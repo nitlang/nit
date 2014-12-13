@@ -1,15 +1,23 @@
 import minilang_test_parser
 
+# An naive recursive stack-based interpreter of the minilang language.
 class Interpretor
 	super Visitor
+
+	# A stack of numeric values
 	var stack = new Array[Int]
+
+	# A stack of boolean values
 	var bstack = new Array[Bool]
+
+	# The current values assigned to each variable
 	var vars = new HashMap[String, Int]
 
 	redef fun visit(n) do n.accept_calculator(self)
 end
 
 redef class Node
+	# Execution of the node by the interpreter `v`
 	fun accept_calculator(v: Interpretor) do visit_children(v)
 end
 

@@ -93,6 +93,7 @@ class BinTreeMap[K: Comparable, E]
 		return res.value
 	end
 
+	# Search `key` in `from` and its children nodes.
 	protected fun search_down(from: N, key: K): nullable N do
 		var cmp = key <=> from.key
 		if cmp == 0 then return from
@@ -115,6 +116,7 @@ class BinTreeMap[K: Comparable, E]
 		return min_from(root.as(not null)).value
 	end
 
+	# Get the left-most child from `node`.
 	protected fun min_from(node: N): N do
 		if node.left == null then return node
 		return min_from(node.left.as(not null))
@@ -131,6 +133,7 @@ class BinTreeMap[K: Comparable, E]
 		return max_from(root.as(not null)).value
 	end
 
+	# Get the right-most child from `node`.
 	protected fun max_from(node: N): N do
 		if node.right == null then return node
 		return max_from(node.right.as(not null))
@@ -148,6 +151,7 @@ class BinTreeMap[K: Comparable, E]
 		insert_node(new BinTreeNode[K, E](key, item))
 	end
 
+	# Add `node` in the tree.
 	protected fun insert_node(node: N) do
 		len += 1
 		if root == null then
@@ -311,6 +315,7 @@ class BinTreeMap[K: Comparable, E]
 		return sorted
 	end
 
+	# Sort the tree from `node` and place results in `sorted`.
 	protected fun sort_down(node: N, sorted: Array[E]) do
 		if node.left != null then sort_down(node.left.as(not null), sorted)
 		sorted.add(node.value)
@@ -323,6 +328,7 @@ class BinTreeMap[K: Comparable, E]
 		return "[{print_tree(root)}]"
 	end
 
+	# Print the tree starting from `node`.
 	protected fun print_tree(node: N): String do
 		var s = new FlatBuffer
 		s.append(node.to_s)
@@ -340,6 +346,7 @@ class BinTreeMap[K: Comparable, E]
 		f.close
 	end
 
+	# Translate the tree in dot format starting from `node`.
 	protected fun dot_down(node: N, f: OProcess) do
 		if node.left != null then dot_down(node.left.as(not null), f)
 		f.write node.to_dot
@@ -371,14 +378,10 @@ end
 class BinTreeNode[K: Comparable, E]
 	super TreeNode[K, E]
 
-	private var prev: nullable BinTreeNode[K, E]
-	private var next: nullable BinTreeNode[K, E]
+	private var prev: nullable BinTreeNode[K, E] = null
+	private var next: nullable BinTreeNode[K, E] = null
 
 	redef type N: BinTreeNode[K, E]
-
-	init(key: K, item: E) do
-		super(key, item)
-	end
 
 	private var left_node: nullable N = null
 
@@ -448,11 +451,10 @@ end
 private class BinTreeMapIterator[K: Comparable, E]
 	super MapIterator[K, E]
 
-	var current: nullable BinTreeNode[K, E]
+	var tree: BinTreeMap[K, E]
+	var current: nullable BinTreeNode[K, E] = null
 
-	init(tree: BinTreeMap[K, E]) do
-		current = tree.first_node
-	end
+	init do current = tree.first_node
 
 	redef fun is_ok do return not current == null
 	redef fun next do current = current.next

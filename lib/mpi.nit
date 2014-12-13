@@ -117,7 +117,7 @@ class MPI
 		# Deserialize message
 		var deserializer = new JsonDeserializer(buffer)
 		var deserialized = deserializer.deserialize
-		
+
 		if deserialized == null then print "|{buffer}|{buffer.chars.join("-")}| {buffer.length}"
 
 		return deserialized
@@ -191,19 +191,46 @@ end
 
 # An MPI data type
 extern class DataType `{ MPI_Datatype `}
+	# Get a MPI char.
 	new char `{ return MPI_CHAR; `}
+
+	# Get a MPI short.
 	new short `{ return MPI_SHORT; `}
+
+	# Get a MPI int.
 	new int `{ return MPI_INT; `}
+
+	# Get a MPI long.
 	new long `{ return MPI_LONG; `}
+
+	# Get a MPI long long.
 	new long_long `{ return MPI_LONG_LONG; `}
+
+	# Get a MPI unsigned char.
 	new unsigned_char `{ return MPI_UNSIGNED_CHAR; `}
+
+	# Get a MPI unsigned short.
 	new unsigned_short `{ return MPI_UNSIGNED_SHORT; `}
+
+	# Get a MPI unsigned int.
 	new unsigned `{ return MPI_UNSIGNED; `}
+
+	# Get a MPI unsigned long.
 	new unsigned_long `{ return MPI_UNSIGNED_LONG; `}
+
+	# Get a MPI unsigned long long.
 	new unsigned_long_long `{ return MPI_UNSIGNED_LONG_LONG; `}
+
+	# Get a MPI float.
 	new float `{ return MPI_FLOAT; `}
+
+	# Get a MPI double.
 	new double `{ return MPI_DOUBLE; `}
+
+	# Get a MPI long double.
 	new long_double `{ return MPI_LONG_DOUBLE; `}
+
+	# Get a MPI byte.
 	new byte `{ return MPI_BYTE; `}
 end
 
@@ -235,21 +262,60 @@ end
 
 # An MPI operation
 #
-# Used with the `reduce` method
+# Used with the `reduce` method.
+#
+# See <http://www.mpi-forum.org/docs/mpi-1.1/mpi-11-html/node78.html>
 extern class Op `{ MPI_Op `}
+	# Get a MPI null operation.
 	new op_null `{ return MPI_OP_NULL; `}
+
+	# Get a MPI maximum operation.
 	new max `{ return MPI_MAX; `}
+
+	# Get a MPI minimum operation.
 	new min `{ return MPI_MIN; `}
+
+	# Get a MPI sum operation.
 	new sum `{ return MPI_SUM; `}
+
+	# Get a MPI product operation.
 	new prod `{ return MPI_PROD; `}
+
+	# Get a MPI logical and operation.
 	new land `{ return MPI_LAND; `}
+
+	# Get a MPI bit-wise and operation.
 	new band `{ return MPI_BAND; `}
+
+	# Get a MPI logical or operation.
 	new lor `{ return MPI_LOR; `}
+
+	# Get a MPI bit-wise or operation.
 	new bor `{ return MPI_BOR; `}
+
+	# Get a MPI logical xor operation.
 	new lxor `{ return MPI_LXOR; `}
+
+	# Get a MPI bit-wise xor operation.
 	new bxor `{ return MPI_BXOR; `}
+
+	# Get a MPI minloc operation.
+	#
+	# Used to compute a global minimum and also an index attached
+	# to the minimum value.
+	#
+	# See <http://www.mpi-forum.org/docs/mpi-1.1/mpi-11-html/node79.html#Node79>
 	new minloc `{ return MPI_MINLOC; `}
+
+	# Get a MPI maxloc operation.
+	#
+	# Used to compute a global maximum and also an index attached
+	# to the maximum value.
+	#
+	# See <http://www.mpi-forum.org/docs/mpi-1.1/mpi-11-html/node79.html#Node79>
 	new maxloc `{ return MPI_MAXLOC; `}
+
+	# Get a MPI replace operation.
 	new replace `{ return MPI_REPLACE; `}
 end
 

@@ -31,6 +31,9 @@ abstract class Processor
 	# Controller rank is always 0
 	var controller_rank: Rank = 0.rank
 
+	# Rank on this processor
+	fun rank: Rank is abstract
+
 	# Where to store data for transfer between nodes
 	#
 	# Require: `buffer.length % 4 == 0`
@@ -49,7 +52,7 @@ abstract class Processor
 	# Tag of a new task packet of size `tasks_per_packet`
 	var task_tag: Tag = 0.tag
 
-	# Tag to return a set of `Result` throught `buffer`
+	# Tag to return a set of `Result` thought `buffer`
 	var result_tag: Tag = 1.tag
 
 	# Tag to notify `Worker` when to quit
@@ -67,7 +70,10 @@ abstract class Processor
 	# Run the main logic of this node
 	fun run is abstract
 
-	# Engines targetted by this execution
+	# Hash or name of the branch to test
+	var branch_hash: String is noinit
+
+	# Engines targeted by this execution
 	var engines: Array[String] is noinit
 
 	# All known engines, used to detect errors in `engines`
@@ -86,6 +92,10 @@ abstract class Processor
 	fun read_cli_options
 	do
 		var opt_ctx = new OptionContext
+		var opt_hash = new OptionString(
+			"Branch to test",
+			"--hash", "-h")
+		opt_hash.mandatory = true
 		var opt_engines = new OptionString(
 			"Engines to test, separated with commas ({all_engines.join(", ")} or all)",
 			"--engine", "-e")
@@ -97,7 +107,7 @@ abstract class Processor
 			"Clean up all nitester files (and do not run tests)",
 			"--cleanup", "-C")
 
-		opt_ctx.add_option(opt_engines, opt_help, opt_verbose, opt_cleanup)
+		opt_ctx.add_option(opt_hash, opt_engines, opt_help, opt_verbose, opt_cleanup)
 		opt_ctx.parse args
 
 		# --help?
@@ -132,6 +142,9 @@ abstract class Processor
 		if rest.is_empty then opt_ctx.usage_error "This tool needs at least one test_program.nit"
 		test_programs = rest
 
+		# hash
+		branch_hash = opt_hash.value.as(not null)
+
 		# gather and check engines
 		var engines_str = opt_engines.value
 		var engines
@@ -160,18 +173,38 @@ abstract class Processor
 	# All tasks to be performed
 	var tasks = new Array[Task]
 
-	# Gather and registar all tasks
+	# Gather and register all tasks
 	fun create_tasks
 	do
-		for prog in test_programs do for engine in engines do
-			tasks.add new Task(engine, prog)
+		# At this point we are in our local nit
+		var skip_path = "tests/turing.skip"
+		var skip
+		if skip_path.file_exists then
+			var skip_file = new IFStream.open(skip_path)
+			skip = skip_file.read_lines
+			skip_file.close
+		else
+			skip = new Array[String]
 		end
+
+		for prog in test_programs do for engine in engines do
+
+			# Is is blacklisted?
+			for s in skip do if not s.is_empty and prog.has(s) then
+				if verbose > 0 and rank == 0 then print "Skipping test '{prog}' because of '{s}' in turing.skip"
+				continue label
+			end
+
+			tasks.add new Task(engine, prog)
+		end label
 	end
 end
 
 # Single controller to dispatch tasks, gather results and produce stats
 class Controller
 	super Processor
+
+	redef fun rank do return controller_rank
 
 	# Id as `Int` of the next task to distribute
 	var next_task_id = 0
@@ -326,13 +359,10 @@ class Worker
 	super Processor
 
 	# The `Rank` of `self`
-	var rank: Rank
+	redef var rank: Rank
 
 	# Compilation directory
 	var comp_dir = "/dev/shm/nit_compile{rank}" is lazy
-
-	# Output file directory
-	var out_dir = "/dev/shm/nit_out{rank}" is lazy
 
 	# Directory to store the xml files produced for Jenkins
 	var xml_dir = "~/jenkins_xml/"
@@ -341,7 +371,10 @@ class Worker
 	var tests_sh_out = "/dev/shm/nit_local_out{rank}" is lazy
 
 	# Source Nit repository, must be already updated and `make` before execution
-	var nit_source_dir = "~/nit"
+	var local_nit = "/dev/shm/nit{rank}" is lazy
+
+	# Remote Nit repository (actually the local source)
+	var remote_nit = "~/nit/"
 
 	# Compiled `Regex` to detect the argument of an execution
 	var re_arg: Regex = "arg [0-9]+".to_re
@@ -364,6 +397,26 @@ class Worker
 	fun setup
 	do
 		if verbose > 0 then sys.system "hostname"
+
+		if local_nit.file_exists then local_nit.rmdir
+
+		exec_and_check "git clone {remote_nit} {local_nit}"
+		local_nit.chdir
+		exec_and_check "git config remote.origin.fetch +refs/remotes/origin/pr/*:refs/remotes/origin/pr/*"
+		exec_and_check "git fetch origin --quiet"
+		exec_and_check "git checkout {branch_hash}"
+		exec_and_check "cp {remote_nit}/bin/nitg bin/"
+		exec_and_check "src/git-gen-version.sh"
+		exec_and_check "bin/nitg --dir bin/ src/nit.nit src/nitvm.nit"
+	end
+
+	private fun exec_and_check(cmd: String)
+	do
+		if verbose > 0 then
+			print "+ {cmd}"
+			var res = sys.system(cmd)
+			assert res == 0 else print "Command '{cmd}' failed."
+		end
 	end
 
 	# Clean up the testing environment
@@ -372,8 +425,8 @@ class Worker
 	fun cleanup
 	do
 		if comp_dir.file_exists then comp_dir.rmdir
-		if out_dir.file_exists then out_dir.rmdir
 		if tests_sh_out.file_exists then tests_sh_out.file_delete
+		if local_nit.file_exists then local_nit.file_delete
 	end
 
 	# Single C `int` to hold the next task id received from the `Controller`
@@ -401,11 +454,12 @@ class Worker
 					if task_id >= tasks.length then break
 					var task = tasks[task_id]
 
+					"tests".chdir
+
 					# Command line to execute test
-					var cmd = "XMLDIR={xml_dir} ERRLIST={out_dir}/errlist TMPDIR={out_dir} " +
+					var cmd = "XMLDIR={xml_dir} " +
 						"CCACHE_DIR={ccache_dir} CCACHE_TEMPDIR={ccache_dir} CCACHE_BASEDIR={comp_dir} " +
-						"./tests.sh --compdir {comp_dir} --outdir {out_dir} " +
-						" --node --engine {task.engine} {task.test_program} > {tests_sh_out}"
+						"./tests.sh --node --engine {task.engine} {task.test_program} > {tests_sh_out}"
 
 					# Execute test
 					sys.system cmd

@@ -60,28 +60,28 @@ class TplPage
 		var css = (self.shareurl / "css").html_escape
 		var vendors = (self.shareurl / "vendors").html_escape
 
-		add "<!DOCTYPE html>"
-		add "<head>"
-		add " <meta charset='utf-8'/>"
-		add " <!--link rel='stylesheet' href='{css}/Nitdoc.UI.css' type='text/css'/-->"
-		add " <link rel='stylesheet' href='{vendors}/bootstrap/css/bootstrap.min.css'/>"
-		add " <link rel='stylesheet' href='{css}/nitdoc.bootstrap.css'/>"
-		add " <link rel='stylesheet' href='{css}/nitdoc.css'/>"
-		add " <link rel='stylesheet' href='{css}/Nitdoc.QuickSearch.css'/>"
-		add " <link rel='stylesheet' href='{css}/Nitdoc.ModalBox.css'/>"
-		add " <link rel='stylesheet' href='{css}/Nitdoc.GitHub.css'/>"
-		add " <title>{title}</title>"
-		add "</head>"
+		addn "<!DOCTYPE html>"
+		addn "<head>"
+		addn " <meta charset='utf-8'/>"
+		addn " <!--link rel='stylesheet' href='{css}/Nitdoc.UI.css' type='text/css'/-->"
+		addn " <link rel='stylesheet' href='{vendors}/bootstrap/css/bootstrap.min.css'/>"
+		addn " <link rel='stylesheet' href='{css}/nitdoc.bootstrap.css'/>"
+		addn " <link rel='stylesheet' href='{css}/nitdoc.css'/>"
+		addn " <link rel='stylesheet' href='{css}/Nitdoc.QuickSearch.css'/>"
+		addn " <link rel='stylesheet' href='{css}/Nitdoc.ModalBox.css'/>"
+		addn " <link rel='stylesheet' href='{css}/Nitdoc.GitHub.css'/>"
+		addn " <title>{title}</title>"
+		addn "</head>"
 		add "<body"
 		for attr in body_attrs do add attr
-		add ">"
+		addn ">"
 	end
 
 	# Render the topmenu template
 	private fun render_topmenu do
-		add " <div class='row'>"
+		addn " <div class='row'>"
 		add topmenu
-		add " </div>"
+		addn " </div>"
 	end
 
 	# Render the sidebar
@@ -99,9 +99,9 @@ class TplPage
 	private fun render_content do
 		for section in sections do add section
 		if footer != null then
-			add "<div class='well footer'>"
+			addn "<div class='well footer'>"
 			add footer.as(not null)
-			add "</div>"
+			addn "</div>"
 		end
 	end
 
@@ -110,41 +110,41 @@ class TplPage
 		var vendors = (self.shareurl / "vendors").html_escape
 		var js = (self.shareurl / "js").html_escape
 
-		add "<script src='{vendors}/jquery/jquery-1.11.1.min.js'></script>"
-		add "<script src='{vendors}/jquery/jquery-ui-1.10.4.custom.min.js'></script>"
-		add "<script src='{vendors}/bootstrap/js/bootstrap.min.js'></script>"
-		add "<script data-main='{js}/nitdoc' src='{js}/lib/require.js'></script>"
+		addn "<script src='{vendors}/jquery/jquery-1.11.1.min.js'></script>"
+		addn "<script src='{vendors}/jquery/jquery-ui-1.10.4.custom.min.js'></script>"
+		addn "<script src='{vendors}/bootstrap/js/bootstrap.min.js'></script>"
+		addn "<script data-main='{js}/nitdoc' src='{js}/lib/require.js'></script>"
 		for script in scripts do add script
-		add """<script>
+		addn """<script>
 			$(function () {
 				$("[data-toggle='tooltip']").tooltip();
 				$("[data-toggle='popover']").popover();
 			});
 		</script>"""
-		add "</body>"
-		add "</html>"
+		addn "</body>"
+		addn "</html>"
 	end
 
 	# Render the whole page
 	redef fun rendering do
 		render_head
-		add "<div class='container-fluid'>"
+		addn "<div class='container-fluid'>"
 		render_topmenu
-		add " <div class='row' id='content'>"
+		addn " <div class='row' id='content'>"
 		if sidebar != null then
-			add "<div class='col col-xs-3 col-lg-2'>"
+			addn "<div class='col col-xs-3 col-lg-2'>"
 			render_sidebar
-			add "</div>"
-			add "<div class='col col-xs-9 col-lg-10' data-spy='scroll' data-target='.summary'>"
+			addn "</div>"
+			addn "<div class='col col-xs-9 col-lg-10' data-spy='scroll' data-target='.summary'>"
 			render_content
-			add "</div>"
+			addn "</div>"
 		else
-			add "<div class='col col-xs-12'>"
+			addn "<div class='col col-xs-12'>"
 			render_content
-			add "</div>"
+			addn "</div>"
 		end
-		add " </div>"
-		add "</div>"
+		addn " </div>"
+		addn "</div>"
 		render_footer
 	end
 end
@@ -182,7 +182,7 @@ class TplTopMenu
 		end
 		tpl.add ">"
 		tpl.add content
-		tpl.add "</li>"
+		tpl.addn "</li>"
 		add_raw(tpl)
 	end
 
@@ -193,27 +193,27 @@ class TplTopMenu
 
 	redef fun rendering do
 		if brand == null and elts.is_empty then return
-		add "<nav id='topmenu' class='navbar navbar-default navbar-fixed-top' role='navigation'>"
-		add " <div class='container-fluid'>"
-		add "  <div class='navbar-header'>"
+		addn "<nav id='topmenu' class='navbar navbar-default navbar-fixed-top' role='navigation'>"
+		addn " <div class='container-fluid'>"
+		addn "  <div class='navbar-header'>"
 		add "   <button type='button' class='navbar-toggle' "
-		add "       data-toggle='collapse' data-target='#topmenu-collapse'>"
-		add "	 <span class='sr-only'>Toggle menu</span>"
-		add "    <span class='icon-bar'></span>"
-		add "    <span class='icon-bar'></span>"
-		add "    <span class='icon-bar'></span>"
-		add "   </button>"
+		addn "       data-toggle='collapse' data-target='#topmenu-collapse'>"
+		addn "    <span class='sr-only'>Toggle menu</span>"
+		addn "    <span class='icon-bar'></span>"
+		addn "    <span class='icon-bar'></span>"
+		addn "    <span class='icon-bar'></span>"
+		addn "   </button>"
 		if brand != null then add brand.as(not null)
-		add "  </div>"
-		add "  <div class='collapse navbar-collapse' id='topmenu-collapse'>"
+		addn "  </div>"
+		addn "  <div class='collapse navbar-collapse' id='topmenu-collapse'>"
 		if not elts.is_empty then
-			add "<ul class='nav navbar-nav'>"
+			addn "<ul class='nav navbar-nav'>"
 			for elt in elts do add elt
-			add "</ul>"
+			addn "</ul>"
 		end
-		add "  </div>"
-		add " </div>"
-		add "</nav>"
+		addn "  </div>"
+		addn " </div>"
+		addn "</nav>"
 	end
 end
 
@@ -233,9 +233,9 @@ class TplSidebar
 	redef fun rendering do
 		if boxes.is_empty then return
 		order_boxes
-		add "<div id='sidebar'>"
+		addn "<div id='sidebar'>"
 		for box in boxes do add box
-		add "</div>"
+		addn "</div>"
 	end
 end
 
@@ -296,16 +296,16 @@ class TplSideBox
 		if content == null then return
 		var open = ""
 		if is_open then open = "in"
-		add "<div class='panel'>"
-		add " <div class='panel-heading'>"
+		addn "<div class='panel'>"
+		addn " <div class='panel-heading'>"
 		add "  <a data-toggle='collapse' data-parent='#sidebar' data-target='#box_{id}' href='#'>"
 		add title
-		add "  </a>"
-		add " </div>"
-		add " <div id='box_{id}' class='panel-body collapse {open}'>"
+		addn "  </a>"
+		addn " </div>"
+		addn " <div id='box_{id}' class='panel-body collapse {open}'>"
 		add content.as(not null)
-		add " </div>"
-		add "</div>"
+		addn " </div>"
+		addn "</div>"
 	end
 end
 
@@ -332,18 +332,18 @@ class TplSummary
 
 	redef fun rendering do
 		if children.is_empty then return
-		add "<div class='panel'>"
-		add " <div class='panel-heading'>"
+		addn "<div class='panel'>"
+		addn " <div class='panel-heading'>"
 		add "  <a data-toggle='collapse' data-parent='#sidebar' data-target='#box-sum' href='#'>"
 		add "Summary"
-		add "  </a>"
-		add " </div>"
-		add " <div id='box-sum' class='summary collapse in'>"
-		add " <ul class='nav'>"
+		addn "  </a>"
+		addn " </div>"
+		addn " <div id='box-sum' class='summary collapse in'>"
+		addn " <ul class='nav'>"
 		for entry in children do add entry
-		add " </ul>"
-		add " </div>"
-		add "</div>"
+		addn " </ul>"
+		addn " </div>"
+		addn "</div>"
 	end
 end
 
@@ -364,11 +364,11 @@ class TplSummaryEntry
 		add "<li>"
 		add text
 		if not children.is_empty then
-			add "<ul class='nav'>"
+			addn "\n<ul class='nav'>"
 			for entry in children do add entry
-			add "</ul>"
+			addn "</ul>"
 		end
-		add "</li>"
+		addn  "</li>"
 	end
 end
 
@@ -444,23 +444,23 @@ class TplSection
 	super TplSectionElt
 
 	redef fun rendering do
-		add "<section id='{id}' class='{css_classes.join(" ")}'>"
+		addn "<section id='{id}' class='{css_classes.join(" ")}'>"
 		if title != null then
 			var lvl = hlvl
 			if lvl == 2 then title_classes.add "well well-sm"
-			add "<h{lvl} class='{title_classes.join(" ")}'>"
-			add title.as(not null)
-			add "</h{lvl}>"
+			addn "<h{lvl} class='{title_classes.join(" ")}'>"
+			addn title.as(not null)
+			addn "</h{lvl}>"
 		end
 		if subtitle != null then
-			add "<div class='info subtitle'>"
-			add subtitle.as(not null)
-			add "</div>"
+			addn "<div class='info subtitle'>"
+			addn subtitle.as(not null)
+			addn "</div>"
 		end
 		for child in children do
 			add child
 		end
-		add "</section>"
+		addn "</section>"
 	end
 end
 
@@ -488,23 +488,23 @@ class TplArticle
 
 	redef fun rendering do
 		if is_empty then return
-		add "<article id='{id}' class='{css_classes.join(" ")}'>"
+		addn "<article id='{id}' class='{css_classes.join(" ")}'>"
 		if source_link != null then
 			add "<div class='source-link'>"
 			add source_link.as(not null)
-			add "</div>"
+			addn "</div>"
 		end
 		if title != null then
 			var lvl = hlvl
 			if lvl == 2 then title_classes.add "well well-sm"
 			add "<h{lvl} class='{title_classes.join(" ")}'>"
 			add title.as(not null)
-			add "</h{lvl}>"
+			addn "</h{lvl}>"
 		end
 		if subtitle != null then
 			add "<div class='info subtitle'>"
 			add subtitle.as(not null)
-			add "</div>"
+			addn "</div>"
 		end
 		if content != null then
 			add content.as(not null)
@@ -512,7 +512,7 @@ class TplArticle
 		for child in children do
 			add child
 		end
-		add """</article>"""
+		addn """</article>"""
 	end
 
 	redef fun is_empty: Bool do
@@ -534,7 +534,7 @@ class TplDefinition
 	var location: nullable Streamable = null is writable
 
 	private fun render_info do
-		add "<div class='info text-right'>"
+		addn "<div class='info text-right'>"
 		if namespace != null then
 			if comment == null then
 				add "<span class=\"noComment\">no comment for </span>"
@@ -545,7 +545,7 @@ class TplDefinition
 			add " "
 			add location.as(not null)
 		end
-		add "</div>"
+		addn "</div>"
 	end
 
 	private fun render_comment do
@@ -553,10 +553,10 @@ class TplDefinition
 	end
 
 	redef fun rendering do
-		add "<div class='definition'>"
+		addn "<div class='definition'>"
 		render_comment
 		render_info
-		add "</div>"
+		addn "</div>"
 	end
 end
 
@@ -570,20 +570,20 @@ class TplClassDefinition
 	init do end
 
 	redef fun rendering do
-		add "<div class='definition'>"
+		addn "<div class='definition'>"
 		render_comment
 		render_info
 		render_list("Introduces", intros)
 		render_list("Redefines", redefs)
-		add "</div>"
+		addn "</div>"
 	end
 
 	private fun render_list(name: String, elts: Array[TplListElt]) do
 		if elts.is_empty then return
-		add "<h5>{name.html_escape}</h5>"
-		add "<ul class='list-unstyled list-definition'>"
+		addn "<h5>{name.html_escape}</h5>"
+		addn "<ul class='list-unstyled list-definition'>"
 		for elt in elts do add elt
-		add "</ul>"
+		addn "</ul>"
 	end
 end
 
@@ -597,47 +597,47 @@ class TplSearchPage
 
 	redef fun rendering do
 		var title = self.title
-		if title != null then add "<h1>{title.to_s.html_escape}</h1>"
-		add "<div class='container-fluid'>"
-		add " <div class='row'>"
+		if title != null then addn "<h1>{title.to_s.html_escape}</h1>"
+		addn "<div class='container-fluid'>"
+		addn " <div class='row'>"
 		if not modules.is_empty then
-			add "<div class='col-xs-4'>"
-			add "<h3>Modules</h3>"
-			add "<ul>"
+			addn "<div class='col-xs-4'>"
+			addn "<h3>Modules</h3>"
+			addn "<ul>"
 			for m in modules do
 				add "<li>"
 				add m
-				add "</li>"
+				addn "</li>"
 			end
-			add "</ul>"
-			add "</div>"
+			addn "</ul>"
+			addn "</div>"
 		end
 		if not classes.is_empty then
-			add "<div class='col-xs-4'>"
-			add "<h3>Classes</h3>"
-			add "<ul>"
+			addn "<div class='col-xs-4'>"
+			addn "<h3>Classes</h3>"
+			addn "<ul>"
 			for c in classes do
 				add "<li>"
 				add c
-				add "</li>"
+				addn "</li>"
 			end
-			add "</ul>"
-			add "</div>"
+			addn "</ul>"
+			addn "</div>"
 		end
 		if not props.is_empty then
-			add "<div class='col-xs-4'>"
-			add "<h3>Properties</h3>"
-			add "<ul>"
+			addn "<div class='col-xs-4'>"
+			addn "<h3>Properties</h3>"
+			addn "<ul>"
 			for p in props do
 				add "<li>"
 				add p
-				add "</li>"
+				addn "</li>"
 			end
-			add "</ul>"
-			add "</div>"
+			addn "</ul>"
+			addn "</div>"
 		end
-		add " </div>"
-		add "</div>"
+		addn " </div>"
+		addn "</div>"
 	end
 end
 
@@ -700,9 +700,9 @@ class TplList
 
 	redef fun rendering do
 		if elts.is_empty then return
-		add "<ul class='{css_classes.join(" ")}'>"
+		addn "<ul class='{css_classes.join(" ")}'>"
 		for elt in elts do add elt
-		add "</ul>"
+		addn "</ul>"
 	end
 end
 
@@ -737,7 +737,7 @@ class TplListItem
 	redef fun rendering do
 		add "<li class='{css_classes.join(" ")}'>"
 		add content
-		add "</li>"
+		addn "</li>"
 	end
 end
 
@@ -755,9 +755,9 @@ class TplTab
 	var css_classes = new Array[String]
 
 	redef fun rendering do
-		add "<div class='tab-content'>"
+		addn "<div class='tab-content'>"
 		for panel in panels do add panel
-		add "</div>"
+		addn "</div>"
 	end
 end
 
@@ -796,9 +796,9 @@ class TplTabPanel
 	redef fun rendering do
 		add "<div class='tab-pane {css_classes.join(" ")}"
 		if is_active then add "active"
-		add "' id='{id}'>"
+		addn "' id='{id}'>"
 		if content != null then add content.as(not null)
-		add "</div>"
+		addn "</div>"
 	end
 end
 
@@ -886,9 +886,9 @@ class TplScript
 	redef fun rendering do
 		add "<script"
 		for attr in attrs do add attr
-		add ">"
+		addn ">"
 		render_content
-		add "</script>"
+		addn "</script>"
 	end
 end
 
@@ -905,17 +905,17 @@ class TplPiwikScript
 		if tracker_url.chars.last != '/' then tracker_url += "/"
 		tracker_url = "://{tracker_url}".to_json
 
-		add "<!-- Piwik -->"
-		add "var _paq = _paq || [];"
-		add " _paq.push([\"trackPageView\"]);"
-		add " _paq.push([\"enableLinkTracking\"]);"
-		add "(function() \{"
-		add " var u=((\"https:\" == document.location.protocol) ? \"https\" : \"http\") + {tracker_url};"
-		add " _paq.push([\"setTrackerUrl\", u+\"piwik.php\"]);"
-		add " _paq.push([\"setSiteId\", {site_id}]);"
-		add " var d=document, g=d.createElement(\"script\"), s=d.getElementsByTagName(\"script\")[0]; g.type=\"text/javascript\";"
-		add " g.defer=true; g.async=true; g.src=u+\"piwik.js\"; s.parentNode.insertBefore(g,s);"
-		add "\})();"
+		addn "<!-- Piwik -->"
+		addn "var _paq = _paq || [];"
+		addn " _paq.push([\"trackPageView\"]);"
+		addn " _paq.push([\"enableLinkTracking\"]);"
+		addn "(function() \{"
+		addn " var u=((\"https:\" == document.location.protocol) ? \"https\" : \"http\") + {tracker_url};"
+		addn " _paq.push([\"setTrackerUrl\", u+\"piwik.php\"]);"
+		addn " _paq.push([\"setSiteId\", {site_id}]);"
+		addn " var d=document, g=d.createElement(\"script\"), s=d.getElementsByTagName(\"script\")[0]; g.type=\"text/javascript\";"
+		addn " g.defer=true; g.async=true; g.src=u+\"piwik.js\"; s.parentNode.insertBefore(g,s);"
+		addn "\})();"
 	end
 end
 

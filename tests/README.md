@@ -170,11 +170,17 @@ It is a success.
 The `$engine.skip` files (where `$engine` is an engine name, see below) describe tests that are skipped completely on a given engine.
 Usually it used with then engine `niti` because tests are too long.
 
-The `cc.skip` file describes tests that are analysed but no executable is generated.
-Usually it is because expected CC errors or missing C libraries.
+The `cc.skip` file describes tests that are analyzed but no executable is generated.
+Usually it is because of expected CC errors or missing C libraries.
 
 The `exec.skip` file describes tests that compiled but not executed.
 Usually it is because the programs are interactive or run some kind of server.
+
+The `$os.skip` file describes tests that are to be skipped completely on the given OS.
+Usually it is because of OS specific libraries.
+
+The `turing.skip` file describes tests that are to be skipped completely on the Turing cluster doing continuous testing over MPI.
+Usually it is because of an unavailable library or a large work which would not benefit from parallelization.
 
 These `*.skip` files contain a list of patterns that will be used against test names.
 A single substring can thus be used to skip a full family of tests.

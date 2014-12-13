@@ -29,7 +29,7 @@ abstract class CArray[E]
 	# Pointer to the real C array
 	var native_array: NATIVE is noinit
 
-	private init(length: Int) do self._length = length
+	private init(length: Int) is old_style_init do self._length = length
 
 	redef fun [](index)
 	do
@@ -38,6 +38,7 @@ abstract class CArray[E]
 		return native_array[index]
 	end
 
+	# Set `val` at `index`.
 	fun []=(index: Int, val: E)
 	do
 		assert not destroyed
@@ -45,7 +46,14 @@ abstract class CArray[E]
 		native_array[index] = val
 	end
 
+	# Was this instance destroyed?
+	#
+	# See `CArray::destroy`.
 	var destroyed = false
+
+	# Free used memory used by `native_array`.
+	#
+	# Also set `destroyed` to true.
 	fun destroy
 	do
 		if destroyed then return
@@ -57,9 +65,14 @@ end
 
 # A native C array, as in a pointer to the first element of the array
 extern class NativeCArray `{ void * `}
+
+	# Type of contained elements.
 	type E: nullable Object
 
+	# Get element at `index`.
 	fun [](index: E): E is abstract
+
+	# Set `val` at `index`.
 	fun []=(index: E, val: E) is abstract
 
 	# Return pointer to the address to the second element of this array
@@ -73,8 +86,8 @@ class CIntArray
 	super CArray[Int]
 	redef type NATIVE: NativeCIntArray
 
-	init(size: Int)
-	do
+	# Initialize a new CIntArray of `size` elements.
+	init(size: Int) is old_style_init do
 		native_array = new NativeCIntArray(size)
 		super size
 	end
@@ -95,7 +108,9 @@ extern class NativeCIntArray `{ int* `}
 	super NativeCArray
 	redef type E: Int
 
+	# Initialize a new NativeCIntArray of `size` elements.
 	new(size: Int) `{ return calloc(size, sizeof(int)); `}
+
 	redef fun [](index) `{ return recv[index]; `}
 	redef fun []=(index, val) `{ recv[index] = val; `}
 
@@ -108,8 +123,7 @@ class CByteArray
 	redef type NATIVE: NativeCByteArray
 
 	# Allocate a new array of `size`
-	init(size: Int)
-	do
+	init(size: Int) is old_style_init do
 		native_array = new NativeCByteArray(size)
 		super size
 	end

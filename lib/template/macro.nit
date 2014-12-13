@@ -363,8 +363,8 @@ end
 private class TemplateStringIterator
 	super MapIterator[String, nullable Streamable]
 
-	private var subject: TemplateString
-	private var key_it: Iterator[String] is noinit
+	var subject: TemplateString
+	var key_it: Iterator[String] is noinit
 
 	init do
 		self.key_it = subject.macro_names.iterator

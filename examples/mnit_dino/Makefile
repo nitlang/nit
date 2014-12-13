@@ -2,11 +2,11 @@ default: linux
 
 linux:
 	mkdir -p bin
-	../../bin/nitg -o bin/dino src/dino_linux.nit
+	../../bin/nitc -o bin/dino src/dino_linux.nit
 
 android: android-icons
 	mkdir -p bin
-	../../bin/nitg -o bin/dino.apk src/dino_android.nit
+	../../bin/nitc -o bin/dino.apk src/dino_android.nit
 
 ../../contrib/inkscape_tools/bin/svg_to_icons:
 	$(MAKE) -C ../../contrib/inkscape_tools

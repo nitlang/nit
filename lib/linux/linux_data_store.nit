@@ -34,7 +34,7 @@ private class LinuxStore
 	# Sqlite3 table used
 	fun db_table: String do return "data_store"
 
-	private var db_cache: nullable Sqlite3DB = null
+	var db_cache: nullable Sqlite3DB = null
 
 	# Database to use to implement the `DataStore`
 	fun db: nullable Sqlite3DB

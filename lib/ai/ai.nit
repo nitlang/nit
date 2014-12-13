@@ -8,6 +8,7 @@
 # You  are  allowed  to  redistribute it and sell it, alone or is a part of
 # another product.
 
+# Simple toolkit for artificial intelligence.
 module ai
 
 import backtrack

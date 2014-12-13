@@ -1,7 +1,11 @@
-nitg
+nitc
 nitdoc
 nitlight
 neo_doxygen_dump
 neo_doxygen_file_compound
 neo_doxygen_graph_empty_project
 neo_doxygen_member_resolve_introducer
+test_docdown
+nith
+nit_pretty
+nitmetrics

@@ -12,12 +12,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# A gramar describing a language
+# A grammar describing a language
 class Gram
-	# The productions (non-terminal) of the conctete grammar
+	# The productions (non-terminal) of the concrete grammar
 	var prods = new Array[Production]
 
-	# The additionnal abstract productions of the grammar
+	# The additional abstract productions of the grammar
 	# TODO clean AST
 	var ast_prods = new Array[Production]
 
@@ -35,7 +35,7 @@ class Gram
 				res.append("{p.name} =\n")
 			end
 			var last = null
-			if not p.alts.is_empty then p.alts.last
+			if not p.alts.is_empty then last = p.alts.last
 			for a in p.alts do
 				res.append("\t\{{a.name}:\} {a.elems.join(" ")}")
 				if a.codes == null then a.make_codes
@@ -55,7 +55,7 @@ class Gram
 		return res.to_s
 	end
 
-	# Inline (ie. remove from the conctete grammar) some production
+	# Inline (ie. remove from the concrete grammar) some production
 	# REQUIRE: no circular production in `prods`
 	fun inline(prods: Collection[Production])
 	do
@@ -322,14 +322,14 @@ class Production
 	# The alternative of the production
 	var alts = new Array[Alternative]
 
-	# Additionnal alternatives in the AST
+	# Additional alternatives in the AST
 	var ast_alts = new Array[Alternative]
 
 	# Is self the accept production
 	var accept = false
 
 	# Is self transformed to a other production for the AST
-	# FIXME: cleaup AST
+	# FIXME: cleanup AST
 	var spe: nullable Production = null is writable
 
 	# Is self contains only a single alternative (then no need for a abstract production class in the AST)
@@ -345,8 +345,10 @@ class Production
 
 	# Is the production nullable
 	var is_nullable = false
+
 	# The first tokens of the production
 	var firsts = new HashSet[Item]
+
 	# The tokens that may follows the production (as in SLR)
 	var afters = new HashSet[Item]
 
@@ -432,7 +434,7 @@ class Alternative
 	# Is the alternative unparsable? (ie not in the automaton)
 	var phony = false is writable
 
-	# Imitialize codes with the elements
+	# Initialize codes with the elements
 	fun make_codes
 	do
 		if codes != null then return
@@ -445,20 +447,27 @@ class Alternative
 	end
 end
 
-# A step in the construction of the AST. used to modelize transformations
+# A step in the construction of the AST.
+# Used to model transformations
 interface Code
 end
+
 # Get a element from the stack
 class CodePop
 	super Code
 	redef fun to_s do return "pop"
 end
-# Allocate a new AST node for an alternative using the correct number of poped elements
+
+# Allocate a new AST node for an alternative using the correct number of popped elements
 class CodeNew
 	super Code
+
+	# The associated alternative
 	var alt: Alternative
+
 	redef fun to_s do return "New {alt.name}/{alt.elems.length}"
 end
+
 # Get null
 class CodeNull
 	super Code
@@ -477,7 +486,7 @@ abstract class Element
 	# The mangled name of the element
 	fun cname: String do return "N{name.to_cmangle}"
 
-	# the name of the class in the AST
+	# The name of the class in the AST
 	fun acname: String do
 		var res = acname_cache
 		if res == null then
@@ -486,15 +495,17 @@ abstract class Element
 		end
 		return res
 	end
+
+	# The name of the class in the AST
 	fun acname=(s: String) do acname_cache = s
 end
 
 # A terminal element
 class Token
 	super Element
-	# States of the LR automatio that shift on self
+	# States of the LR automaton that shift on self
 	var shifts = new ArraySet[LRState]
-	# States of the LR automatio that reduce on self in the lookahead(1)
+	# States of the LR automaton that reduce on self in the lookahead(1)
 	var reduces = new ArraySet[LRState]
 end
 
@@ -872,13 +883,13 @@ end
 
 # A state in a LR automaton
 class LRState
-	# name of the automaton (short part from the start)
+	# Name of the automaton (short part from the start)
 	var name: String
 
-	# malglen name
+	# Mangled name
 	fun cname: String do return name.to_cmangle
 
-	# number
+	# Number
 	var number: Int = -1
 
 	# Set of all items
@@ -893,7 +904,7 @@ class LRState
 	# Ingoing transitions
 	var outs = new Array[LRTransition]
 
-	# trans function
+	# Trans function
 	fun trans(e: Element): nullable LRState
 	do
 		for t in outs do if t.elem == e then return t.to
@@ -915,7 +926,7 @@ class LRState
 		return true
 	end
 
-	# Recusively extends item outside the core
+	# Recursively extends item outside the core
 	fun extends(i: Item)
 	do
 		var e = i.next
@@ -940,7 +951,7 @@ class LRState
 	var gotos = new ArraySet[Production]
 	# Reduction guarded by tokens
 	var guarded_reduce = new HashMap[Token, Set[Item]]
-	# Shitfs guarded by tokens
+	# Shifts guarded by tokens
 	var guarded_shift = new HashMap[Token, Set[Item]]
 
 	# Does the state need a guard to perform an action?
@@ -949,7 +960,7 @@ class LRState
 	# Is the state LR0?
 	fun is_lr0: Bool do return reduces.length <= 1 and shifts.is_empty or reduces.is_empty
 
-	# compute guards and conflicts
+	# Compute guards and conflicts
 	fun analysis
 	do
 		# Extends the core
@@ -1031,7 +1042,7 @@ class LRState
 		end
 	end
 
-	# Return `i` and all other items of the state that expands, directly or undirectly, to `i`
+	# Return `i` and all other items of the state that expands, directly or indirectly, to `i`
 	fun back_expand(i: Item): Set[Item]
 	do
 		var res = new ArraySet[Item]
@@ -1056,7 +1067,7 @@ end
 class LRTransition
 	# The origin state
 	var from: LRState
-	# The testination state
+	# The destination state
 	var to: LRState
 	# The element labeling the transition
 	var elem: Element
@@ -1085,14 +1096,14 @@ class Item
 		return b.to_s
 	end
 
-	# The element thatr follow the dot, null if the fdot is at the end
+	# The element that follows the dot, null if the dot is at the end
 	fun next: nullable Element
 	do
 		if pos >= alt.elems.length then return null
 		return alt.elems[pos]
 	end
 
-	# SLR loohahead
+	# SLR lookahead
 	fun lookahead: Set[Token]
 	do
 		var res = new HashSet[Token]

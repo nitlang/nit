@@ -27,12 +27,6 @@ redef class Model
 	# All known modules
 	var mmodules = new Array[MModule]
 
-	# placebo for old module nesting hierarchy.
-	# where mainmodule < mainmodule::nestedmodule
-	#
-	# TODO REMOVE, rely on mgroup instead
-	var mmodule_nesting_hierarchy = new POSet[MModule]
-
 	# Full module importation hierarchy including private or nested links.
 	var mmodule_importation_hierarchy = new POSet[MModule]
 
@@ -91,12 +85,6 @@ class MModule
 	# Alias for `name`
 	redef fun to_s do return self.name
 
-	# placebo for old module nesting hierarchy
-	# The view of the module in the `model.mmodule_nesting_hierarchy`
-	#
-	# TODO REMOVE, rely on mgroup instead
-	var in_nesting: POSetElement[MModule] is noinit
-
 	# The view of the module in the `model.mmodule_importation_hierarchy`
 	var in_importation: POSetElement[MModule] is noinit
 
@@ -117,7 +105,6 @@ class MModule
 	do
 		model.mmodules_by_name.add_one(name, self)
 		model.mmodules.add(self)
-		self.in_nesting = model.mmodule_nesting_hierarchy.add_node(self)
 		if mgroup != null then
 			mgroup.mmodules.add(self)
 			if mgroup.name == name then
@@ -127,16 +114,8 @@ class MModule
 			# placebo for old module nesting hierarchy
 			var direct_owner = mgroup.default_mmodule
 			if direct_owner == self then
-				# The module is the new owner of its own group, thus adopt the other modules
-				for m in mgroup.mmodules do
-					if m == self then continue
-					model.mmodule_nesting_hierarchy.add_edge(self, m)
-				end
 				# The potential owner is the default_mmodule of the parent group
 				if mgroup.parent != null then direct_owner = mgroup.parent.default_mmodule
-			end
-			if direct_owner != self and direct_owner != null then
-				model.mmodule_nesting_hierarchy.add_edge(direct_owner, self)
 			end
 		end
 		self.in_importation = model.mmodule_importation_hierarchy.add_node(self)

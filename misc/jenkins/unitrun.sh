@@ -28,7 +28,7 @@ shift
 if env time --quiet -f%U true 2>/dev/null; then
 	TIME="env time --quiet -f%U -o '${name}.t.out'"
 elif env time -f%U true 2>/dev/null; then
-	TIME="env time -f%U -o '${name}.t.out'"
+	TIME="env time -f%U -o ${name}.t.out"
 else
 	TIME=
 fi

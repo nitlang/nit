@@ -237,7 +237,7 @@ redef class MModule
 	redef fun tpl_declaration do
 		var tpl = new Template
 		tpl.add "<span>module "
-		tpl.add tpl_link
+		tpl.add tpl_namespace
 		tpl.add "</span>"
 		return tpl
 	end

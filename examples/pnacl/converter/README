@@ -5,7 +5,7 @@ Steps to make the example work :
 2. Declare the environment variable NACL_SDK_ROOT as the root of the target platform within the SDK (ex: ~/nacl_sdk/pepper_34/) :
 	$ export NACL_SDK_ROOT=/path/to/nacl_sdk/pepper_[your_version]
 
-3. Compile the Nit code with: `nitg --semi-global converter.nit` or `make`.
+3. Compile the Nit code with: `nitc --semi-global converter.nit` or `make`.
 
 You must use the '--semi-global' (or `--global`) option. Some features in the standard library are not supported by the NaCL platform, the global compiler do not try to compile them.
 

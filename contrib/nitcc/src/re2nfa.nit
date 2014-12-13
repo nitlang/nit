@@ -37,7 +37,6 @@ redef class Nstr
 	redef fun make_rfa: Automaton
 	do
 		var a = new Automaton.epsilon
-		var val
 		for c in self.value.chars do
 			var b = new Automaton.atom(c.ascii)
 			a.concat(b)
