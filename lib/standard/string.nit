@@ -448,13 +448,36 @@ abstract class Text
 		return " " * before + self + " " * (diff-before)
 	end
 
-	# Mangle a string to be a unique string only made of alphanumeric characters
+	# Mangle a string to be a unique string only made of alphanumeric characters and underscores.
+	#
+	# This method is injective (two different inputs never produce the same
+	# output) and the returned string always respect the following rules:
+	#
+	# * Contains only US-ASCII letters, digits and underscores.
+	# * Never starts with a digit.
+	# * Never contains two contiguous underscores.
+	#
+	#     assert "42_is/The answer!".to_cmangle == "_52d2_is_47dThe_32danswer_33d"
+	#     assert "__d".to_cmangle == "_95d_d"
+	#     assert "_42".to_cmangle == "_95d42"
+	#     assert "foo".to_cmangle == "foo"
+	#     assert "".to_cmangle == ""
 	fun to_cmangle: String
 	do
+		if is_empty then return ""
 		var res = new FlatBuffer
 		var underscore = false
-		for i in [0..length[ do
-			var c = chars[i]
+		var start = 0
+		var c = chars[0]
+
+		if c >= '0' and c <= '9' then
+			res.add('_')
+			res.append(c.ascii.to_s)
+			res.add('d')
+			start = 1
+		end
+		for i in [start..length[ do
+			c = chars[i]
 			if (c >= 'a' and c <= 'z') or (c >='A' and c <= 'Z') then
 				res.add(c)
 				underscore = false
