@@ -405,8 +405,6 @@ class CypherQuery
 	# `params` to embed in the query like in prepared statements
 	var params = new JsonObject
 
-	init do end
-
 	# init the query from a query string
 	init from_string(query: String) do
 		self.query = query

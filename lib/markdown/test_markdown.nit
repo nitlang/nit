@@ -2522,8 +2522,6 @@ class TestLine
 
 	var subject: MDLine
 
-	init do end
-
 	fun test_is_empty do
 		subject = new MDLine("")
 		assert subject.is_empty
