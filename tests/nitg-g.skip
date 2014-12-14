@@ -7,5 +7,5 @@ neo_doxygen_graph_empty_project
 neo_doxygen_member_resolve_introducer
 test_docdown
 nith
-nit_pretty
+nitpretty
 nitmetrics
