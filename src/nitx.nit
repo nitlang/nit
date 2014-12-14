@@ -347,7 +347,7 @@ private class Pager
 	fun add_indent do addn("  " * indent)
 	fun addn(text: String) do content.append(text.escape)
 	fun add_rule do add("\n---\n")
-	fun render do sys.system("echo \"{content}\" | pager -r")
+	fun render do sys.system("echo \"{content}\" | less -r")
 end
 
 redef class MModule
