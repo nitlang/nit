@@ -519,6 +519,8 @@ class Worker
 						end
 					end
 
+					if verbose > 1 then print "Done testing: {task}"
+
 					self.results_count = c
 				end
 
