@@ -385,17 +385,38 @@ abstract class Text
 	#     assert "\na\nb\tc\t".trim          == "a\nb\tc"
 	fun trim: SELFTYPE do return (self.l_trim).r_trim
 
-	# Returns `self` removed from its last `\n` (if any).
+	# Returns `self` removed from its last line terminator (if any).
 	#
 	#    assert "Hello\n".chomp == "Hello"
 	#    assert "Hello".chomp   == "Hello"
-	#    assert "\n\n\n".chomp  == "\n\n"
 	#
-	# This method is mainly used to remove the LINE_FEED character from lines of text.
+	#    assert "\n".chomp == ""
+	#    assert "".chomp   == ""
+	#
+	# Line terminators are `"\n"`, `"\r\n"` and `"\r"`.
+	# A single line terminator, the last one, is removed.
+	#
+	#    assert "\r\n".chomp     == ""
+	#    assert "\r\n\n".chomp   == "\r\n"
+	#    assert "\r\n\r\n".chomp == "\r\n"
+	#    assert "\r\n\r".chomp   == "\r\n"
+	#
+	# Note: unlike with most IO methods like `IStream::read_line`,
+	# a single `\r` is considered here to be a line terminator and will be removed.
 	fun chomp: SELFTYPE
 	do
-		if self.is_empty or self.chars.last != '\n' then return self
-		return substring(0, length-1)
+		var len = length
+		if len == 0 then return self
+		var l = self.chars.last
+		if l == '\r' then
+			return substring(0, len-1)
+		else if l != '\n' then
+			return self
+		else if len > 1 and self.chars[len-2] == '\r' then
+			return substring(0, len-2)
+		else
+			return substring(0, len-1)
+		end
 	end
 
 	# Justify a self in a space of `length`

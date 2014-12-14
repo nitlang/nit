@@ -62,41 +62,43 @@ abstract class IStream
 
 	# Read a string until the end of the line.
 	#
-	# The line terminator '\n', if any, is preserved in each line.
-	# Use the method `Text::chomp` to safely remove it.
+	# The line terminator '\n' and '\r\n', if any, is removed in each line.
 	#
 	# ~~~
 	# var txt = "Hello\n\nWorld\n"
 	# var i = new StringIStream(txt)
-	# assert i.read_line == "Hello\n"
-	# assert i.read_line == "\n"
-	# assert i.read_line == "World\n"
+	# assert i.read_line == "Hello"
+	# assert i.read_line == ""
+	# assert i.read_line == "World"
 	# assert i.eof
 	# ~~~
 	#
-	# If `\n` is not present at the end of the result, it means that
-	# a non-eol terminated last line was returned.
+	# Only LINE FEED (`\n`), CARRIAGE RETURN & LINE FEED (`\r\n`), and
+	# the end or file (EOF) is considered to delimit the end of lines.
+	# CARRIAGE RETURN (`\r`) alone is not used for the end of line.
 	#
 	# ~~~
-	# var i2 = new StringIStream("hello")
-	# assert not i2.eof
-	# assert i2.read_line == "hello"
+	# var txt2 = "Hello\r\n\n\rWorld"
+	# var i2 = new StringIStream(txt2)
+	# assert i2.read_line == "Hello"
+	# assert i2.read_line == ""
+	# assert i2.read_line == "\rWorld"
 	# assert i2.eof
 	# ~~~
 	#
-	# NOTE: Only LINE FEED (`\n`) is considered to delimit the end of lines.
+	# NOTE: Use `append_line_to` if the line terminator needs to be preserved.
 	fun read_line: String
 	do
 		if last_error != null then return ""
-		assert not eof
+		if eof then return ""
 		var s = new FlatBuffer
 		append_line_to(s)
-		return s.to_s
+		return s.to_s.chomp
 	end
 
 	# Read all the lines until the eof.
 	#
-	# The line terminator '\n' is removed in each line,
+	# The line terminator '\n' and `\r\n` is removed in each line,
 	#
 	# ~~~
 	# var txt = "Hello\n\nWorld\n"
@@ -107,17 +109,25 @@ abstract class IStream
 	# This method is more efficient that splitting
 	# the result of `read_all`.
 	#
-	# NOTE: Only LINE FEED (`\n`) is considered to delimit the end of lines.
+	# NOTE: SEE `read_line` for details.
 	fun read_lines: Array[String]
 	do
 		var res = new Array[String]
 		while not eof do
-			res.add read_line.chomp
+			res.add read_line
 		end
 		return res
 	end
 
 	# Read all the stream until the eof.
+	#
+	# The content of the file is returned verbatim.
+	#
+	# ~~~
+	# var txt = "Hello\n\nWorld\n"
+	# var i = new StringIStream(txt)
+	# assert i.read_all == txt
+	# ~~~
 	fun read_all: String
 	do
 		if last_error != null then return ""
@@ -131,7 +141,37 @@ abstract class IStream
 
 	# Read a string until the end of the line and append it to `s`.
 	#
-	# SEE: `read_line` for details.
+	# Unlike `read_line` and other related methods,
+	# the line terminator '\n', if any, is preserved in each line.
+	# Use the method `Text::chomp` to safely remove it.
+	#
+	# ~~~
+	# var txt = "Hello\n\nWorld\n"
+	# var i = new StringIStream(txt)
+	# var b = new FlatBuffer
+	# i.append_line_to(b)
+	# assert b == "Hello\n"
+	# i.append_line_to(b)
+	# assert b == "Hello\n\n"
+	# i.append_line_to(b)
+	# assert b == txt
+	# assert i.eof
+	# ~~~
+	#
+	# If `\n` is not present at the end of the result, it means that
+	# a non-eol terminated last line was returned.
+	#
+	# ~~~
+	# var i2 = new StringIStream("hello")
+	# assert not i2.eof
+	# var b2 = new FlatBuffer
+	# i2.append_line_to(b2)
+	# assert b2 == "hello"
+	# assert i2.eof
+	# ~~~
+	#
+	# NOTE: The single character LINE FEED (`\n`) delimits the end of lines.
+	# Therefore CARRIAGE RETURN & LINE FEED (`\r\n`) is also recognized.
 	fun append_line_to(s: Buffer)
 	do
 		if last_error != null then return
@@ -205,12 +245,9 @@ abstract class BufferedIStream
 	super IStream
 	redef fun read_char
 	do
-		if last_error != null then return 0
-		if eof then last_error = new IOError("Stream has reached eof")
-		if _buffer_pos >= _buffer.length then
-			fill_buffer
-		end
-		if _buffer_pos >= _buffer.length then
+		if last_error != null then return -1
+		if eof then
+			last_error = new IOError("Stream has reached eof")
 			return -1
 		end
 		var c = _buffer.chars[_buffer_pos]
@@ -223,7 +260,6 @@ abstract class BufferedIStream
 		if last_error != null then return ""
 		if _buffer.length == _buffer_pos then
 			if not eof then
-				fill_buffer
 				return read(i)
 			end
 			return ""
@@ -261,6 +297,15 @@ abstract class BufferedIStream
 			var i = _buffer_pos
 			while i < _buffer.length and _buffer.chars[i] != '\n' do i += 1
 
+			var eol
+			if i < _buffer.length then
+				assert _buffer.chars[i] == '\n'
+				i += 1
+				eol = true
+			else
+				eol = false
+			end
+
 			# if there is something to append
 			if i > _buffer_pos then
 				# Enlarge the string (if needed)
@@ -272,25 +317,30 @@ abstract class BufferedIStream
 					s.add(_buffer.chars[j])
 					j += 1
 				end
+				_buffer_pos = i
+			else
+				assert end_reached
+				return
 			end
 
-			if i < _buffer.length then
-				# so \n is in _buffer[i]
-				_buffer_pos = i + 1 # skip \n
+			if eol then
+				# so \n is found
 				return
 			else
 				# so \n is not found
-				_buffer_pos = i
-				if end_reached then
-					return
-				else
-					fill_buffer
-				end
+				if end_reached then return
+				fill_buffer
 			end
 		end
 	end
 
-	redef fun eof do return _buffer_pos >= _buffer.length and end_reached
+	redef fun eof
+	do
+		if _buffer_pos < _buffer.length then return false
+		if end_reached then return true
+		fill_buffer
+		return _buffer_pos >= _buffer.length and end_reached
+	end
 
 	# The buffer
 	private var buffer: nullable FlatBuffer = null

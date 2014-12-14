@@ -116,7 +116,6 @@ class Nitiwiki
 		while not pipe.eof do
 			var file = pipe.read_line
 			if file == "" then break # last line
-			file = file.substring(0, file.length - 1) # strip last oef
 			var name = file.basename(".md")
 			if name == "header" or name == "footer" or name == "menu" then continue
 			files.add file
