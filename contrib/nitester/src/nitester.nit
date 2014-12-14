@@ -303,7 +303,7 @@ class Controller
 				mpi.recv_empty(status.source, status.tag, comm_world)
 				at_work.remove(status.source)
 
-				if verbose > 1 then print "worker {status.source} is done ({at_work.length} still at work)"
+				if verbose > 0 then print "Worker {status.source} is done ({at_work.length} still at work)"
 			else
 				print "Unexpected tag {status.tag}"
 				shutdown
@@ -550,7 +550,7 @@ class Worker
 	fun send_results
 	do
 		if results_count > 0 then
-			if verbose > 1 then print "sending {results_count} results"
+			if verbose > 2 then print "Sending {results_count} results"
 			mpi.send_from(buffer, 0, results_count*4, controller_rank, result_tag, comm_world)
 			results_count = 0
 		end
