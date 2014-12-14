@@ -24,6 +24,8 @@ redef class ToolContext
 	private var opt_source = new OptionString("link for source (%f for filename, %l for first line, %L for last line)", "--source")
 	private var opt_sharedir = new OptionString("directory containing nitdoc assets", "--sharedir")
 	private var opt_shareurl = new OptionString("use shareurl instead of copy shared files", "--shareurl")
+	private var opt_no_attributes = new OptionBool("ignore the attributes",
+			"--no-attributes")
 	private var opt_nodot = new OptionBool("do not generate graphes with graphviz", "--no-dot")
 	private var opt_private = new OptionBool("also generate private API", "--private")
 
@@ -46,7 +48,8 @@ redef class ToolContext
 		super
 
 		var opts = option_context
-		opts.add_option(opt_dir, opt_source, opt_sharedir, opt_shareurl, opt_nodot, opt_private)
+		opts.add_option(opt_dir, opt_source, opt_sharedir, opt_shareurl,
+				opt_no_attributes, opt_nodot, opt_private)
 		opts.add_option(opt_custom_title, opt_custom_footer, opt_custom_intro, opt_custom_brand)
 		opts.add_option(opt_github_upstream, opt_github_base_sha1, opt_github_gitdir)
 		opts.add_option(opt_piwik_tracker, opt_piwik_site_id)
@@ -82,6 +85,23 @@ redef class ToolContext
 				abort
 			end
 		end
+	end
+
+	# Filter the entity based on the options specified by the user.
+	#
+	# Return `true` if the specified entity has to be included in the generated
+	# documentation
+	private fun filter_mclass(mclass: MClass): Bool do
+		return mclass.visibility >= min_visibility
+	end
+
+	# Filter the entity based on the options specified by the user.
+	#
+	# Return `true` if the specified entity has to be included in the generated
+	# documentation
+	private fun filter_mproperty(mproperty: MProperty): Bool do
+		return mproperty.visibility >= min_visibility and
+			not (opt_no_attributes.value and mproperty isa MAttribute)
 	end
 end
 
@@ -154,7 +174,7 @@ class Nitdoc
 
 	private fun classes do
 		for mclass in model.mclasses do
-			if mclass.visibility <= ctx.min_visibility then continue
+			if not ctx.filter_mclass(mclass) then continue
 			var page = new NitdocClass(ctx, model, mainmodule, mclass)
 			page.render.write_to_file("{ctx.output_dir.to_s}/{page.page_url}")
 		end
@@ -162,9 +182,8 @@ class Nitdoc
 
 	private fun properties do
 		for mproperty in model.mproperties do
-			if mproperty.visibility <= ctx.min_visibility then continue
+			if not ctx.filter_mproperty(mproperty) then continue
 			if mproperty isa MInnerClass then continue
-			if mproperty isa MAttribute then continue
 			var page = new NitdocProperty(ctx, model, mainmodule, mproperty)
 			page.render.write_to_file("{ctx.output_dir.to_s}/{page.page_url}")
 		end
@@ -196,12 +215,11 @@ class QuickSearch
 			add_result_for(mmodule.name, mmodule.full_name, mmodule.nitdoc_url)
 		end
 		for mclass in model.mclasses do
-			if mclass.visibility < ctx.min_visibility then continue
+			if not ctx.filter_mclass(mclass) then continue
 			add_result_for(mclass.name, mclass.full_name, mclass.nitdoc_url)
 		end
 		for mproperty in model.mproperties do
-			if mproperty.visibility < ctx.min_visibility then continue
-			if mproperty isa MAttribute then continue
+			if not ctx.filter_mproperty(mproperty) then continue
 			for mpropdef in mproperty.mpropdefs do
 				var full_name = mpropdef.mclassdef.mclass.full_name
 				var cls_url = mpropdef.mclassdef.mclass.nitdoc_url
@@ -658,7 +676,7 @@ class NitdocSearch
 	private fun classes_list: Array[MClass] do
 		var sorted = new Array[MClass]
 		for mclass in model.mclasses do
-			if mclass.visibility < ctx.min_visibility then continue
+			if not ctx.filter_mclass(mclass) then continue
 			sorted.add mclass
 		end
 		name_sorter.sort(sorted)
@@ -669,9 +687,7 @@ class NitdocSearch
 	private fun mprops_list: Array[MProperty] do
 		var sorted = new Array[MProperty]
 		for mproperty in model.mproperties do
-			if mproperty.visibility < ctx.min_visibility then continue
-			if mproperty isa MAttribute then continue
-			sorted.add mproperty
+			if ctx.filter_mproperty(mproperty) then sorted.add mproperty
 		end
 		name_sorter.sort(sorted)
 		return sorted
@@ -1084,22 +1100,17 @@ class NitdocClass
 
 	# Property list to display in sidebar
 	fun tpl_sidebar_properties do
-		var kind_map = sort_by_kind(mclass_inherited_mprops)
+		var by_kind = new PropertiesByKind.with_elements(mclass_inherited_mprops)
 		var summary = new TplList.with_classes(["list-unstyled"])
 
-		tpl_sidebar_list("Virtual types", kind_map["type"].to_a, summary)
-		tpl_sidebar_list("Constructors", kind_map["init"].to_a, summary)
-		tpl_sidebar_list("Methods", kind_map["fun"].to_a, summary)
-		if not kind_map["inner"].is_empty then
-			tpl_sidebar_list("Inner classes", kind_map["inner"].to_a, summary)
-		end
+		by_kind.sort_groups(name_sorter)
+		for g in by_kind.groups do tpl_sidebar_list(g, summary)
 		tpl_sidebar.boxes.add new TplSideBox.with_content("All properties", summary)
 	end
 
-	private fun tpl_sidebar_list(name: String, mprops: Array[MProperty], summary: TplList) do
+	private fun tpl_sidebar_list(mprops: PropertyGroup[MProperty], summary: TplList) do
 		if mprops.is_empty then return
-		name_sorter.sort(mprops)
-		var entry = new TplListItem.with_content(name)
+		var entry = new TplListItem.with_content(mprops.title)
 		var list = new TplList.with_classes(["list-unstyled", "list-labeled"])
 		for mprop in mprops do
 			list.add_li tpl_sidebar_item(mprop)
@@ -1159,15 +1170,14 @@ class NitdocClass
 		# parents
 		var hparents = new HashSet[MClass]
 		for c in mclass.in_hierarchy(mainmodule).direct_greaters do
-			if c.visibility < ctx.min_visibility then continue
-			hparents.add c
+			if ctx.filter_mclass(c) then hparents.add c
 		end
 
 		# ancestors
 		var hancestors = new HashSet[MClass]
 		for c in mclass.in_hierarchy(mainmodule).greaters do
 			if c == mclass then continue
-			if c.visibility < ctx.min_visibility then continue
+			if not ctx.filter_mclass(c) then continue
 			if hparents.has(c) then continue
 			hancestors.add c
 		end
@@ -1175,15 +1185,14 @@ class NitdocClass
 		# children
 		var hchildren = new HashSet[MClass]
 		for c in mclass.in_hierarchy(mainmodule).direct_smallers do
-			if c.visibility < ctx.min_visibility then continue
-			hchildren.add c
+			if ctx.filter_mclass(c) then hchildren.add c
 		end
 
 		# descendants
 		var hdescendants = new HashSet[MClass]
 		for c in mclass.in_hierarchy(mainmodule).smallers do
 			if c == mclass then continue
-			if c.visibility < ctx.min_visibility then continue
+			if not ctx.filter_mclass(c) then continue
 			if hchildren.has(c) then continue
 			hdescendants.add c
 		end
@@ -1266,34 +1275,21 @@ class NitdocClass
 
 				# properties
 				var mprops = mmodules2mprops[mentity]
-				var kind_map = sort_by_kind(mprops)
+				var by_kind = new PropertiesByKind.with_elements(mprops)
 
-				# virtual types
-				for article in tpl_mproperty_articles(kind_map, "type") do
-					section.add_child article
-				end
-				# constructors
-				for article in tpl_mproperty_articles(kind_map, "init") do
-					section.add_child article
-				end
-				# methods
-				for article in tpl_mproperty_articles(kind_map, "fun") do
-					section.add_child article
-				end
-				# inner classes
-				for article in tpl_mproperty_articles(kind_map, "inner") do
-					section.add_child article
+				for g in by_kind.groups do
+					for article in tpl_mproperty_articles(g) do
+						section.add_child article
+					end
 				end
 				parent.add_child section
 			end
 		end
 	end
 
-	private fun tpl_mproperty_articles(kind_map: Map[String, Set[MProperty]],
-		kind_name: String): Sequence[TplArticle] do
+	private fun tpl_mproperty_articles(elts: Collection[MProperty]):
+			Sequence[TplArticle] do
 		var articles = new List[TplArticle]
-		var elts = kind_map[kind_name].to_a
-		name_sorter.sort(elts)
 		for elt in elts do
 			var local_defs = mprops2mdefs[elt]
 			# var all_defs = elt.mpropdefs
@@ -1342,28 +1338,6 @@ class NitdocClass
 			var mmodule = mpropdefs.first.mclassdef.mmodule
 			if not map.has_key(mmodule) then map[mmodule] = new HashSet[MProperty]
 			map[mmodule].add mprop
-		end
-		return map
-	end
-
-	private fun sort_by_kind(mprops: Collection[MProperty]): Map[String, Set[MProperty]] do
-		var map = new HashMap[String, Set[MProperty]]
-		map["type"] = new HashSet[MProperty]
-		map["init"] = new HashSet[MProperty]
-		map["fun"] = new HashSet[MProperty]
-		map["inner"] = new HashSet[MProperty]
-		for mprop in mprops do
-			if mprop isa MVirtualTypeProp then
-				map["type"].add mprop
-			else if mprop isa MMethod then
-				if mprop.is_init then
-					map["init"].add mprop
-				else
-					map["fun"].add mprop
-				end
-			else if mprop isa MInnerClass then
-				map["inner"].add mprop
-			end
 		end
 		return map
 	end
@@ -1438,6 +1412,74 @@ class NitdocClass
 		op.append("\}\n")
 		return tpl_graph(op, name, null)
 	end
+end
+
+# Groups properties by kind.
+private class PropertiesByKind
+	# The virtual types.
+	var virtual_types = new PropertyGroup[MVirtualTypeProp]("Virtual types")
+
+	# The constructors.
+	var constructors = new PropertyGroup[MMethod]("Contructors")
+
+	# The attributes.
+	var attributes = new PropertyGroup[MAttribute]("Attributes")
+
+	# The methods.
+	var methods = new PropertyGroup[MMethod]("Methods")
+
+	# The inner classes.
+	var inner_classes = new PropertyGroup[MInnerClass]("Inner classes")
+
+	# All the groups.
+	#
+	# Sorted in the order they are displayed to the user.
+	var groups: SequenceRead[PropertyGroup[MProperty]] = [
+			virtual_types,
+			constructors,
+			attributes,
+			methods,
+			inner_classes: PropertyGroup[MProperty]]
+
+	# Add each the specified property to the appropriate list.
+	init with_elements(properties: Collection[MProperty]) do add_all(properties)
+
+	# Add the specified property to the appropriate list.
+	fun add(property: MProperty) do
+		if property isa MMethod then
+			if property.is_init then
+				constructors.add property
+			else
+				methods.add property
+			end
+		else if property isa MVirtualTypeProp then
+			virtual_types.add property
+		else if property isa MAttribute then
+			attributes.add property
+		else if property isa MInnerClass then
+			inner_classes.add property
+		else
+			abort
+		end
+	end
+
+	# Add each the specified property to the appropriate list.
+	fun add_all(properties: Collection[MProperty]) do
+		for p in properties do add(p)
+	end
+
+	# Sort each group with the specified comparator.
+	fun sort_groups(comparator: Comparator) do
+		for g in groups do comparator.sort(g)
+	end
+end
+
+# A Group of properties of the same kind.
+private class PropertyGroup[E: MProperty]
+	super Array[E]
+
+	# The title of the group, as displayed to the user.
+	var title: String
 end
 
 # A MProperty page
