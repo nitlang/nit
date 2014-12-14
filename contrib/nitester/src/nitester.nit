@@ -187,8 +187,7 @@ abstract class Processor
 			skip = new Array[String]
 		end
 
-		for prog in test_programs do for engine in engines do
-
+		for engine in engines do for prog in test_programs do
 			# Is is blacklisted?
 			for s in skip do if not s.is_empty and prog.has(s) then
 				if verbose > 0 and rank == 0 then print "Skipping test '{prog}' because of '{s}' in turing.skip"
