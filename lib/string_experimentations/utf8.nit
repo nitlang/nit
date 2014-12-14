@@ -308,7 +308,6 @@ redef class FlatString
 		var index = self.index
 		var ipos = 0
 		var max = length
-		var items = self.items
 
 		while ipos < max do
 			var u = index[ipos].to_upper
@@ -330,7 +329,6 @@ redef class FlatString
 		var index = self.index
 		var ipos = 0
 		var max = length
-		var items = self.items
 
 		while ipos < max do
 			var u = index[ipos].to_lower

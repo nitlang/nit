@@ -106,8 +106,6 @@ redef class Grid
 		var min = 1
 		var kind = 0
 
-		var tile: nullable Tile = null
-
 		for x in [0..grid.width[ do
 			for y in [0..grid.height[ do
 				var t = grid.grid[x][y]
@@ -121,7 +119,6 @@ redef class Grid
 				var l = fs.length
 				if l == 0 then continue
 
-				tile = t
 				if n == 0 then
 					if min == 1 or start.length > l then
 						start = fs

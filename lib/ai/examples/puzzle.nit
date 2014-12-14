@@ -276,7 +276,6 @@ for arg in args do
 		continue
 	end
 
-	var c = new Clock
 	var s = pb.astar
 	s.memorize = true
 	var r = s.run

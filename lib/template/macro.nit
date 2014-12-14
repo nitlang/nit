@@ -150,7 +150,6 @@ class TemplateString
 	# Also build `self` template parts using original template text.
 	private fun parse do
 		var text = tpl_text
-		var chars = text.chars
 		var pos = 0
 		var out = new FlatBuffer
 		var start_pos: Int

@@ -305,7 +305,6 @@ class CodeWarehouse
 		var jarray_id = "java_array"
 		var loop_ = create_loop(java_type, nit_type, true, jarray_id, narray_id)
 		var imports = create_imports(nit_type, true)
-		var jtype = java_type.to_s
 		var jinstanciation = create_array_instance(java_type, nit_type, jarray_id)
 		var return_str = ""
 		

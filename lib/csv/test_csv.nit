@@ -105,7 +105,6 @@ class TestCsvReader
 			expected: SequenceRead[SequenceRead[String]]) do
 		var istream: IStream
 		var reader: CsvReader
-		var i = 0
 
 		istream = new StringIStream(input_rfc4180)
 		reader = new CsvReader(istream)
