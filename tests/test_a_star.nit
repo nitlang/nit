@@ -91,7 +91,7 @@ class PositionPathContext
 	redef fun worst_heuristic_cost do return 100
 end
 
-fun print_path(path: nullable Path[NamedNode]) do if path == null then
+fun print_path(path: nullable AStarPath[NamedNode]) do if path == null then
 	print "null path"
 else
 	var names = new Array[String]

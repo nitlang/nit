@@ -6,7 +6,7 @@
 #
 # This file is free software, which comes along with NIT.  This software is
 # distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
-# without  even  the implied warranty of  MERCHANTABILITY or  FITNESS FOR A 
+# without  even  the implied warranty of  MERCHANTABILITY or  FITNESS FOR A
 # PARTICULAR PURPOSE.  You can modify it is you want,  provided this header
 # is kept unaltered, and a notification of the changes is added.
 # You  are  allowed  to  redistribute it and sell it, alone or is a part of
@@ -19,6 +19,7 @@ intrude import stream
 intrude import ropes
 import string_search
 import time
+import gc
 
 in "C Header" `{
 	#include <dirent.h>
@@ -41,7 +42,7 @@ abstract class FStream
 	private var file: nullable NativeFile = null
 
 	# The status of a file. see POSIX stat(2).
-	fun file_stat: FileStat do return _file.file_stat
+	fun file_stat: NativeFileStat do return _file.file_stat
 
 	# File descriptor of this file
 	fun fd: Int do return _file.fileno
@@ -135,7 +136,7 @@ end
 class OFStream
 	super FStream
 	super OStream
-	
+
 	redef fun write(s)
 	do
 		if last_error != null then return
@@ -166,7 +167,7 @@ class OFStream
 		_is_writable = false
 	end
 	redef var is_writable = false
-	
+
 	# Write `len` bytes from `native`.
 	private fun write_native(native: NativeString, len: Int)
 	do
@@ -186,7 +187,7 @@ class OFStream
 			last_error = new IOError("Problem in writing : {err} {len} \n")
 		end
 	end
-	
+
 	# Open the file at `path` for writing.
 	init open(path: String)
 	do
@@ -275,24 +276,68 @@ redef class Streamable
 	end
 end
 
-redef class String
-	# return true if a file with this names exists
-	fun file_exists: Bool do return to_cstring.file_exists
+# Utility class to access file system services
+#
+# Usually created with `Text::to_path`.
+class Path
 
-	# The status of a file. see POSIX stat(2).
-	fun file_stat: FileStat do return to_cstring.file_stat
+	private var path: String
 
-	# The status of a file or of a symlink. see POSIX lstat(2).
-	fun file_lstat: FileStat do return to_cstring.file_lstat
+	# Path to this file
+	redef fun to_s do return path
 
-	# Remove a file, return true if success
-	fun file_delete: Bool do return to_cstring.file_delete
+	# Name of the file name at `to_s`
+	#
+	# ~~~
+	# var path = "/tmp/somefile".to_path
+	# assert path.filename == "somefile"
+	# ~~~
+	var filename: String = path.basename("") is lazy
 
-	# Copy content of file at `self` to `dest`
-	fun file_copy_to(dest: String)
+	# Does the file at `path` exists?
+	fun exists: Bool do return stat != null
+
+	# Information on the file at `self` following symbolic links
+	#
+	# Returns `null` if there is no file at `self`.
+	#
+	# ~~~
+	# var p = "/tmp/".to_path
+	# var stat = p.stat
+	# if stat != null then # Does `p` exist?
+	#     print "It's size is {stat.size}"
+	#     if stat.is_dir then print "It's a directory"
+	# end
+	# ~~~
+	fun stat: nullable FileStat
 	do
-		var input = new IFStream.open(self)
-		var output = new OFStream.open(dest)
+		var stat = path.to_cstring.file_stat
+		if stat.address_is_null then return null
+		return new FileStat(stat)
+	end
+
+	# Information on the file or link at `self`
+	#
+	# Do not follow symbolic links.
+	fun link_stat: nullable FileStat
+	do
+		var stat = path.to_cstring.file_lstat
+		if stat.address_is_null then return null
+		return new FileStat(stat)
+	end
+
+	# Delete a file from the file system, return `true` on success
+	#
+	# Require: `exists`
+	fun delete: Bool do return path.to_cstring.file_delete
+
+	# Copy content of file at `path` to `dest`
+	#
+	# Require: `exists`
+	fun copy(dest: Path)
+	do
+		var input = open_ro
+		var output = dest.open_wo
 
 		while not input.eof do
 			var buffer = input.read(1024)
@@ -302,6 +347,196 @@ redef class String
 		input.close
 		output.close
 	end
+
+	# Open this file for reading
+	#
+	# Require: `exists and not link_stat.is_dir`
+	fun open_ro: IFStream
+	do
+		# TODO manage streams error when they are merged
+		return new IFStream.open(path)
+	end
+
+	# Open this file for writing
+	#
+	# Require: `not exists or not stat.is_dir`
+	fun open_wo: OFStream
+	do
+		# TODO manage streams error when they are merged
+		return new OFStream.open(path)
+	end
+
+	# Lists the name of the files contained within the directory at `path`
+	#
+	# Require: `exists and is_dir`
+	fun files: Array[Path]
+	do
+		var files = new Array[Path]
+		for filename in path.files do
+			files.add new Path(path / filename)
+		end
+		return files
+	end
+
+	# Delete a directory and all of its content, return `true` on success
+	#
+	# Does not go through symbolic links and may get stuck in a cycle if there
+	# is a cycle in the file system.
+	fun rmdir: Bool
+	do
+		var ok = true
+		for file in self.files do
+			var stat = file.link_stat
+			if stat.is_dir then
+				ok = file.rmdir and ok
+			else
+				ok = file.delete and ok
+			end
+		end
+
+		# Delete the directory itself
+		if ok then path.to_cstring.rmdir
+
+		return ok
+	end
+
+	redef fun ==(other) do return other isa Path and path.simplify_path == other.path.simplify_path
+	redef fun hash do return path.simplify_path.hash
+end
+
+# Information on a file
+#
+# Created by `Path::stat` and `Path::link_stat`.
+#
+# The information within this class is gathered when the instance is initialized
+# it will not be updated if the targeted file is modified.
+class FileStat
+	super Finalizable
+
+	# TODO private init
+
+	# The low-level status of a file
+	#
+	# See: POSIX stat(2)
+	private var stat: NativeFileStat
+
+	private var finalized = false
+
+	redef fun finalize
+	do
+		if not finalized then
+			stat.free
+			finalized = true
+		end
+	end
+
+	# Returns the last access time in seconds since Epoch
+	fun last_access_time: Int
+	do
+		assert not finalized
+		return stat.atime
+	end
+
+	# Returns the last modification time in seconds since Epoch
+	fun last_modification_time: Int
+	do
+		assert not finalized
+		return stat.mtime
+	end
+
+	# Size of the file at `path`
+	fun size: Int
+	do
+		assert not finalized
+		return stat.size
+	end
+
+	# Is this a regular file and not a device file, pipe, socket, etc.?
+	fun is_file: Bool
+	do
+		assert not finalized
+		return stat.is_reg
+	end
+
+	# Is this a directory?
+	fun is_dir: Bool
+	do
+		assert not finalized
+		return stat.is_dir
+	end
+
+	# Is this a symbolic link?
+	fun is_link: Bool
+	do
+		assert not finalized
+		return stat.is_lnk
+	end
+
+	# FIXME Make the following POSIX only? or implement in some other way on Windows
+
+	# Returns the last status change time in seconds since Epoch
+	fun last_status_change_time: Int
+	do
+		assert not finalized
+		return stat.ctime
+	end
+
+	# Returns the permission bits of file
+	fun mode: Int
+	do
+		assert not finalized
+		return stat.mode
+	end
+
+	# Is this a character device?
+	fun is_chr: Bool
+	do
+		assert not finalized
+		return stat.is_chr
+	end
+
+	# Is this a block device?
+	fun is_blk: Bool
+	do
+		assert not finalized
+		return stat.is_blk
+	end
+
+	# Is this a FIFO pipe?
+	fun is_fifo: Bool
+	do
+		assert not finalized
+		return stat.is_fifo
+	end
+
+	# Is this a UNIX socket
+	fun is_sock: Bool
+	do
+		assert not finalized
+		return stat.is_sock
+	end
+end
+
+redef class Text
+	# Access file system related services on the path at `self`
+	fun to_path: Path do return new Path(to_s)
+end
+
+redef class String
+	# return true if a file with this names exists
+	fun file_exists: Bool do return to_cstring.file_exists
+
+	# The status of a file. see POSIX stat(2).
+	fun file_stat: NativeFileStat do return to_cstring.file_stat
+
+	# The status of a file or of a symlink. see POSIX lstat(2).
+	fun file_lstat: NativeFileStat do return to_cstring.file_lstat
+
+	# Remove a file, return true if success
+	fun file_delete: Bool do return to_cstring.file_delete
+
+	# Copy content of file at `self` to `dest`
+	fun file_copy_to(dest: String) do to_path.copy(dest.to_path)
 
 	# Remove the trailing extension `ext`.
 	#
@@ -557,25 +792,7 @@ redef class String
 	#
 	# Does not go through symbolic links and may get stuck in a cycle if there
 	# is a cycle in the filesystem.
-	fun rmdir: Bool
-	do
-		var ok = true
-		for file in self.files do
-			var file_path = self.join_path(file)
-			var stat = file_path.file_lstat
-			if stat.is_dir then
-				ok = file_path.rmdir and ok
-			else
-				ok = file_path.file_delete and ok
-			end
-			stat.free
-		end
-
-		# Delete the directory itself
-		if ok then to_cstring.rmdir
-
-		return ok
-	end
+	fun rmdir: Bool do return to_path.rmdir
 
 	# Change the current working directory
 	#
@@ -650,8 +867,8 @@ end
 
 redef class NativeString
 	private fun file_exists: Bool is extern "string_NativeString_NativeString_file_exists_0"
-	private fun file_stat: FileStat is extern "string_NativeString_NativeString_file_stat_0"
-	private fun file_lstat: FileStat `{
+	private fun file_stat: NativeFileStat is extern "string_NativeString_NativeString_file_stat_0"
+	private fun file_lstat: NativeFileStat `{
 		struct stat* stat_element;
 		int res;
 		stat_element = malloc(sizeof(struct stat));
@@ -667,12 +884,12 @@ redef class NativeString
 end
 
 # This class is system dependent ... must reify the vfs
-extern class FileStat `{ struct stat * `}
+extern class NativeFileStat `{ struct stat * `}
 	# Returns the permission bits of file
 	fun mode: Int is extern "file_FileStat_FileStat_mode_0"
 	# Returns the last access time
 	fun atime: Int is extern "file_FileStat_FileStat_atime_0"
-	# Returns the last status change time 
+	# Returns the last status change time
 	fun ctime: Int is extern "file_FileStat_FileStat_ctime_0"
 	# Returns the last modification time
 	fun mtime: Int is extern "file_FileStat_FileStat_mtime_0"
@@ -700,7 +917,7 @@ private extern class NativeFile `{ FILE* `}
 	fun io_read(buf: NativeString, len: Int): Int is extern "file_NativeFile_NativeFile_io_read_2"
 	fun io_write(buf: NativeString, len: Int): Int is extern "file_NativeFile_NativeFile_io_write_2"
 	fun io_close: Int is extern "file_NativeFile_NativeFile_io_close_0"
-	fun file_stat: FileStat is extern "file_NativeFile_NativeFile_file_stat_0"
+	fun file_stat: NativeFileStat is extern "file_NativeFile_NativeFile_file_stat_0"
 	fun fileno: Int `{ return fileno(recv); `}
 	# Flushes the buffer, forcing the write operation
 	fun flush: Int is extern "fflush"

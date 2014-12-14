@@ -705,5 +705,5 @@ extern class Pointer
 	fun address_is_null: Bool is extern "address_is_null"
 
 	# Free the memory pointed by this pointer
-	fun free `{ free(recv); `}
+	fun free is extern "free"
 end
