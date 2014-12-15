@@ -18,7 +18,6 @@
 module vm
 
 import interpreter::naive_interpreter
-import model_utils
 import perfect_hashing
 
 redef class ModelBuilder
@@ -160,7 +159,7 @@ class VirtualMachine super NaiveInterpreter
 
 		assert recv isa MutableInstance
 
-		recv.internal_attributes = init_internal_attributes(initialization_value, recv.mtype.as(MClassType).mclass.all_mattributes(mainmodule, none_visibility).length)
+		recv.internal_attributes = init_internal_attributes(initialization_value, recv.mtype.as(MClassType).mclass.mattributes.length)
 		super
 	end
 
@@ -389,6 +388,18 @@ redef class MClass
 	# introduced by self class in the vtable
 	var positions_methods: HashMap[MClass, Int] = new HashMap[MClass, Int]
 
+	# The `MAttribute` this class introduced
+	var intro_mattributes = new Array[MAttribute]
+
+	# The `MMethod` this class introduced
+	var intro_mmethods = new Array[MMethod]
+
+	# All `MAttribute` this class contains
+	var mattributes = new Array[MAttribute]
+
+	# All `MMethod` this class contains
+	var mmethods = new Array[MMethod]
+
 	# Allocates a VTable for this class and gives it an id
 	private fun make_vt(v: VirtualMachine)
 	do
@@ -418,13 +429,12 @@ redef class MClass
 			if not parent.loaded then parent.make_vt(v)
 
 			# Get the number of introduced methods and attributes for this class
-			var methods = 0
-			var attributes = 0
+			var methods = parent.intro_mmethods.length
+			var attributes = parent.intro_mattributes.length
 
-			for p in parent.intro_mproperties(none_visibility) do
-				if p isa MMethod then methods += 1
-				if p isa MAttribute then attributes += 1
-			end
+			# Updates `mmethods` and `mattributes`
+			mmethods.add_all(parent.intro_mmethods)
+			mattributes.add_all(parent.intro_mattributes)
 
 			ids.push(parent.vtable.id)
 			nb_methods.push(methods)
@@ -490,20 +500,35 @@ redef class MClass
 		# Fixing offsets for self attributes and methods
 		var relative_offset_attr = 0
 		var relative_offset_meth = 0
-		for p in intro_mproperties(none_visibility) do
-			if p isa MMethod then
-				self_methods += 1
-				p.offset = relative_offset_meth
-				p.absolute_offset = offset_methods + relative_offset_meth
-				relative_offset_meth += 1
-			end
-			if p isa MAttribute then
-				nb_introduced_attributes += 1
-				p.offset = relative_offset_attr
-				p.absolute_offset = offset_attributes + relative_offset_attr
-				relative_offset_attr += 1
+
+		# Update `intro_mmethods` and `intro_mattributes`
+		# For each MClassdef this MClass has
+		for classdef in mclassdefs do
+			# For each property this MClassdef introduce
+			for p in classdef.intro_mproperties do
+				# Collect properties and fixing offsets
+				if p isa MMethod then
+					self_methods += 1
+					p.offset = relative_offset_meth
+					p.absolute_offset = offset_methods + relative_offset_meth
+					relative_offset_meth += 1
+
+					intro_mmethods.add(p)
+				end
+				if p isa MAttribute then
+					nb_introduced_attributes += 1
+					p.offset = relative_offset_attr
+					p.absolute_offset = offset_attributes + relative_offset_attr
+					relative_offset_attr += 1
+
+					intro_mattributes.add(p)
+				end
 			end
 		end
+
+		# Updates caches with introduced attributes of `self` class
+		mattributes.add_all(intro_mattributes)
+		mmethods.add_all(intro_mmethods)
 
 		nb_methods_total.add_all(nb_methods)
 		nb_methods_total.push(self_methods)
@@ -525,12 +550,10 @@ redef class MClass
 	private fun fill_vtable(v:VirtualMachine, table: VTable, cl: MClass)
 	do
 		var methods = new Array[MMethodDef]
-		for m in cl.intro_mproperties(none_visibility) do
-			if m isa MMethod then
-				# `propdef` is the most specific implementation for this MMethod
-				var propdef = m.lookup_first_definition(v.mainmodule, self.intro.bound_mtype)
-				methods.push(propdef)
-			end
+		for m in cl.intro_mmethods do
+			# `propdef` is the most specific implementation for this MMethod
+			var propdef = m.lookup_first_definition(v.mainmodule, self.intro.bound_mtype)
+			methods.push(propdef)
 		end
 
 		# Call a method in C to put propdefs of self methods in the vtables
@@ -593,7 +616,7 @@ redef class MClass
 			for cl in direct_parents do
 				# If we never have visited this class
 				if not res.has(cl) then
-					var properties_length = cl.all_mproperties(v.mainmodule, none_visibility).length
+					var properties_length = cl.mmethods.length + cl.mattributes.length
 					if properties_length > max then
 						max = properties_length
 						prefix = cl
