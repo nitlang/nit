@@ -12,8 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-NITG=../../bin/nitc
-NITG_FLAGS=--dir bin
+NITC=../../bin/nitc
+NITC_FLAGS=--dir bin
 NEO4J_DIR=/var/lib/neo4j
 OLD_PWD=${PWD}
 
@@ -22,7 +22,7 @@ OLD_PWD=${PWD}
 # Compile the tool.
 bin:
 	mkdir -p bin
-	$(NITG) $(NITG_FLAGS) src/neo_doxygen.nit
+	$(NITC) $(NITC_FLAGS) src/neo_doxygen.nit
 
 # Reset the local graph.
 reset-neo:
