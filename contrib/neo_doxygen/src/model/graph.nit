@@ -310,8 +310,6 @@ class Namespace
 	super Compound
 
 	# The inner namespaces.
-	#
-	# Left empty for the root namespace.
 	var inner_namespaces: SimpleCollection[NamespaceRef] = new Array[NamespaceRef]
 
 	init do
@@ -336,12 +334,6 @@ class Namespace
 	redef fun put_edges do
 		super
 		graph.add_edge(self, "PROJECT", graph.project)
-		if self["name"] == self["full_name"] and self["full_name"] != "" then
-			# The root namespace does not know its children.
-			var root = graph.by_id[""]
-			graph.add_edge(self, "PARENT", root)
-			graph.add_edge(root, "NESTS", self)
-		end
 		for ns in inner_namespaces do
 			var node = ns.seek_in(graph)
 			graph.add_edge(node, "PARENT", self)
@@ -391,6 +383,4 @@ class RootNamespace
 		self["full_name"] = ""
 		self["name"] = graph.project_name
 	end
-
-	redef fun declare_namespace(id: String, name: String) do end
 end
