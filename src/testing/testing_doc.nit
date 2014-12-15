@@ -79,7 +79,9 @@ class NitUnitExecutor
 	var cpt = 0
 
 	# The entry point for a new `ndoc` node
-	# Fill the prepated `tc` (testcase) XTM node
+	# Fill `docunits` with new discovered unit of tests.
+	#
+	# `tc` (testcase) is the pre-filled XML node
 	fun extract(ndoc: ADoc, tc: HTMLTag)
 	do
 		blocks.clear
@@ -103,12 +105,26 @@ class NitUnitExecutor
 
 		if blocks.is_empty then return
 
-		for block in blocks do test_block(ndoc, tc, block)
+		for block in blocks do
+			docunits.add new DocUnit(ndoc, tc, block.join(""))
+		end
 	end
 
-	# Execute a block
-	fun test_block(ndoc: ADoc, tc: HTMLTag, block: Array[String])
+	# All extracted docunits
+	var docunits = new Array[DocUnit]
+
+	# Execute all the docunits
+	fun run_tests
 	do
+		for du in docunits do
+				test_single_docunit(du)
+		end
+	end
+
+	# Executes a single doc-unit in its own program.
+	fun test_single_docunit(du: DocUnit)
+	do
+		var tc = du.testcase
 		toolcontext.modelbuilder.unit_entities += 1
 
 		cpt += 1
@@ -124,9 +140,7 @@ class NitUnitExecutor
 		f.write("# Example extracted from a documentation\n")
 		f.write("import {mmodule.name}\n")
 		f.write("\n")
-		for text in block do
-			f.write(text)
-		end
+		f.write(du.block)
 		f.close
 
 		if toolcontext.opt_noact.value then return
@@ -154,26 +168,38 @@ class NitUnitExecutor
 
 		n2 = new HTMLTag("system-out")
 		tc.add n2
-		for text in block do n2.append(text)
+		n2.append(du.block)
 
 
 		if res != 0 then
 			var ne = new HTMLTag("failure")
 			ne.attr("message", msg)
 			tc.add ne
-			toolcontext.warning(ndoc.location, "failure", "FAILURE: {tc.attrs["classname"]}.{tc.attrs["name"]} (in {file}): {msg}")
+			toolcontext.warning(du.ndoc.location, "failure", "FAILURE: {tc.attrs["classname"]}.{tc.attrs["name"]} (in {file}): {msg}")
 			toolcontext.modelbuilder.failed_entities += 1
 		else if res2 != 0 then
 			var ne = new HTMLTag("error")
 			ne.attr("message", msg)
 			tc.add ne
-			toolcontext.warning(ndoc.location, "error", "ERROR: {tc.attrs["classname"]}.{tc.attrs["name"]} (in {file}): {msg}")
+			toolcontext.warning(du.ndoc.location, "error", "ERROR: {tc.attrs["classname"]}.{tc.attrs["name"]} (in {file}): {msg}")
 			toolcontext.modelbuilder.failed_entities += 1
 		end
 		toolcontext.check_errors
 
 		testsuite.add(tc)
 	end
+end
+
+# A unit-test to run
+class DocUnit
+	# The original comment node
+	var ndoc: ADoc
+
+	# The XML node that contains the information about the execution
+	var testcase: HTMLTag
+
+	# The text of the code to execute
+	var block: String
 end
 
 class SearchAssertVisitor
@@ -264,6 +290,8 @@ redef class ModelBuilder
 				end
 			end
 		end
+
+		d2m.run_tests
 
 		return ts
 	end
