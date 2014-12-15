@@ -83,8 +83,8 @@ class StreamCat
 	do
 		_streams = streams.iterator
 	end
-	init(streams: IStream ...)
-	do
+
+	init(streams: IStream ...) is old_style_init do
 		_streams = streams.iterator
 	end
 end
@@ -133,8 +133,7 @@ class StreamDemux
 		_streams = streams
 	end
 
-	init(streams: OStream ...)
-	do
+	init(streams: OStream ...) is old_style_init do
 		_streams = streams
 	end
 end
