@@ -708,6 +708,9 @@ redef class AMethPropdef
 			msignature = mpropdef.mproperty.intro.msignature
 			if msignature == null then return # Skip error
 
+			# The local signature is adapted to use the local formal types, if any.
+			msignature = msignature.resolve_for(mclassdef.mclass.mclass_type, mclassdef.bound_mtype, mmodule, false)
+
 			# Check inherited signature arity
 			if param_names.length != msignature.arity then
 				var node: ANode
@@ -983,7 +986,11 @@ redef class AAttrPropdef
 			var msignature = mreadpropdef.mproperty.intro.msignature
 			if msignature == null then return # Error, thus skipped
 			inherited_type = msignature.return_mtype
-			if mtype == null then mtype = inherited_type
+			if inherited_type != null then
+				# The inherited type is adapted to use the local formal types, if any.
+				inherited_type = inherited_type.resolve_for(mclassdef.mclass.mclass_type, mclassdef.bound_mtype, mmodule, false)
+				if mtype == null then mtype = inherited_type
+			end
 		end
 
 		var nexpr = self.n_expr

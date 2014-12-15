@@ -237,7 +237,7 @@ redef class MModule
 	redef fun tpl_declaration do
 		var tpl = new Template
 		tpl.add "<span>module "
-		tpl.add tpl_link
+		tpl.add tpl_namespace
 		tpl.add "</span>"
 		return tpl
 	end
@@ -575,6 +575,17 @@ redef class MPropDef
 		var li = new TplListItem.with_content(lnk)
 		li.css_classes.add "signature"
 		return li
+	end
+end
+
+redef class MAttributeDef
+	redef fun tpl_signature do
+		var tpl = new Template
+		if static_mtype != null then
+			tpl.add ": "
+			tpl.add static_mtype.tpl_signature
+		end
+		return tpl
 	end
 end
 

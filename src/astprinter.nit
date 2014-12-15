@@ -47,15 +47,6 @@ private class ASTPrinterVisitor
 	do
 		if last_current != current_node then
 			last_current = current_node
-			var l = current_node._location
-			if l != null then
-				eol
-				out.add(s)
-				out.add("\t# {l.colored_line("0;32").split_with('\n').first}")
-				has_eol = false
-				eol
-				return
-			end
 		end
 		out.add(s)
 		has_eol = false

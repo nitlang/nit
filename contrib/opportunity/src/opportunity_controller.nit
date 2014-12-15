@@ -136,7 +136,6 @@ class OpportunityRESTAction
 
 	redef fun answer(request, uri) do
 		print "Received REST request from {uri}"
-		var get = request.get_args
 		var req = uri.split("/")
 		if req.has("people") then
 			return (new OpportunityPeopleREST).answer(request, uri)

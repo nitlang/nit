@@ -29,6 +29,6 @@ First, compile the interpreter with the Nit compiler/interpreter, and launch the
 
 Example:
 ~~~
-nitg ./brainfuck.nit
+nitc ./brainfuck.nit
 ./brainfuck ./examples/hello.bf
 ~~~

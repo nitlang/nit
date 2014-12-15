@@ -6,7 +6,7 @@ Neo4j that is readable by the `nx` tool.
 
 ## Installation
 
-Ensure that you have a working version of `nitg` in `../../bin` then run `make`
+Ensure that you have a working version of `nitc` in `../../bin` then run `make`
 in the present directory. The executable will be then generated at
 `bin/neo_doxygen`.
 

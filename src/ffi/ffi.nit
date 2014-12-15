@@ -32,6 +32,7 @@ import c
 import cpp
 import java
 import extra_java_files
+import objc
 
 redef class MModule
 	# Does this module uses the FFI?

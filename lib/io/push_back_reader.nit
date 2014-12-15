@@ -12,7 +12,7 @@
 module io::push_back_reader
 
 # Input stream that permits to push bytes back to the stream.
-interface PushBackReader
+class PushBackReader
 	super IStream
 
 	# Push the specified byte back to the stream.

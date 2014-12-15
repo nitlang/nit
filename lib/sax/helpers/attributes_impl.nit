@@ -91,7 +91,7 @@ class AttributesImpl
 				return data[index * 5 + 3]
 			end
 		else if index isa String and "" != index then
-			var i: Int = 0
+			var i = 0
 
 			while i < data.length do
 				if data[i + 2] == index then
@@ -130,7 +130,7 @@ class AttributesImpl
 				return data[index * 5 + 4]
 			end
 		else if index isa String and "" != index then
-			var i: Int = 0
+			var i = 0
 
 			while i < data.length do
 				if data[i + 2] == index then
@@ -158,7 +158,7 @@ class AttributesImpl
 	# The index of the attribute, or -1 if it does not
 	# appear in the list.
 	redef fun index_ns(uri: String, local_name: String): Int do
-		var i: Int = 0
+		var i = 0
 
 		if "" != local_name then
 			while i < data.length do
@@ -185,7 +185,7 @@ class AttributesImpl
 	# The index of the attribute, or -1 if it does not
 	# appear in the list.
 	redef fun index_of(qname: String): Int do
-		var i: Int = 0
+		var i = 0
 
 		if "" != qname then
 			while i < data.length do
@@ -219,7 +219,7 @@ class AttributesImpl
 	# attribute is not in the list or if Namespace
 	# processing is not being performed.
 	redef fun type_ns(uri: String, local_name: String): nullable String do
-		var i: Int = 0
+		var i = 0
 
 		if "" != local_name then
 			while i < data.length do
@@ -253,7 +253,7 @@ class AttributesImpl
 	# attribute is not in the list or if Namespace
 	# processing is not being performed.
 	redef fun value_ns(uri: String, local_name: String): nullable String do
-		var i: Int = 0
+		var i = 0
 
 		if "" != local_name then
 			while i < data.length do
@@ -281,7 +281,7 @@ class AttributesImpl
 	#
 	# * `atts`: attributes to copy.
 	fun attributes=(atts: Attributes) do
-		var i: Int = 0
+		var i = 0
 
 		clear
 		length = atts.length

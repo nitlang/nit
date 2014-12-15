@@ -350,7 +350,7 @@ class XophonLexer
 	# match `expected`.
 	fun expect_string(expected: String, context: String): Bool do
 		var chars = expected.chars
-		var i: Int = 0
+		var i = 0
 
 		while i < chars.length do
 			if not accept(chars[i]) then

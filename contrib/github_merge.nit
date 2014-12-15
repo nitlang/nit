@@ -15,7 +15,7 @@
 # Query the Github PR API to perform a merge
 module github_merge
 
-import github_api
+import github::github_curl
 import template
 
 redef class Object
@@ -93,7 +93,7 @@ if args.length != 1 then
 	var x = curl.get_and_check("https://api.github.com/repos/privat/nit/issues?labels=ok_will_merge")
 	for y in x.json_as_a do
 		var number = y.json_as_map["number"].as(Int)
-		var pr = curl.getpr(number)
+		curl.getpr(number)
 	end
 else
 	# With a arg, merge the PR

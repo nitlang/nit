@@ -17,7 +17,7 @@
 # Script to scan Github for repositories possibly using JNI.
 module github_search_for_jni
 
-import github_api
+import github::github_curl
 
 # The proprieties introduced by this redef are to be used only on a JSON object
 # representing a Github repository.

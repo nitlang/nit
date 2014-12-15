@@ -21,7 +21,7 @@ module reactor
 import more_collections
 import libevent
 
-import server_config
+import vararg_routes
 import http_request
 import http_response
 
@@ -32,7 +32,10 @@ class HttpServer
 	# The associated `HttpFactory`
 	var factory: HttpFactory
 
-	init(buf_ev: NativeBufferEvent, factory: HttpFactory) do self.factory = factory
+	# Init the server using `HttpFactory`.
+	init(buf_ev: NativeBufferEvent, factory: HttpFactory) is old_style_init do
+		self.factory = factory
+	end
 
 	private var parser = new HttpRequestParser is lazy
 
@@ -69,6 +72,9 @@ class HttpServer
 		if virtual_host != null then
 			var route = virtual_host.routes[request.uri]
 			if route != null then
+				# include uri parameters in request
+				request.uri_params = route.parse_params(request.uri)
+
 				var handler = route.handler
 				var root = route.path
 				var turi
@@ -91,7 +97,7 @@ redef abstract class Action
 	# `request` is fully formed request object and has a reference to the session
 	# if one preexists.
 	#
-	# `truncated_uri` is the ending of the fulle request URI, truncated from the route
+	# `truncated_uri` is the ending of the full request URI, truncated from the route
 	# leading to this `Action`.
 	fun answer(request: HttpRequest, truncated_uri: String): HttpResponse is abstract
 end

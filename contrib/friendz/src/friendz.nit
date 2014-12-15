@@ -140,7 +140,6 @@ class TextButton
 	var textx: Int
 
 	redef fun draw(ctx) do
-		var x = self.x
 		if self.toggleable then
 			var w
 			if self.toggled or not self.enabled then w = 6 else w = 7

@@ -1,6 +1,6 @@
 # This file is part of NIT ( http://www.nitlanguage.org ).
 #
-# Copyright 2012 Jean Privat <jean@pryen.org>
+# Copyright 2014 Alexis Laferrière <alexis.laf@xymus.net>
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,25 +14,20 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# A global Nit compiler
-module nitg
+# Hello world using the Cocoa framework
+module hello_cocoa
 
-import frontend
-import compiler
-import transform
+import cocoa::foundation
 
-redef class ToolContext
-	redef fun process_options(args)
-	do
-		super
+in "ObjC" `{
+	#import <Foundation/Foundation.h>
+`}
 
-		var sum = opt_global.value.to_i + opt_separate.value.to_i + opt_erasure.value.to_i
-		if sum > 1 then
-			print "Options --global, --separate and --erasure are exclusive"
-			exit(1)
-		else if sum == 0 then
-			# --separate by default
-			opt_separate.value = true
-		end
-	end
-end
+# Print `"Hello world!"` to the log
+fun hello_world in "ObjC" `{
+	@autoreleasepool {
+		NSLog(@"Hello World!");
+	}
+`}
+
+hello_world

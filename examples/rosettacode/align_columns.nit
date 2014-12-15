@@ -13,7 +13,6 @@ fun aligner(text: String, left: Float)
 do
 	# Each row is a sequence of fields
 	var rows = new Array[Array[String]]
-	var max = 0
 	for line in text.split('\n') do
 		rows.add line.split("$")
 	end

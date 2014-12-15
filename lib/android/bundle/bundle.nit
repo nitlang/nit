@@ -665,7 +665,6 @@ class Bundle
 	# Returns the `null` if none or if it's the wrong value type
 	fun array_of_string(key: String): nullable Array[String]
 	do
-		var string_array = new Array[String]
 		sys.jni_env.push_local_frame(1)
 
 		var return_value = native_bundle.get_string_array(key.to_java_string)

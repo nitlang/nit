@@ -333,7 +333,7 @@ class MakefileToolchain
 			if libs != null then linker_options.add_all(libs)
 		end
 
-		makefile.write("CC = ccache cc\nCXX = ccache c++\nCFLAGS = -g -O2 -Wno-unused-value -Wno-switch\nCINCL =\nLDFLAGS ?= \nLDLIBS  ?= -lm {linker_options.join(" ")}\n\n")
+		makefile.write("CC = ccache cc\nCXX = ccache c++\nCFLAGS = -g -O2 -Wno-unused-value -Wno-switch -Wno-attributes\nCINCL =\nLDFLAGS ?= \nLDLIBS  ?= -lm {linker_options.join(" ")}\n\n")
 
 		var ost = toolcontext.opt_stacktrace.value
 		if (ost == "libunwind" or ost == "nitstack") and (platform == null or platform.supports_libunwind) then makefile.write("NEED_LIBUNWIND := YesPlease\n")
@@ -3067,7 +3067,7 @@ end
 # Create a tool context to handle options and paths
 var toolcontext = new ToolContext
 
-toolcontext.tooldescription = "Usage: nitg [OPTION]... file.nit...\nCompiles Nit programs."
+toolcontext.tooldescription = "Usage: nitc [OPTION]... file.nit...\nCompiles Nit programs."
 
 # We do not add other options, so process them now!
 toolcontext.process_options(args)

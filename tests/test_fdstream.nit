@@ -14,15 +14,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import stream
+import file
 
-var fd_in = new FDIStream(0)
-var fd_out = new FDOStream(1)
-var fd_err = new FDOStream(2)
+var fd_in = new IFStream.from_fd(0)
+var fd_out = new OFStream.from_fd(1)
+var fd_err = new OFStream.from_fd(2)
 
 fd_out.write("Hello\n")
 
 var s = fd_in.read_line
 fd_out.write(s)
+fd_out.write("\n")
 
 fd_err.write("World\n")

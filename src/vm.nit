@@ -54,10 +54,21 @@ class VirtualMachine super NaiveInterpreter
 		super
 	end
 
-	# Subtyping test for the virtual machine
+	# Runtime subtyping test
 	redef fun is_subtype(sub, sup: MType): Bool
 	do
+		if sub == sup then return true
+
 		var anchor = self.frame.arguments.first.mtype.as(MClassType)
+
+		# `sub` or `sup` are formal or virtual types, resolve them to concrete types
+		if sub isa MParameterType or sub isa MVirtualType then
+			sub = sub.resolve_for(anchor.mclass.mclass_type, anchor, mainmodule, false)
+		end
+		if sup isa MParameterType or sup isa MVirtualType then
+			sup = sup.resolve_for(anchor.mclass.mclass_type, anchor, mainmodule, false)
+		end
+
 		var sup_accept_null = false
 		if sup isa MNullableType then
 			sup_accept_null = true
@@ -77,11 +88,6 @@ class VirtualMachine super NaiveInterpreter
 		end
 		# Now the case of direct null and nullable is over
 
-		# An unfixed formal type can only accept itself
-		if sup isa MParameterType or sup isa MVirtualType then
-			return sub == sup
-		end
-
 		if sub isa MParameterType or sub isa MVirtualType then
 			sub = sub.anchor_to(mainmodule, anchor)
 			# Manage the second layer of null/nullable
@@ -100,31 +106,29 @@ class VirtualMachine super NaiveInterpreter
 
 		assert sup isa MClassType
 
-		# Create the sup vtable if not create
+		# `sub` and `sup` can be discovered inside a Generic type during the subtyping test
 		if not sup.mclass.loaded then create_class(sup.mclass)
-
-		# Sub can be discovered inside a Generic type during the subtyping test
 		if not sub.mclass.loaded then create_class(sub.mclass)
 
-		if sup isa MGenericType then
-			var sub2 = sub.supertype_to(mainmodule, anchor, sup.mclass)
-			assert sub2.mclass == sup.mclass
-
-			for i in [0..sup.mclass.arity[ do
-				var sub_arg = sub2.arguments[i]
-				var sup_arg = sup.arguments[i]
-				var res = is_subtype(sub_arg, sup_arg)
-
-				if res == false then return false
-			end
-			return true
-		end
-
+		# For now, always use perfect hashing for subtyping test
 		var super_id = sup.mclass.vtable.id
 		var mask = sub.mclass.vtable.mask
 
-		# For now, we always use perfect hashing for subtyping test
-		return inter_is_subtype_ph(super_id, mask, sub.mclass.vtable.internal_vtable)
+		var res = inter_is_subtype_ph(super_id, mask, sub.mclass.vtable.internal_vtable)
+		if res == false then return false
+		# sub and sup can be generic types, each argument of generics has to be tested
+
+		if not sup isa MGenericType then return true
+		var sub2 = sub.supertype_to(mainmodule, anchor, sup.mclass)
+
+		# Test each argument of a generic by recursive calls
+		for i in [0..sup.mclass.arity[ do
+			var sub_arg = sub2.arguments[i]
+			var sup_arg = sup.arguments[i]
+			var res2 = is_subtype(sub_arg, sup_arg)
+			if res2 == false then return false
+		end
+		return true
 	end
 
 	# Subtyping test with perfect hashing
@@ -555,7 +559,9 @@ redef class MClass
 	private fun superclasses_ordering(v: VirtualMachine): Array[MClass]
 	do
 		var superclasses = new Array[MClass]
-		superclasses.add_all(ancestors)
+
+		# Add all superclasses of `self`
+		superclasses.add_all(self.in_hierarchy(v.mainmodule).greaters)
 
 		var res = new Array[MClass]
 		if superclasses.length > 1 then

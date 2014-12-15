@@ -310,7 +310,7 @@ private class PagerMatchesRenderer
 		pager.render
 	end
 
-	private fun props_fulldoc(pager: Pager, raw_mprops: List[MProperty]) do
+	fun props_fulldoc(pager: Pager, raw_mprops: List[MProperty]) do
 		# group by module
 		var cats = new HashMap[MModule, Array[MProperty]]
 		for mprop in raw_mprops do
@@ -347,7 +347,7 @@ private class Pager
 	fun add_indent do addn("  " * indent)
 	fun addn(text: String) do content.append(text.escape)
 	fun add_rule do add("\n---\n")
-	fun render do sys.system("echo \"{content}\" | pager -r")
+	fun render do sys.system("echo \"{content}\" | less -r")
 end
 
 redef class MModule

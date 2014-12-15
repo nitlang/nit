@@ -21,17 +21,24 @@ in "C header" `{
 #include <time.h>
 `}
 
+# Elapsed time representation.
 extern class Timespec `{struct timespec*`}
+
+	# Init a new Timespec from `s` seconds and `ns` nanoseconds.
 	new ( s, ns : Int ) `{
 		struct timespec* tv = malloc( sizeof(struct timespec) );
 		tv->tv_sec = s; tv->tv_nsec = ns;
 		return tv;
 	`}
+
+	# Init a new Timespec from now.
 	new monotonic_now `{
 		struct timespec* tv = malloc( sizeof(struct timespec) );
 		clock_gettime( CLOCK_MONOTONIC, tv );
 		return tv;
 	`}
+
+	# Init a new Timespec copied from another.
 	new copy_of( other : Timespec ) `{
 		struct timespec* tv = malloc( sizeof(struct timespec) );
 		tv->tv_sec = other->tv_sec;
@@ -39,9 +46,12 @@ extern class Timespec `{struct timespec*`}
 		return tv;
 	`}
 
+	# Update `self` clock.
 	fun update `{
 		clock_gettime( CLOCK_MONOTONIC, recv );
 	`}
+
+	# Substract a Timespec from `self`.
 	fun - ( o : Timespec ) : Timespec
 	do
 		var s = sec - o.sec
@@ -50,15 +60,16 @@ extern class Timespec `{struct timespec*`}
 		return new Timespec( s, ns )
 	end
 
+	# Number of whole seconds of elapsed time.
 	fun sec : Int `{
 		return recv->tv_sec;
 	`}
+
+	# Rest of the elapsed time (a fraction of a second).
+	#
+	# Number of nanoseconds.
 	fun nanosec : Int `{
 		return recv->tv_nsec;
-	`}
-
-	fun destroy `{
-		free( recv );
 	`}
 
 	# Seconds in Float

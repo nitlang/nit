@@ -54,6 +54,12 @@ See niunit(1) for details.
 
     Here, the `git rev-parse HEAD` is used to link to the current snapshot revision of the file.
 
+`--no-attribute`
+:   Ignore the attributes.
+
+    Note: In Nit, attributes are private. Therefore, this option is only useful
+    when combined with `--private`.
+
 `--no-dot`
 :   do not generate graphs with graphviz.
 

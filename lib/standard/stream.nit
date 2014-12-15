@@ -12,23 +12,35 @@
 module stream
 
 intrude import ropes
+import error
 
 in "C" `{
 	#include <unistd.h>
-	#include <poll.h>
-	#include <errno.h>
 	#include <string.h>
 	#include <signal.h>
 `}
 
+# Any kind of error that could be produced by an operation on Streams
+class IOError
+	super Error
+end
+
 # Abstract stream class
-interface IOS
+abstract class IOS
+	# Error produced by the file stream
+	#
+	#     var ifs = new IFStream.open("donotmakethisfile.binx")
+	#     ifs.read_all
+	#     ifs.close
+	#     assert ifs.last_error != null
+	var last_error: nullable IOError = null
+
 	# close the stream
 	fun close is abstract
 end
 
 # Abstract input streams
-interface IStream
+abstract class IStream
 	super IOS
 	# Read a character. Return its ASCII value, -1 on EOF or timeout
 	fun read_char: Int is abstract
@@ -36,6 +48,7 @@ interface IStream
 	# Read at most i bytes
 	fun read(i: Int): String
 	do
+		if last_error != null then return ""
 		var s = new FlatBuffer.with_capacity(i)
 		while i > 0 and not eof do
 			var c = read_char
@@ -49,40 +62,43 @@ interface IStream
 
 	# Read a string until the end of the line.
 	#
-	# The line terminator '\n', if any, is preserved in each line.
-	# Use the method `Text::chomp` to safely remove it.
+	# The line terminator '\n' and '\r\n', if any, is removed in each line.
 	#
 	# ~~~
 	# var txt = "Hello\n\nWorld\n"
 	# var i = new StringIStream(txt)
-	# assert i.read_line == "Hello\n"
-	# assert i.read_line == "\n"
-	# assert i.read_line == "World\n"
+	# assert i.read_line == "Hello"
+	# assert i.read_line == ""
+	# assert i.read_line == "World"
 	# assert i.eof
 	# ~~~
 	#
-	# If `\n` is not present at the end of the result, it means that
-	# a non-eol terminated last line was returned.
+	# Only LINE FEED (`\n`), CARRIAGE RETURN & LINE FEED (`\r\n`), and
+	# the end or file (EOF) is considered to delimit the end of lines.
+	# CARRIAGE RETURN (`\r`) alone is not used for the end of line.
 	#
 	# ~~~
-	# var i2 = new StringIStream("hello")
-	# assert not i2.eof
-	# assert i2.read_line == "hello"
+	# var txt2 = "Hello\r\n\n\rWorld"
+	# var i2 = new StringIStream(txt2)
+	# assert i2.read_line == "Hello"
+	# assert i2.read_line == ""
+	# assert i2.read_line == "\rWorld"
 	# assert i2.eof
 	# ~~~
 	#
-	# NOTE: Only LINE FEED (`\n`) is considered to delimit the end of lines.
+	# NOTE: Use `append_line_to` if the line terminator needs to be preserved.
 	fun read_line: String
 	do
-		assert not eof
+		if last_error != null then return ""
+		if eof then return ""
 		var s = new FlatBuffer
 		append_line_to(s)
-		return s.to_s
+		return s.to_s.chomp
 	end
 
 	# Read all the lines until the eof.
 	#
-	# The line terminator '\n' is removed in each line,
+	# The line terminator '\n' and `\r\n` is removed in each line,
 	#
 	# ~~~
 	# var txt = "Hello\n\nWorld\n"
@@ -93,19 +109,28 @@ interface IStream
 	# This method is more efficient that splitting
 	# the result of `read_all`.
 	#
-	# NOTE: Only LINE FEED (`\n`) is considered to delimit the end of lines.
+	# NOTE: SEE `read_line` for details.
 	fun read_lines: Array[String]
 	do
 		var res = new Array[String]
 		while not eof do
-			res.add read_line.chomp
+			res.add read_line
 		end
 		return res
 	end
 
 	# Read all the stream until the eof.
+	#
+	# The content of the file is returned verbatim.
+	#
+	# ~~~
+	# var txt = "Hello\n\nWorld\n"
+	# var i = new StringIStream(txt)
+	# assert i.read_all == txt
+	# ~~~
 	fun read_all: String
 	do
+		if last_error != null then return ""
 		var s = new FlatBuffer
 		while not eof do
 			var c = read_char
@@ -116,9 +141,40 @@ interface IStream
 
 	# Read a string until the end of the line and append it to `s`.
 	#
-	# SEE: `read_line` for details.
+	# Unlike `read_line` and other related methods,
+	# the line terminator '\n', if any, is preserved in each line.
+	# Use the method `Text::chomp` to safely remove it.
+	#
+	# ~~~
+	# var txt = "Hello\n\nWorld\n"
+	# var i = new StringIStream(txt)
+	# var b = new FlatBuffer
+	# i.append_line_to(b)
+	# assert b == "Hello\n"
+	# i.append_line_to(b)
+	# assert b == "Hello\n\n"
+	# i.append_line_to(b)
+	# assert b == txt
+	# assert i.eof
+	# ~~~
+	#
+	# If `\n` is not present at the end of the result, it means that
+	# a non-eol terminated last line was returned.
+	#
+	# ~~~
+	# var i2 = new StringIStream("hello")
+	# assert not i2.eof
+	# var b2 = new FlatBuffer
+	# i2.append_line_to(b2)
+	# assert b2 == "hello"
+	# assert i2.eof
+	# ~~~
+	#
+	# NOTE: The single character LINE FEED (`\n`) delimits the end of lines.
+	# Therefore CARRIAGE RETURN & LINE FEED (`\r\n`) is also recognized.
 	fun append_line_to(s: Buffer)
 	do
+		if last_error != null then return
 		loop
 			var x = read_char
 			if x == -1 then
@@ -137,7 +193,7 @@ interface IStream
 end
 
 # IStream capable of declaring if readable without blocking
-interface PollableIStream
+abstract class PollableIStream
 	super IStream
 
 	# Is there something to read? (without blocking)
@@ -146,7 +202,7 @@ interface PollableIStream
 end
 
 # Abstract output stream
-interface OStream
+abstract class OStream
 	super IOS
 	# write a string
 	fun write(s: Text) is abstract
@@ -189,11 +245,9 @@ abstract class BufferedIStream
 	super IStream
 	redef fun read_char
 	do
-		assert not eof
-		if _buffer_pos >= _buffer.length then
-			fill_buffer
-		end
-		if _buffer_pos >= _buffer.length then
+		if last_error != null then return -1
+		if eof then
+			last_error = new IOError("Stream has reached eof")
 			return -1
 		end
 		var c = _buffer.chars[_buffer_pos]
@@ -203,9 +257,9 @@ abstract class BufferedIStream
 
 	redef fun read(i)
 	do
+		if last_error != null then return ""
 		if _buffer.length == _buffer_pos then
 			if not eof then
-				fill_buffer
 				return read(i)
 			end
 			return ""
@@ -221,6 +275,7 @@ abstract class BufferedIStream
 
 	redef fun read_all
 	do
+		if last_error != null then return ""
 		var s = new FlatBuffer
 		while not eof do
 			var j = _buffer_pos
@@ -242,6 +297,15 @@ abstract class BufferedIStream
 			var i = _buffer_pos
 			while i < _buffer.length and _buffer.chars[i] != '\n' do i += 1
 
+			var eol
+			if i < _buffer.length then
+				assert _buffer.chars[i] == '\n'
+				i += 1
+				eol = true
+			else
+				eol = false
+			end
+
 			# if there is something to append
 			if i > _buffer_pos then
 				# Enlarge the string (if needed)
@@ -253,25 +317,30 @@ abstract class BufferedIStream
 					s.add(_buffer.chars[j])
 					j += 1
 				end
+				_buffer_pos = i
+			else
+				assert end_reached
+				return
 			end
 
-			if i < _buffer.length then
-				# so \n is in _buffer[i]
-				_buffer_pos = i + 1 # skip \n
+			if eol then
+				# so \n is found
 				return
 			else
 				# so \n is not found
-				_buffer_pos = i
-				if end_reached then
-					return
-				else
-					fill_buffer
-				end
+				if end_reached then return
+				fill_buffer
 			end
 		end
 	end
 
-	redef fun eof do return _buffer_pos >= _buffer.length and end_reached
+	redef fun eof
+	do
+		if _buffer_pos < _buffer.length then return false
+		if end_reached then return true
+		fill_buffer
+		return _buffer_pos >= _buffer.length and end_reached
+	end
 
 	# The buffer
 	private var buffer: nullable FlatBuffer = null
@@ -294,138 +363,9 @@ abstract class BufferedIStream
 end
 
 # An Input/Output Stream
-interface IOStream
+abstract class IOStream
 	super IStream
 	super OStream
-end
-
-##############################################################"
-
-# A File Descriptor Stream.
-abstract class FDStream
-	super IOS
-	# File description
-	var fd: Int
-
-	redef fun close do native_close(fd)
-
-	private fun native_close(i: Int): Int is extern "stream_FDStream_FDStream_native_close_1"
-	private fun native_read_char(i: Int): Int is extern "stream_FDStream_FDStream_native_read_char_1"
-	private fun native_read(i: Int, buf: NativeString, len: Int): Int is extern "stream_FDStream_FDStream_native_read_3"
-	private fun native_write(i: Int, buf: NativeString, len: Int): Int is extern "stream_FDStream_FDStream_native_write_3"
-	private fun native_write_char(i: Int, c: Char): Int is extern "stream_FDStream_FDStream_native_write_char_2"
-end
-
-# An Input File Descriptor Stream.
-class FDIStream
-	super FDStream
-	super IStream
-	redef var eof: Bool = false
-	
-	redef fun read_char
-	do
-		var nb = native_read_char(fd)
-		if nb == -1 then eof = true
-		return nb
-	end
-end
-
-# An Output File Descriptor Stream.
-class FDOStream
-	super FDStream
-	super OStream
-	redef var is_writable = true
-
-	redef fun write(s)
-	do
-		var nb = native_write(fd, s.to_cstring, s.length)
-		if nb < s.length then is_writable = false
-	end
-end
-
-# An Input/Output File Descriptor Stream.
-class FDIOStream
-	super FDIStream
-	super FDOStream
-	super IOStream
-end
-
-redef interface Object
-	# returns first available stream to read or write to
-	# return null on interruption (possibly a signal)
-	protected fun poll( streams : Sequence[FDStream] ) : nullable FDStream
-	do
-		var in_fds = new Array[Int]
-		var out_fds = new Array[Int]
-		var fd_to_stream = new HashMap[Int,FDStream]
-		for s in streams do
-			var fd = s.fd
-			if s isa FDIStream then in_fds.add( fd )
-			if s isa FDOStream then out_fds.add( fd )
-
-			fd_to_stream[fd] = s
-		end
-
-		var polled_fd = intern_poll( in_fds, out_fds )
-
-		if polled_fd == null then
-			return null
-		else
-			return fd_to_stream[polled_fd]
-		end
-	end
-
-	private fun intern_poll(in_fds: Array[Int], out_fds: Array[Int]) : nullable Int is extern import Array[Int].length, Array[Int].[], Int.as(nullable Int) `{
-		int in_len, out_len, total_len;
-		struct pollfd *c_fds;
-		sigset_t sigmask;
-		int i;
-		int first_polled_fd = -1;
-		int result;
-
-		in_len = Array_of_Int_length( in_fds );
-		out_len = Array_of_Int_length( out_fds );
-		total_len = in_len + out_len;
-		c_fds = malloc( sizeof(struct pollfd) * total_len );
-
-		/* input streams */
-		for ( i=0; i<in_len; i ++ ) {
-			int fd;
-			fd = Array_of_Int__index( in_fds, i );
-
-			c_fds[i].fd = fd;
-			c_fds[i].events = POLLIN;
-		}
-
-		/* output streams */
-		for ( i=0; i<out_len; i ++ ) {
-			int fd;
-			fd = Array_of_Int__index( out_fds, i );
-
-			c_fds[i].fd = fd;
-			c_fds[i].events = POLLOUT;
-		}
-
-		/* poll all fds, unlimited timeout */
-		result = poll( c_fds, total_len, -1 );
-
-		if ( result > 0 ) {
-			/* analyse results */
-			for ( i=0; i<total_len; i++ )
-				if ( c_fds[i].revents & c_fds[i].events || /* awaited event */
-					 c_fds[i].revents & POLLHUP ) /* closed */
-				{
-					first_polled_fd = c_fds[i].fd;
-					break;
-				}
-
-			return Int_as_nullable( first_polled_fd );
-		}
-		else if ( result < 0 )
-			fprintf( stderr, "Error in Stream:poll: %s\n", strerror( errno ) );
-
-		return null_Int();
-	`}
 end
 
 # Stream to a String.

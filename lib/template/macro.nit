@@ -150,7 +150,6 @@ class TemplateString
 	# Also build `self` template parts using original template text.
 	private fun parse do
 		var text = tpl_text
-		var chars = text.chars
 		var pos = 0
 		var out = new FlatBuffer
 		var start_pos: Int
@@ -363,8 +362,8 @@ end
 private class TemplateStringIterator
 	super MapIterator[String, nullable Streamable]
 
-	private var subject: TemplateString
-	private var key_it: Iterator[String] is noinit
+	var subject: TemplateString
+	var key_it: Iterator[String] is noinit
 
 	init do
 		self.key_it = subject.macro_names.iterator

@@ -83,8 +83,6 @@ end
 
 var config = configs.first
 
-var format = config.attribs(egl_display).native_visual_id
-
 # TODO android part
 # Opengles1Display_midway_init(recv, format);
 

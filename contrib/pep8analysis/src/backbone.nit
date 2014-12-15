@@ -5,8 +5,6 @@ import parser
 class AnalysisManager
 	super Noter
 	var opts = new OptionContext
-
-	init do end
 end
 
 abstract class Noter
