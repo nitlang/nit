@@ -80,8 +80,8 @@ end
 
 # Implements `declare_class`.
 redef class ClassCompound
-	redef fun declare_class(id, full_name, prot) do
-		class_def.declare_class(id, full_name, prot)
+	redef fun declare_class(id, name, prot) do
+		class_def.declare_class(id, name, prot)
 	end
 end
 
@@ -103,11 +103,11 @@ redef class ClassDef
 	# Parameters:
 	#
 	# * `id`: `model_id` of the inner class definition.
-	# * `full_name`: qualified name of the inner class definition.
+	# * `name`: name of the inner class definition.
 	# * `prot`: visibility (proctection).
-	fun declare_class(id: String, full_name: String, prot: String) do
+	fun declare_class(id: String, name: String, prot: String) do
 		var member = new InnerClass(graph, self, id)
-		member.full_name = full_name
+		member.name = name
 		member.visibility = prot
 		members.add member
 		inner_classes.add member

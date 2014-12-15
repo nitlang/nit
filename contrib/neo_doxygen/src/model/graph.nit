@@ -277,11 +277,9 @@ abstract class Compound
 	# Parameters:
 	#
 	# * `id`: `model_id` of the inner class.
-	# * `full_name`: qualified name of the inner class. Ignored in practice.
+	# * `name`: short name of the inner class.
 	# * `prot`: visibility (proctection).
-	#
-	# TODO: Handle cases where only the `full_name` is available.
-	fun declare_class(id: String, full_name: String, prot: String) do end
+	fun declare_class(id: String, name: String, prot: String) do end
 
 	# Declare a base compound (usually, a base class).
 	#
