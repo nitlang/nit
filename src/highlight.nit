@@ -29,6 +29,14 @@ class HighlightVisitor
 	# Used to have a really huge and verbose HTML (mainly for debug)
 	var with_ast = false is writable
 
+	# Prefixes used in generated IDs for line `<span>` elements.
+	# Useful if more than one highlighted code is present in the same HTML document.
+	#
+	# If set to the empty string, id for lines are disabled.
+	#
+	# Is `"L"` by default.
+	var line_id_prefix = "L" is writable
+
 	# The first line to generate, null if start at the first line
 	var first_line: nullable Int = null is writable
 
@@ -82,7 +90,8 @@ class HighlightVisitor
 
 				# Add a div for the whole line
 				var tag = new HTMLTag("span")
-				tag.attrs["id"] = "L{cline}"
+				var p = line_id_prefix
+				if p != "" then tag.attrs["id"] = "{p}{cline}"
 				tag.classes.add "line"
 				stack2.add(html)
 				html.add tag
