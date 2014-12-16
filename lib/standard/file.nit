@@ -89,10 +89,11 @@ class IFStream
 
 	redef fun close
 	do
-		if _file.address_is_null then return
+		if _file == null or _file.address_is_null then return
 		var i = _file.io_close
 		_buffer.clear
 		end_reached = true
+		_file = null
 	end
 
 	redef fun fill_buffer
@@ -154,6 +155,7 @@ class OFStream
 
 	redef fun close
 	do
+		if _file == null then return
 		if _file.address_is_null then
 			if last_error != null then return
 			last_error = new IOError("Cannot close unopened write stream")
@@ -165,6 +167,7 @@ class OFStream
 			last_error = new IOError("Close failed due to error {sys.errno.strerror}")
 		end
 		_is_writable = false
+		_file = null
 	end
 	redef var is_writable = false
 
