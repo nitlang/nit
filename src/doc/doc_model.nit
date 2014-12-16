@@ -217,7 +217,11 @@ redef class MModule
 
 	redef var nitdoc_id is lazy do
 		if mgroup != null then
-			return "{mgroup.nitdoc_id}__{name.to_cmangle}"
+			if mgroup.mmodules.length == 1 then
+				return "{mgroup.nitdoc_id}-"
+			else
+				return "{mgroup.nitdoc_id}__{name.to_cmangle}"
+			end
 		end
 		return name.to_cmangle
 	end
