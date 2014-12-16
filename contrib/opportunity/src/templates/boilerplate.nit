@@ -107,10 +107,13 @@ end
 class OpportunityPage
 	super Template
 
+	# The HTML code of the header and of the banner.
 	var header = new OpportunityHeader
 
+	# The HTML code of the body.
 	var body: Streamable = "" is writable
 
+	# The HTML code of the footer.
 	var footer = new OpportunityFooter
 
 	redef fun rendering do
