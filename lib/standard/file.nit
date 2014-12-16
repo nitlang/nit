@@ -366,6 +366,41 @@ class Path
 		return new OFStream.open(path)
 	end
 
+	# Read all the content of the file
+	#
+	# See `IStream::read_all` for details.
+	fun read_all: String
+	do
+		var s = open_ro
+		var res = s.read_all
+		s.close
+		return res
+	end
+
+	# Read all the lines of the file
+	#
+	# See `IStream::read_lines` for details.
+	fun read_lines: Array[String]
+	do
+		var s = open_ro
+		var res = s.read_lines
+		s.close
+		return res
+	end
+
+	# Return an iterator on each line of the file
+	# Note: the stream is automatically closed at the end of the file (see `LineIterator::close_on_finish`)
+	#
+	# See `IStream::each_line` for details.
+	fun each_line: LineIterator
+	do
+		var s = open_ro
+		var res = s.each_line
+		res.close_on_finish = true
+		return res
+	end
+
+
 	# Lists the name of the files contained within the directory at `path`
 	#
 	# Require: `exists and is_dir`
