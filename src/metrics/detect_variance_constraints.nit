@@ -76,11 +76,6 @@ private class DetectVarianceConstraintsPhase
 	end
 end
 
-redef class MParameterType
-	# The fully-qualified name of the formal parameter.
-	fun full_name: String do return "{mclass.full_name}::{name}"
-end
-
 # A specific analysis that detects the variance constraints of formal parameters.
 #
 # The client has 3 steps to do:

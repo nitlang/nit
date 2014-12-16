@@ -358,11 +358,10 @@ class MClass
 	redef var name: String
 
 	# The canonical name of the class
+	#
+	# It is the name of the class prefixed by the full_name of the `intro_mmodule`
 	# Example: `"owner::module::MyClass"`
-	fun full_name: String
-	do
-		return "{self.intro_mmodule.full_name}::{name}"
-	end
+	redef var full_name is lazy do return "{self.intro_mmodule.full_name}::{name}"
 
 	# The number of generic formal parameters
 	# 0 if the class is not generic
@@ -1668,11 +1667,12 @@ abstract class MProperty
 	# The (short) name of the property
 	redef var name: String
 
-	# The canonical name of the property
-	# Example: "owner::my_module::MyClass::my_method"
-	fun full_name: String
-	do
-		return "{self.intro_mclassdef.mmodule.full_name}::{self.intro_mclassdef.mclass.name}::{name}"
+	# The canonical name of the property.
+	#
+	# It is the short-`name` prefixed by the short-name of the class and the full-name of the module.
+	# Example: "my_project::my_module::MyClass::my_method"
+	redef var full_name is lazy do
+		return "{intro_mclassdef.mmodule.full_name}::{intro_mclassdef.mclass.name}::{name}"
 	end
 
 	# The visibility of the property

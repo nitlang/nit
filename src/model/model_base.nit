@@ -25,8 +25,27 @@ end
 # A named and possibly documented entity in the model.
 # This class is useful to generalize presentation of entities to the human.
 abstract class MEntity
-	# The short (unqualified) name of this model entity
+	# The short (unqualified) name of this model entity.
+	#
+	# The short-name is based from the identifiers used to declare or denote the entity.
+	# It is usually globally ambiguous but is often enough in a precise local context.
+	#
+	# It is suitable to use the short-name in message to the user.
+	# However, special care must be used in case of potential ambiguities or name conflict.
 	fun name: String is abstract
+
+	# A fully-qualified name of this model entity.
+	#
+	# The full-name is based on the short name and is usually prefixed by the name of an outer entity.
+	# Usually the quad (`::`) is used to separate the different names.
+	#
+	# The full-name is expected to be unique and unambiguous in lawful Nit models for the same kind of entity.
+	#
+	# It is often suitable to use it in message to the user.
+	# However, some full-name could be long and verbose,
+	#
+	# See the specific implementation in subclasses for details.
+	fun full_name: String is abstract
 
 	# A Model Entity has a direct link to its model
 	fun model: Model is abstract

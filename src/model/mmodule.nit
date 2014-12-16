@@ -88,10 +88,14 @@ class MModule
 	# The view of the module in the `model.mmodule_importation_hierarchy`
 	var in_importation: POSetElement[MModule] is noinit
 
-	# The canonical name of the module
+	# The canonical name of the module.
+	#
+	# It is usually the `name` prefixed by the project's name.
 	# Example: `"project::name"`
-	fun full_name: String
-	do
+	#
+	# If both names are the same (of if the module is project-less), then
+	# the short-name is used alone.
+	redef var full_name is lazy do
 		var mgroup = self.mgroup
 		if mgroup == null or mgroup.mproject.name == self.name then
 			return self.name
