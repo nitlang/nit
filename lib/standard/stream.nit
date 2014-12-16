@@ -119,6 +119,36 @@ abstract class IStream
 		return res
 	end
 
+	# Return an iterator that read each line.
+	#
+	# The line terminator '\n' and `\r\n` is removed in each line,
+	# The line are read with `read_line`. See this method for details.
+	#
+	# ~~~
+	# var txt = "Hello\n\nWorld\n"
+	# var i = new StringIStream(txt)
+	# assert i.each_line.to_a == ["Hello", "", "World"]
+	# ~~~
+	#
+	# Unlike `read_lines` that read all lines at the call, `each_line` is lazy.
+	# Therefore, the stream should no be closed until the end of the stream.
+	#
+	# ~~~
+	# i = new StringIStream(txt)
+	# var el = i.each_line
+	#
+	# assert el.item == "Hello"
+	# el.next
+	# assert el.item == ""
+	# el.next
+	#
+	# i.close
+	#
+	# assert not el.is_ok
+	# # closed before "world" is read
+	# ~~~
+	fun each_line: LineIterator do return new LineIterator(self)
+
 	# Read all the stream until the eof.
 	#
 	# The content of the file is returned verbatim.
@@ -190,6 +220,53 @@ abstract class IStream
 	# Is there something to read.
 	# This function returns 'false' if there is something to read.
 	fun eof: Bool is abstract
+end
+
+# Iterator returned by `IStream::each_line`.
+# See the aforementioned method for details.
+class LineIterator
+	super Iterator[String]
+
+	# The original stream
+	var stream: IStream
+
+	redef fun is_ok
+	do
+		var res = not stream.eof
+		if not res and close_on_finish then stream.close
+		return res
+	end
+
+	redef fun item
+	do
+		var line = self.line
+		if line == null then
+			line = stream.read_line
+		end
+		self.line = line
+		return line
+	end
+
+	# The last line read (cache)
+	private var line: nullable String = null
+
+	redef fun next
+	do
+		# force the read
+		if line == null then item
+		# drop the line
+		line = null
+	end
+
+	# Close the stream when the stream is at the EOF.
+	#
+	# Default is false.
+	var close_on_finish = false is writable
+
+	redef fun finish
+	do
+		if close_on_finish then stream.close
+	end
 end
 
 # IStream capable of declaring if readable without blocking
