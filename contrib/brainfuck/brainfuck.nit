@@ -16,7 +16,7 @@
 module brainfuck
 
 # Interpreter for Brainfuck source code.
-class BFInterpret
+class BFInterpreter
 	# Data cells
 	var dr = new Array[Char]
 	# Data pointer
@@ -28,16 +28,19 @@ class BFInterpret
 	var program: String
 
 	# Contains the set of valid instructions, used in next
-	var valid_instr: Set[Char]
+	var valid_instr: Set[Char] is noinit
 
-	# Starts interpretation of file `filename`
-	init(filename: String) do
-		var ifs = new IFStream.open(filename.simplify_path)
+	# Create an interpreter for `program`.
+	init do
 		valid_instr = new HashSet[Char]
 		valid_instr.add_all "><[].,+-".chars
 		dr.add 0.ascii
-		program = ifs.read_all
-		start
+	end
+
+	# Create an interpreter for the file located at `path`.
+	init from_file(path: String) do
+		var ifs = new IFStream.open(path)
+		init(ifs.read_all)
 	end
 
 	# Starts the interpretation of the loaded program
@@ -131,4 +134,4 @@ class BFInterpret
 	end
 end
 
-var i = new BFInterpret(args[0])
+new BFInterpreter.from_file(args[0]).start
