@@ -12,14 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# The model used to populate the Neo4j graph.
-module model
-
-import location
-import linked_text
-import graph
-import class_compound
-import module_compound
-import member
-import inner_class
-import namespace_members
+## A `bar` function in the `foo` namespace.
+def bar:
+	"""By default, Doxygen recognizes anything in the docstrings as verbatim
+	detailed description."""
+	pass
