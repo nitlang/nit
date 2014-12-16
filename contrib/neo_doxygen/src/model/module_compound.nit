@@ -77,7 +77,7 @@ class FileCompound
 			sys.stderr.write "Inner mamespace declarations without name are not yet supported (except for the root namespace).\n"
 		end
 		m = new Module(graph, self, new NamespaceRef(id, full_name))
-		m.location = self["location"].as(nullable Location)
+		m.location = location
 		inner_namespaces.add m
 	end
 
