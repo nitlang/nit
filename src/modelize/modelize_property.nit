@@ -470,6 +470,7 @@ redef class APropdef
 			return false
 
 		end
+		if mprop isa MMethod and mprop.is_root_init then return true
 		if kwredef == null then
 			if need_redef then
 				modelbuilder.error(self, "Redef error: {mclassdef.mclass}::{mprop.name} is an inherited property. To redefine it, add the redef keyword.")
@@ -652,7 +653,7 @@ redef class AMethPropdef
 			if parent isa ATopClassdef then mprop.is_toplevel = true
 			self.check_redef_keyword(modelbuilder, mclassdef, n_kwredef, false, mprop)
 		else
-			if not mprop.is_root_init and not self.check_redef_keyword(modelbuilder, mclassdef, n_kwredef, not self isa AMainMethPropdef, mprop) then return
+			if not self.check_redef_keyword(modelbuilder, mclassdef, n_kwredef, not self isa AMainMethPropdef, mprop) then return
 			check_redef_property_visibility(modelbuilder, self.n_visibility, mprop)
 		end
 		mclassdef.mprop2npropdef[mprop] = self
