@@ -86,7 +86,6 @@ class OpportunityFooter
 	redef fun rendering do
 		add """
 </div>
-</body>
 <div class="footer">
 	<div class="well well-sm">
 		<p class="text-muted text-center">
@@ -97,6 +96,7 @@ class OpportunityFooter
 		</p>
 	</div>
 </div>
+</body>
 </html>
 """
 	end
