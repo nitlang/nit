@@ -104,6 +104,20 @@ class MModule
 		end
 	end
 
+	# Return the name of the global C identifier associated to `self`.
+	# This name is used to prefix files and other C identifiers associated with `self`.
+	redef var c_name: String is lazy do
+		var g = mgroup
+		var res
+		if g != null and g.mproject.name != name then
+			res = g.mproject.name.to_cmangle + "__" + name.to_cmangle
+		else
+			res = name.to_cmangle
+		end
+		return res
+	end
+
+
 	# Create a new empty module and register it to a model
 	init
 	do

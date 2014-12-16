@@ -363,6 +363,8 @@ class MClass
 	# Example: `"owner::module::MyClass"`
 	redef var full_name is lazy do return "{self.intro_mmodule.full_name}::{name}"
 
+	redef var c_name is lazy do return "{intro_mmodule.c_name}__{name.to_cmangle}"
+
 	# The number of generic formal parameters
 	# 0 if the class is not generic
 	var arity: Int is noinit
@@ -539,6 +541,14 @@ class MClassDef
 			return "{mmodule.full_name}#{mclass.name}"
 		else
 			return "{mmodule.full_name}#{mclass.full_name}"
+		end
+	end
+
+	redef var c_name is lazy do
+		if is_intro then
+			return mclass.c_name
+		else
+			return "{mmodule.c_name}__{mclass.c_name.to_cmangle}"
 		end
 	end
 
@@ -1051,6 +1061,8 @@ class MClassType
 
 	redef fun full_name do return mclass.full_name
 
+	redef fun c_name do return mclass.c_name
+
 	redef fun need_anchor do return false
 
 	redef fun anchor_to(mmodule: MModule, anchor: MClassType): MClassType
@@ -1171,6 +1183,16 @@ class MGenericType
 			args.add t.full_name
 		end
 		return "{mclass.full_name}[{args.join(", ")}]}"
+	end
+
+	redef var c_name is lazy do
+		var res = mclass.c_name
+		# Note: because the arity is known, a prefix notation is enough
+		for t in arguments do
+			res += "__"
+			res += t.c_name
+		end
+		return res.to_s
 	end
 
 	redef var need_anchor: Bool is noinit
@@ -1315,6 +1337,8 @@ class MVirtualType
 	redef fun to_s do return self.mproperty.to_s
 
 	redef fun full_name do return self.mproperty.full_name
+
+	redef fun c_name do return self.mproperty.c_name
 end
 
 # The type associated to a formal parameter generic type of a class
@@ -1360,6 +1384,8 @@ class MParameterType
 	redef fun to_s do return name
 
 	redef var full_name is lazy do return "{mclass.full_name}::{name}"
+
+	redef var c_name is lazy do return mclass.c_name + "__" + "#{name}".to_cmangle
 
 	redef fun lookup_bound(mmodule: MModule, resolved_receiver: MType): MType
 	do
@@ -1482,6 +1508,8 @@ class MNullableType
 
 	redef var full_name is lazy do return "nullable {mtype.full_name}"
 
+	redef var c_name is lazy do return "nullable__{mtype.c_name}"
+
 	redef fun need_anchor do return mtype.need_anchor
 	redef fun as_nullable do return self
 	redef fun as_notnullable do return mtype
@@ -1535,6 +1563,7 @@ class MNullType
 	redef var model: Model
 	redef fun to_s do return "null"
 	redef fun full_name do return "null"
+	redef fun c_name do return "null"
 	redef fun as_nullable do return self
 	redef fun need_anchor do return false
 	redef fun resolve_for(mtype, anchor, mmodule, cleanup_virtual) do return self
@@ -1707,6 +1736,10 @@ abstract class MProperty
 	# Example: "my_project::my_module::MyClass::my_method"
 	redef var full_name is lazy do
 		return "{intro_mclassdef.mmodule.full_name}::{intro_mclassdef.mclass.name}::{name}"
+	end
+
+	redef var c_name is lazy do
+		return "{intro_mclassdef.mmodule.c_name}__{intro_mclassdef.mclass.c_name}__{name.to_cmangle}"
 	end
 
 	# The visibility of the property
@@ -2007,6 +2040,18 @@ abstract class MPropDef
 			res.append "::"
 		end
 		res.append name
+		return res.to_s
+	end
+
+	redef var c_name is lazy do
+		var res = new FlatBuffer
+		res.append mclassdef.c_name
+		res.append "__"
+		if is_intro then
+			res.append name.to_cmangle
+		else
+			res.append mproperty.c_name.to_cmangle
+		end
 		return res.to_s
 	end
 

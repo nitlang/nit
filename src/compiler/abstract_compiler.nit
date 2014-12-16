@@ -1692,21 +1692,9 @@ redef class MType
 
 	# Short name of the `ctype` to use in unions
 	fun ctypename: String do return "val"
-
-	# Return the name of the C structure associated to a Nit live type
-	fun c_name: String is abstract
-	protected var c_name_cache: nullable String is protected writable
 end
 
 redef class MClassType
-	redef fun c_name
-	do
-		var res = self.c_name_cache
-		if res != null then return res
-		res = "{mclass.intro_mmodule.c_name}__{mclass.name.to_cmangle}"
-		self.c_name_cache = res
-		return res
-	end
 
 	redef fun ctype: String
 	do
@@ -1757,90 +1745,8 @@ redef class MClassType
 	end
 end
 
-redef class MGenericType
-	redef fun c_name
-	do
-		var res = self.c_name_cache
-		if res != null then return res
-		res = super
-		for t in self.arguments do
-			res = res + t.c_name
-		end
-		self.c_name_cache = res
-		return res
-	end
-end
-
-redef class MParameterType
-	redef fun c_name
-	do
-		var res = self.c_name_cache
-		if res != null then return res
-		res = "{self.mclass.c_name}_FT{self.rank}"
-		self.c_name_cache = res
-		return res
-	end
-end
-
-redef class MVirtualType
-	redef fun c_name
-	do
-		var res = self.c_name_cache
-		if res != null then return res
-		res = "{self.mproperty.intro.mclassdef.mclass.c_name}_VT{self.mproperty.name}"
-		self.c_name_cache = res
-		return res
-	end
-end
-
-redef class MNullableType
-	redef fun c_name
-	do
-		var res = self.c_name_cache
-		if res != null then return res
-		res = "nullable_{self.mtype.c_name}"
-		self.c_name_cache = res
-		return res
-	end
-end
-
-redef class MClass
-	# Return the name of the C structure associated to a Nit class
-	fun c_name: String do
-		var res = self.c_name_cache
-		if res != null then return res
-		res = "{intro_mmodule.c_name}__{name.to_cmangle}"
-		self.c_name_cache = res
-		return res
-	end
-	private var c_name_cache: nullable String
-end
-
-redef class MProperty
-	fun c_name: String do
-		var res = self.c_name_cache
-		if res != null then return res
-		res = "{self.intro.c_name}"
-		self.c_name_cache = res
-		return res
-	end
-	private var c_name_cache: nullable String
-end
-
 redef class MPropDef
 	type VISITOR: AbstractCompilerVisitor
-
-	private var c_name_cache: nullable String
-
-	# The mangled name associated to the property
-	fun c_name: String
-	do
-		var res = self.c_name_cache
-		if res != null then return res
-		res = "{self.mclassdef.mmodule.c_name}__{self.mclassdef.mclass.name.to_cmangle}__{self.mproperty.name.to_cmangle}"
-		self.c_name_cache = res
-		return res
-	end
 end
 
 redef class MMethodDef
@@ -3020,19 +2926,6 @@ redef class Array[E]
 end
 
 redef class MModule
-	# Return the name of the global C identifier associated to `self`.
-	# This name is used to prefix files and other C identifiers associated with `self`.
-	var c_name: String is lazy do
-		var g = mgroup
-		var res
-		if g != null and g.mproject.name != name then
-			res = g.mproject.name.to_cmangle + "__" + name.to_cmangle
-		else
-			res = name.to_cmangle
-		end
-		return res
-	end
-
 	# All `MProperty` associated to all `MClassDef` of `mclass`
 	fun properties(mclass: MClass): Set[MProperty] do
 		if not self.properties_cache.has_key(mclass) then

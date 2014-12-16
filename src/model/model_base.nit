@@ -47,6 +47,21 @@ abstract class MEntity
 	# See the specific implementation in subclasses for details.
 	fun full_name: String is abstract
 
+	# A fully-qualified C-like identifier of this model entity.
+	#
+	# The C-name is a name that respects the rule of identifiers in the C language:
+	# it is only made of alphanumeric characters and starts with a letter (or a underscore).
+	#
+	# The C-name can be seen as a mangled version of the `full_name`.
+	# Therefore, it is expected to be unique and unambiguous in lawful Nit models for the same kind of entity.
+	#
+	# The C-name is used by tools that need some identifiers in generated files to designate the
+	# entity.
+	#
+	# Is is not suitable to use it directly with the user (e.g. in message) and
+	# indirect use should be restricted (e.g. to name a web-page)
+	fun c_name: String is abstract
+
 	# A Model Entity has a direct link to its model
 	fun model: Model is abstract
 end
