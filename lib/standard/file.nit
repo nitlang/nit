@@ -371,6 +371,11 @@ class Path
 
 	# Read all the content of the file
 	#
+	# ~~~
+	# var content = "/etc/issue".to_path.read_all
+	# print content
+	# ~~~
+	#
 	# See `IStream::read_all` for details.
 	fun read_all: String
 	do
@@ -382,6 +387,17 @@ class Path
 
 	# Read all the lines of the file
 	#
+	# ~~~
+	# var lines = "/etc/passwd".to_path.read_lines
+	#
+	# print "{lines.length} users"
+	#
+	# for l in lines do
+	#     var fields = l.split(":")
+	#     print "name={fields[0]} uid={fields[2]}"
+	# end
+	# ~~~
+	#
 	# See `IStream::read_lines` for details.
 	fun read_lines: Array[String]
 	do
@@ -392,6 +408,14 @@ class Path
 	end
 
 	# Return an iterator on each line of the file
+	#
+	# ~~~
+	# for l in "/etc/passwd".to_path.each_line do
+	#     var fields = l.split(":")
+	#     print "name={fields[0]} uid={fields[2]}"
+	# end
+	# ~~~
+	#
 	# Note: the stream is automatically closed at the end of the file (see `LineIterator::close_on_finish`)
 	#
 	# See `IStream::each_line` for details.
