@@ -24,6 +24,18 @@ Here, only the specific one are indicated.
     If `-f` is given, only the inside of the body part is generated such that it could be integrated
     into a HTML document.
 
+`--line-id-prefix`
+:   Prefix of the id of each line `<span>` element.
+
+    By default, each line is enclosed in its own `<span>` element with an `id` attribute made of the line number prefixed by `L` (e.g. `L1` for the first line).
+
+    This option changes the prefix used.
+    If an empty string is used, then the `<span>` are generated without `id` attributes.
+
+    This option is especially usuful with `--fragment` when more than one highlighted code is
+    included in the same HTML document.
+    Each fragment can thus be generated with its own distinct prefix, or the id can be disabled alltogether.
+
 `--first-line`
 :   Start the source file at this line (default: 1).
 
