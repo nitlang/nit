@@ -17,7 +17,6 @@ module graph_store
 
 import neo4j
 import console
-import flush_stdout
 
 # A storage medium for a graph.
 #
@@ -40,17 +39,13 @@ abstract class GraphStore
 	#
 	# This method must be called before the first call to `show_progress` or
 	# `show_done`.
-	protected fun prepare_display do
-		printn "{term_save_cursor} "
-		flush_stdout
-	end
+	protected fun prepare_display do printn "{term_save_cursor} "
 
 	# Show the progress, in percentage.
 	#
 	# For use in the implementation of `save_all` only.
 	protected fun show_progress(progress: Int) do
 		printn "{term_rewind} {progress}% "
-		flush_stdout
 	end
 
 	# Show a message to indicate that the task finished with success.
@@ -58,7 +53,6 @@ abstract class GraphStore
 	# For use in the implementation of `save_all` only.
 	protected fun show_done do
 		print "{term_rewind} Done."
-		flush_stdout
 	end
 end
 

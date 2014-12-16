@@ -22,7 +22,6 @@ import model
 import doxml
 import graph_store
 import console
-import flush_stdout
 import opts
 
 # An importation task.
@@ -60,7 +59,6 @@ class NeoDoxygenJob
 		else
 			printn "Reading {dir}... "
 		end
-		flush_stdout
 		loop
 			for f in list_files(dir) do
 				var path = dir/f
@@ -81,7 +79,6 @@ class NeoDoxygenJob
 		else
 			print "{file_count} files read."
 		end
-		flush_stdout
 	end
 
 	# List files in a directory.
@@ -107,7 +104,6 @@ class NeoDoxygenJob
 	# Save the graph.
 	fun save do
 		sys.stdout.write "Linking nodes...{term_save_cursor} "
-		flush_stdout
 		model.put_edges
 		print "{term_rewind} Done."
 		var nodes = model.all_nodes
