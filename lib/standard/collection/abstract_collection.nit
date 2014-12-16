@@ -39,8 +39,8 @@ import kernel
 # var x: Collection[U]
 # # ...
 # for u in x do
-#     # u is a U
-#     # ...
+#	# u is a U
+#	# ...
 # end
 # ~~~
 #
@@ -50,7 +50,7 @@ import kernel
 # var x: Collection[U]
 # # ...
 # var i = x.iterator
-#     while i.is_ok do
+# while i.is_ok do
 #     var u = i.item # u is a U
 #     # ...
 #     i.next
@@ -110,7 +110,7 @@ interface Collection[E]
 	# How many occurrences of `item` are in the collection?
 	# Comparisons are done with ==
 	#
-	#    assert [10,20,10].count(10)         == 2
+	#     assert [10,20,10].count(10)         == 2
 	fun count(item: E): Int
 	do
 		var nb = 0
@@ -120,7 +120,7 @@ interface Collection[E]
 
 	# Return the first item of the collection
 	#
-	#    assert [1,2,3].first                == 1
+	#     assert [1,2,3].first                == 1
 	fun first: E
 	do
 		assert length > 0
@@ -129,13 +129,13 @@ interface Collection[E]
 
 	# Does the collection contain at least each element of `other`?
 	#
-	#    assert [1,3,4,2].has_all([1..2])    == true
-	#    assert [1,3,4,2].has_all([1..5])    == false
+	#     assert [1,3,4,2].has_all([1..2])    == true
+	#     assert [1,3,4,2].has_all([1..5])    == false
 	#
 	# Repeated elements in the collections are not considered.
 	#
-	#    assert [1,1,1].has_all([1])         == true
-	#    assert [1..5].has_all([1,1,1])      == true
+	#     assert [1,1,1].has_all([1])         == true
+	#     assert [1..5].has_all([1,1,1])      == true
 	#
 	# Note that the default implementation is general and correct for any lawful Collections.
 	# It is memory-efficient but relies on `has` so may be CPU-inefficient for some kind of collections.
@@ -150,16 +150,16 @@ interface Collection[E]
 	# The same elements must be present in both `self` and `other`,
 	# but the order of the elements in the collections are not considered.
 	#
-	#    assert [1..3].has_exactly([3,1,2]) == true  # the same elements
-	#    assert [1..3].has_exactly([3,1])   == false # 2 is not in the array
-	#    assert [1..2].has_exactly([3,1,2]) == false # 3 is not in the range
+	#     assert [1..3].has_exactly([3,1,2]) == true  # the same elements
+	#     assert [1..3].has_exactly([3,1])   == false # 2 is not in the array
+	#     assert [1..2].has_exactly([3,1,2]) == false # 3 is not in the range
 	#
 	# Repeated elements must be present in both collections in the same amount.
 	# So basically it is a multi-set comparison.
 	#
-	#    assert [1,2,3,2].has_exactly([1,2,2,3]) == true  # the same elements
-	#    assert [1,2,3,2].has_exactly([1,2,3])   == false # more 2 in the first array
-	#    assert [1,2,3].has_exactly([1,2,2,3])   == false # more 2 in the second array
+	#     assert [1,2,3,2].has_exactly([1,2,2,3]) == true  # the same elements
+	#     assert [1,2,3,2].has_exactly([1,2,3])   == false # more 2 in the first array
+	#     assert [1,2,3].has_exactly([1,2,2,3])   == false # more 2 in the second array
 	#
 	# Note that the default implementation is general and correct for any lawful Collections.
 	# It is memory-efficient but relies on `count` so may be CPU-inefficient for some kind of collections.

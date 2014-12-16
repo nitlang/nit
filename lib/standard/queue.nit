@@ -74,10 +74,13 @@ interface Queue[E]
 	# `first` is made an alias of `peek` to avoid bad surprises
 	redef fun first do return peek
 
-	# Take and return all elements until the queue is empty
-	# ensure `is_empty`
-	# ensure `result.length == old(length)`
-	# ensure `not old(is_empty) implies result.first == old(peek)`
+	# Take and return all elements until the queue is empty.
+	#
+	# Ensure:
+	# * `is_empty`
+	# * `result.length == old(length)`
+	# * `not old(is_empty) implies result.first == old(peek)`
+	#
 	# ~~~
 	# var a = (new Array[Int]).as_lifo
 	# a.add 1

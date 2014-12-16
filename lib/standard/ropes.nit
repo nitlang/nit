@@ -16,8 +16,12 @@
 #
 # Ropes are a data structure introduced in a 1995 paper from
 # Hans J. Boehm, Russ Atkinson and Michael Plass.
-# See : `Ropes : an Alternative to Strings`, `Software - Practice and Experience,
-# Vol. 25(12), 1315-1330 (December 1995)`.
+#
+# See:
+#
+# > Ropes: an Alternative to Strings,
+# > *Software - Practice and Experience*,
+# > Vol. 25(12), 1315-1330 (December 1995).
 #
 # The implementation developed here provides an automatic change
 # of data structure depending on the length of the leaves.
@@ -32,11 +36,11 @@
 #
 # Example :
 #
-# `            Concat                   `
-# `          /        \                 `
-# `    Concat          Concat           `
-# `   /      \        /      \          `
-# `"My"     " Name"  " is"   " Simon."  `
+#	            Concat
+#	          /        \
+#	    Concat          Concat
+#	   /      \        /      \
+#	"My"     " Name"  " is"   " Simon."
 #
 # Note that the above example is not representative of the actual implementation
 # of `Ropes`, since short leaves are merged to keep the rope at an acceptable

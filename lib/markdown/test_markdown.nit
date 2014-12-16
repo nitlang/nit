@@ -1013,6 +1013,12 @@ break</a> with a line-ending space.</p>
 		assert exp == res
 	end
 
+	fun test_escape_bad_html do
+			var test = "-1 if < , +1 if > and 0 otherwise"
+			var exp = "<p>-1 if &lt; , +1 if > and 0 otherwise</p>\n"
+		var res = test.md_to_html.write_to_string
+		assert exp == res
+	end
 
 	fun test_daring_encoding do
 		var test = """

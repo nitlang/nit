@@ -618,15 +618,18 @@ redef class String
 	# trainling "/" is removed
 	#
 	# Note that the method only wonrk on the string:
+	#
 	#  * no I/O access is performed
 	#  * the validity of the path is not checked
 	#
-	#     assert "some/./complex/../../path/from/../to/a////file//".simplify_path	     ==  "path/to/a/file"
-	#     assert "../dir/file".simplify_path       ==  "../dir/file"
-	#     assert "dir/../../".simplify_path        ==  ".."
-	#     assert "dir/..".simplify_path            ==  "."
-	#     assert "//absolute//path/".simplify_path ==  "/absolute/path"
-	#     assert "//absolute//../".simplify_path   ==  "/"
+	# ~~~
+	# assert "some/./complex/../../path/from/../to/a////file//".simplify_path	     ==  "path/to/a/file"
+	# assert "../dir/file".simplify_path       ==  "../dir/file"
+	# assert "dir/../../".simplify_path        ==  ".."
+	# assert "dir/..".simplify_path            ==  "."
+	# assert "//absolute//path/".simplify_path ==  "/absolute/path"
+	# assert "//absolute//../".simplify_path   ==  "/"
+	# ~~~
 	fun simplify_path: String
 	do
 		var a = self.split_with("/")

@@ -24,6 +24,10 @@ code {
 	border: 1px solid #ddd;
 }
 
+pre code {
+	border: none;
+}
+
 .navbar-default .navbar-toggle {
 	margin-top: 2px;
 	padding: 5px 10px;

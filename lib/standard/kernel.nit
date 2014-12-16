@@ -66,13 +66,13 @@ interface Object
 	fun is_same_instance(other: nullable Object): Bool is intern
 
 	# Have `self` and `other` the same value?
-	##
+	#
 	# The exact meaning of "same value" is let to the subclasses.
 	# Implicitly, the default implementation, is `is_same_instance`
 	fun ==(other: nullable Object): Bool do return self.is_same_instance(other)
 
 	# Have `self` and `other` different values?
-	##
+	#
 	# != is equivalent with "not ==".
 	fun !=(other: nullable Object): Bool do return not (self == other)
 
@@ -93,7 +93,7 @@ interface Object
 
 	# The hash code of the object.
 	# Assuming that a == b -> a.hash == b.hash
-	##
+	#
 	# Without redefinition, it is based on the `object_id` of the instance.
 	fun hash: Int do return object_id / 8
 end
@@ -283,8 +283,10 @@ end
 
 # Native Booleans.
 # `true` and `false` are the only instances.
+#
 # Boolean are manipulated trough three special operators:
-#	 `and`, `or`, `not`.
+# `and`, `or`, `not`.
+#
 # Booleans are mainly used by conditional statement and loops.
 universal Bool
 	redef fun object_id is intern
@@ -489,8 +491,8 @@ universal Int
 
 	# The character whose ASCII value is `self`.
 	#
-	#      assert 65.ascii   == 'A'
-	#      assert 10.ascii   == '\n'
+	#     assert 65.ascii   == 'A'
+	#     assert 10.ascii   == '\n'
 	fun ascii: Char is intern
 
 	# Number of digits of an integer in base `b` (plus one if negative)

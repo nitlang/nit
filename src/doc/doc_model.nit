@@ -16,28 +16,10 @@
 module doc_model
 
 import model_utils
-import docdown
+import doc_down
 import doc_templates
 import ordered_tree
 import model_ext
-
-
-################################################################################
-# Additions to Nit entities.
-
-redef class MDoc
-	# Comment synopsys HTML escaped
-	fun short_comment: String do return content.first.html_escape
-
-	# Full comment HTML escaped
-	fun full_comment: String do return content.join("\n").html_escape
-
-	# Synopsys in a template
-	fun tpl_short_comment: Streamable do return short_markdown
-
-	# Full comment in a template
-	fun tpl_comment: Streamable do return full_markdown
-end
 
 redef class Location
 	# Github url based on this location
@@ -112,7 +94,7 @@ redef class MEntity
 		lnk.add tpl_link
 		if mdoc != null then
 			lnk.add ": "
-			lnk.add mdoc.short_markdown
+			lnk.add mdoc.tpl_short_comment
 		end
 		return new TplListItem.with_content(lnk)
 	end
@@ -142,7 +124,7 @@ redef class MConcern
 		lnk.add tpl_anchor
 		if mdoc != null then
 			lnk.add ": "
-			lnk.add mdoc.short_markdown
+			lnk.add mdoc.tpl_short_comment
 		end
 		return new TplListItem.with_content(lnk)
 	end
@@ -405,10 +387,10 @@ redef class MClassDef
 		lnk.add tpl_link
 		if mdoc != null then
 			lnk.add ": "
-			lnk.add mdoc.short_markdown
+			lnk.add mdoc.tpl_short_comment
 		else if mclass.intro.mdoc != null then
 			lnk.add ": "
-			lnk.add mclass.intro.mdoc.short_markdown
+			lnk.add mclass.intro.mdoc.tpl_short_comment
 		end
 		return new TplListItem.with_content(lnk)
 	end
@@ -552,10 +534,10 @@ redef class MPropDef
 		lnk.add anchor
 		if mdoc != null then
 			lnk.add ": "
-			lnk.add mdoc.short_markdown
+			lnk.add mdoc.tpl_short_comment
 		else if mproperty.intro.mdoc != null then
 			lnk.add ": "
-			lnk.add mproperty.intro.mdoc.short_markdown
+			lnk.add mproperty.intro.mdoc.tpl_short_comment
 		end
 		return new TplListItem.with_content(lnk)
 	end
@@ -570,7 +552,7 @@ redef class MPropDef
 		lnk.add anchor
 		if mdoc != null then
 			lnk.add ": "
-			lnk.add mdoc.short_markdown
+			lnk.add mdoc.tpl_short_comment
 		end
 		var li = new TplListItem.with_content(lnk)
 		li.css_classes.add "signature"
