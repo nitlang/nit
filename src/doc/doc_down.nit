@@ -93,6 +93,7 @@ private class NitdocDecorator
 		end
 		v.add "<pre class=\"nitcode\"><code>"
 		var hl = new HighlightVisitor
+		hl.line_id_prefix = ""
 		hl.enter_visit(ast)
 		v.add(hl.html)
 		v.add "</code></pre>\n"
@@ -109,6 +110,7 @@ private class NitdocDecorator
 		else
 			v.add "<code class=\"nitcode\">"
 			var hl = new HighlightVisitor
+			hl.line_id_prefix = ""
 			hl.enter_visit(ast)
 			v.add(hl.html)
 		end
