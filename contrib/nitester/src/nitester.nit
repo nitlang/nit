@@ -187,8 +187,7 @@ abstract class Processor
 			skip = new Array[String]
 		end
 
-		for prog in test_programs do for engine in engines do
-
+		for engine in engines do for prog in test_programs do
 			# Is is blacklisted?
 			for s in skip do if not s.is_empty and prog.has(s) then
 				if verbose > 0 and rank == 0 then print "Skipping test '{prog}' because of '{s}' in turing.skip"
@@ -303,7 +302,7 @@ class Controller
 				mpi.recv_empty(status.source, status.tag, comm_world)
 				at_work.remove(status.source)
 
-				if verbose > 1 then print "worker {status.source} is done ({at_work.length} still at work)"
+				if verbose > 0 then print "Worker {status.source} is done ({at_work.length} still at work)"
 			else
 				print "Unexpected tag {status.tag}"
 				shutdown
@@ -405,9 +404,8 @@ class Worker
 		exec_and_check "git config remote.origin.fetch +refs/remotes/origin/pr/*:refs/remotes/origin/pr/*"
 		exec_and_check "git fetch origin --quiet"
 		exec_and_check "git checkout {branch_hash}"
-		exec_and_check "cp {remote_nit}/bin/nitg bin/"
+		exec_and_check "cp {remote_nit}/bin/*  bin/"
 		exec_and_check "src/git-gen-version.sh"
-		exec_and_check "bin/nitg --dir bin/ src/nit.nit src/nitvm.nit"
 	end
 
 	private fun exec_and_check(cmd: String)
@@ -520,6 +518,8 @@ class Worker
 						end
 					end
 
+					if verbose > 1 then print "Done testing: {task}"
+
 					self.results_count = c
 				end
 
@@ -549,7 +549,7 @@ class Worker
 	fun send_results
 	do
 		if results_count > 0 then
-			if verbose > 1 then print "sending {results_count} results"
+			if verbose > 2 then print "Sending {results_count} results"
 			mpi.send_from(buffer, 0, results_count*4, controller_rank, result_tag, comm_world)
 			results_count = 0
 		end

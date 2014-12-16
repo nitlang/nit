@@ -20,3 +20,6 @@ nitunit_args
 nitpretty_args
 hamming_number
 hailstone
+test_map
+nitls
+nituml
