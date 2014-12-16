@@ -656,6 +656,17 @@ redef class AMethPropdef
 			if not self.check_redef_keyword(modelbuilder, mclassdef, n_kwredef, not self isa AMainMethPropdef, mprop) then return
 			check_redef_property_visibility(modelbuilder, self.n_visibility, mprop)
 		end
+
+		# Check name conflicts in the local class for constructors.
+		if is_init then
+			for p, n in mclassdef.mprop2npropdef do
+				if p != mprop and p isa MMethod and p.name == name then
+					check_redef_keyword(modelbuilder, mclassdef, n_kwredef, false, p)
+					break
+				end
+			end
+		end
+
 		mclassdef.mprop2npropdef[mprop] = self
 
 		var mpropdef = new MMethodDef(mclassdef, mprop, self.location)
