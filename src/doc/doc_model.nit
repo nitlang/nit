@@ -179,7 +179,7 @@ redef class MGroup
 		if parent != null then
 			return "{parent.nitdoc_id}__{name.to_cmangle}"
 		end
-		return "{mproject.nitdoc_id}__{name.to_cmangle}"
+		return name.to_cmangle
 	end
 
 	redef fun nitdoc_url do return "group_{nitdoc_id}.html"
