@@ -43,7 +43,7 @@ redef class MModule
 
 		ensure_compile_nitni_base(v)
 
-		nitni_ccu.header_c_types.add("#include \"{name}._ffi.h\"\n")
+		nitni_ccu.header_c_types.add("#include \"{c_name}._ffi.h\"\n")
 		nitni_ccu.header_c_types.add """
 extern void nitni_global_ref_incr(void*);
 extern void nitni_global_ref_decr(void*);
@@ -255,11 +255,11 @@ end
 redef class CCompilationUnit
 	fun write_as_nitni(mmodule: MModule, compdir: String)
 	do
-		var base_name = "{mmodule.name}._nitni"
+		var base_name = "{mmodule.c_name}._nitni"
 
 		var h_file = "{base_name}.h"
 		write_header_to_file( mmodule, "{compdir}/{h_file}", new Array[String],
-			"{mmodule.cname.to_s.to_upper}_NITG_NITNI_H")
+			"{mmodule.c_name.to_s.to_upper}_NITG_NITNI_H")
 
 		var c_file = "{base_name}.c"
 		write_body_to_file( mmodule, "{compdir}/{c_file}", ["\"{h_file}\""] )

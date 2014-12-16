@@ -124,7 +124,7 @@ class CPPLanguage
 
 		# write .cpp and .hpp file
 		cpp_file.header_custom.add("extern \"C\" \{\n")
-		cpp_file.header_custom.add("#include \"{mmodule.name}._ffi.h\"\n")
+		cpp_file.header_custom.add("#include \"{mmodule.c_name}._ffi.h\"\n")
 		cpp_file.header_custom.add("\}\n")
 
 		var file = cpp_file.write_to_files(mmodule, compdir)
@@ -158,10 +158,10 @@ class CPPCompilationUnit
 
 	fun write_to_files(mmodule: MModule, compdir: String): ExternCppFile
 	do
-		var base_name = "{mmodule.name}._ffi"
+		var base_name = "{mmodule.c_name}._ffi"
 
 		var h_file = "{base_name}.hpp"
-		var guard = "{mmodule.cname.to_s.to_upper}_NIT_HPP"
+		var guard = "{mmodule.c_name.to_s.to_upper}_NIT_HPP"
 
 		write_header_to_file(mmodule, "{compdir}/{h_file}", new Array[String], guard)
 

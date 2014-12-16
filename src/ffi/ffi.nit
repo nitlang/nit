@@ -57,7 +57,7 @@ redef class MModule
 
 		# include dependancies FFI
 		for mod in header_dependencies do
-			if mod.uses_ffi then ffi_ccu.header_custom.add("#include \"{mod.name}._ffi.h\"\n")
+			if mod.uses_ffi then ffi_ccu.header_custom.add("#include \"{mod.c_name}._ffi.h\"\n")
 		end
 
 		ffi_ccu.write_as_impl(self, compdir)
@@ -95,7 +95,7 @@ redef class AModule
 			language.compile_module_block(block, ffi_ccu, mmodule)
 		end
 
-		ffi_ccu.header_c_base.add( "#include \"{mmodule.name}._nitni.h\"\n" )
+		ffi_ccu.header_c_base.add( "#include \"{mmodule.c_name}._nitni.h\"\n" )
 
 		ffi_ccu.body_decl.add("#ifdef ANDROID\n")
 		ffi_ccu.body_decl.add("	#include <android/log.h>\n")
