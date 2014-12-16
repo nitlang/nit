@@ -1279,11 +1279,11 @@ abstract class AbstractCompilerVisitor
 	fun escapemark_name(e: nullable EscapeMark): String
 	do
 		assert e != null
-		if escapemark_names.has_key(e) then return escapemark_names[e]
+		if frame.escapemark_names.has_key(e) then return frame.escapemark_names[e]
 		var name = e.name
 		if name == null then name = "label"
 		name = get_name(name)
-		escapemark_names[e] = name
+		frame.escapemark_names[e] = name
 		return name
 	end
 
@@ -1294,8 +1294,6 @@ abstract class AbstractCompilerVisitor
 		if e.escapes.is_empty then return
 		add("BREAK_{escapemark_name(e)}: (void)0;")
 	end
-
-	private var escapemark_names = new HashMap[EscapeMark, String]
 
 	# Return a "const char*" variable associated to the classname of the dynamic type of an object
 	# NOTE: we do not return a `RuntimeVariable` "NativeString" as the class may not exist in the module/program
@@ -1681,6 +1679,10 @@ class Frame
 
 	# The label at the end of the property
 	var returnlabel: nullable String = null is writable
+
+	# Labels associated to a each escapemarks.
+	# Because of inlinings, escape-marks must be associated to their context (the frame)
+	private var escapemark_names = new HashMap[EscapeMark, String]
 end
 
 redef class MType
@@ -2349,7 +2351,7 @@ redef class AAttrPropdef
 		var oldnode = v.current_node
 		v.current_node = self
 		var old_frame = v.frame
-		var frame = new Frame(v, self.mpropdef.as(not null), recv.mcasttype.as(MClassType), [recv])
+		var frame = new Frame(v, self.mpropdef.as(not null), recv.mcasttype.as_notnullable.as(MClassType), [recv])
 		v.frame = frame
 
 		var value
