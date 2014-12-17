@@ -143,7 +143,7 @@ abstract class OptionParameter
 	redef fun read_param(it)
 	do
 		super
-		if it.is_ok and it.item.chars.first != '-' then
+		if it.is_ok and (it.item.is_empty or it.item.chars.first != '-') then
 			value = convert(it.item)
 			it.next
 		else
