@@ -146,15 +146,21 @@ extern class GLProgram `{GLuint`}
 		return active_attrib_name_native(index, max_size).to_s
 	end
 	private fun active_attrib_name_native(index, max_size: Int): NativeString `{
+		// We get more values than we need, for compatibility. At least the
+		// NVidia driver tries to fill them even if NULL.
+
 		char *name = malloc(max_size);
-		glGetActiveAttrib(recv, index, max_size, NULL, NULL, NULL, name);
+		int size;
+		GLenum type;
+		glGetActiveAttrib(recv, index, max_size, NULL, &size, &type, name);
 		return name;
 	`}
 
 	# Size of the active attribute at `index`
 	fun active_attrib_size(index: Int): Int `{
 		int size;
-		glGetActiveAttrib(recv, index, 0, NULL, NULL, &size, NULL);
+		GLenum type;
+		glGetActiveAttrib(recv, index, 0, NULL, &size, &type, NULL);
 		return size;
 	`}
 
@@ -162,8 +168,9 @@ extern class GLProgram `{GLuint`}
 	#
 	# May only be float related data types (single float, vectors and matrix).
 	fun active_attrib_type(index: Int): GLFloatDataType `{
+		int size;
 		GLenum type;
-		glGetActiveAttrib(recv, index, 0, NULL, &type, NULL, NULL);
+		glGetActiveAttrib(recv, index, 0, NULL, &size, &type, NULL);
 		return type;
 	`}
 
@@ -175,14 +182,17 @@ extern class GLProgram `{GLuint`}
 	end
 	private fun active_uniform_name_native(index, max_size: Int): NativeString `{
 		char *name = malloc(max_size);
-		glGetActiveUniform(recv, index, max_size, NULL, NULL, NULL, name);
+		int size;
+		GLenum type;
+		glGetActiveUniform(recv, index, max_size, NULL, &size, &type, name);
 		return name;
 	`}
 
 	# Size of the active uniform at `index`
 	fun active_uniform_size(index: Int): Int `{
 		int size;
-		glGetActiveUniform(recv, index, 0, NULL, NULL, &size, NULL);
+		GLenum type;
+		glGetActiveUniform(recv, index, 0, NULL, &size, &type, NULL);
 		return size;
 	`}
 
@@ -190,8 +200,9 @@ extern class GLProgram `{GLuint`}
 	#
 	# May be any data type supported by OpenGL ES 2.0 shaders.
 	fun active_uniform_type(index: Int): GLDataType `{
-		GLenum type;
-		glGetActiveUniform(recv, index, 0, NULL, &type, NULL, NULL);
+		int size;
+		GLenum type = 0;
+		glGetActiveUniform(recv, index, 0, NULL, &size, &type, NULL);
 		return type;
 	`}
 end
