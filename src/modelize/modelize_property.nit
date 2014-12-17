@@ -470,6 +470,7 @@ redef class APropdef
 			return false
 
 		end
+		if mprop isa MMethod and mprop.is_root_init then return true
 		if kwredef == null then
 			if need_redef then
 				modelbuilder.error(self, "Redef error: {mclassdef.mclass}::{mprop.name} is an inherited property. To redefine it, add the redef keyword.")
@@ -652,9 +653,20 @@ redef class AMethPropdef
 			if parent isa ATopClassdef then mprop.is_toplevel = true
 			self.check_redef_keyword(modelbuilder, mclassdef, n_kwredef, false, mprop)
 		else
-			if not mprop.is_root_init and not self.check_redef_keyword(modelbuilder, mclassdef, n_kwredef, not self isa AMainMethPropdef, mprop) then return
+			if not self.check_redef_keyword(modelbuilder, mclassdef, n_kwredef, not self isa AMainMethPropdef, mprop) then return
 			check_redef_property_visibility(modelbuilder, self.n_visibility, mprop)
 		end
+
+		# Check name conflicts in the local class for constructors.
+		if is_init then
+			for p, n in mclassdef.mprop2npropdef do
+				if p != mprop and p isa MMethod and p.name == name then
+					check_redef_keyword(modelbuilder, mclassdef, n_kwredef, false, p)
+					break
+				end
+			end
+		end
+
 		mclassdef.mprop2npropdef[mprop] = self
 
 		var mpropdef = new MMethodDef(mclassdef, mprop, self.location)
