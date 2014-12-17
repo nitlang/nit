@@ -1532,7 +1532,7 @@ redef class AArrayExpr
 	redef fun expr(v)
 	do
 		var val = new Array[Instance]
-		for nexpr in self.n_exprs.n_exprs do
+		for nexpr in self.n_exprs do
 			var i = v.expr(nexpr)
 			if i == null then return null
 			val.add(i)

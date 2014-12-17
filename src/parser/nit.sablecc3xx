@@ -566,7 +566,7 @@ expr_single~nopar~nobra {-> expr}
 // !nopar to unambiguise 'foo[5].bar' between '(foo[5]).bar' and 'foo([5].bar),
 !nobra!nopar	| {range} obra no expr [n2]:no dotdot [n3]:no [expr2]:expr_nobra [n4]:no cbra annotations_o {-> New expr.crange(obra, expr, expr2.expr, cbra, annotations_o.annotations)}
 !nobra!nopar	| {orange} obra no expr [n2]:no dotdot [n3]:no [expr2]:expr_nobra [n4]:no [cbra]:obra annotations_o {-> New expr.orange(obra, expr, expr2.expr, cbra, annotations_o.annotations)}
-!nobra!nopar	| {array} obra no args_list typing_o cbra annotations_o {-> New expr.array(obra, args_list.exprs, typing_o.type, cbra, annotations_o.annotations)}
+!nobra!nopar	| {array} obra no array_items typing_o cbra annotations_o {-> New expr.array(obra, [array_items.expr], typing_o.type, cbra, annotations_o.annotations)}
 	;
 
 expr_par {-> expr}
@@ -580,6 +580,16 @@ many_expr {->expr}
 
 many_expr_tail {->expr}
 	= comma no any_expr {-> any_expr.expr}
+	;
+
+array_items {-> expr*}
+	= array_item array_items_tail* {-> [array_item.expr, array_items_tail.expr]}
+	;
+array_items_tail {-> expr}
+	= comma no array_item {-> array_item.expr}
+	;
+array_item {-> expr}
+	= expr no {-> expr}
 	;
 
 superstring {-> expr} 
@@ -871,7 +881,7 @@ expr	= {block} expr* kwend?
 	| {range} expr [expr2]:expr annotations?
 	| {crange} obra expr [expr2]:expr cbra annotations?
 	| {orange} obra expr [expr2]:expr [cbra]:obra annotations?
-	| {array} obra [exprs]:exprs type? cbra annotations?
+	| {array} obra [exprs]:expr* type? cbra annotations?
 	| {self} kwself annotations?
 	| {implicit_self} 
 	| {true} kwtrue annotations?

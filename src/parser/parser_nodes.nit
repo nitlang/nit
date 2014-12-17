@@ -1773,7 +1773,7 @@ end
 class AArrayExpr
 	super AExpr
 	var n_obra: TObra is writable, noinit
-	var n_exprs: AExprs is writable, noinit
+	var n_exprs = new ANodes[AExpr](self)
 	var n_type: nullable AType = null is writable
 	var n_cbra: TCbra is writable, noinit
 end

@@ -1193,7 +1193,7 @@ redef class AArrayExpr
 		end
 		var mtypes = new Array[nullable MType]
 		var useless = false
-		for e in self.n_exprs.n_exprs do
+		for e in self.n_exprs do
 			var t = v.visit_expr(e)
 			if t == null then
 				return # Skip error

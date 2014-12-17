@@ -2652,7 +2652,7 @@ redef class AArrayExpr
 	do
 		var mtype = self.mtype.as(MClassType).arguments.first
 		var array = new Array[RuntimeVariable]
-		for nexpr in self.n_exprs.n_exprs do
+		for nexpr in self.n_exprs do
 			var i = v.expr(nexpr, mtype)
 			array.add(i)
 		end

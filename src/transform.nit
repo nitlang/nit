@@ -282,10 +282,10 @@ redef class AArrayExpr
 	do
 		var nblock = v.builder.make_block
 
-		var nnew = v.builder.make_new(with_capacity_callsite.as(not null), [v.builder.make_int(n_exprs.n_exprs.length)])
+		var nnew = v.builder.make_new(with_capacity_callsite.as(not null), [v.builder.make_int(n_exprs.length)])
 		nblock.add nnew
 
-		for nexpr in self.n_exprs.n_exprs do
+		for nexpr in self.n_exprs do
 			var nadd = v.builder.make_call(nnew.make_var_read, push_callsite.as(not null), [nexpr])
 			nblock.add nadd
 		end
