@@ -590,6 +590,8 @@ array_items_tail {-> expr}
 	;
 array_item {-> expr}
 	= expr no {-> expr}
+	| {for} kwfor no [ids]:idlist [n2]:no kwin [n3]:no expr [n4]:no kwdo [block]:array_item {-> New expr.for(kwfor, [ids.id], expr, kwdo, block.expr, Null)}
+	| {if} kwif [n1]:no expr [n2]:no kwthen [n3]:no [then]:array_item {-> New expr.if(kwif, expr, then.expr, Null)}
 	;
 
 superstring {-> expr} 
