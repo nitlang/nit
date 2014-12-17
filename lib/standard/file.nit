@@ -89,10 +89,11 @@ class IFStream
 
 	redef fun close
 	do
-		if _file.address_is_null then return
+		if _file == null or _file.address_is_null then return
 		var i = _file.io_close
 		_buffer.clear
 		end_reached = true
+		_file = null
 	end
 
 	redef fun fill_buffer
@@ -154,6 +155,7 @@ class OFStream
 
 	redef fun close
 	do
+		if _file == null then return
 		if _file.address_is_null then
 			if last_error != null then return
 			last_error = new IOError("Cannot close unopened write stream")
@@ -165,6 +167,7 @@ class OFStream
 			last_error = new IOError("Close failed due to error {sys.errno.strerror}")
 		end
 		_is_writable = false
+		_file = null
 	end
 	redef var is_writable = false
 
@@ -365,6 +368,65 @@ class Path
 		# TODO manage streams error when they are merged
 		return new OFStream.open(path)
 	end
+
+	# Read all the content of the file
+	#
+	# ~~~
+	# var content = "/etc/issue".to_path.read_all
+	# print content
+	# ~~~
+	#
+	# See `IStream::read_all` for details.
+	fun read_all: String
+	do
+		var s = open_ro
+		var res = s.read_all
+		s.close
+		return res
+	end
+
+	# Read all the lines of the file
+	#
+	# ~~~
+	# var lines = "/etc/passwd".to_path.read_lines
+	#
+	# print "{lines.length} users"
+	#
+	# for l in lines do
+	#     var fields = l.split(":")
+	#     print "name={fields[0]} uid={fields[2]}"
+	# end
+	# ~~~
+	#
+	# See `IStream::read_lines` for details.
+	fun read_lines: Array[String]
+	do
+		var s = open_ro
+		var res = s.read_lines
+		s.close
+		return res
+	end
+
+	# Return an iterator on each line of the file
+	#
+	# ~~~
+	# for l in "/etc/passwd".to_path.each_line do
+	#     var fields = l.split(":")
+	#     print "name={fields[0]} uid={fields[2]}"
+	# end
+	# ~~~
+	#
+	# Note: the stream is automatically closed at the end of the file (see `LineIterator::close_on_finish`)
+	#
+	# See `IStream::each_line` for details.
+	fun each_line: LineIterator
+	do
+		var s = open_ro
+		var res = s.each_line
+		res.close_on_finish = true
+		return res
+	end
+
 
 	# Lists the name of the files contained within the directory at `path`
 	#
