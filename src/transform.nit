@@ -68,8 +68,7 @@ private class TransformVisitor
 	redef fun visit(node)
 	do
 		if node isa AAnnotations then return
-		node.visit_all(self)
-		node.accept_transform_visitor(self)
+		node.full_transform_visitor(self)
 	end
 
 	# Get a primitive class or display a fatal error on `location`.
@@ -86,6 +85,11 @@ private class TransformVisitor
 end
 
 redef class ANode
+	private fun full_transform_visitor(v: TransformVisitor)
+	do
+		visit_all(v)
+		accept_transform_visitor(v)
+	end
 	private fun accept_transform_visitor(v: TransformVisitor)
 	do
 	end
