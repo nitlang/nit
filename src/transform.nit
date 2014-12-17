@@ -95,6 +95,22 @@ redef class ANode
 	end
 end
 
+redef class AExpr
+	redef fun full_transform_visitor(v: TransformVisitor)
+	do
+		var na = comprehension
+		if na != null then
+			# We are building a comprehension array `array`
+			# Replace `self` with `array.push(self)`
+			var place = detach_with_placeholder
+			var recv = na.nnew.make_var_read
+			var nadd = v.builder.make_call(recv, na.push_callsite.as(not null), [self])
+			place.replace_with(nadd)
+		end
+		super
+	end
+end
+
 redef class AVardeclExpr
 	# `var x = y` is replaced with `x = y`
 	#
@@ -282,22 +298,27 @@ redef class AArrayExpr
 	# t.add(y)
 	# t
 	# ~~~
-	redef fun accept_transform_visitor(v)
+	redef fun full_transform_visitor(v)
 	do
 		var nblock = v.builder.make_block
 
 		var nnew = v.builder.make_new(with_capacity_callsite.as(not null), [v.builder.make_int(n_exprs.length)])
+		self.nnew = nnew
+
 		nblock.add nnew
 
+		super
+
 		for nexpr in self.n_exprs do
-			var nadd = v.builder.make_call(nnew.make_var_read, push_callsite.as(not null), [nexpr])
-			nblock.add nadd
+			nblock.add nexpr
 		end
 		var nres = nnew.make_var_read
 		nblock.add nres
 
 		replace_with(nblock)
 	end
+
+	private var nnew: ANewExpr is noinit
 end
 
 redef class ACrangeExpr
