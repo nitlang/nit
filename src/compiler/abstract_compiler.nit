@@ -2650,7 +2650,7 @@ end
 redef class AArrayExpr
 	redef fun expr(v)
 	do
-		var mtype = self.mtype.as(MClassType).arguments.first
+		var mtype = self.element_mtype.as(not null)
 		var array = new Array[RuntimeVariable]
 		for nexpr in self.n_exprs do
 			var i = v.expr(nexpr, mtype)

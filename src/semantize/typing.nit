@@ -1180,8 +1180,14 @@ redef class ASuperstringExpr
 end
 
 redef class AArrayExpr
+	# The `with_capacity` method on Array
 	var with_capacity_callsite: nullable CallSite
+
+	# The `push` method on arrays
 	var push_callsite: nullable CallSite
+
+	# The element of each type
+	var element_mtype: nullable MType
 
 	redef fun accept_typing(v)
 	do
@@ -1216,6 +1222,9 @@ redef class AArrayExpr
 			assert ntype != null
 			v.modelbuilder.warning(ntype, "useless-type", "Warning: useless type declaration `{mtype}` in literal Array since it can be inferred from the elements type.")
 		end
+
+		self.element_mtype = mtype
+
 		var mclass = v.get_mclass(self, "Array")
 		if mclass == null then return # Forward error
 		var array_mtype = mclass.get_mtype([mtype])
