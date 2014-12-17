@@ -17,8 +17,8 @@ Edge
 3:foo
 7:MEntity
 6:MGroup
-=properties=JsonObject(2):
-{"full_name":"","name":"foo"}
+=properties=JsonObject(1):
+{"name":"foo"}
 
 Edge
 =type=7:PROJECT
@@ -30,8 +30,8 @@ Edge
 3:foo
 7:MEntity
 6:MGroup
-=properties=JsonObject(2):
-{"full_name":"","name":"foo"}
+=properties=JsonObject(1):
+{"name":"foo"}
 ----
 =to=Node
 =labels=Array(3):

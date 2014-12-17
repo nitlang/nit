@@ -46,13 +46,8 @@ class FileCompound
 		super
 	end
 
-	redef fun name_separator: String do return "/"
-
 	redef fun location=(location: nullable Location) do
 		super
-		if location != null and location.path != null then
-			full_name = location.path.as(not null)
-		end
 		for m in inner_namespaces do m.location = location
 	end
 
@@ -81,7 +76,7 @@ class FileCompound
 		inner_namespaces.add m
 	end
 
-	redef fun declare_class(id, full_name, prot) do
+	redef fun declare_class(id, name, prot) do
 		assert not id.is_empty else
 			sys.stderr.write "Inner class declarations without ID are not yet supported.\n"
 		end
@@ -138,14 +133,11 @@ private class Module
 		update_name
 	end
 
-	# Update the `full_name` and the `name`.
+	# Update the `name`.
 	#
 	# Update the short name of the module to the `basename` of the file that
 	# declares it.
-	fun update_name do
-		name = file_compound.basename
-		parent_name = namespace.full_name
-	end
+	fun update_name do name = file_compound.basename
 
 	redef fun put_in_graph do
 		super

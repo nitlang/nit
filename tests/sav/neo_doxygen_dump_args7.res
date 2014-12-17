@@ -22,8 +22,8 @@ Edge
 11:inner-class
 7:MEntity
 6:MGroup
-=properties=JsonObject(2):
-{"full_name":"","name":"inner-class"}
+=properties=JsonObject(1):
+{"name":"inner-class"}
 
 
 Edge
@@ -36,8 +36,8 @@ Edge
 11:inner-class
 7:MEntity
 6:MGroup
-=properties=JsonObject(2):
-{"full_name":"","name":"inner-class"}
+=properties=JsonObject(1):
+{"name":"inner-class"}
 ----
 =to=Node
 =labels=Array(3):
@@ -379,16 +379,16 @@ Edge
 11:inner-class
 7:MEntity
 6:MGroup
-=properties=JsonObject(2):
-{"full_name":"","name":"inner-class"}
+=properties=JsonObject(1):
+{"name":"inner-class"}
 ----
 =to=Entity#0:
 =labels=Array(3):
 11:inner-class
 7:MEntity
 7:MModule
-=properties=JsonObject(3):
-{"location":"%SOURCE_DIRECTORY%\/OuterClass.java:1,1--1,1","name":"OuterClass","full_name":"OuterClass"}
+=properties=JsonObject(2):
+{"location":"%SOURCE_DIRECTORY%\/OuterClass.java:1,1--1,1","name":"OuterClass"}
 
 
 Edge
@@ -401,8 +401,8 @@ Edge
 11:inner-class
 7:MEntity
 7:MModule
-=properties=JsonObject(3):
-{"location":"%SOURCE_DIRECTORY%\/OuterClass.java:1,1--1,1","name":"OuterClass","full_name":"OuterClass"}
+=properties=JsonObject(2):
+{"location":"%SOURCE_DIRECTORY%\/OuterClass.java:1,1--1,1","name":"OuterClass"}
 ----
 =to=Entity#17:class_outer_class
 =labels=Array(3):
@@ -423,8 +423,8 @@ Edge
 11:inner-class
 7:MEntity
 7:MModule
-=properties=JsonObject(3):
-{"location":"%SOURCE_DIRECTORY%\/OuterClass.java:1,1--1,1","name":"OuterClass","full_name":"OuterClass"}
+=properties=JsonObject(2):
+{"location":"%SOURCE_DIRECTORY%\/OuterClass.java:1,1--1,1","name":"OuterClass"}
 ----
 =to=Entity#0:
 =labels=Array(3):
@@ -445,8 +445,8 @@ Edge
 11:inner-class
 7:MEntity
 7:MModule
-=properties=JsonObject(3):
-{"location":"%SOURCE_DIRECTORY%\/OuterClass.java:1,1--1,1","name":"OuterClass","full_name":"OuterClass"}
+=properties=JsonObject(2):
+{"location":"%SOURCE_DIRECTORY%\/OuterClass.java:1,1--1,1","name":"OuterClass"}
 ----
 =to=Entity#33:class_outer_class_1_1_inner_class
 =labels=Array(3):
@@ -467,8 +467,8 @@ Edge
 11:inner-class
 7:MEntity
 7:MModule
-=properties=JsonObject(3):
-{"location":"%SOURCE_DIRECTORY%\/OuterClass.java:1,1--1,1","name":"OuterClass","full_name":"OuterClass"}
+=properties=JsonObject(2):
+{"location":"%SOURCE_DIRECTORY%\/OuterClass.java:1,1--1,1","name":"OuterClass"}
 ----
 =to=Entity#0:
 =labels=Array(3):

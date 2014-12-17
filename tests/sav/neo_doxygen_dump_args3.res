@@ -22,8 +22,8 @@ Edge
 13:empty-project
 7:MEntity
 6:MGroup
-=properties=JsonObject(2):
-{"full_name":"","name":"empty-project"}
+=properties=JsonObject(1):
+{"name":"empty-project"}
 
 
 Edge
@@ -36,8 +36,8 @@ Edge
 13:empty-project
 7:MEntity
 6:MGroup
-=properties=JsonObject(2):
-{"full_name":"","name":"empty-project"}
+=properties=JsonObject(1):
+{"name":"empty-project"}
 ----
 =to=Node
 =labels=Array(3):

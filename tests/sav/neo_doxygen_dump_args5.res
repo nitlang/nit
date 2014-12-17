@@ -22,8 +22,8 @@ Edge
 3:foo
 7:MEntity
 6:MGroup
-=properties=JsonObject(2):
-{"full_name":"","name":"foo"}
+=properties=JsonObject(1):
+{"name":"foo"}
 
 
 Edge
@@ -36,8 +36,8 @@ Edge
 3:foo
 7:MEntity
 6:MGroup
-=properties=JsonObject(2):
-{"full_name":"","name":"foo"}
+=properties=JsonObject(1):
+{"name":"foo"}
 ----
 =to=Node
 =labels=Array(3):
@@ -58,16 +58,16 @@ Edge
 3:foo
 7:MEntity
 6:MGroup
-=properties=JsonObject(5):
-{"kind":"namespace","visibility":"","full_name":"org","name":"org","location":"\/dev\/null:1,1--1,1"}
+=properties=JsonObject(4):
+{"kind":"namespace","visibility":"","name":"org","location":"\/dev\/null:1,1--1,1"}
 ----
 =to=Entity#0:
 =labels=Array(3):
 3:foo
 7:MEntity
 6:MGroup
-=properties=JsonObject(2):
-{"full_name":"","name":"foo"}
+=properties=JsonObject(1):
+{"name":"foo"}
 
 
 Edge
@@ -80,16 +80,16 @@ Edge
 3:foo
 7:MEntity
 6:MGroup
-=properties=JsonObject(2):
-{"full_name":"","name":"foo"}
+=properties=JsonObject(1):
+{"name":"foo"}
 ----
 =to=Entity#12:namespaceorg
 =labels=Array(3):
 3:foo
 7:MEntity
 6:MGroup
-=properties=JsonObject(5):
-{"kind":"namespace","visibility":"","full_name":"org","name":"org","location":"\/dev\/null:1,1--1,1"}
+=properties=JsonObject(4):
+{"kind":"namespace","visibility":"","name":"org","location":"\/dev\/null:1,1--1,1"}
 
 
 Edge
@@ -102,16 +102,16 @@ Edge
 3:foo
 7:MEntity
 6:MGroup
-=properties=JsonObject(5):
-{"kind":"namespace","visibility":"","full_name":"org::example::foo","name":"foo","location":"%SOURCE_DIRECTORY%\/org\/example\/foo\/A.java:16,1--1,1"}
+=properties=JsonObject(4):
+{"kind":"namespace","visibility":"","name":"foo","location":"%SOURCE_DIRECTORY%\/org\/example\/foo\/A.java:16,1--1,1"}
 ----
 =to=Entity#0:
 =labels=Array(3):
 3:foo
 7:MEntity
 7:MModule
-=properties=JsonObject(3):
-{"location":"%SOURCE_DIRECTORY%\/org\/example\/foo\/A.java:1,1--1,1","name":"A","full_name":"org::example::foo::A"}
+=properties=JsonObject(2):
+{"location":"%SOURCE_DIRECTORY%\/org\/example\/foo\/A.java:1,1--1,1","name":"A"}
 
 
 Edge
@@ -124,8 +124,8 @@ Edge
 3:foo
 7:MEntity
 7:MModule
-=properties=JsonObject(3):
-{"location":"%SOURCE_DIRECTORY%\/org\/example\/foo\/A.java:1,1--1,1","name":"A","full_name":"org::example::foo::A"}
+=properties=JsonObject(2):
+{"location":"%SOURCE_DIRECTORY%\/org\/example\/foo\/A.java:1,1--1,1","name":"A"}
 ----
 =to=Entity#32:classorg_1_1example_1_1foo_1_1_a
 =labels=Array(3):
@@ -146,8 +146,8 @@ Edge
 3:foo
 7:MEntity
 7:MModule
-=properties=JsonObject(3):
-{"location":"%SOURCE_DIRECTORY%\/org\/example\/foo\/A.java:1,1--1,1","name":"A","full_name":"org::example::foo::A"}
+=properties=JsonObject(2):
+{"location":"%SOURCE_DIRECTORY%\/org\/example\/foo\/A.java:1,1--1,1","name":"A"}
 ----
 =to=Entity#0:
 =labels=Array(3):
@@ -168,16 +168,16 @@ Edge
 3:foo
 7:MEntity
 6:MGroup
-=properties=JsonObject(5):
-{"kind":"namespace","visibility":"","full_name":"org::example::foo","name":"foo","location":"%SOURCE_DIRECTORY%\/org\/example\/foo\/A.java:16,1--1,1"}
+=properties=JsonObject(4):
+{"kind":"namespace","visibility":"","name":"foo","location":"%SOURCE_DIRECTORY%\/org\/example\/foo\/A.java:16,1--1,1"}
 ----
 =to=Entity#0:
 =labels=Array(3):
 3:foo
 7:MEntity
 7:MModule
-=properties=JsonObject(3):
-{"location":"%SOURCE_DIRECTORY%\/org\/example\/foo\/B.java:1,1--1,1","name":"B","full_name":"org::example::foo::B"}
+=properties=JsonObject(2):
+{"location":"%SOURCE_DIRECTORY%\/org\/example\/foo\/B.java:1,1--1,1","name":"B"}
 
 
 Edge
@@ -190,8 +190,8 @@ Edge
 3:foo
 7:MEntity
 7:MModule
-=properties=JsonObject(3):
-{"location":"%SOURCE_DIRECTORY%\/org\/example\/foo\/B.java:1,1--1,1","name":"B","full_name":"org::example::foo::B"}
+=properties=JsonObject(2):
+{"location":"%SOURCE_DIRECTORY%\/org\/example\/foo\/B.java:1,1--1,1","name":"B"}
 ----
 =to=Entity#32:classorg_1_1example_1_1foo_1_1_b
 =labels=Array(3):
@@ -212,8 +212,8 @@ Edge
 3:foo
 7:MEntity
 7:MModule
-=properties=JsonObject(3):
-{"location":"%SOURCE_DIRECTORY%\/org\/example\/foo\/B.java:1,1--1,1","name":"B","full_name":"org::example::foo::B"}
+=properties=JsonObject(2):
+{"location":"%SOURCE_DIRECTORY%\/org\/example\/foo\/B.java:1,1--1,1","name":"B"}
 ----
 =to=Entity#0:
 =labels=Array(3):
@@ -234,16 +234,16 @@ Edge
 3:foo
 7:MEntity
 6:MGroup
-=properties=JsonObject(5):
-{"kind":"namespace","visibility":"","full_name":"org::example::foo","name":"foo","location":"%SOURCE_DIRECTORY%\/org\/example\/foo\/A.java:16,1--1,1"}
+=properties=JsonObject(4):
+{"kind":"namespace","visibility":"","name":"foo","location":"%SOURCE_DIRECTORY%\/org\/example\/foo\/A.java:16,1--1,1"}
 ----
 =to=Entity#0:
 =labels=Array(3):
 3:foo
 7:MEntity
 7:MModule
-=properties=JsonObject(3):
-{"location":"%SOURCE_DIRECTORY%\/org\/example\/foo\/C.java:1,1--1,1","name":"C","full_name":"org::example::foo::C"}
+=properties=JsonObject(2):
+{"location":"%SOURCE_DIRECTORY%\/org\/example\/foo\/C.java:1,1--1,1","name":"C"}
 
 
 Edge
@@ -256,8 +256,8 @@ Edge
 3:foo
 7:MEntity
 7:MModule
-=properties=JsonObject(3):
-{"location":"%SOURCE_DIRECTORY%\/org\/example\/foo\/C.java:1,1--1,1","name":"C","full_name":"org::example::foo::C"}
+=properties=JsonObject(2):
+{"location":"%SOURCE_DIRECTORY%\/org\/example\/foo\/C.java:1,1--1,1","name":"C"}
 ----
 =to=Entity#36:interfaceorg_1_1example_1_1foo_1_1_c
 =labels=Array(3):
@@ -278,8 +278,8 @@ Edge
 3:foo
 7:MEntity
 7:MModule
-=properties=JsonObject(3):
-{"location":"%SOURCE_DIRECTORY%\/org\/example\/foo\/C.java:1,1--1,1","name":"C","full_name":"org::example::foo::C"}
+=properties=JsonObject(2):
+{"location":"%SOURCE_DIRECTORY%\/org\/example\/foo\/C.java:1,1--1,1","name":"C"}
 ----
 =to=Entity#0:
 =labels=Array(3):
@@ -300,16 +300,16 @@ Edge
 3:foo
 7:MEntity
 6:MGroup
-=properties=JsonObject(5):
-{"kind":"namespace","visibility":"","full_name":"org::example::foo","name":"foo","location":"%SOURCE_DIRECTORY%\/org\/example\/foo\/A.java:16,1--1,1"}
+=properties=JsonObject(4):
+{"kind":"namespace","visibility":"","name":"foo","location":"%SOURCE_DIRECTORY%\/org\/example\/foo\/A.java:16,1--1,1"}
 ----
 =to=Entity#0:
 =labels=Array(3):
 3:foo
 7:MEntity
 7:MModule
-=properties=JsonObject(3):
-{"location":"%SOURCE_DIRECTORY%\/org\/example\/foo\/EmptyClass.java:1,1--1,1","name":"EmptyClass","full_name":"org::example::foo::EmptyClass"}
+=properties=JsonObject(2):
+{"location":"%SOURCE_DIRECTORY%\/org\/example\/foo\/EmptyClass.java:1,1--1,1","name":"EmptyClass"}
 
 
 Edge
@@ -322,8 +322,8 @@ Edge
 3:foo
 7:MEntity
 7:MModule
-=properties=JsonObject(3):
-{"location":"%SOURCE_DIRECTORY%\/org\/example\/foo\/EmptyClass.java:1,1--1,1","name":"EmptyClass","full_name":"org::example::foo::EmptyClass"}
+=properties=JsonObject(2):
+{"location":"%SOURCE_DIRECTORY%\/org\/example\/foo\/EmptyClass.java:1,1--1,1","name":"EmptyClass"}
 ----
 =to=Entity#42:classorg_1_1example_1_1foo_1_1_empty_class
 =labels=Array(3):
@@ -344,8 +344,8 @@ Edge
 3:foo
 7:MEntity
 7:MModule
-=properties=JsonObject(3):
-{"location":"%SOURCE_DIRECTORY%\/org\/example\/foo\/EmptyClass.java:1,1--1,1","name":"EmptyClass","full_name":"org::example::foo::EmptyClass"}
+=properties=JsonObject(2):
+{"location":"%SOURCE_DIRECTORY%\/org\/example\/foo\/EmptyClass.java:1,1--1,1","name":"EmptyClass"}
 ----
 =to=Entity#0:
 =labels=Array(3):
@@ -1804,8 +1804,8 @@ Edge
 3:foo
 7:MEntity
 6:MGroup
-=properties=JsonObject(5):
-{"kind":"namespace","visibility":"","full_name":"org","name":"org","location":"\/dev\/null:1,1--1,1"}
+=properties=JsonObject(4):
+{"kind":"namespace","visibility":"","name":"org","location":"\/dev\/null:1,1--1,1"}
 ----
 =to=Node
 =labels=Array(3):
@@ -1826,16 +1826,16 @@ Edge
 3:foo
 7:MEntity
 6:MGroup
-=properties=JsonObject(5):
-{"kind":"namespace","visibility":"","full_name":"org::example","name":"example","location":"\/dev\/null:1,1--1,1"}
+=properties=JsonObject(4):
+{"kind":"namespace","visibility":"","name":"example","location":"\/dev\/null:1,1--1,1"}
 ----
 =to=Entity#12:namespaceorg
 =labels=Array(3):
 3:foo
 7:MEntity
 6:MGroup
-=properties=JsonObject(5):
-{"kind":"namespace","visibility":"","full_name":"org","name":"org","location":"\/dev\/null:1,1--1,1"}
+=properties=JsonObject(4):
+{"kind":"namespace","visibility":"","name":"org","location":"\/dev\/null:1,1--1,1"}
 
 
 Edge
@@ -1848,16 +1848,16 @@ Edge
 3:foo
 7:MEntity
 6:MGroup
-=properties=JsonObject(5):
-{"kind":"namespace","visibility":"","full_name":"org","name":"org","location":"\/dev\/null:1,1--1,1"}
+=properties=JsonObject(4):
+{"kind":"namespace","visibility":"","name":"org","location":"\/dev\/null:1,1--1,1"}
 ----
 =to=Entity#23:namespaceorg_1_1example
 =labels=Array(3):
 3:foo
 7:MEntity
 6:MGroup
-=properties=JsonObject(5):
-{"kind":"namespace","visibility":"","full_name":"org::example","name":"example","location":"\/dev\/null:1,1--1,1"}
+=properties=JsonObject(4):
+{"kind":"namespace","visibility":"","name":"example","location":"\/dev\/null:1,1--1,1"}
 
 
 Edge
@@ -1870,8 +1870,8 @@ Edge
 3:foo
 7:MEntity
 6:MGroup
-=properties=JsonObject(5):
-{"kind":"namespace","visibility":"","full_name":"org::example","name":"example","location":"\/dev\/null:1,1--1,1"}
+=properties=JsonObject(4):
+{"kind":"namespace","visibility":"","name":"example","location":"\/dev\/null:1,1--1,1"}
 ----
 =to=Node
 =labels=Array(3):
@@ -1892,16 +1892,16 @@ Edge
 3:foo
 7:MEntity
 6:MGroup
-=properties=JsonObject(5):
-{"kind":"namespace","visibility":"","full_name":"org::example::foo","name":"foo","location":"%SOURCE_DIRECTORY%\/org\/example\/foo\/A.java:16,1--1,1"}
+=properties=JsonObject(4):
+{"kind":"namespace","visibility":"","name":"foo","location":"%SOURCE_DIRECTORY%\/org\/example\/foo\/A.java:16,1--1,1"}
 ----
 =to=Entity#23:namespaceorg_1_1example
 =labels=Array(3):
 3:foo
 7:MEntity
 6:MGroup
-=properties=JsonObject(5):
-{"kind":"namespace","visibility":"","full_name":"org::example","name":"example","location":"\/dev\/null:1,1--1,1"}
+=properties=JsonObject(4):
+{"kind":"namespace","visibility":"","name":"example","location":"\/dev\/null:1,1--1,1"}
 
 
 Edge
@@ -1914,16 +1914,16 @@ Edge
 3:foo
 7:MEntity
 6:MGroup
-=properties=JsonObject(5):
-{"kind":"namespace","visibility":"","full_name":"org::example","name":"example","location":"\/dev\/null:1,1--1,1"}
+=properties=JsonObject(4):
+{"kind":"namespace","visibility":"","name":"example","location":"\/dev\/null:1,1--1,1"}
 ----
 =to=Entity#30:namespaceorg_1_1example_1_1foo
 =labels=Array(3):
 3:foo
 7:MEntity
 6:MGroup
-=properties=JsonObject(5):
-{"kind":"namespace","visibility":"","full_name":"org::example::foo","name":"foo","location":"%SOURCE_DIRECTORY%\/org\/example\/foo\/A.java:16,1--1,1"}
+=properties=JsonObject(4):
+{"kind":"namespace","visibility":"","name":"foo","location":"%SOURCE_DIRECTORY%\/org\/example\/foo\/A.java:16,1--1,1"}
 
 
 Edge
@@ -1936,8 +1936,8 @@ Edge
 3:foo
 7:MEntity
 6:MGroup
-=properties=JsonObject(5):
-{"kind":"namespace","visibility":"","full_name":"org::example::foo","name":"foo","location":"%SOURCE_DIRECTORY%\/org\/example\/foo\/A.java:16,1--1,1"}
+=properties=JsonObject(4):
+{"kind":"namespace","visibility":"","name":"foo","location":"%SOURCE_DIRECTORY%\/org\/example\/foo\/A.java:16,1--1,1"}
 ----
 =to=Node
 =labels=Array(3):

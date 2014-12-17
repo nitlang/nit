@@ -28,7 +28,7 @@ var buffer = new RopeBuffer
 var root_ns = graph.by_id[""].as(Namespace)
 var location: Location
 
-file.full_name = "Bar.java"
+file.name = "Bar.java"
 file.model_id = "_Bar_8java"
 location = new Location
 location.path = "a/b/Bar.java"
@@ -38,7 +38,7 @@ file.declare_class("classbaz", "Baz", "")
 file.declare_namespace("", "a::b")
 file.put_in_graph
 
-file_2.full_name = "Bar.java"
+file_2.name = "Bar.java"
 file_2.model_id = "_Bar_8java_2"
 location = new Location
 location.path = "Bar.java"
@@ -48,7 +48,7 @@ file_2.declare_namespace("", "d")
 file_2.put_in_graph
 
 bar_class.model_id = "classa_b_bar"
-bar_class.full_name = "a::b::Bar"
+bar_class.name = "Bar"
 location = new Location
 location.path = "a/b/Bar.class"
 location.line_start = 5
@@ -59,7 +59,7 @@ bar_class.location = location
 bar_class.put_in_graph
 
 baz_class.model_id = "classbaz"
-baz_class.full_name = "Baz"
+baz_class.name = "Baz"
 location = new Location
 location.path = "Baz.jar"
 baz_class.location = location
@@ -69,19 +69,23 @@ root_ns.declare_namespace("", "a")
 root_ns.declare_namespace("namespacec", "c")
 root_ns.declare_namespace("", "d")
 
+a_ns.name = "a"
 a_ns.full_name = "a"
 a_ns.declare_namespace("", "a::b")
 a_ns.put_in_graph
 
+b_ns.name = "b"
 b_ns.full_name = "a::b"
 b_ns.declare_class("classa_b_bar", "", "")
 b_ns.put_in_graph
 
 c_ns.model_id = "namespacec"
+c_ns.name = "c"
 c_ns.full_name = "c"
 c_ns.put_in_graph
 
 d_ns.model_id = "namespaced"
+d_ns.name = "d"
 d_ns.full_name = "d"
 d_ns.put_in_graph
 

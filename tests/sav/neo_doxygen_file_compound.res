@@ -18,8 +18,8 @@ Edge
 3:foo
 7:MEntity
 6:MGroup
-=properties=JsonObject(2):
-{"full_name":"","name":"foo"}
+=properties=JsonObject(1):
+{"name":"foo"}
 
 Edge
 =type=7:PROJECT
@@ -31,8 +31,8 @@ Edge
 3:foo
 7:MEntity
 6:MGroup
-=properties=JsonObject(2):
-{"full_name":"","name":"foo"}
+=properties=JsonObject(1):
+{"name":"foo"}
 ----
 =to=Node
 =labels=Array(3):
@@ -52,16 +52,16 @@ Edge
 3:foo
 7:MEntity
 6:MGroup
-=properties=JsonObject(2):
-{"full_name":"a","name":"a"}
+=properties=JsonObject(1):
+{"name":"a"}
 ----
 =to=Entity#0:
 =labels=Array(3):
 3:foo
 7:MEntity
 6:MGroup
-=properties=JsonObject(2):
-{"full_name":"","name":"foo"}
+=properties=JsonObject(1):
+{"name":"foo"}
 
 Edge
 =type=5:NESTS
@@ -73,16 +73,16 @@ Edge
 3:foo
 7:MEntity
 6:MGroup
-=properties=JsonObject(2):
-{"full_name":"","name":"foo"}
+=properties=JsonObject(1):
+{"name":"foo"}
 ----
 =to=Entity#0:
 =labels=Array(3):
 3:foo
 7:MEntity
 6:MGroup
-=properties=JsonObject(2):
-{"full_name":"a","name":"a"}
+=properties=JsonObject(1):
+{"name":"a"}
 
 Edge
 =type=6:PARENT
@@ -94,16 +94,16 @@ Edge
 3:foo
 7:MEntity
 6:MGroup
-=properties=JsonObject(2):
-{"full_name":"c","name":"c"}
+=properties=JsonObject(1):
+{"name":"c"}
 ----
 =to=Entity#0:
 =labels=Array(3):
 3:foo
 7:MEntity
 6:MGroup
-=properties=JsonObject(2):
-{"full_name":"","name":"foo"}
+=properties=JsonObject(1):
+{"name":"foo"}
 
 Edge
 =type=5:NESTS
@@ -115,16 +115,16 @@ Edge
 3:foo
 7:MEntity
 6:MGroup
-=properties=JsonObject(2):
-{"full_name":"","name":"foo"}
+=properties=JsonObject(1):
+{"name":"foo"}
 ----
 =to=Entity#10:namespacec
 =labels=Array(3):
 3:foo
 7:MEntity
 6:MGroup
-=properties=JsonObject(2):
-{"full_name":"c","name":"c"}
+=properties=JsonObject(1):
+{"name":"c"}
 
 Edge
 =type=6:PARENT
@@ -136,16 +136,16 @@ Edge
 3:foo
 7:MEntity
 6:MGroup
-=properties=JsonObject(2):
-{"full_name":"d","name":"d"}
+=properties=JsonObject(1):
+{"name":"d"}
 ----
 =to=Entity#0:
 =labels=Array(3):
 3:foo
 7:MEntity
 6:MGroup
-=properties=JsonObject(2):
-{"full_name":"","name":"foo"}
+=properties=JsonObject(1):
+{"name":"foo"}
 
 Edge
 =type=5:NESTS
@@ -157,16 +157,16 @@ Edge
 3:foo
 7:MEntity
 6:MGroup
-=properties=JsonObject(2):
-{"full_name":"","name":"foo"}
+=properties=JsonObject(1):
+{"name":"foo"}
 ----
 =to=Entity#10:namespaced
 =labels=Array(3):
 3:foo
 7:MEntity
 6:MGroup
-=properties=JsonObject(2):
-{"full_name":"d","name":"d"}
+=properties=JsonObject(1):
+{"name":"d"}
 
 Edge
 =type=8:DECLARES
@@ -178,16 +178,16 @@ Edge
 3:foo
 7:MEntity
 6:MGroup
-=properties=JsonObject(2):
-{"full_name":"a::b","name":"b"}
+=properties=JsonObject(1):
+{"name":"b"}
 ----
 =to=Entity#0:
 =labels=Array(3):
 3:foo
 7:MEntity
 7:MModule
-=properties=JsonObject(3):
-{"location":"a\/b\/Bar.java:1,1--1,1","name":"Bar","full_name":"a::b::Bar"}
+=properties=JsonObject(2):
+{"location":"a\/b\/Bar.java:1,1--1,1","name":"Bar"}
 
 Edge
 =type=10:INTRODUCES
@@ -199,16 +199,16 @@ Edge
 3:foo
 7:MEntity
 7:MModule
-=properties=JsonObject(3):
-{"location":"a\/b\/Bar.java:1,1--1,1","name":"Bar","full_name":"a::b::Bar"}
+=properties=JsonObject(2):
+{"location":"a\/b\/Bar.java:1,1--1,1","name":"Bar"}
 ----
 =to=Entity#12:classa_b_bar
 =labels=Array(3):
 3:foo
 7:MEntity
 6:MClass
-=properties=JsonObject(5):
-{"kind":"class","visibility":"public","full_name":"a::b::Bar","name":"Bar","location":"a\/b\/Bar.class:5,1--100,10"}
+=properties=JsonObject(4):
+{"kind":"class","visibility":"public","name":"Bar","location":"a\/b\/Bar.class:5,1--100,10"}
 
 Edge
 =type=7:DEFINES
@@ -220,16 +220,16 @@ Edge
 3:foo
 7:MEntity
 7:MModule
-=properties=JsonObject(3):
-{"location":"a\/b\/Bar.java:1,1--1,1","name":"Bar","full_name":"a::b::Bar"}
+=properties=JsonObject(2):
+{"location":"a\/b\/Bar.java:1,1--1,1","name":"Bar"}
 ----
 =to=Entity#0:
 =labels=Array(3):
 3:foo
 7:MEntity
 9:MClassDef
-=properties=JsonObject(4):
-{"location":"a\/b\/Bar.class:5,1--100,10","is_intro":true,"name":"Bar","full_name":"a::b::Bar"}
+=properties=JsonObject(3):
+{"location":"a\/b\/Bar.class:5,1--100,10","is_intro":true,"name":"Bar"}
 
 Edge
 =type=8:DECLARES
@@ -241,16 +241,16 @@ Edge
 3:foo
 7:MEntity
 6:MGroup
-=properties=JsonObject(2):
-{"full_name":"c","name":"c"}
+=properties=JsonObject(1):
+{"name":"c"}
 ----
 =to=Entity#0:
 =labels=Array(3):
 3:foo
 7:MEntity
 7:MModule
-=properties=JsonObject(3):
-{"location":"Bar.java:1,1--1,1","name":"Bar","full_name":"c::Bar"}
+=properties=JsonObject(2):
+{"location":"Bar.java:1,1--1,1","name":"Bar"}
 
 Edge
 =type=8:DECLARES
@@ -262,16 +262,16 @@ Edge
 3:foo
 7:MEntity
 6:MGroup
-=properties=JsonObject(2):
-{"full_name":"d","name":"d"}
+=properties=JsonObject(1):
+{"name":"d"}
 ----
 =to=Entity#0:
 =labels=Array(3):
 3:foo
 7:MEntity
 7:MModule
-=properties=JsonObject(3):
-{"location":"Bar.java:1,1--1,1","name":"Bar","full_name":"d::Bar"}
+=properties=JsonObject(2):
+{"location":"Bar.java:1,1--1,1","name":"Bar"}
 
 Edge
 =type=9:CLASSTYPE
@@ -283,8 +283,8 @@ Edge
 3:foo
 7:MEntity
 6:MClass
-=properties=JsonObject(5):
-{"kind":"class","visibility":"public","full_name":"a::b::Bar","name":"Bar","location":"a\/b\/Bar.class:5,1--100,10"}
+=properties=JsonObject(4):
+{"kind":"class","visibility":"public","name":"Bar","location":"a\/b\/Bar.class:5,1--100,10"}
 ----
 =to=Entity#0:
 =labels=Array(4):
@@ -292,8 +292,8 @@ Edge
 7:MEntity
 5:MType
 10:MClassType
-=properties=JsonObject(2):
-{"name":"Bar","full_name":"a::b::Bar"}
+=properties=JsonObject(1):
+{"name":"Bar"}
 
 Edge
 =type=5:CLASS
@@ -306,16 +306,16 @@ Edge
 7:MEntity
 5:MType
 10:MClassType
-=properties=JsonObject(2):
-{"name":"Bar","full_name":"a::b::Bar"}
+=properties=JsonObject(1):
+{"name":"Bar"}
 ----
 =to=Entity#12:classa_b_bar
 =labels=Array(3):
 3:foo
 7:MEntity
 6:MClass
-=properties=JsonObject(5):
-{"kind":"class","visibility":"public","full_name":"a::b::Bar","name":"Bar","location":"a\/b\/Bar.class:5,1--100,10"}
+=properties=JsonObject(4):
+{"kind":"class","visibility":"public","name":"Bar","location":"a\/b\/Bar.class:5,1--100,10"}
 
 Edge
 =type=9:BOUNDTYPE
@@ -327,8 +327,8 @@ Edge
 3:foo
 7:MEntity
 9:MClassDef
-=properties=JsonObject(4):
-{"location":"a\/b\/Bar.class:5,1--100,10","is_intro":true,"name":"Bar","full_name":"a::b::Bar"}
+=properties=JsonObject(3):
+{"location":"a\/b\/Bar.class:5,1--100,10","is_intro":true,"name":"Bar"}
 ----
 =to=Entity#0:
 =labels=Array(4):
@@ -336,8 +336,8 @@ Edge
 7:MEntity
 5:MType
 10:MClassType
-=properties=JsonObject(2):
-{"name":"Bar","full_name":"a::b::Bar"}
+=properties=JsonObject(1):
+{"name":"Bar"}
 
 Edge
 =type=6:MCLASS
@@ -349,16 +349,16 @@ Edge
 3:foo
 7:MEntity
 9:MClassDef
-=properties=JsonObject(4):
-{"location":"a\/b\/Bar.class:5,1--100,10","is_intro":true,"name":"Bar","full_name":"a::b::Bar"}
+=properties=JsonObject(3):
+{"location":"a\/b\/Bar.class:5,1--100,10","is_intro":true,"name":"Bar"}
 ----
 =to=Entity#12:classa_b_bar
 =labels=Array(3):
 3:foo
 7:MEntity
 6:MClass
-=properties=JsonObject(5):
-{"kind":"class","visibility":"public","full_name":"a::b::Bar","name":"Bar","location":"a\/b\/Bar.class:5,1--100,10"}
+=properties=JsonObject(4):
+{"kind":"class","visibility":"public","name":"Bar","location":"a\/b\/Bar.class:5,1--100,10"}
 
 Edge
 =type=9:CLASSTYPE
@@ -370,8 +370,8 @@ Edge
 3:foo
 7:MEntity
 6:MClass
-=properties=JsonObject(5):
-{"kind":"class","visibility":"public","full_name":"Baz","name":"Baz","location":"Baz.jar:1,1--1,1"}
+=properties=JsonObject(4):
+{"kind":"class","visibility":"public","name":"Baz","location":"Baz.jar:1,1--1,1"}
 ----
 =to=Entity#0:
 =labels=Array(4):
@@ -379,8 +379,8 @@ Edge
 7:MEntity
 5:MType
 10:MClassType
-=properties=JsonObject(2):
-{"name":"Baz","full_name":"Baz"}
+=properties=JsonObject(1):
+{"name":"Baz"}
 
 Edge
 =type=5:CLASS
@@ -393,16 +393,16 @@ Edge
 7:MEntity
 5:MType
 10:MClassType
-=properties=JsonObject(2):
-{"name":"Baz","full_name":"Baz"}
+=properties=JsonObject(1):
+{"name":"Baz"}
 ----
 =to=Entity#8:classbaz
 =labels=Array(3):
 3:foo
 7:MEntity
 6:MClass
-=properties=JsonObject(5):
-{"kind":"class","visibility":"public","full_name":"Baz","name":"Baz","location":"Baz.jar:1,1--1,1"}
+=properties=JsonObject(4):
+{"kind":"class","visibility":"public","name":"Baz","location":"Baz.jar:1,1--1,1"}
 
 Edge
 =type=9:BOUNDTYPE
@@ -414,8 +414,8 @@ Edge
 3:foo
 7:MEntity
 9:MClassDef
-=properties=JsonObject(4):
-{"location":"Baz.jar:1,1--1,1","is_intro":true,"name":"Baz","full_name":"Baz"}
+=properties=JsonObject(3):
+{"location":"Baz.jar:1,1--1,1","is_intro":true,"name":"Baz"}
 ----
 =to=Entity#0:
 =labels=Array(4):
@@ -423,8 +423,8 @@ Edge
 7:MEntity
 5:MType
 10:MClassType
-=properties=JsonObject(2):
-{"name":"Baz","full_name":"Baz"}
+=properties=JsonObject(1):
+{"name":"Baz"}
 
 Edge
 =type=6:MCLASS
@@ -436,16 +436,16 @@ Edge
 3:foo
 7:MEntity
 9:MClassDef
-=properties=JsonObject(4):
-{"location":"Baz.jar:1,1--1,1","is_intro":true,"name":"Baz","full_name":"Baz"}
+=properties=JsonObject(3):
+{"location":"Baz.jar:1,1--1,1","is_intro":true,"name":"Baz"}
 ----
 =to=Entity#8:classbaz
 =labels=Array(3):
 3:foo
 7:MEntity
 6:MClass
-=properties=JsonObject(5):
-{"kind":"class","visibility":"public","full_name":"Baz","name":"Baz","location":"Baz.jar:1,1--1,1"}
+=properties=JsonObject(4):
+{"kind":"class","visibility":"public","name":"Baz","location":"Baz.jar:1,1--1,1"}
 
 Edge
 =type=7:PROJECT
@@ -457,8 +457,8 @@ Edge
 3:foo
 7:MEntity
 6:MGroup
-=properties=JsonObject(2):
-{"full_name":"a","name":"a"}
+=properties=JsonObject(1):
+{"name":"a"}
 ----
 =to=Node
 =labels=Array(3):
@@ -478,16 +478,16 @@ Edge
 3:foo
 7:MEntity
 6:MGroup
-=properties=JsonObject(2):
-{"full_name":"a::b","name":"b"}
+=properties=JsonObject(1):
+{"name":"b"}
 ----
 =to=Entity#0:
 =labels=Array(3):
 3:foo
 7:MEntity
 6:MGroup
-=properties=JsonObject(2):
-{"full_name":"a","name":"a"}
+=properties=JsonObject(1):
+{"name":"a"}
 
 Edge
 =type=5:NESTS
@@ -499,16 +499,16 @@ Edge
 3:foo
 7:MEntity
 6:MGroup
-=properties=JsonObject(2):
-{"full_name":"a","name":"a"}
+=properties=JsonObject(1):
+{"name":"a"}
 ----
 =to=Entity#0:
 =labels=Array(3):
 3:foo
 7:MEntity
 6:MGroup
-=properties=JsonObject(2):
-{"full_name":"a::b","name":"b"}
+=properties=JsonObject(1):
+{"name":"b"}
 
 Edge
 =type=7:PROJECT
@@ -520,8 +520,8 @@ Edge
 3:foo
 7:MEntity
 6:MGroup
-=properties=JsonObject(2):
-{"full_name":"a::b","name":"b"}
+=properties=JsonObject(1):
+{"name":"b"}
 ----
 =to=Node
 =labels=Array(3):
@@ -541,8 +541,8 @@ Edge
 3:foo
 7:MEntity
 6:MGroup
-=properties=JsonObject(2):
-{"full_name":"c","name":"c"}
+=properties=JsonObject(1):
+{"name":"c"}
 ----
 =to=Node
 =labels=Array(3):
@@ -562,8 +562,8 @@ Edge
 3:foo
 7:MEntity
 6:MGroup
-=properties=JsonObject(2):
-{"full_name":"d","name":"d"}
+=properties=JsonObject(1):
+{"name":"d"}
 ----
 =to=Node
 =labels=Array(3):
@@ -594,8 +594,8 @@ Edge
 3:foo
 7:MEntity
 6:MGroup
-=properties=JsonObject(2):
-{"full_name":"","name":"foo"}
+=properties=JsonObject(1):
+{"name":"foo"}
 
 Edge
 =type=7:PROJECT
@@ -607,8 +607,8 @@ Edge
 3:foo
 7:MEntity
 6:MGroup
-=properties=JsonObject(2):
-{"full_name":"","name":"foo"}
+=properties=JsonObject(1):
+{"name":"foo"}
 ----
 =to=Node
 =labels=Array(3):
@@ -628,16 +628,16 @@ Edge
 3:foo
 7:MEntity
 6:MGroup
-=properties=JsonObject(2):
-{"full_name":"a","name":"a"}
+=properties=JsonObject(1):
+{"name":"a"}
 ----
 =to=Entity#0:
 =labels=Array(3):
 3:foo
 7:MEntity
 6:MGroup
-=properties=JsonObject(2):
-{"full_name":"","name":"foo"}
+=properties=JsonObject(1):
+{"name":"foo"}
 
 Edge
 =type=5:NESTS
@@ -649,16 +649,16 @@ Edge
 3:foo
 7:MEntity
 6:MGroup
-=properties=JsonObject(2):
-{"full_name":"","name":"foo"}
+=properties=JsonObject(1):
+{"name":"foo"}
 ----
 =to=Entity#0:
 =labels=Array(3):
 3:foo
 7:MEntity
 6:MGroup
-=properties=JsonObject(2):
-{"full_name":"a","name":"a"}
+=properties=JsonObject(1):
+{"name":"a"}
 
 Edge
 =type=6:PARENT
@@ -670,16 +670,16 @@ Edge
 3:foo
 7:MEntity
 6:MGroup
-=properties=JsonObject(2):
-{"full_name":"c","name":"c"}
+=properties=JsonObject(1):
+{"name":"c"}
 ----
 =to=Entity#0:
 =labels=Array(3):
 3:foo
 7:MEntity
 6:MGroup
-=properties=JsonObject(2):
-{"full_name":"","name":"foo"}
+=properties=JsonObject(1):
+{"name":"foo"}
 
 Edge
 =type=5:NESTS
@@ -691,16 +691,16 @@ Edge
 3:foo
 7:MEntity
 6:MGroup
-=properties=JsonObject(2):
-{"full_name":"","name":"foo"}
+=properties=JsonObject(1):
+{"name":"foo"}
 ----
 =to=Entity#10:namespacec
 =labels=Array(3):
 3:foo
 7:MEntity
 6:MGroup
-=properties=JsonObject(2):
-{"full_name":"c","name":"c"}
+=properties=JsonObject(1):
+{"name":"c"}
 
 Edge
 =type=6:PARENT
@@ -712,16 +712,16 @@ Edge
 3:foo
 7:MEntity
 6:MGroup
-=properties=JsonObject(2):
-{"full_name":"d","name":"d"}
+=properties=JsonObject(1):
+{"name":"d"}
 ----
 =to=Entity#0:
 =labels=Array(3):
 3:foo
 7:MEntity
 6:MGroup
-=properties=JsonObject(2):
-{"full_name":"","name":"foo"}
+=properties=JsonObject(1):
+{"name":"foo"}
 
 Edge
 =type=5:NESTS
@@ -733,16 +733,16 @@ Edge
 3:foo
 7:MEntity
 6:MGroup
-=properties=JsonObject(2):
-{"full_name":"","name":"foo"}
+=properties=JsonObject(1):
+{"name":"foo"}
 ----
 =to=Entity#10:namespaced
 =labels=Array(3):
 3:foo
 7:MEntity
 6:MGroup
-=properties=JsonObject(2):
-{"full_name":"d","name":"d"}
+=properties=JsonObject(1):
+{"name":"d"}
 
 Edge
 =type=8:DECLARES
@@ -754,16 +754,16 @@ Edge
 3:foo
 7:MEntity
 6:MGroup
-=properties=JsonObject(2):
-{"full_name":"a::b","name":"b"}
+=properties=JsonObject(1):
+{"name":"b"}
 ----
 =to=Entity#0:
 =labels=Array(3):
 3:foo
 7:MEntity
 7:MModule
-=properties=JsonObject(3):
-{"location":"a\/b\/Bar.java:1,1--1,1","name":"Bar","full_name":"a::b::Bar"}
+=properties=JsonObject(2):
+{"location":"a\/b\/Bar.java:1,1--1,1","name":"Bar"}
 
 Edge
 =type=10:INTRODUCES
@@ -775,16 +775,16 @@ Edge
 3:foo
 7:MEntity
 7:MModule
-=properties=JsonObject(3):
-{"location":"a\/b\/Bar.java:1,1--1,1","name":"Bar","full_name":"a::b::Bar"}
+=properties=JsonObject(2):
+{"location":"a\/b\/Bar.java:1,1--1,1","name":"Bar"}
 ----
 =to=Entity#12:classa_b_bar
 =labels=Array(3):
 3:foo
 7:MEntity
 6:MClass
-=properties=JsonObject(5):
-{"kind":"class","visibility":"public","full_name":"a::b::Bar","name":"Bar","location":"a\/b\/Bar.class:5,1--100,10"}
+=properties=JsonObject(4):
+{"kind":"class","visibility":"public","name":"Bar","location":"a\/b\/Bar.class:5,1--100,10"}
 
 Edge
 =type=7:DEFINES
@@ -796,16 +796,16 @@ Edge
 3:foo
 7:MEntity
 7:MModule
-=properties=JsonObject(3):
-{"location":"a\/b\/Bar.java:1,1--1,1","name":"Bar","full_name":"a::b::Bar"}
+=properties=JsonObject(2):
+{"location":"a\/b\/Bar.java:1,1--1,1","name":"Bar"}
 ----
 =to=Entity#0:
 =labels=Array(3):
 3:foo
 7:MEntity
 9:MClassDef
-=properties=JsonObject(4):
-{"location":"a\/b\/Bar.class:5,1--100,10","is_intro":true,"name":"Bar","full_name":"a::b::Bar"}
+=properties=JsonObject(3):
+{"location":"a\/b\/Bar.class:5,1--100,10","is_intro":true,"name":"Bar"}
 
 Edge
 =type=8:DECLARES
@@ -817,16 +817,16 @@ Edge
 3:foo
 7:MEntity
 6:MGroup
-=properties=JsonObject(2):
-{"full_name":"c","name":"c"}
+=properties=JsonObject(1):
+{"name":"c"}
 ----
 =to=Entity#0:
 =labels=Array(3):
 3:foo
 7:MEntity
 7:MModule
-=properties=JsonObject(3):
-{"location":"Bar.java:1,1--1,1","name":"Bar","full_name":"c::Bar"}
+=properties=JsonObject(2):
+{"location":"Bar.java:1,1--1,1","name":"Bar"}
 
 Edge
 =type=8:DECLARES
@@ -838,16 +838,16 @@ Edge
 3:foo
 7:MEntity
 6:MGroup
-=properties=JsonObject(2):
-{"full_name":"d","name":"d"}
+=properties=JsonObject(1):
+{"name":"d"}
 ----
 =to=Entity#0:
 =labels=Array(3):
 3:foo
 7:MEntity
 7:MModule
-=properties=JsonObject(3):
-{"location":"Bar.java:1,1--1,1","name":"Bar","full_name":"d::Bar"}
+=properties=JsonObject(2):
+{"location":"Bar.java:1,1--1,1","name":"Bar"}
 
 Edge
 =type=9:CLASSTYPE
@@ -859,8 +859,8 @@ Edge
 3:foo
 7:MEntity
 6:MClass
-=properties=JsonObject(5):
-{"kind":"class","visibility":"public","full_name":"a::b::Bar","name":"Bar","location":"a\/b\/Bar.class:5,1--100,10"}
+=properties=JsonObject(4):
+{"kind":"class","visibility":"public","name":"Bar","location":"a\/b\/Bar.class:5,1--100,10"}
 ----
 =to=Entity#0:
 =labels=Array(4):
@@ -868,8 +868,8 @@ Edge
 7:MEntity
 5:MType
 10:MClassType
-=properties=JsonObject(2):
-{"name":"Bar","full_name":"a::b::Bar"}
+=properties=JsonObject(1):
+{"name":"Bar"}
 
 Edge
 =type=5:CLASS
@@ -882,16 +882,16 @@ Edge
 7:MEntity
 5:MType
 10:MClassType
-=properties=JsonObject(2):
-{"name":"Bar","full_name":"a::b::Bar"}
+=properties=JsonObject(1):
+{"name":"Bar"}
 ----
 =to=Entity#12:classa_b_bar
 =labels=Array(3):
 3:foo
 7:MEntity
 6:MClass
-=properties=JsonObject(5):
-{"kind":"class","visibility":"public","full_name":"a::b::Bar","name":"Bar","location":"a\/b\/Bar.class:5,1--100,10"}
+=properties=JsonObject(4):
+{"kind":"class","visibility":"public","name":"Bar","location":"a\/b\/Bar.class:5,1--100,10"}
 
 Edge
 =type=9:BOUNDTYPE
@@ -903,8 +903,8 @@ Edge
 3:foo
 7:MEntity
 9:MClassDef
-=properties=JsonObject(4):
-{"location":"a\/b\/Bar.class:5,1--100,10","is_intro":true,"name":"Bar","full_name":"a::b::Bar"}
+=properties=JsonObject(3):
+{"location":"a\/b\/Bar.class:5,1--100,10","is_intro":true,"name":"Bar"}
 ----
 =to=Entity#0:
 =labels=Array(4):
@@ -912,8 +912,8 @@ Edge
 7:MEntity
 5:MType
 10:MClassType
-=properties=JsonObject(2):
-{"name":"Bar","full_name":"a::b::Bar"}
+=properties=JsonObject(1):
+{"name":"Bar"}
 
 Edge
 =type=6:MCLASS
@@ -925,16 +925,16 @@ Edge
 3:foo
 7:MEntity
 9:MClassDef
-=properties=JsonObject(4):
-{"location":"a\/b\/Bar.class:5,1--100,10","is_intro":true,"name":"Bar","full_name":"a::b::Bar"}
+=properties=JsonObject(3):
+{"location":"a\/b\/Bar.class:5,1--100,10","is_intro":true,"name":"Bar"}
 ----
 =to=Entity#12:classa_b_bar
 =labels=Array(3):
 3:foo
 7:MEntity
 6:MClass
-=properties=JsonObject(5):
-{"kind":"class","visibility":"public","full_name":"a::b::Bar","name":"Bar","location":"a\/b\/Bar.class:5,1--100,10"}
+=properties=JsonObject(4):
+{"kind":"class","visibility":"public","name":"Bar","location":"a\/b\/Bar.class:5,1--100,10"}
 
 Edge
 =type=9:CLASSTYPE
@@ -946,8 +946,8 @@ Edge
 3:foo
 7:MEntity
 6:MClass
-=properties=JsonObject(5):
-{"kind":"class","visibility":"public","full_name":"Baz","name":"Baz","location":"Baz.jar:1,1--1,1"}
+=properties=JsonObject(4):
+{"kind":"class","visibility":"public","name":"Baz","location":"Baz.jar:1,1--1,1"}
 ----
 =to=Entity#0:
 =labels=Array(4):
@@ -955,8 +955,8 @@ Edge
 7:MEntity
 5:MType
 10:MClassType
-=properties=JsonObject(2):
-{"name":"Baz","full_name":"Baz"}
+=properties=JsonObject(1):
+{"name":"Baz"}
 
 Edge
 =type=5:CLASS
@@ -969,16 +969,16 @@ Edge
 7:MEntity
 5:MType
 10:MClassType
-=properties=JsonObject(2):
-{"name":"Baz","full_name":"Baz"}
+=properties=JsonObject(1):
+{"name":"Baz"}
 ----
 =to=Entity#8:classbaz
 =labels=Array(3):
 3:foo
 7:MEntity
 6:MClass
-=properties=JsonObject(5):
-{"kind":"class","visibility":"public","full_name":"Baz","name":"Baz","location":"Baz.jar:1,1--1,1"}
+=properties=JsonObject(4):
+{"kind":"class","visibility":"public","name":"Baz","location":"Baz.jar:1,1--1,1"}
 
 Edge
 =type=9:BOUNDTYPE
@@ -990,8 +990,8 @@ Edge
 3:foo
 7:MEntity
 9:MClassDef
-=properties=JsonObject(4):
-{"location":"Baz.jar:1,1--1,1","is_intro":true,"name":"Baz","full_name":"Baz"}
+=properties=JsonObject(3):
+{"location":"Baz.jar:1,1--1,1","is_intro":true,"name":"Baz"}
 ----
 =to=Entity#0:
 =labels=Array(4):
@@ -999,8 +999,8 @@ Edge
 7:MEntity
 5:MType
 10:MClassType
-=properties=JsonObject(2):
-{"name":"Baz","full_name":"Baz"}
+=properties=JsonObject(1):
+{"name":"Baz"}
 
 Edge
 =type=6:MCLASS
@@ -1012,16 +1012,16 @@ Edge
 3:foo
 7:MEntity
 9:MClassDef
-=properties=JsonObject(4):
-{"location":"Baz.jar:1,1--1,1","is_intro":true,"name":"Baz","full_name":"Baz"}
+=properties=JsonObject(3):
+{"location":"Baz.jar:1,1--1,1","is_intro":true,"name":"Baz"}
 ----
 =to=Entity#8:classbaz
 =labels=Array(3):
 3:foo
 7:MEntity
 6:MClass
-=properties=JsonObject(5):
-{"kind":"class","visibility":"public","full_name":"Baz","name":"Baz","location":"Baz.jar:1,1--1,1"}
+=properties=JsonObject(4):
+{"kind":"class","visibility":"public","name":"Baz","location":"Baz.jar:1,1--1,1"}
 
 Edge
 =type=7:PROJECT
@@ -1033,8 +1033,8 @@ Edge
 3:foo
 7:MEntity
 6:MGroup
-=properties=JsonObject(2):
-{"full_name":"a","name":"a"}
+=properties=JsonObject(1):
+{"name":"a"}
 ----
 =to=Node
 =labels=Array(3):
@@ -1054,16 +1054,16 @@ Edge
 3:foo
 7:MEntity
 6:MGroup
-=properties=JsonObject(2):
-{"full_name":"a::b","name":"b"}
+=properties=JsonObject(1):
+{"name":"b"}
 ----
 =to=Entity#0:
 =labels=Array(3):
 3:foo
 7:MEntity
 6:MGroup
-=properties=JsonObject(2):
-{"full_name":"a","name":"a"}
+=properties=JsonObject(1):
+{"name":"a"}
 
 Edge
 =type=5:NESTS
@@ -1075,16 +1075,16 @@ Edge
 3:foo
 7:MEntity
 6:MGroup
-=properties=JsonObject(2):
-{"full_name":"a","name":"a"}
+=properties=JsonObject(1):
+{"name":"a"}
 ----
 =to=Entity#0:
 =labels=Array(3):
 3:foo
 7:MEntity
 6:MGroup
-=properties=JsonObject(2):
-{"full_name":"a::b","name":"b"}
+=properties=JsonObject(1):
+{"name":"b"}
 
 Edge
 =type=7:PROJECT
@@ -1096,8 +1096,8 @@ Edge
 3:foo
 7:MEntity
 6:MGroup
-=properties=JsonObject(2):
-{"full_name":"a::b","name":"b"}
+=properties=JsonObject(1):
+{"name":"b"}
 ----
 =to=Node
 =labels=Array(3):
@@ -1117,8 +1117,8 @@ Edge
 3:foo
 7:MEntity
 6:MGroup
-=properties=JsonObject(2):
-{"full_name":"c","name":"c"}
+=properties=JsonObject(1):
+{"name":"c"}
 ----
 =to=Node
 =labels=Array(3):
@@ -1138,8 +1138,8 @@ Edge
 3:foo
 7:MEntity
 6:MGroup
-=properties=JsonObject(2):
-{"full_name":"d","name":"d"}
+=properties=JsonObject(1):
+{"name":"d"}
 ----
 =to=Node
 =labels=Array(3):
@@ -1159,16 +1159,16 @@ Edge
 3:foo
 7:MEntity
 6:MGroup
-=properties=JsonObject(2):
-{"full_name":"","name":"foo"}
+=properties=JsonObject(1):
+{"name":"foo"}
 ----
 =to=Entity#0:
 =labels=Array(3):
 3:foo
 7:MEntity
 7:MModule
-=properties=JsonObject(3):
-{"location":"a\/b\/Bar.java:1,1--1,1","name":"Bar","full_name":"Bar"}
+=properties=JsonObject(2):
+{"location":"a\/b\/Bar.java:1,1--1,1","name":"Bar"}
 
 Edge
 =type=10:INTRODUCES
@@ -1180,16 +1180,16 @@ Edge
 3:foo
 7:MEntity
 7:MModule
-=properties=JsonObject(3):
-{"location":"a\/b\/Bar.java:1,1--1,1","name":"Bar","full_name":"Bar"}
+=properties=JsonObject(2):
+{"location":"a\/b\/Bar.java:1,1--1,1","name":"Bar"}
 ----
 =to=Entity#8:classbaz
 =labels=Array(3):
 3:foo
 7:MEntity
 6:MClass
-=properties=JsonObject(5):
-{"kind":"class","visibility":"public","full_name":"Baz","name":"Baz","location":"Baz.jar:1,1--1,1"}
+=properties=JsonObject(4):
+{"kind":"class","visibility":"public","name":"Baz","location":"Baz.jar:1,1--1,1"}
 
 Edge
 =type=7:DEFINES
@@ -1201,15 +1201,15 @@ Edge
 3:foo
 7:MEntity
 7:MModule
-=properties=JsonObject(3):
-{"location":"a\/b\/Bar.java:1,1--1,1","name":"Bar","full_name":"Bar"}
+=properties=JsonObject(2):
+{"location":"a\/b\/Bar.java:1,1--1,1","name":"Bar"}
 ----
 =to=Entity#0:
 =labels=Array(3):
 3:foo
 7:MEntity
 9:MClassDef
-=properties=JsonObject(4):
-{"location":"Baz.jar:1,1--1,1","is_intro":true,"name":"Baz","full_name":"Baz"}
+=properties=JsonObject(3):
+{"location":"Baz.jar:1,1--1,1","is_intro":true,"name":"Baz"}
 
 

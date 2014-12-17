@@ -93,9 +93,8 @@ redef class ClassDef
 	# All `InnerClass` entities registred here are automatically added to the
 	# graph with the `ClassDef`.
 	#
-	# To ensure that the `full_name` of each `InnerClass` entity is correctly
-	# set and that each inner class will be correctly linked, `declare_class`
-	# should be used to add each inner class.
+	# To ensure that each inner class will be correctly linked,
+	# `declare_class` should be used to add each inner class.
 	var inner_classes: SimpleCollection[InnerClass] = new Array[InnerClass]
 
 	# Declare an inner class.
