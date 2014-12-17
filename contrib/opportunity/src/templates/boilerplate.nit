@@ -86,7 +86,6 @@ class OpportunityFooter
 	redef fun rendering do
 		add """
 </div>
-</body>
 <div class="footer">
 	<div class="well well-sm">
 		<p class="text-muted text-center">
@@ -97,6 +96,7 @@ class OpportunityFooter
 		</p>
 	</div>
 </div>
+</body>
 </html>
 """
 	end
@@ -107,10 +107,13 @@ end
 class OpportunityPage
 	super Template
 
+	# The HTML code of the header and of the banner.
 	var header = new OpportunityHeader
 
+	# The HTML code of the body.
 	var body: Streamable = "" is writable
 
+	# The HTML code of the footer.
 	var footer = new OpportunityFooter
 
 	redef fun rendering do
