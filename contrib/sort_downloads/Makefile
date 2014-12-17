@@ -1,6 +1,6 @@
 build:
 	mkdir -p bin/
-	../../bin/nitc -o bin/sort_downloads src/sort_downloads.nit
+	../../bin/nitc --dir bin/ src/*.nit
 
 install:
 	install bin/sort_downloads /usr/local/bin/
