@@ -34,12 +34,28 @@ interface Jsonable
 	# SEE: `append_json`
 	fun to_json: String is abstract
 
+	# Use `append_json` to implement `to_json`.
+	#
+	# Therefore, one that redefine `append_json` may use the following
+	# redefinition to link `to_json` and `append_json`:
+	#
+	# ~~~nitish
+	# redef fun to_json do return to_json_by_append
+	# ~~~
+	#
+	# Note: This is not the default implementation of `to_json` in order to
+	# avoid cyclic references between `append_json` and `to_json` when none are
+	# implemented.
+	protected fun to_json_by_append: String do
+		var buffer = new RopeBuffer
+		append_json(buffer)
+		return buffer.write_to_string
+	end
+
 	# Append the JSON representation of `self` to the specified buffer.
 	#
 	# SEE: `to_json`
-	fun append_json(buffer: Buffer) do
-		buffer.append(to_json)
-	end
+	fun append_json(buffer: Buffer) do buffer.append(to_json)
 end
 
 redef class Text
@@ -82,11 +98,7 @@ redef class Text
 	#
 	#     assert "\t\"http://example.com\"\r\n\0\\".to_json ==
 	#     		"\"\\t\\\"http:\\/\\/example.com\\\"\\r\\n\\u0000\\\\\""
-	redef fun to_json do
-		var buffer = new FlatBuffer
-		append_json(buffer)
-		return buffer.write_to_string
-	end
+	redef fun to_json do return to_json_by_append
 
 	# Parse `self` as JSON.
 	#
@@ -211,11 +223,7 @@ interface JsonMapRead[K: String, V: nullable Jsonable]
 	#     obj = new JsonObject
 	#     obj["baz"] = null
 	#     assert obj.to_json == "\{\"baz\":null\}"
-	redef fun to_json do
-		var buffer = new FlatBuffer
-		append_json(buffer)
-		return buffer.write_to_string
-	end
+	redef fun to_json do return to_json_by_append
 
 	private fun append_json_entry(iterator: MapIterator[String, nullable Jsonable],
 			buffer: Buffer) do
@@ -259,11 +267,7 @@ class JsonSequenceRead[E: nullable Jsonable]
 	#     assert arr.to_json =="[\"foo\"]"
 	#     arr.pop
 	#     assert arr.to_json =="[]"
-	redef fun to_json do
-		var buffer = new FlatBuffer
-		append_json(buffer)
-		return buffer.write_to_string
-	end
+	redef fun to_json do return to_json_by_append
 
 	private fun append_json_entry(iterator: Iterator[nullable Jsonable],
 			buffer: Buffer) do
