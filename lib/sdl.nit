@@ -21,6 +21,7 @@ module sdl is
 end
 
 import mnit_display
+import c
 
 in "C header" `{
 	#include <unistd.h>
@@ -244,6 +245,12 @@ extern class SDLImage
 	redef fun height: Int `{ return recv->h; `}
 
 	fun is_ok: Bool do return not address_is_null
+
+	# Returns a reference to the pixels of the texture
+	fun pixels: NativeCByteArray `{ return recv->pixels; `}
+
+	# Does this texture has an alpha mask?
+	fun amask: Bool `{ return recv->format->Amask; `}
 end
 
 # A simple rectangle
