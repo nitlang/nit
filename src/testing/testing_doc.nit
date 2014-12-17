@@ -79,7 +79,9 @@ class NitUnitExecutor
 	var cpt = 0
 
 	# The entry point for a new `ndoc` node
-	# Fill the prepated `tc` (testcase) XTM node
+	# Fill `docunits` with new discovered unit of tests.
+	#
+	# `tc` (testcase) is the pre-filled XML node
 	fun extract(ndoc: ADoc, tc: HTMLTag)
 	do
 		blocks.clear
@@ -103,12 +105,123 @@ class NitUnitExecutor
 
 		if blocks.is_empty then return
 
-		for block in blocks do test_block(ndoc, tc, block)
+		for block in blocks do
+			docunits.add new DocUnit(ndoc, tc, block.join(""))
+		end
 	end
 
-	# Execute a block
-	fun test_block(ndoc: ADoc, tc: HTMLTag, block: Array[String])
+	# All extracted docunits
+	var docunits = new Array[DocUnit]
+
+	# Execute all the docunits
+	fun run_tests
 	do
+		var simple_du = new Array[DocUnit]
+		for du in docunits do
+			var ast = toolcontext.parse_something(du.block)
+			if ast isa AExpr then
+				simple_du.add du
+			else
+				test_single_docunit(du)
+			end
+		end
+
+		test_simple_docunits(simple_du)
+	end
+
+	# Executes multiples doc-units in a shared program.
+	# Used for docunits simple block of code (without modules, classes, functions etc.)
+	#
+	# In case of compilation error, the method fallbacks to `test_single_docunit` to
+	# * locate exactly the compilation problem in the problematic docunit.
+	# * permit the execution of the other docunits that may be correct.
+	fun test_simple_docunits(dus: Array[DocUnit])
+	do
+		if dus.is_empty then return
+
+		var file = "{prefix}-0.nit"
+
+		var dir = file.dirname
+		if dir != "" then dir.mkdir
+		var f
+		f = new OFStream.open(file)
+		f.write("# GENERATED FILE\n")
+		f.write("# Docunits extracted from comments\n")
+		f.write("import {mmodule.name}\n")
+		f.write("\n")
+		var i = 0
+		for du in dus do
+
+			i += 1
+			f.write("fun run_{i} do\n")
+			f.write("# {du.testcase.attrs["name"]}\n")
+			f.write(du.block)
+			f.write("end\n")
+		end
+		f.write("var a = args.first.to_i\n")
+		for j in [1..i[ do
+			f.write("if a == {j} then run_{j}\n")
+		end
+		f.close
+
+		if toolcontext.opt_noact.value then return
+
+		var nit_dir = toolcontext.nit_dir
+		var nitg = nit_dir/"bin/nitg"
+		if not nitg.file_exists then
+			toolcontext.error(null, "Cannot find nitg. Set envvar NIT_DIR.")
+			toolcontext.check_errors
+		end
+		var cmd = "{nitg} --ignore-visibility --no-color '{file}' -I {mmodule.location.file.filename.dirname} >'{file}.out1' 2>&1 </dev/null -o '{file}.bin'"
+		var res = sys.system(cmd)
+
+		if res != 0 then
+			# Compilation error.
+			# Fall-back to individual modes:
+			for du in dus do
+				test_single_docunit(du)
+			end
+			return
+		end
+
+		i = 0
+		for du in dus do
+			var tc = du.testcase
+			toolcontext.modelbuilder.unit_entities += 1
+			i += 1
+			toolcontext.info("Execute doc-unit {du.testcase.attrs["name"]} in {file} {i}", 1)
+			var res2 = sys.system("{file.to_program_name}.bin {i} >>'{file}.out1' 2>&1 </dev/null")
+
+			var msg
+			f = new IFStream.open("{file}.out1")
+			var n2
+			n2 = new HTMLTag("system-err")
+			tc.add n2
+			msg = f.read_all
+			f.close
+
+			n2 = new HTMLTag("system-out")
+			tc.add n2
+			n2.append(du.block)
+
+			if res2 != 0 then
+				var ne = new HTMLTag("error")
+				ne.attr("message", msg)
+				tc.add ne
+				toolcontext.warning(du.ndoc.location, "error", "ERROR: {tc.attrs["classname"]}.{tc.attrs["name"]} (in {file}): {msg}")
+				toolcontext.modelbuilder.failed_entities += 1
+			end
+			toolcontext.check_errors
+
+			testsuite.add(tc)
+		end
+	end
+
+	# Executes a single doc-unit in its own program.
+	# Used for docunits larger than a single block of code (with modules, classes, functions etc.)
+	fun test_single_docunit(du: DocUnit)
+	do
+		var tc = du.testcase
 		toolcontext.modelbuilder.unit_entities += 1
 
 		cpt += 1
@@ -124,9 +237,7 @@ class NitUnitExecutor
 		f.write("# Example extracted from a documentation\n")
 		f.write("import {mmodule.name}\n")
 		f.write("\n")
-		for text in block do
-			f.write(text)
-		end
+		f.write(du.block)
 		f.close
 
 		if toolcontext.opt_noact.value then return
@@ -154,26 +265,38 @@ class NitUnitExecutor
 
 		n2 = new HTMLTag("system-out")
 		tc.add n2
-		for text in block do n2.append(text)
+		n2.append(du.block)
 
 
 		if res != 0 then
 			var ne = new HTMLTag("failure")
 			ne.attr("message", msg)
 			tc.add ne
-			toolcontext.warning(ndoc.location, "failure", "FAILURE: {tc.attrs["classname"]}.{tc.attrs["name"]} (in {file}): {msg}")
+			toolcontext.warning(du.ndoc.location, "failure", "FAILURE: {tc.attrs["classname"]}.{tc.attrs["name"]} (in {file}): {msg}")
 			toolcontext.modelbuilder.failed_entities += 1
 		else if res2 != 0 then
 			var ne = new HTMLTag("error")
 			ne.attr("message", msg)
 			tc.add ne
-			toolcontext.warning(ndoc.location, "error", "ERROR: {tc.attrs["classname"]}.{tc.attrs["name"]} (in {file}): {msg}")
+			toolcontext.warning(du.ndoc.location, "error", "ERROR: {tc.attrs["classname"]}.{tc.attrs["name"]} (in {file}): {msg}")
 			toolcontext.modelbuilder.failed_entities += 1
 		end
 		toolcontext.check_errors
 
 		testsuite.add(tc)
 	end
+end
+
+# A unit-test to run
+class DocUnit
+	# The original comment node
+	var ndoc: ADoc
+
+	# The XML node that contains the information about the execution
+	var testcase: HTMLTag
+
+	# The text of the code to execute
+	var block: String
 end
 
 class SearchAssertVisitor
@@ -264,6 +387,8 @@ redef class ModelBuilder
 				end
 			end
 		end
+
+		d2m.run_tests
 
 		return ts
 	end
