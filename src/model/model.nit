@@ -358,11 +358,12 @@ class MClass
 	redef var name: String
 
 	# The canonical name of the class
+	#
+	# It is the name of the class prefixed by the full_name of the `intro_mmodule`
 	# Example: `"owner::module::MyClass"`
-	fun full_name: String
-	do
-		return "{self.intro_mmodule.full_name}::{name}"
-	end
+	redef var full_name is lazy do return "{self.intro_mmodule.full_name}::{name}"
+
+	redef var c_name is lazy do return "{intro_mmodule.c_name}__{name.to_cmangle}"
 
 	# The number of generic formal parameters
 	# 0 if the class is not generic
@@ -527,6 +528,29 @@ class MClassDef
 
 	# Actually the name of the `mclass`
 	redef fun name do return mclass.name
+
+	# The module and class name separated by a '#'.
+	#
+	# The short-name of the class is used for introduction.
+	# Example: "my_module#MyClass"
+	#
+	# The full-name of the class is used for refinement.
+	# Example: "my_module#intro_module::MyClass"
+	redef var full_name is lazy do
+		if is_intro then
+			return "{mmodule.full_name}#{mclass.name}"
+		else
+			return "{mmodule.full_name}#{mclass.full_name}"
+		end
+	end
+
+	redef var c_name is lazy do
+		if is_intro then
+			return mclass.c_name
+		else
+			return "{mmodule.c_name}__{mclass.c_name.to_cmangle}"
+		end
+	end
 
 	redef fun model do return mmodule.model
 
@@ -1035,6 +1059,10 @@ class MClassType
 
 	redef fun to_s do return mclass.to_s
 
+	redef fun full_name do return mclass.full_name
+
+	redef fun c_name do return mclass.c_name
+
 	redef fun need_anchor do return false
 
 	redef fun anchor_to(mmodule: MModule, anchor: MClassType): MClassType
@@ -1143,9 +1171,29 @@ class MGenericType
 		self.to_s = "{mclass}[{arguments.join(", ")}]"
 	end
 
-	# Recursively print the type of the arguments within brackets.
+	# The short-name of the class, then the full-name of each type arguments within brackets.
 	# Example: `"Map[String, List[Int]]"`
 	redef var to_s: String is noinit
+
+	# The full-name of the class, then the full-name of each type arguments within brackets.
+	# Example: `"standard::Map[standard::String, standard::List[standard::Int]]"`
+	redef var full_name is lazy do
+		var args = new Array[String]
+		for t in arguments do
+			args.add t.full_name
+		end
+		return "{mclass.full_name}[{args.join(", ")}]}"
+	end
+
+	redef var c_name is lazy do
+		var res = mclass.c_name
+		# Note: because the arity is known, a prefix notation is enough
+		for t in arguments do
+			res += "__"
+			res += t.c_name
+		end
+		return res.to_s
+	end
 
 	redef var need_anchor: Bool is noinit
 
@@ -1287,6 +1335,10 @@ class MVirtualType
 	end
 
 	redef fun to_s do return self.mproperty.to_s
+
+	redef fun full_name do return self.mproperty.full_name
+
+	redef fun c_name do return self.mproperty.c_name
 end
 
 # The type associated to a formal parameter generic type of a class
@@ -1330,6 +1382,10 @@ class MParameterType
 	redef var name
 
 	redef fun to_s do return name
+
+	redef var full_name is lazy do return "{mclass.full_name}::{name}"
+
+	redef var c_name is lazy do return mclass.c_name + "__" + "#{name}".to_cmangle
 
 	redef fun lookup_bound(mmodule: MModule, resolved_receiver: MType): MType
 	do
@@ -1450,6 +1506,10 @@ class MNullableType
 
 	redef var to_s: String is noinit
 
+	redef var full_name is lazy do return "nullable {mtype.full_name}"
+
+	redef var c_name is lazy do return "nullable__{mtype.c_name}"
+
 	redef fun need_anchor do return mtype.need_anchor
 	redef fun as_nullable do return self
 	redef fun as_notnullable do return mtype
@@ -1502,6 +1562,8 @@ class MNullType
 	super MType
 	redef var model: Model
 	redef fun to_s do return "null"
+	redef fun full_name do return "null"
+	redef fun c_name do return "null"
 	redef fun as_nullable do return self
 	redef fun need_anchor do return false
 	redef fun resolve_for(mtype, anchor, mmodule, cleanup_virtual) do return self
@@ -1668,11 +1730,16 @@ abstract class MProperty
 	# The (short) name of the property
 	redef var name: String
 
-	# The canonical name of the property
-	# Example: "owner::my_module::MyClass::my_method"
-	fun full_name: String
-	do
-		return "{self.intro_mclassdef.mmodule.full_name}::{self.intro_mclassdef.mclass.name}::{name}"
+	# The canonical name of the property.
+	#
+	# It is the short-`name` prefixed by the short-name of the class and the full-name of the module.
+	# Example: "my_project::my_module::MyClass::my_method"
+	redef var full_name is lazy do
+		return "{intro_mclassdef.mmodule.full_name}::{intro_mclassdef.mclass.name}::{name}"
+	end
+
+	redef var c_name is lazy do
+		return "{intro_mclassdef.mmodule.c_name}__{intro_mclassdef.mclass.c_name}__{name.to_cmangle}"
 	end
 
 	# The visibility of the property
@@ -1942,6 +2009,51 @@ abstract class MPropDef
 
 	# Actually the name of the `mproperty`
 	redef fun name do return mproperty.name
+
+	# The full-name of mpropdefs combine the information about the `classdef` and the `mproperty`.
+	#
+	# Therefore the combination of identifiers is awful,
+	# the worst case being
+	#
+	# ~~~nitish
+	# "{mclassdef.mmodule.full_name}#{mclassdef.mclass.intro_mmodule.full_name}::{mclassdef.name}#{mproperty.intro_mclassdef.mmodule.full_name}::{mproperty.intro_mclassdef.name}::{name}"
+	# ~~~
+	#
+	# Fortunately, the full-name is simplified when entities are repeated.
+	# The simplest form is "my_module#MyClass#my_property".
+	redef var full_name is lazy do
+		var res = new FlatBuffer
+		res.append mclassdef.mmodule.full_name
+		res.append "#"
+		if not mclassdef.is_intro then
+			res.append mclassdef.mclass.intro_mmodule.full_name
+			res.append "::"
+		end
+		res.append mclassdef.name
+		res.append "#"
+		if mproperty.intro_mclassdef.mmodule != mclassdef.mmodule then
+			res.append mproperty.intro_mclassdef.mmodule.full_name
+			res.append "::"
+		end
+		if mclassdef.mclass != mproperty.intro_mclassdef.mclass then
+			res.append mproperty.intro_mclassdef.mclass.name
+			res.append "::"
+		end
+		res.append name
+		return res.to_s
+	end
+
+	redef var c_name is lazy do
+		var res = new FlatBuffer
+		res.append mclassdef.c_name
+		res.append "__"
+		if is_intro then
+			res.append name.to_cmangle
+		else
+			res.append mproperty.c_name.to_cmangle
+		end
+		return res.to_s
+	end
 
 	redef fun model do return mclassdef.model
 

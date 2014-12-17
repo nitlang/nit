@@ -69,8 +69,9 @@ class MGroup
 	# see `in_nesting` for more
 	var parent: nullable MGroup
 
-	# fully qualified name
-	fun full_name: String
+	# Fully qualified name.
+	# It includes each parent group separated by `/`
+	redef fun full_name
 	do
 		var p = parent
 		if p == null then return name

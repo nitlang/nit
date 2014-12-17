@@ -88,10 +88,14 @@ class MModule
 	# The view of the module in the `model.mmodule_importation_hierarchy`
 	var in_importation: POSetElement[MModule] is noinit
 
-	# The canonical name of the module
+	# The canonical name of the module.
+	#
+	# It is usually the `name` prefixed by the project's name.
 	# Example: `"project::name"`
-	fun full_name: String
-	do
+	#
+	# If both names are the same (of if the module is project-less), then
+	# the short-name is used alone.
+	redef var full_name is lazy do
 		var mgroup = self.mgroup
 		if mgroup == null or mgroup.mproject.name == self.name then
 			return self.name
@@ -99,6 +103,20 @@ class MModule
 			return "{mgroup.mproject.name}::{self.name}"
 		end
 	end
+
+	# Return the name of the global C identifier associated to `self`.
+	# This name is used to prefix files and other C identifiers associated with `self`.
+	redef var c_name: String is lazy do
+		var g = mgroup
+		var res
+		if g != null and g.mproject.name != name then
+			res = g.mproject.name.to_cmangle + "__" + name.to_cmangle
+		else
+			res = name.to_cmangle
+		end
+		return res
+	end
+
 
 	# Create a new empty module and register it to a model
 	init
