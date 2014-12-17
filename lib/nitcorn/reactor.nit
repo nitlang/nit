@@ -2,6 +2,7 @@
 #
 # Copyright 2013 Jean-Philippe Caissy <jpcaissy@piji.ca>
 # Copyright 2014 Alexis Laferrière <alexis.laf@xymus.net>
+# Copyright 2014 Alexandre Terrasa <alexandre@moz-code.org>
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -19,7 +20,7 @@
 module reactor
 
 import more_collections
-import libevent
+import http_request_parser
 
 import vararg_routes
 import http_request
@@ -41,10 +42,7 @@ class HttpServer
 
 	redef fun read_callback(str)
 	do
-		# TODO support bigger inputs (such as big forms and file upload)
-
 		var request_object = parser.parse_http_request(str.to_s)
-
 		if request_object != null then delegate_answer request_object
 	end
 
