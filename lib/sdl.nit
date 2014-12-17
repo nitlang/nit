@@ -310,10 +310,10 @@ class SDLMouseButtonEvent
 	fun is_left_button: Bool do return button == 1
 
 	# Is this event raised by the right button?
-	fun is_right_button: Bool do return button == 2
+	fun is_right_button: Bool do return button == 3
 
 	# Is this event raised by the middle button?
-	fun is_middle_button: Bool do return button == 3
+	fun is_middle_button: Bool do return button == 2
 
 	# Is this event raised by the wheel going down?
 	fun is_down_wheel: Bool do return button == 4
