@@ -179,3 +179,14 @@ class JavaSource
 		super
 	end
 end
+
+# Importation logics for Python.
+class PythonSource
+	super SourceLanguage
+
+	redef fun apply_member_type(member, type_text) do
+		# Doxygen may forgot to remove the `def` keyword on methods.
+		extract_keyword(type_text, "def")
+		super
+	end
+end

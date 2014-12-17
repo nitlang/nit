@@ -149,6 +149,7 @@ class NeoDoxygenCommand
 	init do
 		sources["any"] = new DefaultSource
 		sources["java"] = new JavaSource
+		sources["python"] = new PythonSource
 
 		var prefix = new OptionText("""
 {{{"NAME".bold}}}
@@ -185,7 +186,7 @@ class NeoDoxygenCommand
 
 		var keys = new Array[String].from(sources.keys)
 		opt_src_lang = new OptionEnum(keys,
-				"The programming language to assume when processing chunk in the declarations left as-is by Doxygen. Use `any` (the default) to disable any language-specific processing.",
+				"The programming language to assume when processing chunks in the declarations left as-is by Doxygen. Use `any` (the default) to disable any language-specific processing.",
 				keys.index_of("any"), "--src-lang")
 		option_context.add_option(opt_src_lang)
 	end
@@ -249,8 +250,8 @@ end
 
 # Add handling of multi-line descriptions.
 #
-# Note: The algorithm is naive and do not handle internationalisation and
-# escape sequences.
+# Note: The algorithm is naive and do not handle internationalisation,
+# multi-byte characters and control characters.
 redef class Option
 
 	redef fun pretty(off) do
