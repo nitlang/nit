@@ -3,6 +3,7 @@
 # Copyright 2013 Frederic Sevillano
 # Copyright 2013 Jean-Philippe Caissy <jpcaissy@piji.ca>
 # Copyright 2014 Alexis Laferrière <alexis.laf@xymus.net>
+# Copyright 2014 Alexandre Terrasa <alexandre@moz-code.org>
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -45,6 +46,9 @@ class HttpRequest
 
 	# The header of this request
 	var header = new HashMap[String, String]
+
+	# The raw body of the request.
+	var body = ""
 
 	# The content of the cookie of this request
 	var cookie = new HashMap[String, String]
@@ -142,6 +146,7 @@ class HttpRequestParser
 
 		# POST args
 		if http_request.method == "POST" then
+			http_request.body = body
 			var lines = body.split_with('&')
 			for line in lines do if not line.trim.is_empty then
 				var parts = line.split_once_on('=')
