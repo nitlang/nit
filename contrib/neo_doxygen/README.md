@@ -71,6 +71,17 @@ works on a collection of projects grouped in a directory. For detail about how
 to invoke each script, see the comments in these scripts.
 
 
+## Brief descriptions
+
+To populate the first line of a description (used as brief description in
+Nitdoc), `neo_doxygen` uses the brief description provided by Doxygen. So, you
+may need to change settings like `JAVADOC_AUTOBRIEF`, `QT_AUTOBRIEF` and
+`MULTILINE_CPP_IS_BRIEF` in Doxygen to make `neo_doxygen` properly split the
+brief description from the detailed description. In absence of brief
+description, `neo_doxygen` will use the first block (usually, the first
+paragraph) of the detailed as brief description.
+
+
 ## Python
 
 The built-in filter of Doxygen for Python is very basic. For example, it
