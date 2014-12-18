@@ -24,6 +24,7 @@ import opts
 import location
 import version
 import template
+import more_collections
 
 # A warning or an error
 class Message
@@ -111,6 +112,25 @@ class ToolContext
 	# Set this value to `true` if you need to keep the program going in case of error.
 	var keep_going = false is writable
 
+	# List of tags per source-file whose warnings are not displayed.
+	#
+	# Initially empty, it is up to the toll to fill it.
+	# The tag "all" means all warnings and advices.
+	var warning_blacklist = new MultiHashMap[SourceFile, String]
+
+	# Is the source-file of `l` associated with `tag` in `warning_blacklist`?
+	#
+	# currently returns `false` if `l` is null or does not have a source-file.
+	fun is_warning_blacklisted(l: nullable Location, tag: String): Bool
+	do
+		if l == null then return false
+		var f = l.file
+		if f == null then return false
+		var tags = warning_blacklist.get_or_null(f)
+		if tags == null then return false
+		return tags.has("all") or tags.has(tag)
+	end
+
 	# Output all current stacked messages and display total error informations
 	#
 	# Return true if no errors occurred.
@@ -181,6 +201,7 @@ class ToolContext
 	do
 		if opt_warning.value.has("no-{tag}") then return
 		if not opt_warning.value.has(tag) and opt_warn.value == 0 then return
+		if is_warning_blacklisted(l, tag) then return
 		messages.add(new Message(l, tag, text))
 		warning_count = warning_count + 1
 		if opt_stop_on_first_error.value then check_errors
@@ -203,6 +224,7 @@ class ToolContext
 	do
 		if opt_warning.value.has("no-{tag}") then return
 		if not opt_warning.value.has(tag) and opt_warn.value <= 1 then return
+		if is_warning_blacklisted(l, tag) then return
 		messages.add(new Message(l, tag, text))
 		warning_count = warning_count + 1
 		if opt_stop_on_first_error.value then check_errors
