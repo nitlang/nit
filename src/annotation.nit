@@ -16,7 +16,7 @@
 module annotation
 
 import modelbuilder
-private import literal
+import literal
 import model::mmodule_data
 
 redef class Prod
@@ -97,37 +97,6 @@ redef class AAnnotation
 
 		modelbuilder.error(self, "Annotation error: \"{name}\" expects a single identifier as argument.")
 		return null
-	end
-end
-
-redef class AExpr
-	# Get `self` as a `String`.
-	# Return null if not a string.
-	fun as_string: nullable String
-	do
-		if not self isa AStringFormExpr then return null
-		return self.value.as(not null)
-	end
-
-	# Get `self` as an `Int`.
-	# Return null if not an integer.
-	fun as_int: nullable Int
-	do
-		if not self isa AIntExpr then return null
-		return self.value.as(not null)
-	end
-
-	# Get `self` as a single identifier.
-	# Return null if not a single identifier.
-	fun as_id: nullable String
-	do
-		if self isa AMethidExpr then
-			return self.collect_text
-		end
-		if not self isa ACallExpr then return null
-		if not self.n_expr isa AImplicitSelfExpr then return null
-		if not self.n_args.n_exprs.is_empty then return null
-		return self.n_id.text
 	end
 end
 
