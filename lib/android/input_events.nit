@@ -216,6 +216,8 @@ extern class AndroidKeyEvent `{AInputEvent *`}
 		return 0;
 	`}
 
+	redef fun name do return key_code.to_s
+
 	# Was this event raised by the back key?
 	fun is_back_key: Bool do return key_code == 4
 

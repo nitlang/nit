@@ -369,27 +369,27 @@ class SDLKeyEvent
 	super KeyEvent
 	super SDLInputEvent
 
-	var key_name: String
+	redef var name
 	var down: Bool
 
 	init (key_name: String, down: Bool)
 	do
-		self.key_name = key_name
+		self.name = key_name
 		self.down = down
 	end
 
 	redef fun to_c: nullable Char
 	do
-		if key_name.length == 1 then return key_name.chars.first
+		if name.length == 1 then return name.chars.first
 		return null
 	end
 
 	redef fun to_s
 	do
 		if down then
-			return "KeyboardEvent key {key_name} down"
+			return "KeyboardEvent key {name} down"
 		else
-			return "KeyboardEvent key {key_name} up"
+			return "KeyboardEvent key {name} up"
 		end
 	end
 
@@ -397,13 +397,13 @@ class SDLKeyEvent
 	redef fun is_down do return down
 
 	# Return true if the key is the up arrow
-	redef fun is_arrow_up do return key_name == "up"
+	redef fun is_arrow_up do return name == "up"
 	# Return true if the key is the left arrow
-	redef fun is_arrow_left do return key_name == "left"
+	redef fun is_arrow_left do return name == "left"
 	# Return true if the key is the down arrow
-	redef fun is_arrow_down do return key_name == "down"
+	redef fun is_arrow_down do return name == "down"
 	# Return true if the key is the right arrow
-	redef fun is_arrow_right do return key_name == "right"
+	redef fun is_arrow_right do return name == "right"
 end
 
 class SDLQuitEvent
