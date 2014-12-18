@@ -13,7 +13,7 @@
 # limitations under the License.
 
 # Documentation reading.
-module doxml::doc
+module doxml::doc_listener
 
 import listener
 

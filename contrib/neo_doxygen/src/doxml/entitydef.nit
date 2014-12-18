@@ -15,7 +15,7 @@
 # Common SAX listeners for entity definitions.
 module doxml::entitydef
 
-import doc
+import doc_listener
 
 # Processes the content of an entity definition.
 abstract class EntityDefListener
