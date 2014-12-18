@@ -117,7 +117,47 @@ abstract class ANode
 	# Visit all nodes in order.
 	# Thus, call `v.enter_visit(e)` for each child `e`
 	fun visit_all(v: Visitor) is abstract
+
+	# Do a deep search and return an array of tokens that match a given text
+	fun collect_tokens_by_text(text: String): Array[Token]
+	do
+		var v = new CollectTokensByTextVisitor(text)
+		v.enter_visit(self)
+		return v.result
+	end
+
+	# Do a deep search and return an array of node that are annotated
+	# The attached node can be retrieved by two invocations of parent
+	fun collect_annotations_by_name(name: String): Array[AAnnotation]
+	do
+		var v = new CollectAnnotationsByNameVisitor(name)
+		v.enter_visit(self)
+		return v.result
+	end
 end
+
+private class CollectTokensByTextVisitor
+	super Visitor
+	var text: String
+	var result = new Array[Token]
+	redef fun visit(node)
+	do
+		node.visit_all(self)
+		if node isa Token and node.text == text then result.add(node)
+	end
+end
+
+private class CollectAnnotationsByNameVisitor
+	super Visitor
+	var name: String
+	var result = new Array[AAnnotation]
+	redef fun visit(node)
+	do
+		node.visit_all(self)
+		if node isa AAnnotation and node.n_atid.n_id.text == name then result.add(node)
+	end
+end
+
 
 # A sequence of nodes
 # It is a specific class (instead of using a Array) to track the parent/child relation when nodes are added or removed
