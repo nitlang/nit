@@ -34,29 +34,9 @@ redef class Prod
 		end
 		return res.first
 	end
-
-	# Return all its annotations of a given name in the order of their declaration
-	# Retun an empty array if no such an annotation.
-	fun get_annotations(name: String): Array[AAnnotation]
-	do
-		var res = new Array[AAnnotation]
-		var nas = n_annotations
-		if nas == null then return res
-		for na in nas.n_items do
-			if na.name != name then continue
-			res.add(na)
-		end
-		return res
-	end
 end
 
 redef class AAnnotation
-	# The name of the annotation
-	fun name: String
-	do
-		return n_atid.n_id.text
-	end
-
 	# Get the single argument of `self` as a `String`.
 	# Raise error and return null on any inconsistency.
 	fun arg_as_string(modelbuilder: ModelBuilder): nullable String

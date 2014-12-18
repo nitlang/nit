@@ -269,6 +269,20 @@ abstract class Prod
 	# All the annotations attached directly to the node
 	var n_annotations: nullable AAnnotations = null is writable
 
+	# Return all its annotations of a given name in the order of their declaration
+	# Retun an empty array if no such an annotation.
+	fun get_annotations(name: String): Array[AAnnotation]
+	do
+		var res = new Array[AAnnotation]
+		var nas = n_annotations
+		if nas == null then return res
+		for na in nas.n_items do
+			if na.name != name then continue
+			res.add(na)
+		end
+		return res
+	end
+
 	redef fun replace_with(n: ANode)
 	do
 		super
@@ -2038,6 +2052,12 @@ class AAnnotation
 	var n_opar: nullable TOpar = null is writable
 	var n_args = new ANodes[AExpr](self)
 	var n_cpar: nullable TCpar = null is writable
+
+	# The name of the annotation
+	fun name: String
+	do
+		return n_atid.n_id.text
+	end
 end
 
 # An annotation name
