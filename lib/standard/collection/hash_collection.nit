@@ -10,10 +10,15 @@
 # You  are  allowed  to  redistribute it and sell it, alone or is a part of
 # another product.
 
-# Introduce Hashmap and Hashset.
+# Introduce `HashMap` and `HashSet`.
 module hash_collection
 
 import array
+
+redef class Map[K, V]
+	# Get a `HashMap[K, V]` as default implementation
+	new do return new HashMap[K, V]
+end
 
 # A HashCollection is an array of HashNode[K] indexed by the K hash value
 private abstract class HashCollection[K]
