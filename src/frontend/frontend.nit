@@ -15,6 +15,7 @@
 # Collect and orchestration of main frontend phases
 module frontend
 
+import no_warning
 import simple_misc_analysis
 import literal
 import modelize
