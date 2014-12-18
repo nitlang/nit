@@ -2199,6 +2199,8 @@ redef class AMethPropdef
 end
 
 redef class AAttrPropdef
+	redef fun can_inline: Bool do return not is_lazy
+
 	redef fun compile_to_c(v, mpropdef, arguments)
 	do
 		if mpropdef == mreadpropdef then
