@@ -35,10 +35,18 @@ redef class MEntity
 	# HTML Escaped name
 	fun nitdoc_name: String is abstract
 
-	# Used as HTML unique ids
+	# ID used as a HTML unique ID and in file names.
+	#
+	# **Must** match the following (POSIX ERE) regular expression:
+	#
+	# ~~~POSIX ERE
+	# ^[A-Za-z_][A-Za-z0-9._-]*$
+	# ~~~
+	#
+	# That way, the ID is always a valid URI component and a valid XML name.
 	fun nitdoc_id: String is abstract
 
-	# URL of this entity Nitdoc page
+	# URL of this entity’s Nitdoc page.
 	fun nitdoc_url: String is abstract
 
 	# A template link to the mentity `nitdoc_id`
@@ -131,8 +139,8 @@ redef class MConcern
 end
 
 redef class MProject
+	redef var nitdoc_id = name.to_cmangle is lazy
 	redef fun nitdoc_name do return name.html_escape
-	redef fun nitdoc_id do return nitdoc_name
 	redef fun nitdoc_url do return root.nitdoc_url
 
 	redef fun mdoc do
@@ -167,11 +175,11 @@ end
 redef class MGroup
 	redef fun nitdoc_name do return name.html_escape
 
-	redef fun nitdoc_id do
+	redef var nitdoc_id is lazy do
 		if parent != null then
-			return "{parent.nitdoc_id}__{nitdoc_name}"
+			return "{parent.nitdoc_id}__{name.to_cmangle}"
 		end
-		return "{mproject.nitdoc_id}__{nitdoc_name}"
+		return name.to_cmangle
 	end
 
 	redef fun nitdoc_url do return "group_{nitdoc_id}.html"
@@ -207,11 +215,15 @@ end
 redef class MModule
 	redef fun nitdoc_name do return name.html_escape
 
-	redef fun nitdoc_id do
+	redef var nitdoc_id is lazy do
 		if mgroup != null then
-			return "{mgroup.nitdoc_id}__{nitdoc_name}"
+			if mgroup.mmodules.length == 1 then
+				return "{mgroup.nitdoc_id}-"
+			else
+				return "{mgroup.nitdoc_id}__{name.to_cmangle}"
+			end
 		end
-		return nitdoc_name
+		return name.to_cmangle
 	end
 
 	redef fun nitdoc_url do return "module_{nitdoc_id}.html"
@@ -247,7 +259,7 @@ end
 
 redef class MClass
 	redef fun nitdoc_name do return name.html_escape
-	redef fun nitdoc_id do return "{intro_mmodule.mgroup.mproject}__{name.to_cmangle}"
+	redef var nitdoc_id = "{intro_mmodule.nitdoc_id}__{name.to_cmangle}" is lazy
 	redef fun nitdoc_url do return "class_{nitdoc_id}.html"
 	redef fun mdoc do return intro.mdoc
 
@@ -297,7 +309,7 @@ end
 
 redef class MClassDef
 	redef fun nitdoc_name do return mclass.nitdoc_name
-	redef fun nitdoc_id do return "{mmodule.nitdoc_id}__{name.to_cmangle}"
+	redef var nitdoc_id = "{mmodule.nitdoc_id}__{name.to_cmangle}" is lazy
 	redef fun nitdoc_url do return "{mclass.nitdoc_url}#{nitdoc_id}"
 
 	redef fun tpl_namespace do
@@ -417,8 +429,8 @@ redef class MClassDef
 end
 
 redef class MProperty
+	redef var nitdoc_id = "{intro_mclassdef.mclass.nitdoc_id}__{name.to_cmangle}" is lazy
 	redef fun nitdoc_name do return name.html_escape
-	redef fun nitdoc_id do return "{intro_mclassdef.mclass.nitdoc_id}__{name.to_cmangle}"
 	redef fun nitdoc_url do return "property_{nitdoc_id}.html"
 
 	redef fun mdoc do return intro.mdoc
@@ -445,7 +457,7 @@ end
 
 redef class MPropDef
 	redef fun nitdoc_name do return mproperty.nitdoc_name
-	redef fun nitdoc_id do return "{mclassdef.nitdoc_id}__{name.to_cmangle}"
+	redef var nitdoc_id = "{mclassdef.nitdoc_id}__{name.to_cmangle}" is lazy
 	redef fun nitdoc_url do return "{mproperty.nitdoc_url}#{nitdoc_id}"
 
 	redef fun tpl_anchor: TplLink do
@@ -605,28 +617,6 @@ redef class MVirtualTypeDef
 	end
 end
 
-redef class MInnerClass
-	redef fun nitdoc_url do return inner.nitdoc_url
-	redef fun tpl_signature do return inner.tpl_signature
-end
-
-redef class MInnerClassDef
-	redef fun nitdoc_url do return inner.nitdoc_url
-
-	redef fun tpl_anchor do return inner.tpl_anchor
-	redef fun tpl_link do return inner.tpl_link
-	redef fun tpl_signature do return inner.tpl_signature
-
-	redef fun tpl_definition do
-		var tpl = new TplClassDefinition
-		tpl.namespace = mclassdef.tpl_namespace
-		if mdoc != null then
-			tpl.comment = mdoc.tpl_comment
-		end
-		return tpl
-	end
-end
-
 redef class MType
 	fun tpl_signature: Template is abstract
 end
@@ -751,6 +741,28 @@ redef class MRawType
 			else
 				tpl.add part.text.html_escape
 			end
+		end
+		return tpl
+	end
+end
+
+redef class MInnerClass
+	redef fun nitdoc_url do return inner.nitdoc_url
+	redef fun tpl_signature do return inner.tpl_signature
+end
+
+redef class MInnerClassDef
+	redef fun nitdoc_url do return inner.nitdoc_url
+
+	redef fun tpl_anchor do return inner.tpl_anchor
+	redef fun tpl_link do return inner.tpl_link
+	redef fun tpl_signature do return inner.tpl_signature
+
+	redef fun tpl_definition do
+		var tpl = new TplClassDefinition
+		tpl.namespace = mclassdef.tpl_namespace
+		if mdoc != null then
+			tpl.comment = mdoc.tpl_comment
 		end
 		return tpl
 	end

@@ -427,7 +427,7 @@ abstract class NitdocPage
 		var intros = mmodule.intro_mclassdefs(ctx.min_visibility).to_a
 		if not intros.is_empty then
 			mainmodule.linearize_mclassdefs(intros)
-			var intros_art = new TplArticle.with_title("{mmodule.nitdoc_id}_intros", "Introduces")
+			var intros_art = new TplArticle.with_title("{mmodule.nitdoc_id}.intros", "Introduces")
 			var intros_lst = new TplList.with_classes(["list-unstyled", "list-labeled"])
 			for mclassdef in intros do
 				intros_lst.add_li mclassdef.tpl_list_item
@@ -440,7 +440,7 @@ abstract class NitdocPage
 		var redefs = mmodule.redef_mclassdefs(ctx.min_visibility).to_a
 		if not redefs.is_empty then
 			mainmodule.linearize_mclassdefs(redefs)
-			var redefs_art = new TplArticle.with_title("{mmodule.nitdoc_id}_redefs", "Redefines")
+			var redefs_art = new TplArticle.with_title("{mmodule.nitdoc_id}.redefs", "Redefines")
 			var redefs_lst = new TplList.with_classes(["list-unstyled", "list-labeled"])
 			for mclassdef in redefs do
 				redefs_lst.add_li mclassdef.tpl_list_item
@@ -469,7 +469,7 @@ abstract class NitdocPage
 			redef_article.source_link = tpl_showsource(mclassdef.location)
 			article.add_child redef_article
 			# mpropdefs list
-			var intros = new TplArticle.with_title("{mclassdef.nitdoc_id}_intros", "Introduces")
+			var intros = new TplArticle.with_title("{mclassdef.nitdoc_id}.intros", "Introduces")
 			var intros_lst = new TplList.with_classes(["list-unstyled", "list-labeled"])
 			for mpropdef in mclassdef.collect_intro_mpropdefs(ctx.min_visibility) do
 				intros_lst.add_li mpropdef.tpl_list_item
@@ -478,7 +478,7 @@ abstract class NitdocPage
 				intros.content = intros_lst
 				redef_article.add_child intros
 			end
-			var redefs = new TplArticle.with_title("{mclassdef.nitdoc_id}_redefs", "Redefines")
+			var redefs = new TplArticle.with_title("{mclassdef.nitdoc_id}.redefs", "Redefines")
 			var redefs_lst = new TplList.with_classes(["list-unstyled", "list-labeled"])
 			for mpropdef in mclassdef.collect_redef_mpropdefs(ctx.min_visibility) do
 				redefs_lst.add_li mpropdef.tpl_list_item
@@ -528,7 +528,7 @@ abstract class NitdocPage
 		if main_mpropdef.mdoc != null then
 			article.content = main_mpropdef.mdoc.tpl_comment
 		end
-		var subarticle = new TplArticle("{main_mpropdef.nitdoc_id}_redefs")
+		var subarticle = new TplArticle("{main_mpropdef.nitdoc_id}.redefs")
 		# Add redef in same `MClass`
 		if local_mpropdefs.length > 1 then
 			for mpropdef in local_mpropdefs do
@@ -550,7 +550,7 @@ abstract class NitdocPage
 		end
 		# Add linearization
 		if lin.length > 1 then
-			var lin_article = new TplArticle("{main_mpropdef.nitdoc_id}_lin")
+			var lin_article = new TplArticle("{main_mpropdef.nitdoc_id}.lin")
 			lin_article.title = "Inheritance"
 			var lst = new TplList.with_classes(["list-unstyled", "list-labeled"])
 			for mpropdef in lin do
