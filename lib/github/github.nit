@@ -15,4 +15,4 @@
 # Github API related features.
 module github
 
-import github_curl
+import api
