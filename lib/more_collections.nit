@@ -29,7 +29,7 @@ module more_collections
 #     assert m.has_key("four")
 #     assert m["four"] == ['i', 'i', 'i', 'i']
 #     assert m["zzz"] == new Array[Char]
-class MultiHashMap[K: Object, V]
+class MultiHashMap[K, V]
 	super HashMap[K, Array[V]]
 
 	# Add `v` to the array associated with `k`.
@@ -59,7 +59,7 @@ end
 # assert hm2[1, "one"] == 1.0
 # assert hm2[2, "not-two"] == null
 # ~~~~
-class HashMap2[K1: Object, K2: Object, V]
+class HashMap2[K1, K2, V]
 	private var level1 = new HashMap[K1, HashMap[K2, V]]
 
 	# Return the value associated to the keys `k1` and `k2`.
@@ -97,7 +97,7 @@ end
 # assert hm3[1, "one", 11] == 1.0
 # assert hm3[2, "not-two", 22] == null
 # ~~~~
-class HashMap3[K1: Object, K2: Object, K3: Object, V]
+class HashMap3[K1, K2, K3, V]
 	private var level1 = new HashMap[K1, HashMap2[K2, K3, V]]
 
 	# Return the value associated to the keys `k1`, `k2`, and `k3`.
@@ -165,7 +165,7 @@ end
 # assert dma["b"] == [65, 66]
 # assert dma.default == [65]
 # ~~~~
-class DefaultMap[K: Object, V]
+class DefaultMap[K, V]
 	super HashMap[K, V]
 
 	# The default value.
