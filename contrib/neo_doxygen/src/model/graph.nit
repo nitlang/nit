@@ -128,6 +128,12 @@ abstract class Entity
 	# Is empty for entities without an ID.
 	var model_id: String = "" is writable
 
+	# The full (qualified) name, as presented by the original model.
+	#
+	# Fully independant of `name`. By default, equals to `""` for the root
+	# namespace.
+	var full_name: nullable String = null is writable
+
 	# Associated documentation.
 	var doc = new JsonArray is writable
 
@@ -137,8 +143,6 @@ abstract class Entity
 	end
 
 	# The short (unqualified) name.
-	#
-	# May be also set by `full_name=`.
 	fun name=(name: String) do
 		self["name"] = name
 	end
@@ -156,40 +160,10 @@ abstract class Entity
 	end
 
 	# The namespace separator of Nit/C++.
-	fun ns_separator: String do return "::"
-
-	# The name separator used when calling `full_name=`.
-	fun name_separator: String do return ns_separator
-
-	# The full (qualified) name.
 	#
-	# Also set `name` using `name_separator`.
-	fun full_name=(full_name: String) do
-		var m = full_name.search_last(name_separator)
-
-		self["full_name"] = full_name
-		if m == null then
-			name = full_name
-		else
-			name = full_name.substring_from(m.after)
-		end
-	end
-
-	# The full (qualified) name.
-	fun full_name: String do
-		var full_name = self["full_name"]
-		assert full_name isa String
-		return full_name
-	end
-
-	# Set the full name using the current name and the specified parent name.
-	fun parent_name=(parent_name: String) do
-		if parent_name.is_empty then
-			self["full_name"] = name
-		else
-			self["full_name"] = parent_name + name_separator + name
-		end
-	end
+	# Used to join two or more names when we need to work around some
+	# limitations of the Nit model.
+	fun ns_separator: String do return "::"
 
 	# Set the location of the entity in the source code.
 	fun location=(location: nullable Location) do
@@ -277,11 +251,9 @@ abstract class Compound
 	# Parameters:
 	#
 	# * `id`: `model_id` of the inner class.
-	# * `full_name`: qualified name of the inner class. Ignored in practice.
+	# * `name`: short name of the inner class.
 	# * `prot`: visibility (proctection).
-	#
-	# TODO: Handle cases where only the `full_name` is available.
-	fun declare_class(id: String, full_name: String, prot: String) do end
+	fun declare_class(id: String, name: String, prot: String) do end
 
 	# Declare a base compound (usually, a base class).
 	#
@@ -312,8 +284,6 @@ class Namespace
 	super Compound
 
 	# The inner namespaces.
-	#
-	# Left empty for the root namespace.
 	var inner_namespaces: SimpleCollection[NamespaceRef] = new Array[NamespaceRef]
 
 	init do
@@ -325,25 +295,22 @@ class Namespace
 		inner_namespaces.add new NamespaceRef(id, full_name)
 	end
 
-	redef fun declare_class(id: String, full_name: String, prot: String) do
+	redef fun declare_class(id, name, prot) do
+		assert not id.is_empty else
+			sys.stderr.write "Inner class declarations without ID are not yet supported.\n"
+		end
 		graph.class_to_ns[id] = self
 	end
 
 	redef fun put_in_graph do
 		super
-		var full_name = self["full_name"]
+		var full_name = self.full_name
 		if full_name isa String then graph.namespaces[full_name] = self
 	end
 
 	redef fun put_edges do
 		super
 		graph.add_edge(self, "PROJECT", graph.project)
-		if self["name"] == self["full_name"] and self["full_name"] != "" then
-			# The root namespace does not know its children.
-			var root = graph.by_id[""]
-			graph.add_edge(self, "PARENT", root)
-			graph.add_edge(root, "NESTS", self)
-		end
 		for ns in inner_namespaces do
 			var node = ns.seek_in(graph)
 			graph.add_edge(node, "PARENT", self)
@@ -390,9 +357,7 @@ class RootNamespace
 
 	init do
 		super
-		self["full_name"] = ""
-		self["name"] = graph.project_name
+		full_name = ""
+		name = graph.project_name
 	end
-
-	redef fun declare_namespace(id: String, name: String) do end
 end

@@ -37,18 +37,6 @@ redef class Namespace
 		self_class.as(not null).declare_member(member)
 	end
 
-	redef fun full_name=(full_name) do
-		super
-		var self_class = self.self_class
-		if self_class isa SelfClass then self_class.update_name
-	end
-
-	redef fun parent_name=(parent_name) do
-		super
-		var self_class = self.self_class
-		if self_class isa SelfClass then self_class.update_name
-	end
-
 	redef fun put_in_graph do
 		super
 		var self_class = self.self_class
@@ -76,11 +64,5 @@ class SelfClass
 	init do
 		super
 		name = "(self)"
-		update_name
 	end
-
-	# Update the `full_name`.
-	#
-	# Update the parent name to the `full_name` of the namespace.
-	private fun update_name do parent_name = namespace.full_name
 end

@@ -44,13 +44,10 @@ abstract class MemberOrInner
 		self["is_intro"] = is_intro
 		if is_intro then
 			var visibility = self["visibility"]
-			var full_name = self["full_name"]
 			var name = self["name"]
 
 			introducer = create_introducer
-			if full_name isa String then
-				introducer.full_name = full_name
-			else if name isa String then
+			if name isa String then
 				introducer.name = name
 			end
 			if visibility isa String then
@@ -89,20 +86,6 @@ abstract class MemberOrInner
 		super
 		if introducer != null then
 			introducer.as(not null).name = name
-		end
-	end
-
-	redef fun full_name=(full_name: String) do
-		super
-		if introducer != null then
-			introducer.as(not null).full_name = full_name
-		end
-	end
-
-	redef fun parent_name=(parent_name: String) do
-		super
-		if introducer != null then
-			introducer.as(not null).parent_name = parent_name
 		end
 	end
 

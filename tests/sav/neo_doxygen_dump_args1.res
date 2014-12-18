@@ -22,8 +22,8 @@ Edge
 35:empty project with default settings
 7:MEntity
 6:MGroup
-=properties=JsonObject(2):
-{"full_name":"","name":"empty project with default settings"}
+=properties=JsonObject(1):
+{"name":"empty project with default settings"}
 
 
 Edge
@@ -36,8 +36,8 @@ Edge
 35:empty project with default settings
 7:MEntity
 6:MGroup
-=properties=JsonObject(2):
-{"full_name":"","name":"empty project with default settings"}
+=properties=JsonObject(1):
+{"name":"empty project with default settings"}
 ----
 =to=Node
 =labels=Array(3):

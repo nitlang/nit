@@ -50,18 +50,6 @@ class ClassCompound
 		class_def.name = name
 	end
 
-	redef fun full_name=(full_name: String) do
-		super
-		class_type.full_name = full_name
-		class_def.full_name = full_name
-	end
-
-	redef fun parent_name=(parent_name: String) do
-		super
-		class_type.parent_name = parent_name
-		class_def.parent_name = parent_name
-	end
-
 	redef fun location=(location: nullable Location) do
 		super
 		class_def.location = location
@@ -119,10 +107,12 @@ class ClassDef
 	#
 	# Includes inner classes.
 	#
-	# To ensure that the `full_name` of each member is correctly set,
-	# `declare_member` or `declare_class` should be used to add each member.
+	# Filled by `declare_member` and `declare_class`.
 	#
 	# Note: `declare_class` is defined by the `inner_class` module.
+	#
+	# SEE: `declare_member`
+	# SEE: `declare_class`
 	var members: SimpleCollection[MemberOrInner] = new Array[MemberOrInner]
 
 	init do
@@ -149,26 +139,7 @@ class ClassDef
 
 	# Append the specified member.
 	fun declare_member(member: Member) do
-		var full_name = self["full_name"]
-
-		if full_name != null then
-			member.parent_name = full_name.to_s
-		end
 		members.add(member)
-	end
-
-	redef fun full_name=(full_name: String) do
-		super
-		for m in members do
-			m.parent_name = full_name
-		end
-	end
-
-	redef fun parent_name=(parent_name: String) do
-		super
-		for m in members do
-			m.parent_name = full_name
-		end
 	end
 
 	redef fun put_edges do

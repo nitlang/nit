@@ -16,6 +16,7 @@
 module doxml::compounddef
 
 import memberdef
+import doxyname
 import more_collections
 
 # Processes the content of a `compounddef` element.
@@ -142,9 +143,9 @@ class CompoundDefListener
 
 	redef fun end_dox_element(local_name: String) do
 		if "compoundname" == local_name then
-			compound.full_name = text.to_s
+			compound.doxyname = text.to_s
 		else if "innerclass" == local_name then
-			compound.declare_class(refid, text.to_s, prot)
+			compound.doxygen_declare_class(refid, text.to_s, prot)
 		else if "innernamespace" == local_name then
 			compound.declare_namespace(refid, text.to_s)
 		else if "memberdef" == local_name then

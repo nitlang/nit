@@ -43,7 +43,6 @@
 # `MGroup`
 #
 # * labels: `MGroup`, `model_name` and `MEntity`.
-# * `full_name`: fully qualified name.
 # * `(:MGroup)-[:PROJECT]->(:MProject)`: associated project.
 # * `(:MGroup)-[:PARENT]->(:MGroup)`: parent group. Does not exist for the root
 # group.
@@ -55,7 +54,6 @@
 # `MModule`
 #
 # * labels: `MModule`, `model_name` and `MEntity`.
-# * `full_name`: fully qualified name.
 # * `location`: origin of the definition. SEE: `Location.to_s`
 # * `(:MModule)-[:IMPORTS]->(:MModule)`: modules that are imported directly.
 # * `(:MModule)-[:INTRODUCES]->(:MClass)`: all by classes introduced by this
@@ -66,7 +64,6 @@
 # `MClass`
 #
 # * labels: `MClass`, `model_name` and `MEntity`.
-# * `full_name`: fully qualified name.
 # * `kind`: kind of the class (`interface`, `abstract class`, etc.)
 # * `visibility`: visibility of the class.
 # * `parameter_names`: JSON array listing the name of each formal generic
@@ -96,7 +93,6 @@
 # * labels: `MProperty`, `model_name` and `MEntity`. Must also have `MMethod`,
 # `MAttribute` `MVirtualTypeProp` or `MInnerClass`, depending on the class of
 # the represented entity.
-# * `full_name`: fully qualified name.
 # * `visibility`: visibility of the property.
 # * `is_init`: Indicates if the property is a constructor. Exists only if the
 # node is a `MMethod`.
@@ -403,7 +399,6 @@ class NeoModel
 	private fun mgroup_node(mgroup: MGroup): NeoNode do
 		var node = make_node(mgroup)
 		node.labels.add "MGroup"
-		node["full_name"] = mgroup.full_name
 		var parent = mgroup.parent
 		node.out_edges.add(new NeoEdge(node, "PROJECT", to_node(mgroup.mproject)))
 		if parent != null then
@@ -442,7 +437,6 @@ class NeoModel
 	private fun mmodule_node(mmodule: MModule): NeoNode do
 		var node = make_node(mmodule)
 		node.labels.add "MModule"
-		node["full_name"] = mmodule.full_name
 		node["location"] = mmodule.location.to_s
 		for parent in mmodule.in_importation.direct_greaters do
 			node.out_edges.add(new NeoEdge(node, "IMPORTS", to_node(parent)))
@@ -486,7 +480,6 @@ class NeoModel
 	private fun mclass_node(mclass: MClass): NeoNode do
 		var node = make_node(mclass)
 		node.labels.add "MClass"
-		node["full_name"] = mclass.full_name
 		node["kind"] = mclass.kind.to_s
 		node["visibility"] = mclass.visibility.to_s
 		if not mclass.mparameters.is_empty then
@@ -568,7 +561,6 @@ class NeoModel
 	private fun mproperty_node(mproperty: MProperty): NeoNode do
 		var node = make_node(mproperty)
 		node.labels.add "MProperty"
-		node["full_name"] = mproperty.full_name
 		node["visibility"] = mproperty.visibility.to_s
 		if mproperty isa MMethod then
 			node.labels.add "MMethod"

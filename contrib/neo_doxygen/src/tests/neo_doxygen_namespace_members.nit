@@ -17,11 +17,12 @@ import model
 
 var graph = new ProjectGraph("foo")
 var file = new FileCompound(graph)
+var root_ns = graph.by_id[""].as(Namespace)
 var ns = new Namespace(graph)
 var member = new Attribute(graph)
 var buffer = new RopeBuffer
 
-file.full_name = "foo.py"
+file.name = "foo.py"
 file.model_id = "_foo_8py"
 file.declare_namespace("namespacefoo", "foo")
 file.put_in_graph
@@ -30,9 +31,11 @@ member.name = "bar"
 member.put_in_graph
 
 ns.model_id = "namespacefoo"
-ns.full_name = "foo"
+ns.name = "foo"
 ns.declare_member(member)
 ns.put_in_graph
+
+root_ns.declare_namespace("namespacefoo", "")
 
 graph.add_global_modules
 graph.put_edges
