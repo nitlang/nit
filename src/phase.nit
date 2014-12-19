@@ -71,6 +71,13 @@ redef class ToolContext
 		return phases
 	end
 
+	# Is `phase_process_npropdef` not called automatically by `run_phases`?
+	#
+	# When set to true, it is the responsibility of the tools
+	#
+	# Is false by default.
+	var semantize_is_lazy = false is writable
+
 	# Set of already analyzed modules.
 	private var phased_modules = new HashSet[AModule]
 
@@ -110,7 +117,7 @@ redef class ToolContext
 				for nclassdef in nmodule.n_classdefs do
 					assert phase.toolcontext == self
 					phase.process_nclassdef(nclassdef)
-					for npropdef in nclassdef.n_propdefs do
+					if not semantize_is_lazy then for npropdef in nclassdef.n_propdefs do
 						assert phase.toolcontext == self
 						phase_process_npropdef(phase, npropdef)
 					end
@@ -140,6 +147,31 @@ redef class ToolContext
 	do
 		phase.process_npropdef(npropdef)
 	end
+
+	# Run the phase on the given npropdef.
+	# Does nothing if `semantize_is_lazy` is false.
+	fun run_phases_on_npropdef(npropdef: APropdef)
+	do
+		if not semantize_is_lazy then return
+		if npropdef.is_phased then return
+		npropdef.is_phased = true
+
+		#self.info("Semantic analysis of property {npropdef.location.file.filename}", 0)
+
+		var phases = phases_list
+		for phase in phases do
+			if phase.disabled then continue
+			assert phase.toolcontext == self
+			phase_process_npropdef(phase, npropdef)
+			self.check_errors
+		end
+	end
+end
+
+redef class APropdef
+	# Is the propdef already analyzed by `run_phases_on_npropdef`.
+	# Unused unless `semantize_is_lazy` is true.
+	private var is_phased = false
 end
 
 # Collect all annotation
