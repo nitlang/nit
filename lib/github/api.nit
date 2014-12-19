@@ -252,6 +252,25 @@ class GithubAPI
 		return milestone.load_from_github
 	end
 
+	# Get the Github issue event with `id`.
+	#
+	# Returns `null` if the event cannot be found.
+	#
+	#     var api = new GithubAPI(get_github_oauth)
+	#     var repo = api.load_repo("privat/nit")
+	#     assert repo isa Repo
+	#     var event = api.load_issue_event(repo, 199674194)
+	#     assert event.actor.login == "privat"
+	#     assert event.event == "labeled"
+	#     assert event.labl.name == "need_review"
+	#     assert event.issue.number == 945
+	fun load_issue_event(repo: Repo, id: Int): nullable IssueEvent do
+		var event = new IssueEvent(self, repo, id)
+		event.load_from_github
+		if was_error then return null
+		return event
+	end
+
 	# Get the Github commit comment with `id`.
 	#
 	# Returns `null` if the comment cannot be found.
@@ -713,6 +732,22 @@ class Issue
 	# Full description of the issue.
 	fun body: String  do return json["body"].to_s
 
+	# List of events on this issue.
+	fun events: Array[IssueEvent] do
+		var res = new Array[IssueEvent]
+		var page = 1
+		var array = api.get("{key}/events?page={page}").as(JsonArray)
+		while not array.is_empty do
+			for obj in array do
+				if not obj isa JsonObject then continue
+				res.add new IssueEvent.from_json(api, repo, obj)
+			end
+			page += 1
+			array = api.get("{key}/events?page={page}").as(JsonArray)
+		end
+		return res
+	end
+
 	# User that closed this issue (if any).
 	fun closed_by: nullable User do
 		var closer = json["closed_by"]
@@ -1029,4 +1064,89 @@ class ReviewComment
 
 	# Original commit id.
 	fun original_commit_id: String do return json["original_commit_id"].to_s
+end
+
+# An event that occurs on a Github `Issue`.
+#
+# Should be accessed from `GithubAPI::load_issue_event`.
+#
+# See <https://developer.github.com/v3/issues/events/>.
+class IssueEvent
+	super RepoEntity
+
+	redef var key is lazy do return "{repo.key}/issues/events/{id}"
+
+	# Event id on Github.
+	var id: Int
+
+	redef init from_json(api, repo, json) do
+		self.id = json["id"].as(Int)
+		super
+	end
+
+	# Issue that contains `self`.
+	fun issue: Issue do
+		return new Issue.from_json(api, repo, json["issue"].as(JsonObject))
+	end
+
+	# User that initiated the event.
+	fun actor: User do
+		return new User.from_json(api, json["actor"].as(JsonObject))
+	end
+
+	# Creation time in ISODate format.
+	fun created_at: ISODate do
+		return new ISODate.from_string(json["created_at"].to_s)
+	end
+
+	# Event descriptor.
+	fun event: String do return json["event"].to_s
+
+	# Commit linked to this event (if any).
+	fun commit_id: nullable String do
+		var res = json["commit_id"]
+		if res == null then return null
+		return res.to_s
+	end
+
+	# Label linked to this event (if any).
+	fun labl: nullable Label do
+		var res = json["label"]
+		if not res isa JsonObject then return null
+		return new Label.from_json(api, repo, res)
+	end
+
+	# User linked to this event (if any).
+	fun assignee: nullable User do
+		var res = json["assignee"]
+		if not res isa JsonObject then return null
+		return new User.from_json(api, res)
+	end
+
+	# Milestone linked to this event (if any).
+	fun milestone: nullable Milestone do
+		var res = json["milestone"]
+		if not res isa JsonObject then return null
+		return new Milestone.from_json(api, repo, res)
+	end
+
+	# Rename linked to this event (if any).
+	fun rename: nullable RenameAction do
+		var res = json["rename"]
+		if res == null then return null
+		return new RenameAction(res.as(JsonObject))
+	end
+end
+
+# A rename action maintains the name before and after a renaming action.
+class RenameAction
+
+	# JSON content.
+	var json: JsonObject
+
+	# Name before renaming.
+	fun from: String do return json["from"].to_s
+
+	# Name after renaming.
+	fun to: String do return json["to"].to_s
 end
