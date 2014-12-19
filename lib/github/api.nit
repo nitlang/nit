@@ -86,7 +86,7 @@ class GithubAPI
 	# Execute a GET request on Github API.
 	#
 	# This method returns raw json data.
-	# See other `get_*` methods to use more expressive types.
+	# See other `load_*` methods to use more expressive types.
 	#
 	#     var api = new GithubAPI(get_github_oauth)
 	#     var obj = api.get("repos/privat/nit")
