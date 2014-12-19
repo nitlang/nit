@@ -60,4 +60,4 @@ end
 var self_mm = mainmodule
 var self_args = arguments
 
-modelbuilder.run_naive_interpreter(self_mm, self_args)
+modelbuilder.run_virtual_machine(self_mm, self_args)
