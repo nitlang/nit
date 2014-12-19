@@ -44,11 +44,16 @@ redef class ModelBuilder
 	# Retrieve the associated AST node of a mpropertydef.
 	# This method is used to associate model entity with syntactic entities.
 	#
-	# If the property definition is not associated with a node, returns node.
+	# If the property definition is not associated with a node, returns `null`.
 	fun mpropdef2node(mpropdef: MPropDef): nullable ANode
 	do
-		var res: nullable ANode = mpropdef2npropdef.get_or_null(mpropdef)
-		if res != null then return res
+		var res
+		res = mpropdef2npropdef.get_or_null(mpropdef)
+		if res != null then
+			# Run the phases on it
+			toolcontext.run_phases_on_npropdef(res)
+			return res
+		end
 		if mpropdef isa MMethodDef and mpropdef.mproperty.is_root_init then
 			res = mclassdef2nclassdef.get_or_null(mpropdef.mclassdef)
 			if res != null then return res
@@ -65,6 +70,8 @@ redef class ModelBuilder
 		if n == null then return res
 		for npropdef in n.n_propdefs do
 			if npropdef isa AAttrPropdef then
+				# Run the phases on it
+				toolcontext.run_phases_on_npropdef(npropdef)
 				res.add(npropdef)
 			end
 		end
