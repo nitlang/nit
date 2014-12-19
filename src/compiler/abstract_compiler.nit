@@ -1534,6 +1534,15 @@ abstract class AbstractCompilerVisitor
 	fun stmt(nexpr: nullable AExpr)
 	do
 		if nexpr == null then return
+
+		var narray = nexpr.comprehension
+		if narray != null then
+			var recv = frame.comprehension.as(not null)
+			var val = expr(nexpr, narray.element_mtype)
+			compile_callsite(narray.push_callsite.as(not null), [recv, val])
+			return
+		end
+
 		var old = self.current_node
 		self.current_node = nexpr
 		nexpr.stmt(self)
@@ -1683,6 +1692,9 @@ class Frame
 	# Labels associated to a each escapemarks.
 	# Because of inlinings, escape-marks must be associated to their context (the frame)
 	private var escapemark_names = new HashMap[EscapeMark, String]
+
+	# The array comprehension currently filled, if any
+	private var comprehension: nullable RuntimeVariable = null
 end
 
 redef class MType
@@ -2652,13 +2664,18 @@ end
 redef class AArrayExpr
 	redef fun expr(v)
 	do
-		var mtype = self.mtype.as(MClassType).arguments.first
+		var mtype = self.element_mtype.as(not null)
 		var array = new Array[RuntimeVariable]
-		for nexpr in self.n_exprs.n_exprs do
-			var i = v.expr(nexpr, mtype)
-			array.add(i)
+		var res = v.array_instance(array, mtype)
+
+		var old_comprehension = v.frame.comprehension
+		v.frame.comprehension = res
+		for nexpr in self.n_exprs do
+			v.stmt(nexpr)
 		end
-		return v.array_instance(array, mtype)
+		v.frame.comprehension = old_comprehension
+
+		return res
 	end
 end
 

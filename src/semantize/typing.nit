@@ -633,6 +633,12 @@ redef class AExpr
 	do
 		v.error(self, "no implemented accept_typing for {self.class_name}")
 	end
+
+	# Is non-null if `self` is a leaf of a comprehension array construction.
+	# In this case, the enclosing literal array node is designated.
+	# The result of the evaluation of `self` must be
+	# stored inside the designated array (there is an implicit `push`)
+	var comprehension: nullable AArrayExpr = null
 end
 
 redef class ABlockExpr
@@ -857,7 +863,12 @@ redef class AIfExpr
 
 		v.visit_stmt(n_then)
 		v.visit_stmt(n_else)
+
 		self.is_typed = true
+
+		if n_then != null and n_else == null then
+			self.mtype = n_then.mtype
+		end
 	end
 end
 
@@ -1043,6 +1054,7 @@ redef class AForExpr
 		self.do_type_iterator(v, mtype)
 
 		v.visit_stmt(n_block)
+		self.mtype = n_block.mtype
 		self.is_typed = true
 	end
 end
@@ -1180,9 +1192,31 @@ redef class ASuperstringExpr
 end
 
 redef class AArrayExpr
+	# The `with_capacity` method on Array
 	var with_capacity_callsite: nullable CallSite
+
+	# The `push` method on arrays
 	var push_callsite: nullable CallSite
 
+	# The element of each type
+	var element_mtype: nullable MType
+
+	# Set that `self` is a part of comprehension array `na`
+	# If `self` is a `for`, or a `if`, then `set_comprehension` is recursively applied.
+	private fun set_comprehension(n: nullable AExpr)
+	do
+		if n == null then
+			return
+		else if n isa AForExpr then
+			set_comprehension(n.n_block)
+		else if n isa AIfExpr then
+			set_comprehension(n.n_then)
+			set_comprehension(n.n_else)
+		else
+			# is a leave
+			n.comprehension = self
+		end
+	end
 	redef fun accept_typing(v)
 	do
 		var mtype: nullable MType = null
@@ -1193,11 +1227,12 @@ redef class AArrayExpr
 		end
 		var mtypes = new Array[nullable MType]
 		var useless = false
-		for e in self.n_exprs.n_exprs do
+		for e in self.n_exprs do
 			var t = v.visit_expr(e)
 			if t == null then
 				return # Skip error
 			end
+			set_comprehension(e)
 			if mtype != null then
 				if v.check_subtype(e, t, mtype) == null then return # Skip error
 				if t == mtype then useless = true
@@ -1216,6 +1251,9 @@ redef class AArrayExpr
 			assert ntype != null
 			v.modelbuilder.warning(ntype, "useless-type", "Warning: useless type declaration `{mtype}` in literal Array since it can be inferred from the elements type.")
 		end
+
+		self.element_mtype = mtype
+
 		var mclass = v.get_mclass(self, "Array")
 		if mclass == null then return # Forward error
 		var array_mtype = mclass.get_mtype([mtype])

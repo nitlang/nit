@@ -2044,7 +2044,7 @@ end
 redef class AArrayExpr
 	redef fun accept_pretty_printer(v) do
 		v.consume "["
-		v.visit_list n_exprs.n_exprs
+		v.visit_list n_exprs
 		v.consume "]"
 	end
 end

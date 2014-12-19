@@ -173,14 +173,20 @@ class NaiveInterpreter
 	# If `n` cannot be evaluated, then aborts.
 	fun stmt(n: nullable AExpr)
 	do
-		if n != null then
-			var frame = self.frame
-			var old = frame.current_node
-			frame.current_node = n
-			#n.debug("Execute stmt")
-			n.stmt(self)
-			frame.current_node = old
+		if n == null then return
+
+		if n.comprehension != null then
+			var comprehension = frame.comprehension.as(not null)
+			var i = expr(n)
+			if i != null then comprehension.add(i)
+			return
 		end
+
+		var frame = self.frame
+		var old = frame.current_node
+		frame.current_node = n
+		n.stmt(self)
+		frame.current_node = old
 	end
 
 	# Map used to store values of nodes that must be evaluated once in the system (`AOnceExpr`)
@@ -664,6 +670,7 @@ class Frame
 	var arguments: Array[Instance]
 	# Mapping between a variable and the current value
 	private var map: Map[Variable, Instance] = new HashMap[Variable, Instance]
+	var comprehension: nullable Array[Instance] = null
 end
 
 redef class ANode
@@ -1532,11 +1539,18 @@ redef class AArrayExpr
 	redef fun expr(v)
 	do
 		var val = new Array[Instance]
-		for nexpr in self.n_exprs.n_exprs do
-			var i = v.expr(nexpr)
-			if i == null then return null
-			val.add(i)
+		var old_comprehension = v.frame.comprehension
+		v.frame.comprehension = val
+		for nexpr in self.n_exprs do
+			if nexpr isa AForExpr then
+				v.stmt(nexpr)
+			else
+				var i = v.expr(nexpr)
+				if i == null then return null
+				val.add(i)
+			end
 		end
+		v.frame.comprehension = old_comprehension
 		var mtype = v.unanchor_type(self.mtype.as(not null)).as(MClassType)
 		var elttype = mtype.arguments.first
 		return v.array_instance(val, elttype)
