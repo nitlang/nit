@@ -162,11 +162,28 @@ class GithubAPI
 	#     var repo = api.load_repo("privat/nit")
 	#     assert repo.name == "nit"
 	#     assert repo.owner.login == "privat"
+	#     assert repo.default_branch.name == "master"
 	fun load_repo(full_name: String): nullable Repo do
 		var repo = new Repo(self, full_name)
 		repo.load_from_github
 		if was_error then return null
 		return repo
+	end
+
+	# Get the Github branch with `name`.
+	#
+	# Returns `null` if the branch cannot be found.
+	#
+	#     var api = new GithubAPI(get_github_oauth)
+	#     var repo = api.load_repo("privat/nit")
+	#     assert repo isa Repo
+	#     var branch = api.load_branch(repo, "master")
+	#     assert branch.name == "master"
+	fun load_branch(repo: Repo, name: String): nullable Branch do
+		var branch = new Branch(self, repo, name)
+		branch.load_from_github
+		if was_error then return null
+		return branch
 	end
 end
 
@@ -250,5 +267,61 @@ class Repo
 	# Get the repo owner.
 	fun owner: User do
 		return new User.from_json(api, json["owner"].as(JsonObject))
+	end
+
+	# List of branches associated with their names.
+	fun branches: Map[String, Branch] do
+		api.message(1, "Get branches for {full_name}")
+		var array = api.get("repos/{full_name}/branches")
+		var res = new HashMap[String, Branch]
+		if not array isa JsonArray then return res
+		for obj in array do
+			if not obj isa JsonObject then continue
+			var name = obj["name"].to_s
+			res[name] = new Branch.from_json(api, self, obj)
+		end
+		return res
+	end
+
+	# Repo default branch.
+	fun default_branch: Branch do
+		var name = json["default_branch"].to_s
+		var branch = api.load_branch(self, name)
+		assert branch isa Branch
+		return branch
+	end
+end
+
+# A `RepoEntity` is something contained in a `Repo`.
+abstract class RepoEntity
+	super GithubEntity
+
+	# Repo that contains `self`.
+	var repo: Repo
+
+	# Init `self` from a `json` object.
+	init from_json(api: GithubAPI, repo: Repo, json: JsonObject) do
+		self.api = api
+		self.repo = repo
+		self.json = json
+	end
+end
+
+# A Github branch.
+#
+# Should be accessed from `GithubAPI::load_branch`.
+#
+# See <https://developer.github.com/v3/repos/#list-branches>.
+class Branch
+	super RepoEntity
+
+	redef var key is lazy do return "{repo.key}/branches/{name}"
+
+	# Branch name.
+	var name: String
+
+	redef init from_json(api, repo, json) do
+		self.name = json["name"].to_s
+		super
 	end
 end
