@@ -859,12 +859,17 @@ class AModule
 	var n_classdefs = new ANodes[AClassdef](self)
 end
 
-# The declaration of the module with the documentation, name, and annotations
-class AModuledecl
+# Abstract class for definition of entities
+abstract class ADefinition
 	super Prod
 	var n_doc: nullable ADoc = null is writable
 	var n_kwredef: nullable TKwredef = null is writable
-	var n_visibility: AVisibility is writable, noinit
+	var n_visibility: nullable AVisibility = null is writable
+end
+
+# The declaration of the module with the documentation, name, and annotations
+class AModuledecl
+	super ADefinition
 	var n_kwmodule: TKwmodule is writable, noinit
 	var n_name: AModuleName is writable, noinit
 end
@@ -872,21 +877,19 @@ end
 # A import clause of a module
 abstract class AImport
 	super Prod
+	var n_visibility: AVisibility is writable, noinit
+	var n_kwimport: TKwimport is writable, noinit
 end
 
 # A standard import clause. eg `import x`
 class AStdImport
 	super AImport
-	var n_visibility: AVisibility is writable, noinit
-	var n_kwimport: TKwimport is writable, noinit
 	var n_name: AModuleName is writable, noinit
 end
 
 # The special import clause of the kernel module. eg `import end`
 class ANoImport
 	super AImport
-	var n_visibility: AVisibility is writable, noinit
-	var n_kwimport: TKwimport is writable, noinit
 	var n_kwend: TKwend is writable, noinit
 end
 
@@ -932,9 +935,7 @@ end
 # A standard class definition with a name, superclasses and properties
 class AStdClassdef
 	super AClassdef
-	var n_doc: nullable ADoc = null is writable
-	var n_kwredef: nullable TKwredef = null is writable
-	var n_visibility: AVisibility is writable, noinit
+	super ADefinition
 	var n_classkind: AClasskind is writable, noinit
 	var n_id: nullable TClassid = null is writable
 	var n_formaldefs = new ANodes[AFormaldef](self)
@@ -1008,10 +1009,7 @@ end
 
 # The definition of a property
 abstract class APropdef
-	super Prod
-	var n_doc: nullable ADoc = null is writable
-	var n_kwredef: nullable TKwredef = null is writable
-	var n_visibility: nullable AVisibility = null is writable
+	super ADefinition
 end
 
 # A definition of an attribute
@@ -1480,32 +1478,31 @@ abstract class ABoolExpr
 	super AExpr
 end
 
-# A `or` expression 
-class AOrExpr
+# Something that is binary boolean expression
+abstract class ABinBoolExpr
 	super ABoolExpr
 	var n_expr: AExpr is writable, noinit
 	var n_expr2: AExpr is writable, noinit
+end
+
+# A `or` expression
+class AOrExpr
+	super ABinBoolExpr
 end
 
 # A `and` expression
 class AAndExpr
-	super ABoolExpr
-	var n_expr: AExpr is writable, noinit
-	var n_expr2: AExpr is writable, noinit
+	super ABinBoolExpr
 end
 
 # A `or else` expression
 class AOrElseExpr
-	super ABoolExpr
-	var n_expr: AExpr is writable, noinit
-	var n_expr2: AExpr is writable, noinit
+	super ABinBoolExpr
 end
 
 # A `implies` expression
 class AImpliesExpr
-	super ABoolExpr
-	var n_expr: AExpr is writable, noinit
-	var n_expr2: AExpr is writable, noinit
+	super ABinBoolExpr
 end
 
 # A `not` expression
@@ -1869,25 +1866,26 @@ class AParExpr
 	var n_cpar: TCpar is writable, noinit
 end
 
-# A type cast. eg `x.as(T)`
-class AAsCastExpr
+# A cast, against a type or `not null`
+class AAsCastForm
 	super AExpr
 	var n_expr: AExpr is writable, noinit
 	var n_kwas: TKwas is writable, noinit
 	var n_opar: nullable TOpar = null is writable
-	var n_type: AType is writable, noinit
 	var n_cpar: nullable TCpar = null is writable
+end
+
+# A type cast. eg `x.as(T)`
+class AAsCastExpr
+	super AAsCastForm
+	var n_type: AType is writable, noinit
 end
 
 # A as-not-null cast. eg `x.as(not null)`
 class AAsNotnullExpr
-	super AExpr
-	var n_expr: AExpr is writable, noinit
-	var n_kwas: TKwas is writable, noinit
-	var n_opar: nullable TOpar = null is writable
+	super AAsCastForm
 	var n_kwnot: TKwnot is writable, noinit
 	var n_kwnull: TKwnull is writable, noinit
-	var n_cpar: nullable TCpar = null is writable
 end
 
 # A is-set check of old-style attributes. eg `isset x._a`
@@ -2030,10 +2028,7 @@ end
 
 # A single annotation
 class AAnnotation
-	super Prod
-	var n_doc: nullable ADoc = null is writable
-	var n_kwredef: nullable TKwredef = null is writable
-	var n_visibility: nullable AVisibility is writable
+	super ADefinition
 	var n_atid: AAtid is writable, noinit
 	var n_opar: nullable TOpar = null is writable
 	var n_args = new ANodes[AExpr](self)
