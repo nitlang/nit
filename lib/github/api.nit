@@ -636,6 +636,17 @@ class Commit
 		return new ISODate.from_string(author["date"].to_s)
 	end
 
+	# List files staged in this commit.
+	fun files: Array[GithubFile] do
+		var res = new Array[GithubFile]
+		var files = json["files"]
+		if not files isa JsonArray then return res
+		for obj in files do
+			res.add(new GithubFile(obj.as(JsonObject)))
+		end
+		return res
+	end
+
 	# Commit message.
 	fun message: String do return json["commit"].as(JsonObject)["message"].to_s
 end
@@ -1199,4 +1210,16 @@ class ContributorStats
 
 	# ContributorStats can be compared on the total amount of commits.
 	redef fun <(o) do return total < o.total
+end
+
+# A Github file representation.
+#
+# Mostly a wrapper around a json object.
+class GithubFile
+
+	# Json content.
+	var json: JsonObject
+
+	# File name.
+	fun filename: String do return json["filename"].to_s
 end
