@@ -59,7 +59,7 @@ Edge
 7:MEntity
 6:MClass
 =properties=JsonObject(5):
-{"kind":"class","visibility":"package","name":"Foo","location":"%SOURCE_DIRECTORY%\/Foo.java:19,1--19,1","mdoc":["A class in the root namespace"]}
+{"kind":"class","visibility":"package","name":"Foo","location":"%SOURCE_DIRECTORY%\/Foo.java:19,1--19,1","mdoc":["A class in the root namespace."]}
 ----
 =to=Entity#0:
 =labels=Array(4):
@@ -91,7 +91,7 @@ Edge
 7:MEntity
 6:MClass
 =properties=JsonObject(5):
-{"kind":"class","visibility":"package","name":"Foo","location":"%SOURCE_DIRECTORY%\/Foo.java:19,1--19,1","mdoc":["A class in the root namespace"]}
+{"kind":"class","visibility":"package","name":"Foo","location":"%SOURCE_DIRECTORY%\/Foo.java:19,1--19,1","mdoc":["A class in the root namespace."]}
 
 
 Edge
@@ -105,7 +105,7 @@ Edge
 7:MEntity
 9:MClassDef
 =properties=JsonObject(4):
-{"location":"%SOURCE_DIRECTORY%\/Foo.java:19,1--19,1","is_intro":true,"name":"Foo","mdoc":["A class in the root namespace"]}
+{"location":"%SOURCE_DIRECTORY%\/Foo.java:19,1--19,1","is_intro":true,"name":"Foo","mdoc":["A class in the root namespace."]}
 ----
 =to=Entity#0:
 =labels=Array(4):
@@ -128,7 +128,7 @@ Edge
 7:MEntity
 9:MClassDef
 =properties=JsonObject(4):
-{"location":"%SOURCE_DIRECTORY%\/Foo.java:19,1--19,1","is_intro":true,"name":"Foo","mdoc":["A class in the root namespace"]}
+{"location":"%SOURCE_DIRECTORY%\/Foo.java:19,1--19,1","is_intro":true,"name":"Foo","mdoc":["A class in the root namespace."]}
 ----
 =to=Entity#9:class_foo
 =labels=Array(3):
@@ -136,7 +136,7 @@ Edge
 7:MEntity
 6:MClass
 =properties=JsonObject(5):
-{"kind":"class","visibility":"package","name":"Foo","location":"%SOURCE_DIRECTORY%\/Foo.java:19,1--19,1","mdoc":["A class in the root namespace"]}
+{"kind":"class","visibility":"package","name":"Foo","location":"%SOURCE_DIRECTORY%\/Foo.java:19,1--19,1","mdoc":["A class in the root namespace."]}
 
 
 Edge
@@ -158,7 +158,7 @@ Edge
 7:MEntity
 7:MModule
 =properties=JsonObject(3):
-{"location":"%SOURCE_DIRECTORY%\/Foo.java:1,1--1,1","name":"Foo","mdoc":["A class in the root namespace"]}
+{"location":"%SOURCE_DIRECTORY%\/Foo.java:1,1--1,1","name":"Foo","mdoc":["A class in the root namespace."]}
 
 
 Edge
@@ -172,7 +172,7 @@ Edge
 7:MEntity
 7:MModule
 =properties=JsonObject(3):
-{"location":"%SOURCE_DIRECTORY%\/Foo.java:1,1--1,1","name":"Foo","mdoc":["A class in the root namespace"]}
+{"location":"%SOURCE_DIRECTORY%\/Foo.java:1,1--1,1","name":"Foo","mdoc":["A class in the root namespace."]}
 ----
 =to=Entity#9:class_foo
 =labels=Array(3):
@@ -180,7 +180,7 @@ Edge
 7:MEntity
 6:MClass
 =properties=JsonObject(5):
-{"kind":"class","visibility":"package","name":"Foo","location":"%SOURCE_DIRECTORY%\/Foo.java:19,1--19,1","mdoc":["A class in the root namespace"]}
+{"kind":"class","visibility":"package","name":"Foo","location":"%SOURCE_DIRECTORY%\/Foo.java:19,1--19,1","mdoc":["A class in the root namespace."]}
 
 
 Edge
@@ -194,7 +194,7 @@ Edge
 7:MEntity
 7:MModule
 =properties=JsonObject(3):
-{"location":"%SOURCE_DIRECTORY%\/Foo.java:1,1--1,1","name":"Foo","mdoc":["A class in the root namespace"]}
+{"location":"%SOURCE_DIRECTORY%\/Foo.java:1,1--1,1","name":"Foo","mdoc":["A class in the root namespace."]}
 ----
 =to=Entity#0:
 =labels=Array(3):
@@ -202,7 +202,7 @@ Edge
 7:MEntity
 9:MClassDef
 =properties=JsonObject(4):
-{"location":"%SOURCE_DIRECTORY%\/Foo.java:19,1--19,1","is_intro":true,"name":"Foo","mdoc":["A class in the root namespace"]}
+{"location":"%SOURCE_DIRECTORY%\/Foo.java:19,1--19,1","is_intro":true,"name":"Foo","mdoc":["A class in the root namespace."]}
 
 
 ---===DONE===---

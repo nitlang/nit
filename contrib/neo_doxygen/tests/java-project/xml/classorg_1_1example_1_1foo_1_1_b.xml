@@ -49,9 +49,9 @@
         <name>baz</name>
         <reimplements refid="interfaceorg_1_1example_1_1foo_1_1_c_1a28ac7ce349ebb3e4a7747a8dd951582b">baz</reimplements>
         <briefdescription>
-        </briefdescription>
+<para>Some overriden documentation. </para>        </briefdescription>
         <detaileddescription>
-<para>Some overriden documentation. </para>        </detaileddescription>
+        </detaileddescription>
         <inbodydescription>
         </inbodydescription>
         <location file="%SOURCE_DIRECTORY%/org/example/foo/B.java" line="28" column="1" bodyfile="%SOURCE_DIRECTORY%/org/example/foo/B.java" bodystart="28" bodyend="28"/>

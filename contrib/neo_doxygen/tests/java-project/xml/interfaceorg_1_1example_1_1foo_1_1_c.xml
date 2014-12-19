@@ -11,9 +11,9 @@
         <name>THE_ANSWER</name>
         <initializer>= 42L</initializer>
         <briefdescription>
-        </briefdescription>
+<para>“Answer to the Ultimate Question of Life, the Universe, and Everything. </para>        </briefdescription>
         <detaileddescription>
-<para>“Answer to the Ultimate Question of Life, the Universe, and Everything.“ </para>        </detaileddescription>
+<para>“ </para>        </detaileddescription>
         <inbodydescription>
         </inbodydescription>
         <location file="%SOURCE_DIRECTORY%/org/example/foo/C.java" line="25" column="1" bodyfile="%SOURCE_DIRECTORY%/org/example/foo/C.java" bodystart="25" bodyend="-1"/>
@@ -27,18 +27,18 @@
         <name>baz</name>
         <reimplementedby refid="classorg_1_1example_1_1foo_1_1_b_1a733f4e076f29c7d0c41ed258199ea1d9">baz</reimplementedby>
         <briefdescription>
-        </briefdescription>
+<para><ref refid="classorg_1_1example_1_1foo_1_1_a" kindref="compound">A</ref> function with implicit modifiers. </para>        </briefdescription>
         <detaileddescription>
-<para><ref refid="classorg_1_1example_1_1foo_1_1_a" kindref="compound">A</ref> function with implicit modifiers. </para>        </detaileddescription>
+        </detaileddescription>
         <inbodydescription>
         </inbodydescription>
         <location file="%SOURCE_DIRECTORY%/org/example/foo/C.java" line="30" column="1"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
-    </briefdescription>
+<para>An interface. </para>    </briefdescription>
     <detaileddescription>
-<para>An interface </para>    </detaileddescription>
+    </detaileddescription>
     <inheritancegraph>
       <node id="10">
         <label>org.example.foo.B</label>

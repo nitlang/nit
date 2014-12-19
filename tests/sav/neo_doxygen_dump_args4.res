@@ -243,7 +243,7 @@ Edge
 7:MEntity
 7:MModule
 =properties=JsonObject(3):
-{"location":"%SOURCE_DIRECTORY%\/org\/example\/foo\/C.java:1,1--1,1","name":"C","mdoc":["An interface"]}
+{"location":"%SOURCE_DIRECTORY%\/org\/example\/foo\/C.java:1,1--1,1","name":"C","mdoc":["An interface."]}
 
 
 Edge
@@ -257,7 +257,7 @@ Edge
 7:MEntity
 7:MModule
 =properties=JsonObject(3):
-{"location":"%SOURCE_DIRECTORY%\/org\/example\/foo\/C.java:1,1--1,1","name":"C","mdoc":["An interface"]}
+{"location":"%SOURCE_DIRECTORY%\/org\/example\/foo\/C.java:1,1--1,1","name":"C","mdoc":["An interface."]}
 ----
 =to=Entity#36:interfaceorg_1_1example_1_1foo_1_1_c
 =labels=Array(3):
@@ -265,7 +265,7 @@ Edge
 7:MEntity
 6:MClass
 =properties=JsonObject(5):
-{"kind":"interface","visibility":"public","name":"C","location":"%SOURCE_DIRECTORY%\/org\/example\/foo\/C.java:21,1--31,1","mdoc":["An interface"]}
+{"kind":"interface","visibility":"public","name":"C","location":"%SOURCE_DIRECTORY%\/org\/example\/foo\/C.java:21,1--31,1","mdoc":["An interface."]}
 
 
 Edge
@@ -279,7 +279,7 @@ Edge
 7:MEntity
 7:MModule
 =properties=JsonObject(3):
-{"location":"%SOURCE_DIRECTORY%\/org\/example\/foo\/C.java:1,1--1,1","name":"C","mdoc":["An interface"]}
+{"location":"%SOURCE_DIRECTORY%\/org\/example\/foo\/C.java:1,1--1,1","name":"C","mdoc":["An interface."]}
 ----
 =to=Entity#0:
 =labels=Array(3):
@@ -287,7 +287,7 @@ Edge
 7:MEntity
 9:MClassDef
 =properties=JsonObject(4):
-{"location":"%SOURCE_DIRECTORY%\/org\/example\/foo\/C.java:21,1--31,1","is_intro":true,"name":"C","mdoc":["An interface"]}
+{"location":"%SOURCE_DIRECTORY%\/org\/example\/foo\/C.java:21,1--31,1","is_intro":true,"name":"C","mdoc":["An interface."]}
 
 
 Edge
@@ -1457,7 +1457,7 @@ Edge
 8:MPropDef
 13:MAttributeDef
 =properties=JsonObject(5):
-{"location":"%SOURCE_DIRECTORY%\/org\/example\/foo\/C.java:25,1---1,1","visibility":"public","name":"THE_ANSWER","mdoc":["\u000e2\u00080\u0009cAnswer to the Ultimate Question of Life, the Universe, and Everything.\u000e2\u00080\u0009c"],"is_intro":true}
+{"location":"%SOURCE_DIRECTORY%\/org\/example\/foo\/C.java:25,1---1,1","visibility":"public","name":"THE_ANSWER","mdoc":["\u000e2\u00080\u0009cAnswer to the Ultimate Question of Life, the Universe, and Everything.","\u000e2\u00080\u0009c"],"is_intro":true}
 ----
 =to=Entity#0:
 =labels=Array(4):
@@ -1481,7 +1481,7 @@ Edge
 8:MPropDef
 13:MAttributeDef
 =properties=JsonObject(5):
-{"location":"%SOURCE_DIRECTORY%\/org\/example\/foo\/C.java:25,1---1,1","visibility":"public","name":"THE_ANSWER","mdoc":["\u000e2\u00080\u0009cAnswer to the Ultimate Question of Life, the Universe, and Everything.\u000e2\u00080\u0009c"],"is_intro":true}
+{"location":"%SOURCE_DIRECTORY%\/org\/example\/foo\/C.java:25,1---1,1","visibility":"public","name":"THE_ANSWER","mdoc":["\u000e2\u00080\u0009cAnswer to the Ultimate Question of Life, the Universe, and Everything.","\u000e2\u00080\u0009c"],"is_intro":true}
 ----
 =to=Entity#0:
 =labels=Array(4):
@@ -1576,7 +1576,7 @@ Edge
 7:MEntity
 6:MClass
 =properties=JsonObject(5):
-{"kind":"interface","visibility":"public","name":"C","location":"%SOURCE_DIRECTORY%\/org\/example\/foo\/C.java:21,1--31,1","mdoc":["An interface"]}
+{"kind":"interface","visibility":"public","name":"C","location":"%SOURCE_DIRECTORY%\/org\/example\/foo\/C.java:21,1--31,1","mdoc":["An interface."]}
 ----
 =to=Entity#0:
 =labels=Array(4):
@@ -1608,7 +1608,7 @@ Edge
 7:MEntity
 6:MClass
 =properties=JsonObject(5):
-{"kind":"interface","visibility":"public","name":"C","location":"%SOURCE_DIRECTORY%\/org\/example\/foo\/C.java:21,1--31,1","mdoc":["An interface"]}
+{"kind":"interface","visibility":"public","name":"C","location":"%SOURCE_DIRECTORY%\/org\/example\/foo\/C.java:21,1--31,1","mdoc":["An interface."]}
 
 
 Edge
@@ -1622,7 +1622,7 @@ Edge
 7:MEntity
 9:MClassDef
 =properties=JsonObject(4):
-{"location":"%SOURCE_DIRECTORY%\/org\/example\/foo\/C.java:21,1--31,1","is_intro":true,"name":"C","mdoc":["An interface"]}
+{"location":"%SOURCE_DIRECTORY%\/org\/example\/foo\/C.java:21,1--31,1","is_intro":true,"name":"C","mdoc":["An interface."]}
 ----
 =to=Entity#0:
 =labels=Array(4):
@@ -1645,7 +1645,7 @@ Edge
 7:MEntity
 9:MClassDef
 =properties=JsonObject(4):
-{"location":"%SOURCE_DIRECTORY%\/org\/example\/foo\/C.java:21,1--31,1","is_intro":true,"name":"C","mdoc":["An interface"]}
+{"location":"%SOURCE_DIRECTORY%\/org\/example\/foo\/C.java:21,1--31,1","is_intro":true,"name":"C","mdoc":["An interface."]}
 ----
 =to=Entity#36:interfaceorg_1_1example_1_1foo_1_1_c
 =labels=Array(3):
@@ -1653,7 +1653,7 @@ Edge
 7:MEntity
 6:MClass
 =properties=JsonObject(5):
-{"kind":"interface","visibility":"public","name":"C","location":"%SOURCE_DIRECTORY%\/org\/example\/foo\/C.java:21,1--31,1","mdoc":["An interface"]}
+{"kind":"interface","visibility":"public","name":"C","location":"%SOURCE_DIRECTORY%\/org\/example\/foo\/C.java:21,1--31,1","mdoc":["An interface."]}
 
 
 Edge
@@ -1667,7 +1667,7 @@ Edge
 7:MEntity
 9:MClassDef
 =properties=JsonObject(4):
-{"location":"%SOURCE_DIRECTORY%\/org\/example\/foo\/C.java:21,1--31,1","is_intro":true,"name":"C","mdoc":["An interface"]}
+{"location":"%SOURCE_DIRECTORY%\/org\/example\/foo\/C.java:21,1--31,1","is_intro":true,"name":"C","mdoc":["An interface."]}
 ----
 =to=Entity#0:
 =labels=Array(4):
@@ -1699,7 +1699,7 @@ Edge
 7:MEntity
 9:MClassDef
 =properties=JsonObject(4):
-{"location":"%SOURCE_DIRECTORY%\/org\/example\/foo\/C.java:21,1--31,1","is_intro":true,"name":"C","mdoc":["An interface"]}
+{"location":"%SOURCE_DIRECTORY%\/org\/example\/foo\/C.java:21,1--31,1","is_intro":true,"name":"C","mdoc":["An interface."]}
 
 
 Edge
@@ -1713,7 +1713,7 @@ Edge
 7:MEntity
 9:MClassDef
 =properties=JsonObject(4):
-{"location":"%SOURCE_DIRECTORY%\/org\/example\/foo\/C.java:21,1--31,1","is_intro":true,"name":"C","mdoc":["An interface"]}
+{"location":"%SOURCE_DIRECTORY%\/org\/example\/foo\/C.java:21,1--31,1","is_intro":true,"name":"C","mdoc":["An interface."]}
 ----
 =to=Entity#71:interfaceorg_1_1example_1_1foo_1_1_c_1a4e97061eb40b045e820de05b33c43d21
 =labels=Array(4):
@@ -1722,7 +1722,7 @@ Edge
 8:MPropDef
 13:MAttributeDef
 =properties=JsonObject(5):
-{"location":"%SOURCE_DIRECTORY%\/org\/example\/foo\/C.java:25,1---1,1","visibility":"public","name":"THE_ANSWER","mdoc":["\u000e2\u00080\u0009cAnswer to the Ultimate Question of Life, the Universe, and Everything.\u000e2\u00080\u0009c"],"is_intro":true}
+{"location":"%SOURCE_DIRECTORY%\/org\/example\/foo\/C.java:25,1---1,1","visibility":"public","name":"THE_ANSWER","mdoc":["\u000e2\u00080\u0009cAnswer to the Ultimate Question of Life, the Universe, and Everything.","\u000e2\u00080\u0009c"],"is_intro":true}
 
 
 Edge
@@ -1736,7 +1736,7 @@ Edge
 7:MEntity
 9:MClassDef
 =properties=JsonObject(4):
-{"location":"%SOURCE_DIRECTORY%\/org\/example\/foo\/C.java:21,1--31,1","is_intro":true,"name":"C","mdoc":["An interface"]}
+{"location":"%SOURCE_DIRECTORY%\/org\/example\/foo\/C.java:21,1--31,1","is_intro":true,"name":"C","mdoc":["An interface."]}
 ----
 =to=Entity#0:
 =labels=Array(4):
@@ -1768,7 +1768,7 @@ Edge
 7:MEntity
 9:MClassDef
 =properties=JsonObject(4):
-{"location":"%SOURCE_DIRECTORY%\/org\/example\/foo\/C.java:21,1--31,1","is_intro":true,"name":"C","mdoc":["An interface"]}
+{"location":"%SOURCE_DIRECTORY%\/org\/example\/foo\/C.java:21,1--31,1","is_intro":true,"name":"C","mdoc":["An interface."]}
 
 
 Edge
@@ -1782,7 +1782,7 @@ Edge
 7:MEntity
 9:MClassDef
 =properties=JsonObject(4):
-{"location":"%SOURCE_DIRECTORY%\/org\/example\/foo\/C.java:21,1--31,1","is_intro":true,"name":"C","mdoc":["An interface"]}
+{"location":"%SOURCE_DIRECTORY%\/org\/example\/foo\/C.java:21,1--31,1","is_intro":true,"name":"C","mdoc":["An interface."]}
 ----
 =to=Entity#71:interfaceorg_1_1example_1_1foo_1_1_c_1a28ac7ce349ebb3e4a7747a8dd951582b
 =labels=Array(4):

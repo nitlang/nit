@@ -18,9 +18,9 @@
           <declname>y</declname>
         </param>
         <briefdescription>
-        </briefdescription>
+<para>Does something... </para>        </briefdescription>
         <detaileddescription>
-<para>Does something... </para>        </detaileddescription>
+        </detaileddescription>
         <inbodydescription>
         </inbodydescription>
         <location file="%SOURCE_DIRECTORY%/org/example/foo/A.java" line="22" column="1"/>
