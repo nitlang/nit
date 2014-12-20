@@ -86,6 +86,15 @@ abstract class NeoNodeCollection
 		node[id_property] = id
 	end
 
+	# Enlarge the collection to have at least the specified capacity.
+	#
+	# The capacity is specified in number of nodes. Used to minimize the
+	# number of times the collection need to be resized when adding nodes
+	# in batches.
+	#
+	# Do nothing by default.
+	fun enlarge(cap: Int) do end
+
 	# Add the specified node to the graph and set its local ID.
 	#
 	# SEE: `add`
@@ -138,6 +147,11 @@ abstract class NeoNodeCollection
 			if node == n then remove_node(n)
 		end
 	end
+
+	# Optimize the collection, possibly by rewritting it.
+	#
+	# The local ID of the elements may be changed by this method.
+	fun compact do end
 end
 
 # A mean to save and load a Neo4j graph.
