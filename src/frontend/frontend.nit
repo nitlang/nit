@@ -33,6 +33,8 @@ redef class ToolContext
 	# SEE `dummy`
 	private fun do_dummy: Bool
 	do
+		# Force no warning before analysing classes
+		phases.add_edge(modelize_class_phase, no_warning_phase)
 		# Force easy warnings after modelbuilder
 		phases.add_edge(simple_misc_analysis_phase, modelize_property_phase)
 		# Force easy warnings before intraproc-errors
