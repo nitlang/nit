@@ -404,8 +404,9 @@ abstract class NitdocPage
 		var article = mproject.tpl_article
 		article.subtitle = mproject.tpl_declaration
 		article.content = mproject.tpl_definition
-		if mproject.mdoc != null then
-			article.content = mproject.mdoc.tpl_short_comment
+		var mdoc = mproject.mdoc_or_fallback
+		if mdoc != null then
+			article.content = mdoc.tpl_short_comment
 		end
 		return article
 	end
@@ -525,8 +526,8 @@ abstract class NitdocPage
 		article.title_classes.add "signature"
 		article.summary_title = "{mprop.nitdoc_name}"
 		article.subtitle = main_mpropdef.tpl_namespace
-		if main_mpropdef.mdoc != null then
-			article.content = main_mpropdef.mdoc.tpl_comment
+		if main_mpropdef.mdoc_or_fallback != null then
+			article.content = main_mpropdef.mdoc_or_fallback.tpl_comment
 		end
 		var subarticle = new TplArticle("{main_mpropdef.nitdoc_id}.redefs")
 		# Add redef in same `MClass`
@@ -541,8 +542,8 @@ abstract class NitdocPage
 				redef_article.title_classes.add "signature info"
 				redef_article.css_classes.add "nospace"
 				var redef_content = new Template
-				if mpropdef.mdoc != null then
-					redef_content.add mpropdef.mdoc.tpl_comment
+				if mpropdef.mdoc_or_fallback != null then
+					redef_content.add mpropdef.mdoc_or_fallback.tpl_comment
 				end
 				redef_article.content = redef_content
 				subarticle.add_child redef_article
@@ -1126,7 +1127,8 @@ class NitdocClass
 			var cls_url = mprop.intro.mclassdef.mclass.nitdoc_url
 			var def_url = "{cls_url}#{mprop.nitdoc_id}"
 			var lnk = new TplLink(def_url, mprop.name)
-			if mprop.intro.mdoc != null then lnk.title = mprop.intro.mdoc.short_comment
+			var mdoc = mprop.intro.mdoc_or_fallback
+			if mdoc != null then lnk.title = mdoc.short_comment
 			var item = new Template
 			item.add new TplLabel.with_classes(classes)
 			item.add lnk
@@ -1148,8 +1150,9 @@ class NitdocClass
 		var section = new TplSection.with_title("top", tpl_title)
 		section.subtitle = mclass.intro.tpl_declaration
 		var article = new TplArticle("comment")
-		if mclass.mdoc != null then
-			article.content = mclass.mdoc.tpl_comment
+		var mdoc = mclass.mdoc_or_fallback
+		if mdoc != null then
+			article.content = mdoc.tpl_comment
 		end
 		section.add_child article
 		return section
