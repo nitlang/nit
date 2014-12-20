@@ -38,13 +38,20 @@ private class NoWarningPhase
 
 		var modelbuilder = toolcontext.modelbuilder
 
-		# Get all the new annotations
+		var source = nmodule.location.file
+
+		# Disable `missing-doc` for `test_suite`
+		if source != null and not nmoduledecl.get_annotations("test_suite").is_empty then
+			toolcontext.warning_blacklist[source].add("missing-doc")
+		end
+
+
+		# Get all the `no_warning` annotations
 		var name = "no_warning"
 		var annots = nmoduledecl.get_annotations(name)
 
 		if annots.is_empty then return
 
-		var source = nmodule.location.file
 		if source == null then
 			modelbuilder.warning(annots.first, "file-less-module", "Warning: annotation `{name}` does not currently work on file-less modules.")
 			return
