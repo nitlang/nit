@@ -14,37 +14,76 @@
 #
 # ## Usage
 #
-# Create a new JsonStore or reuse an existing one.
+# ### Initialization
+#
+# JsonStore use the file system to store and load json files.
+#
+# For initialization you need to give the directory used in the
+# file system to save objects.
+#
 # ~~~
 # var store = new JsonStore("store_dir")
 # ~~~
 #
-# JsonStore can store json of type JsonObject and JsonArray.
+# ### Documents
+#
+# With JsonStore you manage *documents*.
+# Documents are simple json files that can be stored and loaded from json store.
+#
+# JsonStore can store documents of type JsonObject and JsonArray.
 # ~~~
-# var red = "red"
-# var obj = new JsonObject
-# obj["color"] = red
-# obj["code"] = "FF0000"
+# var red = new JsonObject
+# red["name"] = "red"
+# red["code"] = "FF0000"
 # ~~~
 #
-# Data are stored under a key.
+# Data are stored under a *key*.
+# This is the path to the document from `JsonStore::store_dir`
+# without the `.json` extension.
+#
+# Examples:
+#
+# * key `document` will store data under `store_dir / "document.json"`
+# * key `collection/data` will store data under `store_dir / "collection/data.json"`
+#
 # ~~~
-# var key = "colors/{red}"
+# var key = "colors/red"
 # ~~~
 #
 # Store the object.
 # ~~~
-# store.store_object(key, obj)
-# assert store.has_key(key)
+# store.store_object(key, red)
 # ~~~
 #
 # Load the object.
 # ~~~
-# var res = store.load_object(key)
-# assert res["name"] == red
+# assert store.has_key(key)
+# var obj = store.load_object(key)
+# assert obj["name"] == obj["name"]
 # ~~~
 #
-# Clear all stored data.
+# ### Collections
+#
+# A collection is a set of documents stored under the same path.
+#
+# ~~~
+# var green = new JsonObject
+# green["name"] = "green"
+# green["code"] = "00FF00"
+# store.store_object("colors/green", green)
+#
+# assert store.has_collection("colors")
+#
+# var col = store.list_collection("colors")
+# assert col.length == 2
+# assert col.has("green")
+# assert col.has("red")
+# ~~~
+#
+# ### Clearing store
+#
+# You can delete all the data contained in the `JsonStore::store_dir` with `clear`.
+#
 # ~~~
 # store.clear
 # ~~~
@@ -53,15 +92,6 @@ module store
 import static
 
 # A JsonStore can save and load json data from file system.
-#
-# Json files are stored under a `key`.
-# This key represents the path to the json file from `store_dir`
-# without the `.json` extension.
-#
-# Examples:
-#
-# * key `document` will store data under `store_dir / "document.json"`
-# * key `collection/data` will store data under `store_dir / "collection/data.json"`
 class JsonStore
 
 	# Directory where data are stored.
@@ -125,5 +155,24 @@ class JsonStore
 		var text = file.read_all
 		file.close
 		return text.parse_json
+	end
+
+	# Get the list of keys stored under the collection `key`.
+	fun list_collection(key: String): JsonArray do
+		var res = new JsonArray
+		var coll = (store_dir / "{key}").to_path
+		if not coll.exists or not coll.stat.is_dir then return res
+		for file in coll.files do
+			if file.to_s.has_suffix(".json") then
+				res.add(file.to_s.basename(".json"))
+			end
+		end
+		return res
+	end
+
+	# Does `key` matches a collection?
+	fun has_collection(key: String): Bool do
+		var path = (store_dir / "{key}").to_path
+		return path.exists and path.stat.is_dir
 	end
 end
