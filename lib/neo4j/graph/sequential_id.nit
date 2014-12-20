@@ -36,6 +36,7 @@ private import pipeline
 # assert b["id"] == 2
 # assert c["id"] == 4
 # assert nodes.to_a == [a, b, c]
+# assert nodes.length == 3
 # ~~~
 class SequentialNodeCollection
 	super NeoNodeCollection
@@ -44,16 +45,25 @@ class SequentialNodeCollection
 
 	private var nodes = new Array[nullable NeoNode]
 
+	redef var length = 0
+
 	redef fun iterator do return new NullSkipper[NeoNode](self.nodes.iterator)
+
+	redef fun [](id) do return nodes[id].as(NeoNode)
 
 	redef fun get_or_null(id) do
 		if id < 0 or id > nodes.length then return null
 		return nodes[id]
 	end
 
+	redef fun has_id(id: Int): Bool do
+		return id >= 0 and id < nodes.length and nodes[id] isa NeoNode
+	end
+
 	redef fun register(node) do
 		nodes.add node
 		id_of(node) = nodes.length
+		length += 1
 	end
 
 	redef fun add(node) do
@@ -65,15 +75,23 @@ class SequentialNodeCollection
 			sys.stderr.write "The local ID must be greater or equal to 0. Got {id}.\n"
 		end
 		# Pad with nulls.
+		nodes.enlarge(id)
 		var delta = id - nodes.length
 		while delta > 0 do
 			nodes.add null
 			delta -= 1
 		end
 		nodes[id] = node
+		length += 1
 	end
 
 	redef fun remove_at(id) do
 		nodes[id] = null
+		length -= 1
+	end
+
+	redef fun clear do
+		nodes.clear
+		length = 0
 	end
 end
