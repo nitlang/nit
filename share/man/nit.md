@@ -102,6 +102,11 @@ Whatever follows it is used as arguments of the interpreted program.
 
 ## OTHER OPTIONS
 
+`--vm`
+:   Run the virtual machine instead of the naive interpreter (experimental)
+
+The virtual machine is currently under heavy development and, unless you are developing the vm, there is no reason to use this option yet.
+
 `-o`
 :   Does nothing. Used for compatibility.
 

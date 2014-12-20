@@ -21,7 +21,7 @@ import interpreter::naive_interpreter
 import perfect_hashing
 
 redef class ModelBuilder
-	redef fun run_naive_interpreter(mainmodule: MModule, arguments: Array[String])
+	fun run_virtual_machine(mainmodule: MModule, arguments: Array[String])
 	do
 		var time0 = get_time
 		self.toolcontext.info("*** NITVM STARTING ***", 1)

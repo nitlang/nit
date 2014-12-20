@@ -20,6 +20,7 @@ module nit
 import interpreter
 import frontend
 import parser_util
+import vm
 
 # Create a tool context to handle options and paths
 var toolcontext = new ToolContext
@@ -30,7 +31,8 @@ var opt = new OptionString("compatibility (does noting)", "-o")
 toolcontext.option_context.add_option(opt)
 var opt_eval = new OptionBool("Specifies the program from command-line", "-e")
 var opt_loop = new OptionBool("Repeatedly run the program for each line in file-name arguments", "-n")
-toolcontext.option_context.add_option(opt_eval, opt_loop)
+var opt_vm = new OptionBool("Run the virtual machine instead of the naive interpreter (experimental)", "--vm")
+toolcontext.option_context.add_option(opt_eval, opt_loop, opt_vm)
 # We do not add other options, so process them now!
 toolcontext.process_options(args)
 
@@ -78,6 +80,8 @@ if toolcontext.opt_debugger_autorun.value then
 	modelbuilder.run_debugger_autorun(self_mm, self_args)
 else if toolcontext.opt_debugger_mode.value then
 	modelbuilder.run_debugger(self_mm, self_args)
+else if opt_vm.value then
+	modelbuilder.run_virtual_machine(self_mm, self_args)
 else
 	modelbuilder.run_naive_interpreter(self_mm, self_args)
 end
