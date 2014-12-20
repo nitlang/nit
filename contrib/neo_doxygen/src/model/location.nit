@@ -15,7 +15,7 @@
 # This module is used to model locations in source files.
 module location
 
-import neo4j
+import json::static
 
 # A location inside a source file.
 class Location
