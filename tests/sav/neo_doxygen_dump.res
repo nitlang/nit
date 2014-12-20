@@ -25,7 +25,7 @@
 
   -h, --help   Show the help (this page).
 
-  --src-lang   The programming language to assume when processing chunk in the
+  --src-lang   The programming language to assume when processing chunks in the
                declarations left as-is by Doxygen. Use `any` (the default) to
-               disable any language-specific processing. <any, java>
+               disable any language-specific processing. <any, java, python>
 

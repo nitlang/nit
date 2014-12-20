@@ -69,3 +69,11 @@ Also, they **must** be run with the current working directory set to the present
 directory. `gen-one.sh` handle only one project at a time while `gen-all.sh`
 works on a collection of projects grouped in a directory. For detail about how
 to invoke each script, see the comments in these scripts.
+
+
+## Python
+
+The built-in filter of Doxygen for Python is very basic. For example, it
+recognizes anything in the “docstrings” as verbatim detailed description. In
+order to enhance the processing of the Python scripts, the
+[doxypypy](https://github.com/Feneric/doxypypy) filter may be used.
