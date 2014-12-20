@@ -168,6 +168,8 @@ redef class NeoGraph
 	# For the expected format, see `JsonGraphStore`.
 	fun load_json_object(o: JsonObject) do
 		var json_nodes = o["nodes"].as(JsonArray)
+		var nodes = self.nodes
+		nodes.enlarge(nodes.length)
 		for json_node in json_nodes do
 			assert json_node isa JsonObject
 			var node = new NeoNode.from_json_object(json_node)
@@ -175,6 +177,8 @@ redef class NeoGraph
 		end
 
 		var json_edges = o["edges"].as(JsonArray)
+		var edges = self.edges
+		if edges isa AbstractArray[NeoEdge] then edges.enlarge(edges.length)
 		for json_edge in json_edges do
 			assert json_edge isa JsonObject
 			var from = nodes[nodes.id_from_jsonable(json_edge["from"])]
