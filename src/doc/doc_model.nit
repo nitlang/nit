@@ -32,8 +32,8 @@ redef class Location
 end
 
 redef class MEntity
-	# HTML Escaped name
-	fun nitdoc_name: String is abstract
+	# HTML-escaped name.
+	fun nitdoc_name: String do return name.html_escape
 
 	# ID used as a HTML unique ID and in file names.
 	#
@@ -145,7 +145,6 @@ end
 
 redef class MProject
 	redef var nitdoc_id = name.to_cmangle is lazy
-	redef fun nitdoc_name do return name.html_escape
 	redef fun nitdoc_url do return root.nitdoc_url
 
 	redef fun tpl_declaration do
@@ -171,8 +170,6 @@ redef class MProject
 end
 
 redef class MGroup
-	redef fun nitdoc_name do return name.html_escape
-
 	redef var nitdoc_id is lazy do
 		if parent != null then
 			return "{parent.nitdoc_id}__{name.to_cmangle}"
@@ -211,8 +208,6 @@ redef class MGroup
 end
 
 redef class MModule
-	redef fun nitdoc_name do return name.html_escape
-
 	redef var nitdoc_id is lazy do
 		if mgroup != null then
 			if mgroup.mmodules.length == 1 then
@@ -257,7 +252,6 @@ redef class MModule
 end
 
 redef class MClass
-	redef fun nitdoc_name do return name.html_escape
 	redef var nitdoc_id = "{intro_mmodule.nitdoc_id}__{name.to_cmangle}" is lazy
 	redef fun nitdoc_url do return "class_{nitdoc_id}.html"
 	redef fun mdoc_or_fallback do return intro.mdoc
@@ -289,7 +283,7 @@ redef class MClass
 			tpl.add "["
 			var parameter_names = new Array[String]
 			for p in mparameters do
-				parameter_names.add(p.name)
+				parameter_names.add(p.nitdoc_name)
 			end
 			tpl.add parameter_names.join(", ")
 			tpl.add "]"
@@ -360,7 +354,7 @@ redef class MClassDef
 		if not mparameters.is_empty then
 			tpl.add "["
 			for i in [0..mparameters.length[ do
-				tpl.add "{mparameters[i].name}: "
+				tpl.add "{mparameters[i].nitdoc_name}: "
 				tpl.add bound_mtype.arguments[i].tpl_signature
 				if i < mparameters.length - 1 then tpl.add ", "
 			end
@@ -382,8 +376,8 @@ redef class MClassDef
 	redef fun tpl_css_classes do
 		var set = new HashSet[String]
 		if is_intro then set.add "intro"
-		set.add_all mclass.intro.modifiers
-		set.add_all modifiers
+		for m in mclass.intro.modifiers do set.add m.to_cmangle
+		for m in modifiers do set.add m.to_cmangle
 		return set.to_a
 	end
 
@@ -391,7 +385,7 @@ redef class MClassDef
 		var tpl = new Template
 		for modifier in modifiers do
 			if modifier == "public" then continue
-			tpl.add "{modifier} "
+			tpl.add "{modifier.html_escape} "
 		end
 		return tpl
 	end
@@ -399,7 +393,6 @@ end
 
 redef class MProperty
 	redef var nitdoc_id = "{intro_mclassdef.mclass.nitdoc_id}__{name.to_cmangle}" is lazy
-	redef fun nitdoc_name do return name.html_escape
 	redef fun nitdoc_url do return "property_{nitdoc_id}.html"
 
 	redef fun mdoc_or_fallback do return intro.mdoc
@@ -475,8 +468,8 @@ redef class MPropDef
 	redef fun tpl_css_classes do
 		var set = new HashSet[String]
 		if is_intro then set.add "intro"
-		set.add_all mproperty.intro.modifiers
-		set.add_all modifiers
+		for m in mproperty.intro.modifiers do set.add m.to_cmangle
+		for m in modifiers do set.add m.to_cmangle
 		return set.to_a
 	end
 
@@ -484,7 +477,7 @@ redef class MPropDef
 		var tpl = new Template
 		for modifier in modifiers do
 			if modifier == "public" then continue
-			tpl.add "{modifier} "
+			tpl.add "{modifier.html_escape} "
 		end
 		return tpl
 	end
@@ -540,7 +533,7 @@ redef class MMethod
 		var tpl = new Template
 		var params = new Array[String]
 		for param in intro.msignature.mparameters do
-			params.add param.name
+			params.add param.name.html_escape
 		end
 		if not params.is_empty then
 			tpl.add "("
@@ -603,7 +596,7 @@ end
 
 redef class MParameterType
 	redef fun tpl_link do
-		return new TplLink.with_title("{mclass.nitdoc_url}#FT_{name}", name, "formal type")
+		return new TplLink.with_title("{mclass.nitdoc_url}#FT_{name.to_cmangle}", name, "formal type")
 	end
 	redef fun tpl_signature do return tpl_link
 end

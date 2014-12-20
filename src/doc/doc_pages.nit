@@ -386,7 +386,7 @@ abstract class NitdocPage
 		var source = ctx.opt_source.value
 		if source == null then
 			var url = location.file.filename.simplify_path
-			return "<a target='_blank' title='Show source' href=\"{url}\">View Source</a>"
+			return "<a target='_blank' title='Show source' href=\"{url.html_escape}\">View Source</a>"
 		end
 		# THIS IS JUST UGLY ! (but there is no replace yet)
 		var x = source.split_with("%f")
@@ -396,7 +396,7 @@ abstract class NitdocPage
 		x = source.split_with("%L")
 		source = x.join(location.line_end.to_s)
 		source = source.simplify_path
-		return "<a target='_blank' title='Show source' href=\"{source.to_s}\">View Source</a>"
+		return "<a target='_blank' title='Show source' href=\"{source.to_s.html_escape}\">View Source</a>"
 	end
 
 	# MProject description template
@@ -518,7 +518,8 @@ abstract class NitdocPage
 		else
 			var cls_url = mprop.intro.mclassdef.mclass.nitdoc_url
 			var def_url = "{cls_url}#{mprop.nitdoc_id}"
-			var lnk = new TplLink.with_title(def_url, mprop.name, "Go to introduction")
+			var lnk = new TplLink.with_title(def_url, mprop.nitdoc_name,
+					"Go to introduction")
 			title.add "redef "
 			title.add lnk
 		end
@@ -1126,7 +1127,7 @@ class NitdocClass
 			classes.add "inherit"
 			var cls_url = mprop.intro.mclassdef.mclass.nitdoc_url
 			var def_url = "{cls_url}#{mprop.nitdoc_id}"
-			var lnk = new TplLink(def_url, mprop.name)
+			var lnk = new TplLink(def_url, mprop.nitdoc_name)
 			var mdoc = mprop.intro.mdoc_or_fallback
 			if mdoc != null then lnk.title = mdoc.short_comment
 			var item = new Template
