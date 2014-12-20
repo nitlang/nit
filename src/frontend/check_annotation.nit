@@ -88,6 +88,7 @@ old_style_init
 abstract
 intern
 extern
+no_warning
 
 pkgconfig
 c_compiler_option
