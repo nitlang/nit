@@ -86,7 +86,7 @@ class GithubAPI
 	# Execute a GET request on Github API.
 	#
 	# This method returns raw json data.
-	# See other `get_*` methods to use more expressive types.
+	# See other `load_*` methods to use more expressive types.
 	#
 	#     var api = new GithubAPI(get_github_oauth)
 	#     var obj = api.get("repos/privat/nit")
@@ -162,11 +162,45 @@ class GithubAPI
 	#     var repo = api.load_repo("privat/nit")
 	#     assert repo.name == "nit"
 	#     assert repo.owner.login == "privat"
+	#     assert repo.default_branch.name == "master"
 	fun load_repo(full_name: String): nullable Repo do
 		var repo = new Repo(self, full_name)
 		repo.load_from_github
 		if was_error then return null
 		return repo
+	end
+
+	# Get the Github branch with `name`.
+	#
+	# Returns `null` if the branch cannot be found.
+	#
+	#     var api = new GithubAPI(get_github_oauth)
+	#     var repo = api.load_repo("privat/nit")
+	#     assert repo isa Repo
+	#     var branch = api.load_branch(repo, "master")
+	#     assert branch.name == "master"
+	#     assert branch.commit isa Commit
+	fun load_branch(repo: Repo, name: String): nullable Branch do
+		var branch = new Branch(self, repo, name)
+		branch.load_from_github
+		if was_error then return null
+		return branch
+	end
+
+	# Get the Github commit with `sha`.
+	#
+	# Returns `null` if the commit cannot be found.
+	#
+	#     var api = new GithubAPI(get_github_oauth)
+	#     var repo = api.load_repo("privat/nit")
+	#     assert repo isa Repo
+	#     var commit = api.load_commit(repo, "64ce1f")
+	#     assert commit isa Commit
+	fun load_commit(repo: Repo, sha: String): nullable Commit do
+		var commit = new Commit(self, repo, sha)
+		commit.load_from_github
+		if was_error then return null
+		return commit
 	end
 end
 
@@ -251,4 +285,150 @@ class Repo
 	fun owner: User do
 		return new User.from_json(api, json["owner"].as(JsonObject))
 	end
+
+	# List of branches associated with their names.
+	fun branches: Map[String, Branch] do
+		api.message(1, "Get branches for {full_name}")
+		var array = api.get("repos/{full_name}/branches")
+		var res = new HashMap[String, Branch]
+		if not array isa JsonArray then return res
+		for obj in array do
+			if not obj isa JsonObject then continue
+			var name = obj["name"].to_s
+			res[name] = new Branch.from_json(api, self, obj)
+		end
+		return res
+	end
+
+	# Repo default branch.
+	fun default_branch: Branch do
+		var name = json["default_branch"].to_s
+		var branch = api.load_branch(self, name)
+		assert branch isa Branch
+		return branch
+	end
+end
+
+# A `RepoEntity` is something contained in a `Repo`.
+abstract class RepoEntity
+	super GithubEntity
+
+	# Repo that contains `self`.
+	var repo: Repo
+
+	# Init `self` from a `json` object.
+	init from_json(api: GithubAPI, repo: Repo, json: JsonObject) do
+		self.api = api
+		self.repo = repo
+		self.json = json
+	end
+end
+
+# A Github branch.
+#
+# Should be accessed from `GithubAPI::load_branch`.
+#
+# See <https://developer.github.com/v3/repos/#list-branches>.
+class Branch
+	super RepoEntity
+
+	redef var key is lazy do return "{repo.key}/branches/{name}"
+
+	# Branch name.
+	var name: String
+
+	redef init from_json(api, repo, json) do
+		self.name = json["name"].to_s
+		super
+	end
+
+	# Get the last commit of `self`.
+	fun commit: Commit do
+		return new Commit.from_json(api, repo, json["commit"].as(JsonObject))
+	end
+
+	# List all commits in `self`.
+	#
+	# This can be long depending on the branch size.
+	# Commit are returned in an unspecified order.
+	fun commits: Array[Commit] do
+		var res = new Array[Commit]
+		var done = new HashSet[String]
+		var todos = new Array[Commit]
+		todos.add commit
+		while not todos.is_empty do
+			var commit = todos.pop
+			if done.has(commit.sha) then continue
+			done.add commit.sha
+			res.add commit
+			for parent in commit.parents do
+				todos.add parent
+			end
+		end
+		return res
+	end
+end
+
+# A Github commit.
+#
+# Should be accessed from `GithubAPI::load_commit`.
+#
+# See <https://developer.github.com/v3/commits/>.
+class Commit
+	super RepoEntity
+
+	redef var key is lazy do return "{repo.key}/commits/{sha}"
+
+	# Commit SHA.
+	var sha: String
+
+	redef init from_json(api, repo, json) do
+		self.sha = json["sha"].to_s
+		super
+	end
+
+	# Parent commits of `self`.
+	fun parents: Array[Commit] do
+		var res = new Array[Commit]
+		var parents = json["parents"]
+		if not parents isa JsonArray then return res
+		for obj in parents do
+			if not obj isa JsonObject then continue
+			res.add(api.load_commit(repo, obj["sha"].to_s).as(not null))
+		end
+		return res
+	end
+
+	# Author of the commit.
+	fun author: nullable User do
+		if not json.has_key("author") then return null
+		var user = json["author"]
+		if not user isa JsonObject then return null
+		return new User.from_json(api, user)
+	end
+
+	# Committer of the commit.
+	fun committer: nullable User do
+		if not json.has_key("committer") then return null
+		var user = json["author"]
+		if not user isa JsonObject then return null
+		return new User.from_json(api, user)
+	end
+
+	# Authoring date as ISODate.
+	fun author_date: ISODate do
+		var commit = json["commit"].as(JsonObject)
+		var author = commit["author"].as(JsonObject)
+		return new ISODate.from_string(author["date"].to_s)
+	end
+
+	# Commit date as ISODate.
+	fun commit_date: ISODate do
+		var commit = json["commit"].as(JsonObject)
+		var author = commit["committer"].as(JsonObject)
+		return new ISODate.from_string(author["date"].to_s)
+	end
+
+	# Commit message.
+	fun message: String do return json["commit"].as(JsonObject)["message"].to_s
 end
