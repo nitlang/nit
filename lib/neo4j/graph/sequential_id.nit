@@ -37,6 +37,13 @@ private import pipeline
 # assert c["id"] == 4
 # assert nodes.to_a == [a, b, c]
 # assert nodes.length == 3
+#
+# nodes.compact
+# assert a["id"] == 1
+# assert b["id"] == 2
+# assert c["id"] == 3
+# assert nodes.to_a == [a, b, c]
+# assert nodes.length == 3
 # ~~~
 class SequentialNodeCollection
 	super NeoNodeCollection
@@ -59,6 +66,8 @@ class SequentialNodeCollection
 	redef fun has_id(id: Int): Bool do
 		return id >= 0 and id < nodes.length and nodes[id] isa NeoNode
 	end
+
+	redef fun enlarge(cap) do nodes.enlarge(cap)
 
 	redef fun register(node) do
 		nodes.add node
@@ -93,5 +102,15 @@ class SequentialNodeCollection
 	redef fun clear do
 		nodes.clear
 		length = 0
+	end
+
+	redef fun compact do
+		var i = iterator
+
+		nodes = new Array[nullable NeoNode]
+		for n in i do
+			nodes.add n
+			id_of(n) = nodes.length
+		end
 	end
 end
