@@ -23,18 +23,18 @@ var a_ns = new Namespace(graph)
 file.full_name = "Baz.java"
 file.declare_class("classa_bar", "a::Bar", "public")
 file.declare_namespace("namespacea", "a")
-file.doc.add "A file."
+file.doc.brief_description = "A file."
 file.put_in_graph
 
 a_ns.full_name = "a"
 a_ns.model_id = "namespacea"
 a_ns.declare_class("classa_bar", "a::Bar", "public")
-a_ns.doc.add "A namespace."
+a_ns.doc.brief_description = "A namespace."
 a_ns.put_in_graph
 
 bar_class.model_id = "classa_bar"
 bar_class.full_name = "a::Bar"
-bar_class.doc.add "A class."
+bar_class.doc.brief_description = "A class."
 bar_class.put_in_graph
 
 graph.add_global_modules

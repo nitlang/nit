@@ -22,11 +22,11 @@ class DocListener
 	super TextListener
 
 	# The read documentation.
-	var doc = new JsonArray is writable
+	var doc = new Documentation is writable
 
 	redef fun end_listening do
 		super
-		var line = to_s.trim
+		var line = flush_buffer.trim
 		if not line.is_empty then doc.add(line)
 	end
 end

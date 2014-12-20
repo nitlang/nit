@@ -33,7 +33,7 @@ member.put_in_graph
 ns.model_id = "namespacefoo"
 ns.name = "foo"
 ns.declare_member(member)
-ns.doc.add "A documented namespace."
+ns.doc.brief_description = "A documented namespace."
 ns.put_in_graph
 
 root_ns.declare_namespace("namespacefoo", "")
