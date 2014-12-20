@@ -21,6 +21,7 @@ intrude import modelize_class
 private import annotation
 
 redef class ToolContext
+	# Run `AClassdef::build_property` on the classdefs of each module
 	var modelize_property_phase: Phase = new ModelizePropertyPhase(self, [modelize_class_phase])
 end
 
@@ -324,7 +325,8 @@ redef class MPropDef
 end
 
 redef class AClassdef
-	var build_properties_is_done = false
+	# Marker used in `ModelBuilder::build_properties`
+	private var build_properties_is_done = false
 
 	# The free init (implicitely constructed by the class if required)
 	var mfree_init: nullable MMethodDef = null

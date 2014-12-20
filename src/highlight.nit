@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Highliting of Nit AST
+# Highlighting of Nit AST
 module highlight
 
 import frontend
@@ -48,6 +48,8 @@ class HighlightVisitor
 		html.add_class("nitcode")
 	end
 
+	# The entry-point of the highlighting.
+	# Will fill `html` with the generated HTML content.
 	fun enter_visit(n: ANode)
 	do
 		n.parentize_tokens
@@ -329,6 +331,7 @@ redef class MModule
 		return res
 	end
 
+	# The module HTML page
 	fun href: String
 	do
 		return name + ".html"
@@ -386,6 +389,7 @@ redef class MClassDef
 		return res
 	end
 
+	# The class HTML page (an anchor in the module page)
 	fun href: String
 	do
 		return mmodule.href + "#" + to_s
@@ -432,6 +436,7 @@ redef class MPropDef
 		return res
 	end
 
+	# The property HTML page (an anchor in the module page)
 	fun href: String
 	do
 		return self.mclassdef.mmodule.href + "#" + self.to_s

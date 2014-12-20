@@ -21,6 +21,7 @@ module local_var_init
 import flow
 
 redef class ToolContext
+	# Run `APropdef::do_local_var_init` on each propdef
 	var local_var_init_phase: Phase = new LocalVarInitPhase(self, [flow_phase])
 end
 

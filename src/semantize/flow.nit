@@ -20,6 +20,7 @@ module flow
 import scope
 
 redef class ToolContext
+	# Run `APropdef::do_flow` on each propdef
 	var flow_phase: Phase = new FlowPhase(self, [scope_phase])
 end
 

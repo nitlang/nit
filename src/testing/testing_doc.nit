@@ -299,28 +299,21 @@ class DocUnit
 	var block: String
 end
 
-class SearchAssertVisitor
-	super Visitor
-	var foundit = false
-	redef fun visit(node)
-	do
-		if foundit then
-			return
-		else if node isa AAssertExpr then
-			foundit = true
-			return
-		else
-			node.visit_all(self)
-		end
-	end
-end
-
 redef class ModelBuilder
+	# Total number analyzed `MEntity`
 	var total_entities = 0
+
+	# The number of `MEntity` that have some documentation
 	var doc_entities = 0
+
+	# The total number of executed docunits
 	var unit_entities = 0
+
+	# The number failed docunits
 	var failed_entities = 0
 
+	# Extracts and executes all the docunits in the `mmodule`
+	# Returns a JUnit-compatible `<testsuite>` XML element that contains the results of the executions.
 	fun test_markdown(mmodule: MModule): HTMLTag
 	do
 		var ts = new HTMLTag("testsuite")

@@ -20,6 +20,7 @@ module scope
 import phase
 
 redef class ToolContext
+	# Run `APropdef::do_scope` on each propdef.
 	var scope_phase: Phase = new ScopePhase(self, null)
 end
 

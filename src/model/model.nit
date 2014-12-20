@@ -373,6 +373,7 @@ class MClass
 	# is empty if the class is not generic
 	var mparameters = new Array[MParameterType]
 
+	# Initialize `mparameters` from their names.
 	protected fun setup_parameter_names(parameter_names: nullable Array[String]) is
 		autoinit
 	do
@@ -1693,6 +1694,8 @@ class MParameter
 		end
 	end
 
+	# Returns a new parameter with the `mtype` resolved.
+	# See `MType::resolve_for` for details.
 	fun resolve_for(mtype: MType, anchor: nullable MClassType, mmodule: MModule, cleanup_virtual: Bool): MParameter
 	do
 		if not self.mtype.need_anchor then return self

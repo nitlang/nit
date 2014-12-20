@@ -20,6 +20,7 @@ module literal
 import phase
 
 redef class ToolContext
+	# Parses literal values in the whole AST and produces errors if needed
 	var literal_phase: Phase = new LiteralPhase(self, null)
 end
 

@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Computing of super-constructors that must be implicitely called at the begin of constructors.
+# Computing of super-constructors that must be implicitly called at the begin of constructors.
 # The current rules are a bit crazy but whatever.
 module auto_super_init
 
@@ -22,6 +22,7 @@ import typing
 private import annotation
 
 redef class ToolContext
+	# Phase that inject `super` in constructors that need it.
 	var auto_super_init_phase: Phase = new AutoSuperInitPhase(self, [typing_phase])
 end
 

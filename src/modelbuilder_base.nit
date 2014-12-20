@@ -234,6 +234,8 @@ end
 
 redef class ADoc
 	private var mdoc_cache: nullable MDoc
+
+	# Convert `self` to a `MDoc`
 	fun to_mdoc: MDoc
 	do
 		var res = mdoc_cache

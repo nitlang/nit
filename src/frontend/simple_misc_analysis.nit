@@ -24,6 +24,7 @@ module simple_misc_analysis
 import phase
 
 redef class ToolContext
+	# Execute `AModule::do_simple_misc_analysis` on each module.
 	var simple_misc_analysis_phase: Phase = new SimpleMiscAnalysisPhase(self, null)
 end
 

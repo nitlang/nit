@@ -791,7 +791,7 @@ class TClassid
 	end
 end
 
-# A standard identifier (variable, method...). They start with a lowercase. 
+# A standard identifier (variable, method...). They start with a lowercase.
 class TId
 	super Token
 	redef fun to_s
@@ -907,40 +907,65 @@ end
 class AModule
 	super Prod
 
+	# The declaration part of the module
 	var n_moduledecl: nullable AModuledecl = null is writable
+
+	# List of importation clauses
 	var n_imports = new ANodes[AImport](self)
+
+	# List of extern blocks
 	var n_extern_code_blocks = new ANodes[AExternCodeBlock](self)
+
+	# List of class definition (including top-level methods and the main)
 	var n_classdefs = new ANodes[AClassdef](self)
+end
+
+# Abstract class for definition of entities
+abstract class ADefinition
+	super Prod
+	# The documentation
+	var n_doc: nullable ADoc = null is writable
+
+	# The `redef` keyword
+	var n_kwredef: nullable TKwredef = null is writable
+
+	# The declared visibility
+	var n_visibility: nullable AVisibility = null is writable
 end
 
 # The declaration of the module with the documentation, name, and annotations
 class AModuledecl
-	super Prod
-	var n_doc: nullable ADoc = null is writable
-	var n_kwredef: nullable TKwredef = null is writable
-	var n_visibility: AVisibility is writable, noinit
+	super ADefinition
+
+	# The `module` keyword
 	var n_kwmodule: TKwmodule is writable, noinit
+
+	# The declared module name
 	var n_name: AModuleName is writable, noinit
 end
 
 # A import clause of a module
 abstract class AImport
 	super Prod
+
+	# The declared visibility
+	var n_visibility: AVisibility is writable, noinit
+
+	# The `import` keyword
+	var n_kwimport: TKwimport is writable, noinit
 end
 
 # A standard import clause. eg `import x`
 class AStdImport
 	super AImport
-	var n_visibility: AVisibility is writable, noinit
-	var n_kwimport: TKwimport is writable, noinit
+	# The imported module name
 	var n_name: AModuleName is writable, noinit
 end
 
 # The special import clause of the kernel module. eg `import end`
 class ANoImport
 	super AImport
-	var n_visibility: AVisibility is writable, noinit
-	var n_kwimport: TKwimport is writable, noinit
+	# The `end` keyword, that indicate the root module
 	var n_kwend: TKwend is writable, noinit
 end
 
@@ -957,21 +982,25 @@ end
 # An implicit or explicit public visibility modifier
 class APublicVisibility
 	super AVisibility
+	# The `public` keyword, if any
 	var n_kwpublic: nullable TKwpublic is writable
 end
 # An explicit private visibility modifier
 class APrivateVisibility
 	super AVisibility
+	# The `private` keyword
 	var n_kwprivate: TKwprivate is writable, noinit
 end
 # An explicit protected visibility modifier
 class AProtectedVisibility
 	super AVisibility
+	# The `protected` keyword
 	var n_kwprotected: TKwprotected is writable, noinit
 end
 # An explicit intrude visibility modifier
 class AIntrudeVisibility
 	super AVisibility
+	# The `intrude` keyword
 	var n_kwintrude: TKwintrude is writable, noinit
 end
 
@@ -980,21 +1009,33 @@ end
 # There is tow special case of class definition
 abstract class AClassdef
 	super Prod
+	# All the declared properties (including the main method)
 	var n_propdefs = new ANodes[APropdef](self)
 end
 
 # A standard class definition with a name, superclasses and properties
 class AStdClassdef
 	super AClassdef
-	var n_doc: nullable ADoc = null is writable
-	var n_kwredef: nullable TKwredef = null is writable
-	var n_visibility: AVisibility is writable, noinit
+	super ADefinition
+
+	# The class kind (interface, abstract class, etc.)
 	var n_classkind: AClasskind is writable, noinit
+
+	# The name of the class
 	var n_id: nullable TClassid = null is writable
+
+	# The list of formal parameter types
 	var n_formaldefs = new ANodes[AFormaldef](self)
+
+	# The extern block code
 	var n_extern_code_block: nullable AExternCodeBlock = null is writable
+
+	# The list of super-classes
 	var n_superclasses = new ANodes[ASuperclass](self)
+
+	# The `end` keyword
 	var n_kwend: TKwend is writable, noinit
+
 	redef fun hot_location do return n_id.location
 end
 
@@ -1016,39 +1057,56 @@ end
 # A default, or concrete class modifier (just `class`)
 class AConcreteClasskind
 	super AClasskind
+
+	# The `class` keyword.
 	var n_kwclass: TKwclass is writable, noinit
 end
 
 # An abstract class modifier (`abstract class`)
 class AAbstractClasskind
 	super AClasskind
+
+	# The `abstract` keyword.
 	var n_kwabstract: TKwabstract is writable, noinit
+
+	# The `class` keyword.
 	var n_kwclass: TKwclass is writable, noinit
 end
 
 # An interface class modifier (`interface`)
 class AInterfaceClasskind
 	super AClasskind
+
+	# The `interface` keyword.
 	var n_kwinterface: TKwinterface is writable, noinit
 end
 
 # An enum/universal class modifier (`enum class`)
 class AEnumClasskind
 	super AClasskind
+
+	# The `enum` keyword.
 	var n_kwenum: TKwenum is writable, noinit
 end
 
 # An extern class modifier (`extern class`)
 class AExternClasskind
 	super AClasskind
+
+	# The `extern` keyword.
 	var n_kwextern: TKwextern is writable, noinit
+
+	# The `class` keyword.
 	var n_kwclass: nullable TKwclass = null is writable
 end
 
 # The definition of a formal generic parameter type. eg `X: Y`
 class AFormaldef
 	super Prod
+
+	# The name of the parameter type
 	var n_id: TClassid is writable, noinit
+
 	# The bound of the parameter type
 	var n_type: nullable AType = null is writable
 end
@@ -1056,32 +1114,37 @@ end
 # A super-class. eg `super X`
 class ASuperclass
 	super Prod
+
+	# The super keyword
 	var n_kwsuper: TKwsuper is writable, noinit
+
+	# The super-class (indicated as a type)
 	var n_type: AType is writable, noinit
 end
 
 # The definition of a property
 abstract class APropdef
-	super Prod
-	var n_doc: nullable ADoc = null is writable
-	var n_kwredef: nullable TKwredef = null is writable
-	var n_visibility: nullable AVisibility = null is writable
+	super ADefinition
 end
 
 # A definition of an attribute
 # For historical reason, old-syle and new-style attributes use the same `ANode` sub-class
 class AAttrPropdef
 	super APropdef
+
+	# The identifier for a old-style attribute (null if new-style)
 	var n_kwvar: TKwvar is writable, noinit
 
 	# The identifier for a new-style attribute (null if old-style)
 	var n_id2: TId is writable, noinit
 
+	# The declared type of the attribute
 	var n_type: nullable AType = null is writable
 
-	# The initial value, if any
+	# The initial value, if any (set with `=`)
 	var n_expr: nullable AExpr = null is writable
 
+	# The initial value, if any (set with `do return`)
 	var n_block: nullable AExpr = null is writable
 
 	redef fun hot_location
@@ -1093,14 +1156,31 @@ end
 # A definition of all kind of method (including constructors)
 class AMethPropdef
 	super APropdef
+
+	# The `fun` keyword, if any
 	var n_kwmeth: nullable TKwmeth = null is writable
+
+	# The `init` keyword, if any
 	var n_kwinit: nullable TKwinit = null is writable
+
+	# The `new` keyword, if any
 	var n_kwnew: nullable TKwnew = null is writable
+
+	# The name of the method, if any
 	var n_methid: nullable AMethid = null is writable
+
+	# The signature of the method, if any
 	var n_signature: nullable ASignature = null is writable
+
+	# The body (in Nit) of the method, if any
 	var n_block: nullable AExpr = null is writable
+
+	# The list of declared callbacks (for extern methods)
 	var n_extern_calls: nullable AExternCalls = null is writable
+
+	# The body (in extern code) of the method, if any
 	var n_extern_code_block: nullable AExternCodeBlock = null is writable
+
 	redef fun hot_location
 	do
 		if n_methid != null then
@@ -1123,7 +1203,11 @@ end
 # Declaration of callbacks for extern methods
 class AExternCalls
 	super Prod
+
+	# The `import` keyword
 	var n_kwimport: TKwimport is writable, noinit
+
+	# The list of declared callbacks
 	var n_extern_calls: ANodes[AExternCall] = new ANodes[AExternCall](self)
 end
 
@@ -1140,26 +1224,38 @@ end
 # A single callback declaration on a method on the current receiver
 class ALocalPropExternCall
 	super APropExternCall
+
+	# The name of the called-back method
 	var n_methid: AMethid is writable, noinit
 end
 
 # A single callback declaration on a method on an explicit receiver type.
 class AFullPropExternCall
 	super APropExternCall
+
+	# The type of the receiver of the called-back method
 	var n_type: AType is writable, noinit
+
+	# The dot `.`
 	var n_dot: nullable TDot = null is writable
+
+	# The name of the called-back method
 	var n_methid: AMethid is writable, noinit
 end
 
 # A single callback declaration on a method on a constructor
 class AInitPropExternCall
 	super APropExternCall
+
+	# The allocated type
 	var n_type: AType is writable, noinit
 end
 
 # A single callback declaration on a `super` call
 class ASuperExternCall
 	super AExternCall
+
+	# The `super` keyword
 	var n_kwsuper: TKwsuper is writable, noinit
 end
 
@@ -1171,34 +1267,62 @@ end
 # A single callback declaration on a cast to a given type
 class ACastAsExternCall
 	super ACastExternCall
+
+	# The origin type of the cast
 	var n_from_type: AType is writable, noinit
+
+	# The dot (`.`)
 	var n_dot: nullable TDot = null is writable
+
+	# The `as` keyword
 	var n_kwas: TKwas is writable, noinit
+
+	# The destination of the cast
 	var n_to_type: AType is writable, noinit
 end
 
 # A single callback declaration on a cast to a nullable type
 class AAsNullableExternCall
 	super ACastExternCall
+
+	# The origin type to cast as nullable
 	var n_type: AType is writable, noinit
+
+	# The `as` keyword
 	var n_kwas: TKwas is writable, noinit
+
+	# The `nullable` keyword
 	var n_kwnullable: TKwnullable is writable, noinit
 end
 
 # A single callback declaration on a cast to a non-nullable type
 class AAsNotNullableExternCall
 	super ACastExternCall
+
+	# The destination type on a cast to not nullable
 	var n_type: AType is writable, noinit
+
+	# The `as` keyword.
 	var n_kwas: TKwas is writable, noinit
+
+	# The `not` keyword
 	var n_kwnot: TKwnot is writable, noinit
+
+	# The `nullable` keyword
 	var n_kwnullable: TKwnullable is writable, noinit
 end
 
 # A definition of a virtual type
 class ATypePropdef
 	super APropdef
+
+	# The `type` keyword
 	var n_kwtype: TKwtype is writable, noinit
+
+	# The name of the virtual type
 	var n_id: TClassid is writable, noinit
+
+	# The bound of the virtual type
 	var n_type: AType is writable, noinit
 end
 
@@ -1211,141 +1335,202 @@ end
 # A method name with a simple identifier
 class AIdMethid
 	super AMethid
+
+	# The simple identifier
 	var n_id: TId is writable, noinit
 end
 
 # A method name `+`
 class APlusMethid
 	super AMethid
+
+	# The `+` symbol
 	var n_plus: TPlus is writable, noinit
 end
 
 # A method name `-`
 class AMinusMethid
 	super AMethid
+
+	# The `-` symbol
 	var n_minus: TMinus is writable, noinit
 end
 
 # A method name `*`
 class AStarMethid
 	super AMethid
+
+	# The `*` symbol
 	var n_star: TStar is writable, noinit
 end
 
 # A method name `**`
 class AStarstarMethid
 	super AMethid
+
+	# The `**` symbol
 	var n_starstar: TStarstar is writable, noinit
 end
 
 # A method name `/`
 class ASlashMethid
 	super AMethid
+
+	# The `/` symbol
 	var n_slash: TSlash is writable, noinit
 end
 
 # A method name `%`
 class APercentMethid
 	super AMethid
+
+	# The `%` symbol
 	var n_percent: TPercent is writable, noinit
 end
 
 # A method name `==`
 class AEqMethid
 	super AMethid
+
+	# The `==` symbol
 	var n_eq: TEq is writable, noinit
 end
 
 # A method name `!=`
 class ANeMethid
 	super AMethid
+
+	# The `!=` symbol
 	var n_ne: TNe is writable, noinit
 end
 
 # A method name `<=`
 class ALeMethid
 	super AMethid
+
+	# The `<=` symbol
 	var n_le: TLe is writable, noinit
 end
 
 # A method name `>=`
 class AGeMethid
 	super AMethid
+
+	# The `>=` symbol
 	var n_ge: TGe is writable, noinit
 end
 
 # A method name `<`
 class ALtMethid
 	super AMethid
+
+	# The `<` symbol
 	var n_lt: TLt is writable, noinit
 end
 
 # A method name `>`
 class AGtMethid
 	super AMethid
+
+	# The `>` symbol
 	var n_gt: TGt is writable, noinit
 end
 
 # A method name `<<`
 class ALlMethid
 	super AMethid
+
+	# The `<<` symbol
 	var n_ll: TLl is writable, noinit
 end
 
 # A method name `>>`
 class AGgMethid
 	super AMethid
+
+	# The `>>` symbol
 	var n_gg: TGg is writable, noinit
 end
 
 # A method name `[]`
 class ABraMethid
 	super AMethid
+
+	# The `[` symbol
 	var n_obra: TObra is writable, noinit
+
+	# The `]` symbol
 	var n_cbra: TCbra is writable, noinit
 end
 
 # A method name `<=>`
 class AStarshipMethid
 	super AMethid
+
+	# The `<=>` symbol
 	var n_starship: TStarship is writable, noinit
 end
 
 # A setter method name with a simple identifier (with a `=`)
 class AAssignMethid
 	super AMethid
+
+	# The base identifier
 	var n_id: TId is writable, noinit
+
+	# The `=` symbol
 	var n_assign: TAssign is writable, noinit
 end
 
 # A method name `[]=`
 class ABraassignMethid
 	super AMethid
+
+	# The `[` symbol
 	var n_obra: TObra is writable, noinit
+
+	# The `]` symbol
 	var n_cbra: TCbra is writable, noinit
+
+	# The `=` symbol
 	var n_assign: TAssign is writable, noinit
 end
 
 # A signature in a method definition. eg `(x,y:X,z:Z):T`
 class ASignature
 	super Prod
+
+	# The `(` symbol
 	var n_opar: nullable TOpar = null is writable
+
+	# The list of parameters
 	var n_params = new ANodes[AParam](self)
+
+	# The `)` symbol
 	var n_cpar: nullable TCpar = null is writable
+
+	# The return type
 	var n_type: nullable AType = null is writable
 end
 
 # A parameter definition in a signature. eg `x:X`
 class AParam
 	super Prod
+
+	# The name of the parameter
 	var n_id: TId is writable, noinit
+
+	# The type of the parameter, if any
 	var n_type: nullable AType = null is writable
+
+	# The `...` symbol to indicate varargs
 	var n_dotdotdot: nullable TDotdotdot = null is writable
 end
 
 # A static type. eg `nullable X[Y]`
 class AType
 	super Prod
+	# The `nullable` keyword
 	var n_kwnullable: nullable TKwnullable = null is writable
 
 	# The name of the class or of the formal type
@@ -1358,7 +1543,11 @@ end
 # A label at the end of a block or in a break/continue statement. eg `label x`
 class ALabel
 	super Prod
+
+	# The `label` keyword
 	var n_kwlabel: TKwlabel is writable, noinit
+
+	# The name of the label, if any
 	var n_id: nullable TId is writable
 end
 
@@ -1372,16 +1561,29 @@ end
 # The last `AExpr` gives the value of the whole block
 class ABlockExpr
 	super AExpr
+
+	# The list of statements in the bloc.
+	# The last element is often considered as an expression that give the value of the whole block.
 	var n_expr = new ANodes[AExpr](self)
+
+	# The `end` keyword
 	var n_kwend: nullable TKwend = null is writable
 end
 
 # A declaration of a local variable. eg `var x: X = y`
 class AVardeclExpr
 	super AExpr
+
+	# The `var` keyword
 	var n_kwvar: TKwvar is writable, noinit
+
+	# The name of the local variable
 	var n_id: TId is writable, noinit
+
+	# The declaration type of the local variable
 	var n_type: nullable AType = null is writable
+
+	# The `=` symbol (for the initial value)
 	var n_assign: nullable TAssign = null is writable
 
 	# The initial value, if any
@@ -1391,13 +1593,19 @@ end
 # A `return` statement. eg `return x`
 class AReturnExpr
 	super AExpr
+
+	# The `return` keyword
 	var n_kwreturn: nullable TKwreturn = null is writable
+
+	# The return value, if any
 	var n_expr: nullable AExpr = null is writable
 end
 
 # Something that has a label.
 abstract class ALabelable
 	super Prod
+
+	# The associated label declatation
 	var n_label: nullable ALabel = null is writable
 end
 
@@ -1405,24 +1613,32 @@ end
 abstract class AEscapeExpr
 	super AExpr
 	super ALabelable
+
+	# The return value, if nay (unused currently)
 	var n_expr: nullable AExpr = null is writable
 end
 
 # A `break` statement.
 class ABreakExpr
 	super AEscapeExpr
+
+	# The `break` keyword
 	var n_kwbreak: TKwbreak is writable, noinit
 end
 
 # An `abort` statement
 class AAbortExpr
 	super AExpr
+
+	# The `abort` keyword
 	var n_kwabort: TKwabort is writable, noinit
 end
 
 # A `continue` statement
 class AContinueExpr
 	super AEscapeExpr
+
+	# The `continue` keyword.
 	var n_kwcontinue: nullable TKwcontinue = null is writable
 end
 
@@ -1430,27 +1646,51 @@ end
 class ADoExpr
 	super AExpr
 	super ALabelable
+
+	# The `do` keyword
 	var n_kwdo: TKwdo is writable, noinit
+
+	# The list of statements of the `do`.
 	var n_block: nullable AExpr = null is writable
 end
 
 # A `if` statement
 class AIfExpr
 	super AExpr
+
+	# The `if` keyword
 	var n_kwif: TKwif is writable, noinit
+
+	# The expression used as the condition of the `if`
 	var n_expr: AExpr is writable, noinit
+
+	# The body of the `then` part
 	var n_then: nullable AExpr = null is writable
+
+	# The body of the `else` part
 	var n_else: nullable AExpr = null is writable
 end
 
-# A `if` expression
+# A `if` expression (ternary conditional). eg. `if true then 1 else 0`
 class AIfexprExpr
 	super AExpr
+
+	# The `if` keyword
 	var n_kwif: TKwif is writable, noinit
+
+	# The expression used as the condition of the `if`
 	var n_expr: AExpr is writable, noinit
+
+	# The `then` keyword
 	var n_kwthen: TKwthen is writable, noinit
+
+	# The expression in the `then` part
 	var n_then: AExpr is writable, noinit
+
+	# The `else` keyword
 	var n_kwelse: TKwelse is writable, noinit
+
+	# The expression in the `else` part
 	var n_else: AExpr is writable, noinit
 end
 
@@ -1458,9 +1698,17 @@ end
 class AWhileExpr
 	super AExpr
 	super ALabelable
+
+	# The `while` keyword
 	var n_kwwhile:  TKwwhile is writable, noinit
+
+	# The expression used as the condition of the `while`
 	var n_expr: AExpr is writable, noinit
+
+	# The `do` keyword
 	var n_kwdo: TKwdo is writable, noinit
+
+	# The body of the loop
 	var n_block: nullable AExpr = null is writable
 end
 
@@ -1468,7 +1716,11 @@ end
 class ALoopExpr
 	super AExpr
 	super ALabelable
+
+	# The `loop` keyword
 	var n_kwloop: TKwloop is writable, noinit
+
+	# The body of the loop
 	var n_block: nullable AExpr = null is writable
 end
 
@@ -1476,40 +1728,70 @@ end
 class AForExpr
 	super AExpr
 	super ALabelable
+
+	# The `for` keyword
 	var n_kwfor: TKwfor is writable, noinit
+
+	# The list of name of the automatic variables
 	var n_ids = new ANodes[TId](self)
+
+	# The expression used as the collection to iterate on
 	var n_expr: AExpr is writable, noinit
+
+	# The `do` keyword
 	var n_kwdo: TKwdo is writable, noinit
+
+	# The body of the loop
 	var n_block: nullable AExpr = null is writable
 end
 
 # An `assert` statement
 class AAssertExpr
 	super AExpr
+
+	# The `assert` keyword
 	var n_kwassert: TKwassert is writable, noinit
+
+	# The name of the assert, if any
 	var n_id: nullable TId = null is writable
+
+	# The expression used as the condition of the `assert`
 	var n_expr: AExpr is writable, noinit
+
+	# The body to execute when the assert fails
 	var n_else: nullable AExpr = null is writable
 end
 
 # Whatever is a simple assignment. eg `= something`
 abstract class AAssignFormExpr
 	super AExpr
+
+	# The `=` symbol
 	var n_assign: TAssign is writable, noinit
+
+	# The right-value to assign.
 	var n_value: AExpr is writable, noinit
 end
 
 # Whatever is a combined assignment. eg `+= something`
 abstract class AReassignFormExpr
 	super AExpr
+
+	# The combined operator (eg. `+=`)
 	var n_assign_op: AAssignOp is writable, noinit
+
+	# The right-value to apply on the combined operator.
 	var n_value: AExpr is writable, noinit
 end
 
 # A `once` expression. eg `once x`
 class AOnceExpr
 	super AExpr
+
+	# The `once` keyword
 	var n_kwonce: TKwonce is writable, noinit
+
+	# The expression to evaluate only one time
 	var n_expr: AExpr is writable, noinit
 end
 
@@ -1534,38 +1816,45 @@ abstract class ABoolExpr
 	super AExpr
 end
 
-# A `or` expression 
-class AOrExpr
+# Something that is binary boolean expression
+abstract class ABinBoolExpr
 	super ABoolExpr
+
+	# The first boolean operand
 	var n_expr: AExpr is writable, noinit
+
+	# The second boolean operand
 	var n_expr2: AExpr is writable, noinit
+end
+
+# A `or` expression
+class AOrExpr
+	super ABinBoolExpr
 end
 
 # A `and` expression
 class AAndExpr
-	super ABoolExpr
-	var n_expr: AExpr is writable, noinit
-	var n_expr2: AExpr is writable, noinit
+	super ABinBoolExpr
 end
 
 # A `or else` expression
 class AOrElseExpr
-	super ABoolExpr
-	var n_expr: AExpr is writable, noinit
-	var n_expr2: AExpr is writable, noinit
+	super ABinBoolExpr
 end
 
 # A `implies` expression
 class AImpliesExpr
-	super ABoolExpr
-	var n_expr: AExpr is writable, noinit
-	var n_expr2: AExpr is writable, noinit
+	super ABinBoolExpr
 end
 
 # A `not` expression
 class ANotExpr
 	super ABoolExpr
+
+	# The `not` keyword
 	var n_kwnot: TKwnot is writable, noinit
+
+	# The boolean operand of the `not`
 	var n_expr: AExpr is writable, noinit
 end
 
@@ -1612,7 +1901,11 @@ end
 # A type-ckeck expression. eg `x isa T`
 class AIsaExpr
 	super ABoolExpr
+
+	# The expression to check
 	var n_expr: AExpr is writable, noinit
+
+	# The destination type to check to
 	var n_type: AType is writable, noinit
 end
 
@@ -1654,17 +1947,25 @@ end
 # A unary minus expression. eg `-x`
 class AUminusExpr
 	super ASendExpr
+
+	# The `-` symbol
 	var n_minus: TMinus is writable, noinit
 end
 
 # An explicit instantiation. eg `new T`
 class ANewExpr
 	super AExpr
+
+	# The `new` keyword
 	var n_kwnew: TKwnew is writable, noinit
+
+	# The `type` keyword
 	var n_type: AType is writable, noinit
 
 	# The name of the named-constructor, if any
 	var n_id: nullable TId = null is writable
+
+	# The arguments of the `new`
 	var n_args: AExprs is writable, noinit
 end
 
@@ -1740,8 +2041,14 @@ end
 # A call to `super`. OR a call of a super-constructor
 class ASuperExpr
 	super AExpr
+
+	# The qualifier part before the super (currenlty unused)
 	var n_qualified: nullable AQualified = null is writable
+
+	# The `super` keyword
 	var n_kwsuper: TKwsuper is writable, noinit
+
+	# The arguments of the super
 	var n_args: AExprs is writable, noinit
 end
 
@@ -1749,13 +2056,19 @@ end
 # Note: because `init` is a keyword and not a `TId`, the explicit call to init cannot be a `ACallFormExpr`.
 class AInitExpr
 	super ASendExpr
+
+	# The `init` keyword
 	var n_kwinit: TKwinit is writable, noinit
+
+	# The arguments of the init
 	var n_args: AExprs is writable, noinit
 end
 
 # Whatever looks-like a call of the brackets `[]` operator.
 abstract class ABraFormExpr
 	super ASendExpr
+
+	# The arguments inside the brackets
 	var n_args: AExprs is writable, noinit
 end
 
@@ -1773,6 +2086,8 @@ end
 # Whatever is an access to a local variable
 abstract class AVarFormExpr
 	super AExpr
+
+	# The name of the attribute
 	var n_id: TId is writable, noinit
 end
 
@@ -1805,36 +2120,58 @@ end
 # A literal range, open or closed
 abstract class ARangeExpr
 	super AExpr
+
+	# The left (lower) element of the range
 	var n_expr: AExpr is writable, noinit
+
+	# The right (uppr) element of the range
 	var n_expr2: AExpr is writable, noinit
 end
 
 # A closed literal range. eg `[x..y]`
 class ACrangeExpr
 	super ARangeExpr
+
+	# The opening bracket `[`
 	var n_obra: TObra is writable, noinit
+
+	# The closing bracket `]`
 	var n_cbra: TCbra is writable, noinit
 end
 
 # An open literal range. eg `[x..y[`
 class AOrangeExpr
 	super ARangeExpr
+
+	# The opening bracket `[`
 	var n_obra: TObra is writable, noinit
+
+	# The closing bracket `[` (because open range)
 	var n_cbra: TObra is writable, noinit
 end
 
 # A literal array. eg. `[x,y,z]`
 class AArrayExpr
 	super AExpr
+
+	# The opening bracket `[`
 	var n_obra: TObra is writable, noinit
+
+	# The elements of the array
 	var n_exprs = new ANodes[AExpr](self)
+
+	# The type of the element of the array (if any)
 	var n_type: nullable AType = null is writable
+
+	# The closing bracket `]`
 	var n_cbra: TCbra is writable, noinit
 end
 
-# A read of `self` 
+# A read of `self`
 class ASelfExpr
 	super AExpr
+
+	# The `self` keyword
 	var n_kwself: nullable TKwself is writable
 end
 
@@ -1846,45 +2183,69 @@ end
 # A `true` boolean literal constant
 class ATrueExpr
 	super ABoolExpr
+
+	# The `true` keyword
 	var n_kwtrue: TKwtrue is writable, noinit
 end
+
 # A `false` boolean literal constant
 class AFalseExpr
 	super ABoolExpr
+
+	# The `false` keyword
 	var n_kwfalse: TKwfalse is writable, noinit
 end
+
 # A `null` literal constant
 class ANullExpr
 	super AExpr
+
+	# The `null` keyword
 	var n_kwnull: TKwnull is writable, noinit
 end
+
 # An integer literal
 class AIntExpr
 	super AExpr
 end
+
 # An integer literal in decimal format
 class ADecIntExpr
 	super AIntExpr
+
+	# The decimal token
 	var n_number: TNumber is writable, noinit
 end
+
 # An integer literal in hexadecimal format
 class AHexIntExpr
 	super AIntExpr
+
+	# The hexadecimal token
 	var n_hex_number: THexNumber is writable, noinit
 end
+
 # A float literal
 class AFloatExpr
 	super AExpr
+
+	# The float token
 	var n_float: TFloat is writable, noinit
 end
+
 # A character literal
 class ACharExpr
 	super AExpr
+
+	# The character token
 	var n_char: TChar is writable, noinit
 end
+
 # A string literal
 abstract class AStringFormExpr
 	super AExpr
+
+	# The string token
 	var n_string: Token is writable, noinit
 end
 
@@ -1912,54 +2273,85 @@ end
 # Each part is modeled a sequence of expression. eg. `["a{, x, }b{, y, }c"]`
 class ASuperstringExpr
 	super AExpr
+
+	# The list of the expressions of the superstring
 	var n_exprs = new ANodes[AExpr](self)
 end
 
 # A simple parenthesis. eg `(x)`
 class AParExpr
 	super AExpr
+
+	# The opening parenthesis
 	var n_opar: TOpar is writable, noinit
+
+	# The inner expression
 	var n_expr: AExpr is writable, noinit
+
+	# The closing parenthesis
 	var n_cpar: TCpar is writable, noinit
+end
+
+# A cast, against a type or `not null`
+class AAsCastForm
+	super AExpr
+
+	# The expression to cast
+	var n_expr: AExpr is writable, noinit
+
+	# The `as` keyword
+	var n_kwas: TKwas is writable, noinit
+
+	# The opening parenthesis
+	var n_opar: nullable TOpar = null is writable
+
+	# The closing parenthesis
+	var n_cpar: nullable TCpar = null is writable
 end
 
 # A type cast. eg `x.as(T)`
 class AAsCastExpr
-	super AExpr
-	var n_expr: AExpr is writable, noinit
-	var n_kwas: TKwas is writable, noinit
-	var n_opar: nullable TOpar = null is writable
+	super AAsCastForm
+
+	# The target type to cast to
 	var n_type: AType is writable, noinit
-	var n_cpar: nullable TCpar = null is writable
 end
 
 # A as-not-null cast. eg `x.as(not null)`
 class AAsNotnullExpr
-	super AExpr
-	var n_expr: AExpr is writable, noinit
-	var n_kwas: TKwas is writable, noinit
-	var n_opar: nullable TOpar = null is writable
+	super AAsCastForm
+
+	# The `not` keyword
 	var n_kwnot: TKwnot is writable, noinit
+
+	# The `null` keyword
 	var n_kwnull: TKwnull is writable, noinit
-	var n_cpar: nullable TCpar = null is writable
 end
 
 # A is-set check of old-style attributes. eg `isset x._a`
 class AIssetAttrExpr
 	super AAttrFormExpr
+
+	# The `isset` keyword
 	var n_kwisset: TKwisset is writable, noinit
 end
 
 # An ellipsis notation used to pass an expression as it, in a vararg parameter
 class AVarargExpr
 	super AExpr
+
+	# The passed expression
 	var n_expr: AExpr is writable, noinit
+
+	# The `...` symbol
 	var n_dotdotdot: TDotdotdot is writable, noinit
 end
 
 # A list of expression separated with commas (arguments for instance)
 class AManyExpr
 	super AExpr
+
+	# The list of expressions
 	var n_exprs = new ANodes[AExpr](self)
 end
 
@@ -1967,6 +2359,8 @@ end
 # Can only be found in special construction like arguments of annotations.
 class ATypeExpr
 	super AExpr
+
+	# The encapsulated type
 	var n_type: AType is writable, noinit
 end
 
@@ -1974,13 +2368,18 @@ end
 # Can only be found in special construction like arguments of annotations.
 class AMethidExpr
 	super AExpr
-	# The receiver, is any
+
+	# The receiver
 	var n_expr: AExpr is writable, noinit
+
+	# The encapsulated method identifier
 	var n_id: AMethid is writable, noinit
 end
 
 # A special expression that encapsulate an annotation
 # Can only be found in special construction like arguments of annotations.
+#
+# The encapsulated annotations are in `n_annotations`
 class AAtExpr
 	super AExpr
 end
@@ -1988,15 +2387,25 @@ end
 # A special expression to debug types
 class ADebugTypeExpr
 	super AExpr
+
+	# The `debug` keyword
 	var n_kwdebug: TKwdebug is writable, noinit
+
+	# The `type` keyword
 	var n_kwtype: TKwtype is writable, noinit
+
+	# The expression to check
 	var n_expr: AExpr is writable, noinit
+
+	# The type to check
 	var n_type: AType is writable, noinit
 end
 
 # A list of expression separated with commas (arguments for instance)
 abstract class AExprs
 	super Prod
+
+	# The list of expressions
 	var n_exprs = new ANodes[AExpr](self)
 end
 
@@ -2008,14 +2417,22 @@ end
 # A list of expressions enclosed in parentheses
 class AParExprs
 	super AExprs
+
+	# The opening parenthesis
 	var n_opar: TOpar is writable, noinit
+
+	# The closing parenthesis
 	var n_cpar: TCpar is writable, noinit
 end
 
 # A list of expressions enclosed in brackets
 class ABraExprs
 	super AExprs
+
+	# The opening bracket
 	var n_obra: TObra is writable, noinit
+
+	# The closing bracket
 	var n_cbra: TCbra is writable, noinit
 end
 
@@ -2027,42 +2444,66 @@ end
 # The `+=` assignment operation
 class APlusAssignOp
 	super AAssignOp
+
+	# The `+=` operator
 	var n_pluseq: TPluseq is writable, noinit
 end
 
 # The `-=` assignment operator
 class AMinusAssignOp
 	super AAssignOp
+
+	# The `-=` operator
 	var n_minuseq: TMinuseq is writable, noinit
 end
 
 # A possibly fully-qualified module identifier
 class AModuleName
 	super Prod
+
+	# The starting quad (`::`)
 	var n_quad: nullable TQuad = null is writable
+
+	# The list of quad-separated project/group identifiers
 	var n_path = new ANodes[TId](self)
+
+	# The final module identifier
 	var n_id: TId is writable, noinit
 end
 
 # A language declaration for an extern block
 class AInLanguage
 	super Prod
+
+	# The `in` keyword
 	var n_kwin: TKwin is writable, noinit
+
+	# The language name
 	var n_string: TString is writable, noinit
 end
 
 # An full extern block
 class AExternCodeBlock
 	super Prod
+
+	# The language declration
 	var n_in_language: nullable AInLanguage = null is writable
+
+	# The block of extern code
 	var n_extern_code_segment: TExternCodeSegment is writable, noinit
 end
 
 # A possible full method qualifier.
 class AQualified
 	super Prod
+
+	# The starting quad (`::`)
 	var n_quad: nullable TQuad = null is writable
+
+	# The list of quad-separated project/group/module identifiers
 	var n_id = new ANodes[TId](self)
+
+	# A class identifier
 	var n_classid: nullable TClassid = null is writable
 end
 
@@ -2070,27 +2511,48 @@ end
 # It contains the block of comments just above the declaration
 class ADoc
 	super Prod
+
+	# A list of lines of comment
 	var n_comment = new ANodes[TComment](self)
 end
 
 # A group of annotation on a node
+#
+# This same class is used for the 3 kind of annotations:
+#
+# * *is* annotations. eg `module foo is bar`.
+# * *at* annotations. eg `foo@bar` or `foo@(bar,baz)`.
+# * *class* annotations, defined in classes.
 class AAnnotations
 	super Prod
+
+	# The `@` symbol, for *at* annotations
 	var n_at: nullable TAt = null is writable
+
+	# The opening parenthesis in *at* annotations
 	var n_opar: nullable TOpar = null is writable
+
+	# The list of annotations
 	var n_items = new ANodes[AAnnotation](self)
+
+	# The closing parenthesis in *at* annotations
 	var n_cpar: nullable TCpar = null is writable
 end
 
 # A single annotation
 class AAnnotation
-	super Prod
-	var n_doc: nullable ADoc = null is writable
-	var n_kwredef: nullable TKwredef = null is writable
-	var n_visibility: nullable AVisibility is writable
+	super ADefinition
+
+	# The name of the annotation
 	var n_atid: AAtid is writable, noinit
+
+	# The opening parenthesis of the arguments
 	var n_opar: nullable TOpar = null is writable
+
+	# The list of arguments
 	var n_args = new ANodes[AExpr](self)
+
+	# The closing parenthesis
 	var n_cpar: nullable TCpar = null is writable
 
 	# The name of the annotation
@@ -2103,6 +2565,9 @@ end
 # An annotation name
 abstract class AAtid
 	super Prod
+
+	# The identifier of the annotation.
+	# Can be a TId of a keyword
 	var n_id: Token is writable, noinit
 end
 
@@ -2129,6 +2594,10 @@ end
 # The root of the AST
 class Start
 	super Prod
+
+	# The main module
 	var n_base: nullable AModule is writable
+
+	# The end of file (or error) token
 	var n_eof: EOF is writable
 end

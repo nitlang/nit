@@ -21,7 +21,7 @@ import poset
 
 redef class ToolContext
 	# The various registered phases to performs
-	# The order in the poset is the dependance of phases
+	# The order in the poset is the dependence of phases
 	#
 	# While you can directly modify the poset (nodes and edges),
 	# it is often simpler to use the constructor in `Phase`
@@ -64,6 +64,7 @@ redef class ToolContext
 		end
 	end
 
+	# The list of registered phases in the application order.
 	fun phases_list: Sequence[Phase]
 	do
 		var phases = self.phases.to_a
@@ -136,7 +137,9 @@ redef class ToolContext
 		errors_info
 	end
 
-	fun phase_process_npropdef(phase: Phase, npropdef: APropdef)
+	# Process the given `phase` on the `npropdef`
+	# Called by `run_phases`
+	protected fun phase_process_npropdef(phase: Phase, npropdef: APropdef)
 	do
 		phase.process_npropdef(npropdef)
 	end
