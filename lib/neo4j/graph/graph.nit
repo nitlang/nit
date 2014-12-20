@@ -109,6 +109,35 @@ abstract class NeoNodeCollection
 		register(node)
 		return node
 	end
+
+	# Remove the node with the specified local ID.
+	fun remove_at(id: ID_TYPE) is abstract
+
+	# Remove the specified node.
+	#
+	# The local ID is used instead of `==` to seek the node.
+	fun remove_node(node: NeoNode) do
+		remove_at(id_of(node))
+	end
+
+	redef fun clear do
+		for node in self do remove_node(node)
+	end
+
+	redef fun remove(node: NeoNode) do
+		for n in self do
+			if node == n then
+				remove_node(n)
+				return
+			end
+		end
+	end
+
+	redef fun remove_all(node: NeoNode) do
+		for n in self do
+			if node == n then remove_node(n)
+		end
+	end
 end
 
 # A mean to save and load a Neo4j graph.
