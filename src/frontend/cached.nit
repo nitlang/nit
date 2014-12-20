@@ -14,8 +14,7 @@
 
 # Implementation of the method-related annotation `cached`
 #
-# Note this module can be used as a reference on how to implements
-# complex annotation that modify both the model and the AST of a Nit program
+# The cached annotation is deprecated, use the `lazy` annotation instead.
 module cached
 
 import modelize
@@ -25,6 +24,7 @@ private import annotation
 intrude import modelize::modelize_property
 
 redef class ToolContext
+	# Process the `cached` annotation on methods
 	var cached_phase: Phase = new CachedPhase(self, [modelize_property_phase])
 end
 

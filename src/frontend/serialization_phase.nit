@@ -24,7 +24,10 @@ import modelize
 private import annotation
 
 redef class ToolContext
+	# Generate serialization and deserialization methods on `auto_serializable` annotated classes.
 	var serialization_phase_pre_model: Phase = new SerializationPhasePreModel(self, null)
+
+	# The second phase of the serialization
 	var serialization_phase_post_model: Phase = new SerializationPhasePostModel(self,
 		[modelize_class_phase, serialization_phase_pre_model])
 

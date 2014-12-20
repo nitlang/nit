@@ -20,6 +20,7 @@ module modelize_class
 import modelbuilder
 
 redef class ToolContext
+	# Run `AModule::build_classes` on each module
 	var modelize_class_phase: Phase = new ModelizeClassPhase(self, null)
 end
 

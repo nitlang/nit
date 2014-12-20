@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# This module is used to model Nit source-file and locations in source-file
+# Nit source-file and locations in source-file
 module location
 
 # A raw text Nit source file
@@ -51,8 +51,13 @@ class Location
 	super Comparable
 	redef type OTHER: Location
 
+	# The associated source-file
 	var file: nullable SourceFile
+
+	# The starting line number (starting from 1)
 	var line_start: Int
+
+	# The stopping line number (starting from 1)
 	var line_end: Int
 
 	# Start of this location on `line_start`
@@ -64,6 +69,7 @@ class Location
 	# Require: `column_start >= 0`
 	var column_start: Int
 
+	# End of this location on `line_end`
 	var column_end: Int
 
 	# The index in the start character in the source
@@ -86,8 +92,6 @@ class Location
 	end
 
 	private var text_cache: nullable String = null
-
-	init with_file(f: SourceFile) do init(f,0,0,0,0)
 
 	redef fun ==(other: nullable Object): Bool do
 		if other == null then return false

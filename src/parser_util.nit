@@ -222,10 +222,15 @@ redef class ToolContext
 	end
 end
 
+# A modified lexer that feed tokens before and after the real tokens.
 class InjectedLexer
 	super Lexer
 
+	# The tokens to use before the real tokens (in order).
 	var injected_before = new List[Token]
+
+	# The tokens to use after the real tokens (in order).
+	# The real EOF token is produced after these tokens.
 	var injected_after = new List[Token]
 	private var is_finished = false
 

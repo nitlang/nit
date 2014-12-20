@@ -22,6 +22,7 @@ import phase
 private import annotation
 
 redef class ToolContext
+	# Check for unknown annotation in each module
 	var check_annotation_phase: Phase = new CheckAnnotationPhase(self, null)
 end
 

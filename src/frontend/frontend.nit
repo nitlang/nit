@@ -28,7 +28,9 @@ import glsl_validation
 redef class ToolContext
 	# FIXME: there is conflict in linex in nitc, so use this trick to force invocation
 	private var dummy: Bool = do_dummy
-	fun do_dummy: Bool
+
+	# SEE `dummy`
+	private fun do_dummy: Bool
 	do
 		# Force easy warnings after modelbuilder
 		phases.add_edge(simple_misc_analysis_phase, modelize_property_phase)
