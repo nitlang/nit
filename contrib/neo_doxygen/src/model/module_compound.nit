@@ -139,19 +139,19 @@ private class Module
 	# declares it.
 	fun update_name do name = file_compound.basename
 
-	redef fun put_in_graph do
-		super
-	end
-
 	redef fun put_edges do
 		var ns_compound = namespace.seek_in(graph)
 		var self_class = ns_compound.self_class
+		var class_count = 0
+		var last_class: nullable ClassCompound = null
 
 		graph.add_edge(ns_compound, "DECLARES", self)
 
 		for c in file_compound.inner_classes do
 			if graph.class_to_ns[c] != ns_compound then continue
 			var class_compound = graph.by_id[c].as(ClassCompound)
+			last_class = class_compound
+			class_count += 1
 			graph.add_edge(self, "INTRODUCES", class_compound)
 			graph.add_edge(self, "DEFINES", class_compound.class_def)
 		end
@@ -163,6 +163,13 @@ private class Module
 			graph.add_edge(self, "INTRODUCES", self_class)
 			graph.add_edge(self, "DEFINES", self_class.class_def)
 		end
+
+		if doc.is_empty and class_count == 1 then
+			doc = last_class.as(not null).doc
+		end
+		if doc.is_empty then doc = file_compound.doc
+		if doc.is_empty then doc = ns_compound.doc
+		if not doc.is_empty then set_mdoc
 	end
 end
 

@@ -242,8 +242,8 @@ Edge
 3:foo
 7:MEntity
 7:MModule
-=properties=JsonObject(2):
-{"location":"%SOURCE_DIRECTORY%\/org\/example\/foo\/C.java:1,1--1,1","name":"C"}
+=properties=JsonObject(3):
+{"location":"%SOURCE_DIRECTORY%\/org\/example\/foo\/C.java:1,1--1,1","name":"C","mdoc":["An interface"]}
 
 
 Edge
@@ -256,8 +256,8 @@ Edge
 3:foo
 7:MEntity
 7:MModule
-=properties=JsonObject(2):
-{"location":"%SOURCE_DIRECTORY%\/org\/example\/foo\/C.java:1,1--1,1","name":"C"}
+=properties=JsonObject(3):
+{"location":"%SOURCE_DIRECTORY%\/org\/example\/foo\/C.java:1,1--1,1","name":"C","mdoc":["An interface"]}
 ----
 =to=Entity#36:interfaceorg_1_1example_1_1foo_1_1_c
 =labels=Array(3):
@@ -278,8 +278,8 @@ Edge
 3:foo
 7:MEntity
 7:MModule
-=properties=JsonObject(2):
-{"location":"%SOURCE_DIRECTORY%\/org\/example\/foo\/C.java:1,1--1,1","name":"C"}
+=properties=JsonObject(3):
+{"location":"%SOURCE_DIRECTORY%\/org\/example\/foo\/C.java:1,1--1,1","name":"C","mdoc":["An interface"]}
 ----
 =to=Entity#0:
 =labels=Array(3):
@@ -308,8 +308,8 @@ Edge
 3:foo
 7:MEntity
 7:MModule
-=properties=JsonObject(2):
-{"location":"%SOURCE_DIRECTORY%\/org\/example\/foo\/EmptyClass.java:1,1--1,1","name":"EmptyClass"}
+=properties=JsonObject(3):
+{"location":"%SOURCE_DIRECTORY%\/org\/example\/foo\/EmptyClass.java:1,1--1,1","name":"EmptyClass","mdoc":["This class is empty and is only visible in this package."]}
 
 
 Edge
@@ -322,8 +322,8 @@ Edge
 3:foo
 7:MEntity
 7:MModule
-=properties=JsonObject(2):
-{"location":"%SOURCE_DIRECTORY%\/org\/example\/foo\/EmptyClass.java:1,1--1,1","name":"EmptyClass"}
+=properties=JsonObject(3):
+{"location":"%SOURCE_DIRECTORY%\/org\/example\/foo\/EmptyClass.java:1,1--1,1","name":"EmptyClass","mdoc":["This class is empty and is only visible in this package."]}
 ----
 =to=Entity#42:classorg_1_1example_1_1foo_1_1_empty_class
 =labels=Array(3):
@@ -344,8 +344,8 @@ Edge
 3:foo
 7:MEntity
 7:MModule
-=properties=JsonObject(2):
-{"location":"%SOURCE_DIRECTORY%\/org\/example\/foo\/EmptyClass.java:1,1--1,1","name":"EmptyClass"}
+=properties=JsonObject(3):
+{"location":"%SOURCE_DIRECTORY%\/org\/example\/foo\/EmptyClass.java:1,1--1,1","name":"EmptyClass","mdoc":["This class is empty and is only visible in this package."]}
 ----
 =to=Entity#0:
 =labels=Array(3):

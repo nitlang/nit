@@ -157,8 +157,8 @@ Edge
 14:root-namespace
 7:MEntity
 7:MModule
-=properties=JsonObject(2):
-{"location":"%SOURCE_DIRECTORY%\/Foo.java:1,1--1,1","name":"Foo"}
+=properties=JsonObject(3):
+{"location":"%SOURCE_DIRECTORY%\/Foo.java:1,1--1,1","name":"Foo","mdoc":["A class in the root namespace"]}
 
 
 Edge
@@ -171,8 +171,8 @@ Edge
 14:root-namespace
 7:MEntity
 7:MModule
-=properties=JsonObject(2):
-{"location":"%SOURCE_DIRECTORY%\/Foo.java:1,1--1,1","name":"Foo"}
+=properties=JsonObject(3):
+{"location":"%SOURCE_DIRECTORY%\/Foo.java:1,1--1,1","name":"Foo","mdoc":["A class in the root namespace"]}
 ----
 =to=Entity#9:class_foo
 =labels=Array(3):
@@ -193,8 +193,8 @@ Edge
 14:root-namespace
 7:MEntity
 7:MModule
-=properties=JsonObject(2):
-{"location":"%SOURCE_DIRECTORY%\/Foo.java:1,1--1,1","name":"Foo"}
+=properties=JsonObject(3):
+{"location":"%SOURCE_DIRECTORY%\/Foo.java:1,1--1,1","name":"Foo","mdoc":["A class in the root namespace"]}
 ----
 =to=Entity#0:
 =labels=Array(3):
