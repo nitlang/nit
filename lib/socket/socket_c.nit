@@ -29,15 +29,7 @@ in "C Header" `{
 	#include <netdb.h>
 	#include <sys/poll.h>
 
-	typedef int S_DESCRIPTOR;
-	typedef struct sockaddr_in S_ADDR_IN;
-	typedef struct sockaddr S_ADDR;
-	typedef struct in_addr S_IN_ADDR;
-	typedef struct hostent S_HOSTENT;
-	typedef struct timeval S_TIMEVAL;
-	typedef struct sockaccept_result { S_ADDR_IN addr_in; S_DESCRIPTOR s_desc; } S_ACCEPT_RESULT;
-	typedef fd_set S_FD_SET;
-	typedef socklen_t S_LEN;
+	typedef struct sockaccept_result { struct sockaddr_in addr_in; int s_desc; } S_ACCEPT_RESULT;
 `}
 
 # Wrapper for the data structure PollFD used for polling on a socket
@@ -101,9 +93,9 @@ private extern class FFSocketPollFD `{ struct pollfd `}
 
 end
 
-extern class FFSocket `{ S_DESCRIPTOR* `}
+extern class FFSocket `{ int* `}
 	new socket(domain: FFSocketAddressFamilies, socketType: FFSocketTypes, protocol: FFSocketProtocolFamilies) `{
-		S_DESCRIPTOR *d = NULL; d = (S_DESCRIPTOR*) malloc( sizeof(S_DESCRIPTOR) );
+		int *d = NULL; d = (int*) malloc( sizeof(int) );
 		int ds = socket(domain, socketType, protocol);
 		if(ds == -1){
 			free(d);
@@ -117,7 +109,7 @@ extern class FFSocket `{ S_DESCRIPTOR* `}
 	fun descriptor: Int `{ return *recv; `}
 
 	fun gethostbyname(n: String): FFSocketHostent import String.to_cstring `{ return gethostbyname(String_to_cstring(n)); `}
-	fun connect(addrIn: FFSocketAddrIn): Int `{ return connect( *recv, (S_ADDR*)addrIn, sizeof(*addrIn) ); `}
+	fun connect(addrIn: FFSocketAddrIn): Int `{ return connect( *recv, (struct sockaddr*)addrIn, sizeof(*addrIn) ); `}
 	fun write(buffer: String): Int import String.to_cstring, String.length `{ return write(*recv, (char*)String_to_cstring(buffer), String_length(buffer)); `}
 
 	fun read: String import NativeString.to_s_with_length `{
@@ -141,7 +133,7 @@ extern class FFSocket `{ S_DESCRIPTOR* `}
 		}
 	`}
 
-	fun bind(addrIn: FFSocketAddrIn): Int `{ return bind(*recv, (S_ADDR*)addrIn, sizeof(*addrIn)); `}
+	fun bind(addrIn: FFSocketAddrIn): Int `{ return bind(*recv, (struct sockaddr*)addrIn, sizeof(*addrIn)); `}
 	fun listen(size: Int): Int `{ return listen(*recv, size); `}
 
 	# Checks if the buffer is ready for any event specified when creating the pollfd structure
@@ -173,10 +165,10 @@ extern class FFSocket `{ S_DESCRIPTOR* `}
 	`}
 
 	private fun i_accept(addrIn: FFSocketAddrIn): FFSocket `{
-		S_LEN s = sizeof(S_ADDR);
-		S_DESCRIPTOR *d = NULL;
-		d = malloc(sizeof(S_DESCRIPTOR));
-		*d = accept(*recv,(S_ADDR*)addrIn, &s);
+		socklen_t s = sizeof(struct sockaddr);
+		int *d = NULL;
+		d = malloc(sizeof(int));
+		*d = accept(*recv,(struct sockaddr*)addrIn, &s);
 		return d;
 	`}
 	fun accept: FFSocketAcceptResult
@@ -200,23 +192,23 @@ extern class FFSocketAcceptResult `{ S_ACCEPT_RESULT* `}
 	fun destroy `{ free(recv); `}
 end
 
-extern class FFSocketAddrIn `{ S_ADDR_IN* `}
+extern class FFSocketAddrIn `{ struct sockaddr_in* `}
 	new `{
-		S_ADDR_IN *sai = NULL;
-		sai = malloc( sizeof(S_ADDR_IN) );
+		struct sockaddr_in *sai = NULL;
+		sai = malloc( sizeof(struct sockaddr_in) );
 		return sai;
 	`}
 	new with(port: Int, family: FFSocketAddressFamilies) `{
-		S_ADDR_IN *sai = NULL;
-		sai = malloc( sizeof(S_ADDR_IN) );
+		struct sockaddr_in *sai = NULL;
+		sai = malloc( sizeof(struct sockaddr_in) );
 		sai->sin_family = family;
 		sai->sin_port = htons(port);
 		sai->sin_addr.s_addr = INADDR_ANY;
 		return sai;
 	`}
 	new with_hostent(hostent: FFSocketHostent, port: Int) `{
-		S_ADDR_IN *sai = NULL;
-		sai = malloc( sizeof(S_ADDR_IN) );
+		struct sockaddr_in *sai = NULL;
+		sai = malloc( sizeof(struct sockaddr_in) );
 		sai->sin_family = hostent->h_addrtype;
 		sai->sin_port = htons(port);
 		memcpy( (char*)&sai->sin_addr.s_addr, (char*)hostent->h_addr, hostent->h_length );
@@ -228,7 +220,7 @@ extern class FFSocketAddrIn `{ S_ADDR_IN* `}
 	fun destroy `{ free(recv); `}
 end
 
-extern class FFSocketHostent `{ S_HOSTENT* `}
+extern class FFSocketHostent `{ struct hostent* `}
 	private fun i_h_aliases(i: Int): String import NativeString.to_s `{ return NativeString_to_s(recv->h_aliases[i]); `}
 	private fun i_h_aliases_reachable(i: Int): Bool `{ return (recv->h_aliases[i] != NULL); `}
 	fun h_aliases: Array[String]
@@ -242,16 +234,16 @@ extern class FFSocketHostent `{ S_HOSTENT* `}
 		end
 		return d
 	end
-	fun h_addr: String import NativeString.to_s `{ return NativeString_to_s( (char*)inet_ntoa(*(S_IN_ADDR*)recv->h_addr) ); `}
+	fun h_addr: String import NativeString.to_s `{ return NativeString_to_s( (char*)inet_ntoa(*(struct in_addr*)recv->h_addr) ); `}
 	fun h_addrtype: Int `{ return recv->h_addrtype; `}
 	fun h_length: Int `{ return recv->h_length; `}
 	fun h_name: String import NativeString.to_s `{ return NativeString_to_s(recv->h_name); `}
 end
 
-extern class FFTimeval `{ S_TIMEVAL* `}
+extern class FFTimeval `{ struct timeval* `}
 	new (seconds: Int, microseconds: Int) `{
-		S_TIMEVAL* tv = NULL;
-		tv = malloc( sizeof(S_TIMEVAL) );
+		struct timeval* tv = NULL;
+		tv = malloc( sizeof(struct timeval) );
 		tv->tv_sec = seconds;
 		tv->tv_usec = microseconds;
 		return tv;
@@ -261,10 +253,10 @@ extern class FFTimeval `{ S_TIMEVAL* `}
 	fun destroy `{ free( recv ); `}
 end
 
-extern class FFSocketSet `{ S_FD_SET* `}
+extern class FFSocketSet `{ fd_set* `}
 	new `{
-		S_FD_SET *f = NULL;
-		f = malloc( sizeof(S_FD_SET) );
+		fd_set *f = NULL;
+		f = malloc( sizeof(fd_set) );
 		return f;
 	`}
 	fun set(s: FFSocket) `{ FD_SET( *s, recv ); `}
@@ -277,12 +269,12 @@ end
 class FFSocketObserver
 	fun select(max: FFSocket, reads: nullable FFSocketSet, write: nullable FFSocketSet,
              except: nullable FFSocketSet, timeout: FFTimeval): Int `{
-		S_FD_SET *rds, *wts, *exs = NULL;
-		S_TIMEVAL *tm = NULL;
-		if(reads != NULL) rds = (S_FD_SET*)reads;
-		if(write != NULL) wts = (S_FD_SET*)write;
-		if(except != NULL) exs = (S_FD_SET*)except;
-		if(timeout != NULL) tm = (S_TIMEVAL*)timeout;
+		fd_set *rds, *wts, *exs = NULL;
+		struct timeval *tm = NULL;
+		if(reads != NULL) rds = (fd_set*)reads;
+		if(write != NULL) wts = (fd_set*)write;
+		if(except != NULL) exs = (fd_set*)except;
+		if(timeout != NULL) tm = (struct timeval*)timeout;
 		return select(*max, rds, wts, exs, tm);
 	`}
 end
