@@ -29,7 +29,10 @@ in "C Header" `{
 	#include <netdb.h>
 	#include <sys/poll.h>
 
-	typedef struct sockaccept_result { struct sockaddr_in addr_in; int s_desc; } S_ACCEPT_RESULT;
+	typedef struct sockaccept_result {
+		struct sockaddr_in addr_in;
+		int s_desc;
+	} S_ACCEPT_RESULT;
 `}
 
 # Wrapper for the data structure PollFD used for polling on a socket
@@ -77,10 +80,13 @@ end
 
 # Data structure used by the poll function
 private extern class FFSocketPollFD `{ struct pollfd `}
+
 	# File descriptor id
 	private fun fd: Int `{ return recv.fd; `}
+
 	# List of events to be watched
 	private fun events: Int `{ return recv.events; `}
+
 	# List of events received by the last poll function
 	private fun revents: Int `{  return recv.revents; `}
 
@@ -94,8 +100,9 @@ private extern class FFSocketPollFD `{ struct pollfd `}
 end
 
 extern class FFSocket `{ int* `}
+
 	new socket(domain: FFSocketAddressFamilies, socketType: FFSocketTypes, protocol: FFSocketProtocolFamilies) `{
-		int *d = NULL; d = (int*) malloc( sizeof(int) );
+		int *d = malloc(sizeof(int));
 		int ds = socket(domain, socketType, protocol);
 		if(ds == -1){
 			free(d);
@@ -104,13 +111,23 @@ extern class FFSocket `{ int* `}
 		memcpy(d, &ds, sizeof(ds));
 		return d;
 	`}
+
 	fun destroy `{ free(recv); `}
-	fun close: Int `{ return close( *recv ); `}
+
+	fun close: Int `{ return close(*recv); `}
+
 	fun descriptor: Int `{ return *recv; `}
 
 	fun gethostbyname(n: String): FFSocketHostent import String.to_cstring `{ return gethostbyname(String_to_cstring(n)); `}
-	fun connect(addrIn: FFSocketAddrIn): Int `{ return connect( *recv, (struct sockaddr*)addrIn, sizeof(*addrIn) ); `}
-	fun write(buffer: String): Int import String.to_cstring, String.length `{ return write(*recv, (char*)String_to_cstring(buffer), String_length(buffer)); `}
+
+	fun connect(addrIn: FFSocketAddrIn): Int `{
+		return connect(*recv, (struct sockaddr*)addrIn, sizeof(*addrIn));
+	`}
+
+	fun write(buffer: String): Int
+	import String.to_cstring, String.length `{
+		return write(*recv, (char*)String_to_cstring(buffer), String_length(buffer));
+	`}
 
 	fun read: String import NativeString.to_s_with_length `{
 		static char c[1024];
@@ -128,12 +145,13 @@ extern class FFSocket `{ int* `}
 	fun setsockopt(level: FFSocketOptLevels, option_name: FFSocketOptNames, option_value: Int) `{
 		int err = setsockopt(*recv, level, option_name, &option_value, sizeof(int));
 		if(err != 0){
-			perror("Error on setsockopts : ");
+			perror("Error on setsockopts: ");
 			exit(1);
 		}
 	`}
 
 	fun bind(addrIn: FFSocketAddrIn): Int `{ return bind(*recv, (struct sockaddr*)addrIn, sizeof(*addrIn)); `}
+
 	fun listen(size: Int): Int `{ return listen(*recv, size); `}
 
 	# Checks if the buffer is ready for any event specified when creating the pollfd structure
@@ -146,10 +164,10 @@ extern class FFSocket `{ int* `}
 
 	# Call to the poll function of the C socket
 	#
-	# Signature :
+	# Signature:
 	# int poll(struct pollfd fds[], nfds_t nfds, int timeout);
 	#
-	# Official documentation of the poll function :
+	# Official documentation of the poll function:
 	#
 	# The poll() function provides applications with a mechanism for multiplexing input/output over a set of file descriptors.
 	# For each member of the array pointed to by fds, poll() shall examine the given file descriptor for the event(s) specified in events.
@@ -171,6 +189,7 @@ extern class FFSocket `{ int* `}
 		*d = accept(*recv,(struct sockaddr*)addrIn, &s);
 		return d;
 	`}
+
 	fun accept: FFSocketAcceptResult
 	do
 		var addrIn = new FFSocketAddrIn
@@ -182,47 +201,58 @@ end
 extern class FFSocketAcceptResult `{ S_ACCEPT_RESULT* `}
 	new (socket: FFSocket, addrIn: FFSocketAddrIn) `{
 		S_ACCEPT_RESULT *sar = NULL;
-		sar = malloc( sizeof(S_ACCEPT_RESULT) );
+		sar = malloc(sizeof(S_ACCEPT_RESULT));
 		sar->s_desc = *socket;
 		sar->addr_in = *addrIn;
 		return sar;
 	`}
+
 	fun socket: FFSocket `{ return &recv->s_desc; `}
+
 	fun addrIn: FFSocketAddrIn `{ return &recv->addr_in; `}
+
 	fun destroy `{ free(recv); `}
 end
 
 extern class FFSocketAddrIn `{ struct sockaddr_in* `}
 	new `{
 		struct sockaddr_in *sai = NULL;
-		sai = malloc( sizeof(struct sockaddr_in) );
+		sai = malloc(sizeof(struct sockaddr_in));
 		return sai;
 	`}
+
 	new with(port: Int, family: FFSocketAddressFamilies) `{
 		struct sockaddr_in *sai = NULL;
-		sai = malloc( sizeof(struct sockaddr_in) );
+		sai = malloc(sizeof(struct sockaddr_in));
 		sai->sin_family = family;
 		sai->sin_port = htons(port);
 		sai->sin_addr.s_addr = INADDR_ANY;
 		return sai;
 	`}
+
 	new with_hostent(hostent: FFSocketHostent, port: Int) `{
 		struct sockaddr_in *sai = NULL;
-		sai = malloc( sizeof(struct sockaddr_in) );
+		sai = malloc(sizeof(struct sockaddr_in));
 		sai->sin_family = hostent->h_addrtype;
 		sai->sin_port = htons(port);
-		memcpy( (char*)&sai->sin_addr.s_addr, (char*)hostent->h_addr, hostent->h_length );
+		memcpy((char*)&sai->sin_addr.s_addr, (char*)hostent->h_addr, hostent->h_length);
 		return sai;
 	`}
-	fun address: String import NativeString.to_s `{ return NativeString_to_s( (char*)inet_ntoa(recv->sin_addr) ); `}
+
+	fun address: String import NativeString.to_s `{ return NativeString_to_s((char*)inet_ntoa(recv->sin_addr)); `}
+
 	fun family: FFSocketAddressFamilies `{ return recv->sin_family; `}
+
 	fun port: Int `{ return ntohs(recv->sin_port); `}
+
 	fun destroy `{ free(recv); `}
 end
 
 extern class FFSocketHostent `{ struct hostent* `}
 	private fun i_h_aliases(i: Int): String import NativeString.to_s `{ return NativeString_to_s(recv->h_aliases[i]); `}
+
 	private fun i_h_aliases_reachable(i: Int): Bool `{ return (recv->h_aliases[i] != NULL); `}
+
 	fun h_aliases: Array[String]
 	do
 		var i=0
@@ -234,47 +264,59 @@ extern class FFSocketHostent `{ struct hostent* `}
 		end
 		return d
 	end
-	fun h_addr: String import NativeString.to_s `{ return NativeString_to_s( (char*)inet_ntoa(*(struct in_addr*)recv->h_addr) ); `}
+
+	fun h_addr: String import NativeString.to_s `{ return NativeString_to_s((char*)inet_ntoa(*(struct in_addr*)recv->h_addr)); `}
+
 	fun h_addrtype: Int `{ return recv->h_addrtype; `}
+
 	fun h_length: Int `{ return recv->h_length; `}
+
 	fun h_name: String import NativeString.to_s `{ return NativeString_to_s(recv->h_name); `}
 end
 
 extern class FFTimeval `{ struct timeval* `}
 	new (seconds: Int, microseconds: Int) `{
 		struct timeval* tv = NULL;
-		tv = malloc( sizeof(struct timeval) );
+		tv = malloc(sizeof(struct timeval));
 		tv->tv_sec = seconds;
 		tv->tv_usec = microseconds;
 		return tv;
 	`}
+
 	fun seconds: Int `{ return recv->tv_sec; `}
+
 	fun microseconds: Int `{ return recv->tv_usec; `}
-	fun destroy `{ free( recv ); `}
+
+	fun destroy `{ free(recv); `}
 end
 
 extern class FFSocketSet `{ fd_set* `}
 	new `{
 		fd_set *f = NULL;
-		f = malloc( sizeof(fd_set) );
+		f = malloc(sizeof(fd_set));
 		return f;
 	`}
-	fun set(s: FFSocket) `{ FD_SET( *s, recv ); `}
-	fun is_set(s: FFSocket): Bool `{ return FD_ISSET( *s, recv ); `}
-	fun zero `{ FD_ZERO( recv ); `}
-	fun clear(s: FFSocket) `{ FD_CLR( *s, recv ); `}
-	fun destroy `{ free( recv ); `}
+
+	fun set(s: FFSocket) `{ FD_SET(*s, recv); `}
+
+	fun is_set(s: FFSocket): Bool `{ return FD_ISSET(*s, recv); `}
+
+	fun zero `{ FD_ZERO(recv); `}
+
+	fun clear(s: FFSocket) `{ FD_CLR(*s, recv); `}
+
+	fun destroy `{ free(recv); `}
 end
 
 class FFSocketObserver
 	fun select(max: FFSocket, reads: nullable FFSocketSet, write: nullable FFSocketSet,
-             except: nullable FFSocketSet, timeout: FFTimeval): Int `{
+			 except: nullable FFSocketSet, timeout: FFTimeval): Int `{
 		fd_set *rds, *wts, *exs = NULL;
 		struct timeval *tm = NULL;
-		if(reads != NULL) rds = (fd_set*)reads;
-		if(write != NULL) wts = (fd_set*)write;
-		if(except != NULL) exs = (fd_set*)except;
-		if(timeout != NULL) tm = (struct timeval*)timeout;
+		if (reads != NULL) rds = (fd_set*)reads;
+		if (write != NULL) wts = (fd_set*)write;
+		if (except != NULL) exs = (fd_set*)except;
+		if (timeout != NULL) tm = (struct timeval*)timeout;
 		return select(*max, rds, wts, exs, tm);
 	`}
 end
@@ -285,20 +327,43 @@ extern class FFSocketTypes `{ int `}
 	new sock_raw `{ return SOCK_RAW; `}
 	new sock_seqpacket `{ return SOCK_SEQPACKET; `}
 end
+
 extern class FFSocketAddressFamilies `{ int `}
 	new af_null `{ return 0; `}
-	new af_unspec `{ return  AF_UNSPEC; `} 		# unspecified
-	new af_unix `{ return  AF_UNIX; `} 		# local to host (pipes)
-	new af_local `{ return  AF_LOCAL; `} 		# backward compatibility
-	new af_inet `{ return  AF_INET; `}		# internetwork: UDP, TCP, etc.
-	new af_sna `{ return  AF_SNA; `}		# IBM SNA
-	new af_decnet `{ return  AF_DECnet; `}		# DECnet
-	new af_route `{ return  AF_ROUTE; `}		# Internal Routing Protocol
-	new af_ipx `{ return  AF_IPX; `}		# Novell Internet Protocol
-	new af_isdn `{ return  AF_ISDN; `}		# Integrated Services Digital Network
-	new af_inet6 `{ return  AF_INET6; `}		# IPv6
-	new af_max `{ return  AF_MAX; `}
+
+	# Unspecified
+	new af_unspec `{ return AF_UNSPEC; `}
+
+	# Local to host (pipes)
+	new af_unix `{ return AF_UNIX; `}
+
+	# For backward compatibility
+	new af_local `{ return AF_LOCAL; `}
+
+	# Internetwork: UDP, TCP, etc.
+	new af_inet `{ return AF_INET; `}
+
+	# IBM SNA
+	new af_sna `{ return AF_SNA; `}
+
+	# DECnet
+	new af_decnet `{ return AF_DECnet; `}
+
+	# Internal Routing Protocol
+	new af_route `{ return AF_ROUTE; `}
+
+	# Novell Internet Protocol
+	new af_ipx `{ return AF_IPX; `}
+
+	# Integrated Services Digital Network
+	new af_isdn `{ return AF_ISDN; `}
+
+	# IPv6
+	new af_inet6 `{ return AF_INET6; `}
+
+	new af_max `{ return AF_MAX; `}
 end
+
 extern class FFSocketProtocolFamilies `{ int `}
 	new pf_null `{ return 0; `}
 	new pf_unspec `{ return PF_UNSPEC; `}
@@ -314,40 +379,81 @@ extern class FFSocketProtocolFamilies `{ int `}
 	new pf_inet6 `{ return PF_INET6; `}
 	new pf_max `{ return PF_MAX; `}
 end
+
 # Level on which to set options
 extern class FFSocketOptLevels `{ int `}
+
 	# Dummy for IP (As defined in C)
 	new ip `{ return IPPROTO_IP;`}
+
 	# Control message protocol
 	new icmp `{ return IPPROTO_ICMP;`}
+
 	# Use TCP
 	new tcp `{ return IPPROTO_TCP; `}
+
 	# Socket level options
 	new socket `{ return SOL_SOCKET; `}
 end
+
 # Options for socket, use with setsockopt
 extern class FFSocketOptNames `{ int `}
+
 	# Enables debugging information
 	new debug `{ return SO_DEBUG; `}
+
 	# Authorizes the broadcasting of messages
 	new broadcast `{ return SO_BROADCAST; `}
+
 	# Authorizes the reuse of the local address
 	new reuseaddr `{ return SO_REUSEADDR; `}
+
 	# Authorizes the use of keep-alive packets in a connection
 	new keepalive `{ return SO_KEEPALIVE; `}
 end
+
 # Used for the poll function of a socket, mix several Poll values to check for events on more than one type of event
 extern class FFSocketPollValues `{ int `}
-	new pollin `{ return POLLIN; `}           # Data other than high-priority data may be read without blocking.
-	new pollrdnorm `{ return POLLRDNORM; `}   # Normal data may be read without blocking.
-	new pollrdband `{ return POLLRDBAND; `}   # Priority data may be read without blocking.
-	new pollpri `{ return POLLPRI; `}         # High-priority data may be read without blocking.
-	new pollout `{ return POLLOUT; `}         # Normal data may be written without blocking.
-	new pollwrnorm `{ return POLLWRNORM; `}   # Equivalent to POLLOUT
-	new pollwrband `{ return POLLWRBAND; `}   # Priority data may be written.
-	new pollerr `{ return POLLERR; `}         # An error has occurred on the device or stream. This flag is only valid in the revents bitmask; it shall be ignored in the events member.
-	new pollhup `{ return POLLHUP; `}         # The device has been disconnected. This event and POLLOUT are mutually-exclusive; a stream can never be writable if a hangup has occurred. However, this event and POLLIN, POLLRDNORM, POLLRDBAND, or POLLPRI are not mutually-exclusive. This flag is only valid in the revents bitmask; it shall be ignored in the events member.
-	new pollnval `{ return POLLNVAL; `}       # The specified fd value is invalid. This flag is only valid in the revents member; it shall ignored in the events member.
+
+	# Data other than high-priority data may be read without blocking.
+	new pollin `{ return POLLIN; `}
+
+	# Normal data may be read without blocking.
+	new pollrdnorm `{ return POLLRDNORM; `}
+
+	# Priority data may be read without blocking.
+	new pollrdband `{ return POLLRDBAND; `}
+
+	# High-priority data may be read without blocking.
+	new pollpri `{ return POLLPRI; `}
+
+	# Normal data may be written without blocking.
+	new pollout `{ return POLLOUT; `}
+
+	# Equivalent to POLLOUT
+	new pollwrnorm `{ return POLLWRNORM; `}
+
+	# Priority data may be written.
+	new pollwrband `{ return POLLWRBAND; `}
+
+	# An error has occurred on the device or stream.
+	#
+	# This flag is only valid in the revents bitmask; it shall be ignored in the events member.
+	new pollerr `{ return POLLERR; `}
+
+	# The device has been disconnected.
+	#
+	# This event and POLLOUT are mutually-exclusive; a stream can never be
+	# writable if a hangup has occurred. However, this event and POLLIN,
+	# POLLRDNORM, POLLRDBAND, or POLLPRI are not mutually-exclusive.
+	#
+	# This flag is only valid in the revents bitmask; it shall be ignored in the events member.
+	new pollhup `{ return POLLHUP; `}
+
+	# The specified fd value is invalid.
+	#
+	# This flag is only valid in the revents member; it shall ignored in the events member.
+	new pollnval `{ return POLLNVAL; `}
 
 	# Combines two FFSocketPollValues
 	private fun +(other: FFSocketPollValues): FFSocketPollValues `{
