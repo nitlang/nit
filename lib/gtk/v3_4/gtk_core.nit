@@ -348,6 +348,13 @@ extern class GtkGrid `{GtkGrid *`}
 	`}
 end
 
+# A container box
+#
+# @https://developer.gnome.org/gtk3/3.4/GtkBox.html
+extern class GtkBox `{ GtkBox * `}
+	super GtkContainer
+end
+
 #The tree interface used by GtkTreeView
 #@https://developer.gnome.org/gtk3/stable/GtkTreeModel.html
 extern class GtkTreeModel `{GtkTreeModel *`}
