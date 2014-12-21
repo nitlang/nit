@@ -39,12 +39,12 @@ in "C Header" `{
 class PollFD
 
 	# The PollFD object
-	private var poll_struct: FFSocketPollFD
+	private var poll_struct: NativeSocketPollFD
 
 	# A collection of the events to be watched
-	var events: Array[FFSocketPollValues]
+	var events: Array[NativeSocketPollValues]
 
-	init(pid: Int, events: Array[FFSocketPollValues])
+	init(pid: Int, events: Array[NativeSocketPollValues])
 	do
 		assert events.length >= 1
 		self.events = events
@@ -55,13 +55,13 @@ class PollFD
 			events_in_one += events[i]
 		end
 
-		self.poll_struct = new FFSocketPollFD(pid, events_in_one)
+		self.poll_struct = new NativeSocketPollFD(pid, events_in_one)
 	end
 
 	# Reads the response and returns an array with the type of events that have been found
-	private fun check_response(response: Int): Array[FFSocketPollValues]
+	private fun check_response(response: Int): Array[NativeSocketPollValues]
 	do
-		var resp_array = new Array[FFSocketPollValues]
+		var resp_array = new Array[NativeSocketPollValues]
 		for i in events do
 			if c_check_resp(response, i) != 0 then
 				resp_array.push(i)
@@ -71,7 +71,7 @@ class PollFD
 	end
 
 	# Checks if the poll call has returned true for a particular type of event
-	private fun c_check_resp(response: Int, mask: FFSocketPollValues): Int
+	private fun c_check_resp(response: Int, mask: NativeSocketPollValues): Int
 	`{
 		return response & mask;
 	`}
@@ -79,7 +79,7 @@ class PollFD
 end
 
 # Data structure used by the poll function
-private extern class FFSocketPollFD `{ struct pollfd `}
+private extern class NativeSocketPollFD `{ struct pollfd `}
 
 	# File descriptor id
 	private fun fd: Int `{ return recv.fd; `}
@@ -90,7 +90,7 @@ private extern class FFSocketPollFD `{ struct pollfd `}
 	# List of events received by the last poll function
 	private fun revents: Int `{  return recv.revents; `}
 
-	new (pid: Int, events: FFSocketPollValues) `{
+	new (pid: Int, events: NativeSocketPollValues) `{
 		struct pollfd poll;
 		poll.fd = pid;
 		poll.events = events;
@@ -99,15 +99,14 @@ private extern class FFSocketPollFD `{ struct pollfd `}
 
 end
 
-extern class FFSocket `{ int* `}
+extern class NativeSocket `{ int* `}
 
-	new socket(domain: FFSocketAddressFamilies, socketType: FFSocketTypes, protocol: FFSocketProtocolFamilies) `{
-		int *d = malloc(sizeof(int));
+	new socket(domain: NativeSocketAddressFamilies, socketType: NativeSocketTypes, protocol: NativeSocketProtocolFamilies) `{
 		int ds = socket(domain, socketType, protocol);
 		if(ds == -1){
-			free(d);
 			return NULL;
 		}
+		int *d = malloc(sizeof(int));
 		memcpy(d, &ds, sizeof(ds));
 		return d;
 	`}
@@ -118,9 +117,9 @@ extern class FFSocket `{ int* `}
 
 	fun descriptor: Int `{ return *recv; `}
 
-	fun gethostbyname(n: String): FFSocketHostent import String.to_cstring `{ return gethostbyname(String_to_cstring(n)); `}
+	fun gethostbyname(n: String): NativeSocketHostent import String.to_cstring `{ return gethostbyname(String_to_cstring(n)); `}
 
-	fun connect(addrIn: FFSocketAddrIn): Int `{
+	fun connect(addrIn: NativeSocketAddrIn): Int `{
 		return connect(*recv, (struct sockaddr*)addrIn, sizeof(*addrIn));
 	`}
 
@@ -142,7 +141,7 @@ extern class FFSocket `{ int* `}
 	`}
 
 	# Sets an option for the socket
-	fun setsockopt(level: FFSocketOptLevels, option_name: FFSocketOptNames, option_value: Int) `{
+	fun setsockopt(level: NativeSocketOptLevels, option_name: NativeSocketOptNames, option_value: Int) `{
 		int err = setsockopt(*recv, level, option_name, &option_value, sizeof(int));
 		if(err != 0){
 			perror("Error on setsockopts: ");
@@ -150,14 +149,14 @@ extern class FFSocket `{ int* `}
 		}
 	`}
 
-	fun bind(addrIn: FFSocketAddrIn): Int `{ return bind(*recv, (struct sockaddr*)addrIn, sizeof(*addrIn)); `}
+	fun bind(addrIn: NativeSocketAddrIn): Int `{ return bind(*recv, (struct sockaddr*)addrIn, sizeof(*addrIn)); `}
 
 	fun listen(size: Int): Int `{ return listen(*recv, size); `}
 
 	# Checks if the buffer is ready for any event specified when creating the pollfd structure
-	fun socket_poll(filedesc: PollFD, timeout: Int): Array[FFSocketPollValues]
+	fun socket_poll(filedesc: PollFD, timeout: Int): Array[NativeSocketPollValues]
 	do
-		var result = i_poll(filedesc.poll_struct, timeout)
+		var result = native_poll(filedesc.poll_struct, timeout)
 		assert result != -1
 		return filedesc.check_response(result)
 	end
@@ -177,12 +176,12 @@ extern class FFSocket `{ int* `}
 	# It is a pointer to an array with one member for each open file descriptor of interest.
 	# The array's members are pollfd structures within which fd specifies an open file descriptor and events and revents are bitmasks constructed by
 	# OR'ing a combination of the pollfd flags.
-	private fun i_poll(filedesc: FFSocketPollFD, timeout: Int): Int `{
+	private fun native_poll(filedesc: NativeSocketPollFD, timeout: Int): Int `{
 		int poll_return = poll(&filedesc, 1, timeout);
 		return poll_return;
 	`}
 
-	private fun i_accept(addrIn: FFSocketAddrIn): FFSocket `{
+	private fun native_accept(addrIn: NativeSocketAddrIn): NativeSocket `{
 		socklen_t s = sizeof(struct sockaddr);
 		int *d = NULL;
 		d = malloc(sizeof(int));
@@ -190,16 +189,16 @@ extern class FFSocket `{ int* `}
 		return d;
 	`}
 
-	fun accept: FFSocketAcceptResult
+	fun accept: NativeSocketAcceptResult
 	do
-		var addrIn = new FFSocketAddrIn
-		var s = i_accept(addrIn)
-		return new FFSocketAcceptResult(s, addrIn)
+		var addrIn = new NativeSocketAddrIn
+		var s = native_accept(addrIn)
+		return new NativeSocketAcceptResult(s, addrIn)
 	end
 end
 
-extern class FFSocketAcceptResult `{ S_ACCEPT_RESULT* `}
-	new (socket: FFSocket, addrIn: FFSocketAddrIn) `{
+extern class NativeSocketAcceptResult `{ S_ACCEPT_RESULT* `}
+	new (socket: NativeSocket, addrIn: NativeSocketAddrIn) `{
 		S_ACCEPT_RESULT *sar = NULL;
 		sar = malloc(sizeof(S_ACCEPT_RESULT));
 		sar->s_desc = *socket;
@@ -207,21 +206,21 @@ extern class FFSocketAcceptResult `{ S_ACCEPT_RESULT* `}
 		return sar;
 	`}
 
-	fun socket: FFSocket `{ return &recv->s_desc; `}
+	fun socket: NativeSocket `{ return &recv->s_desc; `}
 
-	fun addrIn: FFSocketAddrIn `{ return &recv->addr_in; `}
+	fun addrIn: NativeSocketAddrIn `{ return &recv->addr_in; `}
 
 	fun destroy `{ free(recv); `}
 end
 
-extern class FFSocketAddrIn `{ struct sockaddr_in* `}
+extern class NativeSocketAddrIn `{ struct sockaddr_in* `}
 	new `{
 		struct sockaddr_in *sai = NULL;
 		sai = malloc(sizeof(struct sockaddr_in));
 		return sai;
 	`}
 
-	new with(port: Int, family: FFSocketAddressFamilies) `{
+	new with(port: Int, family: NativeSocketAddressFamilies) `{
 		struct sockaddr_in *sai = NULL;
 		sai = malloc(sizeof(struct sockaddr_in));
 		sai->sin_family = family;
@@ -230,7 +229,7 @@ extern class FFSocketAddrIn `{ struct sockaddr_in* `}
 		return sai;
 	`}
 
-	new with_hostent(hostent: FFSocketHostent, port: Int) `{
+	new with_hostent(hostent: NativeSocketHostent, port: Int) `{
 		struct sockaddr_in *sai = NULL;
 		sai = malloc(sizeof(struct sockaddr_in));
 		sai->sin_family = hostent->h_addrtype;
@@ -241,25 +240,25 @@ extern class FFSocketAddrIn `{ struct sockaddr_in* `}
 
 	fun address: String import NativeString.to_s `{ return NativeString_to_s((char*)inet_ntoa(recv->sin_addr)); `}
 
-	fun family: FFSocketAddressFamilies `{ return recv->sin_family; `}
+	fun family: NativeSocketAddressFamilies `{ return recv->sin_family; `}
 
 	fun port: Int `{ return ntohs(recv->sin_port); `}
 
 	fun destroy `{ free(recv); `}
 end
 
-extern class FFSocketHostent `{ struct hostent* `}
-	private fun i_h_aliases(i: Int): String import NativeString.to_s `{ return NativeString_to_s(recv->h_aliases[i]); `}
+extern class NativeSocketHostent `{ struct hostent* `}
+	private fun native_h_aliases(i: Int): String import NativeString.to_s `{ return NativeString_to_s(recv->h_aliases[i]); `}
 
-	private fun i_h_aliases_reachable(i: Int): Bool `{ return (recv->h_aliases[i] != NULL); `}
+	private fun native_h_aliases_reachable(i: Int): Bool `{ return (recv->h_aliases[i] != NULL); `}
 
 	fun h_aliases: Array[String]
 	do
 		var i=0
 		var d=new Array[String]
 		loop
-			d.add(i_h_aliases(i))
-			if i_h_aliases_reachable(i+1) == false then break
+			d.add(native_h_aliases(i))
+			if native_h_aliases_reachable(i+1) == false then break
 			i += 1
 		end
 		return d
@@ -274,7 +273,7 @@ extern class FFSocketHostent `{ struct hostent* `}
 	fun h_name: String import NativeString.to_s `{ return NativeString_to_s(recv->h_name); `}
 end
 
-extern class FFTimeval `{ struct timeval* `}
+extern class NativeTimeval `{ struct timeval* `}
 	new (seconds: Int, microseconds: Int) `{
 		struct timeval* tv = NULL;
 		tv = malloc(sizeof(struct timeval));
@@ -290,27 +289,27 @@ extern class FFTimeval `{ struct timeval* `}
 	fun destroy `{ free(recv); `}
 end
 
-extern class FFSocketSet `{ fd_set* `}
+extern class NativeSocketSet `{ fd_set* `}
 	new `{
 		fd_set *f = NULL;
 		f = malloc(sizeof(fd_set));
 		return f;
 	`}
 
-	fun set(s: FFSocket) `{ FD_SET(*s, recv); `}
+	fun set(s: NativeSocket) `{ FD_SET(*s, recv); `}
 
-	fun is_set(s: FFSocket): Bool `{ return FD_ISSET(*s, recv); `}
+	fun is_set(s: NativeSocket): Bool `{ return FD_ISSET(*s, recv); `}
 
 	fun zero `{ FD_ZERO(recv); `}
 
-	fun clear(s: FFSocket) `{ FD_CLR(*s, recv); `}
+	fun clear(s: NativeSocket) `{ FD_CLR(*s, recv); `}
 
 	fun destroy `{ free(recv); `}
 end
 
-class FFSocketObserver
-	fun select(max: FFSocket, reads: nullable FFSocketSet, write: nullable FFSocketSet,
-			 except: nullable FFSocketSet, timeout: FFTimeval): Int `{
+class NativeSocketObserver
+	fun select(max: NativeSocket, reads: nullable NativeSocketSet, write: nullable NativeSocketSet,
+			 except: nullable NativeSocketSet, timeout: NativeTimeval): Int `{
 		fd_set *rds, *wts, *exs = NULL;
 		struct timeval *tm = NULL;
 		if (reads != NULL) rds = (fd_set*)reads;
@@ -321,14 +320,14 @@ class FFSocketObserver
 	`}
 end
 
-extern class FFSocketTypes `{ int `}
+extern class NativeSocketTypes `{ int `}
 	new sock_stream `{ return SOCK_STREAM; `}
 	new sock_dgram `{ return SOCK_DGRAM; `}
 	new sock_raw `{ return SOCK_RAW; `}
 	new sock_seqpacket `{ return SOCK_SEQPACKET; `}
 end
 
-extern class FFSocketAddressFamilies `{ int `}
+extern class NativeSocketAddressFamilies `{ int `}
 	new af_null `{ return 0; `}
 
 	# Unspecified
@@ -364,7 +363,7 @@ extern class FFSocketAddressFamilies `{ int `}
 	new af_max `{ return AF_MAX; `}
 end
 
-extern class FFSocketProtocolFamilies `{ int `}
+extern class NativeSocketProtocolFamilies `{ int `}
 	new pf_null `{ return 0; `}
 	new pf_unspec `{ return PF_UNSPEC; `}
 	new pf_local `{ return PF_LOCAL; `}
@@ -381,7 +380,7 @@ extern class FFSocketProtocolFamilies `{ int `}
 end
 
 # Level on which to set options
-extern class FFSocketOptLevels `{ int `}
+extern class NativeSocketOptLevels `{ int `}
 
 	# Dummy for IP (As defined in C)
 	new ip `{ return IPPROTO_IP;`}
@@ -397,7 +396,7 @@ extern class FFSocketOptLevels `{ int `}
 end
 
 # Options for socket, use with setsockopt
-extern class FFSocketOptNames `{ int `}
+extern class NativeSocketOptNames `{ int `}
 
 	# Enables debugging information
 	new debug `{ return SO_DEBUG; `}
@@ -413,7 +412,7 @@ extern class FFSocketOptNames `{ int `}
 end
 
 # Used for the poll function of a socket, mix several Poll values to check for events on more than one type of event
-extern class FFSocketPollValues `{ int `}
+extern class NativeSocketPollValues `{ int `}
 
 	# Data other than high-priority data may be read without blocking.
 	new pollin `{ return POLLIN; `}
@@ -455,8 +454,8 @@ extern class FFSocketPollValues `{ int `}
 	# This flag is only valid in the revents member; it shall ignored in the events member.
 	new pollnval `{ return POLLNVAL; `}
 
-	# Combines two FFSocketPollValues
-	private fun +(other: FFSocketPollValues): FFSocketPollValues `{
+	# Combines two NativeSocketPollValues
+	private fun +(other: NativeSocketPollValues): NativeSocketPollValues `{
 		return recv | other;
 	`}
 end

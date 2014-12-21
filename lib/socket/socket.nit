@@ -38,10 +38,10 @@ class Socket
 	var port: Int is noinit
 
 	# Underlying C socket
-	private var socket: FFSocket is noinit
+	private var socket: NativeSocket is noinit
 
 	# Underlying C socket
-	private var addrin: FFSocketAddrIn is noinit
+	private var addrin: NativeSocketAddrIn is noinit
 
 	redef var end_reached = false
 
@@ -50,14 +50,14 @@ class Socket
 	do
 		_buffer = new FlatBuffer
 		_buffer_pos = 0
-		socket = new FFSocket.socket( new FFSocketAddressFamilies.af_inet, new FFSocketTypes.sock_stream, new FFSocketProtocolFamilies.pf_null )
+		socket = new NativeSocket.socket( new NativeSocketAddressFamilies.af_inet, new NativeSocketTypes.sock_stream, new NativeSocketProtocolFamilies.pf_null )
 		if socket.address_is_null then
 			end_reached = true
 			return
 		end
-		socket.setsockopt(new FFSocketOptLevels.socket, new FFSocketOptNames.reuseaddr, 1)
+		socket.setsockopt(new NativeSocketOptLevels.socket, new NativeSocketOptNames.reuseaddr, 1)
 		var hostname = socket.gethostbyname(thost)
-		addrin = new FFSocketAddrIn.with_hostent(hostname, tport)
+		addrin = new NativeSocketAddrIn.with_hostent(hostname, tport)
 		address = addrin.address
 		host = hostname.h_name
 		port = addrin.port
@@ -69,13 +69,13 @@ class Socket
 	do
 		_buffer = new FlatBuffer
 		_buffer_pos = 0
-		socket = new FFSocket.socket( new FFSocketAddressFamilies.af_inet, new FFSocketTypes.sock_stream, new FFSocketProtocolFamilies.pf_null )
+		socket = new NativeSocket.socket( new NativeSocketAddressFamilies.af_inet, new NativeSocketTypes.sock_stream, new NativeSocketProtocolFamilies.pf_null )
 		if socket.address_is_null then
 			end_reached = true
 			return
 		end
-		socket.setsockopt(new FFSocketOptLevels.socket, new FFSocketOptNames.reuseaddr, 1)
-		addrin = new FFSocketAddrIn.with(tport, new FFSocketAddressFamilies.af_inet)
+		socket.setsockopt(new NativeSocketOptLevels.socket, new NativeSocketOptNames.reuseaddr, 1)
+		addrin = new NativeSocketAddrIn.with(tport, new NativeSocketAddressFamilies.af_inet)
 		address = addrin.address
 		port = addrin.port
 		host = null
@@ -84,7 +84,7 @@ class Socket
 	end
 
 	# Creates a client socket, this is meant to be used by accept only
-	private init primitive_init(h: FFSocketAcceptResult)
+	private init primitive_init(h: NativeSocketAcceptResult)
 	do
 		_buffer = new FlatBuffer
 		_buffer_pos = 0
@@ -103,8 +103,8 @@ class Socket
 	#
 	# timeout : Time in milliseconds before stopping listening for events on this socket
 	#
-	private fun pollin(event_types: Array[FFSocketPollValues], timeout: Int): Array[FFSocketPollValues] do
-		if end_reached then return new Array[FFSocketPollValues]
+	private fun pollin(event_types: Array[NativeSocketPollValues], timeout: Int): Array[NativeSocketPollValues] do
+		if end_reached then return new Array[NativeSocketPollValues]
 		return socket.socket_poll(new PollFD(socket.descriptor, event_types), timeout)
 	end
 
@@ -116,8 +116,8 @@ class Socket
 	do
 		if _buffer_pos < _buffer.length then return true
 		if eof then return false
-		var events = new Array[FFSocketPollValues]
-		events.push(new FFSocketPollValues.pollin)
+		var events = new Array[NativeSocketPollValues]
+		events.push(new NativeSocketPollValues.pollin)
 		return pollin(events, timeout).length != 0
 	end
 
@@ -126,9 +126,9 @@ class Socket
 	fun connected: Bool
 	do
 		if eof then return false
-		var events = new Array[FFSocketPollValues]
-		events.push(new FFSocketPollValues.pollhup)
-		events.push(new FFSocketPollValues.pollerr)
+		var events = new Array[NativeSocketPollValues]
+		events.push(new NativeSocketPollValues.pollhup)
+		events.push(new NativeSocketPollValues.pollerr)
 		if pollin(events, 0).length == 0 then
 			return true
 		else
@@ -212,7 +212,7 @@ class Socket
 end
 
 class SocketSet
-	var sset = new FFSocketSet
+	var sset = new NativeSocketSet
 	fun set(s: Socket) do sset.set(s.socket) end
 	fun is_set(s: Socket): Bool do return sset.is_set(s.socket) end
 	fun zero do sset.zero end
@@ -220,7 +220,7 @@ class SocketSet
 end
 
 class SocketObserver
-	private var observer: FFSocketObserver
+	private var observer: NativeSocketObserver
 	var readset: nullable SocketSet = null
 	var writeset: nullable SocketSet = null
 	var exceptset: nullable SocketSet = null
@@ -229,11 +229,11 @@ class SocketObserver
 		if read then readset = new SocketSet
 		if write then writeset = new SocketSet
 		if except then exceptset = new SocketSet
-		observer = new FFSocketObserver
+		observer = new NativeSocketObserver
 	end	
 	fun select(max: Socket,seconds: Int, microseconds: Int): Bool
 	do
-		var timeval = new FFTimeval(seconds, microseconds)
+		var timeval = new NativeTimeval(seconds, microseconds)
 		return observer.select(max.socket, readset.sset, writeset.sset, readset.sset, timeval) > 0
 	end
 end
