@@ -243,6 +243,9 @@ class PrettyPrinterVisitor
 			consume "."
 		end
 	end
+
+	# Do we break string literals that are too long?
+	var break_strings = false is public writable
 end
 
 # Base framework redefs
@@ -2086,9 +2089,13 @@ end
 
 redef class AStringFormExpr
 	redef fun accept_pretty_printer(v) do
-		var can_inline = v.can_inline(self)
-
-		if can_inline then
+		if not v.break_strings then
+			# n_string.force_inline = true
+			v.visit n_string
+			return
+		end
+		if v.can_inline(self) then
+			n_string.force_inline = true
 			v.visit n_string
 		else
 			var text = n_string.text
@@ -2116,7 +2123,12 @@ end
 
 redef class ASuperstringExpr
 	redef fun accept_pretty_printer(v) do
-		for n_expr in n_exprs do v.visit n_expr
+		for n_expr in n_exprs do
+			if not v.break_strings then
+				n_expr.force_inline = true
+			end
+			v.visit n_expr
+		end
 	end
 
 	redef fun must_be_inline do

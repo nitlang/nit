@@ -32,6 +32,9 @@ redef class ToolContext
 	var opt_meld = new OptionBool("Show diff between source and output using meld",
 	   "--meld")
 
+	# Break too long string literals.
+	var opt_break_str = new OptionBool("Break too long string literals", "--break-strings")
+
 	# Check formatting instead of pretty printing.
 	#
 	# This option create a tempory pretty printed file then check if
@@ -54,7 +57,7 @@ var toolcontext = new ToolContext
 
 toolcontext.option_context.
    add_option(toolcontext.opt_dir, toolcontext.opt_output, toolcontext.opt_diff,
-   toolcontext.opt_meld, toolcontext.opt_check)
+   toolcontext.opt_meld, toolcontext.opt_check, toolcontext.opt_break_str)
 
 toolcontext.tooldescription = "Usage: nitpretty [OPTION]... <file.nit>\n" +
 	"Pretty print Nit code from Nit source files."
@@ -80,6 +83,10 @@ end
 var dir = toolcontext.opt_dir.value or else ".nitpretty"
 if not dir.file_exists then dir.mkdir
 var v = new PrettyPrinterVisitor
+
+if toolcontext.opt_break_str.value then
+	v.break_strings = true
+end
 
 for mmodule in mmodules do
 	if not mbuilder.mmodule2nmodule.has_key(mmodule) then

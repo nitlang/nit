@@ -80,12 +80,28 @@ fun foo do
 	end
 end
 
-print "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam tincidunt sapien et velit fringilla varius at non eros. Nunc ut ultricies metus, sit amet lacinia felis. Donec in facilisis neque, non laoreet nibh. Etiam nec purus eu orci congue iaculis eu quis lorem. Ut et blandit erat. Cras fermentum pellentesque ante, ut dapibus ipsum placerat sit amet. Vivamus pharetra, sem vitae consequat venenatis, diam risus placerat est, sed hendrerit purus justo vitae lectus. In id quam mattis, rutrum augue eu, vehicula ipsum. Nulla nec egestas turpis, nec ullamcorper odio. Pellentesque vitae arcu justo. Aliquam sed pharetra lacus."
+print "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam tincidun" +
+	"t sapien et velit fringilla varius at non eros. Nunc ut ultricies metus, sit a" +
+	"met lacinia felis. Donec in facilisis neque, non laoreet nibh. Etiam nec purus" +
+	" eu orci congue iaculis eu quis lorem. Ut et blandit erat. Cras fermentum pell" +
+	"entesque ante, ut dapibus ipsum placerat sit amet. Vivamus pharetra, sem vitae" +
+	" consequat venenatis, diam risus placerat est, sed hendrerit purus justo vitae" +
+	" lectus. In id quam mattis, rutrum augue eu, vehicula ipsum. Nulla nec egestas" +
+	" turpis, nec ullamcorper odio. Pellentesque vitae arcu justo. Aliquam sed phar" +
+	"etra lacus."
 
 var lorem = "lorem"
 var ipsum = "ipsum" # for fun
 
-print "We also need to handle super strings: {lorem} {ipsum} dolor sit amet, consectetur adipiscing elit. Aliquam tincidunt sapien et velit fringilla varius at non eros. Nunc ut ultricies metus, sit amet lacinia felis. Donec in facilisis neque, non laoreet nibh. Etiam nec purus eu orci congue iaculis eu quis {lorem}. Ut et blandit erat. Cras fermentum pellentesque ante, ut dapibus {ipsum} placerat sit amet. Vivamus pharetra, sem vitae consequat venenatis, diam risus placerat est, sed hendrerit purus justo vitae lectus. In id quam mattis, rutrum augue eu, vehicula ipsum. Nulla nec egestas turpis, nec ullamcorper odio. Pellentesque vitae arcu justo. Aliquam sed pharetra lacus." # ending
+print "We also need to handle super strings: {lorem} {ipsum} dolor sit amet, con" +
+	"sectetur adipiscing elit. Aliquam tincidunt sapien et velit fringilla varius a" +
+	"t non eros. Nunc ut ultricies metus, sit amet lacinia felis. Donec in facilisi" +
+	"s neque, non laoreet nibh. Etiam nec purus eu orci congue iaculis eu quis {lorem}" +
+	". Ut et blandit erat. Cras fermentum pellentesque ante, ut dapibus {ipsum} pla" +
+	"cerat sit amet. Vivamus pharetra, sem vitae consequat venenatis, diam risus pl" +
+	"acerat est, sed hendrerit purus justo vitae lectus. In id quam mattis, rutrum " +
+	"augue eu, vehicula ipsum. Nulla nec egestas turpis, nec ullamcorper odio. Pell" +
+	"entesque vitae arcu justo. Aliquam sed pharetra lacus." # ending
 
 var title = "title"
 var links = new Array[String] # why not?
