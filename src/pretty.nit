@@ -345,7 +345,7 @@ redef class Prod
 	end
 
 	redef fun was_inline do
-		return first_token.location.line_start == last_token.location.line_end
+		return start_token.location.line_start == last_token.location.line_end
 	end
 end
 
