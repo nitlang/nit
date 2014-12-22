@@ -171,6 +171,14 @@ class TCPStream
 		end
 	end
 
+	# Send the data present in the socket buffer
+	fun flush
+	do
+		socket.setsockopt(new NativeSocketOptLevels.tcp, new NativeSocketOptNames.tcp_nodelay, 1)
+		socket.setsockopt(new NativeSocketOptLevels.tcp, new NativeSocketOptNames.tcp_nodelay, 0)
+	end
+end
+
 # A socket listening on a given `port` for incomming connections
 #
 # Create streams to communicate with clients using `accept`.
@@ -222,6 +230,14 @@ class TCPServer
 		return new TCPStream.server_side(native)
 	end
 
+	# Set whether calls to `accept` are blocking
+	fun blocking=(value: Bool)
+	do
+		# We use the opposite from the native version as the native API
+		# is closer to the C API. In the Nity API, we use a positive version
+		# of the name.
+		socket.non_blocking = not value
+	end
 
 	# Close this socket
 	fun close
