@@ -28,7 +28,11 @@ in "C Header" `{
 	#include <arpa/inet.h>
 	#include <netdb.h>
 	#include <sys/poll.h>
+`}
 
+in "C" `{
+	#include <fcntl.h>
+	#include <netinet/tcp.h>
 `}
 
 # Wrapper for the data structure PollFD used for polling on a socket
@@ -194,6 +198,21 @@ extern class NativeSocket `{ int* `}
 		if s.address_is_null then return null
 		return new SocketAcceptResult(s, addrIn)
 	end
+
+	# Set wether this socket is non blocking
+	fun non_blocking=(value: Bool) `{
+		int flags = fcntl(*recv, F_GETFL, 0);
+		if (flags == -1) flags = 0;
+
+		if (value) {
+			flags = flags | O_NONBLOCK;
+		} else if (flags & O_NONBLOCK) {
+			flags = flags - O_NONBLOCK;
+		} else {
+			return;
+		}
+		fcntl(*recv, F_SETFL, flags);
+	`}
 end
 
 # Result of a call to `NativeSocket::accept`
@@ -402,6 +421,9 @@ extern class NativeSocketOptNames `{ int `}
 
 	# Authorizes the use of keep-alive packets in a connection
 	new keepalive `{ return SO_KEEPALIVE; `}
+
+	# Disable the Nagle algorithm and send data as soon as possible, in smaller packets
+	new tcp_nodelay `{ return TCP_NODELAY; `}
 end
 
 # Used for the poll function of a socket, mix several Poll values to check for events on more than one type of event
