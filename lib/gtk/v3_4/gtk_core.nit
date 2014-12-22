@@ -404,7 +404,7 @@ extern class GtkEntry `{GtkEntry *`}
 		 return (GtkEntry *)gtk_entry_new();
 	`}
 
-	fun text : String is extern import String.to_cstring`{
+	fun text : String is extern import NativeString.to_s `{
 		return NativeString_to_s( (char *)gtk_entry_get_text( recv ) );
 	`}
 
