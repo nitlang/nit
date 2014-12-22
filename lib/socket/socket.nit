@@ -17,7 +17,7 @@
 # Socket services
 module socket
 
-import socket_c
+private import socket_c
 intrude import standard::stream
 
 # A general TCP socket, either a `TCPStream` or a `TCPServer`
@@ -251,30 +251,48 @@ class TCPServer
 	end
 end
 
+# A simple set of sockets used by `SocketObserver`
 class SocketSet
-	var sset = new NativeSocketSet
-	fun set(s: TCPSocket) do sset.set(s.socket) end
-	fun is_set(s: TCPSocket): Bool do return sset.is_set(s.socket) end
-	fun zero do sset.zero end
-	fun clear(s: TCPSocket) do sset.clear(s.socket) end
+	private var native = new NativeSocketSet
+
+	init do clear
+
+	# Add `socket` to this set
+	fun add(socket: Socket) do native.set(socket.socket)
+
+	# Remove `socket` from this set
+	fun remove(socket: Socket) do native.clear(socket.socket)
+
+	# Does this set has `socket`?
+	fun has(socket: Socket): Bool do return native.is_set(socket.socket)
+
+	# Clear all sockets from this set
+	fun clear do native.zero
 end
 
+# Service class to manage calls to `select`
 class SocketObserver
-	private var observer: NativeSocketObserver
-	var readset: nullable SocketSet = null
-	var writeset: nullable SocketSet = null
-	var exceptset: nullable SocketSet = null
-	init(read :Bool, write :Bool, except: Bool)
-	do
-		if read then readset = new SocketSet
-		if write then writeset = new SocketSet
-		if except then exceptset = new SocketSet
-		observer = new NativeSocketObserver
+	private var native = new NativeSocketObserver
+
+	var read_set: nullable SocketSet = null
+
+	var write_set: nullable SocketSet = null
+
+	var except_set: nullable SocketSet = null
+
+	init(read: Bool, write: Bool, except: Bool)
+	is old_style_init do
+		if read then read_set = new SocketSet
+		if write then write_set = new SocketSet
+		if except then except_set = new SocketSet
 	end
-	fun select(max: TCPSocket, seconds: Int, microseconds: Int): Bool
+
+	fun select(max: Socket, seconds: Int, microseconds: Int): Bool
 	do
+		# FIXME this implementation (see the call to nullable attributes below) and
+		# `NativeSockectObserver::select` is not stable.
+
 		var timeval = new NativeTimeval(seconds, microseconds)
-		return observer.select(max.socket, readset.sset, writeset.sset, readset.sset, timeval) > 0
+		return native.select(max.socket, read_set.native, write_set.native, except_set.native, timeval) > 0
 	end
 end
-

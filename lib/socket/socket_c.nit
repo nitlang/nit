@@ -320,6 +320,8 @@ extern class NativeSocketSet `{ fd_set* `}
 end
 
 class NativeSocketObserver
+	# FIXME this implementation is broken. `reads`, `write` and `except`
+	# are boxed objects, passing them to a C function is illegal.
 	fun select(max: NativeSocket, reads: nullable NativeSocketSet, write: nullable NativeSocketSet,
 			 except: nullable NativeSocketSet, timeout: NativeTimeval): Int `{
 		fd_set *rds, *wts, *exs = NULL;
