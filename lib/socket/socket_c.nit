@@ -29,10 +29,6 @@ in "C Header" `{
 	#include <netdb.h>
 	#include <sys/poll.h>
 
-	typedef struct sockaccept_result {
-		struct sockaddr_in addr_in;
-		int s_desc;
-	} S_ACCEPT_RESULT;
 `}
 
 # Wrapper for the data structure PollFD used for polling on a socket
@@ -189,28 +185,22 @@ extern class NativeSocket `{ int* `}
 		return d;
 	`}
 
-	fun accept: NativeSocketAcceptResult
+	fun accept: nullable SocketAcceptResult
 	do
 		var addrIn = new NativeSocketAddrIn
 		var s = native_accept(addrIn)
-		return new NativeSocketAcceptResult(s, addrIn)
+		return new SocketAcceptResult(s, addrIn)
 	end
 end
 
-extern class NativeSocketAcceptResult `{ S_ACCEPT_RESULT* `}
-	new (socket: NativeSocket, addrIn: NativeSocketAddrIn) `{
-		S_ACCEPT_RESULT *sar = NULL;
-		sar = malloc(sizeof(S_ACCEPT_RESULT));
-		sar->s_desc = *socket;
-		sar->addr_in = *addrIn;
-		return sar;
-	`}
+# Result of a call to `NativeSocket::accept`
+class SocketAcceptResult
 
-	fun socket: NativeSocket `{ return &recv->s_desc; `}
+	# Opened socket
+	var socket: NativeSocket
 
-	fun addrIn: NativeSocketAddrIn `{ return &recv->addr_in; `}
-
-	fun destroy `{ free(recv); `}
+	# Address of the remote client
+	var addr_in: NativeSocketAddrIn
 end
 
 extern class NativeSocketAddrIn `{ struct sockaddr_in* `}
