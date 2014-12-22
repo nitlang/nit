@@ -772,6 +772,11 @@ redef class APropdef
 		end
 	end
 
+	# Factorize annotations visit for all APropdef.
+	fun visit_annotations(v: PrettyPrinterVisitor, n_annotations: nullable AAnnotations) do
+		if n_annotations != null then v.visit n_annotations
+	end
+
 	redef fun start_token do
 		if n_doc == null then return super
 		return n_doc.last_token.next_token
@@ -798,7 +803,7 @@ redef class AAttrPropdef
 			v.visit n_expr
 		end
 
-		if n_annotations != null then v.visit n_annotations
+		visit_annotations(v, n_annotations)
 		v.finish_line
 		v.addn
 	end
@@ -822,6 +827,7 @@ redef class ATypePropdef
 		v.consume ":"
 		v.adds
 		v.visit n_type
+		visit_annotations(v, n_annotations)
 		v.finish_line
 		v.addn
 	end
@@ -846,14 +852,11 @@ redef class AMethPropdef
 
 		v.visit n_signature
 
-		if n_annotations != null then
-			v.visit n_annotations
-		else
-			v.adds
-		end
+		var annot_inline = v.can_inline(n_annotations)
+		visit_annotations(v, n_annotations)
 
 		if n_extern_calls != null or n_extern_code_block != null then
-			if n_annotations != null then v.adds
+			v.adds
 			if n_extern_calls != null then v.visit n_extern_calls
 			if n_extern_code_block != null then v.visit n_extern_code_block
 		end
@@ -862,12 +865,10 @@ redef class AMethPropdef
 
 		if n_block != null then
 			while not v.current_token isa TKwdo do v.skip
-			if n_annotations != null then
-				if v.can_inline(n_annotations) then
-					v.adds
-				else
-					v.addt
-				end
+			if n_annotations != null and not annot_inline then
+				v.addt
+			else
+				v.adds
 			end
 			v.consume "do"
 
