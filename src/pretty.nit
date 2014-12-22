@@ -256,8 +256,9 @@ redef class ANodes[E]
 				if not e_can_inline then
 					v.add ","
 					v.addn
+					v.indent += 1
 					v.addt
-					v.addt
+					v.indent -= 1
 				else
 					v.add ", "
 				end
@@ -987,8 +988,9 @@ redef class AExternCalls
 			v.visit_list n_extern_calls
 		else
 			v.addn
+			v.indent += 1
 			v.addt
-			v.addt
+			v.indent -= 1
 			v.visit_list n_extern_calls
 		end
 
@@ -1486,7 +1488,6 @@ redef class ACallExpr
 		if not n_expr isa AImplicitSelfExpr and not can_inline then
 			v.addn
 			v.addt
-			v.addt
 		end
 
 		v.visit n_id
@@ -1647,8 +1648,9 @@ redef class ANewExpr
 
 			if not can_inline then
 				v.addn
+				v.indent += 1
 				v.addt
-				v.addt
+				v.indent -= 1
 			end
 
 			v.visit n_id
@@ -1756,16 +1758,15 @@ redef class AAssertExpr
 				v.visit n_else
 			else
 				v.addn
+				v.indent += 1
 
 				if n_else isa ABlockExpr then
-					v.indent += 1
 					n_else.force_block = true
 					v.visit n_else
 					v.indent -= 1
 					v.addt
 					v.visit n_else.n_kwend
 				else
-					v.indent += 1
 					v.addt
 					v.visit n_else
 					v.addn
@@ -1904,8 +1905,9 @@ private class ABinOpHelper
 			v.visit bin_expr2
 		else
 			v.addn
+			v.indent += 1
 			v.addt
-			v.addt
+			v.indent -= 1
 			v.visit bin_expr2
 		end
 	end
