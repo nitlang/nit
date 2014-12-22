@@ -31,25 +31,28 @@ class WebSocket
 	super PollableIStream
 
 	# Client connection to the server
-	var client: Socket
+	var client: TCPStream
 
 	# Socket listening to connections on a defined port
-	var listener: Socket
+	var listener: TCPServer
 
 	# Creates a new Websocket server listening on given port with `max_clients` slots available
 	init(port: Int, max_clients: Int)
 	do
 		_buffer = new FlatBuffer
 		_buffer_pos = 0
-		listener = new Socket.server(port, max_clients)
+		listener = new TCPServer(port)
+		listener.listen max_clients
 	end
 
 	# Accept an incoming connection and initializes the handshake
 	fun accept
 	do
-		assert not listener.eof
+		assert not listener.closed
 
-		client = listener.accept
+		var client = listener.accept
+		assert client != null
+		self.client = client
 
 		var headers = parse_handshake
 		var resp = handshake_response(headers)
