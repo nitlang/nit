@@ -469,6 +469,10 @@ end
 
 redef class AAnnotation
 	redef fun accept_pretty_printer(v) do
+		if n_visibility != null and not n_visibility isa APublicVisibility then
+			v.visit n_visibility
+			v.adds
+		end
 		v.visit n_atid
 		if not n_args.is_empty then
 			if n_opar == null then
