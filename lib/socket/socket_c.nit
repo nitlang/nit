@@ -177,18 +177,21 @@ extern class NativeSocket `{ int* `}
 		return poll_return;
 	`}
 
-	private fun native_accept(addrIn: NativeSocketAddrIn): NativeSocket `{
+	private fun native_accept(addr_in: NativeSocketAddrIn): NativeSocket `{
 		socklen_t s = sizeof(struct sockaddr);
-		int *d = NULL;
-		d = malloc(sizeof(int));
-		*d = accept(*recv,(struct sockaddr*)addrIn, &s);
-		return d;
+		int socket = accept(*recv, (struct sockaddr*)addr_in, &s);
+		if (socket == -1) return NULL;
+
+		int *ptr = malloc(sizeof(int));
+		*ptr = socket;
+		return ptr;
 	`}
 
 	fun accept: nullable SocketAcceptResult
 	do
 		var addrIn = new NativeSocketAddrIn
 		var s = native_accept(addrIn)
+		if s.address_is_null then return null
 		return new SocketAcceptResult(s, addrIn)
 	end
 end
