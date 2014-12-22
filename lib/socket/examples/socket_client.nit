@@ -21,18 +21,23 @@ import socket
 
 if args.length < 2 then
 	print "Usage : socket_client <host> <port>"
-	return
+	exit 1
 end
 
-var s = new Socket.client(args[0], args[1].to_i)
-print "[HOST ADDRESS] : {s.address}"
-print "[HOST] : {s.host or else "unamed"}"
-print "[PORT] : {s.port}"
-print "Connecting ... {s.connected}"
+var address = args[0]
+var port = args[1].to_i
+
+# Open a conection with the server
+var s = new TCPStream.connect(address, port)
+printn "Connecting to {s.host}:{s.port} at {s.address}... "
+print if s.connected then "Connected" else "Connection failed"
+
 if s.connected then
-	print "Writing ... Hello server !"
-	s.write("Hello server !")
-	print "[Response from server] : {s.read(100)}"
-	print "Closing ..."
+	# Communicate
+	s.write "Hello server!\n"
+	print s.read_line
+	s.write "Bye server!\n"
+	print s.read_line
+
 	s.close
 end
