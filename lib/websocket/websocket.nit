@@ -132,8 +132,8 @@ class WebSocket
 	# Reads an HTTP frame
 	protected fun read_http_frame(buf: Buffer): String
 	do
-		client.append_line_to(buf)
-		buf.chars.add('\n')
+		buf.append client.read_line
+		buf.append("\r\n")
 		if buf.has_substring("\r\n\r\n", buf.length - 4) then return buf.to_s
 		return read_http_frame(buf)
 	end
@@ -238,7 +238,7 @@ class WebSocket
 		unpad_message
 	end
 
-	redef fun end_reached do return _buffer_pos >= _buffer.length and client.eof
+	redef fun end_reached do return client._buffer_pos >= client._buffer.length and client.end_reached
 
 	# Is there some data available to be read ?
 	fun can_read(timeout: Int): Bool do return client.ready_to_read(timeout)

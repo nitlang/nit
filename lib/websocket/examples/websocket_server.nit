@@ -39,7 +39,8 @@ while not sock.listener.closed do
 		sock.write(msg)
 	end
 	if sock.can_read(10) then
-		msg = sock.read_line
+		msg = ""
+		while sock.can_read(0) do msg += sock.read(100)
 		if msg != "" then print msg
 	end
 end

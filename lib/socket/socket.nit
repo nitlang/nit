@@ -107,7 +107,7 @@ class TCPStream
 	fun ready_to_read(timeout: Int): Bool
 	do
 		if _buffer_pos < _buffer.length then return true
-		if eof then return false
+		if end_reached then return false
 		var events = [new NativeSocketPollValues.pollin]
 		return pollin(events, timeout).length != 0
 	end
@@ -168,6 +168,7 @@ class TCPStream
 		if closed then return
 		if socket.close >= 0 then
 			closed = true
+			end_reached = true
 		end
 	end
 
