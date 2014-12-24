@@ -90,8 +90,10 @@ redef class ModelBuilder
 	fun set_stdstreams
 	do
 		if self.toolcontext.opt_socket_mode.value then
-			var sock = new Socket.server(toolcontext.opt_debug_port.value, 1)
+			var sock = new TCPServer(toolcontext.opt_debug_port.value)
+			sock.listen 1
 			var ns = sock.accept
+			assert ns != null
 			sock.close
 			sys.set_io(ns,ns,ns)
 		else if self.toolcontext.opt_websocket_mode.value then
@@ -103,7 +105,7 @@ redef class ModelBuilder
 
 	fun close_stdstreams
 	do
-		if sys.stdin isa WebSocket or sys.stdin isa Socket then
+		if sys.stdin isa WebSocket or sys.stdin isa TCPStream then
 			sys.stdin.close
 			sys.stdout.close
 			sys.stderr.close

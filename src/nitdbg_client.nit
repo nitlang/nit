@@ -65,19 +65,19 @@ if toolcontext.opt_debug_port.value < 0 or toolcontext.opt_debug_port.value > 65
 	return
 end
 
-var debug: Socket
+var debug: TCPStream
 
 # An IPV4 address does always complies to this form : x.x.x.x
 # Where x is an integer whose value is >=0 and <= 255
 if toolcontext.opt_host_address.value != null then
 	if toolcontext.opt_host_address.value.is_valid_ipv4_address then
-		debug = new Socket.client(toolcontext.opt_host_address.value.as(not null), toolcontext.opt_debug_port.value)
+		debug = new TCPStream.connect(toolcontext.opt_host_address.value.as(not null), toolcontext.opt_debug_port.value)
 	else
 		toolcontext.option_context.usage
 		return
 	end
 else
-	debug = new Socket.client("127.0.0.1", toolcontext.opt_debug_port.value)
+	debug = new TCPStream.connect("127.0.0.1", toolcontext.opt_debug_port.value)
 end
 
 print "[HOST ADDRESS] : {debug.address}"

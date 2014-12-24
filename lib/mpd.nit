@@ -23,7 +23,7 @@ import socket
 class MPDConnection
 
 	# Socket connection to server.
-	var socket: nullable Socket = null
+	var socket: nullable TCPStream = null
 
 	# Server hostname.
 	var host: String
@@ -40,9 +40,10 @@ class MPDConnection
 	# Connect to the MPD server
 	fun connect
 	do
-		var p: nullable Socket = null
+		var p: nullable TCPStream = null
 
-		p = new Socket.client(host, port)
+		p = new TCPStream.connect(host, port)
+		assert p.connected
 
 		sys.nanosleep(0,5000)
 

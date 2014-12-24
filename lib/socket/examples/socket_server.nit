@@ -24,27 +24,31 @@ if args.is_empty then
 	return
 end
 
-var socket = new Socket.server(args[0].to_i, 1)
+var socket = new TCPServer(args[0].to_i)
+socket.listen 1
 print "[PORT] : {socket.port.to_s}"
 
-var clients = new Array[Socket]
+var clients = new Array[TCPStream]
 var max = socket
 loop
 	var fs = new SocketObserver(true, true, true)
-	fs.readset.set(socket)
+	fs.read_set.add socket
 
-	for c in clients do fs.readset.set(c)
+	for c in clients do fs.read_set.add c
 
+	printn "."
 	if fs.select(max, 4, 0) == 0 then
 		print "Error occured in select {sys.errno.strerror}"
 		break
 	end
 
-	if fs.readset.is_set(socket) then
+	if fs.read_set.has(socket) then
 		var ns = socket.accept
 		print "Accepting {ns.address} ... "
-		print "[Message from {ns.address}] : {ns.read(100)}"
-		ns.write("Goodbye client.")
+		print "[Message from {ns.address}] : {ns.read_line}"
+		ns.write "Hello client.\n"
+		print "[Message from {ns.address}] : {ns.read_line}"
+		ns.write "Bye client.\n"
 		print "Closing {ns.address} ..."
 		ns.close
 	end

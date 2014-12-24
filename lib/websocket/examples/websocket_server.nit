@@ -23,13 +23,13 @@ var sock = new WebSocket(8088, 1)
 
 var msg: String
 
-if sock.listener.eof then
+if sock.listener.closed then
 	print sys.errno.strerror
 end
 
 sock.accept
 
-while not sock.listener.eof do
+while not sock.listener.closed do
 	if not sock.connected then sock.accept
 	if sys.stdin.poll_in then
 		msg = gets

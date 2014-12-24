@@ -17,82 +17,76 @@
 # Socket services
 module socket
 
-import socket_c
+private import socket_c
 intrude import standard::stream
 
-# Portal for communication between two machines
-class Socket
+# A general TCP socket, either a `TCPStream` or a `TCPServer`
+abstract class Socket
+
+	# Underlying C socket
+	private var socket: NativeSocket is noinit
+
+	# Port used by the socket
+	var port: Int
+
+	# IPv4 address to which `self` is connected
+	#
+	# Formatted as xxx.xxx.xxx.xxx.
+	var address: String is noinit
+
+	# Is this socket closed?
+	var closed = false
+end
+
+# Simple communication stream with a remote socket
+class TCPStream
+	super Socket
 	super BufferedIStream
 	super OStream
 	super PollableIStream
 
-	# IPv4 address the socket is connected to
-	# Formatted as xxx.xxx.xxx.xxx
-	var address: String is noinit
+	# Real canonical name of the host to which `self` is connected
+	var host: String
 
-	# Hostname of the socket connected to self
-	# In C : The real canonical host name (e.g. example.org)
-	var host: nullable String = null
-
-	# Port open for the socket
-	var port: Int is noinit
-
-	# Underlying C socket
-	private var socket: FFSocket is noinit
-
-	# Underlying C socket
-	private var addrin: FFSocketAddrIn is noinit
+	private var addrin: NativeSocketAddrIn is noinit
 
 	redef var end_reached = false
 
-	# Creates a socket connection to host `thost` on port `port`
-	init client(thost: String, tport: Int)
-	do
-		_buffer = new FlatBuffer
-		_buffer_pos = 0
-		socket = new FFSocket.socket( new FFSocketAddressFamilies.af_inet, new FFSocketTypes.sock_stream, new FFSocketProtocolFamilies.pf_null )
-		if socket.address_is_null then
-			end_reached = true
-			return
-		end
-		socket.setsockopt(new FFSocketOptLevels.socket, new FFSocketOptNames.reuseaddr, 1)
-		var hostname = socket.gethostbyname(thost)
-		addrin = new FFSocketAddrIn.with_hostent(hostname, tport)
-		address = addrin.address
-		host = hostname.h_name
-		port = addrin.port
-		if not end_reached then end_reached = not connect
-	end
+	# TODO make init private
 
-	# Creates a server socket on port `tport`, with a connection queue of size `max`
-	init server(tport: Int, max: Int)
+	# Creates a socket connection to host `host` on port `port`
+	init connect(host: String, port: Int)
 	do
 		_buffer = new FlatBuffer
 		_buffer_pos = 0
-		socket = new FFSocket.socket( new FFSocketAddressFamilies.af_inet, new FFSocketTypes.sock_stream, new FFSocketProtocolFamilies.pf_null )
+		socket = new NativeSocket.socket(new NativeSocketAddressFamilies.af_inet,
+			new NativeSocketTypes.sock_stream, new NativeSocketProtocolFamilies.pf_null)
 		if socket.address_is_null then
 			end_reached = true
+			closed = true
 			return
 		end
-		socket.setsockopt(new FFSocketOptLevels.socket, new FFSocketOptNames.reuseaddr, 1)
-		addrin = new FFSocketAddrIn.with(tport, new FFSocketAddressFamilies.af_inet)
+		socket.setsockopt(new NativeSocketOptLevels.socket, new NativeSocketOptNames.reuseaddr, 1)
+		var hostname = socket.gethostbyname(host)
+		addrin = new NativeSocketAddrIn.with_hostent(hostname, port)
+
 		address = addrin.address
-		port = addrin.port
-		host = null
-		bind
-		listen(max)
+		init(addrin.port, hostname.h_name)
+
+		closed = not internal_connect
+		end_reached = closed
 	end
 
 	# Creates a client socket, this is meant to be used by accept only
-	private init primitive_init(h: FFSocketAcceptResult)
+	private init server_side(h: SocketAcceptResult)
 	do
 		_buffer = new FlatBuffer
 		_buffer_pos = 0
 		socket = h.socket
-		addrin = h.addrIn
+		addrin = h.addr_in
 		address = addrin.address
-		port = addrin.port
-		host = null
+
+		init(addrin.port, address)
 	end
 
 	redef fun poll_in do return ready_to_read(0)
@@ -102,37 +96,31 @@ class Socket
 	# event_types : Combination of several event types to watch
 	#
 	# timeout : Time in milliseconds before stopping listening for events on this socket
-	#
-	private fun pollin(event_types: Array[FFSocketPollValues], timeout: Int): Array[FFSocketPollValues] do
-		if end_reached then return new Array[FFSocketPollValues]
+	private fun pollin(event_types: Array[NativeSocketPollValues], timeout: Int): Array[NativeSocketPollValues] do
+		if end_reached then return new Array[NativeSocketPollValues]
 		return socket.socket_poll(new PollFD(socket.descriptor, event_types), timeout)
 	end
 
 	# Easier use of pollin to check for something to read on all channels of any priority
 	#
 	# timeout : Time in milliseconds before stopping to wait for events
-	#
 	fun ready_to_read(timeout: Int): Bool
 	do
 		if _buffer_pos < _buffer.length then return true
 		if eof then return false
-		var events = new Array[FFSocketPollValues]
-		events.push(new FFSocketPollValues.pollin)
+		var events = [new NativeSocketPollValues.pollin]
 		return pollin(events, timeout).length != 0
 	end
 
 	# Checks if the socket still is connected
-	#
 	fun connected: Bool
 	do
-		if eof then return false
-		var events = new Array[FFSocketPollValues]
-		events.push(new FFSocketPollValues.pollhup)
-		events.push(new FFSocketPollValues.pollerr)
+		if closed then return false
+		var events = [new NativeSocketPollValues.pollhup, new NativeSocketPollValues.pollerr]
 		if pollin(events, 0).length == 0 then
 			return true
 		else
-			end_reached = true
+			closed = true
 			return false
 		end
 	end
@@ -142,16 +130,16 @@ class Socket
 	# Establishes a connection to socket addrin
 	#
 	# REQUIRES : not self.end_reached
-	private fun connect: Bool
+	private fun internal_connect: Bool
 	do
-		assert not end_reached
+		assert not closed
 		return socket.connect(addrin) >= 0
 	end
 
 	# If socket.end_reached, nothing will happen
 	redef fun write(msg: Text)
 	do
-		if end_reached then return
+		if closed then return
 		socket.write(msg.to_s)
 	end
 
@@ -175,66 +163,136 @@ class Socket
 		_buffer.append(read)
 	end
 
-	redef fun close do
-		if end_reached then return
+	redef fun close
+	do
+		if closed then return
 		if socket.close >= 0 then
-			end_reached = true
+			closed = true
 		end
+	end
+
+	# Send the data present in the socket buffer
+	fun flush
+	do
+		socket.setsockopt(new NativeSocketOptLevels.tcp, new NativeSocketOptNames.tcp_nodelay, 1)
+		socket.setsockopt(new NativeSocketOptLevels.tcp, new NativeSocketOptNames.tcp_nodelay, 0)
+	end
+end
+
+# A socket listening on a given `port` for incomming connections
+#
+# Create streams to communicate with clients using `accept`.
+class TCPServer
+	super Socket
+
+	private var addrin: NativeSocketAddrIn is noinit
+
+	# Create and bind a listening server socket on port `port`
+	init
+	do
+		socket = new NativeSocket.socket(new NativeSocketAddressFamilies.af_inet,
+			new NativeSocketTypes.sock_stream, new NativeSocketProtocolFamilies.pf_null)
+		assert not socket.address_is_null
+		socket.setsockopt(new NativeSocketOptLevels.socket, new NativeSocketOptNames.reuseaddr, 1)
+		addrin = new NativeSocketAddrIn.with(port, new NativeSocketAddressFamilies.af_inet)
+		address = addrin.address
+
+		# Bind it
+		closed = not bind
 	end
 
 	# Associates the socket to a local address and port
 	#
-	# Returns : `true` if the socket could be bound, `false` otherwise
+	# Returns whether the socket has been be bound.
 	private fun bind: Bool do
-		if end_reached then return false
 		return socket.bind(addrin) >= 0
 	end
 
 	# Sets the socket as ready to accept incoming connections, `size` is the maximum number of queued clients
 	#
-	# Returns : `true` if the socket could be set, `false` otherwise
-	private fun listen(size: Int): Bool do
-		if end_reached then return false
+	# Returns `true` if the socket could be set, `false` otherwise
+	fun listen(size: Int): Bool do
 		return socket.listen(size) >= 0
 	end
 
 	# Accepts an incoming connection from a client
-	# This creates a new socket that represents the connection to a client
 	#
-	# Returns : the socket for communication with the client
+	# Create and return a new socket to the client. May return null if not
+	# `blocking` and there's no waiting clients, or upon an interruption
+	# (whether `blocking` or not).
 	#
-	# REQUIRES : not self.end_reached
-	fun accept: Socket do
-		assert not end_reached
-		return new Socket.primitive_init(socket.accept)
+	# Require: not closed
+	fun accept: nullable TCPStream
+	do
+		assert not closed
+		var native = socket.accept
+		if native == null then return null
+		return new TCPStream.server_side(native)
 	end
 
+	# Set whether calls to `accept` are blocking
+	fun blocking=(value: Bool)
+	do
+		# We use the opposite from the native version as the native API
+		# is closer to the C API. In the Nity API, we use a positive version
+		# of the name.
+		socket.non_blocking = not value
+	end
+
+	# Close this socket
+	fun close
+	do
+		# FIXME unify with `SocketStream::close` when we can use qualified names
+
+		if closed then return
+		if socket.close >= 0 then
+			closed = true
+		end
+	end
 end
 
+# A simple set of sockets used by `SocketObserver`
 class SocketSet
-	var sset = new FFSocketSet
-	fun set(s: Socket) do sset.set(s.socket) end
-	fun is_set(s: Socket): Bool do return sset.is_set(s.socket) end
-	fun zero do sset.zero end
-	fun clear(s: Socket) do sset.clear(s.socket) end
+	private var native = new NativeSocketSet
+
+	init do clear
+
+	# Add `socket` to this set
+	fun add(socket: Socket) do native.set(socket.socket)
+
+	# Remove `socket` from this set
+	fun remove(socket: Socket) do native.clear(socket.socket)
+
+	# Does this set has `socket`?
+	fun has(socket: Socket): Bool do return native.is_set(socket.socket)
+
+	# Clear all sockets from this set
+	fun clear do native.zero
 end
 
+# Service class to manage calls to `select`
 class SocketObserver
-	private var observer: FFSocketObserver
-	var readset: nullable SocketSet = null
-	var writeset: nullable SocketSet = null
-	var exceptset: nullable SocketSet = null
-	init(read :Bool, write :Bool, except: Bool)
+	private var native = new NativeSocketObserver
+
+	var read_set: nullable SocketSet = null
+
+	var write_set: nullable SocketSet = null
+
+	var except_set: nullable SocketSet = null
+
+	init(read: Bool, write: Bool, except: Bool)
+	is old_style_init do
+		if read then read_set = new SocketSet
+		if write then write_set = new SocketSet
+		if except then except_set = new SocketSet
+	end
+
+	fun select(max: Socket, seconds: Int, microseconds: Int): Bool
 	do
-		if read then readset = new SocketSet
-		if write then writeset = new SocketSet
-		if except then exceptset = new SocketSet
-		observer = new FFSocketObserver
-	end	
-	fun select(max: Socket,seconds: Int, microseconds: Int): Bool
-	do
-		var timeval = new FFTimeval(seconds, microseconds)
-		return observer.select(max.socket, readset.sset, writeset.sset, readset.sset, timeval) > 0
+		# FIXME this implementation (see the call to nullable attributes below) and
+		# `NativeSockectObserver::select` is not stable.
+
+		var timeval = new NativeTimeval(seconds, microseconds)
+		return native.select(max.socket, read_set.native, write_set.native, except_set.native, timeval) > 0
 	end
 end
-
