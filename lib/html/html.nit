@@ -84,10 +84,13 @@ class HTMLPage
 	end
 end
 
+# An HTML element.
 class HTMLTag
 	super Streamable
 
-	# HTML tagname: 'div' for <div></div>
+	# HTML element type.
+	#
+	# `"div"` for `<div></div>`.
 	var tag: String
 	init do
 		self.is_void = (once ["area", "base", "br", "col", "command", "embed", "hr", "img", "input", "keygen", "link", "meta", "param", "source", "track", "wbr"]).has(tag)
@@ -99,6 +102,7 @@ class HTMLTag
 	#     assert (new HTMLTag("p")).is_void      == false
 	var is_void: Bool is noinit
 
+	# Create a HTML elements with the specifed type and attributes.
 	init with_attrs(tag: String, attrs: Map[String, String]) do
 		self.tag = tag
 		self.attrs = attrs

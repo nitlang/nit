@@ -186,8 +186,8 @@ Edge
 3:foo
 7:MEntity
 7:MModule
-=properties=JsonObject(2):
-{"location":"a\/b\/Bar.java:1,1--1,1","name":"Bar"}
+=properties=JsonObject(3):
+{"location":"a\/b\/Bar.java:1,1--1,1","name":"Bar","mdoc":["The first file."]}
 
 Edge
 =type=10:INTRODUCES
@@ -199,8 +199,8 @@ Edge
 3:foo
 7:MEntity
 7:MModule
-=properties=JsonObject(2):
-{"location":"a\/b\/Bar.java:1,1--1,1","name":"Bar"}
+=properties=JsonObject(3):
+{"location":"a\/b\/Bar.java:1,1--1,1","name":"Bar","mdoc":["The first file."]}
 ----
 =to=Entity#12:classa_b_bar
 =labels=Array(3):
@@ -220,8 +220,8 @@ Edge
 3:foo
 7:MEntity
 7:MModule
-=properties=JsonObject(2):
-{"location":"a\/b\/Bar.java:1,1--1,1","name":"Bar"}
+=properties=JsonObject(3):
+{"location":"a\/b\/Bar.java:1,1--1,1","name":"Bar","mdoc":["The first file."]}
 ----
 =to=Entity#0:
 =labels=Array(3):
@@ -762,8 +762,8 @@ Edge
 3:foo
 7:MEntity
 7:MModule
-=properties=JsonObject(2):
-{"location":"a\/b\/Bar.java:1,1--1,1","name":"Bar"}
+=properties=JsonObject(3):
+{"location":"a\/b\/Bar.java:1,1--1,1","name":"Bar","mdoc":["The first file."]}
 
 Edge
 =type=10:INTRODUCES
@@ -775,8 +775,8 @@ Edge
 3:foo
 7:MEntity
 7:MModule
-=properties=JsonObject(2):
-{"location":"a\/b\/Bar.java:1,1--1,1","name":"Bar"}
+=properties=JsonObject(3):
+{"location":"a\/b\/Bar.java:1,1--1,1","name":"Bar","mdoc":["The first file."]}
 ----
 =to=Entity#12:classa_b_bar
 =labels=Array(3):
@@ -796,8 +796,8 @@ Edge
 3:foo
 7:MEntity
 7:MModule
-=properties=JsonObject(2):
-{"location":"a\/b\/Bar.java:1,1--1,1","name":"Bar"}
+=properties=JsonObject(3):
+{"location":"a\/b\/Bar.java:1,1--1,1","name":"Bar","mdoc":["The first file."]}
 ----
 =to=Entity#0:
 =labels=Array(3):
@@ -1167,8 +1167,8 @@ Edge
 3:foo
 7:MEntity
 7:MModule
-=properties=JsonObject(2):
-{"location":"a\/b\/Bar.java:1,1--1,1","name":"Bar"}
+=properties=JsonObject(3):
+{"location":"a\/b\/Bar.java:1,1--1,1","name":"Bar","mdoc":["The first file."]}
 
 Edge
 =type=10:INTRODUCES
@@ -1180,8 +1180,8 @@ Edge
 3:foo
 7:MEntity
 7:MModule
-=properties=JsonObject(2):
-{"location":"a\/b\/Bar.java:1,1--1,1","name":"Bar"}
+=properties=JsonObject(3):
+{"location":"a\/b\/Bar.java:1,1--1,1","name":"Bar","mdoc":["The first file."]}
 ----
 =to=Entity#8:classbaz
 =labels=Array(3):
@@ -1201,8 +1201,8 @@ Edge
 3:foo
 7:MEntity
 7:MModule
-=properties=JsonObject(2):
-{"location":"a\/b\/Bar.java:1,1--1,1","name":"Bar"}
+=properties=JsonObject(3):
+{"location":"a\/b\/Bar.java:1,1--1,1","name":"Bar","mdoc":["The first file."]}
 ----
 =to=Entity#0:
 =labels=Array(3):

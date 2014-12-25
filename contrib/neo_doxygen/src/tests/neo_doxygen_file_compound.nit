@@ -36,6 +36,7 @@ file.location = location
 file.declare_class("classa_b_bar", "a::b::Bar", "package")
 file.declare_class("classbaz", "Baz", "")
 file.declare_namespace("", "a::b")
+file.doc.brief_description = "The first file."
 file.put_in_graph
 
 file_2.name = "Bar.java"

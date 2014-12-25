@@ -18,6 +18,7 @@ module model::graph
 import neo4j
 import more_collections
 import location
+import descriptions
 
 # A Neo4j graph.
 class NeoGraph
@@ -135,7 +136,7 @@ abstract class Entity
 	var full_name: nullable String = null is writable
 
 	# Associated documentation.
-	var doc = new JsonArray is writable
+	var doc = new Documentation is writable
 
 	init do
 		self.labels.add(graph.project_name)
@@ -179,7 +180,7 @@ abstract class Entity
 	#
 	# Called by the loader when it has finished to read the entity.
 	fun put_in_graph do
-		if doc.length > 0 then
+		if not doc.is_empty then
 			set_mdoc
 		end
 		graph.all_nodes.add(self)

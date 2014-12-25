@@ -13,32 +13,31 @@
 # limitations under the License.
 
 import tests
-import model
+intrude import model::module_compound
 
 var graph = new ProjectGraph("foo")
 var file = new FileCompound(graph)
-var root_ns = graph.by_id[""].as(Namespace)
-var ns = new Namespace(graph)
-var member = new Attribute(graph)
-var buffer = new RopeBuffer
+var bar_class = new ClassCompound(graph)
+var a_ns = new Namespace(graph)
 
-file.name = "foo.py"
-file.model_id = "_foo_8py"
-file.declare_namespace("namespacefoo", "foo")
+file.full_name = "Baz.java"
+file.declare_class("classa_bar", "a::Bar", "public")
+file.declare_namespace("namespacea", "a")
+file.doc.brief_description = "A file."
 file.put_in_graph
 
-member.name = "bar"
-member.put_in_graph
+a_ns.full_name = "a"
+a_ns.model_id = "namespacea"
+a_ns.declare_class("classa_bar", "a::Bar", "public")
+a_ns.doc.brief_description = "A namespace."
+a_ns.put_in_graph
 
-ns.model_id = "namespacefoo"
-ns.name = "foo"
-ns.declare_member(member)
-ns.doc.brief_description = "A documented namespace."
-ns.put_in_graph
-
-root_ns.declare_namespace("namespacefoo", "")
+bar_class.model_id = "classa_bar"
+bar_class.full_name = "a::Bar"
+bar_class.doc.brief_description = "A class."
+bar_class.put_in_graph
 
 graph.add_global_modules
 graph.put_edges
-graph.debug buffer
-print buffer
+
+assert file.inner_namespaces[0]["mdoc"] == bar_class.doc

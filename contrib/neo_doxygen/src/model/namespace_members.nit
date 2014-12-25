@@ -65,4 +65,9 @@ class SelfClass
 		super
 		name = "(self)"
 	end
+
+	redef fun put_in_graph do
+		if doc.is_empty then doc = namespace.doc
+		super
+	end
 end
