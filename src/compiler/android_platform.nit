@@ -234,21 +234,22 @@ $(call import-module,android/native_app_glue)
 			end
 		end
 
-		### copy resources  (for android)
-		# This will be accessed from `android_project_root`
-		var res_dir
+		### Copy resources and libs where expected by the SDK
+		var project_root
 		if compiler.mainmodule.location.file != null then
 			# it is a real file, use "{file}/../res"
-			res_dir = "{compiler.mainmodule.location.file.filename.dirname}/../res"
+			project_root = "{compiler.mainmodule.location.file.filename.dirname}/.."
 		else
 			# probably used -m, use "."
-			res_dir = "res"
+			project_root = "."
 		end
+
+		# Android resources folder
+		var res_dir = project_root / "res"
 		if res_dir.file_exists then
 			# copy the res folder to .nit_compile
 			res_dir = res_dir.realpath
-			var target_res_dir = "{android_project_root}"
-			toolcontext.exec_and_check(["cp", "-R", res_dir, target_res_dir], "Android project error")
+			toolcontext.exec_and_check(["cp", "-R", res_dir, android_project_root], "Android project error")
 		end
 
 		if not res_dir.file_exists or not "{res_dir}/values/strings.xml".file_exists then
@@ -257,6 +258,12 @@ $(call import-module,android/native_app_glue)
 <resources>
     <string name="app_name">{{{app_name}}}</string>
 </resources>""".write_to_file "{dir}/res/values/strings.xml"
+		end
+
+		# Android libs folder
+		var libs_dir = project_root / "libs"
+		if libs_dir.file_exists then
+			toolcontext.exec_and_check(["cp", "-r", libs_dir, android_project_root], "Android project error")
 		end
 	end
 
