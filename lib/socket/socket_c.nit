@@ -79,24 +79,23 @@ class PollFD
 end
 
 # Data structure used by the poll function
-private extern class NativeSocketPollFD `{ struct pollfd `}
+private extern class NativeSocketPollFD `{ struct pollfd * `}
 
-	# File descriptor id
-	private fun fd: Int `{ return recv.fd; `}
+	# File descriptor
+	fun fd: Int `{ return recv->fd; `}
 
 	# List of events to be watched
-	private fun events: Int `{ return recv.events; `}
+	fun events: Int `{ return recv->events; `}
 
 	# List of events received by the last poll function
-	private fun revents: Int `{  return recv.revents; `}
+	fun revents: Int `{  return recv->revents; `}
 
 	new (pid: Int, events: NativeSocketPollValues) `{
-		struct pollfd poll;
-		poll.fd = pid;
-		poll.events = events;
+		struct pollfd *poll = malloc(sizeof(struct pollfd));
+		poll->fd = pid;
+		poll->events = events;
 		return poll;
 	`}
-
 end
 
 extern class NativeSocket `{ int* `}
@@ -177,7 +176,7 @@ extern class NativeSocket `{ int* `}
 	# The array's members are pollfd structures within which fd specifies an open file descriptor and events and revents are bitmasks constructed by
 	# OR'ing a combination of the pollfd flags.
 	private fun native_poll(filedesc: NativeSocketPollFD, timeout: Int): Int `{
-		int poll_return = poll(&filedesc, 1, timeout);
+		int poll_return = poll(filedesc, 1, timeout);
 		return poll_return;
 	`}
 
