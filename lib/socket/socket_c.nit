@@ -368,9 +368,6 @@ extern class NativeSocketAddressFamilies `{ int `}
 	# Novell Internet Protocol
 	new af_ipx `{ return AF_IPX; `}
 
-	# Integrated Services Digital Network
-	new af_isdn `{ return AF_ISDN; `}
-
 	# IPv6
 	new af_inet6 `{ return AF_INET6; `}
 
@@ -387,7 +384,6 @@ extern class NativeSocketProtocolFamilies `{ int `}
 	new pf_decnet `{ return PF_DECnet; `}
 	new pf_route `{ return PF_ROUTE; `}
 	new pf_ipx `{ return PF_IPX; `}
-	new pf_isdn `{ return PF_ISDN; `}
 	new pf_key `{ return PF_KEY; `}
 	new pf_inet6 `{ return PF_INET6; `}
 	new pf_max `{ return PF_MAX; `}
