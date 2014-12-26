@@ -37,6 +37,7 @@ in "C" `{
 
 # Wrapper for the data structure PollFD used for polling on a socket
 class PollFD
+	super FinalizableOnce
 
 	# The PollFD object
 	private var poll_struct: NativeSocketPollFD
@@ -76,6 +77,10 @@ class PollFD
 		return response & mask;
 	`}
 
+	redef fun finalize_once
+	do
+		poll_struct.free
+	end
 end
 
 # Data structure used by the poll function
