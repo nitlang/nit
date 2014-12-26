@@ -36,3 +36,29 @@ class Finalizable
 	# to use attributes of this instances.
 	fun finalize do end
 end
+
+# An object to be finalized only once
+#
+# This is an utility sub-class to `Finalizable` which ensures that `finalized_once`
+# is called only once per instance. User classes implementing `FinalizableOnce`
+# shoud specialize `finalize_once` and _not_ `finalize`. When manipulating the user
+# class, only `finalize` should be called as it protects `finalize_once`.
+class FinalizableOnce
+	super Finalizable
+
+	# Has `self` been finalized? (either by the GC or an explicit call to `finalize`)
+	var finalized = false
+
+	redef fun finalize
+	do
+		if finalized then return
+
+		finalize_once
+		finalized = true
+	end
+
+	# Real finalization method of `FinalizableOnce`, will be called only once
+	#
+	# See: `Finalizable::finalize` for restrictions on finalizer methods.
+	protected fun finalize_once do end
+end
