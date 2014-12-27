@@ -30,11 +30,14 @@ redef class ToolContext
 	# --disable-phase
 	var opt_disable_phase = new OptionArray("DEBUG: Disable a specific phase; use `list` to get the list.", "--disable-phase")
 
+	# --disable-phase
+	var opt_sloppy = new OptionBool("DEBUG: force lazy semantic analysis of the source-code", "--sloppy")
+
 	redef init
 	do
 		super
 
-		option_context.add_option(opt_disable_phase)
+		option_context.add_option(opt_disable_phase, opt_sloppy)
 	end
 
 	redef fun process_options(args)
@@ -62,6 +65,8 @@ redef class ToolContext
 			end
 			if not found then fatal_error(null, "Error: no phase named `{v}`. Use `list` to list all phases.")
 		end
+
+		if opt_sloppy.value then semantize_is_lazy = true
 	end
 
 	fun phases_list: Sequence[Phase]
