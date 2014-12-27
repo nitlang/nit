@@ -66,7 +66,11 @@ class TCPStream
 			closed = true
 			return
 		end
-		socket.setsockopt(new NativeSocketOptLevels.socket, new NativeSocketOptNames.reuseaddr, 1)
+		if not socket.setsockopt(new NativeSocketOptLevels.socket, new NativeSocketOptNames.reuseaddr, 1) then
+			end_reached = true
+			closed = true
+			return
+		end
 		var hostname = socket.gethostbyname(host)
 		addrin = new NativeSocketAddrIn.with_hostent(hostname, port)
 
@@ -174,8 +178,10 @@ class TCPStream
 	# Send the data present in the socket buffer
 	fun flush
 	do
-		socket.setsockopt(new NativeSocketOptLevels.tcp, new NativeSocketOptNames.tcp_nodelay, 1)
-		socket.setsockopt(new NativeSocketOptLevels.tcp, new NativeSocketOptNames.tcp_nodelay, 0)
+		if not socket.setsockopt(new NativeSocketOptLevels.tcp, new NativeSocketOptNames.tcp_nodelay, 1) or
+		   not socket.setsockopt(new NativeSocketOptLevels.tcp, new NativeSocketOptNames.tcp_nodelay, 0) then
+			closed = true
+		end
 	end
 end
 
@@ -193,7 +199,10 @@ class TCPServer
 		socket = new NativeSocket.socket(new NativeSocketAddressFamilies.af_inet,
 			new NativeSocketTypes.sock_stream, new NativeSocketProtocolFamilies.pf_null)
 		assert not socket.address_is_null
-		socket.setsockopt(new NativeSocketOptLevels.socket, new NativeSocketOptNames.reuseaddr, 1)
+		if not socket.setsockopt(new NativeSocketOptLevels.socket, new NativeSocketOptNames.reuseaddr, 1) then
+			closed = true
+			return
+		end
 		addrin = new NativeSocketAddrIn.with(port, new NativeSocketAddressFamilies.af_inet)
 		address = addrin.address
 

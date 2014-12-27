@@ -145,12 +145,14 @@ extern class NativeSocket `{ int* `}
 	`}
 
 	# Sets an option for the socket
-	fun setsockopt(level: NativeSocketOptLevels, option_name: NativeSocketOptNames, option_value: Int) `{
+	#
+	# Returns `true` on success.
+	fun setsockopt(level: NativeSocketOptLevels, option_name: NativeSocketOptNames, option_value: Int): Bool `{
 		int err = setsockopt(*recv, level, option_name, &option_value, sizeof(int));
 		if(err != 0){
-			perror("Error on setsockopts: ");
-			exit(1);
+			return 0;
 		}
+		return 1;
 	`}
 
 	fun bind(addrIn: NativeSocketAddrIn): Int `{ return bind(*recv, (struct sockaddr*)addrIn, sizeof(*addrIn)); `}
