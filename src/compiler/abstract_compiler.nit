@@ -2151,7 +2151,7 @@ redef class AMethPropdef
 	do
 		var externname
 		var at = self.get_single_annotation("extern", v.compiler.modelbuilder)
-		if at != null then
+		if at != null and at.n_args.length == 1 then
 			externname = at.arg_as_string(v.compiler.modelbuilder)
 			if externname == null then return false
 		else
