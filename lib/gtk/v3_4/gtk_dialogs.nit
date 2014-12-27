@@ -119,8 +119,8 @@ extern class GtkAboutDialog `{GtkAboutDialog *`}
 	#	gtk_about_dialog_set_authors( recv, String_to_cstring( authors_list ) );
 	#`}
 
-	fun show ( parent : GtkWindow, params : String ) is extern import String.to_cstring`{
-		gtk_show_about_dialog( parent, String_to_cstring( params ), NULL);
+	fun show_about_dialog(parent: GtkWindow, params: String) import String.to_cstring `{
+		gtk_show_about_dialog(parent, String_to_cstring(params), NULL);
 	`}
 end
 

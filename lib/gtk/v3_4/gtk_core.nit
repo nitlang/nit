@@ -116,6 +116,17 @@ extern class GtkWidget `{GtkWidget *`}
 	fun visible_self: Bool is extern `{
 		return gtk_widget_get_visible(recv);
 	`}
+
+	# Destroy the widget
+	fun destroy `{ gtk_widget_destroy(recv); `}
+
+	# Show the widget on screen
+	#
+	# See: `show_all` to recursively show this widget and contained widgets.
+	fun show `{ gtk_widget_show(recv); `}
+
+	# Hide the widget (reverse the effects of `show`)
+	fun hide `{ gtk_widget_hide(recv); `}
 end
 
 #Base class for widgets which contain other widgets
