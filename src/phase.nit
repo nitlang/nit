@@ -69,8 +69,8 @@ redef class ToolContext
 		if opt_sloppy.value then semantize_is_lazy = true
 	end
 
-	fun phases_list: Sequence[Phase]
-	do
+	# The list of phases in the order to run them
+	var phases_list: Sequence[Phase] is lazy do
 		var phases = self.phases.to_a
 		self.phases.sort(phases)
 		return phases
