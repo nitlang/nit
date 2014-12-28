@@ -34,7 +34,7 @@ typedef struct {
 # UTF-8 char as defined in RFC-3629, e.g. 1-4 Bytes
 #
 # A UTF-8 char has its bytes stored in a NativeString (char*)
-extern class UnicodeChar `{ UTF8Char* `}
+extern class UTF8Char `{ UTF8Char* `}
 
 	new(pos: Int, ns: NativeString) `{
 		UTF8Char* u = malloc(sizeof(UTF8Char));
@@ -83,8 +83,8 @@ extern class UnicodeChar `{ UTF8Char* `}
 	# Returns the Unicode code point representing the character
 	#
 	# Note : A unicode character might not be a visible glyph, but it will be used to determine canonical equivalence
-	fun code_point: Int import UnicodeChar.len `{
-		switch(UnicodeChar_len(recv)){
+	fun code_point: Int import UTF8Char.len `{
+		switch(UTF8Char_len(recv)){
 			case 1:
 				return (long)(0x7F & (unsigned char)recv->ns[recv->pos]);
 			case 2:
@@ -105,8 +105,8 @@ extern class UnicodeChar `{ UTF8Char* `}
 	#
 	# NOTE : Works only on ASCII chars
 	# TODO : Support unicode for to_upper
-	fun to_upper: UnicodeChar import UnicodeChar.code_point `{
-		int cp = UnicodeChar_code_point(recv);
+	fun to_upper: UTF8Char import UTF8Char.code_point `{
+		int cp = UTF8Char_code_point(recv);
 		if(cp < 97 || cp > 122){ return recv; }
 		char* ns = malloc(2);
 		ns[1] = '\0';
@@ -122,8 +122,8 @@ extern class UnicodeChar `{ UTF8Char* `}
 	#
 	# NOTE : Works only on ASCII chars
 	# TODO : Support unicode for to_upper
-	fun to_lower: UnicodeChar import UnicodeChar.code_point `{
-		int cp = UnicodeChar_code_point(recv);
+	fun to_lower: UTF8Char import UTF8Char.code_point `{
+		int cp = UTF8Char_code_point(recv);
 		if(cp < 65 || cp > 90){ return recv; }
 		char* ns = malloc(2);
 		ns[1] = '\0';
@@ -140,15 +140,15 @@ extern class UnicodeChar `{ UTF8Char* `}
 		if o isa Char then
 			if len != 1 then return false
 			if code_point == o.ascii then return true
-		else if o isa UnicodeChar then
+		else if o isa UTF8Char then
 			if len != o.len then return false
 			if code_point == o.code_point then return true
 		end
 		return false
 	end
 
-	redef fun output import UnicodeChar.code_point `{
-		switch(UnicodeChar_len(recv)){
+	redef fun output import UTF8Char.code_point `{
+		switch(UTF8Char_len(recv)){
 			case 1:
 				printf("%c", recv->ns[recv->pos]);
 				break;
@@ -165,7 +165,7 @@ extern class UnicodeChar `{ UTF8Char* `}
 	`}
 
 	redef fun to_s import NativeString.to_s_with_length `{
-		int len = utf8___UnicodeChar_len___impl(recv);
+		int len = utf8___UTF8Char_len___impl(recv);
 		char* r = malloc(len + 1);
 		r[len] = '\0';
 		char* src = (recv->ns + recv->pos);
@@ -182,10 +182,10 @@ private extern class StringIndex `{ UTF8Char* `}
 	new(size: Int) `{ return malloc(size*sizeof(UTF8Char)); `}
 
 	# Sets the character at `index` as `item`
-	fun []=(index: Int, item: UnicodeChar) `{ recv[index] = *item; `}
+	fun []=(index: Int, item: UTF8Char) `{ recv[index] = *item; `}
 
 	# Gets the character at position `id`
-	fun [](id: Int): UnicodeChar `{ return &recv[id]; `}
+	fun [](id: Int): UTF8Char `{ return &recv[id]; `}
 
 	# Copies a part of self starting at index `my_from` of length `length` into `other`, starting at `its_from`
 	fun copy_to(other: StringIndex, my_from: Int, its_from: Int, length: Int)`{
@@ -259,7 +259,7 @@ redef class FlatString
 			var uchar = index[i]
 			var uchar_len = uchar.len
 			ipos -= uchar_len
-			new_index[pos_index] = new UnicodeChar(ipos, native)
+			new_index[pos_index] = new UTF8Char(ipos, native)
 			pos_index -= 1
 			items.copy_to(native, uchar_len, pos, ipos)
 			pos += uchar_len
@@ -373,7 +373,7 @@ redef class NativeString
 	# Creates the index for said NativeString
 	# `length` is the size of the CString (in bytes, up to the first \0)
 	# real_len is just a way to store the length (UTF-8 characters)
-	private fun make_index(length: Int, real_len: Container[Int]): StringIndex import Container[Int].item=, UnicodeChar.len `{
+	private fun make_index(length: Int, real_len: Container[Int]): StringIndex import Container[Int].item=, UTF8Char.len `{
 		int pos = 0;
 		int index_pos = 0;
 		UTF8Char* index = malloc(length*sizeof(UTF8Char));
@@ -381,7 +381,7 @@ redef class NativeString
 			UTF8Char* curr = &index[index_pos];
 			curr->pos = pos;
 			curr->ns = recv;
-			pos += UnicodeChar_len(curr);
+			pos += UTF8Char_len(curr);
 			index_pos ++;
 		}
 		Container_of_Int_item__assign(real_len, index_pos);
