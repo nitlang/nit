@@ -129,12 +129,6 @@ class MModule
 				assert mgroup.default_mmodule == null
 				mgroup.default_mmodule = self
 			end
-			# placebo for old module nesting hierarchy
-			var direct_owner = mgroup.default_mmodule
-			if direct_owner == self then
-				# The potential owner is the default_mmodule of the parent group
-				if mgroup.parent != null then direct_owner = mgroup.parent.default_mmodule
-			end
 		end
 		self.in_importation = model.mmodule_importation_hierarchy.add_node(self)
 	end
