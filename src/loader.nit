@@ -455,6 +455,19 @@ redef class ModelBuilder
 			end
 		end
 
+		# Check for conflicting module names in the project
+		if mgroup != null then
+			var others = model.get_mmodules_by_name(mod_name)
+			if others != null then for other in others do
+				if other.mgroup!= null and other.mgroup.mproject == mgroup.mproject then
+					var node: ANode
+					if decl == null then node = nmodule else node = decl.n_name
+					error(node, "Error: A module named `{other.full_name}` already exists at {other.location}")
+					break
+				end
+			end
+		end
+
 		# Create the module
 		var mmodule = new MModule(model, mgroup, mod_name, nmodule.location)
 		nmodule.mmodule = mmodule
