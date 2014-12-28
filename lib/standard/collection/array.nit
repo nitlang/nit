@@ -281,6 +281,32 @@ class Array[E]
 		_items[l] = item
 	end
 
+	# Slight optimization for arrays
+	redef fun add_all(items)
+	do
+		var l = _length
+		var nl = l + items.length
+		if _capacity < nl then
+			enlarge nl
+		end
+
+		if items isa Array[E] then
+			var k = 0
+			while l < nl do
+				_items[l] = items._items[k]
+				l += 1
+				k += 1
+			end
+		else
+			for item in items do
+				_items[l] = item
+				l += 1
+			end
+		end
+
+		_length = nl
+	end
+
 	redef fun enlarge(cap)
 	do
 		var c = _capacity
