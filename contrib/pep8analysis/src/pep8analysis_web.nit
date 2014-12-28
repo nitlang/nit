@@ -46,7 +46,7 @@ in "C++" `{
 
 redef class AnalysisManager
 
-	fun run(src: String)
+	fun run_web(src: String)
 	do
 		sys.suggest_garbage_collection
 
@@ -109,7 +109,7 @@ redef class AnalysisManager
 end
 
 redef class NativeString
-	fun run_analysis do manager.run to_s
+	fun run_analysis do manager.run_web to_s
 end
 
 fun dummy_set_callbacks import NativeString.run_analysis in "C++" `{
