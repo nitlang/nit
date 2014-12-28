@@ -1234,7 +1234,7 @@ class SeparateCompilerVisitor
 			(compiler.modelbuilder.toolcontext.opt_inline_some_methods.value and mmethoddef.can_inline(self)) then
 			compiler.modelbuilder.nb_invok_by_inline += 1
 			if compiler.modelbuilder.toolcontext.opt_invocation_metrics.value then add("count_invoke_by_inline++;")
-			var frame = new Frame(self, mmethoddef, recvtype, arguments)
+			var frame = new StaticFrame(self, mmethoddef, recvtype, arguments)
 			frame.returnlabel = self.get_name("RET_LABEL")
 			frame.returnvar = res
 			var old_frame = self.frame
@@ -1284,11 +1284,11 @@ class SeparateCompilerVisitor
 		# of the method (ie recv) if the static type is unresolved
 		# This is more complex than usual because the unresolved type must not be resolved
 		# with the current receiver (ie self).
-		# Therefore to isolate the resolution from self, a local Frame is created.
+		# Therefore to isolate the resolution from self, a local StaticFrame is created.
 		# One can see this implementation as an inlined method of the receiver whose only
 		# job is to allocate the array
 		var old_frame = self.frame
-		var frame = new Frame(self, mpropdef, mpropdef.mclassdef.bound_mtype, [recv])
+		var frame = new StaticFrame(self, mpropdef, mpropdef.mclassdef.bound_mtype, [recv])
 		self.frame = frame
 		#print "required Array[{elttype}] for recv {recv.inspect}. bound=Array[{self.resolve_for(elttype, recv)}]. selfvar={frame.arguments.first.inspect}"
 		var res = self.array_instance(varargs, elttype)
@@ -1806,7 +1806,7 @@ class SeparateRuntimeFunction
 		var v = compiler.new_visitor
 		var selfvar = new RuntimeVariable("self", recv, recv)
 		var arguments = new Array[RuntimeVariable]
-		var frame = new Frame(v, mmethoddef, recv, arguments)
+		var frame = new StaticFrame(v, mmethoddef, recv, arguments)
 		v.frame = frame
 
 		var msignature = mmethoddef.msignature.resolve_for(mmethoddef.mclassdef.bound_mtype, mmethoddef.mclassdef.bound_mtype, mmethoddef.mclassdef.mmodule, true)
@@ -1878,7 +1878,7 @@ class VirtualRuntimeFunction
 		var v = compiler.new_visitor
 		var selfvar = new RuntimeVariable("self", v.object_type, recv)
 		var arguments = new Array[RuntimeVariable]
-		var frame = new Frame(v, mmethoddef, recv, arguments)
+		var frame = new StaticFrame(v, mmethoddef, recv, arguments)
 		v.frame = frame
 
 		var sig = new FlatBuffer

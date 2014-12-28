@@ -965,7 +965,7 @@ private class CustomizedRuntimeFunction
 			selfvar.is_exact = true
 		end
 		var arguments = new Array[RuntimeVariable]
-		var frame = new Frame(v, mmethoddef, recv, arguments)
+		var frame = new StaticFrame(v, mmethoddef, recv, arguments)
 		v.frame = frame
 
 		var sig = new FlatBuffer
@@ -1024,7 +1024,7 @@ private class CustomizedRuntimeFunction
 			ret = v.resolve_for(ret, arguments.first)
 		end
 		if self.mmethoddef.can_inline(v) then
-			var frame = new Frame(v, self.mmethoddef, self.recv, arguments)
+			var frame = new StaticFrame(v, self.mmethoddef, self.recv, arguments)
 			frame.returnlabel = v.get_name("RET_LABEL")
 			if ret != null then
 				frame.returnvar = v.new_var(ret)
