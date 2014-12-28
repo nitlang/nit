@@ -51,7 +51,7 @@ var arguments = toolcontext.option_context.rest
 # build model
 var model = new Model
 var mbuilder = new ModelBuilder(model, toolcontext)
-var mmodules = mbuilder.parse(arguments)
+var mmodules = mbuilder.parse_full(arguments)
 
 if mmodules.is_empty then return
 mbuilder.run_phases
