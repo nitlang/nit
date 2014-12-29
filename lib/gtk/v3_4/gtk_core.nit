@@ -116,6 +116,17 @@ extern class GtkWidget `{GtkWidget *`}
 	fun visible_self: Bool is extern `{
 		return gtk_widget_get_visible(recv);
 	`}
+
+	# Destroy the widget
+	fun destroy `{ gtk_widget_destroy(recv); `}
+
+	# Show the widget on screen
+	#
+	# See: `show_all` to recursively show this widget and contained widgets.
+	fun show `{ gtk_widget_show(recv); `}
+
+	# Hide the widget (reverse the effects of `show`)
+	fun hide `{ gtk_widget_hide(recv); `}
 end
 
 #Base class for widgets which contain other widgets
@@ -348,6 +359,13 @@ extern class GtkGrid `{GtkGrid *`}
 	`}
 end
 
+# A container box
+#
+# @https://developer.gnome.org/gtk3/3.4/GtkBox.html
+extern class GtkBox `{ GtkBox * `}
+	super GtkContainer
+end
+
 #The tree interface used by GtkTreeView
 #@https://developer.gnome.org/gtk3/stable/GtkTreeModel.html
 extern class GtkTreeModel `{GtkTreeModel *`}
@@ -386,7 +404,7 @@ extern class GtkEntry `{GtkEntry *`}
 		 return (GtkEntry *)gtk_entry_new();
 	`}
 
-	fun text : String is extern import String.to_cstring`{
+	fun text : String is extern import NativeString.to_s `{
 		return NativeString_to_s( (char *)gtk_entry_get_text( recv ) );
 	`}
 
