@@ -40,34 +40,36 @@ in "C" `{
 		LOGI("handle input %i", (int)pthread_self());
 		if (AInputEvent_getType(event) == AINPUT_EVENT_TYPE_KEY) {
 			LOGI("key");
-			return App_extern_input_key(nit_app, event);
+			return App_native_input_key(nit_app, event);
 		}
 		else if (AInputEvent_getType(event) == AINPUT_EVENT_TYPE_MOTION) {
 			LOGI("motion");
-			return App_extern_input_motion(nit_app, event);
+			return App_native_input_motion(nit_app, event);
 		}
 
 		return 0;
 	}
 `}
 
+extern class NativeAndroidMotionEvent `{AInputEvent *`}
 
-extern class InnerAndroidMotionEvent in "C" `{AInputEvent *`}
-	super Pointer
-	private fun pointers_count: Int is extern `{
-	return AMotionEvent_getPointerCount(recv);
+	private fun pointers_count: Int `{
+		return AMotionEvent_getPointerCount(recv);
 	`}
-	private fun just_went_down: Bool is extern `{
-	return (AMotionEvent_getAction(recv) & AMOTION_EVENT_ACTION_MASK) == AMOTION_EVENT_ACTION_DOWN;
+
+	private fun just_went_down: Bool `{
+		return (AMotionEvent_getAction(recv) & AMOTION_EVENT_ACTION_MASK) == AMOTION_EVENT_ACTION_DOWN;
 	`}
-	private fun edge: Int is extern `{
-	return AMotionEvent_getEdgeFlags(recv);
+
+	private fun edge: Int `{
+		return AMotionEvent_getEdgeFlags(recv);
 	`}
-	private fun index_down_pointer: Int is extern `{
-	int a = AMotionEvent_getAction(recv);
-	if ((a & AMOTION_EVENT_ACTION_MASK) == AMOTION_EVENT_ACTION_POINTER_DOWN)
-		return (a & AMOTION_EVENT_ACTION_POINTER_INDEX_MASK) >> AMOTION_EVENT_ACTION_POINTER_INDEX_SHIFT;
-	else return -1;
+
+	private fun index_down_pointer: Int `{
+		int a = AMotionEvent_getAction(recv);
+		if ((a & AMOTION_EVENT_ACTION_MASK) == AMOTION_EVENT_ACTION_POINTER_DOWN)
+			return (a & AMOTION_EVENT_ACTION_POINTER_INDEX_MASK) >> AMOTION_EVENT_ACTION_POINTER_INDEX_SHIFT;
+		else return -1;
 	`}
 
 	private fun action: AMotionEventAction `{ return AMotionEvent_getAction(recv); `}
@@ -92,8 +94,8 @@ class AndroidMotionEvent
 	super AndroidInputEvent
 	super MotionEvent
 
-	private init(ie: InnerAndroidMotionEvent) do inner_event = ie
-	private var inner_event: InnerAndroidMotionEvent
+	private init(ie: NativeAndroidMotionEvent) do native = ie
+	private var native: NativeAndroidMotionEvent
 
 	private var pointers_cache: nullable Array[AndroidPointerEvent] = null
 	fun pointers: Array[AndroidPointerEvent]
@@ -102,7 +104,7 @@ class AndroidMotionEvent
 			return pointers_cache.as(not null)
 		else
 			var pointers = new Array[AndroidPointerEvent]
-			var pointers_count = inner_event.pointers_count
+			var pointers_count = native.pointers_count
 			for i in [0 .. pointers_count [do
 				var pointer_event = new AndroidPointerEvent(self, i)
 				pointers.add(pointer_event)
@@ -112,12 +114,12 @@ class AndroidMotionEvent
 		end
 	end
 
-	redef fun just_went_down: Bool do return inner_event.just_went_down
-	fun edge: Int do return inner_event.edge
+	redef fun just_went_down: Bool do return native.just_went_down
+	fun edge: Int do return native.edge
 
 	redef fun down_pointer: nullable AndroidPointerEvent
 	do
-		var i = inner_event.index_down_pointer
+		var i = native.index_down_pointer
 		if i > 0 then
 			return pointers[i]
 		else
@@ -133,43 +135,44 @@ class AndroidPointerEvent
 	protected var motion_event: AndroidMotionEvent
 	protected var pointer_id: Int
 
-	redef fun x: Float do return extern_x(motion_event.inner_event, pointer_id)
-	private fun extern_x(motion_event: InnerAndroidMotionEvent, pointer_id: Int): Float is extern `{
+	redef fun x: Float do return native_x(motion_event.native, pointer_id)
+
+	private fun native_x(motion_event: NativeAndroidMotionEvent, pointer_id: Int): Float `{
 		return AMotionEvent_getX(motion_event, pointer_id);
 	`}
 
-	redef fun y: Float do return extern_y(motion_event.inner_event, pointer_id)
-	private fun extern_y(motion_event: InnerAndroidMotionEvent, pointer_id: Int): Float is extern `{
+	redef fun y: Float do return native_y(motion_event.native, pointer_id)
+
+	private fun native_y(motion_event: NativeAndroidMotionEvent, pointer_id: Int): Float `{
 		return AMotionEvent_getY(motion_event, pointer_id);
 	`}
 
-	fun pressure: Float do return extern_pressure(motion_event.inner_event, pointer_id)
-	private fun extern_pressure(motion_event: InnerAndroidMotionEvent, pointer_id: Int): Float is extern `{
+	fun pressure: Float do return native_pressure(motion_event.native, pointer_id)
+
+	private fun native_pressure(motion_event: NativeAndroidMotionEvent, pointer_id: Int): Float `{
 		return AMotionEvent_getPressure(motion_event, pointer_id);
 	`}
 
 	redef fun pressed
 	do
-		var action = motion_event.inner_event.action
+		var action = motion_event.native.action
 		return action.is_down or action.is_move
 	end
 
 	redef fun depressed do return not pressed
 end
 
-extern class AndroidKeyEvent in "C" `{AInputEvent *`}
+extern class AndroidKeyEvent `{AInputEvent *`}
 	super KeyEvent
 	super AndroidInputEvent
 
-	fun action: Int is extern `{
+	fun action: Int `{
 		return AKeyEvent_getAction(recv);
 	`}
 	redef fun is_down: Bool do return action == 0
 	redef fun is_up: Bool do return action == 1
 
-	fun key_code: Int is extern `{
-		return AKeyEvent_getKeyCode(recv);
-	`}
+	fun key_code: Int `{ return AKeyEvent_getKeyCode(recv); `}
 
 	redef fun to_c `{
 		int code = AKeyEvent_getKeyCode(recv);
@@ -196,12 +199,13 @@ redef class App
 		super
 	end
 
-	private fun set_as_input_handler(app_glue: NativeAppGlue) import extern_input_key, extern_input_motion `{
+	private fun set_as_input_handler(app_glue: NativeAppGlue)
+	import native_input_key, native_input_motion `{
 		app_glue->onInputEvent = mnit_handle_input;
 	`}
 
 	# these are used as a callback from native to type incoming events
-	private fun extern_input_key(event: AndroidKeyEvent): Bool is abstract
+	private fun native_input_key(event: AndroidKeyEvent): Bool is abstract
 
-	private fun extern_input_motion(event: InnerAndroidMotionEvent): Bool is abstract
+	private fun native_input_motion(event: NativeAndroidMotionEvent): Bool is abstract
 end

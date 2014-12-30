@@ -56,12 +56,12 @@ redef class App
 
 	redef fun generate_input do poll_looper 0
 
-	redef fun extern_input_key(event)
+	redef fun native_input_key(event)
 	do
 		return input(event)
 	end
 
-	redef fun extern_input_motion(event)
+	redef fun native_input_motion(event)
 	do
 		var ie = new AndroidMotionEvent(event)
 		var handled = input(ie)
