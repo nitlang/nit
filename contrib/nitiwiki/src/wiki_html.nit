@@ -110,7 +110,7 @@ redef class WikiSection
 		for child in children.values do
 			if child isa WikiArticle and child.is_index then return child
 		end
-		return new WikiSectionIndex(wiki, self)
+		return new WikiSectionIndex(wiki, "index", self)
 	end
 
 	redef fun tpl_link do return index.tpl_link
@@ -322,11 +322,6 @@ class WikiSectionIndex
 	# The section described by `self`.
 	var section: WikiSection
 
-	init(wiki: Nitiwiki, section: WikiSection) do
-		super(wiki, "index")
-		self.section = section
-	end
-
 	redef var is_dirty = false
 
 	redef fun tpl_article do
@@ -341,11 +336,19 @@ end
 class TplArticle
 	super Template
 
+	# Article title.
 	var title: nullable Streamable = null
+
+	# Article HTML body.
 	var body: nullable Streamable = null
+
+	# Sidebar of this article (if any).
 	var sidebar: nullable TplSidebar = null
+
+	# Breadcrumbs from wiki root to this article.
 	var breadcrumbs: nullable TplBreadcrumbs = null
 
+	# Init `self` with a `title`.
 	init with_title(title: Streamable) do
 		self.title = title
 	end
