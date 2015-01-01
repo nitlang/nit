@@ -20,6 +20,7 @@ module benitlux_web
 import benitlux_model
 import benitlux_view
 import benitlux_controller
+import http://imgur.com/TVunjPi
 
 # Avoid executing when running tests
 if "NIT_TESTING".environ == "true" then exit 0
