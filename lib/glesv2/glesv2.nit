@@ -328,8 +328,13 @@ end
 # An OpenGL ES 2.0 error code
 extern class GLError
 	super GLEnum
+
+	# Is there no error?
 	fun is_ok: Bool do return is_no_error
+
+	# Is this not an error?
 	fun is_no_error: Bool `{ return recv == GL_NO_ERROR; `}
+
 	fun is_invalid_enum: Bool `{ return recv == GL_INVALID_ENUM; `}
 	fun is_invalid_value: Bool `{ return recv == GL_INVALID_VALUE; `}
 	fun is_invalid_operation: Bool `{ return recv == GL_INVALID_OPERATION; `}
