@@ -492,6 +492,22 @@ class GLES
 	# Specify the width of rasterized lines
 	fun line_width(width: Float) `{ glLineWidth(width); `}
 
+	# Set the pixel arithmetic for the blending operations
+	#
+	# Defaultvalues before assignation:
+	# * `src_factor`: `GLBlendFactor::one`
+	# * `dst_factor`: `GLBlendFactor::zero`
+	fun blend_func(src_factor, dst_factor: GLBlendFactor) `{
+		glBlendFunc(src_factor, dst_factor);
+	`}
+
+	# Specify the value used for depth buffer comparisons
+	#
+	# Default value is `GLDepthFunc::less`
+	#
+	# Foreign: glDepthFunc
+	fun depth_func(func: GLDepthFunc) `{ glDepthFunc(func); `}
+
 	# Set the texture minifying function
 	#
 	# Foreign: glTexParameter with GL_TEXTURE_MIN_FILTER
@@ -560,6 +576,47 @@ extern class GLDataType
 	fun is_bool_vec4: Bool `{ return recv == GL_BOOL_VEC4; `}
 	fun is_sampler_2d: Bool `{ return recv == GL_SAMPLER_2D; `}
 	fun is_sampler_cube: Bool `{ return recv == GL_SAMPLER_CUBE; `}
+end
+
+# Pixel arithmetic for blending operations
+#
+# Used by `GLES::blend_func`
+extern class GLBlendFactor
+	super GLEnum
+
+	new zero `{ return GL_ZERO; `}
+	new one `{ return GL_ONE; `}
+	new src_color `{ return GL_SRC_COLOR; `}
+	new one_minus_src_color `{ return GL_ONE_MINUS_SRC_COLOR; `}
+	new dst_color `{ return GL_DST_COLOR; `}
+	new one_minus_dst_color `{ return GL_ONE_MINUS_DST_COLOR; `}
+	new src_alpha `{ return GL_SRC_ALPHA; `}
+	new one_minus_src_alpha `{ return GL_ONE_MINUS_SRC_ALPHA; `}
+	new dst_alpha `{ return GL_DST_ALPHA; `}
+	new one_minus_dst_alpha `{ return GL_ONE_MINUS_DST_ALPHA; `}
+	new constant_color `{ return GL_CONSTANT_COLOR; `}
+	new one_minus_constant_color `{ return GL_ONE_MINUS_CONSTANT_COLOR; `}
+	new constant_alpha `{ return GL_CONSTANT_ALPHA; `}
+	new one_minus_constant_alpha `{ return GL_ONE_MINUS_CONSTANT_ALPHA; `}
+
+	# Used for destination only
+	new src_alpha_saturate `{ return GL_SRC_ALPHA_SATURATE; `}
+end
+
+# Condition under which a pixel will be drawn
+#
+# Used by `GLES::depth_func`
+extern class GLDepthFunc
+	super GLEnum
+
+	 new never `{ return GL_NEVER; `}
+	 new less `{ return GL_LESS; `}
+	 new equal `{ return GL_EQUAL; `}
+	 new lequal `{ return GL_LEQUAL; `}
+	 new greater `{ return GL_GREATER; `}
+	 new not_equal `{ return GL_NOTEQUAL; `}
+	 new gequal `{ return GL_GEQUAL; `}
+	 new always `{ return GL_ALWAYS; `}
 end
 
 # Set of buffers as a bitwise OR mask, used by `GLES::clear`
