@@ -357,6 +357,51 @@ do
 	end
 end
 
+# Texture minifying function
+#
+# Used by: `GLES::tex_parameter_min_filter`
+extern class GLTextureMinFilter
+	super GLEnum
+
+	new nearest `{ return GL_NEAREST; `}
+	new linear `{ return GL_LINEAR; `}
+end
+
+# Texture magnification function
+#
+# Used by: `GLES::tex_parameter_mag_filter`
+extern class GLTextureMagFilter
+	super GLEnum
+
+	new nearest `{ return GL_NEAREST; `}
+	new linear `{ return GL_LINEAR; `}
+	new nearest_mipmap_nearest `{ return GL_NEAREST_MIPMAP_NEAREST; `}
+	new linear_mipmap_nearest `{ return GL_LINEAR_MIPMAP_NEAREST; `}
+	new nearest_mipmap_linear `{ return GL_NEAREST_MIPMAP_LINEAR; `}
+	new linear_mipmap_linear `{ return GL_LINEAR_MIPMAP_LINEAR; `}
+end
+
+# Wrap parameter of a texture
+#
+# Used by: `tex_parameter_wrap_*`
+extern class GLTextureWrap
+	super GLEnum
+
+	new clamp_to_edge `{ return GL_CLAMP_TO_EDGE; `}
+	new mirrored_repeat `{ return GL_MIRRORED_REPEAT; `}
+	new repeat `{ return GL_REPEAT; `}
+end
+
+# Target texture
+#
+# Used by: `tex_parameter_*`
+extern class GLTextureTarget
+	super GLEnum
+
+	new flat `{ return GL_TEXTURE_2D; `}
+	new cube_map `{ return GL_TEXTURE_CUBE_MAP; `}
+end
+
 redef class Sys
 	private var gles = new GLES is lazy
 end
@@ -427,6 +472,34 @@ class GLES
 	#
 	# Should always return `true` in OpenGL ES 2.0 and 3.0.
 	fun shader_compiler: Bool do return get_bool(0x8DFA)
+
+	# Set the texture minifying function
+	#
+	# Foreign: glTexParameter with GL_TEXTURE_MIN_FILTER
+	fun tex_parameter_min_filter(target: GLTextureTarget, value: GLTextureMinFilter) `{
+		glTexParameteri(target, GL_TEXTURE_MIN_FILTER, value);
+	`}
+
+	# Set the texture magnification function
+	#
+	# Foreign: glTexParameter with GL_TEXTURE_MAG_FILTER
+	fun tex_parameter_mag_filter(target: GLTextureTarget, value: GLTextureMagFilter) `{
+		glTexParameteri(target, GL_TEXTURE_MAG_FILTER, value);
+	`}
+
+	# Set the texture wrap parameter for coordinates _s_
+	#
+	# Foreign: glTexParameter with GL_TEXTURE_WRAP_S
+	fun tex_parameter_wrap_s(target: GLTextureTarget, value: GLTextureWrap) `{
+		glTexParameteri(target, GL_TEXTURE_WRAP_S, value);
+	`}
+
+	# Set the texture wrap parameter for coordinates _t_
+	#
+	# Foreign: glTexParameter with GL_TEXTURE_WRAP_T
+	fun tex_parameter_wrap_t(target: GLTextureTarget, value: GLTextureWrap) `{
+		glTexParameteri(target, GL_TEXTURE_WRAP_T, value);
+	`}
 end
 
 # Float related data types of OpenGL ES 2.0 shaders
