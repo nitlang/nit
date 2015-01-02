@@ -508,6 +508,13 @@ class GLES
 	# Foreign: glDepthFunc
 	fun depth_func(func: GLDepthFunc) `{ glDepthFunc(func); `}
 
+	# Copy a block of pixels from the framebuffer of `fomat` and `typ` at `data`
+	#
+	# Foreign: glReadPixel
+	fun read_pixels(x, y, width, height: Int, format: GLPixelFormat, typ: GLPixelType, data: Pointer) `{
+		glReadPixels(x, y, width, height, GL_RGBA, GL_UNSIGNED_BYTE, data);
+	`}
+
 	# Set the texture minifying function
 	#
 	# Foreign: glTexParameter with GL_TEXTURE_MIN_FILTER
@@ -535,6 +542,11 @@ class GLES
 	fun tex_parameter_wrap_t(target: GLTextureTarget, value: GLTextureWrap) `{
 		glTexParameteri(target, GL_TEXTURE_WRAP_T, value);
 	`}
+
+	# Render primitives from array data
+	#
+	# Foreign: glDrawArrays
+	fun draw_arrays(mode: GLDrawMode, from, count: Int) `{ glDrawArrays(mode, from, count); `}
 end
 
 # Float related data types of OpenGL ES 2.0 shaders
@@ -578,6 +590,19 @@ extern class GLDataType
 	fun is_sampler_cube: Bool `{ return recv == GL_SAMPLER_CUBE; `}
 end
 
+# Kind of primitives to render with `GLES::draw_arrays`
+extern class GLDrawMode
+	super GLEnum
+
+	new points `{ return GL_POINTS; `}
+	new line_strip `{ return GL_LINE_STRIP; `}
+	new line_loop `{ return GL_LINE_LOOP; `}
+	new lines `{ return GL_LINES; `}
+	new triangle_strip `{ return GL_TRIANGLE_STRIP; `}
+	new triangle_fan `{ return GL_TRIANGLE_FAN; `}
+	new triangles `{ return GL_TRIANGLES; `}
+end
+
 # Pixel arithmetic for blending operations
 #
 # Used by `GLES::blend_func`
@@ -617,6 +642,29 @@ extern class GLDepthFunc
 	 new not_equal `{ return GL_NOTEQUAL; `}
 	 new gequal `{ return GL_GEQUAL; `}
 	 new always `{ return GL_ALWAYS; `}
+end
+
+# Format of pixel data
+#
+# Used by `GLES::read_pixels`
+extern class GLPixelFormat
+	super GLEnum
+
+	new alpha `{ return GL_ALPHA; `}
+	new rgb `{ return GL_RGB; `}
+	new rgba `{ return GL_RGBA; `}
+end
+
+# Data type of pixel data
+#
+# Used by `GLES::read_pixels`
+extern class GLPixelType
+	super GLEnum
+
+	new unsigned_byte `{ return GL_UNSIGNED_BYTE; `}
+	new unsigned_short_5_6_5 `{ return GL_UNSIGNED_SHORT_5_6_5; `}
+	new unsigned_short_4_4_4_4 `{ return GL_UNSIGNED_SHORT_4_4_4_4; `}
+	new unsigned_short_5_5_5_1 `{ return GL_UNSIGNED_SHORT_5_5_5_1; `}
 end
 
 # Set of buffers as a bitwise OR mask, used by `GLES::clear`
