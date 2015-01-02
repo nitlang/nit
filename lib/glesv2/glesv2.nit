@@ -317,8 +317,17 @@ extern class GLfloatArray `{GLfloat *`}
 	`}
 end
 
+# General type for OpenGL enumerations
+extern class GLEnum `{ GLenum `}
+
+	redef fun hash `{ return recv; `}
+
+	redef fun ==(o) do return o != null and is_same_type(o) and o.hash == self.hash
+end
+
 # An OpenGL ES 2.0 error code
-extern class GLError `{ GLenum `}
+extern class GLError
+	super GLEnum
 	fun is_ok: Bool do return is_no_error
 	fun is_no_error: Bool `{ return recv == GL_NO_ERROR; `}
 	fun is_invalid_enum: Bool `{ return recv == GL_INVALID_ENUM; `}
@@ -397,7 +406,9 @@ fun gl_shader_compiler: Bool do return gl_get_bool(0x8DFA)
 #
 # Only data types supported by shader attributes, as seen with
 # `GLProgram::active_attrib_type`.
-extern class GLFloatDataType `{ GLenum `}
+extern class GLFloatDataType
+	super GLEnum
+
 	fun is_float: Bool `{ return recv == GL_FLOAT; `}
 	fun is_float_vec2: Bool `{ return recv == GL_FLOAT_VEC2; `}
 	fun is_float_vec3: Bool `{ return recv == GL_FLOAT_VEC3; `}
@@ -405,6 +416,12 @@ extern class GLFloatDataType `{ GLenum `}
 	fun is_float_mat2: Bool `{ return recv == GL_FLOAT_MAT2; `}
 	fun is_float_mat3: Bool `{ return recv == GL_FLOAT_MAT3; `}
 	fun is_float_mat4: Bool `{ return recv == GL_FLOAT_MAT4; `}
+
+	# Instances of `GLFloatDataType` can be equal to instances of `GLDataType`
+	redef fun ==(o)
+	do
+		return o != null and o isa GLFloatDataType and o.hash == self.hash
+	end
 end
 
 # All data types of OpenGL ES 2.0 shaders
