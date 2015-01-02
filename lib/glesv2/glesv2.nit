@@ -425,6 +425,11 @@ class GLES
 	# Set the viewport
 	fun viewport(x, y, width, height: Int) `{ glViewport(x, y, width, height); `}
 
+	# Specify mapping of depth values from normalized device coordinates to window coordinates
+	#
+	# Default at `gl_depth_range(0.0, 1.0)`
+	fun depth_range(near, far: Float) `{ glDepthRangef(near, far); `}
+
 	# Define front- and back-facing polygons
 	#
 	# Front-facing polygons are clockwise if `value`, counter-clockwise otherwise.
@@ -477,6 +482,15 @@ class GLES
 	#
 	# Should always return `true` in OpenGL ES 2.0 and 3.0.
 	fun shader_compiler: Bool do return get_bool(0x8DFA)
+
+	# Enable or disable writing into the depth buffer
+	fun depth_mask(value: Bool) `{ glDepthMask(value); `}
+
+	# Set the scale and units used to calculate depth values
+	fun polygon_offset(factor, units: Float) `{ glPolygonOffset(factor, units); `}
+
+	# Specify the width of rasterized lines
+	fun line_width(width: Float) `{ glLineWidth(width); `}
 
 	# Set the texture minifying function
 	#
