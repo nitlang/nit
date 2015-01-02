@@ -375,6 +375,27 @@ class GLES
 	# Set the viewport
 	fun viewport(x, y, width, height: Int) `{ glViewport(x, y, width, height); `}
 
+	# Define front- and back-facing polygons
+	#
+	# Front-facing polygons are clockwise if `value`, counter-clockwise otherwise.
+	fun front_face=(value: Bool) `{ glFrontFace(value? GL_CW: GL_CCW); `}
+
+	# Specify whether front- or back-facing polygons can be culled, default is `back` only
+	#
+	# One or both of `front` or `back` must be `true`. If you want to deactivate culling
+	# use `(new GLCap.cull_face).disable`.
+	#
+	# Require: `front or back`
+	fun cull_face(front, back: Bool)
+	do
+		assert not (front or back)
+		cull_face_native(front, back)
+	end
+
+	private fun cull_face_native(front, back: Bool) `{
+		glCullFace(front? back? GL_FRONT_AND_BACK: GL_BACK: GL_FRONT);
+	`}
+
 	# Clear the `buffer`
 	fun clear(buffer: GLBuffer) `{ glClear(buffer); `}
 
