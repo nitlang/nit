@@ -199,9 +199,8 @@ end
 # Abstract OpenGL ES shader object, implemented by `GLFragmentShader` and `GLVertexShader`
 extern class GLShader `{GLuint`}
 	# Set the source of the shader
-	fun source=(code: String) import String.to_cstring, String.length `{
-		GLchar *c_code = String_to_cstring(code);
-		glShaderSource(recv, 1, (const GLchar * const*)&c_code, NULL);
+	fun source=(code: NativeString) `{
+		glShaderSource(recv, 1, (GLchar const **)&code, NULL);
 	`}
 
 	# Source of the shader, if available
