@@ -106,16 +106,16 @@ assert egl_bind_opengl_es_api else print "eglBingAPI failed: {egl_display.error}
 ## GLESv2
 #
 
-print "Can compile shaders? {gl_shader_compiler}"
+print "Can compile shaders? {gl.shader_compiler}"
 assert_no_gl_error
 
-assert gl_shader_compiler else print "Cannot compile shaders"
+assert gl.shader_compiler else print "Cannot compile shaders"
 
 # gl program
-print gl_error.to_s
+print gl.error.to_s
 var program = new GLProgram
 if not program.is_ok then
-	print "Program is not ok: {gl_error.to_s}\nLog:"
+	print "Program is not ok: {gl.error.to_s}\nLog:"
 	print program.info_log
 	abort
 end
@@ -123,27 +123,28 @@ assert_no_gl_error
 
 # vertex shader
 var vertex_shader = new GLVertexShader
-assert vertex_shader.is_ok else print "Vertex shader is not ok: {gl_error}"
+assert vertex_shader.is_ok else print "Vertex shader is not ok: {gl.error}"
 vertex_shader.source = """
 attribute vec4 vPosition;
 void main()
 {
   gl_Position = vPosition;
-}                           """
+}
+""".to_cstring
 vertex_shader.compile
 assert vertex_shader.is_compiled else print "Vertex shader compilation failed with: {vertex_shader.info_log} {program.info_log}"
 assert_no_gl_error
 
 # fragment shader
 var fragment_shader = new GLFragmentShader
-assert fragment_shader.is_ok else print "Fragment shader is not ok: {gl_error}"
+assert fragment_shader.is_ok else print "Fragment shader is not ok: {gl.error}"
 fragment_shader.source = """
 precision mediump float;
 void main()
 {
 	gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);
 }
-"""
+""".to_cstring
 fragment_shader.compile
 assert fragment_shader.is_compiled else print "Fragment shader compilation failed with: {fragment_shader.info_log}"
 assert_no_gl_error
@@ -159,12 +160,12 @@ assert_no_gl_error
 var vertices = [0.0, 0.5, 0.0, -0.5, -0.5, 0.0, 0.5, -0.5, 0.0]
 var vertex_array = new VertexArray(0, 3, vertices)
 vertex_array.attrib_pointer
-gl_clear_color(0.5, 0.0, 0.5, 1.0)
+gl.clear_color(0.5, 0.0, 0.5, 1.0)
 for i in [0..10000[ do
 	printn "."
 	assert_no_gl_error
-	gl_viewport(0, 0, width, height)
-	gl_clear_color_buffer
+	gl.viewport(0, 0, width, height)
+	gl.clear((new GLBuffer).color)
 	program.use
 	vertex_array.enable
 	vertex_array.draw_arrays_triangles
