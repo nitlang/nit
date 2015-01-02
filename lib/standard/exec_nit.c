@@ -82,7 +82,7 @@ se_exec_data_t* exec_Process_Process_basic_exec_execute_4(void *s, char *prog, c
 
 		/* calls */
 		execvp(prog, arg);
-		abort();
+		_exit(127);
 	}
 	else if (id > 0)
        	{ /* father */
