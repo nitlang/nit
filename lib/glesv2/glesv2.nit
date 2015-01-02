@@ -407,6 +407,25 @@ extern class GLTextureTarget
 	new cube_map `{ return GL_TEXTURE_CUBE_MAP; `}
 end
 
+# A server-side capability
+class GLCap
+
+	# TODO private init
+
+	# Internal OpenGL integer for this capability
+	private var val: Int
+
+	# Enable this server-side capability
+	fun enable do enable_native(val)
+	private fun enable_native(cap: Int) `{ glEnable(cap); `}
+
+	# Disable this server-side capability
+	fun disable do disable_native(val)
+	private fun disable_native(cap: Int) `{ glDisable(cap); `}
+
+	redef fun hash do return val
+	redef fun ==(o) do return o != null and is_same_type(o) and o.hash == self.hash
+end
 redef class Sys
 	private var gles = new GLES is lazy
 end
@@ -547,6 +566,58 @@ class GLES
 	#
 	# Foreign: glDrawArrays
 	fun draw_arrays(mode: GLDrawMode, from, count: Int) `{ glDrawArrays(mode, from, count); `}
+
+	# OpenGL server-side capabilities
+	var capabilities = new GLCapabilities is lazy
+end
+
+# Entry point to OpenGL server-side capabilities
+class GLCapabilities
+
+	# GL capability: blend the computed fragment color values
+	#
+	# Foreign: GL_BLEND
+	fun blend: GLCap is lazy do return new GLCap(0x0BE2)
+
+	# GL capability: cull polygons based of their winding in window coordinates
+	#
+	# Foreign: GL_CULL_FACE
+	fun cull_face: GLCap is lazy do return new GLCap(0x0B44)
+
+	# GL capability: do depth comparisons and update the depth buffer
+	#
+	# Foreign: GL_DEPTH_TEST
+	fun depth_test: GLCap is lazy do return new GLCap(0x0B71)
+
+	# GL capability: dither color components or indices before they are written to the color buffer
+	#
+	# Foreign: GL_DITHER
+	fun dither: GLCap is lazy do return new GLCap(0x0BE2)
+
+	# GL capability: add an offset to depth values of a polygon fragment before depth test
+	#
+	# Foreign: GL_POLYGON_OFFSET_FILL
+	fun polygon_offset_fill: GLCap is lazy do return new GLCap(0x8037)
+
+	# GL capability: compute a temporary coverage value where each bit is determined by the alpha value at the corresponding location
+	#
+	# Foreign: GL_SAMPLE_ALPHA_TO_COVERAGE
+	fun sample_alpha_to_coverage: GLCap is lazy do return new GLCap(0x809E)
+
+	# GL capability: AND the fragment coverage with the temporary coverage value
+	#
+	# Foreign: GL_SAMPLE_COVERAGE
+	fun sample_coverage: GLCap is lazy do return new GLCap(0x80A0)
+
+	# GL capability: discard fragments that are outside the scissor rectangle
+	#
+	# Foreign: GL_SCISSOR_TEST
+	fun scissor_test: GLCap is lazy do return new GLCap(0x0C11)
+
+	# GL capability: do stencil testing and update the stencil buffer
+	#
+	# Foreign: GL_STENCIL_TEST
+	fun stencil_test: GLCap is lazy do return new GLCap(0x0B90)
 end
 
 # Float related data types of OpenGL ES 2.0 shaders
