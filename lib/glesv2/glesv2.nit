@@ -348,59 +348,65 @@ extern class GLError
 	end
 end
 
-# Clear the color buffer with `r`, `g`, `b`, `a`
-protected fun gl_clear_color(r, g, b, a: Float) `{ glClearColor(r, g, b, a); `}
-
-# Set the viewport
-protected fun gl_viewport(x, y, width, height: Int) `{ glViewport(x, y, width, height); `}
-
-# Direct call to `glClear`, call with a combinaison of `gl_clear_color_buffer`,
-# `gl_stencil_buffer_bit` and `gl_color_buffer_bit`.
-private fun gl_clear(flag: Int) `{ glClear(flag); `}
-
-protected fun gl_depth_buffer_bit: Int do return 0x0100
-protected fun gl_stencil_buffer_bit: Int do return 0x0400
-protected fun gl_color_buffer_bit: Int do return 0x4000
-
-protected fun gl_clear_color_buffer do gl_clear(gl_color_buffer_bit)
-protected fun gl_clear_depth_buffer do gl_clear(gl_depth_buffer_bit)
-protected fun gl_clear_stencil_buffer do gl_clear(gl_stencil_buffer_bit)
-
-protected fun gl_error: GLError `{ return glGetError(); `}
 protected fun assert_no_gl_error
 do
-	var error = gl_error
+	var error = gl.error
 	if not error.is_ok then
 		print "GL error: {error}"
 		abort
 	end
 end
 
-# Query the boolean value at `key`
-private fun gl_get_bool(key: Int): Bool `{
-	GLboolean val;
-	glGetBooleanv(key, &val);
-	return val == GL_TRUE;
-`}
+redef class Sys
+	private var gles = new GLES is lazy
+end
 
-# Query the floating point value at `key`
-private fun gl_get_float(key: Int): Float `{
-	GLfloat val;
-	glGetFloatv(key, &val);
-	return val;
-`}
+# Entry points to OpenGL ES 2.0 services
+fun gl: GLES do return sys.gles
 
-# Query the integer value at `key`
-private fun gl_get_int(key: Int): Int `{
-	GLint val;
-	glGetIntegerv(key, &val);
-	return val;
-`}
+# OpenGL ES 2.0 services
+class GLES
 
-# Does this driver support shader compilation?
-#
-# Should always return `true` in OpenGL ES 2.0 and 3.0.
-fun gl_shader_compiler: Bool do return gl_get_bool(0x8DFA)
+	# Clear the color buffer to `red`, `green`, `blue` and `alpha`
+	fun clear_color(red, green, blue, alpha: Float) `{
+		glClearColor(red, green, blue, alpha);
+	`}
+
+	# Set the viewport
+	fun viewport(x, y, width, height: Int) `{ glViewport(x, y, width, height); `}
+
+	# Clear the `buffer`
+	fun clear(buffer: GLBuffer) `{ glClear(buffer); `}
+
+	# Last error from OpenGL ES 2.0
+	fun error: GLError `{ return glGetError(); `}
+
+	# Query the boolean value at `key`
+	private fun get_bool(key: Int): Bool `{
+		GLboolean val;
+		glGetBooleanv(key, &val);
+		return val == GL_TRUE;
+	`}
+
+	# Query the floating point value at `key`
+	private fun get_float(key: Int): Float `{
+		GLfloat val;
+		glGetFloatv(key, &val);
+		return val;
+	`}
+
+	# Query the integer value at `key`
+	private fun get_int(key: Int): Int `{
+		GLint val;
+		glGetIntegerv(key, &val);
+		return val;
+	`}
+
+	# Does this driver support shader compilation?
+	#
+	# Should always return `true` in OpenGL ES 2.0 and 3.0.
+	fun shader_compiler: Bool do return get_bool(0x8DFA)
+end
 
 # Float related data types of OpenGL ES 2.0 shaders
 #
@@ -441,4 +447,24 @@ extern class GLDataType
 	fun is_bool_vec4: Bool `{ return recv == GL_BOOL_VEC4; `}
 	fun is_sampler_2d: Bool `{ return recv == GL_SAMPLER_2D; `}
 	fun is_sampler_cube: Bool `{ return recv == GL_SAMPLER_CUBE; `}
+end
+
+# Set of buffers as a bitwise OR mask, used by `GLES::clear`
+#
+# ~~~
+# var buffers = (new GLBuffer).color.depth
+# gl.clear buffers
+# ~~~
+extern class GLBuffer `{ GLbitfield `}
+	# Get an empty set of buffers
+	new `{ return 0; `}
+
+	# Add the color buffer to the returned buffer set
+	fun color: GLBuffer `{ return recv | GL_COLOR_BUFFER_BIT; `}
+
+	# Add the depth buffer to the returned buffer set
+	fun depth: GLBuffer `{ return recv | GL_DEPTH_BUFFER_BIT; `}
+
+	# Add the stencil buffer to the returned buffer set
+	fun stencil: GLBuffer `{ return recv | GL_STENCIL_BUFFER_BIT; `}
 end
