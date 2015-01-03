@@ -29,7 +29,6 @@ in "C header" `{
 	EGLConfig mnit_config;
 	int32_t mnit_width;
 	int32_t mnit_height;
-	float mnit_zoom;
 
 	struct mnit_opengles_Texture {
 		GLuint texture;
@@ -207,7 +206,6 @@ class Opengles1Display
 		mnit_config = config;
 		mnit_width = w;
 		mnit_height = h;
-		mnit_zoom = 1.0f;
 
 		LOGI("surface", (int)surface);
 		LOGI("display", (int)display);
@@ -263,7 +261,6 @@ class Opengles1Display
 		glMatrixMode(GL_PROJECTION);
 		glLoadIdentity();
 		glOrthof(x, x+w, y+h, y, 0.0f, 1.0f);
-		mnit_zoom = ((float)w)/mnit_width;
 		glMatrixMode(GL_MODELVIEW);
 		glFrontFace( GL_CW );
 	`}

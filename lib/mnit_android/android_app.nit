@@ -34,10 +34,6 @@ in "C" `{
 	extern EGLConfig mnit_config;
 	extern int32_t mnit_width;
 	extern int32_t mnit_height;
-	extern float mnit_zoom;
-
-	//int mnit_orientation_changed;
-	float mnit_zoom;
 `}
 
 redef class App
