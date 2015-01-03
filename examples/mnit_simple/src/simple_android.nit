@@ -18,9 +18,11 @@ module simple_android is
 	android_manifest("""<uses-permission android:name="android.permission.VIBRATE" />""")
 end
 
-import simple
 import mnit_android
+import android::portrait
 import serialization
+
+import simple
 
 in "Java" `{
 	import android.content.Context;

@@ -12,6 +12,7 @@ module friendz_android
 
 import friendz
 import mnit_android
+import android::landscape
 
 redef class App
 	redef fun window_created

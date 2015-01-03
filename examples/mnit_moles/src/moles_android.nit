@@ -16,8 +16,10 @@
 
 module moles_android
 
-import moles
 import mnit_android
+import android::portrait
+
+import moles
 
 redef class Game
 	redef fun columns do return 3
