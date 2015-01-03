@@ -553,6 +553,15 @@ redef class ModelBuilder
 	# Register the nmodule associated to each mmodule
 	# FIXME: why not refine the `MModule` class with a nullable attribute?
 	var mmodule2nmodule = new HashMap[MModule, AModule]
+
+	# Retrieve the associated AST node of a mmodule.
+	# This method is used to associate model entity with syntactic entities.
+	#
+	# If the module is not associated with a node, returns null.
+	fun mmodule2node(mmodule: MModule): nullable AModule
+	do
+		return mmodule2nmodule.get_or_null(mmodule)
+	end
 end
 
 # File-system location of a module (file) that is identified but not always loaded.
