@@ -57,6 +57,7 @@ private extern class NativeAndroidMotionEvent `{AInputEvent *`}
 		return AMotionEvent_getPointerCount(recv);
 	`}
 
+	# Did this motion event just started?
 	fun just_went_down: Bool `{
 		return (AMotionEvent_getAction(recv) & AMOTION_EVENT_ACTION_MASK) == AMOTION_EVENT_ACTION_DOWN;
 	`}
@@ -65,6 +66,7 @@ private extern class NativeAndroidMotionEvent `{AInputEvent *`}
 		return AMotionEvent_getEdgeFlags(recv);
 	`}
 
+	# Get the non-primary pointer id that just went down (returns -1 or > 0)
 	fun index_down_pointer: Int `{
 		int a = AMotionEvent_getAction(recv);
 		if ((a & AMOTION_EVENT_ACTION_MASK) == AMOTION_EVENT_ACTION_POINTER_DOWN)
@@ -134,8 +136,14 @@ class AndroidMotionEvent
 
 	redef fun down_pointer: nullable AndroidPointerEvent
 	do
+		if just_went_down then
+			# The primary pointer went down
+			return pointers[0]
+		end
+
 		var i = native.index_down_pointer
 		if i > 0 then
+			# A secondary pointer went down
 			return pointers[i]
 		else
 			return null
@@ -178,6 +186,12 @@ class AndroidPointerEvent
 	end
 
 	redef fun depressed do return not pressed
+
+	# Does this pointer just began touching the screen?
+	fun just_went_down: Bool
+	do
+		return motion_event.down_pointer == self
+	end
 end
 
 # An hardware key event

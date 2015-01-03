@@ -23,5 +23,5 @@ redef class App
 end
 
 redef class AndroidPointerEvent
-	redef fun is_motion do return not motion_event.just_went_down
+	redef fun is_motion do return not just_went_down
 end
