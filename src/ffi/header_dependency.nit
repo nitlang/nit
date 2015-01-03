@@ -58,8 +58,8 @@ redef class MModule
 			end
 
 			# does the super module itself has extern dependancies?
-			var amodule = v.toolcontext.modelbuilder.mmodule2nmodule[m]
-			if amodule.has_public_c_header then header_dependencies.add(m)
+			var amodule = v.toolcontext.modelbuilder.mmodule2node(m)
+			if amodule != null and amodule.has_public_c_header then header_dependencies.add(m)
 		end
 
 		header_dependencies_cache = header_dependencies

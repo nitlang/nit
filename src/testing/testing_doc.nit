@@ -318,9 +318,9 @@ redef class ModelBuilder
 	do
 		var ts = new HTMLTag("testsuite")
 		toolcontext.info("nitunit: doc-unit {mmodule}", 2)
-		if not mmodule2nmodule.has_key(mmodule) then return ts
 
-		var nmodule = mmodule2nmodule[mmodule]
+		var nmodule = mmodule2node(mmodule)
+		if nmodule == null then return ts
 
 		# usualy, only the original module must be imported in the unit test.
 		var o = mmodule
