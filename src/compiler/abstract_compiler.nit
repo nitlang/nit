@@ -1458,10 +1458,11 @@ abstract class AbstractCompilerVisitor
 		self.require_declaration(s)
 	end
 
-	# look for a needed .h and .c file for a given .nit source-file
-	# FIXME: bad API, parameter should be a `MModule`, not its source-file
-	fun add_extern(file: String)
+	# Look for a needed .h and .c file for a given module
+	# This is used for the legacy FFI
+	fun add_extern(mmodule: MModule)
 	do
+		var file = mmodule.location.file.filename
 		file = file.strip_extension(".nit")
 		var tryfile = file + ".nit.h"
 		if tryfile.file_exists then
@@ -2157,10 +2158,7 @@ redef class AMethPropdef
 		else
 			return false
 		end
-		if location.file != null then
-			var file = location.file.filename
-			v.add_extern(file)
-		end
+		v.add_extern(mpropdef.mclassdef.mmodule)
 		var res: nullable RuntimeVariable = null
 		var ret = mpropdef.msignature.return_mtype
 		if ret != null then
@@ -2192,10 +2190,7 @@ redef class AMethPropdef
 		else
 			return false
 		end
-		if location.file != null then
-			var file = location.file.filename
-			v.add_extern(file)
-		end
+		v.add_extern(mpropdef.mclassdef.mmodule)
 		v.adapt_signature(mpropdef, arguments)
 		v.unbox_signature_extern(mpropdef, arguments)
 		var ret = arguments.first.mtype
