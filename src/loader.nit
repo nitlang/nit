@@ -551,8 +551,9 @@ redef class ModelBuilder
 	var nmodules = new Array[AModule]
 
 	# Register the nmodule associated to each mmodule
-	# FIXME: why not refine the `MModule` class with a nullable attribute?
-	var mmodule2nmodule = new HashMap[MModule, AModule]
+	#
+	# Public clients need to use `mmodule2node` to access stuff.
+	private var mmodule2nmodule = new HashMap[MModule, AModule]
 
 	# Retrieve the associated AST node of a mmodule.
 	# This method is used to associate model entity with syntactic entities.
