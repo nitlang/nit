@@ -51,32 +51,33 @@ in "C" `{
 	}
 `}
 
-extern class NativeAndroidMotionEvent `{AInputEvent *`}
+private extern class NativeAndroidMotionEvent `{AInputEvent *`}
 
-	private fun pointers_count: Int `{
+	fun pointers_count: Int `{
 		return AMotionEvent_getPointerCount(recv);
 	`}
 
-	private fun just_went_down: Bool `{
+	fun just_went_down: Bool `{
 		return (AMotionEvent_getAction(recv) & AMOTION_EVENT_ACTION_MASK) == AMOTION_EVENT_ACTION_DOWN;
 	`}
 
-	private fun edge: Int `{
+	fun edge: Int `{
 		return AMotionEvent_getEdgeFlags(recv);
 	`}
 
-	private fun index_down_pointer: Int `{
+	fun index_down_pointer: Int `{
 		int a = AMotionEvent_getAction(recv);
 		if ((a & AMOTION_EVENT_ACTION_MASK) == AMOTION_EVENT_ACTION_POINTER_DOWN)
 			return (a & AMOTION_EVENT_ACTION_POINTER_INDEX_MASK) >> AMOTION_EVENT_ACTION_POINTER_INDEX_SHIFT;
 		else return -1;
 	`}
 
-	private fun action: AMotionEventAction `{ return AMotionEvent_getAction(recv); `}
+	fun action: AMotionEventAction `{ return AMotionEvent_getAction(recv); `}
 end
 
-extern class AMotionEventAction `{ int32_t `}
-	protected fun action: Int `{ return recv & AMOTION_EVENT_ACTION_MASK; `}
+private extern class AMotionEventAction `{ int32_t `}
+	fun action: Int `{ return recv & AMOTION_EVENT_ACTION_MASK; `}
+
 	fun is_down: Bool do return action == 0
 	fun is_up: Bool do return action == 1
 	fun is_move: Bool do return action == 2
@@ -86,18 +87,21 @@ extern class AMotionEventAction `{ int32_t `}
 	fun is_pointer_up: Bool do return action == 6
 end
 
+# An input event on Android
 interface AndroidInputEvent
 	super InputEvent
 end
 
+# A motion event concerning a single or more `pointers`
 class AndroidMotionEvent
 	super AndroidInputEvent
 	super MotionEvent
 
-	private init(ie: NativeAndroidMotionEvent) do native = ie
 	private var native: NativeAndroidMotionEvent
 
 	private var pointers_cache: nullable Array[AndroidPointerEvent] = null
+
+	# Pointers (or fingers) composing this motion event
 	fun pointers: Array[AndroidPointerEvent]
 	do
 		if pointers_cache != null then
@@ -115,7 +119,18 @@ class AndroidMotionEvent
 	end
 
 	redef fun just_went_down: Bool do return native.just_went_down
-	fun edge: Int do return native.edge
+
+	# Was the top edge of the screen intersected by this event?
+	fun touch_to_edge: Bool do return native.edge == 1
+
+	# Was the bottom edge of the screen intersected by this event?
+	fun touch_bottom_edge: Bool do return native.edge == 2
+
+	# Was the left edge of the screen intersected by this event?
+	fun touch_left_edge: Bool do return native.edge == 4
+
+	# Was the right edge of the screen intersected by this event?
+	fun touch_right_edge: Bool do return native.edge == 8
 
 	redef fun down_pointer: nullable AndroidPointerEvent
 	do
@@ -128,12 +143,14 @@ class AndroidMotionEvent
 	end
 end
 
+# A pointer event
 class AndroidPointerEvent
 	super PointerEvent
 	super AndroidInputEvent
 
-	protected var motion_event: AndroidMotionEvent
-	protected var pointer_id: Int
+	private var motion_event: AndroidMotionEvent
+
+	private var pointer_id: Int
 
 	redef fun x: Float do return native_x(motion_event.native, pointer_id)
 
@@ -147,6 +164,7 @@ class AndroidPointerEvent
 		return AMotionEvent_getY(motion_event, pointer_id);
 	`}
 
+	# Pressure applied by this pointer
 	fun pressure: Float do return native_pressure(motion_event.native, pointer_id)
 
 	private fun native_pressure(motion_event: NativeAndroidMotionEvent, pointer_id: Int): Float `{
@@ -162,16 +180,17 @@ class AndroidPointerEvent
 	redef fun depressed do return not pressed
 end
 
+# An hardware key event
 extern class AndroidKeyEvent `{AInputEvent *`}
 	super KeyEvent
 	super AndroidInputEvent
 
-	fun action: Int `{
-		return AKeyEvent_getAction(recv);
-	`}
+	private fun action: Int `{ return AKeyEvent_getAction(recv); `}
+
 	redef fun is_down: Bool do return action == 0
 	redef fun is_up: Bool do return action == 1
 
+	# Hardware code of the key raising this event
 	fun key_code: Int `{ return AKeyEvent_getKeyCode(recv); `}
 
 	redef fun to_c `{
@@ -183,11 +202,19 @@ extern class AndroidKeyEvent `{AInputEvent *`}
 		return 0;
 	`}
 
+	# Was this event raised by the back key?
 	fun is_back_key: Bool do return key_code == 4
+
+	# Was this event raised by the menu key?
 	fun is_menu_key: Bool do return key_code == 82
+
+	# Was this event raised by the search key?
 	fun is_search_key: Bool do return key_code == 84
 
+	# Was this event raised by the volume up key?
 	fun is_volume_up: Bool do return key_code == 24
+
+	# Was this event raised by the volume down key?
 	fun is_volume_down: Bool do return key_code == 25
 end
 
