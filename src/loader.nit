@@ -446,9 +446,7 @@ redef class ModelBuilder
 	do
 		# Check the module name
 		var decl = nmodule.n_moduledecl
-		if decl == null then
-			#warning(nmodule, "Warning: Missing 'module' keyword") #FIXME: NOT YET FOR COMPATIBILITY
-		else
+		if decl != null then
 			var decl_name = decl.n_name.n_id.text
 			if decl_name != mod_name then
 				error(decl.n_name, "Error: module name missmatch; declared {decl_name} file named {mod_name}")
