@@ -15,14 +15,23 @@ import mnit_android
 import android::landscape
 
 redef class App
+	# Zoom applied for the device display from the game logic coordinates
+	var zoom = 1.0
+
 	redef fun window_created
 	do
 		super
-		var w = screen_width
-		display.set_viewport(0,0,w,w*display.height/display.width)
+
+		var h = screen_height
+		display.set_viewport(0,0,h*display.width/display.height,h)
+
+		zoom = display.height.to_f / h.to_f
 	end
 end
 
 redef class AndroidPointerEvent
 	redef fun is_motion do return not just_went_down
+
+	redef fun x do return super / app.zoom
+	redef fun y do return super / app.zoom
 end
