@@ -1063,8 +1063,8 @@ class SeparateCompilerVisitor
 	do
 		var rta = compiler.runtime_type_analysis
 		var mmethod = callsite.mproperty
-		# TODO: Inlining of new-style constructors
-		if compiler.modelbuilder.toolcontext.opt_direct_call_monomorph.value and rta != null and not mmethod.is_root_init then
+		# TODO: Inlining of new-style constructors with initializers
+		if compiler.modelbuilder.toolcontext.opt_direct_call_monomorph.value and rta != null and callsite.mpropdef.initializers.is_empty then
 			var tgs = rta.live_targets(callsite)
 			if tgs.length == 1 then
 				# DIRECT CALL
