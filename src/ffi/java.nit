@@ -518,6 +518,35 @@ redef class MClassType
 				else break
 			end
 
+			# Change `float[]` to `[float`
+			if jni_type.has('[') then
+				var depth = jni_type.chars.count('[')
+				var java_type = jni_type.replace("[]", "")
+				var short
+
+				if java_type == "boolean" then
+					short = "Z"
+				else if java_type == "byte" then
+					short = "B"
+				else if java_type == "char" then
+					short = "C"
+				else if java_type == "short" then
+					short = "S"
+				else if java_type == "int" then
+					short = "I"
+				else if java_type == "long" then
+					short = "J"
+				else if java_type == "float" then
+					short = "F"
+				else if java_type == "double" then
+					short = "D"
+				else
+					short = "L{java_type};"
+				end
+
+				return "["*depth + short
+			end
+
 			return "L{jni_type};"
 		end
 		if mclass.name == "Bool" then return "Z"
@@ -530,6 +559,7 @@ redef class MClassType
 	redef fun jni_signature_alt
 	do
 		var ftype = mclass.ftype
+
 		if ftype isa ForeignJavaType then return "Object"
 		if mclass.name == "Bool" then return "Boolean"
 		if mclass.name == "Char" then return "Char"
