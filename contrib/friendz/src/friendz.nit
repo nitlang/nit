@@ -1082,8 +1082,8 @@ redef class Game
 		level = null
 		var i = levels.first
 		for l in levels do
-			if l.get_state == l.l_open then break
 			i = l
+			if l.get_state == l.l_open then break
 		end
 		entities.push(new StartButton(self, i))
 	end
