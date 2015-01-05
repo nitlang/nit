@@ -207,15 +207,7 @@ class CodeGenerator
 			nit_signature.add ": {return_type} "
 		end
 
-		var param_to_copy = param_to_copy(jparam_list, nit_types)
-
 		var temp = new Array[String]
-
-		if nb_params > 1 then
-			comment = "#"
-			temp.add("\t# NOT SUPPORTED: more than one parameter to copy\n")
-			temp.add("\t# Has to be implemented manually\n")
-		end
 
 		temp.add(comment + nit_signature.join(""))
 
@@ -224,31 +216,10 @@ class CodeGenerator
 			temp.add(" in \"Java\" `\{\n{comment}\t\trecv.{jmethod_id}({java_params});\n{comment}\t`\}\n")
 		# Methods with return type
 		else if return_type != null then
-			if jreturn_type.is_primitive_array then
-				# Copy one parameter and the return value
-				if param_to_copy != null then
-					var rtype_couple = new Couple[JavaType, NitType](jreturn_type, return_type)
-					temp.add(code_warehouse.param_return_copy(rtype_couple, param_to_copy, jmethod_id, java_params))
-				# Copy the return type
-				else
-					temp.add(code_warehouse.return_type_copy(jreturn_type, return_type, jmethod_id, java_params))
-				end
-			# Copy the parameter
-			else if param_to_copy != null then
-				temp.add(code_warehouse.param_type_copy(param_to_copy.first, param_to_copy.second, jmethod_id, java_params, true))
-			# No copy
-			else
-				temp.add(" in \"Java\" `\{\n{comment}\t\treturn {jreturn_type.return_cast} recv.{jmethod_id}({java_params});\n{comment}\t`\}\n")
-			end
+			temp.add(" in \"Java\" `\{\n{comment}\t\treturn {jreturn_type.return_cast} recv.{jmethod_id}({java_params});\n{comment}\t`\}\n")
 		# Methods without return type
 		else if jreturn_type.is_void then
-			# Copy one parameter
-			if param_to_copy != null then
-				temp.add(code_warehouse.param_type_copy(param_to_copy.first, param_to_copy.second, jmethod_id, java_params, false))
-			# No copy
-			else
-				temp.add(" in \"Java\" `\{\n{comment}\t\trecv.{jmethod_id}({java_params});\n{comment}\t`\}\n")
-			end
+			temp.add(" in \"Java\" `\{\n{comment}\t\trecv.{jmethod_id}({java_params});\n{comment}\t`\}\n")
 		# No copy
 		else
 			temp.add(" in \"Java\" `\{\n{comment}\t\trecv.{jmethod_id}({java_params});\n{comment}\t`\}\n")
@@ -256,131 +227,10 @@ class CodeGenerator
 
 		return temp.join("")
 	end
-
-	# Only one primitive array parameter can be copied
-	# If there's none or more than one then `null` is returned
-	fun param_to_copy(jtypes: Array[JavaType], ntypes: Array[NitType]): nullable Couple[JavaType, NitType]
-	do
-		var counter = 0
-		var couple = null
-		for i in [0..jtypes.length[ do
-			if jtypes[i].is_primitive_array then
-				counter += 1
-				couple = new Couple[JavaType, NitType](jtypes[i], ntypes[i])
-			end
-		end
-
-		nb_params = counter
-
-		if counter > 1 then return null
-		return couple
-	end
 end
 
 # Contains raw code mostly used to copy collections
 class CodeWarehouse
-
-	# Collection as return value
-	fun return_type_copy(java_type: JavaType, nit_type: NitType, jmethod_id, params_id: String): String
-	do
-		var narray_id = "nit_array"
-		var loop_ = create_loop(java_type, nit_type, false, "java_array", narray_id)
-		var imports = create_imports(nit_type, false)
-
-		return """{{{imports}}} in "Java" `{ 
-		{{{java_type.to_s}}} java_array = recv.{{{jmethod_id}}}({{{params_id}}});
-		int {{{narray_id}}} = new_{{{nit_type.id}}}_of_{{{nit_type.generic_params.join("_")}}}();
-
-		{{{loop_}}}
-
-		return {{{narray_id}}};
-	`}
-"""
-	end
-
-	# Collection as parameter
-	fun param_type_copy(java_type: JavaType, nit_type: NitType, jmethod_id, params_id: String, has_return: Bool): String
-	do
-		var narray_id = "nit_array"
-		var jarray_id = "java_array"
-		var loop_ = create_loop(java_type, nit_type, true, jarray_id, narray_id)
-		var imports = create_imports(nit_type, true)
-		var jinstanciation = create_array_instance(java_type, nit_type, jarray_id)
-		var return_str = ""
-		
-		if has_return then
-			return_str = "return "
-		end
-
-		params_id = params_id.replace(nit_type.arg_id, jarray_id)
-
-		return """{{{imports}}} in "Java" `{ 
-		{{{jinstanciation}}}
-		int {{{narray_id}}} = new_{{{nit_type.id}}}_of_{{{nit_type.generic_params.join("_")}}}();
-
-		{{{loop_}}}
-
-		{{{return_str}}}recv.{{{jmethod_id}}}({{{params_id}}});
-	`}
-"""
-	end
-
-	# One collection parameter and the return type will be copied
-	fun param_return_copy(return_types, param_types: Couple[JavaType, NitType], jmethod_id, params_id: String): String
-	do
-		var narray_id = "nit_array"
-		var narray_id2 = "nit_array2"
-
-		var r_jtype = return_types.first
-		var r_ntype = return_types.second
-
-		var p_jtype = param_types.first
-		var p_ntype = param_types.second
-
-		var r_loop = create_loop(r_jtype, r_ntype, false, "java_array", narray_id)
-		var p_loop = create_loop(p_jtype, p_ntype, true, "java_array2", narray_id2)
-
-		var imports = new Array[String]
-		
-		# Avoid import duplication
-		if p_ntype.to_s != r_ntype.to_s then
-			imports.add create_imports(p_ntype, true)
-		end
-
-		imports.add create_imports(r_ntype, false)
-
-		params_id = params_id.replace(p_ntype.arg_id, narray_id)
-
-		var jinstanciation = create_array_instance(p_jtype, p_ntype, "java_array")
-
-		return """{{{imports.join(", ")}}} in "Java" `{
-		{{{jinstanciation}}}
-
-		{{{p_loop}}}
-
-		{{{r_jtype.to_s}}} java_array2 = recv.{{{jmethod_id}}}({{{params_id}}});
-		int {{{narray_id2}}} = new_{{{r_ntype.id}}}_of_{{{r_ntype.generic_params.join("_")}}}();
-
-		{{{r_loop}}}
-
-		return {{{narray_id2}}};
-	`}
-"""
-	end
-
-	private fun create_array_instance(java_type: JavaType, nit_type: NitType, jarray_id: String): String
-	do
-		var jtype = java_type.to_s
-		var instanciation = ""
-
-		if java_type.is_primitive_array then
-			instanciation = "{jtype} {jarray_id} = new {java_type.full_id}[(int)Array_of_{nit_type.generic_params[0]}_length({nit_type.arg_id})];"
-		else
-			instanciation = "{jtype} {jarray_id} = new {jtype}();"
-		end
-
-		return instanciation
-	end
 
 	private fun create_imports(nit_type: NitType, is_param: Bool): String
 	do

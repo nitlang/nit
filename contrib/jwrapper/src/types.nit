@@ -53,12 +53,11 @@ class JavaType
 	fun to_nit_type: NitType
 	do
 		var nit_type: NitType
+		var type_id = null
 
-		if self.is_primitive_array then
-			return self.convert_primitive_array
+		if not is_primitive_array then
+			type_id = converter.to_nit_type(self.id)
 		end
-
-		var type_id = converter.to_nit_type(self.id)
 
 		if type_id == null then
 			nit_type = self.extern_name
@@ -79,38 +78,6 @@ class JavaType
 			if not nit_param.is_complete then nit_type.is_complete = false
 		end
 
-		return nit_type
-	end
-
-	fun convert_primitive_array: NitType
-	do
-		var nit_type = new NitType("Array")
-
-		var last_nit_type = nit_type
-
-		for i in [1..array_dimension] do
-			var temp: NitType
-			last_nit_type.generic_params = new Array[NitType]
-
-			if i == array_dimension then
-				var temp_type = converter.to_nit_type(self.id)
-
-				if temp_type == null then 
-					temp = self.extern_name
-					nit_type.is_complete = false
-					if temp.mod != null then nit_type.mod = temp.mod
-				else
-					temp = new NitType(temp_type)
-				end
-			else
-				temp = new NitType("Array")
-			end
-
-			last_nit_type.generic_params.add(temp)
-
-			last_nit_type = temp
-		end
-		
 		return nit_type
 	end
 
