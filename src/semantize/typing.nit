@@ -756,11 +756,6 @@ redef class AReassignFormExpr
 
 		self.read_type = readtype
 
-		if readtype isa MNullType then
-			v.error(self, "Error: Method '{reassign_name}' call on 'null'.")
-			return null
-		end
-
 		var callsite = v.get_method(self, readtype, reassign_name, false)
 		if callsite == null then return null # Skip error
 		self.reassign_callsite = callsite
@@ -1407,10 +1402,6 @@ redef class ASendExpr
 		var name = self.property_name
 
 		if recvtype == null then return # Forward error
-		if recvtype isa MNullType then
-			v.error(self, "Error: Method '{name}' call on 'null'.")
-			return
-		end
 
 		var callsite = v.get_method(self, recvtype, name, self.n_expr isa ASelfExpr)
 		if callsite == null then return
@@ -1554,10 +1545,6 @@ redef class ASendReassignFormExpr
 		var name = self.property_name
 
 		if recvtype == null then return # Forward error
-		if recvtype isa MNullType then
-			v.error(self, "Error: Method '{name}' call on 'null'.")
-			return
-		end
 
 		var for_self = self.n_expr isa ASelfExpr
 		var callsite = v.get_method(self, recvtype, name, for_self)
