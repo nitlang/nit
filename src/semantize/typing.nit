@@ -267,7 +267,7 @@ private class TypeVisitor
 		#debug("recv: {recvtype} (aka {unsafe_type})")
 		if recvtype isa MNullType then
 			# `null` only accepts some methods of object.
-			if name == "==" or name == "!=" then
+			if name == "==" or name == "!=" or name == "is_same_instance" then
 				unsafe_type = mmodule.object_type.as_nullable
 			else
 				self.error(node, "Error: Method '{name}' call on 'null'.")

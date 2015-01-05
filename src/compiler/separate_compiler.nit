@@ -1115,7 +1115,7 @@ class SeparateCompilerVisitor
 		var maybenull = (recv.mcasttype isa MNullableType or recv.mcasttype isa MNullType) and consider_null
 		if maybenull then
 			self.add("if ({recv} == NULL) \{")
-			if mmethod.name == "==" then
+			if mmethod.name == "==" or mmethod.name == "is_same_instance" then
 				res = self.new_var(bool_type)
 				var arg = arguments[1]
 				if arg.mcasttype isa MNullableType then
