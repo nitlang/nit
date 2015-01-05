@@ -1144,7 +1144,8 @@ redef class Game
 		end
 		var ev = lastev
 		if ev isa Event then
-			display.blit(img[4,0],ev.offset_x-42,ev.offset_y-6)
+			# Cursor, kept for debugging
+			#display.blit(img[4,0],ev.offset_x-42,ev.offset_y-6)
 		end
 		dirty_all = false
 	end
