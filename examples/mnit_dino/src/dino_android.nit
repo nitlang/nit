@@ -21,6 +21,7 @@ end
 import dino
 
 import mnit_android
+import android::portrait
 import android::vibration
 
 redef class ImageSet

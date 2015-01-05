@@ -19,6 +19,8 @@ module ballz_android is
 	app_name("Ballz")
 end
 
+import android::portrait
+
 import game_logic
 
 redef class App

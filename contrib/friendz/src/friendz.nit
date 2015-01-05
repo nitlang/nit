@@ -17,6 +17,8 @@ import mnit
 import realtime
 import solver
 import mnit::tileset
+import app::data_store
+import md5
 
 intrude import grid
 intrude import level
@@ -1080,8 +1082,8 @@ redef class Game
 		level = null
 		var i = levels.first
 		for l in levels do
-			if l.get_state == l.l_open then break
 			i = l
+			if l.get_state == l.l_open then break
 		end
 		entities.push(new StartButton(self, i))
 	end
@@ -1142,7 +1144,8 @@ redef class Game
 		end
 		var ev = lastev
 		if ev isa Event then
-			display.blit(img[4,0],ev.offset_x-42,ev.offset_y-6)
+			# Cursor, kept for debugging
+			#display.blit(img[4,0],ev.offset_x-42,ev.offset_y-6)
 		end
 		dirty_all = false
 	end
@@ -1264,6 +1267,18 @@ redef class Game
 			if kc == g.shortcut then
 				g.click(ev)
 				g.dirty = true
+			end
+		end
+	end
+
+	redef fun load_levels
+	do
+		super
+
+		for level in levels do
+			var score = app.data_store["s{level.str.md5}"]
+			if score isa Int then
+				level.score = score
 			end
 		end
 	end
@@ -1632,5 +1647,12 @@ redef class KeyEvent
 		var c = to_c
 		if c != null then return c.to_s
 		return "unknown"
+	end
+end
+
+redef class Level
+	redef fun save
+	do
+		app.data_store["s{str.md5}"] = if score > 0 then score else null
 	end
 end

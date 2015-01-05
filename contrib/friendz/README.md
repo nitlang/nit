@@ -33,3 +33,8 @@ In challenge level you have to place as much as monster as possible.
 
 This game was originally developed for the [Casual Gameplay Design Competition
 \#9](http://jayisgames.com/cgdc9).
+
+# Artwork
+
+The artwork was created by Sam Hocevar <sam@zoy.org> for the Monsterz arcade
+puzzle game http://sam.zoy.org/monsterz/

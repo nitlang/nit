@@ -96,10 +96,8 @@ class Level
 		return true
 	end
 
-	fun save
-	do
-		#save_cookie("s"+self.hash, self.score>0?self.score:"")
-	end
+	# Save the score of the level
+	fun save do end
 end
 
 # main game object
@@ -174,8 +172,6 @@ class Game
 		for i in [0..levels_code.length[ do
 			var l = new Level(self,i, levels_code[i])
 			levels[i] = l
-			#var v = read_cookie("s"+l.hash)
-			#l = v
 		end
 	end
 
