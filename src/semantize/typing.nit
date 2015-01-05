@@ -266,8 +266,13 @@ private class TypeVisitor
 
 		#debug("recv: {recvtype} (aka {unsafe_type})")
 		if recvtype isa MNullType then
-			self.error(node, "Error: Method '{name}' call on 'null'.")
-			return null
+			# `null` only accepts some methods of object.
+			if name == "==" or name == "!=" then
+				unsafe_type = mmodule.object_type.as_nullable
+			else
+				self.error(node, "Error: Method '{name}' call on 'null'.")
+				return null
+			end
 		end
 
 		var mproperty = self.try_get_mproperty_by_name2(node, unsafe_type, name)
