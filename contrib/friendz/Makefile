@@ -14,4 +14,4 @@ doc:
 	../../bin/nitdoc -d doc/ src/friendz.nit src/friendz_linux.nit
 
 clean:
-	rm -rf bin/ doc/
+	rm -rf bin/ doc/ res/
