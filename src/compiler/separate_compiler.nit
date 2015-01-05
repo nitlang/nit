@@ -1142,15 +1142,15 @@ class SeparateCompilerVisitor
 		else
 			self.add("\{")
 		end
-		if not self.compiler.modelbuilder.toolcontext.opt_no_shortcut_equate.value and (mmethod.name == "==" or mmethod.name == "!=") then
+		if not self.compiler.modelbuilder.toolcontext.opt_no_shortcut_equate.value and (mmethod.name == "==" or mmethod.name == "!=" or mmethod.name == "is_same_instance") then
 			# Recv is not null, thus if arg is, it is easy to conclude (and respect the invariants)
 			var arg = arguments[1]
 			if arg.mcasttype isa MNullType then
 				if res == null then res = self.new_var(bool_type)
-				if mmethod.name == "==" then
-					self.add("{res} = 0; /* arg is null but recv is not */")
-				else
+				if mmethod.name == "!=" then
 					self.add("{res} = 1; /* arg is null and recv is not */")
+				else # `==` and `is_same_instance`
+					self.add("{res} = 0; /* arg is null but recv is not */")
 				end
 				self.add("\}") # closes the null case
 				self.add("if (0) \{") # what follow is useless, CC will drop it
