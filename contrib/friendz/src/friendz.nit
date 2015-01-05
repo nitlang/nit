@@ -17,6 +17,8 @@ import mnit
 import realtime
 import solver
 import mnit::tileset
+import app::data_store
+import md5
 
 intrude import grid
 intrude import level
@@ -1267,6 +1269,18 @@ redef class Game
 			end
 		end
 	end
+
+	redef fun load_levels
+	do
+		super
+
+		for level in levels do
+			var score = app.data_store["s{level.str.md5}"]
+			if score isa Int then
+				level.score = score
+			end
+		end
+	end
 end
 
 # The spash title image
@@ -1632,5 +1646,12 @@ redef class KeyEvent
 		var c = to_c
 		if c != null then return c.to_s
 		return "unknown"
+	end
+end
+
+redef class Level
+	redef fun save
+	do
+		app.data_store["s{str.md5}"] = if score > 0 then score else null
 	end
 end
