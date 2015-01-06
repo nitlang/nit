@@ -105,7 +105,7 @@ class CodeGenerator
 	do
 		var temp = new Array[String]
 		temp.add("extern class Native{jtype.id} in \"Java\" `\{ {jtype} `\}\n")
-		temp.add("\tsuper JavaObject\n\tredef type SELF: Native{jtype.id}\n\n")
+		temp.add("\tsuper JavaObject\n\n")
 
 		return temp.join("")
 	end
@@ -121,7 +121,7 @@ class CodeGenerator
 
 		var temp = new Array[String]
 		temp.add("extern class {nit_type} in \"Java\" `\{ {jtype.to_package_name} `\}\n")
-		temp.add("\tsuper JavaObject\n\tredef type SELF: {nit_type}\n\nend\n")
+		temp.add("\tsuper JavaObject\n\nend\n")
 
 		return temp.join("")
 	end
