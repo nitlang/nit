@@ -294,28 +294,28 @@ end
 class JavaClass
 	var class_type = new JavaType(new JavaTypeConverter)
 	var attributes = new HashMap[String, JavaType]
-	var methods = new HashMap[String, Array[JReturnAndParams]]
+
+	# Methods of this class organized by their name
+	var methods = new HashMap[String, Array[JavaMethod]]
+
 	var unknown_types = new HashSet[JavaType]
 	var imports = new HashSet[NitModule]
 
 	fun add_method(id: String, return_type: JavaType, params: Array[JavaType])
 	do
-		var ret_and_params = methods.get_or_default(id, new Array[JReturnAndParams])
-		
-		ret_and_params.add(new JReturnAndParams(return_type, new Array[JavaType].from(params)))
-		methods[id] = ret_and_params
+		var signatures = methods.get_or_default(id, new Array[JavaMethod])
+		signatures.add(new JavaMethod(return_type, new Array[JavaType].from(params)))
+		methods[id] = signatures
 	end
 end
 
-class JReturnAndParams
+# A Java method, with its signature
+class JavaMethod
+	# Type returned by the method
 	var return_type: JavaType
-	var params: Array[JavaType]
 
-	init(return_type: JavaType, params: Array[JavaType])
-	do
-		self.return_type = return_type
-		self.params = params
-	end
+	# Type of the arguments of the method
+	var params: Array[JavaType]
 end
 
 class NitModule
