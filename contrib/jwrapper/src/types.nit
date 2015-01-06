@@ -174,12 +174,11 @@ class JavaType
 
 	# Search inside `lib/android` directory for already wrapped classes
 	# If found, contains the class identifier and the Nit Module name
-	var find_extern_class: nullable Couple[String, NitModule] = find_extern_class_fun is lazy
+	var find_extern_class: nullable Couple[String, NitModule] is lazy do
 
-	private fun find_extern_class_fun: nullable Couple[String, NitModule]
-	do
-		var regex = "extern class Native[a-zA-Z1-9]\\\+[ ]\\\+in[ ]\\\+\"Java\"[ ]*`\{[ ]*" + self.to_s + "\\\+[ ]*`\}"
-		var grep = new IProcess("grep", "-r", regex, "{"NIT_DIR".environ}/lib/android/")
+		var regex = "extern class [a-zA-Z1-9]\\\+[ ]\\\+in[ ]\\\+\"Java\"[ ]*`\{[ ]*" + self.to_s + "\\\+[ ]*`\}"
+		var nit_dir = "NIT_DIR".environ
+		var grep = new IProcess("grep", "-r", regex, nit_dir/"lib/android/", nit_dir/"lib/java/")
 		var to_eat = ["private", "extern", "class"]
 
 		var output = grep.read_line
