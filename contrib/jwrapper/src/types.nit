@@ -93,15 +93,16 @@ class JavaType
 	do
 		if is_wrapped then return new NitType.with_module(find_extern_class.as(not null).first, find_extern_class.as(not null).second)
 
-		var name = "Native" + extern_class_name.join("")
-		var nit_type: NitType
-		if self.is_primitive_array then
-			nit_type = new NitType.with_generic_params("Array", name)
+		var name
+		if is_primitive_array then
+			# Primitive arrays have a special naming convention
+			name = "Native" + extern_class_name.join("").capitalized + "Array"
 		else
-			nit_type = new NitType("Native" + extern_class_name.join(""))
+			name = "Native" + extern_class_name.join("")
 		end
-		nit_type.is_complete = false
 
+		var nit_type = new NitType(name)
+		nit_type.is_complete = false
 		return nit_type
 	end
 
