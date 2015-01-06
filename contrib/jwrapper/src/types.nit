@@ -318,12 +318,12 @@ class JavaMethod
 	var params: Array[JavaType]
 end
 
+# A Nit module, use to import the referenced extern classes
 class NitModule
-	var value: String
-
-	init(str: String) do value = str
+	# Name of the module
+	var name: String
 
 	redef fun ==(other): Bool do return self.to_s == other.to_s
-	redef fun to_s: String do return self.value
-	redef fun hash: Int do return self.value.hash
+	redef fun to_s: String do return self.name
+	redef fun hash: Int do return self.name.hash
 end
