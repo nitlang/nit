@@ -128,9 +128,9 @@ class CodeGenerator
 
 	fun gen_attribute(jid: String, jtype: JavaType): String
 	do
-		return "\tvar {jid.to_snake_case}: {jtype.to_nit_type}\n"
+		return "\tvar {jid.to_nit_method_name}: {jtype.to_nit_type}\n"
 	end
-	
+
 	fun gen_method(jmethod_id: String, nmethod_id: String, jreturn_type: JavaType, jparam_list: Array[JavaType]): String
 	do
 		var java_params = ""
@@ -138,7 +138,7 @@ class CodeGenerator
 		var nit_id = "arg"
 		var nit_id_no = 0
 		var nit_types = new Array[NitType]
-		var comment = "" 
+		var comment = ""
 
 		# Parameters
 		for i in [0..jparam_list.length[ do
@@ -177,7 +177,7 @@ class CodeGenerator
 		end
 
 		# Method identifier
-		var method_id = nmethod_id.to_snake_case
+		var method_id = nmethod_id.to_nit_method_name
 		var nit_signature = new Array[String]
 
 		nit_signature.add "\tfun {method_id}"
@@ -253,5 +253,27 @@ class CodeWarehouse
 		end
 
 		return imports
+	end
+end
+
+redef class String
+	# Convert the Java method name `self` to the Nit style
+	#
+	# * Converts to snake case
+	# * Strips `Get` and `Set`
+	# * Add suffix `=` to setters
+	fun to_nit_method_name: String
+	do
+		var name
+		if self.has_prefix("Get") then
+			name = self.substring_from(3)
+		else if self.has_prefix("Set") then
+			name = self.substring_from(3)
+			name += "="
+		else
+			name = self
+		end
+
+		return name.to_snake_case
 	end
 end
