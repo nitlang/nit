@@ -59,41 +59,7 @@ redef class ModelBuilder
 		self.toolcontext.info("*** GENERATING C ***", 1)
 
 		var compiler = new GlobalCompiler(mainmodule, self, runtime_type_analysis)
-		compiler.compile_header
-
-		if mainmodule.model.get_mclasses_by_name("Pointer") != null then
-			runtime_type_analysis.live_types.add(mainmodule.pointer_type)
-		end
-		for t in runtime_type_analysis.live_types do
-			compiler.declare_runtimeclass(t)
-		end
-
-		compiler.compile_class_names
-
-		# Init instance code (allocate and init-arguments)
-		for t in runtime_type_analysis.live_types do
-			if t.ctype == "val*" then
-				compiler.generate_init_instance(t)
-				if t.mclass.kind == extern_kind then
-					compiler.generate_box_instance(t)
-				end
-			else
-				compiler.generate_box_instance(t)
-			end
-		end
-
-		# The main function of the C
-		compiler.compile_nitni_global_ref_functions
-		compiler.compile_main_function
-
-		# Compile until all runtime_functions are visited
-		while not compiler.todos.is_empty do
-			var m = compiler.todos.shift
-			self.toolcontext.info("Compile {m} ({compiler.seen.length-compiler.todos.length}/{compiler.seen.length})", 3)
-			m.compile_to_c(compiler)
-		end
-		self.toolcontext.info("Total methods to compile to C: {compiler.seen.length}", 2)
-
+		compiler.do_compilation
 		compiler.display_stats
 
 		var time1 = get_time
@@ -124,6 +90,47 @@ class GlobalCompiler
 				self.live_primitive_types.add(t)
 			end
 		end
+	end
+
+	redef fun do_compilation
+	do
+		var compiler = self
+
+		compiler.compile_header
+
+		if mainmodule.model.get_mclasses_by_name("Pointer") != null then
+			runtime_type_analysis.live_types.add(mainmodule.pointer_type)
+		end
+		for t in runtime_type_analysis.live_types do
+			compiler.declare_runtimeclass(t)
+		end
+
+		compiler.compile_class_names
+
+		# Init instance code (allocate and init-arguments)
+		for t in runtime_type_analysis.live_types do
+			if t.ctype == "val*" then
+				compiler.generate_init_instance(t)
+				if t.mclass.kind == extern_kind then
+					compiler.generate_box_instance(t)
+				end
+			else
+				compiler.generate_box_instance(t)
+			end
+		end
+
+		# The main function of the C
+		compiler.compile_nitni_global_ref_functions
+		compiler.compile_main_function
+
+		# Compile until all runtime_functions are visited
+		while not compiler.todos.is_empty do
+			var m = compiler.todos.shift
+			modelbuilder.toolcontext.info("Compile {m} ({compiler.seen.length-compiler.todos.length}/{compiler.seen.length})", 3)
+			m.compile_to_c(compiler)
+		end
+		modelbuilder.toolcontext.info("Total methods to compile to C: {compiler.seen.length}", 2)
+
 	end
 
 	# Compile class names (for the class_name and output_class_name methods)

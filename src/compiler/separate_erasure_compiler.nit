@@ -65,35 +65,8 @@ redef class ModelBuilder
 		self.toolcontext.info("*** GENERATING C ***", 1)
 
 		var compiler = new SeparateErasureCompiler(mainmodule, self, runtime_type_analysis)
-		compiler.compile_header
-
-		var c_name = mainmodule.c_name
-
-		# compile class structures
-		self.toolcontext.info("Property coloring", 2)
-		compiler.new_file("{c_name}.tables")
-		compiler.do_property_coloring
-		for m in mainmodule.in_importation.greaters do
-			for mclass in m.intro_mclasses do
-				compiler.compile_class_to_c(mclass)
-			end
-		end
-		compiler.compile_color_consts(compiler.vt_colors)
-
-		# The main function of the C
-		compiler.new_file("{c_name}.main")
-		compiler.compile_nitni_global_ref_functions
-		compiler.compile_main_function
-
-		# compile methods
-		for m in mainmodule.in_importation.greaters do
-			self.toolcontext.info("Generate C for module {m.full_name}", 2)
-			compiler.new_file("{m.c_name}.sep")
-			compiler.compile_module_to_c(m)
-		end
-
+		compiler.do_compilation
 		compiler.display_stats
-
 		var time1 = get_time
 		self.toolcontext.info("*** END GENERATING C: {time1-time0} ***", 2)
 		write_and_make(compiler)
@@ -433,6 +406,11 @@ class SeparateErasureCompiler
 		else
 			return mtype
 		end
+	end
+
+	redef fun compile_types
+	do
+		compile_color_consts(vt_colors)
 	end
 
 	redef fun new_visitor do return new SeparateErasureCompilerVisitor(self)

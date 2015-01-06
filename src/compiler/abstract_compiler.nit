@@ -481,6 +481,10 @@ abstract class AbstractCompiler
 		self.realmainmodule = mainmodule
 	end
 
+	# Do the full code generation of the program `mainmodule`
+	# It is the main method usually called after the instantiation
+	fun do_compilation is abstract
+
 	# Force the creation of a new file
 	# The point is to avoid contamination between must-be-compiled-separately files
 	fun new_file(name: String): CodeFile
@@ -2151,7 +2155,7 @@ redef class AMethPropdef
 	do
 		var externname
 		var at = self.get_single_annotation("extern", v.compiler.modelbuilder)
-		if at != null then
+		if at != null and at.n_args.length == 1 then
 			externname = at.arg_as_string(v.compiler.modelbuilder)
 			if externname == null then return false
 		else

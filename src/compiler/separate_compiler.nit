@@ -90,47 +90,7 @@ redef class ModelBuilder
 		self.toolcontext.info("*** GENERATING C ***", 1)
 
 		var compiler = new SeparateCompiler(mainmodule, self, runtime_type_analysis)
-		compiler.compile_header
-
-		var c_name = mainmodule.c_name
-
-		# compile class structures
-		self.toolcontext.info("Property coloring", 2)
-		compiler.new_file("{c_name}.classes")
-		compiler.do_property_coloring
-		for m in mainmodule.in_importation.greaters do
-			for mclass in m.intro_mclasses do
-				#if mclass.kind == abstract_kind or mclass.kind == interface_kind then continue
-				compiler.compile_class_to_c(mclass)
-			end
-		end
-
-		# The main function of the C
-		compiler.new_file("{c_name}.main")
-		compiler.compile_nitni_global_ref_functions
-		compiler.compile_main_function
-		compiler.compile_finalizer_function
-
-		# compile methods
-		for m in mainmodule.in_importation.greaters do
-			self.toolcontext.info("Generate C for module {m.full_name}", 2)
-			compiler.new_file("{m.c_name}.sep")
-			compiler.compile_module_to_c(m)
-		end
-
-		# compile live & cast type structures
-		self.toolcontext.info("Type coloring", 2)
-		compiler.new_file("{c_name}.types")
-		var mtypes = compiler.do_type_coloring
-		for t in mtypes do
-			compiler.compile_type_to_c(t)
-		end
-		# compile remaining types structures (useless but needed for the symbol resolution at link-time)
-		for t in compiler.undead_types do
-			if mtypes.has(t) then continue
-			compiler.compile_type_to_c(t)
-		end
-
+		compiler.do_compilation
 		compiler.display_stats
 
 		var time1 = get_time
@@ -168,6 +128,60 @@ class SeparateCompiler
 		var file = new_file("nit.common")
 		self.header = new CodeWriter(file)
 		self.compile_box_kinds
+	end
+
+	redef fun do_compilation
+	do
+		var compiler = self
+		compiler.compile_header
+
+		var c_name = mainmodule.c_name
+
+		# compile class structures
+		modelbuilder.toolcontext.info("Property coloring", 2)
+		compiler.new_file("{c_name}.classes")
+		compiler.do_property_coloring
+		for m in mainmodule.in_importation.greaters do
+			for mclass in m.intro_mclasses do
+				#if mclass.kind == abstract_kind or mclass.kind == interface_kind then continue
+				compiler.compile_class_to_c(mclass)
+			end
+		end
+
+		# The main function of the C
+		compiler.new_file("{c_name}.main")
+		compiler.compile_nitni_global_ref_functions
+		compiler.compile_main_function
+		compiler.compile_finalizer_function
+
+		# compile methods
+		for m in mainmodule.in_importation.greaters do
+			modelbuilder.toolcontext.info("Generate C for module {m.full_name}", 2)
+			compiler.new_file("{m.c_name}.sep")
+			compiler.compile_module_to_c(m)
+		end
+
+		# compile live & cast type structures
+		modelbuilder.toolcontext.info("Type coloring", 2)
+		compiler.new_file("{c_name}.types")
+		compiler.compile_types
+	end
+
+	# Color and compile type structures and cast information
+	fun compile_types
+	do
+		var compiler = self
+
+		var mtypes = compiler.do_type_coloring
+		for t in mtypes do
+			compiler.compile_type_to_c(t)
+		end
+		# compile remaining types structures (useless but needed for the symbol resolution at link-time)
+		for t in compiler.undead_types do
+			if mtypes.has(t) then continue
+			compiler.compile_type_to_c(t)
+		end
+
 	end
 
 	redef fun compile_header_structs do
