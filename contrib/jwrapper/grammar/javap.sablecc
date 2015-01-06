@@ -13,12 +13,12 @@ multi_files = class_or_interface*;
 
 class_or_interface = class_declaration | interface_declaration;
 
-class_declaration = class_header '{' field_declaration* '}';
+class_declaration = class_header '{' property_declaration* '}';
 
 class_header = modifier* 'class' full_class_name extends_declaration?
 			   implements_declaration? throws_declaration?;
 interface_declaration = modifier* 'interface' full_class_name extends_interface_declaration?
-						'{' field_declaration* '}';
+						'{' property_declaration* '}';
 
 modifier = 'public'|'private'|'protected'|'static'|'final'|'native'|'synchronized'|'abstract'|'threadsafe'|'transient'|'volatile';
 type = type_specifier '[]'*;
@@ -50,7 +50,7 @@ statement_block = '{' statement* '}';
 variable_id = identifier '[]'*;
 method_id = identifier;
 
-field_declaration = method_declaration | constructor_declaration | variable_declaration | static_declaration | ';';
+property_declaration = method_declaration | constructor_declaration | variable_declaration | static_declaration | ';';
 variable_declaration = modifier* type variable_id throws_declaration? ';';
 method_declaration = modifier* generic_param? type method_id '(' parameter_list? ')' throws_declaration? ';';
 constructor_declaration = modifier* full_class_name '(' parameter_list? ')' throws_declaration? ';';
