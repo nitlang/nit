@@ -251,48 +251,7 @@ class CodeWarehouse
 		else
 			imports = """ import {{{ntype}}}.iterator, Iterator[{{{gen_type}}}].is_ok, Iterator[{{{gen_type}}}].next, Iterator[{{{gen_type}}}].item"""
 		end
-		
+
 		return imports
-	end
-
-	private fun create_loop(java_type: JavaType, nit_type: NitType, is_param: Bool, jarray_id, narray_id: String): String
-	do
-		var loop_header = ""
-		var loop_body = ""
-		var gen_type = nit_type.generic_params.join("_")
-
-		if is_param then
-			if java_type.is_primitive_array then
-				loop_header = "for(int i=0; i < {jarray_id}.length; ++i)"
-				loop_body   = """\t\t\t{{{jarray_id}}}[i] = {{{java_type.param_cast}}}Array_of_{{{gen_type}}}__index({{{nit_type.arg_id}}}, i);"""
-			else if nit_type.id == "Array" then
-				loop_header = """int length = Array_of_{{{gen_type}}}_length((int){{{nit_type.arg_id}}});\n\t\tfor(int i=0; i < length; ++i)"""
-				loop_body   = """\t\t\t{{{jarray_id}}}.add({{{java_type.param_cast}}}Array_of_{{{gen_type}}}__index({{{narray_id}}}, i));"""
-			else
-				loop_header = """int itr = {{{nit_type.id}}}_of_{{{gen_type}}}_iterator({{{nit_type.arg_id}}});\n\t\twhile(Iterator_of_{{{gen_type}}}_is_ok(itr)) {"""
-				if nit_type.is_map then
-					var key_cast = java_type.to_cast(java_type.generic_params[0].id, true)
-					var value_cast = java_type.to_cast(java_type.generic_params[1].id, true)
-					loop_body   = """\t\t\t{{{jarray_id}}}[{{{key_cast}}}iterator_of_{{{nit_type.id}}}_key(itr)] = {{{value_cast}}}iterator_of_{{{nit_type.id}}}_item(itr);\n\t\t\titerator_of_{{{gen_type}}}_next(itr);\n\t\t}"""
-				else
-					loop_body   = """\t\t\t{{{jarray_id}}}.add({{{java_type.param_cast}}}iterator_of_{{{nit_type.id}}}_item(itr));\n\t\t\titerator_of_{{{gen_type}}}_next(itr);\n\t\t}"""
-				end
-			end
-		else
-			if nit_type.is_map then
-				var key_cast = java_type.to_cast(java_type.generic_params[0].id, false)
-				var value_cast = java_type.to_cast(java_type.generic_params[1].id, false)
-				loop_header = """for (java.util.Map.Entry<{{{java_type.generic_params[0]}}}, {{{java_type.generic_params[1]}}}> e: {{{jarray_id}}})"""
-				loop_body   = """\t\t\t{{{nit_type.id}}}_of_{{{gen_type}}}_{{{nit_type.generic_params[1]}}}__index_assign({{{narray_id}}}, {{{key_cast}}}e.getKey(), {{{value_cast}}}e.getValue());"""
-			else if java_type.is_iterable then
-				loop_header = """for ({{{java_type.generic_params[0]}}} e: {{{jarray_id}}})"""
-				loop_body   = """\t\t\t{{{nit_type.id}}}_of_{{{gen_type}}}_add({{{narray_id}}}, {{{java_type.return_cast}}}e);"""
-			else
-				loop_header = "for(int i=0; i < {jarray_id}.length; ++i)"
-				loop_body   = """\t\t\t{{{nit_type.id}}}_of_{{{gen_type}}}_add({{{narray_id}}}, {{{java_type.return_cast}}}{{{jarray_id}}}[i]);"""
-			end
-		end
-
-		return loop_header + "\n" + loop_body
 	end
 end
