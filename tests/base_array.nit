@@ -25,3 +25,4 @@ for i in a do
 end
 
 #alt1# var b = [10, true]
+#alt2# var c = [null, null]

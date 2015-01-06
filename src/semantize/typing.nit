@@ -1243,7 +1243,7 @@ redef class AArrayExpr
 		if mtype == null then
 			mtype = v.merge_types(self, mtypes)
 		end
-		if mtype == null then
+		if mtype == null or mtype isa MNullType then
 			v.error(self, "Type Error: ambiguous array type {mtypes.join(" ")}")
 			return
 		end
