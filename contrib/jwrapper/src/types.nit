@@ -53,12 +53,11 @@ class JavaType
 	fun to_nit_type: NitType
 	do
 		var nit_type: NitType
+		var type_id = null
 
-		if self.is_primitive_array then
-			return self.convert_primitive_array
+		if not is_primitive_array then
+			type_id = converter.to_nit_type(self.id)
 		end
-
-		var type_id = converter.to_nit_type(self.id)
 
 		if type_id == null then
 			nit_type = self.extern_name
@@ -82,38 +81,6 @@ class JavaType
 		return nit_type
 	end
 
-	fun convert_primitive_array: NitType
-	do
-		var nit_type = new NitType("Array")
-
-		var last_nit_type = nit_type
-
-		for i in [1..array_dimension] do
-			var temp: NitType
-			last_nit_type.generic_params = new Array[NitType]
-
-			if i == array_dimension then
-				var temp_type = converter.to_nit_type(self.id)
-
-				if temp_type == null then 
-					temp = self.extern_name
-					nit_type.is_complete = false
-					if temp.mod != null then nit_type.mod = temp.mod
-				else
-					temp = new NitType(temp_type)
-				end
-			else
-				temp = new NitType("Array")
-			end
-
-			last_nit_type.generic_params.add(temp)
-
-			last_nit_type = temp
-		end
-		
-		return nit_type
-	end
-
 	fun is_iterable: Bool do return iterable.has(self.id)
 
 	fun is_collection: Bool do return is_primitive_array or collections_list.has(self.id)
@@ -126,15 +93,16 @@ class JavaType
 	do
 		if is_wrapped then return new NitType.with_module(find_extern_class.as(not null).first, find_extern_class.as(not null).second)
 
-		var name = "Native" + extern_class_name.join("")
-		var nit_type: NitType
-		if self.is_primitive_array then
-			nit_type = new NitType.with_generic_params("Array", name)
+		var name
+		if is_primitive_array then
+			# Primitive arrays have a special naming convention
+			name = "Native" + extern_class_name.join("").capitalized + "Array"
 		else
-			nit_type = new NitType("Native" + extern_class_name.join(""))
+			name = "Native" + extern_class_name.join("")
 		end
-		nit_type.is_complete = false
 
+		var nit_type = new NitType(name)
+		nit_type.is_complete = false
 		return nit_type
 	end
 
@@ -206,12 +174,11 @@ class JavaType
 
 	# Search inside `lib/android` directory for already wrapped classes
 	# If found, contains the class identifier and the Nit Module name
-	var find_extern_class: nullable Couple[String, NitModule] = find_extern_class_fun is lazy
+	var find_extern_class: nullable Couple[String, NitModule] is lazy do
 
-	private fun find_extern_class_fun: nullable Couple[String, NitModule]
-	do
-		var regex = "extern class Native[a-zA-Z1-9]\\\+[ ]\\\+in[ ]\\\+\"Java\"[ ]*`\{[ ]*" + self.to_s + "\\\+[ ]*`\}"
-		var grep = new IProcess("grep", "-r", regex, "{"NIT_DIR".environ}/lib/android/")
+		var regex = "extern class [a-zA-Z1-9]\\\+[ ]\\\+in[ ]\\\+\"Java\"[ ]*`\{[ ]*" + self.to_s + "\\\+[ ]*`\}"
+		var nit_dir = "NIT_DIR".environ
+		var grep = new IProcess("grep", "-r", regex, nit_dir/"lib/android/", nit_dir/"lib/java/")
 		var to_eat = ["private", "extern", "class"]
 
 		var output = grep.read_line

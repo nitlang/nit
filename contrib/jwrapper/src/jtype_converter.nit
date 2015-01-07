@@ -61,28 +61,6 @@ class JavaTypeConverter
 		return_cast_map["CharSequence"] = "(String)"
 	end
 
-	init with_collections
-	do
-		self.init
-		# Collections
-		type_map["List"] = "Array"
-		type_map["ArrayList"] = "Array"
-		type_map["LinkedList"] = "List"
-		type_map["Vector"] = "Array"
-	
-		type_map["Set"] = "HashSet"
-		type_map["SortedSet"] = "Still have to make my mind on this one"
-		type_map["HashSet"] = "HashSet"
-		type_map["TreeSet"] = "HashSet"
-		type_map["LinkedHashSet"] = "HashSet"
-		type_map["Map"] = "HashMap"
-		type_map["SortedMap"] = "RBTreeMap"
-		type_map["HashMap"] = "HashMap"
-		type_map["TreeMap"] = "RBTreeMap"
-		type_map["Hashtable"] = "HashMap"
-		type_map["LinkedHashMap"] = "HashMap"
-	end
-
 	fun to_nit_type(java_type: String): nullable String
 	do
 		return self.type_map.get_or_null(java_type)

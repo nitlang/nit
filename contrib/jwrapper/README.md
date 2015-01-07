@@ -43,13 +43,3 @@ Unknown types are types that doesn't have an equivalent in Nit as of yet.
 Jwrapper won't wrap a class that already is in the `lib/android` directory.
 
 Can't use both -c and -w together, either you comment unknown types or you wrap them.
-
-## Limitations
-jwrapper support for java primitive array is limited to one parameter and the return value.
-
-If the method contains more than one primitive array parameter, the method will be commented with a `NOT SUPPORTED` notice.
-
-## TODO List
-* Generate static methods on top-level
-* Extend primitive array support
-* Enhance static overload support (currently, it suffixes the method name with a number)
