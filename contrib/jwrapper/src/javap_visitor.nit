@@ -21,7 +21,7 @@ module javap_visitor
 import javap_test_parser
 import code_generator
 import jtype_converter
-intrude import types
+intrude import model
 
 class JavaVisitor
 	super Visitor

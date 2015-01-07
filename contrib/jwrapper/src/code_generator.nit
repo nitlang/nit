@@ -17,7 +17,7 @@
 # Services to generate extern class `in "Java"`
 module code_generator
 
-intrude import types
+intrude import model
 
 class CodeGenerator
 

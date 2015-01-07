@@ -15,7 +15,7 @@
 # limitations under the License.
 
 # Contains the java and nit type representation used to convert java to nit code
-module types
+module model
 
 import jtype_converter
 
@@ -67,7 +67,7 @@ class JavaType
 		end
 
 		if not self.has_generic_params then return nit_type
-		
+
 		nit_type.generic_params = new Array[NitType]
 
 		for param in generic_params do
@@ -123,7 +123,7 @@ class JavaType
 			for i in [0..array_dimension[ do
 				id += "[]"
 			end
-		else if self.has_generic_params then 
+		else if self.has_generic_params then
 			var gen_list = new Array[String]
 
 			for param in generic_params do
@@ -277,7 +277,7 @@ class NitType
 	do
 		var id = self.identifier
 
-		if self.has_generic_params then 
+		if self.has_generic_params then
 			var gen_list = new Array[String]
 
 			for param in generic_params do
