@@ -41,7 +41,7 @@ var modelbuilder = new ModelBuilder(model, toolcontext)
 
 var args = toolcontext.option_context.rest
 
-var mmodules = modelbuilder.parse(args)
+var mmodules = modelbuilder.parse_full(args)
 modelbuilder.run_phases
 
 if opt_full.value then mmodules = model.mmodules

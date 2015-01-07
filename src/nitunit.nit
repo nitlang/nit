@@ -53,7 +53,7 @@ end
 var model = new Model
 var modelbuilder = new ModelBuilder(model, toolcontext)
 
-var mmodules = modelbuilder.parse(args)
+var mmodules = modelbuilder.parse_full(args)
 modelbuilder.run_phases
 
 if toolcontext.opt_gen_unit.value then

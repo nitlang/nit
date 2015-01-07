@@ -88,6 +88,61 @@ redef class ModelBuilder
 		return mmodules.to_a
 	end
 
+	# Load recursively all modules of the group `mgroup`.
+	# See `parse` for details.
+	fun parse_group(mgroup: MGroup): Array[MModule]
+	do
+		var res = new Array[MModule]
+		visit_group(mgroup)
+		for mg in mgroup.in_nesting.smallers do
+			for mp in mg.module_paths do
+				var nmodule = self.load_module(mp.filepath)
+				if nmodule == null then continue # Skip error
+				# Load imported module
+				build_module_importation(nmodule)
+
+				res.add(nmodule.mmodule.as(not null))
+			end
+		end
+		return res
+	end
+
+	# Load a bunch of modules and groups.
+	# Each name can be a module or a group.
+	# If it is a group then recursively all its modules are parsed.
+	# See `parse` for details.
+	fun parse_full(names: Sequence[String]): Array[MModule]
+	do
+		var time0 = get_time
+		# Parse and recursively load
+		self.toolcontext.info("*** PARSE ***", 1)
+		var mmodules = new ArraySet[MModule]
+		for a in names do
+			var mgroup = self.get_mgroup(a)
+			if mgroup != null then
+				mmodules.add_all parse_group(mgroup)
+				continue
+			end
+			var nmodule = self.load_module(a)
+			if nmodule == null then continue # Skip error
+			# Load imported module
+			build_module_importation(nmodule)
+
+			mmodules.add(nmodule.mmodule.as(not null))
+		end
+		var time1 = get_time
+		self.toolcontext.info("*** END PARSE: {time1-time0} ***", 2)
+
+		self.toolcontext.check_errors
+
+		if toolcontext.opt_only_parse.value then
+			self.toolcontext.info("*** ONLY PARSE...", 1)
+			exit(0)
+		end
+
+		return mmodules.to_a
+	end
+
 	# The list of directories to search for top level modules
 	# The list is initially set with:
 	#

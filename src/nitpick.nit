@@ -46,7 +46,7 @@ var model = new Model
 var modelbuilder = new ModelBuilder(model, toolcontext)
 
 # Here we load an process all modules passed on the command line
-var mmodules = modelbuilder.parse(arguments)
+var mmodules = modelbuilder.parse_full(arguments)
 toolcontext.mmodules_to_check.add_all mmodules
 
 modelbuilder.run_phases
