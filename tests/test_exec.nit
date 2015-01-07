@@ -18,19 +18,43 @@ import exec
 
 var hw = new Process("echo", "A", "hello", "world!")
 hw.wait
+print hw.status
+
+print ""
 
 var ip = new IProcess("echo", "B hello world!")
 ip.read_line.output
 ip.wait
+print ip.status
+
+print ""
 
 var op = new OProcess.from_a("cat", null)
 op.write("C hello world!\n")
 op.close
 op.wait
+print op.status
+
+print ""
 
 var iop = new IOProcess.from_a("cat", null)
 iop.write("D hello world!\n")
 iop.read_line.output
 iop.close
 iop.wait
+print iop.status
 
+print ""
+
+var e1 = new Process("sh", "-c", "echo E; exit 1")
+e1.wait
+print e1.status
+
+print ""
+
+var ioperr = new IOProcess.from_a("bad command", null)
+ioperr.write("D hello world!\n")
+ioperr.read_line.output
+ioperr.close
+ioperr.wait
+print ioperr.status
