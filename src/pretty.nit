@@ -172,7 +172,7 @@ class PrettyPrinterVisitor
 		else
 			abort
 		end
-		assert current_token.location <= token.location
+		if current_token.location > token.location then return
 		while current_token != token do visit current_token
 	end
 
