@@ -87,8 +87,8 @@ redef class ModelBuilder
 	do
 		var annotations = new Array[AAnnotation]
 		for mmod in mmodule.in_importation.greaters do
-			if not mmodule2nmodule.keys.has(mmod) then continue
-			var amod = mmodule2nmodule[mmod]
+			var amod = mmodule2node(mmod)
+			if amod == null then continue
 			var module_decl = amod.n_moduledecl
 			if module_decl == null then continue
 			var aas = module_decl.get_annotations(name)
@@ -101,8 +101,8 @@ redef class ModelBuilder
 	# Obviously, if there is no ast associated to `mmodule`, then nothing is returned.
 	fun get_mmodule_annotation(name: String, mmodule: MModule): nullable AAnnotation
 	do
-		if not mmodule2nmodule.keys.has(mmodule) then return null
-		var amod = mmodule2nmodule[mmodule]
+		var amod = mmodule2node(mmodule)
+		if amod == null then return null
 		var module_decl = amod.n_moduledecl
 		if module_decl == null then return null
 		var res = module_decl.get_single_annotation(name, self)

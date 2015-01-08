@@ -283,9 +283,8 @@ redef class ModelBuilder
 		nmodule.build_classes_is_done = true
 		var mmodule = nmodule.mmodule.as(not null)
 		for imp in mmodule.in_importation.direct_greaters do
-
-			if not mmodule2nmodule.has_key(imp) then continue
-			build_classes(mmodule2nmodule[imp])
+			var nimp = mmodule2node(imp)
+			if nimp != null then build_classes(nimp)
 		end
 
 		if errcount != toolcontext.error_count then return

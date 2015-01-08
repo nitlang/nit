@@ -501,9 +501,7 @@ redef class ModelBuilder
 	do
 		# Check the module name
 		var decl = nmodule.n_moduledecl
-		if decl == null then
-			#warning(nmodule, "Warning: Missing 'module' keyword") #FIXME: NOT YET FOR COMPATIBILITY
-		else
+		if decl != null then
 			var decl_name = decl.n_name.n_id.text
 			if decl_name != mod_name then
 				error(decl.n_name, "Error: module name missmatch; declared {decl_name} file named {mod_name}")
@@ -606,8 +604,18 @@ redef class ModelBuilder
 	var nmodules = new Array[AModule]
 
 	# Register the nmodule associated to each mmodule
-	# FIXME: why not refine the `MModule` class with a nullable attribute?
-	var mmodule2nmodule = new HashMap[MModule, AModule]
+	#
+	# Public clients need to use `mmodule2node` to access stuff.
+	private var mmodule2nmodule = new HashMap[MModule, AModule]
+
+	# Retrieve the associated AST node of a mmodule.
+	# This method is used to associate model entity with syntactic entities.
+	#
+	# If the module is not associated with a node, returns null.
+	fun mmodule2node(mmodule: MModule): nullable AModule
+	do
+		return mmodule2nmodule.get_or_null(mmodule)
+	end
 end
 
 # File-system location of a module (file) that is identified but not always loaded.

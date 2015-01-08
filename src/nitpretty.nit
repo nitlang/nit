@@ -82,12 +82,11 @@ if not dir.file_exists then dir.mkdir
 var v = new PrettyPrinterVisitor
 
 for mmodule in mmodules do
-	if not mbuilder.mmodule2nmodule.has_key(mmodule) then
+	var nmodule = mbuilder.mmodule2node(mmodule)
+	if nmodule == null then
 		print " Error: no source file for module {mmodule}"
 		return
 	end
-
-	var nmodule = mbuilder.mmodule2nmodule[mmodule]
 	var file = "{dir}/{mmodule.name}.nit"
 	var tpl = v.pretty_nmodule(nmodule)
 	tpl.write_to_file file

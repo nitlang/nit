@@ -86,7 +86,7 @@ redef class ModelBuilder
 		model.mmodule_importation_hierarchy.sort(mmodules)
 		var nmodules = new Array[AModule]
 		for mm in mmodules do
-			nmodules.add(mmodule2nmodule[mm])
+			nmodules.add(mmodule2node(mm).as(not null))
 		end
 		toolcontext.run_phases(nmodules)
 

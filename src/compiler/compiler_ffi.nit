@@ -27,8 +27,7 @@ redef class MModule
 
 	private fun nmodule(v: AbstractCompilerVisitor): nullable AModule
 	do
-		var m2n = v.compiler.modelbuilder.mmodule2nmodule
-		return m2n.get_or_null(self)
+		return v.compiler.modelbuilder.mmodule2node(self)
 	end
 
 	redef fun finalize_ffi(compiler: AbstractCompiler)
@@ -100,7 +99,7 @@ redef class AMethPropdef
 	do
 		var mmodule = mpropdef.mclassdef.mmodule
 		var mainmodule = v.compiler.mainmodule
-		var amodule = v.compiler.modelbuilder.mmodule2nmodule[mmodule]
+		var amodule = v.compiler.modelbuilder.mmodule2node(mmodule)
 		var mclass_type = mpropdef.mclassdef.bound_mtype
 
 		# Declare as extern

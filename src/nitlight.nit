@@ -67,7 +67,8 @@ for mm in mmodules do
 	if opt_last_line.value != 0 then v.last_line = opt_last_line.value
 	if opt_ast.value then v.with_ast = true
 	var page = null
-	var m = modelbuilder.mmodule2nmodule[mm]
+	var m = modelbuilder.mmodule2node(mm)
+	assert m != null
 	if not opt_fragment.value then
 		page = new HTMLTag("html")
 		page.add_raw_html """<head>
