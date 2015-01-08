@@ -202,6 +202,22 @@ class GithubAPI
 		if was_error then return null
 		return commit
 	end
+
+	# Get the Github label with `name`.
+	#
+	# Returns `null` if the label cannot be found.
+	#
+	#     var api = new GithubAPI(get_github_oauth)
+	#     var repo = api.load_repo("privat/nit")
+	#     assert repo isa Repo
+	#     var labl = api.load_label(repo, "ok_will_merge")
+	#     assert labl != null
+	fun load_label(repo: Repo, name: String): nullable Label do
+		var labl = new Label(self, repo, name)
+		labl.load_from_github
+		if was_error then return null
+		return labl
+	end
 end
 
 # Something returned by the Github API.
@@ -300,6 +316,19 @@ class Repo
 		return res
 	end
 
+	# List of labels associated with their names.
+	fun labels: Map[String, Label] do
+		api.message(1, "Get labels for {full_name}")
+		var array = api.get("repos/{full_name}/labels")
+		var res = new HashMap[String, Label]
+		if not array isa JsonArray then return res
+		for obj in array do
+			if not obj isa JsonObject then continue
+			var name = obj["name"].to_s
+			res[name] = new Label.from_json(api, self, obj)
+		end
+		return res
+	end
 	# Repo default branch.
 	fun default_branch: Branch do
 		var name = json["default_branch"].to_s
@@ -431,4 +460,26 @@ class Commit
 
 	# Commit message.
 	fun message: String do return json["commit"].as(JsonObject)["message"].to_s
+end
+
+# A Github label.
+#
+# Should be accessed from `GithubAPI::load_label`.
+#
+# See <https://developer.github.com/v3/issues/labels/>.
+class Label
+	super RepoEntity
+
+	redef var key is lazy do return "{repo.key}/labels/{name}"
+
+	# Label name.
+	var name: String
+
+	redef init from_json(api, repo, json) do
+		self.name = json["name"].to_s
+		super
+	end
+
+	# Label color code.
+	fun color: String do return json["color"].to_s
 end
