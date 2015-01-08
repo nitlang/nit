@@ -910,9 +910,9 @@ redef class AMethPropdef
 					v.add "end"
 				end
 			end
+		v.finish_line
 		end
 
-		v.finish_line
 		v.addn
 		assert v.indent == before
 	end
