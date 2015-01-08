@@ -25,9 +25,7 @@ class A
 	fun baz is
 		a
 		bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
-	do
-		print "2"
-	end
+	do print "2"
 end
 
 class B

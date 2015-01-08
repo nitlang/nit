@@ -834,7 +834,6 @@ redef class AMethPropdef
 		#  TODO: Handle extern annotations
 
 		var before = v.indent
-		var can_inline = v.can_inline(self)
 		super
 		if n_kwinit != null then v.visit n_kwinit
 		if n_kwmeth != null then v.visit n_kwmeth
@@ -872,7 +871,7 @@ redef class AMethPropdef
 			end
 			v.consume "do"
 
-			if can_inline then
+			if v.can_inline(n_block) then
 				v.adds
 
 				if n_block isa ABlockExpr then

@@ -67,7 +67,9 @@ class Test[E]
 		end
 	end
 
-	fun save_those_nodes(nodes: Collection[Object]) do for node in nodes do count(node)
+	fun save_those_nodes(nodes: Collection[Object]) do
+		for node in nodes do count(node)
+	end
 end
 
 fun foo do
