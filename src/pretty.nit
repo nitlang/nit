@@ -435,7 +435,6 @@ redef class AAnnotations
 	redef fun accept_pretty_printer(v) do
 		v.adds
 		v.consume "is"
-
 		if v.can_inline(self) then
 			v.adds
 			for n_item in n_items do
@@ -444,21 +443,21 @@ redef class AAnnotations
 					v.add ", "
 				end
 			end
-			v.finish_line
-		else if n_items.length > 1 then
+			if not was_inline then
+				v.finish_line
+				if v.current_token isa TKwend then v.skip
+			end
+		else
 			v.addn
 			v.indent += 1
-
 			for n_item in n_items do
 				v.addt
 				v.visit n_item
 				v.finish_line
-				v.addn
+				if n_item != n_items.last then v.addn
 			end
-
 			v.indent -= 1
 		end
-		if not was_inline and v.current_token isa TKwend then v.skip
 	end
 
 	redef fun is_inlinable do
@@ -789,6 +788,7 @@ redef class APropdef
 		if n_block == null then return
 		while not v.current_token isa TKwdo do v.skip
 		if n_annotations != null and not annot_inline then
+			v.addn
 			v.addt
 		else
 			v.adds
