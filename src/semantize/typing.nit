@@ -266,8 +266,13 @@ private class TypeVisitor
 
 		#debug("recv: {recvtype} (aka {unsafe_type})")
 		if recvtype isa MNullType then
-			self.error(node, "Error: Method '{name}' call on 'null'.")
-			return null
+			# `null` only accepts some methods of object.
+			if name == "==" or name == "!=" or name == "is_same_instance" then
+				unsafe_type = mmodule.object_type.as_nullable
+			else
+				self.error(node, "Error: Method '{name}' call on 'null'.")
+				return null
+			end
 		end
 
 		var mproperty = self.try_get_mproperty_by_name2(node, unsafe_type, name)
@@ -755,11 +760,6 @@ redef class AReassignFormExpr
 		end
 
 		self.read_type = readtype
-
-		if readtype isa MNullType then
-			v.error(self, "Error: Method '{reassign_name}' call on 'null'.")
-			return null
-		end
 
 		var callsite = v.get_method(self, readtype, reassign_name, false)
 		if callsite == null then return null # Skip error
@@ -1407,10 +1407,6 @@ redef class ASendExpr
 		var name = self.property_name
 
 		if recvtype == null then return # Forward error
-		if recvtype isa MNullType then
-			v.error(self, "Error: Method '{name}' call on 'null'.")
-			return
-		end
 
 		var callsite = v.get_method(self, recvtype, name, self.n_expr isa ASelfExpr)
 		if callsite == null then return
@@ -1554,10 +1550,6 @@ redef class ASendReassignFormExpr
 		var name = self.property_name
 
 		if recvtype == null then return # Forward error
-		if recvtype isa MNullType then
-			v.error(self, "Error: Method '{name}' call on 'null'.")
-			return
-		end
 
 		var for_self = self.n_expr isa ASelfExpr
 		var callsite = v.get_method(self, recvtype, name, for_self)

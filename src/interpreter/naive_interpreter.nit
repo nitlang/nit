@@ -458,7 +458,7 @@ class NaiveInterpreter
 	fun send_commons(mproperty: MMethod, args: Array[Instance], mtype: MType): nullable Instance
 	do
 		if mtype isa MNullType then
-			if mproperty.name == "==" then
+			if mproperty.name == "==" or mproperty.name == "is_same_instance" then
 				return self.bool_instance(args[0] == args[1])
 			else if mproperty.name == "!=" then
 				return self.bool_instance(args[0] != args[1])
