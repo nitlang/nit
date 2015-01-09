@@ -242,28 +242,28 @@ class ToolContext
 	#
 	# Stops execution and prints errors if the program isn't available or didn't end correctly
 	fun exec_and_check(args: Array[String], error: String)
-        do
-                var prog = args.first
-                args.remove_at 0
+	do
+		var prog = args.first
+		args.remove_at 0
 
-                # Is the wanted program available?
-                var proc_which = new IProcess.from_a("which", [prog])
-                proc_which.wait
-                var res = proc_which.status
-                if res != 0 then
-                        print "{error}: executable \"{prog}\" not found"
-                        exit 1
-                end
+		# Is the wanted program available?
+		var proc_which = new IProcess.from_a("which", [prog])
+		proc_which.wait
+		var res = proc_which.status
+		if res != 0 then
+			print "{error}: executable \"{prog}\" not found"
+			exit 1
+		end
 
-                # Execute the wanted program
-                var proc = new Process.from_a(prog, args)
-                proc.wait
-                res = proc.status
-                if res != 0 then
-                        print "{error}: execution of \"{prog} {args.join(" ")}\" failed"
-                        exit 1
-                end
-        end
+		# Execute the wanted program
+		var proc = new Process.from_a(prog, args)
+		proc.wait
+		res = proc.status
+		if res != 0 then
+			print "{error}: execution of \"{prog} {args.join(" ")}\" failed"
+			exit 1
+		end
+	end
 
 	# Global OptionContext
 	var option_context = new OptionContext
