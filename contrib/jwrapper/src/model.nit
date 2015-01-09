@@ -15,7 +15,7 @@
 # limitations under the License.
 
 # Contains the java and nit type representation used to convert java to nit code
-module types
+module model
 
 import jtype_converter
 
@@ -67,7 +67,7 @@ class JavaType
 		end
 
 		if not self.has_generic_params then return nit_type
-		
+
 		nit_type.generic_params = new Array[NitType]
 
 		for param in generic_params do
@@ -123,7 +123,7 @@ class JavaType
 			for i in [0..array_dimension[ do
 				id += "[]"
 			end
-		else if self.has_generic_params then 
+		else if self.has_generic_params then
 			var gen_list = new Array[String]
 
 			for param in generic_params do
@@ -277,7 +277,7 @@ class NitType
 	do
 		var id = self.identifier
 
-		if self.has_generic_params then 
+		if self.has_generic_params then
 			var gen_list = new Array[String]
 
 			for param in generic_params do
@@ -294,36 +294,36 @@ end
 class JavaClass
 	var class_type = new JavaType(new JavaTypeConverter)
 	var attributes = new HashMap[String, JavaType]
-	var methods = new HashMap[String, Array[JReturnAndParams]]
+
+	# Methods of this class organized by their name
+	var methods = new HashMap[String, Array[JavaMethod]]
+
 	var unknown_types = new HashSet[JavaType]
 	var imports = new HashSet[NitModule]
 
 	fun add_method(id: String, return_type: JavaType, params: Array[JavaType])
 	do
-		var ret_and_params = methods.get_or_default(id, new Array[JReturnAndParams])
-		
-		ret_and_params.add(new JReturnAndParams(return_type, new Array[JavaType].from(params)))
-		methods[id] = ret_and_params
+		var signatures = methods.get_or_default(id, new Array[JavaMethod])
+		signatures.add(new JavaMethod(return_type, new Array[JavaType].from(params)))
+		methods[id] = signatures
 	end
 end
 
-class JReturnAndParams
+# A Java method, with its signature
+class JavaMethod
+	# Type returned by the method
 	var return_type: JavaType
-	var params: Array[JavaType]
 
-	init(return_type: JavaType, params: Array[JavaType])
-	do
-		self.return_type = return_type
-		self.params = params
-	end
+	# Type of the arguments of the method
+	var params: Array[JavaType]
 end
 
+# A Nit module, use to import the referenced extern classes
 class NitModule
-	var value: String
-
-	init(str: String) do value = str
+	# Name of the module
+	var name: String
 
 	redef fun ==(other): Bool do return self.to_s == other.to_s
-	redef fun to_s: String do return self.value
-	redef fun hash: Int do return self.value.hash
+	redef fun to_s: String do return self.name
+	redef fun hash: Int do return self.name.hash
 end

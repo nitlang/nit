@@ -21,7 +21,7 @@ module javap_visitor
 import javap_test_parser
 import code_generator
 import jtype_converter
-intrude import types
+intrude import model
 
 class JavaVisitor
 	super Visitor
@@ -336,11 +336,11 @@ redef class Nimplements_declaration
 	end
 end
 
-#                                          #
-#   F I E L D    D E C L A R A T I O N S   #
-#                                          #
+#                                            #
+# P R O P E R T Y    D E C L A R A T I O N S #
+#                                            #
 
-# Method declaration in the field declarations
+# Method declaration
 redef class Nmethod_declaration
 	redef fun accept_visitor(v)
 	do
@@ -357,7 +357,7 @@ redef class Nmethod_declaration
 	end
 end
 
-# Constructor declaration in the field declarations
+# Constructor declaration
 redef class Nconstructor_declaration
 	redef fun accept_visitor(v)
 	do
@@ -367,7 +367,7 @@ redef class Nconstructor_declaration
 	end
 end
 
-# Variable declaration in the field declarations
+# Variable property declaration
 redef class Nvariable_declaration
 	redef fun accept_visitor(v)
 	do
@@ -382,7 +382,7 @@ redef class Nvariable_declaration
 	end
 end
 
-# Static declaration in the field declarations
+# Static property declaration
 redef class Nstatic_declaration
 	redef fun accept_visitor(v)
 	do
@@ -392,7 +392,7 @@ redef class Nstatic_declaration
 	end
 end
 
-# Identifier of the field
+# Identifier of a variable
 redef class Nvariable_id
 	redef fun accept_visitor(v)
 	do

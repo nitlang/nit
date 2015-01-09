@@ -17,7 +17,7 @@
 # Services to generate extern class `in "Java"`
 module code_generator
 
-intrude import types
+intrude import model
 
 class CodeGenerator
 
@@ -128,9 +128,9 @@ class CodeGenerator
 
 	fun gen_attribute(jid: String, jtype: JavaType): String
 	do
-		return "\tvar {jid.to_snake_case}: {jtype.to_nit_type}\n"
+		return "\tvar {jid.to_nit_method_name}: {jtype.to_nit_type}\n"
 	end
-	
+
 	fun gen_method(jmethod_id: String, nmethod_id: String, jreturn_type: JavaType, jparam_list: Array[JavaType]): String
 	do
 		var java_params = ""
@@ -138,7 +138,7 @@ class CodeGenerator
 		var nit_id = "arg"
 		var nit_id_no = 0
 		var nit_types = new Array[NitType]
-		var comment = "" 
+		var comment = ""
 
 		# Parameters
 		for i in [0..jparam_list.length[ do
@@ -177,7 +177,7 @@ class CodeGenerator
 		end
 
 		# Method identifier
-		var method_id = nmethod_id.to_snake_case
+		var method_id = nmethod_id.to_nit_method_name
 		var nit_signature = new Array[String]
 
 		nit_signature.add "\tfun {method_id}"
@@ -216,7 +216,7 @@ class CodeGenerator
 			temp.add(" in \"Java\" `\{\n{comment}\t\trecv.{jmethod_id}({java_params});\n{comment}\t`\}\n")
 		# Methods with return type
 		else if return_type != null then
-			temp.add(" in \"Java\" `\{\n{comment}\t\treturn {jreturn_type.return_cast} recv.{jmethod_id}({java_params});\n{comment}\t`\}\n")
+			temp.add(" in \"Java\" `\{\n{comment}\t\treturn {jreturn_type.return_cast}recv.{jmethod_id}({java_params});\n{comment}\t`\}\n")
 		# Methods without return type
 		else if jreturn_type.is_void then
 			temp.add(" in \"Java\" `\{\n{comment}\t\trecv.{jmethod_id}({java_params});\n{comment}\t`\}\n")
@@ -251,48 +251,29 @@ class CodeWarehouse
 		else
 			imports = """ import {{{ntype}}}.iterator, Iterator[{{{gen_type}}}].is_ok, Iterator[{{{gen_type}}}].next, Iterator[{{{gen_type}}}].item"""
 		end
-		
+
 		return imports
 	end
+end
 
-	private fun create_loop(java_type: JavaType, nit_type: NitType, is_param: Bool, jarray_id, narray_id: String): String
+redef class String
+	# Convert the Java method name `self` to the Nit style
+	#
+	# * Converts to snake case
+	# * Strips `Get` and `Set`
+	# * Add suffix `=` to setters
+	fun to_nit_method_name: String
 	do
-		var loop_header = ""
-		var loop_body = ""
-		var gen_type = nit_type.generic_params.join("_")
-
-		if is_param then
-			if java_type.is_primitive_array then
-				loop_header = "for(int i=0; i < {jarray_id}.length; ++i)"
-				loop_body   = """\t\t\t{{{jarray_id}}}[i] = {{{java_type.param_cast}}}Array_of_{{{gen_type}}}__index({{{nit_type.arg_id}}}, i);"""
-			else if nit_type.id == "Array" then
-				loop_header = """int length = Array_of_{{{gen_type}}}_length((int){{{nit_type.arg_id}}});\n\t\tfor(int i=0; i < length; ++i)"""
-				loop_body   = """\t\t\t{{{jarray_id}}}.add({{{java_type.param_cast}}}Array_of_{{{gen_type}}}__index({{{narray_id}}}, i));"""
-			else
-				loop_header = """int itr = {{{nit_type.id}}}_of_{{{gen_type}}}_iterator({{{nit_type.arg_id}}});\n\t\twhile(Iterator_of_{{{gen_type}}}_is_ok(itr)) {"""
-				if nit_type.is_map then
-					var key_cast = java_type.to_cast(java_type.generic_params[0].id, true)
-					var value_cast = java_type.to_cast(java_type.generic_params[1].id, true)
-					loop_body   = """\t\t\t{{{jarray_id}}}[{{{key_cast}}}iterator_of_{{{nit_type.id}}}_key(itr)] = {{{value_cast}}}iterator_of_{{{nit_type.id}}}_item(itr);\n\t\t\titerator_of_{{{gen_type}}}_next(itr);\n\t\t}"""
-				else
-					loop_body   = """\t\t\t{{{jarray_id}}}.add({{{java_type.param_cast}}}iterator_of_{{{nit_type.id}}}_item(itr));\n\t\t\titerator_of_{{{gen_type}}}_next(itr);\n\t\t}"""
-				end
-			end
+		var name
+		if self.has_prefix("Get") then
+			name = self.substring_from(3)
+		else if self.has_prefix("Set") then
+			name = self.substring_from(3)
+			name += "="
 		else
-			if nit_type.is_map then
-				var key_cast = java_type.to_cast(java_type.generic_params[0].id, false)
-				var value_cast = java_type.to_cast(java_type.generic_params[1].id, false)
-				loop_header = """for (java.util.Map.Entry<{{{java_type.generic_params[0]}}}, {{{java_type.generic_params[1]}}}> e: {{{jarray_id}}})"""
-				loop_body   = """\t\t\t{{{nit_type.id}}}_of_{{{gen_type}}}_{{{nit_type.generic_params[1]}}}__index_assign({{{narray_id}}}, {{{key_cast}}}e.getKey(), {{{value_cast}}}e.getValue());"""
-			else if java_type.is_iterable then
-				loop_header = """for ({{{java_type.generic_params[0]}}} e: {{{jarray_id}}})"""
-				loop_body   = """\t\t\t{{{nit_type.id}}}_of_{{{gen_type}}}_add({{{narray_id}}}, {{{java_type.return_cast}}}e);"""
-			else
-				loop_header = "for(int i=0; i < {jarray_id}.length; ++i)"
-				loop_body   = """\t\t\t{{{nit_type.id}}}_of_{{{gen_type}}}_add({{{narray_id}}}, {{{java_type.return_cast}}}{{{jarray_id}}}[i]);"""
-			end
+			name = self
 		end
 
-		return loop_header + "\n" + loop_body
+		return name.to_snake_case
 	end
 end
