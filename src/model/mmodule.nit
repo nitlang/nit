@@ -112,6 +112,22 @@ class MModule
 		end
 	end
 
+	# The namespace used for entities according to their visibility `v`.
+	#
+	# Public entities use only the project as a namespace.
+	# Private entities use the `full_name` (i.e. "project::module")
+	#
+	# This method is used by entities to implement their `full_name`.
+	fun namespace_for(v: MVisibility): String do
+		if v <= private_visibility then return full_name
+		var mgroup = self.mgroup
+		if mgroup == null then
+			return full_name
+		else
+			return mgroup.mproject.full_name
+		end
+	end
+
 	# Return the name of the global C identifier associated to `self`.
 	# This name is used to prefix files and other C identifiers associated with `self`.
 	redef var c_name: String is lazy do
@@ -125,6 +141,19 @@ class MModule
 		return res
 	end
 
+	# C identifier version of `namespace_for`.
+	# See `c_name`
+	#
+	# This method is used by entities to implement their `c_name`.
+	fun c_namespace_for(v: MVisibility): String do
+		if v <= private_visibility then return c_name
+		var mgroup = self.mgroup
+		if mgroup == null then
+			return c_name
+		else
+			return mgroup.mproject.c_name
+		end
+	end
 
 	# Create a new empty module and register it to a model
 	init
