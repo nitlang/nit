@@ -76,6 +76,14 @@ class MModule
 	# The group of module in the project if any
 	var mgroup: nullable MGroup
 
+	# The project of the module if any
+	# Safe alias for `mgroup.mproject`
+	fun mproject: nullable MProject
+	do
+		var g = mgroup
+		if g == null then return null else return g.mproject
+	end
+
 	# The short name of the module
 	redef var name: String
 
