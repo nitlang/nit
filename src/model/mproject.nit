@@ -27,6 +27,10 @@ class MProject
 	# The name of the project
 	redef var name: String
 
+	redef fun full_name do return name
+
+	redef var c_name = name.to_cmangle is lazy
+
 	# The model of the project
 	redef var model: Model
 
