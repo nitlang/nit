@@ -36,6 +36,8 @@ class AndroidPlatform
 
 	redef fun supports_libunwind do return false
 
+	redef fun supports_linker_script do return false
+
 	redef fun toolchain(toolcontext) do return new AndroidToolchain(toolcontext)
 end
 

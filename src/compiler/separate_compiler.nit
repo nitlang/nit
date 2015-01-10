@@ -258,7 +258,7 @@ class SeparateCompiler
 		if m isa MEntity then
 			if modelbuilder.toolcontext.opt_inline_coloring_numbers.value then
 				self.provide_declaration(m.const_color, "#define {m.const_color} {color}")
-			else if not modelbuilder.toolcontext.opt_colors_are_symbols.value then
+			else if not modelbuilder.toolcontext.opt_colors_are_symbols.value or not v.compiler.target_platform.supports_linker_script then
 				self.provide_declaration(m.const_color, "extern const int {m.const_color};")
 				v.add("const int {m.const_color} = {color};")
 			else
