@@ -252,27 +252,15 @@ class SeparateCompiler
 
 	fun compile_color_const(v: SeparateCompilerVisitor, m: Object, color: Int) do
 		if color_consts_done.has(m) then return
-		if m isa MProperty then
+		if m isa MEntity then
 			if modelbuilder.toolcontext.opt_inline_coloring_numbers.value then
 				self.provide_declaration(m.const_color, "#define {m.const_color} {color}")
 			else
 				self.provide_declaration(m.const_color, "extern const int {m.const_color};")
 				v.add("const int {m.const_color} = {color};")
 			end
-		else if m isa MPropDef then
-			if modelbuilder.toolcontext.opt_inline_coloring_numbers.value then
-				self.provide_declaration(m.const_color, "#define {m.const_color} {color}")
-			else
-				self.provide_declaration(m.const_color, "extern const int {m.const_color};")
-				v.add("const int {m.const_color} = {color};")
-			end
-		else if m isa MType then
-			if modelbuilder.toolcontext.opt_inline_coloring_numbers.value then
-				self.provide_declaration(m.const_color, "#define {m.const_color} {color}")
-			else
-				self.provide_declaration(m.const_color, "extern const int {m.const_color};")
-				v.add("const int {m.const_color} = {color};")
-			end
+		else
+			abort
 		end
 		color_consts_done.add(m)
 	end
@@ -1953,20 +1941,18 @@ class VirtualRuntimeFunction
 	redef fun call(v, arguments) do abort
 end
 
-redef class MType
-	fun const_color: String do return "COLOR_{c_name}"
+redef class MEntity
+	var const_color: String is lazy do return "COLOR_{c_name}"
 end
 
 interface PropertyLayoutElement end
 
 redef class MProperty
 	super PropertyLayoutElement
-	fun const_color: String do return "COLOR_{c_name}"
 end
 
 redef class MPropDef
 	super PropertyLayoutElement
-	fun const_color: String do return "COLOR_{c_name}"
 end
 
 redef class AMethPropdef
