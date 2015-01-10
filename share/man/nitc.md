@@ -329,6 +329,18 @@ Usually you do not need them since they make the generated code slower.
 `--colo-dead-methods`
 :   Force colorization of dead methods.
 
+`--colors-are-symbols`
+:   Store colors as symbols instead of static data.
+
+    By default, the various identifiers used to implement OO-mechanisms are stored as genuine constant static variables.
+
+    This option uses linker symbols to encode these identifiers.
+    This makes the compiled program faster since less indirections are required to get the values.
+    It also produces executables that are a little bit smaller since static memory does not have to store the colors.
+
+    Warning: the usage of linker symbols is not portable on all toolchains (eg. Mac OS X).
+    Also, this option does nothing on some platforms (like android).
+
 `--no-gcc-directive`
 :   Disable advanced gcc directives for optimization.
 
