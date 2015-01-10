@@ -29,6 +29,9 @@ redef class ToolContext
 	var opt_no_union_attribute = new OptionBool("Put primitive attibutes in a box instead of an union", "--no-union-attribute")
 	# --no-shortcut-equate
 	var opt_no_shortcut_equate = new OptionBool("Always call == in a polymorphic way", "--no-shortcut-equal")
+	# --colors-are-symbols
+	var opt_colors_are_symbols = new OptionBool("Store colors as symbols (faster)", "--colors-are-symbols")
+
 	# --inline-coloring-numbers
 	var opt_inline_coloring_numbers = new OptionBool("Inline colors and ids (semi-global)", "--inline-coloring-numbers")
 	# --inline-some-methods
@@ -50,7 +53,7 @@ redef class ToolContext
 		self.option_context.add_option(self.opt_separate)
 		self.option_context.add_option(self.opt_no_inline_intern)
 		self.option_context.add_option(self.opt_no_union_attribute)
-		self.option_context.add_option(self.opt_no_shortcut_equate)
+		self.option_context.add_option(self.opt_no_shortcut_equate, opt_colors_are_symbols)
 		self.option_context.add_option(self.opt_inline_coloring_numbers, opt_inline_some_methods, opt_direct_call_monomorph, opt_skip_dead_methods, opt_semi_global)
 		self.option_context.add_option(self.opt_colo_dead_methods)
 		self.option_context.add_option(self.opt_tables_metrics)
@@ -255,9 +258,15 @@ class SeparateCompiler
 		if m isa MEntity then
 			if modelbuilder.toolcontext.opt_inline_coloring_numbers.value then
 				self.provide_declaration(m.const_color, "#define {m.const_color} {color}")
-			else
+			else if not modelbuilder.toolcontext.opt_colors_are_symbols.value then
 				self.provide_declaration(m.const_color, "extern const int {m.const_color};")
 				v.add("const int {m.const_color} = {color};")
+			else
+				# The color 'C' is the ``address'' of a false static variable 'XC'
+				self.provide_declaration(m.const_color, "#define {m.const_color} ((long)&X{m.const_color})\nextern const void X{m.const_color};")
+				if color == -1 then color = 0 # Symbols cannot be negative, so just use 0 for dead things
+				# Teach the linker that the address of 'XC' is `color`.
+				linker_script.add("X{m.const_color} = {color};")
 			end
 		else
 			abort
