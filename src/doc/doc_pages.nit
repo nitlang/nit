@@ -543,8 +543,8 @@ abstract class NitdocPage
 				redef_article.title_classes.add "signature info"
 				redef_article.css_classes.add "nospace"
 				var redef_content = new Template
-				if mpropdef.mdoc_or_fallback != null then
-					redef_content.add mpropdef.mdoc_or_fallback.tpl_comment
+				if mpropdef.mdoc != null then
+					redef_content.add mpropdef.mdoc.tpl_comment
 				end
 				redef_article.content = redef_content
 				subarticle.add_child redef_article
