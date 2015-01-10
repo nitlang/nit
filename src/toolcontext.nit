@@ -243,6 +243,8 @@ class ToolContext
 	# Stops execution and prints errors if the program isn't available or didn't end correctly
 	fun exec_and_check(args: Array[String], error: String)
 	do
+		info("+ {args.join(" ")}", 2)
+
 		var prog = args.first
 		args.remove_at 0
 
