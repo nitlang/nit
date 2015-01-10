@@ -371,6 +371,18 @@ class MakefileToolchain
 			dep_rules.add(o)
 		end
 
+		# Generate linker script, if any
+		if not compiler.linker_script.is_empty then
+			var linker_script_path = "{compile_dir}/linker_script"
+			ofiles.add "linker_script"
+			var f = new OFStream.open(linker_script_path)
+			for l in compiler.linker_script do
+				f.write l
+				f.write "\n"
+			end
+			f.close
+		end
+
 		var java_files = new Array[ExternFile]
 
 		var pkgconfigs = new Array[String]
@@ -510,6 +522,10 @@ abstract class AbstractCompiler
 
 	# Where global declaration are stored (the main .h)
 	var header: CodeWriter is writable, noinit
+
+	# Additionnal linker script for `ld`.
+	# Mainly used to do specific link-time symbol resolution
+	var linker_script = new Array[String]
 
 	# Provide a declaration that can be requested (before or latter) by a visitor
 	fun provide_declaration(key: String, s: String)
