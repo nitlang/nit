@@ -97,6 +97,18 @@ redef class ModelBuilder
 				error(nclassdef, "Redef error: No imported class {name} to refine.")
 				return
 			end
+
+			# Check for conflicting class full-names in the project
+			if mmodule.mgroup != null and mvisibility >= protected_visibility then
+				var mclasses = model.get_mclasses_by_name(name)
+				if mclasses != null then for other in mclasses do
+					if other.intro_mmodule.mgroup != null and other.intro_mmodule.mgroup.mproject == mmodule.mgroup.mproject then
+						error(nclassdef, "Error: A class named `{other.full_name}` is already defined in module `{other.intro_mmodule}` at {other.intro.location}.")
+						break
+					end
+				end
+			end
+
 			mclass = new MClass(mmodule, name, names, mkind, mvisibility)
 			#print "new class {mclass}"
 		else if nclassdef isa AStdClassdef and nmodule.mclass2nclassdef.has_key(mclass) then

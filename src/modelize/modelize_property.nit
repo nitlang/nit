@@ -485,6 +485,18 @@ redef class APropdef
 				modelbuilder.error(self, "Redef error: {mclassdef.mclass}::{mprop.name} is an inherited property. To redefine it, add the redef keyword.")
 				return false
 			end
+
+			# Check for full-name conflicts in the project.
+			# A public property should have a unique qualified name `project::class::prop`.
+			if mprop.intro_mclassdef.mmodule.mgroup != null and mprop.visibility >= protected_visibility then
+				var others = modelbuilder.model.get_mproperties_by_name(mprop.name)
+				if others != null then for other in others do
+					if other != mprop and other.intro_mclassdef.mmodule.mgroup != null and other.intro_mclassdef.mmodule.mgroup.mproject == mprop.intro_mclassdef.mmodule.mgroup.mproject and other.intro_mclassdef.mclass.name == mprop.intro_mclassdef.mclass.name and other.visibility >= protected_visibility then
+						modelbuilder.advice(self, "full-name-conflict", "Warning: A property named `{other.full_name}` is already defined in module `{other.intro_mclassdef.mmodule}` for the class `{other.intro_mclassdef.mclass.name}`.")
+						break
+					end
+				end
+			end
 		else
 			if not need_redef then
 				modelbuilder.error(self, "Error: No property {mclassdef.mclass}::{mprop.name} is inherited. Remove the redef keyword to define a new property.")

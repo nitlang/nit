@@ -1040,8 +1040,8 @@ abstract class AbstractCompilerVisitor
 	# The current visited AST node
 	var current_node: nullable ANode = null is writable
 
-	# The current `Frame`
-	var frame: nullable Frame = null is writable
+	# The current `StaticFrame`
+	var frame: nullable StaticFrame = null is writable
 
 	# Alias for self.compiler.mainmodule.object_type
 	fun object_type: MClassType do return self.compiler.mainmodule.object_type
@@ -1670,8 +1670,8 @@ class RuntimeVariable
 	end
 end
 
-# A frame correspond to a visited property in a `GlobalCompilerVisitor`
-class Frame
+# The static context of a visited property in a `AbstractCompilerVisitor`
+class StaticFrame
 
 	type VISITOR: AbstractCompilerVisitor
 
@@ -2270,7 +2270,7 @@ redef class AAttrPropdef
 		var oldnode = v.current_node
 		v.current_node = self
 		var old_frame = v.frame
-		var frame = new Frame(v, self.mpropdef.as(not null), recv.mcasttype.as_notnullable.as(MClassType), [recv])
+		var frame = new StaticFrame(v, self.mpropdef.as(not null), recv.mcasttype.as_notnullable.as(MClassType), [recv])
 		v.frame = frame
 
 		var value
@@ -2309,7 +2309,7 @@ redef class AAttrPropdef
 		var oldnode = v.current_node
 		v.current_node = self
 		var old_frame = v.frame
-		var frame = new Frame(v, self.mpropdef.as(not null), recv.mtype.as(MClassType), [recv])
+		var frame = new StaticFrame(v, self.mpropdef.as(not null), recv.mtype.as(MClassType), [recv])
 		v.frame = frame
 		# Force read to check the initialization
 		v.read_attribute(self.mpropdef.mproperty, recv)

@@ -20,7 +20,7 @@ import highlight
 import docdown
 
 redef class ModelBuilder
-	fun test_markdown(page: HTMLTag, mmodule: MModule)
+	fun do_test_markdown(page: HTMLTag, mmodule: MModule)
 	do
 		page.add_raw_html "<h3 id='{mmodule}'>module {mmodule}</h1>"
 		var mdoc = mmodule.mdoc
@@ -115,13 +115,13 @@ if opt_full.value then
 				page.add mdoc.full_markdown
 			end
 			for m in g.mmodules do
-				modelbuilder.test_markdown(page, m)
+				modelbuilder.do_test_markdown(page, m)
 			end
 		end
 	end
 else
 	for m in mmodules do
-		modelbuilder.test_markdown(page, m)
+		modelbuilder.do_test_markdown(page, m)
 	end
 end
 
