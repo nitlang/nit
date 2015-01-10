@@ -103,7 +103,7 @@ end
 # Sub-classes of `Platform` represent the target platform of a compilation
 #
 # Services will be added to this class in other modules.
-abstract class Platform
+class Platform
 	# Does the platform provide and support the library `unwind`?
 	fun supports_libunwind: Bool do return true
 

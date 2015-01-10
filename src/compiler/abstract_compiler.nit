@@ -120,20 +120,16 @@ redef class ModelBuilder
 	# Simple indirection to `Toolchain::write_and_make`
 	protected fun write_and_make(compiler: AbstractCompiler)
 	do
-		var platform = compiler.mainmodule.target_platform
-		var toolchain
-		if platform == null then
-			toolchain = new MakefileToolchain(toolcontext)
-		else
-			toolchain = platform.toolchain(toolcontext)
-		end
+		var platform = compiler.target_platform
+		var toolchain = platform.toolchain(toolcontext)
 		compile_dir = toolchain.compile_dir
 		toolchain.write_and_make compiler
 	end
 end
 
 redef class Platform
-	fun toolchain(toolcontext: ToolContext): Toolchain is abstract
+	# The specific tool-chain associated to the platform
+	fun toolchain(toolcontext: ToolContext): Toolchain do return new MakefileToolchain(toolcontext)
 end
 
 class Toolchain
@@ -189,10 +185,10 @@ class MakefileToolchain
 
 	fun write_files(compiler: AbstractCompiler, compile_dir: String, cfiles: Array[String])
 	do
-		var platform = compiler.mainmodule.target_platform
-		if self.toolcontext.opt_stacktrace.value == "nitstack" and (platform == null or platform.supports_libunwind) then compiler.build_c_to_nit_bindings
+		var platform = compiler.target_platform
+		if self.toolcontext.opt_stacktrace.value == "nitstack" and platform.supports_libunwind then compiler.build_c_to_nit_bindings
 		var cc_opt_with_libgc = "-DWITH_LIBGC"
-		if platform != null and not platform.supports_libgc then cc_opt_with_libgc = ""
+		if not platform.supports_libgc then cc_opt_with_libgc = ""
 
 		# Add gc_choser.h to aditionnal bodies
 		var gc_chooser = new ExternCFile("gc_chooser.c", cc_opt_with_libgc)
@@ -311,7 +307,7 @@ class MakefileToolchain
 	fun write_makefile(compiler: AbstractCompiler, compile_dir: String, cfiles: Array[String])
 	do
 		var mainmodule = compiler.mainmodule
-		var platform = compiler.mainmodule.target_platform
+		var platform = compiler.target_platform
 
 		var outname = outfile(mainmodule)
 
@@ -336,7 +332,7 @@ class MakefileToolchain
 		makefile.write("CC = ccache cc\nCXX = ccache c++\nCFLAGS = -g -O2 -Wno-unused-value -Wno-switch -Wno-attributes\nCINCL =\nLDFLAGS ?= \nLDLIBS  ?= -lm {linker_options.join(" ")}\n\n")
 
 		var ost = toolcontext.opt_stacktrace.value
-		if (ost == "libunwind" or ost == "nitstack") and (platform == null or platform.supports_libunwind) then makefile.write("NEED_LIBUNWIND := YesPlease\n")
+		if (ost == "libunwind" or ost == "nitstack") and platform.supports_libunwind then makefile.write("NEED_LIBUNWIND := YesPlease\n")
 
 		# Dynamic adaptations
 		# While `platform` enable complex toolchains, they are statically applied
@@ -488,9 +484,13 @@ abstract class AbstractCompiler
 	# Is hardening asked? (see --hardening)
 	fun hardening: Bool do return self.modelbuilder.toolcontext.opt_hardening.value
 
+	# The targeted specific platform
+	var target_platform: Platform is noinit
+
 	init
 	do
 		self.realmainmodule = mainmodule
+		target_platform = mainmodule.target_platform or else new Platform
 	end
 
 	# Do the full code generation of the program `mainmodule`
@@ -697,11 +697,11 @@ extern void nitni_global_ref_decr( struct nitni_ref *ref );
 		var v = self.new_visitor
 		v.add_decl("#include <signal.h>")
 		var ost = modelbuilder.toolcontext.opt_stacktrace.value
-		var platform = mainmodule.target_platform
+		var platform = target_platform
 
-		if platform != null and not platform.supports_libunwind then ost = "none"
+		if not platform.supports_libunwind then ost = "none"
 
-		var no_main = (platform != null and platform.no_main) or modelbuilder.toolcontext.opt_no_main.value
+		var no_main = platform.no_main or modelbuilder.toolcontext.opt_no_main.value
 
 		if ost == "nitstack" or ost == "libunwind" then
 			v.add_decl("#define UNW_LOCAL_ONLY")
