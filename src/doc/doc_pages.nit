@@ -166,7 +166,7 @@ class Nitdoc
 
 	private fun modules do
 		for mmodule in model.mmodules do
-			if mmodule.is_fictive then continue
+			if mmodule.is_fictive or mmodule.is_test_suite then continue
 			var page = new NitdocModule(ctx, model, mainmodule, mmodule)
 			page.render.write_to_file("{ctx.output_dir.to_s}/{page.page_url}")
 		end
@@ -211,7 +211,7 @@ class QuickSearch
 
 	init do
 		for mmodule in model.mmodules do
-			if mmodule.is_fictive then continue
+			if mmodule.is_fictive or mmodule.is_test_suite then continue
 			add_result_for(mmodule.name, mmodule.full_name, mmodule.nitdoc_url)
 		end
 		for mclass in model.mclasses do
@@ -667,7 +667,7 @@ class NitdocSearch
 	private fun modules_list: Array[MModule] do
 		var sorted = new Array[MModule]
 		for mmodule in model.mmodule_importation_hierarchy do
-			if mmodule.is_fictive then continue
+			if mmodule.is_fictive or mmodule.is_test_suite then continue
 			sorted.add mmodule
 		end
 		name_sorter.sort(sorted)
@@ -933,7 +933,7 @@ class NitdocModule
 		# Imports
 		var lst = new Array[MModule]
 		for dep in imports do
-			if dep.is_fictive then continue
+			if dep.is_fictive or dep.is_test_suite then continue
 			if dep == mmodule then continue
 			lst.add(dep)
 		end
@@ -945,7 +945,7 @@ class NitdocModule
 		# Clients
 		lst = new Array[MModule]
 		for dep in clients do
-			if dep.is_fictive then continue
+			if dep.is_fictive or dep.is_test_suite then continue
 			if dep == mmodule then continue
 			lst.add(dep)
 		end
@@ -1024,10 +1024,10 @@ class NitdocModule
 	fun tpl_dot(mmodules: Collection[MModule]): nullable TplArticle do
 		var poset = new POSet[MModule]
 		for mmodule in mmodules do
-			if mmodule.is_fictive then continue
+			if mmodule.is_fictive or mmodule.is_test_suite then continue
 			poset.add_node mmodule
 			for omodule in mmodules do
-				if mmodule.is_fictive then continue
+				if omodule.is_fictive or omodule.is_test_suite then continue
 				poset.add_node mmodule
 				if mmodule.in_importation < omodule then
 					poset.add_edge(mmodule, omodule)
