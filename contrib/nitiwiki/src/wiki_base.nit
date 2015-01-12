@@ -54,6 +54,7 @@ class Nitiwiki
 		sys.system "rsync -vr --delete {root}/ {config.rsync_dir}"
 	end
 
+	# Pull data from git repository.
 	fun fetch do
 		sys.system "git pull {config.git_origin} {config.git_branch}"
 	end
@@ -211,6 +212,9 @@ class Nitiwiki
 		return path.simplify_path
 	end
 
+	# Transform an id style name into a pretty printed name.
+	#
+	# Used to translate ids in beautiful page names.
 	fun pretty_name(name: String): String do
 		name = name.replace("_", " ")
 		name = name.capitalized
