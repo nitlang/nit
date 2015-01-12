@@ -19,7 +19,7 @@ module websocket_server
 
 import websocket
 
-var sock = new WebSocket(8088, 1)
+var sock = new WebSocketListener(8088, 1)
 
 var msg: String
 
@@ -27,20 +27,21 @@ if sock.listener.closed then
 	print sys.errno.strerror
 end
 
-sock.accept
+var cli: TCPStream
 
-while not sock.listener.closed do
-	if not sock.connected then sock.accept
-	if sys.stdin.poll_in then
-		msg = gets
-		printn "Received message : {msg}"
-		if msg == "exit" then sock.close
-		if msg == "disconnect" then sock.disconnect_client
-		sock.write(msg)
-	end
-	if sock.can_read(10) then
-		msg = ""
-		while sock.can_read(0) do msg += sock.read(100)
-		if msg != "" then print msg
+while not sock.closed do
+	cli = sock.accept
+	while cli.connected do
+		if sys.stdin.poll_in then
+			msg = gets
+			printn "Received message : {msg}"
+			if msg == "disconnect" then cli.close
+			cli.write(msg)
+		end
+		if cli.can_read(10) then
+			msg = ""
+			while cli.can_read(0) do msg += cli.read(100)
+			if msg != "" then print msg
+		end
 	end
 end

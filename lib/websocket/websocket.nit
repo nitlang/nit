@@ -24,14 +24,11 @@ import base64
 
 intrude import standard::stream
 
-# Websocket compatible server, works as an extra layer to the original Sockets
-class WebSocket
-	super BufferedIStream
-	super OStream
-	super PollableIStream
-
-	# Client connection to the server
-	var client: TCPStream
+# Websocket compatible listener
+#
+# Produces Websocket client-server connections
+class WebSocketListener
+	super Socket
 
 	# Socket listening to connections on a defined port
 	var listener: TCPServer
@@ -39,39 +36,50 @@ class WebSocket
 	# Creates a new Websocket server listening on given port with `max_clients` slots available
 	init(port: Int, max_clients: Int)
 	do
-		_buffer = new FlatBuffer
-		_buffer_pos = 0
 		listener = new TCPServer(port)
 		listener.listen max_clients
 	end
 
-	# Accept an incoming connection and initializes the handshake
-	fun accept
+	# Accepts an incoming connection
+	fun accept: WebsocketConnection
 	do
 		assert not listener.closed
 
 		var client = listener.accept
 		assert client != null
-		self.client = client
 
+		return new WebsocketConnection(listener.port, "", client)
+	end
+
+	# Stop listening for incoming connections
+	fun close
+	do
+		listener.close
+	end
+end
+
+# Connection to a websocket client
+#
+# Can be used to communicate with a client
+class WebsocketConnection
+	super TCPStream
+
+	init do
+		_buffer = new FlatBuffer
+		_buffer_pos = 0
 		var headers = parse_handshake
 		var resp = handshake_response(headers)
 
 		client.write(resp)
 	end
 
-	# Disconnect from a client
-	fun disconnect_client
-	do
-		client.close
-	end
+	# Client connection to the server
+	var client: TCPStream
 
-	# Disconnects the client if one is connected
-	# And stops the server
+	# Disconnect from a client
 	redef fun close
 	do
 		client.close
-		listener.close
 	end
 
 	# Parses the input handshake sent by the client
@@ -134,7 +142,7 @@ class WebSocket
 	do
 		buf.append client.read_line
 		buf.append("\r\n")
-		if buf.has_substring("\r\n\r\n", buf.length - 4) then return buf.to_s
+		if buf.has_suffix("\r\n\r\n") then return buf.to_s
 		return read_http_frame(buf)
 	end
 
@@ -222,9 +230,9 @@ class WebSocket
 	end
 
 	# Checks if a connection to a client is available
-	fun connected: Bool do return client.connected
+	redef fun connected do return client.connected
 
-	redef fun write(msg: Text)
+	redef fun write(msg)
 	do
 		client.write(frame_message(msg.to_s))
 	end
