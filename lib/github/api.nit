@@ -202,6 +202,38 @@ class GithubAPI
 		if was_error then return null
 		return commit
 	end
+
+	# Get the Github label with `name`.
+	#
+	# Returns `null` if the label cannot be found.
+	#
+	#     var api = new GithubAPI(get_github_oauth)
+	#     var repo = api.load_repo("privat/nit")
+	#     assert repo isa Repo
+	#     var labl = api.load_label(repo, "ok_will_merge")
+	#     assert labl != null
+	fun load_label(repo: Repo, name: String): nullable Label do
+		var labl = new Label(self, repo, name)
+		labl.load_from_github
+		if was_error then return null
+		return labl
+	end
+
+	# Get the Github milestone with `id`.
+	#
+	# Returns `null` if the milestone cannot be found.
+	#
+	#     var api = new GithubAPI(get_github_oauth)
+	#     var repo = api.load_repo("privat/nit")
+	#     assert repo isa Repo
+	#     var stone = api.load_milestone(repo, 4)
+	#     assert stone.title == "v1.0prealpha"
+	fun load_milestone(repo: Repo, id: Int): nullable Milestone do
+		var milestone = new Milestone(self, repo, id)
+		milestone.load_from_github
+		if was_error then return null
+		return milestone
+	end
 end
 
 # Something returned by the Github API.
@@ -296,6 +328,35 @@ class Repo
 			if not obj isa JsonObject then continue
 			var name = obj["name"].to_s
 			res[name] = new Branch.from_json(api, self, obj)
+		end
+		return res
+	end
+
+	# List of labels associated with their names.
+	fun labels: Map[String, Label] do
+		api.message(1, "Get labels for {full_name}")
+		var array = api.get("repos/{full_name}/labels")
+		var res = new HashMap[String, Label]
+		if not array isa JsonArray then return res
+		for obj in array do
+			if not obj isa JsonObject then continue
+			var name = obj["name"].to_s
+			res[name] = new Label.from_json(api, self, obj)
+		end
+		return res
+	end
+
+	# List of milestones associated with their ids.
+	fun milestones: Map[Int, Milestone] do
+		api.message(1, "Get milestones for {full_name}")
+		var array = api.get("repos/{full_name}/milestones")
+		var res = new HashMap[Int, Milestone]
+		if array isa JsonArray then
+			for obj in array do
+				if not obj isa JsonObject then continue
+				var number = obj["number"].as(Int)
+				res[number] = new Milestone.from_json(api, self, obj)
+			end
 		end
 		return res
 	end
@@ -431,4 +492,91 @@ class Commit
 
 	# Commit message.
 	fun message: String do return json["commit"].as(JsonObject)["message"].to_s
+end
+
+# A Github label.
+#
+# Should be accessed from `GithubAPI::load_label`.
+#
+# See <https://developer.github.com/v3/issues/labels/>.
+class Label
+	super RepoEntity
+
+	redef var key is lazy do return "{repo.key}/labels/{name}"
+
+	# Label name.
+	var name: String
+
+	redef init from_json(api, repo, json) do
+		self.name = json["name"].to_s
+		super
+	end
+
+	# Label color code.
+	fun color: String do return json["color"].to_s
+end
+
+# A Github milestone.
+#
+# Should be accessed from `GithubAPI::load_milestone`.
+#
+# See <https://developer.github.com/v3/issues/milestones/>.
+class Milestone
+	super RepoEntity
+
+	redef var key is lazy do return "{repo.key}/milestones/{number}"
+
+	# The milestone id on Github.
+	var number: Int
+
+	redef init from_json(api, repo, json) do
+		super
+		self.number = json["number"].as(Int)
+	end
+
+	# Milestone title.
+	fun title: String do return json["title"].to_s
+
+	# Milestone long description.
+	fun description: String do return json["description"].to_s
+
+	# Count of opened issues linked to this milestone.
+	fun open_issues: Int do return json["open_issues"].to_s.to_i
+
+	# Count of closed issues linked to this milestone.
+	fun closed_issues: Int do return json["closed_issues"].to_s.to_i
+
+	# Milestone state.
+	fun state: String do return json["state"].to_s
+
+	# Creation time in ISODate format.
+	fun created_at: ISODate do
+		return new ISODate.from_string(json["created_at"].to_s)
+	end
+
+	# User that created this milestone.
+	fun creator: User do
+		return new User.from_json(api, json["creator"].as(JsonObject))
+	end
+
+	# Due time in ISODate format (if any).
+	fun due_on: nullable ISODate do
+		var res = json["updated_at"]
+		if res == null then return null
+		return new ISODate.from_string(res.to_s)
+	end
+
+	# Update time in ISODate format (if any).
+	fun updated_at: nullable ISODate do
+		var res = json["updated_at"]
+		if res == null then return null
+		return new ISODate.from_string(res.to_s)
+	end
+
+	# Close time in ISODate format (if any).
+	fun closed_at: nullable ISODate do
+		var res = json["closed_at"]
+		if res == null then return null
+		return new ISODate.from_string(res.to_s)
+	end
 end
