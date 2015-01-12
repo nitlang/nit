@@ -203,6 +203,22 @@ class GithubAPI
 		return commit
 	end
 
+	# Get the Github issue #`number`.
+	#
+	# Returns `null` if the issue cannot be found.
+	#
+	#     var api = new GithubAPI(get_github_oauth)
+	#     var repo = api.load_repo("privat/nit")
+	#     assert repo != null
+	#     var issue = api.load_issue(repo, 1)
+	#     assert issue.title == "Doc"
+	fun load_issue(repo: Repo, number: Int): nullable Issue do
+		var issue = new Issue(self, repo, number)
+		issue.load_from_github
+		if was_error then return null
+		return issue
+	end
+
 	# Get the Github label with `name`.
 	#
 	# Returns `null` if the label cannot be found.
@@ -330,6 +346,31 @@ class Repo
 			res[name] = new Branch.from_json(api, self, obj)
 		end
 		return res
+	end
+
+	# List of issues associated with their ids.
+	fun issues: Map[Int, Issue] do
+		api.message(1, "Get issues for {full_name}")
+		var res = new HashMap[Int, Issue]
+		var issue = last_issue
+		if issue == null then return res
+		res[issue.number] = issue
+		while issue.number > 1 do
+			issue = api.load_issue(self, issue.number - 1)
+			assert issue isa Issue
+			res[issue.number] = issue
+		end
+		return res
+	end
+
+	# Get the last published issue.
+	fun last_issue: nullable Issue do
+		var array = api.get("repos/{full_name}/issues")
+		if not array isa JsonArray then return null
+		if array.is_empty then return null
+		var obj = array.first
+		if not obj isa JsonObject then return null
+		return new Issue.from_json(api, self, obj)
 	end
 
 	# List of labels associated with their names.
@@ -494,6 +535,95 @@ class Commit
 	fun message: String do return json["commit"].as(JsonObject)["message"].to_s
 end
 
+# A Github issue.
+#
+# Should be accessed from `GithubAPI::load_issue`.
+#
+# See <https://developer.github.com/v3/issues/>.
+class Issue
+	super RepoEntity
+
+	redef var key is lazy do return "{repo.key}/issues/{number}"
+
+	# Issue Github ID.
+	var number: Int
+
+	redef init from_json(api, repo, json) do
+		self.number = json["number"].as(Int)
+		super
+	end
+
+	# Issue title.
+	fun title: String do return json["title"].to_s
+
+	# User that created this issue.
+	fun user: User do
+		return new User.from_json(api, json["user"].as(JsonObject))
+	end
+
+	# List of labels on this issue associated to their names.
+	fun labels: Map[String, Label] do
+		var res = new HashMap[String, Label]
+		for obj in json["labels"].as(JsonArray) do
+			if not obj isa JsonObject then continue
+			var name = obj["name"].to_s
+			res[name] = new Label.from_json(api, repo, obj)
+		end
+		return res
+	end
+
+	# State of the issue on Github.
+	fun state: String do return json["state"].to_s
+
+	# Is the issue locked?
+	fun locked: Bool do return json["locked"].as(Bool)
+
+	# Assigned `User` (if any).
+	fun assignee: nullable User do
+		var assignee = json["assignee"]
+		if not assignee isa JsonObject then return null
+		return new User.from_json(api, assignee)
+	end
+
+	# `Milestone` (if any).
+	fun milestone: nullable Milestone do
+		var milestone = json["milestone"]
+		if not milestone isa JsonObject then return null
+		return new Milestone.from_json(api, repo, milestone)
+	end
+
+	# Number of comments on this issue.
+	fun comments_count: Int do return json["comments"].to_s.to_i
+
+	# Creation time in ISODate format.
+	fun created_at: ISODate do
+		return new ISODate.from_string(json["created_at"].to_s)
+	end
+
+	# Last update time in ISODate format (if any).
+	fun updated_at: nullable ISODate do
+		var res = json["updated_at"]
+		if res == null then return null
+		return new ISODate.from_string(res.to_s)
+	end
+
+	# Close time in ISODate format (if any).
+	fun closed_at: nullable ISODate do
+		var res = json["closed_at"]
+		if res == null then return null
+		return new ISODate.from_string(res.to_s)
+	end
+
+	# Full description of the issue.
+	fun body: String  do return json["body"].to_s
+
+	# User that closed this issue (if any).
+	fun closed_by: nullable User do
+		var closer = json["closed_by"]
+		if not closer isa JsonObject then return null
+		return new User.from_json(api, closer)
+	end
+end
 # A Github label.
 #
 # Should be accessed from `GithubAPI::load_label`.
