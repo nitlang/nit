@@ -209,5 +209,8 @@ class MModule
 	# exposed to the final user.
 	var is_fictive: Bool = false is writable
 
+	# Is `self` a unit test module used by `nitunit`?
+	var is_test_suite: Bool = false is writable
+
 	redef fun parent_concern do return mgroup
 end

@@ -515,6 +515,7 @@ redef class ModelBuilder
 		self.mmodule2nmodule[mmodule] = nmodule
 
 		if decl != null then
+			# Extract documentation
 			var ndoc = decl.n_doc
 			if ndoc != null then
 				var mdoc = ndoc.to_mdoc
@@ -523,6 +524,8 @@ redef class ModelBuilder
 			else
 				advice(decl, "missing-doc", "Documentation warning: Undocumented module `{mmodule}`")
 			end
+			# Is the module a test suite?
+			mmodule.is_test_suite = not decl.get_annotations("test_suite").is_empty
 		end
 
 		return mmodule
