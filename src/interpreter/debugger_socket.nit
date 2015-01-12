@@ -97,15 +97,16 @@ redef class ModelBuilder
 			sock.close
 			sys.set_io(ns,ns,ns)
 		else if self.toolcontext.opt_websocket_mode.value then
-			var websock = new WebSocket(toolcontext.opt_debug_port.value, 1)
-			websock.accept
-			sys.set_io(websock,websock,websock)
+			var websock = new WebSocketListener(toolcontext.opt_debug_port.value, 1)
+			var cli = websock.accept
+			websock.close
+			sys.set_io(cli,cli,cli)
 		end
 	end
 
 	fun close_stdstreams
 	do
-		if sys.stdin isa WebSocket or sys.stdin isa TCPStream then
+		if sys.stdin isa TCPStream then
 			sys.stdin.close
 			sys.stdout.close
 			sys.stderr.close
@@ -118,6 +119,6 @@ redef class Sys
 	do
 		self.stdin = istream
 		self.stdout = ostream
-		self.stderr = ostream
+		self.stderr = errstream
 	end
 end
