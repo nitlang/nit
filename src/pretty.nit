@@ -773,8 +773,66 @@ redef class APropdef
 	end
 
 	# Factorize annotations visit for all APropdef.
-	fun visit_annotations(v: PrettyPrinterVisitor, n_annotations: nullable AAnnotations) do
+	#
+	# Return true if annotations were inlined.
+	fun visit_annotations(v: PrettyPrinterVisitor, n_annotations: nullable AAnnotations): Bool do
+		var res = v.can_inline(n_annotations)
 		if n_annotations != null then v.visit n_annotations
+		return res
+	end
+
+	# Factorize block visit for APropdefs.
+	#
+	# Were annotations printed inline? If so, we need to print the block differently.
+	fun visit_block(v: PrettyPrinterVisitor, n_block: nullable AExpr, annot_inline: Bool) do
+		if n_block == null then return
+		while not v.current_token isa TKwdo do v.skip
+		if n_annotations != null and not annot_inline then
+			v.addt
+		else
+			v.adds
+		end
+		v.consume "do"
+
+		if v.can_inline(n_block) then
+			v.adds
+
+			if n_block isa ABlockExpr then
+				if n_block.n_expr.is_empty then
+					v.visit n_block.n_kwend
+				else
+					v.visit n_block.n_expr.first
+					v.current_token = n_block.n_kwend
+					v.skip
+				end
+			else
+				v.visit n_block
+				if v.current_token isa TKwend then v.skip
+			end
+		else
+			v.finish_line
+			v.addn
+			v.indent += 1
+
+			if n_block isa ABlockExpr then
+				n_block.force_block = true
+				v.visit n_block
+				v.catch_up n_block.n_kwend
+			else
+				v.addt
+				v.visit n_block
+				v.addn
+			end
+
+			v.indent -= 1
+			v.addt
+			if n_block isa ABlockExpr then
+				v.visit n_block.n_kwend
+			else
+				v.add "end"
+			end
+		end
+		v.finish_line
 	end
 
 	redef fun start_token do
@@ -803,7 +861,8 @@ redef class AAttrPropdef
 			v.visit n_expr
 		end
 
-		visit_annotations(v, n_annotations)
+		var annot_inline = visit_annotations(v, n_annotations)
+		visit_block(v, n_block, annot_inline)
 		v.finish_line
 		v.addn
 	end
@@ -852,8 +911,7 @@ redef class AMethPropdef
 
 		v.visit n_signature
 
-		var annot_inline = v.can_inline(n_annotations)
-		visit_annotations(v, n_annotations)
+		var annot_inline = visit_annotations(v, n_annotations)
 
 		if n_extern_calls != null or n_extern_code_block != null then
 			v.adds
@@ -861,58 +919,7 @@ redef class AMethPropdef
 			if n_extern_code_block != null then v.visit n_extern_code_block
 		end
 
-		var n_block = self.n_block
-
-		if n_block != null then
-			while not v.current_token isa TKwdo do v.skip
-			if n_annotations != null and not annot_inline then
-				v.addt
-			else
-				v.adds
-			end
-			v.consume "do"
-
-			if v.can_inline(n_block) then
-				v.adds
-
-				if n_block isa ABlockExpr then
-					if n_block.n_expr.is_empty then
-						v.visit n_block.n_kwend
-					else
-						v.visit n_block.n_expr.first
-						v.current_token = n_block.n_kwend
-						v.skip
-					end
-				else
-					v.visit n_block
-					if v.current_token isa TKwend then v.skip
-				end
-			else
-				v.finish_line
-				v.addn
-				v.indent += 1
-
-				if n_block isa ABlockExpr then
-					n_block.force_block = true
-					v.visit n_block
-					v.catch_up n_block.n_kwend
-				else
-					v.addt
-					v.visit n_block
-					v.addn
-				end
-
-				v.indent -= 1
-				v.addt
-				if n_block isa ABlockExpr then
-					v.visit n_block.n_kwend
-				else
-					v.add "end"
-				end
-			end
-		v.finish_line
-		end
-
+		visit_block(v, n_block, annot_inline)
 		v.addn
 		assert v.indent == before
 	end
