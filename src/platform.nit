@@ -103,7 +103,7 @@ end
 # Sub-classes of `Platform` represent the target platform of a compilation
 #
 # Services will be added to this class in other modules.
-abstract class Platform
+class Platform
 	# Does the platform provide and support the library `unwind`?
 	fun supports_libunwind: Bool do return true
 
@@ -112,4 +112,7 @@ abstract class Platform
 
 	# Does this platform declare its own main function? If so, we won't generate one in Nit.
 	fun no_main: Bool do return false
+
+	# Does the platform accepts linker scripts?
+	fun supports_linker_script: Bool do return true
 end
