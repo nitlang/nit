@@ -149,9 +149,7 @@ class GithubAPI
 	#     assert user.login == "Morriar"
 	fun load_user(login: String): nullable User do
 		var user = new User(self, login)
-		user.load_from_github
-		if was_error then return null
-		return user
+		return user.load_from_github
 	end
 
 	# Get the Github repo with `full_name`.
@@ -165,9 +163,7 @@ class GithubAPI
 	#     assert repo.default_branch.name == "master"
 	fun load_repo(full_name: String): nullable Repo do
 		var repo = new Repo(self, full_name)
-		repo.load_from_github
-		if was_error then return null
-		return repo
+		return repo.load_from_github
 	end
 
 	# Get the Github branch with `name`.
@@ -182,9 +178,7 @@ class GithubAPI
 	#     assert branch.commit isa Commit
 	fun load_branch(repo: Repo, name: String): nullable Branch do
 		var branch = new Branch(self, repo, name)
-		branch.load_from_github
-		if was_error then return null
-		return branch
+		return branch.load_from_github
 	end
 
 	# Get the Github commit with `sha`.
@@ -198,9 +192,7 @@ class GithubAPI
 	#     assert commit isa Commit
 	fun load_commit(repo: Repo, sha: String): nullable Commit do
 		var commit = new Commit(self, repo, sha)
-		commit.load_from_github
-		if was_error then return null
-		return commit
+		return commit.load_from_github
 	end
 
 	# Get the Github issue #`number`.
@@ -214,9 +206,7 @@ class GithubAPI
 	#     assert issue.title == "Doc"
 	fun load_issue(repo: Repo, number: Int): nullable Issue do
 		var issue = new Issue(self, repo, number)
-		issue.load_from_github
-		if was_error then return null
-		return issue
+		return issue.load_from_github
 	end
 
 	# Get the Github pull request #`number`.
@@ -231,9 +221,7 @@ class GithubAPI
 	#     assert pull.user.login == "Morriar"
 	fun load_pull(repo: Repo, number: Int): nullable PullRequest do
 		var pull = new PullRequest(self, repo, number)
-		pull.load_from_github
-		if was_error then return null
-		return pull
+		return pull.load_from_github
 	end
 
 	# Get the Github label with `name`.
@@ -247,9 +235,7 @@ class GithubAPI
 	#     assert labl != null
 	fun load_label(repo: Repo, name: String): nullable Label do
 		var labl = new Label(self, repo, name)
-		labl.load_from_github
-		if was_error then return null
-		return labl
+		return labl.load_from_github
 	end
 
 	# Get the Github milestone with `id`.
@@ -263,9 +249,7 @@ class GithubAPI
 	#     assert stone.title == "v1.0prealpha"
 	fun load_milestone(repo: Repo, id: Int): nullable Milestone do
 		var milestone = new Milestone(self, repo, id)
-		milestone.load_from_github
-		if was_error then return null
-		return milestone
+		return milestone.load_from_github
 	end
 end
 
@@ -288,8 +272,10 @@ abstract class GithubEntity
 	var json: JsonObject is noinit, protected writable
 
 	# Load `json` from Github API.
-	private fun load_from_github do
+	private fun load_from_github: nullable SELF do
 		json = api.load_from_github(key)
+		if api.was_error then return null
+		return self
 	end
 
 	redef fun to_s do return json.to_json
