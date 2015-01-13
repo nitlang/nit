@@ -35,6 +35,10 @@ redef class ToolContext
 	# Break too long string literals.
 	var opt_break_str = new OptionBool("Break too long string literals", "--break-strings")
 
+	# Force `do` on the same line as the method signature.
+	var opt_inline_do = new OptionBool("Force do keyword on the same line as the method signature",
+		"--inline-do")
+
 	# Check formatting instead of pretty printing.
 	#
 	# This option create a tempory pretty printed file then check if
@@ -55,9 +59,10 @@ end
 # process options
 var toolcontext = new ToolContext
 
-toolcontext.option_context.
-   add_option(toolcontext.opt_dir, toolcontext.opt_output, toolcontext.opt_diff,
-   toolcontext.opt_meld, toolcontext.opt_check, toolcontext.opt_break_str)
+var opts = toolcontext.option_context
+opts.add_option(toolcontext.opt_dir, toolcontext.opt_output)
+opts.add_option(toolcontext.opt_diff, toolcontext.opt_meld, toolcontext.opt_check)
+opts.add_option(toolcontext.opt_break_str, toolcontext.opt_inline_do)
 
 toolcontext.tooldescription = "Usage: nitpretty [OPTION]... <file.nit>\n" +
 	"Pretty print Nit code from Nit source files."
@@ -86,6 +91,9 @@ var v = new PrettyPrinterVisitor
 
 if toolcontext.opt_break_str.value then
 	v.break_strings = true
+end
+if toolcontext.opt_inline_do.value then
+	v.inline_do = true
 end
 
 for mmodule in mmodules do

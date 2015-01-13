@@ -183,7 +183,7 @@ class PrettyPrinterVisitor
 			visit current_token
 		end
 
-		while current_token isa TEol do skip
+		while current_token isa TEol do visit(current_token)
 	end
 
 	# The template under construction.
@@ -246,6 +246,9 @@ class PrettyPrinterVisitor
 
 	# Do we break string literals that are too long?
 	var break_strings = false is public writable
+
+	# Do we force `do` to be on the same line as the method signature?
+	var inline_do = false is public writable
 end
 
 # Base framework redefs
@@ -792,17 +795,33 @@ redef class APropdef
 	#
 	# Were annotations printed inline? If so, we need to print the block differently.
 	fun visit_block(v: PrettyPrinterVisitor, n_block: nullable AExpr, annot_inline: Bool) do
+		var can_inline = v.can_inline(n_block)
 		if n_block == null then return
-		while not v.current_token isa TKwdo do v.skip
 		if n_annotations != null and not annot_inline then
 			v.addn
 			v.addt
-		else
-			v.adds
 		end
+		if v.inline_do then
+			while not v.current_token isa TKwdo do v.skip
+		end
+		var token = v.current_token
+		var do_inline = true
+		loop
+			if token isa TEol then
+				v.skip
+				if not v.can_inline(n_block) then
+					v.addn
+					v.addt
+					do_inline = false
+				end
+			end
+			token = v.current_token
+			if token isa TKwdo then break
+		end
+		if annot_inline and do_inline then v.adds
 		v.consume "do"
 
-		if v.can_inline(n_block) then
+		if v.can_inline(n_block) and do_inline then
 			v.adds
 
 			if n_block isa ABlockExpr then

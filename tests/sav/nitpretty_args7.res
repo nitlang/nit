@@ -29,7 +29,8 @@ class B
 	# comment 3
 	redef fun foo do return bar # comment
 
-	redef fun bar do
+	redef fun bar
+	do
 		return 10 # comment 4
 	end
 
@@ -38,6 +39,11 @@ class B
 
 	fun other: String do
 		return "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+	end
+
+	fun foo1(arr: Array[String], len: Int, ind: Int): String
+	do
+		return "Hello World!"
 	end
 end
 

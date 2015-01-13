@@ -15,7 +15,8 @@
 class Foo
 	fun bar: Bool do return true
 
-	fun foo(other: Foo): Foo do
+	fun foo(other: Foo): Foo
+	do
 		if other.bar then
 			return other
 		else
@@ -34,7 +35,8 @@ class Foo
 		return nb
 	end
 
-	fun gaz: Int do
+	fun gaz: Int
+	do
 		if bar then # 3
 			return 1
 		else
