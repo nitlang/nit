@@ -131,7 +131,10 @@ class VirtualMachine super NaiveInterpreter
 	end
 
 	# Subtyping test with perfect hashing
-	private fun inter_is_subtype_ph(id: Int, mask:Int, vtable: Pointer): Bool `{
+	# * `id` is the identifier of the target class
+	# * `mask` is the perfect hashing mask of the receiver class
+	# * `vtable` is the pointer to the virtual table of the receiver class
+	fun inter_is_subtype_ph(id: Int, mask:Int, vtable: Pointer): Bool `{
 		// hv is the position in hashtable
 		int hv = id & mask;
 
@@ -143,7 +146,10 @@ class VirtualMachine super NaiveInterpreter
 	`}
 
 	# Subtyping test with Cohen test (direct access)
-	private fun inter_is_subtype_sst(id: Int, position: Int, vtable: Pointer): Bool `{
+	# * `id` is the identifier of the target class
+	# * `mask` is the absolute position of the target identifier in the virtual table
+	# * `vtable` is the pointer to the virtual table of the receiver class
+	fun inter_is_subtype_sst(id: Int, position: Int, vtable: Pointer): Bool `{
 		// Direct access to the position given in parameter
 		int tableid = (long unsigned int)((long int *)vtable)[position];
 
@@ -224,8 +230,12 @@ class VirtualMachine super NaiveInterpreter
 		end
 	end
 
-	# Execute a method dispatch with perfect hashing
-	private fun method_dispatch_ph(vtable: Pointer, mask: Int, id: Int, offset: Int): MMethodDef `{
+	# Execute a method dispatch with perfect hashing and return the appropriate `MMethodDef`
+	# * `vtable` Pointer to the internal virtual table of the class
+	# * `mask` Perfect hashing mask of the receiver class
+	# * `id` Identifier of the class which introduce the method
+	# * `offset` Relative offset of the method from the beginning of the block
+	fun method_dispatch_ph(vtable: Pointer, mask: Int, id: Int, offset: Int): MMethodDef `{
 		// Perfect hashing position
 		int hv = mask & id;
 		long unsigned int *pointer = (long unsigned int*)(((long int *)vtable)[-hv]);
@@ -238,9 +248,9 @@ class VirtualMachine super NaiveInterpreter
 	`}
 
 	# Execute a method dispatch with direct access and return the appropriate `MMethodDef`
-	# `vtable` : Pointer to the internal pointer of the class
-	# `absolute_offset` : Absolute offset from the beginning of the virtual table
-	private fun method_dispatch_sst(vtable: Pointer, absolute_offset: Int): MMethodDef `{
+	# * `vtable` Pointer to the internal virtual table of the class
+	# * `absolute_offset` Absolute offset from the beginning of the virtual table
+	fun method_dispatch_sst(vtable: Pointer, absolute_offset: Int): MMethodDef `{
 		// pointer+2 is the position where methods are
 		// Add the offset of property and get the method implementation
 		MMethodDef propdef = (MMethodDef)((long int *)vtable)[absolute_offset];
@@ -281,7 +291,7 @@ class VirtualMachine super NaiveInterpreter
 	# * `mask` is the perfect hashing mask of the class
 	# * `id` is the identifier of the class
 	# * `offset` is the relative offset of this attribute
-	private fun read_attribute_ph(instance: Pointer, vtable: Pointer, mask: Int, id: Int, offset: Int): Instance `{
+	fun read_attribute_ph(instance: Pointer, vtable: Pointer, mask: Int, id: Int, offset: Int): Instance `{
 		// Perfect hashing position
 		int hv = mask & id;
 		long unsigned int *pointer = (long unsigned int*)(((long int *)vtable)[-hv]);
@@ -297,7 +307,7 @@ class VirtualMachine super NaiveInterpreter
 	# Return the attribute value in `instance` with a direct access (SST)
 	# * `instance` is the attributes array of the receiver
 	# * `offset` is the absolute offset of this attribute
-	private fun read_attribute_sst(instance: Pointer, offset: Int): Instance `{
+	fun read_attribute_sst(instance: Pointer, offset: Int): Instance `{
 		/* We can make a direct access to the attribute value
 		   because this attribute is always at the same position
 		   for the class of this receiver */
@@ -331,7 +341,7 @@ class VirtualMachine super NaiveInterpreter
 	# * `id` is the identifier of the class
 	# * `offset` is the relative offset of this attribute
 	# * `value` is the new value for this attribute
-	private fun write_attribute_ph(instance: Pointer, vtable: Pointer, mask: Int, id: Int, offset: Int, value: Instance) `{
+	fun write_attribute_ph(instance: Pointer, vtable: Pointer, mask: Int, id: Int, offset: Int, value: Instance) `{
 		// Perfect hashing position
 		int hv = mask & id;
 		long unsigned int *pointer = (long unsigned int*)(((long int *)vtable)[-hv]);
@@ -347,7 +357,7 @@ class VirtualMachine super NaiveInterpreter
 	# * `instance` is the attributes array of the receiver
 	# * `offset` is the absolute offset of this attribute
 	# * `value` is the new value for this attribute
-	private fun write_attribute_sst(instance: Pointer, offset: Int, value: Instance) `{
+	fun write_attribute_sst(instance: Pointer, offset: Int, value: Instance) `{
 		// Direct access to the position with the absolute offset
 		((Instance *)instance)[offset] = value;
 		Instance_incr_ref(value);
