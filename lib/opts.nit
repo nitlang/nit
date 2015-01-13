@@ -44,11 +44,13 @@ abstract class Option
 	var default_value: VALUE is writable
 
 	# Create a new option
-	init(help: String, default: VALUE, names: nullable Array[String])
-	do
+	init(help: String, default: VALUE, names: nullable Array[String]) is old_style_init do
 		init_opt(help, default, names)
 	end
 
+	# Init option `helptext`, `default_value` and `names`.
+	#
+	# Also set current `value` to `default`.
 	fun init_opt(help: String, default: VALUE, names: nullable Array[String])
 	do
 		if names == null then
@@ -80,6 +82,7 @@ abstract class Option
 		return text.to_s
 	end
 
+	# Pretty print the default value.
 	fun pretty_default: String
 	do
 		var dv = default_value
@@ -97,7 +100,9 @@ end
 # Not really an option. Just add a line of text when displaying the usage
 class OptionText
 	super Option
-	init(text: String) do super(text, null, null)
+
+	# Init a new OptionText with `text`.
+	init(text: String) is old_style_init do super(text, null, null)
 
 	redef fun pretty(off) do return to_s
 
@@ -109,7 +114,8 @@ class OptionBool
 	super Option
 	redef type VALUE: Bool
 
-	init(help: String, names: String...) do super(help, false, names)
+	# Init a new OptionBool with a `help` message and `names`.
+	init(help: String, names: String...) is old_style_init do super(help, false, names)
 
 	redef fun read_param(it)
 	do
@@ -123,7 +129,8 @@ class OptionCount
 	super Option
 	redef type VALUE: Int
 
-	init(help: String, names: String...) do super(help, 0, names)
+	# Init a new OptionCount with a `help` message and `names`.
+	init(help: String, names: String...) is old_style_init do super(help, 0, names)
 
 	redef fun read_param(it)
 	do
@@ -135,6 +142,8 @@ end
 # Option with one parameter (mandatory by default)
 abstract class OptionParameter
 	super Option
+
+	# Convert `str` to a value of type `VALUE`.
 	protected fun convert(str: String): VALUE is abstract
 
 	# Is the parameter mandatory?
@@ -159,7 +168,8 @@ class OptionString
 	super OptionParameter
 	redef type VALUE: nullable String
 
-	init(help: String, names: String...) do super(help, null, names)
+	# Init a new OptionString with a `help` message and `names`.
+	init(help: String, names: String...) is old_style_init do super(help, null, names)
 
 	redef fun convert(str) do return str
 end
@@ -170,10 +180,14 @@ end
 class OptionEnum
 	super OptionParameter
 	redef type VALUE: Int
+
+	# Values in the enumeration.
 	var values: Array[String]
 
-	init(values: Array[String], help: String, default: Int, names: String...)
-	do
+	# Init a new OptionEnum from `values` with a `help` message and `names`.
+	#
+	# `default` is the index of the default value in `values`.
+	init(values: Array[String], help: String, default: Int, names: String...) is old_style_init do
 		assert values.length > 0
 		self.values = values.to_a
 		super("{help} <{values.join(", ")}>", default, names)
@@ -190,6 +204,7 @@ class OptionEnum
 		return id
 	end
 
+	# Get the value name from `values`.
 	fun value_name: String do return values[value]
 
 	redef fun pretty_default
@@ -203,7 +218,10 @@ class OptionInt
 	super OptionParameter
 	redef type VALUE: Int
 
-	init(help: String, default: Int, names: String...) do super(help, default, names)
+	# Init a new OptionInt with a `help` message, a `default` value and `names`.
+	init(help: String, default: Int, names: String...) is old_style_init do
+		super(help, default, names)
+	end
 
 	redef fun convert(str) do return str.to_i
 end
@@ -213,7 +231,10 @@ class OptionFloat
 	super OptionParameter
 	redef type VALUE: Float
 
-	init(help: String, default: Float, names: String...) do super(help, default, names)
+	# Init a new OptionFloat with a `help` message, a `default` value and `names`.
+	init(help: String, default: Float, names: String...) is old_style_init do
+		super(help, default, names)
+	end
 
 	redef fun convert(str) do return str.to_f
 end
@@ -224,8 +245,8 @@ class OptionArray
 	super OptionParameter
 	redef type VALUE: Array[String]
 
-	init(help: String, names: String...)
-	do
+	# Init a new OptionArray with a `help` message and `names`.
+	init(help: String, names: String...) is old_style_init do
 		values = new Array[String]
 		super(help, values, names)
 	end
@@ -352,6 +373,7 @@ class OptionContext
 		end
 	end
 
+	# Options parsing errors.
 	fun get_errors: Array[String]
 	do
 		var errors = new Array[String]

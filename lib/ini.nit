@@ -37,10 +37,7 @@ class ConfigTree
 	# The ini file used to read/store data
 	var ini_file: String
 
-	init(file: String) do
-		self.ini_file = file
-		if file.file_exists then load
-	end
+	init do if ini_file.file_exists then load
 
 	# Get the config value for `key`
 	#
@@ -103,7 +100,6 @@ class ConfigTree
 	#    assert config.has_key("foo.bar")
 	#    assert not config.has_key("zoo")
 	fun has_key(key: String): Bool do
-		var children = roots
 		var parts = key.split(".").reversed
 		var node = get_root(parts.pop)
 		if node == null then return false
@@ -223,7 +219,6 @@ class ConfigTree
 	private var roots = new Array[ConfigNode]
 
 	private fun set_node(key: String, value: nullable String) do
-		var children = roots
 		var parts = key.split(".").reversed
 		var k = parts.pop
 		var root = get_root(k)
@@ -250,7 +245,6 @@ class ConfigTree
 	end
 
 	private fun get_node(key: String): nullable ConfigNode do
-		var children = roots
 		var parts = key.split(".").reversed
 		var node = get_root(parts.pop)
 		while not parts.is_empty do
@@ -283,14 +277,11 @@ class ConfigTree
 end
 
 private class ConfigNode
-	var parent: nullable ConfigNode
+
+	var parent: nullable ConfigNode = null
 	var children = new HashMap[String, ConfigNode]
 	var name: String is writable
-	var value: nullable String
-
-	init(name: String) do
-		self.name = name
-	end
+	var value: nullable String = null
 
 	fun key: String do
 		if parent == null then

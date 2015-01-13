@@ -85,8 +85,7 @@ class CurlHTTPRequest
 		curl.prim_curl.easy_setopt(new CURLOption.user_agent, name)
 	end
 
-	init (url: String, curl: nullable Curl)
-	do
+	init (url: String, curl: nullable Curl) is old_style_init do
 		self.url = url
 		self.curl = curl
 	end
@@ -211,8 +210,7 @@ class CurlMailRequest
 	var body: nullable String = "" is writable
 	private var supported_outgoing_protocol: Array[String] = ["smtp", "smtps"]
 
-	init (curl: nullable Curl)
-	do
+	init (curl: nullable Curl) is old_style_init do
 		self.curl = curl
 	end
 
@@ -351,12 +349,6 @@ class CurlResponseFailed
 
 	var error_code: Int
 	var error_msg: String
-
-	init (err_code: Int, err_msg: String)
-	do
-		self.error_code = err_code
-		self.error_msg = err_msg
-	end
 end
 
 # Success Abstract Response Success Class
@@ -467,7 +459,7 @@ class HeaderMapIterator
 	super MapIterator[String, String]
 
 	private var iterator: Iterator[Couple[String, String]]
-	init(map: HeaderMap) do self.iterator = map.arr.iterator
+	init(map: HeaderMap) is old_style_init do self.iterator = map.arr.iterator
 
 	redef fun is_ok do return self.iterator.is_ok
 	redef fun next do self.iterator.next

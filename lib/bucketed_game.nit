@@ -179,8 +179,6 @@ class Game
 	# but cannot be used to add new Events.
 	var last_turn: nullable ThinGameTurn[G] = null
 
-	init do end
-
 	# Execute and return a new GameTurn.
 	#
 	# This method calls `do_pre_turn` before executing the GameTurn

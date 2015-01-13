@@ -374,10 +374,10 @@ end
 
 private class DephIterator
 	super Iterator[Node]
+
 	var stack = new List[Iterator[nullable Node]]
 
-	init(i: Iterator[nullable Node])
-	do
+	init(i: Iterator[nullable Node]) is old_style_init do
 		stack.add i
 	end
 
