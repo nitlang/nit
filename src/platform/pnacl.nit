@@ -15,10 +15,10 @@
 # limitations under the License.
 
 # Compile program for the PNaCl platform
-module pnacl_platform
+module pnacl
 
 import platform
-import abstract_compiler
+import compiler::abstract_compiler
 
 redef class ToolContext
 	redef fun platform_from_name(name)

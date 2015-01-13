@@ -15,10 +15,10 @@
 # limitations under the License.
 
 # Compile program for the Android platform
-module android_platform
+module android
 
 import platform
-import abstract_compiler
+import compiler::abstract_compiler
 import ffi
 intrude import ffi::extra_java_files
 import android_annotations
