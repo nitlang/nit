@@ -251,6 +251,22 @@ class GithubAPI
 		var milestone = new Milestone(self, repo, id)
 		return milestone.load_from_github
 	end
+
+	# Get the Github commit comment with `id`.
+	#
+	# Returns `null` if the comment cannot be found.
+	#
+	#     var api = new GithubAPI(get_github_oauth)
+	#     var repo = api.load_repo("privat/nit")
+	#     assert repo != null
+	#     var comment = api.load_commit_comment(repo, 8982707)
+	#     assert comment.user.login == "Morriar"
+	#     assert comment.body == "For testing purposes..."
+	#     assert comment.commit.sha == "7eacb86d1e24b7e72bc9ac869bf7182c0300ceca"
+	fun load_commit_comment(repo: Repo, id: Int): nullable CommitComment do
+		var comment = new CommitComment(self, repo, id)
+		return comment.load_from_github
+	end
 end
 
 # Something returned by the Github API.
@@ -871,4 +887,35 @@ abstract class Comment
 
 	# Comment body text.
 	fun body: String do return json["body"].to_s
+end
+
+# A comment made on a commit.
+class CommitComment
+	super Comment
+
+	redef var key is lazy do return "{repo.key}/comments/{id}"
+
+	# Commented commit.
+	fun commit: Commit do
+		return api.load_commit(repo, json["commit_id"].to_s).as(not null)
+	end
+
+	# Position of the comment on the line.
+	fun position: nullable String do
+		if not json.has_key("position") then return null
+		var res = json["position"]
+		if res == null then return null
+		return res.to_s
+	end
+
+	# Line of the comment.
+	fun line: nullable String do
+		if not json.has_key("line") then return null
+		var res = json["line"]
+		if res == null then return null
+		return res.to_s
+	end
+
+	# Path of the commented file.
+	fun path: String do return json["path"].to_s
 end
