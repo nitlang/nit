@@ -12,40 +12,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# comment 1
-class A
-	type FOO: Discrete
-	private var foo: FOO # comment
+# Testing only imports
 
-	# comment 2
-	var bar: Int = 10
-end
+# Module comment
+module test_mod2 # second comment
 
-class B
-	super A
+import standard::kernel
+#import standard::string
 
-	redef type FOO: Int
-
-	# comment 3
-	redef fun foo do return bar # comment
-
-	redef fun bar
-	do
-		return 10 # comment 4
-	end
-
-	fun baz do return # comment 5
-	protected fun baz2 do end
-
-	fun other: String do
-		return "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" +
-			"aaaaaaaaaaaaaaaaaaaaaaaaaa"
-	end
-
-	fun foo1(arr: Array[String], len: Int, ind: Int): String
-	do
-		return "Hello World!"
-	end
-end
-
-# end
+import template # no need for string
+# import standard

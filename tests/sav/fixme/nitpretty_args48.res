@@ -12,40 +12,50 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# comment 1
-class A
-	type FOO: Discrete
-	private var foo: FOO # comment
+var a = 1
+var b = 2
 
-	# comment 2
-	var bar: Int = 10
+# 0
+if a == b then # 1
+	# 2
+else # 3
+	# 4
+end # 5
+
+if a == b then print a # printing a
+
+if a == b then
+	print a # printing a
 end
 
-class B
-	super A
+if a == b then print a
+ # end
 
-	redef type FOO: Int
+if a == b then a = b
 
-	# comment 3
-	redef fun foo do return bar # comment
+if a == b then end
 
-	redef fun bar
-	do
-		return 10 # comment 4
-	end
+if a == b then end
 
-	fun baz do return # comment 5
-	protected fun baz2 do end
+if a != b then a = b
 
-	fun other: String do
-		return "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" +
-			"aaaaaaaaaaaaaaaaaaaaaaaaaa"
-	end
 
-	fun foo1(arr: Array[String], len: Int, ind: Int): String
-	do
-		return "Hello World!"
-	end
+if a > b then
+	a = b
+else
+	a = b
 end
 
-# end
+if a < b then
+	a = b
+else if a == b then
+	a = b
+end
+
+if a < b then
+	a = b
+else if a == b then
+	a = b
+else
+	a = b
+end

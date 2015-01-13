@@ -39,6 +39,13 @@ redef class ToolContext
 	var opt_inline_do = new OptionBool("Force do keyword on the same line as the method signature",
 		"--inline-do")
 
+	# Force formatting on empty lines.
+	#
+	# By default empty lines are kept as they were typed in the file.
+	# When enabling this option, `nitpretty` will decide where to break lines
+	# and will put empty lines to separate properties and code blocks.
+	var opt_skip_empty = new OptionBool("Force formatting of empty lines", "--skip-empty")
+
 	# Check formatting instead of pretty printing.
 	#
 	# This option create a tempory pretty printed file then check if
@@ -63,6 +70,7 @@ var opts = toolcontext.option_context
 opts.add_option(toolcontext.opt_dir, toolcontext.opt_output)
 opts.add_option(toolcontext.opt_diff, toolcontext.opt_meld, toolcontext.opt_check)
 opts.add_option(toolcontext.opt_break_str, toolcontext.opt_inline_do)
+opts.add_option(toolcontext.opt_skip_empty)
 
 toolcontext.tooldescription = "Usage: nitpretty [OPTION]... <file.nit>\n" +
 	"Pretty print Nit code from Nit source files."
@@ -94,6 +102,9 @@ if toolcontext.opt_break_str.value then
 end
 if toolcontext.opt_inline_do.value then
 	v.inline_do = true
+end
+if toolcontext.opt_skip_empty.value then
+	v.skip_empty = true
 end
 
 for mmodule in mmodules do

@@ -12,40 +12,25 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# comment 1
 class A
-	type FOO: Discrete
-	private var foo: FOO # comment
-
-	# comment 2
-	var bar: Int = 10
+	fun foo do end
+	fun bar(a: Int): Int do return 1
+	fun baz(a, b: Int) do end
+	fun gaz(a: Int, b: Float...) do end
 end
 
-class B
-	super A
+fun top1 do end
+fun top2(a: Int) do end
 
-	redef type FOO: Int
+# comment 1
+var a = new A # comment 2
+a.foo # comment 3
+a.bar 1 # comment 4
+a.baz(1, 2) # comment 5
+top1 # comment 6
+top2 10 # comment 7
 
-	# comment 3
-	redef fun foo do return bar # comment
+print 10 # comment 8
 
-	redef fun bar
-	do
-		return 10 # comment 4
-	end
+var b = a.bar(1)
 
-	fun baz do return # comment 5
-	protected fun baz2 do end
-
-	fun other: String do
-		return "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" +
-			"aaaaaaaaaaaaaaaaaaaaaaaaaa"
-	end
-
-	fun foo1(arr: Array[String], len: Int, ind: Int): String
-	do
-		return "Hello World!"
-	end
-end
-
-# end
