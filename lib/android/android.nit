@@ -16,10 +16,6 @@
 
 # Android services and implementation of app.nit
 #
-# To use this module and compile for Android, you must install the
-# Android SDK (with API level 10) and NDK (with the API level 9).
-# The tools `android`, `ndk-build` and `ant` must be in your PATH.
-#
 # This module provides basic logging facilities, advanced logging can be
 # achieved by importing `android::log`.
 module android

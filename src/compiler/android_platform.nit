@@ -174,7 +174,8 @@ $(call import-module,android/native_app_glue)
     <application
 		android:label="@string/app_name"
 		android:hasCode="true"
-		android:debuggable="{{{not release}}}">
+		android:debuggable="{{{not release}}}"
+		{{{icon_declaration}}}>
 
         <!-- Our activity is the built-in NativeActivity framework class.
              This will take care of integrating with our NDK code. -->
@@ -290,12 +291,40 @@ $(call import-module,android/native_app_glue)
 		# Move the apk to the target
 		var outname = outfile(compiler.mainmodule)
 
-		var src_apk_suffix
 		if release then
-			src_apk_suffix = "release-unsigned"
-		else src_apk_suffix = "debug"
+			var apk_path = "{android_project_root}/bin/{compiler.mainmodule.name}-release-unsigned.apk"
 
-		toolcontext.exec_and_check(["mv", "{android_project_root}/bin/{compiler.mainmodule.name}-{src_apk_suffix}.apk", outname], "Android project error")
+			# Sign APK
+			var keystore_path= "KEYSTORE".environ
+			var key_alias= "KEY_ALIAS".environ
+			var tsa_server= "TSA_SERVER".environ
+
+			if key_alias.is_empty then
+				toolcontext.fatal_error(null,
+					"Fatal Error: the environment variable `KEY_ALIAS` must be set to use the `--release` option on Android projects.")
+			end
+
+			args = ["jarsigner", "-sigalg", "MD5withRSA", "-digestalg", "SHA1", apk_path, key_alias]
+
+			## Use a custom keystore
+			if not keystore_path.is_empty then args.add_all(["-keystore", keystore_path])
+
+			## Use a TSA server
+			if not tsa_server.is_empty then args.add_all(["-tsa", tsa_server])
+
+			toolcontext.exec_and_check(args, "Android project error")
+
+			# Clean output file
+			if outname.to_path.exists then outname.to_path.delete
+
+			# Align APK
+			args = ["zipalign", "4", apk_path, outname]
+			toolcontext.exec_and_check(args, "Android project error")
+		else
+			# Move to the expected output path
+			args = ["mv", "{android_project_root}/bin/{compiler.mainmodule.name}-debug.apk", outname]
+			toolcontext.exec_and_check(args, "Android project error")
+		end
 	end
 end
 
