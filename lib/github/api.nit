@@ -40,11 +40,11 @@ import github_curl
 #
 # ~~~
 # var repo = api.load_repo("privat/nit")
-# assert repo isa Repo
+# assert repo != null
 # assert repo.name == "nit"
 #
 # var user = api.load_user("Morriar")
-# assert user isa User
+# assert user != null
 # assert user.login == "Morriar"
 # ~~~
 class GithubAPI
@@ -176,7 +176,7 @@ class GithubAPI
 	#
 	#     var api = new GithubAPI(get_github_oauth)
 	#     var repo = api.load_repo("privat/nit")
-	#     assert repo isa Repo
+	#     assert repo != null
 	#     var branch = api.load_branch(repo, "master")
 	#     assert branch.name == "master"
 	#     assert branch.commit isa Commit
@@ -193,7 +193,7 @@ class GithubAPI
 	#
 	#     var api = new GithubAPI(get_github_oauth)
 	#     var repo = api.load_repo("privat/nit")
-	#     assert repo isa Repo
+	#     assert repo != null
 	#     var commit = api.load_commit(repo, "64ce1f")
 	#     assert commit isa Commit
 	fun load_commit(repo: Repo, sha: String): nullable Commit do
@@ -242,7 +242,7 @@ class GithubAPI
 	#
 	#     var api = new GithubAPI(get_github_oauth)
 	#     var repo = api.load_repo("privat/nit")
-	#     assert repo isa Repo
+	#     assert repo != null
 	#     var labl = api.load_label(repo, "ok_will_merge")
 	#     assert labl != null
 	fun load_label(repo: Repo, name: String): nullable Label do
@@ -258,7 +258,7 @@ class GithubAPI
 	#
 	#     var api = new GithubAPI(get_github_oauth)
 	#     var repo = api.load_repo("privat/nit")
-	#     assert repo isa Repo
+	#     assert repo != null
 	#     var stone = api.load_milestone(repo, 4)
 	#     assert stone.title == "v1.0prealpha"
 	fun load_milestone(repo: Repo, id: Int): nullable Milestone do
