@@ -267,6 +267,22 @@ class GithubAPI
 		var comment = new CommitComment(self, repo, id)
 		return comment.load_from_github
 	end
+
+	# Get the Github issue comment with `id`.
+	#
+	# Returns `null` if the comment cannot be found.
+	#
+	#     var api = new GithubAPI(get_github_oauth)
+	#     var repo = api.load_repo("privat/nit")
+	#     assert repo != null
+	#     var comment = api.load_issue_comment(repo, 6020149)
+	#     assert comment.user.login == "privat"
+	#     assert comment.created_at.to_s == "2012-05-30T20:16:54Z"
+	#     assert comment.issue.number == 10
+	fun load_issue_comment(repo: Repo, id: Int): nullable IssueComment do
+		var comment = new IssueComment(self, repo, id)
+		return comment.load_from_github
+	end
 end
 
 # Something returned by the Github API.
@@ -633,6 +649,27 @@ class Issue
 		return new Milestone.from_json(api, repo, milestone)
 	end
 
+	# List of comments made on this issue.
+	fun comments: Array[IssueComment] do
+		var res = new Array[IssueComment]
+		var count = comments_count
+		var page = 1
+		var array = api.get("{key}/comments?page={page}")
+		if not array isa JsonArray then
+			return res
+		end
+		while not array.is_empty and res.length < count do
+			for obj in array do
+				if not obj isa JsonObject then continue
+				var id = obj["id"].as(Int)
+				res.add(api.load_issue_comment(repo, id).as(not null))
+			end
+			page += 1
+			array = api.get("{key}/comments?page={page}").as(JsonArray)
+		end
+		return res
+	end
+
 	# Number of comments on this issue.
 	fun comments_count: Int do return json["comments"].to_s.to_i
 
@@ -918,4 +955,24 @@ class CommitComment
 
 	# Path of the commented file.
 	fun path: String do return json["path"].to_s
+end
+
+# Comments made on Github issue and pull request pages.
+#
+# Should be accessed from `GithubAPI::load_issue_comment`.
+#
+# See <https://developer.github.com/v3/issues/comments/>.
+class IssueComment
+	super Comment
+
+	redef var key is lazy do return "{repo.key}/issues/comments/{id}"
+
+	# Issue that contains `self`.
+	fun issue: Issue do
+		var number = issue_url.split("/").last.to_i
+		return api.load_issue(repo, number).as(not null)
+	end
+
+	# Link to the issue document on API.
+	fun issue_url: String do return json["issue_url"].to_s
 end
