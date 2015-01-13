@@ -37,6 +37,7 @@ in "C" `{
 
 # Wrapper for the data structure PollFD used for polling on a socket
 class PollFD
+	super FinalizableOnce
 
 	# The PollFD object
 	private var poll_struct: NativeSocketPollFD
@@ -76,27 +77,30 @@ class PollFD
 		return response & mask;
 	`}
 
+	redef fun finalize_once
+	do
+		poll_struct.free
+	end
 end
 
 # Data structure used by the poll function
-private extern class NativeSocketPollFD `{ struct pollfd `}
+private extern class NativeSocketPollFD `{ struct pollfd * `}
 
-	# File descriptor id
-	private fun fd: Int `{ return recv.fd; `}
+	# File descriptor
+	fun fd: Int `{ return recv->fd; `}
 
 	# List of events to be watched
-	private fun events: Int `{ return recv.events; `}
+	fun events: Int `{ return recv->events; `}
 
 	# List of events received by the last poll function
-	private fun revents: Int `{  return recv.revents; `}
+	fun revents: Int `{  return recv->revents; `}
 
 	new (pid: Int, events: NativeSocketPollValues) `{
-		struct pollfd poll;
-		poll.fd = pid;
-		poll.events = events;
+		struct pollfd *poll = malloc(sizeof(struct pollfd));
+		poll->fd = pid;
+		poll->events = events;
 		return poll;
 	`}
-
 end
 
 extern class NativeSocket `{ int* `}
@@ -141,12 +145,14 @@ extern class NativeSocket `{ int* `}
 	`}
 
 	# Sets an option for the socket
-	fun setsockopt(level: NativeSocketOptLevels, option_name: NativeSocketOptNames, option_value: Int) `{
+	#
+	# Returns `true` on success.
+	fun setsockopt(level: NativeSocketOptLevels, option_name: NativeSocketOptNames, option_value: Int): Bool `{
 		int err = setsockopt(*recv, level, option_name, &option_value, sizeof(int));
 		if(err != 0){
-			perror("Error on setsockopts: ");
-			exit(1);
+			return 0;
 		}
+		return 1;
 	`}
 
 	fun bind(addrIn: NativeSocketAddrIn): Int `{ return bind(*recv, (struct sockaddr*)addrIn, sizeof(*addrIn)); `}
@@ -177,7 +183,7 @@ extern class NativeSocket `{ int* `}
 	# The array's members are pollfd structures within which fd specifies an open file descriptor and events and revents are bitmasks constructed by
 	# OR'ing a combination of the pollfd flags.
 	private fun native_poll(filedesc: NativeSocketPollFD, timeout: Int): Int `{
-		int poll_return = poll(&filedesc, 1, timeout);
+		int poll_return = poll(filedesc, 1, timeout);
 		return poll_return;
 	`}
 
@@ -368,9 +374,6 @@ extern class NativeSocketAddressFamilies `{ int `}
 	# Novell Internet Protocol
 	new af_ipx `{ return AF_IPX; `}
 
-	# Integrated Services Digital Network
-	new af_isdn `{ return AF_ISDN; `}
-
 	# IPv6
 	new af_inet6 `{ return AF_INET6; `}
 
@@ -387,7 +390,6 @@ extern class NativeSocketProtocolFamilies `{ int `}
 	new pf_decnet `{ return PF_DECnet; `}
 	new pf_route `{ return PF_ROUTE; `}
 	new pf_ipx `{ return PF_IPX; `}
-	new pf_isdn `{ return PF_ISDN; `}
 	new pf_key `{ return PF_KEY; `}
 	new pf_inet6 `{ return PF_INET6; `}
 	new pf_max `{ return PF_MAX; `}
