@@ -834,3 +834,41 @@ class Milestone
 		return new ISODate.from_string(res.to_s)
 	end
 end
+
+# A Github comment
+#
+# There is two kinds of comments:
+#
+# * `CommitComment` are made on a commit page.
+# * `IssueComment` are made on an issue or pull request page.
+# * `ReviewComment` are made on the diff associated to a pull request.
+abstract class Comment
+	super RepoEntity
+
+	# Identifier of this comment.
+	var id: Int
+
+	redef init from_json(api, repo, json) do
+		self.id = json["id"].as(Int)
+		super
+	end
+
+	# User that made this comment.
+	fun user: User do
+		return new User.from_json(api, json["user"].as(JsonObject))
+	end
+
+	# Creation time in ISODate format.
+	fun created_at: ISODate do
+		return new ISODate.from_string(json["created_at"].to_s)
+	end
+
+	# Last update time in ISODate format (if any).
+	fun updated_at: nullable ISODate do
+		if not json.has_key("updated_at") then return null
+		return new ISODate.from_string(json["updated_at"].to_s)
+	end
+
+	# Comment body text.
+	fun body: String do return json["body"].to_s
+end
