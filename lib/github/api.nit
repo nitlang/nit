@@ -283,6 +283,22 @@ class GithubAPI
 		var comment = new IssueComment(self, repo, id)
 		return comment.load_from_github
 	end
+
+	# Get the Github diff comment with `id`.
+	#
+	# Returns `null` if the comment cannot be found.
+	#
+	#     var api = new GithubAPI(get_github_oauth)
+	#     var repo = api.load_repo("privat/nit")
+	#     assert repo != null
+	#     var comment = api.load_review_comment(repo, 21010363)
+	#     assert comment.path == "src/modelize/modelize_property.nit"
+	#     assert comment.original_position == 26
+	#     assert comment.pull.number == 945
+	fun load_review_comment(repo: Repo, id: Int): nullable ReviewComment do
+		var comment = new ReviewComment(self, repo, id)
+		return comment.load_from_github
+	end
 end
 
 # Something returned by the Github API.
@@ -975,4 +991,42 @@ class IssueComment
 
 	# Link to the issue document on API.
 	fun issue_url: String do return json["issue_url"].to_s
+end
+
+# Comments made on Github pull request diffs.
+#
+# Should be accessed from `GithubAPI::load_diff_comment`.
+#
+# See <https://developer.github.com/v3/pulls/comments/>.
+class ReviewComment
+	super Comment
+
+	redef var key is lazy do return "{repo.key}/pulls/comments/{id}"
+
+	# Pull request that contains `self`.
+	fun pull: PullRequest do
+		var number = pull_request_url.split("/").last.to_i
+		return api.load_pull(repo, number).as(not null)
+	end
+
+	# Link to the pull request on API.
+	fun pull_request_url: String do return json["pull_request_url"].to_s
+
+	# Diff hunk.
+	fun diff_hunk: String do return json["diff_hunk"].to_s
+
+	# Path of commented file.
+	fun path: String do return json["path"].to_s
+
+	# Position of the comment on the file.
+	fun position: Int do return json["position"].to_s.to_i
+
+	# Original position in the diff.
+	fun original_position: Int do return json["original_position"].to_s.to_i
+
+	# Commit referenced by this comment.
+	fun commit_id: String do return json["commit_id"].to_s
+
+	# Original commit id.
+	fun original_commit_id: String do return json["original_commit_id"].to_s
 end
