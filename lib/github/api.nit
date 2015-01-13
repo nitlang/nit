@@ -203,6 +203,39 @@ class GithubAPI
 		return commit
 	end
 
+	# Get the Github issue #`number`.
+	#
+	# Returns `null` if the issue cannot be found.
+	#
+	#     var api = new GithubAPI(get_github_oauth)
+	#     var repo = api.load_repo("privat/nit")
+	#     assert repo != null
+	#     var issue = api.load_issue(repo, 1)
+	#     assert issue.title == "Doc"
+	fun load_issue(repo: Repo, number: Int): nullable Issue do
+		var issue = new Issue(self, repo, number)
+		issue.load_from_github
+		if was_error then return null
+		return issue
+	end
+
+	# Get the Github pull request #`number`.
+	#
+	# Returns `null` if the pull request cannot be found.
+	#
+	#     var api = new GithubAPI(get_github_oauth)
+	#     var repo = api.load_repo("privat/nit")
+	#     assert repo != null
+	#     var pull = api.load_pull(repo, 1)
+	#     assert pull.title == "Doc"
+	#     assert pull.user.login == "Morriar"
+	fun load_pull(repo: Repo, number: Int): nullable PullRequest do
+		var pull = new PullRequest(self, repo, number)
+		pull.load_from_github
+		if was_error then return null
+		return pull
+	end
+
 	# Get the Github label with `name`.
 	#
 	# Returns `null` if the label cannot be found.
@@ -332,6 +365,31 @@ class Repo
 		return res
 	end
 
+	# List of issues associated with their ids.
+	fun issues: Map[Int, Issue] do
+		api.message(1, "Get issues for {full_name}")
+		var res = new HashMap[Int, Issue]
+		var issue = last_issue
+		if issue == null then return res
+		res[issue.number] = issue
+		while issue.number > 1 do
+			issue = api.load_issue(self, issue.number - 1)
+			assert issue isa Issue
+			res[issue.number] = issue
+		end
+		return res
+	end
+
+	# Get the last published issue.
+	fun last_issue: nullable Issue do
+		var array = api.get("repos/{full_name}/issues")
+		if not array isa JsonArray then return null
+		if array.is_empty then return null
+		var obj = array.first
+		if not obj isa JsonObject then return null
+		return new Issue.from_json(api, self, obj)
+	end
+
 	# List of labels associated with their names.
 	fun labels: Map[String, Label] do
 		api.message(1, "Get labels for {full_name}")
@@ -357,6 +415,28 @@ class Repo
 				var number = obj["number"].as(Int)
 				res[number] = new Milestone.from_json(api, self, obj)
 			end
+		end
+		return res
+	end
+
+	# List of pull-requests associated with their ids.
+	#
+	# Implementation notes: because PR numbers are not consecutive,
+	# PR are loaded from pages.
+	# See: https://developer.github.com/v3/pulls/#list-pull-requests
+	fun pulls: Map[Int, PullRequest] do
+		api.message(1, "Get pulls for {full_name}")
+		var res = new HashMap[Int, PullRequest]
+		var page = 1
+		var array = api.get("{key}/pulls?page={page}").as(JsonArray)
+		while not array.is_empty do
+			for obj in array do
+				if not obj isa JsonObject then continue
+				var number = obj["number"].as(Int)
+				res[number] = new PullRequest.from_json(api, self, obj)
+			end
+			page += 1
+			array = api.get("{key}/pulls?page={page}").as(JsonArray)
 		end
 		return res
 	end
@@ -492,6 +572,194 @@ class Commit
 
 	# Commit message.
 	fun message: String do return json["commit"].as(JsonObject)["message"].to_s
+end
+
+# A Github issue.
+#
+# Should be accessed from `GithubAPI::load_issue`.
+#
+# See <https://developer.github.com/v3/issues/>.
+class Issue
+	super RepoEntity
+
+	redef var key is lazy do return "{repo.key}/issues/{number}"
+
+	# Issue Github ID.
+	var number: Int
+
+	redef init from_json(api, repo, json) do
+		self.number = json["number"].as(Int)
+		super
+	end
+
+	# Issue title.
+	fun title: String do return json["title"].to_s
+
+	# User that created this issue.
+	fun user: User do
+		return new User.from_json(api, json["user"].as(JsonObject))
+	end
+
+	# List of labels on this issue associated to their names.
+	fun labels: Map[String, Label] do
+		var res = new HashMap[String, Label]
+		for obj in json["labels"].as(JsonArray) do
+			if not obj isa JsonObject then continue
+			var name = obj["name"].to_s
+			res[name] = new Label.from_json(api, repo, obj)
+		end
+		return res
+	end
+
+	# State of the issue on Github.
+	fun state: String do return json["state"].to_s
+
+	# Is the issue locked?
+	fun locked: Bool do return json["locked"].as(Bool)
+
+	# Assigned `User` (if any).
+	fun assignee: nullable User do
+		var assignee = json["assignee"]
+		if not assignee isa JsonObject then return null
+		return new User.from_json(api, assignee)
+	end
+
+	# `Milestone` (if any).
+	fun milestone: nullable Milestone do
+		var milestone = json["milestone"]
+		if not milestone isa JsonObject then return null
+		return new Milestone.from_json(api, repo, milestone)
+	end
+
+	# Number of comments on this issue.
+	fun comments_count: Int do return json["comments"].to_s.to_i
+
+	# Creation time in ISODate format.
+	fun created_at: ISODate do
+		return new ISODate.from_string(json["created_at"].to_s)
+	end
+
+	# Last update time in ISODate format (if any).
+	fun updated_at: nullable ISODate do
+		var res = json["updated_at"]
+		if res == null then return null
+		return new ISODate.from_string(res.to_s)
+	end
+
+	# Close time in ISODate format (if any).
+	fun closed_at: nullable ISODate do
+		var res = json["closed_at"]
+		if res == null then return null
+		return new ISODate.from_string(res.to_s)
+	end
+
+	# TODO link to pull request
+
+	# Full description of the issue.
+	fun body: String  do return json["body"].to_s
+
+	# User that closed this issue (if any).
+	fun closed_by: nullable User do
+		var closer = json["closed_by"]
+		if not closer isa JsonObject then return null
+		return new User.from_json(api, closer)
+	end
+end
+
+# A Github pull request.
+#
+# Should be accessed from `GithubAPI::load_pull`.
+#
+# PullRequest are basically Issues with more data.
+# See <https://developer.github.com/v3/pulls/>.
+class PullRequest
+	super Issue
+
+	redef var key is lazy do return "{repo.key}/pulls/{number}"
+
+	# Merge time in ISODate format (if any).
+	fun merged_at: nullable ISODate do
+		var res = json["merged_at"]
+		if res == null then return null
+		return new ISODate.from_string(res.to_s)
+	end
+
+	# Merge commit SHA.
+	fun merge_commit_sha: String do return json["merge_commit_sha"].to_s
+
+	# Count of comments made on the pull request diff.
+	fun review_comments: Int do return json["review_comments"].to_s.to_i
+
+	# Pull request head (can be a commit SHA or a branch name).
+	fun head: PullRef do
+		var json = json["head"].as(JsonObject)
+		return new PullRef(api, json)
+	end
+
+	# Pull request base (can be a commit SHA or a branch name).
+	fun base: PullRef do
+		var json = json["base"].as(JsonObject)
+		return new PullRef(api, json)
+	end
+
+	# Is this pull request merged?
+	fun merged: Bool do return json["merged"].as(Bool)
+
+	# Is this pull request mergeable?
+	fun mergeable: Bool do return json["mergeable"].as(Bool)
+
+	# Mergeable state of this pull request.
+	#
+	# See <https://developer.github.com/v3/pulls/#list-pull-requests>.
+	fun mergeable_state: Int do return json["mergeable_state"].to_s.to_i
+
+	# User that merged this pull request (if any).
+	fun merged_by: nullable User do
+		var merger = json["merged_by"]
+		if not merger isa JsonObject then return null
+		return new User.from_json(api, merger)
+	end
+
+	# Count of commits in this pull request.
+	fun commits: Int do return json["commits"].to_s.to_i
+
+	# Added line count.
+	fun additions: Int do return json["additions"].to_s.to_i
+
+	# Deleted line count.
+	fun deletions: Int do return json["deletions"].to_s.to_i
+
+	# Changed files count.
+	fun changed_files: Int do return json["changed_files"].to_s.to_i
+end
+
+# A pull request reference (used for head and base).
+class PullRef
+
+	# Api instance that maintains self.
+	var api: GithubAPI
+
+	# JSON representation.
+	var json: JsonObject
+
+	# Label pointed by `self`.
+	fun labl: String do return json["label"].to_s
+
+	# Reference pointed by `self`.
+	fun ref: String do return json["ref"].to_s
+
+	# Commit SHA pointed by `self`.
+	fun sha: String do return json["sha"].to_s
+
+	# User pointed by `self`.
+	fun user: User do
+		return new User.from_json(api, json["user"].as(JsonObject))
+	end
+
+	# Repo pointed by `self`.
+	fun repo: Repo do
+		return new Repo.from_json(api, json["repo"].as(JsonObject))
+	end
 end
 
 # A Github label.
