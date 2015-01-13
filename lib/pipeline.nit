@@ -159,6 +159,45 @@ redef interface Iterator[E]
 	end
 end
 
+# Wraps an iterator to skip nulls.
+#
+# ~~~nit
+# var i: Iterator[Int]
+#
+# i = new NullSkipper[Int]([null, 1, null, 2, null: nullable Int].iterator)
+# assert i.to_a == [1, 2]
+#
+# i = new NullSkipper[Int]([1, null, 2, 3: nullable Int].iterator)
+# assert i.to_a == [1, 2, 3]
+# ~~~
+class NullSkipper[E: Object]
+	super Iterator[E]
+
+	# The inner iterator.
+	var inner: Iterator[nullable E]
+
+	redef fun finish do inner.finish
+
+	redef fun is_ok do
+		skip_nulls
+		return inner.is_ok
+	end
+
+	redef fun item do
+		skip_nulls
+		return inner.item.as(E)
+	end
+
+	redef fun next do
+		inner.next
+		skip_nulls
+	end
+
+	private fun skip_nulls do
+		while inner.is_ok and inner.item == null do inner.next
+	end
+end
+
 # Interface that reify a function.
 # Concrete subclasses must implements the `apply` method.
 #

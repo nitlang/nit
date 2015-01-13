@@ -493,5 +493,12 @@ class StringIStream
 		source = ""
 	end
 
+	redef fun read_all do
+		var c = cursor
+		cursor = source.length
+		if c == 0 then return source
+		return source.substring_from(c)
+	end
+
 	redef fun eof do return cursor >= source.length
 end
