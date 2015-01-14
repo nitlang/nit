@@ -361,9 +361,13 @@ class MClass
 	#
 	# It is the name of the class prefixed by the full_name of the `intro_mmodule`
 	# Example: `"owner::module::MyClass"`
-	redef var full_name is lazy do return "{self.intro_mmodule.full_name}::{name}"
+	redef var full_name is lazy do
+		return "{self.intro_mmodule.namespace_for(visibility)}::{name}"
+	end
 
-	redef var c_name is lazy do return "{intro_mmodule.c_name}__{name.to_cmangle}"
+	redef var c_name is lazy do
+		return "{intro_mmodule.c_namespace_for(visibility)}__{name.to_cmangle}"
+	end
 
 	# The number of generic formal parameters
 	# 0 if the class is not generic
@@ -539,17 +543,29 @@ class MClassDef
 	# Example: "my_module#intro_module::MyClass"
 	redef var full_name is lazy do
 		if is_intro then
+			# public gives 'p#A'
+			# private gives 'p::m#A'
+			return "{mmodule.namespace_for(mclass.visibility)}#{mclass.name}"
+		else if mclass.intro_mmodule.mproject != mmodule.mproject then
+			# public gives 'q::n#p::A'
+			# private gives 'q::n#p::m::A'
+			return "{mmodule.full_name}#{mclass.full_name}"
+		else if mclass.visibility > private_visibility then
+			# public gives 'p::n#A'
 			return "{mmodule.full_name}#{mclass.name}"
 		else
-			return "{mmodule.full_name}#{mclass.full_name}"
+			# private gives 'p::n#::m::A' (redundant p is omitted)
+			return "{mmodule.full_name}#::{mclass.intro_mmodule.name}::{mclass.name}"
 		end
 	end
 
 	redef var c_name is lazy do
 		if is_intro then
-			return mclass.c_name
+			return "{mmodule.c_namespace_for(mclass.visibility)}___{mclass.c_name}"
+		else if mclass.intro_mmodule.mproject == mmodule.mproject and mclass.visibility > private_visibility then
+			return "{mmodule.c_name}___{mclass.name.to_cmangle}"
 		else
-			return "{mmodule.c_name}__{mclass.c_name.to_cmangle}"
+			return "{mmodule.c_name}___{mclass.c_name}"
 		end
 	end
 
@@ -1738,11 +1754,12 @@ abstract class MProperty
 	# It is the short-`name` prefixed by the short-name of the class and the full-name of the module.
 	# Example: "my_project::my_module::MyClass::my_method"
 	redef var full_name is lazy do
-		return "{intro_mclassdef.mmodule.full_name}::{intro_mclassdef.mclass.name}::{name}"
+		return "{intro_mclassdef.mmodule.namespace_for(visibility)}::{intro_mclassdef.mclass.name}::{name}"
 	end
 
 	redef var c_name is lazy do
-		return "{intro_mclassdef.mmodule.c_name}__{intro_mclassdef.mclass.c_name}__{name.to_cmangle}"
+		# FIXME use `namespace_for`
+		return "{intro_mclassdef.mmodule.c_name}__{intro_mclassdef.mclass.name.to_cmangle}__{name.to_cmangle}"
 	end
 
 	# The visibility of the property
@@ -2018,42 +2035,66 @@ abstract class MPropDef
 	# Therefore the combination of identifiers is awful,
 	# the worst case being
 	#
-	# ~~~nitish
-	# "{mclassdef.mmodule.full_name}#{mclassdef.mclass.intro_mmodule.full_name}::{mclassdef.name}#{mproperty.intro_mclassdef.mmodule.full_name}::{mproperty.intro_mclassdef.name}::{name}"
-	# ~~~
+	#  * a property "p::m::A::x"
+	#  * redefined in a refinement of a class "q::n::B"
+	#  * in a module "r::o"
+	#  * so "r::o#q::n::B#p::m::A::x"
 	#
 	# Fortunately, the full-name is simplified when entities are repeated.
-	# The simplest form is "my_module#MyClass#my_property".
+	# For the previous case, the simplest form is "p#A#x".
 	redef var full_name is lazy do
 		var res = new FlatBuffer
-		res.append mclassdef.mmodule.full_name
+
+		# The first part is the mclassdef. Worst case is "r::o#q::n::B"
+		res.append mclassdef.full_name
+
 		res.append "#"
-		if not mclassdef.is_intro then
-			res.append mclassdef.mclass.intro_mmodule.full_name
-			res.append "::"
+
+		if mclassdef.mclass == mproperty.intro_mclassdef.mclass then
+			# intro are unambiguous in a class
+			res.append name
+		else
+			# Just try to simplify each part
+			if mclassdef.mmodule.mproject != mproperty.intro_mclassdef.mmodule.mproject then
+				# precise "p::m" only if "p" != "r"
+				res.append mproperty.intro_mclassdef.mmodule.full_name
+				res.append "::"
+			else if mproperty.visibility <= private_visibility then
+				# Same project ("p"=="q"), but private visibility,
+				# does the module part ("::m") need to be displayed
+				if mclassdef.mmodule.namespace_for(mclassdef.mclass.visibility) != mproperty.intro_mclassdef.mmodule.mproject then
+					res.append "::"
+					res.append mproperty.intro_mclassdef.mmodule.name
+					res.append "::"
+				end
+			end
+			if mclassdef.mclass != mproperty.intro_mclassdef.mclass then
+				# precise "B" only if not the same class than "A"
+				res.append mproperty.intro_mclassdef.name
+				res.append "::"
+			end
+			# Always use the property name "x"
+			res.append mproperty.name
 		end
-		res.append mclassdef.name
-		res.append "#"
-		if mproperty.intro_mclassdef.mmodule != mclassdef.mmodule then
-			res.append mproperty.intro_mclassdef.mmodule.full_name
-			res.append "::"
-		end
-		if mclassdef.mclass != mproperty.intro_mclassdef.mclass then
-			res.append mproperty.intro_mclassdef.mclass.name
-			res.append "::"
-		end
-		res.append name
 		return res.to_s
 	end
 
 	redef var c_name is lazy do
 		var res = new FlatBuffer
 		res.append mclassdef.c_name
-		res.append "__"
-		if is_intro then
+		res.append "___"
+		if mclassdef.mclass == mproperty.intro_mclassdef.mclass then
 			res.append name.to_cmangle
 		else
-			res.append mproperty.c_name.to_cmangle
+			if mclassdef.mmodule != mproperty.intro_mclassdef.mmodule then
+				res.append mproperty.intro_mclassdef.mmodule.c_name
+				res.append "__"
+			end
+			if mclassdef.mclass != mproperty.intro_mclassdef.mclass then
+				res.append mproperty.intro_mclassdef.name.to_cmangle
+				res.append "__"
+			end
+			res.append mproperty.name.to_cmangle
 		end
 		return res.to_s
 	end
