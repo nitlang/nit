@@ -2174,7 +2174,7 @@ redef class Map[K,V]
 		var i = iterator
 		var k = i.key
 		var e = i.item
-		s.append("{k}{couple_sep}{e or else "<null>"}")
+		s.append("{k or else "<null>"}{couple_sep}{e or else "<null>"}")
 
 		# Concat other items
 		i.next
@@ -2182,7 +2182,7 @@ redef class Map[K,V]
 			s.append(sep)
 			k = i.key
 			e = i.item
-			s.append("{k}{couple_sep}{e or else "<null>"}")
+			s.append("{k or else "<null>"}{couple_sep}{e or else "<null>"}")
 			i.next
 		end
 		return s.to_s

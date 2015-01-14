@@ -377,7 +377,7 @@ interface Set[E: Object]
 end
 
 # MapRead are abstract associative collections: `key` -> `item`.
-interface MapRead[K: Object, V]
+interface MapRead[K, V]
 	# Get the item at `key`
 	#
 	#     var x = new HashMap[String, Int]
@@ -492,7 +492,7 @@ end
 #     assert map.values.has(1)      ==  true
 #     assert map.values.has(3)      ==  false
 #
-interface Map[K: Object, V]
+interface Map[K, V]
 	super MapRead[K, V]
 
 	# Set the `value` at `key`.
@@ -552,7 +552,7 @@ interface Map[K: Object, V]
 end
 
 # Iterators for Map.
-interface MapIterator[K: Object, V]
+interface MapIterator[K, V]
 	# The current item.
 	# Require `is_ok`.
 	fun item: V is abstract
@@ -583,7 +583,7 @@ interface MapIterator[K: Object, V]
 end
 
 # Iterator on a 'keys' point of view of a map
-class MapKeysIterator[K: Object, V]
+class MapKeysIterator[K, V]
 	super Iterator[K]
 	# The original iterator
 	var original_iterator: MapIterator[K, V]
@@ -594,7 +594,7 @@ class MapKeysIterator[K: Object, V]
 end
 
 # Iterator on a 'values' point of view of a map
-class MapValuesIterator[K: Object, V]
+class MapValuesIterator[K, V]
 	super Iterator[V]
 	# The original iterator
 	var original_iterator: MapIterator[K, V]
@@ -941,7 +941,7 @@ end
 
 # Associative arrays that internally uses couples to represent each (key, value) pairs.
 # This is an helper class that some specific implementation of Map may implements.
-interface CoupleMap[K: Object, V]
+interface CoupleMap[K, V]
 	super Map[K, V]
 
 	# Return the couple of the corresponding key
@@ -968,7 +968,7 @@ end
 # Iterator on CoupleMap
 #
 # Actually it is a wrapper around an iterator of the internal array of the map.
-private class CoupleMapIterator[K: Object, V]
+private class CoupleMapIterator[K, V]
 	super MapIterator[K, V]
 	redef fun item do return _iter.item.second
 	
