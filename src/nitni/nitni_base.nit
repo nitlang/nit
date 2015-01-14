@@ -22,7 +22,6 @@ module nitni_base
 
 import parser
 import modelbuilder # builder only for externcalls
-private import compiler::abstract_compiler
 
 redef class MMethod
 	# Short name of this method in C (without the class name)
@@ -50,12 +49,6 @@ redef class MMethod
 		if nit_name.chars.last == '=' then return "{nit_name.substring(0, nit_name.length-1)}__assign"
 		return nit_name
 	end
-end
-
-redef class MModule
-	# Mangled name of this module in C
-	fun cname: String do return c_name # FIXME this is a hack to keep the internal FFI
-	# API independent of the compilers while still using the `MModule::c_name` service.
 end
 
 redef class MMethodDef

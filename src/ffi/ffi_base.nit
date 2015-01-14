@@ -152,10 +152,10 @@ end
 redef class CCompilationUnit
 	fun write_as_impl(mmodule: MModule, compdir: String)
 	do
-		var base_name = "{mmodule.name}._ffi"
+		var base_name = "{mmodule.c_name}._ffi"
 
 		var h_file = "{base_name}.h"
-		var guard = "{mmodule.cname.to_s.to_upper}_NIT_H"
+		var guard = "{mmodule.c_name.to_upper}_NIT_H"
 		write_header_to_file(mmodule, "{compdir}/{h_file}", new Array[String], guard)
 
 		var c_file = "{base_name}.c"
