@@ -40,11 +40,11 @@ import github_curl
 #
 # ~~~
 # var repo = api.load_repo("privat/nit")
-# assert repo isa Repo
+# assert repo != null
 # assert repo.name == "nit"
 #
 # var user = api.load_user("Morriar")
-# assert user isa User
+# assert user != null
 # assert user.login == "Morriar"
 # ~~~
 class GithubAPI
@@ -149,9 +149,7 @@ class GithubAPI
 	#     assert user.login == "Morriar"
 	fun load_user(login: String): nullable User do
 		var user = new User(self, login)
-		user.load_from_github
-		if was_error then return null
-		return user
+		return user.load_from_github
 	end
 
 	# Get the Github repo with `full_name`.
@@ -165,9 +163,7 @@ class GithubAPI
 	#     assert repo.default_branch.name == "master"
 	fun load_repo(full_name: String): nullable Repo do
 		var repo = new Repo(self, full_name)
-		repo.load_from_github
-		if was_error then return null
-		return repo
+		return repo.load_from_github
 	end
 
 	# Get the Github branch with `name`.
@@ -176,15 +172,13 @@ class GithubAPI
 	#
 	#     var api = new GithubAPI(get_github_oauth)
 	#     var repo = api.load_repo("privat/nit")
-	#     assert repo isa Repo
+	#     assert repo != null
 	#     var branch = api.load_branch(repo, "master")
 	#     assert branch.name == "master"
 	#     assert branch.commit isa Commit
 	fun load_branch(repo: Repo, name: String): nullable Branch do
 		var branch = new Branch(self, repo, name)
-		branch.load_from_github
-		if was_error then return null
-		return branch
+		return branch.load_from_github
 	end
 
 	# Get the Github commit with `sha`.
@@ -193,14 +187,12 @@ class GithubAPI
 	#
 	#     var api = new GithubAPI(get_github_oauth)
 	#     var repo = api.load_repo("privat/nit")
-	#     assert repo isa Repo
+	#     assert repo != null
 	#     var commit = api.load_commit(repo, "64ce1f")
 	#     assert commit isa Commit
 	fun load_commit(repo: Repo, sha: String): nullable Commit do
 		var commit = new Commit(self, repo, sha)
-		commit.load_from_github
-		if was_error then return null
-		return commit
+		return commit.load_from_github
 	end
 
 	# Get the Github issue #`number`.
@@ -214,9 +206,7 @@ class GithubAPI
 	#     assert issue.title == "Doc"
 	fun load_issue(repo: Repo, number: Int): nullable Issue do
 		var issue = new Issue(self, repo, number)
-		issue.load_from_github
-		if was_error then return null
-		return issue
+		return issue.load_from_github
 	end
 
 	# Get the Github pull request #`number`.
@@ -231,9 +221,7 @@ class GithubAPI
 	#     assert pull.user.login == "Morriar"
 	fun load_pull(repo: Repo, number: Int): nullable PullRequest do
 		var pull = new PullRequest(self, repo, number)
-		pull.load_from_github
-		if was_error then return null
-		return pull
+		return pull.load_from_github
 	end
 
 	# Get the Github label with `name`.
@@ -242,14 +230,12 @@ class GithubAPI
 	#
 	#     var api = new GithubAPI(get_github_oauth)
 	#     var repo = api.load_repo("privat/nit")
-	#     assert repo isa Repo
+	#     assert repo != null
 	#     var labl = api.load_label(repo, "ok_will_merge")
 	#     assert labl != null
 	fun load_label(repo: Repo, name: String): nullable Label do
 		var labl = new Label(self, repo, name)
-		labl.load_from_github
-		if was_error then return null
-		return labl
+		return labl.load_from_github
 	end
 
 	# Get the Github milestone with `id`.
@@ -258,14 +244,60 @@ class GithubAPI
 	#
 	#     var api = new GithubAPI(get_github_oauth)
 	#     var repo = api.load_repo("privat/nit")
-	#     assert repo isa Repo
+	#     assert repo != null
 	#     var stone = api.load_milestone(repo, 4)
 	#     assert stone.title == "v1.0prealpha"
 	fun load_milestone(repo: Repo, id: Int): nullable Milestone do
 		var milestone = new Milestone(self, repo, id)
-		milestone.load_from_github
-		if was_error then return null
-		return milestone
+		return milestone.load_from_github
+	end
+
+	# Get the Github commit comment with `id`.
+	#
+	# Returns `null` if the comment cannot be found.
+	#
+	#     var api = new GithubAPI(get_github_oauth)
+	#     var repo = api.load_repo("privat/nit")
+	#     assert repo != null
+	#     var comment = api.load_commit_comment(repo, 8982707)
+	#     assert comment.user.login == "Morriar"
+	#     assert comment.body == "For testing purposes..."
+	#     assert comment.commit.sha == "7eacb86d1e24b7e72bc9ac869bf7182c0300ceca"
+	fun load_commit_comment(repo: Repo, id: Int): nullable CommitComment do
+		var comment = new CommitComment(self, repo, id)
+		return comment.load_from_github
+	end
+
+	# Get the Github issue comment with `id`.
+	#
+	# Returns `null` if the comment cannot be found.
+	#
+	#     var api = new GithubAPI(get_github_oauth)
+	#     var repo = api.load_repo("privat/nit")
+	#     assert repo != null
+	#     var comment = api.load_issue_comment(repo, 6020149)
+	#     assert comment.user.login == "privat"
+	#     assert comment.created_at.to_s == "2012-05-30T20:16:54Z"
+	#     assert comment.issue.number == 10
+	fun load_issue_comment(repo: Repo, id: Int): nullable IssueComment do
+		var comment = new IssueComment(self, repo, id)
+		return comment.load_from_github
+	end
+
+	# Get the Github diff comment with `id`.
+	#
+	# Returns `null` if the comment cannot be found.
+	#
+	#     var api = new GithubAPI(get_github_oauth)
+	#     var repo = api.load_repo("privat/nit")
+	#     assert repo != null
+	#     var comment = api.load_review_comment(repo, 21010363)
+	#     assert comment.path == "src/modelize/modelize_property.nit"
+	#     assert comment.original_position == 26
+	#     assert comment.pull.number == 945
+	fun load_review_comment(repo: Repo, id: Int): nullable ReviewComment do
+		var comment = new ReviewComment(self, repo, id)
+		return comment.load_from_github
 	end
 end
 
@@ -288,8 +320,10 @@ abstract class GithubEntity
 	var json: JsonObject is noinit, protected writable
 
 	# Load `json` from Github API.
-	private fun load_from_github do
+	private fun load_from_github: nullable SELF do
 		json = api.load_from_github(key)
+		if api.was_error then return null
+		return self
 	end
 
 	redef fun to_s do return json.to_json
@@ -631,6 +665,27 @@ class Issue
 		return new Milestone.from_json(api, repo, milestone)
 	end
 
+	# List of comments made on this issue.
+	fun comments: Array[IssueComment] do
+		var res = new Array[IssueComment]
+		var count = comments_count
+		var page = 1
+		var array = api.get("{key}/comments?page={page}")
+		if not array isa JsonArray then
+			return res
+		end
+		while not array.is_empty and res.length < count do
+			for obj in array do
+				if not obj isa JsonObject then continue
+				var id = obj["id"].as(Int)
+				res.add(api.load_issue_comment(repo, id).as(not null))
+			end
+			page += 1
+			array = api.get("{key}/comments?page={page}").as(JsonArray)
+		end
+		return res
+	end
+
 	# Number of comments on this issue.
 	fun comments_count: Int do return json["comments"].to_s.to_i
 
@@ -847,4 +902,131 @@ class Milestone
 		if res == null then return null
 		return new ISODate.from_string(res.to_s)
 	end
+end
+
+# A Github comment
+#
+# There is two kinds of comments:
+#
+# * `CommitComment` are made on a commit page.
+# * `IssueComment` are made on an issue or pull request page.
+# * `ReviewComment` are made on the diff associated to a pull request.
+abstract class Comment
+	super RepoEntity
+
+	# Identifier of this comment.
+	var id: Int
+
+	redef init from_json(api, repo, json) do
+		self.id = json["id"].as(Int)
+		super
+	end
+
+	# User that made this comment.
+	fun user: User do
+		return new User.from_json(api, json["user"].as(JsonObject))
+	end
+
+	# Creation time in ISODate format.
+	fun created_at: ISODate do
+		return new ISODate.from_string(json["created_at"].to_s)
+	end
+
+	# Last update time in ISODate format (if any).
+	fun updated_at: nullable ISODate do
+		if not json.has_key("updated_at") then return null
+		return new ISODate.from_string(json["updated_at"].to_s)
+	end
+
+	# Comment body text.
+	fun body: String do return json["body"].to_s
+end
+
+# A comment made on a commit.
+class CommitComment
+	super Comment
+
+	redef var key is lazy do return "{repo.key}/comments/{id}"
+
+	# Commented commit.
+	fun commit: Commit do
+		return api.load_commit(repo, json["commit_id"].to_s).as(not null)
+	end
+
+	# Position of the comment on the line.
+	fun position: nullable String do
+		if not json.has_key("position") then return null
+		var res = json["position"]
+		if res == null then return null
+		return res.to_s
+	end
+
+	# Line of the comment.
+	fun line: nullable String do
+		if not json.has_key("line") then return null
+		var res = json["line"]
+		if res == null then return null
+		return res.to_s
+	end
+
+	# Path of the commented file.
+	fun path: String do return json["path"].to_s
+end
+
+# Comments made on Github issue and pull request pages.
+#
+# Should be accessed from `GithubAPI::load_issue_comment`.
+#
+# See <https://developer.github.com/v3/issues/comments/>.
+class IssueComment
+	super Comment
+
+	redef var key is lazy do return "{repo.key}/issues/comments/{id}"
+
+	# Issue that contains `self`.
+	fun issue: Issue do
+		var number = issue_url.split("/").last.to_i
+		return api.load_issue(repo, number).as(not null)
+	end
+
+	# Link to the issue document on API.
+	fun issue_url: String do return json["issue_url"].to_s
+end
+
+# Comments made on Github pull request diffs.
+#
+# Should be accessed from `GithubAPI::load_diff_comment`.
+#
+# See <https://developer.github.com/v3/pulls/comments/>.
+class ReviewComment
+	super Comment
+
+	redef var key is lazy do return "{repo.key}/pulls/comments/{id}"
+
+	# Pull request that contains `self`.
+	fun pull: PullRequest do
+		var number = pull_request_url.split("/").last.to_i
+		return api.load_pull(repo, number).as(not null)
+	end
+
+	# Link to the pull request on API.
+	fun pull_request_url: String do return json["pull_request_url"].to_s
+
+	# Diff hunk.
+	fun diff_hunk: String do return json["diff_hunk"].to_s
+
+	# Path of commented file.
+	fun path: String do return json["path"].to_s
+
+	# Position of the comment on the file.
+	fun position: Int do return json["position"].to_s.to_i
+
+	# Original position in the diff.
+	fun original_position: Int do return json["original_position"].to_s.to_i
+
+	# Commit referenced by this comment.
+	fun commit_id: String do return json["commit_id"].to_s
+
+	# Original commit id.
+	fun original_commit_id: String do return json["original_commit_id"].to_s
 end
