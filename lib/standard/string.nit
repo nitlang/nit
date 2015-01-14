@@ -1092,15 +1092,19 @@ class FlatString
 			from = 0
 		end
 
-		var realFrom = index_from + from
+		var new_from = index_from + from
 
-		if (realFrom + count) > index_to then return new FlatString.with_infos(items, index_to - realFrom + 1, realFrom, index_to)
+		if (new_from + count) > index_to then
+			var new_len = index_to - new_from + 1
+			if new_len <= 0 then return empty
+			return new FlatString.with_infos(items, new_len, new_from, index_to)
+		end
 
-		if count == 0 then return empty
+		if count <= 0 then return empty
 
-		var to = realFrom + count - 1
+		var to = new_from + count - 1
 
-		return new FlatString.with_infos(items, to - realFrom + 1, realFrom, to)
+		return new FlatString.with_infos(items, to - new_from + 1, new_from, to)
 	end
 
 	redef fun empty do return "".as(FlatString)

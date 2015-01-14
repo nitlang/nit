@@ -15,22 +15,23 @@
 module primitive_types
 
 intrude import standard::file
+intrude import standard::string
 
 # Wrapper for `NativeFile`
 class PrimitiveNativeFile
 
-	var file: FStream
+	var file: IOS
 
 	init native_stdin do
-		file = new IFStream.from_fd(0)
+		file = sys.stdin
 	end
 
 	init native_stdout do
-		file = new OFStream.from_fd(1)
+		file = sys.stdout
 	end
 
 	init native_stderr do
-		file = new OFStream.from_fd(2)
+		file = sys.stderr
 	end
 
 	init io_open_read(path: String) do
@@ -41,19 +42,42 @@ class PrimitiveNativeFile
 		file = new OFStream.open(path.to_s)
 	end
 
-	fun address_is_null: Bool do return file._file.address_is_null
+	fun address_is_null: Bool do
+		if file isa FStream then return file.as(FStream)._file.address_is_null
+		return false
+	end
 
-	fun io_read(buf: NativeString, len: Int): Int do return file._file.io_read(buf, len)
+	fun io_read(buf: NativeString, len: Int): Int do
+		if file isa FStream then return file.as(FStream)._file.io_read(buf, len)
+		var str = file.as(IStream).read(len)
+		str.to_cstring.copy_to(buf, str.length, 0, 0)
+		return str.length
+	end
 
-	fun io_write(buf: NativeString, len: Int): Int do return file._file.io_write(buf, len)
+	fun io_write(buf: NativeString, len: Int): Int do
+		if file isa FStream then return file.as(FStream)._file.io_write(buf, len)
+		file.as(OStream).write(buf.to_s_with_length(len))
+		return len
+	end
 
-	fun io_close: Int do return file._file.io_close
+	fun io_close: Int do
+		if file isa FStream then return file.as(FStream)._file.io_close
+		file.close
+		return 0
+	end
 
-	fun fileno: Int do return file._file.fileno
+	fun fileno: Int do
+		if file isa FStream then return file.as(FStream)._file.fileno
+		return 0
+	end
 
-	fun flush: Int do return file._file.flush
+	fun flush: Int do
+		if file isa FStream then return file.as(FStream)._file.flush
+		return 0
+	end
 
 	fun set_buffering_type(size, mode: Int): Int do
-		return file._file.set_buffering_type(size, mode)
+		if file isa FStream then return file.as(FStream)._file.set_buffering_type(size, mode)
+		return 0
 	end
 end
