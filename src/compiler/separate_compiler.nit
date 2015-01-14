@@ -1860,6 +1860,31 @@ class SeparateRuntimeFunction
 
 	redef fun to_s do return self.mmethoddef.to_s
 
+	# The C return type (something or `void`)
+	var c_ret: String is lazy do
+		var ret = called_signature.return_mtype
+		if ret != null then
+			return ret.ctype
+		else
+			return "void"
+		end
+	end
+
+	# The C signature (only the parmeter part)
+	var c_sig: String is lazy do
+		var sig = new FlatBuffer
+		sig.append("({called_recv.ctype} self")
+		for i in [0..called_signature.arity[ do
+			var mtype = called_signature.mparameters[i].mtype
+			if i == called_signature.vararg_rank then
+				mtype = mmethoddef.mclassdef.mmodule.get_primitive_class("Array").get_mtype([mtype])
+			end
+			sig.append(", {mtype.ctype} p{i}")
+		end
+		sig.append(")")
+		return sig.to_s
+	end
+
 	redef fun compile_to_c(compiler)
 	do
 		var mmethoddef = self.mmethoddef
@@ -1872,17 +1897,14 @@ class SeparateRuntimeFunction
 		v.frame = frame
 
 		var msignature = called_signature
+		var ret = called_signature.return_mtype
 
 		var sig = new FlatBuffer
 		var comment = new FlatBuffer
-		var ret = msignature.return_mtype
-		if ret != null then
-			sig.append("{ret.ctype} ")
-		else
-			sig.append("void ")
-		end
+		sig.append(c_ret)
+		sig.append(" ")
 		sig.append(self.c_name)
-		sig.append("({selfvar.mtype.ctype} {selfvar}")
+		sig.append(c_sig)
 		comment.append("({selfvar}: {selfvar.mtype}")
 		arguments.add(selfvar)
 		for i in [0..msignature.arity[ do
@@ -1891,11 +1913,9 @@ class SeparateRuntimeFunction
 				mtype = v.get_class("Array").get_mtype([mtype])
 			end
 			comment.append(", {mtype}")
-			sig.append(", {mtype.ctype} p{i}")
 			var argvar = new RuntimeVariable("p{i}", mtype, mtype)
 			arguments.add(argvar)
 		end
-		sig.append(")")
 		comment.append(")")
 		if ret != null then
 			comment.append(": {ret}")
