@@ -22,7 +22,7 @@ module opengles2_hello_triangle
 
 import glesv2
 import egl
-import mnit_linux # for sdl
+import mnit_linux::sdl
 import x11
 
 if "NIT_TESTING".environ == "true" then exit(0)
