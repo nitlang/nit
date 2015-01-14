@@ -1180,8 +1180,10 @@ class SeparateCompilerVisitor
 
 		var res0 = before_send(mmethod, arguments)
 
+		var runtime_function = mmethod.intro.virtual_runtime_function
+		var msignature = runtime_function.called_signature
+
 		var res: nullable RuntimeVariable
-		var msignature = mmethod.intro.msignature.resolve_for(mmethod.intro.mclassdef.bound_mtype, mmethod.intro.mclassdef.bound_mtype, mmethod.intro.mclassdef.mmodule, true)
 		var ret = msignature.return_mtype
 		if ret == null then
 			res = null
@@ -1189,10 +1191,8 @@ class SeparateCompilerVisitor
 			res = self.new_var(ret)
 		end
 
-		var s = new FlatBuffer
 		var ss = new FlatBuffer
 
-		s.append("val*")
 		ss.append("{recv}")
 		for i in [0..msignature.arity[ do
 			var a = arguments[i+1]
@@ -1200,16 +1200,12 @@ class SeparateCompilerVisitor
 			if i == msignature.vararg_rank then
 				t = arguments[i+1].mcasttype
 			end
-			s.append(", {t.ctype}")
 			a = self.autobox(a, t)
 			ss.append(", {a}")
 		end
 
-
-		var r
-		if ret == null then r = "void" else r = ret.ctype
 		self.require_declaration(const_color)
-		var call = "(({r} (*)({s}))({arguments.first}->class->vft[{const_color}]))({ss}) /* {mmethod} on {arguments.first.inspect}*/"
+		var call = "(({runtime_function.c_ret} (*){runtime_function.c_sig})({arguments.first}->class->vft[{const_color}]))({ss}) /* {mmethod} on {arguments.first.inspect}*/"
 
 		if res != null then
 			self.add("{res} = {call};")
