@@ -12,35 +12,37 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# comment 1
-class A
-type FOO: Discrete
-	private var foo: FOO # comment
-# comment 2
-	var bar: Int = 10
-end
+# prims
 
-class B
-	super A
+var a = true
+var b = false
 
-	redef type FOO: Int
-# comment 3
-	redef fun foo do return bar # comment
-	redef fun bar
-	do
-		return 10 # comment 4
-	end
-	fun baz do
-		return
-	end # comment 5
-	protected fun baz2 do end
-	fun other: String do return "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+var c = 10
+var d = -10
+var e = 1.12
 
-	fun foo1(arr: Array[String], len: Int, ind: Int): String
-	do
-		return "Hello World!"
-	end
-end
+var f = -1.12
+var n = 'a'
+var o = null
+var p = 0x12345678
 
-# end
+# strings
+
+var g = "test"
+var h1 = "Hello {g}"
+var h2 = "Hello \"{g}\" Hello"
+var h3 = "Hello {g}"
+var m = """
+bla
+	bla
+
+bla"""
+
+# arrays
+
+var j = [1, 2, 3]
+var k = [1..2[
+var l = [1..2]
+
+
 

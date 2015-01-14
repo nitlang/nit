@@ -26,12 +26,10 @@ class Foo
 
 	fun baz: Int do
 		var nb = 0
-
 		while nb < 10 do
 			print nb
 			nb += 1
 		end # 1
-
 		return nb
 	end
 
@@ -47,6 +45,7 @@ end
 
 class Test[E]
 	var heap: ArrayHeap[E]
+
 	init to(comparator: Comparator[E]) do heap = new ArrayHeap[E](comparator)
 
 	init from(comparator: Comparator[E], items: Collection[E]) do
@@ -109,3 +108,4 @@ var body = """
 	</div>
 </body>
 </html>"""
+

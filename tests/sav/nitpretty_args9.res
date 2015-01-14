@@ -31,7 +31,5 @@ class A
 	fun foo5 do end # comment
 
 	fun foo6(aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa,
-		aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa: Int) do
-		print 1
-	end
+		aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa: Int) do print 1
 end # comment

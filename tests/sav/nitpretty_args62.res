@@ -15,8 +15,7 @@
 class Foo
 	fun bar: Bool do return true
 
-	fun foo(other: Foo): Foo
-	do
+	fun foo(other: Foo): Foo do
 		if other.bar then
 			return other
 		else
@@ -26,17 +25,14 @@ class Foo
 
 	fun baz: Int do
 		var nb = 0
-
 		while nb < 10 do
 			print nb
 			nb += 1
 		end # 1
-
 		return nb
 	end
 
-	fun gaz: Int
-	do
+	fun gaz: Int do
 		if bar then # 3
 			return 1
 		else
@@ -47,6 +43,7 @@ end
 
 class Test[E]
 	var heap: ArrayHeap[E]
+
 	init to(comparator: Comparator[E]) do heap = new ArrayHeap[E](comparator)
 
 	init from(comparator: Comparator[E], items: Collection[E]) do
@@ -109,3 +106,4 @@ var body = """
 	</div>
 </body>
 </html>"""
+

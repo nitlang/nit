@@ -12,35 +12,40 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# comment 1
+module test_annot1 is platform("android")
+
 class A
-type FOO: Discrete
-	private var foo: FOO # comment
-# comment 2
-	var bar: Int = 10
+	fun goo is intern
+
+	# test
+	fun foo is a, b
+	fun bar is a, b do print "1"
+	fun baz is
+		a
+		bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+	do print "2"
 end
 
 class B
-	super A
+	fun foo is a, b
 
-	redef type FOO: Int
-# comment 3
-	redef fun foo do return bar # comment
-	redef fun bar
-	do
-		return 10 # comment 4
-	end
-	fun baz do
-		return
-	end # comment 5
-	protected fun baz2 do end
-	fun other: String do return "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
 
-	fun foo1(arr: Array[String], len: Int, ind: Int): String
-	do
-		return "Hello World!"
+	fun bar is a, b
+ do print "1"
+
+	fun baz is a, b
+ do
+		bar
+		print "2"
 	end
+
+	fun gaz is
+		a
+		bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+	do
+		bar
+		print "2"
+	end
+
 end
-
-# end
-

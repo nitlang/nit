@@ -34,9 +34,8 @@ fun errno: Int is extern `{
 	return errno;
 `}
 
-fun errnoooooooooooooooooooooooooooooooooooooooooooooooooooooooooo: Int is extern `{
-	 return errno;
-`}
+fun errnoooooooooooooooooooooooooooooooooooooooooooooooooooooooooo: Int is
+	extern `{ return errno; `}
 
 private class A
 	var my_attr = 1234
@@ -69,6 +68,7 @@ end
 extern class TimeT `{time_t`}
 	new `{ return time(NULL); `}
 	new from_i(i: Int) `{ return i; `}
+
 	fun update `{ time(&recv); `}
 
 	fun ctime: String import NativeString.to_s_with_copy `{
@@ -78,10 +78,11 @@ extern class TimeT `{time_t`}
 	# Difference in secondes from start (self if the end time)
 	fun difftime(start: TimeT): Float `{ return difftime(recv, start); `}
 
-	private fun intern_poll(in_fds: Array[Int], out_fds: Array[Int]): nullable Int is import
-		Array[Int].length, Array[Int].[], Int.as(nullable Int) `{`}
+	private fun intern_poll(in_fds: Array[Int], out_fds: Array[Int]): nullable Int is
+		extern import Array[Int].length, Array[Int].[], Int.as(nullable Int) `{`}
 end
 
 fun address_is_null: Bool is extern "address_is_null"
 
 fun free `{ free(recv); `}
+

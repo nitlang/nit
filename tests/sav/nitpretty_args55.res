@@ -12,35 +12,87 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# comment 1
-class A
-type FOO: Discrete
-	private var foo: FOO # comment
-# comment 2
-	var bar: Int = 10
+
+# toplevel comment
+
+
+
+
+
+
+# block
+# block
+# block
+
+
+
+
+
+# Adoc1
+class A # ending comments
+
+	super Object
+	# super Int
+
+
+	super String
+	# super Truc
+
+
+
+	# inclass comments
+	# comm
+	#    ented
+	#      blocks
+
+
+
+	# Adoc2
+	fun foo do
+
+		# comment
+
+
+
+		var truc
+
+		# comment
+		# comment
+
+
+
+		# comment
+
+
+		var chose
+
+		# comment
+	end
+
+	# comm
+	#    ented
+	#      blocks
+
+
+	fun bar do end
+
+
+	fun baz do end
+	# comment before end
+
+end # ending comments
+
+# comm
+#    ented
+#      blocks
+
+abstract class B # comment
 end
 
-class B
-	super A
+abstract class C end
 
-	redef type FOO: Int
-# comment 3
-	redef fun foo do return bar # comment
-	redef fun bar
-	do
-		return 10 # comment 4
-	end
-	fun baz do
-		return
-	end # comment 5
-	protected fun baz2 do end
-	fun other: String do return "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+abstract class B # comment 2
 
-	fun foo1(arr: Array[String], len: Int, ind: Int): String
-	do
-		return "Hello World!"
-	end
 end
 
-# end
-
+abstract class C end

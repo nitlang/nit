@@ -79,7 +79,7 @@ class PrettyPrinterVisitor
 		current_token = nmodule.location.file.first_token
 		visit nmodule
 		catch_up nmodule.location.file.last_token
-		tpl.add "\n"
+		if skip_empty then tpl.add "\n"
 		return tpl.as(not null)
 	end
 
@@ -172,7 +172,7 @@ class PrettyPrinterVisitor
 		else
 			abort
 		end
-		assert current_token.location <= token.location
+		if current_token.location > token.location then return
 		while current_token != token do visit current_token
 	end
 
@@ -183,7 +183,7 @@ class PrettyPrinterVisitor
 			visit current_token
 		end
 
-		while current_token isa TEol do skip
+		while current_token isa TEol do visit(current_token)
 	end
 
 	# The template under construction.
@@ -223,6 +223,14 @@ class PrettyPrinterVisitor
 		if current_length == 0 and last_line_is_blank then return
 		previous_length = current_length
 		current_length = 0
+		if skip_empty then wait_addn += 1
+	end
+
+	# Perform `addn` even if not `skip_empty`.
+	fun forcen do
+		if current_length == 0 and last_line_is_blank then return
+		previous_length = current_length
+		current_length = 0
 		wait_addn += 1
 	end
 
@@ -243,6 +251,15 @@ class PrettyPrinterVisitor
 			consume "."
 		end
 	end
+
+	# Do we break string literals that are too long?
+	var break_strings = false is public writable
+
+	# Do we force `do` to be on the same line as the method signature?
+	var inline_do = false is public writable
+
+	# Do we force the deletion of empty lines?
+	var skip_empty = false is public writable
 end
 
 # Base framework redefs
@@ -255,9 +272,10 @@ redef class ANodes[E]
 			if e != first then
 				if not e_can_inline then
 					v.add ","
-					v.addn
+					v.forcen
+					v.indent += 1
 					v.addt
-					v.addt
+					v.indent -= 1
 				else
 					v.add ", "
 				end
@@ -308,6 +326,17 @@ redef class Token
 	redef fun was_inline do return true
 end
 
+redef class TEol
+	redef fun accept_pretty_printer(v) do
+		if v.skip_empty then
+			super
+		else
+			v.add text
+			v.current_token = next_token
+		end
+	end
+end
+
 redef class Prod
 	redef fun accept_pretty_printer(v) do v.visit first_token
 
@@ -344,7 +373,7 @@ redef class Prod
 	end
 
 	redef fun was_inline do
-		return first_token.location.line_start == last_token.location.line_end
+		return start_token.location.line_start == last_token.location.line_end
 	end
 end
 
@@ -355,13 +384,13 @@ redef class TComment
 		if is_adoc then
 			v.addt
 			super
-			v.addn
+			v.forcen
 			return
 		end
 
 		if is_licence then
 			super
-			v.addn
+			v.forcen
 			if is_last_in_group then v.addn
 			return
 		end
@@ -370,7 +399,7 @@ redef class TComment
 			v.addn
 			v.addt
 			super
-			v.addn
+			v.forcen
 			v.addn
 			return
 		end
@@ -379,13 +408,14 @@ redef class TComment
 			if next_token isa TComment and is_first_in_group then v.addn
 			v.addt
 			super
-			v.addn
+			v.forcen
 			var prev_token = self.prev_token
 			if prev_token isa TComment and prev_token.is_inline and is_last_in_group then v.addn
 			return
 		end
 
 		super
+		if not v.skip_empty then v.forcen
 	end
 
 	# Is `self` part of an `ADoc`?
@@ -434,7 +464,6 @@ redef class AAnnotations
 	redef fun accept_pretty_printer(v) do
 		v.adds
 		v.consume "is"
-
 		if v.can_inline(self) then
 			v.adds
 			for n_item in n_items do
@@ -443,21 +472,27 @@ redef class AAnnotations
 					v.add ", "
 				end
 			end
-			v.finish_line
-		else if n_items.length > 1 then
-			v.addn
+			if not was_inline then
+				v.finish_line
+				if v.current_token isa TKwend then v.skip
+			end
+		else
+			v.forcen
 			v.indent += 1
-
 			for n_item in n_items do
 				v.addt
 				v.visit n_item
 				v.finish_line
-				v.addn
+				if n_item != n_items.last then
+					if was_inline then
+						v.forcen
+					else
+						v.addn
+					end
+				end
 			end
-
 			v.indent -= 1
 		end
-		if not was_inline and v.current_token isa TKwend then v.skip
 	end
 
 	redef fun is_inlinable do
@@ -469,6 +504,10 @@ end
 
 redef class AAnnotation
 	redef fun accept_pretty_printer(v) do
+		if n_visibility != null and not n_visibility isa APublicVisibility then
+			v.visit n_visibility
+			v.adds
+		end
 		v.visit n_atid
 		if not n_args.is_empty then
 			if n_opar == null then
@@ -494,7 +533,7 @@ redef class AModule
 		v.visit n_moduledecl
 
 		if not n_imports.is_empty then
-			v.addn
+			if v.skip_empty then v.addn
 
 			for n_import in n_imports do
 				v.catch_up n_import
@@ -516,7 +555,7 @@ redef class AModule
 		end
 
 		if not n_classdefs.is_empty then
-			v.addn
+			if v.skip_empty then v.addn
 
 			for n_classdef in n_classdefs do
 				v.catch_up n_classdef
@@ -561,7 +600,7 @@ redef class AModuledecl
 		end
 
 		v.finish_line
-		v.addn
+		if v.skip_empty then v.addn
 	end
 end
 
@@ -582,7 +621,7 @@ redef class ANoImport
 		v.adds
 		v.visit n_kwend
 		v.finish_line
-		v.addn
+		if v.skip_empty then v.addn
 	end
 end
 
@@ -597,7 +636,7 @@ redef class AStdImport
 		v.adds
 		v.visit n_name
 		v.finish_line
-		v.addn
+		if v.skip_empty then v.addn
 	end
 end
 
@@ -609,9 +648,9 @@ redef class AClassdef
 			v.catch_up n_propdef
 
 			if n_propdef.n_doc != null or not v.can_inline(n_propdef) then
-				if n_propdef != n_propdefs.first then v.addn
+				if v.skip_empty and n_propdef != n_propdefs.first then v.addn
 				v.visit n_propdef
-				if n_propdef != n_propdefs.last then v.addn
+				if v.skip_empty and n_propdef != n_propdefs.last then v.addn
 			else
 				v.visit n_propdef
 			end
@@ -660,7 +699,7 @@ redef class AStdClassdef
 			end
 		else
 			v.finish_line
-			v.addn
+			if v.skip_empty then v.addn
 			v.indent += 1
 
 			for n_superclass in n_superclasses do
@@ -672,7 +711,7 @@ redef class AStdClassdef
 			end
 
 			if not n_superclasses.is_empty and not n_propdefs.is_empty then
-				v.addn
+				if v.skip_empty then v.addn
 			end
 
 			super
@@ -682,7 +721,7 @@ redef class AStdClassdef
 
 		v.visit n_kwend
 		v.finish_line
-		v.addn
+		if v.skip_empty then v.addn
 		assert v.indent == 0
 	end
 
@@ -772,6 +811,90 @@ redef class APropdef
 		end
 	end
 
+	# Factorize annotations visit for all APropdef.
+	#
+	# Return true if annotations were inlined.
+	fun visit_annotations(v: PrettyPrinterVisitor, n_annotations: nullable AAnnotations): Bool do
+		var res = v.can_inline(n_annotations)
+		if n_annotations != null then v.visit n_annotations
+		return res
+	end
+
+	# Factorize block visit for APropdefs.
+	#
+	# Were annotations printed inline? If so, we need to print the block differently.
+	fun visit_block(v: PrettyPrinterVisitor, n_block: nullable AExpr, annot_inline: Bool) do
+		# var can_inline = v.can_inline(n_block)
+		if n_block == null then return
+		if n_annotations != null and not annot_inline then
+			v.forcen
+			v.addt
+		end
+		if v.inline_do then
+			while not v.current_token isa TKwdo do v.skip
+		end
+		var token = v.current_token
+		var do_inline = true
+		loop
+			if token isa TEol then
+				v.skip
+				if not v.can_inline(n_block) then
+					v.forcen
+					v.addt
+					do_inline = false
+				end
+			end
+			token = v.current_token
+			if token isa TKwdo then break
+		end
+		if annot_inline and do_inline then v.adds
+		v.consume "do"
+
+		if v.can_inline(n_block) and do_inline then
+			v.adds
+
+			if n_block isa ABlockExpr then
+				if n_block.n_expr.is_empty then
+					v.visit n_block.n_kwend
+				else
+					v.visit n_block.n_expr.first
+					v.current_token = n_block.n_kwend
+					v.skip
+				end
+			else
+				v.visit n_block
+				if v.current_token isa TKwend then v.skip
+			end
+		else
+			v.finish_line
+			if was_inline then
+				v.forcen
+			else
+				v.addn
+			end
+			v.indent += 1
+
+			if n_block isa ABlockExpr then
+				n_block.force_block = true
+				v.visit n_block
+				v.catch_up n_block.n_kwend
+			else
+				v.addt
+				v.visit n_block
+				v.forcen
+			end
+
+			v.indent -= 1
+			v.addt
+			if n_block isa ABlockExpr then
+				v.visit n_block.n_kwend
+			else
+				v.add "end"
+			end
+		end
+		v.finish_line
+	end
+
 	redef fun start_token do
 		if n_doc == null then return super
 		return n_doc.last_token.next_token
@@ -798,7 +921,8 @@ redef class AAttrPropdef
 			v.visit n_expr
 		end
 
-		if n_annotations != null then v.visit n_annotations
+		var annot_inline = visit_annotations(v, n_annotations)
+		visit_block(v, n_block, annot_inline)
 		v.finish_line
 		v.addn
 	end
@@ -822,6 +946,7 @@ redef class ATypePropdef
 		v.consume ":"
 		v.adds
 		v.visit n_type
+		visit_annotations(v, n_annotations)
 		v.finish_line
 		v.addn
 	end
@@ -834,7 +959,6 @@ redef class AMethPropdef
 		#  TODO: Handle extern annotations
 
 		var before = v.indent
-		var can_inline = v.can_inline(self)
 		super
 		if n_kwinit != null then v.visit n_kwinit
 		if n_kwmeth != null then v.visit n_kwmeth
@@ -847,72 +971,15 @@ redef class AMethPropdef
 
 		v.visit n_signature
 
-		if n_annotations != null then
-			v.visit n_annotations
-		else
-			v.adds
-		end
+		var annot_inline = visit_annotations(v, n_annotations)
 
 		if n_extern_calls != null or n_extern_code_block != null then
-			if n_annotations != null then v.adds
+			v.adds
 			if n_extern_calls != null then v.visit n_extern_calls
 			if n_extern_code_block != null then v.visit n_extern_code_block
 		end
 
-		var n_block = self.n_block
-
-		if n_block != null then
-			while not v.current_token isa TKwdo do v.skip
-			if n_annotations != null then
-				if v.can_inline(n_annotations) then
-					v.adds
-				else
-					v.addt
-				end
-			end
-			v.consume "do"
-
-			if can_inline then
-				v.adds
-
-				if n_block isa ABlockExpr then
-					if n_block.n_expr.is_empty then
-						v.visit n_block.n_kwend
-					else
-						v.visit n_block.n_expr.first
-						v.current_token = n_block.n_kwend
-						v.skip
-					end
-				else
-					v.visit n_block
-					if v.current_token isa TKwend then v.skip
-				end
-			else
-				v.finish_line
-				v.addn
-				v.indent += 1
-
-				if n_block isa ABlockExpr then
-					n_block.force_block = true
-					v.visit n_block
-					v.catch_up n_block.n_kwend
-				else
-					v.addt
-					v.visit n_block
-					v.addn
-				end
-
-				v.indent -= 1
-				v.addt
-				if n_block isa ABlockExpr then
-					v.visit n_block.n_kwend
-				else
-					v.add "end"
-				end
-			end
-		end
-
-		v.finish_line
+		visit_block(v, n_block, annot_inline)
 		v.addn
 		assert v.indent == before
 	end
@@ -934,7 +1001,7 @@ end
 redef class AMainMethPropdef
 	redef fun accept_pretty_printer(v) do
 		v.visit n_block
-		v.addn
+		if v.skip_empty then v.addn
 	end
 end
 
@@ -980,8 +1047,9 @@ redef class AExternCalls
 			v.visit_list n_extern_calls
 		else
 			v.addn
+			v.indent += 1
 			v.addt
-			v.addt
+			v.indent -= 1
 			v.visit_list n_extern_calls
 		end
 
@@ -1087,7 +1155,7 @@ redef class TExternCodeSegment
 
 				for line in lines do
 					v.add line.r_trim
-					v.addn
+					v.forcen
 				end
 
 				v.addt
@@ -1177,11 +1245,18 @@ redef class AIfExpr
 			else if n_then == null then
 				v.add "end"
 			end
-
 			v.skip_to last_token.last_real_token_in_line
 		else
 			v.finish_line
-			v.addn
+			if was_inline then
+				v.forcen
+			else if not v.skip_empty and n_then != null and
+				n_then.was_inline and
+				n_then.location.line_end == location.line_start then
+				v.forcen # Xymus fucking syntax
+			else
+				v.addn
+			end
 			v.indent += 1
 
 			if n_then != null then
@@ -1191,7 +1266,11 @@ redef class AIfExpr
 				else
 					v.addt
 					v.visit n_then
-					v.addn
+					if n_then.was_inline then
+						v.forcen
+					else
+						v.addn
+					end
 				end
 			end
 
@@ -1210,7 +1289,11 @@ redef class AIfExpr
 					v.visit n_else
 				else
 					v.finish_line
-					v.addn
+					if was_inline then
+						v.forcen
+					else
+						v.addn
+					end
 					v.indent += 1
 
 					if n_else isa ABlockExpr then
@@ -1219,7 +1302,11 @@ redef class AIfExpr
 					else
 						v.addt
 						v.visit n_else
-						v.addn
+						if n_else.was_inline then
+							v.forcen
+						else
+							v.addn
+						end
 					end
 
 					if last_token isa TKwend then
@@ -1479,7 +1566,6 @@ redef class ACallExpr
 		if not n_expr isa AImplicitSelfExpr and not can_inline then
 			v.addn
 			v.addt
-			v.addt
 		end
 
 		v.visit n_id
@@ -1640,8 +1726,9 @@ redef class ANewExpr
 
 			if not can_inline then
 				v.addn
+				v.indent += 1
 				v.addt
-				v.addt
+				v.indent -= 1
 			end
 
 			v.visit n_id
@@ -1749,16 +1836,15 @@ redef class AAssertExpr
 				v.visit n_else
 			else
 				v.addn
+				v.indent += 1
 
 				if n_else isa ABlockExpr then
-					v.indent += 1
 					n_else.force_block = true
 					v.visit n_else
 					v.indent -= 1
 					v.addt
 					v.visit n_else.n_kwend
 				else
-					v.indent += 1
 					v.addt
 					v.visit n_else
 					v.addn
@@ -1897,8 +1983,9 @@ private class ABinOpHelper
 			v.visit bin_expr2
 		else
 			v.addn
+			v.indent += 1
 			v.addt
-			v.addt
+			v.indent -= 1
 			v.visit bin_expr2
 		end
 	end
@@ -2073,9 +2160,13 @@ end
 
 redef class AStringFormExpr
 	redef fun accept_pretty_printer(v) do
-		var can_inline = v.can_inline(self)
-
-		if can_inline then
+		if not v.break_strings then
+			# n_string.force_inline = true
+			v.visit n_string
+			return
+		end
+		if v.can_inline(self) then
+			n_string.force_inline = true
 			v.visit n_string
 		else
 			var text = n_string.text
@@ -2086,7 +2177,11 @@ redef class AStringFormExpr
 
 				if v.current_length >= v.max_size and i <= text.length - 3 then
 					v.add "\" +"
-					v.addn
+					if was_inline then
+						v.forcen
+					else
+						v.addn
+					end
 					v.indent += 1
 					v.addt
 					v.indent -= 1
@@ -2103,7 +2198,12 @@ end
 
 redef class ASuperstringExpr
 	redef fun accept_pretty_printer(v) do
-		for n_expr in n_exprs do v.visit n_expr
+		for n_expr in n_exprs do
+			if not v.break_strings then
+				n_expr.force_inline = true
+			end
+			v.visit n_expr
+		end
 	end
 
 	redef fun must_be_inline do

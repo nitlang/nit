@@ -1,3 +1,34 @@
+--skip-empty test_pretty/test_mod1.nit
+--skip-empty test_pretty/test_mod2.nit
+--skip-empty test_pretty/test_mod3.nit
+--skip-empty test_pretty/test_class1.nit
+--skip-empty test_pretty/test_class2.nit
+--skip-empty test_pretty/test_class3.nit
+--skip-empty test_pretty/test_prop1.nit
+--skip-empty test_pretty/test_prop2.nit
+--skip-empty test_pretty/test_prop3.nit
+--skip-empty test_pretty/test_loop1.nit
+--skip-empty test_pretty/test_loop2.nit
+--skip-empty test_pretty/test_loop3.nit
+--skip-empty test_pretty/test_call1.nit
+--skip-empty test_pretty/test_call2.nit
+--skip-empty test_pretty/test_if1.nit
+--skip-empty test_pretty/test_if2.nit
+--skip-empty test_pretty/test_if3.nit
+--skip-empty test_pretty/test_op1.nit
+--skip-empty test_pretty/test_op2.nit
+--skip-empty test_pretty/test_op3.nit
+--skip-empty test_pretty/test_extern1.nit
+--skip-empty test_pretty/test_attr1.nit
+--skip-empty test_pretty/test_attr2.nit
+--skip-empty test_pretty/test_comments1.nit
+--skip-empty test_pretty/test_indent1.nit
+--skip-empty test_pretty/test_prims1.nit
+--skip-empty test_pretty/test_annot1.nit
+--skip-empty --break-strings test_pretty/test_prop1.nit
+--skip-empty --break-strings test_pretty/test_indent1.nit
+--skip-empty --inline-do test_pretty/test_prop1.nit
+--skip-empty --inline-do test_pretty/test_indent1.nit
 test_pretty/test_mod1.nit
 test_pretty/test_mod2.nit
 test_pretty/test_mod3.nit
@@ -25,3 +56,7 @@ test_pretty/test_comments1.nit
 test_pretty/test_indent1.nit
 test_pretty/test_prims1.nit
 test_pretty/test_annot1.nit
+--break-strings test_pretty/test_prop1.nit
+--break-strings test_pretty/test_indent1.nit
+--inline-do test_pretty/test_prop1.nit
+--inline-do test_pretty/test_indent1.nit

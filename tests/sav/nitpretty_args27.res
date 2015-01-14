@@ -15,15 +15,17 @@
 module test_annot1 is platform("android")
 
 class A
+	fun goo is intern
+
+	# test
 	fun foo is a, b
+
 	fun bar is a, b do print "1"
 
 	fun baz is
 		a
 		bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
-	do
-		print "2"
-	end
+	do print "2"
 end
 
 class B
