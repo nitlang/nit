@@ -560,7 +560,7 @@ class SeparateCompiler
 				var r = pd.separate_runtime_function
 				r.compile_to_c(self)
 				var r2 = pd.virtual_runtime_function
-				r2.compile_to_c(self)
+				if r2 != r then r2.compile_to_c(self)
 			end
 		end
 		self.mainmodule = old_module
@@ -1802,7 +1802,20 @@ redef class MMethodDef
 			# Because the function is virtual, the signature must match the one of the original class
 			var intromclassdef = mproperty.intro.mclassdef
 			var recv = intromclassdef.bound_mtype
+
+			res = separate_runtime_function
+			if res.called_recv == recv then
+				self.virtual_runtime_function_cache = res
+				return res
+			end
+
 			var msignature = mproperty.intro.msignature.resolve_for(recv, recv, intromclassdef.mmodule, true)
+
+			if recv.ctype == res.called_recv.ctype and msignature.c_equiv(res.called_signature) then
+				self.virtual_runtime_function_cache = res
+				return res
+			end
+
 			res = new SeparateRuntimeFunction(self, recv, msignature, "VIRTUAL_{c_name}")
 			self.virtual_runtime_function_cache = res
 			res.is_thunk = true
@@ -1810,6 +1823,23 @@ redef class MMethodDef
 		return res
 	end
 	private var virtual_runtime_function_cache: nullable SeparateRuntimeFunction
+end
+
+redef class MSignature
+	# Does the C-version of `self` the same than the C-version of `other`?
+	fun c_equiv(other: MSignature): Bool
+	do
+		if self == other then return true
+		if arity != other.arity then return false
+		for i in [0..arity[ do
+			if mparameters[i].mtype.ctype != other.mparameters[i].mtype.ctype then return false
+		end
+		if return_mtype != other.return_mtype then
+			if return_mtype == null or other.return_mtype == null then return false
+			if return_mtype.ctype != other.return_mtype.ctype then return false
+		end
+		return true
+	end
 end
 
 # The C function associated to a methoddef separately compiled
