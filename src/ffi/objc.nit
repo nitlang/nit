@@ -32,6 +32,27 @@ end
 
 redef class MModule
 	private var objc_file: nullable ObjCCompilationUnit = null
+
+	private var has_public_objc_header = false
+
+	# Imported modules with public Objective-C code blocks
+	var objc_imported_headers: HashSet[MModule] is lazy do
+		var dep = new HashSet[MModule]
+
+		# gather from importation
+		for m in in_importation.direct_greaters do
+			# does the super module has inherited dependencies?
+			var import_dep = m.objc_imported_headers
+			if not import_dep.is_empty then
+				dep.add_all import_dep
+			end
+
+			# does the super module itself has a public header?
+			if m.has_public_objc_header then dep.add(m)
+		end
+
+		return dep
+	end
 end
 
 # The Objective-C langugage visitor
@@ -47,6 +68,8 @@ class ObjCLanguage
 		if block.is_objc_header then
 			mmodule.objc_file.header_custom.add block.location.as_line_pragma
 			mmodule.objc_file.header_custom.add block.code
+
+			mmodule.has_public_objc_header = true
 		else if block.is_objc_body then
 			mmodule.objc_file.body_custom.add block.location.as_line_pragma
 			mmodule.objc_file.body_custom.add block.code
@@ -76,6 +99,12 @@ class ObjCLanguage
 	do
 		var objc_file = mmodule.objc_file
 		assert objc_file != null
+
+		# Import public Objective-C header of imported modules
+		var dep = mmodule.objc_imported_headers
+		for mod in dep do
+			objc_file.header_custom.add "#include \"{mod.c_name}._ffi_m.h\"\n"
+		end
 
 		# write .m and _m.h file
 		mmodule.objc_file.header_c_types.add """
