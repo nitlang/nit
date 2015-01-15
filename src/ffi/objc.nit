@@ -211,6 +211,13 @@ end
 private class FromObjCCallContext
 	super ObjCCallContext
 
+	redef fun cast_to(mtype, name)
+	do
+		if mtype isa MClassType and mtype.mclass.ftype isa ForeignObjCType then
+			return "(__bridge void*)({name})"
+		else return name
+	end
+
 	redef fun cast_from(mtype, name)
 	do
 		if mtype isa MClassType and mtype.mclass.ftype isa ForeignObjCType then
