@@ -33,36 +33,32 @@ redef class AModule
 end
 
 redef class MModule
-	private var header_dependencies_cache: nullable Array[MModule] = null
-	fun header_dependencies: Array[MModule]
-	do
-		var cache = header_dependencies_cache
-		assert cache != null
-		return cache
-	end
+	# Modules with public foreign code blocks (C header)
+	var header_dependencies: nullable HashSet[MModule] = null
 
 	private fun compute_header_dependencies(v: HeaderDependancyPhase)
 	do
-		if header_dependencies_cache != null then return
+		if header_dependencies != null then return
 
-		var header_dependencies = new Array[MModule]
+		var header_dependencies = new HashSet[MModule]
 
 		# gather from importation
 		for m in in_importation.direct_greaters do
-			m.compute_header_dependencies(v)
+			m.compute_header_dependencies v
 
-			# does the super module has inherited dependancies?
+			# does the super module has inherited dependencies?
 			var hd = m.header_dependencies
+			assert hd != null
 			if not hd.is_empty then
-				header_dependencies.add_all(hd)
+				header_dependencies.add_all hd
 			end
 
-			# does the super module itself has extern dependancies?
+			# does the super module itself has extern dependencies?
 			var amodule = v.toolcontext.modelbuilder.mmodule2node(m)
 			if amodule != null and amodule.has_public_c_header then header_dependencies.add(m)
 		end
 
-		header_dependencies_cache = header_dependencies
+		self.header_dependencies = header_dependencies
 	end
 end
 
