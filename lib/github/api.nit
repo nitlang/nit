@@ -252,6 +252,25 @@ class GithubAPI
 		return milestone.load_from_github
 	end
 
+	# Get the Github issue event with `id`.
+	#
+	# Returns `null` if the event cannot be found.
+	#
+	#     var api = new GithubAPI(get_github_oauth)
+	#     var repo = api.load_repo("privat/nit")
+	#     assert repo isa Repo
+	#     var event = api.load_issue_event(repo, 199674194)
+	#     assert event.actor.login == "privat"
+	#     assert event.event == "labeled"
+	#     assert event.labl.name == "need_review"
+	#     assert event.issue.number == 945
+	fun load_issue_event(repo: Repo, id: Int): nullable IssueEvent do
+		var event = new IssueEvent(self, repo, id)
+		event.load_from_github
+		if was_error then return null
+		return event
+	end
+
 	# Get the Github commit comment with `id`.
 	#
 	# Returns `null` if the comment cannot be found.
@@ -475,6 +494,19 @@ class Repo
 		return res
 	end
 
+	# List of contributor related statistics.
+	fun contrib_stats: Array[ContributorStats] do
+		api.message(1, "Get contributor stats for {full_name}")
+		var res = new Array[ContributorStats]
+		var array = api.get("{key}/stats/contributors")
+		if array isa JsonArray then
+			for obj in array do
+				res.add new ContributorStats.from_json(api, obj.as(JsonObject))
+			end
+		end
+		return res
+	end
+
 	# Repo default branch.
 	fun default_branch: Branch do
 		var name = json["default_branch"].to_s
@@ -604,6 +636,17 @@ class Commit
 		return new ISODate.from_string(author["date"].to_s)
 	end
 
+	# List files staged in this commit.
+	fun files: Array[GithubFile] do
+		var res = new Array[GithubFile]
+		var files = json["files"]
+		if not files isa JsonArray then return res
+		for obj in files do
+			res.add(new GithubFile(obj.as(JsonObject)))
+		end
+		return res
+	end
+
 	# Commit message.
 	fun message: String do return json["commit"].as(JsonObject)["message"].to_s
 end
@@ -712,6 +755,22 @@ class Issue
 
 	# Full description of the issue.
 	fun body: String  do return json["body"].to_s
+
+	# List of events on this issue.
+	fun events: Array[IssueEvent] do
+		var res = new Array[IssueEvent]
+		var page = 1
+		var array = api.get("{key}/events?page={page}").as(JsonArray)
+		while not array.is_empty do
+			for obj in array do
+				if not obj isa JsonObject then continue
+				res.add new IssueEvent.from_json(api, repo, obj)
+			end
+			page += 1
+			array = api.get("{key}/events?page={page}").as(JsonArray)
+		end
+		return res
+	end
 
 	# User that closed this issue (if any).
 	fun closed_by: nullable User do
@@ -1029,4 +1088,138 @@ class ReviewComment
 
 	# Original commit id.
 	fun original_commit_id: String do return json["original_commit_id"].to_s
+end
+
+# An event that occurs on a Github `Issue`.
+#
+# Should be accessed from `GithubAPI::load_issue_event`.
+#
+# See <https://developer.github.com/v3/issues/events/>.
+class IssueEvent
+	super RepoEntity
+
+	redef var key is lazy do return "{repo.key}/issues/events/{id}"
+
+	# Event id on Github.
+	var id: Int
+
+	redef init from_json(api, repo, json) do
+		self.id = json["id"].as(Int)
+		super
+	end
+
+	# Issue that contains `self`.
+	fun issue: Issue do
+		return new Issue.from_json(api, repo, json["issue"].as(JsonObject))
+	end
+
+	# User that initiated the event.
+	fun actor: User do
+		return new User.from_json(api, json["actor"].as(JsonObject))
+	end
+
+	# Creation time in ISODate format.
+	fun created_at: ISODate do
+		return new ISODate.from_string(json["created_at"].to_s)
+	end
+
+	# Event descriptor.
+	fun event: String do return json["event"].to_s
+
+	# Commit linked to this event (if any).
+	fun commit_id: nullable String do
+		var res = json["commit_id"]
+		if res == null then return null
+		return res.to_s
+	end
+
+	# Label linked to this event (if any).
+	fun labl: nullable Label do
+		var res = json["label"]
+		if not res isa JsonObject then return null
+		return new Label.from_json(api, repo, res)
+	end
+
+	# User linked to this event (if any).
+	fun assignee: nullable User do
+		var res = json["assignee"]
+		if not res isa JsonObject then return null
+		return new User.from_json(api, res)
+	end
+
+	# Milestone linked to this event (if any).
+	fun milestone: nullable Milestone do
+		var res = json["milestone"]
+		if not res isa JsonObject then return null
+		return new Milestone.from_json(api, repo, res)
+	end
+
+	# Rename linked to this event (if any).
+	fun rename: nullable RenameAction do
+		var res = json["rename"]
+		if res == null then return null
+		return new RenameAction(res.as(JsonObject))
+	end
+end
+
+# A rename action maintains the name before and after a renaming action.
+class RenameAction
+
+	# JSON content.
+	var json: JsonObject
+
+	# Name before renaming.
+	fun from: String do return json["from"].to_s
+
+	# Name after renaming.
+	fun to: String do return json["to"].to_s
+end
+
+# Contributors list with additions, deletions, and commit counts.
+#
+# Should be accessed from `Repo::contrib_stats`.
+#
+# See <https://developer.github.com/v3/repos/statistics/>.
+class ContributorStats
+	super Comparable
+
+	redef type OTHER: ContributorStats
+
+	# Github API client.
+	var api: GithubAPI
+
+	# Json content.
+	var json: JsonObject
+
+	# Init `self` from a `json` object.
+	init from_json(api: GithubAPI, json: JsonObject) do
+		self.api = api
+		self.json = json
+	end
+
+	# User these statistics are about.
+	fun author: User do
+		return new User.from_json(api, json["author"].as(JsonObject))
+	end
+
+	# Total number of commit.
+	fun total: Int do return json["total"].to_s.to_i
+
+	# Are of weeks of activity with detailed statistics.
+	fun weeks: JsonArray do return json["weeks"].as(JsonArray)
+
+	# ContributorStats can be compared on the total amount of commits.
+	redef fun <(o) do return total < o.total
+end
+
+# A Github file representation.
+#
+# Mostly a wrapper around a json object.
+class GithubFile
+
+	# Json content.
+	var json: JsonObject
+
+	# File name.
+	fun filename: String do return json["filename"].to_s
 end
