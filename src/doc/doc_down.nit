@@ -143,10 +143,18 @@ private class NitdocDecorator
 	end
 end
 
+# Decorator for span elements.
+#
+# Because inline comments can appear as span elements,
+# InlineDecorator do not decorate things like paragraphs or headers.
 private class InlineDecorator
 	super NitdocDecorator
 
 	redef fun add_paragraph(v, block) do
+		v.emit_in block
+	end
+
+	redef fun add_headline(v, block) do
 		v.emit_in block
 	end
 
