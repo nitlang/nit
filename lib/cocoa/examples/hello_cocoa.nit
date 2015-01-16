@@ -19,10 +19,6 @@ module hello_cocoa
 
 import cocoa::foundation
 
-in "ObjC" `{
-	#import <Foundation/Foundation.h>
-`}
-
 # Print `"Hello world!"` to the log
 fun hello_world in "ObjC" `{
 	@autoreleasepool {

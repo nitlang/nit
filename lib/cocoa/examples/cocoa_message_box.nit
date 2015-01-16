@@ -19,10 +19,6 @@ module cocoa_message_box
 
 import cocoa
 
-in "ObjC" `{
-	#import <Cocoa/Cocoa.h>
-`}
-
 fun dialog in "ObjC" `{
 	NSAlert *alert = [[[NSAlert alloc] init] autorelease];
 	[alert setMessageText:@"Hello world!"];

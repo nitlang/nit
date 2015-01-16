@@ -15,10 +15,10 @@
 # limitations under the License.
 
 # Compile to JavaScript using the Emscripten SDK
-module emscripten_platform
+module emscripten
 
 import platform
-import abstract_compiler
+import compiler::abstract_compiler
 
 redef class ToolContext
 	redef fun platform_from_name(name)
