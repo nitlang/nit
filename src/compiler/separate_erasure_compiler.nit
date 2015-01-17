@@ -235,13 +235,9 @@ class SeparateErasureCompiler
 						v.add_decl("NULL, /* DEAD {mclass.intro_mmodule}:{mclass}:{mpropdef} */")
 						continue
 					end
-					if true or mpropdef.mclassdef.bound_mtype.ctype != "val*" then
-						v.require_declaration("VIRTUAL_{mpropdef.c_name}")
-						v.add_decl("(nitmethod_t)VIRTUAL_{mpropdef.c_name}, /* pointer to {mclass.intro_mmodule}:{mclass}:{mpropdef} */")
-					else
-						v.require_declaration("{mpropdef.c_name}")
-						v.add_decl("(nitmethod_t){mpropdef.c_name}, /* pointer to {mclass.intro_mmodule}:{mclass}:{mpropdef} */")
-					end
+					var rf = mpropdef.virtual_runtime_function
+					v.require_declaration(rf.c_name)
+					v.add_decl("(nitmethod_t){rf.c_name}, /* pointer to {mpropdef.full_name} */")
 				end
 			end
 			v.add_decl("\}")
