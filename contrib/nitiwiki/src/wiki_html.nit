@@ -81,6 +81,7 @@ redef class WikiSection
 		end
 		var index = self.index
 		if index isa WikiSectionIndex then
+			wiki.message("Render auto-index for section {out_path}", 1)
 			index.is_dirty = true
 			add_child index
 		end
