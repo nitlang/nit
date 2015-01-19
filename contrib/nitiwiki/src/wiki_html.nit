@@ -322,6 +322,10 @@ class WikiSectionIndex
 	# The section described by `self`.
 	var section: WikiSection
 
+	redef fun title do return section.title
+
+	redef fun url do return section.url
+
 	redef var is_dirty = false
 
 	redef fun tpl_article do
