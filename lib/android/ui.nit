@@ -331,22 +331,15 @@ extern class NativeTextView in "Java" `{ android.widget.TextView `}
 
 	fun text=(value: JavaString) in "Java" `{
 
-		android.util.Log.d("Nity", "1");
 		final TextView final_recv = recv;
 		final String final_value = value;
 
-		android.util.Log.d("Nity", "4");
 		((NativeActivity)recv.getContext()).runOnUiThread(new Runnable() {
 			@Override
 			public void run()  {
-				android.util.Log.d("Nity", "-5");
-				android.util.Log.d("Nity", final_value);
-				android.util.Log.d("Nity", "-5.5");
 				final_recv.setText(final_value);
-				android.util.Log.d("Nity", "-6");
 			}
 		});
-		android.util.Log.d("Nity", "7");
 	`}
 
 	fun enabled: Bool in "Java" `{ return recv.isEnabled(); `}
