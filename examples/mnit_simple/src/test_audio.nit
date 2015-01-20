@@ -21,27 +21,29 @@ import simple_android
 import android::audio
 
 redef class App
-	var soundsp: Sound
-	var soundmp: Sound
+	var soundsp: nullable Sound
+	var soundmp: nullable Sound
+	var test_assets = false
+	var test_ressources = true
 
-	redef fun init_window
+	redef fun window_created
 	do
 		super
-
-		default_mediaplayer.reset
-		manage_audio_mode
-
-		# Retrieve sound
-		soundsp = load_sound("sound.ogg")
-		soundmp = load_music("xylofon.ogg")
+		if test_assets then
+			soundsp = load_sound("testsound.ogg")
+			soundmp = load_music("xylofon.ogg")
+		end
+		if test_ressources then
+			soundsp = load_sound_from_res("testsound")
+			soundmp = load_music_from_res("xylofon")
+		end
 		default_mediaplayer.looping = true
-		default_mediaplayer.prepare
 		soundmp.play
 	end
 
 	redef fun input( ie )
 	do
-		if ie isa PointerEvent and ie.depressed then 
+		if ie isa PointerEvent and ie.depressed then
 			soundsp.play
 		end
 		return super
