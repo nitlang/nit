@@ -102,6 +102,13 @@ extern class NativeAssetManager in "Java" `{ android.content.res.AssetManager `}
 		}
 		return afd;
 	`}
+
+	# HACK for bug #845
+	redef fun new_global_ref import sys, Sys.jni_env `{
+		Sys sys = NativeResources_sys(recv);
+		JNIEnv *env = Sys_jni_env(sys);
+		return (*env)->NewGlobalRef(env, recv);
+	`}
 end
 
 # Assets manager using a `NativeAssetManager` to manage android assets
@@ -138,14 +145,18 @@ class AssetManager
 
 	# Open an asset using ACCESS_STREAMING mode, returning a NativeInputStream
 	fun open(file_name: String): NativeInputStream do
+		sys.jni_env.push_local_frame(1)
 		var return_value =  native_assets_manager.open(file_name.to_java_string)
+		sys.jni_env.pop_local_frame
 		return return_value
 	end
 
 	# Open an asset using it's name and returning a NativeAssetFileDescriptor
 	# `file_name` is
 	fun open_fd(file_name: String): NativeAssetFileDescriptor do
-		var return_value = native_assets_manager.open_fd(file_name.to_java_string)
+		sys.jni_env.push_local_frame(1)
+		var return_value = native_assets_manager.open_fd(file_name.to_java_string).new_global_ref
+		sys.jni_env.pop_local_frame
 		return return_value
 	end
 
@@ -158,7 +169,7 @@ class AssetManager
 	# Return a bitmap from the assets
 	fun bitmap(name: String): NativeBitmap do
 		sys.jni_env.push_local_frame(1)
-		var return_value = new NativeBitmap.from_stream(native_assets_manager.open(name.to_java_string))
+		var return_value = new NativeBitmap.from_stream(native_assets_manager.open(name.to_java_string)).new_global_ref
 		sys.jni_env.pop_local_frame
 		return return_value
 	end
@@ -291,6 +302,14 @@ extern class NativeBitmap in "Java" `{ android.graphics.Bitmap `}
 	new from_resources(res: NativeResources, id: Int) in "Java" `{ return BitmapFactory.decodeResource(res, (int)id); `}
 	fun width: Int in "Java" `{ return recv.getWidth(); `}
 	fun height: Int in "Java" `{ return recv.getHeight(); `}
+
+	# HACK for bug #845
+	redef fun new_global_ref import sys, Sys.jni_env `{
+		Sys sys = NativeResources_sys(recv);
+		JNIEnv *env = Sys_jni_env(sys);
+		return (*env)->NewGlobalRef(env, recv);
+	`}
+
 end
 
 # Android AssetFileDescriptor, can be retrieve by AssetManager and used to load a sound in a SoundPool
@@ -337,6 +356,13 @@ extern class NativeAssetFileDescriptor in "Java" `{ android.content.res.AssetFil
 	fun length: Int in "Java" `{ return (int)recv.getLength(); `}
 	fun start_offset: Int in "Java" `{ return (int)recv.getStartOffset(); `}
 	redef fun to_s: String import JavaString.to_s in "Java" `{ return JavaString_to_s(recv.toString()); `}
+
+	# HACK for bug #845
+	redef fun new_global_ref import sys, Sys.jni_env `{
+		Sys sys = NativeResources_sys(recv);
+		JNIEnv *env = Sys_jni_env(sys);
+		return (*env)->NewGlobalRef(env, recv);
+	`}
 end
 
 # Native class representing something drawable, can be retrieved from the resources
