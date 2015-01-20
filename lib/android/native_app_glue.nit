@@ -301,7 +301,10 @@ extern class NativeAppGlue `{ struct android_app* `}
 	# We use the `userData` field of the C structure to store an handle to
 	# the associated App
 	private fun user_data: App `{ return recv->userData; `}
-	private fun user_data=(val: App) `{ recv->userData = val; `}
+	private fun user_data=(val: App) `{
+		App_incr_ref(val);
+		recv->userData = val;
+	`}
 
 	# Fill this in with the function to process input events.  At this point
 	# the event has already been pre-dispatched, and it will be finished upon
