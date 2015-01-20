@@ -21,6 +21,7 @@ module sdl is
 end
 
 import mnit_display
+import c
 
 in "C header" `{
 	#include <unistd.h>
@@ -160,7 +161,26 @@ extern class SDLDisplay `{SDL_Surface *`}
 	fun warp_mouse(x,y: Int) `{ SDL_WarpMouse(x, y); `}
 
 	# Show or hide the cursor
-	fun show_cursor(show: Bool) `{ SDL_ShowCursor(show); `}
+	fun show_cursor=(val: Bool) `{ SDL_ShowCursor(val? SDL_ENABLE: SDL_DISABLE); `}
+
+	# Is the cursor visible?
+	fun show_cursor: Bool `{ SDL_ShowCursor(SDL_QUERY); `}
+
+	# Grab or release the input
+	fun grab_input=(val: Bool) `{ SDL_WM_GrabInput(val? SDL_GRAB_ON: SDL_GRAB_OFF); `}
+
+	# Is the input grabbed?
+	fun grab_input: Bool `{ SDL_WM_GrabInput(SDL_GRAB_QUERY) == SDL_GRAB_ON; `}
+
+	# Are instances of `SDLMouseMotionEvent` ignored?
+	fun ignore_mouse_motion_events: Bool `{
+		return SDL_EventState(SDL_MOUSEMOTION, SDL_QUERY);
+	`}
+
+	# Do not raise instances of `SDLMouseMotionEvent` if `val`
+	fun ignore_mouse_motion_events=(val: Bool) `{
+		SDL_EventState(SDL_MOUSEMOTION, val? SDL_IGNORE: SDL_ENABLE);
+	`}
 end
 
 # Basic Drawing figures
@@ -225,6 +245,12 @@ extern class SDLImage
 	redef fun height: Int `{ return recv->h; `}
 
 	fun is_ok: Bool do return not address_is_null
+
+	# Returns a reference to the pixels of the texture
+	fun pixels: NativeCByteArray `{ return recv->pixels; `}
+
+	# Does this texture has an alpha mask?
+	fun amask: Bool `{ return recv->format->Amask; `}
 end
 
 # A simple rectangle
@@ -284,10 +310,10 @@ class SDLMouseButtonEvent
 	fun is_left_button: Bool do return button == 1
 
 	# Is this event raised by the right button?
-	fun is_right_button: Bool do return button == 2
+	fun is_right_button: Bool do return button == 3
 
 	# Is this event raised by the middle button?
-	fun is_middle_button: Bool do return button == 3
+	fun is_middle_button: Bool do return button == 2
 
 	# Is this event raised by the wheel going down?
 	fun is_down_wheel: Bool do return button == 4
