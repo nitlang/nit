@@ -24,7 +24,7 @@ class A
 		2.output
 		var res = a
 		if res == 10 then res = 20
-		return res
+		return res #alt1# return #alt2#
 	end
 end
 
