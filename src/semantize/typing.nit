@@ -609,6 +609,10 @@ redef class AAttrPropdef
 		var nblock = self.n_block
 		if nblock != null then
 			v.visit_stmt(nblock)
+			if not nblock.after_flow_context.is_unreachable then
+				# We reach the end of the init without having a return, it is bad
+				v.error(self, "Control error: Reached end of block (a 'return' with a value was expected).")
+			end
 		end
 	end
 end
