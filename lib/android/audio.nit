@@ -1,4 +1,4 @@
-# this file is part of NIT ( http://www.nitlanguage.org ).
+# This file is part of NIT ( http://www.nitlanguage.org ).
 #
 # Copyright 2014 Romain Chanoir <romain.chanoir@viacesi.fr>
 #
@@ -14,54 +14,88 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Android audio services
+# Android audio services, wraps a part of android audio API
 #
-# You can get a sound by loading it with a `SoundPool` or a `MediaPlayer`
-# the recommended way to load a sound is by it's resource ID or it's name
-# other ways are for advanced use
+# For this example, the sounds "test_sound" and "test_music" are located in the "assets/sounds" folder,
+# they both have ".ogg" extension. "test_sound" is a short sound and "test_music" a music track
+# ~~~nitish
+# # Note that you need to specify the path from "assets" folder and the extension
+# var s = app.load_sound("sounds/test_sound.ogg")
+# var m = app.load_music("sounds/test_music.ogg")
+# s.play
+# m.play
+# ~~~
+#
+# Now, the sounds are in "res/raw"
+# ~~~nitish
+# s = app.load_sound_from_res("test_sound")
+# m = app.load_music_from_res("test_sound")
+# s.play
+# m.play
+# ~~~
+#
+# See http://developer.android.com/reference/android/media/package-summary.html for more infos
 module audio
 
 import java
 import java::io
 import assets_and_resources
-import app
+import app::audio
 
 in "Java" `{
 	import android.media.MediaPlayer;
 	import android.media.SoundPool;
 	import java.io.IOException;
 	import android.media.AudioManager;
+	import android.media.AudioManager.OnAudioFocusChangeListener;
 	import android.content.Context;
 	import android.util.Log;
+`}
+
+# FIXME: This listener is not working at the moment, but is needed to gain or give up the audio focus
+# of the application
+in "Java inner" `{
+	static OnAudioFocusChangeListener afChangeListener = new OnAudioFocusChangeListener() {
+		public void onAudioFocusChange(int focusChange) {
+			if(focusChange == AudioManager.AUDIOFOCUS_LOSS_TRANSIENT) {
+			}else if (focusChange == AudioManager.AUDIOFOCUS_GAIN) {
+			}else if (focusChange == AudioManager.AUDIOFOCUS_LOSS) {
+			}
+		}
+	};
 `}
 
 # AudioManager of the application, used to manage the audio mode
 extern class NativeAudioManager in "Java" `{ android.media.AudioManager `}
 	super JavaObject
 
+	# Current audio mode.
+	# ( MODE_NORMAL = 0, MODE_RINGTONE = 1, MODE_IN_CALL = 2 or MODE_IN_COMMUNICATION = 3 )
 	fun mode: Int in "Java" `{ return recv.getMode(); `}
+
+	# Sets the audio mode.
+	# ( MODE_NORMAL = 0, MODE_RINGTONE = 1, MODE_IN_CALL = 2 or MODE_IN_COMMUNICATION = 3 )
 	fun mode=(i: Int) in "Java" `{ recv.setMode((int)i); `}
-	fun wired_headset_on: Bool in "Java" `{ return recv.isWiredHeadsetOn(); `}
-	fun wired_headset_on=(b: Bool) in "Java" `{ recv.setWiredHeadsetOn(b); `}
-	fun speakerphone_on: Bool in "Java" `{ return recv.isSpeakerphoneOn(); `}
-	fun speakerphone_on=(b: Bool) in "Java" `{ recv.setSpeakerphoneOn(b); `}
-	fun manage_audio_mode in "Java" `{
-		recv.setMode(0);
-		if (recv.isWiredHeadsetOn()) {
-			recv.setSpeakerphoneOn(false);
-		} else {
-			recv.setSpeakerphoneOn(true);
-		}
+
+	# Sends a request to obtain audio focus
+	fun request_audio_focus: Int in "Java" `{
+		return recv.requestAudioFocus(afChangeListener, AudioManager.STREAM_MUSIC, AudioManager.AUDIOFOCUS_GAIN);
 	`}
 
+	# Gives up audio focus
+	fun abandon_audio_focus: Int in "Java" `{ return recv.abandonAudioFocus(afChangeListener); `}
 end
 
 # Media Player from Java, used to play long sounds or musics, not simultaneously
 # This is a low-level class, use `MediaPlater` instead
-extern class NativeMediaPlayer in "Java" `{ android.media.MediaPlayer `}
+private extern class NativeMediaPlayer in "Java" `{ android.media.MediaPlayer `}
 	super JavaObject
 
-	new in "Java" `{ return new MediaPlayer(); `}
+	new in "Java" `{
+		MediaPlayer mp = new MediaPlayer();
+		mp.setAudioStreamType(AudioManager.STREAM_MUSIC);
+		return mp;
+	`}
 	fun start in "Java" `{ recv.start(); `}
 	fun prepare in "Java" `{
 		try {
@@ -104,7 +138,7 @@ end
 
 # Sound Pool from Java, used to play sounds simultaneously
 # This is a low-level class, use `SoundPool`instead
-extern class NativeSoundPool in "Java" `{ android.media.SoundPool `}
+private extern class NativeSoundPool in "Java" `{ android.media.SoundPool `}
 	super JavaObject
 
 	new(max_streams, stream_type, src_quality: Int) in "Java" `{
@@ -165,7 +199,7 @@ class SoundPool
 		return new SoundSP(null, nsoundpool.load_asset_fd(afd, priority), self)
 	end
 
-	# Load the sound from it's resource id
+	# Load the sound from its resource id
 	fun load_id(context: NativeActivity, id:Int): Sound do
 		return new SoundSP(null, nsoundpool.load_id(context, id, priority), self)
 	end
@@ -184,7 +218,7 @@ class SoundPool
 		return nsoundpool.play(id, left_volume, right_volume, priority, looping, rate)
 	end
 
-	# Load a sound by it's name in the resources, the sound must be in the `res/raw` folder
+	# Load a sound by its name in the resources, the sound must be in the `res/raw` folder
 	fun load_name(resource_manager: ResourcesManager, context: NativeActivity, sound: String): Sound do
 		var id = resource_manager.raw_id(sound)
 		return new SoundSP(id, nsoundpool.load_id(context, id, priority), self)
@@ -231,8 +265,11 @@ end
 class MediaPlayer
 	private var nmedia_player: NativeMediaPlayer is noinit
 
+	# Used to control the state of the mediaplayer
+	private var is_prepared = false is writable
+
 	# The sound associated with this mediaplayer
-	var sound: nullable Sound = null
+	var sound: nullable Sound = null is writable
 
 	# Create a new MediaPlayer, but no sound is attached, you'll need
 	# to use `load_sound` before using it
@@ -249,20 +286,21 @@ class MediaPlayer
 	fun load_sound(id: Int, context: NativeActivity): Sound do
 		self.nmedia_player = self.nmedia_player.create(context, id)
 		self.sound = new SoundMP(id, self)
+		self.is_prepared = true
 		return self.sound.as(not null)
 	end
 
-	# Starts or resume playback
+	# Starts or resumes playback
 	# REQUIRE `self.sound != null`
 	fun start do
-		assert sound != null
+		if not is_prepared then prepare
 		nmedia_player.start
 	end
 
 	# Stops playback after playback has been stopped or paused
 	# REQUIRE `self.sound != null`
 	fun stop do
-		assert sound != null
+		is_prepared = false
 		nmedia_player.stop
 	end
 
@@ -271,6 +309,7 @@ class MediaPlayer
 	fun prepare do
 		assert sound != null
 		nmedia_player.prepare
+		is_prepared = true
 	end
 
 	# Pauses playback
@@ -292,7 +331,7 @@ class MediaPlayer
 	# Reset MediaPlayer to its initial state
 	fun reset do nmedia_player.reset
 
-	# Sets the datasource (file-pathor http/rtsp URL) to use
+	# Sets the datasource (file-path or http/rtsp URL) to use
 	fun data_source(path: String): Sound do
 		sys.jni_env.push_local_frame(1)
 		nmedia_player.data_source_path(path.to_java_string)
@@ -323,14 +362,10 @@ class MediaPlayer
 	fun stream_type=(stream_type: Int) do nmedia_player.stream_type = stream_type
 end
 
-# Represents an android sound that can be played by a SoundPool or a MediaPlayer
-# The only way to get a sound is by a MediaPlayer, a SoundPool, or the App
-abstract class Sound
+redef class Sound
 
-	# The resource ID of this sound
+	# Resource ID of this sound
 	var id: nullable Int
-
-	fun play is abstract
 end
 
 # Sound implemented with a SoundPool
@@ -350,6 +385,8 @@ class SoundSP
 	end
 
 	redef fun play do soundpool.play(soundpool_id)
+	redef fun pause do soundpool.pause_stream(soundpool_id)
+	redef fun resume do soundpool.resume(soundpool_id)
 end
 
 # Sound Implemented with a MediaPlayer
@@ -364,53 +401,81 @@ class SoundMP
 		self.media_player = media_player
 	end
 
-	redef fun play do self.media_player.start
+	redef fun play do media_player.start
+	redef fun pause do media_player.pause
+	redef fun resume do play
 end
 
 redef class App
 
+	# Sounds handled by the application, when you load a sound, it's added to this list.
+	# This array is used in `pause` and `resume`
+	private var sounds = new Array[Sound]
+
+	# Returns the default MediaPlayer of the application.
+	# When you load a music, it goes in this MediaPlayer.
+	# Use it for advanced sound management
 	fun default_mediaplayer: MediaPlayer is cached do return new MediaPlayer
+
+	# Returns the default MediaPlayer of the application.
+	# When you load a short sound (not a music), it's added to this soundpool.
+	# Use it for advanced sound management.
 	fun default_soundpool: SoundPool is cached do return new SoundPool
 
 	# Get the native audio manager
-	private	fun audio_manager: NativeAudioManager import native_activity in "Java" `{
+	fun audio_manager: NativeAudioManager import native_activity in "Java" `{
 		return (AudioManager)App_native_activity(recv).getSystemService(Context.AUDIO_SERVICE);
 	`}
 
-	# Manages whether the app sound need to be in headphones mode or not
-	# TODO: this method is not ideal, need to find a better way
-	fun manage_audio_mode import native_activity in "Java" `{
-		AudioManager manager = (AudioManager)App_native_activity(recv).getSystemService(Context.AUDIO_SERVICE);
-		manager.setMode(0);
-			if (manager.isWiredHeadsetOn()) {
-				manager.setSpeakerphoneOn(false);
-			} else {
-				manager.setSpeakerphoneOn(true);
-			}
+	# Sets the stream of the app to STREAM_MUSIC.
+	# STREAM_MUSIC is the default stream used by android apps.
+	private fun manage_audio_stream import native_activity, native_app_glue in "Java" `{
+		App_native_activity(recv).setVolumeControlStream(AudioManager.STREAM_MUSIC);
 	`}
 
-	# Retrieve a sound with a soundpool in the `assets` folder using it's name
+	# Retrieves a sound with a soundpool in the `assets` folder using its name.
 	# Used to play short songs, can play multiple sounds simultaneously
-	fun load_sound(path: String): Sound do
-		return default_soundpool.load_asset_fd(asset_manager.open_fd(path))
+	redef fun load_sound(path: String): Sound do
+		return add_to_sounds(default_soundpool.load_asset_fd(asset_manager.open_fd(path)))
 	end
 
-	# Retrieve a music with a media player in the `assets`folder using it's name
+	# Retrieves a music with a media player in the `assets` folder using its name.
 	# Used to play long sounds or musics, can't play multiple sounds simultaneously
 	fun load_music(path: String): Sound do
 		var fd = asset_manager.open_fd(path)
-		var sound =  default_mediaplayer.data_source_fd(fd.file_descriptor, fd.start_offset, fd.length)
+		return add_to_sounds(default_mediaplayer.data_source_fd(fd.file_descriptor, fd.start_offset, fd.length))
+	end
+
+	# Same as `load_sound` but load the sound from the `res/raw` folder
+	fun load_sound_from_res(sound_name: String): Sound do
+		return add_to_sounds(default_soundpool.load_name(resource_manager,self.native_activity, sound_name))
+	end
+
+	# Same as `load_music` but load the sound from the `res/raw` folder
+	fun load_music_from_res(music: String): Sound do
+		return add_to_sounds(default_mediaplayer.load_sound(resource_manager.raw_id(music), self.native_activity))
+	end
+
+	# Factorizes `sounds.add` to use it in `load_music`, `load_sound`, `load_music_from_res` and `load_sound_from_res`
+	private fun add_to_sounds(sound: Sound): Sound do
+		sounds.add(sound)
 		return sound
 	end
 
-	# same as `load_sound` but load the sound from the `res\raw` folder
-	fun load_sound_from_res(sound_name: String): Sound do
-		return default_soundpool.load_name(resource_manager,self.native_activity, sound_name)
+	redef fun pause do
+		for s in sounds do s.pause
+		audio_manager.abandon_audio_focus
 	end
 
-	# same as `load_music` but load the sound from the `res\raw` folder
-	fun load_music_from_res(music: String): Sound do
-		return default_mediaplayer.load_sound(resource_manager.raw_id(music), self.native_activity)
+	redef fun init_window do
+		super
+		audio_manager.request_audio_focus
+		manage_audio_stream
 	end
 
+	redef fun resume do
+		super
+		audio_manager.request_audio_focus
+		for s in sounds do s.resume
+	end
 end
