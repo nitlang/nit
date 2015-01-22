@@ -55,3 +55,4 @@ nitunit.xml
 *.stub.nit.[ch]
 
 .metadata/*
+.github_data
