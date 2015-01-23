@@ -117,26 +117,6 @@ abstract class NitdocPage
 		return article
 	end
 
-	# A (source) link template for a given location
-	fun tpl_showsource(location: nullable Location): nullable String
-	do
-		if location == null then return null
-		var source = ctx.opt_source.value
-		if source == null then
-			var url = location.file.filename.simplify_path
-			return "<a target='_blank' title='Show source' href=\"{url.html_escape}\">View Source</a>"
-		end
-		# THIS IS JUST UGLY ! (but there is no replace yet)
-		var x = source.split_with("%f")
-		source = x.join(location.file.filename.simplify_path)
-		x = source.split_with("%l")
-		source = x.join(location.line_start.to_s)
-		x = source.split_with("%L")
-		source = x.join(location.line_end.to_s)
-		source = source.simplify_path
-		return "<a target='_blank' title='Show source' href=\"{source.to_s.html_escape}\">View Source</a>"
-	end
-
 	# MProject description template
 	fun tpl_mproject_article(mproject: MProject): TplArticle do
 		var article = mproject.tpl_article
@@ -198,14 +178,14 @@ abstract class NitdocPage
 		if not mclassdefs.has(mclass.intro) then
 			# add intro synopsys
 			var intro_article = mclass.intro.tpl_short_article
-			intro_article.source_link = tpl_showsource(mclass.intro.location)
+			intro_article.source_link = ctx.tpl_showsource(mclass.intro.location)
 			article.add_child intro_article
 		end
 		ctx.mainmodule.linearize_mclassdefs(mclassdefs)
 		for mclassdef in mclassdefs do
 			# add mclassdef full description
 			var redef_article = mclassdef.tpl_article
-			redef_article.source_link = tpl_showsource(mclassdef.location)
+			redef_article.source_link = ctx.tpl_showsource(mclassdef.location)
 			article.add_child redef_article
 			# mpropdefs list
 			var intros = new TplArticle.with_title("{mclassdef.nitdoc_id}.intros", "Introduces")
@@ -234,7 +214,7 @@ abstract class NitdocPage
 	fun tpl_mclassdef_article(mclassdef: MClassDef): TplArticle do
 		var article = mclassdef.tpl_article
 		if mclassdef.is_intro then article.content = null
-		article.source_link = tpl_showsource(mclassdef.location)
+		article.source_link = ctx.tpl_showsource(mclassdef.location)
 		return article
 	end
 
@@ -306,7 +286,7 @@ abstract class NitdocPage
 	# MProperty description template
 	fun tpl_mpropdef_article(mpropdef: MPropDef): TplArticle do
 		var article = mpropdef.tpl_article
-		article.source_link = tpl_showsource(mpropdef.location)
+		article.source_link = ctx.tpl_showsource(mpropdef.location)
 		return article
 	end
 end
@@ -642,7 +622,7 @@ class NitdocModule
 		var article = new TplArticle("intro")
 		var def = mmodule.tpl_definition
 		var location = mmodule.location
-		article.source_link = tpl_showsource(location)
+		article.source_link = ctx.tpl_showsource(location)
 		article.content = def
 		section.add_child article
 		return section
