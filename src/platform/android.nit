@@ -59,7 +59,7 @@ class AndroidToolchain
 	do
 		var android_project_root = android_project_root.as(not null)
 		var project = toolcontext.modelbuilder.android_project_for(compiler.mainmodule)
-		var short_project_name = compiler.mainmodule.name
+		var short_project_name = compiler.mainmodule.name.replace("-", "_")
 		var release = toolcontext.opt_release.value
 
 		var app_name = project.name
@@ -278,6 +278,7 @@ $(call import-module,android/native_app_glue)
 	redef fun compile_c_code(compiler, compile_dir)
 	do
 		var android_project_root = android_project_root.as(not null)
+		var short_project_name = compiler.mainmodule.name.replace("-", "_")
 		var release = toolcontext.opt_release.value
 
 		# Compile C code (and thus Nit)
@@ -294,7 +295,7 @@ $(call import-module,android/native_app_glue)
 		var outname = outfile(compiler.mainmodule)
 
 		if release then
-			var apk_path = "{android_project_root}/bin/{compiler.mainmodule.name}-release-unsigned.apk"
+			var apk_path = "{android_project_root}/bin/{short_project_name}-release-unsigned.apk"
 
 			# Sign APK
 			var keystore_path= "KEYSTORE".environ
@@ -324,7 +325,7 @@ $(call import-module,android/native_app_glue)
 			toolcontext.exec_and_check(args, "Android project error")
 		else
 			# Move to the expected output path
-			args = ["mv", "{android_project_root}/bin/{compiler.mainmodule.name}-debug.apk", outname]
+			args = ["mv", "{android_project_root}/bin/{short_project_name}-debug.apk", outname]
 			toolcontext.exec_and_check(args, "Android project error")
 		end
 	end
