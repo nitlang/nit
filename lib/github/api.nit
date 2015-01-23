@@ -133,7 +133,7 @@ class GithubAPI
 
 	# Load the json object from Github.
 	# See `GithubEntity::load_from_github`.
-	private fun load_from_github(key: String): JsonObject do
+	protected fun load_from_github(key: String): JsonObject do
 		message(1, "Get {key} (github)")
 		var res = get(key)
 		if was_error then return new JsonObject
