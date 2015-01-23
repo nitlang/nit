@@ -26,8 +26,10 @@ echo "shortstat"
 git diff --shortstat "$orig".."$cur"
 echo "PR"
 git log --first-parent "$orig".."$cur" | grep 'Pull-Request: #' | wc -l
+echo "non-merge commits"
+git log --no-merges --oneline "$orig".."$cur"  | wc -l
 echo "shortlog"
-git shortlog -ens "$orig".."$cur"
+git shortlog -ens --no-merges "$orig".."$cur"
 echo log
 echo
 git log --format="* %s [[!commit %h]]" --first-parent "$orig".."$cur" | tac
