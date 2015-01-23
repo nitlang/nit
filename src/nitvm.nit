@@ -18,6 +18,7 @@
 module nitvm
 
 import vm
+import vm_optimizations
 import frontend
 
 # Create a tool context to handle options and paths
