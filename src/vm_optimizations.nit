@@ -19,6 +19,57 @@ module vm_optimizations
 
 import vm
 
+redef class VirtualMachine
+
+	# Add optimization of the method dispatch
+	redef fun callsite(callsite: nullable CallSite, arguments: Array[Instance]): nullable Instance
+	do
+		var initializers = callsite.mpropdef.initializers
+		if initializers.is_empty then return send_optimize(callsite.as(not null), arguments)
+
+		var recv = arguments.first
+		var i = 1
+		for p in initializers do
+			if p isa MMethod then
+				var args = [recv]
+				for x in p.intro.msignature.mparameters do
+					args.add arguments[i]
+					i += 1
+				end
+				self.send(p, args)
+			else if p isa MAttribute then
+				assert recv isa MutableInstance
+				write_attribute(p, recv, arguments[i])
+				i += 1
+			else abort
+		end
+		assert i == arguments.length
+
+		return send_optimize(callsite.as(not null), [recv])
+	end
+
+	# Try to have the most efficient implementation of the method dispatch
+	fun send_optimize(callsite: CallSite, args: Array[Instance]): nullable Instance
+	do
+		var recv = args.first
+		var mtype = recv.mtype
+		var ret = send_commons(callsite.mproperty, args, mtype)
+		if ret != null then return ret
+
+		if callsite.status == 0 then callsite.optimize(recv)
+
+		var propdef
+		if callsite.status == 1 then
+			propdef = method_dispatch_sst(recv.vtable.internal_vtable, callsite.offset)
+		else
+			propdef = method_dispatch_ph(recv.vtable.internal_vtable, recv.vtable.mask,
+				callsite.id, callsite.offset)
+		end
+
+		return self.call(propdef, args)
+	end
+end
+
 redef class AAttrFormExpr
 	# Position of the attribute in attribute table
 	#
@@ -133,7 +184,9 @@ redef class CallSite
 	# Identifier of the class which introduced the MMethod
 	var id: Int
 
-	# Optimize a method dispatch
+	# Optimize a method dispatch,
+	# If this method is always at the same position in virtual table, we can use direct access,
+	# Otherwise we must use perfect hashing
 	fun optimize(recv: Instance)
 	do
 		if mproperty.intro_mclassdef.mclass.positions_methods[recv.mtype.as(MClassType).mclass] != -1 then
