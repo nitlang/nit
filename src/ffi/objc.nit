@@ -154,7 +154,7 @@ private class ObjCCompilationUnit
 
 		files.add compdir/c_file
 
-		mmodule.c_linker_options = "{mmodule.c_linker_options} -lobjc"
+		mmodule.ldflags = "{mmodule.ldflags} -lobjc"
 
 		return new ExternObjCFile(compdir/c_file, mmodule)
 	end

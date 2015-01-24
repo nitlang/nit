@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Offers the annotations `c_compiler_option` and `c_linker_option` to specify
+# Offers the annotations `cflags` and `ldflags` to specify
 # options for the C compiler directly or indirectly. Differs from the `pkgconfig`
 # annotation by the separation of the options between the compiler and linker.
 module c_compiler_options
@@ -24,15 +24,15 @@ import cpp
 private import annotation
 
 redef class ToolContext
-	var c_compiler_options_phase: Phase = new CCompilerOptionsPhase(self, null)
+	var cflags_phase: Phase = new CCompilerOptionsPhase(self, null)
 end
 
 private class CCompilerOptionsPhase
 	super Phase
 
-	fun compiler_annotation_name: String do return "c_compiler_option"
-	fun linker_annotation_name: String do return "c_linker_option"
-	fun cpp_compiler_annotation_name: String do return "cpp_compiler_option"
+	fun compiler_annotation_name: String do return "cflags"
+	fun linker_annotation_name: String do return "ldflags"
+	fun cpp_compiler_annotation_name: String do return "cppflags"
 
 	redef fun process_annotated_node(nmoduledecl, nat)
 	do
@@ -145,17 +145,17 @@ private class CCompilerOptionsPhase
 
 	fun process_c_compiler_annotation(mmodule: MModule, opt: String)
 	do
-		mmodule.c_compiler_options = "{mmodule.c_compiler_options} {opt}"
+		mmodule.cflags = "{mmodule.cflags} {opt}"
 	end
 
 	fun process_c_linker_annotation(mmodule: MModule, opt: String)
 	do
-		mmodule.c_linker_options = "{mmodule.c_linker_options} {opt}"
+		mmodule.ldflags = "{mmodule.ldflags} {opt}"
 	end
 
 	fun process_cpp_compiler_annotation(mmodule: MModule, opt: String)
 	do
-		mmodule.cpp_compiler_options = "{mmodule.cpp_compiler_options} {opt}"
+		mmodule.cppflags = "{mmodule.cppflags} {opt}"
 	end
 end
 
