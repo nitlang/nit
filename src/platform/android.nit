@@ -64,9 +64,11 @@ class AndroidToolchain
 
 		var app_name = project.name
 		if app_name == null then app_name = compiler.mainmodule.name
+		if not release then app_name += " Debug"
 
 		var app_package = project.java_package
 		if app_package == null then app_package = "org.nitlanguage.{short_project_name}"
+		if not release then app_package += "_debug"
 
 		var app_version = project.version
 		if app_version == null then app_version = "1.0"
