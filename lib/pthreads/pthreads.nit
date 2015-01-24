@@ -16,8 +16,8 @@
 
 # Main POSIX threads support and intro the classes `Thread`, `Mutex` and `Barrier`
 module pthreads is
-	c_compiler_option("-pthread")
-	c_linker_option("-pthread")
+	cflags "-pthread"
+	ldflags "-pthread"
 	pkgconfig "bdw-gc"
 end
 

@@ -20,7 +20,7 @@
 # alone: JPG, PNG, TIF, GIT, ICO and much more.
 module image is
 	pkgconfig "sdl2"
-	c_linker_option "-lSDL2_image"
+	ldflags "-lSDL2_image"
 end
 
 import sdl2

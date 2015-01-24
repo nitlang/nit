@@ -27,8 +27,8 @@
 # most of JNI functions. You can use it to further customize the behavior
 # of your code.
 module java is
-	c_compiler_option "-I $(JAVA_HOME)/include/ -I $(JAVA_HOME)/include/linux/"
-	c_linker_option("-L $(JNI_LIB_PATH) -ljvm")
+	cflags "-I $(JAVA_HOME)/include/ -I $(JAVA_HOME)/include/linux/"
+	ldflags "-L $(JNI_LIB_PATH) -ljvm"
 	new_annotation extra_java_files
 end
 

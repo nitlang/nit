@@ -20,8 +20,8 @@
 # analysis results. The result graph will be sent to the JavaScript function
 # `show_graph` with the source of the graph in Graphviz's dot.
 module pep8analysis_web is
-	cpp_compiler_option("--std=c++11 --bind")
-	c_linker_option("--bind")
+	cppflags "--std=c++11 --bind"
+	ldflags "--bind"
 end
 
 import emscripten

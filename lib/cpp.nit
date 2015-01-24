@@ -16,7 +16,7 @@
 
 # Offers features to interface with C++ code and libraries
 module cpp is
-	new_annotation cpp_compiler_option
+	new_annotation cppflags
 end
 
 # A pointer to a C++ std::string instance

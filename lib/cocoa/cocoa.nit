@@ -20,7 +20,7 @@
 #
 # This wrapper of the Cocoa API regroups the Foundation Kit and the
 # Application Kit.
-module cocoa is c_linker_option "-framework Cocoa"
+module cocoa is ldflags "-framework Cocoa"
 
 import foundation
 import app_kit

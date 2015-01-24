@@ -26,8 +26,8 @@
 # Since this module is a thin wrapper around OpenMPI, in case of missing
 # documentation, you can refer to https://www.open-mpi.org/doc/v1.8/.
 module mpi is
-	c_compiler_option(exec("mpicc", "-showme:compile"))
-	c_linker_option(exec("mpicc", "-showme:link"))
+	cflags exec("mpicc", "-showme:compile")
+	ldflags exec("mpicc", "-showme:link")
 end
 
 import c

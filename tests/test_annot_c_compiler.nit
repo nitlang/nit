@@ -15,10 +15,10 @@
 # limitations under the License.
 
 module test_annot_c_compiler is
-	c_compiler_option("-I /usr/include")
-	c_compiler_option(exec("pkg-config", "--cflags", "sdl"))
-	c_linker_option("-lm")
-	c_linker_option("-lm", "-L /usr/bin")
+	cflags "-I /usr/include"
+	cflags exec("pkg-config", "--cflags", "sdl")
+	ldflags "-lm"
+	ldflags("-lm", "-L /usr/bin")
 end
 
 fun dummy `{ printf("nothing...\n"); `}

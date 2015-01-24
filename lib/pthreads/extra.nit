@@ -16,8 +16,8 @@
 
 # Offers some POSIX threads services that are not available on all platforms
 module extra is
-	c_compiler_option("-pthread")
-	c_linker_option("-pthread")
+	cflags "-pthread"
+	ldflags "-pthread"
 end
 
 intrude import pthreads

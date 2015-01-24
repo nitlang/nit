@@ -16,8 +16,8 @@
 
 # SDL display support (used in Linux for windows and inputes only)
 module sdl is
-	c_compiler_option(exec("sdl-config", "--cflags"))
-	c_linker_option(exec("sdl-config", "--libs"), "-lSDL_image -lSDL_ttf")
+	cflags exec("sdl-config", "--cflags")
+	ldflags(exec("sdl-config", "--libs"), "-lSDL_image -lSDL_ttf")
 end
 
 import mnit_display
