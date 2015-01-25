@@ -2990,7 +2990,7 @@ redef class MModule
 
 	# Give requided addinional system libraries (as given to LD_LIBS)
 	# Note: can return null instead of an empty set
-	fun collect_linker_libs: nullable Set[String] do return null
+	fun collect_linker_libs: nullable Array[String] do return null
 end
 
 # Create a tool context to handle options and paths

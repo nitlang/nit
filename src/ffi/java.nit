@@ -242,8 +242,8 @@ redef class MModule
 	# Tell the C compiler where to find jni.h and how to link with libjvm
 	private fun insert_compiler_options
 	do
-		cflags = "{cflags} -I $(JAVA_HOME)/include/ -I $(JAVA_HOME)/include/linux/"
-		ldflags = "{ldflags} -L $(JNI_LIB_PATH) -ljvm"
+		cflags.add_one("", "-I $(JAVA_HOME)/include/ -I $(JAVA_HOME)/include/linux/")
+		ldflags.add_one("", "-L $(JNI_LIB_PATH) -ljvm")
 	end
 
 	# Name of the generated Java class where to store all implementation methods of this module

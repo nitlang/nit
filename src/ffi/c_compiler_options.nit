@@ -22,9 +22,11 @@ module c_compiler_options
 import c
 import cpp
 private import annotation
+private import platform
 
 redef class ToolContext
-	var cflags_phase: Phase = new CCompilerOptionsPhase(self, null)
+	# Phase to find `cflags`, `ldflags` and `cppflags`
+	var cflags_phase: Phase = new CCompilerOptionsPhase(self, [platform_phase])
 end
 
 private class CCompilerOptionsPhase
@@ -128,35 +130,45 @@ private class CCompilerOptionsPhase
 			end
 		end
 
-		# retreive module
+		# Retrieve module
 		var mmodule = nmoduledecl.parent.as(AModule).mmodule.as(not null)
 
+		# Get target platform from annotation on annotation
+		var platform = ""
+
+		## Is there an imported platform?
+		var target_platform = mmodule.target_platform
+		if target_platform != null then
+			platform = target_platform.name or else ""
+		end
+
+		## Is the platform declared explicitly?
+		var annots = nat.n_annotations
+		if annots != null then
+			var items = annots.n_items
+			if items.length > 1 then
+				modelbuilder.error(annots, "Annotation error: `annotation_name` accepts only a single annotation, the platform name")
+				return
+			end
+			assert items.length == 1
+
+			var item = items.first
+			platform = item.name
+		end
+
+		# Store the flags in the module
 		for opt in simplified_options do
-			var cmd = opt.option
+			var arg = opt.option
 			if annotation_name == compiler_annotation_name then
-				process_c_compiler_annotation(mmodule, cmd)
+				mmodule.cflags.add_one(platform, arg)
 			else if annotation_name == linker_annotation_name then
-				process_c_linker_annotation(mmodule, cmd)
+				mmodule.ldflags.add_one(platform, arg)
 			else if annotation_name == cpp_compiler_annotation_name then
-				process_cpp_compiler_annotation(mmodule, cmd)
+				mmodule.cppflags.add_one(platform, arg)
 			else abort
 		end
 	end
 
-	fun process_c_compiler_annotation(mmodule: MModule, opt: String)
-	do
-		mmodule.cflags = "{mmodule.cflags} {opt}"
-	end
-
-	fun process_c_linker_annotation(mmodule: MModule, opt: String)
-	do
-		mmodule.ldflags = "{mmodule.ldflags} {opt}"
-	end
-
-	fun process_cpp_compiler_annotation(mmodule: MModule, opt: String)
-	do
-		mmodule.cppflags = "{mmodule.cppflags} {opt}"
-	end
 end
 
 abstract class CCompilerOption
