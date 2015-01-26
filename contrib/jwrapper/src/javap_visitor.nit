@@ -61,6 +61,22 @@ class JavaVisitor
 		self.variable_type = new JavaType(self.converter)
 		super
 	end
+
+	# Add the identifier from `token` to the current context
+	fun add_identifier(token: NToken)
+	do
+		if declaration_type == "variable" then
+			if declaration_element == "type" then
+				variable_type.identifier.add(token.text)
+			end
+		else if declaration_type == "method" then
+			if declaration_element == "return_type" then
+				method_return_type.identifier.add(token.text)
+			else if declaration_element == "parameter_list" then
+				method_params[param_index].identifier.add(token.text)
+			end
+		end
+	end
 end
 
 redef class Node
@@ -162,139 +178,35 @@ redef class N_39d_91d_93d_39d
 end
 
 redef class N_39dchar_39d
-	redef fun accept_visitor(v)
-	do
-		if v.declaration_type == "variable" then
-			if v.declaration_element == "type" then
-				v.variable_type.identifier.add(self.text)
-			end
-		else if v.declaration_type == "method" then
-			if v.declaration_element == "return_type" then
-				v.method_return_type.identifier.add(self.text)
-			else if v.declaration_element == "parameter_list" then
-				v.method_params[v.param_index].identifier.add(self.text)
-			end
-		end
-	end
+	redef fun accept_visitor(v) do v.add_identifier self
 end
 
 redef class N_39dboolean_39d
-	redef fun accept_visitor(v)
-	do
-		if v.declaration_type == "variable" then
-			if v.declaration_element == "type" then
-				v.variable_type.identifier.add(self.text)
-			end
-		else if v.declaration_type == "method" then
-			if v.declaration_element == "return_type" then
-				v.method_return_type.identifier.add(self.text)
-			else if v.declaration_element == "parameter_list" then
-				v.method_params[v.param_index].identifier.add(self.text)
-			end
-		end
-	end
+	redef fun accept_visitor(v) do v.add_identifier self
 end
 
 redef class N_39dfloat_39d
-	redef fun accept_visitor(v)
-	do
-		if v.declaration_type == "variable" then
-			if v.declaration_element == "type" then
-				v.variable_type.identifier.add(self.text)
-			end
-		else if v.declaration_type == "method" then
-			if v.declaration_element == "return_type" then
-				v.method_return_type.identifier.add(self.text)
-			else if v.declaration_element == "parameter_list" then
-				v.method_params[v.param_index].identifier.add(self.text)
-			end
-		end
-	end
+	redef fun accept_visitor(v) do v.add_identifier self
 end
 
 redef class N_39ddouble_39d
-	redef fun accept_visitor(v)
-	do
-		if v.declaration_type == "variable" then
-			if v.declaration_element == "type" then
-				v.variable_type.identifier.add(self.text)
-			end
-		else if v.declaration_type == "method" then
-			if v.declaration_element == "return_type" then
-				v.method_return_type.identifier.add(self.text)
-			else if v.declaration_element == "parameter_list" then
-				v.method_params[v.param_index].identifier.add(self.text)
-			end
-		end
-	end
+	redef fun accept_visitor(v) do v.add_identifier self
 end
 
 redef class N_39dbyte_39d
-	redef fun accept_visitor(v)
-	do
-		if v.declaration_type == "variable" then
-			if v.declaration_element == "type" then
-				v.variable_type.identifier.add(self.text)
-			end
-		else if v.declaration_type == "method" then
-			if v.declaration_element == "return_type" then
-				v.method_return_type.identifier.add(self.text)
-			else if v.declaration_element == "parameter_list" then
-				v.method_params[v.param_index].identifier.add(self.text)
-			end
-		end
-	end
+	redef fun accept_visitor(v) do v.add_identifier self
 end
 
 redef class N_39dshort_39d
-	redef fun accept_visitor(v)
-	do
-		if v.declaration_type == "variable" then
-			if v.declaration_element == "type" then
-				v.variable_type.identifier.add(self.text)
-			end
-		else if v.declaration_type == "method" then
-			if v.declaration_element == "return_type" then
-				v.method_return_type.identifier.add(self.text)
-			else if v.declaration_element == "parameter_list" then
-				v.method_params[v.param_index].identifier.add(self.text)
-			end
-		end
-	end
+	redef fun accept_visitor(v) do v.add_identifier self
 end
 
 redef class N_39dint_39d
-	redef fun accept_visitor(v)
-	do
-		if v.declaration_type == "variable" then
-			if v.declaration_element == "type" then
-				v.variable_type.identifier.add(self.text)
-			end
-		else if v.declaration_type == "method" then
-			if v.declaration_element == "return_type" then
-				v.method_return_type.identifier.add(self.text)
-			else if v.declaration_element == "parameter_list" then
-				v.method_params[v.param_index].identifier.add(self.text)
-			end
-		end
-	end
+	redef fun accept_visitor(v) do v.add_identifier self
 end
 
 redef class N_39dlong_39d
-	redef fun accept_visitor(v)
-	do
-		if v.declaration_type == "variable" then
-			if v.declaration_element == "type" then
-				v.variable_type.identifier.add(self.text)
-			end
-		else if v.declaration_type == "method" then
-			if v.declaration_element == "return_type" then
-				v.method_return_type.identifier.add(self.text)
-			else if v.declaration_element == "parameter_list" then
-				v.method_params[v.param_index].identifier.add(self.text)
-			end
-		end
-	end
+	redef fun accept_visitor(v) do v.add_identifier self
 end
 
 #                                  #
