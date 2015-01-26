@@ -14,18 +14,15 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-all: nitmd/nitmd txtmark/Txtmark.class markdown4j/Markdown4j.class
+Markdown4j.class: markdown4j-2.2.jar
+	javac -cp markdown4j-2.2.jar Markdown4j.java
 
-nitmd/nitmd:
-	make -C nitmd
+markdown4j-2.2.jar:
+	wget https://markdown4j.googlecode.com/files/markdown4j-2.2.jar
 
-txtmark/Txtmark.class:
-	make -C txtmark
-
-markdown4j/Markdown4j.class:
-	make -C markdown4j
+test: Markdown4j.class
+	java -cp .:markdown4j-2.2.jar Markdown4j ../../benches/hello.md 5
 
 clean:
-	make -C nitmd clean
-	make -C txtmark clean
-	make -C markdown4j clean
+	rm -rf markdown4j-2.2.jar
+	rm -rf Markdown4j.class

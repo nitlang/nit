@@ -100,6 +100,18 @@ function bench_txtmark()
 }
 bench_txtmark
 
+function bench_markdown4j()
+{
+	name="$FUNCNAME"
+	skip_test "$name" && return
+	prepare_res $outdir/markdown4j.dat "markdown4j" "markdown4j"
+	for file in $bncdir/*.md; do
+		name=`basename $file .md`
+		bench_command "$bench" "" "java" "-cp" "$engdir/markdown4j/.:$engdir/markdown4j/markdown4j-2.2.jar" "Markdown4j" "$file" "$s"
+	done
+}
+bench_markdown4j
+
 if test "$#" -gt 0; then
     plot $outdir/bench_markdown.gnu
 fi
