@@ -76,6 +76,18 @@ mkdir -p $outdir
 
 s=50
 
+function bench_nitmd()
+{
+	name="$FUNCNAME"
+	skip_test "$name" && return
+	prepare_res $outdir/nitmd.dat "nitmd" "nitmd"
+	for file in $bncdir/*.md; do
+		bench=`basename $file .md`
+		bench_command "$bench" "" "$engdir/nitmd/nitmd" "$file" "$s"
+	done
+}
+bench_nitmd
+
 if test "$#" -gt 0; then
     plot $outdir/bench_markdown.gnu
 fi
