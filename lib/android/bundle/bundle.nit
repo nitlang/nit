@@ -18,9 +18,11 @@
 # Android API for various data exchange purposes
 module bundle
 
-import native_app_glue
 import serialization
 import json_serialization
+
+import platform
+import activities
 
 in "Java" `{
 	import android.os.Bundle;
@@ -31,6 +33,8 @@ in "Java" `{
 
 extern class NativeBundle in "Java" `{ android.os.Bundle `}
 	super JavaObject
+
+	new in "Java" `{ return new Bundle(); `}
 
 	fun clone: JavaObject in "Java" `{ return recv.clone(); `}
 	fun size: Int in "Java" `{ return recv.size(); `}
@@ -421,26 +425,10 @@ end
 
 # A class mapping `String` keys to various value types
 class Bundle
-	private var native_bundle: NativeBundle
-	private var context: NativeActivity
+	private var native_bundle: NativeBundle = new NativeBundle is lazy
 
-	init(app: App)
-	do
-		self.context = app.native_activity
-		setup
-	end
-
-	private fun set_vars(native_bundle: NativeBundle)
-	do
-		self.native_bundle = native_bundle.new_global_ref
-	end
-
-	private fun setup import context, set_vars in "Java" `{
-		Activity context = (Activity) Bundle_context(recv);
-		Bundle bundle = new Bundle();
-		
-		Bundle_set_vars(recv, bundle);
-	`}
+	# Get a new `Bundle` wrapping `native_bundle`
+	init from(native_bundle: NativeBundle) do self.native_bundle = native_bundle
 
 	# Returns `true` if the Bundle contains this key
 	fun has(key: String): Bool
