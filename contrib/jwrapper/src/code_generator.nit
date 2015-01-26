@@ -80,9 +80,8 @@ class CodeGenerator
 
 	fun gen_licence: String
 	do
-		return """# This file is part of NIT (http://www.nitlanguage.org).
-#
-# Copyright [Year] [Author name] <Author e-mail>
+		return """
+# This file is part of NIT (http://www.nitlanguage.org).
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -96,7 +95,7 @@ class CodeGenerator
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# This code has been generated using `javap`
+# This code has been generated using `jwrapper`
 """
 	end
 
