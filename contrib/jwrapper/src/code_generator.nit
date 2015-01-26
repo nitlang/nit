@@ -27,7 +27,6 @@ class CodeGenerator
 	var java_class: JavaClass
 	var nb_params: Int
 	var module_name: String
-	fun code_warehouse: CodeWarehouse do return once new CodeWarehouse
 
 	init (file_name: String, jclass: JavaClass, with_attributes, comment: Bool)
 	do
@@ -226,33 +225,6 @@ class CodeGenerator
 		end
 
 		return temp.join("")
-	end
-end
-
-# Contains raw code mostly used to copy collections
-class CodeWarehouse
-
-	private fun create_imports(nit_type: NitType, is_param: Bool): String
-	do
-		var imports = ""
-		var ntype = nit_type.to_s
-		var gen_type = nit_type.generic_params.join(", ")
-
-		if not is_param then
-			if nit_type.is_map then
-				imports = """ import {{{ntype}}}, {{{ntype}}}.[]="""
-			else
-				imports = """ import {{{ntype}}}, {{{ntype}}}.add"""
-			end
-		else if nit_type.id == "Array" then
-			imports = """ import {{{ntype}}}, {{{ntype}}}.length, {{{ntype}}}.[]"""
-		else if nit_type.is_map then
-			imports = """ import {{{ntype}}}.iterator, Iterator[{{{gen_type}}}].is_ok, Iterator[{{{gen_type}}}].next, Iterator[{{{gen_type}}}].item, Iterator[{{{gen_type}}}].key"""
-		else
-			imports = """ import {{{ntype}}}.iterator, Iterator[{{{gen_type}}}].is_ok, Iterator[{{{gen_type}}}].next, Iterator[{{{gen_type}}}].item"""
-		end
-
-		return imports
 	end
 end
 
