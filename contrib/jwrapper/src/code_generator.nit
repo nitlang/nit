@@ -264,16 +264,13 @@ redef class String
 	# * Add suffix `=` to setters
 	fun to_nit_method_name: String
 	do
-		var name
-		if self.has_prefix("Get") then
-			name = self.substring_from(3)
-		else if self.has_prefix("Set") then
-			name = self.substring_from(3)
-			name += "="
-		else
-			name = self
+		var name = self.to_snake_case
+		if name.has_prefix("get_") then
+			name = name.substring_from(4)
+		else if name.has_prefix("set_") then
+			name = name.substring_from(4) + "="
 		end
 
-		return name.to_snake_case
+		return name
 	end
 end
