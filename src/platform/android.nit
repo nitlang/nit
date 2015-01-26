@@ -179,7 +179,8 @@ $(call import-module,android/native_app_glue)
 		android:label="@string/app_name"
 		android:hasCode="true"
 		android:debuggable="{{{not release}}}"
-		{{{icon_declaration}}}>
+		{{{icon_declaration}}}
+		android:configChanges="mcc|mnc|locale|touchscreen|keyboard|keyboardHidden|navigation|screenLayout|fontScale|uiMode|orientation">
 
         <!-- Our activity is the built-in NativeActivity framework class.
              This will take care of integrating with our NDK code. -->
