@@ -15,6 +15,8 @@
 # Business logic of a calculator
 module calculator_logic
 
+import json::dynamic
+
 # Hold the state of the calculator and its services
 class CalculatorContext
 	# Result of the last operation
@@ -117,6 +119,52 @@ class CalculatorContext
 
 		self.result = result
 		self.current = null
+	end
+
+	# Serialize calculator state to Json
+	fun to_json: String
+	do
+		# Do not save NaN nor inf
+		var result = self.result
+		if result != null and (result.to_f.is_nan or result.to_f.is_inf != 0) then result = null
+
+		var self_last_op = self.last_op
+		var last_op
+		if self_last_op == null then
+			last_op = "null"
+		else last_op = "\"{self_last_op}\""
+
+		var self_current = self.current
+		var current
+		if self_current == null then
+			current = "null"
+		else current = "\"{self_current}\""
+
+		return """
+{
+	"result": {{{result or else "null"}}},
+	"last_op": {{{last_op}}},
+	"current": {{{current}}}
+}"""
+	end
+
+	# Load calculator state from Json
+	init from_json(json_string: String)
+	do
+		var json = json_string.to_json_value
+		if json.is_error then
+			print "Loading state failed: {json.to_error}"
+			return
+		end
+
+		var result = json["result"]
+		if result.is_numeric then self.result = result.to_numeric
+
+		var last_op = json["last_op"]
+		if last_op.is_string then self.last_op = last_op.to_s.chars.first
+
+		var current = json["current"]
+		if current.is_string then self.current = new FlatBuffer.from(current.to_s)
 	end
 end
 
