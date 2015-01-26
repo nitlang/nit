@@ -88,6 +88,18 @@ function bench_nitmd()
 }
 bench_nitmd
 
+function bench_txtmark()
+{
+	name="$FUNCNAME"
+	skip_test "$name" && return
+	prepare_res $outdir/txtmark.dat "txtmark" "txtmark"
+	for file in $bncdir/*.md; do
+		bench=`basename $file .md`
+		bench_command "$bench" "" "java" "-cp" "$engdir/txtmark/.:$engdir/txtmark/txtmark-0.11.jar" "Txtmark" "$file" "$s"
+	done
+}
+bench_txtmark
+
 if test "$#" -gt 0; then
     plot $outdir/bench_markdown.gnu
 fi

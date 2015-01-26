@@ -14,14 +14,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-all: nitmd/nitmd txtmark/Txtmark.class
+Txtmark.class: txtmark-0.11.jar
+	javac -cp txtmark-0.11.jar Txtmark.java
 
-nitmd/nitmd:
-	make -C nitmd
+txtmark-0.11.jar:
+	wget -O txtmark-0.11.jar http://search.maven.org/remotecontent?filepath=com/github/rjeschke/txtmark/0.11/txtmark-0.11.jar
 
-txtmark/Txtmark.class:
-	make -C txtmark
+test: Txtmark.class
+	java -cp .:txtmark-0.11.jar Txtmark ../../benches/hello.md 5
 
 clean:
-	make -C nitmd clean
-	make -C txtmark clean
+	rm -rf txtmark-0.11.jar Txtmark.class
