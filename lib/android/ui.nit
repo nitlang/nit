@@ -106,43 +106,8 @@ end
 
 redef extern class NativeActivity
 
-	# Fill this entire `NativeActivity` with `popup`
-	#
-	# This is a workaround for the use on `takeSurface` in `NativeActivity.java`
-	#
-	# TODO replace NativeActivity by our own NitActivity
-	private fun dedicate_to_popup(popup: NativePopupWindow, popup_layout: NativeViewGroup) in "Java" `{
-		final LinearLayout final_main_layout = new LinearLayout(recv);
-		final ViewGroup final_popup_layout = popup_layout;
-		final PopupWindow final_popup = popup;
-		final Activity final_recv = recv;
-
-		recv.runOnUiThread(new Runnable() {
-			@Override
-			public void run()  {
-				MarginLayoutParams params = new MarginLayoutParams(
-					LinearLayout.LayoutParams.MATCH_PARENT,
-					LinearLayout.LayoutParams.MATCH_PARENT);
-
-				final_recv.setContentView(final_main_layout, params);
-
-				final_popup.showAtLocation(final_popup_layout, Gravity.TOP, 0, 40);
-			}
-		});
-	`}
-
 	# Set the main layout of this activity
-	fun content_view=(layout: NativeViewGroup)
-	do
-		var popup = new NativePopupWindow(self)
-		popup.content_view = layout
-		dedicate_to_popup(popup, layout)
-	end
-
-	# Set the real content view of this activity, without hack
-	#
-	# TODO bring use this instead of the hack with `dedicate_to_pupup`
-	private fun real_content_view=(layout: NativeViewGroup) in "Java" `{
+	fun content_view=(layout: NativeViewGroup) in "Java" `{
 		final ViewGroup final_layout = layout;
 		final Activity final_recv = recv;
 
