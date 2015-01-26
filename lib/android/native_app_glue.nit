@@ -32,7 +32,7 @@
 #   is on the same thread as Nit and manages the synchronization with the
 #   main Android thread.
 #
-# * `NativeActivity` is implemented in Java by `android.app.NativeActivity`,
+# * `NativeNativeActivity` is implemented in Java by `android.app.NativeActivity`,
 #   which is a subclass of `Activity` and `Context` (in Java). It represent
 #   main activity of the running application. Use it to get anything related
 #   to the `Context` and as anchor to execute Java UI code.
@@ -40,6 +40,7 @@ module native_app_glue is ldflags "-landroid"
 
 import platform
 import log
+import activities
 
 in "C header" `{
 	#include <android_native_app_glue.h>
@@ -114,22 +115,12 @@ in "C body" `{
 	}
 `}
 
-# An Android activity context
-extern class NativeContext in "Java" `{ android.content.Context `}
-	super JavaObject
-end
-
-# A wrapper of context
-extern class NativeContextWrapper in "Java" `{ android.content.ContextWrapper `}
-	super NativeContext
-end
-
 # Android SDK's `android.app.NativeActivity`.
 #
 # Can be used to get anything related to the `Context` of the activity in Java
 # and as anchor to execute Java UI code.
-extern class NativeActivity in "Java" `{ android.app.NativeActivity `}
-	super NativeContextWrapper
+extern class NativeNativeActivity in "Java" `{ android.app.NativeActivity `}
+	super NativeActivity
 end
 
 redef class App
