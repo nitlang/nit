@@ -27,7 +27,7 @@ end
 redef class MModule
 	private var cpp_file: nullable CPPCompilationUnit = null
 
-	var cpp_compiler_options = "" is writable
+	var cppflags = "" is writable
 end
 
 class CPPLanguage
@@ -133,7 +133,7 @@ class CPPLanguage
 		mmodule.ffi_files.add(file)
 
 		# add linked option to support C++
-		mmodule.c_linker_options = "{mmodule.c_linker_options} -lstdc++"
+		mmodule.ldflags = "{mmodule.ldflags} -lstdc++"
 	end
 
 	redef fun compile_callback(callback, mmodule, mainmodule, ecc)
@@ -180,7 +180,7 @@ class ExternCppFile
 	var mmodule: MModule
 
 	redef fun makefile_rule_name do return "{filename.basename("")}.o"
-	redef fun makefile_rule_content do return "$(CXX) $(CFLAGS) {mmodule.cpp_compiler_options} -c {filename.basename("")} -o {filename.basename("")}.o"
+	redef fun makefile_rule_content do return "$(CXX) $(CFLAGS) {mmodule.cppflags} -c {filename.basename("")} -o {filename.basename("")}.o"
 	redef fun compiles_to_o_file do return true
 end
 

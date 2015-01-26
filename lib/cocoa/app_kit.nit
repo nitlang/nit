@@ -15,7 +15,7 @@
 # limitations under the License.
 
 # The Application Kit provides services to create GUI
-module app_kit is c_linker_option "-framework AppKit"
+module app_kit is ldflags "-framework AppKit"
 
 import foundation
 

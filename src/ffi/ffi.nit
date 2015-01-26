@@ -62,7 +62,7 @@ redef class MModule
 
 		ffi_ccu.write_as_impl(self, compdir)
 		for filename in ffi_ccu.files do
-			var f = new ExternCFile(filename, c_compiler_options)
+			var f = new ExternCFile(filename, cflags)
 			f.pkgconfigs.add_all pkgconfigs
 			ffi_files.add(f)
 		end

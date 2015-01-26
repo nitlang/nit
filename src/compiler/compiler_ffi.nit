@@ -52,7 +52,7 @@ extern void nitni_global_ref_decr(void*);
 		nitni_ccu.write_as_nitni(self, v.compiler.modelbuilder.compile_dir)
 
 		for file in nitni_ccu.files do
-			var f = new ExternCFile(file, c_compiler_options)
+			var f = new ExternCFile(file, cflags)
 			f.pkgconfigs.add_all pkgconfigs
 			v.compiler.extern_bodies.add(f)
 		end
@@ -76,7 +76,7 @@ extern void nitni_global_ref_decr(void*);
 
 	redef fun collect_linker_libs
 	do
-		var s = c_linker_options
+		var s = ldflags
 		if s.is_empty then return null
 		var res = new ArraySet[String]
 		res.add s

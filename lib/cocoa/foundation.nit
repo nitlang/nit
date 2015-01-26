@@ -15,7 +15,7 @@
 # limitations under the License.
 
 # The Foundation Kit provides basic Objective-C classes and structures
-module foundation is c_linker_option "-framework Foundation"
+module foundation is ldflags "-framework Foundation"
 
 in "ObjC Header" `{
 	#import <Foundation/Foundation.h>

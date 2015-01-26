@@ -92,8 +92,8 @@ extern
 no_warning
 
 pkgconfig
-c_compiler_option
-c_linker_option
+cflags
+ldflags
 
 platform
 """

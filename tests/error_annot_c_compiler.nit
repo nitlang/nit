@@ -14,12 +14,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-#alt1#	module error_annot_c_compiler_alt1 is c_compiler_option
-#alt2#	module error_annot_c_compiler_alt2 is c_compiler_option(foo("llvm-config"))
-#alt3#	module error_annot_c_compiler_alt3 is c_compiler_option(foo("llvm-config", "2nd arg"))
-#alt4#	module error_annot_c_compiler_alt4 is c_linker_option
-#alt5#	module error_annot_c_compiler_alt5 is c_compiler_option(exec("invalid-program"))
-#alt6#	module error_annot_c_compiler_alt6 is c_compiler_option(exec)
+#alt1#	module error_annot_c_compiler_alt1 is cflags
+#alt2#	module error_annot_c_compiler_alt2 is cflags(foo("llvm-config"))
+#alt3#	module error_annot_c_compiler_alt3 is cflags(foo("llvm-config", "2nd arg"))
+#alt4#	module error_annot_c_compiler_alt4 is ldflags
+#alt5#	module error_annot_c_compiler_alt5 is cflags(exec("invalid-program"))
+#alt6#	module error_annot_c_compiler_alt6 is cflags(exec)
 
 fun foo `{ printf("nothing...\n"); `}
 

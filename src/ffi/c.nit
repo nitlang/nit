@@ -72,8 +72,8 @@ redef class Location
 end
 
 redef class MModule
-	var c_compiler_options = "" is writable
-	var c_linker_options = "" is writable
+	var cflags = "" is writable
+	var ldflags = "" is writable
 
 	# Additional libraries needed for the compilation
 	# Will be used with pkg-config
