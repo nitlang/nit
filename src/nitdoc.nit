@@ -28,7 +28,9 @@ private class NitdocPhase
 	redef fun process_mainmodule(mainmodule, mmodules)
 	do
 		# generate doc
-		var nitdoc = new Nitdoc(toolcontext, mainmodule.model, mainmodule)
+		toolcontext.model = mainmodule.model
+		toolcontext.mainmodule = mainmodule
+		var nitdoc = new Nitdoc(toolcontext)
 		nitdoc.generate
 	end
 end
