@@ -27,7 +27,6 @@ class CodeGenerator
 	var java_class: JavaClass
 	var nb_params: Int
 	var module_name: String
-	fun code_warehouse: CodeWarehouse do return once new CodeWarehouse
 
 	init (file_name: String, jclass: JavaClass, with_attributes, comment: Bool)
 	do
@@ -81,9 +80,8 @@ class CodeGenerator
 
 	fun gen_licence: String
 	do
-		return """# This file is part of NIT (http://www.nitlanguage.org).
-#
-# Copyright [Year] [Author name] <Author e-mail>
+		return """
+# This file is part of NIT (http://www.nitlanguage.org).
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -97,7 +95,7 @@ class CodeGenerator
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# This code has been generated using `javap`
+# This code has been generated using `jwrapper`
 """
 	end
 
@@ -229,33 +227,6 @@ class CodeGenerator
 	end
 end
 
-# Contains raw code mostly used to copy collections
-class CodeWarehouse
-
-	private fun create_imports(nit_type: NitType, is_param: Bool): String
-	do
-		var imports = ""
-		var ntype = nit_type.to_s
-		var gen_type = nit_type.generic_params.join(", ")
-
-		if not is_param then
-			if nit_type.is_map then
-				imports = """ import {{{ntype}}}, {{{ntype}}}.[]="""
-			else
-				imports = """ import {{{ntype}}}, {{{ntype}}}.add"""
-			end
-		else if nit_type.id == "Array" then
-			imports = """ import {{{ntype}}}, {{{ntype}}}.length, {{{ntype}}}.[]"""
-		else if nit_type.is_map then
-			imports = """ import {{{ntype}}}.iterator, Iterator[{{{gen_type}}}].is_ok, Iterator[{{{gen_type}}}].next, Iterator[{{{gen_type}}}].item, Iterator[{{{gen_type}}}].key"""
-		else
-			imports = """ import {{{ntype}}}.iterator, Iterator[{{{gen_type}}}].is_ok, Iterator[{{{gen_type}}}].next, Iterator[{{{gen_type}}}].item"""
-		end
-
-		return imports
-	end
-end
-
 redef class String
 	# Convert the Java method name `self` to the Nit style
 	#
@@ -264,16 +235,13 @@ redef class String
 	# * Add suffix `=` to setters
 	fun to_nit_method_name: String
 	do
-		var name
-		if self.has_prefix("Get") then
-			name = self.substring_from(3)
-		else if self.has_prefix("Set") then
-			name = self.substring_from(3)
-			name += "="
-		else
-			name = self
+		var name = self.to_snake_case
+		if name.has_prefix("get_") then
+			name = name.substring_from(4)
+		else if name.has_prefix("set_") then
+			name = name.substring_from(4) + "="
 		end
 
-		return name.to_snake_case
+		return name
 	end
 end

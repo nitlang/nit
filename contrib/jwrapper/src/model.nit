@@ -85,8 +85,6 @@ class JavaType
 
 	fun is_collection: Bool do return is_primitive_array or collections_list.has(self.id)
 
-	fun is_map: Bool do return maps.has(self.id)
-
 	fun is_wrapped: Bool do return find_extern_class != null
 
 	fun extern_name: NitType
@@ -249,7 +247,6 @@ class NitType
 	var is_complete: Bool = true
 
 	fun has_generic_params: Bool do return not generic_params == null
-	fun maps: Array[String] is cached do return ["HashMap", "RBTreeMap"]
 
 	fun id: String do return identifier
 
@@ -270,8 +267,6 @@ class NitType
 		self.init(id)
 		self.mod = mod
 	end
-
-	fun is_map: Bool do return maps.has(self.identifier)
 
 	redef fun to_s: String
 	do
