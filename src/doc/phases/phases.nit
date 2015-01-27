@@ -14,3 +14,5 @@
 
 # Phases represent the *steps* of the NitDoc generation process.
 module phases
+
+import indexing
