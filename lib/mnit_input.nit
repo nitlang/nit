@@ -85,6 +85,11 @@ interface KeyEvent
 
 	# Get Char value of key, if any
 	fun to_c: nullable Char is abstract
+
+	# Name of the key that raised `self`
+	#
+	# Use mainly for debug since it is implementation dependent.
+	fun name: String is abstract
 end
 
 # Mobile hardware (or pseudo hardware) event

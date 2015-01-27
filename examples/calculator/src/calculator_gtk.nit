@@ -21,17 +21,18 @@ import calculator_logic
 
 import gtk
 
+# GTK calculator UI
 class CalculatorGui
 	super GtkCallable
 
-	var win : GtkWindow is noinit
-	var container : GtkGrid is noinit
+	private var win: GtkWindow is noinit
+	private var container: GtkGrid is noinit
 
-	var lbl_disp : GtkLabel is noinit
-	var but_eq : GtkButton is noinit
-	var but_dot : GtkButton is noinit
+	private var lbl_disp: GtkLabel is noinit
+	private var but_eq: GtkButton is noinit
+	private var but_dot: GtkButton is noinit
 
-	var context = new CalculatorContext
+	private var context = new CalculatorContext
 
 	redef fun signal(sender, op)
 	do
@@ -54,57 +55,57 @@ class CalculatorGui
 	do
 		init_gtk
 
-		win = new GtkWindow( 0 )
+		win = new GtkWindow(0)
 
-		container = new GtkGrid(5,5,true)
-		win.add( container )
+		container = new GtkGrid(5, 5, true)
+		win.add(container)
 
-		lbl_disp = new GtkLabel( "_" )
-		container.attach( lbl_disp, 0, 0, 5, 1 )
+		lbl_disp = new GtkLabel("_")
+		container.attach(lbl_disp, 0, 0, 5, 1)
 
-		# digits
+		# Digits
 		for n in [0..9] do
-			var but = new GtkButton.with_label( n.to_s )
-			but.request_size( 64, 64 )
-			but.signal_connect( "clicked", self, n )
+			var but = new GtkButton.with_label(n.to_s)
+			but.request_size(64, 64)
+			but.signal_connect("clicked", self, n)
 			if n == 0 then
-				container.attach( but, 0, 4, 1, 1 )
-			else container.attach( but, (n-1)%3, 3-(n-1)/3, 1, 1 )
+				container.attach(but, 0, 4, 1, 1)
+			else container.attach(but, (n-1)%3, 3-(n-1)/3, 1, 1)
 		end
 
-		# operators
+		# Operators
 		var r = 1
-		for op in ['+', '-', '*', '/' ] do
-			var but = new GtkButton.with_label( op.to_s )
-			but.request_size( 64, 64 )
-			but.signal_connect( "clicked", self, op )
-			container.attach( but, 3, r, 1, 1 )
+		for op in ['+', '-', '*', '/'] do
+			var but = new GtkButton.with_label(op.to_s)
+			but.request_size(64, 64)
+			but.signal_connect("clicked", self, op)
+			container.attach(but, 3, r, 1, 1)
 			r+=1
 		end
 
 		# =
-		but_eq = new GtkButton.with_label( "=" )
-		but_eq.request_size( 64, 64 )
-		but_eq.signal_connect( "clicked", self, '=' )
-		container.attach( but_eq, 4, 3, 1, 2 )
+		but_eq = new GtkButton.with_label("=")
+		but_eq.request_size(64, 64)
+		but_eq.signal_connect("clicked", self, '=')
+		container.attach(but_eq, 4, 3, 1, 2)
 
 		# .
-		but_dot = new GtkButton.with_label( "." )
-		but_dot.request_size( 64, 64 )
-		but_dot.signal_connect( "clicked", self, '.' )
-		container.attach( but_dot, 1, 4, 1, 1 )
+		but_dot = new GtkButton.with_label(".")
+		but_dot.request_size(64, 64)
+		but_dot.signal_connect("clicked", self, '.')
+		container.attach(but_dot, 1, 4, 1, 1)
 
-		#C
-		var but_c =  new GtkButton.with_label( "C" )
-		but_c.request_size( 64, 64 )
+		# C
+		var but_c =  new GtkButton.with_label("C")
+		but_c.request_size(64, 64)
 		but_c.signal_connect("clicked", self, 'C')
-		container.attach( but_c, 2, 4, 1, 1 )
+		container.attach(but_c, 2, 4, 1, 1)
 
 		win.show_all
 	end
 end
 
-# graphical application
+# Do not show GUI in when testing
 if "NIT_TESTING".environ == "true" then exit 0
 
 var app = new CalculatorGui

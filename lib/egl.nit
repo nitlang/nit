@@ -412,6 +412,12 @@ class EGLConfigChooser
 	fun surface_type=(flag: Int) do insert_attrib_with_val(0x3033, flag)
 	fun surface_type_egl do surface_type = 4
 
+	# Set which client rendering APIs are supported
+	fun renderable_type=(flag: Int) do insert_attrib_with_val(0x3040, flag)
+
+	# Set EGL as the only supported rendering API
+	fun renderable_type_egl do renderable_type = 4
+
 	fun blue_size=(size: Int) do insert_attrib_with_val(0x3022, size)
 	fun green_size=(size: Int) do insert_attrib_with_val(0x3023, size)
 	fun red_size=(size: Int) do insert_attrib_with_val(0x3024, size)

@@ -31,11 +31,13 @@ class CLanguage
 	redef fun compile_module_block(block, ecc, mmodule)
 	do
 		if block.is_c_header then
-			ecc.header_custom.add( block.location.as_line_pragma )
-			ecc.header_custom.add( block.code )
+			ecc.header_custom.add block.location.as_line_pragma
+			ecc.header_custom.add "\n"
+			ecc.header_custom.add block.code
 		else if block.is_c_body then
-			ecc.body_custom.add( block.location.as_line_pragma )
-			ecc.body_impl.add( block.code )
+			ecc.body_impl.add block.location.as_line_pragma
+			ecc.body_impl.add "\n"
+			ecc.body_impl.add block.code
 		end
 	end
 
