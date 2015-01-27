@@ -138,11 +138,20 @@ class AndroidToolchain
 			end
 		end
 
-		## Generate delagating makefile
+		## Generate delegating makefile
 		dir = "{android_project_root}/jni/"
 		"""
 include $(call all-subdir-makefiles)
 		""".write_to_file("{dir}/Android.mk")
+
+		# Gather ldflags for Android
+		var ldflags = new Array[String]
+		var platform_name = "android"
+		for mmodule in compiler.mainmodule.in_importation.greaters do
+			if mmodule.ldflags.keys.has(platform_name) then
+				ldflags.add_all mmodule.ldflags[platform_name]
+			end
+		end
 
 		### generate makefile into "{compile_dir}/Android.mk"
 		dir = compile_dir
@@ -154,7 +163,7 @@ LOCAL_CFLAGS	:= -D ANDROID -D WITH_LIBGC
 LOCAL_MODULE    := main
 LOCAL_SRC_FILES := \\
 {{{cfiles.join(" \\\n")}}}
-LOCAL_LDLIBS    := -llog -landroid -lEGL -lGLESv1_CM -lz libgc.a
+LOCAL_LDLIBS    := {{{ldflags.join(" ")}}} libgc.a
 LOCAL_STATIC_LIBRARIES := android_native_app_glue png
 
 include $(BUILD_SHARED_LIBRARY)
