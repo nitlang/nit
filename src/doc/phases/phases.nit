@@ -17,4 +17,4 @@ module phases
 
 import indexing
 import show_sources
-import graphs
+import hierarchies

@@ -598,61 +598,6 @@ class NitdocModule
 		return section
 	end
 
-	# inheritance section
-	private fun tpl_inheritance(parent: TplSection) do
-		# Extract relevent modules
-		var imports = mmodule.in_importation.greaters
-		if imports.length > 10 then imports = mmodule.in_importation.direct_greaters
-		var clients = mmodule.in_importation.smallers
-		if clients.length > 10 then clients = mmodule.in_importation.direct_smallers
-
-		# Display lists
-		var section = new TplSection.with_title("dependencies", "Dependencies")
-
-		# Graph
-		var mmodules = new HashSet[MModule]
-		mmodules.add_all mmodule.nested_mmodules
-		mmodules.add_all imports
-		if clients.length < 10 then mmodules.add_all clients
-		mmodules.add mmodule
-		var graph = ctx.tpl_mmodules_graph(mmodule, mmodules)
-		if graph != null then section.add_child graph
-
-		# Imports
-		var lst = new Array[MModule]
-		for dep in imports do
-			if dep.is_fictive or dep.is_test_suite then continue
-			if dep == mmodule then continue
-			lst.add(dep)
-		end
-		if not lst.is_empty then
-			ctx.name_sorter.sort lst
-			section.add_child tpl_list("imports", "Imports", lst)
-		end
-
-		# Clients
-		lst = new Array[MModule]
-		for dep in clients do
-			if dep.is_fictive or dep.is_test_suite then continue
-			if dep == mmodule then continue
-			lst.add(dep)
-		end
-		if not lst.is_empty then
-			ctx.name_sorter.sort lst
-			section.add_child tpl_list("clients", "Clients", lst)
-		end
-
-		parent.add_child section
-	end
-
-	private fun tpl_list(id: String, title: String, mmodules: Array[MModule]): TplArticle do
-		var article = new TplArticle.with_title(id, title)
-		var list = new TplList.with_classes(["list-unstyled", "list-definition"])
-		for mmodule in mmodules do list.elts.add mmodule.tpl_list_item
-		article.content = list
-		return article
-	end
-
 	private fun tpl_concerns(parent: TplSection) do
 		if concerns.is_empty then return
 		parent.add_child new TplArticle.with_content("concerns", "Concerns", concerns.to_tpl)
@@ -702,7 +647,7 @@ class NitdocModule
 	redef fun tpl_content do
 		tpl_sidebar_mclasses
 		var top = tpl_intro
-		tpl_inheritance(top)
+		top.add_child ctx.tpl_importation(mmodule)
 		tpl_concerns(top)
 		tpl_mclasses(top)
 		tpl_page.add_section top
@@ -826,98 +771,6 @@ class NitdocClass
 		parent.add_child new TplArticle.with_content("concerns", "Concerns", concerns.to_tpl)
 	end
 
-	private fun tpl_inheritance(parent: TplSection) do
-		# parents
-		var hparents = new HashSet[MClass]
-		for c in mclass.in_hierarchy(ctx.mainmodule).direct_greaters do
-			if ctx.filter_mclass(c) then hparents.add c
-		end
-
-		# ancestors
-		var hancestors = new HashSet[MClass]
-		for c in mclass.in_hierarchy(ctx.mainmodule).greaters do
-			if c == mclass then continue
-			if not ctx.filter_mclass(c) then continue
-			if hparents.has(c) then continue
-			hancestors.add c
-		end
-
-		# children
-		var hchildren = new HashSet[MClass]
-		for c in mclass.in_hierarchy(ctx.mainmodule).direct_smallers do
-			if ctx.filter_mclass(c) then hchildren.add c
-		end
-
-		# descendants
-		var hdescendants = new HashSet[MClass]
-		for c in mclass.in_hierarchy(ctx.mainmodule).smallers do
-			if c == mclass then continue
-			if not ctx.filter_mclass(c) then continue
-			if hchildren.has(c) then continue
-			hdescendants.add c
-		end
-
-		# Display lists
-		var section = new TplSection.with_title("inheritance", "Inheritance")
-
-		# Graph
-		var mclasses = new HashSet[MClass]
-		mclasses.add_all hancestors
-		mclasses.add_all hparents
-		mclasses.add_all hchildren
-		mclasses.add_all hdescendants
-		mclasses.add mclass
-		var graph = ctx.tpl_mclasses_graph(mclass, mclasses)
-		if graph != null then section.add_child graph
-
-		# parents
-		if not hparents.is_empty then
-			var lst = hparents.to_a
-			ctx.name_sorter.sort lst
-			section.add_child tpl_list("parents", "Parents", lst)
-		end
-
-		# ancestors
-		if not hancestors.is_empty then
-			var lst = hancestors.to_a
-			ctx.name_sorter.sort lst
-			section.add_child tpl_list("ancestors", "Ancestors", lst)
-		end
-
-		# children
-		if not hchildren.is_empty then
-			var lst = hchildren.to_a
-			ctx.name_sorter.sort lst
-			section.add_child tpl_list("children", "Children", lst)
-		end
-
-		# descendants
-		if not hdescendants.is_empty then
-			var lst = hdescendants.to_a
-			ctx.name_sorter.sort lst
-			section.add_child tpl_list("descendants", "Descendants", lst)
-		end
-
-		parent.add_child section
-	end
-
-	private fun tpl_list(id: String, title: String, elts: Array[MClass]): TplArticle do
-		var article = new TplArticle.with_title(id, title)
-		if elts.length > 20 then
-			var tpl = new Template
-			for e in elts do
-				tpl.add e.tpl_link
-				if e != elts.last then tpl.add ", "
-			end
-			article.content = tpl
-		else
-			var list = new TplList.with_classes(["list-unstyled", "list-definition"])
-			for elt in elts do list.elts.add elt.tpl_list_item
-			article.content = list
-		end
-		return article
-	end
-
 	private fun tpl_properties(parent: TplSection) do
 		var lst = concerns.to_a
 		for mentity in lst do
@@ -974,7 +827,7 @@ class NitdocClass
 	redef fun tpl_content do
 		tpl_sidebar_properties
 		var top = tpl_intro
-		tpl_inheritance(top)
+		top.add_child ctx.tpl_inheritance(mclass)
 		tpl_concerns(top)
 		tpl_properties(top)
 		tpl_page.add_section top
