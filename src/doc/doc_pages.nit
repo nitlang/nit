@@ -87,36 +87,6 @@ abstract class NitdocPage
 	# Build page content template
 	fun tpl_content is abstract
 
-	# Clickable graphviz image using dot format
-	# return null if no graph for this page
-	fun tpl_graph(dot: Buffer, name: String, title: nullable String): nullable TplArticle do
-		if ctx.opt_nodot.value then return null
-		var output_dir = ctx.output_dir
-		var path = output_dir / name
-		var path_sh = path.escape_to_sh
-		var file = new OFStream.open("{path}.dot")
-		file.write(dot)
-		file.close
-		sys.system("\{ test -f {path_sh}.png && test -f {path_sh}.s.dot && diff -- {path_sh}.dot {path_sh}.s.dot >/dev/null 2>&1 ; \} || \{ cp -- {path_sh}.dot {path_sh}.s.dot && dot -Tpng -o{path_sh}.png -Tcmapx -o{path_sh}.map {path_sh}.s.dot ; \}")
-		var fmap = new IFStream.open("{path}.map")
-		var map = fmap.read_all
-		fmap.close
-
-		var article = new TplArticle("graph")
-		var alt = ""
-		if title != null then
-			article.title = title
-			alt = "alt='{title.html_escape}'"
-		end
-		article.css_classes.add "text-center"
-		var content = new Template
-		var name_html = name.html_escape
-		content.add "<img src='{name_html}.png' usemap='#{name_html}' style='margin:auto' {alt}/>"
-		content.add map
-		article.content = content
-		return article
-	end
-
 	# MProject description template
 	fun tpl_mproject_article(mproject: MProject): TplArticle do
 		var article = mproject.tpl_article
@@ -645,7 +615,7 @@ class NitdocModule
 		mmodules.add_all imports
 		if clients.length < 10 then mmodules.add_all clients
 		mmodules.add mmodule
-		var graph = tpl_dot(mmodules)
+		var graph = ctx.tpl_mmodules_graph(mmodule, mmodules)
 		if graph != null then section.add_child graph
 
 		# Imports
@@ -736,38 +706,6 @@ class NitdocModule
 		tpl_concerns(top)
 		tpl_mclasses(top)
 		tpl_page.add_section top
-	end
-
-	# Genrate dot hierarchy for class inheritance
-	fun tpl_dot(mmodules: Collection[MModule]): nullable TplArticle do
-		var poset = new POSet[MModule]
-		for mmodule in mmodules do
-			if mmodule.is_fictive or mmodule.is_test_suite then continue
-			poset.add_node mmodule
-			for omodule in mmodules do
-				if omodule.is_fictive or omodule.is_test_suite then continue
-				poset.add_node mmodule
-				if mmodule.in_importation < omodule then
-					poset.add_edge(mmodule, omodule)
-				end
-			end
-		end
-		# build graph
-		var op = new RopeBuffer
-		var name = "dep_module_{mmodule.nitdoc_id}"
-		op.append("digraph \"{name.escape_to_dot}\" \{ rankdir=BT; node[shape=none,margin=0,width=0,height=0,fontsize=10]; edge[dir=none,color=gray]; ranksep=0.2; nodesep=0.1;\n")
-		for mmodule in poset do
-			if mmodule == self.mmodule then
-				op.append("\"{mmodule.name.escape_to_dot}\"[shape=box,margin=0.03];\n")
-			else
-				op.append("\"{mmodule.name.escape_to_dot}\"[URL=\"{mmodule.nitdoc_url.escape_to_dot}\"];\n")
-			end
-			for omodule in poset[mmodule].direct_greaters do
-				op.append("\"{mmodule.name.escape_to_dot}\"->\"{omodule.name.escape_to_dot}\";\n")
-			end
-		end
-		op.append("\}\n")
-		return tpl_graph(op, name, null)
 	end
 
 	private fun sort_by_mclass(mclassdefs: Collection[MClassDef]): Map[MClass, Set[MClassDef]] do
@@ -929,7 +867,7 @@ class NitdocClass
 		mclasses.add_all hchildren
 		mclasses.add_all hdescendants
 		mclasses.add mclass
-		var graph = tpl_dot(mclasses)
+		var graph = ctx.tpl_mclasses_graph(mclass, mclasses)
 		if graph != null then section.add_child graph
 
 		# parents
@@ -1087,52 +1025,6 @@ class NitdocClass
 			end
 		end
 		return res
-	end
-
-	# Generate dot hierarchy for classes
-	fun tpl_dot(mclasses: Collection[MClass]): nullable TplArticle do
-		var poset = new POSet[MClass]
-
-		for mclass in mclasses do
-			poset.add_node mclass
-			for oclass in mclasses do
-				if mclass == oclass then continue
-				poset.add_node oclass
-				if mclass.in_hierarchy(ctx.mainmodule) < oclass then
-					poset.add_edge(mclass, oclass)
-				end
-			end
-		end
-
-		var op = new RopeBuffer
-		var name = "dep_class_{mclass.nitdoc_id}"
-		op.append("digraph \"{name.escape_to_dot}\" \{ rankdir=BT; node[shape=none,margin=0,width=0,height=0,fontsize=10]; edge[dir=none,color=gray]; ranksep=0.2; nodesep=0.1;\n")
-		var classes = poset.to_a
-		var todo = new Array[MClass]
-		var done = new HashSet[MClass]
-		ctx.mainmodule.linearize_mclasses(classes)
-		if not classes.is_empty then todo.add classes.first
-		while not todo.is_empty do
-			var c = todo.shift
-			if done.has(c) then continue
-			done.add c
-			if c == mclass then
-				op.append("\"{c.name.escape_to_dot}\"[shape=box,margin=0.03];\n")
-			else
-				op.append("\"{c.name.escape_to_dot}\"[URL=\"{c.nitdoc_url.escape_to_dot}\"];\n")
-			end
-			var smallers = poset[c].direct_smallers
-			if smallers.length < 10 then
-				for c2 in smallers do
-					op.append("\"{c2.name.escape_to_dot}\"->\"{c.name.escape_to_dot}\";\n")
-				end
-				todo.add_all smallers
-			else
-				op.append("\"...\"->\"{c.name.escape_to_dot}\";\n")
-			end
-		end
-		op.append("\}\n")
-		return tpl_graph(op, name, null)
 	end
 end
 
