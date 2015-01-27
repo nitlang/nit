@@ -18,3 +18,4 @@ module phases
 import indexing
 import show_sources
 import hierarchies
+import intros_redefs

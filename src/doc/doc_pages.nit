@@ -113,31 +113,13 @@ abstract class NitdocPage
 		article.subtitle = mmodule.tpl_declaration
 		article.content = mmodule.tpl_definition
 		# mclassdefs list
-		var intros = mmodule.intro_mclassdefs(ctx.min_visibility).to_a
-		if not intros.is_empty then
-			ctx.mainmodule.linearize_mclassdefs(intros)
-			var intros_art = new TplArticle.with_title("{mmodule.nitdoc_id}.intros", "Introduces")
-			var intros_lst = new TplList.with_classes(["list-unstyled", "list-labeled"])
-			for mclassdef in intros do
-				intros_lst.add_li mclassdef.tpl_list_item
-			end
-			if not intros_lst.is_empty then
-				intros_art.content = intros_lst
-				article.add_child intros_art
-			end
+		var intros_article = ctx.mmodule_intros(mmodule)
+		if intros_article != null then
+			article.add_child intros_article
 		end
-		var redefs = mmodule.redef_mclassdefs(ctx.min_visibility).to_a
-		if not redefs.is_empty then
-			ctx.mainmodule.linearize_mclassdefs(redefs)
-			var redefs_art = new TplArticle.with_title("{mmodule.nitdoc_id}.redefs", "Redefines")
-			var redefs_lst = new TplList.with_classes(["list-unstyled", "list-labeled"])
-			for mclassdef in redefs do
-				redefs_lst.add_li mclassdef.tpl_list_item
-			end
-			if not redefs_lst.is_empty then
-				redefs_art.content = redefs_lst
-				article.add_child redefs_art
-			end
+		var redefs_article = ctx.mmodule_redefs(mmodule)
+		if redefs_article != null then
+			article.add_child redefs_article
 		end
 		return article
 	end
@@ -158,23 +140,13 @@ abstract class NitdocPage
 			redef_article.source_link = ctx.tpl_showsource(mclassdef.location)
 			article.add_child redef_article
 			# mpropdefs list
-			var intros = new TplArticle.with_title("{mclassdef.nitdoc_id}.intros", "Introduces")
-			var intros_lst = new TplList.with_classes(["list-unstyled", "list-labeled"])
-			for mpropdef in mclassdef.collect_intro_mpropdefs(ctx.min_visibility) do
-				intros_lst.add_li mpropdef.tpl_list_item
+			var intros_article = ctx.mclassdef_intros(mclassdef)
+			if intros_article != null then
+				redef_article.add_child intros_article
 			end
-			if not intros_lst.is_empty then
-				intros.content = intros_lst
-				redef_article.add_child intros
-			end
-			var redefs = new TplArticle.with_title("{mclassdef.nitdoc_id}.redefs", "Redefines")
-			var redefs_lst = new TplList.with_classes(["list-unstyled", "list-labeled"])
-			for mpropdef in mclassdef.collect_redef_mpropdefs(ctx.min_visibility) do
-				redefs_lst.add_li mpropdef.tpl_list_item
-			end
-			if not redefs_lst.is_empty then
-				redefs.content = redefs_lst
-				redef_article.add_child redefs
+			var redefs_article = ctx.mclassdef_redefs(mclassdef)
+			if redefs_article != null then
+				redef_article.add_child redefs_article
 			end
 		end
 		return article
