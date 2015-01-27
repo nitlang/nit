@@ -61,14 +61,16 @@ class AndroidToolchain
 	do
 		var android_project_root = android_project_root.as(not null)
 		var project = toolcontext.modelbuilder.android_project_for(compiler.mainmodule)
-		var short_project_name = compiler.mainmodule.name
+		var short_project_name = compiler.mainmodule.name.replace("-", "_")
 		var release = toolcontext.opt_release.value
 
 		var app_name = project.name
 		if app_name == null then app_name = compiler.mainmodule.name
+		if not release then app_name += " Debug"
 
 		var app_package = project.java_package
 		if app_package == null then app_package = "org.nitlanguage.{short_project_name}"
+		if not release then app_package += "_debug"
 
 		var app_version = project.version
 		if app_version == null then app_version = "1.0"
@@ -179,7 +181,8 @@ $(call import-module,android/native_app_glue)
 		android:label="@string/app_name"
 		android:hasCode="true"
 		android:debuggable="{{{not release}}}"
-		{{{icon_declaration}}}>
+		{{{icon_declaration}}}
+		android:configChanges="mcc|mnc|locale|touchscreen|keyboard|keyboardHidden|navigation|screenLayout|fontScale|uiMode|orientation">
 
         <!-- Our activity is the built-in NativeActivity framework class.
              This will take care of integrating with our NDK code. -->
@@ -289,6 +292,7 @@ $(call import-module,android/native_app_glue)
 	redef fun compile_c_code(compiler, compile_dir)
 	do
 		var android_project_root = android_project_root.as(not null)
+		var short_project_name = compiler.mainmodule.name.replace("-", "_")
 		var release = toolcontext.opt_release.value
 
 		# Compile C code (and thus Nit)
@@ -305,7 +309,7 @@ $(call import-module,android/native_app_glue)
 		var outname = outfile(compiler.mainmodule)
 
 		if release then
-			var apk_path = "{android_project_root}/bin/{compiler.mainmodule.name}-release-unsigned.apk"
+			var apk_path = "{android_project_root}/bin/{short_project_name}-release-unsigned.apk"
 
 			# Sign APK
 			var keystore_path= "KEYSTORE".environ
@@ -335,7 +339,7 @@ $(call import-module,android/native_app_glue)
 			toolcontext.exec_and_check(args, "Android project error")
 		else
 			# Move to the expected output path
-			args = ["mv", "{android_project_root}/bin/{compiler.mainmodule.name}-debug.apk", outname]
+			args = ["mv", "{android_project_root}/bin/{short_project_name}-debug.apk", outname]
 			toolcontext.exec_and_check(args, "Android project error")
 		end
 	end
