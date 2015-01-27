@@ -1,0 +1,123 @@
+#!/bin/bash
+# This file is part of NIT ( http://www.nitlanguage.org ).
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# Shell script to bench nitmd over different kind of document.
+
+source ../bench_common.sh
+source ../bench_plot.sh
+
+## CONFIGURATION OPTIONS ##
+
+# Default number of times a command must be run with bench_command
+# Can be overrided with 'the option -n'
+count=2
+
+### HELPER FUNCTIONS ##
+
+function die()
+{
+	echo >&2 "error: $*"
+	died=1
+}
+
+## HANDLE OPTIONS ##
+
+function usage()
+{
+	echo "run_bench: [options]* benchname"
+	echo "  -v: verbose mode"
+	echo "  -n count: number of execution for each bar (default: $count)"
+	echo "  --dry: Do not run the commands, just reuse the data and generate the graph"
+	echo "  -h: this help"
+}
+
+stop=false
+while [ "$stop" = false ]; do
+	case "$1" in
+		-v) verbose=true; shift;;
+		-h) usage; exit;;
+		-n) count="$2"; shift; shift;;
+		--dry) dry_run=true; shift;;
+		*) stop=true
+	esac
+done
+
+## GEN BENCHES
+cd benches; make; cd ..
+
+## COMPILE ENGINES
+cd engines; make; cd ..
+
+NOTSKIPED="$*"
+
+if test -z "$NOTSKIPED"; then
+	usage
+	echo "List of available benches:"
+	echo "* all: run all the benches"
+fi
+
+## EFFECTIVE BENCHS ##
+outdir="./out"
+engdir="./engines"
+bncdir="./benches/out"
+mkdir -p $outdir
+
+s=50
+
+function bench_nitmd()
+{
+	name="$FUNCNAME"
+	skip_test "$name" && return
+	prepare_res $outdir/nitmd.dat "nitmd" "nitmd"
+	for file in $bncdir/*.md; do
+		bench=`basename $file .md`
+		bench_command "$bench" "" "$engdir/nitmd/nitmd" "$file" "$s"
+	done
+}
+bench_nitmd
+
+function bench_txtmark()
+{
+	name="$FUNCNAME"
+	skip_test "$name" && return
+	prepare_res $outdir/txtmark.dat "txtmark" "txtmark"
+	for file in $bncdir/*.md; do
+		bench=`basename $file .md`
+		bench_command "$bench" "" "java" "-cp" "$engdir/txtmark/.:$engdir/txtmark/txtmark-0.11.jar" "Txtmark" "$file" "$s"
+	done
+}
+bench_txtmark
+
+function bench_markdown4j()
+{
+	name="$FUNCNAME"
+	skip_test "$name" && return
+	prepare_res $outdir/markdown4j.dat "markdown4j" "markdown4j"
+	for file in $bncdir/*.md; do
+		name=`basename $file .md`
+		bench_command "$bench" "" "java" "-cp" "$engdir/markdown4j/.:$engdir/markdown4j/markdown4j-2.2.jar" "Markdown4j" "$file" "$s"
+	done
+}
+bench_markdown4j
+
+if test "$#" -gt 0; then
+    plot $outdir/bench_markdown.gnu
+fi
+
+if test -n "$died"; then
+	echo "Some commands failed"
+	exit 1
+fi
+exit 0
