@@ -31,6 +31,7 @@ end
 class EmscriptenPlatform
 	super Platform
 
+	redef fun name do return "emscripten"
 	redef fun supports_libunwind do return false
 	redef fun supports_libgc do return false
 	redef fun supports_linker_script do return false

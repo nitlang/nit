@@ -31,6 +31,8 @@ end
 class PnaclPlatform
 	super Platform
 
+	redef fun name do return "pnacl"
+
 	redef fun supports_libunwind do return false
 
 	redef fun no_main do return true
