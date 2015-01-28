@@ -155,7 +155,7 @@ private class Concat
 		else
 			var r = right
 			var rlen = r.length
-			if rlen + slen > maxlen then return new Concat(left, new Concat(r, s))
+			if rlen + slen > maxlen then return new Concat(self, s)
 			return new Concat(left, r + s)
 		end
 	end
