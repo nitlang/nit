@@ -74,7 +74,7 @@ end
 private class Concat
 	super RopeString
 
-	redef var length: Int
+	redef var length: Int is noinit
 
 	redef fun substrings do return new RopeSubstrings(self)
 
@@ -98,10 +98,8 @@ private class Concat
 	# Right child of the node
 	var right: String
 
-	init(l: String, r: String) is old_style_init do
-		left = l
-		right = r
-		length = l.length + r.length
+	init do
+		length = left.length + right.length
 	end
 
 	redef fun output do
@@ -780,17 +778,15 @@ end
 private class RopeChars
 	super StringCharView
 
-	var tgt: RopeString
-
-	init(s: RopeString) is old_style_init do tgt = s
+	redef type SELFTYPE: RopeString
 
 	redef fun [](i) do
-		return tgt[i]
+		return target[i]
 	end
 
-	redef fun iterator_from(i) do return new RopeIter.from(tgt, i)
+	redef fun iterator_from(i) do return new RopeIter.from(target, i)
 
-	redef fun reverse_iterator_from(i) do return new RopeReviter.from(tgt, i)
+	redef fun reverse_iterator_from(i) do return new RopeReviter.from(target, i)
 
 end
 
