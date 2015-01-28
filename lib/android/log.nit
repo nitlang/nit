@@ -15,7 +15,7 @@
 # limitations under the License.
 
 # Advanced Android logging services
-module log
+module log is ldflags "-llog"
 
 import platform
 

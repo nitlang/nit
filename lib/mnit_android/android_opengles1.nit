@@ -16,7 +16,7 @@
 
 # Adapts OpenGL ES 1.0 for use on Android by offering services to get
 # a handler to the native display and window.
-module android_opengles1
+module android_opengles1 is ldflags "-lEGL -lGLESv1_CM"
 
 import android_app
 import android

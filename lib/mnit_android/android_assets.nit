@@ -21,7 +21,7 @@
 # * The Android ndk
 # * zlib (which is included in the Android ndk)
 # * libpng which must be provided by the Nit compilation framework
-module android_assets
+module android_assets is ldflags "-lz"
 
 import mnit
 import android_app
