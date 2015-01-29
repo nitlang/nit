@@ -60,6 +60,8 @@ redef class MModule
 			if mod.uses_ffi then ffi_ccu.header_custom.add("#include \"{mod.c_name}._ffi.h\"\n")
 		end
 
+		var cflags = self.cflags[""].join(" ")
+
 		ffi_ccu.write_as_impl(self, compdir)
 		for filename in ffi_ccu.files do
 			var f = new ExternCFile(filename, cflags)

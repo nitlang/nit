@@ -104,6 +104,10 @@ end
 #
 # Services will be added to this class in other modules.
 class Platform
+
+	# Simple lower-case name of the platform
+	fun name: nullable String do return null
+
 	# Does the platform provide and support the library `unwind`?
 	fun supports_libunwind: Bool do return true
 

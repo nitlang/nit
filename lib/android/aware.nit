@@ -14,17 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-module platform is
-	platform("android")
-	new_annotation java_package
-	new_annotation min_api_version
-	new_annotation max_api_version
-	new_annotation target_api_version
-	new_annotation android_manifest
-	new_annotation android_manifest_application
-	new_annotation android_manifest_activity
-end
-
-import java
-import app
-import aware
+# Android compatibility module
+#
+# Defines the `@android` annotation used to tag `ldflags` annotations.
+module aware is new_annotation(android)

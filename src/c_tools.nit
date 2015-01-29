@@ -125,7 +125,7 @@ end
 class ExternCFile
 	super ExternFile
 
-	# Additional specific CC compiler -c flags
+	# Custom options for the C compiler (CFLAGS)
 	var cflags: String
 
 	redef fun hash do return filename.hash

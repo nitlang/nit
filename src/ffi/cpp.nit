@@ -27,7 +27,8 @@ end
 redef class MModule
 	private var cpp_file: nullable CPPCompilationUnit = null
 
-	var cppflags = "" is writable
+	# Custom options for the C++ compiler (CPPFLAGS)
+	var cppflags = new MultiHashMap[String, String]
 end
 
 class CPPLanguage
@@ -133,7 +134,7 @@ class CPPLanguage
 		mmodule.ffi_files.add(file)
 
 		# add linked option to support C++
-		mmodule.ldflags = "{mmodule.ldflags} -lstdc++"
+		mmodule.ldflags.add_one("", "-lstdc++")
 	end
 
 	redef fun compile_callback(callback, mmodule, mainmodule, ecc)
@@ -180,7 +181,7 @@ class ExternCppFile
 	var mmodule: MModule
 
 	redef fun makefile_rule_name do return "{filename.basename("")}.o"
-	redef fun makefile_rule_content do return "$(CXX) $(CFLAGS) {mmodule.cppflags} -c {filename.basename("")} -o {filename.basename("")}.o"
+	redef fun makefile_rule_content do return "$(CXX) $(CFLAGS) {mmodule.cppflags[""].join(" ")} -c {filename.basename("")} -o {filename.basename("")}.o"
 	redef fun compiles_to_o_file do return true
 end
 

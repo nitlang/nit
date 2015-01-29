@@ -33,8 +33,10 @@ module glesv2 is
 	pkgconfig
 	new_annotation glsl_vertex_shader
 	new_annotation glsl_fragment_shader
+	ldflags("-lGLESv2")@android
 end
 
+import android::aware
 
 in "C Header" `{
 	#include <GLES2/gl2.h>

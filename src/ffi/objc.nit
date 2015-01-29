@@ -154,7 +154,7 @@ private class ObjCCompilationUnit
 
 		files.add compdir/c_file
 
-		mmodule.ldflags = "{mmodule.ldflags} -lobjc"
+		mmodule.ldflags.add_one("", "-lobjc")
 
 		return new ExternObjCFile(compdir/c_file, mmodule)
 	end
