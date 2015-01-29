@@ -1216,7 +1216,7 @@ redef class AExpr
 	# Return a possible value
 	# NOTE: Do not call this method directly, but use `v.expr`
 	# This method is here to be implemented by subclasses.
-	private fun expr(v: NaiveInterpreter): nullable Instance
+	protected fun expr(v: NaiveInterpreter): nullable Instance
 	do
 		fatal(v, "NOT YET IMPLEMENTED expr {class_name}")
 		abort
@@ -1225,7 +1225,7 @@ redef class AExpr
 	# Evaluate the node as a statement.
 	# NOTE: Do not call this method directly, but use `v.stmt`
 	# This method is here to be implemented by subclasses (no need to return something).
-	private fun stmt(v: NaiveInterpreter)
+	protected fun stmt(v: NaiveInterpreter)
 	do
 		expr(v)
 	end
