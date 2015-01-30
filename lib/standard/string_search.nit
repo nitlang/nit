@@ -370,16 +370,16 @@ redef class Text
 	# Split `self` using `p` as separator.
 	#
 	#     assert "hello world".split('o')          ==  ["hell", " w", "rld"]
-	fun split(p: Pattern): Array[SELFTYPE]
+	fun split(p: Pattern): Array[String]
 	do
 		var matches = p.split_in(self)
-		var res = new Array[SELFTYPE].with_capacity(matches.length)
+		var res = new Array[String].with_capacity(matches.length)
 		for m in matches do res.add(m.to_s)
 		return res
 	end
 
 	# @deprecated alias for `split`
-	fun split_with(p: Pattern): Array[SELFTYPE] do return self.split(p)
+	fun split_with(p: Pattern): Array[String] do return self.split(p)
 
 	# Split `self` on the first `=`
 	#
@@ -396,7 +396,7 @@ redef class Text
 	#
 	#     assert "hlelo".replace("le", "el")	     ==  "hello"
 	#     assert "hello".replace('l', "")	     ==  "heo"
-	fun replace(p: Pattern, string: SELFTYPE): SELFTYPE
+	fun replace(p: Pattern, string: SELFTYPE): String
 	do
 		return self.split_with(p).join(string)
 	end

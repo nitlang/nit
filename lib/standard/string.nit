@@ -439,10 +439,10 @@ abstract class Text
 	# REQUIRE: `left >= 0.0 and left <= 1.0`
 	# ENSURE: `self.length <= length implies result.length == length`
 	# ENSURE: `self.length >= length implies result == self`
-	fun justify(length: Int, left: Float): SELFTYPE
+	fun justify(length: Int, left: Float): String
 	do
 		var diff = length - self.length
-		if diff <= 0 then return self
+		if diff <= 0 then return to_s
 		assert left >= 0.0 and left <= 1.0
 		var before = (diff.to_f * left).to_i
 		return " " * before + self + " " * (diff-before)
@@ -711,7 +711,7 @@ abstract class Text
 	#     assert "a&b-<>\"x\"/'".html_escape      ==  "a&amp;b-&lt;&gt;&#34;x&#34;&#47;&#39;"
 	#
 	# SEE: <https://www.owasp.org/index.php/XSS_%28Cross_Site_Scripting%29_Prevention_Cheat_Sheet#RULE_.231_-_HTML_Escape_Before_Inserting_Untrusted_Data_into_HTML_Element_Content>
-	fun html_escape: SELFTYPE
+	fun html_escape: String
 	do
 		var buf = new FlatBuffer
 
