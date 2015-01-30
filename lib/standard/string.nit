@@ -877,7 +877,7 @@ end
 abstract class String
 	super Text
 
-	redef type SELFTYPE: String
+	redef type SELFTYPE: String is fixed
 
 	redef fun to_s do return self
 
@@ -1399,7 +1399,7 @@ end
 abstract class Buffer
 	super Text
 
-	redef type SELFTYPE: Buffer
+	redef type SELFTYPE: Buffer is fixed
 
 	# Specific implementations MUST set this to `true` in order to invalidate caches
 	protected var is_dirty = true
