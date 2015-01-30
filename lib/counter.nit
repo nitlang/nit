@@ -35,7 +35,7 @@ import poset
 # assert c.max    == "b" # because "b" has the most count (3)
 # assert c.avg    == 2.0 # because it is the mean of the counts
 # ~~~~
-class Counter[E: Object]
+class Counter[E]
 	super Map[E, Int]
 
 	# Total number of counted occurrences
@@ -181,7 +181,8 @@ class Counter[E: Object]
 	fun max: nullable E do
 		var max: nullable Int = null
 		var elem: nullable E = null
-		for e, v in map do
+		for e in map.keys do
+			var v = map[e]
 			if max == null or v > max then
 				max = v
 				elem = e
@@ -201,7 +202,8 @@ class Counter[E: Object]
 	fun min: nullable E do
 		var min: nullable Int = null
 		var elem: nullable E = null
-		for e, v in map do
+		for e in map.keys do
+			var v = map[e]
 			if min == null or v < min then
 				min = v
 				elem = e
@@ -238,7 +240,7 @@ class Counter[E: Object]
 	end
 end
 
-private class CounterComparator[E: Object]
+private class CounterComparator[E]
 	super Comparator
 	redef type COMPARED: E
 	var counter: Counter[E]

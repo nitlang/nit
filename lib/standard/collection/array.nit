@@ -471,7 +471,7 @@ end
 # Others collections ##########################################################
 
 # A set implemented with an Array.
-class ArraySet[E: Object]
+class ArraySet[E]
 	super Set[E]
 
 	# The stored elements.
@@ -522,7 +522,7 @@ class ArraySet[E: Object]
 end
 
 # Iterators on sets implemented with arrays.
-private class ArraySetIterator[E: Object]
+private class ArraySetIterator[E]
 	super Iterator[E]
 
 	redef fun is_ok do return _iter.is_ok

@@ -71,7 +71,7 @@ module poset
 #
 # Thanks to the `[]` method, elements can be considered relatively to the poset.
 # SEE `POSetElement`
-class POSet[E: Object]
+class POSet[E]
 	super Collection[E]
 	super Comparator
 
@@ -379,7 +379,7 @@ end
 # # ...
 # t.in_some_relation.greaters
 # ~~~
-class POSetElement[E: Object]
+class POSetElement[E]
 	# The poset self belong to
 	var poset: POSet[E]
 
