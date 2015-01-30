@@ -1522,8 +1522,6 @@ class FlatBuffer
 	super FlatText
 	super Buffer
 
-	redef type SELFTYPE: FlatBuffer
-
 	redef var chars: Sequence[Char] = new FlatBufferCharView(self)
 
 	private var capacity: Int = 0
