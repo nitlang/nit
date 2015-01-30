@@ -2,42 +2,43 @@ This product includes software developed as part of the Nit Language
 project ( http://nitlanguage.org ).
 
 Files: *
-Copyright: 2004-2014 Jean Privat <jean@pryen.org>
+Copyright: 2004-2015 Jean Privat <jean@pryen.org>
            2006-2008 Floréal Morandat <morandat@lirmm.fr>
            2009      Julien Chevalier <chevjulien@gmail.com>
            2009-2011 Jean-Sebastien Gelinas <calestar@gmail.com>
-           2009-2014 Alexis Laferrière <alexis.laf@xymus.net>
+           2009-2015 Alexis Laferrière <alexis.laf@xymus.net>
            2011      Matthieu Auger <matthieu.auger@gmail.com>
-           2011-2014 Alexandre Terrasa <alexandre@moz-code.org>
+           2011-2015 Alexandre Terrasa <alexandre@moz-code.org>
            2012      Alexandre Pennetier <alexandre.pennetier@me.com>
-           2013-2014 Lucas Bajolet <r4pass@hotmail.com>
+           2013-2015 Lucas Bajolet <r4pass@hotmail.com>
            2013      Stefan Lage <lagestfan@gmail.com>
            2013      Nathan Heu <heu.nathan@courrier.uqam.ca>
            2013      Matthieu Lucas <lucasmatthieu@gmail.com>
-           2014      Romain Chanoir <romain.chanoir@viacesi.fr>
+           2014-2015 Romain Chanoir <romain.chanoir@viacesi.fr>
            2014      Frédéric Vachon <fredvac@gmail.com>
            2014      Johan Kayser <johan.kayser@viacesi.fr>
-           2014      Julien Pagès <julien.projet@gmail.com>
+           2014-2015 Julien Pagès <julien.projet@gmail.com>
            2014      Geoffrey Hecht <geoffrey.hecht@gmail.com>
            2014      Jean-Christophe Beaupré <jcbrinfo@users.noreply.github.com>
+           2015      Arthur Delamare <arthur.delamare@viacesi.fr>
 License: Apache 2.0 (see LICENSE)
 Comment: The main license of the work, except for the following exceptions
 
 Files: lib/*
        clib/*
        share/nitdoc/*
-Copyright: 2004-2014 Jean Privat <jean@pryen.org>
+Copyright: 2004-2015 Jean Privat <jean@pryen.org>
            2006-2008 Floréal Morandat <morandat@lirmm.fr>
            2009-2011 Jean-Sebastien Gelinas <calestar@gmail.com>
-           2009-2014 Alexis Laferrière <alexis.laf@xymus.net>
+           2009-2015 Alexis Laferrière <alexis.laf@xymus.net>
            2009      Julien Chevalier <chevjulien@gmail.com>
-           2011-2014 Alexandre Terrasa <alexandre@moz-concept.com>
+           2011-2015 Alexandre Terrasa <alexandre@moz-concept.com>
            2012      Alexandre Pennetier <alexandre.pennetier@me.com>
-           2013-2014 Lucas Bajolet <r4pass@hotmail.com>
+           2013-2015 Lucas Bajolet <r4pass@hotmail.com>
            2013      Nathan Heu <heu.nathan@courrier.uqam.ca>
            2013      Matthieu Lucas <lucasmatthieu@gmail.com>
            2013      Stefan Lage <lagestfan@gmail.com>
-           2014      Romain Chanoir <romain.chanoir@viacesi.fr>
+           2014-2015 Romain Chanoir <romain.chanoir@viacesi.fr>
            2014      Frédéric Vachon <fredvac@gmail.com>
            2014      Johan Kayser <johan.kayser@viacesi.fr>
            2014      Geoffrey Hecht <geoffrey.hecht@gmail.com>
@@ -46,7 +47,7 @@ Copyright: 2004-2014 Jean Privat <jean@pryen.org>
            2014      Clement de Figueiredo <clement.defigueiredo@gmail.com>
            2014      Maxime Leroy <maxime.leroy76@gmail.com>
            2014      Johann Dubois <johann.dubois@outlook.com>
-           2014      Jean-Christophe Beaupré <jcbrinfo@users.noreply.github.com>
+           2014-2015 Jean-Christophe Beaupré <jcbrinfo@users.noreply.github.com>
            2014      Alexandre Blondin Massé <alexandre.blondin.masse@gmail.com>
 Licence: BSD 2 (see LICENSE-BSD)
 Comment: Use of libraries and resources is basically unrestricted. We hold the copyright
