@@ -11,10 +11,10 @@ Then can add the brush to your html page:
 
 	<script type="text/javascript" src="shBrushNit.js"></script>
 
-# vim
+# Vim
 
-vim is a powerful text editor.
-The misc/vim directory contains the support of nit files to vim.
+Vim is a powerful text editor and a favorite of the Nit team.
+The `misc/vim` directory provides Vim support for Nit source files.
 
 ### Install
 
@@ -23,7 +23,7 @@ The simpler way to install nit for vim is with [pathogen][1].
     cd ~/.vim/bundle
     ln -s /full/path/to/nit/misc/vim nit
 
-Ensure that your .vimrc contains
+Ensure that `~/.vimrc` contains
 
     call pathogen#infect()
     syntax on
@@ -33,8 +33,32 @@ Ensure that your .vimrc contains
 
 ### Features
 
- * syntax highlighting
- * indentation
- * syntax checker (require [Syntastic][2]).
+ * Syntax highlighting
+ * Automatic indentation
+ * Syntax checker (require [Syntastic][2]).
+ * Autocomplete for whole projects using module importations
 
   [2]: https://github.com/scrooloose/syntastic
+
+### Autocomplete
+
+The Nit plugin offers better autocomplete by scanning all projects in the
+current directory, and their dependencies.
+
+Add the following code to `~/.vimrc`, then use `ctrl-n` to open the
+autocomplete popup.
+
+~~~
+" Compute Nit module dependencies for autocomplete on loading our first Nit module
+autocmd Filetype nit call NitComplete()
+
+" Map reloading Nit module dependencies to F2
+map <F2> :call ForceNitComplete()<enter>
+~~~
+
+The plugin is compatible with, and optimized for, [AutoComplPop][3].
+
+Look at the functions defined in `misc/vim/plugin/nit.vim` for all possible
+usages.
+
+  [3]: http://www.vim.org/scripts/script.php?script_id=1879
