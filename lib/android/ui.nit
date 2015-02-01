@@ -38,7 +38,7 @@ import native_app_glue
 import pthreads::concurrent_collections
 
 in "Java" `{
-	import android.app.NativeActivity;
+	import android.app.Activity;
 
 	import android.view.Gravity;
 	import android.view.MotionEvent;
@@ -115,7 +115,7 @@ redef extern class NativeActivity
 		final LinearLayout final_main_layout = new LinearLayout(recv);
 		final ViewGroup final_popup_layout = popup_layout;
 		final PopupWindow final_popup = popup;
-		final NativeActivity final_recv = recv;
+		final Activity final_recv = recv;
 
 		recv.runOnUiThread(new Runnable() {
 			@Override
@@ -144,7 +144,7 @@ redef extern class NativeActivity
 	# TODO bring use this instead of the hack with `dedicate_to_pupup`
 	private fun real_content_view=(layout: NativeViewGroup) in "Java" `{
 		final ViewGroup final_layout = layout;
-		final NativeActivity final_recv = recv;
+		final Activity final_recv = recv;
 
 		recv.runOnUiThread(new Runnable() {
 			@Override
@@ -334,7 +334,7 @@ extern class NativeTextView in "Java" `{ android.widget.TextView `}
 		final TextView final_recv = recv;
 		final String final_value = value;
 
-		((NativeActivity)recv.getContext()).runOnUiThread(new Runnable() {
+		((Activity)recv.getContext()).runOnUiThread(new Runnable() {
 			@Override
 			public void run()  {
 				final_recv.setText(final_value);
@@ -347,7 +347,7 @@ extern class NativeTextView in "Java" `{ android.widget.TextView `}
 		final TextView final_recv = recv;
 		final boolean final_value = value;
 
-		((NativeActivity)recv.getContext()).runOnUiThread(new Runnable() {
+		((Activity)recv.getContext()).runOnUiThread(new Runnable() {
 			@Override
 			public void run()  {
 				final_recv.setEnabled(final_value);
