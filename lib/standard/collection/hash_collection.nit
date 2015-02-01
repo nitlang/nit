@@ -408,7 +408,7 @@ end
 
 # A `Set` implemented with a hash table.
 # Keys of such a map cannot be null and require a working `hash` method
-class HashSet[E: Object]
+class HashSet[E]
 	super Set[E]
 	super HashCollection[E]
 
@@ -462,12 +462,12 @@ class HashSet[E: Object]
 	redef fun new_set do return new HashSet[E]
 end
 
-private class HashSetNode[E: Object]
+private class HashSetNode[E]
 	super HashNode[E]
 	redef type N: HashSetNode[E]
 end
 
-private class HashSetIterator[E: Object]
+private class HashSetIterator[E]
 	super Iterator[E]
 	redef fun is_ok do return _node != null
 

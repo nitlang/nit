@@ -31,7 +31,7 @@ import hash_collection
 # Unkike theorical Disjoint-set data structures, the underling implementation is opaque
 # that makes the traditionnal `find` method unavailable for clients.
 # The methods `in_same_subset`, `to_partitions`, and their variations are offered instead.
-class DisjointSet[E: Object]
+class DisjointSet[E]
 	super SimpleCollection[E]
 
 	# The node in the hiearchical structure for each element

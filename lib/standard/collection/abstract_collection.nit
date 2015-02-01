@@ -305,7 +305,7 @@ end
 #      # ...
 #      s.add(a)
 #      assert s.has(b)      ==  true
-interface Set[E: Object]
+interface Set[E]
 	super SimpleCollection[E]
 
 	redef fun has_only(item)
