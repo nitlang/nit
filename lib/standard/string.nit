@@ -1911,15 +1911,22 @@ redef class Int
 		end
 	end
 
+	# C function to calculate the length of the `NativeString` to receive `self`
+	private fun int_to_s_len: Int is extern "native_int_length_str"
+
 	# C function to convert an nit Int to a NativeString (char*)
-	private fun native_int_to_s: NativeString is extern "native_int_to_s"
+	private fun native_int_to_s(nstr: NativeString, strlen: Int) is extern "native_int_to_s"
 
 	# return displayable int in base 10 and signed
 	#
 	#     assert 1.to_s            == "1"
 	#     assert (-123).to_s       == "-123"
 	redef fun to_s do
-		return native_int_to_s.to_s
+		var nslen = int_to_s_len
+		var ns = new NativeString(nslen + 1)
+		ns[nslen] = '\0'
+		native_int_to_s(ns, nslen + 1)
+		return ns.to_s_with_length(nslen)
 	end
 
 	# return displayable int in hexadecimal

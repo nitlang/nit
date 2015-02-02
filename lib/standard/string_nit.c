@@ -11,10 +11,12 @@
 
 #include "string_nit.h"
 
+// Returns the length of `recv` as a `char*` (excluding the null character)
+long native_int_length_str(long recv){
+	return snprintf(NULL, 0, "%ld", recv);
+}
+
 // Integer to NativeString method
-char* native_int_to_s(long recv){
-	int len = snprintf(NULL, 0, "%ld", recv);
-	char* str = malloc(len+1);
-	sprintf(str, "%ld", recv);
-	return str;
+void native_int_to_s(long recv, char* str, long buflen){
+	snprintf(str, buflen, "%ld", recv);
 }
