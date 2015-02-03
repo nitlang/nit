@@ -428,6 +428,27 @@ class Repo
 		return res
 	end
 
+	# Search issues in this repo form an advanced query.
+	#
+	# Example:
+	#
+	# ~~~nitish
+	# var issues = repo.search_issues("is:open label:need_review")
+	# ~~~
+	#
+	# See <https://developer.github.com/v3/search/#search-issues>.
+	fun search_issues(query: String): nullable Array[Issue] do
+		query = "search/issues?q={query} repo:{full_name}"
+		var response = api.get(query)
+		if api.was_error then return null
+		var arr = response.as(JsonObject)["items"].as(JsonArray)
+		var res = new Array[Issue]
+		for obj in arr do
+			res.add new Issue.from_json(api, self, obj.as(JsonObject))
+		end
+		return res
+	end
+
 	# Get the last published issue.
 	fun last_issue: nullable Issue do
 		var array = api.get("repos/{full_name}/issues")
