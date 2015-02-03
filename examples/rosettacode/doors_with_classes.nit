@@ -20,10 +20,12 @@ class Door
 	end
 end
 
-var doors = new Array[Door]
-for door in [0..100[ do doors.add(new Door)
-
 var n = 100
+if args.length > 0 then n = args.first.to_i
+
+var doors = new Array[Door]
+for door in [0..n[ do doors.add(new Door)
+
 for visit in [0..n[ do
 	var i = visit
 	while i < n do
