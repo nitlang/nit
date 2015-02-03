@@ -344,6 +344,9 @@ abstract class GithubEntity
 	end
 
 	redef fun to_s do return json.to_json
+
+	# Github page url.
+	fun html_url: String do return json["html_url"].to_s
 end
 
 # A Github user.
@@ -364,9 +367,6 @@ class User
 		init(api, json["login"].to_s)
 		self.json = json
 	end
-
-	# Github User page url.
-	fun html_url: String do return json["html_url"].to_s
 
 	# Avatar image url for this user.
 	fun avatar_url: String do return json["avatar_url"].to_s
@@ -393,9 +393,6 @@ class Repo
 
 	# Repo short name on Github.
 	fun name: String do return json["name"].to_s
-
-	# Github User page url.
-	fun html_url: String do return json["html_url"].to_s
 
 	# Get the repo owner.
 	fun owner: User do
