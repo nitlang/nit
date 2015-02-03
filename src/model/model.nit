@@ -1905,7 +1905,6 @@ abstract class MProperty
 	# REQUIRE: `mtype.has_mproperty(mmodule, self)`
 	fun lookup_first_definition(mmodule: MModule, mtype: MType): MPROPDEF
 	do
-		assert mtype.has_mproperty(mmodule, self)
 		return lookup_all_definitions(mmodule, mtype).first
 	end
 
@@ -1913,11 +1912,13 @@ abstract class MProperty
 	# Most specific first, most general last
 	fun lookup_all_definitions(mmodule: MModule, mtype: MType): Array[MPROPDEF]
 	do
-		assert not mtype.need_anchor
 		mtype = mtype.as_notnullable
 
 		var cache = self.lookup_all_definitions_cache[mmodule, mtype]
 		if cache != null then return cache
+
+		assert not mtype.need_anchor
+		assert mtype.has_mproperty(mmodule, self)
 
 		#print "select prop {mproperty} for {mtype} in {self}"
 		# First, select all candidates
