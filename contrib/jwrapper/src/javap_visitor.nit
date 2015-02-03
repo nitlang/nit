@@ -213,7 +213,7 @@ end
 #    C L A S S     H E A D E R     #
 #                                  #
 
-redef class Nclass_header
+redef class Nclass_declaration
 	redef fun accept_visitor(v)
 	do
 		v.declaration_type = "class_header"

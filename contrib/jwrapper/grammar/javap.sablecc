@@ -9,18 +9,15 @@ separator = ('.'|'/');
 Parser
 Ignored blank;
 
-multi_files = compiled_from? class_or_interface;
-
-class_or_interface = class_declaration | interface_declaration;
+multi_files = compiled_from? class_declaration;
 
 compiled_from = 'Compiled from "' identifier+ '.java"';
 
-class_declaration = class_header '{' property_declaration* '}';
+class_declaration = modifier* class_or_interface full_class_name
+	extends_declaration? implements_declaration? throws_declaration?
+	'{' property_declaration* '}';
 
-class_header = modifier* 'class' full_class_name extends_declaration?
-			   implements_declaration? throws_declaration?;
-interface_declaration = modifier* 'interface' full_class_name extends_interface_declaration?
-						'{' property_declaration* '}';
+class_or_interface = 'class'|'interface';
 
 modifier = 'public'|'private'|'protected'|'static'|'final'|'native'|'synchronized'|'abstract'|'threadsafe'|'transient'|'volatile';
 type = type_specifier '[]'*;
