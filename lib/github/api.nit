@@ -678,6 +678,7 @@ class Issue
 	# List of labels on this issue associated to their names.
 	fun labels: Map[String, Label] do
 		var res = new HashMap[String, Label]
+		if not json.has_key("labels") then return res
 		for obj in json["labels"].as(JsonArray) do
 			if not obj isa JsonObject then continue
 			var name = obj["name"].to_s
