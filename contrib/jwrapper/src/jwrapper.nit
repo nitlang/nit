@@ -65,9 +65,6 @@ end
 
 var javap = new IProcess("javap", "-public", dot_class)
 
-# Eat the superfluous output line
-javap.read_line
-
 var p = new TestParser_javap
 var tree = p.work(javap.read_all)
 
