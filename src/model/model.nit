@@ -74,11 +74,7 @@ redef class Model
 	# Visibility or modules are not considered
 	fun get_mclasses_by_name(name: String): nullable Array[MClass]
 	do
-		if mclasses_by_name.has_key(name) then
-			return mclasses_by_name[name]
-		else
-			return null
-		end
+		return mclasses_by_name.get_or_null(name)
 	end
 
 	# Collections of properties grouped by their short name
@@ -92,11 +88,7 @@ redef class Model
 	# Visibility or modules are not considered
 	fun get_mproperties_by_name(name: String): nullable Array[MProperty]
 	do
-		if not mproperties_by_name.has_key(name) then
-			return null
-		else
-			return mproperties_by_name[name]
-		end
+		return mproperties_by_name.get_or_null(name)
 	end
 
 	# The only null type
