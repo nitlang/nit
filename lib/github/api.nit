@@ -266,9 +266,7 @@ class GithubAPI
 	#     assert event.issue.number == 945
 	fun load_issue_event(repo: Repo, id: Int): nullable IssueEvent do
 		var event = new IssueEvent(self, repo, id)
-		event.load_from_github
-		if was_error then return null
-		return event
+		return event.load_from_github
 	end
 
 	# Get the Github commit comment with `id`.
