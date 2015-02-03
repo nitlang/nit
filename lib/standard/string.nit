@@ -2018,23 +2018,6 @@ redef class Float
 
 		return p1 + "." + p2
 	end
-
-	# `self` representation with `nb` digits after the '.'.
-	#
-	#     assert 12.345.to_precision_native(1) == "12.3"
-	#     assert 12.345.to_precision_native(2) == "12.35"
-	#     assert 12.345.to_precision_native(3) == "12.345"
-	#     assert 12.345.to_precision_native(4) == "12.3450"
-	fun to_precision_native(nb: Int): String import NativeString.to_s `{
-		int size;
-		char *str;
-
-		size = snprintf(NULL, 0, "%.*f", (int)nb, recv);
-		str = malloc(size + 1);
-		sprintf(str, "%.*f", (int)nb, recv );
-
-		return NativeString_to_s( str );
-	`}
 end
 
 redef class Char
