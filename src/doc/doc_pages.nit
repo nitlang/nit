@@ -612,22 +612,6 @@ class NitdocGroup
 
 	private var mgroup: MGroup
 
-	private var concerns: ConcernsTree is noinit
-	private var intros: Set[MClass] is noinit
-	private var redefs: Set[MClass] is noinit
-
-	init do
-		self.concerns = model.concerns_tree(mgroup.collect_mmodules)
-		self.concerns.sort_with(new MConcernRankSorter)
-		self.intros = mgroup.in_nesting_intro_mclasses(ctx.min_visibility)
-		var redefs = new HashSet[MClass]
-		for rdef in mgroup.in_nesting_redef_mclasses(ctx.min_visibility) do
-			if intros.has(rdef) then continue
-			redefs.add rdef
-		end
-		self.redefs = redefs
-	end
-
 	private var page = new TplPage
 	redef fun tpl_page do return page
 
@@ -719,16 +703,6 @@ class NitdocGroup
 		tpl_groups(top)
 		tpl_page.add_section top
 	end
-
-	private fun sort_by_mclass(mclassdefs: Collection[MClassDef]): Map[MClass, Set[MClassDef]] do
-		var map = new HashMap[MClass, Set[MClassDef]]
-		for mclassdef in mclassdefs do
-			var mclass = mclassdef.mclass
-			if not map.has_key(mclass) then map[mclass] = new HashSet[MClassDef]
-			map[mclass].add mclassdef
-		end
-		return map
-	end
 end
 
 # A module page
@@ -737,27 +711,6 @@ class NitdocModule
 	super NitdocPage
 
 	private var mmodule: MModule
-	private var concerns: ConcernsTree is noinit
-	private var mclasses2mdefs: Map[MClass, Set[MClassDef]] is noinit
-	private var mmodules2mclasses: Map[MModule, Set[MClass]] is noinit
-
-
-	init do
-		var mclassdefs = new HashSet[MClassDef]
-		mclassdefs.add_all mmodule.intro_mclassdefs(ctx.min_visibility)
-		mclassdefs.add_all mmodule.redef_mclassdefs(ctx.min_visibility)
-		self.mclasses2mdefs = sort_by_mclass(mclassdefs)
-		self.mmodules2mclasses = group_by_mmodule(mclasses2mdefs.keys)
-		self.concerns = model.concerns_tree(mmodules2mclasses.keys)
-		# rank concerns
-		mmodule.mgroup.mproject.booster_rank = -1000
-		mmodule.mgroup.booster_rank = -1000
-		mmodule.booster_rank = -1000
-		self.concerns.sort_with(new MConcernRankSorter)
-		mmodule.mgroup.mproject.booster_rank = 0
-		mmodule.mgroup.booster_rank = 0
-		mmodule.booster_rank = 0
-	end
 
 	private var page = new TplPage
 	redef fun tpl_page do return page
@@ -908,18 +861,6 @@ class NitdocModule
 		end
 	end
 
-	private fun group_by_mmodule(mclasses: Collection[MClass]): Map[MModule, Set[MClass]] do
-		var res = new HashMap[MModule, Set[MClass]]
-		for mclass in mclasses do
-			var mmodule = mclass.intro_mmodule
-			if not res.has_key(mmodule) then
-				res[mmodule] = new HashSet[MClass]
-			end
-			res[mmodule].add(mclass)
-		end
-		return res
-	end
-
 	redef fun tpl_content do
 		tpl_sidebar_mclasses
 		var top = tpl_intro
@@ -960,16 +901,6 @@ class NitdocModule
 		op.append("\}\n")
 		return tpl_graph(op, name, null)
 	end
-
-	private fun sort_by_mclass(mclassdefs: Collection[MClassDef]): Map[MClass, Set[MClassDef]] do
-		var map = new HashMap[MClass, Set[MClassDef]]
-		for mclassdef in mclassdefs do
-			var mclass = mclassdef.mclass
-			if not map.has_key(mclass) then map[mclass] = new HashSet[MClassDef]
-			map[mclass].add mclassdef
-		end
-		return map
-	end
 end
 
 # A class page
@@ -978,19 +909,6 @@ class NitdocClass
 	super NitdocPage
 
 	private var mclass: MClass
-	private var concerns: ConcernsTree is noinit
-	private var mprops2mdefs: Map[MProperty, Set[MPropDef]] is noinit
-	private var mmodules2mprops: Map[MModule, Set[MProperty]] is noinit
-
-	init do
-		var mpropdefs = new HashSet[MPropDef]
-		mpropdefs.add_all mclass.intro_mpropdefs(ctx.min_visibility)
-		mpropdefs.add_all mclass.redef_mpropdefs(ctx.min_visibility)
-		self.mprops2mdefs = sort_by_mproperty(mpropdefs)
-		self.mmodules2mprops = sort_by_mmodule(mprops2mdefs.keys)
-		self.concerns = model.concerns_tree(mmodules2mprops.keys)
-		self.concerns.sort_with(new MConcernRankSorter)
-	end
 
 	private var page = new TplPage
 	redef fun tpl_page do return page
@@ -1233,28 +1151,6 @@ class NitdocClass
 		tpl_page.add_section top
 	end
 
-	private fun sort_by_mproperty(mpropdefs: Collection[MPropDef]): Map[MProperty, Set[MPropDef]] do
-		var map = new HashMap[MProperty, Set[MPropDef]]
-		for mpropdef in mpropdefs do
-			var mproperty = mpropdef.mproperty
-			if not map.has_key(mproperty) then map[mproperty] = new HashSet[MPropDef]
-			map[mproperty].add mpropdef
-		end
-		return map
-	end
-
-	private fun sort_by_mmodule(mprops: Collection[MProperty]): Map[MModule, Set[MProperty]] do
-		var map = new HashMap[MModule, Set[MProperty]]
-		for mprop in mprops do
-			var mpropdefs = mprops2mdefs[mprop].to_a
-			mainmodule.linearize_mpropdefs(mpropdefs)
-			var mmodule = mpropdefs.first.mclassdef.mmodule
-			if not map.has_key(mmodule) then map[mmodule] = new HashSet[MProperty]
-			map[mmodule].add mprop
-		end
-		return map
-	end
-
 	private fun mclass_inherited_mprops: Set[MProperty] do
 		var res = new HashSet[MProperty]
 		var local = mclass.local_mproperties(ctx.min_visibility)
@@ -1267,16 +1163,6 @@ class NitdocClass
 			res.add mprop
 		end
 		res.add_all local
-		return res
-	end
-
-	private fun collect_mmodules(mprops: Collection[MProperty]): Set[MModule] do
-		var res = new HashSet[MModule]
-		for mprop in mprops do
-			if mprops2mdefs.has_key(mprop) then
-				for mpropdef in mprops2mdefs[mprop] do res.add mpropdef.mclassdef.mmodule
-			end
-		end
 		return res
 	end
 
@@ -1332,23 +1218,6 @@ class NitdocProperty
 	super NitdocPage
 
 	private var mproperty: MProperty
-	private var concerns: ConcernsTree is noinit
-	private var mmodules2mdefs: Map[MModule, Set[MPropDef]] is noinit
-
-	init do
-		self.mproperty = mproperty
-		self.mmodules2mdefs = sort_by_mmodule(collect_mpropdefs)
-		self.concerns = model.concerns_tree(mmodules2mdefs.keys)
-		self.concerns.sort_with(new MConcernRankSorter)
-	end
-
-	private fun collect_mpropdefs: Set[MPropDef] do
-		var res = new HashSet[MPropDef]
-		for mpropdef in mproperty.mpropdefs do
-			if not mpropdef.is_intro then res.add mpropdef
-		end
-		return res
-	end
 
 	private var page = new TplPage
 	redef fun tpl_page do return page
@@ -1429,16 +1298,6 @@ class NitdocProperty
 		var top = tpl_intro
 		tpl_properties(top)
 		tpl_page.add_section top
-	end
-
-	private fun sort_by_mmodule(mpropdefs: Collection[MPropDef]): Map[MModule, Set[MPropDef]] do
-		var map = new HashMap[MModule, Set[MPropDef]]
-		for mpropdef in mpropdefs do
-			var mmodule = mpropdef.mclassdef.mmodule
-			if not map.has_key(mmodule) then map[mmodule] = new HashSet[MPropDef]
-			map[mmodule].add mpropdef
-		end
-		return map
 	end
 end
 

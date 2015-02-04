@@ -17,4 +17,4 @@
 # See `DocPhase`.
 module doc_phases
 
-import doc_pages
+import doc_concerns
