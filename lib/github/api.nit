@@ -266,9 +266,7 @@ class GithubAPI
 	#     assert event.issue.number == 945
 	fun load_issue_event(repo: Repo, id: Int): nullable IssueEvent do
 		var event = new IssueEvent(self, repo, id)
-		event.load_from_github
-		if was_error then return null
-		return event
+		return event.load_from_github
 	end
 
 	# Get the Github commit comment with `id`.
@@ -346,6 +344,9 @@ abstract class GithubEntity
 	end
 
 	redef fun to_s do return json.to_json
+
+	# Github page url.
+	fun html_url: String do return json["html_url"].to_s
 end
 
 # A Github user.
@@ -366,9 +367,6 @@ class User
 		init(api, json["login"].to_s)
 		self.json = json
 	end
-
-	# Github User page url.
-	fun html_url: String do return json["html_url"].to_s
 
 	# Avatar image url for this user.
 	fun avatar_url: String do return json["avatar_url"].to_s
@@ -395,9 +393,6 @@ class Repo
 
 	# Repo short name on Github.
 	fun name: String do return json["name"].to_s
-
-	# Github User page url.
-	fun html_url: String do return json["html_url"].to_s
 
 	# Get the repo owner.
 	fun owner: User do
@@ -429,6 +424,27 @@ class Repo
 			issue = api.load_issue(self, issue.number - 1)
 			assert issue isa Issue
 			res[issue.number] = issue
+		end
+		return res
+	end
+
+	# Search issues in this repo form an advanced query.
+	#
+	# Example:
+	#
+	# ~~~nitish
+	# var issues = repo.search_issues("is:open label:need_review")
+	# ~~~
+	#
+	# See <https://developer.github.com/v3/search/#search-issues>.
+	fun search_issues(query: String): nullable Array[Issue] do
+		query = "search/issues?q={query} repo:{full_name}"
+		var response = api.get(query)
+		if api.was_error then return null
+		var arr = response.as(JsonObject)["items"].as(JsonArray)
+		var res = new Array[Issue]
+		for obj in arr do
+			res.add new Issue.from_json(api, self, obj.as(JsonObject))
 		end
 		return res
 	end
@@ -680,6 +696,7 @@ class Issue
 	# List of labels on this issue associated to their names.
 	fun labels: Map[String, Label] do
 		var res = new HashMap[String, Label]
+		if not json.has_key("labels") then return res
 		for obj in json["labels"].as(JsonArray) do
 			if not obj isa JsonObject then continue
 			var name = obj["name"].to_s
