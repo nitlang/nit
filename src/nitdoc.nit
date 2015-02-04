@@ -37,7 +37,8 @@ private class Nitdoc
 			new MakePagePhase(toolcontext, doc),
 			new POSetPhase(toolcontext, doc),
 			new ConcernsPhase(toolcontext, doc),
-			new StructurePhase(toolcontext, doc): DocPhase]
+			new StructurePhase(toolcontext, doc),
+			new GraphPhase(toolcontext, doc): DocPhase]
 
 		for phase in phases do
 			toolcontext.info("# {phase.class_name}", 1)
