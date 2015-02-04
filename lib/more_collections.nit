@@ -36,8 +36,9 @@ class MultiHashMap[K, V]
 	# If there is no array associated, then create it.
 	fun add_one(k: K, v: V)
 	do
-		if self.has_key(k) then
-			self[k].add(v)
+		var x = self.get_or_null(k)
+		if x != null then
+			x.add(v)
 		else
 			self[k] = [v]
 		end
@@ -67,22 +68,19 @@ class HashMap2[K1, K2, V]
 	fun [](k1: K1, k2: K2): nullable V
 	do
 		var level1 = self.level1
-		if not level1.has_key(k1) then return null
-		var level2 = level1[k1]
-		if not level2.has_key(k2) then return null
-		return level2[k2]
+		var level2 = level1.get_or_null(k1)
+		if level2 == null then return null
+		return level2.get_or_null(k2)
 	end
 
 	# Set `v` the value associated to the keys `k1` and `k2`.
 	fun []=(k1: K1, k2: K2, v: V)
 	do
 		var level1 = self.level1
-		var level2: HashMap[K2, V]
-		if not level1.has_key(k1) then
+		var level2 = level1.get_or_null(k1)
+		if level2 == null then
 			level2 = new HashMap[K2, V]
 			level1[k1] = level2
-		else
-			level2 = level1[k1]
 		end
 		level2[k2] = v
 	end
@@ -91,10 +89,8 @@ class HashMap2[K1, K2, V]
 	fun remove_at(k1: K1, k2: K2)
 	do
 		var level1 = self.level1
-
-		if not level1.has_key(k1) then return
-
-		var level2 = level1[k1]
+		var level2 = level1.get_or_null(k1)
+		if level2 == null then return
 		level2.keys.remove(k2)
 	end
 end
@@ -116,8 +112,8 @@ class HashMap3[K1, K2, K3, V]
 	fun [](k1: K1, k2: K2, k3: K3): nullable V
 	do
 		var level1 = self.level1
-		if not level1.has_key(k1) then return null
-		var level2 = level1[k1]
+		var level2 = level1.get_or_null(k1)
+		if level2 == null then return null
 		return level2[k2, k3]
 	end
 
@@ -125,12 +121,10 @@ class HashMap3[K1, K2, K3, V]
 	fun []=(k1: K1, k2: K2, k3: K3, v: V)
 	do
 		var level1 = self.level1
-		var level2: HashMap2[K2, K3, V]
-		if not level1.has_key(k1) then
+		var level2 = level1.get_or_null(k1)
+		if level2 == null then
 			level2 = new HashMap2[K2, K3, V]
 			level1[k1] = level2
-		else
-			level2 = level1[k1]
 		end
 		level2[k2, k3] = v
 	end
@@ -139,10 +133,8 @@ class HashMap3[K1, K2, K3, V]
 	fun remove_at(k1: K1, k2: K2, k3: K3)
 	do
 		var level1 = self.level1
-
-		if not level1.has_key(k1) then return
-
-		var level2 = level1[k1]
+		var level2 = level1.get_or_null(k1)
+		if level2 == null then return
 		level2.remove_at(k2, k3)
 	end
 end

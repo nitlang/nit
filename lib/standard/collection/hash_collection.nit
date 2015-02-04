@@ -235,6 +235,16 @@ class HashMap[K, V]
 		end
 	end
 
+	redef fun get_or_null(key)
+	do
+		var c = node_at(key)
+		if c == null then
+			return null
+		else
+			return c._value
+		end
+	end
+
 	redef fun iterator: HashMapIterator[K, V] do return new HashMapIterator[K,V](self)
 
 	redef fun length do return _the_length
