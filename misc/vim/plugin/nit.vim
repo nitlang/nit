@@ -52,8 +52,8 @@ function NitComplete()
 		" prediction and some also require double-enter on end of line.
 		let g:acp_behaviorKeywordIgnores = ['new', 'var', 'in', 'do', 'els', 'end', 'ret', 'for', 'fun']
 
-		" Use nitls to compute all interesting files from the current directory
-		for file in split(system('nitls -M', '\n'))
+		" Use nitls to compute all interesting files from the current directory and the standard library
+		for file in split(system('nitls -M standard .', '\n'))
 			silent let &complete = &complete . ',s' . file
 			silent set complete?
 		endfor
