@@ -12,8 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Nitdoc page generation
+# Nitdoc generation framework.
 module doc
 
-import doc_pages
-
+import doc_base
+import doc_phases

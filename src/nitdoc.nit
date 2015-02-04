@@ -13,6 +13,7 @@
 # limitations under the License.
 
 # Documentation generator for the nit language.
+#
 # Generate API documentation in HTML format from nit source code.
 module nitdoc
 
@@ -20,21 +21,34 @@ import modelbuilder
 import doc
 
 redef class ToolContext
-	var docphase: Phase = new NitdocPhase(self, null)
+	# Nitdoc generation phase.
+	var docphase: Phase = new Nitdoc(self, null)
 end
 
-private class NitdocPhase
+# Nitdoc phase explores the model and generate pages for each mentities found
+private class Nitdoc
 	super Phase
 	redef fun process_mainmodule(mainmodule, mmodules)
 	do
-		# generate doc
-		var nitdoc = new Nitdoc(toolcontext, mainmodule.model, mainmodule)
-		nitdoc.generate
+		var doc = new DocModel(mainmodule.model, mainmodule)
+
+		var phases = new Array[DocPhase]
+
+		for phase in phases do
+			toolcontext.info("# {phase.class_name}", 1)
+			phase.apply
+		end
 	end
 end
 
-# process options
+# build toolcontext
 var toolcontext = new ToolContext
+var tpl = new Template
+tpl.add "Usage: nitdoc [OPTION]... <file.nit>...\n"
+tpl.add "Generates HTML pages of API documentation from Nit source files."
+toolcontext.tooldescription = tpl.write_to_string
+
+# process options
 toolcontext.process_options(args)
 var arguments = toolcontext.option_context.rest
 
@@ -43,6 +57,7 @@ var model = new Model
 var mbuilder = new ModelBuilder(model, toolcontext)
 var mmodules = mbuilder.parse_full(arguments)
 
+# process
 if mmodules.is_empty then return
 mbuilder.run_phases
 toolcontext.run_global_phases(mmodules)

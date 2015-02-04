@@ -53,11 +53,6 @@ redef class ToolContext
 		opts.add_option(opt_custom_title, opt_custom_footer, opt_custom_intro, opt_custom_brand)
 		opts.add_option(opt_github_upstream, opt_github_base_sha1, opt_github_gitdir)
 		opts.add_option(opt_piwik_tracker, opt_piwik_site_id)
-
-		var tpl = new Template
-		tpl.add "Usage: nitdoc [OPTION]... <file.nit>...\n"
-		tpl.add "Generates HTML pages of API documentation from Nit source files."
-		tooldescription = tpl.write_to_string
 	end
 
 	redef fun process_options(args) do
@@ -111,17 +106,6 @@ class Nitdoc
 	var model: Model
 	var mainmodule: MModule
 
-	fun generate do
-		init_output_dir
-		overview
-		search
-		groups
-		modules
-		classes
-		properties
-		quicksearch_list
-	end
-
 	private fun init_output_dir do
 		# create destination dir if it's necessary
 		var output_dir = ctx.output_dir
@@ -143,55 +127,6 @@ class Nitdoc
 			sys.system("cp -r -- {sharedir.to_s.escape_to_sh}/resources/ {output_dir.to_s.escape_to_sh}/resources/")
 		end
 
-	end
-
-	private fun overview do
-		var page = new NitdocOverview(ctx, model, mainmodule)
-		page.render.write_to_file("{ctx.output_dir.to_s}/{page.page_url}")
-	end
-
-	private fun search do
-		var page = new NitdocSearch(ctx, model, mainmodule)
-		page.render.write_to_file("{ctx.output_dir.to_s}/{page.page_url}")
-	end
-
-	private fun groups do
-		for mproject in model.mprojects do
-			for mgroup in mproject.mgroups.to_a do
-				var page = new NitdocGroup(ctx, model, mainmodule, mgroup)
-				page.render.write_to_file("{ctx.output_dir.to_s}/{page.page_url}")
-			end
-		end
-	end
-
-	private fun modules do
-		for mmodule in model.mmodules do
-			if mmodule.is_fictive or mmodule.is_test_suite then continue
-			var page = new NitdocModule(ctx, model, mainmodule, mmodule)
-			page.render.write_to_file("{ctx.output_dir.to_s}/{page.page_url}")
-		end
-	end
-
-	private fun classes do
-		for mclass in model.mclasses do
-			if not ctx.filter_mclass(mclass) then continue
-			var page = new NitdocClass(ctx, model, mainmodule, mclass)
-			page.render.write_to_file("{ctx.output_dir.to_s}/{page.page_url}")
-		end
-	end
-
-	private fun properties do
-		for mproperty in model.mproperties do
-			if not ctx.filter_mproperty(mproperty) then continue
-			if mproperty isa MInnerClass then continue
-			var page = new NitdocProperty(ctx, model, mainmodule, mproperty)
-			page.render.write_to_file("{ctx.output_dir.to_s}/{page.page_url}")
-		end
-	end
-
-	private fun quicksearch_list do
-		var quicksearch = new QuickSearch(ctx, model)
-		quicksearch.render.write_to_file("{ctx.output_dir.to_s}/quicksearch-list.js")
 	end
 end
 
