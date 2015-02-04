@@ -34,6 +34,7 @@ private class Nitdoc
 
 		var phases = [
 			new ExtractionPhase(toolcontext, doc),
+			new IndexingPhase(toolcontext, doc),
 			new MakePagePhase(toolcontext, doc),
 			new POSetPhase(toolcontext, doc),
 			new ConcernsPhase(toolcontext, doc),

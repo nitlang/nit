@@ -18,3 +18,4 @@
 module doc_phases
 
 import doc_html
+import doc_indexing
