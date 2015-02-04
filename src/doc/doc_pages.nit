@@ -629,12 +629,6 @@ class NitdocModule
 
 	# inheritance section
 	private fun tpl_inheritance(parent: TplSection) do
-		# Extract relevent modules
-		var imports = mmodule.in_importation.greaters
-		if imports.length > 10 then imports = mmodule.in_importation.direct_greaters
-		var clients = mmodule.in_importation.smallers
-		if clients.length > 10 then clients = mmodule.in_importation.direct_smallers
-
 		# Display lists
 		var section = new TplSection.with_title("dependencies", "Dependencies")
 
@@ -649,11 +643,6 @@ class NitdocModule
 
 		# Imports
 		var lst = new Array[MModule]
-		for dep in imports do
-			if dep.is_fictive or dep.is_test_suite then continue
-			if dep == mmodule then continue
-			lst.add(dep)
-		end
 		if not lst.is_empty then
 			name_sorter.sort lst
 			section.add_child tpl_list("imports", "Imports", lst)
@@ -661,11 +650,6 @@ class NitdocModule
 
 		# Clients
 		lst = new Array[MModule]
-		for dep in clients do
-			if dep.is_fictive or dep.is_test_suite then continue
-			if dep == mmodule then continue
-			lst.add(dep)
-		end
 		if not lst.is_empty then
 			name_sorter.sort lst
 			section.add_child tpl_list("clients", "Clients", lst)
@@ -684,18 +668,6 @@ class NitdocModule
 
 	# Genrate dot hierarchy for class inheritance
 	fun tpl_dot(mmodules: Collection[MModule]): nullable TplArticle do
-		var poset = new POSet[MModule]
-		for mmodule in mmodules do
-			if mmodule.is_fictive or mmodule.is_test_suite then continue
-			poset.add_node mmodule
-			for omodule in mmodules do
-				if omodule.is_fictive or omodule.is_test_suite then continue
-				poset.add_node mmodule
-				if mmodule.in_importation < omodule then
-					poset.add_edge(mmodule, omodule)
-				end
-			end
-		end
 		# build graph
 		var op = new RopeBuffer
 		var name = "dep_module_{mmodule.nitdoc_id}"
@@ -787,36 +759,6 @@ class NitdocClass
 	end
 
 	private fun tpl_inheritance(parent: TplSection) do
-		# parents
-		var hparents = new HashSet[MClass]
-		for c in mclass.in_hierarchy(mainmodule).direct_greaters do
-			if ctx.filter_mclass(c) then hparents.add c
-		end
-
-		# ancestors
-		var hancestors = new HashSet[MClass]
-		for c in mclass.in_hierarchy(mainmodule).greaters do
-			if c == mclass then continue
-			if not ctx.filter_mclass(c) then continue
-			if hparents.has(c) then continue
-			hancestors.add c
-		end
-
-		# children
-		var hchildren = new HashSet[MClass]
-		for c in mclass.in_hierarchy(mainmodule).direct_smallers do
-			if ctx.filter_mclass(c) then hchildren.add c
-		end
-
-		# descendants
-		var hdescendants = new HashSet[MClass]
-		for c in mclass.in_hierarchy(mainmodule).smallers do
-			if c == mclass then continue
-			if not ctx.filter_mclass(c) then continue
-			if hchildren.has(c) then continue
-			hdescendants.add c
-		end
-
 		# Display lists
 		var section = new TplSection.with_title("inheritance", "Inheritance")
 
@@ -880,19 +822,6 @@ class NitdocClass
 
 	# Generate dot hierarchy for classes
 	fun tpl_dot(mclasses: Collection[MClass]): nullable TplArticle do
-		var poset = new POSet[MClass]
-
-		for mclass in mclasses do
-			poset.add_node mclass
-			for oclass in mclasses do
-				if mclass == oclass then continue
-				poset.add_node oclass
-				if mclass.in_hierarchy(mainmodule) < oclass then
-					poset.add_edge(mclass, oclass)
-				end
-			end
-		end
-
 		var op = new RopeBuffer
 		var name = "dep_class_{mclass.nitdoc_id}"
 		op.append("digraph \"{name.escape_to_dot}\" \{ rankdir=BT; node[shape=none,margin=0,width=0,height=0,fontsize=10]; edge[dir=none,color=gray]; ranksep=0.2; nodesep=0.1;\n")
