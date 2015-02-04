@@ -18,5 +18,5 @@
 module doc_phases
 
 import doc_structure
-import doc_poset
+import doc_hierarchies
 import doc_graphs

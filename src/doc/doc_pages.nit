@@ -593,36 +593,6 @@ class NitdocModule
 		lnk.add def.tpl_link
 		return new TplListItem.with_content(lnk)
 	end
-
-	# inheritance section
-	private fun tpl_inheritance(parent: TplSection) do
-		# Display lists
-		var section = new TplSection.with_title("dependencies", "Dependencies")
-
-		# Imports
-		var lst = new Array[MModule]
-		if not lst.is_empty then
-			name_sorter.sort lst
-			section.add_child tpl_list("imports", "Imports", lst)
-		end
-
-		# Clients
-		lst = new Array[MModule]
-		if not lst.is_empty then
-			name_sorter.sort lst
-			section.add_child tpl_list("clients", "Clients", lst)
-		end
-
-		parent.add_child section
-	end
-
-	private fun tpl_list(id: String, title: String, mmodules: Array[MModule]): TplArticle do
-		var article = new TplArticle.with_title(id, title)
-		var list = new TplList.with_classes(["list-unstyled", "list-definition"])
-		for mmodule in mmodules do list.elts.add mmodule.tpl_list_item
-		article.content = list
-		return article
-	end
 end
 
 # A class page
@@ -694,58 +664,6 @@ class NitdocClass
 		lnk.add new TplLabel.with_classes(classes)
 		lnk.add mprop.tpl_anchor
 		return new TplListItem.with_content(lnk)
-	end
-
-	private fun tpl_inheritance(parent: TplSection) do
-		# Display lists
-		var section = new TplSection.with_title("inheritance", "Inheritance")
-
-		# parents
-		if not hparents.is_empty then
-			var lst = hparents.to_a
-			name_sorter.sort lst
-			section.add_child tpl_list("parents", "Parents", lst)
-		end
-
-		# ancestors
-		if not hancestors.is_empty then
-			var lst = hancestors.to_a
-			name_sorter.sort lst
-			section.add_child tpl_list("ancestors", "Ancestors", lst)
-		end
-
-		# children
-		if not hchildren.is_empty then
-			var lst = hchildren.to_a
-			name_sorter.sort lst
-			section.add_child tpl_list("children", "Children", lst)
-		end
-
-		# descendants
-		if not hdescendants.is_empty then
-			var lst = hdescendants.to_a
-			name_sorter.sort lst
-			section.add_child tpl_list("descendants", "Descendants", lst)
-		end
-
-		parent.add_child section
-	end
-
-	private fun tpl_list(id: String, title: String, elts: Array[MClass]): TplArticle do
-		var article = new TplArticle.with_title(id, title)
-		if elts.length > 20 then
-			var tpl = new Template
-			for e in elts do
-				tpl.add e.tpl_link
-				if e != elts.last then tpl.add ", "
-			end
-			article.content = tpl
-		else
-			var list = new TplList.with_classes(["list-unstyled", "list-definition"])
-			for elt in elts do list.elts.add elt.tpl_list_item
-			article.content = list
-		end
-		return article
 	end
 end
 

@@ -38,6 +38,7 @@ private class Nitdoc
 			new POSetPhase(toolcontext, doc),
 			new ConcernsPhase(toolcontext, doc),
 			new StructurePhase(toolcontext, doc),
+			new InheritanceListsPhase(toolcontext, doc),
 			new GraphPhase(toolcontext, doc): DocPhase]
 
 		for phase in phases do
