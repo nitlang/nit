@@ -40,7 +40,8 @@ private class Nitdoc
 			new StructurePhase(toolcontext, doc),
 			new InheritanceListsPhase(toolcontext, doc),
 			new IntroRedefListPhase(toolcontext, doc),
-			new GraphPhase(toolcontext, doc): DocPhase]
+			new GraphPhase(toolcontext, doc),
+			new RenderHTMLPhase(toolcontext, doc): DocPhase]
 
 		for phase in phases do
 			toolcontext.info("# {phase.class_name}", 1)

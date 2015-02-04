@@ -17,7 +17,4 @@
 # See `DocPhase`.
 module doc_phases
 
-import doc_structure
-import doc_hierarchies
-import doc_graphs
-import doc_intros_redefs
+import doc_html
