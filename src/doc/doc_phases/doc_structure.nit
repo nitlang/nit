@@ -1,0 +1,280 @@
+# This file is part of NIT ( http://www.nitlanguage.org ).
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# Composes the DocComposite tree of a DocPage and organizes its content.
+module doc_structure
+
+import doc_concerns
+
+# StructurePhase populates the DocPage content with section and article.
+#
+# This phase only applies structure.
+# The content of the structure is choosen by the rendering phases.
+class StructurePhase
+	super DocPhase
+
+	# Used to sort ConcernsTree by rank.
+	private var concerns_sorter = new MConcernRankSorter
+
+	# Used to sort ConcernsTree by name.
+	private var name_sorter = new MEntityNameSorter
+
+	# Populates the given DocModel.
+	redef fun apply do
+		for page in doc.pages do
+			if page isa MEntityPage then page.apply_structure(self, doc)
+		end
+	end
+
+	# TODO index and search page should also be structured here
+end
+
+redef class MEntityPage
+
+	# Populates `self` with structure elements like DocComposite ones.
+	#
+	# See `StructurePhase`.
+	fun apply_structure(v: StructurePhase, doc: DocModel) do end
+end
+
+redef class MGroupPage
+	redef fun apply_structure(v, doc) do
+		if mentity.is_root then
+			root.add new IntroArticle(mentity.mproject)
+		else
+			root.add new IntroArticle(mentity)
+		end
+		var concerns = self.concerns
+		if concerns == null or concerns.is_empty then return
+		# FIXME avoid diff
+		mentity.mproject.booster_rank = -1000
+		mentity.booster_rank = -1000
+		concerns.sort_with(v.concerns_sorter)
+		mentity.mproject.booster_rank = 0
+		mentity.booster_rank = 0
+		root.add new ConcernsArticle(mentity, concerns)
+		for mentity in concerns do
+			if mentity isa MModule then
+				root.add new DefinitionArticle(mentity)
+			else
+				root.add new ConcernSection(mentity)
+			end
+		end
+	end
+end
+
+redef class MModulePage
+	redef fun apply_structure(v, doc) do
+		root.add new IntroArticle(mentity)
+		var concerns = self.concerns
+		if concerns == null or concerns.is_empty then return
+		# FIXME avoid diff
+		mentity.mgroup.mproject.booster_rank = -1000
+		mentity.mgroup.booster_rank = -1000
+		mentity.booster_rank = -1000
+		concerns.sort_with(v.concerns_sorter)
+		mentity.mgroup.mproject.booster_rank = 0
+		mentity.mgroup.booster_rank = 0
+		mentity.booster_rank = 0
+		root.add new ConcernsArticle(mentity, concerns)
+		# reference list
+		for mentity in concerns do
+			var section = new ConcernSection(mentity)
+			if mentity isa MModule then
+				var mclasses = mclasses_for_mmodule(mentity).to_a
+				v.name_sorter.sort(mclasses)
+				for mclass in mclasses do
+					var article = new DefinitionArticle(mclass)
+					var mclassdefs = mclassdefs_for(mclass).to_a
+					if not mclassdefs.has(mclass.intro) then
+						article.add(new DefinitionArticle(mclass.intro))
+					end
+					doc.mainmodule.linearize_mclassdefs(mclassdefs)
+					for mclassdef in mclassdefs do
+						article.add(new DefinitionArticle(mclassdef))
+					end
+					section.add article
+				end
+			end
+			root.add section
+		end
+	end
+
+	# Filters `self.mclassses` by intro `mmodule`.
+	private fun mclasses_for_mmodule(mmodule: MModule): Set[MClass] do
+		var mclasses = new HashSet[MClass]
+		for mclass in self.mclasses do
+			if mclass.intro.mmodule == mmodule then
+				mclasses.add mclass
+			end
+		end
+		return mclasses
+	end
+
+	# Filters `self.mclassdefs` by `mclass`.
+	private fun mclassdefs_for(mclass: MClass): Set[MClassDef] do
+		var mclassdefs = new HashSet[MClassDef]
+		for mclassdef in self.mclassdefs do
+			if mclassdef.mclass == mclass then
+				mclassdefs.add mclassdef
+			end
+		end
+		return mclassdefs
+	end
+end
+
+redef class MClassPage
+	redef fun apply_structure(v, doc) do
+		root.add new IntroArticle(mentity)
+		var concerns = self.concerns
+		if concerns == null or concerns.is_empty then return
+		# FIXME diff hack
+		mentity.intro_mmodule.mgroup.mproject.booster_rank = -1000
+		mentity.intro_mmodule.mgroup.booster_rank = -1000
+		mentity.intro_mmodule.booster_rank = -1000
+		concerns.sort_with(v.concerns_sorter)
+		mentity.intro_mmodule.mgroup.mproject.booster_rank = 0
+		mentity.intro_mmodule.mgroup.booster_rank = 0
+		mentity.intro_mmodule.booster_rank = 0
+		root.add new ConcernsArticle(mentity, concerns)
+		for mentity in concerns do
+			var section = new ConcernSection(mentity)
+			if mentity isa MModule then
+				var mprops = mproperties_for(mentity)
+				var by_kind = new PropertiesByKind.with_elements(mprops)
+				for group in by_kind.groups do
+					v.name_sorter.sort(group)
+					for mprop in group do
+						for mpropdef in mpropdefs_for(mprop, mentity) do
+							section.add new DefinitionArticle(mpropdef)
+						end
+					end
+				end
+			end
+			root.add section
+		end
+	end
+
+	# Filters `self.mpropdefs` by `mmodule`.
+	#
+	# FIXME diff hack
+	private fun mproperties_for(mmodule: MModule): Set[MProperty] do
+		var mprops = new HashSet[MProperty]
+		for mpropdef in self.mpropdefs do
+			if mpropdef.mclassdef.mmodule == mmodule then
+				mprops.add mpropdef.mproperty
+			end
+		end
+		return mprops
+	end
+
+	# Filters `self.mpropdefs` by `mproperty`.
+	#
+	# FIXME diff hack
+	private fun mpropdefs_for(mproperty: MProperty, mmodule: MModule): Set[MPropDef] do
+		var mpropdefs = new HashSet[MPropDef]
+		for mpropdef in self.mpropdefs do
+			if mpropdef.mproperty == mproperty and
+				mpropdef.mclassdef.mmodule == mmodule then
+				mpropdefs.add mpropdef
+			end
+		end
+		return mpropdefs
+	end
+end
+
+redef class MPropertyPage
+	redef fun apply_structure(v, doc) do
+		root.add new IntroArticle(mentity)
+		var concerns = self.concerns
+		if concerns == null or concerns.is_empty then return
+		# FIXME diff hack
+		mentity.intro.mclassdef.mmodule.mgroup.mproject.booster_rank = -1000
+		mentity.intro.mclassdef.mmodule.mgroup.booster_rank = -1000
+		mentity.intro.mclassdef.mmodule.booster_rank = -1000
+		concerns.sort_with(v.concerns_sorter)
+		mentity.intro.mclassdef.mmodule.mgroup.mproject.booster_rank = 0
+		mentity.intro.mclassdef.mmodule.mgroup.booster_rank = 0
+		mentity.intro.mclassdef.mmodule.booster_rank = 0
+		root.add new ConcernsArticle(mentity, concerns)
+		for mentity in concerns do
+			var section = new ConcernSection(mentity)
+			if mentity isa MModule then
+				# Add mproperties
+				var mpropdefs = mpropdefs_for(mentity).to_a
+				v.name_sorter.sort(mpropdefs)
+				for mpropdef in mpropdefs do
+					section.add new DefinitionArticle(mpropdef)
+				end
+			end
+			root.add section
+		end
+	end
+
+	# Filters `self.mpropdefs` by `mmodule`.
+	private fun mpropdefs_for(mmodule: MModule): Set[MPropDef] do
+		var mpropdefs = new HashSet[MPropDef]
+		for mpropdef in self.mpropdefs do
+			if mpropdef.mclassdef.mmodule == mmodule then
+				mpropdefs.add mpropdef
+			end
+		end
+		return mpropdefs
+	end
+end
+
+# A DocComposite element about a MEntity.
+class MEntityComposite
+	super DocComposite
+
+	# MEntity documented by this page element.
+	var mentity: MEntity
+end
+
+# A Section about a Concern.
+#
+# Those sections are used to build the page summary.
+class ConcernSection
+	super MEntityComposite
+	super DocSection
+end
+
+# An article about a Mentity.
+#
+# Used to display textual content about a MEntity.
+abstract class MEntityArticle
+	super MEntityComposite
+	super DocArticle
+end
+
+# An introduction article about a MEntity.
+#
+# Used at the top of a documentation page to introduce the documented MEntity.
+class IntroArticle
+	super MEntityComposite
+	super DocArticle
+end
+
+# An article that display a ConcernsTreee as a list.
+class ConcernsArticle
+	super MEntityArticle
+
+	# Concerns to list in this article.
+	var concerns: ConcernsTree
+end
+
+# An article that display the definition text of a MEntity.
+class DefinitionArticle
+	super MEntityArticle
+end

@@ -35,7 +35,8 @@ private class Nitdoc
 		var phases = [
 			new ExtractionPhase(toolcontext, doc),
 			new MakePagePhase(toolcontext, doc),
-			new ConcernsPhase(toolcontext, doc): DocPhase]
+			new ConcernsPhase(toolcontext, doc),
+			new StructurePhase(toolcontext, doc): DocPhase]
 
 		for phase in phases do
 			toolcontext.info("# {phase.class_name}", 1)

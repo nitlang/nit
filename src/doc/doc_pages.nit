@@ -502,36 +502,6 @@ class NitdocOverview
 	end
 
 	redef fun page_url do return "index.html"
-
-	# intro text
-	private fun tpl_intro: TplSection do
-		var section = new TplSection.with_title("overview", tpl_title)
-		var article = new TplArticle("intro")
-		if ctx.opt_custom_intro.value != null then
-			article.content = ctx.opt_custom_intro.value.to_s
-		end
-		section.add_child article
-		return section
-	end
-
-	# projects list
-	private fun tpl_projects(section: TplSection) do
-		# Projects list
-		var mprojects = model.mprojects.to_a
-		var sorter = new MConcernRankSorter
-		sorter.sort mprojects
-		var ssection = new TplSection.with_title("projects", "Projects")
-		for mproject in mprojects do
-			ssection.add_child tpl_mproject_article(mproject)
-		end
-		section.add_child ssection
-	end
-
-	redef fun tpl_content do
-		var top = tpl_intro
-		tpl_projects(top)
-		tpl_page.add_section top
-	end
 end
 
 # The search page
@@ -545,64 +515,6 @@ class NitdocSearch
 	redef fun tpl_title do return "Index"
 
 	redef fun page_url do return "search.html"
-
-	redef fun tpl_content do
-		var tpl = new TplSearchPage("search_all")
-		var section = new TplSection("search")
-		# title
-		tpl.title = "Index"
-		# modules list
-		for mmodule in modules_list do
-			tpl.modules.add mmodule.tpl_link
-		end
-		# classes list
-		for mclass in classes_list do
-			tpl.classes.add mclass.tpl_link
-		end
-		# properties list
-		for mproperty in mprops_list do
-			var m = new Template
-			m.add mproperty.intro.tpl_link
-			m.add " ("
-			m.add mproperty.intro.mclassdef.mclass.tpl_link
-			m.add ")"
-			tpl.props.add m
-		end
-		section.add_child tpl
-		tpl_page.add_section section
-	end
-
-	# Extract mmodule list to display (sorted by name)
-	private fun modules_list: Array[MModule] do
-		var sorted = new Array[MModule]
-		for mmodule in model.mmodule_importation_hierarchy do
-			if mmodule.is_fictive or mmodule.is_test_suite then continue
-			sorted.add mmodule
-		end
-		name_sorter.sort(sorted)
-		return sorted
-	end
-
-	# Extract mclass list to display (sorted by name)
-	private fun classes_list: Array[MClass] do
-		var sorted = new Array[MClass]
-		for mclass in model.mclasses do
-			if not ctx.filter_mclass(mclass) then continue
-			sorted.add mclass
-		end
-		name_sorter.sort(sorted)
-		return sorted
-	end
-
-	# Extract mproperty list to display (sorted by name)
-	private fun mprops_list: Array[MProperty] do
-		var sorted = new Array[MProperty]
-		for mproperty in model.mproperties do
-			if ctx.filter_mproperty(mproperty) then sorted.add mproperty
-		end
-		name_sorter.sort(sorted)
-		return sorted
-	end
 end
 
 # A group page
@@ -660,49 +572,6 @@ class NitdocGroup
 		lnk.add def.tpl_link
 		return new TplListItem.with_content(lnk)
 	end
-
-	# intro text
-	private fun tpl_intro: TplSection do
-		var section = new TplSection.with_title("top", tpl_title)
-		var article = new TplArticle("intro")
-
-		if mgroup.is_root then
-			section.subtitle = mgroup.mproject.tpl_declaration
-			article.content = mgroup.mproject.tpl_definition
-		else
-			section.subtitle = mgroup.tpl_declaration
-			article.content = mgroup.tpl_definition
-		end
-		section.add_child article
-		return section
-	end
-
-	private fun tpl_concerns(section: TplSection) do
-		if concerns.is_empty then return
-		section.add_child new TplArticle.with_content("concerns", "Concerns", concerns.to_tpl)
-	end
-
-	private fun tpl_groups(parent: TplSection) do
-		var lst = concerns.to_a
-		var section = parent
-		for mentity in lst do
-			if mentity isa MProject then
-				section.add_child new TplSection(mentity.nitdoc_id)
-			else if mentity isa MGroup then
-				section.add_child new TplSection(mentity.nitdoc_id)
-			else if mentity isa MModule then
-				section.add_child tpl_mmodule_article(mentity)
-			end
-		end
-	end
-
-	redef fun tpl_content do
-		tpl_sidebar_mclasses
-		var top = tpl_intro
-		tpl_concerns(top)
-		tpl_groups(top)
-		tpl_page.add_section top
-	end
 end
 
 # A module page
@@ -758,20 +627,6 @@ class NitdocModule
 		return new TplListItem.with_content(lnk)
 	end
 
-	# intro text
-	private fun tpl_intro: TplSection do
-		var section = new TplSection.with_title("top", tpl_title)
-		section.subtitle = mmodule.tpl_declaration
-
-		var article = new TplArticle("intro")
-		var def = mmodule.tpl_definition
-		var location = mmodule.location
-		article.source_link = tpl_showsource(location)
-		article.content = def
-		section.add_child article
-		return section
-	end
-
 	# inheritance section
 	private fun tpl_inheritance(parent: TplSection) do
 		# Extract relevent modules
@@ -825,49 +680,6 @@ class NitdocModule
 		for mmodule in mmodules do list.elts.add mmodule.tpl_list_item
 		article.content = list
 		return article
-	end
-
-	private fun tpl_concerns(parent: TplSection) do
-		if concerns.is_empty then return
-		parent.add_child new TplArticle.with_content("concerns", "Concerns", concerns.to_tpl)
-	end
-
-	private fun tpl_mclasses(parent: TplSection) do
-		for mentity in concerns do
-			if mentity isa MProject then
-				parent.add_child new TplSection(mentity.nitdoc_id)
-			else if mentity isa MGroup then
-				parent.add_child new TplSection(mentity.nitdoc_id)
-			else if mentity isa MModule then
-				var section = new TplSection(mentity.nitdoc_id)
-				var title = new Template
-				if mentity == mmodule then
-					title.add "in "
-					section.summary_title = "in {mentity.nitdoc_name}"
-				else
-					title.add "from "
-					section.summary_title = "from {mentity.nitdoc_name}"
-				end
-				title.add mentity.tpl_namespace
-				section.title = title
-
-				var mclasses = mmodules2mclasses[mentity].to_a
-				name_sorter.sort(mclasses)
-				for mclass in mclasses do
-					section.add_child tpl_mclass_article(mclass, mclasses2mdefs[mclass].to_a)
-				end
-				parent.add_child section
-			end
-		end
-	end
-
-	redef fun tpl_content do
-		tpl_sidebar_mclasses
-		var top = tpl_intro
-		tpl_inheritance(top)
-		tpl_concerns(top)
-		tpl_mclasses(top)
-		tpl_page.add_section top
 	end
 
 	# Genrate dot hierarchy for class inheritance
@@ -974,29 +786,6 @@ class NitdocClass
 		return new TplListItem.with_content(lnk)
 	end
 
-	private fun tpl_intro: TplSection do
-		var section = new TplSection.with_title("top", tpl_title)
-		section.subtitle = mclass.intro.tpl_declaration
-		var article = new TplArticle("comment")
-		var mdoc = mclass.mdoc_or_fallback
-		if mdoc != null then
-			article.content = mdoc.tpl_comment
-		end
-		section.add_child article
-		return section
-	end
-
-	private fun tpl_concerns(parent: TplSection) do
-		# intro title
-		var section = new TplSection.with_title("intro", "Introduction")
-		section.summary_title = "Introduction"
-		section.add_child tpl_mclassdef_article(mclass.intro)
-		parent.add_child section
-		# concerns
-		if concerns.is_empty then return
-		parent.add_child new TplArticle.with_content("concerns", "Concerns", concerns.to_tpl)
-	end
-
 	private fun tpl_inheritance(parent: TplSection) do
 		# parents
 		var hparents = new HashSet[MClass]
@@ -1089,83 +878,6 @@ class NitdocClass
 		return article
 	end
 
-	private fun tpl_properties(parent: TplSection) do
-		var lst = concerns.to_a
-		for mentity in lst do
-			if mentity isa MProject then
-				parent.add_child new TplSection(mentity.nitdoc_id)
-			else if mentity isa MGroup then
-				parent.add_child new TplSection(mentity.nitdoc_id)
-			else if mentity isa MModule then
-				var section = new TplSection(mentity.nitdoc_id)
-				var title = new Template
-				title.add "in "
-				title.add mentity.tpl_namespace
-				section.title = title
-				section.summary_title = "in {mentity.nitdoc_name}"
-
-				# properties
-				var mprops = mmodules2mprops[mentity]
-				var by_kind = new PropertiesByKind.with_elements(mprops)
-
-				for g in by_kind.groups do
-					for article in tpl_mproperty_articles(g) do
-						section.add_child article
-					end
-				end
-				parent.add_child section
-			end
-		end
-	end
-
-	private fun tpl_mproperty_articles(elts: Collection[MProperty]):
-			Sequence[TplArticle] do
-		var articles = new List[TplArticle]
-		for elt in elts do
-			var local_defs = mprops2mdefs[elt]
-			# var all_defs = elt.mpropdefs
-			var all_defs = new HashSet[MPropDef]
-			for local_def in local_defs do
-				all_defs.add local_def
-				var mpropdef = local_def
-				while not mpropdef.is_intro do
-					mpropdef = mpropdef.lookup_next_definition(mainmodule, mpropdef.mclassdef.bound_mtype)
-					all_defs.add mpropdef
-				end
-			end
-			var loc_lin = local_defs.to_a
-			mainmodule.linearize_mpropdefs(loc_lin)
-			var all_lin = all_defs.to_a
-			mainmodule.linearize_mpropdefs(all_lin)
-			articles.add tpl_mprop_article(loc_lin.first, loc_lin, all_lin)
-		end
-		return articles
-	end
-
-	redef fun tpl_content do
-		tpl_sidebar_properties
-		var top = tpl_intro
-		tpl_inheritance(top)
-		tpl_concerns(top)
-		tpl_properties(top)
-		tpl_page.add_section top
-	end
-
-	private fun mclass_inherited_mprops: Set[MProperty] do
-		var res = new HashSet[MProperty]
-		var local = mclass.local_mproperties(ctx.min_visibility)
-		for mprop in mclass.inherited_mproperties(mainmodule, ctx.min_visibility) do
-			if local.has(mprop) then continue
-			#if mprop isa MMethod and mprop.is_init then continue
-			if mprop.intro.mclassdef.mclass.name == "Object" and
-				(mprop.visibility == protected_visibility or
-				mprop.intro.mclassdef.mmodule.name != "kernel") then continue
-			res.add mprop
-		end
-		res.add_all local
-		return res
-	end
-
 	# Generate dot hierarchy for classes
 	fun tpl_dot(mclasses: Collection[MClass]): nullable TplArticle do
 		var poset = new POSet[MClass]
@@ -1240,64 +952,6 @@ class NitdocProperty
 		topmenu.add_link new TplLink("{mclass.nitdoc_url}", "{mclass.nitdoc_name}")
 		topmenu.add_link new TplLink(page_url, mproperty.nitdoc_name)
 		return topmenu
-	end
-
-	private fun tpl_intro: TplSection do
-		var title = new Template
-		title.add mproperty.nitdoc_name
-		title.add mproperty.intro.tpl_signature
-		var section = new TplSection.with_title("top", title)
-		section.subtitle = mproperty.tpl_namespace
-		section.summary_title = mproperty.nitdoc_name
-		return section
-	end
-
-	private fun tpl_properties(parent: TplSection) do
-		# intro title
-		var ns = mproperty.intro.mclassdef.mmodule.tpl_namespace
-		var section = new TplSection("intro")
-		var title = new Template
-		title.add "Introduction in "
-		title.add ns
-		section.title = title
-		section.summary_title = "Introduction"
-		section.add_child tpl_mpropdef_article(mproperty.intro)
-		parent.add_child section
-
-		# concerns
-		if concerns.is_empty then return
-		parent.add_child new TplArticle.with_content("Concerns", "Concerns", concerns.to_tpl)
-
-		# redef list
-		var lst = concerns.to_a
-		for mentity in lst do
-			if mentity isa MProject then
-				parent.add_child new TplSection(mentity.nitdoc_id)
-			else if mentity isa MGroup then
-				parent.add_child new TplSection(mentity.nitdoc_id)
-			else if mentity isa MModule then
-				var ssection = new TplSection(mentity.nitdoc_id)
-				title = new Template
-				title.add "in "
-				title.add mentity.tpl_namespace
-				ssection.title = title
-				ssection.summary_title = "in {mentity.nitdoc_name}"
-
-				# properties
-				var mpropdefs = mmodules2mdefs[mentity].to_a
-				name_sorter.sort(mpropdefs)
-				for mpropdef in mpropdefs do
-					ssection.add_child tpl_mpropdef_article(mpropdef)
-				end
-				parent.add_child ssection
-			end
-		end
-	end
-
-	redef fun tpl_content do
-		var top = tpl_intro
-		tpl_properties(top)
-		tpl_page.add_section top
 	end
 end
 
