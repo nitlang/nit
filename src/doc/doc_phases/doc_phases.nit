@@ -16,3 +16,5 @@
 #
 # See `DocPhase`.
 module doc_phases
+
+import doc_extract

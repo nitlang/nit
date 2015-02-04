@@ -24,10 +24,7 @@ redef class ToolContext
 	private var opt_source = new OptionString("link for source (%f for filename, %l for first line, %L for last line)", "--source")
 	private var opt_sharedir = new OptionString("directory containing nitdoc assets", "--sharedir")
 	private var opt_shareurl = new OptionString("use shareurl instead of copy shared files", "--shareurl")
-	private var opt_no_attributes = new OptionBool("ignore the attributes",
-			"--no-attributes")
 	private var opt_nodot = new OptionBool("do not generate graphes with graphviz", "--no-dot")
-	private var opt_private = new OptionBool("also generate private API", "--private")
 
 	private var opt_custom_title = new OptionString("custom title for homepage", "--custom-title")
 	private var opt_custom_brand = new OptionString("custom link to external site", "--custom-brand")
@@ -49,7 +46,7 @@ redef class ToolContext
 
 		var opts = option_context
 		opts.add_option(opt_dir, opt_source, opt_sharedir, opt_shareurl,
-				opt_no_attributes, opt_nodot, opt_private)
+				opt_nodot)
 		opts.add_option(opt_custom_title, opt_custom_footer, opt_custom_intro, opt_custom_brand)
 		opts.add_option(opt_github_upstream, opt_github_base_sha1, opt_github_gitdir)
 		opts.add_option(opt_piwik_tracker, opt_piwik_site_id)
@@ -64,12 +61,6 @@ redef class ToolContext
 			output_dir = "doc"
 		end
 		self.output_dir = output_dir
-		# min visibility
-		if opt_private.value then
-			min_visibility = none_visibility
-		else
-			min_visibility = protected_visibility
-		end
 		# github urls
 		var gh_upstream = opt_github_upstream.value
 		var gh_base_sha = opt_github_base_sha1.value
@@ -80,23 +71,6 @@ redef class ToolContext
 				abort
 			end
 		end
-	end
-
-	# Filter the entity based on the options specified by the user.
-	#
-	# Return `true` if the specified entity has to be included in the generated
-	# documentation
-	private fun filter_mclass(mclass: MClass): Bool do
-		return mclass.visibility >= min_visibility
-	end
-
-	# Filter the entity based on the options specified by the user.
-	#
-	# Return `true` if the specified entity has to be included in the generated
-	# documentation
-	private fun filter_mproperty(mproperty: MProperty): Bool do
-		return mproperty.visibility >= min_visibility and
-			not (opt_no_attributes.value and mproperty isa MAttribute)
 	end
 end
 

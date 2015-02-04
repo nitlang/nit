@@ -32,7 +32,7 @@ private class Nitdoc
 	do
 		var doc = new DocModel(mainmodule.model, mainmodule)
 
-		var phases = new Array[DocPhase]
+		var phases = [new ExtractionPhase(toolcontext, doc)]
 
 		for phase in phases do
 			toolcontext.info("# {phase.class_name}", 1)
