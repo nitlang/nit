@@ -39,6 +39,7 @@ private class Nitdoc
 			new ConcernsPhase(toolcontext, doc),
 			new StructurePhase(toolcontext, doc),
 			new InheritanceListsPhase(toolcontext, doc),
+			new IntroRedefListPhase(toolcontext, doc),
 			new GraphPhase(toolcontext, doc): DocPhase]
 
 		for phase in phases do

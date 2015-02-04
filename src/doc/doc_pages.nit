@@ -300,71 +300,12 @@ abstract class NitdocPage
 		var article = mmodule.tpl_article
 		article.subtitle = mmodule.tpl_declaration
 		article.content = mmodule.tpl_definition
-		# mclassdefs list
-		var intros = mmodule.intro_mclassdefs(ctx.min_visibility).to_a
-		if not intros.is_empty then
-			mainmodule.linearize_mclassdefs(intros)
-			var intros_art = new TplArticle.with_title("{mmodule.nitdoc_id}.intros", "Introduces")
-			var intros_lst = new TplList.with_classes(["list-unstyled", "list-labeled"])
-			for mclassdef in intros do
-				intros_lst.add_li mclassdef.tpl_list_item
-			end
-			if not intros_lst.is_empty then
-				intros_art.content = intros_lst
-				article.add_child intros_art
-			end
-		end
-		var redefs = mmodule.redef_mclassdefs(ctx.min_visibility).to_a
-		if not redefs.is_empty then
-			mainmodule.linearize_mclassdefs(redefs)
-			var redefs_art = new TplArticle.with_title("{mmodule.nitdoc_id}.redefs", "Redefines")
-			var redefs_lst = new TplList.with_classes(["list-unstyled", "list-labeled"])
-			for mclassdef in redefs do
-				redefs_lst.add_li mclassdef.tpl_list_item
-			end
-			if not redefs_lst.is_empty then
-				redefs_art.content = redefs_lst
-				article.add_child redefs_art
-			end
-		end
 		return article
 	end
 
 	# MClassDef description template
 	fun tpl_mclass_article(mclass: MClass, mclassdefs: Array[MClassDef]): TplArticle do
 		var article = mclass.tpl_article
-		if not mclassdefs.has(mclass.intro) then
-			# add intro synopsys
-			var intro_article = mclass.intro.tpl_short_article
-			intro_article.source_link = tpl_showsource(mclass.intro.location)
-			article.add_child intro_article
-		end
-		mainmodule.linearize_mclassdefs(mclassdefs)
-		for mclassdef in mclassdefs do
-			# add mclassdef full description
-			var redef_article = mclassdef.tpl_article
-			redef_article.source_link = tpl_showsource(mclassdef.location)
-			article.add_child redef_article
-			# mpropdefs list
-			var intros = new TplArticle.with_title("{mclassdef.nitdoc_id}.intros", "Introduces")
-			var intros_lst = new TplList.with_classes(["list-unstyled", "list-labeled"])
-			for mpropdef in mclassdef.collect_intro_mpropdefs(ctx.min_visibility) do
-				intros_lst.add_li mpropdef.tpl_list_item
-			end
-			if not intros_lst.is_empty then
-				intros.content = intros_lst
-				redef_article.add_child intros
-			end
-			var redefs = new TplArticle.with_title("{mclassdef.nitdoc_id}.redefs", "Redefines")
-			var redefs_lst = new TplList.with_classes(["list-unstyled", "list-labeled"])
-			for mpropdef in mclassdef.collect_redef_mpropdefs(ctx.min_visibility) do
-				redefs_lst.add_li mpropdef.tpl_list_item
-			end
-			if not redefs_lst.is_empty then
-				redefs.content = redefs_lst
-				redef_article.add_child redefs
-			end
-		end
 		return article
 	end
 
@@ -407,25 +348,6 @@ abstract class NitdocPage
 			article.content = main_mpropdef.mdoc_or_fallback.tpl_comment
 		end
 		var subarticle = new TplArticle("{main_mpropdef.nitdoc_id}.redefs")
-		# Add redef in same `MClass`
-		if local_mpropdefs.length > 1 then
-			for mpropdef in local_mpropdefs do
-				if mpropdef == main_mpropdef then continue
-				var redef_article = new TplArticle("{mpropdef.nitdoc_id}")
-				var redef_title = new Template
-				redef_title.add "also redef in "
-				redef_title.add mpropdef.tpl_namespace
-				redef_article.title = redef_title
-				redef_article.title_classes.add "signature info"
-				redef_article.css_classes.add "nospace"
-				var redef_content = new Template
-				if mpropdef.mdoc != null then
-					redef_content.add mpropdef.mdoc.tpl_comment
-				end
-				redef_article.content = redef_content
-				subarticle.add_child redef_article
-			end
-		end
 		# Add linearization
 		if lin.length > 1 then
 			var lin_article = new TplArticle("{main_mpropdef.nitdoc_id}.lin")
@@ -438,13 +360,6 @@ abstract class NitdocPage
 			subarticle.add_child lin_article
 		end
 		article.add_child subarticle
-		return article
-	end
-
-	# MProperty description template
-	fun tpl_mpropdef_article(mpropdef: MPropDef): TplArticle do
-		var article = mpropdef.tpl_article
-		article.source_link = tpl_showsource(mpropdef.location)
 		return article
 	end
 end
