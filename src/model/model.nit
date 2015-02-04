@@ -1787,6 +1787,9 @@ abstract class MProperty
 	# If mtype does not know mproperty then an empty array is returned.
 	#
 	# If you want the really most specific property, then look at `lookup_first_definition`
+	#
+	# REQUIRE: `not mtype.need_anchor` to simplify the API (no `anchor` parameter)
+	# ENSURE: `not mtype.has_mproperty(mmodule, self) == result.is_empty`
 	fun lookup_definitions(mmodule: MModule, mtype: MType): Array[MPROPDEF]
 	do
 		assert not mtype.need_anchor
@@ -1825,7 +1828,8 @@ abstract class MProperty
 	#
 	# If you want the really most specific property, then look at `lookup_next_definition`
 	#
-	# FIXME: Move to `MPropDef`?
+	# REQUIRE: `not mtype.need_anchor` to simplify the API (no `anchor` parameter)
+	# ENSURE: `not mtype.has_mproperty(mmodule, self) implies result.is_empty`
 	fun lookup_super_definitions(mmodule: MModule, mtype: MType): Array[MPROPDEF]
 	do
 		assert not mtype.need_anchor
@@ -1893,7 +1897,7 @@ abstract class MProperty
 	#
 	# FIXME: the linearization is still unspecified
 	#
-	# REQUIRE: `not mtype.need_anchor`
+	# REQUIRE: `not mtype.need_anchor` to simplify the API (no `anchor` parameter)
 	# REQUIRE: `mtype.has_mproperty(mmodule, self)`
 	fun lookup_first_definition(mmodule: MModule, mtype: MType): MPROPDEF
 	do
@@ -1902,6 +1906,9 @@ abstract class MProperty
 
 	# Return all definitions in a linearization order
 	# Most specific first, most general last
+	#
+	# REQUIRE: `not mtype.need_anchor` to simplify the API (no `anchor` parameter)
+	# REQUIRE: `mtype.has_mproperty(mmodule, self)`
 	fun lookup_all_definitions(mmodule: MModule, mtype: MType): Array[MPROPDEF]
 	do
 		mtype = mtype.as_notnullable
