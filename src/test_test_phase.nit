@@ -31,17 +31,26 @@ redef fun do_work(mainmodule, given_mmodules, modelbuilder)
 do
 	print "It works"
 	var model = modelbuilder.model
+	print "I have {model.mprojects.length} projects"
 	print "I have {model.mmodules.length} modules"
 	var mclasses = mainmodule.flatten_mclass_hierarchy
-	print "I have also {mclasses.length} classes"
+	print "I have {mclasses.length} classes"
 
-	var meth_cpt = 0
+	var m_cpt = 0
+	var md_cpt = 0
+	var cd_cpt = 0
 	for m in mainmodule.in_importation.greaters do
 		for cd in m.mclassdefs do
+			cd_cpt += 1
 			for pd in cd.mpropdefs do
-				if pd isa MMethodDef then meth_cpt += 1
+				if pd isa MMethodDef then
+					md_cpt += 1
+					if pd.is_intro then m_cpt += 1
+				end
 			end
 		end
 	end
-	print "And {meth_cpt} definitions of methods"
+	print "For {cd_cpt} definitions of classes"
+	print "I have {m_cpt} methods"
+	print "For {md_cpt} definitions of methods"
 end
