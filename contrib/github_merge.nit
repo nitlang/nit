@@ -127,5 +127,6 @@ else
 	end
 	system("git commit -F mergemsg")
 	print "The merge is made"
+	mergemsg.write_to(stdout)
 end
 
