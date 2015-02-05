@@ -112,11 +112,12 @@ class GameStatusPanel
 
 	redef fun render_body do
 		add "<strong class=\"text-success\">{game.load_players.length}</strong>"
-		add " <a href=\"{game.url}/players\">players</a><br>"
+		add " <a href=\"{game.url}/players\">players</a><br><br>"
 		add "<strong class=\"text-success\">{game.stats["pulls"]}</strong> pull requests"
 		add " (<strong>{game.stats["pulls_open"]}</strong> open)<br>"
 		add "<strong class=\"text-success\">{game.stats["issues"]}</strong> issues"
 		add " (<strong>{game.stats["issues_open"]}</strong> open)<br>"
+		add "<strong class=\"text-success\">{game.stats["commits"]}</strong> commits"
 	end
 end
 
@@ -143,7 +144,11 @@ class PlayerStatusPanel
 		# TODO player.rank
 		add "<p class=\"lead\">ranked "
 		add " <span class=\"text-success\"># {ranking[player.name]}</span></p>"
-		add "<strong class=\"text-success\">{player.nitcoins}</strong> nitcoins<br>"
+		add "<strong class=\"text-success\">{player.nitcoins}</strong> nitcoins<br><br>"
+		add "<strong>{player.stats["pulls"]}</strong> pull requests<br>"
+		add "<strong>{player.stats["issues"]}</strong> issues<br>"
+		add "<strong>{player.stats["commits"]}</strong> commits"
+
 	end
 end
 
