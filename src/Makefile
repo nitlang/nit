@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-NITCOPT=
+NITCOPT=--semi-global
 OLDNITCOPT=
 OBJS=nitc nitpick nit nitdoc nitls nitunit nitpretty nitmetrics nitx nitlight nitdbg_client nitserial
 SRCS=$(patsubst %,%.nit,$(OBJS))
