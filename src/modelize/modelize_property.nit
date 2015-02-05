@@ -829,18 +829,21 @@ redef class AMethPropdef
 				for i in [0..mysignature.arity[ do
 					var myt = mysignature.mparameters[i].mtype
 					var prt = msignature.mparameters[i].mtype
-					if not myt.is_subtype(mmodule, mclassdef.bound_mtype, prt) or
-							not prt.is_subtype(mmodule, mclassdef.bound_mtype, myt) then
-						modelbuilder.error(nsig.n_params[i], "Redef Error: Wrong type for parameter `{mysignature.mparameters[i].name}'. found {myt}, expected {prt} as in {mpropdef.mproperty.intro}.")
+					var node = nsig.n_params[i]
+					if not modelbuilder.check_sametype(node, mmodule, mclassdef.bound_mtype, myt, prt) then
+						modelbuilder.error(node, "Redef Error: Wrong type for parameter `{mysignature.mparameters[i].name}'. found {myt}, expected {prt} as in {mpropdef.mproperty.intro}.")
 					end
 				end
 			end
 			if precursor_ret_type != null then
+				var node: nullable ANode = null
+				if nsig != null then node = nsig.n_type
+				if node == null then node = self
 				if ret_type == null then
 					# Inherit the return type
 					ret_type = precursor_ret_type
-				else if not ret_type.is_subtype(mmodule, mclassdef.bound_mtype, precursor_ret_type) then
-					modelbuilder.error(nsig.n_type.as(not null), "Redef Error: Wrong return type. found {ret_type}, expected {precursor_ret_type} as in {mpropdef.mproperty.intro}.")
+				else if not modelbuilder.check_subtype(node, mmodule, mclassdef.bound_mtype, ret_type, precursor_ret_type) then
+					modelbuilder.error(node, "Redef Error: Wrong return type. found {ret_type}, expected {precursor_ret_type} as in {mpropdef.mproperty.intro}.")
 				end
 			end
 		end
@@ -1162,21 +1165,20 @@ redef class AAttrPropdef
 				for i in [0..mysignature.arity[ do
 					var myt = mysignature.mparameters[i].mtype
 					var prt = msignature.mparameters[i].mtype
-					if not myt.is_subtype(mmodule, mclassdef.bound_mtype, prt) or
-							not prt.is_subtype(mmodule, mclassdef.bound_mtype, myt) then
-						var node: ANode
-						if nsig != null then node = nsig else node = self
+					var node: ANode
+					if nsig != null then node = nsig else node = self
+					if not modelbuilder.check_sametype(node, mmodule, mclassdef.bound_mtype, myt, prt) then
 						modelbuilder.error(node, "Redef Error: Wrong type for parameter `{mysignature.mparameters[i].name}'. found {myt}, expected {prt}.")
 					end
 				end
 			end
 			if precursor_ret_type != null then
+				var node: ANode
+				if nsig != null then node = nsig else node = self
 				if ret_type == null then
 					# Inherit the return type
 					ret_type = precursor_ret_type
-				else if not ret_type.is_subtype(mmodule, mclassdef.bound_mtype, precursor_ret_type) then
-					var node: ANode
-					if nsig != null then node = nsig else node = self
+				else if not modelbuilder.check_subtype(node, mmodule, mclassdef.bound_mtype, ret_type, precursor_ret_type) then
 					modelbuilder.error(node, "Redef Error: Wrong return type. found {ret_type}, expected {precursor_ret_type}.")
 				end
 			end
@@ -1283,7 +1285,7 @@ redef class ATypePropdef
 				modelbuilder.warning(n_type, "refine-type", "Redef Error: a virtual type cannot be refined.")
 				break
 			end
-			if not bound.is_subtype(mmodule, anchor, supbound) then
+			if not modelbuilder.check_subtype(n_type, mmodule, anchor, bound, supbound) then
 				modelbuilder.error(n_type, "Redef Error: Wrong bound type. Found {bound}, expected a subtype of {supbound}, as in {p}.")
 				break
 			end

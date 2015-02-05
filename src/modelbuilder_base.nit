@@ -311,7 +311,7 @@ class ModelBuilder
 				if mt == null then return null # forward error
 				var anchor
 				if mclassdef != null then anchor = mclassdef.bound_mtype else anchor = null
-				if not mt.is_subtype(mmodule, anchor, bound) then
+				if not check_subtype(nt, mmodule, anchor, mt, bound) then
 					error(nt, "Type error: expected {bound}, got {mt}")
 					return null
 				end
@@ -319,6 +319,26 @@ class ModelBuilder
 		end
 		ntype.checked_mtype = true
 		return mtype
+	end
+
+	# Check that `sub` is a subtype of `sup`.
+	# Do not display an error message.
+	#
+	# This method is used a an entry point for the modelize phase to test static subtypes.
+	# Some refinements could redefine it to collect statictics.
+	fun check_subtype(node: ANode, mmodule: MModule, anchor: nullable MClassType, sub, sup: MType): Bool
+	do
+		return sub.is_subtype(mmodule, anchor, sup)
+	end
+
+	# Check that `sub` and `sup` are equvalent types.
+	# Do not display an error message.
+	#
+	# This method is used a an entry point for the modelize phase to test static equivalent types.
+	# Some refinements could redefine it to collect statictics.
+	fun check_sametype(node: ANode, mmodule: MModule, anchor: nullable MClassType, sub, sup: MType): Bool
+	do
+		return sub.is_subtype(mmodule, anchor, sup) and sup.is_subtype(mmodule, anchor, sub)
 	end
 end
 
