@@ -970,13 +970,13 @@ redef class AMethPropdef
 				if fromval < 0 then
 					debug("Illegal access on {recvval} for element {fromval}/{recvval.length}")
 				end
-				if fromval + lenval >= recvval.length then
+				if fromval + lenval > recvval.length then
 					debug("Illegal access on {recvval} for element {fromval}+{lenval}/{recvval.length}")
 				end
 				if toval < 0 then
 					debug("Illegal access on {destval} for element {toval}/{destval.length}")
 				end
-				if toval + lenval >= destval.length then
+				if toval + lenval > destval.length then
 					debug("Illegal access on {destval} for element {toval}+{lenval}/{destval.length}")
 				end
 				recvval.as(FlatBuffer).copy(fromval, lenval, destval, toval)
