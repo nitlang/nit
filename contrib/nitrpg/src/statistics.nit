@@ -24,22 +24,32 @@ import game
 import github::hooks
 import counter
 
+redef class GameEntity
+
+	# Load statistics for this `MEntity` if any.
+	fun load_statistics: nullable GameStats do
+		var key = self.key / "statistics"
+		if not game.store.has_key(key) then return null
+		var json = game.store.load_object(key)
+		return new GameStats.from_json(game, json)
+	end
+
+	# Save statistics under this `MEntity`.
+	fun save_statistics(stats: GameStats) do
+		game.store.store_object(key / stats.key, stats.to_json)
+	end
+end
+
 redef class Game
 
 	# Statistics for this game instance.
-	var stats = new GameStats
-
-	redef fun from_json(json) do
-		super
-		if json.has_key("statistics") then
-			stats.from_json(json["statistics"].as(JsonObject))
-		end
+	var stats: GameStats is lazy do
+		return load_statistics or else new GameStats(game)
 	end
 
-	redef fun to_json do
-		var obj = super
-		obj["statistics"] = stats.to_json
-		return obj
+	redef fun save do
+		super
+		save_statistics(stats)
 	end
 
 	redef fun pretty do
@@ -48,11 +58,6 @@ redef class Game
 		res.append "# stats:\n"
 		res.append stats.pretty
 		return res.write_to_string
-	end
-
-	redef fun clear do
-		super
-		stats.clear
 	end
 end
 
