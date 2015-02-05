@@ -388,7 +388,7 @@ redef class MExplicitCall
 		var recv_var = null
 		if mproperty.is_init then
 			var recv_mtype = recv_mtype
-			recv_var = nitni_visitor.init_instance(recv_mtype)
+			recv_var = nitni_visitor.init_instance_or_extern(recv_mtype)
 			nitni_visitor.add("{mtype.ctype} recv /* var self: {mtype} */;")
 			nitni_visitor.add("recv = {recv_var};")
 		else

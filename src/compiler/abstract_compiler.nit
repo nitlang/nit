@@ -1381,6 +1381,24 @@ abstract class AbstractCompilerVisitor
 	# Generate a alloc-instance + init-attributes
 	fun init_instance(mtype: MClassType): RuntimeVariable is abstract
 
+	# Allocate and init attributes of an instance of a standard or extern class
+	#
+	# Does not support universals and the pseudo-internal `NativeArray` class.
+	fun init_instance_or_extern(mtype: MClassType): RuntimeVariable
+	do
+		var recv
+		var ctype = mtype.ctype
+		assert mtype.mclass.name != "NativeArray"
+		if ctype == "val*" then
+			recv = init_instance(mtype)
+		else if ctype == "char*" then
+			recv = new_expr("NULL/*special!*/", mtype)
+		else
+			recv = new_expr("({ctype})0/*special!*/", mtype)
+		end
+		return recv
+	end
+
 	# Set a GC finalizer on `recv`, only if `recv` isa Finalizable
 	fun set_finalizer(recv: RuntimeVariable)
 	do
@@ -2874,21 +2892,16 @@ redef class ANewExpr
 	do
 		var mtype = self.recvtype
 		assert mtype != null
-		var recv
-		var ctype = mtype.ctype
+
 		if mtype.mclass.name == "NativeArray" then
 			assert self.n_args.n_exprs.length == 1
 			var l = v.expr(self.n_args.n_exprs.first, null)
 			assert mtype isa MGenericType
 			var elttype = mtype.arguments.first
 			return v.native_array_instance(elttype, l)
-		else if ctype == "val*" then
-			recv = v.init_instance(mtype)
-		else if ctype == "char*" then
-			recv = v.new_expr("NULL/*special!*/", mtype)
-		else
-			recv = v.new_expr("({ctype})0/*special!*/", mtype)
 		end
+
+		var recv = v.init_instance_or_extern(mtype)
 
 		var callsite = self.callsite.as(not null)
 		var args = v.varargize(callsite.mpropdef, recv, self.n_args.n_exprs)
