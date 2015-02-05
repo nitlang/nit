@@ -330,8 +330,21 @@ redef class ModelBuilder
 
 	# Return the mgroup associated to a directory path.
 	# If the directory is not a group null is returned.
+	#
+	# Note: `paths` is also used to look for mgroups
 	fun get_mgroup(dirpath: String): nullable MGroup
 	do
+		if not dirpath.file_exists then do
+			for p in paths do
+				var try = p / dirpath
+				if try.file_exists then
+					dirpath = try
+					break label
+				end
+			end
+			return null
+		end label
+
 		var rdp = module_absolute_path(dirpath)
 		if mgroups.has_key(rdp) then
 			return mgroups[rdp]
