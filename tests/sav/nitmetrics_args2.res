@@ -1,5 +1,5 @@
 *** METRICS ***
---- Metrics of covariance detection ---
+--- Detection of variance constraints on formal parameter types ---
 -- Generic classes --
  list:
   with 1 formal type parameter: 13 (92.85%)
