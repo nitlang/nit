@@ -3,7 +3,7 @@
 # Regeneration of c_src from the current nitc
 
 rm -r ../c_src
-./nitc nith.nit --semi-global --compile-dir ../c_src --output ../c_src/nitg --no-cc
+./nitc nith.nit --stacktrace none --semi-global --compile-dir ../c_src --output ../c_src/nitg --no-cc
 
 # Remove old compilation flags
 sed -i -e 's/OLDNITCOPT=.*/OLDNITCOPT=/' Makefile
