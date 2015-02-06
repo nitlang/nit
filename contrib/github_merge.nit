@@ -35,7 +35,12 @@ redef class GithubCurl
 		var statuses = get_and_check("https://api.github.com/repos/privat/nit/statuses/{sha}")
 		prm["statuses"] = statuses
 		print "{prm["title"].to_s}: by {prm["user"].json_as_map["login"].to_s} (# {prm["number"].to_s})"
-		print "\tmergable: {prm["mergeable"].to_s}"
+		var mergeable = prm["mergeable"]
+		if mergeable != null then
+			print "\tmergeable: {mergeable.to_s}"
+		else
+			print "\tmergeable: unknown"
+		end
 		var st = prm["statuses"].json_as_a
 		if not st.is_empty then
 			print "\tstatus: {st[0].json_as_map["state"].to_s}"
@@ -115,12 +120,13 @@ else
 		print "Commit {sha} not in local repository; did you fetch github?"
 		return
 	end
-	if system("git merge --no-commit {sha}") != 0 then
+	if system("git merge --no-ff --no-commit {sha}") != 0 then
 		system("cp mergemsg `git rev-parse --git-dir`/MERGE_MSG")
 		print "Problem during merge... Let's do the commit manually."
 		return
 	end
 	system("git commit -F mergemsg")
 	print "The merge is made"
+	mergemsg.write_to(stdout)
 end
 
