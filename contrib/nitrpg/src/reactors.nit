@@ -29,6 +29,9 @@ class PlayerReactor
 	# Nitcoins rewarded when the player reviews a pull request.
 	var nc_pull_review = 2
 
+	# Nitcoins rewarded when the player has a commit merged.
+	var nc_commit_merged = 1
+
 	redef fun react_event(game, e) do e.react_player_event(self, game)
 end
 
@@ -44,9 +47,12 @@ redef class PullRequestEvent
 
 	# Rewards player for opened pull requests.
 	redef fun react_player_event(r, game) do
+		var player = pull.user.player(game)
 		if action == "opened" then
-			var player = pull.user.player(game)
 			player.nitcoins += r.nc_pull_open
+			player.save
+		else if action == "closed" and pull.merged then
+			player.nitcoins += pull.commits * r.nc_commit_merged
 			player.save
 		end
 	end
