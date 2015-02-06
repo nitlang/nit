@@ -36,4 +36,17 @@ redef class Game
 
 	# Displayed name.
 	fun name: String do return repo.full_name
+
+	# Return a HTML link to this Game.
+	fun link: String do return "<a href=\"{url}\">{name}</a>"
+end
+
+redef class Player
+	# Return a HTML link to this Player.
+	fun link: String do return "<a href=\"{url}\">{name}</a>"
+end
+
+redef class Issue
+	# Return a HTML link to this Issue.
+	fun link: String do return "<a href=\"{html_url}\">#{number}</a>"
 end
