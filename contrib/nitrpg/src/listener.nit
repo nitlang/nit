@@ -33,6 +33,7 @@ class RpgHookListener
 		var game = new Game(api, event.repo)
 		# TODO handle verbosity with opts
 		game.verbose_lvl = 1
+		game.message(1, "Received event {event} for {game.repo.full_name}")
 		for reactor in reactors do reactor.react_event(game, event)
 	end
 end

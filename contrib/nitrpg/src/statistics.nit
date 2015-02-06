@@ -126,7 +126,6 @@ class StatisticsReactor
 	super GameReactor
 
 	redef fun react_event(game, e) do
-		super # log events
 		e.react_stats_event(game)
 	end
 end
