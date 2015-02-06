@@ -293,16 +293,18 @@ class PlayerReviewsPanel
 			return
 		end
 		for issue in issues do
+			var user = issue.user
+			var uplay = user.player(game)
 			add """<div class="media">
-			        <a class="media-left" href="{{{player.url}}}">
+			        <a class="media-left" href="{{{uplay.url}}}">
 					 <img class=\"img-circle\" style="width:50px"
-					   src="{{{issue.user.avatar_url}}}" alt="{{{issue.user.login}}}">
+					   src="{{{user.avatar_url}}}" alt="{{{uplay.name}}}">
 					</a>
 					<div class="media-body">
 					 <h4 class="media-heading">
 					 <a href="{{{issue.html_url}}}">#{{{issue.number}}} {{{issue.title}}}</a></h4>
 					 <span class="text-muted">opened by </span>
-					 <a href="{{{player.url}}}">{{{issue.user.login}}}</a>
+					 <a href="{{{uplay.url}}}">{{{uplay.name}}}</a>
 					</div>
 				   </div>"""
 		end
