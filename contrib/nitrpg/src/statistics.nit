@@ -61,6 +61,27 @@ redef class Game
 	end
 end
 
+redef class Player
+
+	# Statistics for this player.
+	var stats: GameStats is lazy do
+		return load_statistics or else new GameStats(game)
+	end
+
+	redef fun save do
+		super
+		save_statistics(stats)
+	end
+
+	redef fun pretty do
+		var res = new FlatBuffer
+		res.append super
+		res.append "# stats:\n"
+		res.append stats.pretty
+		return res.write_to_string
+	end
+end
+
 # Game statistics structure that can be saved as a `GameEntity`.
 class GameStats
 	super GameEntity
@@ -122,16 +143,24 @@ redef class IssuesEvent
 
 	# Count opened and closed issues.
 	redef fun react_stats_event(game) do
+		var player = issue.user.player(game)
 		if action == "opened" then
 			game.stats.inc("issues")
 			game.stats.inc("issues_open")
 			game.save
+			player.stats.inc("issues")
+			player.stats.inc("issues_open")
+			player.save
 		else if action == "reopened" then
 			game.stats.inc("issues_open")
 			game.save
+			player.stats.inc("issues_open")
+			player.save
 		else if action == "closed" then
 			game.stats.dec("issues_open")
 			game.save
+			player.stats.dec("issues_open")
+			player.save
 		end
 	end
 end
@@ -140,19 +169,28 @@ redef class PullRequestEvent
 
 	# Count opened and closed pull requests.
 	redef fun react_stats_event(game) do
+		var player = pull.user.player(game)
 		if action == "opened" then
 			game.stats.inc("pulls")
 			game.stats.inc("pulls_open")
 			game.save
+			player.stats.inc("pulls")
+			player.stats.inc("pulls_open")
+			player.save
 		else if action == "reopened" then
 			game.stats.inc("pulls_open")
 			game.save
+			player.stats.inc("pulls_open")
+			player.save
 		else if action == "closed" then
 			game.stats.dec("pulls_open")
+			player.stats.dec("pulls_open")
 			if pull.merged then
 				game.stats["commits"] += pull.commits
+				player.stats["commits"] += pull.commits
 			end
 			game.save
+			player.save
 		end
 	end
 end
