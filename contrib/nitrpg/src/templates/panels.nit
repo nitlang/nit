@@ -107,7 +107,7 @@ class GameStatusPanel
 
 	redef fun render_title do
 		add "<span class=\"glyphicon glyphicon-home\"></span>&nbsp;&nbsp;"
-		add "<a href=\"{game.url}\">{game.name}</a>"
+		add "{game.link}"
 	end
 
 	redef fun render_body do
@@ -135,8 +135,7 @@ class PlayerStatusPanel
 		add "<a href=\"{player.url}\">"
 		add " <img class=\"img-circle\" style=\"width: 30px\""
 		add "   src=\"{player.user.avatar_url}\" alt=\"{player.name}\">"
-		add "</a>&nbsp;&nbsp;"
-		add "<a href=\"{player.url}\">{player.name}</a>"
+		add "</a>&nbsp;&nbsp;{player.link}"
 	end
 
 	redef fun render_body do
@@ -148,7 +147,6 @@ class PlayerStatusPanel
 		add "<strong>{player.stats["pulls"]}</strong> pull requests<br>"
 		add "<strong>{player.stats["issues"]}</strong> issues<br>"
 		add "<strong>{player.stats["commits"]}</strong> commits"
-
 	end
 end
 
@@ -172,9 +170,7 @@ class ShortListPlayersPanel
 		end
 		(new PlayerCoinComparator).sort(players)
 		for player in players do
-			add "<a href=\"{player.url}\">"
-			add player.name
-			add "</a>&nbsp;({player.nitcoins})<br>"
+			add "{player.link}&nbsp;({player.nitcoins})<br>"
 		end
 	end
 end
@@ -210,7 +206,7 @@ class ListPlayersPanel
 		for player in players do
 			add "<tr>"
 			add " <td>{rank}</td>"
-			add " <td><a href=\"{player.url}\">{player.name}</a></td>"
+			add " <td>{player.link}</td>"
 			add " <td>{player.nitcoins}</td>"
 			add "</tr>"
 			rank += 1
@@ -256,7 +252,7 @@ class PodiumPanel
 								src="{{{player.user.avatar_url}}}" alt="{{{player.name}}}">
 						</a>
 					</p>
-					<p><a href="{{{player.url}}}">{{{player.name}}}</a></p>
+					<p>{{{player.link}}}</p>
 					<p>{{{player.nitcoins}}}</p>
 					<div class=" progress-bar-warning progress-bar-striped"
 						style="height: {{{size}}}px;"></div>
@@ -302,9 +298,10 @@ class PlayerReviewsPanel
 					</a>
 					<div class="media-body">
 					 <h4 class="media-heading">
-					 <a href="{{{issue.html_url}}}">#{{{issue.number}}} {{{issue.title}}}</a></h4>
+						{{{issue.link}}} {{{issue.title}}}
+					</h4>
 					 <span class="text-muted">opened by </span>
-					 <a href="{{{uplay.url}}}">{{{uplay.name}}}</a>
+					 {{{uplay.link}}}
 					</div>
 				   </div>"""
 		end
