@@ -22,6 +22,7 @@ module statistics
 
 import game
 import github::hooks
+import counter
 
 redef class Game
 
@@ -58,45 +59,36 @@ end
 # Game statistics structure that can be saved as a `GameEntity`.
 class GameStats
 	super GameEntity
+	super Counter[String]
+
+	redef var game
 
 	redef var key = "statistics"
 
-	# Used internally to stats values.
-	private var stats = new HashMap[String, Int]
-
-	init do clear
-
 	# Load `self` from saved data
-	private fun from_json(json: JsonObject) do
-		for k, v in json do stats[k] = v.as(Int)
+	init from_json(game: Game, json: JsonObject) do
+		self.game = game
+		for k, v in json do self[k] = v.as(Int)
 	end
 
 	redef fun to_json do
 		var obj = new JsonObject
-		for k, v in stats do obj[k] = v
+		for k, v in self do obj[k] = v
 		return obj
 	end
 
-	# Retrieves the current value of `key` statistic entry.
-	fun [](key: String): Int do return stats[key]
-
-	# Increments the value of `key` statistic entry by 1.
-	fun incr(key: String) do stats[key] += 1
-
 	# Decrements the value of `key` statistic entry by 1.
-	fun decr(key: String) do stats[key] -= 1
-
-	# Reset game stats.
-	fun clear do
-		stats["issues"] = 0
-		stats["issues_open"] = 0
-		stats["pulls"] = 0
-		stats["pulls_open"] = 0
+	fun dec(key: String) do
+		if not has_key(key) then
+			self[key] = 0
+		else
+			self[key] -= 1
+		end
 	end
 
 	redef fun pretty do
 		var res = new FlatBuffer
-		for k, v in stats do
+		for k, v in self do
 			res.append "# {v} {k}\n"
 		end
 		return res.write_to_string
@@ -127,12 +119,12 @@ redef class IssuesEvent
 	# Count opened and closed issues.
 	redef fun react_stats_event(game) do
 		if action == "opened" then
-			game.stats.incr("issues")
-			game.stats.incr("issues_open")
+			game.stats.inc("issues")
+			game.stats.inc("issues_open")
 		else if action == "reopened" then
-			game.stats.incr("issues_open")
+			game.stats.inc("issues_open")
 		else if action == "closed" then
-			game.stats.decr("issues_open")
+			game.stats.dec("issues_open")
 		end
 	end
 end
@@ -142,12 +134,12 @@ redef class PullRequestEvent
 	# Count opened and closed pull requests.
 	redef fun react_stats_event(game) do
 		if action == "opened" then
-			game.stats.incr("pulls")
-			game.stats.incr("pulls_open")
+			game.stats.inc("pulls")
+			game.stats.inc("pulls_open")
 		else if action == "reopened" then
-			game.stats.incr("pulls_open")
+			game.stats.inc("pulls_open")
 		else if action == "closed" then
-			game.stats.decr("pulls_open")
+			game.stats.dec("pulls_open")
 		end
 	end
 end
