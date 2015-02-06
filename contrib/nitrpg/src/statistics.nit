@@ -107,7 +107,6 @@ class StatisticsReactor
 	redef fun react_event(game, e) do
 		super # log events
 		e.react_stats_event(game)
-		game.save
 	end
 end
 
@@ -126,10 +125,13 @@ redef class IssuesEvent
 		if action == "opened" then
 			game.stats.inc("issues")
 			game.stats.inc("issues_open")
+			game.save
 		else if action == "reopened" then
 			game.stats.inc("issues_open")
+			game.save
 		else if action == "closed" then
 			game.stats.dec("issues_open")
+			game.save
 		end
 	end
 end
@@ -141,13 +143,16 @@ redef class PullRequestEvent
 		if action == "opened" then
 			game.stats.inc("pulls")
 			game.stats.inc("pulls_open")
+			game.save
 		else if action == "reopened" then
 			game.stats.inc("pulls_open")
+			game.save
 		else if action == "closed" then
 			game.stats.dec("pulls_open")
 			if pull.merged then
 				game.stats["commits"] += pull.commits
 			end
+			game.save
 		end
 	end
 end
