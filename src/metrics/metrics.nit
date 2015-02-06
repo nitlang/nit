@@ -33,3 +33,4 @@ import tables_metrics
 import poset_metrics
 import ast_metrics
 import detect_variance_constraints
+import detect_covariance
