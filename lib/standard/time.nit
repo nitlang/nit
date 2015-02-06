@@ -135,7 +135,9 @@ extern class Tm `{struct tm *`}
 		c_format = String_to_cstring(format);
 
 		res = strftime(buf, 100, c_format, recv);
-		return NativeString_to_s(buf);
+		String s = NativeString_to_s_with_copy(buf);
+		free(buf);
+		return s;
 	`}
 
 	redef fun to_s do return asctime.replace("\n", "")

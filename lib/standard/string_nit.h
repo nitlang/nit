@@ -13,6 +13,7 @@
  * another product.
  */
 
-char* native_int_to_s(long recv);
+long native_int_length_str(long recv);
+void native_int_to_s(long recv, char* str, long buflen);
 
 #endif

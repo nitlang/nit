@@ -857,8 +857,15 @@ redef class AMethPropdef
 				return v.int_instance(args[0].to_i.bin_xor(args[1].to_i))
 			else if pname == "bin_not" then
 				return v.int_instance(args[0].to_i.bin_not)
+			else if pname == "int_to_s_len" then
+				return v.int_instance(recvval.to_s.length)
 			else if pname == "native_int_to_s" then
-				return v.native_string_instance(recvval.to_s)
+				var s = recvval.to_s
+				var srecv = args[1].val.as(Buffer)
+				srecv.clear
+				srecv.append(s)
+				srecv.add('\0')
+				return null
 			else if pname == "strerror_ext" then
 				return v.native_string_instance(recvval.strerror)
 			end
@@ -963,13 +970,13 @@ redef class AMethPropdef
 				if fromval < 0 then
 					debug("Illegal access on {recvval} for element {fromval}/{recvval.length}")
 				end
-				if fromval + lenval >= recvval.length then
+				if fromval + lenval > recvval.length then
 					debug("Illegal access on {recvval} for element {fromval}+{lenval}/{recvval.length}")
 				end
 				if toval < 0 then
 					debug("Illegal access on {destval} for element {toval}/{destval.length}")
 				end
-				if toval + lenval >= destval.length then
+				if toval + lenval > destval.length then
 					debug("Illegal access on {destval} for element {toval}+{lenval}/{destval.length}")
 				end
 				recvval.as(FlatBuffer).copy(fromval, lenval, destval, toval)
