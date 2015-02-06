@@ -1,18 +1,17 @@
 #include "nit.common.h"
 #define COLOR_template__Template___is_frozen 0
+extern const char FILE_template[];
 #define COLOR_template__Template___content 1
-void array__Array__add(val* self, val* p0);
-void template__Template__add(val* self, val* p0);
-val* string__NativeString__to_s_with_length(char* self, long p0);
-void template__Template__addn(val* self, val* p0);
-void template__Template__freeze(val* self);
+void standard___standard__Array___standard__abstract_collection__SimpleCollection__add(val* self, val* p0);
+void template___template__Template___add(val* self, val* p0);
+val* standard___standard__NativeString___to_s_with_length(char* self, long p0);
 #define COLOR_template__Template___render_done 2
-void toolcontext__BashCompletion__rendering(val* self);
-void template__Template__force_render(val* self);
+void nit___nit__BashCompletion___template__Template__rendering(val* self);
+void template___template__Template___freeze(val* self);
 #define COLOR_template__Template___is_writing 3
-val* array__AbstractArrayRead__iterator(val* self);
-short int array__ArrayIterator__is_ok(val* self);
-val* array__ArrayIterator__item(val* self);
-#define COLOR_stream__Streamable__write_to 45
-void array__ArrayIterator__next(val* self);
-void template__Template__write_to(val* self, val* p0);
+void template___template__Template___force_render(val* self);
+val* standard___standard__AbstractArrayRead___standard__abstract_collection__Collection__iterator(val* self);
+short int standard__array___standard__array__ArrayIterator___standard__abstract_collection__Iterator__is_ok(val* self);
+val* standard__array___standard__array__ArrayIterator___standard__abstract_collection__Iterator__item(val* self);
+#define COLOR_standard__stream__Streamable__write_to 45
+void standard__array___standard__array__ArrayIterator___standard__abstract_collection__Iterator__next(val* self);
