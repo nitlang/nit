@@ -12,8 +12,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Nitdoc generation framework.
-module doc
+# Phases represent the *steps* of the NitDoc generation process.
+#
+# See `DocPhase`.
+module doc_phases
 
-import doc_base
-import doc_phases
+import doc_html
+import doc_indexing

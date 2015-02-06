@@ -111,7 +111,7 @@ redef class MEntity
 		return new TplListItem.with_content(lnk)
 	end
 
-	fun tpl_css_classes: Array[String] is abstract
+	var tpl_css_classes = new Array[String]
 
 	# Box title for this mentity
 	fun tpl_title: Template do
@@ -257,6 +257,7 @@ redef class MClass
 	redef fun mdoc_or_fallback do return intro.mdoc
 
 	redef fun tpl_declaration do return intro.tpl_declaration
+	redef fun tpl_definition do return intro.tpl_definition
 
 	redef fun tpl_namespace do
 		var tpl = new Template
@@ -365,7 +366,6 @@ redef class MClassDef
 
 	redef fun tpl_definition do
 		var tpl = new TplClassDefinition
-		tpl.namespace = tpl_namespace
 		var mdoc = mdoc_or_fallback
 		if mdoc != null then
 			tpl.comment = mdoc.tpl_comment
@@ -449,7 +449,6 @@ redef class MPropDef
 
 	redef fun tpl_definition do
 		var tpl = new TplDefinition
-		tpl.namespace = mclassdef.tpl_namespace
 		var mdoc = mdoc_or_fallback
 		if mdoc != null then
 			tpl.comment = mdoc.tpl_comment
@@ -556,6 +555,7 @@ end
 redef class MVirtualTypeDef
 	redef fun tpl_signature do
 		var tpl = new Template
+		if bound == null then return tpl
 		tpl.add ": "
 		tpl.add bound.tpl_signature
 		return tpl
@@ -705,7 +705,6 @@ redef class MInnerClassDef
 
 	redef fun tpl_definition do
 		var tpl = new TplClassDefinition
-		tpl.namespace = mclassdef.tpl_namespace
 		var mdoc = mdoc_or_fallback
 		if mdoc != null then
 			tpl.comment = mdoc.tpl_comment
