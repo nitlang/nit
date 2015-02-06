@@ -50,7 +50,7 @@ private class DetectVarianceConstraintsPhase
 	do
 		if not toolcontext.opt_detect_variance_constraints.value and not toolcontext.opt_all.value then return
 
-		print "--- Metrics of covariance detection ---"
+		print "--- Detection of variance constraints on formal parameter types ---"
 
 		var k = new DetectVarianceConstraints
 		k.collect(mainmodule)
