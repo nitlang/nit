@@ -145,6 +145,9 @@ redef class PullRequestEvent
 			game.stats.inc("pulls_open")
 		else if action == "closed" then
 			game.stats.dec("pulls_open")
+			if pull.merged then
+				game.stats["commits"] += pull.commits
+			end
 		end
 	end
 end
