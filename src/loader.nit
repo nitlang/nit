@@ -540,6 +540,12 @@ redef class ModelBuilder
 		nmodules.add(nmodule)
 		self.mmodule2nmodule[mmodule] = nmodule
 
+		var source = nmodule.location.file
+		if source != null then
+			assert source.mmodule == null
+			source.mmodule = mmodule
+		end
+
 		if decl != null then
 			# Extract documentation
 			var ndoc = decl.n_doc
@@ -684,6 +690,11 @@ redef class MGroup
 		return module_paths.length > 1 or mmodules.length > 1 or not in_nesting.direct_smallers.is_empty or mdoc != null
 	end
 
+end
+
+redef class SourceFile
+	# Associated mmodule, once created
+	var mmodule: nullable MModule = null
 end
 
 redef class AStdImport

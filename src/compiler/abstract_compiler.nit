@@ -856,6 +856,12 @@ extern void nitni_global_ref_decr( struct nitni_ref *ref );
 
 		v.add("return 0;")
 		v.add("\}")
+
+		for m in mainmodule.in_importation.greaters do
+			var f = "FILE_"+m.c_name
+			v.add "const char {f}[] = \"{m.location.file.filename.escape_to_c}\";"
+			provide_declaration(f, "extern const char {f}[];")
+		end
 	end
 
 	# Copile all C functions related to the [incr|decr]_ref features of the FFI
@@ -1525,8 +1531,11 @@ abstract class AbstractCompilerVisitor
 
 	fun add_raw_abort
 	do
-		if self.current_node != null and self.current_node.location.file != null then
-			self.add("PRINT_ERROR(\" (%s:%d)\\n\", \"{self.current_node.location.file.filename.escape_to_c}\", {current_node.location.line_start});")
+		if self.current_node != null and self.current_node.location.file != null and
+				self.current_node.location.file.mmodule != null then
+			var f = "FILE_{self.current_node.location.file.mmodule.c_name}"
+			self.require_declaration(f)
+			self.add("PRINT_ERROR(\" (%s:%d)\\n\", {f}, {current_node.location.line_start});")
 		else
 			self.add("PRINT_ERROR(\"\\n\");")
 		end
