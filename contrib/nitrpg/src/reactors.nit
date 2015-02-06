@@ -15,9 +15,6 @@
 # limitations under the License.
 
 # Various implementations of `GameReactor` can be found here.
-#
-# TODO This module use a lot of magic numbers for nitcoin rewards.
-# This should be extracted from configuration or stored elsewhere.
 module reactors
 
 import game
@@ -26,7 +23,13 @@ import game
 class PlayerReactor
 	super GameReactor
 
-	redef fun react_event(game, e) do e.react_player_event(game)
+	# Nitcoins rewarded when the player opens a new pull request.
+	var nc_pull_open = 10
+
+	# Nitcoins rewarded when the player reviews a pull request.
+	var nc_pull_review = 2
+
+	redef fun react_event(game, e) do e.react_player_event(self, game)
 end
 
 redef class GithubEvent
@@ -34,16 +37,16 @@ redef class GithubEvent
 	#
 	# Called by `PlayerReactor::react_event`.
 	# No-op by default.
-	private fun react_player_event(game: Game) do end
+	private fun react_player_event(reactor: PlayerReactor, game: Game) do end
 end
 
 redef class PullRequestEvent
 
 	# Rewards player for opened pull requests.
-	redef fun react_player_event(game) do
+	redef fun react_player_event(r, game) do
 		if action == "opened" then
 			var player = pull.user.player(game)
-			player.nitcoins += 10
+			player.nitcoins += r.nc_pull_open
 			player.save
 		end
 	end
@@ -56,11 +59,11 @@ redef class IssueCommentEvent
 	# Actuallty we look if the comment contains the string `"+1"`.
 	#
 	# TODO only give nitcoins if reviewers < 2
-	redef fun react_player_event(game) do
+	redef fun react_player_event(r, game) do
 		# FIXME use a more precise way to locate reviews
 		if comment.body.has("\\+1\\b".to_re) then
 			var player = comment.user.player(game)
-			player.nitcoins += 2
+			player.nitcoins += r.nc_pull_review
 			player.save
 		end
 	end
