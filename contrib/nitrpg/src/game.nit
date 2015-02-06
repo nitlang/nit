@@ -38,8 +38,17 @@ interface GameEntity
 	# Uniq key used for data storage.
 	fun key: String is abstract
 
-	# Save `self` as a json object.
+	# Saves the `self` state in game data.
+	#
+	# Date are stored under `self.key`.
 	fun save do game.store.store_object(key, to_json)
+
+	# Saves `self` state into `target` key data.
+	#
+	# Data are stored under `target.key / self.key`.
+	fun save_in(target: GameEntity) do
+		game.store.store_object(target.key / key, to_json)
+	end
 
 	# Json representation of `self`.
 	fun to_json: JsonObject  do return new JsonObject
