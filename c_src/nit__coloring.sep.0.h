@@ -1,0 +1,102 @@
+#include "nit.common.h"
+#define COLOR_nit__coloring__POSetConflictGraph___core 0
+extern const char FILE_nit__coloring[];
+#define COLOR_nit__coloring__POSetConflictGraph___border 1
+#define COLOR_nit__coloring__POSetConflictGraph___crown 2
+#define COLOR_nit__coloring__POSetConflictGraph___conflicts 3
+#define COLOR_nit__coloring__POSetConflictGraph___poset 4
+#define COLOR_poset__POSet__nit__POSetConflictGraph___35dE 2
+void nit___nit__POSetConflictGraph___extract_core(val* self);
+void nit___nit__POSetConflictGraph___extract_border(val* self);
+void nit___nit__POSetConflictGraph___extract_crown(val* self);
+void nit___nit__POSetConflictGraph___compute_conflicts(val* self);
+void standard___standard__HashSet___standard__abstract_collection__RemovableCollection__clear(val* self);
+val* poset___poset__POSet___standard__abstract_collection__Collection__iterator(val* self);
+#define COLOR_standard__abstract_collection__Iterator__is_ok 34
+#define COLOR_standard__abstract_collection__Iterator__item 32
+val* poset___poset__POSet____91d_93d(val* self, val* p0);
+val* poset___poset__POSetElement___direct_greaters(val* self);
+#define COLOR_standard__abstract_collection__Collection__length 39
+extern const struct type type_standard__Int;
+extern const char FILE_standard__kernel[];
+val* poset___poset__POSetElement___greaters(val* self);
+void standard___standard__SimpleCollection___add_all(val* self, val* p0);
+#define COLOR_standard__abstract_collection__Iterator__next 33
+val* standard___standard__HashSet___standard__abstract_collection__Collection__iterator(val* self);
+short int nit___nit__POSetConflictGraph___is_border(val* self, val* p0);
+void standard___standard__HashSet___standard__abstract_collection__SimpleCollection__add(val* self, val* p0);
+void standard___standard__HashSet___standard__abstract_collection__RemovableCollection__remove(val* self, val* p0);
+#define COLOR_nit__POSetConflictGraph___35dE 3
+val* poset___poset__POSetElement___direct_smallers(val* self);
+#define COLOR_standard__abstract_collection__Collection__iterator 37
+short int standard___standard__HashSet___standard__abstract_collection__Collection__has(val* self, val* p0);
+void standard___standard__HashMap___standard__abstract_collection__Map__clear(val* self);
+void nit___nit__POSetConflictGraph___add_conflicts(val* self, val* p0);
+short int standard___standard__MapRead___has_key(val* self, val* p0);
+val* NEW_standard__HashSet(const struct type* type);
+#define COLOR_standard__HashSet__nit__POSetConflictGraph___35dE 0
+void standard___standard__HashSet___standard__kernel__Object__init(val* self);
+void standard___standard__HashMap___standard__abstract_collection__Map___91d_93d_61d(val* self, val* p0, val* p1);
+val* standard___standard__HashMap___standard__abstract_collection__MapRead___91d_93d(val* self, val* p0);
+#define COLOR_standard__abstract_collection__SimpleCollection__add 57
+#define COLOR_standard__Collection__nit__POSetConflictGraph___35dE 4
+void nit___nit__POSetConflictGraph___add_conflict(val* self, val* p0, val* p1);
+#define COLOR_nit__coloring__POSetColorer___is_colored 0
+#define COLOR_nit__coloring__POSetColorer___ids_cache 1
+#define COLOR_nit__coloring__POSetColorer___colors_cache 2
+#define COLOR_nit__coloring__POSetColorer___poset_cache 3
+#define COLOR_poset__POSet__nit__POSetColorer___35dE 1
+#define COLOR_nit__coloring__POSetColorer___conflicts_cache 4
+#define COLOR_standard__Map__nit__POSetColorer___35dE__standard__Set__nit__POSetColorer___35dE 2
+#define COLOR_nit__coloring__POSetColorer___graph 5
+#define COLOR_nit__POSetConflictGraph__nit__POSetColorer___35dE 3
+val* NEW_nit__POSetConflictGraph(const struct type* type);
+#define COLOR_nit__coloring__POSetConflictGraph__poset_61d 37
+#define COLOR_standard__kernel__Object__init 7
+void nit___nit__POSetColorer___allocate_ids(val* self);
+void nit___nit__POSetColorer___compute_colors(val* self);
+#define COLOR_standard__HashSet__nit__POSetColorer___35dE 4
+val* standard__array___Collection___to_a(val* self);
+void standard___standard__HashSet___from(val* self, val* p0);
+val* poset___poset__POSet___linearize(val* self, val* p0);
+val* standard___standard__AbstractArrayRead___standard__abstract_collection__Collection__iterator(val* self);
+short int standard__array___standard__array__ArrayIterator___standard__abstract_collection__Iterator__is_ok(val* self);
+val* standard__array___standard__array__ArrayIterator___standard__abstract_collection__Iterator__item(val* self);
+long standard___standard__HashMap___standard__abstract_collection__MapRead__length(val* self);
+val* BOX_standard__Int(long);
+void standard__array___standard__array__ArrayIterator___standard__abstract_collection__Iterator__next(val* self);
+void nit___nit__POSetColorer___colorize_core(val* self);
+void nit___nit__POSetColorer___colorize_set(val* self, val* p0);
+long nit___nit__POSetColorer___min_color(val* self, val* p0);
+short int nit___nit__POSetColorer___is_color_free(val* self, long p0, val* p1);
+#define COLOR_standard__Set__nit__POSetColorer___35dE 5
+#define COLOR_nit__POSetColorer___35dE 6
+#define COLOR_standard__Collection__nit__POSetColorer___35dE 7
+extern const struct class class_standard__Int;
+#define COLOR_nit__coloring__BucketsColorer___colors 0
+#define COLOR_nit__coloring__BucketsColorer___conflicts 1
+#define COLOR_standard__Map__nit__BucketsColorer___35dH__standard__Set__nit__BucketsColorer___35dE 2
+void nit___nit__BucketsColorer___compute_conflicts(val* self, val* p0);
+#define COLOR_standard__abstract_collection__MapRead__iterator 35
+#define COLOR_standard__abstract_collection__MapIterator__is_ok 35
+#define COLOR_standard__abstract_collection__MapIterator__key 33
+#define COLOR_standard__abstract_collection__MapIterator__item 32
+short int nit___nit__BucketsColorer___is_color_free(val* self, val* p0, long p1);
+#define COLOR_standard__abstract_collection__MapIterator__next 34
+#define COLOR_nit__BucketsColorer___35dE 3
+#define COLOR_standard__HashSet__nit__BucketsColorer___35dE 4
+#define COLOR_standard__kernel__Object___61d_61d 2
+#define COLOR_nit__coloring__POSetBucketsColorer___colors 0
+#define COLOR_nit__coloring__POSetBucketsColorer___poset 1
+#define COLOR_poset__POSet__nit__POSetBucketsColorer___35dH 1
+#define COLOR_nit__coloring__POSetBucketsColorer___conflicts 2
+#define COLOR_standard__Map__nit__POSetBucketsColorer___35dH__standard__Set__nit__POSetBucketsColorer___35dH 2
+#define COLOR_standard__Map__nit__POSetBucketsColorer___35dH__standard__Set__nit__POSetBucketsColorer___35dE 3
+#define COLOR_standard__abstract_collection__MapRead__keys 37
+long nit___nit__POSetBucketsColorer___min_color(val* self, val* p0, val* p1);
+#define COLOR_standard__abstract_collection__MapRead___91d_93d 32
+short int nit___nit__POSetBucketsColorer___is_color_free(val* self, long p0, val* p1, val* p2);
+#define COLOR_standard__Collection__nit__POSetBucketsColorer___35dH 4
+long nit___nit__POSetBucketsColorer___max_color(val* self, val* p0, val* p1);
+#define COLOR_nit__POSetBucketsColorer___35dH 5
+#define COLOR_nit___nit__POSetBucketsColorer___standard__kernel__Object__init 41

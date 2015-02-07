@@ -65,3 +65,11 @@ int file_stdin_poll_in_(void) {
 	}
 	return res > 0;
 }
+
+FILE* file_int_fdtostream(int fd, char* mode){
+	return fdopen(fd, mode);
+}
+
+int file_NativeFile_NativeFile_set_buffering_type_0(FILE* f, int buf_sz, int mode){
+	return setvbuf(f, NULL, mode, buf_sz);
+}

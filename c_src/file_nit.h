@@ -24,6 +24,8 @@ extern int string_NativeString_NativeString_file_exists_0(char *f);
 extern void *string_NativeString_NativeString_file_stat_0(char *f);
 extern void *file_NativeFile_NativeFile_file_stat_0(FILE *f);
 extern int string_NativeString_NativeString_file_delete_0(char *f);
+FILE* file_int_fdtostream(int fd, char* mode);
+int file_NativeFile_NativeFile_set_buffering_type_0(FILE* f, int buf_sz, int mode);
 
 #define file_NativeFile_NativeFile_io_read_2(p, b, l) fread((b), 1, (l), (FILE*)(p))
 #define file_NativeFile_NativeFile_io_write_2(p, b, l) fwrite((b), 1, (l), (FILE*)(p))
@@ -40,6 +42,9 @@ extern int string_NativeString_NativeString_file_delete_0(char *f);
 #define file_FileStat_FileStat_ctime_0(self) (((struct stat*)self)->st_ctime)
 #define file_FileStat_FileStat_mtime_0(self) (((struct stat*)self)->st_mtime)
 #define file_FileStat_FileStat_size_0(self) (((struct stat*)self)->st_size)
+#define file_Sys_Sys_buffer_mode_full_0(self) _IOFBF
+#define file_Sys_Sys_buffer_mode_line_0(self) _IOLBF
+#define file_Sys_Sys_buffer_mode_none_0(self) _IONBF
 
 #define string_NativeString_NativeString_file_mkdir_0(p) (mkdir(p, 0777))
 #define string_NativeString_NativeString_file_getcwd_0(p) (getcwd(NULL, 0))

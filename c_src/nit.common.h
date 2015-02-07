@@ -65,37 +65,37 @@ void show_backtrace(int) __attribute__ ((noreturn));
 extern int glob_argc;
 extern char **glob_argv;
 extern val *glob_sys;
-struct instance_string__NativeString {
+struct instance_standard__NativeString {
 const struct type *type;
 const struct class *class;
 void* value;
 };
-struct instance_kernel__Bool {
+struct instance_standard__Bool {
 const struct type *type;
 const struct class *class;
 short int value;
 };
-struct instance_kernel__Float {
+struct instance_standard__Float {
 const struct type *type;
 const struct class *class;
 double value;
 };
-struct instance_kernel__Int {
+struct instance_standard__Int {
 const struct type *type;
 const struct class *class;
 long value;
 };
-struct instance_kernel__Char {
+struct instance_standard__Char {
 const struct type *type;
 const struct class *class;
 char value;
 };
-struct instance_kernel__Pointer {
+struct instance_standard__Pointer {
 const struct type *type;
 const struct class *class;
 void* value;
 };
-struct instance_array__NativeArray {
+struct instance_standard__NativeArray {
 const struct type *type;
 const struct class *class;
 int length;
