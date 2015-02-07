@@ -14,8 +14,9 @@
 
 # Generate files used by the Vim plugin to autocomplete with doc
 #
-# There is 3 files generated, each with a different target: modules, classes,
-# and properties. Each line describe a different entity, with 4 values:
+# There is 3 files generated, each with a different target: modules, types,
+# properties and constructors. Each line describe a different entity,
+# with 4 values:
 #
 # 1. Short name to use in autocompletion
 # 2. Full signature
@@ -23,13 +24,14 @@
 # 4. Full doc with extra
 #
 # The priority with those files is for them to be analyzed efficiently, for
-# this reason, the data is prepared in advant and some information may be
+# this reason, the data is prepared in advance and some information may be
 # duplicated.
 module vim_autocomplete
 
 import modelbuilder
 import phase
 import modelize::modelize_class
+import model_utils
 
 redef class ToolContext
 	# Phase generating the files for the Vim plugin
@@ -53,16 +55,16 @@ redef class MEntity
 	private fun write_to_stream(stream: OStream)
 	do
 		# 1. Short name for autocompletion
-		stream.write name
+		stream.write complete_name
 		stream.write field_separator
 
 		# 2. Full signature
-		stream.write name
+		stream.write complete_name
 		write_signature_to_stream(stream)
 		stream.write field_separator
 
 		# 3. Doc synopsis
-		var mdoc = mdoc
+		var mdoc = complete_mdoc
 		if mdoc != null then
 			stream.write mdoc.content.first
 		end
@@ -81,6 +83,12 @@ redef class MEntity
 	end
 
 	private fun write_signature_to_stream(stream: OStream) do end
+
+	# Actual name used in completion
+	private fun complete_name: String do return name
+
+	# Doc to use in completion
+	private fun complete_mdoc: nullable MDoc do return mdoc
 end
 
 redef class MMethodDef
@@ -103,6 +111,43 @@ redef class MAttributeDef
 	end
 end
 
+# Use `MClassDef` as anchor for its constructors only
+redef class MClassDef
+	private var target_constructor: nullable MMethodDef = null
+
+	redef fun complete_name
+	do
+		var target_constructor = target_constructor
+		assert target_constructor != null
+
+		var params
+		var mparameters = mclass.mparameters
+		if not mparameters.is_empty then
+			params = "[{mparameters.join(", ")}]"
+		else
+			params = ""
+		end
+
+		if target_constructor.name != "init" and target_constructor.name != "new" then
+			return name + params + "." + target_constructor.name
+		end
+
+		return name + params
+	end
+
+	redef fun complete_mdoc
+	do
+		var target_constructor = target_constructor
+		assert target_constructor != null
+
+		if target_constructor.name != "init" and target_constructor.name != "new" then
+			return target_constructor.mdoc
+		end
+
+		return mdoc
+	end
+end
+
 private class AutocompletePhase
 	super Phase
 
@@ -113,8 +158,11 @@ private class AutocompletePhase
 		var compile_dir = "NIT_VIM_DIR".environ
 		if compile_dir.is_empty then compile_dir = "HOME".environ / ".vim/nit"
 		compile_dir.mkdir
+
 		var modules_stream = new OFStream.open(compile_dir / "modules.txt")
 		var classes_stream = new OFStream.open(compile_dir / "classes.txt")
+		var constructors_stream = new OFStream.open(compile_dir / "constructors.txt")
+		var types_stream = new OFStream.open(compile_dir / "types.txt")
 		var properties_stream = new OFStream.open(compile_dir / "properties.txt")
 
 		# Got all known modules
@@ -124,19 +172,39 @@ private class AutocompletePhase
 		end
 
 		# TODO list other modules from the Nit lib
-		# TODO list submodules
 
 		# Get all known classes
 		for mclass in model.mclasses do
 			if not mainmodule.is_visible(mclass.intro_mmodule, public_visibility) then continue
+			var mclass_intro = mclass.intro
 
-			mclass.intro.write_to_stream classes_stream
+			# Can it be instantiated?
+			if mclass.kind != interface_kind and mclass.kind != abstract_kind then
+
+				for prop in mclass.all_mproperties(mainmodule, public_visibility) do
+					if prop isa MMethod and prop.is_init then
+						mclass_intro.target_constructor = prop.intro
+						mclass_intro.write_to_stream constructors_stream
+					end
+				end
+				mclass_intro.target_constructor = null
+			end
+
+			# Always add to types and classes
+			mclass.mclass_type.write_to_stream classes_stream
+			mclass.mclass_type.write_to_stream types_stream
 		end
 
 		# Get all known properties
 		for mproperty in model.mproperties do
 			var intro_mmodule = mproperty.intro_mclassdef.mmodule
 			if not mainmodule.is_visible(intro_mmodule, public_visibility) then continue
+
+			# Is it a virtual type?
+			if mproperty isa MVirtualTypeProp then
+				mproperty.intro.write_to_stream types_stream
+				continue
+			end
 
 			# Skip properties beginning with @ or _
 			var first_letter = mproperty.name.chars.first
@@ -146,9 +214,10 @@ private class AutocompletePhase
 		end
 
 		# Close streams
-		for stream in [modules_stream, classes_stream, properties_stream] do
-			stream.close
+		for stream in [modules_stream, classes_stream, properties_stream,
+			types_stream, constructors_stream] do
 
+			stream.close
 			var error = stream.last_error
 			if error != null then
 				toolcontext.error(null, "Failed to write Vim autocomplete file: {error}")
