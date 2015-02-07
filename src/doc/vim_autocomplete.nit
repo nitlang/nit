@@ -138,6 +138,10 @@ private class AutocompletePhase
 			var intro_mmodule = mproperty.intro_mclassdef.mmodule
 			if not mainmodule.is_visible(intro_mmodule, public_visibility) then continue
 
+			# Skip properties beginning with @ or _
+			var first_letter = mproperty.name.chars.first
+			if first_letter == '@' or first_letter == '_' then continue
+
 			mproperty.intro.write_to_stream properties_stream
 		end
 
