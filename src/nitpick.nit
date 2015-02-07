@@ -16,6 +16,7 @@
 module nitpick
 
 import frontend
+import doc::vim_autocomplete
 
 redef class ToolContext
 	# Modules to analyze, other modules will only get a shallow processing.
@@ -37,6 +38,9 @@ toolcontext.tooldescription = "Usage: nitpick [OPTION]... <file.nit>...\nCollect
 # We do not add other options, so process them now!
 toolcontext.process_options(args)
 
+# Do not stop phases on errors
+toolcontext.keep_going = true
+
 # Get arguments
 var arguments = toolcontext.option_context.rest
 
@@ -50,3 +54,4 @@ var mmodules = modelbuilder.parse_full(arguments)
 toolcontext.mmodules_to_check.add_all mmodules
 
 modelbuilder.run_phases
+toolcontext.run_global_phases(mmodules)

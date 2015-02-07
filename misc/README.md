@@ -16,7 +16,7 @@ Then can add the brush to your html page:
 Vim is a powerful text editor and a favorite of the Nit team.
 The `misc/vim` directory provides Vim support for Nit source files.
 
-### Install
+## Install
 
 The simpler way to install nit for vim is with [pathogen][1].
 
@@ -31,7 +31,7 @@ Ensure that `~/.vimrc` contains
 
   [1]: https://github.com/tpope/vim-pathogen
 
-### Features
+## Features
 
  * Syntax highlighting
  * Automatic indentation
@@ -40,9 +40,15 @@ Ensure that `~/.vimrc` contains
 
   [2]: https://github.com/scrooloose/syntastic
 
-### Autocomplete
+## Autocomplete
 
-The Nit plugin offers better autocomplete by scanning all projects in the
+The Nit plugin offers two kinds of autocompletion: complete and omnifunc.
+
+You can use both completion at the same time. They each have their own strengths and weaknesses.
+
+### Complete
+
+The Nit plugin can configure the `complete` option by scanning all projects in the
 current directory, and their dependencies.
 
 Add the following code to `~/.vimrc`, then use `ctrl-n` to open the
@@ -62,3 +68,27 @@ Look at the functions defined in `misc/vim/plugin/nit.vim` for all possible
 usages.
 
   [3]: http://www.vim.org/scripts/script.php?script_id=1879
+
+### Omnifunc
+
+The Nit plugin also defines an omnifunc which uses metadata files produced by nitpick which
+is called by syntastic.
+It is activated by default when editing a Nit source file, launch it using `ctrl-x ctrl-o`.
+It will suggest entities names from the current context and display the corresponding documentation.
+Once the correct completion has been selected, you can close the documentation preview window with `:pc`.
+
+The omnifunc applies a simple heuristic to recognize what kind of entities to display:
+(This is a simplification some behaviors are missing.)
+
+* If the cursor follows `import`, it will list known modules.
+* If it follows `new`, `super` or `class` it will list known classes.
+* If it follows a `.`, it will list properties.
+* If on an extern method declaration, it will list classes and properties.
+* Otherwise, it will list keywords and properties.
+
+Make sure to save your Nit module if using syntastic or to manually call nitpick the generate
+the metadata files before using the omnifunc. If there is no locally available metadata, it
+will use general metadata in the plugin directory.
+
+The metadata files from nitpick are stored in `~/.vim/nit/`. This location can be customized with
+the environment variable `NIT_VIM_DIR`.
