@@ -33,6 +33,8 @@ redef class ToolContext
 	var opt_colors_are_symbols = new OptionBool("Store colors as symbols (faster)", "--colors-are-symbols")
 	# --trampoline-call
 	var opt_trampoline_call = new OptionBool("Use an indirection when calling", "--trampoline-call")
+	# --substitute-monomorph
+	var opt_substitute_monomorph = new OptionBool("Replace monomorph trampoline with direct call", "--substitute-monomorph")
 
 	# --inline-coloring-numbers
 	var opt_inline_coloring_numbers = new OptionBool("Inline colors and ids (semi-global)", "--inline-coloring-numbers")
@@ -55,7 +57,7 @@ redef class ToolContext
 		self.option_context.add_option(self.opt_separate)
 		self.option_context.add_option(self.opt_no_inline_intern)
 		self.option_context.add_option(self.opt_no_union_attribute)
-		self.option_context.add_option(self.opt_no_shortcut_equate, opt_colors_are_symbols, opt_trampoline_call)
+		self.option_context.add_option(self.opt_no_shortcut_equate, opt_colors_are_symbols, opt_trampoline_call, opt_substitute_monomorph)
 		self.option_context.add_option(self.opt_inline_coloring_numbers, opt_inline_some_methods, opt_direct_call_monomorph, opt_skip_dead_methods, opt_semi_global)
 		self.option_context.add_option(self.opt_colo_dead_methods)
 		self.option_context.add_option(self.opt_tables_metrics)
@@ -567,6 +569,24 @@ class SeparateCompiler
 				# Generate trampolines
 				if modelbuilder.toolcontext.opt_trampoline_call.value then
 					r2.compile_trampolines(self)
+
+					# Replace monomorphic call to a trampoline by a direct call to the virtual implementation
+					if modelbuilder.toolcontext.opt_substitute_monomorph.value then do
+						var m = pd.mproperty
+						if rta == null then
+							# Without RTA, monomorphic means alone (uniq name)
+							if m.mpropdefs.length != 1 then break label
+						else
+							# With RTA, monomorphic means only live methoddef
+							if not rta.live_methoddefs.has(pd) then break label
+							for md in m.mpropdefs do
+								if md != pd and rta.live_methoddefs.has(md) then break label
+							end
+						end
+						# Here the trick, GNU ld can substitute symbols with specific values.
+						var n2 = "CALL_" + m.const_color
+						linker_script.add("{n2} = {r2.c_name};")
+					end label
 				end
 			end
 		end
