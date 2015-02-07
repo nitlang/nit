@@ -188,12 +188,24 @@ fun NitOmnifunc(findstart, base)
 			call NitOmnifuncAddFromFile(a:base, matches, 'modules.txt')
 		endif
 
-		" Classes
-		if count(['new', 'super', 'class', 'nullable'], prev_word) > 0 ||
+		" Classes (instanciable only)
+		if prev_word == 'new'
+			let handled = 1
+			call NitOmnifuncAddFromFile(a:base, matches, 'constructors.txt')
+		endif
+
+		" Other class references
+		if count(['class', 'super'], prev_word) > 0
+			let handled = 1
+			call NitOmnifuncAddFromFile(a:base, matches, 'classes.txt')
+		endif
+
+		" Types
+		if count(['class', 'super', 'nullable', 'isa', 'as'], prev_word) > 0 ||
 		 \ line_prev_cursor =~ '[' || prev_char == ':' ||
 		 \ (line_prev_cursor =~ 'fun' && line_prev_cursor =~ 'import' && (prev_word == 'import' || prev_char == ','))
 			let handled = 1
-			call NitOmnifuncAddFromFile(a:base, matches, 'classes.txt')
+			call NitOmnifuncAddFromFile(a:base, matches, 'types.txt')
 		endif
 
 		" Properties
