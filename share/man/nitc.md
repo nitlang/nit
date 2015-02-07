@@ -274,6 +274,36 @@ will increase.
 :   Do not compile dead methods (semi-global).
     Need `--rta`.
 
+## LINK-BOOST OPTIMIZATIONS
+
+In `--separate` and in `--erasure` modes, some optimization can be gained by hijacking the linker process.
+
+Warning: these optimisations are not portable since they use extra features of the GNU linker `ld`.
+However, there is very few reasons to not use them if GNU `ld` is available.
+
+`--link-boost`
+:   Enable all link-boost optimizations.
+
+`--colors-are-symbols`
+:   Store colors as symbols instead of static data.
+
+    By default, the various identifiers used to implement OO-mechanisms are stored as genuine constant static variables.
+
+    This option uses linker symbols to encode these identifiers.
+    This makes the compiled program faster since less indirections are required to get the values.
+    It also produces executables that are a little bit smaller since static memory does not have to store the colors.
+
+`--substitute-monomorph`
+:   Replace monomorphic trampolines with direct call.
+
+    Late-binding is implemented with *trampolines*, that are small functions that just select and jump the to right implementations.
+    If, at link-time, is it known that the target will always by the same implementation then all calls to the trampoline are replaced by
+    direct calls to this single implementation.
+
+    Note that using trampolines as indirection slows down the executable.
+    However, it is expected that the gain of monomorphic direct-calls overcompensates the additional indirections in polymorphic trampoline-calls.
+
+    Note: automatically enable option `--trampoline-call`.
 
 ## DANGEROUS OPTIMIZATIONS
 
@@ -329,21 +359,13 @@ Usually you do not need them since they make the generated code slower.
 `--colo-dead-methods`
 :   Force colorization of dead methods.
 
-`--colors-are-symbols`
-:   Store colors as symbols instead of static data.
-
-    By default, the various identifiers used to implement OO-mechanisms are stored as genuine constant static variables.
-
-    This option uses linker symbols to encode these identifiers.
-    This makes the compiled program faster since less indirections are required to get the values.
-    It also produces executables that are a little bit smaller since static memory does not have to store the colors.
-
-    Warning: the usage of linker symbols is not portable on all toolchains (eg. Mac OS X).
-    Also, this option does nothing on some platforms (like android).
-
 `--no-gcc-directive`
 :   Disable advanced gcc directives for optimization.
 
+`--trampoline-call`
+:   Use an indirection when calling.
+
+    Just add the trampolines of `--substitute-monomorph` without doing any aditionnal optimizations.
 
 ## INTERNAL OPTIONS
 

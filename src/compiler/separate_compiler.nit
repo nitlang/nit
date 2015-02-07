@@ -31,6 +31,8 @@ redef class ToolContext
 	var opt_no_shortcut_equate = new OptionBool("Always call == in a polymorphic way", "--no-shortcut-equal")
 	# --colors-are-symbols
 	var opt_colors_are_symbols = new OptionBool("Store colors as symbols (faster)", "--colors-are-symbols")
+	# --trampoline-call
+	var opt_trampoline_call = new OptionBool("Use an indirection when calling", "--trampoline-call")
 
 	# --inline-coloring-numbers
 	var opt_inline_coloring_numbers = new OptionBool("Inline colors and ids (semi-global)", "--inline-coloring-numbers")
@@ -53,7 +55,7 @@ redef class ToolContext
 		self.option_context.add_option(self.opt_separate)
 		self.option_context.add_option(self.opt_no_inline_intern)
 		self.option_context.add_option(self.opt_no_union_attribute)
-		self.option_context.add_option(self.opt_no_shortcut_equate, opt_colors_are_symbols)
+		self.option_context.add_option(self.opt_no_shortcut_equate, opt_colors_are_symbols, opt_trampoline_call)
 		self.option_context.add_option(self.opt_inline_coloring_numbers, opt_inline_some_methods, opt_direct_call_monomorph, opt_skip_dead_methods, opt_semi_global)
 		self.option_context.add_option(self.opt_colo_dead_methods)
 		self.option_context.add_option(self.opt_tables_metrics)
@@ -561,6 +563,11 @@ class SeparateCompiler
 				r.compile_to_c(self)
 				var r2 = pd.virtual_runtime_function
 				if r2 != r then r2.compile_to_c(self)
+
+				# Generate trampolines
+				if modelbuilder.toolcontext.opt_trampoline_call.value then
+					r2.compile_trampolines(self)
+				end
 			end
 		end
 		self.mainmodule = old_module
@@ -1204,8 +1211,15 @@ class SeparateCompilerVisitor
 			ss.append(", {a}")
 		end
 
-		self.require_declaration(const_color)
-		var call = "(({runtime_function.c_funptrtype})({arguments.first}->class->vft[{const_color}]))({ss}) /* {mmethod} on {arguments.first.inspect}*/"
+		var call
+		if not compiler.modelbuilder.toolcontext.opt_trampoline_call.value then
+			self.require_declaration(const_color)
+			call = "(({runtime_function.c_funptrtype})({arguments.first}->class->vft[{const_color}]))({ss}) /* {mmethod} on {arguments.first.inspect}*/"
+		else
+			var callsym = "CALL_" + const_color
+			self.require_declaration(callsym)
+			call = "{callsym}({ss}) /* {mmethod} on {arguments.first.inspect}*/"
+		end
 
 		if res != null then
 			self.add("{res} = {call};")
@@ -1948,6 +1962,47 @@ class SeparateRuntimeFunction
 		end
 		v.add("\}")
 		compiler.names[self.c_name] = "{mmethoddef.full_name} ({mmethoddef.location.file.filename}:{mmethoddef.location.line_start})"
+	end
+
+	fun compile_trampolines(compiler: SeparateCompiler)
+	do
+		var recv = self.mmethoddef.mclassdef.bound_mtype
+		var selfvar = arguments.first
+		var ret = called_signature.return_mtype
+
+		if mmethoddef.is_intro and recv.ctype == "val*" then
+			var m = mmethoddef.mproperty
+			var n2 = "CALL_" + m.const_color
+			compiler.provide_declaration(n2, "{c_ret} {n2}{c_sig};")
+			var v2 = compiler.new_visitor
+			v2.add "{c_ret} {n2}{c_sig} \{"
+			v2.require_declaration(m.const_color)
+			var call = "(({c_funptrtype})({selfvar}->class->vft[{m.const_color}]))({arguments.join(", ")});"
+			if ret != null then
+				v2.add "return {call}"
+			else
+				v2.add call
+			end
+
+			v2.add "\}"
+
+		end
+		if mmethoddef.has_supercall and recv.ctype == "val*" then
+			var m = mmethoddef
+			var n2 = "CALL_" + m.const_color
+			compiler.provide_declaration(n2, "{c_ret} {n2}{c_sig};")
+			var v2 = compiler.new_visitor
+			v2.add "{c_ret} {n2}{c_sig} \{"
+			v2.require_declaration(m.const_color)
+			var call = "(({c_funptrtype})({selfvar}->class->vft[{m.const_color}]))({arguments.join(", ")});"
+			if ret != null then
+				v2.add "return {call}"
+			else
+				v2.add call
+			end
+
+			v2.add "\}"
+		end
 	end
 end
 
