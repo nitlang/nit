@@ -170,7 +170,7 @@ class ShortListPlayersPanel
 		end
 		(new PlayerCoinComparator).sort(players)
 		for player in players do
-			add "{player.link}&nbsp;({player.nitcoins})<br>"
+			add "{player.nitcoins} - {player.link}<br>"
 		end
 	end
 end
