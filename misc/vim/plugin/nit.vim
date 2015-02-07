@@ -139,7 +139,7 @@ fun NitOmnifuncAddAMatch(matches, words, name)
 	let desc = get(a:words, 3, '')
 	let desc = join(split(desc, '#nnnn#', 1), "\n")
 	if strlen(pretty) > 40
-		let pretty = pretty[:37] . '...'
+		let pretty = pretty[:39] . '…'
 	endif
 	call add(a:matches, {'word': a:name, 'abbr': pretty, 'menu': synopsis, 'info': desc, 'dup': 1})
 endfun
