@@ -22,23 +22,34 @@ module statistics
 
 import game
 import github::hooks
+import counter
+
+redef class GameEntity
+
+	# Load statistics for this `MEntity` if any.
+	fun load_statistics: nullable GameStats do
+		var key = self.key / "statistics"
+		if not game.store.has_key(key) then return null
+		var json = game.store.load_object(key)
+		return new GameStats.from_json(game, json)
+	end
+
+	# Save statistics under this `MEntity`.
+	fun save_statistics(stats: GameStats) do
+		game.store.store_object(key / stats.key, stats.to_json)
+	end
+end
 
 redef class Game
 
 	# Statistics for this game instance.
-	var stats = new GameStats
-
-	redef fun from_json(json) do
-		super
-		if json.has_key("statistics") then
-			stats.from_json(json["statistics"].as(JsonObject))
-		end
+	var stats: GameStats is lazy do
+		return load_statistics or else new GameStats(game)
 	end
 
-	redef fun to_json do
-		var obj = super
-		obj["statistics"] = stats.to_json
-		return obj
+	redef fun save do
+		super
+		save_statistics(stats)
 	end
 
 	redef fun pretty do
@@ -48,55 +59,62 @@ redef class Game
 		res.append stats.pretty
 		return res.write_to_string
 	end
+end
 
-	redef fun clear do
+redef class Player
+
+	# Statistics for this player.
+	var stats: GameStats is lazy do
+		return load_statistics or else new GameStats(game)
+	end
+
+	redef fun save do
 		super
-		stats.clear
+		save_statistics(stats)
+	end
+
+	redef fun pretty do
+		var res = new FlatBuffer
+		res.append super
+		res.append "# stats:\n"
+		res.append stats.pretty
+		return res.write_to_string
 	end
 end
 
 # Game statistics structure that can be saved as a `GameEntity`.
 class GameStats
 	super GameEntity
+	super Counter[String]
+
+	redef var game
 
 	redef var key = "statistics"
 
-	# Used internally to stats values.
-	private var stats = new HashMap[String, Int]
-
-	init do clear
-
 	# Load `self` from saved data
-	private fun from_json(json: JsonObject) do
-		for k, v in json do stats[k] = v.as(Int)
+	init from_json(game: Game, json: JsonObject) do
+		self.game = game
+		for k, v in json do self[k] = v.as(Int)
 	end
 
 	redef fun to_json do
 		var obj = new JsonObject
-		for k, v in stats do obj[k] = v
+		for k, v in self do obj[k] = v
 		return obj
 	end
 
-	# Retrieves the current value of `key` statistic entry.
-	fun [](key: String): Int do return stats[key]
-
-	# Increments the value of `key` statistic entry by 1.
-	fun incr(key: String) do stats[key] += 1
-
 	# Decrements the value of `key` statistic entry by 1.
-	fun decr(key: String) do stats[key] -= 1
-
-	# Reset game stats.
-	fun clear do
-		stats["issues"] = 0
-		stats["issues_open"] = 0
-		stats["pulls"] = 0
-		stats["pulls_open"] = 0
+	fun dec(key: String) do
+		if not has_key(key) then
+			self[key] = 0
+		else
+			self[key] -= 1
+		end
 	end
 
 	redef fun pretty do
 		var res = new FlatBuffer
-		for k, v in stats do
+		for k, v in self do
 			res.append "# {v} {k}\n"
 		end
 		return res.write_to_string
@@ -110,7 +128,6 @@ class StatisticsReactor
 	redef fun react_event(game, e) do
 		super # log events
 		e.react_stats_event(game)
-		game.save
 	end
 end
 
@@ -126,13 +143,24 @@ redef class IssuesEvent
 
 	# Count opened and closed issues.
 	redef fun react_stats_event(game) do
+		var player = issue.user.player(game)
 		if action == "opened" then
-			game.stats.incr("issues")
-			game.stats.incr("issues_open")
+			game.stats.inc("issues")
+			game.stats.inc("issues_open")
+			game.save
+			player.stats.inc("issues")
+			player.stats.inc("issues_open")
+			player.save
 		else if action == "reopened" then
-			game.stats.incr("issues_open")
+			game.stats.inc("issues_open")
+			game.save
+			player.stats.inc("issues_open")
+			player.save
 		else if action == "closed" then
-			game.stats.decr("issues_open")
+			game.stats.dec("issues_open")
+			game.save
+			player.stats.dec("issues_open")
+			player.save
 		end
 	end
 end
@@ -141,13 +169,28 @@ redef class PullRequestEvent
 
 	# Count opened and closed pull requests.
 	redef fun react_stats_event(game) do
+		var player = pull.user.player(game)
 		if action == "opened" then
-			game.stats.incr("pulls")
-			game.stats.incr("pulls_open")
+			game.stats.inc("pulls")
+			game.stats.inc("pulls_open")
+			game.save
+			player.stats.inc("pulls")
+			player.stats.inc("pulls_open")
+			player.save
 		else if action == "reopened" then
-			game.stats.incr("pulls_open")
+			game.stats.inc("pulls_open")
+			game.save
+			player.stats.inc("pulls_open")
+			player.save
 		else if action == "closed" then
-			game.stats.decr("pulls_open")
+			game.stats.dec("pulls_open")
+			player.stats.dec("pulls_open")
+			if pull.merged then
+				game.stats["commits"] += pull.commits
+				player.stats["commits"] += pull.commits
+			end
+			game.save
+			player.save
 		end
 	end
 end
