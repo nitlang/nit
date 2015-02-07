@@ -440,7 +440,7 @@ Distribution of direct smallers
   intern: 1 (1.81%)
   Object: 1 (1.81%)
   Bool: 1 (1.81%)
---- Metrics of covariance detection ---
+--- Detection of variance constraints on formal parameter types ---
 -- Generic classes --
  list:
   non generic: 7 (100.00%)
@@ -707,6 +707,52 @@ Statistics of type usage:
 	blooming mclasses (threshold: 1.935)
 	   B: 2.25
 	   C: 2.25
+--- Detection of the usage of covariance static type conformance ---
+-- Total --
+- Kinds of the subtype -
+ list:
+  primitive type: 6 (100.00%)
+  total: 6
+- Variance -
+ list:
+  monomorph: 6 (100.00%)
+  total: 6
+- Classes of the subtype -
+ list:
+  Int: 6 (100.00%)
+  total: 6
+-- On covariance only --
+- Specific covariance case explanations -
+ list:
+  total: 0
+- Classes of the subtype, when covariance -
+ list:
+  total: 0
+- Patterns of the covariant cases -
+ list:
+  total: 0
+- Nodes of the covariance cases -
+ list:
+  total: 0
+- Modules of the covariance cases -
+ list:
+  total: 0
+- Kind of the expression node (when it make sense) -
+ list:
+  total: 0
+-- Casts --
+- Kind of cast target -
+ list:
+  total: 0
+- Classes of the cast -
+ list:
+  total: 0
+- Cast pattern -
+ list:
+  total: 0
+- Autocasts -
+ list:
+  total: 0
 
 # Nullable metrics
 

@@ -213,6 +213,141 @@ class ModelBuilder
 		end
 		return res
 	end
+
+	# Return the static type associated to the node `ntype`.
+	# `mmodule` and `mclassdef` is the context where the call is made (used to understand formal types)
+	# In case of problem, an error is displayed on `ntype` and null is returned.
+	# FIXME: the name "resolve_mtype" is awful
+	fun resolve_mtype_unchecked(mmodule: MModule, mclassdef: nullable MClassDef, ntype: AType, with_virtual: Bool): nullable MType
+	do
+		var name = ntype.n_id.text
+		var res: MType
+
+		# Check virtual type
+		if mclassdef != null and with_virtual then
+			var prop = try_get_mproperty_by_name(ntype, mclassdef, name).as(nullable MVirtualTypeProp)
+			if prop != null then
+				if not ntype.n_types.is_empty then
+					error(ntype, "Type error: formal type {name} cannot have formal parameters.")
+				end
+				res = prop.mvirtualtype
+				if ntype.n_kwnullable != null then res = res.as_nullable
+				ntype.mtype = res
+				return res
+			end
+		end
+
+		# Check parameter type
+		if mclassdef != null then
+			for p in mclassdef.mclass.mparameters do
+				if p.name != name then continue
+
+				if not ntype.n_types.is_empty then
+					error(ntype, "Type error: formal type {name} cannot have formal parameters.")
+				end
+
+				res = p
+				if ntype.n_kwnullable != null then res = res.as_nullable
+				ntype.mtype = res
+				return res
+			end
+		end
+
+		# Check class
+		var mclass = try_get_mclass_by_name(ntype, mmodule, name)
+		if mclass != null then
+			var arity = ntype.n_types.length
+			if arity != mclass.arity then
+				if arity == 0 then
+					error(ntype, "Type error: '{name}' is a generic class.")
+				else if mclass.arity == 0 then
+					error(ntype, "Type error: '{name}' is not a generic class.")
+				else
+					error(ntype, "Type error: '{name}' has {mclass.arity} parameters ({arity} are provided).")
+				end
+				return null
+			end
+			if arity == 0 then
+				res = mclass.mclass_type
+				if ntype.n_kwnullable != null then res = res.as_nullable
+				ntype.mtype = res
+				return res
+			else
+				var mtypes = new Array[MType]
+				for nt in ntype.n_types do
+					var mt = resolve_mtype_unchecked(mmodule, mclassdef, nt, with_virtual)
+					if mt == null then return null # Forward error
+					mtypes.add(mt)
+				end
+				res = mclass.get_mtype(mtypes)
+				if ntype.n_kwnullable != null then res = res.as_nullable
+				ntype.mtype = res
+				return res
+			end
+		end
+
+		# If everything fail, then give up :(
+		error(ntype, "Type error: class {name} not found in module {mmodule}.")
+		return null
+	end
+
+	# Return the static type associated to the node `ntype`.
+	# `mmodule` and `mclassdef` is the context where the call is made (used to understand formal types)
+	# In case of problem, an error is displayed on `ntype` and null is returned.
+	# FIXME: the name "resolve_mtype" is awful
+	fun resolve_mtype(mmodule: MModule, mclassdef: nullable MClassDef, ntype: AType): nullable MType
+	do
+		var mtype = ntype.mtype
+		if mtype == null then mtype = resolve_mtype_unchecked(mmodule, mclassdef, ntype, true)
+		if mtype == null then return null # Forward error
+
+		if ntype.checked_mtype then return mtype
+		if mtype isa MGenericType then
+			var mclass = mtype.mclass
+			for i in [0..mclass.arity[ do
+				var bound = mclass.intro.bound_mtype.arguments[i]
+				var nt = ntype.n_types[i]
+				var mt = resolve_mtype(mmodule, mclassdef, nt)
+				if mt == null then return null # forward error
+				var anchor
+				if mclassdef != null then anchor = mclassdef.bound_mtype else anchor = null
+				if not check_subtype(nt, mmodule, anchor, mt, bound) then
+					error(nt, "Type error: expected {bound}, got {mt}")
+					return null
+				end
+			end
+		end
+		ntype.checked_mtype = true
+		return mtype
+	end
+
+	# Check that `sub` is a subtype of `sup`.
+	# Do not display an error message.
+	#
+	# This method is used a an entry point for the modelize phase to test static subtypes.
+	# Some refinements could redefine it to collect statictics.
+	fun check_subtype(node: ANode, mmodule: MModule, anchor: nullable MClassType, sub, sup: MType): Bool
+	do
+		return sub.is_subtype(mmodule, anchor, sup)
+	end
+
+	# Check that `sub` and `sup` are equvalent types.
+	# Do not display an error message.
+	#
+	# This method is used a an entry point for the modelize phase to test static equivalent types.
+	# Some refinements could redefine it to collect statictics.
+	fun check_sametype(node: ANode, mmodule: MModule, anchor: nullable MClassType, sub, sup: MType): Bool
+	do
+		return sub.is_subtype(mmodule, anchor, sup) and sup.is_subtype(mmodule, anchor, sub)
+	end
+end
+
+redef class AType
+	# The mtype associated to the node
+	var mtype: nullable MType = null
+
+	# Is the mtype a valid one?
+	var checked_mtype: Bool = false
 end
 
 redef class AVisibility
