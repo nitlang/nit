@@ -1205,7 +1205,7 @@ class SeparateCompilerVisitor
 		end
 
 		self.require_declaration(const_color)
-		var call = "(({runtime_function.c_ret} (*){runtime_function.c_sig})({arguments.first}->class->vft[{const_color}]))({ss}) /* {mmethod} on {arguments.first.inspect}*/"
+		var call = "(({runtime_function.c_funptrtype})({arguments.first}->class->vft[{const_color}]))({ss}) /* {mmethod} on {arguments.first.inspect}*/"
 
 		if res != null then
 			self.add("{res} = {call};")
@@ -1880,6 +1880,9 @@ class SeparateRuntimeFunction
 		sig.append(")")
 		return sig.to_s
 	end
+
+	# The C type for the function pointer.
+	var c_funptrtype: String is lazy do return "{c_ret}(*){c_sig}"
 
 	redef fun compile_to_c(compiler)
 	do
