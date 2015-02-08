@@ -584,6 +584,36 @@ class GLES
 	var capabilities = new GLCapabilities is lazy
 end
 
+# Bind `framebuffer` to a framebuffer target
+#
+# In OpenGL ES 2.0, `target` must be `gl_FRAMEBUFFER`.
+fun glBindFramebuffer(target: GLFramebufferTarget, framebuffer: Int) `{
+	glBindFramebuffer(target, framebuffer);
+`}
+
+# Target of `glBindFramebuffer`
+extern class GLFramebufferTarget
+	super GLEnum
+end
+
+# Target both reading and writing on the framebuffer with `glBindFramebuffer`
+fun gl_FRAMEBUFFER: GLFramebufferTarget `{ return GL_FRAMEBUFFER; `}
+
+# Bind `renderbuffer` to a renderbuffer target
+#
+# In OpenGL ES 2.0, `target` must be `gl_RENDERBUFFER`.
+fun glBindRenderbuffer(target: GLRenderbufferTarget, renderbuffer: Int) `{
+	glBindRenderbuffer(target, renderbuffer);
+`}
+
+# Target of `glBindRenderbuffer`
+extern class GLRenderbufferTarget
+	super GLEnum
+end
+
+# Target a renderbuffer with `glBindRenderbuffer`
+fun gl_RENDERBUFFER: GLRenderbufferTarget `{ return GL_RENDERBUFFER; `}
+
 # Entry point to OpenGL server-side capabilities
 class GLCapabilities
 
