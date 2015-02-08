@@ -614,6 +614,33 @@ end
 # Target a renderbuffer with `glBindRenderbuffer`
 fun gl_RENDERBUFFER: GLRenderbufferTarget `{ return GL_RENDERBUFFER; `}
 
+# Specify implementation specific hints
+fun glHint(target: GLHintTarget, mode: GLHintMode) `{
+	glHint(target, mode);
+`}
+
+# Hint target for `glHint`
+extern class GLHintTarget
+	super GLEnum
+end
+
+# Indicates the quality of filtering when generating mipmap images
+fun gl_GENERATE_MIPMAP_HINT: GLHintTarget `{ return GL_GENERATE_MIPMAP_HINT; `}
+
+# Hint mode for `glHint`
+extern class GLHintMode
+	super GLEnum
+end
+
+# The most efficient option should be chosen
+fun gl_FASTEST: GLHintMode `{ return GL_FASTEST; `}
+
+# The most correct, or highest quality, option should be chosen
+fun gl_NICEST: GLHintMode `{ return GL_NICEST; `}
+
+# No preference
+fun gl_DONT_CARE: GLHintMode `{ return GL_DONT_CARE; `}
+
 # Entry point to OpenGL server-side capabilities
 class GLCapabilities
 
