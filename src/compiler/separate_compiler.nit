@@ -29,12 +29,15 @@ redef class ToolContext
 	var opt_no_union_attribute = new OptionBool("Put primitive attibutes in a box instead of an union", "--no-union-attribute")
 	# --no-shortcut-equate
 	var opt_no_shortcut_equate = new OptionBool("Always call == in a polymorphic way", "--no-shortcut-equal")
+
 	# --colors-are-symbols
-	var opt_colors_are_symbols = new OptionBool("Store colors as symbols (faster)", "--colors-are-symbols")
+	var opt_colors_are_symbols = new OptionBool("Store colors as symbols (link-boost)", "--colors-are-symbols")
 	# --trampoline-call
 	var opt_trampoline_call = new OptionBool("Use an indirection when calling", "--trampoline-call")
 	# --substitute-monomorph
-	var opt_substitute_monomorph = new OptionBool("Replace monomorph trampoline with direct call", "--substitute-monomorph")
+	var opt_substitute_monomorph = new OptionBool("Replace monomorph trampoline with direct call (link-boost)", "--substitute-monomorph")
+	# --link-boost
+	var opt_link_boost = new OptionBool("Enable all link-boost optimizations", "--link-boost")
 
 	# --inline-coloring-numbers
 	var opt_inline_coloring_numbers = new OptionBool("Inline colors and ids (semi-global)", "--inline-coloring-numbers")
@@ -57,7 +60,8 @@ redef class ToolContext
 		self.option_context.add_option(self.opt_separate)
 		self.option_context.add_option(self.opt_no_inline_intern)
 		self.option_context.add_option(self.opt_no_union_attribute)
-		self.option_context.add_option(self.opt_no_shortcut_equate, opt_colors_are_symbols, opt_trampoline_call, opt_substitute_monomorph)
+		self.option_context.add_option(self.opt_no_shortcut_equate)
+		self.option_context.add_option(opt_colors_are_symbols, opt_trampoline_call, opt_substitute_monomorph, opt_link_boost)
 		self.option_context.add_option(self.opt_inline_coloring_numbers, opt_inline_some_methods, opt_direct_call_monomorph, opt_skip_dead_methods, opt_semi_global)
 		self.option_context.add_option(self.opt_colo_dead_methods)
 		self.option_context.add_option(self.opt_tables_metrics)
@@ -73,6 +77,13 @@ redef class ToolContext
 			tc.opt_inline_some_methods.value = true
 			tc.opt_direct_call_monomorph.value = true
 			tc.opt_skip_dead_methods.value = true
+		end
+		if tc.opt_link_boost.value then
+			tc.opt_colors_are_symbols.value = true
+			tc.opt_substitute_monomorph.value = true
+		end
+		if tc.opt_substitute_monomorph.value then
+			tc.opt_trampoline_call.value = true
 		end
 	end
 
