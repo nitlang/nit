@@ -1131,7 +1131,7 @@ class SeparateCompilerVisitor
 			return res
 		end
 
-		return table_send(mmethod, arguments, mmethod.const_color)
+		return table_send(mmethod, arguments, mmethod)
 	end
 
 	# Handle common special cases before doing the effective method invocation
@@ -1197,7 +1197,7 @@ class SeparateCompilerVisitor
 		return res
 	end
 
-	private fun table_send(mmethod: MMethod, arguments: Array[RuntimeVariable], const_color: String): nullable RuntimeVariable
+	private fun table_send(mmethod: MMethod, arguments: Array[RuntimeVariable], mentity: MEntity): nullable RuntimeVariable
 	do
 		compiler.modelbuilder.nb_invok_by_tables += 1
 		if compiler.modelbuilder.toolcontext.opt_invocation_metrics.value then add("count_invoke_by_tables++;")
@@ -1231,6 +1231,7 @@ class SeparateCompilerVisitor
 			ss.append(", {a}")
 		end
 
+		var const_color = mentity.const_color
 		var call
 		if not compiler.modelbuilder.toolcontext.opt_trampoline_call.value then
 			self.require_declaration(const_color)
@@ -1315,7 +1316,7 @@ class SeparateCompilerVisitor
 			self.compiler.mainmodule = main
 			return res
 		end
-		return table_send(m.mproperty, arguments, m.const_color)
+		return table_send(m.mproperty, arguments, m)
 	end
 
 	redef fun vararg_instance(mpropdef, recv, varargs, elttype)
