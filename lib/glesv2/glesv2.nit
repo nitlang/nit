@@ -619,6 +619,51 @@ fun glHint(target: GLHintTarget, mode: GLHintMode) `{
 	glHint(target, mode);
 `}
 
+# Completeness status of a framebuffer object
+fun glCheckFramebufferStatus(target: GLFramebufferTarget): GLFramebufferStatus `{
+	return glCheckFramebufferStatus(target);
+`}
+
+# Return value of `glCheckFramebufferStatus`
+extern class GLFramebufferStatus
+	super GLEnum
+
+	redef fun to_s
+	do
+		if self == gl_FRAMEBUFFER_COMPLETE then return "complete"
+		if self == gl_FRAMEBUFFER_INCOMPLETE_ATTACHMENT then return "incomplete attachment"
+		if self == gl_FRAMEBUFFER_INCOMPLETE_DIMENSIONS then return "incomplete dimension"
+		if self == gl_FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT then return "incomplete missing attachment"
+		if self == gl_FRAMEBUFFER_UNSUPPORTED then return "unsupported"
+		return "unknown"
+	end
+end
+
+# The framebuffer is complete
+fun gl_FRAMEBUFFER_COMPLETE: GLFramebufferStatus `{
+	return GL_FRAMEBUFFER_COMPLETE;
+`}
+
+# Not all framebuffer attachment points are framebuffer attachment complete
+fun gl_FRAMEBUFFER_INCOMPLETE_ATTACHMENT: GLFramebufferStatus `{
+	return GL_FRAMEBUFFER_INCOMPLETE_ATTACHMENT;
+`}
+
+# Not all attached images have the same width and height
+fun gl_FRAMEBUFFER_INCOMPLETE_DIMENSIONS: GLFramebufferStatus `{
+	return GL_FRAMEBUFFER_INCOMPLETE_DIMENSIONS;
+`}
+
+# No images are attached to the framebuffer
+fun gl_FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT: GLFramebufferStatus `{
+	return GL_FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT;
+`}
+
+# The combination of internal formats of the attached images violates an implementation-dependent set of restrictions
+fun gl_FRAMEBUFFER_UNSUPPORTED: GLFramebufferStatus `{
+	return GL_FRAMEBUFFER_UNSUPPORTED;
+`}
+
 # Hint target for `glHint`
 extern class GLHintTarget
 	super GLEnum
