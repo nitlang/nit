@@ -32,7 +32,7 @@ in "C Header" `{
 	#include <errno.h>
 `}
 
-# File Abstract Stream
+# `Stream` used to interact with a File or FileDescriptor
 abstract class FileStream
 	super Stream
 	# The path of the file.
@@ -63,7 +63,7 @@ abstract class FileStream
 	end
 end
 
-# File input stream
+# `Stream` that can read from a File
 class FileReader
 	super FileStream
 	super BufferedReader
@@ -133,7 +133,7 @@ class FileReader
 	end
 end
 
-# File output stream
+# `Stream` that can write to a File
 class FileWriter
 	super FileStream
 	super Writer

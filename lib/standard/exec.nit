@@ -87,7 +87,7 @@ class Process
 	private fun basic_exec_execute(p: NativeString, av: NativeString, ac: Int, pf: Int): NativeProcess is extern "exec_Process_Process_basic_exec_execute_4"
 end
 
-# stdout of the process is readable
+# `Process` on which the `stdout` is readable like a `Reader`
 class ProcessReader
 	super Process
 	super Reader
@@ -110,7 +110,7 @@ class ProcessReader
 	end
 end
 
-# stdin of the process is writable
+# `Process` on which `stdin` is writable like a `Writer`
 class ProcessWriter
 	super Process
 	super Writer
@@ -133,7 +133,7 @@ class ProcessWriter
 	end
 end
 
-# stdin and stdout are both accessible
+# `Process` on which stdout can be read and stdin can be written to like a `Duplex`
 class ProcessDuplex
 	super ProcessReader
 	super ProcessWriter

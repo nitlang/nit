@@ -25,7 +25,7 @@ class IOError
 	super Error
 end
 
-# Abstract stream class
+# Any kind of stream to read/write/both to or from a source
 abstract class Stream
 	# Error produced by the file stream
 	#
@@ -39,7 +39,7 @@ abstract class Stream
 	fun close is abstract
 end
 
-# Abstract input streams
+# A `Stream` that can be read from
 abstract class Reader
 	super Stream
 	# Read a character. Return its ASCII value, -1 on EOF or timeout
@@ -269,7 +269,7 @@ class LineIterator
 	end
 end
 
-# `ReadStream` capable of declaring if readable without blocking
+# `Reader` capable of declaring if readable without blocking
 abstract class PollableReader
 	super Reader
 
@@ -278,7 +278,7 @@ abstract class PollableReader
 
 end
 
-# Abstract output stream
+# A `Stream` that can be written to
 abstract class Writer
 	super Stream
 	# write a string
@@ -288,12 +288,12 @@ abstract class Writer
 	fun is_writable: Bool is abstract
 end
 
-# Things that can be efficienlty writen to a `WriteStream`
+# Things that can be efficienlty written to a `Writer`
 #
-# The point of this interface it to allow is instance to be efficenty
-# writen into a `WriteStream` without having to allocate a big String object
+# The point of this interface is to allow the instance to be efficiently
+# written into a `Writer`.
 #
-# ready-to-save documents usually provide this interface.
+# Ready-to-save documents usually provide this interface.
 interface Writable
 	# Write itself to a `stream`
 	# The specific logic it let to the concrete subclasses
@@ -317,7 +317,7 @@ redef class Text
 	redef fun write_to(stream) do stream.write(self)
 end
 
-# Input streams with a buffer
+# Input streams with a buffered input for efficiency purposes
 abstract class BufferedReader
 	super Reader
 	redef fun read_char
@@ -439,13 +439,13 @@ abstract class BufferedReader
 	end
 end
 
-# An Input/Output Stream
+# A `Stream` that can be written to and read from
 abstract class Duplex
 	super Reader
 	super Writer
 end
 
-# Stream to a String.
+# `Stream` that can be used to write to a `String`
 #
 # Mainly used for compatibility with Writer type and tests.
 class StringWriter
@@ -466,7 +466,7 @@ class StringWriter
 	redef fun close do closed = true
 end
 
-# Stream from a String.
+# `Stream` used to read from a `String`
 #
 # Mainly used for compatibility with Reader type and tests.
 class StringReader
