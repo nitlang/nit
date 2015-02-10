@@ -405,9 +405,9 @@ redef class APropdef
 	# The associated propdef once build by a `ModelBuilder`
 	var mpropdef: nullable MPROPDEF is writable
 
-	private fun build_property(modelbuilder: ModelBuilder, mclassdef: MClassDef) is abstract
-	private fun build_signature(modelbuilder: ModelBuilder) is abstract
-	private fun check_signature(modelbuilder: ModelBuilder) is abstract
+	private fun build_property(modelbuilder: ModelBuilder, mclassdef: MClassDef) do end
+	private fun build_signature(modelbuilder: ModelBuilder) do end
+	private fun check_signature(modelbuilder: ModelBuilder) do end
 	private fun new_property_visibility(modelbuilder: ModelBuilder, mclassdef: MClassDef, nvisibility: nullable AVisibility): MVisibility
 	do
 		var mvisibility = public_visibility
