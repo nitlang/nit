@@ -29,8 +29,15 @@ redef class ToolContext
 	var opt_no_union_attribute = new OptionBool("Put primitive attibutes in a box instead of an union", "--no-union-attribute")
 	# --no-shortcut-equate
 	var opt_no_shortcut_equate = new OptionBool("Always call == in a polymorphic way", "--no-shortcut-equal")
+
 	# --colors-are-symbols
-	var opt_colors_are_symbols = new OptionBool("Store colors as symbols (faster)", "--colors-are-symbols")
+	var opt_colors_are_symbols = new OptionBool("Store colors as symbols (link-boost)", "--colors-are-symbols")
+	# --trampoline-call
+	var opt_trampoline_call = new OptionBool("Use an indirection when calling", "--trampoline-call")
+	# --substitute-monomorph
+	var opt_substitute_monomorph = new OptionBool("Replace monomorph trampoline with direct call (link-boost)", "--substitute-monomorph")
+	# --link-boost
+	var opt_link_boost = new OptionBool("Enable all link-boost optimizations", "--link-boost")
 
 	# --inline-coloring-numbers
 	var opt_inline_coloring_numbers = new OptionBool("Inline colors and ids (semi-global)", "--inline-coloring-numbers")
@@ -53,7 +60,8 @@ redef class ToolContext
 		self.option_context.add_option(self.opt_separate)
 		self.option_context.add_option(self.opt_no_inline_intern)
 		self.option_context.add_option(self.opt_no_union_attribute)
-		self.option_context.add_option(self.opt_no_shortcut_equate, opt_colors_are_symbols)
+		self.option_context.add_option(self.opt_no_shortcut_equate)
+		self.option_context.add_option(opt_colors_are_symbols, opt_trampoline_call, opt_substitute_monomorph, opt_link_boost)
 		self.option_context.add_option(self.opt_inline_coloring_numbers, opt_inline_some_methods, opt_direct_call_monomorph, opt_skip_dead_methods, opt_semi_global)
 		self.option_context.add_option(self.opt_colo_dead_methods)
 		self.option_context.add_option(self.opt_tables_metrics)
@@ -69,6 +77,13 @@ redef class ToolContext
 			tc.opt_inline_some_methods.value = true
 			tc.opt_direct_call_monomorph.value = true
 			tc.opt_skip_dead_methods.value = true
+		end
+		if tc.opt_link_boost.value then
+			tc.opt_colors_are_symbols.value = true
+			tc.opt_substitute_monomorph.value = true
+		end
+		if tc.opt_substitute_monomorph.value then
+			tc.opt_trampoline_call.value = true
 		end
 	end
 
@@ -561,6 +576,29 @@ class SeparateCompiler
 				r.compile_to_c(self)
 				var r2 = pd.virtual_runtime_function
 				if r2 != r then r2.compile_to_c(self)
+
+				# Generate trampolines
+				if modelbuilder.toolcontext.opt_trampoline_call.value then
+					r2.compile_trampolines(self)
+
+					# Replace monomorphic call to a trampoline by a direct call to the virtual implementation
+					if modelbuilder.toolcontext.opt_substitute_monomorph.value then do
+						var m = pd.mproperty
+						if rta == null then
+							# Without RTA, monomorphic means alone (uniq name)
+							if m.mpropdefs.length != 1 then break label
+						else
+							# With RTA, monomorphic means only live methoddef
+							if not rta.live_methoddefs.has(pd) then break label
+							for md in m.mpropdefs do
+								if md != pd and rta.live_methoddefs.has(md) then break label
+							end
+						end
+						# Here the trick, GNU ld can substitute symbols with specific values.
+						var n2 = "CALL_" + m.const_color
+						linker_script.add("{n2} = {r2.c_name};")
+					end label
+				end
 			end
 		end
 		self.mainmodule = old_module
@@ -1104,7 +1142,7 @@ class SeparateCompilerVisitor
 			return res
 		end
 
-		return table_send(mmethod, arguments, mmethod.const_color)
+		return table_send(mmethod, arguments, mmethod)
 	end
 
 	# Handle common special cases before doing the effective method invocation
@@ -1170,7 +1208,7 @@ class SeparateCompilerVisitor
 		return res
 	end
 
-	private fun table_send(mmethod: MMethod, arguments: Array[RuntimeVariable], const_color: String): nullable RuntimeVariable
+	private fun table_send(mmethod: MMethod, arguments: Array[RuntimeVariable], mentity: MEntity): nullable RuntimeVariable
 	do
 		compiler.modelbuilder.nb_invok_by_tables += 1
 		if compiler.modelbuilder.toolcontext.opt_invocation_metrics.value then add("count_invoke_by_tables++;")
@@ -1204,8 +1242,16 @@ class SeparateCompilerVisitor
 			ss.append(", {a}")
 		end
 
-		self.require_declaration(const_color)
-		var call = "(({runtime_function.c_ret} (*){runtime_function.c_sig})({arguments.first}->class->vft[{const_color}]))({ss}) /* {mmethod} on {arguments.first.inspect}*/"
+		var const_color = mentity.const_color
+		var call
+		if not compiler.modelbuilder.toolcontext.opt_trampoline_call.value then
+			self.require_declaration(const_color)
+			call = "(({runtime_function.c_funptrtype})({arguments.first}->class->vft[{const_color}]))({ss}) /* {mmethod} on {arguments.first.inspect}*/"
+		else
+			var callsym = "CALL_" + const_color
+			self.require_declaration(callsym)
+			call = "{callsym}({ss}) /* {mmethod} on {arguments.first.inspect}*/"
+		end
 
 		if res != null then
 			self.add("{res} = {call};")
@@ -1281,7 +1327,7 @@ class SeparateCompilerVisitor
 			self.compiler.mainmodule = main
 			return res
 		end
-		return table_send(m.mproperty, arguments, m.const_color)
+		return table_send(m.mproperty, arguments, m)
 	end
 
 	redef fun vararg_instance(mpropdef, recv, varargs, elttype)
@@ -1881,6 +1927,12 @@ class SeparateRuntimeFunction
 		return sig.to_s
 	end
 
+	# The C type for the function pointer.
+	var c_funptrtype: String is lazy do return "{c_ret}(*){c_sig}"
+
+	# The arguments, as generated by `compile_to_c`
+	private var arguments: Array[RuntimeVariable] is noinit
+
 	redef fun compile_to_c(compiler)
 	do
 		var mmethoddef = self.mmethoddef
@@ -1917,6 +1969,7 @@ class SeparateRuntimeFunction
 			comment.append(": {ret}")
 		end
 		compiler.provide_declaration(self.c_name, "{sig};")
+		self.arguments = arguments.to_a
 
 		v.add_decl("/* method {self} for {comment} */")
 		v.add_decl("{sig} \{")
@@ -1941,6 +1994,50 @@ class SeparateRuntimeFunction
 		end
 		v.add("\}")
 		compiler.names[self.c_name] = "{mmethoddef.full_name} ({mmethoddef.location.file.filename}:{mmethoddef.location.line_start})"
+	end
+
+	# Compile the trampolines used to implement late-binding.
+	#
+	# See `opt_trampoline_call`.
+	fun compile_trampolines(compiler: SeparateCompiler)
+	do
+		var recv = self.mmethoddef.mclassdef.bound_mtype
+		var selfvar = arguments.first
+		var ret = called_signature.return_mtype
+
+		if mmethoddef.is_intro and recv.ctype == "val*" then
+			var m = mmethoddef.mproperty
+			var n2 = "CALL_" + m.const_color
+			compiler.provide_declaration(n2, "{c_ret} {n2}{c_sig};")
+			var v2 = compiler.new_visitor
+			v2.add "{c_ret} {n2}{c_sig} \{"
+			v2.require_declaration(m.const_color)
+			var call = "(({c_funptrtype})({selfvar}->class->vft[{m.const_color}]))({arguments.join(", ")});"
+			if ret != null then
+				v2.add "return {call}"
+			else
+				v2.add call
+			end
+
+			v2.add "\}"
+
+		end
+		if mmethoddef.has_supercall and recv.ctype == "val*" then
+			var m = mmethoddef
+			var n2 = "CALL_" + m.const_color
+			compiler.provide_declaration(n2, "{c_ret} {n2}{c_sig};")
+			var v2 = compiler.new_visitor
+			v2.add "{c_ret} {n2}{c_sig} \{"
+			v2.require_declaration(m.const_color)
+			var call = "(({c_funptrtype})({selfvar}->class->vft[{m.const_color}]))({arguments.join(", ")});"
+			if ret != null then
+				v2.add "return {call}"
+			else
+				v2.add call
+			end
+
+			v2.add "\}"
+		end
 	end
 end
 

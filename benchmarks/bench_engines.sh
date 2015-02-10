@@ -331,6 +331,26 @@ function bench_compilation_time
 }
 bench_compilation_time
 
+function bench_linkboost()
+{
+	name="$FUNCNAME"
+	skip_test "$name" && return
+	prepare_res "$name-nitc-st.dat" "nitc-st" "nitc with --separate --trampoline-call"
+	run_compiler "nitc-st" ./nitc --separate --trampoline-call
+	prepare_res "$name-nitc-s.dat" "nitc-s" "nitc with --separate"
+	run_compiler "nitc-s" ./nitc --separate
+	prepare_res "$name-nitc-sc.dat" "nitc-sc" "nitc with --separate --colors-are-symbols"
+	run_compiler "nitc-sc" ./nitc --separate --colors-are-symbols
+	prepare_res "$name-nitc-sct.dat" "nitc-sct" "nitc with --separate --colors-are-symbols --trampoline-call"
+	run_compiler "nitc-sct" ./nitc --separate --colors-are-symbols --trampoline-call
+	prepare_res "$name-nitc-sl.dat" "nitc-sl" "nitc with --separate --link-boost"
+	run_compiler "nitc-scts" ./nitc --separate --link-boost
+	prepare_res "$name-nitc-sg.dat" "nitc-sg" "nitc with --separate --semi-global"
+	run_compiler "nitc-sg" ./nitc --separate --semi-global
+	plot "$name.gnu"
+}
+bench_linkboost
+
 if test -n "$html"; then
 	echo >>"$html" "</body></html>"
 fi
