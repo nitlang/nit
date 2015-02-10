@@ -41,7 +41,9 @@ private class TransformPhase
 	do
 		var val
 
-		var v = new TransformVisitor(self, npropdef.mpropdef.as(not null))
+		var m = npropdef.mpropdef
+		if m == null then return
+		var v = new TransformVisitor(self, m)
 		v.enter_visit(npropdef)
 
 		val = new ASTValidationVisitor
