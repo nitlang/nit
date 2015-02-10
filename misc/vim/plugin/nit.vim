@@ -139,7 +139,7 @@ fun NitOmnifuncAddAMatch(matches, words, name)
 	let desc = get(a:words, 3, '')
 	let desc = join(split(desc, '#nnnn#', 1), "\n")
 	if strlen(pretty) > 40
-		let pretty = pretty[:37] . '...'
+		let pretty = pretty[:39] . '…'
 	endif
 	call add(a:matches, {'word': a:name, 'abbr': pretty, 'menu': synopsis, 'info': desc, 'dup': 1})
 endfun
@@ -188,12 +188,24 @@ fun NitOmnifunc(findstart, base)
 			call NitOmnifuncAddFromFile(a:base, matches, 'modules.txt')
 		endif
 
-		" Classes
-		if count(['new', 'super', 'class', 'nullable'], prev_word) > 0 ||
+		" Classes (instanciable only)
+		if prev_word == 'new'
+			let handled = 1
+			call NitOmnifuncAddFromFile(a:base, matches, 'constructors.txt')
+		endif
+
+		" Other class references
+		if count(['class', 'super'], prev_word) > 0
+			let handled = 1
+			call NitOmnifuncAddFromFile(a:base, matches, 'classes.txt')
+		endif
+
+		" Types
+		if count(['class', 'super', 'nullable', 'isa', 'as'], prev_word) > 0 ||
 		 \ line_prev_cursor =~ '[' || prev_char == ':' ||
 		 \ (line_prev_cursor =~ 'fun' && line_prev_cursor =~ 'import' && (prev_word == 'import' || prev_char == ','))
 			let handled = 1
-			call NitOmnifuncAddFromFile(a:base, matches, 'classes.txt')
+			call NitOmnifuncAddFromFile(a:base, matches, 'types.txt')
 		endif
 
 		" Properties

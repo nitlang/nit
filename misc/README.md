@@ -81,7 +81,8 @@ The omnifunc applies a simple heuristic to recognize what kind of entities to di
 (This is a simplification some behaviors are missing.)
 
 * If the cursor follows `import`, it will list known modules.
-* If it follows `new`, `super` or `class` it will list known classes.
+* If it follows `new` it will list known classes with their constructors.
+* If it follows `super`, `class`, `isa` or `as` it will list known classes.
 * If it follows a `.`, it will list properties.
 * If on an extern method declaration, it will list classes and properties.
 * Otherwise, it will list keywords and properties.
