@@ -181,6 +181,7 @@ redef class ModelBuilder
 					mparameters.add(mparameter)
 				end
 				initializers.add(npropdef.mpropdef.mproperty)
+				npropdef.mpropdef.mproperty.is_autoinit = true
 			end
 			if npropdef isa AAttrPropdef then
 				if npropdef.mpropdef == null then return # Skip broken attribute
@@ -190,6 +191,7 @@ redef class ModelBuilder
 					# For autoinit attributes, call the reader to force
 					# the lazy initialization of the attribute.
 					initializers.add(npropdef.mreadpropdef.mproperty)
+					npropdef.mreadpropdef.mproperty.is_autoinit = true
 					continue
 				end
 				if npropdef.has_value then continue
@@ -202,9 +204,11 @@ redef class ModelBuilder
 				if msetter == null then
 					# No setter, it is a old-style attribute, so just add it
 					initializers.add(npropdef.mpropdef.mproperty)
+					npropdef.mpropdef.mproperty.is_autoinit = true
 				else
 					# Add the setter to the list
 					initializers.add(msetter.mproperty)
+					msetter.mproperty.is_autoinit = true
 				end
 			end
 		end
