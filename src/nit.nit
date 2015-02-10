@@ -22,6 +22,7 @@ import frontend
 import parser_util
 import vm
 import vm_optimizations
+import variables_numbering
 
 # Create a tool context to handle options and paths
 var toolcontext = new ToolContext
