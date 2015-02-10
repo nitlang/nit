@@ -67,7 +67,7 @@ class PkgconfigPhase
 		end
 
 		# check availability of pkg-config
-		var proc_which = new IProcess("which", "pkg-config")
+		var proc_which = new ProcessReader("which", "pkg-config")
 		proc_which.wait
 		var status = proc_which.status
 		if status != 0 then

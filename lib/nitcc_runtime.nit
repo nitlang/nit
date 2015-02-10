@@ -274,7 +274,7 @@ end
 # Print a node (using to_s) on a line and recustively each children indented (with two spaces)
 class TreePrinterVisitor
 	super Visitor
-	var writer: OStream
+	var writer: Writer
 	private var indent = 0
 	redef fun visit(n)
 	do
@@ -322,7 +322,7 @@ abstract class Node
 	# Produce a graphiz file for the syntaxtic tree rooted at `self`.
 	fun to_dot(filepath: String)
 	do
-		var f = new OFStream.open(filepath)
+		var f = new FileWriter.open(filepath)
 		f.write("digraph g \{\n")
 		f.write("rankdir=BT;\n")
 
@@ -346,7 +346,7 @@ abstract class Node
 		f.close
 	end
 
-	private fun to_dot_visitor(f: OStream, a: Array[NToken])
+	private fun to_dot_visitor(f: Writer, a: Array[NToken])
 	do
 		f.write("n{object_id} [label=\"{node_name}\"];\n")
 		for x in children do
@@ -558,7 +558,7 @@ abstract class TestParser
 			end
 			text = args.shift
 		else
-			var f = new IFStream.open(filepath)
+			var f = new FileReader.open(filepath)
 			text = f.read_all
 			f.close
 		end
@@ -582,7 +582,7 @@ abstract class TestParser
 		var tokout = "{name}.tokens.out"
 		print "TOKEN: {tokens.length} tokens (see {tokout})"
 
-		var f = new OFStream.open(tokout)
+		var f = new FileWriter.open(tokout)
 		for t in tokens do
 			f.write "{t.to_s}\n"
 		end
@@ -594,7 +594,7 @@ abstract class TestParser
 		var n = p.parse
 
 		var astout = "{name}.ast.out"
-		f = new OFStream.open(astout)
+		f = new FileWriter.open(astout)
 		var tpv = new TreePrinterVisitor(f)
 		var astdotout = "{name}.ast.dot"
 		if n isa NError then

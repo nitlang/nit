@@ -25,7 +25,7 @@ class JsonSerializer
 	super Serializer
 
 	# Target writing stream
-	var stream: OStream
+	var stream: Writer
 
 	redef fun serialize(object)
 	do

@@ -18,7 +18,7 @@ class TestPushBackDecorator
 	super TestSuite
 
 	private fun sample: PushBackDecorator do
-		return new PushBackDecorator(new StringIStream("""
+		return new PushBackDecorator(new StringReader("""
 abcd
 
 efg
@@ -32,7 +32,7 @@ efg
 	end
 
 	fun test_read_char_eof do
-		var subject = new PushBackDecorator(new StringIStream(""))
+		var subject = new PushBackDecorator(new StringReader(""))
 
 		assert -1 == subject.read_char
 	end
@@ -120,7 +120,7 @@ efg
 	end
 
 	fun test_eof_empty do
-		var subject = new PushBackDecorator(new StringIStream(""))
+		var subject = new PushBackDecorator(new StringReader(""))
 
 		assert subject.eof
 	end

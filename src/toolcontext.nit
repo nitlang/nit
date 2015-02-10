@@ -249,7 +249,7 @@ class ToolContext
 		args.remove_at 0
 
 		# Is the wanted program available?
-		var proc_which = new IProcess.from_a("which", [prog])
+		var proc_which = new ProcessReader.from_a("which", [prog])
 		proc_which.wait
 		var res = proc_which.status
 		if res != 0 then

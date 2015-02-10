@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-var f = new IFStream.open("test_file_read.nit")
+var f = new FileReader.open("test_file_read.nit")
 var s: String
 while not f.eof do
     s = f.read_line

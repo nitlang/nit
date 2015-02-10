@@ -71,7 +71,7 @@ end
 
 redef class App
 	# The stream where injected inputs are read
-	private var injected_input_stream: nullable IStream = null
+	private var injected_input_stream: nullable Reader = null
 
 	redef fun setup
 	do
@@ -84,7 +84,7 @@ redef class App
 
 		var input = "MNIT_READ_INPUT".environ
 		if input != "" then
-			injected_input_stream = new IFStream.open(input)
+			injected_input_stream = new FileReader.open(input)
 			print "GET injected_input_stream {input}"
 		end
 

@@ -23,14 +23,14 @@ class CodeGenerator
 
 	var with_attributes: Bool
 	var comment_unknown_types: Bool
-	var file_out: OFStream
+	var file_out: FileWriter
 	var java_class: JavaClass
 	var nb_params: Int
 	var module_name: nullable String = null
 
 	init (file_name: String, jclass: JavaClass, with_attributes, comment: Bool)
 	do
-		file_out = new OFStream.open(file_name)
+		file_out = new FileWriter.open(file_name)
 
 		var nit_ext = ".nit"
 		if file_name.has_suffix(nit_ext) then

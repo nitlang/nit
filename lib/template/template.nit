@@ -39,7 +39,7 @@ module template
 #
 # # Non-linear system with sub-templates.
 #
-# A template is made of a mix of string, sub-templates and other `Streamable` objects.
+# A template is made of a mix of string, sub-templates and other `Writable` objects.
 # A sub-template can be constructed independently of its usages, thus simplifying
 # the high-level logic.
 # A single sub-template can be used more than once.
@@ -67,7 +67,7 @@ module template
 #
 #     class LnkTmpl
 #         super Template
-#         var text: Streamable
+#         var text: Writable
 #         var title: nullable String
 #         var href: String
 #         redef fun rendering do
@@ -83,7 +83,7 @@ module template
 #     assert l.write_to_string == """<a href="hello.png">hello world</a>"""
 #
 class Template
-	super Streamable
+	super Writable
 
 	# Service used to render the content of the template.
 	#
@@ -106,7 +106,7 @@ class Template
 	#     t.add("1")
 	#     t.add("2")
 	#     assert t.write_to_string == "12"
-	fun add(element: Streamable) do
+	fun add(element: Writable) do
 		assert not is_frozen
 		content.add element
 	end
@@ -117,7 +117,7 @@ class Template
 	#     t.addn("1")
 	#     t.addn("2")
 	#     assert t.write_to_string == "1\n2\n"
-	fun addn(element: Streamable) do
+	fun addn(element: Writable) do
 		add element
 		add "\n"
 	end
@@ -128,7 +128,7 @@ class Template
 	#     var t = new Template
 	#     t.add_all(["1", "2"])
 	#     assert t.write_to_string == "12"
-	fun add_all(elements: Collection[Streamable]) do content.add_all elements
+	fun add_all(elements: Collection[Writable]) do content.add_all elements
 
 	# Append a bunch of elements at the end of the template with separations.
 	# see `add`.
@@ -136,7 +136,7 @@ class Template
 	#      var t = new Template
 	#      t.add_list(["1", "2", "3"], ", ", " and ")
 	#      assert t.write_to_string == "1, 2 and 3"
-	fun add_list(elements: Collection[Streamable], sep, last_sep: Streamable) do
+	fun add_list(elements: Collection[Writable], sep, last_sep: Writable) do
 		var last = elements.length - 2
 		var i = 0
 		for e in elements do
@@ -181,7 +181,7 @@ class Template
 	end
 
 	# Each sub-elements
-	private var content = new Array[Streamable]
+	private var content = new Array[Writable]
 
 	# Flag to avoid multiple rendering
 	private var render_done = false
@@ -200,7 +200,7 @@ class Template
 	end
 
 	# Do the full rendering and write the final content to a stream
-	redef fun write_to(stream: OStream)
+	redef fun write_to(stream: Writer)
 	do
 		assert not is_writing
 		is_writing = true

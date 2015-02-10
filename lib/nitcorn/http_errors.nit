@@ -29,10 +29,10 @@ class ErrorTemplate
 	var code: Int is writable
 
 	# Header on this page
-	var header: nullable Streamable = null is writable
+	var header: nullable Writable = null is writable
 
 	# Body to show with this page
-	var body: nullable Streamable = null is writable
+	var body: nullable Writable = null is writable
 
 	redef fun rendering
 	do

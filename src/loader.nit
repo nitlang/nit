@@ -386,7 +386,7 @@ redef class ModelBuilder
 		if not readme.file_exists then readme = dirpath2.join_path("README")
 		if readme.file_exists then
 			var mdoc = new MDoc
-			var s = new IFStream.open(readme)
+			var s = new FileReader.open(readme)
 			while not s.eof do
 				mdoc.content.add(s.read_line)
 			end
@@ -430,7 +430,7 @@ redef class ModelBuilder
 		self.toolcontext.info("load module {filename}", 2)
 
 		# Load the file
-		var file = new IFStream.open(filename)
+		var file = new FileReader.open(filename)
 		var lexer = new Lexer(new SourceFile(filename, file))
 		var parser = new Parser(lexer)
 		var tree = parser.parse

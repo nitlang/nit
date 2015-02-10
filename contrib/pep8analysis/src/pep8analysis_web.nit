@@ -50,7 +50,7 @@ redef class AnalysisManager
 	do
 		sys.suggest_garbage_collection
 
-		var stream = new StringIStream(src)
+		var stream = new StringReader(src)
 		var ast = build_ast("web", stream)
 		if ast == null then return
 
@@ -95,7 +95,7 @@ redef class AnalysisManager
 		print_notes
 		if notes.is_empty then print "Success: Nothing wrong detected"
 
-		var of = new StringOStream
+		var of = new StringWriter
 		cfg.print_dot(of, false)
 		of.close
 		show_graph(of.to_s)

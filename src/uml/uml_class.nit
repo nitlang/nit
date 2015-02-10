@@ -19,7 +19,7 @@ import uml_base
 
 redef class UMLModel
 	# Generates a UML class diagram from a `Model`
-	fun generate_class_uml: Streamable do
+	fun generate_class_uml: Writable do
 		var tpl = new Template
 		tpl.add "digraph G \{\n"
 		tpl.add """	fontname = "Bitstream Vera Sans"
@@ -43,7 +43,7 @@ end
 redef class Model
 
 	# Generates a UML Class diagram from the entities of a `Model`
-	fun tpl_class(ctx: ToolContext, main: MModule): Streamable do
+	fun tpl_class(ctx: ToolContext, main: MModule): Writable do
 		var t = new Template
 		for i in mclasses do
 			if not ctx.private_gen and i.visibility != public_visibility then continue
@@ -56,13 +56,13 @@ redef class Model
 end
 
 redef class MEntity
-	# Generates a dot-compatible `Streamable` UML Class diagram from `self`
-	fun tpl_class(ctx: ToolContext, main: MModule): Streamable is abstract
+	# Generates a dot-compatible `Writable` UML Class diagram from `self`
+	fun tpl_class(ctx: ToolContext, main: MModule): Writable is abstract
 end
 
 redef class MClass
 
-	redef fun tpl_class(ctx, main): Streamable do
+	redef fun tpl_class(ctx, main): Writable do
 		var t = new Template
 		t.add "{name} [\n label = \"\{"
 		if kind == abstract_kind then
@@ -174,7 +174,7 @@ redef class MVisibility
 	#
 	#    assert public_visibility.tpl_class == "+"
 	#    assert private_visibility.tpl_class == "-"
-	fun tpl_class: Streamable do
+	fun tpl_class: Writable do
 		if self == private_visibility then
 			return "-"
 		else if self == protected_visibility then

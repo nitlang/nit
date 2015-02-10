@@ -28,7 +28,7 @@ if not file.file_exists then
 	exit 0
 end
 
-var ifs = new IFStream.open(file)
+var ifs = new FileReader.open(file)
 var md = ifs.read_all
 ifs.close
 

@@ -28,7 +28,7 @@ import template
 # using macros and replacement.
 #
 # A macro is represented as a string identifier like `%MACRO%` in the template
-# string. Using `TemplateString`, macros can be replaced by any `Streamable` data:
+# string. Using `TemplateString`, macros can be replaced by any `Writable` data:
 #
 #    var tpl = new TemplateString("Hello %NAME%!")
 #    tpl.replace("NAME", "Dave")
@@ -139,7 +139,7 @@ class TemplateString
 
 	# Loads the template file contents.
 	private fun load_template_file(tpl_file: String): String do
-		var file = new IFStream.open(tpl_file)
+		var file = new FileReader.open(tpl_file)
 		var text = file.read_all
 		file.close
 		return text
@@ -216,7 +216,7 @@ class TemplateString
 	#    var tpl = new TemplateString("Hello %NAME%!")
 	#    tpl.replace("NAME", "Dave")
 	#    assert tpl.write_to_string == "Hello Dave!"
-	fun replace(name: String, replacement: Streamable) do
+	fun replace(name: String, replacement: Writable) do
 		assert has_macro(name)
 		for macro in macros[name] do
 			macro.replacement = replacement
@@ -269,7 +269,7 @@ class TemplateString
 	#    tpl.replace("FIRSTNAME", "Corben")
 	#    tpl.replace("LASTNAME", "Dallas")
 	#    for name, rep in tpl do assert rep != null
-	fun iterator: MapIterator[String, nullable Streamable] do
+	fun iterator: MapIterator[String, nullable Writable] do
 		return new TemplateStringIterator(self)
 	end
 end
@@ -287,7 +287,7 @@ private class TemplateMacro
 	var end_pos: Int
 
 	# Macro replacement if any.
-	var replacement: nullable Streamable = null
+	var replacement: nullable Writable = null
 
 	# Does `self` already have a `replacement`?
 	fun is_replaced: Bool do return replacement != null
@@ -360,7 +360,7 @@ redef class String
 end
 
 private class TemplateStringIterator
-	super MapIterator[String, nullable Streamable]
+	super MapIterator[String, nullable Writable]
 
 	var subject: TemplateString
 	var key_it: Iterator[String] is noinit

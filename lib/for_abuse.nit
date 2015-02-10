@@ -38,21 +38,21 @@ end
 
 # Abuser to read a file, see `file_open`
 private class ReadFileForAbuser
-	super ForAbuser[IFStream]
+	super ForAbuser[FileReader]
 	var path: String
 	redef fun iterator do return new ReadFileForAbuserIterator(path)
 end
 
 # Abuser iterator to read a file, see `file_open`
 private class ReadFileForAbuserIterator
-	super Iterator[IFStream]
+	super Iterator[FileReader]
 	var path: String
-	redef var item: IFStream is noinit
+	redef var item: FileReader is noinit
 	redef var is_ok = true
 	init
 	do
 		# start of service is to open the file, and return in
-		item = new IFStream.open(path)
+		item = new FileReader.open(path)
 	end
 	redef fun next
 	do
@@ -159,7 +159,7 @@ end
 #         print l
 #         assert not l.is_empty
 #     end # f is automatically closed here
-fun file_open(path: String): ForAbuser[IFStream]
+fun file_open(path: String): ForAbuser[FileReader]
 do
 	return new ReadFileForAbuser(path)
 end

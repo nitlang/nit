@@ -166,7 +166,7 @@ redef class CCompilationUnit
 
 	fun write_header_to_file(mmodule: MModule, file: String, includes: Array[String], guard: String)
 	do
-		var stream = new OFStream.open( file )
+		var stream = new FileWriter.open( file )
 
 		# header comments
 		var module_info = "/*\n\tExtern implementation of Nit module {mmodule.name}\n*/\n"
@@ -187,7 +187,7 @@ redef class CCompilationUnit
 
 	fun write_body_to_file(mmodule: MModule, file: String, includes: Array[String])
 	do
-		var stream = new OFStream.open(file)
+		var stream = new FileWriter.open(file)
 
 		var module_info = "/*\n\tExtern implementation of Nit module {mmodule.name}\n*/\n"
 

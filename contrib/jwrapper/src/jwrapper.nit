@@ -63,7 +63,7 @@ if not "javap".program_is_in_path then
 	exit 1
 end
 
-var javap = new IProcess("javap", "-public", dot_class)
+var javap = new ProcessReader("javap", "-public", dot_class)
 
 var p = new TestParser_javap
 var tree = p.work(javap.read_all)

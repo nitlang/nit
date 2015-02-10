@@ -22,14 +22,14 @@ print hw.status
 
 print ""
 
-var ip = new IProcess("echo", "B hello world!")
+var ip = new ProcessReader("echo", "B hello world!")
 ip.read_line.output
 ip.wait
 print ip.status
 
 print ""
 
-var op = new OProcess.from_a("cat", null)
+var op = new ProcessWriter.from_a("cat", null)
 op.write("C hello world!\n")
 op.close
 op.wait
@@ -37,7 +37,7 @@ print op.status
 
 print ""
 
-var iop = new IOProcess.from_a("cat", null)
+var iop = new ProcessDuplex.from_a("cat", null)
 iop.write("D hello world!\n")
 iop.read_line.output
 iop.close
@@ -52,7 +52,7 @@ print e1.status
 
 print ""
 
-var ioperr = new IOProcess.from_a("bad command", null)
+var ioperr = new ProcessDuplex.from_a("bad command", null)
 ioperr.write("D hello world!\n")
 ioperr.read_line.output
 ioperr.close

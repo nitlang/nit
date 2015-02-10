@@ -70,7 +70,7 @@ class BenitluxSubscriptionAction
 		end
 
 		if sample_email_path.file_exists then
-			var f = new IFStream.open(sample_email_path)
+			var f = new FileReader.open(sample_email_path)
 			var lines = new Array[String]
 			for line in f.read_all.split_with("\n") do if not line.is_empty then lines.add line
 			f.close
@@ -108,7 +108,7 @@ class BenitluxRESTAction
 				return response
 			end
 
-			var stream = new StringOStream
+			var stream = new StringWriter
 			var serializer = new JsonSerializer(stream)
 			serializer.serialize events
 			var serialized = stream.to_s

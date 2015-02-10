@@ -45,7 +45,7 @@ class TplPage
 	var sections = new Array[TplSection]
 
 	# Footer content if any
-	var footer: nullable Streamable = null is writable
+	var footer: nullable Writable = null is writable
 
 	# JS scripts to append at the end of the body
 	var scripts = new Array[TplScript]
@@ -158,9 +158,9 @@ class TplTopMenu
 	super Template
 
 	# Brand link to display in first position of the top menu
-	private var brand: nullable Streamable = null is writable
+	private var brand: nullable Writable = null is writable
 	# Elements of the topmenu
-	private var elts = new Array[Streamable]
+	private var elts = new Array[Writable]
 
 	# The page url where the top menu is displayed.
 	#
@@ -174,7 +174,7 @@ class TplTopMenu
 	end
 
 	# Add a content between `<li>` tags
-	fun add_item(content: Streamable, is_active: Bool) do
+	fun add_item(content: Writable, is_active: Bool) do
 		var tpl = new Template
 		tpl.add "<li"
 		if is_active then
@@ -187,7 +187,7 @@ class TplTopMenu
 	end
 
 	# Add a raw content to the menu
-	fun add_raw(content: Streamable) do
+	fun add_raw(content: Writable) do
 		elts.add content
 	end
 
@@ -277,7 +277,7 @@ class TplSideBox
 
 	# Content to display in the box
 	# box will not be rendered if the content is null
-	var content: nullable Streamable = null is writable
+	var content: nullable Writable = null is writable
 
 	# Is the box opened by default
 	# otherwise, the user will have to clic on the title to display the content
@@ -287,7 +287,7 @@ class TplSideBox
 		self.id = title.to_cmangle
 	end
 
-	init with_content(title: String, content: Streamable) do
+	init with_content(title: String, content: Writable) do
 		init(title)
 		self.content = content
 	end
@@ -352,7 +352,7 @@ class TplSummaryEntry
 	super TplSummaryElt
 
 	# Text to display
-	var text: Streamable
+	var text: Writable
 
 	# Children of this entry
 	# Will be displayed as a tree
@@ -383,10 +383,10 @@ class TplSectionElt
 	# Title to display if any
 	# if both `title` and `summary_title` are null then
 	# the section will not appear in the summary
-	var title: nullable Streamable = null is writable
+	var title: nullable Writable = null is writable
 
 	# Subtitle to display if any
-	var subtitle: nullable Streamable = null is writable
+	var subtitle: nullable Writable = null is writable
 
 	# Title that appear in the summary
 	# if null use `title` instead
@@ -401,7 +401,7 @@ class TplSectionElt
 	# Parent article/section if any
 	var parent: nullable TplSectionElt = null
 
-	init with_title(id: String, title: Streamable) do
+	init with_title(id: String, title: Writable) do
 		init(id)
 		self.title = title
 	end
@@ -469,10 +469,10 @@ class TplArticle
 	super TplSectionElt
 
 	# Content for this article
-	var content: nullable Streamable = null is writable
-	var source_link: nullable Streamable = null is writable
+	var content: nullable Writable = null is writable
+	var source_link: nullable Writable = null is writable
 
-	init with_content(id: String, title: Streamable, content: Streamable) do
+	init with_content(id: String, title: Writable, content: Writable) do
 		with_title(id, title)
 		self.content = content
 	end
@@ -525,13 +525,13 @@ class TplDefinition
 	super Template
 
 	# Comment to display
-	var comment: nullable Streamable = null is writable
+	var comment: nullable Writable = null is writable
 
 	# Namespace for this definition
-	var namespace: nullable Streamable = null is writable
+	var namespace: nullable Writable = null is writable
 
 	# Location link to display
-	var location: nullable Streamable = null is writable
+	var location: nullable Writable = null is writable
 
 	private fun render_info do
 		addn "<div class='info text-right'>"
@@ -589,9 +589,9 @@ end
 class TplSearchPage
 	super TplSectionElt
 
-	var modules = new Array[Streamable]
-	var classes = new Array[Streamable]
-	var props = new Array[Streamable]
+	var modules = new Array[Writable]
+	var classes = new Array[Writable]
+	var props = new Array[Writable]
 
 	redef fun rendering do
 		var title = self.title
@@ -651,7 +651,7 @@ class TplLink
 	var href: String is writable
 
 	# The raw HTML content to display in the link
-	var text: Streamable is writable
+	var text: Writable is writable
 
 	# The unescaped optional title.
 	var title: nullable String = null is writable
@@ -717,16 +717,16 @@ class TplListItem
 	# CSS classes of the <li> element
 	var css_classes = new Array[String]
 
-	init with_content(content: Streamable) do append(content)
+	init with_content(content: Writable) do append(content)
 
-	init with_classes(content: Streamable, classes: Array[String]) do
+	init with_classes(content: Writable, classes: Array[String]) do
 		with_content(content)
 		css_classes = classes
 	end
 
 	# Append `content` to the item
 	# similar to `self.content.add`
-	fun append(content: Streamable) do self.content.add content
+	fun append(content: Writable) do self.content.add content
 
 	redef fun rendering do
 		add "<li class='{css_classes.join(" ")}'>"
@@ -770,16 +770,16 @@ class TplTabPanel
 	# The panel name.
 	#
 	# Displayed in the tab header or in the pointing link.
-	var name: Streamable
+	var name: Writable
 
 	# Is the panel visible by default?
 	var is_active = false is writable
 
 	# Body of the panel
-	var content: nullable Streamable = null is writable
+	var content: nullable Writable = null is writable
 
 	# Get a link pointing to this panel.
-	fun tpl_link_to: Streamable do
+	fun tpl_link_to: Writable do
 		var lnk = new Template
 		lnk.add "<a data-target='#{id}' data-toggle='pill'>"
 		lnk.add name
@@ -801,12 +801,12 @@ class TplLabel
 	super Template
 
 	# Content of the label if any
-	var content: nullable Streamable = null is writable
+	var content: nullable Writable = null is writable
 
 	# CSS classes of the <span> element
 	var css_classes = new Array[String]
 
-	init with_content(content: Streamable) do self.content = content
+	init with_content(content: Writable) do self.content = content
 	init with_classes(classes: Array[String]) do self.css_classes = classes
 
 	redef fun rendering do
@@ -867,7 +867,7 @@ class TplScript
 	super Template
 
 	var attrs = new Array[TagAttribute]
-	var content: nullable Streamable = null is writable
+	var content: nullable Writable = null is writable
 
 	init do
 		attrs.add(new TagAttribute("type", "text/javascript"))

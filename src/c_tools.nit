@@ -61,7 +61,7 @@ class CCompilationUnit
 		body_impl.add( efc.to_writer )
 	end
 
-	fun compile_header_core( stream : OStream )
+	fun compile_header_core( stream : Writer )
 	do
 		header_c_base.write_to( stream )
 		header_custom.write_to( stream )
@@ -69,7 +69,7 @@ class CCompilationUnit
 		header_decl.write_to( stream )
 	end
 
-	fun compile_body_core( stream : OStream )
+	fun compile_body_core( stream : Writer )
 	do
 		body_decl.write_to( stream )
 		body_custom.write_to( stream )

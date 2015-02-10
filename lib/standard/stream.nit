@@ -26,10 +26,10 @@ class IOError
 end
 
 # Abstract stream class
-abstract class IOS
+abstract class Stream
 	# Error produced by the file stream
 	#
-	#     var ifs = new IFStream.open("donotmakethisfile.binx")
+	#     var ifs = new FileReader.open("donotmakethisfile.binx")
 	#     ifs.read_all
 	#     ifs.close
 	#     assert ifs.last_error != null
@@ -40,8 +40,8 @@ abstract class IOS
 end
 
 # Abstract input streams
-abstract class IStream
-	super IOS
+abstract class Reader
+	super Stream
 	# Read a character. Return its ASCII value, -1 on EOF or timeout
 	fun read_char: Int is abstract
 
@@ -66,7 +66,7 @@ abstract class IStream
 	#
 	# ~~~
 	# var txt = "Hello\n\nWorld\n"
-	# var i = new StringIStream(txt)
+	# var i = new StringReader(txt)
 	# assert i.read_line == "Hello"
 	# assert i.read_line == ""
 	# assert i.read_line == "World"
@@ -79,7 +79,7 @@ abstract class IStream
 	#
 	# ~~~
 	# var txt2 = "Hello\r\n\n\rWorld"
-	# var i2 = new StringIStream(txt2)
+	# var i2 = new StringReader(txt2)
 	# assert i2.read_line == "Hello"
 	# assert i2.read_line == ""
 	# assert i2.read_line == "\rWorld"
@@ -102,7 +102,7 @@ abstract class IStream
 	#
 	# ~~~
 	# var txt = "Hello\n\nWorld\n"
-	# var i = new StringIStream(txt)
+	# var i = new StringReader(txt)
 	# assert i.read_lines == ["Hello", "", "World"]
 	# ~~~
 	#
@@ -126,7 +126,7 @@ abstract class IStream
 	#
 	# ~~~
 	# var txt = "Hello\n\nWorld\n"
-	# var i = new StringIStream(txt)
+	# var i = new StringReader(txt)
 	# assert i.each_line.to_a == ["Hello", "", "World"]
 	# ~~~
 	#
@@ -134,7 +134,7 @@ abstract class IStream
 	# Therefore, the stream should no be closed until the end of the stream.
 	#
 	# ~~~
-	# i = new StringIStream(txt)
+	# i = new StringReader(txt)
 	# var el = i.each_line
 	#
 	# assert el.item == "Hello"
@@ -155,7 +155,7 @@ abstract class IStream
 	#
 	# ~~~
 	# var txt = "Hello\n\nWorld\n"
-	# var i = new StringIStream(txt)
+	# var i = new StringReader(txt)
 	# assert i.read_all == txt
 	# ~~~
 	fun read_all: String
@@ -177,7 +177,7 @@ abstract class IStream
 	#
 	# ~~~
 	# var txt = "Hello\n\nWorld\n"
-	# var i = new StringIStream(txt)
+	# var i = new StringReader(txt)
 	# var b = new FlatBuffer
 	# i.append_line_to(b)
 	# assert b == "Hello\n"
@@ -192,7 +192,7 @@ abstract class IStream
 	# a non-eol terminated last line was returned.
 	#
 	# ~~~
-	# var i2 = new StringIStream("hello")
+	# var i2 = new StringReader("hello")
 	# assert not i2.eof
 	# var b2 = new FlatBuffer
 	# i2.append_line_to(b2)
@@ -222,13 +222,13 @@ abstract class IStream
 	fun eof: Bool is abstract
 end
 
-# Iterator returned by `IStream::each_line`.
+# Iterator returned by `Reader::each_line`.
 # See the aforementioned method for details.
 class LineIterator
 	super Iterator[String]
 
 	# The original stream
-	var stream: IStream
+	var stream: Reader
 
 	redef fun is_ok
 	do
@@ -269,9 +269,9 @@ class LineIterator
 	end
 end
 
-# IStream capable of declaring if readable without blocking
-abstract class PollableIStream
-	super IStream
+# `ReadStream` capable of declaring if readable without blocking
+abstract class PollableReader
+	super Reader
 
 	# Is there something to read? (without blocking)
 	fun poll_in: Bool is abstract
@@ -279,8 +279,8 @@ abstract class PollableIStream
 end
 
 # Abstract output stream
-abstract class OStream
-	super IOS
+abstract class Writer
+	super Stream
 	# write a string
 	fun write(s: Text) is abstract
 
@@ -288,16 +288,16 @@ abstract class OStream
 	fun is_writable: Bool is abstract
 end
 
-# Things that can be efficienlty writen to a OStream
+# Things that can be efficienlty writen to a `WriteStream`
 #
 # The point of this interface it to allow is instance to be efficenty
-# writen into a OStream without having to allocate a big String object
+# writen into a `WriteStream` without having to allocate a big String object
 #
 # ready-to-save documents usually provide this interface.
-interface Streamable
+interface Writable
 	# Write itself to a `stream`
 	# The specific logic it let to the concrete subclasses
-	fun write_to(stream: OStream) is abstract
+	fun write_to(stream: Writer) is abstract
 
 	# Like `write_to` but return a new String (may be quite large)
 	#
@@ -306,20 +306,20 @@ interface Streamable
 	# stream without having to allocate and concatenate strings
 	fun write_to_string: String
 	do
-		var stream = new StringOStream
+		var stream = new StringWriter
 		write_to(stream)
 		return stream.to_s
 	end
 end
 
 redef class Text
-	super Streamable
+	super Writable
 	redef fun write_to(stream) do stream.write(self)
 end
 
 # Input streams with a buffer
-abstract class BufferedIStream
-	super IStream
+abstract class BufferedReader
+	super Reader
 	redef fun read_char
 	do
 		if last_error != null then return -1
@@ -440,16 +440,16 @@ abstract class BufferedIStream
 end
 
 # An Input/Output Stream
-abstract class IOStream
-	super IStream
-	super OStream
+abstract class Duplex
+	super Reader
+	super Writer
 end
 
 # Stream to a String.
 #
-# Mainly used for compatibility with OStream type and tests.
-class StringOStream
-	super OStream
+# Mainly used for compatibility with Writer type and tests.
+class StringWriter
+	super Writer
 
 	private var content = new Array[String]
 	redef fun to_s do return content.to_s
@@ -468,9 +468,9 @@ end
 
 # Stream from a String.
 #
-# Mainly used for compatibility with IStream type and tests.
-class StringIStream
-	super IStream
+# Mainly used for compatibility with Reader type and tests.
+class StringReader
+	super Reader
 
 	# The string to read from.
 	var source: String

@@ -95,7 +95,7 @@ private class LinuxStore
 		if db == null then return
 
 		# Serialize
-		var stream = new StringOStream
+		var stream = new StringWriter
 		var serializer = new JsonSerializer(stream)
 		serializer.serialize value
 		var serialized = stream.to_s

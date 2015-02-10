@@ -165,7 +165,7 @@ class Connection
 	do
 		assert path.file_exists
 
-		var file = new IFStream.open(path)
+		var file = new FileReader.open(path)
 		var output = native_buffer_event.output_buffer
 		var fd = file.fd
 		var length = file.file_stat.size

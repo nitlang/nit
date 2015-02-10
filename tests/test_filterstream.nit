@@ -20,16 +20,16 @@ import filter_stream
 var filename_1 = "out/test_filterstream_tmp1.write"
 var filename_2 = "out/test_filterstream_tmp2.write"
 
-var output_file_1 = new OFStream.open(filename_1)
-var output_file_2 = new OFStream.open(filename_2)
+var output_file_1 = new FileWriter.open(filename_1)
+var output_file_2 = new FileWriter.open(filename_2)
 
 var stream_demux = new StreamDemux(output_file_1, output_file_2)
 
 stream_demux.write("Hello World !!\n")
 stream_demux.close
 
-var input_file_1 = new IFStream.open(filename_1)
-var input_file_2 = new IFStream.open(filename_2)
+var input_file_1 = new FileReader.open(filename_1)
+var input_file_2 = new FileReader.open(filename_2)
 
 var stream_cat = new StreamCat(input_file_1,input_file_2)
 

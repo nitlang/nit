@@ -774,22 +774,22 @@ Start ../src/test_parser.nit:17,1--147,1
                                 AListExprs ../src/test_parser.nit:116,44
                               TCpar ")" ../src/test_parser.nit:116,45
                       ABlockExpr ../src/test_parser.nit:118,4--121,5
-                        AVardeclExpr ../src/test_parser.nit:118,4--31
+                        AVardeclExpr ../src/test_parser.nit:118,4--33
                           TKwvar "var" ../src/test_parser.nit:118,4--6
                           TId "f" ../src/test_parser.nit:118,8
                           TAssign "=" ../src/test_parser.nit:118,10
-                          ANewExpr ../src/test_parser.nit:118,12--31
+                          ANewExpr ../src/test_parser.nit:118,12--33
                             TKwnew "new" ../src/test_parser.nit:118,12--14
-                            AType ../src/test_parser.nit:118,16--23
-                              TClassid "IFStream" ../src/test_parser.nit:118,16--23
-                            TId "open" ../src/test_parser.nit:118,25--28
-                            AParExprs ../src/test_parser.nit:118,29--31
-                              TOpar "(" ../src/test_parser.nit:118,29
-                              ACallExpr ../src/test_parser.nit:118,30
-                                AImplicitSelfExpr ../src/test_parser.nit:118,30
-                                TId "a" ../src/test_parser.nit:118,30
-                                AListExprs ../src/test_parser.nit:118,30
-                              TCpar ")" ../src/test_parser.nit:118,31
+                            AType ../src/test_parser.nit:118,16--25
+                              TClassid "FileReader" ../src/test_parser.nit:118,16--25
+                            TId "open" ../src/test_parser.nit:118,27--30
+                            AParExprs ../src/test_parser.nit:118,31--33
+                              TOpar "(" ../src/test_parser.nit:118,31
+                              ACallExpr ../src/test_parser.nit:118,32
+                                AImplicitSelfExpr ../src/test_parser.nit:118,32
+                                TId "a" ../src/test_parser.nit:118,32
+                                AListExprs ../src/test_parser.nit:118,32
+                              TCpar ")" ../src/test_parser.nit:118,33
                         ACallAssignExpr ../src/test_parser.nit:119,4--32
                           AImplicitSelfExpr ../src/test_parser.nit:119,4
                           TId "source" ../src/test_parser.nit:119,4--9

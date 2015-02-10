@@ -443,7 +443,7 @@ class Automaton
 			ni += 1
 		end
 
-		var f = new OFStream.open(filepath) 
+		var f = new FileWriter.open(filepath)
                 f.write("digraph g \{\n")
 
 		for s in states do
@@ -638,10 +638,10 @@ private class DFAGenerator
 	var automaton: Automaton
 	var parser: nullable String
 
-	var out: OStream is noinit
+	var out: Writer is noinit
 
 	init do
-		self.out = new OFStream.open(filepath)
+		self.out = new FileWriter.open(filepath)
 	end
 
 	fun add(s: String) do out.write(s)

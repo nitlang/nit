@@ -52,7 +52,7 @@ redef class MEntity
 	private fun field_separator: String do return "#====#"
 	private fun line_separator: String do return "#nnnn#"
 
-	private fun write_to_stream(stream: OStream)
+	private fun write_to_stream(stream: Writer)
 	do
 		# 1. Short name for autocompletion
 		stream.write complete_name
@@ -82,7 +82,7 @@ redef class MEntity
 		stream.write "\n"
 	end
 
-	private fun write_signature_to_stream(stream: OStream) do end
+	private fun write_signature_to_stream(stream: Writer) do end
 
 	# Actual name used in completion
 	private fun complete_name: String do return name
@@ -159,11 +159,11 @@ private class AutocompletePhase
 		if compile_dir.is_empty then compile_dir = "HOME".environ / ".vim/nit"
 		compile_dir.mkdir
 
-		var modules_stream = new OFStream.open(compile_dir / "modules.txt")
-		var classes_stream = new OFStream.open(compile_dir / "classes.txt")
-		var constructors_stream = new OFStream.open(compile_dir / "constructors.txt")
-		var types_stream = new OFStream.open(compile_dir / "types.txt")
-		var properties_stream = new OFStream.open(compile_dir / "properties.txt")
+		var modules_stream = new FileWriter.open(compile_dir / "modules.txt")
+		var classes_stream = new FileWriter.open(compile_dir / "classes.txt")
+		var constructors_stream = new FileWriter.open(compile_dir / "constructors.txt")
+		var types_stream = new FileWriter.open(compile_dir / "types.txt")
+		var properties_stream = new FileWriter.open(compile_dir / "properties.txt")
 
 		# Got all known modules
 		var model = mainmodule.model

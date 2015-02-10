@@ -56,7 +56,7 @@ end
 
 # Return result from diff between `file1` and `file2`.
 private fun diff(file1, file2: String): String do
-	var p = new IProcess("diff", "-u", file1, file2)
+	var p = new ProcessReader("diff", "-u", file1, file2)
 	var res = p.read_all
 	p.wait
 	p.close

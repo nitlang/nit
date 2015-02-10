@@ -1285,7 +1285,7 @@ class Intent
 	# Returns `self` allowing fluent programming
 	fun []=(name: String, value: nullable Serializable): Intent
 	do
-		var serialized_string = new StringOStream
+		var serialized_string = new StringWriter
 		var serializer = new JsonSerializer(serialized_string)
 		serializer.serialize(value)
 

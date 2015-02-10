@@ -58,7 +58,7 @@ class InputSource
 	# resolving relative URIs, may use `public_id=` to include a public
 	# identifier, and may use `encoding=` to specify the object's character
 	# encoding.
-	init with_stream(stream: IStream) do
+	init with_stream(stream: Reader) do
 		self.stream = stream
 	end
 
@@ -84,7 +84,7 @@ class InputSource
 	# for resolving relative URIs, may set `public_id` to include a
 	# public identifier, and may set `encoding` to specify the object's
 	# character encoding.
-	var stream: nullable IStream = null is writable
+	var stream: nullable Reader = null is writable
 
 	# The character encoding, if known.
 	#

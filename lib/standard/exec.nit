@@ -88,12 +88,12 @@ class Process
 end
 
 # stdout of the process is readable
-class IProcess
+class ProcessReader
 	super Process
-	super IStream
+	super Reader
 
 	# File Descriptor used for the input.
-	var stream_in: IFStream is noinit
+	var stream_in: FileReader is noinit
 
 	redef fun close do stream_in.close
 
@@ -106,17 +106,17 @@ class IProcess
 	redef fun execute
 	do
 		super
-		stream_in = new IFStream.from_fd(data.out_fd)
+		stream_in = new FileReader.from_fd(data.out_fd)
 	end
 end
 
 # stdin of the process is writable
-class OProcess
+class ProcessWriter
 	super Process
-	super OStream
+	super Writer
 
 	# File Descriptor used for the output.
-	var stream_out: OStream is noinit
+	var stream_out: Writer is noinit
 
 	redef fun close do stream_out.close
 
@@ -129,15 +129,15 @@ class OProcess
 	redef fun execute
 	do
 		super
-		stream_out = new OFStream.from_fd(data.in_fd)
+		stream_out = new FileWriter.from_fd(data.in_fd)
 	end
 end
 
 # stdin and stdout are both accessible
-class IOProcess
-	super IProcess
-	super OProcess
-	super IOStream
+class ProcessDuplex
+	super ProcessReader
+	super ProcessWriter
+	super Duplex
 
 	redef fun close
 	do

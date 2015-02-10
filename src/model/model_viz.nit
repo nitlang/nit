@@ -136,7 +136,7 @@ end
 # Interesting elements must be selected. See `mmodules`, ``
 # Display configuration can be set. See `cluster_group`, `project_group`
 class MProjectDot
-	super Streamable
+	super Writable
 
 	# The model where to look for information
 	var model: Model
@@ -161,7 +161,7 @@ class MProjectDot
 	var project_group = true is writable
 
 	# Recursively generate node and clusters for a mgroup
-	private fun dot_cluster(o: OStream, mgroup: MGroup)
+	private fun dot_cluster(o: Writer, mgroup: MGroup)
 	do
 		# Open the cluster, if required
 		if mgroup.parent == null then

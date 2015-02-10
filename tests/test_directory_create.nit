@@ -15,9 +15,9 @@
 # limitations under the License.
 
 "out/test_directory_create.write/tmp_dir".mkdir
-var f =  new OFStream.open("out/test_directory_create.write/tmp_file")
+var f =  new FileWriter.open("out/test_directory_create.write/tmp_file")
 f.write("test")
 f.close
-f =  new OFStream.open("out/test_directory_create.write/tmp_dir/tmp_file_2")
+f =  new FileWriter.open("out/test_directory_create.write/tmp_dir/tmp_file_2")
 f.write("other test")
 f.close

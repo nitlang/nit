@@ -180,7 +180,7 @@ abstract class Processor
 		var skip_path = "tests/turing.skip"
 		var skip
 		if skip_path.file_exists then
-			var skip_file = new IFStream.open(skip_path)
+			var skip_file = new FileReader.open(skip_path)
 			skip = skip_file.read_lines
 			skip_file.close
 		else
@@ -463,7 +463,7 @@ class Worker
 					sys.system cmd
 
 					# Test results were written to file, read them
-					var fstream = new IFStream.open(tests_sh_out)
+					var fstream = new FileReader.open(tests_sh_out)
 					var content = fstream.read_all
 					fstream.close
 

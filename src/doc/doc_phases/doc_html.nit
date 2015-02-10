@@ -818,11 +818,11 @@ redef class GraphArticle
 		var output_dir = v.ctx.output_dir
 		var path = output_dir / id
 		var path_sh = path.escape_to_sh
-		var file = new OFStream.open("{path}.dot")
+		var file = new FileWriter.open("{path}.dot")
 		file.write(dot)
 		file.close
 		sys.system("\{ test -f {path_sh}.png && test -f {path_sh}.s.dot && diff -- {path_sh}.dot {path_sh}.s.dot >/dev/null 2>&1 ; \} || \{ cp -- {path_sh}.dot {path_sh}.s.dot && dot -Tpng -o{path_sh}.png -Tcmapx -o{path_sh}.map {path_sh}.s.dot ; \}")
-		var fmap = new IFStream.open("{path}.map")
+		var fmap = new FileReader.open("{path}.map")
 		var map = fmap.read_all
 		fmap.close
 

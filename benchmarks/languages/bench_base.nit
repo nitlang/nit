@@ -48,7 +48,7 @@ class Generator
 		middle = (dept + 1) / 2
 	end
 
-	var file: nullable OFStream = null
+	var file: nullable FileWriter = null
 	fun write(str: String)
 	do
 		file.write(str)
@@ -62,7 +62,7 @@ class Generator
 	do
 		dir = "{dir}/nit"
 		dir.mkdir
-		file = new OFStream.open("{dir}/{name}.nit")
+		file = new FileWriter.open("{dir}/{name}.nit")
 
 		write "class Root\n\tfun id: Int do return 0\nend"
 		for c in classes do
@@ -117,7 +117,7 @@ class Generator
 	do
 		dir = "{dir}/java"
 		dir.mkdir
-		file = new OFStream.open("{dir}/{name}.java")
+		file = new FileWriter.open("{dir}/{name}.java")
 
 		var cl = ""
 		if interfaces then cl = "X"
@@ -183,7 +183,7 @@ class Generator
 	do
 		dir = "{dir}/cs"
 		dir.mkdir
-		file = new OFStream.open("{dir}/{name}.cs")
+		file = new FileWriter.open("{dir}/{name}.cs")
 
 		var cl = ""
 		if interfaces then cl = "X"
@@ -248,7 +248,7 @@ class Generator
 	do
 		dir = "{dir}/scala"
 		dir.mkdir
-		file = new OFStream.open("{dir}/{name}.scala")
+		file = new FileWriter.open("{dir}/{name}.scala")
 
 		var cl = ""
 		write "object {name} \{"
@@ -316,7 +316,7 @@ class Generator
 	do
 		dir = "{dir}/cpp"
 		dir.mkdir
-		file = new OFStream.open("{dir}/{name}.cpp")
+		file = new FileWriter.open("{dir}/{name}.cpp")
 
 		write "#include <iostream>"
 		write "#include <stdlib.h>"
@@ -374,7 +374,7 @@ class Generator
 			dir = "{dir}/es/{name}"
 		end
 		dir.mkdir
-		file = new OFStream.open("{dir}/root.e")
+		file = new FileWriter.open("{dir}/root.e")
 
 		var istk = ""
 		if se then istk = " is"
@@ -384,7 +384,7 @@ class Generator
 		file.close
 
 		for c in classes do
-			file = new OFStream.open("{dir}/{c}.e")
+			file = new FileWriter.open("{dir}/{c}.e")
 			write "class {c}[E] "
 			if c.supers.is_empty then
 				write "\tinherit ROOT"
@@ -398,7 +398,7 @@ class Generator
 			file.close
 		end
 
-		file = new OFStream.open("{dir}/app{name}.e")
+		file = new FileWriter.open("{dir}/app{name}.e")
 		write "class APP{name.to_upper}"
 		if se then
 			write "insert ARGUMENTS"

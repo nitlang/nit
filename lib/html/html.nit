@@ -27,7 +27,7 @@ module html
 # HTMLPage use fluent interface so you can chain calls as:
 #	add("div").attr("id", "mydiv").text("My Div")
 class HTMLPage
-	super Streamable
+	super Writable
 
 	# Define head content
 	fun head do end
@@ -86,7 +86,7 @@ end
 
 # An HTML element.
 class HTMLTag
-	super Streamable
+	super Writable
 
 	# HTML element type.
 	#
