@@ -1996,6 +1996,9 @@ class SeparateRuntimeFunction
 		compiler.names[self.c_name] = "{mmethoddef.full_name} ({mmethoddef.location.file.filename}:{mmethoddef.location.line_start})"
 	end
 
+	# Compile the trampolines used to implement late-binding.
+	#
+	# See `opt_trampoline_call`.
 	fun compile_trampolines(compiler: SeparateCompiler)
 	do
 		var recv = self.mmethoddef.mclassdef.bound_mtype
