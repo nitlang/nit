@@ -124,7 +124,7 @@ if dir != null then
 
 	var v = new HighlightVisitor
 	toolcontext.info("write {dir}/style.css", 1)
-	var f = new OFStream.open("{dir}/style.css")
+	var f = new FileWriter.open("{dir}/style.css")
 	f.write v.css_content
 	f.close
 end

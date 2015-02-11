@@ -1,5 +1,5 @@
 import emscripten
-redef class IFStream
+redef class FileReader
 	redef fun fill_buffer
 	do
 		print "NOT YET IMPLEMENTED"

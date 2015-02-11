@@ -12,17 +12,17 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-var f = new IFStream.open("test_file_read.nit")
+var f = new FileReader.open("test_file_read.nit")
 print f.read_all
 
 print "---"
 
-f = new IFStream.open("test_file_read.nit")
+f = new FileReader.open("test_file_read.nit")
 print f.read_lines.join("\n")
 
 print "---"
 
-f = new IFStream.open("test_file_read.nit")
+f = new FileReader.open("test_file_read.nit")
 print f.each_line.to_a.join("\n")
 
 print "---"

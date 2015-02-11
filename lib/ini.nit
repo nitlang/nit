@@ -32,7 +32,7 @@ module ini
 #    assert config.has_key("foo.bar")
 #    assert config["foo.bar"] == "foobar"
 class ConfigTree
-	super Streamable
+	super Writable
 
 	# The ini file used to read/store data
 	var ini_file: String
@@ -186,7 +186,7 @@ class ConfigTree
 	#     assert config["goo.boo.baz.bar"] == "gooboobazbar"
 	fun load do
 		roots.clear
-		var stream = new IFStream.open(ini_file)
+		var stream = new FileReader.open(ini_file)
 		var path: nullable String = null
 		while not stream.eof do
 			var line = stream.read_line

@@ -39,7 +39,7 @@ class BFInterpreter
 
 	# Create an interpreter for the file located at `path`.
 	init from_file(path: String) do
-		var ifs = new IFStream.open(path)
+		var ifs = new FileReader.open(path)
 		init(ifs.read_all)
 	end
 

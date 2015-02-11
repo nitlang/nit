@@ -52,7 +52,7 @@ redef class WikiEntry
 	fun url: String do return wiki.config.root_url.join_path(breadcrumbs.join("/"))
 
 	# Get a `<a>` template link to `self`
-	fun tpl_link: Streamable do
+	fun tpl_link: Writable do
 		return "<a href=\"{url}\">{title}</a>"
 	end
 end
@@ -215,7 +215,7 @@ redef class WikiArticle
 	end
 
 	# Generate the HTML header for this article.
-	fun tpl_header: Streamable do
+	fun tpl_header: Writable do
 		var file = header_file
 		if not wiki.has_template(file) then return ""
 		return wiki.load_template(file)
@@ -237,7 +237,7 @@ redef class WikiArticle
 	# Generate the HTML summary for this article.
 	#
 	# Based on `headlines`
-	fun tpl_summary: Streamable do
+	fun tpl_summary: Writable do
 		var headlines = self.headlines
 		var tpl = new Template
 		tpl.add "<ul class=\"summary list-unstyled\">"
@@ -265,7 +265,7 @@ redef class WikiArticle
 	end
 
 	# Generate the HTML menu for this article.
-	fun tpl_menu: Streamable do
+	fun tpl_menu: Writable do
 		var file = menu_file
 		if not wiki.has_template(file) then return ""
 		var tpl = wiki.load_template(file)
@@ -288,7 +288,7 @@ redef class WikiArticle
 	end
 
 	# Generate the HTML footer for this article.
-	fun tpl_footer: Streamable do
+	fun tpl_footer: Writable do
 		var file = footer_file
 		if not wiki.has_template(file) then return ""
 		var tpl = wiki.load_template(file)
@@ -342,10 +342,10 @@ class TplArticle
 	super Template
 
 	# Article title.
-	var title: nullable Streamable = null
+	var title: nullable Writable = null
 
 	# Article HTML body.
-	var body: nullable Streamable = null
+	var body: nullable Writable = null
 
 	# Sidebar of this article (if any).
 	var sidebar: nullable TplSidebar = null
@@ -354,7 +354,7 @@ class TplArticle
 	var breadcrumbs: nullable TplBreadcrumbs = null
 
 	# Init `self` with a `title`.
-	init with_title(title: Streamable) do
+	init with_title(title: Writable) do
 		self.title = title
 	end
 
@@ -389,7 +389,7 @@ class TplSidebar
 	super Template
 
 	# Blocks are `Stremable` pieces that will be rendered in the sidebar.
-	var blocks = new Array[Streamable]
+	var blocks = new Array[Writable]
 
 	redef fun rendering do
 		for block in blocks do

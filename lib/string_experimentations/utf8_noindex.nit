@@ -731,7 +731,7 @@ redef class NativeString
 	end
 end
 
-redef class OFStream
+redef class FileWriter
 	redef fun write(s)
 	do
 		assert is_writable

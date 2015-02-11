@@ -575,7 +575,7 @@ class LRAutomaton
 	# Generate a graphviz file of the automaton
 	fun to_dot(path: String)
 	do
-		var f = new OFStream.open(path)
+		var f = new FileWriter.open(path)
 		f.write("digraph g \{\n")
 		f.write("rankdir=LR;\n")
 		f.write("node[shape=Mrecord,height=0];\n")
@@ -622,7 +622,7 @@ class LRAutomaton
 	do
 		var gen = new Generator
 		gen.gen_to_nit(self, name)
-		var f = new OFStream.open(filepath)
+		var f = new FileWriter.open(filepath)
 		for s in gen.out do
 			f.write(s)
 			f.write("\n")

@@ -101,10 +101,10 @@ private class CCompilerOptionsPhase
 				var cmd_args = opt.command
 				var proc
 				if cmd_args.length == 1 then
-					proc = new IProcess.from_a(cmd_args[0], new Array[String])
+					proc = new ProcessReader.from_a(cmd_args[0], new Array[String])
 				else if cmd_args.length > 1 then
 					var rest_args = cmd_args.subarray(1, cmd_args.length-1)
-					proc = new IProcess.from_a(cmd_args[0], rest_args)
+					proc = new ProcessReader.from_a(cmd_args[0], rest_args)
 				else abort
 
 				# wait for its completion

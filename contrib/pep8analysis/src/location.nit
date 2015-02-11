@@ -26,7 +26,7 @@ class SourceFile
 	var string: String
 
 	# Create a new sourcefile using a filename and a stream
-	init(filename: String, stream: IStream)
+	init(filename: String, stream: Reader)
 	do
 		self.filename = filename
 		string = stream.read_all

@@ -32,9 +32,9 @@ in "C Header" `{
 	#include <errno.h>
 `}
 
-# File Abstract Stream
-abstract class FStream
-	super IOS
+# `Stream` used to interact with a File or FileDescriptor
+abstract class FileStream
+	super Stream
 	# The path of the file.
 	var path: nullable String = null
 
@@ -47,7 +47,7 @@ abstract class FStream
 	# File descriptor of this file
 	fun fd: Int do return _file.fileno
 
-	# Sets the buffering mode for the current FStream
+	# Sets the buffering mode for the current FileStream
 	#
 	# If the buf_size is <= 0, its value will be 512 by default
 	#
@@ -58,16 +58,16 @@ abstract class FStream
 	fun set_buffering_mode(buf_size, mode: Int) do
 		if buf_size <= 0 then buf_size = 512
 		if _file.set_buffering_type(buf_size, mode) != 0 then
-			last_error = new IOError("Error while changing buffering type for FStream, returned error {sys.errno.strerror}")
+			last_error = new IOError("Error while changing buffering type for FileStream, returned error {sys.errno.strerror}")
 		end
 	end
 end
 
-# File input stream
-class IFStream
-	super FStream
-	super BufferedIStream
-	super PollableIStream
+# `Stream` that can read from a File
+class FileReader
+	super FileStream
+	super BufferedReader
+	super PollableReader
 	# Misc
 
 	# Open the same file again.
@@ -133,10 +133,10 @@ class IFStream
 	end
 end
 
-# File output stream
-class OFStream
-	super FStream
-	super OStream
+# `Stream` that can write to a File
+class FileWriter
+	super FileStream
+	super Writer
 
 	redef fun write(s)
 	do
@@ -236,7 +236,7 @@ private fun wipe_write: NativeString do return "w".to_cstring
 
 # Standard input stream.
 class Stdin
-	super IFStream
+	super FileReader
 
 	init do
 		_file = new NativeFile.native_stdin
@@ -249,7 +249,7 @@ end
 
 # Standard output stream.
 class Stdout
-	super OFStream
+	super FileWriter
 	init do
 		_file = new NativeFile.native_stdout
 		path = "/dev/stdout"
@@ -259,7 +259,7 @@ end
 
 # Standard error stream.
 class Stderr
-	super OFStream
+	super FileWriter
 	init do
 		_file = new NativeFile.native_stderr
 		path = "/dev/stderr"
@@ -269,11 +269,11 @@ end
 
 ###############################################################################
 
-redef class Streamable
+redef class Writable
 	# Like `write_to` but take care of creating the file
 	fun write_to_file(filepath: String)
 	do
-		var stream = new OFStream.open(filepath)
+		var stream = new FileWriter.open(filepath)
 		write_to(stream)
 		stream.close
 	end
@@ -354,19 +354,19 @@ class Path
 	# Open this file for reading
 	#
 	# Require: `exists and not link_stat.is_dir`
-	fun open_ro: IFStream
+	fun open_ro: FileReader
 	do
 		# TODO manage streams error when they are merged
-		return new IFStream.open(path)
+		return new FileReader.open(path)
 	end
 
 	# Open this file for writing
 	#
 	# Require: `not exists or not stat.is_dir`
-	fun open_wo: OFStream
+	fun open_wo: FileWriter
 	do
 		# TODO manage streams error when they are merged
-		return new OFStream.open(path)
+		return new FileWriter.open(path)
 	end
 
 	# Read all the content of the file
@@ -376,7 +376,7 @@ class Path
 	# print content
 	# ~~~
 	#
-	# See `IStream::read_all` for details.
+	# See `Reader::read_all` for details.
 	fun read_all: String
 	do
 		var s = open_ro
@@ -398,7 +398,7 @@ class Path
 	# end
 	# ~~~
 	#
-	# See `IStream::read_lines` for details.
+	# See `Reader::read_lines` for details.
 	fun read_lines: Array[String]
 	do
 		var s = open_ro
@@ -418,7 +418,7 @@ class Path
 	#
 	# Note: the stream is automatically closed at the end of the file (see `LineIterator::close_on_finish`)
 	#
-	# See `IStream::each_line` for details.
+	# See `Reader::each_line` for details.
 	fun each_line: LineIterator
 	do
 		var s = open_ro
@@ -999,17 +999,17 @@ end
 redef class Sys
 
 	init do
-		if stdout isa FStream then stdout.as(FStream).set_buffering_mode(256, buffer_mode_line)
+		if stdout isa FileStream then stdout.as(FileStream).set_buffering_mode(256, buffer_mode_line)
 	end
 
 	# Standard input
-	var stdin: PollableIStream = new Stdin is protected writable
+	var stdin: PollableReader = new Stdin is protected writable
 
 	# Standard output
-	var stdout: OStream = new Stdout is protected writable
+	var stdout: Writer = new Stdout is protected writable
 
 	# Standard output for errors
-	var stderr: OStream = new Stderr is protected writable
+	var stderr: Writer = new Stderr is protected writable
 
 	# Enumeration for buffer mode full (flushes when buffer is full)
 	fun buffer_mode_full: Int is extern "file_Sys_Sys_buffer_mode_full_0"
@@ -1020,15 +1020,15 @@ redef class Sys
 
 	# returns first available stream to read or write to
 	# return null on interruption (possibly a signal)
-	protected fun poll( streams : Sequence[FStream] ) : nullable FStream
+	protected fun poll( streams : Sequence[FileStream] ) : nullable FileStream
 	do
 		var in_fds = new Array[Int]
 		var out_fds = new Array[Int]
-		var fd_to_stream = new HashMap[Int,FStream]
+		var fd_to_stream = new HashMap[Int,FileStream]
 		for s in streams do
 			var fd = s.fd
-			if s isa IFStream then in_fds.add( fd )
-			if s isa OFStream then out_fds.add( fd )
+			if s isa FileReader then in_fds.add( fd )
+			if s isa FileWriter then out_fds.add( fd )
 
 			fd_to_stream[fd] = s
 		end

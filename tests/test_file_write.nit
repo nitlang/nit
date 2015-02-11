@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-var f = new OFStream.open("out/test_file_write.write")
+var f = new FileWriter.open("out/test_file_write.write")
    f.write("Quatre vingt et un : {421}\n")
    f.write("Une autre ligne\nencore un")
    f.write(['e', '\n'].to_s)

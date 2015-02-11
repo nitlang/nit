@@ -11,10 +11,10 @@
 # You  are  allowed  to  redistribute it and sell it, alone or is a part of
 # another product.
 
-class FilterIStream
-	super IStream
+class FilterReader
+	super Reader
 	# Filter readed elements
-	var stream: nullable IStream = null
+	var stream: nullable Reader = null
 
 	redef fun eof: Bool
 	do
@@ -23,10 +23,10 @@ class FilterIStream
 	end
 end
 
-class FilterOStream
-	super OStream
+class FilterWriter
+	super Writer
 	# Filter outputed elements
-	var stream: nullable OStream = null
+	var stream: nullable Writer = null
 
 	# Can the stream be used to write
 	redef fun is_writable: Bool
@@ -37,8 +37,8 @@ class FilterOStream
 end
 
 class StreamCat
-	super FilterIStream
-	private var streams: Iterator[IStream]
+	super FilterReader
+	private var streams: Iterator[Reader]
 
 	redef fun eof: Bool
 	do
@@ -53,7 +53,7 @@ class StreamCat
 		end
 	end
 
-	redef fun stream: nullable IStream
+	redef fun stream: nullable Reader
 	do
 		var res = super
 		if res == null and _streams.is_ok then
@@ -79,19 +79,19 @@ class StreamCat
 		end
 	end
 
-	init with_streams(streams: Array[IStream])
+	init with_streams(streams: Array[Reader])
 	do
 		_streams = streams.iterator
 	end
 
-	init(streams: IStream ...) is old_style_init do
+	init(streams: Reader ...) is old_style_init do
 		_streams = streams.iterator
 	end
 end
 
 class StreamDemux
-	super FilterOStream
-	private var streams: Array[OStream]
+	super FilterWriter
+	private var streams: Array[Writer]
 
 	redef fun is_writable: Bool
 	do
@@ -128,12 +128,12 @@ class StreamDemux
 		end
 	end
 
-	init with_streams(streams: Array[OStream])
+	init with_streams(streams: Array[Writer])
 	do
 		_streams = streams
 	end
 
-	init(streams: OStream ...) is old_style_init do
+	init(streams: Writer ...) is old_style_init do
 		_streams = streams
 	end
 end

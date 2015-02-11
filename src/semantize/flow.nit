@@ -77,7 +77,7 @@ private class FlowVisitor
 
 	fun printflow
 	do
-		var file = new OFStream.open("flow.dot")
+		var file = new FileWriter.open("flow.dot")
 		file.write("digraph \{\n")
 		for f in flows do
 			var s = ""

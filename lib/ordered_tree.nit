@@ -59,7 +59,7 @@ module ordered_tree
 # This class can be used as it to work with generic trees but can also be specialized to provide more specific
 # behavior or display. It is why the internal attributes are mutable.
 class OrderedTree[E: Object]
-	super Streamable
+	super Writable
 	super Collection[E]
 
 	# The roots of the tree (in sequence)
@@ -85,7 +85,7 @@ class OrderedTree[E: Object]
 
 	# print the full tree on `o`
 	# Write a ASCII-style tree and use the `display` method to label elements
-	redef fun write_to(stream: OStream)
+	redef fun write_to(stream: Writer)
 	do
 		for r in roots do
 			stream.write display(r)
@@ -94,7 +94,7 @@ class OrderedTree[E: Object]
 		end
 	end
 
-	private fun sub_write_to(o: OStream, e: E, prefix: String)
+	private fun sub_write_to(o: Writer, e: E, prefix: String)
 	do
 		if not sub.has_key(e) then return
 		var subs = sub[e]

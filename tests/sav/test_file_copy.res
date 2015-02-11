@@ -21,6 +21,6 @@ var src = "test_file_copy.nit"
 var dst = "{dir}/copy.nit"
 src.file_copy_to dst
 
-var file = new IFStream.open(dst)
+var file = new FileReader.open(dst)
 printn file.read_all
 file.close

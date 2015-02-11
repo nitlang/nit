@@ -44,7 +44,7 @@ import graph
 # b.labels.add "Bar"
 # graph.edges.add new NeoEdge(a, "BAZ", b)
 #
-# var ostream = new StringOStream
+# var ostream = new StringWriter
 # var store = new JsonGraphStore(graph)
 # store.ostream = ostream
 # store.save
@@ -57,7 +57,7 @@ import graph
 #
 # graph.nodes.clear
 # graph.edges.clear
-# store.istream = new StringIStream(ostream.to_s)
+# store.istream = new StringReader(ostream.to_s)
 # store.load
 # assert 1 == graph.edges.length
 # for edge in graph.edges do
@@ -73,13 +73,13 @@ class JsonGraphStore
 	super GraphStore
 
 	# The stream to use for `load`.
-	var istream: nullable IStream = null is writable
+	var istream: nullable Reader = null is writable
 
 	# The stream to use for `save` and `save_part`.
-	var ostream: nullable OStream = null is writable
+	var ostream: nullable Writer = null is writable
 
-	# Use the specified `IOStream`.
-	init from_io(graph: NeoGraph, iostream: IOStream) do
+	# Use the specified `Duplex`.
+	init from_io(graph: NeoGraph, iostream: Duplex) do
 		init(graph)
 		istream = iostream
 		ostream = iostream
@@ -88,14 +88,14 @@ class JsonGraphStore
 	# Use the specified string to load the graph.
 	init from_string(graph: NeoGraph, string: String) do
 		init(graph)
-		istream = new StringIStream(string)
+		istream = new StringReader(string)
 	end
 
 	redef fun isolated_save do return true
 
 	redef fun load do
 		var istream = self.istream
-		assert istream isa IStream
+		assert istream isa Reader
 		fire_started
 		graph.load_json(istream.read_all)
 		fire_done
@@ -103,7 +103,7 @@ class JsonGraphStore
 
 	redef fun save_part(nodes, edges) do
 		var ostream = self.ostream
-		assert ostream isa OStream
+		assert ostream isa Writer
 		fire_started
 		ostream.write(graph.to_json)
 		fire_done

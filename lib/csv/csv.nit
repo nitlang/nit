@@ -53,7 +53,7 @@ end
 
 # A CSV document representation.
 class CsvDocument
-	super Streamable
+	super Writable
 
 	# The format to use.
 	#
@@ -103,7 +103,7 @@ class CsvDocument
 	# * `has_header`: Is the first row the header?
 	# * `skip_empty`: Do we skip the empty lines?
 	# For details, see `CsvReader.skip_empty`.
-	fun load_from(stream: IStream, has_header: Bool, skip_empty: Bool) do
+	fun load_from(stream: Reader, has_header: Bool, skip_empty: Bool) do
 		var reader = new CsvReader.with_format(stream, format)
 		reader.skip_empty = skip_empty
 		if has_header then
@@ -125,7 +125,7 @@ class CsvDocument
 	# * `has_header`: Is the first row the header?
 	# * `skip_empty`: Do we skip the empty lines?
 	fun load(path: String, has_header: Bool, skip_empty: Bool) do
-		var istream = new IFStream.open(path)
+		var istream = new FileReader.open(path)
 		load_from(istream, has_header, skip_empty)
 		istream.close
 	end
@@ -141,7 +141,7 @@ end
 # delimiters by some parsers.
 #
 # ~~~nit
-# var out = new StringOStream
+# var out = new StringWriter
 # var writer = new CsvWriter(out)
 # writer.write_row(1, 2.0, "foo\nbar")
 # writer.write_sequence([""])
@@ -150,7 +150,7 @@ end
 class CsvWriter
 
 	# The output stream.
-	var ostream: OStream
+	var ostream: Writer
 
 	# The format to use.
 	#
@@ -168,7 +168,7 @@ class CsvWriter
 	var always_escape = false is writable
 
 	# Create a new writer with the specified format.
-	init with_format(ostream:OStream, format: CsvFormat) do
+	init with_format(ostream:Writer, format: CsvFormat) do
 		self.ostream = ostream
 		self.format = format
 	end
@@ -213,7 +213,7 @@ end
 # By default, uses the format recommended by RFC 4180 (see `rfc4180`).
 #
 # ~~~nit
-# var example = new StringIStream("""
+# var example = new StringReader("""
 # foo,bar\r
 # "Hello, word!",1234.5 + 42\r
 # "Something\r
@@ -233,7 +233,7 @@ class CsvReader
 	super Iterator[Array[String]]
 
 	# The input stream.
-	var istream: IStream
+	var istream: Reader
 
 	# The format to use.
 	#
@@ -259,7 +259,7 @@ class CsvReader
 	private var started = false
 
 	# Create a new reader with the specified format.
-	init with_format(istream:IStream, format: CsvFormat) do
+	init with_format(istream:Reader, format: CsvFormat) do
 		self.istream = istream
 		self.format = format
 	end

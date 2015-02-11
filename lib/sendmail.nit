@@ -74,7 +74,7 @@ class Mail
 		all.add_all cc
 		all.add_all bcc
 
-		var proc = new OProcess("sendmail", all.join(","))
+		var proc = new ProcessWriter("sendmail", all.join(","))
 		if proc.is_writable then proc.write to_s
 		proc.close
 		proc.wait

@@ -41,9 +41,9 @@ end
 # Simple communication stream with a remote socket
 class TCPStream
 	super Socket
-	super BufferedIStream
-	super OStream
-	super PollableIStream
+	super BufferedReader
+	super Writer
+	super PollableReader
 
 	# Real canonical name of the host to which `self` is connected
 	var host: String

@@ -27,7 +27,7 @@ redef class MDoc
 	var full_comment: String is lazy do return content.join("\n").html_escape
 
 	# Synopsys in a template
-	var tpl_short_comment: Streamable is lazy do
+	var tpl_short_comment: Writable is lazy do
 		var res = new Template
 		var syn = nitdoc_inline_processor.process(content.first)
 		res.add "<span class=\"synopsys nitdoc\">{syn}</span>"
@@ -36,7 +36,7 @@ redef class MDoc
 	end
 
 	# Full comment in a template
-	var tpl_comment: Streamable is lazy do
+	var tpl_comment: Writable is lazy do
 		var res = new Template
 		var lines = content.to_a
 		res.add "<div class=\"nitdoc\">"

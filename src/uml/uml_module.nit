@@ -20,7 +20,7 @@ import uml_class
 
 redef class UMLModel
 	# Generates a UML package diagram from a `Model`
-	fun generate_package_uml: Streamable do
+	fun generate_package_uml: Writable do
 		var tpl = new Template
 		tpl.add "digraph G \{\n"
 		tpl.add """	fontname = "Bitstream Vera Sans"
@@ -42,7 +42,7 @@ end
 
 redef class Model
 	# Returns a UML package diagram of `main`
-	fun tpl_module(ctx: ToolContext, main: MModule): Streamable do
+	fun tpl_module(ctx: ToolContext, main: MModule): Writable do
 		return main.tpl_module(ctx, main)
 	end
 end
@@ -63,7 +63,7 @@ end
 
 redef class MEntity
 	# Builds a dot UML package diagram entity from `self`
-	fun tpl_module(ctx: ToolContext, main: MModule): Streamable is abstract
+	fun tpl_module(ctx: ToolContext, main: MModule): Writable is abstract
 end
 
 redef class MClassDef

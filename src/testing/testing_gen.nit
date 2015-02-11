@@ -101,7 +101,7 @@ class NitUnitGenerator
 	var nodot: Array[String] = ["+", "-", "*", "/", "%", "==", "!=", "<", "<=", "<=>", ">", ">=", ">"]
 
 	# Generate subject init.
-	private fun gen_init(mclassdef: MClassDef): Streamable do
+	private fun gen_init(mclassdef: MClassDef): Writable do
 		if mclassdef.mclass.arity == 0 then
 			return "\t\tvar subject: {mclassdef.name}"
 		end
@@ -116,7 +116,7 @@ class NitUnitGenerator
 	end
 
 	# Generate call to `method` using `args`.
-	private fun gen_call(method: MMethodDef, args: Array[String]): Streamable do
+	private fun gen_call(method: MMethodDef, args: Array[String]): Writable do
 		# Here we handle the magic of the Nit syntax, have fun :)
 		var name = method.name
 		if name == "[]" then return "subject[{args.join(", ")}]"

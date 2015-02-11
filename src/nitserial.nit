@@ -36,16 +36,16 @@ import template
 class NitModule
 	super Template
 
-	var header: nullable Streamable = null
+	var header: nullable Writable = null
 
 	# The module's name
-	var name: Streamable
+	var name: Writable
 
 	# Imports from this module
-	var imports = new Array[Streamable]
+	var imports = new Array[Writable]
 
 	# Main content of this module
-	var content = new Array[Streamable]
+	var content = new Array[Writable]
 
 	redef fun rendering
 	do

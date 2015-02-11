@@ -401,7 +401,7 @@ abstract class Text
 	#    assert "\r\n\r\n".chomp == "\r\n"
 	#    assert "\r\n\r".chomp   == "\r\n"
 	#
-	# Note: unlike with most IO methods like `IStream::read_line`,
+	# Note: unlike with most IO methods like `Reader::read_line`,
 	# a single `\r` is considered here to be a line terminator and will be removed.
 	fun chomp: SELFTYPE
 	do

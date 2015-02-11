@@ -339,7 +339,7 @@ class BinTreeMap[K: Comparable, E]
 
 	redef fun show_dot do
 		assert not_empty: root != null
-		var f = new OProcess("dot", "-Txlib")
+		var f = new ProcessWriter("dot", "-Txlib")
 		f.write "digraph \{\n"
 		dot_down(root.as(not null), f)
 		f.write "\}\n"
@@ -347,7 +347,7 @@ class BinTreeMap[K: Comparable, E]
 	end
 
 	# Translate the tree in dot format starting from `node`.
-	protected fun dot_down(node: N, f: OProcess) do
+	protected fun dot_down(node: N, f: ProcessWriter) do
 		if node.left != null then dot_down(node.left.as(not null), f)
 		f.write node.to_dot
 		if node.right != null then dot_down(node.right.as(not null), f)

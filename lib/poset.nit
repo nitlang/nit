@@ -228,7 +228,7 @@ class POSet[E]
 	#
 	# Nodes are labeled with their `to_s` so homonymous nodes may appear.
 	# Edges are unlabeled.
-	fun write_dot(f: OStream)
+	fun write_dot(f: Writer)
 	do
 		f.write "digraph \{\n"
 		var ids = new HashMap[E, Int]
@@ -258,7 +258,7 @@ class POSet[E]
 	# See `write_dot` for details.
 	fun show_dot
 	do
-		var f = new OProcess("dot", "-Txlib")
+		var f = new ProcessWriter("dot", "-Txlib")
 		write_dot(f)
 		f.close
 		f.wait

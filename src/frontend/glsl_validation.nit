@@ -62,7 +62,7 @@ private class GLSLValidationPhase
 			if not in_path then return
 		else
 			# Is _glslangValidator_ installed?
-			var proc_which = new IProcess("which", "glslangValidator")
+			var proc_which = new ProcessReader("which", "glslangValidator")
 			proc_which.wait
 			proc_which.close
 			var status = proc_which.status
@@ -91,7 +91,7 @@ private class GLSLValidationPhase
 		shader.write_to_file path
 
 		# Execute the validator
-		var proc_validator = new IProcess("glslangValidator", path)
+		var proc_validator = new ProcessReader("glslangValidator", path)
 		proc_validator.wait
 		var lines = proc_validator.read_all.split('\n')
 		proc_validator.close

@@ -124,7 +124,7 @@ var tests = new Array[Serializable].with_items(a, b, c, d, e, fi, ff)
 #alt1# tests = new Array[Serializable].with_items(a, b, c, d)
 
 for o in tests do
-	var stream = new StringOStream
+	var stream = new StringWriter
 	var serializer = new JsonSerializer(stream)
 	serializer.serialize(o)
 

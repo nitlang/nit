@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-var ifs = new IFStream.open("donotcreate.bing")
+var ifs = new FileReader.open("donotcreate.bing")
 
 var s = ifs.read_all
 

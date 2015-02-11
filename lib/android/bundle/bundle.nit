@@ -672,7 +672,7 @@ redef class Serializable
 	protected fun add_to_bundle(bundle: NativeBundle, key: JavaString)
 	do
 		sys.jni_env.push_local_frame(1)
-		var serialized_string = new StringOStream
+		var serialized_string = new StringWriter
 		var serializer = new JsonSerializer(serialized_string)
 		serializer.serialize(self)
 
@@ -740,7 +740,7 @@ redef class Array[E]
 			var java_string_array = new Array[JavaString]
 
 			for element in self do
-			var serialized_string = new StringOStream
+			var serialized_string = new StringWriter
 				var serializer = new JsonSerializer(serialized_string)
 				serializer.serialize(element)
 				java_string_array.add(serialized_string.to_s.to_java_string)

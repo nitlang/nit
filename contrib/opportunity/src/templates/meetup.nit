@@ -266,7 +266,7 @@ end
 
 redef class Meetup
 	# Build the HTML for `self`
-	fun to_html(db: OpportunityDB): Streamable do
+	fun to_html(db: OpportunityDB): Writable do
 		var t = new Template
 		t.add """
 <div class="container">

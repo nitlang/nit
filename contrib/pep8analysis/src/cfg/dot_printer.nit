@@ -1,7 +1,7 @@
 import cfg_base
 
 redef class CFG
-	fun print_dot( f: OStream, long: Bool )
+	fun print_dot( f: Writer, long: Bool )
 	do
 		f.write("digraph \{\n")
 		f.write("charset=latin1\n")
@@ -13,7 +13,7 @@ redef class CFG
 end
 
 redef class BasicBlock
-	fun print_dot_nodes( f: OStream, long: Bool )
+	fun print_dot_nodes( f: Writer, long: Bool )
 	do
 		var lbl = "\"{name}:\\n{dot_node_text(long)}\""
 		f.write( "{name} [label={lbl}]\n" )
@@ -36,7 +36,7 @@ redef class BasicBlock
 	fun dot_node_header: String do return ""
 	fun dot_node_footer: String do return ""
 
-	fun print_dot_edges( f: OStream, long: Bool )
+	fun print_dot_edges( f: Writer, long: Bool )
 	do
 		for s in successors do
 			f.write( "{name} -> {s.name}\n" )

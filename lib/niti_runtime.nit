@@ -45,7 +45,7 @@ redef class Sys
 	do
 		if args.is_empty then exit(0)
 		stdin.close
-		stdin = new IFStream.open(args.shift)
+		stdin = new FileReader.open(args.shift)
 	end
 
 	# The next line to process by the main program

@@ -16,9 +16,9 @@
 
 import file
 
-var fd_in = new IFStream.from_fd(0)
-var fd_out = new OFStream.from_fd(1)
-var fd_err = new OFStream.from_fd(2)
+var fd_in = new FileReader.from_fd(0)
+var fd_out = new FileWriter.from_fd(1)
+var fd_err = new FileWriter.from_fd(2)
 
 fd_out.write("Hello\n")
 

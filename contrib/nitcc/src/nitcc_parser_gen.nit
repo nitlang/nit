@@ -198,6 +198,6 @@ a.to_dot("nitcc0.lr.dot")
 
 a.gen_to_nit("nitcc_parser.nit", "nitcc")
 
-var f = new OFStream.open("nitcc_lexer.nit")
+var f = new FileWriter.open("nitcc_lexer.nit")
 f.write("import nitcc_lexer0\n")
 f.close

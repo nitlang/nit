@@ -118,7 +118,7 @@ class MarkdownProcessor
 	init do self.emitter = new MarkdownEmitter(self)
 
 	# Process the mardown `input` string and return the processed output.
-	fun process(input: String): Streamable do
+	fun process(input: String): Writable do
 		# init processor
 		link_refs.clear
 		last_link_ref = null
@@ -537,7 +537,7 @@ class MarkdownEmitter
 	end
 
 	# Append `e` to current buffer.
-	fun add(e: Streamable) do
+	fun add(e: Writable) do
 		if e isa Text then
 			current_buffer.append e
 		else
@@ -2442,7 +2442,7 @@ redef class String
 	#    var md = "**Hello World!**"
 	#    var html = md.md_to_html
 	#    assert html == "<p><strong>Hello World!</strong></p>\n"
-	fun md_to_html: Streamable do
+	fun md_to_html: Writable do
 		var processor = new MarkdownProcessor
 		return processor.process(self)
 	end

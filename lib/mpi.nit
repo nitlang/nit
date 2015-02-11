@@ -85,7 +85,7 @@ class MPI
 	fun send(data: nullable Serializable, dest: Rank, tag: Tag, comm: Comm)
 	do
 		# Serialize data
-		var stream = new StringOStream
+		var stream = new StringWriter
 		var serializer = new JsonSerializer(stream)
 		serializer.serialize(data)
 

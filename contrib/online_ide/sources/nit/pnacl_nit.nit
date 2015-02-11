@@ -63,8 +63,8 @@ redef class ToolContext
 	end
 end
 
-# We have to redef some IFStream methods because we don't use NativeFiles anymore.
-redef class IFStream
+# We have to redef some FileReader methods because we don't use NativeFiles anymore.
+redef class FileReader
 
 	# Looks in the 'files' HashMap.
 	redef init open(path: String)

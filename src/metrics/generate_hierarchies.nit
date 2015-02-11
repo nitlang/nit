@@ -77,7 +77,7 @@ do
 		end
 	end
 	buf.append("\}\n")
-	var f = new OFStream.open(toolcontext.output_dir.join_path("class_hierarchy.dot"))
+	var f = new FileWriter.open(toolcontext.output_dir.join_path("class_hierarchy.dot"))
 	f.write(buf.to_s)
 	f.close
 end
@@ -99,7 +99,7 @@ do
 		end
 	end
 	buf.append("\}\n")
-	var f = new OFStream.open(toolcontext.output_dir.join_path("classdef_hierarchy.dot"))
+	var f = new FileWriter.open(toolcontext.output_dir.join_path("classdef_hierarchy.dot"))
 	f.write(buf.to_s)
 	f.close
 end

@@ -630,9 +630,9 @@ end
 
 # A stream for PNaCl, redefines basic input and output methods.
 class PnaclStream
-	super PollableIStream
-	super OStream
-	super BufferedIStream
+	super PollableReader
+	super Writer
+	super BufferedReader
 
 	init do prepare_buffer(10)
 

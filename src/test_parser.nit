@@ -115,7 +115,7 @@ else
 		if no_file then
 			source = new SourceFile.from_string("", a)
 		else
-			var f = new IFStream.open(a)
+			var f = new FileReader.open(a)
 			source = new SourceFile(a, f)
 			f.close
 		end

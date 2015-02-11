@@ -144,7 +144,7 @@ var files
 if opt_recursive.value then
 	files = new Array[String]
 	for d in tc.option_context.rest do
-		var pipe = new IProcess("find", d, "-name", "*.nit")
+		var pipe = new ProcessReader("find", d, "-name", "*.nit")
 		while not pipe.eof do
 			var l = pipe.read_line
 			if l == "" then break # last line

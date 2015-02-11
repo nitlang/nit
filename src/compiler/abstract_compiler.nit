@@ -212,7 +212,7 @@ class MakefileToolchain
 
 		var hfilename = compiler.header.file.name + ".h"
 		var hfilepath = "{compile_dir}/{hfilename}"
-		var h = new OFStream.open(hfilepath)
+		var h = new FileWriter.open(hfilepath)
 		for l in compiler.header.decl_lines do
 			h.write l
 			h.write "\n"
@@ -227,7 +227,7 @@ class MakefileToolchain
 		for f in compiler.files do
 			var i = 0
 			var count = 0
-			var file: nullable OFStream = null
+			var file: nullable FileWriter = null
 			for vis in f.writers do
 				if vis == compiler.header then continue
 				var total_lines = vis.lines.length + vis.decl_lines.length
@@ -240,7 +240,7 @@ class MakefileToolchain
 					var cfilepath = "{compile_dir}/{cfilename}"
 					self.toolcontext.info("new C source files to compile: {cfilepath}", 3)
 					cfiles.add(cfilename)
-					file = new OFStream.open(cfilepath)
+					file = new FileWriter.open(cfilepath)
 					file.write "#include \"{f.name}.0.h\"\n"
 					count = total_lines
 				end
@@ -258,8 +258,8 @@ class MakefileToolchain
 
 			var cfilename = "{f.name}.0.h"
 			var cfilepath = "{compile_dir}/{cfilename}"
-			var hfile: nullable OFStream = null
-			hfile = new OFStream.open(cfilepath)
+			var hfile: nullable FileWriter = null
+			hfile = new FileWriter.open(cfilepath)
 			hfile.write "#include \"{hfilename}\"\n"
 			for key in f.required_declarations do
 				if not compiler.provided_declarations.has_key(key) then
@@ -321,7 +321,7 @@ class MakefileToolchain
 		end
 		var makename = makefile_name(mainmodule)
 		var makepath = "{compile_dir}/{makename}"
-		var makefile = new OFStream.open(makepath)
+		var makefile = new FileWriter.open(makepath)
 
 		var linker_options = new HashSet[String]
 		for m in mainmodule.in_importation.greaters do
@@ -371,7 +371,7 @@ class MakefileToolchain
 		if not compiler.linker_script.is_empty then
 			var linker_script_path = "{compile_dir}/linker_script"
 			ofiles.add "linker_script"
-			var f = new OFStream.open(linker_script_path)
+			var f = new FileWriter.open(linker_script_path)
 			for l in compiler.linker_script do
 				f.write l
 				f.write "\n"
@@ -546,7 +546,7 @@ abstract class AbstractCompiler
 	do
 		var compile_dir = modelbuilder.compile_dir
 
-		var stream = new OFStream.open("{compile_dir}/c_functions_hash.c")
+		var stream = new FileWriter.open("{compile_dir}/c_functions_hash.c")
 		stream.write("#include <string.h>\n")
 		stream.write("#include <stdlib.h>\n")
 		stream.write("#include \"c_functions_hash.h\"\n")
@@ -576,7 +576,7 @@ abstract class AbstractCompiler
 		stream.write("\}\n")
 		stream.close
 
-		stream = new OFStream.open("{compile_dir}/c_functions_hash.h")
+		stream = new FileWriter.open("{compile_dir}/c_functions_hash.h")
 		stream.write("const char* get_nit_name(register const char* procname, register unsigned int len);\n")
 		stream.close
 

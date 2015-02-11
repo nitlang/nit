@@ -156,7 +156,7 @@ redef class AAnnotation
 				value = arg.as_id
 				if value == "git_revision" then
 					# Get Git short revision
-					var proc = new IProcess("git", "rev-parse", "--short", "HEAD")
+					var proc = new ProcessReader("git", "rev-parse", "--short", "HEAD")
 					proc.wait
 					assert proc.status == 0
 					var lines = proc.read_all
@@ -164,7 +164,7 @@ redef class AAnnotation
 
 					# Is it dirty?
 					# If not, the return of `git diff --shortstat` is an empty line
-					proc = new IProcess("git", "diff-index", "--quiet", "HEAD")
+					proc = new ProcessReader("git", "diff-index", "--quiet", "HEAD")
 					proc.wait
 					var dirty = proc.status != 0
 					if dirty then revision += ".d"

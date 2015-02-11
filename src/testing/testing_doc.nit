@@ -144,7 +144,7 @@ class NitUnitExecutor
 		var dir = file.dirname
 		if dir != "" then dir.mkdir
 		var f
-		f = new OFStream.open(file)
+		f = new FileWriter.open(file)
 		f.write("# GENERATED FILE\n")
 		f.write("# Docunits extracted from comments\n")
 		f.write("import {mmodule.name}\n")
@@ -193,7 +193,7 @@ class NitUnitExecutor
 			var res2 = sys.system("{file.to_program_name}.bin {i} >>'{file}.out1' 2>&1 </dev/null")
 
 			var msg
-			f = new IFStream.open("{file}.out1")
+			f = new FileReader.open("{file}.out1")
 			var n2
 			n2 = new HTMLTag("system-err")
 			tc.add n2
@@ -232,7 +232,7 @@ class NitUnitExecutor
 		var dir = file.dirname
 		if dir != "" then dir.mkdir
 		var f
-		f = new OFStream.open(file)
+		f = new FileWriter.open(file)
 		f.write("# GENERATED FILE\n")
 		f.write("# Example extracted from a documentation\n")
 		f.write("import {mmodule.name}\n")
@@ -256,7 +256,7 @@ class NitUnitExecutor
 		end
 
 		var msg
-		f = new IFStream.open("{file}.out1")
+		f = new FileReader.open("{file}.out1")
 		var n2
 		n2 = new HTMLTag("system-err")
 		tc.add n2

@@ -197,7 +197,7 @@ class TestSuite
 		var include_dir = mmodule.location.file.filename.dirname
 		var cmd = "{nitg} --no-color '{file}.nit' -I {include_dir} -o '{file}.bin' > '{file}.out' 2>&1 </dev/null"
 		var res = sys.system(cmd)
-		var f = new IFStream.open("{file}.out")
+		var f = new FileReader.open("{file}.out")
 		var msg = f.read_all
 		f.close
 		# set test case result
@@ -257,7 +257,7 @@ class TestCase
 		var test_file = test_suite.test_file
 		var res_name = "{test_file}_{method_name.escape_to_c}"
 		var res = sys.system("{test_file}.bin {method_name} > '{res_name}.out1' 2>&1 </dev/null")
-		var f = new IFStream.open("{res_name}.out1")
+		var f = new FileReader.open("{res_name}.out1")
 		var msg = f.read_all
 		f.close
 		# set test case result

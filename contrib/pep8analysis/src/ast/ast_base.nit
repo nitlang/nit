@@ -4,11 +4,11 @@ import parser
 redef class AnalysisManager
 	fun build_ast_from_file( filename : String ) : nullable AListing
 	do
-		var file = new IFStream.open( filename )
+		var file = new FileReader.open( filename )
 		return build_ast(filename, file)
 	end
 
-	fun build_ast(filename: String, stream: IStream): nullable AListing
+	fun build_ast(filename: String, stream: Reader): nullable AListing
 	do
 		var source = new SourceFile(filename, stream)
 		var lexer = new Lexer(source)

@@ -588,6 +588,6 @@ abstract class SAXTestSuite
 
 	# Make the reader parse the specified string
 	fun parse_string(str: String) do
-		actual.parse(new InputSource.with_stream(new StringIStream(str)))
+		actual.parse(new InputSource.with_stream(new StringReader(str)))
 	end
 end

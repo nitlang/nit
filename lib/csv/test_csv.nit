@@ -31,7 +31,7 @@ class TestCsvWriter
 	private fun expect(always_escape: Bool, row: SequenceRead[String],
 			expected_rfc4180: String,
 			expected_custom: String) do
-		var out = new StringOStream
+		var out = new StringWriter
 		var writer = new CsvWriter(out)
 
 		writer.always_escape = always_escape
@@ -43,7 +43,7 @@ class TestCsvWriter
 		end
 		writer.close
 
-		out = new StringOStream
+		out = new StringWriter
 		writer = new CsvWriter.with_format(out, custom_format)
 		writer.always_escape = always_escape
 		writer.write_sequence(row)
@@ -103,15 +103,15 @@ class TestCsvReader
 			input_rfc4180: String,
 			input_custom: String,
 			expected: SequenceRead[SequenceRead[String]]) do
-		var istream: IStream
+		var istream: Reader
 		var reader: CsvReader
 
-		istream = new StringIStream(input_rfc4180)
+		istream = new StringReader(input_rfc4180)
 		reader = new CsvReader(istream)
 		reader.skip_empty = skip_empty
 		assert_table_equals("RFC 4180", reader, expected.iterator)
 
-		istream = new StringIStream(input_custom)
+		istream = new StringReader(input_custom)
 		reader = new CsvReader.with_format(istream, custom_format)
 		reader.skip_empty = skip_empty
 		assert_table_equals("{custom_format.delimiter} " +

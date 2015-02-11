@@ -136,7 +136,7 @@ end
 # return "" if no such a key
 fun get_github_oauth: String
 do
-	var p = new IProcess("git", "config", "--get", "github.oauthtoken")
+	var p = new ProcessReader("git", "config", "--get", "github.oauthtoken")
 	var token = p.read_line
 	p.wait
 	p.close

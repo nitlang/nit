@@ -113,7 +113,7 @@ class Nitiwiki
 	# List markdown source files from a directory.
 	fun list_md_files(dir: String): Array[String] do
 		var files = new Array[String]
-		var pipe = new IProcess("find", dir, "-name", "*.md")
+		var pipe = new ProcessReader("find", dir, "-name", "*.md")
 		while not pipe.eof do
 			var file = pipe.read_line
 			if file == "" then break # last line
@@ -512,7 +512,7 @@ class WikiArticle
 	# Page content.
 	#
 	# What you want to be displayed in the page.
-	var content: nullable Streamable = null
+	var content: nullable Writable = null
 
 	# Headlines ids and titles.
 	var headlines = new ArrayMap[String, HeadLine]
@@ -540,7 +540,7 @@ class WikiArticle
 	# REQUIRE: `has_source`.
 	fun md: String is cached do
 		assert has_source
-		var file = new IFStream.open(src_full_path.to_s)
+		var file = new FileReader.open(src_full_path.to_s)
 		var md = file.read_all
 		file.close
 		return md

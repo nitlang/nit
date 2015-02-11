@@ -130,7 +130,7 @@ class JsonStore
 	private fun store_json(key: String, json: Jsonable) do
 		var path = store_dir / "{key}.json"
 		path.dirname.mkdir
-		var file = new OFStream.open(path)
+		var file = new FileWriter.open(path)
 		file.write(json.to_json)
 		file.close
 	end
@@ -151,7 +151,7 @@ class JsonStore
 	private fun load_json(key: String): nullable Jsonable do
 		assert has_key(key)
 		var path = store_dir / "{key}.json"
-		var file = new IFStream.open(path)
+		var file = new FileReader.open(path)
 		var text = file.read_all
 		file.close
 		return text.parse_json

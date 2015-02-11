@@ -60,10 +60,10 @@ class FileServer
 	end
 
 	# Error page template for a given `code`
-	fun error_page(code: Int): Streamable do return new ErrorTemplate(code)
+	fun error_page(code: Int): Writable do return new ErrorTemplate(code)
 
 	# Header of each directory page
-	var header: nullable Streamable = null is writable
+	var header: nullable Writable = null is writable
 
 	redef fun answer(request, turi)
 	do
@@ -145,7 +145,7 @@ class FileServer
 					response.header["Content-Type"] = media_types["html"].as(not null)
 				else
 					# It's a single file
-					var file = new IFStream.open(local_file)
+					var file = new FileReader.open(local_file)
 					response.body = file.read_all
 
 					var ext = local_file.file_extension

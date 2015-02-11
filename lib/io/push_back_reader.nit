@@ -13,7 +13,7 @@ module io::push_back_reader
 
 # Input stream that permits to push bytes back to the stream.
 class PushBackReader
-	super IStream
+	super Reader
 
 	# Push the specified byte back to the stream.
 	#
@@ -35,7 +35,7 @@ class PushBackDecorator
 	super PushBackReader
 
 	# The parent stream.
-	var parent: IStream
+	var parent: Reader
 
 	# The stack of the pushed-back bytes.
 	#

@@ -112,7 +112,7 @@ class Benitlux
 		generate_email(beer_events)
 
 		# Save as sample email to file
-		var f = new OFStream.open(sample_email_path)
+		var f = new FileWriter.open(sample_email_path)
 		f.write email_title + "\n"
 		for line in email_content do f.write line + "\n"
 		f.close

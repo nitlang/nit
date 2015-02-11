@@ -186,7 +186,7 @@ do
 		end
 	end
 	buf.append("</body></html>\n")
-	var f = new OFStream.open(toolcontext.output_dir.join_path("model.html"))
+	var f = new FileWriter.open(toolcontext.output_dir.join_path("model.html"))
 	f.write(buf.to_s)
 	f.close
 end

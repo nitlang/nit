@@ -20,7 +20,7 @@ intrude import standard::string
 # Wrapper for `NativeFile`
 class PrimitiveNativeFile
 
-	var file: IOS
+	var file: Stream
 
 	init native_stdin do
 		file = sys.stdin
@@ -35,49 +35,49 @@ class PrimitiveNativeFile
 	end
 
 	init io_open_read(path: String) do
-		file = new IFStream.open(path.to_s)
+		file = new FileReader.open(path.to_s)
 	end
 
 	init io_open_write(path: String) do
-		file = new OFStream.open(path.to_s)
+		file = new FileWriter.open(path.to_s)
 	end
 
 	fun address_is_null: Bool do
-		if file isa FStream then return file.as(FStream)._file.address_is_null
+		if file isa FileStream then return file.as(FileStream)._file.address_is_null
 		return false
 	end
 
 	fun io_read(buf: NativeString, len: Int): Int do
-		if file isa FStream then return file.as(FStream)._file.io_read(buf, len)
-		var str = file.as(IStream).read(len)
+		if file isa FileStream then return file.as(FileStream)._file.io_read(buf, len)
+		var str = file.as(Reader).read(len)
 		str.to_cstring.copy_to(buf, str.length, 0, 0)
 		return str.length
 	end
 
 	fun io_write(buf: NativeString, len: Int): Int do
-		if file isa FStream then return file.as(FStream)._file.io_write(buf, len)
-		file.as(OStream).write(buf.to_s_with_length(len))
+		if file isa FileStream then return file.as(FileStream)._file.io_write(buf, len)
+		file.as(Writer).write(buf.to_s_with_length(len))
 		return len
 	end
 
 	fun io_close: Int do
-		if file isa FStream then return file.as(FStream)._file.io_close
+		if file isa FileStream then return file.as(FileStream)._file.io_close
 		file.close
 		return 0
 	end
 
 	fun fileno: Int do
-		if file isa FStream then return file.as(FStream)._file.fileno
+		if file isa FileStream then return file.as(FileStream)._file.fileno
 		return 0
 	end
 
 	fun flush: Int do
-		if file isa FStream then return file.as(FStream)._file.flush
+		if file isa FileStream then return file.as(FileStream)._file.flush
 		return 0
 	end
 
 	fun set_buffering_type(size, mode: Int): Int do
-		if file isa FStream then return file.as(FStream)._file.set_buffering_type(size, mode)
+		if file isa FileStream then return file.as(FileStream)._file.set_buffering_type(size, mode)
 		return 0
 	end
 end

@@ -115,7 +115,7 @@ redef class ModelBuilder
 end
 
 redef class Sys
-	private fun set_io(istream: PollableIStream, ostream: OStream, errstream: OStream)
+	private fun set_io(istream: PollableReader, ostream: Writer, errstream: Writer)
 	do
 		self.stdin = istream
 		self.stdout = ostream

@@ -60,7 +60,7 @@ private import lexer
 #     var reader = new XophonReader
 #     #
 #     reader.content_handler = text
-#     reader.parse(new InputSource.with_stream(new StringIStream("<foo>bar baz <n>42</n>.</foo>")))
+#     reader.parse(new InputSource.with_stream(new StringReader("<foo>bar baz <n>42</n>.</foo>")))
 #     assert text.to_s == "bar baz 42."
 class XophonReader
 	super XMLReader
@@ -147,7 +147,7 @@ class XophonReader
 				model.fire_fatal_error("File <{input.system_id.as(not null)}> not found.", null)
 			else
 				lexer = new XophonLexer(model,
-						new IFStream.open(system_id.value))
+						new FileReader.open(system_id.value))
 				parse_main
 				lexer.close
 			end

@@ -25,7 +25,7 @@ class XophonLexer
 	var reader_model: XophonReaderModel
 
 	# The input to read from.
-	var input: IStream is writable
+	var input: Reader is writable
 
 	# Alias to `reader_model.locator`.
 	private var locator: SAXLocatorImpl is noinit

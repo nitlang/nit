@@ -14,7 +14,7 @@
 
 import for_abuse
 
-var escape_f: nullable IStream = null
+var escape_f: nullable Reader = null
 for f in file_open("test_for_abuse.nit") do
 	escape_f = f
 	print f.read_line

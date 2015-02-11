@@ -111,7 +111,7 @@ class OpportunityPage
 	var header = new OpportunityHeader
 
 	# The HTML code of the body.
-	var body: Streamable = "" is writable
+	var body: Writable = "" is writable
 
 	# The HTML code of the footer.
 	var footer = new OpportunityFooter
