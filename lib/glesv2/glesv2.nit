@@ -584,6 +584,108 @@ class GLES
 	var capabilities = new GLCapabilities is lazy
 end
 
+# Bind `framebuffer` to a framebuffer target
+#
+# In OpenGL ES 2.0, `target` must be `gl_FRAMEBUFFER`.
+fun glBindFramebuffer(target: GLFramebufferTarget, framebuffer: Int) `{
+	glBindFramebuffer(target, framebuffer);
+`}
+
+# Target of `glBindFramebuffer`
+extern class GLFramebufferTarget
+	super GLEnum
+end
+
+# Target both reading and writing on the framebuffer with `glBindFramebuffer`
+fun gl_FRAMEBUFFER: GLFramebufferTarget `{ return GL_FRAMEBUFFER; `}
+
+# Bind `renderbuffer` to a renderbuffer target
+#
+# In OpenGL ES 2.0, `target` must be `gl_RENDERBUFFER`.
+fun glBindRenderbuffer(target: GLRenderbufferTarget, renderbuffer: Int) `{
+	glBindRenderbuffer(target, renderbuffer);
+`}
+
+# Target of `glBindRenderbuffer`
+extern class GLRenderbufferTarget
+	super GLEnum
+end
+
+# Target a renderbuffer with `glBindRenderbuffer`
+fun gl_RENDERBUFFER: GLRenderbufferTarget `{ return GL_RENDERBUFFER; `}
+
+# Specify implementation specific hints
+fun glHint(target: GLHintTarget, mode: GLHintMode) `{
+	glHint(target, mode);
+`}
+
+# Completeness status of a framebuffer object
+fun glCheckFramebufferStatus(target: GLFramebufferTarget): GLFramebufferStatus `{
+	return glCheckFramebufferStatus(target);
+`}
+
+# Return value of `glCheckFramebufferStatus`
+extern class GLFramebufferStatus
+	super GLEnum
+
+	redef fun to_s
+	do
+		if self == gl_FRAMEBUFFER_COMPLETE then return "complete"
+		if self == gl_FRAMEBUFFER_INCOMPLETE_ATTACHMENT then return "incomplete attachment"
+		if self == gl_FRAMEBUFFER_INCOMPLETE_DIMENSIONS then return "incomplete dimension"
+		if self == gl_FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT then return "incomplete missing attachment"
+		if self == gl_FRAMEBUFFER_UNSUPPORTED then return "unsupported"
+		return "unknown"
+	end
+end
+
+# The framebuffer is complete
+fun gl_FRAMEBUFFER_COMPLETE: GLFramebufferStatus `{
+	return GL_FRAMEBUFFER_COMPLETE;
+`}
+
+# Not all framebuffer attachment points are framebuffer attachment complete
+fun gl_FRAMEBUFFER_INCOMPLETE_ATTACHMENT: GLFramebufferStatus `{
+	return GL_FRAMEBUFFER_INCOMPLETE_ATTACHMENT;
+`}
+
+# Not all attached images have the same width and height
+fun gl_FRAMEBUFFER_INCOMPLETE_DIMENSIONS: GLFramebufferStatus `{
+	return GL_FRAMEBUFFER_INCOMPLETE_DIMENSIONS;
+`}
+
+# No images are attached to the framebuffer
+fun gl_FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT: GLFramebufferStatus `{
+	return GL_FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT;
+`}
+
+# The combination of internal formats of the attached images violates an implementation-dependent set of restrictions
+fun gl_FRAMEBUFFER_UNSUPPORTED: GLFramebufferStatus `{
+	return GL_FRAMEBUFFER_UNSUPPORTED;
+`}
+
+# Hint target for `glHint`
+extern class GLHintTarget
+	super GLEnum
+end
+
+# Indicates the quality of filtering when generating mipmap images
+fun gl_GENERATE_MIPMAP_HINT: GLHintTarget `{ return GL_GENERATE_MIPMAP_HINT; `}
+
+# Hint mode for `glHint`
+extern class GLHintMode
+	super GLEnum
+end
+
+# The most efficient option should be chosen
+fun gl_FASTEST: GLHintMode `{ return GL_FASTEST; `}
+
+# The most correct, or highest quality, option should be chosen
+fun gl_NICEST: GLHintMode `{ return GL_NICEST; `}
+
+# No preference
+fun gl_DONT_CARE: GLHintMode `{ return GL_DONT_CARE; `}
+
 # Entry point to OpenGL server-side capabilities
 class GLCapabilities
 
