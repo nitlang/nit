@@ -273,11 +273,7 @@ interface GameReactor
 	#
 	# Concrete `GameReactor` implement this method to update game data
 	# for each specific GithubEvent.
-	#
-	# By default, only logs received events.
-	fun react_event(game: Game, event: GithubEvent) do
-		game.message(1, "Received event {event} for {game.repo.full_name}")
-	end
+	fun react_event(game: Game, event: GithubEvent) is abstract
 end
 
 # utils
