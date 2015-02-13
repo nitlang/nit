@@ -87,8 +87,22 @@ class GameAction
 		page.side_panels.add new GameStatusPanel(game)
 		page.breadcrumbs = new Breadcrumbs
 		page.breadcrumbs.add_link(game.url, game.name)
+		prepare_pagination(request)
 		return response
 	end
+
+	# Parse pagination related parameters.
+	private fun prepare_pagination(request: HttpRequest) do
+		var args = request.get_args
+		list_from = args.get_or_default("pfrom", "0").to_i
+		list_limit = args.get_or_default("plimit", "10").to_i
+	end
+
+	# Limit of events to display in lists.
+	var list_limit = 10
+
+	# From where to start the display of events related lists.
+	var list_from = 0
 end
 
 # Repo overview page.
@@ -99,6 +113,7 @@ class RepoHome
 		var rsp = prepare_response(request, url)
 		page.side_panels.add new ShortListPlayersPanel(game)
 		page.flow_panels.add new PodiumPanel(game)
+		page.flow_panels.add new EventListPanel(game, list_limit, list_from)
 		rsp.body = page.write_to_string
 		return rsp
 	end
@@ -137,6 +152,7 @@ class PlayerHome
 		page.side_panels.clear
 		page.side_panels.add new PlayerStatusPanel(game, player)
 		page.flow_panels.add new PlayerReviewsPanel(game, player)
+		page.flow_panels.add new EventListPanel(player, list_limit, list_from)
 		rsp.body = page.write_to_string
 		return rsp
 	end

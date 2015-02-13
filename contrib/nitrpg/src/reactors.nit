@@ -17,7 +17,7 @@
 # Various implementations of `GameReactor` can be found here.
 module reactors
 
-import game
+import events
 
 # Reacts to event that can affect players (like giving nitcoins).
 class PlayerReactor
@@ -41,20 +41,46 @@ redef class GithubEvent
 	# Called by `PlayerReactor::react_event`.
 	# No-op by default.
 	private fun react_player_event(reactor: PlayerReactor, game: Game) do end
+
+	# Generates a GameEvent preinitialized for a reward event.
+	private fun player_reward_event(kind: String, player: Player, reward: Int): GameEvent do
+		var obj = new JsonObject
+		obj["player"] = player.name
+		obj["reward"] = reward
+		obj["github_event"] = json
+		var event = new GameEvent(player.game, kind, obj)
+		player.game.add_event(event)
+		return event
+	end
 end
 
 redef class PullRequestEvent
 
 	# Rewards player for opened pull requests.
 	redef fun react_player_event(r, game) do
-		var player = pull.user.player(game)
 		if action == "opened" then
-			player.nitcoins += r.nc_pull_open
-			player.save
-		else if action == "closed" and pull.merged then
-			player.nitcoins += pull.commits * r.nc_commit_merged
-			player.save
+			react_pull_open(r, game)
+		else if action == "closed" then
+			react_pull_close(r, game)
 		end
+	end
+
+	private fun react_pull_open(r: PlayerReactor, game: Game) do
+		var player = pull.user.player(game)
+		player.nitcoins += r.nc_pull_open
+		player.save
+		var event = player_reward_event("pull_open", player, r.nc_pull_open)
+		player.add_event(event)
+	end
+
+	private fun react_pull_close(r: PlayerReactor, game: Game) do
+		if not pull.merged then return
+		var player = pull.user.player(game)
+		var reward = pull.commits * r.nc_commit_merged
+		player.nitcoins += reward
+		player.save
+		var event = player_reward_event("pull_merged", player, reward)
+		player.add_event(event)
 	end
 end
 
@@ -68,9 +94,15 @@ redef class IssueCommentEvent
 	redef fun react_player_event(r, game) do
 		# FIXME use a more precise way to locate reviews
 		if comment.body.has("\\+1\\b".to_re) then
-			var player = comment.user.player(game)
-			player.nitcoins += r.nc_pull_review
-			player.save
+			react_player_review(r, game)
 		end
+	end
+
+	private fun react_player_review(r: PlayerReactor, game: Game) do
+		var player = comment.user.player(game)
+		player.nitcoins += r.nc_pull_review
+		player.save
+		var event = player_reward_event("pull_review", player, r.nc_pull_review)
+		player.add_event(event)
 	end
 end

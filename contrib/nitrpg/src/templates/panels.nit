@@ -17,7 +17,7 @@
 # Panels templates for `nitpg`.
 module panels
 
-import templates_base
+import templates_events
 
 # A panel can be displayed in a html page.
 #
@@ -170,7 +170,7 @@ class ShortListPlayersPanel
 		end
 		(new PlayerCoinComparator).sort(players)
 		for player in players do
-			add "{player.link}&nbsp;({player.nitcoins})<br>"
+			add "{player.nitcoins} - {player.link}<br>"
 		end
 	end
 end
@@ -305,5 +305,58 @@ class PlayerReviewsPanel
 					</div>
 				   </div>"""
 		end
+	end
+end
+
+# A `Panel` that displays a pagined list of events stored in the `entity`.
+#
+# This way the panel can be used to view events stored under `Game`, `Player`...
+class EventListPanel
+	super Panel
+
+	# Entity to load the events from.
+	var entity: GameEntity
+
+	# Number of events to display.
+	var limit: Int
+
+	# From where to start?
+	var from: Int
+
+	redef fun render_title do
+		add "<span class=\"glyphicon glyphicon-flash\"></span>&nbsp;&nbsp;"
+		add "Last events"
+	end
+
+	redef fun render_body do
+		var events = entity.load_events
+		if events.is_empty then
+			add "<em>No event yet...</em>"
+			return
+		end
+		# check input
+		if limit < 0 then limit = 10
+		if from < 0 then from = 0
+		# display events
+		for i in [from .. from + limit] do
+			if i >= events.length then break
+			add events[i].tpl_event.media_item
+		end
+		# pagination
+		if limit > events.length then return
+		add "<hr>"
+		add """<div class="btn-group" role="group">"""
+		if from > 0 then
+			add """<a class="btn btn-default" role="button"
+					href="?pfrom={{{from - limit}}}&plimit={{{limit}}}">
+				     <span class=\"glyphicon glyphicon-chevron-left\"></span></a>"""
+		end
+		if from + limit < events.length then
+			add """
+		          <a class="btn btn-default" role="button"
+				   href="?pfrom={{{from + limit}}}&plimit={{{limit}}}">
+				    <span class=\"glyphicon glyphicon-chevron-right\"></span></a>"""
+		end
+		add "</div>"
 	end
 end
