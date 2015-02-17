@@ -40,7 +40,7 @@ end
 
 redef class MModulePage
 	redef fun build_inh_list(v, doc) do
-		var section = new ImportationListSection
+		var section = new ImportationListSection(mentity)
 		var imports = self.imports.to_a
 		v.name_sorter.sort(imports)
 		section.add_child new HierarchyListArticle(mentity, "Imports", imports)
@@ -53,7 +53,7 @@ end
 
 redef class MClassPage
 	redef fun build_inh_list(v, doc) do
-		var section = new InheritanceListSection
+		var section = new InheritanceListSection(mentity)
 		var parents = self.parents.to_a
 		v.name_sorter.sort(parents)
 		section.add_child new HierarchyListArticle(mentity, "Parents", parents)
@@ -73,11 +73,13 @@ end
 # FIXME diff hack
 class ImportationListSection
 	super DocSection
+	super MEntityComposite
 end
 
 # FIXME diff hack
 class InheritanceListSection
 	super DocSection
+	super MEntityComposite
 end
 
 # Dislay a hierarchical list of mentities.
