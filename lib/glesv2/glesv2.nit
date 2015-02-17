@@ -375,29 +375,17 @@ do
 	end
 end
 
-# Texture minifying function
-#
-# Used by: `GLES::tex_parameter_min_filter`
-extern class GLTextureMinFilter
+# Texture minifying and magnifying function
+extern class GLTextureFilter
 	super GLEnum
-
-	new nearest `{ return GL_NEAREST; `}
-	new linear `{ return GL_LINEAR; `}
 end
 
-# Texture magnification function
-#
-# Used by: `GLES::tex_parameter_mag_filter`
-extern class GLTextureMagFilter
-	super GLEnum
-
-	new nearest `{ return GL_NEAREST; `}
-	new linear `{ return GL_LINEAR; `}
-	new nearest_mipmap_nearest `{ return GL_NEAREST_MIPMAP_NEAREST; `}
-	new linear_mipmap_nearest `{ return GL_LINEAR_MIPMAP_NEAREST; `}
-	new nearest_mipmap_linear `{ return GL_NEAREST_MIPMAP_LINEAR; `}
-	new linear_mipmap_linear `{ return GL_LINEAR_MIPMAP_LINEAR; `}
-end
+fun gl_NEAREST: GLTextureFilter `{ return GL_NEAREST; `}
+fun gl_LINEAR: GLTextureFilter `{ return GL_LINEAR; `}
+fun gl_NEAREST_MIPMAP_NEAREST: GLTextureFilter `{ return GL_NEAREST_MIPMAP_NEAREST; `}
+fun gl_LINEAR_MIPMAP_NEAREST: GLTextureFilter `{ return GL_LINEAR_MIPMAP_NEAREST; `}
+fun gl_NEAREST_MIPMAP_NINEAR: GLTextureFilter `{ return GL_NEAREST_MIPMAP_LINEAR; `}
+fun gl_LINEAR_MIPMAP_LINEAR: GLTextureFilter `{ return GL_LINEAR_MIPMAP_LINEAR; `}
 
 # Wrap parameter of a texture
 #
@@ -550,14 +538,14 @@ class GLES
 	# Set the texture minifying function
 	#
 	# Foreign: glTexParameter with GL_TEXTURE_MIN_FILTER
-	fun tex_parameter_min_filter(target: GLTextureTarget, value: GLTextureMinFilter) `{
+	fun tex_parameter_min_filter(target: GLTextureTarget, value: GLTextureFilter) `{
 		glTexParameteri(target, GL_TEXTURE_MIN_FILTER, value);
 	`}
 
 	# Set the texture magnification function
 	#
 	# Foreign: glTexParameter with GL_TEXTURE_MAG_FILTER
-	fun tex_parameter_mag_filter(target: GLTextureTarget, value: GLTextureMagFilter) `{
+	fun tex_parameter_mag_filter(target: GLTextureTarget, value: GLTextureFilter) `{
 		glTexParameteri(target, GL_TEXTURE_MAG_FILTER, value);
 	`}
 
