@@ -105,7 +105,7 @@ class RenderHTMLPhase
 	redef fun apply do
 		init_output_dir
 		for page in doc.pages do
-			page.render(self, doc).write_to_file("{ctx.output_dir.to_s}/{page.page_url}")
+			page.render(self, doc).write_to_file("{ctx.output_dir.to_s}/{page.html_url}")
 		end
 	end
 
@@ -163,15 +163,16 @@ redef class DocPage
 			shareurl = v.ctx.opt_shareurl.value.as(not null)
 		end
 
-		# build page
-		self.title = tpl_title(v, doc)
-		self.url = page_url
+		# init page options
 		self.shareurl = shareurl
-		self.topmenu = tpl_topmenu(v, doc)
-		self.add_section tpl_content(v, doc)
 		self.footer = v.ctx.opt_custom_footer.value
 		self.body_attrs.add(new TagAttribute("data-bootstrap-share", shareurl))
-		self.sidebar = tpl_sidebar(v, doc)
+
+		# build page
+		init_title(v, doc)
+		init_sidebar(v, doc)
+		init_topmenu(v, doc)
+		init_content(v, doc)
 
 		# piwik tracking
 		var tracker_url = v.ctx.opt_piwik_tracker.value
@@ -185,23 +186,12 @@ redef class DocPage
 	# FIXME diff hack
 	# all properties below are roughly copied from `doc_pages`
 
-	# URL to this page.
-	fun page_url: String is abstract
-
-	# Build page sidebar if any
-	fun tpl_sidebar(v: RenderHTMLPhase, doc: DocModel): nullable TplSidebar do return null
-
 	# Build page title string
-	fun tpl_title(v: RenderHTMLPhase, doc: DocModel): String do
-		if v.ctx.opt_custom_title.value != null then
-			return v.ctx.opt_custom_title.value.to_s
-		end
-		return "Nitdoc"
-	end
+	fun init_title(v: RenderHTMLPhase, doc: DocModel) is abstract
 
-	# Build top menu template
-	fun tpl_topmenu(v: RenderHTMLPhase, doc: DocModel): TplTopMenu do
-		var topmenu = new TplTopMenu(page_url)
+	# Build top menu template if any.
+	fun init_topmenu(v: RenderHTMLPhase, doc: DocModel) do
+		topmenu = new TplTopMenu(html_url)
 		var brand = v.ctx.opt_custom_brand.value
 		if brand != null then
 			var tpl = new Template
@@ -212,28 +202,31 @@ redef class DocPage
 		end
 		topmenu.add_link new TplLink("index.html", "Overview")
 		topmenu.add_link new TplLink("search.html", "Index")
-		return topmenu
 	end
 
-	# Build page content template
-	fun tpl_content(v: RenderHTMLPhase, doc: DocModel): TplSection is abstract
+	# Build page sidebar if any.
+	fun init_sidebar(v: RenderHTMLPhase, doc: DocModel) do
+		sidebar = new TplSidebar
+	end
+
+	# Build page content template.
+	fun init_content(v: RenderHTMLPhase, doc: DocModel) do end
 end
 
 redef class OverviewPage
-	redef fun page_url do return "index.html"
+	redef var html_url = "index.html"
 
-	redef fun tpl_title(v, doc) do
+	redef fun init_title(v, doc) do
+		title = "Overview"
 		if v.ctx.opt_custom_title.value != null then
-			return v.ctx.opt_custom_title.value.to_s
-		else
-			return "Overview"
+			title = v.ctx.opt_custom_title.value.to_s
 		end
 	end
 
 	# TODO this should be done in StructurePhase.
-	redef fun tpl_content(v, doc) do
+	redef fun init_content(v, doc) do
 		# intro text
-		var section = new TplSection.with_title("overview", tpl_title(v, doc))
+		var section = new TplSection.with_title("overview", title)
 		var article = new TplArticle("intro")
 		if v.ctx.opt_custom_intro.value != null then
 			article.content = v.ctx.opt_custom_intro.value.to_s
@@ -255,18 +248,19 @@ redef class OverviewPage
 			ssection.add_child sarticle
 		end
 		section.add_child ssection
-		return section
+		self.add_section section
 	end
 
-	redef fun tpl_sidebar(v, doc) do return new TplSidebar
+	redef fun init_sidebar(v, doc) do sidebar = new TplSidebar
 end
 
 redef class SearchPage
-	redef fun page_url do return "search.html"
-	redef fun tpl_title(v, doc) do return "Index"
+	redef var html_url = "search.html"
+	redef fun init_title(v, doc) do title = "Index"
+	redef fun init_sidebar(v, doc) do end
 
 	# TODO this should be done in StructurePhase.
-	redef fun tpl_content(v, doc) do
+	redef fun init_content(v, doc) do
 		var tpl = new TplSearchPage("search_all")
 		var section = new TplSection("search")
 		# title
@@ -289,7 +283,7 @@ redef class SearchPage
 			tpl.props.add m
 		end
 		section.add_child tpl
-		return section
+		self.add_section section
 	end
 
 	# Extract mmodule list to display (sorted by name)
@@ -319,9 +313,9 @@ redef class SearchPage
 end
 
 redef class MEntityPage
-	redef fun page_url do return mentity.nitdoc_url
-	redef fun tpl_title(v, doc) do return mentity.nitdoc_name
-	redef fun tpl_content(v, doc) do return root.start_rendering(v, doc, self)
+	redef var html_url is lazy do return mentity.nitdoc_url
+	redef fun init_title(v, doc) do title = mentity.nitdoc_name
+	redef fun init_content(v, doc) do add_section root.start_rendering(v, doc, self)
 end
 
 # FIXME all clases below are roughly copied from `doc_pages` and adapted to new
@@ -329,22 +323,21 @@ end
 # `doc_templates` module.
 
 redef class MGroupPage
-	redef fun tpl_topmenu(v, doc) do
-		var topmenu = super
+	redef fun init_topmenu(v, doc) do
+		super
 		var mproject = mentity.mproject
 		if not mentity.is_root then
 			topmenu.add_link new TplLink(mproject.nitdoc_url, mproject.nitdoc_name)
 		end
-		topmenu.add_link new TplLink(page_url, mproject.nitdoc_name)
-		return topmenu
+		topmenu.add_link new TplLink(html_url, mproject.nitdoc_name)
 	end
 
-	redef fun tpl_sidebar(v, doc) do
-		var sidebar = new TplSidebar
+	redef fun init_sidebar(v, doc) do
+		super
 		var mclasses = new HashSet[MClass]
 		mclasses.add_all intros
 		mclasses.add_all redefs
-		if mclasses.is_empty then return sidebar
+		if mclasses.is_empty then return
 		var list = new TplList.with_classes(["list-unstyled", "list-labeled"])
 
 		var sorted = mclasses.to_a
@@ -353,7 +346,6 @@ redef class MGroupPage
 			list.add_li tpl_sidebar_item(mclass)
 		end
 		sidebar.boxes.add new TplSideBox.with_content("All classes", list)
-		return sidebar
 	end
 
 	private fun tpl_sidebar_item(def: MClass): TplListItem do
@@ -371,22 +363,21 @@ redef class MGroupPage
 end
 
 redef class MModulePage
-	redef fun tpl_topmenu(v, doc) do
-		var topmenu = super
+	redef fun init_topmenu(v, doc) do
+		super
 		var mproject = mentity.mproject
 		topmenu.add_link new TplLink(mproject.nitdoc_url, mproject.nitdoc_name)
 		topmenu.add_link new TplLink(mentity.nitdoc_url, mentity.nitdoc_name)
-		return topmenu
 	end
 
 	# Class list to display in sidebar
-	redef fun tpl_sidebar(v, doc) do
+	redef fun init_sidebar(v, doc) do
 		# TODO filter here?
-		var sidebar = new TplSidebar
+		super
 		var mclasses = new HashSet[MClass]
 		mclasses.add_all mentity.filter_intro_mclasses(v.ctx.min_visibility)
 		mclasses.add_all mentity.filter_redef_mclasses(v.ctx.min_visibility)
-		if mclasses.is_empty then return sidebar
+		if mclasses.is_empty then return
 		var list = new TplList.with_classes(["list-unstyled", "list-labeled"])
 
 		var sorted = mclasses.to_a
@@ -395,7 +386,6 @@ redef class MModulePage
 			list.add_li tpl_sidebar_item(mclass)
 		end
 		sidebar.boxes.add new TplSideBox.with_content("All classes", list)
-		return sidebar
 	end
 
 	private fun tpl_sidebar_item(def: MClass): TplListItem do
@@ -414,27 +404,25 @@ end
 
 redef class MClassPage
 
-	redef fun tpl_title(v, doc) do
-		return "{mentity.nitdoc_name}{mentity.tpl_signature.write_to_string}"
+	redef fun init_title(v, doc) do
+		title = "{mentity.nitdoc_name}{mentity.tpl_signature.write_to_string}"
 	end
 
-	redef fun tpl_topmenu(v, doc) do
-		var topmenu = super
+	redef fun init_topmenu(v, doc) do
+		super
 		var mproject = mentity.intro_mmodule.mgroup.mproject
 		topmenu.add_link new TplLink("{mproject.nitdoc_url}", "{mproject.nitdoc_name}")
-		topmenu.add_link new TplLink(page_url, mentity.nitdoc_name)
-		return topmenu
+		topmenu.add_link new TplLink(html_url, mentity.nitdoc_name)
 	end
 
-	redef fun tpl_sidebar(v, doc) do
-		var sidebar = new TplSidebar
+	redef fun init_sidebar(v, doc) do
+		super
 		var by_kind = new PropertiesByKind.with_elements(mclass_inherited_mprops(v, doc))
 		var summary = new TplList.with_classes(["list-unstyled"])
 
 		by_kind.sort_groups(v.name_sorter)
 		for g in by_kind.groups do tpl_sidebar_list(g, summary)
 		sidebar.boxes.add new TplSideBox.with_content("All properties", summary)
-		return sidebar
 	end
 
 	private fun tpl_sidebar_list(mprops: PropertyGroup[MProperty], summary: TplList) do
@@ -497,22 +485,19 @@ redef class MClassPage
 end
 
 redef class MPropertyPage
-	redef fun tpl_topmenu(v, doc) do
-		var topmenu = super
+	redef fun init_title(v, doc) do
+		title = "{mentity.nitdoc_name}{mentity.tpl_signature.write_to_string}"
+	end
+
+	redef fun init_topmenu(v, doc) do
+		super
 		var mmodule = mentity.intro_mclassdef.mmodule
 		var mproject = mmodule.mgroup.mproject
 		var mclass = mentity.intro_mclassdef.mclass
 		topmenu.add_link new TplLink("{mproject.nitdoc_url}", "{mproject.nitdoc_name}")
 		topmenu.add_link new TplLink("{mclass.nitdoc_url}", "{mclass.nitdoc_name}")
-		topmenu.add_link new TplLink(page_url, mentity.nitdoc_name)
-		return topmenu
+		topmenu.add_link new TplLink(html_url, mentity.nitdoc_name)
 	end
-
-	redef fun tpl_title(v, doc) do
-		return "{mentity.nitdoc_name}{mentity.tpl_signature.write_to_string}"
-	end
-
-	redef fun tpl_sidebar(v, doc) do return new TplSidebar
 end
 
 redef class DocComposite
