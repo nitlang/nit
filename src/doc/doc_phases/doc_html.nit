@@ -157,30 +157,29 @@ end
 redef class DocPage
 
 	# Render the page as a html template.
-	private fun render(v: RenderHTMLPhase, doc: DocModel): TplPage do
+	private fun render(v: RenderHTMLPhase, doc: DocModel): Writable do
 		var shareurl = "."
 		if v.ctx.opt_shareurl.value != null then
 			shareurl = v.ctx.opt_shareurl.value.as(not null)
 		end
 
 		# build page
-		var tpl = new TplPage
-		tpl.title = tpl_title(v, doc)
-		tpl.url = page_url
-		tpl.shareurl = shareurl
-		tpl.topmenu = tpl_topmenu(v, doc)
-		tpl.add_section tpl_content(v, doc)
-		tpl.footer = v.ctx.opt_custom_footer.value
-		tpl.body_attrs.add(new TagAttribute("data-bootstrap-share", shareurl))
-		tpl.sidebar = tpl_sidebar(v, doc)
+		self.title = tpl_title(v, doc)
+		self.url = page_url
+		self.shareurl = shareurl
+		self.topmenu = tpl_topmenu(v, doc)
+		self.add_section tpl_content(v, doc)
+		self.footer = v.ctx.opt_custom_footer.value
+		self.body_attrs.add(new TagAttribute("data-bootstrap-share", shareurl))
+		self.sidebar = tpl_sidebar(v, doc)
 
 		# piwik tracking
 		var tracker_url = v.ctx.opt_piwik_tracker.value
 		var site_id = v.ctx.opt_piwik_site_id.value
 		if tracker_url != null and site_id != null then
-			tpl.scripts.add new TplPiwikScript(tracker_url, site_id)
+			self.scripts.add new TplPiwikScript(tracker_url, site_id)
 		end
-		return tpl
+		return self
 	end
 
 	# FIXME diff hack

@@ -16,15 +16,13 @@
 # Pages are assembled using `Template`
 module html_components
 
+import doc_base
 import template
 import json::static
 
 # A documentation page
-class TplPage
+redef class DocPage
 	super Template
-
-	# The unescaped page title to put in the HTML header.
-	var title: String is writable, noinit
 
 	# Page url
 	var url: String is writable, noinit
