@@ -16,6 +16,7 @@
 module html_templates
 
 import html_model
+import html::bootstrap
 
 # Renders the page as HTML.
 redef class DocPage
@@ -31,7 +32,7 @@ redef class DocPage
 	var body_attrs = new Array[TagAttribute]
 
 	# Top menu template if any.
-	var topmenu: TplTopMenu is writable, noinit
+	var topmenu: DocTopMenu is writable, noinit
 
 	# Sidebar template if any.
 	var sidebar: nullable TplSidebar = null is writable
@@ -72,13 +73,6 @@ redef class DocPage
 		add "<body"
 		for attr in body_attrs do add attr
 		addn ">"
-	end
-
-	# Renders the topmenu template.
-	private fun render_topmenu do
-		addn " <div class='row'>"
-		add topmenu
-		addn " </div>"
 	end
 
 	# Renders the sidebar template.
@@ -129,7 +123,9 @@ redef class DocPage
 	redef fun rendering do
 		render_head
 		addn "<div class='container-fluid'>"
-		render_topmenu
+		addn " <div class='row'>"
+		add topmenu
+		addn " </div>"
 		addn " <div class='row' id='content'>"
 		if sidebar != null then
 			addn "<div class='col col-xs-3 col-lg-2'>"
@@ -146,5 +142,57 @@ redef class DocPage
 		addn " </div>"
 		addn "</div>"
 		render_footer
+	end
+end
+
+# Top menu bar template.
+#
+# FIXME should be a Bootstrap component template
+# At this moment, the topmenu structure stills to specific to Nitdoc to use the
+# generic component.
+class DocTopMenu
+	super UnorderedList
+
+	# Brand link to display in first position of the top menu.
+	#
+	# This is where you want to put your logo.
+	var brand: nullable Writable is noinit, writable
+
+	# Active menu item.
+	#
+	# Depends on the current page, this allows to hilighted the current item.
+	#
+	# FIXME should be using Boostrap breadcrumbs component.
+	# This will still like this to avoid diff and be changed in further fixes
+	# when we will modify the output.
+	var active_item: nullable ListItem is noinit, writable
+
+	redef fun rendering do
+		addn "<nav id='topmenu' class='navbar navbar-default navbar-fixed-top' role='navigation'>"
+		addn " <div class='container-fluid'>"
+		addn "  <div class='navbar-header'>"
+		add "   <button type='button' class='navbar-toggle' "
+		addn "       data-toggle='collapse' data-target='#topmenu-collapse'>"
+		addn "    <span class='sr-only'>Toggle menu</span>"
+		addn "    <span class='icon-bar'></span>"
+		addn "    <span class='icon-bar'></span>"
+		addn "    <span class='icon-bar'></span>"
+		addn "   </button>"
+		if brand != null then
+			add "<span class='navbar-brand'>"
+			add brand.write_to_string
+			add "</span>"
+		end
+		addn "  </div>"
+		addn "  <div class='collapse navbar-collapse' id='topmenu-collapse'>"
+		addn "   <ul class='nav navbar-nav'>"
+		for item in items do
+			if item == active_item then item.css_classes.add "active"
+			add item.write_to_string
+		end
+		addn "   </ul>"
+		addn "  </div>"
+		addn " </div>"
+		addn "</nav>"
 	end
 end

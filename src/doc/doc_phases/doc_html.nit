@@ -191,7 +191,7 @@ redef class DocPage
 
 	# Build top menu template if any.
 	fun init_topmenu(v: RenderHTMLPhase, doc: DocModel) do
-		topmenu = new TplTopMenu(html_url)
+		topmenu = new DocTopMenu
 		var brand = v.ctx.opt_custom_brand.value
 		if brand != null then
 			var tpl = new Template
@@ -200,8 +200,13 @@ redef class DocPage
 			tpl.add "</span>"
 			topmenu.brand = tpl
 		end
-		topmenu.add_link new TplLink("index.html", "Overview")
-		topmenu.add_link new TplLink("search.html", "Index")
+		var title = "Overview"
+		if v.ctx.opt_custom_title.value != null then
+			title = v.ctx.opt_custom_title.value.to_s
+		end
+		topmenu.add_li new ListItem(new Link("index.html", title))
+		topmenu.add_li new ListItem(new Link("search.html", "Index"))
+		topmenu.active_item = topmenu.items.first
 	end
 
 	# Build page sidebar if any.
@@ -257,6 +262,12 @@ end
 redef class SearchPage
 	redef var html_url = "search.html"
 	redef fun init_title(v, doc) do title = "Index"
+
+	redef fun init_topmenu(v, doc) do
+		super
+		topmenu.active_item = topmenu.items.last
+	end
+
 	redef fun init_sidebar(v, doc) do end
 
 	# TODO this should be done in StructurePhase.
@@ -327,9 +338,10 @@ redef class MGroupPage
 		super
 		var mproject = mentity.mproject
 		if not mentity.is_root then
-			topmenu.add_link new TplLink(mproject.nitdoc_url, mproject.nitdoc_name)
+			topmenu.add_li new ListItem(new Link(mproject.nitdoc_url, mproject.nitdoc_name))
 		end
-		topmenu.add_link new TplLink(html_url, mproject.nitdoc_name)
+		topmenu.add_li new ListItem(new Link(html_url, mproject.nitdoc_name))
+		topmenu.active_item = topmenu.items.last
 	end
 
 	redef fun init_sidebar(v, doc) do
@@ -366,8 +378,9 @@ redef class MModulePage
 	redef fun init_topmenu(v, doc) do
 		super
 		var mproject = mentity.mproject
-		topmenu.add_link new TplLink(mproject.nitdoc_url, mproject.nitdoc_name)
-		topmenu.add_link new TplLink(mentity.nitdoc_url, mentity.nitdoc_name)
+		topmenu.add_li new ListItem(new Link(mproject.nitdoc_url, mproject.nitdoc_name))
+		topmenu.add_li new ListItem(new Link(mentity.nitdoc_url, mentity.nitdoc_name))
+		topmenu.active_item = topmenu.items.last
 	end
 
 	# Class list to display in sidebar
@@ -411,8 +424,9 @@ redef class MClassPage
 	redef fun init_topmenu(v, doc) do
 		super
 		var mproject = mentity.intro_mmodule.mgroup.mproject
-		topmenu.add_link new TplLink("{mproject.nitdoc_url}", "{mproject.nitdoc_name}")
-		topmenu.add_link new TplLink(html_url, mentity.nitdoc_name)
+		topmenu.add_li new ListItem(new Link("{mproject.nitdoc_url}", "{mproject.nitdoc_name}"))
+		topmenu.add_li new ListItem(new Link(html_url, mentity.nitdoc_name))
+		topmenu.active_item = topmenu.items.last
 	end
 
 	redef fun init_sidebar(v, doc) do
@@ -494,9 +508,10 @@ redef class MPropertyPage
 		var mmodule = mentity.intro_mclassdef.mmodule
 		var mproject = mmodule.mgroup.mproject
 		var mclass = mentity.intro_mclassdef.mclass
-		topmenu.add_link new TplLink("{mproject.nitdoc_url}", "{mproject.nitdoc_name}")
-		topmenu.add_link new TplLink("{mclass.nitdoc_url}", "{mclass.nitdoc_name}")
-		topmenu.add_link new TplLink(html_url, mentity.nitdoc_name)
+		topmenu.add_li new ListItem(new Link("{mproject.nitdoc_url}", "{mproject.nitdoc_name}"))
+		topmenu.add_li new ListItem(new Link("{mclass.nitdoc_url}", "{mclass.nitdoc_name}"))
+		topmenu.add_li new ListItem(new Link(html_url, mentity.nitdoc_name))
+		topmenu.active_item = topmenu.items.last
 	end
 end
 
