@@ -51,9 +51,9 @@ end
 redef class MGroupPage
 	redef fun apply_structure(v, doc) do
 		if mentity.is_root then
-			root.add new IntroArticle(mentity.mproject)
+			root.add_child new IntroArticle(mentity.mproject)
 		else
-			root.add new IntroArticle(mentity)
+			root.add_child new IntroArticle(mentity)
 		end
 		var concerns = self.concerns
 		if concerns == null or concerns.is_empty then return
@@ -63,12 +63,12 @@ redef class MGroupPage
 		concerns.sort_with(v.concerns_sorter)
 		mentity.mproject.booster_rank = 0
 		mentity.booster_rank = 0
-		root.add new ConcernsArticle(mentity, concerns)
+		root.add_child new ConcernsArticle(mentity, concerns)
 		for mentity in concerns do
 			if mentity isa MModule then
-				root.add new DefinitionArticle(mentity)
+				root.add_child new DefinitionArticle(mentity)
 			else
-				root.add new ConcernSection(mentity)
+				root.add_child new ConcernSection(mentity)
 			end
 		end
 	end
@@ -76,7 +76,7 @@ end
 
 redef class MModulePage
 	redef fun apply_structure(v, doc) do
-		root.add new IntroArticle(mentity)
+		root.add_child new IntroArticle(mentity)
 		var concerns = self.concerns
 		if concerns == null or concerns.is_empty then return
 		# FIXME avoid diff
@@ -87,7 +87,7 @@ redef class MModulePage
 		mentity.mgroup.mproject.booster_rank = 0
 		mentity.mgroup.booster_rank = 0
 		mentity.booster_rank = 0
-		root.add new ConcernsArticle(mentity, concerns)
+		root.add_child new ConcernsArticle(mentity, concerns)
 		# reference list
 		for mentity in concerns do
 			var section = new ConcernSection(mentity)
@@ -98,16 +98,16 @@ redef class MModulePage
 					var article = new DefinitionArticle(mclass)
 					var mclassdefs = mclassdefs_for(mclass).to_a
 					if not mclassdefs.has(mclass.intro) then
-						article.add(new DefinitionArticle(mclass.intro))
+						article.add_child(new DefinitionArticle(mclass.intro))
 					end
 					doc.mainmodule.linearize_mclassdefs(mclassdefs)
 					for mclassdef in mclassdefs do
-						article.add(new DefinitionArticle(mclassdef))
+						article.add_child(new DefinitionArticle(mclassdef))
 					end
-					section.add article
+					section.add_child article
 				end
 			end
-			root.add section
+			root.add_child section
 		end
 	end
 
@@ -136,7 +136,7 @@ end
 
 redef class MClassPage
 	redef fun apply_structure(v, doc) do
-		root.add new IntroArticle(mentity)
+		root.add_child new IntroArticle(mentity)
 		var concerns = self.concerns
 		if concerns == null or concerns.is_empty then return
 		# FIXME diff hack
@@ -147,7 +147,7 @@ redef class MClassPage
 		mentity.intro_mmodule.mgroup.mproject.booster_rank = 0
 		mentity.intro_mmodule.mgroup.booster_rank = 0
 		mentity.intro_mmodule.booster_rank = 0
-		root.add new ConcernsArticle(mentity, concerns)
+		root.add_child new ConcernsArticle(mentity, concerns)
 		for mentity in concerns do
 			var section = new ConcernSection(mentity)
 			if mentity isa MModule then
@@ -157,12 +157,12 @@ redef class MClassPage
 					v.name_sorter.sort(group)
 					for mprop in group do
 						for mpropdef in mpropdefs_for(mprop, mentity) do
-							section.add new DefinitionArticle(mpropdef)
+							section.add_child new DefinitionArticle(mpropdef)
 						end
 					end
 				end
 			end
-			root.add section
+			root.add_child section
 		end
 	end
 
@@ -196,7 +196,7 @@ end
 
 redef class MPropertyPage
 	redef fun apply_structure(v, doc) do
-		root.add new IntroArticle(mentity)
+		root.add_child new IntroArticle(mentity)
 		var concerns = self.concerns
 		if concerns == null or concerns.is_empty then return
 		# FIXME diff hack
@@ -207,7 +207,7 @@ redef class MPropertyPage
 		mentity.intro.mclassdef.mmodule.mgroup.mproject.booster_rank = 0
 		mentity.intro.mclassdef.mmodule.mgroup.booster_rank = 0
 		mentity.intro.mclassdef.mmodule.booster_rank = 0
-		root.add new ConcernsArticle(mentity, concerns)
+		root.add_child new ConcernsArticle(mentity, concerns)
 		for mentity in concerns do
 			var section = new ConcernSection(mentity)
 			if mentity isa MModule then
@@ -215,10 +215,10 @@ redef class MPropertyPage
 				var mpropdefs = mpropdefs_for(mentity).to_a
 				v.name_sorter.sort(mpropdefs)
 				for mpropdef in mpropdefs do
-					section.add new DefinitionArticle(mpropdef)
+					section.add_child new DefinitionArticle(mpropdef)
 				end
 			end
-			root.add section
+			root.add_child section
 		end
 	end
 

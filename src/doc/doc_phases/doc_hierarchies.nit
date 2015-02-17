@@ -43,10 +43,10 @@ redef class MModulePage
 		var section = new ImportationListSection
 		var imports = self.imports.to_a
 		v.name_sorter.sort(imports)
-		section.children.add new HierarchyListArticle(mentity, "Imports", imports)
+		section.add_child new HierarchyListArticle(mentity, "Imports", imports)
 		var clients = self.clients.to_a
 		v.name_sorter.sort(clients)
-		section.children.add new HierarchyListArticle(mentity, "Clients", clients)
+		section.add_child new HierarchyListArticle(mentity, "Clients", clients)
 		root.children.insert(section, 1)
 	end
 end
@@ -56,16 +56,16 @@ redef class MClassPage
 		var section = new InheritanceListSection
 		var parents = self.parents.to_a
 		v.name_sorter.sort(parents)
-		section.children.add new HierarchyListArticle(mentity, "Parents", parents)
+		section.add_child new HierarchyListArticle(mentity, "Parents", parents)
 		var ancestors = self.ancestors.to_a
 		v.name_sorter.sort(ancestors)
-		section.children.add new HierarchyListArticle(mentity, "Ancestors", ancestors)
+		section.add_child new HierarchyListArticle(mentity, "Ancestors", ancestors)
 		var children = self.children.to_a
 		v.name_sorter.sort(children)
-		section.children.add new HierarchyListArticle(mentity, "Children", children)
+		section.add_child new HierarchyListArticle(mentity, "Children", children)
 		var descendants = self.descendants.to_a
 		v.name_sorter.sort(descendants)
-		section.children.add new HierarchyListArticle(mentity, "Descendants", descendants)
+		section.add_child new HierarchyListArticle(mentity, "Descendants", descendants)
 		root.children.insert(section, 1)
 	end
 end

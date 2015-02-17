@@ -83,7 +83,9 @@ abstract class DocComposite
 	# Add a `child` to `self`.
 	#
 	# Shortcut for `children.add`.
-	fun add(child: DocComposite) do children.add child
+	fun add_child(child: DocComposite) do
+		children.add child
+	end
 end
 
 # The `DocComposite` element that contains all the other.
