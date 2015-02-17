@@ -16,7 +16,8 @@
 module doc_base
 
 import toolcontext
-import doc_model # FIXME maintain compatibility with old templates.
+import model_utils
+import model_ext
 
 # The model of a Nitdoc documentation.
 #
@@ -218,4 +219,17 @@ class PropertyGroup[E: MProperty]
 
 	# The title of the group, as displayed to the user.
 	var title: String
+end
+
+redef class MEntity
+	# Name displayed in console for debug and tests.
+	fun nitdoc_name: String do return name.html_escape
+end
+
+redef class MClassDef
+	redef fun nitdoc_name do return mclass.nitdoc_name
+end
+
+redef class MPropDef
+	redef fun nitdoc_name do return mproperty.nitdoc_name
 end
