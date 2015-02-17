@@ -47,6 +47,7 @@ redef class MModulePage
 		var clients = self.clients.to_a
 		v.name_sorter.sort(clients)
 		section.add_child new HierarchyListArticle(mentity, "Clients", clients)
+		section.parent = root.children.first
 		root.children.first.children.insert(section, 1)
 	end
 end
@@ -66,6 +67,7 @@ redef class MClassPage
 		var descendants = self.descendants.to_a
 		v.name_sorter.sort(descendants)
 		section.add_child new HierarchyListArticle(mentity, "Descendants", descendants)
+		section.parent = root.children.first
 		root.children.first.children.insert(section, 1)
 	end
 end

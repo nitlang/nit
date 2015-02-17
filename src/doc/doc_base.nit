@@ -68,7 +68,7 @@ end
 abstract class DocComposite
 
 	# Parent element.
-	var parent: nullable DocComposite = null
+	var parent: nullable DocComposite = null is writable
 
 	# Does `self` have a `parent`?
 	fun is_root: Bool do return parent == null
@@ -85,6 +85,7 @@ abstract class DocComposite
 	#
 	# Shortcut for `children.add`.
 	fun add_child(child: DocComposite) do
+		child.parent = self
 		children.add child
 	end
 end
