@@ -17,6 +17,7 @@ module doc_graphs
 
 import doc_structure
 import doc_poset
+import html_templates::html_model # FIXME maybe this phase should depend on `html_render`
 
 redef class ToolContext
 

@@ -23,6 +23,7 @@ import doc_structure
 import doc_hierarchies
 import doc_intros_redefs
 import doc_graphs
+import html_templates
 
 redef class ToolContext
 

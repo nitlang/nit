@@ -14,3 +14,5 @@
 
 # Introduces templates that compose the documentation HTML rendering.
 module html_templates
+
+import html_model
