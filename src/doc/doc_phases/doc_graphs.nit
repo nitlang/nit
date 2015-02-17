@@ -41,7 +41,7 @@ class GraphPhase
 			if article == null then continue
 			# FIXME avoid diff
 			# page.root.add article
-			page.root.children[1].children.insert(article, 0)
+			page.root.children.first.children[1].children.insert(article, 0)
 		end
 	end
 end

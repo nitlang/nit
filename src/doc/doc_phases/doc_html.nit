@@ -579,6 +579,12 @@ redef class ConcernSection
 	end
 end
 
+redef class MEntitySection
+	redef fun render(v, doc, page, parent) do
+		for child in children do child.render(v, doc, page, parent)
+	end
+end
+
 redef class IntroArticle
 	redef fun render(v, doc, page, parent) do
 		var article = new TplArticle("intro")
