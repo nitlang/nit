@@ -49,11 +49,17 @@ class JsonValue
 
 	# Get this value as a `Int`
 	#
-	# require: `self.is_int`
+	# require: `self.is_numeric`
 	#
 	#     assert "-10".to_json_value.to_i == -10
 	#     assert "123".to_json_value.to_i == 123
-	fun to_i: Int do return value.as(Int)
+	#     assert "123.456".to_json_value.to_i == 123
+	fun to_i: Int
+	do
+		var value = value
+		assert value isa Numeric
+		return value.to_i
+	end
 
 	# Is this value a float?
 	#
@@ -64,11 +70,17 @@ class JsonValue
 
 	# Get this value as a `Float`
 	#
-	# require: `self.is_float`
+	# require: `self.is_numeric`
 	#
 	#     assert "0.0".to_json_value.to_f == 0.0
 	#     assert "123.456".to_json_value.to_f == 123.456
-	fun to_f: Float do return value.as(Float)
+	#     assert "123".to_json_value.to_f == 123.0
+	fun to_f: Float
+	do
+		var value = value
+		assert value isa Numeric
+		return value.to_f
+	end
 
 	# Is the value numeric?
 	#

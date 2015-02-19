@@ -93,6 +93,9 @@ class HashMap2[K1, K2, V]
 		if level2 == null then return
 		level2.keys.remove(k2)
 	end
+
+	# Remove all items
+	fun clear do level1.clear
 end
 
 # Simple way to store an `HashMap[K1, HashMap[K2, HashMap[K3, V]]]`
@@ -137,6 +140,9 @@ class HashMap3[K1, K2, K3, V]
 		if level2 == null then return
 		level2.remove_at(k2, k3)
 	end
+
+	# Remove all items
+	fun clear do level1.clear
 end
 
 # A map with a default value.
