@@ -976,10 +976,11 @@ redef class AAttrPropdef
 		has_value = n_expr != null or n_block != null
 
 		var atnoinit = self.get_single_annotation("noinit", modelbuilder)
+		if atnoinit == null then atnoinit = self.get_single_annotation("noautoinit", modelbuilder)
 		if atnoinit != null then
 			noinit = true
 			if has_value then
-				modelbuilder.error(atnoinit, "Error: `noinit` attributes cannot have an initial value")
+				modelbuilder.error(atnoinit, "Error: `noautoinit` attributes cannot have an initial value")
 				return
 			end
 		end
