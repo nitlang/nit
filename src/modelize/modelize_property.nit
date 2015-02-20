@@ -224,10 +224,19 @@ redef class ModelBuilder
 
 		# Look at the autoinit class-annotation
 		var autoinit = nclassdef.get_single_annotation("autoinit", self)
+		var noautoinit = nclassdef.get_single_annotation("noautoinit", self)
 		if autoinit != null then
 			# Just throws the collected initializers
 			mparameters.clear
 			initializers.clear
+
+			if noautoinit != null then
+				error(autoinit, "Error: `autoinit` and `noautoinit` are incompatible.")
+			end
+
+			if autoinit.n_args.is_empty then
+				error(autoinit, "Syntax error: `autoinit` expects method identifiers, use `noautoinit` to clear all autoinits.")
+			end
 
 			# Get and check each argument
 			for narg in autoinit.n_args do
@@ -264,6 +273,13 @@ redef class ModelBuilder
 					abort
 				end
 			end
+		else if noautoinit != null then
+			if initializers.is_empty then
+				warning(noautoinit, "useless-noautoinit", "Warning: the list of autoinit is already empty.")
+			end
+			# Just clear initializers
+			mparameters.clear
+			initializers.clear
 		else
 			# Search the longest-one and checks for conflict
 			var longest = spropdefs.first
