@@ -15,8 +15,8 @@
 import kernel
 
 class A
-	var x: Object is noinit #alt1,3# var x: Object
-	var y: Object is noinit #alt2,3# var y: Object
+	var x: Object is noautoinit #alt1,3# var x: Object
+	var y: Object is noautoinit #alt2,3# var y: Object
 	fun work
 	do
 		if isset _x then x.output

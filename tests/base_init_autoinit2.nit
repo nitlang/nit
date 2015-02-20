@@ -16,9 +16,9 @@ import kernel
 
 class A
 	var a: Object = get(5) is lazy
-	var b: Object is noinit
-	#alt1#var b2: Object = get(-4) is noinit
-	var c: Object is noinit
+	var b: Object is noautoinit
+	#alt1#var b2: Object = get(-4) is noautoinit
+	var c: Object is noautoinit
 	var d: Object = get(2) is autoinit
 	#alt2#var d2: Object = get(-2) is autoinit, lazy
 	var e: Object = get(1)
