@@ -60,7 +60,7 @@ redef class ANode
 	end
 end
 
-redef class AAnnotations
+redef class AAnnotation
 	redef fun accept_ast_validation(v)
 	do
 		# Do not enter in annotations
