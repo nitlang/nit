@@ -140,11 +140,17 @@ class AndroidToolchain
 			end
 		end
 
-		## Generate delegating makefile
+		## Generate Application.mk
 		dir = "{android_project_root}/jni/"
 		"""
+APP_ABI := armeabi armeabi-v7a x86 mips
+APP_PLATFORM := android-{{{app_target_api}}}
+""".write_to_file "{dir}/Application.mk"
+
+		## Generate delegating makefile
+		"""
 include $(call all-subdir-makefiles)
-		""".write_to_file("{dir}/Android.mk")
+""".write_to_file "{dir}/Android.mk"
 
 		# Gather ldflags for Android
 		var ldflags = new Array[String]
@@ -165,7 +171,7 @@ LOCAL_CFLAGS	:= -D ANDROID -D WITH_LIBGC
 LOCAL_MODULE    := main
 LOCAL_SRC_FILES := \\
 {{{cfiles.join(" \\\n")}}}
-LOCAL_LDLIBS    := {{{ldflags.join(" ")}}} libgc.a
+LOCAL_LDLIBS    := {{{ldflags.join(" ")}}} $(TARGET_ARCH)/libgc.a
 LOCAL_STATIC_LIBRARIES := android_native_app_glue png
 
 include $(BUILD_SHARED_LIBRARY)
@@ -236,13 +242,20 @@ $(call import-module,android/native_app_glue)
 		end
 
 		# Ensure that android-setup-libgc.sh has been executed
-		if not "{share_dir}/libgc/lib".file_exists then
+		if not "{share_dir}/libgc/arm/lib".file_exists then
 			toolcontext.exec_and_check(["{share_dir}/libgc/android-setup-libgc.sh"], "Android project error")
 		end
 
 		# Copy GC files
-		toolcontext.exec_and_check(["cp", "{share_dir}/libgc/lib/libgc.a", "{android_project_root}/libgc.a"], "Android project error")
-		toolcontext.exec_and_check(["ln", "-s", "{share_dir}/libgc/include/gc/", "{android_project_root}/jni/nit_compile/gc"], "Android project error")
+		for arch in ["arm", "x86", "mips"] do
+			dir = android_project_root/arch
+			dir.mkdir
+			toolcontext.exec_and_check(["cp", "{share_dir}/libgc/{arch}/lib/libgc.a",
+				dir/"libgc.a"], "Android project error")
+		end
+
+		toolcontext.exec_and_check(["ln", "-s", "{share_dir}/libgc/arm/include/gc/",
+			"{android_project_root}/jni/nit_compile/gc"], "Android project error")
 
 		### Link to assets (for mnit and others)
 		# This will be accessed from `android_project_root`
@@ -285,7 +298,7 @@ $(call import-module,android/native_app_glue)
 """<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">{{{app_name}}}</string>
-</resources>""".write_to_file "{dir}/res/values/strings.xml"
+</resources>""".write_to_file "{android_project_root}/res/values/strings.xml"
 		end
 
 		# Android libs folder
