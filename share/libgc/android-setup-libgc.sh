@@ -34,18 +34,6 @@ if test -z "$ANDROID_NDK"; then
 	ANDROID_NDK=`dirname $ndk_build_path`
 fi
 
-# Get the first platform available (it shouldn't change much, but it may
-# have to be adjusted)
-for platform in `echo $ANDROID_NDK/platforms/android-*/arch-arm`; do
-	SYS_ROOT=$platform
-	break
-done
-
-if test -z "$SYS_ROOT"; then
-	echo "Error: could not an Android platform in the NDK, define ANDROID_NDK to the correct path."
-	exit 1
-fi
-
 # Information on the currently targeted libgc and libatomic_ops source URL
 # These may have to be updated according to server-side changes and newer
 # versions of the Boehm GC.
@@ -82,17 +70,42 @@ mv $libatomic_ops_dir $libgc_dir/libatomic_ops || exit 1
 
 cd $libgc_dir || exit 1
 
-# Configure for Android
-path="$ANDROID_NDK/toolchains/arm-linux-androideabi-4.6/prebuilt/linux-x86_64/bin/"
-export CC="$path/arm-linux-androideabi-gcc --sysroot=$SYS_ROOT"
-export CXX="$path/arm-linux-androideabi-g++ --sysroot=$SYS_ROOT"
-export LD="$path/arm-linux-androideabi-ld"
-export AR="$path/arm-linux-androideabi-ar"
-export RANLIB="$path/arm-linux-androideabi-ranlib"
-export STRIP="$path/arm-linux-androideabi-strip"
-export CFLAGS="-DIGNORE_DYNAMIC_LOADING -DPLATFORM_ANDROID -I libatomic_ops/src/"
-export LIBS="-lc -lgcc"
-./configure --host=arm-linux-androideabi --enable-static --disable-shared --prefix="$install" || exit 1
+archs=(         arm                       x86                mips)
+tools_dirs=(    arm-linux-androideabi-4.6 x86-4.6            mipsel-linux-android-4.6)
+tools_prefixes=(arm-linux-androideabi     i686-linux-android mipsel-linux-android)
+hosts=(         arm-linux-androideabi     x86-linux-android  mips-linux-android)
 
-# Compile and install locally
-make install -j 4 || exit 1
+n_archs=$(( ${#archs[@]} - 1 ))
+for i in $(eval echo "{0..$n_archs}"); do
+	arch=${archs[i]}
+	tools_dir=${tools_dirs[i]}
+	tools_prefix=${tools_prefixes[i]}
+	host=${hosts[i]}
+
+	# Get the first platform available (it shouldn't change much, but it may
+	# have to be adjusted)
+	for platform in `echo $ANDROID_NDK/platforms/android-*/arch-$arch`; do
+		sys_root=$platform
+		break
+	done
+
+	if test -z "$sys_root"; then
+		echo "Error: could not an Android platform for $arch in the NDK, define ANDROID_NDK to the correct path."
+		exit 1
+	fi
+
+	# Configure for Android
+	path="$ANDROID_NDK/toolchains/$tools_dir/prebuilt/linux-x86_64/bin/"
+	export CC="$path/$tools_prefix-gcc --sysroot=$sys_root"
+	export CXX="$path/$tools_prefix-g++ --sysroot=$sys_root"
+	export LD="$path/$tools_prefix-ld"
+	export AR="$path/$tools_prefix-ar"
+	export RANLIB="$path/$tools_prefix-ranlib"
+	export STRIP="$path/$tools_prefix-strip"
+	export CFLAGS="-DIGNORE_DYNAMIC_LOADING -DPLATFORM_ANDROID -I libatomic_ops/src/"
+	export LIBS="-lc -lgcc"
+	./configure --host=$host --enable-static --disable-shared --prefix="$install/$arch/" || exit 1
+
+	# Compile and install locally
+	make install -j 4 || exit 1
+done
