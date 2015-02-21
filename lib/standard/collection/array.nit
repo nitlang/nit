@@ -252,6 +252,7 @@ end
 #     assert a == b
 class Array[E]
 	super AbstractArray[E]
+	super Cloneable
 
 	redef fun [](index)
 	do
@@ -393,6 +394,29 @@ class Array[E]
 		return true
 	end
 
+	# Shallow clone of `self`
+	#
+	# ~~~
+	# var a = [1,2,3]
+	# var b = a.clone
+	# assert a == b
+	# a.add 4
+	# assert a != b
+	# b.add 4
+	# assert a == b
+	# ~~~
+	#
+	# Note that the clone is shallow and elements are shared between `self` and the result.
+	#
+	# ~~~
+	# var aa = [a]
+	# var bb = aa.clone
+	# assert aa == bb
+	# aa.first.add 5
+	# assert aa == bb
+	# ~~~
+	redef fun clone do return to_a
+
 	# Concatenation of arrays.
 	#
 	# Returns a new array built by concatenating `self` and `other` together.
@@ -473,6 +497,7 @@ end
 # A set implemented with an Array.
 class ArraySet[E]
 	super Set[E]
+	super Cloneable
 
 	# The stored elements.
 	private var array: Array[E] is noinit
@@ -519,6 +544,37 @@ class ArraySet[E]
 	init with_capacity(i: Int) do _array = new Array[E].with_capacity(i)
 
 	redef fun new_set do return new ArraySet[E]
+
+	# Shallow clone of `self`
+	#
+	# ~~~
+	# var a = new ArraySet[Int]
+	# a.add 1
+	# a.add 2
+	# var b = a.clone
+	# assert a == b
+	# a.add 3
+	# assert a != b
+	# b.add 3
+	# assert a == b
+	# ~~~
+	#
+	# Note that the clone is shallow and keys and values are shared between `self` and the result.
+	#
+	# ~~~
+	# var aa = new ArraySet[Array[Int]]
+	# aa.add([1,2])
+	# var bb = aa.clone
+	# assert aa == bb
+	# aa.first.add 5
+	# assert aa == bb
+	# ~~~
+	redef fun clone
+	do
+		var res = new ArraySet[E]
+		res.add_all self
+		return res
+	end
 end
 
 # Iterators on sets implemented with arrays.
@@ -538,6 +594,7 @@ end
 # Associative arrays implemented with an array of (key, value) pairs.
 class ArrayMap[K, E]
 	super CoupleMap[K, E]
+	super Cloneable
 
 	# O(n)
 	redef fun [](key)
@@ -615,6 +672,35 @@ class ArrayMap[K, E]
 			i += 1
 		end
 		return -1
+	end
+
+	# Shallow clone of `self`
+	#
+	# ~~~
+	# var a = new ArrayMap[String,Int]
+	# a["one"] = 1
+	# a["two"] = 2
+	# var b = a.clone
+	# assert a == b
+	# a["zero"] = 0
+	# assert a != b
+	# ~~~
+	#
+	# Note that the clone is shallow and keys and values are shared between `self` and the result.
+	#
+	# ~~~
+	# var aa = new ArrayMap[String, Array[Int]]
+	# aa["two"] = [1,2]
+	# var bb = aa.clone
+	# assert aa == bb
+	# aa["two"].add 5
+	# assert aa == bb
+	# ~~~
+	redef fun clone
+	do
+		var res = new ArrayMap[K,E]
+		res.recover_with self
+		return res
 	end
 end
 
