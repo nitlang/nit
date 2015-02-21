@@ -83,6 +83,7 @@ noinit
 readonly
 writable
 autoinit
+noautoinit
 cached
 nosuper
 old_style_init

@@ -1757,6 +1757,9 @@ abstract class MProperty
 	# The visibility of the property
 	var visibility: MVisibility
 
+	# Is the property usable as an initializer?
+	var is_autoinit = false is writable
+
 	init
 	do
 		intro_mclassdef.intro_mproperties.add(self)

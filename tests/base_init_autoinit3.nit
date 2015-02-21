@@ -15,29 +15,53 @@
 import kernel
 
 class A
-	var a: Object = get(5) is lazy
-	var b: Object is noautoinit
-	#alt1#var b2: Object = get(-4) is noautoinit
-	var c: Object is noautoinit
-	var d: Object = get(2) is autoinit
-	#alt2#var d2: Object = get(-2) is autoinit, lazy
-	var e: Object = get(1)
-	fun setc(v: Object) is autoinit do self.c = get(v)
-	init do
-		b = get(4)
-	end
-	fun get(v: Object): Object
-	do
-		'g'.output
-		v.output
-		return v
-	end
+	var i: Int
 end
 
-var a = new A(3)
-'\n'.output
-a.a.output
-a.b.output
-a.c.output
-a.d.output
-a.e.output
+class B
+	autoinit b, i #alt2# autoinit foo #alt4# autoinit fail
+	super A
+	var b: Bool #alt5# var b: Bool is noinit
+	fun foo do end
+end
+
+class C
+	super A
+	var f: Float
+end
+
+class D
+	autoinit i, b, f
+	super B
+	super C
+end
+
+class E
+	noautoinit #alt6#
+	#alt6,7# autoinit
+	super A
+	var a: A
+end
+
+class F
+	#alt8#noautoinit
+end
+
+var a = new A(1)
+a.i.output
+
+var b = new B(false, 2)
+b.i.output
+b.b.output
+
+var c = new C(3, 3.3)
+c.i.output
+c.f.output
+
+var d = new D(4, true, 4.4)
+d.i.output
+d.b.output
+d.f.output
+
+var e = new E
+#alt1# e.a.i.output

@@ -181,6 +181,7 @@ redef class ModelBuilder
 					mparameters.add(mparameter)
 				end
 				initializers.add(npropdef.mpropdef.mproperty)
+				npropdef.mpropdef.mproperty.is_autoinit = true
 			end
 			if npropdef isa AAttrPropdef then
 				if npropdef.mpropdef == null then return # Skip broken attribute
@@ -190,6 +191,7 @@ redef class ModelBuilder
 					# For autoinit attributes, call the reader to force
 					# the lazy initialization of the attribute.
 					initializers.add(npropdef.mreadpropdef.mproperty)
+					npropdef.mreadpropdef.mproperty.is_autoinit = true
 					continue
 				end
 				if npropdef.has_value then continue
@@ -202,9 +204,11 @@ redef class ModelBuilder
 				if msetter == null then
 					# No setter, it is a old-style attribute, so just add it
 					initializers.add(npropdef.mpropdef.mproperty)
+					npropdef.mpropdef.mproperty.is_autoinit = true
 				else
 					# Add the setter to the list
 					initializers.add(msetter.mproperty)
+					msetter.mproperty.is_autoinit = true
 				end
 			end
 		end
@@ -218,39 +222,99 @@ redef class ModelBuilder
 			return
 		end
 
-		# Search the longest-one and checks for conflict
-		var longest = spropdefs.first
-		if spropdefs.length > 1 then
-			# Check for conflict in the order of initializers
-			# Each initializer list must me a prefix of the longest list
-			# part 1. find the longest list
-			for spd in spropdefs do
-				if spd.initializers.length > longest.initializers.length then longest = spd
+		# Look at the autoinit class-annotation
+		var autoinit = nclassdef.get_single_annotation("autoinit", self)
+		var noautoinit = nclassdef.get_single_annotation("noautoinit", self)
+		if autoinit != null then
+			# Just throws the collected initializers
+			mparameters.clear
+			initializers.clear
+
+			if noautoinit != null then
+				error(autoinit, "Error: `autoinit` and `noautoinit` are incompatible.")
 			end
-			# part 2. compare
-			for spd in spropdefs do
-				var i = 0
-				for p in spd.initializers do
-					if p != longest.initializers[i] then
-						self.error(nclassdef, "Error: conflict for inherited inits {spd}({spd.initializers.join(", ")}) and {longest}({longest.initializers.join(", ")})")
-						return
-					end
-					i += 1
+
+			if autoinit.n_args.is_empty then
+				error(autoinit, "Syntax error: `autoinit` expects method identifiers, use `noautoinit` to clear all autoinits.")
+			end
+
+			# Get and check each argument
+			for narg in autoinit.n_args do
+				var id = narg.as_id
+				if id == null then
+					error(narg, "Syntax error: `autoinit` expects method identifiers.")
+					return
+				end
+
+				# Search the property.
+				# To avoid bad surprises, try to get the setter first.
+				var p = try_get_mproperty_by_name(narg, mclassdef, id + "=")
+				if p == null then
+					p = try_get_mproperty_by_name(narg, mclassdef, id)
+				end
+				if p == null then
+					error(narg, "Error: unknown method `{id}`")
+					return
+				end
+				if not p.is_autoinit then
+					error(narg, "Error: `{p}` is not an autoinit method")
+					return
+				end
+
+				# Register the initializer and the parameters
+				initializers.add(p)
+				var pd = p.intro
+				if pd isa MMethodDef then
+					# Get the signature resolved for the current receiver
+					var sig = pd.msignature.resolve_for(mclassdef.mclass.mclass_type, mclassdef.bound_mtype, mclassdef.mmodule, false)
+					mparameters.add_all sig.mparameters
+				else
+					# TODO attributes?
+					abort
 				end
 			end
-		end
+		else if noautoinit != null then
+			if initializers.is_empty then
+				warning(noautoinit, "useless-noautoinit", "Warning: the list of autoinit is already empty.")
+			end
+			# Just clear initializers
+			mparameters.clear
+			initializers.clear
+		else
+			# Search the longest-one and checks for conflict
+			var longest = spropdefs.first
+			if spropdefs.length > 1 then
+				# Check for conflict in the order of initializers
+				# Each initializer list must me a prefix of the longest list
+				# part 1. find the longest list
+				for spd in spropdefs do
+					if spd.initializers.length > longest.initializers.length then longest = spd
+				end
+				# part 2. compare
+				for spd in spropdefs do
+					var i = 0
+					for p in spd.initializers do
+						if p != longest.initializers[i] then
+							self.error(nclassdef, "Error: conflict for inherited inits {spd}({spd.initializers.join(", ")}) and {longest}({longest.initializers.join(", ")})")
+							return
+						end
+						i += 1
+					end
+				end
+			end
 
-		# Can we just inherit?
-		if spropdefs.length == 1 and mparameters.is_empty and defined_init == null then
-			self.toolcontext.info("{mclassdef} inherits the basic constructor {longest}", 3)
-			mclassdef.mclass.root_init = longest
-			return
-		end
+			# Can we just inherit?
+			if spropdefs.length == 1 and mparameters.is_empty and defined_init == null then
+				self.toolcontext.info("{mclassdef} inherits the basic constructor {longest}", 3)
+				mclassdef.mclass.root_init = longest
+				return
+			end
 
-		# Combine the inherited list to what is collected
-		if longest.initializers.length > 0 then
-			mparameters.prepend longest.new_msignature.mparameters
-			initializers.prepend longest.initializers
+			# Combine the inherited list to what is collected
+			if longest.initializers.length > 0 then
+				mparameters.prepend longest.new_msignature.mparameters
+				initializers.prepend longest.initializers
+			end
 		end
 
 		# If we already have a basic init definition, then setup its initializers
@@ -928,10 +992,11 @@ redef class AAttrPropdef
 		has_value = n_expr != null or n_block != null
 
 		var atnoinit = self.get_single_annotation("noinit", modelbuilder)
+		if atnoinit == null then atnoinit = self.get_single_annotation("noautoinit", modelbuilder)
 		if atnoinit != null then
 			noinit = true
 			if has_value then
-				modelbuilder.error(atnoinit, "Error: `noinit` attributes cannot have an initial value")
+				modelbuilder.error(atnoinit, "Error: `noautoinit` attributes cannot have an initial value")
 				return
 			end
 		end
