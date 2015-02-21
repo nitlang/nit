@@ -226,6 +226,25 @@ interface Discrete
 	end
 end
 
+# Something that can be cloned
+#
+# This interface introduces the `clone` method used to duplicate an instance
+# Its specific semantic is let to the subclasses.
+interface Cloneable
+	# Duplicate `self`
+	#
+	# The specific semantic of this method is let to the subclasses;
+	# Especially, if (and how) attributes are cloned (depth vs. shallow).
+	#
+	# As a rule of thumb, the principle of least astonishment should
+	# be used to guide the semantic.
+	#
+	# Note that as the returned clone depends on the semantic,
+	# the `==` method, if redefined, should ensure the equality
+	# between an object and its clone.
+	fun clone: SELF is abstract
+end
+
 # A numeric value supporting mathematical operations
 interface Numeric
 	super Comparable
