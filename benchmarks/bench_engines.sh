@@ -72,6 +72,8 @@ function run_compiler()
 		bench_command "queens" "bench_queens 13" "./queens.$title.bin" 13
 		run_command "$@" "../lib/ai/examples/puzzle.nit" -o "puzzle.$title.bin"
 		bench_command "puzzle" "puzzle 15-hard" "./puzzle.$title.bin" kleg.mondcafjhbi
+		run_command "$@" "markdown/engines/nitmd/nitmd.nit" -o "nitmd.$title.bin"
+		bench_command "nitmd" "markdown" "./nitmd.$title.bin" markdown/benches/out/mixed.md 80
 	fi
 
 	rm -r *.bin .nit_compile out
@@ -118,6 +120,10 @@ fi
 
 # get the bootstrapped nitc
 cp ../bin/nitc .
+
+if test -z "$fast"; then
+	make -C markdown/benches
+fi
 
 ## EFFECTIVE BENCHS ##
 
