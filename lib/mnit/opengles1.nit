@@ -59,13 +59,6 @@ in "C header" `{
 `}
 
 in "C" `{
-	#define LOGW(...) ((void)fprintf(stderr, "# warn: %s (%i)\n", __VA_ARGS__))
-	#ifdef DEBUG
-		#define LOGI(...) ((void)fprintf(stderr, "# info: %s (%i)\n", __VA_ARGS__))
-	#else
-		#define LOGI(...) (void)0
-	#endif
-
 	extern NativeWindowType mnit_window;
 	extern EGLNativeDisplayType mnit_native_display;
 
@@ -104,32 +97,32 @@ in "C" `{
 		image->src_yi = 1.0;
 
 		if ((mnit_opengles_error_code = glGetError()) != GL_NO_ERROR) {
-			LOGW("error loading image after malloc", mnit_opengles_error_code);
+			PRINT_ERROR("error loading image after malloc: %i", mnit_opengles_error_code);
 		}
 
 		glGenTextures(1, &image->texture);
 
 		if ((mnit_opengles_error_code = glGetError()) != GL_NO_ERROR) {
-			LOGW("error loading image after glGenTextures", mnit_opengles_error_code);
+			PRINT_ERROR("error loading image after glGenTextures: %i", mnit_opengles_error_code);
 		}
 
 		glBindTexture(GL_TEXTURE_2D, image->texture);
 
 		if ((mnit_opengles_error_code = glGetError()) != GL_NO_ERROR) {
-			LOGW("error loading image glBindTexture", mnit_opengles_error_code);
+			PRINT_ERROR("error loading image glBindTexture: %i", mnit_opengles_error_code);
 		}
 
 		glTexImage2D(	GL_TEXTURE_2D, 0, format, width, height,
 						0, format, GL_UNSIGNED_BYTE, (GLvoid*)pixels);
 
 		if ((mnit_opengles_error_code = glGetError()) != GL_NO_ERROR) {
-			LOGW("error loading image after glTexImage2D", mnit_opengles_error_code);
+			PRINT_ERROR("error loading image after glTexImage2D: %i", mnit_opengles_error_code);
 		}
 
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 
 		if ((mnit_opengles_error_code = glGetError()) != GL_NO_ERROR) {
-			LOGW("error loading image after gtTexParameter", mnit_opengles_error_code);
+			PRINT_ERROR("error loading image after gtTexParameter: %i", mnit_opengles_error_code);
 		}
 
 		return image;
@@ -162,27 +155,27 @@ class Opengles1Display
 
 		EGLDisplay display = eglGetDisplay(mnit_native_display);
 		if ( display == EGL_NO_DISPLAY) {
-			LOGW("Unable to eglGetDisplay", 0);
+			PRINT_ERROR("Unable to eglGetDisplay");
 			return -1;
 		}
 
 		if ( eglInitialize(display, 0, 0) == EGL_FALSE) {
-			LOGW("Unable to eglInitialize", 0);
+			PRINT_ERROR("Unable to eglInitialize");
 			return -1;
 		}
 
 		if ( eglChooseConfig(display, attribs, &config, 1, &numConfigs) == EGL_FALSE) {
-			LOGW("Unable to eglChooseConfig", 0);
+			PRINT_ERROR("Unable to eglChooseConfig");
 			return -1;
 		}
 
 		if ( numConfigs == 0 ) {
-			LOGW("No configs available for egl", 0);
+			PRINT_ERROR("No configs available for egl");
 			return -1;
 		}
 
 		if ( eglGetConfigAttrib(display, config, EGL_NATIVE_VISUAL_ID, &format) == EGL_FALSE) {
-			LOGW("Unable to eglGetConfigAttrib", 0);
+			PRINT_ERROR("Unable to eglGetConfigAttrib");
 			return -1;
 		}
 
@@ -193,7 +186,7 @@ class Opengles1Display
 		context = eglCreateContext(display, config, NULL, NULL);
 
 		if (eglMakeCurrent(display, surface, surface, context) == EGL_FALSE) {
-			LOGW("Unable to eglMakeCurrent", 0);
+			PRINT_ERROR("Unable to eglMakeCurrent");
 			return -1;
 		}
 
@@ -206,11 +199,6 @@ class Opengles1Display
 		mnit_config = config;
 		mnit_width = w;
 		mnit_height = h;
-
-		LOGI("surface", (int)surface);
-		LOGI("display", (int)display);
-		LOGI("width", w);
-		LOGI("height", h);
 
 		glViewport(0, 0, mnit_width, mnit_height);
 		glMatrixMode(GL_PROJECTION);
@@ -304,7 +292,7 @@ class Opengles1Display
 		glDisable(GL_TEXTURE_2D);
 
 		if ((mnit_opengles_error_code = glGetError()) != GL_NO_ERROR) {
-		   LOGW("error drawing", mnit_opengles_error_code);
+		   PRINT_ERROR("error drawing: %i", mnit_opengles_error_code);
 		}
 	`}
 
@@ -354,7 +342,7 @@ class Opengles1Display
 		glDisable(GL_TEXTURE_2D);
 
 		if ((mnit_opengles_error_code = glGetError()) != GL_NO_ERROR) {
-		   LOGW("error drawing", mnit_opengles_error_code);
+		   PRINT_ERROR("error drawing: %i", mnit_opengles_error_code);
 		}
 	`}
 
@@ -409,7 +397,7 @@ class Opengles1Display
 		glDisable(GL_TEXTURE_2D);
 
 		if ((mnit_opengles_error_code = glGetError()) != GL_NO_ERROR) {
-		   LOGW("error drawing", mnit_opengles_error_code);
+		   PRINT_ERROR("error drawing: %i", mnit_opengles_error_code);
 		}
 	`}
 
