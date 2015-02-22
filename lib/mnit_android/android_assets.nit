@@ -198,9 +198,14 @@ redef class Opengles1Image
 		for (i = 0; i < height; i++)
 			memcpy(pixels + (row_bytes_pow2*i), row_pointers[i], row_bytes);
 
-		LOGW("OK");
 		recv = mnit_opengles_load_image((const uint_least32_t *)pixels,
 			width, height, width_pow2, height_pow2, has_alpha);
+
+		// Calculate the size of the client-side memory allocated and freed
+		float size = ((float)row_bytes_pow2) * height_pow2/1024.0/1024.0;
+		static float total_size = 0;
+		total_size += size;
+		LOGI("Loaded OK %fmb out of %fmb", size, total_size);
 
 	close_png_ptr:
 		if (info_ptr != NULL)
