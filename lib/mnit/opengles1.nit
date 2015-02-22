@@ -55,7 +55,9 @@ in "C header" `{
 
 	GLenum mnit_opengles_error_code;
 
-	struct mnit_opengles_Texture *mnit_opengles_load_image( const uint_least32_t *pixels, int width, int height, int has_alpha );
+	struct mnit_opengles_Texture *mnit_opengles_load_image(
+		const uint_least32_t *pixels, int width, int height,
+		int width_pow2, int height_pow2, int has_alpha);
 `}
 
 in "C" `{
@@ -79,7 +81,9 @@ in "C" `{
 		{1.0f, 0.0f}
 	};
 
-	struct mnit_opengles_Texture *mnit_opengles_load_image( const uint_least32_t *pixels, int width, int height, int has_alpha )
+	struct mnit_opengles_Texture *mnit_opengles_load_image(
+		const uint_least32_t *pixels, int width, int height,
+		int width_pow2, int height_pow2, int has_alpha)
 	{
 		struct mnit_opengles_Texture *image = malloc(sizeof(struct mnit_opengles_Texture));
 		int format = has_alpha? GL_RGBA: GL_RGB;
@@ -93,8 +97,8 @@ in "C" `{
 
 		image->src_xo = 0;
 		image->src_yo = 0;
-		image->src_xi = 1.0;
-		image->src_yi = 1.0;
+		image->src_xi = ((float)width)/width_pow2;
+		image->src_yi = ((float)height)/height_pow2;
 
 		if ((mnit_opengles_error_code = glGetError()) != GL_NO_ERROR) {
 			PRINT_ERROR("error loading image after malloc: %i", mnit_opengles_error_code);
@@ -112,7 +116,7 @@ in "C" `{
 			PRINT_ERROR("error loading image glBindTexture: %i", mnit_opengles_error_code);
 		}
 
-		glTexImage2D(	GL_TEXTURE_2D, 0, format, width, height,
+		glTexImage2D(	GL_TEXTURE_2D, 0, format, width_pow2, height_pow2,
 						0, format, GL_UNSIGNED_BYTE, (GLvoid*)pixels);
 
 		if ((mnit_opengles_error_code = glGetError()) != GL_NO_ERROR) {
@@ -454,10 +458,12 @@ extern class Opengles1Image in "C" `{struct mnit_opengles_Texture *`}
 		image->scale = recv->scale;
 		image->blended = recv->blended;
 
-		image->src_xo = ((float)x)/recv->width;
-		image->src_yo = ((float)y)/recv->height;
-		image->src_xi = ((float)x+w)/recv->width;
-		image->src_yi = ((float)y+h)/recv->height;
+		float r_dx = recv->src_xi - recv->src_xo;
+		float r_dy = recv->src_yi - recv->src_yo;
+		image->src_xo = recv->src_xo + ((float)x)/recv->width*r_dx;
+		image->src_yo = recv->src_yo + ((float)y)/recv->height*r_dy;
+		image->src_xi = recv->src_xo + ((float)x+w)/recv->width*r_dx;
+		image->src_yi = recv->src_yo + ((float)y+h)/recv->height*r_dy;
 
 		return Opengles1Image_as_Image( image );
     `}
