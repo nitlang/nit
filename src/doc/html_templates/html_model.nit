@@ -129,6 +129,19 @@ redef class MEntity
 	#
 	# Mainly used for icons.
 	var css_classes = new Array[String]
+
+	# A li element that can go in a `HTMLList`.
+	fun html_list_item: ListItem do
+		var tpl = new Template
+		tpl.add new DocHTMLLabel.with_classes(css_classes)
+		tpl.add html_link
+		var comment = html_short_comment
+		if comment != null then
+			tpl.add ": "
+			tpl.add comment
+		end
+		return new ListItem(tpl)
+	end
 end
 
 redef class MProject

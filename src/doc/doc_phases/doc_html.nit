@@ -763,14 +763,8 @@ end
 redef class HierarchyListArticle
 	redef fun render(v, doc, page, parent) do
 		if mentities.is_empty then return
-		var title = list_title
-		var id = list_title.to_lower
-		var article = new TplArticle.with_title(id, title)
-		var list = new TplList.with_classes(["list-unstyled", "list-definition"])
-		for mentity in mentities do
-			list.elts.add mentity.tpl_list_item
-		end
-		article.content = list
+		var article = new TplArticle.with_title(list_title.to_lower, list_title)
+		article.content = write_to_string
 		parent.add_child article
 	end
 end

@@ -18,6 +18,7 @@ module html_templates
 import html_model
 import html::bootstrap
 import doc_phases::doc_structure
+import doc_phases::doc_hierarchies
 
 # Renders the page as HTML.
 redef class DocPage
@@ -297,5 +298,20 @@ redef class DefinitionArticle
 		var comment = mentity.html_comment
 		if comment != null then	addn comment
 		super
+	end
+end
+
+redef class HierarchyListArticle
+	redef var html_id is lazy do return "article_hierarchy_{list_title}_{mentity.nitdoc_id}"
+	redef var html_title is lazy do return list_title
+	redef fun is_empty do return mentities.is_empty
+
+	redef fun render_body do
+		var lst = new UnorderedList
+		lst.css_classes.add "list-unstyled list-definition"
+		for mentity in mentities do
+			lst.add_li mentity.html_list_item
+		end
+		addn lst
 	end
 end
