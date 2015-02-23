@@ -325,7 +325,7 @@ end
 
 redef class MEntityPage
 	redef var html_url is lazy do return mentity.nitdoc_url
-	redef fun init_title(v, doc) do title = mentity.nitdoc_name
+	redef fun init_title(v, doc) do title = mentity.html_name
 	redef fun init_content(v, doc) do add_section root.start_rendering(v, doc, self)
 end
 
@@ -338,9 +338,9 @@ redef class MGroupPage
 		super
 		var mproject = mentity.mproject
 		if not mentity.is_root then
-			topmenu.add_li new ListItem(new Link(mproject.nitdoc_url, mproject.nitdoc_name))
+			topmenu.add_li new ListItem(new Link(mproject.nitdoc_url, mproject.html_name))
 		end
-		topmenu.add_li new ListItem(new Link(html_url, mproject.nitdoc_name))
+		topmenu.add_li new ListItem(new Link(html_url, mproject.html_name))
 		topmenu.active_item = topmenu.items.last
 	end
 
@@ -378,8 +378,8 @@ redef class MModulePage
 	redef fun init_topmenu(v, doc) do
 		super
 		var mproject = mentity.mproject
-		topmenu.add_li new ListItem(new Link(mproject.nitdoc_url, mproject.nitdoc_name))
-		topmenu.add_li new ListItem(new Link(mentity.nitdoc_url, mentity.nitdoc_name))
+		topmenu.add_li new ListItem(new Link(mproject.nitdoc_url, mproject.html_name))
+		topmenu.add_li new ListItem(new Link(mentity.nitdoc_url, mentity.html_name))
 		topmenu.active_item = topmenu.items.last
 	end
 
@@ -417,15 +417,11 @@ end
 
 redef class MClassPage
 
-	redef fun init_title(v, doc) do
-		title = "{mentity.nitdoc_name}{mentity.tpl_signature.write_to_string}"
-	end
-
 	redef fun init_topmenu(v, doc) do
 		super
 		var mproject = mentity.intro_mmodule.mgroup.mproject
-		topmenu.add_li new ListItem(new Link("{mproject.nitdoc_url}", "{mproject.nitdoc_name}"))
-		topmenu.add_li new ListItem(new Link(html_url, mentity.nitdoc_name))
+		topmenu.add_li new ListItem(new Link(mproject.nitdoc_url, mproject.html_name))
+		topmenu.add_li new ListItem(new Link(html_url, mentity.html_name))
 		topmenu.active_item = topmenu.items.last
 	end
 
@@ -456,7 +452,7 @@ redef class MClassPage
 			classes.add "inherit"
 			var cls_url = mprop.intro.mclassdef.mclass.nitdoc_url
 			var def_url = "{cls_url}#{mprop.nitdoc_id}"
-			var lnk = new TplLink(def_url, mprop.nitdoc_name)
+			var lnk = new TplLink(def_url, mprop.html_name)
 			var mdoc = mprop.intro.mdoc_or_fallback
 			if mdoc != null then lnk.title = mdoc.short_comment
 			var item = new Template
@@ -500,7 +496,7 @@ end
 
 redef class MPropertyPage
 	redef fun init_title(v, doc) do
-		title = "{mentity.nitdoc_name}{mentity.tpl_signature.write_to_string}"
+		title = "{mentity.html_name}{mentity.tpl_signature.write_to_string}"
 	end
 
 	redef fun init_topmenu(v, doc) do
@@ -508,9 +504,9 @@ redef class MPropertyPage
 		var mmodule = mentity.intro_mclassdef.mmodule
 		var mproject = mmodule.mgroup.mproject
 		var mclass = mentity.intro_mclassdef.mclass
-		topmenu.add_li new ListItem(new Link("{mproject.nitdoc_url}", "{mproject.nitdoc_name}"))
-		topmenu.add_li new ListItem(new Link("{mclass.nitdoc_url}", "{mclass.nitdoc_name}"))
-		topmenu.add_li new ListItem(new Link(html_url, mentity.nitdoc_name))
+		topmenu.add_li new ListItem(new Link(mproject.nitdoc_url, mproject.html_name))
+		topmenu.add_li new ListItem(new Link(mclass.nitdoc_url, mclass.html_name))
+		topmenu.add_li new ListItem(new Link(html_url, mentity.html_name))
 		topmenu.active_item = topmenu.items.last
 	end
 end
@@ -530,18 +526,16 @@ redef class DocRoot
 	fun start_rendering(v: RenderHTMLPhase, doc: DocModel, page: MEntityPage): TplSection do
 		var section = new TplSection("top")
 		var mentity = page.mentity
-		section.title = mentity.nitdoc_name
+		section.title = mentity.html_name
 		section.subtitle = mentity.tpl_declaration
 		# FIXME ugly hack to avoid diff
 		if mentity isa MGroup and mentity.is_root then
-			section.title = mentity.mproject.nitdoc_name
+			section.title = mentity.mproject.html_name
 			section.subtitle = mentity.mproject.tpl_declaration
-		else if mentity isa MClass then
-			section.title = "{mentity.nitdoc_name}{mentity.tpl_signature.write_to_string}"
 		else if mentity isa MProperty then
-			section.title = "{mentity.nitdoc_name}{mentity.intro.tpl_signature.write_to_string}"
+			section.title = "{mentity.html_name}{mentity.intro.tpl_signature.write_to_string}"
 			section.subtitle = mentity.tpl_namespace
-			section.summary_title = mentity.nitdoc_name
+			section.summary_title = mentity.html_name
 		end
 		render(v, doc, page, section)
 		return section
@@ -576,10 +570,10 @@ redef class ConcernSection
 		var title = new Template
 		if mmodule == page.mentity then
 			title.add "in "
-			section.summary_title = "in {mmodule.nitdoc_name}"
+			section.summary_title = "in {mmodule.html_name}"
 		else
 			title.add "from "
-			section.summary_title = "from {mmodule.nitdoc_name}"
+			section.summary_title = "from {mmodule.html_name}"
 		end
 		title.add mmodule.tpl_namespace
 		section.title = title
@@ -590,7 +584,7 @@ redef class ConcernSection
 		title.add "in "
 		title.add mmodule.tpl_namespace
 		section.title = title
-		section.summary_title = "in {mmodule.nitdoc_name}"
+		section.summary_title = "in {mmodule.html_name}"
 	end
 end
 
@@ -711,14 +705,14 @@ redef class DefinitionArticle
 		else
 			var cls_url = mprop.intro.mclassdef.mclass.nitdoc_url
 			var def_url = "{cls_url}#{mprop.nitdoc_id}"
-			var lnk = new TplLink.with_title(def_url, mprop.nitdoc_name,
+			var lnk = new TplLink.with_title(def_url, mprop.html_name,
 					"Go to introduction")
 			title.add "redef "
 			title.add lnk
 		end
 		article.title = title
 		article.title_classes.add "signature"
-		article.summary_title = "{mprop.nitdoc_name}"
+		article.summary_title = "{mprop.html_name}"
 		article.subtitle = mpropdef.tpl_namespace
 		if mpropdef.mdoc_or_fallback != null then
 			article.content = mpropdef.mdoc_or_fallback.tpl_comment

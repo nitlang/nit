@@ -45,9 +45,20 @@ redef class MEntity
 	# URL of this entity’s Nitdoc page.
 	fun nitdoc_url: String is abstract
 
+	# Returns the mentity name without short signature.
+	#
+	# * MProject: `foo`
+	# * MGroup: `foo`
+	# * MModule: `foo`
+	# * MClass: `Foo[E]`
+	# * MClassDef: `Foo[E]`
+	# * MProperty: `foo(e)`
+	# * MPropdef: `foo(e)`
+	var html_name: String is lazy do return name.html_escape
+
 	# A template link to the mentity `nitdoc_id`
 	fun tpl_anchor: TplLink do
-		var tpl = new TplLink("#{nitdoc_id}", nitdoc_name)
+		var tpl = new TplLink("#{nitdoc_id}", html_name)
 		var mdoc = mdoc_or_fallback
 		if mdoc != null then
 			tpl.title = mdoc.short_comment
@@ -57,7 +68,7 @@ redef class MEntity
 
 	# A template link to the mentity `nitdoc_url`
 	fun tpl_link: TplLink do
-		var tpl = new TplLink(nitdoc_url, nitdoc_name)
+		var tpl = new TplLink(nitdoc_url, html_name)
 		var mdoc = mdoc_or_fallback
 		if mdoc != null then
 			tpl.title = mdoc.short_comment
@@ -80,7 +91,7 @@ redef class MEntity
 		var tpl = new TplArticle.with_title(nitdoc_id, tpl_title)
 		tpl.title_classes.add "signature"
 		tpl.subtitle = tpl_namespace
-		tpl.summary_title = nitdoc_name
+		tpl.summary_title = html_name
 		return tpl
 	end
 
@@ -252,6 +263,22 @@ redef class MClass
 	redef fun nitdoc_url do return "class_{nitdoc_id}.html"
 	redef fun mdoc_or_fallback do return intro.mdoc
 
+	# Format: `Foo[E]`
+	redef var html_name is lazy do
+		var tpl = new Template
+		tpl.add name.html_escape
+		if arity > 0 then
+			tpl.add "["
+			var parameter_names = new Array[String]
+			for p in mparameters do
+				parameter_names.add(p.html_name)
+			end
+			tpl.add parameter_names.join(", ")
+			tpl.add "]"
+		end
+		return tpl.write_to_string
+	end
+
 	redef fun tpl_declaration do return intro.tpl_declaration
 	redef fun tpl_definition do return intro.tpl_definition
 
@@ -268,7 +295,6 @@ redef class MClass
 		var title = new Template
 		title.add tpl_icon
 		title.add tpl_link
-		title.add tpl_signature
 		return title
 	end
 
@@ -280,17 +306,11 @@ redef class MClass
 			tpl.add "["
 			var parameter_names = new Array[String]
 			for p in mparameters do
-				parameter_names.add(p.nitdoc_name)
+				parameter_names.add(p.html_name)
 			end
 			tpl.add parameter_names.join(", ")
 			tpl.add "]"
 		end
-		return tpl
-	end
-
-	redef fun tpl_article do
-		var tpl = super
-		tpl.summary_title = "{nitdoc_name}{tpl_signature.write_to_string}"
 		return tpl
 	end
 
@@ -314,7 +334,7 @@ redef class MClassDef
 
 	redef fun tpl_article do
 		var tpl = new TplArticle(nitdoc_id)
-		tpl.summary_title = "in {mmodule.nitdoc_name}"
+		tpl.summary_title = "in {mmodule.html_name}"
 		tpl.title = tpl_declaration
 		tpl.title_classes.add "signature"
 		var title = new Template
@@ -332,7 +352,6 @@ redef class MClassDef
 		var title = new Template
 		title.add tpl_icon
 		title.add tpl_link
-		title.add tpl_signature
 		return title
 	end
 
@@ -350,7 +369,7 @@ redef class MClassDef
 		if not mparameters.is_empty then
 			tpl.add "["
 			for i in [0..mparameters.length[ do
-				tpl.add "{mparameters[i].nitdoc_name}: "
+				tpl.add "{mparameters[i].html_name}: "
 				tpl.add bound_mtype.arguments[i].tpl_signature
 				if i < mparameters.length - 1 then tpl.add ", "
 			end
@@ -428,7 +447,7 @@ redef class MPropDef
 
 	redef fun tpl_article do
 		var tpl = new TplArticle(nitdoc_id)
-		tpl.summary_title = "in {mclassdef.nitdoc_name}"
+		tpl.summary_title = "in {mclassdef.html_name}"
 		var title = new Template
 		title.add "in "
 		title.add mclassdef.tpl_link
@@ -577,7 +596,9 @@ end
 redef class MGenericType
 	redef fun tpl_signature do
 		var tpl = new Template
-		tpl.add tpl_link
+		var lnk = tpl_link
+		lnk.text = mclass.name.html_escape
+		tpl.add lnk
 		tpl.add "["
 		for i in [0..arguments.length[ do
 			tpl.add arguments[i].tpl_signature
