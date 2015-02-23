@@ -286,3 +286,16 @@ redef class ConcernsArticle
 
 	redef fun render_body do add concerns.html_list
 end
+
+redef class DefinitionArticle
+	redef var html_id is lazy do return "article_definition_{mentity.nitdoc_id}"
+	redef var html_title is lazy do return mentity.html_name
+	redef var html_subtitle is lazy do return mentity.html_declaration
+	redef var is_hidden = false
+
+	redef fun render_body do
+		var comment = mentity.html_comment
+		if comment != null then	addn comment
+		super
+	end
+end
