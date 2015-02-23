@@ -75,7 +75,6 @@ The webserver can then be accessed at `http://yourdomain.com:3000/nitrpg/`.
 NitRPG stills under heavy development.
 Incomming features contain (but are not limited to):
 
-* Add a homepage that lists openened games
 * Periodized stats (weekly, monthly, yearly, overall)
 * Display graphs with stats
 * More achievements

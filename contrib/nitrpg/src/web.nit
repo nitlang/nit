@@ -62,6 +62,51 @@ class RpgAction
 		game.root_url = root_url
 		return game
 	end
+
+	# Returns the list of saved games from NitRPG data.
+	fun load_games: Array[Game] do
+		var res = new Array[Game]
+		var rpgdir = "nitrpg_data"
+		if not rpgdir.file_exists then return res
+		for user in rpgdir.files do
+			for repo in "{rpgdir}/{user}".files do
+				var game = load_game("{user}/{repo}")
+				if game != null then res.add game
+			end
+		end
+		return res
+	end
+end
+
+# Repo overview page.
+class RpgHome
+	super RpgAction
+
+	# Response page stub.
+	var page: NitRpgPage is noinit
+
+	redef fun answer(request, url) do
+		var readme = load_readme
+		var games = load_games
+		var response = new HttpResponse(200)
+		page = new NitRpgPage(root_url)
+		page.side_panels.add new GamesShortListPanel(root_url, games)
+		page.flow_panels.add new MDPanel(readme)
+		response.body = page.write_to_string
+		return response
+	end
+
+	# Load the string content of the nitrpg readme file.
+	private fun load_readme: String do
+		var readme = "README.md"
+		if not readme.file_exists then
+			return "Unable to locate README file."
+		end
+		var file = new FileReader.open(readme)
+		var text = file.read_all
+		file.close
+		return text
+	end
 end
 
 # An action that require a game.
@@ -225,6 +270,7 @@ vh.routes.add new Route("/games/:owner/:repo/players", new ListPlayers(root))
 vh.routes.add new Route("/games/:owner/:repo/achievements/:achievement", new AchievementHome(root))
 vh.routes.add new Route("/games/:owner/:repo/achievements", new ListAchievements(root))
 vh.routes.add new Route("/games/:owner/:repo", new RepoHome(root))
+vh.routes.add new Route("/", new RpgHome(root))
 
 var fac = new HttpFactory.and_libevent
 fac.config.virtual_hosts.add vh
