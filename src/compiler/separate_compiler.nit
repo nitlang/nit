@@ -171,6 +171,7 @@ class SeparateCompiler
 		compiler.compile_nitni_global_ref_functions
 		compiler.compile_main_function
 		compiler.compile_finalizer_function
+		compiler.link_mmethods
 
 		# compile methods
 		for m in mainmodule.in_importation.greaters do
@@ -580,28 +581,63 @@ class SeparateCompiler
 				# Generate trampolines
 				if modelbuilder.toolcontext.opt_trampoline_call.value then
 					r2.compile_trampolines(self)
-
-					# Replace monomorphic call to a trampoline by a direct call to the virtual implementation
-					if modelbuilder.toolcontext.opt_substitute_monomorph.value then do
-						var m = pd.mproperty
-						if rta == null then
-							# Without RTA, monomorphic means alone (uniq name)
-							if m.mpropdefs.length != 1 then break label
-						else
-							# With RTA, monomorphic means only live methoddef
-							if not rta.live_methoddefs.has(pd) then break label
-							for md in m.mpropdefs do
-								if md != pd and rta.live_methoddefs.has(md) then break label
-							end
-						end
-						# Here the trick, GNU ld can substitute symbols with specific values.
-						var n2 = "CALL_" + m.const_color
-						linker_script.add("{n2} = {r2.c_name};")
-					end label
 				end
 			end
 		end
 		self.mainmodule = old_module
+	end
+
+	# Process all introduced methods and compile some linking information (if needed)
+	fun link_mmethods
+	do
+		if not modelbuilder.toolcontext.opt_substitute_monomorph.value then return
+
+		for mmodule in mainmodule.in_importation.greaters do
+			for cd in mmodule.mclassdefs do
+				for m in cd.intro_mproperties do
+					if not m isa MMethod then continue
+					link_mmethod(m)
+				end
+			end
+		end
+	end
+
+	# Compile some linking information (if needed)
+	fun link_mmethod(m: MMethod)
+	do
+		var n2 = "CALL_" + m.const_color
+
+		# Replace monomorphic call by a direct call to the virtual implementation
+		var md = is_monomorphic(m)
+		if md != null then
+			linker_script.add("{n2} = {md.virtual_runtime_function.c_name};")
+		end
+
+	end
+
+	# The single mmethodef called in case of monomorphism.
+	# Returns nul if dead or polymorphic.
+	fun is_monomorphic(m: MMethod): nullable MMethodDef
+	do
+		var rta = runtime_type_analysis
+		if rta == null then
+			# Without RTA, monomorphic means alone (uniq name)
+			if m.mpropdefs.length == 1 then
+				return m.mpropdefs.first
+			else
+				return null
+			end
+		else
+			# With RTA, monomorphic means only live methoddef
+			var res: nullable MMethodDef = null
+			for md in m.mpropdefs do
+				if rta.live_methoddefs.has(md) then
+					if res != null then return null
+					res = md
+				end
+			end
+			return res
+		end
 	end
 
 	# Globaly compile the type structure of a live type
