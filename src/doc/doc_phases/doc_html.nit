@@ -534,7 +534,7 @@ redef class DocRoot
 			section.subtitle = mentity.mproject.html_declaration
 		else if mentity isa MProperty then
 			section.title = "{mentity.html_name}{mentity.intro.tpl_signature.write_to_string}"
-			section.subtitle = mentity.tpl_namespace
+			section.subtitle = mentity.html_namespace
 			section.summary_title = mentity.html_name
 		end
 		render(v, doc, page, section)
@@ -575,14 +575,14 @@ redef class ConcernSection
 			title.add "from "
 			section.summary_title = "from {mmodule.html_name}"
 		end
-		title.add mmodule.tpl_namespace
+		title.add mmodule.html_namespace
 		section.title = title
 	end
 
 	private fun render_concern_other(page: MEntityPage, section: TplSection, mmodule: MModule) do
 		var title = new Template
 		title.add "in "
-		title.add mmodule.tpl_namespace
+		title.add mmodule.html_namespace
 		section.title = title
 		section.summary_title = "in {mmodule.html_name}"
 	end
@@ -609,7 +609,7 @@ redef class IntroArticle
 		# FIXME diff hack
 		if mentity isa MProperty then
 			# intro title
-			var ns = mentity.intro.mclassdef.mmodule.tpl_namespace
+			var ns = mentity.intro.mclassdef.mmodule.html_namespace
 			var section = new TplSection("intro")
 			var title = new Template
 			title.add "Introduction in "
@@ -673,7 +673,7 @@ redef class DefinitionArticle
 
 	private fun make_mclass_article(v: RenderHTMLPhase, page: MEntityPage): TplArticle do
 		var article = mentity.tpl_article
-		article.subtitle = mentity.tpl_namespace
+		article.subtitle = mentity.html_namespace
 		article.content = null
 		return article
 	end
@@ -686,7 +686,7 @@ redef class DefinitionArticle
 		end
 		var title = new Template
 		title.add "in "
-		title.add mclassdef.mmodule.tpl_namespace
+		title.add mclassdef.mmodule.html_namespace
 		article.subtitle = title
 		return article
 	end
@@ -713,7 +713,7 @@ redef class DefinitionArticle
 		article.title = title
 		article.title_classes.add "signature"
 		article.summary_title = "{mprop.html_name}"
-		article.subtitle = mpropdef.tpl_namespace
+		article.subtitle = mpropdef.html_namespace
 		if mpropdef.mdoc_or_fallback != null then
 			article.content = mpropdef.mdoc_or_fallback.tpl_comment
 		end

@@ -103,6 +103,17 @@ redef class MEntity
 		return tpl
 	end
 
+	# Returns `self` namespace decorated with HTML links.
+	#
+	# * MProject: `mproject`
+	# * MGroup: `mproject(::group)`
+	# * MModule: `mgroup::mmodule`
+	# * MClass: `mproject::mclass`
+	# * MClassDef: `mmodule::mclassdef`
+	# * MProperty: `mclass::mprop`
+	# * MPropdef: `mclassdef:mpropdef`
+	fun html_namespace: Template is abstract
+
 	# A template article that briefly describe the entity
 	fun tpl_short_article: TplArticle do
 		var tpl = tpl_article
@@ -117,13 +128,10 @@ redef class MEntity
 	fun tpl_article: TplArticle do
 		var tpl = new TplArticle.with_title(nitdoc_id, tpl_title)
 		tpl.title_classes.add "signature"
-		tpl.subtitle = tpl_namespace
+		tpl.subtitle = html_namespace
 		tpl.summary_title = html_name
 		return tpl
 	end
-
-	# A template namespace
-	fun tpl_namespace: Template is abstract
 
 	# A template definition of the mentity
 	# include name, sysnopsys, comment and namespace
@@ -148,7 +156,7 @@ redef class MEntity
 	fun tpl_title: Template do
 		var title = new Template
 		title.add tpl_icon
-		title.add tpl_namespace
+		title.add html_namespace
 		return title
 	end
 
@@ -178,8 +186,7 @@ redef class MProject
 	redef var nitdoc_id = name.to_cmangle is lazy
 	redef fun nitdoc_url do return root.nitdoc_url
 	redef var html_modifiers = ["project"]
-
-	redef fun tpl_namespace do return html_link
+	redef fun html_namespace do return html_link
 
 	redef fun tpl_definition do
 		var tpl = new TplDefinition
@@ -204,9 +211,13 @@ redef class MGroup
 	redef fun nitdoc_url do return "group_{nitdoc_id}.html"
 	redef var html_modifiers = ["group"]
 
-	redef fun tpl_namespace do
+	# Depends if `self` is root or not.
+	#
+	# * If root `mproject`.
+	# * Else `mproject::self`.
+	redef fun html_namespace do
 		var tpl = new Template
-		tpl.add mproject.tpl_namespace
+		tpl.add mproject.html_namespace
 		if mproject.root != self then
 			tpl.add "::"
 			tpl.add html_link
@@ -239,10 +250,14 @@ redef class MModule
 	redef fun nitdoc_url do return "module_{nitdoc_id}.html"
 	redef var html_modifiers = ["module"]
 
-	redef fun tpl_namespace do
+	# Depends if `self` belongs to a MGroup.
+	#
+	# * If mgroup `mgroup::self`.
+	# * Else `self`.
+	redef fun html_namespace do
 		var tpl = new Template
 		if mgroup != null then
-			tpl.add mgroup.tpl_namespace
+			tpl.add mgroup.html_namespace
 			tpl.add "::"
 		end
 		tpl.add html_link
@@ -285,16 +300,17 @@ redef class MClass
 	redef fun html_modifiers do return intro.html_modifiers
 	redef fun html_declaration do return intro.html_declaration
 
-	redef fun tpl_definition do return intro.tpl_definition
-
-	redef fun tpl_namespace do
+	# Returns `mproject::self`.
+	redef fun html_namespace do
 		var tpl = new Template
-		tpl.add intro_mmodule.mgroup.mproject.tpl_namespace
+		tpl.add intro_mmodule.mgroup.mproject.html_namespace
 		tpl.add "::<span>"
 		tpl.add html_link
 		tpl.add "</span>"
 		return tpl
 	end
+
+	redef fun tpl_definition do return intro.tpl_definition
 
 	redef fun tpl_title do
 		var title = new Template
@@ -360,9 +376,10 @@ redef class MClassDef
 		return tpl
 	end
 
-	redef fun tpl_namespace do
+	# Returns `mmodule::self`
+	redef fun html_namespace do
 		var tpl = new Template
-		tpl.add mmodule.tpl_namespace
+		tpl.add mmodule.html_namespace
 		tpl.add "::<span>"
 		tpl.add mclass.html_link
 		tpl.add "</span>"
@@ -376,7 +393,7 @@ redef class MClassDef
 		tpl.title_classes.add "signature"
 		var title = new Template
 		title.add "in "
-		title.add mmodule.tpl_namespace
+		title.add mmodule.html_namespace
 		tpl.subtitle = title
 		var mdoc = mdoc_or_fallback
 		if mdoc != null then
@@ -441,9 +458,10 @@ redef class MProperty
 	redef fun html_modifiers do return intro.html_modifiers
 	redef fun html_declaration do return intro.html_declaration
 
-	redef fun tpl_namespace do
+	# Returns `mclass::self`.
+	redef fun html_namespace do
 		var tpl = new Template
-		tpl.add intro_mclassdef.mclass.tpl_namespace
+		tpl.add intro_mclassdef.mclass.html_namespace
 		tpl.add "::<span>"
 		tpl.add intro.html_link
 		tpl.add "</span>"
@@ -496,9 +514,10 @@ redef class MPropDef
 		return tpl
 	end
 
-	redef fun tpl_namespace do
+	# Returns `mclassdef::self`
+	redef fun html_namespace do
 		var tpl = new Template
-		tpl.add mclassdef.tpl_namespace
+		tpl.add mclassdef.html_namespace
 		tpl.add "::"
 		tpl.add html_link
 		return tpl
@@ -566,7 +585,7 @@ redef class MPropDef
 	fun tpl_inheritance_item: TplListItem do
 		var lnk = new Template
 		lnk.add new TplLabel.with_classes(tpl_css_classes.to_a)
-		lnk.add mclassdef.mmodule.tpl_namespace
+		lnk.add mclassdef.mmodule.html_namespace
 		lnk.add "::"
 		var atext = mclassdef.html_link.text
 		var ahref = "{mclassdef.mclass.nitdoc_url}#{mproperty.nitdoc_id}"
