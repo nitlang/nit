@@ -278,3 +278,11 @@ redef class IntroArticle
 		super
 	end
 end
+
+redef class ConcernsArticle
+	redef var html_id is lazy do return "article_concerns_{mentity.nitdoc_id}"
+	redef var html_title = "Concerns"
+	redef fun is_hidden do return concerns.is_empty
+
+	redef fun render_body do add concerns.html_list
+end

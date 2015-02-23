@@ -571,6 +571,56 @@ redef class MParameter
 	end
 end
 
+redef class ConcernsTree
+	# Render `self` as a hierarchical UnorderedList.
+	fun html_list: UnorderedList do
+		var lst = new UnorderedList
+		lst.css_classes.add "list-unstyled list-definition"
+		for r in roots do
+			var li = r.html_concern_item
+			lst.add_li li
+			build_html_list(r, li)
+		end
+		return lst
+	end
+
+	# Build the html list recursively.
+	private fun build_html_list(e: MConcern, li: ListItem) do
+		if not sub.has_key(e) then return
+		var subs = sub[e]
+		var lst = new UnorderedList
+		lst.css_classes.add "list-unstyled list-definition"
+		for e2 in subs do
+			if e2 isa MGroup and e2.is_root then
+				build_html_list(e2, li)
+			else
+				var sli = e2.html_concern_item
+				lst.add_li sli
+				build_html_list(e2, sli)
+			end
+		end
+		var text = new Template
+		text.add li.text
+		if not lst.is_empty then text.add lst
+		li.text = text
+	end
+end
+
+redef class MConcern
+	# Return a li element for `self` that can be displayed in a concern list
+	private fun html_concern_item: ListItem do
+		var lnk = html_link
+		var tpl = new Template
+		tpl.add new Link.with_title("#{nitdoc_id}", lnk.text, lnk.title)
+		var comment = html_short_comment
+		if comment != null then
+			tpl.add ": "
+			tpl.add comment
+		end
+		return new ListItem(tpl)
+	end
+end
+
 ################################################################################
 # Additions to `model_ext`.
 

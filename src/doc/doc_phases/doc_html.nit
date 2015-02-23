@@ -613,11 +613,8 @@ end
 
 redef class ConcernsArticle
 	redef fun render(v, doc, page, parent) do
-		# FIXME diff hack
-		var title = "concerns"
-		if page.mentity isa MProperty then title = "Concerns"
 		parent.add_child new TplArticle.
-			with_content(title, "Concerns", concerns.to_tpl)
+			with_content("concerns", "Concerns", write_to_string)
 	end
 end
 
