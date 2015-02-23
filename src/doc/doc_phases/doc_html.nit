@@ -496,7 +496,7 @@ end
 
 redef class MPropertyPage
 	redef fun init_title(v, doc) do
-		title = "{mentity.html_name}{mentity.tpl_signature.write_to_string}"
+		title = "{mentity.html_name}{mentity.html_short_signature.write_to_string}"
 	end
 
 	redef fun init_topmenu(v, doc) do
@@ -533,7 +533,7 @@ redef class DocRoot
 			section.title = mentity.mproject.html_name
 			section.subtitle = mentity.mproject.html_declaration
 		else if mentity isa MProperty then
-			section.title = "{mentity.html_name}{mentity.intro.tpl_signature.write_to_string}"
+			section.title = "{mentity.html_name}{mentity.intro.html_signature.write_to_string}"
 			section.subtitle = mentity.html_namespace
 			section.summary_title = mentity.html_name
 		end
@@ -701,7 +701,7 @@ redef class DefinitionArticle
 		title.add "<span id='{mpropdef.nitdoc_id}'></span>"
 		if mpropdef.is_intro then
 			title.add mprop.html_link
-			title.add mprop.intro.tpl_signature
+			title.add mprop.intro.html_signature
 		else
 			var cls_url = mprop.intro.mclassdef.mclass.nitdoc_url
 			var def_url = "{cls_url}#{mprop.nitdoc_id}"

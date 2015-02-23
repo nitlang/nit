@@ -310,6 +310,12 @@ redef class MClass
 		return tpl
 	end
 
+	# Returns `intro.html_short_signature`.
+	fun html_short_signature: Template do return intro.html_short_signature
+
+	# Returns `intro.html_signature`.
+	fun html_signature: Template do return intro.html_signature
+
 	redef fun tpl_definition do return intro.tpl_definition
 
 	redef fun tpl_title do
@@ -320,21 +326,6 @@ redef class MClass
 	end
 
 	redef fun tpl_icon do return intro.tpl_icon
-
-	fun tpl_signature: Template do
-		var tpl = new Template
-		if arity > 0 then
-			tpl.add "["
-			var parameter_names = new Array[String]
-			for p in mparameters do
-				parameter_names.add(p.html_name)
-			end
-			tpl.add parameter_names.join(", ")
-			tpl.add "]"
-		end
-		return tpl
-	end
-
 	redef fun tpl_css_classes do return intro.tpl_css_classes
 end
 
@@ -371,7 +362,7 @@ redef class MClassDef
 		tpl.add html_modifiers.join(" ")
 		tpl.add " "
 		tpl.add html_link
-		tpl.add tpl_signature
+		tpl.add html_signature
 		tpl.add "</span>"
 		return tpl
 	end
@@ -383,6 +374,37 @@ redef class MClassDef
 		tpl.add "::<span>"
 		tpl.add mclass.html_link
 		tpl.add "</span>"
+		return tpl
+	end
+
+	# Returns the MClassDef generic signature without static bounds.
+	fun html_short_signature: Template do
+		var tpl = new Template
+		var mparameters = mclass.mparameters
+		if not mparameters.is_empty then
+			tpl.add "["
+			for i in [0..mparameters.length[ do
+				tpl.add mparameters[i].html_name
+				if i < mparameters.length - 1 then tpl.add ", "
+			end
+			tpl.add "]"
+		end
+		return tpl
+	end
+
+	# Returns the MClassDef generic signature with static bounds.
+	fun html_signature: Template do
+		var tpl = new Template
+		var mparameters = mclass.mparameters
+		if not mparameters.is_empty then
+			tpl.add "["
+			for i in [0..mparameters.length[ do
+				tpl.add "{mparameters[i].html_name}: "
+				tpl.add bound_mtype.arguments[i].html_signature
+				if i < mparameters.length - 1 then tpl.add ", "
+			end
+			tpl.add "]"
+		end
 		return tpl
 	end
 
@@ -407,21 +429,6 @@ redef class MClassDef
 		title.add tpl_icon
 		title.add html_link
 		return title
-	end
-
-	fun tpl_signature: Template do
-		var tpl = new Template
-		var mparameters = mclass.mparameters
-		if not mparameters.is_empty then
-			tpl.add "["
-			for i in [0..mparameters.length[ do
-				tpl.add "{mparameters[i].html_name}: "
-				tpl.add bound_mtype.arguments[i].tpl_signature
-				if i < mparameters.length - 1 then tpl.add ", "
-			end
-			tpl.add "]"
-		end
-		return tpl
 	end
 
 	redef fun tpl_definition do
@@ -468,7 +475,11 @@ redef class MProperty
 		return tpl
 	end
 
-	fun tpl_signature: Template do return new Template
+	# Returns `intro.html_short_signature`.
+	fun html_short_signature: Template do return intro.html_short_signature
+
+	# Returns `intro.html_signature`.
+	fun html_signature: Template do return intro.html_signature
 
 	redef fun tpl_title do return intro.tpl_title
 
@@ -509,7 +520,7 @@ redef class MPropDef
 		tpl.add html_modifiers.join(" ")
 		tpl.add " "
 		tpl.add html_link
-		tpl.add tpl_signature
+		tpl.add html_signature
 		tpl.add "</span>"
 		return tpl
 	end
@@ -522,6 +533,12 @@ redef class MPropDef
 		tpl.add html_link
 		return tpl
 	end
+
+	# Returns the MPropdDef signature without static types.
+	fun html_short_signature: Template is abstract
+
+	# Returns the MPropDef signature with static types.
+	fun html_signature: Template is abstract
 
 	redef fun tpl_article do
 		var tpl = new TplArticle(nitdoc_id)
@@ -563,8 +580,6 @@ redef class MPropDef
 		end
 		return tpl
 	end
-
-	fun tpl_signature: Template do return new Template
 
 	redef fun tpl_list_item do
 		var lnk = new Template
@@ -611,27 +626,13 @@ redef class MAttributeDef
 		return res
 	end
 
-	redef fun tpl_signature do
+	redef fun html_short_signature do return new Template
+
+	redef fun html_signature do
 		var tpl = new Template
 		if static_mtype != null then
 			tpl.add ": "
-			tpl.add static_mtype.tpl_signature
-		end
-		return tpl
-	end
-end
-
-redef class MMethod
-	redef fun tpl_signature do
-		var tpl = new Template
-		var params = new Array[String]
-		for param in intro.msignature.mparameters do
-			params.add param.name.html_escape
-		end
-		if not params.is_empty then
-			tpl.add "("
-			tpl.add params.join(", ")
-			tpl.add ")"
+			tpl.add static_mtype.html_signature
 		end
 		return tpl
 	end
@@ -655,12 +656,12 @@ redef class MMethodDef
 		return res
 	end
 
-	redef fun tpl_signature do return msignature.tpl_signature
+	redef fun html_short_signature do return msignature.html_short_signature
+	redef fun html_signature do return msignature.html_signature
 end
 
 redef class MVirtualTypeProp
 	redef fun html_link do return mvirtualtype.html_link
-	redef fun tpl_signature do return html_link
 end
 
 redef class MVirtualTypeDef
@@ -671,41 +672,69 @@ redef class MVirtualTypeDef
 		return res
 	end
 
-	redef fun tpl_signature do
+	redef fun html_short_signature do return new Template
+
+	redef fun html_signature do
 		var tpl = new Template
 		if bound == null then return tpl
 		tpl.add ": "
-		tpl.add bound.tpl_signature
+		tpl.add bound.html_signature
 		return tpl
 	end
 end
 
 redef class MType
-	fun tpl_signature: Template is abstract
+	# Returns the signature of this type whithout bounds.
+	fun html_short_signature: Template is abstract
+
+	# Returns the signature of this type.
+	fun html_signature: Template is abstract
 end
 
 redef class MClassType
 	redef fun html_link do return mclass.html_link
-	redef fun tpl_signature do return html_link
+	redef fun html_short_signature do return html_link
+	redef fun html_signature do return html_link
 end
 
 redef class MNullableType
-	redef fun tpl_signature do
+
+	redef fun html_short_signature do
 		var tpl = new Template
 		tpl.add "nullable "
-		tpl.add mtype.tpl_signature
+		tpl.add mtype.html_short_signature
+		return tpl
+	end
+
+	redef fun html_signature do
+		var tpl = new Template
+		tpl.add "nullable "
+		tpl.add mtype.html_signature
 		return tpl
 	end
 end
 
 redef class MGenericType
-	redef fun tpl_signature do
+	redef fun html_short_signature do
 		var lnk = html_link
 		var tpl = new Template
 		tpl.add new Link.with_title(lnk.href, mclass.name.html_escape, lnk.title)
 		tpl.add "["
 		for i in [0..arguments.length[ do
-			tpl.add arguments[i].tpl_signature
+			tpl.add arguments[i].html_short_signature
+			if i < arguments.length - 1 then tpl.add ", "
+		end
+		tpl.add "]"
+		return tpl
+	end
+
+	redef fun html_signature do
+		var lnk = html_link
+		var tpl = new Template
+		tpl.add new Link.with_title(lnk.href, mclass.name.html_escape, lnk.title)
+		tpl.add "["
+		for i in [0..arguments.length[ do
+			tpl.add arguments[i].html_signature
 			if i < arguments.length - 1 then tpl.add ", "
 		end
 		tpl.add "]"
@@ -717,38 +746,64 @@ redef class MParameterType
 	redef fun html_link do
 		return new Link.with_title("{mclass.nitdoc_url}#FT_{name.to_cmangle}", name, "formal type")
 	end
-	redef fun tpl_signature do return html_link
+
+	redef fun html_short_signature do return html_link
+	redef fun html_signature do return html_link
 end
 
 redef class MVirtualType
 	redef fun html_link do return mproperty.intro.html_link
-	redef fun tpl_signature do return html_link
+	redef fun html_signature do return html_link
 end
 
 redef class MSignature
-	redef fun tpl_signature do
+
+	redef fun html_short_signature do
 		var tpl = new Template
 		if not mparameters.is_empty then
 			tpl.add "("
 			for i in [0..mparameters.length[ do
-				tpl.add mparameters[i].tpl_signature
+				tpl.add mparameters[i].html_short_signature
+				if i < mparameters.length - 1 then tpl.add ", "
+			end
+			tpl.add ")"
+		end
+		return tpl
+	end
+
+	redef fun html_signature do
+		var tpl = new Template
+		if not mparameters.is_empty then
+			tpl.add "("
+			for i in [0..mparameters.length[ do
+				tpl.add mparameters[i].html_signature
 				if i < mparameters.length - 1 then tpl.add ", "
 			end
 			tpl.add ")"
 		end
 		if return_mtype != null then
 			tpl.add ": "
-			tpl.add return_mtype.tpl_signature
+			tpl.add return_mtype.html_signature
 		end
 		return tpl
 	end
 end
 
 redef class MParameter
-	fun tpl_signature: Template do
+
+	# Returns `self` name and ellipsys if any.
+	fun html_short_signature: Template do
+		var tpl = new Template
+		tpl.add name
+		if is_vararg then tpl.add "..."
+		return tpl
+	end
+
+	# Returns `self` name with it's static type and ellipsys if any.
+	fun html_signature: Template do
 		var tpl = new Template
 		tpl.add "{name}: "
-		tpl.add mtype.tpl_signature
+		tpl.add mtype.html_signature
 		if is_vararg then tpl.add "..."
 		return tpl
 	end
@@ -796,7 +851,7 @@ end
 # Additions to `model_ext`.
 
 redef class MRawType
-	redef fun tpl_signature do
+	redef fun html_signature do
 		var tpl = new Template
 
 		for part in parts do
@@ -812,7 +867,7 @@ end
 
 redef class MInnerClass
 	redef fun nitdoc_url do return inner.nitdoc_url
-	redef fun tpl_signature do return inner.tpl_signature
+	redef fun html_signature do return inner.html_signature
 end
 
 redef class MInnerClassDef
@@ -820,7 +875,7 @@ redef class MInnerClassDef
 
 	redef fun html_link_to_anchor do return inner.html_link_to_anchor
 	redef fun html_link do return inner.html_link
-	redef fun tpl_signature do return inner.tpl_signature
+	redef fun html_signature do return inner.html_signature
 
 	redef fun tpl_definition do
 		var tpl = new TplClassDefinition
