@@ -109,6 +109,25 @@ class RpgHome
 	end
 end
 
+# Display the list of active game.
+class ListGames
+	super RpgAction
+
+	# Response page stub.
+	var page: NitRpgPage is noinit
+
+	redef fun answer(request, url) do
+		var games = load_games
+		var response = new HttpResponse(200)
+		page = new NitRpgPage(root_url)
+		page.breadcrumbs = new Breadcrumbs
+		page.breadcrumbs.add_link(root_url / "games", "games")
+		page.flow_panels.add new GamesListPanel(root_url, games)
+		response.body = page.write_to_string
+		return response
+	end
+end
+
 # An action that require a game.
 class GameAction
 	super RpgAction
@@ -270,6 +289,7 @@ vh.routes.add new Route("/games/:owner/:repo/players", new ListPlayers(root))
 vh.routes.add new Route("/games/:owner/:repo/achievements/:achievement", new AchievementHome(root))
 vh.routes.add new Route("/games/:owner/:repo/achievements", new ListAchievements(root))
 vh.routes.add new Route("/games/:owner/:repo", new RepoHome(root))
+vh.routes.add new Route("/games", new ListGames(root))
 vh.routes.add new Route("/", new RpgHome(root))
 
 var fac = new HttpFactory.and_libevent
