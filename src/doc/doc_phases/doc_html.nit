@@ -244,7 +244,7 @@ redef class OverviewPage
 		var ssection = new TplSection.with_title("projects", "Projects")
 		for mproject in mprojects do
 			var sarticle = mproject.tpl_article
-			sarticle.subtitle = mproject.tpl_declaration
+			sarticle.subtitle = mproject.html_declaration
 			sarticle.content = mproject.tpl_definition
 			var mdoc = mproject.mdoc_or_fallback
 			if mdoc != null then
@@ -527,11 +527,11 @@ redef class DocRoot
 		var section = new TplSection("top")
 		var mentity = page.mentity
 		section.title = mentity.html_name
-		section.subtitle = mentity.tpl_declaration
+		section.subtitle = mentity.html_declaration
 		# FIXME ugly hack to avoid diff
 		if mentity isa MGroup and mentity.is_root then
 			section.title = mentity.mproject.html_name
-			section.subtitle = mentity.mproject.tpl_declaration
+			section.subtitle = mentity.mproject.html_declaration
 		else if mentity isa MProperty then
 			section.title = "{mentity.html_name}{mentity.intro.tpl_signature.write_to_string}"
 			section.subtitle = mentity.tpl_namespace
@@ -605,7 +605,7 @@ redef class IntroArticle
 		else if mentity isa MPropDef then
 			article.source_link = v.tpl_showsource(mentity.location)
 		end
-		# article.subtitle = mentity.tpl_declaration
+		# article.subtitle = mentity.html_declaration
 		# FIXME diff hack
 		if mentity isa MProperty then
 			# intro title
@@ -644,7 +644,7 @@ redef class DefinitionArticle
 		# FIXME hideous hacks...
 		if mentity isa MModule then
 			article = mentity.tpl_article
-			article.subtitle = mentity.tpl_declaration
+			article.subtitle = mentity.html_declaration
 			article.content = mentity.tpl_definition
 		else if mentity isa MClass then
 			article = make_mclass_article(v, page)
@@ -655,7 +655,7 @@ redef class DefinitionArticle
 			article = make_mpropdef_article(v, doc, page)
 		else
 			article = mentity.tpl_article
-			article.subtitle = mentity.tpl_declaration
+			article.subtitle = mentity.html_declaration
 			if mentity isa MPropDef then
 				article.source_link = v.tpl_showsource(mentity.location)
 			end

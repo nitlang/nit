@@ -81,6 +81,28 @@ redef class MEntity
 		return tpl
 	end
 
+	# Returns the list of keyword used in `self` declaration.
+	fun html_modifiers: Array[String] is abstract
+
+	# Returns the complete MEntity declaration decorated with HTML.
+	#
+	# * MProject: `project foo`
+	# * MGroup: `group foo`
+	# * MModule: `module foo`
+	# * MClass: `private abstract class Foo[E: Object]`
+	# * MClassDef: `redef class Foo[E]`
+	# * MProperty: `private fun foo(e: Object): Int`
+	# * MPropdef: `redef fun foo(e)`
+	fun html_declaration: Template do
+		var tpl = new Template
+		tpl.add "<span>"
+		tpl.add html_modifiers.join(" ")
+		tpl.add " "
+		tpl.add html_link
+		tpl.add "</span>"
+		return tpl
+	end
+
 	# A template article that briefly describe the entity
 	fun tpl_short_article: TplArticle do
 		var tpl = tpl_article
@@ -99,9 +121,6 @@ redef class MEntity
 		tpl.summary_title = html_name
 		return tpl
 	end
-
-	# A template signature that contains modifiers and parameters
-	fun tpl_declaration: Template is abstract
 
 	# A template namespace
 	fun tpl_namespace: Template is abstract
@@ -158,14 +177,7 @@ end
 redef class MProject
 	redef var nitdoc_id = name.to_cmangle is lazy
 	redef fun nitdoc_url do return root.nitdoc_url
-
-	redef fun tpl_declaration do
-		var tpl = new Template
-		tpl.add "<span>project "
-		tpl.add html_link
-		tpl.add "</span>"
-		return tpl
-	end
+	redef var html_modifiers = ["project"]
 
 	redef fun tpl_namespace do return html_link
 
@@ -190,6 +202,7 @@ redef class MGroup
 	end
 
 	redef fun nitdoc_url do return "group_{nitdoc_id}.html"
+	redef var html_modifiers = ["group"]
 
 	redef fun tpl_namespace do
 		var tpl = new Template
@@ -198,14 +211,6 @@ redef class MGroup
 			tpl.add "::"
 			tpl.add html_link
 		end
-		return tpl
-	end
-
-	redef fun tpl_declaration do
-		var tpl = new Template
-		tpl.add "<span>group "
-		tpl.add html_link
-		tpl.add "</span>"
 		return tpl
 	end
 
@@ -232,14 +237,7 @@ redef class MModule
 	end
 
 	redef fun nitdoc_url do return "module_{nitdoc_id}.html"
-
-	redef fun tpl_declaration do
-		var tpl = new Template
-		tpl.add "<span>module "
-		tpl.add tpl_namespace
-		tpl.add "</span>"
-		return tpl
-	end
+	redef var html_modifiers = ["module"]
 
 	redef fun tpl_namespace do
 		var tpl = new Template
@@ -284,7 +282,9 @@ redef class MClass
 		return tpl.write_to_string
 	end
 
-	redef fun tpl_declaration do return intro.tpl_declaration
+	redef fun html_modifiers do return intro.html_modifiers
+	redef fun html_declaration do return intro.html_declaration
+
 	redef fun tpl_definition do return intro.tpl_definition
 
 	redef fun tpl_namespace do
@@ -325,8 +325,40 @@ end
 redef class MClassDef
 	redef var nitdoc_id = "{mmodule.nitdoc_id}__{name.to_cmangle}" is lazy
 	redef fun nitdoc_url do return "{mclass.nitdoc_url}#{nitdoc_id}"
-
 	redef fun mdoc_or_fallback do return mdoc or else mclass.mdoc_or_fallback
+
+	# Depends if `self` is an intro or not.
+	#
+	# * If intro contains the visibility and kind.
+	# * If redef contains the `redef` keyword and kind.
+	redef fun html_modifiers do
+		var res = new Array[String]
+		if not is_intro then
+			res.add "redef"
+		else
+			if mclass.visibility != public_visibility then
+				res.add mclass.visibility.to_s
+			end
+		end
+		res.add mclass.kind.to_s
+		return res
+	end
+
+	# Depends if `self` is an intro or not.
+	#
+	# For intro: `private abstract class Foo[E: Object]`
+	# For redef: `redef class Foo[E]`
+	# TODO change the implementation to correspond to the comment.
+	redef fun html_declaration do
+		var tpl = new Template
+		tpl.add "<span>"
+		tpl.add html_modifiers.join(" ")
+		tpl.add " "
+		tpl.add html_link
+		tpl.add tpl_signature
+		tpl.add "</span>"
+		return tpl
+	end
 
 	redef fun tpl_namespace do
 		var tpl = new Template
@@ -340,7 +372,7 @@ redef class MClassDef
 	redef fun tpl_article do
 		var tpl = new TplArticle(nitdoc_id)
 		tpl.summary_title = "in {mmodule.html_name}"
-		tpl.title = tpl_declaration
+		tpl.title = html_declaration
 		tpl.title_classes.add "signature"
 		var title = new Template
 		title.add "in "
@@ -358,14 +390,6 @@ redef class MClassDef
 		title.add tpl_icon
 		title.add html_link
 		return title
-	end
-
-	redef fun tpl_declaration do
-		var tpl = new Template
-		tpl.add tpl_modifiers
-		tpl.add html_link
-		tpl.add tpl_signature
-		return tpl
 	end
 
 	fun tpl_signature: Template do
@@ -413,8 +437,9 @@ end
 redef class MProperty
 	redef var nitdoc_id = "{intro_mclassdef.mclass.nitdoc_id}__{name.to_cmangle}" is lazy
 	redef fun nitdoc_url do return "property_{nitdoc_id}.html"
-
 	redef fun mdoc_or_fallback do return intro.mdoc
+	redef fun html_modifiers do return intro.html_modifiers
+	redef fun html_declaration do return intro.html_declaration
 
 	redef fun tpl_namespace do
 		var tpl = new Template
@@ -424,8 +449,6 @@ redef class MProperty
 		tpl.add "</span>"
 		return tpl
 	end
-
-	redef fun tpl_declaration do return intro.tpl_declaration
 
 	fun tpl_signature: Template do return new Template
 
@@ -439,8 +462,39 @@ end
 redef class MPropDef
 	redef var nitdoc_id = "{mclassdef.nitdoc_id}__{name.to_cmangle}" is lazy
 	redef fun nitdoc_url do return "{mproperty.nitdoc_url}#{nitdoc_id}"
-
 	redef fun mdoc_or_fallback do return mdoc or else mproperty.mdoc_or_fallback
+
+	# Depends if `self` is an intro or not.
+	#
+	# * If intro contains the visibility and kind.
+	# * If redef contains the `redef` keyword and kind.
+	redef fun html_modifiers do
+		var res = new Array[String]
+		if not is_intro then
+			res.add "redef"
+		else
+			if mproperty.visibility != public_visibility then
+				res.add mproperty.visibility.to_s
+			end
+		end
+		return res
+	end
+
+	# Depends if `self` is an intro or not.
+	#
+	# For intro: `private fun foo(e: Object): Bar is abstract`
+	# For redef: `redef fun foo(e) is cached`
+	# TODO change the implementation to correspond to the comment.
+	redef fun html_declaration do
+		var tpl = new Template
+		tpl.add "<span>"
+		tpl.add html_modifiers.join(" ")
+		tpl.add " "
+		tpl.add html_link
+		tpl.add tpl_signature
+		tpl.add "</span>"
+		return tpl
+	end
 
 	redef fun tpl_namespace do
 		var tpl = new Template
@@ -457,7 +511,7 @@ redef class MPropDef
 		title.add "in "
 		title.add mclassdef.html_link
 		tpl.title = title
-		tpl.subtitle = tpl_declaration
+		tpl.subtitle = html_declaration
 		var mdoc = mdoc_or_fallback
 		if mdoc != null then
 			tpl.content = mdoc.tpl_comment
@@ -471,14 +525,6 @@ redef class MPropDef
 		if mdoc != null then
 			tpl.comment = mdoc.tpl_comment
 		end
-		return tpl
-	end
-
-	redef fun tpl_declaration do
-		var tpl = new Template
-		tpl.add tpl_modifiers
-		tpl.add html_link
-		tpl.add tpl_signature
 		return tpl
 	end
 
@@ -539,6 +585,13 @@ redef class MPropDef
 end
 
 redef class MAttributeDef
+
+	redef fun html_modifiers do
+		var res = super
+		res.add "var"
+		return res
+	end
+
 	redef fun tpl_signature do
 		var tpl = new Template
 		if static_mtype != null then
@@ -566,6 +619,23 @@ redef class MMethod
 end
 
 redef class MMethodDef
+
+	# FIXME annotation should be handled in their own way
+	redef fun html_modifiers do
+		var res = super
+		if is_abstract then
+			res.add "abstract"
+		else if is_intern then
+			res.add "intern"
+		end
+		if mproperty.is_init then
+			res.add "init"
+		else
+			res.add "fun"
+		end
+		return res
+	end
+
 	redef fun tpl_signature do return msignature.tpl_signature
 end
 
@@ -575,6 +645,13 @@ redef class MVirtualTypeProp
 end
 
 redef class MVirtualTypeDef
+
+	redef fun html_modifiers do
+		var res = super
+		res.add "type"
+		return res
+	end
+
 	redef fun tpl_signature do
 		var tpl = new Template
 		if bound == null then return tpl
