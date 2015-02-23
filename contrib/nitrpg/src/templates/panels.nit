@@ -18,6 +18,7 @@
 module panels
 
 import templates_events
+import markdown
 
 # A panel can be displayed in a html page.
 #
@@ -96,6 +97,20 @@ class ErrorPanel
 		add msg.html_escape
 	end
 
+end
+
+# A panel that display a markdown content rendered as HTML.
+class MDPanel
+	super Panel
+
+	# Markdown text to display.
+	var text: String
+
+	redef fun rendering do
+		add """<div class="panel">
+			    <div class="panel-body">{{{text.md_to_html}}}</div>
+			  </div>"""
+	end
 end
 
 # A panel that display repo statistics.
