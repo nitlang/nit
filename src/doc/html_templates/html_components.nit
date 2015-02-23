@@ -49,7 +49,7 @@ class TplTopMenu
 		var tpl = new Template
 		tpl.add "<li"
 		if is_active then
-			tpl.add " class='active'"
+			tpl.add " class=\"active\""
 		end
 		tpl.add ">"
 		tpl.add content
