@@ -19,6 +19,7 @@ import html_model
 import html::bootstrap
 import doc_phases::doc_structure
 import doc_phases::doc_hierarchies
+import doc_phases::doc_intros_redefs
 
 # Renders the page as HTML.
 redef class DocPage
@@ -313,5 +314,20 @@ redef class HierarchyListArticle
 			lst.add_li mentity.html_list_item
 		end
 		addn lst
+	end
+end
+
+redef class IntrosRedefsListArticle
+	redef var html_id is lazy do return "article_intros_redefs_{mentity.nitdoc_id}"
+	redef var html_title is lazy do return list_title
+	redef fun is_hidden do return mentities.is_empty
+
+	redef fun render_body do
+		var lst = new UnorderedList
+		lst.css_classes.add "list-unstyled list-labeled"
+		for mentity in mentities do
+			lst.add_li mentity.html_list_item
+		end
+		add lst
 	end
 end

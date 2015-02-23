@@ -723,16 +723,8 @@ end
 redef class IntrosRedefsListArticle
 	redef fun render(v, doc, page, parent) do
 		if mentities.is_empty then return
-		var title = list_title
-		# FIXME diff hack
-		var id = "intros"
-		if title == "Redefines" then id = "redefs"
-		var article = new TplArticle.with_title("{mentity.nitdoc_id}.{id}", title)
-		var list = new TplList.with_classes(["list-unstyled", "list-labeled"])
-		for mentity in mentities do
-			list.add_li mentity.tpl_list_item
-		end
-		article.content = list
+		var article = new TplArticle.with_title(list_title.to_lower, list_title)
+		article.content = write_to_string
 		parent.add_child article
 	end
 end
