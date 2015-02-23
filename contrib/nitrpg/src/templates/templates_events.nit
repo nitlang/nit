@@ -17,7 +17,7 @@
 # Templates to display `GameEvent` kinds.
 module templates_events
 
-import events
+import achievements
 import templates_base
 
 redef class GameEvent
@@ -29,6 +29,8 @@ redef class GameEvent
 			return new TplPullMerged(self)
 		else if kind == "pull_review" then
 			return new TplPullReview(self)
+		else if kind == "achievement_unlocked" then
+			return new TplAchievementUnlocked(self)
 		end
 		abort
 	end
@@ -61,6 +63,11 @@ class TplEvent
 	var issue_comment_event: IssueCommentEvent is lazy do
 		var obj = event.data["github_event"].as(JsonObject)
 		return new IssueCommentEvent.from_json(event.game.api, obj)
+	end
+
+	# Load `achievement` data key as an Achievement.
+	var achievement: Achievement is lazy do
+		return player.load_achievement(event.data["achievement"].to_s).as(not null)
 	end
 
 	# Display a media item for a reward event.
@@ -107,5 +114,14 @@ class TplPullReview
 	redef var title is lazy do
 		var issue = issue_comment_event.issue
 		return "{player.link} reviewed {issue.link}"
+	end
+end
+
+# Event: achievement_unlocked
+class TplAchievementUnlocked
+	super TplEvent
+
+	redef var title is lazy do
+		return "{player.link} unlocked {achievement.link}"
 	end
 end

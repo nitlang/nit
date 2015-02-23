@@ -114,6 +114,7 @@ class RepoHome
 		page.side_panels.add new ShortListPlayersPanel(game)
 		page.flow_panels.add new PodiumPanel(game)
 		page.flow_panels.add new EventListPanel(game, list_limit, list_from)
+		page.flow_panels.add new AchievementsListPanel(game)
 		rsp.body = page.write_to_string
 		return rsp
 	end
@@ -152,7 +153,45 @@ class PlayerHome
 		page.side_panels.clear
 		page.side_panels.add new PlayerStatusPanel(game, player)
 		page.flow_panels.add new PlayerReviewsPanel(game, player)
+		page.flow_panels.add new AchievementsListPanel(player)
 		page.flow_panels.add new EventListPanel(player, list_limit, list_from)
+		rsp.body = page.write_to_string
+		return rsp
+	end
+end
+
+# Display the list of achievements unlocked for this game.
+class ListAchievements
+	super GameAction
+
+	redef fun answer(request, url) do
+		var rsp = prepare_response(request, url)
+		page.breadcrumbs.add_link(game.url / "achievements", "achievements")
+		page.flow_panels.add new AchievementsListPanel(game)
+		rsp.body = page.write_to_string
+		return rsp
+	end
+end
+
+# Player details page.
+class AchievementHome
+	super GameAction
+
+	redef fun answer(request, url) do
+		var rsp = prepare_response(request, url)
+		var name = request.param("achievement")
+		if name == null then
+			var msg = "Bad request: should look like /:owner/:repo/achievements/:achievement."
+			return bad_request(msg)
+		end
+		var achievement = game.load_achievement(name)
+		if achievement == null then
+			return bad_request("Request Error: unknown achievement {name}.")
+		end
+		page.breadcrumbs.add_link(game.url / "achievements", "achievements")
+		page.breadcrumbs.add_link(achievement.url, achievement.name)
+		page.flow_panels.add new AchievementPanel(achievement)
+		page.flow_panels.add new EventListPanel(achievement, list_limit, list_from)
 		rsp.body = page.write_to_string
 		return rsp
 	end
@@ -175,6 +214,8 @@ var vh = new VirtualHost(iface)
 vh.routes.add new Route("/styles/", new FileServer("www/styles"))
 vh.routes.add new Route("/games/:owner/:repo/players/:player", new PlayerHome(root))
 vh.routes.add new Route("/games/:owner/:repo/players", new ListPlayers(root))
+vh.routes.add new Route("/games/:owner/:repo/achievements/:achievement", new AchievementHome(root))
+vh.routes.add new Route("/games/:owner/:repo/achievements", new ListAchievements(root))
 vh.routes.add new Route("/games/:owner/:repo", new RepoHome(root))
 
 var fac = new HttpFactory.and_libevent
