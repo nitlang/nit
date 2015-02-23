@@ -113,6 +113,72 @@ class MDPanel
 	end
 end
 
+# Display a list of active game.
+#
+# Used for NitRPG homepage.
+class GamesShortListPanel
+	super Panel
+
+	# Root url used for links.
+	var root_url: String
+
+	# List of NitRPG games to display.
+	var games: Array[Game]
+
+	redef fun render_title do
+		add "<span class=\"glyphicon glyphicon-home\"></span>&nbsp;&nbsp;"
+		add "<a href=\"{root_url}/games\">Active games</a>"
+	end
+
+	redef fun render_body do
+		if games.is_empty then
+			add "<em>No game yet...</em>"
+			return
+		end
+		var sorted = games.to_a
+		(new GamePlayersComparator).sort(sorted)
+		for game in sorted do
+			add "{game.link} ({game.load_players.length} players)<br>"
+		end
+	end
+end
+
+# A panel that display a list of player in a repo.
+class GamesListPanel
+	super GamesShortListPanel
+	super TablePanel
+
+	redef fun render_title do
+		add "<span class=\"glyphicon glyphicon-home\"></span>&nbsp;&nbsp;"
+		add "<a href=\"{root_url}/games\">Active games</a>"
+	end
+
+	redef fun render_body do
+		if games.is_empty then
+			add "<div class=\"panel-body\">"
+			add "<em>No player yet...</em>"
+			add "</div>"
+			return
+		end
+		var sorted = games.to_a
+		(new GamePlayersComparator).sort(sorted)
+		add """<table class="table table-striped table-hover">
+			    <tr>
+				 <th>Game</th>
+				 <th>Players</th>
+				 <th>Achievements</th>
+				</tr>"""
+		for game in sorted do
+			add "<tr>"
+			add " <td>{game.link}</td>"
+			add " <td>{game.load_players.length}</td>"
+			add " <td>{game.load_achievements.length}</td>"
+			add "</tr>"
+		end
+		add "</table>"
+	end
+end
+
 # A panel that display repo statistics.
 class GameStatusPanel
 	super Panel
