@@ -53,6 +53,15 @@ class RpgAction
 		rsp.body = page.write_to_string
 		return rsp
 	end
+
+	# Returns the game with `name` or null if no game exists with this name.
+	fun load_game(name: String): nullable Game do
+		var repo = new Repo(api, name)
+		if api.was_error then return null
+		var game = new Game(api, repo)
+		game.root_url = root_url
+		return game
+	end
 end
 
 # An action that require a game.
@@ -72,16 +81,15 @@ class GameAction
 		var owner = request.param("owner")
 		var repo_name = request.param("repo")
 		if owner == null or repo_name == null then
-			var msg = "Bad request: should look like /repos/:owner/:repo."
+			var msg = "Bad request: should look like /games/:owner/:repo."
 			return bad_request(msg)
 		end
-		var repo = new Repo(api, "{owner}/{repo_name}")
-		game = new Game(api, repo)
-		game.root_url = root_url
-		if api.was_error then
+		var game = load_game("{owner}/{repo_name}")
+		if game == null then
 			var msg = api.last_error.message
 			return bad_request("Repo Error: {msg}")
 		end
+		self.game = game
 		var response = new HttpResponse(200)
 		page = new NitRpgPage(root_url)
 		page.side_panels.add new GameStatusPanel(game)
