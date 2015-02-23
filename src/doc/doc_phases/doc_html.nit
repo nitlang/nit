@@ -842,3 +842,317 @@ redef class GraphArticle
 		parent.add_child article
 	end
 end
+
+redef class Location
+	# Github url based on this location
+	fun github(gitdir: String): String do
+		var base_dir = getcwd.join_path(gitdir).simplify_path
+		var file_loc = getcwd.join_path(file.filename).simplify_path
+		var gith_loc = file_loc.substring(base_dir.length + 1, file_loc.length)
+		return "{gith_loc}:{line_start},{column_start}--{line_end},{column_end}"
+	end
+end
+
+redef class MEntity
+	# A template article that briefly describe the entity
+	fun tpl_short_article: TplArticle do
+		var tpl = tpl_article
+		var mdoc = mdoc_or_fallback
+		if mdoc != null then
+			tpl.content = mdoc.tpl_short_comment
+		end
+		return tpl
+	end
+
+	# A template article that describe the entity
+	fun tpl_article: TplArticle do
+		var tpl = new TplArticle.with_title(nitdoc_id, tpl_title)
+		tpl.title_classes.add "signature"
+		tpl.subtitle = html_namespace
+		tpl.summary_title = html_name
+		return tpl
+	end
+
+	# A template definition of the mentity
+	# include name, sysnopsys, comment and namespace
+	fun tpl_definition: TplDefinition is abstract
+
+	# A li element that can go in a list
+	fun tpl_list_item: TplListItem do
+		var lnk = new Template
+		lnk.add new TplLabel.with_classes(tpl_css_classes)
+		lnk.add html_link
+		var mdoc = mdoc_or_fallback
+		if mdoc != null then
+			lnk.add ": "
+			lnk.add mdoc.tpl_short_comment
+		end
+		return new TplListItem.with_content(lnk)
+	end
+
+	var tpl_css_classes = new Array[String]
+
+	# Box title for this mentity
+	fun tpl_title: Template do
+		var title = new Template
+		title.add tpl_icon
+		title.add html_namespace
+		return title
+	end
+
+	# Icon that will be displayed before the title
+	fun tpl_icon: TplIcon do
+		var icon = new TplIcon.with_icon("tag")
+		icon.css_classes.add_all(tpl_css_classes)
+		return icon
+	end
+end
+
+redef class MConcern
+	# Return a li element for `self` that can be displayed in a concern list
+	private fun tpl_concern_item: TplListItem do
+		var lnk = new Template
+		lnk.add html_link_to_anchor
+		var mdoc = mdoc_or_fallback
+		if mdoc != null then
+			lnk.add ": "
+			lnk.add mdoc.tpl_short_comment
+		end
+		return new TplListItem.with_content(lnk)
+	end
+end
+
+redef class MProject
+	redef fun tpl_definition do
+		var tpl = new TplDefinition
+		var mdoc = mdoc_or_fallback
+		if mdoc != null then
+			tpl.comment = mdoc.tpl_comment
+		end
+		return tpl
+	end
+
+	redef fun tpl_css_classes do return ["public"]
+end
+
+redef class MGroup
+	redef fun tpl_definition do
+		var tpl = new TplDefinition
+		var mdoc = mdoc_or_fallback
+		if mdoc != null then
+			tpl.comment = mdoc.tpl_comment
+		end
+		return tpl
+	end
+end
+
+redef class MModule
+	redef fun tpl_definition do
+		var tpl = new TplClassDefinition
+		var mdoc = mdoc_or_fallback
+		if mdoc != null then
+			tpl.comment = mdoc.tpl_comment
+		end
+		return tpl
+	end
+
+	redef fun tpl_css_classes do return ["public"]
+end
+
+redef class MClass
+	redef fun tpl_definition do return intro.tpl_definition
+
+	redef fun tpl_title do
+		var title = new Template
+		title.add tpl_icon
+		title.add html_link
+		return title
+	end
+
+	redef fun tpl_icon do return intro.tpl_icon
+	redef fun tpl_css_classes do return intro.tpl_css_classes
+end
+
+redef class MClassDef
+	redef fun tpl_article do
+		var tpl = new TplArticle(nitdoc_id)
+		tpl.summary_title = "in {mmodule.html_name}"
+		tpl.title = html_declaration
+		tpl.title_classes.add "signature"
+		var title = new Template
+		title.add "in "
+		title.add mmodule.html_namespace
+		tpl.subtitle = title
+		var mdoc = mdoc_or_fallback
+		if mdoc != null then
+			tpl.content = mdoc.tpl_comment
+		end
+		return tpl
+	end
+
+	redef fun tpl_title do
+		var title = new Template
+		title.add tpl_icon
+		title.add html_link
+		return title
+	end
+
+	redef fun tpl_definition do
+		var tpl = new TplClassDefinition
+		var mdoc = mdoc_or_fallback
+		if mdoc != null then
+			tpl.comment = mdoc.tpl_comment
+		end
+		return tpl
+	end
+
+	redef fun tpl_css_classes do
+		var set = new HashSet[String]
+		if is_intro then set.add "intro"
+		for m in mclass.intro.modifiers do set.add m.to_cmangle
+		for m in modifiers do set.add m.to_cmangle
+		return set.to_a
+	end
+
+	fun tpl_modifiers: Template do
+		var tpl = new Template
+		for modifier in modifiers do
+			if modifier == "public" then continue
+			tpl.add "{modifier.html_escape} "
+		end
+		return tpl
+	end
+end
+
+redef class MProperty
+	redef fun tpl_title do return intro.tpl_title
+	redef fun tpl_icon do return intro.tpl_icon
+	redef fun tpl_css_classes do return intro.tpl_css_classes
+end
+
+redef class MPropDef
+	redef fun tpl_article do
+		var tpl = new TplArticle(nitdoc_id)
+		tpl.summary_title = "in {mclassdef.html_name}"
+		var title = new Template
+		title.add "in "
+		title.add mclassdef.html_link
+		tpl.title = title
+		tpl.subtitle = html_declaration
+		var mdoc = mdoc_or_fallback
+		if mdoc != null then
+			tpl.content = mdoc.tpl_comment
+		end
+		return tpl
+	end
+
+	redef fun tpl_definition do
+		var tpl = new TplDefinition
+		var mdoc = mdoc_or_fallback
+		if mdoc != null then
+			tpl.comment = mdoc.tpl_comment
+		end
+		return tpl
+	end
+
+	redef fun tpl_css_classes do
+		var set = new HashSet[String]
+		if is_intro then set.add "intro"
+		for m in mproperty.intro.modifiers do set.add m.to_cmangle
+		for m in modifiers do set.add m.to_cmangle
+		return set.to_a
+	end
+
+	fun tpl_modifiers: Template do
+		var tpl = new Template
+		for modifier in modifiers do
+			if modifier == "public" then continue
+			tpl.add "{modifier.html_escape} "
+		end
+		return tpl
+	end
+
+	redef fun tpl_list_item do
+		var lnk = new Template
+		lnk.add new TplLabel.with_classes(tpl_css_classes.to_a)
+		var atext = html_link.text
+		var ahref = "{mclassdef.mclass.nitdoc_url}#{mproperty.nitdoc_id}"
+		var atitle = html_link.title
+		var anchor = new Link.with_title(ahref, atext, atitle)
+		lnk.add anchor
+		var mdoc = mdoc_or_fallback
+		if mdoc != null then
+			lnk.add ": "
+			lnk.add mdoc.tpl_short_comment
+		end
+		return new TplListItem.with_content(lnk)
+	end
+
+	fun tpl_inheritance_item: TplListItem do
+		var lnk = new Template
+		lnk.add new TplLabel.with_classes(tpl_css_classes.to_a)
+		lnk.add mclassdef.mmodule.html_namespace
+		lnk.add "::"
+		var atext = mclassdef.html_link.text
+		var ahref = "{mclassdef.mclass.nitdoc_url}#{mproperty.nitdoc_id}"
+		var atitle = mclassdef.html_link.title
+		var anchor = new Link.with_title(ahref, atext, atitle)
+		lnk.add anchor
+		var mdoc = mdoc_or_fallback
+		if mdoc != null then
+			lnk.add ": "
+			lnk.add mdoc.tpl_short_comment
+		end
+		var li = new TplListItem.with_content(lnk)
+		li.css_classes.add "signature"
+		return li
+	end
+end
+
+redef class ConcernsTree
+
+	private var seen = new HashSet[MConcern]
+
+	redef fun add(p, e) do
+		if seen.has(e) then return
+		seen.add e
+		super(p, e)
+	end
+
+	fun to_tpl: TplList do
+		var lst = new TplList.with_classes(["list-unstyled", "list-definition"])
+		for r in roots do
+			var li = r.tpl_concern_item
+			lst.add_li li
+			build_list(r, li)
+		end
+		return lst
+	end
+
+	private fun build_list(e: MConcern, li: TplListItem) do
+		if not sub.has_key(e) then return
+		var subs = sub[e]
+		var lst = new TplList.with_classes(["list-unstyled", "list-definition"])
+		for e2 in subs do
+			if e2 isa MGroup and e2.is_root then
+				build_list(e2, li)
+			else
+				var sli = e2.tpl_concern_item
+				lst.add_li sli
+				build_list(e2, sli)
+			end
+		end
+		li.append lst
+	end
+end
+
+redef class MInnerClassDef
+	redef fun tpl_definition do
+		var tpl = new TplClassDefinition
+		var mdoc = mdoc_or_fallback
+		if mdoc != null then
+			tpl.comment = mdoc.tpl_comment
+		end
+		return tpl
+	end
+end
