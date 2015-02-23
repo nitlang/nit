@@ -246,9 +246,9 @@ redef class OverviewPage
 			var sarticle = mproject.tpl_article
 			sarticle.subtitle = mproject.html_declaration
 			sarticle.content = mproject.tpl_definition
-			var mdoc = mproject.mdoc_or_fallback
-			if mdoc != null then
-				sarticle.content = mdoc.tpl_short_comment
+			var comment = mproject.html_short_comment
+			if comment != null then
+				sarticle.content = comment
 			end
 			ssection.add_child sarticle
 		end
@@ -659,9 +659,6 @@ redef class DefinitionArticle
 			if mentity isa MPropDef then
 				article.source_link = v.tpl_showsource(mentity.location)
 			end
-			if not mentity isa MVirtualTypeProp then
-				# article.content = mentity.tpl_comment
-			end
 		end
 		for child in children do
 			child.render(v, doc, page, article)
@@ -714,8 +711,9 @@ redef class DefinitionArticle
 		article.title_classes.add "signature"
 		article.summary_title = "{mprop.html_name}"
 		article.subtitle = mpropdef.html_namespace
-		if mpropdef.mdoc_or_fallback != null then
-			article.content = mpropdef.mdoc_or_fallback.tpl_comment
+		var comment = mpropdef.html_comment
+		if comment != null then
+			article.content = comment
 		end
 		# TODO move in its own phase? let's see after doc_template refactoring.
 		# Add linearization
@@ -857,9 +855,9 @@ redef class MEntity
 	# A template article that briefly describe the entity
 	fun tpl_short_article: TplArticle do
 		var tpl = tpl_article
-		var mdoc = mdoc_or_fallback
-		if mdoc != null then
-			tpl.content = mdoc.tpl_short_comment
+		var comment = html_short_comment
+		if comment != null then
+			tpl.content = comment
 		end
 		return tpl
 	end
@@ -882,10 +880,10 @@ redef class MEntity
 		var lnk = new Template
 		lnk.add new TplLabel.with_classes(tpl_css_classes)
 		lnk.add html_link
-		var mdoc = mdoc_or_fallback
-		if mdoc != null then
+		var comment = html_short_comment
+		if comment != null then
 			lnk.add ": "
-			lnk.add mdoc.tpl_short_comment
+			lnk.add comment
 		end
 		return new TplListItem.with_content(lnk)
 	end
@@ -913,10 +911,10 @@ redef class MConcern
 	private fun tpl_concern_item: TplListItem do
 		var lnk = new Template
 		lnk.add html_link_to_anchor
-		var mdoc = mdoc_or_fallback
-		if mdoc != null then
+		var comment = html_short_comment
+		if comment != null then
 			lnk.add ": "
-			lnk.add mdoc.tpl_short_comment
+			lnk.add comment
 		end
 		return new TplListItem.with_content(lnk)
 	end
@@ -925,9 +923,9 @@ end
 redef class MProject
 	redef fun tpl_definition do
 		var tpl = new TplDefinition
-		var mdoc = mdoc_or_fallback
-		if mdoc != null then
-			tpl.comment = mdoc.tpl_comment
+			var comment = html_comment
+		if comment != null then
+			tpl.comment = comment
 		end
 		return tpl
 	end
@@ -938,9 +936,9 @@ end
 redef class MGroup
 	redef fun tpl_definition do
 		var tpl = new TplDefinition
-		var mdoc = mdoc_or_fallback
-		if mdoc != null then
-			tpl.comment = mdoc.tpl_comment
+		var comment = html_comment
+		if comment != null then
+			tpl.comment = comment
 		end
 		return tpl
 	end
@@ -949,9 +947,9 @@ end
 redef class MModule
 	redef fun tpl_definition do
 		var tpl = new TplClassDefinition
-		var mdoc = mdoc_or_fallback
-		if mdoc != null then
-			tpl.comment = mdoc.tpl_comment
+		var comment = html_comment
+		if comment != null then
+			tpl.comment = comment
 		end
 		return tpl
 	end
@@ -983,9 +981,9 @@ redef class MClassDef
 		title.add "in "
 		title.add mmodule.html_namespace
 		tpl.subtitle = title
-		var mdoc = mdoc_or_fallback
-		if mdoc != null then
-			tpl.content = mdoc.tpl_comment
+		var comment = html_comment
+		if comment != null then
+			tpl.content = comment
 		end
 		return tpl
 	end
@@ -999,9 +997,9 @@ redef class MClassDef
 
 	redef fun tpl_definition do
 		var tpl = new TplClassDefinition
-		var mdoc = mdoc_or_fallback
-		if mdoc != null then
-			tpl.comment = mdoc.tpl_comment
+		var comment = html_comment
+		if comment != null then
+			tpl.comment = comment
 		end
 		return tpl
 	end
@@ -1039,18 +1037,18 @@ redef class MPropDef
 		title.add mclassdef.html_link
 		tpl.title = title
 		tpl.subtitle = html_declaration
-		var mdoc = mdoc_or_fallback
-		if mdoc != null then
-			tpl.content = mdoc.tpl_comment
+		var comment = html_comment
+		if comment != null then
+			tpl.content = comment
 		end
 		return tpl
 	end
 
 	redef fun tpl_definition do
 		var tpl = new TplDefinition
-		var mdoc = mdoc_or_fallback
-		if mdoc != null then
-			tpl.comment = mdoc.tpl_comment
+		var comment = html_comment
+		if comment != null then
+			tpl.comment = comment
 		end
 		return tpl
 	end
@@ -1080,10 +1078,10 @@ redef class MPropDef
 		var atitle = html_link.title
 		var anchor = new Link.with_title(ahref, atext, atitle)
 		lnk.add anchor
-		var mdoc = mdoc_or_fallback
-		if mdoc != null then
+		var comment = html_short_comment
+		if comment != null then
 			lnk.add ": "
-			lnk.add mdoc.tpl_short_comment
+			lnk.add comment
 		end
 		return new TplListItem.with_content(lnk)
 	end
@@ -1098,10 +1096,10 @@ redef class MPropDef
 		var atitle = mclassdef.html_link.title
 		var anchor = new Link.with_title(ahref, atext, atitle)
 		lnk.add anchor
-		var mdoc = mdoc_or_fallback
-		if mdoc != null then
+		var comment = html_short_comment
+		if comment != null then
 			lnk.add ": "
-			lnk.add mdoc.tpl_short_comment
+			lnk.add comment
 		end
 		var li = new TplListItem.with_content(lnk)
 		li.css_classes.add "signature"
@@ -1149,9 +1147,9 @@ end
 redef class MInnerClassDef
 	redef fun tpl_definition do
 		var tpl = new TplClassDefinition
-		var mdoc = mdoc_or_fallback
-		if mdoc != null then
-			tpl.comment = mdoc.tpl_comment
+		var comment = html_comment
+		if comment != null then
+			tpl.comment = comment
 		end
 		return tpl
 	end

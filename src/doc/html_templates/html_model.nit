@@ -103,6 +103,20 @@ redef class MEntity
 	# * MProperty: `mclass::mprop`
 	# * MPropdef: `mclassdef:mpropdef`
 	fun html_namespace: Template is abstract
+
+	# Returns the comment of this MEntity formatted as HTML.
+	var html_comment: nullable Writable is lazy do
+		var mdoc = mdoc_or_fallback
+		if mdoc == null then return null
+		return mdoc.tpl_comment
+	end
+
+	# Returns the comment of this MEntity formatted as HTML.
+	var html_short_comment: nullable Writable is lazy do
+		var mdoc = mdoc_or_fallback
+		if mdoc == null then return null
+		return mdoc.tpl_short_comment
+	end
 end
 
 redef class MProject
