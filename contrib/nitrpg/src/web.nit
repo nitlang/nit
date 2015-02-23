@@ -56,8 +56,8 @@ class RpgAction
 
 	# Returns the game with `name` or null if no game exists with this name.
 	fun load_game(name: String): nullable Game do
-		var repo = new Repo(api, name)
-		if api.was_error then return null
+		var repo = api.load_repo(name)
+		if api.was_error or repo == null then return null
 		var game = new Game(api, repo)
 		game.root_url = root_url
 		return game
@@ -175,6 +175,11 @@ class GameAction
 
 	# From where to start the display of events related lists.
 	var list_from = 0
+
+	# TODO should also check 201, 203 ...
+	private fun is_response_error(response: HttpResponse): Bool do
+		return response.status_code != 200
+	end
 end
 
 # Repo overview page.
@@ -183,6 +188,7 @@ class RepoHome
 
 	redef fun answer(request, url) do
 		var rsp = prepare_response(request, url)
+		if is_response_error(rsp) then return rsp
 		page.side_panels.add new ShortListPlayersPanel(game)
 		page.flow_panels.add new PodiumPanel(game)
 		page.flow_panels.add new EventListPanel(game, list_limit, list_from)
@@ -198,6 +204,7 @@ class ListPlayers
 
 	redef fun answer(request, url) do
 		var rsp = prepare_response(request, url)
+		if is_response_error(rsp) then return rsp
 		page.breadcrumbs.add_link(game.url / "players", "players")
 		page.flow_panels.add new ListPlayersPanel(game)
 		rsp.body = page.write_to_string
@@ -211,6 +218,7 @@ class PlayerHome
 
 	redef fun answer(request, url) do
 		var rsp = prepare_response(request, url)
+		if is_response_error(rsp) then return rsp
 		var name = request.param("player")
 		if name == null then
 			var msg = "Bad request: should look like /:owner/:repo/:players/:name."
@@ -238,6 +246,7 @@ class ListAchievements
 
 	redef fun answer(request, url) do
 		var rsp = prepare_response(request, url)
+		if is_response_error(rsp) then return rsp
 		page.breadcrumbs.add_link(game.url / "achievements", "achievements")
 		page.flow_panels.add new AchievementsListPanel(game)
 		rsp.body = page.write_to_string
@@ -251,6 +260,7 @@ class AchievementHome
 
 	redef fun answer(request, url) do
 		var rsp = prepare_response(request, url)
+		if is_response_error(rsp) then return rsp
 		var name = request.param("achievement")
 		if name == null then
 			var msg = "Bad request: should look like /:owner/:repo/achievements/:achievement."
