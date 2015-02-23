@@ -684,9 +684,10 @@ redef class DefinitionArticle
 				if lin.length > 1 then
 					var lin_article = new TplArticle("{mentity.nitdoc_id}.lin")
 					lin_article.title = "Inheritance"
-					var lst = new TplList.with_classes(["list-unstyled", "list-labeled"])
+					var lst = new UnorderedList
+					lst.css_classes.add("list-unstyled list-labeled")
 					for smpropdef in lin do
-						lst.add_li smpropdef.tpl_inheritance_item
+						lst.add_li tpl_inheritance_item(smpropdef)
 					end
 					lin_article.content = lst
 					article.add_child lin_article
@@ -717,6 +718,26 @@ redef class DefinitionArticle
 			end
 		end
 		return mpropdefs
+	end
+
+	private fun tpl_inheritance_item(mpropdef: MPropDef): ListItem do
+		var lnk = new Template
+		lnk.add new TplLabel.with_classes(css_classes)
+		lnk.add mpropdef.mclassdef.mmodule.html_namespace
+		lnk.add "::"
+		var atext = mpropdef.mclassdef.html_link.text
+		var ahref = "{mpropdef.mclassdef.mclass.nitdoc_url}#{mpropdef.mproperty.nitdoc_id}"
+		var atitle = mpropdef.mclassdef.html_link.title
+		var anchor = new Link.with_title(ahref, atext, atitle)
+		lnk.add anchor
+		var comment = mpropdef.html_short_comment
+		if comment != null then
+			lnk.add ": "
+			lnk.add comment
+		end
+		var li = new ListItem(lnk)
+		li.css_classes.add "signature"
+		return li
 	end
 end
 
@@ -798,59 +819,5 @@ redef class Location
 		var file_loc = getcwd.join_path(file.filename).simplify_path
 		var gith_loc = file_loc.substring(base_dir.length + 1, file_loc.length)
 		return "{gith_loc}:{line_start},{column_start}--{line_end},{column_end}"
-	end
-end
-
-redef class MEntity
-	# A li element that can go in a list
-	fun tpl_list_item: TplListItem do
-		var lnk = new Template
-		lnk.add new TplLabel.with_classes(css_classes)
-		lnk.add html_link
-		var comment = html_short_comment
-		if comment != null then
-			lnk.add ": "
-			lnk.add comment
-		end
-		return new TplListItem.with_content(lnk)
-	end
-end
-
-redef class MPropDef
-	redef fun tpl_list_item do
-		var lnk = new Template
-		lnk.add new TplLabel.with_classes(css_classes)
-		var atext = html_link.text
-		var ahref = "{mclassdef.mclass.nitdoc_url}#{mproperty.nitdoc_id}"
-		var atitle = html_link.title
-		var anchor = new Link.with_title(ahref, atext, atitle)
-		lnk.add anchor
-		var comment = html_short_comment
-		if comment != null then
-			lnk.add ": "
-			lnk.add comment
-		end
-		return new TplListItem.with_content(lnk)
-	end
-
-	#
-	fun tpl_inheritance_item: TplListItem do
-		var lnk = new Template
-		lnk.add new TplLabel.with_classes(css_classes)
-		lnk.add mclassdef.mmodule.html_namespace
-		lnk.add "::"
-		var atext = mclassdef.html_link.text
-		var ahref = "{mclassdef.mclass.nitdoc_url}#{mproperty.nitdoc_id}"
-		var atitle = mclassdef.html_link.title
-		var anchor = new Link.with_title(ahref, atext, atitle)
-		lnk.add anchor
-		var comment = html_short_comment
-		if comment != null then
-			lnk.add ": "
-			lnk.add comment
-		end
-		var li = new TplListItem.with_content(lnk)
-		li.css_classes.add "signature"
-		return li
 	end
 end
