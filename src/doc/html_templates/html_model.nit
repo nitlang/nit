@@ -69,9 +69,11 @@ redef class MEntity
 		return tpl
 	end
 
-	# A template link to the mentity `nitdoc_id`
-	fun tpl_anchor: TplLink do
-		var tpl = new TplLink("#{nitdoc_id}", html_name)
+	# Returns a Link to the mentity `nitdoc_id`.
+	#
+	# Example: `<a href="#nitdoc_id" title="mdoc.short_comment">html_short_name</a>
+	fun html_link_to_anchor: Link do
+		var tpl = new Link("#{nitdoc_id}", html_name)
 		var mdoc = mdoc_or_fallback
 		if mdoc != null then
 			tpl.title = mdoc.short_comment
@@ -143,7 +145,7 @@ redef class MConcern
 	# Return a li element for `self` that can be displayed in a concern list
 	private fun tpl_concern_item: TplListItem do
 		var lnk = new Template
-		lnk.add tpl_anchor
+		lnk.add html_link_to_anchor
 		var mdoc = mdoc_or_fallback
 		if mdoc != null then
 			lnk.add ": "
@@ -720,7 +722,7 @@ end
 redef class MInnerClassDef
 	redef fun nitdoc_url do return inner.nitdoc_url
 
-	redef fun tpl_anchor do return inner.tpl_anchor
+	redef fun html_link_to_anchor do return inner.html_link_to_anchor
 	redef fun html_link do return inner.html_link
 	redef fun tpl_signature do return inner.tpl_signature
 

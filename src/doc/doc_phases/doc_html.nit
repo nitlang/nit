@@ -467,7 +467,7 @@ redef class MClassPage
 		end
 		var lnk = new Template
 		lnk.add new TplLabel.with_classes(classes)
-		lnk.add mprop.tpl_anchor
+		lnk.add mprop.html_link_to_anchor
 		return new TplListItem.with_content(lnk)
 	end
 
