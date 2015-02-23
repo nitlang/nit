@@ -63,6 +63,8 @@ l.add_reactor(new Player1Issue, new Player100Issues, new Player1KIssues)
 l.add_reactor(new Player1Pull, new Player100Pulls, new Player1KPulls)
 l.add_reactor(new Player1Commit, new Player100Commits, new Player1KCommits)
 l.add_reactor(new IssueAboutNitdoc, new IssueAboutFFI)
+l.add_reactor(new Player1Comment, new Player100Comments, new Player1KComments)
+l.add_reactor(new PlayerPingGod, new PlayerFirstReview, new PlayerSaysNitcoin)
 
 print "Listening events on {host}:{port}"
 l.listen
