@@ -159,7 +159,7 @@ class NitUnitExecutor
 			f.write("end\n")
 		end
 		f.write("var a = args.first.to_i\n")
-		for j in [1..i[ do
+		for j in [1..i] do
 			f.write("if a == {j} then run_{j}\n")
 		end
 		f.close
