@@ -219,7 +219,7 @@ import
 
 topdef {-> classdef}
 	= {classdef} classdef {-> classdef}
-	| propdefs_toplevel {-> New classdef.top([propdefs_toplevel.propdef])}
+	| propdef_toplevel n1 {-> New classdef.top([propdef_toplevel.propdef])}
 	;
 
 implicit_main_class {-> classdef?}
@@ -233,7 +233,7 @@ implicit_main_meth {-> propdef}
 
 /* CLASSES *******************************************************************/
 classdef
-	= [doc]:no redef visibility classkind no qclassid formaldefs line_annotations_forclass? extern_code_block? [superclasses]:superclass* propdefs* [n2]:no kwend {-> New classdef.std(doc.doc, redef.kwredef, visibility, classkind, qclassid.classid, [formaldefs.formaldef], line_annotations_forclass.annotations, extern_code_block, [superclasses.superclass], [propdefs.propdef], kwend)};
+	= [doc]:no redef visibility classkind no qclassid formaldefs line_annotations_forclass? extern_code_block? [superclasses]:superclass* propdefs kwend {-> New classdef.std(doc.doc, redef.kwredef, visibility, classkind, qclassid.classid, [formaldefs.formaldef], line_annotations_forclass.annotations, extern_code_block, [superclasses.superclass], [propdefs.propdef], kwend)};
 redef {-> kwredef?}
 	= kwredef? {-> kwredef};
 classkind
@@ -257,8 +257,12 @@ superclass {-> superclass}
 	= {super} no kwsuper [n2]:no type annotation_withend {-> New superclass(kwsuper, type, annotation_withend.annotations)}
 	;
 
-propdefs~toplevel {-> propdef}
-	= propdef~toplevel n1 {-> propdef~toplevel.propdef}
+propdefs {-> propdef*}
+	= propdefn+ no {-> [propdefn.propdef]}
+	| {empty} no {-> []}
+	;
+propdefn {-> propdef}
+	= propdef n1 {-> propdef.propdef}
 	;
 propdef~toplevel {-> propdef}
 	= {meth} [doc]:no redef visibility kwmeth qmethid signature annotation_noend? kwdo stmtso kwend_o {-> New propdef.meth(doc.doc, redef.kwredef, visibility, kwmeth, Null, Null, qmethid.methid, signature, annotation_noend.annotations, Null, Null, stmtso.expr)}
