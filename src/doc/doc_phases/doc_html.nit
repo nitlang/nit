@@ -542,41 +542,13 @@ redef class DefinitionArticle
 			end
 			if page isa MModulePage then is_toc_hidden = true
 		else if mentity isa MPropDef then
-			if page isa MEntityPage and page.mentity isa MClass then
+			if page isa MClassPage then
 				var title = new Template
 				title.add mentity.html_icon
 				title.add mentity.html_declaration
 				html_title = title
 				html_subtitle = mentity.html_namespace
 				toc_title = mentity.html_name
-				# TODO move in its own phase? let's see after doc_template refactoring.
-				# Add linearization
-				var all_defs = new HashSet[MPropDef]
-				for local_def in local_defs(page.as(MClassPage), mentity.mproperty) do
-					all_defs.add local_def
-					var smpropdef = local_def
-					while not smpropdef.is_intro do
-						smpropdef = smpropdef.lookup_next_definition(
-							doc.mainmodule, smpropdef.mclassdef.bound_mtype)
-						all_defs.add smpropdef
-					end
-				end
-				var lin = all_defs.to_a
-				doc.mainmodule.linearize_mpropdefs(lin)
-				if lin.length > 1 then
-					var lin_article = new DocArticle
-					lin_article.html_id = "{mentity.nitdoc_id}.lin"
-					lin_article.html_title = "Inheritance"
-					lin_article.is_toc_hidden = true
-					var lst = new UnorderedList
-					lst.css_classes.add("list-unstyled list-labeled")
-					for smpropdef in lin do
-						lst.add_li tpl_inheritance_item(smpropdef)
-					end
-					# FIXME will be moved in its own phase
-					lin_article.add lst
-					add_child lin_article
-				end
 			else
 				var title = new Template
 				title.add "in "
@@ -587,39 +559,6 @@ redef class DefinitionArticle
 			# article.source_link = v.tpl_showsource(mentity.location)
 		end
 		super
-	end
-
-	# Filter `page.mpropdefs` for this `mpropertie`.
-	#
-	# FIXME compatability with current templates.
-	private fun local_defs(page: MClassPage, mproperty: MProperty): HashSet[MPropDef] do
-		var mpropdefs = new HashSet[MPropDef]
-		for mpropdef in page.mpropdefs do
-			if mpropdef.mproperty == mproperty then
-				mpropdefs.add mpropdef
-			end
-		end
-		return mpropdefs
-	end
-
-	private fun tpl_inheritance_item(mpropdef: MPropDef): ListItem do
-		var lnk = new Template
-		lnk.add new TplLabel.with_classes(css_classes)
-		lnk.add mpropdef.mclassdef.mmodule.html_namespace
-		lnk.add "::"
-		var atext = mpropdef.mclassdef.html_link.text
-		var ahref = "{mpropdef.mclassdef.mclass.nitdoc_url}#{mpropdef.mproperty.nitdoc_id}"
-		var atitle = mpropdef.mclassdef.html_link.title
-		var anchor = new Link.with_title(ahref, atext, atitle)
-		lnk.add anchor
-		var comment = mpropdef.html_short_comment
-		if comment != null then
-			lnk.add ": "
-			lnk.add comment
-		end
-		var li = new ListItem(lnk)
-		li.css_classes.add "signature"
-		return li
 	end
 end
 

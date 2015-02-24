@@ -21,6 +21,7 @@ import doc_phases::doc_structure
 import doc_phases::doc_hierarchies
 import doc_phases::doc_graphs
 import doc_phases::doc_intros_redefs
+import doc_phases::doc_lin
 
 # Renders the page as HTML.
 redef class DocPage
@@ -512,6 +513,32 @@ redef class IntrosRedefsListArticle
 		lst.css_classes.add "list-unstyled list-labeled"
 		for mentity in mentities do
 			lst.add_li mentity.html_list_item
+		end
+		add lst
+	end
+end
+
+redef class DefinitionLinArticle
+	redef var html_id is lazy do return "article_lin_{mentity.nitdoc_id}"
+	redef var html_title is lazy do return "Linearization"
+	redef fun is_hidden do return mentities.is_empty
+	redef var is_toc_hidden = true
+
+	redef fun render_body do
+		var lst = new UnorderedList
+		lst.css_classes.add "list-unstyled list-labeled"
+		for mentity in mentities do
+			if not mentity isa MPropDef then continue # TODO handle all mentities
+			var tpl = new Template
+			tpl.add mentity.mclassdef.html_namespace
+			var comment = mentity.mclassdef.html_short_comment
+			if comment != null then
+				tpl.add ": "
+				tpl.add comment
+			end
+			var li = new ListItem(tpl)
+			li.css_classes.add "signature"
+			lst.add_li li
 		end
 		add lst
 	end

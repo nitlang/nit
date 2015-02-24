@@ -41,6 +41,7 @@ private class Nitdoc
 			new StructurePhase(toolcontext, doc),
 			new InheritanceListsPhase(toolcontext, doc),
 			new IntroRedefListPhase(toolcontext, doc),
+			new LinListPhase(toolcontext, doc),
 			new GraphPhase(toolcontext, doc),
 			new RenderHTMLPhase(toolcontext, doc): DocPhase]
 
