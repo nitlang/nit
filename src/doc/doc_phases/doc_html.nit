@@ -215,7 +215,9 @@ redef class DocPage
 	end
 
 	# Build page content template.
-	fun init_content(v: RenderHTMLPhase, doc: DocModel) do end
+	fun init_content(v: RenderHTMLPhase, doc: DocModel) do
+		root.init_html_render(v, doc, self)
+	end
 end
 
 redef class OverviewPage
@@ -521,6 +523,13 @@ redef class DocComposite
 	#
 	# FIXME needed to maintain TplSection compatibility.
 	fun render(v: RenderHTMLPhase, doc: DocModel, page: MEntityPage, parent: TplSectionElt) is abstract
+
+	# Prepares the HTML rendering for this element.
+	#
+	# This visit is mainly used to set template attributes before rendering.
+	fun init_html_render(v: RenderHTMLPhase, doc: DocModel, page: DocPage) do
+		for child in children do child.init_html_render(v, doc, page)
+	end
 end
 
 redef class DocRoot
@@ -792,22 +801,12 @@ redef class GraphArticle
 		file.close
 		sys.system("\{ test -f {path_sh}.png && test -f {path_sh}.s.dot && diff -- {path_sh}.dot {path_sh}.s.dot >/dev/null 2>&1 ; \} || \{ cp -- {path_sh}.dot {path_sh}.s.dot && dot -Tpng -o{path_sh}.png -Tcmapx -o{path_sh}.map {path_sh}.s.dot ; \}")
 		var fmap = new FileReader.open("{path}.map")
-		var map = fmap.read_all
+		map = fmap.read_all
 		fmap.close
 
 		var article = new TplArticle("graph")
-		var alt = ""
-		# FIXME diff hack
-		# if title != null then
-			# article.title = title
-			# alt = "alt='{title.html_escape}'"
-		# end
 		article.css_classes.add "text-center"
-		var content = new Template
-		var name_html = id.html_escape
-		content.add "<img src='{name_html}.png' usemap='#{name_html}' style='margin:auto' {alt}/>"
-		content.add map
-		article.content = content
+		article.content = write_to_string
 		parent.add_child article
 	end
 end

@@ -19,6 +19,7 @@ import html_model
 import html::bootstrap
 import doc_phases::doc_structure
 import doc_phases::doc_hierarchies
+import doc_phases::doc_graphs
 import doc_phases::doc_intros_redefs
 
 # Renders the page as HTML.
@@ -329,5 +330,23 @@ redef class IntrosRedefsListArticle
 			lst.add_li mentity.html_list_item
 		end
 		add lst
+	end
+end
+
+redef class GraphArticle
+	redef var html_id is lazy do return "article_graph_{mentity.nitdoc_id}"
+	redef var is_hidden = false
+
+	# HTML map used to display link.
+	#
+	# This attribute is set by the `doc_render` phase who knows the context.
+	var map: String is noinit, writable
+
+	redef fun render_body do
+		addn "<div class=\"text-center\">"
+		addn " <img src='{id}.png' usemap='#{id}' style='margin:auto'"
+		addn "  alt='{graph_title}'/>"
+		add map
+		addn "</div>"
 	end
 end
