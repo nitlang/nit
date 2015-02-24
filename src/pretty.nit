@@ -691,8 +691,8 @@ redef class AStdClassdef
 		if can_inline then
 			v.adds
 
-			if not n_superclasses.is_empty then
-				for n_superclass in n_superclasses do
+			if not n_propdefs.is_empty then
+				for n_superclass in n_propdefs do
 					v.visit n_superclass
 					v.adds
 				end
@@ -701,18 +701,6 @@ redef class AStdClassdef
 			v.finish_line
 			if v.skip_empty then v.addn
 			v.indent += 1
-
-			for n_superclass in n_superclasses do
-				v.catch_up n_superclass
-				v.addt
-				v.visit n_superclass
-				v.finish_line
-				v.addn
-			end
-
-			if not n_superclasses.is_empty and not n_propdefs.is_empty then
-				if v.skip_empty then v.addn
-			end
 
 			super
 			v.catch_up n_kwend
@@ -727,8 +715,9 @@ redef class AStdClassdef
 
 	redef fun is_inlinable do
 		if not super then return false
-		if not n_propdefs.is_empty then return false
-		if n_superclasses.length > 1 then return false
+		# FIXME: repair pretty-printing one-liner classes
+		if n_propdefs.length > 0 then return false
+		#if n_propdefs.length == 1 and not n_propdefs.first isa ASuperPropdef then return false
 		if not collect_comments.is_empty then return false
 		return true
 	end
@@ -785,14 +774,6 @@ redef class AType
 	end
 end
 
-redef class ASuperclass
-	redef fun accept_pretty_printer(v) do
-		v.visit n_kwsuper
-		v.adds
-		v.visit n_type
-	end
-end
-
 # Properties
 
 redef class APropdef
@@ -800,7 +781,7 @@ redef class APropdef
 		v.visit n_doc
 		v.addt
 
-		if not n_visibility isa APublicVisibility then
+		if not n_visibility isa nullable APublicVisibility then
 			v.visit n_visibility
 			v.adds
 		end
@@ -1003,6 +984,20 @@ redef class AMainMethPropdef
 		v.visit n_block
 		if v.skip_empty then v.addn
 	end
+end
+
+redef class ASuperPropdef
+	redef fun accept_pretty_printer(v) do
+		super
+		v.visit n_kwsuper
+		v.adds
+		v.visit n_type
+		visit_annotations(v, n_annotations)
+		v.finish_line
+		v.addn
+	end
+
+	redef fun is_inlinable do return true
 end
 
 redef class ASignature

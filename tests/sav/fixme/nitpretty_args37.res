@@ -12,36 +12,33 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# comment 1
-class A
-	type FOO: Discrete
-	private var foo: FOO # comment
+# comment
+class A end
 
-	# comment 2
-	var bar: Int = 10
+class B[T] # comment
+	# comment
+	# comment
+	super A # comment
+
+
+	super C[A, B[A]]
+	# comment
 end
 
-class B
+class C[U, V: B[A]] end # comment
+
+class D
 	super A
-	redef type FOO: Int
 
-	# comment 3
-	redef fun foo do return bar # comment
 
-	redef fun bar do
-		return 10 # comment 4
-	end
+end # comment
 
-	fun baz do return # comment 5
-	protected fun baz2 do end
+class E
 
-	fun other: String do
-		return "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
-	end
 
-	fun foo1(arr: Array[String], len: Int, ind: Int): String do
-		return "Hello World!"
-	end
+
+	super A # comment
 end
 
 # end
+
