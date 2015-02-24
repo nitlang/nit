@@ -34,8 +34,6 @@ class StructurePhase
 	redef fun apply do
 		for page in doc.pages do page.apply_structure(self, doc)
 	end
-
-	# TODO index and search page should also be structured here
 end
 
 redef class DocPage
@@ -59,6 +57,18 @@ redef class OverviewPage
 			section.add_child new DefinitionArticle(mproject)
 		end
 		article.add_child section
+	end
+end
+
+redef class SearchPage
+	redef fun apply_structure(v, doc) do
+		var mmodules = doc.mmodules.to_a
+		v.name_sorter.sort(mmodules)
+		var mclasses = doc.mclasses.to_a
+		v.name_sorter.sort(mclasses)
+		var mprops = doc.mproperties.to_a
+		v.name_sorter.sort(mprops)
+		root.add_child new IndexArticle(mmodules, mclasses, mprops)
 	end
 end
 
@@ -317,4 +327,18 @@ end
 # The project list.
 class ProjectsSection
 	super DocArticle
+end
+
+# An article that display an index of mmodules, mclasses and mproperties.
+class IndexArticle
+	super DocArticle
+
+	# List of mmodules to display.
+	var mmodules: Array[MModule]
+
+	# List of mclasses to display.
+	var mclasses: Array[MClass]
+
+	# List of mproperties to display.
+	var mprops: Array[MProperty]
 end

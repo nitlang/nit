@@ -363,6 +363,46 @@ redef class HomeArticle
 	end
 end
 
+redef class IndexArticle
+	redef var html_id = "index"
+	redef var html_title = "Index"
+	redef fun is_empty do
+		return mmodules.is_empty and mclasses.is_empty and mprops.is_empty
+	end
+
+	redef fun render_body do
+		addn "<div class='container-fluid'>"
+		addn " <div class='row'>"
+		render_list("Modules", mmodules)
+		render_list("Classes", mclasses)
+		render_list("Properties", mprops)
+		addn "</div>"
+		addn "</div>"
+	end
+
+	# Displays a list from the content of `mentities`.
+	private fun render_list(title: String, mentities: Array[MEntity]) do
+		if mentities.is_empty then return
+		addn "<div class='col-xs-4'>"
+		addn new Header(3, title)
+		var lst = new UnorderedList
+		for mentity in mentities do
+			if mentity isa MProperty then
+				var tpl = new Template
+				tpl.add mentity.intro.html_link
+				tpl.add " ("
+				tpl.add mentity.intro.mclassdef.mclass.html_link
+				tpl.add ")"
+				lst.add_li new ListItem(tpl)
+			else
+				lst.add_li new ListItem(mentity.html_link)
+			end
+		end
+		addn lst
+		addn "</div>"
+	end
+end
+
 redef class ProjectsSection
 	redef var html_id = "projects"
 	redef var html_title = "Projects"

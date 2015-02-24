@@ -242,57 +242,6 @@ redef class SearchPage
 	end
 
 	redef fun init_sidebar(v, doc) do end
-
-	# TODO this should be done in StructurePhase.
-	redef fun init_content(v, doc) do
-		var tpl = new TplSearchPage("search_all")
-		var section = new TplSection("search")
-		# title
-		tpl.title = "Index"
-		# modules list
-		for mmodule in modules_list(v, doc) do
-			tpl.modules.add mmodule.html_link
-		end
-		# classes list
-		for mclass in classes_list(v, doc) do
-			tpl.classes.add mclass.html_link
-		end
-		# properties list
-		for mproperty in mprops_list(v, doc) do
-			var m = new Template
-			m.add mproperty.intro.html_link
-			m.add " ("
-			m.add mproperty.intro.mclassdef.mclass.html_link
-			m.add ")"
-			tpl.props.add m
-		end
-		section.add_child tpl
-	end
-
-	# Extract mmodule list to display (sorted by name)
-	private fun modules_list(v: RenderHTMLPhase, doc: DocModel): Array[MModule] do
-		var sorted = new Array[MModule]
-		for mmodule in doc.model.mmodule_importation_hierarchy do
-			if mmodule.is_fictive or mmodule.is_test_suite then continue
-			sorted.add mmodule
-		end
-		v.name_sorter.sort(sorted)
-		return sorted
-	end
-
-	# Extract mclass list to display (sorted by name)
-	private fun classes_list(v: RenderHTMLPhase, doc: DocModel): Array[MClass] do
-		var sorted = doc.mclasses.to_a
-		v.name_sorter.sort(sorted)
-		return sorted
-	end
-
-	# Extract mproperty list to display (sorted by name)
-	private fun mprops_list(v: RenderHTMLPhase, doc: DocModel): Array[MProperty] do
-		var sorted = doc.mproperties.to_a
-		v.name_sorter.sort(sorted)
-		return sorted
-	end
 end
 
 redef class MEntityPage
