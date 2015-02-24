@@ -57,7 +57,8 @@ function run_compiler()
 		bench_command "nitc-g" "nitc --global --no-cc ../src/nitls.nit" "./nitc.$title.bin" -v --global --no-cc ../src/nitls.nit
 		bench_command "nitc-s" "nitc --separate ../src/nitc.nit" "./nitc.$title.bin" -v --no-cc --separate ../src/nitc.nit
 		run_command "$@" ../src/nit.nit -o "nit.$title.bin"
-		bench_command "nit" "nit ../src/test_parser.nit ../src/nitls.nit" "./nit.$title.bin" -v ../src/test_parser.nit -- -n ../src/nitls.nit
+		bench_command "nit-queens" "nit queens.nit 8" "./nit.$title.bin" ../lib/ai/examples/queens.nit -q 8
+		bench_command "nit-nitcc" "nit nitcc.nit calc.sablecc" "./nit.$title.bin" ../contrib/nitcc/src/nitcc.nit ../contrib/nitcc/examples/calc.sablecc
 		run_command "$@" ../src/nitdoc.nit -o "nitdoc.$title.bin"
 		rm -r out 2> /dev/null
 		mkdir out 2> /dev/null
@@ -72,6 +73,8 @@ function run_compiler()
 		bench_command "queens" "bench_queens 13" "./queens.$title.bin" 13
 		run_command "$@" "../lib/ai/examples/puzzle.nit" -o "puzzle.$title.bin"
 		bench_command "puzzle" "puzzle 15-hard" "./puzzle.$title.bin" kleg.mondcafjhbi
+		run_command "$@" "markdown/engines/nitmd/nitmd.nit" -o "nitmd.$title.bin"
+		bench_command "nitmd" "markdown" "./nitmd.$title.bin" markdown/benches/out/mixed.md 80
 	fi
 
 	rm -r *.bin .nit_compile out
@@ -118,6 +121,11 @@ fi
 
 # get the bootstrapped nitc
 cp ../bin/nitc .
+
+if test -z "$fast"; then
+	make -C markdown/benches
+	make -C ../contrib/nitcc
+fi
 
 ## EFFECTIVE BENCHS ##
 
