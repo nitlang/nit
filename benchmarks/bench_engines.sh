@@ -345,11 +345,29 @@ function bench_linkboost()
 	run_compiler "nitc-sct" ./nitc --separate --colors-are-symbols --trampoline-call
 	prepare_res "$name-nitc-sl.dat" "nitc-sl" "nitc with --separate --link-boost"
 	run_compiler "nitc-scts" ./nitc --separate --link-boost
-	prepare_res "$name-nitc-sg.dat" "nitc-sg" "nitc with --separate --semi-global"
-	run_compiler "nitc-sg" ./nitc --separate --semi-global
+	prepare_res "$name-nitc-scgc.dat" "nitc-scgc" "nitc with --separate --colors-are-symbols --guard-call"
+	run_compiler "nitc-scgc" ./nitc --separate --colors-are-symbols --guard-call
+	prepare_res "$name-nitc-scd.dat" "nitc-scd" "nitc with --separate --colors-are-symbols --direct-call-monomorph0"
+	run_compiler "nitc-scd" ./nitc --separate --colors-are-symbols --direct-call-monomorph0
 	plot "$name.gnu"
 }
 bench_linkboost
+
+function bench_call_monomorph()
+{
+	name="$FUNCNAME"
+	skip_test "$name" && return
+	prepare_res "$name-nitc.dat" "nitc" "nitc with --separate"
+	run_compiler "nitc" ./nitc
+	prepare_res "$name-nitc-d0.dat" "nitc-d0" "nitc with --separate --direct-call-monomorph0"
+	run_compiler "nitc-d0" ./nitc --direct-call-monomorph0
+	prepare_res "$name-nitc-d1.dat" "nitc-d" "nitc with --separate --direct-call-monomorph"
+	run_compiler "nitc-d1" ./nitc --direct-call-monomorph
+	prepare_res "$name-nitc-d2.dat" "nitc-d2" "nitc with --separate --direct-call-monomorph2"
+	run_compiler "nitc-d2" ./nitc --direct-call-monomorph --direct-call-monomorph0
+	plot "$name.gnu"
+}
+bench_call_monomorph
 
 if test -n "$html"; then
 	echo >>"$html" "</body></html>"
