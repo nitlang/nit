@@ -309,7 +309,6 @@ class AVisibility super Prod end
 class AClassdef super Prod end
 class AClasskind super Prod end
 class AFormaldef super Prod end
-class ASuperclass super Prod end
 class APropdef super Prod end
 class AMethid super Prod end
 class ASignature super Prod end
@@ -383,9 +382,7 @@ class AStdClassdef
 	var n_classkind: AClasskind is writable, noinit
 	var n_id: nullable TClassid = null is writable
 	var n_formaldefs: List[AFormaldef] = new List[AFormaldef]
-	var n_annotations: nullable AAnnotations = null is writable
 	var n_extern_code_block: nullable AExternCodeBlock = null is writable
-	var n_superclasses: List[ASuperclass] = new List[ASuperclass]
 	var n_propdefs: List[APropdef] = new List[APropdef]
 	var n_kwend: TKwend is writable, noinit
 end
@@ -423,12 +420,6 @@ class AFormaldef
 	super AFormaldef
 	var n_id: TClassid is writable, noinit
 	var n_type: nullable AType = null is writable
-	var n_annotations: nullable AAnnotations = null is writable
-end
-class ASuperclass
-	super ASuperclass
-	var n_kwsuper: TKwsuper is writable, noinit
-	var n_type: AType is writable, noinit
 	var n_annotations: nullable AAnnotations = null is writable
 end
 class AAttrPropdef
@@ -472,6 +463,26 @@ class AMethPropdef
 	var n_extern_calls: nullable AExternCalls = null is writable
 	var n_extern_code_block: nullable AExternCodeBlock = null is writable
 	var n_block: nullable AExpr = null is writable
+end
+class ASuperPropdef
+	super APropdef
+	var n_doc: nullable ADoc = null is writable
+	var n_kwredef: nullable TKwredef = null is writable
+	var n_visibility: AVisibility is writable, noinit
+	var n_kwsuper: TKwsuper is writable, noinit
+	var n_type: AType is writable, noinit
+	var n_annotations: nullable AAnnotations = null is writable
+end
+class AAnnotPropdef
+	super APropdef
+	var n_doc: nullable ADoc = null is writable
+	var n_kwredef: nullable TKwredef = null is writable
+	var n_visibility: nullable AVisibility = null is writable
+	var n_atid: AAtid is writable, noinit
+	var n_opar: nullable TOpar = null is writable
+	var n_args: List[AExpr] = new List[AExpr]
+	var n_cpar: nullable TCpar = null is writable
+	var n_annotations: nullable AAnnotations = null is writable
 end
 class AIdMethid
 	super AMethid
