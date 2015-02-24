@@ -32,20 +32,34 @@ class StructurePhase
 
 	# Populates the given DocModel.
 	redef fun apply do
-		for page in doc.pages do
-			if page isa MEntityPage then page.apply_structure(self, doc)
-		end
+		for page in doc.pages do page.apply_structure(self, doc)
 	end
 
 	# TODO index and search page should also be structured here
 end
 
-redef class MEntityPage
+redef class DocPage
 
 	# Populates `self` with structure elements like DocComposite ones.
 	#
 	# See `StructurePhase`.
 	fun apply_structure(v: StructurePhase, doc: DocModel) do end
+end
+
+redef class OverviewPage
+	redef fun apply_structure(v, doc) do
+		var article = new HomeArticle
+		root.add_child article
+		# Projects list
+		var mprojects = doc.model.mprojects.to_a
+		var sorter = new MConcernRankSorter
+		sorter.sort mprojects
+		var section = new ProjectsSection
+		for mproject in mprojects do
+			section.add_child new DefinitionArticle(mproject)
+		end
+		article.add_child section
+	end
 end
 
 redef class MGroupPage
@@ -293,4 +307,14 @@ end
 # An article that display the definition text of a MEntity.
 class DefinitionArticle
 	super MEntityArticle
+end
+
+# The main project article.
+class HomeArticle
+	super DocArticle
+end
+
+# The project list.
+class ProjectsSection
+	super DocArticle
 end

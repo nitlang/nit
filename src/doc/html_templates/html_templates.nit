@@ -347,6 +347,27 @@ redef class DocArticle
 	end
 end
 
+redef class HomeArticle
+	redef var html_id = "intro"
+	redef var html_title = "Overview"
+
+	# HTML content to display on the home page.
+	#
+	# This attribute is set by the `doc_render` phase who knows the context.
+	var content: nullable String is noinit, writable
+
+	redef fun render_body do
+		var content = self.content
+		if content != null then add content
+		super
+	end
+end
+
+redef class ProjectsSection
+	redef var html_id = "projects"
+	redef var html_title = "Projects"
+end
+
 redef class MEntityComposite
 	redef var html_id is lazy do return mentity.nitdoc_id
 	redef var html_title is lazy do return mentity.nitdoc_name

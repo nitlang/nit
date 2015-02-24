@@ -230,38 +230,6 @@ redef class OverviewPage
 			title = v.ctx.opt_custom_title.value.to_s
 		end
 	end
-
-	# TODO this should be done in StructurePhase.
-	redef fun init_content(v, doc) do
-		# intro text
-		var section = new TplSection.with_title("overview", title)
-		var article = new TplArticle("intro")
-		if v.ctx.opt_custom_intro.value != null then
-			article.content = v.ctx.opt_custom_intro.value.to_s
-		end
-		section.add_child article
-		# Projects list
-		var mprojects = doc.model.mprojects.to_a
-		var sorter = new MConcernRankSorter
-		sorter.sort mprojects
-		var ssection = new TplSection.with_title("projects", "Projects")
-		for mproject in mprojects do
-			var sarticle = new TplArticle(mproject.nitdoc_id)
-			var title = new Template
-			title.add mproject.html_icon
-			title.add mproject.html_link
-			sarticle.title = title
-			sarticle.title_classes.add "signature"
-			sarticle.summary_title = mproject.html_name
-			sarticle.subtitle = mproject.html_declaration
-			var comment = mproject.html_short_comment
-			if comment != null then
-				sarticle.content = comment
-			end
-			ssection.add_child sarticle
-		end
-		section.add_child ssection
-	end
 end
 
 redef class SearchPage
@@ -596,9 +564,8 @@ end
 # FIXME less hideous hacks...
 redef class DefinitionArticle
 	redef fun init_html_render(v, doc, page) do
-		if not page isa MEntityPage then return
 		var mentity = self.mentity
-		if mentity isa MModule then
+		if mentity isa MProject or mentity isa MModule then
 			var title = new Template
 			title.add mentity.html_icon
 			title.add mentity.html_namespace
@@ -621,12 +588,12 @@ redef class DefinitionArticle
 			html_subtitle = title
 			toc_title = "in {mentity.html_name}"
 			# article.source_link = v.tpl_showsource(mentity.location)
-			if mentity.is_intro and mentity.mmodule != page.mentity then
+			if page isa MEntityPage and mentity.is_intro and mentity.mmodule != page.mentity then
 				is_short_comment = true
 			end
 			if page isa MModulePage then is_toc_hidden = true
 		else if mentity isa MPropDef then
-			if page.mentity isa MClass then
+			if page isa MEntityPage and page.mentity isa MClass then
 				var title = new Template
 				title.add mentity.html_icon
 				title.add mentity.html_declaration
@@ -704,6 +671,17 @@ redef class DefinitionArticle
 		var li = new ListItem(lnk)
 		li.css_classes.add "signature"
 		return li
+	end
+end
+
+redef class HomeArticle
+	redef fun init_html_render(v, doc, page) do
+		if v.ctx.opt_custom_title.value != null then
+			self.html_title = v.ctx.opt_custom_title.value.to_s
+			self.toc_title = v.ctx.opt_custom_title.value.to_s
+		end
+		self.content = v.ctx.opt_custom_intro.value
+		super
 	end
 end
 
