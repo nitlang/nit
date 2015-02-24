@@ -22,7 +22,8 @@ Start ../src/test_parser.nit:17,1--147,1
       AConcreteClasskind ../src/test_parser.nit:23,1--5
         TKwclass "class" ../src/test_parser.nit:23,1--5
       TClassid "PrintTreeVisitor" ../src/test_parser.nit:23,7--22
-      ASuperclass ../src/test_parser.nit:24,2--14
+      ASuperPropdef ../src/test_parser.nit:24,2--14
+        APublicVisibility ../src/test_parser.nit:24,2
         TKwsuper "super" ../src/test_parser.nit:24,2--6
         AType ../src/test_parser.nit:24,8--14
           TClassid "Visitor" ../src/test_parser.nit:24,8--14
