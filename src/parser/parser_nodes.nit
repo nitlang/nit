@@ -17,6 +17,7 @@
 module parser_nodes
 
 import location
+import ordered_tree
 
 # Root of the AST class-hierarchy
 abstract class ANode
@@ -31,6 +32,15 @@ abstract class ANode
 	fun debug(message: String)
 	do
 		sys.stderr.write "{hot_location} {self.class_name}: {message}\n{hot_location.colored_line("0;32")}\n"
+	end
+
+	# Write the subtree on stdout.
+	# See `ASTDump`
+	fun dump_tree
+	do
+		var d = new ASTDump
+		d.enter_visit(self)
+		d.write_to(sys.stdout)
 	end
 
 	# Parent of the node in the AST
@@ -158,6 +168,33 @@ private class CollectAnnotationsByNameVisitor
 	end
 end
 
+# A helper class to handle (print) Nit AST as an OrderedTree
+class ASTDump
+	super Visitor
+	super OrderedTree[ANode]
+
+	# Reference to the last parent in the Ordered Tree
+	# Is used to handle the initial node parent and workaround possible inconsistent `ANode::parent`
+	private var last_parent: nullable ANode = null
+
+	redef fun visit(n)
+	do
+		var p = last_parent
+		add(p, n)
+		last_parent = n
+		n.visit_all(self)
+		last_parent = p
+	end
+
+	redef fun display(n)
+	do
+		if n isa Token then
+			return "{n.class_name} \"{n.text.escape_to_c}\" @{n.location}"
+		else
+			return "{n.class_name} @{n.location}"
+		end
+	end
+end
 
 # A sequence of nodes
 # It is a specific class (instead of using a Array) to track the parent/child relation when nodes are added or removed
