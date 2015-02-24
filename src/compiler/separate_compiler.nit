@@ -47,6 +47,8 @@ redef class ToolContext
 	var opt_inline_some_methods = new OptionBool("Allow the separate compiler to inline some methods (semi-global)", "--inline-some-methods")
 	# --direct-call-monomorph
 	var opt_direct_call_monomorph = new OptionBool("Allow the separate compiler to direct call monomorph sites (semi-global)", "--direct-call-monomorph")
+	# --direct-call-monomorph0
+	var opt_direct_call_monomorph0 = new OptionBool("Allow the separate compiler to direct call monomorph sites (semi-global)", "--direct-call-monomorph0")
 	# --skip-dead-methods
 	var opt_skip_dead_methods = new OptionBool("Do not compile dead methods (semi-global)", "--skip-dead-methods")
 	# --semi-global
@@ -63,7 +65,7 @@ redef class ToolContext
 		self.option_context.add_option(self.opt_no_inline_intern)
 		self.option_context.add_option(self.opt_no_union_attribute)
 		self.option_context.add_option(self.opt_no_shortcut_equate)
-		self.option_context.add_option(opt_colors_are_symbols, opt_trampoline_call, opt_guard_call, opt_substitute_monomorph, opt_link_boost)
+		self.option_context.add_option(opt_colors_are_symbols, opt_trampoline_call, opt_guard_call, opt_direct_call_monomorph0, opt_substitute_monomorph, opt_link_boost)
 		self.option_context.add_option(self.opt_inline_coloring_numbers, opt_inline_some_methods, opt_direct_call_monomorph, opt_skip_dead_methods, opt_semi_global)
 		self.option_context.add_option(self.opt_colo_dead_methods)
 		self.option_context.add_option(self.opt_tables_metrics)
@@ -1292,7 +1294,20 @@ class SeparateCompilerVisitor
 		else
 			ress = ""
 		end
-		if mentity isa MMethod and compiler.modelbuilder.toolcontext.opt_guard_call.value then
+		if mentity isa MMethod and compiler.modelbuilder.toolcontext.opt_direct_call_monomorph0.value then
+			# opt_direct_call_monomorph0 is used to compare the efficiency of the alternative lookup implementation, ceteris paribus.
+			# The difference with the non-zero option is that the monomorphism is looked-at on the mmethod level and not at the callsite level.
+			# TODO: remove this mess and use per callsite service to detect monomorphism in a single place.
+			var md = compiler.is_monomorphic(mentity)
+			if md != null then
+				var callsym = md.virtual_runtime_function.c_name
+				self.require_declaration(callsym)
+				self.add "{ress}{callsym}({ss}); /* {mmethod} on {arguments.first.inspect}*/"
+			else
+				self.require_declaration(const_color)
+				self.add "{ress}(({runtime_function.c_funptrtype})({arguments.first}->class->vft[{const_color}]))({ss}); /* {mmethod} on {arguments.first.inspect}*/"
+			end
+		else if mentity isa MMethod and compiler.modelbuilder.toolcontext.opt_guard_call.value then
 			var callsym = "CALL_" + const_color
 			self.require_declaration(callsym)
 			self.add "if (!{callsym}) \{"
