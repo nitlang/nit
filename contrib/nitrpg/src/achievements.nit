@@ -35,7 +35,7 @@ redef class GameEntity
 		var key = self.key / achievement.key
 		if game.store.has_key(key) then return
 		stats.inc("achievements")
-		achievement.save_in(self)
+		achievement.save_in(self.key)
 		save
 	end
 

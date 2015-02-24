@@ -43,11 +43,11 @@ interface GameEntity
 	# Date are stored under `self.key`.
 	fun save do game.store.store_object(key, to_json)
 
-	# Saves `self` state into `target` key data.
+	# Saves `self` state under `key` data.
 	#
-	# Data are stored under `target.key / self.key`.
-	fun save_in(target: GameEntity) do
-		game.store.store_object(target.key / key, to_json)
+	# Data are stored under `key / self.key`.
+	fun save_in(key: String) do
+		game.store.store_object(key / self.key, to_json)
 	end
 
 	# Json representation of `self`.

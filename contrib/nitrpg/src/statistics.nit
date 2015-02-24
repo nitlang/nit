@@ -46,7 +46,7 @@ redef class Game
 
 	redef fun save do
 		super
-		stats.save_in(self)
+		stats.save_in(self.key)
 	end
 
 	redef fun pretty do
@@ -66,7 +66,7 @@ redef class Player
 
 	redef fun save do
 		super
-		stats.save_in(self)
+		stats.save_in(self.key)
 	end
 
 	redef fun pretty do
