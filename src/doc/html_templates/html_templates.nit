@@ -39,7 +39,7 @@ redef class DocPage
 	var topmenu: DocTopMenu is writable, noinit
 
 	# Sidebar template if any.
-	var sidebar: nullable TplSidebar = null is writable
+	var sidebar: nullable DocSideBar = null is writable
 
 	# Content of the page in form a TplSection.
 	# TODO remove when other templates are migrated.
@@ -77,20 +77,6 @@ redef class DocPage
 		add "<body"
 		for attr in body_attrs do add attr
 		addn ">"
-	end
-
-	# Renders the sidebar template.
-	#
-	# Sidebar is automatically populated with a summary of all sections
-	# TODO remove summary generation when other templates are migrated.
-	private fun render_sidebar do
-		if sidebar == null then return
-		var summary = new TplSummary.with_order(0)
-		for section in sections do
-			section.render_summary summary
-		end
-		sidebar.boxes.add summary
-		add sidebar.as(not null)
 	end
 
 	# Renders the footer and content.
@@ -131,9 +117,10 @@ redef class DocPage
 		add topmenu
 		addn " </div>"
 		addn " <div class='row' id='content'>"
+		var sidebar = self.sidebar
 		if sidebar != null then
 			addn "<div class='col col-xs-3 col-lg-2'>"
-			render_sidebar
+			add sidebar
 			addn "</div>"
 			addn "<div class='col col-xs-9 col-lg-10' data-spy='scroll' data-target='.summary'>"
 			render_content
@@ -146,6 +133,16 @@ redef class DocPage
 		addn " </div>"
 		addn "</div>"
 		render_footer
+	end
+
+	# Render table of content for this page.
+	fun html_toc: UnorderedList do
+		var lst = new UnorderedList
+		lst.css_classes.add "nav"
+		for child in root.children do
+			child.render_toc_item(lst)
+		end
+		return lst
 	end
 end
 
@@ -201,6 +198,60 @@ class DocTopMenu
 	end
 end
 
+# Nitdoc sidebar template.
+class DocSideBar
+	super Template
+
+	# Sidebar contains `DocSideBox`.
+	var boxes = new Array[DocSideBox]
+
+	redef fun rendering do
+		if boxes.is_empty then return
+		addn "<div id='sidebar'>"
+		for box in boxes do add box
+		addn "</div>"
+	end
+end
+
+# Something that can be put in a DocSideBar.
+class DocSideBox
+	super Template
+
+	# Box HTML id, used for Bootstrap collapsing feature.
+	#
+	# Use `html_title.to_cmangle` by default.
+	var id: String is lazy do return title.write_to_string.to_cmangle
+
+	# Title of the box to display.
+	var title: Writable
+
+	# Content to display in the box.
+	var content: Writable
+
+	# Is the box opened by default?
+	#
+	# Otherwise, the user will have to clic on the title to display the content.
+	#
+	# Default is `true`.
+	var is_open = true is writable
+
+	redef fun rendering do
+		var open = ""
+		if is_open then open = "in"
+		addn "<div class='panel'>"
+		addn " <div class='panel-heading'>"
+		add "  <a data-toggle='collapse' data-parent='#sidebar'"
+		add "   data-target='#box_{id}' href='#'>"
+		add title
+		addn "  </a>"
+		addn " </div>"
+		addn " <div id='box_{id}' class='summary panel-body collapse {open}'>"
+		add content
+		addn " </div>"
+		addn "</div>"
+	end
+end
+
 redef class DocComposite
 	super Template
 
@@ -246,6 +297,32 @@ redef class DocComposite
 	#
 	# By default, empty elements are hidden.
 	fun is_hidden: Bool do return is_empty
+
+	# A short, undecorated title that goes in the table of contents.
+	#
+	# By default, returns `html_title.to_s`, subclasses should redefine it.
+	var toc_title: String is lazy, writable do return html_title.to_s
+
+	# Is `self` hidden in the table of content?
+	var is_toc_hidden = false is writable
+
+	# Render this element in a table of contents.
+	private fun render_toc_item(lst: UnorderedList) do
+		if is_toc_hidden then return
+
+		var content = new Template
+		content.add new Link("#{html_id}", toc_title)
+
+		if not children.is_empty then
+			var sublst = new UnorderedList
+			sublst.css_classes.add "nav"
+			for child in children do
+				child.render_toc_item(sublst)
+			end
+			content.add sublst
+		end
+		lst.add_li new ListItem(content)
+	end
 end
 
 redef class DocSection
@@ -270,10 +347,32 @@ redef class DocArticle
 	redef fun render_title do end
 end
 
+redef class MEntityComposite
+	redef var html_id is lazy do return mentity.nitdoc_id
+	redef var html_title is lazy do return mentity.nitdoc_name
+end
+
+redef class ConcernSection
+	redef var html_id is lazy do return "section_concerns_{mentity.nitdoc_id}"
+	redef var html_title is lazy do return "in {mentity.nitdoc_name}"
+	redef fun is_toc_hidden do return is_empty
+end
+
+redef class ImportationListSection
+	redef var html_id is lazy do return "section_dependancies_{mentity.nitdoc_id}"
+	redef var html_title is lazy do return "Dependencies"
+end
+
+redef class InheritanceListSection
+	redef var html_id is lazy do return "section_inheritance_{mentity.nitdoc_id}"
+	redef var html_title is lazy do return "Inheritance"
+end
+
 redef class IntroArticle
 	redef var html_id is lazy do return "article_intro_{mentity.nitdoc_id}"
 	redef var html_title is lazy do return null
 	redef var is_hidden = false
+	redef var is_toc_hidden = true
 
 	redef fun render_body do
 		var comment = mentity.html_comment
@@ -286,7 +385,6 @@ redef class ConcernsArticle
 	redef var html_id is lazy do return "article_concerns_{mentity.nitdoc_id}"
 	redef var html_title = "Concerns"
 	redef fun is_hidden do return concerns.is_empty
-
 	redef fun render_body do add concerns.html_list
 end
 
@@ -307,6 +405,7 @@ redef class HierarchyListArticle
 	redef var html_id is lazy do return "article_hierarchy_{list_title}_{mentity.nitdoc_id}"
 	redef var html_title is lazy do return list_title
 	redef fun is_empty do return mentities.is_empty
+	redef fun is_toc_hidden do return mentities.is_empty
 
 	redef fun render_body do
 		var lst = new UnorderedList
@@ -322,6 +421,7 @@ redef class IntrosRedefsListArticle
 	redef var html_id is lazy do return "article_intros_redefs_{mentity.nitdoc_id}"
 	redef var html_title is lazy do return list_title
 	redef fun is_hidden do return mentities.is_empty
+	redef var is_toc_hidden = true
 
 	redef fun render_body do
 		var lst = new UnorderedList
@@ -335,7 +435,10 @@ end
 
 redef class GraphArticle
 	redef var html_id is lazy do return "article_graph_{mentity.nitdoc_id}"
+	redef var html_title = null
+	redef var toc_title do return "Graph"
 	redef var is_hidden = false
+	redef var is_toc_hidden = true
 
 	# HTML map used to display link.
 	#

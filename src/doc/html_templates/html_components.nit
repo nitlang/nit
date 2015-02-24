@@ -40,161 +40,6 @@ end
 # general layout elements
 #########################
 
-# A sidebar template
-class TplSidebar
-	super Template
-
-	# Sidebar contains sidebar element templates called boxes
-	var boxes = new Array[TplSidebarElt]
-
-	# Sort boxes by order priority
-	private fun order_boxes do
-		var sorter = new OrderComparator
-		sorter.sort(boxes)
-	end
-
-	redef fun rendering do
-		if boxes.is_empty then return
-		order_boxes
-		addn "<div id='sidebar'>"
-		for box in boxes do add box
-		addn "</div>"
-	end
-end
-
-# Comparator used to sort boxes by order
-private class OrderComparator
-	super Comparator
-
-	redef type COMPARED: TplSidebarElt
-
-	redef fun compare(a, b) do
-		if a.order < b.order then return -1
-		if a.order > b.order then return 1
-		return 0
-	end
-end
-
-# Something that can be put in the sidebar
-class TplSidebarElt
-	super Template
-
-	# Order of the box in the sidebar
-	var order: Int = 1
-
-	init with_order(order: Int) do self.order = order
-end
-
-# Agenericbox that can be added to sidebar
-class TplSideBox
-	super TplSidebarElt
-
-	# Title of the box to display
-	# Title is also a placeholder for the collapse link
-	var title: String
-
-	# Box HTML id
-	# equals to `title.to_cmangle` by default
-	# Used for collapsing
-	var id: String is noinit
-
-	# Content to display in the box
-	# box will not be rendered if the content is null
-	var content: nullable Writable = null is writable
-
-	# Is the box opened by default
-	# otherwise, the user will have to clic on the title to display the content
-	var is_open = false is writable
-
-	init do
-		self.id = title.to_cmangle
-	end
-
-	init with_content(title: String, content: Writable) do
-		init(title)
-		self.content = content
-	end
-
-	redef fun rendering do
-		if content == null then return
-		var open = ""
-		if is_open then open = "in"
-		addn "<div class='panel'>"
-		addn " <div class='panel-heading'>"
-		add "  <a data-toggle='collapse' data-parent='#sidebar' data-target='#box_{id}' href='#'>"
-		add title
-		addn "  </a>"
-		addn " </div>"
-		addn " <div id='box_{id}' class='panel-body collapse {open}'>"
-		add content.as(not null)
-		addn " </div>"
-		addn "</div>"
-	end
-end
-
-# Something that can go on a summary template
-class TplSummaryElt
-	super Template
-
-	# Add an element to the summary
-	fun add_child(child: TplSummaryElt) is abstract
-end
-
-# A summary that can go on the sidebar
-# If the page contains a sidebar, the summary is automatically placed
-# on top of the sidebarauto-generated
-# summary contains anchors to all sections displayed in the page
-class TplSummary
-	super TplSidebarElt
-	super TplSummaryElt
-
-	# Summary elements to display
-	var children = new Array[TplSummaryElt]
-
-	redef fun add_child(child) do children.add child
-
-	redef fun rendering do
-		if children.is_empty then return
-		addn "<div class='panel'>"
-		addn " <div class='panel-heading'>"
-		add "  <a data-toggle='collapse' data-parent='#sidebar' data-target='#box-sum' href='#'>"
-		add "Summary"
-		addn "  </a>"
-		addn " </div>"
-		addn " <div id='box-sum' class='summary collapse in'>"
-		addn " <ul class='nav'>"
-		for entry in children do add entry
-		addn " </ul>"
-		addn " </div>"
-		addn "</div>"
-	end
-end
-
-# A summary entry
-class TplSummaryEntry
-	super TplSummaryElt
-
-	# Text to display
-	var text: Writable
-
-	# Children of this entry
-	# Will be displayed as a tree
-	var children = new Array[TplSummaryElt]
-
-	redef fun add_child(child) do children.add child
-
-	redef fun rendering do
-		add "<li>"
-		add text
-		if not children.is_empty then
-			addn "\n<ul class='nav'>"
-			for entry in children do add entry
-			addn "</ul>"
-		end
-		addn  "</li>"
-	end
-end
-
 # Something that can go in a section
 # Sections are automatically collected to populate the menu
 class TplSectionElt
@@ -246,20 +91,6 @@ class TplSectionElt
 
 	# Is the section empty (no content at all)
 	fun is_empty: Bool do return children.is_empty
-
-	# Render this section in the summary
-	fun render_summary(parent: TplSummaryElt) do
-		if is_empty then return
-		var title = summary_title
-		if title == null and self.title != null then title = self.title.write_to_string
-		if title == null then return
-		var lnk = new TplLink("#{id}", title)
-		var entry = new TplSummaryEntry(lnk)
-		for child in children do
-			child.render_summary(entry)
-		end
-		parent.add_child entry
-	end
 end
 
 # A HTML <section> element
@@ -298,15 +129,6 @@ class TplArticle
 	init with_content(id: String, title: Writable, content: Writable) do
 		with_title(id, title)
 		self.content = content
-	end
-
-	redef fun render_summary(parent) do
-		if is_empty then return
-		var title = summary_title
-		if title == null and self.title != null then title = self.title.write_to_string
-		if title == null then return
-		var lnk = new TplLink("#{id}", title)
-		parent.add_child new TplSummaryEntry(lnk)
 	end
 
 	redef fun rendering do

@@ -170,9 +170,9 @@ redef class DocPage
 
 		# build page
 		init_title(v, doc)
-		init_sidebar(v, doc)
 		init_topmenu(v, doc)
 		init_content(v, doc)
+		init_sidebar(v, doc)
 
 		# piwik tracking
 		var tracker_url = v.ctx.opt_piwik_tracker.value
@@ -211,7 +211,8 @@ redef class DocPage
 
 	# Build page sidebar if any.
 	fun init_sidebar(v: RenderHTMLPhase, doc: DocModel) do
-		sidebar = new TplSidebar
+		sidebar = new DocSideBar
+		sidebar.boxes.add new DocSideBox("Summary", html_toc)
 	end
 
 	# Build page content template.
@@ -262,8 +263,6 @@ redef class OverviewPage
 		section.add_child ssection
 		self.add_section section
 	end
-
-	redef fun init_sidebar(v, doc) do sidebar = new TplSidebar
 end
 
 redef class SearchPage
@@ -364,7 +363,8 @@ redef class MGroupPage
 		for mclass in sorted do
 			list.add_li tpl_sidebar_item(mclass)
 		end
-		sidebar.boxes.add new TplSideBox.with_content("All classes", list)
+		sidebar.boxes.add new DocSideBox("All classes", list)
+		sidebar.boxes.last.is_open = false
 	end
 
 	private fun tpl_sidebar_item(def: MClass): TplListItem do
@@ -405,7 +405,8 @@ redef class MModulePage
 		for mclass in sorted do
 			list.add_li tpl_sidebar_item(mclass)
 		end
-		sidebar.boxes.add new TplSideBox.with_content("All classes", list)
+		sidebar.boxes.add new DocSideBox("All classes", list)
+		sidebar.boxes.last.is_open = false
 	end
 
 	private fun tpl_sidebar_item(def: MClass): TplListItem do
@@ -439,7 +440,8 @@ redef class MClassPage
 
 		by_kind.sort_groups(v.name_sorter)
 		for g in by_kind.groups do tpl_sidebar_list(g, summary)
-		sidebar.boxes.add new TplSideBox.with_content("All properties", summary)
+		sidebar.boxes.add new DocSideBox("All properties", summary)
+		sidebar.boxes.last.is_open = false
 	end
 
 	private fun tpl_sidebar_list(mprops: PropertyGroup[MProperty], summary: TplList) do
@@ -669,6 +671,7 @@ redef class DefinitionArticle
 			if mentity.is_intro and mentity.mmodule != page.mentity then
 				article.content = mentity.html_short_comment
 			end
+			if page isa MModulePage then is_toc_hidden = true
 		else if mentity isa MPropDef then
 			if page.mentity isa MClass then
 				title = new Template
@@ -706,7 +709,7 @@ redef class DefinitionArticle
 				title.add "in "
 				title.add mentity.mclassdef.html_link
 				article.title = title
-				article.summary_title = "in {mentity.mclassdef.html_name}"
+				toc_title = "in {mentity.mclassdef.html_name}"
 			end
 			article.source_link = v.tpl_showsource(mentity.location)
 		end
