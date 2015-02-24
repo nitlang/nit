@@ -133,8 +133,8 @@ class RenderHTMLPhase
 
 	end
 
-	# A source link template for a given location
-	fun tpl_showsource(location: nullable Location): nullable String
+	# Returns a HTML link for a given `location`.
+	fun html_source_link(location: nullable Location): nullable String
 	do
 		if location == null then return null
 		var source = ctx.opt_source.value
@@ -501,11 +501,11 @@ redef class IntroArticle
 	redef fun init_html_render(v, doc, page) do
 		var mentity = self.mentity
 		if mentity isa MModule then
-			# article.source_link = v.tpl_showsource(mentity.location)
+			html_source_link = v.html_source_link(mentity.location)
 		else if mentity isa MClassDef then
-			# article.source_link = v.tpl_showsource(mentity.location)
+			html_source_link = v.html_source_link(mentity.location)
 		else if mentity isa MPropDef then
-			# article.source_link = v.tpl_showsource(mentity.location)
+			html_source_link = v.html_source_link(mentity.location)
 		end
 	end
 end
@@ -520,7 +520,9 @@ redef class DefinitionArticle
 			title.add mentity.html_namespace
 			html_title = title
 			toc_title = mentity.html_name
-			# article.source_link = v.tpl_showsource(mentity.location)
+			if mentity isa MModule then
+				html_source_link = v.html_source_link(mentity.location)
+			end
 		else if mentity isa MClass then
 			var title = new Template
 			title.add mentity.html_icon
@@ -536,7 +538,7 @@ redef class DefinitionArticle
 			html_title = mentity.html_declaration
 			html_subtitle = title
 			toc_title = "in {mentity.html_name}"
-			# article.source_link = v.tpl_showsource(mentity.location)
+			html_source_link = v.html_source_link(mentity.location)
 			if page isa MEntityPage and mentity.is_intro and mentity.mmodule != page.mentity then
 				is_short_comment = true
 			end
@@ -556,7 +558,7 @@ redef class DefinitionArticle
 				html_title = title
 				toc_title = "in {mentity.mclassdef.html_name}"
 			end
-			# article.source_link = v.tpl_showsource(mentity.location)
+			html_source_link = v.html_source_link(mentity.location)
 		end
 		super
 	end
@@ -585,15 +587,5 @@ redef class GraphArticle
 		var fmap = new FileReader.open("{path}.map")
 		self.map = fmap.read_all
 		fmap.close
-	end
-end
-
-redef class Location
-	# Github url based on this location
-	fun github(gitdir: String): String do
-		var base_dir = getcwd.join_path(gitdir).simplify_path
-		var file_loc = getcwd.join_path(file.filename).simplify_path
-		var gith_loc = file_loc.substring(base_dir.length + 1, file_loc.length)
-		return "{gith_loc}:{line_start},{column_start}--{line_end},{column_end}"
 	end
 end

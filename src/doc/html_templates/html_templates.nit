@@ -442,6 +442,19 @@ redef class IntroArticle
 	redef var is_hidden = false
 	redef var is_toc_hidden = true
 
+	# Link to source to display if any.
+	var html_source_link: nullable Writable is noinit, writable
+
+	redef fun render_title do
+		var lnk = html_source_link
+		if lnk != null then
+			add "<div class='source-link'>"
+			add lnk
+			addn "</div>"
+		end
+		super
+	end
+
 	redef fun render_body do
 		var comment = mentity.html_comment
 		if comment != null then	addn comment
@@ -471,6 +484,19 @@ redef class DefinitionArticle
 	#
 	# FIXME diff hack
 	var is_short_comment: Bool = false is writable
+
+	# Link to source to display if any.
+	var html_source_link: nullable Writable is noinit, writable
+
+	redef fun render_title do
+		var lnk = html_source_link
+		if lnk != null then
+			add "<div class='source-link'>"
+			add lnk
+			addn "</div>"
+		end
+		super
+	end
 
 	redef fun render_body do
 		if not is_no_body then
