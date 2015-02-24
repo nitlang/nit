@@ -606,24 +606,8 @@ redef class IntroArticle
 			article.source_link = v.tpl_showsource(mentity.location)
 		end
 		# article.subtitle = mentity.html_declaration
-		# FIXME diff hack
-		if mentity isa MProperty then
-			# intro title
-			var ns = mentity.intro.mclassdef.mmodule.html_namespace
-			var section = new TplSection("intro")
-			var title = new Template
-			title.add "Introduction in "
-			title.add ns
-			section.title = title
-			section.summary_title = "Introduction"
-			var intro = mentity.intro.tpl_article
-			intro.source_link = v.tpl_showsource(mentity.intro.location)
-			section.add_child intro
-			parent.add_child section
-		else
-			article.content = mentity.tpl_definition
-			parent.add_child article
-		end
+		article.content = write_to_string
+		parent.add_child article
 	end
 end
 

@@ -17,6 +17,7 @@ module html_templates
 
 import html_model
 import html::bootstrap
+import doc_phases::doc_structure
 
 # Renders the page as HTML.
 redef class DocPage
@@ -264,4 +265,16 @@ redef class DocArticle
 	# This is to maintain compatibility with old components, this may change
 	# without notice in further version.
 	redef fun render_title do end
+end
+
+redef class IntroArticle
+	redef var html_id is lazy do return "article_intro_{mentity.nitdoc_id}"
+	redef var html_title is lazy do return null
+	redef var is_hidden = false
+
+	redef fun render_body do
+		var comment = mentity.html_comment
+		if comment != null then	addn comment
+		super
+	end
 end
