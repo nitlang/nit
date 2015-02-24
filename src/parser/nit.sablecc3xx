@@ -233,7 +233,7 @@ implicit_main_meth {-> propdef}
 
 /* CLASSES *******************************************************************/
 classdef
-	= [doc]:no redef visibility classkind no qclassid formaldefs line_annotations_forclass? extern_code_block? [superclasses]:superclass* propdefs kwend {-> New classdef.std(doc.doc, redef.kwredef, visibility, classkind, qclassid.classid, [formaldefs.formaldef], line_annotations_forclass.annotations, extern_code_block, [superclasses.superclass], [propdefs.propdef], kwend)};
+	= [doc]:no redef visibility classkind no qclassid formaldefs extern_code_block? propdefs kwend {-> New classdef.std(doc.doc, redef.kwredef, visibility, classkind, qclassid.classid, [formaldefs.formaldef], extern_code_block, [propdefs.propdef], kwend)};
 redef {-> kwredef?}
 	= kwredef? {-> kwredef};
 classkind
@@ -799,7 +799,7 @@ visibility
 	| {intrude} kwintrude
 	;
 
-classdef= {std} doc? kwredef? visibility classkind [id]:classid? [formaldefs]:formaldef* annotations? extern_code_block? [superclasses]:superclass* [propdefs]:propdef* kwend
+classdef= {std} doc? kwredef? visibility classkind [id]:classid? [formaldefs]:formaldef* extern_code_block? [propdefs]:propdef* kwend
 	| {top} [propdefs]:propdef*
 	| {main} [propdefs]:propdef*
 	;
