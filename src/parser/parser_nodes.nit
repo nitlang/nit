@@ -315,11 +315,17 @@ abstract class Prod
 	do
 		var res = new Array[AAnnotation]
 		var nas = n_annotations
-		if nas == null then return res
-		for na in nas.n_items do
+		if nas != null then for na in nas.n_items do
 			if na.name != name then continue
 			res.add(na)
 		end
+		if self isa AClassdef then for na in n_propdefs do
+			if na isa AAnnotPropdef then
+				if na.name != name then continue
+				res.add na
+			end
+		end
+
 		return res
 	end
 
@@ -1188,6 +1194,11 @@ end
 # The implicit main method
 class AMainMethPropdef
 	super AMethPropdef
+end
+
+class AAnnotPropdef
+	super APropdef
+	super AAnnotation
 end
 
 # A super-class. eg `super X`
