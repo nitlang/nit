@@ -1030,11 +1030,12 @@ class AStdClassdef
 	# The extern block code
 	var n_extern_code_block: nullable AExternCodeBlock = null is writable
 
-	# The list of super-classes
-	var n_superclasses = new ANodes[ASuperclass](self)
-
 	# The `end` keyword
 	var n_kwend: TKwend is writable, noinit
+
+	fun n_superclasses: Array[ASuperPropdef] do
+		return [for d in n_propdefs do if d isa ASuperPropdef then d]
+	end
 
 	redef fun hot_location do return n_id.location
 end
@@ -1109,17 +1110,6 @@ class AFormaldef
 
 	# The bound of the parameter type
 	var n_type: nullable AType = null is writable
-end
-
-# A super-class. eg `super X`
-class ASuperclass
-	super Prod
-
-	# The super keyword
-	var n_kwsuper: TKwsuper is writable, noinit
-
-	# The super-class (indicated as a type)
-	var n_type: AType is writable, noinit
 end
 
 # The definition of a property
@@ -1199,6 +1189,18 @@ end
 class AMainMethPropdef
 	super AMethPropdef
 end
+
+# A super-class. eg `super X`
+class ASuperPropdef
+	super APropdef
+
+	# The super keyword
+	var n_kwsuper: TKwsuper is writable, noinit
+
+	# The super-class (indicated as a type)
+	var n_type: AType is writable, noinit
+end
+
 
 # Declaration of callbacks for extern methods
 class AExternCalls

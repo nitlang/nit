@@ -253,12 +253,13 @@ formaldefs_tail {-> formaldef}
 formaldef
 	= classid annotations? typing_o {-> New formaldef(classid, typing_o.type, annotations)};
 
-superclass {-> superclass}
-	= {super} no kwsuper [n2]:no type annotation_withend {-> New superclass(kwsuper, type, annotation_withend.annotations)}
+superclass {-> propdef}
+	= {super} [doc]:no redef visibility kwsuper [n2]:no type annotation_withend {-> New propdef.super(doc.doc, redef.kwredef, visibility, kwsuper, type, annotation_withend.annotations)}
 	;
 
 propdefs {-> propdef*}
 	= propdefn+ no {-> [propdefn.propdef]}
+	| {super} superclass {-> [superclass.propdef]}
 	| {empty} no {-> []}
 	;
 propdefn {-> propdef}
@@ -276,6 +277,7 @@ propdef~toplevel {-> propdef}
 !toplevel| {init} [doc]:no redef visibility kwinit qmethid? signature annotation_noend? kwdo stmtso kwend_o {-> New propdef.meth(doc.doc, redef.kwredef, visibility, Null, kwinit, Null, qmethid.methid, signature, annotation_noend.annotations, Null, Null, stmtso.expr)}
 !toplevel| {type} [doc]:no redef visibility kwtype classid typing annotation_withend {-> New propdef.type(doc.doc, redef.kwredef, visibility, kwtype, classid, typing.type, annotation_withend.annotations)}
 !toplevel| {extern_init_implicit} [doc]:no redef visibility kwnew qmethid? signature annotation_noend? extern_calls extern_code_block {-> New propdef.meth(doc.doc, redef.kwredef, visibility, Null, Null, kwnew, qmethid.methid, signature, annotation_noend.annotations, extern_calls, extern_code_block, Null)}
+!toplevel| {super} superclass {-> superclass.propdef}
 	;
 annotation_withend~nonull {-> annotations?}
 	= {oneliner} kwis many_annotations {-> many_annotations.annotations}
@@ -811,13 +813,13 @@ classkind
 	| {extern} kwextern kwclass?
 	;
 formaldef = [id]:classid type? annotations?;
-superclass = kwsuper type annotations?;
 
 
 propdef = {attr} doc? kwredef? visibility kwvar [id2]:id type? expr? annotations? [block]:expr?
 	| {main_meth} kwredef? [block]:expr?
 	| {type} doc? kwredef? visibility kwtype [id]:classid type annotations?
 	| {meth} doc? kwredef? visibility kwmeth? kwinit? kwnew? methid? signature annotations? extern_calls? extern_code_block? [block]:expr?
+	| {super} doc? kwredef? visibility kwsuper type annotations?
 	;
 
 methid = {id} id | {plus} plus | {minus} minus | {star} star | {starstar} starstar | {slash} slash | {percent} percent | {eq} eq | {ne} ne | {le} le | {ge} ge | {lt} lt | {gt} gt |  {ll} ll | {gg} gg | {bra} obra cbra | {starship} starship | {assign} id assign | {braassign} obra cbra assign;

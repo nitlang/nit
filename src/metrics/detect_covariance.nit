@@ -230,7 +230,7 @@ private class DetectCovariancePhase
 			else
 				node.debug("6.downcast {sup} to {sub}")
 			end
-		else if n isa ASuperclass then
+		else if n isa ASuperPropdef then
 			cpt_pattern.inc("8.subclass")
 		else if n isa AArrayExpr then
 			cpt_pattern.inc("9.array element")
