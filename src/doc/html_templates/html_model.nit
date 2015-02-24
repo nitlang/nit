@@ -17,7 +17,7 @@ module html_model
 
 import doc_base
 import doc_down
-import doc_templates
+import html_components
 import ordered_tree
 
 redef class Location

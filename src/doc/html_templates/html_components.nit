@@ -14,7 +14,7 @@
 
 # HTML templates used by Nitdoc to generate API documentation
 # Pages are assembled using `Template`
-module doc_templates
+module html_components
 
 import template
 import json::static
@@ -912,4 +912,3 @@ class TplPiwikScript
 		addn "\})();"
 	end
 end
-
