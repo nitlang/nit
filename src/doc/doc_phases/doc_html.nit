@@ -356,8 +356,8 @@ redef class MGroupPage
 		mclasses.add_all intros
 		mclasses.add_all redefs
 		if mclasses.is_empty then return
-		var list = new TplList.with_classes(["list-unstyled", "list-labeled"])
-
+		var list = new UnorderedList
+		list.css_classes.add "list-unstyled list-labeled"
 		var sorted = mclasses.to_a
 		v.name_sorter.sort(sorted)
 		for mclass in sorted do
@@ -367,7 +367,7 @@ redef class MGroupPage
 		sidebar.boxes.last.is_open = false
 	end
 
-	private fun tpl_sidebar_item(def: MClass): TplListItem do
+	private fun tpl_sidebar_item(def: MClass): ListItem do
 		var classes = def.intro.css_classes
 		if intros.has(def) then
 			classes.add "intro"
@@ -375,9 +375,9 @@ redef class MGroupPage
 			classes.add "redef"
 		end
 		var lnk = new Template
-		lnk.add new TplLabel.with_classes(classes)
+		lnk.add new DocHTMLLabel.with_classes(classes)
 		lnk.add def.html_link
-		return new TplListItem.with_content(lnk)
+		return new ListItem(lnk)
 	end
 end
 
@@ -398,7 +398,8 @@ redef class MModulePage
 		mclasses.add_all mentity.filter_intro_mclasses(v.ctx.min_visibility)
 		mclasses.add_all mentity.filter_redef_mclasses(v.ctx.min_visibility)
 		if mclasses.is_empty then return
-		var list = new TplList.with_classes(["list-unstyled", "list-labeled"])
+		var list = new UnorderedList
+		list.css_classes.add "list-unstyled list-labeled"
 
 		var sorted = mclasses.to_a
 		v.name_sorter.sort(sorted)
@@ -409,7 +410,7 @@ redef class MModulePage
 		sidebar.boxes.last.is_open = false
 	end
 
-	private fun tpl_sidebar_item(def: MClass): TplListItem do
+	private fun tpl_sidebar_item(def: MClass): ListItem do
 		var classes = def.intro.css_classes
 		if def.intro_mmodule == self.mentity then
 			classes.add "intro"
@@ -417,9 +418,9 @@ redef class MModulePage
 			classes.add "redef"
 		end
 		var lnk = new Template
-		lnk.add new TplLabel.with_classes(classes)
+		lnk.add new DocHTMLLabel.with_classes(classes)
 		lnk.add def.html_link
-		return new TplListItem.with_content(lnk)
+		return new ListItem(lnk)
 	end
 end
 
@@ -436,7 +437,8 @@ redef class MClassPage
 	redef fun init_sidebar(v, doc) do
 		super
 		var by_kind = new PropertiesByKind.with_elements(mclass_inherited_mprops(v, doc))
-		var summary = new TplList.with_classes(["list-unstyled"])
+		var summary = new UnorderedList
+		summary.css_classes.add "list-unstyled"
 
 		by_kind.sort_groups(v.name_sorter)
 		for g in by_kind.groups do tpl_sidebar_list(g, summary)
@@ -444,30 +446,33 @@ redef class MClassPage
 		sidebar.boxes.last.is_open = false
 	end
 
-	private fun tpl_sidebar_list(mprops: PropertyGroup[MProperty], summary: TplList) do
+	private fun tpl_sidebar_list(mprops: PropertyGroup[MProperty], summary: UnorderedList) do
 		if mprops.is_empty then return
-		var entry = new TplListItem.with_content(mprops.title)
-		var list = new TplList.with_classes(["list-unstyled", "list-labeled"])
+		var list = new UnorderedList
+		list.css_classes.add "list-unstyled list-labeled"
 		for mprop in mprops do
 			list.add_li tpl_sidebar_item(mprop)
 		end
-		entry.append list
-		summary.elts.add entry
+		var content = new Template
+		content.add mprops.title
+		content.add list
+		var li = new ListItem(content)
+		summary.add_li li
 	end
 
-	private fun tpl_sidebar_item(mprop: MProperty): TplListItem do
+	private fun tpl_sidebar_item(mprop: MProperty): ListItem do
 		var classes = mprop.intro.css_classes
 		if not mprop_is_local(mprop) then
 			classes.add "inherit"
 			var cls_url = mprop.intro.mclassdef.mclass.nitdoc_url
 			var def_url = "{cls_url}#{mprop.nitdoc_id}"
-			var lnk = new TplLink(def_url, mprop.html_name)
+			var lnk = new Link(def_url, mprop.html_name)
 			var mdoc = mprop.intro.mdoc_or_fallback
 			if mdoc != null then lnk.title = mdoc.short_comment
 			var item = new Template
-			item.add new TplLabel.with_classes(classes)
+			item.add new DocHTMLLabel.with_classes(classes)
 			item.add lnk
-			return new TplListItem.with_content(item)
+			return new ListItem(item)
 		end
 		if mpropdefs.has(mprop.intro) then
 			classes.add "intro"
@@ -475,9 +480,9 @@ redef class MClassPage
 			classes.add "redef"
 		end
 		var lnk = new Template
-		lnk.add new TplLabel.with_classes(classes)
+		lnk.add new DocHTMLLabel.with_classes(classes)
 		lnk.add mprop.html_link_to_anchor
-		return new TplListItem.with_content(lnk)
+		return new ListItem(lnk)
 	end
 
 	private fun mclass_inherited_mprops(v: RenderHTMLPhase, doc: DocModel): Set[MProperty] do
