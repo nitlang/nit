@@ -57,6 +57,9 @@ redef class Player
 		stats.save_in(self.key)
 	end
 
+	redef fun nitcoins do return stats["nitcoins"]
+	redef fun nitcoins=(nc) do stats["nitcoins"] = nc
+
 	redef fun pretty do
 		var res = new FlatBuffer
 		res.append super
