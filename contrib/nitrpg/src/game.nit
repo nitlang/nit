@@ -235,11 +235,16 @@ end
 
 redef class User
 	# The player linked to `self`.
-	fun player(game: Game): Player is lazy do
-		var player = game.load_player(login)
+	fun player(game: Game): Player do
+		var player = player_cache.get_or_null(game)
+		if player != null then return player
+		player = game.load_player(login)
 		if player == null then player = game.add_player(self)
+		player_cache[game] = player
 		return player
 	end
+
+	private var player_cache = new HashMap[Game, Player]
 end
 
 # A GameReactor reacts to event sent by a `Github::HookListener`.
