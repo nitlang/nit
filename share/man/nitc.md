@@ -115,11 +115,14 @@ See the documentation of these specific modules for details.
 
 `--log`
 :   Generate various log files.
-    Currently unused.
+
+    The tool will generate some files in the logging directory (see `--log-dir`).
+    These files are intended to the advanced user and the developers of the tools.
 
 `--log-dir`
 :   Directory where to generate log files.
-    Currently unused.
+
+    By default the directory is called `logs` in the working directory.
 
 
 `-h`, `-?`, `--help`
