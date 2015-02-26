@@ -34,6 +34,8 @@ redef class ToolContext
 	var opt_colors_are_symbols = new OptionBool("Store colors as symbols (link-boost)", "--colors-are-symbols")
 	# --trampoline-call
 	var opt_trampoline_call = new OptionBool("Use an indirection when calling", "--trampoline-call")
+	# --guard-call
+	var opt_guard_call = new OptionBool("Guard VFT calls with a direct call", "--guard-call")
 	# --substitute-monomorph
 	var opt_substitute_monomorph = new OptionBool("Replace monomorph trampoline with direct call (link-boost)", "--substitute-monomorph")
 	# --link-boost
@@ -45,6 +47,8 @@ redef class ToolContext
 	var opt_inline_some_methods = new OptionBool("Allow the separate compiler to inline some methods (semi-global)", "--inline-some-methods")
 	# --direct-call-monomorph
 	var opt_direct_call_monomorph = new OptionBool("Allow the separate compiler to direct call monomorph sites (semi-global)", "--direct-call-monomorph")
+	# --direct-call-monomorph0
+	var opt_direct_call_monomorph0 = new OptionBool("Allow the separate compiler to direct call monomorph sites (semi-global)", "--direct-call-monomorph0")
 	# --skip-dead-methods
 	var opt_skip_dead_methods = new OptionBool("Do not compile dead methods (semi-global)", "--skip-dead-methods")
 	# --semi-global
@@ -61,7 +65,7 @@ redef class ToolContext
 		self.option_context.add_option(self.opt_no_inline_intern)
 		self.option_context.add_option(self.opt_no_union_attribute)
 		self.option_context.add_option(self.opt_no_shortcut_equate)
-		self.option_context.add_option(opt_colors_are_symbols, opt_trampoline_call, opt_substitute_monomorph, opt_link_boost)
+		self.option_context.add_option(opt_colors_are_symbols, opt_trampoline_call, opt_guard_call, opt_direct_call_monomorph0, opt_substitute_monomorph, opt_link_boost)
 		self.option_context.add_option(self.opt_inline_coloring_numbers, opt_inline_some_methods, opt_direct_call_monomorph, opt_skip_dead_methods, opt_semi_global)
 		self.option_context.add_option(self.opt_colo_dead_methods)
 		self.option_context.add_option(self.opt_tables_metrics)
@@ -171,6 +175,7 @@ class SeparateCompiler
 		compiler.compile_nitni_global_ref_functions
 		compiler.compile_main_function
 		compiler.compile_finalizer_function
+		compiler.link_mmethods
 
 		# compile methods
 		for m in mainmodule.in_importation.greaters do
@@ -580,28 +585,68 @@ class SeparateCompiler
 				# Generate trampolines
 				if modelbuilder.toolcontext.opt_trampoline_call.value then
 					r2.compile_trampolines(self)
-
-					# Replace monomorphic call to a trampoline by a direct call to the virtual implementation
-					if modelbuilder.toolcontext.opt_substitute_monomorph.value then do
-						var m = pd.mproperty
-						if rta == null then
-							# Without RTA, monomorphic means alone (uniq name)
-							if m.mpropdefs.length != 1 then break label
-						else
-							# With RTA, monomorphic means only live methoddef
-							if not rta.live_methoddefs.has(pd) then break label
-							for md in m.mpropdefs do
-								if md != pd and rta.live_methoddefs.has(md) then break label
-							end
-						end
-						# Here the trick, GNU ld can substitute symbols with specific values.
-						var n2 = "CALL_" + m.const_color
-						linker_script.add("{n2} = {r2.c_name};")
-					end label
 				end
 			end
 		end
 		self.mainmodule = old_module
+	end
+
+	# Process all introduced methods and compile some linking information (if needed)
+	fun link_mmethods
+	do
+		if not modelbuilder.toolcontext.opt_substitute_monomorph.value and not modelbuilder.toolcontext.opt_guard_call.value then return
+
+		for mmodule in mainmodule.in_importation.greaters do
+			for cd in mmodule.mclassdefs do
+				for m in cd.intro_mproperties do
+					if not m isa MMethod then continue
+					link_mmethod(m)
+				end
+			end
+		end
+	end
+
+	# Compile some linking information (if needed)
+	fun link_mmethod(m: MMethod)
+	do
+		var n2 = "CALL_" + m.const_color
+
+		# Replace monomorphic call by a direct call to the virtual implementation
+		var md = is_monomorphic(m)
+		if md != null then
+			linker_script.add("{n2} = {md.virtual_runtime_function.c_name};")
+		end
+
+		# If opt_substitute_monomorph then a trampoline is used, else a weak symbol is used
+		if modelbuilder.toolcontext.opt_guard_call.value then
+			var r = m.intro.virtual_runtime_function
+			provide_declaration(n2, "{r.c_ret} {n2}{r.c_sig} __attribute__((weak));")
+		end
+	end
+
+	# The single mmethodef called in case of monomorphism.
+	# Returns nul if dead or polymorphic.
+	fun is_monomorphic(m: MMethod): nullable MMethodDef
+	do
+		var rta = runtime_type_analysis
+		if rta == null then
+			# Without RTA, monomorphic means alone (uniq name)
+			if m.mpropdefs.length == 1 then
+				return m.mpropdefs.first
+			else
+				return null
+			end
+		else
+			# With RTA, monomorphic means only live methoddef
+			var res: nullable MMethodDef = null
+			for md in m.mpropdefs do
+				if rta.live_methoddefs.has(md) then
+					if res != null then return null
+					res = md
+				end
+			end
+			return res
+		end
 	end
 
 	# Globaly compile the type structure of a live type
@@ -1243,20 +1288,41 @@ class SeparateCompilerVisitor
 		end
 
 		var const_color = mentity.const_color
-		var call
-		if not compiler.modelbuilder.toolcontext.opt_trampoline_call.value then
-			self.require_declaration(const_color)
-			call = "(({runtime_function.c_funptrtype})({arguments.first}->class->vft[{const_color}]))({ss}) /* {mmethod} on {arguments.first.inspect}*/"
+		var ress
+		if res != null then
+			ress = "{res} = "
 		else
+			ress = ""
+		end
+		if mentity isa MMethod and compiler.modelbuilder.toolcontext.opt_direct_call_monomorph0.value then
+			# opt_direct_call_monomorph0 is used to compare the efficiency of the alternative lookup implementation, ceteris paribus.
+			# The difference with the non-zero option is that the monomorphism is looked-at on the mmethod level and not at the callsite level.
+			# TODO: remove this mess and use per callsite service to detect monomorphism in a single place.
+			var md = compiler.is_monomorphic(mentity)
+			if md != null then
+				var callsym = md.virtual_runtime_function.c_name
+				self.require_declaration(callsym)
+				self.add "{ress}{callsym}({ss}); /* {mmethod} on {arguments.first.inspect}*/"
+			else
+				self.require_declaration(const_color)
+				self.add "{ress}(({runtime_function.c_funptrtype})({arguments.first}->class->vft[{const_color}]))({ss}); /* {mmethod} on {arguments.first.inspect}*/"
+			end
+		else if mentity isa MMethod and compiler.modelbuilder.toolcontext.opt_guard_call.value then
 			var callsym = "CALL_" + const_color
 			self.require_declaration(callsym)
-			call = "{callsym}({ss}) /* {mmethod} on {arguments.first.inspect}*/"
-		end
-
-		if res != null then
-			self.add("{res} = {call};")
+			self.add "if (!{callsym}) \{"
+			self.require_declaration(const_color)
+			self.add "{ress}(({runtime_function.c_funptrtype})({arguments.first}->class->vft[{const_color}]))({ss}); /* {mmethod} on {arguments.first.inspect}*/"
+			self.add "\} else \{"
+			self.add "{ress}{callsym}({ss}); /* {mmethod} on {arguments.first.inspect}*/"
+			self.add "\}"
+		else if mentity isa MMethod and compiler.modelbuilder.toolcontext.opt_trampoline_call.value then
+			var callsym = "CALL_" + const_color
+			self.require_declaration(callsym)
+			self.add "{ress}{callsym}({ss}); /* {mmethod} on {arguments.first.inspect}*/"
 		else
-			self.add("{call};")
+			self.require_declaration(const_color)
+			self.add "{ress}(({runtime_function.c_funptrtype})({arguments.first}->class->vft[{const_color}]))({ss}); /* {mmethod} on {arguments.first.inspect}*/"
 		end
 
 		if res0 != null then
