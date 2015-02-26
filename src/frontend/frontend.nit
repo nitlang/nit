@@ -21,7 +21,6 @@ import literal
 import modelize
 import semantize
 import div_by_zero
-import cached
 import serialization_phase
 import check_annotation
 import glsl_validation
