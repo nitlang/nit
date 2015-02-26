@@ -132,7 +132,10 @@ redef class ToolContext
 					break
 				end
 				for na in vannot.annotations do
-					phase.process_annotated_node(na.parent.parent.as(not null), na)
+					var p = na.parent
+					if p isa AAnnotations then p = p.parent
+					assert p != null
+					phase.process_annotated_node(p, na)
 				end
 				if errcount != self.error_count then
 					self.check_errors

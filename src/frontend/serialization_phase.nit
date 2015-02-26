@@ -50,7 +50,7 @@ private class SerializationPhasePreModel
 		# Add `super Serializable`
 		var sc = toolcontext.parse_superclass("Serializable")
 		sc.location = nat.location
-		nclassdef.n_superclasses.add sc
+		nclassdef.n_propdefs.add sc
 
 		generate_serialization_method(nclassdef)
 

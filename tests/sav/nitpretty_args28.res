@@ -23,7 +23,6 @@ end
 
 class B
 	super A
-
 	redef type FOO: Int
 
 	# comment 3

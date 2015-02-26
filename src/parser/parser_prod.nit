@@ -388,9 +388,7 @@ redef class AStdClassdef
 		n_classkind: nullable AClasskind,
 		n_id: nullable TClassid,
 		n_formaldefs: Collection[Object], # Should be Collection[AFormaldef]
-		n_annotations: nullable AAnnotations,
 		n_extern_code_block: nullable AExternCodeBlock,
-		n_superclasses: Collection[Object], # Should be Collection[ASuperclass]
 		n_propdefs: Collection[Object], # Should be Collection[APropdef]
 		n_kwend: nullable TKwend
 	)
@@ -406,11 +404,8 @@ redef class AStdClassdef
 		_n_id = n_id
 		if n_id != null then n_id.parent = self
 		self.n_formaldefs.unsafe_add_all(n_formaldefs)
-		_n_annotations = n_annotations
-		if n_annotations != null then n_annotations.parent = self
 		_n_extern_code_block = n_extern_code_block
 		if n_extern_code_block != null then n_extern_code_block.parent = self
-		self.n_superclasses.unsafe_add_all(n_superclasses)
 		self.n_propdefs.unsafe_add_all(n_propdefs)
 		_n_kwend = n_kwend.as(not null)
 		n_kwend.parent = self
@@ -439,15 +434,10 @@ redef class AStdClassdef
 			return
 		end
 		if n_formaldefs.replace_child(old_child, new_child) then return
-		if _n_annotations == old_child then
-			n_annotations = new_child.as(nullable AAnnotations)
-			return
-		end
 		if _n_extern_code_block == old_child then
 			n_extern_code_block = new_child.as(nullable AExternCodeBlock)
 			return
 		end
-		if n_superclasses.replace_child(old_child, new_child) then return
 		if n_propdefs.replace_child(old_child, new_child) then return
 		if _n_kwend == old_child then
 			n_kwend = new_child.as(TKwend)
@@ -480,11 +470,6 @@ redef class AStdClassdef
 		_n_id = node
 		if node != null then node.parent = self
 	end
-	redef fun n_annotations=(node)
-	do
-		_n_annotations = node
-		if node != null then node.parent = self
-	end
 	redef fun n_extern_code_block=(node)
 	do
 		_n_extern_code_block = node
@@ -505,9 +490,7 @@ redef class AStdClassdef
 		v.enter_visit(_n_classkind)
 		v.enter_visit(_n_id)
 		n_formaldefs.visit_all(v)
-		v.enter_visit(_n_annotations)
 		v.enter_visit(_n_extern_code_block)
-		n_superclasses.visit_all(v)
 		n_propdefs.visit_all(v)
 		v.enter_visit(_n_kwend)
 	end
@@ -774,61 +757,6 @@ redef class AFormaldef
 	redef fun visit_all(v: Visitor)
 	do
 		v.enter_visit(_n_id)
-		v.enter_visit(_n_type)
-		v.enter_visit(_n_annotations)
-	end
-end
-redef class ASuperclass
-	init init_asuperclass (
-		n_kwsuper: nullable TKwsuper,
-		n_type: nullable AType,
-		n_annotations: nullable AAnnotations
-	)
-	do
-		_n_kwsuper = n_kwsuper.as(not null)
-		n_kwsuper.parent = self
-		_n_type = n_type.as(not null)
-		n_type.parent = self
-		_n_annotations = n_annotations
-		if n_annotations != null then n_annotations.parent = self
-	end
-
-	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
-	do
-		if _n_kwsuper == old_child then
-			n_kwsuper = new_child.as(TKwsuper)
-			return
-		end
-		if _n_type == old_child then
-			n_type = new_child.as(AType)
-			return
-		end
-		if _n_annotations == old_child then
-			n_annotations = new_child.as(nullable AAnnotations)
-			return
-		end
-	end
-
-	redef fun n_kwsuper=(node)
-	do
-		_n_kwsuper = node
-		node.parent = self
-	end
-	redef fun n_type=(node)
-	do
-		_n_type = node
-		node.parent = self
-	end
-	redef fun n_annotations=(node)
-	do
-		_n_annotations = node
-		if node != null then node.parent = self
-	end
-
-
-	redef fun visit_all(v: Visitor)
-	do
-		v.enter_visit(_n_kwsuper)
 		v.enter_visit(_n_type)
 		v.enter_visit(_n_annotations)
 	end
@@ -1285,6 +1213,211 @@ redef class AMethPropdef
 		v.enter_visit(_n_extern_calls)
 		v.enter_visit(_n_extern_code_block)
 		v.enter_visit(_n_block)
+	end
+end
+redef class ASuperPropdef
+	init init_asuperpropdef (
+		n_doc: nullable ADoc,
+		n_kwredef: nullable TKwredef,
+		n_visibility: nullable AVisibility,
+		n_kwsuper: nullable TKwsuper,
+		n_type: nullable AType,
+		n_annotations: nullable AAnnotations
+	)
+	do
+		_n_doc = n_doc
+		if n_doc != null then n_doc.parent = self
+		_n_kwredef = n_kwredef
+		if n_kwredef != null then n_kwredef.parent = self
+		_n_visibility = n_visibility.as(not null)
+		n_visibility.parent = self
+		_n_kwsuper = n_kwsuper.as(not null)
+		n_kwsuper.parent = self
+		_n_type = n_type.as(not null)
+		n_type.parent = self
+		_n_annotations = n_annotations
+		if n_annotations != null then n_annotations.parent = self
+	end
+
+	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
+	do
+		if _n_doc == old_child then
+			n_doc = new_child.as(nullable ADoc)
+			return
+		end
+		if _n_kwredef == old_child then
+			n_kwredef = new_child.as(nullable TKwredef)
+			return
+		end
+		if _n_visibility == old_child then
+			n_visibility = new_child.as(AVisibility)
+			return
+		end
+		if _n_kwsuper == old_child then
+			n_kwsuper = new_child.as(TKwsuper)
+			return
+		end
+		if _n_type == old_child then
+			n_type = new_child.as(AType)
+			return
+		end
+		if _n_annotations == old_child then
+			n_annotations = new_child.as(nullable AAnnotations)
+			return
+		end
+	end
+
+	redef fun n_doc=(node)
+	do
+		_n_doc = node
+		if node != null then node.parent = self
+	end
+	redef fun n_kwredef=(node)
+	do
+		_n_kwredef = node
+		if node != null then node.parent = self
+	end
+	redef fun n_visibility=(node)
+	do
+		_n_visibility = node
+		node.parent = self
+	end
+	redef fun n_kwsuper=(node)
+	do
+		_n_kwsuper = node
+		node.parent = self
+	end
+	redef fun n_type=(node)
+	do
+		_n_type = node
+		node.parent = self
+	end
+	redef fun n_annotations=(node)
+	do
+		_n_annotations = node
+		if node != null then node.parent = self
+	end
+
+
+	redef fun visit_all(v: Visitor)
+	do
+		v.enter_visit(_n_doc)
+		v.enter_visit(_n_kwredef)
+		v.enter_visit(_n_visibility)
+		v.enter_visit(_n_kwsuper)
+		v.enter_visit(_n_type)
+		v.enter_visit(_n_annotations)
+	end
+end
+redef class AAnnotPropdef
+	init init_aannotpropdef (
+		n_doc: nullable ADoc,
+		n_kwredef: nullable TKwredef,
+		n_visibility: nullable AVisibility,
+		n_atid: nullable AAtid,
+		n_opar: nullable TOpar,
+		n_args: Collection[Object], # Should be Collection[AExpr]
+		n_cpar: nullable TCpar,
+		n_annotations: nullable AAnnotations
+	)
+	do
+		_n_doc = n_doc
+		if n_doc != null then n_doc.parent = self
+		_n_kwredef = n_kwredef
+		if n_kwredef != null then n_kwredef.parent = self
+		_n_visibility = n_visibility
+		if n_visibility != null then n_visibility.parent = self
+		_n_atid = n_atid.as(not null)
+		n_atid.parent = self
+		_n_opar = n_opar
+		if n_opar != null then n_opar.parent = self
+		self.n_args.unsafe_add_all(n_args)
+		_n_cpar = n_cpar
+		if n_cpar != null then n_cpar.parent = self
+		_n_annotations = n_annotations
+		if n_annotations != null then n_annotations.parent = self
+	end
+
+	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
+	do
+		if _n_doc == old_child then
+			n_doc = new_child.as(nullable ADoc)
+			return
+		end
+		if _n_kwredef == old_child then
+			n_kwredef = new_child.as(nullable TKwredef)
+			return
+		end
+		if _n_visibility == old_child then
+			n_visibility = new_child.as(nullable AVisibility)
+			return
+		end
+		if _n_atid == old_child then
+			n_atid = new_child.as(AAtid)
+			return
+		end
+		if _n_opar == old_child then
+			n_opar = new_child.as(nullable TOpar)
+			return
+		end
+		if n_args.replace_child(old_child, new_child) then return
+		if _n_cpar == old_child then
+			n_cpar = new_child.as(nullable TCpar)
+			return
+		end
+		if _n_annotations == old_child then
+			n_annotations = new_child.as(nullable AAnnotations)
+			return
+		end
+	end
+
+	redef fun n_doc=(node)
+	do
+		_n_doc = node
+		if node != null then node.parent = self
+	end
+	redef fun n_kwredef=(node)
+	do
+		_n_kwredef = node
+		if node != null then node.parent = self
+	end
+	redef fun n_visibility=(node)
+	do
+		_n_visibility = node
+		if node != null then node.parent = self
+	end
+	redef fun n_atid=(node)
+	do
+		_n_atid = node
+		node.parent = self
+	end
+	redef fun n_opar=(node)
+	do
+		_n_opar = node
+		if node != null then node.parent = self
+	end
+	redef fun n_cpar=(node)
+	do
+		_n_cpar = node
+		if node != null then node.parent = self
+	end
+	redef fun n_annotations=(node)
+	do
+		_n_annotations = node
+		if node != null then node.parent = self
+	end
+
+
+	redef fun visit_all(v: Visitor)
+	do
+		v.enter_visit(_n_doc)
+		v.enter_visit(_n_kwredef)
+		v.enter_visit(_n_visibility)
+		v.enter_visit(_n_atid)
+		v.enter_visit(_n_opar)
+		n_args.visit_all(v)
+		v.enter_visit(_n_cpar)
+		v.enter_visit(_n_annotations)
 	end
 end
 redef class AIdMethid

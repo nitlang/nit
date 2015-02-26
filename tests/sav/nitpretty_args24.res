@@ -23,7 +23,6 @@ class A # ending comments
 	super Object
 	# super Int
 	super String
-
 	# super Truc
 
 	# inclass comments
