@@ -976,7 +976,6 @@ redef class AAttrPropdef
 			var mvisibility = new_property_visibility(modelbuilder, mclassdef, self.n_visibility)
 			mreadprop = new MMethod(mclassdef, readname, mvisibility)
 			if not self.check_redef_keyword(modelbuilder, mclassdef, n_kwredef, false, mreadprop) then return
-			mreadprop.deprecation = mprop.deprecation
 		else
 			if not self.check_redef_keyword(modelbuilder, mclassdef, n_kwredef, true, mreadprop) then return
 			check_redef_property_visibility(modelbuilder, self.n_visibility, mreadprop)
@@ -1050,7 +1049,7 @@ redef class AAttrPropdef
 			end
 			mwriteprop = new MMethod(mclassdef, writename, mvisibility)
 			if not self.check_redef_keyword(modelbuilder, mclassdef, nwkwredef, false, mwriteprop) then return
-			mwriteprop.deprecation = mprop.deprecation
+			mwriteprop.deprecation = mreadprop.deprecation
 		else
 			if not self.check_redef_keyword(modelbuilder, mclassdef, nwkwredef or else n_kwredef, true, mwriteprop) then return
 			if atwritable != null then
@@ -1067,13 +1066,13 @@ redef class AAttrPropdef
 
 	redef fun build_signature(modelbuilder)
 	do
+		var mreadpropdef = self.mreadpropdef
 		var mpropdef = self.mpropdef
-		if mpropdef == null then return # Error thus skipped
-		var mclassdef = mpropdef.mclassdef
+		if mreadpropdef == null then return # Error thus skipped
+		var mclassdef = mreadpropdef.mclassdef
 		var mmodule = mclassdef.mmodule
 		var mtype: nullable MType = null
 
-		var mreadpropdef = self.mreadpropdef
 
 		var ntype = self.n_type
 		if ntype != null then
@@ -1083,7 +1082,7 @@ redef class AAttrPropdef
 
 		var inherited_type: nullable MType = null
 		# Inherit the type from the getter (usually an abstract getter)
-		if mreadpropdef != null and not mreadpropdef.is_intro then
+		if not mreadpropdef.is_intro then
 			var msignature = mreadpropdef.mproperty.intro.msignature
 			if msignature == null then return # Error, thus skipped
 			inherited_type = msignature.return_mtype
@@ -1118,7 +1117,7 @@ redef class AAttrPropdef
 					var cla = modelbuilder.try_get_mclass_by_name(nexpr, mmodule, "String")
 					if cla != null then mtype = cla.mclass_type
 				else
-					modelbuilder.error(self, "Error: Untyped attribute {mpropdef}. Implicit typing allowed only for literals and new.")
+					modelbuilder.error(self, "Error: Untyped attribute {mreadpropdef}. Implicit typing allowed only for literals and new.")
 				end
 
 				if mtype == null then return
@@ -1133,13 +1132,13 @@ redef class AAttrPropdef
 		end
 
 		if mtype == null then
-			modelbuilder.error(self, "Error: Untyped attribute {mpropdef}")
+			modelbuilder.error(self, "Error: Untyped attribute {mreadpropdef}")
 			return
 		end
 
 		mpropdef.static_mtype = mtype
 
-		if mreadpropdef != null then
+		do
 			var msignature = new MSignature(new Array[MParameter], mtype)
 			mreadpropdef.msignature = msignature
 		end
