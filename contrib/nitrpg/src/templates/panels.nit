@@ -112,7 +112,9 @@ class GameStatusPanel
 
 	redef fun render_body do
 		add "<strong class=\"text-success\">{game.load_players.length}</strong>"
-		add " <a href=\"{game.url}/players\">players</a><br><br>"
+		add " <a href=\"{game.url}/players\">players</a><br>"
+		add "<strong class=\"text-success\">{game.stats["achievements"]}</strong>"
+		add " <a href=\"{game.url}/achievements\">achievements</a><br><br>"
 		add "<strong class=\"text-success\">{game.stats["pulls"]}</strong> pull requests"
 		add " (<strong>{game.stats["pulls_open"]}</strong> open)<br>"
 		add "<strong class=\"text-success\">{game.stats["issues"]}</strong> issues"
@@ -144,6 +146,7 @@ class PlayerStatusPanel
 		add "<p class=\"lead\">ranked "
 		add " <span class=\"text-success\"># {ranking[player.name]}</span></p>"
 		add "<strong class=\"text-success\">{player.nitcoins}</strong> nitcoins<br><br>"
+		add "<strong class=\"text-success\">{player.stats["achievements"]}</strong> achievements<br><br>"
 		add "<strong>{player.stats["pulls"]}</strong> pull requests<br>"
 		add "<strong>{player.stats["issues"]}</strong> issues<br>"
 		add "<strong>{player.stats["commits"]}</strong> commits"
@@ -358,5 +361,77 @@ class EventListPanel
 				    <span class=\"glyphicon glyphicon-chevron-right\"></span></a>"""
 		end
 		add "</div>"
+	end
+end
+
+# Achievement unlocked list panel.
+class AchievementsListPanel
+	super Panel
+
+	# Entity to load the events from.
+	var entity: GameEntity
+
+	redef fun render_title do
+		add "<span class=\"glyphicon glyphicon-list\"></span>&nbsp;&nbsp;"
+		add "Achievements unlocked"
+	end
+
+	redef fun render_body do
+		var achs = entity.load_achievements.values.to_a
+		if achs.is_empty then
+			add "<em>No achievement yet...</em>"
+			return
+		end
+		for ach in achs do add ach.list_item
+	end
+end
+
+# Achievement detail panel.
+class AchievementPanel
+	super Panel
+
+	# Achievement to display.
+	var achievement: Achievement
+
+	redef fun render_title do
+		add "<span class=\"glyphicon glyphicon-check\"></span>&nbsp;&nbsp;"
+		add "Achievement details"
+	end
+
+	redef fun render_body do
+		add """<p class=\"lead\">
+				<span class="badge progress-bar-success"
+				 style="vertical-align: middle">+{{{achievement.reward}}}</span>
+		        {{{achievement.name}}}
+		       </p>
+		       <p><strong>{{{achievement.desc}}}</strong></p>"""
+
+		var events = achievement.load_events
+
+		if events.is_empty then
+			add "<em>Never unlocked...</em>"
+			return
+		end
+
+		var event = events.last
+		var tpl = event.tpl_event
+		var player = tpl.player
+		add "<hr>"
+		add """<div class="media">
+		        <a class="media-left" href="{{{player.url}}}">
+				 <span class="badge progress-bar-warning" style="position: absolute">#1</span>
+		         <img class=\"img-circle\" style="width:50px"
+		          src="{{{player.user.avatar_url}}}" alt="{{{player.name}}}">
+		        </a>
+				<div class="media-body">
+				 <h4 class="media-heading">Unlocked first by {{{player.link}}}</h4>
+				 <span class="text-muted">at {{{event.time}}} </span>
+				</div>
+			   </div>"""
+
+		if events.length > 1 then
+			add """<p><br>Also unlocked by <strong class="text-success">
+		        {{{events.length}}} players</strong>.</p>"""
+		end
 	end
 end

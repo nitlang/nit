@@ -17,8 +17,8 @@
 # This tool is runned to listen to `Github::Event` and update the game.
 module listener
 
-import statistics
 import reactors
+import achievements
 import github::hooks
 
 # `HookListener` that redirects events to a `Game` instance.
@@ -34,8 +34,14 @@ class RpgHookListener
 		# TODO handle verbosity with opts
 		game.verbose_lvl = 1
 		game.message(1, "Received event {event} for {game.repo.full_name}")
-		for reactor in reactors do reactor.react_event(game, event)
+		for reactor in reactors do
+			game.message(2, "Apply reactor {reactor} on {event}")
+			reactor.react_event(game, event)
+		end
 	end
+
+	# Register a reactor for this listener.
+	fun add_reactor(reactors: GameReactor...) do self.reactors.add_all reactors
 end
 
 if args.length != 2 then
@@ -51,9 +57,12 @@ var port = args[1].to_i
 
 var api = new GithubAPI(get_github_oauth)
 
-var listener = new RpgHookListener(api, host, port)
-listener.reactors.add new StatisticsReactor
-listener.reactors.add new PlayerReactor
+var l = new RpgHookListener(api, host, port)
+l.add_reactor(new StatisticsReactor, new PlayerReactor)
+l.add_reactor(new Player1Issue, new Player100Issues, new Player1KIssues)
+l.add_reactor(new Player1Pull, new Player100Pulls, new Player1KPulls)
+l.add_reactor(new Player1Commit, new Player100Commits, new Player1KCommits)
+l.add_reactor(new IssueAboutNitdoc, new IssueAboutFFI)
 
 print "Listening events on {host}:{port}"
-listener.listen
+l.listen

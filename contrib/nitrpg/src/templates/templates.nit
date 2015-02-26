@@ -54,7 +54,7 @@ class NitRpgPage
 	</head>
 	<body>
 		<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-			<a class="navbar-brand" href="/">Github RPG</a>"""
+			<a class="navbar-brand" href="{{{root_url}}}/">Github RPG</a>"""
 		if not breadcrumbs == null then
 			add breadcrumbs.as(not null)
 		end

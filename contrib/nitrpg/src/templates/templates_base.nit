@@ -17,7 +17,7 @@
 # Base HTML rendering templates for `nitpg`.
 module templates_base
 
-import statistics
+import achievements
 
 redef class GameEntity
 
@@ -49,4 +49,25 @@ end
 redef class Issue
 	# Return a HTML link to this Issue.
 	fun link: String do return "<a href=\"{html_url}\">#{number}</a>"
+end
+
+redef class Achievement
+	# Return a HTML link to this Issue.
+	fun link: String do return "<a href=\"{url}\">{name}</a>"
+
+	fun list_item: String do
+		return """<div class="media">
+			       <div class="media-left" style="width: 50px">
+			        <span class="glyphicon glyphicon-check"></span>
+			        <span class="badge progress-bar-success"
+			         style="position: absolute; margin-top: 10px;
+					 margin-left: -5px;">+{{{reward}}}</span>
+			       </div>
+			       <div class="media-body">
+			        <h4 class="media-heading">{{{link}}}</h4>
+			        <span class="text-muted">{{{desc}}}</span>
+			       </div>
+			      </div>"""
+
+	end
 end

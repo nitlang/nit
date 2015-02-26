@@ -26,6 +26,9 @@ import counter
 
 redef class GameEntity
 
+	# Statistics for this entity.
+	fun stats: GameStats is abstract
+
 	# Load statistics for this `MEntity` if any.
 	fun load_statistics: nullable GameStats do
 		var key = self.key / "statistics"
@@ -33,23 +36,17 @@ redef class GameEntity
 		var json = game.store.load_object(key)
 		return new GameStats.from_json(game, json)
 	end
-
-	# Save statistics under this `MEntity`.
-	fun save_statistics(stats: GameStats) do
-		game.store.store_object(key / stats.key, stats.to_json)
-	end
 end
 
 redef class Game
 
-	# Statistics for this game instance.
-	var stats: GameStats is lazy do
+	redef var stats is lazy do
 		return load_statistics or else new GameStats(game)
 	end
 
 	redef fun save do
 		super
-		save_statistics(stats)
+		stats.save_in(self)
 	end
 
 	redef fun pretty do
@@ -63,14 +60,13 @@ end
 
 redef class Player
 
-	# Statistics for this player.
-	var stats: GameStats is lazy do
+	redef var stats is lazy do
 		return load_statistics or else new GameStats(game)
 	end
 
 	redef fun save do
 		super
-		save_statistics(stats)
+		stats.save_in(self)
 	end
 
 	redef fun pretty do
@@ -125,9 +121,7 @@ end
 class StatisticsReactor
 	super GameReactor
 
-	redef fun react_event(game, e) do
-		e.react_stats_event(game)
-	end
+	redef fun react_event(game, e) do e.react_stats_event(game)
 end
 
 redef class GithubEvent
