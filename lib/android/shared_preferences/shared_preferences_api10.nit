@@ -404,7 +404,7 @@ class SharedPreferences
 end
 
 redef class App
-	fun shared_preferences: SharedPreferences is cached do 
+	var shared_preferences: SharedPreferences is lazy do
 		return new SharedPreferences.privately(self, "")
 	end
 end

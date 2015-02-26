@@ -372,10 +372,10 @@ end
 
 redef class App
 	# Resource Manager used to manage resources placed in the `res` folder of the app
-	fun resource_manager: ResourcesManager is cached do return new ResourcesManager(self.resources, self.package_name.to_s)
+	var resource_manager: ResourcesManager is lazy  do return new ResourcesManager(self.resources, self.package_name.to_s)
 
 	# Assets Manager used to manage resources placed in the `assets` folder of the app
-	fun asset_manager: AssetManager is cached do return new AssetManager(self)
+	var asset_manager: AssetManager is lazy do return new AssetManager(self)
 
 	# Get the native AssetsManager of the application, used to initialize the nit's AssetManager
 	private fun assets: NativeAssetManager import native_activity in "Java" `{ return App_native_activity(recv).getAssets(); `}

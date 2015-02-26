@@ -308,7 +308,7 @@ abstract class WikiEntry
 	# Result is returned as an array containg ordered entries:
 	# `breadcrumbs.first` is the root entry and
 	# `breadcrumbs.last == self`
-	fun breadcrumbs: Array[WikiEntry] is cached do
+	var breadcrumbs: Array[WikiEntry] is lazy do
 		var path = new Array[WikiEntry]
 		var entry: nullable WikiEntry = self
 		while entry != null and not entry.is_root do
@@ -538,7 +538,7 @@ class WikiArticle
 	# Extract the markdown text from `source_file`.
 	#
 	# REQUIRE: `has_source`.
-	fun md: String is cached do
+	var md: String is lazy do
 		assert has_source
 		var file = new FileReader.open(src_full_path.to_s)
 		var md = file.read_all
@@ -577,7 +577,7 @@ class WikiConfig
 	#
 	# * key: `wiki.name`
 	# * default: `MyWiki`
-	fun wiki_name: String is cached do return value_or_default("wiki.name", "MyWiki")
+	var wiki_name: String is lazy do return value_or_default("wiki.name", "MyWiki")
 
 	# Site description.
 	#
@@ -585,7 +585,7 @@ class WikiConfig
 	#
 	# * key: `wiki.desc`
 	# * default: ``
-	fun wiki_desc: String is cached do return value_or_default("wiki.desc", "")
+	var wiki_desc: String is lazy do return value_or_default("wiki.desc", "")
 
 	# Site logo url.
 	#
@@ -593,13 +593,13 @@ class WikiConfig
 	#
 	# * key: `wiki.logo`
 	# * default: ``
-	fun wiki_logo: String is cached do return value_or_default("wiki.logo", "")
+	var wiki_logo: String is lazy do return value_or_default("wiki.logo", "")
 
 	# Root url of the wiki.
 	#
 	# * key: `wiki.root_url`
 	# * default: `http://localhost/`
-	fun root_url: String is cached do return value_or_default("wiki.root_url", "http://localhost/")
+	var root_url: String is lazy do return value_or_default("wiki.root_url", "http://localhost/")
 
 
 	# Root directory of the wiki.
@@ -608,7 +608,7 @@ class WikiConfig
 	#
 	# * key: `wiki.root_dir`
 	# * default: `./`
-	fun root_dir: String is cached do return value_or_default("wiki.root_dir", "./").simplify_path
+	var root_dir: String is lazy do return value_or_default("wiki.root_dir", "./").simplify_path
 
 	# Pages directory.
 	#
@@ -616,7 +616,7 @@ class WikiConfig
 	#
 	# * key: `wiki.source_dir
 	# * default: `pages/`
-	fun source_dir: String is cached do
+	var source_dir: String is lazy do
 		return value_or_default("wiki.source_dir", "pages/").simplify_path
 	end
 
@@ -627,7 +627,7 @@ class WikiConfig
 	#
 	# * key: `wiki.out_dir`
 	# * default: `out/`
-	fun out_dir: String is cached do return value_or_default("wiki.out_dir", "out/").simplify_path
+	var out_dir: String is lazy do return value_or_default("wiki.out_dir", "out/").simplify_path
 
 	# Asset files directory.
 	#
@@ -636,7 +636,7 @@ class WikiConfig
 	#
 	# * key: `wiki.assets_dir`
 	# * default: `assets/`
-	fun assets_dir: String is cached do
+	var assets_dir: String is lazy do
 		return value_or_default("wiki.assets_dir", "assets/").simplify_path
 	end
 
@@ -647,7 +647,7 @@ class WikiConfig
 	#
 	# * key: `wiki.templates_dir`
 	# * default: `templates/`
-	fun templates_dir: String is cached do
+	var templates_dir: String is lazy do
 		return value_or_default("wiki.templates_dir", "templates/").simplify_path
 	end
 
@@ -657,7 +657,7 @@ class WikiConfig
 	#
 	# * key: `wiki.template`
 	# * default: `template.html`
-	fun template_file: String is cached do
+	var template_file: String is lazy do
 		return value_or_default("wiki.template", "template.html")
 	end
 
@@ -668,7 +668,7 @@ class WikiConfig
 	#
 	# * key: `wiki.header`
 	# * default: `header.html`
-	fun header_file: String is cached do
+	var header_file: String is lazy do
 		return value_or_default("wiki.header", "header.html")
 	end
 
@@ -678,7 +678,7 @@ class WikiConfig
 	#
 	# * key: `wiki.menu`
 	# * default: `menu.html`
-	fun menu_file: String is cached do
+	var menu_file: String is lazy do
 		return value_or_default("wiki.menu", "menu.html")
 	end
 
@@ -689,7 +689,7 @@ class WikiConfig
 	#
 	# * key: `wiki.footer`
 	# * default: `footer.html`
-	fun footer_file: String is cached do
+	var footer_file: String is lazy do
 		return value_or_default("wiki.footer", "footer.html")
 	end
 
@@ -699,19 +699,19 @@ class WikiConfig
 	#
 	# * key: `wiki.rsync_dir`
 	# * default: ``
-	fun rsync_dir: String is cached do return value_or_default("wiki.rsync_dir", "")
+	var rsync_dir: String is lazy do return value_or_default("wiki.rsync_dir", "")
 
 	# Remote repository used to pull modifications on sources.
 	#
 	# * key: `wiki.git_origin`
 	# * default: `origin`
-	fun git_origin: String is cached do return value_or_default("wiki.git_origin", "origin")
+	var git_origin: String is lazy do return value_or_default("wiki.git_origin", "origin")
 
 	# Remote branch used to pull modifications on sources.
 	#
 	# * key: `wiki.git_branch`
 	# * default: `master`
-	fun git_branch: String is cached do return value_or_default("wiki.git_branch", "master")
+	var git_branch: String is lazy do return value_or_default("wiki.git_branch", "master")
 end
 
 # WikiSection custom configuration.

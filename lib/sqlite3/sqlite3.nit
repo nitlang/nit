@@ -161,7 +161,7 @@ class StatementEntry
 	# Name of the column
 	#
 	# require: `self.statement.is_open`
-	fun name: String is cached do
+	var name: String is lazy do
 		assert statement_closed: statement.is_open
 
 		return statement.native_statement.column_name(index)

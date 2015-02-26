@@ -67,7 +67,7 @@ private abstract class RopeString
 	super Rope
 	super String
 
-	redef fun chars is cached do return new RopeChars(self)
+	redef var chars is lazy do return new RopeChars(self)
 end
 
 # Node that represents a concatenation between two `String`
@@ -80,7 +80,7 @@ private class Concat
 
 	redef fun empty do return ""
 
-	redef fun to_cstring is cached do
+	redef var to_cstring is lazy do
 		var len = length
 		var ns = new NativeString(len + 1)
 		ns[len] = '\0'
@@ -177,7 +177,7 @@ class RopeBuffer
 	super Rope
 	super Buffer
 
-	redef fun chars: Sequence[Char] is cached do return new RopeBufferChars(self)
+	redef var chars: Sequence[Char] is lazy do return new RopeBufferChars(self)
 
 	# The final string being built on the fly
 	private var str: String is noinit

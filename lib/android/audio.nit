@@ -415,12 +415,12 @@ redef class App
 	# Returns the default MediaPlayer of the application.
 	# When you load a music, it goes in this MediaPlayer.
 	# Use it for advanced sound management
-	fun default_mediaplayer: MediaPlayer is cached do return new MediaPlayer
+	var default_mediaplayer: MediaPlayer is lazy do return new MediaPlayer
 
 	# Returns the default MediaPlayer of the application.
 	# When you load a short sound (not a music), it's added to this soundpool.
 	# Use it for advanced sound management.
-	fun default_soundpool: SoundPool is cached do return new SoundPool
+	var default_soundpool: SoundPool is lazy do return new SoundPool
 
 	# Get the native audio manager
 	fun audio_manager: NativeAudioManager import native_activity in "Java" `{

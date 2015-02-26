@@ -78,7 +78,7 @@ end
 
 redef class MModule
 	# Get the type of the class `Serializable`
-	fun serializable_type: MClassType is cached do
+	var serializable_type: MClassType is lazy do
 		return self.get_primitive_class("Serializable").mclass_type
 	end
 end
