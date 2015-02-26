@@ -36,6 +36,13 @@ redef class ModelBuilder
 	do
 		var analysis = new RapidTypeAnalysis(self, mainmodule)
 		analysis.run_analysis
+
+		if toolcontext.opt_log.value then
+			var basename = toolcontext.log_directory / mainmodule.name
+			analysis.live_methods_to_tree.write_to_file(basename + ".rta_methods.txt")
+			analysis.live_types_to_csv.write_to_file(basename + ".rta_types.csv")
+		end
+
 		return analysis
 	end
 end
