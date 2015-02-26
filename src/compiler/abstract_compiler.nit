@@ -1834,6 +1834,15 @@ redef class MMethodDef
 		var modelbuilder = v.compiler.modelbuilder
 		var val = constant_value
 		var node = modelbuilder.mpropdef2node(self)
+
+		if is_abstract then
+			var cn = v.class_name_string(arguments.first)
+			v.current_node = node
+			v.add("PRINT_ERROR(\"Runtime error: Abstract method `%s` called on `%s`\", \"{mproperty.name.escape_to_c}\", {cn});")
+			v.add_raw_abort
+			return null
+		end
+
 		if node isa APropdef then
 			var oldnode = v.current_node
 			v.current_node = node
@@ -1893,13 +1902,6 @@ end
 redef class AMethPropdef
 	redef fun compile_to_c(v, mpropdef, arguments)
 	do
-		if mpropdef.is_abstract then
-			var cn = v.class_name_string(arguments.first)
-			v.add("PRINT_ERROR(\"Runtime error: Abstract method `%s` called on `%s`\", \"{mpropdef.mproperty.name.escape_to_c}\", {cn});")
-			v.add_raw_abort
-			return
-		end
-
 		# Call the implicit super-init
 		var auto_super_inits = self.auto_super_inits
 		if auto_super_inits != null then
