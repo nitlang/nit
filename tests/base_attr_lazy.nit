@@ -26,6 +26,7 @@ class Foo
 		return 20
 	end
 	#alt1#var a3: Object is lazy
+	#alt2#fun a4: Object is lazy
 end
 
 var f = new Foo
