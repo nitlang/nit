@@ -1166,7 +1166,9 @@ redef class AAttrPropdef
 			evaluate_expr(v, recv)
 			return
 		end
-		var mtype = self.mpropdef.static_mtype.as(not null)
+		var mpropdef = self.mpropdef
+		if mpropdef == null then return
+		var mtype = mpropdef.static_mtype.as(not null)
 		mtype = mtype.anchor_to(v.mainmodule, recv.mtype.as(MClassType))
 		if mtype isa MNullableType then
 			v.write_attribute(self.mpropdef.mproperty, recv, v.null_instance)
