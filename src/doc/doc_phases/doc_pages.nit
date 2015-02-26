@@ -26,16 +26,16 @@ class MakePagePhase
 		doc.pages.add new OverviewPage("Overview")
 		doc.pages.add new SearchPage("Index")
 		for mgroup in doc.mgroups do
-			doc.pages.add new MGroupPage(mgroup.nitdoc_id, mgroup)
+			doc.pages.add new MGroupPage(mgroup.nitdoc_name, mgroup)
 		end
 		for mmodule in doc.mmodules do
-			doc.pages.add new MModulePage(mmodule.nitdoc_id, mmodule)
+			doc.pages.add new MModulePage(mmodule.nitdoc_name, mmodule)
 		end
 		for mclass in doc.mclasses do
-			doc.pages.add new MClassPage(mclass.nitdoc_id, mclass)
+			doc.pages.add new MClassPage(mclass.nitdoc_name, mclass)
 		end
 		for mproperty in doc.mproperties do
-			doc.pages.add new MPropertyPage(mproperty.nitdoc_id, mproperty)
+			doc.pages.add new MPropertyPage(mproperty.nitdoc_name, mproperty)
 		end
 	end
 end

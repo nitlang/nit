@@ -12,14 +12,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Nitdoc model template parts generation
-module doc_model
+# HTML templates for Nit model MEntities.
+module html_model
 
-import model_utils
+import doc_base
 import doc_down
-import doc_templates
+import html_components
 import ordered_tree
-import model_ext
 
 redef class Location
 	# Github url based on this location
@@ -32,9 +31,6 @@ redef class Location
 end
 
 redef class MEntity
-	# HTML-escaped name.
-	fun nitdoc_name: String do return name.html_escape
-
 	# ID used as a HTML unique ID and in file names.
 	#
 	# **Must** match the following (POSIX ERE) regular expression:
@@ -302,7 +298,6 @@ redef class MClass
 end
 
 redef class MClassDef
-	redef fun nitdoc_name do return mclass.nitdoc_name
 	redef var nitdoc_id = "{mmodule.nitdoc_id}__{name.to_cmangle}" is lazy
 	redef fun nitdoc_url do return "{mclass.nitdoc_url}#{nitdoc_id}"
 
@@ -418,7 +413,6 @@ redef class MProperty
 end
 
 redef class MPropDef
-	redef fun nitdoc_name do return mproperty.nitdoc_name
 	redef var nitdoc_id = "{mclassdef.nitdoc_id}__{name.to_cmangle}" is lazy
 	redef fun nitdoc_url do return "{mproperty.nitdoc_url}#{nitdoc_id}"
 

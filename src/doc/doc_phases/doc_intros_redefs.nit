@@ -56,10 +56,10 @@ redef class DefinitionArticle
 	private fun build_mmodule_list(v: IntroRedefListPhase, doc: DocModel, mmodule: MModule) do
 		var intros = mmodule.intro_mclassdefs(v.ctx.min_visibility).to_a
 		doc.mainmodule.linearize_mclassdefs(intros)
-		children.add new IntrosRedefsListArticle(mentity, "Introduces", intros)
+		add_child new IntrosRedefsListArticle(mentity, "Introduces", intros)
 		var redefs = mmodule.redef_mclassdefs(v.ctx.min_visibility).to_a
 		doc.mainmodule.linearize_mclassdefs(redefs)
-		children.add new IntrosRedefsListArticle(mentity, "Redefines", redefs)
+		add_child new IntrosRedefsListArticle(mentity, "Redefines", redefs)
 	end
 
 	# TODO this should move to MEntity?
@@ -67,11 +67,11 @@ redef class DefinitionArticle
 		var intros = mclassdef.collect_intro_mpropdefs(v.ctx.min_visibility).to_a
 		# FIXME avoid diff changes
 		# v.ctx.mainmodule.linearize_mpropdefs(intros)
-		children.add new IntrosRedefsListArticle(mentity, "Introduces", intros)
+		add_child new IntrosRedefsListArticle(mentity, "Introduces", intros)
 		var redefs = mclassdef.collect_redef_mpropdefs(v.ctx.min_visibility).to_a
 		# FIXME avoid diff changes
 		# v.ctx.mainmodule.linearize_mpropdefs(redefs)
-		children.add new IntrosRedefsListArticle(mentity, "Redefines", redefs)
+		add_child new IntrosRedefsListArticle(mentity, "Redefines", redefs)
 	end
 
 end

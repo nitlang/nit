@@ -16,6 +16,7 @@
 module doc_indexing
 
 import doc_extract
+import html_templates::html_model # FIXME maybe this phase should depend on `html_render`
 private import json::static
 
 # Generate the index for then Nitdoc QuickSearch field.

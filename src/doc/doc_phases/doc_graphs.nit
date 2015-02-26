@@ -15,7 +15,9 @@
 # Adds importation and class hierarchy graphs.
 module doc_graphs
 
+import doc_structure
 import doc_poset
+import html_templates::html_model # FIXME maybe this phase should depend on `html_render`
 
 redef class ToolContext
 
@@ -70,7 +72,7 @@ redef class MModulePage
 			end
 		end
 		op.append("\}\n")
-		return new GraphArticle(name, op)
+		return new GraphArticle(mentity, name, op)
 	end
 end
 
@@ -104,7 +106,7 @@ redef class MClassPage
 			end
 		end
 		op.append("\}\n")
-		return new GraphArticle(name, op)
+		return new GraphArticle(mentity, name, op)
 	end
 end
 
@@ -113,7 +115,7 @@ end
 # The graph is stored in dot format.
 # The final output is delayed untill rendering.
 class GraphArticle
-	super DocComposite
+	super MEntityComposite
 
 	# Graph ID (used for outputing file with names).
 	var id: String
