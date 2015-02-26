@@ -382,7 +382,6 @@ class RapidTypeAnalysis
 		if mproperty.mpropdefs.length <= 1 then return
 		# If all definitions of a method are live, we can remove the definition of the totry set
 		for d in mproperty.mpropdefs do
-			if d.is_abstract then continue
 			if not live_methoddefs.has(d) then return
 		end
 		#print "full property: {mpropdef.mproperty} for {mpropdef.mproperty.mpropdefs.length} definitions"
