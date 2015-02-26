@@ -102,6 +102,9 @@ class ToolContext
 	# Directory where to generate log files
 	var log_directory: String = "logs"
 
+	# Stream in `log_directory` where all info messages are written
+	var log_info: nullable Writer = null
+
 	# Messages
 	private var messages = new Array[Message]
 	private var message_sorter: Comparator = default_comparator
@@ -235,6 +238,10 @@ class ToolContext
 	do
 		if level <= verbose_level then
 			print "{s}"
+		end
+		if log_info != null then
+			log_info.write s
+			log_info.write "\n"
 		end
 	end
 
@@ -429,8 +436,10 @@ The Nit language documentation and the source code of its tools and libraries ma
 		if opt_log.value then
 			# Make sure the output directory exists
 			log_directory.mkdir
-		end
 
+			# Redirect the verbose messages
+			log_info = (log_directory/"info.txt").to_path.open_wo
+		end
 	end
 
 	# Get the current `nit_version` or "DUMMY_VERSION" if `--set-dummy-tool` is set.
