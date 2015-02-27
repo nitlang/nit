@@ -863,6 +863,10 @@ redef class AMethPropdef
 		mpropdef.is_abstract = self.get_single_annotation("abstract", modelbuilder) != null
 		mpropdef.is_intern = self.get_single_annotation("intern", modelbuilder) != null
 		mpropdef.is_extern = self.n_extern_code_block != null or self.get_single_annotation("extern", modelbuilder) != null
+
+		# Check annotations
+		var at = self.get_single_annotation("lazy", modelbuilder)
+		if at != null then modelbuilder.error(at, "Syntax error: `lazy` must be used on attributes.")
 	end
 
 	redef fun check_signature(modelbuilder)

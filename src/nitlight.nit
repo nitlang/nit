@@ -19,9 +19,6 @@ import highlight
 
 var toolcontext = new ToolContext
 
-# Disable `cached` because it causes issues when printing transformed AST. FIXME
-toolcontext.cached_phase.disabled = true
-
 # Try to colorize, even if programs are non valid
 toolcontext.keep_going = true
 

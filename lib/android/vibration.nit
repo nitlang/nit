@@ -48,7 +48,7 @@ end
 
 redef class App
 	# Get the handle to this device vibrator as a global ref
-	fun vibrator: Vibrator is cached do
+	var vibrator: Vibrator is lazy do
 		var v = vibrator_native(native_activity)
 		return v.new_global_ref
 	end

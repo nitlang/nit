@@ -107,7 +107,7 @@ redef class WikiSection
 	#
 	# If no file `index.md` exists for this section,
 	# a summary is generated using contained articles.
-	fun index: WikiArticle is cached do
+	var index: WikiArticle is lazy do
 		for child in children.values do
 			if child isa WikiArticle and child.is_index then return child
 		end

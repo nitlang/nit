@@ -34,7 +34,7 @@ redef class MConcern
 end
 
 redef class MProject
-	redef fun concern_rank is cached do
+	redef var concern_rank is lazy do
 		var max = 0
 		for mgroup in mgroups do
 			var mmax = mgroup.concern_rank
@@ -87,7 +87,7 @@ redef class MGroup
 		return res
 	end
 
-	redef fun concern_rank is cached do
+	redef var concern_rank is lazy do
 		var max = 0
 		for mmodule in collect_mmodules do
 			var mmax = mmodule.concern_rank
@@ -163,7 +163,7 @@ redef class MModule
 		return mclasses
 	end
 
-	redef fun concern_rank is cached do
+	redef var concern_rank is lazy do
 		var max = 0
 		for p in in_importation.direct_greaters do
 			var pmax = p.concern_rank
