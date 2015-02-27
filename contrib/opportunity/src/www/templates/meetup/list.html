@@ -1,0 +1,29 @@
+<md-content>
+	<h1>Meetups</h1>
+	<md-list>
+	  <md-item ng-repeat="meetup in listMeetupsCtrl.meetups">
+	    <md-item-content>
+	      <div class="md-tile-content">
+	        <h3>{{meetup.name}}</h3>
+	        <div layout="row" layout-align="space-between center">
+	        	<div>
+			        <h4>{{meetup.date}}</h4>
+			        <p>
+			          {{meetup.place}}
+			        </p>
+	        	</div>
+	        	<div>
+			        <md-button><md-icon md-svg-src="../img/open.svg" class="md-primary"></md-icon></md-button>
+			        <md-button><md-icon md-svg-src="../img/edit.svg" class="md-primary"></md-icon></md-button>
+			        <md-button ng-click="listMeetupsCtrl.delete(meetup.id)"><md-icon md-svg-src="../img/delete.svg" class="md-warn"></md-icon></md-button>
+	        	</div>
+	        </div>
+	      </div>
+	    </md-item-content>
+	    <md-divider ng-if="!$last"></md-divider>
+	  </md-item>
+	</md-list>
+	<md-button class="md-primary md-fab md-fab-top-right" ng-click="menu.go('addMeetup')">
+	    <md-icon md-svg-src="../img/add.svg"></md-icon>
+	</md-button>
+</md-content>
