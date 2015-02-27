@@ -220,6 +220,66 @@ abstract class Reader
 	# Is there something to read.
 	# This function returns 'false' if there is something to read.
 	fun eof: Bool is abstract
+
+	# Read the next sequence of non whitespace characters.
+	#
+	# Leading whitespace characters are skipped.
+	# The first whitespace character that follows the result is consumed.
+	#
+	# An empty string is returned if the end of the file or an error is encounter.
+	#
+	# ~~~
+	# var w = new StringReader(" Hello, \n\t World!")
+	# assert w.read_word == "Hello,"
+	# assert w.read_char == '\n'.ascii
+	# assert w.read_word == "World!"
+	# assert w.read_word == ""
+	# ~~~
+	#
+	# `Char::is_whitespace` determines what is a whitespace.
+	fun read_word: String
+	do
+		var buf = new FlatBuffer
+		var c = read_nonwhitespace
+		if c > 0 then
+			buf.add(c.ascii)
+			while not eof do
+				c = read_char
+				if c < 0 then break
+				var a = c.ascii
+				if a.is_whitespace then break
+				buf.add(a)
+			end
+		end
+		var res = buf.to_s
+		return res
+	end
+
+	# Skip whitespace characters (if any) then return the following non-whitespace character.
+	#
+	# Returns the code point of the character.
+	# Return -1 on end of file or error.
+	#
+	# In fact, this method works like `read_char` except it skips whitespace.
+	#
+	# ~~~
+	# var w = new StringReader(" \nab\tc")
+	# assert w.read_nonwhitespace == 'a'.ascii
+	# assert w.read_nonwhitespace == 'b'.ascii
+	# assert w.read_nonwhitespace == 'c'.ascii
+	# assert w.read_nonwhitespace == -1
+	# ~~~
+	#
+	# `Char::is_whitespace` determines what is a whitespace.
+	fun read_nonwhitespace: Int
+	do
+		var c = -1
+		while not eof do
+			c = read_char
+			if c < 0 or not c.ascii.is_whitespace then break
+		end
+		return c
+	end
 end
 
 # Iterator returned by `Reader::each_line`.
