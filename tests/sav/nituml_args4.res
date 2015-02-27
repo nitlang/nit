@@ -52,7 +52,7 @@ Discrete -> Int [dir=back arrowtail=open style=dashed];
 Numeric -> Int [dir=back arrowtail=open style=dashed];
 
 Char [
- label = "{Char||+ to_i(): Int\l+ ascii(): Int\l+ to_lower(): Char\l+ to_upper(): Char\l+ is_digit(): Bool\l+ is_lower(): Bool\l+ is_upper(): Bool\l+ is_letter(): Bool\l}"
+ label = "{Char||+ to_i(): Int\l+ ascii(): Int\l+ to_lower(): Char\l+ to_upper(): Char\l+ is_digit(): Bool\l+ is_lower(): Bool\l+ is_upper(): Bool\l+ is_letter(): Bool\l+ is_whitespace(): Bool\l}"
 ]
 Discrete -> Char [dir=back arrowtail=open style=dashed];
 
