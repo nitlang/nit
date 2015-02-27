@@ -386,6 +386,22 @@ abstract class Text
 	# `Char::is_whitespace` determines what is a whitespace.
 	fun trim: SELFTYPE do return (self.l_trim).r_trim
 
+	# Is the string non-empty but only made of whitespaces?
+	#
+	#    assert " \n\t ".is_whitespace    == true
+	#    assert "  hello  ".is_whitespace == false
+	#    assert "".is_whitespace          == false
+	#
+	# `Char::is_whitespace` determines what is a whitespace.
+	fun is_whitespace: Bool
+	do
+		if is_empty then return false
+		for c in self.chars do
+			if not c.is_whitespace then return false
+		end
+		return true
+	end
+
 	# Returns `self` removed from its last line terminator (if any).
 	#
 	#    assert "Hello\n".chomp == "Hello"
