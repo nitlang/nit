@@ -1163,6 +1163,12 @@ class SeparateCompilerVisitor
 				return direct_call(tgs.first, args)
 			end
 		end
+		# Shortcut intern methods as they are not usually redefinable
+		if callsite.mpropdef.is_intern and callsite.mproperty.name != "object_id" then
+			# `object_id` is the only redefined intern method, so it can not be directly called.
+			# TODO find a less ugly approach?
+			return direct_call(callsite.mpropdef, args)
+		end
 		return super
 	end
 
