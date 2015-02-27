@@ -1852,7 +1852,10 @@ class SeparateCompilerVisitor
 		var nclass = self.get_class("NativeArray")
 		var recv = "((struct instance_{nclass.c_name}*){arguments[0]})->values"
 		if pname == "[]" then
-			self.ret(self.new_expr("{recv}[{arguments[1]}]", ret_type.as(not null)))
+			# Because the objects are boxed, return the box to avoid unnecessary (or broken) unboxing/reboxing
+			var res = self.new_expr("{recv}[{arguments[1]}]", compiler.mainmodule.object_type)
+			res.mcasttype = ret_type.as(not null)
+			self.ret(res)
 			return
 		else if pname == "[]=" then
 			self.add("{recv}[{arguments[1]}]={arguments[2]};")
