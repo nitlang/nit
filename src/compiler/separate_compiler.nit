@@ -1156,24 +1156,30 @@ class SeparateCompilerVisitor
 	redef fun compile_callsite(callsite, args)
 	do
 		var rta = compiler.runtime_type_analysis
-		var mmethod = callsite.mproperty
 		# TODO: Inlining of new-style constructors with initializers
 		if compiler.modelbuilder.toolcontext.opt_direct_call_monomorph.value and rta != null and callsite.mpropdef.initializers.is_empty then
 			var tgs = rta.live_targets(callsite)
 			if tgs.length == 1 then
-				# DIRECT CALL
-				var res0 = before_send(mmethod, args)
-				var res = call(tgs.first, tgs.first.mclassdef.bound_mtype, args)
-				if res0 != null then
-					assert res != null
-					self.assign(res0, res)
-					res = res0
-				end
-				add("\}") # close the before_send
-				return res
+				return direct_call(tgs.first, args)
 			end
 		end
 		return super
+	end
+
+	# Fully and directly call a mpropdef
+	#
+	# This method is used by `compile_callsite`
+	private fun direct_call(mpropdef: MMethodDef, args: Array[RuntimeVariable]): nullable RuntimeVariable
+	do
+		var res0 = before_send(mpropdef.mproperty, args)
+		var res = call(mpropdef, mpropdef.mclassdef.bound_mtype, args)
+		if res0 != null then
+			assert res != null
+			self.assign(res0, res)
+			res = res0
+		end
+		add("\}") # close the before_send
+		return res
 	end
 	redef fun send(mmethod, arguments)
 	do
