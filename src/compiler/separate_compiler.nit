@@ -1156,24 +1156,36 @@ class SeparateCompilerVisitor
 	redef fun compile_callsite(callsite, args)
 	do
 		var rta = compiler.runtime_type_analysis
-		var mmethod = callsite.mproperty
 		# TODO: Inlining of new-style constructors with initializers
 		if compiler.modelbuilder.toolcontext.opt_direct_call_monomorph.value and rta != null and callsite.mpropdef.initializers.is_empty then
 			var tgs = rta.live_targets(callsite)
 			if tgs.length == 1 then
-				# DIRECT CALL
-				var res0 = before_send(mmethod, args)
-				var res = call(tgs.first, tgs.first.mclassdef.bound_mtype, args)
-				if res0 != null then
-					assert res != null
-					self.assign(res0, res)
-					res = res0
-				end
-				add("\}") # close the before_send
-				return res
+				return direct_call(tgs.first, args)
 			end
 		end
+		# Shortcut intern methods as they are not usually redefinable
+		if callsite.mpropdef.is_intern and callsite.mproperty.name != "object_id" then
+			# `object_id` is the only redefined intern method, so it can not be directly called.
+			# TODO find a less ugly approach?
+			return direct_call(callsite.mpropdef, args)
+		end
 		return super
+	end
+
+	# Fully and directly call a mpropdef
+	#
+	# This method is used by `compile_callsite`
+	private fun direct_call(mpropdef: MMethodDef, args: Array[RuntimeVariable]): nullable RuntimeVariable
+	do
+		var res0 = before_send(mpropdef.mproperty, args)
+		var res = call(mpropdef, mpropdef.mclassdef.bound_mtype, args)
+		if res0 != null then
+			assert res != null
+			self.assign(res0, res)
+			res = res0
+		end
+		add("\}") # close the before_send
+		return res
 	end
 	redef fun send(mmethod, arguments)
 	do
@@ -1852,7 +1864,10 @@ class SeparateCompilerVisitor
 		var nclass = self.get_class("NativeArray")
 		var recv = "((struct instance_{nclass.c_name}*){arguments[0]})->values"
 		if pname == "[]" then
-			self.ret(self.new_expr("{recv}[{arguments[1]}]", ret_type.as(not null)))
+			# Because the objects are boxed, return the box to avoid unnecessary (or broken) unboxing/reboxing
+			var res = self.new_expr("{recv}[{arguments[1]}]", compiler.mainmodule.object_type)
+			res.mcasttype = ret_type.as(not null)
+			self.ret(res)
 			return
 		else if pname == "[]=" then
 			self.add("{recv}[{arguments[1]}]={arguments[2]};")
