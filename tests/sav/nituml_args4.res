@@ -30,6 +30,11 @@ Discrete [
 ]
 Comparable -> Discrete [dir=back arrowtail=open style=dashed];
 
+Cloneable [
+ label = "{interface\nCloneable||+ clone(): SELF\l}"
+]
+Object -> Cloneable [dir=back arrowtail=open style=dashed];
+
 Numeric [
  label = "{interface\nNumeric||+ +(i: OTHER): OTHER\l+ -(i: OTHER): OTHER\l+ unary -(): OTHER\l+ *(i: OTHER): OTHER\l+ /(i: OTHER): OTHER\l+ to_i(): Int\l+ to_f(): Float\l+ is_zero(): Bool\l+ zero(): OTHER\l+ value_of(val: Numeric): OTHER\l}"
 ]

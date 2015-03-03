@@ -466,6 +466,30 @@ interface MapRead[K, V]
 	# Note: the value is returned *as is*, implementations may want to store the value in the map before returning it
 	# @toimplement
 	protected fun provide_default_value(key: K): V do abort
+
+	# Does `self` and `other` have the same keys associated with the same values?
+	#
+	# ~~~
+	# var a = new HashMap[String, Int]
+	# var b = new ArrayMap[Object, Numeric]
+	# assert a == b
+	# a["one"] = 1
+	# assert a != b
+	# b["one"] = 1
+	# assert a == b
+	# b["one"] = 2
+	# assert a != b
+	# ~~~
+	redef fun ==(other)
+	do
+		if not other isa MapRead[nullable Object, nullable Object] then return false
+		if other.length != self.length then return false
+		for k, v in self do
+			if not other.has_key(k) then return false
+			if other[k] != v then return false
+		end
+		return true
+	end
 end
 
 # Maps are associative collections: `key` -> `item`.
