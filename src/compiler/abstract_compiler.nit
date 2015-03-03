@@ -1443,7 +1443,7 @@ abstract class AbstractCompilerVisitor
 		var name = self.get_name("varonce")
 		self.add_decl("static {mtype.ctype} {name};")
 		var res = self.new_var(mtype)
-		self.add("if ({name}) \{")
+		self.add("if (likely({name}!=NULL)) \{")
 		self.add("{res} = {name};")
 		self.add("\} else \{")
 		var native_mtype = self.get_class("NativeString").mclass_type
@@ -2823,7 +2823,7 @@ redef class AOnceExpr
 		v.add_decl("static {mtype.ctype} {name};")
 		v.add_decl("static int {guard};")
 		var res = v.new_var(mtype)
-		v.add("if ({guard}) \{")
+		v.add("if (likely({guard})) \{")
 		v.add("{res} = {name};")
 		v.add("\} else \{")
 		var i = v.expr(self.n_expr, mtype)
