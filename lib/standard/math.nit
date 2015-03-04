@@ -195,7 +195,7 @@ redef class Float
 	#     assert -1.34.round == -1.0
 	#     assert -1.67.round == -2.0
 	fun round: Float is extern "round"
-	
+
 	# Returns a random `Float` in `[0.0 .. self[`.
 	fun rand: Float is extern "kernel_Float_Float_rand_0"
 
@@ -220,6 +220,16 @@ redef class Float
 	end
 
 	private fun is_inf_extern: Bool is extern "isinf"
+
+	# Linear interpolation between `a` and `b` using `self` as weight
+	#
+	# ~~~
+	# assert  0.0.lerp(0.0, 128.0) == 0.0
+	# assert  0.5.lerp(0.0, 128.0) == 64.0
+	# assert  1.0.lerp(0.0, 128.0) == 128.0
+	# assert -0.5.lerp(0.0, 128.0) == -64.0
+	# ~~~
+	fun lerp(a, b: Float): Float do return (1.0 - self) * a + self * b
 end
 
 redef class Collection[ E ]
