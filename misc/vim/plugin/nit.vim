@@ -131,10 +131,10 @@ fun NitOmnifuncAddFromFile(base, matches, path)
 		if name == a:base
 			" Exact match
 			call NitOmnifuncAddAMatch(a:matches, words, name)
-		elseif name =~ '^'.a:base
+		elseif name =~? '^'.a:base
 			" Common-prefix match
 			call NitOmnifuncAddAMatch(prefix_matches, words, name)
-		elseif name =~ a:base
+		elseif name =~? a:base
 			" Substring match
 			call NitOmnifuncAddAMatch(substring_matches, words, name)
 		endif
