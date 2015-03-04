@@ -238,6 +238,15 @@ redef class Collection[ E ]
 	end
 end
 
+redef class SequenceRead[E]
+	# Optimized for large collections using `[]`
+	redef fun rand
+	do
+		assert not is_empty
+		return self[length.rand]
+	end
+end
+
 redef class Sys
 	init
 	do
