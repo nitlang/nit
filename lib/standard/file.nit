@@ -999,6 +999,7 @@ end
 redef class Sys
 
 	init do
+		super
 		if stdout isa FileStream then stdout.as(FileStream).set_buffering_mode(256, buffer_mode_line)
 	end
 
