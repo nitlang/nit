@@ -254,6 +254,7 @@ class Stdout
 		_file = new NativeFile.native_stdout
 		path = "/dev/stdout"
 		_is_writable = true
+		set_buffering_mode(256, sys.buffer_mode_line)
 	end
 end
 
@@ -997,10 +998,6 @@ private extern class NativeFile `{ FILE* `}
 end
 
 redef class Sys
-
-	init do
-		if stdout isa FileStream then stdout.as(FileStream).set_buffering_mode(256, buffer_mode_line)
-	end
 
 	# Standard input
 	var stdin: PollableReader = new Stdin is protected writable
