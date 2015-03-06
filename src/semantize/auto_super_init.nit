@@ -102,6 +102,7 @@ redef class AMethPropdef
 		if not mpropdef.is_intro then
 			auto_super_call = true
 			mpropdef.has_supercall = true
+			modelbuilder.toolcontext.info("Auto-super call for {mpropdef}", 4)
 			return
 		end
 
@@ -136,6 +137,7 @@ redef class AMethPropdef
 
 			var callsite = new CallSite(self, recvtype, mmodule, anchor, true, candidate, candidatedef, msignature, false)
 			auto_super_inits.add(callsite)
+			modelbuilder.toolcontext.info("Old-style auto-super init for {mpropdef} to {candidate.full_name}", 4)
 		end
 
 		# No old style? The look for new-style super constructors (called from a old style constructor)
@@ -170,6 +172,7 @@ redef class AMethPropdef
 
 			var callsite = new CallSite(self, recvtype, mmodule, anchor, true, the_root_init_mmethod, candidatedef, msignature, false)
 			auto_super_inits.add(callsite)
+			modelbuilder.toolcontext.info("Auto-super init for {mpropdef} to {the_root_init_mmethod.full_name}", 4)
 		end
 		if auto_super_inits.is_empty then
 			modelbuilder.error(self, "Error: No constructors to call implicitely in {mpropdef}. Call one explicitely.")
