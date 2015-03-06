@@ -416,7 +416,14 @@ interface MapRead[K, V]
 		return default
 	end
 
-	# Alias for `keys.has`
+	# Is there an item associated with `key`?
+	#
+	#     var x = new HashMap[String, Int]
+	#     x["four"] = 4
+	#     assert x.has_key("four") == true
+	#     assert x.has_key("five") == false
+	#
+	# By default it is a synonymous to `keys.has` but could be redefined with a direct implementation.
 	fun has_key(key: K): Bool do return self.keys.has(key)
 
 	# Get a new iterator on the map.
@@ -987,6 +994,8 @@ interface CoupleMap[K, V]
 			return c.second
 		end
 	end
+
+	redef fun has_key(key) do return couple_at(key) != null
 end
 
 # Iterator on CoupleMap

@@ -274,6 +274,7 @@ class HashMap[K, V]
 
 	redef var keys: RemovableCollection[K] = new HashMapKeys[K, V](self)
 	redef var values: RemovableCollection[V] = new HashMapValues[K, V](self)
+	redef fun has_key(k) do return node_at(k) != null
 end
 
 # View of the keys of a HashMap
