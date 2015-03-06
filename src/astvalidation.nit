@@ -22,9 +22,7 @@ class ASTValidationVisitor
 	super Visitor
 	redef fun visit(node)
 	do
-		path.unshift(node)
 		node.accept_ast_validation(self)
-		path.shift
 	end
 	private var path = new List[ANode]
 	private var seen = new HashSet[ANode]
@@ -34,29 +32,33 @@ redef class ANode
 	private fun accept_ast_validation(v: ASTValidationVisitor)
 	do
 		var parent = self.parent
+		var path = v.path
 
-		if v.path.length > 1 then
-			var path_parent = v.path[1]
+		if path.length > 0 then
+			var path_parent = v.path.first
 			if parent == null then
 				self.parent = path_parent
 				#debug "PARENT: expected parent: {path_parent}"
+				v.seen.add(self)
 			else if parent != path_parent then
 				self.parent = path_parent
-				debug "PARENT: expected parent: {path_parent}, got {parent}"
+				if v.seen.has(self) then
+					debug "DUPLICATE (NOTATREE): already seen node with parent {parent} now with {path_parent}."
+				else
+					v.seen.add(self)
+					debug "PARENT: expected parent: {path_parent}, got {parent}"
+				end
 			end
 		end
-
-		if v.seen.has(self) then
-			debug "DUPLICATE: already seen node. NOTATREE"
-		end
-		v.seen.add(self)
 
 		if not isset _location then
 			#debug "LOCATION: unlocated node {v.path.join(", ")}"
 			_location = self.parent.location
 		end
 
+		path.unshift(self)
 		visit_all(v)
+		path.shift
 	end
 end
 
