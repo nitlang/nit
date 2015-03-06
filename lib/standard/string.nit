@@ -1614,6 +1614,20 @@ class FlatBuffer
 	# Create a new empty string.
 	init do end
 
+	# Low-level creation a new buffer with given data.
+	#
+	# `items` will be used as is, without copy, to store the characters of the buffer.
+	# Aliasing issues is the responsibility of the caller.
+	#
+	# If `items` is shared, `written` should be set to true after the creation
+	# so that a modification will do a copy-on-write.
+	private init with_infos(items: NativeString, capacity, length: Int)
+	do
+		self.items = items
+		self.length = length
+		self.capacity = capacity
+	end
+
 	# Create a new string copied from `s`.
 	init from(s: Text)
 	do
@@ -1638,7 +1652,6 @@ class FlatBuffer
 	init with_capacity(cap: Int)
 	do
 		assert cap >= 0
-		# _items = new NativeString.calloc(cap)
 		items = new NativeString(cap+1)
 		capacity = cap
 		length = 0
@@ -1682,11 +1695,10 @@ class FlatBuffer
 		if from < 0 then from = 0
 		if count > length then count = length
 		if from < count then
-			var r = new FlatBuffer.with_capacity(count - from)
-			while from < count do
-				r.chars.push(items[from])
-				from += 1
-			end
+			var len = count - from
+			var r_items = new NativeString(len)
+			items.copy_to(r_items, len, from, 0)
+			var r = new FlatBuffer.with_infos(r_items, len, len)
 			return r
 		else
 			return new FlatBuffer
