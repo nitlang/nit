@@ -618,8 +618,8 @@ class ArrayMap[K, E]
 		end
 	end
 
-	redef var keys: RemovableCollection[K] = new ArrayMapKeys[K, E](self)
-	redef var values: RemovableCollection[E] = new ArrayMapValues[K, E](self)
+	redef var keys: RemovableCollection[K] = new ArrayMapKeys[K, E](self) is lazy
+	redef var values: RemovableCollection[E] = new ArrayMapValues[K, E](self) is lazy
 
 	# O(1)
 	redef fun length do return _items.length
