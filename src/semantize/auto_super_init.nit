@@ -71,9 +71,6 @@ redef class AMethPropdef
 			return
 		end
 
-		# FIXME: THIS IS STUPID (be here to keep the old code working)
-		if not mpropdef.mclassdef.is_intro then return
-
 		# Do we inherit for a constructor?
 		var skip = true
 		for cd in mclassdef.in_hierarchy.direct_greaters do
