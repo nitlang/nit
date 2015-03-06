@@ -1052,7 +1052,7 @@ class FlatString
 	# Indes in _items of the last item of the string
 	private var index_to: Int is noinit
 
-	redef var chars: SequenceRead[Char] = new FlatStringCharView(self)
+	redef var chars: SequenceRead[Char] = new FlatStringCharView(self) is lazy
 
 	redef fun [](index)
 	do
@@ -1522,7 +1522,7 @@ class FlatBuffer
 	super FlatText
 	super Buffer
 
-	redef var chars: Sequence[Char] = new FlatBufferCharView(self)
+	redef var chars: Sequence[Char] = new FlatBufferCharView(self) is lazy
 
 	private var capacity: Int = 0
 
