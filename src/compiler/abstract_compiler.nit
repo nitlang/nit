@@ -2304,7 +2304,7 @@ redef class AAttrPropdef
 
 	fun init_expr(v: AbstractCompilerVisitor, recv: RuntimeVariable)
 	do
-		if has_value and not is_lazy then evaluate_expr(v, recv)
+		if has_value and not is_lazy and not n_expr isa ANullExpr then evaluate_expr(v, recv)
 	end
 
 	# Evaluate, store and return the default value of the attribute
