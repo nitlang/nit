@@ -1000,13 +1000,13 @@ end
 redef class Sys
 
 	# Standard input
-	var stdin: PollableReader = new Stdin is protected writable
+	var stdin: PollableReader = new Stdin is protected writable, lazy
 
 	# Standard output
-	var stdout: Writer = new Stdout is protected writable
+	var stdout: Writer = new Stdout is protected writable, lazy
 
 	# Standard output for errors
-	var stderr: Writer = new Stderr is protected writable
+	var stderr: Writer = new Stderr is protected writable, lazy
 
 	# Enumeration for buffer mode full (flushes when buffer is full)
 	fun buffer_mode_full: Int is extern "file_Sys_Sys_buffer_mode_full_0"
