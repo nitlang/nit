@@ -350,12 +350,12 @@ abstract class Text
 	#
 	#     assert " \n\thello \n\t".l_trim == "hello \n\t"
 	#
-	# A whitespace is defined as any character which ascii value is less than or equal to 32
+	# `Char::is_whitespace` determines what is a whitespace.
 	fun l_trim: SELFTYPE
 	do
 		var iter = self.chars.iterator
 		while iter.is_ok do
-			if iter.item.ascii > 32 then break
+			if not iter.item.is_whitespace then break
 			iter.next
 		end
 		if iter.index == length then return self.empty
@@ -366,12 +366,12 @@ abstract class Text
 	#
 	#     assert " \n\thello \n\t".r_trim == " \n\thello"
 	#
-	# A whitespace is defined as any character which ascii value is less than or equal to 32
+	# `Char::is_whitespace` determines what is a whitespace.
 	fun r_trim: SELFTYPE
 	do
 		var iter = self.chars.reverse_iterator
 		while iter.is_ok do
-			if iter.item.ascii > 32 then break
+			if not iter.item.is_whitespace then break
 			iter.next
 		end
 		if iter.index < 0 then return self.empty
@@ -379,11 +379,28 @@ abstract class Text
 	end
 
 	# Trims trailing and preceding white spaces
-	# A whitespace is defined as any character which ascii value is less than or equal to 32
 	#
 	#     assert "  Hello  World !  ".trim   == "Hello  World !"
 	#     assert "\na\nb\tc\t".trim          == "a\nb\tc"
+	#
+	# `Char::is_whitespace` determines what is a whitespace.
 	fun trim: SELFTYPE do return (self.l_trim).r_trim
+
+	# Is the string non-empty but only made of whitespaces?
+	#
+	#    assert " \n\t ".is_whitespace    == true
+	#    assert "  hello  ".is_whitespace == false
+	#    assert "".is_whitespace          == false
+	#
+	# `Char::is_whitespace` determines what is a whitespace.
+	fun is_whitespace: Bool
+	do
+		if is_empty then return false
+		for c in self.chars do
+			if not c.is_whitespace then return false
+		end
+		return true
+	end
 
 	# Returns `self` removed from its last line terminator (if any).
 	#

@@ -718,6 +718,22 @@ universal Char
 	do
 		return is_lower or is_upper
 	end
+
+	# Is self a whitespace character?
+	#
+	# These correspond to the "Other" and "Separator" groups of the Unicode.
+	#
+	# In the ASCII encoding, this is those <= to space (0x20) plus delete (0x7F).
+	#
+	#     assert 'A'.is_whitespace  == false
+	#     assert ','.is_whitespace  == false
+	#     assert ' '.is_whitespace  == true
+	#     assert '\t'.is_whitespace == true
+	fun is_whitespace: Bool
+	do
+		var i = ascii
+		return i <= 0x20 or i == 0x7F
+	end
 end
 
 # Pointer classes are used to manipulate extern C structures.
