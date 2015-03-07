@@ -130,7 +130,20 @@ abstract class AbstractArrayRead[E]
 		end
 	end
 
-	redef fun iterator: ArrayIterator[E] do return new ArrayIterator[E](self)
+	redef fun iterator: ArrayIterator[E] do
+		var res = _free_iterator
+		if res == null then return new ArrayIterator[E](self)
+		res._index = 0
+		_free_iterator = null
+		return res
+	end
+
+	# An old iterator, free to reuse.
+	# Once an iterator is `finish`, it become reusable.
+	# Since some arrays are iterated a lot, this avoid most of the
+	# continuous allocation/garbage-collection of the needed iterators.
+	private var free_iterator: nullable ArrayIterator[E] = null
+
 	redef fun reverse_iterator do return new ArrayReverseIterator[E](self)
 end
 
@@ -477,6 +490,8 @@ private class ArrayIterator[E]
 	redef var index = 0
 
 	var array: AbstractArrayRead[E]
+
+	redef fun finish do _array._free_iterator = self
 end
 
 private class ArrayReverseIterator[E]
