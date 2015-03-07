@@ -254,6 +254,7 @@ class Stdout
 		_file = new NativeFile.native_stdout
 		path = "/dev/stdout"
 		_is_writable = true
+		set_buffering_mode(256, sys.buffer_mode_line)
 	end
 end
 
@@ -998,18 +999,14 @@ end
 
 redef class Sys
 
-	init do
-		if stdout isa FileStream then stdout.as(FileStream).set_buffering_mode(256, buffer_mode_line)
-	end
-
 	# Standard input
-	var stdin: PollableReader = new Stdin is protected writable
+	var stdin: PollableReader = new Stdin is protected writable, lazy
 
 	# Standard output
-	var stdout: Writer = new Stdout is protected writable
+	var stdout: Writer = new Stdout is protected writable, lazy
 
 	# Standard output for errors
-	var stderr: Writer = new Stderr is protected writable
+	var stderr: Writer = new Stderr is protected writable, lazy
 
 	# Enumeration for buffer mode full (flushes when buffer is full)
 	fun buffer_mode_full: Int is extern "file_Sys_Sys_buffer_mode_full_0"
