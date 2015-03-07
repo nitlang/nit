@@ -110,7 +110,6 @@ redef class ToolContext
 
 			for phase in phases do
 				if phase.disabled then continue
-				self.info(" phase: {phase}", 3)
 				assert phase.toolcontext == self
 				var errcount = self.error_count
 				phase.process_nmodule(nmodule)

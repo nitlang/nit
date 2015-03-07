@@ -149,20 +149,37 @@ class POSet[E]
 		# Update the transitive reduction
 		if te.tos.has(f) then return # Skip the reduction if there is a loop
 
-		for x in te.dfroms.to_a do
+		# Remove transitive edges.
+		# Because the sets of direct is iterated, the list of edges to remove
+		# is stored and is applied after the iteration.
+		# The usual case is that no direct edges need to be removed,
+		# so start with a `null` list of edges.
+		var to_remove: nullable Array[E] = null
+		for x in te.dfroms do
 			var xe = self.elements[x]
 			if xe.tos.has(f) then
-				te.dfroms.remove(x)
+				if to_remove == null then to_remove = new Array[E]
+				to_remove.add x
 				xe.dtos.remove(t)
 			end
 		end
-		for x in fe.dtos.to_a do
+		if to_remove != null then
+			for x in to_remove do te.dfroms.remove(x)
+			to_remove.clear
+		end
+
+		for x in fe.dtos do
 			var xe = self.elements[x]
 			if xe.froms.has(t) then
 				xe.dfroms.remove(f)
-				fe.dtos.remove(x)
+				if to_remove == null then to_remove = new Array[E]
+				to_remove.add x
 			end
 		end
+		if to_remove != null then
+			for x in to_remove do fe.dtos.remove(x)
+		end
+
 		fe.dtos.add t
 		te.dfroms.add f
 	end
