@@ -253,6 +253,63 @@ fun NitOmnifunc(findstart, base)
 	endif
 endfun
 
+" Show doc for the entity under the cursor in the preview window
+fun Nitdoc()
+	" Word under cursor
+	let word = expand("<cword>")
+
+	" All possible docs (there may be more than one entity with the same name)
+	let docs = []
+
+	" Search in all metadata files
+	for file in ['modules', 'classes', 'properties']
+		let path = NitMetadataFile(file.'.txt')
+		if empty(path)
+			continue
+		endif
+
+		for line in readfile(path)
+			let words = split(line, '#====#', 1)
+			let name = get(words, 0, '')
+			if name =~ '^' . word
+				" It fits our word, get long doc
+				let desc = get(words,3,'')
+				let desc = join(split(desc, '#nnnn#', 1), "\n")
+				call add(docs, desc)
+			endif
+		endfor
+	endfor
+
+	" Found no doc, give up
+	if empty(docs) || !(join(docs, '') =~ '\w')
+		return
+	endif
+
+	" Open the preview window on a temp file
+	execute "silent pedit " . tempname()
+
+	" Change to preview window
+	wincmd P
+
+	" Show all found doc one after another
+	for doc in docs
+		if doc =~ '\w'
+			silent put = doc
+			silent put = ''
+		endif
+	endfor
+
+	" Set options
+	setlocal buftype=nofile
+	setlocal noswapfile
+	setlocal syntax=none
+	setlocal bufhidden=delete
+
+	" Change back to the source buffer
+	wincmd p
+	redraw!
+endfun
+
 " Activate the omnifunc on Nit files
 autocmd FileType nit set omnifunc=NitOmnifunc
 
