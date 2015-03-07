@@ -81,6 +81,32 @@ function ForceNitComplete()
 	call NitComplete()
 endfunction
 
+" Get path to the best metadata file named `name`
+"
+" Returns an empty string if not found.
+fun NitMetadataFile(name)
+	" Where are the generated metadata files?
+	if empty($NIT_VIM_DIR)
+		let metadata_dir = $HOME . '/.vim/nit'
+	else
+		let metadata_dir = $NIT_VIM_DIR
+	end
+
+	let path = metadata_dir . '/' . a:name
+
+	" Is there generated custom metadata files?
+	if ! filereadable(path)
+		let path = s:script_dir . '/' . a:name
+
+		" Is there standard metadata files?
+		if ! filereadable(path)
+			return ''
+		endif
+	endif
+
+	return path
+endfun
+
 " Internal function to search for lines in `path` corresponding to the partial
 " word `base`. Adds found and formated match to `matches`.
 "
@@ -92,22 +118,9 @@ fun NitOmnifuncAddFromFile(base, matches, path)
 	let prefix_matches = []
 	let substring_matches = []
 
-	" Where are the generated metadata files?
-	if empty($NIT_VIM_DIR)
-		let metadata_dir = $HOME . '/.vim/nit'
-	else
-		let metadata_dir = $NIT_VIM_DIR
-	end
-
-	let path = metadata_dir . '/' . a:path
-	" Is there generated custom metadata files?
-	if ! filereadable(path)
-		let path = s:script_dir . '/' . a:path
-
-		" Is there standard metadata files?
-		if ! filereadable(path)
-			return
-		endif
+	let path = NitMetadataFile(a:path)
+	if empty(path)
+		return
 	endif
 
 	for line in readfile(path)
@@ -159,10 +172,10 @@ fun NitOmnifunc(findstart, base)
 		" find keyword matching with "a:base"
 		let matches = []
 
-		" Advanced suggestions
+		" advanced suggestions
 		let cursor_line = getline('.')
 
-		" Content of the line before the partial word
+		" content of the line before the partial word
 		let line_prev_cursor = cursor_line[:col('.')-1]
 
 		let prev_char_at = strlen(line_prev_cursor) - 1
