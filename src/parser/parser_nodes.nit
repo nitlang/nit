@@ -1598,7 +1598,7 @@ class ALabel
 	var n_kwlabel: TKwlabel is writable, noinit
 
 	# The name of the label, if any
-	var n_id: nullable TId is writable
+	var n_id: nullable TId is writable, noinit
 end
 
 # Expression and statements
@@ -2222,7 +2222,7 @@ class ASelfExpr
 	super AExpr
 
 	# The `self` keyword
-	var n_kwself: nullable TKwself is writable
+	var n_kwself: nullable TKwself = null is writable
 end
 
 # When there is no explicit receiver, `self` is implicit
