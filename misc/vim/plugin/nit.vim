@@ -310,6 +310,32 @@ fun Nitdoc()
 	redraw!
 endfun
 
+" Call `git grep` on the word under the cursor
+"
+" Shows declarations first, then all matches, in the preview window.
+fun NitGitGrep()
+	let word = expand("<cword>")
+	let out = tempname()
+	execute 'silent !(git grep "\\(module\\|class\\|universal\\|interface\\|var\\|fun\\) '.word.'";'.
+		\'echo; git grep '.word.') > '.out
+
+	" Open the preview window on a temp file
+	execute "silent pedit " . out
+
+	" Change to preview window
+	wincmd P
+
+	" Set options
+	setlocal buftype=nofile
+	setlocal noswapfile
+	setlocal syntax=none
+	setlocal bufhidden=delete
+
+	" Change back to the source buffer
+	wincmd p
+	redraw!
+endfun
+
 " Activate the omnifunc on Nit files
 autocmd FileType nit set omnifunc=NitOmnifunc
 
