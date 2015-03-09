@@ -110,13 +110,17 @@ endfun
 " Internal function to search for lines in `path` corresponding to the partial
 " word `base`. Adds found and formated match to `matches`.
 "
-" Will order the results in 3 levels:
+" Will order the results in 5 levels:
 " 1. Exact matches
 " 2. Common prefix matches
 " 3. Substring matches
+" 4. Synopsis matches
+" 5. Doc matches
 fun NitOmnifuncAddFromFile(base, matches, path)
 	let prefix_matches = []
 	let substring_matches = []
+	let synopsis_matches = []
+	let doc_matches = []
 
 	let path = NitMetadataFile(a:path)
 	if empty(path)
@@ -137,12 +141,20 @@ fun NitOmnifuncAddFromFile(base, matches, path)
 		elseif name =~? a:base
 			" Substring match
 			call NitOmnifuncAddAMatch(substring_matches, words, name)
+		elseif get(words, 2, '') =~? a:base
+			" Match in the synopsis
+			call NitOmnifuncAddAMatch(synopsis_matches, words, name)
+		elseif get(words, 3, '') =~? a:base
+			" Match in the longer doc
+			call NitOmnifuncAddAMatch(synopsis_matches, words, name)
 		endif
 	endfor
 
 	" Assemble the final match list
 	call extend(a:matches, sort(prefix_matches))
 	call extend(a:matches, sort(substring_matches))
+	call extend(a:matches, sort(synopsis_matches))
+	call extend(a:matches, sort(doc_matches))
 endfun
 
 " Internal function to search parse the information from a metadata line
