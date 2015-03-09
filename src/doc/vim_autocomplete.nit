@@ -78,6 +78,7 @@ redef class MEntity
 			for i in 2.times do stream.write line_separator
 			stream.write mdoc.content.join(line_separator)
 		end
+		write_extra_doc(mainmodule, stream)
 
 		stream.write "\n"
 	end
@@ -89,6 +90,9 @@ redef class MEntity
 
 	# Doc to use in completion
 	private fun complete_mdoc: nullable MDoc do return mdoc
+
+	# Extra auto documentation to append to the `stream`
+	private fun write_extra_doc(mainmodule: MModule, stream: Writer) do end
 end
 
 redef class MMethodDef
@@ -145,6 +149,82 @@ redef class MClassDef
 		end
 
 		return mdoc
+	end
+end
+
+redef class MClassType
+	redef fun write_extra_doc(mainmodule, stream)
+	do
+		# Super classes
+		stream.write line_separator*2
+		stream.write "## Class hierarchy"
+
+		var direct_supers = [for s in mclass.in_hierarchy(mainmodule).direct_greaters do s.name]
+		if not direct_supers.is_empty then
+			alpha_comparator.sort direct_supers
+			stream.write line_separator
+			stream.write "* Direct super classes: "
+			stream.write direct_supers.join(", ")
+		end
+
+		var supers = [for s in mclass.in_hierarchy(mainmodule).greaters do s.name]
+		supers.remove mclass.name
+		if not supers.is_empty then
+			alpha_comparator.sort supers
+			stream.write line_separator
+			stream.write "* All super classes: "
+			stream.write supers.join(", ")
+		end
+
+		var direct_subs = [for s in mclass.in_hierarchy(mainmodule).direct_smallers do s.name]
+		if not direct_subs.is_empty then
+			alpha_comparator.sort direct_subs
+			stream.write line_separator
+			stream.write "* Direct sub classes: "
+			stream.write direct_subs.join(", ")
+		end
+
+		var subs = [for s in mclass.in_hierarchy(mainmodule).smallers do s.name]
+		subs.remove mclass.name
+		if not subs.is_empty then
+			alpha_comparator.sort subs
+			stream.write line_separator
+			stream.write "* All sub classes: "
+			stream.write subs.join(", ")
+		end
+
+		# List other properties
+		stream.write line_separator*2
+		stream.write "## Properties"
+		stream.write line_separator
+		var props = mclass.all_mproperties(mainmodule, protected_visibility).to_a
+		alpha_comparator.sort props
+		for prop in props do
+			if mclass.name == "Object" or prop.intro.mclassdef.mclass.name != "Object" then
+
+				if prop.visibility == public_visibility then
+					stream.write "+ "
+				else stream.write "~ " # protected_visibility
+
+				if prop isa MMethod then
+					if prop.is_init and prop.name != "init" then stream.write "init "
+					if prop.is_new and prop.name != "new" then stream.write "new "
+				end
+
+				stream.write prop.name
+
+				if prop isa MMethod then
+					stream.write prop.intro.msignature.to_s
+				end
+
+				var mdoc = prop.intro.mdoc
+				if mdoc != null then
+					stream.write "  # "
+					stream.write mdoc.content.first
+				end
+				stream.write line_separator
+			end
+		end
 	end
 end
 
