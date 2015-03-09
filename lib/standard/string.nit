@@ -1163,10 +1163,14 @@ class FlatString
 	#              String Specific Methods           #
 	##################################################
 
-	private init with_infos(items: NativeString, len: Int, from: Int, to: Int)
+	# Low-level creation of a new string with given data.
+	#
+	# `items` will be used as is, without copy, to retrieve the characters of the string.
+	# Aliasing issues is the responsibility of the caller.
+	private init with_infos(items: NativeString, length: Int, from: Int, to: Int)
 	do
 		self.items = items
-		length = len
+		self.length = length
 		index_from = from
 		index_to = to
 	end
