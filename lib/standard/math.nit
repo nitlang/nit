@@ -167,11 +167,17 @@ redef class Float
 	#     #assert 0.0.pow(9.0) == 0.0
 	fun pow(e: Float): Float is extern "kernel_Float_Float_pow_1"
 
-	# Returns the logarithm of `self`.
+	# Natural logarithm of `self`.
 	#
 	#     assert 0.0.log.is_inf == -1
 	#     #assert 1.0.log == 0.0
 	fun log: Float is extern "kernel_Float_Float_log_0"
+
+	# Logarithm of `self` to base `base`.
+	#
+	#     assert 100.0.log_base(10.0) == 2.0
+	#     assert 256.0.log_base(2.0) == 8.0
+	fun log_base(base: Float): Float do return log/base.log
 
 	# Returns *e* raised to `self`.
 	fun exp: Float is extern "kernel_Float_Float_exp_0"
