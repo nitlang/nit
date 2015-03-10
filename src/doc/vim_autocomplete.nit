@@ -52,7 +52,7 @@ redef class MEntity
 	private fun field_separator: String do return "#====#"
 	private fun line_separator: String do return "#nnnn#"
 
-	private fun write_to_stream(stream: Writer)
+	private fun write_doc(mainmodule: MModule, stream: Writer)
 	do
 		# 1. Short name for autocompletion
 		stream.write complete_name
@@ -168,7 +168,7 @@ private class AutocompletePhase
 		# Got all known modules
 		var model = mainmodule.model
 		for mmodule in model.mmodules do
-			mmodule.write_to_stream modules_stream
+			mmodule.write_doc(mainmodule, modules_stream)
 		end
 
 		# TODO list other modules from the Nit lib
@@ -184,15 +184,15 @@ private class AutocompletePhase
 				for prop in mclass.all_mproperties(mainmodule, public_visibility) do
 					if prop isa MMethod and prop.is_init then
 						mclass_intro.target_constructor = prop.intro
-						mclass_intro.write_to_stream constructors_stream
+						mclass_intro.write_doc(mainmodule, constructors_stream)
 					end
 				end
 				mclass_intro.target_constructor = null
 			end
 
 			# Always add to types and classes
-			mclass.mclass_type.write_to_stream classes_stream
-			mclass.mclass_type.write_to_stream types_stream
+			mclass.mclass_type.write_doc(mainmodule, classes_stream)
+			mclass.mclass_type.write_doc(mainmodule, types_stream)
 		end
 
 		# Get all known properties
@@ -202,7 +202,7 @@ private class AutocompletePhase
 
 			# Is it a virtual type?
 			if mproperty isa MVirtualTypeProp then
-				mproperty.intro.write_to_stream types_stream
+				mproperty.intro.write_doc(mainmodule, types_stream)
 				continue
 			end
 
@@ -210,7 +210,7 @@ private class AutocompletePhase
 			var first_letter = mproperty.name.chars.first
 			if first_letter == '@' or first_letter == '_' then continue
 
-			mproperty.intro.write_to_stream properties_stream
+			mproperty.intro.write_doc(mainmodule, properties_stream)
 		end
 
 		# Close streams
