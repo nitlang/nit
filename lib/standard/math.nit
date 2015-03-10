@@ -167,11 +167,17 @@ redef class Float
 	#     #assert 0.0.pow(9.0) == 0.0
 	fun pow(e: Float): Float is extern "kernel_Float_Float_pow_1"
 
-	# Returns the logarithm of `self`.
+	# Natural logarithm of `self`.
 	#
 	#     assert 0.0.log.is_inf == -1
 	#     #assert 1.0.log == 0.0
 	fun log: Float is extern "kernel_Float_Float_log_0"
+
+	# Logarithm of `self` to base `base`.
+	#
+	#     assert 100.0.log_base(10.0) == 2.0
+	#     assert 256.0.log_base(2.0) == 8.0
+	fun log_base(base: Float): Float do return log/base.log
 
 	# Returns *e* raised to `self`.
 	fun exp: Float is extern "kernel_Float_Float_exp_0"
@@ -195,7 +201,7 @@ redef class Float
 	#     assert -1.34.round == -1.0
 	#     assert -1.67.round == -2.0
 	fun round: Float is extern "round"
-	
+
 	# Returns a random `Float` in `[0.0 .. self[`.
 	fun rand: Float is extern "kernel_Float_Float_rand_0"
 
@@ -220,6 +226,16 @@ redef class Float
 	end
 
 	private fun is_inf_extern: Bool is extern "isinf"
+
+	# Linear interpolation between `a` and `b` using `self` as weight
+	#
+	# ~~~
+	# assert  0.0.lerp(0.0, 128.0) == 0.0
+	# assert  0.5.lerp(0.0, 128.0) == 64.0
+	# assert  1.0.lerp(0.0, 128.0) == 128.0
+	# assert -0.5.lerp(0.0, 128.0) == -64.0
+	# ~~~
+	fun lerp(a, b: Float): Float do return (1.0 - self) * a + self * b
 end
 
 redef class Collection[ E ]
@@ -235,6 +251,15 @@ redef class Collection[ E ]
 			rand_index -= 1
 		end
 		abort
+	end
+end
+
+redef class SequenceRead[E]
+	# Optimized for large collections using `[]`
+	redef fun rand
+	do
+		assert not is_empty
+		return self[length.rand]
 	end
 end
 
