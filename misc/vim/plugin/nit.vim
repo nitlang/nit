@@ -283,7 +283,7 @@ fun Nitdoc()
 		for line in readfile(path)
 			let words = split(line, '#====#', 1)
 			let name = get(words, 0, '')
-			if name =~ '^' . word
+			if name =~ '^' . word . '\>'
 				" It fits our word, get long doc
 				let desc = get(words,3,'')
 				let desc = join(split(desc, '#nnnn#', 1), "\n")
