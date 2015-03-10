@@ -17,7 +17,7 @@ module tileset
 
 import mnit_display
 
-# Efficienly retrieve tiles in a big image
+# Efficiently retrieve tiles in a big image
 class TileSet
 	# The image containing the tileset
 	var image: Image
@@ -63,20 +63,20 @@ end
 class TileSetFont
 	super TileSet
 
-	# Each caracter in the image
+	# Each character in the image
 	# in left->right, then top->bottom order
 	# Use space (' ') for holes in the tileset
 	var chars: String
 
 	# Additional space to insert horizontally between characters
-	# A negave value will display tile overlaped
+	# A negative value will display tile overlapped
 	var hspace: Numeric = 0.0 is writable
 
 	# Additional space to insert vertically between characters
-	# A negave value will display tile overlaped
+	# A negative value will display tile overlapped
 	var vspace: Numeric = 0.0 is writable
 
-	# The glyph (tile) associated to the caracter `c` according to `chars`
+	# The glyph (tile) associated to the character `c` according to `chars`
 	# Returns null if `c` is not in `chars`
 	fun char(c: Char): nullable Image
 	do
