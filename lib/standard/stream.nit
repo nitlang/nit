@@ -404,6 +404,7 @@ abstract class BufferedReader
 		if _buffer_pos + i >= _buffer.length then
 			var from = _buffer_pos
 			_buffer_pos = _buffer.length
+			if from == 0 then return _buffer.to_s
 			return _buffer.substring_from(from).to_s
 		end
 		_buffer_pos += i
