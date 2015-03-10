@@ -226,6 +226,8 @@ redef class MClassType
 			end
 		end
 	end
+
+	redef fun complete_mdoc do return mclass.intro.mdoc
 end
 
 private class AutocompletePhase
