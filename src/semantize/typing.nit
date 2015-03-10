@@ -597,6 +597,8 @@ end
 redef class AAttrPropdef
 	redef fun do_typing(modelbuilder: ModelBuilder)
 	do
+		if not has_value then return
+
 		var mpropdef = self.mpropdef.as(not null)
 		var v = new TypeVisitor(modelbuilder, mpropdef.mclassdef.mmodule, mpropdef)
 		self.selfvariable = v.selfvariable

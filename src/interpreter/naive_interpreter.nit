@@ -413,6 +413,14 @@ class NaiveInterpreter
 		var val = mpropdef.constant_value
 
 		var node = modelbuilder.mpropdef2node(mpropdef)
+		if mpropdef.is_abstract then
+			if node != null then
+				self.frames.unshift new Frame(node, mpropdef, args)
+			end
+			fatal("Abstract method `{mpropdef.mproperty.name}` called on `{args.first.mtype}`")
+			abort
+		end
+
 		if node isa APropdef then
 			self.parameter_check(node, mpropdef, args)
 			return node.call(self, mpropdef, args)
@@ -723,11 +731,6 @@ redef class AMethPropdef
 			var variable = self.n_signature.n_params[i].variable
 			assert variable != null
 			v.write_variable(variable, arguments[i+1])
-		end
-
-		if mpropdef.is_abstract then
-			v.fatal("Abstract method `{mpropdef.mproperty.name}` called on `{arguments.first.mtype}`")
-			abort
 		end
 
 		# Call the implicit super-init
@@ -1163,7 +1166,9 @@ redef class AAttrPropdef
 			evaluate_expr(v, recv)
 			return
 		end
-		var mtype = self.mpropdef.static_mtype.as(not null)
+		var mpropdef = self.mpropdef
+		if mpropdef == null then return
+		var mtype = mpropdef.static_mtype.as(not null)
 		mtype = mtype.anchor_to(v.mainmodule, recv.mtype.as(MClassType))
 		if mtype isa MNullableType then
 			v.write_attribute(self.mpropdef.mproperty, recv, v.null_instance)
