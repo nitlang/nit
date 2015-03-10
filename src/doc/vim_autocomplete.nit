@@ -71,10 +71,10 @@ redef class MEntity
 
 		# 4. Full doc with extra
 		stream.write field_separator
+		stream.write "# "
+		stream.write full_name
+		write_signature_to_stream(stream)
 		if mdoc != null then
-			stream.write "# "
-			stream.write full_name
-			write_signature_to_stream(stream)
 			for i in 2.times do stream.write line_separator
 			stream.write mdoc.content.join(line_separator)
 		end

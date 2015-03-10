@@ -37,6 +37,8 @@ Ensure that `~/.vimrc` contains
  * Automatic indentation
  * Syntax checker (require [Syntastic][2]).
  * Autocomplete for whole projects using module importations
+ * Show documentation in preview window
+ * Search declarations and usages of the word under the cursor
 
   [2]: https://github.com/scrooloose/syntastic
 
@@ -93,3 +95,25 @@ will use general metadata in the plugin directory.
 
 The metadata files from nitpick are stored in `~/.vim/nit/`. This location can be customized with
 the environment variable `NIT_VIM_DIR`.
+
+## Documentation in preview window
+
+You can display the documentation for the entity under the cursor with `:call Nitdoc()`.
+It will use the same metadata files as the omnifunc and the preview window.
+You may want to map the function to a shortcut by adding the following code to `~/.vimrc`.
+
+~~~
+" Map displaying Nitdoc to Ctrl-D
+map <C-d> :call Nitdoc()<enter>
+~~~
+
+## Search declarations and usages of the word under the cursor
+
+The function `NitGitGrep` calls `git grep` to find declarations and usages of the word under the cursor.
+It displays the results in the preview window.
+You may want to map the function to a shortcut by adding the following code to `~/.vimrc`.
+
+~~~
+" Map the NitGitGrep function to Ctrl-G
+map <C-g> :call NitGitGrep()<enter>
+~~~
