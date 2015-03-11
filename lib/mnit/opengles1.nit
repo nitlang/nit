@@ -123,7 +123,8 @@ in "C" `{
 			PRINT_ERROR("error loading image after glTexImage2D: %i", mnit_opengles_error_code);
 		}
 
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 
 		if ((mnit_opengles_error_code = glGetError()) != GL_NO_ERROR) {
 			PRINT_ERROR("error loading image after gtTexParameter: %i", mnit_opengles_error_code);
