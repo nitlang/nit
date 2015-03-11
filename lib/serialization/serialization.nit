@@ -14,20 +14,52 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Offers services to serialize a Nit objects to different persistent formats
+# Abstract services to serialize Nit objects to different formats
+#
+# This module declares the `auto_serializable` annotation to mark Nit classes as serializable.
+# For an introduction to this service, refer to the documentation of the `serialization` group.
+# This documentation provides more technical information on interesting entitie of this module.
+#
+# Interesting entities for end users of serializable classes:
+#
+# * Serialize an instance subclass of `Serializable` with either
+#   `Serializer::serializable` and `Serializable::serialize`.
+# * Deserialize an object using `Deserializer::deserialize`.
+#   The object type must the be checked with an `assert` or otherwise.
+#
+# Interesting entities to create custom serializable classes:
+#
+# * Subclass `Serializable` to declare a class as serializable and to customize
+#   the serialization and deserialization behavior.
+# * Redefine `Serializable::core_serialize_to` to customize the serialization
+#   of the receiver class.
+# * Redefine `Deserializer::deserialize_class` to customize the deserialization
+#   of a specific class by name.
+#
+# Interesting entities for serialization format:
+#
+# * Subclass `Serializer` and `Deserializer` with custom serices.
+# * In `Serializer`, `serialize` and `serialize_reference` must be redefined.
+# * In `Deserializer`; `deserialize`, `deserialize_attribute and
+#   `notify_of_creation` must be redefined.
 module serialization is
 	new_annotation auto_serializable
 end
 
 # Abstract serialization service to be sub-classed by specialized services.
 interface Serializer
-	# Main method of this service, serialize the `object`
+	# Entry point method of this service, serialize the `object`
+	#
+	# This method, and refinements, should handle `null` and probably
+	# use double dispatch to customize the bahavior per serializable objects.
 	fun serialize(object: nullable Serializable) is abstract
 
-	# Serialize an object as a "possible" reference, depending of the service
 	fun serialize_reference(object: Serializable) is abstract
+	# Serialize an object, with full serialization or a simple reference
 
-	# Serialize an attribute, used by `Serializable::core_serialize_to`
+	# Serialize an attribute to compose a serializable object
+	#
+	# This method should be called from `Serializable::core_serialize_to`.
 	fun serialize_attribute(name: String, value: nullable Object)
 	do
 		if not try_to_serialize(value) then
@@ -65,8 +97,13 @@ interface Deserializer
 	# to be implemented by sub-classes
 	fun notify_of_creation(new_object: Object) is abstract
 
-	# Mainly generated method to return the next instance of the givent
-	# class by name
+	# Deserialize the next available object as an instance of `class_name`
+	#
+	# Returns the deserialized object on success, aborts on error.
+	#
+	# This method should be redefined for each custom subclass of `Serializable`.
+	# All refinement should look for a precise `class_name` and call super
+	# on unsupported classes.
 	fun deserialize_class(class_name: String): Object do
 		print "Error: doesn't know how to deserialize class \"{class_name}\""
 		abort
@@ -75,15 +112,28 @@ end
 
 # Instances of this class can be passed to `Serializer::serialize`
 interface Serializable
-	# Full or true serialization
-	fun serialize_to(v: Serializer) do v.serialize(self)
+	# Serialize `self` to `serializer`
+	#
+	# This is a shortcut to `Serializer::serialize`.
+	fun serialize_to(serializer: Serializer) do serializer.serialize(self)
 
-	# Body of the serialization of this class
-	# Can be redefed in sub classes and refinements
-	fun core_serialize_to(v: Serializer) do end
+	# Actual serialization of `self` to `serializer`
+	#
+	# This writes the full data of `self` to `serializer`.
+	#
+	# This method can be redefined in sub classes and refinements.
+	# It should use `Serializer::serialize_attribute` to to register real or
+	# logical attributes.
+	#
+	# Any refinement should have its equivalent refinement of
+	# `Deserializer::deserialize_class` to support this custom deserialization.
+	fun core_serialize_to(serializer: Serializer) do end
 
-	# Whether full serialization (calls `serialize_to`) or place only references
-	fun serialize_to_or_delay(v: Serializer) do v.serialize_reference(self)
+	# Accept references or force direct serialization (using `serialize_to`)
+	#
+	# The subclass change the default behavior, which will accept references,
+	# to force to always serialize copies of `self`.
+	private fun serialize_to_or_delay(v: Serializer) do v.serialize_reference(self)
 end
 
 # Instances of this class are not delayed and instead serialized immediately
