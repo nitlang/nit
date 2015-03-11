@@ -54,8 +54,8 @@ interface Serializer
 	# use double dispatch to customize the bahavior per serializable objects.
 	fun serialize(object: nullable Serializable) is abstract
 
-	fun serialize_reference(object: Serializable) is abstract
 	# Serialize an object, with full serialization or a simple reference
+	protected fun serialize_reference(object: Serializable) is abstract
 
 	# Serialize an attribute to compose a serializable object
 	#
