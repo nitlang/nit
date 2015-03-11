@@ -102,7 +102,7 @@ class JsonDeserializer
 
 		assert current.keys.has(name)
 		var value = current[name]
-		
+
 		return convert_object(value)
 	end
 
@@ -164,7 +164,7 @@ class JsonDeserializer
 				assert val isa String
 
 				if val.length != 1 then print "Error: expected a single char when deserializing '{val}'."
-				
+
 				return val.chars.first
 			end
 
