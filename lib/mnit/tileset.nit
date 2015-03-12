@@ -17,7 +17,7 @@ module tileset
 
 import mnit_display
 
-# Efficienly retrieve tiles in a big image
+# Efficiently retrieve tiles in a big image
 class TileSet
 	# The image containing the tileset
 	var image: Image
@@ -63,26 +63,50 @@ end
 class TileSetFont
 	super TileSet
 
-	# Each caracter in the image
+	# Each character in the image
 	# in left->right, then top->bottom order
 	# Use space (' ') for holes in the tileset
 	var chars: String
 
 	# Additional space to insert horizontally between characters
-	# A negave value will display tile overlaped
+	# A negative value will display tile overlapped
 	var hspace: Numeric = 0.0 is writable
 
 	# Additional space to insert vertically between characters
-	# A negave value will display tile overlaped
+	# A negative value will display tile overlapped
 	var vspace: Numeric = 0.0 is writable
 
-	# The glyph (tile) associated to the caracter `c` according to `chars`
+	# The glyph (tile) associated to the character `c` according to `chars`
 	# Returns null if `c` is not in `chars`
 	fun char(c: Char): nullable Image
 	do
 		var i = chars.index_of(c)
 		if i == -1 then return null
 		return subimages[i]
+	end
+
+	# Distance between the beginning of a letter tile and the beginning of the next letter tile
+	fun advance: Numeric do return width.add(hspace)
+
+	# Distance between the beginning and the end of the longest line of `text`
+	fun text_width(text: String): Numeric
+	do
+		var lines = text.split('\n')
+		if lines.is_empty then return 0
+
+		var longest = 0
+		for line in lines do longest = longest.max(line.length)
+
+		return longest.mul(advance)
+	end
+
+	# Distance between the top of the first line to the bottom of the last line in `text`
+	fun text_height(text: Text): Numeric
+	do
+		if text.is_empty then return 0
+
+		var n_lines = text.chars.count('\n')
+		return (n_lines+1).mul(height.add(vspace)).sub(vspace)
 	end
 end
 

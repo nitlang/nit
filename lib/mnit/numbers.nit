@@ -24,8 +24,6 @@ class NumberImages
 
 	# Images from 0 to 9
 	var imgs: Array[Image]
-
-	private init(imgs: Array[Image]) do self.imgs = imgs
 end
 
 redef class App
