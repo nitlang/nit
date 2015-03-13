@@ -115,7 +115,7 @@ class NaiveInterpreter
 
 	# Is a return executed?
 	# Set this mark to skip the evaluation until the end of the specified method frame
-	var returnmark: nullable Frame = null
+	var returnmark: nullable FRAME = null
 
 	# Is a break or a continue executed?
 	# Set this mark to skip the evaluation until a labeled statement catch it with `is_escape`
@@ -283,11 +283,14 @@ class NaiveInterpreter
 		return res
 	end
 
+	# The virtual type of the frames used in the execution engine
+	type FRAME: Frame
+
 	# The current frame used to store local variables of the current method executed
-	fun frame: Frame do return frames.first
+	fun frame: FRAME do return frames.first
 
 	# The stack of all frames. The first one is the current one.
-	var frames = new List[Frame]
+	var frames = new List[FRAME]
 
 	# Return a stack trace. One line per function
 	fun stack_trace: String
