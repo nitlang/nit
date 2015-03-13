@@ -317,6 +317,15 @@ class NaiveInterpreter
 		return frames.first.arguments.first.mtype.as(MClassType)
 	end
 
+	# Initialize the environment for a call and return a new Frame
+	# *`node` The AST node
+	# *`mpropdef` The corresponding mpropdef
+	# *`args` Arguments of the call
+	fun new_frame(node: ANode, mpropdef: MPropDef, args: Array[Instance]): FRAME
+	do
+		return new Frame(node, mpropdef, args)
+	end
+
 	# Exit the program with a message
 	fun fatal(message: String)
 	do
@@ -418,7 +427,7 @@ class NaiveInterpreter
 		var node = modelbuilder.mpropdef2node(mpropdef)
 		if mpropdef.is_abstract then
 			if node != null then
-				self.frames.unshift new Frame(node, mpropdef, args)
+				self.frames.unshift new_frame(node, mpropdef, args)
 			end
 			fatal("Abstract method `{mpropdef.mproperty.name}` called on `{args.first.mtype}`")
 			abort
@@ -714,7 +723,7 @@ redef class AMethPropdef
 
 	redef fun call(v, mpropdef, args)
 	do
-		var f = new Frame(self, self.mpropdef.as(not null), args)
+		var f = v.new_frame(self, mpropdef, args)
 		var res = call_commons(v, mpropdef, args, f)
 		v.frames.shift
 		if v.returnmark == f then
@@ -1151,7 +1160,8 @@ redef class AAttrPropdef
 		if mpropdef == mreadpropdef then
 			assert args.length == 1
 			if not is_lazy or v.isset_attribute(attr, recv) then return v.read_attribute(attr, recv)
-			return evaluate_expr(v, recv)
+			var f = v.new_frame(self, mpropdef, args)
+			return evaluate_expr(v, recv, f)
 		else if mpropdef == mwritepropdef then
 			assert args.length == 2
 			v.write_attribute(attr, recv, args[1])
@@ -1166,7 +1176,8 @@ redef class AAttrPropdef
 	do
 		if is_lazy then return
 		if has_value then
-			evaluate_expr(v, recv)
+			var f = v.new_frame(self, mpropdef.as(not null), [recv])
+			evaluate_expr(v, recv, f)
 			return
 		end
 		var mpropdef = self.mpropdef
@@ -1178,10 +1189,9 @@ redef class AAttrPropdef
 		end
 	end
 
-	private fun evaluate_expr(v: NaiveInterpreter, recv: Instance): Instance
+	private fun evaluate_expr(v: NaiveInterpreter, recv: Instance, f: Frame): Instance
 	do
 		assert recv isa MutableInstance
-		var f = new Frame(self, self.mpropdef.as(not null), [recv])
 		v.frames.unshift(f)
 
 		var val
