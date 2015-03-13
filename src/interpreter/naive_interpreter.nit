@@ -323,7 +323,7 @@ class NaiveInterpreter
 	# *`args` Arguments of the call
 	fun new_frame(node: ANode, mpropdef: MPropDef, args: Array[Instance]): FRAME
 	do
-		return new Frame(node, mpropdef, args)
+		return new InterpreterFrame(node, mpropdef, args)
 	end
 
 	# Exit the program with a message
@@ -352,14 +352,14 @@ class NaiveInterpreter
 	# Retrieve the value of the variable in the current frame
 	fun read_variable(v: Variable): Instance
 	do
-		var f = frames.first
+		var f = frames.first.as(InterpreterFrame)
 		return f.map[v]
 	end
 
 	# Assign the value of the variable in the current frame
 	fun write_variable(v: Variable, value: Instance)
 	do
-		var f = frames.first
+		var f = frames.first.as(InterpreterFrame)
 		f.map[v] = value
 	end
 
@@ -679,7 +679,7 @@ class PrimitiveInstance[E]
 end
 
 # Information about local variables in a running method
-class Frame
+abstract class Frame
 	# The current visited node
 	# The node is stored by frame to keep a stack trace
 	var current_node: ANode
@@ -688,9 +688,16 @@ class Frame
 	var mpropdef: MPropDef
 	# Arguments of the method (the first is the receiver)
 	var arguments: Array[Instance]
+	# Indicate if the expression has an array comprehension form
+	var comprehension: nullable Array[Instance] = null
+end
+
+# Implementation of a Frame with a Hashmap to store local variables
+class InterpreterFrame
+	super Frame
+
 	# Mapping between a variable and the current value
 	private var map: Map[Variable, Instance] = new HashMap[Variable, Instance]
-	var comprehension: nullable Array[Instance] = null
 end
 
 redef class ANode

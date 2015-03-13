@@ -225,7 +225,7 @@ class Debugger
 	# Auto continues the execution until the end or until an error is encountered
 	var autocontinue = false
 
-	redef type FRAME: Frame
+	redef type FRAME: InterpreterFrame
 
 	#######################################################################
 	##                  Execution of statement function                  ##
@@ -1411,7 +1411,7 @@ redef class AMethPropdef
 	# Not supposed to be used by anyone else than the Debugger.
 	private fun rt_call(v: Debugger, mpropdef: MMethodDef, args: Array[Instance]): nullable Instance
 	do
-		var f = new Frame(self, self.mpropdef.as(not null), args)
+		var f = new InterpreterFrame(self, self.mpropdef.as(not null), args)
 		var curr_instances = v.frame.map
 		for i in curr_instances.keys do
 			f.map[i] = curr_instances[i]

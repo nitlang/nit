@@ -21,6 +21,9 @@ import vm
 
 redef class VirtualMachine
 
+	# The frames of the VirtualMachine are specialized
+	redef type FRAME: VmFrame
+
 	# Number the variables in `n`.
 	# Do nothing if `n` is null
 	fun numbering(n: nullable AExpr, position: Int): Int
@@ -30,11 +33,59 @@ redef class VirtualMachine
 		var pos = n.numbering(self, position)
 		return pos
 	end
+
+	# Redef to add the numbering of variables and arguments
+	redef fun new_frame(node, mpropdef, args)
+	do
+		var f = new VmFrame(node, mpropdef, args)
+
+		# If this Frame is for a method then number variables into the body of the method
+		if node isa AMethPropdef then
+			# Number the variables
+			if not node.is_numbering then node.numbering_variables(self, mpropdef.as(MMethodDef))
+
+			# Create an empty environment
+			f.variables = new Array[Instance].filled_with(initialization_value, node.environment_size)
+		end
+
+		# If this Frame is for an attribute with a block then number the block
+		if node isa AAttrPropdef then
+			# Number the variables
+			if not node.is_numbering then node.numbering_variables(self)
+
+			# Create an empty environment
+			f.variables = new Array[Instance].filled_with(initialization_value, node.environment_size)
+		end
+
+		# Putting self at the beginning of the environment
+		f.variables[0] = args[0]
+		return f
+	end
+
+	# Read a `Variable` from a frame by using its position
+	redef fun read_variable(v: Variable): Instance
+	do
+		return frame.variables[v.position]
+	end
+
+	# Assign the value of the `Variable` in an environment
+	redef fun write_variable(v: Variable, value: Instance)
+	do
+		frame.variables[v.position] = value
+	end
 end
 
 redef class Variable
 	# The position in the environment
 	var position: Int
+end
+
+# Implementation of a Frame with numbered variables
+class VmFrame
+	super Frame
+
+	# Contains the value of Variables (which are numbered)
+	var variables: Array[Instance] = new Array[Instance]
 end
 
 redef class AExpr
