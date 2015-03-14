@@ -65,6 +65,12 @@ var page = new HTMLTag("testsuites")
 
 if toolcontext.opt_full.value then mmodules = model.mmodules
 
+for a in args do
+	var g = modelbuilder.get_mgroup(a)
+	if g == null then continue
+	page.add modelbuilder.test_group(g)
+end
+
 for m in mmodules do
 	page.add modelbuilder.test_markdown(m)
 	page.add modelbuilder.test_unit(m)

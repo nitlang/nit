@@ -404,4 +404,38 @@ redef class ModelBuilder
 
 		return ts
 	end
+
+	# Extracts and executes all the docunits in the readme of the `mgroup`
+	# Returns a JUnit-compatible `<testsuite>` XML element that contains the results of the executions.
+	fun test_group(mgroup: MGroup): HTMLTag
+	do
+		var ts = new HTMLTag("testsuite")
+		toolcontext.info("nitunit: doc-unit group {mgroup}", 2)
+
+		# usually, only the default module must be imported in the unit test.
+		var o = mgroup.default_mmodule
+
+		ts.attr("package", mgroup.full_name)
+
+		var prefix = toolcontext.test_dir
+		prefix = prefix.join_path(mgroup.to_s)
+		var d2m = new NitUnitExecutor(toolcontext, prefix, o, ts)
+
+		var tc
+
+		total_entities += 1
+		var mdoc = mgroup.mdoc
+		if mdoc == null then return ts
+
+		doc_entities += 1
+		tc = new HTMLTag("testcase")
+		# NOTE: jenkins expects a '.' in the classname attr
+		tc.attr("classname", "nitunit." + mgroup.full_name)
+		tc.attr("name", "<group>")
+		d2m.extract(mdoc, tc)
+
+		d2m.run_tests
+
+		return ts
+	end
 end
