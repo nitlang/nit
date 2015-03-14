@@ -455,6 +455,26 @@ redef class ModelBuilder
 		return nmodule
 	end
 
+	# Remove Nit source files from a list of arguments.
+	#
+	# Items of `args` that can be loaded as a nit file will be removed from `args` and returned.
+	fun filter_nit_source(args: Array[String]): Array[String]
+	do
+		var keep = new Array[String]
+		var res = new Array[String]
+		for a in args do
+			var l = identify_file(a)
+			if l == null then
+				keep.add a
+			else
+				res.add a
+			end
+		end
+		args.clear
+		args.add_all(keep)
+		return res
+	end
+
 	# Try to load a module using a path.
 	# Display an error if there is a problem (IO / lexer / parser) and return null.
 	# Note: usually, you do not need this method, use `get_mmodule_by_name` instead.
