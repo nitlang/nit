@@ -53,7 +53,9 @@ end
 var model = new Model
 var modelbuilder = new ModelBuilder(model, toolcontext)
 
-var mmodules = modelbuilder.parse_full(args)
+var module_files = modelbuilder.filter_nit_source(args)
+
+var mmodules = modelbuilder.parse_full(module_files)
 modelbuilder.run_phases
 
 if toolcontext.opt_gen_unit.value then
@@ -66,6 +68,15 @@ var page = new HTMLTag("testsuites")
 if toolcontext.opt_full.value then mmodules = model.mmodules
 
 for a in args do
+	if not a.file_exists then
+		toolcontext.fatal_error(null, "Error: cannot load file or module `{a}`.")
+	end
+	# Try to load the file as a markdown document
+	var mdoc = modelbuilder.load_markdown(a)
+	page.add modelbuilder.test_mdoc(mdoc)
+end
+
+for a in module_files do
 	var g = modelbuilder.get_mgroup(a)
 	if g == null then continue
 	page.add modelbuilder.test_group(g)

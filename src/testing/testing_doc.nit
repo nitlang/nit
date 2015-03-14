@@ -438,4 +438,33 @@ redef class ModelBuilder
 
 		return ts
 	end
+
+	# Test a document object unrelated to a Nit entity
+	fun test_mdoc(mdoc: MDoc): HTMLTag
+	do
+		var ts = new HTMLTag("testsuite")
+		var file = mdoc.location.to_s
+
+		toolcontext.info("nitunit: doc-unit file {file}", 2)
+
+		ts.attr("package", file)
+
+		var prefix = toolcontext.test_dir / "file"
+		var d2m = new NitUnitExecutor(toolcontext, prefix, null, ts)
+
+		var tc
+
+		total_entities += 1
+		doc_entities += 1
+
+		tc = new HTMLTag("testcase")
+		# NOTE: jenkins expects a '.' in the classname attr
+		tc.attr("classname", "nitunit.<file>")
+		tc.attr("name", file)
+
+		d2m.extract(mdoc, tc)
+		d2m.run_tests
+
+		return ts
+	end
 end
