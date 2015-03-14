@@ -497,6 +497,25 @@ interface MapRead[K, V]
 		end
 		return true
 	end
+
+	# A hashcode based on the hashcode of the keys and the values.
+	#
+	# ~~~
+	# var a = new HashMap[String, Int]
+	# var b = new ArrayMap[Object, Numeric]
+	# a["one"] = 1
+	# b["one"] = 1
+	# assert a.hash == b.hash
+	# ~~~
+	redef fun hash
+	do
+		var res = length
+		for k, v in self do
+			if k != null then res += k.hash * 7
+			if v != null then res += v.hash * 11
+		end
+		return res
+	end
 end
 
 # Maps are associative collections: `key` -> `item`.
