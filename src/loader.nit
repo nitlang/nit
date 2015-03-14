@@ -385,17 +385,24 @@ redef class ModelBuilder
 		var readme = dirpath2.join_path("README.md")
 		if not readme.file_exists then readme = dirpath2.join_path("README")
 		if readme.file_exists then
-			var mdoc = new MDoc(new Location(new SourceFile.from_string(readme, ""),0,0,0,0))
-			var s = new FileReader.open(readme)
-			while not s.eof do
-				mdoc.content.add(s.read_line)
-			end
+			var mdoc = load_markdown(readme)
 			mgroup.mdoc = mdoc
 			mdoc.original_mentity = mgroup
 		end
 		mgroup.filepath = dirpath
 		mgroups[rdp] = mgroup
 		return mgroup
+	end
+
+	# Load a markdown file as a documentation object
+	fun load_markdown(filepath: String): MDoc
+	do
+		var mdoc = new MDoc(new Location(new SourceFile.from_string(filepath, ""),0,0,0,0))
+		var s = new FileReader.open(filepath)
+		while not s.eof do
+			mdoc.content.add(s.read_line)
+		end
+		return mdoc
 	end
 
 	# Force the identification of all ModulePath of the group and sub-groups.
