@@ -144,11 +144,7 @@ class NitUnitExecutor
 		var dir = file.dirname
 		if dir != "" then dir.mkdir
 		var f
-		f = new FileWriter.open(file)
-		f.write("# GENERATED FILE\n")
-		f.write("# Docunits extracted from comments\n")
-		f.write("import {mmodule.name}\n")
-		f.write("\n")
+		f = create_unitfile(file)
 		var i = 0
 		for du in dus do
 
@@ -166,14 +162,7 @@ class NitUnitExecutor
 
 		if toolcontext.opt_noact.value then return
 
-		var nit_dir = toolcontext.nit_dir
-		var nitg = nit_dir/"bin/nitg"
-		if not nitg.file_exists then
-			toolcontext.error(null, "Cannot find nitg. Set envvar NIT_DIR.")
-			toolcontext.check_errors
-		end
-		var cmd = "{nitg} --ignore-visibility --no-color '{file}' -I {mmodule.location.file.filename.dirname} >'{file}.out1' 2>&1 </dev/null -o '{file}.bin'"
-		var res = sys.system(cmd)
+		var res = compile_unitfile(file)
 
 		if res != 0 then
 			# Compilation error.
@@ -229,27 +218,14 @@ class NitUnitExecutor
 
 		toolcontext.info("Execute doc-unit {tc.attrs["name"]} in {file}", 1)
 
-		var dir = file.dirname
-		if dir != "" then dir.mkdir
 		var f
-		f = new FileWriter.open(file)
-		f.write("# GENERATED FILE\n")
-		f.write("# Example extracted from a documentation\n")
-		f.write("import {mmodule.name}\n")
-		f.write("\n")
+		f = create_unitfile(file)
 		f.write(du.block)
 		f.close
 
 		if toolcontext.opt_noact.value then return
 
-		var nit_dir = toolcontext.nit_dir
-		var nitg = nit_dir/"bin/nitg"
-		if not nitg.file_exists then
-			toolcontext.error(null, "Cannot find nitg. Set envvar NIT_DIR.")
-			toolcontext.check_errors
-		end
-		var cmd = "{nitg} --ignore-visibility --no-color '{file}' -I {mmodule.location.file.filename.dirname} >'{file}.out1' 2>&1 </dev/null -o '{file}.bin'"
-		var res = sys.system(cmd)
+		var res = compile_unitfile(file)
 		var res2 = 0
 		if res == 0 then
 			res2 = sys.system("{file.to_program_name}.bin >>'{file}.out1' 2>&1 </dev/null")
@@ -284,6 +260,43 @@ class NitUnitExecutor
 		toolcontext.check_errors
 
 		testsuite.add(tc)
+	end
+
+	# Create and fill the header of a unit file `file`.
+	#
+	# A unit file is a Nit source file generated from one
+	# or more docunits that will be compiled and executed.
+	#
+	# The handled on the file is returned and must be completed and closed.
+	#
+	# `file` should be a valid filepath for a Nit source file.
+	private fun create_unitfile(file: String): Writer
+	do
+		var dir = file.dirname
+		if dir != "" then dir.mkdir
+		var f
+		f = new FileWriter.open(file)
+		f.write("# GENERATED FILE\n")
+		f.write("# Docunits extracted from comments\n")
+		f.write("import {mmodule.name}\n")
+		f.write("\n")
+		return f
+	end
+
+	# Compile an unit file and return the compiler return code
+	#
+	# Can terminate the program if the compiler is not found
+	private fun compile_unitfile(file: String): Int
+	do
+		var nit_dir = toolcontext.nit_dir
+		var nitg = nit_dir/"bin/nitg"
+		if not nitg.file_exists then
+			toolcontext.error(null, "Cannot find nitg. Set envvar NIT_DIR.")
+			toolcontext.check_errors
+		end
+		var cmd = "{nitg} --ignore-visibility --no-color '{file}' -I {mmodule.location.file.filename.dirname} >'{file}.out1' 2>&1 </dev/null -o '{file}.bin'"
+		var res = sys.system(cmd)
+		return res
 	end
 end
 
