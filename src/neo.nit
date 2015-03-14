@@ -365,7 +365,10 @@ class NeoModel
 		node.labels.add "MEntity"
 		node.labels.add model_name
 		node["name"] = mentity.name
-		if mentity.mdoc != null then node["mdoc"] = new JsonArray.from(mentity.mdoc.content)
+		if mentity.mdoc != null then
+			node["mdoc"] = new JsonArray.from(mentity.mdoc.content)
+			node["mdoc_location"] = mentity.mdoc.location.to_s
+		end
 		return node
 	end
 
@@ -867,6 +870,9 @@ class NeoModel
 		#TODO filepath
 		var parts = loc.split_with(":")
 		var file = new SourceFile.from_string(parts[0], "")
+		if parts.length == 1 then
+			return new Location(file, 0, 0, 0, 0)
+		end
 		var pos = parts[1].split_with("--")
 		var pos1 = pos[0].split_with(",")
 		var pos2 = pos[1].split_with(",")
@@ -919,7 +925,8 @@ class NeoModel
 			for e in node["mdoc"].as(JsonArray) do
 				lines.add e.to_s#.replace("\n", "\\n")
 			end
-			var mdoc = new MDoc
+			var location = to_location(node["mdoc_location"].to_s)
+			var mdoc = new MDoc(location)
 			mdoc.content.add_all(lines)
 			mdoc.original_mentity = mentity
 			mentity.mdoc = mdoc
