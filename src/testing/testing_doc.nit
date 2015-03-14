@@ -25,8 +25,8 @@ class NitUnitExecutor
 	# The prefix of the generated Nit source-file
 	var prefix: String
 
-	# The module to import
-	var mmodule: MModule
+	# The module to import, if any
+	var mmodule: nullable MModule
 
 	# The XML node associated to the module
 	var testsuite: HTMLTag
@@ -278,7 +278,9 @@ class NitUnitExecutor
 		f = new FileWriter.open(file)
 		f.write("# GENERATED FILE\n")
 		f.write("# Docunits extracted from comments\n")
-		f.write("import {mmodule.name}\n")
+		if mmodule != null then
+			f.write("import {mmodule.name}\n")
+		end
 		f.write("\n")
 		return f
 	end
@@ -294,7 +296,11 @@ class NitUnitExecutor
 			toolcontext.error(null, "Cannot find nitg. Set envvar NIT_DIR.")
 			toolcontext.check_errors
 		end
-		var cmd = "{nitg} --ignore-visibility --no-color '{file}' -I {mmodule.location.file.filename.dirname} >'{file}.out1' 2>&1 </dev/null -o '{file}.bin'"
+		var opts = new Array[String]
+		if mmodule != null then
+			opts.add "-I {mmodule.location.file.filename.dirname}"
+		end
+		var cmd = "{nitg} --ignore-visibility --no-color '{file}' {opts.join(" ")} >'{file}.out1' 2>&1 </dev/null -o '{file}.bin'"
 		var res = sys.system(cmd)
 		return res
 	end
@@ -302,8 +308,8 @@ end
 
 # A unit-test to run
 class DocUnit
-	# The original comment node
-	var ndoc: ADoc
+	# The doc that contains self
+	var mdoc: MDoc
 
 	# The XML node that contains the information about the execution
 	var testcase: HTMLTag
