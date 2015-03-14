@@ -42,6 +42,14 @@ private class DerivingPhase
 				generate_inspect_method(nclassdef)
 			end
 		end
+
+		if nat.name == "auto_derive" then
+			if not nclassdef isa AStdClassdef then
+				toolcontext.error(nclassdef.location, "Syntax error: only a concrete class can be `{nat.name}`.")
+			else
+				generate_derive_to_map_method(nclassdef, nat)
+			end
+		end
 	end
 
 	fun generate_inspect_method(nclassdef: AClassdef)
@@ -60,6 +68,31 @@ private class DerivingPhase
 		end
 
 		code.add "	res += \">\""
+		code.add "	return res"
+		code.add "end"
+
+		# Create method Node and add it to the AST
+		npropdefs.push(toolcontext.parse_propdef(code.join("\n")))
+	end
+
+	fun generate_derive_to_map_method(nclassdef: AClassdef, nat: AAnnotation)
+	do
+		var npropdefs = nclassdef.n_propdefs
+
+		var sc = toolcontext.parse_superclass("Derivable")
+		sc.location = nat.location
+		nclassdef.n_propdefs.add sc
+
+		var code = new Array[String]
+		code.add "redef fun derive_to_map"
+		code.add "do"
+		code.add "	var res = super"
+
+		for attribute in npropdefs do if attribute isa AAttrPropdef then
+			var name = attribute.n_id2.text
+			code.add """	res["{{{name}}}"] = self.{{{name}}}"""
+		end
+
 		code.add "	return res"
 		code.add "end"
 
