@@ -466,7 +466,11 @@ redef class ModelBuilder
 		# Look for the module
 		var file = identify_file(filename)
 		if file == null then
-			toolcontext.error(null, "Error: cannot find module `{filename}`.")
+			if filename.file_exists then
+				toolcontext.error(null, "Error: `{filename}` is not a Nit source file.")
+			else
+				toolcontext.error(null, "Error: cannot find module `{filename}`.")
+			end
 			return null
 		end
 
