@@ -4,3 +4,4 @@ test_nitunit.nit --gen-suite --only-show --private
 test_nitunit2.nit -o $WRITE
 test_doc2.nit --no-color -o $WRITE
 test_nitunit3 --no-color -o $WRITE
+test_nitunit_md.md --no-color -o $WRITE
