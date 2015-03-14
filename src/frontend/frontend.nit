@@ -22,6 +22,7 @@ import modelize
 import semantize
 import div_by_zero
 import serialization_phase
+import deriving
 import check_annotation
 import glsl_validation
 
