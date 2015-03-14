@@ -375,7 +375,7 @@ redef class ADoc
 	do
 		var res = mdoc_cache
 		if res != null then return res
-		res = new MDoc
+		res = new MDoc(location)
 		for c in n_comment do
 			var text = c.text
 			if text.length < 2 then

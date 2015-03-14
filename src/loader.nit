@@ -385,7 +385,7 @@ redef class ModelBuilder
 		var readme = dirpath2.join_path("README.md")
 		if not readme.file_exists then readme = dirpath2.join_path("README")
 		if readme.file_exists then
-			var mdoc = new MDoc
+			var mdoc = new MDoc(new Location(new SourceFile.from_string(readme, ""),0,0,0,0))
 			var s = new FileReader.open(readme)
 			while not s.eof do
 				mdoc.content.add(s.read_line)

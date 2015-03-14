@@ -16,6 +16,7 @@
 module mdoc
 
 import model_base
+import location
 
 # Structured documentation of a `MEntity` object
 class MDoc
@@ -27,6 +28,9 @@ class MDoc
 	# The entity where the documentation is originally attached to.
 	# This gives some context to resolve identifiers or to run examples.
 	var original_mentity: nullable MEntity = null is writable
+
+	# The original location of the doc for error messages
+	var location: Location
 end
 
 redef class MEntity
