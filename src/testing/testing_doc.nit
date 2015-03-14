@@ -57,8 +57,8 @@ class NitUnitExecutor
 		if not (ast isa AModule or ast isa ABlockExpr or ast isa AExpr) then
 			var message = ""
 			if ast isa AError then message = " At {ast.location}: {ast.message}."
-			toolcontext.warning(ndoc.location, "invalid-block", "Error: There is a block of code that is not valid Nit, thus not considered a nitunit. To suppress this warning, enclose the block with a fence tagged `nitish` or `raw` (see `man nitdoc`).{message}")
-			failures.add("{ndoc.location}: Invalid block of code.{message}")
+			toolcontext.warning(mdoc.location, "invalid-block", "Error: There is a block of code that is not valid Nit, thus not considered a nitunit. To suppress this warning, enclose the block with a fence tagged `nitish` or `raw` (see `man nitdoc`).{message}")
+			failures.add("{mdoc.location}: Invalid block of code.{message}")
 			return
 		end
 
@@ -72,8 +72,8 @@ class NitUnitExecutor
 		blocks.last.add(text)
 	end
 
-	# The associated node to localize warnings
-	var ndoc: nullable ADoc = null
+	# The associated documentation object
+	var mdoc: nullable MDoc = null
 
 	# used to generate distinct names
 	var cpt = 0
@@ -82,14 +82,14 @@ class NitUnitExecutor
 	# Fill `docunits` with new discovered unit of tests.
 	#
 	# `tc` (testcase) is the pre-filled XML node
-	fun extract(ndoc: ADoc, tc: HTMLTag)
+	fun extract(mdoc: MDoc, tc: HTMLTag)
 	do
 		blocks.clear
 		failures.clear
 
-		self.ndoc = ndoc
+		self.mdoc = mdoc
 
-		work(ndoc.to_mdoc)
+		work(mdoc)
 
 		toolcontext.check_errors
 
@@ -106,7 +106,7 @@ class NitUnitExecutor
 		if blocks.is_empty then return
 
 		for block in blocks do
-			docunits.add new DocUnit(ndoc, tc, block.join(""))
+			docunits.add new DocUnit(mdoc, tc, block.join(""))
 		end
 	end
 
@@ -197,7 +197,7 @@ class NitUnitExecutor
 				var ne = new HTMLTag("error")
 				ne.attr("message", msg)
 				tc.add ne
-				toolcontext.warning(du.ndoc.location, "error", "ERROR: {tc.attrs["classname"]}.{tc.attrs["name"]} (in {file}): {msg}")
+				toolcontext.warning(du.mdoc.location, "error", "ERROR: {tc.attrs["classname"]}.{tc.attrs["name"]} (in {file}): {msg}")
 				toolcontext.modelbuilder.failed_entities += 1
 			end
 			toolcontext.check_errors
@@ -248,13 +248,13 @@ class NitUnitExecutor
 			var ne = new HTMLTag("failure")
 			ne.attr("message", msg)
 			tc.add ne
-			toolcontext.warning(du.ndoc.location, "failure", "FAILURE: {tc.attrs["classname"]}.{tc.attrs["name"]} (in {file}): {msg}")
+			toolcontext.warning(du.mdoc.location, "failure", "FAILURE: {tc.attrs["classname"]}.{tc.attrs["name"]} (in {file}): {msg}")
 			toolcontext.modelbuilder.failed_entities += 1
 		else if res2 != 0 then
 			var ne = new HTMLTag("error")
 			ne.attr("message", msg)
 			tc.add ne
-			toolcontext.warning(du.ndoc.location, "error", "ERROR: {tc.attrs["classname"]}.{tc.attrs["name"]} (in {file}): {msg}")
+			toolcontext.warning(du.mdoc.location, "error", "ERROR: {tc.attrs["classname"]}.{tc.attrs["name"]} (in {file}): {msg}")
 			toolcontext.modelbuilder.failed_entities += 1
 		end
 		toolcontext.check_errors
@@ -369,7 +369,7 @@ redef class ModelBuilder
 			# NOTE: jenkins expects a '.' in the classname attr
 			tc.attr("classname", "nitunit." + mmodule.full_name + ".<module>")
 			tc.attr("name", "<module>")
-			d2m.extract(ndoc, tc)
+			d2m.extract(ndoc.to_mdoc, tc)
 		end label x
 		for nclassdef in nmodule.n_classdefs do
 			var mclassdef = nclassdef.mclassdef
@@ -382,7 +382,7 @@ redef class ModelBuilder
 					tc = new HTMLTag("testcase")
 					tc.attr("classname", "nitunit." + mmodule.full_name + "." + mclassdef.mclass.full_name)
 					tc.attr("name", "<class>")
-					d2m.extract(ndoc, tc)
+					d2m.extract(ndoc.to_mdoc, tc)
 				end
 			end
 			for npropdef in nclassdef.n_propdefs do
@@ -395,7 +395,7 @@ redef class ModelBuilder
 					tc = new HTMLTag("testcase")
 					tc.attr("classname", "nitunit." + mmodule.full_name + "." + mclassdef.mclass.full_name)
 					tc.attr("name", mpropdef.mproperty.full_name)
-					d2m.extract(ndoc, tc)
+					d2m.extract(ndoc.to_mdoc, tc)
 				end
 			end
 		end
