@@ -16,7 +16,7 @@
 
 import end
 
-class Object
+interface Object
 	fun output is abstract
 end
 

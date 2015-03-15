@@ -16,7 +16,7 @@
 
 import end
 
-class Object
+interface Object
 	fun i_to_s(i: Int)
 	do
 		i.output

@@ -14,7 +14,7 @@
 
 import end
 
-class Object
+interface Object
 end
 
 class Int
