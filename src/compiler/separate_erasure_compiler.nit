@@ -39,6 +39,11 @@ redef class ToolContext
 		if opt_no_check_all.value then
 			opt_no_check_erasure_cast.value = true
 		end
+
+		# Temporary disabled. TODO: implement tagging in the erasure compiler.
+		if opt_erasure.value then
+			opt_no_tag_primitives.value = true
+		end
 	end
 
 	var erasure_compiler_phase = new ErasureCompilerPhase(self, null)
