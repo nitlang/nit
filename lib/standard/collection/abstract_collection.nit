@@ -203,7 +203,7 @@ end
 #
 # Used to pass arguments by reference.
 #
-# Also used when one want to give asingle element when a full
+# Also used when one want to give a single element when a full
 # collection is expected
 class Container[E]
 	super Collection[E]

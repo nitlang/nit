@@ -1191,7 +1191,7 @@ class MGenericType
 		for t in arguments do
 			args.add t.full_name
 		end
-		return "{mclass.full_name}[{args.join(", ")}]}"
+		return "{mclass.full_name}[{args.join(", ")}]"
 	end
 
 	redef var c_name is lazy do
