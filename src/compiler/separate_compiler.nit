@@ -1140,8 +1140,21 @@ class SeparateCompilerVisitor
 		end
 	end
 
-	# Return a C expression returning the runtime type structure of the value
-	# The point of the method is to works also with primitives types.
+	# Returns a C expression of the runtime class structure of the value.
+	# The point of the method is to work also with primitive types.
+	fun class_info(value: RuntimeVariable): String
+	do
+		if value.mtype.ctype == "val*" then
+			return "{value}->class"
+		else
+			compiler.undead_types.add(value.mtype)
+			self.require_declaration("class_{value.mtype.c_name}")
+			return "(&class_{value.mtype.c_name})"
+		end
+	end
+
+	# Returns a C expression of the runtime type structure of the value.
+	# The point of the method is to work also with primitive types.
 	fun type_info(value: RuntimeVariable): String
 	do
 		if value.mtype.ctype == "val*" then
@@ -1317,14 +1330,14 @@ class SeparateCompilerVisitor
 				self.add "{ress}{callsym}({ss}); /* {mmethod} on {arguments.first.inspect}*/"
 			else
 				self.require_declaration(const_color)
-				self.add "{ress}(({runtime_function.c_funptrtype})({arguments.first}->class->vft[{const_color}]))({ss}); /* {mmethod} on {arguments.first.inspect}*/"
+				self.add "{ress}(({runtime_function.c_funptrtype})({class_info(arguments.first)}->vft[{const_color}]))({ss}); /* {mmethod} on {arguments.first.inspect}*/"
 			end
 		else if mentity isa MMethod and compiler.modelbuilder.toolcontext.opt_guard_call.value then
 			var callsym = "CALL_" + const_color
 			self.require_declaration(callsym)
 			self.add "if (!{callsym}) \{"
 			self.require_declaration(const_color)
-			self.add "{ress}(({runtime_function.c_funptrtype})({arguments.first}->class->vft[{const_color}]))({ss}); /* {mmethod} on {arguments.first.inspect}*/"
+			self.add "{ress}(({runtime_function.c_funptrtype})({class_info(arguments.first)}->vft[{const_color}]))({ss}); /* {mmethod} on {arguments.first.inspect}*/"
 			self.add "\} else \{"
 			self.add "{ress}{callsym}({ss}); /* {mmethod} on {arguments.first.inspect}*/"
 			self.add "\}"
@@ -1334,7 +1347,7 @@ class SeparateCompilerVisitor
 			self.add "{ress}{callsym}({ss}); /* {mmethod} on {arguments.first.inspect}*/"
 		else
 			self.require_declaration(const_color)
-			self.add "{ress}(({runtime_function.c_funptrtype})({arguments.first}->class->vft[{const_color}]))({ss}); /* {mmethod} on {arguments.first.inspect}*/"
+			self.add "{ress}(({runtime_function.c_funptrtype})({class_info(arguments.first)}->vft[{const_color}]))({ss}); /* {mmethod} on {arguments.first.inspect}*/"
 		end
 
 		if res0 != null then
@@ -1696,7 +1709,7 @@ class SeparateCompilerVisitor
 				self.add("{res} = ({value2} != NULL) && ({value2}->class == &class_{mtype1.c_name}); /* is_same_type_test */")
 			end
 		else
-			self.add("{res} = ({value1} == {value2}) || ({value1} != NULL && {value2} != NULL && {value1}->class == {value2}->class); /* is_same_type_test */")
+			self.add("{res} = ({value1} == {value2}) || ({value1} != NULL && {value2} != NULL && {class_info(value1)} == {class_info(value2)}); /* is_same_type_test */")
 		end
 		return res
 	end
@@ -1706,7 +1719,7 @@ class SeparateCompilerVisitor
 		var res = self.get_name("var_class_name")
 		self.add_decl("const char* {res};")
 		if value.mtype.ctype == "val*" then
-			self.add "{res} = {value} == NULL ? \"null\" : {value}->type->name;"
+			self.add "{res} = {value} == NULL ? \"null\" : {type_info(value)}->name;"
 		else if value.mtype isa MClassType and value.mtype.as(MClassType).mclass.kind == extern_kind and
 			value.mtype.as(MClassType).name != "NativeString" then
 			self.add "{res} = \"{value.mtype.as(MClassType).mclass}\";"
