@@ -356,6 +356,16 @@ Usually you do not need them since they make the generated code slower.
 `--no-shortcut-equal`
 :   Always call == in a polymorphic way.
 
+`--no-tag-primitive`
+:   Use only boxes for primitive types.
+
+The separate compiler uses tagged values to encode common primitive types like Int, Bool and Char.
+This option disables tags and forces such primitive values to be boxed.
+The drawback is that each boxing costs a memory allocation thus increases the amount of work for the garbage collector.
+
+However, in some cases, it is possible that this option improves performance since the absence of tags simplify the implementation
+of OO mechanisms like method calls or equality tests.
+
 `--no-inline-intern`
 :   Do not inline call to intern methods.
 
