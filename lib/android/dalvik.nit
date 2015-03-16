@@ -58,14 +58,14 @@ redef class Sys
 		// Retrieve main activity
 		jclass class_activity = (*env)->GetObjectClass(env, native_activity);
 		if (class_activity == NULL) {
-			__android_log_print(ANDROID_LOG_ERROR, "Nit", "Failed retreiving activity class");
+			__android_log_print(ANDROID_LOG_ERROR, "Nit", "Failed retrieving activity class");
 			(*env)->ExceptionDescribe(env);
 			exit(1);
 		}
 
 		jmethodID class_activity_getClassLoader = (*env)->GetMethodID(env, class_activity, "getClassLoader", "()Ljava/lang/ClassLoader;");
 		if (class_activity_getClassLoader == NULL) {
-			__android_log_print(ANDROID_LOG_ERROR, "Nit", "Failed retreiving 'getClassLoader' method");
+			__android_log_print(ANDROID_LOG_ERROR, "Nit", "Failed retrieving 'getClassLoader' method");
 			(*env)->ExceptionDescribe(env);
 			exit(1);
 		}
@@ -73,14 +73,14 @@ redef class Sys
 		// Call activity.getClassLoader
 		jobject instance_class_loader = (*env)->CallObjectMethod(env, native_activity, class_activity_getClassLoader);
 		if (instance_class_loader == NULL) {
-			__android_log_print(ANDROID_LOG_ERROR, "Nit", "Failed retreiving class loader instance");
+			__android_log_print(ANDROID_LOG_ERROR, "Nit", "Failed retrieving class loader instance");
 			(*env)->ExceptionDescribe(env);
 			exit(1);
 		}
 
 		jclass class_class_loader = (*env)->GetObjectClass(env, instance_class_loader);
 		if (class_class_loader == NULL) {
-			__android_log_print(ANDROID_LOG_ERROR, "Nit", "Failed retreiving class of class loader");
+			__android_log_print(ANDROID_LOG_ERROR, "Nit", "Failed retrieving class of class loader");
 			(*env)->ExceptionDescribe(env);
 			exit(1);
 		}
@@ -88,7 +88,7 @@ redef class Sys
 		// Get the method ClassLoader.findClass
 		jmethodID class_class_loader_findClass = (*env)->GetMethodID(env, class_class_loader, "findClass", "(Ljava/lang/String;)Ljava/lang/Class;");
 		if (class_class_loader_findClass == NULL) {
-			__android_log_print(ANDROID_LOG_ERROR, "Nit", "Failed retreiving 'findClass' method");
+			__android_log_print(ANDROID_LOG_ERROR, "Nit", "Failed retrieving 'findClass' method");
 			(*env)->ExceptionDescribe(env);
 			exit(1);
 		}
@@ -109,7 +109,7 @@ redef class Sys
 
 		jclass java_class = (*env)->CallObjectMethod(env, instance_class_loader, class_loader_findClass, class_name);
 		if (java_class == NULL) {
-			__android_log_print(ANDROID_LOG_ERROR, "Nit", "Failed loading targetted class");
+			__android_log_print(ANDROID_LOG_ERROR, "Nit", "Failed loading targeted class");
 			(*env)->ExceptionDescribe(env);
 			exit(1);
 		}
