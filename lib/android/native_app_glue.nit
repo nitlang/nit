@@ -148,7 +148,7 @@ redef class App
 	`}
 
 	# Notification from the Android framework to generate a new saved state
-	# 
+	#
 	# You can use the `shared_preferences` module or `NativeAppGlue::saved_state`.
 	fun save_state do end
 
@@ -175,7 +175,7 @@ redef class App
 	fun stop do end
 
 	# Notification from the Android framework, `native_activity` is being destroyed
-	# 
+	#
 	# Clean up and exit.
 	fun destroy do end
 
@@ -197,7 +197,7 @@ redef class App
 	fun input_changed do end
 
 	# Notification from the Android framework, the window has been resized.
-	# 
+	#
 	# Please redraw with its new size.
 	fun window_resized do end
 
@@ -205,7 +205,7 @@ redef class App
 	fun window_redraw_needed do end
 
 	# Notification from the Android framework, the content area of the window has changed
-	# 
+	#
 	# Raised when the soft input window being shown or hidden, and similar events.
 	fun content_rect_changed do end
 
@@ -227,7 +227,7 @@ redef class App
 
 		struct android_app *app_glue = App_native_app_glue(recv);
 		struct android_poll_source* source = (struct android_poll_source*)data;
-		
+
 		// Process this event.
 		if (source != NULL) source->process(app_glue, source);
 	`}
@@ -255,13 +255,13 @@ extern class NdkNativeActivity `{ ANativeActivity * `}
 
 	# Path to this application's internal data directory.
 	fun internal_data_path: NativeString `{ return (char*)recv->internalDataPath; `}
-    
+
 	# Path to this application's external (removable/mountable) data directory.
 	fun external_data_path: NativeString `{ return (char*)recv->externalDataPath; `}
-    
+
 	# The platform's SDK version code.
 	fun sdk_version: Int `{ return recv->sdkVersion; `}
-    
+
 	# This is the native instance of the application.  It is not used by
 	# the framework, but can be set by the application to its own instance
 	# state.
