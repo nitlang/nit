@@ -1953,6 +1953,10 @@ redef class Int
 	#     assert 1.to_s            == "1"
 	#     assert (-123).to_s       == "-123"
 	redef fun to_s do
+		# Fast case for common numbers
+		if self == 0 then return "0"
+		if self == 1 then return "1"
+
 		var nslen = int_to_s_len
 		var ns = new NativeString(nslen + 1)
 		ns[nslen] = '\0'
