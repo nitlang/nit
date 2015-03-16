@@ -15,7 +15,7 @@
 # limitations under the License.
 
 # Implementation of the Nit virtual machine
-module vm
+module virtual_machine
 
 import interpreter::naive_interpreter
 import perfect_hashing
@@ -176,7 +176,6 @@ class VirtualMachine super NaiveInterpreter
 
 		recv.vtable = recv.mtype.as(MClassType).mclass.vtable
 	end
-
 
 	# Initialize the internal representation of an object (its attribute values)
 	# `init_instance` is the initial value of attributes

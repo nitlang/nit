@@ -17,7 +17,7 @@
 # Handle all numbering operations related to local variables in the Nit virtual machine
 module variables_numbering
 
-import vm
+import virtual_machine
 
 redef class VirtualMachine
 

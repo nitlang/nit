@@ -17,7 +17,7 @@
 # Optimization of the nitvm
 module vm_optimizations
 
-import vm
+import virtual_machine
 
 redef class VirtualMachine
 
