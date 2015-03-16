@@ -56,6 +56,9 @@ class AndroidProject
 	# Maximum API level on which the application will be allowed to run
 	var max_api: nullable Int = null
 
+	# Activities to declare in the manifest
+	var activities = new Array[String]
+
 	redef fun to_s do return """
 name: {{{name or else "null"}}}
 namespace: {{{java_package or else "null"}}}
@@ -112,6 +115,12 @@ redef class ModelBuilder
 
 		annots = collect_annotations_on_modules("android_manifest_activity", mmodule)
 		for an in annots do project.manifest_activity_attributes.add an.arg_as_string(self) or else ""
+
+		annots = collect_annotations_on_modules("android_activity", mmodule)
+		for an in annots do
+			var activity = an.arg_as_string(self)
+			if activity != null then project.activities.add activity
+		end
 
 		# Get the date and time (down to the minute) as string
 		var local_time = new Tm.localtime

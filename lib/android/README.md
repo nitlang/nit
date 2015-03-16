@@ -54,6 +54,11 @@ integer as argument. They are applied in the Android manifest as
 
     See http://developer.android.com/guide/topics/manifest/uses-sdk-element.html
 
+* The annotation `android_activity` defines a Java class used as an
+  entrypoint to your application. As of now, this annotation should
+  only be used by low level implementations of Nit on Android.
+  It's usefulness will be extended in the future to customize user applications.
+
 ## Project entry points
 
 Importing `android::landscape` or `android::portrait` locks the generated

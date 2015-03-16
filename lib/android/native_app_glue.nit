@@ -36,7 +36,10 @@
 #   which is a subclass of `Activity` and `Context` (in Java). It represent
 #   main activity of the running application. Use it to get anything related
 #   to the `Context` and as anchor to execute Java UI code.
-module native_app_glue is ldflags "-landroid"
+module native_app_glue is
+	ldflags "-landroid"
+	android_activity "android.app.NativeActivity"
+end
 
 import platform
 import log
