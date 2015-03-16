@@ -40,7 +40,7 @@ module native_app_glue is ldflags "-landroid"
 
 import platform
 import log
-import activities
+import dalvik
 
 in "C header" `{
 	#include <android_native_app_glue.h>
@@ -123,6 +123,10 @@ extern class NativeNativeActivity in "Java" `{ android.app.NativeActivity `}
 	super NativeActivity
 end
 
+redef class Sys
+	redef fun jvm do return app.native_app_glue.ndk_native_activity.vm
+end
+
 redef class App
 	redef fun setup
 	do
@@ -135,8 +139,7 @@ redef class App
 	# The underlying implementation using the Android native_app_glue framework
 	fun native_app_glue: NativeAppGlue `{ return native_app_glue_data; `}
 
-	# The main Java Activity of this application
-	fun native_activity: NativeActivity do return native_app_glue.ndk_native_activity.java_native_activity
+	redef fun native_activity do return native_app_glue.ndk_native_activity.java_native_activity
 
 	# Set `native_app_glue` command handler to our C implementation which
 	# will callback self.

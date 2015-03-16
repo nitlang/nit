@@ -17,23 +17,25 @@
 # Java related services specific to Android and its Dalvik VM
 module dalvik
 
-import native_app_glue
+import activities
+
+redef class App
+	# The main Java Activity of this application
+	fun native_activity: NativeActivity is abstract
+end
 
 extern class JavaClassLoader in "Java" `{java.lang.ClassLoader`}
 	super JavaObject
 end
 
 redef class Sys
-	# Get the running JVM
-	redef fun create_default_jvm
-	do
-		var jvm = app.native_app_glue.ndk_native_activity.vm
-		var jni_env = jvm.attach_current_thread
-		if jni_env.address_is_null then jni_env = jvm.env
+	# We cannot create a JVM on Android
+	#
+	# This method is not reachable on this platform anyway.
+	# `Sys::jvm` is implemented by the main activity modules.
+	redef fun create_default_jvm do abort
 
-		self.jvm = jvm
-		self.jni_env = jni_env
-	end
+	redef fun jni_env do return jvm.attach_current_thread
 
 	private var class_loader: nullable JavaObject = null
 	private var class_loader_method: nullable JMethodID = null
@@ -41,7 +43,7 @@ redef class Sys
 	do
 		var class_loader = self.class_loader
 		if class_loader == null then
-			find_class_loader(app.native_app_glue.ndk_native_activity.java_native_activity)
+			find_class_loader app.native_activity
 			class_loader = self.class_loader
 			assert class_loader != null
 		end
