@@ -169,7 +169,7 @@ extern class JavaVM `{JavaVM *`}
 		return env;
 	`}
 
-	fun attach_current_thread: JniEnv `{
+	fun attach_current_thread: JniEnv import jni_error `{
 		JNIEnv *env;
 	#ifdef ANDROID
 		// the signature is different (better actually) on Android
