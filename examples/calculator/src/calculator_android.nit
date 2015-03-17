@@ -26,7 +26,8 @@ module calculator_android is
 		android:screenOrientation="portrait""""
 end
 
-import android
+# FIXME the next line should import `android` only when it uses nit_activity
+import android::log
 import android::ui
 
 import calculator_logic
