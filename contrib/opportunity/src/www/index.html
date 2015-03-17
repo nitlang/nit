@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html ng-app="opportunity">
+	<head>
+		<title>Nit Opportunity</title>
+		<link href="js/lib/angular-material/angular-material.css" rel="stylesheet">
+		<script src="js/lib/angular/angular.js"></script>
+		<script src="js/lib/angular-animate/angular-animate.js"></script>
+		<script src="js/lib/angular-aria/angular-aria.js"></script>
+		<script src="js/lib/angular-material/angular-material.js"></script>
+		<script src="js/lib/angular-ui-router/release/angular-ui-router.js"></script>
+
+		<script src="js/app/app.js"></script>
+		<script src="js/app/main/router.js"></script>
+
+		<script src="js/app/root/MenuController.js"></script>
+		<script src="js/app/meetup/ListMeetupsController.js"></script>
+		<script src="js/app/meetup/AddMeetupController.js"></script>
+	</head>
+	<body ng-controller="MenuController as menu">
+			<md-toolbar class="md-primary">
+		      <h2 class="md-toolbar-tools">
+		      	<md-button ng-click="menu.toggle()"><md-icon md-svg-src="img/menu.svg"></md-icon></md-button>
+		        <span>Nit Opportunity</span>
+		      </h2>
+		    </md-toolbar>
+	    <div layout="row" layout-fill>
+			<md-sidenav class="md-sidenav-left md-whiteframe-z2" style="margin-top:64px;" md-component-id="left">
+		    	<md-button style='width: 100%;padding-top:15px;padding-bottom:15px;' ng-click='menu.go("meetups")'>Meetups</md-button>
+		    	<md-button style='width: 100%;padding-top:15px;padding-bottom:15px;' ng-click='menu.go("addMeetup")'>Add Meetup</md-button>
+		    </md-sidenav>
+
+		    <md-content flex class="md-padding">
+		        <div layout="column" layout-fill layout-align="center center">
+		    		<div ui-view layout-fill></div>
+		    	<div>
+		    </md-content>
+	    </div>
+	</body>
+</html>

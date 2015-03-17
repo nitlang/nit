@@ -13,9 +13,11 @@
 # limitations under the License
 
 # Web server for Opportunity : A meetup scheduler for real-world encounters !
-module opportunity_web
+module config_web
 
-import opportunity_controller
+import meetup_controller
+#import people_controller
+#import answer_controller
 import opts
 import privileges
 
@@ -25,8 +27,26 @@ if "NIT_TESTING".environ == "true" then exit 0
 var iface = "localhost:8080"
 
 var vh = new VirtualHost(iface)
-vh.routes.add new Route("/rest/", new OpportunityRESTAction)
-vh.routes.add new Route(null, new OpportunityWelcome)
+
+vh.routes.add new Route("/api/meetup/create", new CreateMeetupAction("POST"))
+vh.routes.add new Route("/api/meetup/update/:id", new UpdateMeetupAction("POST"))
+vh.routes.add new Route("/api/meetup/delete/:id", new DeleteMeetupAction("GET"))
+vh.routes.add new Route("/api/meetup/get/:id", new GetMeetupAction("GET"))
+vh.routes.add new Route("/api/meetup/list", new ListMeetupAction("GET"))
+
+#vh.routes.add new Route("/api/people/create", new CreatePeopleAction("POST"))
+#vh.routes.add new Route("/api/people/update", new UpdatePeopleAction("PUT"))
+#vh.routes.add new Route("/api/people/delete/:id", new DeletePeopleAction("GET"))
+#vh.routes.add new Route("/api/people/get/:id", new GetPeopleAction("GET"))
+#vh.routes.add new Route("/api/people/list", new ListPeopleAction("GET"))
+
+#vh.routes.add new Route("/api/answer/create", new CreateAnswerAction("POST"))
+#vh.routes.add new Route("/api/answer/update", new UpdateAnswerAction("PUT"))
+#vh.routes.add new Route("/api/answer/delete/:id", new DeleteAnswerAction("GET"))
+#vh.routes.add new Route("/api/answer/get/:id", new GetAnswerAction("GET"))
+#vh.routes.add new Route("/api/answer/list", new ListAnswerAction("GET"))
+
+vh.routes.add new Route(null, new FileServer("src/www"))
 
 var fac = new HttpFactory.and_libevent
 fac.config.virtual_hosts.add vh

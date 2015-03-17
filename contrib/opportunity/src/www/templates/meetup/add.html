@@ -1,0 +1,18 @@
+<md-content>
+	<h1>Add Meetup</h1>
+	<form>
+		<md-input-container flex>
+	    	<label>Name</label>
+	    	<input ng-model="addMeetupCtrl.meetup.name">
+	  	</md-input-container>
+	    <md-input-container flex>
+	        <label>Date</label>
+	        <input type="date" ng-model="addMeetupCtrl.meetup.date">
+	    </md-input-container>
+	    <md-input-container flex>
+	    	<label>Place</label>
+	    	<input ng-model="addMeetupCtrl.meetup.place">
+	  	</md-input-container>
+	  	<md-button class="md-raised md-primary" style="float:right;" ng-click="addMeetupCtrl.add()">Add Meetup</md-button>
+	</form>
+</md-content>
