@@ -40,9 +40,15 @@ in "C Header" `{
 class JavaVMBuilder
 	super JniEnvRef
 
-	var version: Int = "00010002".to_hex
+	# Version code of the JVM requested by `create_jvm`
+	#
+	# Default at 0x00010002
+	var version = 0x00010002 is writable
+
+	# Additional option strings
 	var options = new Array[String]
 
+	# Create the JVM and return it on success
 	fun create_jvm: nullable JavaVM
 	do
 		var args = new JavaVMInitArgs
@@ -69,7 +75,7 @@ class JavaVMBuilder
 	end
 end
 
-extern class JavaVMInitArgs `{ JavaVMInitArgs* `}
+private extern class JavaVMInitArgs `{ JavaVMInitArgs* `}
 	new `{ return (JavaVMInitArgs*)malloc(sizeof(JavaVMInitArgs)); `}
 
 	# Set the defaut config for a VM
@@ -92,7 +98,7 @@ extern class JavaVMInitArgs `{ JavaVMInitArgs* `}
 	fun n_options=(v: Int) `{ recv->nOptions = v; `}
 end
 
-extern class JavaVMOption `{ JavaVMOption* `}
+private extern class JavaVMOption `{ JavaVMOption* `}
 	fun string: String import NativeString.to_s `{
 		return NativeString_to_s((char*)recv->optionString);
 	`}
@@ -108,7 +114,7 @@ extern class JavaVMOption `{ JavaVMOption* `}
 	`}
 end
 
-extern class JavaVMOptionArray `{ JavaVMOption* `}
+private extern class JavaVMOptionArray `{ JavaVMOption* `}
 	new(size: Int) `{ return (JavaVMOption*)malloc(sizeof(JavaVMOption)*size); `}
 
 	fun [](i: Int): JavaVMOption `{ return recv+i; `}
@@ -119,7 +125,8 @@ extern class JavaVM `{JavaVM *`}
 	# Create the JVM, returns its handle and store the a pointer to JniEnv in `env_ref`
 	#
 	# Unavailable on Android, where you cannot instanciate a new JVM.
-	new(args: JavaVMInitArgs, env_ref: JniEnvRef) import jni_error, JniEnvRef.jni_env=, JniEnv.as nullable `{
+	private new(args: JavaVMInitArgs, env_ref: JniEnvRef)
+	import jni_error, JniEnvRef.jni_env=, JniEnv.as nullable `{
 
 	#ifdef ANDROID
 		JavaVM_jni_error(NULL, "JVM creation not supported on Android", 0);
@@ -142,7 +149,7 @@ extern class JavaVM `{JavaVM *`}
 		}
 	`}
 
-	fun jni_error(msg: NativeString, v: Int)
+	private fun jni_error(msg: NativeString, v: Int)
 	do
 		print "JNI Error: {msg} ({v})"
 		abort
@@ -180,30 +187,30 @@ end
 
 # Represents a jni JNIEnv, which is a thread in a JavaVM
 extern class JniEnv `{JNIEnv *`}
-	
+
 	# Get a class object from its fully-qualified name or null if the class cannot be found
 	fun find_class(class_name : String): JClass import String.to_cstring `{
 		return (*recv)->FindClass(recv,String_to_cstring(class_name));
 	`}
-	
+
 	# Return the method id for an instance of a class or interface
 	# The method is determined by its name and signature
 	# To obtain the method ID of a constructor, supply "<init>" as the method name and "void(V)" as the return type
 	fun get_method_id(clazz : JClass, name : String, signature : String): JMethodID import String.to_cstring `{
 		return (*recv)->GetMethodID(recv, clazz, String_to_cstring(name), String_to_cstring(signature));
 	`}
-	
+
 	# Construct a new Java object from the `clazz`, using the constructor ̀ method_id`
 	fun new_object(clazz: JClass, method_id: JMethodID): JavaObject `{
 		return (*recv)->NewObject(recv, clazz, method_id);
 	`}
-	
+
 	# Return the JClass of `obj`
 	fun get_object_class(obj: JavaObject): JClass `{
 		return (*recv)->GetObjectClass(recv, obj);
 	`}
 
-	# Registers native methods with the class specified by the `clazz` argument	
+	# Registers native methods with the class specified by the `clazz` argument
 	fun register_natives(clazz: JClass, method: JNINativeMethod, n_method : Int): Int `{
 		return (*recv)->RegisterNatives(recv, clazz, method, n_method);
 	`}
@@ -214,7 +221,7 @@ extern class JniEnv `{JNIEnv *`}
 		(*recv)->CallVoidMethodA(recv, obj, method_id, args_tab);
 		free(args_tab);
 	`}
-	
+
 	# Call a method on `obj` designed by `method_id` with an array `args` of argument returning a JavaObject
 	fun call_object_method(obj: JavaObject, method_id: JMethodID, args: nullable Array[nullable Object]): JavaObject import convert_args_to_jni `{
 		jvalue * args_tab = JniEnv_convert_args_to_jni(recv, args);
@@ -222,7 +229,7 @@ extern class JniEnv `{JNIEnv *`}
 		free(args_tab);
 		return res;
 	`}
-	
+
 	# Call a method on `obj` designed by `method_id` with an array `args` of arguments returning a Bool
 	fun call_boolean_method(obj: JavaObject, method_id: JMethodID, args: nullable Array[nullable Object]): Bool import convert_args_to_jni `{
 		jvalue * args_tab = JniEnv_convert_args_to_jni(recv, args);
@@ -246,7 +253,7 @@ extern class JniEnv `{JNIEnv *`}
 		free(args_tab);
 		return res;
 	`}
-	
+
 	# Call a method on `obj` designed by `method_id` with an array `args` of arguments returning a Float
 	fun call_float_method(obj: JavaObject, method_id: JMethodID, args: nullable Array[nullable Object]): Float import convert_args_to_jni `{
 		jvalue * args_tab = JniEnv_convert_args_to_jni(recv, args);
@@ -305,7 +312,7 @@ extern class JniEnv `{JNIEnv *`}
 	fun get_field_id(clazz: JClass, name: String, sign: String): JFieldID import String.to_cstring `{
 		return (*recv)->GetFieldID(recv, clazz, String_to_cstring(name), String_to_cstring(sign));
 	`}
-	
+
 	# returns the value of an instance (nonstatic) field of an object. The field to access is specified by a field ID obtained by calling get_field_id()
 	fun get_object_field(obj: JavaObject, fieldID: JFieldID): JavaObject `{
 		return (*recv)->GetObjectField(recv, obj, fieldID);
@@ -314,7 +321,7 @@ extern class JniEnv `{JNIEnv *`}
 	fun get_boolean_field(obj: JavaObject, fieldID: JFieldID): Bool `{
 		return (*recv)->GetBooleanField(recv, obj, fieldID);
 	`}
-	
+
 	fun get_char_field(obj: JavaObject, fieldID: JFieldID): Char `{
 		return (*recv)->GetCharField(recv, obj, fieldID);
 	`}
@@ -341,12 +348,12 @@ extern class JniEnv `{JNIEnv *`}
 
 	fun set_int_field(obj: JavaObject, fieldID: JFieldID, value: Int) `{
 		(*recv)->SetIntField(recv, obj, fieldID, value);
-	`}		
+	`}
 
 	fun set_float_field(obj: JavaObject, fieldID: JFieldID, value: Float) `{
 		(*recv)->SetFloatField(recv, obj, fieldID, value);
 	`}
-	
+
 	# Check for pending exception without creating a local reference to the exception object
 	fun exception_check: Bool `{
 		return (*recv)->ExceptionCheck(recv);
@@ -371,7 +378,7 @@ extern class JniEnv `{JNIEnv *`}
 	fun exception_clear `{
 		return (*recv)->ExceptionClear(recv);
 	`}
-	
+
 	# Raise a fatal error
 	fun fatal_error(msg: String) import String.to_cstring `{
 		(*recv)->FatalError(recv, String_to_cstring(msg));
@@ -395,7 +402,7 @@ extern class JniEnv `{JNIEnv *`}
 	`}
 end
 
-# used to initialize a JavaVM 
+# used to initialize a JavaVM
 class JniEnvRef
 	var jni_env: nullable JniEnv = null
 end
@@ -445,11 +452,11 @@ extern class JValue `{jvalue`}
 	fun get_boolean:Bool `{
 		return recv.z;
 	`}
-	
+
 	fun set_char(c: Char)`{
 		recv.c = c;
 	`}
-	
+
 	fun get_char: Char `{
 		return recv.c;
 	`}
