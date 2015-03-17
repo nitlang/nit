@@ -86,6 +86,32 @@ redef class Activity
 		native.content_view = layout
 	end
 
+	redef fun on_save_instance_state(state)
+	do
+		super
+
+		var nity = new Bundle.from(state)
+		nity["context"] = context.to_json
+	end
+
+	redef fun on_restore_instance_state(state)
+	do
+		super
+
+		var nity = new Bundle.from(state)
+		if not nity.has("context") then return
+
+		var json = nity.string("context")
+		if json == null then return
+
+		context = new CalculatorContext.from_json(json)
+	end
+
+	redef fun on_resume
+	do
+		display.text = context.display_text
+	end
+
 	redef fun catch_event(event)
 	do
 		if event isa ClickEvent then
