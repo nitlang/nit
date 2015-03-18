@@ -55,6 +55,8 @@ class Location
 	var file: nullable SourceFile
 
 	# The starting line number (starting from 1)
+	#
+	# If `line_start==0` then the whole file is considered
 	var line_start: Int
 
 	# The stopping line number (starting from 1)
@@ -129,8 +131,11 @@ class Location
 		var file_part = ""
 		if file != null then
 			file_part = file.filename
-			if file.filename.length > 0 then file_part += ":"
 		end
+
+		if line_start <= 0 then return file_part
+
+		if file != null and file.filename.length > 0 then file_part += ":"
 
 		if line_start == line_end then
 			if column_start == column_end then
@@ -181,6 +186,8 @@ class Location
 
 		var l = self
 		var i = l.line_start
+		if i <= 0 then return ""
+
 		var line_start = l.file.line_starts[i-1]
 		var line_end = line_start
 		var string = l.file.string

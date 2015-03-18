@@ -385,17 +385,24 @@ redef class ModelBuilder
 		var readme = dirpath2.join_path("README.md")
 		if not readme.file_exists then readme = dirpath2.join_path("README")
 		if readme.file_exists then
-			var mdoc = new MDoc
-			var s = new FileReader.open(readme)
-			while not s.eof do
-				mdoc.content.add(s.read_line)
-			end
+			var mdoc = load_markdown(readme)
 			mgroup.mdoc = mdoc
 			mdoc.original_mentity = mgroup
 		end
 		mgroup.filepath = dirpath
 		mgroups[rdp] = mgroup
 		return mgroup
+	end
+
+	# Load a markdown file as a documentation object
+	fun load_markdown(filepath: String): MDoc
+	do
+		var mdoc = new MDoc(new Location(new SourceFile.from_string(filepath, ""),0,0,0,0))
+		var s = new FileReader.open(filepath)
+		while not s.eof do
+			mdoc.content.add(s.read_line)
+		end
+		return mdoc
 	end
 
 	# Force the identification of all ModulePath of the group and sub-groups.
@@ -448,6 +455,26 @@ redef class ModelBuilder
 		return nmodule
 	end
 
+	# Remove Nit source files from a list of arguments.
+	#
+	# Items of `args` that can be loaded as a nit file will be removed from `args` and returned.
+	fun filter_nit_source(args: Array[String]): Array[String]
+	do
+		var keep = new Array[String]
+		var res = new Array[String]
+		for a in args do
+			var l = identify_file(a)
+			if l == null then
+				keep.add a
+			else
+				res.add a
+			end
+		end
+		args.clear
+		args.add_all(keep)
+		return res
+	end
+
 	# Try to load a module using a path.
 	# Display an error if there is a problem (IO / lexer / parser) and return null.
 	# Note: usually, you do not need this method, use `get_mmodule_by_name` instead.
@@ -459,7 +486,11 @@ redef class ModelBuilder
 		# Look for the module
 		var file = identify_file(filename)
 		if file == null then
-			toolcontext.error(null, "Error: cannot find module `{filename}`.")
+			if filename.file_exists then
+				toolcontext.error(null, "Error: `{filename}` is not a Nit source file.")
+			else
+				toolcontext.error(null, "Error: cannot find module `{filename}`.")
+			end
 			return null
 		end
 

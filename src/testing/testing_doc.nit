@@ -25,8 +25,8 @@ class NitUnitExecutor
 	# The prefix of the generated Nit source-file
 	var prefix: String
 
-	# The module to import
-	var mmodule: MModule
+	# The module to import, if any
+	var mmodule: nullable MModule
 
 	# The XML node associated to the module
 	var testsuite: HTMLTag
@@ -57,8 +57,8 @@ class NitUnitExecutor
 		if not (ast isa AModule or ast isa ABlockExpr or ast isa AExpr) then
 			var message = ""
 			if ast isa AError then message = " At {ast.location}: {ast.message}."
-			toolcontext.warning(ndoc.location, "invalid-block", "Error: There is a block of code that is not valid Nit, thus not considered a nitunit. To suppress this warning, enclose the block with a fence tagged `nitish` or `raw` (see `man nitdoc`).{message}")
-			failures.add("{ndoc.location}: Invalid block of code.{message}")
+			toolcontext.warning(mdoc.location, "invalid-block", "Error: There is a block of code that is not valid Nit, thus not considered a nitunit. To suppress this warning, enclose the block with a fence tagged `nitish` or `raw` (see `man nitdoc`).{message}")
+			failures.add("{mdoc.location}: Invalid block of code.{message}")
 			return
 		end
 
@@ -72,8 +72,8 @@ class NitUnitExecutor
 		blocks.last.add(text)
 	end
 
-	# The associated node to localize warnings
-	var ndoc: nullable ADoc = null
+	# The associated documentation object
+	var mdoc: nullable MDoc = null
 
 	# used to generate distinct names
 	var cpt = 0
@@ -82,14 +82,14 @@ class NitUnitExecutor
 	# Fill `docunits` with new discovered unit of tests.
 	#
 	# `tc` (testcase) is the pre-filled XML node
-	fun extract(ndoc: ADoc, tc: HTMLTag)
+	fun extract(mdoc: MDoc, tc: HTMLTag)
 	do
 		blocks.clear
 		failures.clear
 
-		self.ndoc = ndoc
+		self.mdoc = mdoc
 
-		work(ndoc.to_mdoc)
+		work(mdoc)
 
 		toolcontext.check_errors
 
@@ -106,7 +106,7 @@ class NitUnitExecutor
 		if blocks.is_empty then return
 
 		for block in blocks do
-			docunits.add new DocUnit(ndoc, tc, block.join(""))
+			docunits.add new DocUnit(mdoc, tc, block.join(""))
 		end
 	end
 
@@ -144,11 +144,7 @@ class NitUnitExecutor
 		var dir = file.dirname
 		if dir != "" then dir.mkdir
 		var f
-		f = new FileWriter.open(file)
-		f.write("# GENERATED FILE\n")
-		f.write("# Docunits extracted from comments\n")
-		f.write("import {mmodule.name}\n")
-		f.write("\n")
+		f = create_unitfile(file)
 		var i = 0
 		for du in dus do
 
@@ -166,14 +162,7 @@ class NitUnitExecutor
 
 		if toolcontext.opt_noact.value then return
 
-		var nit_dir = toolcontext.nit_dir
-		var nitg = nit_dir/"bin/nitg"
-		if not nitg.file_exists then
-			toolcontext.error(null, "Cannot find nitg. Set envvar NIT_DIR.")
-			toolcontext.check_errors
-		end
-		var cmd = "{nitg} --ignore-visibility --no-color '{file}' -I {mmodule.location.file.filename.dirname} >'{file}.out1' 2>&1 </dev/null -o '{file}.bin'"
-		var res = sys.system(cmd)
+		var res = compile_unitfile(file)
 
 		if res != 0 then
 			# Compilation error.
@@ -208,7 +197,7 @@ class NitUnitExecutor
 				var ne = new HTMLTag("error")
 				ne.attr("message", msg)
 				tc.add ne
-				toolcontext.warning(du.ndoc.location, "error", "ERROR: {tc.attrs["classname"]}.{tc.attrs["name"]} (in {file}): {msg}")
+				toolcontext.warning(du.mdoc.location, "error", "ERROR: {tc.attrs["classname"]}.{tc.attrs["name"]} (in {file}): {msg}")
 				toolcontext.modelbuilder.failed_entities += 1
 			end
 			toolcontext.check_errors
@@ -229,27 +218,14 @@ class NitUnitExecutor
 
 		toolcontext.info("Execute doc-unit {tc.attrs["name"]} in {file}", 1)
 
-		var dir = file.dirname
-		if dir != "" then dir.mkdir
 		var f
-		f = new FileWriter.open(file)
-		f.write("# GENERATED FILE\n")
-		f.write("# Example extracted from a documentation\n")
-		f.write("import {mmodule.name}\n")
-		f.write("\n")
+		f = create_unitfile(file)
 		f.write(du.block)
 		f.close
 
 		if toolcontext.opt_noact.value then return
 
-		var nit_dir = toolcontext.nit_dir
-		var nitg = nit_dir/"bin/nitg"
-		if not nitg.file_exists then
-			toolcontext.error(null, "Cannot find nitg. Set envvar NIT_DIR.")
-			toolcontext.check_errors
-		end
-		var cmd = "{nitg} --ignore-visibility --no-color '{file}' -I {mmodule.location.file.filename.dirname} >'{file}.out1' 2>&1 </dev/null -o '{file}.bin'"
-		var res = sys.system(cmd)
+		var res = compile_unitfile(file)
 		var res2 = 0
 		if res == 0 then
 			res2 = sys.system("{file.to_program_name}.bin >>'{file}.out1' 2>&1 </dev/null")
@@ -272,25 +248,68 @@ class NitUnitExecutor
 			var ne = new HTMLTag("failure")
 			ne.attr("message", msg)
 			tc.add ne
-			toolcontext.warning(du.ndoc.location, "failure", "FAILURE: {tc.attrs["classname"]}.{tc.attrs["name"]} (in {file}): {msg}")
+			toolcontext.warning(du.mdoc.location, "failure", "FAILURE: {tc.attrs["classname"]}.{tc.attrs["name"]} (in {file}): {msg}")
 			toolcontext.modelbuilder.failed_entities += 1
 		else if res2 != 0 then
 			var ne = new HTMLTag("error")
 			ne.attr("message", msg)
 			tc.add ne
-			toolcontext.warning(du.ndoc.location, "error", "ERROR: {tc.attrs["classname"]}.{tc.attrs["name"]} (in {file}): {msg}")
+			toolcontext.warning(du.mdoc.location, "error", "ERROR: {tc.attrs["classname"]}.{tc.attrs["name"]} (in {file}): {msg}")
 			toolcontext.modelbuilder.failed_entities += 1
 		end
 		toolcontext.check_errors
 
 		testsuite.add(tc)
 	end
+
+	# Create and fill the header of a unit file `file`.
+	#
+	# A unit file is a Nit source file generated from one
+	# or more docunits that will be compiled and executed.
+	#
+	# The handled on the file is returned and must be completed and closed.
+	#
+	# `file` should be a valid filepath for a Nit source file.
+	private fun create_unitfile(file: String): Writer
+	do
+		var dir = file.dirname
+		if dir != "" then dir.mkdir
+		var f
+		f = new FileWriter.open(file)
+		f.write("# GENERATED FILE\n")
+		f.write("# Docunits extracted from comments\n")
+		if mmodule != null then
+			f.write("import {mmodule.name}\n")
+		end
+		f.write("\n")
+		return f
+	end
+
+	# Compile an unit file and return the compiler return code
+	#
+	# Can terminate the program if the compiler is not found
+	private fun compile_unitfile(file: String): Int
+	do
+		var nit_dir = toolcontext.nit_dir
+		var nitg = nit_dir/"bin/nitg"
+		if not nitg.file_exists then
+			toolcontext.error(null, "Cannot find nitg. Set envvar NIT_DIR.")
+			toolcontext.check_errors
+		end
+		var opts = new Array[String]
+		if mmodule != null then
+			opts.add "-I {mmodule.location.file.filename.dirname}"
+		end
+		var cmd = "{nitg} --ignore-visibility --no-color '{file}' {opts.join(" ")} >'{file}.out1' 2>&1 </dev/null -o '{file}.bin'"
+		var res = sys.system(cmd)
+		return res
+	end
 end
 
 # A unit-test to run
 class DocUnit
-	# The original comment node
-	var ndoc: ADoc
+	# The doc that contains self
+	var mdoc: MDoc
 
 	# The XML node that contains the information about the execution
 	var testcase: HTMLTag
@@ -350,7 +369,7 @@ redef class ModelBuilder
 			# NOTE: jenkins expects a '.' in the classname attr
 			tc.attr("classname", "nitunit." + mmodule.full_name + ".<module>")
 			tc.attr("name", "<module>")
-			d2m.extract(ndoc, tc)
+			d2m.extract(ndoc.to_mdoc, tc)
 		end label x
 		for nclassdef in nmodule.n_classdefs do
 			var mclassdef = nclassdef.mclassdef
@@ -363,7 +382,7 @@ redef class ModelBuilder
 					tc = new HTMLTag("testcase")
 					tc.attr("classname", "nitunit." + mmodule.full_name + "." + mclassdef.mclass.full_name)
 					tc.attr("name", "<class>")
-					d2m.extract(ndoc, tc)
+					d2m.extract(ndoc.to_mdoc, tc)
 				end
 			end
 			for npropdef in nclassdef.n_propdefs do
@@ -376,11 +395,74 @@ redef class ModelBuilder
 					tc = new HTMLTag("testcase")
 					tc.attr("classname", "nitunit." + mmodule.full_name + "." + mclassdef.mclass.full_name)
 					tc.attr("name", mpropdef.mproperty.full_name)
-					d2m.extract(ndoc, tc)
+					d2m.extract(ndoc.to_mdoc, tc)
 				end
 			end
 		end
 
+		d2m.run_tests
+
+		return ts
+	end
+
+	# Extracts and executes all the docunits in the readme of the `mgroup`
+	# Returns a JUnit-compatible `<testsuite>` XML element that contains the results of the executions.
+	fun test_group(mgroup: MGroup): HTMLTag
+	do
+		var ts = new HTMLTag("testsuite")
+		toolcontext.info("nitunit: doc-unit group {mgroup}", 2)
+
+		# usually, only the default module must be imported in the unit test.
+		var o = mgroup.default_mmodule
+
+		ts.attr("package", mgroup.full_name)
+
+		var prefix = toolcontext.test_dir
+		prefix = prefix.join_path(mgroup.to_s)
+		var d2m = new NitUnitExecutor(toolcontext, prefix, o, ts)
+
+		var tc
+
+		total_entities += 1
+		var mdoc = mgroup.mdoc
+		if mdoc == null then return ts
+
+		doc_entities += 1
+		tc = new HTMLTag("testcase")
+		# NOTE: jenkins expects a '.' in the classname attr
+		tc.attr("classname", "nitunit." + mgroup.full_name)
+		tc.attr("name", "<group>")
+		d2m.extract(mdoc, tc)
+
+		d2m.run_tests
+
+		return ts
+	end
+
+	# Test a document object unrelated to a Nit entity
+	fun test_mdoc(mdoc: MDoc): HTMLTag
+	do
+		var ts = new HTMLTag("testsuite")
+		var file = mdoc.location.to_s
+
+		toolcontext.info("nitunit: doc-unit file {file}", 2)
+
+		ts.attr("package", file)
+
+		var prefix = toolcontext.test_dir / "file"
+		var d2m = new NitUnitExecutor(toolcontext, prefix, null, ts)
+
+		var tc
+
+		total_entities += 1
+		doc_entities += 1
+
+		tc = new HTMLTag("testcase")
+		# NOTE: jenkins expects a '.' in the classname attr
+		tc.attr("classname", "nitunit.<file>")
+		tc.attr("name", file)
+
+		d2m.extract(mdoc, tc)
 		d2m.run_tests
 
 		return ts

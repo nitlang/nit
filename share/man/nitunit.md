@@ -12,13 +12,15 @@ nitunit [*options*] FILE...
 
 Unit testing in Nit can be achieved in two ways:
 
-* using `DocUnits` in code comments
+* using `DocUnits` in code comments or in markdown files
 * using `TestSuites` with test unit files
 
-`DocUnits` are executable pieces of code found in the documentation of modules,
+`DocUnits` are executable pieces of code found in the documentation of groups, modules,
 classes and properties.
 They are used for documentation purpose, they should be kept simple and illustrative.
 More advanced unit testing can be done using TestSuites.
+
+`DocUnits` can also be used in any markdown files.
 
 `TestSuites` are test files coupled to a tested module.
 They contain a list of test methods called TestCase.
@@ -105,6 +107,14 @@ Such `nitish` piece of code can be used to enclose examples that cannot compile 
 The `nitunit` command is used to test Nit files:
 
     $ nitunit foo.nit
+
+Groups (directories) can be given to test the documentation of the group and of all its Nit files:
+
+    $ nitunit lib/foo
+
+Finally, standard markdown documents can be checked with:
+
+    $ nitunit foo.md
 
 ## Working with `TestSuites`
 
