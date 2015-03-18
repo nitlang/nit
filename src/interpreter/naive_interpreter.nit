@@ -115,7 +115,7 @@ class NaiveInterpreter
 
 	# Is a return executed?
 	# Set this mark to skip the evaluation until the end of the specified method frame
-	var returnmark: nullable Frame = null
+	var returnmark: nullable FRAME = null
 
 	# Is a break or a continue executed?
 	# Set this mark to skip the evaluation until a labeled statement catch it with `is_escape`
@@ -283,11 +283,14 @@ class NaiveInterpreter
 		return res
 	end
 
+	# The virtual type of the frames used in the execution engine
+	type FRAME: Frame
+
 	# The current frame used to store local variables of the current method executed
-	fun frame: Frame do return frames.first
+	fun frame: FRAME do return frames.first
 
 	# The stack of all frames. The first one is the current one.
-	var frames = new List[Frame]
+	var frames = new List[FRAME]
 
 	# Return a stack trace. One line per function
 	fun stack_trace: String
@@ -312,6 +315,15 @@ class NaiveInterpreter
 	fun current_receiver_class: MClassType
 	do
 		return frames.first.arguments.first.mtype.as(MClassType)
+	end
+
+	# Initialize the environment for a call and return a new Frame
+	# *`node` The AST node
+	# *`mpropdef` The corresponding mpropdef
+	# *`args` Arguments of the call
+	fun new_frame(node: ANode, mpropdef: MPropDef, args: Array[Instance]): FRAME
+	do
+		return new InterpreterFrame(node, mpropdef, args)
 	end
 
 	# Exit the program with a message
@@ -340,14 +352,14 @@ class NaiveInterpreter
 	# Retrieve the value of the variable in the current frame
 	fun read_variable(v: Variable): Instance
 	do
-		var f = frames.first
+		var f = frames.first.as(InterpreterFrame)
 		return f.map[v]
 	end
 
 	# Assign the value of the variable in the current frame
 	fun write_variable(v: Variable, value: Instance)
 	do
-		var f = frames.first
+		var f = frames.first.as(InterpreterFrame)
 		f.map[v] = value
 	end
 
@@ -415,7 +427,7 @@ class NaiveInterpreter
 		var node = modelbuilder.mpropdef2node(mpropdef)
 		if mpropdef.is_abstract then
 			if node != null then
-				self.frames.unshift new Frame(node, mpropdef, args)
+				self.frames.unshift new_frame(node, mpropdef, args)
 			end
 			fatal("Abstract method `{mpropdef.mproperty.name}` called on `{args.first.mtype}`")
 			abort
@@ -667,7 +679,7 @@ class PrimitiveInstance[E]
 end
 
 # Information about local variables in a running method
-class Frame
+abstract class Frame
 	# The current visited node
 	# The node is stored by frame to keep a stack trace
 	var current_node: ANode
@@ -676,9 +688,16 @@ class Frame
 	var mpropdef: MPropDef
 	# Arguments of the method (the first is the receiver)
 	var arguments: Array[Instance]
+	# Indicate if the expression has an array comprehension form
+	var comprehension: nullable Array[Instance] = null
+end
+
+# Implementation of a Frame with a Hashmap to store local variables
+class InterpreterFrame
+	super Frame
+
 	# Mapping between a variable and the current value
 	private var map: Map[Variable, Instance] = new HashMap[Variable, Instance]
-	var comprehension: nullable Array[Instance] = null
 end
 
 redef class ANode
@@ -711,7 +730,7 @@ redef class AMethPropdef
 
 	redef fun call(v, mpropdef, args)
 	do
-		var f = new Frame(self, self.mpropdef.as(not null), args)
+		var f = v.new_frame(self, mpropdef, args)
 		var res = call_commons(v, mpropdef, args, f)
 		v.frames.shift
 		if v.returnmark == f then
@@ -1148,7 +1167,8 @@ redef class AAttrPropdef
 		if mpropdef == mreadpropdef then
 			assert args.length == 1
 			if not is_lazy or v.isset_attribute(attr, recv) then return v.read_attribute(attr, recv)
-			return evaluate_expr(v, recv)
+			var f = v.new_frame(self, mpropdef, args)
+			return evaluate_expr(v, recv, f)
 		else if mpropdef == mwritepropdef then
 			assert args.length == 2
 			v.write_attribute(attr, recv, args[1])
@@ -1163,7 +1183,8 @@ redef class AAttrPropdef
 	do
 		if is_lazy then return
 		if has_value then
-			evaluate_expr(v, recv)
+			var f = v.new_frame(self, mpropdef.as(not null), [recv])
+			evaluate_expr(v, recv, f)
 			return
 		end
 		var mpropdef = self.mpropdef
@@ -1175,10 +1196,9 @@ redef class AAttrPropdef
 		end
 	end
 
-	private fun evaluate_expr(v: NaiveInterpreter, recv: Instance): Instance
+	private fun evaluate_expr(v: NaiveInterpreter, recv: Instance, f: Frame): Instance
 	do
 		assert recv isa MutableInstance
-		var f = new Frame(self, self.mpropdef.as(not null), [recv])
 		v.frames.unshift(f)
 
 		var val

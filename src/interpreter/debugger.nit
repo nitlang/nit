@@ -225,6 +225,8 @@ class Debugger
 	# Auto continues the execution until the end or until an error is encountered
 	var autocontinue = false
 
+	redef type FRAME: InterpreterFrame
+
 	#######################################################################
 	##                  Execution of statement function                  ##
 	#######################################################################
@@ -867,7 +869,7 @@ class Debugger
 	# If the variable *variable_name* is an argument of the function being executed in the frame *frame*
 	# The function returns its position in the arguments
 	# Else, it returns -1
-	private fun get_position_of_variable_in_arguments(frame: Frame, variable_name: String): Int
+	private fun get_position_of_variable_in_arguments(frame: FRAME, variable_name: String): Int
 	do
 		var identifiers = get_identifiers_in_current_instruction(get_function_arguments(frame.mpropdef.location.text))
 		for i in [0 .. identifiers.length-1] do
@@ -1053,7 +1055,7 @@ class Debugger
 	#######################################################################
 
 	# Seeks a variable from the current frame called 'variable_path', can introspect complex objects using function get_variable_in_mutable_instance
-	private fun seek_variable(variable_path: String, frame: Frame): nullable Instance
+	private fun seek_variable(variable_path: String, frame: FRAME): nullable Instance
 	do
 		var full_variable = variable_path.split_with(".")
 
@@ -1073,7 +1075,7 @@ class Debugger
 	end
 
 	# Gets a variable 'variable_name' contained in the frame 'frame'
-	private fun get_variable_in_frame(variable_name: String, frame: Frame): nullable Instance
+	private fun get_variable_in_frame(variable_name: String, frame: FRAME): nullable Instance
 	do
 		if variable_name == "self" then
 			if frame.arguments.length >= 1 then return frame.arguments.first
@@ -1409,7 +1411,7 @@ redef class AMethPropdef
 	# Not supposed to be used by anyone else than the Debugger.
 	private fun rt_call(v: Debugger, mpropdef: MMethodDef, args: Array[Instance]): nullable Instance
 	do
-		var f = new Frame(self, self.mpropdef.as(not null), args)
+		var f = new InterpreterFrame(self, self.mpropdef.as(not null), args)
 		var curr_instances = v.frame.map
 		for i in curr_instances.keys do
 			f.map[i] = curr_instances[i]
