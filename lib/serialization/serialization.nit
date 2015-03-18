@@ -1,0 +1,153 @@
+# This file is part of NIT ( http://www.nitlanguage.org ).
+#
+# Copyright 2014 Alexis Laferrière <alexis.laf@xymus.net>
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# Abstract services to serialize Nit objects to different formats
+#
+# This module declares the `auto_serializable` annotation to mark Nit classes as serializable.
+# For an introduction to this service, refer to the documentation of the `serialization` group.
+# This documentation provides more technical information on interesting entitie of this module.
+#
+# Interesting entities for end users of serializable classes:
+#
+# * Serialize an instance subclass of `Serializable` with either
+#   `Serializer::serializable` and `Serializable::serialize`.
+# * Deserialize an object using `Deserializer::deserialize`.
+#   The object type must the be checked with an `assert` or otherwise.
+#
+# Interesting entities to create custom serializable classes:
+#
+# * Subclass `Serializable` to declare a class as serializable and to customize
+#   the serialization and deserialization behavior.
+# * Redefine `Serializable::core_serialize_to` to customize the serialization
+#   of the receiver class.
+# * Redefine `Deserializer::deserialize_class` to customize the deserialization
+#   of a specific class by name.
+#
+# Interesting entities for serialization format:
+#
+# * Subclass `Serializer` and `Deserializer` with custom serices.
+# * In `Serializer`, `serialize` and `serialize_reference` must be redefined.
+# * In `Deserializer`; `deserialize`, `deserialize_attribute and
+#   `notify_of_creation` must be redefined.
+module serialization is
+	new_annotation auto_serializable
+end
+
+# Abstract serialization service to be sub-classed by specialized services.
+interface Serializer
+	# Entry point method of this service, serialize the `object`
+	#
+	# This method, and refinements, should handle `null` and probably
+	# use double dispatch to customize the bahavior per serializable objects.
+	fun serialize(object: nullable Serializable) is abstract
+
+	# Serialize an object, with full serialization or a simple reference
+	protected fun serialize_reference(object: Serializable) is abstract
+
+	# Serialize an attribute to compose a serializable object
+	#
+	# This method should be called from `Serializable::core_serialize_to`.
+	fun serialize_attribute(name: String, value: nullable Object)
+	do
+		if not try_to_serialize(value) then
+			warn("argument {value.class_name}::{name} is not serializable.")
+		end
+	end
+
+	# Serialize `value` is possie, i.e. it is `Serializable` or `null`
+	fun try_to_serialize(value: nullable Object): Bool
+	do
+		if value isa Serializable then
+			value.serialize_to_or_delay(self)
+		else if value == null then
+			serialize value
+		else return false
+		return true
+	end
+
+	# Warn of problems and potential errors (such as if an attribute
+	# is not serializable)
+	fun warn(msg: String) do print "Serialization warning: {msg}"
+end
+
+# Abstract deserialization service
+#
+# After initialization of one of its sub-classes, call `deserialize`
+interface Deserializer
+	# Main method of this class, returns a Nit object
+	fun deserialize: nullable Object is abstract
+
+	# Internal method to be implemented by sub-classes
+	fun deserialize_attribute(name: String): nullable Object is abstract
+
+	# Internal method called by objects in creation,
+	# to be implemented by sub-classes
+	fun notify_of_creation(new_object: Object) is abstract
+
+	# Deserialize the next available object as an instance of `class_name`
+	#
+	# Returns the deserialized object on success, aborts on error.
+	#
+	# This method should be redefined for each custom subclass of `Serializable`.
+	# All refinement should look for a precise `class_name` and call super
+	# on unsupported classes.
+	fun deserialize_class(class_name: String): Object do
+		print "Error: doesn't know how to deserialize class \"{class_name}\""
+		abort
+	end
+end
+
+# Instances of this class can be passed to `Serializer::serialize`
+interface Serializable
+	# Serialize `self` to `serializer`
+	#
+	# This is a shortcut to `Serializer::serialize`.
+	fun serialize_to(serializer: Serializer) do serializer.serialize(self)
+
+	# Actual serialization of `self` to `serializer`
+	#
+	# This writes the full data of `self` to `serializer`.
+	#
+	# This method can be redefined in sub classes and refinements.
+	# It should use `Serializer::serialize_attribute` to to register real or
+	# logical attributes.
+	#
+	# Any refinement should have its equivalent refinement of
+	# `Deserializer::deserialize_class` to support this custom deserialization.
+	fun core_serialize_to(serializer: Serializer) do end
+
+	# Accept references or force direct serialization (using `serialize_to`)
+	#
+	# The subclass change the default behavior, which will accept references,
+	# to force to always serialize copies of `self`.
+	private fun serialize_to_or_delay(v: Serializer) do v.serialize_reference(self)
+end
+
+# Instances of this class are not delayed and instead serialized immediately
+# This applies mainly to `universal` types
+interface DirectSerializable
+	super Serializable
+
+	redef fun serialize_to_or_delay(v) do serialize_to(v)
+end
+
+redef class Bool super DirectSerializable end
+redef class Char super DirectSerializable end
+redef class Int super DirectSerializable end
+redef class Float super DirectSerializable end
+redef class NativeString super DirectSerializable end
+redef class String super DirectSerializable end
+redef class Array[E] super Serializable end
