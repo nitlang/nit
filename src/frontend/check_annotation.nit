@@ -91,6 +91,8 @@ intern
 extern
 no_warning
 
+auto_inspect
+
 pkgconfig
 cflags
 ldflags
