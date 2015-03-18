@@ -199,9 +199,9 @@ class OpportunityMeetupREST
 		if args.has("new_pers") then
 			var name = request.string_arg("persname")
 			var m_id = request.string_arg("meetup_id")
-			var ans = request.string_arg("answers").split("&")
-			if name == null or m_id == null then return bad_req
-			print ans
+			var ans_str = request.string_arg("answers")
+			if name == null or m_id == null or ans_str == null then return bad_req
+			var ans = ans_str.split("&")
 			var ansmap = new HashMap[Int, Int]
 			for i in ans do
 				var mp = i.split("=")
