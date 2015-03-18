@@ -15,5 +15,5 @@
 # limitations under the License.
 
 import kernel
-class Object[E: Object]
+interface Object[E: Object]
 end

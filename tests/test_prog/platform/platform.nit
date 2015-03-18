@@ -18,7 +18,7 @@ module platform
 import end
 
 # Root of everything.
-class Object
+interface Object
 	# Used for comparisons.
 	type OTHER: nullable Object
 

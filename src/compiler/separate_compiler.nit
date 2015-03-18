@@ -29,6 +29,8 @@ redef class ToolContext
 	var opt_no_union_attribute = new OptionBool("Put primitive attibutes in a box instead of an union", "--no-union-attribute")
 	# --no-shortcut-equate
 	var opt_no_shortcut_equate = new OptionBool("Always call == in a polymorphic way", "--no-shortcut-equal")
+	# --no-tag-primitives
+	var opt_no_tag_primitives = new OptionBool("Use only boxes for primitive types", "--no-tag-primitives")
 
 	# --colors-are-symbols
 	var opt_colors_are_symbols = new OptionBool("Store colors as symbols (link-boost)", "--colors-are-symbols")
@@ -65,6 +67,7 @@ redef class ToolContext
 		self.option_context.add_option(self.opt_no_inline_intern)
 		self.option_context.add_option(self.opt_no_union_attribute)
 		self.option_context.add_option(self.opt_no_shortcut_equate)
+		self.option_context.add_option(self.opt_no_tag_primitives)
 		self.option_context.add_option(opt_colors_are_symbols, opt_trampoline_call, opt_guard_call, opt_direct_call_monomorph0, opt_substitute_monomorph, opt_link_boost)
 		self.option_context.add_option(self.opt_inline_coloring_numbers, opt_inline_some_methods, opt_direct_call_monomorph, opt_skip_dead_methods, opt_semi_global)
 		self.option_context.add_option(self.opt_colo_dead_methods)
@@ -163,6 +166,7 @@ class SeparateCompiler
 		modelbuilder.toolcontext.info("Property coloring", 2)
 		compiler.new_file("{c_name}.classes")
 		compiler.do_property_coloring
+		compiler.compile_class_infos
 		for m in mainmodule.in_importation.greaters do
 			for mclass in m.intro_mclasses do
 				#if mclass.kind == abstract_kind or mclass.kind == interface_kind then continue
@@ -217,6 +221,11 @@ class SeparateCompiler
 		self.header.add_decl("struct instance \{ const struct type *type; const struct class *class; nitattribute_t attrs[]; \}; /* general C type representing a Nit instance. */")
 		self.header.add_decl("struct types \{ int dummy; const struct type *types[]; \}; /* a list types (used for vts, fts and unresolved lists). */")
 		self.header.add_decl("typedef struct instance val; /* general C type representing a Nit instance. */")
+
+		if not modelbuilder.toolcontext.opt_no_tag_primitives.value then
+			self.header.add_decl("extern const struct class *class_info[];")
+			self.header.add_decl("extern const struct type *type_info[];")
+		end
 	end
 
 	fun compile_header_attribute_structs
@@ -800,6 +809,8 @@ class SeparateCompiler
 		if mtype.ctype != "val*" or mtype.mclass.name == "Pointer" then
 			# Is a primitive type or the Pointer class, not any other extern class
 
+			if mtype.is_tagged then return
+
 			#Build instance struct
 			self.header.add_decl("struct instance_{c_name} \{")
 			self.header.add_decl("const struct type *type;")
@@ -915,6 +926,58 @@ class SeparateCompiler
 			v.add("return {res};")
 		end
 		v.add("\}")
+	end
+
+	# Compile structures used to map tagged primitive values to their classes and types.
+	# This method also determines which class will be tagged.
+	fun compile_class_infos
+	do
+		if modelbuilder.toolcontext.opt_no_tag_primitives.value then return
+
+		# Note: if you change the tagging scheme, do not forget to update
+		# `autobox` and `extract_tag`
+		var class_info = new Array[nullable MClass].filled_with(null, 4)
+		for t in box_kinds.keys do
+			# Note: a same class can be associated to multiple slots if one want to
+			# use some Huffman coding.
+			if t.name == "Int" then
+				class_info[1] = t
+			else if t.name == "Char" then
+				class_info[2] = t
+			else if t.name == "Bool" then
+				class_info[3] = t
+			else
+				continue
+			end
+			t.mclass_type.is_tagged = true
+		end
+
+		# Compile the table for classes. The tag is used as an index
+		var v = self.new_visitor
+		v.add_decl "const struct class *class_info[4] = \{"
+		for t in class_info do
+			if t == null then
+				v.add_decl("NULL,")
+			else
+				var s = "class_{t.c_name}"
+				v.require_declaration(s)
+				v.add_decl("&{s},")
+			end
+		end
+		v.add_decl("\};")
+
+		# Compile the table for types. The tag is used as an index
+		v.add_decl "const struct type *type_info[4] = \{"
+		for t in class_info do
+			if t == null then
+				v.add_decl("NULL,")
+			else
+				var s = "type_{t.c_name}"
+				v.require_declaration(s)
+				v.add_decl("&{s},")
+			end
+		end
+		v.add_decl("\};")
 	end
 
 	# Add a dynamic test to ensure that the type referenced by `t` is a live type
@@ -1076,8 +1139,30 @@ class SeparateCompilerVisitor
 		else if value.mtype.ctype == "val*" and mtype.ctype == "val*" then
 			return value
 		else if value.mtype.ctype == "val*" then
+			if mtype.is_tagged then
+				if mtype.name == "Int" then
+					return self.new_expr("(long)({value})>>2", mtype)
+				else if mtype.name == "Char" then
+					return self.new_expr("(char)((long)({value})>>2)", mtype)
+				else if mtype.name == "Bool" then
+					return self.new_expr("(short int)((long)({value})>>2)", mtype)
+				else
+					abort
+				end
+			end
 			return self.new_expr("((struct instance_{mtype.c_name}*){value})->value; /* autounbox from {value.mtype} to {mtype} */", mtype)
 		else if mtype.ctype == "val*" then
+			if value.mtype.is_tagged then
+				if value.mtype.name == "Int" then
+					return self.new_expr("(val*)({value}<<2|1)", mtype)
+				else if value.mtype.name == "Char" then
+					return self.new_expr("(val*)((long)({value})<<2|2)", mtype)
+				else if value.mtype.name == "Bool" then
+					return self.new_expr("(val*)((long)({value})<<2|3)", mtype)
+				else
+					abort
+				end
+			end
 			var valtype = value.mtype.as(MClassType)
 			if mtype isa MClassType and mtype.mclass.kind == extern_kind and mtype.mclass.name != "NativeString" then
 				valtype = compiler.mainmodule.pointer_type
@@ -1140,11 +1225,42 @@ class SeparateCompilerVisitor
 		end
 	end
 
-	# Return a C expression returning the runtime type structure of the value
-	# The point of the method is to works also with primitives types.
+	# Returns a C expression containing the tag of the value as a long.
+	#
+	# If the C expression is evaluated to 0, it means there is no tag.
+	# Thus the expression can be used as a condition.
+	fun extract_tag(value: RuntimeVariable): String
+	do
+		assert value.mtype.ctype == "val*"
+		return "((long){value}&3)" # Get the two low bits
+	end
+
+	# Returns a C expression of the runtime class structure of the value.
+	# The point of the method is to work also with primitive types.
+	fun class_info(value: RuntimeVariable): String
+	do
+		if value.mtype.ctype == "val*" then
+			if can_be_primitive(value) and not compiler.modelbuilder.toolcontext.opt_no_tag_primitives.value then
+				var tag = extract_tag(value)
+				return "({tag}?class_info[{tag}]:{value}->class)"
+			end
+			return "{value}->class"
+		else
+			compiler.undead_types.add(value.mtype)
+			self.require_declaration("class_{value.mtype.c_name}")
+			return "(&class_{value.mtype.c_name})"
+		end
+	end
+
+	# Returns a C expression of the runtime type structure of the value.
+	# The point of the method is to work also with primitive types.
 	fun type_info(value: RuntimeVariable): String
 	do
 		if value.mtype.ctype == "val*" then
+			if can_be_primitive(value) and not compiler.modelbuilder.toolcontext.opt_no_tag_primitives.value then
+				var tag = extract_tag(value)
+				return "({tag}?type_info[{tag}]:{value}->type)"
+			end
 			return "{value}->type"
 		else
 			compiler.undead_types.add(value.mtype)
@@ -1317,14 +1433,14 @@ class SeparateCompilerVisitor
 				self.add "{ress}{callsym}({ss}); /* {mmethod} on {arguments.first.inspect}*/"
 			else
 				self.require_declaration(const_color)
-				self.add "{ress}(({runtime_function.c_funptrtype})({arguments.first}->class->vft[{const_color}]))({ss}); /* {mmethod} on {arguments.first.inspect}*/"
+				self.add "{ress}(({runtime_function.c_funptrtype})({class_info(arguments.first)}->vft[{const_color}]))({ss}); /* {mmethod} on {arguments.first.inspect}*/"
 			end
 		else if mentity isa MMethod and compiler.modelbuilder.toolcontext.opt_guard_call.value then
 			var callsym = "CALL_" + const_color
 			self.require_declaration(callsym)
 			self.add "if (!{callsym}) \{"
 			self.require_declaration(const_color)
-			self.add "{ress}(({runtime_function.c_funptrtype})({arguments.first}->class->vft[{const_color}]))({ss}); /* {mmethod} on {arguments.first.inspect}*/"
+			self.add "{ress}(({runtime_function.c_funptrtype})({class_info(arguments.first)}->vft[{const_color}]))({ss}); /* {mmethod} on {arguments.first.inspect}*/"
 			self.add "\} else \{"
 			self.add "{ress}{callsym}({ss}); /* {mmethod} on {arguments.first.inspect}*/"
 			self.add "\}"
@@ -1334,7 +1450,7 @@ class SeparateCompilerVisitor
 			self.add "{ress}{callsym}({ss}); /* {mmethod} on {arguments.first.inspect}*/"
 		else
 			self.require_declaration(const_color)
-			self.add "{ress}(({runtime_function.c_funptrtype})({arguments.first}->class->vft[{const_color}]))({ss}); /* {mmethod} on {arguments.first.inspect}*/"
+			self.add "{ress}(({runtime_function.c_funptrtype})({class_info(arguments.first)}->vft[{const_color}]))({ss}); /* {mmethod} on {arguments.first.inspect}*/"
 		end
 
 		if res0 != null then
@@ -1696,7 +1812,7 @@ class SeparateCompilerVisitor
 				self.add("{res} = ({value2} != NULL) && ({value2}->class == &class_{mtype1.c_name}); /* is_same_type_test */")
 			end
 		else
-			self.add("{res} = ({value1} == {value2}) || ({value1} != NULL && {value2} != NULL && {value1}->class == {value2}->class); /* is_same_type_test */")
+			self.add("{res} = ({value1} == {value2}) || ({value1} != NULL && {value2} != NULL && {class_info(value1)} == {class_info(value2)}); /* is_same_type_test */")
 		end
 		return res
 	end
@@ -1706,7 +1822,7 @@ class SeparateCompilerVisitor
 		var res = self.get_name("var_class_name")
 		self.add_decl("const char* {res};")
 		if value.mtype.ctype == "val*" then
-			self.add "{res} = {value} == NULL ? \"null\" : {value}->type->name;"
+			self.add "{res} = {value} == NULL ? \"null\" : {type_info(value)}->name;"
 		else if value.mtype isa MClassType and value.mtype.as(MClassType).mclass.kind == extern_kind and
 			value.mtype.as(MClassType).name != "NativeString" then
 			self.add "{res} = \"{value.mtype.as(MClassType).mclass}\";"
@@ -1730,6 +1846,8 @@ class SeparateCompilerVisitor
 				self.add("{res} = {value1} == {value2};")
 			else if value2.mtype.ctype != "val*" then
 				self.add("{res} = 0; /* incompatible types {value1.mtype} vs. {value2.mtype}*/")
+			else if value1.mtype.is_tagged then
+				self.add("{res} = ({value2} != NULL) && ({self.autobox(value2, value1.mtype)} == {value1});")
 			else
 				var mtype1 = value1.mtype.as(MClassType)
 				self.require_declaration("class_{mtype1.c_name}")
@@ -1766,6 +1884,13 @@ class SeparateCompilerVisitor
 			else if t2.ctype != "val*" then
 				incompatible = true
 			else if can_be_primitive(value2) then
+				if t1.is_tagged then
+					self.add("{res} = {value1} == {value2};")
+					return res
+				end
+				if not compiler.modelbuilder.toolcontext.opt_no_tag_primitives.value then
+					test.add("(!{extract_tag(value2)})")
+				end
 				test.add("{value1}->class == {value2}->class")
 			else
 				incompatible = true
@@ -1773,6 +1898,13 @@ class SeparateCompilerVisitor
 		else if t2.ctype != "val*" then
 			primitive = t2
 			if can_be_primitive(value1) then
+				if t2.is_tagged then
+					self.add("{res} = {value1} == {value2};")
+					return res
+				end
+				if not compiler.modelbuilder.toolcontext.opt_no_tag_primitives.value then
+					test.add("(!{extract_tag(value1)})")
+				end
 				test.add("{value1}->class == {value2}->class")
 			else
 				incompatible = true
@@ -1791,12 +1923,24 @@ class SeparateCompilerVisitor
 			end
 		end
 		if primitive != null then
+			if primitive.is_tagged then
+				self.add("{res} = {value1} == {value2};")
+				return res
+			end
 			test.add("((struct instance_{primitive.c_name}*){value1})->value == ((struct instance_{primitive.c_name}*){value2})->value")
 		else if can_be_primitive(value1) and can_be_primitive(value2) then
+			if not compiler.modelbuilder.toolcontext.opt_no_tag_primitives.value then
+				test.add("(!{extract_tag(value1)}) && (!{extract_tag(value2)})")
+			end
 			test.add("{value1}->class == {value2}->class")
 			var s = new Array[String]
 			for t, v in self.compiler.box_kinds do
+				if t.mclass_type.is_tagged then continue
 				s.add "({value1}->class->box_kind == {v} && ((struct instance_{t.c_name}*){value1})->value == ((struct instance_{t.c_name}*){value2})->value)"
+			end
+			if s.is_empty then
+				self.add("{res} = {value1} == {value2};")
+				return res
 			end
 			test.add("({s.join(" || ")})")
 		else
@@ -2120,6 +2264,12 @@ class SeparateRuntimeFunction
 			v2.add "\}"
 		end
 	end
+end
+
+redef class MType
+	# Are values of `self` tagged?
+	# If false, it means that the type is not primitive, or is boxed.
+	var is_tagged = false
 end
 
 redef class MEntity

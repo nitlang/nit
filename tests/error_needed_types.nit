@@ -1,7 +1,7 @@
 
 import end#alt7#
 #alt7#import kernel
-class Object#alt7#
+interface Object#alt7#
 end#alt7#
 
 #alt6#class A

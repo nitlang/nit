@@ -207,7 +207,7 @@ function bench_nitc-s_options()
 
 	plot "$name.gnu"
 }
-bench_nitc-s_options "slower" --hardening --no-shortcut-equal --no-union-attribute --no-shortcut-range --no-inline-intern "--no-gcc-directive likely --no-gcc-directive noreturn"
+bench_nitc-s_options "slower" --hardening --no-shortcut-equal --no-union-attribute --no-shortcut-range --no-inline-intern "--no-gcc-directive likely --no-gcc-directive noreturn" "--no-tag-primitives"
 bench_nitc-s_options "nocheck" --no-check-null --no-check-autocast --no-check-attr-isset --no-check-covariance --no-check-assert
 bench_nitc-s_options "faster" --skip-dead-methods --inline-coloring-numbers --inline-some-methods --direct-call-monomorph "--inline-some-methods --direct-call-monomorph" ""
 
