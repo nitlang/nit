@@ -20,18 +20,19 @@ module calculator_android is
 	app_version(0, 1, git_revision)
 	java_package "org.nitlanguage.calculator"
 
-	# Use a translucent background and lock in portrait mode
-	android_manifest_activity """
-		android:theme="@android:style/Theme.Holo.Wallpaper"
-		android:screenOrientation="portrait""""
+	# Lock in portrait mode
+	android_manifest_activity """android:screenOrientation="portrait""""
 end
 
-import android
+# FIXME the next line should import `android` only when it uses nit_activity
+import android::log
 import android::ui
 
 import calculator_logic
 
-redef class App
+redef class Activity
+	super EventCatcher
+
 	private var context = new CalculatorContext
 
 	# The main display, at the top of the screen
@@ -43,7 +44,7 @@ redef class App
 	# Has this window been initialized?
 	private var inited = false
 
-	redef fun init_window
+	redef fun on_start
 	do
 		super
 
@@ -51,8 +52,7 @@ redef class App
 		inited = true
 
 		# Setup UI
-		var context = native_activity
-		var layout = new NativeLinearLayout(context)
+		var layout = new NativeLinearLayout(native)
 		layout.set_vertical
 
 		# Display screen
@@ -69,12 +69,13 @@ redef class App
 		           ["="]]
 
 		for line in ops do
-			var buts_layout = new NativeLinearLayout(context)
+			var buts_layout = new NativeLinearLayout(native)
 			buts_layout.set_horizontal
 			layout.add_view_with_weight(buts_layout, 1.0)
 
 			for op in line do
 				var but = new Button
+				but.event_catcher = self
 				but.text = op
 				but.text_size = 40
 				buts_layout.add_view_with_weight(but.native, 1.0)
@@ -82,7 +83,33 @@ redef class App
 			end
 		end
 
-		context.content_view = layout
+		native.content_view = layout
+	end
+
+	redef fun on_save_instance_state(state)
+	do
+		super
+
+		var nity = new Bundle.from(state)
+		nity["context"] = context.to_json
+	end
+
+	redef fun on_restore_instance_state(state)
+	do
+		super
+
+		var nity = new Bundle.from(state)
+		if not nity.has("context") then return
+
+		var json = nity.string("context")
+		if json == null then return
+
+		context = new CalculatorContext.from_json(json)
+	end
+
+	redef fun on_resume
+	do
+		display.text = context.display_text
 	end
 
 	redef fun catch_event(event)

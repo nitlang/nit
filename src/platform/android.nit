@@ -181,14 +181,15 @@ $(call import-module,android/native_app_glue)
 
 		### generate AndroidManifest.xml
 		dir = android_project_root
-		"""<?xml version="1.0" encoding="utf-8"?>
+		var manifest_file = new FileWriter.open("{dir}/AndroidManifest.xml")
+		manifest_file.write """
+<?xml version="1.0" encoding="utf-8"?>
 <!-- BEGIN_INCLUDE(manifest) -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
         package="{{{app_package}}}"
         android:versionCode="{{{project.version_code}}}"
         android:versionName="{{{app_version}}}">
 
-    <!-- This is the platform API where NativeActivity was introduced. -->
     <uses-sdk
         android:minSdkVersion="{{{app_min_api}}}"
         android:targetSdkVersion="{{{app_target_api}}}"
@@ -200,22 +201,23 @@ $(call import-module,android/native_app_glue)
 		android:debuggable="{{{not release}}}"
 		{{{icon_declaration}}}
 		android:configChanges="mcc|mnc|locale|touchscreen|keyboard|keyboardHidden|navigation|screenLayout|fontScale|uiMode|orientation">
+"""
 
-        <!-- Our activity is the built-in NativeActivity framework class.
-             This will take care of integrating with our NDK code. -->
-        <activity android:name="android.app.NativeActivity"
+		for activity in project.activities do
+			manifest_file.write """
+        <activity android:name="{{{activity}}}"
                 android:label="@string/app_name"
                 {{{project.manifest_activity_attributes.join("\n")}}}
                 {{{icon_declaration}}}>
-            <!-- Tell NativeActivity the name of our .so -->
-            <meta-data android:name=\"android.app.lib_name\"
-                    android:value=\"main\" />
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+"""
+		end
 
+		manifest_file.write """
 {{{project.manifest_application_lines.join("\n")}}}
 
     </application>
@@ -224,7 +226,7 @@ $(call import-module,android/native_app_glue)
 
 </manifest>
 <!-- END_INCLUDE(manifest) -->
-		""".write_to_file("{dir}/AndroidManifest.xml")
+"""
 
 		### Link to png sources
 		# libpng is not available on Android NDK
