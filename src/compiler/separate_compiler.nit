@@ -995,6 +995,7 @@ class SeparateCompiler
 				v.add_decl("NULL,")
 			else
 				var s = "type_{t.c_name}"
+				undead_types.add(t.mclass_type)
 				v.require_declaration(s)
 				v.add_decl("&{s},")
 			end
