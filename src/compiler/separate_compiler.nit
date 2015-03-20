@@ -478,13 +478,35 @@ class SeparateCompiler
 
 	private fun poset_from_mtypes(mtypes, cast_types: Set[MType]): POSet[MType] do
 		var poset = new POSet[MType]
+
+		# Instead of doing the full matrix mtypes X cast_types,
+		# a grouping is done by the base classes of the type so
+		# that we compare only types whose base classes are in inheritance.
+
+		var mtypes_by_class = new MultiHashMap[MClass, MType]
 		for e in mtypes do
+			var c = e.as_notnullable.as(MClassType).mclass
+			mtypes_by_class[c].add(e)
 			poset.add_node(e)
-			for o in cast_types do
-				if e == o then continue
-				poset.add_node(o)
-				if e.is_subtype(mainmodule, null, o) then
-					poset.add_edge(e, o)
+		end
+
+		var casttypes_by_class = new MultiHashMap[MClass, MType]
+		for e in cast_types do
+			var c = e.as_notnullable.as(MClassType).mclass
+			casttypes_by_class[c].add(e)
+			poset.add_node(e)
+		end
+
+		for c1, ts1 in mtypes_by_class do
+			for c2 in c1.in_hierarchy(mainmodule).greaters do
+				var ts2 = casttypes_by_class[c2]
+				for e in ts1 do
+					for o in ts2 do
+						if e == o then continue
+						if e.is_subtype(mainmodule, null, o) then
+							poset.add_edge(e, o)
+						end
+					end
 				end
 			end
 		end
