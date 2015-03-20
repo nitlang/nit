@@ -456,14 +456,9 @@ class SeparateCompiler
 		# Collect types to colorize
 		var live_types = runtime_type_analysis.live_types
 		var live_cast_types = runtime_type_analysis.live_cast_types
-		var mtypes = new HashSet[MType]
-		mtypes.add_all(live_types)
-		for c in self.box_kinds.keys do
-			mtypes.add(c.mclass_type)
-		end
 
 		# Compute colors
-		var poset = poset_from_mtypes(mtypes, live_cast_types)
+		var poset = poset_from_mtypes(live_types, live_cast_types)
 		var colorer = new POSetColorer[MType]
 		colorer.colorize(poset)
 		type_ids = colorer.ids
@@ -471,7 +466,7 @@ class SeparateCompiler
 		type_tables = build_type_tables(poset)
 
 		# VT and FT are stored with other unresolved types in the big resolution_tables
-		self.compile_resolution_tables(mtypes)
+		self.compile_resolution_tables(live_types)
 
 		return poset
 	end
