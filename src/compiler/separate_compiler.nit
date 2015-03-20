@@ -466,7 +466,7 @@ class SeparateCompiler
 		type_tables = build_type_tables(poset)
 
 		# VT and FT are stored with other unresolved types in the big resolution_tables
-		self.compile_resolution_tables(live_types)
+		self.compute_resolution_tables(live_types)
 
 		return poset
 	end
@@ -527,9 +527,8 @@ class SeparateCompiler
 		return tables
 	end
 
-	protected fun compile_resolution_tables(mtypes: Set[MType]) do
-		# resolution_tables is used to perform a type resolution at runtime in O(1)
-
+	# resolution_tables is used to perform a type resolution at runtime in O(1)
+	private fun compute_resolution_tables(mtypes: Set[MType]) do
 		# During the visit of the body of classes, live_unresolved_types are collected
 		# and associated to
 		# Collect all live_unresolved_types (visited in the body of classes)
