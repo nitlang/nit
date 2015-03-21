@@ -2283,7 +2283,7 @@ redef class AAttrPropdef
 
 				v.assign(res, value)
 				if not useiset then
-					var true_v = v.new_expr("1", v.bool_type)
+					var true_v = v.bool_instance(true)
 					v.write_attribute(guard, arguments.first, true_v)
 				end
 				v.add("\}")
@@ -2298,7 +2298,7 @@ redef class AAttrPropdef
 				var ret = self.mpropdef.static_mtype
 				var useiset = ret.ctype == "val*" and not ret isa MNullableType
 				if not useiset then
-					v.write_attribute(self.mlazypropdef.mproperty, arguments.first, v.new_expr("1", v.bool_type))
+					v.write_attribute(self.mlazypropdef.mproperty, arguments.first, v.bool_instance(true))
 				end
 			end
 		else
@@ -2696,7 +2696,7 @@ redef class AOrElseExpr
 end
 
 redef class AIntExpr
-	redef fun expr(v) do return v.new_expr("{self.value.to_s}", self.mtype.as(not null))
+	redef fun expr(v) do return v.int_instance(self.value.as(not null))
 end
 
 redef class AFloatExpr
@@ -2769,11 +2769,11 @@ redef class AOrangeExpr
 end
 
 redef class ATrueExpr
-	redef fun expr(v) do return v.new_expr("1", self.mtype.as(not null))
+	redef fun expr(v) do return v.bool_instance(true)
 end
 
 redef class AFalseExpr
-	redef fun expr(v) do return v.new_expr("0", self.mtype.as(not null))
+	redef fun expr(v) do return v.bool_instance(false)
 end
 
 redef class ANullExpr
