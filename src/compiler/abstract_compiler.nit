@@ -1426,11 +1426,37 @@ abstract class AbstractCompilerVisitor
 		return res
 	end
 
+	# Generate a char value
+	fun char_instance(value: Char): RuntimeVariable
+	do
+		var t = mmodule.char_type
+		var res = new RuntimeVariable("'{value.to_s.escape_to_c}'", t, t)
+		return res
+	end
+
+	# Generate a float value
+	#
+	# FIXME pass a Float, not a string
+	fun float_instance(value: String): RuntimeVariable
+	do
+		var t = mmodule.float_type
+		var res = new RuntimeVariable("{value}", t, t)
+		return res
+	end
+
 	# Generate an integer value
 	fun bool_instance(value: Bool): RuntimeVariable
 	do
 		var s = if value then "1" else "0"
 		var res = new RuntimeVariable(s, bool_type, bool_type)
+		return res
+	end
+
+	# Generate the `null` value
+	fun null_instance: RuntimeVariable
+	do
+		var t = compiler.mainmodule.model.null_type
+		var res = new RuntimeVariable("((val*)NULL)", t, t)
 		return res
 	end
 
@@ -2696,11 +2722,11 @@ redef class AIntExpr
 end
 
 redef class AFloatExpr
-	redef fun expr(v) do return v.new_expr("{self.n_float.text}", self.mtype.as(not null)) # FIXME use value, not n_float
+	redef fun expr(v) do return v.float_instance("{self.n_float.text}") # FIXME use value, not n_float
 end
 
 redef class ACharExpr
-	redef fun expr(v) do return v.new_expr("'{self.value.to_s.escape_to_c}'", self.mtype.as(not null))
+	redef fun expr(v) do return v.char_instance(self.value.as(not null))
 end
 
 redef class AArrayExpr
@@ -2773,7 +2799,7 @@ redef class AFalseExpr
 end
 
 redef class ANullExpr
-	redef fun expr(v) do return v.new_expr("NULL", self.mtype.as(not null))
+	redef fun expr(v) do return v.null_instance
 end
 
 redef class AIsaExpr
