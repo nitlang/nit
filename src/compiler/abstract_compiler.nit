@@ -1078,9 +1078,6 @@ abstract class AbstractCompilerVisitor
 		self.writer = new CodeWriter(compiler.files.last)
 	end
 
-	# Force to get the primitive class named `name` or abort
-	fun get_class(name: String): MClass do return self.compiler.mainmodule.get_primitive_class(name)
-
 	# Force to get the primitive property named `name` in the instance `recv` or abort
 	fun get_property(name: String, recv: MType): MMethod
 	do
@@ -1416,6 +1413,11 @@ abstract class AbstractCompilerVisitor
 		end
 	end
 
+	# The currently processed module
+	#
+	# alias for `compiler.mainmodule`
+	fun mmodule: MModule do return compiler.mainmodule
+
 	# Generate an integer value
 	fun int_instance(value: Int): RuntimeVariable
 	do
@@ -1439,14 +1441,14 @@ abstract class AbstractCompilerVisitor
 	# Generate a string value
 	fun string_instance(string: String): RuntimeVariable
 	do
-		var mtype = self.get_class("String").mclass_type
+		var mtype = mmodule.string_type
 		var name = self.get_name("varonce")
 		self.add_decl("static {mtype.ctype} {name};")
 		var res = self.new_var(mtype)
 		self.add("if (likely({name}!=NULL)) \{")
 		self.add("{res} = {name};")
 		self.add("\} else \{")
-		var native_mtype = self.get_class("NativeString").mclass_type
+		var native_mtype = mmodule.native_string_type
 		var nat = self.new_var(native_mtype)
 		self.add("{nat} = \"{string.escape_to_c}\";")
 		var length = self.int_instance(string.length)

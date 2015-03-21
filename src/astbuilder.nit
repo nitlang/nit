@@ -32,7 +32,7 @@ class ASTBuilder
 	# Make a new Int literal
 	fun make_int(value: Int): AIntExpr
 	do
-		return new ADecIntExpr.make(value, mmodule.get_primitive_class("Int").mclass_type)
+		return new ADecIntExpr.make(value, mmodule.int_type)
 	end
 
 	# Make a new instatiation

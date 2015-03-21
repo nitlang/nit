@@ -402,7 +402,7 @@ class GlobalCompilerVisitor
 
 	redef fun native_array_instance(elttype: MType, length: RuntimeVariable): RuntimeVariable
 	do
-		var ret_type = self.get_class("NativeArray").get_mtype([elttype])
+		var ret_type = mmodule.native_array_type(elttype)
 		ret_type = anchor(ret_type).as(MClassType)
 		return self.new_expr("NEW_{ret_type.c_name}({length})", ret_type)
 	end
@@ -894,10 +894,10 @@ class GlobalCompilerVisitor
 	redef fun array_instance(array, elttype)
 	do
 		elttype = self.anchor(elttype)
-		var arraytype = self.get_class("Array").get_mtype([elttype])
+		var arraytype = mmodule.array_type(elttype)
 		var res = self.init_instance(arraytype)
 		self.add("\{ /* {res} = array_instance Array[{elttype}] */")
-		var nat = self.new_var(self.get_class("NativeArray").get_mtype([elttype]))
+		var nat = self.new_var(mmodule.native_array_type(elttype))
 		nat.is_exact = true
 		self.add("{nat} = NEW_{nat.mtype.c_name}({array.length});")
 		for i in [0..array.length[ do
@@ -991,7 +991,7 @@ private class CustomizedRuntimeFunction
 		for i in [0..mmethoddef.msignature.arity[ do
 			var mtype = mmethoddef.msignature.mparameters[i].mtype
 			if i == mmethoddef.msignature.vararg_rank then
-				mtype = v.get_class("Array").get_mtype([mtype])
+				mtype = v.mmodule.array_type(mtype)
 			end
 			mtype = v.resolve_for(mtype, selfvar)
 			comment.append(", {mtype}")

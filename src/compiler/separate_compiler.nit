@@ -268,7 +268,7 @@ class SeparateCompiler
 		if mclass.mclass_type.ctype_extern == "val*" then
 			return 0
 		else if mclass.kind == extern_kind and mclass.name != "NativeString" then
-			return self.box_kinds[self.mainmodule.get_primitive_class("Pointer")]
+			return self.box_kinds[self.mainmodule.pointer_type.mclass]
 		else
 			return self.box_kinds[mclass]
 		end
@@ -1967,8 +1967,8 @@ class SeparateCompilerVisitor
 
 	redef fun array_instance(array, elttype)
 	do
-		var nclass = self.get_class("NativeArray")
-		var arrayclass = self.get_class("Array")
+		var nclass = mmodule.native_array_class
+		var arrayclass = mmodule.array_class
 		var arraytype = arrayclass.get_mtype([elttype])
 		var res = self.init_instance(arraytype)
 		self.add("\{ /* {res} = array_instance Array[{elttype}] */")
@@ -1985,7 +1985,7 @@ class SeparateCompilerVisitor
 
 	redef fun native_array_instance(elttype: MType, length: RuntimeVariable): RuntimeVariable
 	do
-		var mtype = self.get_class("NativeArray").get_mtype([elttype])
+		var mtype = mmodule.native_array_type(elttype)
 		self.require_declaration("NEW_{mtype.mclass.c_name}")
 		assert mtype isa MGenericType
 		var compiler = self.compiler
@@ -2005,7 +2005,7 @@ class SeparateCompilerVisitor
 	redef fun native_array_def(pname, ret_type, arguments)
 	do
 		var elttype = arguments.first.mtype
-		var nclass = self.get_class("NativeArray")
+		var nclass = mmodule.native_array_class
 		var recv = "((struct instance_{nclass.c_name}*){arguments[0]})->values"
 		if pname == "[]" then
 			# Because the objects are boxed, return the box to avoid unnecessary (or broken) unboxing/reboxing
@@ -2024,14 +2024,6 @@ class SeparateCompilerVisitor
 			self.add("memmove({recv1}, {recv}, {arguments[2]}*sizeof({elttype.ctype}));")
 			return
 		end
-	end
-
-	redef fun calloc_array(ret_type, arguments)
-	do
-		var mclass = self.get_class("ArrayCapable")
-		var ft = mclass.mparameters.first
-		var res = self.native_array_instance(ft, arguments[1])
-		self.ret(res)
 	end
 
 	fun link_unresolved_type(mclassdef: MClassDef, mtype: MType) do
@@ -2144,7 +2136,7 @@ class SeparateRuntimeFunction
 		for i in [0..called_signature.arity[ do
 			var mtype = called_signature.mparameters[i].mtype
 			if i == called_signature.vararg_rank then
-				mtype = mmethoddef.mclassdef.mmodule.get_primitive_class("Array").get_mtype([mtype])
+				mtype = mmethoddef.mclassdef.mmodule.array_type(mtype)
 			end
 			sig.append(", {mtype.ctype} p{i}")
 		end
@@ -2183,7 +2175,7 @@ class SeparateRuntimeFunction
 		for i in [0..msignature.arity[ do
 			var mtype = msignature.mparameters[i].mtype
 			if i == msignature.vararg_rank then
-				mtype = v.get_class("Array").get_mtype([mtype])
+				mtype = v.mmodule.array_type(mtype)
 			end
 			comment.append(", {mtype}")
 			var argvar = new RuntimeVariable("p{i}", mtype, mtype)

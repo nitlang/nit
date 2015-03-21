@@ -177,15 +177,6 @@ class VirtualMachine super NaiveInterpreter
 		recv.vtable = recv.mtype.as(MClassType).mclass.vtable
 	end
 
-	# Create a virtual table for this `MClass` if not already done
-	redef fun get_primitive_class(name: String): MClass
-	do
-		var mclass = super
-
-		if not mclass.loaded then create_class(mclass)
-
-		return mclass
-	end
 
 	# Initialize the internal representation of an object (its attribute values)
 	# `init_instance` is the initial value of attributes

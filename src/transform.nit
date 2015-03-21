@@ -73,12 +73,6 @@ private class TransformVisitor
 		node.full_transform_visitor(self)
 	end
 
-	# Get a primitive class or display a fatal error on `location`.
-	fun get_class(location: AExpr, name: String): MClass
-	do
-		return mmodule.get_primitive_class(name)
-	end
-
 	# Get a primitive method or display a fatal error on `location`.
 	fun get_method(location: AExpr, name: String, recv: MClass): MMethod
 	do
