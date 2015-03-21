@@ -2786,9 +2786,23 @@ redef class ASuperstringExpr
 			array.add(ne)
 		end
 
+		# Store the allocated native array in a static variable
+		# For reusing later
+		var varonce = v.get_name("varonce")
+		v.add("if (unlikely({varonce}==NULL)) \{")
+
 		# The native array that will contains the elements to_s-ized.
 		# For fast concatenation.
 		var a = v.native_array_instance(type_string, v.int_instance(array.length))
+
+		v.add_decl("static {a.mtype.ctype} {varonce};")
+		v.add("\} else \{")
+		# Take the native-array from the store.
+		# The point is to prevent that some recursive execution use (and corrupt) the same native array
+		# WARNING: not thread safe! (FIXME?)
+		v.add("{a} = {varonce};")
+		v.add("{varonce} = NULL;")
+		v.add("\}")
 
 		# Stringify the elements and put them in the native array
 		var to_s_method = v.get_property("to_s", v.object_type)
@@ -2804,6 +2818,10 @@ redef class ASuperstringExpr
 
 		# Fast join the native string to get the result
 		var res = v.send(v.get_property("native_to_s", a.mtype), [a])
+
+		# We finish to work with the native array,
+		# so store it so that it can be reused
+		v.add("{varonce} = {a};")
 		return res
 	end
 end
