@@ -1421,20 +1421,16 @@ abstract class AbstractCompilerVisitor
 	# Generate an integer value
 	fun int_instance(value: Int): RuntimeVariable
 	do
-		var res = self.new_var(self.get_class("Int").mclass_type)
-		self.add("{res} = {value};")
+		var t = mmodule.int_type
+		var res = new RuntimeVariable("{value.to_s}l", t, t)
 		return res
 	end
 
 	# Generate an integer value
 	fun bool_instance(value: Bool): RuntimeVariable
 	do
-		var res = self.new_var(self.get_class("Bool").mclass_type)
-		if value then
-			self.add("{res} = 1;")
-		else
-			self.add("{res} = 0;")
-		end
+		var s = if value then "1" else "0"
+		var res = new RuntimeVariable(s, bool_type, bool_type)
 		return res
 	end
 
