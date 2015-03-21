@@ -603,9 +603,9 @@ abstract class AbstractCompiler
 		var gccd_disable = modelbuilder.toolcontext.opt_no_gcc_directive.value
 		if gccd_disable.has("noreturn") or gccd_disable.has("all") then
 			# Signal handler function prototype
-			self.header.add_decl("void show_backtrace(int);")
+			self.header.add_decl("void fatal_exit(int);")
 		else
-			self.header.add_decl("void show_backtrace(int) __attribute__ ((noreturn));")
+			self.header.add_decl("void fatal_exit(int) __attribute__ ((noreturn));")
 		end
 
 		if gccd_disable.has("likely") or gccd_disable.has("all") then
@@ -741,12 +741,7 @@ extern void nitni_global_ref_decr( struct nitni_ref *ref );
 			v.compiler.header.add_decl("extern long count_isset_checks;")
 		end
 
-		v.add_decl("void sig_handler(int signo)\{")
-		v.add_decl("PRINT_ERROR(\"Caught signal : %s\\n\", strsignal(signo));")
-		v.add_decl("show_backtrace(signo);")
-		v.add_decl("\}")
-
-		v.add_decl("void show_backtrace (int signo) \{")
+		v.add_decl("static void show_backtrace(void) \{")
 		if ost == "nitstack" or ost == "libunwind" then
 			v.add_decl("char* opt = getenv(\"NIT_NO_STACK\");")
 			v.add_decl("unw_cursor_t cursor;")
@@ -776,7 +771,19 @@ extern void nitni_global_ref_decr( struct nitni_ref *ref );
 			v.add_decl("free(procname);")
 			v.add_decl("\}")
 		end
-		v.add_decl("exit(signo);")
+		v.add_decl("\}")
+
+		v.add_decl("void sig_handler(int signo)\{")
+		v.add_decl("PRINT_ERROR(\"Caught signal : %s\\n\", strsignal(signo));")
+		v.add_decl("show_backtrace();")
+		# rethrows
+		v.add_decl("signal(signo, SIG_DFL);")
+		v.add_decl("kill(getpid(), signo);")
+		v.add_decl("\}")
+
+		v.add_decl("void fatal_exit(int status) \{")
+		v.add_decl("show_backtrace();")
+		v.add_decl("exit(status);")
 		v.add_decl("\}")
 
 		if no_main then
@@ -1557,7 +1564,7 @@ abstract class AbstractCompilerVisitor
 		else
 			self.add("PRINT_ERROR(\"\\n\");")
 		end
-		self.add("show_backtrace(1);")
+		self.add("fatal_exit(1);")
 	end
 
 	# Add a dynamic cast

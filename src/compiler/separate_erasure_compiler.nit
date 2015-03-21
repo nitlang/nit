@@ -615,7 +615,7 @@ class SeparateErasureCompilerVisitor
 			var res = self.new_var(mtype)
 			if compiler.runtime_type_analysis != null and not compiler.runtime_type_analysis.live_types.has(value.mtype.as(MClassType)) then
 				self.add("/*no boxing of {value.mtype}: {value.mtype} is not live! */")
-				self.add("PRINT_ERROR(\"Dead code executed!\\n\"); show_backtrace(1);")
+				self.add("PRINT_ERROR(\"Dead code executed!\\n\"); fatal_exit(1);")
 				return res
 			end
 			self.require_declaration("BOX_{valtype.c_name}")

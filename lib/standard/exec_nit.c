@@ -142,3 +142,11 @@ void exec_NativeProcess_NativeProcess_wait_0(void*d) {
 		data->running = 0;
 	}
 }
+
+int string_NativeString_NativeString_system_0(const char *cmd) {
+	int status = system(cmd);
+	if (WIFSIGNALED(status) && WTERMSIG(status) == SIGINT) {
+		// cmd exited on SIGINT: in my opinion the user wants the main to be discontinued
+		kill(getpid(), SIGINT);
+	}
+}
