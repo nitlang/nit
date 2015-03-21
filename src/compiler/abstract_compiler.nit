@@ -1126,6 +1126,14 @@ abstract class AbstractCompilerVisitor
 
 	fun native_array_def(pname: String, ret_type: nullable MType, arguments: Array[RuntimeVariable]) is abstract
 
+	# Return an element of a native array.
+	# The method is unsafe and is just a direct wrapper for the specific implementation of native arrays
+	fun native_array_get(native_array: RuntimeVariable, index: Int): RuntimeVariable is abstract
+
+	# Store an element in a native array.
+	# The method is unsafe and is just a direct wrapper for the specific implementation of native arrays
+	fun native_array_set(native_array: RuntimeVariable, index: Int, value: RuntimeVariable) is abstract
+
 	# Evaluate `args` as expressions in the call of `mpropdef` on `recv`.
 	# This method is used to manage varargs in signatures and returns the real array
 	# of runtime variables to use in the call.
