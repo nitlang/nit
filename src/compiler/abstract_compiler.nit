@@ -2775,14 +2775,35 @@ end
 redef class ASuperstringExpr
 	redef fun expr(v)
 	do
-		var array = new Array[RuntimeVariable]
+		var type_string = mtype.as(not null)
+
+		# Collect elements of the superstring
+		var array = new Array[AExpr]
 		for ne in self.n_exprs do
+			# Drop literal empty string.
+			# They appears in things like "{a}" that is ["", a, ""]
 			if ne isa AStringFormExpr and ne.value == "" then continue # skip empty sub-strings
-			var i = v.expr(ne, null)
-			array.add(i)
+			array.add(ne)
 		end
-		var a = v.array_instance(array, v.object_type)
-		var res = v.send(v.get_property("to_s", a.mtype), [a])
+
+		# The native array that will contains the elements to_s-ized.
+		# For fast concatenation.
+		var a = v.native_array_instance(type_string, v.int_instance(array.length))
+
+		# Stringify the elements and put them in the native array
+		var to_s_method = v.get_property("to_s", v.object_type)
+		for i in [0..array.length[ do
+			var ne = array[i]
+			var e = v.expr(ne, null)
+			# Skip the `to_s` if the element is already a String
+			if not e.mcasttype.is_subtype(v.compiler.mainmodule, null, type_string) then
+				e = v.send(to_s_method, [e]).as(not null)
+			end
+			v.native_array_set(a, i, e)
+		end
+
+		# Fast join the native string to get the result
+		var res = v.send(v.get_property("native_to_s", a.mtype), [a])
 		return res
 	end
 end

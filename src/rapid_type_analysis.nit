@@ -560,11 +560,13 @@ redef class ASuperstringExpr
 		var object_type = mmodule.object_type
 		var arraytype = mmodule.array_type(object_type)
 		v.add_type(arraytype)
-		v.add_type(mmodule.native_array_type(object_type))
+		var nattype = mmodule.native_array_type(object_type)
+		v.add_type(nattype)
 		var prop = v.get_method(arraytype, "join")
 		v.add_monomorphic_send(arraytype, prop)
 		var prop2 = v.get_method(arraytype, "with_native")
 		v.add_monomorphic_send(arraytype, prop2)
+		v.add_monomorphic_send(nattype, v.get_method(nattype, "native_to_s"))
 	end
 end
 
