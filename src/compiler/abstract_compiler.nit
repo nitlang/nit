@@ -2796,6 +2796,16 @@ redef class ASuperstringExpr
 		var a = v.native_array_instance(type_string, v.int_instance(array.length))
 
 		v.add_decl("static {a.mtype.ctype} {varonce};")
+
+		# Pre-fill the array with the literal string parts.
+		# So they do not need to be filled again when reused
+		for i in [0..array.length[ do
+			var ne = array[i]
+			if not ne isa AStringFormExpr then continue
+			var e = v.expr(ne, null)
+			v.native_array_set(a, i, e)
+		end
+
 		v.add("\} else \{")
 		# Take the native-array from the store.
 		# The point is to prevent that some recursive execution use (and corrupt) the same native array
@@ -2808,6 +2818,7 @@ redef class ASuperstringExpr
 		var to_s_method = v.get_property("to_s", v.object_type)
 		for i in [0..array.length[ do
 			var ne = array[i]
+			if ne isa AStringFormExpr then continue
 			var e = v.expr(ne, null)
 			# Skip the `to_s` if the element is already a String
 			if not e.mcasttype.is_subtype(v.compiler.mainmodule, null, type_string) then
