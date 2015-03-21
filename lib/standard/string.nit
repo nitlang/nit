@@ -2184,6 +2184,48 @@ redef class Array[E]
 	end
 end
 
+redef class NativeArray[E]
+	# Join all the elements using `to_s`
+	#
+	# REQUIRE: `self isa NativeArray[String]`
+	# REQUIRE: all elements are initialized
+	fun native_to_s: String
+	do
+		assert self isa NativeArray[String]
+		var l = length
+		var na = self
+		var i = 0
+		var sl = 0
+		var mypos = 0
+		while i < l do
+			sl += na[i].length
+			i += 1
+			mypos += 1
+		end
+		var ns = new NativeString(sl + 1)
+		ns[sl] = '\0'
+		i = 0
+		var off = 0
+		while i < mypos do
+			var tmp = na[i]
+			var tpl = tmp.length
+			if tmp isa FlatString then
+				tmp.items.copy_to(ns, tpl, tmp.index_from, off)
+				off += tpl
+			else
+				for j in tmp.substrings do
+					var s = j.as(FlatString)
+					var slen = s.length
+					s.items.copy_to(ns, slen, s.index_from, off)
+					off += slen
+				end
+			end
+			i += 1
+		end
+		return ns.to_s_with_length(sl)
+	end
+end
+
 redef class Map[K,V]
 	# Concatenate couple of 'key value'.
 	# key and value are separated by `couple_sep`.
