@@ -1661,7 +1661,11 @@ class SeparateCompilerVisitor
 		self.require_declaration(a.const_color)
 		if self.compiler.modelbuilder.toolcontext.opt_no_union_attribute.value then
 			var attr = "{recv}->attrs[{a.const_color}]"
-			if mtype.is_c_primitive then
+			if mtype.is_tagged then
+				# The attribute is not primitive, thus store it as tagged
+				var tv = autobox(value, compiler.mainmodule.object_type)
+				self.add("{attr} = {tv}; /* {a} on {recv.inspect} */")
+			else if mtype.is_c_primitive then
 				assert mtype isa MClassType
 				# The attribute is primitive, thus we store it in a box
 				# The trick is to create the box the first time then resuse the box
