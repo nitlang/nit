@@ -86,7 +86,7 @@ class GlobalCompiler
 		self.header = new CodeWriter(file)
 		self.live_primitive_types = new Array[MClassType]
 		for t in runtime_type_analysis.live_types do
-			if t.ctype != "val*" or t.mclass.name == "Pointer" then
+			if t.is_c_primitive or t.mclass.name == "Pointer" then
 				self.live_primitive_types.add(t)
 			end
 		end
@@ -109,7 +109,7 @@ class GlobalCompiler
 
 		# Init instance code (allocate and init-arguments)
 		for t in runtime_type_analysis.live_types do
-			if t.ctype == "val*" then
+			if not t.is_c_primitive then
 				compiler.generate_init_instance(t)
 				if t.mclass.kind == extern_kind then
 					compiler.generate_box_instance(t)
@@ -228,7 +228,7 @@ class GlobalCompiler
 	fun generate_init_instance(mtype: MClassType)
 	do
 		assert self.runtime_type_analysis.live_types.has(mtype)
-		assert mtype.ctype == "val*"
+		assert not mtype.is_c_primitive
 		var v = self.new_visitor
 
 		var is_native_array = mtype.mclass.name == "NativeArray"
@@ -303,11 +303,11 @@ class GlobalCompilerVisitor
 	do
 		if value.mtype == mtype then
 			return value
-		else if value.mtype.ctype == "val*" and mtype.ctype == "val*" then
+		else if not value.mtype.is_c_primitive and not mtype.is_c_primitive then
 			return value
-		else if value.mtype.ctype == "val*" then
+		else if not value.mtype.is_c_primitive then
 			return self.new_expr("((struct {mtype.c_name}*){value})->value; /* autounbox from {value.mtype} to {mtype} */", mtype)
-		else if mtype.ctype == "val*" then
+		else if not mtype.is_c_primitive then
 			var valtype = value.mtype.as(MClassType)
 			var res = self.new_var(mtype)
 			if not compiler.runtime_type_analysis.live_types.has(valtype) then
@@ -426,7 +426,7 @@ class GlobalCompilerVisitor
 		end
 
 		self.add("/* send {m} on {args.first.inspect} */")
-		if args.first.mtype.ctype != "val*" then
+		if args.first.mtype.is_c_primitive then
 			var mclasstype = args.first.mtype.as(MClassType)
 			if not self.compiler.runtime_type_analysis.live_types.has(mclasstype) then
 				self.add("/* skip, no method {m} */")
@@ -477,7 +477,7 @@ class GlobalCompilerVisitor
 		var defaultpropdef: nullable MMethodDef = null
 		for t in types do
 			var propdef = m.lookup_first_definition(self.compiler.mainmodule, t)
-			if propdef.mclassdef.mclass.name == "Object" and t.ctype == "val*" then
+			if propdef.mclassdef.mclass.name == "Object" and not t.is_c_primitive then
 				defaultpropdef = propdef
 				continue
 			end
@@ -552,7 +552,7 @@ class GlobalCompilerVisitor
 		end
 
 		self.add("/* super {m} on {args.first.inspect} */")
-		if args.first.mtype.ctype != "val*" then
+		if args.first.mtype.is_c_primitive then
 			var mclasstype = args.first.mtype.as(MClassType)
 			if not self.compiler.runtime_type_analysis.live_types.has(mclasstype) then
 				self.add("/* skip, no method {m} */")
@@ -628,7 +628,7 @@ class GlobalCompilerVisitor
 
 	fun bugtype(recv: RuntimeVariable)
 	do
-		if recv.mtype.ctype != "val*" then return
+		if recv.mtype.is_c_primitive then return
 		self.add("PRINT_ERROR(\"BTD BUG: Dynamic type is %s, static type is %s\\n\", class_names[{recv}->classid], \"{recv.mcasttype}\");")
 		self.add("show_backtrace(1);")
 	end
@@ -659,7 +659,7 @@ class GlobalCompilerVisitor
 			ta = self.resolve_for(ta, recv2)
 			var attr = self.new_expr("((struct {t.c_name}*){recv})->{a.intro.c_name}", ta)
 			if not ta isa MNullableType then
-				if ta.ctype == "val*" then
+				if not ta.is_c_primitive then
 					self.add("{res} = ({attr} != NULL);")
 				else
 					self.add("{res} = 1; /*NOTYET isset on primitive attributes*/")
@@ -705,7 +705,7 @@ class GlobalCompilerVisitor
 			ta = self.resolve_for(ta, recv2)
 			var res2 = self.new_expr("((struct {t.c_name}*){recv})->{a.intro.c_name}", ta)
 			if not ta isa MNullableType and not self.compiler.modelbuilder.toolcontext.opt_no_check_attr_isset.value then
-				if ta.ctype == "val*" then
+				if not ta.is_c_primitive then
 					self.add("if ({res2} == NULL) \{")
 					self.add_abort("Uninitialized attribute {a.name}")
 					self.add("\}")
@@ -781,7 +781,7 @@ class GlobalCompilerVisitor
 		var res = self.new_var(bool_type)
 
 		self.add("/* isa {mtype} on {value.inspect} */")
-		if value.mtype.ctype != "val*" then
+		if value.mtype.is_c_primitive then
 			if value.mtype.is_subtype(self.compiler.mainmodule, null, mtype) then
 				self.add("{res} = 1;")
 			else
@@ -816,14 +816,14 @@ class GlobalCompilerVisitor
 	redef fun is_same_type_test(value1, value2)
 	do
 		var res = self.new_var(bool_type)
-		if value2.mtype.ctype == "val*" then
-			if value1.mtype.ctype == "val*" then
+		if not value2.mtype.is_c_primitive then
+			if not value1.mtype.is_c_primitive then
 				self.add "{res} = {value1}->classid == {value2}->classid;"
 			else
 				self.add "{res} = {self.compiler.classid(value1.mtype.as(MClassType))} == {value2}->classid;"
 			end
 		else
-			if value1.mtype.ctype == "val*" then
+			if not value1.mtype.is_c_primitive then
 				self.add "{res} = {value1}->classid == {self.compiler.classid(value2.mtype.as(MClassType))};"
 			else if value1.mcasttype == value2.mcasttype then
 				self.add "{res} = 1;"
@@ -838,7 +838,7 @@ class GlobalCompilerVisitor
 	do
 		var res = self.get_name("var_class_name")
 		self.add_decl("const char* {res};")
-		if value.mtype.ctype == "val*" then
+		if not value.mtype.is_c_primitive then
 			self.add "{res} = class_names[{value}->classid];"
 		else
 			self.add "{res} = class_names[{self.compiler.classid(value.mtype.as(MClassType))}];"
@@ -849,15 +849,15 @@ class GlobalCompilerVisitor
 	redef fun equal_test(value1, value2)
 	do
 		var res = self.new_var(bool_type)
-		if value2.mtype.ctype != "val*" and value1.mtype.ctype == "val*" then
+		if value2.mtype.is_c_primitive and not value1.mtype.is_c_primitive then
 			var tmp = value1
 			value1 = value2
 			value2 = tmp
 		end
-		if value1.mtype.ctype != "val*" then
+		if value1.mtype.is_c_primitive then
 			if value2.mtype == value1.mtype then
 				self.add("{res} = {value1} == {value2};")
-			else if value2.mtype.ctype != "val*" then
+			else if value2.mtype.is_c_primitive then
 				self.add("{res} = 0; /* incompatible types {value1.mtype} vs. {value2.mtype}*/")
 			else
 				var mtype1 = value1.mtype.as(MClassType)

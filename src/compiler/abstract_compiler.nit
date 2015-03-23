@@ -1395,7 +1395,7 @@ abstract class AbstractCompilerVisitor
 		var recv
 		var ctype = mtype.ctype
 		assert mtype.mclass.name != "NativeArray"
-		if ctype == "val*" then
+		if not mtype.is_c_primitive then
 			recv = init_instance(mtype)
 		else if ctype == "char*" then
 			recv = new_expr("NULL/*special!*/", mtype)
@@ -1754,12 +1754,16 @@ redef class MType
 
 	# Short name of the `ctype` to use in unions
 	fun ctypename: String do return "val"
+
+	# Is the associated C type a primitive one?
+	#
+	# ENSURE `result == (ctype != "val*")`
+	fun is_c_primitive: Bool do return false
 end
 
 redef class MClassType
 
-	redef fun ctype: String
-	do
+	redef var ctype is lazy do
 		if mclass.name == "Int" then
 			return "long"
 		else if mclass.name == "Bool" then
@@ -1776,6 +1780,8 @@ redef class MClassType
 			return "val*"
 		end
 	end
+
+	redef var is_c_primitive is lazy do return ctype != "val*"
 
 	redef fun ctype_extern: String
 	do
@@ -2266,7 +2272,7 @@ redef class AAttrPropdef
 			if is_lazy then
 				var set
 				var ret = self.mpropdef.static_mtype
-				var useiset = ret.ctype == "val*" and not ret isa MNullableType
+				var useiset = not ret.is_c_primitive and not ret isa MNullableType
 				var guard = self.mlazypropdef.mproperty
 				if useiset then
 					set = v.isset_attribute(self.mpropdef.mproperty, recv)
@@ -2294,7 +2300,7 @@ redef class AAttrPropdef
 			v.write_attribute(self.mpropdef.mproperty, arguments.first, arguments[1])
 			if is_lazy then
 				var ret = self.mpropdef.static_mtype
-				var useiset = ret.ctype == "val*" and not ret isa MNullableType
+				var useiset = not ret.is_c_primitive and not ret isa MNullableType
 				if not useiset then
 					v.write_attribute(self.mlazypropdef.mproperty, arguments.first, v.new_expr("1", v.bool_type))
 				end
@@ -2803,7 +2809,7 @@ redef class AAsNotnullExpr
 		var i = v.expr(self.n_expr, null)
 		if v.compiler.modelbuilder.toolcontext.opt_no_check_assert.value then return i
 
-		if i.mtype.ctype != "val*" then return i
+		if i.mtype.is_c_primitive then return i
 
 		v.add("if (unlikely({i} == NULL)) \{")
 		v.add_abort("Cast failed")
