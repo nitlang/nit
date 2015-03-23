@@ -47,11 +47,15 @@ class POSetConflictGraph[E: Object]
 
 	var poset: POSet[E]
 
+	# The linearisation order to visit elements in the poset
+	var order: Array[E] is noinit
+
 	init do
 		extract_core
 		extract_border
 		extract_crown
 		compute_conflicts
+		order = poset.linearize(poset)
 	end
 
 	# Compute the set of elements forming the core of the poset hierarchy.
