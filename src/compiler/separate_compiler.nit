@@ -146,8 +146,6 @@ class SeparateCompiler
 	private var type_ids: Map[MType, Int] is noinit
 	private var type_colors: Map[MType, Int] is noinit
 	private var opentype_colors: Map[MType, Int] is noinit
-	protected var method_colors: Map[PropertyLayoutElement, Int] is noinit
-	protected var attr_colors: Map[MAttribute, Int] is noinit
 
 	init do
 		var file = new_file("nit.common")
@@ -305,150 +303,114 @@ class SeparateCompiler
 
 	private var color_consts_done = new HashSet[Object]
 
+	# The conflict graph of classes used for coloration
+	var class_conflict_graph: POSetConflictGraph[MClass] is noinit
+
 	# colorize classe properties
 	fun do_property_coloring do
 
 		var rta = runtime_type_analysis
 
-		# Layouts
-		var poset = mainmodule.flatten_mclass_hierarchy
-		var mclasses = new HashSet[MClass].from(poset)
-		var colorer = new POSetColorer[MClass]
-		colorer.colorize(poset)
+		# Class graph
+		var mclasses = mainmodule.flatten_mclass_hierarchy
+		class_conflict_graph = mclasses.to_conflict_graph
 
-		# The dead methods, still need to provide a dead color symbol
-		var dead_methods = new Array[MMethod]
-
-		# lookup properties to build layout with
+		# Prepare to collect elements to color and build layout with
 		var mmethods = new HashMap[MClass, Set[PropertyLayoutElement]]
 		var mattributes = new HashMap[MClass, Set[MAttribute]]
+
+		# The dead methods and super-call, still need to provide a dead color symbol
+		var dead_methods = new Array[PropertyLayoutElement]
+
 		for mclass in mclasses do
 			mmethods[mclass] = new HashSet[PropertyLayoutElement]
 			mattributes[mclass] = new HashSet[MAttribute]
-			for mprop in self.mainmodule.properties(mclass) do
-				if mprop isa MMethod then
-					if not modelbuilder.toolcontext.opt_colo_dead_methods.value and rta != null and not rta.live_methods.has(mprop) then
-						dead_methods.add(mprop)
-						continue
-					end
-					mmethods[mclass].add(mprop)
-				else if mprop isa MAttribute then
-					mattributes[mclass].add(mprop)
-				end
-			end
 		end
 
-		# Collect all super calls (dead or not)
-		var all_super_calls = new HashSet[MMethodDef]
-		for mmodule in self.mainmodule.in_importation.greaters do
-			for mclassdef in mmodule.mclassdefs do
-				for mpropdef in mclassdef.mpropdefs do
-					if not mpropdef isa MMethodDef then continue
-					if mpropdef.has_supercall then
-						all_super_calls.add(mpropdef)
-					end
-				end
-			end
-		end
-
-		# lookup super calls and add it to the list of mmethods to build layout with
-		var super_calls
+		# Pre-collect known live things
 		if rta != null then
-			super_calls = rta.live_super_sends
-		else
-			super_calls = all_super_calls
+			for m in rta.live_methods do
+				mmethods[m.intro_mclassdef.mclass].add m
+			end
+			for m in rta.live_super_sends do
+				var mclass = m.mclassdef.mclass
+				mmethods[mclass].add m
+			end
 		end
 
-		for mmethoddef in super_calls do
-			var mclass = mmethoddef.mclassdef.mclass
-			mmethods[mclass].add(mmethoddef)
-			for descendant in mclass.in_hierarchy(self.mainmodule).smallers do
-				mmethods[descendant].add(mmethoddef)
+		for m in mainmodule.in_importation.greaters do for cd in m.mclassdefs do
+			var mclass = cd.mclass
+			# Collect methods ad attributes
+			for p in cd.intro_mproperties do
+				if p isa MMethod then
+					if rta == null then
+						mmethods[mclass].add p
+					else if not rta.live_methods.has(p) then
+						dead_methods.add p
+					end
+				else if p isa MAttribute then
+					mattributes[mclass].add p
+				end
+			end
+
+			# Collect all super calls (dead or not)
+			for mpropdef in cd.mpropdefs do
+				if not mpropdef isa MMethodDef then continue
+				if mpropdef.has_supercall then
+					if rta == null then
+						mmethods[mclass].add mpropdef
+					else if not rta.live_super_sends.has(mpropdef) then
+						dead_methods.add mpropdef
+					end
+				end
 			end
 		end
 
 		# methods coloration
-		var meth_colorer = new POSetBucketsColorer[MClass, PropertyLayoutElement](poset, colorer.conflicts)
-		method_colors = meth_colorer.colorize(mmethods)
-		method_tables = build_method_tables(mclasses, super_calls)
+		var meth_colorer = new POSetGroupColorer[MClass, PropertyLayoutElement](class_conflict_graph, mmethods)
+		var method_colors = meth_colorer.colors
 		compile_color_consts(method_colors)
 
-		# attribute null color to dead methods and supercalls
-		for mproperty in dead_methods do
-			compile_color_const(new_visitor, mproperty, -1)
-		end
-		for mpropdef in all_super_calls do
-			if super_calls.has(mpropdef) then continue
-			compile_color_const(new_visitor, mpropdef, -1)
-		end
+		# give null color to dead methods and supercalls
+		for mproperty in dead_methods do compile_color_const(new_visitor, mproperty, -1)
 
-		# attributes coloration
-		var attr_colorer = new POSetBucketsColorer[MClass, MAttribute](poset, colorer.conflicts)
-		attr_colors = attr_colorer.colorize(mattributes)
-		attr_tables = build_attr_tables(mclasses)
+		# attribute coloration
+		var attr_colorer = new POSetGroupColorer[MClass, MAttribute](class_conflict_graph, mattributes)
+		var attr_colors = attr_colorer.colors#ize(poset, mattributes)
 		compile_color_consts(attr_colors)
-	end
 
-	fun build_method_tables(mclasses: Set[MClass], super_calls: Set[MMethodDef]): Map[MClass, Array[nullable MPropDef]] do
-		var tables = new HashMap[MClass, Array[nullable MPropDef]]
+		# Build method and attribute tables
+		method_tables = new HashMap[MClass, Array[nullable MPropDef]]
+		attr_tables = new HashMap[MClass, Array[nullable MProperty]]
 		for mclass in mclasses do
-			var table = new Array[nullable MPropDef]
-			tables[mclass] = table
+			#if mclass.kind == abstract_kind or mclass.kind == interface_kind then continue
+			if rta != null and not rta.live_classes.has(mclass) then continue
 
-			var mproperties = self.mainmodule.properties(mclass)
 			var mtype = mclass.intro.bound_mtype
 
-			for mproperty in mproperties do
-				if not mproperty isa MMethod then continue
-				if not method_colors.has_key(mproperty) then continue
-				var color = method_colors[mproperty]
-				if table.length <= color then
-					for i in [table.length .. color[ do
-						table[i] = null
-					end
+			# Resolve elements in the layout to get the final table
+			var meth_layout = meth_colorer.build_layout(mclass)
+			var meth_table = new Array[nullable MPropDef].with_capacity(meth_layout.length)
+			method_tables[mclass] = meth_table
+			for e in meth_layout do
+				if e == null then
+					meth_table.add null
+				else if e isa MMethod then
+					# Standard method call of `e`
+					meth_table.add e.lookup_first_definition(mainmodule, mtype)
+				else if e isa MMethodDef then
+					# Super-call in the methoddef `e`
+					meth_table.add e.lookup_next_definition(mainmodule, mtype)
+				else
+					abort
 				end
-				table[color] = mproperty.lookup_first_definition(mainmodule, mtype)
 			end
 
-			for supercall in super_calls do
-				if not mtype.collect_mclassdefs(mainmodule).has(supercall.mclassdef) then continue
-
-				var color = method_colors[supercall]
-				if table.length <= color then
-					for i in [table.length .. color[ do
-						table[i] = null
-					end
-				end
-				var mmethoddef = supercall.lookup_next_definition(mainmodule, mtype)
-				table[color] = mmethoddef
-			end
-
+			# Do not need to resolve attributes as only the position is used
+			attr_tables[mclass] = attr_colorer.build_layout(mclass)
 		end
-		return tables
-	end
 
-	fun build_attr_tables(mclasses: Set[MClass]): Map[MClass, Array[nullable MPropDef]] do
-		var tables = new HashMap[MClass, Array[nullable MPropDef]]
-		for mclass in mclasses do
-			var table = new Array[nullable MPropDef]
-			tables[mclass] = table
 
-			var mproperties = self.mainmodule.properties(mclass)
-			var mtype = mclass.intro.bound_mtype
-
-			for mproperty in mproperties do
-				if not mproperty isa MAttribute then continue
-				if not attr_colors.has_key(mproperty) then continue
-				var color = attr_colors[mproperty]
-				if table.length <= color then
-					for i in [table.length .. color[ do
-						table[i] = null
-					end
-				end
-				table[color] = mproperty.lookup_first_definition(mainmodule, mtype)
-			end
-		end
-		return tables
 	end
 
 	# colorize live types of the program
@@ -1029,7 +991,7 @@ class SeparateCompiler
 	private var type_tables: Map[MType, Array[nullable MType]] = new HashMap[MType, Array[nullable MType]]
 	private var resolution_tables: Map[MClassType, Array[nullable MType]] = new HashMap[MClassType, Array[nullable MType]]
 	protected var method_tables: Map[MClass, Array[nullable MPropDef]] = new HashMap[MClass, Array[nullable MPropDef]]
-	protected var attr_tables: Map[MClass, Array[nullable MPropDef]] = new HashMap[MClass, Array[nullable MPropDef]]
+	protected var attr_tables: Map[MClass, Array[nullable MProperty]] = new HashMap[MClass, Array[nullable MProperty]]
 
 	redef fun display_stats
 	do
