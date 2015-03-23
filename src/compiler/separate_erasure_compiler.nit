@@ -643,7 +643,7 @@ class SeparateErasureCompilerVisitor
 
 	redef fun native_array_instance(elttype, length)
 	do
-		var nclass = self.get_class("NativeArray")
+		var nclass = mmodule.native_array_class
 		var mtype = nclass.get_mtype([elttype])
 		var res = self.new_var(mtype)
 		res.is_exact = true

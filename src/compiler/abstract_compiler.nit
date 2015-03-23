@@ -1085,9 +1085,6 @@ abstract class AbstractCompilerVisitor
 		self.writer = new CodeWriter(compiler.files.last)
 	end
 
-	# Force to get the primitive class named `name` or abort
-	fun get_class(name: String): MClass do return self.compiler.mainmodule.get_primitive_class(name)
-
 	# Force to get the primitive property named `name` in the instance `recv` or abort
 	fun get_property(name: String, recv: MType): MMethod
 	do
@@ -1423,37 +1420,64 @@ abstract class AbstractCompilerVisitor
 		end
 	end
 
+	# The currently processed module
+	#
+	# alias for `compiler.mainmodule`
+	fun mmodule: MModule do return compiler.mainmodule
+
 	# Generate an integer value
 	fun int_instance(value: Int): RuntimeVariable
 	do
-		var res = self.new_var(self.get_class("Int").mclass_type)
-		self.add("{res} = {value};")
+		var t = mmodule.int_type
+		var res = new RuntimeVariable("{value.to_s}l", t, t)
+		return res
+	end
+
+	# Generate a char value
+	fun char_instance(value: Char): RuntimeVariable
+	do
+		var t = mmodule.char_type
+		var res = new RuntimeVariable("'{value.to_s.escape_to_c}'", t, t)
+		return res
+	end
+
+	# Generate a float value
+	#
+	# FIXME pass a Float, not a string
+	fun float_instance(value: String): RuntimeVariable
+	do
+		var t = mmodule.float_type
+		var res = new RuntimeVariable("{value}", t, t)
 		return res
 	end
 
 	# Generate an integer value
 	fun bool_instance(value: Bool): RuntimeVariable
 	do
-		var res = self.new_var(self.get_class("Bool").mclass_type)
-		if value then
-			self.add("{res} = 1;")
-		else
-			self.add("{res} = 0;")
-		end
+		var s = if value then "1" else "0"
+		var res = new RuntimeVariable(s, bool_type, bool_type)
+		return res
+	end
+
+	# Generate the `null` value
+	fun null_instance: RuntimeVariable
+	do
+		var t = compiler.mainmodule.model.null_type
+		var res = new RuntimeVariable("((val*)NULL)", t, t)
 		return res
 	end
 
 	# Generate a string value
 	fun string_instance(string: String): RuntimeVariable
 	do
-		var mtype = self.get_class("String").mclass_type
+		var mtype = mmodule.string_type
 		var name = self.get_name("varonce")
 		self.add_decl("static {mtype.ctype} {name};")
 		var res = self.new_var(mtype)
 		self.add("if (likely({name}!=NULL)) \{")
 		self.add("{res} = {name};")
 		self.add("\} else \{")
-		var native_mtype = self.get_class("NativeString").mclass_type
+		var native_mtype = mmodule.native_string_type
 		var nat = self.new_var(native_mtype)
 		self.add("{nat} = \"{string.escape_to_c}\";")
 		var length = self.int_instance(string.length)
@@ -2288,7 +2312,7 @@ redef class AAttrPropdef
 
 				v.assign(res, value)
 				if not useiset then
-					var true_v = v.new_expr("1", v.bool_type)
+					var true_v = v.bool_instance(true)
 					v.write_attribute(guard, arguments.first, true_v)
 				end
 				v.add("\}")
@@ -2303,7 +2327,7 @@ redef class AAttrPropdef
 				var ret = self.mpropdef.static_mtype
 				var useiset = ret.ctype == "val*" and not ret isa MNullableType
 				if not useiset then
-					v.write_attribute(self.mlazypropdef.mproperty, arguments.first, v.new_expr("1", v.bool_type))
+					v.write_attribute(self.mlazypropdef.mproperty, arguments.first, v.bool_instance(true))
 				end
 			end
 		else
@@ -2701,15 +2725,15 @@ redef class AOrElseExpr
 end
 
 redef class AIntExpr
-	redef fun expr(v) do return v.new_expr("{self.value.to_s}", self.mtype.as(not null))
+	redef fun expr(v) do return v.int_instance(self.value.as(not null))
 end
 
 redef class AFloatExpr
-	redef fun expr(v) do return v.new_expr("{self.n_float.text}", self.mtype.as(not null)) # FIXME use value, not n_float
+	redef fun expr(v) do return v.float_instance("{self.n_float.text}") # FIXME use value, not n_float
 end
 
 redef class ACharExpr
-	redef fun expr(v) do return v.new_expr("'{self.value.to_s.escape_to_c}'", self.mtype.as(not null))
+	redef fun expr(v) do return v.char_instance(self.value.as(not null))
 end
 
 redef class AArrayExpr
@@ -2774,15 +2798,15 @@ redef class AOrangeExpr
 end
 
 redef class ATrueExpr
-	redef fun expr(v) do return v.new_expr("1", self.mtype.as(not null))
+	redef fun expr(v) do return v.bool_instance(true)
 end
 
 redef class AFalseExpr
-	redef fun expr(v) do return v.new_expr("0", self.mtype.as(not null))
+	redef fun expr(v) do return v.bool_instance(false)
 end
 
 redef class ANullExpr
-	redef fun expr(v) do return v.new_expr("NULL", self.mtype.as(not null))
+	redef fun expr(v) do return v.null_instance
 end
 
 redef class AIsaExpr

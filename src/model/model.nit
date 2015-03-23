@@ -195,31 +195,40 @@ redef class MModule
 	private var flatten_mclass_hierarchy_cache: nullable POSet[MClass] = null
 
 	# The primitive type `Object`, the root of the class hierarchy
-	fun object_type: MClassType
-	do
-		var res = self.object_type_cache
-		if res != null then return res
-		res = self.get_primitive_class("Object").mclass_type
-		self.object_type_cache = res
-		return res
-	end
-
-	private var object_type_cache: nullable MClassType
+	var object_type: MClassType = self.get_primitive_class("Object").mclass_type is lazy
 
 	# The type `Pointer`, super class to all extern classes
 	var pointer_type: MClassType = self.get_primitive_class("Pointer").mclass_type is lazy
 
 	# The primitive type `Bool`
-	fun bool_type: MClassType
-	do
-		var res = self.bool_type_cache
-		if res != null then return res
-		res = self.get_primitive_class("Bool").mclass_type
-		self.bool_type_cache = res
-		return res
-	end
+	var bool_type: MClassType = self.get_primitive_class("Bool").mclass_type is lazy
 
-	private var bool_type_cache: nullable MClassType
+	# The primitive type `Int`
+	var int_type: MClassType = self.get_primitive_class("Int").mclass_type is lazy
+
+	# The primitive type `Char`
+	var char_type: MClassType = self.get_primitive_class("Char").mclass_type is lazy
+
+	# The primitive type `Float`
+	var float_type: MClassType = self.get_primitive_class("Float").mclass_type is lazy
+
+	# The primitive type `String`
+	var string_type: MClassType = self.get_primitive_class("String").mclass_type is lazy
+
+	# The primitive type `NativeString`
+	var native_string_type: MClassType = self.get_primitive_class("NativeString").mclass_type is lazy
+
+	# A primitive type of `Array`
+	fun array_type(elt_type: MType): MClassType do return array_class.get_mtype([elt_type])
+
+	# The primitive class `Array`
+	var array_class: MClass = self.get_primitive_class("Array") is lazy
+
+	# A primitive type of `NativeArray`
+	fun native_array_type(elt_type: MType): MClassType do return native_array_class.get_mtype([elt_type])
+
+	# The primitive class `NativeArray`
+	var native_array_class: MClass = self.get_primitive_class("NativeArray") is lazy
 
 	# The primitive type `Sys`, the main type of the program, if any
 	fun sys_type: nullable MClassType

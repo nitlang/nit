@@ -225,9 +225,9 @@ class RapidTypeAnalysis
 				var node = self.modelbuilder.mpropdef2node(mmethoddef)
 				var elttype = mmethoddef.msignature.mparameters[vararg_rank].mtype
 				#elttype = elttype.anchor_to(self.mainmodule, v.receiver)
-				var vararg = self.mainmodule.get_primitive_class("Array").get_mtype([elttype])
+				var vararg = self.mainmodule.array_type(elttype)
 				v.add_type(vararg)
-				var native = self.mainmodule.get_primitive_class("NativeArray").get_mtype([elttype])
+				var native = self.mainmodule.native_array_type(elttype)
 				v.add_type(native)
 				v.add_monomorphic_send(vararg, self.modelbuilder.force_get_primitive_method(node, "with_native", vararg.mclass, self.mainmodule))
 			end
@@ -471,11 +471,6 @@ class RapidTypeVisitor
 		return mtype
 	end
 
-	fun get_class(name: String): MClass
-	do
-		return analysis.mainmodule.get_primitive_class(name)
-	end
-
 	fun get_method(recv: MType, name: String): MMethod
 	do
 		var mtype = cleanup_type(recv)
@@ -540,7 +535,7 @@ redef class AArrayExpr
 	do
 		var mtype = self.mtype.as(MClassType)
 		v.add_type(mtype)
-		var native = v.analysis.mainmodule.get_primitive_class("NativeArray").get_mtype([mtype.arguments.first])
+		var native = v.analysis.mainmodule.native_array_type(mtype.arguments.first)
 		v.add_type(native)
 		mtype = v.cleanup_type(mtype).as(not null)
 		var prop = v.get_method(mtype, "with_native")
@@ -551,7 +546,7 @@ end
 redef class AStringFormExpr
 	redef fun accept_rapid_type_visitor(v)
 	do
-		var native = v.get_class("NativeString").mclass_type
+		var native = v.analysis.mainmodule.native_string_type
 		v.add_type(native)
 		var prop = v.get_method(native, "to_s_with_length")
 		v.add_monomorphic_send(native, prop)
@@ -561,9 +556,11 @@ end
 redef class ASuperstringExpr
 	redef fun accept_rapid_type_visitor(v)
 	do
-		var arraytype = v.get_class("Array").get_mtype([v.get_class("Object").mclass_type])
+		var mmodule = v.analysis.mainmodule
+		var object_type = mmodule.object_type
+		var arraytype = mmodule.array_type(object_type)
 		v.add_type(arraytype)
-		v.add_type(v.get_class("NativeArray").get_mtype([v.get_class("Object").mclass_type]))
+		v.add_type(mmodule.native_array_type(object_type))
 		var prop = v.get_method(arraytype, "join")
 		v.add_monomorphic_send(arraytype, prop)
 		var prop2 = v.get_method(arraytype, "with_native")
