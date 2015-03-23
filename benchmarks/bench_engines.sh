@@ -186,10 +186,10 @@ function bench_nitc_options()
 	run_compiler "nitc-$name" ./nitc $common
 
 	if test "$1" = NOALL; then
+		withall=
 		shift
-	elif test -n "$2"; then
-		prepare_res "$name-all.dat" "all" "nitc-g with all options $@"
-		run_compiler "nitc-$name" ./nitc $common $@
+	else
+		withall=true
 	fi
 
 	for opt in "$@"; do
@@ -197,6 +197,11 @@ function bench_nitc_options()
 		prepare_res "$name$ot.dat" "$opt" "nitc-g with option $opt"
 		run_compiler "nitc-$name" ./nitc $common $opt
 	done
+
+	if test -n "$2" -a -n "$withall"; then
+		prepare_res "$name-all.dat" "all" "nitc-g with all options $@"
+		run_compiler "nitc-$name" ./nitc $common $@
+	fi
 
 	plot "$name.gnu"
 }
