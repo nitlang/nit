@@ -150,7 +150,6 @@ class FileWriter
 		else
 			for i in s.substrings do write_native(i.to_cstring, i.length)
 		end
-		_file.flush
 	end
 
 	redef fun close
