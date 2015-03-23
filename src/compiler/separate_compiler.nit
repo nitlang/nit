@@ -386,7 +386,7 @@ class SeparateCompiler
 		method_tables = new HashMap[MClass, Array[nullable MPropDef]]
 		attr_tables = new HashMap[MClass, Array[nullable MProperty]]
 		for mclass in mclasses do
-			#if mclass.kind == abstract_kind or mclass.kind == interface_kind then continue
+			if not mclass.has_new_factory and (mclass.kind == abstract_kind or mclass.kind == interface_kind) then continue
 			if rta != null and not rta.live_classes.has(mclass) then continue
 
 			var mtype = mclass.intro.bound_mtype
