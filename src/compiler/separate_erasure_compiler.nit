@@ -199,8 +199,6 @@ class SeparateErasureCompiler
 		var mtype = mclass.intro.bound_mtype
 		var c_name = mclass.c_name
 
-		var vft = self.method_tables[mclass]
-		var attrs = self.attr_tables[mclass]
 		var class_table = self.class_tables[mclass]
 		var v = self.new_visitor
 
@@ -230,7 +228,8 @@ class SeparateErasureCompiler
 			end
 			v.add_decl("&type_table_{c_name},")
 			v.add_decl("\{")
-			for i in [0 .. vft.length[ do
+			var vft = self.method_tables.get_or_null(mclass)
+			if vft != null then for i in [0 .. vft.length[ do
 				var mpropdef = vft[i]
 				if mpropdef == null then
 					v.add_decl("NULL, /* empty */")
@@ -355,11 +354,18 @@ class SeparateErasureCompiler
 
 			var res = v.new_named_var(mtype, "self")
 			res.is_exact = true
-			v.add("{res} = nit_alloc(sizeof(struct instance) + {attrs.length}*sizeof(nitattribute_t));")
+			var attrs = self.attr_tables.get_or_null(mclass)
+			if attrs == null then
+				v.add("{res} = nit_alloc(sizeof(struct instance));")
+			else
+				v.add("{res} = nit_alloc(sizeof(struct instance) + {attrs.length}*sizeof(nitattribute_t));")
+			end
 			v.require_declaration("class_{c_name}")
 			v.add("{res}->class = &class_{c_name};")
-			self.generate_init_attr(v, res, mtype)
-			v.set_finalizer res
+			if attrs != null then
+				self.generate_init_attr(v, res, mtype)
+				v.set_finalizer res
+			end
 			v.add("return {res};")
 		end
 		v.add("\}")
