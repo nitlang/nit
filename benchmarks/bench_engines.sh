@@ -43,7 +43,10 @@ function run_compiler()
 {
 	local title=$1
 	shift
-	if test -n "$fast"; then
+	if test "$fast" = truetrue; then
+		run_command "$@" ../examples/hello_world.nit -o "hello.$title.bin"
+		bench_command "hello" "hello_world" "./hello.$title.bin"
+	elif test -n "$fast"; then
 		run_command "$@" ../src/nitc.nit -o "nitc.$title.bin"
 		bench_command "nitc-g" "nitc --global ../src/test_parser.nit" "./nitc.$title.bin" -v --global --no-cc ../src/test_parser.nit
 		run_command "$@" ../src/nit.nit -o "nit.$title.bin"
@@ -100,7 +103,7 @@ while [ "$stop" = false ]; do
 		-h) usage; exit;;
 		-n) count="$2"; shift; shift;;
 		--dry) dry_run=true; shift;;
-		--fast) fast=true; shift;;
+		--fast) fast=true$fast; shift;;
 		--html) html="index.html"; echo >"$html" "<html><head></head><body>"; shift;;
 		*) stop=true
 	esac
