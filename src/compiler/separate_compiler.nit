@@ -534,21 +534,26 @@ class SeparateCompiler
 		# Collect all live_unresolved_types (visited in the body of classes)
 
 		# Determinate fo each livetype what are its possible requested anchored types
-		var mtype2unresolved = new HashMap[MClassType, Set[MType]]
+		var mtype2unresolved = new HashMap[MClass, Set[MType]]
 		for mtype in self.runtime_type_analysis.live_types do
-			var set = new HashSet[MType]
+			var mclass = mtype.mclass
+			var set = mtype2unresolved.get_or_null(mclass)
+			if set == null then
+				set = new HashSet[MType]
+				mtype2unresolved[mclass] = set
+			end
 			for cd in mtype.collect_mclassdefs(self.mainmodule) do
 				if self.live_unresolved_types.has_key(cd) then
 					set.add_all(self.live_unresolved_types[cd])
 				end
 			end
-			mtype2unresolved[mtype] = set
 		end
 
 		# Compute the table layout with the prefered method
-		var colorer = new BucketsColorer[MType, MType]
+		var colorer = new BucketsColorer[MClass, MType]
+
 		opentype_colors = colorer.colorize(mtype2unresolved)
-		resolution_tables = self.build_resolution_tables(mtype2unresolved)
+		resolution_tables = self.build_resolution_tables(self.runtime_type_analysis.live_types, mtype2unresolved)
 
 		# Compile a C constant for each collected unresolved type.
 		# Either to a color, or to -1 if the unresolved type is dead (no live receiver can require it)
@@ -573,9 +578,10 @@ class SeparateCompiler
 		#print ""
 	end
 
-	fun build_resolution_tables(elements: Map[MClassType, Set[MType]]): Map[MClassType, Array[nullable MType]] do
+	fun build_resolution_tables(elements: Set[MClassType], map: Map[MClass, Set[MType]]): Map[MClassType, Array[nullable MType]] do
 		var tables = new HashMap[MClassType, Array[nullable MType]]
-		for mclasstype, mtypes in elements do
+		for mclasstype in elements do
+			var mtypes = map[mclasstype.mclass]
 			var table = new Array[nullable MType]
 			for mtype in mtypes do
 				var color = opentype_colors[mtype]
