@@ -2308,3 +2308,14 @@ redef class AMethPropdef
 		return super
 	end
 end
+
+redef class AAttrPropdef
+	redef fun init_expr(v, recv)
+	do
+		super
+		if is_lazy and v.compiler.modelbuilder.toolcontext.opt_no_union_attribute.value then
+			var guard = self.mlazypropdef.mproperty
+			v.write_attribute(guard, recv, v.bool_instance(false))
+		end
+	end
+end
