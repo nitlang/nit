@@ -158,109 +158,65 @@ function bench_steps()
 }
 bench_steps
 
-# $#: options to compare
-function bench_nitc-g_options()
+# Simple script to compare various options on nitc
+#
+# usage: *name* *common* [NOALL] *options*...
+#
+# * *name*, the name of the bench
+# * *common*, options to use on each case
+# * NOALL, optional flag to avoid a last case including all additional options
+# * *options*, sequences of options, one for each case
+#
+# Example: `bench_nitc_options "foo" "-a -b" -c "-d -e"` generates 4 cases:
+#
+# * only *common*: `nitc -a -b`
+# * *common* and first *options*: `nitc -a -b -c`
+# * *common* and second *options*: `nitc -a -b -d -e`
+# * all: *common* and all *options*: `nitc -a -b -c -d -e`
+function bench_nitc_options()
 {
 	tag=$1
 	shift
-	name="$FUNCNAME-$tag"
+	common=$1
+	shift
+	name="$FUNCNAME-$tag$common"
+	name=${name// /}
 	skip_test "$name" && return
-	prepare_res "$name.dat" "no options" "nitc-g without options"
-	run_compiler "nitc-g" ./nitc --global
+	prepare_res "$name.dat" "no options" "nitc $common without more options"
+	run_compiler "nitc-$name" ./nitc $common
 
 	if test "$1" = NOALL; then
 		shift
 	elif test -n "$2"; then
 		prepare_res "$name-all.dat" "all" "nitc-g with all options $@"
-		run_compiler "nitc-g-$tag" ./nitc --global $@
+		run_compiler "nitc-$name" ./nitc $common $@
 	fi
 
 	for opt in "$@"; do
-		ot=${opt// /+}
+		ot=${opt// /}
 		prepare_res "$name$ot.dat" "$opt" "nitc-g with option $opt"
-		run_compiler "nitc-g$ot" ./nitc --global $opt
+		run_compiler "nitc-$name" ./nitc $common $opt
 	done
 
 	plot "$name.gnu"
 }
-bench_nitc-g_options "slower" --hardening --no-shortcut-range
-bench_nitc-g_options "nocheck" --no-check-null --no-check-autocast --no-check-attr-isset --no-check-covariance --no-check-assert
 
-function bench_nitc-s_options()
-{
-	tag=$1
-	shift
-	name="$FUNCNAME-$tag"
-	skip_test "$name" && return
-	prepare_res "$name.dat" "no options" "nitc-s without options"
-	run_compiler "nitc-s" ./nitc --separate
+bench_nitc_options "slower" --global --hardening --no-shortcut-range
+bench_nitc_options "nocheck" --global --no-check-null --no-check-autocast --no-check-attr-isset --no-check-covariance --no-check-assert
 
-	if test "$1" = NOALL; then
-		shift
-	elif test -n "$2"; then
-		prepare_res "$name-all.dat" "all" "nitc-s with all options $@"
-		run_compiler "nitc-s-$tag" ./nitc --separate $@
-	fi
+bench_nitc_options "slower" --separate --hardening --no-shortcut-equal --no-union-attribute --no-shortcut-range --no-inline-intern "--no-gcc-directive likely --no-gcc-directive noreturn" "--no-tag-primitives"
+bench_nitc_options "nocheck" --separate --no-check-null --no-check-autocast --no-check-attr-isset --no-check-covariance --no-check-assert
+bench_nitc_options "faster" --separate --skip-dead-methods --inline-coloring-numbers --inline-some-methods --direct-call-monomorph "--inline-some-methods --direct-call-monomorph"
 
-	for opt in "$@"; do
-		ot=${opt// /+}
-		prepare_res "$name-$ot.dat" "$opt" "nitc-s with option $opt"
-		run_compiler "nitc-s$ot" ./nitc --separate $opt
-	done
+bench_nitc_options "slower" --erasure --hardening --no-shortcut-equal --no-union-attribute --no-shortcut-range --no-inline-intern
+bench_nitc_options "nocheck" --erasure --no-check-null --no-check-autocast --no-check-attr-isset --no-check-covariance --no-check-assert --no-check-erasure-cast
+bench_nitc_options "faster" --erasure --skip-dead-methods --inline-coloring-numbers --inline-some-methods --direct-call-monomorph --rta
 
-	plot "$name.gnu"
-}
-bench_nitc-s_options "slower" --hardening --no-shortcut-equal --no-union-attribute --no-shortcut-range --no-inline-intern "--no-gcc-directive likely --no-gcc-directive noreturn" "--no-tag-primitives"
-bench_nitc-s_options "nocheck" --no-check-null --no-check-autocast --no-check-attr-isset --no-check-covariance --no-check-assert
-bench_nitc-s_options "faster" --skip-dead-methods --inline-coloring-numbers --inline-some-methods --direct-call-monomorph "--inline-some-methods --direct-call-monomorph" ""
-
-function bench_nitc-e_options()
-{
-	tag=$1
-	shift
-	name="$FUNCNAME-$tag"
-	skip_test "$name" && return
-	prepare_res "$name.dat" "no options" "nitc-e without options"
-	run_compiler "nitc-e" ./nitc --erasure
-
-	if test "$1" = NOALL; then
-		shift
-	elif test -n "$2"; then
-		prepare_res "$name-all.dat" "all" "nitc-e with all options $@"
-		run_compiler "nitc-e-$tag" ./nitc --erasure $@
-	fi
-
-	for opt in "$@"; do
-		ot=${opt// /+}
-		prepare_res "$name$ot.dat" "$opt" "nitc-e with option $opt"
-		run_compiler "nitc-e$ot" ./nitc --erasure $opt
-	done
-
-	plot "$name.gnu"
-}
-bench_nitc-e_options "slower" --hardening --no-shortcut-equal --no-union-attribute --no-shortcut-range --no-inline-intern
-bench_nitc-e_options "nocheck" --no-check-null --no-check-autocast --no-check-attr-isset --no-check-covariance --no-check-assert --no-check-erasure-cast
-bench_nitc-e_options "faster" --skip-dead-methods --inline-coloring-numbers --inline-some-methods --direct-call-monomorph --rta
-
-function bench_engines()
-{
-	name="$FUNCNAME"
-	skip_test "$name" && return
-	prepare_res "$name-nitc-s.dat" "nitc-s" "nitc with --separate"
-	run_compiler "nitc-s" ./nitc --separate
-	prepare_res "$name-nitc-e.dat" "nitc-e" "nitc with --erasure"
-	run_compiler "nitc-e" ./nitc --erasure
-	prepare_res "$name-nitc-sg.dat" "nitc-sg" "nitc with --separate --semi-global"
-	run_compiler "nitc-sg" ./nitc --separate --semi-global
-	prepare_res "$name-nitc-eg.dat" "nitc-eg" "nitc with --erasure --semi-global"
-	run_compiler "nitc-eg" ./nitc --erasure --semi-global
-	prepare_res "$name-nitc-egt.dat" "nitc-egt" "nitc with --erasure --semi-global --rta"
-	run_compiler "nitc-egt" ./nitc --erasure --semi-global --rta
-	prepare_res "$name-nitc-g.dat" "nitc-g" "nitc with --global"
-	run_compiler "nitc-g" ./nitc --global
-	plot "$name.gnu"
-}
-bench_engines
+bench_nitc_options "engine" "" NOALL "--separate" "--erasure" "--separate --semi-global" "--erasure --semi-global" "--erasure --semi-global --rta" "--global"
+bench_nitc_options "policy" "" NOALL "--separate" "--erasure" "--separate --no-check-covariance" "--erasure --no-check-covariance --no-check-erasure-cast"
+bench_nitc_options "nullables" "" "--no-check-attr-isset" "--no-union-attribute"
+bench_nitc_options "linkboost" "" NOALL --trampoline-call --colors-are-symbols "--colors-are-symbols --trampoline-call" "--separate --link-boost" "--separate --colors-are-symbols --guard-call" "--separate --colors-are-symbols --direct-call-monomorph0"
+bench_nitc_options "monomorph" "" --direct-call-monomorph0 --direct-call-monomorph
 
 function bench_nitc-e_gc()
 {
@@ -290,38 +246,6 @@ function bench_cc_nitc-e()
 }
 bench_cc_nitc-e
 
-function bench_policy()
-{
-	name="$FUNCNAME"
-	skip_test "$name" && return
-	prepare_res "$name-nitc-s.dat" "nitc-s" "nitc with --separate"
-	run_compiler "nitc-s" ./nitc --separate
-	prepare_res "$name-nitc-e.dat" "nitc-e" "nitc with --erasure"
-	run_compiler "nitc-e" ./nitc --erasure
-	prepare_res "$name-nitc-su.dat" "nitc-su" "nitc with --separate --no-check-covariance"
-	run_compiler "nitc-su" ./nitc --separate --no-check-covariance
-	prepare_res "$name-nitc-eu.dat" "nitc-eu" "nitc with --erasure --no-check-covariance --no-check-erasure-cast"
-	run_compiler "nitc-eu" ./nitc --erasure --no-check-covariance --no-check-erasure-cast
-	plot "$name.gnu"
-}
-bench_policy
-
-function bench_nullables()
-{
-	name="$FUNCNAME"
-	skip_test "$name" && return
-	prepare_res "$name-nitc.dat" "nitc" "nitc no options"
-	run_compiler "nitc" ./nitc --separate
-	prepare_res "$name-nitc-ni.dat" "nitc-ni" "nitc --no-check-attr-isset"
-	run_compiler "nitc" ./nitc --separate --no-check-attr-isset
-	prepare_res "$name-nitc-nu.dat" "nitc-nu" "nitc --no-union-attribute"
-	run_compiler "nitc" ./nitc --separate --no-union-attribute
-	prepare_res "$name-nitc-nu-ni.dat" "nitc-nu-ni" "nitc --no-union-attribute --no-check-attr-isset"
-	run_compiler "nitc" ./nitc --separate --no-union-attribute --no-check-attr-isset
-	plot "$name.gnu"
-}
-bench_nullables
-
 function bench_compilation_time
 {
 	name="$FUNCNAME"
@@ -341,44 +265,6 @@ function bench_compilation_time
 	plot "$name.gnu"
 }
 bench_compilation_time
-
-function bench_linkboost()
-{
-	name="$FUNCNAME"
-	skip_test "$name" && return
-	prepare_res "$name-nitc-st.dat" "nitc-st" "nitc with --separate --trampoline-call"
-	run_compiler "nitc-st" ./nitc --separate --trampoline-call
-	prepare_res "$name-nitc-s.dat" "nitc-s" "nitc with --separate"
-	run_compiler "nitc-s" ./nitc --separate
-	prepare_res "$name-nitc-sc.dat" "nitc-sc" "nitc with --separate --colors-are-symbols"
-	run_compiler "nitc-sc" ./nitc --separate --colors-are-symbols
-	prepare_res "$name-nitc-sct.dat" "nitc-sct" "nitc with --separate --colors-are-symbols --trampoline-call"
-	run_compiler "nitc-sct" ./nitc --separate --colors-are-symbols --trampoline-call
-	prepare_res "$name-nitc-sl.dat" "nitc-sl" "nitc with --separate --link-boost"
-	run_compiler "nitc-scts" ./nitc --separate --link-boost
-	prepare_res "$name-nitc-scgc.dat" "nitc-scgc" "nitc with --separate --colors-are-symbols --guard-call"
-	run_compiler "nitc-scgc" ./nitc --separate --colors-are-symbols --guard-call
-	prepare_res "$name-nitc-scd.dat" "nitc-scd" "nitc with --separate --colors-are-symbols --direct-call-monomorph0"
-	run_compiler "nitc-scd" ./nitc --separate --colors-are-symbols --direct-call-monomorph0
-	plot "$name.gnu"
-}
-bench_linkboost
-
-function bench_call_monomorph()
-{
-	name="$FUNCNAME"
-	skip_test "$name" && return
-	prepare_res "$name-nitc.dat" "nitc" "nitc with --separate"
-	run_compiler "nitc" ./nitc
-	prepare_res "$name-nitc-d0.dat" "nitc-d0" "nitc with --separate --direct-call-monomorph0"
-	run_compiler "nitc-d0" ./nitc --direct-call-monomorph0
-	prepare_res "$name-nitc-d1.dat" "nitc-d" "nitc with --separate --direct-call-monomorph"
-	run_compiler "nitc-d1" ./nitc --direct-call-monomorph
-	prepare_res "$name-nitc-d2.dat" "nitc-d2" "nitc with --separate --direct-call-monomorph2"
-	run_compiler "nitc-d2" ./nitc --direct-call-monomorph --direct-call-monomorph0
-	plot "$name.gnu"
-}
-bench_call_monomorph
 
 if test -n "$html"; then
 	echo >>"$html" "</body></html>"
