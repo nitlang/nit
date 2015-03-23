@@ -1580,7 +1580,7 @@ class SeparateCompilerVisitor
 			self.add("{res} = {recv}->attrs[{a.const_color}] != NULL; /* {a} on {recv.inspect}*/")
 		else
 
-			if not mtype.is_c_primitive then
+			if not mtype.is_c_primitive and not mtype.is_tagged then
 				self.add("{res} = {recv}->attrs[{a.const_color}].val != NULL; /* {a} on {recv.inspect} */")
 			else
 				self.add("{res} = 1; /* NOT YET IMPLEMENTED: isset of primitives: {a} on {recv.inspect} */")
