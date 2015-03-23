@@ -23,6 +23,7 @@ import platform
 import c_tools
 private import annotation
 import mixin
+import counter
 
 # Add compiling options
 redef class ToolContext
@@ -1021,14 +1022,6 @@ extern void nitni_global_ref_decr( struct nitni_ref *ref ) {
 	end
 
 	fun finalize_ffi_for_module(mmodule: MModule) do mmodule.finalize_ffi(self)
-
-	# Division facility
-	# Avoid division by zero by returning the string "n/a"
-	fun div(a,b:Int):String
-	do
-		if b == 0 then return "n/a"
-		return ((a*10000/b).to_f / 100.0).to_precision(2)
-	end
 end
 
 # A file unit (may be more than one file if
