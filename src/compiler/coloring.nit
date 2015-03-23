@@ -17,7 +17,7 @@ module coloring
 import poset
 
 # Build a conflict graph from a POSet
-class POSetConflictGraph[E: Object]
+class POSetConflictGraph[E]
 
 	# Core is composed by:
 	#  * elements that have mutiple direct parents
@@ -45,6 +45,7 @@ class POSetConflictGraph[E: Object]
 	# REQUIRE: is_colored
 	var conflicts = new HashMap[E, Set[E]]
 
+	# The associated poset
 	var poset: POSet[E]
 
 	# The linearisation order to visit elements in the poset
@@ -120,8 +121,12 @@ class POSetConflictGraph[E: Object]
 		#print "border: {border.join(" ")} ({border.length})"
 		#print "crown: {crown.join(" ")} ({crown.length})"
 		print "conflicts:"
-		for e, c in conflicts do print "  {e}: {c.join(" ")}"
+		for e, c in conflicts do print "  {e or else "NULL"}: {c.join(" ")}"
 	end
+end
+
+redef class POSet[E]
+	fun to_conflict_graph: POSetConflictGraph[E] do return new POSetConflictGraph[E](self)
 end
 
 # Colorize elements from a POSet
