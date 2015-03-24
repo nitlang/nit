@@ -231,7 +231,7 @@ class FlatStringIter
 
 	private var it: UnicodeChar
 
-	private var is_created: Bool
+	private var is_created = false
 
 	init(s: FlatString) do from(s, 0)
 

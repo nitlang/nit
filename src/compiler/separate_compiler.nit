@@ -1580,7 +1580,7 @@ class SeparateCompilerVisitor
 			self.add("{res} = {recv}->attrs[{a.const_color}] != NULL; /* {a} on {recv.inspect}*/")
 		else
 
-			if not mtype.is_c_primitive then
+			if not mtype.is_c_primitive and not mtype.is_tagged then
 				self.add("{res} = {recv}->attrs[{a.const_color}].val != NULL; /* {a} on {recv.inspect} */")
 			else
 				self.add("{res} = 1; /* NOT YET IMPLEMENTED: isset of primitives: {a} on {recv.inspect} */")
@@ -1661,7 +1661,11 @@ class SeparateCompilerVisitor
 		self.require_declaration(a.const_color)
 		if self.compiler.modelbuilder.toolcontext.opt_no_union_attribute.value then
 			var attr = "{recv}->attrs[{a.const_color}]"
-			if mtype.is_c_primitive then
+			if mtype.is_tagged then
+				# The attribute is not primitive, thus store it as tagged
+				var tv = autobox(value, compiler.mainmodule.object_type)
+				self.add("{attr} = {tv}; /* {a} on {recv.inspect} */")
+			else if mtype.is_c_primitive then
 				assert mtype isa MClassType
 				# The attribute is primitive, thus we store it in a box
 				# The trick is to create the box the first time then resuse the box
@@ -2302,5 +2306,16 @@ redef class AMethPropdef
 		var m = mpropdef
 		if m != null and m.mproperty.is_init and m.is_extern then return false
 		return super
+	end
+end
+
+redef class AAttrPropdef
+	redef fun init_expr(v, recv)
+	do
+		super
+		if is_lazy and v.compiler.modelbuilder.toolcontext.opt_no_union_attribute.value then
+			var guard = self.mlazypropdef.mproperty
+			v.write_attribute(guard, recv, v.bool_instance(false))
+		end
 	end
 end
