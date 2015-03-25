@@ -88,15 +88,15 @@ function new_answer(sender){
 				</div>
 			</div>
 			<div class = "form-group">
-				<label for="meetup=place" class="col-sm-4 control-label">{{{"Where?"}}}</label>
+				<label for="meetup_place" class="col-sm-4 control-label">{{{"Where?"}}}</label>
 				<div class="col-sm-8">
 					<input name="meetup_place" id="meetup_place" type="text" class="form-control" placeholder="{{{"Place of the event"}}}" value="{{{if meet != null then meet.place else ""}}}">
 				</div>
 			</div>
 			<div class = "form-group">
-				<label for="meetup=maybe" class="col-sm-4 control-label">{{{"Add a Maybe option?"}}}</label>
-				<div class="col-sm-8">
-					<input name="meetup_mode" id="meetup_mode" type="checkbox" class="form-control">
+				<label for="meetup_mode" class="col-sm-4 control-label">{{{"Add a Maybe option?"}}}</label>
+				<div class="col-sm-8 text-left">
+					<input name="meetup_mode" id="meetup_mode" type="checkbox">
 				</div>
 			</div>
 				<h2>{{{"Opportunities"}}}</h2>
