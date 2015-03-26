@@ -25,6 +25,7 @@ import serialization_phase
 import deriving
 import check_annotation
 import glsl_validation
+import parallelization_phase
 
 redef class ToolContext
 	# FIXME: there is conflict in linex in nitc, so use this trick to force invocation
@@ -42,6 +43,7 @@ redef class ToolContext
 		# Code genrated by the serialization phase must be analyzed for literals
 		phases.add_edge(literal_phase, serialization_phase_pre_model)
 		phases.add_edge(modelize_class_phase, serialization_phase_pre_model)
+		phases.add_edge(modelize_class_phase, parallelization_phase)
 		return true
 	end
 end
