@@ -19,6 +19,7 @@ module pthreads is
 	cflags "-pthread"
 	ldflags "-pthread"
 	pkgconfig "bdw-gc"
+	new_annotation threaded
 end
 
 #
