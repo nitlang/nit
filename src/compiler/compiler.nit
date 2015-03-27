@@ -22,3 +22,4 @@ import compiler_ffi
 import platform::android
 import platform::pnacl
 import platform::emscripten
+import platform::ios
