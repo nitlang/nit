@@ -129,7 +129,9 @@ class ProcessWriter
 	redef fun execute
 	do
 		super
-		stream_out = new FileWriter.from_fd(data.in_fd)
+		var out = new FileWriter.from_fd(data.in_fd)
+		out.set_buffering_mode(0, sys.buffer_mode_none)
+		stream_out = out
 	end
 end
 
