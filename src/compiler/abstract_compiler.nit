@@ -589,6 +589,8 @@ abstract class AbstractCompiler
 		self.header.add_decl("#include <stdlib.h>")
 		self.header.add_decl("#include <stdio.h>")
 		self.header.add_decl("#include <string.h>")
+		self.header.add_decl("#include <sys/types.h>\n")
+		self.header.add_decl("#include <unistd.h>\n")
 		self.header.add_decl("#include \"gc_chooser.h\"")
 		self.header.add_decl("#ifdef ANDROID")
 		self.header.add_decl("	#include <android/log.h>")
