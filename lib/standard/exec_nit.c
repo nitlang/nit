@@ -149,4 +149,5 @@ int string_NativeString_NativeString_system_0(const char *cmd) {
 		// cmd exited on SIGINT: in my opinion the user wants the main to be discontinued
 		kill(getpid(), SIGINT);
 	}
+	return status;
 }
