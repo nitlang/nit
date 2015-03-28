@@ -227,6 +227,7 @@ $(call import-module,android/native_app_glue)
 </manifest>
 <!-- END_INCLUDE(manifest) -->
 """
+		manifest_file.close
 
 		### Link to png sources
 		# libpng is not available on Android NDK
