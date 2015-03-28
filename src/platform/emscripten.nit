@@ -35,17 +35,17 @@ class EmscriptenPlatform
 	redef fun supports_libunwind do return false
 	redef fun supports_libgc do return false
 	redef fun supports_linker_script do return false
-	redef fun toolchain(toolcontext) do return new EnscriptenToolchain(toolcontext)
+	redef fun toolchain(toolcontext, compiler) do return new EnscriptenToolchain(toolcontext, compiler)
 end
 
 class EnscriptenToolchain
 	super MakefileToolchain
 
-	redef fun makefile_name(mainmodule) do return "{mainmodule.name}.js.mk"
+	redef fun makefile_name do return "{super}.js.mk"
 
-	redef fun default_outname(mainmodule) do return "{super}.js"
+	redef fun default_outname do return "{super}.js"
 
-	redef fun write_makefile(compiler, compile_dir, cfiles)
+	redef fun write_makefile(compile_dir, cfiles)
 	do
 		super
 

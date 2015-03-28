@@ -42,7 +42,7 @@ class AndroidPlatform
 
 	redef fun supports_linker_script do return false
 
-	redef fun toolchain(toolcontext) do return new AndroidToolchain(toolcontext)
+	redef fun toolchain(toolcontext, compiler) do return new AndroidToolchain(toolcontext, compiler)
 end
 
 class AndroidToolchain
@@ -57,9 +57,9 @@ class AndroidToolchain
 		return "{android_project_root}/jni/nit_compile/"
 	end
 
-	redef fun default_outname(mainmodule) do return "{mainmodule.name}.apk"
+	redef fun default_outname do return "{super}.apk"
 
-	redef fun write_files(compiler, compile_dir, cfiles)
+	redef fun write_files(compile_dir, cfiles)
 	do
 		var android_project_root = android_project_root.as(not null)
 		var project = toolcontext.modelbuilder.android_project_for(compiler.mainmodule)
@@ -107,7 +107,7 @@ class AndroidToolchain
 		if not dir.file_exists then dir.mkdir
 
 		# compile normal C files
-		super(compiler, compile_dir, cfiles)
+		super
 
 		# Gather extra C files generated elsewhere than in super
 		for f in compiler.extern_bodies do
@@ -311,12 +311,12 @@ $(call import-module,android/native_app_glue)
 		end
 	end
 
-	redef fun write_makefile(compiler, compile_dir, cfiles)
+	redef fun write_makefile(compile_dir, cfiles)
 	do
 		# Do nothing, already done in `write_files`
 	end
 
-	redef fun compile_c_code(compiler, compile_dir)
+	redef fun compile_c_code(compile_dir)
 	do
 		var android_project_root = android_project_root.as(not null)
 		var short_project_name = compiler.mainmodule.name.replace("-", "_")

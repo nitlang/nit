@@ -121,20 +121,30 @@ redef class ModelBuilder
 	protected fun write_and_make(compiler: AbstractCompiler)
 	do
 		var platform = compiler.target_platform
-		var toolchain = platform.toolchain(toolcontext)
+		var toolchain = platform.toolchain(toolcontext, compiler)
 		compile_dir = toolchain.compile_dir
-		toolchain.write_and_make compiler
+		toolchain.write_and_make
 	end
 end
 
 redef class Platform
 	# The specific tool-chain associated to the platform
-	fun toolchain(toolcontext: ToolContext): Toolchain do return new MakefileToolchain(toolcontext)
+	fun toolchain(toolcontext: ToolContext, compiler: AbstractCompiler): Toolchain
+	do
+		return new MakefileToolchain(toolcontext, compiler)
+	end
 end
 
+# Build toolchain for a specific target program, varies per `Platform`
 class Toolchain
+
+	# Toolcontext
 	var toolcontext: ToolContext
 
+	# Compiler of the target program
+	var compiler: AbstractCompiler
+
+	# Directory where to generate all C files
 	fun compile_dir: String
 	do
 		var compile_dir = toolcontext.opt_compile_dir.value
@@ -142,13 +152,15 @@ class Toolchain
 		return compile_dir
 	end
 
-	fun write_and_make(compiler: AbstractCompiler) is abstract
+	# Write all C files and compile them
+	fun write_and_make is abstract
 end
 
+# Default toolchain using a Makefile
 class MakefileToolchain
 	super Toolchain
 
-	redef fun write_and_make(compiler)
+	redef fun write_and_make
 	do
 		var compile_dir = compile_dir
 
@@ -161,11 +173,11 @@ class MakefileToolchain
 		compile_dir.mkdir
 
 		var cfiles = new Array[String]
-		write_files(compiler, compile_dir, cfiles)
+		write_files(compile_dir, cfiles)
 
 		# Generate the Makefile
 
-		write_makefile(compiler, compile_dir, cfiles)
+		write_makefile(compile_dir, cfiles)
 
 		var time1 = get_time
 		self.toolcontext.info("*** END WRITING C: {time1-time0} ***", 2)
@@ -177,13 +189,14 @@ class MakefileToolchain
 		time0 = time1
 		self.toolcontext.info("*** COMPILING C ***", 1)
 
-		compile_c_code(compiler, compile_dir)
+		compile_c_code(compile_dir)
 
 		time1 = get_time
 		self.toolcontext.info("*** END COMPILING C: {time1-time0} ***", 2)
 	end
 
-	fun write_files(compiler: AbstractCompiler, compile_dir: String, cfiles: Array[String])
+	# Write all source files to the `compile_dir`
+	fun write_files(compile_dir: String, cfiles: Array[String])
 	do
 		var platform = compiler.target_platform
 		if self.toolcontext.opt_stacktrace.value == "nitstack" and platform.supports_libunwind then compiler.build_c_to_nit_bindings
@@ -280,10 +293,14 @@ class MakefileToolchain
 		self.toolcontext.info("Total C source files to compile: {cfiles.length}", 2)
 	end
 
-	fun makefile_name(mainmodule: MModule): String do return "{mainmodule.c_name}.mk"
+	# Get the name of the Makefile to use
+	fun makefile_name: String do return "{compiler.mainmodule.c_name}.mk"
 
-	fun default_outname(mainmodule: MModule): String
+	# Get the default name of the executable to produce
+	fun default_outname: String
 	do
+		var mainmodule = compiler.mainmodule
+
 		# Search a non fictive module
 		var res = mainmodule.name
 		while mainmodule.is_fictive do
@@ -298,13 +315,14 @@ class MakefileToolchain
 	do
 		var res = self.toolcontext.opt_output.value
 		if res != null then return res
-		res = default_outname(mainmodule)
+		res = default_outname
 		var dir = self.toolcontext.opt_dir.value
 		if dir != null then return dir.join_path(res)
 		return res
 	end
 
-	fun write_makefile(compiler: AbstractCompiler, compile_dir: String, cfiles: Array[String])
+	# Write the Makefile
+	fun write_makefile(compile_dir: String, cfiles: Array[String])
 	do
 		var mainmodule = compiler.mainmodule
 		var platform = compiler.target_platform
@@ -319,7 +337,7 @@ class MakefileToolchain
 			# 2. copy the binary at the right place in the `all` goal.
 			outpath = mainmodule.c_name
 		end
-		var makename = makefile_name(mainmodule)
+		var makename = makefile_name
 		var makepath = "{compile_dir}/{makename}"
 		var makefile = new FileWriter.open(makepath)
 
@@ -444,9 +462,10 @@ endif
 		makepath.file_copy_to "{compile_dir}/Makefile"
 	end
 
-	fun compile_c_code(compiler: AbstractCompiler, compile_dir: String)
+	# The C code is generated, compile it to an executable
+	fun compile_c_code(compile_dir: String)
 	do
-		var makename = makefile_name(compiler.mainmodule)
+		var makename = makefile_name
 
 		var makeflags = self.toolcontext.opt_make_flags.value
 		if makeflags == null then makeflags = ""

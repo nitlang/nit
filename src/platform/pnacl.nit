@@ -37,13 +37,13 @@ class PnaclPlatform
 
 	redef fun no_main do return true
 
-	redef fun toolchain(toolcontext) do return new PnaclToolchain(toolcontext)
+	redef fun toolchain(toolcontext, compiler) do return new PnaclToolchain(toolcontext, compiler)
 end
 
 class PnaclToolchain
 	super MakefileToolchain
 
-	redef fun write_files(compiler, compile_dir, cfiles)
+	redef fun write_files(compile_dir, cfiles)
 	do
 		var app_name = compiler.mainmodule.name
 
@@ -52,7 +52,7 @@ class PnaclToolchain
 		if not dir.file_exists then dir.mkdir
 
 		# compile normal C files
-		super(compiler, compile_dir, cfiles)
+		super
 
 		# Gather extra C files generated elsewhere than in super
 		for f in compiler.extern_bodies do
@@ -238,12 +238,12 @@ function updateStatus(opt_message) {
 		""".write_to_file(file)
 	end
 
-	redef fun write_makefile(compiler, compile_dir, cfiles)
+	redef fun write_makefile(compile_dir, cfiles)
 	do
 		# Do nothing, already done in `write_files`
 	end
 
-	redef fun compile_c_code(compiler, compile_dir)
+	redef fun compile_c_code(compile_dir)
 	do
 		# Generate the pexe
 		toolcontext.exec_and_check(["make", "-C", compile_dir, "-j", "4"], "PNaCl project error")
