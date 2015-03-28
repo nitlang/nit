@@ -59,6 +59,8 @@ redef class ToolContext
 	var opt_colo_dead_methods = new OptionBool("Force colorization of dead methods", "--colo-dead-methods")
 	# --tables-metrics
 	var opt_tables_metrics = new OptionBool("Enable static size measuring of tables used for vft, typing and resolution", "--tables-metrics")
+	# --type-poset
+	var opt_type_poset = new OptionBool("Build a poset of types to create more condensed tables.", "--type-poset")
 
 	redef init
 	do
@@ -72,6 +74,7 @@ redef class ToolContext
 		self.option_context.add_option(self.opt_inline_coloring_numbers, opt_inline_some_methods, opt_direct_call_monomorph, opt_skip_dead_methods, opt_semi_global)
 		self.option_context.add_option(self.opt_colo_dead_methods)
 		self.option_context.add_option(self.opt_tables_metrics)
+		self.option_context.add_option(self.opt_type_poset)
 	end
 
 	redef fun process_options(args)
@@ -414,23 +417,36 @@ class SeparateCompiler
 	end
 
 	# colorize live types of the program
-	private fun do_type_coloring: POSet[MType] do
+	private fun do_type_coloring: Collection[MType] do
 		# Collect types to colorize
 		var live_types = runtime_type_analysis.live_types
 		var live_cast_types = runtime_type_analysis.live_cast_types
 
-		# Compute colors
-		var poset = poset_from_mtypes(live_types, live_cast_types)
-		var colorer = new POSetColorer[MType]
-		colorer.colorize(poset)
-		type_ids = colorer.ids
-		type_colors = colorer.colors
-		type_tables = build_type_tables(poset)
+		var res = new HashSet[MType]
+		res.add_all live_types
+		res.add_all live_cast_types
+
+		if modelbuilder.toolcontext.opt_type_poset.value then
+			# Compute colors with a type poset
+			var poset = poset_from_mtypes(live_types, live_cast_types)
+			var colorer = new POSetColorer[MType]
+			colorer.colorize(poset)
+			type_ids = colorer.ids
+			type_colors = colorer.colors
+			type_tables = build_type_tables(poset)
+		else
+			# Compute colors using the class poset
+			# Faster to compute but the number of holes can degenerate
+			compute_type_test_layouts(live_types, live_cast_types)
+
+			type_ids = new HashMap[MType, Int]
+			for x in res do type_ids[x] = type_ids.length + 1
+		end
 
 		# VT and FT are stored with other unresolved types in the big resolution_tables
 		self.compute_resolution_tables(live_types)
 
-		return poset
+		return res
 	end
 
 	private fun poset_from_mtypes(mtypes, cast_types: Set[MType]): POSet[MType] do
@@ -487,6 +503,48 @@ class SeparateCompiler
 			tables[mtype] = table
 		end
 		return tables
+	end
+
+
+	private fun compute_type_test_layouts(mtypes: Set[MClassType], cast_types: Set[MType]) do
+		# Group cast_type by their classes
+		var bucklets = new HashMap[MClass, Set[MType]]
+		for e in cast_types do
+			var c = e.as_notnullable.as(MClassType).mclass
+			if not bucklets.has_key(c) then
+				bucklets[c] = new HashSet[MType]
+			end
+			bucklets[c].add(e)
+		end
+
+		# Colorize cast_types from the class hierarchy
+		var colorer = new POSetGroupColorer[MClass, MType](class_conflict_graph, bucklets)
+		type_colors = colorer.colors
+
+		var layouts = new HashMap[MClass, Array[nullable MType]]
+		for c in runtime_type_analysis.live_classes do
+			layouts[c] = colorer.build_layout(c)
+		end
+
+		# Build the table for each live type
+		for t in mtypes do
+			# A live type use the layout of its class
+			var c = t.mclass
+			var layout = layouts[c]
+			var table = new Array[nullable MType].with_capacity(layout.length)
+			type_tables[t] = table
+
+			# For each potential super-type in the layout
+			for sup in layout do
+				if sup == null then
+					table.add null
+				else if t.is_subtype(mainmodule, null, sup) then
+					table.add sup
+				else
+					table.add null
+				end
+			end
+		end
 	end
 
 	# resolution_tables is used to perform a type resolution at runtime in O(1)
