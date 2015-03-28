@@ -2047,6 +2047,22 @@ class SeparateCompilerVisitor
 		end
 	end
 
+	redef fun native_array_get(nat, i)
+	do
+		var nclass = mmodule.native_array_class
+		var recv = "((struct instance_{nclass.c_name}*){nat})->values"
+		# Because the objects are boxed, return the box to avoid unnecessary (or broken) unboxing/reboxing
+		var res = self.new_expr("{recv}[{i}]", compiler.mainmodule.object_type)
+		return res
+	end
+
+	redef fun native_array_set(nat, i, val)
+	do
+		var nclass = mmodule.native_array_class
+		var recv = "((struct instance_{nclass.c_name}*){nat})->values"
+		self.add("{recv}[{i}]={val};")
+	end
+
 	fun link_unresolved_type(mclassdef: MClassDef, mtype: MType) do
 		assert mtype.need_anchor
 		var compiler = self.compiler

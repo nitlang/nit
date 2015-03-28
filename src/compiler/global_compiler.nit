@@ -407,6 +407,19 @@ class GlobalCompilerVisitor
 		return self.new_expr("NEW_{ret_type.c_name}({length})", ret_type)
 	end
 
+	redef fun native_array_get(nat, i)
+	do
+		var recv = "((struct {nat.mcasttype.c_name}*){nat})->values"
+		var ret_type = nat.mcasttype.as(MClassType).arguments.first
+		return self.new_expr("{recv}[{i}]", ret_type)
+	end
+
+	redef fun native_array_set(nat, i, val)
+	do
+		var recv = "((struct {nat.mcasttype.c_name}*){nat})->values"
+		self.add("{recv}[{i}]={val};")
+	end
+
 	redef fun calloc_array(ret_type, arguments)
 	do
 		self.ret(self.new_expr("NEW_{ret_type.c_name}({arguments[1]})", ret_type))

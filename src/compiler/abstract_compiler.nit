@@ -1126,6 +1126,14 @@ abstract class AbstractCompilerVisitor
 
 	fun native_array_def(pname: String, ret_type: nullable MType, arguments: Array[RuntimeVariable]) is abstract
 
+	# Return an element of a native array.
+	# The method is unsafe and is just a direct wrapper for the specific implementation of native arrays
+	fun native_array_get(native_array: RuntimeVariable, index: Int): RuntimeVariable is abstract
+
+	# Store an element in a native array.
+	# The method is unsafe and is just a direct wrapper for the specific implementation of native arrays
+	fun native_array_set(native_array: RuntimeVariable, index: Int, value: RuntimeVariable) is abstract
+
 	# Evaluate `args` as expressions in the call of `mpropdef` on `recv`.
 	# This method is used to manage varargs in signatures and returns the real array
 	# of runtime variables to use in the call.
@@ -2767,14 +2775,64 @@ end
 redef class ASuperstringExpr
 	redef fun expr(v)
 	do
-		var array = new Array[RuntimeVariable]
+		var type_string = mtype.as(not null)
+
+		# Collect elements of the superstring
+		var array = new Array[AExpr]
 		for ne in self.n_exprs do
+			# Drop literal empty string.
+			# They appears in things like "{a}" that is ["", a, ""]
 			if ne isa AStringFormExpr and ne.value == "" then continue # skip empty sub-strings
-			var i = v.expr(ne, null)
-			array.add(i)
+			array.add(ne)
 		end
-		var a = v.array_instance(array, v.object_type)
-		var res = v.send(v.get_property("to_s", a.mtype), [a])
+
+		# Store the allocated native array in a static variable
+		# For reusing later
+		var varonce = v.get_name("varonce")
+		v.add("if (unlikely({varonce}==NULL)) \{")
+
+		# The native array that will contains the elements to_s-ized.
+		# For fast concatenation.
+		var a = v.native_array_instance(type_string, v.int_instance(array.length))
+
+		v.add_decl("static {a.mtype.ctype} {varonce};")
+
+		# Pre-fill the array with the literal string parts.
+		# So they do not need to be filled again when reused
+		for i in [0..array.length[ do
+			var ne = array[i]
+			if not ne isa AStringFormExpr then continue
+			var e = v.expr(ne, null)
+			v.native_array_set(a, i, e)
+		end
+
+		v.add("\} else \{")
+		# Take the native-array from the store.
+		# The point is to prevent that some recursive execution use (and corrupt) the same native array
+		# WARNING: not thread safe! (FIXME?)
+		v.add("{a} = {varonce};")
+		v.add("{varonce} = NULL;")
+		v.add("\}")
+
+		# Stringify the elements and put them in the native array
+		var to_s_method = v.get_property("to_s", v.object_type)
+		for i in [0..array.length[ do
+			var ne = array[i]
+			if ne isa AStringFormExpr then continue
+			var e = v.expr(ne, null)
+			# Skip the `to_s` if the element is already a String
+			if not e.mcasttype.is_subtype(v.compiler.mainmodule, null, type_string) then
+				e = v.send(to_s_method, [e]).as(not null)
+			end
+			v.native_array_set(a, i, e)
+		end
+
+		# Fast join the native string to get the result
+		var res = v.send(v.get_property("native_to_s", a.mtype), [a])
+
+		# We finish to work with the native array,
+		# so store it so that it can be reused
+		v.add("{varonce} = {a};")
 		return res
 	end
 end
