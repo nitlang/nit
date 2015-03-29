@@ -1,3 +1,5 @@
 cocoa_extern_types
 cocoa_message_box
 hello_cocoa
+hello_ios
+test_platform_ios
