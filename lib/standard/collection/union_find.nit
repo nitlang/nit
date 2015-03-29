@@ -33,9 +33,45 @@ import hash_collection
 # The methods `in_same_subset`, `to_partitions`, and their variations are offered instead.
 class DisjointSet[E]
 	super SimpleCollection[E]
+	super Cloneable
 
 	# The node in the hiearchical structure for each element
 	private var nodes = new HashMap[E, DisjointSetNode]
+
+	# Copy constructor
+	init from(other: DisjointSet[E])
+	do
+		# Associate a root node in other to the associated root node in self
+		var map = new HashMap[DisjointSetNode, DisjointSetNode]
+		for e, v in other.nodes do
+			# Create the associated node
+			var n2 = new DisjointSetNode
+			nodes[e] = n2
+
+			# Get the root node in other and the associated one in self
+			var p = other.find(e)
+			var p2 = map.get_or_null(p)
+			if p2 == null then
+				# if no associated root node, then a new subset is created
+				map[p] = n2.parent
+				number_of_subsets += 1
+			else
+				# else attach the new node to the subset of the root node
+				n2.parent = p2
+			end
+		end
+	end
+
+	# Shallow copy
+	#
+	#     var s = new DisjointSet[Int]
+	#     s.add_all([1,2,3,4,5])
+	#     s.union_all([1,4,5])
+	#     var s2 = s.clone
+	#     assert s2.number_of_subsets == 3
+	#     assert s2.all_in_same_subset([1,4,5]) == true
+	#     assert s2.in_same_subset(1,2) == false
+	redef fun clone do return new DisjointSet[E].from(self)
 
 	# The number of subsets in the partition
 	#
