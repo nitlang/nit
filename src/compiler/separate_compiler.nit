@@ -2266,7 +2266,7 @@ class SeparateRuntimeFunction
 			var v2 = compiler.new_visitor
 			v2.add "{c_ret} {n2}{c_sig} \{"
 			v2.require_declaration(m.const_color)
-			var call = "(({c_funptrtype})({selfvar}->class->vft[{m.const_color}]))({arguments.join(", ")});"
+			var call = "(({c_funptrtype})({v2.class_info(selfvar)}->vft[{m.const_color}]))({arguments.join(", ")});"
 			if ret != null then
 				v2.add "return {call}"
 			else
@@ -2283,7 +2283,7 @@ class SeparateRuntimeFunction
 			var v2 = compiler.new_visitor
 			v2.add "{c_ret} {n2}{c_sig} \{"
 			v2.require_declaration(m.const_color)
-			var call = "(({c_funptrtype})({selfvar}->class->vft[{m.const_color}]))({arguments.join(", ")});"
+			var call = "(({c_funptrtype})({v2.class_info(selfvar)}->vft[{m.const_color}]))({arguments.join(", ")});"
 			if ret != null then
 				v2.add "return {call}"
 			else
