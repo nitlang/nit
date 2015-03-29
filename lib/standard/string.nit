@@ -538,6 +538,8 @@ abstract class Text
 			var c = chars[i]
 			if c == '\n' then
 				b.append("\\n")
+			else if c == '\t' then
+				b.append("\\t")
 			else if c == '\0' then
 				b.append("\\0")
 			else if c == '"' then
