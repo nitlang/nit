@@ -389,12 +389,15 @@ redef class ModelBuilder
 			return mgroups[rdp]
 		end
 
-		# Hack, a group is determined by:
+		# Hack, a group is determined by one of the following:
 		# * the presence of a honomymous nit file
 		# * the fact that the directory is named `src`
+		# * the fact that there is a sub-directory named `src`
 		var pn = rdp.basename(".nit")
 		var mp = dirpath.join_path(pn + ".nit").simplify_path
 
+		# dirpath2 is the root directory
+		# dirpath is the src subdirectory directory, if any, else it is the same that dirpath2
 		var dirpath2 = dirpath
 		if not mp.file_exists then
 			if pn == "src" then
@@ -402,12 +405,17 @@ redef class ModelBuilder
 				dirpath2 = rdp.dirname
 				pn = dirpath2.basename("")
 			else
-				return null
+				# Check a `src` subdirectory
+				dirpath = dirpath2 / "src"
+				if not dirpath.file_exists then
+					# All rules failed, so return null
+					return null
+				end
 			end
 		end
 
 		# check parent directory
-		var parentpath = dirpath.join_path("..").simplify_path
+		var parentpath = dirpath2.join_path("..").simplify_path
 		var parent = get_mgroup(parentpath)
 
 		var mgroup
@@ -435,7 +443,8 @@ redef class ModelBuilder
 		end
 
 		mgroup.filepath = dirpath
-		mgroups[rdp] = mgroup
+		mgroups[module_absolute_path(dirpath)] = mgroup
+		mgroups[module_absolute_path(dirpath2)] = mgroup
 		return mgroup
 	end
 
