@@ -167,6 +167,7 @@ ggeq = '>>=';
 dotdotdot = '...';
 dotdot = '..';
 dot = '.';
+quest = '?';
 plus = '+';
 minus = '-';
 star = '*';
@@ -573,6 +574,7 @@ expr_atom~nopar~nobra {-> expr}
 	= expr_single~nopar~nobra {-> expr_single~nopar~nobra.expr}
 	| {attr} recv~nopar~nobra qualified_o attrid {-> New expr.attr(recv~nopar~nobra.expr, attrid)}
 	| {call} recv~nopar~nobra qid args {-> New expr.call(recv~nopar~nobra.expr, qid.id, args.exprs)}
+	| {safe} [expr]:expr_atom~nopar~nobra quest {-> New expr.safe(expr.expr, quest)}
 	| {super} qualified_o kwsuper args {-> New expr.super(qualified_o.qualified, kwsuper, args.exprs)}
 	| {init} recv~nopar~nobra kwinit args {-> New expr.init(recv~nopar~nobra.expr, kwinit, args.exprs)}
 !nobra	| {bra} expr_atom~nopar braargs {-> New expr.bra(expr_atom~nopar.expr, braargs.exprs)}
@@ -936,6 +938,7 @@ expr	= {block} expr* kwend?
 	| {isset_attr} kwisset expr [id]:attrid
 	| {debug_type} kwdebug kwtype expr type
 	| {vararg} expr dotdotdot
+	| {safe} expr quest
 	| {type} type
 	| {methid} expr [id]:methid
 	| {at} annotations

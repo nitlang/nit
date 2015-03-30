@@ -775,6 +775,11 @@ class TDot
 	super Token
 end
 
+# The symbol `?`
+class TQuest
+	super Token
+end
+
 # The operator `+`
 class TPlus
 	super TokenOperator
@@ -2488,6 +2493,18 @@ class AVarargExpr
 	# The `...` symbol
 	var n_dotdotdot: TDotdotdot is writable, noinit
 end
+
+# A special notation to mark a null-safe receiver or argument
+class ASafeExpr
+       super AExpr
+
+       # The protected expression
+       var n_expr: AExpr is writable, noinit
+
+       # The `?` symbol
+       var n_quest: TQuest is writable, noinit
+end
+
 
 # A list of expression separated with commas (arguments for instance)
 class AManyExpr
