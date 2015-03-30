@@ -438,6 +438,14 @@ redef class AForExpr
 	end
 end
 
+redef class AWithExpr
+	redef fun accept_flow_visitor(v)
+	do
+		super
+		v.merge_breaks(self.break_mark)
+	end
+end
+
 redef class AAssertExpr
 	redef fun accept_flow_visitor(v)
 	do
