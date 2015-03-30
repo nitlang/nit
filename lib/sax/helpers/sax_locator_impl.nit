@@ -29,7 +29,7 @@ import sax::sax_locator
 #     	redef fun start_document do
 #     		# save the location of the start of the document
 #     		# for future use.
-#     		start_loc = new SAXLocatorImpl.with(locator)
+#     		start_loc = new SAXLocatorImpl.from(locator)
 #     	end
 #     end
 #
@@ -62,7 +62,7 @@ class SAXLocatorImpl super SAXLocator
 	# Parameters:
 	#
 	# * `locator`: locator to copy.
-	init with(locator: SAXLocator) do
+	init from(locator: SAXLocator) do
 		public_id = locator.public_id
 		system_id = locator.system_id
 		line_number = locator.line_number

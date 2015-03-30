@@ -238,7 +238,7 @@ extern class NativeSocketAddrIn `{ struct sockaddr_in* `}
 		return sai;
 	`}
 
-	new with(port: Int, family: NativeSocketAddressFamilies) `{
+	new with_port(port: Int, family: NativeSocketAddressFamilies) `{
 		struct sockaddr_in *sai = NULL;
 		sai = malloc(sizeof(struct sockaddr_in));
 		sai->sin_family = family;
