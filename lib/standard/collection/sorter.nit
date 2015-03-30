@@ -267,6 +267,62 @@ redef class MapRead[K,V]
 		comparator.sort(keys)
 		return [for k in keys do self[k]]
 	end
+
+	# Return an array of all keys sorted with their values using `comparator`.
+	#
+	# ~~~
+	# var map = new HashMap[String, Int]
+	# map["ten"] = 10
+	# map["two"] = 2
+	# map["one"] = 1
+	# assert map.keys_sorted_by_values(default_comparator) == ["one", "two", "ten"]
+	# assert map.keys_sorted_by_values(alpha_comparator) == ["one", "ten", "two"]
+	# ~~~
+	#
+	# See: `to_map_comparator` to get the comparator used internally.
+	fun keys_sorted_by_values(comparator: Comparator): Array[K]
+	do
+		var keys = self.keys.to_a
+		var map_cmp = to_map_comparator(comparator)
+		map_cmp.sort(keys)
+		return keys
+	end
+
+	# A comparator that compares things with their values in self.
+	#
+	# See `MapComparator` for details.
+	fun to_map_comparator(comparator: Comparator): MapComparator[K, V] do return new MapComparator[K,V](self, comparator)
+end
+
+# A comparator that compares things with their values in a map.
+#
+# ~~~
+# var map = new HashMap[String, Int]
+# map["ten"] = 10
+# map["two"] = 2
+# map["one"] = 1
+#
+# var map_cmp = map.to_map_comparator(default_comparator)
+# var a = ["ten", "one", "two"]
+# map_cmp.sort(a)
+# assert a == ["one", "two", "ten"]
+# map_cmp = map.to_map_comparator(alpha_comparator)
+# map_cmp.sort(a)
+# assert a == ["one", "ten", "two"]
+# ~~~
+class MapComparator[K,V]
+	super Comparator
+
+	# What is compared are the keys of the values
+	redef type COMPARED: K
+
+	# The map that associates compared elements to the value used to compare them
+	var map: MapRead[K,V]
+
+	# The comparator used to compare values
+	var comparator: Comparator
+
+	redef fun compare(a,b) do return comparator.compare(map[a], map[b])
 end
 
 # This comparator uses the operator `<=>` to compare objects.
