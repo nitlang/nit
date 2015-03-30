@@ -55,8 +55,6 @@ class TmplComposer
 	# Short name
 	var name: String
 
-	init(name: String) do self.name = name
-
 	redef fun rendering do add "- {name}\n"
 end
 
@@ -68,13 +66,6 @@ class TmplComposerDetail
 	var lastname: String
 	var birth: Int
 	var death: Int
-
-	init(firstname, lastname: String, birth, death: Int) do
-		self.firstname = firstname
-		self.lastname = lastname
-		self.birth = birth
-		self.death = death
-	end
 
 	redef fun rendering do add """
 
