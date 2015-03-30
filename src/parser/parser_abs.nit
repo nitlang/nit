@@ -217,6 +217,9 @@ end
 class TDot
 	super Token
 end
+class TQuest
+	super Token
+end
 class TPlus
 	super Token
 end
@@ -1085,6 +1088,11 @@ class AVarargExpr
 	super AExpr
 	var n_expr: AExpr is writable, noinit
 	var n_dotdotdot: TDotdotdot is writable, noinit
+end
+class ASafeExpr
+	super AExpr
+	var n_expr: AExpr is writable, noinit
+	var n_quest: TQuest is writable, noinit
 end
 class ATypeExpr
 	super AExpr
