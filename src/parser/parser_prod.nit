@@ -2294,8 +2294,8 @@ redef class AVardeclExpr
 		n_annotations: nullable AAnnotations
 	)
 	do
-		_n_kwvar = n_kwvar.as(not null)
-		n_kwvar.parent = self
+		_n_kwvar = n_kwvar
+		if n_kwvar != null then n_kwvar.parent = self
 		_n_id = n_id.as(not null)
 		n_id.parent = self
 		_n_type = n_type
@@ -2311,7 +2311,7 @@ redef class AVardeclExpr
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
 		if _n_kwvar == old_child then
-			n_kwvar = new_child.as(TKwvar)
+			n_kwvar = new_child.as(nullable TKwvar)
 			return
 		end
 		if _n_id == old_child then
@@ -2339,7 +2339,7 @@ redef class AVardeclExpr
 	redef fun n_kwvar=(node)
 	do
 		_n_kwvar = node
-		node.parent = self
+		if node != null then node.parent = self
 	end
 	redef fun n_id=(node)
 	do
@@ -2965,6 +2965,87 @@ redef class AForExpr
 	do
 		v.enter_visit(_n_kwfor)
 		n_ids.visit_all(v)
+		v.enter_visit(_n_expr)
+		v.enter_visit(_n_kwdo)
+		v.enter_visit(_n_block)
+		v.enter_visit(_n_label)
+	end
+end
+redef class AWithExpr
+	init init_awithexpr (
+		n_kwwith: nullable TKwwith,
+		n_expr: nullable AExpr,
+		n_kwdo: nullable TKwdo,
+		n_block: nullable AExpr,
+		n_label: nullable ALabel
+	)
+	do
+		_n_kwwith = n_kwwith.as(not null)
+		n_kwwith.parent = self
+		_n_expr = n_expr.as(not null)
+		n_expr.parent = self
+		_n_kwdo = n_kwdo.as(not null)
+		n_kwdo.parent = self
+		_n_block = n_block
+		if n_block != null then n_block.parent = self
+		_n_label = n_label
+		if n_label != null then n_label.parent = self
+	end
+
+	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
+	do
+		if _n_kwwith == old_child then
+			n_kwwith = new_child.as(TKwwith)
+			return
+		end
+		if _n_expr == old_child then
+			n_expr = new_child.as(AExpr)
+			return
+		end
+		if _n_kwdo == old_child then
+			n_kwdo = new_child.as(TKwdo)
+			return
+		end
+		if _n_block == old_child then
+			n_block = new_child.as(nullable AExpr)
+			return
+		end
+		if _n_label == old_child then
+			n_label = new_child.as(nullable ALabel)
+			return
+		end
+	end
+
+	redef fun n_kwwith=(node)
+	do
+		_n_kwwith = node
+		node.parent = self
+	end
+	redef fun n_expr=(node)
+	do
+		_n_expr = node
+		node.parent = self
+	end
+	redef fun n_kwdo=(node)
+	do
+		_n_kwdo = node
+		node.parent = self
+	end
+	redef fun n_block=(node)
+	do
+		_n_block = node
+		if node != null then node.parent = self
+	end
+	redef fun n_label=(node)
+	do
+		_n_label = node
+		if node != null then node.parent = self
+	end
+
+
+	redef fun visit_all(v: Visitor)
+	do
+		v.enter_visit(_n_kwwith)
 		v.enter_visit(_n_expr)
 		v.enter_visit(_n_kwdo)
 		v.enter_visit(_n_block)

@@ -154,6 +154,9 @@ end
 class TKwlabel
 	super Token
 end
+class TKwwith
+	super Token
+end
 class TKwdebug
 	super Token
 end
@@ -597,7 +600,7 @@ class ABlockExpr
 end
 class AVardeclExpr
 	super AExpr
-	var n_kwvar: TKwvar is writable, noinit
+	var n_kwvar: nullable TKwvar = null is writable
 	var n_id: TId is writable, noinit
 	var n_type: nullable AType = null is writable
 	var n_assign: nullable TAssign = null is writable
@@ -663,6 +666,14 @@ class AForExpr
 	super AExpr
 	var n_kwfor: TKwfor is writable, noinit
 	var n_ids: List[TId] = new List[TId]
+	var n_expr: AExpr is writable, noinit
+	var n_kwdo: TKwdo is writable, noinit
+	var n_block: nullable AExpr = null is writable
+	var n_label: nullable ALabel = null is writable
+end
+class AWithExpr
+	super AExpr
+	var n_kwwith: TKwwith is writable, noinit
 	var n_expr: AExpr is writable, noinit
 	var n_kwdo: TKwdo is writable, noinit
 	var n_block: nullable AExpr = null is writable
