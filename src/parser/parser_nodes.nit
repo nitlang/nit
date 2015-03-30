@@ -661,6 +661,11 @@ class TKwlabel
 	super TokenKeyword
 end
 
+# The keyword `with`
+class TKwwith
+	super TokenKeyword
+end
+
 # The special keyword `__DEBUG__`
 class TKwdebug
 	super Token
@@ -1625,7 +1630,7 @@ class AVardeclExpr
 	super AExpr
 
 	# The `var` keyword
-	var n_kwvar: TKwvar is writable, noinit
+	var n_kwvar: nullable TKwvar = null is writable
 
 	# The name of the local variable
 	var n_id: TId is writable, noinit
@@ -1786,6 +1791,24 @@ class AForExpr
 	var n_ids = new ANodes[TId](self)
 
 	# The expression used as the collection to iterate on
+	var n_expr: AExpr is writable, noinit
+
+	# The `do` keyword
+	var n_kwdo: TKwdo is writable, noinit
+
+	# The body of the loop
+	var n_block: nullable AExpr = null is writable
+end
+
+# A `with` statement
+class AWithExpr
+	super AExpr
+	super ALabelable
+
+	# The `with` keyword
+	var n_kwwith: TKwwith is writable, noinit
+
+	# The expression used to get the value to control
 	var n_expr: AExpr is writable, noinit
 
 	# The `do` keyword
