@@ -135,6 +135,7 @@ class FileReader
 		end
 	end
 
+	# Creates a new File stream from a file descriptor
 	init from_fd(fd: Int) do
 		self.path = ""
 		prepare_buffer(1)
