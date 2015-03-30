@@ -421,13 +421,19 @@ redef class ModelBuilder
 			mgroup = new MGroup(pn, parent.mproject, parent)
 			toolcontext.info("found sub group `{mgroup.full_name}` at {dirpath}", 2)
 		end
-		var readme = dirpath2.join_path("README.md")
+
+		# search documentation
+		# in src first so the documentation of the project code can be distinct for the documentation of the project usage
+		var readme = dirpath.join_path("README.md")
+		if not readme.file_exists then readme = dirpath.join_path("README")
+		if not readme.file_exists then readme = dirpath2.join_path("README.md")
 		if not readme.file_exists then readme = dirpath2.join_path("README")
 		if readme.file_exists then
 			var mdoc = load_markdown(readme)
 			mgroup.mdoc = mdoc
 			mdoc.original_mentity = mgroup
 		end
+
 		mgroup.filepath = dirpath
 		mgroups[rdp] = mgroup
 		return mgroup
