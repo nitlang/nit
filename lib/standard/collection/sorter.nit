@@ -250,6 +250,25 @@ interface Comparator
 
 end
 
+redef class MapRead[K,V]
+	# Return an array of all values sorted with their keys using `comparator`.
+	#
+	# ~~~
+	# var map = new HashMap[Int, String]
+	# map[10] = "ten"
+	# map[2]  = "two"
+	# map[1]  = "one"
+	# assert map.values_sorted_by_key(default_comparator) == ["one", "two", "ten"]
+	# assert map.values_sorted_by_key(alpha_comparator) == ["one", "ten", "two"]
+	# ~~~
+	fun values_sorted_by_key(comparator: Comparator): Array[V]
+	do
+		var keys = self.keys.to_a
+		comparator.sort(keys)
+		return [for k in keys do self[k]]
+	end
+end
+
 # This comparator uses the operator `<=>` to compare objects.
 # see `default_comparator` for an easy-to-use general stateless default comparator.
 class DefaultComparator
