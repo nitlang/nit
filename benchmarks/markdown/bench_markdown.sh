@@ -74,7 +74,7 @@ engdir="./engines"
 bncdir="./benches/out"
 mkdir -p $outdir
 
-s=50
+s=200
 
 function bench_nitmd()
 {
