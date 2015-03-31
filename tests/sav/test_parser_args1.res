@@ -475,7 +475,7 @@ Start ../src/test_parser.nit:17,1--147,1
                 AParExprs ../src/test_parser.nit:71,7--36
                   TOpar "(" ../src/test_parser.nit:71,7
                   AStringExpr ../src/test_parser.nit:71,8--35
-                    TString "\"  -n\11do not print anything\"" ../src/test_parser.nit:71,8--35
+                    TString "\"  -n\tdo not print anything\"" ../src/test_parser.nit:71,8--35
                   TCpar ")" ../src/test_parser.nit:71,36
               ACallExpr ../src/test_parser.nit:72,2--25
                 AImplicitSelfExpr ../src/test_parser.nit:72,2
@@ -483,7 +483,7 @@ Start ../src/test_parser.nit:17,1--147,1
                 AParExprs ../src/test_parser.nit:72,7--25
                   TOpar "(" ../src/test_parser.nit:72,7
                   AStringExpr ../src/test_parser.nit:72,8--24
-                    TString "\"  -l\11only lexer\"" ../src/test_parser.nit:72,8--24
+                    TString "\"  -l\tonly lexer\"" ../src/test_parser.nit:72,8--24
                   TCpar ")" ../src/test_parser.nit:72,25
               ACallExpr ../src/test_parser.nit:73,2--41
                 AImplicitSelfExpr ../src/test_parser.nit:73,2
@@ -491,7 +491,7 @@ Start ../src/test_parser.nit:17,1--147,1
                 AParExprs ../src/test_parser.nit:73,7--41
                   TOpar "(" ../src/test_parser.nit:73,7
                   AStringExpr ../src/test_parser.nit:73,8--40
-                    TString "\"  -p\11lexer and parser (default)\"" ../src/test_parser.nit:73,8--40
+                    TString "\"  -p\tlexer and parser (default)\"" ../src/test_parser.nit:73,8--40
                   TCpar ")" ../src/test_parser.nit:73,41
               ACallExpr ../src/test_parser.nit:74,2--68
                 AImplicitSelfExpr ../src/test_parser.nit:74,2
@@ -499,7 +499,7 @@ Start ../src/test_parser.nit:17,1--147,1
                 AParExprs ../src/test_parser.nit:74,7--68
                   TOpar "(" ../src/test_parser.nit:74,7
                   AStringExpr ../src/test_parser.nit:74,8--67
-                    TString "\"  -e\11instead on files, each argument is a content to parse\"" ../src/test_parser.nit:74,8--67
+                    TString "\"  -e\tinstead on files, each argument is a content to parse\"" ../src/test_parser.nit:74,8--67
                   TCpar ")" ../src/test_parser.nit:74,68
               ACallExpr ../src/test_parser.nit:75,2--51
                 AImplicitSelfExpr ../src/test_parser.nit:75,2
@@ -507,7 +507,7 @@ Start ../src/test_parser.nit:17,1--147,1
                 AParExprs ../src/test_parser.nit:75,7--51
                   TOpar "(" ../src/test_parser.nit:75,7
                   AStringExpr ../src/test_parser.nit:75,8--50
-                    TString "\"  -i\11tree to parse are read interactively\"" ../src/test_parser.nit:75,8--50
+                    TString "\"  -i\ttree to parse are read interactively\"" ../src/test_parser.nit:75,8--50
                   TCpar ")" ../src/test_parser.nit:75,51
               ACallExpr ../src/test_parser.nit:76,2--30
                 AImplicitSelfExpr ../src/test_parser.nit:76,2
@@ -515,7 +515,7 @@ Start ../src/test_parser.nit:17,1--147,1
                 AParExprs ../src/test_parser.nit:76,7--30
                   TOpar "(" ../src/test_parser.nit:76,7
                   AStringExpr ../src/test_parser.nit:76,8--29
-                    TString "\"  -h\11print this help\"" ../src/test_parser.nit:76,8--29
+                    TString "\"  -h\tprint this help\"" ../src/test_parser.nit:76,8--29
                   TCpar ")" ../src/test_parser.nit:76,30
             AIfExpr ../src/test_parser.nit:77,6--146,3
               TKwif "if" ../src/test_parser.nit:77,6--7

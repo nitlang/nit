@@ -531,6 +531,14 @@ abstract class Text
 	#
 	#     assert "abAB12<>&".escape_to_c         == "abAB12<>&"
 	#     assert "\n\"'\\".escape_to_c         == "\\n\\\"\\'\\\\"
+	#
+	# Most non-printable characters (bellow ASCII 32) are escaped to an octal form `\nnn`.
+	# Three digits are always used to avoid following digits to be interpreted as an element
+	# of the octal sequence.
+	#
+	#     assert "{0.ascii}{1.ascii}{8.ascii}{31.ascii}{32.ascii}".escape_to_c == "\\000\\001\\010\\037 "
+	#
+	# The exceptions are the common `\t` and `\n`.
 	fun escape_to_c: String
 	do
 		var b = new FlatBuffer
@@ -538,8 +546,10 @@ abstract class Text
 			var c = chars[i]
 			if c == '\n' then
 				b.append("\\n")
+			else if c == '\t' then
+				b.append("\\t")
 			else if c == '\0' then
-				b.append("\\0")
+				b.append("\\000")
 			else if c == '"' then
 				b.append("\\\"")
 			else if c == '\'' then
@@ -547,7 +557,17 @@ abstract class Text
 			else if c == '\\' then
 				b.append("\\\\")
 			else if c.ascii < 32 then
-				b.append("\\{c.ascii.to_base(8, false)}")
+				b.add('\\')
+				var oct = c.ascii.to_base(8, false)
+				# Force 3 octal digits since it is the
+				# maximum allowed in the C specification
+				if oct.length == 1 then
+					b.add('0')
+					b.add('0')
+				else if oct.length == 2 then
+					b.add('0')
+				end
+				b.append(oct)
 			else
 				b.add(c)
 			end
