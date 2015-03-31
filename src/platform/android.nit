@@ -62,7 +62,7 @@ class AndroidToolchain
 	redef fun write_files(compile_dir, cfiles)
 	do
 		var android_project_root = android_project_root.as(not null)
-		var project = toolcontext.modelbuilder.android_project_for(compiler.mainmodule)
+		var project = new AndroidProject(toolcontext.modelbuilder, compiler.mainmodule)
 		var short_project_name = compiler.mainmodule.name.replace("-", "_")
 		var release = toolcontext.opt_release.value
 
@@ -70,7 +70,7 @@ class AndroidToolchain
 		if app_name == null then app_name = compiler.mainmodule.name
 		if not release then app_name += " Debug"
 
-		var app_package = project.java_package
+		var app_package = project.namespace
 		if app_package == null then app_package = "org.nitlanguage.{short_project_name}"
 		if not release then app_package += "_debug"
 
