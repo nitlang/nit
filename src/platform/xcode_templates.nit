@@ -627,8 +627,17 @@ end
 class PlistTemplate
 	super Template
 
-	# Package of the app
-	var package_name: String
+	# Value of CFBundleName, pretty name of the application
+	var product_name: String
+
+	# Value of CFBundleIdentifier, namespace of the app
+	var bundle_identifier: String
+
+	# Value of CFBundleShortVersionString, human readable version
+	var short_version: String
+
+	# Value of CFBundleVersion, often a revision number
+	var bundle_version: String
 
 	redef fun rendering
 	do
@@ -642,19 +651,19 @@ class PlistTemplate
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
-	<string>{{{package_name}}}.$(PRODUCT_NAME:rfc1034identifier)</string>
+	<string>{{{bundle_identifier}}}</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>$(PRODUCT_NAME)</string>
+	<string>{{{product_name}}}</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0</string>
+	<string>{{{short_version}}}</string>
 	<key>CFBundleSignature</key>
 	<string>\\?\\?\\?\\?</string>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>{{{bundle_version}}}</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>UIRequiredDeviceCapabilities</key>

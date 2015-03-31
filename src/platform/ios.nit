@@ -18,7 +18,7 @@ module ios
 import platform
 import compiler::abstract_compiler
 import xcode_templates
-private import annotation
+import app_annotations
 
 redef class ToolContext
 	redef fun platform_from_name(name)
@@ -42,24 +42,16 @@ private class IOSToolchain
 	# Root of the iOS project, usually `.nit_compile/ios/`
 	var ios_project_root: String is noinit
 
+	# `app.nit` project for the current compilation target
+	var app_project = new AppProject(compiler.modelbuilder, compiler.mainmodule) is lazy
+
 	redef fun default_outname do return "{super}.app"
 
-	# Name of the current project of `compiler`
-	fun project_name: String
-	do
-		var project_name = null
-		# TODO unite the app_name annotation from Android with iOS
-		var annot = compiler.modelbuilder.lookup_annotation_on_modules("app_name", compiler.mainmodule)
-		if annot != null then project_name = annot.arg_as_string(compiler.modelbuilder)
-		if project_name == null then project_name = compiler.mainmodule.name
-		return project_name
-	end
-
-	# Compile C files in `ios_project_root/project_name`
+	# Compile C files in `ios_project_root/app_project.name`
 	redef fun compile_dir
 	do
 		ios_project_root = super/"ios"
-		return ios_project_root/project_name
+		return ios_project_root/app_project.short_name
 	end
 
 	redef fun write_files(compile_dir, cfiles)
@@ -73,7 +65,7 @@ private class IOSToolchain
 
 	redef fun write_makefile(compile_dir, cfiles)
 	do
-		var project_name = project_name
+		var project_name = app_project.short_name
 
 		# Create an XCode project directory
 		var dir = ios_project_root/project_name+".xcodeproj"
@@ -94,13 +86,14 @@ private class IOSToolchain
 
 		# Create the plist in the same directory as the generated C code
 		if not compile_dir.file_exists then compile_dir.mkdir
-		var plist = new PlistTemplate("org.nitlanguage") # TODO customize using an annotation
+		var plist = new PlistTemplate(app_project.name, app_project.namespace,
+			app_project.version, app_project.version_code.to_s)
 		plist.write_to_file compile_dir/"Info.plist"
 	end
 
 	redef fun compile_c_code(compile_dir)
 	do
-		var project_name = project_name
+		var project_name = app_project.short_name
 		var release = toolcontext.opt_release.value
 		var outfile = outfile(compiler.mainmodule)
 
