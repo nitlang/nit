@@ -69,7 +69,9 @@ saferun()
 			*) stop=true
 		esac
 	done
-	if test -n "$TIME"; then
+	if test -d "$1"; then
+		find $1 | sort
+	elif test -n "$TIME"; then
 		$TIME -o "$o" $a $TIMEOUT "$@"
 	else
 		if test -n "$a"; then echo 0 >> "$o"; else echo 0 > "$o"; fi
