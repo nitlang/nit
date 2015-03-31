@@ -15,7 +15,7 @@
 # limitations under the License.
 
 module dino_android is
-	java_package("org.nitlanguage.dino")
+	app_namespace "org.nitlanguage.dino"
 end
 
 import dino

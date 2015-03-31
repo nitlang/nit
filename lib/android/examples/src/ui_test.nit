@@ -16,9 +16,9 @@
 
 # Test for app.nit's UI services
 module ui_test is
-	app_name("app.nit UI test")
+	app_name "app.nit UI test"
 	app_version(0, 1, git_revision)
-	java_package("org.nitlanguage.ui_test")
+	app_namespace "org.nitlanguage.ui_test"
 	android_manifest_activity """android:theme="@android:style/Theme.Light""""
 end
 

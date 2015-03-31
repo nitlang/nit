@@ -32,7 +32,7 @@ as the launcher name.
 
     Example: `app_name "My App"`
 
-* `java_package` specifies the package used by the generated Java
+* `app_namespace` specifies the package used by the generated Java
 classes and the APK file. Once the application is published, this
 value should not be changed. By default, the compiler will use
 the package `org.nitlanguage.{module_name}`.

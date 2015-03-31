@@ -15,8 +15,8 @@
 # limitations under the License.
 
 module complete_simple_android is
-	java_package("org.nitlanguage.test_all")
-	target_api_version(19)
+	app_namespace "org.nitlanguage.test_all"
+	target_api_version 19
 end
 
 import test_bundle
