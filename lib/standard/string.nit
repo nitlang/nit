@@ -864,6 +864,23 @@ abstract class FlatText
 	# Real items, used as cache for to_cstring is called
 	private var real_items: nullable NativeString = null
 
+	# Returns a char* starting at position `index_from`
+	#
+	# WARNING: If you choose to use this service, be careful of the following.
+	#
+	# Strings and NativeString are *ideally* always allocated through a Garbage Collector.
+	# Since the GC tracks the use of the pointer for the beginning of the char*, it may be
+	# deallocated at any moment, rendering the pointer returned by this function invalid.
+	# Any access to freed memory may very likely cause undefined behaviour or a crash.
+	# (Failure to do so will most certainly result in long and painful debugging hours)
+	#
+	# The only safe use of this pointer is if it is ephemeral (e.g. read in a C function
+	# then immediately return).
+	#
+	# As always, do not modify the content of the String in C code, if this is what you want
+	# copy locally the char* as Nit Strings are immutable.
+	private fun fast_cstring: NativeString is abstract
+
 	redef var length: Int = 0
 
 	redef fun output
@@ -1118,6 +1135,8 @@ class FlatString
 		end
 		return native.to_s_with_length(self.length)
 	end
+
+	redef fun fast_cstring do return items.fast_cstring(index_from)
 
 	redef fun substring(from, count)
 	do
@@ -1566,6 +1585,8 @@ class FlatBuffer
 	redef var chars: Sequence[Char] = new FlatBufferCharView(self) is lazy
 
 	private var capacity: Int = 0
+
+	redef fun fast_cstring do return items.fast_cstring(0)
 
 	redef fun substrings do return new FlatSubstringsIter(self)
 
@@ -2288,6 +2309,12 @@ end
 extern class NativeString `{ char* `}
 	# Creates a new NativeString with a capacity of `length`
 	new(length: Int) is intern
+
+	# Returns a char* starting at `index`.
+	#
+	# WARNING: Unsafe for extern code, use only for temporary
+	# pointer manipulation purposes (e.g. write to file or such)
+	fun fast_cstring(index: Int): NativeString is intern
 
 	# Get char at `index`.
 	fun [](index: Int): Char is intern

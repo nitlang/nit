@@ -1016,6 +1016,9 @@ redef class AMethPropdef
 				return v.int_instance(res)
 			else if pname == "atof" then
 				return v.float_instance(recvval.to_f)
+			else if pname == "fast_cstring" then
+				var ns = recvval.to_cstring.to_s.substring_from(args[1].to_i)
+				return v.native_string_instance(ns)
 			end
 		else if cname == "String" then
 			var cs = v.send(v.force_get_primitive_method("to_cstring", args.first.mtype), [args.first])
