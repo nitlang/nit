@@ -8,45 +8,25 @@
 # You  are  allowed  to  redistribute it and sell it, alone or is a part of
 # another product.
 
-# Implementation of Array::to_s with FlatStrings exclusively
+# Implementation of Array::to_s with RopeBuffer exclusively
 #
 # To be used as a Mixin at compile-time for benchmarking purposes.
-module array_to_s_flatstr
+module array_to_s_rope_buf
 
-intrude import standard::string
-
-redef class FlatString
-	redef fun +(o) do
-		var mlen = length
-		var slen = o.length
-		var nns = new NativeString(mlen + slen)
-		items.copy_to(nns, mlen, index_from, 0)
-		if o isa FlatString then
-			o.items.copy_to(nns, slen, o.index_from, mlen)
-		else
-			var pos = mlen
-			for i in o.chars do
-				nns[pos] = i
-				pos += 1
-			end
-		end
-		return nns.to_s_with_length(mlen)
-	end
-end
+intrude import standard::collection::array
+import standard::ropes
 
 redef class Array[E]
-
-	redef fun to_s do
-		var i = 1
+	redef fun to_s: String do
+		var s = new RopeBuffer
+		var i = 0
 		var l = length
-		if l == 0 then return ""
 		var its = _items
-		var s = its[0].to_s
 		while i < l do
 			var e = its[i]
-			if e != null then s += e.to_s
+			if e != null then s.append(e.to_s)
 			i += 1
 		end
-		return s
+		return s.to_s
 	end
 end

@@ -13,19 +13,21 @@
 # To be used as a Mixin at compile-time for benchmarking purposes.
 module array_to_s_rope
 
+intrude import standard::collection::array
+intrude import standard::ropes
+
 redef class Array[E]
 
 	redef fun to_s do
-		var i = 1
 		var l = length
+		var it = _items
 		if l == 0 then return ""
-		var s: String = new RopeString.from(self[0].to_s)
-		var its = _items
-		while i < l do
-			var e = its[i]
-			if e != null then s += e.to_s
-			i += 1
+		if l == 1 then return it[0].to_s
+		var c = new Concat(it[0].to_s, it[1].to_s)
+		for i in [2 .. l[ do
+			c = new Concat(c, it[i].to_s)
 		end
-		return s
+		return c
 	end
+
 end
