@@ -300,15 +300,8 @@ class MakefileToolchain
 	# Get the default name of the executable to produce
 	fun default_outname: String
 	do
-		var mainmodule = compiler.mainmodule
-
-		# Search a non fictive module
-		var res = mainmodule.name
-		while mainmodule.is_fictive do
-			mainmodule = mainmodule.in_importation.direct_greaters.first
-			res = mainmodule.name
-		end
-		return res
+		var mainmodule = compiler.mainmodule.first_real_mmodule
+		return mainmodule.name
 	end
 
 	# Combine options and platform informations to get the final path of the outfile
