@@ -66,6 +66,14 @@ interface Collection[E]
 	#     assert [1..1[.is_empty   == true
 	fun is_empty: Bool do return length == 0
 
+	# Alias for `not is_empty`.
+	#
+	# Some people prefer to have conditions grammatically easier to read.
+	#
+	#     assert [1,2,3].not_empty  == true
+	#     assert [1..1[.not_empty   == false
+	fun not_empty: Bool do return not self.is_empty
+
 	# Number of items in the collection.
 	#
 	#     assert [10,20,30].length == 3

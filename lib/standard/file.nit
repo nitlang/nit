@@ -47,6 +47,21 @@ abstract class FileStream
 	# File descriptor of this file
 	fun fd: Int do return _file.fileno
 
+	redef fun close
+	do
+		if _file == null then return
+		if _file.address_is_null then
+			if last_error != null then return
+			last_error = new IOError("Cannot close unopened file")
+			return
+		end
+		var i = _file.io_close
+		if i != 0 then
+			last_error = new IOError("Close failed due to error {sys.errno.strerror}")
+		end
+		_file = null
+	end
+
 	# Sets the buffering mode for the current FileStream
 	#
 	# If the buf_size is <= 0, its value will be 512 by default
@@ -89,11 +104,9 @@ class FileReader
 
 	redef fun close
 	do
-		if _file == null or _file.address_is_null then return
-		var i = _file.io_close
+		super
 		_buffer.clear
 		end_reached = true
-		_file = null
 	end
 
 	redef fun fill_buffer
@@ -122,6 +135,7 @@ class FileReader
 		end
 	end
 
+	# Creates a new File stream from a file descriptor
 	init from_fd(fd: Int) do
 		self.path = ""
 		prepare_buffer(1)
@@ -154,19 +168,8 @@ class FileWriter
 
 	redef fun close
 	do
-		if _file == null then return
-		if _file.address_is_null then
-			if last_error != null then return
-			last_error = new IOError("Cannot close unopened write stream")
-			_is_writable = false
-			return
-		end
-		var i = _file.io_close
-		if i != 0 then
-			last_error = new IOError("Close failed due to error {sys.errno.strerror}")
-		end
+		super
 		_is_writable = false
-		_file = null
 	end
 	redef var is_writable = false
 

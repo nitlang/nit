@@ -55,9 +55,13 @@ end
 
 # An abstract 2d line segment
 interface ILine[N: Numeric]
+	# The type of points that ends the segment
 	type P: IPoint[N]
 
+	# The point that is the left-end of the segment
 	fun point_left: P is abstract
+
+	# The point that is the right-end of the segment
 	fun point_right: P is abstract
 
 	redef fun to_s do return "{point_left}--{point_right}"
