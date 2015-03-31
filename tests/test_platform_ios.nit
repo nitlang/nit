@@ -12,14 +12,4 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Compilation to C
-module compiler
-
-import separate_erasure_compiler
-import global_compiler
-import compiler_ffi
-
-import platform::android
-import platform::pnacl
-import platform::emscripten
-import platform::ios
+import ios

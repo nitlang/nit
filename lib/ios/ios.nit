@@ -1,4 +1,4 @@
-# This file is part of NIT ( http://www.nitlanguage.org ).
+# This file is part of NIT (http://www.nitlanguage.org).
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -12,14 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Compilation to C
-module compiler
+# iOS services for Nit app on iOS
+module ios
 
-import separate_erasure_compiler
-import global_compiler
-import compiler_ffi
-
-import platform::android
-import platform::pnacl
-import platform::emscripten
-import platform::ios
+import platform
+import app
