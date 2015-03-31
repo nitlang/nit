@@ -477,6 +477,9 @@ class MClass
 	end
 
 	private var get_mtype_cache = new HashMap[Array[MType], MGenericType]
+
+	# Is there a `new` factory to allow the pseudo instantiation?
+	var has_new_factory = false is writable
 end
 
 

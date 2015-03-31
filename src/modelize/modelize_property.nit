@@ -735,6 +735,7 @@ redef class AMethPropdef
 			end
 			mprop.is_init = is_init
 			mprop.is_new = n_kwnew != null
+			if mprop.is_new then mclassdef.mclass.has_new_factory = true
 			if parent isa ATopClassdef then mprop.is_toplevel = true
 			self.check_redef_keyword(modelbuilder, mclassdef, n_kwredef, false, mprop)
 		else

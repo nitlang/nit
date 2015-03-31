@@ -17,7 +17,7 @@ module coloring
 import poset
 
 # Build a conflict graph from a POSet
-class POSetConflictGraph[E: Object]
+class POSetConflictGraph[E]
 
 	# Core is composed by:
 	#  * elements that have mutiple direct parents
@@ -45,13 +45,18 @@ class POSetConflictGraph[E: Object]
 	# REQUIRE: is_colored
 	var conflicts = new HashMap[E, Set[E]]
 
+	# The associated poset
 	var poset: POSet[E]
+
+	# The linearisation order to visit elements in the poset
+	var order: Array[E] is noinit
 
 	init do
 		extract_core
 		extract_border
 		extract_crown
 		compute_conflicts
+		order = poset.linearize(poset)
 	end
 
 	# Compute the set of elements forming the core of the poset hierarchy.
@@ -116,8 +121,12 @@ class POSetConflictGraph[E: Object]
 		#print "border: {border.join(" ")} ({border.length})"
 		#print "crown: {crown.join(" ")} ({crown.length})"
 		print "conflicts:"
-		for e, c in conflicts do print "  {e}: {c.join(" ")}"
+		for e, c in conflicts do print "  {e or else "NULL"}: {c.join(" ")}"
 	end
+end
+
+redef class POSet[E]
+	fun to_conflict_graph: POSetConflictGraph[E] do return new POSetConflictGraph[E](self)
 end
 
 # Colorize elements from a POSet
@@ -260,6 +269,166 @@ class POSetColorer[E: Object]
 	fun pretty_print do
 		print "ids:"
 		for e, id in ids do print "  {e}: {id}"
+		print "colors:"
+		for e, c in colors do print "  {e}: {c}"
+	end
+end
+
+# Colorize elements `E` introduced by holders `H` in a `POSet`.
+#
+# Two elements cannot have the same color if they are introduced or inherited by a same holder.
+class POSetGroupColorer[H: Object, E: Object]
+
+	# The associated conflict graph containing the poset.
+	#
+	# The conflict graph is used instead of the original poset so that the conflict graph can be reused
+	# in different coloration based on the same poset.
+	var graph: POSetConflictGraph[H]
+
+	# The elements to color.
+	#
+	# For each holder, the collection of introduced elements is given.
+	#
+	# A single element must not be introduced in more than one holder.
+	var buckets: Map[H, Collection[E]]
+
+	# The associated poset.
+	#
+	# alias for `graph.poset`
+	fun poset: POSet[H] do return graph.poset
+
+	# The resulting coloring
+	#
+	# Each element from buckets is associated to its own color
+	var colors: Map[E, Int] is lazy do
+		for h in graph.poset do
+			used_colors[h] = new HashSet[Int]
+		end
+		compute_colors
+		return colors_cache
+	end
+
+	# Resulting colors
+	private var colors_cache = new HashMap[E, Int]
+
+	# Set of known used colors
+	private var used_colors = new HashMap[H, HashSet[Int]]
+
+	# Build table layout of elements `E` for the holder `h`.
+	#
+	# `null` is used to fill places without elements (holes).
+	fun build_layout(h: H): Array[nullable E]
+	do
+		var table = new Array[nullable E]
+		for s in poset[h].greaters do
+			var bucket = buckets.get_or_null(s)
+			if bucket == null then continue
+			for e in bucket do
+				var color = colors[e]
+				if table.length <= color then
+					for i in [table.length .. color[ do
+						table[i] = null
+					end
+				else
+					assert table[color] == null else print "in {h}, for {color}: {table[color] or else ""} vs {e}"
+				end
+				table[color] = e
+			end
+		end
+		return table
+	end
+
+	# Colorize core, border and crown in that order
+	private fun compute_colors do
+		colors_cache.clear
+		colorize_core
+		colorize_set(graph.border)
+		colorize_set(graph.crown)
+	end
+
+	# Core elements cannot have the same color than:
+	#  * one of their parents
+	#  * one of their conflicting elements
+	private fun colorize_core do
+		for h in graph.order do
+			if not graph.core.has(h) then continue
+
+			var color = inherit_color(h)
+			var mincolor = color
+			var bucket = buckets.get_or_null(h)
+			if bucket == null then continue
+			var conflicts = graph.conflicts[h]
+			var parents = poset[h].greaters
+			for e in bucket do
+				color = next_free_color(color, parents)
+				color = next_free_color(color, conflicts)
+				colors_cache[e] = color
+				used_colors[h].add color
+				#print "{h}: color[{color}] <- {e}"
+				if mincolor == color then mincolor += 1
+				color += 1
+			end
+			min_colors[h] = mincolor
+		end
+	end
+
+	# Other elements inherit color from their direct parents
+	private fun colorize_set(set: Set[H]) do
+		for h in graph.order do
+			if not set.has(h) then continue
+
+			var color = inherit_color(h)
+			var mincolor = color
+			var bucket = buckets.get_or_null(h)
+			if bucket == null then continue
+			var parents = poset[h].greaters
+			for e in bucket do
+				color = next_free_color(color, parents)
+				colors_cache[e] = color
+				used_colors[h].add color
+				#print "{h}: color[{color}] <- {e} (set)"
+				if mincolor == color then mincolor += 1
+				color += 1
+			end
+			min_colors[h] = mincolor
+		end
+	end
+
+	# Get the first available free color.
+	private fun inherit_color(h: H): Int
+	do
+		var res = 0
+		for p in poset[h].direct_greaters do
+			var m = min_colors[p]
+			if m > res then res = m
+		end
+		min_colors[h] = res
+		return res
+	end
+
+	# The first available color for each holder.
+	#
+	# Is used by children to start their coloring.
+	#
+	# Is updated at the end of a coloring step.
+	private var min_colors = new HashMap[H, Int]
+
+	private fun next_free_color(color: Int, set: Collection[H]): Int do
+		loop
+			for h in set do
+				if used_colors[h].has(color) then
+					#print "\tin {h}, {color} is used"
+					color += 1
+					continue label
+				end
+			end
+			break
+		end label
+		return color
+	end
+
+	# Used for debugging only
+	fun pretty_print do
 		print "colors:"
 		for e, c in colors do print "  {e}: {c}"
 	end
