@@ -408,20 +408,6 @@ case $engine in
 		OPT="--global $OPT --compile-dir $compdir"
 		savdirs="sav/nitg-common/"
 		;;
-	nit)
-		engine=niti
-		isinterpret=true
-		;;
-	niti)
-		enginebinname=nit
-		isinterpret=true
-		;;
-	nitvm)
-		isinterpret=true
-		enginebinname=nit
-		OPT="--vm $OPT"
-		savdirs="sav/niti/"
-		;;
 	emscripten)
 		enginebinname=nitc
 		OPT="-m emscripten_nodejs.nit --semi-global $OPT --compile-dir $compdir"

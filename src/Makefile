@@ -16,7 +16,7 @@
 
 NITCOPT=--semi-global
 OLDNITCOPT=
-OBJS=nitc nitpick nit nitdoc nitls nitunit nitpretty nitmetrics nitx nitlight nitdbg_client nitserial
+OBJS=nitc nitpick nitdoc nitls nitunit nitpretty nitmetrics nitx nitlight nitdbg_client nitserial
 SRCS=$(patsubst %,%.nit,$(OBJS))
 BINS=$(patsubst %,../bin/%,$(OBJS))
 
