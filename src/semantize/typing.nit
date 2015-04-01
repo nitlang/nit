@@ -735,7 +735,7 @@ redef class AVarAssignExpr
 		var variable = self.variable
 		assert variable != null
 
-		var mtype = v.visit_expr_subtype(n_value, variable.declared_type)
+		var mtype = v.visit_expr(n_value)
 
 		v.set_variable(self, variable, mtype)
 
@@ -754,7 +754,7 @@ redef class AReassignFormExpr
 	# `writetype` is the type of the writing of the left value.
 	# (Because of `ACallReassignExpr`, both can be different.
 	# Return the static type of the value to store.
-	private fun resolve_reassignment(v: TypeVisitor, readtype, writetype: MType): nullable MType
+	private fun resolve_reassignment(v: TypeVisitor, readtype: MType, writetype: nullable MType): nullable MType
 	do
 		var reassign_name: String
 		if self.n_assign_op isa APlusAssignOp then
@@ -778,7 +778,7 @@ redef class AReassignFormExpr
 		var value_type = v.visit_expr_subtype(self.n_value, msignature.mparameters.first.mtype)
 		if value_type == null then return null # Skip error
 
-		v.check_subtype(self, rettype, writetype)
+		if writetype != null then v.check_subtype(self, rettype, writetype)
 		return rettype
 	end
 end
@@ -794,10 +794,7 @@ redef class AVarReassignExpr
 
 		read_type = readtype
 
-		var writetype = variable.declared_type
-		if writetype == null then return
-
-		var rettype = self.resolve_reassignment(v, readtype, writetype)
+		var rettype = self.resolve_reassignment(v, readtype, null)
 
 		v.set_variable(self, variable, rettype)
 
