@@ -11,6 +11,9 @@ This group also provides two optional modules with thread-safe collections:
 
 Theses services are implemented using the POSIX threads.
 
+You can also use the `is threaded` annotation on methods, which makes them run on their own thread.
+Methods with return value or self calls are not supported.
+
 ## Known limitations:
 
 * Most services from the Nit library are not thread-safe. You must manage
