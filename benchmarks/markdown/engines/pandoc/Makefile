@@ -14,22 +14,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-all: nitmd/nitmd txtmark/Txtmark.class markdown4j/Markdown4j.class pandoc/pandoc
+pandoc:
+	cabal install pandoc
+	ghc pandoc.hs -O
 
-nitmd/nitmd:
-	make -C nitmd
-
-txtmark/Txtmark.class:
-	make -C txtmark
-
-markdown4j/Markdown4j.class:
-	make -C markdown4j
-
-pandoc/pandoc:
-	make -C pandoc
+test: pandoc
+	./pandoc ../../benches/hello.md 5
 
 clean:
-	make -C nitmd clean
-	make -C txtmark clean
-	make -C markdown4j clean
-	make -C pandoc clean
+	rm pandoc.hi
+	rm pandoc.o
+	rm pandoc
