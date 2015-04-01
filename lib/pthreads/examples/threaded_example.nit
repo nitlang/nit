@@ -19,12 +19,20 @@ module threaded_example
 
 import pthreads
 
-# the "is threaded" annotation makes this fun run on an other thread
+# the `is threaded` annotation makes this method run on an other thread
 fun foo is threaded do
 	sys.nanosleep(1,0)
 	print "threaded"
 end
 
+# Parameterized `threaded` method, same as foo, but with parameters
+fun bar(i : Int, s : String) is threaded do
+	sys.nanosleep(2, 0)
+	print i
+	print s
+end
+
 foo
+bar(10, "parameterized and threaded")
 print "main"
-sys.nanosleep(2,0)
+sys.nanosleep(5,0)
