@@ -63,19 +63,17 @@ class AndroidToolchain
 	do
 		var android_project_root = android_project_root.as(not null)
 		var project = new AndroidProject(toolcontext.modelbuilder, compiler.mainmodule)
-		var short_project_name = compiler.mainmodule.name.replace("-", "_")
 		var release = toolcontext.opt_release.value
 
 		var app_name = project.name
-		if app_name == null then app_name = compiler.mainmodule.name
 		if not release then app_name += " Debug"
 
+		var short_project_name = project.short_name
+
 		var app_package = project.namespace
-		if app_package == null then app_package = "org.nitlanguage.{short_project_name}"
 		if not release then app_package += "_debug"
 
 		var app_version = project.version
-		if app_version == null then app_version = "1.0"
 
 		var app_min_api = project.min_api
 		if app_min_api == null then app_min_api = 10

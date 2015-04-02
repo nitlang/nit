@@ -21,19 +21,28 @@ import literal
 import semantize
 private import annotation
 
-# Metadata associated to an Android project
+# Metadata associated to an `app.nit` project
 class AppProject
-	# Name of the resulting application
-	var name: nullable String = null
+	# Pretty name of the resulting application
+	var name: String = mainmodule.first_real_mmodule.name is lazy
+
+	# Short project name used in `namespace` and configuration files
+	var short_name: String = mainmodule.name.replace("-", "_") is lazy
 
 	# Namespace/package used to identify the application
-	var namespace: nullable String = null
+	var namespace = "org.nitlanguage.{short_name}" is lazy
 
 	# Version of the application
-	var version: nullable String = null
+	var version = "0.1"
 
 	# Numerical version code of the application
-	var version_code: Int = 0
+	var version_code: Int is lazy do
+
+		# Get the date and time (down to the minute) as string
+		var local_time = new Tm.localtime
+		var local_time_s = local_time.strftime("%y%m%d%H%M")
+		return local_time_s.to_i
+	end
 
 	private var modelbuilder: ModelBuilder
 	private var mainmodule: MModule
@@ -41,18 +50,19 @@ class AppProject
 	init
 	do
 		var annot = modelbuilder.lookup_annotation_on_modules("app_name", mainmodule)
-		if annot != null then name = annot.arg_as_string(modelbuilder)
+		if annot != null then
+			var val = annot.arg_as_string(modelbuilder)
+			if val != null then name = val
+		end
 
 		annot = modelbuilder.lookup_annotation_on_modules("app_version", mainmodule)
 		if annot != null then version = annot.as_version(modelbuilder)
 
 		annot = modelbuilder.lookup_annotation_on_modules("app_namespace", mainmodule)
-		if annot != null then namespace = annot.arg_as_string(modelbuilder)
-
-		# Get the date and time (down to the minute) as string
-		var local_time = new Tm.localtime
-		var local_time_s = local_time.strftime("%y%m%d%H%M")
-		version_code = local_time_s.to_i
+		if annot != null then
+			var val = annot.arg_as_string(modelbuilder)
+			if val != null then namespace = val
+		end
 
 		modelbuilder.toolcontext.check_errors
 	end
