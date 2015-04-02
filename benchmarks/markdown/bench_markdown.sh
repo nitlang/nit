@@ -74,7 +74,7 @@ engdir="./engines"
 bncdir="./benches/out"
 mkdir -p $outdir
 
-s=50
+s=200
 
 function bench_nitmd()
 {
@@ -87,6 +87,18 @@ function bench_nitmd()
 	done
 }
 bench_nitmd
+
+function bench_nitmd-o()
+{
+	name="$FUNCNAME"
+	skip_test "$name" && return
+	prepare_res $outdir/nitmd-o.dat "nitmd-o" "nitmd-o"
+	for file in $bncdir/*.md; do
+		bench=`basename $file .md`
+		bench_command "$bench" "" "$engdir/nitmd/nitmd-o" "$file" "$s"
+	done
+}
+bench_nitmd-o
 
 function bench_txtmark()
 {

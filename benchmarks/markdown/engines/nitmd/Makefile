@@ -14,11 +14,17 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+all: nitmd nitmd-o
+
 nitmd:
 	nitc nitmd.nit
 
-test: nitmd
+nitmd-o:
+	nitc --semi-global nitmd.nit -o $@
+
+test: all
 	./nitmd ../../benches/hello.md 5
+	./nitmd-o ../../benches/hello.md 5
 
 clean:
-	rm -rf nitmd
+	rm -rf nitmd nitmd-o
