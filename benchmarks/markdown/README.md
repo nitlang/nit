@@ -11,6 +11,7 @@ Benches markdown parsers.
 * nitmd
 * txtmark 0.11 (https://github.com/rjeschke/txtmark)
 * markdown4j 2.2 (https://code.google.com/p/markdown4j/)
+* pandoc (last version installed from `cabal`)
 
 ## Benches
 

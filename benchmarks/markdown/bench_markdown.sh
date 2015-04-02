@@ -124,6 +124,18 @@ function bench_markdown4j()
 }
 bench_markdown4j
 
+function bench_pandoc()
+{
+	name="$FUNCNAME"
+	skip_test "$name" && return
+	prepare_res $outdir/pandoc.dat "pandoc" "pandoc"
+	for file in $bncdir/*.md; do
+		name=`basename $file .md`
+		bench_command "$bench" "" "$engdir/pandoc/pandoc" "$file" "$s"
+	done
+}
+bench_pandoc
+
 if test "$#" -gt 0; then
     plot $outdir/bench_markdown.gnu
 fi

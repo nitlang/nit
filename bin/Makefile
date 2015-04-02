@@ -1,6 +1,4 @@
-# This file is part of NIT ( http://www.nitlanguage.org ).
-#
-# Copyright 2015 Alexandre Terrasa <alexandre@moz-code.org>
+# Copyright 2013 Alexandre Terrasa <alexandre@moz-code.org>.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,22 +12,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-all: nitmd/nitmd txtmark/Txtmark.class markdown4j/Markdown4j.class pandoc/pandoc
+all: run
 
-nitmd/nitmd:
-	make -C nitmd
+run: hello_world.jar
+	java -jar hello_world.jar
 
-txtmark/Txtmark.class:
-	make -C txtmark
+hello_world.jar: nitj
+	NIT_DIR= ./nitj ../examples/hello_world.nit
 
-markdown4j/Markdown4j.class:
-	make -C markdown4j
-
-pandoc/pandoc:
-	make -C pandoc
+nitj:
+	NIT_DIR= ./nitg ../src/nitj.nit
 
 clean:
-	make -C nitmd clean
-	make -C txtmark clean
-	make -C markdown4j clean
-	make -C pandoc clean
+	rm -rf -- hello_world.jar .nit_jcompile 2> /dev/null || true
