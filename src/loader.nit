@@ -108,8 +108,19 @@ redef class ModelBuilder
 	end
 
 	# Load a bunch of modules and groups.
-	# Each name can be a module or a group.
-	# If it is a group then recursively all its modules are parsed.
+	#
+	# Each name can be:
+	#
+	# * a path to a module, a group or a directory of projects.
+	# * a short name of a module or a group that are looked in the `paths` (-I)
+	#
+	# Then, for each entry, if it is:
+	#
+	# * a module, then is it parser and returned.
+	# * a group then recursively all its modules are parsed.
+	# * a directory of projects then all the modules of all projects are parsed.
+	# * else an error is displayed.
+	#
 	# See `parse` for details.
 	fun parse_full(names: Sequence[String]): Array[MModule]
 	do
@@ -118,11 +129,39 @@ redef class ModelBuilder
 		self.toolcontext.info("*** PARSE ***", 1)
 		var mmodules = new ArraySet[MModule]
 		for a in names do
+			# Case of a group
 			var mgroup = self.get_mgroup(a)
 			if mgroup != null then
 				mmodules.add_all parse_group(mgroup)
 				continue
 			end
+
+			# Case of a directory that is not a group
+			var stat = a.to_path.stat
+			if stat != null and stat.is_dir then
+				self.toolcontext.info("look in directory {a}", 2)
+				var fs = a.files
+				# Try each entry as a group or a module
+				for f in fs do
+					var af = a/f
+					mgroup = get_mgroup(af)
+					if mgroup != null then
+						mmodules.add_all parse_group(mgroup)
+						continue
+					end
+					var mp = identify_file(af)
+					if mp != null then
+						var nmodule = self.load_module(af)
+						if nmodule == null then continue # Skip error
+						build_module_importation(nmodule)
+						mmodules.add(nmodule.mmodule.as(not null))
+					else
+						self.toolcontext.info("ignore file {af}", 2)
+					end
+				end
+				continue
+			end
+
 			var nmodule = self.load_module(a)
 			if nmodule == null then continue # Skip error
 			# Load imported module
@@ -350,12 +389,15 @@ redef class ModelBuilder
 			return mgroups[rdp]
 		end
 
-		# Hack, a group is determined by:
+		# Hack, a group is determined by one of the following:
 		# * the presence of a honomymous nit file
 		# * the fact that the directory is named `src`
+		# * the fact that there is a sub-directory named `src`
 		var pn = rdp.basename(".nit")
 		var mp = dirpath.join_path(pn + ".nit").simplify_path
 
+		# dirpath2 is the root directory
+		# dirpath is the src subdirectory directory, if any, else it is the same that dirpath2
 		var dirpath2 = dirpath
 		if not mp.file_exists then
 			if pn == "src" then
@@ -363,12 +405,17 @@ redef class ModelBuilder
 				dirpath2 = rdp.dirname
 				pn = dirpath2.basename("")
 			else
-				return null
+				# Check a `src` subdirectory
+				dirpath = dirpath2 / "src"
+				if not dirpath.file_exists then
+					# All rules failed, so return null
+					return null
+				end
 			end
 		end
 
 		# check parent directory
-		var parentpath = dirpath.join_path("..").simplify_path
+		var parentpath = dirpath2.join_path("..").simplify_path
 		var parent = get_mgroup(parentpath)
 
 		var mgroup
@@ -382,15 +429,22 @@ redef class ModelBuilder
 			mgroup = new MGroup(pn, parent.mproject, parent)
 			toolcontext.info("found sub group `{mgroup.full_name}` at {dirpath}", 2)
 		end
-		var readme = dirpath2.join_path("README.md")
+
+		# search documentation
+		# in src first so the documentation of the project code can be distinct for the documentation of the project usage
+		var readme = dirpath.join_path("README.md")
+		if not readme.file_exists then readme = dirpath.join_path("README")
+		if not readme.file_exists then readme = dirpath2.join_path("README.md")
 		if not readme.file_exists then readme = dirpath2.join_path("README")
 		if readme.file_exists then
 			var mdoc = load_markdown(readme)
 			mgroup.mdoc = mdoc
 			mdoc.original_mentity = mgroup
 		end
+
 		mgroup.filepath = dirpath
-		mgroups[rdp] = mgroup
+		mgroups[module_absolute_path(dirpath)] = mgroup
+		mgroups[module_absolute_path(dirpath2)] = mgroup
 		return mgroup
 	end
 
