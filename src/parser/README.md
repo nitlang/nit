@@ -27,7 +27,7 @@ In order to simplify the development of the Nit tools, files produced by the par
 * parser_nodes.nit: token and nodes classes hierarchy used by the parser and the lexer
 * tables.nit, tables_nit.h: Interfaces to access the tables needed by the parser and the lexer
 * xss/*.xss: alternate SableCC3 template files for the Nit language
-
+* org/nitlanguage/gen: A Nit parser in Java, used for tests. use the `make java` rule to build it.
 
 The following are generated but present to avoid the need of sablecc3:
 
