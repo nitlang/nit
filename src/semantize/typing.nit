@@ -246,10 +246,7 @@ private class TypeVisitor
 
 	fun get_mclass(node: ANode, name: String): nullable MClass
 	do
-		var mclass = modelbuilder.try_get_mclass_by_name(node, mmodule, name)
-		if mclass == null then
-			self.modelbuilder.error(node, "Type Error: missing primitive class `{name}'.")
-		end
+		var mclass = modelbuilder.get_mclass_by_name(node, mmodule, name)
 		return mclass
 	end
 

@@ -81,6 +81,16 @@ class ModelBuilder
 		return res
 	end
 
+	# Like `try_get_mclass_by_name` but display an error message when the class is not found
+	fun get_mclass_by_name(node: ANode, mmodule: MModule, name: String): nullable MClass
+	do
+		var mclass = try_get_mclass_by_name(node, mmodule, name)
+		if mclass == null then
+			error(node, "Type Error: missing primitive class `{name}'.")
+		end
+		return mclass
+	end
+
 	# Return a property named `name` on the type `mtype` visible in the module `mmodule`.
 	# Visibility in modules is correctly handled.
 	# Protected properties are returned (it is up to the caller to check and reject protected properties).
