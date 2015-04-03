@@ -325,7 +325,8 @@ private class TypeVisitor
 		end
 
 
-		var msignature = mpropdef.new_msignature or else mpropdef.msignature.as(not null)
+		var msignature = mpropdef.new_msignature or else mpropdef.msignature
+		if msignature == null then return null # skip error
 		msignature = resolve_for(msignature, recvtype, recv_is_self).as(MSignature)
 
 		var erasure_cast = false
@@ -566,14 +567,18 @@ redef class AMethPropdef
 		var nblock = self.n_block
 		if nblock == null then return
 
-		var mpropdef = self.mpropdef.as(not null)
+		var mpropdef = self.mpropdef
+		if mpropdef == null then return # skip error
+
 		var v = new TypeVisitor(modelbuilder, mpropdef.mclassdef.mmodule, mpropdef)
 		self.selfvariable = v.selfvariable
 
 		var mmethoddef = self.mpropdef.as(not null)
-		for i in [0..mmethoddef.msignature.arity[ do
-			var mtype = mmethoddef.msignature.mparameters[i].mtype
-			if mmethoddef.msignature.vararg_rank == i then
+		var msignature = mmethoddef.msignature
+		if msignature == null then return # skip error
+		for i in [0..msignature.arity[ do
+			var mtype = msignature.mparameters[i].mtype
+			if msignature.vararg_rank == i then
 				var arrayclass = v.get_mclass(self.n_signature.n_params[i], "Array")
 				if arrayclass == null then return # Skip error
 				mtype = arrayclass.get_mtype([mtype])
@@ -584,7 +589,7 @@ redef class AMethPropdef
 		end
 		v.visit_stmt(nblock)
 
-		if not nblock.after_flow_context.is_unreachable and mmethoddef.msignature.return_mtype != null then
+		if not nblock.after_flow_context.is_unreachable and msignature.return_mtype != null then
 			# We reach the end of the function without having a return, it is bad
 			v.error(self, "Control error: Reached end of function (a 'return' with a value was expected).")
 		end
@@ -596,7 +601,9 @@ redef class AAttrPropdef
 	do
 		if not has_value then return
 
-		var mpropdef = self.mpropdef.as(not null)
+		var mpropdef = self.mpropdef
+		if mpropdef == null then return # skip error
+
 		var v = new TypeVisitor(modelbuilder, mpropdef.mclassdef.mmodule, mpropdef)
 		self.selfvariable = v.selfvariable
 
@@ -1814,7 +1821,8 @@ redef class AAttrFormExpr
 		var mpropdefs = mproperty.lookup_definitions(v.mmodule, unsafe_type)
 		assert mpropdefs.length == 1
 		var mpropdef = mpropdefs.first
-		var attr_type = mpropdef.static_mtype.as(not null)
+		var attr_type = mpropdef.static_mtype
+		if attr_type == null then return # skip error
 		attr_type = v.resolve_for(attr_type, recvtype, self.n_expr isa ASelfExpr)
 		self.attr_type = attr_type
 	end
