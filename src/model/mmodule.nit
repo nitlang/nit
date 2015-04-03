@@ -243,5 +243,15 @@ class MModule
 	# Is `self` a unit test module used by `nitunit`?
 	var is_test_suite: Bool = false is writable
 
+	# Get the first non `is_fictive` module greater than self
+	fun first_real_mmodule: MModule
+	do
+		var mmodule = self
+		while mmodule.is_fictive do
+			mmodule = mmodule.in_importation.direct_greaters.first
+		end
+		return mmodule
+	end
+
 	redef fun parent_concern do return mgroup
 end

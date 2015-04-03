@@ -13,7 +13,11 @@
 # limitations under the License.
 
 # Simple iOS app with a single label
-module hello_ios
+module hello_ios is
+	app_name "Hello iOS"
+	app_namespace "nit.app.hello_ios"
+	app_version(0, 5, git_revision)
+end
 
 import ios
 

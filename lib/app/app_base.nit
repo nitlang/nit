@@ -16,6 +16,7 @@
 
 module app_base is
 	new_annotation app_name
+	new_annotation app_namespace
 	new_annotation app_version
 end
 

@@ -18,7 +18,7 @@
 module calculator_android is
 	app_name "app.nit Calc."
 	app_version(0, 1, git_revision)
-	java_package "org.nitlanguage.calculator"
+	app_namespace "org.nitlanguage.calculator"
 
 	# Lock in portrait mode
 	android_manifest_activity """android:screenOrientation="portrait""""

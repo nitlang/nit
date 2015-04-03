@@ -20,7 +20,6 @@
 # used to tag `ldflags` annotations.
 module aware is
 	new_annotation android
-	new_annotation java_package
 	new_annotation min_api_version
 	new_annotation max_api_version
 	new_annotation target_api_version
