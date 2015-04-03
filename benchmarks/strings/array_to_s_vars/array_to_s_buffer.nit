@@ -13,6 +13,9 @@
 # To be used as a Mixin at compile-time for benchmarking purposes.
 module array_to_s_buffer
 
+intrude import standard::collection::array
+import standard::string
+
 redef class Array[E]
 	redef fun to_s: String do
 		var s = new FlatBuffer

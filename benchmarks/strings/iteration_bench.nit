@@ -12,12 +12,61 @@
 module iteration_bench
 
 import opts
+intrude import standard::ropes
+
+redef class Concat
+	redef fun +(o) do
+		var s = o.to_s
+		return new Concat(self, s)
+	end
+end
+
+redef class FlatString
+	redef fun +(o) do
+		var s = o.to_s
+		var b = new FlatBuffer.with_capacity(length + s.length)
+		b.append self
+		for i in s.substrings do b.append i
+		return b.to_s
+	end
+end
 
 fun bench_flatstr_iter(nb_cct: Int, loops: Int, strlen: Int)
 do
 	var a = "a" * strlen
-	var x = a
-	for i in [0 .. nb_cct] do x += a
+	a = a * nb_cct
+	var cnt = 0
+	var c: Char
+	while cnt != loops do
+		for i in a do
+			c = i
+		end
+		cnt += 1
+	end
+end
+
+fun bench_flatstr_index(nb_cct: Int, loops: Int, strlen: Int)
+do
+	var a = "a" * strlen
+	a = a * nb_cct
+	var cnt = 0
+	var c: Char
+	var pos = 0
+	while cnt != loops do
+		pos = 0
+		while pos < a.length do
+			c = a[pos]
+			pos += 1
+		end
+		cnt += 1
+	end
+end
+
+fun bench_ropestr_iter(nb_cct: Int, loops: Int, strlen: Int)
+do
+	var a = "a" * strlen
+	var x: String = new Concat(a, a)
+	for i in [2 .. nb_cct[ do x = new Concat(x, a)
 	var cnt = 0
 	var c: Char
 	while cnt != loops do
@@ -28,11 +77,11 @@ do
 	end
 end
 
-fun bench_flatstr_index(nb_cct: Int, loops: Int, strlen: Int)
+fun bench_ropestr_index(nb_cct: Int, loops: Int, strlen: Int)
 do
 	var a = "a" * strlen
-	var x = a
-	for i in [0 .. nb_cct] do x += a
+	var x: String = new Concat(a, a)
+	for i in [2 .. nb_cct[ do x = new Concat(x, a)
 	var cnt = 0
 	var c: Char
 	var pos = 0
@@ -49,8 +98,8 @@ end
 fun bench_flatbuf_iter(nb_cct: Int, loops: Int, strlen: Int)
 do
 	var a = "a" * strlen
+	a = a * nb_cct
 	var x = new FlatBuffer.from(a)
-	for i in [0 .. nb_cct] do x.append a
 	var cnt = 0
 	var c: Char
 	while cnt != loops do
@@ -64,8 +113,41 @@ end
 fun bench_flatbuf_index(nb_cct: Int, loops: Int, strlen: Int)
 do
 	var a = "a" * strlen
+	a = a * nb_cct
 	var x = new FlatBuffer.from(a)
-	for i in [0 .. nb_cct] do x.append a
+	var cnt = 0
+	var c: Char
+	var pos = 0
+	while cnt != loops do
+		pos = 0
+		while pos < x.length do
+			c = x[pos]
+			pos += 1
+		end
+		cnt += 1
+	end
+end
+
+fun bench_ropebuf_iter(nb_cct: Int, loops: Int, strlen: Int)
+do
+	var a = "a" * strlen
+	var x = new RopeBuffer.from(a)
+	for i in [0 .. nb_cct[ do x.append a
+	var cnt = 0
+	var c: Char
+	while cnt != loops do
+		for i in x do
+			c = i
+		end
+		cnt += 1
+	end
+end
+
+fun bench_ropebuf_index(nb_cct: Int, loops: Int, strlen: Int)
+do
+	var a = "a" * strlen
+	var x = new RopeBuffer.from(a)
+	for i in [0 .. nb_cct[ do x.append a
 	var cnt = 0
 	var c: Char
 	var pos = 0
@@ -80,7 +162,7 @@ do
 end
 
 var opts = new OptionContext
-var mode = new OptionEnum(["flatstr", "flatbuf"], "Mode", -1, "-m")
+var mode = new OptionEnum(["flatstr", "flatbuf", "ropestr", "ropebuf"], "Mode", -1, "-m")
 var access_mode = new OptionEnum(["iterator", "index"], "Iteration mode", -1, "--iter-mode")
 var nb_ccts = new OptionInt("Number of concatenations done to the string (in the case of the rope, this will increase its depth)", -1, "--ccts")
 var loops = new OptionInt("Number of loops to be done", -1, "--loops")
@@ -111,6 +193,24 @@ else if modval == 1 then
 		bench_flatbuf_iter(nb_ccts.value, loops.value, strlen.value)
 	else if iterval == 1 then
 		bench_flatbuf_index(nb_ccts.value, loops.value, strlen.value)
+	else
+		opts.usage
+		exit(-1)
+	end
+else if modval == 2 then
+	if iterval == 0 then
+		bench_ropestr_iter(nb_ccts.value, loops.value, strlen.value)
+	else if iterval == 1 then
+		bench_ropestr_index(nb_ccts.value, loops.value, strlen.value)
+	else
+		opts.usage
+		exit(-1)
+	end
+else if modval == 3 then
+	if iterval == 0 then
+		bench_ropebuf_iter(nb_ccts.value, loops.value, strlen.value)
+	else if iterval == 1 then
+		bench_ropebuf_index(nb_ccts.value, loops.value, strlen.value)
 	else
 		opts.usage
 		exit(-1)
