@@ -265,7 +265,9 @@ private class TypeVisitor
 		if recvtype isa MNullType then
 			# `null` only accepts some methods of object.
 			if name == "==" or name == "!=" or name == "is_same_instance" then
-				unsafe_type = mmodule.object_type.as_nullable
+				var objclass = get_mclass(node, "Object")
+				if objclass == null then return null # Forward error
+				unsafe_type = objclass.mclass_type
 			else
 				self.error(node, "Error: Method '{name}' call on 'null'.")
 				return null
@@ -702,7 +704,9 @@ redef class AVardeclExpr
 
 		var decltype = mtype
 		if mtype == null or mtype isa MNullType then
-			decltype = v.get_mclass(self, "Object").mclass_type.as_nullable
+			var objclass = v.get_mclass(self, "Object")
+			if objclass == null then return # skip error
+			decltype = objclass.mclass_type.as_nullable
 			if mtype == null then mtype = decltype
 		end
 
@@ -1129,7 +1133,9 @@ redef class AOrElseExpr
 
 		var t = v.merge_types(self, [t1, t2])
 		if t == null then
-			t = v.mmodule.object_type
+			var c = v.get_mclass(self, "Object")
+			if c == null then return # forward error
+			t = c.mclass_type
 			if t2 isa MNullableType then
 				t = t.as_nullable
 			end
@@ -1195,8 +1201,11 @@ redef class ASuperstringExpr
 		var mclass = v.get_mclass(self, "String")
 		if mclass == null then return # Forward error
 		self.mtype = mclass.mclass_type
+		var objclass = v.get_mclass(self, "Object")
+		if objclass == null then return # Forward error
+		var objtype = objclass.mclass_type
 		for nexpr in self.n_exprs do
-			v.visit_expr_subtype(nexpr, v.mmodule.object_type)
+			v.visit_expr_subtype(nexpr, objtype)
 		end
 	end
 end
