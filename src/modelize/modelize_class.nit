@@ -105,7 +105,7 @@ redef class ModelBuilder
 					if other.intro_mmodule.mgroup != null and other.intro_mmodule.mgroup.mproject == mmodule.mgroup.mproject then
 						# Skip classes that are buggy
 						if other.try_intro == null then continue
-						error(nclassdef, "Error: A class named `{other.full_name}` is already defined in module `{other.intro_mmodule}` at {other.intro.location}.")
+						warning(nclassdef, "full-name-conflict", "Error: A class named `{other.full_name}` is already defined in module `{other.intro_mmodule}` at {other.intro.location}.")
 						break
 					end
 				end
