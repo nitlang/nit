@@ -305,7 +305,9 @@ class ModelBuilder
 		if mtype isa MGenericType then
 			var mclass = mtype.mclass
 			for i in [0..mclass.arity[ do
-				var bound = mclass.intro.bound_mtype.arguments[i]
+				var intro = mclass.try_intro
+				if intro == null then return null # skip error
+				var bound = intro.bound_mtype.arguments[i]
 				var nt = ntype.n_types[i]
 				var mt = resolve_mtype(mmodule, mclassdef, nt)
 				if mt == null then return null # forward error
