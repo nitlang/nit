@@ -59,6 +59,9 @@ redef class ToolContext
 				phase.process_mainmodule(mainmodule, mmodules)
 			end
 		end
+
+		check_errors
+		errors_info
 	end
 end
 
