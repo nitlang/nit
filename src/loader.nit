@@ -672,24 +672,33 @@ redef class ModelBuilder
 			if aimport.n_name.n_quad != null then mgroup = null # Start from top level
 			for grp in aimport.n_name.n_path do
 				var path = search_mmodule_by_name(grp, mgroup, grp.text)
-				if path == null then return # Skip error
+				if path == null then
+					nmodule.mmodule = null # invalidate the module
+					return # Skip error
+				end
 				mgroup = path.mgroup
 			end
 			var mod_name = aimport.n_name.n_id.text
 			var sup = self.get_mmodule_by_name(aimport.n_name, mgroup, mod_name)
-			if sup == null then continue # Skip error
+			if sup == null then
+				nmodule.mmodule = null # invalidate the module
+				continue # Skip error
+			end
 			aimport.mmodule = sup
 			imported_modules.add(sup)
 			var mvisibility = aimport.n_visibility.mvisibility
 			if mvisibility == protected_visibility then
 				error(aimport.n_visibility, "Error: only properties can be protected.")
+				nmodule.mmodule = null # invalidate the module
 				return
 			end
 			if sup == mmodule then
 				error(aimport.n_name, "Error: Dependency loop in module {mmodule}.")
+				nmodule.mmodule = null # invalidate the module
 			end
 			if sup.in_importation < mmodule then
 				error(aimport.n_name, "Error: Dependency loop between modules {mmodule} and {sup}.")
+				nmodule.mmodule = null # invalidate the module
 				return
 			end
 			mmodule.set_visibility_for(sup, mvisibility)
@@ -697,7 +706,9 @@ redef class ModelBuilder
 		if stdimport then
 			var mod_name = "standard"
 			var sup = self.get_mmodule_by_name(nmodule, null, mod_name)
-			if sup != null then # Skip error
+			if sup == null then
+				nmodule.mmodule = null # invalidate the module
+			else # Skip error
 				imported_modules.add(sup)
 				mmodule.set_visibility_for(sup, public_visibility)
 			end
