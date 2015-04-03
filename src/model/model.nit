@@ -433,7 +433,16 @@ class MClass
 	#
 	# Warning: such a definition may not exist in the early life of the object.
 	# In this case, the method will abort.
+	#
+	# Use `try_intro` instead
 	var intro: MClassDef is noinit
+
+	# The definition that introduces the class or null if not yet known.
+	#
+	# See `intro`
+	fun try_intro: nullable MClassDef do
+		if isset _intro then return _intro else return null
+	end
 
 	# Return the class `self` in the class hierarchy of the module `mmodule`.
 	#
@@ -627,7 +636,7 @@ class MClassDef
 	var in_hierarchy: nullable POSetElement[MClassDef] = null
 
 	# Is the definition the one that introduced `mclass`?
-	fun is_intro: Bool do return mclass.intro == self
+	fun is_intro: Bool do return isset mclass._intro and mclass.intro == self
 
 	# All properties introduced by the classdef
 	var intro_mproperties = new Array[MProperty]
