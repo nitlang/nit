@@ -86,7 +86,8 @@ redef class ModelBuilder
 		# Force building recursively
 		if nclassdef.build_properties_is_done then return
 		nclassdef.build_properties_is_done = true
-		var mclassdef = nclassdef.mclassdef.as(not null)
+		var mclassdef = nclassdef.mclassdef
+		if mclassdef == null then return # skip error
 		if mclassdef.in_hierarchy == null then return # Skip error
 		for superclassdef in mclassdef.in_hierarchy.direct_greaters do
 			if not mclassdef2nclassdef.has_key(superclassdef) then continue

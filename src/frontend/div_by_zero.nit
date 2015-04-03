@@ -37,7 +37,8 @@ private class DivByZeroPhase
 	redef fun process_nmodule(nmodule)
 	do
 		# The AST node is not enough, we need also the associated model element
-		var mmodule = nmodule.mmodule.as(not null)
+		var mmodule = nmodule.mmodule
+		if mmodule == null then return
 		# For the specific job we have, the simpler it to launch a visitor on
 		# all elements of the AST.
 		var visitor = new DivByZeroVisitor(toolcontext, mmodule)

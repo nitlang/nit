@@ -68,10 +68,11 @@ private class ExternClassesTypingPhaseModel
 		if not nclassdef isa AStdClassdef then return
 
 		var mclassdef = nclassdef.mclassdef
-		var mclass = nclassdef.mclass
+		if mclassdef == null then return
+		var mclass = mclassdef.mclass
 
 		# We only need to do this once per class
-		if mclass.intro != mclassdef then return
+		if not mclassdef.is_intro then return
 
 		if mclass.kind != extern_kind then return
 

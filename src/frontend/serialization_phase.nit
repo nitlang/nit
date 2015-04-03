@@ -184,7 +184,9 @@ private class SerializationPhasePostModel
 	redef fun process_nmodule(nmodule)
 	do
 		for npropdef in nmodule.inits_to_retype do
-			var v = new PreciseTypeVisitor(npropdef, npropdef.mpropdef.mclassdef, toolcontext)
+			var mpropdef = npropdef.mpropdef
+			if mpropdef == null then continue # skip error
+			var v = new PreciseTypeVisitor(npropdef, mpropdef.mclassdef, toolcontext)
 			npropdef.accept_precise_type_visitor v
 		end
 	end

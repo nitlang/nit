@@ -293,7 +293,8 @@ redef class ModelBuilder
 		# Force building recursively
 		if nmodule.build_classes_is_done then return
 		nmodule.build_classes_is_done = true
-		var mmodule = nmodule.mmodule.as(not null)
+		var mmodule = nmodule.mmodule
+		if mmodule == null then return
 		for imp in mmodule.in_importation.direct_greaters do
 			var nimp = mmodule2node(imp)
 			if nimp != null then build_classes(nimp)

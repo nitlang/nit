@@ -56,8 +56,10 @@ redef class AMethPropdef
 	# Collect initializers and build the auto-init
 	fun do_auto_super_init(modelbuilder: ModelBuilder)
 	do
-		var mclassdef = self.parent.as(AClassdef).mclassdef.as(not null)
-		var mpropdef = self.mpropdef.as(not null)
+		var mclassdef = self.parent.as(AClassdef).mclassdef
+		if mclassdef == null then return # skip error
+		var mpropdef = self.mpropdef
+		if mpropdef == null then return # skip error
 		var mmodule = mpropdef.mclassdef.mmodule
 		var anchor = mclassdef.bound_mtype
 		var recvtype = mclassdef.mclass.mclass_type
