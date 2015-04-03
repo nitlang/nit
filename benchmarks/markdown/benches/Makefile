@@ -14,10 +14,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+NITC=../../../bin/nitc
+
 all: out
 
 gen_benches:
-	nitc gen_benches.nit
+	$(NITC) gen_benches.nit
 
 out: gen_benches
 	./gen_benches ./plain.md -o ./out

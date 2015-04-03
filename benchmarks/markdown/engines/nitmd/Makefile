@@ -14,13 +14,15 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+NITC=../../../../bin/nitc
+
 all: nitmd nitmd-o
 
 nitmd:
-	nitc nitmd.nit
+	$(NITC) nitmd.nit
 
 nitmd-o:
-	nitc --semi-global nitmd.nit -o $@
+	$(NITC) --semi-global nitmd.nit -o $@
 
 test: all
 	./nitmd ../../benches/hello.md 5
