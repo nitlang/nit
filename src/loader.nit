@@ -72,8 +72,9 @@ redef class ModelBuilder
 			if nmodule == null then continue # Skip error
 			# Load imported module
 			build_module_importation(nmodule)
-
-			mmodules.add(nmodule.mmodule.as(not null))
+			var mmodule = nmodule.mmodule
+			if mmodule == null then continue # skip error
+			mmodules.add mmodule
 		end
 		var time1 = get_time
 		self.toolcontext.info("*** END PARSE: {time1-time0} ***", 2)
@@ -100,8 +101,9 @@ redef class ModelBuilder
 				if nmodule == null then continue # Skip error
 				# Load imported module
 				build_module_importation(nmodule)
-
-				res.add(nmodule.mmodule.as(not null))
+				var mmodule = nmodule.mmodule
+				if mmodule == null then continue # Skip error
+				res.add mmodule
 			end
 		end
 		return res
@@ -154,7 +156,9 @@ redef class ModelBuilder
 						var nmodule = self.load_module(af)
 						if nmodule == null then continue # Skip error
 						build_module_importation(nmodule)
-						mmodules.add(nmodule.mmodule.as(not null))
+						var mmodule = nmodule.mmodule
+						if mmodule == null then continue # Skip error
+						mmodules.add mmodule
 					else
 						self.toolcontext.info("ignore file {af}", 2)
 					end
@@ -166,8 +170,9 @@ redef class ModelBuilder
 			if nmodule == null then continue # Skip error
 			# Load imported module
 			build_module_importation(nmodule)
-
-			mmodules.add(nmodule.mmodule.as(not null))
+			var mmodule = nmodule.mmodule
+			if mmodule == null then continue # Skip error
+			mmodules.add mmodule
 		end
 		var time1 = get_time
 		self.toolcontext.info("*** END PARSE: {time1-time0} ***", 2)
@@ -261,7 +266,7 @@ redef class ModelBuilder
 		if res == null then return null # Forward error
 		# Load imported module
 		build_module_importation(res)
-		return res.mmodule.as(not null)
+		return res.mmodule
 	end
 
 	# Search a module `name` from path `lookpaths`.
