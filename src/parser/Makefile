@@ -38,3 +38,8 @@ maintainer-clean: clean
 	@echo "This command is intended for maintainers to use;"
 	@echo "it deletes files that may require special tools to rebuild."
 	rm -f -- parser.nit parser_abs.nit parser_prod.nit lexer.nit || true
+
+java: .nit.sablecc3
+	rm -r org/nitlanguage/gen/analysis/ org/nitlanguage/gen/lexer/ org/nitlanguage/gen/node/ org/nitlanguage/gen/parser/
+	${SABLECC3ALTGEN} .nit.sablecc3 -c .nit.sablecc3.dump
+	javac org/nitlanguage/gen/TestParser.java
