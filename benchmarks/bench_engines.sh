@@ -62,6 +62,7 @@ function run_compiler()
 		run_command "$@" ../src/nit.nit -o "nit.$title.bin"
 		bench_command "nit-queens" "nit queens.nit 8" "./nit.$title.bin" ../lib/ai/examples/queens.nit -q 8
 		bench_command "nit-nitcc" "nit nitcc.nit calc.sablecc" "./nit.$title.bin" ../contrib/nitcc/src/nitcc.nit ../contrib/nitcc/examples/calc.sablecc
+		rm calc* 2> /dev/null # remove generated cruft
 		run_command "$@" ../src/nitdoc.nit -o "nitdoc.$title.bin"
 		rm -r out 2> /dev/null
 		mkdir out 2> /dev/null
