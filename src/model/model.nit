@@ -251,7 +251,9 @@ redef class MModule
 	fun get_primitive_class(name: String): MClass
 	do
 		var cla = self.model.get_mclasses_by_name(name)
-		if cla == null then
+		# Filter classes by introducing module
+		if cla != null then cla = [for c in cla do if self.in_importation <= c.intro_mmodule then c]
+		if cla == null or cla.is_empty then
 			if name == "Bool" and self.model.get_mclasses_by_name("Object") != null then
 				# Bool is injected because it is needed by engine to code the result
 				# of the implicit casts.
@@ -261,11 +263,11 @@ redef class MModule
 				cladef.add_in_hierarchy
 				return c
 			end
-			print("Fatal Error: no primitive class {name}")
+			print("Fatal Error: no primitive class {name} in {self}")
 			exit(1)
 		end
 		if cla.length != 1 then
-			var msg = "Fatal Error: more than one primitive class {name}:"
+			var msg = "Fatal Error: more than one primitive class {name} in {self}:"
 			for c in cla do msg += " {c.full_name}"
 			print msg
 			#exit(1)
