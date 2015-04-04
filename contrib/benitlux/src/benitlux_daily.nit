@@ -230,11 +230,11 @@ if not opts.errors.is_empty or opts.help.value == true then
 end
 
 var ben = new Benitlux("sherbrooke")
-ben.run(opts.send_emails.value or else false)
+ben.run(opts.send_emails.value)
 
 # The parsing logic for the wellington locaiton is active (to gather data)
 # but the web interface do not allow to subscribe to its mailing list.
 #
 # TODO revamp mailing list Web interface
 ben = new Benitlux("wellington")
-ben.run(opts.send_emails.value or else false)
+ben.run(opts.send_emails.value)
