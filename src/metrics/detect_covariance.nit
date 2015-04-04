@@ -130,8 +130,8 @@ private class DetectCovariancePhase
 	# Returns true if the test concern real generic covariance
 	fun count_types(node, elem: ANode, sub, sup: MType, mmodule: MModule, anchor: nullable MClassType): Bool
 	do
-		sub = sub.as_notnullable
-		sup = sup.as_notnullable
+		sub = sub.undecorate
+		sup = sup.undecorate
 
 		# Category of the target type
 		if sub isa MGenericType then
@@ -254,8 +254,8 @@ private class DetectCovariancePhase
 	fun count_cast(node: ANode, sub, sup: MType, mmodule: MModule, anchor: nullable MClassType)
 	do
 		var nsup = sup
-		sup = sup.as_notnullable
-		sub = sub.as_notnullable
+		sup = sup.undecorate
+		sub = sub.undecorate
 
 		if sub == nsup then
 			cpt_cast_pattern.inc("monomorphic cast!?!")

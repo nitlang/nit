@@ -870,7 +870,7 @@ redef class AType
 	do
 		var mt = mtype
 		if mt == null then return null
-		mt = mt.as_notnullable
+		mt = mt.undecorate
 		if mt isa MFormalType then
 			res.add_class("nc_vt")
 		end

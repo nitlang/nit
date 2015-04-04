@@ -362,7 +362,7 @@ private class TypeVisitor
 		var erasure_cast = false
 		var rettype = mpropdef.msignature.return_mtype
 		if not recv_is_self and rettype != null then
-			rettype = rettype.as_notnullable
+			rettype = rettype.undecorate
 			if rettype isa MParameterType then
 				var erased_rettype = msignature.return_mtype
 				assert erased_rettype != null
@@ -1030,7 +1030,7 @@ redef class AForExpr
 		# anchor formal and virtual types
 		if mtype.need_anchor then mtype = v.anchor_to(mtype)
 
-		mtype = mtype.as_notnullable
+		mtype = mtype.undecorate
 		self.coltype = mtype.as(MClassType)
 
 		# get methods is_ok, next, item

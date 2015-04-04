@@ -422,7 +422,7 @@ redef class AAsNotNullableExternCall
 	redef fun from_mtype do return n_type.mtype.as_nullable
 	redef fun to_mtype do
 		var mtype = n_type.mtype.as(not null)
-		mtype = mtype.as_notnullable
+		mtype = mtype.undecorate
 		return mtype
 	end
 

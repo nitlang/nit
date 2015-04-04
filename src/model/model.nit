@@ -998,12 +998,14 @@ abstract class MType
 		return res
 	end
 
-	# Return the not nullable version of the type
-	# Is the type is already not nullable, then self is returned.
+	# Remove the base type of a decorated (proxy) type.
+	# Is the type is not decorated, then self is returned.
 	#
-	# Note: this just remove the `nullable` notation, but the result can still contains null.
+	# Most of the time it is used to return the not nullable version of a nullable type.
+	# In this case, this just remove the `nullable` notation, but the result can still contains null.
 	# For instance if `self isa MNullType` or self is a formal type bounded by a nullable type.
-	fun as_notnullable: MType
+	# If you really want to exclude the `null` value, then use `as_notnull`
+	fun undecorate: MType
 	do
 		return self
 	end
@@ -1329,7 +1331,7 @@ class MVirtualType
 	redef fun lookup_fixed(mmodule: MModule, resolved_receiver: MType): MType
 	do
 		assert not resolved_receiver.need_anchor
-		resolved_receiver = resolved_receiver.as_notnullable
+		resolved_receiver = resolved_receiver.undecorate
 		assert resolved_receiver isa MClassType # It is the only remaining type
 
 		var prop = lookup_single_definition(mmodule, resolved_receiver)
@@ -1438,7 +1440,7 @@ class MParameterType
 	redef fun lookup_bound(mmodule: MModule, resolved_receiver: MType): MType
 	do
 		assert not resolved_receiver.need_anchor
-		resolved_receiver = resolved_receiver.as_notnullable
+		resolved_receiver = resolved_receiver.undecorate
 		assert resolved_receiver isa MClassType # It is the only remaining type
 		var goalclass = self.mclass
 		if resolved_receiver.mclass == goalclass then
@@ -1466,7 +1468,7 @@ class MParameterType
 	redef fun lookup_fixed(mmodule: MModule, resolved_receiver: MType): MType
 	do
 		assert not resolved_receiver.need_anchor
-		resolved_receiver = resolved_receiver.as_notnullable
+		resolved_receiver = resolved_receiver.undecorate
 		assert resolved_receiver isa MClassType # It is the only remaining type
 		var res = self.resolve_for(resolved_receiver.mclass.mclass_type, resolved_receiver, mmodule, false)
 		return res
@@ -1551,7 +1553,7 @@ abstract class MProxyType
 	redef fun need_anchor do return mtype.need_anchor
 	redef fun as_nullable do return mtype.as_nullable
 	redef fun as_notnull do return mtype.as_notnull
-	redef fun as_notnullable do return mtype.as_notnullable
+	redef fun undecorate do return mtype.undecorate
 	redef fun resolve_for(mtype, anchor, mmodule, cleanup_virtual)
 	do
 		var res = self.mtype.resolve_for(mtype, anchor, mmodule, cleanup_virtual)
@@ -1885,7 +1887,7 @@ abstract class MProperty
 	fun lookup_definitions(mmodule: MModule, mtype: MType): Array[MPROPDEF]
 	do
 		assert not mtype.need_anchor
-		mtype = mtype.as_notnullable
+		mtype = mtype.undecorate
 
 		var cache = self.lookup_definitions_cache[mmodule, mtype]
 		if cache != null then return cache
@@ -1925,7 +1927,7 @@ abstract class MProperty
 	fun lookup_super_definitions(mmodule: MModule, mtype: MType): Array[MPROPDEF]
 	do
 		assert not mtype.need_anchor
-		mtype = mtype.as_notnullable
+		mtype = mtype.undecorate
 
 		# First, select all candidates
 		var candidates = new Array[MPROPDEF]
@@ -2003,7 +2005,7 @@ abstract class MProperty
 	# REQUIRE: `mtype.has_mproperty(mmodule, self)`
 	fun lookup_all_definitions(mmodule: MModule, mtype: MType): Array[MPROPDEF]
 	do
-		mtype = mtype.as_notnullable
+		mtype = mtype.undecorate
 
 		var cache = self.lookup_all_definitions_cache[mmodule, mtype]
 		if cache != null then return cache
