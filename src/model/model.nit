@@ -697,6 +697,8 @@ abstract class MType
 		if sup isa MNullableType then
 			sup_accept_null = true
 			sup = sup.mtype
+		else if sup isa MNotNullType then
+			sup = sup.mtype
 		else if sup isa MNullType then
 			sup_accept_null = true
 		end
@@ -704,8 +706,12 @@ abstract class MType
 		# Can `sub` provide null or not?
 		# Thus we can match with `sup_accept_null`
 		# Also discard the nullable marker if it exists
+		var sub_reject_null = false
 		if sub isa MNullableType then
 			if not sup_accept_null then return false
+			sub = sub.mtype
+		else if sub isa MNotNullType then
+			sub_reject_null = true
 			sub = sub.mtype
 		else if sub isa MNullType then
 			return sup_accept_null
@@ -721,12 +727,16 @@ abstract class MType
 
 			assert anchor != null
 			sub = sub.lookup_bound(mmodule, anchor)
+			if sub_reject_null then sub = sub.as_notnull
 
 			#print "3.is {sub} a {sup}?"
 
 			# Manage the second layer of null/nullable
 			if sub isa MNullableType then
-				if not sup_accept_null then return false
+				if not sup_accept_null and not sub_reject_null then return false
+				sub = sub.mtype
+			else if sub isa MNotNullType then
+				sub_reject_null = true
 				sub = sub.mtype
 			else if sub isa MNullType then
 				return sup_accept_null
@@ -734,7 +744,7 @@ abstract class MType
 		end
 		#print "4.is {sub} a {sup}? <- no more resolution"
 
-		assert sub isa MClassType # It is the only remaining type
+		assert sub isa MClassType else print "{sub} <? {sub}" # It is the only remaining type
 
 		# A unfixed formal type can only accept itself
 		if sup isa MFormalType then
@@ -997,6 +1007,13 @@ abstract class MType
 	do
 		return self
 	end
+
+	# Returns the not null version of the type.
+	# That is `self` minus the `null` value.
+	#
+	# For most types, this return `self`.
+	# For formal types, this returns a special `MNotNullType`
+	fun as_notnull: MType do return self
 
 	private var as_nullable_cache: nullable MType = null
 
@@ -1265,6 +1282,8 @@ end
 # and need a context (anchor and mmodule) to be useful.
 abstract class MFormalType
 	super MType
+
+	redef var as_notnull = new MNotNullType(self) is lazy
 end
 
 # A virtual formal type.
@@ -1519,7 +1538,7 @@ class MParameterType
 	end
 end
 
-# A type that decorate an other type.
+# A type that decorates another type.
 #
 # The point of this class is to provide a common implementation of sevices that just forward to the original type.
 # Specific decorator are expected to redefine (or to extend) the default implementation as this suit them.
@@ -1531,6 +1550,7 @@ abstract class MProxyType
 	redef fun model do return self.mtype.model
 	redef fun need_anchor do return mtype.need_anchor
 	redef fun as_nullable do return mtype.as_nullable
+	redef fun as_notnull do return mtype.as_notnull
 	redef fun as_notnullable do return mtype.as_notnullable
 	redef fun resolve_for(mtype, anchor, mmodule, cleanup_virtual)
 	do
@@ -1603,6 +1623,33 @@ class MNullableType
 	end
 end
 
+# A non-null version of a formal type.
+#
+# When a formal type in bounded to a nullable type, this is the type of the not null version of it.
+class MNotNullType
+	super MProxyType
+
+	redef fun to_s do return "not null {mtype}"
+	redef var full_name is lazy do return "not null {mtype.full_name}"
+	redef var c_name is lazy do return "notnull__{mtype.c_name}"
+
+	redef fun as_notnull do return self
+
+	redef fun resolve_for(mtype, anchor, mmodule, cleanup_virtual)
+	do
+		var res = super
+		return res.as_notnull
+	end
+
+	# Efficiently returns `mtype.lookup_fixed(mmodule, resolved_receiver).as_notnull`
+	redef fun lookup_fixed(mmodule, resolved_receiver)
+	do
+		var t = super
+		if t == mtype then return self
+		return t.as_notnull
+	end
+end
+
 # The type of the only value null
 #
 # The is only one null type per model, see `MModel::null_type`.
@@ -1613,6 +1660,9 @@ class MNullType
 	redef fun full_name do return "null"
 	redef fun c_name do return "null"
 	redef fun as_nullable do return self
+
+	# Aborts on `null`
+	redef fun as_notnull do abort # sorry...
 	redef fun need_anchor do return false
 	redef fun resolve_for(mtype, anchor, mmodule, cleanup_virtual) do return self
 	redef fun can_resolve_for(mtype, anchor, mmodule) do return true
