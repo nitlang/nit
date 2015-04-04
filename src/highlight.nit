@@ -871,7 +871,7 @@ redef class AType
 		var mt = mtype
 		if mt == null then return null
 		mt = mt.as_notnullable
-		if mt isa MVirtualType or mt isa MParameterType then
+		if mt isa MFormalType then
 			res.add_class("nc_vt")
 		end
 		return mt.infobox(v)

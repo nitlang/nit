@@ -445,7 +445,7 @@ redef class MType
 		# Now the case of direct null and nullable is over.
 
 		# If `sub` is a formal type, then it is accepted if its bound is accepted
-		while sub isa MParameterType or sub isa MVirtualType do
+		while sub isa MFormalType do
 			#print "3.is {sub} a {sup}?"
 
 			# A unfixed formal type can only accept itself
@@ -469,7 +469,7 @@ redef class MType
 		assert sub isa MClassType # It is the only remaining type
 
 		# A unfixed formal type can only accept itself
-		if sup isa MParameterType or sup isa MVirtualType then
+		if sup isa MFormalType then
 			return false
 		end
 
