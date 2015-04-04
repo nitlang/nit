@@ -1259,9 +1259,17 @@ class MGenericType
 	end
 end
 
+# A formal type (either virtual of parametric).
+#
+# The main issue with formal types is that they offer very little information on their own
+# and need a context (anchor and mmodule) to be useful.
+abstract class MFormalType
+	super MType
+end
+
 # A virtual formal type.
 class MVirtualType
-	super MType
+	super MFormalType
 
 	# The property associated with the type.
 	# Its the definitions of this property that determine the bound or the virtual type.
@@ -1389,7 +1397,7 @@ end
 # Note that parameter types are shared among class refinements.
 # Therefore parameter only have an internal name (see `to_s` for details).
 class MParameterType
-	super MType
+	super MFormalType
 
 	# The generic class where the parameter belong
 	var mclass: MClass
