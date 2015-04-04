@@ -1519,33 +1519,23 @@ class MParameterType
 	end
 end
 
-# A type prefixed with "nullable"
-class MNullableType
+# A type that decorate an other type.
+#
+# The point of this class is to provide a common implementation of sevices that just forward to the original type.
+# Specific decorator are expected to redefine (or to extend) the default implementation as this suit them.
+abstract class MProxyType
 	super MType
-
-	# The base type of the nullable type
+	# The base type
 	var mtype: MType
 
 	redef fun model do return self.mtype.model
-
-	init
-	do
-		self.to_s = "nullable {mtype}"
-	end
-
-	redef var to_s: String is noinit
-
-	redef var full_name is lazy do return "nullable {mtype.full_name}"
-
-	redef var c_name is lazy do return "nullable__{mtype.c_name}"
-
 	redef fun need_anchor do return mtype.need_anchor
-	redef fun as_nullable do return self
-	redef fun as_notnullable do return mtype
+	redef fun as_nullable do return mtype.as_nullable
+	redef fun as_notnullable do return mtype.as_notnullable
 	redef fun resolve_for(mtype, anchor, mmodule, cleanup_virtual)
 	do
 		var res = self.mtype.resolve_for(mtype, anchor, mmodule, cleanup_virtual)
-		return res.as_nullable
+		return res
 	end
 
 	redef fun can_resolve_for(mtype, anchor, mmodule)
@@ -1553,12 +1543,10 @@ class MNullableType
 		return self.mtype.can_resolve_for(mtype, anchor, mmodule)
 	end
 
-	# Efficiently returns `mtype.lookup_fixed(mmodule, resolved_receiver).as_nullable`
 	redef fun lookup_fixed(mmodule, resolved_receiver)
 	do
 		var t = mtype.lookup_fixed(mmodule, resolved_receiver)
-		if t == mtype then return self
-		return t.as_nullable
+		return t
 	end
 
 	redef fun depth do return self.mtype.depth
@@ -1581,6 +1569,37 @@ class MNullableType
 	do
 		assert not self.need_anchor
 		return self.mtype.collect_mtypes(mmodule)
+	end
+end
+
+# A type prefixed with "nullable"
+class MNullableType
+	super MProxyType
+
+	init
+	do
+		self.to_s = "nullable {mtype}"
+	end
+
+	redef var to_s: String is noinit
+
+	redef var full_name is lazy do return "nullable {mtype.full_name}"
+
+	redef var c_name is lazy do return "nullable__{mtype.c_name}"
+
+	redef fun as_nullable do return self
+	redef fun resolve_for(mtype, anchor, mmodule, cleanup_virtual)
+	do
+		var res = super
+		return res.as_nullable
+	end
+
+	# Efficiently returns `mtype.lookup_fixed(mmodule, resolved_receiver).as_nullable`
+	redef fun lookup_fixed(mmodule, resolved_receiver)
+	do
+		var t = super
+		if t == mtype then return self
+		return t.as_nullable
 	end
 end
 
