@@ -115,7 +115,12 @@ private class TypeVisitor
 			#node.debug("Unsafe typing: expected {sup}, got {sub}")
 			return sup
 		end
-		self.modelbuilder.error(node, "Type error: expected {sup}, got {sub}")
+		if sub.need_anchor then
+			var u = anchor_to(sub)
+			self.modelbuilder.error(node, "Type error: expected {sup}, got {sub}: {u}")
+		else
+			self.modelbuilder.error(node, "Type error: expected {sup}, got {sub}")
+		end
 		return null
 	end
 
