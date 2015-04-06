@@ -495,7 +495,7 @@ class Path
 		end
 
 		# Delete the directory itself
-		if ok then path.to_cstring.rmdir
+		if ok then ok = path.to_cstring.rmdir and ok
 
 		return ok
 	end
@@ -903,28 +903,47 @@ redef class String
 	end
 
 	# Create a directory (and all intermediate directories if needed)
-	fun mkdir
+	#
+	# Return an error object in case of error.
+	#
+	#    assert "/etc/".mkdir != null
+	fun mkdir: nullable Error
 	do
 		var dirs = self.split_with("/")
 		var path = new FlatBuffer
-		if dirs.is_empty then return
+		if dirs.is_empty then return null
 		if dirs[0].is_empty then
 			# it was a starting /
 			path.add('/')
 		end
+		var error: nullable Error = null
 		for d in dirs do
 			if d.is_empty then continue
 			path.append(d)
 			path.add('/')
-			path.to_s.to_cstring.file_mkdir
+			var res = path.to_s.to_cstring.file_mkdir
+			if not res and error == null then
+				error = new IOError("Cannot create directory `{path}`: {sys.errno.strerror}")
+			end
 		end
+		return error
 	end
 
 	# Delete a directory and all of its content, return `true` on success
 	#
 	# Does not go through symbolic links and may get stuck in a cycle if there
 	# is a cycle in the filesystem.
-	fun rmdir: Bool do return to_path.rmdir
+	#
+	# Return an error object in case of error.
+	#
+	#    assert "/fail/does not/exist".rmdir != null
+	fun rmdir: nullable Error
+	do
+		var res = to_path.rmdir
+		if res then return null
+		var error = new IOError("Cannot change remove `{self}`: {sys.errno.strerror}")
+		return error
+	end
 
 	# Change the current working directory
 	#
@@ -933,8 +952,18 @@ redef class String
 	#     "..".chdir
 	#     assert getcwd == "/"
 	#
-	# TODO: errno
-	fun chdir do to_cstring.file_chdir
+	# Return an error object in case of error.
+	#
+	#     assert "/etc".chdir == null
+	#     assert "/fail/does no/exist".chdir != null
+	#     assert getcwd == "/etc" # unchanger
+	fun chdir: nullable Error
+	do
+		var res = to_cstring.file_chdir
+		if res then return null
+		var error = new IOError("Cannot change directory to `{self}`: {sys.errno.strerror}")
+		return error
+	end
 
 	# Return right-most extension (without the dot)
 	#
@@ -1022,9 +1051,9 @@ redef class NativeString
 		return stat_element;
 	`}
 	private fun file_mkdir: Bool is extern "string_NativeString_NativeString_file_mkdir_0"
-	private fun rmdir: Bool `{ return rmdir(recv); `}
+	private fun rmdir: Bool `{ return !rmdir(recv); `}
 	private fun file_delete: Bool is extern "string_NativeString_NativeString_file_delete_0"
-	private fun file_chdir is extern "string_NativeString_NativeString_file_chdir_0"
+	private fun file_chdir: Bool is extern "string_NativeString_NativeString_file_chdir_0"
 	private fun file_realpath: NativeString is extern "file_NativeString_realpath"
 end
 
