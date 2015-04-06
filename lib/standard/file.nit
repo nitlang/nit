@@ -87,6 +87,11 @@ class FileReader
 
 	# Open the same file again.
 	# The original path is reused, therefore the reopened file can be a different file.
+	#
+	#     var f = new FileReader.open("/etc/issue")
+	#     var l = f.read_line
+	#     f.reopen
+	#     assert l == f.read_line
 	fun reopen
 	do
 		if not eof and not _file.address_is_null then close
@@ -124,6 +129,16 @@ class FileReader
 	redef var end_reached: Bool = false
 
 	# Open the file at `path` for reading.
+	#
+	#     var f = new FileReader.open("/etc/issue")
+	#     assert not f.end_reached
+	#     f.close
+	#
+	# In case of error, `last_error` is set
+	#
+	#     f = new FileReader.open("/fail/does not/exist")
+	#     assert f.end_reached
+	#     assert f.last_error != null
 	init open(path: String)
 	do
 		self.path = path
@@ -136,6 +151,8 @@ class FileReader
 	end
 
 	# Creates a new File stream from a file descriptor
+	#
+	# This is a low-level method.
 	init from_fd(fd: Int) do
 		self.path = ""
 		prepare_buffer(1)
@@ -237,6 +254,8 @@ private fun wipe_write: NativeString do return "w".to_cstring
 ###############################################################################
 
 # Standard input stream.
+#
+# The class of the default value of `sys.stdin`.
 class Stdin
 	super FileReader
 
@@ -250,6 +269,8 @@ class Stdin
 end
 
 # Standard output stream.
+#
+# The class of the default value of `sys.stdout`.
 class Stdout
 	super FileWriter
 	init do
@@ -261,6 +282,8 @@ class Stdout
 end
 
 # Standard error stream.
+#
+# The class of the default value of `sys.stderr`.
 class Stderr
 	super FileWriter
 	init do
@@ -333,8 +356,6 @@ class Path
 	end
 
 	# Delete a file from the file system, return `true` on success
-	#
-	# Require: `exists`
 	fun delete: Bool do return path.to_cstring.file_delete
 
 	# Copy content of file at `path` to `dest`
@@ -678,11 +699,12 @@ redef class String
 	end
 
 	# Simplify a file path by remove useless ".", removing "//", and resolving ".."
-	# ".." are not resolved if they start the path
-	# starting "/" is not removed
-	# trainling "/" is removed
 	#
-	# Note that the method only wonrk on the string:
+	# * ".." are not resolved if they start the path
+	# * starting "/" is not removed
+	# * trailing "/" is removed
+	#
+	# Note that the method only work on the string:
 	#
 	#  * no I/O access is performed
 	#  * the validity of the path is not checked
@@ -718,7 +740,6 @@ redef class String
 	# Using a standard "{self}/{path}" does not work in the following cases:
 	#
 	# * `self` is empty.
-	# * `path` ends with `'/'`.
 	# * `path` starts with `'/'`.
 	#
 	# This method ensures that the join is valid.
