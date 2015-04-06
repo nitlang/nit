@@ -102,6 +102,17 @@ redef class ModelBuilder
 				npropdef.build_signature(self)
 			end
 			for npropdef in nclassdef2.n_propdefs do
+				if not npropdef isa ATypePropdef then continue
+				# Check circularity
+				var mpropdef = npropdef.mpropdef
+				if mpropdef == null then continue
+				if mpropdef.bound == null then continue
+				if not check_virtual_types_circularity(npropdef, mpropdef.mproperty, mclassdef.bound_mtype, mclassdef.mmodule) then
+					# Invalidate the bound
+					mpropdef.bound = mclassdef.mmodule.model.null_type
+				end
+			end
+			for npropdef in nclassdef2.n_propdefs do
 				# Check ATypePropdef first since they may be required for the other properties
 				if not npropdef isa ATypePropdef then continue
 				npropdef.check_signature(self)
@@ -366,6 +377,8 @@ redef class ModelBuilder
 			mmodule_type = mtype.mproperty.intro_mclassdef.mmodule
 		else if mtype isa MParameterType then
 			# nothing, always visible
+		else if mtype isa MNullType then
+			# nothing to do.
 		else
 			node.debug "Unexpected type {mtype}"
 			abort
@@ -393,6 +406,72 @@ redef class ModelBuilder
 		else if mtype isa MGenericType then
 			for t in mtype.arguments do check_visibility(node, t, mpropdef)
 		end
+	end
+
+	# Detect circularity errors for virtual types.
+	fun check_virtual_types_circularity(node: ANode, mproperty: MVirtualTypeProp, recv: MType, mmodule: MModule): Bool
+	do
+		# Check circularity
+		# Slow case: progress on each resolution until we visit all without getting a loop
+
+		# The graph used to detect loops
+		var mtype = mproperty.mvirtualtype
+		var poset = new POSet[MType]
+
+		# The work-list of type to resolve
+		var todo = new List[MType]
+		todo.add mtype
+
+		while not todo.is_empty do
+			# The visited type
+			var t = todo.pop
+
+			if not t.need_anchor then continue
+
+			# Get the types derived of `t` (subtypes and bounds)
+			var nexts
+			if t isa MNullableType then
+				nexts = [t.mtype]
+			else if t isa MGenericType then
+				nexts = t.arguments
+			else if t isa MVirtualType then
+				var vt = t.mproperty
+				# Because `vt` is possibly unchecked, we have to do the bound-lookup manually
+				var defs = vt.lookup_definitions(mmodule, recv)
+				# TODO something to manage correctly bound conflicts
+				assert not defs.is_empty
+				nexts = new Array[MType]
+				for d in defs do
+					var next = defs.first.bound
+					if next == null then return false
+					nexts.add next
+				end
+			else if t isa MClassType then
+				# Basic type, nothing to to
+				continue
+			else if t isa MParameterType then
+				# Parameter types cannot depend on virtual types, so nothing to do
+				continue
+			else
+				abort
+			end
+
+			# For each one
+			for next in nexts do
+				if poset.has_edge(next, t) then
+					if mtype == next then
+						error(node, "Error: circularity of virtual type definition: {next} <-> {t}")
+					else
+						error(node, "Error: circularity of virtual type definition: {mtype} -> {next} <-> {t}")
+					end
+					return false
+				else
+					poset.add_edge(t, next)
+					todo.add next
+				end
+			end
+		end
+		return true
 	end
 end
 
@@ -1354,7 +1433,7 @@ redef class ATypePropdef
 		var mpropdef = self.mpropdef
 		if mpropdef == null then return # Error thus skipped
 
-		var bound = self.mpropdef.bound
+		var bound = mpropdef.bound
 		if bound == null then return # Error thus skipped
 
 		modelbuilder.check_visibility(n_type, bound, mpropdef)
@@ -1363,23 +1442,6 @@ redef class ATypePropdef
 		var mmodule = mclassdef.mmodule
 		var anchor = mclassdef.bound_mtype
 
-		# Check circularity
-		if bound isa MVirtualType then
-			# Slow case: progress on each resolution until: (i) we loop, or (ii) we found a non formal type
-			var seen = [self.mpropdef.mproperty.mvirtualtype]
-			loop
-				if seen.has(bound) then
-					seen.add(bound)
-					modelbuilder.error(self, "Error: circularity of virtual type definition: {seen.join(" -> ")}")
-					return
-				end
-				seen.add(bound)
-				var next = bound.lookup_bound(mmodule, anchor)
-				if not next isa MVirtualType then break
-				bound = next
-			end
-		end
-
 		var ntype = self.n_type
 		if modelbuilder.resolve_mtype(mmodule, mclassdef, ntype) == null then
 			mpropdef.bound = null
@@ -1387,7 +1449,6 @@ redef class ATypePropdef
 		end
 
 		# Check redefinitions
-		bound = mpropdef.bound.as(not null)
 		for p in mpropdef.mproperty.lookup_super_definitions(mmodule, anchor) do
 			var supbound = p.bound
 			if supbound == null then break # broken super bound, skip error
