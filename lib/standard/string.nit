@@ -1952,9 +1952,7 @@ end
 redef class Int
 
 	# Wrapper of strerror C function
-	private fun strerror_ext: NativeString is extern `{
-		return strerror(recv);
-	`}
+	private fun strerror_ext: NativeString is extern "strerror"
 
 	# Returns a string describing error number
 	fun strerror: String do return strerror_ext.to_s
