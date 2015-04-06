@@ -252,14 +252,14 @@ redef class Int
 end
 
 # Constant for read-only file streams
-private fun read_only: NativeString do return "r".to_cstring
+private fun read_only: NativeString do return once "r".to_cstring
 
 # Constant for write-only file streams
 #
 # If a stream is opened on a file with this method,
 # it will wipe the previous file if any.
 # Else, it will create the file.
-private fun wipe_write: NativeString do return "w".to_cstring
+private fun wipe_write: NativeString do return once "w".to_cstring
 
 ###############################################################################
 
