@@ -42,7 +42,17 @@ abstract class FileStream
 	private var file: nullable NativeFile = null
 
 	# The status of a file. see POSIX stat(2).
-	fun file_stat: NativeFileStat do return _file.file_stat
+	#
+	#     var f = new FileReader.open("/etc/issue")
+	#     assert f.file_stat.is_file
+	#
+	# Return null in case of error
+	fun file_stat: nullable FileStat
+	do
+		var stat = _file.file_stat
+		if stat.address_is_null then return null
+		return new FileStat(stat)
+	end
 
 	# File descriptor of this file
 	fun fd: Int do return _file.fileno
@@ -330,6 +340,10 @@ class Path
 	#
 	# Returns `null` if there is no file at `self`.
 	#
+	#     assert "/etc/".to_path.stat.is_dir
+	#     assert "/etc/issue".to_path.stat.is_file
+	#     assert "/fail/does not/exist".to_path.stat == null
+	#
 	# ~~~
 	# var p = "/tmp/".to_path
 	# var stat = p.stat
@@ -523,12 +537,23 @@ class FileStat
 		return stat.atime
 	end
 
+	# Returns the last access time
+	#
+	# alias for `last_access_time`
+	fun atime: Int do return last_access_time
+
 	# Returns the last modification time in seconds since Epoch
 	fun last_modification_time: Int
 	do
 		assert not finalized
 		return stat.mtime
 	end
+
+	# Returns the last modification time
+	#
+	# alias for `last_modification_time`
+	fun mtime: Int do return last_modification_time
+
 
 	# Size of the file at `path`
 	fun size: Int
@@ -537,12 +562,15 @@ class FileStat
 		return stat.size
 	end
 
-	# Is this a regular file and not a device file, pipe, socket, etc.?
+	# Is self a regular file and not a device file, pipe, socket, etc.?
 	fun is_file: Bool
 	do
 		assert not finalized
 		return stat.is_reg
 	end
+
+	# Alias for `is_file`
+	fun is_reg: Bool do return is_file
 
 	# Is this a directory?
 	fun is_dir: Bool
@@ -566,6 +594,11 @@ class FileStat
 		assert not finalized
 		return stat.ctime
 	end
+
+	# Returns the last status change time
+	#
+	# alias for `last_status_change_time`
+	fun ctime: Int do return last_status_change_time
 
 	# Returns the permission bits of file
 	fun mode: Int
@@ -613,10 +646,20 @@ redef class String
 	fun file_exists: Bool do return to_cstring.file_exists
 
 	# The status of a file. see POSIX stat(2).
-	fun file_stat: NativeFileStat do return to_cstring.file_stat
+	fun file_stat: nullable FileStat
+	do
+		var stat = to_cstring.file_stat
+		if stat.address_is_null then return null
+		return new FileStat(stat)
+	end
 
 	# The status of a file or of a symlink. see POSIX lstat(2).
-	fun file_lstat: NativeFileStat do return to_cstring.file_lstat
+	fun file_lstat: nullable FileStat
+	do
+		var stat = to_cstring.file_lstat
+		if stat.address_is_null then return null
+		return new FileStat(stat)
+	end
 
 	# Remove a file, return true if success
 	fun file_delete: Bool do return to_cstring.file_delete
@@ -973,7 +1016,7 @@ redef class NativeString
 end
 
 # This class is system dependent ... must reify the vfs
-extern class NativeFileStat `{ struct stat * `}
+private extern class NativeFileStat `{ struct stat * `}
 	# Returns the permission bits of file
 	fun mode: Int is extern "file_FileStat_FileStat_mode_0"
 	# Returns the last access time
