@@ -418,7 +418,7 @@ redef class ModelBuilder
 		var mtype = mproperty.mvirtualtype
 		var poset = new POSet[MType]
 
-		# The work-list of type to resolve
+		# The work-list of types to resolve
 		var todo = new List[MType]
 		todo.add mtype
 
