@@ -964,7 +964,17 @@ redef class String
 		end
 	end
 
-	# returns files contained within the directory represented by self
+	# Returns entries contained within the directory represented by self.
+	#
+	#     var files = "/etc".files
+	#     assert files.has("issue")
+	#
+	# Returns an empty array in case of error
+	#
+	#     files = "/etc/issue".files
+	#     assert files.is_empty
+	#
+	# TODO find a better way to handle errors and to give them back to the user.
 	fun files: Array[String] is extern import Array[String], Array[String].add, NativeString.to_s, String.to_cstring `{
 		char *dir_path;
 		DIR *dir;
@@ -972,8 +982,11 @@ redef class String
 		dir_path = String_to_cstring( recv );
 		if ((dir = opendir(dir_path)) == NULL)
 		{
-			perror( dir_path );
-			exit( 1 );
+			//perror( dir_path );
+			//exit( 1 );
+			Array_of_String results;
+			results = new_Array_of_String();
+			return results;
 		}
 		else
 		{
