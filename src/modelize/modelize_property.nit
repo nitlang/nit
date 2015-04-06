@@ -621,26 +621,6 @@ redef class ASignature
 		self.is_visited = true
 		return true
 	end
-
-	# Build a visited signature
-	fun build_signature(modelbuilder: ModelBuilder): nullable MSignature
-	do
-		if param_names.length != param_types.length then
-			# Some parameters are typed, other parameters are not typed.
-			modelbuilder.error(self.n_params[param_types.length], "Error: Untyped parameter `{param_names[param_types.length]}'.")
-			return null
-		end
-
-		var mparameters = new Array[MParameter]
-		for i in [0..param_names.length[ do
-			var mparameter = new MParameter(param_names[i], param_types[i], i == vararg_rank)
-			self.n_params[i].mparameter = mparameter
-			mparameters.add(mparameter)
-		end
-
-		var msignature = new MSignature(mparameters, ret_type)
-		return msignature
-	end
 end
 
 redef class AParam
