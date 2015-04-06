@@ -102,6 +102,13 @@ redef class ModelBuilder
 				npropdef.build_signature(self)
 			end
 			for npropdef in nclassdef2.n_propdefs do
+				# Check ATypePropdef first since they may be required for the other properties
+				if not npropdef isa ATypePropdef then continue
+				npropdef.check_signature(self)
+			end
+
+			for npropdef in nclassdef2.n_propdefs do
+				if npropdef isa ATypePropdef then continue
 				npropdef.check_signature(self)
 			end
 		end
@@ -597,7 +604,7 @@ redef class ASignature
 			param_names.add(np.n_id.text)
 			var ntype = np.n_type
 			if ntype != null then
-				var mtype = modelbuilder.resolve_mtype(mmodule, mclassdef, ntype)
+				var mtype = modelbuilder.resolve_mtype_unchecked(mmodule, mclassdef, ntype, true)
 				if mtype == null then return false # Skip error
 				for i in [0..param_names.length-param_types.length[ do
 					param_types.add(mtype)
@@ -614,12 +621,32 @@ redef class ASignature
 		end
 		var ntype = self.n_type
 		if ntype != null then
-			self.ret_type = modelbuilder.resolve_mtype(mmodule, mclassdef, ntype)
+			self.ret_type = modelbuilder.resolve_mtype_unchecked(mmodule, mclassdef, ntype, true)
 			if self.ret_type == null then return false # Skip error
 		end
 
 		self.is_visited = true
 		return true
+	end
+
+	private fun check_signature(modelbuilder: ModelBuilder, mclassdef: MClassDef): Bool
+	do
+		var res = true
+		for np in self.n_params do
+			var ntype = np.n_type
+			if ntype != null then
+				if modelbuilder.resolve_mtype(mclassdef.mmodule, mclassdef, ntype) == null then
+					res = false
+				end
+			end
+		end
+		var ntype = self.n_type
+		if ntype != null then
+			if modelbuilder.resolve_mtype(mclassdef.mmodule, mclassdef, ntype) == null then
+				res = false
+			end
+		end
+		return res
 	end
 end
 
@@ -860,6 +887,14 @@ redef class AMethPropdef
 		var mysignature = self.mpropdef.msignature
 		if mysignature == null then return # Error thus skiped
 
+		# Check
+		if nsig != null then
+			if not nsig.check_signature(modelbuilder, mclassdef) then
+				self.mpropdef.msignature = null # invalidate
+				return # Forward error
+			end
+		end
+
 		# Lookup for signature in the precursor
 		# FIXME all precursors should be considered
 		if not mpropdef.is_intro then
@@ -1072,7 +1107,7 @@ redef class AAttrPropdef
 
 		var ntype = self.n_type
 		if ntype != null then
-			mtype = modelbuilder.resolve_mtype(mmodule, mclassdef, ntype)
+			mtype = modelbuilder.resolve_mtype_unchecked(mmodule, mclassdef, ntype, true)
 			if mtype == null then return
 		end
 
@@ -1093,7 +1128,7 @@ redef class AAttrPropdef
 		if mtype == null then
 			if nexpr != null then
 				if nexpr isa ANewExpr then
-					mtype = modelbuilder.resolve_mtype(mmodule, mclassdef, nexpr.n_type)
+					mtype = modelbuilder.resolve_mtype_unchecked(mmodule, mclassdef, nexpr.n_type, true)
 				else if nexpr isa AIntExpr then
 					var cla = modelbuilder.try_get_mclass_by_name(nexpr, mmodule, "Int")
 					if cla != null then mtype = cla.mclass_type
@@ -1120,7 +1155,7 @@ redef class AAttrPropdef
 			end
 		else if ntype != null and inherited_type == mtype then
 			if nexpr isa ANewExpr then
-				var xmtype = modelbuilder.resolve_mtype(mmodule, mclassdef, nexpr.n_type)
+				var xmtype = modelbuilder.resolve_mtype_unchecked(mmodule, mclassdef, nexpr.n_type, true)
 				if xmtype == mtype then
 					modelbuilder.advice(ntype, "useless-type", "Warning: useless type definition")
 				end
@@ -1163,6 +1198,18 @@ redef class AAttrPropdef
 		var ntype = self.n_type
 		var mtype = self.mpropdef.static_mtype
 		if mtype == null then return # Error thus skipped
+
+		var mclassdef = mpropdef.mclassdef
+		var mmodule = mclassdef.mmodule
+
+		# Check types
+		if ntype != null then
+			if modelbuilder.resolve_mtype(mmodule, mclassdef, ntype) == null then return
+		end
+		var nexpr = n_expr
+		if nexpr isa ANewExpr then
+			if modelbuilder.resolve_mtype(mmodule, mclassdef, nexpr.n_type) == null then return
+		end
 
 		# Lookup for signature in the precursor
 		# FIXME all precursors should be considered
@@ -1295,7 +1342,7 @@ redef class ATypePropdef
 		var mtype: nullable MType = null
 
 		var ntype = self.n_type
-		mtype = modelbuilder.resolve_mtype(mmodule, mclassdef, ntype)
+		mtype = modelbuilder.resolve_mtype_unchecked(mmodule, mclassdef, ntype, true)
 		if mtype == null then return
 
 		mpropdef.bound = mtype
@@ -1331,6 +1378,12 @@ redef class ATypePropdef
 				if not next isa MVirtualType then break
 				bound = next
 			end
+		end
+
+		var ntype = self.n_type
+		if modelbuilder.resolve_mtype(mmodule, mclassdef, ntype) == null then
+			mpropdef.bound = null
+			return
 		end
 
 		# Check redefinitions
