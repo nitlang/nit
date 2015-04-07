@@ -510,6 +510,33 @@ redef class MNullableType
 	end
 end
 
+redef class MNotNullType
+	redef fun infobox(v)
+	do
+		return mtype.infobox(v)
+	end
+	redef fun linkto
+	do
+		var res = new HTMLTag("span")
+		res.append("not null ").add(mtype.linkto)
+		return res
+	end
+end
+
+redef class MNullType
+	redef fun infobox(v)
+	do
+		var res = new HInfoBox(v, to_s)
+		return res
+	end
+	redef fun linkto
+	do
+		var res = new HTMLTag("span")
+		res.append("null")
+		return res
+	end
+end
+
 redef class MSignature
 	redef fun linkto
 	do
