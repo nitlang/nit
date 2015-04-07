@@ -42,11 +42,6 @@ private class ParallelizationPhase
 
 		#TODO: check for self calls
 
-		if nmethdef.n_signature.n_type != null then
-			toolcontext.error(nmethdef.location, "Syntax error: method with a return value not supported yet.")
-			return
-		end
-
 		# Get the module associated with this method
 		var amod = nmethdef.parent.parent
 		assert amod isa AModule
@@ -65,6 +60,18 @@ private class ParallelizationPhase
 			classname += nmethdef.n_methid.as(AIdMethid).n_id.text
 		end
 
+		# Handle methods with a return value
+		var has_rvalue = nmethdef.n_signature.n_type != null
+		var vtype = ""
+		if has_rvalue then
+			vtype = "redef type E: " + nmethdef.n_signature.n_type.n_id.text
+		end
+		# create a return type
+		var n_id = new TClassid
+		n_id.text = classname
+		var n_type = new AType
+		n_type.n_id = n_id
+		nmethdef.n_signature.n_type = n_type
 
 		var params = new Array[String]
 		# case if the method has parameters
@@ -81,6 +88,8 @@ var {{{param.n_id.text}}} : {{{param.n_type.n_id.text}}}
 		var s="""
 class {{{classname}}}
 	super Thread
+
+	{{{vtype}}}
 
 	{{{params.join("\n")}}}
 	redef fun main do
@@ -102,11 +111,12 @@ end
 		mainfun.n_block = nmethdef.n_block
 
 		# Add "return null" to the end of the `main` function
-		var s_nullreturn = "return null"
-		var nullreturn = toolcontext.parse_something(s_nullreturn)
-		assert nullreturn isa AExpr
-		mainfun.n_block.as(ABlockExpr).n_expr.add(nullreturn)
-
+		if not has_rvalue then
+			var s_nullreturn = "return null"
+			var nullreturn = toolcontext.parse_something(s_nullreturn)
+			assert nullreturn isa AExpr
+			mainfun.n_block.as(ABlockExpr).n_expr.add(nullreturn)
+		end
 
 		# Create new body for the annotated fun
 		var s_newbody : String
@@ -118,11 +128,13 @@ end
 			s_newbody ="""
 var thread = new {{{classname}}}({{{init_params.join(",")}}})
 thread.start
+return thread
 """
 		else
 			s_newbody = """
 var thread = new {{{classname}}}
 thread.start
+return thread
 """
 		end
 
