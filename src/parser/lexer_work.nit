@@ -234,13 +234,14 @@ class Lexer
 				end
 			else
 				if accept_state != -1 then
-					var location = new Location(file, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
 					_pos = accept_pos
 					_line = accept_line
 					_stream_pos = start_stream_pos + accept_length
 					if accept_token == 0 then
+						# Ignored token (whitespaces)
 						return null
 					end
+					var location = new Location(file, start_line + 1, accept_line + 1, start_pos + 1, accept_pos)
 					return make_token(accept_token, location)
 				else
 					_stream_pos = sp
