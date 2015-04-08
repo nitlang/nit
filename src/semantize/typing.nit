@@ -52,6 +52,7 @@ private class TypeVisitor
 	# Is `self` use restricted?
 	# * no explicit `self`
 	# * method called on the implicit self must be top-level
+	# Currently only used for `new` factory since there is no valid receiver inside
 	var is_toplevel_context = false
 
 	init
@@ -71,7 +72,7 @@ private class TypeVisitor
 			selfvariable.declared_type = mclass.mclass_type
 
 			var mprop = mpropdef.mproperty
-			if mprop isa MMethod and (mprop.is_toplevel or mprop.is_new) then
+			if mprop isa MMethod and mprop.is_new then
 				is_toplevel_context = true
 			end
 		end

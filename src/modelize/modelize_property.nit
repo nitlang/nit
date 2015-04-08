@@ -622,15 +622,6 @@ redef class APropdef
 			modelbuilder.error(self, "Error: A property {mprop} is already defined in class {mclassdef.mclass} at line {mclassdef.mprop2npropdef[mprop].location.line_start}.")
 			return false
 		end
-		if mprop isa MMethod and mprop.is_toplevel != (parent isa ATopClassdef) then
-			if mprop.is_toplevel then
-				modelbuilder.error(self, "Error: {mprop} is a top level method.")
-			else
-				modelbuilder.error(self, "Error: {mprop} is not a top level method.")
-			end
-			return false
-
-		end
 		if mprop isa MMethod and mprop.is_root_init then return true
 		if kwredef == null then
 			if need_redef then
@@ -824,7 +815,7 @@ redef class AMethPropdef
 			mprop.is_init = is_init
 			mprop.is_new = n_kwnew != null
 			if mprop.is_new then mclassdef.mclass.has_new_factory = true
-			if parent isa ATopClassdef then mprop.is_toplevel = true
+			if name == "sys" then mprop.is_toplevel = true # special case for sys allowed in `new` factories
 			self.check_redef_keyword(modelbuilder, mclassdef, n_kwredef, false, mprop)
 		else
 			if not self.check_redef_keyword(modelbuilder, mclassdef, n_kwredef, not self isa AMainMethPropdef, mprop) then return

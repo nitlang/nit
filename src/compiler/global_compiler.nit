@@ -528,11 +528,6 @@ class GlobalCompilerVisitor
 	private fun get_recvtype(m: MMethodDef, recvtype: MClassType, args: Array[RuntimeVariable]): MClassType
 	do
 		check_valid_reciever(recvtype)
-		#debug("call {m} on {recvtype} on {args.first}:{args.first.mtype}")
-		if m.mproperty.is_toplevel then
-			# Do not customize top-level methods
-			recvtype = m.mclassdef.bound_mtype
-		end
 		return recvtype
 	end
 
