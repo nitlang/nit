@@ -24,5 +24,5 @@
       [30m[1mbase_simple3::Object[0m[0m[30m (lines 19-20)[0m
       
       class [32m[1mSys[0m[0m
-      [30m[1mbase_simple3::Sys[0m[0m[30m (lines 53-66)[0m
+      [30m[1mbase_simple3::Sys[0m[0m[30m (lines 49-49)[0m
 

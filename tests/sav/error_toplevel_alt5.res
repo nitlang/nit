@@ -1,1 +1,7 @@
-alt/error_toplevel_alt5.nit:40,2--4: Error: 'baz' is not a top-level method, thus need a receiver.
+1
+0
+5
+0
+10
+50
+S
