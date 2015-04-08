@@ -71,6 +71,17 @@ class HighlightVisitor
 				end
 			end
 		end
+		var messages = anode.location.messages
+		if messages != null then
+			tag.css("border-bottom", "solid 2px red")
+			if infobox == null then
+				infobox = new HInfoBox(hv, "Messages")
+			end
+			var c = infobox.new_dropdown("{messages.length} message(s)", "")
+			for m in messages do
+				c.open("li").append(m.text)
+			end
+		end
 		if infobox != null then
 			tag.attach_infobox(infobox)
 		end
@@ -645,6 +656,7 @@ redef class AStdClassdef
 	end
 	redef fun decorate_tag(v, res, token)
 	do
+		if not token isa TClassid then return null
 		res.add_class("nc_def")
 
 		var md = mclassdef
