@@ -19,7 +19,9 @@ module test_parser
 
 import parser
 import parser_util
+import astutil
 
+# A basic visitor that prints AST trees to the screen
 class PrintTreeVisitor
 	super Visitor
 	private var rank: Int = 0
@@ -41,6 +43,7 @@ var only_lexer = false
 var need_help = false
 var no_file = false
 var interactive = false
+var xml = false
 
 while not args.is_empty and args.first.chars.first == '-' do
 	if args.first == "-n" then
@@ -49,6 +52,8 @@ while not args.is_empty and args.first.chars.first == '-' do
 		only_lexer = true
 	else if args.first == "-p" then
 		only_lexer = false
+	else if args.first == "-x" then
+		xml = true
 	else if args.first == "-e" then
 		no_file = true
 	else if args.first == "-i" then
@@ -71,6 +76,7 @@ if (args.is_empty and not interactive) or need_help then
 	print("  -n	do not print anything")
 	print("  -l	only lexer")
 	print("  -p	lexer and parser (default)")
+	print("  -x	instead of a ascii tree, output a XML document")
 	print("  -e	instead on files, each argument is a content to parse")
 	print("  -i	tree to parse are read interactively")
 	print("  -h	print this help")
@@ -138,7 +144,10 @@ else
 				return
 			end
 
-			if not no_print then
+			if xml then
+				tree.parentize_tokens
+				tree.to_xml.write_to(stdout)
+			else if not no_print then
 				(new PrintTreeVisitor).enter_visit(tree)
 			end
 		end
