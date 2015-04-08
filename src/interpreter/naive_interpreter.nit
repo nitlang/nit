@@ -1321,6 +1321,14 @@ redef class ASelfExpr
 	end
 end
 
+redef class AImplicitSelfExpr
+	redef fun expr(v)
+	do
+		if not is_sys then return super
+		return v.mainobj
+	end
+end
+
 redef class AEscapeExpr
 	redef fun stmt(v)
 	do
