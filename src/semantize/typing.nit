@@ -1441,6 +1441,15 @@ redef class ASelfExpr
 	end
 end
 
+redef class AImplicitSelfExpr
+	# Is the implicit receiver `sys`?
+	#
+	# By default, the implicit receiver is `self`.
+	# But when there is not method for `self`, `sys` is used as a fall-back.
+	# Is this case this flag is set to `true`.
+	var is_sys = false
+end
+
 ## MESSAGE SENDING AND PROPERTY
 
 redef class ASendExpr
@@ -1449,13 +1458,38 @@ redef class ASendExpr
 
 	redef fun accept_typing(v)
 	do
-		var recvtype = v.visit_expr(self.n_expr)
+		var nrecv = self.n_expr
+		var recvtype = v.visit_expr(nrecv)
 		var name = self.property_name
 
 		if recvtype == null then return # Forward error
 
-		var callsite = v.get_method(self, recvtype, name, self.n_expr isa ASelfExpr)
-		if callsite == null then return
+		var callsite = null
+		var unsafe_type = v.anchor_to(recvtype)
+		var mproperty = v.try_get_mproperty_by_name2(self, unsafe_type, name)
+		if mproperty == null and nrecv isa AImplicitSelfExpr then
+			# Special fall-back search in `sys` when noting found in the implicit receiver.
+			var sysclass = v.try_get_mclass(self, "Sys")
+			if sysclass != null then
+				var systype = sysclass.mclass_type
+				mproperty = v.try_get_mproperty_by_name2(self, systype, name)
+				if mproperty != null then
+					callsite = v.get_method(self, systype, name, false)
+					if callsite == null then return # Forward error
+					# Update information, we are looking at `sys` now, not `self`
+					nrecv.is_sys = true
+					nrecv.its_variable = null
+					nrecv.mtype = systype
+					recvtype = systype
+				end
+			end
+		end
+		if callsite == null then
+			# If still nothing, just exit
+			callsite = v.get_method(self, recvtype, name, nrecv isa ASelfExpr)
+			if callsite == null then return
+		end
+
 		self.callsite = callsite
 		var msignature = callsite.msignature
 
