@@ -75,20 +75,21 @@ redef class ModelBuilder
 				names.add(ptname)
 			end
 
-		else if nclassdef isa ATopClassdef then
+		else if nclassdef isa ATopClassdef and nclassdef.n_propdefs.first.as(AMethPropdef).n_methid.collect_text == "sys" then
+			# Special case to keep `sys` in object.
+			# Needed to keep working bootstrap and a working java FFI together.
+			# TODO: remove once safe to remove
 			name = "Object"
 			nkind = null
 			mkind = interface_kind
 			nvisibility = null
 			mvisibility = public_visibility
-		else if nclassdef isa AMainClassdef then
+		else
 			name = "Sys"
 			nkind = null
 			mkind = concrete_kind
 			nvisibility = null
 			mvisibility = public_visibility
-		else
-			abort
 		end
 
 		var mclass = try_get_mclass_by_name(nclassdef, mmodule, name)
