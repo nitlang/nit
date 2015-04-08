@@ -220,7 +220,11 @@ private class ComputeProdLocationVisitor
 				var endl = _last_location
 				assert endl != null
 
-				n.location = new Location(startl.file, startl.line_start, endl.line_end, startl.column_start, endl.column_end)
+				if startl == endl then
+					n.location = startl
+				else
+					n.location = new Location(startl.file, startl.line_start, endl.line_end, startl.column_start, endl.column_end)
+				end
 
 				if not _need_after_epsilons.is_empty then
 					var loc = new Location(endl.file, endl.line_end, endl.line_end, endl.column_end, endl.column_end)
