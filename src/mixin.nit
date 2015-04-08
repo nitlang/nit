@@ -52,7 +52,8 @@ redef class ToolContext
 				mainmodule.is_fictive = true
 			end
 
-			var recv = mainmodule.object_type
+			var recv = mainmodule.sys_type
+			assert recv != null
 			var mclassdef = new MClassDef(mainmodule, recv, location)
 			mclassdef.add_in_hierarchy
 
