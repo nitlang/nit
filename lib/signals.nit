@@ -244,82 +244,82 @@ redef class Process
 end
 
 # Hang up detected on controlling terminal or death of controlling process
-protected fun sighup: Int do return 1
+fun sighup: Int do return 1
 
 # Issued if the user sends an interrupt signal
-protected fun sigint: Int do return 2
+fun sigint: Int do return 2
 
 # Issued if the user sends a quit signal
-protected fun sigquit: Int do return 3
+fun sigquit: Int do return 3
 
 # Issued if the user attempts to execute an illegal, malformed, unknown, or privileged instruction
-protected fun sigill: Int do return 4
+fun sigill: Int do return 4
 
 # Issued when an exception occurs: a condition that a debugger has requested to be informed of
-protected fun sigtrap: Int do return 5
+fun sigtrap: Int do return 5
 
 # This signal is sent to a process to tell it to abort, i. e. to terminate
-protected fun sigabrt: Int do return 6
+fun sigabrt: Int do return 6
 
 # This signal is sent to a process when it causes a bus error
-protected fun sigbus: Int do return 7
+fun sigbus: Int do return 7
 
 # Issued if an illegal mathematical operation is attempted
-protected fun sigfpe: Int do return 8
+fun sigfpe: Int do return 8
 
 # If a process gets this signal it must quit immediately and will not perform any clean-up operations
-protected fun sigkill: Int do return 9
+fun sigkill: Int do return 9
 
 # Sent to a process to indicate user-defined conditions
-protected fun sigusr1: Int do return 10
+fun sigusr1: Int do return 10
 
 # Sent to a process when it makes an invalid virtual memory reference, or segmentation fault
-protected fun sigsegv: Int do return 11
+fun sigsegv: Int do return 11
 
 # Sent to a process to indicate user-defined conditions
-protected fun sigusr2: Int do return 12
+fun sigusr2: Int do return 12
 
 # Sent to a process when it attempts to write to a pipe without a process connected to the other end
-protected fun sigpipe: Int do return 13
+fun sigpipe: Int do return 13
 
 # Alarm Clock signal
-protected fun sigalarm: Int do return 14
+fun sigalarm: Int do return 14
 
 # Software termination signal
-protected fun sigterm: Int do return 15
+fun sigterm: Int do return 15
 
 # Sent to a process when a child process terminates or is interrupted
-protected fun sigchild: Int do return 17
+fun sigchild: Int do return 17
 
 # Tell the operating system to continue (restart) a process previously paused by the SIGSTOP or SIGTSTP signal
-protected fun sigcont: Int do return 18
+fun sigcont: Int do return 18
 
 # Tell the operating system to stop a process
-protected fun sigstop: Int do return 19
+fun sigstop: Int do return 19
 
 # Sent to a process by its terminal to request it to stop temporarily
-protected fun sigtstp: Int do return 20
+fun sigtstp: Int do return 20
 
 # Sent to a process when a socket has urgent or out-of-band data available to read
-protected fun sigurg: Int do return 23
+fun sigurg: Int do return 23
 
 # Sent to a process when it has used the CPU for a duration that exceeds a user-settable value
-protected fun sigxcpu: Int do return 24
+fun sigxcpu: Int do return 24
 
 # Sent to a process when it grows a file larger than the maximum allowed size
-protected fun sigxfsz: Int do return 25
+fun sigxfsz: Int do return 25
 
 # Virtual timer expired
-protected fun sigvtalrm: Int do return 26
+fun sigvtalrm: Int do return 26
 
 # Profiling timer expired
-protected fun sigprof: Int do return 27
+fun sigprof: Int do return 27
 
 # Sent to a process when its controlling terminal changes its window size 
-protected fun sigwinch: Int do return 28
+fun sigwinch: Int do return 28
 
 # Sent to a process when the system experiences a power failure
-protected fun sigpwr: Int do return 30
+fun sigpwr: Int do return 30
 
 # Sent to a process when it passes a bad argument to a system call
-protected fun sigsys: Int do return 31
+fun sigsys: Int do return 31

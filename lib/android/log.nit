@@ -24,30 +24,30 @@ in "C" `{
 `}
 
 # Default Android log priority
-protected fun priority_default: Int do return 1
+fun priority_default: Int do return 1
 
 # Verbose Android log priority
-protected fun priority_verbose: Int do return 2
+fun priority_verbose: Int do return 2
 
 # Debug Android log priority
-protected fun priority_debug: Int do return 3
+fun priority_debug: Int do return 3
 
 # Info Android log priority
-protected fun priority_info: Int do return 4
+fun priority_info: Int do return 4
 
 # Warn Android log priority
-protected fun priority_warn: Int do return 5
+fun priority_warn: Int do return 5
 
 # Error Android log priority
-protected fun priority_error: Int do return 6
+fun priority_error: Int do return 6
 
 # Fatal Android log priority
-protected fun priority_fatal: Int do return 7
+fun priority_fatal: Int do return 7
 
 # Silent Android log priority
-protected fun priority_silent: Int do return 8
+fun priority_silent: Int do return 8
 
 # Write `text` to Android log at priority `level` with tag `tag`
-protected fun log_write(level: Int, tag, text: NativeString) `{
+fun log_write(level: Int, tag, text: NativeString) `{
 	__android_log_write(level, tag, text);
 `}

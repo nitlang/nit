@@ -452,6 +452,6 @@ redef class Object
 	end
 end
 
-protected fun egl_bind_opengl_api: Bool `{ return eglBindAPI(EGL_OPENGL_API); `}
-protected fun egl_bind_opengl_es_api: Bool `{ return eglBindAPI(EGL_OPENGL_ES_API); `}
-protected fun egl_bind_openvg_api: Bool `{ return eglBindAPI(EGL_OPENVG_API); `}
+fun egl_bind_opengl_api: Bool `{ return eglBindAPI(EGL_OPENGL_API); `}
+fun egl_bind_opengl_es_api: Bool `{ return eglBindAPI(EGL_OPENGL_ES_API); `}
+fun egl_bind_openvg_api: Bool `{ return eglBindAPI(EGL_OPENVG_API); `}

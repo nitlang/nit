@@ -366,7 +366,7 @@ extern class GLError
 	end
 end
 
-protected fun assert_no_gl_error
+fun assert_no_gl_error
 do
 	var error = gl.error
 	if not error.is_ok then

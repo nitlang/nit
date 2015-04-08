@@ -98,4 +98,4 @@ redef class Location
 	end
 end
 
-protected fun manager: AnalysisManager do return once new AnalysisManager
+fun manager: AnalysisManager do return once new AnalysisManager

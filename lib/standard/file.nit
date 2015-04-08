@@ -1096,30 +1096,30 @@ redef class Sys
 end
 
 # Print `objects` on the standard output (`stdout`).
-protected fun printn(objects: Object...)
+fun printn(objects: Object...)
 do
 	sys.stdout.write(objects.to_s)
 end
 
 # Print an `object` on the standard output (`stdout`) and add a newline.
-protected fun print(object: Object)
+fun print(object: Object)
 do
 	sys.stdout.write(object.to_s)
 	sys.stdout.write("\n")
 end
 
 # Read a character from the standard input (`stdin`).
-protected fun getc: Char
+fun getc: Char
 do
 	return sys.stdin.read_char.ascii
 end
 
 # Read a line from the standard input (`stdin`).
-protected fun gets: String
+fun gets: String
 do
 	return sys.stdin.read_line
 end
 
 # Return the working (current) directory
-protected fun getcwd: String do return file_getcwd.to_s
+fun getcwd: String do return file_getcwd.to_s
 private fun file_getcwd: NativeString is extern "string_NativeString_NativeString_file_getcwd_0"
