@@ -11,3 +11,6 @@ iter:
 
 array:
 	./bench_strings.sh array 10 10000000 10
+
+clean:
+	rm -rf arraytos/ string_concat/ string_iter/ string_substr/ 2>/dev/null

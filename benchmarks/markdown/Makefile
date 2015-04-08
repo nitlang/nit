@@ -1,7 +1,5 @@
 # This file is part of NIT ( http://www.nitlanguage.org ).
 #
-# Copyright 2015 Alexandre Terrasa <alexandre@moz-code.org>
-#
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
@@ -14,19 +12,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-NITC=../../../../bin/nitc
-
-all: nitmd nitmd-o
-
-nitmd:
-	$(NITC) nitmd.nit
-
-nitmd-o:
-	$(NITC) --semi-global nitmd.nit -o $@
-
-test: all
-	./nitmd ../../benches/hello.md 5
-	./nitmd-o ../../benches/hello.md 5
+all:
+	./bench_markdown.sh all
 
 clean:
-	rm -rf nitmd nitmd-o
+	$(MAKE) clean -C benches
+	$(MAKE) clean -C engines
+	rm -rf out/

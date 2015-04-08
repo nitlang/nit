@@ -103,7 +103,7 @@ class PuzzleProblem
 		if x < width-1 then res.add(1)
 		if y >= 1 then res.add(-width)
 		if y < width-1 then res.add(width)
-		return res.as_random.take_all
+		return res
 	end
 
 	# Return the state where the tile at hole+action has moved

@@ -1,0 +1,15 @@
+benches/gen_benches
+benches/out/
+
+engines/nitmd/nitmd
+engines/nitmd/nitmd-o
+
+engines/markdown4j/Markdown4j.class
+engines/markdown4j/markdown4j-2.2.jar
+
+engines/pandoc/pandoc
+engines/pandoc/pandoc.hi
+engines/pandoc/pandoc.o
+
+engines/txtmark/Txtmark.class
+engines/txtmark/txtmark-0.11.jar
