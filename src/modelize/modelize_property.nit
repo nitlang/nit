@@ -103,6 +103,24 @@ redef class ModelBuilder
 				npropdef.build_signature(self)
 			end
 			for npropdef in nclassdef2.n_propdefs do
+				if not npropdef isa ATypePropdef then continue
+				# Check circularity
+				var mpropdef = npropdef.mpropdef
+				if mpropdef == null then continue
+				if mpropdef.bound == null then continue
+				if not check_virtual_types_circularity(npropdef, mpropdef.mproperty, mclassdef.bound_mtype, mclassdef.mmodule) then
+					# Invalidate the bound
+					mpropdef.bound = mclassdef.mmodule.model.null_type
+				end
+			end
+			for npropdef in nclassdef2.n_propdefs do
+				# Check ATypePropdef first since they may be required for the other properties
+				if not npropdef isa ATypePropdef then continue
+				npropdef.check_signature(self)
+			end
+
+			for npropdef in nclassdef2.n_propdefs do
+				if npropdef isa ATypePropdef then continue
 				npropdef.check_signature(self)
 			end
 		end
@@ -361,6 +379,8 @@ redef class ModelBuilder
 			mmodule_type = mtype.mproperty.intro_mclassdef.mmodule
 		else if mtype isa MParameterType then
 			# nothing, always visible
+		else if mtype isa MNullType then
+			# nothing to do.
 		else
 			node.debug "Unexpected type {mtype}"
 			abort
@@ -388,6 +408,72 @@ redef class ModelBuilder
 		else if mtype isa MGenericType then
 			for t in mtype.arguments do check_visibility(node, t, mpropdef)
 		end
+	end
+
+	# Detect circularity errors for virtual types.
+	fun check_virtual_types_circularity(node: ANode, mproperty: MVirtualTypeProp, recv: MType, mmodule: MModule): Bool
+	do
+		# Check circularity
+		# Slow case: progress on each resolution until we visit all without getting a loop
+
+		# The graph used to detect loops
+		var mtype = mproperty.mvirtualtype
+		var poset = new POSet[MType]
+
+		# The work-list of types to resolve
+		var todo = new List[MType]
+		todo.add mtype
+
+		while not todo.is_empty do
+			# The visited type
+			var t = todo.pop
+
+			if not t.need_anchor then continue
+
+			# Get the types derived of `t` (subtypes and bounds)
+			var nexts
+			if t isa MNullableType then
+				nexts = [t.mtype]
+			else if t isa MGenericType then
+				nexts = t.arguments
+			else if t isa MVirtualType then
+				var vt = t.mproperty
+				# Because `vt` is possibly unchecked, we have to do the bound-lookup manually
+				var defs = vt.lookup_definitions(mmodule, recv)
+				# TODO something to manage correctly bound conflicts
+				assert not defs.is_empty
+				nexts = new Array[MType]
+				for d in defs do
+					var next = defs.first.bound
+					if next == null then return false
+					nexts.add next
+				end
+			else if t isa MClassType then
+				# Basic type, nothing to to
+				continue
+			else if t isa MParameterType then
+				# Parameter types cannot depend on virtual types, so nothing to do
+				continue
+			else
+				abort
+			end
+
+			# For each one
+			for next in nexts do
+				if poset.has_edge(next, t) then
+					if mtype == next then
+						error(node, "Error: circularity of virtual type definition: {next} <-> {t}")
+					else
+						error(node, "Error: circularity of virtual type definition: {mtype} -> {next} <-> {t}")
+					end
+					return false
+				else
+					poset.add_edge(t, next)
+					todo.add next
+				end
+			end
+		end
+		return true
 	end
 end
 
@@ -599,7 +685,7 @@ redef class ASignature
 			param_names.add(np.n_id.text)
 			var ntype = np.n_type
 			if ntype != null then
-				var mtype = modelbuilder.resolve_mtype(mmodule, mclassdef, ntype)
+				var mtype = modelbuilder.resolve_mtype_unchecked(mmodule, mclassdef, ntype, true)
 				if mtype == null then return false # Skip error
 				for i in [0..param_names.length-param_types.length[ do
 					param_types.add(mtype)
@@ -616,7 +702,7 @@ redef class ASignature
 		end
 		var ntype = self.n_type
 		if ntype != null then
-			self.ret_type = modelbuilder.resolve_mtype(mmodule, mclassdef, ntype)
+			self.ret_type = modelbuilder.resolve_mtype_unchecked(mmodule, mclassdef, ntype, true)
 			if self.ret_type == null then return false # Skip error
 		end
 
@@ -624,24 +710,24 @@ redef class ASignature
 		return true
 	end
 
-	# Build a visited signature
-	fun build_signature(modelbuilder: ModelBuilder): nullable MSignature
+	private fun check_signature(modelbuilder: ModelBuilder, mclassdef: MClassDef): Bool
 	do
-		if param_names.length != param_types.length then
-			# Some parameters are typed, other parameters are not typed.
-			modelbuilder.error(self.n_params[param_types.length], "Error: Untyped parameter `{param_names[param_types.length]}'.")
-			return null
+		var res = true
+		for np in self.n_params do
+			var ntype = np.n_type
+			if ntype != null then
+				if modelbuilder.resolve_mtype(mclassdef.mmodule, mclassdef, ntype) == null then
+					res = false
+				end
+			end
 		end
-
-		var mparameters = new Array[MParameter]
-		for i in [0..param_names.length[ do
-			var mparameter = new MParameter(param_names[i], param_types[i], i == vararg_rank)
-			self.n_params[i].mparameter = mparameter
-			mparameters.add(mparameter)
+		var ntype = self.n_type
+		if ntype != null then
+			if modelbuilder.resolve_mtype(mclassdef.mmodule, mclassdef, ntype) == null then
+				res = false
+			end
 		end
-
-		var msignature = new MSignature(mparameters, ret_type)
-		return msignature
+		return res
 	end
 end
 
@@ -882,6 +968,14 @@ redef class AMethPropdef
 		var mysignature = self.mpropdef.msignature
 		if mysignature == null then return # Error thus skiped
 
+		# Check
+		if nsig != null then
+			if not nsig.check_signature(modelbuilder, mclassdef) then
+				self.mpropdef.msignature = null # invalidate
+				return # Forward error
+			end
+		end
+
 		# Lookup for signature in the precursor
 		# FIXME all precursors should be considered
 		if not mpropdef.is_intro then
@@ -1098,7 +1192,7 @@ redef class AAttrPropdef
 
 		var ntype = self.n_type
 		if ntype != null then
-			mtype = modelbuilder.resolve_mtype(mmodule, mclassdef, ntype)
+			mtype = modelbuilder.resolve_mtype_unchecked(mmodule, mclassdef, ntype, true)
 			if mtype == null then return
 		end
 
@@ -1119,7 +1213,7 @@ redef class AAttrPropdef
 		if mtype == null then
 			if nexpr != null then
 				if nexpr isa ANewExpr then
-					mtype = modelbuilder.resolve_mtype(mmodule, mclassdef, nexpr.n_type)
+					mtype = modelbuilder.resolve_mtype_unchecked(mmodule, mclassdef, nexpr.n_type, true)
 				else if nexpr isa AIntExpr then
 					var cla = modelbuilder.try_get_mclass_by_name(nexpr, mmodule, "Int")
 					if cla != null then mtype = cla.mclass_type
@@ -1146,7 +1240,7 @@ redef class AAttrPropdef
 			end
 		else if ntype != null and inherited_type == mtype then
 			if nexpr isa ANewExpr then
-				var xmtype = modelbuilder.resolve_mtype(mmodule, mclassdef, nexpr.n_type)
+				var xmtype = modelbuilder.resolve_mtype_unchecked(mmodule, mclassdef, nexpr.n_type, true)
 				if xmtype == mtype then
 					modelbuilder.advice(ntype, "useless-type", "Warning: useless type definition")
 				end
@@ -1189,6 +1283,18 @@ redef class AAttrPropdef
 		var ntype = self.n_type
 		var mtype = self.mpropdef.static_mtype
 		if mtype == null then return # Error thus skipped
+
+		var mclassdef = mpropdef.mclassdef
+		var mmodule = mclassdef.mmodule
+
+		# Check types
+		if ntype != null then
+			if modelbuilder.resolve_mtype(mmodule, mclassdef, ntype) == null then return
+		end
+		var nexpr = n_expr
+		if nexpr isa ANewExpr then
+			if modelbuilder.resolve_mtype(mmodule, mclassdef, nexpr.n_type) == null then return
+		end
 
 		# Lookup for signature in the precursor
 		# FIXME all precursors should be considered
@@ -1321,7 +1427,7 @@ redef class ATypePropdef
 		var mtype: nullable MType = null
 
 		var ntype = self.n_type
-		mtype = modelbuilder.resolve_mtype(mmodule, mclassdef, ntype)
+		mtype = modelbuilder.resolve_mtype_unchecked(mmodule, mclassdef, ntype, true)
 		if mtype == null then return
 
 		mpropdef.bound = mtype
@@ -1333,7 +1439,7 @@ redef class ATypePropdef
 		var mpropdef = self.mpropdef
 		if mpropdef == null then return # Error thus skipped
 
-		var bound = self.mpropdef.bound
+		var bound = mpropdef.bound
 		if bound == null then return # Error thus skipped
 
 		modelbuilder.check_visibility(n_type, bound, mpropdef)
@@ -1342,25 +1448,13 @@ redef class ATypePropdef
 		var mmodule = mclassdef.mmodule
 		var anchor = mclassdef.bound_mtype
 
-		# Check circularity
-		if bound isa MVirtualType then
-			# Slow case: progress on each resolution until: (i) we loop, or (ii) we found a non formal type
-			var seen = [self.mpropdef.mproperty.mvirtualtype]
-			loop
-				if seen.has(bound) then
-					seen.add(bound)
-					modelbuilder.error(self, "Error: circularity of virtual type definition: {seen.join(" -> ")}")
-					return
-				end
-				seen.add(bound)
-				var next = bound.lookup_bound(mmodule, anchor)
-				if not next isa MVirtualType then break
-				bound = next
-			end
+		var ntype = self.n_type
+		if modelbuilder.resolve_mtype(mmodule, mclassdef, ntype) == null then
+			mpropdef.bound = null
+			return
 		end
 
 		# Check redefinitions
-		bound = mpropdef.bound.as(not null)
 		for p in mpropdef.mproperty.lookup_super_definitions(mmodule, anchor) do
 			var supbound = p.bound
 			if supbound == null then break # broken super bound, skip error
