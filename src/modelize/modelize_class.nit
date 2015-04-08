@@ -103,7 +103,9 @@ redef class ModelBuilder
 				var mclasses = model.get_mclasses_by_name(name)
 				if mclasses != null then for other in mclasses do
 					if other.intro_mmodule.mgroup != null and other.intro_mmodule.mgroup.mproject == mmodule.mgroup.mproject then
-						error(nclassdef, "Error: A class named `{other.full_name}` is already defined in module `{other.intro_mmodule}` at {other.intro.location}.")
+						# Skip classes that are buggy
+						if other.try_intro == null then continue
+						warning(nclassdef, "full-name-conflict", "Error: A class named `{other.full_name}` is already defined in module `{other.intro_mmodule}` at {other.intro.location}.")
 						break
 					end
 				end
@@ -224,11 +226,14 @@ redef class ModelBuilder
 	# Visit the AST and set the super-types of the `MClassDef` objects
 	private fun collect_a_mclassdef_inheritance(nmodule: AModule, nclassdef: AClassdef)
 	do
-		var mmodule = nmodule.mmodule.as(not null)
+		var mmodule = nmodule.mmodule
+		if mmodule == null then return
 		var objectclass = try_get_mclass_by_name(nmodule, mmodule, "Object")
 		var pointerclass = try_get_mclass_by_name(nmodule, mmodule, "Pointer")
-		var mclass = nclassdef.mclass.as(not null)
-		var mclassdef = nclassdef.mclassdef.as(not null)
+		var mclass = nclassdef.mclass
+		if mclass == null then return
+		var mclassdef = nclassdef.mclassdef
+		if mclassdef == null then return
 
 		# Do we need to specify Object as a super class?
 		var specobject = true
@@ -274,9 +279,12 @@ redef class ModelBuilder
 	# Check the validity of the specialization heirarchy
 	private fun check_supertypes(nmodule: AModule, nclassdef: AClassdef)
 	do
-		var mmodule = nmodule.mmodule.as(not null)
-		var mclass = nclassdef.mclass.as(not null)
-		var mclassdef = nclassdef.mclassdef.as(not null)
+		var mmodule = nmodule.mmodule
+		if mmodule == null then return
+		var mclass = nclassdef.mclass
+		if mclass == null then return
+		var mclassdef = nclassdef.mclassdef
+		if mclassdef == null then return
 
 		for s in mclassdef.supertypes do
 			if s.is_subtype(mmodule, mclassdef.bound_mtype, mclassdef.bound_mtype) then
@@ -293,7 +301,8 @@ redef class ModelBuilder
 		# Force building recursively
 		if nmodule.build_classes_is_done then return
 		nmodule.build_classes_is_done = true
-		var mmodule = nmodule.mmodule.as(not null)
+		var mmodule = nmodule.mmodule
+		if mmodule == null then return
 		for imp in mmodule.in_importation.direct_greaters do
 			var nimp = mmodule2node(imp)
 			if nimp != null then build_classes(nimp)
@@ -363,7 +372,8 @@ redef class ModelBuilder
 
 		# Check clash of ancestors
 		for nclassdef in nmodule.n_classdefs do
-			var mclassdef = nclassdef.mclassdef.as(not null)
+			var mclassdef = nclassdef.mclassdef
+			if mclassdef == null then continue
 			var superclasses = new HashMap[MClass, MClassType]
 			for scd in mclassdef.in_hierarchy.greaters do
 				for st in scd.supertypes do
@@ -387,7 +397,8 @@ redef class ModelBuilder
 		# Check that the superclasses are not already known (by transitivity)
 		for nclassdef in nmodule.n_classdefs do
 			if not nclassdef isa AStdClassdef then continue
-			var mclassdef = nclassdef.mclassdef.as(not null)
+			var mclassdef = nclassdef.mclassdef
+			if mclassdef == null then continue
 
 			# Get the direct superclasses
 			# Since we are a mclassdef, just look at the mclassdef hierarchy

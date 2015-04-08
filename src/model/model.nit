@@ -251,7 +251,9 @@ redef class MModule
 	fun get_primitive_class(name: String): MClass
 	do
 		var cla = self.model.get_mclasses_by_name(name)
-		if cla == null then
+		# Filter classes by introducing module
+		if cla != null then cla = [for c in cla do if self.in_importation <= c.intro_mmodule then c]
+		if cla == null or cla.is_empty then
 			if name == "Bool" and self.model.get_mclasses_by_name("Object") != null then
 				# Bool is injected because it is needed by engine to code the result
 				# of the implicit casts.
@@ -261,11 +263,11 @@ redef class MModule
 				cladef.add_in_hierarchy
 				return c
 			end
-			print("Fatal Error: no primitive class {name}")
+			print("Fatal Error: no primitive class {name} in {self}")
 			exit(1)
 		end
 		if cla.length != 1 then
-			var msg = "Fatal Error: more than one primitive class {name}:"
+			var msg = "Fatal Error: more than one primitive class {name} in {self}:"
 			for c in cla do msg += " {c.full_name}"
 			print msg
 			#exit(1)
@@ -433,7 +435,16 @@ class MClass
 	#
 	# Warning: such a definition may not exist in the early life of the object.
 	# In this case, the method will abort.
+	#
+	# Use `try_intro` instead
 	var intro: MClassDef is noinit
+
+	# The definition that introduces the class or null if not yet known.
+	#
+	# See `intro`
+	fun try_intro: nullable MClassDef do
+		if isset _intro then return _intro else return null
+	end
 
 	# Return the class `self` in the class hierarchy of the module `mmodule`.
 	#
@@ -627,7 +638,7 @@ class MClassDef
 	var in_hierarchy: nullable POSetElement[MClassDef] = null
 
 	# Is the definition the one that introduced `mclass`?
-	fun is_intro: Bool do return mclass.intro == self
+	fun is_intro: Bool do return isset mclass._intro and mclass.intro == self
 
 	# All properties introduced by the classdef
 	var intro_mproperties = new Array[MProperty]

@@ -86,7 +86,8 @@ redef class ModelBuilder
 		# Force building recursively
 		if nclassdef.build_properties_is_done then return
 		nclassdef.build_properties_is_done = true
-		var mclassdef = nclassdef.mclassdef.as(not null)
+		var mclassdef = nclassdef.mclassdef
+		if mclassdef == null then return # skip error
 		if mclassdef.in_hierarchy == null then return # Skip error
 		for superclassdef in mclassdef.in_hierarchy.direct_greaters do
 			if not mclassdef2nclassdef.has_key(superclassdef) then continue
@@ -296,6 +297,7 @@ redef class ModelBuilder
 					for p in spd.initializers do
 						if p != longest.initializers[i] then
 							self.error(nclassdef, "Error: conflict for inherited inits {spd}({spd.initializers.join(", ")}) and {longest}({longest.initializers.join(", ")})")
+							# TODO: invalidate the initializer to avoid more errors
 							return
 						end
 						i += 1
@@ -890,6 +892,7 @@ redef class AMethPropdef
 			var ret_type = mysignature.return_mtype
 			if ret_type != null and precursor_ret_type == null then
 				modelbuilder.error(nsig.n_type.as(not null), "Redef Error: {mpropdef.mproperty} is a procedure, not a function.")
+				self.mpropdef.msignature = null
 				return
 			end
 
@@ -901,6 +904,7 @@ redef class AMethPropdef
 					var node = nsig.n_params[i]
 					if not modelbuilder.check_sametype(node, mmodule, mclassdef.bound_mtype, myt, prt) then
 						modelbuilder.error(node, "Redef Error: Wrong type for parameter `{mysignature.mparameters[i].name}'. found {myt}, expected {prt} as in {mpropdef.mproperty.intro}.")
+						self.mpropdef.msignature = null
 					end
 				end
 			end
@@ -913,6 +917,7 @@ redef class AMethPropdef
 					ret_type = precursor_ret_type
 				else if not modelbuilder.check_subtype(node, mmodule, mclassdef.bound_mtype, ret_type, precursor_ret_type) then
 					modelbuilder.error(node, "Redef Error: Wrong return type. found {ret_type}, expected {precursor_ret_type} as in {mpropdef.mproperty.intro}.")
+					self.mpropdef.msignature = null
 				end
 			end
 		end
@@ -1028,6 +1033,7 @@ redef class AAttrPropdef
 				else if atautoinit != null then
 					modelbuilder.error(atautoinit, "Error: a autoinit attribute needs a value")
 				end
+				has_value = true
 				return
 			end
 			is_lazy = true

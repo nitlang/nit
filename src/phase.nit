@@ -147,7 +147,7 @@ redef class ToolContext
 		var time1 = get_time
 		self.info("*** END SEMANTIC ANALYSIS: {time1-time0} ***", 2)
 
-		errors_info
+		self.check_errors
 	end
 
 	# Process the given `phase` on the `npropdef`

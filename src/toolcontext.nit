@@ -134,13 +134,13 @@ class ToolContext
 		return tags.has("all") or tags.has(tag)
 	end
 
-	# Output all current stacked messages and display total error informations
+	# Output all current stacked messages
 	#
 	# Return true if no errors occurred.
 	#
 	# If some errors occurred, the behavior depends on the value of `keep_going`.
-	# If `keep_going` is false, then the program exits.
-	# Else, the error count and the warning count are reset and false is returned.
+	# If `keep_going` is false, then the total error informations is displayed and the program exits.
+	# Else, false is returned.
 	fun check_errors: Bool
 	do
 		if messages.length > 0 then
@@ -158,21 +158,21 @@ class ToolContext
 		end
 
 		if error_count > 0 then
-			errors_info
-			if not keep_going then exit(1)
+			if not keep_going then
+				errors_info
+				exit(1)
+			end
 			return false
 		end
 		return true
 	end
 
-	# Display (and reset) total error informations
+	# Display total error informations
 	fun errors_info
 	do
 		if error_count == 0 and warning_count == 0 then return
 		if opt_no_color.value then return
 		sys.stderr.write "Errors: {error_count}. Warnings: {warning_count}.\n"
-		error_count = 0
-		warning_count = 0
 	end
 
 	# Display an error

@@ -40,7 +40,7 @@ private class CheckAnnotationPhase
 	do
 		# Get the mmodule
 		var mmodule = nmodule.mmodule
-		assert mmodule != null
+		if mmodule == null then return
 		self.mmodule = mmodule
 
 		# If no decl block then quit
@@ -112,7 +112,7 @@ platform
 		if primtives_annotations.has(name) then return
 
 		var mmodule = self.mmodule
-		assert mmodule != null
+		if mmodule == null then return
 
 		# Lazily build the full user-list
 		var annots = user_annotations.get_or_null(mmodule)

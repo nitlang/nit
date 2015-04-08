@@ -30,7 +30,7 @@ private class NoWarningPhase
 	do
 		# Get the mmodule
 		var mmodule = nmodule.mmodule
-		assert mmodule != null
+		if mmodule == null then return
 
 		var source = nmodule.location.file
 

@@ -52,11 +52,16 @@ redef class ToolContext
 	# Run `process_mainmodule` on all phases
 	fun run_global_phases(mmodules: Array[MModule])
 	do
-		var mainmodule = make_main_module(mmodules)
-		for phase in phases_list do
-			if phase.disabled then continue
-			phase.process_mainmodule(mainmodule, mmodules)
+		if not mmodules.is_empty then
+			var mainmodule = make_main_module(mmodules)
+			for phase in phases_list do
+				if phase.disabled then continue
+				phase.process_mainmodule(mainmodule, mmodules)
+			end
 		end
+
+		check_errors
+		errors_info
 	end
 end
 
