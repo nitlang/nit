@@ -311,7 +311,13 @@ redef class ModelBuilder
 		if errcount != toolcontext.error_count then return
 
 		# Create all classes
+		# process AStdClassdef before so that non-AStdClassdef classes can be attached to existing ones, if any
 		for nclassdef in nmodule.n_classdefs do
+			if not nclassdef isa AStdClassdef then continue
+			self.build_a_mclass(nmodule, nclassdef)
+		end
+		for nclassdef in nmodule.n_classdefs do
+			if nclassdef isa AStdClassdef then continue
 			self.build_a_mclass(nmodule, nclassdef)
 		end
 
@@ -319,6 +325,11 @@ redef class ModelBuilder
 
 		# Create all classdefs
 		for nclassdef in nmodule.n_classdefs do
+			if not nclassdef isa AStdClassdef then continue
+			self.build_a_mclassdef(nmodule, nclassdef)
+		end
+		for nclassdef in nmodule.n_classdefs do
+			if nclassdef isa AStdClassdef then continue
 			self.build_a_mclassdef(nmodule, nclassdef)
 		end
 
