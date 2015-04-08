@@ -91,6 +91,24 @@ class Message
 	end
 end
 
+redef class Location
+	# Errors and warnings associated to this location.
+	var messages: nullable Array[Message]
+
+	# Add a message to `self`
+	#
+	# See `messages`
+	private fun add_message(m: Message)
+	do
+		var ms = messages
+		if ms == null then
+			ms = new Array[Message]
+			messages = ms
+		end
+		ms.add m
+	end
+end
+
 # Global context for tools
 class ToolContext
 	# Number of errors
@@ -178,7 +196,9 @@ class ToolContext
 	# Display an error
 	fun error(l: nullable Location, s: String)
 	do
-		messages.add(new Message(l,null,s))
+		var m = new Message(l,null,s)
+		if l != null then l.add_message m
+		messages.add m
 		error_count = error_count + 1
 		if opt_stop_on_first_error.value then check_errors
 	end
@@ -205,7 +225,9 @@ class ToolContext
 		if opt_warning.value.has("no-{tag}") then return
 		if not opt_warning.value.has(tag) and opt_warn.value == 0 then return
 		if is_warning_blacklisted(l, tag) then return
-		messages.add(new Message(l, tag, text))
+		var m = new Message(l, tag, text)
+		if l != null then l.add_message m
+		messages.add m
 		warning_count = warning_count + 1
 		if opt_stop_on_first_error.value then check_errors
 	end
@@ -228,7 +250,9 @@ class ToolContext
 		if opt_warning.value.has("no-{tag}") then return
 		if not opt_warning.value.has(tag) and opt_warn.value <= 1 then return
 		if is_warning_blacklisted(l, tag) then return
-		messages.add(new Message(l, tag, text))
+		var m = new Message(l, tag, text)
+		if l != null then l.add_message m
+		messages.add m
 		warning_count = warning_count + 1
 		if opt_stop_on_first_error.value then check_errors
 	end
