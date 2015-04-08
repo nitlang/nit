@@ -68,9 +68,9 @@ class AppProject
 	end
 
 	redef fun to_s do return """
-name: {{{name or else "null"}}}
-namespace: {{{namespace or else "null"}}}
-version: {{{version or else "null"}}}"""
+name: {{{name}}}
+namespace: {{{namespace}}}
+version: {{{version}}}"""
 end
 
 redef class AAnnotation

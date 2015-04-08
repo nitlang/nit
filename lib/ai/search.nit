@@ -731,7 +731,7 @@ class SearchNode[S: Object, A]
 		print "result:{state}"
 		for n in path do
 			var a = n.action
-			if a != null then print "    + {a or else ""}"
+			if a != null then print "    + {a}"
 			print "  {n.steps}: {n.state} ({n.cost}$)"
 		end
 	end

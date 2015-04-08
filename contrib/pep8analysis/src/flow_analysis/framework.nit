@@ -52,7 +52,7 @@ class FlowAnalysis[S]
 			end
 
 			if current_in != null then
-				in_set(block) = current_in.as(not null)
+				in_set(block) = current_in
 			else
 				continue
 			end
@@ -61,7 +61,7 @@ class FlowAnalysis[S]
 
 			var old_out = out_set(block)
 			for line in block.lines do
-				self.current_in = current_in.as(not null)
+				self.current_in = current_in
 				self.current_out = empty_set
 				pre_line_visit(line)
 				enter_visit(line)

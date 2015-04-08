@@ -61,10 +61,10 @@ class VirtualMachine super NaiveInterpreter
 		var anchor = self.frame.arguments.first.mtype.as(MClassType)
 
 		# `sub` or `sup` are formal or virtual types, resolve them to concrete types
-		if sub isa MParameterType or sub isa MVirtualType then
+		if sub isa MFormalType then
 			sub = sub.resolve_for(anchor.mclass.mclass_type, anchor, mainmodule, false)
 		end
-		if sup isa MParameterType or sup isa MVirtualType then
+		if sup isa MFormalType then
 			sup = sup.resolve_for(anchor.mclass.mclass_type, anchor, mainmodule, false)
 		end
 
@@ -87,7 +87,7 @@ class VirtualMachine super NaiveInterpreter
 		end
 		# Now the case of direct null and nullable is over
 
-		if sub isa MParameterType or sub isa MVirtualType then
+		if sub isa MFormalType then
 			sub = sub.anchor_to(mainmodule, anchor)
 			# Manage the second layer of null/nullable
 			if sub isa MNullableType then

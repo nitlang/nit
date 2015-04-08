@@ -708,6 +708,8 @@ abstract class MType
 		if sup isa MNullableType then
 			sup_accept_null = true
 			sup = sup.mtype
+		else if sup isa MNotNullType then
+			sup = sup.mtype
 		else if sup isa MNullType then
 			sup_accept_null = true
 		end
@@ -715,8 +717,12 @@ abstract class MType
 		# Can `sub` provide null or not?
 		# Thus we can match with `sup_accept_null`
 		# Also discard the nullable marker if it exists
+		var sub_reject_null = false
 		if sub isa MNullableType then
 			if not sup_accept_null then return false
+			sub = sub.mtype
+		else if sub isa MNotNullType then
+			sub_reject_null = true
 			sub = sub.mtype
 		else if sub isa MNullType then
 			return sup_accept_null
@@ -724,7 +730,7 @@ abstract class MType
 		# Now the case of direct null and nullable is over.
 
 		# If `sub` is a formal type, then it is accepted if its bound is accepted
-		while sub isa MParameterType or sub isa MVirtualType do
+		while sub isa MFormalType do
 			#print "3.is {sub} a {sup}?"
 
 			# A unfixed formal type can only accept itself
@@ -732,12 +738,16 @@ abstract class MType
 
 			assert anchor != null
 			sub = sub.lookup_bound(mmodule, anchor)
+			if sub_reject_null then sub = sub.as_notnull
 
 			#print "3.is {sub} a {sup}?"
 
 			# Manage the second layer of null/nullable
 			if sub isa MNullableType then
-				if not sup_accept_null then return false
+				if not sup_accept_null and not sub_reject_null then return false
+				sub = sub.mtype
+			else if sub isa MNotNullType then
+				sub_reject_null = true
 				sub = sub.mtype
 			else if sub isa MNullType then
 				return sup_accept_null
@@ -745,10 +755,10 @@ abstract class MType
 		end
 		#print "4.is {sub} a {sup}? <- no more resolution"
 
-		assert sub isa MClassType # It is the only remaining type
+		assert sub isa MClassType else print "{sub} <? {sub}" # It is the only remaining type
 
 		# A unfixed formal type can only accept itself
-		if sup isa MParameterType or sup isa MVirtualType then
+		if sup isa MFormalType then
 			return false
 		end
 
@@ -999,15 +1009,24 @@ abstract class MType
 		return res
 	end
 
-	# Return the not nullable version of the type
-	# Is the type is already not nullable, then self is returned.
+	# Remove the base type of a decorated (proxy) type.
+	# Is the type is not decorated, then self is returned.
 	#
-	# Note: this just remove the `nullable` notation, but the result can still contains null.
+	# Most of the time it is used to return the not nullable version of a nullable type.
+	# In this case, this just remove the `nullable` notation, but the result can still contains null.
 	# For instance if `self isa MNullType` or self is a formal type bounded by a nullable type.
-	fun as_notnullable: MType
+	# If you really want to exclude the `null` value, then use `as_notnull`
+	fun undecorate: MType
 	do
 		return self
 	end
+
+	# Returns the not null version of the type.
+	# That is `self` minus the `null` value.
+	#
+	# For most types, this return `self`.
+	# For formal types, this returns a special `MNotNullType`
+	fun as_notnull: MType do return self
 
 	private var as_nullable_cache: nullable MType = null
 
@@ -1270,9 +1289,19 @@ class MGenericType
 	end
 end
 
+# A formal type (either virtual of parametric).
+#
+# The main issue with formal types is that they offer very little information on their own
+# and need a context (anchor and mmodule) to be useful.
+abstract class MFormalType
+	super MType
+
+	redef var as_notnull = new MNotNullType(self) is lazy
+end
+
 # A virtual formal type.
 class MVirtualType
-	super MType
+	super MFormalType
 
 	# The property associated with the type.
 	# Its the definitions of this property that determine the bound or the virtual type.
@@ -1313,7 +1342,7 @@ class MVirtualType
 	redef fun lookup_fixed(mmodule: MModule, resolved_receiver: MType): MType
 	do
 		assert not resolved_receiver.need_anchor
-		resolved_receiver = resolved_receiver.as_notnullable
+		resolved_receiver = resolved_receiver.undecorate
 		assert resolved_receiver isa MClassType # It is the only remaining type
 
 		var prop = lookup_single_definition(mmodule, resolved_receiver)
@@ -1400,7 +1429,7 @@ end
 # Note that parameter types are shared among class refinements.
 # Therefore parameter only have an internal name (see `to_s` for details).
 class MParameterType
-	super MType
+	super MFormalType
 
 	# The generic class where the parameter belong
 	var mclass: MClass
@@ -1422,7 +1451,7 @@ class MParameterType
 	redef fun lookup_bound(mmodule: MModule, resolved_receiver: MType): MType
 	do
 		assert not resolved_receiver.need_anchor
-		resolved_receiver = resolved_receiver.as_notnullable
+		resolved_receiver = resolved_receiver.undecorate
 		assert resolved_receiver isa MClassType # It is the only remaining type
 		var goalclass = self.mclass
 		if resolved_receiver.mclass == goalclass then
@@ -1450,7 +1479,7 @@ class MParameterType
 	redef fun lookup_fixed(mmodule: MModule, resolved_receiver: MType): MType
 	do
 		assert not resolved_receiver.need_anchor
-		resolved_receiver = resolved_receiver.as_notnullable
+		resolved_receiver = resolved_receiver.undecorate
 		assert resolved_receiver isa MClassType # It is the only remaining type
 		var res = self.resolve_for(resolved_receiver.mclass.mclass_type, resolved_receiver, mmodule, false)
 		return res
@@ -1522,33 +1551,24 @@ class MParameterType
 	end
 end
 
-# A type prefixed with "nullable"
-class MNullableType
+# A type that decorates another type.
+#
+# The point of this class is to provide a common implementation of sevices that just forward to the original type.
+# Specific decorator are expected to redefine (or to extend) the default implementation as this suit them.
+abstract class MProxyType
 	super MType
-
-	# The base type of the nullable type
+	# The base type
 	var mtype: MType
 
 	redef fun model do return self.mtype.model
-
-	init
-	do
-		self.to_s = "nullable {mtype}"
-	end
-
-	redef var to_s: String is noinit
-
-	redef var full_name is lazy do return "nullable {mtype.full_name}"
-
-	redef var c_name is lazy do return "nullable__{mtype.c_name}"
-
 	redef fun need_anchor do return mtype.need_anchor
-	redef fun as_nullable do return self
-	redef fun as_notnullable do return mtype
+	redef fun as_nullable do return mtype.as_nullable
+	redef fun as_notnull do return mtype.as_notnull
+	redef fun undecorate do return mtype.undecorate
 	redef fun resolve_for(mtype, anchor, mmodule, cleanup_virtual)
 	do
 		var res = self.mtype.resolve_for(mtype, anchor, mmodule, cleanup_virtual)
-		return res.as_nullable
+		return res
 	end
 
 	redef fun can_resolve_for(mtype, anchor, mmodule)
@@ -1556,12 +1576,10 @@ class MNullableType
 		return self.mtype.can_resolve_for(mtype, anchor, mmodule)
 	end
 
-	# Efficiently returns `mtype.lookup_fixed(mmodule, resolved_receiver).as_nullable`
 	redef fun lookup_fixed(mmodule, resolved_receiver)
 	do
 		var t = mtype.lookup_fixed(mmodule, resolved_receiver)
-		if t == mtype then return self
-		return t.as_nullable
+		return t
 	end
 
 	redef fun depth do return self.mtype.depth
@@ -1587,6 +1605,64 @@ class MNullableType
 	end
 end
 
+# A type prefixed with "nullable"
+class MNullableType
+	super MProxyType
+
+	init
+	do
+		self.to_s = "nullable {mtype}"
+	end
+
+	redef var to_s: String is noinit
+
+	redef var full_name is lazy do return "nullable {mtype.full_name}"
+
+	redef var c_name is lazy do return "nullable__{mtype.c_name}"
+
+	redef fun as_nullable do return self
+	redef fun resolve_for(mtype, anchor, mmodule, cleanup_virtual)
+	do
+		var res = super
+		return res.as_nullable
+	end
+
+	# Efficiently returns `mtype.lookup_fixed(mmodule, resolved_receiver).as_nullable`
+	redef fun lookup_fixed(mmodule, resolved_receiver)
+	do
+		var t = super
+		if t == mtype then return self
+		return t.as_nullable
+	end
+end
+
+# A non-null version of a formal type.
+#
+# When a formal type in bounded to a nullable type, this is the type of the not null version of it.
+class MNotNullType
+	super MProxyType
+
+	redef fun to_s do return "not null {mtype}"
+	redef var full_name is lazy do return "not null {mtype.full_name}"
+	redef var c_name is lazy do return "notnull__{mtype.c_name}"
+
+	redef fun as_notnull do return self
+
+	redef fun resolve_for(mtype, anchor, mmodule, cleanup_virtual)
+	do
+		var res = super
+		return res.as_notnull
+	end
+
+	# Efficiently returns `mtype.lookup_fixed(mmodule, resolved_receiver).as_notnull`
+	redef fun lookup_fixed(mmodule, resolved_receiver)
+	do
+		var t = super
+		if t == mtype then return self
+		return t.as_notnull
+	end
+end
+
 # The type of the only value null
 #
 # The is only one null type per model, see `MModel::null_type`.
@@ -1597,6 +1673,9 @@ class MNullType
 	redef fun full_name do return "null"
 	redef fun c_name do return "null"
 	redef fun as_nullable do return self
+
+	# Aborts on `null`
+	redef fun as_notnull do abort # sorry...
 	redef fun need_anchor do return false
 	redef fun resolve_for(mtype, anchor, mmodule, cleanup_virtual) do return self
 	redef fun can_resolve_for(mtype, anchor, mmodule) do return true
@@ -1819,7 +1898,7 @@ abstract class MProperty
 	fun lookup_definitions(mmodule: MModule, mtype: MType): Array[MPROPDEF]
 	do
 		assert not mtype.need_anchor
-		mtype = mtype.as_notnullable
+		mtype = mtype.undecorate
 
 		var cache = self.lookup_definitions_cache[mmodule, mtype]
 		if cache != null then return cache
@@ -1859,7 +1938,7 @@ abstract class MProperty
 	fun lookup_super_definitions(mmodule: MModule, mtype: MType): Array[MPROPDEF]
 	do
 		assert not mtype.need_anchor
-		mtype = mtype.as_notnullable
+		mtype = mtype.undecorate
 
 		# First, select all candidates
 		var candidates = new Array[MPROPDEF]
@@ -1937,7 +2016,7 @@ abstract class MProperty
 	# REQUIRE: `mtype.has_mproperty(mmodule, self)`
 	fun lookup_all_definitions(mmodule: MModule, mtype: MType): Array[MPROPDEF]
 	do
-		mtype = mtype.as_notnullable
+		mtype = mtype.undecorate
 
 		var cache = self.lookup_all_definitions_cache[mmodule, mtype]
 		if cache != null then return cache

@@ -13,7 +13,9 @@
 
 # This module introduces the standard array structure.
 # It also implements two other abstract collections : ArrayMap and ArraySet
-module array
+module array is
+	no_warning "useless-type-test" # to avoid warning with nitc while compiling with c_src
+end
 
 import abstract_collection
 

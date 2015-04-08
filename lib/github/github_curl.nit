@@ -82,7 +82,7 @@ class GithubCurl
 			if obj isa JsonObject then
 				if obj.keys.has("message") then
 					var title = "GithubAPIError"
-					var msg = obj["message"].to_s or else ""
+					var msg = obj["message"].to_s
 					var err = new GithubError(msg, title)
 					err.json["requested_uri"] = uri
 					err.json["status_code"] = response.status_code

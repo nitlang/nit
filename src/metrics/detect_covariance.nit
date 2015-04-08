@@ -130,8 +130,8 @@ private class DetectCovariancePhase
 	# Returns true if the test concern real generic covariance
 	fun count_types(node, elem: ANode, sub, sup: MType, mmodule: MModule, anchor: nullable MClassType): Bool
 	do
-		sub = sub.as_notnullable
-		sup = sup.as_notnullable
+		sub = sub.undecorate
+		sup = sup.undecorate
 
 		# Category of the target type
 		if sub isa MGenericType then
@@ -254,8 +254,8 @@ private class DetectCovariancePhase
 	fun count_cast(node: ANode, sub, sup: MType, mmodule: MModule, anchor: nullable MClassType)
 	do
 		var nsup = sup
-		sup = sup.as_notnullable
-		sub = sub.as_notnullable
+		sup = sup.undecorate
+		sub = sub.undecorate
 
 		if sub == nsup then
 			cpt_cast_pattern.inc("monomorphic cast!?!")
@@ -445,7 +445,7 @@ redef class MType
 		# Now the case of direct null and nullable is over.
 
 		# If `sub` is a formal type, then it is accepted if its bound is accepted
-		while sub isa MParameterType or sub isa MVirtualType do
+		while sub isa MFormalType do
 			#print "3.is {sub} a {sup}?"
 
 			# A unfixed formal type can only accept itself
@@ -469,7 +469,7 @@ redef class MType
 		assert sub isa MClassType # It is the only remaining type
 
 		# A unfixed formal type can only accept itself
-		if sup isa MParameterType or sup isa MVirtualType then
+		if sup isa MFormalType then
 			return false
 		end
 

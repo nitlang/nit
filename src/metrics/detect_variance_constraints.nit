@@ -113,7 +113,7 @@ class DetectVarianceConstraints
 					if pd isa MMethodDef then
 						# Parameters (contravariant)
 						for p in pd.msignature.mparameters do
-							var t = p.mtype.as_notnullable
+							var t = p.mtype.undecorate
 							if not t.need_anchor then
 								# OK
 							else if t isa MParameterType then
@@ -129,7 +129,7 @@ class DetectVarianceConstraints
 						# Return (covariant)
 						var t = pd.msignature.return_mtype
 						if t != null and t.need_anchor then
-							t = t.as_notnullable
+							t = t.undecorate
 							if t isa MParameterType then
 								covar_pt.add(t)
 							else if t isa MVirtualType then
@@ -144,7 +144,7 @@ class DetectVarianceConstraints
 						# Attribute (invariant)
 						var t = pd.static_mtype
 						if t != null and t.need_anchor then
-							t = t.as_notnullable
+							t = t.undecorate
 							if t isa MParameterType then
 								covar_pt.add t
 								contravar_pt.add t
@@ -161,7 +161,7 @@ class DetectVarianceConstraints
 						# Virtual type bound (covariant)
 						var t = pd.bound
 						if t != null and t.need_anchor then
-							t = t.as_notnullable
+							t = t.undecorate
 							if t isa MParameterType then
 								covar_pt.add t
 							else if t isa MVirtualType then
@@ -223,7 +223,7 @@ class DetectVarianceConstraints
 			# Process the generic types in a covariant position
 			for c in covar_classes do for i in [0..c.mclass.arity[ do
 				# The type used in the argument
-				var ta = c.arguments[i].as_notnullable
+				var ta = c.arguments[i].undecorate
 				# The associated formal parameter
 				var tp = c.mclass.mparameters[i]
 
@@ -259,7 +259,7 @@ class DetectVarianceConstraints
 			# Process the generic types in a contravariant position
 			for c in contravar_classes do for i in [0..c.mclass.arity[ do
 				# The type used in the argument
-				var ta = c.arguments[i].as_notnullable
+				var ta = c.arguments[i].undecorate
 				# The associated formal parameter
 				var tp = c.mclass.mparameters[i]
 

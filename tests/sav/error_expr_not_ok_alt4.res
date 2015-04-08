@@ -106,7 +106,7 @@ alt/error_expr_not_ok_alt4.nit:147,7--18: Type error: expected A, got Array[Int]
 alt/error_expr_not_ok_alt4.nit:149,7--24: Type error: expected A, got String
 alt/error_expr_not_ok_alt4.nit:150,7--18: Warning: Expression is already a Int.
 alt/error_expr_not_ok_alt4.nit:150,7--18: Type error: expected A, got Int
-alt/error_expr_not_ok_alt4.nit:151,7--23: Warning: expression is already not null, since it is a `Int`.
+alt/error_expr_not_ok_alt4.nit:151,7--10: Warning: expression is not null, since it is a `Int`.
 alt/error_expr_not_ok_alt4.nit:151,7--23: Type error: expected A, got Int
 alt/error_expr_not_ok_alt4.nit:152,7--18: Warning: Expression is already a Int.
 alt/error_expr_not_ok_alt4.nit:152,7--18: Type error: expected A, got Bool

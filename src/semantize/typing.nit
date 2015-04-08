@@ -115,7 +115,12 @@ private class TypeVisitor
 			#node.debug("Unsafe typing: expected {sup}, got {sub}")
 			return sup
 		end
-		self.modelbuilder.error(node, "Type error: expected {sup}, got {sub}")
+		if sub.need_anchor then
+			var u = anchor_to(sub)
+			self.modelbuilder.error(node, "Type error: expected {sup}, got {sub}: {u}")
+		else
+			self.modelbuilder.error(node, "Type error: expected {sup}, got {sub}")
+		end
 		return null
 	end
 
@@ -194,6 +199,34 @@ private class TypeVisitor
 		return sup
 	end
 
+	# Can `mtype` be null (up to the current knowledge)?
+	fun can_be_null(mtype: MType): Bool
+	do
+		if mtype isa MNullableType or mtype isa MNullType then return true
+		if mtype isa MFormalType then
+			var x = anchor_to(mtype)
+			if x isa MNullableType or x isa MNullType then return true
+		end
+		return false
+	end
+
+	# Check that `mtype` can be null (up to the current knowledge).
+	#
+	# If not then display a `useless-null-test` warning on node and return false.
+	# Else return true.
+	fun check_can_be_null(anode: ANode, mtype: MType): Bool
+	do
+		if can_be_null(mtype) then return true
+
+		if mtype isa MFormalType then
+			var res = anchor_to(mtype)
+			modelbuilder.warning(anode, "useless-null-test", "Warning: expression is not null, since it is a `{mtype}: {res}`.")
+		else
+			modelbuilder.warning(anode, "useless-null-test", "Warning: expression is not null, since it is a `{mtype}`.")
+		end
+		return false
+	end
+
 	# Special verification on != and == for null
 	# Return true
 	fun null_test(anode: ABinopExpr)
@@ -205,24 +238,24 @@ private class TypeVisitor
 
 		if not mtype2 isa MNullType then return
 
+		if mtype isa MNullType then return
+
 		# Check of useless null
-		if not mtype isa MNullableType then
-			if not anchor_to(mtype) isa MNullableType then
-				modelbuilder.warning(anode, "useless-null-test", "Warning: expression is not null, since it is a `{mtype}`.")
-			end
-			return
-		end
+		if not check_can_be_null(anode.n_expr, mtype) then return
+
+		mtype = mtype.as_notnull
 
 		# Check for type adaptation
 		var variable = anode.n_expr.its_variable
 		if variable == null then return
 
+		# One is null (mtype2 see above) the other is not null
 		if anode isa AEqExpr then
 			anode.after_flow_context.when_true.set_var(variable, mtype2)
-			anode.after_flow_context.when_false.set_var(variable, mtype.mtype)
+			anode.after_flow_context.when_false.set_var(variable, mtype)
 		else if anode isa ANeExpr then
 			anode.after_flow_context.when_false.set_var(variable, mtype2)
-			anode.after_flow_context.when_true.set_var(variable, mtype.mtype)
+			anode.after_flow_context.when_true.set_var(variable, mtype)
 		else
 			abort
 		end
@@ -334,7 +367,7 @@ private class TypeVisitor
 		var erasure_cast = false
 		var rettype = mpropdef.msignature.return_mtype
 		if not recv_is_self and rettype != null then
-			rettype = rettype.as_notnullable
+			rettype = rettype.undecorate
 			if rettype isa MParameterType then
 				var erased_rettype = msignature.return_mtype
 				assert erased_rettype != null
@@ -450,7 +483,7 @@ private class TypeVisitor
 			var found = true
 			for t2 in col do
 				if t2 == null then continue # return null
-				if t2 isa MNullableType or t2 isa MNullType then
+				if can_be_null(t2) and not can_be_null(t1) then
 					t1 = t1.as_nullable
 				end
 				if not is_subtype(t2, t1) then found = false
@@ -1010,7 +1043,7 @@ redef class AForExpr
 		# anchor formal and virtual types
 		if mtype.need_anchor then mtype = v.anchor_to(mtype)
 
-		mtype = mtype.as_notnullable
+		mtype = mtype.undecorate
 		self.coltype = mtype.as(MClassType)
 
 		# get methods is_ok, next, item
@@ -1129,14 +1162,18 @@ redef class AOrElseExpr
 			return # Skip error
 		end
 
-		t1 = t1.as_notnullable
+		if t1 isa MNullType then
+			v.error(n_expr, "Type error: or else on null")
+		else if v.check_can_be_null(n_expr, t1) then
+			t1 = t1.as_notnull
+		end
 
 		var t = v.merge_types(self, [t1, t2])
 		if t == null then
 			var c = v.get_mclass(self, "Object")
 			if c == null then return # forward error
 			t = c.mclass_type
-			if t2 isa MNullableType then
+			if v.can_be_null(t2) then
 				t = t.as_nullable
 			end
 			#v.error(self, "Type Error: ambiguous type {t1} vs {t2}")
@@ -1368,22 +1405,12 @@ redef class AAsNotnullExpr
 			v.error(self, "Type error: as(not null) on null")
 			return
 		end
-		if mtype isa MNullableType then
-			self.mtype = mtype.mtype
-			return
-		end
-		self.mtype = mtype
 
-		if mtype isa MClassType then
-			v.modelbuilder.warning(self, "useless-type-test", "Warning: expression is already not null, since it is a `{mtype}`.")
-			return
+		if v.check_can_be_null(n_expr, mtype) then
+			mtype = mtype.as_notnull
 		end
-		assert mtype.need_anchor
-		var u = v.anchor_to(mtype)
-		if not u isa MNullableType then
-			v.modelbuilder.warning(self, "useless-type-test", "Warning: expression is already not null, since it is a `{mtype}: {u}`.")
-			return
-		end
+
+		self.mtype = mtype
 	end
 end
 

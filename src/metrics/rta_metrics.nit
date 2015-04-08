@@ -374,7 +374,7 @@ redef class RapidTypeAnalysis
 		super
 		tnlc.values.inc(mtype)
 
-		mtype = mtype.as_notnullable
+		mtype = mtype.undecorate
 		if mtype isa MClassType then
 			cnlc.values.inc(mtype.mclass)
 		end
@@ -385,7 +385,7 @@ end
 
 redef class MType
 	private fun signature_depth: Int do
-		var mtype = self.as_notnullable
+		var mtype = self.undecorate
 		if not mtype isa MGenericType then return 0
 
 		var depth = 0

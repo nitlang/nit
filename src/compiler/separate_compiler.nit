@@ -458,14 +458,14 @@ class SeparateCompiler
 
 		var mtypes_by_class = new MultiHashMap[MClass, MType]
 		for e in mtypes do
-			var c = e.as_notnullable.as(MClassType).mclass
+			var c = e.undecorate.as(MClassType).mclass
 			mtypes_by_class[c].add(e)
 			poset.add_node(e)
 		end
 
 		var casttypes_by_class = new MultiHashMap[MClass, MType]
 		for e in cast_types do
-			var c = e.as_notnullable.as(MClassType).mclass
+			var c = e.undecorate.as(MClassType).mclass
 			casttypes_by_class[c].add(e)
 			poset.add_node(e)
 		end
@@ -510,7 +510,7 @@ class SeparateCompiler
 		# Group cast_type by their classes
 		var bucklets = new HashMap[MClass, Set[MType]]
 		for e in cast_types do
-			var c = e.as_notnullable.as(MClassType).mclass
+			var c = e.undecorate.as(MClassType).mclass
 			if not bucklets.has_key(c) then
 				bucklets[c] = new HashSet[MType]
 			end
@@ -742,7 +742,7 @@ class SeparateCompiler
 
 		# resolution table (for receiver)
 		if is_live then
-			var mclass_type = mtype.as_notnullable
+			var mclass_type = mtype.undecorate
 			assert mclass_type isa MClassType
 			if resolution_tables[mclass_type].is_empty then
 				v.add_decl("NULL, /*NO RESOLUTIONS*/")
@@ -775,7 +775,7 @@ class SeparateCompiler
 
 	fun compile_type_resolution_table(mtype: MType) do
 
-		var mclass_type = mtype.as_notnullable.as(MClassType)
+		var mclass_type = mtype.undecorate.as(MClassType)
 
 		# extern const struct resolution_table_X resolution_table_X
 		self.provide_declaration("resolution_table_{mtype.c_name}", "extern const struct types resolution_table_{mtype.c_name};")
@@ -2006,7 +2006,7 @@ class SeparateCompilerVisitor
 
 	fun can_be_primitive(value: RuntimeVariable): Bool
 	do
-		var t = value.mcasttype.as_notnullable
+		var t = value.mcasttype.undecorate
 		if not t isa MClassType then return false
 		var k = t.mclass.kind
 		return k == interface_kind or t.is_c_primitive

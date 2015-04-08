@@ -111,7 +111,7 @@ redef class AMethPropdef
 		# return type
 		var rmt = mpropdef.msignature.return_mtype
 		if rmt != null then
-			if rmt isa MParameterType or rmt isa MVirtualType then
+			if rmt isa MFormalType then
 				var mclass_type = mpropdef.mclassdef.bound_mtype
 				rmt = rmt.anchor_to(mmodule, mclass_type)
 			end
@@ -122,7 +122,7 @@ redef class AMethPropdef
 		# params
 		for p in mpropdef.msignature.mparameters do
 			var mtype = p.mtype.resolve_for(recv_type, recv_type, mmodule, true)
-			if mtype isa MParameterType or mtype isa MVirtualType then
+			if mtype isa MFormalType then
 				var mclass_type = mpropdef.mclassdef.bound_mtype
 				mtype = mtype.anchor_to(mmodule, mclass_type)
 			end
@@ -308,7 +308,7 @@ redef class AFullPropExternCall
 
 		if mtype == null then return
 
-		if mtype isa MParameterType or mtype isa MVirtualType then
+		if mtype isa MFormalType then
 			mtype = mtype.anchor_to(mmodule, mclass_type)
 		end
 
@@ -422,7 +422,7 @@ redef class AAsNotNullableExternCall
 	redef fun from_mtype do return n_type.mtype.as_nullable
 	redef fun to_mtype do
 		var mtype = n_type.mtype.as(not null)
-		mtype = mtype.as_notnullable
+		mtype = mtype.undecorate
 		return mtype
 	end
 
