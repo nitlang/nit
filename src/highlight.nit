@@ -183,8 +183,8 @@ class HighlightVisitor
 
 			c = n
 		end
-		assert stack.is_empty
-		assert stack2.is_empty
+		#assert stack.is_empty
+		#assert stack2.is_empty
 	end
 
 	# Return a default CSS content related to CSS classes used in the `html` tree.
