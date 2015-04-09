@@ -131,7 +131,6 @@ abstract class Processor
 				else
 					full_path.file_delete
 				end
-				stat.free
 			end
 			mpi.finalize
 			exit 0
