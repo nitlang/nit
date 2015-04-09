@@ -285,6 +285,57 @@ redef class AForExpr
 	end
 end
 
+redef class AWithExpr
+	# is replaced with a do/end and injected calls to `start` and `finish`
+	#
+	# Basically, the following
+	#
+	# ~~~nitish
+	# with expr do
+	#   block
+	# end label l
+	# ~~~
+	#
+	# is transformed into
+	#
+	# ~~~nitish
+	# var x = expr
+	# do
+	#   x.start
+	#   block
+	# end label l
+	# x.finish
+	# ~~~
+	#
+	# The point is that `finish` is called even if the block is escaped.
+	redef fun accept_transform_visitor(v)
+	do
+		var escapemark = self.break_mark
+		assert escapemark != null
+
+		var nblock = v.builder.make_block
+
+		var nexpr = n_expr
+
+		nblock.add nexpr
+
+		var ndo = v.builder.make_do
+		ndo.break_mark = escapemark
+
+		var start = v.builder.make_call(nexpr.make_var_read, method_start.as(not null), null)
+
+		ndo.add start
+
+		ndo.add self.n_block.as(not null)
+
+		nblock.add ndo
+
+		nblock.add v.builder.make_call(nexpr.make_var_read, method_finish.as(not null), null)
+
+		replace_with(nblock)
+	end
+end
+
 redef class AArrayExpr
 	# `[x,y]` is replaced with
 	#

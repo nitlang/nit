@@ -411,6 +411,24 @@ redef class AForExpr
 	end
 end
 
+redef class AWithExpr
+	# The break escape mark associated with the 'with'
+	var break_mark: nullable EscapeMark
+
+	redef fun accept_scope_visitor(v)
+	do
+		v.scopes.unshift(new Scope)
+
+		var escapemark = v.make_escape_mark(n_label, true)
+		self.break_mark = escapemark
+
+		v.enter_visit(n_expr)
+		v.enter_visit_block(n_block, escapemark)
+
+		v.shift_scope
+	end
+end
+
 redef class AVarFormExpr
 	# The associated variable
 	var variable: nullable Variable

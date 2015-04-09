@@ -748,6 +748,7 @@ redef class AVardeclExpr
 
 		#debug("var {variable}: {mtype}")
 
+		self.mtype = mtype
 		self.is_typed = true
 	end
 end
@@ -1099,6 +1100,24 @@ redef class AForExpr
 		if mtype == null then return
 
 		self.do_type_iterator(v, mtype)
+
+		v.visit_stmt(n_block)
+		self.mtype = n_block.mtype
+		self.is_typed = true
+	end
+end
+
+redef class AWithExpr
+	var method_start: nullable CallSite
+	var method_finish: nullable CallSite
+
+	redef fun accept_typing(v: TypeVisitor)
+	do
+		var mtype = v.visit_expr(n_expr)
+		if mtype == null then return
+
+		method_start = v.get_method(self, mtype, "start", n_expr isa ASelfExpr)
+		method_finish = v.get_method(self, mtype, "finish", n_expr isa ASelfExpr)
 
 		v.visit_stmt(n_block)
 		self.mtype = n_block.mtype

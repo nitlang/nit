@@ -50,7 +50,7 @@ class TestSaxophonit
 		expected.document_locator = new SAXLocatorImpl
 		expected.start_document
 		expected.start_element("", "a", "a", new AttributesImpl)
-		expected.fatal_error(new SAXParseException.with(
+		expected.fatal_error(new SAXParseException.with_info(
 				"The type in the closing tag (`b`) does not match the type " +
 				"in the opening tag (`a`).", null, null, 1, 8))
 		expected.end_document

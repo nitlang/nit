@@ -204,7 +204,7 @@ class TCPServer
 			closed = true
 			return
 		end
-		addrin = new NativeSocketAddrIn.with(port, new NativeSocketAddressFamilies.af_inet)
+		addrin = new NativeSocketAddrIn.with_port(port, new NativeSocketAddressFamilies.af_inet)
 		address = addrin.address
 
 		# Bind it

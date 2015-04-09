@@ -1273,14 +1273,16 @@ redef class ABlockExpr
 end
 
 redef class AVardeclExpr
-	redef fun stmt(v)
+	redef fun expr(v)
 	do
 		var ne = self.n_expr
 		if ne != null then
 			var i = v.expr(ne)
-			if i == null then return
+			if i == null then return null
 			v.write_variable(self.variable.as(not null), i)
+			return i
 		end
+		return null
 	end
 end
 
@@ -1462,6 +1464,19 @@ redef class AForExpr
 		if method_finish != null then
 			v.callsite(method_finish, [iter])
 		end
+	end
+end
+
+redef class AWithExpr
+	redef fun stmt(v)
+	do
+		var expr = v.expr(self.n_expr)
+		if expr == null then return
+
+		v.callsite(method_start, [expr])
+		v.stmt(self.n_block)
+		v.is_escape(self.break_mark) # Clear the break
+		v.callsite(method_finish, [expr])
 	end
 end
 

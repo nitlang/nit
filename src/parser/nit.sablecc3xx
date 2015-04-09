@@ -145,6 +145,7 @@ kwas = 'as';
 kwnullable = 'nullable';
 kwisset = 'isset';
 kwlabel = 'label';
+kwwith = 'with';
 kwdebug = '__debug__';
 
 opar = '(';
@@ -416,6 +417,7 @@ stmt~withelse~noexpr~nopar {-> expr}
 	| {while} while~withelse {-> while~withelse.expr}
 	| {loop} loop~withelse {-> loop~withelse.expr}
 	| {for} for~withelse {-> for~withelse.expr}
+	| {with} with~withelse {-> with~withelse.expr}
 	| {assert} assert~withelse {-> assert~withelse.expr}
 !noexpr	| {call} recv qid args_nopar {-> New expr.call(recv.expr, qid.id, args_nopar.exprs)}
 !noexpr	| {super} qualified_o kwsuper args_nopar {-> New expr.super(qualified_o.qualified, kwsuper, args_nopar.exprs)}
@@ -472,6 +474,16 @@ while~withelse {-> expr}
 for~withelse {-> expr}
 	= kwfor no [ids]:idlist [n2]:no kwin [n3]:no expr [n4]:no kwdo stmtso_withend label {-> New expr.for(kwfor, [ids.id], expr, kwdo, stmtso_withend.expr, label)}
 	| {nolabel} kwfor no [ids]:idlist [n2]:no kwin [n3]:no expr [n4]:no kwdo stmtso~withelse {-> New expr.for(kwfor, [ids.id], expr, kwdo, stmtso~withelse.expr, Null)}
+	;
+
+with~withelse {-> expr}
+	= kwwith no withexpr [n4]:no kwdo stmtso_withend label {-> New expr.with(kwwith, withexpr.expr, kwdo, stmtso_withend.expr, label)}
+	| {nolabel} kwwith no withexpr [n4]:no kwdo stmtso~withelse {-> New expr.with(kwwith, withexpr.expr, kwdo, stmtso~withelse.expr, Null)}
+	;
+
+withexpr {-> expr}
+	= {assign} id annotations? typing_o assign no expr {-> New expr.vardecl(Null, id, typing_o.type, assign, expr.expr, annotations)}
+	| expr {-> expr}
 	;
 
 assert~withelse {-> expr}
@@ -833,7 +845,7 @@ type	= kwnullable? [id]:classid [types]:type* annotations?;
 label = kwlabel id?;
 
 expr	= {block} expr* kwend? 
-	| {vardecl} kwvar id type? assign? expr? annotations?
+	| {vardecl} kwvar? id type? assign? expr? annotations?
 	| {return} kwreturn? expr?
 	| {break} kwbreak label?
 	| {abort} kwabort
@@ -844,6 +856,7 @@ expr	= {block} expr* kwend?
 	| {while} kwwhile expr kwdo [block]:expr? label?
 	| {loop} kwloop [block]:expr? label?
 	| {for} kwfor [ids]:id* expr kwdo [block]:expr? label?
+	| {with} kwwith expr kwdo [block]:expr? label?
 	| {assert} kwassert id? expr [else]:expr?
 	| {once} kwonce expr 
 	| {send} expr 

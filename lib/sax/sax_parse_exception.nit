@@ -88,7 +88,7 @@ class SAXParseException
 	# caused the error or warning.
 	# * `column_number`: column number of the end of the text that
 	# caused the error or warning.
-	init with(message: String, public_id: nullable String,
+	init with_info(message: String, public_id: nullable String,
 			system_id: nullable String, line_number: Int, column_number: Int) do
 		init(message)
 		self.public_id = public_id
