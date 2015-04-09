@@ -1570,6 +1570,11 @@ redef class ASendExpr
 	# Each subclass simply provide the correct name.
 	private fun property_name: String is abstract
 
+	# The node identifying the name (id, operator, etc) for messages.
+	#
+	# Is `self` by default
+	private fun property_node: ANode do return self
+
 	# An array of all arguments (excluding self)
 	fun raw_arguments: Array[AExpr] do return compute_raw_arguments
 
@@ -1643,11 +1648,13 @@ end
 
 redef class ACallExpr
 	redef fun property_name do return n_id.text
+	redef fun property_node do return n_id
 	redef fun compute_raw_arguments do return n_args.to_a
 end
 
 redef class ACallAssignExpr
 	redef fun property_name do return n_id.text + "="
+	redef fun property_node do return n_id
 	redef fun compute_raw_arguments
 	do
 		var res = n_args.to_a
@@ -1679,11 +1686,12 @@ redef class ASendReassignFormExpr
 	do
 		var recvtype = v.visit_expr(self.n_expr)
 		var name = self.property_name
+		var node = self.property_node
 
 		if recvtype == null then return # Forward error
 
 		var for_self = self.n_expr isa ASelfExpr
-		var callsite = v.get_method(self, recvtype, name, for_self)
+		var callsite = v.get_method(node, recvtype, name, for_self)
 
 		if callsite == null then return
 		self.callsite = callsite
@@ -1698,7 +1706,7 @@ redef class ASendReassignFormExpr
 			return
 		end
 
-		var wcallsite = v.get_method(self, recvtype, name + "=", self.n_expr isa ASelfExpr)
+		var wcallsite = v.get_method(node, recvtype, name + "=", self.n_expr isa ASelfExpr)
 		if wcallsite == null then return
 		self.write_callsite = wcallsite
 
@@ -1715,6 +1723,7 @@ end
 
 redef class ACallReassignExpr
 	redef fun property_name do return n_id.text
+	redef fun property_node do return n_id
 	redef fun compute_raw_arguments do return n_args.to_a
 end
 
@@ -1725,6 +1734,7 @@ end
 
 redef class AInitExpr
 	redef fun property_name do return "init"
+	redef fun property_node do return n_kwinit
 	redef fun compute_raw_arguments do return n_args.to_a
 end
 
@@ -1879,10 +1889,13 @@ redef class ANewExpr
 
 		var name: String
 		var nid = self.n_id
+		var node: ANode
 		if nid != null then
 			name = nid.text
+			node = nid
 		else
 			name = "new"
+			node = self.n_kwnew
 		end
 		if name == "intern" then
 			if kind != concrete_kind then
@@ -1898,7 +1911,7 @@ redef class ANewExpr
 			return
 		end
 
-		var callsite = v.get_method(self, recvtype, name, false)
+		var callsite = v.get_method(node, recvtype, name, false)
 		if callsite == null then return
 
 		if not callsite.mproperty.is_new then
