@@ -56,10 +56,10 @@ abstract class QuadTree[E: Boxed[Numeric]]
 	end
 
 	redef fun items_overlapping(region :Boxed[Numeric]): SimpleCollection[E] do
-        var res = new Array[E]
-        items_overlapping_in(region,res)
-        return res
-     end  
+		var res = new Array[E]
+		items_overlapping_in(region,res)
+		return res
+	end
 
 	# add the item to the tree, create children if the limit is reached
 	redef fun add(item: E) do if self.is_leaf then self.data.add(item) else add_to_children(item)
@@ -86,7 +86,7 @@ abstract class QuadTree[E: Boxed[Numeric]]
 			else if self.center.y > item.top then
 				self.data.add(item)
 			else if self.center.y < item.bottom then
-					self.data.add(item)
+				self.data.add(item)
 			else
 				self.data.add(item)
 			end
@@ -209,7 +209,7 @@ end
 # the center of the parent node
 class SQuadTree[E: Boxed[Numeric]]
 	super QuadTree[E]
-	
+
 	# the width of the current node of the QuadTree
 	var width: Numeric
 	# the height of the current node of the QuadTree
