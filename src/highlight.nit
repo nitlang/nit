@@ -57,6 +57,37 @@ class HighlightVisitor
 		htmlize(s.first_token.as(not null), s.last_token.as(not null))
 	end
 
+	private fun full_tag(anode: ANode, hv: HighlightVisitor): nullable HTMLTag
+	do
+		var tag = anode.make_tag(hv)
+		if tag == null then return null
+		var infobox = anode.infobox(hv)
+		if infobox == null and anode isa Token then
+			var pa = anode.parent
+			if pa != null then
+				var c = anode
+				if c isa TId or c isa TClassid or c isa TAttrid or c isa TokenLiteral or c isa TokenOperator or c isa TComment and pa isa ADoc then
+					infobox = pa.decorate_tag(hv, tag, anode)
+				end
+			end
+		end
+		var messages = anode.location.messages
+		if messages != null then
+			tag.css("border-bottom", "solid 2px red")
+			if infobox == null then
+				infobox = new HInfoBox(hv, "Messages")
+			end
+			var c = infobox.new_dropdown("{messages.length} message(s)", "")
+			for m in messages do
+				c.open("li").append(m.text)
+			end
+		end
+		if infobox != null then
+			tag.attach_infobox(infobox)
+		end
+		return tag
+	end
+
 	# Produce HTML between two tokens
 	protected fun htmlize(first_token, last_token: Token)
 	do
@@ -79,11 +110,9 @@ class HighlightVisitor
 				if c0 != null then starting = c0.starting_prods
 				if starting != null then for p in starting do
 					if not p.is_block then continue
-					var tag = p.make_tag(hv)
+					var tag = full_tag(p, hv)
 					if tag == null then continue
 					tag.add_class("foldable")
-					var infobox = p.infobox(hv)
-					if infobox != null then tag.attach_infobox(infobox)
 					stack2.add(html)
 					html.add tag
 					html = tag
@@ -108,10 +137,8 @@ class HighlightVisitor
 			starting = c.starting_prods
 			if starting != null then for p in starting do
 				if not p.is_span then continue
-				var tag = p.make_tag(hv)
+				var tag = full_tag(p, hv)
 				if tag == null then continue
-				var infobox = p.infobox(hv)
-				if infobox != null then tag.attach_infobox(infobox)
 				stack2.add(html)
 				html.add tag
 				html = tag
@@ -122,17 +149,8 @@ class HighlightVisitor
 			if c isa TEol then 
 				html.append "\n"
 			else
-				var tag = c.make_tag(hv)
-				var pa = c.parent
-				var infobox = null
-				if c isa TId or c isa TClassid or c isa TAttrid or c isa TokenLiteral or c isa TokenOperator then
-					assert c != null
-					if pa != null then infobox = pa.decorate_tag(hv, tag, c)
-				else if c isa TComment and pa isa ADoc then
-					infobox = pa.decorate_tag(hv, tag, c)
-				end
-				if infobox != null then tag.attach_infobox(infobox)
-				html.add tag
+				var tag = full_tag(c, hv)
+				if tag != null then html.add tag
 			end
 
 			# Handle ending span productions
@@ -165,8 +183,8 @@ class HighlightVisitor
 
 			c = n
 		end
-		assert stack.is_empty
-		assert stack2.is_empty
+		#assert stack.is_empty
+		#assert stack2.is_empty
 	end
 
 	# Return a default CSS content related to CSS classes used in the `html` tree.
@@ -638,6 +656,7 @@ redef class AStdClassdef
 	end
 	redef fun decorate_tag(v, res, token)
 	do
+		if not token isa TClassid then return null
 		res.add_class("nc_def")
 
 		var md = mclassdef

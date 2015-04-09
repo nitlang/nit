@@ -91,6 +91,24 @@ class Message
 	end
 end
 
+redef class Location
+	# Errors and warnings associated to this location.
+	var messages: nullable Array[Message]
+
+	# Add a message to `self`
+	#
+	# See `messages`
+	private fun add_message(m: Message)
+	do
+		var ms = messages
+		if ms == null then
+			ms = new Array[Message]
+			messages = ms
+		end
+		ms.add m
+	end
+end
+
 # Global context for tools
 class ToolContext
 	# Number of errors
@@ -176,14 +194,21 @@ class ToolContext
 	end
 
 	# Display an error
-	fun error(l: nullable Location, s: String)
+	#
+	# Return the message (to add information)
+	fun error(l: nullable Location, s: String): Message
 	do
-		messages.add(new Message(l,null,s))
+		var m = new Message(l,null,s)
+		if l != null then l.add_message m
+		messages.add m
 		error_count = error_count + 1
 		if opt_stop_on_first_error.value then check_errors
+		return m
 	end
 
 	# Add an error, show errors and quit
+	#
+	# Because the program will quit, nothing is returned.
 	fun fatal_error(l: nullable Location, s: String)
 	do
 		error(l,s)
@@ -200,14 +225,19 @@ class ToolContext
 	# * They always are real issues (no false positive)
 	#
 	# First-level warnings are displayed by default (except if option `-q` is given).
-	fun warning(l: nullable Location, tag: String, text: String)
+	#
+	# Return the message (to add information) or null if the warning is disabled
+	fun warning(l: nullable Location, tag: String, text: String): nullable Message
 	do
-		if opt_warning.value.has("no-{tag}") then return
-		if not opt_warning.value.has(tag) and opt_warn.value == 0 then return
-		if is_warning_blacklisted(l, tag) then return
-		messages.add(new Message(l, tag, text))
+		if opt_warning.value.has("no-{tag}") then return null
+		if not opt_warning.value.has(tag) and opt_warn.value == 0 then return null
+		if is_warning_blacklisted(l, tag) then return null
+		var m = new Message(l, tag, text)
+		if l != null then l.add_message m
+		messages.add m
 		warning_count = warning_count + 1
 		if opt_stop_on_first_error.value then check_errors
+		return m
 	end
 
 	# Display a second-level warning.
@@ -223,14 +253,19 @@ class ToolContext
 	#
 	# In order to prevent warning inflation à la Java, second-level warnings are not displayed by
 	# default and require an additional option `-W`.
-	fun advice(l: nullable Location, tag: String, text: String)
+	#
+	# Return the message (to add information) or null if the warning is disabled
+	fun advice(l: nullable Location, tag: String, text: String): nullable Message
 	do
-		if opt_warning.value.has("no-{tag}") then return
-		if not opt_warning.value.has(tag) and opt_warn.value <= 1 then return
-		if is_warning_blacklisted(l, tag) then return
-		messages.add(new Message(l, tag, text))
+		if opt_warning.value.has("no-{tag}") then return null
+		if not opt_warning.value.has(tag) and opt_warn.value <= 1 then return null
+		if is_warning_blacklisted(l, tag) then return null
+		var m = new Message(l, tag, text)
+		if l != null then l.add_message m
+		messages.add m
 		warning_count = warning_count + 1
 		if opt_stop_on_first_error.value then check_errors
+		return m
 	end
 
 	# Display an info
