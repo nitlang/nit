@@ -3019,7 +3019,9 @@ redef class ANewExpr
 
 		var recv = v.init_instance_or_extern(mtype)
 
-		var callsite = self.callsite.as(not null)
+		var callsite = self.callsite
+		if callsite == null then return recv
+
 		var args = v.varargize(callsite.mpropdef, recv, self.n_args.n_exprs)
 		var res2 = v.compile_callsite(callsite, args)
 		if res2 != null then
