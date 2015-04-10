@@ -42,7 +42,17 @@ abstract class FileStream
 	private var file: nullable NativeFile = null
 
 	# The status of a file. see POSIX stat(2).
-	fun file_stat: NativeFileStat do return _file.file_stat
+	#
+	#     var f = new FileReader.open("/etc/issue")
+	#     assert f.file_stat.is_file
+	#
+	# Return null in case of error
+	fun file_stat: nullable FileStat
+	do
+		var stat = _file.file_stat
+		if stat.address_is_null then return null
+		return new FileStat(stat)
+	end
 
 	# File descriptor of this file
 	fun fd: Int do return _file.fileno
@@ -87,6 +97,11 @@ class FileReader
 
 	# Open the same file again.
 	# The original path is reused, therefore the reopened file can be a different file.
+	#
+	#     var f = new FileReader.open("/etc/issue")
+	#     var l = f.read_line
+	#     f.reopen
+	#     assert l == f.read_line
 	fun reopen
 	do
 		if not eof and not _file.address_is_null then close
@@ -124,6 +139,16 @@ class FileReader
 	redef var end_reached: Bool = false
 
 	# Open the file at `path` for reading.
+	#
+	#     var f = new FileReader.open("/etc/issue")
+	#     assert not f.end_reached
+	#     f.close
+	#
+	# In case of error, `last_error` is set
+	#
+	#     f = new FileReader.open("/fail/does not/exist")
+	#     assert f.end_reached
+	#     assert f.last_error != null
 	init open(path: String)
 	do
 		self.path = path
@@ -136,6 +161,8 @@ class FileReader
 	end
 
 	# Creates a new File stream from a file descriptor
+	#
+	# This is a low-level method.
 	init from_fd(fd: Int) do
 		self.path = ""
 		prepare_buffer(1)
@@ -225,18 +252,20 @@ redef class Int
 end
 
 # Constant for read-only file streams
-private fun read_only: NativeString do return "r".to_cstring
+private fun read_only: NativeString do return once "r".to_cstring
 
 # Constant for write-only file streams
 #
 # If a stream is opened on a file with this method,
 # it will wipe the previous file if any.
 # Else, it will create the file.
-private fun wipe_write: NativeString do return "w".to_cstring
+private fun wipe_write: NativeString do return once "w".to_cstring
 
 ###############################################################################
 
 # Standard input stream.
+#
+# The class of the default value of `sys.stdin`.
 class Stdin
 	super FileReader
 
@@ -250,6 +279,8 @@ class Stdin
 end
 
 # Standard output stream.
+#
+# The class of the default value of `sys.stdout`.
 class Stdout
 	super FileWriter
 	init do
@@ -261,6 +292,8 @@ class Stdout
 end
 
 # Standard error stream.
+#
+# The class of the default value of `sys.stderr`.
 class Stderr
 	super FileWriter
 	init do
@@ -307,6 +340,10 @@ class Path
 	#
 	# Returns `null` if there is no file at `self`.
 	#
+	#     assert "/etc/".to_path.stat.is_dir
+	#     assert "/etc/issue".to_path.stat.is_file
+	#     assert "/fail/does not/exist".to_path.stat == null
+	#
 	# ~~~
 	# var p = "/tmp/".to_path
 	# var stat = p.stat
@@ -333,8 +370,6 @@ class Path
 	end
 
 	# Delete a file from the file system, return `true` on success
-	#
-	# Require: `exists`
 	fun delete: Bool do return path.to_cstring.file_delete
 
 	# Copy content of file at `path` to `dest`
@@ -460,7 +495,7 @@ class Path
 		end
 
 		# Delete the directory itself
-		if ok then path.to_cstring.rmdir
+		if ok then ok = path.to_cstring.rmdir and ok
 
 		return ok
 	end
@@ -502,12 +537,23 @@ class FileStat
 		return stat.atime
 	end
 
+	# Returns the last access time
+	#
+	# alias for `last_access_time`
+	fun atime: Int do return last_access_time
+
 	# Returns the last modification time in seconds since Epoch
 	fun last_modification_time: Int
 	do
 		assert not finalized
 		return stat.mtime
 	end
+
+	# Returns the last modification time
+	#
+	# alias for `last_modification_time`
+	fun mtime: Int do return last_modification_time
+
 
 	# Size of the file at `path`
 	fun size: Int
@@ -516,12 +562,15 @@ class FileStat
 		return stat.size
 	end
 
-	# Is this a regular file and not a device file, pipe, socket, etc.?
+	# Is self a regular file and not a device file, pipe, socket, etc.?
 	fun is_file: Bool
 	do
 		assert not finalized
 		return stat.is_reg
 	end
+
+	# Alias for `is_file`
+	fun is_reg: Bool do return is_file
 
 	# Is this a directory?
 	fun is_dir: Bool
@@ -545,6 +594,11 @@ class FileStat
 		assert not finalized
 		return stat.ctime
 	end
+
+	# Returns the last status change time
+	#
+	# alias for `last_status_change_time`
+	fun ctime: Int do return last_status_change_time
 
 	# Returns the permission bits of file
 	fun mode: Int
@@ -592,10 +646,20 @@ redef class String
 	fun file_exists: Bool do return to_cstring.file_exists
 
 	# The status of a file. see POSIX stat(2).
-	fun file_stat: NativeFileStat do return to_cstring.file_stat
+	fun file_stat: nullable FileStat
+	do
+		var stat = to_cstring.file_stat
+		if stat.address_is_null then return null
+		return new FileStat(stat)
+	end
 
 	# The status of a file or of a symlink. see POSIX lstat(2).
-	fun file_lstat: NativeFileStat do return to_cstring.file_lstat
+	fun file_lstat: nullable FileStat
+	do
+		var stat = to_cstring.file_lstat
+		if stat.address_is_null then return null
+		return new FileStat(stat)
+	end
 
 	# Remove a file, return true if success
 	fun file_delete: Bool do return to_cstring.file_delete
@@ -678,11 +742,12 @@ redef class String
 	end
 
 	# Simplify a file path by remove useless ".", removing "//", and resolving ".."
-	# ".." are not resolved if they start the path
-	# starting "/" is not removed
-	# trainling "/" is removed
 	#
-	# Note that the method only wonrk on the string:
+	# * ".." are not resolved if they start the path
+	# * starting "/" is not removed
+	# * trailing "/" is removed
+	#
+	# Note that the method only work on the string:
 	#
 	#  * no I/O access is performed
 	#  * the validity of the path is not checked
@@ -718,7 +783,6 @@ redef class String
 	# Using a standard "{self}/{path}" does not work in the following cases:
 	#
 	# * `self` is empty.
-	# * `path` ends with `'/'`.
 	# * `path` starts with `'/'`.
 	#
 	# This method ensures that the join is valid.
@@ -839,28 +903,47 @@ redef class String
 	end
 
 	# Create a directory (and all intermediate directories if needed)
-	fun mkdir
+	#
+	# Return an error object in case of error.
+	#
+	#    assert "/etc/".mkdir != null
+	fun mkdir: nullable Error
 	do
 		var dirs = self.split_with("/")
 		var path = new FlatBuffer
-		if dirs.is_empty then return
+		if dirs.is_empty then return null
 		if dirs[0].is_empty then
 			# it was a starting /
 			path.add('/')
 		end
+		var error: nullable Error = null
 		for d in dirs do
 			if d.is_empty then continue
 			path.append(d)
 			path.add('/')
-			path.to_s.to_cstring.file_mkdir
+			var res = path.to_s.to_cstring.file_mkdir
+			if not res and error == null then
+				error = new IOError("Cannot create directory `{path}`: {sys.errno.strerror}")
+			end
 		end
+		return error
 	end
 
 	# Delete a directory and all of its content, return `true` on success
 	#
 	# Does not go through symbolic links and may get stuck in a cycle if there
 	# is a cycle in the filesystem.
-	fun rmdir: Bool do return to_path.rmdir
+	#
+	# Return an error object in case of error.
+	#
+	#    assert "/fail/does not/exist".rmdir != null
+	fun rmdir: nullable Error
+	do
+		var res = to_path.rmdir
+		if res then return null
+		var error = new IOError("Cannot change remove `{self}`: {sys.errno.strerror}")
+		return error
+	end
 
 	# Change the current working directory
 	#
@@ -869,8 +952,18 @@ redef class String
 	#     "..".chdir
 	#     assert getcwd == "/"
 	#
-	# TODO: errno
-	fun chdir do to_cstring.file_chdir
+	# Return an error object in case of error.
+	#
+	#     assert "/etc".chdir == null
+	#     assert "/fail/does no/exist".chdir != null
+	#     assert getcwd == "/etc" # unchanger
+	fun chdir: nullable Error
+	do
+		var res = to_cstring.file_chdir
+		if res then return null
+		var error = new IOError("Cannot change directory to `{self}`: {sys.errno.strerror}")
+		return error
+	end
 
 	# Return right-most extension (without the dot)
 	#
@@ -900,7 +993,17 @@ redef class String
 		end
 	end
 
-	# returns files contained within the directory represented by self
+	# Returns entries contained within the directory represented by self.
+	#
+	#     var files = "/etc".files
+	#     assert files.has("issue")
+	#
+	# Returns an empty array in case of error
+	#
+	#     files = "/etc/issue".files
+	#     assert files.is_empty
+	#
+	# TODO find a better way to handle errors and to give them back to the user.
 	fun files: Array[String] is extern import Array[String], Array[String].add, NativeString.to_s, String.to_cstring `{
 		char *dir_path;
 		DIR *dir;
@@ -908,8 +1011,11 @@ redef class String
 		dir_path = String_to_cstring( recv );
 		if ((dir = opendir(dir_path)) == NULL)
 		{
-			perror( dir_path );
-			exit( 1 );
+			//perror( dir_path );
+			//exit( 1 );
+			Array_of_String results;
+			results = new_Array_of_String();
+			return results;
 		}
 		else
 		{
@@ -945,14 +1051,14 @@ redef class NativeString
 		return stat_element;
 	`}
 	private fun file_mkdir: Bool is extern "string_NativeString_NativeString_file_mkdir_0"
-	private fun rmdir: Bool `{ return rmdir(recv); `}
+	private fun rmdir: Bool `{ return !rmdir(recv); `}
 	private fun file_delete: Bool is extern "string_NativeString_NativeString_file_delete_0"
-	private fun file_chdir is extern "string_NativeString_NativeString_file_chdir_0"
+	private fun file_chdir: Bool is extern "string_NativeString_NativeString_file_chdir_0"
 	private fun file_realpath: NativeString is extern "file_NativeString_realpath"
 end
 
 # This class is system dependent ... must reify the vfs
-extern class NativeFileStat `{ struct stat * `}
+private extern class NativeFileStat `{ struct stat * `}
 	# Returns the permission bits of file
 	fun mode: Int is extern "file_FileStat_FileStat_mode_0"
 	# Returns the last access time
@@ -1096,30 +1202,30 @@ redef class Sys
 end
 
 # Print `objects` on the standard output (`stdout`).
-protected fun printn(objects: Object...)
+fun printn(objects: Object...)
 do
 	sys.stdout.write(objects.to_s)
 end
 
 # Print an `object` on the standard output (`stdout`) and add a newline.
-protected fun print(object: Object)
+fun print(object: Object)
 do
 	sys.stdout.write(object.to_s)
 	sys.stdout.write("\n")
 end
 
 # Read a character from the standard input (`stdin`).
-protected fun getc: Char
+fun getc: Char
 do
 	return sys.stdin.read_char.ascii
 end
 
 # Read a line from the standard input (`stdin`).
-protected fun gets: String
+fun gets: String
 do
 	return sys.stdin.read_line
 end
 
 # Return the working (current) directory
-protected fun getcwd: String do return file_getcwd.to_s
+fun getcwd: String do return file_getcwd.to_s
 private fun file_getcwd: NativeString is extern "string_NativeString_NativeString_file_getcwd_0"

@@ -17,10 +17,6 @@ module kernel
 
 import end # Mark this module is a top level one. (must be only one)
 
-`{
-#include <errno.h>
-`}
-
 ###############################################################################
 # System Classes                                                              #
 ###############################################################################
@@ -111,9 +107,7 @@ class Sys
 	fun run do main
 
 	# Number of the last error
-	fun errno: Int is extern `{
-		return errno;
-	`}
+	fun errno: Int is extern "sys_errno"
 end
 
 # Quit the program with a specific return code
