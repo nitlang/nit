@@ -1,1 +1,1 @@
-error_attr_unk.nit:17,8--12: Error: Attribute _toto doesn't exists in Sys.
+error_attr_unk.nit:17,8--12: Error: attribute `_toto` does not exist in `Sys`.

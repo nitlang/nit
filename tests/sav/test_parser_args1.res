@@ -572,12 +572,12 @@ Start ../src/test_parser.nit:17,1--156,1
                     TId "only_lexer" ../src/test_parser.nit:84,5--14
                     AListExprs ../src/test_parser.nit:84,14
                   ABlockExpr ../src/test_parser.nit:85,3--86,8
-                    ACallExpr ../src/test_parser.nit:85,3--44
+                    ACallExpr ../src/test_parser.nit:85,3--43
                       AImplicitSelfExpr ../src/test_parser.nit:85,3
                       TId "print" ../src/test_parser.nit:85,3--7
-                      AListExprs ../src/test_parser.nit:85,9--44
-                        AStringExpr ../src/test_parser.nit:85,9--44
-                          TString "\"Error: -l and -i are incompatibles\"" ../src/test_parser.nit:85,9--44
+                      AListExprs ../src/test_parser.nit:85,9--43
+                        AStringExpr ../src/test_parser.nit:85,9--43
+                          TString "\"Error: -l and -i are incompatible\"" ../src/test_parser.nit:85,9--43
                     ACallExpr ../src/test_parser.nit:86,3--8
                       AImplicitSelfExpr ../src/test_parser.nit:86,3
                       TId "exit" ../src/test_parser.nit:86,3--6
@@ -591,12 +591,12 @@ Start ../src/test_parser.nit:17,1--156,1
                       TId "no_file" ../src/test_parser.nit:87,10--16
                       AListExprs ../src/test_parser.nit:87,16
                     ABlockExpr ../src/test_parser.nit:88,3--89,8
-                      ACallExpr ../src/test_parser.nit:88,3--44
+                      ACallExpr ../src/test_parser.nit:88,3--43
                         AImplicitSelfExpr ../src/test_parser.nit:88,3
                         TId "print" ../src/test_parser.nit:88,3--7
-                        AListExprs ../src/test_parser.nit:88,9--44
-                          AStringExpr ../src/test_parser.nit:88,9--44
-                            TString "\"Error: -e and -i are incompatibles\"" ../src/test_parser.nit:88,9--44
+                        AListExprs ../src/test_parser.nit:88,9--43
+                          AStringExpr ../src/test_parser.nit:88,9--43
+                            TString "\"Error: -e and -i are incompatible\"" ../src/test_parser.nit:88,9--43
                       ACallExpr ../src/test_parser.nit:89,3--8
                         AImplicitSelfExpr ../src/test_parser.nit:89,3
                         TId "exit" ../src/test_parser.nit:89,3--6

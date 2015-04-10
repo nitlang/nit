@@ -1,1 +1,1 @@
-alt/base_init_noinit_alt4.nit:30,3--10: Error: Incorrect number of parameters. Got 1, expected 0. Signature is 
+alt/base_init_noinit_alt4.nit:30,3--5: Error: expected 0 argument(s) for `init`; got 1. See introduction at `standard::Object::init`.

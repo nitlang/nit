@@ -1,1 +1,1 @@
-alt/base_vararg_alt7.nit:63,1--11: Error: arity mismatch; prototype is 'foobar(b: Char, a: Char..., c: Char)'
+alt/base_vararg_alt7.nit:63,1--6: Error: expected at least 3 argument(s) for `foobar(b: Char, a: Char..., c: Char)`; got 1. See introduction at `base_vararg_alt7::Sys::foobar`.

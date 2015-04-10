@@ -1,1 +1,1 @@
-error_intern.nit:20,2--8: Fatal error: unknown intern method error_intern::A::foo.
+Runtime error: uncompiled method `foo` called on `A`. NOT YET IMPLEMENTED (error_intern.nit:20)

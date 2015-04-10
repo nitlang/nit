@@ -1,1 +1,1 @@
-alt/error_toplevel_alt1.nit:25,3--10: Error: Method 'bar' doesn't exists in Int.
+alt/error_toplevel_alt1.nit:25,5--7: Error: method `bar` does not exists in `Int`.

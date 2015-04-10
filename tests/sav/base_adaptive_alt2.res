@@ -1,1 +1,1 @@
-alt/base_adaptive_alt2.nit:34,3--7: Error: Method 'bar' doesn't exists in A.
+alt/base_adaptive_alt2.nit:34,5--7: Error: method `bar` does not exists in `A`.

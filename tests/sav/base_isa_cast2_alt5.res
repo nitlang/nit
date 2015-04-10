@@ -1,1 +1,1 @@
-alt/base_isa_cast2_alt5.nit:52,2--10: Error: Method 'foo' doesn't exists in A.
+alt/base_isa_cast2_alt5.nit:52,4--6: Error: method `foo` does not exists in `A`.
