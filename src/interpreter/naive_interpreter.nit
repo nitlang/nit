@@ -1001,11 +1001,11 @@ redef class AMethPropdef
 			else if pname == "file_exists" then
 				return v.bool_instance(recvval.to_s.file_exists)
 			else if pname == "file_mkdir" then
-				recvval.to_s.mkdir
-				return null
+				var res = recvval.to_s.mkdir
+				return v.bool_instance(res == null)
 			else if pname == "file_chdir" then
-				recvval.to_s.chdir
-				return null
+				var res = recvval.to_s.chdir
+				return v.bool_instance(res == null)
 			else if pname == "file_realpath" then
 				return v.native_string_instance(recvval.to_s.realpath)
 			else if pname == "get_environ" then
