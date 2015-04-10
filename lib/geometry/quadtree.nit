@@ -29,7 +29,7 @@ import pipeline
 abstract class QuadTree[E: Boxed[Numeric]]
 	super BoxedCollection[E]
 
-	protected var center: nullable Point[Numeric]
+	protected var center: nullable Point[Numeric] = null
 	var data: Array[E] = new Array[E]
 
 	#  ________________
@@ -39,20 +39,14 @@ abstract class QuadTree[E: Boxed[Numeric]]
 	#  |   0   |   3   |
 	#  |_______|_______|
 
-	protected var child0: nullable QuadTree[E]
-	protected var child1: nullable QuadTree[E]
-	protected var child2: nullable QuadTree[E]
-	protected var child3: nullable QuadTree[E]
+	protected var child0: nullable QuadTree[E] = null
+	protected var child1: nullable QuadTree[E] = null
+	protected var child2: nullable QuadTree[E] = null
+	protected var child3: nullable QuadTree[E] = null
 
 	# represent the threshold before subdividing the node
-	protected var item_limit = 4
-	protected var parent_node: nullable QuadTree[E]
-
-	# create the quadtree and set the item limit for each node
-	init(limit: Int)
-	do
-		self.item_limit = limit
-	end
+	protected var item_limit: Int
+	protected var parent_node: nullable QuadTree[E] = null
 
 	# create a node, giving him self as a parent. Used to create children nodes
 	init with_parent(limit: Int, parent: QuadTree[E])
@@ -62,10 +56,10 @@ abstract class QuadTree[E: Boxed[Numeric]]
 	end
 
 	redef fun items_overlapping(region :Boxed[Numeric]): SimpleCollection[E] do
-        var res = new Array[E]
-        items_overlapping_in(region,res)
-        return res
-     end  
+		var res = new Array[E]
+		items_overlapping_in(region,res)
+		return res
+	end
 
 	# add the item to the tree, create children if the limit is reached
 	redef fun add(item: E) do if self.is_leaf then self.data.add(item) else add_to_children(item)
@@ -92,7 +86,7 @@ abstract class QuadTree[E: Boxed[Numeric]]
 			else if self.center.y > item.top then
 				self.data.add(item)
 			else if self.center.y < item.bottom then
-					self.data.add(item)
+				self.data.add(item)
 			else
 				self.data.add(item)
 			end
@@ -215,23 +209,16 @@ end
 # the center of the parent node
 class SQuadTree[E: Boxed[Numeric]]
 	super QuadTree[E]
-	
+
 	# the width of the current node of the QuadTree
 	var width: Numeric
 	# the height of the current node of the QuadTree
 	var height: Numeric
 
-	init(l: Int, c: Point[Numeric], w: Numeric, h: Numeric)
-	do
-		self.item_limit = l
-		self.center = c
-		self.width = w
-		self.height = h
-	end
-
 	init with_parent(l: Int, c: Point[Numeric], w: Numeric, h: Numeric, p: QuadTree[E])
 	do
-		init(l, c, w, h)
+		init(l, w, h)
+		center = c
 		self.parent_node = p
 	end
 
