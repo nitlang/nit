@@ -36,6 +36,12 @@ private class IOSPlatform
 	redef fun toolchain(toolcontext, compiler) do return new IOSToolchain(toolcontext, compiler)
 end
 
+private class IosProject
+	super AppProject
+
+	redef fun namespace do return super.to_camel_case
+end
+
 private class IOSToolchain
 	super MakefileToolchain
 
@@ -43,7 +49,7 @@ private class IOSToolchain
 	var ios_project_root: String is noinit
 
 	# `app.nit` project for the current compilation target
-	var app_project = new AppProject(compiler.modelbuilder, compiler.mainmodule) is lazy
+	var app_project = new IosProject(compiler.modelbuilder, compiler.mainmodule) is lazy
 
 	redef fun default_outname do return "{super}.app"
 
