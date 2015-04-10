@@ -45,5 +45,9 @@ do
 	o.output
 end
 
+redef class Sys
+	redef fun output do 'S'.output
+end
+
 0.foo1
 foo2

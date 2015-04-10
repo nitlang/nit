@@ -21,7 +21,7 @@ end
 fun foo do print "foo"
 
 fun call_a_fun import foo `{
-	Object_foo(recv);
+	Sys_foo(recv);
 `}
 
 fun call_a_constructor import A, A.bar `{

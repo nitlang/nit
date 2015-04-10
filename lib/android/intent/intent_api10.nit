@@ -1334,11 +1334,11 @@ redef extern class NativeActivity
 end
 
 # Allows user to get values with enum-like syntax : `intent_action.main`
-protected fun intent_action: Action do return once new Action
+fun intent_action: Action do return once new Action
 # Allows user to get values with enum-like syntax : `intent_category.home`
-protected fun intent_category: Category do return once new Category
+fun intent_category: Category do return once new Category
 # Allows user to get values with enum-like syntax : `intent_flag.activity_brought_to_front`
-protected fun intent_flag: Flag do return once new Flag
+fun intent_flag: Flag do return once new Flag
 
 private class StringCopyArray
 	var collection = new Array[String]

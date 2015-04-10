@@ -162,11 +162,11 @@
 	  std: 0.926
 	  sum: 6
 	cnbp: number of accessible properties (inherited + local)
-	  avg: 6.0
-	  max: C (10)
-	  min: Object (4)
-	  std: 2.268
-	  sum: 42
+	  avg: 3.0
+	  max: C (7)
+	  min: Object (1)
+	  std: 2.36
+	  sum: 24
 	cnba: number of accessible attributes (inherited + local)
 	  avg: 0.0
 	  max: C (2)
@@ -186,11 +186,11 @@
 	  std: 0.535
 	  sum: 2
 	cnbhp: number of inherited properties
-	  avg: 3.0
-	  max: Bool (4)
+	  avg: 0.0
+	  max: Bool (1)
 	  min: Object (0)
-	  std: 1.464
-	  sum: 24
+	  std: 0.926
+	  sum: 6
 
  ## global metrics
 	cnoa: number of ancestor classes
@@ -224,11 +224,11 @@
 	  std: 0.926
 	  sum: 6
 	cnbp: number of accessible properties (inherited + local)
-	  avg: 6.0
-	  max: C (10)
-	  min: Object (4)
-	  std: 2.268
-	  sum: 42
+	  avg: 3.0
+	  max: C (7)
+	  min: Object (1)
+	  std: 2.36
+	  sum: 24
 	cnba: number of accessible attributes (inherited + local)
 	  avg: 0.0
 	  max: C (2)
@@ -248,11 +248,41 @@
 	  std: 0.535
 	  sum: 2
 	cnbhp: number of inherited properties
-	  avg: 3.0
-	  max: Bool (4)
+	  avg: 0.0
+	  max: Bool (1)
 	  min: Object (0)
-	  std: 1.464
-	  sum: 24
+	  std: 0.926
+	  sum: 6
+--- Metrics of refinement usage ---
+Number of modules: 1
+
+Number of classes: 7
+  Number of interface kind: 1 (14.28%)
+  Number of enum kind: 2 (28.57%)
+  Number of class kind: 4 (57.14%)
+
+Number of class definitions: 7
+Number of refined classes: 0 (0.00%)
+Average number of class refinments by classes: 0.00
+Average number of class refinments by refined classes: na
+
+Number of properties: 18
+  Number of MAttribute: 3 (16.66%)
+  Number of MMethod: 15 (83.33%)
+
+Number of property definitions: 20
+Number of redefined properties: 1 (5.55%)
+Average number of property redefinitions by property: 0.11
+Average number of property redefinitions by redefined property: 2.00
+--- Explicit vs. Implicit Self ---
+Total number of self: 5
+Total number of implicit self: 4 (80.00%)
+--- Construction of tables ---
+Number of runtime classes: 6 (excluding interfaces and abstract classes)
+Average number of composing class definition by runtime class: 2.00
+Total size of tables (classes and instances): 23 (not including stuff like info for subtyping or call-next-method)
+Average size of table by runtime class: 3.83
+Values never redefined: 17 (73.91%)
 --- Poset metrics ---
 ## Module importation hierarchy
 Number of nodes: 1
@@ -458,36 +488,6 @@ Distribution of direct smallers
   bivariants: 0 (na%)
   invariants: 0 (na%)
   total: 0
---- Metrics of refinement usage ---
-Number of modules: 1
-
-Number of classes: 7
-  Number of interface kind: 1 (14.28%)
-  Number of enum kind: 2 (28.57%)
-  Number of class kind: 4 (57.14%)
-
-Number of class definitions: 7
-Number of refined classes: 0 (0.00%)
-Average number of class refinments by classes: 0.00
-Average number of class refinments by refined classes: na
-
-Number of properties: 18
-  Number of MAttribute: 3 (16.66%)
-  Number of MMethod: 15 (83.33%)
-
-Number of property definitions: 20
-Number of redefined properties: 1 (5.55%)
-Average number of property redefinitions by property: 0.11
-Average number of property redefinitions by redefined property: 2.00
---- Explicit vs. Implicit Self ---
-Total number of self: 5
-Total number of implicit self: 4 (80.00%)
---- Construction of tables ---
-Number of runtime classes: 6 (excluding interfaces and abstract classes)
-Average number of composing class definition by runtime class: 2.00
-Total size of tables (classes and instances): 38 (not including stuff like info for subtyping or call-next-method)
-Average size of table by runtime class: 6.33
-Values never redefined: 32 (84.21%)
 generating project_hierarchy.dot
 generating module_hierarchy.dot
 
@@ -695,18 +695,14 @@ Statistics of type usage:
   A: 1 (11.11%)
 
 # Mendel metrics
-	large mclasses (threshold: 2.291)
-	   B: 3
-	   C: 3
-	budding mclasses (threshold: 0.693)
-	   B: 0.75
-	   C: 0.75
-	blooming mclasses (threshold: 1.935)
-	   B: 2.25
-	   C: 2.25
-	blooming mclasses (threshold: 1.935)
-	   B: 2.25
-	   C: 2.25
+	large mclasses (threshold: 3.354)
+	   Sys: 4
+	budding mclasses (threshold: 3.51)
+	   Sys: 4.0
+	blooming mclasses (threshold: 12.0)
+	   Sys: 16.0
+	blooming mclasses (threshold: 12.0)
+	   Sys: 16.0
 --- Detection of the usage of covariance static type conformance ---
 -- Total --
 - Kinds of the subtype -
@@ -880,9 +876,9 @@ MMethodDef locally designated (by number of CallSites)
   base_simple3#C#val1: 1 (4.54%)
   ...
   base_simple3#A#init: 1 (4.54%)
-  base_simple3#Object#baz: 1 (4.54%)
-  base_simple3#Object#bar: 1 (4.54%)
-  base_simple3#Object#foo: 1 (4.54%)
+  base_simple3#Sys#baz: 1 (4.54%)
+  base_simple3#Sys#bar: 1 (4.54%)
+  base_simple3#Sys#foo: 1 (4.54%)
   base_simple3#C#init: 1 (4.54%)
 MMethodDef possibly invoked at runtime (by number of CallSites)
  population: 13
@@ -901,9 +897,9 @@ MMethodDef possibly invoked at runtime (by number of CallSites)
   base_simple3#C#val1: 1 (4.54%)
   ...
   base_simple3#A#init: 1 (4.54%)
-  base_simple3#Object#baz: 1 (4.54%)
-  base_simple3#Object#bar: 1 (4.54%)
-  base_simple3#Object#foo: 1 (4.54%)
+  base_simple3#Sys#baz: 1 (4.54%)
+  base_simple3#Sys#bar: 1 (4.54%)
+  base_simple3#Sys#foo: 1 (4.54%)
   base_simple3#C#init: 1 (4.54%)
 class_hierarchy.dot
 classdef_hierarchy.dot

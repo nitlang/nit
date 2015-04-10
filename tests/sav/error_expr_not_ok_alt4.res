@@ -10,8 +10,7 @@ alt/error_expr_not_ok_alt4.nit:43,1--8: Error: Method 'fail' doesn't exists in I
 alt/error_expr_not_ok_alt4.nit:45,7--10: Type error: expected A, got Object
 alt/error_expr_not_ok_alt4.nit:46,1--9: Error: Method 'fail' doesn't exists in Object.
 alt/error_expr_not_ok_alt4.nit:49,7--10: Type error: expected A, got Object
-alt/error_expr_not_ok_alt4.nit:50,1--10: Error: cannot call 'trash', a top-level method, with a receiver.
-alt/error_expr_not_ok_alt4.nit:50,1--10: Error: Incorrect number of parameters. Got 0, expected 1. Signature is (x: A)
+alt/error_expr_not_ok_alt4.nit:50,1--10: Error: Method 'trash' doesn't exists in Object.
 alt/error_expr_not_ok_alt4.nit:60,4--7: Type error: expected Bool, got Int
 alt/error_expr_not_ok_alt4.nit:60,20: Type error: expected A, got Int
 alt/error_expr_not_ok_alt4.nit:62,10--13: Type error: expected Bool, got Int

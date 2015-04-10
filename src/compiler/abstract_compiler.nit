@@ -2521,6 +2521,13 @@ redef class ASelfExpr
 	redef fun expr(v) do return v.frame.arguments.first
 end
 
+redef class AImplicitSelfExpr
+	redef fun expr(v) do
+		if not is_sys then return super
+		return v.new_expr("glob_sys", mtype.as(not null))
+	end
+end
+
 redef class AEscapeExpr
 	redef fun stmt(v) do v.add("goto BREAK_{v.escapemark_name(self.escapemark)};")
 end

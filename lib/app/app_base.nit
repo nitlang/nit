@@ -52,6 +52,6 @@ class App
 	fun window_closing do end
 end
 
-protected fun app: App do return once new App
+fun app: App do return once new App
 app.setup
 app.run

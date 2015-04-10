@@ -492,7 +492,7 @@ in "C Header" `{
 redef class String
 	# returns the md5 digest of the receiver string
 	# algorithm implemented by L. Peter Deutsch <ghost@aladdin.com>
-	fun md5: String import String.to_cstring, NativeString.to_s, String.print `{
+	fun md5: String import String.to_cstring, NativeString.to_s `{
 		md5_state_t state;
 		md5_byte_t digest[16]; /* result */
 		char *hex_output = malloc(33*sizeof(char));

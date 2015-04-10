@@ -75,20 +75,21 @@ redef class ModelBuilder
 				names.add(ptname)
 			end
 
-		else if nclassdef isa ATopClassdef then
+		else if nclassdef isa ATopClassdef and nclassdef.n_propdefs.first.as(AMethPropdef).n_methid.collect_text == "sys" then
+			# Special case to keep `sys` in object.
+			# Needed to keep working bootstrap and a working java FFI together.
+			# TODO: remove once safe to remove
 			name = "Object"
 			nkind = null
 			mkind = interface_kind
 			nvisibility = null
 			mvisibility = public_visibility
-		else if nclassdef isa AMainClassdef then
+		else
 			name = "Sys"
 			nkind = null
 			mkind = concrete_kind
 			nvisibility = null
 			mvisibility = public_visibility
-		else
-			abort
 		end
 
 		var mclass = try_get_mclass_by_name(nclassdef, mmodule, name)
@@ -311,7 +312,13 @@ redef class ModelBuilder
 		if errcount != toolcontext.error_count then return
 
 		# Create all classes
+		# process AStdClassdef before so that non-AStdClassdef classes can be attached to existing ones, if any
 		for nclassdef in nmodule.n_classdefs do
+			if not nclassdef isa AStdClassdef then continue
+			self.build_a_mclass(nmodule, nclassdef)
+		end
+		for nclassdef in nmodule.n_classdefs do
+			if nclassdef isa AStdClassdef then continue
 			self.build_a_mclass(nmodule, nclassdef)
 		end
 
@@ -319,6 +326,11 @@ redef class ModelBuilder
 
 		# Create all classdefs
 		for nclassdef in nmodule.n_classdefs do
+			if not nclassdef isa AStdClassdef then continue
+			self.build_a_mclassdef(nmodule, nclassdef)
+		end
+		for nclassdef in nmodule.n_classdefs do
+			if nclassdef isa AStdClassdef then continue
 			self.build_a_mclassdef(nmodule, nclassdef)
 		end
 

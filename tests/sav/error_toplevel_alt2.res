@@ -1,1 +1,7 @@
-alt/error_toplevel_alt2.nit:35,2--5: Error: self cannot be used in top-level method.
+1
+0
+5
+0
+10
+20
+50
