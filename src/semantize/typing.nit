@@ -545,7 +545,6 @@ end
 redef class FlowContext
 	# Store changes of types because of type evolution
 	private var vars = new HashMap[Variable, nullable MType]
-	private var cache = new HashMap[Variable, nullable Array[nullable MType]]
 
 	# Adapt the variable to a static type
 	# Warning1: do not modify vars directly.
@@ -553,14 +552,10 @@ redef class FlowContext
 	private fun set_var(variable: Variable, mtype: nullable MType)
 	do
 		self.vars[variable] = mtype
-		self.cache.keys.remove(variable)
 	end
 
 	private fun collect_types(variable: Variable): nullable Array[nullable MType]
 	do
-		if cache.has_key(variable) then
-			return cache[variable]
-		end
 		var res: nullable Array[nullable MType] = null
 		if vars.has_key(variable) then
 			var mtype = vars[variable]
@@ -582,7 +577,6 @@ redef class FlowContext
 				end
 			end
 		end
-		cache[variable] = res
 		return res
 	end
 end
