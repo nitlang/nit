@@ -266,9 +266,13 @@ fun NitOmnifunc(findstart, base)
 endfun
 
 " Show doc for the entity under the cursor in the preview window
-fun Nitdoc()
-	" Word under cursor
-	let word = expand("<cword>")
+fun Nitdoc(...)
+	if a:0 == 0 || empty(a:1)
+		" Word under cursor
+		let word = expand("<cword>")
+	else
+		let word = join(a:000, ' ')
+	endif
 
 	" All possible docs (there may be more than one entity with the same name)
 	let docs = []
@@ -350,5 +354,8 @@ endfun
 
 " Activate the omnifunc on Nit files
 autocmd FileType nit set omnifunc=NitOmnifunc
+
+" Define the user command Nitdoc for ease of use
+command -nargs=* Nitdoc call Nitdoc("<args>")
 
 let s:script_dir = fnamemodify(resolve(expand('<sfile>:p')), ':h')
