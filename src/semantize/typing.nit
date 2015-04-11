@@ -239,12 +239,16 @@ private class TypeVisitor
 
 		if not mtype2 isa MNullType then return
 
-		if mtype isa MNullType then return
-
 		# Check of useless null
 		if not check_can_be_null(anode.n_expr, mtype) then return
 
-		mtype = mtype.as_notnull
+		if mtype isa MNullType then
+			# Because of type adaptation, we cannot just stop here
+			# so return use `null` as a bottom type that will be merged easily (cf) `merge_types`
+			mtype = null
+		else
+			mtype = mtype.as_notnull
+		end
 
 		# Check for type adaptation
 		var variable = anode.n_expr.its_variable
