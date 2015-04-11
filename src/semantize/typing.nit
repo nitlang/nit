@@ -1334,6 +1334,8 @@ redef class AArrayExpr
 			end
 		end
 		if mtype == null then
+			# Ensure monotony for type adaptation on loops
+			if self.element_mtype != null then mtypes.add self.element_mtype
 			mtype = v.merge_types(self, mtypes)
 		end
 		if mtype == null or mtype isa MNullType then
