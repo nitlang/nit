@@ -334,6 +334,8 @@ fun Nitdoc(...)
 			silent put = ''
 		endif
 	endfor
+	execute 0
+	delete " the first empty line
 
 	" Set options
 	setlocal buftype=nofile
