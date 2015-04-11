@@ -471,6 +471,9 @@ private class TypeVisitor
 	# Some variables where type-adapted during the visit
 	var dirty = false
 
+	# Some loops had been visited during the visit
+	var has_loop = false
+
 	fun set_variable(node: AExpr, variable: Variable, mtype: nullable MType)
 	do
 		var flow = node.after_flow_context
@@ -629,7 +632,12 @@ redef class AMethPropdef
 			assert variable != null
 			variable.declared_type = mtype
 		end
-		v.visit_stmt(nblock)
+
+		loop
+			v.dirty = false
+			v.visit_stmt(nblock)
+			if not v.has_loop or not v.dirty then break
+		end
 
 		if not nblock.after_flow_context.is_unreachable and msignature.return_mtype != null then
 			# We reach the end of the function without having a return, it is bad
@@ -958,8 +966,8 @@ end
 redef class AWhileExpr
 	redef fun accept_typing(v)
 	do
+		v.has_loop = true
 		v.visit_expr_bool(n_expr)
-
 		v.visit_stmt(n_block)
 		self.is_typed = true
 	end
@@ -968,6 +976,7 @@ end
 redef class ALoopExpr
 	redef fun accept_typing(v)
 	do
+		v.has_loop = true
 		v.visit_stmt(n_block)
 		self.is_typed = true
 	end
@@ -1103,12 +1112,14 @@ redef class AForExpr
 
 	redef fun accept_typing(v)
 	do
+		v.has_loop = true
 		var mtype = v.visit_expr(n_expr)
 		if mtype == null then return
 
 		self.do_type_iterator(v, mtype)
 
 		v.visit_stmt(n_block)
+
 		self.mtype = n_block.mtype
 		self.is_typed = true
 	end
