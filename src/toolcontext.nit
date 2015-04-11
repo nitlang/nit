@@ -54,6 +54,11 @@ class Message
 		return location.as(not null) < other.location.as(not null)
 	end
 
+	redef fun ==(other): Bool do
+		if not other isa Message then return false
+		return location == other.location and tag == other.tag and text == other.text
+	end
+
 	redef fun to_s: String
 	do
 		var l = location
@@ -199,6 +204,7 @@ class ToolContext
 	fun error(l: nullable Location, s: String): Message
 	do
 		var m = new Message(l,null,s)
+		if messages.has(m) then return m
 		if l != null then l.add_message m
 		messages.add m
 		error_count = error_count + 1
@@ -233,6 +239,7 @@ class ToolContext
 		if not opt_warning.value.has(tag) and opt_warn.value == 0 then return null
 		if is_warning_blacklisted(l, tag) then return null
 		var m = new Message(l, tag, text)
+		if messages.has(m) then return null
 		if l != null then l.add_message m
 		messages.add m
 		warning_count = warning_count + 1
@@ -261,6 +268,7 @@ class ToolContext
 		if not opt_warning.value.has(tag) and opt_warn.value <= 1 then return null
 		if is_warning_blacklisted(l, tag) then return null
 		var m = new Message(l, tag, text)
+		if messages.has(m) then return null
 		if l != null then l.add_message m
 		messages.add m
 		warning_count = warning_count + 1
