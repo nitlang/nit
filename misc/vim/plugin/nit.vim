@@ -84,7 +84,7 @@ endfunction
 " Get path to the best metadata file named `name`
 "
 " Returns an empty string if not found.
-fun NitMetadataFile(name)
+fun s:NitMetadataFile(name)
 	" Where are the generated metadata files?
 	if empty($NIT_VIM_DIR)
 		let metadata_dir = $HOME . '/.vim/nit'
@@ -122,7 +122,7 @@ fun NitOmnifuncAddFromFile(base, matches, path)
 	let synopsis_matches = []
 	let doc_matches = []
 
-	let path = NitMetadataFile(a:path)
+	let path = s:NitMetadataFile(a:path)
 	if empty(path)
 		return
 	endif
@@ -134,19 +134,19 @@ fun NitOmnifuncAddFromFile(base, matches, path)
 		" Add?
 		if name == a:base
 			" Exact match
-			call NitOmnifuncAddAMatch(a:matches, words, name)
+			call s:NitOmnifuncAddAMatch(a:matches, words, name)
 		elseif name =~? '^'.a:base
 			" Common-prefix match
-			call NitOmnifuncAddAMatch(prefix_matches, words, name)
+			call s:NitOmnifuncAddAMatch(prefix_matches, words, name)
 		elseif name =~? a:base
 			" Substring match
-			call NitOmnifuncAddAMatch(substring_matches, words, name)
+			call s:NitOmnifuncAddAMatch(substring_matches, words, name)
 		elseif get(words, 2, '') =~? a:base
 			" Match in the synopsis
-			call NitOmnifuncAddAMatch(synopsis_matches, words, name)
+			call s:NitOmnifuncAddAMatch(synopsis_matches, words, name)
 		elseif get(words, 3, '') =~? a:base
 			" Match in the longer doc
-			call NitOmnifuncAddAMatch(synopsis_matches, words, name)
+			call s:NitOmnifuncAddAMatch(synopsis_matches, words, name)
 		endif
 	endfor
 
@@ -158,7 +158,7 @@ fun NitOmnifuncAddFromFile(base, matches, path)
 endfun
 
 " Internal function to search parse the information from a metadata line
-fun NitOmnifuncAddAMatch(matches, words, name)
+fun s:NitOmnifuncAddAMatch(matches, words, name)
 	let pretty = get(a:words, 1, '')
 	let synopsis = get(a:words, 2, '')
 	let desc = get(a:words, 3, '')
@@ -275,7 +275,7 @@ fun Nitdoc()
 
 	" Search in all metadata files
 	for file in ['modules', 'classes', 'properties']
-		let path = NitMetadataFile(file.'.txt')
+		let path = s:NitMetadataFile(file.'.txt')
 		if empty(path)
 			continue
 		endif
