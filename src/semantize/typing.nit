@@ -444,6 +444,8 @@ private class TypeVisitor
 
 	fun get_variable(node: AExpr, variable: Variable): nullable MType
 	do
+		if not variable.is_adapted then return variable.declared_type
+
 		var flow = node.after_flow_context
 		if flow == null then
 			self.error(node, "No context!")
@@ -546,6 +548,10 @@ end
 redef class Variable
 	# The declared type of the variable
 	var declared_type: nullable MType
+
+	# Was the variable type-adapted?
+	# This is used to speedup type retrieval while it remains `false`
+	private var is_adapted = false
 end
 
 redef class FlowContext
@@ -557,9 +563,11 @@ redef class FlowContext
 	# Warning2: sub-flow may have cached a unadapted variable
 	private fun set_var(v: TypeVisitor, variable: Variable, mtype: nullable MType)
 	do
+		if variable.declared_type == mtype and not variable.is_adapted then return
 		if vars.has_key(variable) and vars[variable] == mtype then return
 		self.vars[variable] = mtype
 		v.dirty = true
+		variable.is_adapted = true
 		#node.debug "set {variable} to {mtype or else "X"}"
 	end
 
