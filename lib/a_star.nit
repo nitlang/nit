@@ -147,7 +147,8 @@ class Node
 
 				while frontier_node != self do
 					path.nodes.unshift(frontier_node)
-					frontier_node = frontier_node.best_source.as(not null)
+					frontier_node = frontier_node.best_source
+					assert frontier_node != null
 				end
 
 				return path
