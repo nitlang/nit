@@ -395,7 +395,7 @@ redef class AWhileExpr
 		var after_block = v.current_flow_context
 
 		before_loop.add_loop(after_block)
-		v.merge_continues_to(after_block, self.continue_mark)
+		v.merge_continues_to(before_loop, self.continue_mark)
 
 		v.current_flow_context = after_expr.when_false
 		v.merge_breaks(self.break_mark)
@@ -412,7 +412,7 @@ redef class ALoopExpr
 		var after_block = v.current_flow_context
 
 		before_loop.add_loop(after_block)
-		v.merge_continues_to(after_block, self.continue_mark)
+		v.merge_continues_to(before_loop, self.continue_mark)
 
 		v.make_unreachable_flow
 		v.merge_breaks(self.break_mark)
@@ -431,7 +431,7 @@ redef class AForExpr
 		var after_block = v.current_flow_context
 
 		before_loop.add_loop(after_block)
-		v.merge_continues_to(after_block, self.continue_mark)
+		v.merge_continues_to(before_loop, self.continue_mark)
 
 		v.make_merge_flow(v.current_flow_context, before_loop)
 		v.merge_breaks(self.break_mark)
