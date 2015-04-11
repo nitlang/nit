@@ -276,6 +276,10 @@ fun Nitdoc(...)
 
 	" All possible docs (there may be more than one entity with the same name)
 	let docs = []
+	let prefix_matches = []
+	let substring_matches = []
+	let synopsis_matches = []
+	let doc_matches = []
 
 	" Search in all metadata files
 	for file in ['modules', 'classes', 'properties']
@@ -287,14 +291,30 @@ fun Nitdoc(...)
 		for line in readfile(path)
 			let words = split(line, '#====#', 1)
 			let name = get(words, 0, '')
-			if name =~ '^' . word . '\>'
-				" It fits our word, get long doc
-				let desc = get(words,3,'')
-				let desc = join(split(desc, '#nnnn#', 1), "\n")
-				call add(docs, desc)
+			if name =~ '^'.word.'\>'
+				" Exact match
+				call s:NitdocAdd(docs, words)
+			elseif name =~? '^'.word
+				" Common-prefix match
+				call s:NitdocAdd(prefix_matches, words)
+			elseif name =~? word
+				" Substring match
+				call s:NitdocAdd(substring_matches, words)
+			elseif get(words, 2, '') =~? word
+				" Match in the synopsis
+				call s:NitdocAdd(synopsis_matches, words)
+			elseif get(words, 3, '') =~? word
+				" Match in the longer doc
+				call s:NitdocAdd(doc_matches, words)
 			endif
 		endfor
 	endfor
+
+	" Unite all results in prefered order
+	call extend(docs, sort(prefix_matches))
+	call extend(docs, sort(substring_matches))
+	call extend(docs, sort(synopsis_matches))
+	call extend(docs, sort(doc_matches))
 
 	" Found no doc, give up
 	if empty(docs) || !(join(docs, '') =~ '\w')
@@ -324,6 +344,13 @@ fun Nitdoc(...)
 	" Change back to the source buffer
 	wincmd p
 	redraw!
+endfun
+
+" Internal function to search parse the information from a metadata line
+fun s:NitdocAdd(matches, words)
+	let desc = get(a:words, 3, '')
+	let desc = join(split(desc, '#nnnn#', 1), "\n")
+	call add(a:matches, desc)
 endfun
 
 " Call `git grep` on the word under the cursor
