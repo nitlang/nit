@@ -98,13 +98,15 @@ the environment variable `NIT_VIM_DIR`.
 
 ## Documentation in preview window
 
-You can display the documentation for the entity under the cursor with `:call Nitdoc()`.
-It will use the same metadata files as the omnifunc and the preview window.
+The command `:Nitdoc` searches the documentation for the word under the cursor.
+The results are displayed in the preview window in order of relevance.
+You can search for any word by passing it as an argument, as in `:Nitdoc modulo`.
+The Nitdoc command uses the same metadata files as the omnifunc.
 You may want to map the function to a shortcut by adding the following code to `~/.vimrc`.
 
 ~~~
 " Map displaying Nitdoc to Ctrl-D
-map <C-d> :call Nitdoc()<enter>
+map <C-d> :Nitdoc<enter>
 ~~~
 
 ## Search declarations and usages of the word under the cursor
