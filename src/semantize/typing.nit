@@ -456,7 +456,7 @@ private class TypeVisitor
 			#node.debug("*** START Collected for {variable}")
 			var mtypes = flow.collect_types(variable)
 			#node.debug("**** END Collected for {variable}")
-			if mtypes == null or mtypes.length == 0 then
+			if mtypes.length == 0 then
 				return variable.declared_type
 			else if mtypes.length == 1 then
 				return mtypes.first
@@ -554,29 +554,35 @@ redef class FlowContext
 		self.vars[variable] = mtype
 	end
 
-	private fun collect_types(variable: Variable): nullable Array[nullable MType]
+	# Look in the flow and previous flow and collect all first reachable type adaptation of a local variable
+	private fun collect_types(variable: Variable): Array[nullable MType]
 	do
-		var res: nullable Array[nullable MType] = null
-		if vars.has_key(variable) then
-			var mtype = vars[variable]
-			res = [mtype]
-		else if self.previous.is_empty then
-			# Root flow
-			res = [variable.declared_type]
-		else
-			for flow in self.previous do
-				if flow.is_unreachable then continue
-				var r2 = flow.collect_types(variable)
-				if r2 == null then continue
-				if res == null then
-					res = r2.to_a
-				else
-					for t in r2 do
-						if not res.has(t) then res.add(t)
-					end
+		#node.debug "flow for {variable}"
+		var res = new Array[nullable MType]
+
+		var todo = [self]
+		var seen = new HashSet[FlowContext]
+		while not todo.is_empty do
+			var f = todo.pop
+			if f.is_unreachable then continue
+			if seen.has(f) then continue
+			seen.add f
+
+			if f.vars.has_key(variable) then
+				# Found something. Collect it and do not process further on this path
+				res.add f.vars[variable]
+				#f.node.debug "process {variable}: got {f.vars[variable] or else "X"}"
+			else
+				todo.add_all f.previous
+				todo.add_all f.loops
+				if f.previous.is_empty then
+					# Root flowcontext mean a parameter or something related
+					res.add variable.declared_type
+					#f.node.debug "root process {variable}: got {variable.declared_type or else "X"}"
 				end
 			end
 		end
+		#self.node.debug "##### end flow for {variable}: {res.join(" ")}"
 		return res
 	end
 end
