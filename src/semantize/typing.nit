@@ -252,11 +252,11 @@ private class TypeVisitor
 
 		# One is null (mtype2 see above) the other is not null
 		if anode isa AEqExpr then
-			anode.after_flow_context.when_true.set_var(variable, mtype2)
-			anode.after_flow_context.when_false.set_var(variable, mtype)
+			anode.after_flow_context.when_true.set_var(self, variable, mtype2)
+			anode.after_flow_context.when_false.set_var(self, variable, mtype)
 		else if anode isa ANeExpr then
-			anode.after_flow_context.when_false.set_var(variable, mtype2)
-			anode.after_flow_context.when_true.set_var(variable, mtype)
+			anode.after_flow_context.when_false.set_var(self, variable, mtype2)
+			anode.after_flow_context.when_true.set_var(self, variable, mtype)
 		else
 			abort
 		end
@@ -468,12 +468,15 @@ private class TypeVisitor
 		end
 	end
 
+	# Some variables where type-adapted during the visit
+	var dirty = false
+
 	fun set_variable(node: AExpr, variable: Variable, mtype: nullable MType)
 	do
 		var flow = node.after_flow_context
 		assert flow != null
 
-		flow.set_var(variable, mtype)
+		flow.set_var(self, variable, mtype)
 	end
 
 	fun merge_types(node: ANode, col: Array[nullable MType]): nullable MType
@@ -549,9 +552,12 @@ redef class FlowContext
 	# Adapt the variable to a static type
 	# Warning1: do not modify vars directly.
 	# Warning2: sub-flow may have cached a unadapted variable
-	private fun set_var(variable: Variable, mtype: nullable MType)
+	private fun set_var(v: TypeVisitor, variable: Variable, mtype: nullable MType)
 	do
+		if vars.has_key(variable) and vars[variable] == mtype then return
 		self.vars[variable] = mtype
+		v.dirty = true
+		#node.debug "set {variable} to {mtype or else "X"}"
 	end
 
 	# Look in the flow and previous flow and collect all first reachable type adaptation of a local variable
@@ -1401,7 +1407,7 @@ redef class AIsaExpr
 			#var from = if orig != null then orig.to_s else "invalid"
 			#var to = if mtype != null then mtype.to_s else "invalid"
 			#debug("adapt {variable}: {from} -> {to}")
-			self.after_flow_context.when_true.set_var(variable, mtype)
+			self.after_flow_context.when_true.set_var(v, variable, mtype)
 		end
 
 		self.mtype = v.type_bool(self)
