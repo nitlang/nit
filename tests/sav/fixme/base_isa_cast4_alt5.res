@@ -1,12 +1,1 @@
-1
-2
-3
-4
-4
-5
-6
-6
-7
-7
-8
-8
+alt/base_isa_cast4_alt5.nit:89,1--8: Error: Method 'foo' doesn't exists in A.
