@@ -146,7 +146,7 @@ fun NitOmnifuncAddFromFile(base, matches, path)
 			call s:NitOmnifuncAddAMatch(synopsis_matches, words, name)
 		elseif get(words, 3, '') =~? a:base
 			" Match in the longer doc
-			call s:NitOmnifuncAddAMatch(synopsis_matches, words, name)
+			call s:NitOmnifuncAddAMatch(doc_matches, words, name)
 		endif
 	endfor
 
