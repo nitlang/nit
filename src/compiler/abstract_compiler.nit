@@ -1628,6 +1628,12 @@ abstract class AbstractCompilerVisitor
 	fun stmt(nexpr: nullable AExpr)
 	do
 		if nexpr == null then return
+		if nexpr.mtype == null and not nexpr.is_typed then
+			# Untyped expression.
+			# Might mean dead code
+			# So just return
+			return
+		end
 
 		var narray = nexpr.comprehension
 		if narray != null then
@@ -1647,6 +1653,13 @@ abstract class AbstractCompilerVisitor
 	# `mtype` is the expected return type, pass null if no specific type is expected.
 	fun expr(nexpr: AExpr, mtype: nullable MType): RuntimeVariable
 	do
+		if nexpr.mtype == null then
+			# Untyped expression.
+			# Might mean dead code
+			# so return a placebo result
+			if mtype == null then mtype = compiler.mainmodule.object_type
+			return new_var(mtype)
+		end
 		var old = self.current_node
 		self.current_node = nexpr
 		var res = nexpr.expr(self).as(not null)

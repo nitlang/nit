@@ -74,7 +74,7 @@ redef class AExpr
 	do
 		super
 		if mtype == null and not is_typed then
-			debug "TYPING: untyped expression"
+			#debug "TYPING: untyped expression"
 		end
 	end
 end
