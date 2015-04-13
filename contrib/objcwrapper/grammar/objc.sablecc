@@ -1,0 +1,337 @@
+/* Grammar for Objective-C header files */
+Grammar objc;
+
+Lexer
+    upper = 'A'..'Z';
+    lower = 'a'..'z';
+    letter = upper | lower;
+    digit = '0'..'9';
+
+    comma = ',';
+    lpar = '(';
+    rpar = ')';
+    star = '*';
+
+    string = '"' (Any - '"')* '"';
+    class = upper (letter | '_' | digit)*;
+    id = lower (letter | '_' | digit)*;
+
+    private = '_' (letter | digit)+;
+    num = digit+;
+    macro_name = '__' (letter | '_')+;
+    num_typed = num upper+;
+    hexadecimal = '0x' (letter | digit)+;
+    pointer = star+;
+
+    blank = (' ' | '\t' | '\n')+;
+    comments = ('#' (Any - '\n')*);
+
+Parser
+    Ignored blank, comments;
+
+    prog = lines*;
+
+    lines =
+        {class:} '@class' classes ';' |
+        {protocol:} protocol |
+        {attribute:} attribute |
+        {static:} static |
+        {structure:} structure |
+        {interface:} '@interface' class interface? inheritance? protocols? instance_variables? interface_block* '@end' |
+        {line:} line;
+
+    interface_block =
+        {line:} line |
+        {instance:} instance_declaration;
+
+    line =
+        {library_extern_declaration:} library_extern_declaration |
+        {typedef:} typedef |
+        {extern:} extern |
+        {enum:} 'enum' '{' params '}' attribute? ';';
+
+    typedef =
+        {variable:} 'typedef' 'struct'? declaration ';' |
+        {method:} 'typedef' type method ';' |
+        {structure:} 'typedef' structure |
+        {anonymous:} 'typedef' type anonymous ';';
+
+    instance_declaration =
+        {signature:} signature_block |
+        {property:} property_declaration;
+
+    property_declaration =
+        {property:} optional_method? '@property' property_attribute? property attribute* ';';
+
+    property_attribute =
+        {attribute:} lpar params rpar;
+
+    interface =
+        {interface:} lpar params? rpar;
+
+    library_extern_declaration =
+        {simple:} 'UIKIT_EXTERN' type pointer? 'const'? term attribute? ';' |
+        {method:} 'UIKIT_EXTERN' type method? attribute? ';';
+
+    protocol =
+        {declaration:} '@protocol' type additional_type* ';' |
+        {construction:} '@protocol' type protocols? protocol_block+ '@end';
+
+    additional_type =
+        {type:} comma type;
+
+    protocol_block =
+        {signature:} signature_block |
+        {property:} property_declaration;
+
+    signature_block =
+        {signature:} optional_method? scope signature_return_type? signature+ attribute_list? ';';
+
+    signature_return_type =
+        {return:} lpar type pointer? function_pointer? protocols? rpar;
+
+    optional_method =
+        {required:} '@required' |
+        {optional:} '@optional';
+
+    method =
+        {call:} pointer? term lpar args rpar |
+        {declaration:} pointer? term lpar declarations rpar;
+
+    attribute_list =
+        {attr:} attribute+;
+
+    attribute =
+        {availability:} '__attribute__' lpar lpar 'availability' lpar params rpar rpar rpar |
+        {visibility:} '__attribute__' lpar lpar 'visibility' lpar term rpar rpar rpar |
+        {objc_gc:} '__attribute__' lpar lpar 'objc_gc' lpar term rpar rpar rpar |
+        {attribute_id:} '__attribute__' lpar lpar term rpar rpar |
+        {attribute_method:} '__attribute__' lpar lpar method rpar rpar;
+
+    extern =
+        {method:} 'extern' type method attribute? ';' |
+        {simple:} 'extern' type pointer? 'const'? term attribute? ';';
+
+    static =
+        {method:} 'static' 'inline' type method attribute? ';' |
+        {attr:} 'static' '__inline__' attribute+ type method attribute? ';';
+
+    scope =
+        {class:} '+' |
+        {instance:} '-';
+
+    signature =
+        {named:} [left:]term ':' lpar signature_type rpar attribute? [right:]term |
+        {single:} term |
+        {comma:} comma '...' |
+        {macro:} macro_name;
+
+    signature_type =
+        {anonymous:} type anonymous |
+        {table:} type protocols? '[]' |
+        {pointer:} type pointer |
+        {unsigned:} unsigned pointer |
+        {protocol:} type protocols |
+        {function_pointer:} function_pointer |
+        {normal:} type;
+
+    anonymous =
+        {method:} lpar '^' term? rpar lpar declarations? rpar |
+        {inception:} lpar '^' term? rpar lpar type lpar '^' term? rpar lpar type rpar rpar;
+
+    property =
+        {property:} type protocols? pointer? [left:]term [right:]term? |
+        {anonymous:} type anonymous |
+        {function_pointer:} function_pointer;
+
+    type =
+        {type:} type_annotation? unsigned? data_type;
+
+    type_annotation =
+        {const:} 'const' |
+        {in:} 'in' |
+        {out:} 'out' |
+        {inout:} 'inout' |
+        {bycopy:} 'bycopy' |
+        {byref:} 'byref';
+
+    unsigned =
+        {u:} 'unsigned' |
+        {s:} 'signed';
+
+    data_type =
+        {more:} more_type |
+        {otype:} class;
+
+    more_type =
+        {stype:} specific_type |
+        {ptype:} primitive_type;
+
+    specific_type =
+        {uui:} 'uuid_t' |
+        {i:} 'id' |
+        {b:} '_Bool' |
+        {pth:} 'pthread_mutex_t' |
+        {ds:} 'dispatch_semaphore_t' |
+        {dq:} 'dispatch_queue_t' |
+        {val:} 'va_list' |
+        {identityref:} 'SecIdentityRef' |
+        {trustref:} 'SecTrustRef' |
+        {class:} 'Class' |
+        {protocol:} 'Protocol' |
+        {v:} 'void';
+
+    primitive_type =
+        {ui8:} 'uint8_t' |
+        {ui16:} 'uint16_t' |
+        {ui32:} 'uint32_t' |
+        {ui64:} 'uint64_t' |
+        {i8:} 'int8_t' |
+        {i16:} 'int16_t' |
+        {i32:} 'int32_t' |
+        {i64:} 'int64_t' |
+        {uc:} 'unichar' |
+        {c:} 'char' |
+        {s:} 'short' |
+        {si:} 'short int' |
+        {i:} 'int' |
+        {l:} 'long' |
+        {li:} 'long int' |
+        {ll:} 'long long' |
+        {lli:} 'long long int' |
+        {f:} 'float' |
+        {d:} 'double' |
+        {ld:} 'long double';
+
+    classe =
+        {class:} class |
+        {protocol:} 'Protocol';
+
+    classes =
+        {classes:} classe additional*;
+
+    protocols =
+        {protocols:} '<' classe additional* '>';
+
+    inheritance =
+        {add:} ':' classe additional*;
+
+    additional =
+        {add:} comma classe;
+
+    declarations =
+        {declarations:} declaration additional_declaration*;
+
+    additional_declaration =
+        {add:} comma declaration;
+
+    declaration =
+        {pointer:} type protocols? attribute? pointer? term? '[]'? |
+        {typedef:} type primitive_type |
+        {function_pointer:} function_pointer |
+        {comma:} '...';
+
+    declaration_variable_instance =
+        {unsigned:} type_annotation? unsigned more_type? protocols? attribute? pointer? term '[]'? |
+        {data_type:} type_annotation? data_type protocols? attribute? pointer? term? '[]'?;
+
+    instance_variables =
+        {instance:} '{' instance_variable* '}';
+
+    scope_instance_variable =
+        {package:} '@package' |
+        {public:} '@public' |
+        {private:} '@private' |
+        {protected:} '@protected';
+
+    instance_variable =
+        {scope:} scope_instance_variable |
+        {variable:} attribute? declaration_variable_instance bit_field? additional_variable* ';' |
+        {anonymous:} declaration_variable_instance anonymous ';' |
+        {structure:} structure |
+        {union:} union;
+
+    additional_variable =
+        {add} comma term bit_field?;
+
+    function_pointer =
+        {type:} type pointer? lpar pointer term? rpar lpar declarations rpar;
+
+    union =
+        {name:} 'union' '{' structure_params+ '}' term ';';
+
+    structure =
+        {name:} 'struct' structure_core term ';' |
+        {type:} 'struct' type structure_core term? ';' |
+        {private:} 'struct' private structure_core? term? ';';
+
+    structure_core =
+        {core:} '{' structure_params+ '}';
+
+    structure_params =
+        {value:} declaration bit_field? ';' |
+        {structure:} structure;
+
+    params =
+        {params:} param additional_params*;
+
+    additional_params =
+        {add:} comma param?;
+
+    param =
+        {id:} term |
+        {bitwise:} term '=' bitwise |
+        {term:} term '=' pointer? term+ |
+        {attr:} term attribute |
+        {attrterm:} term attribute '=' term |
+        {attrbitwise:} term attribute '=' bitwise;
+
+    args =
+        {args:} arg additional_arg*;
+
+    additional_arg =
+        {add:} comma arg;
+
+    arg =
+        {num:} num |
+        {macro:} macro_name;
+
+    bitwise =
+        {rterm:} bitwise_operator_not? term bitwise_operator bitwise_operator_not? term |
+        {num:} lpar bitwise_operator_not? term rpar |
+        {term:} lpar bitwise_operator_not? term additional_bitwise+ rpar arithmetic?;
+
+    bitwise_operator =
+        {left_shift:} '<<' |
+        {right_shift:} '>>' |
+        {and:} '&' |
+        {or:} '|' |
+        {xor:} '^';
+
+    bitwise_operator_not =
+        {not:} '~';
+
+    additional_bitwise =
+        {add:} bitwise_operator bitwise_operator_not? term;
+
+    bit_field =
+        {value:} ':' num;
+
+    arithmetic =
+        {add:} '+' num |
+        {minus:} '-' num |
+        {star:} pointer num |
+        {divide:} '/' num;
+
+    term =
+        {num_typed:} '-'? num_typed |
+        {private:} private |
+        {num:} num |
+        {negative:} '-' num |
+        {float:} num '.' num |
+        {string:} string |
+        {hexadecimal:} hexadecimal |
+        {class:} class |
+        {var:} id |
+        {private_table:} private '[' lpar? num rpar? ']' |
+        {table:} id '[' lpar? num rpar? ']';
