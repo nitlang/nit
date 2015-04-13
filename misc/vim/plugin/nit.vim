@@ -318,6 +318,7 @@ fun Nitdoc(...)
 
 	" Found no doc, give up
 	if empty(docs) || !(join(docs, '') =~ '\w')
+		echo 'Nitdoc found nothing for "' . word . '"'
 		return
 	endif
 
