@@ -1807,6 +1807,9 @@ redef class ANewExpr
 		var mtype = v.unanchor_type(self.recvtype.as(not null))
 		var recv: Instance = new MutableInstance(mtype)
 		v.init_instance(recv)
+		var callsite = self.callsite
+		if callsite == null then return recv
+
 		var args = v.varargize(callsite.mpropdef, recv, self.n_args.n_exprs)
 		if args == null then return null
 		var res2 = v.callsite(callsite, args)

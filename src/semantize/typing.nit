@@ -1844,6 +1844,7 @@ redef class ANewExpr
 		end
 
 		self.recvtype = recvtype
+		var kind = recvtype.mclass.kind
 
 		var name: String
 		var nid = self.n_id
@@ -1852,11 +1853,24 @@ redef class ANewExpr
 		else
 			name = "new"
 		end
+		if name == "intern" then
+			if kind != concrete_kind then
+				v.error(self, "Type Error: Cannot instantiate {kind} {recvtype}.")
+				return
+			end
+			if n_args.n_exprs.not_empty then
+				v.error(n_args, "Type Error: the intern constructor expects no arguments.")
+				return
+			end
+			# Our job is done
+			self.mtype = recvtype
+			return
+		end
+
 		var callsite = v.get_method(self, recvtype, name, false)
 		if callsite == null then return
 
 		if not callsite.mproperty.is_new then
-			var kind = recvtype.mclass.kind
 			if kind != concrete_kind then
 				v.error(self, "Type Error: Cannot instantiate {kind} {recvtype}.")
 				return
