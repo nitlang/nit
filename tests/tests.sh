@@ -50,6 +50,7 @@ Usage: $e [options] modulenames
 --outdir    Use a specific output folder (default=out/)
 --compdir   Use a specific temporary compilation folder (default=.nit_compile)
 --node      Run as a node in parallel, will not output context information
+--autosav   Copy the .res files directly in the sav folder overriding existing .res files
 END
 }
 
@@ -234,6 +235,7 @@ function process_result()
 			echo "[*ok*] $outdir/$pattern.res $SAV - but $OLD remains!"
 			echo >>$xml "<error message='`xmlesc "ok $outdir/$pattern.res - but $OLD remains"`'/>"
 			remains="$remains $OLD"
+			test "$autosav" = "true" && rm "$OLD"
 		else
 			echo "[ok] $outdir/$pattern.res $SAV"
 		fi
@@ -243,6 +245,7 @@ function process_result()
 			echo "[*fixme*] $outdir/$pattern.res $FIXME - but $OLD remains!"
 			echo >>$xml "<error message='`xmlesc "ok $outdir/$pattern.res - but $OLD remains"`'/>"
 			remains="$remains $OLD"
+			test "$autosav" = "true" && rm "$OLD"
 		else
 			echo "[fixme] $outdir/$pattern.res $FIXME"
 			echo >>$xml "<skipped/>"
@@ -260,6 +263,7 @@ function process_result()
 		echo >>$xml "]]></system-out>"
 		nok="$nok $pattern"
 		echo "$ii" >> "$ERRLIST"
+		test "$autosav" = "true" && cp "$outdir/$pattern.res" "$SOSO"
 	elif [ -n "$SOSOF" ]; then
 		echo "[======= fixme soso $outdir/$pattern.res $SOSOF =======]"
 		echo >>$xml "<error message='`xmlesc "soso $outdir/$pattern.res $SOSO"`'/>"
@@ -268,6 +272,7 @@ function process_result()
 		echo >>$xml "]]></system-out>"
 		nok="$nok $pattern"
 		echo "$ii" >> "$ERRLIST"
+		test "$autosav" = "true" && cp "$outdir/$pattern.res" && "$SOSO"
 	elif [ -n "$NSAV" ]; then
 		echo "[======= fail $outdir/$pattern.res $NSAV =======]"
 		echo >>$xml "<error message='`xmlesc "fail $outdir/$pattern.res $NSAV"`'/>"
@@ -276,6 +281,7 @@ function process_result()
 		echo >>$xml "]]></system-out>"
 		nok="$nok $pattern"
 		echo "$ii" >> "$ERRLIST"
+		test "$autosav" = "true" && cp "$outdir/$pattern.res" "$NSAV"
 	elif [ -n "$NFIXME" ]; then
 		echo "[======= changed $outdir/$pattern.res $NFIXME ======]"
 		echo >>$xml "<error message='`xmlesc "changed $outdir/$pattern.res $NFIXME"`'/>"
@@ -284,6 +290,7 @@ function process_result()
 		echo >>$xml "]]></system-out>"
 		nok="$nok $pattern"
 		echo "$ii" >> "$ERRLIST"
+		test "$autosav" = "true" && cp "$outdir/$pattern.res" "$NFIXME"
 	elif [ -s "$outdir/$pattern.res" ]; then
 		echo "[=== no sav ===] $outdir/$pattern.res is not empty"
 		echo >>$xml "<error message='no sav and not empty'/>"
@@ -292,6 +299,7 @@ function process_result()
 		echo >>$xml "]]></system-out>"
 		nos="$nos $pattern"
 		echo "$ii" >> "$ERRLIST"
+		test "$autosav" = "true" && cp "$outdir/$pattern.res" "sav/"
 	else
 		# no sav but empty res
 		echo "[0k] $outdir/$pattern.res is empty"
@@ -364,6 +372,7 @@ find_nitc()
 
 verbose=false
 isnode=false
+autosav=false
 stop=false
 engine=nitc
 noskip=
@@ -378,6 +387,7 @@ while [ $stop = false ]; do
 		--outdir) outdir="$2"; shift; shift;;
 		--compdir) compdir="$2"; shift; shift;;
 		--node) isnode=true; shift;;
+		--autosav) autosav=true; shift;;
 		*) stop=true
 	esac
 done
