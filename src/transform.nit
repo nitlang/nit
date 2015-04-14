@@ -26,7 +26,7 @@ redef class ToolContext
 	var transform_phase: Phase = new TransformPhase(self, [typing_phase, auto_super_init_phase])
 
 	# --no-shortcut-range
-	var opt_no_shortcut_range: OptionBool = new OptionBool("Always insantiate a range and its iterator on 'for' loops", "--no-shortcut-range")
+	var opt_no_shortcut_range: OptionBool = new OptionBool("Always instantiate a range and its iterator on 'for' loops", "--no-shortcut-range")
 
 	redef init
 	do
