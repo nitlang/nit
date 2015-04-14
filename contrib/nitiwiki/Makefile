@@ -4,6 +4,7 @@ nitiwiki:
 	mkdir -p bin
 	../../bin/nitc src/nitiwiki.nit -o bin/nitiwiki
 
+check: tests
 tests: nitiwiki
 	cd tests; make
 

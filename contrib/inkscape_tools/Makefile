@@ -4,6 +4,7 @@ bins:
 	mkdir -p bin
 	../../bin/nitc --dir bin src/svg_to_png_and_nit.nit src/svg_to_icons.nit
 
+check: tests
 tests: test-dino test-app
 
 test-app: bin/svg_to_png_and_nit
