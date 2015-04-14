@@ -14,3 +14,5 @@
 
 # Game and multimedia framework for Nit
 module gamnit
+
+import display
