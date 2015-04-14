@@ -39,10 +39,9 @@ private class ParallelizationPhase
 			toolcontext.error(nmethdef.location, "Syntax error: only a method can be threaded.")
 			return
 		end
-		if nmethdef.n_signature.n_params.length != 0 then
-			toolcontext.error(nmethdef.location, "Syntax error: parametrized method not supported yet.")
-			return
-		end
+
+		#TODO: check for self calls
+
 		if nmethdef.n_signature.n_type != null then
 			toolcontext.error(nmethdef.location, "Syntax error: method with a return value not supported yet.")
 			return
@@ -66,11 +65,24 @@ private class ParallelizationPhase
 			classname += nmethdef.n_methid.as(AIdMethid).n_id.text
 		end
 
-		# Create a string corresponding to the threaded class
-		var s ="""
+
+		var params = new Array[String]
+		# case if the method has parameters
+		if nmethdef.n_signature.n_params.not_empty then
+			for param in nmethdef.n_signature.n_params do
+				params.add("""
+var {{{param.n_id.text}}} : {{{param.n_type.n_id.text}}}
+
+""")
+			end
+		end
+
+		# String corresponding to the generated class
+		var s="""
 class {{{classname}}}
 	super Thread
 
+	{{{params.join("\n")}}}
 	redef fun main do
 	end
 end
@@ -95,11 +107,24 @@ end
 		assert nullreturn isa AExpr
 		mainfun.n_block.as(ABlockExpr).n_expr.add(nullreturn)
 
+
 		# Create new body for the annotated fun
-		var s_newbody ="""
+		var s_newbody : String
+		if nmethdef.n_signature.n_params.not_empty then
+			var init_params = new Array[String]
+			for param in nmethdef.n_signature.n_params do
+				init_params.add(param.n_id.text)
+			end
+			s_newbody ="""
+var thread = new {{{classname}}}({{{init_params.join(",")}}})
+thread.start
+"""
+		else
+			s_newbody = """
 var thread = new {{{classname}}}
 thread.start
 """
+		end
 
 		var newbody = toolcontext.parse_something(s_newbody)
 		nmethdef.n_block = newbody.as(ABlockExpr)
