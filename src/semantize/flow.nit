@@ -78,7 +78,7 @@ private class FlowVisitor
 	fun printflow
 	do
 		var file = new FileWriter.open("flow.dot")
-		file.write("digraph \{\n")
+		file.write("digraph \{\nnode[shape=box];")
 		for f in flows do
 			var s = ""
 			if f.node isa AExpr then
@@ -86,13 +86,14 @@ private class FlowVisitor
 			end
 			file.write "F{f.object_id} [label=\"{f.object_id}\\n{f.node.location}\\n{f.node.class_name}\\n{f.name}{s}\"];\n"
 			for p in f.previous do
-				file.write "F{p.object_id} -> F{f.object_id};\n"
+				s = ""
+				if f.when_true == p then s = "[label=TRUE, style=dotted]"
+				if f.when_false == p then s = "[label=FALSE, style=dotted]"
+				if f.when_true == p and f.when_false == p then s = "[label=TRUE_FALSE, style=dotted]"
+				file.write "F{p.object_id} -> F{f.object_id}{s};\n"
 			end
-			if f.when_true != f then
-				file.write "F{f.object_id} -> F{f.when_true.object_id}[label=TRUE, style=dotted];\n"
-			end
-			if f.when_false != f then
-				file.write "F{f.object_id} -> F{f.when_false.object_id}[label=FALSE,style=dotted];\n"
+			for p in f.loops do
+				file.write "F{p.object_id} -> F{f.object_id}[label=LOOP, style=dashed, constraint=false];\n"
 			end
 		end
 		file.write("\}\n")
@@ -395,7 +396,7 @@ redef class AWhileExpr
 		var after_block = v.current_flow_context
 
 		before_loop.add_loop(after_block)
-		v.merge_continues_to(after_block, self.continue_mark)
+		v.merge_continues_to(before_loop, self.continue_mark)
 
 		v.current_flow_context = after_expr.when_false
 		v.merge_breaks(self.break_mark)
@@ -412,7 +413,7 @@ redef class ALoopExpr
 		var after_block = v.current_flow_context
 
 		before_loop.add_loop(after_block)
-		v.merge_continues_to(after_block, self.continue_mark)
+		v.merge_continues_to(before_loop, self.continue_mark)
 
 		v.make_unreachable_flow
 		v.merge_breaks(self.break_mark)
@@ -431,7 +432,7 @@ redef class AForExpr
 		var after_block = v.current_flow_context
 
 		before_loop.add_loop(after_block)
-		v.merge_continues_to(after_block, self.continue_mark)
+		v.merge_continues_to(before_loop, self.continue_mark)
 
 		v.make_merge_flow(v.current_flow_context, before_loop)
 		v.merge_breaks(self.break_mark)

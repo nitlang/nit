@@ -239,12 +239,16 @@ private class TypeVisitor
 
 		if not mtype2 isa MNullType then return
 
-		if mtype isa MNullType then return
-
 		# Check of useless null
 		if not check_can_be_null(anode.n_expr, mtype) then return
 
-		mtype = mtype.as_notnull
+		if mtype isa MNullType then
+			# Because of type adaptation, we cannot just stop here
+			# so return use `null` as a bottom type that will be merged easily (cf) `merge_types`
+			mtype = null
+		else
+			mtype = mtype.as_notnull
+		end
 
 		# Check for type adaptation
 		var variable = anode.n_expr.its_variable
@@ -252,11 +256,11 @@ private class TypeVisitor
 
 		# One is null (mtype2 see above) the other is not null
 		if anode isa AEqExpr then
-			anode.after_flow_context.when_true.set_var(variable, mtype2)
-			anode.after_flow_context.when_false.set_var(variable, mtype)
+			anode.after_flow_context.when_true.set_var(self, variable, mtype2)
+			anode.after_flow_context.when_false.set_var(self, variable, mtype)
 		else if anode isa ANeExpr then
-			anode.after_flow_context.when_false.set_var(variable, mtype2)
-			anode.after_flow_context.when_true.set_var(variable, mtype)
+			anode.after_flow_context.when_false.set_var(self, variable, mtype2)
+			anode.after_flow_context.when_true.set_var(self, variable, mtype)
 		else
 			abort
 		end
@@ -444,6 +448,8 @@ private class TypeVisitor
 
 	fun get_variable(node: AExpr, variable: Variable): nullable MType
 	do
+		if not variable.is_adapted then return variable.declared_type
+
 		var flow = node.after_flow_context
 		if flow == null then
 			self.error(node, "No context!")
@@ -456,7 +462,7 @@ private class TypeVisitor
 			#node.debug("*** START Collected for {variable}")
 			var mtypes = flow.collect_types(variable)
 			#node.debug("**** END Collected for {variable}")
-			if mtypes == null or mtypes.length == 0 then
+			if mtypes.length == 0 then
 				return variable.declared_type
 			else if mtypes.length == 1 then
 				return mtypes.first
@@ -468,12 +474,18 @@ private class TypeVisitor
 		end
 	end
 
+	# Some variables where type-adapted during the visit
+	var dirty = false
+
+	# Some loops had been visited during the visit
+	var has_loop = false
+
 	fun set_variable(node: AExpr, variable: Variable, mtype: nullable MType)
 	do
 		var flow = node.after_flow_context
 		assert flow != null
 
-		flow.set_var(variable, mtype)
+		flow.set_var(self, variable, mtype)
 	end
 
 	fun merge_types(node: ANode, col: Array[nullable MType]): nullable MType
@@ -540,49 +552,58 @@ end
 redef class Variable
 	# The declared type of the variable
 	var declared_type: nullable MType
+
+	# Was the variable type-adapted?
+	# This is used to speedup type retrieval while it remains `false`
+	private var is_adapted = false
 end
 
 redef class FlowContext
 	# Store changes of types because of type evolution
 	private var vars = new HashMap[Variable, nullable MType]
-	private var cache = new HashMap[Variable, nullable Array[nullable MType]]
 
 	# Adapt the variable to a static type
 	# Warning1: do not modify vars directly.
 	# Warning2: sub-flow may have cached a unadapted variable
-	private fun set_var(variable: Variable, mtype: nullable MType)
+	private fun set_var(v: TypeVisitor, variable: Variable, mtype: nullable MType)
 	do
+		if variable.declared_type == mtype and not variable.is_adapted then return
+		if vars.has_key(variable) and vars[variable] == mtype then return
 		self.vars[variable] = mtype
-		self.cache.keys.remove(variable)
+		v.dirty = true
+		variable.is_adapted = true
+		#node.debug "set {variable} to {mtype or else "X"}"
 	end
 
-	private fun collect_types(variable: Variable): nullable Array[nullable MType]
+	# Look in the flow and previous flow and collect all first reachable type adaptation of a local variable
+	private fun collect_types(variable: Variable): Array[nullable MType]
 	do
-		if cache.has_key(variable) then
-			return cache[variable]
-		end
-		var res: nullable Array[nullable MType] = null
-		if vars.has_key(variable) then
-			var mtype = vars[variable]
-			res = [mtype]
-		else if self.previous.is_empty then
-			# Root flow
-			res = [variable.declared_type]
-		else
-			for flow in self.previous do
-				if flow.is_unreachable then continue
-				var r2 = flow.collect_types(variable)
-				if r2 == null then continue
-				if res == null then
-					res = r2.to_a
-				else
-					for t in r2 do
-						if not res.has(t) then res.add(t)
-					end
+		#node.debug "flow for {variable}"
+		var res = new Array[nullable MType]
+
+		var todo = [self]
+		var seen = new HashSet[FlowContext]
+		while not todo.is_empty do
+			var f = todo.pop
+			if f.is_unreachable then continue
+			if seen.has(f) then continue
+			seen.add f
+
+			if f.vars.has_key(variable) then
+				# Found something. Collect it and do not process further on this path
+				res.add f.vars[variable]
+				#f.node.debug "process {variable}: got {f.vars[variable] or else "X"}"
+			else
+				todo.add_all f.previous
+				todo.add_all f.loops
+				if f.previous.is_empty then
+					# Root flowcontext mean a parameter or something related
+					res.add variable.declared_type
+					#f.node.debug "root process {variable}: got {variable.declared_type or else "X"}"
 				end
 			end
 		end
-		cache[variable] = res
+		#self.node.debug "##### end flow for {variable}: {res.join(" ")}"
 		return res
 	end
 end
@@ -623,7 +644,12 @@ redef class AMethPropdef
 			assert variable != null
 			variable.declared_type = mtype
 		end
-		v.visit_stmt(nblock)
+
+		loop
+			v.dirty = false
+			v.visit_stmt(nblock)
+			if not v.has_loop or not v.dirty then break
+		end
 
 		if not nblock.after_flow_context.is_unreachable and msignature.return_mtype != null then
 			# We reach the end of the function without having a return, it is bad
@@ -952,8 +978,8 @@ end
 redef class AWhileExpr
 	redef fun accept_typing(v)
 	do
+		v.has_loop = true
 		v.visit_expr_bool(n_expr)
-
 		v.visit_stmt(n_block)
 		self.is_typed = true
 	end
@@ -962,6 +988,7 @@ end
 redef class ALoopExpr
 	redef fun accept_typing(v)
 	do
+		v.has_loop = true
 		v.visit_stmt(n_block)
 		self.is_typed = true
 	end
@@ -1097,12 +1124,14 @@ redef class AForExpr
 
 	redef fun accept_typing(v)
 	do
+		v.has_loop = true
 		var mtype = v.visit_expr(n_expr)
 		if mtype == null then return
 
 		self.do_type_iterator(v, mtype)
 
 		v.visit_stmt(n_block)
+
 		self.mtype = n_block.mtype
 		self.is_typed = true
 	end
@@ -1317,6 +1346,8 @@ redef class AArrayExpr
 			end
 		end
 		if mtype == null then
+			# Ensure monotony for type adaptation on loops
+			if self.element_mtype != null then mtypes.add self.element_mtype
 			mtype = v.merge_types(self, mtypes)
 		end
 		if mtype == null or mtype isa MNullType then
@@ -1401,7 +1432,7 @@ redef class AIsaExpr
 			#var from = if orig != null then orig.to_s else "invalid"
 			#var to = if mtype != null then mtype.to_s else "invalid"
 			#debug("adapt {variable}: {from} -> {to}")
-			self.after_flow_context.when_true.set_var(variable, mtype)
+			self.after_flow_context.when_true.set_var(v, variable, mtype)
 		end
 
 		self.mtype = v.type_bool(self)

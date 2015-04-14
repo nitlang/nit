@@ -209,6 +209,7 @@ class BacktrackSolver[S: Object, A]
 
 				problem.backtrack(state, a)
 				node = node.parent
+				assert node != null
 				continue
 			end
 
