@@ -179,8 +179,9 @@ interface Collection[E]
 	end
 end
 
-# Instances of the Iterator class generates a series of elements, one at a time.
-# They are mainly used with collections.
+# Iterators generate a series of elements, one at a time.
+#
+# They are mainly used with collections and obtained from `Collection::iterator`.
 interface Iterator[E]
 	# The current item.
 	# Require `is_ok`.
