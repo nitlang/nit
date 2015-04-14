@@ -84,7 +84,7 @@ endfunction
 " Get path to the best metadata file named `name`
 "
 " Returns an empty string if not found.
-fun NitMetadataFile(name)
+fun s:NitMetadataFile(name)
 	" Where are the generated metadata files?
 	if empty($NIT_VIM_DIR)
 		let metadata_dir = $HOME . '/.vim/nit'
@@ -122,7 +122,7 @@ fun NitOmnifuncAddFromFile(base, matches, path)
 	let synopsis_matches = []
 	let doc_matches = []
 
-	let path = NitMetadataFile(a:path)
+	let path = s:NitMetadataFile(a:path)
 	if empty(path)
 		return
 	endif
@@ -134,19 +134,19 @@ fun NitOmnifuncAddFromFile(base, matches, path)
 		" Add?
 		if name == a:base
 			" Exact match
-			call NitOmnifuncAddAMatch(a:matches, words, name)
+			call s:NitOmnifuncAddAMatch(a:matches, words, name)
 		elseif name =~? '^'.a:base
 			" Common-prefix match
-			call NitOmnifuncAddAMatch(prefix_matches, words, name)
+			call s:NitOmnifuncAddAMatch(prefix_matches, words, name)
 		elseif name =~? a:base
 			" Substring match
-			call NitOmnifuncAddAMatch(substring_matches, words, name)
+			call s:NitOmnifuncAddAMatch(substring_matches, words, name)
 		elseif get(words, 2, '') =~? a:base
 			" Match in the synopsis
-			call NitOmnifuncAddAMatch(synopsis_matches, words, name)
+			call s:NitOmnifuncAddAMatch(synopsis_matches, words, name)
 		elseif get(words, 3, '') =~? a:base
 			" Match in the longer doc
-			call NitOmnifuncAddAMatch(synopsis_matches, words, name)
+			call s:NitOmnifuncAddAMatch(doc_matches, words, name)
 		endif
 	endfor
 
@@ -158,7 +158,7 @@ fun NitOmnifuncAddFromFile(base, matches, path)
 endfun
 
 " Internal function to search parse the information from a metadata line
-fun NitOmnifuncAddAMatch(matches, words, name)
+fun s:NitOmnifuncAddAMatch(matches, words, name)
 	let pretty = get(a:words, 1, '')
 	let synopsis = get(a:words, 2, '')
 	let desc = get(a:words, 3, '')
@@ -266,16 +266,24 @@ fun NitOmnifunc(findstart, base)
 endfun
 
 " Show doc for the entity under the cursor in the preview window
-fun Nitdoc()
-	" Word under cursor
-	let word = expand("<cword>")
+fun Nitdoc(...)
+	if a:0 == 0 || empty(a:1)
+		" Word under cursor
+		let word = expand("<cword>")
+	else
+		let word = join(a:000, ' ')
+	endif
 
 	" All possible docs (there may be more than one entity with the same name)
 	let docs = []
+	let prefix_matches = []
+	let substring_matches = []
+	let synopsis_matches = []
+	let doc_matches = []
 
 	" Search in all metadata files
 	for file in ['modules', 'classes', 'properties']
-		let path = NitMetadataFile(file.'.txt')
+		let path = s:NitMetadataFile(file.'.txt')
 		if empty(path)
 			continue
 		endif
@@ -283,17 +291,34 @@ fun Nitdoc()
 		for line in readfile(path)
 			let words = split(line, '#====#', 1)
 			let name = get(words, 0, '')
-			if name =~ '^' . word . '\>'
-				" It fits our word, get long doc
-				let desc = get(words,3,'')
-				let desc = join(split(desc, '#nnnn#', 1), "\n")
-				call add(docs, desc)
+			if name =~ '^'.word.'\>'
+				" Exact match
+				call s:NitdocAdd(docs, words)
+			elseif name =~? '^'.word
+				" Common-prefix match
+				call s:NitdocAdd(prefix_matches, words)
+			elseif name =~? word
+				" Substring match
+				call s:NitdocAdd(substring_matches, words)
+			elseif get(words, 2, '') =~? word
+				" Match in the synopsis
+				call s:NitdocAdd(synopsis_matches, words)
+			elseif get(words, 3, '') =~? word
+				" Match in the longer doc
+				call s:NitdocAdd(doc_matches, words)
 			endif
 		endfor
 	endfor
 
+	" Unite all results in prefered order
+	call extend(docs, sort(prefix_matches))
+	call extend(docs, sort(substring_matches))
+	call extend(docs, sort(synopsis_matches))
+	call extend(docs, sort(doc_matches))
+
 	" Found no doc, give up
 	if empty(docs) || !(join(docs, '') =~ '\w')
+		echo 'Nitdoc found nothing for "' . word . '"'
 		return
 	endif
 
@@ -310,6 +335,8 @@ fun Nitdoc()
 			silent put = ''
 		endif
 	endfor
+	execute 0
+	delete " the first empty line
 
 	" Set options
 	setlocal buftype=nofile
@@ -320,6 +347,13 @@ fun Nitdoc()
 	" Change back to the source buffer
 	wincmd p
 	redraw!
+endfun
+
+" Internal function to search parse the information from a metadata line
+fun s:NitdocAdd(matches, words)
+	let desc = get(a:words, 3, '')
+	let desc = join(split(desc, '#nnnn#', 1), "\n")
+	call add(a:matches, desc)
 endfun
 
 " Call `git grep` on the word under the cursor
@@ -350,5 +384,8 @@ endfun
 
 " Activate the omnifunc on Nit files
 autocmd FileType nit set omnifunc=NitOmnifunc
+
+" Define the user command Nitdoc for ease of use
+command -nargs=* Nitdoc call Nitdoc("<args>")
 
 let s:script_dir = fnamemodify(resolve(expand('<sfile>:p')), ':h')
