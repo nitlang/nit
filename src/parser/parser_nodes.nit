@@ -1879,6 +1879,10 @@ end
 # A binary operation on a method
 abstract class ABinopExpr
 	super ASendExpr
+
+	# The operator
+	var n_op: Token is writable, noinit
+
 	# The second operand of the operation
 	# Note: the receiver (`n_expr`) is the first operand
 	var n_expr2: AExpr is writable, noinit
@@ -1895,6 +1899,9 @@ abstract class ABinBoolExpr
 
 	# The first boolean operand
 	var n_expr: AExpr is writable, noinit
+
+	# The operator
+	var n_op: Token is writable, noinit
 
 	# The second boolean operand
 	var n_expr2: AExpr is writable, noinit
@@ -1913,6 +1920,9 @@ end
 # A `or else` expression
 class AOrElseExpr
 	super ABinBoolExpr
+
+	# The `else` keyword
+	var n_kwelse: TKwelse is writable, noinit
 end
 
 # A `implies` expression
@@ -1977,6 +1987,9 @@ class AIsaExpr
 
 	# The expression to check
 	var n_expr: AExpr is writable, noinit
+
+	# The `isa` keyword
+	var n_kwisa: TKwisa is writable, noinit
 
 	# The destination type to check to
 	var n_type: AType is writable, noinit

@@ -501,10 +501,10 @@ expr~nopar~nobra {-> expr}
 
 expr_and~nopar~nobra {-> expr}
 	= expr_not~nopar~nobra {-> expr_not~nopar~nobra.expr}
-	| {:or} expr_and~nopar~nobra :kwor :no expr_not~nopar~nobra
-	| {:and} expr_and~nopar~nobra :kwand :no expr_not~nopar~nobra
-	| {:or_else} expr_and~nopar~nobra :kwor :kwelse :no expr_not~nopar~nobra
-	| {:implies} expr_and~nopar~nobra :kwimplies :no expr_not~nopar~nobra
+	| {:or} expr_and~nopar~nobra kwor :no expr_not~nopar~nobra
+	| {:and} expr_and~nopar~nobra kwand :no expr_not~nopar~nobra
+	| {:or_else} expr_and~nopar~nobra kwor kwelse :no expr_not~nopar~nobra
+	| {:implies} expr_and~nopar~nobra kwimplies :no expr_not~nopar~nobra
 	;
 
 expr_not~nopar~nobra {-> expr}
@@ -514,34 +514,34 @@ expr_not~nopar~nobra {-> expr}
 
 expr_eq~nopar~nobra {-> expr}
 	= expr_add~nopar~nobra {-> expr_add~nopar~nobra.expr}
-	| {:eq} expr_add~nopar~nobra :eq :no [expr2]:expr_add~nopar~nobra
-	| {:ne} expr_add~nopar~nobra :ne :no [expr2]:expr_add~nopar~nobra
-	| {:lt} expr_add~nopar~nobra :lt :no [expr2]:expr_add~nopar~nobra
-	| {:le} expr_add~nopar~nobra :le :no [expr2]:expr_add~nopar~nobra
-	| {:ll} expr_eq~nopar~nobra :ll :no [expr2]:expr_add~nopar~nobra
-	| {:gt} expr_add~nopar~nobra :gt :no [expr2]:expr_add~nopar~nobra
-	| {:ge} expr_add~nopar~nobra :ge :no [expr2]:expr_add~nopar~nobra
-	| {:gg} expr_eq~nopar~nobra :gg :no [expr2]:expr_add~nopar~nobra
-	| {:starship} expr_add~nopar~nobra :starship :no [expr2]:expr_add~nopar~nobra
-	| {:isa} expr_add~nopar~nobra :kwisa :no type~nobra
+	| {:eq} expr_add~nopar~nobra eq :no [expr2]:expr_add~nopar~nobra
+	| {:ne} expr_add~nopar~nobra ne :no [expr2]:expr_add~nopar~nobra
+	| {:lt} expr_add~nopar~nobra lt :no [expr2]:expr_add~nopar~nobra
+	| {:le} expr_add~nopar~nobra le :no [expr2]:expr_add~nopar~nobra
+	| {:ll} expr_eq~nopar~nobra ll :no [expr2]:expr_add~nopar~nobra
+	| {:gt} expr_add~nopar~nobra gt :no [expr2]:expr_add~nopar~nobra
+	| {:ge} expr_add~nopar~nobra ge :no [expr2]:expr_add~nopar~nobra
+	| {:gg} expr_eq~nopar~nobra gg :no [expr2]:expr_add~nopar~nobra
+	| {:starship} expr_add~nopar~nobra starship :no [expr2]:expr_add~nopar~nobra
+	| {:isa} expr_add~nopar~nobra kwisa :no type~nobra
 	;
 
 expr_add~nopar~nobra {-> expr}
 	=  expr_mul~nopar~nobra {-> expr_mul~nopar~nobra.expr}
-	| {:plus} expr_add~nopar~nobra :plus :no [expr2]:expr_mul~nopar~nobra
-	| {:minus} expr_add~nopar~nobra :minus :no [expr2]:expr_mul~nopar~nobra
+	| {:plus} expr_add~nopar~nobra plus :no [expr2]:expr_mul~nopar~nobra
+	| {:minus} expr_add~nopar~nobra minus :no [expr2]:expr_mul~nopar~nobra
 	;
 
 expr_mul~nopar~nobra {-> expr}
 	= expr_pow~nopar~nobra {-> expr_pow~nopar~nobra.expr}
-	| {:star} expr_mul~nopar~nobra :star :no [expr2]:expr_pow~nopar~nobra
-	| {:slash} expr_mul~nopar~nobra :slash :no [expr2]:expr_pow~nopar~nobra
-	| {:percent} expr_mul~nopar~nobra :percent :no [expr2]:expr_pow~nopar~nobra
+	| {:star} expr_mul~nopar~nobra star :no [expr2]:expr_pow~nopar~nobra
+	| {:slash} expr_mul~nopar~nobra slash :no [expr2]:expr_pow~nopar~nobra
+	| {:percent} expr_mul~nopar~nobra percent :no [expr2]:expr_pow~nopar~nobra
 	;
 
 expr_pow~nopar~nobra {-> expr}
 	= expr_minus~nopar~nobra {-> expr_minus~nopar~nobra.expr}
-	| {:starstar} expr_minus~nopar~nobra :starstar :no [expr2]:expr_pow~nopar~nobra
+	| {:starstar} expr_minus~nopar~nobra starstar :no [expr2]:expr_pow~nopar~nobra
 	;
 
 expr_minus~nopar~nobra {-> expr}
@@ -862,27 +862,27 @@ expr	= {block} expr* kwend?
 	| {once} kwonce expr 
 	| {send} expr 
 	| {binop} expr [expr2]:expr 
-	| {or} expr [expr2]:expr 
-	| {and} expr [expr2]:expr 
-	| {or_else} expr [expr2]:expr
-	| {implies} expr [expr2]:expr
-	| {not} kwnot expr 
-	| {eq} expr [expr2]:expr 
-	| {ne} expr [expr2]:expr 
-	| {lt} expr [expr2]:expr 
-	| {le} expr [expr2]:expr 
-	| {ll} expr [expr2]:expr
-	| {gt} expr [expr2]:expr 
-	| {ge} expr [expr2]:expr 
-	| {gg} expr [expr2]:expr
-	| {isa} expr type 
-	| {plus} expr [expr2]:expr 
-	| {minus} expr [expr2]:expr 
-	| {starship} expr [expr2]:expr 
-	| {star} expr [expr2]:expr 
-	| {starstar} expr [expr2]:expr
-	| {slash} expr [expr2]:expr 
-	| {percent} expr [expr2]:expr 
+	| {or} expr [op]:kwor [expr2]:expr
+	| {and} expr [op]:kwand [expr2]:expr
+	| {or_else} expr [op]:kwor kwelse [expr2]:expr
+	| {implies} expr [op]:kwimplies [expr2]:expr
+	| {not} kwnot expr
+	| {eq} expr [op]:eq [expr2]:expr
+	| {ne} expr [op]:ne [expr2]:expr
+	| {lt} expr [op]:lt [expr2]:expr
+	| {le} expr [op]:le [expr2]:expr
+	| {ll} expr [op]:ll [expr2]:expr
+	| {gt} expr [op]:gt [expr2]:expr
+	| {ge} expr [op]:ge [expr2]:expr
+	| {gg} expr [op]:gg [expr2]:expr
+	| {isa} expr kwisa type
+	| {plus} expr [op]:plus [expr2]:expr
+	| {minus} expr [op]:minus [expr2]:expr
+	| {starship} expr [op]:starship [expr2]:expr
+	| {star} expr [op]:star [expr2]:expr
+	| {starstar} expr [op]:starstar [expr2]:expr
+	| {slash} expr [op]:slash [expr2]:expr
+	| {percent} expr [op]:percent [expr2]:expr
 	| {uminus} minus expr 
 	| {uplus} plus expr
 	| {new} kwnew type id? [args]:exprs
