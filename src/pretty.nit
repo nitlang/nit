@@ -2015,66 +2015,7 @@ redef class ABinopExpr
 
 	redef fun bin_expr1 do return n_expr
 	redef fun bin_expr2 do return n_expr2
-end
-
-redef class AEqExpr
-	redef fun bin_op do return "=="
-end
-
-redef class AGeExpr
-	redef fun bin_op do return ">="
-end
-
-redef class AGgExpr
-	redef fun bin_op do return ">>"
-end
-
-redef class AGtExpr
-	redef fun bin_op do return ">"
-end
-
-redef class ALeExpr
-	redef fun bin_op do return "<="
-end
-
-redef class ALlExpr
-	redef fun bin_op do return "<<"
-end
-
-redef class ALtExpr
-	redef fun bin_op do return "<"
-end
-
-redef class AMinusExpr
-	redef fun bin_op do return "-"
-end
-
-redef class ANeExpr
-	redef fun bin_op do return "!="
-end
-
-redef class APercentExpr
-	redef fun bin_op do return "%"
-end
-
-redef class APlusExpr
-	redef fun bin_op do return "+"
-end
-
-redef class ASlashExpr
-	redef fun bin_op do return "/"
-end
-
-redef class AStarExpr
-	redef fun bin_op do return "*"
-end
-
-redef class AStarstarExpr
-	redef fun bin_op do return "**"
-end
-
-redef class AStarshipExpr
-	redef fun bin_op do return "<=>"
+	redef fun bin_op do return operator
 end
 
 redef class AIsaExpr
@@ -2102,6 +2043,13 @@ redef class AOrElseExpr
 end
 
 # Syntax
+
+redef class AUplusExpr
+	redef fun accept_pretty_printer(v) do
+		v.consume "+"
+		v.visit n_expr
+	end
+end
 
 redef class AUminusExpr
 	redef fun accept_pretty_printer(v) do
