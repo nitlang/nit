@@ -2053,6 +2053,9 @@ redef class AMethPropdef
 			else if pname == "unary -" then
 				v.ret(v.new_expr("-{arguments[0]}", ret.as(not null)))
 				return true
+			else if pname == "unary +" then
+				v.ret(arguments[0])
+				return true
 			else if pname == "*" then
 				v.ret(v.new_expr("{arguments[0]} * {arguments[1]}", ret.as(not null)))
 				return true
@@ -2163,6 +2166,9 @@ redef class AMethPropdef
 				return true
 			else if pname == "unary -" then
 				v.ret(v.new_expr("-{arguments[0]}", ret.as(not null)))
+				return true
+			else if pname == "unary +" then
+				v.ret(arguments[0])
 				return true
 			else if pname == "succ" then
 				v.ret(v.new_expr("{arguments[0]}+1", ret.as(not null)))

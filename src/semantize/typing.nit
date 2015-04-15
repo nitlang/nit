@@ -1638,6 +1638,11 @@ redef class APercentExpr
 	redef fun property_name do return "%"
 end
 
+redef class AUplusExpr
+	redef fun property_name do return "unary +"
+	redef fun compute_raw_arguments do return new Array[AExpr]
+end
+
 redef class AUminusExpr
 	redef fun property_name do return "unary -"
 	redef fun compute_raw_arguments do return new Array[AExpr]

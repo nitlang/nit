@@ -790,6 +790,9 @@ redef class AMethPropdef
 			name = amethodid.collect_text
 			name_node = amethodid
 
+			if name == "+" and self.n_signature.n_params.length == 0 then
+				name = "unary +"
+			end
 			if name == "-" and self.n_signature.n_params.length == 0 then
 				name = "unary -"
 			end
