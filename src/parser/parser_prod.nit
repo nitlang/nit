@@ -3236,11 +3236,14 @@ end
 redef class AOrExpr
 	init init_aorexpr (
 		n_expr: nullable AExpr,
+		n_op: nullable TKwor,
 		n_expr2: nullable AExpr
 	)
 	do
 		_n_expr = n_expr.as(not null)
 		n_expr.parent = self
+		_n_op = n_op.as(not null)
+		n_op.parent = self
 		_n_expr2 = n_expr2.as(not null)
 		n_expr2.parent = self
 	end
@@ -3249,6 +3252,10 @@ redef class AOrExpr
 	do
 		if _n_expr == old_child then
 			n_expr = new_child.as(AExpr)
+			return
+		end
+		if _n_op == old_child then
+			n_op = new_child.as(TKwor)
 			return
 		end
 		if _n_expr2 == old_child then
@@ -3262,6 +3269,11 @@ redef class AOrExpr
 		_n_expr = node
 		node.parent = self
 	end
+	redef fun n_op=(node)
+	do
+		_n_op = node
+		node.parent = self
+	end
 	redef fun n_expr2=(node)
 	do
 		_n_expr2 = node
@@ -3272,17 +3284,21 @@ redef class AOrExpr
 	redef fun visit_all(v: Visitor)
 	do
 		v.enter_visit(_n_expr)
+		v.enter_visit(_n_op)
 		v.enter_visit(_n_expr2)
 	end
 end
 redef class AAndExpr
 	init init_aandexpr (
 		n_expr: nullable AExpr,
+		n_op: nullable TKwand,
 		n_expr2: nullable AExpr
 	)
 	do
 		_n_expr = n_expr.as(not null)
 		n_expr.parent = self
+		_n_op = n_op.as(not null)
+		n_op.parent = self
 		_n_expr2 = n_expr2.as(not null)
 		n_expr2.parent = self
 	end
@@ -3291,6 +3307,10 @@ redef class AAndExpr
 	do
 		if _n_expr == old_child then
 			n_expr = new_child.as(AExpr)
+			return
+		end
+		if _n_op == old_child then
+			n_op = new_child.as(TKwand)
 			return
 		end
 		if _n_expr2 == old_child then
@@ -3304,6 +3324,11 @@ redef class AAndExpr
 		_n_expr = node
 		node.parent = self
 	end
+	redef fun n_op=(node)
+	do
+		_n_op = node
+		node.parent = self
+	end
 	redef fun n_expr2=(node)
 	do
 		_n_expr2 = node
@@ -3314,17 +3339,24 @@ redef class AAndExpr
 	redef fun visit_all(v: Visitor)
 	do
 		v.enter_visit(_n_expr)
+		v.enter_visit(_n_op)
 		v.enter_visit(_n_expr2)
 	end
 end
 redef class AOrElseExpr
 	init init_aorelseexpr (
 		n_expr: nullable AExpr,
+		n_op: nullable TKwor,
+		n_kwelse: nullable TKwelse,
 		n_expr2: nullable AExpr
 	)
 	do
 		_n_expr = n_expr.as(not null)
 		n_expr.parent = self
+		_n_op = n_op.as(not null)
+		n_op.parent = self
+		_n_kwelse = n_kwelse.as(not null)
+		n_kwelse.parent = self
 		_n_expr2 = n_expr2.as(not null)
 		n_expr2.parent = self
 	end
@@ -3333,6 +3365,14 @@ redef class AOrElseExpr
 	do
 		if _n_expr == old_child then
 			n_expr = new_child.as(AExpr)
+			return
+		end
+		if _n_op == old_child then
+			n_op = new_child.as(TKwor)
+			return
+		end
+		if _n_kwelse == old_child then
+			n_kwelse = new_child.as(TKwelse)
 			return
 		end
 		if _n_expr2 == old_child then
@@ -3346,6 +3386,16 @@ redef class AOrElseExpr
 		_n_expr = node
 		node.parent = self
 	end
+	redef fun n_op=(node)
+	do
+		_n_op = node
+		node.parent = self
+	end
+	redef fun n_kwelse=(node)
+	do
+		_n_kwelse = node
+		node.parent = self
+	end
 	redef fun n_expr2=(node)
 	do
 		_n_expr2 = node
@@ -3356,17 +3406,22 @@ redef class AOrElseExpr
 	redef fun visit_all(v: Visitor)
 	do
 		v.enter_visit(_n_expr)
+		v.enter_visit(_n_op)
+		v.enter_visit(_n_kwelse)
 		v.enter_visit(_n_expr2)
 	end
 end
 redef class AImpliesExpr
 	init init_aimpliesexpr (
 		n_expr: nullable AExpr,
+		n_op: nullable TKwimplies,
 		n_expr2: nullable AExpr
 	)
 	do
 		_n_expr = n_expr.as(not null)
 		n_expr.parent = self
+		_n_op = n_op.as(not null)
+		n_op.parent = self
 		_n_expr2 = n_expr2.as(not null)
 		n_expr2.parent = self
 	end
@@ -3375,6 +3430,10 @@ redef class AImpliesExpr
 	do
 		if _n_expr == old_child then
 			n_expr = new_child.as(AExpr)
+			return
+		end
+		if _n_op == old_child then
+			n_op = new_child.as(TKwimplies)
 			return
 		end
 		if _n_expr2 == old_child then
@@ -3388,6 +3447,11 @@ redef class AImpliesExpr
 		_n_expr = node
 		node.parent = self
 	end
+	redef fun n_op=(node)
+	do
+		_n_op = node
+		node.parent = self
+	end
 	redef fun n_expr2=(node)
 	do
 		_n_expr2 = node
@@ -3398,6 +3462,7 @@ redef class AImpliesExpr
 	redef fun visit_all(v: Visitor)
 	do
 		v.enter_visit(_n_expr)
+		v.enter_visit(_n_op)
 		v.enter_visit(_n_expr2)
 	end
 end
@@ -3446,11 +3511,14 @@ end
 redef class AEqExpr
 	init init_aeqexpr (
 		n_expr: nullable AExpr,
+		n_op: nullable TEq,
 		n_expr2: nullable AExpr
 	)
 	do
 		_n_expr = n_expr.as(not null)
 		n_expr.parent = self
+		_n_op = n_op.as(not null)
+		n_op.parent = self
 		_n_expr2 = n_expr2.as(not null)
 		n_expr2.parent = self
 	end
@@ -3459,6 +3527,10 @@ redef class AEqExpr
 	do
 		if _n_expr == old_child then
 			n_expr = new_child.as(AExpr)
+			return
+		end
+		if _n_op == old_child then
+			n_op = new_child.as(TEq)
 			return
 		end
 		if _n_expr2 == old_child then
@@ -3472,6 +3544,11 @@ redef class AEqExpr
 		_n_expr = node
 		node.parent = self
 	end
+	redef fun n_op=(node)
+	do
+		_n_op = node
+		node.parent = self
+	end
 	redef fun n_expr2=(node)
 	do
 		_n_expr2 = node
@@ -3482,17 +3559,21 @@ redef class AEqExpr
 	redef fun visit_all(v: Visitor)
 	do
 		v.enter_visit(_n_expr)
+		v.enter_visit(_n_op)
 		v.enter_visit(_n_expr2)
 	end
 end
 redef class ANeExpr
 	init init_aneexpr (
 		n_expr: nullable AExpr,
+		n_op: nullable TNe,
 		n_expr2: nullable AExpr
 	)
 	do
 		_n_expr = n_expr.as(not null)
 		n_expr.parent = self
+		_n_op = n_op.as(not null)
+		n_op.parent = self
 		_n_expr2 = n_expr2.as(not null)
 		n_expr2.parent = self
 	end
@@ -3501,6 +3582,10 @@ redef class ANeExpr
 	do
 		if _n_expr == old_child then
 			n_expr = new_child.as(AExpr)
+			return
+		end
+		if _n_op == old_child then
+			n_op = new_child.as(TNe)
 			return
 		end
 		if _n_expr2 == old_child then
@@ -3514,6 +3599,11 @@ redef class ANeExpr
 		_n_expr = node
 		node.parent = self
 	end
+	redef fun n_op=(node)
+	do
+		_n_op = node
+		node.parent = self
+	end
 	redef fun n_expr2=(node)
 	do
 		_n_expr2 = node
@@ -3524,17 +3614,21 @@ redef class ANeExpr
 	redef fun visit_all(v: Visitor)
 	do
 		v.enter_visit(_n_expr)
+		v.enter_visit(_n_op)
 		v.enter_visit(_n_expr2)
 	end
 end
 redef class ALtExpr
 	init init_altexpr (
 		n_expr: nullable AExpr,
+		n_op: nullable TLt,
 		n_expr2: nullable AExpr
 	)
 	do
 		_n_expr = n_expr.as(not null)
 		n_expr.parent = self
+		_n_op = n_op.as(not null)
+		n_op.parent = self
 		_n_expr2 = n_expr2.as(not null)
 		n_expr2.parent = self
 	end
@@ -3543,6 +3637,10 @@ redef class ALtExpr
 	do
 		if _n_expr == old_child then
 			n_expr = new_child.as(AExpr)
+			return
+		end
+		if _n_op == old_child then
+			n_op = new_child.as(TLt)
 			return
 		end
 		if _n_expr2 == old_child then
@@ -3556,6 +3654,11 @@ redef class ALtExpr
 		_n_expr = node
 		node.parent = self
 	end
+	redef fun n_op=(node)
+	do
+		_n_op = node
+		node.parent = self
+	end
 	redef fun n_expr2=(node)
 	do
 		_n_expr2 = node
@@ -3566,17 +3669,21 @@ redef class ALtExpr
 	redef fun visit_all(v: Visitor)
 	do
 		v.enter_visit(_n_expr)
+		v.enter_visit(_n_op)
 		v.enter_visit(_n_expr2)
 	end
 end
 redef class ALeExpr
 	init init_aleexpr (
 		n_expr: nullable AExpr,
+		n_op: nullable TLe,
 		n_expr2: nullable AExpr
 	)
 	do
 		_n_expr = n_expr.as(not null)
 		n_expr.parent = self
+		_n_op = n_op.as(not null)
+		n_op.parent = self
 		_n_expr2 = n_expr2.as(not null)
 		n_expr2.parent = self
 	end
@@ -3585,6 +3692,10 @@ redef class ALeExpr
 	do
 		if _n_expr == old_child then
 			n_expr = new_child.as(AExpr)
+			return
+		end
+		if _n_op == old_child then
+			n_op = new_child.as(TLe)
 			return
 		end
 		if _n_expr2 == old_child then
@@ -3598,6 +3709,11 @@ redef class ALeExpr
 		_n_expr = node
 		node.parent = self
 	end
+	redef fun n_op=(node)
+	do
+		_n_op = node
+		node.parent = self
+	end
 	redef fun n_expr2=(node)
 	do
 		_n_expr2 = node
@@ -3608,17 +3724,21 @@ redef class ALeExpr
 	redef fun visit_all(v: Visitor)
 	do
 		v.enter_visit(_n_expr)
+		v.enter_visit(_n_op)
 		v.enter_visit(_n_expr2)
 	end
 end
 redef class ALlExpr
 	init init_allexpr (
 		n_expr: nullable AExpr,
+		n_op: nullable TLl,
 		n_expr2: nullable AExpr
 	)
 	do
 		_n_expr = n_expr.as(not null)
 		n_expr.parent = self
+		_n_op = n_op.as(not null)
+		n_op.parent = self
 		_n_expr2 = n_expr2.as(not null)
 		n_expr2.parent = self
 	end
@@ -3627,6 +3747,10 @@ redef class ALlExpr
 	do
 		if _n_expr == old_child then
 			n_expr = new_child.as(AExpr)
+			return
+		end
+		if _n_op == old_child then
+			n_op = new_child.as(TLl)
 			return
 		end
 		if _n_expr2 == old_child then
@@ -3640,6 +3764,11 @@ redef class ALlExpr
 		_n_expr = node
 		node.parent = self
 	end
+	redef fun n_op=(node)
+	do
+		_n_op = node
+		node.parent = self
+	end
 	redef fun n_expr2=(node)
 	do
 		_n_expr2 = node
@@ -3650,17 +3779,21 @@ redef class ALlExpr
 	redef fun visit_all(v: Visitor)
 	do
 		v.enter_visit(_n_expr)
+		v.enter_visit(_n_op)
 		v.enter_visit(_n_expr2)
 	end
 end
 redef class AGtExpr
 	init init_agtexpr (
 		n_expr: nullable AExpr,
+		n_op: nullable TGt,
 		n_expr2: nullable AExpr
 	)
 	do
 		_n_expr = n_expr.as(not null)
 		n_expr.parent = self
+		_n_op = n_op.as(not null)
+		n_op.parent = self
 		_n_expr2 = n_expr2.as(not null)
 		n_expr2.parent = self
 	end
@@ -3669,6 +3802,10 @@ redef class AGtExpr
 	do
 		if _n_expr == old_child then
 			n_expr = new_child.as(AExpr)
+			return
+		end
+		if _n_op == old_child then
+			n_op = new_child.as(TGt)
 			return
 		end
 		if _n_expr2 == old_child then
@@ -3682,6 +3819,11 @@ redef class AGtExpr
 		_n_expr = node
 		node.parent = self
 	end
+	redef fun n_op=(node)
+	do
+		_n_op = node
+		node.parent = self
+	end
 	redef fun n_expr2=(node)
 	do
 		_n_expr2 = node
@@ -3692,17 +3834,21 @@ redef class AGtExpr
 	redef fun visit_all(v: Visitor)
 	do
 		v.enter_visit(_n_expr)
+		v.enter_visit(_n_op)
 		v.enter_visit(_n_expr2)
 	end
 end
 redef class AGeExpr
 	init init_ageexpr (
 		n_expr: nullable AExpr,
+		n_op: nullable TGe,
 		n_expr2: nullable AExpr
 	)
 	do
 		_n_expr = n_expr.as(not null)
 		n_expr.parent = self
+		_n_op = n_op.as(not null)
+		n_op.parent = self
 		_n_expr2 = n_expr2.as(not null)
 		n_expr2.parent = self
 	end
@@ -3711,6 +3857,10 @@ redef class AGeExpr
 	do
 		if _n_expr == old_child then
 			n_expr = new_child.as(AExpr)
+			return
+		end
+		if _n_op == old_child then
+			n_op = new_child.as(TGe)
 			return
 		end
 		if _n_expr2 == old_child then
@@ -3724,6 +3874,11 @@ redef class AGeExpr
 		_n_expr = node
 		node.parent = self
 	end
+	redef fun n_op=(node)
+	do
+		_n_op = node
+		node.parent = self
+	end
 	redef fun n_expr2=(node)
 	do
 		_n_expr2 = node
@@ -3734,17 +3889,21 @@ redef class AGeExpr
 	redef fun visit_all(v: Visitor)
 	do
 		v.enter_visit(_n_expr)
+		v.enter_visit(_n_op)
 		v.enter_visit(_n_expr2)
 	end
 end
 redef class AGgExpr
 	init init_aggexpr (
 		n_expr: nullable AExpr,
+		n_op: nullable TGg,
 		n_expr2: nullable AExpr
 	)
 	do
 		_n_expr = n_expr.as(not null)
 		n_expr.parent = self
+		_n_op = n_op.as(not null)
+		n_op.parent = self
 		_n_expr2 = n_expr2.as(not null)
 		n_expr2.parent = self
 	end
@@ -3753,6 +3912,10 @@ redef class AGgExpr
 	do
 		if _n_expr == old_child then
 			n_expr = new_child.as(AExpr)
+			return
+		end
+		if _n_op == old_child then
+			n_op = new_child.as(TGg)
 			return
 		end
 		if _n_expr2 == old_child then
@@ -3766,6 +3929,11 @@ redef class AGgExpr
 		_n_expr = node
 		node.parent = self
 	end
+	redef fun n_op=(node)
+	do
+		_n_op = node
+		node.parent = self
+	end
 	redef fun n_expr2=(node)
 	do
 		_n_expr2 = node
@@ -3776,17 +3944,21 @@ redef class AGgExpr
 	redef fun visit_all(v: Visitor)
 	do
 		v.enter_visit(_n_expr)
+		v.enter_visit(_n_op)
 		v.enter_visit(_n_expr2)
 	end
 end
 redef class AIsaExpr
 	init init_aisaexpr (
 		n_expr: nullable AExpr,
+		n_kwisa: nullable TKwisa,
 		n_type: nullable AType
 	)
 	do
 		_n_expr = n_expr.as(not null)
 		n_expr.parent = self
+		_n_kwisa = n_kwisa.as(not null)
+		n_kwisa.parent = self
 		_n_type = n_type.as(not null)
 		n_type.parent = self
 	end
@@ -3795,6 +3967,10 @@ redef class AIsaExpr
 	do
 		if _n_expr == old_child then
 			n_expr = new_child.as(AExpr)
+			return
+		end
+		if _n_kwisa == old_child then
+			n_kwisa = new_child.as(TKwisa)
 			return
 		end
 		if _n_type == old_child then
@@ -3808,6 +3984,11 @@ redef class AIsaExpr
 		_n_expr = node
 		node.parent = self
 	end
+	redef fun n_kwisa=(node)
+	do
+		_n_kwisa = node
+		node.parent = self
+	end
 	redef fun n_type=(node)
 	do
 		_n_type = node
@@ -3818,17 +3999,21 @@ redef class AIsaExpr
 	redef fun visit_all(v: Visitor)
 	do
 		v.enter_visit(_n_expr)
+		v.enter_visit(_n_kwisa)
 		v.enter_visit(_n_type)
 	end
 end
 redef class APlusExpr
 	init init_aplusexpr (
 		n_expr: nullable AExpr,
+		n_op: nullable TPlus,
 		n_expr2: nullable AExpr
 	)
 	do
 		_n_expr = n_expr.as(not null)
 		n_expr.parent = self
+		_n_op = n_op.as(not null)
+		n_op.parent = self
 		_n_expr2 = n_expr2.as(not null)
 		n_expr2.parent = self
 	end
@@ -3837,6 +4022,10 @@ redef class APlusExpr
 	do
 		if _n_expr == old_child then
 			n_expr = new_child.as(AExpr)
+			return
+		end
+		if _n_op == old_child then
+			n_op = new_child.as(TPlus)
 			return
 		end
 		if _n_expr2 == old_child then
@@ -3850,6 +4039,11 @@ redef class APlusExpr
 		_n_expr = node
 		node.parent = self
 	end
+	redef fun n_op=(node)
+	do
+		_n_op = node
+		node.parent = self
+	end
 	redef fun n_expr2=(node)
 	do
 		_n_expr2 = node
@@ -3860,17 +4054,21 @@ redef class APlusExpr
 	redef fun visit_all(v: Visitor)
 	do
 		v.enter_visit(_n_expr)
+		v.enter_visit(_n_op)
 		v.enter_visit(_n_expr2)
 	end
 end
 redef class AMinusExpr
 	init init_aminusexpr (
 		n_expr: nullable AExpr,
+		n_op: nullable TMinus,
 		n_expr2: nullable AExpr
 	)
 	do
 		_n_expr = n_expr.as(not null)
 		n_expr.parent = self
+		_n_op = n_op.as(not null)
+		n_op.parent = self
 		_n_expr2 = n_expr2.as(not null)
 		n_expr2.parent = self
 	end
@@ -3879,6 +4077,10 @@ redef class AMinusExpr
 	do
 		if _n_expr == old_child then
 			n_expr = new_child.as(AExpr)
+			return
+		end
+		if _n_op == old_child then
+			n_op = new_child.as(TMinus)
 			return
 		end
 		if _n_expr2 == old_child then
@@ -3892,6 +4094,11 @@ redef class AMinusExpr
 		_n_expr = node
 		node.parent = self
 	end
+	redef fun n_op=(node)
+	do
+		_n_op = node
+		node.parent = self
+	end
 	redef fun n_expr2=(node)
 	do
 		_n_expr2 = node
@@ -3902,17 +4109,21 @@ redef class AMinusExpr
 	redef fun visit_all(v: Visitor)
 	do
 		v.enter_visit(_n_expr)
+		v.enter_visit(_n_op)
 		v.enter_visit(_n_expr2)
 	end
 end
 redef class AStarshipExpr
 	init init_astarshipexpr (
 		n_expr: nullable AExpr,
+		n_op: nullable TStarship,
 		n_expr2: nullable AExpr
 	)
 	do
 		_n_expr = n_expr.as(not null)
 		n_expr.parent = self
+		_n_op = n_op.as(not null)
+		n_op.parent = self
 		_n_expr2 = n_expr2.as(not null)
 		n_expr2.parent = self
 	end
@@ -3921,6 +4132,10 @@ redef class AStarshipExpr
 	do
 		if _n_expr == old_child then
 			n_expr = new_child.as(AExpr)
+			return
+		end
+		if _n_op == old_child then
+			n_op = new_child.as(TStarship)
 			return
 		end
 		if _n_expr2 == old_child then
@@ -3934,6 +4149,11 @@ redef class AStarshipExpr
 		_n_expr = node
 		node.parent = self
 	end
+	redef fun n_op=(node)
+	do
+		_n_op = node
+		node.parent = self
+	end
 	redef fun n_expr2=(node)
 	do
 		_n_expr2 = node
@@ -3944,17 +4164,21 @@ redef class AStarshipExpr
 	redef fun visit_all(v: Visitor)
 	do
 		v.enter_visit(_n_expr)
+		v.enter_visit(_n_op)
 		v.enter_visit(_n_expr2)
 	end
 end
 redef class AStarExpr
 	init init_astarexpr (
 		n_expr: nullable AExpr,
+		n_op: nullable TStar,
 		n_expr2: nullable AExpr
 	)
 	do
 		_n_expr = n_expr.as(not null)
 		n_expr.parent = self
+		_n_op = n_op.as(not null)
+		n_op.parent = self
 		_n_expr2 = n_expr2.as(not null)
 		n_expr2.parent = self
 	end
@@ -3963,6 +4187,10 @@ redef class AStarExpr
 	do
 		if _n_expr == old_child then
 			n_expr = new_child.as(AExpr)
+			return
+		end
+		if _n_op == old_child then
+			n_op = new_child.as(TStar)
 			return
 		end
 		if _n_expr2 == old_child then
@@ -3976,6 +4204,11 @@ redef class AStarExpr
 		_n_expr = node
 		node.parent = self
 	end
+	redef fun n_op=(node)
+	do
+		_n_op = node
+		node.parent = self
+	end
 	redef fun n_expr2=(node)
 	do
 		_n_expr2 = node
@@ -3986,17 +4219,21 @@ redef class AStarExpr
 	redef fun visit_all(v: Visitor)
 	do
 		v.enter_visit(_n_expr)
+		v.enter_visit(_n_op)
 		v.enter_visit(_n_expr2)
 	end
 end
 redef class AStarstarExpr
 	init init_astarstarexpr (
 		n_expr: nullable AExpr,
+		n_op: nullable TStarstar,
 		n_expr2: nullable AExpr
 	)
 	do
 		_n_expr = n_expr.as(not null)
 		n_expr.parent = self
+		_n_op = n_op.as(not null)
+		n_op.parent = self
 		_n_expr2 = n_expr2.as(not null)
 		n_expr2.parent = self
 	end
@@ -4005,6 +4242,10 @@ redef class AStarstarExpr
 	do
 		if _n_expr == old_child then
 			n_expr = new_child.as(AExpr)
+			return
+		end
+		if _n_op == old_child then
+			n_op = new_child.as(TStarstar)
 			return
 		end
 		if _n_expr2 == old_child then
@@ -4018,6 +4259,11 @@ redef class AStarstarExpr
 		_n_expr = node
 		node.parent = self
 	end
+	redef fun n_op=(node)
+	do
+		_n_op = node
+		node.parent = self
+	end
 	redef fun n_expr2=(node)
 	do
 		_n_expr2 = node
@@ -4028,17 +4274,21 @@ redef class AStarstarExpr
 	redef fun visit_all(v: Visitor)
 	do
 		v.enter_visit(_n_expr)
+		v.enter_visit(_n_op)
 		v.enter_visit(_n_expr2)
 	end
 end
 redef class ASlashExpr
 	init init_aslashexpr (
 		n_expr: nullable AExpr,
+		n_op: nullable TSlash,
 		n_expr2: nullable AExpr
 	)
 	do
 		_n_expr = n_expr.as(not null)
 		n_expr.parent = self
+		_n_op = n_op.as(not null)
+		n_op.parent = self
 		_n_expr2 = n_expr2.as(not null)
 		n_expr2.parent = self
 	end
@@ -4047,6 +4297,10 @@ redef class ASlashExpr
 	do
 		if _n_expr == old_child then
 			n_expr = new_child.as(AExpr)
+			return
+		end
+		if _n_op == old_child then
+			n_op = new_child.as(TSlash)
 			return
 		end
 		if _n_expr2 == old_child then
@@ -4060,6 +4314,11 @@ redef class ASlashExpr
 		_n_expr = node
 		node.parent = self
 	end
+	redef fun n_op=(node)
+	do
+		_n_op = node
+		node.parent = self
+	end
 	redef fun n_expr2=(node)
 	do
 		_n_expr2 = node
@@ -4070,17 +4329,21 @@ redef class ASlashExpr
 	redef fun visit_all(v: Visitor)
 	do
 		v.enter_visit(_n_expr)
+		v.enter_visit(_n_op)
 		v.enter_visit(_n_expr2)
 	end
 end
 redef class APercentExpr
 	init init_apercentexpr (
 		n_expr: nullable AExpr,
+		n_op: nullable TPercent,
 		n_expr2: nullable AExpr
 	)
 	do
 		_n_expr = n_expr.as(not null)
 		n_expr.parent = self
+		_n_op = n_op.as(not null)
+		n_op.parent = self
 		_n_expr2 = n_expr2.as(not null)
 		n_expr2.parent = self
 	end
@@ -4089,6 +4352,10 @@ redef class APercentExpr
 	do
 		if _n_expr == old_child then
 			n_expr = new_child.as(AExpr)
+			return
+		end
+		if _n_op == old_child then
+			n_op = new_child.as(TPercent)
 			return
 		end
 		if _n_expr2 == old_child then
@@ -4102,6 +4369,11 @@ redef class APercentExpr
 		_n_expr = node
 		node.parent = self
 	end
+	redef fun n_op=(node)
+	do
+		_n_op = node
+		node.parent = self
+	end
 	redef fun n_expr2=(node)
 	do
 		_n_expr2 = node
@@ -4112,6 +4384,7 @@ redef class APercentExpr
 	redef fun visit_all(v: Visitor)
 	do
 		v.enter_visit(_n_expr)
+		v.enter_visit(_n_op)
 		v.enter_visit(_n_expr2)
 	end
 end
@@ -4154,6 +4427,48 @@ redef class AUminusExpr
 	redef fun visit_all(v: Visitor)
 	do
 		v.enter_visit(_n_minus)
+		v.enter_visit(_n_expr)
+	end
+end
+redef class AUplusExpr
+	init init_auplusexpr (
+		n_plus: nullable TPlus,
+		n_expr: nullable AExpr
+	)
+	do
+		_n_plus = n_plus.as(not null)
+		n_plus.parent = self
+		_n_expr = n_expr.as(not null)
+		n_expr.parent = self
+	end
+
+	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
+	do
+		if _n_plus == old_child then
+			n_plus = new_child.as(TPlus)
+			return
+		end
+		if _n_expr == old_child then
+			n_expr = new_child.as(AExpr)
+			return
+		end
+	end
+
+	redef fun n_plus=(node)
+	do
+		_n_plus = node
+		node.parent = self
+	end
+	redef fun n_expr=(node)
+	do
+		_n_expr = node
+		node.parent = self
+	end
+
+
+	redef fun visit_all(v: Visitor)
+	do
+		v.enter_visit(_n_plus)
 		v.enter_visit(_n_expr)
 	end
 end
@@ -6491,60 +6806,234 @@ redef class ABraExprs
 end
 redef class APlusAssignOp
 	init init_aplusassignop (
-		n_pluseq: nullable TPluseq
+		n_op: nullable TPluseq
 	)
 	do
-		_n_pluseq = n_pluseq.as(not null)
-		n_pluseq.parent = self
+		_n_op = n_op.as(not null)
+		n_op.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_pluseq == old_child then
-			n_pluseq = new_child.as(TPluseq)
+		if _n_op == old_child then
+			n_op = new_child.as(TPluseq)
 			return
 		end
 	end
 
-	redef fun n_pluseq=(node)
+	redef fun n_op=(node)
 	do
-		_n_pluseq = node
+		_n_op = node
 		node.parent = self
 	end
 
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_pluseq)
+		v.enter_visit(_n_op)
 	end
 end
 redef class AMinusAssignOp
 	init init_aminusassignop (
-		n_minuseq: nullable TMinuseq
+		n_op: nullable TMinuseq
 	)
 	do
-		_n_minuseq = n_minuseq.as(not null)
-		n_minuseq.parent = self
+		_n_op = n_op.as(not null)
+		n_op.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_minuseq == old_child then
-			n_minuseq = new_child.as(TMinuseq)
+		if _n_op == old_child then
+			n_op = new_child.as(TMinuseq)
 			return
 		end
 	end
 
-	redef fun n_minuseq=(node)
+	redef fun n_op=(node)
 	do
-		_n_minuseq = node
+		_n_op = node
 		node.parent = self
 	end
 
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_minuseq)
+		v.enter_visit(_n_op)
+	end
+end
+redef class AStarAssignOp
+	init init_astarassignop (
+		n_op: nullable TStareq
+	)
+	do
+		_n_op = n_op.as(not null)
+		n_op.parent = self
+	end
+
+	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
+	do
+		if _n_op == old_child then
+			n_op = new_child.as(TStareq)
+			return
+		end
+	end
+
+	redef fun n_op=(node)
+	do
+		_n_op = node
+		node.parent = self
+	end
+
+
+	redef fun visit_all(v: Visitor)
+	do
+		v.enter_visit(_n_op)
+	end
+end
+redef class ASlashAssignOp
+	init init_aslashassignop (
+		n_op: nullable TSlasheq
+	)
+	do
+		_n_op = n_op.as(not null)
+		n_op.parent = self
+	end
+
+	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
+	do
+		if _n_op == old_child then
+			n_op = new_child.as(TSlasheq)
+			return
+		end
+	end
+
+	redef fun n_op=(node)
+	do
+		_n_op = node
+		node.parent = self
+	end
+
+
+	redef fun visit_all(v: Visitor)
+	do
+		v.enter_visit(_n_op)
+	end
+end
+redef class APercentAssignOp
+	init init_apercentassignop (
+		n_op: nullable TPercenteq
+	)
+	do
+		_n_op = n_op.as(not null)
+		n_op.parent = self
+	end
+
+	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
+	do
+		if _n_op == old_child then
+			n_op = new_child.as(TPercenteq)
+			return
+		end
+	end
+
+	redef fun n_op=(node)
+	do
+		_n_op = node
+		node.parent = self
+	end
+
+
+	redef fun visit_all(v: Visitor)
+	do
+		v.enter_visit(_n_op)
+	end
+end
+redef class AStarstarAssignOp
+	init init_astarstarassignop (
+		n_op: nullable TStarstareq
+	)
+	do
+		_n_op = n_op.as(not null)
+		n_op.parent = self
+	end
+
+	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
+	do
+		if _n_op == old_child then
+			n_op = new_child.as(TStarstareq)
+			return
+		end
+	end
+
+	redef fun n_op=(node)
+	do
+		_n_op = node
+		node.parent = self
+	end
+
+
+	redef fun visit_all(v: Visitor)
+	do
+		v.enter_visit(_n_op)
+	end
+end
+redef class ALlAssignOp
+	init init_allassignop (
+		n_op: nullable TLleq
+	)
+	do
+		_n_op = n_op.as(not null)
+		n_op.parent = self
+	end
+
+	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
+	do
+		if _n_op == old_child then
+			n_op = new_child.as(TLleq)
+			return
+		end
+	end
+
+	redef fun n_op=(node)
+	do
+		_n_op = node
+		node.parent = self
+	end
+
+
+	redef fun visit_all(v: Visitor)
+	do
+		v.enter_visit(_n_op)
+	end
+end
+redef class AGgAssignOp
+	init init_aggassignop (
+		n_op: nullable TGgeq
+	)
+	do
+		_n_op = n_op.as(not null)
+		n_op.parent = self
+	end
+
+	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
+	do
+		if _n_op == old_child then
+			n_op = new_child.as(TGgeq)
+			return
+		end
+	end
+
+	redef fun n_op=(node)
+	do
+		_n_op = node
+		node.parent = self
+	end
+
+
+	redef fun visit_all(v: Visitor)
+	do
+		v.enter_visit(_n_op)
 	end
 end
 redef class AModuleName

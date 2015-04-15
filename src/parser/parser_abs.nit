@@ -190,6 +190,24 @@ end
 class TMinuseq
 	super Token
 end
+class TStareq
+	super Token
+end
+class TSlasheq
+	super Token
+end
+class TPercenteq
+	super Token
+end
+class TStarstareq
+	super Token
+end
+class TLleq
+	super Token
+end
+class TGgeq
+	super Token
+end
 class TDotdotdot
 	super Token
 end
@@ -703,21 +721,26 @@ end
 class AOrExpr
 	super AExpr
 	var n_expr: AExpr is writable, noinit
+	var n_op: TKwor is writable, noinit
 	var n_expr2: AExpr is writable, noinit
 end
 class AAndExpr
 	super AExpr
 	var n_expr: AExpr is writable, noinit
+	var n_op: TKwand is writable, noinit
 	var n_expr2: AExpr is writable, noinit
 end
 class AOrElseExpr
 	super AExpr
 	var n_expr: AExpr is writable, noinit
+	var n_op: TKwor is writable, noinit
+	var n_kwelse: TKwelse is writable, noinit
 	var n_expr2: AExpr is writable, noinit
 end
 class AImpliesExpr
 	super AExpr
 	var n_expr: AExpr is writable, noinit
+	var n_op: TKwimplies is writable, noinit
 	var n_expr2: AExpr is writable, noinit
 end
 class ANotExpr
@@ -728,86 +751,107 @@ end
 class AEqExpr
 	super AExpr
 	var n_expr: AExpr is writable, noinit
+	var n_op: TEq is writable, noinit
 	var n_expr2: AExpr is writable, noinit
 end
 class ANeExpr
 	super AExpr
 	var n_expr: AExpr is writable, noinit
+	var n_op: TNe is writable, noinit
 	var n_expr2: AExpr is writable, noinit
 end
 class ALtExpr
 	super AExpr
 	var n_expr: AExpr is writable, noinit
+	var n_op: TLt is writable, noinit
 	var n_expr2: AExpr is writable, noinit
 end
 class ALeExpr
 	super AExpr
 	var n_expr: AExpr is writable, noinit
+	var n_op: TLe is writable, noinit
 	var n_expr2: AExpr is writable, noinit
 end
 class ALlExpr
 	super AExpr
 	var n_expr: AExpr is writable, noinit
+	var n_op: TLl is writable, noinit
 	var n_expr2: AExpr is writable, noinit
 end
 class AGtExpr
 	super AExpr
 	var n_expr: AExpr is writable, noinit
+	var n_op: TGt is writable, noinit
 	var n_expr2: AExpr is writable, noinit
 end
 class AGeExpr
 	super AExpr
 	var n_expr: AExpr is writable, noinit
+	var n_op: TGe is writable, noinit
 	var n_expr2: AExpr is writable, noinit
 end
 class AGgExpr
 	super AExpr
 	var n_expr: AExpr is writable, noinit
+	var n_op: TGg is writable, noinit
 	var n_expr2: AExpr is writable, noinit
 end
 class AIsaExpr
 	super AExpr
 	var n_expr: AExpr is writable, noinit
+	var n_kwisa: TKwisa is writable, noinit
 	var n_type: AType is writable, noinit
 end
 class APlusExpr
 	super AExpr
 	var n_expr: AExpr is writable, noinit
+	var n_op: TPlus is writable, noinit
 	var n_expr2: AExpr is writable, noinit
 end
 class AMinusExpr
 	super AExpr
 	var n_expr: AExpr is writable, noinit
+	var n_op: TMinus is writable, noinit
 	var n_expr2: AExpr is writable, noinit
 end
 class AStarshipExpr
 	super AExpr
 	var n_expr: AExpr is writable, noinit
+	var n_op: TStarship is writable, noinit
 	var n_expr2: AExpr is writable, noinit
 end
 class AStarExpr
 	super AExpr
 	var n_expr: AExpr is writable, noinit
+	var n_op: TStar is writable, noinit
 	var n_expr2: AExpr is writable, noinit
 end
 class AStarstarExpr
 	super AExpr
 	var n_expr: AExpr is writable, noinit
+	var n_op: TStarstar is writable, noinit
 	var n_expr2: AExpr is writable, noinit
 end
 class ASlashExpr
 	super AExpr
 	var n_expr: AExpr is writable, noinit
+	var n_op: TSlash is writable, noinit
 	var n_expr2: AExpr is writable, noinit
 end
 class APercentExpr
 	super AExpr
 	var n_expr: AExpr is writable, noinit
+	var n_op: TPercent is writable, noinit
 	var n_expr2: AExpr is writable, noinit
 end
 class AUminusExpr
 	super AExpr
 	var n_minus: TMinus is writable, noinit
+	var n_expr: AExpr is writable, noinit
+end
+class AUplusExpr
+	super AExpr
+	var n_plus: TPlus is writable, noinit
 	var n_expr: AExpr is writable, noinit
 end
 class ANewExpr
@@ -1077,11 +1121,35 @@ class ABraExprs
 end
 class APlusAssignOp
 	super AAssignOp
-	var n_pluseq: TPluseq is writable, noinit
+	var n_op: TPluseq is writable, noinit
 end
 class AMinusAssignOp
 	super AAssignOp
-	var n_minuseq: TMinuseq is writable, noinit
+	var n_op: TMinuseq is writable, noinit
+end
+class AStarAssignOp
+	super AAssignOp
+	var n_op: TStareq is writable, noinit
+end
+class ASlashAssignOp
+	super AAssignOp
+	var n_op: TSlasheq is writable, noinit
+end
+class APercentAssignOp
+	super AAssignOp
+	var n_op: TPercenteq is writable, noinit
+end
+class AStarstarAssignOp
+	super AAssignOp
+	var n_op: TStarstareq is writable, noinit
+end
+class ALlAssignOp
+	super AAssignOp
+	var n_op: TLleq is writable, noinit
+end
+class AGgAssignOp
+	super AAssignOp
+	var n_op: TGgeq is writable, noinit
 end
 class AModuleName
 	super AModuleName
