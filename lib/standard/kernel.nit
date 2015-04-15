@@ -446,10 +446,16 @@ universal Int
 	#     assert 5.lshift(1)    == 10
 	fun lshift(i: Int): Int is intern
 
+	# alias of `lshift`
+	fun <<(i: Int): Int do return lshift(i)
+
 	# `i` bits shift fo the right (aka >>)
 	#
 	#     assert 5.rshift(1)    == 2
 	fun rshift(i: Int): Int is intern
+
+	# alias of `rshift`
+	fun >>(i: Int): Int do return rshift(i)
 
 	redef fun to_i do return self
 	redef fun to_f is intern
