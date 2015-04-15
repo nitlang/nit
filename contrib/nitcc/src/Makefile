@@ -33,6 +33,7 @@ minilang: nitcc ../examples/minilang.sablecc ../examples/minilang.nit
 	${NITC} ../examples/minilang.nit -v
 	printf "10\n42\n" | ./minilang ../examples/minilang.minilang
 
+check: tests
 tests:
 	cd ../tests && ./run
 

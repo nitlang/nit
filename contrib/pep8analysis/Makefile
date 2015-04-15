@@ -5,6 +5,7 @@ bin/pep8analysis:
 doc/index.html:
 	../../bin/nitdoc src/pep8analysis.nit
 
+check: tests
 tests: bin/pep8analysis
 	bin/pep8analysis --cfg-long tests/privat/*.pep tests/micro/*.pep tests/terrasa/*.pep
 
