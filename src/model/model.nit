@@ -380,6 +380,29 @@ class MClass
 	# is empty if the class is not generic
 	var mparameters = new Array[MParameterType]
 
+	# A string version of the signature a generic class.
+	#
+	# eg. `Map[K: nullable Object, V: nullable Object]`
+	#
+	# If the class in non generic the name is just given.
+	#
+	# eg. `Object`
+	fun signature_to_s: String
+	do
+		if arity == 0 then return name
+		var res = new FlatBuffer
+		res.append name
+		res.append "["
+		for i in [0..arity[ do
+			if i > 0 then res.append ", "
+			res.append mparameters[i].name
+			res.append ": "
+			res.append intro.bound_mtype.arguments[i].to_s
+		end
+		res.append "]"
+		return res.to_s
+	end
+
 	# Initialize `mparameters` from their names.
 	protected fun setup_parameter_names(parameter_names: nullable Array[String]) is
 		autoinit

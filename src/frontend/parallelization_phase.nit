@@ -36,14 +36,14 @@ private class ParallelizationPhase
 		if nat.n_atid.n_id.text != "threaded" then return
 
 		if not nmethdef isa AMethPropdef then
-			toolcontext.error(nmethdef.location, "Syntax error: only a method can be threaded.")
+			toolcontext.error(nat.location, "Syntax Error: only a method can be threaded.")
 			return
 		end
 
 		#TODO: check for self calls
 
 		if nmethdef.n_signature.n_type != null then
-			toolcontext.error(nmethdef.location, "Syntax error: method with a return value not supported yet.")
+			toolcontext.error(nat.location, "Error: functions not supported yet.")
 			return
 		end
 

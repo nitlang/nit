@@ -41,9 +41,21 @@ class Message
 
 	# The human-readable description of the message.
 	#
-	# It should be short and fit on a single line.
-	# It should also have meaningful information first in case
-	# on truncation by an IDE for instance.
+	# eg. "Error: cannot find method `foo`."
+	#
+	# A good message should:
+	#
+	# * start with a message type like "Error:", "Syntax Error:", "Warning:".
+	#   The type is capitalized and terminated by a column.
+	#   The rest on the message starts with a lowercase letter and is terminated with a dot.
+	#
+	# * be short and fit on a single line.
+	#
+	# * have meaningful information first.
+	#   This helps the reader and remain usable
+	#   when truncated, by an IDE for instance.
+	#
+	# * enclose identifiers, keywords and pieces of code with back-quotes.
 	var text: String
 
 	# Comparisons are made on message locations.
@@ -510,7 +522,7 @@ The Nit language documentation and the source code of its tools and libraries ma
 		var res = opt_nit_dir.value
 		if res != null then
 			if not check_nit_dir(res) then
-				fatal_error(null, "Fatal Error: the value of --nit-dir does not seem to be a valid base Nit directory: {res}")
+				fatal_error(null, "Fatal Error: the value of --nit-dir does not seem to be a valid base Nit directory: {res}.")
 			end
 			return res
 		end
@@ -519,7 +531,7 @@ The Nit language documentation and the source code of its tools and libraries ma
 		res = "NIT_DIR".environ
 		if not res.is_empty then
 			if not check_nit_dir(res) then
-				fatal_error(null, "Fatal Error: the value of NIT_DIR does not seem to be a valid base Nit directory: {res}")
+				fatal_error(null, "Fatal Error: the value of NIT_DIR does not seem to be a valid base Nit directory: {res}.")
 			end
 			return res
 		end
@@ -543,7 +555,7 @@ The Nit language documentation and the source code of its tools and libraries ma
 			if check_nit_dir(res) then return res.simplify_path
 		end
 
-		fatal_error(null, "Fatal Error: Cannot locate a valid base nit directory. It is quite unexpected. Try to set the environment variable `NIT_DIR` or to use the `--nit-dir` option.")
+		fatal_error(null, "Fatal Error: cannot locate a valid base Nit directory. It is quite unexpected. Try to set the environment variable `NIT_DIR` or to use the `--nit-dir` option.")
 		abort
 	end
 

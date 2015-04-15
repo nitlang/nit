@@ -45,13 +45,13 @@ private class JavaExtraFilesPhase
 		var modelbuilder = toolcontext.modelbuilder
 
 		if not nmoduledecl isa AModuledecl then
-			modelbuilder.error(nat, "Syntax error: only the declaration of modules may use \"{annot_name}\".")
+			modelbuilder.error(nat, "Syntax Error: only the declaration of modules may use `{annot_name}`.")
 			return
 		end
 
 		var args = nat.n_args
 		if args.is_empty then
-			modelbuilder.error(nat, "Syntax error: \"{annot_name}\" expects at least one argument.")
+			modelbuilder.error(nat, "Syntax Error: `{annot_name}` expects at least one argument.")
 			return
 		end
 
@@ -64,7 +64,7 @@ private class JavaExtraFilesPhase
 			mmodule.extra_java_files = java_files
 		end
 
-		var format_error = "Syntax error: \"{annot_name}\" expects its arguments to be paths to java files."
+		var format_error = "Syntax Error: `{annot_name}` expects its arguments to be paths to java files."
 		for arg in args do
 			var path = arg.as_string
 			if path == null then
@@ -77,7 +77,7 @@ private class JavaExtraFilesPhase
 			if source_file != null then path = "{source_file.filename.dirname}/{path}"
 
 			if not path.file_exists then
-				modelbuilder.error(nat, "FFI with Java error: file \"{path}\" not found.")
+				modelbuilder.error(nat, "FFI with Java Error: file `{path}` not found.")
 				continue
 			end
 

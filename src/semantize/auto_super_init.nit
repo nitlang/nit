@@ -69,7 +69,7 @@ redef class AMethPropdef
 
 		# Collect only for constructors
 		if not mpropdef.mproperty.is_init or mpropdef.mproperty.is_new then
-			if nosuper != null then modelbuilder.error(nosuper, "Error: nosuper only in `init`")
+			if nosuper != null then modelbuilder.error(nosuper, "Error: `nosuper` only allowed in `init`.")
 			return
 		end
 
@@ -89,7 +89,7 @@ redef class AMethPropdef
 			v.enter_visit(nblock)
 			var anode = v.has_explicit_super_init
 			if anode != null then
-				if nosuper != null then modelbuilder.error(anode, "Error: method is annotated nosuper but a constructor call is present")
+				if nosuper != null then modelbuilder.error(anode, "Error: method is annotated `nosuper` but a super-constructor call is present.")
 				return
 			end
 			if v.is_broken then return # skip
@@ -119,7 +119,7 @@ redef class AMethPropdef
 				candidate = modelbuilder.try_get_mproperty_by_name2(self, mmodule, msupertype, "init")
 			end
 			if candidate == null then
-				modelbuilder.error(self, "Error: Cannot do an implicit constructor call in {mpropdef}; there is no constructor named {mpropdef.mproperty.name} in {msupertype}.")
+				modelbuilder.error(self, "Error: cannot do an implicit constructor call in `{mpropdef}`; there is no constructor named `{mpropdef.mproperty.name}` in `{msupertype}`.")
 				return
 			end
 			assert candidate isa MMethod
@@ -158,7 +158,7 @@ redef class AMethPropdef
 					var i = 0
 					for p in spd.initializers do
 						if p != candidatedef.initializers[i] then
-							modelbuilder.error(self, "Error: Cannot do an implicit constructor call to comflicting for inherited inits {spd}({spd.initializers.join(", ")}) and {candidatedef}({candidatedef.initializers.join(", ")}). NOTE: Do not mix old-style and new-style init!")
+							modelbuilder.error(self, "Error: cannot do an implicit constructor call to conflicting inherited inits `{spd}({spd.initializers.join(", ")}`) and `{candidatedef}({candidatedef.initializers.join(", ")}`). NOTE: Do not mix old-style and new-style init!")
 							return
 						end
 						i += 1
@@ -174,7 +174,7 @@ redef class AMethPropdef
 			modelbuilder.toolcontext.info("Auto-super init for {mpropdef} to {the_root_init_mmethod.full_name}", 4)
 		end
 		if auto_super_inits.is_empty then
-			modelbuilder.error(self, "Error: No constructors to call implicitely in {mpropdef}. Call one explicitely.")
+			modelbuilder.error(self, "Error: no constructors to call implicitly in `{mpropdef}`. Call one explicitly.")
 			return
 		end
 
@@ -184,7 +184,7 @@ redef class AMethPropdef
 			var msig = mpropdef.msignature.as(not null)
 			var supermsig = auto_super_init.msignature
 			if supermsig.arity > msig.arity then
-				modelbuilder.error(self, "Error: Cannot do an implicit constructor call to {auto_super_init_def}{supermsig}. Expected at least {supermsig.arity} arguments, got {msig.arity}.")
+				modelbuilder.error(self, "Error: cannot do an implicit constructor call to `{auto_super_init_def}{supermsig}`. Expected at least `{supermsig.arity}` arguments, got `{msig.arity}`.")
 				continue
 			end
 			var i = 0
@@ -193,7 +193,7 @@ redef class AMethPropdef
 				var sub = p.mtype
 				var sup = sp.mtype
 				if not sub.is_subtype(mmodule, anchor, sup) then
-					modelbuilder.error(self, "Error: Cannot do an implicit constructor call to {auto_super_init_def}{supermsig}. Expected argument #{i} of type {sp.mtype}, got implicit argument {p.name} of type {p.mtype}.")
+					modelbuilder.error(self, "Error: cannot do an implicit constructor call to `{auto_super_init_def}{supermsig}`. Expected argument #{i} of type `{sp.mtype}`, got implicit argument `{p.name}` of type `{p.mtype}`.")
 					break
 				end
 				i += 1

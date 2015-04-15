@@ -1,1 +1,1 @@
-error_inh_clash.nit:17,7: Error: Incompatibles ancestors for A: Array[Int], Array[Char]
+error_inh_clash.nit:17,7: Error: incompatible ancestors for `A`; conflict: `Array[Int]` and `Array[Char]`

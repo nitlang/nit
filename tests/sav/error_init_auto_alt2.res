@@ -1,4 +1,4 @@
-alt/error_init_auto_alt2.nit:34,5--9: Error: Incorrect number of parameters. Got 0, expected 2. Signature is (x: Int, y: Int)
-alt/error_init_auto_alt2.nit:35,5--12: Error: Incorrect number of parameters. Got 1, expected 2. Signature is (x: Int, y: Int)
-alt/error_init_auto_alt2.nit:37,5--18: Error: Incorrect number of parameters. Got 3, expected 2. Signature is (x: Int, y: Int)
-alt/error_init_auto_alt2.nit:38,5--16: Error: Method 'foo' doesn't exists in A.
+alt/error_init_auto_alt2.nit:34,5--7: Error: expected 2 argument(s) for `init(x: Int, y: Int)`; got 0. See introduction at `standard::Object::init`.
+alt/error_init_auto_alt2.nit:35,5--7: Error: expected 2 argument(s) for `init(x: Int, y: Int)`; got 1. See introduction at `standard::Object::init`.
+alt/error_init_auto_alt2.nit:37,5--7: Error: expected 2 argument(s) for `init(x: Int, y: Int)`; got 3. See introduction at `standard::Object::init`.
+alt/error_init_auto_alt2.nit:38,11--13: Error: method `foo` does not exists in `A`.

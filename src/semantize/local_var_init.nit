@@ -70,7 +70,7 @@ private class LocalVarInitVisitor
 
 		var flow = node.after_flow_context.as(not null)
 		if not flow.is_variable_set(variable) then
-			self.toolcontext.error(node.hot_location, "Error: variable '{variable}' is possibly unset.")
+			self.toolcontext.error(node.hot_location, "Error: possibly unset variable `{variable}`.")
 			# Remove the variable to avoid repeating errors
 			self.maybe_unset_vars.remove(variable)
 		end

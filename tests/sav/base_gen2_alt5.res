@@ -1,1 +1,1 @@
-alt/base_gen2_alt5.nit:65,13--17: Type error: 'C' has 2 parameters (1 are provided).
+alt/base_gen2_alt5.nit:65,13--17: Type Error: expected 2 formal argument(s) for `C[F: nullable Object, G: nullable Object]`; got 1.

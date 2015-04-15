@@ -63,14 +63,14 @@ class FFILanguageAssignationPhase
 			var identified = v.identify_language(n)
 			if identified then
 				if found and identified then
-					toolcontext.error(n.location, "Two languages identified as possible handlers.")
+					toolcontext.error(n.location, "FFI Error: two languages identified as possible handlers.")
 				end
 				n.language = v
 				found = true
 			end
 		end
 
-		if not found then toolcontext.error(n.location, "Unsupported language.")
+		if not found then toolcontext.error(n.location, "FFI Error: unsupported language.")
 	end
 end
 

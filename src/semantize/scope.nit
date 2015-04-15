@@ -99,7 +99,7 @@ private class ScopeVisitor
 		var name = variable.name
 		var found = search_variable(name)
 		if found != null then
-			self.error(node, "Error: A variable named `{name}' already exists")
+			self.error(node, "Error: a variable named `{name}` already exists.")
 			return false
 		end
 		scopes.first.variables[name] = variable
@@ -160,14 +160,14 @@ private class ScopeVisitor
 			if nid == null then
 				var res = search_label("")
 				if res != null then
-					self.error(nlabel, "Syntax error: anonymous label already defined.")
+					self.error(nlabel, "Syntax Error: anonymous label already defined.")
 				end
 				name = ""
 			else
 				name = nid.text
 				var found = self.search_label(name)
 				if found != null then
-					self.error(nlabel, "Syntax error: label {name} already defined.")
+					self.error(nlabel, "Syntax Error: label `{name}` already defined.")
 				end
 			end
 		else
@@ -190,7 +190,7 @@ private class ScopeVisitor
 			if nid == null then
 				var res = search_label("")
 				if res == null then
-					self.error(nlabel, "Syntax error: invalid anonymous label.")
+					self.error(nlabel, "Syntax Error: invalid anonymous label.")
 					return null
 				end
 				return res
@@ -198,7 +198,7 @@ private class ScopeVisitor
 			var name = nid.text
 			var res = search_label(name)
 			if res == null then
-				self.error(nlabel, "Syntax error: invalid label {name}.")
+				self.error(nlabel, "Syntax Error: invalid label `{name}`.")
 				return null
 			end
 			return res
@@ -209,7 +209,7 @@ private class ScopeVisitor
 					return res
 				end
 			end
-			self.error(node, "Syntax Error: 'break' statement outside block.")
+			self.error(node, "Syntax Error: `break` statement outside block.")
 			return null
 		end
 	end
@@ -443,7 +443,7 @@ redef class ACallFormExpr
 			if variable != null then
 				var n: AExpr
 				if not n_args.n_exprs.is_empty or n_args isa AParExprs then
-					v.error(self, "Error: {name} is variable, not a function.")
+					v.error(self, "Error: `{name}` is a variable, not a method.")
 					return
 				end
 				n = variable_create(variable)

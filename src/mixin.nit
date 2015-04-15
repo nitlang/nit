@@ -64,13 +64,13 @@ redef class ToolContext
 				if spl.length > 1 then val = spl[1]
 				var prop = mainmodule.try_get_primitive_method(name, recv.mclass)
 				if prop == null then
-					error(null, "Error: --define: no top-level function `{name}`")
+					error(null, "Error: --define: no top-level function `{name}`.")
 					continue
 				end
 				var ret = prop.intro.msignature.return_mtype
 				var v
 				if ret == null then
-					error(null, "Error: --define: Method `{prop}` is not a function")
+					error(null, "Error: --define: method `{prop}` is not a function.")
 					continue
 				else if ret.to_s == "Bool" then
 					if val == null or val == "true" then
@@ -78,25 +78,25 @@ redef class ToolContext
 					else if val == "false" then
 						v = false
 					else
-						error(null, "Error: --define: Method `{prop}` need a Bool.")
+						error(null, "Error: --define: method `{prop}` needs a Bool.")
 						continue
 					end
 				else if ret.to_s == "Int" then
 					if val != null and val.is_numeric then
 						v = val.to_i
 					else
-						error(null, "Error: --define: Method `{prop}` need a Int.")
+						error(null, "Error: --define: method `{prop}` needs a Int.")
 						continue
 					end
 				else if ret.to_s == "String" then
 					if val != null then
 						v = val
 					else
-						error(null, "Error: --define: Method `{prop}` need a String.")
+						error(null, "Error: --define: method `{prop}` needs a String.")
 						continue
 					end
 				else
-					error(null, "Error: --define: Method `{prop}` return an unmanaged type {ret}.")
+					error(null, "Error: --define: method `{prop}` returns an unsupported type `{ret}`.")
 					continue
 				end
 				var pd = new MMethodDef(mclassdef, prop, location)

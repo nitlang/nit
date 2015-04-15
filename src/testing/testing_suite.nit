@@ -185,17 +185,17 @@ class TestSuite
 
 	# Compile all `test_cases` cases in one file.
 	fun compile do
-		# find nitg
+		# find nitc
 		var nit_dir = toolcontext.nit_dir
-		var nitg = nit_dir/"bin/nitg"
-		if not nitg.file_exists then
-			toolcontext.error(null, "Cannot find nitg. Set envvar NIT_DIR.")
+		var nitc = nit_dir/"bin/nitc"
+		if not nitc.file_exists then
+			toolcontext.error(null, "Error: cannot find nitc. Set envvar NIT_DIR.")
 			toolcontext.check_errors
 		end
 		# compile test suite
 		var file = test_file
 		var include_dir = mmodule.location.file.filename.dirname
-		var cmd = "{nitg} --no-color '{file}.nit' -I {include_dir} -o '{file}.bin' > '{file}.out' 2>&1 </dev/null"
+		var cmd = "{nitc} --no-color '{file}.nit' -I {include_dir} -o '{file}.bin' > '{file}.out' 2>&1 </dev/null"
 		var res = sys.system(cmd)
 		var f = new FileReader.open("{file}.out")
 		var msg = f.read_all
@@ -223,7 +223,7 @@ class TestCase
 	# Test method to be compiled and tested.
 	var test_method: MMethodDef
 
-	# `ToolContext` to use to display messages and find `nitg` bin.
+	# `ToolContext` to use to display messages and find `nitc` bin.
 	var toolcontext: ToolContext
 
 	# `MMethodDef` to call before the test case.

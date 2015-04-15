@@ -371,7 +371,7 @@ redef class TypeVisitor
 					dcp.cpt_autocast.inc("vt+pt")
 					dcp.count_cast(node, supx, sub, mmodule, anchor)
 				else
-					self.modelbuilder.error(node, "Type error: expected {sup}, got {sub}")
+					self.modelbuilder.error(node, "Type Error: expected `{sup}`, got `{sub}`")
 					return null
 				end
 			end

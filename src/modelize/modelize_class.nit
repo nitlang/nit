@@ -65,11 +65,11 @@ redef class ModelBuilder
 				var nfd = nclassdef.n_formaldefs[i]
 				var ptname = nfd.n_id.text
 				if names.has(ptname) then
-					error(nfd, "Error: A formal parameter type `{ptname}' already exists")
+					error(nfd, "Error: a formal parameter type `{ptname}` already exists.")
 					return
 				end
 				for c in ptname.chars do if c >= 'a' and c<= 'z' then
-					warning(nfd, "formal-type-name", "Warning: lowercase in the formal parameter type {ptname}")
+					warning(nfd, "formal-type-name", "Warning: lowercase in the formal parameter type `{ptname}`.")
 					break
 				end
 				names.add(ptname)
@@ -95,7 +95,7 @@ redef class ModelBuilder
 		var mclass = try_get_mclass_by_name(nclassdef, mmodule, name)
 		if mclass == null then
 			if nclassdef isa AStdClassdef and nclassdef.n_kwredef != null then
-				error(nclassdef, "Redef error: No imported class {name} to refine.")
+				error(nclassdef, "Redef Error: no imported class `{name}` to refine.")
 				return
 			end
 
@@ -106,7 +106,7 @@ redef class ModelBuilder
 					if other.intro_mmodule.mgroup != null and other.intro_mmodule.mgroup.mproject == mmodule.mgroup.mproject then
 						# Skip classes that are buggy
 						if other.try_intro == null then continue
-						warning(nclassdef, "full-name-conflict", "Error: A class named `{other.full_name}` is already defined in module `{other.intro_mmodule}` at {other.intro.location}.")
+						warning(nclassdef, "full-name-conflict", "Error: a class named `{other.full_name}` is already defined in module `{other.intro_mmodule}` at {other.intro.location}.")
 						break
 					end
 				end
@@ -115,18 +115,18 @@ redef class ModelBuilder
 			mclass = new MClass(mmodule, name, names, mkind, mvisibility)
 			#print "new class {mclass}"
 		else if nclassdef isa AStdClassdef and nmodule.mclass2nclassdef.has_key(mclass) then
-			error(nclassdef, "Error: A class {name} is already defined at line {nmodule.mclass2nclassdef[mclass].location.line_start}.")
+			error(nclassdef, "Error: a class `{name}` is already defined at line {nmodule.mclass2nclassdef[mclass].location.line_start}.")
 			return
 		else if nclassdef isa AStdClassdef and nclassdef.n_kwredef == null then
-			error(nclassdef, "Redef error: {name} is an imported class. Add the redef keyword to refine it.")
+			error(nclassdef, "Redef Error: `{name}` is an imported class. Add the `redef` keyword to refine it.")
 			return
 		else if arity != 0 and mclass.arity != arity then
-			error(nclassdef, "Redef error: Formal parameter arity missmatch; got {arity}, expected {mclass.arity}.")
+			error(nclassdef, "Redef Error: expected {mclass.arity} formal parameter(s) for {mclass.signature_to_s}; got {arity}.")
 			return
 		else if nkind != null and mkind != concrete_kind and mclass.kind != mkind then
-			error(nkind, "Error: refinement changed the kind from a {mclass.kind} to a {mkind}")
+			error(nkind, "Redef Error: refinement changed the kind from `{mclass.kind}` to `{mkind}`.")
 		else if nvisibility != null and mvisibility != public_visibility and mclass.visibility != mvisibility then
-			error(nvisibility, "Error: refinement changed the visibility from a {mclass.visibility} to a {mvisibility}")
+			error(nvisibility, "Redef Error: refinement changed the visibility from `{mclass.visibility}` to `{mvisibility}`")
 		end
 		nclassdef.mclass = mclass
 		if not nmodule.mclass2nclassdef.has_key(mclass) then
@@ -167,7 +167,7 @@ redef class ModelBuilder
 				var nfd = nclassdef.n_formaldefs[i]
 				var pname = mclass.mparameters[i].name
 				if nfd.n_id.text != pname then
-					error(nfd.n_id, "Error: Formal parameter type #{i} `{nfd.n_id.text}` must be named `{pname}' as in the original definition in module `{mclass.intro.mmodule}`.")
+					error(nfd.n_id, "Error: formal parameter type #{i} `{nfd.n_id.text}` must be named `{pname}` as in the original definition in module `{mclass.intro.mmodule}`.")
 				end
 				var nfdt = nfd.n_type
 				if nfdt != null then
@@ -175,17 +175,17 @@ redef class ModelBuilder
 					if bound == null then return # Forward error
 					if bound.need_anchor then
 						# No F-bounds!
-						error(nfd, "Error: Formal parameter type `{pname}' bounded with a formal parameter type")
+						error(nfd, "Error: formal parameter type `{pname}` bounded with a formal parameter type.")
 					else
 						bounds.add(bound)
 						nfd.bound = bound
 					end
 					if bound isa MClassType and bound.mclass.kind == enum_kind then
-						warning(nfdt, "useless-bound", "Warning: Useless formal parameter type since `{bound}` cannnot have subclasses.")
+						warning(nfdt, "useless-bound", "Warning: useless formal parameter type since `{bound}` cannot have subclasses.")
 					end
 				else if mclass.mclassdefs.is_empty then
 					if objectclass == null then
-						error(nfd, "Error: Formal parameter type `{pname}' unbounded but no Object class exist.")
+						error(nfd, "Error: formal parameter type `{pname}` unbounded but no `Object` class exists.")
 						return
 					end
 					# No bound, then implicitely bound by nullable Object
@@ -251,11 +251,11 @@ redef class ModelBuilder
 				var mtype = resolve_mtype_unchecked(mmodule, mclassdef, ntype, false)
 				if mtype == null then continue # Skip because of error
 				if not mtype isa MClassType then
-					error(ntype, "Error: supertypes cannot be a formal type")
+					error(ntype, "Error: supertypes cannot be a formal type.")
 					return
 				end
 				if not mclass.kind.can_specialize(mtype.mclass.kind) then
-					error(ntype, "Error: {mclass.kind} {mclass} cannot specialize {mtype.mclass.kind} {mtype.mclass}")
+					error(ntype, "Error: {mclass.kind} `{mclass}` cannot specialize {mtype.mclass.kind} `{mtype.mclass}`.")
 				end
 				supertypes.add mtype
 				#print "new super : {mclass} < {mtype}"
@@ -289,7 +289,7 @@ redef class ModelBuilder
 
 		for s in mclassdef.supertypes do
 			if s.is_subtype(mmodule, mclassdef.bound_mtype, mclassdef.bound_mtype) then
-				error(nclassdef, "Error: Inheritance loop for class {mclass} with type {s}")
+				error(nclassdef, "Error: inheritance loop for class `{mclass}` with type `{s}`.")
 			end
 		end
 	end
@@ -395,7 +395,7 @@ redef class ModelBuilder
 						var st1 = superclasses[st.mclass].resolve_for(mclassdef.mclass.mclass_type, mclassdef.bound_mtype, mmodule, false)
 						var st2 = st.resolve_for(mclassdef.mclass.mclass_type, mclassdef.bound_mtype, mmodule, false)
 						if st1 != st2 then
-							error(nclassdef, "Error: Incompatibles ancestors for {mclassdef.mclass}: {st1}, {st2}")
+							error(nclassdef, "Error: incompatible ancestors for `{mclassdef.mclass}`; conflict: `{st1}` and `{st2}`")
 						end
 					end
 				end
@@ -435,12 +435,12 @@ redef class ModelBuilder
 				if not parents.has(sc) or sc == objectclass then
 					# Skip the warning on generated code
 					if ntype.location.file != null and not ntype.location.file.filename.is_empty then
-						warning(ntype, "useless-superclass", "Warning: superfluous super-class {mtype} in class {mclassdef.mclass}.")
+						warning(ntype, "useless-superclass", "Warning: superfluous super-class `{mtype}` in class `{mclassdef.mclass}`.")
 					end
 				else if not seen_parents.has_key(sc) then
 					seen_parents[sc] = ntype
 				else
-					warning(ntype, "useless-superclass", "Warning: duplicated super-class {mtype} in class {mclassdef.mclass}.")
+					warning(ntype, "useless-superclass", "Warning: duplicated super-class `{mtype}` in class `{mclassdef.mclass}`.")
 				end
 			end
 		end

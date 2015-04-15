@@ -287,7 +287,7 @@ redef class ALocalPropExternCall
 			mmodule, mclass_type, m_name )
 
 		if method == null then
-			toolcontext.error(location, "Local method {m_name} not found.")
+			toolcontext.error(location, "Error: local method `{m_name}` not found.")
 			return
 		end
 
@@ -313,7 +313,7 @@ redef class AFullPropExternCall
 		end
 
 		if mtype isa MNullableType then
-			toolcontext.error(location, "Type {n_type.collect_text} is nullable and thus cannot be the receiver." )
+			toolcontext.error(location, "Error: type `{n_type.collect_text}` is nullable and thus cannot be the receiver." )
 			return
 		end
 
@@ -322,7 +322,7 @@ redef class AFullPropExternCall
 			mmodule, mtype, m_name )
 
 		if method == null then
-			toolcontext.error(location, "Method {m_name} not found in {n_type.collect_text}." )
+			toolcontext.error(location, "Error: method `{m_name}` not found in `{n_type.collect_text}`." )
 			return
 		end
 
@@ -341,7 +341,7 @@ redef class AInitPropExternCall
 		if mtype == null then return
 
 		if not mtype isa MClassType then
-			toolcontext.error(location, "Type {n_type.collect_text} is not a class and thus cannot be used to instanciate a new instance." )
+			toolcontext.error(location, "Error: type `{n_type.collect_text}` is not a class and thus cannot be used to instantiate a new instance." )
 			return
 		end
 
@@ -356,7 +356,7 @@ redef class AInitPropExternCall
 		end
 
 		if meth == null then
-			toolcontext.error(location, "Method {meth_name} not found in {n_type.collect_text}." )
+			toolcontext.error(location, "Error: method `{meth_name}` not found in `{n_type.collect_text}`." )
 			return
 		end
 

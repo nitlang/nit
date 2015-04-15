@@ -38,8 +38,8 @@ private class ExternClassesTypingPhaseAst
 		if code_block == null then return
 
 		if nclassdef.n_kwredef != null then
-			# A redef cannot specifiy a different extern type
-			toolcontext.error(nclassdef.location, "Only the introduction of a class can specify an extern type.")
+			# A redef cannot specify a different extern type
+			toolcontext.error(nclassdef.location, "FFI Error: only the introduction of a class can declare an extern type.")
 			return
 		end
 
@@ -118,7 +118,7 @@ redef class MClass
 					else
 						# detect conflict
 						if super_ftype != ftype_b then
-							v.toolcontext.error(null, "Extern type conflict in {self}")
+							v.toolcontext.error(null, "FFI Error: extern type conflict in `{self}`.")
 							return null
 						end
 					end

@@ -39,7 +39,7 @@ class PkgconfigPhase
 		var modelbuilder = toolcontext.modelbuilder
 
 		if not nmoduledecl isa AModuledecl then
-			modelbuilder.error(nat, "Syntax error: only the declaration of modules may use \"pkgconfig\".")
+			modelbuilder.error(nat, "Syntax Error: only the declaration of modules may use `pkgconfig`.")
 			return
 		end
 
@@ -58,7 +58,7 @@ class PkgconfigPhase
 			for arg in args do
 				var pkg = arg.as_string
 				if pkg == null then
-					modelbuilder.error(nat, "Syntax error: \"pkgconfig\" expects its arguments to be the name of the package as String literals.")
+					modelbuilder.error(nat, "Syntax Error: `pkgconfig` expects its arguments to be the name of the package as String literals.")
 					return
 				end
 
@@ -71,7 +71,7 @@ class PkgconfigPhase
 		proc_which.wait
 		var status = proc_which.status
 		if status != 0 then
-			modelbuilder.error(nat, "Error: program pkg-config not found, make sure it is installed.")
+			modelbuilder.error(nat, "Error: program `pkg-config` not found, make sure it is installed.")
 			return
 		end
 
@@ -80,10 +80,10 @@ class PkgconfigPhase
 			proc_exist.wait
 			status = proc_exist.status
 			if status == 1 then
-				modelbuilder.error(nat, "Error: package \"{pkg}\" unknown by pkg-config, make sure the development package is be installed.")
+				modelbuilder.error(nat, "Error: package `{pkg}` unknown by `pkg-config`, make sure the development package is be installed.")
 				return
 			else if status != 0 then
-				modelbuilder.error(nat, "Error: something went wrong calling pkg-config, make sure it is correctly installed.")
+				modelbuilder.error(nat, "Error: something went wrong calling `pkg-config`, make sure it is correctly installed.")
 				return
 			end
 

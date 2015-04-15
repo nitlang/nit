@@ -123,7 +123,7 @@ redef class ACharExpr
 	do
 		var txt = self.n_char.text.unescape_nit
 		if txt.length != 3 then
-			v.toolcontext.error(self.hot_location, "Invalid character literal {txt}")
+			v.toolcontext.error(self.hot_location, "Syntax Error: invalid character literal `{txt}`.")
 			return
 		end
 		self.value = txt.chars[1]

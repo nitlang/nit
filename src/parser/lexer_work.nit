@@ -248,7 +248,7 @@ class Lexer
 					var location = new Location(file, start_line + 1, start_line + 1, start_pos + 1, start_pos + 1)
 					if sp > start_stream_pos then
 						var text = string.substring(start_stream_pos, sp-start_stream_pos)
-						var token = new ALexerError.init_lexer_error("Syntax error: unknown token {text}.", location, text)
+						var token = new ALexerError.init_lexer_error("Syntax Error: unknown token `{text}`.", location, text)
 						file.last_token = token
 						return token
 					else

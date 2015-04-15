@@ -30,7 +30,7 @@ redef class ToolContext
 
 		var eof = tree.n_eof
 		if eof isa AError then
-			self.fatal_error(null, "Fatal Error: {eof.message}")
+			self.fatal_error(null, "Fatal Error: {eof.message}.")
 			abort
 		end
 		return tree.n_base.as(not null)
@@ -43,7 +43,7 @@ redef class ToolContext
 		var nmodule = parse_module(string)
 		var nclassdefs = nmodule.n_classdefs
 		if nclassdefs.length != 1 then
-			self.fatal_error(null, "Fatal Error: not a classdef")
+			self.fatal_error(null, "Fatal Error: not a classdef.")
 			abort
 		end
 		return nclassdefs.first
@@ -57,7 +57,7 @@ redef class ToolContext
 		var nclassdef = parse_classdef(mod_string)
 		var npropdefs = nclassdef.n_propdefs
 		if npropdefs.length != 1 then
-			self.fatal_error(null, "Fatal Error: not a propdef")
+			self.fatal_error(null, "Fatal Error: not a propdef.")
 			abort
 		end
 		return npropdefs.first
@@ -91,7 +91,7 @@ redef class ToolContext
 		var nclassdef = parse_classdef(mod_string).as(AStdClassdef)
 		var nsuperclasses = nclassdef.n_propdefs
 		if nsuperclasses.length != 1 then
-			self.fatal_error(null, "Fatal Error: not a super class declaration")
+			self.fatal_error(null, "Fatal Error: not a super class declaration.")
 			abort
 		end
 		return nsuperclasses.first

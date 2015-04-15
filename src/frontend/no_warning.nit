@@ -58,20 +58,20 @@ private class NoWarningPhase
 		if annots.is_empty then return
 
 		if source == null then
-			modelbuilder.warning(annots.first, "file-less-module", "Warning: annotation `{name}` does not currently work on file-less modules.")
+			modelbuilder.warning(annots.first, "file-less-module", "Warning: `{name}` does not currently work on file-less modules.")
 			return
 		end
 
 		for annot in annots do
 			var args = annot.n_args
 			if args.is_empty then
-				modelbuilder.error(annot, "Annotation error: `{name}` needs a list of warnings. Use `\"all\"` to disable all warnings.")
+				modelbuilder.error(annot, "Syntax Error: `{name}` expects a list of warnings. Use `\"all\"` to disable all warnings.")
 				continue
 			end
 			for arg in args do
 				var tag = arg.as_string
 				if tag == null then
-					modelbuilder.error(arg, "Annotation error: `{name}` expects String as arguments.")
+					modelbuilder.error(arg, "Syntax Error: `{name}` expects String as arguments.")
 					continue
 				end
 

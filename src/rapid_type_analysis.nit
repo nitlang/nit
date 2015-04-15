@@ -321,7 +321,7 @@ class RapidTypeAnalysis
 	do
 		var d = mtype.length
 		if d > 255 then
-			self.modelbuilder.toolcontext.fatal_error(null, "Fatal error: limitation in the rapidtype analysis engine: a type depth of {d} is too important, the problematic type is {mtype}.")
+			self.modelbuilder.toolcontext.fatal_error(null, "Fatal Error: limitation in the rapidtype analysis engine: a type depth of {d} is too important, the problematic type is `{mtype}`.")
 		end
 	end
 

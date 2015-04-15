@@ -48,13 +48,13 @@ private class CCompilerOptionsPhase
 		var modelbuilder = toolcontext.modelbuilder
 
 		if not nmoduledecl isa AModuledecl then
-			modelbuilder.error(nat, "Syntax error: only the declaration of modules may use \"{annotation_name}\".")
+			modelbuilder.error(nat, "Syntax Error: only the declaration of modules may use `{annotation_name}`.")
 			return
 		end
 
 		var args = nat.n_args
 		if args.is_empty then
-			modelbuilder.error(nat, "Syntax error: \"{annotation_name}\" expects at least one argument.")
+			modelbuilder.error(nat, "Syntax Error: `{annotation_name}` expects at least one argument.")
 			return
 		end
 
@@ -69,14 +69,14 @@ private class CCompilerOptionsPhase
 				# We support calls to "exec" only
 				var exec_args = expr.n_args.to_a
 				if expr.n_id.text != "exec" or exec_args.is_empty then
-					modelbuilder.error(nat, "Syntax error: \"{annotation_name}\" accepts only calls to `exec` with the command as arguments.")
+					modelbuilder.error(nat, "Syntax Error: `{annotation_name}` accepts only calls to `exec` with the command as arguments.")
 					return
 				end
 
 				var exec_args_as_strings = new Array[String]
 				for exec_arg in exec_args do
 					if not exec_arg isa AStringFormExpr then
-						modelbuilder.error(nat, "Syntax error: calls to `exec` expects the arguments to be String literals.")
+						modelbuilder.error(nat, "Syntax Error: calls to `exec` expects the arguments to be String literals.")
 						return
 					else
 						var arg_string = exec_arg.collect_text
@@ -88,7 +88,7 @@ private class CCompilerOptionsPhase
 				var opt = new ExecCCompilerOption(exec_args_as_strings, expr)
 				options.add(opt)
 			else
-				modelbuilder.error(nat, "Syntax error: \"{annotation_name}\" expects its arguments to be the name of the package as String literals.")
+				modelbuilder.error(nat, "Syntax Error: `{annotation_name}` expects its arguments to be the name of the package as String literals.")
 				return
 			end
 		end
@@ -113,14 +113,14 @@ private class CCompilerOptionsPhase
 				# check result
 				var status = proc.status
 				if status != 0 then
-					modelbuilder.error(opt.exec_node, "Annotation error: Something went wrong executing the argument of annotation \"{annotation_name}\", make sure the command is valid.")
+					modelbuilder.error(opt.exec_node, "Error: something went wrong when executing the argument of `{annotation_name}`, make sure the command is valid.")
 					return
 				end
 
 				# process result
 				var result = proc.read_all.replace("\n", " ")
 				if result.is_empty then
-					modelbuilder.error(opt.exec_node, "Annotation error: Got no result from the command, make sure it is valid.")
+					modelbuilder.error(opt.exec_node, "Error: got no result from the command, make sure it is valid.")
 					return
 				end
 				simplified_options.add(new DirectCCompilerOption(result))
@@ -147,7 +147,7 @@ private class CCompilerOptionsPhase
 		if annots != null then
 			var items = annots.n_items
 			if items.length > 1 then
-				modelbuilder.error(annots, "Annotation error: `annotation_name` accepts only a single annotation, the platform name")
+				modelbuilder.error(annots, "Syntax Error: `{annotation_name}` accepts only a single annotation, the platform name.")
 				return
 			end
 			assert items.length == 1

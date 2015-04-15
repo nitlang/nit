@@ -129,7 +129,7 @@ end
 
 var sum = opt_tree.value.to_i + opt_source.value.to_i + opt_project.value.to_i
 if sum > 1 then
-	print "Error: options --tree, --source, and --project are exclusives."
+	print "Error: options --tree, --source, and --project are exclusive."
 	print tc.tooldescription
 	exit 1
 end

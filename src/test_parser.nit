@@ -82,10 +82,10 @@ if (args.is_empty and not interactive) or need_help then
 	print("  -h	print this help")
 else if interactive then
 	if only_lexer then
-		print "Error: -l and -i are incompatibles"
+		print "Error: -l and -i are incompatible"
 		exit 1
 	else if no_file then
-		print "Error: -e and -i are incompatibles"
+		print "Error: -e and -i are incompatible"
 		exit 1
 	else if not args.is_empty then
 		print "Error: -i works without arguments"

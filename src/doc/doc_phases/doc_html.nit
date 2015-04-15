@@ -87,7 +87,7 @@ redef class ToolContext
 		var git_dir = opt_github_gitdir
 		var opts = [upstream.value, base_sha.value, git_dir.value]
 		if not opts.has_only(null) and opts.has(null) then
-			print "Error: Options {upstream.names.first}, " +
+			print "Option Error: options {upstream.names.first}, " +
 				"{base_sha.names.first} and {git_dir.names.first} " +
 				"are required to enable the GitHub plugin"
 			exit 1
@@ -120,7 +120,7 @@ class RenderHTMLPhase
 			var dir = ctx.nit_dir
 			sharedir = dir/"share/nitdoc"
 			if not sharedir.file_exists then
-				print "Error: Cannot locate nitdoc share files. Uses --sharedir or envvar NIT_DIR"
+				print "Error: cannot locate nitdoc share files. Uses --sharedir or envvar NIT_DIR"
 				abort
 			end
 		end
