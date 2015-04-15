@@ -62,6 +62,7 @@ Start ../src/test_parser.nit:17,1--156,1
                 AImplicitSelfExpr ../src/test_parser.nit:30,6
                 TId "n" ../src/test_parser.nit:30,6
                 AListExprs ../src/test_parser.nit:30,6
+              TKwisa "isa" ../src/test_parser.nit:30,8--10
               AType ../src/test_parser.nit:30,12--16
                 TClassid "Token" ../src/test_parser.nit:30,12--16
             ABlockExpr ../src/test_parser.nit:31,4--88
@@ -73,6 +74,7 @@ Start ../src/test_parser.nit:17,1--156,1
                   AStarExpr ../src/test_parser.nit:31,11--21
                     AStringExpr ../src/test_parser.nit:31,11--14
                       TString "\"  \"" ../src/test_parser.nit:31,11--14
+                    TStar "*" ../src/test_parser.nit:31,16
                     ACallExpr ../src/test_parser.nit:31,18--21
                       AImplicitSelfExpr ../src/test_parser.nit:31,18
                       TId "rank" ../src/test_parser.nit:31,18--21
@@ -117,6 +119,7 @@ Start ../src/test_parser.nit:17,1--156,1
                   AStarExpr ../src/test_parser.nit:33,11--21
                     AStringExpr ../src/test_parser.nit:33,11--14
                       TString "\"  \"" ../src/test_parser.nit:33,11--14
+                    TStar "*" ../src/test_parser.nit:33,16
                     ACallExpr ../src/test_parser.nit:33,18--21
                       AImplicitSelfExpr ../src/test_parser.nit:33,18
                       TId "rank" ../src/test_parser.nit:33,18--21
@@ -151,6 +154,7 @@ Start ../src/test_parser.nit:17,1--156,1
                 AImplicitSelfExpr ../src/test_parser.nit:35,10
                 TId "rank" ../src/test_parser.nit:35,10--13
                 AListExprs ../src/test_parser.nit:35,13
+              TPlus "+" ../src/test_parser.nit:35,15
               ADecIntExpr ../src/test_parser.nit:35,17
                 TNumber "1" ../src/test_parser.nit:35,17
           ACallExpr ../src/test_parser.nit:36,3--19
@@ -174,6 +178,7 @@ Start ../src/test_parser.nit:17,1--156,1
                 AImplicitSelfExpr ../src/test_parser.nit:37,10
                 TId "rank" ../src/test_parser.nit:37,10--13
                 AListExprs ../src/test_parser.nit:37,13
+              TMinus "-" ../src/test_parser.nit:37,15
               ADecIntExpr ../src/test_parser.nit:37,17
                 TNumber "1" ../src/test_parser.nit:37,17
           TKwend "end" ../src/test_parser.nit:38,2--4
@@ -229,6 +234,7 @@ Start ../src/test_parser.nit:17,1--156,1
                     AListExprs ../src/test_parser.nit:48,14
                   TId "is_empty" ../src/test_parser.nit:48,16--23
                   AListExprs ../src/test_parser.nit:48,23
+              TKwand "and" ../src/test_parser.nit:48,25--27
               AEqExpr ../src/test_parser.nit:48,29--57
                 ACallExpr ../src/test_parser.nit:48,29--50
                   ACallExpr ../src/test_parser.nit:48,29--44
@@ -243,6 +249,7 @@ Start ../src/test_parser.nit:17,1--156,1
                     AListExprs ../src/test_parser.nit:48,44
                   TId "first" ../src/test_parser.nit:48,46--50
                   AListExprs ../src/test_parser.nit:48,50
+                TEq "==" ../src/test_parser.nit:48,52--53
                 ACharExpr ../src/test_parser.nit:48,55--57
                   TChar "\'-\'" ../src/test_parser.nit:48,55--57
             TKwdo "do" ../src/test_parser.nit:48,59--60
@@ -257,6 +264,7 @@ Start ../src/test_parser.nit:17,1--156,1
                       AListExprs ../src/test_parser.nit:49,8
                     TId "first" ../src/test_parser.nit:49,10--14
                     AListExprs ../src/test_parser.nit:49,14
+                  TEq "==" ../src/test_parser.nit:49,16--17
                   AStringExpr ../src/test_parser.nit:49,19--22
                     TString "\"-n\"" ../src/test_parser.nit:49,19--22
                 ABlockExpr ../src/test_parser.nit:50,3--17
@@ -277,6 +285,7 @@ Start ../src/test_parser.nit:17,1--156,1
                         AListExprs ../src/test_parser.nit:51,13
                       TId "first" ../src/test_parser.nit:51,15--19
                       AListExprs ../src/test_parser.nit:51,19
+                    TEq "==" ../src/test_parser.nit:51,21--22
                     AStringExpr ../src/test_parser.nit:51,24--27
                       TString "\"-l\"" ../src/test_parser.nit:51,24--27
                   ABlockExpr ../src/test_parser.nit:52,3--19
@@ -297,6 +306,7 @@ Start ../src/test_parser.nit:17,1--156,1
                           AListExprs ../src/test_parser.nit:53,13
                         TId "first" ../src/test_parser.nit:53,15--19
                         AListExprs ../src/test_parser.nit:53,19
+                      TEq "==" ../src/test_parser.nit:53,21--22
                       AStringExpr ../src/test_parser.nit:53,24--27
                         TString "\"-p\"" ../src/test_parser.nit:53,24--27
                     ABlockExpr ../src/test_parser.nit:54,3--20
@@ -317,6 +327,7 @@ Start ../src/test_parser.nit:17,1--156,1
                             AListExprs ../src/test_parser.nit:55,13
                           TId "first" ../src/test_parser.nit:55,15--19
                           AListExprs ../src/test_parser.nit:55,19
+                        TEq "==" ../src/test_parser.nit:55,21--22
                         AStringExpr ../src/test_parser.nit:55,24--27
                           TString "\"-x\"" ../src/test_parser.nit:55,24--27
                       ABlockExpr ../src/test_parser.nit:56,3--12
@@ -337,6 +348,7 @@ Start ../src/test_parser.nit:17,1--156,1
                               AListExprs ../src/test_parser.nit:57,13
                             TId "first" ../src/test_parser.nit:57,15--19
                             AListExprs ../src/test_parser.nit:57,19
+                          TEq "==" ../src/test_parser.nit:57,21--22
                           AStringExpr ../src/test_parser.nit:57,24--27
                             TString "\"-e\"" ../src/test_parser.nit:57,24--27
                         ABlockExpr ../src/test_parser.nit:58,3--16
@@ -357,6 +369,7 @@ Start ../src/test_parser.nit:17,1--156,1
                                 AListExprs ../src/test_parser.nit:59,13
                               TId "first" ../src/test_parser.nit:59,15--19
                               AListExprs ../src/test_parser.nit:59,19
+                            TEq "==" ../src/test_parser.nit:59,21--22
                             AStringExpr ../src/test_parser.nit:59,24--27
                               TString "\"-i\"" ../src/test_parser.nit:59,24--27
                           ABlockExpr ../src/test_parser.nit:60,3--20
@@ -378,8 +391,10 @@ Start ../src/test_parser.nit:17,1--156,1
                                     AListExprs ../src/test_parser.nit:61,13
                                   TId "first" ../src/test_parser.nit:61,15--19
                                   AListExprs ../src/test_parser.nit:61,19
+                                TEq "==" ../src/test_parser.nit:61,21--22
                                 AStringExpr ../src/test_parser.nit:61,24--27
                                   TString "\"-h\"" ../src/test_parser.nit:61,24--27
+                              TKwor "or" ../src/test_parser.nit:61,29--30
                               AEqExpr ../src/test_parser.nit:61,32--49
                                 ACallExpr ../src/test_parser.nit:61,32--41
                                   ACallExpr ../src/test_parser.nit:61,32--35
@@ -388,6 +403,7 @@ Start ../src/test_parser.nit:17,1--156,1
                                     AListExprs ../src/test_parser.nit:61,35
                                   TId "first" ../src/test_parser.nit:61,37--41
                                   AListExprs ../src/test_parser.nit:61,41
+                                TEq "==" ../src/test_parser.nit:61,43--44
                                 AStringExpr ../src/test_parser.nit:61,46--49
                                   TString "\"-?\"" ../src/test_parser.nit:61,46--49
                             ABlockExpr ../src/test_parser.nit:62,3--18
@@ -450,6 +466,7 @@ Start ../src/test_parser.nit:17,1--156,1
                       AListExprs ../src/test_parser.nit:70,8
                     TId "is_empty" ../src/test_parser.nit:70,10--17
                     AListExprs ../src/test_parser.nit:70,17
+                  TKwand "and" ../src/test_parser.nit:70,19--21
                   ANotExpr ../src/test_parser.nit:70,23--37
                     TKwnot "not" ../src/test_parser.nit:70,23--25
                     ACallExpr ../src/test_parser.nit:70,27--37
@@ -457,6 +474,7 @@ Start ../src/test_parser.nit:17,1--156,1
                       TId "interactive" ../src/test_parser.nit:70,27--37
                       AListExprs ../src/test_parser.nit:70,37
                 TCpar ")" ../src/test_parser.nit:70,38
+              TKwor "or" ../src/test_parser.nit:70,40--41
               ACallExpr ../src/test_parser.nit:70,43--51
                 AImplicitSelfExpr ../src/test_parser.nit:70,43
                 TId "need_help" ../src/test_parser.nit:70,43--51
@@ -663,6 +681,7 @@ Start ../src/test_parser.nit:17,1--156,1
                           AImplicitSelfExpr ../src/test_parser.nit:99,6
                           TId "n" ../src/test_parser.nit:99,6
                           AListExprs ../src/test_parser.nit:99,6
+                        TKwisa "isa" ../src/test_parser.nit:99,8--10
                         AType ../src/test_parser.nit:99,12--18
                           TClassid "TString" ../src/test_parser.nit:99,12--18
                       ABlockExpr ../src/test_parser.nit:100,4--106,11
@@ -684,6 +703,7 @@ Start ../src/test_parser.nit:17,1--156,1
                               AImplicitSelfExpr ../src/test_parser.nit:101,7
                               TId "s" ../src/test_parser.nit:101,7
                               AListExprs ../src/test_parser.nit:101,7
+                            TEq "==" ../src/test_parser.nit:101,9--10
                             AStringExpr ../src/test_parser.nit:101,12--15
                               TString "\":q\"" ../src/test_parser.nit:101,12--15
                           ABlockExpr ../src/test_parser.nit:102,5--9
@@ -708,6 +728,7 @@ Start ../src/test_parser.nit:17,1--156,1
                           AImplicitSelfExpr ../src/test_parser.nit:109,6
                           TId "n" ../src/test_parser.nit:109,6
                           AListExprs ../src/test_parser.nit:109,6
+                        TKwisa "isa" ../src/test_parser.nit:109,8--10
                         AType ../src/test_parser.nit:109,12--17
                           TClassid "AError" ../src/test_parser.nit:109,12--17
                       ABlockExpr ../src/test_parser.nit:110,4--111,11
@@ -902,6 +923,7 @@ Start ../src/test_parser.nit:17,1--156,1
                                 AImplicitSelfExpr ../src/test_parser.nit:131,14
                                 TId "token" ../src/test_parser.nit:131,14--18
                                 AListExprs ../src/test_parser.nit:131,18
+                              TKwisa "isa" ../src/test_parser.nit:131,20--22
                               AType ../src/test_parser.nit:131,24--26
                                 TClassid "EOF" ../src/test_parser.nit:131,24--26
                           TKwdo "do" ../src/test_parser.nit:131,28--29
@@ -1002,6 +1024,7 @@ Start ../src/test_parser.nit:17,1--156,1
                               AImplicitSelfExpr ../src/test_parser.nit:142,7
                               TId "error" ../src/test_parser.nit:142,7--11
                               AListExprs ../src/test_parser.nit:142,11
+                            TKwisa "isa" ../src/test_parser.nit:142,13--15
                             AType ../src/test_parser.nit:142,17--22
                               TClassid "AError" ../src/test_parser.nit:142,17--22
                           ABlockExpr ../src/test_parser.nit:143,5--144,10
