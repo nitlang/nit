@@ -2551,22 +2551,26 @@ end
 # A complex assignment operator. (`+=` and `-=`)
 abstract class AAssignOp
 	super Prod
+
+	# The combined assignment operator
+	var n_op: Token is writable, noinit
+
+	# The name of the operator without the `=` (eg '+')
+	fun operator: String is abstract
 end
 
 # The `+=` assignment operation
 class APlusAssignOp
 	super AAssignOp
 
-	# The `+=` operator
-	var n_pluseq: TPluseq is writable, noinit
+	redef fun operator do return "+"
 end
 
 # The `-=` assignment operator
 class AMinusAssignOp
 	super AAssignOp
 
-	# The `-=` operator
-	var n_minuseq: TMinuseq is writable, noinit
+	redef fun operator do return "-"
 end
 
 # A possibly fully-qualified module identifier

@@ -935,8 +935,8 @@ exprs
 	| {bra} obra [exprs]:expr* cbra
 	;
 assign_op
-	= {plus} pluseq
-	| {minus} minuseq
+	= {plus} [op]:pluseq
+	| {minus}[op]:minuseq
 	;
 
 module_name = quad? [path]:id* id;
