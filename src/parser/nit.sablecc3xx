@@ -547,6 +547,7 @@ expr_pow~nopar~nobra {-> expr}
 expr_minus~nopar~nobra {-> expr}
 	= expr_new~nopar~nobra {-> expr_new~nopar~nobra.expr}
 	| {:uminus} minus expr_minus~nobra
+	| {:uplus} plus expr_minus~nobra
 	| {:once} kwonce :no expr_minus~nobra
 	;
 
@@ -883,6 +884,7 @@ expr	= {block} expr* kwend?
 	| {slash} expr [expr2]:expr 
 	| {percent} expr [expr2]:expr 
 	| {uminus} minus expr 
+	| {uplus} plus expr
 	| {new} kwnew type id? [args]:exprs
 	| {attr} expr [id]:attrid 
 	| {attr_assign} expr [id]:attrid assign [value]:expr 

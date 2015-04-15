@@ -2025,6 +2025,14 @@ class AUminusExpr
 	var n_minus: TMinus is writable, noinit
 end
 
+# A unary plus expression. eg `+x`
+class AUplusExpr
+	super ASendExpr
+
+	# The `+` symbol
+	var n_plus: TPlus is writable, noinit
+end
+
 # An explicit instantiation. eg `new T`
 class ANewExpr
 	super AExpr
