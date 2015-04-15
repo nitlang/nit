@@ -158,6 +158,12 @@ quad = '::';
 assign = '=';
 pluseq = '+=';
 minuseq = '-=';
+stareq = '*=';
+slasheq = '/=';
+percenteq = '%=';
+starstareq = '**=';
+lleq = '<<=';
+ggeq = '>>=';
 dotdotdot = '...';
 dotdot = '..';
 dot = '.';
@@ -443,6 +449,12 @@ assignment~nopar {-> expr}
 assign_op
 	= {plus} pluseq
 	| {minus} minuseq
+	| {star} stareq
+	| {slash} slasheq
+	| {percent} percenteq
+	| {starstar} starstareq
+	| {ll} lleq
+	| {gg} ggeq
 	;
 
 do~withelse {-> expr}
@@ -937,6 +949,12 @@ exprs
 assign_op
 	= {plus} [op]:pluseq
 	| {minus}[op]:minuseq
+	| {star} [op]:stareq
+	| {slash} [op]:slasheq
+	| {percent} [op]:percenteq
+	| {starstar} [op]:starstareq
+	| {ll} [op]:lleq
+	| {gg} [op]:ggeq
 	;
 
 module_name = quad? [path]:id* id;

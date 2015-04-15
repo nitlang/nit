@@ -730,6 +730,36 @@ class TMinuseq
 	super TokenOperator
 end
 
+# The operator `*=`
+class TStareq
+	super TokenOperator
+end
+
+# The operator `/=`
+class TSlasheq
+	super TokenOperator
+end
+
+# The operator `%=`
+class TPercenteq
+	super TokenOperator
+end
+
+# The operator `**=`
+class TStarstareq
+	super TokenOperator
+end
+
+# The operator `<<=`
+class TLleq
+	super TokenOperator
+end
+
+# The operator `>>=`
+class TGgeq
+	super TokenOperator
+end
+
 # The symbol `...`
 class TDotdotdot
 	super Token
@@ -2559,18 +2589,60 @@ abstract class AAssignOp
 	fun operator: String is abstract
 end
 
-# The `+=` assignment operation
+# A `+=` assignment operation
 class APlusAssignOp
 	super AAssignOp
 
 	redef fun operator do return "+"
 end
 
-# The `-=` assignment operator
+# A `-=` assignment operation
 class AMinusAssignOp
 	super AAssignOp
 
 	redef fun operator do return "-"
+end
+
+# A `*=` assignment operation
+class AStarAssignOp
+	super AAssignOp
+
+	redef fun operator do return "*"
+end
+
+# A `/=` assignment operation
+class ASlashAssignOp
+	super AAssignOp
+
+	redef fun operator do return "/"
+end
+
+# A `%=` assignment operation
+class APercentAssignOp
+	super AAssignOp
+
+	redef fun operator do return "%"
+end
+
+# A `**=` assignment operation
+class AStarstarAssignOp
+	super AAssignOp
+
+	redef fun operator do return "**"
+end
+
+# A `<<=` assignment operation
+class ALlAssignOp
+	super AAssignOp
+
+	redef fun operator do return "<<"
+end
+
+# A `>>=` assignment operation
+class AGgAssignOp
+	super AAssignOp
+
+	redef fun operator do return ">>"
 end
 
 # A possibly fully-qualified module identifier
