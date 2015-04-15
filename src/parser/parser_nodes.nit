@@ -1886,6 +1886,9 @@ abstract class ABinopExpr
 	# The second operand of the operation
 	# Note: the receiver (`n_expr`) is the first operand
 	var n_expr2: AExpr is writable, noinit
+
+	# The name of the operator (eg '+')
+	fun operator: String is abstract
 end
 
 # Something that is boolean expression
@@ -1944,41 +1947,49 @@ end
 # A `==` expression
 class AEqExpr
 	super ABinopExpr
+	redef fun operator do return "=="
 end
 
 # A `!=` expression
 class ANeExpr
 	super ABinopExpr
+	redef fun operator do return "!="
 end
 
 # A `<` expression
 class ALtExpr
 	super ABinopExpr
+	redef fun operator do return "<"
 end
 
 # A `<=` expression
 class ALeExpr
 	super ABinopExpr
+	redef fun operator do return "<="
 end
 
 # A `<<` expression
 class ALlExpr
 	super ABinopExpr
+	redef fun operator do return "<<"
 end
 
 # A `>` expression
 class AGtExpr
 	super ABinopExpr
+	redef fun operator do return ">"
 end
 
 # A `>=` expression
 class AGeExpr
 	super ABinopExpr
+	redef fun operator do return ">="
 end
 
 # A `>>` expression
 class AGgExpr
 	super ABinopExpr
+	redef fun operator do return ">>"
 end
 
 # A type-ckeck expression. eg `x isa T`
@@ -1998,36 +2009,43 @@ end
 # A `+` expression
 class APlusExpr
 	super ABinopExpr
+	redef fun operator do return "+"
 end
 
 # A `-` expression
 class AMinusExpr
 	super ABinopExpr
+	redef fun operator do return "-"
 end
 
 # A `<=>` expression
 class AStarshipExpr
 	super ABinopExpr
+	redef fun operator do return "<=>"
 end
 
 # A `*` expression
 class AStarExpr
 	super ABinopExpr
+	redef fun operator do return "*"
 end
 
 # A `**` expression
 class AStarstarExpr
 	super ABinopExpr
+	redef fun operator do return "**"
 end
 
 # A `/` expression
 class ASlashExpr
 	super ABinopExpr
+	redef fun operator do return "/"
 end
 
 # A `%` expression
 class APercentExpr
 	super ABinopExpr
+	redef fun operator do return "%"
 end
 
 # A unary minus expression. eg `-x`
