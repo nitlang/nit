@@ -30,7 +30,7 @@ redef class Prod
 		var res = get_annotations(name)
 		if res.is_empty then return null
 		if res.length > 1 then
-			modelbuilder.error(res[1], "Error: multiple annotation `{name}`. A previous one is defined line {res[0].location.line_start}")
+			modelbuilder.error(res[1], "Syntax Error: multiple `{name}`. A previous one is defined line {res[0].location.line_start}.")
 		end
 		return res.first
 	end
@@ -47,7 +47,7 @@ redef class AAnnotation
 			if arg != null then return arg
 		end
 
-		modelbuilder.error(self, "Annotation error: \"{name}\" expects a single String as argument.")
+		modelbuilder.error(self, "Syntax Error: `{name}` expects a single String as argument.")
 		return null
 	end
 
@@ -61,7 +61,7 @@ redef class AAnnotation
 			if arg != null then return arg
 		end
 
-		modelbuilder.error(self, "Annotation error: \"{name}\" expects a single Int as argument.")
+		modelbuilder.error(self, "Syntax Error: `{name}` expects a single Int as argument.")
 		return null
 	end
 
@@ -75,7 +75,7 @@ redef class AAnnotation
 			if arg != null then return arg
 		end
 
-		modelbuilder.error(self, "Annotation error: \"{name}\" expects a single identifier as argument.")
+		modelbuilder.error(self, "Syntax Error: `{name}` expects a single identifier as argument.")
 		return null
 	end
 end
@@ -142,7 +142,7 @@ redef class ModelBuilder
 			for annot in annotations do locs.add(annot.location)
 
 			toolcontext.error(mmodule.location,
-				"Priority conflict on annotation {name}, it has been defined in: {locs.join(", ")}")
+				"Error: priority conflict on annotation `{name}`, it has been defined in: {locs.join(", ")}.")
 		end
 		return annotations.first
 	end

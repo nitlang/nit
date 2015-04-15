@@ -146,7 +146,7 @@ class Parser
 			else if action_type == 3 then # ERROR
 				# skip injected tokens
 				while not isset token._location do token = lexer.next
-				var node2 = new AParserError.init_parser_error("Syntax error: unexpected {token}.", token.location, token)
+				var node2 = new AParserError.init_parser_error("Syntax Error: unexpected {token}.", token.location, token)
 				var node = new Start(null, node2)
 				return node
 			end

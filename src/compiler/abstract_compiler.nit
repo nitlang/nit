@@ -95,12 +95,12 @@ redef class ToolContext
 			# Default is nitstack
 			opt_stacktrace.value = "nitstack"
 		else
-			print "Error: unknown value `{st}` for --stacktrace. Use `none`, `libunwind`, `nitstack` or `auto`."
+			print "Option Error: unknown value `{st}` for --stacktrace. Use `none`, `libunwind`, `nitstack` or `auto`."
 			exit(1)
 		end
 
 		if opt_output.value != null and opt_dir.value != null then
-			print "Error: cannot use both --dir and --output"
+			print "Option Error: cannot use both --dir and --output"
 			exit(1)
 		end
 
@@ -463,16 +463,18 @@ endif
 
 		var makeflags = self.toolcontext.opt_make_flags.value
 		if makeflags == null then makeflags = ""
-		self.toolcontext.info("make -B -C {compile_dir} -f {makename} -j 4 {makeflags}", 2)
+
+		var command = "make -B -C {compile_dir} -f {makename} -j 4 {makeflags}"
+		self.toolcontext.info(command, 2)
 
 		var res
 		if self.toolcontext.verbose_level >= 3 then
-			res = sys.system("make -B -C {compile_dir} -f {makename} -j 4 {makeflags} 2>&1")
+			res = sys.system("{command} 2>&1")
 		else
-			res = sys.system("make -B -C {compile_dir} -f {makename} -j 4 {makeflags} 2>&1 >/dev/null")
+			res = sys.system("{command} 2>&1 >/dev/null")
 		end
 		if res != 0 then
-			toolcontext.error(null, "make failed! Error code: {res}.")
+			toolcontext.error(null, "Compilation Error: `make` failed with error code: {res}. The command was `{command}`.")
 		end
 	end
 end
@@ -689,7 +691,7 @@ extern void nitni_global_ref_decr( struct nitni_ref *ref );
 		var finalize_meth = mainmodule.try_get_primitive_method("finalize", finalizable_type.mclass)
 
 		if finalize_meth == null then
-			modelbuilder.toolcontext.error(null, "The `Finalizable` class doesn't declare the `finalize` method.")
+			modelbuilder.toolcontext.error(null, "Error: the `Finalizable` class does not declare the `finalize` method.")
 			return
 		end
 
@@ -3159,7 +3161,7 @@ var modelbuilder = new ModelBuilder(model, toolcontext)
 
 var arguments = toolcontext.option_context.rest
 if arguments.length > 1 and toolcontext.opt_output.value != null then
-	print "Error: --output needs a single source file. Do you prefer --dir?"
+	print "Option Error: --output needs a single source file. Do you prefer --dir?"
 	exit 1
 end
 

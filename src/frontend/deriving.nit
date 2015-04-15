@@ -37,7 +37,7 @@ private class DerivingPhase
 	do
 		if nat.name == "auto_inspect" then
 			if not nclassdef isa AStdClassdef then
-				toolcontext.error(nclassdef.location, "Syntax error: only a concrete class can be `{nat.name}`.")
+				toolcontext.error(nclassdef.location, "Syntax Error: only a concrete class can be `{nat.name}`.")
 			else
 				generate_inspect_method(nclassdef)
 			end
@@ -45,7 +45,7 @@ private class DerivingPhase
 
 		if nat.name == "auto_derive" then
 			if not nclassdef isa AStdClassdef then
-				toolcontext.error(nclassdef.location, "Syntax error: only a concrete class can be `{nat.name}`.")
+				toolcontext.error(nclassdef.location, "Syntax Error: only a concrete class can be `{nat.name}`.")
 			else
 				generate_derive_to_map_method(nclassdef, nat)
 			end

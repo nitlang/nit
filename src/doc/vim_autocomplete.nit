@@ -302,7 +302,7 @@ private class AutocompletePhase
 			stream.close
 			var error = stream.last_error
 			if error != null then
-				toolcontext.error(null, "Failed to write Vim autocomplete file: {error}")
+				toolcontext.error(null, "Error: failed to write Vim autocomplete file: {error}.")
 			end
 		end
 	end

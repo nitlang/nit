@@ -52,7 +52,7 @@ private class GLSLValidationPhase
 		# Only applicable on strings
 		if not nstring isa AStringFormExpr then
 			toolcontext.error(nstring.location,
-				"Syntax error: only a string literal can be annotated as \"{annot_name}\".")
+				"Syntax Error: only a string literal can be annotated as `{annot_name}`.")
 			return
 		end
 
@@ -70,7 +70,7 @@ private class GLSLValidationPhase
 			tool_is_in_path = in_path
 			if not in_path then
 				toolcontext.warning(nat.location, "glslvalidator",
-					"Warning: program \"glslangValidator\" not in PATH, cannot validate this shader.")
+					"Warning: program `glslangValidator` not in PATH, cannot validate this shader.")
 				return
 			end
 		end

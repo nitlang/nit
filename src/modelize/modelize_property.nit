@@ -190,7 +190,7 @@ redef class ModelBuilder
 				if sig == null then continue # Skip broken method
 
 				if not npropdef.mpropdef.is_intro then
-					self.error(at, "Error: `autoinit` cannot be set on redefinitions")
+					self.error(at, "Error: `autoinit` cannot be set on redefinitions.")
 					continue
 				end
 
@@ -237,7 +237,7 @@ redef class ModelBuilder
 		# Look for most-specific new-stype init definitions
 		var spropdefs = the_root_init_mmethod.lookup_super_definitions(mclassdef.mmodule, mclassdef.bound_mtype)
 		if spropdefs.is_empty then
-			toolcontext.error(nclassdef.location, "Error: {mclassdef} does not specialize {the_root_init_mmethod.intro_mclassdef}. Possible duplication of the root class `Object`?")
+			toolcontext.error(nclassdef.location, "Error: `{mclassdef}` does not specialize `{the_root_init_mmethod.intro_mclassdef}`. Possible duplication of the root class `Object`?")
 			return
 		end
 
@@ -254,14 +254,14 @@ redef class ModelBuilder
 			end
 
 			if autoinit.n_args.is_empty then
-				error(autoinit, "Syntax error: `autoinit` expects method identifiers, use `noautoinit` to clear all autoinits.")
+				error(autoinit, "Syntax Error: `autoinit` expects method identifiers, use `noautoinit` to clear all autoinits.")
 			end
 
 			# Get and check each argument
 			for narg in autoinit.n_args do
 				var id = narg.as_id
 				if id == null then
-					error(narg, "Syntax error: `autoinit` expects method identifiers.")
+					error(narg, "Syntax Error: `autoinit` expects method identifiers.")
 					return
 				end
 
@@ -390,10 +390,10 @@ redef class ModelBuilder
 			assert mmodule_type != null
 			var vis_module_type = mmodule.visibility_for(mmodule_type) # the visibility of the original module
 			if mproperty.visibility > vis_type then
-				error(node, "Error: The {mproperty.visibility} property `{mproperty}` cannot contain the {vis_type} type `{mtype}`")
+				error(node, "Error: the {mproperty.visibility} property `{mproperty}` cannot contain the {vis_type} type `{mtype}`.")
 				return
 			else if mproperty.visibility > vis_module_type then
-				error(node, "Error: The {mproperty.visibility} property `{mproperty}` cannot contain the type `{mtype}` from the {vis_module_type} module `{mmodule_type}`")
+				error(node, "Error: the {mproperty.visibility} property `{mproperty}` cannot contain the type `{mtype}` from the {vis_module_type} module `{mmodule_type}`.")
 				return
 			end
 		end
@@ -462,9 +462,9 @@ redef class ModelBuilder
 			for next in nexts do
 				if poset.has_edge(next, t) then
 					if mtype == next then
-						error(node, "Error: circularity of virtual type definition: {next} <-> {t}")
+						error(node, "Error: circularity of virtual type definition: {next} <-> {t}.")
 					else
-						error(node, "Error: circularity of virtual type definition: {mtype} -> {next} <-> {t}")
+						error(node, "Error: circularity of virtual type definition: {mtype} -> {next} <-> {t}.")
 					end
 					return false
 				else
@@ -527,17 +527,17 @@ redef class MClassDef
 
 			# SELF must be declared in Object, otherwise this will create conflicts
 			if intro_mclassdef.mclass.name != "Object" then
-				modelbuilder.error(nintro, "Error: the virtual type SELF must be declared in Object.")
+				modelbuilder.error(nintro, "Error: the virtual type `SELF` must be declared in `Object`.")
 			end
 
 			# SELF must be public
 			if mprop.visibility != public_visibility then
-				modelbuilder.error(nintro, "Error: the virtual type SELF must be public.")
+				modelbuilder.error(nintro, "Error: the virtual type `SELF` must be public.")
 			end
 
 			# SELF must not be fixed
 			if intro.is_fixed then
-				modelbuilder.error(nintro, "Error: the virtual type SELF cannot be fixed.")
+				modelbuilder.error(nintro, "Error: the virtual type `SELF` cannot be fixed.")
 			end
 
 			return
@@ -566,17 +566,17 @@ redef class APropdef
 		if nvisibility != null then
 			mvisibility = nvisibility.mvisibility
 			if mvisibility == intrude_visibility then
-				modelbuilder.error(nvisibility, "Error: intrude is not a legal visibility for properties.")
+				modelbuilder.error(nvisibility, "Error: `intrude` is not a legal visibility for properties.")
 				mvisibility = public_visibility
 			end
 		end
 		if mclassdef.mclass.visibility == private_visibility then
 			if mvisibility == protected_visibility then
 				assert nvisibility != null
-				modelbuilder.error(nvisibility, "Error: The only legal visibility for properties in a private class is private.")
+				modelbuilder.error(nvisibility, "Error: `private` is the only legal visibility for properties in a private class.")
 			else if mvisibility == private_visibility then
 				assert nvisibility != null
-				modelbuilder.advice(nvisibility, "useless-visibility", "Warning: private is superfluous since the only legal visibility for properties in a private class is private.")
+				modelbuilder.advice(nvisibility, "useless-visibility", "Warning: `private` is superfluous since the only legal visibility for properties in a private class is private.")
 			end
 			mvisibility = private_visibility
 		end
@@ -612,20 +612,20 @@ redef class APropdef
 		if nvisibility == null then return
 		var mvisibility = nvisibility.mvisibility
 		if mvisibility != mprop.visibility and mvisibility != public_visibility then
-				modelbuilder.error(nvisibility, "Error: redefinition changed the visibility from a {mprop.visibility} to a {mvisibility}")
+				modelbuilder.error(nvisibility, "Error: redefinition changed the visibility from `{mprop.visibility}` to `{mvisibility}`.")
 		end
 	end
 
 	private fun check_redef_keyword(modelbuilder: ModelBuilder, mclassdef: MClassDef, kwredef: nullable Token, need_redef: Bool, mprop: MProperty): Bool
 	do
 		if mclassdef.mprop2npropdef.has_key(mprop) then
-			modelbuilder.error(self, "Error: A property {mprop} is already defined in class {mclassdef.mclass} at line {mclassdef.mprop2npropdef[mprop].location.line_start}.")
+			modelbuilder.error(self, "Error: a property `{mprop}` is already defined in class `{mclassdef.mclass}` at line {mclassdef.mprop2npropdef[mprop].location.line_start}.")
 			return false
 		end
 		if mprop isa MMethod and mprop.is_root_init then return true
 		if kwredef == null then
 			if need_redef then
-				modelbuilder.error(self, "Redef error: {mclassdef.mclass}::{mprop.name} is an inherited property. To redefine it, add the redef keyword.")
+				modelbuilder.error(self, "Redef Error: `{mclassdef.mclass}::{mprop.name}` is an inherited property. To redefine it, add the `redef` keyword.")
 				return false
 			end
 
@@ -642,7 +642,7 @@ redef class APropdef
 			end
 		else
 			if not need_redef then
-				modelbuilder.error(self, "Error: No property {mclassdef.mclass}::{mprop.name} is inherited. Remove the redef keyword to define a new property.")
+				modelbuilder.error(self, "Error: no property `{mclassdef.mclass}::{mprop.name}` is inherited. Remove the `redef` keyword to define a new property.")
 				return false
 			end
 		end
@@ -683,7 +683,7 @@ redef class ASignature
 				end
 				if np.n_dotdotdot != null then
 					if self.vararg_rank != -1 then
-						modelbuilder.error(np, "Error: {param_names[self.vararg_rank]} is already a vararg")
+						modelbuilder.error(np, "Error: `{param_names[self.vararg_rank]}` is already a vararg")
 						return false
 					else
 						self.vararg_rank = param_names.length - 1
@@ -892,7 +892,7 @@ redef class AMethPropdef
 			if param_names.length != msignature.arity then
 				var node: ANode
 				if nsig != null then node = nsig else node = self
-				modelbuilder.error(node, "Redef error: {mpropdef} redefines {mpropdef.mproperty.intro} with {param_names.length} parameter(s), {msignature.arity} expected. Signature is {mpropdef}{msignature}")
+				modelbuilder.error(node, "Redef Error: expected {msignature.arity} parameter(s) for `{mpropdef.mproperty.name}{msignature}`; got {param_names.length}. See introduction at `{mpropdef.mproperty.full_name}`.")
 				return
 			end
 		else if mpropdef.mproperty.is_init and not mpropdef.mproperty.is_new then
@@ -924,7 +924,7 @@ redef class AMethPropdef
 
 		if param_names.length != param_types.length then
 			# Some parameters are typed, other parameters are not typed.
-			modelbuilder.error(nsig.n_params[param_types.length], "Error: Untyped parameter `{param_names[param_types.length]}'.")
+			modelbuilder.error(nsig.n_params[param_types.length], "Error: untyped parameter `{param_names[param_types.length]}'.")
 			return
 		end
 
@@ -946,7 +946,7 @@ redef class AMethPropdef
 
 		# Check annotations
 		var at = self.get_single_annotation("lazy", modelbuilder)
-		if at != null then modelbuilder.error(at, "Syntax error: `lazy` must be used on attributes.")
+		if at != null then modelbuilder.error(at, "Syntax Error: `lazy` must be used on attributes.")
 	end
 
 	redef fun check_signature(modelbuilder)
@@ -976,7 +976,7 @@ redef class AMethPropdef
 			var precursor_ret_type = msignature.return_mtype
 			var ret_type = mysignature.return_mtype
 			if ret_type != null and precursor_ret_type == null then
-				modelbuilder.error(nsig.n_type.as(not null), "Redef Error: {mpropdef.mproperty} is a procedure, not a function.")
+				modelbuilder.error(nsig.n_type.as(not null), "Redef Error: `{mpropdef.mproperty}` is a procedure, not a function.")
 				self.mpropdef.msignature = null
 				return
 			end
@@ -988,7 +988,7 @@ redef class AMethPropdef
 					var prt = msignature.mparameters[i].mtype
 					var node = nsig.n_params[i]
 					if not modelbuilder.check_sametype(node, mmodule, mclassdef.bound_mtype, myt, prt) then
-						modelbuilder.error(node, "Redef Error: Wrong type for parameter `{mysignature.mparameters[i].name}'. found {myt}, expected {prt} as in {mpropdef.mproperty.intro}.")
+						modelbuilder.error(node, "Redef Error: expected `{prt}` for parameter `{mysignature.mparameters[i].name}'; got `{myt}`.")
 						self.mpropdef.msignature = null
 					end
 				end
@@ -1001,7 +1001,7 @@ redef class AMethPropdef
 					# Inherit the return type
 					ret_type = precursor_ret_type
 				else if not modelbuilder.check_subtype(node, mmodule, mclassdef.bound_mtype, ret_type, precursor_ret_type) then
-					modelbuilder.error(node, "Redef Error: Wrong return type. found {ret_type}, expected {precursor_ret_type} as in {mpropdef.mproperty.intro}.")
+					modelbuilder.error(node, "Redef Error: expected `{precursor_ret_type}` for return type; got `{ret_type}`.")
 					self.mpropdef.msignature = null
 				end
 			end
@@ -1051,12 +1051,8 @@ redef class AAttrPropdef
 
 		var atabstract = self.get_single_annotation("abstract", modelbuilder)
 		if atabstract == null then
-			if mclass.kind == interface_kind then
-				modelbuilder.error(self, "Error: Attempt to define attribute {name} in the interface {mclass}.")
-			else if mclass.kind == enum_kind then
-				modelbuilder.error(self, "Error: Attempt to define attribute {name} in the enum class {mclass}.")
-			else if mclass.kind == extern_kind then
-				modelbuilder.error(self, "Error: Attempt to define attribute {name} in the extern class {mclass}.")
+			if not mclass.kind.need_init then
+				modelbuilder.error(self, "Error: attempt to define attribute `{name}` in the {mclass.kind} `{mclass}`.")
 			end
 
 			var mprop = new MAttribute(mclassdef, "_" + name, private_visibility)
@@ -1087,7 +1083,7 @@ redef class AAttrPropdef
 		has_value = n_expr != null or n_block != null
 
 		if atabstract != null and has_value then
-			modelbuilder.error(atabstract, "Error: `abstract` attributes cannot have an initial value")
+			modelbuilder.error(atabstract, "Error: `abstract` attributes cannot have an initial value.")
 			return
 		end
 
@@ -1096,11 +1092,11 @@ redef class AAttrPropdef
 		if atnoinit != null then
 			noinit = true
 			if has_value then
-				modelbuilder.error(atnoinit, "Error: `noautoinit` attributes cannot have an initial value")
+				modelbuilder.error(atnoinit, "Error: `noautoinit` attributes cannot have an initial value.")
 				return
 			end
 			if atabstract != null then
-				modelbuilder.error(atnoinit, "Error: `noautoinit` attributes cannot be abstract")
+				modelbuilder.error(atnoinit, "Error: `noautoinit` attributes cannot be abstract.")
 				return
 			end
 		end
@@ -1109,14 +1105,14 @@ redef class AAttrPropdef
 		var atautoinit = self.get_single_annotation("autoinit", modelbuilder)
 		if atlazy != null or atautoinit != null then
 			if atlazy != null and atautoinit != null then
-				modelbuilder.error(atlazy, "Error: lazy incompatible with autoinit")
+				modelbuilder.error(atlazy, "Error: `lazy` incompatible with `autoinit`.")
 				return
 			end
 			if not has_value then
 				if atlazy != null then
-					modelbuilder.error(atlazy, "Error: a lazy attribute needs a value")
+					modelbuilder.error(atlazy, "Error: `lazy` attributes need a value.")
 				else if atautoinit != null then
-					modelbuilder.error(atautoinit, "Error: a autoinit attribute needs a value")
+					modelbuilder.error(atautoinit, "Error: `autoinit` attributes need a value.")
 				end
 				has_value = true
 				return
@@ -1130,7 +1126,7 @@ redef class AAttrPropdef
 		var atreadonly = self.get_single_annotation("readonly", modelbuilder)
 		if atreadonly != null then
 			if not has_value then
-				modelbuilder.error(atreadonly, "Error: a readonly attribute needs a value")
+				modelbuilder.error(atreadonly, "Error: `readonly` attributes need a value.")
 			end
 			# No setter, so just leave
 			return
@@ -1224,7 +1220,7 @@ redef class AAttrPropdef
 					var cla = modelbuilder.try_get_mclass_by_name(nexpr, mmodule, "String")
 					if cla != null then mtype = cla.mclass_type
 				else
-					modelbuilder.error(self, "Error: Untyped attribute {mreadpropdef}. Implicit typing allowed only for literals and new.")
+					modelbuilder.error(self, "Error: untyped attribute `{mreadpropdef}`. Implicit typing allowed only for literals and new.")
 				end
 
 				if mtype == null then return
@@ -1239,7 +1235,7 @@ redef class AAttrPropdef
 		end
 
 		if mtype == null then
-			modelbuilder.error(self, "Error: Untyped attribute {mreadpropdef}")
+			modelbuilder.error(self, "Error: untyped attribute `{mreadpropdef}`.")
 			return
 		end
 
@@ -1294,7 +1290,7 @@ redef class AAttrPropdef
 			if precursor_type == null then return
 
 			if mtype != precursor_type then
-				modelbuilder.error(ntype.as(not null), "Redef Error: Wrong static type. found {mtype}, expected {precursor_type}.")
+				modelbuilder.error(ntype.as(not null), "Redef Error: expected `{precursor_type}` type as a bound; got `{mtype}`.")
 				return
 			end
 		end
@@ -1333,7 +1329,7 @@ redef class AAttrPropdef
 			if mysignature.arity != msignature.arity then
 				var node: ANode
 				if nsig != null then node = nsig else node = self
-				modelbuilder.error(node, "Redef Error: {mysignature.arity} parameters found, {msignature.arity} expected. Signature is {mpropdef}{msignature}")
+				modelbuilder.error(node, "Redef Error: expected {msignature.arity} parameter(s) for `{mpropdef.mproperty.name}{msignature}`; got {mysignature.arity}. See introduction at `{mpropdef.mproperty.full_name}`.")
 				return
 			end
 			var precursor_ret_type = msignature.return_mtype
@@ -1341,7 +1337,7 @@ redef class AAttrPropdef
 			if ret_type != null and precursor_ret_type == null then
 				var node: ANode
 				if nsig != null then node = nsig else node = self
-				modelbuilder.error(node, "Redef Error: {mpropdef.mproperty} is a procedure, not a function.")
+				modelbuilder.error(node, "Redef Error: `{mpropdef.mproperty}` is a procedure, not a function.")
 				return
 			end
 
@@ -1353,7 +1349,7 @@ redef class AAttrPropdef
 					var node: ANode
 					if nsig != null then node = nsig else node = self
 					if not modelbuilder.check_sametype(node, mmodule, mclassdef.bound_mtype, myt, prt) then
-						modelbuilder.error(node, "Redef Error: Wrong type for parameter `{mysignature.mparameters[i].name}'. found {myt}, expected {prt}.")
+						modelbuilder.error(node, "Redef Error: expected `{prt}` type for parameter `{mysignature.mparameters[i].name}'; got `{myt}`.")
 					end
 				end
 			end
@@ -1364,7 +1360,7 @@ redef class AAttrPropdef
 					# Inherit the return type
 					ret_type = precursor_ret_type
 				else if not modelbuilder.check_subtype(node, mmodule, mclassdef.bound_mtype, ret_type, precursor_ret_type) then
-					modelbuilder.error(node, "Redef Error: Wrong return type. found {ret_type}, expected {precursor_ret_type}.")
+					modelbuilder.error(node, "Redef Error: expected `{precursor_ret_type}` return type; got `{ret_type}`.")
 				end
 			end
 		end
@@ -1382,7 +1378,7 @@ redef class ATypePropdef
 			var mvisibility = new_property_visibility(modelbuilder, mclassdef, self.n_visibility)
 			mprop = new MVirtualTypeProp(mclassdef, name, mvisibility)
 			for c in name.chars do if c >= 'a' and c<= 'z' then
-				modelbuilder.warning(n_id, "bad-type-name", "Warning: lowercase in the virtual type {name}")
+				modelbuilder.warning(n_id, "bad-type-name", "Warning: lowercase in the virtual type `{name}`.")
 				break
 			end
 			if not self.check_redef_keyword(modelbuilder, mclassdef, self.n_kwredef, false, mprop) then return
@@ -1450,7 +1446,7 @@ redef class ATypePropdef
 			var supbound = p.bound
 			if supbound == null then break # broken super bound, skip error
 			if p.is_fixed then
-				modelbuilder.error(self, "Redef Error: Virtual type {mpropdef.mproperty} is fixed in super-class {p.mclassdef.mclass}")
+				modelbuilder.error(self, "Redef Error: virtual type `{mpropdef.mproperty}` is fixed in super-class `{p.mclassdef.mclass}`.")
 				break
 			end
 			if p.mclassdef.mclass == mclassdef.mclass then
@@ -1459,7 +1455,7 @@ redef class ATypePropdef
 				break
 			end
 			if not modelbuilder.check_subtype(n_type, mmodule, anchor, bound, supbound) then
-				modelbuilder.error(n_type, "Redef Error: Wrong bound type. Found {bound}, expected a subtype of {supbound}, as in {p}.")
+				modelbuilder.error(n_type, "Redef Error: expected `{supbound}` bound type; got `{bound}`.")
 				break
 			end
 		end

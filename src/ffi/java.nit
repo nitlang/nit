@@ -296,7 +296,7 @@ redef class AMethPropdef
 		assert sys_class != null
 		var sys_jni_env_meth = modelbuilder.try_get_mproperty_by_name2(self, mmodule, sys_class.mclass_type, "jni_env")
 		if sys_jni_env_meth == null or not sys_jni_env_meth isa MMethod then
-			toolcontext.error(self.location, "Java FFI error: you must import the `java` module when using the FFI with Java")
+			toolcontext.error(self.location, "Java FFI Error: you must import the `java` module when using the FFI with Java")
 			return
 		end
 

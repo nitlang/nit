@@ -74,7 +74,7 @@ class ModelBuilder
 			if res == null then
 				res = mclass
 			else
-				error(anode, "Ambigous class name '{name}'; conflict between {mclass.full_name} and {res.full_name}")
+				error(anode, "Error: ambiguous class name `{name}`; conflict between `{mclass.full_name}` and `{res.full_name}`.")
 				return null
 			end
 		end
@@ -168,7 +168,7 @@ class ModelBuilder
 			assert ress.length > 1
 			var s = new Array[String]
 			for mprop in ress do s.add mprop.full_name
-			self.error(anode, "Ambigous property name '{name}' for {mtype}; conflict between {s.join(" and ")}")
+			self.error(anode, "Error: ambiguous property name `{name}` for `{mtype}`; conflict between {s.join(" and ")}.")
 		end
 
 		self.try_get_mproperty_by_name2_cache[mmodule, mtype, name] = res
@@ -218,7 +218,7 @@ class ModelBuilder
 		if res == null then
 			var l = null
 			if n != null then l = n.hot_location
-			self.toolcontext.fatal_error(l, "Fatal Error: {recv} must have a property named {name}.")
+			self.toolcontext.fatal_error(l, "Fatal Error: `{recv}` must have a property named `{name}`.")
 			abort
 		end
 		return res
@@ -238,7 +238,7 @@ class ModelBuilder
 			var prop = try_get_mproperty_by_name(ntype, mclassdef, name).as(nullable MVirtualTypeProp)
 			if prop != null then
 				if not ntype.n_types.is_empty then
-					error(ntype, "Type error: formal type {name} cannot have formal parameters.")
+					error(ntype, "Type Error: formal type `{name}` cannot have formal parameters.")
 				end
 				res = prop.mvirtualtype
 				if ntype.n_kwnullable != null then res = res.as_nullable
@@ -253,7 +253,7 @@ class ModelBuilder
 				if p.name != name then continue
 
 				if not ntype.n_types.is_empty then
-					error(ntype, "Type error: formal type {name} cannot have formal parameters.")
+					error(ntype, "Type Error: formal type `{name}` cannot have formal parameters.")
 				end
 
 				res = p
@@ -269,11 +269,11 @@ class ModelBuilder
 			var arity = ntype.n_types.length
 			if arity != mclass.arity then
 				if arity == 0 then
-					error(ntype, "Type error: '{name}' is a generic class.")
+					error(ntype, "Type Error: `{mclass.signature_to_s}` is a generic class.")
 				else if mclass.arity == 0 then
-					error(ntype, "Type error: '{name}' is not a generic class.")
+					error(ntype, "Type Error: `{name}` is not a generic class.")
 				else
-					error(ntype, "Type error: '{name}' has {mclass.arity} parameters ({arity} are provided).")
+					error(ntype, "Type Error: expected {mclass.arity} formal argument(s) for `{mclass.signature_to_s}`; got {arity}.")
 				end
 				return null
 			end
@@ -297,7 +297,7 @@ class ModelBuilder
 		end
 
 		# If everything fail, then give up :(
-		error(ntype, "Type error: class {name} not found in module {mmodule}.")
+		error(ntype, "Error: class `{name}` not found in module `{mmodule}`.")
 		return null
 	end
 
@@ -324,7 +324,7 @@ class ModelBuilder
 				var anchor
 				if mclassdef != null then anchor = mclassdef.bound_mtype else anchor = null
 				if not check_subtype(nt, mmodule, anchor, mt, bound) then
-					error(nt, "Type error: expected {bound}, got {mt}")
+					error(nt, "Type Error: expected `{bound}`, got `{mt}`.")
 					return null
 				end
 			end

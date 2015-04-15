@@ -245,9 +245,9 @@ redef class ModelBuilder
 
 		if candidate == null then
 			if mgroup != null then
-				error(anode, "Error: cannot find module {name} from {mgroup.name}. tried {lookpaths.join(", ")}")
+				error(anode, "Error: cannot find module `{name}` from `{mgroup.name}`. Tried: {lookpaths.join(", ")}.")
 			else
-				error(anode, "Error: cannot find module {name}. tried {lookpaths.join(", ")}")
+				error(anode, "Error: cannot find module `{name}`. Tried: {lookpaths.join(", ")}.")
 			end
 			return null
 		end
@@ -284,7 +284,7 @@ redef class ModelBuilder
 					var abs_candidate = module_absolute_path(candidate)
 					var abs_try_file = module_absolute_path(try_file)
 					if abs_candidate != abs_try_file then
-						toolcontext.error(location, "Error: conflicting module file for {name}: {candidate} {try_file}")
+						toolcontext.error(location, "Error: conflicting module file for `{name}`: `{candidate}` `{try_file}`")
 					end
 				end
 			end
@@ -297,7 +297,7 @@ redef class ModelBuilder
 					var abs_candidate = module_absolute_path(candidate)
 					var abs_try_file = module_absolute_path(try_file)
 					if abs_candidate != abs_try_file then
-						toolcontext.error(location, "Error: conflicting module file for {name}: {candidate} {try_file}")
+						toolcontext.error(location, "Error: conflicting module file for `{name}`: `{candidate}` `{try_file}`")
 					end
 				end
 			end
@@ -485,11 +485,11 @@ redef class ModelBuilder
 	fun load_module_ast(filename: String): nullable AModule
 	do
 		if filename.file_extension != "nit" then
-			self.toolcontext.error(null, "Error: file {filename} is not a valid nit module.")
+			self.toolcontext.error(null, "Error: file `{filename}` is not a valid nit module.")
 			return null
 		end
 		if not filename.file_exists then
-			self.toolcontext.error(null, "Error: file {filename} not found.")
+			self.toolcontext.error(null, "Error: file `{filename}` not found.")
 			return null
 		end
 
@@ -607,7 +607,7 @@ redef class ModelBuilder
 		if decl != null then
 			var decl_name = decl.n_name.n_id.text
 			if decl_name != mod_name then
-				error(decl.n_name, "Error: module name missmatch; declared {decl_name} file named {mod_name}")
+				error(decl.n_name, "Error: module name mismatch; declared {decl_name} file named {mod_name}.")
 			end
 		end
 
@@ -618,7 +618,7 @@ redef class ModelBuilder
 				if other.mgroup!= null and other.mgroup.mproject == mgroup.mproject then
 					var node: ANode
 					if decl == null then node = nmodule else node = decl.n_name
-					error(node, "Error: A module named `{other.full_name}` already exists at {other.location}")
+					error(node, "Error: a module named `{other.full_name}` already exists at {other.location}.")
 					break
 				end
 			end
@@ -693,11 +693,11 @@ redef class ModelBuilder
 				return
 			end
 			if sup == mmodule then
-				error(aimport.n_name, "Error: Dependency loop in module {mmodule}.")
+				error(aimport.n_name, "Error: dependency loop in module {mmodule}.")
 				nmodule.mmodule = null # invalidate the module
 			end
 			if sup.in_importation < mmodule then
-				error(aimport.n_name, "Error: Dependency loop between modules {mmodule} and {sup}.")
+				error(aimport.n_name, "Error: dependency loop between modules {mmodule} and {sup}.")
 				nmodule.mmodule = null # invalidate the module
 				return
 			end

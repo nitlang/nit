@@ -44,21 +44,21 @@ private class PlatformPhase
 		# Do some validity checks and print errors if the annotation is used incorrectly
 		var modelbuilder = toolcontext.modelbuilder
 		if not nmoduledecl isa AModuledecl then
-			modelbuilder.error(nat, "Syntax error: only the declaration of modules may use \"{annotation_name}\".")
+			modelbuilder.error(nat, "Syntax Error: only the declaration of modules may use `{annotation_name}`.")
 			return
 		end
 
 		var args = nat.n_args
 		var platform_name
 		if args.length > 1 then
-			modelbuilder.error(nat, "Syntax error: \"{annotation_name}\" expects at most a single argument.")
+			modelbuilder.error(nat, "Syntax Error: `{annotation_name}` expects at most a single argument.")
 			return
 		else if args.is_empty then
 			platform_name = nmoduledecl.n_name.collect_text
 		else
 			platform_name = args.first.as_string
 			if platform_name == null then
-				var format_error = "Syntax error: \"{annotation_name}\" expects its argument to be the name of the target platform as a String literal."
+				var format_error = "Syntax Error: `{annotation_name}` expects its argument to be the name of the target platform as a String literal."
 				modelbuilder.error(nat, format_error)
 				return
 			end
@@ -69,13 +69,13 @@ private class PlatformPhase
 
 		var platform = toolcontext.platform_from_name(platform_name)
 		if platform == null then
-			toolcontext.error(nat.location, "Error: target platform \"{platform_name}\" unknown")
+			toolcontext.error(nat.location, "Error: target platform `{platform_name}` unknown.")
 			return
 		end
 
 		var previous_target_platform = mmodule.target_platform
 		if previous_target_platform != null and previous_target_platform != platform then
-			modelbuilder.error(nat, "Syntax error: a target platform has already been defined as \"{previous_target_platform}\".")
+			modelbuilder.error(nat, "Syntax Error: a target platform has already been defined as `{previous_target_platform}`.")
 		end
 
 		mmodule.local_target_platform = platform

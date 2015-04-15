@@ -57,7 +57,7 @@ class NitUnitExecutor
 		if not (ast isa AModule or ast isa ABlockExpr or ast isa AExpr) then
 			var message = ""
 			if ast isa AError then message = " At {ast.location}: {ast.message}."
-			toolcontext.warning(mdoc.location, "invalid-block", "Error: There is a block of code that is not valid Nit, thus not considered a nitunit. To suppress this warning, enclose the block with a fence tagged `nitish` or `raw` (see `man nitdoc`).{message}")
+			toolcontext.warning(mdoc.location, "invalid-block", "Error: there is a block of invalid Nit code, thus not considered a nitunit. To suppress this warning, enclose the block with a fence tagged `nitish` or `raw` (see `man nitdoc`).{message}")
 			failures.add("{mdoc.location}: Invalid block of code.{message}")
 			return
 		end
@@ -291,16 +291,16 @@ class NitUnitExecutor
 	private fun compile_unitfile(file: String): Int
 	do
 		var nit_dir = toolcontext.nit_dir
-		var nitg = nit_dir/"bin/nitg"
-		if not nitg.file_exists then
-			toolcontext.error(null, "Cannot find nitg. Set envvar NIT_DIR.")
+		var nitc = nit_dir/"bin/nitc"
+		if not nitc.file_exists then
+			toolcontext.error(null, "Error: cannot find nitc. Set envvar NIT_DIR.")
 			toolcontext.check_errors
 		end
 		var opts = new Array[String]
 		if mmodule != null then
 			opts.add "-I {mmodule.location.file.filename.dirname}"
 		end
-		var cmd = "{nitg} --ignore-visibility --no-color '{file}' {opts.join(" ")} >'{file}.out1' 2>&1 </dev/null -o '{file}.bin'"
+		var cmd = "{nitc} --ignore-visibility --no-color '{file}' {opts.join(" ")} >'{file}.out1' 2>&1 </dev/null -o '{file}.bin'"
 		var res = sys.system(cmd)
 		return res
 	end

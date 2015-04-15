@@ -43,7 +43,7 @@ private class SerializationPhasePreModel
 		# Skip if we are not interested
 		if nat.n_atid.n_id.text != "auto_serializable" then return
 		if not nclassdef isa AStdClassdef then
-			toolcontext.error(nclassdef.location, "Syntax error: only a concrete class can be automatically serialized.")
+			toolcontext.error(nclassdef.location, "Syntax Error: only a concrete class can be automatically serialized.")
 			return
 		end
 
@@ -153,7 +153,7 @@ private class SerializationPhasePreModel
 			code.add "	redef fun deserialize_class(name)"
 			code.add "	do"
 		else
-			toolcontext.error(deserializer_npropdef.location, "Annotation error: you cannot define Deserializer::deserialize_class in a module where you use \"auto_serializable\".")
+			toolcontext.error(deserializer_npropdef.location, "Error: you cannot define `Deserializer::deserialize_class` in a module where you use `auto_serializable`.")
 			return
 		end
 

@@ -18,7 +18,7 @@
 #
 # Executing on the module `game_logic` will create the module `game_logic_serial`
 # in the local directory. Mixing the generated module to the main module with
-# `nitg game_logic.nit -m game_logic_serial` will create a program supporting
+# `nitc game_logic.nit -m game_logic_serial` will create a program supporting
 # deserialization of all generic types visible from the main module.
 #
 # Because the generation is limited to the visible types, a module author might want
@@ -215,7 +215,7 @@ redef class Deserializer
 
 		for mtype in rta.live_types do
 			# We are only interested in instanciated generics, subtypes of Serializable
-			# and which are visibles.
+			# and which are visible.
 			if mtype isa MGenericType and
 			   mtype.is_subtype(m, null, serializable_type) and
 			   mtype.is_visible_from(mmodule) and

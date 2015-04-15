@@ -342,8 +342,9 @@ $(call import-module,android/native_app_glue)
 			var tsa_server= "TSA_SERVER".environ
 
 			if key_alias.is_empty then
-				toolcontext.fatal_error(null,
-					"Fatal Error: the environment variable `KEY_ALIAS` must be set to use the `--release` option on Android projects.")
+				toolcontext.error(null,
+					"Error: the environment variable `KEY_ALIAS` must be set to use the `--release` option on Android projects.")
+				return
 			end
 
 			args = ["jarsigner", "-sigalg", "MD5withRSA", "-digestalg", "SHA1", apk_path, key_alias]

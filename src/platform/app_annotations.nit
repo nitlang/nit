@@ -84,11 +84,11 @@ redef class AAnnotation
 
 		var args = n_args
 		if args.length < 1 then
-			modelbuilder.error(self, "Annotation error: \"{name}\" expects at least a single argument.")
+			modelbuilder.error(self, "Syntax Error: `{name}` expects at least one argument.")
 			return ""
 		else
 			for arg in args do
-				var format_error = "Annotation error: \"{name}\" expects its arguments to be of type Int or a call to `git_revision`"
+				var format_error = "Syntax Eror: `{name}` expects its arguments to be of type Int or a call to `git_revision`."
 
 				var value
 				value = arg.as_int

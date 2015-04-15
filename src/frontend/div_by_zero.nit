@@ -80,6 +80,6 @@ private class DivByZeroVisitor
 		if not op1.mtype.is_subtype(mmodule, null, int_type) then return
 
 		# Error detected
-		toolcontext.error(node.location, "Error: Definitely division by zero")
+		toolcontext.warning(node.location, "div-by-zero", "Warning: division by zero.")
 	end
 end
