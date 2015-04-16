@@ -105,13 +105,13 @@ private class TypeVisitor
 	# If `sub` is a safe subtype of `sup` then return `sub`.
 	# If `sub` is an unsafe subtype (ie an implicit cast is required), then return `sup`.
 	#
-	# The point of the return type is to determinate the usable type on an expression:
+	# The point of the return type is to determinate the usable type on an expression when `autocast` is true:
 	# If the suptype is safe, then the return type is the one on the expression typed by `sub`.
 	# Is the subtype is unsafe, then the return type is the one of an implicit cast on `sup`.
-	fun check_subtype(node: ANode, sub, sup: MType): nullable MType
+	fun check_subtype(node: ANode, sub, sup: MType, autocast: Bool): nullable MType
 	do
 		if self.is_subtype(sub, sup) then return sub
-		if self.is_subtype(sub, self.anchor_to(sup)) then
+		if autocast and self.is_subtype(sub, self.anchor_to(sup)) then
 			# FIXME workaround to the current unsafe typing policy. To remove once fixed virtual types exists.
 			#node.debug("Unsafe typing: expected {sup}, got {sub}")
 			return sup
@@ -166,7 +166,7 @@ private class TypeVisitor
 
 		if sup == null then return null # Forward error
 
-		var res = check_subtype(nexpr, sub, sup)
+		var res = check_subtype(nexpr, sub, sup, true)
 		if res != sub then
 			nexpr.implicit_cast_to = res
 		end
@@ -837,7 +837,7 @@ redef class AReassignFormExpr
 		var value_type = v.visit_expr_subtype(self.n_value, msignature.mparameters.first.mtype)
 		if value_type == null then return null # Skip error
 
-		v.check_subtype(self, rettype, writetype)
+		v.check_subtype(self, rettype, writetype, false)
 		return rettype
 	end
 end
@@ -1329,7 +1329,7 @@ redef class AArrayExpr
 			end
 			set_comprehension(e)
 			if mtype != null then
-				if v.check_subtype(e, t, mtype) == null then return # Skip error
+				if v.check_subtype(e, t, mtype, false) == null then return # Forward error
 				if t == mtype then useless = true
 			else
 				mtypes.add(t)
