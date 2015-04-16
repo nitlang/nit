@@ -730,6 +730,36 @@ class TMinuseq
 	super TokenOperator
 end
 
+# The operator `*=`
+class TStareq
+	super TokenOperator
+end
+
+# The operator `/=`
+class TSlasheq
+	super TokenOperator
+end
+
+# The operator `%=`
+class TPercenteq
+	super TokenOperator
+end
+
+# The operator `**=`
+class TStarstareq
+	super TokenOperator
+end
+
+# The operator `<<=`
+class TLleq
+	super TokenOperator
+end
+
+# The operator `>>=`
+class TGgeq
+	super TokenOperator
+end
+
 # The symbol `...`
 class TDotdotdot
 	super Token
@@ -1879,9 +1909,16 @@ end
 # A binary operation on a method
 abstract class ABinopExpr
 	super ASendExpr
+
+	# The operator
+	var n_op: Token is writable, noinit
+
 	# The second operand of the operation
 	# Note: the receiver (`n_expr`) is the first operand
 	var n_expr2: AExpr is writable, noinit
+
+	# The name of the operator (eg '+')
+	fun operator: String is abstract
 end
 
 # Something that is boolean expression
@@ -1895,6 +1932,9 @@ abstract class ABinBoolExpr
 
 	# The first boolean operand
 	var n_expr: AExpr is writable, noinit
+
+	# The operator
+	var n_op: Token is writable, noinit
 
 	# The second boolean operand
 	var n_expr2: AExpr is writable, noinit
@@ -1913,6 +1953,9 @@ end
 # A `or else` expression
 class AOrElseExpr
 	super ABinBoolExpr
+
+	# The `else` keyword
+	var n_kwelse: TKwelse is writable, noinit
 end
 
 # A `implies` expression
@@ -1934,41 +1977,49 @@ end
 # A `==` expression
 class AEqExpr
 	super ABinopExpr
+	redef fun operator do return "=="
 end
 
 # A `!=` expression
 class ANeExpr
 	super ABinopExpr
+	redef fun operator do return "!="
 end
 
 # A `<` expression
 class ALtExpr
 	super ABinopExpr
+	redef fun operator do return "<"
 end
 
 # A `<=` expression
 class ALeExpr
 	super ABinopExpr
+	redef fun operator do return "<="
 end
 
 # A `<<` expression
 class ALlExpr
 	super ABinopExpr
+	redef fun operator do return "<<"
 end
 
 # A `>` expression
 class AGtExpr
 	super ABinopExpr
+	redef fun operator do return ">"
 end
 
 # A `>=` expression
 class AGeExpr
 	super ABinopExpr
+	redef fun operator do return ">="
 end
 
 # A `>>` expression
 class AGgExpr
 	super ABinopExpr
+	redef fun operator do return ">>"
 end
 
 # A type-ckeck expression. eg `x isa T`
@@ -1978,6 +2029,9 @@ class AIsaExpr
 	# The expression to check
 	var n_expr: AExpr is writable, noinit
 
+	# The `isa` keyword
+	var n_kwisa: TKwisa is writable, noinit
+
 	# The destination type to check to
 	var n_type: AType is writable, noinit
 end
@@ -1985,36 +2039,43 @@ end
 # A `+` expression
 class APlusExpr
 	super ABinopExpr
+	redef fun operator do return "+"
 end
 
 # A `-` expression
 class AMinusExpr
 	super ABinopExpr
+	redef fun operator do return "-"
 end
 
 # A `<=>` expression
 class AStarshipExpr
 	super ABinopExpr
+	redef fun operator do return "<=>"
 end
 
 # A `*` expression
 class AStarExpr
 	super ABinopExpr
+	redef fun operator do return "*"
 end
 
 # A `**` expression
 class AStarstarExpr
 	super ABinopExpr
+	redef fun operator do return "**"
 end
 
 # A `/` expression
 class ASlashExpr
 	super ABinopExpr
+	redef fun operator do return "/"
 end
 
 # A `%` expression
 class APercentExpr
 	super ABinopExpr
+	redef fun operator do return "%"
 end
 
 # A unary minus expression. eg `-x`
@@ -2023,6 +2084,14 @@ class AUminusExpr
 
 	# The `-` symbol
 	var n_minus: TMinus is writable, noinit
+end
+
+# A unary plus expression. eg `+x`
+class AUplusExpr
+	super ASendExpr
+
+	# The `+` symbol
+	var n_plus: TPlus is writable, noinit
 end
 
 # An explicit instantiation. eg `new T`
@@ -2512,22 +2581,68 @@ end
 # A complex assignment operator. (`+=` and `-=`)
 abstract class AAssignOp
 	super Prod
+
+	# The combined assignment operator
+	var n_op: Token is writable, noinit
+
+	# The name of the operator without the `=` (eg '+')
+	fun operator: String is abstract
 end
 
-# The `+=` assignment operation
+# A `+=` assignment operation
 class APlusAssignOp
 	super AAssignOp
 
-	# The `+=` operator
-	var n_pluseq: TPluseq is writable, noinit
+	redef fun operator do return "+"
 end
 
-# The `-=` assignment operator
+# A `-=` assignment operation
 class AMinusAssignOp
 	super AAssignOp
 
-	# The `-=` operator
-	var n_minuseq: TMinuseq is writable, noinit
+	redef fun operator do return "-"
+end
+
+# A `*=` assignment operation
+class AStarAssignOp
+	super AAssignOp
+
+	redef fun operator do return "*"
+end
+
+# A `/=` assignment operation
+class ASlashAssignOp
+	super AAssignOp
+
+	redef fun operator do return "/"
+end
+
+# A `%=` assignment operation
+class APercentAssignOp
+	super AAssignOp
+
+	redef fun operator do return "%"
+end
+
+# A `**=` assignment operation
+class AStarstarAssignOp
+	super AAssignOp
+
+	redef fun operator do return "**"
+end
+
+# A `<<=` assignment operation
+class ALlAssignOp
+	super AAssignOp
+
+	redef fun operator do return "<<"
+end
+
+# A `>>=` assignment operation
+class AGgAssignOp
+	super AAssignOp
+
+	redef fun operator do return ">>"
 end
 
 # A possibly fully-qualified module identifier

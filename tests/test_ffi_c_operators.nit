@@ -26,6 +26,11 @@ class A
 		return new_A( s + o );
 	`}
 
+	fun +: A import value, A `{
+		int s = A_value(recv);
+		return new_A(+s);
+	`}
+
 	fun -( other : A ) : A import value, A `{
 		int s = A_value( recv );
 		int o = A_value( other );
@@ -163,4 +168,5 @@ print a[ 52 ] # 52
 a[ 74 ] = new A( 96 )
 print a # 96
 
+print(+(new A(123)))
 print(-(new A(123)))

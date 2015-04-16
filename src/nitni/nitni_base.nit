@@ -31,6 +31,7 @@ redef class MMethod
 		if nit_name == "+" then return "_plus"
 		if nit_name == "-" then return "_minus"
 		if nit_name == "unary -" then return "_unary_minus"
+		if nit_name == "unary +" then return "_unary_plus"
 		if nit_name == "*" then return "_star"
 		if nit_name == "/" then return "_slash"
 		if nit_name == "%" then return "_percent"

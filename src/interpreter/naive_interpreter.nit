@@ -833,6 +833,8 @@ redef class AMethPropdef
 			var recvval = args[0].to_i
 			if pname == "unary -" then
 				return v.int_instance(-args[0].to_i)
+			else if pname == "unary +" then
+				return args[0]
 			else if pname == "+" then
 				return v.int_instance(args[0].to_i + args[1].to_i)
 			else if pname == "-" then
@@ -907,6 +909,8 @@ redef class AMethPropdef
 			var recv = args[0].to_f
 			if pname == "unary -" then
 				return v.float_instance(-recv)
+			else if pname == "unary +" then
+				return args[0]
 			else if pname == "+" then
 				return v.float_instance(recv + args[1].to_f)
 			else if pname == "-" then

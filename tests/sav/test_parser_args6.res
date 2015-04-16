@@ -21,6 +21,7 @@ Start 1,1--42
                     AImplicitSelfExpr 1,32
                     TId "toto" 1,32--35
                     AListExprs 1,35
+                  TPlus "+" 1,36
                   ACallExpr 1,37--40
                     AImplicitSelfExpr 1,37
                     TId "toto" 1,37--40

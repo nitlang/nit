@@ -20,3 +20,15 @@ var i = 1#alt1#
 #alt1#var i: Object = 1
 i += 2
 i.output
+i -= 1
+i.output
+i *= 3
+i.output
+i /= 2
+i.output
+i %= 5
+i.output
+i <<= 3
+i.output
+i >>= 2
+i.output

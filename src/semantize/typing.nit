@@ -822,14 +822,7 @@ redef class AReassignFormExpr
 	# Return the static type of the value to store.
 	private fun resolve_reassignment(v: TypeVisitor, readtype, writetype: MType): nullable MType
 	do
-		var reassign_name: String
-		if self.n_assign_op isa APlusAssignOp then
-			reassign_name = "+"
-		else if self.n_assign_op isa AMinusAssignOp then
-			reassign_name = "-"
-		else
-			abort
-		end
+		var reassign_name = self.n_assign_op.operator
 
 		self.read_type = readtype
 
@@ -1581,9 +1574,10 @@ end
 
 redef class ABinopExpr
 	redef fun compute_raw_arguments do return [n_expr2]
+	redef fun property_name do return operator
+	redef fun property_node do return n_op
 end
 redef class AEqExpr
-	redef fun property_name do return "=="
 	redef fun accept_typing(v)
 	do
 		super
@@ -1591,51 +1585,16 @@ redef class AEqExpr
 	end
 end
 redef class ANeExpr
-	redef fun property_name do return "!="
 	redef fun accept_typing(v)
 	do
 		super
 		v.null_test(self)
 	end
 end
-redef class ALtExpr
-	redef fun property_name do return "<"
-end
-redef class ALeExpr
-	redef fun property_name do return "<="
-end
-redef class ALlExpr
-	redef fun property_name do return "<<"
-end
-redef class AGtExpr
-	redef fun property_name do return ">"
-end
-redef class AGeExpr
-	redef fun property_name do return ">="
-end
-redef class AGgExpr
-	redef fun property_name do return ">>"
-end
-redef class APlusExpr
-	redef fun property_name do return "+"
-end
-redef class AMinusExpr
-	redef fun property_name do return "-"
-end
-redef class AStarshipExpr
-	redef fun property_name do return "<=>"
-end
-redef class AStarExpr
-	redef fun property_name do return "*"
-end
-redef class AStarstarExpr
-	redef fun property_name do return "**"
-end
-redef class ASlashExpr
-	redef fun property_name do return "/"
-end
-redef class APercentExpr
-	redef fun property_name do return "%"
+
+redef class AUplusExpr
+	redef fun property_name do return "unary +"
+	redef fun compute_raw_arguments do return new Array[AExpr]
 end
 
 redef class AUminusExpr
