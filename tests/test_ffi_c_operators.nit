@@ -102,14 +102,16 @@ class A
 		return A_value( recv ) <= A_value( other );
 	`}
 
-	fun >>( other : A ) import value, value=, A `{
+	fun >>( other : A ): A import value, value=, A `{
 		int new_val = A_value( recv ) >> A_value( other );
 		A_value__assign( recv, new_val );
+		return recv;
 	`}
 
-	fun <<( other : A ) import value, A `{
+	fun <<( other : A ): A import value, A `{
 		int new_val = A_value( recv ) << A_value( other );
 		A_value__assign( recv, new_val );
+		return recv;
 	`}
 
 	fun []( index : Int ) : A import A `{
@@ -154,13 +156,13 @@ print new A( 1 ) >= new A( 100 ) # false
 print new A( 100 ) >= new A( 100 ) # true
 print new A( 100 ) >= new A( 1 ) # true
 
-#var x = new A( 1 )
-#x << new A( 5 )
-#print x # 16
+var x = new A( 1 )
+x = x << new A( 5 )
+print x # 32
 
-#var y = new A( 32 )
-#y >> new A( 2 )
-#print y # 8
+var y = new A( 32 )
+y = y >> new A( 2 )
+print y # 8
 
 var a = new A( 456 )
 print a[ 52 ] # 52
