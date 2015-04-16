@@ -97,7 +97,7 @@ redef class Int
 	end
 end
 
-var opt_out_src = new OptionString("Path to output source file", "--src", "-s")
+var opt_out_src = new OptionString("Path to output source file (folder or file)", "--src", "-s")
 var opt_assets = new OptionString("Path to assert dir where to put PNG files", "--assets", "-a")
 var opt_scale = new OptionFloat("Apply scaling to exported images (default at 1.0 of 90dpi)", 1.0, "--scale", "-x")
 var opt_help = new OptionBool("Print this help message", "--help", "-h")
@@ -139,7 +139,7 @@ end
 
 var src_path = opt_out_src.value
 if src_path == null then src_path = "src"
-if not src_path.file_exists then
+if not src_path.file_exists and src_path.file_extension != "nit" then
 	stderr.write "Source dir '{src_path}' does not exist (use --src)\n"
 	exit 1
 end
@@ -253,8 +253,12 @@ for drawing in drawings do
 		end
 	end
 
+	if not src_path.file_extension == "nit" then
+		src_path = src_path/drawing_name+".nit"
+	end
+
 	# Output source file
-	var src_file = new FileWriter.open("{src_path}/{drawing_name}.nit")
+	var src_file = new FileWriter.open(src_path)
 	nit_src.write_to(src_file)
 	src_file.close
 
