@@ -790,11 +790,17 @@ redef class AMethPropdef
 			name = amethodid.collect_text
 			name_node = amethodid
 
-			if name == "+" and self.n_signature.n_params.length == 0 then
+			var arity = self.n_signature.n_params.length
+			if name == "+" and arity == 0 then
 				name = "unary +"
-			end
-			if name == "-" and self.n_signature.n_params.length == 0 then
+			else if name == "-" and arity == 0 then
 				name = "unary -"
+			else
+				if amethodid.is_binary and arity != 1 then
+					modelbuilder.error(self.n_signature, "Syntax Error: binary operator `{name}` requires exactly one parameter; got {arity}.")
+				else if amethodid.min_arity > arity then
+					modelbuilder.error(self.n_signature, "Syntax Error: `{name}` requires at least {amethodid.min_arity} parameter(s); got {arity}.")
+				end
 			end
 		end
 
@@ -868,6 +874,9 @@ redef class AMethPropdef
 			end
 		end
 
+		var accept_special_last_parameter = self.n_methid == null or self.n_methid.accept_special_last_parameter
+		var return_is_mandatory = self.n_methid != null and self.n_methid.return_is_mandatory
+
 		# Retrieve info from the signature AST
 		var param_names = new Array[String] # Names of parameters from the AST
 		var param_types = new Array[MType] # Types of parameters from the AST
@@ -940,6 +949,14 @@ redef class AMethPropdef
 
 		# In `new`-factories, the return type is by default the classtype.
 		if ret_type == null and mpropdef.mproperty.is_new then ret_type = mclassdef.mclass.mclass_type
+
+		# Special checks for operator methods
+		if not accept_special_last_parameter and mparameters.not_empty and mparameters.last.is_vararg then
+			modelbuilder.error(self.n_signature.n_params.last, "Error: illegal variadic parameter `{mparameters.last}` for `{mpropdef.mproperty.name}`.")
+		end
+		if ret_type == null and return_is_mandatory then
+			modelbuilder.error(self.n_methid, "Error: mandatory return type for `{mpropdef.mproperty.name}`.")
+		end
 
 		msignature = new MSignature(mparameters, ret_type)
 		mpropdef.msignature = msignature
@@ -1020,6 +1037,56 @@ redef class AMethPropdef
 			if nt != null then modelbuilder.check_visibility(nt, nt.mtype.as(not null), mpropdef)
 		end
 	end
+end
+
+redef class AMethid
+	# Is a return required?
+	#
+	# * True for operators and brackets.
+	# * False for id and assignment.
+	fun return_is_mandatory: Bool do return true
+
+	# Can the last parameter be special like a vararg?
+	#
+	# * False for operators: the last one is in fact the only one.
+	# * False for assignments: it is the right part of the assignment.
+	# * True for ids and brackets.
+	fun accept_special_last_parameter: Bool do return false
+
+	# The minimum required number of parameters.
+	#
+	# * 1 for binary operators
+	# * 1 for brackets
+	# * 1 for assignments
+	# * 2 for bracket assignments
+	# * 0 for ids
+	fun min_arity: Int do return 1
+
+	# Is the `self` a binary operator?
+	fun is_binary: Bool do return true
+end
+
+redef class AIdMethid
+	redef fun return_is_mandatory do return false
+	redef fun accept_special_last_parameter do return true
+	redef fun min_arity do return 0
+	redef fun is_binary do return false
+end
+
+redef class ABraMethid
+	redef fun accept_special_last_parameter do return true
+	redef fun is_binary do return false
+end
+
+redef class ABraassignMethid
+	redef fun return_is_mandatory do return false
+	redef fun min_arity do return 2
+	redef fun is_binary do return false
+end
+
+redef class AAssignMethid
+	redef fun return_is_mandatory do return false
+	redef fun is_binary do return false
 end
 
 redef class AAttrPropdef
