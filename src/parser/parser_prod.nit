@@ -6895,6 +6895,61 @@ redef class AVarargExpr
 		v.enter_visit(_n_dotdotdot)
 	end
 end
+redef class ANamedargExpr
+	init init_anamedargexpr (
+		n_id: nullable TId,
+		n_assign: nullable TAssign,
+		n_expr: nullable AExpr
+	)
+	do
+		_n_id = n_id.as(not null)
+		n_id.parent = self
+		_n_assign = n_assign.as(not null)
+		n_assign.parent = self
+		_n_expr = n_expr.as(not null)
+		n_expr.parent = self
+	end
+
+	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
+	do
+		if _n_id == old_child then
+			n_id = new_child.as(TId)
+			return
+		end
+		if _n_assign == old_child then
+			n_assign = new_child.as(TAssign)
+			return
+		end
+		if _n_expr == old_child then
+			n_expr = new_child.as(AExpr)
+			return
+		end
+	end
+
+	redef fun n_id=(node)
+	do
+		_n_id = node
+		node.parent = self
+	end
+	redef fun n_assign=(node)
+	do
+		_n_assign = node
+		node.parent = self
+	end
+	redef fun n_expr=(node)
+	do
+		_n_expr = node
+		node.parent = self
+	end
+
+
+	redef fun visit_all(v: Visitor)
+	do
+		v.enter_visit(_n_id)
+		v.enter_visit(_n_assign)
+		v.enter_visit(_n_expr)
+	end
+end
 redef class ATypeExpr
 	init init_atypeexpr (
 		n_type: nullable AType
