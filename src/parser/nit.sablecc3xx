@@ -619,6 +619,7 @@ expr_atom~nopar~nobra {-> expr}
 arg~nopar~nobra {-> expr}
 	= [expr]:expr~nopar~nobra {-> expr.expr}
 	| {vararg} [expr]:expr~nopar~nobra dotdotdot {-> New expr.vararg(expr.expr, dotdotdot)}
+	| {namedarg} id assign [expr]:expr~nopar~nobra  {-> New expr.namedarg(id, assign, expr.expr) }
 	;
 
 expr_single~nopar~nobra {-> expr}
@@ -1000,6 +1001,7 @@ expr	= {block} expr* kwend?
 	| {isset_attr} kwisset expr [id]:attrid
 	| {debug_type} kwdebug kwtype expr type
 	| {vararg} expr dotdotdot
+	| {namedarg} id assign expr
 	| {type} type
 	| {methid} expr [id]:methid
 	| {at} annotations
