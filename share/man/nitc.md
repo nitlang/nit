@@ -435,6 +435,11 @@ They are useless for a normal user.
 `--stub-man`
 :   Generate a stub manpage in pandoc markdown format.
 
+`--keep-going`
+:   Continue after errors, whatever the consequences.
+
+The tool does not stop after some errors but continue until it produces incorrect result, crashes, erases the hard drive, or just continue forever in an infinite loop.
+This option is used to test the robustness of the tools by allowing phases to progress on incorrect data.
 
 # ENVIRONMENT VARIABLES
 
