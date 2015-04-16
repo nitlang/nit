@@ -38,7 +38,6 @@ class ImageSetSrc
 	super Template
 
 	var name: String
-	init(name: String) do self.name = name
 
 	var attributes = new Array[String]
 	var load_exprs = new Array[String]
@@ -177,7 +176,7 @@ for drawing in drawings do
 	while not proc.eof do
 		var line = proc.read_line
 		var words = line.split(",")
-		
+
 		if words.length == 5 then
 			var id = words[0]
 
