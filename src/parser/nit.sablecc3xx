@@ -614,7 +614,11 @@ expr_atom~nopar~nobra {-> expr}
         | {as_cast} expr_atom~nopar~nobra dot no kwas [n2]:no opar [n3]:no type [n4]:no cpar {-> New expr.as_cast(expr_atom~nopar~nobra.expr, kwas, opar, type, cpar)}
         | {as_notnull} expr_atom~nopar~nobra dot no kwas [n2]:no opar [n3]:no kwnot [n4]:no kwnull [n5]:no cpar {-> New expr.as_notnull(expr_atom~nopar~nobra.expr, kwas, opar, kwnot, kwnull, cpar)}
         | {as_notnull2}expr_atom~nopar~nobra dot no kwas [n2]:no kwnot [n4]:no kwnull {-> New expr.as_notnull(expr_atom~nopar~nobra.expr, kwas, Null, kwnot, kwnull, Null)}
-	| {vararg} [expr]:expr_atom~nopar~nobra dotdotdot {-> New expr.vararg(expr.expr, dotdotdot)}
+	;
+
+arg~nopar~nobra {-> expr}
+	= [expr]:expr~nopar~nobra {-> expr.expr}
+	| {vararg} [expr]:expr~nopar~nobra dotdotdot {-> New expr.vararg(expr.expr, dotdotdot)}
 	;
 
 expr_single~nopar~nobra {-> expr}
@@ -777,12 +781,10 @@ args_nopar {-> exprs}
 	;
 braargs	{-> exprs}
 	= obra no expr_list cbra {-> New exprs.bra(obra, [expr_list.expr], cbra)};
-args_list {-> exprs}
-	= expr_list {-> New exprs.list([expr_list.expr])};
 expr_list {-> expr*}
-	= expr [n2]:no expr_tail* {-> [expr, expr_tail.expr]};
+	= arg [n2]:no expr_tail* {-> [arg.expr, expr_tail.expr]};
 expr_tail {-> expr} 
-	= comma no expr [n2]:no {-> expr};
+	= comma no arg [n2]:no {-> arg.expr};
 idlist {-> id*}
 	= opar no idlist_nopar [n2]:no cpar {-> [idlist_nopar.id]}
 	| {nopar} idlist_nopar {-> [idlist_nopar.id]}
