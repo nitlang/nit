@@ -1897,6 +1897,13 @@ redef class AVarargExpr
 	end
 end
 
+redef class ANamedargExpr
+	redef fun expr(v)
+	do
+		return v.expr(self.n_expr)
+	end
+end
+
 redef class ADebugTypeExpr
 	redef fun stmt(v)
 	do
