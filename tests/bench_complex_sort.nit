@@ -26,6 +26,7 @@ class A
 	redef fun val1: Int do return _a
 
 	init(i: Int) do _a = i
+	redef fun to_s do return "Aa{a}"
 end
 
 class Elt2
@@ -39,6 +40,7 @@ end
 class B
 	super Elt2
 	init(i: Int) do initelt2(i)
+	redef fun to_s do return "Bb{b}"
 end
 
 class C
@@ -52,6 +54,7 @@ class C
 		_c = i
 		_d = j
 	end
+	redef fun to_s do return "Cc{c}d{d}"
 end
 
 class D
@@ -64,6 +67,7 @@ class D
 		init(i)
 		initelt2(j)
 	end
+	redef fun to_s do return "Da{a}b{b}"
 end
 
 class E
@@ -71,6 +75,7 @@ class E
 	redef fun val1: Int do return 5 end
 
 	init(i: Int) do initelt2(i)
+	redef fun to_s do return "Eb{b}"
 end
 
 class EltComparator
@@ -111,6 +116,7 @@ do
 	end
 end
 
+srand_from(0)
 var n = 20
 
 if not args.is_empty then
@@ -122,9 +128,12 @@ for i in [0..n[ do
 	array.push(generator)
 end
 
+print array.join(", ")
+
 var comparator = new EltComparator
 for i in [0..n[ do
 	comparator.sort(array)
 	comparator.toggle
 end
 
+print array.join(", ")

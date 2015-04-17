@@ -18,8 +18,9 @@ redef class Object
 	fun foo do end
 end
 class A
-	redef fun foo do end
+	redef fun foo do i += 1 end
 	init do end
+	var i = 0
 end
 class B
 	super A
@@ -72,3 +73,6 @@ for i in [0..1.lshift(n)[ do
 	end
 end
 
+for j in [0..nb[ do
+	print a[j].as(A).i
+end

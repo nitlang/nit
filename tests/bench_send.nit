@@ -44,7 +44,10 @@ class A
 	end
 	fun baz
 	do
+		i += 1
 	end
+
+	var i = 0
 
 	init
 	do
@@ -105,3 +108,8 @@ while i < 1.lshift(n) do
 	a.hop(b, c, d)
 	i = i + 1
 end
+
+print a.i
+print b.i
+print c.i
+print d.i
