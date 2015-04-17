@@ -115,7 +115,7 @@ redef class ToolContext
 	#     assert tc.parse_something("foo\nbar") isa ABlockExpr
 	#     assert tc.parse_something("fun foo do bar\nfoo") isa AModule
 	#     assert tc.parse_something("fun fun") isa AParserError
-	#     assert tc.parse_something("?%^&") isa ALexerError
+	#     assert tc.parse_something("`?%^&") isa ALexerError
 	fun parse_something(string: String): ANode
 	do
 		var source = new SourceFile.from_string("", string)

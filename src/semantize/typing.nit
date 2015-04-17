@@ -141,7 +141,13 @@ private class TypeVisitor
 	do
 		nexpr.accept_typing(self)
 		var mtype = nexpr.mtype
-		if mtype != null then return mtype
+		if mtype != null then
+			if nexpr.has_safe_operands then
+				mtype = mtype.as_nullable
+				nexpr.mtype = mtype
+			end
+			return mtype
+		end
 		if not nexpr.is_typed then
 			if not self.modelbuilder.toolcontext.error_count > 0 then # check that there is really an error
 				if self.modelbuilder.toolcontext.verbose_level > 1 then
@@ -713,6 +719,23 @@ redef class AExpr
 	# The result of the evaluation of `self` must be
 	# stored inside the designated array (there is an implicit `push`)
 	var comprehension: nullable AArrayExpr = null
+
+	# Some operands are safe so the whole operation (self) must be protected.
+	# When `has_safe_operands` is true, the typing will automatically adapt the mtype
+	# of self and the engines will know they have to protect self.
+	var has_safe_operands = false
+
+	# Find if `nexpr` is a safe operand of `self` (ie. isa ASafeExpr).
+	#
+	# This method is used to update information about safe operator:
+	# * update `self.has_safe_operands` accordingly
+	# * flag `nexpr.mark` so that illegal ASafeExpr will be left unmarked thus cause errors.
+	fun is_safe_operand(nexpr: AExpr): Bool do
+		if not nexpr isa ASafeExpr then return false
+		nexpr.marked = true
+		self.has_safe_operands = true
+		return true
+	end
 end
 
 redef class ABlockExpr
@@ -1500,6 +1523,10 @@ redef class ASendExpr
 	redef fun accept_typing(v)
 	do
 		var nrecv = self.n_expr
+		is_safe_operand(nrecv)
+		var args = compute_raw_arguments
+		for a in args do is_safe_operand(a)
+
 		var recvtype = v.visit_expr(nrecv)
 		var name = self.property_name
 		var node = self.property_node
@@ -1534,8 +1561,6 @@ redef class ASendExpr
 
 		self.callsite = callsite
 		var msignature = callsite.msignature
-
-		var args = compute_raw_arguments
 
 		callsite.check_signature(v, args)
 
@@ -1844,6 +1869,9 @@ redef class ANewExpr
 			end
 		end
 
+		var args = n_args.to_a
+		for a in args do is_safe_operand(a)
+
 		self.recvtype = recvtype
 		var kind = recvtype.mclass.kind
 
@@ -1892,7 +1920,6 @@ redef class ANewExpr
 			return
 		end
 
-		var args = n_args.to_a
 		callsite.check_signature(v, args)
 	end
 end
@@ -1909,6 +1936,8 @@ redef class AAttrFormExpr
 	# Resolve the attribute accessed.
 	private fun resolve_property(v: TypeVisitor)
 	do
+		is_safe_operand(self.n_expr)
+
 		var recvtype = v.visit_expr(self.n_expr)
 		if recvtype == null then return # Skip error
 		var node = self.n_id
@@ -1952,6 +1981,7 @@ redef class AAttrAssignExpr
 		self.resolve_property(v)
 		var mtype = self.attr_type
 
+		is_safe_operand(self.n_value)
 		v.visit_expr_subtype(self.n_value, mtype)
 		self.is_typed = true
 	end
@@ -1984,6 +2014,37 @@ redef class AIssetAttrExpr
 		end
 		self.mtype = v.type_bool(self)
 	end
+end
+
+redef class ASafeExpr
+	redef fun accept_typing(v)
+	do
+		var mtype = v.visit_expr(n_expr)
+		if mtype == null then return # Skip error
+
+		if not marked then
+			v.error(self, "Syntax Error: unexpected safe operator `?`.")
+			return
+		end
+
+		self.mtype = mtype
+
+		if mtype isa MNullType then
+			v.modelbuilder.warning(self, "useless-safe", "Warning: safe operator useless on null.")
+			return
+		end
+
+		if not v.can_be_null(mtype) then
+			v.modelbuilder.warning(self, "useless-safe", "Warning: safe operator useless on non nullable.")
+			return
+		end
+
+		self.mtype = mtype.as_notnull
+	end
+
+	# Is the safe operand acknowledged by the operation?
+	# Is updated by `is_safe_operand`
+	private var marked = false
 end
 
 redef class AVarargExpr

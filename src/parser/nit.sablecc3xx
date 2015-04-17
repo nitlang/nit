@@ -167,6 +167,7 @@ ggeq = '>>=';
 dotdotdot = '...';
 dotdot = '..';
 dot = '.';
+quest = '?';
 plus = '+';
 minus = '-';
 star = '*';
@@ -508,52 +509,52 @@ assertid {-> id}
 /* EXPRESSIONS ***************************************************************/
 expr~nopar~nobra {-> expr}
 	= expr_and~nopar~nobra {-> expr_and~nopar~nobra.expr}
-	| {ifexpr} kwif [n1]:no expr [n2]:no kwthen [n3]:no [then]:expr [n4]:no kwelse [n5]:no [else]:expr~nopar~nobra {-> New expr.ifexpr(kwif, expr, kwthen, then, kwelse, else.expr)}
+	| {ifexpr} kwif [n1]:no expr [n2]:no kwthen [n3]:no [then]:expr [n4]:no kwelse [n5]:no [else]:expr~nobra {-> New expr.ifexpr(kwif, expr, kwthen, then, kwelse, else.expr)}
 	;
 
 expr_and~nopar~nobra {-> expr}
 	= expr_not~nopar~nobra {-> expr_not~nopar~nobra.expr}
-	| {:or} expr_and~nopar~nobra kwor :no expr_not~nopar~nobra
-	| {:and} expr_and~nopar~nobra kwand :no expr_not~nopar~nobra
-	| {:or_else} expr_and~nopar~nobra kwor kwelse :no expr_not~nopar~nobra
-	| {:implies} expr_and~nopar~nobra kwimplies :no expr_not~nopar~nobra
+	| {:or} expr_and~nopar~nobra kwor :no expr_not~nobra
+	| {:and} expr_and~nopar~nobra kwand :no expr_not~nobra
+	| {:or_else} expr_and~nopar~nobra kwor kwelse :no expr_not~nobra
+	| {:implies} expr_and~nopar~nobra kwimplies :no expr_not~nobra
 	;
 
 expr_not~nopar~nobra {-> expr}
 	= expr_eq~nopar~nobra {-> expr_eq~nopar~nobra.expr}
-	| {not} kwnot no expr_not~nopar~nobra {-> New expr.not(kwnot, expr_not~nopar~nobra.expr)}
+	| {not} kwnot no expr_not~nobra {-> New expr.not(kwnot, expr_not~nobra.expr)}
 	;
 
 expr_eq~nopar~nobra {-> expr}
 	= expr_add~nopar~nobra {-> expr_add~nopar~nobra.expr}
-	| {:eq} expr_add~nopar~nobra eq :no [expr2]:expr_add~nopar~nobra
-	| {:ne} expr_add~nopar~nobra ne :no [expr2]:expr_add~nopar~nobra
-	| {:lt} expr_add~nopar~nobra lt :no [expr2]:expr_add~nopar~nobra
-	| {:le} expr_add~nopar~nobra le :no [expr2]:expr_add~nopar~nobra
-	| {:ll} expr_eq~nopar~nobra ll :no [expr2]:expr_add~nopar~nobra
-	| {:gt} expr_add~nopar~nobra gt :no [expr2]:expr_add~nopar~nobra
-	| {:ge} expr_add~nopar~nobra ge :no [expr2]:expr_add~nopar~nobra
-	| {:gg} expr_eq~nopar~nobra gg :no [expr2]:expr_add~nopar~nobra
-	| {:starship} expr_add~nopar~nobra starship :no [expr2]:expr_add~nopar~nobra
+	| {:eq} expr_add~nopar~nobra eq :no [expr2]:expr_add~nobra
+	| {:ne} expr_add~nopar~nobra ne :no [expr2]:expr_add~nobra
+	| {:lt} expr_add~nopar~nobra lt :no [expr2]:expr_add~nobra
+	| {:le} expr_add~nopar~nobra le :no [expr2]:expr_add~nobra
+	| {:ll} expr_eq~nopar~nobra ll :no [expr2]:expr_add~nobra
+	| {:gt} expr_add~nopar~nobra gt :no [expr2]:expr_add~nobra
+	| {:ge} expr_add~nopar~nobra ge :no [expr2]:expr_add~nobra
+	| {:gg} expr_eq~nopar~nobra gg :no [expr2]:expr_add~nobra
+	| {:starship} expr_add~nopar~nobra starship :no [expr2]:expr_add~nobra
 	| {:isa} expr_add~nopar~nobra kwisa :no type~nobra
 	;
 
 expr_add~nopar~nobra {-> expr}
 	=  expr_mul~nopar~nobra {-> expr_mul~nopar~nobra.expr}
-	| {:plus} expr_add~nopar~nobra plus :no [expr2]:expr_mul~nopar~nobra
-	| {:minus} expr_add~nopar~nobra minus :no [expr2]:expr_mul~nopar~nobra
+	| {:plus} expr_add~nopar~nobra plus :no [expr2]:expr_mul~nobra
+	| {:minus} expr_add~nopar~nobra minus :no [expr2]:expr_mul~nobra
 	;
 
 expr_mul~nopar~nobra {-> expr}
 	= expr_pow~nopar~nobra {-> expr_pow~nopar~nobra.expr}
-	| {:star} expr_mul~nopar~nobra star :no [expr2]:expr_pow~nopar~nobra
-	| {:slash} expr_mul~nopar~nobra slash :no [expr2]:expr_pow~nopar~nobra
-	| {:percent} expr_mul~nopar~nobra percent :no [expr2]:expr_pow~nopar~nobra
+	| {:star} expr_mul~nopar~nobra star :no [expr2]:expr_pow~nobra
+	| {:slash} expr_mul~nopar~nobra slash :no [expr2]:expr_pow~nobra
+	| {:percent} expr_mul~nopar~nobra percent :no [expr2]:expr_pow~nobra
 	;
 
 expr_pow~nopar~nobra {-> expr}
 	= expr_minus~nopar~nobra {-> expr_minus~nopar~nobra.expr}
-	| {:starstar} expr_minus~nopar~nobra starstar :no [expr2]:expr_pow~nopar~nobra
+	| {:starstar} expr_minus~nopar~nobra starstar :no [expr2]:expr_pow~nobra
 	;
 
 expr_minus~nopar~nobra {-> expr}
@@ -566,13 +567,14 @@ expr_minus~nopar~nobra {-> expr}
 expr_new~nopar~nobra {-> expr}
 	= expr_atom~nopar~nobra {-> expr_atom~nopar~nobra.expr}
 	| {new} kwnew no type~nobra_nopar args {-> New expr.new(kwnew, type~nobra_nopar.type, Null, args.exprs)}
-	| {isset_attr} kwisset recv~nopar~nobra qualified_o attrid {-> New expr.isset_attr(kwisset, recv~nopar~nobra.expr, attrid)}
+	| {isset_attr} kwisset recv~nobra qualified_o attrid {-> New expr.isset_attr(kwisset, recv~nobra.expr, attrid)}
 	;
 
 expr_atom~nopar~nobra {-> expr}
 	= expr_single~nopar~nobra {-> expr_single~nopar~nobra.expr}
 	| {attr} recv~nopar~nobra qualified_o attrid {-> New expr.attr(recv~nopar~nobra.expr, attrid)}
 	| {call} recv~nopar~nobra qid args {-> New expr.call(recv~nopar~nobra.expr, qid.id, args.exprs)}
+	| {safe} [expr]:expr_atom~nopar~nobra quest {-> New expr.safe(expr.expr, quest)}
 	| {super} qualified_o kwsuper args {-> New expr.super(qualified_o.qualified, kwsuper, args.exprs)}
 	| {init} recv~nopar~nobra kwinit args {-> New expr.init(recv~nopar~nobra.expr, kwinit, args.exprs)}
 !nobra	| {bra} expr_atom~nopar braargs {-> New expr.bra(expr_atom~nopar.expr, braargs.exprs)}
@@ -936,6 +938,7 @@ expr	= {block} expr* kwend?
 	| {isset_attr} kwisset expr [id]:attrid
 	| {debug_type} kwdebug kwtype expr type
 	| {vararg} expr dotdotdot
+	| {safe} expr quest
 	| {type} type
 	| {methid} expr [id]:methid
 	| {at} annotations

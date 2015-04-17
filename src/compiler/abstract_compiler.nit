@@ -1637,17 +1637,38 @@ abstract class AbstractCompilerVisitor
 			return
 		end
 
+		# Handle comprehension arrays
 		var narray = nexpr.comprehension
 		if narray != null then
+			# ie. manage the statement as an expression and puts the result in the array in building
 			var recv = frame.comprehension.as(not null)
 			var val = expr(nexpr, narray.element_mtype)
 			compile_callsite(narray.push_callsite.as(not null), [recv, val])
 			return
 		end
 
+		# Update the node *cursor*, for feedback
 		var old = self.current_node
 		self.current_node = nexpr
+
+		# Prepare the exit label for operations with safe operands
+		var old_safe_label = null
+		if nexpr.has_safe_operands then
+			old_safe_label = safe_label
+			safe_label = get_name("SAFE_LABEL")
+		end
+
+		# Evaluate the node
 		nexpr.stmt(self)
+
+		# Place the exit label for operations with safe operands
+		if nexpr.has_safe_operands then
+			var safe_label = self.safe_label.as(not null)
+			self.safe_label = old_safe_label
+			add "{safe_label}: (void)0;"
+		end
+
+		# Restore the node cursor
 		self.current_node = old
 	end
 
@@ -1662,22 +1683,65 @@ abstract class AbstractCompilerVisitor
 			if mtype == null then mtype = compiler.mainmodule.object_type
 			return new_var(mtype)
 		end
+
+		# Update the node *cursor*, for feedback
 		var old = self.current_node
 		self.current_node = nexpr
+
+		# Prepare the exit label for operations with safe operands
+		var old_safe_label = null
+		if nexpr.has_safe_operands then
+			old_safe_label = safe_label
+			safe_label = get_name("SAFE_LABEL")
+		end
+
+		# Evaluate the node
 		var res = nexpr.expr(self).as(not null)
+
+		# Place the exit label for operations with safe operands
+		# And catch the safe value
+		if nexpr.has_safe_operands then
+			var safe_label = self.safe_label.as(not null)
+			self.safe_label = old_safe_label
+			var res0 = res
+			res = new_var(nexpr.mtype.as(not null))
+			assign(res, res0)
+			add "goto EXIT_{safe_label};"
+			add "{safe_label}:"
+			add "{res} = NULL;"
+			add "EXIT_{safe_label}: (void)0;"
+		end
+
+		# Autobox to the requested type, if needed
 		if mtype != null then
 			mtype = self.anchor(mtype)
 			res = self.autobox(res, mtype)
 		end
+
+		# Update precise type information
 		res = autoadapt(res, nexpr.mtype.as(not null))
+
+		# Do implicit auto-casts if required.
 		var implicit_cast_to = nexpr.implicit_cast_to
 		if implicit_cast_to != null and not self.compiler.modelbuilder.toolcontext.opt_no_check_autocast.value then
 			add_cast(res, implicit_cast_to, "auto")
 			res = autoadapt(res, implicit_cast_to)
 		end
+
+		# Handle safe operand
+		var safe_label = self.safe_label
+		if safe_label != null and nexpr isa ASafeExpr then
+			add "if ({res} == NULL) goto {safe_label};"
+		end
+
+		# Restore the node cursor
 		self.current_node = old
+
 		return res
 	end
+
+	# The label used for the safe operands in the current operation.
+	var safe_label: nullable String = null
 
 	# Alias for `self.expr(nexpr, self.bool_type)`
 	fun expr_bool(nexpr: AExpr): RuntimeVariable do return expr(nexpr, bool_type)
@@ -2769,8 +2833,12 @@ redef class AOrElseExpr
 		v.add("if ({i1}!=NULL) \{")
 		v.assign(res, i1)
 		v.add("\} else \{")
-		var i2 = v.expr(self.n_expr2, null)
-		v.assign(res, i2)
+		if self.n_expr2.mtype != null then
+			var i2 = v.expr(self.n_expr2, null)
+			v.assign(res, i2)
+		else
+			v.stmt(self.n_expr2)
+		end
 		v.add("\}")
 		return res
 	end
@@ -3099,6 +3167,14 @@ redef class AIssetAttrExpr
 		var recv = v.expr(self.n_expr, null)
 		var mproperty = self.mproperty.as(not null)
 		return v.isset_attribute(mproperty, recv)
+	end
+end
+
+redef class ASafeExpr
+	redef fun expr(v)
+	do
+		var recv = v.expr(self.n_expr, null)
+		return recv
 	end
 end
 
