@@ -1637,17 +1637,24 @@ abstract class AbstractCompilerVisitor
 			return
 		end
 
+		# Handle comprehension arrays
 		var narray = nexpr.comprehension
 		if narray != null then
+			# ie. manage the statement as an expression and puts the result in the array in building
 			var recv = frame.comprehension.as(not null)
 			var val = expr(nexpr, narray.element_mtype)
 			compile_callsite(narray.push_callsite.as(not null), [recv, val])
 			return
 		end
 
+		# Update the node *cursor*, for feedback
 		var old = self.current_node
 		self.current_node = nexpr
+
+		# Evaluate the node
 		nexpr.stmt(self)
+
+		# Restore the node cursor
 		self.current_node = old
 	end
 
@@ -1662,20 +1669,33 @@ abstract class AbstractCompilerVisitor
 			if mtype == null then mtype = compiler.mainmodule.object_type
 			return new_var(mtype)
 		end
+
+		# Update the node *cursor*, for feedback
 		var old = self.current_node
 		self.current_node = nexpr
+
+		# Evaluate the node
 		var res = nexpr.expr(self).as(not null)
+
+		# Autobox to the requested type, if needed
 		if mtype != null then
 			mtype = self.anchor(mtype)
 			res = self.autobox(res, mtype)
 		end
+
+		# Update precise type information
 		res = autoadapt(res, nexpr.mtype.as(not null))
+
+		# Do implicit auto-casts if required.
 		var implicit_cast_to = nexpr.implicit_cast_to
 		if implicit_cast_to != null and not self.compiler.modelbuilder.toolcontext.opt_no_check_autocast.value then
 			add_cast(res, implicit_cast_to, "auto")
 			res = autoadapt(res, implicit_cast_to)
 		end
+
+		# Restore the node cursor
 		self.current_node = old
+
 		return res
 	end
 
