@@ -97,7 +97,11 @@ b.val = 1
 c.val = 2
 d.val = 3
 var i = 0
-while i < 100000 do
+
+var n = 10
+if args.not_empty then n = args.first.to_i
+
+while i < 1.lshift(n) do
 	a.hop(b, c, d)
 	i = i + 1
 end

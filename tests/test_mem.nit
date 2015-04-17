@@ -27,4 +27,7 @@ fun foo(n: Int): List[Int]
 	return a
     end
 
-print(foo(23))
+var n = 10
+if args.not_empty then n = args.first.to_i
+
+print(foo(n))

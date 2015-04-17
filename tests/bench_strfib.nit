@@ -32,7 +32,7 @@ if args.has("-q") then
 	args.remove("-q")
 end
 
-var n = 5
+var n = 15
 if args.length > 0 then n = args.first.to_i
 var res = strfib(n)
 

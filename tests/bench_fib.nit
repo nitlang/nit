@@ -30,7 +30,7 @@ redef class Int
 	end
 end
 
-var n = 10
+var n = 20
 if not args.is_empty then
 	n = args.first.to_i
 end

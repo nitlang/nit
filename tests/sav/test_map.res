@@ -10,8 +10,8 @@ true
 2
 0
 * test 2 *
-1000
-334
+100
+34
 * test 3 *
 * start:
 true

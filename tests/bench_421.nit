@@ -29,7 +29,7 @@ do
 	return steps
 end
 
-var n = 10
+var n = 456
 if not args.is_empty then
 	n = args.first.to_i
 end

@@ -27,4 +27,7 @@ do
 	end
 end
 
-print(tak(37,12,6))
+var n = 17
+if args.not_empty then n = args.first.to_i
+
+print(tak(n,12,6))

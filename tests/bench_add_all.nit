@@ -14,16 +14,19 @@
 
 # Performance test for Array::add_all
 
-import standard::collection
+var n = 10
+if args.not_empty then n = args.first.to_i
+
+var nn = 1.lshift(n)
 
 var a = new Array[Numeric]
 var b = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-for i in 10000.times do
+for i in nn.times do
 	a.add_all b
 end
 
 var c = [1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0]
-for i in 10000.times do
+for i in nn.times do
 	a.add_all c
 end
 

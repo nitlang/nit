@@ -267,11 +267,11 @@ e1.attach(a1)
 b1.start
 b2.start
 
-var nb = 100000
+var nb = 10
 if not args.is_empty then
 	nb = args.first.to_i
 end
 
-s.run_for(nb)
+s.run_for(1.lshift(nb))
 print(c1.count)
 

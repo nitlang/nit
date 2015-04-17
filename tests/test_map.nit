@@ -40,7 +40,7 @@ end
 fun test2(h: Map[Int, Int])
 do
 	print("* test 2 *")
-	var nb = 999
+	var nb = 99
 	
 	var i = 0
 	while i <= nb do
