@@ -365,6 +365,9 @@ class ToolContext
 	# Option --stop-on-first-error
 	var opt_stop_on_first_error = new OptionBool("Stop on first error", "--stop-on-first-error")
 
+	# Option --keep-going
+	var opt_keep_going = new OptionBool("Continue after errors, whatever the consequences", "--keep-going")
+
 	# Option --no-color
 	var opt_no_color = new OptionBool("Do not use color to display errors and warnings", "--no-color")
 
@@ -379,7 +382,7 @@ class ToolContext
 
 	init
 	do
-		option_context.add_option(opt_warn, opt_warning, opt_quiet, opt_stop_on_first_error, opt_no_color, opt_log, opt_log_dir, opt_nit_dir, opt_help, opt_version, opt_set_dummy_tool, opt_verbose, opt_bash_completion, opt_stub_man)
+		option_context.add_option(opt_warn, opt_warning, opt_quiet, opt_stop_on_first_error, opt_keep_going, opt_no_color, opt_log, opt_log_dir, opt_nit_dir, opt_help, opt_version, opt_set_dummy_tool, opt_verbose, opt_bash_completion, opt_stub_man)
 
 		# Hide some internal options
 		opt_stub_man.hidden = true
@@ -484,6 +487,8 @@ The Nit language documentation and the source code of its tools and libraries ma
 
 		# Set verbose level
 		verbose_level = opt_verbose.value
+
+		if opt_keep_going.value then keep_going = true
 
 		if self.opt_quiet.value then self.opt_warn.value = 0
 

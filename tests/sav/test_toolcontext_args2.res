@@ -4,6 +4,7 @@ Test for ToolContext, try --bash-completion.
   -w, --warning           Show/hide a specific warning
   -q, --quiet             Do not show warnings
   --stop-on-first-error   Stop on first error
+  --keep-going            Continue after errors, whatever the consequences
   --no-color              Do not use color to display errors and warnings
   --log                   Generate various log files
   --log-dir               Directory where to generate log files
