@@ -427,9 +427,39 @@ private class TypeVisitor
 		var map = new SignatureMap
 
 		var setted = args.length - msignature.min_arity
+
+		# First, handle named arguments
+		for i in [0..args.length[ do
+			var e = args[i]
+			if not e isa ANamedargExpr then continue
+			var name = e.n_id.text
+			var param = msignature.mparameter_by_name(name)
+			if param == null then
+				modelbuilder.error(e.n_id, "Error: no parameter `{name}` for `{mproperty}{msignature}`.")
+				return null
+			end
+			if not param.is_default then
+				modelbuilder.error(e, "Error: parameter `{name}` is not optional for `{mproperty}{msignature}`.")
+				return null
+			end
+			var idx = msignature.mparameters.index_of(param)
+			var prev = map.map.get_or_null(idx)
+			if prev != null then
+				modelbuilder.error(e, "Error: parameter `{name}` already associated with argument #{prev} for `{mproperty}{msignature}`.")
+				return null
+			end
+			map.map[idx] = i
+			setted -= 1
+			e.mtype = self.visit_expr_subtype(e.n_expr, param.mtype)
+		end
+
+		# Second, associate remaining parameters
 		var vararg_decl = args.length - msignature.arity
 		var j = 0
 		for i in [0..msignature.arity[ do
+			# Skip parameters associated by name
+			if map.map.has_key(i) then continue
+
 			var param = msignature.mparameters[i]
 			if param.is_default then
 				if setted > 0 then
@@ -438,6 +468,9 @@ private class TypeVisitor
 					continue
 				end
 			end
+
+			# Search the next free argument: skip named arguments since they are already associated
+			while args[j] isa ANamedargExpr do j += 1
 			var arg = args[j]
 			map.map[i] = j
 			j += 1
@@ -450,6 +483,8 @@ private class TypeVisitor
 			var paramtype = param.mtype
 			self.visit_expr_subtype(arg, paramtype)
 		end
+
+		# Third, check varargs
 		if vararg_rank >= 0 then
 			var paramtype = msignature.mparameters[vararg_rank].mtype
 			var first = args[vararg_rank]
