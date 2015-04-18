@@ -343,7 +343,7 @@ redef class TypeVisitor
 		return sub
 	end
 
-	redef fun check_subtype(node: ANode, sub, sup: MType): nullable MType
+	redef fun check_subtype(node: ANode, sub, sup: MType, autocast: Bool): nullable MType
 	do
 		var res = super
 
@@ -359,6 +359,9 @@ redef class TypeVisitor
 		# Case of autocast
 		if not self.is_subtype(sub, sup) then
 			if node isa AAsCastExpr then
+				return res
+			end
+			if not autocast then
 				return res
 			end
 			sup = supx.resolve_for(anchor.mclass.mclass_type, anchor, mmodule, true)

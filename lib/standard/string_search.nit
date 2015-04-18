@@ -388,8 +388,14 @@ redef class Text
 	fun split_once_on(p: Pattern): Array[SELFTYPE]
 	do
 		var m = p.search_in(self, 0)
-		if m == null then return [self]
-		return new Array[SELFTYPE].with_items(substring(0, m.from), substring_from(m.after))
+		var res = new Array[SELFTYPE]
+		if m == null then
+			res.add self
+		else
+			res.add substring(0, m.from)
+			res.add substring_from(m.after)
+		end
+		return res
 	end
 
 	# Replace all occurences of a pattern with a string

@@ -20,6 +20,7 @@ import astbuilder
 import astvalidation
 import semantize
 intrude import semantize::scope
+intrude import semantize::typing
 
 redef class ToolContext
 	var transform_phase: Phase = new TransformPhase(self, [typing_phase, auto_super_init_phase])
@@ -104,6 +105,14 @@ redef class AExpr
 			place.replace_with(nadd)
 		end
 		super
+	end
+
+	redef fun replace_with(other)
+	do
+		super
+		if other isa AExpr then
+			if other.implicit_cast_to == null then other.implicit_cast_to = implicit_cast_to
+		end
 	end
 end
 

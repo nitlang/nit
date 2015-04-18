@@ -540,6 +540,8 @@ redef class AArrayExpr
 		mtype = v.cleanup_type(mtype).as(not null)
 		var prop = v.get_method(mtype, "with_native")
 		v.add_monomorphic_send(mtype, prop)
+		v.add_callsite(with_capacity_callsite)
+		v.add_callsite(push_callsite)
 	end
 end
 
