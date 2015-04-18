@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-var nb = 5
+var nb = 25
 if not args.is_empty then nb = args.first.to_i
 
 var cpt = 0

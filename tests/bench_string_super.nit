@@ -14,9 +14,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+var n = 10
+if args.not_empty then n = args.first.to_i
+
 var s = "*"
-var i = 0
-while i < 8 do
+var i = 1
+while i < n do
 	s = "Je dis «{s}» et redis «{s}» et trois fois de plus : «{s}{s}{s}».\n"
 	i = i + 1
 end

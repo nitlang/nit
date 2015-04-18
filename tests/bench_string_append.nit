@@ -17,7 +17,7 @@
 #alt1 import standard
 #alt1 import standard::ropes
 
-var n = 7
+var n = 4
 if not args.is_empty then
 	n = args.first.to_i
 end

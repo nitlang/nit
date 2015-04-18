@@ -18,8 +18,9 @@ redef class Object
 	fun foo do end
 end
 class A
-	redef fun foo do end
+	redef fun foo do i += 1 end
 	init do end
+	var i = 0
 end
 class B
 	super A
@@ -53,6 +54,9 @@ class F
 
 end
 
+var n = 10
+if args.not_empty then n = args.first.to_i
+
 var nb = 60
 var a = new Array[Object].with_capacity(nb)
 for i in [0..(nb/6)[ do
@@ -63,9 +67,12 @@ for i in [0..(nb/6)[ do
 	a[i*6+4] = new E
 	a[i*6+5] = new F
 end
-for i in [0..1000000[ do
+for i in [0..1.lshift(n)[ do
 	for j in [0..nb[ do
 		a[j].foo
 	end
 end
 
+for j in [0..nb[ do
+	print a[j].as(A).i
+end
