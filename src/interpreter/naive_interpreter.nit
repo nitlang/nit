@@ -402,6 +402,8 @@ class NaiveInterpreter
 			var param = msignature.mparameters[i]
 			var j = map.map.get_or_null(i)
 			if j == null then
+				# default value
+				res.add(null_instance)
 				continue
 			end
 			if param.is_vararg and map.vararg_decl > 0 then
