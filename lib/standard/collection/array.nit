@@ -147,6 +147,55 @@ abstract class AbstractArrayRead[E]
 	private var free_iterator: nullable ArrayIterator[E] = null
 
 	redef fun reverse_iterator do return new ArrayReverseIterator[E](self)
+
+	# Returns a sub-array containing `count` elements starting from `from`.
+	#
+	# For most cases (see other case bellow),
+	# the first element is `from` and
+	# the last element is `from+count-1`.
+	#
+	# ~~~
+	# var a = [10, 20, 30, 40, 50]
+	# assert a.sub(0, 3) == [10, 20, 30]
+	# assert a.sub(3, 2) == [40, 50]
+	# assert a.sub(3, 1) == [40]
+	# ~~~
+	#
+	# If `count` is 0 or negative then an empty array is returned
+	#
+	# ~~~
+	# assert a.sub(3,0).is_empty
+	# assert a.sub(3,-1).is_empty
+	# ~~~
+	#
+	# If `from < 0` or `from+count>length` then inexistent elements are ignored.
+	# In this case the length of the result is lower than count.
+	#
+	# ~~~
+	# assert a.sub(-2, 4)  == [10, 20]
+	# assert a.sub(4, 99)  == [50]
+	# assert a.sub(-9, 99) == [10,20,30,40,50]
+	# assert a.sub(-99, 9).is_empty
+	# ~~~
+	fun sub(from: Int, count: Int): Array[E] do
+		if from < 0 then
+			count += from
+			from = 0
+		end
+		if count < 0 then
+			count = 0
+		end
+		var to = from + count
+		if to > length then
+			to = length
+		end
+		var res = new Array[E].with_capacity(to - from)
+		while from < to do
+			res.add(self[from])
+			from += 1
+		end
+		return res
+	end
 end
 
 # Resizable one dimension array of objects.

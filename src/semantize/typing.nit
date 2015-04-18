@@ -398,47 +398,58 @@ private class TypeVisitor
 	# Visit the expressions of args and check their conformity with the corresponding type in signature
 	# The point of this method is to handle varargs correctly
 	# Note: The signature must be correctly adapted
-	fun check_signature(node: ANode, args: Array[AExpr], mproperty: MProperty, msignature: MSignature): Bool
+	fun check_signature(node: ANode, args: Array[AExpr], mproperty: MProperty, msignature: MSignature): nullable SignatureMap
 	do
 		var vararg_rank = msignature.vararg_rank
 		if vararg_rank >= 0 then
 			if args.length < msignature.arity then
 				modelbuilder.error(node, "Error: expected at least {msignature.arity} argument(s) for `{mproperty}{msignature}`; got {args.length}. See introduction at `{mproperty.full_name}`.")
-				return false
+				return null
 			end
 		else if args.length != msignature.arity then
 			modelbuilder.error(node, "Error: expected {msignature.arity} argument(s) for `{mproperty}{msignature}`; got {args.length}. See introduction at `{mproperty.full_name}`.")
-			return false
+			return null
 		end
 
 		#debug("CALL {unsafe_type}.{msignature}")
 
+		# Associate each parameter to a position in the arguments
+		var map = new SignatureMap
+
 		var vararg_decl = args.length - msignature.arity
+		var j = 0
 		for i in [0..msignature.arity[ do
-			var j = i
-			if i == vararg_rank then continue # skip the vararg
-			if i > vararg_rank then
-				j = i + vararg_decl
+			var param = msignature.mparameters[i]
+			var arg = args[j]
+			map.map[i] = j
+			j += 1
+
+			if i == vararg_rank then
+				j += vararg_decl
+				continue # skip the vararg
 			end
-			var paramtype = msignature.mparameters[i].mtype
-			self.visit_expr_subtype(args[j], paramtype)
+
+			var paramtype = param.mtype
+			self.visit_expr_subtype(arg, paramtype)
 		end
 		if vararg_rank >= 0 then
 			var paramtype = msignature.mparameters[vararg_rank].mtype
 			var first = args[vararg_rank]
 			if vararg_decl == 0 and first isa AVarargExpr then
 				var mclass = get_mclass(node, "Array")
-				if mclass == null then return false # Forward error
+				if mclass == null then return null # Forward error
 				var array_mtype = mclass.get_mtype([paramtype])
 				self.visit_expr_subtype(first.n_expr, array_mtype)
 				first.mtype  = first.n_expr.mtype
 			else
-				for j in [vararg_rank..vararg_rank+vararg_decl] do
-					self.visit_expr_subtype(args[j], paramtype)
+				map.vararg_decl = vararg_decl + 1
+				for i in [vararg_rank..vararg_rank+vararg_decl] do
+					self.visit_expr_subtype(args[i], paramtype)
 				end
 			end
 		end
-		return true
+
+		return map
 	end
 
 	fun error(node: ANode, message: String)
@@ -508,6 +519,20 @@ private class TypeVisitor
 	end
 end
 
+# Mapping between parameters and arguments in a call.
+#
+# Parameters and arguments are not stored in the class but referenced by their position (starting from 0)
+#
+# The point of this class is to help engine and other things to map arguments in the AST to parameters of the model.
+class SignatureMap
+	# Associate a parameter to an argument
+	var map = new ArrayMap[Int, Int]
+
+	# The length of the vararg sequence
+	# 0 if no vararg or if reverse vararg (cf `AVarargExpr`)
+	var vararg_decl: Int = 0
+end
+
 # A specific method call site with its associated informations.
 class CallSite
 	# The associated node for location
@@ -540,9 +565,15 @@ class CallSite
 	# Is a implicit cast required on erasure typing policy?
 	var erasure_cast: Bool
 
+	# The mapping used on the call to associate arguments to parameters
+	# If null then no specific association is required.
+	var signaturemap: nullable SignatureMap = null
+
 	private fun check_signature(v: TypeVisitor, args: Array[AExpr]): Bool
 	do
-		return v.check_signature(self.node, args, self.mproperty, self.msignature)
+		var map = v.check_signature(self.node, args, self.mproperty, self.msignature)
+		signaturemap = map
+		return map == null
 	end
 end
 
@@ -1737,13 +1768,17 @@ redef class ASuperExpr
 		msignature = v.resolve_for(msignature, recvtype, true).as(MSignature)
 		var args = self.n_args.to_a
 		if args.length > 0 then
-			v.check_signature(self, args, mproperty, msignature)
+			signaturemap = v.check_signature(self, args, mproperty, msignature)
 		end
 		self.mtype = msignature.return_mtype
 		self.is_typed = true
 		v.mpropdef.has_supercall = true
 		mpropdef = v.mpropdef.as(MMethodDef)
 	end
+
+	# The mapping used on the call to associate arguments to parameters.
+	# If null then no specific association is required.
+	var signaturemap: nullable SignatureMap
 
 	private fun process_superinit(v: TypeVisitor)
 	do
