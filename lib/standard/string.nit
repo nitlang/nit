@@ -976,30 +976,50 @@ abstract class String
 	#
 	#     assert "randomMethodId".to_snake_case == "random_method_id"
 	#
-	# If `self` is upper, it is returned unchanged
+	# The rules are the following:
 	#
-	#     assert "RANDOM_METHOD_ID".to_snake_case == "RANDOM_METHOD_ID"
+	# An uppercase is always converted to a lowercase
 	#
-	# If the identifier is prefixed by an underscore, the underscore is ignored
+	#     assert "HELLO_WORLD".to_snake_case == "hello_world"
 	#
-	#     assert "_privateField".to_snake_case == "_private_field"
+	# An uppercase that follows a lowercase is prefixed with an underscore
+	#
+	#     assert "HelloTheWORLD".to_snake_case == "hello_the_world"
+	#
+	# An uppercase that follows an uppercase and is followed by a lowercase, is prefixed with an underscore
+	#
+	#     assert "HelloTHEWorld".to_snake_case == "hello_the_world"
+	#
+	# All other characters are kept as is; `self` does not need to be a proper CamelCased string.
+	#
+	#     assert "=-_H3ll0Th3W0rld_-=".to_snake_case == "=-_h3ll0th3w0rld_-="
 	fun to_snake_case: SELFTYPE
 	do
-		if self.is_upper then return self
+		if self.is_lower then return self
 
 		var new_str = new FlatBuffer.with_capacity(self.length)
-		var is_first_char = true
+		var prev_is_lower = false
+		var prev_is_upper = false
 
 		for i in [0..length[ do
 			var char = chars[i]
-			if is_first_char then 
-				new_str.add(char.to_lower)
-				is_first_char = false
+			if char.is_lower then
+				new_str.add(char)
+				prev_is_lower = true
+				prev_is_upper = false
 			else if char.is_upper then
-				new_str.add('_')
+				if prev_is_lower then
+					new_str.add('_')
+				else if prev_is_upper and i+1 < length and chars[i+1].is_lower then
+					new_str.add('_')
+				end
 				new_str.add(char.to_lower)
+				prev_is_lower = false
+				prev_is_upper = true
 			else
 				new_str.add(char)
+				prev_is_lower = false
+				prev_is_upper = false
 			end
 		end
 		

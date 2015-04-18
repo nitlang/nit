@@ -222,7 +222,7 @@ abstract class Phase
 	end
 
 	# By default, the name is the lowercased prefix of the classname
-	redef fun to_s do return class_name.strip_extension("Phase").to_lower
+	redef fun to_s do return class_name.strip_extension("Phase").to_snake_case
 
 	# Is the phase globally disabled?
 	# A disabled phase is not called automatically called by `ToolContext::run_phases` and cie.
