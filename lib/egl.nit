@@ -454,3 +454,6 @@ end
 fun egl_bind_opengl_api: Bool `{ return eglBindAPI(EGL_OPENGL_API); `}
 fun egl_bind_opengl_es_api: Bool `{ return eglBindAPI(EGL_OPENGL_ES_API); `}
 fun egl_bind_openvg_api: Bool `{ return eglBindAPI(EGL_OPENVG_API); `}
+
+# Handle to the default display to use with EGL
+fun egl_default_display: Pointer `{ return EGL_DEFAULT_DISPLAY; `}
