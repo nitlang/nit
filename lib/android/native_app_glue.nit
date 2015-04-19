@@ -368,4 +368,13 @@ end
 
 # Android NDK's structure to control the native window for drawing
 extern class ANativeWindow `{ ANativeWindow* `}
+	# Change the format and size of the window buffers
+	#
+	# All arguments can be set to 0 to use the default devices values.
+	# `width` and `height` must both be set to 0 or have significant values.
+	#
+	# `format` is a value specified by EGL.
+	fun set_buffers_geometry(width, height, format: Int): Bool `{
+		return ANativeWindow_setBuffersGeometry(self, (int32_t)width, (int32_t)height, (int32_t)format);
+	`}
 end
