@@ -17,6 +17,8 @@ module display
 
 import ::glesv2
 
+import display_linux is conditional(linux)
+
 # Should Gamnit be more verbose?
 fun debug_gamnit: Bool do return false
 
