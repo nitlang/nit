@@ -407,8 +407,18 @@ private class TypeVisitor
 				return null
 			end
 		else if args.length != msignature.arity then
-			modelbuilder.error(node, "Error: expected {msignature.arity} argument(s) for `{mproperty}{msignature}`; got {args.length}. See introduction at `{mproperty.full_name}`.")
-			return null
+			if msignature.arity == msignature.min_arity then
+				modelbuilder.error(node, "Error: expected {msignature.arity} argument(s) for `{mproperty}{msignature}`; got {args.length}. See introduction at `{mproperty.full_name}`.")
+				return null
+			end
+			if args.length > msignature.arity then
+				modelbuilder.error(node, "Error: expected at most {msignature.arity} argument(s) for `{mproperty}{msignature}`; got {args.length}. See introduction at `{mproperty.full_name}`.")
+				return null
+			end
+			if args.length < msignature.min_arity then
+				modelbuilder.error(node, "Error: expected at least {msignature.min_arity} argument(s) for `{mproperty}{msignature}`; got {args.length}. See introduction at `{mproperty.full_name}`.")
+				return null
+			end
 		end
 
 		#debug("CALL {unsafe_type}.{msignature}")
@@ -416,10 +426,18 @@ private class TypeVisitor
 		# Associate each parameter to a position in the arguments
 		var map = new SignatureMap
 
+		var setted = args.length - msignature.min_arity
 		var vararg_decl = args.length - msignature.arity
 		var j = 0
 		for i in [0..msignature.arity[ do
 			var param = msignature.mparameters[i]
+			if param.is_default then
+				if setted > 0 then
+					setted -= 1
+				else
+					continue
+				end
+			end
 			var arg = args[j]
 			map.map[i] = j
 			j += 1
