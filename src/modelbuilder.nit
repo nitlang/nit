@@ -91,6 +91,7 @@ redef class ModelBuilder
 		model.mmodule_importation_hierarchy.sort(mmodules)
 		var nmodules = new Array[AModule]
 		for mm in mmodules do
+			if mm.is_fictive then continue
 			nmodules.add(mmodule2node(mm).as(not null))
 		end
 		toolcontext.run_phases(nmodules)
