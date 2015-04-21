@@ -448,6 +448,14 @@ redef class ModelBuilder
 
 	# Registration of the nclassdef associated to each mclassdef
 	private var mclassdef2nclassdef = new HashMap[MClassDef, AClassdef]
+
+	# Retrieve the associated AST node of a mclassdef.
+	#
+	# This method is used to associate model entity with syntactic entities.
+	# If the class definition is not associated with a node, returns `null`.
+	fun mclassdef2node(mclassdef: MClassDef): nullable AClassdef do
+		return mclassdef2nclassdef.get_or_null(mclassdef)
+	end
 end
 
 redef class AModule
