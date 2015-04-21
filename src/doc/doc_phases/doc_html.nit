@@ -278,18 +278,18 @@ redef class SearchPage
 		tpl.title = "Index"
 		# modules list
 		for mmodule in modules_list(v, doc) do
-			tpl.modules.add mmodule.tpl_link
+			tpl.modules.add mmodule.html_link
 		end
 		# classes list
 		for mclass in classes_list(v, doc) do
-			tpl.classes.add mclass.tpl_link
+			tpl.classes.add mclass.html_link
 		end
 		# properties list
 		for mproperty in mprops_list(v, doc) do
 			var m = new Template
-			m.add mproperty.intro.tpl_link
+			m.add mproperty.intro.html_link
 			m.add " ("
-			m.add mproperty.intro.mclassdef.mclass.tpl_link
+			m.add mproperty.intro.mclassdef.mclass.html_link
 			m.add ")"
 			tpl.props.add m
 		end
@@ -369,7 +369,7 @@ redef class MGroupPage
 		end
 		var lnk = new Template
 		lnk.add new TplLabel.with_classes(classes)
-		lnk.add def.tpl_link
+		lnk.add def.html_link
 		return new TplListItem.with_content(lnk)
 	end
 end
@@ -410,7 +410,7 @@ redef class MModulePage
 		end
 		var lnk = new Template
 		lnk.add new TplLabel.with_classes(classes)
-		lnk.add def.tpl_link
+		lnk.add def.html_link
 		return new TplListItem.with_content(lnk)
 	end
 end
@@ -700,7 +700,7 @@ redef class DefinitionArticle
 		title.add mprop.tpl_icon
 		title.add "<span id='{mpropdef.nitdoc_id}'></span>"
 		if mpropdef.is_intro then
-			title.add mprop.tpl_link
+			title.add mprop.html_link
 			title.add mprop.intro.tpl_signature
 		else
 			var cls_url = mprop.intro.mclassdef.mclass.nitdoc_url

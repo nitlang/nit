@@ -18,6 +18,7 @@ module html_model
 import doc_base
 import doc_down
 import html_components
+import html::bootstrap
 import ordered_tree
 
 redef class Location
@@ -56,9 +57,11 @@ redef class MEntity
 	# * MPropdef: `foo(e)`
 	var html_name: String is lazy do return name.html_escape
 
-	# A template link to the mentity `nitdoc_id`
-	fun tpl_anchor: TplLink do
-		var tpl = new TplLink("#{nitdoc_id}", html_name)
+	# Returns a Link to the mentity `html_url`.
+	#
+	# Example: `<a href="html_url" title="mdoc.short_comment">html_short_name</a>
+	var html_link: Link is lazy do
+		var tpl = new Link(nitdoc_url, html_name)
 		var mdoc = mdoc_or_fallback
 		if mdoc != null then
 			tpl.title = mdoc.short_comment
@@ -66,9 +69,9 @@ redef class MEntity
 		return tpl
 	end
 
-	# A template link to the mentity `nitdoc_url`
-	fun tpl_link: TplLink do
-		var tpl = new TplLink(nitdoc_url, html_name)
+	# A template link to the mentity `nitdoc_id`
+	fun tpl_anchor: TplLink do
+		var tpl = new TplLink("#{nitdoc_id}", html_name)
 		var mdoc = mdoc_or_fallback
 		if mdoc != null then
 			tpl.title = mdoc.short_comment
@@ -109,7 +112,7 @@ redef class MEntity
 	fun tpl_list_item: TplListItem do
 		var lnk = new Template
 		lnk.add new TplLabel.with_classes(tpl_css_classes)
-		lnk.add tpl_link
+		lnk.add html_link
 		var mdoc = mdoc_or_fallback
 		if mdoc != null then
 			lnk.add ": "
@@ -157,12 +160,12 @@ redef class MProject
 	redef fun tpl_declaration do
 		var tpl = new Template
 		tpl.add "<span>project "
-		tpl.add tpl_link
+		tpl.add html_link
 		tpl.add "</span>"
 		return tpl
 	end
 
-	redef fun tpl_namespace do return tpl_link
+	redef fun tpl_namespace do return html_link
 
 	redef fun tpl_definition do
 		var tpl = new TplDefinition
@@ -191,7 +194,7 @@ redef class MGroup
 		tpl.add mproject.tpl_namespace
 		if mproject.root != self then
 			tpl.add "::"
-			tpl.add tpl_link
+			tpl.add html_link
 		end
 		return tpl
 	end
@@ -199,7 +202,7 @@ redef class MGroup
 	redef fun tpl_declaration do
 		var tpl = new Template
 		tpl.add "<span>group "
-		tpl.add tpl_link
+		tpl.add html_link
 		tpl.add "</span>"
 		return tpl
 	end
@@ -242,7 +245,7 @@ redef class MModule
 			tpl.add mgroup.tpl_namespace
 			tpl.add "::"
 		end
-		tpl.add tpl_link
+		tpl.add html_link
 		return tpl
 	end
 
@@ -286,7 +289,7 @@ redef class MClass
 		var tpl = new Template
 		tpl.add intro_mmodule.mgroup.mproject.tpl_namespace
 		tpl.add "::<span>"
-		tpl.add tpl_link
+		tpl.add html_link
 		tpl.add "</span>"
 		return tpl
 	end
@@ -294,7 +297,7 @@ redef class MClass
 	redef fun tpl_title do
 		var title = new Template
 		title.add tpl_icon
-		title.add tpl_link
+		title.add html_link
 		return title
 	end
 
@@ -327,7 +330,7 @@ redef class MClassDef
 		var tpl = new Template
 		tpl.add mmodule.tpl_namespace
 		tpl.add "::<span>"
-		tpl.add mclass.tpl_link
+		tpl.add mclass.html_link
 		tpl.add "</span>"
 		return tpl
 	end
@@ -351,14 +354,14 @@ redef class MClassDef
 	redef fun tpl_title do
 		var title = new Template
 		title.add tpl_icon
-		title.add tpl_link
+		title.add html_link
 		return title
 	end
 
 	redef fun tpl_declaration do
 		var tpl = new Template
 		tpl.add tpl_modifiers
-		tpl.add tpl_link
+		tpl.add html_link
 		tpl.add tpl_signature
 		return tpl
 	end
@@ -415,7 +418,7 @@ redef class MProperty
 		var tpl = new Template
 		tpl.add intro_mclassdef.mclass.tpl_namespace
 		tpl.add "::<span>"
-		tpl.add intro.tpl_link
+		tpl.add intro.html_link
 		tpl.add "</span>"
 		return tpl
 	end
@@ -441,7 +444,7 @@ redef class MPropDef
 		var tpl = new Template
 		tpl.add mclassdef.tpl_namespace
 		tpl.add "::"
-		tpl.add tpl_link
+		tpl.add html_link
 		return tpl
 	end
 
@@ -450,7 +453,7 @@ redef class MPropDef
 		tpl.summary_title = "in {mclassdef.html_name}"
 		var title = new Template
 		title.add "in "
-		title.add mclassdef.tpl_link
+		title.add mclassdef.html_link
 		tpl.title = title
 		tpl.subtitle = tpl_declaration
 		var mdoc = mdoc_or_fallback
@@ -472,7 +475,7 @@ redef class MPropDef
 	redef fun tpl_declaration do
 		var tpl = new Template
 		tpl.add tpl_modifiers
-		tpl.add tpl_link
+		tpl.add html_link
 		tpl.add tpl_signature
 		return tpl
 	end
@@ -499,8 +502,10 @@ redef class MPropDef
 	redef fun tpl_list_item do
 		var lnk = new Template
 		lnk.add new TplLabel.with_classes(tpl_css_classes.to_a)
-		var anchor = tpl_link
-		anchor.href = "{mclassdef.mclass.nitdoc_url}#{mproperty.nitdoc_id}"
+		var atext = html_link.text
+		var ahref = "{mclassdef.mclass.nitdoc_url}#{mproperty.nitdoc_id}"
+		var atitle = html_link.title
+		var anchor = new Link.with_title(ahref, atext, atitle)
 		lnk.add anchor
 		var mdoc = mdoc_or_fallback
 		if mdoc != null then
@@ -515,8 +520,10 @@ redef class MPropDef
 		lnk.add new TplLabel.with_classes(tpl_css_classes.to_a)
 		lnk.add mclassdef.mmodule.tpl_namespace
 		lnk.add "::"
-		var anchor = mclassdef.tpl_link
-		anchor.href = "{mclassdef.mclass.nitdoc_url}#{mproperty.nitdoc_id}"
+		var atext = mclassdef.html_link.text
+		var ahref = "{mclassdef.mclass.nitdoc_url}#{mproperty.nitdoc_id}"
+		var atitle = mclassdef.html_link.title
+		var anchor = new Link.with_title(ahref, atext, atitle)
 		lnk.add anchor
 		var mdoc = mdoc_or_fallback
 		if mdoc != null then
@@ -561,8 +568,8 @@ redef class MMethodDef
 end
 
 redef class MVirtualTypeProp
-	redef fun tpl_link do return mvirtualtype.tpl_link
-	redef fun tpl_signature do return tpl_link
+	redef fun html_link do return mvirtualtype.html_link
+	redef fun tpl_signature do return html_link
 end
 
 redef class MVirtualTypeDef
@@ -580,8 +587,8 @@ redef class MType
 end
 
 redef class MClassType
-	redef fun tpl_link do return mclass.tpl_link
-	redef fun tpl_signature do return tpl_link
+	redef fun html_link do return mclass.html_link
+	redef fun tpl_signature do return html_link
 end
 
 redef class MNullableType
@@ -595,10 +602,9 @@ end
 
 redef class MGenericType
 	redef fun tpl_signature do
+		var lnk = html_link
 		var tpl = new Template
-		var lnk = tpl_link
-		lnk.text = mclass.name.html_escape
-		tpl.add lnk
+		tpl.add new Link.with_title(lnk.href, mclass.name.html_escape, lnk.title)
 		tpl.add "["
 		for i in [0..arguments.length[ do
 			tpl.add arguments[i].tpl_signature
@@ -610,15 +616,15 @@ redef class MGenericType
 end
 
 redef class MParameterType
-	redef fun tpl_link do
-		return new TplLink.with_title("{mclass.nitdoc_url}#FT_{name.to_cmangle}", name, "formal type")
+	redef fun html_link do
+		return new Link.with_title("{mclass.nitdoc_url}#FT_{name.to_cmangle}", name, "formal type")
 	end
-	redef fun tpl_signature do return tpl_link
+	redef fun tpl_signature do return html_link
 end
 
 redef class MVirtualType
-	redef fun tpl_link do return mproperty.intro.tpl_link
-	redef fun tpl_signature do return tpl_link
+	redef fun html_link do return mproperty.intro.html_link
+	redef fun tpl_signature do return html_link
 end
 
 redef class MSignature
@@ -697,7 +703,7 @@ redef class MRawType
 
 		for part in parts do
 			if part.target != null then
-				tpl.add part.target.as(not null).tpl_link
+				tpl.add part.target.as(not null).html_link
 			else
 				tpl.add part.text.html_escape
 			end
@@ -715,7 +721,7 @@ redef class MInnerClassDef
 	redef fun nitdoc_url do return inner.nitdoc_url
 
 	redef fun tpl_anchor do return inner.tpl_anchor
-	redef fun tpl_link do return inner.tpl_link
+	redef fun html_link do return inner.html_link
 	redef fun tpl_signature do return inner.tpl_signature
 
 	redef fun tpl_definition do
