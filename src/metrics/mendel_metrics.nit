@@ -81,24 +81,28 @@ private class MendelMetricsPhase
 		metrics.collect(mclasses)
 		if csv then metrics.to_csv.save("{out}/mendel.csv")
 
-		print toolcontext.format_h4("\tlarge mclasses (threshold: {cnblp.threshold})")
-		for mclass in cnblp.above_threshold do
-			print toolcontext.format_p("\t   {mclass.name}: {cnblp.values[mclass]}")
+		var threshold = cnblp.threshold
+		print toolcontext.format_h4("\tlarge mclasses (threshold: {threshold})")
+		for mclass in cnblp.sort do
+			var val = cnblp.values[mclass]
+			if val.to_f < threshold then break
+			print toolcontext.format_p("\t   {mclass.name}: {val}")
 		end
 
-		print toolcontext.format_h4("\tbudding mclasses (threshold: {cnvi.threshold})")
-		for mclass in cnvi.above_threshold do
-			print toolcontext.format_p("\t   {mclass.name}: {cnvi.values[mclass]}")
+		threshold = cnvi.threshold
+		print toolcontext.format_h4("\tbudding mclasses (threshold: {threshold})")
+		for mclass in cnvi.sort do
+			var val = cnvi.values[mclass]
+			if val.to_f < threshold then break
+			print toolcontext.format_p("\t   {mclass.name}: {val}")
 		end
 
-		print toolcontext.format_h4("\tblooming mclasses (threshold: {cnvs.threshold})")
-		for mclass in cnvs.above_threshold do
-			print toolcontext.format_p("\t   {mclass.name}: {cnvs.values[mclass]}")
-		end
-
-		print toolcontext.format_h4("\tblooming mclasses (threshold: {cnvs.threshold})")
-		for mclass in cnvs.above_threshold do
-			print toolcontext.format_p("\t   {mclass.name}: {cnvs.values[mclass]}")
+		threshold = cnvs.threshold
+		print toolcontext.format_h4("\tblooming mclasses (threshold: {threshold})")
+		for mclass in cnvs.sort do
+			var val = cnvs.values[mclass]
+			if val.to_f < threshold then break
+			print toolcontext.format_p("\t   {mclass.name}: {val}")
 		end
 
 		if csv then

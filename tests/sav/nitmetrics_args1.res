@@ -701,8 +701,6 @@ Statistics of type usage:
 	   Sys: 4.0
 	blooming mclasses (threshold: 12.0)
 	   Sys: 16.0
-	blooming mclasses (threshold: 12.0)
-	   Sys: 16.0
 --- Detection of the usage of covariance static type conformance ---
 -- Total --
 - Kinds of the subtype -
