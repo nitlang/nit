@@ -211,6 +211,11 @@ interface Metric
 
 	# The set of element above the threshold
 	fun above_threshold: Set[ELM] is abstract
+
+	# Sort the metric keys by values
+	fun sort: Array[ELM] do
+		return values.keys_sorted_by_values(default_reverse_comparator)
+	end
 end
 
 # A Metric that collects integer data
@@ -338,7 +343,6 @@ class FloatMetric
 			print "{"\t" * indent}  sum: {sum}"
 		end
 	end
-
 end
 
 # A MetricSet is a metric holder
