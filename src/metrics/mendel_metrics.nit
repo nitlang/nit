@@ -48,6 +48,9 @@ import mclasses_metrics
 import modelize
 
 redef class ToolContext
+	# Compute MENDEL metrics.
+	#
+	# See `mendel_metrics` module documentation.
 	var mendel_metrics_phase: Phase = new MendelMetricsPhase(self, null)
 end
 
@@ -134,6 +137,7 @@ class CBMS
 	redef fun name do return "cbms"
 	redef fun desc do return "branch mean size, mean number of introduction available among ancestors"
 
+	# Mainmodule used to compute class hierarchy.
 	var mainmodule: MModule
 
 	redef fun collect(mclasses) do
@@ -153,6 +157,7 @@ class CNVI
 	redef fun name do return "cnvi"
 	redef fun desc do return "class novelty index, contribution of the class to its branch in term of introductions"
 
+	# Mainmodule used to compute class hierarchy.
 	var mainmodule: MModule
 
 	redef fun collect(mclasses) do
@@ -181,6 +186,7 @@ class CNVS
 	redef fun name do return "cnvs"
 	redef fun desc do return "class novelty score, importance of the contribution of the class to its branch"
 
+	# Mainmodule used to compute class hierarchy.
 	var mainmodule: MModule
 
 	redef fun collect(mclasses) do
