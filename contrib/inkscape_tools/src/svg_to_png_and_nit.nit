@@ -257,10 +257,11 @@ var opt_out_src = new OptionString("Path to output source file (folder or file)"
 var opt_assets = new OptionString("Path to assert dir where to put PNG files", "--assets", "-a")
 var opt_scale = new OptionFloat("Apply scaling to exported images (default at 1.0 of 90dpi)", 1.0, "--scale", "-x")
 var opt_gamnit = new OptionBool("Target the Gamnit framework (by default it targets Mnit)", "--gamnit", "-g")
+var opt_pow2 = new OptionBool("Round the image size to the next power of 2", "--pow2")
 var opt_help = new OptionBool("Print this help message", "--help", "-h")
 
 var opt_context = new OptionContext
-opt_context.add_option(opt_out_src, opt_assets, opt_scale, opt_gamnit, opt_help)
+opt_context.add_option(opt_out_src, opt_assets, opt_scale, opt_gamnit, opt_pow2, opt_help)
 
 opt_context.parse(args)
 var rest = opt_context.rest
@@ -394,12 +395,14 @@ for drawing in drawings do
 	nit_src.write_to(src_file)
 	src_file.close
 
-	# Find closest power of 2
-	var dx = max_x - min_x
-	max_x = dx.next_pow2 + min_x
+	# Find next power of 2
+	if opt_pow2.value then
+		var dx = max_x - min_x
+		max_x = dx.next_pow2 + min_x
 
-	var dy = max_y - min_y
-	max_y = dy.next_pow2 + min_y
+		var dy = max_y - min_y
+		max_y = dy.next_pow2 + min_y
+	end
 
 	# Inkscape's --export-area inverts the Y axis. It uses the lower left corner of
 	# the drawing area where as queries return coordinates from the top left.
