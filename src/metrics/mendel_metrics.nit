@@ -135,7 +135,6 @@ class CBMS
 	redef fun desc do return "branch mean size, mean number of introduction available among ancestors"
 
 	var mainmodule: MModule
-	init(mainmodule: MModule) do self.mainmodule = mainmodule
 
 	redef fun collect(mclasses) do
 		for mclass in mclasses do
@@ -155,7 +154,6 @@ class CNVI
 	redef fun desc do return "class novelty index, contribution of the class to its branch in term of introductions"
 
 	var mainmodule: MModule
-	init(mainmodule: MModule) do self.mainmodule = mainmodule
 
 	redef fun collect(mclasses) do
 		var cbms = new CBMS(mainmodule)
@@ -184,7 +182,6 @@ class CNVS
 	redef fun desc do return "class novelty score, importance of the contribution of the class to its branch"
 
 	var mainmodule: MModule
-	init(mainmodule: MModule) do self.mainmodule = mainmodule
 
 	redef fun collect(mclasses) do
 		var cnvi = new CNVI(mainmodule)
