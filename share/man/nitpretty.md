@@ -25,6 +25,22 @@ nitpretty [*options*]... FILE
 `--check`
 :   Check format of Nit source files
 
+    This option creates a temporary pretty printed file then checks if the output
+    of the diff command on the source file and the pretty printed one is empty.
+
+`--break-strings`
+:   Break too long string literals
+
+`--inline-do`
+:   Force do keyword on the same line as the method signature
+
+`--skip-empty`
+:   Force formatting of empty lines
+
+    By default empty lines are kept as they were typed in the file.
+    When enabling this option, `nitpretty` will decide where to break lines and
+    will put empty lines to separate properties and code blocks.
+
 # SPECIFICATION
 
 The specification of the pretty printing is described here.

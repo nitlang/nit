@@ -48,9 +48,9 @@ redef class ToolContext
 
 	# Check formatting instead of pretty printing.
 	#
-	# This option create a tempory pretty printed file then check if
-	# the output of the diff command on the source file and the pretty
-	# printed one is empty.
+	# This option creates a temporary pretty printed file then checks if the
+	# output of the diff command on the source file and the pretty printed one is
+	# empty.
 	var opt_check = new OptionBool("Check format of Nit source files", "--check")
 end
 
