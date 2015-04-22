@@ -233,6 +233,7 @@ class PlayerHome
 		page.side_panels.clear
 		page.side_panels.add new PlayerStatusPanel(game, player)
 		page.flow_panels.add new PlayerReviewsPanel(game, player)
+		page.flow_panels.add new PlayerWorkPanel(game, player)
 		page.flow_panels.add new AchievementsListPanel(player)
 		page.flow_panels.add new EventListPanel(player, list_limit, list_from)
 		rsp.body = page.write_to_string
