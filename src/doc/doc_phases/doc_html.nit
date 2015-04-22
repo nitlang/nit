@@ -244,7 +244,7 @@ redef class OverviewPage
 		var ssection = new TplSection.with_title("projects", "Projects")
 		for mproject in mprojects do
 			var sarticle = mproject.tpl_article
-			sarticle.subtitle = mproject.tpl_declaration
+			sarticle.subtitle = mproject.html_declaration
 			sarticle.content = mproject.tpl_definition
 			var mdoc = mproject.mdoc_or_fallback
 			if mdoc != null then
@@ -278,18 +278,18 @@ redef class SearchPage
 		tpl.title = "Index"
 		# modules list
 		for mmodule in modules_list(v, doc) do
-			tpl.modules.add mmodule.tpl_link
+			tpl.modules.add mmodule.html_link
 		end
 		# classes list
 		for mclass in classes_list(v, doc) do
-			tpl.classes.add mclass.tpl_link
+			tpl.classes.add mclass.html_link
 		end
 		# properties list
 		for mproperty in mprops_list(v, doc) do
 			var m = new Template
-			m.add mproperty.intro.tpl_link
+			m.add mproperty.intro.html_link
 			m.add " ("
-			m.add mproperty.intro.mclassdef.mclass.tpl_link
+			m.add mproperty.intro.mclassdef.mclass.html_link
 			m.add ")"
 			tpl.props.add m
 		end
@@ -369,7 +369,7 @@ redef class MGroupPage
 		end
 		var lnk = new Template
 		lnk.add new TplLabel.with_classes(classes)
-		lnk.add def.tpl_link
+		lnk.add def.html_link
 		return new TplListItem.with_content(lnk)
 	end
 end
@@ -410,7 +410,7 @@ redef class MModulePage
 		end
 		var lnk = new Template
 		lnk.add new TplLabel.with_classes(classes)
-		lnk.add def.tpl_link
+		lnk.add def.html_link
 		return new TplListItem.with_content(lnk)
 	end
 end
@@ -467,7 +467,7 @@ redef class MClassPage
 		end
 		var lnk = new Template
 		lnk.add new TplLabel.with_classes(classes)
-		lnk.add mprop.tpl_anchor
+		lnk.add mprop.html_link_to_anchor
 		return new TplListItem.with_content(lnk)
 	end
 
@@ -496,7 +496,7 @@ end
 
 redef class MPropertyPage
 	redef fun init_title(v, doc) do
-		title = "{mentity.html_name}{mentity.tpl_signature.write_to_string}"
+		title = "{mentity.html_name}{mentity.html_short_signature.write_to_string}"
 	end
 
 	redef fun init_topmenu(v, doc) do
@@ -527,14 +527,14 @@ redef class DocRoot
 		var section = new TplSection("top")
 		var mentity = page.mentity
 		section.title = mentity.html_name
-		section.subtitle = mentity.tpl_declaration
+		section.subtitle = mentity.html_declaration
 		# FIXME ugly hack to avoid diff
 		if mentity isa MGroup and mentity.is_root then
 			section.title = mentity.mproject.html_name
-			section.subtitle = mentity.mproject.tpl_declaration
+			section.subtitle = mentity.mproject.html_declaration
 		else if mentity isa MProperty then
-			section.title = "{mentity.html_name}{mentity.intro.tpl_signature.write_to_string}"
-			section.subtitle = mentity.tpl_namespace
+			section.title = "{mentity.html_name}{mentity.intro.html_signature.write_to_string}"
+			section.subtitle = mentity.html_namespace
 			section.summary_title = mentity.html_name
 		end
 		render(v, doc, page, section)
@@ -575,14 +575,14 @@ redef class ConcernSection
 			title.add "from "
 			section.summary_title = "from {mmodule.html_name}"
 		end
-		title.add mmodule.tpl_namespace
+		title.add mmodule.html_namespace
 		section.title = title
 	end
 
 	private fun render_concern_other(page: MEntityPage, section: TplSection, mmodule: MModule) do
 		var title = new Template
 		title.add "in "
-		title.add mmodule.tpl_namespace
+		title.add mmodule.html_namespace
 		section.title = title
 		section.summary_title = "in {mmodule.html_name}"
 	end
@@ -605,11 +605,11 @@ redef class IntroArticle
 		else if mentity isa MPropDef then
 			article.source_link = v.tpl_showsource(mentity.location)
 		end
-		# article.subtitle = mentity.tpl_declaration
+		# article.subtitle = mentity.html_declaration
 		# FIXME diff hack
 		if mentity isa MProperty then
 			# intro title
-			var ns = mentity.intro.mclassdef.mmodule.tpl_namespace
+			var ns = mentity.intro.mclassdef.mmodule.html_namespace
 			var section = new TplSection("intro")
 			var title = new Template
 			title.add "Introduction in "
@@ -644,7 +644,7 @@ redef class DefinitionArticle
 		# FIXME hideous hacks...
 		if mentity isa MModule then
 			article = mentity.tpl_article
-			article.subtitle = mentity.tpl_declaration
+			article.subtitle = mentity.html_declaration
 			article.content = mentity.tpl_definition
 		else if mentity isa MClass then
 			article = make_mclass_article(v, page)
@@ -655,7 +655,7 @@ redef class DefinitionArticle
 			article = make_mpropdef_article(v, doc, page)
 		else
 			article = mentity.tpl_article
-			article.subtitle = mentity.tpl_declaration
+			article.subtitle = mentity.html_declaration
 			if mentity isa MPropDef then
 				article.source_link = v.tpl_showsource(mentity.location)
 			end
@@ -673,7 +673,7 @@ redef class DefinitionArticle
 
 	private fun make_mclass_article(v: RenderHTMLPhase, page: MEntityPage): TplArticle do
 		var article = mentity.tpl_article
-		article.subtitle = mentity.tpl_namespace
+		article.subtitle = mentity.html_namespace
 		article.content = null
 		return article
 	end
@@ -686,7 +686,7 @@ redef class DefinitionArticle
 		end
 		var title = new Template
 		title.add "in "
-		title.add mclassdef.mmodule.tpl_namespace
+		title.add mclassdef.mmodule.html_namespace
 		article.subtitle = title
 		return article
 	end
@@ -700,8 +700,8 @@ redef class DefinitionArticle
 		title.add mprop.tpl_icon
 		title.add "<span id='{mpropdef.nitdoc_id}'></span>"
 		if mpropdef.is_intro then
-			title.add mprop.tpl_link
-			title.add mprop.intro.tpl_signature
+			title.add mprop.html_link
+			title.add mprop.intro.html_signature
 		else
 			var cls_url = mprop.intro.mclassdef.mclass.nitdoc_url
 			var def_url = "{cls_url}#{mprop.nitdoc_id}"
@@ -713,7 +713,7 @@ redef class DefinitionArticle
 		article.title = title
 		article.title_classes.add "signature"
 		article.summary_title = "{mprop.html_name}"
-		article.subtitle = mpropdef.tpl_namespace
+		article.subtitle = mpropdef.html_namespace
 		if mpropdef.mdoc_or_fallback != null then
 			article.content = mpropdef.mdoc_or_fallback.tpl_comment
 		end
