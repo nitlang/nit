@@ -360,16 +360,21 @@ class PlayerReviewsPanel
 
 	redef fun render_title do
 		add "<span class=\"glyphicon glyphicon-check\"></span>&nbsp;&nbsp;"
-		add "Review pull requests to gain nitcoins!"
+		add "Review pull requests and comment issues to gain nitcoins!"
 	end
 
 	redef fun render_body do
 		var q = "is:open label:need_review sort:updated-asc " +
 			"-involves:{player.name}"
 
-		var issues = game.repo.search_issues(q)
+		var q2 = "is:open label:request_for_comments sort:updated-asc " +
+			"-involves:{player.name}"
+
+		var issues = new ArraySet[Issue]
+		issues.add_all game.repo.search_issues(q).as(not null)
+		issues.add_all game.repo.search_issues(q2).as(not null)
 		if issues.is_empty then
-			add "<em>No pull request to review yet...</em>"
+			add "<em>No pull request or issue to review yet...</em>"
 			return
 		end
 		for issue in issues do
