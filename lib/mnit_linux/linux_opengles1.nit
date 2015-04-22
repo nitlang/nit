@@ -78,7 +78,9 @@ end
 
 redef extern class Opengles1Image
 	new from_sdl_image( sdl_image: SDLImage ) is extern `{
-		return mnit_opengles_load_image( sdl_image->pixels, sdl_image->w, sdl_image->h, sdl_image->format->Amask );
+		return mnit_opengles_load_image( sdl_image->pixels,
+			sdl_image->w, sdl_image->h,
+			sdl_image->w, sdl_image->h, sdl_image->format->Amask );
 	`}
 
 	# using sdl
@@ -91,7 +93,9 @@ redef extern class Opengles1Image
 			fprintf(stderr, "SDL failed to load image <%s>: %s\n", String_to_cstring(path), IMG_GetError());
 			return NULL;
 		} else {
-			opengles_image = mnit_opengles_load_image( sdl_image->pixels, sdl_image->w, sdl_image->h, sdl_image->format->Amask );
+			opengles_image = mnit_opengles_load_image( sdl_image->pixels,
+				sdl_image->w, sdl_image->h,
+				sdl_image->w, sdl_image->h, sdl_image->format->Amask );
 			SDL_FreeSurface(sdl_image);
 			return opengles_image;
 		}
