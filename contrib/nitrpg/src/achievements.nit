@@ -400,3 +400,119 @@ class Player10KCommits
 	redef var reward = 10000
 	redef var threshold = 10000
 end
+
+#####################
+### Issue Comments
+#####################
+
+# Unlock achievement after X issue comments.
+#
+# Used to factorize behavior.
+abstract class PlayerXComments
+	super AchievementReactor
+
+	# Number of comments required to unlock the achievement.
+	var threshold: Int is noinit
+
+	redef fun react_event(game, event) do
+		if not event isa IssueCommentEvent then return
+		if not event.action == "created" then return
+		var player = event.comment.user.player(game)
+		if player.stats["comments"] == threshold then
+			var a = new_achievement(game)
+			player.unlock_achievement(a, event)
+		end
+	end
+end
+
+# Player author his first comment in issues.
+class Player1Comment
+	super PlayerXComments
+
+	redef var id = "player_1_comment"
+	redef var name = "From lurker to member"
+	redef var desc = "Comment on an issue."
+	redef var reward = 10
+	redef var threshold = 1
+end
+
+# Player author 100 issue comments.
+class Player100Comments
+	super PlayerXComments
+
+	redef var id = "player_100_comments"
+	redef var name = "Chatter"
+	redef var desc = "Comment 100 times on issues."
+	redef var reward = 100
+	redef var threshold = 100
+end
+
+# Player author 1000 issue comments.
+class Player1KComments
+	super PlayerXComments
+
+	redef var id = "player_1000__comments"
+	redef var name = "You sir, talk a lot!"
+	redef var desc = "Comment 1000 times on issues."
+	redef var reward = 1000
+	redef var threshold = 1000
+end
+
+# Ping @privat in a comment.
+class PlayerPingGod
+	super AchievementReactor
+
+	redef var id = "player_ping_god"
+	redef var name = "Ping god"
+	redef var desc = "Ping the owner of the repo for the first time."
+	redef var reward = 50
+
+	redef fun react_event(game, event) do
+		if not event isa IssueCommentEvent then return
+		var owner = game.repo.owner.login
+		if event.comment.body.has("@{owner}".to_re) then
+			var player = event.comment.user.player(game)
+			var a = new_achievement(game)
+			player.unlock_achievement(a, event)
+		end
+	end
+end
+
+# Give your first +1
+class PlayerFirstReview
+	super AchievementReactor
+
+	redef var id = "player_first_review"
+	redef var name = "First +1"
+	redef var desc = "Give a +1 for the first time."
+	redef var reward = 10
+
+	redef fun react_event(game, event) do
+		if not event isa IssueCommentEvent then return
+		# FIXME use a more precise way to locate reviews
+		if event.comment.has_ok_review then
+			var player = event.comment.user.player(game)
+			var a = new_achievement(game)
+			player.unlock_achievement(a, event)
+		end
+	end
+end
+
+# Talk about nitcoin in issue comments.
+class PlayerSaysNitcoin
+	super AchievementReactor
+
+	redef var id = "player_says_nitcoin"
+	redef var name = "Talking about money"
+	redef var desc = "Say something about nitcoins in a comment."
+	redef var reward = 10
+
+	redef fun react_event(game, event) do
+		if not event isa IssueCommentEvent then return
+		if event.comment.body.has("(n|N)itcoin".to_re) then
+			var player = event.comment.user.player(game)
+			var a = new_achievement(game)
+			player.unlock_achievement(a, event)
+		end
+	end
+end

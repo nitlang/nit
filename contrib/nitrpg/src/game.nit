@@ -292,6 +292,19 @@ end
 
 # utils
 
+# Sort games by descending number of players.
+#
+# The first in the list is the game with the more players.
+class GamePlayersComparator
+	super Comparator
+
+	redef type COMPARED: Game
+
+	redef fun compare(a, b) do
+		return b.load_players.length <=> a.load_players.length
+	end
+end
+
 # Sort players by descending number of nitcoins.
 #
 # The first in the list is the player with the more of nitcoins.

@@ -187,3 +187,27 @@ redef class PullRequestEvent
 		end
 	end
 end
+
+redef class IssueCommentEvent
+
+	# Count posted comments
+	redef fun react_stats_event(game) do
+		if action == "created" then
+			var player = comment.user.player(game)
+			game.stats.inc("comments")
+			player.stats.inc("comments")
+			# FIXME use a more precise way to locate reviews
+			if comment.has_ok_review then
+				game.stats.inc("reviews")
+				player.stats.inc("reviews")
+			end
+			game.save
+			player.save
+		end
+	end
+end
+
+redef class IssueComment
+	# Does this comment contain a "+1"?
+	fun has_ok_review: Bool do return body.has("\\+1\\b".to_re)
+end

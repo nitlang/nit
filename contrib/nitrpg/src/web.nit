@@ -53,6 +53,79 @@ class RpgAction
 		rsp.body = page.write_to_string
 		return rsp
 	end
+
+	# Returns the game with `name` or null if no game exists with this name.
+	fun load_game(name: String): nullable Game do
+		var repo = api.load_repo(name)
+		if api.was_error or repo == null then return null
+		var game = new Game(api, repo)
+		game.root_url = root_url
+		return game
+	end
+
+	# Returns the list of saved games from NitRPG data.
+	fun load_games: Array[Game] do
+		var res = new Array[Game]
+		var rpgdir = "nitrpg_data"
+		if not rpgdir.file_exists then return res
+		for user in rpgdir.files do
+			for repo in "{rpgdir}/{user}".files do
+				var game = load_game("{user}/{repo}")
+				if game != null then res.add game
+			end
+		end
+		return res
+	end
+end
+
+# Repo overview page.
+class RpgHome
+	super RpgAction
+
+	# Response page stub.
+	var page: NitRpgPage is noinit
+
+	redef fun answer(request, url) do
+		var readme = load_readme
+		var games = load_games
+		var response = new HttpResponse(200)
+		page = new NitRpgPage(root_url)
+		page.side_panels.add new GamesShortListPanel(root_url, games)
+		page.flow_panels.add new MDPanel(readme)
+		response.body = page.write_to_string
+		return response
+	end
+
+	# Load the string content of the nitrpg readme file.
+	private fun load_readme: String do
+		var readme = "README.md"
+		if not readme.file_exists then
+			return "Unable to locate README file."
+		end
+		var file = new FileReader.open(readme)
+		var text = file.read_all
+		file.close
+		return text
+	end
+end
+
+# Display the list of active game.
+class ListGames
+	super RpgAction
+
+	# Response page stub.
+	var page: NitRpgPage is noinit
+
+	redef fun answer(request, url) do
+		var games = load_games
+		var response = new HttpResponse(200)
+		page = new NitRpgPage(root_url)
+		page.breadcrumbs = new Breadcrumbs
+		page.breadcrumbs.add_link(root_url / "games", "games")
+		page.flow_panels.add new GamesListPanel(root_url, games)
+		response.body = page.write_to_string
+		return response
+	end
 end
 
 # An action that require a game.
@@ -72,16 +145,15 @@ class GameAction
 		var owner = request.param("owner")
 		var repo_name = request.param("repo")
 		if owner == null or repo_name == null then
-			var msg = "Bad request: should look like /repos/:owner/:repo."
+			var msg = "Bad request: should look like /games/:owner/:repo."
 			return bad_request(msg)
 		end
-		var repo = new Repo(api, "{owner}/{repo_name}")
-		game = new Game(api, repo)
-		game.root_url = root_url
-		if api.was_error then
+		var game = load_game("{owner}/{repo_name}")
+		if game == null then
 			var msg = api.last_error.message
 			return bad_request("Repo Error: {msg}")
 		end
+		self.game = game
 		var response = new HttpResponse(200)
 		page = new NitRpgPage(root_url)
 		page.side_panels.add new GameStatusPanel(game)
@@ -103,6 +175,11 @@ class GameAction
 
 	# From where to start the display of events related lists.
 	var list_from = 0
+
+	# TODO should also check 201, 203 ...
+	private fun is_response_error(response: HttpResponse): Bool do
+		return response.status_code != 200
+	end
 end
 
 # Repo overview page.
@@ -111,6 +188,7 @@ class RepoHome
 
 	redef fun answer(request, url) do
 		var rsp = prepare_response(request, url)
+		if is_response_error(rsp) then return rsp
 		page.side_panels.add new ShortListPlayersPanel(game)
 		page.flow_panels.add new PodiumPanel(game)
 		page.flow_panels.add new EventListPanel(game, list_limit, list_from)
@@ -126,6 +204,7 @@ class ListPlayers
 
 	redef fun answer(request, url) do
 		var rsp = prepare_response(request, url)
+		if is_response_error(rsp) then return rsp
 		page.breadcrumbs.add_link(game.url / "players", "players")
 		page.flow_panels.add new ListPlayersPanel(game)
 		rsp.body = page.write_to_string
@@ -139,6 +218,7 @@ class PlayerHome
 
 	redef fun answer(request, url) do
 		var rsp = prepare_response(request, url)
+		if is_response_error(rsp) then return rsp
 		var name = request.param("player")
 		if name == null then
 			var msg = "Bad request: should look like /:owner/:repo/:players/:name."
@@ -166,6 +246,7 @@ class ListAchievements
 
 	redef fun answer(request, url) do
 		var rsp = prepare_response(request, url)
+		if is_response_error(rsp) then return rsp
 		page.breadcrumbs.add_link(game.url / "achievements", "achievements")
 		page.flow_panels.add new AchievementsListPanel(game)
 		rsp.body = page.write_to_string
@@ -179,6 +260,7 @@ class AchievementHome
 
 	redef fun answer(request, url) do
 		var rsp = prepare_response(request, url)
+		if is_response_error(rsp) then return rsp
 		var name = request.param("achievement")
 		if name == null then
 			var msg = "Bad request: should look like /:owner/:repo/achievements/:achievement."
@@ -217,6 +299,8 @@ vh.routes.add new Route("/games/:owner/:repo/players", new ListPlayers(root))
 vh.routes.add new Route("/games/:owner/:repo/achievements/:achievement", new AchievementHome(root))
 vh.routes.add new Route("/games/:owner/:repo/achievements", new ListAchievements(root))
 vh.routes.add new Route("/games/:owner/:repo", new RepoHome(root))
+vh.routes.add new Route("/games", new ListGames(root))
+vh.routes.add new Route("/", new RpgHome(root))
 
 var fac = new HttpFactory.and_libevent
 fac.config.virtual_hosts.add vh
