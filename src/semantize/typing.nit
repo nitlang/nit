@@ -453,12 +453,26 @@ private class TypeVisitor
 		if vararg_rank >= 0 then
 			var paramtype = msignature.mparameters[vararg_rank].mtype
 			var first = args[vararg_rank]
-			if vararg_decl == 0 and first isa AVarargExpr then
+			if vararg_decl == 0 then
 				var mclass = get_mclass(node, "Array")
 				if mclass == null then return null # Forward error
 				var array_mtype = mclass.get_mtype([paramtype])
-				self.visit_expr_subtype(first.n_expr, array_mtype)
-				first.mtype  = first.n_expr.mtype
+				if first isa AVarargExpr then
+					self.visit_expr_subtype(first.n_expr, array_mtype)
+					first.mtype  = first.n_expr.mtype
+				else
+					# only one vararg, maybe `...` was forgot, so be gentle!
+					var t = visit_expr(first)
+					if t == null then return null # Forward error
+					if not is_subtype(t, paramtype) and is_subtype(t, array_mtype) then
+						# Not acceptable but could be a `...`
+						error(first, "Type Error: expected `{paramtype}`, got `{t}`. Is an ellipsis `...` missing on the argument?")
+						return null
+					end
+					# Standard valid vararg, finish the job
+					map.vararg_decl = 1
+					self.visit_expr_subtype(first, paramtype)
+				end
 			else
 				map.vararg_decl = vararg_decl + 1
 				for i in [vararg_rank..vararg_rank+vararg_decl] do
