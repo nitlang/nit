@@ -915,8 +915,8 @@ expr	= {block} expr* kwend?
 	| {starstar} expr [op]:starstar [expr2]:expr
 	| {slash} expr [op]:slash [expr2]:expr
 	| {percent} expr [op]:percent [expr2]:expr
-	| {uminus} minus expr 
-	| {uplus} plus expr
+	| {uminus} [op]:minus expr
+	| {uplus} [op]:plus expr
 	| {new} kwnew type id? [args]:exprs
 	| {attr} expr [id]:attrid 
 	| {attr_assign} expr [id]:attrid assign [value]:expr 

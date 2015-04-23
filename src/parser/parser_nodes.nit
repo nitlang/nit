@@ -2041,20 +2041,28 @@ class APercentExpr
 	redef fun operator do return "%"
 end
 
-# A unary minus expression. eg `-x`
-class AUminusExpr
+# A unary operation on a method
+class AUnaryopExpr
 	super ASendExpr
 
-	# The `-` symbol
-	var n_minus: TMinus is writable, noinit
+	# The operator
+	var n_op: Token is writable, noinit
+
+	# The name of the operator (eg '+')
+	fun operator: String is abstract
+end
+
+# A unary minus expression. eg `-x`
+class AUminusExpr
+	super AUnaryopExpr
+	redef fun operator do return "-"
 end
 
 # A unary plus expression. eg `+x`
 class AUplusExpr
-	super ASendExpr
+	super AUnaryopExpr
+	redef fun operator do return "+"
 
-	# The `+` symbol
-	var n_plus: TPlus is writable, noinit
 end
 
 # An explicit instantiation. eg `new T`
