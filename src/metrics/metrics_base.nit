@@ -248,9 +248,9 @@ class IntMetric
 	end
 
 	# Values average
-	redef fun avg: Float do return values_cache.avg
+	redef fun avg do return values_cache.avg
 
-	redef fun std_dev: Float do return values_cache.std_dev
+	redef fun std_dev do return values_cache.std_dev
 
 	redef fun above_threshold do
 		var above = new HashSet[ELM]
@@ -322,7 +322,7 @@ class FloatMetric
 		return sum / values.length.to_f
 	end
 
-	redef fun std_dev: Float do
+	redef fun std_dev do
 		var sum = 0.0
 		for value in values.values do
 			sum += (value - avg).pow(2.to_f)
