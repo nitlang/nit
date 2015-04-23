@@ -1451,408 +1451,553 @@ redef class AIdMethid
 end
 redef class APlusMethid
 	init init_aplusmethid (
-		n_plus: nullable TPlus
+		n_op: nullable TPlus
 	)
 	do
-		_n_plus = n_plus.as(not null)
-		n_plus.parent = self
+		_n_op = n_op.as(not null)
+		n_op.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_plus == old_child then
-			n_plus = new_child.as(TPlus)
+		if _n_op == old_child then
+			n_op = new_child.as(TPlus)
 			return
 		end
 	end
 
-	redef fun n_plus=(node)
+	redef fun n_op=(node)
 	do
-		_n_plus = node
+		_n_op = node
 		node.parent = self
 	end
 
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_plus)
+		v.enter_visit(_n_op)
 	end
 end
 redef class AMinusMethid
 	init init_aminusmethid (
-		n_minus: nullable TMinus
+		n_op: nullable TMinus
 	)
 	do
-		_n_minus = n_minus.as(not null)
-		n_minus.parent = self
+		_n_op = n_op.as(not null)
+		n_op.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_minus == old_child then
-			n_minus = new_child.as(TMinus)
+		if _n_op == old_child then
+			n_op = new_child.as(TMinus)
 			return
 		end
 	end
 
-	redef fun n_minus=(node)
+	redef fun n_op=(node)
 	do
-		_n_minus = node
+		_n_op = node
 		node.parent = self
 	end
 
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_minus)
+		v.enter_visit(_n_op)
 	end
 end
 redef class AStarMethid
 	init init_astarmethid (
-		n_star: nullable TStar
+		n_op: nullable TStar
 	)
 	do
-		_n_star = n_star.as(not null)
-		n_star.parent = self
+		_n_op = n_op.as(not null)
+		n_op.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_star == old_child then
-			n_star = new_child.as(TStar)
+		if _n_op == old_child then
+			n_op = new_child.as(TStar)
 			return
 		end
 	end
 
-	redef fun n_star=(node)
+	redef fun n_op=(node)
 	do
-		_n_star = node
+		_n_op = node
 		node.parent = self
 	end
 
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_star)
+		v.enter_visit(_n_op)
 	end
 end
 redef class AStarstarMethid
 	init init_astarstarmethid (
-		n_starstar: nullable TStarstar
+		n_op: nullable TStarstar
 	)
 	do
-		_n_starstar = n_starstar.as(not null)
-		n_starstar.parent = self
+		_n_op = n_op.as(not null)
+		n_op.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_starstar == old_child then
-			n_starstar = new_child.as(TStarstar)
+		if _n_op == old_child then
+			n_op = new_child.as(TStarstar)
 			return
 		end
 	end
 
-	redef fun n_starstar=(node)
+	redef fun n_op=(node)
 	do
-		_n_starstar = node
+		_n_op = node
 		node.parent = self
 	end
 
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_starstar)
+		v.enter_visit(_n_op)
 	end
 end
 redef class ASlashMethid
 	init init_aslashmethid (
-		n_slash: nullable TSlash
+		n_op: nullable TSlash
 	)
 	do
-		_n_slash = n_slash.as(not null)
-		n_slash.parent = self
+		_n_op = n_op.as(not null)
+		n_op.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_slash == old_child then
-			n_slash = new_child.as(TSlash)
+		if _n_op == old_child then
+			n_op = new_child.as(TSlash)
 			return
 		end
 	end
 
-	redef fun n_slash=(node)
+	redef fun n_op=(node)
 	do
-		_n_slash = node
+		_n_op = node
 		node.parent = self
 	end
 
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_slash)
+		v.enter_visit(_n_op)
 	end
 end
 redef class APercentMethid
 	init init_apercentmethid (
-		n_percent: nullable TPercent
+		n_op: nullable TPercent
 	)
 	do
-		_n_percent = n_percent.as(not null)
-		n_percent.parent = self
+		_n_op = n_op.as(not null)
+		n_op.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_percent == old_child then
-			n_percent = new_child.as(TPercent)
+		if _n_op == old_child then
+			n_op = new_child.as(TPercent)
 			return
 		end
 	end
 
-	redef fun n_percent=(node)
+	redef fun n_op=(node)
 	do
-		_n_percent = node
+		_n_op = node
 		node.parent = self
 	end
 
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_percent)
+		v.enter_visit(_n_op)
 	end
 end
 redef class AEqMethid
 	init init_aeqmethid (
-		n_eq: nullable TEq
+		n_op: nullable TEq
 	)
 	do
-		_n_eq = n_eq.as(not null)
-		n_eq.parent = self
+		_n_op = n_op.as(not null)
+		n_op.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_eq == old_child then
-			n_eq = new_child.as(TEq)
+		if _n_op == old_child then
+			n_op = new_child.as(TEq)
 			return
 		end
 	end
 
-	redef fun n_eq=(node)
+	redef fun n_op=(node)
 	do
-		_n_eq = node
+		_n_op = node
 		node.parent = self
 	end
 
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_eq)
+		v.enter_visit(_n_op)
 	end
 end
 redef class ANeMethid
 	init init_anemethid (
-		n_ne: nullable TNe
+		n_op: nullable TNe
 	)
 	do
-		_n_ne = n_ne.as(not null)
-		n_ne.parent = self
+		_n_op = n_op.as(not null)
+		n_op.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_ne == old_child then
-			n_ne = new_child.as(TNe)
+		if _n_op == old_child then
+			n_op = new_child.as(TNe)
 			return
 		end
 	end
 
-	redef fun n_ne=(node)
+	redef fun n_op=(node)
 	do
-		_n_ne = node
+		_n_op = node
 		node.parent = self
 	end
 
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_ne)
+		v.enter_visit(_n_op)
 	end
 end
 redef class ALeMethid
 	init init_alemethid (
-		n_le: nullable TLe
+		n_op: nullable TLe
 	)
 	do
-		_n_le = n_le.as(not null)
-		n_le.parent = self
+		_n_op = n_op.as(not null)
+		n_op.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_le == old_child then
-			n_le = new_child.as(TLe)
+		if _n_op == old_child then
+			n_op = new_child.as(TLe)
 			return
 		end
 	end
 
-	redef fun n_le=(node)
+	redef fun n_op=(node)
 	do
-		_n_le = node
+		_n_op = node
 		node.parent = self
 	end
 
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_le)
+		v.enter_visit(_n_op)
 	end
 end
 redef class AGeMethid
 	init init_agemethid (
-		n_ge: nullable TGe
+		n_op: nullable TGe
 	)
 	do
-		_n_ge = n_ge.as(not null)
-		n_ge.parent = self
+		_n_op = n_op.as(not null)
+		n_op.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_ge == old_child then
-			n_ge = new_child.as(TGe)
+		if _n_op == old_child then
+			n_op = new_child.as(TGe)
 			return
 		end
 	end
 
-	redef fun n_ge=(node)
+	redef fun n_op=(node)
 	do
-		_n_ge = node
+		_n_op = node
 		node.parent = self
 	end
 
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_ge)
+		v.enter_visit(_n_op)
 	end
 end
 redef class ALtMethid
 	init init_altmethid (
-		n_lt: nullable TLt
+		n_op: nullable TLt
 	)
 	do
-		_n_lt = n_lt.as(not null)
-		n_lt.parent = self
+		_n_op = n_op.as(not null)
+		n_op.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_lt == old_child then
-			n_lt = new_child.as(TLt)
+		if _n_op == old_child then
+			n_op = new_child.as(TLt)
 			return
 		end
 	end
 
-	redef fun n_lt=(node)
+	redef fun n_op=(node)
 	do
-		_n_lt = node
+		_n_op = node
 		node.parent = self
 	end
 
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_lt)
+		v.enter_visit(_n_op)
 	end
 end
 redef class AGtMethid
 	init init_agtmethid (
-		n_gt: nullable TGt
+		n_op: nullable TGt
 	)
 	do
-		_n_gt = n_gt.as(not null)
-		n_gt.parent = self
+		_n_op = n_op.as(not null)
+		n_op.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_gt == old_child then
-			n_gt = new_child.as(TGt)
+		if _n_op == old_child then
+			n_op = new_child.as(TGt)
 			return
 		end
 	end
 
-	redef fun n_gt=(node)
+	redef fun n_op=(node)
 	do
-		_n_gt = node
+		_n_op = node
 		node.parent = self
 	end
 
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_gt)
+		v.enter_visit(_n_op)
 	end
 end
 redef class ALlMethid
 	init init_allmethid (
-		n_ll: nullable TLl
+		n_op: nullable TLl
 	)
 	do
-		_n_ll = n_ll.as(not null)
-		n_ll.parent = self
+		_n_op = n_op.as(not null)
+		n_op.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_ll == old_child then
-			n_ll = new_child.as(TLl)
+		if _n_op == old_child then
+			n_op = new_child.as(TLl)
 			return
 		end
 	end
 
-	redef fun n_ll=(node)
+	redef fun n_op=(node)
 	do
-		_n_ll = node
+		_n_op = node
 		node.parent = self
 	end
 
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_ll)
+		v.enter_visit(_n_op)
 	end
 end
 redef class AGgMethid
 	init init_aggmethid (
-		n_gg: nullable TGg
+		n_op: nullable TGg
 	)
 	do
-		_n_gg = n_gg.as(not null)
-		n_gg.parent = self
+		_n_op = n_op.as(not null)
+		n_op.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_gg == old_child then
-			n_gg = new_child.as(TGg)
+		if _n_op == old_child then
+			n_op = new_child.as(TGg)
 			return
 		end
 	end
 
-	redef fun n_gg=(node)
+	redef fun n_op=(node)
 	do
-		_n_gg = node
+		_n_op = node
 		node.parent = self
 	end
 
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_gg)
+		v.enter_visit(_n_op)
+	end
+end
+redef class AStarshipMethid
+	init init_astarshipmethid (
+		n_op: nullable TStarship
+	)
+	do
+		_n_op = n_op.as(not null)
+		n_op.parent = self
+	end
+
+	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
+	do
+		if _n_op == old_child then
+			n_op = new_child.as(TStarship)
+			return
+		end
+	end
+
+	redef fun n_op=(node)
+	do
+		_n_op = node
+		node.parent = self
+	end
+
+
+	redef fun visit_all(v: Visitor)
+	do
+		v.enter_visit(_n_op)
+	end
+end
+redef class APipeMethid
+	init init_apipemethid (
+		n_op: nullable TPipe
+	)
+	do
+		_n_op = n_op.as(not null)
+		n_op.parent = self
+	end
+
+	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
+	do
+		if _n_op == old_child then
+			n_op = new_child.as(TPipe)
+			return
+		end
+	end
+
+	redef fun n_op=(node)
+	do
+		_n_op = node
+		node.parent = self
+	end
+
+
+	redef fun visit_all(v: Visitor)
+	do
+		v.enter_visit(_n_op)
+	end
+end
+redef class ACaretMethid
+	init init_acaretmethid (
+		n_op: nullable TCaret
+	)
+	do
+		_n_op = n_op.as(not null)
+		n_op.parent = self
+	end
+
+	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
+	do
+		if _n_op == old_child then
+			n_op = new_child.as(TCaret)
+			return
+		end
+	end
+
+	redef fun n_op=(node)
+	do
+		_n_op = node
+		node.parent = self
+	end
+
+
+	redef fun visit_all(v: Visitor)
+	do
+		v.enter_visit(_n_op)
+	end
+end
+redef class AAmpMethid
+	init init_aampmethid (
+		n_op: nullable TAmp
+	)
+	do
+		_n_op = n_op.as(not null)
+		n_op.parent = self
+	end
+
+	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
+	do
+		if _n_op == old_child then
+			n_op = new_child.as(TAmp)
+			return
+		end
+	end
+
+	redef fun n_op=(node)
+	do
+		_n_op = node
+		node.parent = self
+	end
+
+
+	redef fun visit_all(v: Visitor)
+	do
+		v.enter_visit(_n_op)
+	end
+end
+redef class ATildeMethid
+	init init_atildemethid (
+		n_op: nullable TTilde
+	)
+	do
+		_n_op = n_op.as(not null)
+		n_op.parent = self
+	end
+
+	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
+	do
+		if _n_op == old_child then
+			n_op = new_child.as(TTilde)
+			return
+		end
+	end
+
+	redef fun n_op=(node)
+	do
+		_n_op = node
+		node.parent = self
+	end
+
+
+	redef fun visit_all(v: Visitor)
+	do
+		v.enter_visit(_n_op)
 	end
 end
 redef class ABraMethid
@@ -1895,35 +2040,6 @@ redef class ABraMethid
 	do
 		v.enter_visit(_n_obra)
 		v.enter_visit(_n_cbra)
-	end
-end
-redef class AStarshipMethid
-	init init_astarshipmethid (
-		n_starship: nullable TStarship
-	)
-	do
-		_n_starship = n_starship.as(not null)
-		n_starship.parent = self
-	end
-
-	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
-	do
-		if _n_starship == old_child then
-			n_starship = new_child.as(TStarship)
-			return
-		end
-	end
-
-	redef fun n_starship=(node)
-	do
-		_n_starship = node
-		node.parent = self
-	end
-
-
-	redef fun visit_all(v: Visitor)
-	do
-		v.enter_visit(_n_starship)
 	end
 end
 redef class AAssignMethid
@@ -4388,22 +4504,187 @@ redef class APercentExpr
 		v.enter_visit(_n_expr2)
 	end
 end
+redef class APipeExpr
+	init init_apipeexpr (
+		n_expr: nullable AExpr,
+		n_op: nullable TPipe,
+		n_expr2: nullable AExpr
+	)
+	do
+		_n_expr = n_expr.as(not null)
+		n_expr.parent = self
+		_n_op = n_op.as(not null)
+		n_op.parent = self
+		_n_expr2 = n_expr2.as(not null)
+		n_expr2.parent = self
+	end
+
+	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
+	do
+		if _n_expr == old_child then
+			n_expr = new_child.as(AExpr)
+			return
+		end
+		if _n_op == old_child then
+			n_op = new_child.as(TPipe)
+			return
+		end
+		if _n_expr2 == old_child then
+			n_expr2 = new_child.as(AExpr)
+			return
+		end
+	end
+
+	redef fun n_expr=(node)
+	do
+		_n_expr = node
+		node.parent = self
+	end
+	redef fun n_op=(node)
+	do
+		_n_op = node
+		node.parent = self
+	end
+	redef fun n_expr2=(node)
+	do
+		_n_expr2 = node
+		node.parent = self
+	end
+
+
+	redef fun visit_all(v: Visitor)
+	do
+		v.enter_visit(_n_expr)
+		v.enter_visit(_n_op)
+		v.enter_visit(_n_expr2)
+	end
+end
+redef class ACaretExpr
+	init init_acaretexpr (
+		n_expr: nullable AExpr,
+		n_op: nullable TCaret,
+		n_expr2: nullable AExpr
+	)
+	do
+		_n_expr = n_expr.as(not null)
+		n_expr.parent = self
+		_n_op = n_op.as(not null)
+		n_op.parent = self
+		_n_expr2 = n_expr2.as(not null)
+		n_expr2.parent = self
+	end
+
+	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
+	do
+		if _n_expr == old_child then
+			n_expr = new_child.as(AExpr)
+			return
+		end
+		if _n_op == old_child then
+			n_op = new_child.as(TCaret)
+			return
+		end
+		if _n_expr2 == old_child then
+			n_expr2 = new_child.as(AExpr)
+			return
+		end
+	end
+
+	redef fun n_expr=(node)
+	do
+		_n_expr = node
+		node.parent = self
+	end
+	redef fun n_op=(node)
+	do
+		_n_op = node
+		node.parent = self
+	end
+	redef fun n_expr2=(node)
+	do
+		_n_expr2 = node
+		node.parent = self
+	end
+
+
+	redef fun visit_all(v: Visitor)
+	do
+		v.enter_visit(_n_expr)
+		v.enter_visit(_n_op)
+		v.enter_visit(_n_expr2)
+	end
+end
+redef class AAmpExpr
+	init init_aampexpr (
+		n_expr: nullable AExpr,
+		n_op: nullable TAmp,
+		n_expr2: nullable AExpr
+	)
+	do
+		_n_expr = n_expr.as(not null)
+		n_expr.parent = self
+		_n_op = n_op.as(not null)
+		n_op.parent = self
+		_n_expr2 = n_expr2.as(not null)
+		n_expr2.parent = self
+	end
+
+	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
+	do
+		if _n_expr == old_child then
+			n_expr = new_child.as(AExpr)
+			return
+		end
+		if _n_op == old_child then
+			n_op = new_child.as(TAmp)
+			return
+		end
+		if _n_expr2 == old_child then
+			n_expr2 = new_child.as(AExpr)
+			return
+		end
+	end
+
+	redef fun n_expr=(node)
+	do
+		_n_expr = node
+		node.parent = self
+	end
+	redef fun n_op=(node)
+	do
+		_n_op = node
+		node.parent = self
+	end
+	redef fun n_expr2=(node)
+	do
+		_n_expr2 = node
+		node.parent = self
+	end
+
+
+	redef fun visit_all(v: Visitor)
+	do
+		v.enter_visit(_n_expr)
+		v.enter_visit(_n_op)
+		v.enter_visit(_n_expr2)
+	end
+end
 redef class AUminusExpr
 	init init_auminusexpr (
-		n_minus: nullable TMinus,
+		n_op: nullable TMinus,
 		n_expr: nullable AExpr
 	)
 	do
-		_n_minus = n_minus.as(not null)
-		n_minus.parent = self
+		_n_op = n_op.as(not null)
+		n_op.parent = self
 		_n_expr = n_expr.as(not null)
 		n_expr.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_minus == old_child then
-			n_minus = new_child.as(TMinus)
+		if _n_op == old_child then
+			n_op = new_child.as(TMinus)
 			return
 		end
 		if _n_expr == old_child then
@@ -4412,9 +4693,9 @@ redef class AUminusExpr
 		end
 	end
 
-	redef fun n_minus=(node)
+	redef fun n_op=(node)
 	do
-		_n_minus = node
+		_n_op = node
 		node.parent = self
 	end
 	redef fun n_expr=(node)
@@ -4426,26 +4707,26 @@ redef class AUminusExpr
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_minus)
+		v.enter_visit(_n_op)
 		v.enter_visit(_n_expr)
 	end
 end
 redef class AUplusExpr
 	init init_auplusexpr (
-		n_plus: nullable TPlus,
+		n_op: nullable TPlus,
 		n_expr: nullable AExpr
 	)
 	do
-		_n_plus = n_plus.as(not null)
-		n_plus.parent = self
+		_n_op = n_op.as(not null)
+		n_op.parent = self
 		_n_expr = n_expr.as(not null)
 		n_expr.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_plus == old_child then
-			n_plus = new_child.as(TPlus)
+		if _n_op == old_child then
+			n_op = new_child.as(TPlus)
 			return
 		end
 		if _n_expr == old_child then
@@ -4454,9 +4735,9 @@ redef class AUplusExpr
 		end
 	end
 
-	redef fun n_plus=(node)
+	redef fun n_op=(node)
 	do
-		_n_plus = node
+		_n_op = node
 		node.parent = self
 	end
 	redef fun n_expr=(node)
@@ -4468,7 +4749,49 @@ redef class AUplusExpr
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_plus)
+		v.enter_visit(_n_op)
+		v.enter_visit(_n_expr)
+	end
+end
+redef class AUtildeExpr
+	init init_autildeexpr (
+		n_op: nullable TTilde,
+		n_expr: nullable AExpr
+	)
+	do
+		_n_op = n_op.as(not null)
+		n_op.parent = self
+		_n_expr = n_expr.as(not null)
+		n_expr.parent = self
+	end
+
+	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
+	do
+		if _n_op == old_child then
+			n_op = new_child.as(TTilde)
+			return
+		end
+		if _n_expr == old_child then
+			n_expr = new_child.as(AExpr)
+			return
+		end
+	end
+
+	redef fun n_op=(node)
+	do
+		_n_op = node
+		node.parent = self
+	end
+	redef fun n_expr=(node)
+	do
+		_n_expr = node
+		node.parent = self
+	end
+
+
+	redef fun visit_all(v: Visitor)
+	do
+		v.enter_visit(_n_op)
 		v.enter_visit(_n_expr)
 	end
 end
@@ -6962,6 +7285,93 @@ redef class AStarstarAssignOp
 	do
 		if _n_op == old_child then
 			n_op = new_child.as(TStarstareq)
+			return
+		end
+	end
+
+	redef fun n_op=(node)
+	do
+		_n_op = node
+		node.parent = self
+	end
+
+
+	redef fun visit_all(v: Visitor)
+	do
+		v.enter_visit(_n_op)
+	end
+end
+redef class APipeAssignOp
+	init init_apipeassignop (
+		n_op: nullable TPipeeq
+	)
+	do
+		_n_op = n_op.as(not null)
+		n_op.parent = self
+	end
+
+	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
+	do
+		if _n_op == old_child then
+			n_op = new_child.as(TPipeeq)
+			return
+		end
+	end
+
+	redef fun n_op=(node)
+	do
+		_n_op = node
+		node.parent = self
+	end
+
+
+	redef fun visit_all(v: Visitor)
+	do
+		v.enter_visit(_n_op)
+	end
+end
+redef class ACaretAssignOp
+	init init_acaretassignop (
+		n_op: nullable TCareteq
+	)
+	do
+		_n_op = n_op.as(not null)
+		n_op.parent = self
+	end
+
+	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
+	do
+		if _n_op == old_child then
+			n_op = new_child.as(TCareteq)
+			return
+		end
+	end
+
+	redef fun n_op=(node)
+	do
+		_n_op = node
+		node.parent = self
+	end
+
+
+	redef fun visit_all(v: Visitor)
+	do
+		v.enter_visit(_n_op)
+	end
+end
+redef class AAmpAssignOp
+	init init_aampassignop (
+		n_op: nullable TAmpeq
+	)
+	do
+		_n_op = n_op.as(not null)
+		n_op.parent = self
+	end
+
+	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
+	do
+		if _n_op == old_child then
+			n_op = new_child.as(TAmpeq)
 			return
 		end
 	end
