@@ -801,6 +801,8 @@ redef class AMethPropdef
 				name = "unary +"
 			else if name == "-" and arity == 0 then
 				name = "unary -"
+			else if name == "~" and arity == 0 then
+				name = "unary ~"
 			else
 				if amethodid.is_binary and arity != 1 then
 					modelbuilder.error(self.n_signature, "Syntax Error: binary operator `{name}` requires exactly one parameter; got {arity}.")
