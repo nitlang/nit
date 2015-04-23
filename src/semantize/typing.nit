@@ -1641,13 +1641,8 @@ redef class ANeExpr
 	end
 end
 
-redef class AUplusExpr
-	redef fun property_name do return "unary +"
-	redef fun compute_raw_arguments do return new Array[AExpr]
-end
-
-redef class AUminusExpr
-	redef fun property_name do return "unary -"
+redef class AUnaryopExpr
+	redef fun property_name do return "unary {operator}"
 	redef fun compute_raw_arguments do return new Array[AExpr]
 end
 
