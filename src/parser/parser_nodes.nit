@@ -750,6 +750,21 @@ class TStarstareq
 	super TokenOperator
 end
 
+# The operator `|=`
+class TPipeeq
+	super TokenOperator
+end
+
+# The operator `^=`
+class TCareteq
+	super TokenOperator
+end
+
+# The operator `&=`
+class TAmpeq
+	super TokenOperator
+end
+
 # The operator `<<=`
 class TLleq
 	super TokenOperator
@@ -800,8 +815,28 @@ class TSlash
 	super TokenOperator
 end
 
-# The operator `+%
+# The operator `%`
 class TPercent
+	super TokenOperator
+end
+
+# The operator `|`
+class TPipe
+	super TokenOperator
+end
+
+# The operator `^`
+class TCaret
+	super TokenOperator
+end
+
+# The operator `&`
+class TAmp
+	super TokenOperator
+end
+
+# The operator `~`
+class TTilde
 	super TokenOperator
 end
 
@@ -1460,7 +1495,26 @@ end
 # A method name `%`
 class APercentMethid
 	super AOperatorMethid
+end
 
+# A method name `|`
+class APipeMethid
+	super AOperatorMethid
+end
+
+# A method name `^`
+class ACaretMethid
+	super AOperatorMethid
+end
+
+# A method name `&`
+class AAmpMethid
+	super AOperatorMethid
+end
+
+# A method name `~`
+class ATildeMethid
+	super AOperatorMethid
 end
 
 # A method name `==`
@@ -2041,6 +2095,24 @@ class APercentExpr
 	redef fun operator do return "%"
 end
 
+# A `|` expression
+class APipeExpr
+	super ABinopExpr
+	redef fun operator do return "|"
+end
+
+# A `^` expression
+class ACaretExpr
+	super ABinopExpr
+	redef fun operator do return "^"
+end
+
+# A `&` expression
+class AAmpExpr
+	super ABinopExpr
+	redef fun operator do return "&"
+end
+
 # A unary operation on a method
 class AUnaryopExpr
 	super ASendExpr
@@ -2062,7 +2134,12 @@ end
 class AUplusExpr
 	super AUnaryopExpr
 	redef fun operator do return "+"
+end
 
+# A unary `~` expression
+class AUtildeExpr
+	super AUnaryopExpr
+	redef fun operator do return "~"
 end
 
 # An explicit instantiation. eg `new T`
@@ -2600,6 +2677,27 @@ class AStarstarAssignOp
 	super AAssignOp
 
 	redef fun operator do return "**"
+end
+
+# A `|=` assignment operation
+class APipeAssignOp
+	super AAssignOp
+
+	redef fun operator do return "|"
+end
+
+# A `^=` assignment operation
+class ACaretAssignOp
+	super AAssignOp
+
+	redef fun operator do return "^"
+end
+
+# A `&=` assignment operation
+class AAmpAssignOp
+	super AAssignOp
+
+	redef fun operator do return "&"
 end
 
 # A `<<=` assignment operation
