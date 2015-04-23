@@ -197,6 +197,9 @@ interface Metric
 		end
 	end
 
+	# The sum of all the values.
+	fun sum: VAL is abstract
+
 	# The values standard derivation
 	fun std_dev: Float is abstract
 
@@ -232,7 +235,7 @@ class IntMetric
 
 	redef fun clear do values_cache.clear
 
-	fun sum: Int do return values_cache.sum
+	redef fun sum do return values_cache.sum
 
 	redef fun max do
 		assert not values_cache.is_empty
@@ -281,7 +284,8 @@ class FloatMetric
 
 	redef fun clear do values_cache.clear
 
-	fun sum: Float do
+
+	redef fun sum do
 		var sum = 0.0
 		for v in values.values do sum += v
 		return sum
