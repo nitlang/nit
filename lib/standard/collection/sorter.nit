@@ -334,5 +334,25 @@ class DefaultComparator
 	redef fun compare(a, b) do return a <=> b
 end
 
+# This comparator uses the operator `<=>` to compare objects in a reverse order.
+#
+# See `default_reverse_comparator` for an easy-to-use general stateless reverse
+# default comparator.
+class DefaultReverseComparator
+	super Comparator
+
+	redef type COMPARED: Comparable
+
+	# Returns `b <=> a`.
+	redef fun compare(a, b) do return b <=> a
+end
+
 # Easy-to-use general stateless default comparator that uses `<=>` to compare things.
 fun default_comparator: DefaultComparator do return once new DefaultComparator
+
+# Easy-to-use general stateless default reverse comparator.
+#
+# Does the same as `default_comparator` but in reverse order.
+fun default_reverse_comparator: DefaultReverseComparator do
+	return once new DefaultReverseComparator
+end
