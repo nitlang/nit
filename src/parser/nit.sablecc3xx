@@ -846,7 +846,27 @@ propdef = {attr} doc? kwredef? visibility kwvar [id2]:id type? expr? annotations
 	| {annot} doc? kwredef? visibility? atid opar? [args]:expr* cpar? annotations?
 	;
 
-methid = {id} id | {plus} plus | {minus} minus | {star} star | {starstar} starstar | {slash} slash | {percent} percent | {eq} eq | {ne} ne | {le} le | {ge} ge | {lt} lt | {gt} gt |  {ll} ll | {gg} gg | {bra} obra cbra | {starship} starship | {assign} id assign | {braassign} obra cbra assign;
+methid
+	= {id} id
+	| {plus} [op]:plus
+	| {minus} [op]:minus
+	| {star} [op]:star
+	| {starstar} [op]:starstar
+	| {slash} [op]:slash
+	| {percent} [op]:percent
+	| {eq} [op]:eq
+	| {ne} [op]:ne
+	| {le} [op]:le
+	| {ge} [op]:ge
+	| {lt} [op]:lt
+	| {gt} [op]:gt
+	| {ll} [op]:ll
+	| {gg} [op]:gg
+	| {starship} [op]:starship
+	| {bra} obra cbra
+	| {assign} id assign
+	| {braassign} obra cbra assign
+	;
 
 signature = opar? [params]:param* cpar? type?;
 

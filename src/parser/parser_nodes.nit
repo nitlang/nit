@@ -1425,116 +1425,87 @@ class AIdMethid
 	var n_id: TId is writable, noinit
 end
 
-# A method name `+`
-class APlusMethid
+# A method name for an operator
+class AOperatorMethid
 	super AMethid
 
-	# The `+` symbol
-	var n_plus: TPlus is writable, noinit
+	# The associated operator symbol
+	var n_op: Token is writable, noinit
+end
+# A method name `+`
+class APlusMethid
+	super AOperatorMethid
 end
 
 # A method name `-`
 class AMinusMethid
-	super AMethid
-
-	# The `-` symbol
-	var n_minus: TMinus is writable, noinit
+	super AOperatorMethid
 end
 
 # A method name `*`
 class AStarMethid
-	super AMethid
-
-	# The `*` symbol
-	var n_star: TStar is writable, noinit
+	super AOperatorMethid
 end
 
 # A method name `**`
 class AStarstarMethid
-	super AMethid
-
-	# The `**` symbol
-	var n_starstar: TStarstar is writable, noinit
+	super AOperatorMethid
 end
 
 # A method name `/`
 class ASlashMethid
-	super AMethid
-
-	# The `/` symbol
-	var n_slash: TSlash is writable, noinit
+	super AOperatorMethid
 end
 
 # A method name `%`
 class APercentMethid
-	super AMethid
+	super AOperatorMethid
 
-	# The `%` symbol
-	var n_percent: TPercent is writable, noinit
 end
 
 # A method name `==`
 class AEqMethid
-	super AMethid
-
-	# The `==` symbol
-	var n_eq: TEq is writable, noinit
+	super AOperatorMethid
 end
 
 # A method name `!=`
 class ANeMethid
-	super AMethid
-
-	# The `!=` symbol
-	var n_ne: TNe is writable, noinit
+	super AOperatorMethid
 end
 
 # A method name `<=`
 class ALeMethid
-	super AMethid
-
-	# The `<=` symbol
-	var n_le: TLe is writable, noinit
+	super AOperatorMethid
 end
 
 # A method name `>=`
 class AGeMethid
-	super AMethid
-
-	# The `>=` symbol
-	var n_ge: TGe is writable, noinit
+	super AOperatorMethid
 end
 
 # A method name `<`
 class ALtMethid
-	super AMethid
-
-	# The `<` symbol
-	var n_lt: TLt is writable, noinit
+	super AOperatorMethid
 end
 
 # A method name `>`
 class AGtMethid
-	super AMethid
-
-	# The `>` symbol
-	var n_gt: TGt is writable, noinit
+	super AOperatorMethid
 end
 
 # A method name `<<`
 class ALlMethid
-	super AMethid
-
-	# The `<<` symbol
-	var n_ll: TLl is writable, noinit
+	super AOperatorMethid
 end
 
 # A method name `>>`
 class AGgMethid
-	super AMethid
+	super AOperatorMethid
+end
 
-	# The `>>` symbol
-	var n_gg: TGg is writable, noinit
+# A method name `<=>`
+class AStarshipMethid
+	super AOperatorMethid
 end
 
 # A method name `[]`
@@ -1546,14 +1517,6 @@ class ABraMethid
 
 	# The `]` symbol
 	var n_cbra: TCbra is writable, noinit
-end
-
-# A method name `<=>`
-class AStarshipMethid
-	super AMethid
-
-	# The `<=>` symbol
-	var n_starship: TStarship is writable, noinit
 end
 
 # A setter method name with a simple identifier (with a `=`)
