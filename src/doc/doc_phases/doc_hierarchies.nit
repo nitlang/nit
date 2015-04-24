@@ -41,12 +41,14 @@ end
 redef class MModulePage
 	redef fun build_inh_list(v, doc) do
 		var section = new ImportationListSection(mentity)
+		var group = new PanelGroup("List")
 		var imports = self.imports.to_a
 		v.name_sorter.sort(imports)
-		section.add_child new HierarchyListArticle(mentity, "Imports", imports)
+		group.add_child new HierarchyListArticle(mentity, "Imports", imports)
 		var clients = self.clients.to_a
 		v.name_sorter.sort(clients)
-		section.add_child new HierarchyListArticle(mentity, "Clients", clients)
+		group.add_child new HierarchyListArticle(mentity, "Clients", clients)
+		section.add_child group
 		section.parent = root.children.first
 		root.children.first.children.insert(section, 1)
 	end
@@ -55,18 +57,20 @@ end
 redef class MClassPage
 	redef fun build_inh_list(v, doc) do
 		var section = new InheritanceListSection(mentity)
+		var group = new PanelGroup("List")
 		var parents = self.parents.to_a
 		v.name_sorter.sort(parents)
-		section.add_child new HierarchyListArticle(mentity, "Parents", parents)
+		group.add_child new HierarchyListArticle(mentity, "Parents", parents)
 		var ancestors = self.ancestors.to_a
 		v.name_sorter.sort(ancestors)
-		section.add_child new HierarchyListArticle(mentity, "Ancestors", ancestors)
+		group.add_child new HierarchyListArticle(mentity, "Ancestors", ancestors)
 		var children = self.children.to_a
 		v.name_sorter.sort(children)
-		section.add_child new HierarchyListArticle(mentity, "Children", children)
+		group.add_child new HierarchyListArticle(mentity, "Children", children)
 		var descendants = self.descendants.to_a
 		v.name_sorter.sort(descendants)
-		section.add_child new HierarchyListArticle(mentity, "Descendants", descendants)
+		group.add_child new HierarchyListArticle(mentity, "Descendants", descendants)
+		section.add_child group
 		section.parent = root.children.first
 		root.children.first.children.insert(section, 1)
 	end
@@ -74,13 +78,13 @@ end
 
 # FIXME diff hack
 class ImportationListSection
-	super DocSection
+	super TabbedGroup
 	super MEntityComposite
 end
 
 # FIXME diff hack
 class InheritanceListSection
-	super DocSection
+	super TabbedGroup
 	super MEntityComposite
 end
 
