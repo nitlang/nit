@@ -2067,6 +2067,11 @@ redef class AArrayExpr
 	redef fun accept_pretty_printer(v) do
 		v.consume "["
 		v.visit_list n_exprs
+		if n_type != null then
+			v.consume ":"
+			v.adds
+			v.visit n_type
+		end
 		v.consume "]"
 	end
 end
