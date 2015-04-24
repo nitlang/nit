@@ -196,3 +196,72 @@ class DocTopMenu
 		addn "</nav>"
 	end
 end
+
+redef class DocComposite
+	super Template
+
+	# HTML anchor id
+	var html_id: String is noinit
+
+	# Title to display if any.
+	#
+	# This title can be decorated with HTML.
+	var html_title: nullable Writable is noinit, writable
+
+	# Subtitle to display if any.
+	var html_subtitle: nullable Writable is noinit, writable
+
+	# Render the element title and subtitle.
+	private fun render_title do
+		if html_title != null then
+			addn new Header(hlvl, html_title.write_to_string)
+		end
+		if html_subtitle != null then
+			addn "<div class='info subtitle'>"
+			addn html_subtitle.write_to_string
+			addn "</div>"
+		end
+	end
+
+	# Render the element body.
+	private fun render_body do end
+
+	redef fun rendering do
+		if is_hidden then return
+		render_title
+		render_body
+	end
+
+	# Level <hX> for HTML heading.
+	private fun hlvl: Int do
+		if parent == null then return 1
+		return parent.hlvl + 1
+	end
+
+	# Is `self` not displayed in the page.
+	#
+	# By default, empty elements are hidden.
+	fun is_hidden: Bool do return is_empty
+end
+
+redef class DocSection
+	super BSComponent
+
+	redef fun rendering do
+		if is_hidden then
+			addn "<a id=\"{html_id}\"></a>"
+			return
+		end
+		render_body
+	end
+end
+
+redef class DocArticle
+	super BSComponent
+
+	# Never displays the title for article.
+	#
+	# This is to maintain compatibility with old components, this may change
+	# without notice in further version.
+	redef fun render_title do end
+end
