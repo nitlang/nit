@@ -36,6 +36,120 @@ class DocHTMLLabel
 	end
 end
 
+# A component that display tabbed data.
+class DocTabs
+	super BSComponent
+
+	# HTML id of this component.
+	var html_id: String
+
+	# Text displayed on the tabs dropdown button.
+	var drop_text: String
+
+	# Panels to display in this tab group.
+	var panels = new Array[DocTabPanel]
+
+	# Droplist containing links to panels.
+	#
+	# Can also be used to add external links.
+	var drop_list: DocTabsDrop is lazy do return new DocTabsDrop(html_id, drop_text)
+
+	# Adds a new `panel` to that tab.
+	#
+	# You should always use this instead of `panels.add` because it also set the
+	# `drop_list` entry.
+	fun add_panel(panel: DocTabPanel) do
+		drop_list.add_li panel.render_tab
+		panels.add panel
+	end
+
+	redef fun rendering do
+		if panels.is_empty then return
+		panels.first.is_active = true
+		add "<div role=\"tabpanel\">"
+		if drop_list.items.length > 1 then add drop_list
+		add " <div class=\"tab-content\">"
+		for panel in panels do
+			add panel
+		end
+		add " </div>"
+		add "</div>"
+	end
+end
+
+# A list of tab regrouped in a dropdown
+class DocTabsDrop
+	super UnorderedList
+
+	# HTML id used by the tabs group.
+	var html_id: String
+
+	# Title to display in the tab item.
+	var html_title: String
+
+	redef fun rendering do
+		add """<ul id="{{{html_id}}}-tabs" class="nav pull-right" role="tablist">"""
+		add """ <li role="presentation" class="dropdown pull-right">"""
+		add """  <a href="#" id="{{{html_id}}}-drop" class="dropdown-toggle"
+		          data-toggle="dropdown" aria-controls="{{{html_id}}}-contents"
+		          aria-expanded="false">"""
+        add html_title
+		add """ <span class="glyphicon glyphicon-menu-hamburger"></span>"""
+		add """ </a>"""
+		add """ <ul class="dropdown-menu" role="menu"
+		         aria-labelledby="{{{html_id}}}-drop" id="{{{html_id}}}-contents">"""
+		for item in items do add item
+		add "  </ul>"
+        add " </li>"
+        add "</ul>"
+	end
+end
+
+# A panel that goes in a DocTabs.
+class DocTabPanel
+	super BSComponent
+
+	# HTML id of this panel.
+	var html_id: String
+
+	# Title of this panel as displayed in the tab label.
+	var tab_title: String
+
+	# HTML content of this panel.
+	var html_content: Writable is writable
+
+	# Is this panel visible by default?
+	var is_active = false
+
+	redef fun rendering do
+		var active = ""
+		if is_active then active = "active in"
+		add "<div role=\"tabpanel\" class=\"tab-pane fade {active}\""
+		add "  id=\"{html_id}\" aria-labelledby=\"{html_id}-tab\">"
+		add html_content
+		add "</div>"
+	end
+
+	private fun render_tab: DocTabItem do return new DocTabItem(tab_title, html_id)
+end
+
+# A ListItem that goes in a DocTabsDrop.
+private class DocTabItem
+	super ListItem
+
+	# Panel id to trigger when the link is clicked.
+	var target_id: String
+
+	redef fun rendering do
+		add "<li{render_css_classes}>"
+		add " <a role=\"tab\" data-toggle=\"tab\" aria-expanded=\"false\" tabindex=\"-1\""
+		add "   id=\"{target_id}-tab\" href=\"#{target_id}\" aria-controls=\"{target_id}\">"
+		add text
+		add " </a>"
+		add "</li>"
+	end
+end
+
 # A HTML tag attribute
 #  `<tag attr="value">`
 #
