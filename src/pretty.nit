@@ -99,7 +99,20 @@ class PrettyPrinterVisitor
 		n.accept_pretty_printer self
 	end
 
-	# Visit a list of `Anode`.
+	# Visit a list of arguments `ANode` with optional parentheses
+	fun visit_args(n: nullable ANodes[ANode]) do
+		if n == null or n.is_empty then return
+		if current_token isa TOpar then
+			consume "("
+		else
+			adds
+		end
+
+		visit_list n
+		if current_token isa TCpar then consume ")"
+	end
+
+	# Visit a list of `ANode`.
 	fun visit_list(n: nullable ANodes[ANode]) do
 		if n == null then return
 		n.accept_pretty_printer self
@@ -513,15 +526,7 @@ redef class AAnnotation
 			v.adds
 		end
 		v.visit n_atid
-		if not n_args.is_empty then
-			if n_opar == null then
-				v.adds
-			else
-				v.visit n_opar
-			end
-			v.visit_list n_args
-			v.visit n_cpar
-		end
+		v.visit_args n_args
 	end
 end
 
@@ -1576,14 +1581,7 @@ redef class ACallExpr
 				v.visit n_args.n_exprs.first
 				if v.current_token isa TCpar then v.skip
 			else
-				if v.current_token isa TOpar then
-					v.consume "("
-				else
-					v.adds
-				end
-
-				v.visit_list n_args.n_exprs
-				if v.current_token isa TCpar then v.consume ")"
+				v.visit_args n_args.n_exprs
 			end
 		end
 	end
@@ -1704,12 +1702,7 @@ redef class AInitExpr
 		end
 
 		v.visit n_kwinit
-
-		if not n_args.n_exprs.is_empty then
-			v.consume "("
-			v.visit_list n_args.n_exprs
-			v.consume ")"
-		end
+		v.visit_args n_args.n_exprs
 	end
 end
 
@@ -1733,11 +1726,7 @@ redef class ANewExpr
 			v.visit n_id
 		end
 
-		if not n_args.n_exprs.is_empty then
-			v.consume "("
-			v.visit_list n_args.n_exprs
-			v.consume ")"
-		end
+		v.visit_args n_args.n_exprs
 	end
 
 	redef fun is_inlinable do return true
@@ -1884,14 +1873,7 @@ redef class ASuperExpr
 				v.visit n_args.n_exprs.first
 				if v.current_token isa TCpar then v.skip
 			else
-				if v.current_token isa TOpar then
-					v.consume "("
-				else
-					v.adds
-				end
-
-				v.visit_list n_args.n_exprs
-				if v.current_token isa TCpar then v.consume ")"
+				v.visit_args n_args.n_exprs
 			end
 		end
 	end
