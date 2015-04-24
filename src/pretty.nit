@@ -124,7 +124,7 @@ class PrettyPrinterVisitor
 		if n.must_be_inline then return true
 		if n.must_be_block then return false
 		# check length
-		if n.collect_length + current_length > max_size then return false
+		if max_size > 0 and n.collect_length + current_length > max_size then return false
 		# check block is inlinable
 		return n.is_inlinable
 	end
@@ -219,7 +219,8 @@ class PrettyPrinterVisitor
 	var tab_size = 8
 
 	# Max line size.
-	var max_size = 80
+	# 0 (or negative) to disable.
+	var max_size = 80 is writable
 
 	# Length of the current line.
 	var current_length = 0
@@ -2118,7 +2119,7 @@ redef class AStringFormExpr
 			while i < text.length do
 				v.add text[i].to_s
 
-				if v.current_length >= v.max_size and i <= text.length - 3 then
+				if v.max_size > 0 and v.current_length >= v.max_size and i <= text.length - 3 then
 					v.add "\" +"
 					if was_inline then
 						v.forcen

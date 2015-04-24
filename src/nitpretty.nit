@@ -32,6 +32,9 @@ redef class ToolContext
 	var opt_meld = new OptionBool("Show diff between source and output using meld",
 	   "--meld")
 
+	# --line-width
+	var opt_line_width = new OptionInt("Maximum length of lines (use 0 to disable automatic line breaks)", 80, "--line-width")
+
 	# Break too long string literals.
 	var opt_break_str = new OptionBool("Break too long string literals", "--break-strings")
 
@@ -69,7 +72,7 @@ var toolcontext = new ToolContext
 var opts = toolcontext.option_context
 opts.add_option(toolcontext.opt_dir, toolcontext.opt_output)
 opts.add_option(toolcontext.opt_diff, toolcontext.opt_meld, toolcontext.opt_check)
-opts.add_option(toolcontext.opt_break_str, toolcontext.opt_inline_do)
+opts.add_option(toolcontext.opt_line_width, toolcontext.opt_break_str, toolcontext.opt_inline_do)
 opts.add_option(toolcontext.opt_skip_empty)
 
 toolcontext.tooldescription = "Usage: nitpretty [OPTION]... <file.nit>\n" +
@@ -97,6 +100,7 @@ var dir = toolcontext.opt_dir.value or else ".nitpretty"
 if not dir.file_exists then dir.mkdir
 var v = new PrettyPrinterVisitor
 
+v.max_size = toolcontext.opt_line_width.value
 if toolcontext.opt_break_str.value then
 	v.break_strings = true
 end
