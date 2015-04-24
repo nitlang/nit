@@ -292,6 +292,8 @@ redef class ANodes[E]
 		for e in self do
 			var e_can_inline = v.can_inline(e)
 
+			if v.current_token isa TComma then v.skip
+
 			if e != first then
 				if not e_can_inline then
 					v.add ","
