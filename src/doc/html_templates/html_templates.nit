@@ -472,20 +472,21 @@ redef class IntroArticle
 	# Link to source to display if any.
 	var html_source_link: nullable Writable is noinit, writable
 
-	redef fun render_title do
+	redef fun render_body do
+		var tabs = new DocTabs("{html_id}.tabs", "")
+		var comment = mentity.html_comment
+		if comment != null then
+			tabs.add_panel new DocTabPanel("{html_tab_id}-comment", "Comment", comment)
+		end
+		for child in children do
+			if child.is_hidden then continue
+			tabs.add_panel new DocTabPanel(child.html_tab_id, child.toc_title, child)
+		end
 		var lnk = html_source_link
 		if lnk != null then
-			add "<div class='source-link'>"
-			add lnk
-			addn "</div>"
+			tabs.drop_list.items.add new ListItem(lnk)
 		end
-		super
-	end
-
-	redef fun render_body do
-		var comment = mentity.html_comment
-		if comment != null then	addn comment
-		super
+		addn tabs
 	end
 end
 
@@ -529,16 +530,6 @@ redef class DefinitionArticle
 	# Link to source to display if any.
 	var html_source_link: nullable Writable is noinit, writable
 
-	redef fun render_title do
-		var lnk = html_source_link
-		if lnk != null then
-			add "<div class='source-link'>"
-			add lnk
-			addn "</div>"
-		end
-		super
-	end
-
 	redef fun render_body do
 		var tabs = new DocTabs("{html_id}.tabs", "")
 		if not is_no_body then
@@ -555,6 +546,10 @@ redef class DefinitionArticle
 		for child in children do
 			if child.is_hidden then continue
 			tabs.add_panel new DocTabPanel(child.html_tab_id, child.toc_title, child)
+		end
+		var lnk = html_source_link
+		if lnk != null then
+			tabs.drop_list.items.add new ListItem(lnk)
 		end
 		addn tabs
 	end

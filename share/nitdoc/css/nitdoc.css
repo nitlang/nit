@@ -197,6 +197,20 @@ article.nospace {
 	border-left: 2px solid #0d8921;
 }
 
+
+.pull-right .dropdown-toggle {
+	padding: 0 5px;
+}
+
+/* Hide the "..." link */
+
+article .dropdown, article .dropdown {
+	visibility: hidden;
+}
+article:hover .dropdown, article:target .dropdown {
+	visibility: visible;
+}
+
 /*
  * Page parts
  */
@@ -271,20 +285,6 @@ article.nospace {
 
 .list-definition .list-definition {
 	margin-left: 30px;
-}
-
-.source-link {
-	display: none;
-	float: right;
-	margin-top: 10px;
-}
-
-.source-link a {
-	color: #0d8921;
-}
-
-article:hover .source-link, article:target .source-link {
-	display: block;
 }
 
 /*
