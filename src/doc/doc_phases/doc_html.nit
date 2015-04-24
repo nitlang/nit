@@ -536,14 +536,6 @@ redef class DefinitionArticle
 			if mentity isa MModule then
 				html_source_link = v.html_source_link(mentity.location)
 			end
-		else if mentity isa MClass then
-			var title = new Template
-			title.add mentity.html_icon
-			title.add mentity.html_link
-			html_title = title
-			html_subtitle = mentity.html_namespace
-			toc_title = mentity.html_name
-			is_no_body = true
 		else if mentity isa MClassDef then
 			var title = new Template
 			title.add "in "

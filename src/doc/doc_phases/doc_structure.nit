@@ -123,7 +123,7 @@ redef class MModulePage
 				var mclasses = mclasses_for_mmodule(mentity).to_a
 				v.name_sorter.sort(mclasses)
 				for mclass in mclasses do
-					var article = new DefinitionArticle(mclass)
+					var article = new DefinitionListArticle(mclass)
 					var mclassdefs = mclassdefs_for(mclass).to_a
 					if not mclassdefs.has(mclass.intro) then
 						article.add_child(new DefinitionArticle(mclass.intro))
@@ -312,6 +312,11 @@ class ConcernsArticle
 
 	# Concerns to list in this article.
 	var concerns: ConcernsTree
+end
+
+# An article that displaus a list of definition belonging to a MEntity.
+class DefinitionListArticle
+	super MEntityArticle
 end
 
 # An article that display the definition text of a MEntity.

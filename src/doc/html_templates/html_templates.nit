@@ -469,6 +469,20 @@ redef class ConcernsArticle
 	redef fun render_body do add concerns.html_list
 end
 
+redef class DefinitionListArticle
+	redef var html_id is lazy do return "article:{mentity.nitdoc_id}.definition-list"
+
+	redef var html_title is lazy do
+		var title = new Template
+		title.add mentity.html_icon
+		title.add mentity.html_link
+		return title
+	end
+
+	redef var html_subtitle is lazy do return mentity.html_namespace
+	redef var toc_title is lazy do return mentity.html_name
+end
+
 redef class DefinitionArticle
 	redef var html_id is lazy do return "article:{mentity.nitdoc_id}.definition"
 	redef var html_title is lazy do return mentity.html_name
