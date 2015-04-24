@@ -1063,7 +1063,7 @@ redef class AExternCalls
 			v.adds
 			v.visit_list n_extern_calls
 		else
-			v.addn
+			v.forcen
 			v.indent += 1
 			v.addt
 			v.indent -= 1
@@ -1163,7 +1163,7 @@ redef class TExternCodeSegment
 				v.add "`\{"
 
 				if not lines.first.trim.is_empty then
-					v.addn
+					v.forcen
 					lines.first.l_trim
 					v.indent += 1
 					v.addt
@@ -1240,7 +1240,7 @@ redef class AIfExpr
 			v.adds
 		else
 			v.visit n_expr
-			v.addn
+			v.forcen
 			v.addt
 		end
 
@@ -1582,7 +1582,7 @@ redef class ACallExpr
 		v.visit_recv n_expr
 
 		if not n_expr isa AImplicitSelfExpr and not can_inline then
-			v.addn
+			v.forcen
 			v.addt
 		end
 
@@ -1731,7 +1731,7 @@ redef class ANewExpr
 			v.consume "."
 
 			if not can_inline then
-				v.addn
+				v.forcen
 				v.indent += 1
 				v.addt
 				v.indent -= 1
@@ -1849,7 +1849,7 @@ redef class AAssertExpr
 				else
 					v.addt
 					v.visit n_else
-					v.addn
+					v.forcen
 					v.indent -= 1
 					v.addt
 					v.add "end"
@@ -1977,7 +1977,7 @@ private class ABinOpHelper
 			v.adds
 			v.visit bin_expr2
 		else
-			v.addn
+			v.forcen
 			v.indent += 1
 			v.addt
 			v.indent -= 1
