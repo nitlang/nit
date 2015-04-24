@@ -669,7 +669,7 @@ redef class MConcern
 	private fun html_concern_item: ListItem do
 		var lnk = html_link
 		var tpl = new Template
-		tpl.add new Link.with_title("#{nitdoc_id}", lnk.text, lnk.title)
+		tpl.add new Link.with_title("#concern:{nitdoc_id}", lnk.text, lnk.title)
 		var comment = html_short_comment
 		if comment != null then
 			tpl.add ": "

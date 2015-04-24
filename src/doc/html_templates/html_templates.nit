@@ -349,7 +349,7 @@ redef class DocArticle
 end
 
 redef class HomeArticle
-	redef var html_id = "intro"
+	redef var html_id = "article:home"
 	redef var html_title = "Overview"
 
 	# HTML content to display on the home page.
@@ -365,7 +365,7 @@ redef class HomeArticle
 end
 
 redef class IndexArticle
-	redef var html_id = "index"
+	redef var html_id = "article:index"
 	redef var html_title = "Index"
 	redef fun is_empty do
 		return mmodules.is_empty and mclasses.is_empty and mprops.is_empty
@@ -405,7 +405,7 @@ redef class IndexArticle
 end
 
 redef class ProjectsSection
-	redef var html_id = "projects"
+	redef var html_id = "section:projects"
 	redef var html_title = "Projects"
 end
 
@@ -415,29 +415,29 @@ redef class MEntityComposite
 end
 
 redef class MEntitySection
-	redef var html_id is lazy do return "section_{mentity.nitdoc_name}"
+	redef var html_id is lazy do return "section:{mentity.nitdoc_name}"
 	redef var html_title is lazy do return mentity.html_name
 	redef var html_subtitle is lazy do return mentity.html_declaration
 end
 
 redef class ConcernSection
-	redef var html_id is lazy do return "section_concerns_{mentity.nitdoc_id}"
+	redef var html_id is lazy do return "concern:{mentity.nitdoc_id}"
 	redef var html_title is lazy do return "in {mentity.nitdoc_name}"
 	redef fun is_toc_hidden do return is_empty
 end
 
 redef class ImportationListSection
-	redef var html_id is lazy do return "section_dependancies_{mentity.nitdoc_id}"
+	redef var html_id is lazy do return "section:{mentity.nitdoc_id}.importation"
 	redef var html_title is lazy do return "Dependencies"
 end
 
 redef class InheritanceListSection
-	redef var html_id is lazy do return "section_inheritance_{mentity.nitdoc_id}"
+	redef var html_id is lazy do return "section:{mentity.nitdoc_id}.inheritance"
 	redef var html_title is lazy do return "Inheritance"
 end
 
 redef class IntroArticle
-	redef var html_id is lazy do return "article_intro_{mentity.nitdoc_id}"
+	redef var html_id is lazy do return "article:{mentity.nitdoc_id}.intro"
 	redef var html_title = null
 	redef var is_hidden = false
 	redef var is_toc_hidden = true
@@ -463,14 +463,14 @@ redef class IntroArticle
 end
 
 redef class ConcernsArticle
-	redef var html_id is lazy do return "article_concerns_{mentity.nitdoc_id}"
+	redef var html_id is lazy do return "article:{mentity.nitdoc_id}.concerns"
 	redef var html_title = "Concerns"
 	redef fun is_hidden do return concerns.is_empty
 	redef fun render_body do add concerns.html_list
 end
 
 redef class DefinitionArticle
-	redef var html_id is lazy do return "article_definition_{mentity.nitdoc_id}"
+	redef var html_id is lazy do return "article:{mentity.nitdoc_id}.definition"
 	redef var html_title is lazy do return mentity.html_name
 	redef var html_subtitle is lazy do return mentity.html_declaration
 	redef var is_hidden = false
@@ -513,7 +513,7 @@ redef class DefinitionArticle
 end
 
 redef class HierarchyListArticle
-	redef var html_id is lazy do return "article_hierarchy_{list_title}_{mentity.nitdoc_id}"
+	redef var html_id is lazy do return "article:{list_title}_{mentity.nitdoc_id}.hierarchy"
 	redef var html_title is lazy do return list_title
 	redef fun is_empty do return mentities.is_empty
 	redef fun is_toc_hidden do return mentities.is_empty
@@ -529,7 +529,7 @@ redef class HierarchyListArticle
 end
 
 redef class IntrosRedefsListArticle
-	redef var html_id is lazy do return "article_intros_redefs_{mentity.nitdoc_id}"
+	redef var html_id is lazy do return "article:{mentity.nitdoc_id}.intros_redefs"
 	redef var html_title is lazy do return list_title
 	redef fun is_hidden do return mentities.is_empty
 	redef var is_toc_hidden = true
@@ -545,7 +545,7 @@ redef class IntrosRedefsListArticle
 end
 
 redef class DefinitionLinArticle
-	redef var html_id is lazy do return "article_lin_{mentity.nitdoc_id}"
+	redef var html_id is lazy do return "article:{mentity.nitdoc_id}.lin"
 	redef var html_title is lazy do return "Linearization"
 	redef fun is_hidden do return mentities.is_empty
 	redef var is_toc_hidden = true
@@ -571,7 +571,7 @@ redef class DefinitionLinArticle
 end
 
 redef class GraphArticle
-	redef var html_id is lazy do return "article_graph_{mentity.nitdoc_id}"
+	redef var html_id is lazy do return "article:{mentity.nitdoc_id}.graph"
 	redef var html_title = null
 	redef var toc_title do return "Graph"
 	redef var is_hidden = false

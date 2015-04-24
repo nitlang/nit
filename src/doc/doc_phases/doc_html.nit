@@ -379,7 +379,7 @@ redef class MClassPage
 		if not mprop_is_local(mprop) then
 			classes.add "inherit"
 			var cls_url = mprop.intro.mclassdef.mclass.nitdoc_url
-			var def_url = "{cls_url}#{mprop.nitdoc_id}"
+			var def_url = "{cls_url}#article:{mprop.nitdoc_id}.definition"
 			var lnk = new Link(def_url, mprop.html_name)
 			var mdoc = mprop.intro.mdoc_or_fallback
 			if mdoc != null then lnk.title = mdoc.short_comment
@@ -393,10 +393,26 @@ redef class MClassPage
 		else
 			classes.add "redef"
 		end
+		var def = select_mpropdef(mprop)
+		var anc = def.html_link_to_anchor
+		anc.href = "#article:{def.nitdoc_id}.definition"
 		var lnk = new Template
 		lnk.add new DocHTMLLabel.with_classes(classes)
-		lnk.add mprop.html_link_to_anchor
+		lnk.add anc
 		return new ListItem(lnk)
+	end
+
+	# Get the mpropdef contained in `self` page for a mprop.
+	#
+	# FIXME this method is used to translate a mprop into a mpropdefs for
+	# section linking. A better page structure should avoid this...
+	private fun select_mpropdef(mprop: MProperty): MPropDef do
+		for mclassdef in mentity.mclassdefs do
+			for mpropdef in mclassdef.mpropdefs do
+				if mpropdef.mproperty == mprop then return mpropdef
+			end
+		end
+		abort # FIXME is there a case where the prop is not found?
 	end
 
 	private fun mclass_inherited_mprops(v: RenderHTMLPhase, doc: DocModel): Set[MProperty] do
@@ -473,7 +489,11 @@ redef class ConcernSection
 	redef fun init_html_render(v, doc, page) do
 		if not page isa MEntityPage then return
 		var mentity = self.mentity
-		if page.mentity isa MModule and mentity isa MModule then
+		if page isa MGroupPage then
+			html_title = null
+			toc_title = mentity.html_name
+			is_toc_hidden = false
+		else if page.mentity isa MModule and mentity isa MModule then
 			var title = new Template
 			if mentity == page.mentity then
 				title.add "in "
@@ -559,6 +579,9 @@ redef class DefinitionArticle
 				toc_title = "in {mentity.mclassdef.html_name}"
 			end
 			html_source_link = v.html_source_link(mentity.location)
+		end
+		if page isa MGroupPage and mentity isa MModule then
+			is_toc_hidden = true
 		end
 		super
 	end

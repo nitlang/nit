@@ -91,11 +91,11 @@ redef class MGroupPage
 		mentity.booster_rank = 0
 		section.add_child new ConcernsArticle(mentity, concerns)
 		for mentity in concerns do
+			var ssection = new ConcernSection(mentity)
 			if mentity isa MModule then
-				section.add_child new DefinitionArticle(mentity)
-			else
-				section.add_child new ConcernSection(mentity)
+				ssection.add_child new DefinitionArticle(mentity)
 			end
+			section.add_child ssection
 		end
 	end
 end
