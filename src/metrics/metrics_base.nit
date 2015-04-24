@@ -57,12 +57,12 @@ redef class ToolContext
 	var opt_generate_hyperdoc = new OptionBool("Generate Hyperdoc", "--generate_hyperdoc")
 	# --poset
 	var opt_poset = new OptionBool("Complete metrics on posets", "--poset")
-
 	# --no-colors
 	var opt_nocolors = new OptionBool("Disable colors in console outputs", "--no-colors")
-
-
+	# --dir
 	var opt_dir = new OptionString("Directory where some statistics files are generated", "-d", "--dir")
+
+	# Output directory for metrics files.
 	var output_dir: String = "."
 
 	redef init
@@ -98,27 +98,41 @@ redef class ToolContext
 		end
 	end
 
-	# colorize heading 1 for console output
+	# Format and colorize a string heading of level 1 for console output.
+	#
+	# Default style is yellow and bold.
 	fun format_h1(str: String): String do
 		if opt_nocolors.value then return str
 		return str.yellow.bold
 	end
 
+	# Format and colorize a string heading of level 2 for console output.
+	#
+	# Default style is white and bold.
 	fun format_h2(str: String): String do
 		if opt_nocolors.value then return str
 		return str.bold
 	end
 
+	# Format and colorize a string heading of level 3 for console output.
+	#
+	# Default style is white and nobold.
 	fun format_h3(str: String): String do
 		if opt_nocolors.value then return str
 		return str
 	end
 
+	# Format and colorize a string heading of level 4 for console output.
+	#
+	# Default style is green.
 	fun format_h4(str: String): String do
 		if opt_nocolors.value then return str
 		return str.green
 	end
 
+	# Format and colorize a string heading of level 5 for console output.
+	#
+	# Default style is light gray.
 	fun format_p(str: String): String do
 		if opt_nocolors.value then return str
 		return str.light_gray
@@ -144,11 +158,20 @@ end
 #
 # The concept is reified here for a better organization and documentation
 interface Metric
+
+	# Type of elements measured by this metric.
 	type ELM: Object
+
+	# Type of values used to measure elements.
 	type VAL: Object
+
+	# Type of data representation used to associate elements and values.
 	type RES: Map[ELM, VAL]
 
+	# The name of this metric (generally an acronym about the metric).
 	fun name: String is abstract
+
+	# A long and understandable description about what is measured by this metric.
 	fun desc: String is abstract
 
 	# Clear all results for this metric
@@ -197,6 +220,9 @@ interface Metric
 		end
 	end
 
+	# The sum of all the values.
+	fun sum: VAL is abstract
+
 	# The values standard derivation
 	fun std_dev: Float is abstract
 
@@ -211,6 +237,11 @@ interface Metric
 
 	# The set of element above the threshold
 	fun above_threshold: Set[ELM] is abstract
+
+	# Sort the metric keys by values
+	fun sort: Array[ELM] do
+		return values.keys_sorted_by_values(default_reverse_comparator)
+	end
 end
 
 # A Metric that collects integer data
@@ -222,12 +253,14 @@ class IntMetric
 	redef type VAL: Int
 	redef type RES: Counter[ELM]
 
+	# `IntMetric` uses a Counter to store values in intern.
 	protected var values_cache = new Counter[ELM]
+
 	redef fun values do return values_cache
 
 	redef fun clear do values_cache.clear
 
-	fun sum: Int do return values_cache.sum
+	redef fun sum do return values_cache.sum
 
 	redef fun max do
 		assert not values_cache.is_empty
@@ -240,9 +273,9 @@ class IntMetric
 	end
 
 	# Values average
-	redef fun avg: Float do return values_cache.avg
+	redef fun avg do return values_cache.avg
 
-	redef fun std_dev: Float do return values_cache.std_dev
+	redef fun std_dev do return values_cache.std_dev
 
 	redef fun above_threshold do
 		var above = new HashSet[ELM]
@@ -271,12 +304,15 @@ class FloatMetric
 
 	redef type VAL: Float
 
+	# `FloatMetric` uses a Map to store values in intern.
 	protected var values_cache = new HashMap[ELM, VAL]
+
 	redef fun values do return values_cache
 
 	redef fun clear do values_cache.clear
 
-	fun sum: Float do
+
+	redef fun sum do
 		var sum = 0.0
 		for v in values.values do sum += v
 		return sum
@@ -313,7 +349,7 @@ class FloatMetric
 		return sum / values.length.to_f
 	end
 
-	redef fun std_dev: Float do
+	redef fun std_dev do
 		var sum = 0.0
 		for value in values.values do
 			sum += (value - avg).pow(2.to_f)
@@ -338,13 +374,14 @@ class FloatMetric
 			print "{"\t" * indent}  sum: {sum}"
 		end
 	end
-
 end
 
 # A MetricSet is a metric holder
 #
 # It purpose is to be extended with a metric collect service
 class MetricSet
+
+	# Type of element measured by this `MetricSet`.
 	type ELM: Object
 
 	# Metrics to compute

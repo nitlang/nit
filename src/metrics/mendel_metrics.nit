@@ -48,6 +48,9 @@ import mclasses_metrics
 import modelize
 
 redef class ToolContext
+	# Compute MENDEL metrics.
+	#
+	# See `mendel_metrics` module documentation.
 	var mendel_metrics_phase: Phase = new MendelMetricsPhase(self, null)
 end
 
@@ -81,24 +84,28 @@ private class MendelMetricsPhase
 		metrics.collect(mclasses)
 		if csv then metrics.to_csv.save("{out}/mendel.csv")
 
-		print toolcontext.format_h4("\tlarge mclasses (threshold: {cnblp.threshold})")
-		for mclass in cnblp.above_threshold do
-			print toolcontext.format_p("\t   {mclass.name}: {cnblp.values[mclass]}")
+		var threshold = cnblp.threshold
+		print toolcontext.format_h4("\tlarge mclasses (threshold: {threshold})")
+		for mclass in cnblp.sort do
+			var val = cnblp.values[mclass]
+			if val.to_f < threshold then break
+			print toolcontext.format_p("\t   {mclass.name}: {val}")
 		end
 
-		print toolcontext.format_h4("\tbudding mclasses (threshold: {cnvi.threshold})")
-		for mclass in cnvi.above_threshold do
-			print toolcontext.format_p("\t   {mclass.name}: {cnvi.values[mclass]}")
+		threshold = cnvi.threshold
+		print toolcontext.format_h4("\tbudding mclasses (threshold: {threshold})")
+		for mclass in cnvi.sort do
+			var val = cnvi.values[mclass]
+			if val.to_f < threshold then break
+			print toolcontext.format_p("\t   {mclass.name}: {val}")
 		end
 
-		print toolcontext.format_h4("\tblooming mclasses (threshold: {cnvs.threshold})")
-		for mclass in cnvs.above_threshold do
-			print toolcontext.format_p("\t   {mclass.name}: {cnvs.values[mclass]}")
-		end
-
-		print toolcontext.format_h4("\tblooming mclasses (threshold: {cnvs.threshold})")
-		for mclass in cnvs.above_threshold do
-			print toolcontext.format_p("\t   {mclass.name}: {cnvs.values[mclass]}")
+		threshold = cnvs.threshold
+		print toolcontext.format_h4("\tblooming mclasses (threshold: {threshold})")
+		for mclass in cnvs.sort do
+			var val = cnvs.values[mclass]
+			if val.to_f < threshold then break
+			print toolcontext.format_p("\t   {mclass.name}: {val}")
 		end
 
 		if csv then
@@ -130,8 +137,8 @@ class CBMS
 	redef fun name do return "cbms"
 	redef fun desc do return "branch mean size, mean number of introduction available among ancestors"
 
+	# Mainmodule used to compute class hierarchy.
 	var mainmodule: MModule
-	init(mainmodule: MModule) do self.mainmodule = mainmodule
 
 	redef fun collect(mclasses) do
 		for mclass in mclasses do
@@ -150,8 +157,8 @@ class CNVI
 	redef fun name do return "cnvi"
 	redef fun desc do return "class novelty index, contribution of the class to its branch in term of introductions"
 
+	# Mainmodule used to compute class hierarchy.
 	var mainmodule: MModule
-	init(mainmodule: MModule) do self.mainmodule = mainmodule
 
 	redef fun collect(mclasses) do
 		var cbms = new CBMS(mainmodule)
@@ -179,8 +186,8 @@ class CNVS
 	redef fun name do return "cnvs"
 	redef fun desc do return "class novelty score, importance of the contribution of the class to its branch"
 
+	# Mainmodule used to compute class hierarchy.
 	var mainmodule: MModule
-	init(mainmodule: MModule) do self.mainmodule = mainmodule
 
 	redef fun collect(mclasses) do
 		var cnvi = new CNVI(mainmodule)
