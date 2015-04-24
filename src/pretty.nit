@@ -165,8 +165,14 @@ class PrettyPrinterVisitor
 		end
 	end
 
+	# Consume comments and end of lines if any
+	fun consume_comments do
+		while current_token isa TEol or current_token isa TComment do visit current_token
+	end
+
 	# Visit `current_token`.
 	fun consume(token: String) do
+		consume_comments
 		if current_token.text == token then else current_token.debug("Got `{current_token.text}`; expected `{token}`.")
 		visit current_token
 	end
@@ -1278,10 +1284,8 @@ redef class AIfExpr
 				end
 			end
 
+			v.consume_comments
 			if has_else(v) then
-				while not v.current_token isa TKwelse do
-					v.consume v.current_token.text
-				end
 
 				v.indent -= 1
 				v.addt
