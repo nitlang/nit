@@ -162,6 +162,9 @@ stareq = '*=';
 slasheq = '/=';
 percenteq = '%=';
 starstareq = '**=';
+pipeeq = '|=';
+careteq = '^=';
+ampeq = '&=';
 lleq = '<<=';
 ggeq = '>>=';
 dotdotdot = '...';
@@ -173,6 +176,10 @@ star = '*';
 starstar = '**';
 slash = '/';
 percent = '%';
+pipe = '|';
+caret = '^';
+amp = '&';
+tilde = '~';
 eq = '==';
 ne = '!=';
 lt = '<';
@@ -312,6 +319,10 @@ methid~noid {-> methid}
 	| {starstar} starstar {-> New methid.starstar(starstar)}
 	| {slash} slash {-> New methid.slash(slash)}
 	| {percent} percent {-> New methid.percent(percent)}
+	| {pipe} pipe {-> New methid.pipe(pipe)}
+	| {caret} caret {-> New methid.caret(caret)}
+	| {amp} amp {-> New methid.amp(amp)}
+	| {tilde} tilde {-> New methid.tilde(tilde)}
 	| {eq} eq {-> New methid.eq(eq)}
 	| {ne} ne {-> New methid.ne(ne)}
 	| {le} le {-> New methid.le(le)}
@@ -453,6 +464,9 @@ assign_op
 	| {slash} slasheq
 	| {percent} percenteq
 	| {starstar} starstareq
+	| {pipe} pipeeq
+	| {caret} careteq
+	| {amp} ampeq
 	| {ll} lleq
 	| {gg} ggeq
 	;
@@ -525,17 +539,36 @@ expr_not~nopar~nobra {-> expr}
 	;
 
 expr_eq~nopar~nobra {-> expr}
-	= expr_add~nopar~nobra {-> expr_add~nopar~nobra.expr}
-	| {:eq} expr_add~nopar~nobra eq :no [expr2]:expr_add~nopar~nobra
-	| {:ne} expr_add~nopar~nobra ne :no [expr2]:expr_add~nopar~nobra
-	| {:lt} expr_add~nopar~nobra lt :no [expr2]:expr_add~nopar~nobra
-	| {:le} expr_add~nopar~nobra le :no [expr2]:expr_add~nopar~nobra
-	| {:ll} expr_eq~nopar~nobra ll :no [expr2]:expr_add~nopar~nobra
-	| {:gt} expr_add~nopar~nobra gt :no [expr2]:expr_add~nopar~nobra
-	| {:ge} expr_add~nopar~nobra ge :no [expr2]:expr_add~nopar~nobra
-	| {:gg} expr_eq~nopar~nobra gg :no [expr2]:expr_add~nopar~nobra
-	| {:starship} expr_add~nopar~nobra starship :no [expr2]:expr_add~nopar~nobra
-	| {:isa} expr_add~nopar~nobra kwisa :no type~nobra
+	= expr_bitor~nopar~nobra {-> expr_bitor~nopar~nobra.expr}
+	| {:eq} expr_bitor~nopar~nobra eq :no [expr2]:expr_bitor~nopar~nobra
+	| {:ne} expr_bitor~nopar~nobra ne :no [expr2]:expr_bitor~nopar~nobra
+	| {:lt} expr_bitor~nopar~nobra lt :no [expr2]:expr_bitor~nopar~nobra
+	| {:le} expr_bitor~nopar~nobra le :no [expr2]:expr_bitor~nopar~nobra
+	| {:gt} expr_bitor~nopar~nobra gt :no [expr2]:expr_bitor~nopar~nobra
+	| {:ge} expr_bitor~nopar~nobra ge :no [expr2]:expr_bitor~nopar~nobra
+	| {:starship} expr_bitor~nopar~nobra starship :no [expr2]:expr_bitor~nopar~nobra
+	| {:isa} expr_bitor~nopar~nobra kwisa :no type~nobra
+	;
+
+expr_bitor~nopar~nobra {-> expr}
+	= [expr]:expr_bitxor~nopar~nobra {-> expr.expr}
+	| {:pipe} expr_bitor~nopar~nobra pipe :no [expr2]:expr_bitxor~nopar~nobra
+	;
+
+expr_bitxor~nopar~nobra {-> expr}
+	= [expr]:expr_bitand~nopar~nobra {-> expr.expr}
+	| {:caret} expr_bitxor~nopar~nobra caret :no [expr2]:expr_bitand~nopar~nobra
+	;
+
+expr_bitand~nopar~nobra {-> expr}
+	= [expr]:expr_shift~nopar~nobra {-> expr.expr}
+	| {:amp} expr_bitand~nopar~nobra amp :no [expr2]:expr_shift~nopar~nobra
+	;
+
+expr_shift~nopar~nobra {-> expr}
+	= [expr]:expr_add~nopar~nobra {-> expr.expr}
+	| {:ll} expr_shift~nopar~nobra ll :no [expr2]:expr_add~nopar~nobra
+	| {:gg} expr_shift~nopar~nobra gg :no [expr2]:expr_add~nopar~nobra
 	;
 
 expr_add~nopar~nobra {-> expr}
@@ -560,6 +593,7 @@ expr_minus~nopar~nobra {-> expr}
 	= expr_new~nopar~nobra {-> expr_new~nopar~nobra.expr}
 	| {:uminus} minus expr_minus~nobra
 	| {:uplus} plus expr_minus~nobra
+	| {:utilde} tilde expr_minus~nobra
 	| {:once} kwonce :no expr_minus~nobra
 	;
 
@@ -846,7 +880,31 @@ propdef = {attr} doc? kwredef? visibility kwvar [id2]:id type? expr? annotations
 	| {annot} doc? kwredef? visibility? atid opar? [args]:expr* cpar? annotations?
 	;
 
-methid = {id} id | {plus} plus | {minus} minus | {star} star | {starstar} starstar | {slash} slash | {percent} percent | {eq} eq | {ne} ne | {le} le | {ge} ge | {lt} lt | {gt} gt |  {ll} ll | {gg} gg | {bra} obra cbra | {starship} starship | {assign} id assign | {braassign} obra cbra assign;
+methid
+	= {id} id
+	| {plus} [op]:plus
+	| {minus} [op]:minus
+	| {star} [op]:star
+	| {starstar} [op]:starstar
+	| {slash} [op]:slash
+	| {percent} [op]:percent
+	| {eq} [op]:eq
+	| {ne} [op]:ne
+	| {le} [op]:le
+	| {ge} [op]:ge
+	| {lt} [op]:lt
+	| {gt} [op]:gt
+	| {ll} [op]:ll
+	| {gg} [op]:gg
+	| {starship} [op]:starship
+	| {pipe} [op]:pipe
+	| {caret} [op]:caret
+	| {amp} [op]:amp
+	| {tilde} [op]:tilde
+	| {bra} obra cbra
+	| {assign} id assign
+	| {braassign} obra cbra assign
+	;
 
 signature = opar? [params]:param* cpar? type?;
 
@@ -895,8 +953,12 @@ expr	= {block} expr* kwend?
 	| {starstar} expr [op]:starstar [expr2]:expr
 	| {slash} expr [op]:slash [expr2]:expr
 	| {percent} expr [op]:percent [expr2]:expr
-	| {uminus} minus expr 
-	| {uplus} plus expr
+	| {pipe} expr [op]:pipe [expr2]:expr
+	| {caret} expr [op]:caret [expr2]:expr
+	| {amp} expr [op]:amp [expr2]:expr
+	| {uminus} [op]:minus expr
+	| {uplus} [op]:plus expr
+	| {utilde} [op]:tilde expr
 	| {new} kwnew type id? [args]:exprs
 	| {attr} expr [id]:attrid 
 	| {attr_assign} expr [id]:attrid assign [value]:expr 
@@ -953,6 +1015,9 @@ assign_op
 	| {slash} [op]:slasheq
 	| {percent} [op]:percenteq
 	| {starstar} [op]:starstareq
+	| {pipe} [op]:pipeeq
+	| {caret} [op]:careteq
+	| {amp} [op]:ampeq
 	| {ll} [op]:lleq
 	| {gg} [op]:ggeq
 	;

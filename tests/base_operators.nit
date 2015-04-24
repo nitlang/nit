@@ -1,7 +1,5 @@
 # This file is part of NIT ( http://www.nitlanguage.org ).
 #
-# Copyright 2004-2008 Jean Privat <jean@pryen.org>
-#
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
@@ -14,8 +12,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import standard::kernel
 
 class A
+   fun +: A
+   do
+	   0.output
+	   return self
+   end
    fun +(a: A): A
    do
 	   2.output
@@ -86,6 +90,31 @@ class A
 	   15.output
 	   return a
    end
+   fun **(a: A): A
+   do
+	   16.output
+	   return a
+   end
+   fun |(a: A): A
+   do
+	   16.output
+	   return a
+   end
+   fun ^(a: A): A
+   do
+	   17.output
+	   return a
+   end
+   fun &(a: A): A
+   do
+	   18.output
+	   return a
+   end
+   fun ~: A
+   do
+	   19.output
+	   return self
+   end
 
    init do end
 end
@@ -94,6 +123,21 @@ var a = new A
 var a2 = new A
 var b : Bool
 var i: Int
-a = a + -a - a * a / a % a >> a << a
+
+a = +a + -a - a * a / a % a >> a << a ** a | ~a ^ a & a
 b = a == a2 and a < a and a > a and a <= a and a >= a
 i = a <=> a
+
+'\n'.output
+
+a += a
+a -= a
+a *= a
+a /= a
+a %= a
+a **= a
+a <<= a
+a >>= a
+a |= a
+a ^= a
+a &= a

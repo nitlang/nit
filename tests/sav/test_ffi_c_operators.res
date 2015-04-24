@@ -1,7 +1,11 @@
+test_ffi_c_operators.nit:139,7--15: Warning: expression is not null, since it is a `A`.
 11
+123
 9
+-123
 22
 3
+false
 false
 false
 false
@@ -22,7 +26,9 @@ true
 true
 32
 8
+7
+5
+2
+-4
 52
 456
-123
--123

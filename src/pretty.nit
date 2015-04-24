@@ -2044,16 +2044,9 @@ end
 
 # Syntax
 
-redef class AUplusExpr
+redef class AUnaryopExpr
 	redef fun accept_pretty_printer(v) do
-		v.consume "+"
-		v.visit n_expr
-	end
-end
-
-redef class AUminusExpr
-	redef fun accept_pretty_printer(v) do
-		v.consume "-"
+		v.visit n_op
 		v.visit n_expr
 	end
 end
