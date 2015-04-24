@@ -192,14 +192,7 @@ redef class DocPage
 	# Build top menu template if any.
 	fun init_topmenu(v: RenderHTMLPhase, doc: DocModel) do
 		topmenu = new DocTopMenu
-		var brand = v.ctx.opt_custom_brand.value
-		if brand != null then
-			var tpl = new Template
-			tpl.add "<span class='navbar-brand'>"
-			tpl.add brand
-			tpl.add "</span>"
-			topmenu.brand = tpl
-		end
+		topmenu.brand = v.ctx.opt_custom_brand.value
 		var title = "Overview"
 		if v.ctx.opt_custom_title.value != null then
 			title = v.ctx.opt_custom_title.value.to_s
