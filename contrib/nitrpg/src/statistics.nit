@@ -26,27 +26,17 @@ import counter
 
 redef class GameEntity
 
-	# Statistics for this entity.
-	fun stats: GameStats is abstract
-
-	# Load statistics for this `MEntity` if any.
-	fun load_statistics: nullable GameStats do
-		var key = self.key / "statistics"
-		if not game.store.has_key(key) then return null
-		var json = game.store.load_object(key)
-		return new GameStats.from_json(game, json)
-	end
+	# Statistics manager for this entity.
+	fun stats: GameStatsManager is abstract
 end
 
 redef class Game
 
-	redef var stats is lazy do
-		return load_statistics or else new GameStats(game)
-	end
+	redef var stats is lazy do return new GameStatsManager(game, self)
 
 	redef fun save do
 		super
-		stats.save_in(self)
+		stats.save_in(self.key)
 	end
 
 	redef fun pretty do
@@ -60,14 +50,15 @@ end
 
 redef class Player
 
-	redef var stats is lazy do
-		return load_statistics or else new GameStats(game)
-	end
+	redef var stats is lazy do return new GameStatsManager(game, self)
 
 	redef fun save do
 		super
-		stats.save_in(self)
+		stats.save_in(self.key)
 	end
+
+	redef fun nitcoins do return stats["nitcoins"]
+	redef fun nitcoins=(nc) do stats["nitcoins"] = nc
 
 	redef fun pretty do
 		var res = new FlatBuffer
@@ -78,6 +69,98 @@ redef class Player
 	end
 end
 
+# Store game stats for defined period.
+class GameStatsManager
+	super GameEntity
+	super Counter[String]
+
+	redef var game
+
+	# The GameEntity monitored by these statistics.
+	var owner: GameEntity
+
+	redef var key = "stats"
+
+	# Returns the `GameStats` instance for the overall statistics.
+	var overall: GameStats is lazy do
+		return load_stats_for("all")
+	end
+
+	# Returns the `GameStats` instance for the current year statistics.
+	var yearly: GameStats is lazy do
+		var date = new Tm.gmtime
+		var key = date.strftime("%Y")
+		return load_stats_for(key)
+	end
+
+	# Returns the `GameStats` instance for the current month statistics.
+	var monthly: GameStats is lazy do
+		var date = new Tm.gmtime
+		var key = date.strftime("%Y-%m")
+		return load_stats_for(key)
+	end
+
+	# Returns the `GameStats` instance for the current day statistics.
+	var daily: GameStats is lazy do
+		var date = new Tm.gmtime
+		var key = date.strftime("%Y-%m-%d")
+		return load_stats_for(key)
+	end
+
+	# Returns the `GameStats` instance for the current week statistics.
+	var weekly: GameStats is lazy do
+		var date = new Tm.gmtime
+		var key = date.strftime("%Y-W%U")
+		return load_stats_for(key)
+	end
+
+	# Load statistics for a `period` key.
+	fun load_stats_for(period: String): GameStats do
+		var key = owner.key / self.key / period
+		if not game.store.has_key(key) then
+			return new GameStats(game, period)
+		end
+		var json = game.store.load_object(key)
+		return new GameStats.from_json(game, period, json)
+	end
+
+	redef fun [](key) do return overall[key]
+
+	redef fun []=(key, value) do
+		overall[key] = value
+		yearly[key] = value
+		monthly[key] = value
+		daily[key] = value
+		weekly[key] = value
+	end
+
+	redef fun inc(e) do
+		overall.inc(e)
+		yearly.inc(e)
+		monthly.inc(e)
+		daily.inc(e)
+		weekly.inc(e)
+	end
+
+	redef fun dec(e) do
+		overall.dec(e)
+		yearly.dec(e)
+		monthly.dec(e)
+		daily.dec(e)
+		weekly.dec(e)
+	end
+
+	redef fun save_in(key) do
+		overall.save_in(key / self.key)
+		yearly.save_in(key / self.key)
+		monthly.save_in(key / self.key)
+		daily.save_in(key / self.key)
+		weekly.save_in(key / self.key)
+	end
+
+	redef fun pretty do return overall.pretty
+end
+
 # Game statistics structure that can be saved as a `GameEntity`.
 class GameStats
 	super GameEntity
@@ -85,11 +168,13 @@ class GameStats
 
 	redef var game
 
-	redef var key = "statistics"
+	# The pedriod these stats are about.
+	var period: String
 
-	# Load `self` from saved data
-	init from_json(game: Game, json: JsonObject) do
-		self.game = game
+	redef fun key do return period
+
+	# Load `self` from saved data.
+	init from_json(game: Game, period: String, json: JsonObject) do
 		for k, v in json do self[k] = v.as(Int)
 	end
 
@@ -97,15 +182,6 @@ class GameStats
 		var obj = new JsonObject
 		for k, v in self do obj[k] = v
 		return obj
-	end
-
-	# Decrements the value of `key` statistic entry by 1.
-	fun dec(key: String) do
-		if not has_key(key) then
-			self[key] = 0
-		else
-			self[key] -= 1
-		end
 	end
 
 	redef fun pretty do

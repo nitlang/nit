@@ -25,7 +25,7 @@ import game
 redef class GameEntity
 
 	# Saves `event` in `self`.
-	fun add_event(event: GameEvent) do event.save_in(self)
+	fun add_event(event: GameEvent) do event.save_in(self.key)
 
 	# List all events registered in this entity.
 	#

@@ -93,6 +93,22 @@ class Counter[E]
 		for e in es do inc(e)
 	end
 
+	# Decrement the value of `e` by 1
+	fun dec(e: E) do
+		if not has_key(e) then
+			self.map[e] = 0
+		else
+			self.map[e] = self[e] - 1
+			sum += - 1
+		end
+	end
+
+	# Decrement the value for each element of `es`
+	fun dec_all(es: Collection[E])
+	do
+		for e in es do dec(e)
+	end
+
 	# A new Counter initialized with `inc_all`.
 	init from(es: Collection[E])
 	do
