@@ -1287,7 +1287,10 @@ redef class AIfExpr
 			end
 
 			v.consume_comments
-			if has_else(v) then
+
+			# FIXME: for some unknown reasons, has_else can be true even if
+			# there is no `else` keyword but a `end` instead.
+			if has_else(v) and v.current_token isa TKwelse then
 
 				v.indent -= 1
 				v.addt
