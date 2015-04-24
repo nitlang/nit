@@ -35,6 +35,9 @@ redef class ToolContext
 	# --line-width
 	var opt_line_width = new OptionInt("Maximum length of lines (use 0 to disable automatic line breaks)", 80, "--line-width")
 
+	# --no-inline
+	var opt_no_inline = new OptionBool("Disable automatic one-liners", "--no-inline")
+
 	# Break too long string literals.
 	var opt_break_str = new OptionBool("Break too long string literals", "--break-strings")
 
@@ -73,6 +76,7 @@ var opts = toolcontext.option_context
 opts.add_option(toolcontext.opt_dir, toolcontext.opt_output)
 opts.add_option(toolcontext.opt_diff, toolcontext.opt_meld, toolcontext.opt_check)
 opts.add_option(toolcontext.opt_line_width, toolcontext.opt_break_str, toolcontext.opt_inline_do)
+opts.add_option(toolcontext.opt_no_inline)
 opts.add_option(toolcontext.opt_skip_empty)
 
 toolcontext.tooldescription = "Usage: nitpretty [OPTION]... <file.nit>\n" +
@@ -109,6 +113,9 @@ if toolcontext.opt_inline_do.value then
 end
 if toolcontext.opt_skip_empty.value then
 	v.skip_empty = true
+end
+if toolcontext.opt_no_inline.value then
+	v.no_inline = true
 end
 
 for mmodule in mmodules do

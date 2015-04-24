@@ -121,6 +121,7 @@ class PrettyPrinterVisitor
 	# Is the node inlinable and can fit on the line.
 	fun can_inline(n: nullable ANode): Bool do
 		if n == null then return true
+		if no_inline and n.location.line_start != n.location.line_end then return false
 		if n.must_be_inline then return true
 		if n.must_be_block then return false
 		# check length
@@ -284,6 +285,9 @@ class PrettyPrinterVisitor
 
 	# Do we force the deletion of empty lines?
 	var skip_empty = false is public writable
+
+	# Disable automatic inlining.
+	var no_inline = false is writable
 end
 
 # Base framework redefs
