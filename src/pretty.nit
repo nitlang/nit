@@ -145,12 +145,16 @@ class PrettyPrinterVisitor
 	# Skip `current_token` until `target` is reached.
 	fun skip_to(target: nullable Token) do
 		if target == null then return
-		while current_token != target do skip
+		while current_token != null and current_token != target do skip
+		if current_token == null then
+			target.debug("Looked for, but not found :(")
+			abort
+		end
 	end
 
 	# Visit `current_token`.
 	fun consume(token: String) do
-		assert current_token.text == token
+		if current_token.text == token then else current_token.debug("Got `{current_token.text}`; expected `{token}`.")
 		visit current_token
 	end
 
