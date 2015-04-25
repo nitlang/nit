@@ -236,19 +236,26 @@ end
 abstract class Thread
 	super Finalizable
 
+	# Type returned by `main`
+	type E : nullable Object
+
 	private var native: nullable NativePthread = null
+
+	# Is this thread finished ? True when main returned
+	var is_done = false
 
 	# Main method of this thread
 	#
 	# The returned valued is passed to the caller of `join`.
-	fun main: nullable Object do return null
+	fun main: E do return null
 
-	private fun main_intern: nullable Object
+	private fun main_intern: E
 	do
 		# Register thread local data
 		sys.self_thread_key.set self
-
-		return main
+		var r = main
+		self.is_done = true
+		return r
 	end
 
 	# Start executing this thread
@@ -266,12 +273,12 @@ abstract class Thread
 	# `Sys::thread_exit`. Returns the object returned from the other thread.
 	#
 	# Stats the thread if now already done by a call to `start`.
-	fun join: nullable Object
+	fun join: E
 	do
 		if native == null then start
 		var r = native.join
 		native = null
-		return r
+		return r.as(E)
 	end
 
 	redef fun finalize

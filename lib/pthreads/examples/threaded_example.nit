@@ -32,7 +32,17 @@ fun bar(i : Int, s : String) is threaded do
 	print s
 end
 
+# Parameterized `threaded` method with a return type
+fun baz(i : Int, j : Int): Int is threaded do
+	sys.nanosleep(10, 0)
+	return i + j
+end
+
+print "main"
 foo
 bar(10, "parameterized and threaded")
-print "main"
 sys.nanosleep(5,0)
+var x  = baz(2, 3)
+print "main, waiting for baz"
+var y = x.join
+print("baz result : " + y.to_s)
