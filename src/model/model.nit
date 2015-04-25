@@ -1717,6 +1717,15 @@ class MSignature
 	# The each parameter (in order)
 	var mparameters: Array[MParameter]
 
+	# Returns a parameter named `name`, if any.
+	fun mparameter_by_name(name: String): nullable MParameter
+	do
+		for p in mparameters do
+			if p.name == name then return p
+		end
+		return null
+	end
+
 	# The return type (null for a procedure)
 	var return_mtype: nullable MType
 

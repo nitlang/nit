@@ -1146,6 +1146,12 @@ class AVarargExpr
 	var n_expr: AExpr is writable, noinit
 	var n_dotdotdot: TDotdotdot is writable, noinit
 end
+class ANamedargExpr
+	super AExpr
+	var n_id: TId is writable, noinit
+	var n_assign: TAssign is writable, noinit
+	var n_expr: AExpr is writable, noinit
+end
 class ATypeExpr
 	super AExpr
 	var n_type: AType is writable, noinit

@@ -2537,6 +2537,20 @@ class AVarargExpr
 	var n_dotdotdot: TDotdotdot is writable, noinit
 end
 
+# An named notation used to pass an expression by name in a parameter
+class ANamedargExpr
+	super AExpr
+
+	# The name of the argument
+	var n_id: TId is writable, noinit
+
+	# The `=` synbol
+	var n_assign: TAssign is writable, noinit
+
+	# The passed expression
+	var n_expr: AExpr is writable, noinit
+end
+
 # A list of expression separated with commas (arguments for instance)
 class AManyExpr
 	super AExpr
