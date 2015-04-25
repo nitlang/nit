@@ -41,21 +41,11 @@ redef class DocPage
 	# Sidebar template if any.
 	var sidebar: nullable DocSideBar = null is writable
 
-	# Content of the page in form a TplSection.
-	# TODO remove when other templates are migrated.
-	var sections = new Array[TplSection]
-
 	# Footer content if any.
 	var footer: nullable Writable = null is writable
 
 	# JS scripts to append at the end of the body
 	var scripts = new Array[TplScript]
-
-	# Adds a section to this page.
-	# TODO remove when other templates are migrated.
-	fun add_section(section: TplSection) do
-		sections.add section
-	end
 
 	# Renders the html `<head>`.
 	private fun render_head do
@@ -81,7 +71,7 @@ redef class DocPage
 
 	# Renders the footer and content.
 	private fun render_content do
-		for section in sections do add section
+		add root
 		if footer != null then
 			addn "<div class='well footer'>"
 			add footer.as(not null)
@@ -256,7 +246,7 @@ redef class DocComposite
 	super Template
 
 	# HTML anchor id
-	var html_id: String is noinit
+	var html_id: String is noinit, writable
 
 	# Title to display if any.
 	#
@@ -269,7 +259,10 @@ redef class DocComposite
 	# Render the element title and subtitle.
 	private fun render_title do
 		if html_title != null then
-			addn new Header(hlvl, html_title.write_to_string)
+		var header = new Header(hlvl, html_title.write_to_string)
+		header.css_classes.add "signature"
+		if hlvl == 2 then header.css_classes.add "well well-sm"
+		addn header
 		end
 		if html_subtitle != null then
 			addn "<div class='info subtitle'>"
@@ -279,7 +272,9 @@ redef class DocComposite
 	end
 
 	# Render the element body.
-	private fun render_body do end
+	private fun render_body do
+		for child in children do addn child.write_to_string
+	end
 
 	redef fun rendering do
 		if is_hidden then return
@@ -289,7 +284,7 @@ redef class DocComposite
 
 	# Level <hX> for HTML heading.
 	private fun hlvl: Int do
-		if parent == null then return 1
+		if parent == null then return 0
 		return parent.hlvl + 1
 	end
 
@@ -333,23 +328,34 @@ redef class DocSection
 			addn "<a id=\"{html_id}\"></a>"
 			return
 		end
+		addn "<section{render_css_classes} id=\"{html_id}\">"
+		render_title
 		render_body
+		addn "</section>"
 	end
 end
 
 redef class DocArticle
 	super BSComponent
 
-	# Never displays the title for article.
-	#
-	# This is to maintain compatibility with old components, this may change
-	# without notice in further version.
-	redef fun render_title do end
+	redef fun rendering do
+		if is_hidden then return
+		addn "<article{render_css_classes} id=\"{html_id}\">"
+		render_title
+		render_body
+		addn "</article>"
+	end
 end
 
 redef class MEntityComposite
 	redef var html_id is lazy do return mentity.nitdoc_id
 	redef var html_title is lazy do return mentity.nitdoc_name
+end
+
+redef class MEntitySection
+	redef var html_id is lazy do return "section_{mentity.nitdoc_name}"
+	redef var html_title is lazy do return mentity.html_name
+	redef var html_subtitle is lazy do return mentity.html_declaration
 end
 
 redef class ConcernSection
@@ -370,7 +376,7 @@ end
 
 redef class IntroArticle
 	redef var html_id is lazy do return "article_intro_{mentity.nitdoc_id}"
-	redef var html_title is lazy do return null
+	redef var html_title = null
 	redef var is_hidden = false
 	redef var is_toc_hidden = true
 
@@ -394,9 +400,26 @@ redef class DefinitionArticle
 	redef var html_subtitle is lazy do return mentity.html_declaration
 	redef var is_hidden = false
 
+	# Does `self` display only it's title and no body?
+	#
+	# FIXME diff hack
+	var is_no_body: Bool = false is writable
+
+	# Does `self` display only the short content as definition?
+	#
+	# FIXME diff hack
+	var is_short_comment: Bool = false is writable
+
 	redef fun render_body do
-		var comment = mentity.html_comment
-		if comment != null then	addn comment
+		if not is_no_body then
+			var comment
+			if is_short_comment then
+				comment = mentity.html_short_comment
+			else
+				comment = mentity.html_comment
+			end
+			if comment != null then	addn comment
+		end
 		super
 	end
 end

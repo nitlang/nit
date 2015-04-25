@@ -261,7 +261,6 @@ redef class OverviewPage
 			ssection.add_child sarticle
 		end
 		section.add_child ssection
-		self.add_section section
 	end
 end
 
@@ -300,7 +299,6 @@ redef class SearchPage
 			tpl.props.add m
 		end
 		section.add_child tpl
-		self.add_section section
 	end
 
 	# Extract mmodule list to display (sorted by name)
@@ -332,7 +330,6 @@ end
 redef class MEntityPage
 	redef var html_url is lazy do return mentity.nitdoc_url
 	redef fun init_title(v, doc) do title = mentity.html_name
-	redef fun init_content(v, doc) do add_section root.start_rendering(v, doc, self)
 end
 
 # FIXME all clases below are roughly copied from `doc_pages` and adapted to new
@@ -526,11 +523,6 @@ redef class MPropertyPage
 end
 
 redef class DocComposite
-	# Render this DocComposite as HTML.
-	#
-	# FIXME needed to maintain TplSection compatibility.
-	fun render(v: RenderHTMLPhase, doc: DocModel, page: MEntityPage, parent: TplSectionElt) is abstract
-
 	# Prepares the HTML rendering for this element.
 	#
 	# This visit is mainly used to set template attributes before rendering.
@@ -539,151 +531,108 @@ redef class DocComposite
 	end
 end
 
-redef class DocRoot
-
-	# Start the rendering from root.
-	#
-	# FIXME needed to maintain TplSection compatibility.
-	fun start_rendering(v: RenderHTMLPhase, doc: DocModel, page: MEntityPage): TplSection do
-		var section = new TplSection("top")
-		var mentity = page.mentity
-		section.title = mentity.html_name
-		section.subtitle = mentity.html_declaration
-		# FIXME ugly hack to avoid diff
-		if mentity isa MGroup and mentity.is_root then
-			section.title = mentity.mproject.html_name
-			section.subtitle = mentity.mproject.html_declaration
-		else if mentity isa MProperty then
-			section.title = "{mentity.html_name}{mentity.intro.html_signature.write_to_string}"
-			section.subtitle = mentity.html_namespace
-			section.summary_title = mentity.html_name
-		end
-		render(v, doc, page, section)
-		return section
-	end
-
-	redef fun render(v, doc, page, parent) do
-		for child in children do
-			child.render(v, doc, page, parent)
-		end
-	end
-end
-
-redef class ConcernSection
-	redef fun render(v, doc, page, parent) do
-		var section = new TplSection(mentity.nitdoc_id)
-		var mentity = self.mentity
-		# FIXME hideous hacks to avoid diff
-		if page.mentity isa MModule and mentity isa MModule then
-			render_concern_mmodule(page, section, mentity)
-		else if page.mentity isa MClass and mentity isa MModule then
-			render_concern_other(page, section, mentity)
-		else if page.mentity isa MProperty and mentity isa MModule then
-			render_concern_other(page, section, mentity)
-		end
-		for child in children do
-			child.render(v, doc, page, section)
-		end
-		parent.add_child section
-	end
-
-	private fun render_concern_mmodule(page: MEntityPage, section: TplSection, mmodule: MModule) do
-		var title = new Template
-		if mmodule == page.mentity then
-			title.add "in "
-			section.summary_title = "in {mmodule.html_name}"
-		else
-			title.add "from "
-			section.summary_title = "from {mmodule.html_name}"
-		end
-		title.add mmodule.html_namespace
-		section.title = title
-	end
-
-	private fun render_concern_other(page: MEntityPage, section: TplSection, mmodule: MModule) do
-		var title = new Template
-		title.add "in "
-		title.add mmodule.html_namespace
-		section.title = title
-		section.summary_title = "in {mmodule.html_name}"
-	end
-end
-
+# FIXME hideous hacks to avoid diff
 redef class MEntitySection
-	redef fun render(v, doc, page, parent) do
-		for child in children do child.render(v, doc, page, parent)
-	end
-end
-
-redef class IntroArticle
-	redef fun render(v, doc, page, parent) do
-		var article = new TplArticle("intro")
+	redef fun init_html_render(v, doc, page) do
+		if not page isa MEntityPage then return
 		var mentity = self.mentity
-		if mentity isa MModule then
-			article.source_link = v.tpl_showsource(mentity.location)
-		else if mentity isa MClassDef then
-			article.source_link = v.tpl_showsource(mentity.location)
-		else if mentity isa MPropDef then
-			article.source_link = v.tpl_showsource(mentity.location)
+		if mentity isa MGroup and mentity.is_root then
+			html_title = mentity.mproject.html_name
+			html_subtitle = mentity.mproject.html_declaration
+		else if mentity isa MProperty then
+			var title = new Template
+			title.add mentity.html_name
+			title.add mentity.html_signature
+			html_title = title
+			html_subtitle = mentity.html_namespace
+			toc_title = mentity.html_name
 		end
-		# article.subtitle = mentity.html_declaration
-		article.content = write_to_string
-		parent.add_child article
+		super
 	end
 end
 
-redef class ConcernsArticle
-	redef fun render(v, doc, page, parent) do
-		parent.add_child new TplArticle.
-			with_content("concerns", "Concerns", write_to_string)
+# FIXME hideous hacks to avoid diff
+redef class ConcernSection
+	redef fun init_html_render(v, doc, page) do
+		if not page isa MEntityPage then return
+		var mentity = self.mentity
+		if page.mentity isa MModule and mentity isa MModule then
+			var title = new Template
+			if mentity == page.mentity then
+				title.add "in "
+				toc_title = "in {mentity.html_name}"
+			else
+				title.add "from "
+				toc_title = "from {mentity.html_name}"
+			end
+			title.add mentity.html_namespace
+			html_title = title
+		else if (page.mentity isa MClass and mentity isa MModule) or
+				(page.mentity isa MProperty and mentity isa MModule) then
+			var title = new Template
+			title.add "in "
+			title.add mentity.html_namespace
+			html_title = title
+			toc_title = "in {mentity.html_name}"
+		end
+		super
 	end
 end
 
-redef class DefinitionArticle
-	redef fun render(v, doc, page, parent) do
-		var title = new Template
-		title.add mentity.html_icon
-		title.add mentity.html_name
-
-		var article = new TplArticle(mentity.nitdoc_id)
-		article.title = title
-		article.title_classes.add "signature"
-		article.subtitle = mentity.html_declaration
-		article.summary_title = mentity.html_name
-		article.content = write_to_string
-
-		# FIXME less hideous hacks...
+# TODO redo showlink
+redef class IntroArticle
+	redef fun init_html_render(v, doc, page) do
 		var mentity = self.mentity
 		if mentity isa MModule then
-			title = new Template
+			# article.source_link = v.tpl_showsource(mentity.location)
+		else if mentity isa MClassDef then
+			# article.source_link = v.tpl_showsource(mentity.location)
+		else if mentity isa MPropDef then
+			# article.source_link = v.tpl_showsource(mentity.location)
+		end
+	end
+end
+
+# FIXME less hideous hacks...
+redef class DefinitionArticle
+	redef fun init_html_render(v, doc, page) do
+		if not page isa MEntityPage then return
+		var mentity = self.mentity
+		if mentity isa MModule then
+			var title = new Template
 			title.add mentity.html_icon
 			title.add mentity.html_namespace
-			article.title = title
+			html_title = title
+			toc_title = mentity.html_name
+			# article.source_link = v.tpl_showsource(mentity.location)
 		else if mentity isa MClass then
-			title = new Template
+			var title = new Template
 			title.add mentity.html_icon
 			title.add mentity.html_link
-			article.title = title
-			article.subtitle = mentity.html_namespace
-			article.content = null
+			html_title = title
+			html_subtitle = mentity.html_namespace
+			toc_title = mentity.html_name
+			is_no_body = true
 		else if mentity isa MClassDef then
-			title = new Template
+			var title = new Template
 			title.add "in "
 			title.add mentity.mmodule.html_namespace
-			article.title = mentity.html_declaration
-			article.subtitle = title
-			article.source_link = v.tpl_showsource(mentity.location)
+			html_title = mentity.html_declaration
+			html_subtitle = title
+			toc_title = "in {mentity.html_name}"
+			# article.source_link = v.tpl_showsource(mentity.location)
 			if mentity.is_intro and mentity.mmodule != page.mentity then
-				article.content = mentity.html_short_comment
+				is_short_comment = true
 			end
 			if page isa MModulePage then is_toc_hidden = true
 		else if mentity isa MPropDef then
 			if page.mentity isa MClass then
-				title = new Template
+				var title = new Template
 				title.add mentity.html_icon
 				title.add mentity.html_declaration
-				article.title = title
-				article.subtitle = mentity.html_namespace
+				html_title = title
+				html_subtitle = mentity.html_namespace
+				toc_title = mentity.html_name
 				# TODO move in its own phase? let's see after doc_template refactoring.
 				# Add linearization
 				var all_defs = new HashSet[MPropDef]
@@ -699,29 +648,29 @@ redef class DefinitionArticle
 				var lin = all_defs.to_a
 				doc.mainmodule.linearize_mpropdefs(lin)
 				if lin.length > 1 then
-					var lin_article = new TplArticle("{mentity.nitdoc_id}.lin")
-					lin_article.title = "Inheritance"
+					var lin_article = new DocArticle
+					lin_article.html_id = "{mentity.nitdoc_id}.lin"
+					lin_article.html_title = "Inheritance"
+					lin_article.is_toc_hidden = true
 					var lst = new UnorderedList
 					lst.css_classes.add("list-unstyled list-labeled")
 					for smpropdef in lin do
 						lst.add_li tpl_inheritance_item(smpropdef)
 					end
-					lin_article.content = lst
-					article.add_child lin_article
+					# FIXME will be moved in its own phase
+					lin_article.add lst
+					add_child lin_article
 				end
 			else
-				title = new Template
+				var title = new Template
 				title.add "in "
 				title.add mentity.mclassdef.html_link
-				article.title = title
+				html_title = title
 				toc_title = "in {mentity.mclassdef.html_name}"
 			end
-			article.source_link = v.tpl_showsource(mentity.location)
+			# article.source_link = v.tpl_showsource(mentity.location)
 		end
-		for child in children do
-			child.render(v, doc, page, article)
-		end
-		parent.add_child article
+		super
 	end
 
 	# Filter `page.mpropdefs` for this `mpropertie`.
@@ -758,49 +707,8 @@ redef class DefinitionArticle
 	end
 end
 
-redef class IntrosRedefsListArticle
-	redef fun render(v, doc, page, parent) do
-		if mentities.is_empty then return
-		var article = new TplArticle.with_title(list_title.to_lower, list_title)
-		article.content = write_to_string
-		parent.add_child article
-	end
-end
-
-# FIXME compatibility with doc_templates.
-redef class ImportationListSection
-	redef fun render(v, doc, page, parent) do
-		var section = new TplSection.with_title("dependencies", "Dependencies")
-		for child in children do
-			child.render(v, doc, page, section)
-		end
-		parent.add_child section
-	end
-end
-
-# FIXME compatibility with doc_templates.
-redef class InheritanceListSection
-	redef fun render(v, doc, page, parent) do
-		var section = new TplSection.with_title("inheritance", "Inheritance")
-		for child in children do
-			child.render(v, doc, page, section)
-		end
-		parent.add_child section
-	end
-end
-
-# FIXME compatibility with doc_templates.
-redef class HierarchyListArticle
-	redef fun render(v, doc, page, parent) do
-		if mentities.is_empty then return
-		var article = new TplArticle.with_title(list_title.to_lower, list_title)
-		article.content = write_to_string
-		parent.add_child article
-	end
-end
-
 redef class GraphArticle
-	redef fun render(v, doc, page, parent) do
+	redef fun init_html_render(v, doc, page) do
 		var output_dir = v.ctx.output_dir
 		var path = output_dir / id
 		var path_sh = path.escape_to_sh
@@ -809,13 +717,8 @@ redef class GraphArticle
 		file.close
 		sys.system("\{ test -f {path_sh}.png && test -f {path_sh}.s.dot && diff -- {path_sh}.dot {path_sh}.s.dot >/dev/null 2>&1 ; \} || \{ cp -- {path_sh}.dot {path_sh}.s.dot && dot -Tpng -o{path_sh}.png -Tcmapx -o{path_sh}.map {path_sh}.s.dot ; \}")
 		var fmap = new FileReader.open("{path}.map")
-		map = fmap.read_all
+		self.map = fmap.read_all
 		fmap.close
-
-		var article = new TplArticle("graph")
-		article.css_classes.add "text-center"
-		article.content = write_to_string
-		parent.add_child article
 	end
 end
 
