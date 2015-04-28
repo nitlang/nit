@@ -382,8 +382,10 @@ fun NitGitGrep()
 	redraw!
 endfun
 
-" Activate the omnifunc on Nit files
-autocmd FileType nit set omnifunc=NitOmnifunc
+if !exists("g:nit_disable_omnifunc") || !g:nit_disable_omnifunc
+	" Activate the omnifunc on Nit files
+	autocmd FileType nit set omnifunc=NitOmnifunc
+endif
 
 " Define the user command Nitdoc for ease of use
 command -nargs=* Nitdoc call Nitdoc("<args>")
