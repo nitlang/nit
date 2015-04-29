@@ -102,6 +102,9 @@ class BasicBlock
 	# Used to handle recursions by treating only one time each block
 	var treated: Bool = false
 
+	# Used to dump the BasicBlock to dot
+	var treated_debug: Bool = false
+
 	# If true, the iterated dominance frontier of this block has been computed
 	var df_computed: Bool = false
 
@@ -507,6 +510,57 @@ redef class AMethPropdef
 			n_block.generate_basic_blocks(ssa, basic_block.as(not null))
 			is_generated = true
 		end
+	end
+end
+
+# Utility class for dump basic block and SSA output to dot files
+class BlockDebug
+	# The output file
+	var file: FileWriter
+
+	# Dump all the hierarchy of BasicBlock from `block` to the leaves
+	fun dump(block: BasicBlock)
+	do
+		# Write the basic blocks hierarchy in output file
+		file.write("digraph basic_blocks\n\{\n")
+		var i = 0
+		file.write(print_block(block, i))
+		file.write("\n\}")
+
+		file.close
+	end
+
+	# Print all the block recursively from `block` to the leaves
+	# *`block` The root BasicBlock
+	# *`i` Used for the recursion
+	private fun print_block(block: BasicBlock, i: Int): String
+	do
+		# Precise the type and location of the begin and end of current block
+		var s = "block{block.hash.to_s} [shape=record, label="+"\"\{"
+		s += "block" + block.to_s.escape_to_dot
+		s += "|\{" + block.first.location.file.filename.to_s + block.first.location.line_start.to_s
+		s += " | " + block.first.to_s.escape_to_dot
+
+		# Print phi-functions if any
+		for phi in block.phi_functions do
+			s += " | " + phi.to_s.escape_to_dot + " "
+		end
+
+		s += "}|\{" + block.last.location.file.filename.to_s + block.last.location.line_start.to_s
+		s += " | " + block.last.to_s.escape_to_dot + "}}\"];"+ "\n"
+
+		i += 1
+		block.treated_debug = true
+
+		for b in block.successors do
+			# Print edges to successors
+			s += "block{block.hash.to_s} -> " + " block{b.hash.to_s};\n"
+
+			# Recursively print child blocks
+			if not b.treated_debug then s += print_block(b, i)
+		end
+
+		return s
 	end
 end
 
