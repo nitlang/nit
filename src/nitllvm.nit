@@ -12,9 +12,23 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# LLVM backend
+# LLVM backend for the Nit compiler (Work in progress)
 #
-# TODO complete doc
+# # Features and TODO list
+#
+# - [x] Generate basic class structures
+# - [x] Generate LLVM function signatures
+# - [ ] Generate LLVM implementation code
+# - [ ] Attributes
+# - [ ] Intern methods
+# - [ ] Generic and other types
+# - [ ] Support the FFI with C
+#
+# # References
+#
+# * http://llvm.org/docs/WritingAnLLVMBackend.html
+# * http://llvm.org/docs/LangRef.html
+# * http://llvm.org/releases/2.6/docs/tutorial/JITTutorial1.html
 module nitllvm
 
 import modelbuilder
