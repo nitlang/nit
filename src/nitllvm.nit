@@ -22,6 +22,10 @@ import frontend
 import model_utils
 
 redef class ToolContext
+	# --output
+	var opt_output = new OptionString("Output file", "-o", "--output")
+
+	init do option_context.add_option opt_output
 
 	# LLVM code generation
 	var llvm_phase: Phase = new LLVMPhase(self, null)
@@ -91,8 +95,11 @@ private class LLVMPhase
 		end
 
 		# Write LLVM code to file
-		var llvm_output_file = "{args[0]}.ll"
-		var ll = llvm_output_file.to_path.open_wo
+		var ll: Writer
+		var llvm_output_file = toolcontext.opt_output.value
+		if llvm_output_file != null then
+			ll = llvm_output_file.to_path.open_wo
+		else ll = sys.stdout
 
 		ll.write "\n; Class Structures\n"
 		for class_name, llvm_code in llvm_attributes do ll.write llvm_code
