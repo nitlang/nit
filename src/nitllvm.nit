@@ -32,119 +32,78 @@ private class LLVMPhase
 
 	redef fun process_mainmodule(mainmodule, mmodules)
 	do
-		var fw = new FileWriter.open("{args[0]}_Vtables.txt")
-		var ll = new FileWriter.open("{args[0]}.ll")
-
-		var llvm_classes_vtables = new HashMap[String, String]
+		# Prepare LLVM code in memory
+		var llvm_classes_vfts = new HashMap[String, String]
 		var llvm_functions = new HashMap[String, String]
 		var llvm_attributes = new HashMap[String, String]
 
-		print "Process process_mainmodule"
-		print "mainmodule {mainmodule}"
+		for mclass in mainmodule.flatten_mclass_hierarchy do
+			var class_vft = ["%class_{mclass.name}_vft = type \{\n"]
+			var class_vft_entries = new Array[String]
+			var class_attributes = ["\n%class_{mclass.name} = type \{%class_{mclass.name}_vft*"] # TODO
 
-		var full_mclass_hierarchy = mainmodule.flatten_mclass_hierarchy
+			var mproperties = mclass.all_mproperties(mainmodule, private_visibility)
+			for mproperty in mproperties do
+				if mproperty isa MMethod then
 
-		ll.write("\n\n;Class Structures\n")
-		for mclass in full_mclass_hierarchy
-			do
-				llvm_classes_vtables[mclass.name]="%class_{mclass.name}_vtable = type \{\n"
-				llvm_attributes[mclass.name]="%class_{mclass.name} = type \{%class_{mclass.name}_vtable*"
+					var mpropdefs = mproperty.lookup_all_definitions(mainmodule, mclass.mclass_type)
+					for mpropdef in mpropdefs do
 
-				fw.write("-----------------------------\n")
-				print "-----------------------------"
+						var class_vft_entry = ["\t"]
 
-				print "mclass.name:>>{mclass.name}<<"
+						var index = "{mpropdef.mclassdef.name}_{mpropdef.name}"
+						var llvm_function = ["define "]
+						if mpropdef.msignature.return_mtype != null then
+							llvm_function.add "%{mpropdef.msignature.return_mtype.name} "
+							class_vft_entry.add "%{mpropdef.msignature.return_mtype.name}("
+						else
+							llvm_function.add "void "
+							class_vft_entry.add "void("
+						end
 
-				fw.write("Class:{mclass.name}\n")
-				fw.write("\nVtable:\n")
-				fw.write("**********************\n")
+						var params = new Array[String]
 
-				var my_mproperties= mclass.all_mproperties(mainmodule,mclass.visibility)
+						# Receiver
+						params.add "%class_{mpropdef.mclassdef.name}*"
+						llvm_function.add "@{index}(%class_{mclass.name}* %this"
 
-				if my_mproperties.is_empty == false then
+						for param in mpropdef.msignature.mparameters do
+							llvm_function.add ",%class_{param.mtype.name} {param.name}"
+							params.add "%class_{param.mtype.name}"
+						end
+						class_vft_entry.add params.join(",")
 
-					for my_mproperty in my_mproperties do
-						if my_mproperty isa MMethod then
+						llvm_function.add ") nounwind \{\n; Method body\n\}\n" # TODO
+						class_vtable_entry.add ")* @{index}"
 
-							print "Method found"
-							print "my_mproperty.full_name:>>{my_mproperty.full_name}<<"
-							print "my_mproperty.name:>>{my_mproperty.name}<<\n"
-							fw.write("Function:{my_mproperty.name}\n")
+						llvm_functions[index] = llvm_function.join("")
+						class_vft_entries.add class_vft_entry.join("")
+					end
+				end
+			end
 
-							#var my_visib=my_mproperty.visibility.to_s
-							#print "my_mproperty.visibility is {my_visib}\n"
+			class_vft.add class_vft_entries.join(",\n")
+			class_vft.add "\n\}\n\n"
+			llvm_classes_vfts[mclass.name] = class_vft.join("")
 
-							var my_MPROPALLDEF= my_mproperty.lookup_all_definitions(mainmodule,mclass.mclass_type)
-							#var my_nextDef =my_mproperty.lookup_first_definition(mainmodule, mclass.mclass_type)
-							#print "my_nextDef:>>{my_nextDef.name}<<\n"
-							#var my_nextDef2 =my_nextDef.lookup_next_definition(mainmodule, mclass.mclass_type)
-							#print "my_nextDef2:>>{my_nextDef2.name}<<\n"
+			class_attributes.add "\}\n"
+			llvm_attributes[mclass.name] = class_attributes.join("")
+		end
 
-							var j=0
-							for x in my_MPROPALLDEF do
+		# Write LLVM code to file
+		var llvm_output_file = "{args[0]}.ll"
+		var ll = llvm_output_file.to_path.open_wo
 
-								var index="{x.mclassdef.name}_{x.name}"
-								print "index:>>{index}<<\n"
-								fw.write("\n_{x.name}_{x.mclassdef.name}\n")
-								llvm_functions[index]="define "
-								print "Signature:>>{x.msignature.name}<<\n"
-								if	x.msignature.return_mtype != null then
-									print "Signature mtype:>>{x.msignature.return_mtype.name}<<\n"
-									#llvm_functions[index]="%{llvm_functions[index]}* "
-									llvm_functions[index]="{llvm_functions[index]}%{x.msignature.return_mtype.name} "
-									llvm_classes_vtables[mclass.name]="{llvm_classes_vtables[mclass.name]}%{x.msignature.return_mtype.name}("
-								else
-									llvm_functions[index]="{llvm_functions[index]}void "
-									llvm_classes_vtables[mclass.name]="{llvm_classes_vtables[mclass.name]}void("
-								end
+		ll.write "\n; Class Structures\n"
+		for class_name, llvm_code in llvm_attributes do ll.write llvm_code
 
-								llvm_classes_vtables[mclass.name]="{llvm_classes_vtables[mclass.name]}%class_{x.mclassdef.name}*,"
+		ll.write "\n; Functions\n"
+		for llvm_code in llvm_functions.values do ll.write llvm_code
 
-								llvm_functions[index]="{llvm_functions[index]}@{index}(%class_{mclass.name}* %this"
-								var funct_params = x.msignature.mparameters
+		ll.write "\n; Classes VFTs\n"
+		for llvm_code in llvm_classes_vfts.values do ll.write llvm_code
 
-
-								var i=0
-								for y in funct_params do
-
-									print "Signature param mtype:>>{y.mtype.name}<<\n"
-									print "Signature param name:>>{y.name}<<\n"
-									llvm_functions[index]="{llvm_functions[index]},%class_{y.mtype.name} {y.name}"
-
-									if i <funct_params.length then
-										llvm_classes_vtables[mclass.name]="{llvm_classes_vtables[mclass.name]}%class_{y.mtype.name},"
-									else
-										llvm_classes_vtables[mclass.name]="{llvm_classes_vtables[mclass.name]}%class_{y.mtype.name}"
-									end
-									i=i+1
-								end
-
-								llvm_functions[index]="{llvm_functions[index]}) nounwind \{\n;Corp de la methode\n\}\n"
-								if j < my_MPROPALLDEF.length then
-									llvm_classes_vtables[mclass.name]="{llvm_classes_vtables[mclass.name]})* @{index},\n"
-								else
-									llvm_classes_vtables[mclass.name]="{llvm_classes_vtables[mclass.name]})* @{index}\n"
-								end
-								j=j+1
-
-							end
-						end #if my_mproperty
-
-					end#for my_mproperty
-					llvm_classes_vtables[mclass.name]="{llvm_classes_vtables[mclass.name]}\n\}\n\n"
-					fw.write("**********************\n\n")
-				end#if my_mproperties
-
-				llvm_attributes[mclass.name]="\n{llvm_attributes[mclass.name]}\}\n"
-				ll.write(llvm_attributes[mclass.name])
-
-		end#for mclass
-		ll.write("\n\n;Functions\n")
-		for v in llvm_functions.values do ll.write(v)
-		ll.write("\n\n;Classes Vtables\n")
-		for v in llvm_classes_vtables.values do ll.write(v)
-		ll.write("\n\ndefine i32 @main(i32 %argc, i8** %argv) nounwind \{\n\n\}")
-		fw.close
+		ll.write "\n\ndefine i32 @main(i32 %argc, i8** %argv) nounwind \{\n\n\}"
 		ll.close
 	end
 end
