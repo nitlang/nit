@@ -86,13 +86,19 @@ private class LLVMPhase
 						llvm_function.add "@{index}(%class_{mclass.name}* %this"
 
 						for param in mpropdef.msignature.mparameters do
-							llvm_function.add ",%class_{param.mtype.name} {param.name}"
+							llvm_function.add ",%class_{param.mtype.name} %{param.name}"
 							params.add "%class_{param.mtype.name}"
 						end
 						class_vft_entry.add params.join(",")
 
-						llvm_function.add ") nounwind \{\n; Method body\n\}\n" # TODO
-						class_vtable_entry.add ")* @{index}"
+						llvm_function.add """) nounwind {
+	; Method body TODO
+	ret void
+}
+"""
+						class_vft_entry.add ")*"
+						# TODO use the suffix " @{index}" on the previous line?
+						# Without it is no so much a VFT, but I couldn't get it to compile otherwise
 
 						llvm_functions[index] = llvm_function.join("")
 						class_vft_entries.add class_vft_entry.join("")
@@ -124,7 +130,12 @@ private class LLVMPhase
 		ll.write "\n; Classes VFTs\n"
 		for llvm_code in llvm_classes_vfts.values do ll.write llvm_code
 
-		ll.write "\n\ndefine i32 @main(i32 %argc, i8** %argv) nounwind \{\n\n\}"
+		ll.write """
+define i32 @main(i32 %argc, i8** %argv) nounwind {
+	; TODO
+	ret i32 7 ; for debugging purposes
+}
+"""
 		ll.close
 	end
 end
