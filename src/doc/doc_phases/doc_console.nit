@@ -60,6 +60,7 @@ class Nitx
 		print "\nCommands:"
 		print "\tname\t\tlookup module, class and property with the corresponding 'name'"
 		print "\tdoc: <name::space>\tdisplay the documentation page of 'namespace'"
+		print "\tparam: <Type>\tlookup methods using the corresponding 'Type' as parameter"
 		print "\t:h\t\tdisplay this help message"
 		print "\t:q\t\tquit interactive mode"
 		print ""
@@ -113,6 +114,8 @@ interface NitxQuery
 			return new CommentQuery(query_string)
 		else if query_string.has_prefix("doc:") then
 			return new DocQuery(query_string)
+		else if query_string.has_prefix("param:") then
+			return new ParamQuery(query_string)
 		end
 		return new CommentQuery("comment: {query_string}")
 	end
@@ -207,6 +210,28 @@ class CommentQuery
 		else
 			return super
 		end
+	end
+end
+
+# A query to search signatures using a specific `MType` as parameter.
+class ParamQuery
+	super MetaQuery
+
+	redef fun perform(nitx, doc) do
+		var res = new Array[NitxMatch]
+		var mtype_name = args.first
+		for mproperty in doc.mproperties do
+			if not mproperty isa MMethod then continue
+			var msignature = mproperty.intro.msignature
+			if msignature != null then
+				for mparam in msignature.mparameters do
+					if mparam.mtype.name == mtype_name then
+						res.add new MEntityMatch(self, mproperty)
+					end
+				end
+			end
+		end
+		return res
 	end
 end
 
