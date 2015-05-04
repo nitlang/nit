@@ -121,6 +121,26 @@ redef class MEntity
 	#
 	# See module `console`.
 	fun cs_visibility_color(string: String): String do return string.green
+
+	# Source code associated to this MEntity.
+	#
+	# Uses `cs_location` to locate the source code.
+	fun cs_source_code: String do
+		# FIXME up location to mentity
+		var loc = new Location.from_string(cs_location)
+		var fr = new FileReader.open(loc.file.filename)
+		var content = new FlatBuffer
+		var i = 0
+		while not fr.eof do
+			i += 1
+			var line = fr.read_line
+			if i < loc.line_start or i > loc.line_end then continue
+			# FIXME add nitlight for console
+			content.append "{line}\n"
+		end
+		fr.close
+		return content.write_to_string
+	end
 end
 
 redef class MProject

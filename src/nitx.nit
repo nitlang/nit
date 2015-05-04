@@ -20,6 +20,7 @@
 # * Display documentation page from Nitdoc in console
 # * Find type usage in parameters, returns and news.
 # * Find usage of a specific property.
+# * Find source code related to class/property by its name.
 module nitx
 
 import modelbuilder

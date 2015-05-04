@@ -64,6 +64,7 @@ class Nitx
 		print "\treturn: <Type>\tlookup methods returning the corresponding 'Type'"
 		print "\tnew: <Type>\tlookup methods creating new instances of 'Type'"
 		print "\tcall: <name>\tlookup methods calling 'name'"
+		print "\tcode: <name>\tdisplay the source code associated to the 'name' entity"
 		print "\t:h\t\tdisplay this help message"
 		print "\t:q\t\tquit interactive mode"
 		print ""
@@ -125,6 +126,9 @@ interface NitxQuery
 			return new NewQuery(query_string)
 		else if query_string.has_prefix("call:") then
 			return new CallQuery(query_string)
+		else if query_string.has_prefix("code:") then
+			return new CodeQuery(query_string)
+
 		end
 		return new CommentQuery("comment: {query_string}")
 	end
@@ -356,6 +360,54 @@ class PageMatch
 	end
 end
 
+# A query to search source code from a file name.
+class CodeQuery
+	super MetaQuery
+
+	# FIXME refactor this!
+	redef fun perform(nitx, doc) do
+		var res = new Array[NitxMatch]
+		var name = args.first
+		# if name is an existing sourcefile, opens it
+		if name.file_exists then
+			var fr = new FileReader.open(name)
+			var content = fr.read_all
+			fr.close
+			res.add new CodeMatch(self, name, content)
+			return res
+		end
+		# else, lookup the model by name
+		for mentity in doc.search_mentities(name) do
+			if mentity isa MClass then continue
+			if mentity isa MProperty then continue
+			res.add new CodeMatch(self, mentity.cs_location, mentity.cs_source_code)
+		end
+		return res
+	end
+
+	redef fun make_results(nitx, results) do
+		var page = new DocPage("Code Results")
+		for res in results do
+			page.add new CodeQueryArticle(self, res.as(CodeMatch))
+		end
+		return page
+	end
+end
+
+# A match between a piece of code and a string.
+class CodeMatch
+	super NitxMatch
+
+	# Location of the code match.
+	var location: String
+
+	# Piece of code matched.
+	var content: String
+
+	redef fun make_list_item do return "* {location}"
+end
+
+
 # A query that contains a nitx command.
 #
 # These commands are prefixed with `:` and are used to control the execution of
@@ -471,6 +523,24 @@ private class QueryResultArticle
 			addn ""
 			addn result.make_list_item
 		end
+	end
+end
+
+# An article that displays a piece of code.
+private class CodeQueryArticle
+	super DocArticle
+
+	# The query linked to the result to display.
+	var query: NitxQuery
+
+	# The result to display.
+	var result: CodeMatch
+
+	redef fun render_body do
+		addn ""
+		addn "in {result.location}".gray.bold
+		addn ""
+		add result.content
 	end
 end
 
