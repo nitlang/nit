@@ -191,6 +191,7 @@ gg = '>>';
 starship = '<=>';
 bang='!';
 at='@';
+semi=';';
 
 classid = uppercase letter*;
 id = lowercase letter*;
@@ -826,10 +827,14 @@ kwend_o {-> kwend?}
 	= kwend? {-> kwend}
 	;
 
-n1	= {a} comment | {b} eol;
-n {-> doc?}
-	= {a} n2? comment+ {-> New doc([comment])}
-	| {b} n2 {-> Null}
+/* A single hard break */
+n1	= {a} comment | {b} eol | {c} semi;
+
+/* A mandatory hard break, returns the last comment */
+n~nosemi {-> doc?}
+	= {a} n2* comment+ {-> New doc([comment])}
+	| {b} n2+ {-> Null}
+!nosemi | {c} n2* comment* semi n? {-> n.doc }
 	;
 no {-> doc?}
 	= {empty} {-> Null}
@@ -837,8 +842,7 @@ no {-> doc?}
 	;
 
 n2
-	= {a} n2? comment+ eol+
-	| {b} eol+
+	= {a} comment* eol
 	;
 
 /*****************************************************************************/

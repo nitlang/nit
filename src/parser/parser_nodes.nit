@@ -895,6 +895,11 @@ class TAt
 	super Token
 end
 
+# The symbol `;`
+class TSemi
+	super Token
+end
+
 # A class (or formal type) identifier. They start with an uppercase.
 class TClassid
 	super Token
