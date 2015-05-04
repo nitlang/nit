@@ -19,6 +19,7 @@
 # * Display comment from name/namespace
 # * Display documentation page from Nitdoc in console
 # * Find type usage in parameters, returns and news.
+# * Find usage of a specific property.
 module nitx
 
 import modelbuilder

@@ -63,6 +63,7 @@ class Nitx
 		print "\tparam: <Type>\tlookup methods using the corresponding 'Type' as parameter"
 		print "\treturn: <Type>\tlookup methods returning the corresponding 'Type'"
 		print "\tnew: <Type>\tlookup methods creating new instances of 'Type'"
+		print "\tcall: <name>\tlookup methods calling 'name'"
 		print "\t:h\t\tdisplay this help message"
 		print "\t:q\t\tquit interactive mode"
 		print ""
@@ -122,6 +123,8 @@ interface NitxQuery
 			return new ReturnQuery(query_string)
 		else if query_string.has_prefix("new:") then
 			return new NewQuery(query_string)
+		else if query_string.has_prefix("call:") then
+			return new CallQuery(query_string)
 		end
 		return new CommentQuery("comment: {query_string}")
 	end
@@ -282,6 +285,27 @@ class NewQuery
 	end
 end
 
+# A query to search methods calling a specific `MProperty`.
+class CallQuery
+	super MetaQuery
+
+	redef fun perform(nitx, doc) do
+		var res = new Array[NitxMatch]
+		var mprop_name = args.first
+		for mpropdef in doc.mpropdefs do
+			var visitor = new MPropertyCallVisitor
+			var npropdef = nitx.ctx.modelbuilder.mpropdef2node(mpropdef)
+			if npropdef == null then continue
+			visitor.enter_visit(npropdef)
+			for mprop in visitor.calls do
+				if mprop.name != mprop_name then continue
+				res.add new MEntityMatch(self, mpropdef)
+			end
+		end
+		return res
+	end
+end
+
 # A query to search a Nitdoc documentation page by its name.
 class DocQuery
 	super MetaQuery
@@ -402,6 +426,21 @@ private class TypeInitVisitor
 		if not node isa ANewExpr then return
 		var mtype = node.n_type.mtype
 		if mtype != null and mtype.name == mtype_name then inits.add(mtype)
+	end
+end
+
+# Visitor looking for calls to a `MProperty` (new T).
+#
+# See `CallQuery`.
+private class MPropertyCallVisitor
+	super Visitor
+
+	var calls = new HashSet[MProperty]
+	redef fun visit(node)
+	do
+		node.visit_all(self)
+		if not node isa ASendExpr then return
+		calls.add node.callsite.mproperty
 	end
 end
 
