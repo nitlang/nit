@@ -17,6 +17,7 @@
 # Features:
 #
 # * Display comment from name/namespace
+# * Display documentation page from Nitdoc in console
 module nitx
 
 import modelbuilder
