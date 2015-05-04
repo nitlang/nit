@@ -62,6 +62,7 @@ class Nitx
 		print "\tdoc: <name::space>\tdisplay the documentation page of 'namespace'"
 		print "\tparam: <Type>\tlookup methods using the corresponding 'Type' as parameter"
 		print "\treturn: <Type>\tlookup methods returning the corresponding 'Type'"
+		print "\tnew: <Type>\tlookup methods creating new instances of 'Type'"
 		print "\t:h\t\tdisplay this help message"
 		print "\t:q\t\tquit interactive mode"
 		print ""
@@ -119,6 +120,8 @@ interface NitxQuery
 			return new ParamQuery(query_string)
 		else if query_string.has_prefix("return:") then
 			return new ReturnQuery(query_string)
+		else if query_string.has_prefix("new:") then
+			return new NewQuery(query_string)
 		end
 		return new CommentQuery("comment: {query_string}")
 	end
@@ -259,6 +262,26 @@ class ReturnQuery
 	end
 end
 
+# A query to search methods creating new instances of a specific `MType`.
+class NewQuery
+	super MetaQuery
+
+	redef fun perform(nitx, doc) do
+		var res = new Array[NitxMatch]
+		var mtype_name = args.first
+		for mpropdef in doc.mpropdefs do
+			var visitor = new TypeInitVisitor(mtype_name)
+			var npropdef = nitx.ctx.modelbuilder.mpropdef2node(mpropdef)
+			if npropdef == null then continue
+			visitor.enter_visit(npropdef)
+			for i in visitor.inits do
+				res.add new MEntityMatch(self, mpropdef)
+			end
+		end
+		return res
+	end
+end
+
 # A query to search a Nitdoc documentation page by its name.
 class DocQuery
 	super MetaQuery
@@ -359,6 +382,26 @@ redef class DocModel
 			res.add mentity
 		end
 		return res
+	end
+end
+
+# Visitor looking for initialized `MType` (new T).
+#
+# See `NewQuery`.
+private class TypeInitVisitor
+	super Visitor
+
+	# `MType` name to look for.
+	var mtype_name: String
+
+	var inits = new HashSet[MType]
+	redef fun visit(node)
+	do
+		node.visit_all(self)
+		# look for init
+		if not node isa ANewExpr then return
+		var mtype = node.n_type.mtype
+		if mtype != null and mtype.name == mtype_name then inits.add(mtype)
 	end
 end
 
