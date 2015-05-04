@@ -10,9 +10,9 @@ nitx [*options*] FILE [COMMAND]
 
 # DESCRIPTION
 
-`nitx` in an interactive tool that display information about programs and libraries.
+`nitx` in an interactive tool that displays informations about programs and libraries.
 
-A command that query some information can be given as and argument.
+A command that query some information can be given as parameter.
 This will immediately displays the information then terminates the programs.
 
 If no command are given, the program starts an interactive session where commands are entered until `:q` is given.
@@ -31,6 +31,15 @@ If no command are given, the program starts an interactive session where command
 `new: Type`
 :   lookup methods creating new instances of 'Type'.
 
+`call: Property`
+:   lookup calls to 'Property'.
+
+`doc: name`
+:   lookup documentation pages about 'name'.
+
+`code: name`
+:   lookup source code related to 'name'.
+
 `:h`
 :   display an help message about the commands.
 
@@ -39,7 +48,8 @@ If no command are given, the program starts an interactive session where command
 
 # OPTIONS
 
-Only common options of the Nit tools are understood.
+`-q`
+:	execute a query, display results in console then quit.
 
 # SEE ALSO
 
