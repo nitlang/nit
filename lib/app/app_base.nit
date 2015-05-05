@@ -34,9 +34,6 @@ class App
 	# Main entry point of your application
 	fun run do end
 
-	# Prefix to all log messages, used by `log_error`, `log_warning` and `log_info`.
-	fun log_prefix: String do return "app.nit"
-
 	# Main init method for graphical stuff
 	# Is called when display is ready so graphical assets
 	# can be loaded at this time.

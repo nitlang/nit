@@ -23,6 +23,11 @@ in "C" `{
 	#include <android/log.h>
 `}
 
+redef class App
+	# Prefix to all log messages
+	protected fun log_prefix: String do return "app.nit"
+end
+
 # Default Android log priority
 fun priority_default: Int do return 1
 
