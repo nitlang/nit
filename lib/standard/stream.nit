@@ -395,20 +395,18 @@ abstract class BufferedReader
 	redef fun read(i)
 	do
 		if last_error != null then return ""
-		if _buffer.length == _buffer_pos then
-			if not eof then
-				return read(i)
-			end
-			return ""
+		if eof then return ""
+		var p = _buffer_pos
+		var bufsp = _buffer.length - p
+		if bufsp >= i then
+			_buffer_pos += i
+			return _buffer.substring(p, i).to_s
 		end
-		if _buffer_pos + i >= _buffer.length then
-			var from = _buffer_pos
-			_buffer_pos = _buffer.length
-			if from == 0 then return _buffer.to_s
-			return _buffer.substring_from(from).to_s
-		end
-		_buffer_pos += i
-		return _buffer.substring(_buffer_pos - i, i).to_s
+		_buffer_pos = _buffer.length
+		var readln = _buffer.length - p
+		var s = _buffer.substring(p, readln).to_s
+		fill_buffer
+		return s + read(i - readln)
 	end
 
 	redef fun read_all
