@@ -257,6 +257,19 @@ redef class Collection[ E ]
 		end
 		abort
 	end
+
+	# Return a new array made of elements in a random order.
+	#
+	# ~~~
+	# var a = [1,2,1].to_shuffle
+	# assert a == [1,1,2] or a == [1,2,1] or a == [2,1,1]
+	# ~~~
+	fun to_shuffle: Array[E]
+	do
+		var res = self.to_a
+		res.shuffle
+		return res
+	end
 end
 
 redef class SequenceRead[E]
@@ -265,6 +278,36 @@ redef class SequenceRead[E]
 	do
 		assert not is_empty
 		return self[length.rand]
+	end
+end
+
+redef class AbstractArray[E]
+	# Reorder randomly the elements in self.
+	#
+	# ~~~
+	# var a = new Array[Int]
+	#
+	# a.shuffle
+	# assert a.is_empty
+	#
+	# a.add 1
+	# a.shuffle
+	# assert a == [1]
+	#
+	# a.add 2
+	# a.shuffle
+	# assert a == [1,2] or a == [2,1]
+	# ~~~
+	#
+	# ENSURE self.shuffle.has_exactly(old(self))
+	fun shuffle
+	do
+		for i in [0..length[ do
+			var j = i + (length-i).rand
+			var tmp = self[i]
+			self[i] = self[j]
+			self[j] = tmp
+		end
 	end
 end
 
