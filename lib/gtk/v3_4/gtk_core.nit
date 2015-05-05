@@ -380,6 +380,12 @@ end
 # See: https://developer.gnome.org/gtk3/3.4/GtkBox.html
 extern class GtkBox `{ GtkBox * `}
 	super GtkContainer
+	super GtkOrientable
+
+	# Create a new `GtkBox` with the given `orientation` and `spacing` between its children
+	new (orientation: GtkOrientation, spacing: Int) `{
+		return (GtkBox *)gtk_box_new(orientation, spacing);
+	`}
 end
 
 # The tree interface used by GtkTreeView
