@@ -360,6 +360,21 @@ extern class GtkGrid `{GtkGrid *`}
 	`}
 end
 
+# A widget that can switch orientation
+extern class GtkOrientable `{GtkOrientable *`}
+	super GtkWidget
+
+	# Get the orientation of this widget
+	fun orientation: GtkOrientation `{
+		return gtk_orientable_get_orientation(recv);
+	`}
+
+	# Set the orientation of this widget
+	fun orientation=(orientation: GtkOrientation) `{
+		gtk_orientable_set_orientation(recv, orientation);
+	`}
+end
+
 # A container box
 #
 # See: https://developer.gnome.org/gtk3/3.4/GtkBox.html
