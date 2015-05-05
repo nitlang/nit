@@ -99,7 +99,20 @@ class PrettyPrinterVisitor
 		n.accept_pretty_printer self
 	end
 
-	# Visit a list of `Anode`.
+	# Visit a list of arguments `ANode` with optional parentheses
+	fun visit_args(n: nullable ANodes[ANode]) do
+		if n == null or n.is_empty then return
+		if current_token isa TOpar then
+			consume "("
+		else
+			adds
+		end
+
+		visit_list n
+		if current_token isa TCpar then consume ")"
+	end
+
+	# Visit a list of `ANode`.
 	fun visit_list(n: nullable ANodes[ANode]) do
 		if n == null then return
 		n.accept_pretty_printer self
@@ -108,10 +121,11 @@ class PrettyPrinterVisitor
 	# Is the node inlinable and can fit on the line.
 	fun can_inline(n: nullable ANode): Bool do
 		if n == null then return true
+		if no_inline and n.location.line_start != n.location.line_end then return false
 		if n.must_be_inline then return true
 		if n.must_be_block then return false
 		# check length
-		if n.collect_length + current_length > max_size then return false
+		if max_size > 0 and n.collect_length + current_length > max_size then return false
 		# check block is inlinable
 		return n.is_inlinable
 	end
@@ -145,12 +159,22 @@ class PrettyPrinterVisitor
 	# Skip `current_token` until `target` is reached.
 	fun skip_to(target: nullable Token) do
 		if target == null then return
-		while current_token != target do skip
+		while current_token != null and current_token != target do skip
+		if current_token == null then
+			target.debug("Looked for, but not found :(")
+			abort
+		end
+	end
+
+	# Consume comments and end of lines if any
+	fun consume_comments do
+		while current_token isa TEol or current_token isa TComment do visit current_token
 	end
 
 	# Visit `current_token`.
 	fun consume(token: String) do
-		assert current_token.text == token
+		consume_comments
+		if current_token.text == token then else current_token.debug("Got `{current_token.text}`; expected `{token}`.")
 		visit current_token
 	end
 
@@ -196,7 +220,8 @@ class PrettyPrinterVisitor
 	var tab_size = 8
 
 	# Max line size.
-	var max_size = 80
+	# 0 (or negative) to disable.
+	var max_size = 80 is writable
 
 	# Length of the current line.
 	var current_length = 0
@@ -260,6 +285,9 @@ class PrettyPrinterVisitor
 
 	# Do we force the deletion of empty lines?
 	var skip_empty = false is public writable
+
+	# Disable automatic inlining.
+	var no_inline = false is writable
 end
 
 # Base framework redefs
@@ -268,6 +296,8 @@ redef class ANodes[E]
 	private fun accept_pretty_printer(v: PrettyPrinterVisitor) do
 		for e in self do
 			var e_can_inline = v.can_inline(e)
+
+			if v.current_token isa TComma then v.skip
 
 			if e != first then
 				if not e_can_inline then
@@ -509,15 +539,7 @@ redef class AAnnotation
 			v.adds
 		end
 		v.visit n_atid
-		if not n_args.is_empty then
-			if n_opar == null then
-				v.adds
-			else
-				v.visit n_opar
-			end
-			v.visit_list n_args
-			v.visit n_cpar
-		end
+		v.visit_args n_args
 	end
 end
 
@@ -1041,7 +1063,7 @@ redef class AExternCalls
 			v.adds
 			v.visit_list n_extern_calls
 		else
-			v.addn
+			v.forcen
 			v.indent += 1
 			v.addt
 			v.indent -= 1
@@ -1141,7 +1163,7 @@ redef class TExternCodeSegment
 				v.add "`\{"
 
 				if not lines.first.trim.is_empty then
-					v.addn
+					v.forcen
 					lines.first.l_trim
 					v.indent += 1
 					v.addt
@@ -1218,7 +1240,7 @@ redef class AIfExpr
 			v.adds
 		else
 			v.visit n_expr
-			v.addn
+			v.forcen
 			v.addt
 		end
 
@@ -1269,10 +1291,11 @@ redef class AIfExpr
 				end
 			end
 
-			if has_else(v) then
-				while not v.current_token isa TKwelse do
-					v.consume v.current_token.text
-				end
+			v.consume_comments
+
+			# FIXME: for some unknown reasons, has_else can be true even if
+			# there is no `else` keyword but a `end` instead.
+			if has_else(v) and v.current_token isa TKwelse then
 
 				v.indent -= 1
 				v.addt
@@ -1559,7 +1582,7 @@ redef class ACallExpr
 		v.visit_recv n_expr
 
 		if not n_expr isa AImplicitSelfExpr and not can_inline then
-			v.addn
+			v.forcen
 			v.addt
 		end
 
@@ -1572,14 +1595,7 @@ redef class ACallExpr
 				v.visit n_args.n_exprs.first
 				if v.current_token isa TCpar then v.skip
 			else
-				if v.current_token isa TOpar then
-					v.consume "("
-				else
-					v.adds
-				end
-
-				v.visit_list n_args.n_exprs
-				if v.current_token isa TCpar then v.consume ")"
+				v.visit_args n_args.n_exprs
 			end
 		end
 	end
@@ -1700,12 +1716,7 @@ redef class AInitExpr
 		end
 
 		v.visit n_kwinit
-
-		if not n_args.n_exprs.is_empty then
-			v.consume "("
-			v.visit_list n_args.n_exprs
-			v.consume ")"
-		end
+		v.visit_args n_args.n_exprs
 	end
 end
 
@@ -1720,7 +1731,7 @@ redef class ANewExpr
 			v.consume "."
 
 			if not can_inline then
-				v.addn
+				v.forcen
 				v.indent += 1
 				v.addt
 				v.indent -= 1
@@ -1729,11 +1740,7 @@ redef class ANewExpr
 			v.visit n_id
 		end
 
-		if not n_args.n_exprs.is_empty then
-			v.consume "("
-			v.visit_list n_args.n_exprs
-			v.consume ")"
-		end
+		v.visit_args n_args.n_exprs
 	end
 
 	redef fun is_inlinable do return true
@@ -1842,7 +1849,7 @@ redef class AAssertExpr
 				else
 					v.addt
 					v.visit n_else
-					v.addn
+					v.forcen
 					v.indent -= 1
 					v.addt
 					v.add "end"
@@ -1880,14 +1887,7 @@ redef class ASuperExpr
 				v.visit n_args.n_exprs.first
 				if v.current_token isa TCpar then v.skip
 			else
-				if v.current_token isa TOpar then
-					v.consume "("
-				else
-					v.adds
-				end
-
-				v.visit_list n_args.n_exprs
-				if v.current_token isa TCpar then v.consume ")"
+				v.visit_args n_args.n_exprs
 			end
 		end
 	end
@@ -1977,7 +1977,7 @@ private class ABinOpHelper
 			v.adds
 			v.visit bin_expr2
 		else
-			v.addn
+			v.forcen
 			v.indent += 1
 			v.addt
 			v.indent -= 1
@@ -2068,6 +2068,11 @@ redef class AArrayExpr
 	redef fun accept_pretty_printer(v) do
 		v.consume "["
 		v.visit_list n_exprs
+		if n_type != null then
+			v.consume ":"
+			v.adds
+			v.visit n_type
+		end
 		v.consume "]"
 	end
 end
@@ -2111,7 +2116,7 @@ redef class AStringFormExpr
 			while i < text.length do
 				v.add text[i].to_s
 
-				if v.current_length >= v.max_size and i <= text.length - 3 then
+				if v.max_size > 0 and v.current_length >= v.max_size and i <= text.length - 3 then
 					v.add "\" +"
 					if was_inline then
 						v.forcen
