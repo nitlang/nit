@@ -241,6 +241,11 @@ end
 redef class Collection[ E ]
 	# Return a random element form the collection
 	# There must be at least one element in the collection
+	#
+	# ~~~
+	# var x = [1,2,3].rand
+	# assert x == 1 or x == 2 or x == 3
+	# ~~~
 	fun rand: E
 	do
 		if is_empty then abort
