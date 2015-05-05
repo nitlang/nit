@@ -1015,11 +1015,10 @@ extern class GtkAdjustment `{GtkAdjustment *`}
 end
 
 extern class GdkColor `{GdkColor*`}
-	new is extern `{
-		GdkColor * col = malloc(sizeof(GdkColor));
-		/*gdk_color_parse( "red", recv );*/
-		gdk_color_parse( "red", col);
-		return col;
+	new (color_name: String) import String.to_cstring `{
+		GdkColor *color = malloc(sizeof(GdkColor));
+		gdk_color_parse(String_to_cstring(color_name), color);
+		return color;
 	`}
 end
 
