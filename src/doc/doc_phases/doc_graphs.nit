@@ -73,7 +73,7 @@ redef class MModulePage
 			end
 		end
 		op.append("\}\n")
-		return new GraphArticle(mentity, name, op)
+		return new GraphArticle(mentity, name, "Importation Graph", op)
 	end
 end
 
@@ -107,7 +107,7 @@ redef class MClassPage
 			end
 		end
 		op.append("\}\n")
-		return new GraphArticle(mentity, name, op)
+		return new GraphArticle(mentity, name, "Inheritance Graph", op)
 	end
 end
 
@@ -120,6 +120,9 @@ class GraphArticle
 
 	# Graph ID (used for outputing file with names).
 	var id: String
+
+	# Graph title to display.
+	var graph_title: String
 
 	# Dot script of the graph.
 	var dot: Text

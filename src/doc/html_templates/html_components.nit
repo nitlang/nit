@@ -17,8 +17,24 @@
 module html_components
 
 import doc_base
-import template
+import html::bootstrap
 import json::static
+
+# A label with a text content.
+class DocHTMLLabel
+	super BSLabel
+
+	redef init do
+		css_classes.clear
+		css_classes.add "label"
+	end
+
+	# Init this label from css classes.
+	init with_classes(classes: Array[String]) do
+		init("label", "")
+		css_classes.add_all classes
+	end
+end
 
 #########################
 # general layout elements

@@ -17,6 +17,10 @@ module html_templates
 
 import html_model
 import html::bootstrap
+import doc_phases::doc_structure
+import doc_phases::doc_hierarchies
+import doc_phases::doc_graphs
+import doc_phases::doc_intros_redefs
 
 # Renders the page as HTML.
 redef class DocPage
@@ -264,4 +268,85 @@ redef class DocArticle
 	# This is to maintain compatibility with old components, this may change
 	# without notice in further version.
 	redef fun render_title do end
+end
+
+redef class IntroArticle
+	redef var html_id is lazy do return "article_intro_{mentity.nitdoc_id}"
+	redef var html_title is lazy do return null
+	redef var is_hidden = false
+
+	redef fun render_body do
+		var comment = mentity.html_comment
+		if comment != null then	addn comment
+		super
+	end
+end
+
+redef class ConcernsArticle
+	redef var html_id is lazy do return "article_concerns_{mentity.nitdoc_id}"
+	redef var html_title = "Concerns"
+	redef fun is_hidden do return concerns.is_empty
+
+	redef fun render_body do add concerns.html_list
+end
+
+redef class DefinitionArticle
+	redef var html_id is lazy do return "article_definition_{mentity.nitdoc_id}"
+	redef var html_title is lazy do return mentity.html_name
+	redef var html_subtitle is lazy do return mentity.html_declaration
+	redef var is_hidden = false
+
+	redef fun render_body do
+		var comment = mentity.html_comment
+		if comment != null then	addn comment
+		super
+	end
+end
+
+redef class HierarchyListArticle
+	redef var html_id is lazy do return "article_hierarchy_{list_title}_{mentity.nitdoc_id}"
+	redef var html_title is lazy do return list_title
+	redef fun is_empty do return mentities.is_empty
+
+	redef fun render_body do
+		var lst = new UnorderedList
+		lst.css_classes.add "list-unstyled list-definition"
+		for mentity in mentities do
+			lst.add_li mentity.html_list_item
+		end
+		addn lst
+	end
+end
+
+redef class IntrosRedefsListArticle
+	redef var html_id is lazy do return "article_intros_redefs_{mentity.nitdoc_id}"
+	redef var html_title is lazy do return list_title
+	redef fun is_hidden do return mentities.is_empty
+
+	redef fun render_body do
+		var lst = new UnorderedList
+		lst.css_classes.add "list-unstyled list-labeled"
+		for mentity in mentities do
+			lst.add_li mentity.html_list_item
+		end
+		add lst
+	end
+end
+
+redef class GraphArticle
+	redef var html_id is lazy do return "article_graph_{mentity.nitdoc_id}"
+	redef var is_hidden = false
+
+	# HTML map used to display link.
+	#
+	# This attribute is set by the `doc_render` phase who knows the context.
+	var map: String is noinit, writable
+
+	redef fun render_body do
+		addn "<div class=\"text-center\">"
+		addn " <img src='{id}.png' usemap='#{id}' style='margin:auto'"
+		addn "  alt='{graph_title}'/>"
+		add map
+		addn "</div>"
+	end
 end

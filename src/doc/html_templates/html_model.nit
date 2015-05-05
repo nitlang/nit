@@ -117,6 +117,31 @@ redef class MEntity
 		if mdoc == null then return null
 		return mdoc.tpl_short_comment
 	end
+
+	# Icon that will be displayed before the title
+	fun html_icon: BSIcon do
+		var icon = new BSIcon("tag")
+		icon.css_classes.add_all(css_classes)
+		return icon
+	end
+
+	# CSS classes used to decorate `self`.
+	#
+	# Mainly used for icons.
+	var css_classes = new Array[String]
+
+	# A li element that can go in a `HTMLList`.
+	fun html_list_item: ListItem do
+		var tpl = new Template
+		tpl.add new DocHTMLLabel.with_classes(css_classes)
+		tpl.add html_link
+		var comment = html_short_comment
+		if comment != null then
+			tpl.add ": "
+			tpl.add comment
+		end
+		return new ListItem(tpl)
+	end
 end
 
 redef class MProject
@@ -124,6 +149,7 @@ redef class MProject
 	redef fun nitdoc_url do return root.nitdoc_url
 	redef var html_modifiers = ["project"]
 	redef fun html_namespace do return html_link
+	redef var css_classes = ["public"]
 end
 
 redef class MGroup
@@ -150,6 +176,8 @@ redef class MGroup
 		end
 		return tpl
 	end
+
+	redef var css_classes = ["public"]
 end
 
 redef class MModule
@@ -180,6 +208,8 @@ redef class MModule
 		tpl.add html_link
 		return tpl
 	end
+
+	redef var css_classes = ["public"]
 end
 
 redef class MClass
@@ -221,6 +251,9 @@ redef class MClass
 
 	# Returns `intro.html_signature`.
 	fun html_signature: Template do return intro.html_signature
+
+	redef fun html_icon do return intro.html_icon
+	redef fun css_classes do return intro.css_classes
 end
 
 redef class MClassDef
@@ -249,14 +282,17 @@ redef class MClassDef
 	#
 	# For intro: `private abstract class Foo[E: Object]`
 	# For redef: `redef class Foo[E]`
-	# TODO change the implementation to correspond to the comment.
 	redef fun html_declaration do
 		var tpl = new Template
 		tpl.add "<span>"
 		tpl.add html_modifiers.join(" ")
 		tpl.add " "
 		tpl.add html_link
-		tpl.add html_signature
+		if is_intro then
+			tpl.add html_signature
+		else
+			tpl.add html_short_signature
+		end
 		tpl.add "</span>"
 		return tpl
 	end
@@ -301,6 +337,14 @@ redef class MClassDef
 		end
 		return tpl
 	end
+
+	redef fun css_classes do
+		var set = new HashSet[String]
+		if is_intro then set.add "intro"
+		for m in mclass.intro.modifiers do set.add m.to_cmangle
+		for m in modifiers do set.add m.to_cmangle
+		return set.to_a
+	end
 end
 
 redef class MProperty
@@ -325,6 +369,8 @@ redef class MProperty
 
 	# Returns `intro.html_signature`.
 	fun html_signature: Template do return intro.html_signature
+
+	redef fun css_classes do return intro.css_classes
 end
 
 redef class MPropDef
@@ -352,14 +398,18 @@ redef class MPropDef
 	#
 	# For intro: `private fun foo(e: Object): Bar is abstract`
 	# For redef: `redef fun foo(e) is cached`
-	# TODO change the implementation to correspond to the comment.
 	redef fun html_declaration do
 		var tpl = new Template
 		tpl.add "<span>"
 		tpl.add html_modifiers.join(" ")
 		tpl.add " "
-		tpl.add html_link
-		tpl.add html_signature
+		if is_intro then
+			tpl.add html_link
+			tpl.add html_signature
+		else
+			tpl.add mproperty.intro.html_link
+			tpl.add html_short_signature
+		end
 		tpl.add "</span>"
 		return tpl
 	end
@@ -378,6 +428,14 @@ redef class MPropDef
 
 	# Returns the MPropDef signature with static types.
 	fun html_signature: Template is abstract
+
+	redef fun css_classes do
+		var set = new HashSet[String]
+		if is_intro then set.add "intro"
+		for m in mproperty.intro.modifiers do set.add m.to_cmangle
+		for m in modifiers do set.add m.to_cmangle
+		return set.to_a
+	end
 end
 
 redef class MAttributeDef
@@ -568,6 +626,56 @@ redef class MParameter
 		tpl.add mtype.html_signature
 		if is_vararg then tpl.add "..."
 		return tpl
+	end
+end
+
+redef class ConcernsTree
+	# Render `self` as a hierarchical UnorderedList.
+	fun html_list: UnorderedList do
+		var lst = new UnorderedList
+		lst.css_classes.add "list-unstyled list-definition"
+		for r in roots do
+			var li = r.html_concern_item
+			lst.add_li li
+			build_html_list(r, li)
+		end
+		return lst
+	end
+
+	# Build the html list recursively.
+	private fun build_html_list(e: MConcern, li: ListItem) do
+		if not sub.has_key(e) then return
+		var subs = sub[e]
+		var lst = new UnorderedList
+		lst.css_classes.add "list-unstyled list-definition"
+		for e2 in subs do
+			if e2 isa MGroup and e2.is_root then
+				build_html_list(e2, li)
+			else
+				var sli = e2.html_concern_item
+				lst.add_li sli
+				build_html_list(e2, sli)
+			end
+		end
+		var text = new Template
+		text.add li.text
+		if not lst.is_empty then text.add lst
+		li.text = text
+	end
+end
+
+redef class MConcern
+	# Return a li element for `self` that can be displayed in a concern list
+	private fun html_concern_item: ListItem do
+		var lnk = html_link
+		var tpl = new Template
+		tpl.add new Link.with_title("#{nitdoc_id}", lnk.text, lnk.title)
+		var comment = html_short_comment
+		if comment != null then
+			tpl.add ": "
+			tpl.add comment
+		end
+		return new ListItem(tpl)
 	end
 end
 

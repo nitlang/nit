@@ -215,7 +215,9 @@ redef class DocPage
 	end
 
 	# Build page content template.
-	fun init_content(v: RenderHTMLPhase, doc: DocModel) do end
+	fun init_content(v: RenderHTMLPhase, doc: DocModel) do
+		root.init_html_render(v, doc, self)
+	end
 end
 
 redef class OverviewPage
@@ -243,9 +245,14 @@ redef class OverviewPage
 		sorter.sort mprojects
 		var ssection = new TplSection.with_title("projects", "Projects")
 		for mproject in mprojects do
-			var sarticle = mproject.tpl_article
+			var sarticle = new TplArticle(mproject.nitdoc_id)
+			var title = new Template
+			title.add mproject.html_icon
+			title.add mproject.html_link
+			sarticle.title = title
+			sarticle.title_classes.add "signature"
+			sarticle.summary_title = mproject.html_name
 			sarticle.subtitle = mproject.html_declaration
-			sarticle.content = mproject.tpl_definition
 			var comment = mproject.html_short_comment
 			if comment != null then
 				sarticle.content = comment
@@ -361,7 +368,7 @@ redef class MGroupPage
 	end
 
 	private fun tpl_sidebar_item(def: MClass): TplListItem do
-		var classes = def.intro.tpl_css_classes.to_a
+		var classes = def.intro.css_classes
 		if intros.has(def) then
 			classes.add "intro"
 		else
@@ -402,7 +409,7 @@ redef class MModulePage
 	end
 
 	private fun tpl_sidebar_item(def: MClass): TplListItem do
-		var classes = def.intro.tpl_css_classes.to_a
+		var classes = def.intro.css_classes
 		if def.intro_mmodule == self.mentity then
 			classes.add "intro"
 		else
@@ -447,7 +454,7 @@ redef class MClassPage
 	end
 
 	private fun tpl_sidebar_item(mprop: MProperty): TplListItem do
-		var classes = mprop.intro.tpl_css_classes.to_a
+		var classes = mprop.intro.css_classes
 		if not mprop_is_local(mprop) then
 			classes.add "inherit"
 			var cls_url = mprop.intro.mclassdef.mclass.nitdoc_url
@@ -516,6 +523,13 @@ redef class DocComposite
 	#
 	# FIXME needed to maintain TplSection compatibility.
 	fun render(v: RenderHTMLPhase, doc: DocModel, page: MEntityPage, parent: TplSectionElt) is abstract
+
+	# Prepares the HTML rendering for this element.
+	#
+	# This visit is mainly used to set template attributes before rendering.
+	fun init_html_render(v: RenderHTMLPhase, doc: DocModel, page: DocPage) do
+		for child in children do child.init_html_render(v, doc, page)
+	end
 end
 
 redef class DocRoot
@@ -606,140 +620,100 @@ redef class IntroArticle
 			article.source_link = v.tpl_showsource(mentity.location)
 		end
 		# article.subtitle = mentity.html_declaration
-		# FIXME diff hack
-		if mentity isa MProperty then
-			# intro title
-			var ns = mentity.intro.mclassdef.mmodule.html_namespace
-			var section = new TplSection("intro")
-			var title = new Template
-			title.add "Introduction in "
-			title.add ns
-			section.title = title
-			section.summary_title = "Introduction"
-			var intro = mentity.intro.tpl_article
-			intro.source_link = v.tpl_showsource(mentity.intro.location)
-			section.add_child intro
-			parent.add_child section
-		else
-			article.content = mentity.tpl_definition
-			parent.add_child article
-		end
+		article.content = write_to_string
+		parent.add_child article
 	end
 end
 
 redef class ConcernsArticle
 	redef fun render(v, doc, page, parent) do
-		# FIXME diff hack
-		var title = "concerns"
-		if page.mentity isa MProperty then title = "Concerns"
 		parent.add_child new TplArticle.
-			with_content(title, "Concerns", concerns.to_tpl)
+			with_content("concerns", "Concerns", write_to_string)
 	end
 end
 
 redef class DefinitionArticle
 	redef fun render(v, doc, page, parent) do
-		var article: TplArticle
+		var title = new Template
+		title.add mentity.html_icon
+		title.add mentity.html_name
+
+		var article = new TplArticle(mentity.nitdoc_id)
+		article.title = title
+		article.title_classes.add "signature"
+		article.subtitle = mentity.html_declaration
+		article.summary_title = mentity.html_name
+		article.content = write_to_string
+
+		# FIXME less hideous hacks...
 		var mentity = self.mentity
-		# FIXME hideous hacks...
 		if mentity isa MModule then
-			article = mentity.tpl_article
-			article.subtitle = mentity.html_declaration
-			article.content = mentity.tpl_definition
+			title = new Template
+			title.add mentity.html_icon
+			title.add mentity.html_namespace
+			article.title = title
 		else if mentity isa MClass then
-			article = make_mclass_article(v, page)
+			title = new Template
+			title.add mentity.html_icon
+			title.add mentity.html_link
+			article.title = title
+			article.subtitle = mentity.html_namespace
+			article.content = null
 		else if mentity isa MClassDef then
-			article = make_mclassdef_article(v, page)
+			title = new Template
+			title.add "in "
+			title.add mentity.mmodule.html_namespace
+			article.title = mentity.html_declaration
+			article.subtitle = title
 			article.source_link = v.tpl_showsource(mentity.location)
-		else if mentity isa MPropDef and page.mentity isa MClass then
-			article = make_mpropdef_article(v, doc, page)
-		else
-			article = mentity.tpl_article
-			article.subtitle = mentity.html_declaration
-			if mentity isa MPropDef then
-				article.source_link = v.tpl_showsource(mentity.location)
+			if mentity.is_intro and mentity.mmodule != page.mentity then
+				article.content = mentity.html_short_comment
 			end
+		else if mentity isa MPropDef then
+			if page.mentity isa MClass then
+				title = new Template
+				title.add mentity.html_icon
+				title.add mentity.html_declaration
+				article.title = title
+				article.subtitle = mentity.html_namespace
+				# TODO move in its own phase? let's see after doc_template refactoring.
+				# Add linearization
+				var all_defs = new HashSet[MPropDef]
+				for local_def in local_defs(page.as(MClassPage), mentity.mproperty) do
+					all_defs.add local_def
+					var smpropdef = local_def
+					while not smpropdef.is_intro do
+						smpropdef = smpropdef.lookup_next_definition(
+							doc.mainmodule, smpropdef.mclassdef.bound_mtype)
+						all_defs.add smpropdef
+					end
+				end
+				var lin = all_defs.to_a
+				doc.mainmodule.linearize_mpropdefs(lin)
+				if lin.length > 1 then
+					var lin_article = new TplArticle("{mentity.nitdoc_id}.lin")
+					lin_article.title = "Inheritance"
+					var lst = new UnorderedList
+					lst.css_classes.add("list-unstyled list-labeled")
+					for smpropdef in lin do
+						lst.add_li tpl_inheritance_item(smpropdef)
+					end
+					lin_article.content = lst
+					article.add_child lin_article
+				end
+			else
+				title = new Template
+				title.add "in "
+				title.add mentity.mclassdef.html_link
+				article.title = title
+				article.summary_title = "in {mentity.mclassdef.html_name}"
+			end
+			article.source_link = v.tpl_showsource(mentity.location)
 		end
 		for child in children do
 			child.render(v, doc, page, article)
 		end
 		parent.add_child article
-	end
-
-	# FIXME avoid diff while preserving TplArticle compatibility.
-
-	private fun make_mclass_article(v: RenderHTMLPhase, page: MEntityPage): TplArticle do
-		var article = mentity.tpl_article
-		article.subtitle = mentity.html_namespace
-		article.content = null
-		return article
-	end
-
-	private fun make_mclassdef_article(v: RenderHTMLPhase, page: MEntityPage): TplArticle do
-		var mclassdef = mentity.as(MClassDef)
-		var article = mentity.tpl_article
-		if mclassdef.is_intro and mclassdef.mmodule != page.mentity then
-			article = mentity.tpl_short_article
-		end
-		var title = new Template
-		title.add "in "
-		title.add mclassdef.mmodule.html_namespace
-		article.subtitle = title
-		return article
-	end
-
-	private fun make_mpropdef_article(v: RenderHTMLPhase, doc: DocModel, page: MEntityPage): TplArticle
-	do
-		var mpropdef = mentity.as(MPropDef)
-		var mprop = mpropdef.mproperty
-		var article = new TplArticle(mprop.nitdoc_id)
-		var title = new Template
-		title.add mprop.tpl_icon
-		title.add "<span id='{mpropdef.nitdoc_id}'></span>"
-		if mpropdef.is_intro then
-			title.add mprop.html_link
-			title.add mprop.intro.html_signature
-		else
-			var cls_url = mprop.intro.mclassdef.mclass.nitdoc_url
-			var def_url = "{cls_url}#{mprop.nitdoc_id}"
-			var lnk = new TplLink.with_title(def_url, mprop.html_name,
-					"Go to introduction")
-			title.add "redef "
-			title.add lnk
-		end
-		article.title = title
-		article.title_classes.add "signature"
-		article.summary_title = "{mprop.html_name}"
-		article.subtitle = mpropdef.html_namespace
-		var comment = mpropdef.html_comment
-		if comment != null then
-			article.content = comment
-		end
-		# TODO move in its own phase? let's see after doc_template refactoring.
-		# Add linearization
-		var all_defs = new HashSet[MPropDef]
-		for local_def in local_defs(page.as(MClassPage), mprop) do
-			all_defs.add local_def
-			var smpropdef = local_def
-			while not smpropdef.is_intro do
-				smpropdef = smpropdef.lookup_next_definition(
-					doc.mainmodule, smpropdef.mclassdef.bound_mtype)
-				all_defs.add smpropdef
-			end
-		end
-		var lin = all_defs.to_a
-		doc.mainmodule.linearize_mpropdefs(lin)
-		if lin.length > 1 then
-			var lin_article = new TplArticle("{mpropdef.nitdoc_id}.lin")
-			lin_article.title = "Inheritance"
-			var lst = new TplList.with_classes(["list-unstyled", "list-labeled"])
-			for smpropdef in lin do
-				lst.add_li smpropdef.tpl_inheritance_item
-			end
-			lin_article.content = lst
-			article.add_child lin_article
-		end
-		return article
 	end
 
 	# Filter `page.mpropdefs` for this `mpropertie`.
@@ -754,21 +728,33 @@ redef class DefinitionArticle
 		end
 		return mpropdefs
 	end
+
+	private fun tpl_inheritance_item(mpropdef: MPropDef): ListItem do
+		var lnk = new Template
+		lnk.add new TplLabel.with_classes(css_classes)
+		lnk.add mpropdef.mclassdef.mmodule.html_namespace
+		lnk.add "::"
+		var atext = mpropdef.mclassdef.html_link.text
+		var ahref = "{mpropdef.mclassdef.mclass.nitdoc_url}#{mpropdef.mproperty.nitdoc_id}"
+		var atitle = mpropdef.mclassdef.html_link.title
+		var anchor = new Link.with_title(ahref, atext, atitle)
+		lnk.add anchor
+		var comment = mpropdef.html_short_comment
+		if comment != null then
+			lnk.add ": "
+			lnk.add comment
+		end
+		var li = new ListItem(lnk)
+		li.css_classes.add "signature"
+		return li
+	end
 end
 
 redef class IntrosRedefsListArticle
 	redef fun render(v, doc, page, parent) do
 		if mentities.is_empty then return
-		var title = list_title
-		# FIXME diff hack
-		var id = "intros"
-		if title == "Redefines" then id = "redefs"
-		var article = new TplArticle.with_title("{mentity.nitdoc_id}.{id}", title)
-		var list = new TplList.with_classes(["list-unstyled", "list-labeled"])
-		for mentity in mentities do
-			list.add_li mentity.tpl_list_item
-		end
-		article.content = list
+		var article = new TplArticle.with_title(list_title.to_lower, list_title)
+		article.content = write_to_string
 		parent.add_child article
 	end
 end
@@ -799,14 +785,8 @@ end
 redef class HierarchyListArticle
 	redef fun render(v, doc, page, parent) do
 		if mentities.is_empty then return
-		var title = list_title
-		var id = list_title.to_lower
-		var article = new TplArticle.with_title(id, title)
-		var list = new TplList.with_classes(["list-unstyled", "list-definition"])
-		for mentity in mentities do
-			list.elts.add mentity.tpl_list_item
-		end
-		article.content = list
+		var article = new TplArticle.with_title(list_title.to_lower, list_title)
+		article.content = write_to_string
 		parent.add_child article
 	end
 end
@@ -821,22 +801,12 @@ redef class GraphArticle
 		file.close
 		sys.system("\{ test -f {path_sh}.png && test -f {path_sh}.s.dot && diff -- {path_sh}.dot {path_sh}.s.dot >/dev/null 2>&1 ; \} || \{ cp -- {path_sh}.dot {path_sh}.s.dot && dot -Tpng -o{path_sh}.png -Tcmapx -o{path_sh}.map {path_sh}.s.dot ; \}")
 		var fmap = new FileReader.open("{path}.map")
-		var map = fmap.read_all
+		map = fmap.read_all
 		fmap.close
 
 		var article = new TplArticle("graph")
-		var alt = ""
-		# FIXME diff hack
-		# if title != null then
-			# article.title = title
-			# alt = "alt='{title.html_escape}'"
-		# end
 		article.css_classes.add "text-center"
-		var content = new Template
-		var name_html = id.html_escape
-		content.add "<img src='{name_html}.png' usemap='#{name_html}' style='margin:auto' {alt}/>"
-		content.add map
-		article.content = content
+		article.content = write_to_string
 		parent.add_child article
 	end
 end
@@ -848,309 +818,5 @@ redef class Location
 		var file_loc = getcwd.join_path(file.filename).simplify_path
 		var gith_loc = file_loc.substring(base_dir.length + 1, file_loc.length)
 		return "{gith_loc}:{line_start},{column_start}--{line_end},{column_end}"
-	end
-end
-
-redef class MEntity
-	# A template article that briefly describe the entity
-	fun tpl_short_article: TplArticle do
-		var tpl = tpl_article
-		var comment = html_short_comment
-		if comment != null then
-			tpl.content = comment
-		end
-		return tpl
-	end
-
-	# A template article that describe the entity
-	fun tpl_article: TplArticle do
-		var tpl = new TplArticle.with_title(nitdoc_id, tpl_title)
-		tpl.title_classes.add "signature"
-		tpl.subtitle = html_namespace
-		tpl.summary_title = html_name
-		return tpl
-	end
-
-	# A template definition of the mentity
-	# include name, sysnopsys, comment and namespace
-	fun tpl_definition: TplDefinition is abstract
-
-	# A li element that can go in a list
-	fun tpl_list_item: TplListItem do
-		var lnk = new Template
-		lnk.add new TplLabel.with_classes(tpl_css_classes)
-		lnk.add html_link
-		var comment = html_short_comment
-		if comment != null then
-			lnk.add ": "
-			lnk.add comment
-		end
-		return new TplListItem.with_content(lnk)
-	end
-
-	var tpl_css_classes = new Array[String]
-
-	# Box title for this mentity
-	fun tpl_title: Template do
-		var title = new Template
-		title.add tpl_icon
-		title.add html_namespace
-		return title
-	end
-
-	# Icon that will be displayed before the title
-	fun tpl_icon: TplIcon do
-		var icon = new TplIcon.with_icon("tag")
-		icon.css_classes.add_all(tpl_css_classes)
-		return icon
-	end
-end
-
-redef class MConcern
-	# Return a li element for `self` that can be displayed in a concern list
-	private fun tpl_concern_item: TplListItem do
-		var lnk = new Template
-		lnk.add html_link_to_anchor
-		var comment = html_short_comment
-		if comment != null then
-			lnk.add ": "
-			lnk.add comment
-		end
-		return new TplListItem.with_content(lnk)
-	end
-end
-
-redef class MProject
-	redef fun tpl_definition do
-		var tpl = new TplDefinition
-			var comment = html_comment
-		if comment != null then
-			tpl.comment = comment
-		end
-		return tpl
-	end
-
-	redef fun tpl_css_classes do return ["public"]
-end
-
-redef class MGroup
-	redef fun tpl_definition do
-		var tpl = new TplDefinition
-		var comment = html_comment
-		if comment != null then
-			tpl.comment = comment
-		end
-		return tpl
-	end
-end
-
-redef class MModule
-	redef fun tpl_definition do
-		var tpl = new TplClassDefinition
-		var comment = html_comment
-		if comment != null then
-			tpl.comment = comment
-		end
-		return tpl
-	end
-
-	redef fun tpl_css_classes do return ["public"]
-end
-
-redef class MClass
-	redef fun tpl_definition do return intro.tpl_definition
-
-	redef fun tpl_title do
-		var title = new Template
-		title.add tpl_icon
-		title.add html_link
-		return title
-	end
-
-	redef fun tpl_icon do return intro.tpl_icon
-	redef fun tpl_css_classes do return intro.tpl_css_classes
-end
-
-redef class MClassDef
-	redef fun tpl_article do
-		var tpl = new TplArticle(nitdoc_id)
-		tpl.summary_title = "in {mmodule.html_name}"
-		tpl.title = html_declaration
-		tpl.title_classes.add "signature"
-		var title = new Template
-		title.add "in "
-		title.add mmodule.html_namespace
-		tpl.subtitle = title
-		var comment = html_comment
-		if comment != null then
-			tpl.content = comment
-		end
-		return tpl
-	end
-
-	redef fun tpl_title do
-		var title = new Template
-		title.add tpl_icon
-		title.add html_link
-		return title
-	end
-
-	redef fun tpl_definition do
-		var tpl = new TplClassDefinition
-		var comment = html_comment
-		if comment != null then
-			tpl.comment = comment
-		end
-		return tpl
-	end
-
-	redef fun tpl_css_classes do
-		var set = new HashSet[String]
-		if is_intro then set.add "intro"
-		for m in mclass.intro.modifiers do set.add m.to_cmangle
-		for m in modifiers do set.add m.to_cmangle
-		return set.to_a
-	end
-
-	fun tpl_modifiers: Template do
-		var tpl = new Template
-		for modifier in modifiers do
-			if modifier == "public" then continue
-			tpl.add "{modifier.html_escape} "
-		end
-		return tpl
-	end
-end
-
-redef class MProperty
-	redef fun tpl_title do return intro.tpl_title
-	redef fun tpl_icon do return intro.tpl_icon
-	redef fun tpl_css_classes do return intro.tpl_css_classes
-end
-
-redef class MPropDef
-	redef fun tpl_article do
-		var tpl = new TplArticle(nitdoc_id)
-		tpl.summary_title = "in {mclassdef.html_name}"
-		var title = new Template
-		title.add "in "
-		title.add mclassdef.html_link
-		tpl.title = title
-		tpl.subtitle = html_declaration
-		var comment = html_comment
-		if comment != null then
-			tpl.content = comment
-		end
-		return tpl
-	end
-
-	redef fun tpl_definition do
-		var tpl = new TplDefinition
-		var comment = html_comment
-		if comment != null then
-			tpl.comment = comment
-		end
-		return tpl
-	end
-
-	redef fun tpl_css_classes do
-		var set = new HashSet[String]
-		if is_intro then set.add "intro"
-		for m in mproperty.intro.modifiers do set.add m.to_cmangle
-		for m in modifiers do set.add m.to_cmangle
-		return set.to_a
-	end
-
-	fun tpl_modifiers: Template do
-		var tpl = new Template
-		for modifier in modifiers do
-			if modifier == "public" then continue
-			tpl.add "{modifier.html_escape} "
-		end
-		return tpl
-	end
-
-	redef fun tpl_list_item do
-		var lnk = new Template
-		lnk.add new TplLabel.with_classes(tpl_css_classes.to_a)
-		var atext = html_link.text
-		var ahref = "{mclassdef.mclass.nitdoc_url}#{mproperty.nitdoc_id}"
-		var atitle = html_link.title
-		var anchor = new Link.with_title(ahref, atext, atitle)
-		lnk.add anchor
-		var comment = html_short_comment
-		if comment != null then
-			lnk.add ": "
-			lnk.add comment
-		end
-		return new TplListItem.with_content(lnk)
-	end
-
-	fun tpl_inheritance_item: TplListItem do
-		var lnk = new Template
-		lnk.add new TplLabel.with_classes(tpl_css_classes.to_a)
-		lnk.add mclassdef.mmodule.html_namespace
-		lnk.add "::"
-		var atext = mclassdef.html_link.text
-		var ahref = "{mclassdef.mclass.nitdoc_url}#{mproperty.nitdoc_id}"
-		var atitle = mclassdef.html_link.title
-		var anchor = new Link.with_title(ahref, atext, atitle)
-		lnk.add anchor
-		var comment = html_short_comment
-		if comment != null then
-			lnk.add ": "
-			lnk.add comment
-		end
-		var li = new TplListItem.with_content(lnk)
-		li.css_classes.add "signature"
-		return li
-	end
-end
-
-redef class ConcernsTree
-
-	private var seen = new HashSet[MConcern]
-
-	redef fun add(p, e) do
-		if seen.has(e) then return
-		seen.add e
-		super(p, e)
-	end
-
-	fun to_tpl: TplList do
-		var lst = new TplList.with_classes(["list-unstyled", "list-definition"])
-		for r in roots do
-			var li = r.tpl_concern_item
-			lst.add_li li
-			build_list(r, li)
-		end
-		return lst
-	end
-
-	private fun build_list(e: MConcern, li: TplListItem) do
-		if not sub.has_key(e) then return
-		var subs = sub[e]
-		var lst = new TplList.with_classes(["list-unstyled", "list-definition"])
-		for e2 in subs do
-			if e2 isa MGroup and e2.is_root then
-				build_list(e2, li)
-			else
-				var sli = e2.tpl_concern_item
-				lst.add_li sli
-				build_list(e2, sli)
-			end
-		end
-		li.append lst
-	end
-end
-
-redef class MInnerClassDef
-	redef fun tpl_definition do
-		var tpl = new TplClassDefinition
-		var comment = html_comment
-		if comment != null then
-			tpl.comment = comment
-		end
-		return tpl
 	end
 end
