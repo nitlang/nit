@@ -174,12 +174,13 @@ end
 extern class GtkWindow `{GtkWindow *`}
 	super GtkBin
 
-	new (flag: Int) `{
-		GtkWindow *win;
+	new (typ: GtkWindowType) `{
+		return (GtkWindow *)gtk_window_new(typ);
+	`}
 
-		win = GTK_WINDOW(gtk_window_new(flag));
-		g_signal_connect(win, "destroy", G_CALLBACK(gtk_main_quit), NULL);
-		return win;
+	# Connect the "destroy" signal to `quit_gtk`
+	fun connect_destroy_signal_to_quit `{
+		g_signal_connect(recv, "destroy", G_CALLBACK(gtk_main_quit), NULL);
 	`}
 
 	fun title=(title: String) import String.to_cstring `{
