@@ -1024,7 +1024,5 @@ extern class GdkColor `{GdkColor*`}
 end
 
 extern class GdkRGBA `{GdkRGBA*`}
-	new is extern `{
-	`}
 end
 
