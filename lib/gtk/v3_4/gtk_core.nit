@@ -386,6 +386,29 @@ extern class GtkBox `{ GtkBox * `}
 	new (orientation: GtkOrientation, spacing: Int) `{
 		return (GtkBox *)gtk_box_new(orientation, spacing);
 	`}
+
+	# Give the children of `self` equal space in the box?
+	fun omogeneous: Bool `{ return gtk_box_get_homogeneous(recv); `}
+
+	# Give the children of `self` equal space in the box?
+	fun omogeneous=(omogeneous: Bool) `{
+		gtk_box_set_homogeneous(recv, omogeneous);
+	`}
+
+	# Add `child` and pack it at the start of the box
+	fun pack_start(child: GtkWidget, expand, fill: Bool, padding: Int) `{
+		gtk_box_pack_start(recv, child, expand, fill, padding);
+	`}
+
+	# Add `child` and pack it at the end of the box
+	fun pack_end(child: GtkWidget, expand, fill: Bool, padding: Int) `{
+		gtk_box_pack_end(recv, child, expand, fill, padding);
+	`}
+
+	# Set the way `child` is packed in `self`
+	fun set_child_packing(child: GtkWidget, expand, fill: Bool, padding: Int, packing: GtkPackType) `{
+		gtk_box_set_child_packing(recv, child, expand, fill, padding, packing);
+	`}
 end
 
 # The tree interface used by GtkTreeView
