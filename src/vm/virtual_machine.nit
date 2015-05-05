@@ -106,8 +106,8 @@ class VirtualMachine super NaiveInterpreter
 		assert sup isa MClassType
 
 		# `sub` and `sup` can be discovered inside a Generic type during the subtyping test
-		if not sup.mclass.loaded then create_class(sup.mclass)
-		if not sub.mclass.loaded then create_class(sub.mclass)
+		if not sup.mclass.loaded then load_class(sup.mclass)
+		if not sub.mclass.loaded then load_class(sub.mclass)
 
 		# For now, always use perfect hashing for subtyping test
 		var super_id = sup.mclass.vtable.id
@@ -159,7 +159,7 @@ class VirtualMachine super NaiveInterpreter
 	# Redef init_instance to simulate the loading of a class
 	redef fun init_instance(recv: Instance)
 	do
-		if not recv.mtype.as(MClassType).mclass.loaded then create_class(recv.mtype.as(MClassType).mclass)
+		if not recv.mtype.as(MClassType).mclass.loaded then load_class(recv.mtype.as(MClassType).mclass)
 
 		recv.vtable = recv.mtype.as(MClassType).mclass.vtable
 
@@ -172,7 +172,7 @@ class VirtualMachine super NaiveInterpreter
 	# Associate a `PrimitiveInstance` to its `VTable`
 	redef fun init_instance_primitive(recv: Instance)
 	do
-		if not recv.mtype.as(MClassType).mclass.loaded then create_class(recv.mtype.as(MClassType).mclass)
+		if not recv.mtype.as(MClassType).mclass.loaded then load_class(recv.mtype.as(MClassType).mclass)
 
 		recv.vtable = recv.mtype.as(MClassType).mclass.vtable
 	end
@@ -192,8 +192,16 @@ class VirtualMachine super NaiveInterpreter
 		return attributes;
 	`}
 
-	# Creates the runtime structures for this class
-	fun create_class(mclass: MClass) do	mclass.make_vt(self)
+	# Load the class and create its runtime structures
+	fun load_class(mclass: MClass)
+	do
+		if mclass.loaded then return
+
+		# Recursively load superclasses
+		for parent in mclass.in_hierarchy(mainmodule).direct_greaters do load_class(parent)
+
+		mclass.make_vt(self)
+	end
 
 	# Execute `mproperty` for a `args` (where `args[0]` is the receiver).
 	redef fun send(mproperty: MMethod, args: Array[Instance]): nullable Instance
@@ -394,6 +402,14 @@ redef class MClass
 	# The `MMethod` this class introduced
 	var intro_mmethods = new Array[MMethod]
 
+	# The chosen prefix for this class.
+	# The prefix is the direct superclass which has the most properties,
+	# this class will stay at its usual position in virtual table and attribute table
+	var prefix: nullable MClass
+
+	# The linear extension of all superclasses with the prefix rule
+	var ordering: Array[MClass]
+
 	# All `MAttribute` this class contains
 	var mattributes = new Array[MAttribute]
 
@@ -401,13 +417,11 @@ redef class MClass
 	var mmethods = new Array[MMethod]
 
 	# Allocates a VTable for this class and gives it an id
-	private fun make_vt(v: VirtualMachine)
+	private fun make_vt(vm: VirtualMachine)
 	do
-		if loaded then return
-
-		# `superclasses` contains the order of superclasses for virtual tables
-		var superclasses = superclasses_ordering(v)
-		superclasses.remove(self)
+		# `ordering` contains the order of superclasses for virtual tables
+		ordering = superclasses_ordering(vm)
+		ordering.remove(self)
 
 		# Make_vt for super-classes
 		var ids = new Array[Int]
@@ -422,11 +436,10 @@ redef class MClass
 		# and the second and third are respectively class id and delta
 		var offset_methods = 3
 
-		# The previous element in `superclasses`
-		var previous_parent: nullable MClass = null
-		if superclasses.length > 0 then	previous_parent = superclasses[0]
-		for parent in superclasses do
-			if not parent.loaded then parent.make_vt(v)
+		var parent
+		var prefix_index = ordering.index_of(prefix.as(not null))
+		for i in [0..ordering.length[ do
+			parent = ordering[i]
 
 			# Get the number of introduced methods and attributes for this class
 			var methods = parent.intro_mmethods.length
@@ -446,9 +459,6 @@ redef class MClass
 			var pos_attr = -1
 			var pos_meth = -1
 
-			if previous_parent.as(not null).positions_attributes[parent] == offset_attributes then pos_attr = offset_attributes
-			if previous_parent.as(not null).positions_methods[parent] == offset_methods then pos_meth = offset_methods
-
 			parent.update_positions(pos_attr, pos_meth, self)
 
 			offset_attributes += attributes
@@ -457,16 +467,16 @@ redef class MClass
 		end
 
 		# When all super-classes have their identifiers and vtables, allocate current one
-		allocate_vtable(v, ids, nb_methods, nb_attributes, offset_attributes, offset_methods)
+		allocate_vtable(vm, ids, nb_methods, nb_attributes, offset_attributes, offset_methods)
 		loaded = true
 
 		# Set the absolute position of the identifier of this class in the virtual table
 		color = offset_methods - 2
 
 		# The virtual table now needs to be filled with pointer to methods
-		superclasses.add(self)
-		for cl in superclasses do
-			fill_vtable(v, vtable.as(not null), cl)
+		ordering.add(self)
+		for cl in ordering do
+			fill_vtable(vm, vtable.as(not null), cl)
 		end
 	end
 
@@ -544,20 +554,21 @@ redef class MClass
 		vtable.internal_vtable = v.memory_manager.init_vtable(ids_total, nb_methods_total, deltas, vtable.mask)
 	end
 
-	# Fill the vtable with methods of `self` class
-	# * `v` : Current instance of the VirtualMachine
-	# * `table` : the table of self class, will be filled with its methods
-	private fun fill_vtable(v:VirtualMachine, table: VTable, cl: MClass)
+	# Fill the vtable with local methods for `self` class
+	# * `vm` Current instance of the VirtualMachine
+	# * `table` the table of self class, will be filled with its methods
+	# * `cl` The class which introduced the methods
+	private fun fill_vtable(vm: VirtualMachine, table: VTable, cl: MClass)
 	do
 		var methods = new Array[MMethodDef]
 		for m in cl.intro_mmethods do
 			# `propdef` is the most specific implementation for this MMethod
-			var propdef = m.lookup_first_definition(v.mainmodule, self.intro.bound_mtype)
+			var propdef = m.lookup_first_definition(vm.mainmodule, self.intro.bound_mtype)
 			methods.push(propdef)
 		end
 
 		# Call a method in C to put propdefs of self methods in the vtables
-		v.memory_manager.put_methods(vtable.internal_vtable, vtable.mask, cl.vtable.id, methods)
+		vm.memory_manager.put_methods(vtable.internal_vtable, vtable.mask, cl.vtable.id, methods)
 	end
 
 	# Computes delta for each class
@@ -594,6 +605,7 @@ redef class MClass
 			return ordering
 		else
 			# There is no super-class, self is Object
+			prefix = self
 			return superclasses
 		end
 	end
@@ -625,6 +637,8 @@ redef class MClass
 			end
 
 			if prefix != null then
+				if self.prefix == null then self.prefix = prefix
+
 				# Add the prefix class ordering at the beginning of our sequence
 				var prefix_res = new Array[MClass]
 				prefix_res = prefix.dfs(v, prefix_res)
@@ -646,6 +660,8 @@ redef class MClass
 			res.push(self)
 		else
 			if direct_parents.length > 0 then
+				if prefix == null then prefix = direct_parents.first
+
 				res = direct_parents.first.dfs(v, res)
 			end
 		end
