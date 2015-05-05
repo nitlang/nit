@@ -336,9 +336,9 @@ end
 extern class GtkGrid `{GtkGrid *`}
 	super GtkContainer
 
-	# Create a grid with a fixed number of rows and columns
-	new ( rows : Int, columns : Int, homogeneous : Bool ) `{
-		return (GtkGrid*)gtk_grid_new(); // rows, columns, homogeneous );
+	# Create a new grid
+	new `{
+		return (GtkGrid*)gtk_grid_new();
 	`}
 
 	# Set a widget child inside the grid at a given position
