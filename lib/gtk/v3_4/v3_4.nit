@@ -15,7 +15,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-module v3_4 is pkgconfig("gtk+-3.0")
+module v3_4 is pkgconfig "gtk+-3.0"
 
 import gtk_widgets_ext
 import gtk_dialogs

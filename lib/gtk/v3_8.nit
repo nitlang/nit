@@ -21,7 +21,7 @@ import v3_6
 
 redef class GtkWidget
 	# Get the visibility of the widget, check if it's parents are visible too
-	fun visible: Bool is extern `{
+	fun visible: Bool `{
 		return gtk_widget_is_visible(recv);
 	`}
 end
