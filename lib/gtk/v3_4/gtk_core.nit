@@ -16,7 +16,10 @@
 # limitations under the License.
 
 # Classes and services to use libGTK widgets
-module gtk_core is pkgconfig("gtk+-3.0")
+module gtk_core is
+	pkgconfig "gtk+-3.0"
+	cflags "-Wno-deprecated-declarations"
+end
 
 import gtk_enums
 import gdk_enums
