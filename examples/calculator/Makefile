@@ -1,8 +1,7 @@
 all:
 	mkdir -p bin/
 
-	# Compile in global mode to silence warnings on unused GTK deprecated
-	../../bin/nitc --global --dir bin/ src/calculator_gtk.nit src/calculator_test.nit
+	../../bin/nitc --dir bin/ src/calculator_gtk.nit src/calculator_test.nit
 
 android:
 	mkdir -p bin/ res/

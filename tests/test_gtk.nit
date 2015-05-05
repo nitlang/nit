@@ -47,9 +47,10 @@ class MyApp
 	do
 		init_gtk
 
-		win = new GtkWindow( 0 )
+		win = new GtkWindow(new GtkWindowType.toplevel)
+		win.connect_destroy_signal_to_quit
 
-		container = new GtkGrid(2,1,true)
+		container = new GtkGrid
 		win.add( container )
 
 		lbl = new GtkLabel( "Hello world" )
