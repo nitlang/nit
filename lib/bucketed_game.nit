@@ -48,20 +48,16 @@ class Buckets[G: Game]
 	# Bucket type used in this implementation.
 	type BUCKET: HashSet[Bucketable[G]]
 
-	private var buckets: Array[BUCKET] is noinit
-
 	private var next_bucket: nullable BUCKET = null
 	private var current_bucket_key: Int = -1
 
-	init
-	do
-		var n_buckets = 100
-		buckets = new Array[BUCKET].with_capacity(n_buckets)
+	# Number of `buckets`, default at 100
+	#
+	# Must be set prior to using any other methods of this class.
+	var n_buckets = 100
 
-		for b in [0 .. n_buckets [do
-			buckets[b] = new HashSet[Bucketable[G]]
-		end
-	end
+	private var buckets: Array[BUCKET] =
+		[for b in n_buckets.times do new HashSet[Bucketable[G]]] is lazy
 
 	# Add the Bucketable event `e` at `at_tick`.
 	fun add_at(e: Bucketable[G], at_tick: Int)

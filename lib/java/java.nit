@@ -165,7 +165,7 @@ redef extern class JavaObject
 
 	# Pops the current local reference frame and return a valid reference to self
 	#
-	# Similiar to `JavaVM::pop_local_frame` but returns a value.
+	# Similar to `JavaVM::pop_local_frame` but returns a value.
 	fun pop_from_local_frame: SELF
 	do
 		var jni_env = sys.jni_env

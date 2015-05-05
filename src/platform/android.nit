@@ -197,8 +197,7 @@ $(call import-module,android/native_app_glue)
 		android:label="@string/app_name"
 		android:hasCode="true"
 		android:debuggable="{{{not release}}}"
-		{{{icon_declaration}}}
-		android:configChanges="mcc|mnc|locale|touchscreen|keyboard|keyboardHidden|navigation|screenLayout|fontScale|uiMode|orientation">
+		{{{icon_declaration}}}>
 """
 
 		for activity in project.activities do
