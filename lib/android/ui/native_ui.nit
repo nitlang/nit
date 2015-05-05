@@ -23,6 +23,7 @@ in "Java" `{
 	import android.app.Activity;
 
 	import android.view.Gravity;
+	import android.view.View;
 	import android.view.ViewGroup;
 	import android.view.ViewGroup.MarginLayoutParams;
 
@@ -60,6 +61,19 @@ extern class NativeView in "Java" `{ android.view.View `}
 
 	fun minimum_width=(val: Int) in "Java" `{ recv.setMinimumWidth((int)val); `}
 	fun minimum_height=(val: Int) in "Java" `{ recv.setMinimumHeight((int)val); `}
+
+	fun enabled: Bool in "Java" `{ return recv.isEnabled(); `}
+	fun enabled=(value: Bool) in "Java" `{
+		final View final_recv = recv;
+		final boolean final_value = value;
+
+		((Activity)recv.getContext()).runOnUiThread(new Runnable() {
+			@Override
+			public void run()  {
+				final_recv.setEnabled(final_value);
+			}
+		});
+	`}
 end
 
 # A collection of `NativeView`
@@ -67,6 +81,11 @@ extern class NativeViewGroup in "Java" `{ android.view.ViewGroup `}
 	super NativeView
 
 	fun add_view(view: NativeView) in "Java" `{ recv.addView(view); `}
+
+	fun add_view_with_weight(view: NativeView, weight: Float)
+	in "Java" `{
+		recv.addView(view, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT, (float)weight));
+	`}
 end
 
 # A `NativeViewGroup` organized in a line
@@ -84,11 +103,6 @@ extern class NativeLinearLayout in "Java" `{ android.widget.LinearLayout `}
 			LinearLayout.LayoutParams.MATCH_PARENT,
 			LinearLayout.LayoutParams.WRAP_CONTENT);
 		recv.addView(view, params);
-	`}
-
-	fun add_view_with_weight(view: NativeView, weight: Float)
-	in "Java" `{
-		recv.addView(view, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT, (float)weight));
 	`}
 end
 
@@ -139,23 +153,13 @@ extern class NativeTextView in "Java" `{ android.widget.TextView `}
 		});
 	`}
 
-	fun enabled: Bool in "Java" `{ return recv.isEnabled(); `}
-	fun enabled=(value: Bool) in "Java" `{
-		final TextView final_recv = recv;
-		final boolean final_value = value;
-
-		((Activity)recv.getContext()).runOnUiThread(new Runnable() {
-			@Override
-			public void run()  {
-				final_recv.setEnabled(final_value);
-			}
-		});
-	`}
-
 	fun gravity_center in "Java" `{
 		recv.setGravity(Gravity.CENTER);
 	`}
 
+	fun text_size: Float in "Java" `{
+		return recv.getTextSize();
+	`}
 	fun text_size=(dpi: Float) in "Java" `{
 		recv.setTextSize(android.util.TypedValue.COMPLEX_UNIT_DIP, (float)dpi);
 	`}
