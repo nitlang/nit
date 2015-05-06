@@ -32,20 +32,44 @@ class StructurePhase
 
 	# Populates the given DocModel.
 	redef fun apply do
-		for page in doc.pages do
-			if page isa MEntityPage then page.apply_structure(self, doc)
-		end
+		for page in doc.pages do page.apply_structure(self, doc)
 	end
-
-	# TODO index and search page should also be structured here
 end
 
-redef class MEntityPage
+redef class DocPage
 
 	# Populates `self` with structure elements like DocComposite ones.
 	#
 	# See `StructurePhase`.
 	fun apply_structure(v: StructurePhase, doc: DocModel) do end
+end
+
+redef class OverviewPage
+	redef fun apply_structure(v, doc) do
+		var article = new HomeArticle
+		root.add_child article
+		# Projects list
+		var mprojects = doc.model.mprojects.to_a
+		var sorter = new MConcernRankSorter
+		sorter.sort mprojects
+		var section = new ProjectsSection
+		for mproject in mprojects do
+			section.add_child new DefinitionArticle(mproject)
+		end
+		article.add_child section
+	end
+end
+
+redef class SearchPage
+	redef fun apply_structure(v, doc) do
+		var mmodules = doc.mmodules.to_a
+		v.name_sorter.sort(mmodules)
+		var mclasses = doc.mclasses.to_a
+		v.name_sorter.sort(mclasses)
+		var mprops = doc.mproperties.to_a
+		v.name_sorter.sort(mprops)
+		root.add_child new IndexArticle(mmodules, mclasses, mprops)
+	end
 end
 
 redef class MGroupPage
@@ -67,11 +91,11 @@ redef class MGroupPage
 		mentity.booster_rank = 0
 		section.add_child new ConcernsArticle(mentity, concerns)
 		for mentity in concerns do
+			var ssection = new ConcernSection(mentity)
 			if mentity isa MModule then
-				section.add_child new DefinitionArticle(mentity)
-			else
-				section.add_child new ConcernSection(mentity)
+				ssection.add_child new DefinitionArticle(mentity)
 			end
+			section.add_child ssection
 		end
 	end
 end
@@ -293,4 +317,28 @@ end
 # An article that display the definition text of a MEntity.
 class DefinitionArticle
 	super MEntityArticle
+end
+
+# The main project article.
+class HomeArticle
+	super DocArticle
+end
+
+# The project list.
+class ProjectsSection
+	super DocArticle
+end
+
+# An article that display an index of mmodules, mclasses and mproperties.
+class IndexArticle
+	super DocArticle
+
+	# List of mmodules to display.
+	var mmodules: Array[MModule]
+
+	# List of mclasses to display.
+	var mclasses: Array[MClass]
+
+	# List of mproperties to display.
+	var mprops: Array[MProperty]
 end
