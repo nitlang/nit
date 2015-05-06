@@ -40,6 +40,12 @@ redef class AModule
 	do
 		var v = new SimpleMiscVisitor(toolcontext)
 		v.enter_visit(self)
+
+		var t = location.file.first_token
+		while t != null do
+			t.accept_simple_misc_token(v)
+			t = t.next_token
+		end
 	end
 end
 
@@ -71,6 +77,12 @@ redef class ANode
 		after_simple_misc(v)
 	end
 	private fun after_simple_misc(v: SimpleMiscVisitor) do end
+end
+
+redef class Token
+	private fun accept_simple_misc_token(v: SimpleMiscVisitor)
+	do
+	end
 end
 
 redef class ASignature
@@ -166,5 +178,27 @@ redef class AOnceExpr
 		super
 
 		v.once_count = v.once_count - 1
+	end
+end
+
+redef class TSemi
+	redef fun accept_simple_misc_token(v)
+	do
+		var n = next_token
+		var p = prev_token
+		if
+			n == null or
+			n isa TEol or
+			n isa EOF or
+			n isa TComment or
+			p == null or
+			p isa TEol or
+			p isa EOF or
+			p isa TComment or
+			p isa TSemi
+		then
+			v.warning(self, "semi", "Warning: superfluous `;`.")
+			return
+		end
 	end
 end
