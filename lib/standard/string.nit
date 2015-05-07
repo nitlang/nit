@@ -849,6 +849,39 @@ abstract class Text
 		return hash_cache.as(not null)
 	end
 
+	# Gives the formatted string back as a Nit string with `args` in place
+	#
+	# 	assert "This %1 is a %2.".format("String", "formatted String") == "This String is a formatted String"
+	# 	assert "\\%1 This string".format("String") == "\\%1 This string"
+	fun format(args: Object...): String do
+		var s = new Array[Text]
+		var curr_st = 0
+		var i = 0
+		while i < length do
+			# Skip escaped characters
+			if self[i] == '\\' then
+				i += 1
+			# In case of format
+			else if self[i] == '%' then
+				var fmt_st = i
+				i += 1
+				var ciph_st = i
+				while i < length and self[i].is_numeric do
+					i += 1
+				end
+				i -= 1
+				var fmt_end = i
+				var ciph_len = fmt_end - ciph_st + 1
+				s.push substring(curr_st, fmt_st - curr_st)
+				s.push args[substring(ciph_st, ciph_len).to_i - 1].to_s
+				curr_st = i + 1
+			end
+			i += 1
+		end
+		s.push substring(curr_st, length - curr_st)
+		return s.to_s
+	end
+
 end
 
 # All kinds of array-based text representations.
