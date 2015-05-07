@@ -20,7 +20,7 @@
 # In order to reproduce executions, the behavior of the application must be deterministic
 # for a given sequence of inputs.
 # The main source of differences in executions is caused by the `rand` function,
-# Set the environment variable `MNIT_SRAND` to a value to force srand to be initialized with this value.
+# Set the environment variable `NIT_SRAND` to a value to force srand to be initialized with this value.
 #
 # The input event file is made of event descriptions, one event by line.
 #
@@ -75,13 +75,6 @@ redef class App
 
 	redef fun setup
 	do
-		var env = "MNIT_SRAND".environ
-		if env != "" then
-			srand_from(env.to_i)
-		else
-			srand_from(0)
-		end
-
 		var input = "MNIT_READ_INPUT".environ
 		if input != "" then
 			injected_input_stream = new FileReader.open(input)

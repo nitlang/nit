@@ -60,3 +60,11 @@ redef class NativeString
 	private fun get_environ: NativeString is extern "string_NativeString_NativeString_get_environ_0"
 	private fun setenv( v : NativeString ) is extern "string_NativeString_NativeString_setenv_1"
 end
+
+redef class Sys
+	redef init
+	do
+		var x = "NIT_SRAND".environ
+		if x != "" then srand_from(x.to_i)
+	end
+end

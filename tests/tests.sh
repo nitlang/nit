@@ -21,7 +21,7 @@
 export LANG=C
 export LC_ALL=C
 export NIT_TESTING=true
-export MNIT_SRAND=0
+export NIT_SRAND=0
 
 unset NIT_DIR
 
