@@ -542,8 +542,8 @@ class WikiArticle
 	# Extract the markdown text from `source_file`.
 	#
 	# REQUIRE: `has_source`.
-	var md: String is lazy do
-		assert has_source
+	var md: nullable String is lazy do
+		if not has_source then return null
 		var file = new FileReader.open(src_full_path.to_s)
 		var md = file.read_all
 		file.close
