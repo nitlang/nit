@@ -16,7 +16,6 @@
 module wiki_base
 
 import template::macro
-import markdown
 import opts
 import ini
 
@@ -516,18 +515,13 @@ class WikiArticle
 	# Page content.
 	#
 	# What you want to be displayed in the page.
-	var content: nullable Writable = null
+	var content: nullable Writable = null is writable
 
-	# Headlines ids and titles.
-	var headlines = new ArrayMap[String, HeadLine]
-
-	# Create a new articleu sing a markdown source file.
+	# Create a new article using a markdown source file.
 	init from_source(wiki: Nitiwiki, md_file: String) do
 		src_full_path = md_file
 		init(wiki, md_file.basename(".md"))
-		var md_proc = new MarkdownProcessor
-		content = md_proc.process(md)
-		headlines = md_proc.emitter.decorator.headlines
+		content = md
 	end
 
 	redef var src_full_path: nullable String = null
