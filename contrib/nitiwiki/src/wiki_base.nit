@@ -105,7 +105,7 @@ class Nitiwiki
 		end
 	end
 
-	# Display msg if `level >= verbose_level`
+	# Display msg if `level <= verbose_level`
 	fun message(msg: String, level: Int) do
 		if level <= verbose_level then print msg
 	end
@@ -163,6 +163,7 @@ class Nitiwiki
 	# `path` is used to determine the ancestor sections.
 	protected fun new_article(path: String): WikiArticle do
 		if entries.has_key(path) then return entries[path].as(WikiArticle)
+		message("Found article `{path}`", 2)
 		var article = new WikiArticle.from_source(self, path)
 		var section = new_section(path.dirname)
 		section.add_child(article)
@@ -447,7 +448,7 @@ class WikiSection
 	private fun try_load_config do
 		var cfile = wiki.expand_path(wiki.config.root_dir, src_path, wiki.config_filename)
 		if not cfile.file_exists then return
-		wiki.message("Custom config for section {name}", 2)
+		wiki.message("Custom config for section {name}", 1)
 		config = new SectionConfig(cfile)
 	end
 
