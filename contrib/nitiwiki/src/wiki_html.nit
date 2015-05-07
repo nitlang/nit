@@ -20,7 +20,8 @@ import wiki_base
 redef class Nitiwiki
 
 	# Render HTML output looking for changes in the markdown sources.
-	fun render do
+	redef fun render do
+		super
 		if not root_section.is_dirty and not force_render then return
 		var out_dir = expand_path(config.root_dir, config.out_dir)
 		out_dir.mkdir

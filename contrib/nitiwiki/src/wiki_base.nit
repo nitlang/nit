@@ -72,6 +72,9 @@ class Nitiwiki
 		end
 	end
 
+	# Render output.
+	fun render do end
+
 	# Show wiki status.
 	fun status do
 		print "nitiWiki"
