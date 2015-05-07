@@ -289,6 +289,9 @@ end
 class TAt
 	super Token
 end
+class TSemi
+	super Token
+end
 class TClassid
 	super Token
 end
