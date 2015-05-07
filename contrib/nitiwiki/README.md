@@ -128,6 +128,55 @@ For more details on each option see `WikiConfig`.
 
 To add content in your wiki simply add markdown files (with `.md` extension) into the `pages/` folder.
 
+#### Write content
+
+Nitiwiki only support content written in
+[markdown format](http://daringfireball.net/projects/markdown/).
+
+#### Link wiki articles
+
+In nitiwiki, linking to a section or an article is done using the *wikilinks*.
+
+Wikilinks provide easy linking between pages of the wiki.
+To create a wikilink, just put the name of the page to link to in double brackets.
+For example `[[WikiLink]]`.
+
+If you ever need to write something like `[[WikiLink]]` without creating a wikilink,
+just prefix it with a `\\`, like `\\[[WikiLink]]`.
+
+There are some special linking precedence that come into play when linking between
+sections and sub-sections.
+
+Nitiwiki will chose the first entry that match the given wikilinks in that order:
+1. Looks in the current section
+2. Looks in the current section children recursively
+3. Looks in the current section parents until root
+
+To link to or from a subpage, you can use a regular wikilink that does not
+contain the name of the parent directory of the subpage.
+Nikiwiki descends the directory hierarchy looking for a page that matches your link.
+
+For example, if `FooBar/SubPage` links to `OtherPage`, nikiwiki will first prefer
+pointing the link to `FooBar/SubPage/OtherPage` if it exists, next to
+`FooBar/OtherPage` and finally to `OtherPage` in the root of the wiki.
+
+You can also specify a link that contains a relative section name,
+like `FooBar/OtherPage` to specify what page to link to.
+
+You can also use `/` at the start of a link, to specify exactly which page to link to,
+when there are multiple pages with similar names and the link goes to the wrong page by default.
+For example, linking from `FooBar/SubPage` to `/OtherPage` will link to the `OtherPage`
+in the root of the wiki, even if there is a `FooBar/OtherPage`.
+
+It's also possible to write a wikilink that uses something other than the page
+name as the link text.
+For example `[[Contact|Contact me!]]` links to the `Contact` page, but the link
+will appear like this: `Contact me!`.
+
+You can link to an anchor inside a page, using something like `[[WikiLink#foo]]`.
+
+#### Render the wiki in HTML
+
 Once you have done your changes, use:
 
 	nitiwiki --status
