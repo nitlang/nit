@@ -1436,12 +1436,13 @@ class SeparateCompilerVisitor
 		if compiler.modelbuilder.toolcontext.opt_invocation_metrics.value then add("count_invoke_by_tables++;")
 
 		assert arguments.length == mmethod.intro.msignature.arity + 1 else debug("Invalid arity for {mmethod}. {arguments.length} arguments given.")
-		var recv = arguments.first
 
 		var res0 = before_send(mmethod, arguments)
 
 		var runtime_function = mmethod.intro.virtual_runtime_function
 		var msignature = runtime_function.called_signature
+
+		adapt_signature(mmethod.intro, arguments)
 
 		var res: nullable RuntimeVariable
 		var ret = msignature.return_mtype
@@ -1451,18 +1452,7 @@ class SeparateCompilerVisitor
 			res = self.new_var(ret)
 		end
 
-		var ss = new FlatBuffer
-
-		ss.append("{recv}")
-		for i in [0..msignature.arity[ do
-			var a = arguments[i+1]
-			var t = msignature.mparameters[i].mtype
-			if i == msignature.vararg_rank then
-				t = arguments[i+1].mcasttype
-			end
-			a = self.autobox(a, t)
-			ss.append(", {a}")
-		end
+		var ss = arguments.join(", ")
 
 		var const_color = mentity.const_color
 		var ress
