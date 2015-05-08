@@ -24,6 +24,7 @@ app_name "app.nit Calc."
 end
 
 import app::ui
+import app::data_store
 import android::aware
 
 import calculator_logic
@@ -91,5 +92,23 @@ class CalculatorWindow
 
 			display.text = context.display_text
 		end
+	end
+
+	redef fun on_save_state
+	do
+		app.data_store["context"] = context.to_json
+		super
+	end
+
+	redef fun on_restore_state
+	do
+		super
+
+		var save = app.data_store["context"]
+		if save == null then return
+		assert save isa String
+
+		self.context = new CalculatorContext.from_json(save)
+		display.text = context.display_text
 	end
 end
