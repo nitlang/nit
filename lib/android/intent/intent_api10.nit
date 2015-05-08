@@ -18,7 +18,7 @@
 # `android.content.Intent` for the android platform
 module intent_api10
 
-import native_app_glue
+import dalvik
 import android::bundle
 import serialization
 private import json_serialization
@@ -33,6 +33,8 @@ in "Java" `{
 
 extern class NativeIntent in "Java" `{ android.content.Intent `}
 	super JavaObject
+
+	new in "Java" `{ return new Intent(); `}
 
 	fun add_category(category: JavaString) in "Java" `{ recv.addCategory(category); `}
 	fun add_flags(flags: Int) in "Java" `{ recv.addFlags((int)flags); `}
@@ -626,23 +628,7 @@ end
 
 # Services allowing to launch an activity and start/stop services
 class Intent
-	protected var intent: NativeIntent
-	protected var context: NativeActivity
-
-	init (app: App)
-	do
-		self.context = app.native_activity
-		setup
-	end
-
-	private fun set_vars(intent: NativeIntent) do
-		self.intent = intent.new_global_ref
-	end
-
-	private fun setup import context, intent, set_vars in "Java" `{
-		Intent intent = new Intent();
-		Intent_set_vars(recv, intent);
-	`}
+	protected var intent: NativeIntent = (new NativeIntent).new_global_ref is lazy
 
 	# The general action to be performed
 	#
