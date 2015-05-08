@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Tools and utilities for language targetted FFI implementations
+# Tools and utilities for implement FFI with different languages
 module light_ffi_base
 
 import c_tools
@@ -23,9 +23,13 @@ import modelbuilder
 import nitni::nitni_utilities
 
 redef class ToolContext
+	# Phase that assign a `FFILanguage` to all `AExternCodeBlock`
 	var ffi_language_assignation_phase: Phase = new FFILanguageAssignationPhase(self, null)
 end
 
+# Phase that assign a `FFILanguage` to all `AExternCodeBlock`
+#
+# It will also report errors when using an unknown foreign langages.
 class FFILanguageAssignationPhase
 	super Phase
 
@@ -75,27 +79,34 @@ class FFILanguageAssignationPhase
 end
 
 redef class MModule
+	# All FFI files linked to this module
 	var ffi_files = new Array[ExternFile]
 end
 
 redef class AExternCodeBlock
+	# User entered name for the language of this block
 	fun language_name: nullable String do
 		if n_in_language == null then return null
 		return n_in_language.n_string.without_quotes
 	end
-	fun language_name_lowered: nullable String do
+
+	# `language_name`, in lower case
+	protected fun language_name_lowered: nullable String do
 		if language_name == null then return null
 		return language_name.to_lower
 	end
 
+	# User entered foreign code in the block
 	fun code: String do return n_extern_code_segment.without_guard
 
+	# `FFILanguage` assigned to this block
 	var language: nullable FFILanguage = null
 end
 
 # Visitor for a specific languages. Works kinda like a `Phase` and is executed
 # by a `Phase`.
 class FFILanguage
+	# `FFILanguageAssignationPhase` assigning `self` to `AExternCodeBlock`s
 	var ffi_language_assignation_phase: FFILanguageAssignationPhase
 
 	init
@@ -143,6 +154,7 @@ redef class TExternCodeSegment
 end
 
 redef class CCompilationUnit
+	# Compile as `_ffi` files which contains the implementation of extern methods
 	fun write_as_impl(mmodule: MModule, compdir: String)
 	do
 		var base_name = "{mmodule.c_name}._ffi"
@@ -157,6 +169,7 @@ redef class CCompilationUnit
 		files.add( "{compdir}/{c_file}" )
 	end
 
+	# Write the header part to `file` including all `includes` using the `guard`
 	fun write_header_to_file(mmodule: MModule, file: String, includes: Array[String], guard: String)
 	do
 		var stream = new FileWriter.open( file )
@@ -178,6 +191,7 @@ redef class CCompilationUnit
 		stream.close
 	end
 
+	# Write the body part to `file` including all `includes`
 	fun write_body_to_file(mmodule: MModule, file: String, includes: Array[String])
 	do
 		var stream = new FileWriter.open(file)
@@ -193,6 +207,8 @@ redef class CCompilationUnit
 	end
 end
 
+# Foreign equivalent types of extern classes
 class ForeignType
+	# C type of `self`, by default it is `void*`
 	fun ctype: String do return "void*"
 end

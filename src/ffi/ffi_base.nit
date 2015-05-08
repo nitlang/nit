@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Tools and utilities for language targetted FFI implementations
+# Tools and utilities for implement FFI with different languages
 module ffi_base
 
 import c_tools

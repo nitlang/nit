@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# FFI support for the compilers
+# Full FFI support for the compiler
 module compiler_ffi
 
 intrude import light

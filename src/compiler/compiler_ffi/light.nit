@@ -14,13 +14,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# FFI support for the compilers
+# Light FFI support for the compiler
 module light
 
 intrude import abstract_compiler
 intrude import ffi::light_ffi
 
 redef class MModule
+	# `CCompilationUnit` used for nitni signatures and code specific to the compiler
 	var nitni_ccu: nullable CCompilationUnit = null
 
 	private fun nmodule(v: AbstractCompilerVisitor): nullable AModule
@@ -82,7 +83,6 @@ redef class AMethPropdef
 	private fun compile_ffi_support_to_c(v: AbstractCompilerVisitor)
 	do
 		var mmodule = mpropdef.mclassdef.mmodule
-		var mainmodule = v.compiler.mainmodule
 		var amodule = v.compiler.modelbuilder.mmodule2node(mmodule)
 		var mclass_type = mpropdef.mclassdef.bound_mtype
 
@@ -220,6 +220,7 @@ redef class AMethPropdef
 end
 
 redef class CCompilationUnit
+	# Compile a `_nitni` files, used to implement nitni features for the compiler
 	fun write_as_nitni(mmodule: MModule, compdir: String)
 	do
 		var base_name = "{mmodule.c_name}._nitni"
