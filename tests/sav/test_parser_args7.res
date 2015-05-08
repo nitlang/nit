@@ -14,6 +14,7 @@
 --> AForExpr 1,1--15
   TKwfor "for" 1,1--3
   TId "i" 1,5
+  TKwin "in" 1,7--8
   ACallExpr 1,10
     AImplicitSelfExpr 1,10
     TId "x" 1,10
@@ -30,7 +31,8 @@
       TKwmeth "fun" 1,1--3
       AIdMethid 1,5--7
         TId "foo" 1,5--7
-      ASignature 1,12
+      ASignature 1,9
+      TKwdo "do" 1,9--10
       ACallExpr 1,12
         AImplicitSelfExpr 1,12
         TId "z" 1,12
@@ -38,6 +40,7 @@
 --> ... ... AForExpr 1,1--3,3
   TKwfor "for" 1,1--3
   TId "i" 1,5
+  TKwin "in" 1,7--8
   ACallExpr 1,10
     AImplicitSelfExpr 1,10
     TId "x" 1,10
@@ -56,11 +59,13 @@
       TKwmeth "fun" 1,1--3
       AIdMethid 1,5--7
         TId "foo" 1,5--7
-      ASignature 2,1
+      ASignature 1,9
+      TKwdo "do" 1,9--10
       ABlockExpr 2,1--5,3
         AForExpr 2,1--4,3
           TKwfor "for" 2,1--3
           TId "i" 2,5
+          TKwin "in" 2,7--8
           ACallExpr 2,10
             AImplicitSelfExpr 2,10
             TId "x" 2,10
