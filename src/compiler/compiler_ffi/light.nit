@@ -98,10 +98,17 @@ redef class AMethPropdef
 		mmodule.ensure_compile_nitni_base(v)
 	end
 
+	# Should we compile the extern method `self`?
+	#
+	# Returns false when restricting to the light FFI on methods using callbacks.
+	fun accept_externmeth: Bool do return true
+
 	redef fun compile_externmeth_to_c(v, mpropdef, arguments)
 	do
 		# if using the old native interface fallback on previous implementation
 		if n_extern_code_block == null then return super
+
+		if not accept_externmeth then return false
 
 		var mmodule = mpropdef.mclassdef.mmodule
 		mmodule.uses_ffi = true
@@ -163,6 +170,8 @@ redef class AMethPropdef
 	do
 		# if using the old native interface fallback on previous implementation
 		if n_extern_code_block == null then return super
+
+		if not accept_externmeth then return false
 
 		var mmodule = mpropdef.mclassdef.mmodule
 		mmodule.uses_ffi = true
