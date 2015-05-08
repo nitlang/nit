@@ -88,12 +88,9 @@ redef class IssueCommentEvent
 
 	# Rewards player for review comments.
 	#
-	# Actuallty we look if the comment contains the string `"+1"`.
-	#
 	# TODO only give nitcoins if reviewers < 2
 	redef fun react_player_event(r, game) do
-		# FIXME use a more precise way to locate reviews
-		if comment.body.has("\\+1\\b".to_re) then
+		if comment.is_ack then
 			react_player_review(r, game)
 		end
 	end
