@@ -14,9 +14,28 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# FFI concers common between the compilers and the interpreter.
-# Offers services to compile modules using foreign code. Mainly allows
-# to wrap foreign code in Nit methods.
+# Full FFI support, independent of the compiler
+#
+# The full FFI support all the features of the light FFI and more:
+#
+# * More foreign languages: **C++, Java and Objective-C**.
+# * **Callbacks** to Nit from foreign codes.
+#   The callbacks are declared in Nit using the `import` annotation on extern methods.
+#   They are then generated on demand for the target foreign language.
+# * **Static Nit types** in C for precise typing and static typing errors in C.
+# * **Propagating public code blocks** at the module level (C Header).
+#   This allows to use extern classes in foreign code in other modules
+#   without having to import the related headers.
+#   This is optional in C as it is easy to find the correct importation.
+#   However it is important in Java and other complex FFIs.
+# * **Reference pinning** of Nit objects from foreign code.
+#   This ensure that objects referenced from foreign code are not liberated by the GC.
+# * FFI **annotations**:
+#   * `cflags`, `ldflags` and `cppflags` pass arguments to the C and C++
+# compilers and linker.
+#   * `pkgconfig` calls the `pkg-config` program to get the arguments
+# to pass to the C copiler and linker.
+#   * `extra_java_files` adds Java source file to the compilation chain.
 module ffi
 
 import modelbuilder

@@ -14,9 +14,22 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# FFI concers common between the compilers and the interpreter.
-# Offers services to compile modules using foreign code. Mainly allows
-# to wrap foreign code in Nit methods.
+# Light FFI support, independent of the compiler
+#
+# The light FFI offers only basic FFI features:
+#
+# * **Extern methods** implemented in C, nested within the Nit code.
+#   The body of these method is copied directly to the generated C files for compilation.
+#   Also supports extern `new` factories.
+# * Module level **C code blocks**, both "C Body" (the default) and "C Header".
+#   They will be copied to the beginning of the generated C files.
+# * Automatic transformation of Nit **primitive types** from/to their equivalent in C.
+# * **Extern classes** to create a Nit class around a C pointer.
+#   Allows to specify the equivalent C type of the Nit extern class.
+#
+# These limited features should be easy to implement in new/alternative engines
+# to quickly achieve a bootstrap. For this reason, core features of the Nit
+# standard library should be limited to use the light FFI.
 module light_ffi
 
 import modelbuilder
