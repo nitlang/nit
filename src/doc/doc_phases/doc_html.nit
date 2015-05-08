@@ -192,14 +192,7 @@ redef class DocPage
 	# Build top menu template if any.
 	fun init_topmenu(v: RenderHTMLPhase, doc: DocModel) do
 		topmenu = new DocTopMenu
-		var brand = v.ctx.opt_custom_brand.value
-		if brand != null then
-			var tpl = new Template
-			tpl.add "<span class='navbar-brand'>"
-			tpl.add brand
-			tpl.add "</span>"
-			topmenu.brand = tpl
-		end
+		topmenu.brand = v.ctx.opt_custom_brand.value
 		var title = "Overview"
 		if v.ctx.opt_custom_title.value != null then
 			title = v.ctx.opt_custom_title.value.to_s
@@ -543,14 +536,6 @@ redef class DefinitionArticle
 			if mentity isa MModule then
 				html_source_link = v.html_source_link(mentity.location)
 			end
-		else if mentity isa MClass then
-			var title = new Template
-			title.add mentity.html_icon
-			title.add mentity.html_link
-			html_title = title
-			html_subtitle = mentity.html_namespace
-			toc_title = mentity.html_name
-			is_no_body = true
 		else if mentity isa MClassDef then
 			var title = new Template
 			title.add "in "
