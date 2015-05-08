@@ -23,6 +23,8 @@ import transform
 import rapid_type_analysis
 import compiler::separate_erasure_compiler
 
+import compiler::compiler_ffi::light_only
+
 redef class ToolContext
 	redef fun process_options(args)
 	do
