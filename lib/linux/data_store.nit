@@ -14,7 +14,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-module linux_data_store
+# `app::data_store` implementation on GNU/Linux
+module data_store
 
 import app::data_store
 private import xdg_basedir

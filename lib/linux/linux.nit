@@ -18,4 +18,4 @@
 module linux
 
 import app
-private import linux_data_store
+private import data_store
