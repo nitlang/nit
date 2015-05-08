@@ -17,7 +17,7 @@
 # Services to display a _toast_, a small popup on Android
 module toast
 
-import native_app_glue
+import dalvik
 
 in "Java" `{
 	import android.widget.Toast;
@@ -34,7 +34,7 @@ redef class App
 
 	private fun native_toast(message: JavaString, is_long: Bool)
 	import native_activity in "Java" `{
-		final android.app.NativeActivity context = App_native_activity(recv);
+		final android.app.Activity context = App_native_activity(recv);
 		final CharSequence final_message = message;
 		final int duration = is_long? Toast.LENGTH_LONG: Toast.LENGTH_SHORT;
 
