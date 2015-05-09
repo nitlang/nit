@@ -46,7 +46,7 @@ class AndroidProject
 
 	init
 	do
-		var annots = modelbuilder.collect_annotations_on_modules("min_api_version", mainmodule)
+		var annots = modelbuilder.collect_annotations_on_modules("android_api_min", mainmodule)
 		if not annots.is_empty then
 			var i = annots.pop.arg_as_int(modelbuilder)
 			if i == null then i = 0
@@ -58,7 +58,7 @@ class AndroidProject
 			end
 		end
 
-		annots = modelbuilder.collect_annotations_on_modules("max_api_version", mainmodule)
+		annots = modelbuilder.collect_annotations_on_modules("android_api_max", mainmodule)
 		if not annots.is_empty then
 			var i = annots.pop.arg_as_int(modelbuilder)
 			if i == null then i = 0
@@ -70,7 +70,7 @@ class AndroidProject
 			end
 		end
 
-		var annot = modelbuilder.lookup_annotation_on_modules("target_api_version", mainmodule)
+		var annot = modelbuilder.lookup_annotation_on_modules("android_api_target", mainmodule)
 		if annot != null then target_api = annot.arg_as_int(modelbuilder) or else 0
 
 		annots = modelbuilder.collect_annotations_on_modules("android_manifest", mainmodule)

@@ -16,13 +16,12 @@
 
 # Android compatibility module
 #
-# Defines all Android related annoations including the `@android` annotations
-# used to tag `ldflags` annotations.
+# Defines all Android related annotations, including `ldflags@android`.
 module aware is
 	new_annotation android
-	new_annotation min_api_version
-	new_annotation max_api_version
-	new_annotation target_api_version
+	new_annotation android_api_min
+	new_annotation android_api_max
+	new_annotation android_api_target
 	new_annotation android_manifest
 	new_annotation android_manifest_application
 	new_annotation android_manifest_activity
