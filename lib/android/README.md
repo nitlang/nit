@@ -13,29 +13,15 @@ The tools `android`, `ndk-build` and `ant` must be in your PATH.
 
 # Configure your Android application
 
-The `app.nit` framework and this project offers some services to
-customized the generated Android application.
+The _app.nit_ framework and this project offers some services to
+customize the generated Android application.
 
-## Module annotations
+## Annotations
 
-* `app_version` specifies the version of the generated APK file.
-It takes 3 arguments: the major, minor and revision version numbers.
-The special function `git_revision` will use the prefix of the hash of the
-latest git commit. The default version is 1.0.
+* All _app.nit_ annotations are applied to Android projects:
+  `app_name`, `app_namespace` and `app_version`.
 
-    Example: `app_version(1, 0, git_revision)`
-
-* `app_name` takes a single argument, the visible name of the Android
-application. By default, the compiler would use the name of the target
-module. This name will be used as the name of the main activity and
-as the launcher name.
-
-    Example: `app_name "My App"`
-
-* `app_namespace` specifies the package used by the generated Java
-classes and the APK file. Once the application is published, this
-value should not be changed. By default, the compiler will use
-the package `org.nitlanguage.{module_name}`.
+    See: `../app/README.md`
 
 * Custom information can be added to the Android manifest file
 using the annotations `android_manifest`, `android_manifest_application`
@@ -47,8 +33,8 @@ and `android_manifest_activity`.
     android_manifest """<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>"""
     ~~~
 
-* The API version target can be specified with `min_api_version`,
-`max_api_version` and `target_api_version`. These take a single
+* The API version target can be specified with `android_api_min`,
+`android_api_max` and `android_api_target`. These take a single
 integer as argument. They are applied in the Android manifest as
 `minSdkVesion`, `targetSdkVersion` and `maxSdkVersion`.
 
