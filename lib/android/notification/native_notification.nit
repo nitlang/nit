@@ -15,7 +15,7 @@
 # limitations under the License.
 
 # Native Java classes for notifications
-module native_notification is min_api_version 11
+module native_notification is android_api_min 11
 
 import android::assets_and_resources
 

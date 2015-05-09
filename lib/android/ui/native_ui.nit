@@ -15,7 +15,7 @@
 # limitations under the License.
 
 # Native services from the `android.view` and `android.widget` namespaces
-module native_ui is min_api_version 14
+module native_ui is android_api_min 14
 
 import nit_activity
 

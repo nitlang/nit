@@ -15,7 +15,7 @@
 # limitations under the License.
 
 # Refines intent module to add API 17 services
-module intent_api17 is min_api_version(17)
+module intent_api17 is android_api_min 17
 
 import intent_api16
 

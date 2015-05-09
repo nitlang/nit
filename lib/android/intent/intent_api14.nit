@@ -15,7 +15,7 @@
 # limitations under the License.
 
 # Refines intent module to add API 14 services
-module intent_api14 is min_api_version(14)
+module intent_api14 is android_api_min 14
 
 import intent_api12
 

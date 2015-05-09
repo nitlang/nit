@@ -16,7 +16,7 @@
 
 module complete_simple_android is
 	app_namespace "org.nitlanguage.test_all"
-	target_api_version 19
+	android_api_target 19
 end
 
 import test_bundle

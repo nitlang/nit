@@ -16,8 +16,8 @@
 
 # Test for the API level related annotations
 module test_target_api is
-	min_api_version(10)
-	max_api_version(19)
+	android_api_min 10
+	android_api_max 19
 end
 
 import simple_android

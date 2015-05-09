@@ -15,7 +15,7 @@
 # limitations under the License.
 
 # Refines shared_preferences module to add API 11 services
-module shared_preferences_api11 is min_api_version(11)
+module shared_preferences_api11 is android_api_min 11
 
 import shared_preferences
 
