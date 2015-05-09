@@ -16,16 +16,16 @@
 # limitations under the License.
 
 # GTK+ services added at version 3.6
-module v3_6 is pkgconfig("gtk+-3.0")
+module v3_6 is pkgconfig "gtk+-3.0"
 
 import v3_4
 
-#An entry which shows a search icon
-#@https://developer.gnome.org/gtk3/stable/GtkSearchEntry.html
+# An entry which shows a search icon
+# See: https://developer.gnome.org/gtk3/stable/GtkSearchEntry.html
 extern class GtkSearchEntry `{GtkSearchEntry *`}
 	super GtkEntry
 
-	new is extern `{
-		return (GtkSearchEntry *)gtk_search_entry_new( );	
+	new `{
+		return (GtkSearchEntry *)gtk_search_entry_new();
 	`}
 end
