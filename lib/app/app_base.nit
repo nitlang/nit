@@ -37,9 +37,6 @@ class App
 	# Prefix to all log messages, used by `log_error`, `log_warning` and `log_info`.
 	fun log_prefix: String do return "app.nit"
 
-	# Helper function for logging warnings
-	fun log_warning(msg: String) do sys.stderr.write "{log_prefix} warn: {msg}\n"
-
 	# Main init method for graphical stuff
 	# Is called when display is ready so graphical assets
 	# can be loaded at this time.
@@ -49,6 +46,14 @@ class App
 	fun window_closing do end
 end
 
+# Print a warning
+fun print_warning(object: Object)
+do
+	sys.stderr.write object.to_s
+	sys.stderr.write "\n"
+end
+
+# The running `App`
 fun app: App do return once new App
 app.setup
 app.run
