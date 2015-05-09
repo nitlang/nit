@@ -42,7 +42,7 @@ redef class App
 	do
 		var asset = try_loading_asset( id )
 		if asset == null then # error
-			log_error( "asset <{id}> could not be loaded." )
+			print_error "asset <{id}> could not be loaded."
 			abort
 		else
 			return asset
@@ -57,7 +57,7 @@ redef class App
 		if asset isa Image then
 			return asset
 		else
-			log_error( "asset <{id}> is not an image." )
+			print_error "asset <{id}> is not an image."
 			abort
 		end
 	end

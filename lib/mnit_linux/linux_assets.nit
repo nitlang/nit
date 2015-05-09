@@ -33,7 +33,7 @@ redef class App
 	do
 		var path = "{assets_dir}/{id}"
 		if not path.file_exists then
-			log_error( "asset <{id}> does not exists." )
+			print_error "asset <{id}> does not exists."
 			exit(1)
 			abort
 		else
