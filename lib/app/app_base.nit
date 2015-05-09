@@ -37,9 +37,6 @@ class App
 	# Prefix to all log messages, used by `log_error`, `log_warning` and `log_info`.
 	fun log_prefix: String do return "app.nit"
 
-	# Helper function for logging errors
-	fun log_error(msg: String) do sys.stderr.write "{log_prefix} error: {msg}\n"
-
 	# Helper function for logging warnings
 	fun log_warning(msg: String) do sys.stderr.write "{log_prefix} warn: {msg}\n"
 
