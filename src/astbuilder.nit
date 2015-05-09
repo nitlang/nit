@@ -244,7 +244,9 @@ redef class AIfExpr
 		_n_kwif = new TKwif
 		_n_expr = condition
 		_n_expr.parent = self
+		_n_kwthen = new TKwthen
 		_n_then = new ABlockExpr.make
+		_n_kwelse = new TKwelse
 		_n_else = new ABlockExpr.make
 		self.mtype = mtype
 		self.is_typed = true
