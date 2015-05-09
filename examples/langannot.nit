@@ -35,3 +35,9 @@ example
 
 of the language annotation capacities
 """
+
+var s = "example"
+
+print "This superstring {s} rocks"
+
+print "This superstring %1 rocks".format(s)

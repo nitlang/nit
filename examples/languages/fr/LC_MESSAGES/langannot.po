@@ -6,4 +6,12 @@ msgstr "Cette chaîne de caractères est un test"
 msgid "Multiline string\n\nexample\n\n\nof the language annotation capacities\n"
 msgstr "Example de\n\nchaine multiligne\n\n\navec annotation de localisation\n"
 
+#: langannot::langannot 39--9:17
+msgid "example"
+msgstr "exemple"
+
+#: langannot::langannot 41--7:34, langannot::langannot 43--7:33
+msgid "This superstring %1 rocks"
+msgstr "Cet %1 de superstring est génial"
+
 # Generated file, do not modify
