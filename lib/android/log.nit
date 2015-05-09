@@ -23,6 +23,24 @@ in "C" `{
 	#include <android/log.h>
 `}
 
+# Use Android logs to print
+redef fun print(object)
+do
+	log_write(priority_info, app.log_prefix.to_cstring, object.to_s.to_cstring)
+end
+
+# Use Android logs to print errors
+redef fun print_error(object)
+do
+	log_write(priority_error, app.log_prefix.to_cstring, object.to_s.to_cstring)
+end
+
+# Use Android logs to print warnings
+redef fun print_warning(object)
+do
+	log_write(priority_warn, app.log_prefix.to_cstring, object.to_s.to_cstring)
+end
+
 redef class App
 	# Prefix to all log messages
 	protected fun log_prefix: String do return "app.nit"
