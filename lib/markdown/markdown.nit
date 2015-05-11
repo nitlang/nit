@@ -244,7 +244,7 @@ class MarkdownProcessor
 	#
 	# Markdown allows link refs to be defined over two lines:
 	#
-	# 	[id]: http://example.com/longish/path/to/resource/here
+	#	[id]: http://example.com/longish/path/to/resource/here
 	#		"Optional Title Here"
 	#
 	private var last_link_ref: nullable LinkRef = null
@@ -2000,7 +2000,7 @@ abstract class TokenLinkOrImage
 				comment = lr.title
 			end
 		else
-		var tid = name.write_to_string.replace("\n", " ").to_lower
+			var tid = name.write_to_string.replace("\n", " ").to_lower
 			if v.processor.link_refs.has_key(tid) then
 				var lr = v.processor.link_refs[tid]
 				link = lr.link

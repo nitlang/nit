@@ -157,7 +157,11 @@ if opt_rsync.value then
 end
 
 # --status
-if opt_status.value or args.is_empty then
+if opt_status.value or
+	(not opt_clean.value and
+	 not opt_fetch.value and
+	 not opt_render.value and
+	 not opt_rsync.value) then
 	wiki.parse
 	wiki.status
 end
