@@ -1,7 +1,5 @@
 # This file is part of NIT ( http://www.nitlanguage.org ).
 #
-# Copyright 2012 Jean Privat <jean@pryen.org>
-#
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
@@ -14,29 +12,15 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# A ligHt Nit compiler
-module nith
+# Compiler support for the light FFI only, detects unsupported usage of callbacks
+module light_only
 
-import modelize
-import transform
+import light
 
-import rapid_type_analysis
-import compiler::separate_erasure_compiler
+redef class MClassType
+	redef fun cname_normal_class do return "void*"
+end
 
-import compiler::compiler_ffi::light_only
-
-redef class ToolContext
-	redef fun process_options(args)
-	do
-		super
-
-		var sum = opt_separate.value.to_i + opt_erasure.value.to_i
-		if sum > 1 then
-			print "Options --separate and --erasure are exclusive"
-			exit(1)
-		else if sum == 0 then
-			# --separate by default
-			opt_separate.value = true
-		end
-	end
+redef class AMethPropdef
+	redef fun accept_externmeth do return n_extern_calls == null
 end

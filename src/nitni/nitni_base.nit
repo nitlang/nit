@@ -98,7 +98,7 @@ redef class MClassType
 			assert ctype != null
 			return ctype
 		end
-		return mangled_cname
+		return cname_normal_class
 	end
 
 	redef fun cname_blind do
@@ -111,6 +111,9 @@ redef class MClassType
 		if mclass.kind == extern_kind then return "void*"
 		return "struct nitni_instance *"
 	end
+
+	# Name of this type in C for normal classes (not extern and not primitive)
+	protected fun cname_normal_class: String do return mangled_cname
 
 	redef fun mangled_cname do return mclass.name
 
