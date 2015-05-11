@@ -32,14 +32,14 @@ redef class App
 
 	fun test_intent
 	do
-		intent = new Intent(self)
+		intent = new Intent
 		intent.action = intent_action.view.to_s
 		intent.data   = "content://contacts/people/"
 
-		intent.launch_activity
+		start_activity intent
 		intent.destroy
 
-		intent = new Intent(self)
+		intent = new Intent
 		var p1 = new Point(10, 20)
 		intent["a_point"] = p1
 		var p2 = intent["a_point"]

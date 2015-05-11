@@ -17,7 +17,7 @@
 # Implements `app::data_store` using `shared_preferences`
 #
 # We use the shared preferences named "data_store" to store the data.
-module android_data_store
+module data_store
 
 import app::data_store
 private import shared_preferences

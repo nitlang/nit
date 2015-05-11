@@ -17,7 +17,7 @@
 # Services to save/load data using `android.content.SharedPreferences` for the android platform
 module shared_preferences_api10
 
-import native_app_glue
+import dalvik
 import serialization
 private import json_serialization
 
