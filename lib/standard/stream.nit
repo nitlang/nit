@@ -392,6 +392,34 @@ abstract class BufferedReader
 		return c.ascii
 	end
 
+	# Peeks up to `n` bytes in the buffer, returns an empty string on EOF
+	#
+	# The operation does not consume the buffer
+	#
+	# ~~~nitish
+	# 	var x = new FileReader("File.txt")
+	#	assert x.peek(5) == x.read(5)
+	# ~~~
+	fun peek(i: Int): String do
+		if eof then return ""
+		var b = new FlatBuffer.with_capacity(i)
+		while i > 0 and not eof do
+			b.add _buffer[_buffer_pos]
+			_buffer_pos += 1
+			i -= 1
+		end
+		var nbuflen = b.length + (_buffer.length - _buffer_pos)
+		var nbuf = new FlatBuffer.with_capacity(nbuflen)
+		nbuf.append(b)
+		while _buffer_pos < _buffer.length do
+			nbuf.add(_buffer[_buffer_pos])
+			_buffer_pos += 1
+		end
+		_buffer_pos = 0
+		_buffer = nbuf
+		return b.to_s
+	end
+
 	redef fun read(i)
 	do
 		if last_error != null then return ""
