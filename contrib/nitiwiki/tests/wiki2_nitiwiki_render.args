@@ -1,0 +1,1 @@
+../bin/nitiwiki --config wiki2/config.ini --clean --render -v

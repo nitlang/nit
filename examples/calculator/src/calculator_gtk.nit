@@ -55,10 +55,11 @@ class CalculatorGui
 	do
 		init_gtk
 
-		win = new GtkWindow(0)
+		win = new GtkWindow(new GtkWindowType.toplevel)
+		win.connect_destroy_signal_to_quit
 
-		container = new GtkGrid(5, 5, true)
-		win.add(container)
+		container = new GtkGrid
+		win.add container
 
 		lbl_disp = new GtkLabel("_")
 		container.attach(lbl_disp, 0, 0, 5, 1)

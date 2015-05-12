@@ -9,22 +9,22 @@ base_formal_subtype.nit:58,10--19: Warning: expression is already a `VE` since i
 base_formal_subtype.nit:59,10--18: Warning: expression is already a `E` since it is a `VVE`.
 base_formal_subtype.nit:60,10--23: Warning: expression is already a `Object` since it is a `VVE`.
 base_formal_subtype.nit:62,10--20: Warning: expression is already a `VGE`.
-base_formal_subtype.nit:63,10--20: Warning: expression is already a `G[E]` since it is a `VGE`.
-base_formal_subtype.nit:64,10--25: Warning: expression is already a `G[Object]` since it is a `VGE`.
+base_formal_subtype.nit:63,10--21: Warning: expression is already a `G[E]` since it is a `VGE`.
+base_formal_subtype.nit:64,10--26: Warning: expression is already a `G[Object]` since it is a `VGE`.
 base_formal_subtype.nit:65,10--23: Warning: expression is already a `Object` since it is a `VGE`.
 base_formal_subtype.nit:67,10--22: Warning: expression is already a `VVGE`.
 base_formal_subtype.nit:68,10--21: Warning: expression is already a `VGE` since it is a `VVGE`.
-base_formal_subtype.nit:69,10--21: Warning: expression is already a `G[E]` since it is a `VVGE`.
-base_formal_subtype.nit:70,10--26: Warning: expression is already a `G[Object]` since it is a `VVGE`.
+base_formal_subtype.nit:69,10--22: Warning: expression is already a `G[E]` since it is a `VVGE`.
+base_formal_subtype.nit:70,10--27: Warning: expression is already a `G[Object]` since it is a `VVGE`.
 base_formal_subtype.nit:71,10--24: Warning: expression is already a `Object` since it is a `VVGE`.
 base_formal_subtype.nit:73,10--22: Warning: expression is already a `VGVE`.
-base_formal_subtype.nit:74,10--22: Warning: expression is already a `G[VE]` since it is a `VGVE`.
-base_formal_subtype.nit:75,10--21: Warning: expression is already a `G[E]` since it is a `VGVE`.
-base_formal_subtype.nit:76,10--26: Warning: expression is already a `G[Object]` since it is a `VGVE`.
+base_formal_subtype.nit:74,10--23: Warning: expression is already a `G[VE]` since it is a `VGVE`.
+base_formal_subtype.nit:75,10--22: Warning: expression is already a `G[E]` since it is a `VGVE`.
+base_formal_subtype.nit:76,10--27: Warning: expression is already a `G[Object]` since it is a `VGVE`.
 base_formal_subtype.nit:77,10--24: Warning: expression is already a `Object` since it is a `VGVE`.
 base_formal_subtype.nit:79,10--24: Warning: expression is already a `VGVVE`.
-base_formal_subtype.nit:80,10--24: Warning: expression is already a `G[VVE]` since it is a `VGVVE`.
-base_formal_subtype.nit:81,10--23: Warning: expression is already a `G[VE]` since it is a `VGVVE`.
-base_formal_subtype.nit:82,10--22: Warning: expression is already a `G[E]` since it is a `VGVVE`.
-base_formal_subtype.nit:83,10--27: Warning: expression is already a `G[Object]` since it is a `VGVVE`.
+base_formal_subtype.nit:80,10--25: Warning: expression is already a `G[VVE]` since it is a `VGVVE`.
+base_formal_subtype.nit:81,10--24: Warning: expression is already a `G[VE]` since it is a `VGVVE`.
+base_formal_subtype.nit:82,10--23: Warning: expression is already a `G[E]` since it is a `VGVVE`.
+base_formal_subtype.nit:83,10--28: Warning: expression is already a `G[Object]` since it is a `VGVVE`.
 base_formal_subtype.nit:84,10--25: Warning: expression is already a `Object` since it is a `VGVVE`.

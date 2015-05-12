@@ -56,6 +56,34 @@ interface Jsonable
 	#
 	# SEE: `to_json`
 	fun append_json(buffer: Buffer) do buffer.append(to_json)
+
+	# Pretty print JSON string.
+	#
+	# ~~~
+	# var obj = new JsonObject
+	# obj["foo"] = 1
+	# obj["bar"] = true
+	# var arr = new JsonArray
+	# arr.add 2
+	# arr.add false
+	# arr.add "baz"
+	# obj["baz"] = arr
+	# var res = obj.to_pretty_json
+	# var exp = """{
+	#	"foo": 1,
+	#	"bar": true,
+	#	"baz": [2, false, "baz"]
+	# }\n"""
+	# assert res == exp
+	# ~~~
+	fun to_pretty_json: String do
+		var res = new FlatBuffer
+		pretty_json_visit(res, 0)
+		res.add '\n'
+		return res.write_to_string
+	end
+
+	private fun pretty_json_visit(buffer: FlatBuffer, indent: Int) is abstract
 end
 
 redef class Text
@@ -96,8 +124,10 @@ redef class Text
 
 	# Encode `self` in JSON.
 	#
-	#     assert "\t\"http://example.com\"\r\n\0\\".to_json ==
-	#     		"\"\\t\\\"http:\\/\\/example.com\\\"\\r\\n\\u0000\\\\\""
+	# ~~~
+	# assert "\t\"http://example.com\"\r\n\0\\".to_json ==
+	#     "\"\\t\\\"http:\\/\\/example.com\\\"\\r\\n\\u0000\\\\\""
+	# ~~~
 	redef fun to_json do return to_json_by_append
 
 	# Parse `self` as JSON.
@@ -225,6 +255,29 @@ interface JsonMapRead[K: String, V: nullable Jsonable]
 	#     assert obj.to_json == "\{\"baz\":null\}"
 	redef fun to_json do return to_json_by_append
 
+	redef fun pretty_json_visit(buffer, indent) do
+		buffer.append "\{\n"
+		indent += 1
+		var i = 0
+		for k, v in self do
+			buffer.append "\t" * indent
+			buffer.append "\"{k}\": "
+			if v isa JsonObject or v isa JsonArray then
+				v.pretty_json_visit(buffer, indent)
+			else
+				buffer.append v.to_json
+			end
+			if i < length - 1 then
+				buffer.append ","
+			end
+			buffer.append "\n"
+			i += 1
+		end
+		indent -= 1
+		buffer.append "\t" * indent
+		buffer.append "\}"
+	end
+
 	private fun append_json_entry(iterator: MapIterator[String, nullable Jsonable],
 			buffer: Buffer) do
 		buffer.append iterator.key.to_json
@@ -269,6 +322,21 @@ class JsonSequenceRead[E: nullable Jsonable]
 	#     assert arr.to_json =="[]"
 	redef fun to_json do return to_json_by_append
 
+	redef fun pretty_json_visit(buffer, indent) do
+		buffer.append "\["
+		var i = 0
+		for v in self do
+			if v isa JsonObject or v isa JsonArray then
+				v.pretty_json_visit(buffer, indent)
+			else
+				buffer.append v.to_json
+			end
+			if i < length - 1 then buffer.append ", "
+			i += 1
+		end
+		buffer.append "\]"
+	end
+
 	private fun append_json_entry(iterator: Iterator[nullable Jsonable],
 			buffer: Buffer) do
 		buffer.append_json_of(iterator.item)
@@ -287,13 +355,15 @@ redef class JsonParseError
 
 	# Get the JSON representation of `self`.
 	#
-	#     var err = new JsonParseError("foo", new Position(1, 2, 3, 4, 5, 6))
-	#     assert err.to_json == "\{\"error\":\"JsonParseError\"," +
-	#     		"\"position\":\{" +
-	#     			"\"pos_start\":1,\"pos_end\":2," +
-	#     			"\"line_start\":3,\"line_end\":4," +
-	#     			"\"col_start\":5,\"col_end\":6" +
-	#     		"\},\"message\":\"foo\"\}"
+	# ~~~
+	# var err = new JsonParseError("foo", new Position(1, 2, 3, 4, 5, 6))
+	# assert err.to_json == "\{\"error\":\"JsonParseError\"," +
+	#		"\"position\":\{" +
+	#			"\"pos_start\":1,\"pos_end\":2," +
+	#			"\"line_start\":3,\"line_end\":4," +
+	#			"\"col_start\":5,\"col_end\":6" +
+	#		"\},\"message\":\"foo\"\}"
+	# ~~~
 	redef fun to_json do
 		return "\{\"error\":\"JsonParseError\"," +
 				"\"position\":{position.to_json}," +
@@ -306,12 +376,14 @@ redef class Position
 
 	# Get the JSON representation of `self`.
 	#
-	#     var pos = new Position(1, 2, 3, 4, 5, 6)
-	#     assert pos.to_json == "\{" +
-	#     			"\"pos_start\":1,\"pos_end\":2," +
-	#     			"\"line_start\":3,\"line_end\":4," +
-	#     			"\"col_start\":5,\"col_end\":6" +
-	#     		"\}"
+	# ~~~
+	# var pos = new Position(1, 2, 3, 4, 5, 6)
+	# assert pos.to_json == "\{" +
+	#			"\"pos_start\":1,\"pos_end\":2," +
+	#			"\"line_start\":3,\"line_end\":4," +
+	#			"\"col_start\":5,\"col_end\":6" +
+	#		"\}"
+	# ~~~
 	redef fun to_json do
 		return "\{\"pos_start\":{pos_start},\"pos_end\":{pos_end}," +
 				"\"line_start\":{line_start},\"line_end\":{line_end}," +

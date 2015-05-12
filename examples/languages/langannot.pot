@@ -6,4 +6,12 @@ msgstr ""
 msgid "Multiline string\n\nexample\n\n\nof the language annotation capacities\n"
 msgstr ""
 
+#: langannot::langannot 39--9:17
+msgid "example"
+msgstr ""
+
+#: langannot::langannot 41--7:34, langannot::langannot 43--7:33
+msgid "This superstring %1 rocks"
+msgstr ""
+
 # Generated file, do not modify

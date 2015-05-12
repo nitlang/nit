@@ -490,7 +490,7 @@ class PlayerFirstReview
 	redef fun react_event(game, event) do
 		if not event isa IssueCommentEvent then return
 		# FIXME use a more precise way to locate reviews
-		if event.comment.has_ok_review then
+		if event.comment.is_ack then
 			var player = event.comment.user.player(game)
 			var a = new_achievement(game)
 			player.unlock_achievement(a, event)

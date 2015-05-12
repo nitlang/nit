@@ -424,7 +424,7 @@ redef class MExplicitCall
 		var csignature = mproperty.build_c_implementation_signature(recv_mtype, mmodule, "___indirect", long_signature, from_java_call_context)
 		var cf = new CFunction("JNIEXPORT {csignature}")
 		cf.exprs.add "\t{mproperty.build_ccall(recv_mtype, mainmodule, null, long_signature, from_java_call_context, null)}\n"
-		ccu.add_local_function cf
+		ccu.add_non_static_local_function cf
 
 		# In Java, declare the extern method as a private static local method
 		var java_signature = mproperty.build_csignature(recv_mtype, mainmodule, null, short_signature, java_call_context)
@@ -651,3 +651,17 @@ end
 private fun java_call_context: JavaCallContext do return new JavaCallContext
 private fun to_java_call_context: ToJavaCallContext do return new ToJavaCallContext
 private fun from_java_call_context: FromJavaCallContext do return new FromJavaCallContext
+
+redef class CCompilationUnit
+	# Similar to `add_local_function` but not `static`
+	#
+	# Used when the signature contains a visibility attribute.
+	private fun add_non_static_local_function(c_function: CFunction)
+	do
+		body_decl.add c_function.signature
+		body_decl.add ";\n"
+
+		body_impl.add "\n"
+		body_impl.add c_function.to_writer
+	end
+end

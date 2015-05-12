@@ -24,7 +24,7 @@ import platform
 import native_app_glue
 import dalvik
 private import log
-private import android_data_store
+private import data_store
 
 redef class App
 	redef fun init_window

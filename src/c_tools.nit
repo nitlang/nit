@@ -47,33 +47,37 @@ class CCompilationUnit
 	# files to compile TODO check is appropriate
 	var files = new Array[String]
 
-	fun add_local_function( efc : CFunction )
+	# Add `c_function` as a `static` function local to this unit
+	fun add_local_function(c_function: CFunction)
 	do
-		body_decl.add "static {efc.signature};\n"
+		body_decl.add "static {c_function.signature};\n"
 		body_impl.add "\n"
-		body_impl.add efc.to_writer
+		body_impl.add c_function.to_writer
 	end
 
-	fun add_exported_function( efc : CFunction )
+	# Add `c_function` as a public function to this unit
+	fun add_exported_function(c_function: CFunction)
 	do
-		header_decl.add( "{efc.signature};\n" )
-		body_impl.add( "\n" )
-		body_impl.add( efc.to_writer )
+		header_decl.add "{c_function.signature};\n"
+		body_impl.add "\n"
+		body_impl.add c_function.to_writer
 	end
 
-	fun compile_header_core( stream : Writer )
+	# Write the core of the header to `stream`
+	fun compile_header_core(stream: Writer)
 	do
-		header_c_base.write_to( stream )
-		header_custom.write_to( stream )
-		header_c_types.write_to( stream )
-		header_decl.write_to( stream )
+		header_c_base.write_to stream
+		header_custom.write_to stream
+		header_c_types.write_to stream
+		header_decl.write_to stream
 	end
 
-	fun compile_body_core( stream : Writer )
+	# Write the core of the body to `stream`
+	fun compile_body_core(stream: Writer)
 	do
-		body_decl.write_to( stream )
-		body_custom.write_to( stream )
-		body_impl.write_to( stream )
+		body_decl.write_to stream
+		body_custom.write_to stream
+		body_impl.write_to stream
 	end
 end
 

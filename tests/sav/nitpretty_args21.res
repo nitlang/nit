@@ -34,9 +34,8 @@ fun errno: Int is extern `{
 	return errno;
 `}
 
-fun errnoooooooooooooooooooooooooooooooooooooooooooooooooooooooooo: Int is extern `{
-	 return errno;
-`}
+fun errnoooooooooooooooooooooooooooooooooooooooooooooooooooooooooo: Int is
+	extern `{ return errno; `}
 
 private class A
 	var my_attr = 1234

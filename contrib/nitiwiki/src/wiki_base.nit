@@ -16,7 +16,6 @@
 module wiki_base
 
 import template::macro
-import markdown
 import opts
 import ini
 
@@ -72,6 +71,9 @@ class Nitiwiki
 		end
 	end
 
+	# Render output.
+	fun render do end
+
 	# Show wiki status.
 	fun status do
 		print "nitiWiki"
@@ -105,7 +107,7 @@ class Nitiwiki
 		end
 	end
 
-	# Display msg if `level >= verbose_level`
+	# Display msg if `level <= verbose_level`
 	fun message(msg: String, level: Int) do
 		if level <= verbose_level then print msg
 	end
@@ -163,6 +165,7 @@ class Nitiwiki
 	# `path` is used to determine the ancestor sections.
 	protected fun new_article(path: String): WikiArticle do
 		if entries.has_key(path) then return entries[path].as(WikiArticle)
+		message("Found article `{path}`", 2)
 		var article = new WikiArticle.from_source(self, path)
 		var section = new_section(path.dirname)
 		section.add_child(article)
@@ -447,7 +450,7 @@ class WikiSection
 	private fun try_load_config do
 		var cfile = wiki.expand_path(wiki.config.root_dir, src_path, wiki.config_filename)
 		if not cfile.file_exists then return
-		wiki.message("Custom config for section {name}", 2)
+		wiki.message("Custom config for section {name}", 1)
 		config = new SectionConfig(cfile)
 	end
 
@@ -512,18 +515,13 @@ class WikiArticle
 	# Page content.
 	#
 	# What you want to be displayed in the page.
-	var content: nullable Writable = null
+	var content: nullable Writable = null is writable
 
-	# Headlines ids and titles.
-	var headlines = new ArrayMap[String, HeadLine]
-
-	# Create a new articleu sing a markdown source file.
+	# Create a new article using a markdown source file.
 	init from_source(wiki: Nitiwiki, md_file: String) do
 		src_full_path = md_file
 		init(wiki, md_file.basename(".md"))
-		var md_proc = new MarkdownProcessor
-		content = md_proc.process(md)
-		headlines = md_proc.emitter.decorator.headlines
+		content = md
 	end
 
 	redef var src_full_path: nullable String = null
@@ -538,8 +536,8 @@ class WikiArticle
 	# Extract the markdown text from `source_file`.
 	#
 	# REQUIRE: `has_source`.
-	var md: String is lazy do
-		assert has_source
+	var md: nullable String is lazy do
+		if not has_source then return null
 		var file = new FileReader.open(src_full_path.to_s)
 		var md = file.read_all
 		file.close

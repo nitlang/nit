@@ -17,7 +17,8 @@
 # Manages all extern classes and their associated foreign type.
 module extern_classes
 
-import ffi_base
+import light_ffi_base
+import modelize
 
 redef class ToolContext
 	var extern_classes_typing_phase_ast: Phase = new ExternClassesTypingPhaseAst(self, [ffi_language_assignation_phase, modelize_class_phase])

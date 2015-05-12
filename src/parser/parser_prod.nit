@@ -387,7 +387,9 @@ redef class AStdClassdef
 		n_visibility: nullable AVisibility,
 		n_classkind: nullable AClasskind,
 		n_id: nullable TClassid,
+		n_obra: nullable TObra,
 		n_formaldefs: Collection[Object], # Should be Collection[AFormaldef]
+		n_cbra: nullable TCbra,
 		n_extern_code_block: nullable AExternCodeBlock,
 		n_propdefs: Collection[Object], # Should be Collection[APropdef]
 		n_kwend: nullable TKwend
@@ -403,7 +405,11 @@ redef class AStdClassdef
 		n_classkind.parent = self
 		_n_id = n_id
 		if n_id != null then n_id.parent = self
+		_n_obra = n_obra
+		if n_obra != null then n_obra.parent = self
 		self.n_formaldefs.unsafe_add_all(n_formaldefs)
+		_n_cbra = n_cbra
+		if n_cbra != null then n_cbra.parent = self
 		_n_extern_code_block = n_extern_code_block
 		if n_extern_code_block != null then n_extern_code_block.parent = self
 		self.n_propdefs.unsafe_add_all(n_propdefs)
@@ -433,7 +439,15 @@ redef class AStdClassdef
 			n_id = new_child.as(nullable TClassid)
 			return
 		end
+		if _n_obra == old_child then
+			n_obra = new_child.as(nullable TObra)
+			return
+		end
 		if n_formaldefs.replace_child(old_child, new_child) then return
+		if _n_cbra == old_child then
+			n_cbra = new_child.as(nullable TCbra)
+			return
+		end
 		if _n_extern_code_block == old_child then
 			n_extern_code_block = new_child.as(nullable AExternCodeBlock)
 			return
@@ -470,6 +484,16 @@ redef class AStdClassdef
 		_n_id = node
 		if node != null then node.parent = self
 	end
+	redef fun n_obra=(node)
+	do
+		_n_obra = node
+		if node != null then node.parent = self
+	end
+	redef fun n_cbra=(node)
+	do
+		_n_cbra = node
+		if node != null then node.parent = self
+	end
 	redef fun n_extern_code_block=(node)
 	do
 		_n_extern_code_block = node
@@ -489,7 +513,9 @@ redef class AStdClassdef
 		v.enter_visit(_n_visibility)
 		v.enter_visit(_n_classkind)
 		v.enter_visit(_n_id)
+		v.enter_visit(_n_obra)
 		n_formaldefs.visit_all(v)
+		v.enter_visit(_n_cbra)
 		v.enter_visit(_n_extern_code_block)
 		n_propdefs.visit_all(v)
 		v.enter_visit(_n_kwend)
@@ -769,9 +795,12 @@ redef class AAttrPropdef
 		n_kwvar: nullable TKwvar,
 		n_id2: nullable TId,
 		n_type: nullable AType,
+		n_assign: nullable TAssign,
 		n_expr: nullable AExpr,
 		n_annotations: nullable AAnnotations,
-		n_block: nullable AExpr
+		n_kwdo: nullable TKwdo,
+		n_block: nullable AExpr,
+		n_kwend: nullable TKwend
 	)
 	do
 		_n_doc = n_doc
@@ -786,12 +815,18 @@ redef class AAttrPropdef
 		n_id2.parent = self
 		_n_type = n_type
 		if n_type != null then n_type.parent = self
+		_n_assign = n_assign
+		if n_assign != null then n_assign.parent = self
 		_n_expr = n_expr
 		if n_expr != null then n_expr.parent = self
 		_n_annotations = n_annotations
 		if n_annotations != null then n_annotations.parent = self
+		_n_kwdo = n_kwdo
+		if n_kwdo != null then n_kwdo.parent = self
 		_n_block = n_block
 		if n_block != null then n_block.parent = self
+		_n_kwend = n_kwend
+		if n_kwend != null then n_kwend.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -820,6 +855,10 @@ redef class AAttrPropdef
 			n_type = new_child.as(nullable AType)
 			return
 		end
+		if _n_assign == old_child then
+			n_assign = new_child.as(nullable TAssign)
+			return
+		end
 		if _n_expr == old_child then
 			n_expr = new_child.as(nullable AExpr)
 			return
@@ -828,8 +867,16 @@ redef class AAttrPropdef
 			n_annotations = new_child.as(nullable AAnnotations)
 			return
 		end
+		if _n_kwdo == old_child then
+			n_kwdo = new_child.as(nullable TKwdo)
+			return
+		end
 		if _n_block == old_child then
 			n_block = new_child.as(nullable AExpr)
+			return
+		end
+		if _n_kwend == old_child then
+			n_kwend = new_child.as(nullable TKwend)
 			return
 		end
 	end
@@ -864,6 +911,11 @@ redef class AAttrPropdef
 		_n_type = node
 		if node != null then node.parent = self
 	end
+	redef fun n_assign=(node)
+	do
+		_n_assign = node
+		if node != null then node.parent = self
+	end
 	redef fun n_expr=(node)
 	do
 		_n_expr = node
@@ -874,9 +926,19 @@ redef class AAttrPropdef
 		_n_annotations = node
 		if node != null then node.parent = self
 	end
+	redef fun n_kwdo=(node)
+	do
+		_n_kwdo = node
+		if node != null then node.parent = self
+	end
 	redef fun n_block=(node)
 	do
 		_n_block = node
+		if node != null then node.parent = self
+	end
+	redef fun n_kwend=(node)
+	do
+		_n_kwend = node
 		if node != null then node.parent = self
 	end
 
@@ -889,9 +951,12 @@ redef class AAttrPropdef
 		v.enter_visit(_n_kwvar)
 		v.enter_visit(_n_id2)
 		v.enter_visit(_n_type)
+		v.enter_visit(_n_assign)
 		v.enter_visit(_n_expr)
 		v.enter_visit(_n_annotations)
+		v.enter_visit(_n_kwdo)
 		v.enter_visit(_n_block)
+		v.enter_visit(_n_kwend)
 	end
 end
 redef class AMainMethPropdef
@@ -1056,7 +1121,9 @@ redef class AMethPropdef
 		n_annotations: nullable AAnnotations,
 		n_extern_calls: nullable AExternCalls,
 		n_extern_code_block: nullable AExternCodeBlock,
-		n_block: nullable AExpr
+		n_kwdo: nullable TKwdo,
+		n_block: nullable AExpr,
+		n_kwend: nullable TKwend
 	)
 	do
 		_n_doc = n_doc
@@ -1081,8 +1148,12 @@ redef class AMethPropdef
 		if n_extern_calls != null then n_extern_calls.parent = self
 		_n_extern_code_block = n_extern_code_block
 		if n_extern_code_block != null then n_extern_code_block.parent = self
+		_n_kwdo = n_kwdo
+		if n_kwdo != null then n_kwdo.parent = self
 		_n_block = n_block
 		if n_block != null then n_block.parent = self
+		_n_kwend = n_kwend
+		if n_kwend != null then n_kwend.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
@@ -1131,8 +1202,16 @@ redef class AMethPropdef
 			n_extern_code_block = new_child.as(nullable AExternCodeBlock)
 			return
 		end
+		if _n_kwdo == old_child then
+			n_kwdo = new_child.as(nullable TKwdo)
+			return
+		end
 		if _n_block == old_child then
 			n_block = new_child.as(nullable AExpr)
+			return
+		end
+		if _n_kwend == old_child then
+			n_kwend = new_child.as(nullable TKwend)
 			return
 		end
 	end
@@ -1192,9 +1271,19 @@ redef class AMethPropdef
 		_n_extern_code_block = node
 		if node != null then node.parent = self
 	end
+	redef fun n_kwdo=(node)
+	do
+		_n_kwdo = node
+		if node != null then node.parent = self
+	end
 	redef fun n_block=(node)
 	do
 		_n_block = node
+		if node != null then node.parent = self
+	end
+	redef fun n_kwend=(node)
+	do
+		_n_kwend = node
 		if node != null then node.parent = self
 	end
 
@@ -1212,7 +1301,9 @@ redef class AMethPropdef
 		v.enter_visit(_n_annotations)
 		v.enter_visit(_n_extern_calls)
 		v.enter_visit(_n_extern_code_block)
+		v.enter_visit(_n_kwdo)
 		v.enter_visit(_n_block)
+		v.enter_visit(_n_kwend)
 	end
 end
 redef class ASuperPropdef
@@ -2270,7 +2361,9 @@ redef class AType
 	init init_atype (
 		n_kwnullable: nullable TKwnullable,
 		n_id: nullable TClassid,
+		n_obra: nullable TObra,
 		n_types: Collection[Object], # Should be Collection[AType]
+		n_cbra: nullable TCbra,
 		n_annotations: nullable AAnnotations
 	)
 	do
@@ -2278,7 +2371,11 @@ redef class AType
 		if n_kwnullable != null then n_kwnullable.parent = self
 		_n_id = n_id.as(not null)
 		n_id.parent = self
+		_n_obra = n_obra
+		if n_obra != null then n_obra.parent = self
 		self.n_types.unsafe_add_all(n_types)
+		_n_cbra = n_cbra
+		if n_cbra != null then n_cbra.parent = self
 		_n_annotations = n_annotations
 		if n_annotations != null then n_annotations.parent = self
 	end
@@ -2293,7 +2390,15 @@ redef class AType
 			n_id = new_child.as(TClassid)
 			return
 		end
+		if _n_obra == old_child then
+			n_obra = new_child.as(nullable TObra)
+			return
+		end
 		if n_types.replace_child(old_child, new_child) then return
+		if _n_cbra == old_child then
+			n_cbra = new_child.as(nullable TCbra)
+			return
+		end
 		if _n_annotations == old_child then
 			n_annotations = new_child.as(nullable AAnnotations)
 			return
@@ -2310,6 +2415,16 @@ redef class AType
 		_n_id = node
 		node.parent = self
 	end
+	redef fun n_obra=(node)
+	do
+		_n_obra = node
+		if node != null then node.parent = self
+	end
+	redef fun n_cbra=(node)
+	do
+		_n_cbra = node
+		if node != null then node.parent = self
+	end
 	redef fun n_annotations=(node)
 	do
 		_n_annotations = node
@@ -2321,7 +2436,9 @@ redef class AType
 	do
 		v.enter_visit(_n_kwnullable)
 		v.enter_visit(_n_id)
+		v.enter_visit(_n_obra)
 		n_types.visit_all(v)
+		v.enter_visit(_n_cbra)
 		v.enter_visit(_n_annotations)
 	end
 end
@@ -2708,7 +2825,9 @@ redef class AIfExpr
 	init init_aifexpr (
 		n_kwif: nullable TKwif,
 		n_expr: nullable AExpr,
+		n_kwthen: nullable TKwthen,
 		n_then: nullable AExpr,
+		n_kwelse: nullable TKwelse,
 		n_else: nullable AExpr
 	)
 	do
@@ -2716,8 +2835,12 @@ redef class AIfExpr
 		n_kwif.parent = self
 		_n_expr = n_expr.as(not null)
 		n_expr.parent = self
+		_n_kwthen = n_kwthen.as(not null)
+		n_kwthen.parent = self
 		_n_then = n_then
 		if n_then != null then n_then.parent = self
+		_n_kwelse = n_kwelse
+		if n_kwelse != null then n_kwelse.parent = self
 		_n_else = n_else
 		if n_else != null then n_else.parent = self
 	end
@@ -2732,8 +2855,16 @@ redef class AIfExpr
 			n_expr = new_child.as(AExpr)
 			return
 		end
+		if _n_kwthen == old_child then
+			n_kwthen = new_child.as(TKwthen)
+			return
+		end
 		if _n_then == old_child then
 			n_then = new_child.as(nullable AExpr)
+			return
+		end
+		if _n_kwelse == old_child then
+			n_kwelse = new_child.as(nullable TKwelse)
 			return
 		end
 		if _n_else == old_child then
@@ -2752,9 +2883,19 @@ redef class AIfExpr
 		_n_expr = node
 		node.parent = self
 	end
+	redef fun n_kwthen=(node)
+	do
+		_n_kwthen = node
+		node.parent = self
+	end
 	redef fun n_then=(node)
 	do
 		_n_then = node
+		if node != null then node.parent = self
+	end
+	redef fun n_kwelse=(node)
+	do
+		_n_kwelse = node
 		if node != null then node.parent = self
 	end
 	redef fun n_else=(node)
@@ -2768,7 +2909,9 @@ redef class AIfExpr
 	do
 		v.enter_visit(_n_kwif)
 		v.enter_visit(_n_expr)
+		v.enter_visit(_n_kwthen)
 		v.enter_visit(_n_then)
+		v.enter_visit(_n_kwelse)
 		v.enter_visit(_n_else)
 	end
 end
@@ -3006,6 +3149,7 @@ redef class AForExpr
 	init init_aforexpr (
 		n_kwfor: nullable TKwfor,
 		n_ids: Collection[Object], # Should be Collection[TId]
+		n_kwin: nullable TKwin,
 		n_expr: nullable AExpr,
 		n_kwdo: nullable TKwdo,
 		n_block: nullable AExpr,
@@ -3015,6 +3159,8 @@ redef class AForExpr
 		_n_kwfor = n_kwfor.as(not null)
 		n_kwfor.parent = self
 		self.n_ids.unsafe_add_all(n_ids)
+		_n_kwin = n_kwin.as(not null)
+		n_kwin.parent = self
 		_n_expr = n_expr.as(not null)
 		n_expr.parent = self
 		_n_kwdo = n_kwdo.as(not null)
@@ -3032,6 +3178,10 @@ redef class AForExpr
 			return
 		end
 		if n_ids.replace_child(old_child, new_child) then return
+		if _n_kwin == old_child then
+			n_kwin = new_child.as(TKwin)
+			return
+		end
 		if _n_expr == old_child then
 			n_expr = new_child.as(AExpr)
 			return
@@ -3053,6 +3203,11 @@ redef class AForExpr
 	redef fun n_kwfor=(node)
 	do
 		_n_kwfor = node
+		node.parent = self
+	end
+	redef fun n_kwin=(node)
+	do
+		_n_kwin = node
 		node.parent = self
 	end
 	redef fun n_expr=(node)
@@ -3081,6 +3236,7 @@ redef class AForExpr
 	do
 		v.enter_visit(_n_kwfor)
 		n_ids.visit_all(v)
+		v.enter_visit(_n_kwin)
 		v.enter_visit(_n_expr)
 		v.enter_visit(_n_kwdo)
 		v.enter_visit(_n_block)
@@ -3173,6 +3329,7 @@ redef class AAssertExpr
 		n_kwassert: nullable TKwassert,
 		n_id: nullable TId,
 		n_expr: nullable AExpr,
+		n_kwelse: nullable TKwelse,
 		n_else: nullable AExpr
 	)
 	do
@@ -3182,6 +3339,8 @@ redef class AAssertExpr
 		if n_id != null then n_id.parent = self
 		_n_expr = n_expr.as(not null)
 		n_expr.parent = self
+		_n_kwelse = n_kwelse
+		if n_kwelse != null then n_kwelse.parent = self
 		_n_else = n_else
 		if n_else != null then n_else.parent = self
 	end
@@ -3198,6 +3357,10 @@ redef class AAssertExpr
 		end
 		if _n_expr == old_child then
 			n_expr = new_child.as(AExpr)
+			return
+		end
+		if _n_kwelse == old_child then
+			n_kwelse = new_child.as(nullable TKwelse)
 			return
 		end
 		if _n_else == old_child then
@@ -3221,6 +3384,11 @@ redef class AAssertExpr
 		_n_expr = node
 		node.parent = self
 	end
+	redef fun n_kwelse=(node)
+	do
+		_n_kwelse = node
+		if node != null then node.parent = self
+	end
 	redef fun n_else=(node)
 	do
 		_n_else = node
@@ -3233,6 +3401,7 @@ redef class AAssertExpr
 		v.enter_visit(_n_kwassert)
 		v.enter_visit(_n_id)
 		v.enter_visit(_n_expr)
+		v.enter_visit(_n_kwelse)
 		v.enter_visit(_n_else)
 	end
 end
@@ -5744,6 +5913,7 @@ redef class ACrangeExpr
 	init init_acrangeexpr (
 		n_obra: nullable TObra,
 		n_expr: nullable AExpr,
+		n_dotdot: nullable TDotdot,
 		n_expr2: nullable AExpr,
 		n_cbra: nullable TCbra,
 		n_annotations: nullable AAnnotations
@@ -5753,6 +5923,8 @@ redef class ACrangeExpr
 		n_obra.parent = self
 		_n_expr = n_expr.as(not null)
 		n_expr.parent = self
+		_n_dotdot = n_dotdot.as(not null)
+		n_dotdot.parent = self
 		_n_expr2 = n_expr2.as(not null)
 		n_expr2.parent = self
 		_n_cbra = n_cbra.as(not null)
@@ -5769,6 +5941,10 @@ redef class ACrangeExpr
 		end
 		if _n_expr == old_child then
 			n_expr = new_child.as(AExpr)
+			return
+		end
+		if _n_dotdot == old_child then
+			n_dotdot = new_child.as(TDotdot)
 			return
 		end
 		if _n_expr2 == old_child then
@@ -5795,6 +5971,11 @@ redef class ACrangeExpr
 		_n_expr = node
 		node.parent = self
 	end
+	redef fun n_dotdot=(node)
+	do
+		_n_dotdot = node
+		node.parent = self
+	end
 	redef fun n_expr2=(node)
 	do
 		_n_expr2 = node
@@ -5816,6 +5997,7 @@ redef class ACrangeExpr
 	do
 		v.enter_visit(_n_obra)
 		v.enter_visit(_n_expr)
+		v.enter_visit(_n_dotdot)
 		v.enter_visit(_n_expr2)
 		v.enter_visit(_n_cbra)
 		v.enter_visit(_n_annotations)
@@ -5825,6 +6007,7 @@ redef class AOrangeExpr
 	init init_aorangeexpr (
 		n_obra: nullable TObra,
 		n_expr: nullable AExpr,
+		n_dotdot: nullable TDotdot,
 		n_expr2: nullable AExpr,
 		n_cbra: nullable TObra,
 		n_annotations: nullable AAnnotations
@@ -5834,6 +6017,8 @@ redef class AOrangeExpr
 		n_obra.parent = self
 		_n_expr = n_expr.as(not null)
 		n_expr.parent = self
+		_n_dotdot = n_dotdot.as(not null)
+		n_dotdot.parent = self
 		_n_expr2 = n_expr2.as(not null)
 		n_expr2.parent = self
 		_n_cbra = n_cbra.as(not null)
@@ -5850,6 +6035,10 @@ redef class AOrangeExpr
 		end
 		if _n_expr == old_child then
 			n_expr = new_child.as(AExpr)
+			return
+		end
+		if _n_dotdot == old_child then
+			n_dotdot = new_child.as(TDotdot)
 			return
 		end
 		if _n_expr2 == old_child then
@@ -5876,6 +6065,11 @@ redef class AOrangeExpr
 		_n_expr = node
 		node.parent = self
 	end
+	redef fun n_dotdot=(node)
+	do
+		_n_dotdot = node
+		node.parent = self
+	end
 	redef fun n_expr2=(node)
 	do
 		_n_expr2 = node
@@ -5897,6 +6091,7 @@ redef class AOrangeExpr
 	do
 		v.enter_visit(_n_obra)
 		v.enter_visit(_n_expr)
+		v.enter_visit(_n_dotdot)
 		v.enter_visit(_n_expr2)
 		v.enter_visit(_n_cbra)
 		v.enter_visit(_n_annotations)
@@ -8067,12 +8262,16 @@ redef class ADoc
 end
 redef class AAnnotations
 	init init_aannotations (
+		n_kwis: nullable TKwis,
 		n_at: nullable TAt,
 		n_opar: nullable TOpar,
 		n_items: Collection[Object], # Should be Collection[AAnnotation]
-		n_cpar: nullable TCpar
+		n_cpar: nullable TCpar,
+		n_kwend: nullable TKwend
 	)
 	do
+		_n_kwis = n_kwis
+		if n_kwis != null then n_kwis.parent = self
 		_n_at = n_at
 		if n_at != null then n_at.parent = self
 		_n_opar = n_opar
@@ -8080,10 +8279,16 @@ redef class AAnnotations
 		self.n_items.unsafe_add_all(n_items)
 		_n_cpar = n_cpar
 		if n_cpar != null then n_cpar.parent = self
+		_n_kwend = n_kwend
+		if n_kwend != null then n_kwend.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
+		if _n_kwis == old_child then
+			n_kwis = new_child.as(nullable TKwis)
+			return
+		end
 		if _n_at == old_child then
 			n_at = new_child.as(nullable TAt)
 			return
@@ -8097,8 +8302,17 @@ redef class AAnnotations
 			n_cpar = new_child.as(nullable TCpar)
 			return
 		end
+		if _n_kwend == old_child then
+			n_kwend = new_child.as(nullable TKwend)
+			return
+		end
 	end
 
+	redef fun n_kwis=(node)
+	do
+		_n_kwis = node
+		if node != null then node.parent = self
+	end
 	redef fun n_at=(node)
 	do
 		_n_at = node
@@ -8114,14 +8328,21 @@ redef class AAnnotations
 		_n_cpar = node
 		if node != null then node.parent = self
 	end
+	redef fun n_kwend=(node)
+	do
+		_n_kwend = node
+		if node != null then node.parent = self
+	end
 
 
 	redef fun visit_all(v: Visitor)
 	do
+		v.enter_visit(_n_kwis)
 		v.enter_visit(_n_at)
 		v.enter_visit(_n_opar)
 		n_items.visit_all(v)
 		v.enter_visit(_n_cpar)
+		v.enter_visit(_n_kwend)
 	end
 end
 redef class AAnnotation

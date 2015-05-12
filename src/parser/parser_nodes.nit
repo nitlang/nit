@@ -1142,8 +1142,14 @@ class AStdClassdef
 	# The name of the class
 	var n_id: nullable TClassid = null is writable
 
+	# The `[` symbol
+	var n_obra: nullable TObra = null is writable
+
 	# The list of formal parameter types
 	var n_formaldefs = new ANodes[AFormaldef](self)
+
+	# The `]` symbol
+	var n_cbra: nullable TCbra = null is writable
 
 	# The extern block code
 	var n_extern_code_block: nullable AExternCodeBlock = null is writable
@@ -1240,20 +1246,29 @@ end
 class AAttrPropdef
 	super APropdef
 
-	# The identifier for a old-style attribute (null if new-style)
+	# The `var` keyword
 	var n_kwvar: TKwvar is writable, noinit
 
-	# The identifier for a new-style attribute (null if old-style)
+	# The identifier for a new-style attribute
 	var n_id2: TId is writable, noinit
 
 	# The declared type of the attribute
 	var n_type: nullable AType = null is writable
 
+	# The `=` symbol
+	var n_assign: nullable TAssign = null is writable
+
 	# The initial value, if any (set with `=`)
 	var n_expr: nullable AExpr = null is writable
 
+	# The `do` keyword
+	var n_kwdo: nullable TKwdo = null is writable
+
 	# The initial value, if any (set with `do return`)
 	var n_block: nullable AExpr = null is writable
+
+	# The `end` keyword
+	var n_kwend: nullable TKwend = null is writable
 
 	redef fun hot_location
 	do
@@ -1280,8 +1295,14 @@ class AMethPropdef
 	# The signature of the method, if any
 	var n_signature: nullable ASignature = null is writable
 
+	# The `do` keyword
+	var n_kwdo: nullable TKwdo = null is writable
+
 	# The body (in Nit) of the method, if any
 	var n_block: nullable AExpr = null is writable
+
+	# The `end` keyword
+	var n_kwend: nullable TKwend = null is writable
 
 	# The list of declared callbacks (for extern methods)
 	var n_extern_calls: nullable AExternCalls = null is writable
@@ -1643,8 +1664,14 @@ class AType
 	# The name of the class or of the formal type
 	var n_id: TClassid is writable, noinit
 
+	# The opening bracket
+	var n_obra: nullable TObra = null is writable
+
 	# Type arguments for a generic type
 	var n_types = new ANodes[AType](self)
+
+	# The closing bracket
+	var n_cbra: nullable TCbra = null is writable
 end
 
 # A label at the end of a block or in a break/continue statement. eg `label x`
@@ -1771,8 +1798,14 @@ class AIfExpr
 	# The expression used as the condition of the `if`
 	var n_expr: AExpr is writable, noinit
 
+	# The `then` keyword
+	var n_kwthen: TKwthen is writable, noinit
+
 	# The body of the `then` part
 	var n_then: nullable AExpr = null is writable
+
+	# The `else` keyword
+	var n_kwelse: nullable TKwelse = null is writable
 
 	# The body of the `else` part
 	var n_else: nullable AExpr = null is writable
@@ -1842,6 +1875,9 @@ class AForExpr
 	# The list of name of the automatic variables
 	var n_ids = new ANodes[TId](self)
 
+	# The `in` keyword
+	var n_kwin: TKwin is writable, noinit
+
 	# The expression used as the collection to iterate on
 	var n_expr: AExpr is writable, noinit
 
@@ -1882,6 +1918,9 @@ class AAssertExpr
 
 	# The expression used as the condition of the `assert`
 	var n_expr: AExpr is writable, noinit
+
+	# The `else` keyword
+	var n_kwelse: nullable TKwelse = null is writable
 
 	# The body to execute when the assert fails
 	var n_else: nullable AExpr = null is writable
@@ -2319,7 +2358,10 @@ abstract class ARangeExpr
 	# The left (lower) element of the range
 	var n_expr: AExpr is writable, noinit
 
-	# The right (uppr) element of the range
+	# The `..`
+	var n_dotdot: TDotdot is writable, noinit
+
+	# The right (upper) element of the range
 	var n_expr2: AExpr is writable, noinit
 end
 
@@ -2802,6 +2844,9 @@ end
 class AAnnotations
 	super Prod
 
+	# The `is` keyword, for *is* annotations
+	var n_kwis: nullable TKwis = null is writable
+
 	# The `@` symbol, for *at* annotations
 	var n_at: nullable TAt = null is writable
 
@@ -2813,6 +2858,9 @@ class AAnnotations
 
 	# The closing parenthesis in *at* annotations
 	var n_cpar: nullable TCpar = null is writable
+
+	# The `end` keyword, for *is* annotations
+	var n_kwend: nullable TKwend = null is writable
 end
 
 # A single annotation
