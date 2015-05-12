@@ -23,17 +23,16 @@ var l = 0
 var inw = false
 while not stdin.eof do
 	var i = stdin.read_char
-	if i >= 0 then
-		var x = i.ascii
+	if i != null then
 		c = c + 1
-		if x > ' ' then
+		if i > ' ' then
 			if not inw then
 				inw = true
 				w = w + 1
 			end
 		else
 			inw = false
-			if x == '\n' then
+			if i == '\n' then
 				l = l + 1
 			end
 		end
