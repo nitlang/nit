@@ -24,7 +24,7 @@
 # impossible for you to compile the apk correctly
 module assets_and_resources
 
-import native_app_glue
+import dalvik
 import java
 import java::io
 
