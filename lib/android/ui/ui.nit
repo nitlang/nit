@@ -1,7 +1,5 @@
 # This file is part of NIT (http://www.nitlanguage.org).
 #
-# Copyright 2014 Alexis Laferrière <alexis.laf@xymus.net>
-#
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
@@ -17,134 +15,123 @@
 # Views and services to use the Android native user interface
 module ui
 
+# Implementation note:
+#
+# We cannot rely on `Activity::on_restore_instance_state` to implement
+# `on_restore_state` is it only invoked if there is a bundled state,
+# and we don't use the Android bundled state.
+
 import native_ui
+import log
+import nit_activity
 
-# An event from the `app.nit` framework
-interface AppEvent
-	# Reaction to this event
-	fun react do end
+import app::ui
+private import data_store
+
+redef class Control
+	# The Android element used to implement `self`
+	fun native: NATIVE is abstract
+
+	# Type of `native`
+	type NATIVE: JavaObject
 end
 
-# A control click event
-class ClickEvent
-	super AppEvent
+redef class Window
+	redef var native = app.native_activity
 
-	# Sender of this event
-	var sender: Button
+	redef type NATIVE: NativeActivity
 
-	redef fun react do sender.click self
+	redef fun add(item)
+	do
+		super
+
+		# FIXME abstract the Android restriction where `content_view` must be a layout
+		assert item isa Layout
+		native.content_view = item.native
+	end
 end
 
-# Receiver of events not handled directly by the sender
-interface EventCatcher
-	fun catch_event(event: AppEvent) do end
+redef class View
+	redef type NATIVE: NativeView
+
+	redef fun enabled=(enabled) do native.enabled = enabled or else true
+	redef fun enabled do return native.enabled
 end
 
-redef class App
-	super EventCatcher
+redef class Layout
+	redef type NATIVE: NativeViewGroup
+
+	redef fun add(item)
+	do
+		super
+
+		assert item isa View
+
+		# FIXME abstract the use either homogeneous or weight to balance views size in a layout
+		native.add_view_with_weight(item.native, 1.0)
+	end
 end
 
-# An `Object` that raises events
-abstract class Eventful
-	var event_catcher: EventCatcher = app is lazy, writable
+redef class HorizontalLayout
+	redef var native do
+		var layout = new NativeLinearLayout(app.native_activity)
+		layout.set_horizontal
+		return layout
+	end
 end
 
-#
-## Nity classes and services
-#
+redef class VerticalLayout
+	redef var native do
+		var layout = new NativeLinearLayout(app.native_activity)
+		layout.set_vertical
+		return layout
+	end
+end
 
-# An Android control with text
-abstract class TextView
+redef class TextView
+	redef type NATIVE: NativeTextView
+
+	redef fun text do return native.text.to_s
+	redef fun text=(value) do
+		if value == null then value = ""
+		native.text = value.to_java_string
+	end
+
+	# Size of the text
+	fun text_size: Float do return native.text_size
+
+	# Size of the text
+	fun text_size=(text_size: nullable Float) do
+		if text_size != null then native.text_size = text_size
+	end
+end
+
+redef class TextInput
+	redef type NATIVE: NativeEditText
+	redef var native = (new NativeEditText(app.native_activity)).new_global_ref
+end
+
+redef class Button
 	super Finalizable
-	super Eventful
-
-	# Native Java variant to this Nity class
-	type NATIVE: NativeTextView
-
-	# The native Java object encapsulated by `self`
-	var native: NATIVE is noinit
-
-	# Get the text of this view
-	fun text: String
-	do
-		var jstr = native.text
-		var str = jstr.to_s
-		jstr.delete_local_ref
-		return str
-	end
-
-	# Set the text of this view
-	fun text=(value: Text)
-	do
-		var jstr = value.to_s.to_java_string
-		native.text = jstr
-		jstr.delete_local_ref
-	end
-
-	# Get whether this view is enabled or not
-	fun enabled: Bool do return native.enabled
-
-	# Set if this view is enabled
-	fun enabled=(val: Bool) do native.enabled = val
-
-	# Set the size of the text in this view at `dpi`
-	fun text_size=(dpi: Numeric) do native.text_size = dpi.to_f
-
-	private var finalized = false
-	redef fun finalize
-	do
-		if not finalized then
-			native.delete_global_ref
-			finalized = true
-		end
-	end
-end
-
-# An Android button
-class Button
-	super TextView
 
 	redef type NATIVE: NativeButton
+	redef var native = (new NativeButton(app.native_activity, self)).new_global_ref
 
-	init
-	do
-		var native = new NativeButton(app.native_activity, self)
-		self.native = native.new_global_ref
-	end
+	private fun on_click do notify_observers new ButtonPressEvent(self)
 
-	# Click event
-	#
-	# By default, this method calls `app.catch_event`. It can be specialized
-	# with custom behavior or the receiver of `catch_event` can be changed
-	# with `event_catcher=`.
-	fun click(event: AppEvent) do event_catcher.catch_event(event)
-
-	private fun click_from_native do click(new ClickEvent(self))
-end
-
-# An Android editable text field
-class EditText
-	super TextView
-
-	redef type NATIVE: NativeEditText
-
-	init
-	do
-		var native = new NativeEditText(app.activities.first.native)
-		self.native = native.new_global_ref
-	end
+	redef fun finalize do native.delete_global_ref
 end
 
 redef class NativeButton
-	new (context: NativeActivity, sender_object: Object)
-	import Button.click_from_native in "Java" `{
+	private new (context: NativeActivity, sender_object: Button)
+	import Button.on_click in "Java" `{
 		final int final_sender_object = sender_object;
 
 		return new android.widget.Button(context){
 			@Override
 			public boolean onTouchEvent(android.view.MotionEvent event) {
 				if(event.getAction() == android.view.MotionEvent.ACTION_DOWN) {
-					Button_click_from_native(final_sender_object);
+					Button_on_click(final_sender_object);
 					return true;
 				}
 				return false;
