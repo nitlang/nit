@@ -14,6 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Base of the _app.nit_ framework, defines `App`
 module app_base is
 	new_annotation app_name
 	new_annotation app_namespace
@@ -22,9 +23,11 @@ end
 
 # App subclasses are cross-platform applications
 #
-# This class is redefed by plateform modules and so
-# App can be specialized directly in the user app.
+# This class is refined by platform modules and so
+# App can be specialized directly in the user application code.
 class App
+	super AppComponent
+
 	protected init do end
 
 	# Starts the internal setup of graphical and other stuff
@@ -33,14 +36,47 @@ class App
 
 	# Main entry point of your application
 	fun run do end
+end
 
-	# Main init method for graphical stuff
-	# Is called when display is ready so graphical assets
-	# can be loaded at this time.
-	fun window_created do end
+# An element of an application that is notified of the application life cycle
+#
+# Most users of _app.nit_ need only to implement `on_create` to setup the application.
+#
+# On mobile devices, the application can be stopped a anytime when another application takes the foreground.
+# Implement the callbacks `on_save_state` and `on_load_state` to keep the state of the application between execution,
+# for an illusion of continuous execution.
+abstract class AppComponent
 
-	# Called before destroying the window
-	fun window_closing do end
+	# The application is being created
+	#
+	# You should build the UI at this time.
+	fun on_create do end
+
+	# The application is starting or restarting, it is visible to the user
+	fun on_start do end
+
+	# The application enters the active state, it is in the foreground and interactive
+	fun on_resume do end
+
+	# The application leaves the active state but is still partially visible
+	#
+	# It may still be visible in the background.
+	# It may then go back to `on_resume` or `on_stop`.
+	fun on_pause do end
+
+	# The application is completely hidden from the user
+	#
+	# It may then be destroyed (`on_destroy`) or go back to `on_start`.
+	fun on_stop do end
+
+	# The application is being destroyed
+	fun on_destroy do end
+
+	# The application may be destroyed soon, save its state for a future `on_restore_state`
+	fun on_save_state do end
+
+	# The application is launching, restore its state from a previous `on_save_state`
+	fun on_restore_state do end
 end
 
 # Print a warning
@@ -52,5 +88,6 @@ end
 
 # The running `App`
 fun app: App do return once new App
+
 app.setup
 app.run
