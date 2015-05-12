@@ -30,41 +30,35 @@ redef class App
 	redef fun init_window
 	do
 		super
-		window_created
+		on_create
+		on_restore_state
+		on_start
 	end
 
 	redef fun term_window
 	do
 		super
-		window_closing
+		on_stop
 	end
 
 	# Is the application currently paused?
 	var paused = true
 
-	redef fun window_created
-	do
-		super
-		paused = false
-	end
-
-	redef fun window_closing
-	do
-		paused = true
-		super
-	end
-
 	redef fun pause
 	do
 		paused = true
+		on_pause
 		super
 	end
 
 	redef fun resume
 	do
 		paused = false
+		on_resume
 		super
 	end
+
+	redef fun save_state do on_save_state
 
 	redef fun lost_focus
 	do
@@ -78,5 +72,5 @@ redef class App
 		super
 	end
 
-	redef fun destroy do exit 0
+	redef fun destroy do on_destroy
 end
