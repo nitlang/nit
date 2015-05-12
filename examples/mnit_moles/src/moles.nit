@@ -233,7 +233,7 @@ redef class App
 
 	var screen: nullable Screen = null
 
-	redef fun window_created
+	redef fun on_create
 	do
 		super
 

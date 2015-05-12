@@ -21,7 +21,7 @@ import simple
 import app::data_store
 
 redef class App
-	redef fun window_created
+	redef fun on_create
 	do
 		super
 

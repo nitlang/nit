@@ -18,7 +18,7 @@ redef class App
 	# Zoom applied for the device display from the game logic coordinates
 	var zoom = 1.0
 
-	redef fun window_created
+	redef fun on_create
 	do
 		super
 

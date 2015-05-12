@@ -1583,7 +1583,7 @@ redef class App
 	# Wanted screen height
 	var screen_height = 480
 
-	redef fun window_created
+	redef fun on_create
 	do
 		super
 		game = new Game

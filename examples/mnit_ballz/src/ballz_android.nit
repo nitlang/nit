@@ -41,7 +41,7 @@ redef class App
 		super
 	end
 
-	redef fun window_created
+	redef fun on_create
 	do
 		super
 		screen = new Screen(self, display.as(Display))
