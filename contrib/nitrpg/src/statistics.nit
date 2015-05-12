@@ -273,7 +273,7 @@ redef class IssueCommentEvent
 			game.stats.inc("comments")
 			player.stats.inc("comments")
 			# FIXME use a more precise way to locate reviews
-			if comment.has_ok_review then
+			if comment.is_ack then
 				game.stats.inc("reviews")
 				player.stats.inc("reviews")
 			end
@@ -281,9 +281,4 @@ redef class IssueCommentEvent
 			player.save
 		end
 	end
-end
-
-redef class IssueComment
-	# Does this comment contain a "+1"?
-	fun has_ok_review: Bool do return body.has("\\+1\\b".to_re)
 end

@@ -18,7 +18,7 @@
 # `android.content.Intent` for the android platform
 module intent_api10
 
-import native_app_glue
+import dalvik
 import android::bundle
 import serialization
 private import json_serialization
@@ -33,6 +33,8 @@ in "Java" `{
 
 extern class NativeIntent in "Java" `{ android.content.Intent `}
 	super JavaObject
+
+	new in "Java" `{ return new Intent(); `}
 
 	fun add_category(category: JavaString) in "Java" `{ recv.addCategory(category); `}
 	fun add_flags(flags: Int) in "Java" `{ recv.addFlags((int)flags); `}
@@ -626,23 +628,7 @@ end
 
 # Services allowing to launch an activity and start/stop services
 class Intent
-	protected var intent: NativeIntent
-	protected var context: NativeActivity
-
-	init (app: App)
-	do
-		self.context = app.native_activity
-		setup
-	end
-
-	private fun set_vars(intent: NativeIntent) do
-		self.intent = intent.new_global_ref
-	end
-
-	private fun setup import context, intent, set_vars in "Java" `{
-		Intent intent = new Intent();
-		Intent_set_vars(recv, intent);
-	`}
+	protected var intent: NativeIntent = (new NativeIntent).new_global_ref is lazy
 
 	# The general action to be performed
 	#
@@ -1311,14 +1297,6 @@ class Intent
 		sys.jni_env.pop_local_frame
 		return self
 	end
-	# Execute the intent and launch the appropriate application
-	fun launch_activity do context.start_activity(intent)
-
-	# Start a service that will be running until the `stop_service` call
-	fun start_service do context.start_service(intent)
-
-	# Stop service
-	fun stop_service do context.stop_service(intent)
 
 	# Deletes intent global reference
 	fun destroy do self.intent.delete_global_ref
@@ -1328,9 +1306,9 @@ class Intent
 end
 
 redef extern class NativeActivity
-	fun start_activity(intent: NativeIntent) in "Java" `{ recv.startActivity(intent); `}
-	fun start_service(intent: NativeIntent) in "Java" `{ recv.startService(intent); `}
-	fun stop_service(intent: NativeIntent) in "Java" `{ recv.stopService(intent); `}
+	private fun start_activity(intent: NativeIntent) in "Java" `{ recv.startActivity(intent); `}
+	private fun start_service(intent: NativeIntent) in "Java" `{ recv.startService(intent); `}
+	private fun stop_service(intent: NativeIntent) in "Java" `{ recv.stopService(intent); `}
 end
 
 # Allows user to get values with enum-like syntax : `intent_action.main`
@@ -1348,4 +1326,16 @@ end
 private class StringCopyHashSet
 	var collection = new HashSet[String]
 	fun add(element: JavaString) do collection.add element.to_s
+end
+
+redef class App
+
+	# Execute the intent and launch the appropriate application
+	fun start_activity(intent: Intent) do native_activity.start_activity(intent.intent)
+
+	# Start a service that will be running until the `stop_service` call
+	fun start_service(intent: Intent) do native_activity.start_service(intent.intent)
+
+	# Stop service
+	fun stop_service(intent: Intent) do native_activity.stop_service(intent.intent)
 end

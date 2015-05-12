@@ -41,6 +41,7 @@ Start ../src/test_parser.nit:17,1--156,1
         TId "rank" ../src/test_parser.nit:27,14--17
         AType ../src/test_parser.nit:27,20--22
           TClassid "Int" ../src/test_parser.nit:27,20--22
+        TAssign "=" ../src/test_parser.nit:27,24
         ADecIntExpr ../src/test_parser.nit:27,26
           TNumber "0" ../src/test_parser.nit:27,26
       AMethPropdef ../src/test_parser.nit:28,2--38,4
@@ -54,6 +55,7 @@ Start ../src/test_parser.nit:17,1--156,1
           AParam ../src/test_parser.nit:28,18
             TId "n" ../src/test_parser.nit:28,18
           TCpar ")" ../src/test_parser.nit:28,19
+        TKwdo "do" ../src/test_parser.nit:29,2--3
         ABlockExpr ../src/test_parser.nit:30,3--38,4
           AIfExpr ../src/test_parser.nit:30,3--34,5
             TKwif "if" ../src/test_parser.nit:30,3--4
@@ -65,6 +67,7 @@ Start ../src/test_parser.nit:17,1--156,1
               TKwisa "isa" ../src/test_parser.nit:30,8--10
               AType ../src/test_parser.nit:30,12--16
                 TClassid "Token" ../src/test_parser.nit:30,12--16
+            TKwthen "then" ../src/test_parser.nit:30,18--21
             ABlockExpr ../src/test_parser.nit:31,4--88
               ACallExpr ../src/test_parser.nit:31,4--88
                 AImplicitSelfExpr ../src/test_parser.nit:31,4
@@ -110,6 +113,7 @@ Start ../src/test_parser.nit:17,1--156,1
                   AStringExpr ../src/test_parser.nit:31,84--87
                     TString "\"\\n\"" ../src/test_parser.nit:31,84--87
                   TCpar ")" ../src/test_parser.nit:31,88
+            TKwelse "else" ../src/test_parser.nit:32,3--6
             ABlockExpr ../src/test_parser.nit:33,4--34,5
               ACallExpr ../src/test_parser.nit:33,4--59
                 AImplicitSelfExpr ../src/test_parser.nit:33,4
@@ -267,6 +271,7 @@ Start ../src/test_parser.nit:17,1--156,1
                   TEq "==" ../src/test_parser.nit:49,16--17
                   AStringExpr ../src/test_parser.nit:49,19--22
                     TString "\"-n\"" ../src/test_parser.nit:49,19--22
+                TKwthen "then" ../src/test_parser.nit:49,24--27
                 ABlockExpr ../src/test_parser.nit:50,3--17
                   ACallAssignExpr ../src/test_parser.nit:50,3--17
                     AImplicitSelfExpr ../src/test_parser.nit:50,3
@@ -275,6 +280,7 @@ Start ../src/test_parser.nit:17,1--156,1
                     TAssign "=" ../src/test_parser.nit:50,12
                     ATrueExpr ../src/test_parser.nit:50,14--17
                       TKwtrue "true" ../src/test_parser.nit:50,14--17
+                TKwelse "else" ../src/test_parser.nit:51,2--5
                 AIfExpr ../src/test_parser.nit:51,7--66,4
                   TKwif "if" ../src/test_parser.nit:51,7--8
                   AEqExpr ../src/test_parser.nit:51,10--27
@@ -288,6 +294,7 @@ Start ../src/test_parser.nit:17,1--156,1
                     TEq "==" ../src/test_parser.nit:51,21--22
                     AStringExpr ../src/test_parser.nit:51,24--27
                       TString "\"-l\"" ../src/test_parser.nit:51,24--27
+                  TKwthen "then" ../src/test_parser.nit:51,29--32
                   ABlockExpr ../src/test_parser.nit:52,3--19
                     ACallAssignExpr ../src/test_parser.nit:52,3--19
                       AImplicitSelfExpr ../src/test_parser.nit:52,3
@@ -296,6 +303,7 @@ Start ../src/test_parser.nit:17,1--156,1
                       TAssign "=" ../src/test_parser.nit:52,14
                       ATrueExpr ../src/test_parser.nit:52,16--19
                         TKwtrue "true" ../src/test_parser.nit:52,16--19
+                  TKwelse "else" ../src/test_parser.nit:53,2--5
                   AIfExpr ../src/test_parser.nit:53,7--66,4
                     TKwif "if" ../src/test_parser.nit:53,7--8
                     AEqExpr ../src/test_parser.nit:53,10--27
@@ -309,6 +317,7 @@ Start ../src/test_parser.nit:17,1--156,1
                       TEq "==" ../src/test_parser.nit:53,21--22
                       AStringExpr ../src/test_parser.nit:53,24--27
                         TString "\"-p\"" ../src/test_parser.nit:53,24--27
+                    TKwthen "then" ../src/test_parser.nit:53,29--32
                     ABlockExpr ../src/test_parser.nit:54,3--20
                       ACallAssignExpr ../src/test_parser.nit:54,3--20
                         AImplicitSelfExpr ../src/test_parser.nit:54,3
@@ -317,6 +326,7 @@ Start ../src/test_parser.nit:17,1--156,1
                         TAssign "=" ../src/test_parser.nit:54,14
                         AFalseExpr ../src/test_parser.nit:54,16--20
                           TKwfalse "false" ../src/test_parser.nit:54,16--20
+                    TKwelse "else" ../src/test_parser.nit:55,2--5
                     AIfExpr ../src/test_parser.nit:55,7--66,4
                       TKwif "if" ../src/test_parser.nit:55,7--8
                       AEqExpr ../src/test_parser.nit:55,10--27
@@ -330,6 +340,7 @@ Start ../src/test_parser.nit:17,1--156,1
                         TEq "==" ../src/test_parser.nit:55,21--22
                         AStringExpr ../src/test_parser.nit:55,24--27
                           TString "\"-x\"" ../src/test_parser.nit:55,24--27
+                      TKwthen "then" ../src/test_parser.nit:55,29--32
                       ABlockExpr ../src/test_parser.nit:56,3--12
                         ACallAssignExpr ../src/test_parser.nit:56,3--12
                           AImplicitSelfExpr ../src/test_parser.nit:56,3
@@ -338,6 +349,7 @@ Start ../src/test_parser.nit:17,1--156,1
                           TAssign "=" ../src/test_parser.nit:56,7
                           ATrueExpr ../src/test_parser.nit:56,9--12
                             TKwtrue "true" ../src/test_parser.nit:56,9--12
+                      TKwelse "else" ../src/test_parser.nit:57,2--5
                       AIfExpr ../src/test_parser.nit:57,7--66,4
                         TKwif "if" ../src/test_parser.nit:57,7--8
                         AEqExpr ../src/test_parser.nit:57,10--27
@@ -351,6 +363,7 @@ Start ../src/test_parser.nit:17,1--156,1
                           TEq "==" ../src/test_parser.nit:57,21--22
                           AStringExpr ../src/test_parser.nit:57,24--27
                             TString "\"-e\"" ../src/test_parser.nit:57,24--27
+                        TKwthen "then" ../src/test_parser.nit:57,29--32
                         ABlockExpr ../src/test_parser.nit:58,3--16
                           ACallAssignExpr ../src/test_parser.nit:58,3--16
                             AImplicitSelfExpr ../src/test_parser.nit:58,3
@@ -359,6 +372,7 @@ Start ../src/test_parser.nit:17,1--156,1
                             TAssign "=" ../src/test_parser.nit:58,11
                             ATrueExpr ../src/test_parser.nit:58,13--16
                               TKwtrue "true" ../src/test_parser.nit:58,13--16
+                        TKwelse "else" ../src/test_parser.nit:59,2--5
                         AIfExpr ../src/test_parser.nit:59,7--66,4
                           TKwif "if" ../src/test_parser.nit:59,7--8
                           AEqExpr ../src/test_parser.nit:59,10--27
@@ -372,6 +386,7 @@ Start ../src/test_parser.nit:17,1--156,1
                             TEq "==" ../src/test_parser.nit:59,21--22
                             AStringExpr ../src/test_parser.nit:59,24--27
                               TString "\"-i\"" ../src/test_parser.nit:59,24--27
+                          TKwthen "then" ../src/test_parser.nit:59,29--32
                           ABlockExpr ../src/test_parser.nit:60,3--20
                             ACallAssignExpr ../src/test_parser.nit:60,3--20
                               AImplicitSelfExpr ../src/test_parser.nit:60,3
@@ -380,6 +395,7 @@ Start ../src/test_parser.nit:17,1--156,1
                               TAssign "=" ../src/test_parser.nit:60,15
                               ATrueExpr ../src/test_parser.nit:60,17--20
                                 TKwtrue "true" ../src/test_parser.nit:60,17--20
+                          TKwelse "else" ../src/test_parser.nit:61,2--5
                           AIfExpr ../src/test_parser.nit:61,7--66,4
                             TKwif "if" ../src/test_parser.nit:61,7--8
                             AOrExpr ../src/test_parser.nit:61,10--49
@@ -406,6 +422,7 @@ Start ../src/test_parser.nit:17,1--156,1
                                 TEq "==" ../src/test_parser.nit:61,43--44
                                 AStringExpr ../src/test_parser.nit:61,46--49
                                   TString "\"-?\"" ../src/test_parser.nit:61,46--49
+                            TKwthen "then" ../src/test_parser.nit:61,51--54
                             ABlockExpr ../src/test_parser.nit:62,3--18
                               ACallAssignExpr ../src/test_parser.nit:62,3--18
                                 AImplicitSelfExpr ../src/test_parser.nit:62,3
@@ -414,6 +431,7 @@ Start ../src/test_parser.nit:17,1--156,1
                                 TAssign "=" ../src/test_parser.nit:62,13
                                 ATrueExpr ../src/test_parser.nit:62,15--18
                                   TKwtrue "true" ../src/test_parser.nit:62,15--18
+                            TKwelse "else" ../src/test_parser.nit:63,2--5
                             ABlockExpr ../src/test_parser.nit:64,3--66,4
                               ACallExpr ../src/test_parser.nit:64,3--48
                                 ACallExpr ../src/test_parser.nit:64,3--8
@@ -479,6 +497,7 @@ Start ../src/test_parser.nit:17,1--156,1
                 AImplicitSelfExpr ../src/test_parser.nit:70,43
                 TId "need_help" ../src/test_parser.nit:70,43--51
                 AListExprs ../src/test_parser.nit:70,51
+            TKwthen "then" ../src/test_parser.nit:70,53--56
             ABlockExpr ../src/test_parser.nit:71,2--82,30
               ACallExpr ../src/test_parser.nit:71,2--16
                 AImplicitSelfExpr ../src/test_parser.nit:71,2
@@ -576,12 +595,14 @@ Start ../src/test_parser.nit:17,1--156,1
                   AStringExpr ../src/test_parser.nit:82,8--29
                     TString "\"  -h\tprint this help\"" ../src/test_parser.nit:82,8--29
                   TCpar ")" ../src/test_parser.nit:82,30
+            TKwelse "else" ../src/test_parser.nit:83,1--4
             AIfExpr ../src/test_parser.nit:83,6--155,3
               TKwif "if" ../src/test_parser.nit:83,6--7
               ACallExpr ../src/test_parser.nit:83,9--19
                 AImplicitSelfExpr ../src/test_parser.nit:83,9
                 TId "interactive" ../src/test_parser.nit:83,9--19
                 AListExprs ../src/test_parser.nit:83,19
+              TKwthen "then" ../src/test_parser.nit:83,21--24
               ABlockExpr ../src/test_parser.nit:84,2--117,4
                 AIfExpr ../src/test_parser.nit:84,2--93,4
                   TKwif "if" ../src/test_parser.nit:84,2--3
@@ -589,6 +610,7 @@ Start ../src/test_parser.nit:17,1--156,1
                     AImplicitSelfExpr ../src/test_parser.nit:84,5
                     TId "only_lexer" ../src/test_parser.nit:84,5--14
                     AListExprs ../src/test_parser.nit:84,14
+                  TKwthen "then" ../src/test_parser.nit:84,16--19
                   ABlockExpr ../src/test_parser.nit:85,3--86,8
                     ACallExpr ../src/test_parser.nit:85,3--43
                       AImplicitSelfExpr ../src/test_parser.nit:85,3
@@ -602,12 +624,14 @@ Start ../src/test_parser.nit:17,1--156,1
                       AListExprs ../src/test_parser.nit:86,8
                         ADecIntExpr ../src/test_parser.nit:86,8
                           TNumber "1" ../src/test_parser.nit:86,8
+                  TKwelse "else" ../src/test_parser.nit:87,2--5
                   AIfExpr ../src/test_parser.nit:87,7--93,4
                     TKwif "if" ../src/test_parser.nit:87,7--8
                     ACallExpr ../src/test_parser.nit:87,10--16
                       AImplicitSelfExpr ../src/test_parser.nit:87,10
                       TId "no_file" ../src/test_parser.nit:87,10--16
                       AListExprs ../src/test_parser.nit:87,16
+                    TKwthen "then" ../src/test_parser.nit:87,18--21
                     ABlockExpr ../src/test_parser.nit:88,3--89,8
                       ACallExpr ../src/test_parser.nit:88,3--43
                         AImplicitSelfExpr ../src/test_parser.nit:88,3
@@ -621,6 +645,7 @@ Start ../src/test_parser.nit:17,1--156,1
                         AListExprs ../src/test_parser.nit:89,8
                           ADecIntExpr ../src/test_parser.nit:89,8
                             TNumber "1" ../src/test_parser.nit:89,8
+                    TKwelse "else" ../src/test_parser.nit:90,2--5
                     AIfExpr ../src/test_parser.nit:90,7--93,4
                       TKwif "if" ../src/test_parser.nit:90,7--8
                       ANotExpr ../src/test_parser.nit:90,10--26
@@ -632,6 +657,7 @@ Start ../src/test_parser.nit:17,1--156,1
                             AListExprs ../src/test_parser.nit:90,17
                           TId "is_empty" ../src/test_parser.nit:90,19--26
                           AListExprs ../src/test_parser.nit:90,26
+                      TKwthen "then" ../src/test_parser.nit:90,28--31
                       ABlockExpr ../src/test_parser.nit:91,3--92,8
                         ACallExpr ../src/test_parser.nit:91,3--43
                           AImplicitSelfExpr ../src/test_parser.nit:91,3
@@ -684,6 +710,7 @@ Start ../src/test_parser.nit:17,1--156,1
                         TKwisa "isa" ../src/test_parser.nit:99,8--10
                         AType ../src/test_parser.nit:99,12--18
                           TClassid "TString" ../src/test_parser.nit:99,12--18
+                      TKwthen "then" ../src/test_parser.nit:99,20--23
                       ABlockExpr ../src/test_parser.nit:100,4--106,11
                         AVardeclExpr ../src/test_parser.nit:100,4--17
                           TKwvar "var" ../src/test_parser.nit:100,4--6
@@ -706,9 +733,11 @@ Start ../src/test_parser.nit:17,1--156,1
                             TEq "==" ../src/test_parser.nit:101,9--10
                             AStringExpr ../src/test_parser.nit:101,12--15
                               TString "\":q\"" ../src/test_parser.nit:101,12--15
+                          TKwthen "then" ../src/test_parser.nit:101,17--20
                           ABlockExpr ../src/test_parser.nit:102,5--9
                             ABreakExpr ../src/test_parser.nit:102,5--9
                               TKwbreak "break" ../src/test_parser.nit:102,5--9
+                          TKwelse "else" ../src/test_parser.nit:103,4--7
                           ABlockExpr ../src/test_parser.nit:104,5--105,6
                             ACallExpr ../src/test_parser.nit:104,5--24
                               AImplicitSelfExpr ../src/test_parser.nit:104,5
@@ -731,6 +760,7 @@ Start ../src/test_parser.nit:17,1--156,1
                         TKwisa "isa" ../src/test_parser.nit:109,8--10
                         AType ../src/test_parser.nit:109,12--17
                           TClassid "AError" ../src/test_parser.nit:109,12--17
+                      TKwthen "then" ../src/test_parser.nit:109,19--22
                       ABlockExpr ../src/test_parser.nit:110,4--111,11
                         ACallExpr ../src/test_parser.nit:110,4--57
                           AImplicitSelfExpr ../src/test_parser.nit:110,4
@@ -776,6 +806,7 @@ Start ../src/test_parser.nit:17,1--156,1
                           AImplicitSelfExpr ../src/test_parser.nit:114,10
                           TId "no_print" ../src/test_parser.nit:114,10--17
                           AListExprs ../src/test_parser.nit:114,17
+                      TKwthen "then" ../src/test_parser.nit:114,19--22
                       ABlockExpr ../src/test_parser.nit:115,4--40
                         ACallExpr ../src/test_parser.nit:115,4--40
                           AParExpr ../src/test_parser.nit:115,4--25
@@ -797,10 +828,12 @@ Start ../src/test_parser.nit:17,1--156,1
                       ABlockExpr ../src/test_parser.nit:116,3--5
                         TKwend "end" ../src/test_parser.nit:116,3--5
                     TKwend "end" ../src/test_parser.nit:117,2--4
+              TKwelse "else" ../src/test_parser.nit:118,1--4
               ABlockExpr ../src/test_parser.nit:119,2--155,3
                 AForExpr ../src/test_parser.nit:119,2--154,4
                   TKwfor "for" ../src/test_parser.nit:119,2--4
                   TId "a" ../src/test_parser.nit:119,6
+                  TKwin "in" ../src/test_parser.nit:119,8--9
                   ACallExpr ../src/test_parser.nit:119,11--14
                     AImplicitSelfExpr ../src/test_parser.nit:119,11
                     TId "args" ../src/test_parser.nit:119,11--14
@@ -816,6 +849,7 @@ Start ../src/test_parser.nit:17,1--156,1
                         AImplicitSelfExpr ../src/test_parser.nit:121,6
                         TId "no_file" ../src/test_parser.nit:121,6--12
                         AListExprs ../src/test_parser.nit:121,12
+                      TKwthen "then" ../src/test_parser.nit:121,14--17
                       ABlockExpr ../src/test_parser.nit:122,4--45
                         ACallAssignExpr ../src/test_parser.nit:122,4--45
                           AImplicitSelfExpr ../src/test_parser.nit:122,4
@@ -836,6 +870,7 @@ Start ../src/test_parser.nit:17,1--156,1
                                 TId "a" ../src/test_parser.nit:122,44
                                 AListExprs ../src/test_parser.nit:122,44
                               TCpar ")" ../src/test_parser.nit:122,45
+                      TKwelse "else" ../src/test_parser.nit:123,3--6
                       ABlockExpr ../src/test_parser.nit:124,4--127,5
                         AVardeclExpr ../src/test_parser.nit:124,4--33
                           TKwvar "var" ../src/test_parser.nit:124,4--6
@@ -902,6 +937,7 @@ Start ../src/test_parser.nit:17,1--156,1
                         AImplicitSelfExpr ../src/test_parser.nit:129,6
                         TId "only_lexer" ../src/test_parser.nit:129,6--15
                         AListExprs ../src/test_parser.nit:129,15
+                      TKwthen "then" ../src/test_parser.nit:129,17--20
                       ABlockExpr ../src/test_parser.nit:130,4--136,6
                         AVardeclExpr ../src/test_parser.nit:130,4--25
                           TKwvar "var" ../src/test_parser.nit:130,4--6
@@ -936,6 +972,7 @@ Start ../src/test_parser.nit:17,1--156,1
                                   AImplicitSelfExpr ../src/test_parser.nit:132,12
                                   TId "no_print" ../src/test_parser.nit:132,12--19
                                   AListExprs ../src/test_parser.nit:132,19
+                              TKwthen "then" ../src/test_parser.nit:132,21--24
                               ABlockExpr ../src/test_parser.nit:133,6--64
                                 ACallExpr ../src/test_parser.nit:133,6--64
                                   AImplicitSelfExpr ../src/test_parser.nit:133,6
@@ -979,6 +1016,7 @@ Start ../src/test_parser.nit:17,1--156,1
                                 TId "next" ../src/test_parser.nit:135,19--22
                                 AListExprs ../src/test_parser.nit:135,22
                             TKwend "end" ../src/test_parser.nit:136,4--6
+                      TKwelse "else" ../src/test_parser.nit:137,3--6
                       ABlockExpr ../src/test_parser.nit:138,4--153,5
                         AVardeclExpr ../src/test_parser.nit:138,4--33
                           TKwvar "var" ../src/test_parser.nit:138,4--6
@@ -1027,6 +1065,7 @@ Start ../src/test_parser.nit:17,1--156,1
                             TKwisa "isa" ../src/test_parser.nit:142,13--15
                             AType ../src/test_parser.nit:142,17--22
                               TClassid "AError" ../src/test_parser.nit:142,17--22
+                          TKwthen "then" ../src/test_parser.nit:142,24--27
                           ABlockExpr ../src/test_parser.nit:143,5--144,10
                             ACallExpr ../src/test_parser.nit:143,5--58
                               AImplicitSelfExpr ../src/test_parser.nit:143,5
@@ -1065,6 +1104,7 @@ Start ../src/test_parser.nit:17,1--156,1
                             AImplicitSelfExpr ../src/test_parser.nit:147,7
                             TId "xml" ../src/test_parser.nit:147,7--9
                             AListExprs ../src/test_parser.nit:147,9
+                          TKwthen "then" ../src/test_parser.nit:147,11--14
                           ABlockExpr ../src/test_parser.nit:148,5--149,32
                             ACallExpr ../src/test_parser.nit:148,5--25
                               ACallExpr ../src/test_parser.nit:148,5--8
@@ -1089,6 +1129,7 @@ Start ../src/test_parser.nit:17,1--156,1
                                   TId "stdout" ../src/test_parser.nit:149,26--31
                                   AListExprs ../src/test_parser.nit:149,31
                                 TCpar ")" ../src/test_parser.nit:149,32
+                          TKwelse "else" ../src/test_parser.nit:150,4--7
                           AIfExpr ../src/test_parser.nit:150,9--152,6
                             TKwif "if" ../src/test_parser.nit:150,9--10
                             ANotExpr ../src/test_parser.nit:150,12--23
@@ -1097,6 +1138,7 @@ Start ../src/test_parser.nit:17,1--156,1
                                 AImplicitSelfExpr ../src/test_parser.nit:150,16
                                 TId "no_print" ../src/test_parser.nit:150,16--23
                                 AListExprs ../src/test_parser.nit:150,23
+                            TKwthen "then" ../src/test_parser.nit:150,25--28
                             ABlockExpr ../src/test_parser.nit:151,5--44
                               ACallExpr ../src/test_parser.nit:151,5--44
                                 AParExpr ../src/test_parser.nit:151,5--26

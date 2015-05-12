@@ -426,7 +426,9 @@ class AStdClassdef
 	var n_visibility: AVisibility is writable, noinit
 	var n_classkind: AClasskind is writable, noinit
 	var n_id: nullable TClassid = null is writable
+	var n_obra: nullable TObra = null is writable
 	var n_formaldefs: List[AFormaldef] = new List[AFormaldef]
+	var n_cbra: nullable TCbra = null is writable
 	var n_extern_code_block: nullable AExternCodeBlock = null is writable
 	var n_propdefs: List[APropdef] = new List[APropdef]
 	var n_kwend: TKwend is writable, noinit
@@ -475,9 +477,12 @@ class AAttrPropdef
 	var n_kwvar: TKwvar is writable, noinit
 	var n_id2: TId is writable, noinit
 	var n_type: nullable AType = null is writable
+	var n_assign: nullable TAssign = null is writable
 	var n_expr: nullable AExpr = null is writable
 	var n_annotations: nullable AAnnotations = null is writable
+	var n_kwdo: nullable TKwdo = null is writable
 	var n_block: nullable AExpr = null is writable
+	var n_kwend: nullable TKwend = null is writable
 end
 class AMainMethPropdef
 	super APropdef
@@ -507,7 +512,9 @@ class AMethPropdef
 	var n_annotations: nullable AAnnotations = null is writable
 	var n_extern_calls: nullable AExternCalls = null is writable
 	var n_extern_code_block: nullable AExternCodeBlock = null is writable
+	var n_kwdo: nullable TKwdo = null is writable
 	var n_block: nullable AExpr = null is writable
+	var n_kwend: nullable TKwend = null is writable
 end
 class ASuperPropdef
 	super APropdef
@@ -643,7 +650,9 @@ class AType
 	super AType
 	var n_kwnullable: nullable TKwnullable = null is writable
 	var n_id: TClassid is writable, noinit
+	var n_obra: nullable TObra = null is writable
 	var n_types: List[AType] = new List[AType]
+	var n_cbra: nullable TCbra = null is writable
 	var n_annotations: nullable AAnnotations = null is writable
 end
 class ALabel
@@ -694,7 +703,9 @@ class AIfExpr
 	super AExpr
 	var n_kwif: TKwif is writable, noinit
 	var n_expr: AExpr is writable, noinit
+	var n_kwthen: TKwthen is writable, noinit
 	var n_then: nullable AExpr = null is writable
+	var n_kwelse: nullable TKwelse = null is writable
 	var n_else: nullable AExpr = null is writable
 end
 class AIfexprExpr
@@ -724,6 +735,7 @@ class AForExpr
 	super AExpr
 	var n_kwfor: TKwfor is writable, noinit
 	var n_ids: List[TId] = new List[TId]
+	var n_kwin: TKwin is writable, noinit
 	var n_expr: AExpr is writable, noinit
 	var n_kwdo: TKwdo is writable, noinit
 	var n_block: nullable AExpr = null is writable
@@ -742,6 +754,7 @@ class AAssertExpr
 	var n_kwassert: TKwassert is writable, noinit
 	var n_id: nullable TId = null is writable
 	var n_expr: AExpr is writable, noinit
+	var n_kwelse: nullable TKwelse = null is writable
 	var n_else: nullable AExpr = null is writable
 end
 class AOnceExpr
@@ -1022,6 +1035,7 @@ class ACrangeExpr
 	super AExpr
 	var n_obra: TObra is writable, noinit
 	var n_expr: AExpr is writable, noinit
+	var n_dotdot: TDotdot is writable, noinit
 	var n_expr2: AExpr is writable, noinit
 	var n_cbra: TCbra is writable, noinit
 	var n_annotations: nullable AAnnotations = null is writable
@@ -1030,6 +1044,7 @@ class AOrangeExpr
 	super AExpr
 	var n_obra: TObra is writable, noinit
 	var n_expr: AExpr is writable, noinit
+	var n_dotdot: TDotdot is writable, noinit
 	var n_expr2: AExpr is writable, noinit
 	var n_cbra: TObra is writable, noinit
 	var n_annotations: nullable AAnnotations = null is writable
@@ -1305,10 +1320,12 @@ class ADoc
 end
 class AAnnotations
 	super AAnnotations
+	var n_kwis: nullable TKwis = null is writable
 	var n_at: nullable TAt = null is writable
 	var n_opar: nullable TOpar = null is writable
 	var n_items: List[AAnnotation] = new List[AAnnotation]
 	var n_cpar: nullable TCpar = null is writable
+	var n_kwend: nullable TKwend = null is writable
 end
 class AAnnotation
 	super AAnnotation

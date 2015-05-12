@@ -21,7 +21,7 @@ module vibration is
 	android_manifest("""<uses-permission android:name="android.permission.VIBRATE" />""")
 end
 
-import native_app_glue
+import dalvik
 
 # Handle to an Android vibrator
 extern class Vibrator in "Java" `{ android.os.Vibrator `}

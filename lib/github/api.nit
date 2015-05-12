@@ -1016,6 +1016,12 @@ abstract class Comment
 
 	# Comment body text.
 	fun body: String do return json["body"].to_s
+
+	# Does the comment contain an acknowledgement (+1)
+	fun is_ack: Bool
+	do
+		return body.has("\\+1\\b".to_re) or body.has(":+1:") or body.has(":shipit:")
+	end
 end
 
 # A comment made on a commit.

@@ -131,31 +131,31 @@ hi def link NITFFIDelimiters		Keyword
 " FFI Python
 syntax include @FFIPython syntax/python.vim
 unlet b:current_syntax
-syn match NITFFILanguage	/\c"Python"/ nextgroup=NITFFIBlockPython skipwhite
+syn match NITFFILanguage	/\c"Python"\ze.*`{/ nextgroup=NITFFIBlockPython skipwhite
 syn region NITFFIBlockPython matchgroup=NITFFI start='`{' matchgroup=NITFFI end='`}' keepend fold contains=@FFIPython
 
 " FFI Java
 syntax include @FFIJava syntax/java.vim
 unlet b:current_syntax
-syn match NITFFILanguage	/\c"Java\(\| inner\)"/ nextgroup=NITFFIBlockJava skipwhite
+syn match NITFFILanguage	/\c"Java\(\| inner\)"\ze.*`{/ nextgroup=NITFFIBlockJava skipwhite
 syn region NITFFIBlockJava matchgroup=NITFFI start='`{' matchgroup=NITFFI end='`}' keepend fold contains=@FFIJava
 
 " FFI C++
 syntax include @FFICpp syntax/cpp.vim
 unlet b:current_syntax
-syn match NITFFILanguage	/\c"C++\(\| header\| body\)"/ nextgroup=NITFFIBlockCpp skipwhite
+syn match NITFFILanguage	/\c"C++\(\| header\| body\)"\ze.*`{/ nextgroup=NITFFIBlockCpp skipwhite
 syn region NITFFIBlockCpp matchgroup=NITFFI start='`{' matchgroup=NITFFI end='`}' keepend fold contains=@FFICpp
 
 " FFI Objective-C
 syntax include @FFIObjC syntax/objc.vim
 unlet b:current_syntax
-syn match NITFFILanguage	/\c"ObjC\(\| Header\| Body\)"/ nextgroup=NITFFIBlockObjC skipwhite
+syn match NITFFILanguage	/\c"ObjC\(\| Header\| Body\)"\ze.*`{/ nextgroup=NITFFIBlockObjC skipwhite
 syn region NITFFIBlockObjC matchgroup=NITFFI start='`{' matchgroup=NITFFI end='`}' keepend fold contains=@FFIObjC
 
 " FFI C (the last one is the default)
 syntax include @FFIC syntax/c.vim
 unlet b:current_syntax
-syn match NITFFILanguage		/\c"C\(\| header\| body\)"/	nextgroup=NITFFIBlockC skipwhite
+syn match NITFFILanguage		/\c"C\(\| header\| body\)"\ze.*`{/	nextgroup=NITFFIBlockC skipwhite
 syn region NITFFIBlockC matchgroup=NITFFI start='`{' matchgroup=NITFFI end='`}' keepend fold contains=@FFIC
 
 hi def link NITFFILanguage		Define

@@ -108,6 +108,19 @@ private class StringFinder
 		if e isa AAnnotation then return
 		super
 	end
+
+	# Adds a String to the list of strings of the module
+	#
+	# The string needs to be pre-formatted to C standards (escape_to_c)
+	fun add_string(s: String, loc: Location) do
+		var locstr = "{amodule.mmodule.mgroup.name}::{amodule.mmodule.name} {loc.line_start}--{loc.column_start}:{loc.column_end}"
+		if not strings.has_key(s) then
+			var po = new PObject([locstr], s, "")
+			strings[s] = po
+		else
+			strings[s].locations.push locstr
+		end
+	end
 end
 
 redef class ANode
@@ -119,15 +132,35 @@ redef class AStringExpr
 	redef fun accept_string_finder(v) do
 		var str = value.as(not null).escape_to_c
 		var parse = v.toolcontext.parse_expr("\"{str}\".get_translation(\"{v.domain}\", \"{v.languages_location}\").unescape_nit")
-		var loc = location
-		var locstr = "{v.amodule.mmodule.mgroup.name}::{v.amodule.mmodule.name} {loc.line_start}--{loc.column_start}:{loc.column_end}"
-		if not v.strings.has_key(str) then
-			var po = new PObject([locstr], str, "")
-			v.strings[str] = po
-		else
-			v.strings[str].locations.push locstr
-		end
 		replace_with(parse)
+		v.add_string(str, location)
+	end
+end
+
+redef class ASuperstringExpr
+
+	redef fun accept_string_finder(v) do
+		var fmt = ""
+		var exprs = new Array[AExpr]
+		for i in n_exprs do
+			if i isa AStringFormExpr then
+				fmt += i.value.as(not null)
+			else
+				fmt += "%"
+				exprs.push i
+				fmt += exprs.length.to_s
+			end
+		end
+		fmt = fmt.escape_to_c
+		v.add_string(fmt, location)
+		var parse = v.toolcontext.parse_expr("\"{fmt}\".get_translation(\"{v.domain}\", \"{v.languages_location}\").unescape_nit.format()")
+		if not parse isa ACallExpr then
+			v.toolcontext.error(location, "Fatal error in i18n annotation, the parsed superstring could not be generated properly")
+			return
+		end
+		var parse_exprs = parse.n_args.n_exprs
+		parse_exprs.add_all exprs
+		replace_with parse
 	end
 end
 

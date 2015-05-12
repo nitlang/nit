@@ -23,7 +23,7 @@ error_operators.nit:46,10: Syntax Error: binary operator `>=` requires exactly o
 error_operators.nit:47,11: Syntax Error: binary operator `<=>` requires exactly one parameter; got 0.
 error_operators.nit:48,10: Syntax Error: binary operator `<<` requires exactly one parameter; got 0.
 error_operators.nit:49,10: Syntax Error: binary operator `>>` requires exactly one parameter; got 0.
-error_operators.nit:50,14: Syntax Error: `foo=` requires at least 1 parameter(s); got 0.
+error_operators.nit:50,11: Syntax Error: `foo=` requires at least 1 parameter(s); got 0.
 error_operators.nit:51,10: Syntax Error: `[]` requires at least 1 parameter(s); got 0.
 error_operators.nit:52,9--14: Syntax Error: `[]=` requires at least 2 parameter(s); got 1.
 error_operators.nit:57,7--18: Syntax Error: binary operator `+` requires exactly one parameter; got 3.

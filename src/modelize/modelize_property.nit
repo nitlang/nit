@@ -182,7 +182,7 @@ redef class ModelBuilder
 		var initializers = new Array[MProperty]
 		for npropdef in nclassdef.n_propdefs do
 			if npropdef isa AMethPropdef then
-				if npropdef.mpropdef == null then return # Skip broken attribute
+				if npropdef.mpropdef == null then return # Skip broken method
 				var at = npropdef.get_single_annotation("autoinit", self)
 				if at == null then continue # Skip non tagged init
 
@@ -203,25 +203,26 @@ redef class ModelBuilder
 				npropdef.mpropdef.mproperty.is_autoinit = true
 			end
 			if npropdef isa AAttrPropdef then
-				if npropdef.mpropdef == null then return # Skip broken attribute
+				var mreadpropdef = npropdef.mreadpropdef
+				if mreadpropdef == null or mreadpropdef.msignature == null then return # Skip broken attribute
 				if npropdef.noinit then continue # Skip noinit attribute
 				var atautoinit = npropdef.get_single_annotation("autoinit", self)
 				if atautoinit != null then
 					# For autoinit attributes, call the reader to force
 					# the lazy initialization of the attribute.
-					initializers.add(npropdef.mreadpropdef.mproperty)
-					npropdef.mreadpropdef.mproperty.is_autoinit = true
+					initializers.add(mreadpropdef.mproperty)
+					mreadpropdef.mproperty.is_autoinit = true
 					continue
 				end
 				if npropdef.has_value then continue
-				var paramname = npropdef.mpropdef.mproperty.name.substring_from(1)
-				var ret_type = npropdef.mpropdef.static_mtype
+				var paramname = mreadpropdef.mproperty.name
+				var ret_type = mreadpropdef.msignature.return_mtype
 				if ret_type == null then return
 				var mparameter = new MParameter(paramname, ret_type, false, ret_type isa MNullableType)
 				mparameters.add(mparameter)
 				var msetter = npropdef.mwritepropdef
 				if msetter == null then
-					# No setter, it is a old-style attribute, so just add it
+					# No setter, it is a readonly attribute, so just add it
 					initializers.add(npropdef.mpropdef.mproperty)
 					npropdef.mpropdef.mproperty.is_autoinit = true
 				else
