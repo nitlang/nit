@@ -60,7 +60,7 @@ abstract class Text
 	fun substring(from: Int, count: Int): SELFTYPE is abstract
 
 	# Iterates on the substrings of self if any
-	fun substrings: Iterator[Text] is abstract
+	fun substrings: Iterator[FlatText] is abstract
 
 	# Is the current Text empty (== "")
 	#
@@ -986,7 +986,7 @@ abstract class String
 	#     assert "helloworld".insert_at(" ", 5)	== "hello world"
 	fun insert_at(s: String, pos: Int): SELFTYPE is abstract
 
-	redef fun substrings: Iterator[String] is abstract
+	redef fun substrings is abstract
 
 	# Returns a reversed version of self
 	#
