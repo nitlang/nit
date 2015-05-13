@@ -532,7 +532,6 @@ redef class MClass
 				if p isa MMethod then
 					self_methods += 1
 					p.offset = relative_offset_meth
-					p.absolute_offset = offset_methods + relative_offset_meth
 					relative_offset_meth += 1
 
 					intro_mmethods.add(p)
@@ -540,7 +539,6 @@ redef class MClass
 				if p isa MAttribute then
 					nb_introduced_attributes += 1
 					p.offset = relative_offset_attr
-					p.absolute_offset = offset_attributes + relative_offset_attr
 					relative_offset_attr += 1
 
 					intro_mattributes.add(p)
@@ -802,21 +800,21 @@ redef class MClass
 	end
 end
 
+redef class MProperty
+	# Relative offset of this in the runtime instance
+	# (beginning of the block of its introducing class for attributes or methods)
+	var offset: Int
+end
+
 redef class MAttribute
 	# Relative offset of this attribute in the runtime instance
 	# (beginning of the block of its introducing class)
-	var offset: Int
-
-	# Absolute offset of this attribute in the runtime instance (beginning of the attribute table)
-	var absolute_offset: Int
+	redef var offset: Int
 end
 
 redef class MMethod
 	# Relative offset of this method in the virtual table (from the beginning of the block)
-	var offset: Int
-
-	# Absolute offset of this method in the virtual table (from the beginning of the vtable)
-	var absolute_offset: Int
+	redef var offset: Int
 end
 
 # Redef MutableInstance to improve implementation of attributes in objects
