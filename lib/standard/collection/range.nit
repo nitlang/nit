@@ -49,6 +49,15 @@ class Range[E: Discrete]
 
 	redef fun iterator do return new IteratorRange[E](self)
 
+	# Gets an iterator starting at the end and going backwards
+	#
+	#     var reviter = [1..4].reverse_iterator
+	#     assert reviter.to_a == [4,3,2,1]
+	#
+	#     reviter = [1..4[.reverse_iterator
+	#     assert reviter.to_a == [3,2,1]
+	fun reverse_iterator: Iterator[E] do return new ReverseIteratorRange[E](self)
+
 	#     assert [1..10].length		== 10
 	#     assert [1..10[.length		== 9
 	#     assert [1..1].length		== 1
@@ -120,19 +129,35 @@ class Range[E: Discrete]
 	end
 end
 
+# Iterator on ranges.
 private class IteratorRange[E: Discrete]
-	# Iterator on ranges.
 	super Iterator[E]
 	var range: Range[E]
 	redef var item is noinit
 
 	redef fun is_ok do return _item < _range.after
-	
+
 	redef fun next do _item = _item.successor(1)
-	
+
 	init
 	do
 		_item = _range.first
+	end
+end
+
+# Reverse iterator on ranges.
+private class ReverseIteratorRange[E: Discrete]
+	super Iterator[E]
+	var range: Range[E]
+	redef var item is noinit
+
+	redef fun is_ok do return _item >= _range.first
+
+	redef fun next do _item = _item.predecessor(1)
+
+	init
+	do
+		_item = _range.last
 	end
 end
 
