@@ -20,11 +20,11 @@ redef class Char
 	#
 	# NOTE: works on letters only
 	#
-	#    assert 'x'.rot(6) == 'd'
-	#    assert 'T'.rot(15) == 'I'
-	#    assert '1'.rot(10) == '1'
-	#    assert '$'.rot(10) == '$'
-	#    assert 'z'.rot(-2) == 'x'
+	#     assert 'x'.rot(6) == 'd'
+	#     assert 'T'.rot(15) == 'I'
+	#     assert '1'.rot(10) == '1'
+	#     assert '$'.rot(10) == '$'
+	#     assert 'z'.rot(-2) == 'x'
 	fun rot(x: Int): Char do
 		if not is_letter then return self
 		x = x % 26
@@ -60,8 +60,8 @@ redef class String
 	# We then replace every letter in our original string by
 	# their rotated representations, therefore yielding : "dbedewx"
 	#
-	#    assert "All your base are belong to us".rot(13) == "Nyy lbhe onfr ner orybat gb hf"
-	#    assert "This is no moon.".rot(4).rot(22) == "This is no moon."
+	#     assert "All your base are belong to us".rot(13) == "Nyy lbhe onfr ner orybat gb hf"
+	#     assert "This is no moon.".rot(4).rot(22) == "This is no moon."
 	#
 	# NOTE : Works on letters only
 	# NOTE : This cipher is symmetrically decrypted with an `x` of 26-`x`
@@ -92,7 +92,7 @@ redef class String
 	#
 	# Therefore, yielding the ciphertext : "fgounbmtcieehkh"
 	#
-	#    assert "fuckingbehemoth".railfence(4) == "fgounbmtcieehkh"
+	#     assert "fuckingbehemoth".railfence(4) == "fgounbmtcieehkh"
 	fun railfence(depth: Int): String do
 		var lines = new Array[FlatBuffer].with_capacity(depth)
 		var up = false
@@ -129,7 +129,7 @@ redef class String
 
 	# Transforms a rail-fence-encrypted String to its original
 	#
-	#    assert "fgounbmtcieehkh".unrail(4) == "fuckingbehemoth"
+	#     assert "fgounbmtcieehkh".unrail(4) == "fuckingbehemoth"
 	fun unrail(depth: Int): String do
 		var dots = "." * length
 		var arr = new FlatBuffer.from(dots)

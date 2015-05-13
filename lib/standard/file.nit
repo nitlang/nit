@@ -962,7 +962,7 @@ redef class String
 	#
 	# Return an error object in case of error.
 	#
-	#    assert "/fail/does not/exist".rmdir != null
+	#     assert "/fail/does not/exist".rmdir != null
 	fun rmdir: nullable Error
 	do
 		var res = to_path.rmdir

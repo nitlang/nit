@@ -61,11 +61,11 @@ import graph
 # store.load
 # assert 1 == graph.edges.length
 # for edge in graph.edges do
-# 	assert "BAZ" == edge.rel_type
-# 	assert a.labels == edge.from.labels
-# 	for k, v in a.properties do assert v == edge.from.properties[k]
-# 	assert b.labels == edge.to.labels
-# 	for k, v in b.properties do assert v == edge.to.properties[k]
+#	assert "BAZ" == edge.rel_type
+#	assert a.labels == edge.from.labels
+#	for k, v in a.properties do assert v == edge.from.properties[k]
+#	assert b.labels == edge.to.labels
+#	for k, v in b.properties do assert v == edge.to.properties[k]
 # end
 # assert 2 == graph.nodes.length
 # ~~~
@@ -136,11 +136,11 @@ redef class NeoGraph
 	# 		new SequentialNodeCollection("node_id"), graph.to_json)
 	# assert 1 == graph.edges.length
 	# for edge in graph.edges do
-	# 	assert "BAZ" == edge.rel_type
-	# 	assert a.labels == edge.from.labels
-	# 	for k, v in a.properties do assert v == edge.from.properties[k]
-	# 	assert b.labels == edge.to.labels
-	# 	for k, v in b.properties do assert v == edge.to.properties[k]
+	#	assert "BAZ" == edge.rel_type
+	#	assert a.labels == edge.from.labels
+	#	for k, v in a.properties do assert v == edge.from.properties[k]
+	#	assert b.labels == edge.to.labels
+	#	for k, v in b.properties do assert v == edge.to.properties[k]
 	# end
 	# assert 2 == graph.nodes.length
 	# ~~~

@@ -398,9 +398,9 @@ abstract class Text
 
 	# Is the string non-empty but only made of whitespaces?
 	#
-	#    assert " \n\t ".is_whitespace    == true
-	#    assert "  hello  ".is_whitespace == false
-	#    assert "".is_whitespace          == false
+	#     assert " \n\t ".is_whitespace    == true
+	#     assert "  hello  ".is_whitespace == false
+	#     assert "".is_whitespace          == false
 	#
 	# `Char::is_whitespace` determines what is a whitespace.
 	fun is_whitespace: Bool
@@ -414,19 +414,19 @@ abstract class Text
 
 	# Returns `self` removed from its last line terminator (if any).
 	#
-	#    assert "Hello\n".chomp == "Hello"
-	#    assert "Hello".chomp   == "Hello"
+	#     assert "Hello\n".chomp == "Hello"
+	#     assert "Hello".chomp   == "Hello"
 	#
-	#    assert "\n".chomp == ""
-	#    assert "".chomp   == ""
+	#     assert "\n".chomp == ""
+	#     assert "".chomp   == ""
 	#
 	# Line terminators are `"\n"`, `"\r\n"` and `"\r"`.
 	# A single line terminator, the last one, is removed.
 	#
-	#    assert "\r\n".chomp     == ""
-	#    assert "\r\n\n".chomp   == "\r\n"
-	#    assert "\r\n\r\n".chomp == "\r\n"
-	#    assert "\r\n\r".chomp   == "\r\n"
+	#     assert "\r\n".chomp     == ""
+	#     assert "\r\n\n".chomp   == "\r\n"
+	#     assert "\r\n\r\n".chomp == "\r\n"
+	#     assert "\r\n\r".chomp   == "\r\n"
 	#
 	# Note: unlike with most IO methods like `Reader::read_line`,
 	# a single `\r` is considered here to be a line terminator and will be removed.
@@ -858,8 +858,8 @@ abstract class Text
 
 	# Gives the formatted string back as a Nit string with `args` in place
 	#
-	#    assert "This %1 is a %2.".format("String", "formatted String") == "This String is a formatted String."
-	#    assert "\\%1 This string".format("String") == "\\%1 This string"
+	#     assert "This %1 is a %2.".format("String", "formatted String") == "This String is a formatted String."
+	#     assert "\\%1 This string".format("String") == "\\%1 This string"
 	fun format(args: Object...): String do
 		var s = new Array[Text]
 		var curr_st = 0
