@@ -297,4 +297,3 @@ private class ConfigNode
 		return null
 	end
 end
-

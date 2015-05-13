@@ -143,7 +143,7 @@ class Neo4jClient
 	# Save the node in base
 	#
 	#     var client = new Neo4jClient("http://localhost:7474")
-	#     #
+	#
 	#     # Create a node
 	#     var andres = new NeoNode
 	#     andres["name"] = "Andres"
@@ -199,7 +199,7 @@ class Neo4jClient
 	# From and to nodes will be created.
 	#
 	#     var client = new Neo4jClient("http://localhost:7474")
-	#     #
+	#
 	#     var andres = new NeoNode
 	#     var kate = new NeoNode
 	#     var edge = new NeoEdge(andres, "LOVES", kate)
@@ -248,14 +248,14 @@ class Neo4jClient
 	# Retrieve all nodes with specified `lbl`
 	#
 	#     var client = new Neo4jClient("http://localhost:7474")
-	#     #
+	#
 	#     var andres = new NeoNode
 	#     andres.labels.add_all(["Human", "Male"])
 	#     client.save_node(andres)
 	#     var kate = new NeoNode
 	#     kate.labels.add_all(["Human", "Female"])
 	#     client.save_node(kate)
-	#     #
+	#
 	#     var nodes = client.nodes_with_label("Human")
 	#     assert nodes.has(andres)
 	#     assert nodes.has(kate)
@@ -274,14 +274,14 @@ class Neo4jClient
 	# Retrieve nodes belonging to all the specified `labels`.
 	#
 	#     var client = new Neo4jClient("http://localhost:7474")
-	#     #
+	#
 	#     var andres = new NeoNode
 	#     andres.labels.add_all(["Human", "Male"])
 	#     client.save_node(andres)
 	#     var kate = new NeoNode
 	#     kate.labels.add_all(["Human", "Female"])
 	#     client.save_node(kate)
-	#     #
+	#
 	#     var nodes = client.nodes_with_labels(["Human", "Male"])
 	#     assert nodes.has(andres)
 	#     assert not nodes.has(kate)
@@ -1027,4 +1027,3 @@ class NeoJob
 		return job
 	end
 end
-

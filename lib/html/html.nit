@@ -126,6 +126,7 @@ class HTMLTag
 	var attrs: Map[String, String] = new HashMap[String, String]
 
 	# Get the attributed value of 'prop' or null if 'prop' is undifened
+	#
 	#     var img = new HTMLTag("img")
 	#     img.attr("src", "./image.png").attr("alt", "image")
 	#     assert img.get_attr("src")     == "./image.png"
@@ -135,6 +136,7 @@ class HTMLTag
 	end
 
 	# Set a 'value' for 'key'
+	#
 	#     var img = new HTMLTag("img")
 	#     img.attr("src", "./image.png").attr("alt", "image")
 	#     assert img.write_to_string      == """<img src=".&#47;image.png" alt="image"/>"""
@@ -144,6 +146,7 @@ class HTMLTag
 	end
 
 	# Add a CSS class to the HTML tag
+	#
 	#     var img = new HTMLTag("img")
 	#     img.add_class("logo").add_class("fullpage")
 	#     assert img.write_to_string      == """<img class="logo fullpage"/>"""
@@ -156,6 +159,7 @@ class HTMLTag
 	var classes: Set[String] = new HashSet[String]
 
 	# Add multiple CSS classes
+	#
 	#     var img = new HTMLTag("img")
 	#     img.add_classes(["logo", "fullpage"])
 	#     assert img.write_to_string      == """<img class="logo fullpage"/>"""
@@ -165,6 +169,7 @@ class HTMLTag
 	end
 
 	# Set a CSS 'value' for 'prop'
+	#
 	#     var img = new HTMLTag("img")
 	#     img.css("border", "2px solid black").css("position", "absolute")
 	#     assert img.write_to_string      == """<img style="border: 2px solid black; position: absolute"/>"""
@@ -175,6 +180,7 @@ class HTMLTag
 	private var css_props: Map[String, String] = new HashMap[String, String]
 
 	# Get CSS value for 'prop'
+	#
 	#     var img = new HTMLTag("img")
 	#     img.css("border", "2px solid black").css("position", "absolute")
 	#     assert img.get_css("border")    == "2px solid black"
@@ -208,6 +214,7 @@ class HTMLTag
         end
 
 	# Add a HTML 'child' to self
+	#
 	#     var ul = new HTMLTag("ul")
 	#     ul.add(new HTMLTag("li"))
 	#     assert ul.write_to_string    == "<ul><li></li></ul>"
@@ -235,6 +242,7 @@ class HTMLTag
 	var children: Set[HTMLTag] = new HashSet[HTMLTag]
 
 	# Clear all child and set the text of element
+	#
 	#     var p = new HTMLTag("p")
 	#     p.text("Hello World!")
 	#     assert p.write_to_string      ==  "<p>Hello World!</p>"
@@ -247,6 +255,7 @@ class HTMLTag
 	end
 
 	# Append text to element
+	#
 	#     var p = new HTMLTag("p")
 	#     p.append("Hello")
 	#     p.add(new HTMLTag("br"))
