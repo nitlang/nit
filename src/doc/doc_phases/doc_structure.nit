@@ -266,6 +266,21 @@ redef class MPropertyPage
 	end
 end
 
+# A group of sections that can be displayed together in a tab.
+#
+# Display the first child and hide less relevant data in other panels.
+class TabbedGroup
+	super DocSection
+end
+
+# A group of sections that can be displayed together in a tab panel.
+class PanelGroup
+	super DocSection
+
+	# The title of this group.
+	var group_title: String
+end
+
 # A DocComposite element about a MEntity.
 class MEntityComposite
 	super DocComposite
@@ -316,6 +331,7 @@ end
 
 # An article that displaus a list of definition belonging to a MEntity.
 class DefinitionListArticle
+	super TabbedGroup
 	super MEntityArticle
 end
 

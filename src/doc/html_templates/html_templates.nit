@@ -319,6 +319,15 @@ redef class DocComposite
 		end
 		lst.add_li new ListItem(content)
 	end
+
+	# ID used in HTML tab labels.
+	#
+	# We sanitize it for Boostrap JS panels that do not like ":" and "." in ids.
+	var html_tab_id: String is lazy do
+		var id = html_id.replace(":", "")
+		id = id.replace(".", "")
+		return "{id}-tab"
+	end
 end
 
 redef class DocSection
@@ -346,6 +355,24 @@ redef class DocArticle
 		render_body
 		addn "</article>"
 	end
+end
+
+redef class TabbedGroup
+	redef fun render_body do
+		var tabs = new DocTabs("{html_id}.tabs", "")
+		for child in children do
+			if child.is_hidden then continue
+			tabs.add_panel new DocTabPanel(child.html_tab_id, child.toc_title, child)
+		end
+		addn tabs
+	end
+end
+
+redef class PanelGroup
+	redef var html_id is lazy do return "group:{group_title.to_lower.to_snake_case}"
+	redef var html_title = null
+	redef var toc_title is lazy do return group_title
+	redef var is_toc_hidden = true
 end
 
 redef class HomeArticle
@@ -445,20 +472,21 @@ redef class IntroArticle
 	# Link to source to display if any.
 	var html_source_link: nullable Writable is noinit, writable
 
-	redef fun render_title do
+	redef fun render_body do
+		var tabs = new DocTabs("{html_id}.tabs", "")
+		var comment = mentity.html_comment
+		if comment != null then
+			tabs.add_panel new DocTabPanel("{html_tab_id}-comment", "Comment", comment)
+		end
+		for child in children do
+			if child.is_hidden then continue
+			tabs.add_panel new DocTabPanel(child.html_tab_id, child.toc_title, child)
+		end
 		var lnk = html_source_link
 		if lnk != null then
-			add "<div class='source-link'>"
-			add lnk
-			addn "</div>"
+			tabs.drop_list.items.add new ListItem(lnk)
 		end
-		super
-	end
-
-	redef fun render_body do
-		var comment = mentity.html_comment
-		if comment != null then	addn comment
-		super
+		addn tabs
 	end
 end
 
@@ -502,17 +530,8 @@ redef class DefinitionArticle
 	# Link to source to display if any.
 	var html_source_link: nullable Writable is noinit, writable
 
-	redef fun render_title do
-		var lnk = html_source_link
-		if lnk != null then
-			add "<div class='source-link'>"
-			add lnk
-			addn "</div>"
-		end
-		super
-	end
-
 	redef fun render_body do
+		var tabs = new DocTabs("{html_id}.tabs", "")
 		if not is_no_body then
 			var comment
 			if is_short_comment then
@@ -520,9 +539,19 @@ redef class DefinitionArticle
 			else
 				comment = mentity.html_comment
 			end
-			if comment != null then	addn comment
+			if comment != null then
+				tabs.add_panel new DocTabPanel("{html_tab_id}-comment", "Comment", comment)
+			end
 		end
-		super
+		for child in children do
+			if child.is_hidden then continue
+			tabs.add_panel new DocTabPanel(child.html_tab_id, child.toc_title, child)
+		end
+		var lnk = html_source_link
+		if lnk != null then
+			tabs.drop_list.items.add new ListItem(lnk)
+		end
+		addn tabs
 	end
 end
 
@@ -530,7 +559,7 @@ redef class HierarchyListArticle
 	redef var html_id is lazy do return "article:{list_title}_{mentity.nitdoc_id}.hierarchy"
 	redef var html_title is lazy do return list_title
 	redef fun is_empty do return mentities.is_empty
-	redef fun is_toc_hidden do return mentities.is_empty
+	redef var is_toc_hidden = true
 
 	redef fun render_body do
 		var lst = new UnorderedList
@@ -542,8 +571,16 @@ redef class HierarchyListArticle
 	end
 end
 
-redef class IntrosRedefsListArticle
+redef class IntrosRedefsSection
 	redef var html_id is lazy do return "article:{mentity.nitdoc_id}.intros_redefs"
+	redef var toc_title do return "Intros / Redefs"
+	redef var html_title = null
+	redef var html_subtitle = null
+	redef var is_toc_hidden = true
+end
+
+redef class IntrosRedefsListArticle
+	redef var html_id is lazy do return "article:{list_title}_{mentity.nitdoc_id}.intros_redefs"
 	redef var html_title is lazy do return list_title
 	redef fun is_hidden do return mentities.is_empty
 	redef var is_toc_hidden = true
