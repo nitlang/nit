@@ -52,7 +52,7 @@ private class LinuxStore
 		# Open DB connection
 		db = new Sqlite3DB.open(db_path)
 		if not db.is_open then
-			app.log_error "Data store unavaible, cannot load/save data. (at '{db_path}' with '{db.error or else "unknown"}')"
+			print_error "Data store unavaible, cannot load/save data. (at '{db_path}' with '{db.error or else "unknown"}')"
 			return null
 		end
 

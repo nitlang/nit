@@ -23,31 +23,54 @@ in "C" `{
 	#include <android/log.h>
 `}
 
+# Use Android logs to print
+redef fun print(object)
+do
+	log_write(priority_info, app.log_prefix.to_cstring, object.to_s.to_cstring)
+end
+
+# Use Android logs to print errors
+redef fun print_error(object)
+do
+	log_write(priority_error, app.log_prefix.to_cstring, object.to_s.to_cstring)
+end
+
+# Use Android logs to print warnings
+redef fun print_warning(object)
+do
+	log_write(priority_warn, app.log_prefix.to_cstring, object.to_s.to_cstring)
+end
+
+redef class App
+	# Prefix to all log messages
+	protected fun log_prefix: String do return "app.nit"
+end
+
 # Default Android log priority
-fun priority_default: Int do return 1
+private fun priority_default: Int do return 1
 
 # Verbose Android log priority
-fun priority_verbose: Int do return 2
+private fun priority_verbose: Int do return 2
 
 # Debug Android log priority
-fun priority_debug: Int do return 3
+private fun priority_debug: Int do return 3
 
 # Info Android log priority
-fun priority_info: Int do return 4
+private fun priority_info: Int do return 4
 
 # Warn Android log priority
-fun priority_warn: Int do return 5
+private fun priority_warn: Int do return 5
 
 # Error Android log priority
-fun priority_error: Int do return 6
+private fun priority_error: Int do return 6
 
 # Fatal Android log priority
-fun priority_fatal: Int do return 7
+private fun priority_fatal: Int do return 7
 
 # Silent Android log priority
-fun priority_silent: Int do return 8
+private fun priority_silent: Int do return 8
 
 # Write `text` to Android log at priority `level` with tag `tag`
-fun log_write(level: Int, tag, text: NativeString) `{
+private fun log_write(level: Int, tag, text: NativeString) `{
 	__android_log_write(level, tag, text);
 `}

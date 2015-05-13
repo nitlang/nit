@@ -1214,6 +1214,13 @@ do
 	sys.stdout.write("\n")
 end
 
+# Print `object` on the error output (`stderr` or a log system)
+fun print_error(object: Object)
+do
+	sys.stderr.write object.to_s
+	sys.stderr.write "\n"
+end
+
 # Read a character from the standard input (`stdin`).
 fun getc: Char
 do

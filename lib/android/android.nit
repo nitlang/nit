@@ -26,14 +26,7 @@ import dalvik
 private import log
 private import data_store
 
-# Uses Android logs to print everything
-redef fun print(text) do log_write(priority_info, app.log_prefix.to_cstring, text.to_s.to_cstring)
-
 redef class App
-	redef fun log_error(msg) do log_write(priority_error, log_prefix.to_cstring, msg.to_cstring)
-
-	redef fun log_warning(msg) do log_write(priority_warn, log_prefix.to_cstring, msg.to_cstring)
-
 	redef fun init_window
 	do
 		super
