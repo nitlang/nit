@@ -345,7 +345,7 @@ abstract class Text
 		end
 		return true
 	end
-			
+
 	# Removes the whitespaces at the beginning of self
 	#
 	#     assert " \n\thello \n\t".l_trim == "hello \n\t"
@@ -1005,7 +1005,7 @@ abstract class String
 	#     assert "Hello World!".to_lower     == "hello world!"
 	fun to_lower : SELFTYPE is abstract
 
-	# Takes a camel case `self` and converts it to snake case 
+	# Takes a camel case `self` and converts it to snake case
 	#
 	#     assert "randomMethodId".to_snake_case == "random_method_id"
 	#
@@ -1055,11 +1055,11 @@ abstract class String
 				prev_is_upper = false
 			end
 		end
-		
+
 		return new_str.to_s
 	end
 
-	# Takes a snake case `self` and converts it to camel case 
+	# Takes a snake case `self` and converts it to camel case
 	#
 	#     assert "random_method_id".to_camel_case == "randomMethodId"
 	#
