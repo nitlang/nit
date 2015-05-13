@@ -15,7 +15,7 @@
 # limitations under the License.
 
 # Refines intent module to add API 19 services
-module intent_api19 is min_api_version(19)
+module intent_api19 is android_api_min 19
 
 import intent_api18
 
