@@ -851,8 +851,8 @@ abstract class Text
 
 	# Gives the formatted string back as a Nit string with `args` in place
 	#
-	# 	assert "This %1 is a %2.".format("String", "formatted String") == "This String is a formatted String"
-	# 	assert "\\%1 This string".format("String") == "\\%1 This string"
+	#    assert "This %1 is a %2.".format("String", "formatted String") == "This String is a formatted String."
+	#    assert "\\%1 This string".format("String") == "\\%1 This string"
 	fun format(args: Object...): String do
 		var s = new Array[Text]
 		var curr_st = 0
