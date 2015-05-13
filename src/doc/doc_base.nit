@@ -88,6 +88,12 @@ abstract class DocComposite
 		child.parent = self
 		children.add child
 	end
+
+	# Depth of `self` in the composite tree.
+	fun depth: Int do
+		if parent == null then return 0
+		return parent.depth + 1
+	end
 end
 
 # The `DocComposite` element that contains all the other.

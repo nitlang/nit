@@ -284,10 +284,7 @@ redef class DocComposite
 	end
 
 	# Level <hX> for HTML heading.
-	private fun hlvl: Int do
-		if parent == null then return 0
-		return parent.hlvl + 1
-	end
+	private fun hlvl: Int do return depth
 
 	# Is `self` not displayed in the page.
 	#
