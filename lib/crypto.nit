@@ -81,11 +81,14 @@ redef class String
 	#
 	# Say we have "fuckingbehemoth".railfence(4)
 	#
-	# This happens in-memory :
-	#	f.....g.....o..
-	#	.u...n.b...m.t.
-	#	..c.i...e.e...h
-	#	...k.....h.....
+	# This happens in-memory:
+	#
+	# ~~~raw
+	# f.....g.....o..
+	# .u...n.b...m.t.
+	# ..c.i...e.e...h
+	# ...k.....h.....
+	# ~~~
 	#
 	# Therefore, yielding the ciphertext : "fgounbmtcieehkh"
 	#

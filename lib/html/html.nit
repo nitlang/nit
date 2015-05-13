@@ -19,13 +19,18 @@ module html
 #
 # You can define subclass and override methods head and body
 #
+# ~~~nitish
 # class MyPage
 #	super HTMLPage
 #	redef body do add("p").text("Hello World!")
 # end
+# ~~~
 #
 # HTMLPage use fluent interface so you can chain calls as:
-#	add("div").attr("id", "mydiv").text("My Div")
+#
+# ~~~nitish
+# add("div").attr("id", "mydiv").text("My Div")
+# ~~~
 class HTMLPage
 	super Writable
 
@@ -51,7 +56,10 @@ class HTMLPage
 	end
 
 	# Add a html tag to the current element
+	#
+	# ~~~nitish
 	# add("div").attr("id", "mydiv").text("My Div")
+	# ~~~
 	fun add(tag: String): HTMLTag do
 		var node = new HTMLTag(tag)
 		current.add(node)
@@ -59,14 +67,20 @@ class HTMLPage
 	end
 
 	# Add a raw html string
+	#
+	# ~~~nitish
 	# add_html("<a href='#top'>top</a>")
+	# ~~~
 	fun add_html(html: String) do current.add(new HTMLRaw("", html))
 
 	# Open a html tag
+	#
+	# ~~~nitish
 	# open("ul")
 	# add("li").text("item1")
 	# add("li").text("item2")
 	# close("ul")
+	# ~~~
 	fun open(tag: String): HTMLTag do
 		stack.push(current)
 		current = add(tag)
