@@ -150,8 +150,13 @@ class WebsocketConnection
 	private fun unpad_message do
 		var fin = false
 		while not fin do
-			var fst_char = client.read_char
-			var snd_char = client.read_char
+			var fst_byte = client.read_byte
+			var snd_byte = client.read_byte
+			if fst_byte == null or snd_byte == null then
+				last_error = new IOError("Error: bad frame")
+				client.close
+				return
+			end
 			# First byte in msg is formatted this way :
 			# |(fin - 1bit)|(RSV1 - 1bit)|(RSV2 - 1bit)|(RSV3 - 1bit)|(opcode - 4bits)
 			# fin = Flag indicating if current frame is the last one
@@ -165,9 +170,9 @@ class WebsocketConnection
 			#	%x9 denotes a ping
 			#	%xA denotes a pong
 			#	%xB-F are reserved for further control frames
-			var fin_flag = fst_char.bin_and(128)
+			var fin_flag = fst_byte.bin_and(128)
 			if fin_flag != 0 then fin = true
-			var opcode = fst_char.bin_and(15)
+			var opcode = fst_byte.bin_and(15)
 			if opcode == 9 then
 				_buffer.add(138.ascii)
 				_buffer.add('\0')
@@ -183,20 +188,30 @@ class WebsocketConnection
 			# |(mask - 1bit)|(payload length - 7 bits)
 			# As specified, if the payload length is 126 or 127
 			# The next 16 or 64 bits contain an extended payload length
-			var mask_flag = snd_char.bin_and(128)
-			var len = snd_char.bin_and(127)
+			var mask_flag = snd_byte.bin_and(128)
+			var len = snd_byte.bin_and(127)
 			var payload_ext_len = 0
 			if len == 126 then
-				payload_ext_len = client.read_char.lshift(8)
-				payload_ext_len += client.read_char
+				var tmp = client.read(2)
+				if tmp.length != 2 then
+					last_error = new IOError("Error: received interrupted frame")
+					client.close
+					return
+				end
+				payload_ext_len = tmp[1].ascii + tmp[0].ascii.lshift(8)
 			else if len == 127 then
 				# 64 bits for length are not supported,
 				# only the last 32 will be interpreted as a Nit Integer
-				for i in [0..4[ do client.read_char
-				payload_ext_len = client.read_char.lshift(24)
-				payload_ext_len += client.read_char.lshift(16)
-				payload_ext_len += client.read_char.lshift(8)
-				payload_ext_len += client.read_char
+				var tmp = client.read(8)
+				if tmp.length != 8 then
+					last_error = new IOError("Error: received interrupted frame")
+					client.close
+					return
+				end
+				for pos in [0 .. tmp.length[ do
+					var i = tmp[pos].ascii
+					payload_ext_len += i.lshift(8 * (7 - pos))
+				end
 			end
 			if mask_flag != 0 then
 				if payload_ext_len != 0 then

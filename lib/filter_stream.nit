@@ -65,7 +65,7 @@ class StreamCat
 		return res
 	end
 
-	redef fun read_char: Int
+	redef fun read_char
 	do
 		assert not eof
 		return stream.read_char

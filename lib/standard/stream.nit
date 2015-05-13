@@ -42,10 +42,10 @@ end
 # A `Stream` that can be read from
 abstract class Reader
 	super Stream
-	# Read a character. Returns `null` on EOF or timeout
+	# Reads a character. Returns `null` on EOF or timeout
 	fun read_char: nullable Char is abstract
 
-	# Reads a byte, returns `null` if EOF or timeout
+	# Reads a byte. Returns `null` on EOF or timeout
 	fun read_byte: nullable Int is abstract
 
 	# Read at most i bytes

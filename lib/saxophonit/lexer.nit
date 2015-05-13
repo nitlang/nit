@@ -254,17 +254,21 @@ class XophonLexer
 			locator.column_number += 1
 		end
 
-		last_char = input.read_char
-		if last_char < 0 then
+		var s = input.read_byte
+		if s == null then
+			last_char = -1
 			return
 		end
+		last_char = s
 
 		# XML 1.0 end-of-line handling
 		# Note: Regardless the XML version, any EOL defined by the
 		# recommandation MUST be reported as a single LINE FEED.
 		if was_cr and last_char == '\n'.ascii then
 			# EOL already reported. => Skip this byte.
-			last_char = input.read_char
+			s = input.read_byte
+			if s == null then s = -1
+			last_char = s
 		end
 		was_cr = last_char == '\r'.ascii
 		if was_cr then
