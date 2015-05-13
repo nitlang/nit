@@ -882,6 +882,27 @@ abstract class Text
 		return s.to_s
 	end
 
+	# Copies `n` bytes from `self` at `src_offset` into `dest` starting at `dest_offset`
+	#
+	# Basically a high-level synonym of NativeString::copy_to
+	#
+	# REQUIRE: `n` must be large enough to contain `len` bytes
+	#
+	# 	var ns = new NativeString(8)
+	# 	"Text is String".copy_to_native(ns, 8, 2, 0)
+	#	assert ns.to_s_with_length(8) == "xt is St"
+	#
+	fun copy_to_native(dest: NativeString, n, src_offset, dest_offset: Int) do
+		var mypos = src_offset
+		var itspos = dest_offset
+		while n > 0 do
+			dest[itspos] = self.chars[mypos]
+			itspos += 1
+			mypos += 1
+			n -= 1
+		end
+	end
+
 end
 
 # All kinds of array-based text representations.
@@ -926,6 +947,10 @@ abstract class FlatText
 	end
 
 	redef fun flatten do return self
+
+	redef fun copy_to_native(dest, n, src_offset, dest_offset) do
+		items.copy_to(dest, n, src_offset, dest_offset)
+	end
 end
 
 # Abstract class for the SequenceRead compatible

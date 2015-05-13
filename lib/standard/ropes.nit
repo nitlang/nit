@@ -157,6 +157,27 @@ private class Concat
 			return new Concat(left, r + s)
 		end
 	end
+
+	redef fun copy_to_native(dest, n, src_offset, dest_offset) do
+		var remlen = n
+		var subs = new RopeSubstrings.from(self, src_offset)
+		var st = src_offset - subs.pos
+		var off = dest_offset
+		while n > 0 do
+			var it = subs.item
+			if n > it.length then
+				var cplen = it.length - st
+				it.items.copy_to(dest, cplen, st, off)
+				off += cplen
+				n -= cplen
+			else
+				it.items.copy_to(dest, n, st, off)
+				n = 0
+			end
+			subs.next
+			st = 0
+		end
+	end
 end
 
 # Mutable `Rope`, optimized for concatenation operations
