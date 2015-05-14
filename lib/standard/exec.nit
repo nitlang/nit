@@ -99,6 +99,8 @@ class ProcessReader
 
 	redef fun read_char do return stream_in.read_char
 
+	redef fun read_byte do return stream_in.read_byte
+
 	redef fun eof do return stream_in.eof
 
 	redef fun pipeflags do return 2

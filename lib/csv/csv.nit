@@ -314,10 +314,9 @@ class CsvReader
 		var got_delimiter = false
 
 		loop
-			var i = istream.read_char
-			var c: Char
+			var c = istream.read_char
 
-			if i < 0 then
+			if c == null then
 				if got_row then
 					row.add value.to_s
 					return row
@@ -325,7 +324,6 @@ class CsvReader
 					return null
 				end
 			end
-			c = i.ascii
 
 			if c == format.delimiter then
 				if got_delimiter and unescaped == 0 then
@@ -334,11 +332,10 @@ class CsvReader
 				end
 				# Read all bytes until the delimiter.
 				loop
-					i = istream.read_char
-					assert not_eof: i >= 0 else
+					c = istream.read_char
+					assert not_eof: c != null else
 						sys.stderr.write "Unexpected end of file before the end of a delimited value.\n"
 					end
-					c = i.ascii
 					if c == format.delimiter then break
 					value.add c
 				end

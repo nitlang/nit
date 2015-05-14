@@ -1224,7 +1224,9 @@ end
 # Read a character from the standard input (`stdin`).
 fun getc: Char
 do
-	return sys.stdin.read_char.ascii
+	var c = sys.stdin.read_char
+	if c == null then return '\1'
+	return c
 end
 
 # Read a line from the standard input (`stdin`).

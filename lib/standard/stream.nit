@@ -42,8 +42,11 @@ end
 # A `Stream` that can be read from
 abstract class Reader
 	super Stream
-	# Read a character. Return its ASCII value, -1 on EOF or timeout
-	fun read_char: Int is abstract
+	# Reads a character. Returns `null` on EOF or timeout
+	fun read_char: nullable Char is abstract
+
+	# Reads a byte. Returns `null` on EOF or timeout
+	fun read_byte: nullable Int is abstract
 
 	# Read at most i bytes
 	fun read(i: Int): String
@@ -52,8 +55,8 @@ abstract class Reader
 		var s = new FlatBuffer.with_capacity(i)
 		while i > 0 and not eof do
 			var c = read_char
-			if c >= 0 then
-				s.add(c.ascii)
+			if c != null then
+				s.add(c)
 				i -= 1
 			end
 		end
@@ -164,7 +167,7 @@ abstract class Reader
 		var s = new FlatBuffer
 		while not eof do
 			var c = read_char
-			if c >= 0 then s.add(c.ascii)
+			if c != null then s.add(c)
 		end
 		return s.to_s
 	end
@@ -207,12 +210,11 @@ abstract class Reader
 		if last_error != null then return
 		loop
 			var x = read_char
-			if x == -1 then
+			if x == null then
 				if eof then return
 			else
-				var c = x.ascii
-				s.chars.push(c)
-				if c == '\n' then return
+				s.chars.push(x)
+				if x == '\n' then return
 			end
 		end
 	end
@@ -241,14 +243,13 @@ abstract class Reader
 	do
 		var buf = new FlatBuffer
 		var c = read_nonwhitespace
-		if c > 0 then
-			buf.add(c.ascii)
+		if c != null then
+			buf.add(c)
 			while not eof do
 				c = read_char
-				if c < 0 then break
-				var a = c.ascii
-				if a.is_whitespace then break
-				buf.add(a)
+				if c == null then break
+				if c.is_whitespace then break
+				buf.add(c)
 			end
 		end
 		var res = buf.to_s
@@ -258,25 +259,25 @@ abstract class Reader
 	# Skip whitespace characters (if any) then return the following non-whitespace character.
 	#
 	# Returns the code point of the character.
-	# Return -1 on end of file or error.
+	# Returns `null` on end of file or error.
 	#
 	# In fact, this method works like `read_char` except it skips whitespace.
 	#
 	# ~~~
 	# var w = new StringReader(" \nab\tc")
-	# assert w.read_nonwhitespace == 'a'.ascii
-	# assert w.read_nonwhitespace == 'b'.ascii
-	# assert w.read_nonwhitespace == 'c'.ascii
-	# assert w.read_nonwhitespace == -1
+	# assert w.read_nonwhitespace == 'a'
+	# assert w.read_nonwhitespace == 'b'
+	# assert w.read_nonwhitespace == 'c'
+	# assert w.read_nonwhitespace == null
 	# ~~~
 	#
 	# `Char::is_whitespace` determines what is a whitespace.
-	fun read_nonwhitespace: Int
+	fun read_nonwhitespace: nullable Char
 	do
-		var c = -1
+		var c: nullable Char = null
 		while not eof do
 			c = read_char
-			if c < 0 or not c.ascii.is_whitespace then break
+			if c == null or not c.is_whitespace then break
 		end
 		return c
 	end
@@ -382,14 +383,26 @@ abstract class BufferedReader
 	super Reader
 	redef fun read_char
 	do
-		if last_error != null then return -1
+		if last_error != null then return null
 		if eof then
 			last_error = new IOError("Stream has reached eof")
-			return -1
+			return null
 		end
-		var c = _buffer.chars[_buffer_pos]
+		var c = _buffer[_buffer_pos]
 		_buffer_pos += 1
-		return c.ascii
+		return c
+	end
+
+	redef fun read_byte
+	do
+		if last_error != null then return null
+		if eof then
+			last_error = new IOError("Stream has reached eof")
+			return null
+		end
+		var c = _buffer[_buffer_pos].ascii
+		_buffer_pos += 1
+		return c
 	end
 
 	# Peeks up to `n` bytes in the buffer, returns an empty string on EOF
@@ -459,11 +472,11 @@ abstract class BufferedReader
 		loop
 			# First phase: look for a '\n'
 			var i = _buffer_pos
-			while i < _buffer.length and _buffer.chars[i] != '\n' do i += 1
+			while i < _buffer.length and _buffer[i] != '\n' do i += 1
 
 			var eol
 			if i < _buffer.length then
-				assert _buffer.chars[i] == '\n'
+				assert _buffer[i] == '\n'
 				i += 1
 				eol = true
 			else
@@ -478,7 +491,7 @@ abstract class BufferedReader
 				# Copy from the buffer to the string
 				var j = _buffer_pos
 				while j < i do
-					s.add(_buffer.chars[j])
+					s.add(_buffer[j])
 					j += 1
 				end
 				_buffer_pos = i
@@ -567,12 +580,23 @@ class StringReader
 
 	redef fun read_char do
 		if cursor < source.length then
-			var c = source[cursor].ascii
+			var c = source[cursor]
 
 			cursor += 1
 			return c
 		else
-			return -1
+			return null
+		end
+	end
+
+	redef fun read_byte do
+		if cursor < source.length then
+			var c = source[cursor]
+
+			cursor += 1
+			return c.ascii
+		else
+			return null
 		end
 	end
 
