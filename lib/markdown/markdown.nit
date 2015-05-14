@@ -456,15 +456,23 @@ end
 # The emitter use a `Decorator` to select the output format.
 class MarkdownEmitter
 
+	# Kind of processor used for parsing.
+	type PROCESSOR: MarkdownProcessor
+
 	# Processor containing link refs.
-	var processor: MarkdownProcessor
+	var processor: PROCESSOR
+
+	# Kind of decorator used for decoration.
+	type DECORATOR: Decorator
 
 	# Decorator used for output.
 	# Default is `HTMLDecorator`
-	var decorator: Decorator = new HTMLDecorator is writable
+	var decorator: DECORATOR is writable, lazy do
+		return new HTMLDecorator
+	end
 
 	# Create a new `MarkdownEmitter` using a custom `decorator`.
-	init with_decorator(processor: MarkdownProcessor, decorator: Decorator) do
+	init with_decorator(processor: PROCESSOR, decorator: DECORATOR) do
 		init processor
 		self.decorator = decorator
 	end
@@ -481,9 +489,7 @@ class MarkdownEmitter
 	fun emit_in(block: Block) do block.emit_in(self)
 
 	# Transform and emit mardown text
-	fun emit_text(text: Text) do
-		emit_text_until(text, 0, null)
-	end
+	fun emit_text(text: Text) do emit_text_until(text, 0, null)
 
 	# Transform and emit mardown text starting at `from` and
 	# until a token with the same type as `token` is found.
@@ -580,64 +586,67 @@ end
 # Default decorator used is `HTMLDecorator`.
 interface Decorator
 
+	# Kind of emitter used for decoration.
+	type EMITTER: MarkdownEmitter
+
 	# Render a ruler block.
-	fun add_ruler(v: MarkdownEmitter, block: BlockRuler) is abstract
+	fun add_ruler(v: EMITTER, block: BlockRuler) is abstract
 
 	# Render a headline block with corresponding level.
-	fun add_headline(v: MarkdownEmitter, block: BlockHeadline) is abstract
+	fun add_headline(v: EMITTER, block: BlockHeadline) is abstract
 
 	# Render a paragraph block.
-	fun add_paragraph(v: MarkdownEmitter, block: BlockParagraph) is abstract
+	fun add_paragraph(v: EMITTER, block: BlockParagraph) is abstract
 
 	# Render a code or fence block.
-	fun add_code(v: MarkdownEmitter, block: BlockCode) is abstract
+	fun add_code(v: EMITTER, block: BlockCode) is abstract
 
 	# Render a blockquote.
-	fun add_blockquote(v: MarkdownEmitter, block: BlockQuote) is abstract
+	fun add_blockquote(v: EMITTER, block: BlockQuote) is abstract
 
 	# Render an unordered list.
-	fun add_unorderedlist(v: MarkdownEmitter, block: BlockUnorderedList) is abstract
+	fun add_unorderedlist(v: EMITTER, block: BlockUnorderedList) is abstract
 
 	# Render an ordered list.
-	fun add_orderedlist(v: MarkdownEmitter, block: BlockOrderedList) is abstract
+	fun add_orderedlist(v: EMITTER, block: BlockOrderedList) is abstract
 
 	# Render a list item.
-	fun add_listitem(v: MarkdownEmitter, block: BlockListItem) is abstract
+	fun add_listitem(v: EMITTER, block: BlockListItem) is abstract
 
 	# Render an emphasis text.
-	fun add_em(v: MarkdownEmitter, text: Text) is abstract
+	fun add_em(v: EMITTER, text: Text) is abstract
 
 	# Render a strong text.
-	fun add_strong(v: MarkdownEmitter, text: Text) is abstract
+	fun add_strong(v: EMITTER, text: Text) is abstract
 
 	# Render a strike text.
 	#
 	# Extended mode only (see `MarkdownProcessor::ext_mode`)
-	fun add_strike(v: MarkdownEmitter, text: Text) is abstract
+	fun add_strike(v: EMITTER, text: Text) is abstract
 
 	# Render a link.
-	fun add_link(v: MarkdownEmitter, link: Text, name: Text, comment: nullable Text) is abstract
+	fun add_link(v: EMITTER, link: Text, name: Text, comment: nullable Text) is abstract
 
 	# Render an image.
-	fun add_image(v: MarkdownEmitter, link: Text, name: Text, comment: nullable Text) is abstract
+	fun add_image(v: EMITTER, link: Text, name: Text, comment: nullable Text) is abstract
 
 	# Render an abbreviation.
-	fun add_abbr(v: MarkdownEmitter, name: Text, comment: Text) is abstract
+	fun add_abbr(v: EMITTER, name: Text, comment: Text) is abstract
 
 	# Render a code span reading from a buffer.
-	fun add_span_code(v: MarkdownEmitter, buffer: Text, from, to: Int) is abstract
+	fun add_span_code(v: EMITTER, buffer: Text, from, to: Int) is abstract
 
 	# Render a text and escape it.
-	fun append_value(v: MarkdownEmitter, value: Text) is abstract
+	fun append_value(v: EMITTER, value: Text) is abstract
 
 	# Render code text from buffer and escape it.
-	fun append_code(v: MarkdownEmitter, buffer: Text, from, to: Int) is abstract
+	fun append_code(v: EMITTER, buffer: Text, from, to: Int) is abstract
 
 	# Render a character escape.
-	fun escape_char(v: MarkdownEmitter, char: Char) is abstract
+	fun escape_char(v: EMITTER, char: Char) is abstract
 
 	# Render a line break
-	fun add_line_break(v: MarkdownEmitter) is abstract
+	fun add_line_break(v: EMITTER) is abstract
 
 	# Generate a new html valid id from a `String`.
 	fun strip_id(txt: String): String is abstract
