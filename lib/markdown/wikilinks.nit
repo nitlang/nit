@@ -41,7 +41,7 @@ end
 redef class Decorator
 
 	# Renders a `[[wikilink]]` item.
-	fun add_wikilink(v: MarkdownEmitter, link: Text, name, comment: nullable Text) do
+	fun add_wikilink(v: EMITTER, link: Text, name, comment: nullable Text) do
 		if name != null then
 			v.add "[[{name}|{link}]]"
 		else
