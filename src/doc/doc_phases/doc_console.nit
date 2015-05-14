@@ -184,7 +184,7 @@ class CommentQuery
 	redef fun perform(nitx, doc) do
 		var name = args.first
 		var res = new Array[NitxMatch]
-		for mentity in doc.search_mentities(name) do
+		for mentity in doc.mentities_by_name(name) do
 			res.add new MEntityMatch(self, mentity)
 		end
 		return res
