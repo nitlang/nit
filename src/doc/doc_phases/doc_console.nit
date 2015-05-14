@@ -138,7 +138,7 @@ interface NitxQuery
 
 	# Pretty prints the results for the console.
 	fun make_results(nitx: Nitx, results: Array[NitxMatch]): DocPage do
-		var page = new DocPage("Results")
+		var page = new DocPage("results", "Results")
 		page.root.add_child(new QueryResultArticle(self, results))
 		return page
 	end
@@ -386,7 +386,7 @@ class CodeQuery
 	end
 
 	redef fun make_results(nitx, results) do
-		var page = new DocPage("Code Results")
+		var page = new DocPage("results", "Code Results")
 		for res in results do
 			page.add new CodeQueryArticle(self, res.as(CodeMatch))
 		end

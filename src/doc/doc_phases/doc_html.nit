@@ -187,7 +187,7 @@ redef class DocPage
 	# all properties below are roughly copied from `doc_pages`
 
 	# Build page title string
-	fun init_title(v: RenderHTMLPhase, doc: DocModel) is abstract
+	fun init_title(v: RenderHTMLPhase, doc: DocModel) do end
 
 	# Build top menu template if any.
 	fun init_topmenu(v: RenderHTMLPhase, doc: DocModel) do
