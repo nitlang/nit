@@ -311,6 +311,35 @@ abstract class Token
 	# May have disappeared in the AST
 	var next_token: nullable Token = null
 
+	# Is `self` a token discarded from the AST?
+	#
+	# Loose tokens are not present in the AST.
+	# It means they were identified by the lexer but were discarded by the parser.
+	# It also means that they are not visited or manipulated by AST-related functions.
+	#
+	# Each loose token is attached to the non-loose token that precedes or follows it.
+	# The rules are the following:
+	#
+	# * tokens that follow a non-loose token on a same line are attached to it.
+	#   See `next_looses`.
+	# * other tokens, thus that precede a non-loose token on the same line or the next one,
+	# are attached to this one. See `prev_looses`.
+	#
+	# Loose tokens are mostly end of lines (`TEol`) and comments (`TComment`).
+	# Whitespace are ignored by the lexer, so they are not even considered as loose tokens.
+	# See `blank_before` to get the whitespace that separate tokens.
+	var is_loose = false
+
+	# Loose tokens that precede `self`.
+	#
+	# These tokens start the line or belong to a line with only loose tokens.
+	var prev_looses = new Array[Token] is lazy
+
+	# Loose tokens that follow `self`
+	#
+	# These tokens are on the same line than `self`.
+	var next_looses = new Array[Token] is lazy
+
 	# The verbatim blank text between `prev_token` and `self`
 	fun blank_before: String
 	do
