@@ -40,6 +40,7 @@ module audio
 import java
 import java::io
 import assets_and_resources
+import native_app_glue # FIXME update this module to use nit_activity
 import app::audio
 
 in "Java" `{
