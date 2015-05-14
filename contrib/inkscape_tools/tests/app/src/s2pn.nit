@@ -22,7 +22,7 @@ redef class App
 
 	init do super
 
-	redef fun window_created
+	redef fun on_create
 	do
 		super
 

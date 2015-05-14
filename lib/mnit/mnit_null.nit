@@ -87,7 +87,7 @@ redef class App
 	do
 		super
 		display = new NullDisplay
-		window_created
+		on_create
 	end
 
 	# Force the printing of blit operations

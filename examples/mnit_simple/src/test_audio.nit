@@ -26,7 +26,7 @@ redef class App
 	var test_assets = false
 	var test_ressources = true
 
-	redef fun window_created
+	redef fun on_create
 	do
 		super
 		if test_assets then

@@ -189,7 +189,11 @@ class Activity
 	# as registered by `on_save_instance_state`.
 	#
 	# Followed by `on_start`.
-	fun on_create(save_state: NativeBundle) do end
+	fun on_create(save_state: NativeBundle)
+	do
+		app.on_create
+		app.on_restore_state
+	end
 
 	# Notification from Android, the activity has been restarted
 	#
@@ -199,28 +203,30 @@ class Activity
 	# Notification from Android, the activity has been started
 	#
 	# Followed by `on_resume` or `on_stop`.
-	fun on_start do end
+	fun on_start do app.on_start
 
 	# Notification from Android, the activity has been resumed
 	#
 	# Followed by `on_pause`
-	fun on_resume do end
+	fun on_resume do app.on_resume
 
 	# Notification from Android, the activity has been paused
 	#
 	# Followed by `on_resume` or `on_stop`.
-	fun on_pause do end
+	fun on_pause do app.on_pause
 
 	# Notification from Android, the activity has been stopped
 	#
 	# Followed by `on_restart` or `on_destroy`.
-	fun on_stop do end
+	fun on_stop do app.on_stop
 
 	# Notification from Android, the activity is being destroyed
 	#
 	# Clean up and exit.
 	fun on_destroy
 	do
+		app.on_destroy
+
 		native.delete_global_ref
 		app.activities.remove self
 	end
@@ -233,7 +239,7 @@ class Activity
 	# Notification from Android, the activity may be stopped, save state
 	#
 	# Occurs before `on_stop` and, without guarantee, before or after `on_pause`.
-	fun on_save_instance_state(save_state: NativeBundle) do end
+	fun on_save_instance_state(save_state: NativeBundle) do app.on_save_state
 
 	# Notification from Android, the system is running low on memory
 	#

@@ -315,7 +315,7 @@ redef class App
 	var img_boss_left: Image
 	var img_boss_right: Image
 
-	redef fun window_created
+	redef fun on_create
 	do
 		super
 

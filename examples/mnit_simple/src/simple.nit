@@ -26,7 +26,7 @@ redef class App
 
 	var img : nullable I = null
 
-	redef fun window_created
+	redef fun on_create
 	do
 		super
 
