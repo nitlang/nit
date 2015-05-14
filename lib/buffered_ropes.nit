@@ -66,10 +66,10 @@ end
 #
 # Basically just returns `self` encapsulated in a `FlatString`.
 private class LeafSubstrings
-	super IndexedIterator[Text]
+	super IndexedIterator[FlatText]
 
 	var leaf: Leaf
-	var str: String is noinit
+	var str: FlatString is noinit
 	var avail = true
 
 	init do

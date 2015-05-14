@@ -157,6 +157,27 @@ private class Concat
 			return new Concat(left, r + s)
 		end
 	end
+
+	redef fun copy_to_native(dest, n, src_offset, dest_offset) do
+		var remlen = n
+		var subs = new RopeSubstrings.from(self, src_offset)
+		var st = src_offset - subs.pos
+		var off = dest_offset
+		while n > 0 do
+			var it = subs.item
+			if n > it.length then
+				var cplen = it.length - st
+				it.items.copy_to(dest, cplen, st, off)
+				off += cplen
+				n -= cplen
+			else
+				it.items.copy_to(dest, n, st, off)
+				n = 0
+			end
+			subs.next
+			st = 0
+		end
+	end
 end
 
 # Mutable `Rope`, optimized for concatenation operations
@@ -204,7 +225,7 @@ class RopeBuffer
 	# mutable native string (`ns`)
 	private var buf_size: Int is noinit
 
-	redef fun substrings: Iterator[String] do return new RopeBufSubstringIterator(self)
+	redef fun substrings do return new RopeBufSubstringIterator(self)
 
 	# Builds an empty `RopeBuffer`
 	init do
@@ -648,12 +669,12 @@ private class ReverseRopeSubstrings
 end
 
 private class RopeBufSubstringIterator
-	super Iterator[String]
+	super Iterator[FlatText]
 
 	# Iterator on the substrings of the building string
-	var iter: Iterator[String]
+	var iter: Iterator[FlatText]
 	# Makes a String out of the buffered part of the Ropebuffer
-	var nsstr: String
+	var nsstr: FlatString
 	# Did we attain the buffered part ?
 	var nsstr_done = false
 
@@ -682,7 +703,7 @@ end
 
 # Substrings of a Rope (i.e. Postfix iterator on leaves)
 private class RopeSubstrings
-	super IndexedIterator[String]
+	super IndexedIterator[FlatString]
 
 	# Visit Stack
 	var iter: RopeIterPiece is noinit
@@ -692,7 +713,7 @@ private class RopeSubstrings
 	var max: Int is noinit
 
 	# Current leaf
-	var str: String is noinit
+	var str: FlatString is noinit
 
 	init(root: RopeString) is old_style_init do
 		var r = new RopeIterPiece(root, true, false, null)
@@ -704,7 +725,7 @@ private class RopeSubstrings
 				rnod = rnod.left
 				r = new RopeIterPiece(rnod, true, false, r)
 			else
-				str = rnod
+				str = rnod.as(FlatString)
 				r.rdone = true
 				iter = r
 				break
@@ -729,7 +750,7 @@ private class RopeSubstrings
 					r = new RopeIterPiece(rnod, true, false, r)
 				end
 			else
-				str = rnod
+				str = rnod.as(FlatString)
 				r.rdone = true
 				iter = r
 				self.pos = pos - off
@@ -753,7 +774,7 @@ private class RopeSubstrings
 			if not rnod isa Concat then
 				it.ldone = true
 				it.rdone = true
-				str = rnod
+				str = rnod.as(FlatString)
 				iter = it.as(not null)
 				break
 			end
