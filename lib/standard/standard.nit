@@ -32,3 +32,4 @@ import queue
 import numeric
 import error
 import re
+import bytes
