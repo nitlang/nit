@@ -182,15 +182,15 @@ private class ComputeProdLocationVisitor
 	# Already visited epsilon productions that waits something after them
 	var need_after_epsilons = new Array[Prod]
 
-	# Location of the last visited token in the current production
-	var last_location: nullable Location = null
+	# The last visited token in the current production
+	var last_token: nullable Token = null
 
 	redef fun visit(n: ANode)
 	do
 		if n isa Token then
 			if not isset n._location then return
 			var loc = n._location
-			_last_location = loc
+			_last_token = n
 
 			# Add a first token to productions that need one
 			if not _need_first_prods.is_empty then
@@ -217,8 +217,7 @@ private class ComputeProdLocationVisitor
 			var startl = n._first_location
 			if startl != null then
 				# Non-epsilon production
-				var endl = _last_location
-				assert endl != null
+				var endl = _last_token.location
 
 				if startl == endl then
 					n.location = startl
