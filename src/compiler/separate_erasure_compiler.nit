@@ -273,7 +273,7 @@ class SeparateErasureCompiler
 			#Build BOX
 			self.provide_declaration("BOX_{c_name}", "val* BOX_{c_name}({mtype.ctype_extern});")
 			v.add_decl("/* allocate {mtype} */")
-			v.add_decl("val* BOX_{mtype.c_name}({mtype.ctype} value) \{")
+			v.add_decl("val* BOX_{mtype.c_name}({mtype.ctype_extern} value) \{")
 			v.add("struct instance_{c_name}*res = nit_alloc(sizeof(struct instance_{c_name}));")
 			v.require_declaration("class_{c_name}")
 			v.add("res->class = &class_{c_name};")
