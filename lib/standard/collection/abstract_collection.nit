@@ -237,6 +237,43 @@ interface Iterator[E]
 	#
 	# Do nothing by default.
 	fun finish do end
+
+	# A decorator around `self` that advance self a given number of steps instead of one.
+	#
+	# ~~~
+	# var i = [11, 22, 33, 44, 55].iterator
+	# var i2 = i.to_step(2)
+	#
+	# assert i2.item == 11
+	# i2.next
+	# assert i2.item == 33
+	#
+	# assert i.item == 33
+	# ~~~
+	fun to_step(step: Int): Iterator[E] do return new StepIterator[E](self, step)
+end
+
+# A basic helper class to specialize specific Iterator decorators
+abstract class IteratorDecorator[E]
+	super Iterator[E]
+
+	# The underling iterator
+	protected var real: Iterator[E]
+
+	redef fun is_ok do return real.is_ok
+	redef fun item do return real.item
+	redef fun finish do real.finish
+	redef fun next do real.next
+	redef fun next_by(step) do real.next_by(step)
+end
+
+# A decorator that advance a given number of steps
+private class StepIterator[E]
+	super IteratorDecorator[E]
+	var step: Int
+
+	redef fun next do real.next_by(step)
+	redef fun next_by(step) do real.next_by(step * self.step)
 end
 
 # A collection that contains only one item.
