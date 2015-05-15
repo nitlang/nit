@@ -191,6 +191,37 @@ interface Iterator[E]
 	# Require `is_ok`.
 	fun next is abstract
 
+	# Jump to the next item `step` times.
+	#
+	# ~~~
+	# var i = [11, 22, 33, 44].iterator
+	# assert i.item == 11
+	# i.next_by 2
+	# assert i.item == 33
+	# ~~~
+	#
+	# `next_by` should be used instead of looping on `next` because is takes care
+	# of stopping if the end of iteration is reached prematurely whereas a loop of
+	# `next` will abort because of the precondition on `is_ok`.
+	#
+	# ~~~
+	# i.next_by 100
+	# assert not i.is_ok
+	# ~~~
+	#
+	# If `step` is negative, this method aborts.
+	# But specific subclasses can change this and do something more meaningful instead.
+	#
+	# Require `is_ok`
+	fun next_by(step: Int)
+	do
+		assert step >= 0
+		while is_ok and step > 0 do
+			next
+			step -= 1
+		end
+	end
+
 	# Is there a current item ?
 	fun is_ok: Bool is abstract
 
