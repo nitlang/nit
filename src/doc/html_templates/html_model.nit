@@ -462,22 +462,50 @@ redef class MMethodDef
 
 	# FIXME annotation should be handled in their own way
 	redef fun html_modifiers do
+		if mproperty.is_init then
+			var res = new Array[String]
+			if mproperty.visibility != public_visibility then
+				res.add mproperty.visibility.to_s
+			end
+			return res
+		end
 		var res = super
 		if is_abstract then
 			res.add "abstract"
 		else if is_intern then
 			res.add "intern"
 		end
-		if mproperty.is_init then
-			res.add "init"
-		else
-			res.add "fun"
-		end
+		res.add "fun"
 		return res
 	end
 
-	redef fun html_short_signature do return msignature.html_short_signature
-	redef fun html_signature do return msignature.html_signature
+	redef fun html_declaration do
+		if mproperty.is_init then
+			var tpl = new Template
+			tpl.add "<span>"
+			tpl.add html_modifiers.join(" ")
+			tpl.add " "
+			tpl.add html_link
+			tpl.add html_signature
+			tpl.add "</span>"
+			return tpl
+		end
+		return super
+	end
+
+	redef fun html_short_signature do
+		if mproperty.is_root_init and new_msignature != null then
+			return new_msignature.html_short_signature
+		end
+		return msignature.html_short_signature
+	end
+
+	redef fun html_signature do
+		if mproperty.is_root_init and new_msignature != null then
+			return new_msignature.html_signature
+		end
+		return msignature.html_signature
+	end
 end
 
 redef class MVirtualTypeProp
