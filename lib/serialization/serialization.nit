@@ -63,7 +63,7 @@ interface Serializer
 	fun serialize_attribute(name: String, value: nullable Object)
 	do
 		if not try_to_serialize(value) then
-			warn("argument {value.class_name}::{name} is not serializable.")
+			warn("argument {name} of type {value.class_name} is not serializable.")
 		end
 	end
 

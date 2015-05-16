@@ -142,7 +142,7 @@ class JsonDeserializer
 				var class_name = object["__class"]
 				assert class_name isa String
 
-				assert not id_to_object.keys.has(id) else print "Error: Object with id '{id}' is deserialized twice."
+				assert not id_to_object.keys.has(id) else print "Error: Object with id '{id}' of {class_name} is deserialized twice."
 
 				# advance on path
 				path.push object

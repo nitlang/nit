@@ -123,7 +123,7 @@ private class SerializationPhasePreModel
 
 			code.add ""
 			code.add "\tvar {name} = v.deserialize_attribute(\"{name}\")"
-			code.add "\tassert {name} isa {type_name} else print \"Unsupported type for attribute '{name}', got '\{{name}.class_name\}' (ex {type_name})\""
+			code.add "\tassert {name} isa {type_name} else print \"Unsupported type for `\{class_name\}::{name}`, got '\{{name}.class_name\}'; expected {type_name}\""
 			code.add "\tself.{name} = {name}"
 		end
 
