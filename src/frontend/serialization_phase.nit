@@ -99,9 +99,6 @@ private class SerializationPhasePreModel
 	# Add a constructor to the automated nclassdef
 	fun generate_deserialization_init(nclassdef: AStdClassdef)
 	do
-		# Do not generate constructors for abstract classes
-		if nclassdef.n_classkind isa AAbstractClasskind then return
-
 		var npropdefs = nclassdef.n_propdefs
 
 		var code = new Array[String]
