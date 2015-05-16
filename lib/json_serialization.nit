@@ -111,7 +111,7 @@ class JsonDeserializer
 	redef fun notify_of_creation(new_object)
 	do
 		var id = just_opened_id
-		assert id != null
+		if id == null then return # Register `new_object` only once
 		id_to_object[id] = new_object
 	end
 
