@@ -258,7 +258,7 @@ redef class Array[E]
 	end
 
 	# Instanciate a new `Array` from its serialized representation.
-	init from_deserializer(v: Deserializer)
+	redef init from_deserializer(v: Deserializer)
 	do
 		if v isa JsonDeserializer then
 			v.notify_of_creation self

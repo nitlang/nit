@@ -105,8 +105,9 @@ private class SerializationPhasePreModel
 		var npropdefs = nclassdef.n_propdefs
 
 		var code = new Array[String]
-		code.add "init from_deserializer(v: Deserializer)"
+		code.add "redef init from_deserializer(v: Deserializer)"
 		code.add "do"
+		code.add "	super"
 		code.add "	v.notify_of_creation self"
 
 		for attribute in npropdefs do if attribute isa AAttrPropdef then

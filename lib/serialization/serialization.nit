@@ -134,6 +134,11 @@ interface Serializable
 	# The subclass change the default behavior, which will accept references,
 	# to force to always serialize copies of `self`.
 	private fun serialize_to_or_delay(v: Serializer) do v.serialize_reference(self)
+
+	# Create an instance of this class from the `deserializer`
+	#
+	# This constructor is refined by subclasses to correctly build their instances.
+	init from_deserializer(deserializer: Deserializer) do end
 end
 
 # Instances of this class are not delayed and instead serialized immediately
