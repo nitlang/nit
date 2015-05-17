@@ -42,7 +42,7 @@ class JsonSerializer
 
 	redef fun serialize_reference(object)
 	do
-		if refs_map.keys.has(object) then
+		if refs_map.has_key(object) then
 			# if already serialized, add local reference
 			var id = ref_id_for(object)
 			stream.write "\{\"__kind\": \"ref\", \"__id\": {id}\}"
@@ -53,12 +53,12 @@ class JsonSerializer
 	end
 
 	# Map of references to already serialized objects.
-	var refs_map = new HashMap[Serializable,Int]
+	private var refs_map = new StrictHashMap[Serializable,Int]
 
 	# Get the internal serialized reference for this `object`.
 	private fun ref_id_for(object: Serializable): Int
 	do
-		if refs_map.keys.has(object) then
+		if refs_map.has_key(object) then
 			return refs_map[object]
 		else
 			var id = refs_map.length
@@ -81,8 +81,8 @@ class JsonDeserializer
 	# Depth-first path in the serialized object tree.
 	var path = new Array[JsonObject]
 
-	# Map of refenrences to already deserialized objects.
-	var id_to_object = new HashMap[Int, Object]
+	# Map of references to already deserialized objects.
+	private var id_to_object = new StrictHashMap[Int, Object]
 
 	# Last encountered object reference id.
 	#
@@ -128,7 +128,7 @@ class JsonDeserializer
 				var id = object["__id"]
 				assert id isa Int
 
-				assert id_to_object.keys.has(id)
+				assert id_to_object.has_key(id)
 				return id_to_object[id]
 			end
 
@@ -142,7 +142,7 @@ class JsonDeserializer
 				var class_name = object["__class"]
 				assert class_name isa String
 
-				assert not id_to_object.keys.has(id) else print "Error: Object with id '{id}' of {class_name} is deserialized twice."
+				assert not id_to_object.has_key(id) else print "Error: Object with id '{id}' of {class_name} is deserialized twice."
 
 				# advance on path
 				path.push object
@@ -271,4 +271,60 @@ redef class Array[E]
 			end
 		end
 	end
+end
+
+# Maps instances to a value, uses `is_same_instance`
+#
+# Warning: This class does not implement all the services from `Map`.
+private class StrictHashMap[K, V]
+	super Map[K, V]
+
+	# private
+	var map = new HashMap[K, Array[Couple[K, V]]]
+
+	redef var length = 0
+
+	redef fun is_empty do return length == 0
+
+	# private
+	fun node_at(key: K): nullable Couple[K, V]
+	do
+		if not map.keys.has(key) then return null
+
+		var arr = map[key]
+		for couple in arr do
+			if couple.first.is_same_serialized(key) then
+				return couple
+			end
+		end
+
+		return null
+	end
+
+	redef fun [](key)
+	do
+		var node = node_at(key)
+		assert node != null
+		return node.second
+	end
+
+	redef fun []=(key, value)
+	do
+		var node = node_at(key)
+		if node != null then
+			node.second = value
+			return
+		end
+
+		var arr
+		if not map.keys.has(key) then
+			arr = new Array[Couple[K, V]]
+			map[key] = arr
+		else arr = map[key]
+
+		arr.add new Couple[K, V](key, value)
+		self.length += 1
+	end
+
+	redef fun has_key(key) do return node_at(key) != null
 end
