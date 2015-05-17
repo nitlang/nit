@@ -22,8 +22,11 @@
 # such as a forest with many individual trees.
 module bucketed_game
 
+import serialization
+
 # Something acting on the game
 class Turnable[G: Game]
+	auto_serializable
 
 	# Execute `turn` for this instance.
 	fun do_turn(turn: GameTurn[G]) is abstract
@@ -32,6 +35,8 @@ end
 # Something acting on the game from time to time
 class Bucketable[G: Game]
 	super Turnable[G]
+	auto_serializable
+
 	private var act_at: nullable Int = null
 
 	# Cancel the previously registered acting turn
@@ -44,6 +49,7 @@ end
 # Optimized organization of `Bucketable` instances
 class Buckets[G: Game]
 	super Turnable[G]
+	auto_serializable
 
 	# Bucket type used in this implementation.
 	type BUCKET: HashSet[Bucketable[G]]
@@ -112,10 +118,12 @@ end
 # Event raised at the first turn
 class FirstTurnEvent
 	super GameEvent
+	auto_serializable
 end
 
 # Game logic on the client
 class ThinGame
+	auto_serializable
 
 	# Game tick when `self` should act.
 	#
@@ -125,17 +133,19 @@ end
 
 # Game turn on the client
 class ThinGameTurn[G: ThinGame]
+	auto_serializable
 
 	# Game tick when `self` should act.
 	var tick: Int is protected writable
 
-	# List of game events occured for `self`.
-	var events = new List[GameEvent] is protected writable
+	# Game events occurred for `self`.
+	var events = new Array[GameEvent] is protected writable
 end
 
 # Game turn on the full logic
 class GameTurn[G: Game]
 	super ThinGameTurn[G]
+	auto_serializable
 
 	# Game that `self` belongs to.
 	var game: G
@@ -163,6 +173,7 @@ end
 # Full game logic
 class Game
 	super ThinGame
+	auto_serializable
 
 	# Game type used in this implementation.
 	type G: Game
