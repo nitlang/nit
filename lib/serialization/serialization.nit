@@ -162,4 +162,5 @@ redef class Int super DirectSerializable end
 redef class Float super DirectSerializable end
 redef class NativeString super DirectSerializable end
 redef class String super DirectSerializable end
-redef class Array[E] super Serializable end
+redef class SimpleCollection[E] super Serializable end
+redef class Map[K, V] super Serializable end
