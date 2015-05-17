@@ -96,7 +96,7 @@ class CalculatorWindow
 
 	redef fun on_save_state
 	do
-		app.data_store["context"] = context.to_json
+		app.data_store["context"] = context
 		super
 	end
 
@@ -104,11 +104,10 @@ class CalculatorWindow
 	do
 		super
 
-		var save = app.data_store["context"]
-		if save == null then return
-		assert save isa String
+		var context = app.data_store["context"]
+		if not context isa CalculatorContext then return
 
-		self.context = new CalculatorContext.from_json(save)
+		self.context = context
 		display.text = context.display_text
 	end
 end
