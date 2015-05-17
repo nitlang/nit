@@ -238,6 +238,38 @@ redef class Collection[E]
 	end
 end
 
+redef class SimpleCollection[E]
+	redef fun serialize_to_json(v)
+	do
+		# Register as pseudo object
+		var id = v.ref_id_for(self)
+		v.stream.write """{"__kind": "obj", "__id": """
+		v.stream.write id.to_s
+		v.stream.write """, "__class": """"
+		v.stream.write class_name
+		v.stream.write """", "__length": """
+		v.stream.write length.to_s
+		v.stream.write """, "__items": """
+		serialize_to_pure_json v
+		v.stream.write "\}"
+	end
+
+	redef init from_deserializer(v: Deserializer)
+	do
+		if v isa JsonDeserializer then
+			v.notify_of_creation self
+			init
+
+			var length = v.deserialize_attribute("__length").as(Int)
+			var arr = v.path.last["__items"].as(SequenceRead[nullable Object])
+			for i in length.times do
+				var obj = v.convert_object(arr[i])
+				self.add obj
+			end
+		end
+	end
+end
+
 redef class Array[E]
 	redef fun serialize_to_json(v)
 	do
@@ -246,27 +278,46 @@ redef class Array[E]
 			# we do not want Array[Int] or anything else here.
 
 			serialize_to_pure_json v
-		else
-			# Register as pseudo object
-			var id = v.ref_id_for(self)
-			v.stream.write "\{\"__kind\": \"obj\", \"__id\": {id}, \"__class\": \"{class_name}\""
-			v.stream.write """, "__length": {{{length}}}, "__items": """
-			serialize_to_pure_json v
-			v.stream.write "\}"
-		end
+		else super
+	end
+end
+
+redef class Map[K, V]
+	redef fun serialize_to_json(v)
+	do
+		# Register as pseudo object
+		var id = v.ref_id_for(self)
+
+		v.stream.write """{"__kind": "obj", "__id": """
+		v.stream.write id.to_s
+		v.stream.write """, "__class": """"
+		v.stream.write class_name
+		v.stream.write """", "__length": """
+		v.stream.write length.to_s
+		v.stream.write """, "__keys": """
+
+		keys.serialize_to_pure_json v
+
+		v.stream.write """, "__values": """
+		values.serialize_to_pure_json v
+		v.stream.write "\}"
 	end
 
 	# Instantiate a new `Array` from its serialized representation.
 	redef init from_deserializer(v: Deserializer)
 	do
+		init
+
 		if v isa JsonDeserializer then
 			v.notify_of_creation self
 
 			var length = v.deserialize_attribute("__length").as(Int)
-			var arr = v.path.last["__items"].as(SequenceRead[nullable Object])
+			var keys = v.path.last["__keys"].as(SequenceRead[nullable Object])
+			var values = v.path.last["__values"].as(SequenceRead[nullable Object])
 			for i in length.times do
-				var obj = v.convert_object(arr[i])
-				self.add obj
+				var key = v.convert_object(keys[i])
+				var value = v.convert_object(values[i])
+				self[key] = value
 			end
 		end
 	end
