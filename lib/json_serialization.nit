@@ -219,45 +219,44 @@ redef class NativeString
 	redef fun serialize_to_json(v) do to_s.serialize_to_json(v)
 end
 
-redef class Array[E]
-	redef fun serialize_to_json(v)
+redef class Collection[E]
+	# Utility to serialize a normal Json array
+	private fun serialize_to_pure_json(v: JsonSerializer)
 	do
-		if class_name == "Array[nullable Serializable]" then
-			# Using class_name to the the exact type
-			# We do not want Array[Int] or anything else here
 			v.stream.write "["
 			var is_first = true
 			for e in self do
 				if is_first then
 					is_first = false
-				else v.stream.write(", ")
+				else v.stream.write ", "
 
 				if not v.try_to_serialize(e) then
 					v.warn("element of type {e.class_name} is not serializable.")
 				end
 			end
 			v.stream.write "]"
+	end
+end
+
+redef class Array[E]
+	redef fun serialize_to_json(v)
+	do
+		if class_name == "Array[nullable Serializable]" then
+			# Using class_name to get the exact type,
+			# we do not want Array[Int] or anything else here.
+
+			serialize_to_pure_json v
 		else
 			# Register as pseudo object
 			var id = v.ref_id_for(self)
 			v.stream.write "\{\"__kind\": \"obj\", \"__id\": {id}, \"__class\": \"{class_name}\""
-			v.stream.write """, "__length": {{{length}}}, "__items": ["""
-			var is_first = true
-			for e in self do
-				if is_first then
-					is_first = false
-				else v.stream.write(", ")
-
-				if not v.try_to_serialize(e) then
-					v.warn("element of type {e.class_name} is not serializable.")
-				end
-			end
-			v.stream.write "]"
+			v.stream.write """, "__length": {{{length}}}, "__items": """
+			serialize_to_pure_json v
 			v.stream.write "\}"
 		end
 	end
 
-	# Instanciate a new `Array` from its serialized representation.
+	# Instantiate a new `Array` from its serialized representation.
 	redef init from_deserializer(v: Deserializer)
 	do
 		if v isa JsonDeserializer then
