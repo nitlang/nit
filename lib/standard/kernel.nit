@@ -63,7 +63,7 @@ interface Object
 
 	# Have `self` and `other` the same value?
 	#
-	# The exact meaning of "same value" is let to the subclasses.
+	# The exact meaning of "same value" is left to the subclasses.
 	# Implicitly, the default implementation, is `is_same_instance`
 	fun ==(other: nullable Object): Bool do return self.is_same_instance(other)
 
@@ -85,7 +85,7 @@ interface Object
 	# Display class name on stdout (debug only).
 	# This method MUST not be used by programs, it is here for debugging
 	# only and can be removed without any notice
-	fun output_class_name is intern	
+	fun output_class_name is intern
 
 	# The hash code of the object.
 	# Assuming that a == b -> a.hash == b.hash
@@ -223,11 +223,11 @@ end
 # Something that can be cloned
 #
 # This interface introduces the `clone` method used to duplicate an instance
-# Its specific semantic is let to the subclasses.
+# Its specific semantic is left to the subclasses.
 interface Cloneable
 	# Duplicate `self`
 	#
-	# The specific semantic of this method is let to the subclasses;
+	# The specific semantic of this method is left to the subclasses;
 	# Especially, if (and how) attributes are cloned (depth vs. shallow).
 	#
 	# As a rule of thumb, the principle of least astonishment should
