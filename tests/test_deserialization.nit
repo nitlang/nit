@@ -98,7 +98,7 @@ class E
 	redef fun to_s do return "<E: a: {a.join(", ")}; b: {b.join(", ")}>"
 end
 
-# Class with generics
+# Parameterized class
 class F[N: Numeric]
 	auto_serializable
 
@@ -106,6 +106,31 @@ class F[N: Numeric]
 	init(n: N) do self.n = n
 
 	redef fun to_s do return "<E: {n}>"
+end
+
+# Other collections
+class G
+	auto_serializable
+
+	var hs = new HashSet[Int]
+	var s: Set[String] = new ArraySet[String]
+	var hm = new HashMap[String, Int]
+	var am = new ArrayMap[String, String]
+
+	init
+	do
+		hs.add -1
+		hs.add 0
+		s.add "one"
+		s.add "two"
+		hm["one"] = 1
+		hm["two"] = 2
+		am["three"] = 3.to_s
+		am["four"] = 4.to_s
+	end
+
+	redef fun to_s do return "<G: hs: {hs.join(", ")}; s: {s.join(", ")}; "+
+		"hm: {hm.join(", ", ". ")}; am: {am.join(", ", ". ")}>"
 end
 
 var a = new A(true, 'a', 0.1234, 1234, "asdf", null)
@@ -116,9 +141,10 @@ d.d = d
 var e = new E
 var fi = new F[Int](2222)
 var ff = new F[Float](33.33)
+var g = new G
 
 # Default works only with Nit serial
-var tests = new Array[Serializable].with_items(a, b, c, d, e, fi, ff)
+var tests = [a, b, c, d, e, fi, ff, g: Serializable]
 
 # Alt1 should work without nitserial
 #alt1# tests = new Array[Serializable].with_items(a, b, c, d)

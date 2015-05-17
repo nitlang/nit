@@ -22,16 +22,24 @@ import serialization
 redef class Deserializer
 	redef fun deserialize_class(name)
 	do
-			if name == "Array[Object]" then return new Array[Object].from_deserializer(self)
-			if name == "Array[nullable Serializable]" then return new Array[nullable Serializable].from_deserializer(self)
-			if name == "F[Int]" then return new F[Int].from_deserializer(self)
-			if name == "F[Float]" then return new F[Float].from_deserializer(self)
-			if name == "Array[Serializable]" then return new Array[Serializable].from_deserializer(self)
-			if name == "Array[String]" then return new Array[String].from_deserializer(self)
-			if name == "Array[HashMap[String, nullable Object]]" then return new Array[HashMap[String, nullable Object]].from_deserializer(self)
-			if name == "Array[Match]" then return new Array[Match].from_deserializer(self)
-			if name == "Array[nullable Object]" then return new Array[nullable Object].from_deserializer(self)
-			if name == "Array[FlatBuffer]" then return new Array[FlatBuffer].from_deserializer(self)
+		# Module: test_deserialization
+		if name == "Array[Object]" then return new Array[Object].from_deserializer(self)
+		if name == "Array[nullable Serializable]" then return new Array[nullable Serializable].from_deserializer(self)
+		if name == "F[Int]" then return new F[Int].from_deserializer(self)
+		if name == "F[Float]" then return new F[Float].from_deserializer(self)
+		if name == "HashSet[Int]" then return new HashSet[Int].from_deserializer(self)
+		if name == "ArraySet[String]" then return new ArraySet[String].from_deserializer(self)
+		if name == "HashMap[String, Int]" then return new HashMap[String, Int].from_deserializer(self)
+		if name == "ArrayMap[String, String]" then return new ArrayMap[String, String].from_deserializer(self)
+		if name == "Array[Serializable]" then return new Array[Serializable].from_deserializer(self)
+		if name == "Array[String]" then return new Array[String].from_deserializer(self)
+		if name == "HashMap[Serializable, Int]" then return new HashMap[Serializable, Int].from_deserializer(self)
+		if name == "Array[JsonObject]" then return new Array[JsonObject].from_deserializer(self)
+		if name == "HashMap[Int, Object]" then return new HashMap[Int, Object].from_deserializer(self)
+		if name == "Array[Node]" then return new Array[Node].from_deserializer(self)
+		if name == "Array[LRState]" then return new Array[LRState].from_deserializer(self)
+		if name == "Array[Couple[String, String]]" then return new Array[Couple[String, String]].from_deserializer(self)
+		if name == "Array[nullable Jsonable]" then return new Array[nullable Jsonable].from_deserializer(self)
 		return super
 	end
 end
