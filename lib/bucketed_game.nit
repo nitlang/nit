@@ -26,6 +26,7 @@
 module bucketed_game is serialize
 
 import serialization
+import counter
 
 # Something acting on the game
 abstract class Turnable[G: Game]
@@ -64,6 +65,9 @@ class Buckets[G: Game]
 
 	private var buckets: Array[BUCKET] =
 		[for b in n_buckets.times do new HashSet[Bucketable[G]]] is lazy
+
+	# Stats on delays asked when adding an event with `act_in` and `act_next`
+	private var delays = new Counter[Int]
 
 	# Add the Bucketable event `e` at `at_tick`.
 	fun add_at(e: Bucketable[G], at_tick: Int)
@@ -105,6 +109,26 @@ class Buckets[G: Game]
 				end
 			end
 		end
+	end
+
+	# Get some statistics on both the current held events and historic expired events
+	fun stats: String
+	do
+		var entries = 0
+		var instances = new HashSet[Bucketable[G]]
+		var max = 0
+		var min = 100000
+		for bucket in buckets do
+			var len = bucket.length
+			entries += len
+			instances.add_all bucket
+			min = min.min(len)
+			max = max.max(len)
+		end
+		var avg = entries.to_f / buckets.length.to_f
+
+		return "{buckets.length} buckets; uniq/tot:{instances.length}/{entries}, avg:{avg.to_precision(1)}, min:{min}, max:{max}\n" +
+			"history:{delays.sum}, avg:{delays.avg}, min:{delays[delays.min.as(not null)]}, max:{delays[delays.max.as(not null)]}"
 	end
 end
 
@@ -153,10 +177,18 @@ class GameTurn[G: Game]
 	end
 
 	# Insert the Bucketable event `e` to be executed at next tick.
-	fun act_next(e: Bucketable[G]) do game.buckets.add_at(e, tick + 1)
+	fun act_next(e: Bucketable[G])
+	do
+		game.buckets.add_at(e, tick + 1)
+		game.buckets.delays.inc(1)
+	end
 
 	# Insert the Bucketable event `e` to be executed at tick `t`.
-	fun act_in(e: Bucketable[G], t: Int) do game.buckets.add_at(e, tick + t)
+	fun act_in(e: Bucketable[G], t: Int)
+	do
+		game.buckets.add_at(e, tick + t)
+		game.buckets.delays.inc(t)
+	end
 
 	# Add and `apply` a game `event`.
 	fun add_event( event : GameEvent )
