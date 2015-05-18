@@ -37,7 +37,9 @@ class JsonSerializer
 
 	redef fun serialize_attribute(name, value)
 	do
-		stream.write ", \"{name}\": "
+		stream.write ", \""
+		stream.write name
+		stream.write "\": "
 		super
 	end
 
@@ -46,7 +48,9 @@ class JsonSerializer
 		if refs_map.has_key(object) then
 			# if already serialized, add local reference
 			var id = ref_id_for(object)
-			stream.write "\{\"__kind\": \"ref\", \"__id\": {id}\}"
+			stream.write "\{\"__kind\": \"ref\", \"__id\": "
+			stream.write id.to_s
+			stream.write "\}"
 		else
 			# serialize here
 			serialize object
@@ -190,7 +194,11 @@ redef class Serializable
 	private fun serialize_to_json(v: JsonSerializer)
 	do
 		var id = v.ref_id_for(self)
-		v.stream.write "\{\"__kind\": \"obj\", \"__id\": {id}, \"__class\": \"{class_name}\""
+		v.stream.write "\{\"__kind\": \"obj\", \"__id\": "
+		v.stream.write id.to_s
+		v.stream.write ", \"__class\": \""
+		v.stream.write class_name
+		v.stream.write "\""
 		core_serialize_to(v)
 		v.stream.write "\}"
 	end
@@ -209,7 +217,12 @@ redef class Bool
 end
 
 redef class Char
-	redef fun serialize_to_json(v) do v.stream.write "\{\"__kind\": \"char\", \"__val\": {to_s.to_json}\}"
+	redef fun serialize_to_json(v)
+	do
+		v.stream.write "\{\"__kind\": \"char\", \"__val\": "
+		v.stream.write to_s.to_json
+		v.stream.write "\}"
+	end
 end
 
 redef class String
