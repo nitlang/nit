@@ -133,7 +133,7 @@ abstract class NeoNodeCollection
 		for node in self do remove_node(node)
 	end
 
-	redef fun remove(node: NeoNode) do
+	redef fun remove(node) do
 		for n in self do
 			if node == n then
 				remove_node(n)
@@ -142,7 +142,7 @@ abstract class NeoNodeCollection
 		end
 	end
 
-	redef fun remove_all(node: NeoNode) do
+	redef fun remove_all(node) do
 		for n in self do
 			if node == n then remove_node(n)
 		end

@@ -115,7 +115,7 @@ class DisjointSet[E]
 	#     s.add(1)
 	#     assert s.has(1)
 	#     assert not s.has(2)
-	redef fun has(e: E): Bool
+	redef fun has(e)
 	do
 		return nodes.has_key(e)
 	end
