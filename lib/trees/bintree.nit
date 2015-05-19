@@ -64,7 +64,7 @@ class BinTreeMap[K: Comparable, E]
 	#     assert not tree.has_key(0)
 	#     assert tree.has_key(2)
 	#     assert not tree.has_key(6)
-	redef fun has_key(key: K): Bool do
+	redef fun has_key(key) do
 		if is_empty then return false
 		var res = search_down(root.as(not null), key)
 		if res != null then
@@ -85,7 +85,7 @@ class BinTreeMap[K: Comparable, E]
 	#     assert tree[1] == "n1"
 	#     assert tree.has_key(1)
 	#     assert tree[2] == "n2"
-	redef fun [](key: K): E do
+	redef fun [](key) do
 		assert not_empty: not is_empty
 		if cache_node != null and cache_node.key == key then return cache_node.value
 		var res = search_down(root.as(not null), key)
@@ -94,7 +94,8 @@ class BinTreeMap[K: Comparable, E]
 	end
 
 	# Search `key` in `from` and its children nodes.
-	protected fun search_down(from: N, key: K): nullable N do
+	protected fun search_down(from: N, key: nullable Object): nullable N do
+		if not key isa Comparable then return null
 		var cmp = key <=> from.key
 		if cmp == 0 then return from
 		if from.left != null and cmp < 0 then
