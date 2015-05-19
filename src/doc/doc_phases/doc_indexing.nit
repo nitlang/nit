@@ -80,6 +80,7 @@ private class QuickSearchTable
 
 	redef fun provide_default_value(key) do
 		var v = new QuickSearchResultList
+		assert key isa String
 		self[key] = v
 		return v
 	end
