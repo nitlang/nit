@@ -15,10 +15,10 @@
 # limitations under the License.
 
 # Handles serialization and deserialization of objects to/from Json.
-module json_serialization
+module serialization
 
-import serialization
-import json::static
+import ::serialization
+import static
 
 # Serializer of Nit objects to Json string.
 class JsonSerializer

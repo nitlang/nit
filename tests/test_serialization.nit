@@ -15,7 +15,7 @@
 # limitations under the License.
 
 import serialization
-import json_serialization
+import json::serialization
 
 # Simple class
 class A
