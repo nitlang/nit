@@ -320,16 +320,22 @@ redef class SimpleCollection[E]
 	redef fun serialize_to_json(v)
 	do
 		# Register as pseudo object
-		var id = v.ref_id_for(self)
-		v.stream.write """{"__kind": "obj", "__id": """
-		v.stream.write id.to_s
-		v.stream.write """, "__class": """"
-		v.stream.write class_name
-		v.stream.write """", "__length": """
-		v.stream.write length.to_s
-		v.stream.write """, "__items": """
+		if not v.plain_json then
+			var id = v.ref_id_for(self)
+			v.stream.write """{"__kind": "obj", "__id": """
+			v.stream.write id.to_s
+			v.stream.write """, "__class": """"
+			v.stream.write class_name
+			v.stream.write """", "__length": """
+			v.stream.write length.to_s
+			v.stream.write """, "__items": """
+		end
+
 		serialize_to_pure_json v
-		v.stream.write "\}"
+
+		if not v.plain_json then
+			v.stream.write "\}"
+		end
 	end
 
 	redef init from_deserializer(v: Deserializer)
@@ -368,11 +374,11 @@ redef class Map[K, V]
 
 		if v.plain_json then
 			v.stream.write "\{"
-			var first = false
+			var first = true
 			for key, val in self do
 				if not first then
 					v.stream.write ", "
-				else first = true
+				else first = false
 
 				if key == null then key = "null"
 

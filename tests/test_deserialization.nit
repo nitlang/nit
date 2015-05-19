@@ -15,7 +15,6 @@
 # limitations under the License.
 
 import serialization
-import json_serialization
 
 # Simple class
 class A
@@ -93,7 +92,6 @@ class E
 
 	var a = new Array[Object].with_items("hello", 1234, 123.4)
 	var b = new Array[nullable Serializable].with_items("hella", 2345, 234.5)
-	init do end
 
 	redef fun to_s do return "<E: a: {a.join(", ")}; b: {b.join(", ")}>"
 end
@@ -103,7 +101,6 @@ class F[N: Numeric]
 	auto_serializable
 
 	var n: N
-	init(n: N) do self.n = n
 
 	redef fun to_s do return "<E: {n}>"
 end
@@ -133,31 +130,23 @@ class G
 		"hm: {hm.join(", ", ". ")}; am: {am.join(", ", ". ")}>"
 end
 
-var a = new A(true, 'a', 0.1234, 1234, "asdf", null)
-var b = new B(false, 'b', 123.123, 2345, "hjkl", 12, 1111, "qwer")
-var c = new C(a, b)
-var d = new D(false, 'b', 123.123, 2345, "new line ->\n<-", null, 1111, "\t\f\"\r\\/")
-d.d = d
-var e = new E
-var fi = new F[Int](2222)
-var ff = new F[Float](33.33)
-var g = new G
+class TestEntities
+	var a = new A(true, 'a', 0.1234, 1234, "asdf", null)
+	var b = new B(false, 'b', 123.123, 2345, "hjkl", 12, 1111, "qwer")
+	var c = new C(a, b)
+	var d = new D(false, 'b', 123.123, 2345, "new line ->\n<-", null, 1111, "\t\f\"\r\\/")
+	init do d.d = d
+	var e = new E
+	var fi = new F[Int](2222)
+	var ff = new F[Float](33.33)
+	var g = new G
 
-# Default works only with Nit serial
-var tests = [a, b, c, d, e, fi, ff, g: Serializable]
+	# should work without nitserial
+	var without_generics: Array[Serializable] = [a, b, c, d: Serializable]
 
-# Alt1 should work without nitserial
-#alt1# tests = new Array[Serializable].with_items(a, b, c, d)
-
-for o in tests do
-	var stream = new StringWriter
-	var serializer = new JsonSerializer(stream)
-	serializer.serialize(o)
-
-	var deserializer = new JsonDeserializer(stream.to_s)
-	var deserialized = deserializer.deserialize
-
-	print "# Nit:\n{o}\n"
-	print "# Json:\n{stream}\n"
-	print "# Back in Nit:\n{deserialized or else "null"}\n"
+	# Default works only with Nit serial
+	var with_generics: Array[Serializable] = [a, b, c, d, e, fi, ff, g: Serializable]
 end
+
+# We instanciate it here so that `nitserial` detects generic types as being alive
+var entities = new TestEntities
