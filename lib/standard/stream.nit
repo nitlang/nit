@@ -345,6 +345,9 @@ abstract class Writer
 	# write a string
 	fun write(s: Text) is abstract
 
+	# Write a single byte
+	fun write_byte(value: Int) is abstract
+
 	# Can the stream be used to write
 	fun is_writable: Bool is abstract
 end

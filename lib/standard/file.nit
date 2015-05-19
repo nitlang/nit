@@ -193,6 +193,26 @@ class FileWriter
 		end
 	end
 
+	redef fun write_byte(value)
+	do
+		if last_error != null then return
+		if not _is_writable then
+			last_error = new IOError("Cannot write to non-writable stream")
+			return
+		end
+		if _file.address_is_null then
+			last_error = new IOError("Writing on a null stream")
+			_is_writable = false
+			return
+		end
+
+		var err = _file.write_byte(value)
+		if err != 1 then
+			# Big problem
+			last_error = new IOError("Problem writing a byte: {err}")
+		end
+	end
+
 	redef fun close
 	do
 		super
@@ -1090,6 +1110,10 @@ end
 private extern class NativeFile `{ FILE* `}
 	fun io_read(buf: NativeString, len: Int): Int is extern "file_NativeFile_NativeFile_io_read_2"
 	fun io_write(buf: NativeString, len: Int): Int is extern "file_NativeFile_NativeFile_io_write_2"
+	fun write_byte(value: Int): Int `{
+		unsigned char b = (unsigned char)value;
+		return fwrite(&b, 1, 1, recv);
+	`}
 	fun io_close: Int is extern "file_NativeFile_NativeFile_io_close_0"
 	fun file_stat: NativeFileStat is extern "file_NativeFile_NativeFile_file_stat_0"
 	fun fileno: Int `{ return fileno(recv); `}
