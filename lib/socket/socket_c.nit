@@ -132,6 +132,11 @@ extern class NativeSocket `{ int* `}
 		return write(*recv, (char*)String_to_cstring(buffer), String_length(buffer));
 	`}
 
+	# Write `value` as a single byte
+	fun write_byte(value: Int): Int `{
+		return write(*recv, &value, 1);
+	`}
+
 	fun read: String import NativeString.to_s_with_length `{
 		static char c[1024];
 		int n = read(*recv, c, 1024);

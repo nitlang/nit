@@ -147,6 +147,12 @@ class TCPStream
 		socket.write(msg.to_s)
 	end
 
+	redef fun write_byte(value)
+	do
+		if closed then return
+		socket.write_byte value
+	end
+
 	fun write_ln(msg: Text)
 	do
 		if end_reached then return
