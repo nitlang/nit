@@ -22,6 +22,14 @@
 #
 # Alternatively, you may define a custom path to the NDK by setting
 # `ANDROID_NDK`.
+#
+# The source package should be downloaded and compiled only once.
+# If the working directory is cleared, the cached version will be lost.
+# On test servers, which clear the working directory frequently,
+# it may be a good idea to use a local version of the source packages.
+# To do so, download the following two packages and put them in your HOME directory.
+# * http://www.hboehm.info/gc/gc_source/gc-7.4.0.tar.gz
+# * http://www.hboehm.info/gc/gc_source/libatomic_ops-7.4.0.tar.gz
 
 # If ANDROID_NDK is not set, get it from the path to `ndk-build`
 if test -z "$ANDROID_NDK"; then
@@ -38,8 +46,10 @@ fi
 # These may have to be updated according to server-side changes and newer
 # versions of the Boehm GC.
 libgc_url=http://www.hboehm.info/gc/gc_source/gc-7.4.0.tar.gz
+libgc_local=~/gc-7.4.0.tar.gz
 libgc_dir=gc-7.4.0
 libatomic_ops_url=http://www.hboehm.info/gc/gc_source/libatomic_ops-7.4.0.tar.gz
+libatomic_ops_local=~/libatomic_ops-7.4.0.tar.gz
 libatomic_ops_dir=libatomic_ops-7.4.0
 
 # Absolute installation path
@@ -53,8 +63,21 @@ fi
 mkdir -p "$install/src"
 cd "$install/src"
 
-# Download libs
-for url in $libgc_url $libatomic_ops_url; do
+# Download libs, trying to use a local version if possible
+urls=""
+if test -f $libgc_local; then
+	cp $libgc_local .
+else
+	urls=$libgc_url
+fi
+
+if test -f $libatomic_ops_local; then
+	cp $libatomic_ops_local .
+else
+	urls="$urls $libatomic_ops_url"
+fi
+
+for url in $urls; do
 	echo "Downloading $url..."
 	curl --progress-bar -o `basename $url` $url || exit 1
 done
