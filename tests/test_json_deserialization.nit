@@ -18,18 +18,20 @@ import json::serialization
 
 var entities = new TestEntities
 
-var tests = entities.without_generics#alt1#
+var tests = entities.without_generics#alt1##alt2#
 #alt1#var tests = entities.with_generics
+#alt2#var tests = entities.with_generics
 
 for o in tests do
 	var stream = new StringWriter
 	var serializer = new JsonSerializer(stream)
+	#alt2#serializer.plain_json = true
 	serializer.serialize(o)
 
-	var deserializer = new JsonDeserializer(stream.to_s)
-	var deserialized = deserializer.deserialize
+	var deserializer = new JsonDeserializer(stream.to_s)#alt2#
+	var deserialized = deserializer.deserialize#alt2#
 
 	print "# Nit:\n{o}\n"
 	print "# Json:\n{stream}\n"
-	print "# Back in Nit:\n{deserialized or else "null"}\n"
+	print "# Back in Nit:\n{deserialized or else "null"}\n"#alt2#
 end
