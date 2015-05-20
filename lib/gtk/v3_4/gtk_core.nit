@@ -389,11 +389,11 @@ extern class GtkBox `{ GtkBox * `}
 	`}
 
 	# Give the children of `self` equal space in the box?
-	fun omogeneous: Bool `{ return gtk_box_get_homogeneous(recv); `}
+	fun homogeneous: Bool `{ return gtk_box_get_homogeneous(recv); `}
 
 	# Give the children of `self` equal space in the box?
-	fun omogeneous=(omogeneous: Bool) `{
-		gtk_box_set_homogeneous(recv, omogeneous);
+	fun homogeneous=(homogeneous: Bool) `{
+		gtk_box_set_homogeneous(recv, homogeneous);
 	`}
 
 	# Add `child` and pack it at the start of the box
