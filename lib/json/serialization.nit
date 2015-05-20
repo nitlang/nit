@@ -14,7 +14,47 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Handles serialization and deserialization of objects to/from Json.
+# Handles serialization and deserialization of objects to/from JSON
+#
+# ## Nity JSON
+#
+# `JsonSerializer` write Nit objects that subclass `Serializable` to JSON,
+# and `JsonDeserializer` can read them. They both use meta-data added to the
+# generated JSON to recreate the Nit instances with the exact original type.
+#
+# For more information on Nit serialization, see: ../serialization/README.md
+#
+# ## Plain JSON
+#
+# The attribute `JsonSerializer::plain_json` triggers generating plain and
+# clean JSON. This format is easier to read for an human and a non-Nit program,
+# but it cannot be fully deserialized. It can still be read by services from
+# `json::static` and `json::dynamic`.
+#
+# A shortcut to this service is provided by `Serializable::to_plain_json`.
+#
+# ### Usage Example
+#
+# ~~~nitish
+# import json::serialization
+#
+# class Person
+#     auto_serializable
+#
+#     var name: String
+#     var year_of_birth: Int
+#     var next_of_kin: nullable Person
+# end
+#
+# var bob = new Person("Bob", 1986)
+# var alice = new Person("Alice", 1978, bob)
+#
+# assert bob.to_plain_json == """
+# {"name": "Bob", "year_of_birth": 1986, "next_of_kin": null}"""
+#
+# assert alice.to_plain_json == """
+# {"name": "Alice", "year_of_birth": 1978, "next_of_kin": {"name": "Bob", "year_of_birth": 1986, "next_of_kin": null}}"""
+# ~~~
 module serialization
 
 import ::serialization
