@@ -447,6 +447,13 @@ redef class MEntitySection
 	redef var html_subtitle is lazy do return mentity.html_declaration
 end
 
+redef class ConstructorsSection
+	redef var html_id is lazy do return "article:{mentity.nitdoc_id}.constructors"
+	redef var html_title = "Constructors"
+	redef var html_subtitle = null
+	redef fun is_toc_hidden do return is_empty
+end
+
 redef class ConcernSection
 	redef var html_id is lazy do return "concern:{mentity.nitdoc_id}"
 	redef var html_title is lazy do return "in {mentity.nitdoc_name}"

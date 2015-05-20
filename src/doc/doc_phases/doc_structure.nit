@@ -16,6 +16,7 @@
 module doc_structure
 
 import doc_concerns
+import modelize
 
 # StructurePhase populates the DocPage content with section and article.
 #
@@ -177,6 +178,12 @@ redef class MClassPage
 		mentity.intro_mmodule.mgroup.mproject.booster_rank = 0
 		mentity.intro_mmodule.mgroup.booster_rank = 0
 		mentity.intro_mmodule.booster_rank = 0
+		var constructors = new ConstructorsSection(mentity)
+		var minit = mentity.root_init
+		if minit != null then
+			constructors.add_child new DefinitionArticle(minit)
+		end
+		section.add_child constructors
 		section.add_child new ConcernsArticle(mentity, concerns)
 		for mentity in concerns do
 			var ssection = new ConcernSection(mentity)
@@ -187,7 +194,12 @@ redef class MClassPage
 					v.name_sorter.sort(group)
 					for mprop in group do
 						for mpropdef in mpropdefs_for(mprop, mentity) do
-							ssection.add_child new DefinitionArticle(mpropdef)
+							if mpropdef isa MMethodDef and mpropdef.mproperty.is_init then
+								if mpropdef == minit then continue
+								constructors.add_child new DefinitionArticle(mpropdef)
+							else
+								ssection.add_child new DefinitionArticle(mpropdef)
+							end
 						end
 					end
 				end
@@ -287,6 +299,11 @@ class MEntityComposite
 
 	# MEntity documented by this page element.
 	var mentity: MEntity
+end
+
+# A list of constructors.
+class ConstructorsSection
+	super MEntitySection
 end
 
 # A Section about a Concern.
