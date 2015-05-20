@@ -63,3 +63,12 @@
 # Back in Nit:
 <E: 33.33>
 
+# Nit:
+<G: hs: -1, 0; s: one, two; hm: one. 1, two. 2; am: three. 3, four. 4>
+
+# Json:
+{"__kind": "obj", "__id": 0, "__class": "G", "hs": {"__kind": "obj", "__id": 1, "__class": "HashSet[Int]", "__length": 2, "__items": [-1, 0]}, "s": {"__kind": "obj", "__id": 2, "__class": "ArraySet[String]", "__length": 2, "__items": ["one", "two"]}, "hm": {"__kind": "obj", "__id": 3, "__class": "HashMap[String, Int]", "__length": 2, "__keys": ["one", "two"], "__values": [1, 2]}, "am": {"__kind": "obj", "__id": 4, "__class": "ArrayMap[String, String]", "__length": 2, "__keys": ["three", "four"], "__values": ["3", "4"]}}
+
+# Back in Nit:
+<G: hs: -1, 0; s: one, two; hm: one. 1, two. 2; am: three. 3, four. 4>
+

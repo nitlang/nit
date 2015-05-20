@@ -42,7 +42,7 @@ class JsonSerializer
 
 	redef fun serialize_reference(object)
 	do
-		if refs_map.keys.has(object) then
+		if refs_map.has_key(object) then
 			# if already serialized, add local reference
 			var id = ref_id_for(object)
 			stream.write "\{\"__kind\": \"ref\", \"__id\": {id}\}"
@@ -53,12 +53,12 @@ class JsonSerializer
 	end
 
 	# Map of references to already serialized objects.
-	var refs_map = new HashMap[Serializable,Int]
+	private var refs_map = new StrictHashMap[Serializable,Int]
 
 	# Get the internal serialized reference for this `object`.
 	private fun ref_id_for(object: Serializable): Int
 	do
-		if refs_map.keys.has(object) then
+		if refs_map.has_key(object) then
 			return refs_map[object]
 		else
 			var id = refs_map.length
@@ -81,8 +81,8 @@ class JsonDeserializer
 	# Depth-first path in the serialized object tree.
 	var path = new Array[JsonObject]
 
-	# Map of refenrences to already deserialized objects.
-	var id_to_object = new HashMap[Int, Object]
+	# Map of references to already deserialized objects.
+	private var id_to_object = new StrictHashMap[Int, Object]
 
 	# Last encountered object reference id.
 	#
@@ -111,7 +111,7 @@ class JsonDeserializer
 	redef fun notify_of_creation(new_object)
 	do
 		var id = just_opened_id
-		assert id != null
+		if id == null then return # Register `new_object` only once
 		id_to_object[id] = new_object
 	end
 
@@ -128,7 +128,7 @@ class JsonDeserializer
 				var id = object["__id"]
 				assert id isa Int
 
-				assert id_to_object.keys.has(id)
+				assert id_to_object.has_key(id)
 				return id_to_object[id]
 			end
 
@@ -142,7 +142,7 @@ class JsonDeserializer
 				var class_name = object["__class"]
 				assert class_name isa String
 
-				assert not id_to_object.keys.has(id) else print "Error: Object with id '{id}' is deserialized twice."
+				assert not id_to_object.has_key(id) else print "Error: Object with id '{id}' of {class_name} is deserialized twice."
 
 				# advance on path
 				path.push object
@@ -219,49 +219,46 @@ redef class NativeString
 	redef fun serialize_to_json(v) do to_s.serialize_to_json(v)
 end
 
-redef class Array[E]
-	redef fun serialize_to_json(v)
+redef class Collection[E]
+	# Utility to serialize a normal Json array
+	private fun serialize_to_pure_json(v: JsonSerializer)
 	do
-		if class_name == "Array[nullable Serializable]" then
-			# Using class_name to the the exact type
-			# We do not want Array[Int] or anything else here
 			v.stream.write "["
 			var is_first = true
 			for e in self do
 				if is_first then
 					is_first = false
-				else v.stream.write(", ")
+				else v.stream.write ", "
 
 				if not v.try_to_serialize(e) then
 					v.warn("element of type {e.class_name} is not serializable.")
 				end
 			end
 			v.stream.write "]"
-		else
-			# Register as pseudo object
-			var id = v.ref_id_for(self)
-			v.stream.write "\{\"__kind\": \"obj\", \"__id\": {id}, \"__class\": \"{class_name}\""
-			v.stream.write """, "__length": {{{length}}}, "__items": ["""
-			var is_first = true
-			for e in self do
-				if is_first then
-					is_first = false
-				else v.stream.write(", ")
+	end
+end
 
-				if not v.try_to_serialize(e) then
-					v.warn("element of type {e.class_name} is not serializable.")
-				end
-			end
-			v.stream.write "]"
-			v.stream.write "\}"
-		end
+redef class SimpleCollection[E]
+	redef fun serialize_to_json(v)
+	do
+		# Register as pseudo object
+		var id = v.ref_id_for(self)
+		v.stream.write """{"__kind": "obj", "__id": """
+		v.stream.write id.to_s
+		v.stream.write """, "__class": """"
+		v.stream.write class_name
+		v.stream.write """", "__length": """
+		v.stream.write length.to_s
+		v.stream.write """, "__items": """
+		serialize_to_pure_json v
+		v.stream.write "\}"
 	end
 
-	# Instanciate a new `Array` from its serialized representation.
-	init from_deserializer(v: Deserializer)
+	redef init from_deserializer(v: Deserializer)
 	do
 		if v isa JsonDeserializer then
 			v.notify_of_creation self
+			init
 
 			var length = v.deserialize_attribute("__length").as(Int)
 			var arr = v.path.last["__items"].as(SequenceRead[nullable Object])
@@ -271,4 +268,113 @@ redef class Array[E]
 			end
 		end
 	end
+end
+
+redef class Array[E]
+	redef fun serialize_to_json(v)
+	do
+		if class_name == "Array[nullable Serializable]" then
+			# Using class_name to get the exact type,
+			# we do not want Array[Int] or anything else here.
+
+			serialize_to_pure_json v
+		else super
+	end
+end
+
+redef class Map[K, V]
+	redef fun serialize_to_json(v)
+	do
+		# Register as pseudo object
+		var id = v.ref_id_for(self)
+
+		v.stream.write """{"__kind": "obj", "__id": """
+		v.stream.write id.to_s
+		v.stream.write """, "__class": """"
+		v.stream.write class_name
+		v.stream.write """", "__length": """
+		v.stream.write length.to_s
+		v.stream.write """, "__keys": """
+
+		keys.serialize_to_pure_json v
+
+		v.stream.write """, "__values": """
+		values.serialize_to_pure_json v
+		v.stream.write "\}"
+	end
+
+	# Instantiate a new `Array` from its serialized representation.
+	redef init from_deserializer(v: Deserializer)
+	do
+		init
+
+		if v isa JsonDeserializer then
+			v.notify_of_creation self
+
+			var length = v.deserialize_attribute("__length").as(Int)
+			var keys = v.path.last["__keys"].as(SequenceRead[nullable Object])
+			var values = v.path.last["__values"].as(SequenceRead[nullable Object])
+			for i in length.times do
+				var key = v.convert_object(keys[i])
+				var value = v.convert_object(values[i])
+				self[key] = value
+			end
+		end
+	end
+end
+
+# Maps instances to a value, uses `is_same_instance`
+#
+# Warning: This class does not implement all the services from `Map`.
+private class StrictHashMap[K, V]
+	super Map[K, V]
+
+	# private
+	var map = new HashMap[K, Array[Couple[K, V]]]
+
+	redef var length = 0
+
+	redef fun is_empty do return length == 0
+
+	# private
+	fun node_at(key: K): nullable Couple[K, V]
+	do
+		if not map.keys.has(key) then return null
+
+		var arr = map[key]
+		for couple in arr do
+			if couple.first.is_same_serialized(key) then
+				return couple
+			end
+		end
+
+		return null
+	end
+
+	redef fun [](key)
+	do
+		var node = node_at(key)
+		assert node != null
+		return node.second
+	end
+
+	redef fun []=(key, value)
+	do
+		var node = node_at(key)
+		if node != null then
+			node.second = value
+			return
+		end
+
+		var arr
+		if not map.keys.has(key) then
+			arr = new Array[Couple[K, V]]
+			map[key] = arr
+		else arr = map[key]
+
+		arr.add new Couple[K, V](key, value)
+		self.length += 1
+	end
+
+	redef fun has_key(key) do return node_at(key) != null
 end

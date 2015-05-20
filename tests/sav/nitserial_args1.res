@@ -13,6 +13,9 @@ redef class Deserializer
 		if name == "Array[nullable Object]" then return new Array[nullable Object].from_deserializer(self)
 		if name == "Array[Serializable]" then return new Array[Serializable].from_deserializer(self)
 		if name == "Array[String]" then return new Array[String].from_deserializer(self)
+		if name == "StrictHashMap[Serializable, Int]" then return new StrictHashMap[Serializable, Int].from_deserializer(self)
+		if name == "HashMap[Serializable, Array[Couple[Serializable, Int]]]" then return new HashMap[Serializable, Array[Couple[Serializable, Int]]].from_deserializer(self)
+		if name == "Array[Couple[Serializable, Int]]" then return new Array[Couple[Serializable, Int]].from_deserializer(self)
 		return super
 	end
 end

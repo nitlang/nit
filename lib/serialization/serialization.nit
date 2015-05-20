@@ -63,7 +63,7 @@ interface Serializer
 	fun serialize_attribute(name: String, value: nullable Object)
 	do
 		if not try_to_serialize(value) then
-			warn("argument {value.class_name}::{name} is not serializable.")
+			warn("argument {name} of type {value.class_name} is not serializable.")
 		end
 	end
 
@@ -134,6 +134,18 @@ interface Serializable
 	# The subclass change the default behavior, which will accept references,
 	# to force to always serialize copies of `self`.
 	private fun serialize_to_or_delay(v: Serializer) do v.serialize_reference(self)
+
+	# Create an instance of this class from the `deserializer`
+	#
+	# This constructor is refined by subclasses to correctly build their instances.
+	init from_deserializer(deserializer: Deserializer) do end
+end
+
+redef interface Object
+	# Is `self` the same as `other` in a serialization context?
+	#
+	# Used to determine if an object has already been serialized.
+	fun is_same_serialized(other: nullable Object): Bool do return is_same_instance(other)
 end
 
 # Instances of this class are not delayed and instead serialized immediately
@@ -150,4 +162,5 @@ redef class Int super DirectSerializable end
 redef class Float super DirectSerializable end
 redef class NativeString super DirectSerializable end
 redef class String super DirectSerializable end
-redef class Array[E] super Serializable end
+redef class SimpleCollection[E] super Serializable end
+redef class Map[K, V] super Serializable end

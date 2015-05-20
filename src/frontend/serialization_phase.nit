@@ -99,14 +99,12 @@ private class SerializationPhasePreModel
 	# Add a constructor to the automated nclassdef
 	fun generate_deserialization_init(nclassdef: AStdClassdef)
 	do
-		# Do not generate constructors for abstract classes
-		if nclassdef.n_classkind isa AAbstractClasskind then return
-
 		var npropdefs = nclassdef.n_propdefs
 
 		var code = new Array[String]
-		code.add "init from_deserializer(v: Deserializer)"
+		code.add "redef init from_deserializer(v: Deserializer)"
 		code.add "do"
+		code.add "	super"
 		code.add "	v.notify_of_creation self"
 
 		for attribute in npropdefs do if attribute isa AAttrPropdef then
@@ -122,7 +120,7 @@ private class SerializationPhasePreModel
 
 			code.add ""
 			code.add "\tvar {name} = v.deserialize_attribute(\"{name}\")"
-			code.add "\tassert {name} isa {type_name} else print \"Unsupported type for attribute '{name}', got '\{{name}.class_name\}' (ex {type_name})\""
+			code.add "\tassert {name} isa {type_name} else print \"Unsupported type for `\{class_name\}::{name}`, got '\{{name}.class_name\}'; expected {type_name}\""
 			code.add "\tself.{name} = {name}"
 		end
 
