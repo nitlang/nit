@@ -20,7 +20,7 @@ module data_store
 import app::data_store
 private import xdg_basedir
 private import sqlite3
-private import json_serialization
+private import json::serialization
 
 redef class App
 	redef var data_store = new LinuxStore
