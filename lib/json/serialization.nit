@@ -19,7 +19,7 @@ module serialization
 
 import ::serialization
 private import ::serialization::engine_tools
-import static
+private import static
 
 # Serializer of Nit objects to Json string.
 class JsonSerializer
@@ -138,10 +138,10 @@ class JsonDeserializer
 	private var text: Text
 
 	# Root json object parsed from input text.
-	var root: nullable Jsonable is noinit
+	private var root: nullable Jsonable is noinit
 
 	# Depth-first path in the serialized object tree.
-	var path = new Array[JsonObject]
+	private var path = new Array[JsonObject]
 
 	# Map of references to already deserialized objects.
 	private var id_to_object = new StrictHashMap[Int, Object]
