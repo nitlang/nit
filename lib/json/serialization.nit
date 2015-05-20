@@ -395,6 +395,7 @@ redef class SimpleCollection[E]
 
 	redef init from_deserializer(v: Deserializer)
 	do
+		super
 		if v isa JsonDeserializer then
 			v.notify_of_creation self
 			init
@@ -466,10 +467,11 @@ redef class Map[K, V]
 	# Instantiate a new `Array` from its serialized representation.
 	redef init from_deserializer(v: Deserializer)
 	do
-		init
+		super
 
 		if v isa JsonDeserializer then
 			v.notify_of_creation self
+			init
 
 			var length = v.deserialize_attribute("__length").as(Int)
 			var keys = v.path.last["__keys"].as(SequenceRead[nullable Object])
