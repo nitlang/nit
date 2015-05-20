@@ -28,9 +28,10 @@ class DummyArray
 		_length = l + 1
 	end
 
-	redef fun remove(value: Int)
+	redef fun remove(value)
 	do
 		assert not is_empty
+		if not value isa Int then return
 		var l = _length
 		if l > 1 then
 			var last = _values[l - 1]
@@ -41,8 +42,9 @@ class DummyArray
 		_length = l - 1
 	end
 
-	redef fun has(value: Int): Bool
+	redef fun has(value)
 	do
+		if not value isa Int then return false
 		assert value < _capacity
 		var pos = _keys[value]
 		if pos < _length then

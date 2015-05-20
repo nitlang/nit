@@ -53,14 +53,14 @@ class Counter[E]
 	redef fun iterator do return map.iterator
 
 	# The number of counted occurrences of `e`
-	redef fun [](e: E): Int
+	redef fun [](e)
 	do
 		var map = self.map
 		if map.has_key(e) then return map[e]
 		return 0
 	end
 
-	redef fun []=(e: E, value: Int)
+	redef fun []=(e, value)
 	do
 		sum -= self[e]
 		self.map[e] = value

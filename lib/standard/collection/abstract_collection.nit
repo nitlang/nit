@@ -92,7 +92,7 @@ interface Collection[E]
 	#     assert [1,2,3].has(9)    == false
 	#     assert [1..5[.has(2)     == true
 	#     assert [1..5[.has(9)     == false
-	fun has(item: E): Bool
+	fun has(item: nullable Object): Bool
 	do
 		for i in self do if i == item then return true
 		return false
@@ -109,7 +109,7 @@ interface Collection[E]
 	#     assert [3..3[.has_only(1)          == true # empty collection
 	#
 	# ENSURE `is_empty implies result == true`
-	fun has_only(item: E): Bool
+	fun has_only(item: nullable Object): Bool
 	do
 		for i in self do if i != item then return false
 		return true
@@ -119,7 +119,7 @@ interface Collection[E]
 	# Comparisons are done with ==
 	#
 	#     assert [10,20,10].count(10)         == 2
-	fun count(item: E): Int
+	fun count(item: nullable Object): Int
 	do
 		var nb = 0
 		for i in self do if i == item then nb += 1
@@ -147,7 +147,7 @@ interface Collection[E]
 	#
 	# Note that the default implementation is general and correct for any lawful Collections.
 	# It is memory-efficient but relies on `has` so may be CPU-inefficient for some kind of collections.
-	fun has_all(other: Collection[E]): Bool
+	fun has_all(other: Collection[nullable Object]): Bool
 	do
 		for x in other do if not has(x) then return false
 		return true
@@ -171,7 +171,7 @@ interface Collection[E]
 	#
 	# Note that the default implementation is general and correct for any lawful Collections.
 	# It is memory-efficient but relies on `count` so may be CPU-inefficient for some kind of collections.
-	fun has_exactly(other: Collection[E]): Bool
+	fun has_exactly(other: Collection[nullable Object]): Bool
 	do
 		if length != other.length then return false
 		for e in self do if self.count(e) != other.count(e) then return false
@@ -267,19 +267,19 @@ interface RemovableCollection[E]
 	# ENSURE `is_empty`
 	fun clear is abstract
 
-	# Remove an occucence of `item`
+	# Remove an occurrence of `item`
 	#
 	#     var a = [1,2,3,1,2,3]
 	#     a.remove 2
 	#     assert a == [1,3,1,2,3]
-	fun remove(item: E) is abstract
+	fun remove(item: nullable Object) is abstract
 
-	# Remove all occurences of `item`
+	# Remove all occurrences of `item`
 	#
 	#     var a = [1,2,3,1,2,3]
 	#     a.remove_all 2
 	#     assert a == [1,3,1,3]
-	fun remove_all(item: E) do while has(item) do remove(item)
+	fun remove_all(item: nullable Object) do while has(item) do remove(item)
 end
 
 # Items can be added to these collections.
@@ -345,7 +345,7 @@ interface Set[E]
 	# Equality is defined on set and means that each set contains the same elements
 	redef fun ==(other)
 	do
-		if not other isa Set[Object] then return false
+		if not other isa Set[nullable Object] then return false
 		if other.length != length then return false
 		return has_all(other)
 	end
@@ -396,7 +396,7 @@ interface MapRead[K, V]
 	#
 	# If the key is not in the map, `provide_default_value` is called (that aborts by default)
 	# See `get_or_null` and `get_or_default` for safe variations.
-	fun [](key: K): V is abstract
+	fun [](key: nullable Object): V is abstract
 
 	# Get the item at `key` or null if `key` is not in the map.
 	#
@@ -406,7 +406,7 @@ interface MapRead[K, V]
 	#     assert x.get_or_null("five") == null
 	#
 	# Note: use `has_key` and `[]` if you need the distinction between a key associated with null, and no key.
-	fun get_or_null(key: K): nullable V
+	fun get_or_null(key: nullable Object): nullable V
 	do
 		if has_key(key) then return self[key]
 		return null
@@ -419,7 +419,7 @@ interface MapRead[K, V]
 	#     assert x.get_or_default("four", 40) == 4
 	#     assert x.get_or_default("five", 50) == 50
 	#
-	fun get_or_default(key: K, default: V): V
+	fun get_or_default(key: nullable Object, default: V): V
 	do
 		if has_key(key) then return self[key]
 		return default
@@ -433,7 +433,7 @@ interface MapRead[K, V]
 	#     assert x.has_key("five") == false
 	#
 	# By default it is a synonymous to `keys.has` but could be redefined with a direct implementation.
-	fun has_key(key: K): Bool do return self.keys.has(key)
+	fun has_key(key: nullable Object): Bool do return self.keys.has(key)
 
 	# Get a new iterator on the map.
 	fun iterator: MapIterator[K, V] is abstract
@@ -481,7 +481,7 @@ interface MapRead[K, V]
 	#
 	# Note: the value is returned *as is*, implementations may want to store the value in the map before returning it
 	# @toimplement
-	protected fun provide_default_value(key: K): V do abort
+	protected fun provide_default_value(key: nullable Object): V do abort
 
 	# Does `self` and `other` have the same keys associated with the same values?
 	#
@@ -716,7 +716,7 @@ interface SequenceRead[E]
 	#     var a = [10,20,30,10,20,30]
 	#     assert a.index_of(20)   == 1
 	#     assert a.index_of(40)   == -1
-	fun index_of(item: E): Int do return index_of_from(item, 0)
+	fun index_of(item: nullable Object): Int do return index_of_from(item, 0)
 
 	# The index of the last occurrence of `item`.
 	# Return -1 if `item` is not found.
@@ -725,7 +725,7 @@ interface SequenceRead[E]
 	#     var a = [10,20,30,10,20,30]
 	#     assert a.last_index_of(20)   == 4
 	#     assert a.last_index_of(40)   == -1
-	fun last_index_of(item: E): Int do return last_index_of_from(item, length-1)
+	fun last_index_of(item: nullable Object): Int do return last_index_of_from(item, length-1)
 
 	# The index of the first occurrence of `item`, starting from pos.
 	# Return -1 if `item` is not found.
@@ -735,7 +735,7 @@ interface SequenceRead[E]
 	#     assert a.index_of_from(20, 3)   == 4
 	#     assert a.index_of_from(20, 4)   == 4
 	#     assert a.index_of_from(20, 5)   == -1
-	fun index_of_from(item: E, pos: Int): Int
+	fun index_of_from(item: nullable Object, pos: Int): Int
 	do
 		var p = 0
 		var i = iterator
@@ -755,7 +755,7 @@ interface SequenceRead[E]
 	#     assert a.last_index_of_from(20, 2)   == 1
 	#     assert a.last_index_of_from(20, 1)   == 1
 	#     assert a.last_index_of_from(20, 0)   == -1
-	fun last_index_of_from(item: E, pos: Int): Int
+	fun last_index_of_from(item: nullable Object, pos: Int): Int
 	do
 		var res = -1
 		var p = 0
@@ -1005,7 +1005,7 @@ interface CoupleMap[K, V]
 
 	# Return the couple of the corresponding key
 	# Return null if the key is no associated element
-	protected fun couple_at(key: K): nullable Couple[K, V] is abstract
+	protected fun couple_at(key: nullable Object): nullable Couple[K, V] is abstract
 
 	# Return a new iteralot on all couples
 	# Used to provide `iterator` and others

@@ -32,13 +32,13 @@ private abstract class HashCollection[K]
 	var last_item: nullable N = null # Last added item (same)
 
 	# The last key accessed (used for cache)
-	var last_accessed_key: nullable K = null
+	var last_accessed_key: nullable Object = null
 
 	# The last node accessed (used for cache)
 	var last_accessed_node: nullable N = null
 
 	# Return the index of the key k
-	fun index_at(k: K): Int
+	fun index_at(k: nullable Object): Int
 	do
 		if k == null then return 0
 
@@ -48,7 +48,7 @@ private abstract class HashCollection[K]
 	end
 
 	# Return the node associated with the key
-	fun node_at(k: K): nullable N
+	fun node_at(k: nullable Object): nullable N
 	do
 		# cache: `is` is used instead of `==` because it is a faster filter (even if not exact)
 		if k.is_same_instance(_last_accessed_key) then return _last_accessed_node
@@ -60,7 +60,7 @@ private abstract class HashCollection[K]
 	end
 
 	# Return the node associated with the key (but with the index already known)
-	fun node_at_idx(i: Int, k: K): nullable N
+	fun node_at_idx(i: Int, k: nullable Object): nullable N
 	do
 		var c = _array[i]
 		while c != null do
@@ -109,7 +109,7 @@ private abstract class HashCollection[K]
 	end
 
 	# Remove the node assosiated with the key
-	fun remove_node(k: K)
+	fun remove_node(k: nullable Object)
 	do
 		var i = index_at(k)
 		var node = node_at_idx(i, k)

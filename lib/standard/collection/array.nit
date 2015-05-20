@@ -63,9 +63,9 @@ abstract class AbstractArrayRead[E]
 
 	redef fun index_of(item) do return index_of_from(item, 0)
 
-	redef fun last_index_of(item: E): Int do return last_index_of_from(item, length-1)
+	redef fun last_index_of(item) do return last_index_of_from(item, length-1)
 
-	redef fun index_of_from(item: E, pos: Int): Int
+	redef fun index_of_from(item, pos)
 	do
 		var i = pos
 		var len = length
@@ -78,7 +78,7 @@ abstract class AbstractArrayRead[E]
 		return -1
 	end
 
-	redef fun last_index_of_from(item: E, pos: Int): Int
+	redef fun last_index_of_from(item, pos)
 	do
 		var i = pos
 		while i >= 0 do

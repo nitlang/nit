@@ -30,7 +30,7 @@ class Range[E: Discrete]
 	#     assert [1..10].has(5)
 	#     assert [1..10].has(10)
 	#     assert not [1..10[.has(10)
-	redef fun has(item) do return item >= first and item <= last
+	redef fun has(item) do return item isa Comparable and item >= first and item <= last
 
 	#     assert [1..1].has_only(1)
 	#     assert not [1..10].has_only(1)
