@@ -50,6 +50,7 @@ class JsonSerializer
 	# * Does not support cycles, will replace the problematic references by `null`.
 	# * Does not serialize the meta-data needed to deserialize the objects
 	#   back to regular Nit objects.
+	# * Keys of Nit `HashMap` are converted to their string reprensentation using `to_s`.
 	var plain_json = false is writable
 
 	# List of the current open objects, the first is the main target of the serialization
@@ -261,6 +262,20 @@ redef class Serializable
 		end
 		core_serialize_to(v)
 		v.stream.write "\}"
+	end
+
+	# Serialize this object to plain JSON
+	#
+	# This is a shortcut using `JsonSerializer::plain_json`,
+	# see its documentation for more information.
+	fun to_plain_json: String
+	do
+		var stream = new StringWriter
+		var serializer = new JsonSerializer(stream)
+		serializer.plain_json = true
+		serializer.serialize self
+		stream.close
+		return stream.to_s
 	end
 end
 
