@@ -869,21 +869,7 @@ class NeoModel
 
 	# Get a `Location` from its string representation.
 	private fun to_location(loc: String): Location do
-		#TODO filepath
-		var parts = loc.split_with(":")
-		var file = new SourceFile.from_string(parts[0], "")
-		if parts.length == 1 then
-			return new Location(file, 0, 0, 0, 0)
-		end
-		var pos = parts[1].split_with("--")
-		var pos1 = pos[0].split_with(",")
-		var pos2 = pos[1].split_with(",")
-		var line_s = pos1[0].to_i
-		var line_e = pos2[0].to_i
-		var column_s = pos1[1].to_i
-		var column_e = 0
-		if pos2.length == 2 then pos2[1].to_i
-		return new Location(file, line_s, line_e, column_s, column_e)
+		return new Location.from_string(loc)
 	end
 
 	# Get a `MVisibility` from its string representation.

@@ -74,6 +74,67 @@ class Location
 	# End of this location on `line_end`
 	var column_end: Int
 
+	# Builds a location instance from its string representation.
+	#
+	# Examples:
+	#
+	# ~~~
+	# var loc = new Location.from_string("location.nit:82,2--105,8")
+	# assert loc.to_s == "location.nit:82,2--105,8"
+	#
+	# loc = new Location.from_string("location.nit")
+	# assert loc.to_s == "location.nit"
+	#
+	# loc = new Location.from_string("location.nit:82,2")
+	# assert loc.to_s == "location.nit:82,2--0,0"
+	#
+	# loc = new Location.from_string("location.nit:82--105")
+	# assert loc.to_s == "location.nit:82,0--105,0"
+	#
+	# loc = new Location.from_string("location.nit:82,2--105")
+	# assert loc.to_s == "location.nit:82,2--105,0"
+	#
+	# loc = new Location.from_string("location.nit:82--105,8")
+	# assert loc.to_s == "location.nit:82,0--105,8"
+	# ~~~
+	init from_string(string: String) do
+		self.line_start = 0
+		self.line_end = 0
+		self.column_start = 0
+		self.column_end = 0
+		# parses the location string and init position vars
+		var parts = string.split_with(":")
+		var filename = parts.shift
+		self.file = new SourceFile(filename, new FileReader.open(filename))
+		# split position
+		if parts.is_empty then return
+		var pos = parts.first.split_with("--")
+		# split start position
+		if pos.first.has(",") then
+			var pos1 = pos.first.split_with(",")
+			self.line_start = pos1[0].to_i
+			if pos1.length > 1 then
+				self.column_start = pos1[1].to_i
+			end
+		else
+			self.line_start = pos.first.to_i
+		end
+		# split end position
+		if pos.length <= 1 then return
+		if pos[1].has(",") then
+			var pos2 = pos[1].split_with(",")
+			if pos2.length > 1 then
+				self.line_end = pos2[0].to_i
+				self.column_end = pos2[1].to_i
+			else
+				self.line_end = self.line_start
+				self.column_end = pos2[0].to_i
+			end
+		else
+			self.line_end = pos[1].to_i
+		end
+	end
+
 	# The index in the start character in the source
 	fun pstart: Int do return file.line_starts[line_start-1] + column_start-1
 
