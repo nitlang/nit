@@ -87,16 +87,6 @@ redef class MModule
 		return mclasses
 	end
 
-	# Get the list of all mclasses imported by 'self'.
-	fun imported_mclasses: Set[MClass] do
-		var mclasses = new HashSet[MClass]
-		for m in in_importation.greaters do
-			if m == self then continue
-			for c in m.mclassdefs do mclasses.add(c.mclass)
-		end
-		return mclasses
-	end
-
 	# Find all mmodules nested in `self` if `self` is the default module of a `MGroup`.
 	fun nested_mmodules: Array[MModule] do
 		var res = new Array[MModule]
