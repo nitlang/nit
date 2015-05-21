@@ -211,8 +211,8 @@ private class DetectCovariancePhase
 		var caseknown = false
 
 		# Detect the pattern
-		var n = node
-		while n isa AType or n isa AExprs do n = n.parent.as(not null)
+		var n: nullable ANode = node
+		while n isa AType or n isa AExprs do n = n.parent
 		cpt_nodes.inc(n.class_name)
 		if n isa AVarAssignExpr or n isa AAttrPropdef and elem isa AExpr then
 			cpt_pattern.inc("1.assign")

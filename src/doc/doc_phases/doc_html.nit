@@ -526,7 +526,7 @@ end
 # FIXME less hideous hacks...
 redef class DefinitionArticle
 	redef fun init_html_render(v, doc, page) do
-		var mentity = self.mentity
+		var mentity: MEntity = self.mentity
 		if mentity isa MProject or mentity isa MModule then
 			var title = new Template
 			title.add mentity.html_icon

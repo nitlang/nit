@@ -433,7 +433,7 @@ redef class ModelBuilder
 
 		while not todo.is_empty do
 			# The visited type
-			var t = todo.pop
+			var t: MType = todo.pop
 
 			if not t.need_anchor then continue
 
