@@ -50,7 +50,7 @@ class HttpResponse
 	end
 
 	# Get this reponse as a string according to HTTP protocol
-	redef fun to_s: String
+	redef fun to_s
 	do
 		finalize
 
