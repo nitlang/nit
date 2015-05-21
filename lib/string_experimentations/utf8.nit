@@ -394,7 +394,7 @@ redef class NativeString
 		return to_s_with_length(len)
 	end
 
-	redef fun to_s_with_length(len: Int): FlatString
+	redef fun to_s_with_length(len)
 	do
 		var real_len = new Container[Int](0)
 		var x = make_index(len, real_len)
