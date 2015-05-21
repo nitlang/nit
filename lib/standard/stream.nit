@@ -379,7 +379,7 @@ interface Writable
 
 	# Like `write_to` but return a new String (may be quite large)
 	#
-	# This funtionnality is anectodical, since the point
+	# This funtionality is anectodical, since the point
 	# of streamable object to to be efficienlty written to a
 	# stream without having to allocate and concatenate strings
 	fun write_to_string: String
@@ -574,7 +574,7 @@ abstract class BufferedReader
 	# Fill the buffer
 	protected fun fill_buffer is abstract
 
-	# Is the last fill_buffer reach the end
+	# Has the last fill_buffer reached the end
 	protected fun end_reached: Bool is abstract
 
 	# Allocate a `_buffer` for a given `capacity`.
