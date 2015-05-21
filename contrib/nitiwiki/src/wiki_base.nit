@@ -188,7 +188,10 @@ class Nitiwiki
 	#
 	# REQUIRE: `has_template`
 	fun load_template(name: String): TemplateString do
-		assert has_template(name)
+		if not has_template(name) then
+			message("Error: can't load template `{name}`", 0)
+			exit 1
+		end
 		var file = expand_path(config.root_dir, config.templates_dir, name)
 		var tpl = new TemplateString.from_file(file)
 		if tpl.has_macro("ROOT_URL") then
