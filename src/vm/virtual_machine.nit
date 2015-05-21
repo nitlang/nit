@@ -105,9 +105,11 @@ class VirtualMachine super NaiveInterpreter
 
 		assert sup isa MClassType
 
-		# `sub` and `sup` can be discovered inside a Generic type during the subtyping test
-		if not sup.mclass.loaded then load_class(sup.mclass)
+		# and `sup` can be discovered inside a Generic type during the subtyping test
 		if not sub.mclass.loaded then load_class(sub.mclass)
+
+		# If the target of the test is not-loaded yet, the subtyping-test will be false
+		if not sup.mclass.abstract_loaded then return false
 
 		# For now, always use perfect hashing for subtyping test
 		var super_id = sup.mclass.vtable.id
@@ -192,15 +194,32 @@ class VirtualMachine super NaiveInterpreter
 		return attributes;
 	`}
 
-	# Load the class and create its runtime structures
+	# Load the class and create its runtime structures, this loading is explicit
 	fun load_class(mclass: MClass)
 	do
 		if mclass.loaded then return
 
 		# Recursively load superclasses
-		for parent in mclass.in_hierarchy(mainmodule).direct_greaters do load_class(parent)
+		for parent in mclass.in_hierarchy(mainmodule).direct_greaters do load_class_indirect(parent)
 
-		mclass.make_vt(self)
+		if mclass.abstract_loaded then
+			mclass.allocate_vtable(self)
+		else
+			mclass.make_vt(self, true)
+		end
+	end
+
+	# This method is called to handle an implicitly loaded class,
+	# i.e. a superclass of an explicitly loaded class
+	# A class loaded implicitly will not be fully allocated
+	fun load_class_indirect(mclass: MClass)
+	do
+		# It the class was already implicitly loaded
+		if mclass.abstract_loaded then return
+
+		for parent in mclass.in_hierarchy(mainmodule).direct_greaters do load_class_indirect(parent)
+
+		mclass.make_vt(self, false)
 	end
 
 	# Execute `mproperty` for a `args` (where `args[0]` is the receiver).
@@ -386,6 +405,9 @@ redef class MClass
 	# True when the class is effectively loaded by the vm, false otherwise
 	var loaded: Bool = false
 
+	# Indicate this class was partially loaded (it only has its identifier allocated)
+	var abstract_loaded: Bool = false
+
 	# Color for Cohen subtyping test : the absolute position of the id
 	# of this class in virtual tables
 	var color: Int
@@ -425,13 +447,14 @@ redef class MClass
 	var mmethods = new Array[MMethod]
 
 	# Allocates a VTable for this class and gives it an id
-	private fun make_vt(vm: VirtualMachine)
+	# * `vm` The currently executed VirtualMachine
+	# * `explicit` Indicate if this class was directly instantiated (i.e. not indirectly loaded)
+	private fun make_vt(vm: VirtualMachine, explicit: Bool)
 	do
 		# `ordering` contains the order of superclasses for virtual tables
 		ordering = superclasses_ordering(vm)
 		ordering.remove(self)
 
-		# Make_vt for super-classes
 		var ids = new Array[Int]
 		var nb_methods = new Array[Int]
 		var nb_attributes = new Array[Int]
@@ -472,6 +495,50 @@ redef class MClass
 			offset_methods += 2 # Because each block starts with an id and the delta
 		end
 
+		# Update the positions of the class
+		update_positions(offset_attributes, offset_methods)
+
+		ordering.add(self)
+
+		# Compute the identifier with Perfect Hashing
+		compute_identifier(vm, ids, offset_methods)
+
+		# Update caches and offsets of methods and attributes for this class
+		# If the loading was explicit, the virtual table will be allocated and filled
+		set_offsets(vm, explicit)
+
+		if not explicit then
+			# Just init the C-pointer to NULL to avoid errors
+			vtable.internal_vtable = vm.memory_manager.null_ptr
+		end
+	end
+
+	# Allocate a unique identifier to the class with perfect hashing
+	# * `vm` The currently executed VirtualMachine
+	# * `ids` Array of superclasses identifiers
+	# * `offset_methods : Offset from the beginning of the table of the group of methods
+	private fun compute_identifier(vm: VirtualMachine, ids: Array[Int], offset_methods: Int)
+	do
+		vtable = new VTable
+		var idc = new Array[Int]
+
+		# Give an identifier to the class and put it inside the virtual table
+		vtable.mask = vm.ph.pnand(ids, 1, idc) - 1
+		vtable.id = idc[0]
+		vtable.classname = name
+
+		# Set the color for subtyping tests in SST of this class
+		color = offset_methods - 2
+
+		# Indicate the class has its identifier computed
+		abstract_loaded = true
+	end
+
+	# Update the positions of this class
+	# * `offset_attributes` The offset of the block of attributes of this class
+	# * `offset_methods` The offset of the block of methods of this class
+	private fun update_positions(offset_attributes: Int, offset_methods: Int)
+	do
 		# Recopy the position tables of the prefix in `self`
 		for key, value in prefix.positions_methods do
 			positions_methods[key] = value
@@ -481,44 +548,16 @@ redef class MClass
 			positions_attributes[key] = value
 		end
 
-		# When all super-classes have their identifiers and vtables, allocate current one
-		allocate_vtable(vm, ids, nb_methods, nb_attributes, offset_attributes, offset_methods)
-		loaded = true
-
-		# The virtual table now needs to be filled with pointer to methods
-		ordering.add(self)
-		for cl in ordering do
-			fill_vtable(vm, vtable.as(not null), cl)
-		end
+		# Save the offsets of self class
+		position_attributes = offset_attributes
+		position_methods = offset_methods
 	end
 
-	# Allocate a single vtable
-	# * `ids : Array of superclasses identifiers
-	# * `nb_methods : Array which contain the number of introduced methods for each class in ids
-	# * `nb_attributes : Array which contain the number of introduced attributes for each class in ids
-	# * `offset_attributes : Offset from the beginning of the table of the group of attributes
-	# * `offset_methods : Offset from the beginning of the table of the group of methods
-	private fun allocate_vtable(v: VirtualMachine, ids: Array[Int], nb_methods: Array[Int], nb_attributes: Array[Int],
-			offset_attributes: Int, offset_methods: Int)
+	# Set the offsets for the properties introduced by `self` class
+	# * `vm` The currently executed VirtualMachine
+	# * `explicit` Indicate if this class was explicitly loaded
+	private fun set_offsets(vm: VirtualMachine, explicit: Bool)
 	do
-		vtable = new VTable
-		var idc = new Array[Int]
-
-		vtable.mask = v.ph.pnand(ids, 1, idc) - 1
-		vtable.id = idc[0]
-		vtable.classname = name
-
-		# Add current id to Array of super-ids
-		var ids_total = new Array[Int]
-		ids_total.add_all(ids)
-		ids_total.push(vtable.id)
-
-		var nb_methods_total = new Array[Int]
-		var nb_attributes_total = new Array[Int]
-
-		var self_methods = 0
-		var nb_introduced_attributes = 0
-
 		# Fixing offsets for self attributes and methods
 		var relative_offset_attr = 0
 		var relative_offset_meth = 0
@@ -530,14 +569,12 @@ redef class MClass
 			for p in classdef.intro_mproperties do
 				# Collect properties and fixing offsets
 				if p isa MMethod then
-					self_methods += 1
 					p.offset = relative_offset_meth
 					relative_offset_meth += 1
 
 					intro_mmethods.add(p)
 				end
 				if p isa MAttribute then
-					nb_introduced_attributes += 1
 					p.offset = relative_offset_attr
 					relative_offset_attr += 1
 
@@ -550,22 +587,33 @@ redef class MClass
 		mattributes.add_all(intro_mattributes)
 		mmethods.add_all(intro_mmethods)
 
-		nb_methods_total.add_all(nb_methods)
-		nb_methods_total.push(self_methods)
+		if explicit then allocate_vtable(vm)
+	end
 
-		nb_attributes_total.add_all(nb_attributes)
-		nb_attributes_total.push(nb_introduced_attributes)
+	# Allocate a single vtable
+	# * `vm` The currently executed VirtualMachine
+	private fun allocate_vtable(vm: VirtualMachine)
+	do
+		var ids = new Array[Int]
+		var nb_methods_total = new Array[Int]
+		var nb_attributes_total = new Array[Int]
 
-		# Set the color for subtyping test of this class
-		color = offset_methods - 2
+		for cl in ordering do
+			ids.add(cl.vtable.id)
+			nb_methods_total.add(cl.intro_mmethods.length)
+			nb_attributes_total.add(cl.intro_mattributes.length)
+		end
 
-		# Save the offsets of self class
-		position_attributes = offset_attributes
-		position_methods = offset_methods
-
-		# Since we have the number of attributes for each class, calculate the delta
+		# Calculate the delta to prepare object structure
 		var deltas = calculate_delta(nb_attributes_total)
-		vtable.internal_vtable = v.memory_manager.init_vtable(ids_total, nb_methods_total, deltas, vtable.mask)
+		vtable.internal_vtable = vm.memory_manager.init_vtable(ids, nb_methods_total, deltas, vtable.mask)
+
+		# The virtual table now needs to be filled with pointer to methods
+		for cl in ordering do
+			fill_vtable(vm, vtable.as(not null), cl)
+		end
+
+		loaded = true
 	end
 
 	# Fill the vtable with local methods for `self` class
@@ -705,6 +753,7 @@ redef class MClass
 
 				var super_id = current_class.vtable.id
 				var mask = sub.vtable.mask
+				vm.load_class(sub)
 
 				if vm.inter_is_subtype_ph(super_id, mask, sub.vtable.internal_vtable) then
 					if not sub.positions_methods.has_key(current_class) then
@@ -744,6 +793,7 @@ redef class MClass
 
 				var super_id = current_class.vtable.id
 				var mask = sub.vtable.mask
+				vm.load_class(sub)
 
 				if vm.inter_is_subtype_ph(super_id, mask, sub.vtable.internal_vtable) then
 					if not sub.positions_methods.has_key(current_class) then
@@ -952,5 +1002,10 @@ class MemoryManager
 			area[i] = (long unsigned int)method;
 			MMethodDef_incr_ref(method);
 		}
+	`}
+
+	# Return a NULL pointer, used to initialize virtual tables
+	private fun null_ptr: Pointer `{
+		return NULL;
 	`}
 end
