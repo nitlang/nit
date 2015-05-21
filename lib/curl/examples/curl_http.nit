@@ -32,16 +32,16 @@ class MyHttpFetcher
 	fun destroy do self.curl.destroy
 
 	# Header callback
-	redef fun header_callback(line: String) do
+	redef fun header_callback(line) do
 		# We keep this callback silent for testing purposes
 		#if not line.has_prefix("Date:") then print "Header_callback : {line}"
 	end
 
 	# Body callback
-	redef fun body_callback(line: String) do self.our_body = "{self.our_body}{line}"
+	redef fun body_callback(line) do self.our_body = "{self.our_body}{line}"
 
 	# Stream callback - Cf : No one is registered
-	redef fun stream_callback(buffer: String, size: Int, count: Int) do print "Stream_callback : {buffer} - {size} - {count}"
+	redef fun stream_callback(buffer, size, count) do print "Stream_callback : {buffer} - {size} - {count}"
 end
 
 
