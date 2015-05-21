@@ -72,7 +72,7 @@ redef class FileReader
 		self.path = path
 		var file = sys.files[path]
 		prepare_buffer(file.length)
-		_buffer.append(file)
+		path.copy_to_native(_buffer, file.length, 0, 0)
 	end
 
 	redef fun close
@@ -82,7 +82,7 @@ redef class FileReader
 
 	redef fun fill_buffer
 	do
-		_buffer.clear
+		buffer_reset
 		end_reached = true
 	end
 
