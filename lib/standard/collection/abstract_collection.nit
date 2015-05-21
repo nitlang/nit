@@ -191,6 +191,37 @@ interface Iterator[E]
 	# Require `is_ok`.
 	fun next is abstract
 
+	# Jump to the next item `step` times.
+	#
+	# ~~~
+	# var i = [11, 22, 33, 44].iterator
+	# assert i.item == 11
+	# i.next_by 2
+	# assert i.item == 33
+	# ~~~
+	#
+	# `next_by` should be used instead of looping on `next` because is takes care
+	# of stopping if the end of iteration is reached prematurely whereas a loop of
+	# `next` will abort because of the precondition on `is_ok`.
+	#
+	# ~~~
+	# i.next_by 100
+	# assert not i.is_ok
+	# ~~~
+	#
+	# If `step` is negative, this method aborts.
+	# But specific subclasses can change this and do something more meaningful instead.
+	#
+	# Require `is_ok`
+	fun next_by(step: Int)
+	do
+		assert step >= 0
+		while is_ok and step > 0 do
+			next
+			step -= 1
+		end
+	end
+
 	# Is there a current item ?
 	fun is_ok: Bool is abstract
 
@@ -206,6 +237,43 @@ interface Iterator[E]
 	#
 	# Do nothing by default.
 	fun finish do end
+
+	# A decorator around `self` that advance self a given number of steps instead of one.
+	#
+	# ~~~
+	# var i = [11, 22, 33, 44, 55].iterator
+	# var i2 = i.to_step(2)
+	#
+	# assert i2.item == 11
+	# i2.next
+	# assert i2.item == 33
+	#
+	# assert i.item == 33
+	# ~~~
+	fun to_step(step: Int): Iterator[E] do return new StepIterator[E](self, step)
+end
+
+# A basic helper class to specialize specific Iterator decorators
+abstract class IteratorDecorator[E]
+	super Iterator[E]
+
+	# The underling iterator
+	protected var real: Iterator[E]
+
+	redef fun is_ok do return real.is_ok
+	redef fun item do return real.item
+	redef fun finish do real.finish
+	redef fun next do real.next
+	redef fun next_by(step) do real.next_by(step)
+end
+
+# A decorator that advance a given number of steps
+private class StepIterator[E]
+	super IteratorDecorator[E]
+	var step: Int
+
+	redef fun next do real.next_by(step)
+	redef fun next_by(step) do real.next_by(step * self.step)
 end
 
 # A collection that contains only one item.

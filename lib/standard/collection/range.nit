@@ -101,8 +101,13 @@ class Range[E: Discrete]
 	init without_last(from: E, to: E)
 	do
 		first = from
-		last = to.predecessor(1)
-		after = to
+		if from <= to then
+			last = to.predecessor(1)
+			after = to
+		else
+			last = to.successor(1)
+			after = to
+		end
 	end
 
 	# Two ranges are equals if they have the same first and last elements.
@@ -126,6 +131,60 @@ class Range[E: Discrete]
 	redef fun hash do
 		# 11 and 23 are magic numbers empirically determined to be not so bad.
 		return first.hash * 11 + last.hash * 23
+	end
+
+	# Gets an iterator that progress with a given step.
+	#
+	# The main usage is in `for` construction.
+	#
+	# ~~~
+	# for i in [10..25].step(10) do assert i == 10 or i == 20
+	# ~~~
+	#
+	# But `step` is usable as any kind of iterator.
+	#
+	# ~~~
+	# assert [10..27].step(5).to_a == [10,15,20,25]
+	# ~~~
+	#
+	# If `step == 1`, then it is equivalent to the default `iterator`.
+	#
+	# ~~~
+	# assert [1..5].step(1).to_a == [1..5].to_a
+	# ~~~
+	#
+	# If `step` is negative, then the iterator will iterate on ranges whose `first` > `last`.
+	#
+	# ~~~
+	# assert [25..12].step(-5).to_a == [25,20,15]
+	# ~~~
+	#
+	# On such ranges, the default `iterator` will be empty
+	#
+	# ~~~
+	# assert [5..1].step(1).to_a.is_empty
+	# assert [5..1].iterator.to_a.is_empty
+	# assert [5..1].to_a.is_empty
+	# assert [5..1].is_empty
+	# ~~~
+	#
+	# Note that on non-empty range, iterating with a negative step will be empty
+	#
+	# ~~~
+	# assert [1..5].step(-1).to_a.is_empty
+	# ~~~
+	fun step(step: Int): Iterator[E]
+	do
+		var i
+		if step >= 0 then
+			i = iterator
+		else
+			i = new DowntoIteratorRange[E](self)
+			step = -step
+		end
+
+		if step == 1 then return i
+		return i.to_step(step)
 	end
 end
 
@@ -158,6 +217,23 @@ private class ReverseIteratorRange[E: Discrete]
 	init
 	do
 		_item = _range.last
+	end
+end
+
+# Iterator on ranges.
+private class DowntoIteratorRange[E: Discrete]
+	super IndexedIterator[E]
+	var range: Range[E]
+	redef var item is noinit
+	redef fun index do return _item.distance(_range.first)
+
+	redef fun is_ok do return _item >= _range.last
+
+	redef fun next do _item = _item.predecessor(1)
+
+	init
+	do
+		_item = _range.first
 	end
 end
 
