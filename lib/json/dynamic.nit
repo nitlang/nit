@@ -131,8 +131,7 @@ class JsonValue
 	#     assert "123".to_json_value.to_s == "123"
 	#     assert "true".to_json_value.to_s == "true"
 	#     assert "[1, 2, 3]".to_json_value.to_s == "123"
-	redef fun to_s: String
-	do
+	redef fun to_s do
 		if value == null then return "null"
 		return value.to_s
 	end
