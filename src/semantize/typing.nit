@@ -842,6 +842,7 @@ redef class AVardeclExpr
 			mtype = v.resolve_mtype(ntype)
 			if mtype == null then return # Skip error
 		end
+		var decltype = mtype
 
 		var nexpr = self.n_expr
 		if nexpr != null then
@@ -857,8 +858,7 @@ redef class AVardeclExpr
 			end
 		end
 
-		var decltype = mtype
-		if mtype == null or mtype isa MNullType then
+		if decltype == null or decltype isa MNullType then
 			var objclass = v.get_mclass(self, "Object")
 			if objclass == null then return # skip error
 			decltype = objclass.mclass_type.as_nullable
