@@ -20,38 +20,6 @@ module model_utils
 import model
 
 redef class MGroup
-	fun in_nesting_intro_mclasses(min_visibility: MVisibility): Set[MClass] do
-		var res = new HashSet[MClass]
-		var lst = in_nesting.direct_smallers
-		for mmodule in mmodules do res.add_all mmodule.filter_intro_mclasses(min_visibility)
-		for mgrp in lst do res.add_all mgrp.in_nesting_intro_mclasses(min_visibility)
-		return res
-	end
-
-	fun in_nesting_redef_mclasses(min_visibility: MVisibility): Set[MClass] do
-		var res = new HashSet[MClass]
-		var lst = in_nesting.direct_smallers
-		for mmodule in mmodules do res.add_all mmodule.filter_redef_mclasses(min_visibility)
-		for mgrp in lst do res.add_all mgrp.in_nesting_redef_mclasses(min_visibility)
-		return res
-	end
-
-	fun in_nesting_intro_mclassdefs(min_visibility: MVisibility): Set[MClassDef] do
-		var res = new HashSet[MClassDef]
-		var lst = in_nesting.direct_smallers
-		for mmodule in mmodules do res.add_all mmodule.intro_mclassdefs(min_visibility)
-		for mgrp in lst do res.add_all mgrp.in_nesting_intro_mclassdefs(min_visibility)
-		return res
-	end
-
-	fun in_nesting_redef_mclassdefs(min_visibility: MVisibility): Set[MClassDef] do
-		var res = new HashSet[MClassDef]
-		var lst = in_nesting.direct_smallers
-		for mmodule in mmodules do res.add_all mmodule.redef_mclassdefs(min_visibility)
-		for mgrp in lst do res.add_all mgrp.in_nesting_redef_mclassdefs(min_visibility)
-		return res
-	end
-
 	# Collect nested modules
 	fun collect_mmodules: Set[MModule] do
 		var res = new HashSet[MModule]
