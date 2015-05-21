@@ -102,6 +102,16 @@ class MVisibility
 	end
 end
 
+# A `Comparator` to sort mentities by their names.
+class MEntityNameSorter
+	super Comparator
+
+	redef type COMPARED: MEntity
+
+	# Returns `a.name <=> b.name`.
+	redef fun compare(a, b) do return a.name <=> b.name
+end
+
 # The visibility level `intrude`
 fun intrude_visibility: MVisibility do return once new MVisibility("intrude", 5)
 # The visibility level `public`

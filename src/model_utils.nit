@@ -414,12 +414,3 @@ redef class MPropDef
 		return res
 	end
 end
-
-# Sorters
-
-# Sort mentities by their name
-class MEntityNameSorter
-	super Comparator
-	redef type COMPARED: MEntity
-	redef fun compare(a, b) do return a.name <=> b.name
-end
