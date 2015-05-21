@@ -113,25 +113,24 @@ class FileReader
 			return
 		end
 		end_reached = false
-		_buffer_pos = 0
-		_buffer.clear
+		buffer_reset
 	end
 
 	redef fun close
 	do
 		super
-		_buffer.clear
+		buffer_reset
 		end_reached = true
 	end
 
 	redef fun fill_buffer
 	do
-		var nb = _file.io_read(_buffer.items, _buffer.capacity)
+		var nb = _file.io_read(_buffer, _buffer_capacity)
 		if nb <= 0 then
 			end_reached = true
 			nb = 0
 		end
-		_buffer.length = nb
+		_buffer_length = nb
 		_buffer_pos = 0
 	end
 
@@ -179,18 +178,23 @@ class FileWriter
 	super FileStream
 	super Writer
 
+	redef fun write_bytes(s) do
+		if last_error != null then return
+		if not _is_writable then
+			last_error = new IOError("cannot write to non-writable stream")
+			return
+		end
+		write_native(s.items, s.length)
+	end
+
 	redef fun write(s)
 	do
 		if last_error != null then return
 		if not _is_writable then
-			last_error = new IOError("Cannot write to non-writable stream")
+			last_error = new IOError("cannot write to non-writable stream")
 			return
 		end
-		if s isa FlatText then
-			write_native(s.to_cstring, s.length)
-		else
-			for i in s.substrings do write_native(i.to_cstring, i.length)
-		end
+		for i in s.substrings do write_native(i.to_cstring, i.length)
 	end
 
 	redef fun write_byte(value)
@@ -435,10 +439,12 @@ class Path
 	# ~~~
 	#
 	# See `Reader::read_all` for details.
-	fun read_all: String
+	fun read_all: String do return read_all_bytes.to_s
+
+	fun read_all_bytes: Bytes
 	do
 		var s = open_ro
-		var res = s.read_all
+		var res = s.read_all_bytes
 		s.close
 		return res
 	end
