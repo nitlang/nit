@@ -200,7 +200,7 @@ class Template
 	end
 
 	# Do the full rendering and write the final content to a stream
-	redef fun write_to(stream: Writer)
+	redef fun write_to(stream)
 	do
 		assert not is_writing
 		is_writing = true
