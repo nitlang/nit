@@ -316,22 +316,6 @@ redef class MClass
 		end
 		return res
 	end
-
-	fun is_class: Bool do
-		return self.kind == concrete_kind or self.kind == abstract_kind
-	end
-
-	fun is_interface: Bool do
-		return self.kind == interface_kind
-	end
-
-	fun is_enum: Bool do
-		return self.kind == enum_kind
-	end
-
-	fun is_abstract: Bool do
-		return self.kind == abstract_kind
-	end
 end
 
 redef class MAttribute
