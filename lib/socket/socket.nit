@@ -141,7 +141,7 @@ class TCPStream
 	end
 
 	# If socket.end_reached, nothing will happen
-	redef fun write(msg: Text)
+	redef fun write(msg)
 	do
 		if closed then return
 		socket.write(msg.to_s)
