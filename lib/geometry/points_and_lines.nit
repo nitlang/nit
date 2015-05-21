@@ -71,8 +71,8 @@ end
 class Line[N: Numeric]
 	super ILine[N]
 
-	redef var point_left: P
-	redef var point_right: P
+	redef var point_left
+	redef var point_right
 
 	init
 	do

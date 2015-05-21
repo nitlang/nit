@@ -55,14 +55,14 @@ abstract class QuadTree[E: Boxed[Numeric]]
 		self.parent_node = parent
 	end
 
-	redef fun items_overlapping(region :Boxed[Numeric]): SimpleCollection[E] do
+	redef fun items_overlapping(region): SimpleCollection[E] do
 		var res = new Array[E]
 		items_overlapping_in(region,res)
 		return res
 	end
 
 	# add the item to the tree, create children if the limit is reached
-	redef fun add(item: E) do if self.is_leaf then self.data.add(item) else add_to_children(item)
+	redef fun add(item) do if self.is_leaf then self.data.add(item) else add_to_children(item)
 
 	private fun add_to_children(item: Boxed[Numeric])
 	do
@@ -93,7 +93,7 @@ abstract class QuadTree[E: Boxed[Numeric]]
 		end
 	end
 
-	redef fun is_empty: Bool do return data.is_empty and (self.is_leaf or (child0.is_empty and child1.is_empty and child2.is_empty and child3.is_empty))
+	redef fun is_empty do return data.is_empty and (self.is_leaf or (child0.is_empty and child1.is_empty and child2.is_empty and child3.is_empty))
 
 	# Return whether or not the Node is a leaf of the tree
 	fun is_leaf: Bool do return child0 == null
