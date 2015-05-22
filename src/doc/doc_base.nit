@@ -74,6 +74,15 @@ class DocPage
 	var root = new DocRoot
 
 	redef fun to_s do return title
+
+	# Pretty prints the content of this page.
+	fun pretty_print: Writable do
+		var res = new Template
+		res.addn "page: {title}"
+		res.addn ""
+		root.pretty_print_in(res)
+		return res
+	end
 end
 
 # `DocPage` elements that can be nested in another.
@@ -126,6 +135,20 @@ abstract class DocComposite
 	fun depth: Int do
 		if parent == null then return 0
 		return parent.depth + 1
+	end
+
+	# Pretty prints this composite recursively.
+	fun pretty_print: Writable do
+		var res = new Template
+		pretty_print_in(res)
+		return res
+	end
+
+	# Appends the Pretty print of this composite in `res`.
+	private fun pretty_print_in(res: Template) do
+		res.add "#" * depth
+		res.addn " {id}"
+		for child in children do child.pretty_print_in(res)
 	end
 end
 
