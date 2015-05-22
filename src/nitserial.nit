@@ -27,7 +27,6 @@ module nitserial
 
 import frontend
 import rapid_type_analysis
-import model_utils
 import template
 
 # A Nit module
