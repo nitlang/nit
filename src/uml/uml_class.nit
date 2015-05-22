@@ -63,7 +63,7 @@ end
 
 redef class MClass
 
-	redef fun tpl_class(ctx, main): Writable do
+	redef fun tpl_class(ctx, main) do
 		var t = new Template
 		t.add "{name} [\n label = \"\{"
 		if kind == abstract_kind then
