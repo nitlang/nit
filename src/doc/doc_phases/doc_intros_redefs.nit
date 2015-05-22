@@ -24,7 +24,7 @@ class IntroRedefListPhase
 	super DocPhase
 
 	redef fun apply do
-		for page in doc.pages do
+		for page in doc.pages.values do
 			if not page isa MEntityPage then continue
 			page.root.build_intro_redef_list(self, doc, page)
 		end
@@ -88,6 +88,8 @@ end
 class IntrosRedefsSection
 	super TabbedGroup
 	super MEntitySection
+
+	redef var toc_title = "Intros / Redefs"
 end
 
 # An article that displays a list of introduced / refined mentities.
@@ -102,4 +104,6 @@ class IntrosRedefsListArticle
 
 	# Intro mentities to list.
 	var mentities: Array[MEntity]
+
+	redef var toc_title = "Intros / Redefs"
 end

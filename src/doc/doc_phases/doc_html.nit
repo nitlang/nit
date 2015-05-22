@@ -104,7 +104,7 @@ class RenderHTMLPhase
 
 	redef fun apply do
 		init_output_dir
-		for page in doc.pages do
+		for page in doc.pages.values do
 			page.render(self, doc).write_to_file("{ctx.output_dir.to_s}/{page.html_url}")
 		end
 	end
@@ -187,7 +187,7 @@ redef class DocPage
 	# all properties below are roughly copied from `doc_pages`
 
 	# Build page title string
-	fun init_title(v: RenderHTMLPhase, doc: DocModel) is abstract
+	fun init_title(v: RenderHTMLPhase, doc: DocModel) do end
 
 	# Build top menu template if any.
 	fun init_topmenu(v: RenderHTMLPhase, doc: DocModel) do
@@ -471,7 +471,7 @@ redef class MEntitySection
 			title.add mentity.html_signature
 			html_title = title
 			html_subtitle = mentity.html_namespace
-			toc_title = mentity.html_name
+			html_toc_title = mentity.html_name
 		end
 		super
 	end
@@ -484,16 +484,16 @@ redef class ConcernSection
 		var mentity = self.mentity
 		if page isa MGroupPage then
 			html_title = null
-			toc_title = mentity.html_name
+			html_toc_title = mentity.html_name
 			is_toc_hidden = false
 		else if page.mentity isa MModule and mentity isa MModule then
 			var title = new Template
 			if mentity == page.mentity then
 				title.add "in "
-				toc_title = "in {mentity.html_name}"
+				html_toc_title = "in {mentity.html_name}"
 			else
 				title.add "from "
-				toc_title = "from {mentity.html_name}"
+				html_toc_title = "from {mentity.html_name}"
 			end
 			title.add mentity.html_namespace
 			html_title = title
@@ -503,7 +503,7 @@ redef class ConcernSection
 			title.add "in "
 			title.add mentity.html_namespace
 			html_title = title
-			toc_title = "in {mentity.html_name}"
+			html_toc_title = "in {mentity.html_name}"
 		end
 		super
 	end
@@ -532,7 +532,7 @@ redef class DefinitionArticle
 			title.add mentity.html_icon
 			title.add mentity.html_namespace
 			html_title = title
-			toc_title = mentity.html_name
+			html_toc_title = mentity.html_name
 			if mentity isa MModule then
 				html_source_link = v.html_source_link(mentity.location)
 			end
@@ -542,7 +542,7 @@ redef class DefinitionArticle
 			title.add mentity.mmodule.html_namespace
 			html_title = mentity.html_declaration
 			html_subtitle = title
-			toc_title = "in {mentity.html_name}"
+			html_toc_title = "in {mentity.html_name}"
 			html_source_link = v.html_source_link(mentity.location)
 			if page isa MEntityPage and mentity.is_intro and mentity.mmodule != page.mentity then
 				is_short_comment = true
@@ -555,13 +555,13 @@ redef class DefinitionArticle
 				title.add mentity.html_declaration
 				html_title = title
 				html_subtitle = mentity.html_namespace
-				toc_title = mentity.html_name
+				html_toc_title = mentity.html_name
 			else
 				var title = new Template
 				title.add "in "
 				title.add mentity.mclassdef.html_link
 				html_title = title
-				toc_title = "in {mentity.mclassdef.html_name}"
+				html_toc_title = "in {mentity.mclassdef.html_name}"
 			end
 			html_source_link = v.html_source_link(mentity.location)
 		end
@@ -576,7 +576,7 @@ redef class HomeArticle
 	redef fun init_html_render(v, doc, page) do
 		if v.ctx.opt_custom_title.value != null then
 			self.html_title = v.ctx.opt_custom_title.value.to_s
-			self.toc_title = v.ctx.opt_custom_title.value.to_s
+			self.html_toc_title = v.ctx.opt_custom_title.value.to_s
 		end
 		self.content = v.ctx.opt_custom_intro.value
 		super

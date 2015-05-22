@@ -294,17 +294,22 @@ redef class DocComposite
 	# A short, undecorated title that goes in the table of contents.
 	#
 	# By default, returns `html_title.to_s`, subclasses should redefine it.
-	var toc_title: String is lazy, writable do return html_title.to_s
-
-	# Is `self` hidden in the table of content?
-	var is_toc_hidden = false is writable
+	var html_toc_title: nullable String is lazy, writable do
+		if html_title == null then return null
+		return html_title.write_to_string
+	end
 
 	# Render this element in a table of contents.
 	private fun render_toc_item(lst: UnorderedList) do
 		if is_toc_hidden then return
 
 		var content = new Template
-		content.add new Link("#{html_id}", toc_title)
+
+		if html_toc_title == null then
+			content.add new Link("#{html_id}", toc_title)
+		else
+			content.add new Link("#{html_id}", html_toc_title.to_s)
+		end
 
 		if not children.is_empty then
 			var sublst = new UnorderedList
@@ -359,16 +364,16 @@ redef class TabbedGroup
 		var tabs = new DocTabs("{html_id}.tabs", "")
 		for child in children do
 			if child.is_hidden then continue
-			tabs.add_panel new DocTabPanel(child.html_tab_id, child.toc_title, child)
+			var title = child.html_toc_title or else child.toc_title
+			tabs.add_panel new DocTabPanel(child.html_tab_id, title, child)
 		end
 		addn tabs
 	end
 end
 
 redef class PanelGroup
-	redef var html_id is lazy do return "group:{group_title.to_lower.to_snake_case}"
+	redef var html_id is lazy do return "group:{title.to_lower.to_snake_case}"
 	redef var html_title = null
-	redef var toc_title is lazy do return group_title
 	redef var is_toc_hidden = true
 end
 
@@ -484,7 +489,8 @@ redef class IntroArticle
 		end
 		for child in children do
 			if child.is_hidden then continue
-			tabs.add_panel new DocTabPanel(child.html_tab_id, child.toc_title, child)
+			var title = child.html_toc_title or else child.toc_title
+			tabs.add_panel new DocTabPanel(child.html_tab_id, title, child)
 		end
 		var lnk = html_source_link
 		if lnk != null then
@@ -512,7 +518,7 @@ redef class DefinitionListArticle
 	end
 
 	redef var html_subtitle is lazy do return mentity.html_namespace
-	redef var toc_title is lazy do return mentity.html_name
+	redef var html_toc_title is lazy do return mentity.html_name
 end
 
 redef class DefinitionArticle
@@ -549,7 +555,8 @@ redef class DefinitionArticle
 		end
 		for child in children do
 			if child.is_hidden then continue
-			tabs.add_panel new DocTabPanel(child.html_tab_id, child.toc_title, child)
+			var title = child.html_toc_title or else child.toc_title
+			tabs.add_panel new DocTabPanel(child.html_tab_id, title, child)
 		end
 		var lnk = html_source_link
 		if lnk != null then
@@ -577,7 +584,6 @@ end
 
 redef class IntrosRedefsSection
 	redef var html_id is lazy do return "article:{mentity.nitdoc_id}.intros_redefs"
-	redef var toc_title do return "Intros / Redefs"
 	redef var html_title = null
 	redef var html_subtitle = null
 	redef var is_toc_hidden = true
@@ -628,7 +634,6 @@ end
 redef class GraphArticle
 	redef var html_id is lazy do return "article:{mentity.nitdoc_id}.graph"
 	redef var html_title = null
-	redef var toc_title do return "Graph"
 	redef var is_hidden = false
 	redef var is_toc_hidden = true
 

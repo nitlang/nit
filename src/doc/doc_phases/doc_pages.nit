@@ -23,19 +23,19 @@ class MakePagePhase
 
 	# Instanciates documentation pages for the given DocModel.
 	redef fun apply do
-		doc.pages.add new OverviewPage("Overview")
-		doc.pages.add new SearchPage("Index")
+		doc.add_page new OverviewPage("overview", "Overview")
+		doc.add_page new SearchPage("search", "Index")
 		for mgroup in doc.mgroups do
-			doc.pages.add new MGroupPage(mgroup.nitdoc_name, mgroup)
+			doc.add_page new MGroupPage(mgroup)
 		end
 		for mmodule in doc.mmodules do
-			doc.pages.add new MModulePage(mmodule.nitdoc_name, mmodule)
+			doc.add_page new MModulePage(mmodule)
 		end
 		for mclass in doc.mclasses do
-			doc.pages.add new MClassPage(mclass.nitdoc_name, mclass)
+			doc.add_page new MClassPage(mclass)
 		end
 		for mproperty in doc.mproperties do
-			doc.pages.add new MPropertyPage(mproperty.nitdoc_name, mproperty)
+			doc.add_page new MPropertyPage(mproperty)
 		end
 	end
 end
@@ -52,6 +52,7 @@ end
 
 # A DocPage documenting a MEntity.
 class MEntityPage
+	autoinit mentity
 	super DocPage
 
 	# Type of MEntity documented by this page.
@@ -59,6 +60,9 @@ class MEntityPage
 
 	# MEntity documented by this page.
 	var mentity: MENTITY
+
+	redef var id is lazy do return mentity.nitdoc_id
+	redef var title is lazy do return mentity.nitdoc_name
 end
 
 # A documentation page about a MGroup.
