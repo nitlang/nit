@@ -265,7 +265,6 @@ redef class DocComposite
 		if html_title != null then
 		var header = new Header(hlvl, html_title.write_to_string)
 		header.css_classes.add "signature"
-		if hlvl == 2 then header.css_classes.add "well well-sm"
 		addn header
 		end
 		if html_subtitle != null then
