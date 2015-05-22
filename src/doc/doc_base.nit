@@ -91,6 +91,12 @@ abstract class DocComposite
 	# Parent element.
 	var parent: nullable DocComposite = null is writable
 
+	# Item title.
+	#
+	# Even if the title is not displayed in the final outputl, every composite
+	# needs a title so it can be displayed in console for debug.
+	var title: String
+
 	# Does `self` have a `parent`?
 	fun is_root: Bool do return parent == null
 
@@ -122,7 +128,10 @@ end
 # The root uses a specific subclass to provide different a different behavior
 # than other `DocComposite` elements.
 class DocRoot
+	noautoinit
 	super DocComposite
+
+	redef var title = "<root>"
 
 	# No op for `RootSection`.
 	redef fun parent=(p) do end

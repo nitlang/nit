@@ -47,13 +47,13 @@ end
 
 redef class OverviewPage
 	redef fun apply_structure(v, doc) do
-		var article = new HomeArticle
+		var article = new HomeArticle("Home")
 		root.add_child article
 		# Projects list
 		var mprojects = doc.model.mprojects.to_a
 		var sorter = new MConcernRankSorter
 		sorter.sort mprojects
-		var section = new ProjectsSection
+		var section = new ProjectsSection("Projects")
 		for mproject in mprojects do
 			section.add_child new DefinitionArticle(mproject)
 		end
@@ -69,7 +69,7 @@ redef class SearchPage
 		v.name_sorter.sort(mclasses)
 		var mprops = doc.mproperties.to_a
 		v.name_sorter.sort(mprops)
-		root.add_child new IndexArticle(mmodules, mclasses, mprops)
+		root.add_child new IndexArticle("Index", mmodules, mclasses, mprops)
 	end
 end
 
@@ -288,14 +288,14 @@ end
 # A group of sections that can be displayed together in a tab panel.
 class PanelGroup
 	super DocSection
-
-	# The title of this group.
-	var group_title: String
 end
 
 # A DocComposite element about a MEntity.
 class MEntityComposite
+	autoinit mentity
 	super DocComposite
+
+	redef var title is lazy do return mentity.name
 
 	# MEntity documented by this page element.
 	var mentity: MEntity

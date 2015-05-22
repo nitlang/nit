@@ -366,7 +366,7 @@ redef class TabbedGroup
 end
 
 redef class PanelGroup
-	redef var html_id is lazy do return "group:{group_title.to_lower.to_snake_case}"
+	redef var html_id is lazy do return "group:{title.to_lower.to_snake_case}"
 	redef var html_title = null
 	redef var toc_title is lazy do return group_title
 	redef var is_toc_hidden = true
