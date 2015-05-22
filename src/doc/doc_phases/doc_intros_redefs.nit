@@ -24,7 +24,7 @@ class IntroRedefListPhase
 	super DocPhase
 
 	redef fun apply do
-		for page in doc.pages do
+		for page in doc.pages.values do
 			if not page isa MEntityPage then continue
 			page.root.build_intro_redef_list(self, doc, page)
 		end

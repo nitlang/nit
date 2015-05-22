@@ -23,7 +23,7 @@ class POSetPhase
 
 	# Populates the given DocModel.
 	redef fun apply do
-		for page in doc.pages do
+		for page in doc.pages.values do
 			if page isa MEntityPage then page.build_poset(self, doc)
 		end
 	end

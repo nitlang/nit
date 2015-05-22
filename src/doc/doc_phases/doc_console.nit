@@ -19,6 +19,7 @@
 module doc_console
 
 import semantize
+import doc_extract
 import doc::console_templates
 
 # Nitx handles console I/O.
@@ -214,7 +215,7 @@ class CommentQuery
 		if len == 1 then
 			var res = results.first.as(MEntityMatch)
 			var mentity = res.mentity
-			var page = new DocPage("Results")
+			var page = new DocPage("resultats", "Results")
 			var article = new DefinitionArticle(mentity)
 			article.cs_title = mentity.name
 			article.cs_subtitle = mentity.cs_declaration
@@ -317,7 +318,7 @@ class DocQuery
 	redef fun perform(nitx, doc) do
 		var res = new Array[NitxMatch]
 		var name = args.first
-		for page in doc.pages do
+		for page in doc.pages.values do
 			if name == "*" then # FIXME dev only
 				res.add new PageMatch(self, page)
 			else if page.title == name then

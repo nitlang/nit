@@ -27,16 +27,26 @@ import model_ext
 # It is a placeholder to share data between each phase.
 class DocModel
 
-	# `DocPage` composing the documentation.
+	# `DocPage` composing the documentation associated to their ids.
 	#
 	# This is where `DocPhase` store and access pages to produce documentation.
-	var pages = new Array[DocPage]
+	#
+	# See `add_page`.
+	var pages: Map[String, DocPage] = new HashMap[String, DocPage]
 
 	# Nit `Model` from which we extract the documentation.
 	var model: Model is writable
 
 	# The entry point of the `model`.
 	var mainmodule: MModule is writable
+
+	# Add a `page` to this documentation.
+	fun add_page(page: DocPage) do
+		if pages.has_key(page.id) then
+			print "Warning: multiple page with the same id `{page.id}`"
+		end
+		pages[page.id] = page
+	end
 end
 
 # A documentation page abstraction.

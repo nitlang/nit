@@ -36,7 +36,7 @@ class GraphPhase
 
 	redef fun apply do
 		if ctx.opt_nodot.value then return
-		for page in doc.pages do
+		for page in doc.pages.values do
 			var article = page.build_graph(self, doc)
 			if article == null then continue
 			# FIXME avoid diff
