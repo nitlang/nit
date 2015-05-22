@@ -97,4 +97,6 @@ class DefinitionLinArticle
 
 	# The linearized list to display.
 	var mentities: Array[MEntity]
+
+	redef var toc_title = "Linearization"
 end

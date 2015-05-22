@@ -88,6 +88,8 @@ end
 class IntrosRedefsSection
 	super TabbedGroup
 	super MEntitySection
+
+	redef var toc_title = "Intros / Redefs"
 end
 
 # An article that displays a list of introduced / refined mentities.
@@ -102,4 +104,6 @@ class IntrosRedefsListArticle
 
 	# Intro mentities to list.
 	var mentities: Array[MEntity]
+
+	redef var toc_title = "Intros / Redefs"
 end

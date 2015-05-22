@@ -128,4 +128,5 @@ class GraphArticle
 	var dot: Text
 
 	redef var is_empty = false
+	redef var toc_title = "Graph"
 end
