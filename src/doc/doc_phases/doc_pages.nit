@@ -23,19 +23,19 @@ class MakePagePhase
 
 	# Instanciates documentation pages for the given DocModel.
 	redef fun apply do
-		doc.pages.add new OverviewPage("overview", "Overview")
-		doc.pages.add new SearchPage("search", "Index")
+		doc.add_page new OverviewPage("overview", "Overview")
+		doc.add_page new SearchPage("search", "Index")
 		for mgroup in doc.mgroups do
-			doc.pages.add new MGroupPage(mgroup)
+			doc.add_page new MGroupPage(mgroup)
 		end
 		for mmodule in doc.mmodules do
-			doc.pages.add new MModulePage(mmodule)
+			doc.add_page new MModulePage(mmodule)
 		end
 		for mclass in doc.mclasses do
-			doc.pages.add new MClassPage(mclass)
+			doc.add_page new MClassPage(mclass)
 		end
 		for mproperty in doc.mproperties do
-			doc.pages.add new MPropertyPage(mproperty)
+			doc.add_page new MPropertyPage(mproperty)
 		end
 	end
 end

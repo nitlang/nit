@@ -23,7 +23,7 @@ class ConcernsPhase
 
 	# Populates the given DocModel.
 	redef fun apply do
-		for page in doc.pages do page.build_concerns(doc)
+		for page in doc.pages.values do page.build_concerns(doc)
 	end
 end
 

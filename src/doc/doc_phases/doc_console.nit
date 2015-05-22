@@ -19,6 +19,7 @@
 module doc_console
 
 import semantize
+import doc_extract
 import doc::console_templates
 
 # Nitx handles console I/O.
@@ -195,7 +196,7 @@ class CommentQuery
 		if len == 1 then
 			var res = results.first.as(MEntityMatch)
 			var mentity = res.mentity
-			var page = new DocPage("Results")
+			var page = new DocPage("resultats", "Results")
 			var article = new DefinitionArticle(mentity)
 			article.cs_title = mentity.name
 			article.cs_subtitle = mentity.cs_declaration
@@ -234,29 +235,6 @@ end
 
 ## exploration
 
-redef class DocModel
-
-	# Lists all MEntities in the model.
-	private var mentities: Collection[MEntity] is lazy do
-		var res = new HashSet[MEntity]
-		res.add_all mprojects
-		res.add_all mgroups
-		res.add_all mmodules
-		res.add_all mclasses
-		res.add_all mclassdefs
-		res.add_all mproperties
-		res.add_all mpropdefs
-		return res
-	end
-
-	# Search MEntities that match `name` by their name or namespace.
-	private fun search_mentities(name: String): Array[MEntity] do
-		var res = new Array[MEntity]
-		for mentity in mentities do
-			if mentity.name != name and mentity.cs_namespace != name then continue
-			res.add mentity
-		end
-		return res
 	end
 end
 

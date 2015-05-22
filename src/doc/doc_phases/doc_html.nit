@@ -104,7 +104,7 @@ class RenderHTMLPhase
 
 	redef fun apply do
 		init_output_dir
-		for page in doc.pages do
+		for page in doc.pages.values do
 			page.render(self, doc).write_to_file("{ctx.output_dir.to_s}/{page.html_url}")
 		end
 	end
