@@ -142,7 +142,7 @@ class CBMS
 
 	redef fun collect(mclasses) do
 		for mclass in mclasses do
-			var totc = mclass.all_mproperties(mainmodule, protected_visibility).length
+			var totc = mclass.collect_accessible_mproperties(protected_visibility).length
 			var ditc = mclass.in_hierarchy(mainmodule).depth
 			values[mclass] = totc.to_f / (ditc + 1).to_f
 		end
@@ -169,7 +169,7 @@ class CNVI
 				cbms.clear
 				cbms.collect(new HashSet[MClass].from(parents))
 				# compute class novelty index
-				var locc = mclass.local_mproperties(protected_visibility).length
+				var locc = mclass.collect_accessible_mproperties(protected_visibility).length
 				values[mclass] = locc.to_f / cbms.avg
 			else
 				values[mclass] = 0.0
@@ -193,7 +193,7 @@ class CNVS
 		var cnvi = new CNVI(mainmodule)
 		cnvi.collect(mclasses)
 		for mclass in mclasses do
-			var locc = mclass.local_mproperties(protected_visibility).length
+			var locc = mclass.collect_local_mproperties(protected_visibility).length
 			values[mclass] = cnvi.values[mclass] * locc.to_f
 		end
 	end
@@ -228,34 +228,34 @@ redef class MClass
 
 	# pure overriders contain only redefinitions
 	private fun is_pure_overrider(min_visibility: MVisibility): Bool do
-		var news = intro_mproperties(min_visibility).length
-		var locs = local_mproperties(min_visibility).length
+		var news = collect_intro_mproperties(min_visibility).length
+		var locs = collect_local_mproperties(min_visibility).length
 		if news == 0 and locs > 0 then return true
 		return false
 	end
 
 	# overriders contain more definitions than introductions
 	private fun is_overrider(min_visibility: MVisibility): Bool do
-		var rdfs = redef_mproperties(min_visibility).length
-		var news = intro_mproperties(min_visibility).length
-		var locs = local_mproperties(min_visibility).length
+		var rdfs = collect_redef_mproperties(min_visibility).length
+		var news = collect_intro_mproperties(min_visibility).length
+		var locs = collect_local_mproperties(min_visibility).length
 		if rdfs >= news and locs > 0 then return true
 		return false
 	end
 
 	# pure extenders contain only introductions
 	private fun is_pure_extender(min_visibility: MVisibility): Bool do
-		var rdfs = redef_mproperties(min_visibility).length
-		var locs = local_mproperties(min_visibility).length
+		var rdfs = collect_redef_mproperties(min_visibility).length
+		var locs = collect_local_mproperties(min_visibility).length
 		if rdfs == 0 and locs > 0 then return true
 		return false
 	end
 
 	# extenders contain more introduction than redefinitions
 	private fun is_extender(min_visibility: MVisibility): Bool do
-		var rdfs = redef_mproperties(min_visibility).length
-		var news = intro_mproperties(min_visibility).length
-		var locs = local_mproperties(min_visibility).length
+		var rdfs = collect_redef_mproperties(min_visibility).length
+		var news = collect_intro_mproperties(min_visibility).length
+		var locs = collect_local_mproperties(min_visibility).length
 		if news > rdfs and locs > 0 then return true
 		return false
 	end
@@ -263,7 +263,7 @@ redef class MClass
 	# pure specializers always call to super in its redefinitions
 	private fun is_pure_specializer(min_visibility: MVisibility): Bool do
 		var ovrs = overriden_mproperties(min_visibility).length
-		var rdfs = redef_mproperties(min_visibility).length
+		var rdfs = collect_redef_mproperties(min_visibility).length
 		if ovrs == 0 and rdfs > 0 then return true
 		return false
 	end
@@ -272,7 +272,7 @@ redef class MClass
 	private fun is_specializer(min_visibility: MVisibility): Bool do
 		var spcs = extended_mproperties(min_visibility).length
 		var ovrs = overriden_mproperties(min_visibility).length
-		var rdfs = redef_mproperties(min_visibility).length
+		var rdfs = collect_redef_mproperties(min_visibility).length
 		if spcs > ovrs and rdfs > 0 then return true
 		return false
 	end
@@ -280,7 +280,7 @@ redef class MClass
 	# pure replacers never call to super in its redefinitions
 	private fun is_pure_replacer(min_visibility: MVisibility): Bool do
 		var spcs = extended_mproperties(min_visibility).length
-		var rdfs = redef_mproperties(min_visibility).length
+		var rdfs = collect_redef_mproperties(min_visibility).length
 		if spcs == 0 and rdfs > 0 then return true
 		return false
 	end
@@ -289,7 +289,7 @@ redef class MClass
 	private fun is_replacer(min_visibility: MVisibility): Bool do
 		var spcs = extended_mproperties(min_visibility).length
 		var ovrs = overriden_mproperties(min_visibility).length
-		var rdfs = redef_mproperties(min_visibility).length
+		var rdfs = collect_redef_mproperties(min_visibility).length
 		if ovrs > spcs and rdfs > 0 then return true
 		return false
 	end
@@ -298,7 +298,7 @@ redef class MClass
 	private fun is_equal(min_visibility: MVisibility): Bool do
 		var spcs = extended_mproperties(min_visibility).length
 		var ovrs = overriden_mproperties(min_visibility).length
-		var rdfs = redef_mproperties(min_visibility).length
+		var rdfs = collect_redef_mproperties(min_visibility).length
 		if spcs == ovrs and rdfs > 0 then return true
 		return false
 	end

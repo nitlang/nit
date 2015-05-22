@@ -93,7 +93,7 @@ class CNBNA
 
 	redef fun collect(mclasses) do
 		for mclass in mclasses do
-			var all = mclass.all_mattributes(mainmodule, min_visibility)
+			var all = mclass.collect_accessible_mattributes(min_visibility)
 			for mattr in all do
 				if mattr.is_nullable then values.inc(mclass)
 			end
@@ -101,6 +101,15 @@ class CNBNA
 	end
 end
 
+redef class MAttribute
+	# Is this attribute nullable for sure?
+	#
+	# This mean that its introduction is declarred with a nullable static type
+	# since attributes are invariant this will work on most cases
+	# attributes with static type anchored with a virtual type are not "nullable for-sure"
+	# because this type can be redefined in subclasses
+	private fun is_nullable: Bool do return intro.static_mtype isa MNullableType
+end
 
 private class NullableSends
 	super Visitor

@@ -18,6 +18,7 @@
 module mclasses_metrics
 
 import metrics_base
+import model::model_collect
 
 redef class ToolContext
 	var mclasses_metrics_phase: Phase = new MClassesMetricsPhase(self, null)
@@ -192,7 +193,7 @@ class CNBP
 
 	redef fun collect(mclasses) do
 		for mclass in mclasses do
-			values[mclass] = mclass.all_mproperties(mainmodule, min_visibility).length
+			values[mclass] = mclass.collect_accessible_mproperties(min_visibility).length
 		end
 	end
 end
@@ -214,7 +215,7 @@ class CNBA
 
 	redef fun collect(mclasses) do
 		for mclass in mclasses do
-			values[mclass] = mclass.all_mattributes(mainmodule, min_visibility).length
+			values[mclass] = mclass.collect_accessible_mattributes(min_visibility).length
 		end
 	end
 end
@@ -236,7 +237,7 @@ class CNBIP
 
 	redef fun collect(mclasses) do
 		for mclass in mclasses do
-			values[mclass] = mclass.intro_mproperties(min_visibility).length
+			values[mclass] = mclass.collect_intro_mproperties(min_visibility).length
 		end
 	end
 end
@@ -258,7 +259,7 @@ class CNBRP
 
 	redef fun collect(mclasses) do
 		for mclass in mclasses do
-			values[mclass] = mclass.redef_mproperties(min_visibility).length
+			values[mclass] = mclass.collect_redef_mproperties(min_visibility).length
 		end
 	end
 end
@@ -280,7 +281,7 @@ class CNBHP
 
 	redef fun collect(mclasses) do
 		for mclass in mclasses do
-			values[mclass] = mclass.inherited_mproperties(mainmodule, min_visibility).length
+			values[mclass] = mclass.collect_inherited_mproperties(min_visibility).length
 		end
 	end
 end
@@ -302,7 +303,7 @@ class CNBLP
 
 	redef fun collect(mclasses) do
 		for mclass in mclasses do
-			values[mclass] = mclass.local_mproperties(min_visibility).length
+			values[mclass] = mclass.collect_local_mproperties(min_visibility).length
 		end
 	end
 end
