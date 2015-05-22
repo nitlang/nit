@@ -772,7 +772,8 @@ Statistics of type usage:
 	  sum: 0
 --- Sends on Nullable Receiver ---
 Total number of sends: 19
-Number of sends on a nullable receiver: 0 (0.00%)
+Number of sends on a unsafe nullable receiver: 0 (0.00%)
+Number of sends on a safe nullable receiver: 0 (0.00%)
 Number of buggy sends (cannot determine the type of the receiver): 0 (0.00%)
 
 # RTA metrics
