@@ -1024,39 +1024,23 @@ redef class String
 	#     assert files.is_empty
 	#
 	# TODO find a better way to handle errors and to give them back to the user.
-	fun files: Array[String] is extern import Array[String], Array[String].add, NativeString.to_s, String.to_cstring `{
-		char *dir_path;
-		DIR *dir;
+	fun files: Array[String]
+	do
+		var res = new Array[String]
+		var d = new NativeDir.opendir(to_cstring)
+		if d.address_is_null then return res
 
-		dir_path = String_to_cstring( recv );
-		if ((dir = opendir(dir_path)) == NULL)
-		{
-			//perror( dir_path );
-			//exit( 1 );
-			Array_of_String results;
-			results = new_Array_of_String();
-			return results;
-		}
-		else
-		{
-			Array_of_String results;
-			String file_name;
-			struct dirent *de;
+		loop
+			var de = d.readdir
+			if de.address_is_null then break
+			var name = de.to_s_with_copy
+			if name == "." or name == ".." then continue
+			res.add name
+		end
+		d.closedir
 
-			results = new_Array_of_String();
-
-			while ( ( de = readdir( dir ) ) != NULL )
-				if ( strcmp( de->d_name, ".." ) != 0 &&
-					strcmp( de->d_name, "." ) != 0 )
-				{
-					file_name = NativeString_to_s( strdup( de->d_name ) );
-					Array_of_String_add( results, file_name );
-				}
-
-			closedir( dir );
-			return results;
-		}
-	`}
+		return res
+	end
 end
 
 redef class NativeString
@@ -1127,6 +1111,24 @@ private extern class NativeFile `{ FILE* `}
 	new native_stdin is extern "file_NativeFileCapable_NativeFileCapable_native_stdin_0"
 	new native_stdout is extern "file_NativeFileCapable_NativeFileCapable_native_stdout_0"
 	new native_stderr is extern "file_NativeFileCapable_NativeFileCapable_native_stderr_0"
+end
+
+# Standard `DIR*` pointer
+private extern class NativeDir `{ DIR* `}
+
+	# Open a directory
+	new opendir(path: NativeString) `{ return opendir(path); `}
+
+	# Close a directory
+	fun closedir `{ closedir(recv); `}
+
+	# Read the next directory entry
+	fun readdir: NativeString `{
+		struct dirent *de;
+		de = readdir(recv);
+		if (!de) return NULL;
+		return de->d_name;
+	`}
 end
 
 redef class Sys
