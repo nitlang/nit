@@ -126,16 +126,7 @@ class List[E]
 			push(e)
 			return
 		end
-		var nnode = new ListNode[E](e)
-		var next = node.next
-		if next == null then
-			_tail = nnode
-		else
-			next.prev = nnode
-		end
-		nnode.prev = node
-		nnode.next = next
-		node.next = nnode
+		insert_before(e, node)
 	end
 
 	# Append `l` to `self` but clear `l`.
