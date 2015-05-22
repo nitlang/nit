@@ -16,6 +16,7 @@
 module doc_concerns
 
 import doc_pages
+import model::model_collect
 
 # ConcernsPhase computes the ConcernsTree used for each page layout.
 class ConcernsPhase
@@ -23,7 +24,7 @@ class ConcernsPhase
 
 	# Populates the given DocModel.
 	redef fun apply do
-		for page in doc.pages.values do page.build_concerns(doc)
+		for page in doc.pages.values do page.build_concerns(self)
 	end
 end
 
@@ -32,7 +33,7 @@ redef class DocPage
 	# Build the `concerns` tree for this page.
 	#
 	# Since only `MEntityPage`, this method is a no-op for everything else.
-	private fun build_concerns(doc: DocModel) do end
+	private fun build_concerns(v: ConcernsPhase) do end
 end
 
 redef class MEntityPage
@@ -53,15 +54,16 @@ redef class MGroupPage
 	# Refined classes in `mentity` that should appear in this page.
 	var redefs = new HashSet[MClass]
 
-	redef fun build_concerns(doc) do
+	redef fun build_concerns(v) do
+		var doc = v.doc
 		var mmodules = new HashSet[MModule]
-		for mmodule in mentity.collect_mmodules do
+		for mmodule in mentity.mmodules do
 			if doc.mmodules.has(mmodule) then mmodules.add mmodule
 			# collect mclasses
 			for mclass in mmodule.intro_mclasses do
 				if doc.mclasses.has(mclass) then intros.add mclass
 			end
-			for mclass in mmodule.redef_mclasses do
+			for mclass in mmodule.collect_redef_mclasses(v.ctx.min_visibility) do
 				if doc.mclasses.has(mclass) then redefs.add mclass
 			end
 		end
@@ -77,7 +79,8 @@ redef class MModulePage
 	# MClassDefs located in `mentity` to display in this page.
 	var mclassdefs = new HashSet[MClassDef]
 
-	redef fun build_concerns(doc) do
+	redef fun build_concerns(v) do
+		var doc = v.doc
 		# extract mclassdefs in mmodule
 		for mclassdef in mentity.mclassdefs do
 			if doc.mclassdefs.has(mclassdef) then mclassdefs.add mclassdef
@@ -105,7 +108,8 @@ redef class MClassPage
 	# MPropdefs to display in this page.
 	var mpropdefs = new HashSet[MPropDef]
 
-	redef fun build_concerns(doc) do
+	redef fun build_concerns(v) do
+		var doc = v.doc
 		# collect mclassdefs
 		for mclassdef in mentity.mclassdefs do
 			if doc.mclassdefs.has(mclassdef) then mclassdefs.add mclassdef
@@ -131,7 +135,8 @@ redef class MPropertyPage
 	# MPropdefs to display in this page.
 	var mpropdefs = new HashSet[MPropDef]
 
-	redef fun build_concerns(doc) do
+	redef fun build_concerns(v) do
+		var doc = v.doc
 		# collect mpropdefs
 		for mpropdef in mentity.mpropdefs do
 			# FIXME diff hack

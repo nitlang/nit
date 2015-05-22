@@ -434,7 +434,7 @@ end
 redef class MGroup
 	redef var concern_rank is lazy do
 		var max = 0
-		for mmodule in collect_mmodules do
+		for mmodule in mmodules do
 			var mmax = mmodule.concern_rank
 			if mmax > max then max = mmax
 		end

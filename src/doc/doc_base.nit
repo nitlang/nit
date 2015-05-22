@@ -16,7 +16,6 @@
 module doc_base
 
 import toolcontext
-import model_utils
 import model_ext
 
 # The model of a Nitdoc documentation.
