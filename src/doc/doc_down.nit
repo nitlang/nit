@@ -20,11 +20,19 @@ import highlight
 private import parser_util
 
 redef class MDoc
-	# Comment synopsys HTML escaped
-	var short_comment: String is lazy do return content.first.html_escape
 
-	# Full comment HTML escaped
-	var full_comment: String is lazy do return content.join("\n").html_escape
+	# Synopsis HTML escaped.
+	var synopsis: String is lazy do return content.first.html_escape
+
+	# Comment without synopsis HTML escaped
+	var comment: String is lazy do
+		var lines = content.to_a
+		if not lines.is_empty then lines.shift
+		return content.join("\n").html_escape
+	end
+
+	# Full comment HTML escaped.
+	var documentation: String is lazy do return content.join("\n").html_escape
 
 	private var markdown_proc: MarkdownProcessor is lazy do
 		return original_mentity.model.nitdoc_md_processor
@@ -34,8 +42,8 @@ redef class MDoc
 		return original_mentity.model.nitdoc_inline_processor
 	end
 
-	# Synopsys in a template
-	var tpl_short_comment: Writable is lazy do
+	# Renders the synopsis as a HTML comment block.
+	var html_synopsis: Writable is lazy do
 		var res = new Template
 		var syn = inline_proc.process(content.first)
 		res.add "<span class=\"synopsys nitdoc\">{syn}</span>"
@@ -43,17 +51,28 @@ redef class MDoc
 
 	end
 
-	# Full comment in a template
-	var tpl_comment: Writable is lazy do
-		var res = new Template
+	# Renders the comment without the synopsis as a HTML comment block.
+	var html_comment: Writable is lazy do
 		var lines = content.to_a
+		if not lines.is_empty then lines.shift
+		return lines_to_html(lines)
+	end
+
+	# Renders the synopsis and the comment as a HTML comment block.
+	var html_documentation: Writable is lazy do return lines_to_html(content.to_a)
+
+	# Renders markdown line as a HTML comment block.
+	private fun lines_to_html(lines: Array[String]): Writable do
+		var res = new Template
 		res.add "<div class=\"nitdoc\">"
 		# do not use DocUnit as synopsys
-		if not content.first.has_prefix("    ") and
-		   not content.first.has_prefix("\t") then
-			# parse synopsys
-			var syn = inline_proc.process(lines.shift)
-			res.add "<p class=\"synopsys\">{syn}</p>"
+		if not lines.is_empty then
+			if not lines.first.has_prefix("    ") and
+			   not lines.first.has_prefix("\t") then
+				# parse synopsys
+				var syn = inline_proc.process(lines.shift)
+				res.add "<p class=\"synopsys\">{syn}</p>"
+			end
 		end
 		# check for annotations
 		for i in [0 .. lines.length[ do
@@ -70,6 +89,7 @@ redef class MDoc
 		res.add markdown_proc.process(lines.join("\n"))
 		res.add "</div>"
 		return res
+
 	end
 end
 

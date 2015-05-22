@@ -375,7 +375,7 @@ redef class MClassPage
 			var def_url = "{cls_url}#{mprop.nitdoc_id}.definition"
 			var lnk = new Link(def_url, mprop.html_name)
 			var mdoc = mprop.intro.mdoc_or_fallback
-			if mdoc != null then lnk.title = mdoc.short_comment
+			if mdoc != null then lnk.title = mdoc.synopsis
 			var item = new Template
 			item.add new DocHTMLLabel.with_classes(classes)
 			item.add lnk

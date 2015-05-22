@@ -446,7 +446,7 @@ redef class IntroArticle
 
 	redef fun render_body do
 		var tabs = new DocTabs("{html_id}.tabs", "")
-		var comment = mentity.html_comment
+		var comment = mentity.html_documentation
 		if comment != null then
 			tabs.add_panel new DocTabPanel("{html_tab_id}-comment", "Comment", comment)
 		end
@@ -502,9 +502,9 @@ redef class DefinitionArticle
 		if not is_no_body then
 			var comment
 			if is_short_comment then
-				comment = mentity.html_short_comment
+				comment = mentity.html_synopsis
 			else
-				comment = mentity.html_comment
+				comment = mentity.html_documentation
 			end
 			if comment != null then
 				tabs.add_panel new DocTabPanel("{html_tab_id}-comment", "Comment", comment)
@@ -542,7 +542,7 @@ redef class DefinitionLinArticle
 			if not mentity isa MPropDef then continue # TODO handle all mentities
 			var tpl = new Template
 			tpl.add mentity.mclassdef.html_namespace
-			var comment = mentity.mclassdef.html_short_comment
+			var comment = mentity.mclassdef.html_synopsis
 			if comment != null then
 				tpl.add ": "
 				tpl.add comment
