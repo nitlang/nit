@@ -16,7 +16,7 @@
 module test_neo
 
 import neo
-import model_utils
+import model
 import frontend
 
 var test_name = "test_{get_time.to_s}"
