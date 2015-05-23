@@ -109,6 +109,7 @@ private class NullableSends
 
 	var total_sends: Int = 0
 	var nullable_sends: Int = 0
+	var nullable_eq_sends: Int = 0
 	var buggy_sends: Int = 0
 
 	# Get a new visitor on a classef to add type count in `typecount`.
@@ -130,7 +131,12 @@ private class NullableSends
 			end
 			t = t.anchor_to(self.nclassdef.mclassdef.mmodule, self.nclassdef.mclassdef.bound_mtype)
 			if t isa MNullableType then
-				self.nullable_sends += 1
+				var name = n.callsite.mproperty.name
+				if name == "==" or name == "!=" or name == "is_same_instance" then
+					self.nullable_eq_sends += 1
+				else
+					self.nullable_sends += 1
+				end
 			else if t isa MClassType then
 				# Nothing
 			else
@@ -146,6 +152,7 @@ do
 	print "--- Sends on Nullable Receiver ---"
 	var total_sends = 0
 	var nullable_sends = 0
+	var nullable_eq_sends = 0
 	var buggy_sends = 0
 
 	# Visit all the source code to collect data
@@ -155,10 +162,12 @@ do
 			visitor.enter_visit(nclassdef)
 			total_sends += visitor.total_sends
 			nullable_sends += visitor.nullable_sends
+			nullable_eq_sends += visitor.nullable_eq_sends
 			buggy_sends += visitor.buggy_sends
 		end
 	end
 	print "Total number of sends: {total_sends}"
-	print "Number of sends on a nullable receiver: {nullable_sends} ({div(nullable_sends*100,total_sends)}%)"
+	print "Number of sends on a unsafe nullable receiver: {nullable_sends} ({div(nullable_sends*100,total_sends)}%)"
+	print "Number of sends on a safe nullable receiver: {nullable_eq_sends} ({div(nullable_eq_sends*100,total_sends)}%)"
 	print "Number of buggy sends (cannot determine the type of the receiver): {buggy_sends} ({div(buggy_sends*100,total_sends)}%)"
 end
