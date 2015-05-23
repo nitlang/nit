@@ -18,7 +18,7 @@
 module benitlux_controller
 
 import nitcorn
-import json_serialization
+private import json::serialization
 
 import benitlux_model
 import benitlux_db

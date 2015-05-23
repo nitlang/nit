@@ -14,11 +14,52 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Handles serialization and deserialization of objects to/from Json.
-module json_serialization
+# Handles serialization and deserialization of objects to/from JSON
+#
+# ## Nity JSON
+#
+# `JsonSerializer` write Nit objects that subclass `Serializable` to JSON,
+# and `JsonDeserializer` can read them. They both use meta-data added to the
+# generated JSON to recreate the Nit instances with the exact original type.
+#
+# For more information on Nit serialization, see: ../serialization/README.md
+#
+# ## Plain JSON
+#
+# The attribute `JsonSerializer::plain_json` triggers generating plain and
+# clean JSON. This format is easier to read for an human and a non-Nit program,
+# but it cannot be fully deserialized. It can still be read by services from
+# `json::static` and `json::dynamic`.
+#
+# A shortcut to this service is provided by `Serializable::to_plain_json`.
+#
+# ### Usage Example
+#
+# ~~~nitish
+# import json::serialization
+#
+# class Person
+#     auto_serializable
+#
+#     var name: String
+#     var year_of_birth: Int
+#     var next_of_kin: nullable Person
+# end
+#
+# var bob = new Person("Bob", 1986)
+# var alice = new Person("Alice", 1978, bob)
+#
+# assert bob.to_plain_json == """
+# {"name": "Bob", "year_of_birth": 1986, "next_of_kin": null}"""
+#
+# assert alice.to_plain_json == """
+# {"name": "Alice", "year_of_birth": 1978, "next_of_kin": {"name": "Bob", "year_of_birth": 1986, "next_of_kin": null}}"""
+# ~~~
+module serialization
 
-import serialization
-import json::static
+import ::serialization
+private import ::serialization::engine_tools
+private import static
 
 # Serializer of Nit objects to Json string.
 class JsonSerializer
@@ -27,25 +68,87 @@ class JsonSerializer
 	# Target writing stream
 	var stream: Writer
 
+	# Write plain JSON? easier to read but does not support Nit deserialization
+	#
+	# If `false`, the default, serialize to support deserialization:
+	#
+	# * Write meta-data, including the types of the serialized objects so they can
+	#   be deserialized to their original form using `JsonDeserializer`.
+	# * Use references when an object has already been serialized so to not duplicate it.
+	# * Support cycles in references.
+	# * Preserve the Nit `Char` type as an object because it does not exist in JSON.
+	# * The generated JSON is standard and can be read by non-Nit programs.
+	#   However, some Nit types are not represented by the simplest possible JSON representation.
+	#   With the added meta-data, it can be complex to read.
+	#
+	# If `true`, serialize for other programs:
+	#
+	# * Nit objects are serialized to pure and standard JSON so they can
+	#   be easily read by non-Nit programs and humans.
+	# * Nit objects are serialized for every references, so they can be duplicated.
+	#   It is easier to read but it creates a larger output.
+	# * Does not support cycles, will replace the problematic references by `null`.
+	# * Does not serialize the meta-data needed to deserialize the objects
+	#   back to regular Nit objects.
+	# * Keys of Nit `HashMap` are converted to their string reprensentation using `to_s`.
+	var plain_json = false is writable
+
+	# List of the current open objects, the first is the main target of the serialization
+	#
+	# Used only when `plain_json == true` to detect cycles in serialization.
+	private var open_objects = new Array[Object]
+
+	# Has the first attribute of the current object already been serialized?
+	#
+	# Used only when `plain_json == true`.
+	private var first_attribute = false
+
 	redef fun serialize(object)
 	do
 		if object == null then
 			stream.write "null"
-		else object.serialize_to_json(self)
+		else
+			if plain_json then
+				for o in open_objects do
+					if object.is_same_serialized(o) then
+						# Cycle detected
+						stream.write "null"
+						return
+					end
+				end
+
+				open_objects.add object
+			end
+
+			first_attribute = true
+			object.serialize_to_json self
+			first_attribute = false
+
+			if plain_json then open_objects.pop
+		end
 	end
 
 	redef fun serialize_attribute(name, value)
 	do
-		stream.write ", \"{name}\": "
+		if not plain_json or not first_attribute then
+			stream.write ", "
+			first_attribute = false
+		end
+
+		stream.write "\""
+		stream.write name
+		stream.write "\": "
 		super
 	end
 
 	redef fun serialize_reference(object)
 	do
-		if refs_map.has_key(object) then
+		if not plain_json and refs_map.has_key(object) then
 			# if already serialized, add local reference
 			var id = ref_id_for(object)
-			stream.write "\{\"__kind\": \"ref\", \"__id\": {id}\}"
+			stream.write "\{\"__kind\": \"ref\", \"__id\": "
+			stream.write id.to_s
+			stream.write "\}"
 		else
 			# serialize here
 			serialize object
@@ -76,10 +179,10 @@ class JsonDeserializer
 	private var text: Text
 
 	# Root json object parsed from input text.
-	var root: nullable Jsonable is noinit
+	private var root: nullable Jsonable is noinit
 
 	# Depth-first path in the serialized object tree.
-	var path = new Array[JsonObject]
+	private var path = new Array[JsonObject]
 
 	# Map of references to already deserialized objects.
 	private var id_to_object = new StrictHashMap[Int, Object]
@@ -189,9 +292,30 @@ redef class Serializable
 	private fun serialize_to_json(v: JsonSerializer)
 	do
 		var id = v.ref_id_for(self)
-		v.stream.write "\{\"__kind\": \"obj\", \"__id\": {id}, \"__class\": \"{class_name}\""
+		v.stream.write "\{"
+		if not v.plain_json then
+			v.stream.write "\"__kind\": \"obj\", \"__id\": "
+			v.stream.write id.to_s
+			v.stream.write ", \"__class\": \""
+			v.stream.write class_name
+			v.stream.write "\""
+		end
 		core_serialize_to(v)
 		v.stream.write "\}"
+	end
+
+	# Serialize this object to plain JSON
+	#
+	# This is a shortcut using `JsonSerializer::plain_json`,
+	# see its documentation for more information.
+	fun to_plain_json: String
+	do
+		var stream = new StringWriter
+		var serializer = new JsonSerializer(stream)
+		serializer.plain_json = true
+		serializer.serialize self
+		stream.close
+		return stream.to_s
 	end
 end
 
@@ -208,7 +332,16 @@ redef class Bool
 end
 
 redef class Char
-	redef fun serialize_to_json(v) do v.stream.write "\{\"__kind\": \"char\", \"__val\": {to_s.to_json}\}"
+	redef fun serialize_to_json(v)
+	do
+		if v.plain_json then
+			v.stream.write to_s.to_json
+		else
+			v.stream.write "\{\"__kind\": \"char\", \"__val\": "
+			v.stream.write to_s.to_json
+			v.stream.write "\}"
+		end
+	end
 end
 
 redef class String
@@ -242,16 +375,22 @@ redef class SimpleCollection[E]
 	redef fun serialize_to_json(v)
 	do
 		# Register as pseudo object
-		var id = v.ref_id_for(self)
-		v.stream.write """{"__kind": "obj", "__id": """
-		v.stream.write id.to_s
-		v.stream.write """, "__class": """"
-		v.stream.write class_name
-		v.stream.write """", "__length": """
-		v.stream.write length.to_s
-		v.stream.write """, "__items": """
+		if not v.plain_json then
+			var id = v.ref_id_for(self)
+			v.stream.write """{"__kind": "obj", "__id": """
+			v.stream.write id.to_s
+			v.stream.write """, "__class": """"
+			v.stream.write class_name
+			v.stream.write """", "__length": """
+			v.stream.write length.to_s
+			v.stream.write """, "__items": """
+		end
+
 		serialize_to_pure_json v
-		v.stream.write "\}"
+
+		if not v.plain_json then
+			v.stream.write "\}"
+		end
 	end
 
 	redef init from_deserializer(v: Deserializer)
@@ -273,7 +412,7 @@ end
 redef class Array[E]
 	redef fun serialize_to_json(v)
 	do
-		if class_name == "Array[nullable Serializable]" then
+		if v.plain_json or class_name == "Array[nullable Serializable]" then
 			# Using class_name to get the exact type,
 			# we do not want Array[Int] or anything else here.
 
@@ -288,19 +427,40 @@ redef class Map[K, V]
 		# Register as pseudo object
 		var id = v.ref_id_for(self)
 
-		v.stream.write """{"__kind": "obj", "__id": """
-		v.stream.write id.to_s
-		v.stream.write """, "__class": """"
-		v.stream.write class_name
-		v.stream.write """", "__length": """
-		v.stream.write length.to_s
-		v.stream.write """, "__keys": """
+		if v.plain_json then
+			v.stream.write "\{"
+			var first = true
+			for key, val in self do
+				if not first then
+					v.stream.write ", "
+				else first = false
 
-		keys.serialize_to_pure_json v
+				if key == null then key = "null"
 
-		v.stream.write """, "__values": """
-		values.serialize_to_pure_json v
-		v.stream.write "\}"
+				v.stream.write key.to_s.to_json
+				v.stream.write ": "
+				if not v.try_to_serialize(val) then
+					v.warn("element of type {val.class_name} is not serializable.")
+					v.stream.write "null"
+				end
+			end
+			v.stream.write "\}"
+		else
+			v.stream.write """{"__kind": "obj", "__id": """
+			v.stream.write id.to_s
+			v.stream.write """, "__class": """"
+			v.stream.write class_name
+			v.stream.write """", "__length": """
+			v.stream.write length.to_s
+
+			v.stream.write """, "__keys": """
+			keys.serialize_to_pure_json v
+
+			v.stream.write """, "__values": """
+			values.serialize_to_pure_json v
+
+			v.stream.write "\}"
+		end
 	end
 
 	# Instantiate a new `Array` from its serialized representation.
@@ -321,60 +481,4 @@ redef class Map[K, V]
 			end
 		end
 	end
-end
-
-# Maps instances to a value, uses `is_same_instance`
-#
-# Warning: This class does not implement all the services from `Map`.
-private class StrictHashMap[K, V]
-	super Map[K, V]
-
-	# private
-	var map = new HashMap[K, Array[Couple[K, V]]]
-
-	redef var length = 0
-
-	redef fun is_empty do return length == 0
-
-	# private
-	fun node_at(key: K): nullable Couple[K, V]
-	do
-		if not map.keys.has(key) then return null
-
-		var arr = map[key]
-		for couple in arr do
-			if couple.first.is_same_serialized(key) then
-				return couple
-			end
-		end
-
-		return null
-	end
-
-	redef fun [](key)
-	do
-		var node = node_at(key)
-		assert node != null
-		return node.second
-	end
-
-	redef fun []=(key, value)
-	do
-		var node = node_at(key)
-		if node != null then
-			node.second = value
-			return
-		end
-
-		var arr
-		if not map.keys.has(key) then
-			arr = new Array[Couple[K, V]]
-			map[key] = arr
-		else arr = map[key]
-
-		arr.add new Couple[K, V](key, value)
-		self.length += 1
-	end
-
-	redef fun has_key(key) do return node_at(key) != null
 end

@@ -15,7 +15,7 @@
 # limitations under the License.
 
 import serialization
-import json_serialization
+import json::serialization
 
 # Simple class
 class A
@@ -97,6 +97,7 @@ d.d = d
 for o in new Array[Serializable].with_items(a, b, c, d) do
 	var stream = new StringWriter
 	var serializer = new JsonSerializer(stream)
+	#alt1#serializer.plain_json = true
 	serializer.serialize(o)
 
 	print "# Nit:\n{o}\n"
