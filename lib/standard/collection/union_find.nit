@@ -92,7 +92,6 @@ class DisjointSet[E]
 		var ne = nodes[e]
 		if ne.parent == ne then return ne
 		var res = nfind(ne)
-		nodes[e] = res
 		return res
 	end
 
@@ -158,6 +157,36 @@ class DisjointSet[E]
 		return true
 	end
 
+	# Returns an array of all elements in the same subset as `e`.
+	#
+	#     var s = new DisjointSet[Int]
+	#     s.add_all([1,2,3,4,5,6])
+	#     s.union(1,2)
+	#     s.union(1,3)
+	#     s.union(4,5)
+	#     assert s.subset(1).length == 3
+	#     assert s.subset(4).length == 2
+	#     assert s.subset(6).length == 1
+	fun subset(e: E): Array[E]
+	do
+		return [for f in nodes.keys
+			do if find(e) == find(f) then f]
+	end
+
+	# Returns an array of all subsets of this disjoint set
+	#
+	#    var s = new DisjointSet[Int]
+	#    s.add_all([1,2,3,4,5,6])
+	#    s.union(1,2)
+	#    s.union(1,3)
+	#    s.union(4,5)
+	#    assert s.all_subsets.length == 3
+	fun all_subsets: Array[Array[E]]
+	do
+		return [for e in nodes.keys
+			do if nodes[e].is_root then subset(e)]
+	end
+
 	# Construct the current partitionning
 	#
 	#     var s = new DisjointSet[Int]
@@ -210,10 +239,8 @@ class DisjointSet[E]
 		var fr = nf.rank
 		if er < fr then
 			ne.parent = nf
-			nodes[e] = nf
 		else
 			nf.parent = ne
-			nodes[f] = ne
 			if er == fr then
 				# The only case where the deep is increased is when both are equals
 				ne.rank = er+1
@@ -241,4 +268,7 @@ private class DisjointSetNode
 	# The term rank is used instead of depth since
 	# path compression is used, see `DisjointSet::nfind`
 	var rank = 0
+
+	# Returns true if and only if this node is a root
+	fun is_root: Bool do return parent == self end
 end
