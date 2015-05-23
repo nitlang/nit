@@ -1697,8 +1697,32 @@ class MNullType
 	redef fun c_name do return "null"
 	redef fun as_nullable do return self
 
-	# Aborts on `null`
-	redef fun as_notnull do abort # sorry...
+	redef var as_notnull = new MBottomType(model) is lazy
+	redef fun need_anchor do return false
+	redef fun resolve_for(mtype, anchor, mmodule, cleanup_virtual) do return self
+	redef fun can_resolve_for(mtype, anchor, mmodule) do return true
+
+	redef fun collect_mclassdefs(mmodule) do return new HashSet[MClassDef]
+
+	redef fun collect_mclasses(mmodule) do return new HashSet[MClass]
+
+	redef fun collect_mtypes(mmodule) do return new HashSet[MClassType]
+end
+
+# The special universal most specific type.
+#
+# This type is intended to be only used internally for type computation or analysis and should not be exposed to the user.
+# The bottom type can de used to denote things that are absurd, dead, or the absence of knowledge.
+#
+# Semantically it is the singleton `null.as_notnull`.
+class MBottomType
+	super MType
+	redef var model: Model
+	redef fun to_s do return "bottom"
+	redef fun full_name do return "bottom"
+	redef fun c_name do return "bottom"
+	redef fun as_nullable do return model.null_type
+	redef fun as_notnull do return self
 	redef fun need_anchor do return false
 	redef fun resolve_for(mtype, anchor, mmodule, cleanup_virtual) do return self
 	redef fun can_resolve_for(mtype, anchor, mmodule) do return true
