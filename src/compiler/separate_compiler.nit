@@ -2032,6 +2032,7 @@ class SeparateCompilerVisitor
 		self.require_declaration("NEW_{mtype.mclass.c_name}")
 		assert mtype isa MGenericType
 		var compiler = self.compiler
+		length = autobox(length, compiler.mainmodule.int_type)
 		if mtype.need_anchor then
 			hardening_live_open_type(mtype)
 			link_unresolved_type(self.frame.mpropdef.mclassdef, mtype)

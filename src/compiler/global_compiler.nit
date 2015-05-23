@@ -404,6 +404,7 @@ class GlobalCompilerVisitor
 	do
 		var ret_type = mmodule.native_array_type(elttype)
 		ret_type = anchor(ret_type).as(MClassType)
+		length = autobox(length, compiler.mainmodule.int_type)
 		return self.new_expr("NEW_{ret_type.c_name}({length})", ret_type)
 	end
 

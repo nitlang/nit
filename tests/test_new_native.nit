@@ -31,3 +31,10 @@ print a.length
 print a[0]
 print a.to_a.join(",")
 
+var i
+i = 3
+a = new NativeArray[Int](i)
+i = 1
+a[i] = i
+print a[i]
+print a[1]
