@@ -16,7 +16,7 @@
 module wiki_links
 
 import wiki_base
-intrude import markdown
+import markdown::wikilinks
 
 redef class Nitiwiki
 	# Looks up a WikiEntry by its `name`.
@@ -189,16 +189,6 @@ class NitiwikiMdProcessor
 		emitter = new MarkdownEmitter(self)
 		emitter.decorator = new NitiwikiDecorator(wiki, context)
 	end
-
-	redef fun token_at(text, pos) do
-		var token = super
-		if not token isa TokenLink then return token
-		if pos + 1 < text.length then
-			var c = text[pos + 1]
-			if c == '[' then return new TokenWikiLink(pos, c)
-		end
-		return token
-	end
 end
 
 private class NitiwikiDecorator
@@ -210,7 +200,7 @@ private class NitiwikiDecorator
 	# Article used to contextualize links.
 	var context: WikiArticle
 
-	fun add_wikilink(v: MarkdownEmitter, link: Text, name, comment: nullable Text) do
+	redef fun add_wikilink(v, link, name, comment) do
 		var wiki = v.processor.as(NitiwikiMdProcessor).wiki
 		var target: nullable WikiEntry = null
 		var anchor: nullable String = null
@@ -248,48 +238,5 @@ private class NitiwikiDecorator
 		if name == null then name = link
 		v.emit_text(name)
 		v.add "</a>"
-	end
-end
-
-# A NitiWiki link token.
-#
-# Something of the form `[[foo]]`.
-#
-# Allowed formats:
-#
-# * `[[Wikilink]]`
-# * `[[Wikilink/Bar]]`
-# * `[[Wikilink#foo]]`
-# * `[[Wikilink/Bar#foo]]`
-# * `[[title|Wikilink]]`
-# * `[[title|Wikilink/Bar]]`
-# * `[[title|Wikilink/Bar#foo]]`
-class TokenWikiLink
-	super TokenLink
-
-	redef fun emit_hyper(v) do
-		v.decorator.as(NitiwikiDecorator).add_wikilink(v, link.as(not null), name, comment)
-	end
-
-	redef fun check_link(v, out, start, token) do
-		var md = v.current_text
-		var pos = start + 2
-		var tmp = new FlatBuffer
-		pos = md.read_md_link_id(tmp, pos)
-		if pos < start then return -1
-		var name = tmp.write_to_string
-		if name.has("|") then
-			var parts = name.split_once_on("|")
-			self.name = parts.first
-			self.link = parts[1]
-		else
-			self.name = null
-			self.link = name
-		end
-		pos += 1
-		pos = md.skip_spaces(pos)
-		if pos < start then return -1
-		pos += 1
-		return pos
 	end
 end
