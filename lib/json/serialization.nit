@@ -57,13 +57,13 @@
 # ~~~
 module serialization
 
-import ::serialization
+import ::serialization::caching
 private import ::serialization::engine_tools
 private import static
 
 # Serializer of Nit objects to Json string.
 class JsonSerializer
-	super Serializer
+	super CachingSerializer
 
 	# Target writing stream
 	var stream: Writer
@@ -143,9 +143,9 @@ class JsonSerializer
 
 	redef fun serialize_reference(object)
 	do
-		if not plain_json and refs_map.has_key(object) then
+		if not plain_json and cache.has_object(object) then
 			# if already serialized, add local reference
-			var id = ref_id_for(object)
+			var id = cache.id_for(object)
 			stream.write "\{\"__kind\": \"ref\", \"__id\": "
 			stream.write id.to_s
 			stream.write "\}"
@@ -154,26 +154,11 @@ class JsonSerializer
 			serialize object
 		end
 	end
-
-	# Map of references to already serialized objects.
-	private var refs_map = new StrictHashMap[Serializable,Int]
-
-	# Get the internal serialized reference for this `object`.
-	private fun ref_id_for(object: Serializable): Int
-	do
-		if refs_map.has_key(object) then
-			return refs_map[object]
-		else
-			var id = refs_map.length
-			refs_map[object] = id
-			return id
-		end
-	end
 end
 
 # Deserializer from a Json string.
 class JsonDeserializer
-	super Deserializer
+	super CachingDeserializer
 
 	# Json text to deserialize from.
 	private var text: Text
@@ -183,9 +168,6 @@ class JsonDeserializer
 
 	# Depth-first path in the serialized object tree.
 	private var path = new Array[JsonObject]
-
-	# Map of references to already deserialized objects.
-	private var id_to_object = new StrictHashMap[Int, Object]
 
 	# Last encountered object reference id.
 	#
@@ -215,7 +197,7 @@ class JsonDeserializer
 	do
 		var id = just_opened_id
 		if id == null then return # Register `new_object` only once
-		id_to_object[id] = new_object
+		cache[id] = new_object
 	end
 
 	# Convert from simple Json object to Nit object
@@ -231,8 +213,8 @@ class JsonDeserializer
 				var id = object["__id"]
 				assert id isa Int
 
-				assert id_to_object.has_key(id)
-				return id_to_object[id]
+				assert cache.has_id(id)
+				return cache.object_for(id)
 			end
 
 			# obj?
@@ -245,7 +227,7 @@ class JsonDeserializer
 				var class_name = object["__class"]
 				assert class_name isa String
 
-				assert not id_to_object.has_key(id) else print "Error: Object with id '{id}' of {class_name} is deserialized twice."
+				assert not cache.has_id(id) else print "Error: Object with id '{id}' of {class_name} is deserialized twice."
 
 				# advance on path
 				path.push object
@@ -291,7 +273,7 @@ end
 redef class Serializable
 	private fun serialize_to_json(v: JsonSerializer)
 	do
-		var id = v.ref_id_for(self)
+		var id = v.cache.new_id_for(self)
 		v.stream.write "\{"
 		if not v.plain_json then
 			v.stream.write "\"__kind\": \"obj\", \"__id\": "
@@ -376,7 +358,7 @@ redef class SimpleCollection[E]
 	do
 		# Register as pseudo object
 		if not v.plain_json then
-			var id = v.ref_id_for(self)
+			var id = v.cache.new_id_for(self)
 			v.stream.write """{"__kind": "obj", "__id": """
 			v.stream.write id.to_s
 			v.stream.write """, "__class": """"
@@ -426,7 +408,7 @@ redef class Map[K, V]
 	redef fun serialize_to_json(v)
 	do
 		# Register as pseudo object
-		var id = v.ref_id_for(self)
+		var id = v.cache.new_id_for(self)
 
 		if v.plain_json then
 			v.stream.write "\{"
