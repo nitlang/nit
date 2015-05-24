@@ -27,4 +27,5 @@ while t2 != null do
 		t2 = t2.next #alt2# t2 = null
 	end
 	#alt3#t2 = t2.next
+	#alt3#exit(0)
 end

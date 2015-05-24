@@ -48,6 +48,6 @@ loop
 	if i != null then
 		bar(i)
 	else
-		break #alt4#
+		break #alt4# exit(0)
 	end
 end
