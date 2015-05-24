@@ -160,6 +160,8 @@ class Connection
 		native_buffer_event.write(str.to_cstring, str.length)
 	end
 
+	redef fun write_byte(byte) do native_buffer_event.write_byte(byte)
+
 	# Write a file to the connection
 	#
 	# require: `path.file_exists`
@@ -181,6 +183,12 @@ extern class NativeBufferEvent `{ struct bufferevent * `}
 	# Write `length` bytes of `line`
 	fun write(line: NativeString, length: Int): Int `{
 		return bufferevent_write(recv, line, length);
+	`}
+
+	# Write the byte `value`
+	fun write_byte(value: Int): Int `{
+		unsigned char byt = (unsigned char)value;
+		return bufferevent_write(recv, &byt, 1);
 	`}
 
 	# Check if we have anything left in our buffers. If so, we set our connection to be closed
