@@ -81,4 +81,4 @@ a[3] = new A.init2('3', a[2].bar('1'))
 a[2].bar('2') = new A
 a[4] = new A.init2('4', a[2].bar('1'))
 a[5] = new A.init2('5', a[2].bar('2'))
-printn(a)
+print a

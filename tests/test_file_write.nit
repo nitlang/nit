@@ -17,5 +17,5 @@
 var f = new FileWriter.open("out/test_file_write.write")
    f.write("Quatre vingt et un : {421}\n")
    f.write("Une autre ligne\nencore un")
-   f.write(['e', '\n'].to_s)
+   f.write(['e', '\n'].plain_to_s)
    f.close

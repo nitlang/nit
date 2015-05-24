@@ -5,4 +5,4 @@ Runtime error: Assert failed (../lib/c.nit:36)
 2
 3
 4
-01234
+[0,1,2,3,4]
