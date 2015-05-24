@@ -94,7 +94,7 @@ end
 
 redef class MClassType
 	redef fun is_visible_from(mmodule) do
-		return mmodule.is_visible(mclass.intro_mmodule, public_visibility)
+		return mmodule.is_visible(mclass.intro_mmodule, mclass.visibility)
 	end
 end
 
