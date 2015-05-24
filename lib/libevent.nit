@@ -115,6 +115,8 @@ end
 #
 # TODO, use polls
 class Connection
+	super Writer
+
 	# Closing this connection has been requested, but may not yet be `closed`
 	var close_requested = false
 
@@ -125,7 +127,7 @@ class Connection
 	var native_buffer_event: NativeBufferEvent
 
 	# Close this connection if possible, otherwise mark it to be closed later
-	fun close
+	redef fun close
 	do
 		var success = native_buffer_event.destroy
 		close_requested = true
@@ -153,7 +155,7 @@ class Connection
 	fun event_callback(events: Int) do end
 
 	# Write a string to the connection
-	fun write(str: String)
+	redef fun write(str)
 	do
 		native_buffer_event.write(str.to_cstring, str.length)
 	end
