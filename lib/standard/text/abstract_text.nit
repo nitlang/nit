@@ -1508,13 +1508,23 @@ redef class Char
 end
 
 redef class Collection[E]
-	# Concatenate elements.
+	# String representation of the content of the collection.
+	#
+	# The standard representation is the list of elements separated with commas.
+	#
+	# ~~~
+	# assert [1,2,3].to_s == "[1,2,3]"
+	# assert [1..3].to_s  == "[1,2,3]"
+	# assert (new Array[Int]).to_s == "[]" # empty collection
+	# ~~~
+	#
+	# Subclasses may return a more specific string representation.
 	redef fun to_s
 	do
-		return plain_to_s
+		return "[" + join(",") + "]"
 	end
 
-	# Concatenate element without separators
+	# Concatenate elements without separators
 	fun plain_to_s: String
 	do
 		var s = new Buffer
