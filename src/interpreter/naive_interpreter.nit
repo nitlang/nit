@@ -1629,7 +1629,7 @@ redef class ASuperstringExpr
 			array.add(i)
 		end
 		var i = v.array_instance(array, v.mainmodule.object_type)
-		var res = v.send(v.force_get_primitive_method("to_s", i.mtype), [i])
+		var res = v.send(v.force_get_primitive_method("plain_to_s", i.mtype), [i])
 		assert res != null
 		return res
 	end
