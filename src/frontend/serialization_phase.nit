@@ -34,6 +34,21 @@ redef class ToolContext
 	private fun place_holder_type_name: String do return "PlaceHolderTypeWhichShouldNotExist"
 end
 
+redef class ANode
+	# Is this node annotated to be made serializable?
+	private fun is_serialize: Bool do return false
+
+	private fun accept_precise_type_visitor(v: PreciseTypeVisitor) do visit_all(v)
+end
+
+redef class ADefinition
+
+	redef fun is_serialize do
+		return get_annotations("serialize").not_empty or
+			get_annotations("auto_serializable").not_empty
+	end
+end
+
 # TODO add annotations on attributes (volatile, sensitive or do_not_serialize?)
 private class SerializationPhasePreModel
 	super Phase
@@ -65,8 +80,7 @@ private class SerializationPhasePreModel
 		# collect all classes
 		var auto_serializable_nclassdefs = new Array[AStdClassdef]
 		for nclassdef in nmodule.n_classdefs do
-			if nclassdef isa AStdClassdef and
-			   not nclassdef.get_annotations("auto_serializable").is_empty then
+			if nclassdef isa AStdClassdef and nclassdef.is_serialize then
 				auto_serializable_nclassdefs.add nclassdef
 			end
 		end
@@ -199,10 +213,6 @@ private class PreciseTypeVisitor
 	var toolcontext: ToolContext
 
 	redef fun visit(n) do n.accept_precise_type_visitor(self)
-end
-
-redef class ANode
-	private fun accept_precise_type_visitor(v: PreciseTypeVisitor) do visit_all(v)
 end
 
 redef class AIsaExpr
