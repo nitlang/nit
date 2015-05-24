@@ -97,6 +97,17 @@ redef abstract class Writer
 		write_byte 0x00
 	end
 
+	# Write the length as a 64 bits integer, then the content of `text`
+	#
+	# To be used with `Reader::read_block`.
+	#
+	# Compared to `write_string`, this method supports null bytes in `text`.
+	fun write_block(text: Text)
+	do
+		write_int64 text.length
+		write text
+	end
+
 	# Write a floating point `value` on 32 bits
 	#
 	# Using this format may result in a loss of precision as it uses less bits
@@ -160,6 +171,16 @@ redef abstract class Reader
 			if byte == 0x00 then return buf.to_s
 			buf.chars.add byte.ascii
 		end
+	end
+
+	# Read the length as a 64 bits integer, then the content of the block
+	#
+	# To be used with `Writer::write_block`.
+	fun read_block: String
+	do
+		var length = read_int64
+		if length == 0 then return ""
+		return read(length)
 	end
 
 	# Read a floating point on 32 bits and return it as a `Float`
