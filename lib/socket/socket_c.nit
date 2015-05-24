@@ -134,7 +134,8 @@ extern class NativeSocket `{ int* `}
 
 	# Write `value` as a single byte
 	fun write_byte(value: Int): Int `{
-		return write(*recv, &value, 1);
+		unsigned char byt = (unsigned char)value;
+		return write(*recv, &byt, 1);
 	`}
 
 	fun read: String import NativeString.to_s_with_length `{
