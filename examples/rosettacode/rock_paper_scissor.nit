@@ -6,45 +6,47 @@
 #
 # author: Istvan szalai 22/05/2015
 
-#return a value to dertermine who win the match
-fun win_or_lose(player, computer: Int): Int do
-	if player == computer then return 0
-	if player > computer then return 1
-	return 2
+# Return a value to dertermine who win the match.
+# Return 0 for lose, 1 for win, 2 for equality.
+fun win_or_lose(player, computer: String): Int do
+	if player == computer then return 2
+	if player == "rock" and computer == "scissors" then return 1
+	if player == "rock" and computer == "paper" then return 0
+	if player == "paper" and computer == "rock" then return 1
+	if player == "paper" and computer == "scissors" then return 0
+	if player == "scissors" and computer == "paper" then return 1
+	return 0
 end
 
-#return a string with about the match winner or looser
+# Return a string with about the match winner or looser.
 fun result_of_the_match_message(number: Int): String do
-	if number == 0 then return "It's a tie !"
-	if number == 1 then return "You win"
-	return "You lose"
+	if number == 2 then return "It's a tie!"
+	if number == 1 then return "You win!"
+	return "You lose!"
 end
 
-#return what the computer player did
+# Return a String for the player about what the computer player did.
 fun computer_message(number: Int): String do
 	if number == 5 then return "The computer played rock;"
 	if number == 6 then return "The computer played scissors;"
 	return "The computer played paper;"
 end
 
-#return the converted string for the core function
-fun convert(str: String): Int do
-	if str == "rock" then return 5
-	if str == "scissors" then return 6
-	return 7
-end
+# Return a random value for the computer player input.
+fun computer_player: Int do return 3.rand + 5
 
-#return a random value for the computer player input
-fun computer_player: Int do return 3.rand + 5 end
-
-#Game loop
+# Game loop.
 var x = ""
+var test = false;
 loop do
-	print "Choose your weapon|exit"
-	x = gets
-	if x == "exit" then break
-	x.to_i
+	while not test do
+		print "Choose your weapon|exit"
+		x = gets
+		if x == "exit" then break
+		if x == "paper" and x == "rock" and x == "scissors" then test = true;
+		if test == false then print"Unknow input!"
+	end
 	var z = computer_player
 	print computer_message(z)
-	print result_of_the_match_message(win_or_lose(convert(x), z))
+	print result_of_the_match_message(win_or_lose(x,z))
 end
