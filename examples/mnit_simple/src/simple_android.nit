@@ -43,7 +43,7 @@ redef class App
 		android.util.Log.d("mnit_simple", "Java within NIT!!!");
 
 		// - Context needed from now on
-		final android.app.Activity context = App_native_activity(recv);
+		final android.app.Activity context = App_native_activity(self);
 
 		// Vibration
 		android.os.Vibrator v = (android.os.Vibrator)

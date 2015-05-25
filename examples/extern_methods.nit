@@ -22,20 +22,20 @@ redef enum Int
 	# Returns self'th fibonnaci number
 	# implemented here in C for optimization purposes
 	fun fib : Int import fib `{
-		if ( recv < 2 )
-			return recv;
+		if ( self < 2 )
+			return self;
 		else
-			return Int_fib( recv-1 ) + Int_fib( recv-2 );
+			return Int_fib( self-1 ) + Int_fib( self-2 );
 	`}
 
 	# System call to sleep for "self" seconds
 	fun sleep `{
-		sleep( recv );
+		sleep( self );
 	`}
 
 	# Return atan2l( self, x ) from libmath
 	fun atan_with( x : Int ) : Float `{
-		return atan2( recv, x );
+		return atan2( self, x );
 	`}
 
 	# This method callback to Nit methods from C code
@@ -45,10 +45,10 @@ redef enum Int
 	# * to_s, a method of all objects
 	# * String.to_cstring, a method of String to return an equivalent char*
 	fun foo import fib, +, to_s, String.to_cstring `{
-		long recv_fib = Int_fib( recv );
-		long recv_plus_fib = Int__plus( recv, recv_fib );
+		long self_fib = Int_fib( self );
+		long self_plus_fib = Int__plus( self, self_fib );
 
-		String nit_string = Int_to_s( recv_plus_fib );
+		String nit_string = Int_to_s( self_plus_fib );
 		char *c_string = String_to_cstring( nit_string );
 
 		printf( "from C: self + fib(self) = %s\n", c_string );

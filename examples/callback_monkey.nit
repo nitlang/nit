@@ -87,6 +87,6 @@ extern class Monkey `{ CMonkey * `}
 		// - Receiver
 		// - Function pointer to object return method
 		// - Datas
-		cbMonkey( recv, &nit_monkey_callback_func, data );
+		cbMonkey( self, &nit_monkey_callback_func, data );
 	`}
 end
