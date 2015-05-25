@@ -28,21 +28,21 @@ extern class Vibrator in "Java" `{ android.os.Vibrator `}
 	super JavaObject
 
 	# Vibrate for `n` miliseconds
-	fun vibrate(n: Int) in "Java" `{ recv.vibrate(n); `}
+	fun vibrate(n: Int) in "Java" `{ self.vibrate(n); `}
 
 	# Does this devices has a vibrator
 	#
 	# TODO activate in API 11
-	#fun exists: Bool in "Java" `{ return recv.hasVibrator(); `}
+	#fun exists: Bool in "Java" `{ return self.hasVibrator(); `}
 
 	# Turn off the vibration
-	fun cancel in "Java" `{ recv.cancel(); `}
+	fun cancel in "Java" `{ self.cancel(); `}
 
 	# HACK for bug #845
 	redef fun new_global_ref import sys, Sys.jni_env `{
-		Sys sys = Vibrator_sys(recv);
+		Sys sys = Vibrator_sys(self);
 		JNIEnv *env = Sys_jni_env(sys);
-		return (*env)->NewGlobalRef(env, recv);
+		return (*env)->NewGlobalRef(env, self);
 	`}
 end
 

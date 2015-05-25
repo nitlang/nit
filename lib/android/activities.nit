@@ -33,8 +33,8 @@ extern class NativeActivity in "Java" `{ android.app.Activity `}
 
 	# HACK for bug #845
 	redef fun new_global_ref: SELF import sys, Sys.jni_env `{
-		Sys sys = NativeActivity_sys(recv);
+		Sys sys = NativeActivity_sys(self);
 		JNIEnv *env = Sys_jni_env(sys);
-		return (*env)->NewGlobalRef(env, recv);
+		return (*env)->NewGlobalRef(env, self);
 	`}
 end

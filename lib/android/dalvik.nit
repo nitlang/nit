@@ -55,7 +55,7 @@ redef class Sys
 	end
 
 	private fun find_class_loader(native_activity: NativeActivity) import jni_env, class_loader=, JavaObject.as nullable, class_loader_method=, JMethodID.as nullable `{
-		JNIEnv *env = Sys_jni_env(recv);
+		JNIEnv *env = Sys_jni_env(self);
 
 		// Retrieve main activity
 		jclass class_activity = (*env)->GetObjectClass(env, native_activity);
@@ -96,8 +96,8 @@ redef class Sys
 		}
 
 		// Return the values to Nit
-		Sys_class_loader__assign(recv, JavaObject_as_nullable((*env)->NewGlobalRef(env, instance_class_loader)));
-		Sys_class_loader_method__assign(recv, JMethodID_as_nullable(class_class_loader_findClass));
+		Sys_class_loader__assign(self, JavaObject_as_nullable((*env)->NewGlobalRef(env, instance_class_loader)));
+		Sys_class_loader_method__assign(self, JMethodID_as_nullable(class_class_loader_findClass));
 
 		// Clean up
 		(*env)->DeleteLocalRef(env, class_activity);
@@ -106,7 +106,7 @@ redef class Sys
 	`}
 
 	private fun load_jclass_intern(instance_class_loader: JavaObject, class_loader_findClass: JMethodID, name: NativeString): JClass import jni_env `{
-		JNIEnv *env = Sys_jni_env(recv);
+		JNIEnv *env = Sys_jni_env(self);
 		jobject class_name = (*env)->NewStringUTF(env, name);
 
 		jclass java_class = (*env)->CallObjectMethod(env, instance_class_loader, class_loader_findClass, class_name);

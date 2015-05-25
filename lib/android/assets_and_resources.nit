@@ -47,11 +47,11 @@ in "Java" `{
 extern class NativeAssetManager in "Java" `{ android.content.res.AssetManager `}
 	super JavaObject
 
-	fun close in "Java" `{ recv.close(); `}
+	fun close in "Java" `{ self.close(); `}
 
 	fun get_locales: Array[JavaString] import Array[JavaString], Array[JavaString].add in "Java" `{
 		int arr = new_Array_of_JavaString();
-		for (String s : recv.getLocales()) {
+		for (String s : self.getLocales()) {
 			Array_of_JavaString_add(arr, s);
 		}
 		return arr;
@@ -60,7 +60,7 @@ extern class NativeAssetManager in "Java" `{ android.content.res.AssetManager `}
 	fun list(path: JavaString): Array[JavaString] import Array[JavaString], Array[JavaString].add  in "Java" `{
 		int arr = new_Array_of_JavaString();
 		try {
-			for (String s : recv.list(path)) {
+			for (String s : self.list(path)) {
 				Array_of_JavaString_add(arr, s);
 			}
 		}catch (IOException e) {
@@ -73,7 +73,7 @@ extern class NativeAssetManager in "Java" `{ android.content.res.AssetManager `}
 	fun open(file_name: JavaString): NativeInputStream in "Java" `{
 		InputStream stream = null;
 		try {
-			stream = recv.open(file_name);
+			stream = self.open(file_name);
 		}catch (IOException e) {
 			Log.e("Error while opening " + file_name, e.getMessage());
 			e.printStackTrace();
@@ -84,7 +84,7 @@ extern class NativeAssetManager in "Java" `{ android.content.res.AssetManager `}
 	fun open_fd(file_name: JavaString): NativeAssetFileDescriptor in "Java" `{
 		AssetFileDescriptor afd = null;
 		try {
-			afd = recv.openFd(file_name);
+			afd = self.openFd(file_name);
 		}catch(IOException e){
 			Log.e("Error while opening " + file_name, e.getMessage());
 			e.printStackTrace();
@@ -95,7 +95,7 @@ extern class NativeAssetManager in "Java" `{ android.content.res.AssetManager `}
 	fun open_non_asset_fd(file_name: JavaString): NativeAssetFileDescriptor in "Java" `{
 		AssetFileDescriptor afd = null;
 		try {
-			afd =  recv.openNonAssetFd(file_name);
+			afd =  self.openNonAssetFd(file_name);
 		}catch(IOException e){
 			Log.e("Error while opening " + file_name, e.getMessage());
 			e.printStackTrace();
@@ -105,9 +105,9 @@ extern class NativeAssetManager in "Java" `{ android.content.res.AssetManager `}
 
 	# HACK for bug #845
 	redef fun new_global_ref import sys, Sys.jni_env `{
-		Sys sys = NativeResources_sys(recv);
+		Sys sys = NativeResources_sys(self);
 		JNIEnv *env = Sys_jni_env(sys);
-		return (*env)->NewGlobalRef(env, recv);
+		return (*env)->NewGlobalRef(env, self);
 	`}
 end
 
@@ -183,24 +183,24 @@ end
 extern class NativeResources in "Java" `{ android.content.res.Resources `}
 	super JavaObject
 
-	fun get_assets:NativeAssetManager in "Java" `{ return recv.getAssets(); `}
-	fun get_color(id: Int): Int in "Java" `{ return recv.getColor((int)id); `}
-	fun get_boolean(id: Int): Bool in "Java" `{ return recv.getBoolean((int)id); `}
-	fun get_dimension(id: Int): Int in "Java" `{ return (int)recv.getDimension((int)id); `}
-	fun get_drawable(id: Int): NativeDrawable in "Java" `{ return recv.getDrawable((int)id); `}
-	fun get_identifier(name, def_type, def_package: JavaString): Int in "Java" `{ return recv.getIdentifier(name, def_type, def_package); `}
-	fun get_integer(id: Int): Int in "Java" `{ return recv.getInteger((int)id); `}
-	fun get_string(id: Int): JavaString in "Java" `{ return recv.getString((int)id); `}
-	fun get_resource_entry_name(resid: Int): JavaString in "Java" `{ return recv.getResourceEntryName((int)resid); `}
-	fun get_resource_name(resid: Int): JavaString in "Java" `{ return recv.getResourceName((int)resid); `}
-	fun get_resource_pakage_name(resid: Int): JavaString in "Java" `{ return recv.getResourcePackageName((int)resid); `}
-	fun get_resource_type_name(resid: Int): JavaString in "Java" `{ return recv.getResourceTypeName((int)resid); `}
+	fun get_assets:NativeAssetManager in "Java" `{ return self.getAssets(); `}
+	fun get_color(id: Int): Int in "Java" `{ return self.getColor((int)id); `}
+	fun get_boolean(id: Int): Bool in "Java" `{ return self.getBoolean((int)id); `}
+	fun get_dimension(id: Int): Int in "Java" `{ return (int)self.getDimension((int)id); `}
+	fun get_drawable(id: Int): NativeDrawable in "Java" `{ return self.getDrawable((int)id); `}
+	fun get_identifier(name, def_type, def_package: JavaString): Int in "Java" `{ return self.getIdentifier(name, def_type, def_package); `}
+	fun get_integer(id: Int): Int in "Java" `{ return self.getInteger((int)id); `}
+	fun get_string(id: Int): JavaString in "Java" `{ return self.getString((int)id); `}
+	fun get_resource_entry_name(resid: Int): JavaString in "Java" `{ return self.getResourceEntryName((int)resid); `}
+	fun get_resource_name(resid: Int): JavaString in "Java" `{ return self.getResourceName((int)resid); `}
+	fun get_resource_pakage_name(resid: Int): JavaString in "Java" `{ return self.getResourcePackageName((int)resid); `}
+	fun get_resource_type_name(resid: Int): JavaString in "Java" `{ return self.getResourceTypeName((int)resid); `}
 
 	# HACK for bug #845
 	redef fun new_global_ref import sys, Sys.jni_env `{
-		Sys sys = NativeResources_sys(recv);
+		Sys sys = NativeResources_sys(self);
 		JNIEnv *env = Sys_jni_env(sys);
-		return (*env)->NewGlobalRef(env, recv);
+		return (*env)->NewGlobalRef(env, self);
 	`}
 end
 
@@ -300,14 +300,14 @@ extern class NativeBitmap in "Java" `{ android.graphics.Bitmap `}
 	# Create a NativeBitmap using a resource ID and the NativeResources
 	# Called by the ResourceManager
 	new from_resources(res: NativeResources, id: Int) in "Java" `{ return BitmapFactory.decodeResource(res, (int)id); `}
-	fun width: Int in "Java" `{ return recv.getWidth(); `}
-	fun height: Int in "Java" `{ return recv.getHeight(); `}
+	fun width: Int in "Java" `{ return self.getWidth(); `}
+	fun height: Int in "Java" `{ return self.getHeight(); `}
 
 	# HACK for bug #845
 	redef fun new_global_ref import sys, Sys.jni_env `{
-		Sys sys = NativeResources_sys(recv);
+		Sys sys = NativeResources_sys(self);
 		JNIEnv *env = Sys_jni_env(sys);
-		return (*env)->NewGlobalRef(env, recv);
+		return (*env)->NewGlobalRef(env, self);
 	`}
 
 end
@@ -318,14 +318,14 @@ extern class NativeAssetFileDescriptor in "Java" `{ android.content.res.AssetFil
 
 	fun close in "Java" `{
 		try {
-			recv.close();
+			self.close();
 		}catch(IOException e){
 			e.printStackTrace();
 		}
 	`}
 	fun create_input_stream: NativeFileInputStream in "Java" `{
 		try {
-			return recv.createInputStream();
+			return self.createInputStream();
 		}catch(IOException e){
 			Log.e("Error creating input_stream", e.getMessage());
 			e.printStackTrace();
@@ -334,34 +334,34 @@ extern class NativeAssetFileDescriptor in "Java" `{ android.content.res.AssetFil
 	`}
 	fun create_output_stream: NativeFileOutputStream in "Java" `{
 		try {
-			return recv.createOutputStream();
+			return self.createOutputStream();
 		}catch(IOException e){
 			Log.e("Error creating output stream", e.getMessage());
 			e.printStackTrace();
 			return null;
 		}
 	`}
-	fun describe_contents: Int in "Java" `{ return (int)recv.describeContents(); `}
-	fun declared_length: Int in "Java" `{ return (int)recv.getDeclaredLength(); `}
-	# fun extras: Bundle in "Java" `{ return recv.getExtras(); `}
+	fun describe_contents: Int in "Java" `{ return (int)self.describeContents(); `}
+	fun declared_length: Int in "Java" `{ return (int)self.getDeclaredLength(); `}
+	# fun extras: Bundle in "Java" `{ return self.getExtras(); `}
 
 	fun  file_descriptor: NativeFileDescriptor in "Java" `{
-		FileDescriptor fd =  recv.getFileDescriptor();
+		FileDescriptor fd =  self.getFileDescriptor();
 		if (fd == null) {
 			Log.e("AssetFileDesciptorError", "Can't retrieve the FileDescriptor of this AssetFileDescriptor");
 		}
 		return fd;
 	`}
 
-	fun length: Int in "Java" `{ return (int)recv.getLength(); `}
-	fun start_offset: Int in "Java" `{ return (int)recv.getStartOffset(); `}
-	redef fun to_s: String import JavaString.to_s in "Java" `{ return JavaString_to_s(recv.toString()); `}
+	fun length: Int in "Java" `{ return (int)self.getLength(); `}
+	fun start_offset: Int in "Java" `{ return (int)self.getStartOffset(); `}
+	redef fun to_s: String import JavaString.to_s in "Java" `{ return JavaString_to_s(self.toString()); `}
 
 	# HACK for bug #845
 	redef fun new_global_ref import sys, Sys.jni_env `{
-		Sys sys = NativeResources_sys(recv);
+		Sys sys = NativeResources_sys(self);
 		JNIEnv *env = Sys_jni_env(sys);
-		return (*env)->NewGlobalRef(env, recv);
+		return (*env)->NewGlobalRef(env, self);
 	`}
 end
 
@@ -378,11 +378,11 @@ redef class App
 	var asset_manager: AssetManager is lazy do return new AssetManager(self)
 
 	# Get the native AssetsManager of the application, used to initialize the nit's AssetManager
-	private fun assets: NativeAssetManager import native_activity in "Java" `{ return App_native_activity(recv).getAssets(); `}
+	private fun assets: NativeAssetManager import native_activity in "Java" `{ return App_native_activity(self).getAssets(); `}
 
 	# Get the package name of the application
-	private fun package_name: JavaString import native_activity in "Java" `{ return App_native_activity(recv).getPackageName(); `}
+	private fun package_name: JavaString import native_activity in "Java" `{ return App_native_activity(self).getPackageName(); `}
 
 	# Get the native ResourceManager of the application, used to initialize the nit's ResourceManager
-	private fun resources: NativeResources import native_activity in "Java" `{ return App_native_activity(recv).getResources(); `}
+	private fun resources: NativeResources import native_activity in "Java" `{ return App_native_activity(self).getResources(); `}
 end

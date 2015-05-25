@@ -159,8 +159,8 @@ redef class App
 	Activity.on_start, Activity.on_restart, Activity.on_stop,
 	Activity.on_pause, Activity.on_resume,
 	Activity.on_save_instance_state, Activity.on_restore_instance_state `{
-		App_incr_ref(recv);
-		global_app = recv;
+		App_incr_ref(self);
+		global_app = self;
 	`}
 
 	# Create the Nit side to this new `native` Java activity, and return it to Java

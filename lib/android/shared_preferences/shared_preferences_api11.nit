@@ -31,7 +31,7 @@ redef extern class NativeSharedPreferences
 	fun get_string_set(key: JavaString): HashSet[JavaString] import HashSet[JavaString],
 		HashSet[JavaString].add in "Java" `{
 		Set<String> def_value = new HashSet<String>();
-		Set<String> java_set = recv.getStringSet(key, def_value);
+		Set<String> java_set = self.getStringSet(key, def_value);
 		int nit_hashset = new_HashSet_of_JavaString();
 
 		for (String element: java_set)
@@ -54,7 +54,7 @@ redef extern class NativeSharedPreferencesEditor
 			Iterator_of_JavaString_next(itr);
 		}
 
-		return recv.putStringSet(key, java_set);
+		return self.putStringSet(key, java_set);
 	`}
 end
 

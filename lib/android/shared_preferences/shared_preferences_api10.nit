@@ -34,13 +34,13 @@ in "Java" `{
 extern class NativeSharedPreferences in "Java" `{ android.content.SharedPreferences `}
 	super JavaObject
 
-	fun contains(key: JavaString): Bool in "Java" `{ return recv.contains(key); `}
+	fun contains(key: JavaString): Bool in "Java" `{ return self.contains(key); `}
 	fun get_all: HashMap[JavaString, JavaObject] import HashMap[JavaString, JavaObject],
 		HashMap[JavaString, JavaObject].[]= in "Java" `{
 		Map<String, ?> java_map = null;
 		int nit_hashmap = new_HashMap_of_JavaString_JavaObject();
 		try {
-			java_map = recv.getAll();
+			java_map = self.getAll();
 		} catch (NullPointerException e) {
 			return nit_hashmap;
 		}
@@ -54,7 +54,7 @@ extern class NativeSharedPreferences in "Java" `{ android.content.SharedPreferen
 	fun get_boolean(key: JavaString, def_value: Bool): Bool in "Java" `{
 		boolean return_value;
 		try {
-			return_value = recv.getBoolean(key, def_value);
+			return_value = self.getBoolean(key, def_value);
 		} catch (ClassCastException e) {
 			return def_value;
 		}
@@ -64,7 +64,7 @@ extern class NativeSharedPreferences in "Java" `{ android.content.SharedPreferen
 	fun get_float(key: JavaString, def_value: Float): Float in "Java" `{
 		float return_value;
 		try {
-			return_value = recv.getFloat(key, (float) def_value);
+			return_value = self.getFloat(key, (float) def_value);
 		} catch (ClassCastException e) {
 			return def_value;
 		}
@@ -74,7 +74,7 @@ extern class NativeSharedPreferences in "Java" `{ android.content.SharedPreferen
 	fun get_int(key: JavaString, def_value: Int): Int in "Java" `{
 		int return_value;
 		try {
-			return_value = recv.getInt(key, (int)def_value);
+			return_value = self.getInt(key, (int)def_value);
 		} catch (ClassCastException e) {
 			return def_value;
 		}
@@ -84,7 +84,7 @@ extern class NativeSharedPreferences in "Java" `{ android.content.SharedPreferen
 	fun get_long(key: JavaString, def_value: Int): Int in "Java" `{
 		long return_value;
 		try {
-			return_value = recv.getLong(key, def_value);
+			return_value = self.getLong(key, def_value);
 		} catch (ClassCastException e) {
 			return def_value;
 		}
@@ -94,7 +94,7 @@ extern class NativeSharedPreferences in "Java" `{ android.content.SharedPreferen
 	fun get_string(key: JavaString, def_value: JavaString): JavaString in "Java" `{
 		String return_value = null;
 		try {
-			return_value = recv.getString(key, def_value);
+			return_value = self.getString(key, def_value);
 		} catch (ClassCastException e) {
 			return def_value;
 		}
@@ -104,41 +104,41 @@ extern class NativeSharedPreferences in "Java" `{ android.content.SharedPreferen
 
 	# HACK for bug #845
 	redef fun new_global_ref import sys, Sys.jni_env `{
-		Sys sys = NativeSharedPreferences_sys(recv);
+		Sys sys = NativeSharedPreferences_sys(self);
 		JNIEnv *env = Sys_jni_env(sys);
-		return (*env)->NewGlobalRef(env, recv);
+		return (*env)->NewGlobalRef(env, self);
 	`}
 end
 
 extern class NativeSharedPreferencesEditor in "Java" `{ android.content.SharedPreferences$Editor `}
 	super JavaObject
 
-	fun clear: NativeSharedPreferencesEditor in "Java" `{ return recv.clear(); `}
-	fun commit: Bool in "Java" `{ return recv.commit(); `}
+	fun clear: NativeSharedPreferencesEditor in "Java" `{ return self.clear(); `}
+	fun commit: Bool in "Java" `{ return self.commit(); `}
 	fun put_boolean(key: JavaString, value: Bool): NativeSharedPreferencesEditor in "Java" `{
-		return recv.putBoolean (key, value);
+		return self.putBoolean (key, value);
 	`}
 	fun put_float(key: JavaString, value: Float): NativeSharedPreferencesEditor in "Java" `{
-		return recv.putFloat(key, (float) value);
+		return self.putFloat(key, (float) value);
 	`}
 	fun put_int(key: JavaString, value: Int): NativeSharedPreferencesEditor in "Java" `{
-		return recv.putInt(key, (int)value);
+		return self.putInt(key, (int)value);
 	`}
 	fun put_long(key: JavaString, value: Int): NativeSharedPreferencesEditor in "Java" `{
-		return recv.putLong(key, value);
+		return self.putLong(key, value);
 	`}
 	fun put_string(key: JavaString, value: JavaString): NativeSharedPreferencesEditor in "Java" `{
-		return recv.putString(key, value);
+		return self.putString(key, value);
 	`}
 	fun remove(key: JavaString): NativeSharedPreferencesEditor in "Java" `{
-		return recv.remove(key);
+		return self.remove(key);
 	`}
 
 	# HACK for bug #845
 	redef fun new_global_ref import sys, Sys.jni_env `{
-		Sys sys = NativeSharedPreferencesEditor_sys(recv);
+		Sys sys = NativeSharedPreferencesEditor_sys(self);
 		JNIEnv *env = Sys_jni_env(sys);
-		return (*env)->NewGlobalRef(env, recv);
+		return (*env)->NewGlobalRef(env, self);
 	`}
 end
 
@@ -175,7 +175,7 @@ class SharedPreferences
 	end
 
 	private fun setup(file_name: JavaString, mode: Int) import context, set_vars in "Java" `{
-		Activity context = (Activity) SharedPreferences_context(recv);
+		Activity context = (Activity) SharedPreferences_context(self);
 		SharedPreferences sp;
 
 		// Uses default SharedPreferences if file_name is an empty String
@@ -187,7 +187,7 @@ class SharedPreferences
 
 		SharedPreferences.Editor editor = sp.edit();
 
-		SharedPreferences_set_vars(recv, sp, editor);
+		SharedPreferences_set_vars(self, sp, editor);
 	`}
 
 	private fun commit_if_auto do if auto_commit then self.commit

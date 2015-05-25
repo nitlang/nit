@@ -54,31 +54,31 @@ in "C" `{
 private extern class NativeAndroidMotionEvent `{AInputEvent *`}
 
 	fun pointers_count: Int `{
-		return AMotionEvent_getPointerCount(recv);
+		return AMotionEvent_getPointerCount(self);
 	`}
 
 	# Did this motion event just started?
 	fun just_went_down: Bool `{
-		return (AMotionEvent_getAction(recv) & AMOTION_EVENT_ACTION_MASK) == AMOTION_EVENT_ACTION_DOWN;
+		return (AMotionEvent_getAction(self) & AMOTION_EVENT_ACTION_MASK) == AMOTION_EVENT_ACTION_DOWN;
 	`}
 
 	fun edge: Int `{
-		return AMotionEvent_getEdgeFlags(recv);
+		return AMotionEvent_getEdgeFlags(self);
 	`}
 
 	# Get the non-primary pointer id that just went down (returns -1 or > 0)
 	fun index_down_pointer: Int `{
-		int a = AMotionEvent_getAction(recv);
+		int a = AMotionEvent_getAction(self);
 		if ((a & AMOTION_EVENT_ACTION_MASK) == AMOTION_EVENT_ACTION_POINTER_DOWN)
 			return (a & AMOTION_EVENT_ACTION_POINTER_INDEX_MASK) >> AMOTION_EVENT_ACTION_POINTER_INDEX_SHIFT;
 		else return -1;
 	`}
 
-	fun action: AMotionEventAction `{ return AMotionEvent_getAction(recv); `}
+	fun action: AMotionEventAction `{ return AMotionEvent_getAction(self); `}
 end
 
 private extern class AMotionEventAction `{ int32_t `}
-	fun action: Int `{ return recv & AMOTION_EVENT_ACTION_MASK; `}
+	fun action: Int `{ return self & AMOTION_EVENT_ACTION_MASK; `}
 
 	fun is_down: Bool do return action == 0
 	fun is_up: Bool do return action == 1
@@ -199,16 +199,16 @@ extern class AndroidKeyEvent `{AInputEvent *`}
 	super KeyEvent
 	super AndroidInputEvent
 
-	private fun action: Int `{ return AKeyEvent_getAction(recv); `}
+	private fun action: Int `{ return AKeyEvent_getAction(self); `}
 
 	redef fun is_down: Bool do return action == 0
 	redef fun is_up: Bool do return action == 1
 
 	# Hardware code of the key raising this event
-	fun key_code: Int `{ return AKeyEvent_getKeyCode(recv); `}
+	fun key_code: Int `{ return AKeyEvent_getKeyCode(self); `}
 
 	redef fun to_c `{
-		int code = AKeyEvent_getKeyCode(recv);
+		int code = AKeyEvent_getKeyCode(self);
 		if (code >= AKEYCODE_0 && code <= AKEYCODE_9)
 			return '0'+code-AKEYCODE_0;
 		if (code >= AKEYCODE_A && code <= AKEYCODE_Z)
