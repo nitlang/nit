@@ -107,11 +107,11 @@ redef class MExplicitCall
 		if mproperty.is_init then
 			var recv_mtype = recv_mtype
 			recv_var = nitni_visitor.init_instance_or_extern(recv_mtype)
-			nitni_visitor.add("{mtype.ctype} recv /* var self: {mtype} */;")
-			nitni_visitor.add("recv = {recv_var};")
+			nitni_visitor.add("{mtype.ctype} self /* var self: {mtype} */;")
+			nitni_visitor.add("self = {recv_var};")
 		else
 			mtype = mtype.anchor_to(v.compiler.mainmodule, recv_mtype)
-			recv_var = nitni_visitor.var_from_c("recv", mtype)
+			recv_var = nitni_visitor.var_from_c("self", mtype)
 			recv_var = nitni_visitor.box_extern(recv_var, mtype)
 		end
 
@@ -226,7 +226,7 @@ redef class MExplicitSuper
 
 		var vars = new Array[RuntimeVariable]
 
-		var recv_var = nitni_visitor.var_from_c("recv", mclass_type)
+		var recv_var = nitni_visitor.var_from_c("self", mclass_type)
 		recv_var = nitni_visitor.box_extern(recv_var, mclass_type)
 		vars.add(recv_var)
 
