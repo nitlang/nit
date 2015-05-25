@@ -12,7 +12,7 @@ digraph G {
 					fontsize = 8
 				]
 Object [
- label = "{interface\nObject||+ object_id(): Int\l+ is_same_type(other: Object): Bool\l+ is_same_instance(other: nullable Object): Bool\l+ ==(other: nullable Object): Bool\l+ !=(other: nullable Object): Bool\l+ output()\l+ output_class_name()\l+ hash(): Int\l+ sys(): Sys\l}"
+ label = "{interface\nObject||+ object_id(): Int\l+ is_same_type(other: Object): Bool\l+ is_same_instance(other: nullable Object): Bool\l+ ==(other: nullable Object): Bool\l+ !=(other: nullable Object): Bool\l+ output()\l+ output_class_name()\l+ hash(): Int\l+ sys(): Sys\l+ init()\l}"
 ]
 
 Sys [
