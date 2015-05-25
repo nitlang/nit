@@ -24,15 +24,14 @@ in "C header" `{
 	#include <assert.h>
 `}
 
-# Add support of binary operations related 
-# to binary level of Integer
-# For compatibility reasons, xor, and, or methods 
-# are still in the math.nit module
+# Add support of binary operations related to binary level of Integer
+# For compatibility reasons, xor, and, or methods are still in the `math` module.
 redef class Int
 
-	# Sets the i-bit of self to the given value
-	#     assert 11.setbit(0, 0) == 10
-	#     assert 10.setbit(0, 1) == 11 
+	# Sets the i-bit of self to the given `value`
+	#
+	#	 assert 11.setbit(0, 0) == 10
+	#	 assert 10.setbit(0, 1) == 11
 	fun setbit(index: Int, value: Int): Int `{
 		assert(index >= 0 && index < 32);
 
@@ -42,14 +41,15 @@ redef class Int
 			return recv & ~(1 << index);
 	`}
 
-	# Returns the i-bit value of self Integer
-	#     assert 10.getbit(0) == 0
-	#     assert 10.getbit(3) == 1
+	# Returns the i-bit value of `self`
+	#
+	#	 assert 10.getbit(0) == 0
+	#	 assert 10.getbit(3) == 1
 	fun getbit(index: Int): Int `{
 		assert(index >= 0 && index < 32);
 
 		int op = 1 << index;
-		
+
 		if((recv & op) == 0)
 			return 0;
 		else
@@ -57,10 +57,10 @@ redef class Int
 	`}
 
 	# Give a binary representation of self Integer
-	fun bits : Array[Int]
+	fun bits: Array[Int]
 	do
-		var bits = new Array[Int].with_capacity(32) 
-		
+		var bits = new Array[Int].with_capacity(32)
+
 		for i in [0..32[
 		do
 			bits[i] = getbit(i)
@@ -69,10 +69,10 @@ redef class Int
 		return bits
 	end
 
-	# Returns the number of bits of specified value (0 or 1)
-	# in self 
-	#     assert 10.number_bits(1) == 2
-	#     assert 10.number_bits(0) == 30
+	# Returns the number of bits of specified value (0 or 1) in `self`
+	#
+	#	 assert 10.number_bits(1) == 2
+	#	 assert 10.number_bits(0) == 30
 	fun number_bits(value: Int): Int `{
 		assert(value == 0 || value == 1);
 
@@ -99,20 +99,22 @@ redef class Int
 		return count;
 	`}
 
-	# Returns the position of the highest bit
-	# set to 1 in self (the rightest bit is at position 0)
-	#     assert 10.highest_bit == 3
-	#     assert 1.highest_bit == 0
-	fun highest_bit: Int `{ 
+	# Returns the position of the highest bit set to 1 in `self`
+	#
+	# The rightmost bit is at position 0.
+	#
+	#	 assert 10.highest_bit == 3
+	#	 assert 1.highest_bit == 0
+	fun highest_bit: Int `{
 		long int msb = 1L << 31;
 		int pos = 31;
-		
+
 		while(msb > 0 && !(recv & msb))
 		{
 			msb /= 2;
 			pos--;
 		}
-		
+
 		return pos;
 	`}
 end
