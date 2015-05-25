@@ -307,6 +307,12 @@ end
 class THexNumber
 	super Token
 end
+class TBinNumber
+	super Token
+end
+class TOctNumber
+	super Token
+end
 class TFloat
 	super Token
 end
@@ -1088,6 +1094,16 @@ end
 class AHexIntExpr
 	super AExpr
 	var n_hex_number: THexNumber is writable, noinit
+	var n_annotations: nullable AAnnotations = null is writable
+end
+class ABinIntExpr
+	super AExpr
+	var n_bin_number: TBinNumber is writable, noinit
+	var n_annotations: nullable AAnnotations = null is writable
+end
+class AOctIntExpr
+	super AExpr
+	var n_oct_number: TOctNumber is writable, noinit
 	var n_annotations: nullable AAnnotations = null is writable
 end
 class AFloatExpr

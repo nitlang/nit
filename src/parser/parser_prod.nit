@@ -6436,6 +6436,90 @@ redef class AHexIntExpr
 		v.enter_visit(_n_annotations)
 	end
 end
+redef class ABinIntExpr
+	init init_abinintexpr (
+		n_bin_number: nullable TBinNumber,
+		n_annotations: nullable AAnnotations
+	)
+	do
+		_n_bin_number = n_bin_number.as(not null)
+		n_bin_number.parent = self
+		_n_annotations = n_annotations
+		if n_annotations != null then n_annotations.parent = self
+	end
+
+	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
+	do
+		if _n_bin_number == old_child then
+			n_bin_number = new_child.as(TBinNumber)
+			return
+		end
+		if _n_annotations == old_child then
+			n_annotations = new_child.as(nullable AAnnotations)
+			return
+		end
+	end
+
+	redef fun n_bin_number=(node)
+	do
+		_n_bin_number = node
+		node.parent = self
+	end
+	redef fun n_annotations=(node)
+	do
+		_n_annotations = node
+		if node != null then node.parent = self
+	end
+
+
+	redef fun visit_all(v: Visitor)
+	do
+		v.enter_visit(_n_bin_number)
+		v.enter_visit(_n_annotations)
+	end
+end
+redef class AOctIntExpr
+	init init_aoctintexpr (
+		n_oct_number: nullable TOctNumber,
+		n_annotations: nullable AAnnotations
+	)
+	do
+		_n_oct_number = n_oct_number.as(not null)
+		n_oct_number.parent = self
+		_n_annotations = n_annotations
+		if n_annotations != null then n_annotations.parent = self
+	end
+
+	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
+	do
+		if _n_oct_number == old_child then
+			n_oct_number = new_child.as(TOctNumber)
+			return
+		end
+		if _n_annotations == old_child then
+			n_annotations = new_child.as(nullable AAnnotations)
+			return
+		end
+	end
+
+	redef fun n_oct_number=(node)
+	do
+		_n_oct_number = node
+		node.parent = self
+	end
+	redef fun n_annotations=(node)
+	do
+		_n_annotations = node
+		if node != null then node.parent = self
+	end
+
+
+	redef fun visit_all(v: Visitor)
+	do
+		v.enter_visit(_n_oct_number)
+		v.enter_visit(_n_annotations)
+	end
+end
 redef class AFloatExpr
 	init init_afloatexpr (
 		n_float: nullable TFloat,
