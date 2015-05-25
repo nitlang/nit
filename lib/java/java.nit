@@ -77,7 +77,7 @@ redef class Sys
 
 	# Get a Java class by its name from the current `jni_env`
 	fun load_jclass(name: NativeString): JClass import jni_env `{
-		JNIEnv *nit_ffi_jni_env = Sys_jni_env(recv);
+		JNIEnv *nit_ffi_jni_env = Sys_jni_env(self);
 
 		// retrieve the implementation Java class
 		jclass java_class = (*nit_ffi_jni_env)->FindClass(nit_ffi_jni_env, name);
@@ -100,12 +100,12 @@ extern class JavaString in "Java" `{ java.lang.String `}
 
 	# Get the string from Java and copy it to Nit memory
 	fun to_cstring: NativeString import sys, Sys.jni_env `{
-		Sys sys = JavaString_sys(recv);
+		Sys sys = JavaString_sys(self);
 		JNIEnv *env = Sys_jni_env(sys);
 
 		// Get the data from Java
-		const jbyte *java_cstr = (char*)(*env)->GetStringUTFChars(env, recv, NULL);
-		jsize len = (*env)->GetStringUTFLength(env, recv);
+		const jbyte *java_cstr = (char*)(*env)->GetStringUTFChars(env, self, NULL);
+		jsize len = (*env)->GetStringUTFLength(env, self);
 
 		// Copy it in control of Nit
 		char *nit_cstr = (char*)malloc(len+1);
@@ -113,7 +113,7 @@ extern class JavaString in "Java" `{ java.lang.String `}
 		nit_cstr[len] = '\0';
 
 		// Free JNI ref and return
-		(*env)->ReleaseStringUTFChars(env, recv, java_cstr);
+		(*env)->ReleaseStringUTFChars(env, self, java_cstr);
 		return nit_cstr;
 	`}
 
@@ -126,9 +126,9 @@ redef class NativeString
 	# This instance is only valid until the next execution of Java code.
 	# You can use `new_local_ref` to keep it longer.
 	fun to_java_string: JavaString import sys, Sys.jni_env `{
-		Sys sys = JavaString_sys(recv);
+		Sys sys = JavaString_sys(self);
 		JNIEnv *env = Sys_jni_env(sys);
-		return (*env)->NewStringUTF(env, recv);
+		return (*env)->NewStringUTF(env, self);
 	`}
 end
 
@@ -144,23 +144,23 @@ redef extern class JavaObject
 	# You must use a global reference when keeping a Java object
 	# across execution of Java code, per JNI specification.
 	fun new_global_ref: SELF import sys, Sys.jni_env `{
-		Sys sys = JavaObject_sys(recv);
+		Sys sys = JavaObject_sys(self);
 		JNIEnv *env = Sys_jni_env(sys);
-		return (*env)->NewGlobalRef(env, recv);
+		return (*env)->NewGlobalRef(env, self);
 	`}
 
 	# Delete this global reference
 	fun delete_global_ref import sys, Sys.jni_env `{
-		Sys sys = JavaObject_sys(recv);
+		Sys sys = JavaObject_sys(self);
 		JNIEnv *env = Sys_jni_env(sys);
-		(*env)->DeleteGlobalRef(env, recv);
+		(*env)->DeleteGlobalRef(env, self);
 	`}
 
 	# Delete this local reference
 	fun delete_local_ref import sys, Sys.jni_env `{
-		Sys sys = JavaObject_sys(recv);
+		Sys sys = JavaObject_sys(self);
 		JNIEnv *env = Sys_jni_env(sys);
-		(*env)->DeleteLocalRef(env, recv);
+		(*env)->DeleteLocalRef(env, self);
 	`}
 
 	# Pops the current local reference frame and return a valid reference to self
@@ -173,7 +173,7 @@ redef extern class JavaObject
 	end
 
 	private fun pop_from_local_frame_with_env(jni_env: JniEnv): SELF `{
-		return (*jni_env)->PopLocalFrame(jni_env, recv);
+		return (*jni_env)->PopLocalFrame(jni_env, self);
 	`}
 
 	# Is `self` null in Java?
@@ -186,10 +186,10 @@ redef extern class JavaObject
 	# the return of all extern methods implemented in Java to ensure the value
 	# is not a Java null. In case it is, you should replace it by a normal Nit
 	# `null`.
-	fun is_java_null: Bool in "Java" `{ return recv == null; `}
+	fun is_java_null: Bool in "Java" `{ return self == null; `}
 
 	# `JavaString` representation of `self` using Java's `toString`
-	fun to_java_string: JavaString in "Java" `{ return recv.toString(); `}
+	fun to_java_string: JavaString in "Java" `{ return self.toString(); `}
 
 	# Use Java's `toString` for any `JavaObject`
 	redef fun to_s
