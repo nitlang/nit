@@ -81,3 +81,23 @@ class DeserializerCache
 	# Associate `object` to `id`
 	fun []=(id: Int, object: Object) do received[id] = object
 end
+
+# A shared cache for serialization and deserialization
+class DuplexCache
+	super SerializerCache
+	super DeserializerCache
+
+	redef fun new_id_for(object)
+	do
+		var id = super
+		received[id] = object
+		return id
+	end
+
+	redef fun []=(id, object)
+	do
+		super
+		assert object isa Serializable
+		sent[object] = id
+	end
+end
