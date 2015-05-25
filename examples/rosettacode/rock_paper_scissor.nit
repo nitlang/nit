@@ -27,9 +27,17 @@ end
 
 # Return a String for the player about what the computer player did.
 fun computer_message(number: Int): String do
-	if number == 5 then return "The computer played rock;"
-	if number == 6 then return "The computer played scissors;"
-	return "The computer played paper;"
+	if number == 5 then return "The computer played rock"
+	if number == 6 then return "The computer played scissors"
+	return "The computer played paper"
+end
+
+# Convert the random number from computer to a String.
+# Return "rock" for 5, "scissors" for 6 and "paper" for 7.
+fun convert(computer : Int) :String do
+	if computer == 5 then return "rock"
+	if computer == 6 then return "scissors"
+	return "paper"
 end
 
 # Return a random value for the computer player input.
@@ -37,16 +45,17 @@ fun computer_player: Int do return 3.rand + 5
 
 # Game loop.
 var x = ""
-var test = false;
+var test = false
 loop do
 	while not test do
 		print "Choose your weapon|exit"
 		x = gets
 		if x == "exit" then break
-		if x == "paper" and x == "rock" and x == "scissors" then test = true;
+		if x == "paper" or x == "rock" or x == "scissors" then test = true
 		if test == false then print"Unknow input!"
 	end
+	test = false
 	var z = computer_player
 	print computer_message(z)
-	print result_of_the_match_message(win_or_lose(x,z))
+	print result_of_the_match_message(win_or_lose(x,convert(z)))
 end
