@@ -946,6 +946,16 @@ class THexNumber
 	super TokenLiteral
 end
 
+# A literal binary integer
+class TBinNumber
+	super TokenLiteral
+end
+
+# A literal octal integer
+class TOctNumber
+	super TokenLiteral
+end
+
 # A literal floating point number
 class TFloat
 	super TokenLiteral
@@ -2460,6 +2470,22 @@ class AHexIntExpr
 
 	# The hexadecimal token
 	var n_hex_number: THexNumber is writable, noinit
+end
+
+# An integer literal in binary format
+class ABinIntExpr
+	super AIntExpr
+
+	# The binary token
+	var n_bin_number: TBinNumber is writable, noinit
+end
+
+# An integer literal in octal format
+class AOctIntExpr
+	super AIntExpr
+
+	# The octal token
+	var n_oct_number: TOctNumber is writable, noinit
 end
 
 # A float literal
