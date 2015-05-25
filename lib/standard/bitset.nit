@@ -1,4 +1,4 @@
-# This file is part of NIT ( http://www.nitlanguage.org ).
+# This file is part of NIT (http://www.nitlanguage.org).
 #
 # Copyright 2014 Julien Pagès <julien.pages@lirmm.fr>
 #
@@ -6,7 +6,7 @@
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#	 http://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -36,9 +36,9 @@ redef class Int
 		assert(index >= 0 && index < 32);
 
 		if(value == 1)
-			return recv | (1 << index);
+			return self | (1 << index);
 		else
-			return recv & ~(1 << index);
+			return self & ~(1 << index);
 	`}
 
 	# Returns the i-bit value of `self`
@@ -50,7 +50,7 @@ redef class Int
 
 		int op = 1 << index;
 
-		if((recv & op) == 0)
+		if((self & op) == 0)
 			return 0;
 		else
 			return 1;
@@ -84,7 +84,7 @@ redef class Int
 		{
 			for(i=bound; i>0; i/=2)
 			{
-				if(recv & i)
+				if(self & i)
 					count++;
 			}
 		}
@@ -92,7 +92,7 @@ redef class Int
 		{
 			for(i=bound; i>0; i/=2)
 			{
-				if(!(recv & i))
+				if(!(self & i))
 					count++;
 			}
 		}
@@ -109,7 +109,7 @@ redef class Int
 		long int msb = 1L << 31;
 		int pos = 31;
 
-		while(msb > 0 && !(recv & msb))
+		while(msb > 0 && !(self & msb))
 		{
 			msb /= 2;
 			pos--;

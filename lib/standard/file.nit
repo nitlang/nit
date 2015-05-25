@@ -1056,12 +1056,12 @@ redef class NativeString
 		struct stat* stat_element;
 		int res;
 		stat_element = malloc(sizeof(struct stat));
-		res = lstat(recv, stat_element);
+		res = lstat(self, stat_element);
 		if (res == -1) return NULL;
 		return stat_element;
 	`}
 	private fun file_mkdir: Bool is extern "string_NativeString_NativeString_file_mkdir_0"
-	private fun rmdir: Bool `{ return !rmdir(recv); `}
+	private fun rmdir: Bool `{ return !rmdir(self); `}
 	private fun file_delete: Bool is extern "string_NativeString_NativeString_file_delete_0"
 	private fun file_chdir: Bool is extern "string_NativeString_NativeString_file_chdir_0"
 	private fun file_realpath: NativeString is extern "file_NativeString_realpath"
@@ -1081,19 +1081,19 @@ private extern class NativeFileStat `{ struct stat * `}
 	fun size: Int is extern "file_FileStat_FileStat_size_0"
 
 	# Returns true if it is a regular file (not a device file, pipe, sockect, ...)
-	fun is_reg: Bool `{ return S_ISREG(recv->st_mode); `}
+	fun is_reg: Bool `{ return S_ISREG(self->st_mode); `}
 	# Returns true if it is a directory
-	fun is_dir: Bool `{ return S_ISDIR(recv->st_mode); `}
+	fun is_dir: Bool `{ return S_ISDIR(self->st_mode); `}
 	# Returns true if it is a character device
-	fun is_chr: Bool `{ return S_ISCHR(recv->st_mode); `}
+	fun is_chr: Bool `{ return S_ISCHR(self->st_mode); `}
 	# Returns true if it is a block device
-	fun is_blk: Bool `{ return S_ISBLK(recv->st_mode); `}
+	fun is_blk: Bool `{ return S_ISBLK(self->st_mode); `}
 	# Returns true if the type is fifo
-	fun is_fifo: Bool `{ return S_ISFIFO(recv->st_mode); `}
+	fun is_fifo: Bool `{ return S_ISFIFO(self->st_mode); `}
 	# Returns true if the type is a link
-	fun is_lnk: Bool `{ return S_ISLNK(recv->st_mode); `}
+	fun is_lnk: Bool `{ return S_ISLNK(self->st_mode); `}
 	# Returns true if the type is a socket
-	fun is_sock: Bool `{ return S_ISSOCK(recv->st_mode); `}
+	fun is_sock: Bool `{ return S_ISSOCK(self->st_mode); `}
 end
 
 # Instance of this class are standard FILE * pointers
@@ -1102,11 +1102,11 @@ private extern class NativeFile `{ FILE* `}
 	fun io_write(buf: NativeString, len: Int): Int is extern "file_NativeFile_NativeFile_io_write_2"
 	fun write_byte(value: Int): Int `{
 		unsigned char b = (unsigned char)value;
-		return fwrite(&b, 1, 1, recv);
+		return fwrite(&b, 1, 1, self);
 	`}
 	fun io_close: Int is extern "file_NativeFile_NativeFile_io_close_0"
 	fun file_stat: NativeFileStat is extern "file_NativeFile_NativeFile_file_stat_0"
-	fun fileno: Int `{ return fileno(recv); `}
+	fun fileno: Int `{ return fileno(self); `}
 	# Flushes the buffer, forcing the write operation
 	fun flush: Int is extern "fflush"
 	# Used to specify how the buffering will be handled for the current stream.
@@ -1126,12 +1126,12 @@ private extern class NativeDir `{ DIR* `}
 	new opendir(path: NativeString) `{ return opendir(path); `}
 
 	# Close a directory
-	fun closedir `{ closedir(recv); `}
+	fun closedir `{ closedir(self); `}
 
 	# Read the next directory entry
 	fun readdir: NativeString `{
 		struct dirent *de;
-		de = readdir(recv);
+		de = readdir(self);
 		if (!de) return NULL;
 		return de->d_name;
 	`}

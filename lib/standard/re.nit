@@ -42,7 +42,7 @@ private extern class NativeRegex `{ regex_t* `}
 
 	# Compile the regular expression `regex` into a form that is suitable for subsequent `regexec` searches
 	fun regcomp(regex: NativeString, cflags: Int): Int `{
-		return regcomp(recv, regex, cflags);
+		return regcomp(self, regex, cflags);
 	`}
 
 	# Match `string` against the precompiled pattern buffer of `self`, locating matches
@@ -50,32 +50,32 @@ private extern class NativeRegex `{ regex_t* `}
 	# `nmatch` and `pmatch` are used to provide information regarding the location of any matches.
 	# `eflags` may be the bitwise-or of one or both of `flag_notbol` and `flag_noteol`.
 	fun regexec(string: NativeString, nmatch: Int, pmatch: NativeMatchArray, eflags: Int): Int `{
-		return regexec(recv, string, nmatch, pmatch, eflags);
+		return regexec(self, string, nmatch, pmatch, eflags);
 	`}
 
 	# Match `string` against the precompiled pattern buffer of `self`, do not locate matches
 	#
 	# `eflags` may be the bitwise-or of one or both of `flag_notbol` and `flag_noteol`.
 	fun regexec_match_only(string: NativeString, eflags: Int): Int `{
-		return regexec(recv, string, 0, NULL, eflags);
+		return regexec(self, string, 0, NULL, eflags);
 	`}
 
 	# Free the memory allocated to the pattern buffer by the compiling process
 	#
 	# Does not free the memory holding `self`, use `free` for this purpose.
-	fun regfree `{ regfree(recv); `}
+	fun regfree `{ regfree(self); `}
 
 	# Turn the error codes that can be returned by both `regcomp` and `regexec` into error message strings
 	fun regerror(errcode: Int): NativeString `{
-		size_t len = regerror(errcode, recv, NULL, 0);
+		size_t len = regerror(errcode, self, NULL, 0);
 		char *message = malloc(len);
-		regerror(errcode, recv, message, len);
+		regerror(errcode, self, message, len);
 
 		return message;
 	`}
 
 	# Number of parenthetical subexpressions in this compiled regular expression
-	fun re_nsub: Int `{ return recv->re_nsub; `}
+	fun re_nsub: Int `{ return self->re_nsub; `}
 end
 
 # Flags for `NativeRegex::regcomp`
@@ -96,7 +96,7 @@ private fun error_nomatch: Int `{ return REG_NOMATCH; `}
 private fun error_espace: Int `{ return REG_ESPACE; `}
 
 redef universal Int
-	private fun is_nomatch: Bool `{ return recv == REG_NOMATCH; `}
+	private fun is_nomatch: Bool `{ return self == REG_NOMATCH; `}
 end
 
 # An array of `regmatch_t` or a pointer to one
@@ -105,17 +105,17 @@ private extern class NativeMatchArray `{ regmatch_t* `}
 	new malloc(length: Int) `{ return malloc(length * sizeof(regmatch_t)); `}
 
 	# The offset in string of the beginning of a substring
-	fun rm_so: Int `{ return recv->rm_so; `}
+	fun rm_so: Int `{ return self->rm_so; `}
 
 	# The offset in string of the end of the substring
-	fun rm_eo: Int `{ return recv->rm_eo; `}
+	fun rm_eo: Int `{ return self->rm_eo; `}
 
 	# Get a pointer to the element at `index`, can also be used as a subarray
-	fun [](index: Int): NativeMatchArray `{ return recv + index; `}
+	fun [](index: Int): NativeMatchArray `{ return self + index; `}
 end
 
 redef extern class NativeString
-	private fun substring_from(index: Int): NativeString `{ return recv + index; `}
+	private fun substring_from(index: Int): NativeString `{ return self + index; `}
 end
 
 redef class Text

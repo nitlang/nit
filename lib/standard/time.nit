@@ -41,20 +41,20 @@ extern class TimeT `{time_t`}
 	new from_i(i: Int) `{ return i; `}
 
 	# Update current time.
-	fun update `{ time(&recv); `}
+	fun update `{ time(&self); `}
 
 	# Convert `self` to a human readable String.
 	fun ctime: String import NativeString.to_s_with_copy `{
-		return NativeString_to_s_with_copy( ctime(&recv) );
+		return NativeString_to_s_with_copy( ctime(&self) );
 	`}
 
 	# Difference in secondes from start (self if the end time)
-	fun difftime(start: TimeT): Float `{ return difftime(recv, start); `}
+	fun difftime(start: TimeT): Float `{ return difftime(self, start); `}
 
 	redef fun to_s do return ctime.replace("\n", "")
 
 	# Convert self to Int (expressed as seconds since epoch).
-	fun to_i: Int `{ return (int)recv; `}
+	fun to_i: Int `{ return (int)self; `}
 end
 
 # Time structure
@@ -91,38 +91,38 @@ extern class Tm `{struct tm *`}
 	`}
 
 	# Convert `self` as a TimeT.
-	fun to_timet: TimeT `{ return mktime(recv); `}
+	fun to_timet: TimeT `{ return mktime(self); `}
 
 	# Seconds after the minute.
-	fun sec: Int `{ return recv->tm_sec; `}
+	fun sec: Int `{ return self->tm_sec; `}
 
 	# Minutes after the hour.
-	fun min: Int `{ return recv->tm_min; `}
+	fun min: Int `{ return self->tm_min; `}
 
 	# hours since midnight.
-	fun hour: Int `{ return recv->tm_hour; `}
+	fun hour: Int `{ return self->tm_hour; `}
 
 	# Day of the month.
-	fun mday: Int `{ return recv->tm_mday; `}
+	fun mday: Int `{ return self->tm_mday; `}
 
 	# Months since January.
-	fun mon: Int `{ return recv->tm_mon; `}
+	fun mon: Int `{ return self->tm_mon; `}
 
 	# Years since 1900.
-	fun year: Int `{ return recv->tm_year; `}
+	fun year: Int `{ return self->tm_year; `}
 
 	# Days since Sunday.
-	fun wday: Int `{ return recv->tm_wday; `}
+	fun wday: Int `{ return self->tm_wday; `}
 
 	# Days since January 1st.
-	fun yday: Int `{ return recv->tm_yday; `}
+	fun yday: Int `{ return self->tm_yday; `}
 
 	# Is `self` in Daylight Saving Time.
-	fun is_dst: Bool `{ return recv->tm_isdst; `}
+	fun is_dst: Bool `{ return self->tm_isdst; `}
 
 	# Convert `self` to a human readable String.
 	fun asctime: String import NativeString.to_s_with_copy `{
-		return NativeString_to_s_with_copy( asctime(recv) );
+		return NativeString_to_s_with_copy( asctime(self) );
 	`}
 
 	# Convert `self` to a human readable String corresponding to `format`.
@@ -134,7 +134,7 @@ extern class Tm `{struct tm *`}
 		buf = (char*)malloc(100);
 		c_format = String_to_cstring(format);
 
-		res = strftime(buf, 100, c_format, recv);
+		res = strftime(buf, 100, c_format, self);
 		String s = NativeString_to_s_with_copy(buf);
 		free(buf);
 		return s;

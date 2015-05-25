@@ -47,7 +47,7 @@ redef class Int
 	# Returns the square root of `self`
 	#
 	#     assert 16.sqrt == 4
-	fun sqrt: Int `{ return sqrt(recv); `}
+	fun sqrt: Int `{ return sqrt(self); `}
 
 	# Returns the greatest common divisor of `self` and `o`
 	#
@@ -158,7 +158,7 @@ redef class Float
 	#     assert 12.0.abs == 12.0
 	#     assert (-34.56).abs == 34.56
 	#     assert -34.56.abs == -34.56
-	fun abs: Float `{ return fabs(recv); `}
+	fun abs: Float `{ return fabs(self); `}
 
 	# Returns `self` raised at `e` power.
 	#
@@ -186,13 +186,13 @@ redef class Float
 	#     assert 1.9.ceil == 2.0
 	#     assert 2.0.ceil == 2.0
 	#     assert (-1.5).ceil == -1.0
-	fun ceil: Float `{ return ceil(recv); `}
+	fun ceil: Float `{ return ceil(self); `}
 
 	#     assert 1.1.floor == 1.0
 	#     assert 1.9.floor == 1.0
 	#     assert 2.0.floor == 2.0
 	#     assert (-1.5).floor == -2.0
-	fun floor: Float `{ return floor(recv); `}
+	fun floor: Float `{ return floor(self); `}
 
 	# Rounds the value of a float to its nearest integer value
 	#
