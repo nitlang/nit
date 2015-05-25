@@ -105,7 +105,7 @@ class JavaLanguage
 			jni_signature_alt = mclass_type.jni_signature_alt
 			return_type = mclass_type
 		else
-			params.add "recv"
+			params.add "self"
 			if signature.return_mtype != null then
 				var ret_mtype = signature.return_mtype
 				ret_mtype = ret_mtype.resolve_for(mclass_type, mclass_type, mmodule, true)
@@ -637,7 +637,7 @@ redef class MMethod
 		cparams.add "jclass clazz"
 
 		if not self.is_init then
-			cparams.add "{call_context.name_mtype(recv_mtype)} recv"
+			cparams.add "{call_context.name_mtype(recv_mtype)} self"
 		end
 		for p in signature.mparameters do
 			var param_mtype = p.mtype.resolve_for(recv_mtype, recv_mtype, from_mmodule, true)
