@@ -24,6 +24,21 @@ abstract class CachingSerializer
 
 	# Cache of known objects
 	var cache = new SerializerCache is lazy, writable
+
+	# Link the cache of `self` with `deserializer`
+	#
+	# This allows reference objects by id when they are known by the other side
+	# of the stream.
+	#
+	# Use `cache` if it is a `DuplexCache`, otherwise create a new one.
+	fun link(deserializer: CachingDeserializer)
+	do
+		var mem = self.cache
+		if not mem isa DuplexCache then mem = new DuplexCache
+
+		self.cache = mem
+		deserializer.cache = mem
+	end
 end
 
 # A `Deserializer` with a `cache`
