@@ -126,133 +126,6 @@
 	  min: base_simple3 (1)
 	  std: 0.0
 	  sum: 1
-
-# MClasses metrics
-
- ## project base_simple3
-  `- group base_simple3
-	cnoa: number of ancestor classes
-	  avg: 0.0
-	  max: Bool (1)
-	  min: Object (0)
-	  std: 0.926
-	  sum: 6
-	cnop: number of parent classes
-	  avg: 0.0
-	  max: Bool (1)
-	  min: Object (0)
-	  std: 0.926
-	  sum: 6
-	cnoc: number of child classes
-	  avg: 0.0
-	  max: Object (6)
-	  min: Bool (0)
-	  std: 2.268
-	  sum: 6
-	cnod: number of descendant classes
-	  avg: 0.0
-	  max: Object (6)
-	  min: Bool (0)
-	  std: 2.268
-	  sum: 6
-	cdit: depth in class tree
-	  avg: 0.0
-	  max: Bool (1)
-	  min: Object (0)
-	  std: 0.926
-	  sum: 6
-	cnbp: number of accessible properties (inherited + local)
-	  avg: 3.0
-	  max: C (7)
-	  min: Object (1)
-	  std: 2.36
-	  sum: 24
-	cnba: number of accessible attributes (inherited + local)
-	  avg: 0.0
-	  max: C (2)
-	  min: Object (0)
-	  std: 0.845
-	  sum: 3
-	cnbip: number of introduced properties
-	  avg: 2.0
-	  max: C (6)
-	  min: Bool (0)
-	  std: 2.268
-	  sum: 18
-	cnbrp: number of redefined properties
-	  avg: 0.0
-	  max: A (1)
-	  min: Object (0)
-	  std: 0.535
-	  sum: 2
-	cnbhp: number of inherited properties
-	  avg: 0.0
-	  max: Bool (1)
-	  min: Object (0)
-	  std: 0.926
-	  sum: 6
-
- ## global metrics
-	cnoa: number of ancestor classes
-	  avg: 0.0
-	  max: Bool (1)
-	  min: Object (0)
-	  std: 0.926
-	  sum: 6
-	cnop: number of parent classes
-	  avg: 0.0
-	  max: Bool (1)
-	  min: Object (0)
-	  std: 0.926
-	  sum: 6
-	cnoc: number of child classes
-	  avg: 0.0
-	  max: Object (6)
-	  min: Bool (0)
-	  std: 2.268
-	  sum: 6
-	cnod: number of descendant classes
-	  avg: 0.0
-	  max: Object (6)
-	  min: Bool (0)
-	  std: 2.268
-	  sum: 6
-	cdit: depth in class tree
-	  avg: 0.0
-	  max: Bool (1)
-	  min: Object (0)
-	  std: 0.926
-	  sum: 6
-	cnbp: number of accessible properties (inherited + local)
-	  avg: 3.0
-	  max: C (7)
-	  min: Object (1)
-	  std: 2.36
-	  sum: 24
-	cnba: number of accessible attributes (inherited + local)
-	  avg: 0.0
-	  max: C (2)
-	  min: Object (0)
-	  std: 0.845
-	  sum: 3
-	cnbip: number of introduced properties
-	  avg: 2.0
-	  max: C (6)
-	  min: Bool (0)
-	  std: 2.268
-	  sum: 18
-	cnbrp: number of redefined properties
-	  avg: 0.0
-	  max: A (1)
-	  min: Object (0)
-	  std: 0.535
-	  sum: 2
-	cnbhp: number of inherited properties
-	  avg: 0.0
-	  max: Bool (1)
-	  min: Object (0)
-	  std: 0.926
-	  sum: 6
 --- Metrics of refinement usage ---
 Number of modules: 1
 
@@ -488,6 +361,133 @@ Distribution of direct smallers
   bivariants: 0 (na%)
   invariants: 0 (na%)
   total: 0
+
+# MClasses metrics
+
+ ## project base_simple3
+  `- group base_simple3
+	cnoa: number of ancestor classes
+	  avg: 0.0
+	  max: Bool (1)
+	  min: Object (0)
+	  std: 0.926
+	  sum: 6
+	cnop: number of parent classes
+	  avg: 0.0
+	  max: Bool (1)
+	  min: Object (0)
+	  std: 0.926
+	  sum: 6
+	cnoc: number of child classes
+	  avg: 0.0
+	  max: Object (6)
+	  min: Bool (0)
+	  std: 2.268
+	  sum: 6
+	cnod: number of descendant classes
+	  avg: 0.0
+	  max: Object (6)
+	  min: Bool (0)
+	  std: 2.268
+	  sum: 6
+	cdit: depth in class tree
+	  avg: 0.0
+	  max: Bool (1)
+	  min: Object (0)
+	  std: 0.926
+	  sum: 6
+	cnbp: number of accessible properties (inherited + local)
+	  avg: 3.0
+	  max: C (7)
+	  min: Object (1)
+	  std: 2.36
+	  sum: 24
+	cnba: number of accessible attributes (inherited + local)
+	  avg: 0.0
+	  max: C (2)
+	  min: Object (0)
+	  std: 0.845
+	  sum: 3
+	cnbip: number of introduced properties
+	  avg: 2.0
+	  max: C (6)
+	  min: Bool (0)
+	  std: 2.268
+	  sum: 18
+	cnbrp: number of redefined properties
+	  avg: 0.0
+	  max: A (1)
+	  min: Object (0)
+	  std: 0.535
+	  sum: 2
+	cnbhp: number of inherited properties
+	  avg: 0.0
+	  max: Bool (1)
+	  min: Object (0)
+	  std: 0.926
+	  sum: 6
+
+ ## global metrics
+	cnoa: number of ancestor classes
+	  avg: 0.0
+	  max: Bool (1)
+	  min: Object (0)
+	  std: 0.926
+	  sum: 6
+	cnop: number of parent classes
+	  avg: 0.0
+	  max: Bool (1)
+	  min: Object (0)
+	  std: 0.926
+	  sum: 6
+	cnoc: number of child classes
+	  avg: 0.0
+	  max: Object (6)
+	  min: Bool (0)
+	  std: 2.268
+	  sum: 6
+	cnod: number of descendant classes
+	  avg: 0.0
+	  max: Object (6)
+	  min: Bool (0)
+	  std: 2.268
+	  sum: 6
+	cdit: depth in class tree
+	  avg: 0.0
+	  max: Bool (1)
+	  min: Object (0)
+	  std: 0.926
+	  sum: 6
+	cnbp: number of accessible properties (inherited + local)
+	  avg: 3.0
+	  max: C (7)
+	  min: Object (1)
+	  std: 2.36
+	  sum: 24
+	cnba: number of accessible attributes (inherited + local)
+	  avg: 0.0
+	  max: C (2)
+	  min: Object (0)
+	  std: 0.845
+	  sum: 3
+	cnbip: number of introduced properties
+	  avg: 2.0
+	  max: C (6)
+	  min: Bool (0)
+	  std: 2.268
+	  sum: 18
+	cnbrp: number of redefined properties
+	  avg: 0.0
+	  max: A (1)
+	  min: Object (0)
+	  std: 0.535
+	  sum: 2
+	cnbhp: number of inherited properties
+	  avg: 0.0
+	  max: Bool (1)
+	  min: Object (0)
+	  std: 0.926
+	  sum: 6
 generating project_hierarchy.dot
 generating module_hierarchy.dot
 
@@ -697,10 +697,10 @@ Statistics of type usage:
 # Mendel metrics
 	large mclasses (threshold: 3.354)
 	   Sys: 4
-	budding mclasses (threshold: 3.51)
-	   Sys: 4.0
-	blooming mclasses (threshold: 12.0)
-	   Sys: 16.0
+	budding mclasses (threshold: 4.177)
+	   Sys: 5.0
+	blooming mclasses (threshold: 14.626)
+	   Sys: 20.0
 --- Detection of the usage of covariance static type conformance ---
 -- Total --
 - Kinds of the subtype -
