@@ -47,7 +47,7 @@ extern class A
 	`}
 
 	fun p : Int import m `{
-		return A_m( recv ) + 5;
+		return A_m( self ) + 5;
 	`}
 
 	fun in_language : Int is extern in "C" `{

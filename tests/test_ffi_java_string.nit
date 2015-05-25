@@ -30,7 +30,7 @@ class A
 		System.out.println(input);
 
 		// Callback Nit with string
-		String str = A_bar(recv, "Created in Java");
+		String str = A_bar(self, "Created in Java");
 		System.out.println(str);
 
 		// Send back a string

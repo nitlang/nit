@@ -16,7 +16,7 @@ extern class A in "C" `{struct s_a*`}
 		return v;
 	`}
 	fun p `{
-		printf( "A< %d %d >\n", recv->x, recv->y );
+		printf( "A< %d %d >\n", self->x, self->y );
 	`}
 end
 
@@ -32,8 +32,8 @@ extern class B in "C" `{struct s_b*`}
 	`}
 	redef fun p import super `{
 		printf( "B< " );
-		B_p___super(recv);
-		printf( "   %d %d >\n", recv->w, recv->h );
+		B_p___super(self);
+		printf( "   %d %d >\n", self->w, self->h );
 	`}
 end
 
@@ -46,7 +46,7 @@ extern class C
 		return v;
 	`}
 	redef fun p `{
-		printf( "C< %d %d >\n", recv->x, recv->y );
+		printf( "C< %d %d >\n", self->x, self->y );
 	`}
 end
 

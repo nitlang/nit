@@ -33,13 +33,13 @@ extern class CppVector in "C++" `{vector<int>*`}
 
 	# Adds an element to the end of the vector
 	fun push(v: Int) in "C++" `{
-		recv->push_back(v);
+		self->push_back(v);
 	`}
 
 	# Pops an element from the end of the vector
 	fun pop: Int in "C++" `{
-		long val = recv->back();
-		recv->pop_back();
+		long val = self->back();
+		self->pop_back();
 		return val;
 	`}
 end
