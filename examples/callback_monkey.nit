@@ -14,16 +14,15 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# This sample has been implemented to show you how simple is it to play 
-# with native callbacks (C) through an high level with NIT program.
-
+# This sample has been implemented to show you how simple is it to relay
+# native callbacks from C to a Nit program.
 module callback_monkey
 
 in "C header" `{
 	#include <stdio.h>
 	#include <stdlib.h>
 
-	typedef struct { 
+	typedef struct {
 		int id;
 		int age;
 	} CMonkey;
@@ -40,53 +39,53 @@ in "C body" `{
 	void cbMonkey(CMonkey *mkey, void callbackFunc(CMonkey*, MonkeyAction*), MonkeyAction *data)
 	{
 		sleep(2);
-		callbackFunc( mkey, data );
+		callbackFunc(mkey, data);
 	}
 
 	// Back of background treatment, will be redirected to callback function
-	void nit_monkey_callback_func( CMonkey *mkey, MonkeyAction *data )
+	void nit_monkey_callback_func(CMonkey *mkey, MonkeyAction *data)
 	{
-		// To call a your method, the signature must be written like this :
+		// To call a your method, the signature must be written like this:
 		// <Interface Name>_<Method>...
-		MonkeyActionCallable_wokeUp( data->toCall, mkey, data->message );
+		MonkeyActionCallable_woke_up(data->toCall, mkey, data->message);
 	}
 `}
 
 # Implementable interface to get callback in defined methods
 interface MonkeyActionCallable
-	fun wokeUp( sender:Monkey, message: Object) is abstract
+	fun woke_up(sender:Monkey, message: Object) is abstract
 end
 
 # Defining my object type Monkey, which is, in a low level, a pointer to a C struct (CMonkey)
 extern class Monkey `{ CMonkey * `}
-	
+
 	new `{
-		CMonkey *monkey = malloc( sizeof(CMonkey) );
+		CMonkey *monkey = malloc(sizeof(CMonkey));
 		monkey->age = 10;
 		monkey->id = 1;
 		return monkey;
 	`}
-	
-	# Object method which will get a callback in wokeUp method, defined in MonkeyActionCallable interface
-	# Must be defined as Nit/C method because of C call inside
-	fun wokeUpAction( toCall: MonkeyActionCallable, message: Object ) is extern import MonkeyActionCallable.wokeUp `{
 
-		// Allocating memory to keep reference of received parameters :
+	# Object method which will get a callback in woke_up method, defined in MonkeyActionCallable interface
+	# Must be defined as Nit/C method because of C call inside
+	fun woke_up_action(toCall: MonkeyActionCallable, message: Object) is extern import MonkeyActionCallable.woke_up `{
+
+		// Allocating memory to keep reference of received parameters:
 		// - Object receiver
-		// - Message 
-		MonkeyAction *data = malloc( sizeof(MonkeyAction) );
+		// - Message
+		MonkeyAction *data = malloc(sizeof(MonkeyAction));
 
 		// Incrementing reference counter to prevent from releasing
-		MonkeyActionCallable_incr_ref( toCall );
-		Object_incr_ref( message );
-		
+		MonkeyActionCallable_incr_ref(toCall);
+		Object_incr_ref(message);
+
 		data->toCall = toCall;
 		data->message = message;
-		
-		// Calling method which reproduce a callback by passing :
+
+		// Calling method which reproduce a callback by passing:
 		// - Receiver
 		// - Function pointer to object return method
 		// - Datas
-		cbMonkey( self, &nit_monkey_callback_func, data );
+		cbMonkey(self, &nit_monkey_callback_func, data);
 	`}
 end

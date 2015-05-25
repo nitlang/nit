@@ -14,10 +14,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# This sample has been implemented to show you how simple is it to play 
-# with native callbacks (C) through an high level with NIT program.
-
+# This sample has been implemented to show you how simple is it to relay
+# native callbacks from C to a Nit program.
 module callback_chimpanze
+
 import callback_monkey
 
 class Chimpanze
@@ -27,15 +27,16 @@ class Chimpanze
 	do
 		var monkey = new Monkey
 		print "Hum, I'm sleeping ..."
-		# Invoking method which will take some time to compute, and 
-		# will be back in wokeUp method with information.
+
+		# Invoking method which will take some time to compute, and
+		# will be back in woke_up method with information.
 		# - Callback method defined in MonkeyActionCallable Interface
-		monkey.wokeUpAction(self, "Hey, I'm awake.")
+		monkey.woke_up_action(self, "Hey, I'm awake.")
 	end
 
 	# Inherit callback method, defined by MonkeyActionCallable interface
-	# - Back of wokeUpAction method 
-	redef fun wokeUp( sender:Monkey, message:Object )
+	# - Back of woke_up_action method
+	redef fun woke_up(sender:Monkey, message:Object)
 	do
 		print message
 	end
