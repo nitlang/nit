@@ -1,4 +1,5 @@
 # This file is part of NIT ( http://www.nitlanguage.org ).
+#
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
@@ -183,4 +184,20 @@ class MdDecorator
 	end
 
 	private var allowed_id_chars: Array[Char] = ['-', '_', ':', '.']
+end
+
+# Decorator for span elements.
+#
+# InlineDecorator does not decorate things like paragraphs or headers.
+class InlineDecorator
+	super HTMLDecorator
+
+	redef fun add_paragraph(v, block) do v.emit_in block
+	redef fun add_headline(v, block) do v.emit_in block
+
+	redef fun add_code(v, block) do
+		v.add "<code>"
+		v.emit_in block
+		v.add "</code>"
+	end
 end

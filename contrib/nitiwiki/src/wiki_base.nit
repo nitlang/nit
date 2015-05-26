@@ -115,11 +115,11 @@ class Nitiwiki
 	# List markdown source files from a directory.
 	fun list_md_files(dir: String): Array[String] do
 		var files = new Array[String]
-		var pipe = new ProcessReader("find", dir, "-name", "*.md")
+		var pipe = new ProcessReader("find", dir, "-name", "*.{config.md_ext}")
 		while not pipe.eof do
 			var file = pipe.read_line
 			if file == "" then break # last line
-			var name = file.basename(".md")
+			var name = file.basename(".{config.md_ext}")
 			if name == "header" or name == "footer" or name == "menu" then continue
 			files.add file
 		end
@@ -188,7 +188,10 @@ class Nitiwiki
 	#
 	# REQUIRE: `has_template`
 	fun load_template(name: String): TemplateString do
-		assert has_template(name)
+		if not has_template(name) then
+			message("Error: can't load template `{name}`", 0)
+			exit 1
+		end
 		var file = expand_path(config.root_dir, config.templates_dir, name)
 		var tpl = new TemplateString.from_file(file)
 		if tpl.has_macro("ROOT_URL") then
@@ -520,7 +523,7 @@ class WikiArticle
 	# Create a new article using a markdown source file.
 	init from_source(wiki: Nitiwiki, md_file: String) do
 		src_full_path = md_file
-		init(wiki, md_file.basename(".md"))
+		init(wiki, md_file.basename(".{wiki.config.md_ext}"))
 		content = md
 	end
 
@@ -599,6 +602,14 @@ class WikiConfig
 	# * default: `http://localhost/`
 	var root_url: String is lazy do return value_or_default("wiki.root_url", "http://localhost/")
 
+	# Markdown extension recognized by this wiki.
+	#
+	# We allow only one kind of extension per wiki.
+	# Files with other markdown extensions will be treated as resources.
+	#
+	# * key: `wiki.md_ext`
+	# * default: `md`
+	var md_ext: String is lazy do return value_or_default("wiki.md_ext", "md")
 
 	# Root directory of the wiki.
 	#
