@@ -294,7 +294,10 @@ redef class DocComposite
 	# A short, undecorated title that goes in the table of contents.
 	#
 	# By default, returns `html_title.to_s`, subclasses should redefine it.
-	var toc_title: String is lazy, writable do return html_title.to_s
+	var html_toc_title: nullable String is lazy, writable do
+		if html_title == null then return toc_title
+		return html_title.write_to_string
+	end
 
 	# Is `self` hidden in the table of content?
 	var is_toc_hidden = false is writable
@@ -304,8 +307,7 @@ redef class DocComposite
 		if is_toc_hidden then return
 
 		var content = new Template
-		content.add new Link("#{html_id}", toc_title)
-
+		content.add new Link("#{html_id}", html_toc_title.to_s)
 		if not children.is_empty then
 			var sublst = new UnorderedList
 			sublst.css_classes.add "nav"
@@ -365,7 +367,8 @@ redef class TabbedGroup
 		var tabs = new DocTabs("{html_id}.tabs", "")
 		for child in children do
 			if child.is_hidden then continue
-			tabs.add_panel new DocTabPanel(child.html_tab_id, child.toc_title, child)
+			var title = child.html_toc_title or else child.toc_title or else ""
+			tabs.add_panel new DocTabPanel(child.html_tab_id, title, child)
 		end
 		addn tabs
 	end
@@ -479,7 +482,8 @@ redef class IntroArticle
 		end
 		for child in children do
 			if child.is_hidden then continue
-			tabs.add_panel new DocTabPanel(child.html_tab_id, child.toc_title, child)
+			var title = child.html_toc_title or else child.toc_title or else ""
+			tabs.add_panel new DocTabPanel(child.html_tab_id, title, child)
 		end
 		var lnk = html_source_link
 		if lnk != null then
@@ -504,7 +508,7 @@ redef class DefinitionListArticle
 	end
 
 	redef var html_subtitle is lazy do return mentity.html_namespace
-	redef var toc_title is lazy do return mentity.html_name
+	redef var html_toc_title is lazy do return mentity.html_name
 end
 
 redef class DefinitionArticle
@@ -540,7 +544,8 @@ redef class DefinitionArticle
 		end
 		for child in children do
 			if child.is_hidden then continue
-			tabs.add_panel new DocTabPanel(child.html_tab_id, child.toc_title, child)
+			var title = child.html_toc_title or else child.toc_title or else ""
+			tabs.add_panel new DocTabPanel(child.html_tab_id, title, child)
 		end
 		var lnk = html_source_link
 		if lnk != null then
@@ -612,7 +617,6 @@ end
 
 redef class GraphArticle
 	redef var html_title = null
-	redef var toc_title do return "Graph"
 	redef var is_hidden = false
 	redef var is_toc_hidden = true
 
