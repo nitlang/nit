@@ -31,9 +31,9 @@ class AttributesImpl
 	super Attributes
 
 	private var data = new Array[String]
-	redef var length: Int = 0
+	redef var length = 0
 
-	redef fun uri(index: Int): nullable String do
+	redef fun uri(index) do
 		if index >= 0 and index < length then
 			return data[index * 5]
 		else
@@ -41,7 +41,7 @@ class AttributesImpl
 		end
 	end
 
-	redef fun local_name(index: Int): nullable String do
+	redef fun local_name(index) do
 		if index >= 0 and index < length then
 			return data[index * 5 + 1]
 		else
@@ -49,7 +49,7 @@ class AttributesImpl
 		end
 	end
 
-	redef fun qname(index: Int): nullable String do
+	redef fun qname(index) do
 		if index >= 0 and index < length then
 			return data[index * 5 + 2]
 		else
@@ -85,7 +85,7 @@ class AttributesImpl
 	# are not available.
 	#
 	# SEE: `length`
-	redef fun type_of(index): nullable String do
+	redef fun type_of(index) do
 		if index isa Int then
 			if index >= 0 and index < length then
 				return data[index * 5 + 3]
@@ -124,7 +124,7 @@ class AttributesImpl
 	# are not available.
 	#
 	# SEE: `length`
-	redef fun value_of(index): nullable String do
+	redef fun value_of(index) do
 		if index isa Int then
 			if index >= 0 and index < length then
 				return data[index * 5 + 4]
@@ -157,7 +157,7 @@ class AttributesImpl
 	#
 	# The index of the attribute, or -1 if it does not
 	# appear in the list.
-	redef fun index_ns(uri: String, local_name: String): Int do
+	redef fun index_ns(uri, local_name) do
 		var i = 0
 
 		if "" != local_name then
@@ -184,7 +184,7 @@ class AttributesImpl
 	#
 	# The index of the attribute, or -1 if it does not
 	# appear in the list.
-	redef fun index_of(qname: String): Int do
+	redef fun index_of(qname) do
 		var i = 0
 
 		if "" != qname then
@@ -218,7 +218,7 @@ class AttributesImpl
 	# The attribute type as a string, or `null` if the
 	# attribute is not in the list or if Namespace
 	# processing is not being performed.
-	redef fun type_ns(uri: String, local_name: String): nullable String do
+	redef fun type_ns(uri, local_name) do
 		var i = 0
 
 		if "" != local_name then
@@ -252,7 +252,7 @@ class AttributesImpl
 	# The attribute value as a string, or `null` if the
 	# attribute is not in the list or if Namespace
 	# processing is not being performed.
-	redef fun value_ns(uri: String, local_name: String): nullable String do
+	redef fun value_ns(uri, local_name) do
 		var i = 0
 
 		if "" != local_name then

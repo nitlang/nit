@@ -42,14 +42,14 @@ class XMLFilterImpl
 
 	# XMLFilter
 
-	redef var parent: nullable XMLReader = null is writable
+	redef var parent = null is writable
 
 	# XMLReader
 
-	redef var entity_resolver: nullable EntityResolver = null is writable
-	redef var dtd_handler: nullable DTDHandler = null is writable
-	redef var content_handler: nullable ContentHandler = null is writable
-	redef var error_handler: nullable ErrorHandler = null is writable
+	redef var entity_resolver = null is writable
+	redef var dtd_handler = null is writable
+	redef var content_handler = null is writable
+	redef var error_handler = null is writable
 
 
 	############################################################################
@@ -73,7 +73,7 @@ class XMLFilterImpl
 		parent = parent_reader
 	end
 
-	redef fun feature_recognized(name: String): Bool do
+	redef fun feature_recognized(name) do
 		if parent == null then
 			return false
 		else
@@ -81,7 +81,7 @@ class XMLFilterImpl
 		end
 	end
 
-	redef fun feature_readable(name: String): Bool do
+	redef fun feature_readable(name) do
 		if parent == null then
 			return false
 		else
@@ -89,7 +89,7 @@ class XMLFilterImpl
 		end
 	end
 
-	redef fun feature_writable(name: String): Bool do
+	redef fun feature_writable(name) do
 		if parent == null then
 			return false
 		else
@@ -112,7 +112,7 @@ class XMLFilterImpl
 	# SEE: `feature_recognized`
 	#
 	# SEE: `feature_readable`
-	redef fun feature(name: String): Bool do
+	redef fun feature(name) do
 		assert sax_recognized: parent != null else
 			sys.stderr.write("Feature: {name}\n")
 		end
@@ -136,14 +136,14 @@ class XMLFilterImpl
 	# SEE: `feature_recognized`
 	#
 	# SEE: `feature_writable`
-	redef fun feature=(name: String, value: Bool) do
+	redef fun feature=(name, value) do
 		assert sax_recognized: parent != null else
 			sys.stderr.write("Feature: {name}\n")
 		end
 		parent.feature(name) = value
 	end
 
-	redef fun property_recognized(name: String): Bool do
+	redef fun property_recognized(name) do
 		if parent == null then
 			return false
 		else
@@ -151,7 +151,7 @@ class XMLFilterImpl
 		end
 	end
 
-	redef fun property_readable(name: String): Bool do
+	redef fun property_readable(name) do
 		if parent == null then
 			return false
 		else
@@ -159,7 +159,7 @@ class XMLFilterImpl
 		end
 	end
 
-	redef fun property_writable(name: String): Bool do
+	redef fun property_writable(name) do
 		if parent == null then
 			return false
 		else
@@ -180,7 +180,7 @@ class XMLFilterImpl
 	# SEE: `property_recognized`
 	#
 	# SEE: `property_readable`
-	redef fun property(name: String): nullable Object do
+	redef fun property(name) do
 		assert sax_recognized: parent != null else
 			sys.stderr.write("Property: {name}\n")
 		end
@@ -204,19 +204,19 @@ class XMLFilterImpl
 	# SEE: `property_recognized`
 	#
 	# SEE: `property_writable`
-	redef fun property=(name: String, value: nullable Object) do
+	redef fun property=(name, value) do
 		assert sax_recognized: parent != null else
 			sys.stderr.write("Property: {name}\n")
 		end
 		parent.property(name) = value
 	end
 
-	redef fun parse(input: InputSource) do
+	redef fun parse(input) do
 		setup_parse
 		parent.parse(input)
 	end
 
-	redef fun parse_file(system_id: String) do
+	redef fun parse_file(system_id) do
 		var source = new InputSource
 
 		source.system_id = system_id
@@ -227,9 +227,7 @@ class XMLFilterImpl
 	############################################################################
 	# EntityResolver
 
-	redef fun resolve_entity(public_id: nullable String,
-			system_id: nullable String):
-			nullable InputSource do
+	redef fun resolve_entity(public_id, system_id) do
 		if entity_resolver == null then
 			return null
 		else
@@ -241,15 +239,13 @@ class XMLFilterImpl
 	############################################################################
 	# DTDHandler
 
-	redef fun notation_decl(name: String, public_id: String,
-			system_id: String) do
+	redef fun notation_decl(name, public_id, system_id) do
 		if dtd_handler != null then
 			dtd_handler.notation_decl(name, public_id, system_id)
 		end
 	end
 
-	redef fun unparsed_entity_decl(name: String, public_id: String,
-			system_id: String) do
+	redef fun unparsed_entity_decl(name, public_id, system_id) do
 		if dtd_handler != null then
 			dtd_handler.unparsed_entity_decl(name, public_id, system_id)
 		end
@@ -259,7 +255,7 @@ class XMLFilterImpl
 	############################################################################
 	# ContentHandler
 
-	redef fun document_locator=(locator: SAXLocator) do
+	redef fun document_locator=(locator) do
 		if content_handler != null then
 			content_handler.document_locator = locator
 		end
@@ -277,50 +273,49 @@ class XMLFilterImpl
 		end
 	end
 
-	redef fun start_prefix_mapping(prefix: String, uri: String) do
+	redef fun start_prefix_mapping(prefix, uri) do
 		if content_handler != null then
 			content_handler.start_prefix_mapping(prefix, uri)
 		end
 	end
 
-	redef fun end_prefix_mapping(prefix: String) do
+	redef fun end_prefix_mapping(prefix) do
 		if content_handler != null then
 			content_handler.end_prefix_mapping(prefix)
 		end
 	end
 
-	redef fun start_element(uri: String, local_name: String, qname: String,
-			atts: Attributes) do
+	redef fun start_element(uri, local_name, qname, atts) do
 		if content_handler != null then
 			content_handler.start_element(uri, local_name, qname, atts)
 		end
 	end
 
-	redef fun end_element(uri: String, local_name: String, qname: String) do
+	redef fun end_element(uri, local_name, qname) do
 		if content_handler != null then
 			content_handler.end_element(uri, local_name, qname)
 		end
 	end
 
-	redef fun characters(str: String) do
+	redef fun characters(str) do
 		if content_handler != null then
 			content_handler.characters(str)
 		end
 	end
 
-	redef fun ignorable_whitespace(str: String) do
+	redef fun ignorable_whitespace(str) do
 		if content_handler != null then
 			content_handler.ignorable_whitespace(str)
 		end
 	end
 
-	redef fun processing_instruction(target: String, data: nullable String) do
+	redef fun processing_instruction(target, data) do
 		if content_handler != null then
 			content_handler.processing_instruction(target, data)
 		end
 	end
 
-	redef fun skipped_entity(name: String) do
+	redef fun skipped_entity(name) do
 		if content_handler != null then
 			content_handler.skipped_entity(name)
 		end
@@ -330,19 +325,19 @@ class XMLFilterImpl
 	############################################################################
 	# ErrorHandler
 
-	redef fun warning(exception: SAXParseException) do
+	redef fun warning(exception) do
 		if error_handler != null then
 			error_handler.warning(exception)
 		end
 	end
 
-	redef fun error(exception: SAXParseException) do
+	redef fun error(exception) do
 		if error_handler != null then
 			error_handler.error(exception)
 		end
 	end
 
-	redef fun fatal_error(exception: SAXParseException) do
+	redef fun fatal_error(exception) do
 		if error_handler != null then
 			error_handler.fatal_error(exception)
 		else

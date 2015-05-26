@@ -68,63 +68,63 @@ class XophonReader
 	private var model = new XophonReaderModel
 	private var lexer: XophonLexer is noinit
 
-	redef fun entity_resolver: nullable EntityResolver do return model.entity_resolver
-	redef fun entity_resolver=(entity_resolver: nullable EntityResolver) do
+	redef fun entity_resolver do return model.entity_resolver
+	redef fun entity_resolver=(entity_resolver) do
 		model.entity_resolver = entity_resolver
 	end
 
-	redef fun dtd_handler: nullable DTDHandler do return model.dtd_handler
-	redef fun dtd_handler=(dtd_handler: nullable DTDHandler) do
+	redef fun dtd_handler do return model.dtd_handler
+	redef fun dtd_handler=(dtd_handler) do
 		model.dtd_handler = dtd_handler
 	end
 
-	redef fun content_handler: nullable ContentHandler do return model.content_handler
-	redef fun content_handler=(content_handler: nullable ContentHandler) do
+	redef fun content_handler do return model.content_handler
+	redef fun content_handler=(content_handler) do
 		model.content_handler = content_handler
 	end
 
-	redef fun error_handler: nullable ErrorHandler do return model.error_handler
-	redef fun error_handler=(error_handler: nullable ErrorHandler) do
+	redef fun error_handler do return model.error_handler
+	redef fun error_handler=(error_handler) do
 		model.error_handler = error_handler
 	end
 
 
-	redef fun feature_recognized(name: String): Bool do
+	redef fun feature_recognized(name) do
 		return model.feature_recognized(name)
 	end
 
-	redef fun feature_readable(name: String): Bool do
+	redef fun feature_readable(name) do
 		return model.feature_readable(name)
 	end
 
-	redef fun feature_writable(name: String): Bool do
+	redef fun feature_writable(name) do
 		return model.feature_readable(name)
 	end
 
-	redef fun feature(name: String): Bool do return model.feature(name)
-	redef fun feature=(name: String, value: Bool) do model.feature(name) = value
+	redef fun feature(name) do return model.feature(name)
+	redef fun feature=(name, value) do model.feature(name) = value
 
-	redef fun property_recognized(name: String): Bool do
+	redef fun property_recognized(name) do
 		return model.property_recognized(name)
 	end
 
-	redef fun property_readable(name: String): Bool do
+	redef fun property_readable(name) do
 		return model.property_readable(name)
 	end
 
-	redef fun property_writable(name: String): Bool do
+	redef fun property_writable(name) do
 		return model.property_writable(name)
 	end
 
-	redef fun property(name: String): nullable Object do
+	redef fun property(name) do
 		return model.property(name)
 	end
 
-	redef fun property=(name: String, value: nullable Object) do
+	redef fun property=(name, value) do
 		model.property(name) = value
 	end
 
-	redef fun parse(input: InputSource) do
+	redef fun parse(input) do
 		var system_id: nullable MaybeError[String, Error] = null
 		model.locator = new SAXLocatorImpl
 
@@ -157,7 +157,7 @@ class XophonReader
 		end
 	end
 
-	redef fun parse_file(system_id: String) do
+	redef fun parse_file(system_id) do
 		parse(new InputSource.with_system_id(system_id))
 	end
 
