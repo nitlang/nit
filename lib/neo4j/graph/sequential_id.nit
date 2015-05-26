@@ -63,7 +63,7 @@ class SequentialNodeCollection
 		return nodes[id]
 	end
 
-	redef fun has_id(id: Int): Bool do
+	redef fun has_id(id) do
 		return id >= 0 and id < nodes.length and nodes[id] isa NeoNode
 	end
 
