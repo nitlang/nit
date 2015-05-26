@@ -32,7 +32,7 @@ redef class MarkdownProcessor
 		if not token isa TokenLink then return token
 		if pos + 1 < text.length then
 			var c = text[pos + 1]
-			if c == '[' then return new TokenWikiLink(pos, c)
+			if c == '[' then return new TokenWikiLink(token.location, pos, c)
 		end
 		return token
 	end
