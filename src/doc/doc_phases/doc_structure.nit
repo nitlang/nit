@@ -53,7 +53,7 @@ redef class OverviewPage
 		var mprojects = doc.model.mprojects.to_a
 		var sorter = new MConcernRankSorter
 		sorter.sort mprojects
-		var section = new ProjectsSection("section:projects")
+		var section = new ProjectsSection("projects.section")
 		for mproject in mprojects do
 			section.add_child new DefinitionArticle("article:{mproject.nitdoc_id}.definition", mproject)
 		end
@@ -75,7 +75,7 @@ end
 
 redef class MGroupPage
 	redef fun apply_structure(v, doc) do
-		var section = new MEntitySection("section:{mentity.nitdoc_name}", mentity)
+		var section = new MEntitySection("{mentity.nitdoc_name}.section", mentity)
 		root.add_child section
 		if mentity.is_root then
 			section.add_child new IntroArticle("article:{mentity.mproject.nitdoc_id}.intro", mentity.mproject)
@@ -103,7 +103,7 @@ end
 
 redef class MModulePage
 	redef fun apply_structure(v, doc) do
-		var section = new MEntitySection("section:{mentity.nitdoc_name}", mentity)
+		var section = new MEntitySection("{mentity.nitdoc_name}.section", mentity)
 		root.add_child section
 		section.add_child new IntroArticle("article:{mentity.nitdoc_id}.intro", mentity)
 		var concerns = self.concerns
@@ -168,7 +168,7 @@ end
 
 redef class MClassPage
 	redef fun apply_structure(v, doc) do
-		var section = new MEntitySection("section:{mentity.nitdoc_name}", mentity)
+		var section = new MEntitySection("{mentity.nitdoc_name}.section", mentity)
 		root.add_child section
 		section.add_child new IntroArticle("article:{mentity.nitdoc_id}.intro", mentity)
 		var concerns = self.concerns
@@ -244,7 +244,7 @@ end
 
 redef class MPropertyPage
 	redef fun apply_structure(v, doc) do
-		var section = new MEntitySection("section:{mentity.nitdoc_name}", mentity)
+		var section = new MEntitySection("{mentity.nitdoc_name}.section", mentity)
 		root.add_child section
 		section.add_child new IntroArticle("article:{mentity.nitdoc_id}.intro", mentity)
 		var concerns = self.concerns
