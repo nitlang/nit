@@ -123,6 +123,9 @@ abstract class DocComposite
 	# Does `self` have `children`?
 	fun is_empty: Bool do return children.is_empty
 
+	# Title used in table of content if any.
+	var toc_title: nullable String is writable, lazy do return title
+
 	# Add a `child` to `self`.
 	#
 	# Shortcut for `children.add`.
