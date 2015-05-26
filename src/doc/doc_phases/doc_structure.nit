@@ -330,6 +330,17 @@ abstract class MEntityArticle
 	super DocArticle
 end
 
+# An article that displays a list of mentities.
+class MEntitiesListArticle
+	super DocArticle
+
+	# MEntities to display.
+	var mentities: Array[MEntity]
+
+	redef fun is_hidden do return mentities.is_empty
+end
+
+
 # A section about a Mentity.
 #
 # Used to regroup content about a MEntity.

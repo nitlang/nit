@@ -58,10 +58,10 @@ redef class DefinitionArticle
 		var group = new PanelGroup("list.group", "List")
 		var intros = mmodule.intro_mclassdefs(v.ctx.min_visibility).to_a
 		doc.mainmodule.linearize_mclassdefs(intros)
-		group.add_child new IntrosRedefsListArticle("{mentity.nitdoc_id}.intros", "Introduces", intros)
+		group.add_child new MEntitiesListArticle("{mentity.nitdoc_id}.intros", "Introduces", intros)
 		var redefs = mmodule.redef_mclassdefs(v.ctx.min_visibility).to_a
 		doc.mainmodule.linearize_mclassdefs(redefs)
-		group.add_child new IntrosRedefsListArticle("{mentity.nitdoc_id}.redefs", "Redefines", redefs)
+		group.add_child new MEntitiesListArticle("{mentity.nitdoc_id}.redefs", "Redefines", redefs)
 		section.add_child group
 		add_child(section)
 	end
@@ -73,11 +73,11 @@ redef class DefinitionArticle
 		var intros = mclassdef.collect_intro_mpropdefs(v.ctx.min_visibility).to_a
 		# FIXME avoid diff changes
 		# v.ctx.mainmodule.linearize_mpropdefs(intros)
-		group.add_child new IntrosRedefsListArticle("{mentity.nitdoc_id}.intros", "Introduces", intros)
+		group.add_child new MEntitiesListArticle("{mentity.nitdoc_id}.intros", "Introduces", intros)
 		var redefs = mclassdef.collect_redef_mpropdefs(v.ctx.min_visibility).to_a
 		# FIXME avoid diff changes
 		# v.ctx.mainmodule.linearize_mpropdefs(redefs)
-		group.add_child new IntrosRedefsListArticle("{mentity.nitdoc_id}.redefs", "Redefines", redefs)
+		group.add_child new MEntitiesListArticle("{mentity.nitdoc_id}.redefs", "Redefines", redefs)
 		section.add_child group
 		add_child(section)
 	end
@@ -89,19 +89,5 @@ class IntrosRedefsSection
 	super TabbedGroup
 	super MEntitySection
 
-	redef var is_toc_hidden = true
-end
-
-# An article that displays a list of introduced / refined mentities.
-#
-# FIXME diff hack
-# This can merged with InheritanceListArticle in a more generic class.
-class IntrosRedefsListArticle
-	super DocArticle
-
-	# Intro mentities to list.
-	var mentities: Array[MEntity]
-
-	redef fun is_hidden do return mentities.is_empty
 	redef var is_toc_hidden = true
 end

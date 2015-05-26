@@ -45,10 +45,10 @@ redef class MModulePage
 		var group = new PanelGroup("list.group", "List")
 		var imports = self.imports.to_a
 		v.name_sorter.sort(imports)
-		group.add_child new HierarchyListArticle("{id}.imports", "Imports", imports)
+		group.add_child new MEntitiesListArticle("{id}.imports", "Imports", imports)
 		var clients = self.clients.to_a
 		v.name_sorter.sort(clients)
-		group.add_child new HierarchyListArticle("{id}.clients", "Clients", clients)
+		group.add_child new MEntitiesListArticle("{id}.clients", "Clients", clients)
 		section.add_child group
 		section.parent = root.children.first
 		root.children.first.children.insert(section, 1)
@@ -62,16 +62,16 @@ redef class MClassPage
 		var group = new PanelGroup("list.group", "List")
 		var parents = self.parents.to_a
 		v.name_sorter.sort(parents)
-		group.add_child new HierarchyListArticle("{id}.parents", "Parents", parents)
+		group.add_child new MEntitiesListArticle("{id}.parents", "Parents", parents)
 		var ancestors = self.ancestors.to_a
 		v.name_sorter.sort(ancestors)
-		group.add_child new HierarchyListArticle("{id}.ancestors", "Ancestors", ancestors)
+		group.add_child new MEntitiesListArticle("{id}.ancestors", "Ancestors", ancestors)
 		var children = self.children.to_a
 		v.name_sorter.sort(children)
-		group.add_child new HierarchyListArticle("{id}.children", "Children", children)
+		group.add_child new MEntitiesListArticle("{id}.children", "Children", children)
 		var descendants = self.descendants.to_a
 		v.name_sorter.sort(descendants)
-		group.add_child new HierarchyListArticle("{id}.descendants", "Descendants", descendants)
+		group.add_child new MEntitiesListArticle("{id}.descendants", "Descendants", descendants)
 		section.add_child group
 		section.parent = root.children.first
 		root.children.first.children.insert(section, 1)
@@ -88,14 +88,4 @@ end
 class InheritanceListSection
 	super TabbedGroup
 	super MEntityComposite
-end
-
-# Dislay a hierarchical list of mentities.
-class HierarchyListArticle
-	super DocArticle
-
-	# MEntities to display in this list.
-	var mentities: Array[MEntity]
-
-	redef fun is_hidden do return mentities.is_empty
 end
