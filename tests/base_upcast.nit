@@ -14,13 +14,13 @@ end
 
 fun maybe: Bool do return true
 
-var ai = new A[Int]
-var ab = new A[Bool]
-var bi = new B[Int]
-var bb = new B[Bool]
-var ci = new C[Int]
-var cb = new C[Bool]
-var d = new D
+var ai: A[Int] = new A[Int]
+var ab: A[Bool] = new A[Bool]
+var bi: B[Int] = new B[Int]
+var bb: B[Bool] = new B[Bool]
+var ci: C[Int] = new C[Int]
+var cb: C[Bool] = new C[Bool]
+var d: D = new D
 
 if maybe then ai = ai
 #alt1#if maybe then ai = ab

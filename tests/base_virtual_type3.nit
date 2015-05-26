@@ -28,5 +28,5 @@ c.tab = new Array[T]
 c.tab.add(new U)
 c.tab.first.foo
 
-var i = 2
+var i: Int = 2
 #alt1#i = c.tab.first

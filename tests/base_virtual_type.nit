@@ -34,7 +34,7 @@ end
 
 var b = new B
 var t = new T
-var i = 2
+var i: Int = 2
 var t2 = b.e
 #alt1#i = b.e
 #alt2#b.e = i
