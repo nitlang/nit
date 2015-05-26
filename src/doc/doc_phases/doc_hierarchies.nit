@@ -41,7 +41,7 @@ end
 redef class MModulePage
 	redef fun build_inh_list(v, doc) do
 		var id = mentity.nitdoc_id
-		var section = new ImportationListSection("section:{id}.importation", mentity)
+		var section = new ImportationListSection("{id}.importation", mentity)
 		var group = new PanelGroup("group:list", "List")
 		var imports = self.imports.to_a
 		v.name_sorter.sort(imports)
@@ -58,7 +58,7 @@ end
 redef class MClassPage
 	redef fun build_inh_list(v, doc) do
 		var id = mentity.nitdoc_id
-		var section = new InheritanceListSection("section:{id}.inheritance", mentity)
+		var section = new InheritanceListSection("{id}.inheritance", mentity)
 		var group = new PanelGroup("group:list", "List")
 		var parents = self.parents.to_a
 		v.name_sorter.sort(parents)
