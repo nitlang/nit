@@ -164,3 +164,37 @@ redef class NativeString super DirectSerializable end
 redef class String super DirectSerializable end
 redef class SimpleCollection[E] super Serializable end
 redef class Map[K, V] super Serializable end
+
+redef class Couple[F, S]
+	super Serializable
+
+	redef init from_deserializer(v)
+	do
+		v.notify_of_creation self
+		var first = v.deserialize_attribute("first")
+		var second = v.deserialize_attribute("second")
+		init(first, second)
+	end
+
+	redef fun core_serialize_to(v)
+	do
+		v.serialize_attribute("first", first)
+		v.serialize_attribute("second", second)
+	end
+end
+
+redef class Container[E]
+	super Serializable
+
+	redef init from_deserializer(v)
+	do
+		v.notify_of_creation self
+		var item = v.deserialize_attribute("item")
+		init item
+	end
+
+	redef fun core_serialize_to(v)
+	do
+		v.serialize_attribute("item", first)
+	end
+end

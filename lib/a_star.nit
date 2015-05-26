@@ -55,8 +55,12 @@
 # ~~~
 module a_star
 
+import serialization
+
 # General graph node
 class Node
+	super Serializable
+
 	# Type of the others nodes in the `graph`
 	type N: Node
 
@@ -183,10 +187,32 @@ class Node
 			end
 		end
 	end
+
+	# We customize the serialization process to avoid problems with recursive
+	# serialization engines. These engines, such as `JsonSerializer`,
+	# are at danger to serialize the graph as a very deep tree.
+	# With a large graph it can cause a stack overflow.
+	#
+	# Instead, we serialize the nodes first and then the links.
+	redef fun core_serialize_to(serializer: Serializer)
+	do
+		serializer.serialize_attribute("graph", graph)
+	end
+
+	redef init from_deserializer(deserializer)
+	do
+		deserializer.notify_of_creation self
+
+		var graph = deserializer.deserialize_attribute("graph")
+		assert graph isa Graph[N, Link]
+		self.graph = graph
+	end
 end
 
 # Link between two nodes and associated to a graph
 class Link
+	auto_serializable
+
 	# Type of the nodes in `graph`
 	type N: Node
 
@@ -210,6 +236,8 @@ end
 
 # General graph
 class Graph[N: Node, L: Link]
+	super Serializable
+
 	# Nodes in this graph
 	var nodes: Set[N] = new HashSet[N]
 
@@ -236,15 +264,35 @@ class Graph[N: Node, L: Link]
 
 	# Used to check if nodes have been searched in one pathfinding
 	private var pathfinding_current_evocation: Int = 0
+
+	redef fun core_serialize_to(serializer: Serializer)
+	do
+		serializer.serialize_attribute("nodes", nodes)
+		serializer.serialize_attribute("links", links)
+	end
+
+	redef init from_deserializer(deserializer)
+	do
+		deserializer.notify_of_creation self
+
+		var nodes = deserializer.deserialize_attribute("nodes")
+		assert nodes isa HashSet[N]
+		self.nodes = nodes
+
+		var links = deserializer.deserialize_attribute("links")
+		assert links isa HashSet[L]
+		for link in links do add_link link
+	end
 end
 
 # Result from path finding and a walkable path
 class AStarPath[N]
+	auto_serializable
 
-	# The total cost of this path
+	# Total cost of this path
 	var total_cost: Int
 
-	# The list of nodes composing this path
+	# Nodes composing this path
 	var nodes = new List[N]
 
 	private var at: Int = 0
@@ -269,6 +317,8 @@ end
 
 # Context related to an evocation of pathfinding
 class PathContext
+	auto_serializable
+
 	# Type of the nodes in `graph`
 	type N: Node
 
@@ -302,6 +352,7 @@ end
 # Warning: A* is not optimize for such a case
 class ConstantPathContext
 	super PathContext
+	auto_serializable
 
 	redef fun worst_cost do return 1
 	redef fun cost(l) do return 1
@@ -313,6 +364,7 @@ end
 # A `PathContext` for graphs with `WeightedLink`
 class WeightedPathContext
 	super PathContext
+	auto_serializable
 
 	redef type L: WeightedLink
 
@@ -341,6 +393,7 @@ end
 # A `Link` with a `weight`
 class WeightedLink
 	super Link
+	auto_serializable
 
 	# The `weight`, or cost, of this link
 	var weight: Int
@@ -348,6 +401,8 @@ end
 
 # Advanced path conditions with customizable accept states
 class TargetCondition[N: Node]
+	auto_serializable
+
 	# Should the pathfinding accept `node` as a goal?
 	fun accept(node: N): Bool is abstract
 
