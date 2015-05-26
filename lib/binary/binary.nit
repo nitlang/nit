@@ -86,6 +86,28 @@ redef abstract class Writer
 		write_byte int
 	end
 
+	# Write `text` as a null terminated string
+	#
+	# To be used with `Reader::read_string`.
+	#
+	# Require: `text` has no null bytes.
+	fun write_string(text: Text)
+	do
+		write text
+		write_byte 0x00
+	end
+
+	# Write the length as a 64 bits integer, then the content of `text`
+	#
+	# To be used with `Reader::read_block`.
+	#
+	# Compared to `write_string`, this method supports null bytes in `text`.
+	fun write_block(text: Text)
+	do
+		write_int64 text.length
+		write text
+	end
+
 	# Write a floating point `value` on 32 bits
 	#
 	# Using this format may result in a loss of precision as it uses less bits
@@ -136,6 +158,29 @@ redef abstract class Reader
 		var int = read_byte
 		if int == null then return new Array[Bool]
 		return [for b in 8.times do int.bin_and(2**b) > 0]
+	end
+
+	# Read a null terminated string
+	#
+	# To be used with `Writer::write_string`.
+	fun read_string: String
+	do
+		var buf = new FlatBuffer
+		loop
+			var byte = read_byte
+			if byte == 0x00 then return buf.to_s
+			buf.chars.add byte.ascii
+		end
+	end
+
+	# Read the length as a 64 bits integer, then the content of the block
+	#
+	# To be used with `Writer::write_block`.
+	fun read_block: String
+	do
+		var length = read_int64
+		if length == 0 then return ""
+		return read(length)
 	end
 
 	# Read a floating point on 32 bits and return it as a `Float`
