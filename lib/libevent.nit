@@ -188,7 +188,7 @@ extern class NativeBufferEvent `{ struct bufferevent * `}
 	# Write the byte `value`
 	fun write_byte(value: Int): Int `{
 		unsigned char byt = (unsigned char)value;
-		return bufferevent_write(recv, &byt, 1);
+		return bufferevent_write(self, &byt, 1);
 	`}
 
 	# Check if we have anything left in our buffers. If so, we set our connection to be closed
