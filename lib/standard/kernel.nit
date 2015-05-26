@@ -275,6 +275,12 @@ interface Numeric
 	#     assert 5.to_f         != 5 # Float and Int are not equals
 	fun to_f: Float is abstract
 
+	# The byte equivalent of `self`
+	#
+	#     assert (-1).to_b == 0xFF.to_b
+	#     assert (1.9).to_b == 1.to_b
+	fun to_b: Byte is abstract
+
 	# Is this the value of zero in its domain?
 	fun is_zero: Bool do return self == zero
 
@@ -344,6 +350,7 @@ universal Float
 
 	redef fun to_i is intern
 	redef fun to_f do return self
+	redef fun to_b is intern
 
 	redef fun zero do return 0.0
 	redef fun value_of(val) do return val.to_f
@@ -381,6 +388,110 @@ universal Float
 	do
 		assert precision >= 0.0
 		return self <= other + precision and self >= other - precision
+	end
+
+	redef fun max(other)
+	do
+		if self < other then
+			return other
+		else
+			return self
+		end
+	end
+
+	redef fun min(c)
+	do
+		if c < self then
+			return c
+		else
+			return self
+		end
+	end
+end
+
+# Native bytes.
+# Same as a C `unsigned char`
+universal Byte
+	super Discrete
+	super Numeric
+
+	redef type OTHER: Byte
+
+	redef fun successor(i) do return self + i.to_b
+	redef fun predecessor(i) do return self - i.to_b
+
+	redef fun object_id is intern
+	redef fun hash do return self.to_i
+	redef fun ==(i) is intern
+	redef fun !=(i) is intern
+	redef fun output is intern
+
+	redef fun <=(i) is intern
+	redef fun <(i) is intern
+	redef fun >=(i) is intern
+	redef fun >(i) is intern
+	redef fun +(i) is intern
+
+	# On an Byte, unary minus will return `(256 - self) % 256`
+	#
+	#     assert -(1.to_b) == 0xFF.to_b
+	#     assert -(0.to_b) == 0x00.to_b
+	redef fun - is intern
+	redef fun -(i) is intern
+	redef fun *(i) is intern
+	redef fun /(i) is intern
+
+	# Modulo of `self` with `i`.
+	#
+	# Finds the remainder of division of `self` by `i`.
+	#
+	#     assert 5.to_b % 2.to_b		== 1.to_b
+	#     assert 10.to_b % 2.to_b		== 0.to_b
+	fun %(i: Byte): Byte is intern
+
+	redef fun zero do return 0.to_b
+	redef fun value_of(val) do return val.to_b
+
+	# `i` bits shift fo the left (aka <<)
+	#
+	#     assert 5.to_b.lshift(1)    == 10.to_b
+	fun lshift(i: Int): Byte is intern
+
+	# alias of `lshift`
+	fun <<(i: Int): Byte do return lshift(i)
+
+	# `i` bits shift fo the right (aka >>)
+	#
+	#     assert 5.to_b.rshift(1)    == 2.to_b
+	fun rshift(i: Int): Byte is intern
+
+	# alias of `rshift`
+	fun >>(i: Int): Byte do return rshift(i)
+
+	redef fun to_i is intern
+	redef fun to_f is intern
+	redef fun to_b do return self
+
+	redef fun distance(i) do return (self - i).to_i
+
+	redef fun <=>(other)
+	do
+		if self < other then
+			return -1
+		else if other < self then
+			return 1
+		else
+			return 0
+		end
+	end
+
+	redef fun is_between(c, d)
+	do
+		if self < c or d < self then
+			return false
+		else
+			return true
+		end
 	end
 
 	redef fun max(other)
@@ -459,6 +570,7 @@ universal Int
 
 	redef fun to_i do return self
 	redef fun to_f is intern
+	redef fun to_b is intern
 
 	redef fun distance(i)
 	do

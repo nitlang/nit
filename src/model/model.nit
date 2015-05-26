@@ -206,6 +206,9 @@ redef class MModule
 	# The primitive type `Int`
 	var int_type: MClassType = self.get_primitive_class("Int").mclass_type is lazy
 
+	# The primitive type `Byte`
+	var byte_type: MClassType = self.get_primitive_class("Byte").mclass_type is lazy
+
 	# The primitive type `Char`
 	var char_type: MClassType = self.get_primitive_class("Char").mclass_type is lazy
 
