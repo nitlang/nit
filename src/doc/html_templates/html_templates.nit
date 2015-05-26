@@ -538,27 +538,16 @@ redef class DefinitionArticle
 	end
 end
 
-redef class HierarchyListArticle
-	redef fun render_body do
-		var lst = new UnorderedList
-		lst.css_classes.add "list-unstyled list-definition"
-		for mentity in mentities do
-			lst.add_li mentity.html_list_item
-		end
-		addn lst
-	end
-end
-
 redef class IntrosRedefsSection
 	redef var toc_title do return "Intros / Redefs"
 	redef var html_title = null
 	redef var html_subtitle = null
 end
 
-redef class IntrosRedefsListArticle
+redef class MEntitiesListArticle
 	redef fun render_body do
 		var lst = new UnorderedList
-		lst.css_classes.add "list-unstyled list-labeled"
+		lst.css_classes.add "list-unstyled list-definition"
 		for mentity in mentities do
 			lst.add_li mentity.html_list_item
 		end
