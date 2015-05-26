@@ -55,7 +55,7 @@ redef class DefinitionArticle
 	# TODO this should move to MEntity?
 	private fun build_mmodule_list(v: IntroRedefListPhase, doc: DocModel, mmodule: MModule) do
 		var section = new IntrosRedefsSection("{mentity.nitdoc_id}.intros_redefs", mentity)
-		var group = new PanelGroup("group:list", "List")
+		var group = new PanelGroup("list.group", "List")
 		var intros = mmodule.intro_mclassdefs(v.ctx.min_visibility).to_a
 		doc.mainmodule.linearize_mclassdefs(intros)
 		group.add_child new IntrosRedefsListArticle("{mentity.nitdoc_id}.intros", mentity, "Introduces", intros)
@@ -69,7 +69,7 @@ redef class DefinitionArticle
 	# TODO this should move to MEntity?
 	private fun build_mclassdef_list(v: IntroRedefListPhase, doc: DocModel, mclassdef: MClassDef) do
 		var section = new IntrosRedefsSection("{mentity.nitdoc_id}.intros_redefs", mentity)
-		var group = new PanelGroup("group:list", "List")
+		var group = new PanelGroup("list.group", "List")
 		var intros = mclassdef.collect_intro_mpropdefs(v.ctx.min_visibility).to_a
 		# FIXME avoid diff changes
 		# v.ctx.mainmodule.linearize_mpropdefs(intros)
