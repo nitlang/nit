@@ -125,4 +125,5 @@ class GraphArticle
 	var dot: Text
 
 	redef var is_hidden = false
+	redef var is_toc_hidden = true
 end
