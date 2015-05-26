@@ -232,7 +232,7 @@ redef class AIsaExpr
 		var recv = v.expr(self.n_expr)
 		if recv == null then return null
 
-		if status == 0 then optimize(v, recv.mtype, self.cast_type.as(not null))
+		optimize(v, recv.mtype, self.cast_type.as(not null))
 		var mtype = v.unanchor_type(self.cast_type.as(not null))
 
 		# If this test can be optimized, directly call appropriate subtyping methods
@@ -258,10 +258,19 @@ redef class AIsaExpr
 			return
 		end
 
-		if not target.mclass.loaded then return
+		if not target.mclass.abstract_loaded then return
 
-		# We use perfect hashing
-		status = 2
+		# If the value is positive, the target class has an invariant position in source's structures
+		var value = source.mclass.get_position_methods(target.mclass)
+
+		if value > 0 then
+			# `value - 2` is the position of the target identifier in source vtable
+			position = value - 2
+			status = 1
+		else
+			# We use perfect hashing
+			status = 2
+		end
 		id = target.mclass.vtable.id
 	end
 end
@@ -288,7 +297,7 @@ redef class AAsCastExpr
 		var recv = v.expr(self.n_expr)
 		if recv == null then return null
 
-		if status == 0 then optimize(v, recv.mtype, self.mtype.as(not null))
+		optimize(v, recv.mtype, self.mtype.as(not null))
 
 		var mtype = self.mtype.as(not null)
 		var amtype = v.unanchor_type(mtype)
@@ -323,11 +332,17 @@ redef class AAsCastExpr
 
 		if not target.mclass.loaded then return
 
-		# Try to get the position of the target type in source's structures
-		var value = source.mclass.positions_methods.get_or_null(target.mclass)
+		# If the value is positive, the target class has an invariant position in source's structures
+		var value = source.mclass.get_position_methods(target.mclass)
 
-		# We use perfect hashing
-		status = 2
+		if value > 0 then
+			# `value - 2` is the position of the target identifier in source vtable
+			position = value - 2
+			status = 1
+		else
+			# We use perfect hashing
+			status = 2
+		end
 		id = target.mclass.vtable.id
 	end
 end
