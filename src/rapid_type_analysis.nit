@@ -296,10 +296,10 @@ class RapidTypeAnalysis
 				if not ot.can_resolve_for(t, t, mainmodule) then continue
 				var rt = ot.anchor_to(mainmodule, t)
 				if live_types.has(rt) then continue
+				if not check_depth(rt) then continue
 				#print "{ot}/{t} -> {rt}"
 				live_types.add(rt)
 				todo_types.add(rt)
-				check_depth(rt)
 			end
 		end
 		#print "MType {live_types.length}: {live_types.join(", ")}"
@@ -317,12 +317,14 @@ class RapidTypeAnalysis
 		#print "cast MType {live_cast_types.length}: {live_cast_types.join(", ")}"
 	end
 
-	private fun check_depth(mtype: MClassType)
+	private fun check_depth(mtype: MClassType): Bool
 	do
 		var d = mtype.length
 		if d > 255 then
 			self.modelbuilder.toolcontext.fatal_error(null, "Fatal Error: limitation in the rapidtype analysis engine: a type depth of {d} is too important, the problematic type is `{mtype}`.")
+			return false
 		end
+		return true
 	end
 
 	fun add_new(recv: MClassType, mtype: MClassType)
