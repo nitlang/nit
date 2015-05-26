@@ -32,7 +32,7 @@ redef class AInstructionLine
 	# TODO move to AnalysisManager as private?
 	private fun enrich
 	do
-		var instr = n_instruction
+		var instr: AInstruction = n_instruction
 		var new_instr : AInstruction
 
 		var id = instr.n_id.text.to_upper
