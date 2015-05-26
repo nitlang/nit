@@ -203,7 +203,7 @@ class CommentQuery
 	redef fun perform(nitx, doc) do
 		var name = args.first
 		var res = new Array[NitxMatch]
-		for mentity in doc.search_mentities(name) do
+		for mentity in doc.mentities_by_name(name) do
 			res.add new MEntityMatch(self, mentity)
 		end
 		return res
@@ -377,7 +377,7 @@ class CodeQuery
 			return res
 		end
 		# else, lookup the model by name
-		for mentity in doc.search_mentities(name) do
+		for mentity in doc.mentities_by_name(name) do
 			if mentity isa MClass then continue
 			if mentity isa MProperty then continue
 			res.add new CodeMatch(self, mentity.cs_location, mentity.cs_source_code)
@@ -434,32 +434,6 @@ class NitxHelp
 end
 
 ## exploration
-
-redef class DocModel
-
-	# Lists all MEntities in the model.
-	private var mentities: Collection[MEntity] is lazy do
-		var res = new HashSet[MEntity]
-		res.add_all mprojects
-		res.add_all mgroups
-		res.add_all mmodules
-		res.add_all mclasses
-		res.add_all mclassdefs
-		res.add_all mproperties
-		res.add_all mpropdefs
-		return res
-	end
-
-	# Search MEntities that match `name` by their name or namespace.
-	private fun search_mentities(name: String): Array[MEntity] do
-		var res = new Array[MEntity]
-		for mentity in mentities do
-			if mentity.name != name and mentity.cs_namespace != name then continue
-			res.add mentity
-		end
-		return res
-	end
-end
 
 # Visitor looking for initialized `MType` (new T).
 #

@@ -146,4 +146,29 @@ redef class DocModel
 			end
 		end
 	end
+
+	# Lists all MEntities in the model.
+	#
+	# FIXME invalidate cache if `self` is modified.
+	var mentities: Collection[MEntity] is lazy do
+		var res = new HashSet[MEntity]
+		res.add_all mprojects
+		res.add_all mgroups
+		res.add_all mmodules
+		res.add_all mclasses
+		res.add_all mclassdefs
+		res.add_all mproperties
+		res.add_all mpropdefs
+		return res
+	end
+
+	# Searches MEntities that match `name`.
+	fun mentities_by_name(name: String): Array[MEntity] do
+		var res = new Array[MEntity]
+		for mentity in mentities do
+			if mentity.name != name then continue
+			res.add mentity
+		end
+		return res
+	end
 end
