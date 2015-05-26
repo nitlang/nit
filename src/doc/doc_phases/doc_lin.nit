@@ -73,7 +73,7 @@ redef class DefinitionArticle
 		var lin = all_defs.to_a
 		doc.mainmodule.linearize_mpropdefs(lin)
 		if lin.length > 1 then
-			add_child new DefinitionLinArticle("article:{mentity.nitdoc_id}.lin", mentity, lin)
+			add_child new DefinitionLinArticle("{mentity.nitdoc_id}.lin", mentity, lin)
 		end
 	end
 

@@ -73,7 +73,7 @@ redef class MModulePage
 			end
 		end
 		op.append("\}\n")
-		return new GraphArticle("article:{mentity.nitdoc_id}.graph", mentity, name, "Importation Graph", op)
+		return new GraphArticle("{mentity.nitdoc_id}.graph", mentity, name, "Importation Graph", op)
 	end
 end
 
@@ -107,7 +107,7 @@ redef class MClassPage
 			end
 		end
 		op.append("\}\n")
-		return new GraphArticle("article:{mentity.nitdoc_id}.graph", mentity, name, "Inheritance Graph", op)
+		return new GraphArticle("{mentity.nitdoc_id}.graph", mentity, name, "Inheritance Graph", op)
 	end
 end
 
