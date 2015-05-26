@@ -53,7 +53,7 @@ extern class NativeBSON `{ bson_t * `}
 		bson_t *bson;
 		bson = bson_new_from_json(data, -1, &error);
 		if(!bson) {
-			NativeBSON_set_mongoc_error(recv, &error);
+			NativeBSON_set_mongoc_error(bson, &error);
 			return NULL;
 		}
 		return bson;
