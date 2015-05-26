@@ -19,31 +19,6 @@ module model_utils
 
 import model
 
-redef class MConcern
-
-	# Boost a MConcern rank
-	# see: `MConcernRankSorter`
-	# Use a positive booster to push down a result in the list
-	# A negative booster can be used to push up the result
-	var booster_rank: Int = 0 is writable
-
-	# Concern ranking used for ordering
-	# see: `MConcernRankSorter`
-	# Rank can be positive or negative
-	fun concern_rank: Int is abstract
-end
-
-redef class MProject
-	redef var concern_rank is lazy do
-		var max = 0
-		for mgroup in mgroups do
-			var mmax = mgroup.concern_rank
-			if mmax > max then max = mmax
-		end
-		return max + 1
-	end
-end
-
 redef class MGroup
 	fun in_nesting_intro_mclasses(min_visibility: MVisibility): Set[MClass] do
 		var res = new HashSet[MClass]
@@ -85,15 +60,6 @@ redef class MGroup
 			res.add_all mgroup.collect_mmodules
 		end
 		return res
-	end
-
-	redef var concern_rank is lazy do
-		var max = 0
-		for mmodule in collect_mmodules do
-			var mmax = mmodule.concern_rank
-			if mmax > max then max = mmax
-		end
-		return max + 1
 	end
 end
 
@@ -161,15 +127,6 @@ redef class MModule
 			for c in m.mclassdefs do mclasses.add(c.mclass)
 		end
 		return mclasses
-	end
-
-	redef var concern_rank is lazy do
-		var max = 0
-		for p in in_importation.direct_greaters do
-			var pmax = p.concern_rank
-			if pmax > max then max = pmax
-		end
-		return max + 1
 	end
 
 	# Find all mmodules nested in `self` if `self` is the default module of a `MGroup`.
@@ -507,27 +464,4 @@ class MEntityNameSorter
 	super Comparator
 	redef type COMPARED: MEntity
 	redef fun compare(a, b) do return a.name <=> b.name
-end
-
-# Sort MConcerns based on the module importation hierarchy ranking
-# see also: `MConcern::concern_rank` and `MConcern::booster_rank`
-#
-# Comparison is made with the formula:
-#
-# ~~~nitish
-# a.concern_rank + a.booster_rank <=> b.concern_rank + b.booster_ran
-# ~~~
-#
-# If both `a` and `b` have the same ranking,
-# ordering is based on lexicographic comparison of `a.name` and `b.name`
-class MConcernRankSorter
-	super Comparator
-	redef type COMPARED: MConcern
-
-	redef fun compare(a, b) do
-		if a.concern_rank == b.concern_rank then
-			return a.name <=> b.name
-		end
-		return a.concern_rank + a.booster_rank <=> b.concern_rank + b.booster_rank
-	end
 end
