@@ -197,10 +197,12 @@ private class SerializationPhasePreModel
 		var npropdefs = nclassdef.n_propdefs
 
 		var code = new Array[String]
-		code.add "redef init from_deserializer(v: Deserializer)"
-		code.add "do"
-		code.add "	super"
-		code.add "	v.notify_of_creation self"
+		code.add """
+redef init from_deserializer(v: Deserializer)
+do
+	super
+	v.notify_of_creation self
+"""
 
 		for attribute in npropdefs do if attribute isa AAttrPropdef then
 
@@ -218,10 +220,10 @@ private class SerializationPhasePreModel
 			end
 			var name = attribute.name
 
-			code.add ""
-			code.add "\tvar {name} = v.deserialize_attribute(\"{name}\")"
-			code.add "\tassert {name} isa {type_name} else print \"Unsupported type for `\{class_name\}::{name}`, got '\{{name}.class_name\}'; expected {type_name}\""
-			code.add "\tself.{name} = {name}"
+			code.add """
+	var {{{name}}} = v.deserialize_attribute("{{{name}}}")
+	assert {{{name}}} isa {{{type_name}}} else print "Unsupported type for `{class_name}::{{{name}}}`, got '{{{{name}}}.class_name}'; expected {{{type_name}}}"
+	self.{{{name}}} = {{{name}}}"""
 		end
 
 		code.add "end"
