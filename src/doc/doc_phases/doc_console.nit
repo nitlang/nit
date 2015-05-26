@@ -59,6 +59,12 @@ class Nitx
 	fun help do
 		print "\nCommands:"
 		print "\tname\t\tlookup module, class and property with the corresponding 'name'"
+		print "\tdoc: <name::space>\tdisplay the documentation page of 'namespace'"
+		print "\tparam: <Type>\tlookup methods using the corresponding 'Type' as parameter"
+		print "\treturn: <Type>\tlookup methods returning the corresponding 'Type'"
+		print "\tnew: <Type>\tlookup methods creating new instances of 'Type'"
+		print "\tcall: <name>\tlookup methods calling 'name'"
+		print "\tcode: <name>\tdisplay the source code associated to the 'name' entity"
 		print "\t:h\t\tdisplay this help message"
 		print "\t:q\t\tquit interactive mode"
 		print ""
@@ -110,6 +116,19 @@ interface NitxQuery
 			return new NitxHelp
 		else if query_string.has_prefix("comment:") then
 			return new CommentQuery(query_string)
+		else if query_string.has_prefix("doc:") then
+			return new DocQuery(query_string)
+		else if query_string.has_prefix("param:") then
+			return new ParamQuery(query_string)
+		else if query_string.has_prefix("return:") then
+			return new ReturnQuery(query_string)
+		else if query_string.has_prefix("new:") then
+			return new NewQuery(query_string)
+		else if query_string.has_prefix("call:") then
+			return new CallQuery(query_string)
+		else if query_string.has_prefix("code:") then
+			return new CodeQuery(query_string)
+
 		end
 		return new CommentQuery("comment: {query_string}")
 	end
@@ -207,6 +226,188 @@ class CommentQuery
 	end
 end
 
+# A query to search signatures using a specific `MType` as parameter.
+class ParamQuery
+	super MetaQuery
+
+	redef fun perform(nitx, doc) do
+		var res = new Array[NitxMatch]
+		var mtype_name = args.first
+		for mproperty in doc.mproperties do
+			if not mproperty isa MMethod then continue
+			var msignature = mproperty.intro.msignature
+			if msignature != null then
+				for mparam in msignature.mparameters do
+					if mparam.mtype.name == mtype_name then
+						res.add new MEntityMatch(self, mproperty)
+					end
+				end
+			end
+		end
+		return res
+	end
+end
+
+# A query to search signatures using a specific `MType` as return.
+class ReturnQuery
+	super MetaQuery
+
+	redef fun perform(nitx, doc) do
+		var res = new Array[NitxMatch]
+		var mtype_name = args.first
+		for mproperty in doc.mproperties do
+			if not mproperty isa MMethod then continue
+			var msignature = mproperty.intro.msignature
+			if msignature != null then
+				var mreturn = msignature.return_mtype
+				if mreturn != null and mreturn.name == mtype_name then
+					res.add new MEntityMatch(self, mproperty)
+				end
+			end
+		end
+		return res
+	end
+end
+
+# A query to search methods creating new instances of a specific `MType`.
+class NewQuery
+	super MetaQuery
+
+	redef fun perform(nitx, doc) do
+		var res = new Array[NitxMatch]
+		var mtype_name = args.first
+		for mpropdef in doc.mpropdefs do
+			var visitor = new TypeInitVisitor(mtype_name)
+			var npropdef = nitx.ctx.modelbuilder.mpropdef2node(mpropdef)
+			if npropdef == null then continue
+			visitor.enter_visit(npropdef)
+			for i in visitor.inits do
+				res.add new MEntityMatch(self, mpropdef)
+			end
+		end
+		return res
+	end
+end
+
+# A query to search methods calling a specific `MProperty`.
+class CallQuery
+	super MetaQuery
+
+	redef fun perform(nitx, doc) do
+		var res = new Array[NitxMatch]
+		var mprop_name = args.first
+		for mpropdef in doc.mpropdefs do
+			var visitor = new MPropertyCallVisitor
+			var npropdef = nitx.ctx.modelbuilder.mpropdef2node(mpropdef)
+			if npropdef == null then continue
+			visitor.enter_visit(npropdef)
+			for mprop in visitor.calls do
+				if mprop.name != mprop_name then continue
+				res.add new MEntityMatch(self, mpropdef)
+			end
+		end
+		return res
+	end
+end
+
+# A query to search a Nitdoc documentation page by its name.
+class DocQuery
+	super MetaQuery
+
+	redef fun perform(nitx, doc) do
+		var res = new Array[NitxMatch]
+		var name = args.first
+		for page in doc.pages do
+			if name == "*" then # FIXME dev only
+				res.add new PageMatch(self, page)
+			else if page.title == name then
+				res.add new PageMatch(self, page)
+			else if page isa MEntityPage and page.mentity.cs_namespace == name then
+				res.add new PageMatch(self, page)
+			end
+		end
+		return res
+	end
+
+	redef fun make_results(nitx, results) do
+		var len = results.length
+		# FIXME how to render the pager for one worded namespaces like "standard"?
+		if len == 1 then
+			var page = results.first.as(PageMatch).page
+			var pager = new Pager
+			pager.add page.write_to_string
+			pager.render
+			return page
+		else
+			return super
+		end
+	end
+end
+
+# A match between a `DocPage` and a `MEntity`.
+class PageMatch
+	super NitxMatch
+
+	# `DocPage` matched.
+	var page: DocPage
+
+	redef fun make_list_item do
+		var page = self.page
+		if page isa MEntityPage then
+			return page.mentity.cs_list_item
+		end
+		return " * {page.title}"
+	end
+end
+
+# A query to search source code from a file name.
+class CodeQuery
+	super MetaQuery
+
+	# FIXME refactor this!
+	redef fun perform(nitx, doc) do
+		var res = new Array[NitxMatch]
+		var name = args.first
+		# if name is an existing sourcefile, opens it
+		if name.file_exists then
+			var fr = new FileReader.open(name)
+			var content = fr.read_all
+			fr.close
+			res.add new CodeMatch(self, name, content)
+			return res
+		end
+		# else, lookup the model by name
+		for mentity in doc.search_mentities(name) do
+			if mentity isa MClass then continue
+			if mentity isa MProperty then continue
+			res.add new CodeMatch(self, mentity.cs_location, mentity.cs_source_code)
+		end
+		return res
+	end
+
+	redef fun make_results(nitx, results) do
+		var page = new DocPage("Code Results")
+		for res in results do
+			page.add new CodeQueryArticle(self, res.as(CodeMatch))
+		end
+		return page
+	end
+end
+
+# A match between a piece of code and a string.
+class CodeMatch
+	super NitxMatch
+
+	# Location of the code match.
+	var location: String
+
+	# Piece of code matched.
+	var content: String
+
+	redef fun make_list_item do return "* {location}"
+end
+
+
 # A query that contains a nitx command.
 #
 # These commands are prefixed with `:` and are used to control the execution of
@@ -260,6 +461,41 @@ redef class DocModel
 	end
 end
 
+# Visitor looking for initialized `MType` (new T).
+#
+# See `NewQuery`.
+private class TypeInitVisitor
+	super Visitor
+
+	# `MType` name to look for.
+	var mtype_name: String
+
+	var inits = new HashSet[MType]
+	redef fun visit(node)
+	do
+		node.visit_all(self)
+		# look for init
+		if not node isa ANewExpr then return
+		var mtype = node.n_type.mtype
+		if mtype != null and mtype.name == mtype_name then inits.add(mtype)
+	end
+end
+
+# Visitor looking for calls to a `MProperty` (new T).
+#
+# See `CallQuery`.
+private class MPropertyCallVisitor
+	super Visitor
+
+	var calls = new HashSet[MProperty]
+	redef fun visit(node)
+	do
+		node.visit_all(self)
+		if not node isa ASendExpr then return
+		calls.add node.callsite.mproperty
+	end
+end
+
 # display
 
 # A `DocArticle` that displays query results.
@@ -287,6 +523,24 @@ private class QueryResultArticle
 			addn ""
 			addn result.make_list_item
 		end
+	end
+end
+
+# An article that displays a piece of code.
+private class CodeQueryArticle
+	super DocArticle
+
+	# The query linked to the result to display.
+	var query: NitxQuery
+
+	# The result to display.
+	var result: CodeMatch
+
+	redef fun render_body do
+		addn ""
+		addn "in {result.location}".gray.bold
+		addn ""
+		add result.content
 	end
 end
 

@@ -1,5 +1,13 @@
-[1m= result for 'foo'[0m
 
-  fun [1m[32mfoo[0m[0m
-  [30m[1mbase_simple3::Sys::foo[0m[0m[30m (lines 49-49)[0m
+[1m[32m# 2 result(s) for 'comment: foo'[m[m
+
+ [1m[32mF[m[m [1m[34mfoo[m[m
+   [1m[30mbase_simple3::Sys::foo[m[m
+   fun foo
+   [30mbase_simple3.nit:49,1--19[m
+
+ [1m[32mF[m[m [1m[34mfoo[m[m
+   [1m[30mbase_simple3::base_simple3::Sys::foo[m[m
+   fun foo
+   [30mbase_simple3.nit:49,1--19[m
 
