@@ -99,4 +99,5 @@ class DefinitionLinArticle
 	var mentities: Array[MEntity]
 
 	redef var toc_title = "Linearization"
+	redef fun is_hidden do return mentities.is_empty
 end

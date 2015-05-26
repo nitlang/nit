@@ -120,8 +120,10 @@ abstract class DocComposite
 	# Children are ordered, this order can be changed by the `DocPhase`.
 	var children = new Array[DocComposite]
 
-	# Does `self` have `children`?
-	fun is_empty: Bool do return children.is_empty
+	# Is `self` not displayed in the page.
+	#
+	# By default, empty elements are hidden.
+	fun is_hidden: Bool do return children.is_empty
 
 	# Title used in table of content if any.
 	var toc_title: nullable String is writable, lazy do return title

@@ -342,6 +342,8 @@ end
 class IntroArticle
 	super MEntityComposite
 	super DocArticle
+
+	redef var is_hidden = false
 end
 
 # An article that display a ConcernsTreee as a list.
@@ -350,6 +352,8 @@ class ConcernsArticle
 
 	# Concerns to list in this article.
 	var concerns: ConcernsTree
+
+	redef fun is_hidden do return concerns.is_empty
 end
 
 # An article that displaus a list of definition belonging to a MEntity.
@@ -361,6 +365,8 @@ end
 # An article that display the definition text of a MEntity.
 class DefinitionArticle
 	super MEntityArticle
+
+	redef var is_hidden = false
 end
 
 # The main project article.
@@ -385,6 +391,10 @@ class IndexArticle
 
 	# List of mproperties to display.
 	var mprops: Array[MProperty]
+
+	redef fun is_hidden do
+		return mmodules.is_empty and mclasses.is_empty and mprops.is_empty
+	end
 end
 
 # Concerns ranking

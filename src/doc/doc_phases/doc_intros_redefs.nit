@@ -100,4 +100,6 @@ class IntrosRedefsListArticle
 
 	# Intro mentities to list.
 	var mentities: Array[MEntity]
+
+	redef fun is_hidden do return mentities.is_empty
 end
