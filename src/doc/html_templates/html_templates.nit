@@ -294,12 +294,9 @@ redef class DocComposite
 		return html_title.write_to_string
 	end
 
-	# Is `self` hidden in the table of content?
-	var is_toc_hidden = false is writable
-
 	# Render this element in a table of contents.
 	private fun render_toc_item(lst: UnorderedList) do
-		if is_toc_hidden then return
+		if is_toc_hidden or html_toc_title == null then return
 
 		var content = new Template
 		content.add new Link("#{html_id}", html_toc_title.to_s)
@@ -442,12 +439,10 @@ end
 redef class ConstructorsSection
 	redef var html_title = "Constructors"
 	redef var html_subtitle = null
-	redef fun is_toc_hidden do return is_hidden
 end
 
 redef class ConcernSection
 	redef var html_title is lazy do return "in {mentity.nitdoc_name}"
-	redef fun is_toc_hidden do return is_hidden
 end
 
 redef class ImportationListSection
@@ -460,7 +455,6 @@ end
 
 redef class IntroArticle
 	redef var html_title = null
-	redef var is_toc_hidden = true
 
 	# Link to source to display if any.
 	var html_source_link: nullable Writable is noinit, writable
@@ -545,8 +539,6 @@ redef class DefinitionArticle
 end
 
 redef class HierarchyListArticle
-	redef var is_toc_hidden = true
-
 	redef fun render_body do
 		var lst = new UnorderedList
 		lst.css_classes.add "list-unstyled list-definition"
@@ -561,12 +553,9 @@ redef class IntrosRedefsSection
 	redef var toc_title do return "Intros / Redefs"
 	redef var html_title = null
 	redef var html_subtitle = null
-	redef var is_toc_hidden = true
 end
 
 redef class IntrosRedefsListArticle
-	redef var is_toc_hidden = true
-
 	redef fun render_body do
 		var lst = new UnorderedList
 		lst.css_classes.add "list-unstyled list-labeled"
@@ -579,7 +568,6 @@ end
 
 redef class DefinitionLinArticle
 	redef var html_title is lazy do return "Linearization"
-	redef var is_toc_hidden = true
 
 	redef fun render_body do
 		var lst = new UnorderedList
@@ -603,7 +591,6 @@ end
 
 redef class GraphArticle
 	redef var html_title = null
-	redef var is_toc_hidden = true
 
 	# HTML map used to display link.
 	#

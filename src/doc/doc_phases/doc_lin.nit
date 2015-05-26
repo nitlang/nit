@@ -100,4 +100,5 @@ class DefinitionLinArticle
 
 	redef var toc_title = "Linearization"
 	redef fun is_hidden do return mentities.is_empty
+	redef var is_toc_hidden = true
 end

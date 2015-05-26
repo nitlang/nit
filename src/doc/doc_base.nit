@@ -129,6 +129,11 @@ abstract class DocComposite
 	# Title used in table of content if any.
 	var toc_title: nullable String is writable, lazy do return title
 
+	# Is `self` hidden in the table of content?
+	var is_toc_hidden: Bool is writable, lazy do
+		return toc_title == null or is_hidden
+	end
+
 	# Add a `child` to `self`.
 	#
 	# Shortcut for `children.add`.

@@ -318,6 +318,8 @@ end
 class ConcernSection
 	super MEntityComposite
 	super DocSection
+
+	redef fun is_toc_hidden do return is_hidden
 end
 
 # An article about a Mentity.
@@ -344,6 +346,7 @@ class IntroArticle
 	super DocArticle
 
 	redef var is_hidden = false
+	redef var is_toc_hidden = true
 end
 
 # An article that display a ConcernsTreee as a list.

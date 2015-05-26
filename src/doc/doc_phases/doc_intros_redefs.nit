@@ -88,6 +88,8 @@ end
 class IntrosRedefsSection
 	super TabbedGroup
 	super MEntitySection
+
+	redef var is_toc_hidden = true
 end
 
 # An article that displays a list of introduced / refined mentities.
@@ -101,4 +103,5 @@ class IntrosRedefsListArticle
 	var mentities: Array[MEntity]
 
 	redef fun is_hidden do return mentities.is_empty
+	redef var is_toc_hidden = true
 end
