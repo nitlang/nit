@@ -13,8 +13,8 @@ You must use the '--semi-global' (or `--global`) option. Some features in the st
 
 5. Set up the Chrome browser :
  - PNaCl is enabled by default in Chrome version 31 and later.
- - For a better development experience, it’s also recommended to disable the Chrome cache : 
- 	- Open Chrome’s developer tools by clicking the menu icon menu-icon and choosing Tools > Developer tools.
+ - For a better development experience, it’s also recommended to disable the Chrome cache :
+	- Open Chrome’s developer tools by clicking the menu icon menu-icon and choosing Tools > Developer tools.
 	- Click the gear icon gear-icon in the bottom right corner of the Chrome window.
 	- Under the “General” settings, check the box next to “Disable cache (while DevTools is open)”.
 	- Keep the Developer Tools pane open while developing Native Client applications.

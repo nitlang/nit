@@ -66,4 +66,3 @@ Using bash completion with Nit tools:
 More information:
 
 	http://www.nitlanguage.org
-
