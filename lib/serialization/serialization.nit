@@ -88,7 +88,7 @@ end
 # Abstract deserialization service
 #
 # After initialization of one of its sub-classes, call `deserialize`
-interface Deserializer
+abstract class Deserializer
 	# Main method of this class, returns a Nit object
 	fun deserialize: nullable Object is abstract
 
@@ -109,6 +109,48 @@ interface Deserializer
 	fun deserialize_class(class_name: String): Object do
 		print "Error: doesn't know how to deserialize class \"{class_name}\""
 		abort
+	end
+
+	# Should `self` keep trying to deserialize an object after an error?
+	#
+	# This behavior takes effect after each attribute deserialization with
+	# errors such as a missing attribute or the value is of the wrong type.
+	# If `keep_going`, the attribute will be skipped but the engine will
+	# deserialize the next attribute.
+	# If `not keep_going`, the engine stops deserializing right away.
+	#
+	# When at `true`, this may cause the accumulation of a lot of entries in `errors`.
+	#
+	# Default at `true`.
+	var keep_going: nullable Bool is writable
+
+	# Errors encountered in the last call to `deserialize`
+	var errors = new Array[Error]
+end
+
+# Deserialization got wrong attribute names
+class AttributeTypeError
+	super Error
+
+	# Parent object of the problematic attribute
+	var receiver: Object
+
+	# Name of the problematic attribute in `receiver`
+	var attribute_name: String
+
+	# Deserialized object that isn't of the `expected_type`
+	var attribute: nullable Object
+
+	# Name of the type expected for `attribute`
+	var expected_type: String
+
+	redef fun to_s
+	do
+		var attribute = attribute
+		var found_type = if attribute != null then attribute.class_name else "null"
+
+		return "Deserialization Error: {
+		}Wrong type on `{receiver.class_name}::{attribute_name}` expected `{expected_type}`, got `{found_type}`"
 	end
 end
 
