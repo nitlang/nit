@@ -92,7 +92,7 @@ redef class MGroupPage
 		mentity.booster_rank = 0
 		section.add_child new ConcernsArticle("{mentity.nitdoc_id}.concerns", mentity, concerns)
 		for mentity in concerns do
-			var ssection = new ConcernSection("concern:{mentity.nitdoc_id}", mentity)
+			var ssection = new ConcernSection("{mentity.nitdoc_id}.concern", mentity)
 			if mentity isa MModule then
 				ssection.add_child new DefinitionArticle("{mentity.nitdoc_id}.definition", mentity)
 			end
@@ -119,7 +119,7 @@ redef class MModulePage
 		section.add_child new ConcernsArticle("{mentity.nitdoc_id}.concerns", mentity, concerns)
 		# reference list
 		for mentity in concerns do
-			var ssection = new ConcernSection("concern:{mentity.nitdoc_id}", mentity)
+			var ssection = new ConcernSection("{mentity.nitdoc_id}.concern", mentity)
 			if mentity isa MModule then
 				var mclasses = mclasses_for_mmodule(mentity).to_a
 				v.name_sorter.sort(mclasses)
@@ -190,7 +190,7 @@ redef class MClassPage
 		section.add_child constructors
 		section.add_child new ConcernsArticle("{mentity.nitdoc_id}.concerns", mentity, concerns)
 		for mentity in concerns do
-			var ssection = new ConcernSection("concern:{mentity.nitdoc_id}", mentity)
+			var ssection = new ConcernSection("{mentity.nitdoc_id}.concern", mentity)
 			if mentity isa MModule then
 				var mprops = mproperties_for(mentity)
 				var by_kind = new PropertiesByKind.with_elements(mprops)
@@ -259,7 +259,7 @@ redef class MPropertyPage
 		mentity.intro.mclassdef.mmodule.booster_rank = 0
 		section.add_child new ConcernsArticle("{mentity.nitdoc_id}.concerns", mentity, concerns)
 		for mentity in concerns do
-			var ssection = new ConcernSection("concern:{mentity.nitdoc_id}", mentity)
+			var ssection = new ConcernSection("{mentity.nitdoc_id}.concern", mentity)
 			if mentity isa MModule then
 				# Add mproperties
 				var mpropdefs = mpropdefs_for(mentity).to_a
