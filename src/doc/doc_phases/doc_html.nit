@@ -372,7 +372,7 @@ redef class MClassPage
 		if not mprop_is_local(mprop) then
 			classes.add "inherit"
 			var cls_url = mprop.intro.mclassdef.mclass.nitdoc_url
-			var def_url = "{cls_url}#article:{mprop.nitdoc_id}.definition"
+			var def_url = "{cls_url}#{mprop.nitdoc_id}.definition"
 			var lnk = new Link(def_url, mprop.html_name)
 			var mdoc = mprop.intro.mdoc_or_fallback
 			if mdoc != null then lnk.title = mdoc.short_comment
@@ -388,7 +388,7 @@ redef class MClassPage
 		end
 		var def = select_mpropdef(mprop)
 		var anc = def.html_link_to_anchor
-		anc.href = "#article:{def.nitdoc_id}.definition"
+		anc.href = "#{def.nitdoc_id}.definition"
 		var lnk = new Template
 		lnk.add new DocHTMLLabel.with_classes(classes)
 		lnk.add anc

@@ -45,10 +45,10 @@ redef class MModulePage
 		var group = new PanelGroup("group:list", "List")
 		var imports = self.imports.to_a
 		v.name_sorter.sort(imports)
-		group.add_child new HierarchyListArticle("article:Imports_{id}.hierarchy", mentity, "Imports", imports)
+		group.add_child new HierarchyListArticle("{id}.imports", mentity, "Imports", imports)
 		var clients = self.clients.to_a
 		v.name_sorter.sort(clients)
-		group.add_child new HierarchyListArticle("article:Clients_{id}.hierarchy", mentity, "Clients", clients)
+		group.add_child new HierarchyListArticle("{id}.clients", mentity, "Clients", clients)
 		section.add_child group
 		section.parent = root.children.first
 		root.children.first.children.insert(section, 1)
@@ -62,16 +62,16 @@ redef class MClassPage
 		var group = new PanelGroup("group:list", "List")
 		var parents = self.parents.to_a
 		v.name_sorter.sort(parents)
-		group.add_child new HierarchyListArticle("article:Parents_{id}.hierarchy", mentity, "Parents", parents)
+		group.add_child new HierarchyListArticle("{id}.parents", mentity, "Parents", parents)
 		var ancestors = self.ancestors.to_a
 		v.name_sorter.sort(ancestors)
-		group.add_child new HierarchyListArticle("article:Ancestors_{id}.hierarchy", mentity, "Ancestors", ancestors)
+		group.add_child new HierarchyListArticle("{id}.ancestors", mentity, "Ancestors", ancestors)
 		var children = self.children.to_a
 		v.name_sorter.sort(children)
-		group.add_child new HierarchyListArticle("article:Children_{id}.hierarchy", mentity, "Children", children)
+		group.add_child new HierarchyListArticle("{id}.children", mentity, "Children", children)
 		var descendants = self.descendants.to_a
 		v.name_sorter.sort(descendants)
-		group.add_child new HierarchyListArticle("article:Descendants_{id}.hierarchy", mentity, "Descendants", descendants)
+		group.add_child new HierarchyListArticle("{id}.descendants", mentity, "Descendants", descendants)
 		section.add_child group
 		section.parent = root.children.first
 		root.children.first.children.insert(section, 1)
