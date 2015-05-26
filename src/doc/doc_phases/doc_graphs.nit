@@ -124,5 +124,5 @@ class GraphArticle
 	# Dot script of the graph.
 	var dot: Text
 
-	redef var is_empty = false
+	redef var is_hidden = false
 end

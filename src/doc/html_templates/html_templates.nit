@@ -286,11 +286,6 @@ redef class DocComposite
 	# Level <hX> for HTML heading.
 	private fun hlvl: Int do return depth
 
-	# Is `self` not displayed in the page.
-	#
-	# By default, empty elements are hidden.
-	fun is_hidden: Bool do return is_empty
-
 	# A short, undecorated title that goes in the table of contents.
 	#
 	# By default, returns `html_title.to_s`, subclasses should redefine it.
@@ -397,9 +392,6 @@ end
 
 redef class IndexArticle
 	redef var html_title = "Index"
-	redef fun is_empty do
-		return mmodules.is_empty and mclasses.is_empty and mprops.is_empty
-	end
 
 	redef fun render_body do
 		addn "<div class='container-fluid'>"
@@ -450,12 +442,12 @@ end
 redef class ConstructorsSection
 	redef var html_title = "Constructors"
 	redef var html_subtitle = null
-	redef fun is_toc_hidden do return is_empty
+	redef fun is_toc_hidden do return is_hidden
 end
 
 redef class ConcernSection
 	redef var html_title is lazy do return "in {mentity.nitdoc_name}"
-	redef fun is_toc_hidden do return is_empty
+	redef fun is_toc_hidden do return is_hidden
 end
 
 redef class ImportationListSection
@@ -468,7 +460,6 @@ end
 
 redef class IntroArticle
 	redef var html_title = null
-	redef var is_hidden = false
 	redef var is_toc_hidden = true
 
 	# Link to source to display if any.
@@ -495,7 +486,6 @@ end
 
 redef class ConcernsArticle
 	redef var html_title = "Concerns"
-	redef fun is_hidden do return concerns.is_empty
 	redef fun render_body do add concerns.html_list
 end
 
@@ -514,7 +504,6 @@ end
 redef class DefinitionArticle
 	redef var html_title is lazy do return mentity.html_name
 	redef var html_subtitle is lazy do return mentity.html_declaration
-	redef var is_hidden = false
 
 	# Does `self` display only it's title and no body?
 	#
@@ -556,7 +545,6 @@ redef class DefinitionArticle
 end
 
 redef class HierarchyListArticle
-	redef fun is_empty do return mentities.is_empty
 	redef var is_toc_hidden = true
 
 	redef fun render_body do
@@ -577,7 +565,6 @@ redef class IntrosRedefsSection
 end
 
 redef class IntrosRedefsListArticle
-	redef fun is_hidden do return mentities.is_empty
 	redef var is_toc_hidden = true
 
 	redef fun render_body do
@@ -592,7 +579,6 @@ end
 
 redef class DefinitionLinArticle
 	redef var html_title is lazy do return "Linearization"
-	redef fun is_hidden do return mentities.is_empty
 	redef var is_toc_hidden = true
 
 	redef fun render_body do
@@ -617,7 +603,6 @@ end
 
 redef class GraphArticle
 	redef var html_title = null
-	redef var is_hidden = false
 	redef var is_toc_hidden = true
 
 	# HTML map used to display link.
