@@ -13,6 +13,7 @@ module stream
 
 intrude import ropes
 import error
+intrude import bytes
 
 in "C" `{
 	#include <unistd.h>
@@ -48,19 +49,23 @@ abstract class Reader
 	# Reads a byte. Returns `null` on EOF or timeout
 	fun read_byte: nullable Int is abstract
 
+	# Reads a String of at most `i` length
+	fun read(i: Int): String do return read_bytes(i).to_s
+
 	# Read at most i bytes
-	fun read(i: Int): String
+	fun read_bytes(i: Int): Bytes
 	do
-		if last_error != null then return ""
-		var s = new FlatBuffer.with_capacity(i)
+		if last_error != null then return new Bytes.empty
+		var s = new NativeString(i)
+		var buf = new Bytes(s, 0, 0)
 		while i > 0 and not eof do
-			var c = read_char
+			var c = read_byte
 			if c != null then
-				s.add(c)
+				buf.add c
 				i -= 1
 			end
 		end
-		return s.to_s
+		return buf
 	end
 
 	# Read a string until the end of the line.
@@ -154,22 +159,27 @@ abstract class Reader
 
 	# Read all the stream until the eof.
 	#
-	# The content of the file is returned verbatim.
+	# The content of the file is returned as a String.
 	#
 	# ~~~
 	# var txt = "Hello\n\nWorld\n"
 	# var i = new StringReader(txt)
 	# assert i.read_all == txt
 	# ~~~
-	fun read_all: String
+	fun read_all: String do return read_all_bytes.to_s
+
+	# Read all the stream until the eof.
+	#
+	# The content of the file is returned verbatim.
+	fun read_all_bytes: Bytes
 	do
-		if last_error != null then return ""
-		var s = new FlatBuffer
+		if last_error != null then return new Bytes.empty
+		var s = new Bytes.empty
 		while not eof do
-			var c = read_char
+			var c = read_byte
 			if c != null then s.add(c)
 		end
-		return s.to_s
+		return s
 	end
 
 	# Read a string until the end of the line and append it to `s`.
@@ -342,6 +352,10 @@ end
 # A `Stream` that can be written to
 abstract class Writer
 	super Stream
+
+	# Writes bytes from `s`
+	fun write_bytes(s: Bytes) is abstract
+
 	# write a string
 	fun write(s: Text) is abstract
 
@@ -365,7 +379,7 @@ interface Writable
 
 	# Like `write_to` but return a new String (may be quite large)
 	#
-	# This funtionnality is anectodical, since the point
+	# This funtionality is anectodical, since the point
 	# of streamable object to to be efficienlty written to a
 	# stream without having to allocate and concatenate strings
 	fun write_to_string: String
@@ -408,66 +422,87 @@ abstract class BufferedReader
 		return c
 	end
 
-	# Peeks up to `n` bytes in the buffer, returns an empty string on EOF
+	fun buffer_reset do
+		_buffer_length = 0
+		_buffer_pos = 0
+	end
+
+	# Peeks up to `n` bytes in the buffer
 	#
 	# The operation does not consume the buffer
 	#
 	# ~~~nitish
-	# 	var x = new FileReader("File.txt")
-	#	assert x.peek(5) == x.read(5)
+	# var x = new FileReader.open("File.txt")
+	# assert x.peek(5) == x.read(5)
 	# ~~~
-	fun peek(i: Int): String do
-		if eof then return ""
-		var b = new FlatBuffer.with_capacity(i)
-		while i > 0 and not eof do
-			b.add _buffer[_buffer_pos]
-			_buffer_pos += 1
-			i -= 1
+	fun peek(i: Int): Bytes do
+		if eof then return new Bytes.empty
+		var remsp = _buffer_length - _buffer_pos
+		if i <= remsp then
+			var bf = new Bytes.with_capacity(i)
+			bf.append_ns_from(_buffer, i, _buffer_pos)
+			return bf
 		end
-		var nbuflen = b.length + (_buffer.length - _buffer_pos)
-		var nbuf = new FlatBuffer.with_capacity(nbuflen)
-		nbuf.append(b)
-		while _buffer_pos < _buffer.length do
-			nbuf.add(_buffer[_buffer_pos])
-			_buffer_pos += 1
+		var bf = new Bytes.with_capacity(i)
+		bf.append_ns_from(_buffer, remsp, _buffer_pos)
+		_buffer_pos = _buffer_length
+		read_intern(i - bf.length, bf)
+		remsp = _buffer_length - _buffer_pos
+		var full_len = bf.length + remsp
+		if full_len > _buffer_capacity then
+			var c = _buffer_capacity
+			while c < full_len do c = c * 2 + 2
+			_buffer_capacity = c
 		end
+		var nns = new NativeString(_buffer_capacity)
+		bf.items.copy_to(nns, bf.length, 0, 0)
+		_buffer.copy_to(nns, remsp, _buffer_pos, bf.length)
+		_buffer = nns
 		_buffer_pos = 0
-		_buffer = nbuf
-		return b.to_s
+		_buffer_length = full_len
+		return bf
 	end
 
-	redef fun read(i)
+	redef fun read_bytes(i)
 	do
-		if last_error != null then return ""
-		if eof then return ""
+		if last_error != null then return new Bytes.empty
+		var buf = new Bytes.with_capacity(i)
+		read_intern(i, buf)
+		return buf
+	end
+
+	# Fills `buf` with at most `i` bytes read from `self`
+	private fun read_intern(i: Int, buf: Bytes): Int do
+		if eof then return 0
 		var p = _buffer_pos
-		var bufsp = _buffer.length - p
+		var bufsp = _buffer_length - p
 		if bufsp >= i then
 			_buffer_pos += i
-			return _buffer.substring(p, i).to_s
+			buf.append_ns_from(_buffer, i, p)
+			return i
 		end
-		_buffer_pos = _buffer.length
-		var readln = _buffer.length - p
-		var s = _buffer.substring(p, readln).to_s
-		fill_buffer
-		return s + read(i - readln)
+		_buffer_pos = _buffer_length
+		var readln = _buffer_length - p
+		buf.append_ns_from(_buffer, readln, p)
+		var rd = read_intern(i - readln, buf)
+		return rd + readln
 	end
 
-	redef fun read_all
+	redef fun read_all_bytes
 	do
-		if last_error != null then return ""
-		var s = new FlatBuffer
+		if last_error != null then return new Bytes.empty
+		var s = new Bytes.with_capacity(10)
 		while not eof do
 			var j = _buffer_pos
-			var k = _buffer.length
+			var k = _buffer_length
 			while j < k do
-				s.add(_buffer[j])
+				s.add(_buffer[j].ascii)
 				j += 1
 			end
 			_buffer_pos = j
 			fill_buffer
 		end
-		return s.to_s
+		return s
 	end
 
 	redef fun append_line_to(s)
@@ -475,10 +510,12 @@ abstract class BufferedReader
 		loop
 			# First phase: look for a '\n'
 			var i = _buffer_pos
-			while i < _buffer.length and _buffer[i] != '\n' do i += 1
+			while i < _buffer_length and _buffer[i] != '\n' do
+				i += 1
+			end
 
 			var eol
-			if i < _buffer.length then
+			if i < _buffer_length then
 				assert _buffer[i] == '\n'
 				i += 1
 				eol = true
@@ -516,29 +553,37 @@ abstract class BufferedReader
 
 	redef fun eof
 	do
-		if _buffer_pos < _buffer.length then return false
+		if _buffer_pos < _buffer_length then return false
 		if end_reached then return true
 		fill_buffer
-		return _buffer_pos >= _buffer.length and end_reached
+		return _buffer_pos >= _buffer_length and end_reached
 	end
 
 	# The buffer
-	private var buffer: nullable FlatBuffer = null
+	private var buffer: NativeString = new NativeString(0)
 
 	# The current position in the buffer
-	private var buffer_pos: Int = 0
+	private var buffer_pos = 0
+
+	# Length of the current buffer (i.e. nuber of bytes in the buffer)
+	private var buffer_length = 0
+
+	# Capacity of the buffer
+	private var buffer_capacity = 0
 
 	# Fill the buffer
 	protected fun fill_buffer is abstract
 
-	# Is the last fill_buffer reach the end
+	# Has the last fill_buffer reached the end
 	protected fun end_reached: Bool is abstract
 
 	# Allocate a `_buffer` for a given `capacity`.
 	protected fun prepare_buffer(capacity: Int)
 	do
-		_buffer = new FlatBuffer.with_capacity(capacity)
+		_buffer = new NativeString(capacity)
 		_buffer_pos = 0 # need to read
+		_buffer_length = 0
+		_buffer_capacity = capacity
 	end
 end
 
@@ -557,6 +602,11 @@ class StringWriter
 	private var content = new Array[String]
 	redef fun to_s do return content.to_s
 	redef fun is_writable do return not closed
+
+	redef fun write_bytes(b) do
+		content.add(b.to_s)
+	end
+
 	redef fun write(str)
 	do
 		assert not closed
@@ -607,11 +657,11 @@ class StringReader
 		source = ""
 	end
 
-	redef fun read_all do
-		var c = cursor
-		cursor = source.length
-		if c == 0 then return source
-		return source.substring_from(c)
+	redef fun read_all_bytes do
+		var nslen = source.length - cursor
+		var nns = new NativeString(nslen)
+		source.copy_to_native(nns, nslen, cursor, 0)
+		return new Bytes(nns, nslen, nslen)
 	end
 
 	redef fun eof do return cursor >= source.length

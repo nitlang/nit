@@ -653,9 +653,11 @@ class PnaclStream
 	# fill_buffer now checks for a message in the message queue which is filled by user inputs.
 	redef fun fill_buffer
 	do
-		_buffer.clear
 		_buffer_pos = 0
-		_buffer.append check_message.to_s
+		var nns = check_message
+		var nslen = nns.cstring_length
+		_buffer_length = nslen
+		nns.copy_to(buffer, nslen, 0, 0)
 	end
 end
 

@@ -123,14 +123,20 @@ class Bitmap
 
 		# =============== Bitmap header ================
 		for x in [0..13] do
-			bitmap_header[x] = fileReader.read(1)[0].ascii
+			var b = fileReader.read_byte
+			if b == null then
+				return
+			end
+			bitmap_header[x] = b
 		end
 		self.file_size = get_value(bitmap_header.subarray(2, 4))
 		self.data_offset = get_value(bitmap_header.subarray(10, 4))
 
 		# =============== DIB header ================
 		for x in [0..39] do
-			dib_header[x] = fileReader.read(1)[0].ascii
+			var b = fileReader.read_byte
+			if b == null then return
+			dib_header[x] = b
 		end
 		var dib_size = get_value(dib_header.subarray(0, 4))
 		# only support BITMAPINFOHEADER
@@ -159,9 +165,11 @@ class Bitmap
 				var row = new Array[Int].with_capacity(self.width)
 				for y in [0..self.width[
 				do
-					var red = fileReader.read(1)[0].ascii * 256 * 256
-					var green = fileReader.read(1)[0].ascii * 256
-					var blue = fileReader.read(1)[0].ascii
+					var bts = fileReader.read_bytes(3)
+					if bts.length != 3 then return
+					var red = bts[0] << 16
+					var green = bts[1] << 8
+					var blue = bts[2]
 					row.add(red + green + blue)
 				end
 				self.data.add(row)
@@ -169,18 +177,6 @@ class Bitmap
 		end
 		fileReader.close
 	end #end of load_from_file method
-
-	# Reads in a series of bytes from the FileReader when loading a Bitmap from a file
-	# FileReader.read(1) is used due to https://github.com/privat/nit/issues/1264
-	private fun read_chars(fr: FileReader, howMany: Int): String
-	do
-		var s = ""
-		for x in [1..howMany]
-		do
-			s += fr.read(1)
-		end
-		return s
-	end
 
 	# Converts the value contained in two or four bytes into an Int. Since Nit
 	# does not have a byte type, Int is used

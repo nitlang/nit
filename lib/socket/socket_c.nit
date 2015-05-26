@@ -137,16 +137,14 @@ extern class NativeSocket `{ int* `}
 		return write(*recv, &value, 1);
 	`}
 
-	fun read: String import NativeString.to_s_with_length `{
+	fun read: String import NativeString.to_s_with_length, NativeString.to_s_with_copy `{
 		static char c[1024];
-		int n = read(*recv, c, 1024);
+		int n = read(*recv, c, 1023);
 		if(n < 0) {
 			return NativeString_to_s_with_length("",0);
 		}
-		char* ret = malloc(n + 1);
-		memcpy(ret, c, n);
-		ret[n] = '\0';
-		return NativeString_to_s_with_length(ret, n);
+		c[n] = 0;
+		return NativeString_to_s_with_copy(c);
 	`}
 
 	# Sets an option for the socket

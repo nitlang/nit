@@ -57,7 +57,7 @@ class TCPStream
 	# Creates a socket connection to host `host` on port `port`
 	init connect(host: String, port: Int)
 	do
-		_buffer = new FlatBuffer
+		_buffer = new NativeString(1024)
 		_buffer_pos = 0
 		socket = new NativeSocket.socket(new NativeSocketAddressFamilies.af_inet,
 			new NativeSocketTypes.sock_stream, new NativeSocketProtocolFamilies.pf_null)
@@ -84,7 +84,7 @@ class TCPStream
 	# Creates a client socket, this is meant to be used by accept only
 	private init server_side(h: SocketAcceptResult)
 	do
-		_buffer = new FlatBuffer
+		_buffer = new NativeString(1024)
 		_buffer_pos = 0
 		socket = h.socket
 		addrin = h.addr_in
@@ -110,7 +110,7 @@ class TCPStream
 	# timeout : Time in milliseconds before stopping to wait for events
 	fun ready_to_read(timeout: Int): Bool
 	do
-		if _buffer_pos < _buffer.length then return true
+		if _buffer_pos < _buffer_length then return true
 		if end_reached then return false
 		var events = [new NativeSocketPollValues.pollin]
 		return pollin(events, timeout).length != 0
@@ -153,6 +153,11 @@ class TCPStream
 		socket.write_byte value
 	end
 
+	redef fun write_bytes(s) do
+		if closed then return
+		socket.write(s.to_s)
+	end
+
 	fun write_ln(msg: Text)
 	do
 		if end_reached then return
@@ -162,7 +167,7 @@ class TCPStream
 
 	redef fun fill_buffer
 	do
-		_buffer.clear
+		_buffer_length = 0
 		_buffer_pos = 0
 		if not connected then return
 		var read = socket.read
@@ -170,7 +175,17 @@ class TCPStream
 			close
 			end_reached = true
 		end
-		_buffer.append(read)
+		enlarge(_buffer_capacity + read.length)
+		read.copy_to_native(_buffer, read.length, 0, 0)
+		_buffer_length = read.length
+	end
+
+	fun enlarge(len: Int) do
+		if _buffer_capacity >= len then return
+		while _buffer_capacity < len do _buffer_capacity *= 2
+		var ns = new NativeString(_buffer_capacity)
+		_buffer.copy_to(ns, _buffer_length - _buffer_pos, _buffer_pos, 0)
+		_buffer = ns
 	end
 
 	redef fun close
