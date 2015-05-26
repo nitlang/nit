@@ -499,7 +499,7 @@ redef class String
 		int di;
 		char *in_text;
 
-		in_text = String_to_cstring(recv);
+		in_text = String_to_cstring(self);
 
 		md5_init(&state);
 		md5_append(&state, (const md5_byte_t *)in_text, strlen(in_text));

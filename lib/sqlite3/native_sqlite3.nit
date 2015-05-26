@@ -29,7 +29,7 @@ end
 
 extern class Sqlite3Code `{int`}
 	new ok `{ return SQLITE_OK; `} #         0   /* Successful result */
-	fun is_ok: Bool `{ return recv == SQLITE_OK; `}
+	fun is_ok: Bool `{ return self == SQLITE_OK; `}
 
 	# new  `{ return SQLITE_ERROR; `} #      1   /* SQL error or missing database */
 	# new  `{ return SQLITE_INTERNAL; `} #    2   /* Internal logic error in SQLite */
@@ -61,14 +61,14 @@ extern class Sqlite3Code `{int`}
 	# new  `{ return SQLITE_WARNING; `} #    28   /* Warnings from sqlite3_log() */
 
 	new row `{ return SQLITE_ROW; `} #        100  /* sqlite3_step() has another row ready */
-	fun is_row: Bool `{ return recv == SQLITE_ROW; `}
+	fun is_row: Bool `{ return self == SQLITE_ROW; `}
 
 	new done `{ return SQLITE_DONE; `} #       101  /* sqlite3_step() has finished executing */
-	fun is_done: Bool `{ return recv == SQLITE_DONE; `}
+	fun is_done: Bool `{ return self == SQLITE_DONE; `}
 
 	redef fun to_s: String import NativeString.to_s `{
 #if SQLITE_VERSION_NUMBER >= 3007015
-		char *err = (char *)sqlite3_errstr(recv);
+		char *err = (char *)sqlite3_errstr(self);
 #else
 		char *err = "sqlite3_errstr supported only by version >= 3.7.15";
 #endif
@@ -82,11 +82,11 @@ extern class NativeStatement `{sqlite3_stmt*`}
 
 	# Evaluate the statement
 	fun step: Sqlite3Code `{
-		return sqlite3_step(recv);
+		return sqlite3_step(self);
 	`}
 
 	fun column_name(i: Int) : String import NativeString.to_s `{
-		const char * name = (sqlite3_column_name(recv, i));
+		const char * name = (sqlite3_column_name(self, i));
 		if(name == NULL){
 			name = "";
 		}
@@ -96,37 +96,37 @@ extern class NativeStatement `{sqlite3_stmt*`}
 
 	# Number of bytes in the blob or string at row `i`
 	fun column_bytes(i: Int) : Int `{
-		return sqlite3_column_bytes(recv, i);
+		return sqlite3_column_bytes(self, i);
 	`}
 
 	fun column_double(i: Int) : Float `{
-		return sqlite3_column_double(recv, i);
+		return sqlite3_column_double(self, i);
 	`}
 
 	fun column_int(i: Int) : Int `{
-		return sqlite3_column_int(recv, i);
+		return sqlite3_column_int(self, i);
 	`}
 
 	fun column_text(i: Int): NativeString `{
-		return (char *)sqlite3_column_text(recv, i);
+		return (char *)sqlite3_column_text(self, i);
 	`}
 
 	# Type of the entry at row `i`
 	fun column_type(i: Int): DataType `{
-		return sqlite3_column_type(recv, i);
+		return sqlite3_column_type(self, i);
 	`}
 
-	fun column_blob(i: Int): Pointer `{ return (void*)sqlite3_column_blob(recv, i); `}
+	fun column_blob(i: Int): Pointer `{ return (void*)sqlite3_column_blob(self, i); `}
 
 	fun column_count: Int `{
-		return sqlite3_column_count(recv);
+		return sqlite3_column_count(self);
 	`}
 
 	# Reset this statement to its original state, to be reexecuted
-	fun reset: Sqlite3Code `{ return sqlite3_reset(recv); `}
+	fun reset: Sqlite3Code `{ return sqlite3_reset(self); `}
 
 	# Delete this statement
-	fun finalize: Sqlite3Code `{ return sqlite3_finalize(recv); `}
+	fun finalize: Sqlite3Code `{ return sqlite3_finalize(self); `}
 end
 
 # A database connection
@@ -155,24 +155,24 @@ extern class NativeSqlite3 `{sqlite3 *`}
 	# Close this connection
 	fun close `{
 #if SQLITE_VERSION_NUMBER >= 3007014
-		sqlite3_close_v2(recv);
+		sqlite3_close_v2(self);
 #else
 		// A program using the older version should not rely on the garbage-collector
 		// to close its connections. They must be closed manually after the associated
 		// prepare statements have been finalized.
-		sqlite3_close(recv);
+		sqlite3_close(self);
 #endif
 	`}
 
 	# Execute a SQL statement
 	fun exec(sql: String): Sqlite3Code import String.to_cstring `{
-		return sqlite3_exec(recv, String_to_cstring(sql), 0, 0, 0);
+		return sqlite3_exec(self, String_to_cstring(sql), 0, 0, 0);
 	`}
 
 	# Prepare a SQL statement
 	fun prepare(sql: String): nullable NativeStatement import String.to_cstring, NativeStatement.as nullable `{
 		sqlite3_stmt *stmt;
-		int res = sqlite3_prepare_v2(recv, String_to_cstring(sql), -1, &stmt, 0);
+		int res = sqlite3_prepare_v2(self, String_to_cstring(sql), -1, &stmt, 0);
 		if (res == SQLITE_OK)
 			return NativeStatement_as_nullable(stmt);
 		else
@@ -180,21 +180,21 @@ extern class NativeSqlite3 `{sqlite3 *`}
 	`}
 
 	fun last_insert_rowid: Int `{
-		return sqlite3_last_insert_rowid(recv);
+		return sqlite3_last_insert_rowid(self);
 	`}
 
 	fun error: Sqlite3Code `{
-		return sqlite3_errcode(recv);
+		return sqlite3_errcode(self);
 	`}
 end
 
 # Sqlite data types
 extern class DataType `{ int `}
-	fun is_integer: Bool `{ return recv == SQLITE_INTEGER; `}
-	fun is_float: Bool `{ return recv == SQLITE_FLOAT; `}
-	fun is_blob: Bool `{ return recv == SQLITE_BLOB; `}
-	fun is_null: Bool `{ return recv == SQLITE_NULL; `}
-	fun is_text: Bool `{ return recv == SQLITE_TEXT; `}
+	fun is_integer: Bool `{ return self == SQLITE_INTEGER; `}
+	fun is_float: Bool `{ return self == SQLITE_FLOAT; `}
+	fun is_blob: Bool `{ return self == SQLITE_BLOB; `}
+	fun is_null: Bool `{ return self == SQLITE_NULL; `}
+	fun is_text: Bool `{ return self == SQLITE_TEXT; `}
 
-	fun to_i: Int `{ return recv; `}
+	fun to_i: Int `{ return self; `}
 end

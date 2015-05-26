@@ -32,7 +32,7 @@ redef extern class SDLWindow
 
 		SDL_VERSION(&val->version);
 
-		if(SDL_GetWindowWMInfo(recv, val) <= 0) {
+		if(SDL_GetWindowWMInfo(self, val) <= 0) {
 			free(val);
 			return NULL;
 		}
@@ -46,27 +46,27 @@ end
 # Created using `SDLWindow::vm_info`
 extern class SDLSysWMInfo `{ SDL_SysWMinfo * `}
 	# Is this an unknown window manager?
-	fun is_unknown: Bool `{ return recv->subsystem == SDL_SYSWM_UNKNOWN; `}
+	fun is_unknown: Bool `{ return self->subsystem == SDL_SYSWM_UNKNOWN; `}
 
 	# Is this a Windows system?
-	fun is_windows: Bool `{ return recv->subsystem == SDL_SYSWM_WINDOWS; `}
+	fun is_windows: Bool `{ return self->subsystem == SDL_SYSWM_WINDOWS; `}
 
 	# Is this the X11 window manager?
-	fun is_x11: Bool `{ return recv->subsystem == SDL_SYSWM_X11; `}
+	fun is_x11: Bool `{ return self->subsystem == SDL_SYSWM_X11; `}
 
 	# Is this a direct DirectFB?
-	fun is_direcfb: Bool `{ return recv->subsystem == SDL_SYSWM_DIRECTFB; `}
+	fun is_direcfb: Bool `{ return self->subsystem == SDL_SYSWM_DIRECTFB; `}
 
 	# Is this system an OS X?
-	fun is_cocoa: Bool `{ return recv->subsystem == SDL_SYSWM_COCOA; `}
+	fun is_cocoa: Bool `{ return self->subsystem == SDL_SYSWM_COCOA; `}
 
 	# Is this system an iOS?
-	fun is_uikit: Bool `{ return recv->subsystem == SDL_SYSWM_UIKIT; `}
+	fun is_uikit: Bool `{ return self->subsystem == SDL_SYSWM_UIKIT; `}
 
 	# It this window manager Wayland?
 	fun is_wayland: Bool `{
 		#if SDL_VERSION_ATLEAST(2, 0, 2)
-			return recv->subsystem == SDL_SYSWM_WAYLAND;
+			return self->subsystem == SDL_SYSWM_WAYLAND;
 		#else
 			return 0;
 		#endif
@@ -75,7 +75,7 @@ extern class SDLSysWMInfo `{ SDL_SysWMinfo * `}
 	# It this window manager Mir?
 	fun is_mir: Bool `{
 		#if SDL_VERSION_ATLEAST(2, 0, 3)
-			return recv->subsystem == SDL_SYSWM_MIR;
+			return self->subsystem == SDL_SYSWM_MIR;
 		#else
 			return 0;
 		#endif
@@ -84,7 +84,7 @@ extern class SDLSysWMInfo `{ SDL_SysWMinfo * `}
 	# Is this system a Windows RT?
 	fun is_winrt: Bool `{
 		#if SDL_VERSION_ATLEAST(2, 0, 3)
-			return recv->subsystem == SDL_SYSWM_WINRT;
+			return self->subsystem == SDL_SYSWM_WINRT;
 		#else
 			return 0;
 		#endif
@@ -93,7 +93,7 @@ extern class SDLSysWMInfo `{ SDL_SysWMinfo * `}
 	# Is this system an Android?
 	fun is_android: Bool `{
 		#if SDL_VERSION_ATLEAST(2, 0, 4)
-			return recv->subsystem == SDL_SYSWM_ANDROID;
+			return self->subsystem == SDL_SYSWM_ANDROID;
 		#else
 			return 0;
 		#endif
@@ -103,6 +103,6 @@ extern class SDLSysWMInfo `{ SDL_SysWMinfo * `}
 	#
 	# Require: `is_x11`
 	fun x11_window_handle: Pointer `{
-		return (void*)recv->info.x11.window;
+		return (void*)self->info.x11.window;
 	`}
 end

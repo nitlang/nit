@@ -235,7 +235,7 @@ redef class String
 		sha1nfo s;
 
 		sha1_init(&s);
-		sha1_write(&s, String_to_cstring(recv), String_length(recv));
+		sha1_write(&s, String_to_cstring(self), String_length(self));
 		uint8_t* digest = sha1_result(&s);
 
 		char* digested = malloc(21);
@@ -258,7 +258,7 @@ redef class String
 		sha1nfo s;
 
 		sha1_init(&s);
-		sha1_write(&s, String_to_cstring(recv), String_length(recv));
+		sha1_write(&s, String_to_cstring(self), String_length(self));
 		uint8_t* digest = sha1_result(&s);
 
 		char* ret_str = malloc(41);

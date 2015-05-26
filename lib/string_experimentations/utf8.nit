@@ -57,8 +57,8 @@ extern class UTF8Char `{ UTF8Char* `}
 	#  4       | 11110xxx 10xxxxxx 10xxxxxx 10xxxxxx
 	# ~~~
 	private fun len: Int `{
-		char* ns = recv->ns;
-		int pos = recv->pos;
+		char* ns = self->ns;
+		int pos = self->pos;
 		char nspos = ns[pos];
 		if((nspos & 0x80) == 0x00){ return 1;}
 		if((nspos & 0xE0) == 0xC0){ return 2;}
@@ -70,34 +70,34 @@ extern class UTF8Char `{ UTF8Char* `}
 
 	# Position in containing NativeString
 	private fun pos: Int `{
-		return recv->pos;
+		return self->pos;
 	`}
 
-	private fun pos=(p: Int) `{recv->pos = p;`}
+	private fun pos=(p: Int) `{self->pos = p;`}
 
 	# C char* wrapping the char
 	fun ns: NativeString `{
-		return recv->ns;
+		return self->ns;
 	`}
 
 	# Returns the Unicode code point representing the character
 	#
 	# Note : A unicode character might not be a visible glyph, but it will be used to determine canonical equivalence
 	fun code_point: Int import UTF8Char.len `{
-		switch(UTF8Char_len(recv)){
+		switch(UTF8Char_len(self)){
 			case 1:
-				return (long)(0x7F & (unsigned char)recv->ns[recv->pos]);
+				return (long)(0x7F & (unsigned char)self->ns[self->pos]);
 			case 2:
-				return 0 | ((0x1F & (unsigned char)recv->ns[recv->pos]) << 6) | (0x3F & (unsigned char)recv->ns[recv->pos+1]);
+				return 0 | ((0x1F & (unsigned char)self->ns[self->pos]) << 6) | (0x3F & (unsigned char)self->ns[self->pos+1]);
 			case 3:
-				return 0 | ((0x0F & (unsigned char)recv->ns[recv->pos]) << 12) |
-				((0x3F & (unsigned char)recv->ns[recv->pos+1]) << 6) |
-				(0x3F & (unsigned char)recv->ns[recv->pos+2]);
+				return 0 | ((0x0F & (unsigned char)self->ns[self->pos]) << 12) |
+				((0x3F & (unsigned char)self->ns[self->pos+1]) << 6) |
+				(0x3F & (unsigned char)self->ns[self->pos+2]);
 			case 4:
-				return 0 | ((0x07 & (unsigned char)recv->ns[recv->pos]) << 18) |
-				((0x3F & (unsigned char)recv->ns[recv->pos+1]) << 12) |
-				((0x3F & (unsigned char)recv->ns[recv->pos+2]) << 6) |
-				(0x3F & (unsigned char)recv->ns[recv->pos+3]);
+				return 0 | ((0x07 & (unsigned char)self->ns[self->pos]) << 18) |
+				((0x3F & (unsigned char)self->ns[self->pos+1]) << 12) |
+				((0x3F & (unsigned char)self->ns[self->pos+2]) << 6) |
+				(0x3F & (unsigned char)self->ns[self->pos+3]);
 		}
 	`}
 
@@ -106,11 +106,11 @@ extern class UTF8Char `{ UTF8Char* `}
 	# NOTE : Works only on ASCII chars
 	# TODO : Support unicode for to_upper
 	fun to_upper: UTF8Char import UTF8Char.code_point `{
-		int cp = UTF8Char_code_point(recv);
-		if(cp < 97 || cp > 122){ return recv; }
+		int cp = UTF8Char_code_point(self);
+		if(cp < 97 || cp > 122){ return self; }
 		char* ns = malloc(2);
 		ns[1] = '\0';
-		char c = recv->ns[recv->pos];
+		char c = self->ns[self->pos];
 		ns[0] = c - 32;
 		UTF8Char* ret = malloc(sizeof(UTF8Char));
 		ret->ns = ns;
@@ -123,11 +123,11 @@ extern class UTF8Char `{ UTF8Char* `}
 	# NOTE : Works only on ASCII chars
 	# TODO : Support unicode for to_upper
 	fun to_lower: UTF8Char import UTF8Char.code_point `{
-		int cp = UTF8Char_code_point(recv);
-		if(cp < 65 || cp > 90){ return recv; }
+		int cp = UTF8Char_code_point(self);
+		if(cp < 65 || cp > 90){ return self; }
 		char* ns = malloc(2);
 		ns[1] = '\0';
-		char c = recv->ns[recv->pos];
+		char c = self->ns[self->pos];
 		ns[0] = c + 32;
 		UTF8Char* ret = malloc(sizeof(UTF8Char));
 		ret->ns = ns;
@@ -148,27 +148,27 @@ extern class UTF8Char `{ UTF8Char* `}
 	end
 
 	redef fun output import UTF8Char.code_point `{
-		switch(UTF8Char_len(recv)){
+		switch(UTF8Char_len(self)){
 			case 1:
-				printf("%c", recv->ns[recv->pos]);
+				printf("%c", self->ns[self->pos]);
 				break;
 			case 2:
-				printf("%c%c", recv->ns[recv->pos], recv->ns[recv->pos + 1]);
+				printf("%c%c", self->ns[self->pos], self->ns[self->pos + 1]);
 				break;
 			case 3:
-				printf("%c%c%c", recv->ns[recv->pos], recv->ns[recv->pos + 1], recv->ns[recv->pos + 2]);
+				printf("%c%c%c", self->ns[self->pos], self->ns[self->pos + 1], self->ns[self->pos + 2]);
 				break;
 			case 4:
-				printf("%c%c%c%c", recv->ns[recv->pos], recv->ns[recv->pos + 1], recv->ns[recv->pos + 2], recv->ns[recv->pos + 3]);
+				printf("%c%c%c%c", self->ns[self->pos], self->ns[self->pos + 1], self->ns[self->pos + 2], self->ns[self->pos + 3]);
 				break;
 		}
 	`}
 
 	redef fun to_s import NativeString.to_s_with_length `{
-		int len = utf8___UTF8Char_len___impl(recv);
+		int len = utf8___UTF8Char_len___impl(self);
 		char* r = malloc(len + 1);
 		r[len] = '\0';
-		char* src = (recv->ns + recv->pos);
+		char* src = (self->ns + self->pos);
 		memcpy(r, src, len);
 		return NativeString_to_s_with_length(r, len);
 	`}
@@ -182,14 +182,14 @@ private extern class StringIndex `{ UTF8Char* `}
 	new(size: Int) `{ return malloc(size*sizeof(UTF8Char)); `}
 
 	# Sets the character at `index` as `item`
-	fun []=(index: Int, item: UTF8Char) `{ recv[index] = *item; `}
+	fun []=(index: Int, item: UTF8Char) `{ self[index] = *item; `}
 
 	# Gets the character at position `id`
-	fun [](id: Int): UTF8Char `{ return &recv[id]; `}
+	fun [](id: Int): UTF8Char `{ return &self[id]; `}
 
 	# Copies a part of self starting at index `my_from` of length `length` into `other`, starting at `its_from`
 	fun copy_to(other: StringIndex, my_from: Int, its_from: Int, length: Int)`{
-		UTF8Char* myfrom = recv + my_from*(sizeof(UTF8Char));
+		UTF8Char* myfrom = self + my_from*(sizeof(UTF8Char));
 		UTF8Char* itsfrom = other + its_from*(sizeof(UTF8Char));
 		memcpy(itsfrom, myfrom, length);
 	`}
@@ -380,7 +380,7 @@ redef class NativeString
 		while(pos < length){
 			UTF8Char* curr = &index[index_pos];
 			curr->pos = pos;
-			curr->ns = recv;
+			curr->ns = self;
 			pos += UTF8Char_len(curr);
 			index_pos ++;
 		}

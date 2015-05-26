@@ -185,7 +185,7 @@ class Opengles1Display
 		}
 
 		/* Used by Android to set buffer geometry */
-		Opengles1Display_midway_init(recv, format);
+		Opengles1Display_midway_init(self, format);
 
 		surface = eglCreateWindowSurface(display, config, mnit_window, NULL);
 		context = eglCreateContext(display, config, NULL, NULL);
@@ -428,43 +428,43 @@ end
 extern class Opengles1Image in "C" `{struct mnit_opengles_Texture *`}
 	super Image
 
-    redef fun destroy is extern `{ free( recv ); `}
+    redef fun destroy is extern `{ free( self ); `}
 
-    redef fun width: Int is extern `{ return recv->width; `}
-    redef fun height: Int is extern `{ return recv->height; `}
+    redef fun width: Int is extern `{ return self->width; `}
+    redef fun height: Int is extern `{ return self->height; `}
 
-	fun center_x: Int `{ return recv->center_x; `}
-	fun center_y: Int `{ return recv->center_y; `}
+	fun center_x: Int `{ return self->center_x; `}
+	fun center_y: Int `{ return self->center_y; `}
 
     redef fun scale=( v: Float ) is extern `{
-		recv->scale = v;
-		recv->center_x = v*recv->width/2;
-		recv->center_y = v*recv->height/2;
+		self->scale = v;
+		self->center_x = v*self->width/2;
+		self->center_y = v*self->height/2;
     `}
-    redef fun scale: Float is extern `{ return recv->scale; `}
+    redef fun scale: Float is extern `{ return self->scale; `}
 
-    redef fun blended=( v: Bool ) is extern `{ recv->blended = v; `}
-    redef fun blended: Bool is extern `{ return recv->blended; `}
+    redef fun blended=( v: Bool ) is extern `{ self->blended = v; `}
+    redef fun blended: Bool is extern `{ return self->blended; `}
 
     # inherits scale and blend from source
     redef fun subimage( x, y, w, h: Int ): Image is extern import Opengles1Image.as( Image ) `{
 		struct mnit_opengles_Texture* image =
 			malloc( sizeof( struct mnit_opengles_Texture ) );
 
-		image->texture = recv->texture;
+		image->texture = self->texture;
 		image->width = w;
 		image->height = h;
-		image->center_x = recv->scale*w/2;
-		image->center_y = recv->scale*h/2;
-		image->scale = recv->scale;
-		image->blended = recv->blended;
+		image->center_x = self->scale*w/2;
+		image->center_y = self->scale*h/2;
+		image->scale = self->scale;
+		image->blended = self->blended;
 
-		float r_dx = recv->src_xi - recv->src_xo;
-		float r_dy = recv->src_yi - recv->src_yo;
-		image->src_xo = recv->src_xo + ((float)x)/recv->width*r_dx;
-		image->src_yo = recv->src_yo + ((float)y)/recv->height*r_dy;
-		image->src_xi = recv->src_xo + ((float)x+w)/recv->width*r_dx;
-		image->src_yi = recv->src_yo + ((float)y+h)/recv->height*r_dy;
+		float r_dx = self->src_xi - self->src_xo;
+		float r_dy = self->src_yi - self->src_yo;
+		image->src_xo = self->src_xo + ((float)x)/self->width*r_dx;
+		image->src_yo = self->src_yo + ((float)y)/self->height*r_dy;
+		image->src_xi = self->src_xo + ((float)x+w)/self->width*r_dx;
+		image->src_yi = self->src_yo + ((float)y+h)/self->height*r_dy;
 
 		return Opengles1Image_as_Image( image );
     `}

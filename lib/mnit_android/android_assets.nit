@@ -35,8 +35,8 @@ in "C" `{
 	void mnit_android_png_read_data(png_structp png_ptr,
 			png_bytep data, png_size_t length)
 	{
-			struct AAsset *recv = png_get_io_ptr(png_ptr);
-			int read = AAsset_read(recv, data, length);
+			struct AAsset *self = png_get_io_ptr(png_ptr);
+			int read = AAsset_read(self, data, length);
 	}
 	void mnit_android_png_error_fn(png_structp png_ptr,
 		png_const_charp error_msg)
@@ -54,7 +54,7 @@ extern class AndroidAsset in "C" `{struct AAsset*`}
 
 	fun read(count: Int): nullable String is extern import String.as nullable, NativeString.to_s `{
 		char *buffer = malloc(sizeof(char) * (count+1));
-		int read = AAsset_read(recv, buffer, count);
+		int read = AAsset_read(self, buffer, count);
 		if (read != count)
 			return null_String();
 		else
@@ -65,18 +65,18 @@ extern class AndroidAsset in "C" `{struct AAsset*`}
 	`}
 
 	fun length: Int is extern `{
-		return AAsset_getLength(recv);
+		return AAsset_getLength(self);
 	`}
 
 	fun to_fd: Int is extern `{
 		off_t start;
 		off_t length;
-		int fd = AAsset_openFileDescriptor(recv, &start, &length);
+		int fd = AAsset_openFileDescriptor(self, &start, &length);
 		return fd;
 	`}
 
 	fun close is extern `{
-		AAsset_close(recv);
+		AAsset_close(self);
 	`}
 end
 
@@ -102,7 +102,7 @@ redef class App
 	end
 
 	protected fun load_asset_from_apk(path: String): nullable AndroidAsset is extern import String.to_cstring, AndroidAsset.as nullable, native_app_glue  `{
-		struct android_app *native_app_glue = App_native_app_glue(recv);
+		struct android_app *native_app_glue = App_native_app_glue(self);
 		struct AAsset* a = AAssetManager_open(native_app_glue->activity->assetManager, String_to_cstring(path), AASSET_MODE_BUFFER);
 		if (a == NULL)
 		{
@@ -119,7 +119,7 @@ end
 redef class Opengles1Image
 	# Read a png from a zipped stream
 	new from_android_asset(asset: AndroidAsset) import Int.next_pow `{
-		struct mnit_opengles_Texture *recv = NULL;
+		struct mnit_opengles_Texture *self = NULL;
 
 		png_structp png_ptr = NULL;
 		png_infop info_ptr = NULL;
@@ -198,7 +198,7 @@ redef class Opengles1Image
 		for (i = 0; i < height; i++)
 			memcpy(pixels + (row_bytes_pow2*i), row_pointers[i], row_bytes);
 
-		recv = mnit_opengles_load_image((const uint_least32_t *)pixels,
+		self = mnit_opengles_load_image((const uint_least32_t *)pixels,
 			width, height, width_pow2, height_pow2, has_alpha);
 
 		// Calculate the size of the client-side memory allocated and freed
@@ -223,7 +223,7 @@ redef class Opengles1Image
 		}
 
 	close_stream:
-		return recv;
+		return self;
 	`}
 end
 

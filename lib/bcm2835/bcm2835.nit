@@ -57,39 +57,39 @@ extern class RPiPin `{ RPiGPIOPin `}
 	new p1_26 `{ return RPI_GPIO_P1_26; `}
 
 	# Select mode: input, output or alts
-	fun fsel=(mode: FunctionSelect) `{ bcm2835_gpio_fsel(recv, mode); `}
+	fun fsel=(mode: FunctionSelect) `{ bcm2835_gpio_fsel(self, mode); `}
 
 	# Set output
-	redef fun write(high) `{ bcm2835_gpio_write(recv, high? HIGH: LOW); `}
+	redef fun write(high) `{ bcm2835_gpio_write(self, high? HIGH: LOW); `}
 
 	# Set pull up mode
-	fun pud=(pud: PUDControl) `{ bcm2835_gpio_set_pud(recv, pud); `}
+	fun pud=(pud: PUDControl) `{ bcm2835_gpio_set_pud(self, pud); `}
 
 	# Falling edge detect
 	# Do not use on raspbian, it is bugged!
-	fun fen `{ bcm2835_gpio_fen(recv); `}
-	fun clr_fen `{ bcm2835_gpio_clr_fen(recv); `}
+	fun fen `{ bcm2835_gpio_fen(self); `}
+	fun clr_fen `{ bcm2835_gpio_clr_fen(self); `}
 
 	# Raising edge detect
 	# Do not use on raspbian, it is bugged!
-	fun ren `{ bcm2835_gpio_ren(recv); `}
-	fun clr_ren `{ bcm2835_gpio_clr_ren(recv); `}
+	fun ren `{ bcm2835_gpio_ren(self); `}
+	fun clr_ren `{ bcm2835_gpio_clr_ren(self); `}
 
 	# High edge detect
 	# Do not use on raspbian, it is bugged!
-	fun hen `{ bcm2835_gpio_hen(recv); `}
-	fun clr_hen `{ bcm2835_gpio_clr_hen(recv); `}
+	fun hen `{ bcm2835_gpio_hen(self); `}
+	fun clr_hen `{ bcm2835_gpio_clr_hen(self); `}
 
 	# Low edge detect
 	# Do not use on raspbian, it is bugged!
-	fun len `{ bcm2835_gpio_len(recv); `}
-	fun clr_len `{ bcm2835_gpio_clr_len(recv); `}
+	fun len `{ bcm2835_gpio_len(self); `}
+	fun clr_len `{ bcm2835_gpio_clr_len(self); `}
 
-	fun set_eds `{ bcm2835_gpio_set_eds(recv); `}
-	fun eds: Bool `{ return bcm2835_gpio_eds(recv); `}
+	fun set_eds `{ bcm2835_gpio_set_eds(self); `}
+	fun eds: Bool `{ return bcm2835_gpio_eds(self); `}
 
 	# Return input on pin, true for high and false for low
-	fun lev: Bool `{ return bcm2835_gpio_lev(recv); `}
+	fun lev: Bool `{ return bcm2835_gpio_lev(self); `}
 end
 
 extern class FunctionSelect `{ bcm2835FunctionSelect `}
@@ -115,8 +115,8 @@ extern class PUDControl `{ bcm2835PUDControl `}
 end
 
 redef universal Int
-	fun bcm2835_delay `{ bcm2835_delay(recv); `}
-	fun bcm2835_delay_micros `{ bcm2835_delayMicroseconds(recv); `}
+	fun bcm2835_delay `{ bcm2835_delay(self); `}
+	fun bcm2835_delay_micros `{ bcm2835_delayMicroseconds(self); `}
 end
 
 class RotaryEncoder

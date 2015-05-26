@@ -38,7 +38,7 @@ redef class NativeString
 	#
 	# For more info, SEE setlocale manual
 	fun set_locale `{
-		setlocale(LC_ALL, recv);
+		setlocale(LC_ALL, self);
 	`}
 end
 
@@ -55,13 +55,13 @@ redef class String
 	# Gettext `gettext`, SEE gettext manual for further info
 	fun gettext: String
 	import String.to_cstring, NativeString.to_s `{
-		return NativeString_to_s(gettext(String_to_cstring(recv)));
+		return NativeString_to_s(gettext(String_to_cstring(self)));
 	`}
 
 	# Gettext `dgettext`, SEE gettext manual for further info
 	fun dgettext(domain: String): String
 	import String.to_cstring, NativeString.to_s `{
-		return NativeString_to_s(dgettext(String_to_cstring(domain), String_to_cstring(recv)));
+		return NativeString_to_s(dgettext(String_to_cstring(domain), String_to_cstring(self)));
 	`}
 end
 
