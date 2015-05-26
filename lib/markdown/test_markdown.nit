@@ -2688,3 +2688,130 @@ c:c
 		assert res == exp
 	end
 end
+
+class TestTokenLocation
+	super TestSuite
+
+	fun test_token_location1 do
+		var string = "**Hello** `World`"
+		var stack =  [
+			"TokenStrongStar at 1,1--1,1",
+			"TokenStrongStar at 1,8--1,8",
+			"TokenCodeSingle at 1,11--1,11",
+			"TokenCodeSingle at 1,17--1,17"]
+		(new TestTokenProcessor(stack)).process(string)
+	end
+
+	fun test_token_location2 do
+		var string = "**Hello**\n`World`\n*Bonjour*\n[le monde]()"
+		var stack =  [
+			"TokenStrongStar at 1,1--1,1",
+			"TokenStrongStar at 1,8--1,8",
+			"TokenCodeSingle at 2,1--2,1",
+			"TokenCodeSingle at 2,7--2,7",
+			"TokenEmStar at 3,1--3,1",
+			"TokenEmStar at 3,9--3,9",
+			"TokenLink at 4,1--4,1"]
+		(new TestTokenProcessor(stack)).process(string)
+	end
+
+	fun test_token_location3 do
+		var string = """**Hello**
+		`World`
+		*Bonjour*
+		[le monde]()"""
+		var stack =  [
+			"TokenStrongStar at 1,1--1,1",
+			"TokenStrongStar at 1,8--1,8",
+			"TokenCodeSingle at 2,1--2,1",
+			"TokenCodeSingle at 2,7--2,7",
+			"TokenEmStar at 3,1--3,1",
+			"TokenEmStar at 3,9--3,9",
+			"TokenLink at 4,1--4,1"]
+		(new TestTokenProcessor(stack)).process(string)
+	end
+end
+
+class TestTokenProcessor
+	super MarkdownProcessor
+
+	var test_stack: Array[String]
+
+	redef fun token_at(input, pos) do
+		var token = super
+		if token isa TokenNone then return token
+		var res = "{token.class_name} at {token.location}"
+		print res
+		var exp = test_stack.shift
+		assert exp == res
+		return token
+	end
+end
+
+class TestBlockLocation
+	super TestSuite
+
+	var proc = new MarkdownProcessor
+
+	fun test_block_location1 do
+		var stack = [
+			"BlockHeadline: 1,1--1,8",
+			"BlockListItem: 2,1--2,6",
+			"BlockListItem: 3,1--3,5"
+		]
+		var string =
+		"# Title\n* li1\n* li2"
+		proc.emitter.decorator = new TestBlockDecorator(stack)
+		proc.process(string)
+	end
+
+	fun test_block_location2 do
+		var stack = [
+			"BlockHeadline: 1,1--1,11",
+			"BlockFence: 3,1--5,4",
+			"BlockListItem: 7,1--7,7",
+			"BlockListItem: 8,1--8,6"]
+		var string ="""#### Title
+
+~~~fence
+some code
+~~~
+
+1. li1
+1. li2"""
+		proc.emitter.decorator = new TestBlockDecorator(stack)
+		proc.process(string)
+	end
+end
+
+class TestBlockDecorator
+	super HTMLDecorator
+
+	var stack: Array[String]
+
+	redef fun add_headline(v, block) do
+		super
+		check_res(block)
+	end
+
+	redef fun add_listitem(v, block) do
+		super
+		check_res(block)
+	end
+
+	redef fun add_blockquote(v, block) do
+		super
+		check_res(block)
+	end
+
+	redef fun add_code(v, block) do
+		super
+		check_res(block)
+	end
+
+	fun check_res(block: Block) do
+		var res = "{block.class_name}: {block.block.location}"
+		var exp = stack.shift
+		assert res == exp
+	end
+end
