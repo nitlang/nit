@@ -4,7 +4,7 @@
 #
 # This file is free software, which comes along with NIT.  This software is
 # distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
-# without  even  the implied warranty of  MERCHANTABILITY or  FITNESS FOR A 
+# without  even  the implied warranty of  MERCHANTABILITY or  FITNESS FOR A
 # PARTICULAR PURPOSE.  You can modify it is you want,  provided this header
 # is kept unaltered, and a notification of the changes is added.
 # You  are  allowed  to  redistribute it and sell it, alone or is a part of
@@ -238,14 +238,16 @@ private class DowntoIteratorRange[E: Discrete]
 end
 
 redef class Int
-	# Returns the range from 0 to `self-1`, is used to do:
+	# Returns the range from 0 to `self-1`.
 	#
-	#     var s = new Array[String]
-	#     for i in 3.times do s.add "cool"
-	#     assert s.join(" ") == "cool cool cool"
+	#     assert 3.times == [0..3[
+	#     assert 10.times == [0..10[
+	#     assert ((-1).times).is_empty
 	#
-	#     s.clear
-	#     for i in 10.times do s.add(i.to_s)
-	#     assert s.to_s == "0123456789"
+	# This can be usefull for loops:
+	#
+	#    var s = new Array[String]
+	#    for i in 3.times do s.add "cool"
+	#    assert s.join(" ") == "cool cool cool"
 	fun times: Range[Int] do return [0 .. self[
 end
