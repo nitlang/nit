@@ -2153,6 +2153,10 @@ class MMethod
 	do
 		return self.is_init
 	end
+
+	# A specific method that is safe to call on null.
+	# Currently, only `==`, `!=` and `is_same_instance` are safe
+	fun is_null_safe: Bool do return name == "==" or name == "!=" or name == "is_same_instance"
 end
 
 # A global attribute
