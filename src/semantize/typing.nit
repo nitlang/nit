@@ -760,8 +760,8 @@ redef class AAttrPropdef
 	do
 		if not has_value then return
 
-		var mpropdef = self.mpropdef
-		if mpropdef == null then return # skip error
+		var mpropdef = self.mreadpropdef
+		if mpropdef == null or mpropdef.msignature == null then return # skip error
 
 		var v = new TypeVisitor(modelbuilder, mpropdef.mclassdef.mmodule, mpropdef)
 		self.selfvariable = v.selfvariable

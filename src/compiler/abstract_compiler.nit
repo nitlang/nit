@@ -2494,7 +2494,7 @@ redef class AAttrPropdef
 		var oldnode = v.current_node
 		v.current_node = self
 		var old_frame = v.frame
-		var frame = new StaticFrame(v, self.mpropdef.as(not null), recv.mcasttype.undecorate.as(MClassType), [recv])
+		var frame = new StaticFrame(v, self.mreadpropdef.as(not null), recv.mcasttype.undecorate.as(MClassType), [recv])
 		v.frame = frame
 
 		var value

@@ -354,7 +354,7 @@ class RapidTypeAnalysis
 			for npropdef in modelbuilder.collect_attr_propdef(cd) do
 				if not npropdef.has_value then continue
 
-				var mpropdef = npropdef.mpropdef.as(not null)
+				var mpropdef = npropdef.mreadpropdef.as(not null)
 				var v = new RapidTypeVisitor(self, bound_mtype, mpropdef)
 				v.enter_visit(npropdef.n_expr)
 				v.enter_visit(npropdef.n_block)

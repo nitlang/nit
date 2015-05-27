@@ -1245,7 +1245,7 @@ redef class AAttrPropdef
 	do
 		if is_lazy then return
 		if has_value then
-			var f = v.new_frame(self, mpropdef.as(not null), [recv])
+			var f = v.new_frame(self, mreadpropdef.as(not null), [recv])
 			evaluate_expr(v, recv, f)
 			return
 		end
