@@ -127,7 +127,7 @@ abstract class Text
 	end
 
 	# Return a null terminated char *
-	fun to_cstring: NativeString do return flatten.to_cstring
+	fun to_cstring: NativeString is abstract
 
 	# The index of the last occurrence of an element starting from pos (in reverse order).
 	#
@@ -838,9 +838,6 @@ abstract class Text
 		return escape_more_to_c("|\{\}<>")
 	end
 
-	# Flat representation of self
-	fun flatten: FlatText is abstract
-
 	private var hash_cache: nullable Int = null
 
 	redef fun hash
@@ -955,8 +952,6 @@ abstract class FlatText
 			i += 1
 		end
 	end
-
-	redef fun flatten do return self
 
 	redef fun copy_to_native(dest, n, src_offset, dest_offset) do
 		items.copy_to(dest, n, src_offset, dest_offset)
