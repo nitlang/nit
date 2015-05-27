@@ -249,6 +249,16 @@ abstract class Text
 	#     assert "ff".to_hex == 255
 	fun to_hex: Int do return a_to(16)
 
+	# If `self` contains only digits <= '7', return the corresponding integer.
+	#
+	#     assert "714".to_oct == 460
+	fun to_oct: Int do return a_to(8)
+
+	# If `self` contains only '0' et '1', return the corresponding integer.
+	#
+	#     assert "101101".to_bin == 45
+	fun to_bin: Int do return a_to(2)
+
 	# If `self` contains only digits and letters, return the corresponding integer in a given base
 	#
 	#     assert "120".a_to(3)     == 15

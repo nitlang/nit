@@ -87,6 +87,16 @@ redef class AExpr
 	end
 end
 
+redef class Text
+	private fun remove_underscores: Text do
+		var b = new FlatBuffer
+		for i in chars do
+			if i == '_' then continue
+			b.add i
+		end
+		return b
+	end
+end
 
 redef class AIntExpr
 	# The value of the literal int once computed.
@@ -96,14 +106,43 @@ end
 redef class ADecIntExpr
 	redef fun accept_literal(v)
 	do
-		self.value = self.n_number.text.to_i
+		value = self.n_number.text.to_i
 	end
 end
 
 redef class AHexIntExpr
 	redef fun accept_literal(v)
 	do
-		self.value = self.n_hex_number.text.substring_from(2).to_hex
+		var s = self.n_hex_number.text.substring_from(2).remove_underscores
+		if s.is_empty then
+			v.toolcontext.error(location, "Error: invalid hexadecimal literal")
+			return
+		end
+		value = s.to_hex
+	end
+end
+
+redef class ABinIntExpr
+	redef fun accept_literal(v)
+	do
+		var s = self.n_bin_number.text.substring_from(2).remove_underscores
+		if s.is_empty then
+			v.toolcontext.error(location, "Error: invalid binary literal")
+			return
+		end
+		value = s.to_bin
+	end
+end
+
+redef class AOctIntExpr
+	redef fun accept_literal(v)
+	do
+		var s = self.n_oct_number.text.substring_from(2).remove_underscores
+		if s.is_empty then
+			v.toolcontext.error(location, "Error: invalid octal literal")
+			return
+		end
+		value = s.to_oct
 	end
 end
 
