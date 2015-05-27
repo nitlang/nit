@@ -313,6 +313,18 @@ end
 class TOctNumber
 	super Token
 end
+class TBytenum
+	super Token
+end
+class THexBytenum
+	super Token
+end
+class TBinBytenum
+	super Token
+end
+class TOctBytenum
+	super Token
+end
 class TFloat
 	super Token
 end
@@ -1104,6 +1116,26 @@ end
 class AOctIntExpr
 	super AExpr
 	var n_oct_number: TOctNumber is writable, noinit
+	var n_annotations: nullable AAnnotations = null is writable
+end
+class ADecByteExpr
+	super AExpr
+	var n_bytenum: TBytenum is writable, noinit
+	var n_annotations: nullable AAnnotations = null is writable
+end
+class AHexByteExpr
+	super AExpr
+	var n_hex_bytenum: THexBytenum is writable, noinit
+	var n_annotations: nullable AAnnotations = null is writable
+end
+class ABinByteExpr
+	super AExpr
+	var n_bin_bytenum: TBinBytenum is writable, noinit
+	var n_annotations: nullable AAnnotations = null is writable
+end
+class AOctByteExpr
+	super AExpr
+	var n_oct_bytenum: TOctBytenum is writable, noinit
 	var n_annotations: nullable AAnnotations = null is writable
 end
 class AFloatExpr

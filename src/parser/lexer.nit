@@ -1242,7 +1242,7 @@ redef class TOctNumber
     end
 end
 
-redef class TFloat
+redef class TBytenum
     redef fun parser_index: Int
     do
 	return 103
@@ -1254,7 +1254,7 @@ redef class TFloat
     end
 end
 
-redef class TString
+redef class THexBytenum
     redef fun parser_index: Int
     do
 	return 104
@@ -1266,7 +1266,7 @@ redef class TString
     end
 end
 
-redef class TStartString
+redef class TBinBytenum
     redef fun parser_index: Int
     do
 	return 105
@@ -1278,7 +1278,7 @@ redef class TStartString
     end
 end
 
-redef class TMidString
+redef class TOctBytenum
     redef fun parser_index: Int
     do
 	return 106
@@ -1290,7 +1290,7 @@ redef class TMidString
     end
 end
 
-redef class TEndString
+redef class TFloat
     redef fun parser_index: Int
     do
 	return 107
@@ -1302,7 +1302,7 @@ redef class TEndString
     end
 end
 
-redef class TChar
+redef class TString
     redef fun parser_index: Int
     do
 	return 108
@@ -1314,7 +1314,7 @@ redef class TChar
     end
 end
 
-redef class TBadString
+redef class TStartString
     redef fun parser_index: Int
     do
 	return 109
@@ -1326,7 +1326,7 @@ redef class TBadString
     end
 end
 
-redef class TBadChar
+redef class TMidString
     redef fun parser_index: Int
     do
 	return 110
@@ -1338,10 +1338,58 @@ redef class TBadChar
     end
 end
 
-redef class TExternCodeSegment
+redef class TEndString
     redef fun parser_index: Int
     do
 	return 111
+    end
+
+    init init_tk(loc: Location)
+    do
+		_location = loc
+    end
+end
+
+redef class TChar
+    redef fun parser_index: Int
+    do
+	return 112
+    end
+
+    init init_tk(loc: Location)
+    do
+		_location = loc
+    end
+end
+
+redef class TBadString
+    redef fun parser_index: Int
+    do
+	return 113
+    end
+
+    init init_tk(loc: Location)
+    do
+		_location = loc
+    end
+end
+
+redef class TBadChar
+    redef fun parser_index: Int
+    do
+	return 114
+    end
+
+    init init_tk(loc: Location)
+    do
+		_location = loc
+    end
+end
+
+redef class TExternCodeSegment
+    redef fun parser_index: Int
+    do
+	return 115
     end
 
     init init_tk(loc: Location)
@@ -1354,7 +1402,7 @@ end
 redef class EOF
     redef fun parser_index: Int
     do
-	return 112
+	return 116
     end
 end
 
@@ -1671,30 +1719,42 @@ redef class Lexer
 			return new TOctNumber.init_tk(location)
 		end
 		if accept_token == 104 then
-			return new TFloat.init_tk(location)
+			return new TBytenum.init_tk(location)
 		end
 		if accept_token == 105 then
-			return new TString.init_tk(location)
+			return new THexBytenum.init_tk(location)
 		end
 		if accept_token == 106 then
-			return new TStartString.init_tk(location)
+			return new TBinBytenum.init_tk(location)
 		end
 		if accept_token == 107 then
-			return new TMidString.init_tk(location)
+			return new TOctBytenum.init_tk(location)
 		end
 		if accept_token == 108 then
-			return new TEndString.init_tk(location)
+			return new TFloat.init_tk(location)
 		end
 		if accept_token == 109 then
-			return new TChar.init_tk(location)
+			return new TString.init_tk(location)
 		end
 		if accept_token == 110 then
-			return new TBadString.init_tk(location)
+			return new TStartString.init_tk(location)
 		end
 		if accept_token == 111 then
-			return new TBadChar.init_tk(location)
+			return new TMidString.init_tk(location)
 		end
 		if accept_token == 112 then
+			return new TEndString.init_tk(location)
+		end
+		if accept_token == 113 then
+			return new TChar.init_tk(location)
+		end
+		if accept_token == 114 then
+			return new TBadString.init_tk(location)
+		end
+		if accept_token == 115 then
+			return new TBadChar.init_tk(location)
+		end
+		if accept_token == 116 then
 			return new TExternCodeSegment.init_tk(location)
 		end
 		abort # unknown token index `accept_token`

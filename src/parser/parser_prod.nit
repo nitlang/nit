@@ -6520,6 +6520,174 @@ redef class AOctIntExpr
 		v.enter_visit(_n_annotations)
 	end
 end
+redef class ADecByteExpr
+	init init_adecbyteexpr (
+		n_bytenum: nullable TBytenum,
+		n_annotations: nullable AAnnotations
+	)
+	do
+		_n_bytenum = n_bytenum.as(not null)
+		n_bytenum.parent = self
+		_n_annotations = n_annotations
+		if n_annotations != null then n_annotations.parent = self
+	end
+
+	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
+	do
+		if _n_bytenum == old_child then
+			n_bytenum = new_child.as(TBytenum)
+			return
+		end
+		if _n_annotations == old_child then
+			n_annotations = new_child.as(nullable AAnnotations)
+			return
+		end
+	end
+
+	redef fun n_bytenum=(node)
+	do
+		_n_bytenum = node
+		node.parent = self
+	end
+	redef fun n_annotations=(node)
+	do
+		_n_annotations = node
+		if node != null then node.parent = self
+	end
+
+
+	redef fun visit_all(v: Visitor)
+	do
+		v.enter_visit(_n_bytenum)
+		v.enter_visit(_n_annotations)
+	end
+end
+redef class AHexByteExpr
+	init init_ahexbyteexpr (
+		n_hex_bytenum: nullable THexBytenum,
+		n_annotations: nullable AAnnotations
+	)
+	do
+		_n_hex_bytenum = n_hex_bytenum.as(not null)
+		n_hex_bytenum.parent = self
+		_n_annotations = n_annotations
+		if n_annotations != null then n_annotations.parent = self
+	end
+
+	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
+	do
+		if _n_hex_bytenum == old_child then
+			n_hex_bytenum = new_child.as(THexBytenum)
+			return
+		end
+		if _n_annotations == old_child then
+			n_annotations = new_child.as(nullable AAnnotations)
+			return
+		end
+	end
+
+	redef fun n_hex_bytenum=(node)
+	do
+		_n_hex_bytenum = node
+		node.parent = self
+	end
+	redef fun n_annotations=(node)
+	do
+		_n_annotations = node
+		if node != null then node.parent = self
+	end
+
+
+	redef fun visit_all(v: Visitor)
+	do
+		v.enter_visit(_n_hex_bytenum)
+		v.enter_visit(_n_annotations)
+	end
+end
+redef class ABinByteExpr
+	init init_abinbyteexpr (
+		n_bin_bytenum: nullable TBinBytenum,
+		n_annotations: nullable AAnnotations
+	)
+	do
+		_n_bin_bytenum = n_bin_bytenum.as(not null)
+		n_bin_bytenum.parent = self
+		_n_annotations = n_annotations
+		if n_annotations != null then n_annotations.parent = self
+	end
+
+	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
+	do
+		if _n_bin_bytenum == old_child then
+			n_bin_bytenum = new_child.as(TBinBytenum)
+			return
+		end
+		if _n_annotations == old_child then
+			n_annotations = new_child.as(nullable AAnnotations)
+			return
+		end
+	end
+
+	redef fun n_bin_bytenum=(node)
+	do
+		_n_bin_bytenum = node
+		node.parent = self
+	end
+	redef fun n_annotations=(node)
+	do
+		_n_annotations = node
+		if node != null then node.parent = self
+	end
+
+
+	redef fun visit_all(v: Visitor)
+	do
+		v.enter_visit(_n_bin_bytenum)
+		v.enter_visit(_n_annotations)
+	end
+end
+redef class AOctByteExpr
+	init init_aoctbyteexpr (
+		n_oct_bytenum: nullable TOctBytenum,
+		n_annotations: nullable AAnnotations
+	)
+	do
+		_n_oct_bytenum = n_oct_bytenum.as(not null)
+		n_oct_bytenum.parent = self
+		_n_annotations = n_annotations
+		if n_annotations != null then n_annotations.parent = self
+	end
+
+	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
+	do
+		if _n_oct_bytenum == old_child then
+			n_oct_bytenum = new_child.as(TOctBytenum)
+			return
+		end
+		if _n_annotations == old_child then
+			n_annotations = new_child.as(nullable AAnnotations)
+			return
+		end
+	end
+
+	redef fun n_oct_bytenum=(node)
+	do
+		_n_oct_bytenum = node
+		node.parent = self
+	end
+	redef fun n_annotations=(node)
+	do
+		_n_annotations = node
+		if node != null then node.parent = self
+	end
+
+
+	redef fun visit_all(v: Visitor)
+	do
+		v.enter_visit(_n_oct_bytenum)
+		v.enter_visit(_n_annotations)
+	end
+end
 redef class AFloatExpr
 	init init_afloatexpr (
 		n_float: nullable TFloat,
