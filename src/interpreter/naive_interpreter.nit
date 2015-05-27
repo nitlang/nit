@@ -1638,6 +1638,13 @@ redef class AIntExpr
 	end
 end
 
+redef class AByteExpr
+	redef fun expr(v)
+	do
+		return v.byte_instance(self.value.as(not null))
+	end
+end
+
 redef class AFloatExpr
 	redef fun expr(v)
 	do

@@ -1317,6 +1317,9 @@ redef class AAttrPropdef
 				else if nexpr isa AIntExpr then
 					var cla = modelbuilder.try_get_mclass_by_name(nexpr, mmodule, "Int")
 					if cla != null then mtype = cla.mclass_type
+				else if nexpr isa AByteExpr then
+					var cla = modelbuilder.try_get_mclass_by_name(nexpr, mmodule, "Byte")
+					if cla != null then mtype = cla.mclass_type
 				else if nexpr isa AFloatExpr then
 					var cla = modelbuilder.try_get_mclass_by_name(nexpr, mmodule, "Float")
 					if cla != null then mtype = cla.mclass_type

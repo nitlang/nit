@@ -146,6 +146,58 @@ redef class AOctIntExpr
 	end
 end
 
+redef class AByteExpr
+	# The value of the literal int once computed.
+	var value: nullable Byte
+end
+
+redef class ADecByteExpr
+	redef fun accept_literal(v)
+	do
+		var t = self.n_bytenum.text
+		value = t.substring(0, t.length - 2).to_i.to_b
+	end
+end
+
+redef class AHexByteExpr
+	redef fun accept_literal(v)
+	do
+		var t = self.n_hex_bytenum.text
+		var s = t.substring(2, t.length - 4).remove_underscores
+		if s.is_empty then
+			v.toolcontext.error(location, "Error: invalid hexadecimal literal")
+			return
+		end
+		value = s.to_hex.to_b
+	end
+end
+
+redef class ABinByteExpr
+	redef fun accept_literal(v)
+	do
+		var t = self.n_bin_bytenum.text
+		var s = t.substring(2, t.length - 4).remove_underscores
+		if s.is_empty then
+			v.toolcontext.error(location, "Error: invalid binary literal")
+			return
+		end
+		value = s.to_bin.to_b
+	end
+end
+
+redef class AOctByteExpr
+	redef fun accept_literal(v)
+	do
+		var t = self.n_oct_bytenum.text
+		var s = t.substring(2, t.length - 4).remove_underscores
+		if s.is_empty then
+			v.toolcontext.error(location, "Error: invalid octal literal")
+			return
+		end
+		value = s.to_oct.to_b
+	end
+end
+
 redef class AFloatExpr
 	# The value of the literal float once computed.
 	var value: nullable Float

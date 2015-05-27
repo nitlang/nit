@@ -517,6 +517,13 @@ redef class AIntExpr
 	end
 end
 
+redef class AByteExpr
+	redef fun accept_rapid_type_visitor(v)
+	do
+		v.add_type(self.mtype.as(MClassType))
+	end
+end
+
 redef class AFloatExpr
 	redef fun accept_rapid_type_visitor(v)
 	do
