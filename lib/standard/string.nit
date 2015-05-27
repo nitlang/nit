@@ -495,7 +495,7 @@ abstract class Text
 	fun to_cmangle: String
 	do
 		if is_empty then return ""
-		var res = new FlatBuffer
+		var res = new Buffer
 		var underscore = false
 		var start = 0
 		var c = chars[0]
@@ -551,7 +551,7 @@ abstract class Text
 	# The exceptions are the common `\t` and `\n`.
 	fun escape_to_c: String
 	do
-		var b = new FlatBuffer
+		var b = new Buffer
 		for i in [0..length[ do
 			var c = chars[i]
 			if c == '\n' then
@@ -591,7 +591,7 @@ abstract class Text
 	#     assert "ab|\{\}".escape_more_to_c("|\{\}") == "ab\\|\\\{\\\}"
 	fun escape_more_to_c(chars: String): String
 	do
-		var b = new FlatBuffer
+		var b = new Buffer
 		for c in escape_to_c.chars do
 			if chars.chars.has(c) then
 				b.add('\\')
@@ -612,7 +612,7 @@ abstract class Text
 	#
 	#     assert "\n\"'\\\{\}0".escape_to_sh == "'\n\"'\\''\\\{\}0'"
 	fun escape_to_sh: String do
-		var b = new FlatBuffer
+		var b = new Buffer
 		b.chars.add '\''
 		for i in [0..length[ do
 			var c = chars[i]
@@ -633,7 +633,7 @@ abstract class Text
 	# These characters are `;`, `|`, `\`, and the non-printable ones.
 	# They will be rendered as `"?{hex}"`.
 	fun escape_to_mk: String do
-		var b = new FlatBuffer
+		var b = new Buffer
 		for i in [0..length[ do
 			var c = chars[i]
 			if c == '$' then
@@ -659,7 +659,7 @@ abstract class Text
 	#     assert u.chars[0].ascii      ==  10 # (the ASCII value of the "new line" character)
 	fun unescape_nit: String
 	do
-		var res = new FlatBuffer.with_capacity(self.length)
+		var res = new Buffer.with_cap(self.length)
 		var was_slash = false
 		for i in [0..length[ do
 			var c = chars[i]
@@ -694,7 +694,7 @@ abstract class Text
 	#     assert ".com/post?e=asdf&f=123".to_percent_encoding == ".com%2fpost%3fe%3dasdf%26f%3d123"
 	fun to_percent_encoding: String
 	do
-		var buf = new FlatBuffer
+		var buf = new Buffer
 
 		for i in [0..length[ do
 			var c = chars[i]
@@ -723,7 +723,7 @@ abstract class Text
 	#     assert "invalid % usage".from_percent_encoding == "invalid ? usage"
 	fun from_percent_encoding: String
 	do
-		var buf = new FlatBuffer
+		var buf = new Buffer
 
 		var i = 0
 		while i < length do
@@ -760,7 +760,7 @@ abstract class Text
 	# SEE: <https://www.owasp.org/index.php/XSS_%28Cross_Site_Scripting%29_Prevention_Cheat_Sheet#RULE_.231_-_HTML_Escape_Before_Inserting_Untrusted_Data_into_HTML_Element_Content>
 	fun html_escape: String
 	do
-		var buf = new FlatBuffer
+		var buf = new Buffer
 
 		for i in [0..length[ do
 			var c = chars[i]
@@ -1060,7 +1060,7 @@ abstract class String
 	do
 		if self.is_lower then return self
 
-		var new_str = new FlatBuffer.with_capacity(self.length)
+		var new_str = new Buffer.with_cap(self.length)
 		var prev_is_lower = false
 		var prev_is_upper = false
 
@@ -1108,7 +1108,7 @@ abstract class String
 	do
 		if self.is_upper then return self
 
-		var new_str = new FlatBuffer
+		var new_str = new Buffer
 		var is_first_char = true
 		var follows_us = false
 
@@ -1143,7 +1143,7 @@ abstract class String
 	fun capitalized: SELFTYPE do
 		if length == 0 then return self
 
-		var buf = new FlatBuffer.with_capacity(length)
+		var buf = new Buffer.with_cap(length)
 
 		var curr = chars[0].to_upper
 		var prev = curr
@@ -1541,6 +1541,12 @@ end
 abstract class Buffer
 	super Text
 
+	# New `Buffer` factory, will return a concrete `Buffer` type with default capacity
+	new do return new FlatBuffer
+
+	# New `Buffer` factory, returns a concrete `Buffer` with a capacity of `i`
+	new with_cap(i: Int) do return new FlatBuffer.with_capacity(i)
+
 	redef type SELFTYPE: Buffer is fixed
 
 	# Specific implementations MUST set this to `true` in order to invalidate caches
@@ -1566,7 +1572,7 @@ abstract class Buffer
 
 	# Clears the buffer
 	#
-	#     var b = new FlatBuffer
+	#     var b = new Buffer
 	#     b.append "hello"
 	#     assert not b.is_empty
 	#     b.clear
@@ -1578,7 +1584,7 @@ abstract class Buffer
 
 	# Adds the content of text `s` at the end of self
 	#
-	#     var b = new FlatBuffer
+	#     var b = new Buffer
 	#     b.append "hello"
 	#     b.append "world"
 	#     assert b == "helloworld"
@@ -1586,7 +1592,7 @@ abstract class Buffer
 
 	# `self` is appended in such a way that `self` is repeated `r` times
 	#
-	#     var b = new FlatBuffer
+	#     var b = new Buffer
 	#     b.append "hello"
 	#     b.times 3
 	#     assert b == "hellohellohello"
@@ -1594,7 +1600,7 @@ abstract class Buffer
 
 	# Reverses itself in-place
 	#
-	#     var b = new FlatBuffer
+	#     var b = new Buffer
 	#     b.append("hello")
 	#     b.reverse
 	#     assert b == "olleh"
@@ -1602,7 +1608,7 @@ abstract class Buffer
 
 	# Changes each lower-case char in `self` by its upper-case variant
 	#
-	#     var b = new FlatBuffer
+	#     var b = new Buffer
 	#     b.append("Hello World!")
 	#     b.upper
 	#     assert b == "HELLO WORLD!"
@@ -1610,7 +1616,7 @@ abstract class Buffer
 
 	# Changes each upper-case char in `self` by its lower-case variant
 	#
-	#     var b = new FlatBuffer
+	#     var b = new Buffer
 	#     b.append("Hello World!")
 	#     b.lower
 	#     assert b == "hello world!"
@@ -1716,7 +1722,7 @@ class FlatBuffer
 		length = 0
 	end
 
-	redef fun empty do return new FlatBuffer
+	redef fun empty do return new Buffer
 
 	redef fun enlarge(cap)
 	do
@@ -1840,7 +1846,7 @@ class FlatBuffer
 			var r = new FlatBuffer.with_infos(r_items, len, len)
 			return r
 		else
-			return new FlatBuffer
+			return new Buffer
 		end
 	end
 
@@ -2199,7 +2205,7 @@ redef class Char
 	#     assert 'x'.to_s    == "x"
 	redef fun to_s
 	do
-		var s = new FlatBuffer.with_capacity(1)
+		var s = new Buffer.with_cap(1)
 		s.chars[0] = self
 		return s.to_s
 	end
@@ -2249,7 +2255,7 @@ redef class Collection[E]
 	# Concatenate element without separators
 	fun plain_to_s: String
 	do
-		var s = new FlatBuffer
+		var s = new Buffer
 		for e in self do if e != null then s.append(e.to_s)
 		return s.to_s
 	end
@@ -2262,7 +2268,7 @@ redef class Collection[E]
 	do
 		if is_empty then return ""
 
-		var s = new FlatBuffer # Result
+		var s = new Buffer # Result
 
 		# Concat first item
 		var i = iterator
@@ -2385,7 +2391,7 @@ redef class Map[K,V]
 	do
 		if is_empty then return ""
 
-		var s = new FlatBuffer # Result
+		var s = new Buffer # Result
 
 		# Concat first item
 		var i = iterator
