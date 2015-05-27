@@ -18,7 +18,7 @@
 module numeric
 
 import math
-import string
+import text
 
 redef class Text
 	# Get the numeric version of `self`

@@ -15,7 +15,7 @@
 module primitive_types
 
 intrude import standard::file
-intrude import standard::string
+intrude import standard::text::flat
 
 # Wrapper for `NativeFile`
 class PrimitiveNativeFile

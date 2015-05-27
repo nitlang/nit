@@ -21,7 +21,7 @@
 # The main entities are `Text::to_re` and `Regex`.
 module re
 
-import string_search
+import text
 import gc
 import error
 

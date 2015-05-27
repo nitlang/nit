@@ -11,7 +11,7 @@
 # Input and output streams of characters
 module stream
 
-intrude import ropes
+intrude import text::ropes
 import error
 intrude import bytes
 

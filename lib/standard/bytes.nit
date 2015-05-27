@@ -17,7 +17,7 @@ module bytes
 
 import kernel
 import collection::array
-intrude import string
+intrude import text::flat
 
 # A buffer containing Byte-manipulation facilities
 #

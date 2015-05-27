@@ -14,7 +14,7 @@
 # Management of time and dates
 module time
 
-import string_search
+import text
 import stream
 
 in "C Header" `{
