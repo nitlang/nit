@@ -768,7 +768,8 @@ class SeparateCompiler
 			end
 			v.add_decl("\},")
 		else
-			v.add_decl("0, \{\}, /*DEAD TYPE*/")
+			# Use -1 to indicate dead type, the info is used by --hardening
+			v.add_decl("-1, \{\}, /*DEAD TYPE*/")
 		end
 		v.add_decl("\};")
 	end
@@ -1036,7 +1037,7 @@ class SeparateCompiler
 		v.add("if({t} == NULL) \{")
 		v.add_abort("type null")
 		v.add("\}")
-		v.add("if({t}->table_size == 0) \{")
+		v.add("if({t}->table_size < 0) \{")
 		v.add("PRINT_ERROR(\"Insantiation of a dead type: %s\\n\", {t}->name);")
 		v.add_abort("type dead")
 		v.add("\}")
