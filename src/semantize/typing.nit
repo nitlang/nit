@@ -329,6 +329,8 @@ private class TypeVisitor
 		if recvtype isa MNullType and not mproperty.is_null_safe then
 			self.error(node, "Error: method `{name}` called on `null`.")
 			return null
+		else if unsafe_type isa MNullableType and not mproperty.is_null_safe then
+			modelbuilder.advice(node, "call-on-nullable", "Warning: method call on a nullable receiver `{recvtype}`.")
 		end
 
 		if is_toplevel_context and recv_is_self and not mproperty.is_toplevel then
