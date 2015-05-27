@@ -6,4 +6,3 @@ This program creates a fake model that can be used to test tools like:
 * `nitmetrics`
 * `nitx`
 * or others `modelbuilder`.
-
