@@ -768,7 +768,7 @@ redef class AAttrPropdef
 
 		var nexpr = self.n_expr
 		if nexpr != null then
-			var mtype = self.mpropdef.static_mtype
+			var mtype = self.mtype
 			v.visit_expr_subtype(nexpr, mtype)
 		end
 		var nblock = self.n_block

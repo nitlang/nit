@@ -1135,6 +1135,10 @@ end
 redef class AAttrPropdef
 	redef type MPROPDEF: MAttributeDef
 
+	# The static type of the property (declared, inferred or inherited)
+	# This attribute is also used to check if the property was analyzed and is valid.
+	var mtype: nullable MType
+
 	# Is the node tagged `noinit`?
 	var noinit = false
 
@@ -1359,6 +1363,8 @@ redef class AAttrPropdef
 			return
 		end
 
+		self.mtype = mtype
+
 		if mpropdef != null then
 			mpropdef.static_mtype = mtype
 		end
@@ -1389,7 +1395,7 @@ redef class AAttrPropdef
 		var mpropdef = self.mpropdef
 		if mpropdef == null then return # Error thus skipped
 		var ntype = self.n_type
-		var mtype = self.mpropdef.static_mtype
+		var mtype = self.mtype
 		if mtype == null then return # Error thus skipped
 
 		var mclassdef = mpropdef.mclassdef

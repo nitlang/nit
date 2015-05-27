@@ -1251,7 +1251,7 @@ redef class AAttrPropdef
 		end
 		var mpropdef = self.mpropdef
 		if mpropdef == null then return
-		var mtype = mpropdef.static_mtype.as(not null)
+		var mtype = self.mtype.as(not null)
 		mtype = mtype.anchor_to(v.mainmodule, recv.mtype.as(MClassType))
 		if mtype isa MNullableType then
 			v.write_attribute(self.mpropdef.mproperty, recv, v.null_instance)

@@ -2444,7 +2444,7 @@ redef class AAttrPropdef
 			var res
 			if is_lazy then
 				var set
-				var ret = self.mpropdef.static_mtype
+				var ret = self.mtype
 				var useiset = not ret.is_c_primitive and not ret isa MNullableType
 				var guard = self.mlazypropdef.mproperty
 				if useiset then
@@ -2472,7 +2472,7 @@ redef class AAttrPropdef
 			assert arguments.length == 2
 			v.write_attribute(self.mpropdef.mproperty, arguments.first, arguments[1])
 			if is_lazy then
-				var ret = self.mpropdef.static_mtype
+				var ret = self.mtype
 				var useiset = not ret.is_c_primitive and not ret isa MNullableType
 				if not useiset then
 					v.write_attribute(self.mlazypropdef.mproperty, arguments.first, v.bool_instance(true))
@@ -2498,7 +2498,7 @@ redef class AAttrPropdef
 		v.frame = frame
 
 		var value
-		var mtype = self.mpropdef.static_mtype
+		var mtype = self.mtype
 		assert mtype != null
 
 		var nexpr = self.n_expr
