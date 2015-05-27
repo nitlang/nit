@@ -84,6 +84,7 @@ readonly
 writable
 autoinit
 noautoinit
+lateinit
 nosuper
 old_style_init
 abstract
