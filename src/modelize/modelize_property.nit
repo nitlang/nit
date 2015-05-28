@@ -299,25 +299,19 @@ redef class ModelBuilder
 					abort
 				end
 			end
-		else if noautoinit != null then
-			if initializers.is_empty then
-				warning(noautoinit, "useless-noautoinit", "Warning: the list of autoinit is already empty.")
-			end
-			# Just clear initializers
-			mparameters.clear
-			initializers.clear
 		else
 			# Search the longest-one and checks for conflict
 			var longest = spropdefs.first
 			if spropdefs.length > 1 then
-				# Check for conflict in the order of initializers
-				# Each initializer list must me a prefix of the longest list
 				# part 1. find the longest list
 				for spd in spropdefs do
 					if spd.initializers.length > longest.initializers.length then longest = spd
 				end
 				# part 2. compare
-				for spd in spropdefs do
+				# Check for conflict in the order of initializers
+				# Each initializer list must me a prefix of the longest list
+				# If `noautoinit` is set, just ignore conflicts
+				if noautoinit == null then for spd in spropdefs do
 					var i = 0
 					for p in spd.initializers do
 						if p != longest.initializers[i] then
@@ -330,17 +324,27 @@ redef class ModelBuilder
 				end
 			end
 
-			# Can we just inherit?
-			if spropdefs.length == 1 and mparameters.is_empty and defined_init == null then
-				self.toolcontext.info("{mclassdef} inherits the basic constructor {longest}", 3)
-				mclassdef.mclass.root_init = longest
-				return
-			end
+			if noautoinit != null then
+				# If there is local or inherited initializers, then complain.
+				if initializers.is_empty and longest.initializers.is_empty then
+					warning(noautoinit, "useless-noautoinit", "Warning: the list of autoinit is already empty.")
+				end
+				# Just clear initializers
+				mparameters.clear
+				initializers.clear
+			else
+				# Can we just inherit?
+				if spropdefs.length == 1 and mparameters.is_empty and defined_init == null then
+					self.toolcontext.info("{mclassdef} inherits the basic constructor {longest}", 3)
+					mclassdef.mclass.root_init = longest
+					return
+				end
 
-			# Combine the inherited list to what is collected
-			if longest.initializers.length > 0 then
-				mparameters.prepend longest.new_msignature.mparameters
-				initializers.prepend longest.initializers
+				# Combine the inherited list to what is collected
+				if longest.initializers.length > 0 then
+					mparameters.prepend longest.new_msignature.mparameters
+					initializers.prepend longest.initializers
+				end
 			end
 		end
 

@@ -40,7 +40,7 @@ class E
 	noautoinit #alt6#
 	#alt6,7# autoinit
 	super A
-	var a: A
+	var a: A #alt9#
 end
 
 class F
