@@ -149,7 +149,7 @@ class Toolchain
 	fun compile_dir: String
 	do
 		var compile_dir = toolcontext.opt_compile_dir.value
-		if compile_dir == null then compile_dir = ".nit_compile"
+		if compile_dir == null then compile_dir = "nit_compile"
 		return compile_dir
 	end
 
@@ -327,7 +327,7 @@ class MakefileToolchain
 		var outpath = real_outpath.escape_to_mk
 		if outpath != real_outpath then
 			# If the name is crazy and need escaping, we will do an indirection
-			# 1. generate the binary in the .nit_compile dir under an escaped name
+			# 1. generate the binary in the nit_compile dir under an escaped name
 			# 2. copy the binary at the right place in the `all` goal.
 			outpath = mainmodule.c_name
 		end
