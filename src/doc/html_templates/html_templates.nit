@@ -423,10 +423,6 @@ redef class IndexArticle
 	end
 end
 
-redef class ProjectsSection
-	redef var html_title = "Projects"
-end
-
 redef class MEntityComposite
 	redef var html_title is lazy do return mentity.nitdoc_name
 end

@@ -53,7 +53,7 @@ redef class OverviewPage
 		var mprojects = doc.model.mprojects.to_a
 		var sorter = new MConcernRankSorter
 		sorter.sort mprojects
-		var section = new ProjectsSection("projects.section", "Projects")
+		var section = new DocSection("projects.section", "Projects")
 		for mproject in mprojects do
 			section.add_child new DefinitionArticle("{mproject.nitdoc_id}.definition", mproject)
 		end
@@ -385,11 +385,6 @@ end
 
 # The main project article.
 class HomeArticle
-	super DocArticle
-end
-
-# The project list.
-class ProjectsSection
 	super DocArticle
 end
 
