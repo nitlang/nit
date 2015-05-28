@@ -436,10 +436,6 @@ redef class ConcernSection
 	redef var html_title is lazy do return "in {mentity.nitdoc_name}"
 end
 
-redef class ImportationListSection
-	redef var html_title is lazy do return "Dependencies"
-end
-
 redef class IntroArticle
 	redef var html_title = null
 

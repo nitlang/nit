@@ -41,7 +41,7 @@ end
 redef class MModulePage
 	redef fun build_inh_list(v, doc) do
 		var id = mentity.nitdoc_id
-		var section = new ImportationListSection("{id}.importation", mentity)
+		var section = new TabbedGroup("{id}.importation", "Dependencies")
 		var group = new PanelGroup("list.group", "List")
 		var imports = self.imports.to_a
 		v.name_sorter.sort(imports)
@@ -76,10 +76,4 @@ redef class MClassPage
 		section.parent = root.children.first
 		root.children.first.children.insert(section, 1)
 	end
-end
-
-# FIXME diff hack
-class ImportationListSection
-	super TabbedGroup
-	super MEntityComposite
 end
