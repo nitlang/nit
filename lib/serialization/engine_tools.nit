@@ -16,59 +16,31 @@
 module engine_tools
 
 import serialization
+intrude import standard::collection::hash_collection
 
-# Maps instances to a value, uses `is_same_instance`
-#
-# Warning: This class does not implement all the services from `Map`.
+# Maps instances to a value, uses `is_same_serialized` and `serialization_hash`.
 class StrictHashMap[K, V]
-	super Map[K, V]
+	super HashMap[K, V]
 
-	# private
-	var map = new HashMap[K, Array[Couple[K, V]]]
-
-	redef var length = 0
-
-	redef fun is_empty do return length == 0
-
-	# private
-	fun node_at(key: K): nullable Couple[K, V]
+	redef fun index_at(k)
 	do
-		if not map.keys.has(key) then return null
+		if k == null then return 0
 
-		var arr = map[key]
-		for couple in arr do
-			if couple.first.is_same_serialized(key) then
-				return couple
+		var i = k.serialization_hash % _capacity
+		if i < 0 then i = - i
+		return i
+	end
+
+	redef fun node_at_idx(i, k)
+	do
+		var c = _array[i]
+		while c != null do
+			var ck = c._key
+			if ck.is_same_serialized(k) then
+				break
 			end
+			c = c._next_in_bucklet
 		end
-
-		return null
+		return c
 	end
-
-	redef fun [](key)
-	do
-		var node = node_at(key)
-		assert node != null
-		return node.second
-	end
-
-	redef fun []=(key, value)
-	do
-		var node = node_at(key)
-		if node != null then
-			node.second = value
-			return
-		end
-
-		var arr
-		if not map.keys.has(key) then
-			arr = new Array[Couple[K, V]]
-			map[key] = arr
-		else arr = map[key]
-
-		arr.add new Couple[K, V](key, value)
-		self.length += 1
-	end
-
-	redef fun has_key(key) do return node_at(key) != null
 end
