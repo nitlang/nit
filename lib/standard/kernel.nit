@@ -5,7 +5,7 @@
 #
 # This file is free software, which comes along with NIT.  This software is
 # distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
-# without  even  the implied warranty of  MERCHANTABILITY or  FITNESS FOR A 
+# without  even  the implied warranty of  MERCHANTABILITY or  FITNESS FOR A
 # PARTICULAR PURPOSE.  You can modify it is you want,  provided this header
 # is kept unaltered, and a notification of the changes is added.
 # You  are  allowed  to  redistribute it and sell it, alone or is a part of
@@ -128,7 +128,7 @@ interface Comparable
 	type OTHER: Comparable
 
 	# Is `self` lesser than `other`?
-	fun <(other: OTHER): Bool is abstract 
+	fun <(other: OTHER): Bool is abstract
 
 	# not `other` < `self`
 	# Note, the implementation must ensure that: `(x<=y) == (x<y or x==y)`
@@ -331,10 +331,10 @@ universal Float
 	redef fun !=(i) is intern
 	redef fun output is intern
 
-	redef fun <=(i): Bool is intern
-	redef fun <(i): Bool is intern
-	redef fun >=(i): Bool is intern
-	redef fun >(i): Bool is intern
+	redef fun <=(i) is intern
+	redef fun <(i) is intern
+	redef fun >=(i) is intern
+	redef fun >(i) is intern
 
 	redef fun +(i) is intern
 	redef fun - is intern
@@ -483,9 +483,9 @@ universal Int
 
 	redef fun is_between(c, d)
 	do
-		if self < c or d < self then 
+		if self < c or d < self then
 			return false
-		else 
+		else
 			return true
 		end
 	end
@@ -536,7 +536,7 @@ universal Int
 		# count digits
 		while n > 0 do
 			d += 1
-			n = n / b  	# euclidian division /
+			n = n / b	# euclidian division /
 		end
 		return d
 	end

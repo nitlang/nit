@@ -19,7 +19,7 @@ import abstract_collection
 class Range[E: Discrete]
 	super Collection[E]
 
-	redef var first: E
+	redef var first
 
 	# Get the last element.
 	var last: E

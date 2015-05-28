@@ -5,7 +5,7 @@
 #
 # This file is free software, which comes along with NIT.  This software is
 # distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
-# without  even  the implied warranty of  MERCHANTABILITY or  FITNESS FOR A 
+# without  even  the implied warranty of  MERCHANTABILITY or  FITNESS FOR A
 # PARTICULAR PURPOSE.  You can modify it is you want,  provided this header
 # is kept unaltered, and a notification of the changes is added.
 # You  are  allowed  to  redistribute it and sell it, alone or is a part of
@@ -65,8 +65,7 @@ abstract class AbstractArrayRead[E]
 
 	redef fun last_index_of(item) do return last_index_of_from(item, length-1)
 
-	redef fun index_of_from(item, pos)
-	do
+	redef fun index_of_from(item, pos) do
 		var i = pos
 		var len = length
 		while i < len do
@@ -78,8 +77,7 @@ abstract class AbstractArrayRead[E]
 		return -1
 	end
 
-	redef fun last_index_of_from(item, pos)
-	do
+	redef fun last_index_of_from(item, pos)	do
 		var i = pos
 		while i >= 0 do
 			if self[i] == item then
@@ -242,8 +240,7 @@ abstract class AbstractArray[E]
 		self[0] = item
 	end
 
-	redef fun insert(item: E, pos: Int)
-	do
+	redef fun insert(item, pos) do
 		enlarge(length + 1)
 		copy_to(pos, length-pos, self, pos + 1)
 		self[pos] = item
