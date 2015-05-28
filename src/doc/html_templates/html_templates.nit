@@ -432,11 +432,6 @@ redef class MEntitySection
 	redef var html_subtitle is lazy do return mentity.html_declaration
 end
 
-redef class ConstructorsSection
-	redef var html_title = "Constructors"
-	redef var html_subtitle = null
-end
-
 redef class ConcernSection
 	redef var html_title is lazy do return "in {mentity.nitdoc_name}"
 end
