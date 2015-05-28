@@ -169,6 +169,9 @@ class MakefileToolchain
 	do
 		var compile_dir = compile_dir
 
+		# Remove the compilation directory unless explicitly set
+		var auto_remove = toolcontext.opt_compile_dir.value == null
+
 		# Generate the .h and .c files
 		# A single C file regroups many compiled rumtime functions
 		# Note that we do not try to be clever an a small change in a Nit source file may change the content of all the generated .c files
@@ -196,6 +199,10 @@ class MakefileToolchain
 		self.toolcontext.info("*** COMPILING C ***", 1)
 
 		compile_c_code(compile_dir)
+
+		if auto_remove then
+			sys.system("rm -r -- '{root_compile_dir.escape_to_sh}/'")
+		end
 
 		time1 = get_time
 		self.toolcontext.info("*** END COMPILING C: {time1-time0} ***", 2)
