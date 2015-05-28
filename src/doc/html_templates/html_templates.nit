@@ -533,8 +533,6 @@ redef class MEntitiesListArticle
 end
 
 redef class DefinitionLinArticle
-	redef var html_title is lazy do return "Linearization"
-
 	redef fun render_body do
 		var lst = new UnorderedList
 		lst.css_classes.add "list-unstyled list-labeled"
