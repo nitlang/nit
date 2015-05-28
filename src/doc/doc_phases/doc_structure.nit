@@ -364,7 +364,7 @@ class ConcernsArticle
 	redef fun is_hidden do return concerns.is_empty
 end
 
-# An article that displaus a list of definition belonging to a MEntity.
+# An article that displays a list of definition belonging to a MEntity.
 class DefinitionListArticle
 	super TabbedGroup
 	super MEntityArticle
