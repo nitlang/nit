@@ -529,12 +529,6 @@ redef class DefinitionArticle
 	end
 end
 
-redef class IntrosRedefsSection
-	redef var toc_title do return "Intros / Redefs"
-	redef var html_title = null
-	redef var html_subtitle = null
-end
-
 redef class MEntitiesListArticle
 	redef fun render_body do
 		var lst = new UnorderedList

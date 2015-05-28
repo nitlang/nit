@@ -55,7 +55,8 @@ redef class DefinitionArticle
 
 	# TODO this should move to MEntity?
 	private fun build_mmodule_list(v: IntroRedefListPhase, doc: DocModel, mmodule: MModule) do
-		var section = new IntrosRedefsSection("{mentity.nitdoc_id}.intros_redefs", mentity)
+		var section = new TabbedGroup("{mentity.nitdoc_id}.intros_redefs")
+		section.toc_title = "Intros / Redefs"
 		var group = new PanelGroup("list.group", "List")
 		var intros = mmodule.collect_intro_mclassdefs(v.ctx.min_visibility).to_a
 		doc.mainmodule.linearize_mclassdefs(intros)
@@ -69,7 +70,8 @@ redef class DefinitionArticle
 
 	# TODO this should move to MEntity?
 	private fun build_mclassdef_list(v: IntroRedefListPhase, doc: DocModel, mclassdef: MClassDef) do
-		var section = new IntrosRedefsSection("{mentity.nitdoc_id}.intros_redefs", mentity)
+		var section = new TabbedGroup("{mentity.nitdoc_id}.intros_redefs")
+		section.toc_title = "Intros / Redefs"
 		var group = new PanelGroup("list.group", "List")
 		var intros = mclassdef.collect_intro_mpropdefs(v.ctx.min_visibility).to_a
 		# FIXME avoid diff changes
@@ -82,13 +84,4 @@ redef class DefinitionArticle
 		section.add_child group
 		add_child(section)
 	end
-
-end
-
-# Section that contains the intros and redefs lists.
-class IntrosRedefsSection
-	super TabbedGroup
-	super MEntitySection
-
-	redef var is_toc_hidden = true
 end
