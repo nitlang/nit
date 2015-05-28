@@ -181,8 +181,7 @@ redef class MClassPage
 		mentity.intro_mmodule.mgroup.mproject.booster_rank = 0
 		mentity.intro_mmodule.mgroup.booster_rank = 0
 		mentity.intro_mmodule.booster_rank = 0
-		var constructors = new ConstructorsSection(
-			"{mentity.nitdoc_id}.constructors", mentity)
+		var constructors = new DocSection("{mentity.nitdoc_id}.constructors", "Constructors")
 		var minit = mentity.root_init
 		if minit != null then
 			constructors.add_child new DefinitionArticle("{minit.nitdoc_id}.definition", minit)
@@ -305,11 +304,6 @@ class MEntityComposite
 
 	# MEntity documented by this page element.
 	var mentity: MEntity
-end
-
-# A list of constructors.
-class ConstructorsSection
-	super MEntitySection
 end
 
 # A Section about a Concern.
