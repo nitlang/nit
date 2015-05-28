@@ -9,10 +9,10 @@ redef class Deserializer
 	redef fun deserialize_class(name)
 	do
 		# Module: test_serialization
-		if name == "Array[Object]" then return new Array[Object].from_deserializer(self)
+		if name == "Array[String]" then return new Array[String].from_deserializer(self)
 		if name == "Array[nullable Object]" then return new Array[nullable Object].from_deserializer(self)
 		if name == "Array[Serializable]" then return new Array[Serializable].from_deserializer(self)
-		if name == "Array[String]" then return new Array[String].from_deserializer(self)
+		if name == "Array[Object]" then return new Array[Object].from_deserializer(self)
 		if name == "HashMap[Serializable, Array[Couple[Serializable, Int]]]" then return new HashMap[Serializable, Array[Couple[Serializable, Int]]].from_deserializer(self)
 		if name == "Array[Couple[Serializable, Int]]" then return new Array[Couple[Serializable, Int]].from_deserializer(self)
 		return super
