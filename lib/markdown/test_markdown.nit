@@ -2366,43 +2366,46 @@ end
 class TestBlock
 	super TestSuite
 
+	# A dummy location for testing purposes.
+	var loc = new MDLocation(0, 0, 0, 0)
+
 	fun test_has_blocks do
-		var subject = new MDBlock
+		var subject = new MDBlock(loc)
 		assert not subject.has_blocks
-		subject.first_block = new MDBlock
+		subject.first_block = new MDBlock(loc)
 		assert subject.has_blocks
 	end
 
 	fun test_count_blocks do
-		var subject = new MDBlock
+		var subject = new MDBlock(loc)
 		assert subject.count_blocks == 0
-		subject.first_block = new MDBlock
+		subject.first_block = new MDBlock(loc)
 		assert subject.count_blocks == 1
-		subject.first_block.next = new MDBlock
+		subject.first_block.next = new MDBlock(loc)
 		assert subject.count_blocks == 2
 	end
 
 	fun test_has_lines do
-		var subject = new MDBlock
+		var subject = new MDBlock(loc)
 		assert not subject.has_lines
-		subject.first_line = new MDLine("")
+		subject.first_line = new MDLine(loc, "")
 		assert subject.has_lines
 	end
 
 	fun test_count_lines do
-		var subject = new MDBlock
+		var subject = new MDBlock(loc)
 		assert subject.count_lines == 0
-		subject.first_line = new MDLine("")
+		subject.first_line = new MDLine(loc, "")
 		assert subject.count_lines == 1
-		subject.first_line.next = new MDLine("")
+		subject.first_line.next = new MDLine(loc, "")
 		assert subject.count_lines == 2
 	end
 
 	fun test_split do
-		var line1 = new MDLine("line1")
-		var line2 = new MDLine("line2")
-		var line3 = new MDLine("line3")
-		var subject = new MDBlock
+		var line1 = new MDLine(loc, "line1")
+		var line2 = new MDLine(loc, "line2")
+		var line3 = new MDLine(loc, "line3")
+		var subject = new MDBlock(loc)
 		subject.add_line line1
 		subject.add_line line2
 		subject.add_line line3
@@ -2417,19 +2420,19 @@ class TestBlock
 	end
 
 	fun test_add_line do
-		var subject = new MDBlock
+		var subject = new MDBlock(loc)
 		assert subject.count_lines == 0
-		subject.add_line new MDLine("")
+		subject.add_line new MDLine(loc, "")
 		assert subject.count_lines == 1
-		subject.add_line new MDLine("")
+		subject.add_line new MDLine(loc, "")
 		assert subject.count_lines == 2
 	end
 
 	fun test_remove_line do
-		var line1 = new MDLine("line1")
-		var line2 = new MDLine("line2")
-		var line3 = new MDLine("line3")
-		var subject = new MDBlock
+		var line1 = new MDLine(loc, "line1")
+		var line2 = new MDLine(loc, "line2")
+		var line3 = new MDLine(loc, "line3")
+		var subject = new MDBlock(loc)
 		subject.add_line line1
 		subject.add_line line2
 		subject.add_line line3
@@ -2442,29 +2445,29 @@ class TestBlock
 	end
 
 	fun test_transform_headline1 do
-		var subject = new MDBlock
+		var subject = new MDBlock(loc)
 		var kind = new BlockHeadline(subject)
-		subject.add_line new MDLine(" #   Title 1   ")
+		subject.add_line new MDLine(loc, " #   Title 1   ")
 		kind.transform_headline(subject)
 		assert kind.depth == 1
 		assert subject.first_line.value == "Title 1"
 	end
 
 	fun test_transform_headline2 do
-		var subject = new MDBlock
+		var subject = new MDBlock(loc)
 		var kind = new BlockHeadline(subject)
-		subject.add_line new MDLine(" #####Title 5   ")
+		subject.add_line new MDLine(loc, " #####Title 5   ")
 		kind.transform_headline(subject)
 		assert kind.depth == 5
 		assert subject.first_line.value == "Title 5"
 	end
 
 	fun test_remove_quote_prefix do
-		var subject = new MDBlock
+		var subject = new MDBlock(loc)
 		var kind = new BlockQuote(subject)
-		subject.add_line new MDLine(" > line 1")
-		subject.add_line new MDLine(" > line 2")
-		subject.add_line new MDLine(" > line 3")
+		subject.add_line new MDLine(loc, " > line 1")
+		subject.add_line new MDLine(loc, " > line 2")
+		subject.add_line new MDLine(loc, " > line 3")
 		kind.remove_block_quote_prefix(subject)
 		assert subject.first_line.value == "line 1"
 		assert subject.first_line.next.value == "line 2"
@@ -2472,51 +2475,51 @@ class TestBlock
 	end
 
 	fun test_remove_leading_empty_lines_1 do
-		var block = new MDBlock
-		block.add_line new MDLine("")
-		block.add_line new MDLine("")
-		block.add_line new MDLine("")
-		block.add_line new MDLine("")
-		block.add_line new MDLine("   text")
-		block.add_line new MDLine("")
+		var block = new MDBlock(loc)
+		block.add_line new MDLine(loc, "")
+		block.add_line new MDLine(loc, "")
+		block.add_line new MDLine(loc, "")
+		block.add_line new MDLine(loc, "")
+		block.add_line new MDLine(loc, "   text")
+		block.add_line new MDLine(loc, "")
 		assert block.remove_leading_empty_lines
 		assert block.first_line.value == "   text"
 	end
 
 	fun test_remove_leading_empty_lines_2 do
-		var block = new MDBlock
-		block.add_line new MDLine("   text")
+		var block = new MDBlock(loc)
+		block.add_line new MDLine(loc, "   text")
 		block.remove_leading_empty_lines
 		assert block.first_line.value == "   text"
 	end
 
 	fun test_remove_trailing_empty_lines_1 do
-		var block = new MDBlock
-		block.add_line new MDLine("")
-		block.add_line new MDLine("text")
-		block.add_line new MDLine("")
-		block.add_line new MDLine("")
-		block.add_line new MDLine("")
-		block.add_line new MDLine("")
+		var block = new MDBlock(loc)
+		block.add_line new MDLine(loc, "")
+		block.add_line new MDLine(loc, "text")
+		block.add_line new MDLine(loc, "")
+		block.add_line new MDLine(loc, "")
+		block.add_line new MDLine(loc, "")
+		block.add_line new MDLine(loc, "")
 		assert block.remove_trailing_empty_lines
 		assert block.last_line.value == "text"
 	end
 
 	fun test_remove_trailing_empty_lines_2 do
-		var block = new MDBlock
-		block.add_line new MDLine("text  ")
+		var block = new MDBlock(loc)
+		block.add_line new MDLine(loc, "text  ")
 		assert not block.remove_trailing_empty_lines
 		assert block.last_line.value == "text  "
 	end
 
 	fun test_remove_surrounding_empty_lines do
-		var block = new MDBlock
-		block.add_line new MDLine("")
-		block.add_line new MDLine("text")
-		block.add_line new MDLine("")
-		block.add_line new MDLine("")
-		block.add_line new MDLine("")
-		block.add_line new MDLine("")
+		var block = new MDBlock(loc)
+		block.add_line new MDLine(loc, "")
+		block.add_line new MDLine(loc, "text")
+		block.add_line new MDLine(loc, "")
+		block.add_line new MDLine(loc, "")
+		block.add_line new MDLine(loc, "")
+		block.add_line new MDLine(loc, "")
 		assert block.remove_surrounding_empty_lines
 		assert block.first_line.value == "text"
 		assert block.last_line.value == "text"
@@ -2526,118 +2529,121 @@ end
 class TestLine
 	super TestSuite
 
+	# A dummy location for testing purposes.
+	var loc = new MDLocation(0, 0, 0, 0)
+
 	var subject: MDLine
 
 	fun test_is_empty do
-		subject = new MDLine("")
+		subject = new MDLine(loc, "")
 		assert subject.is_empty
-		subject = new MDLine("    ")
+		subject = new MDLine(loc, "    ")
 		assert subject.is_empty
-		subject = new MDLine("test")
+		subject = new MDLine(loc, "test")
 		assert not subject.is_empty
-		subject = new MDLine("    test")
+		subject = new MDLine(loc, "    test")
 		assert not subject.is_empty
 	end
 
 	fun test_leading do
-		subject = new MDLine("")
+		subject = new MDLine(loc, "")
 		assert subject.leading == 0
-		subject = new MDLine("    ")
+		subject = new MDLine(loc, "    ")
 		assert subject.leading == 4
-		subject = new MDLine("test")
+		subject = new MDLine(loc, "test")
 		assert subject.leading == 0
-		subject = new MDLine("    test")
+		subject = new MDLine(loc, "    test")
 		assert subject.leading == 4
 	end
 
 	fun test_trailing do
-		subject = new MDLine("")
+		subject = new MDLine(loc, "")
 		assert subject.trailing == 0
-		subject = new MDLine("    ")
+		subject = new MDLine(loc, "    ")
 		assert subject.trailing == 0
-		subject = new MDLine("test   ")
+		subject = new MDLine(loc, "test   ")
 		assert subject.trailing == 3
-		subject = new MDLine("    test ")
+		subject = new MDLine(loc, "    test ")
 		assert subject.trailing == 1
 	end
 
 	fun test_line_type do
 		var v = new MarkdownProcessor
-		subject = new MDLine("")
+		subject = new MDLine(loc, "")
 		assert v.line_kind(subject) isa LineEmpty
-		subject = new MDLine("    ")
+		subject = new MDLine(loc, "    ")
 		assert v.line_kind(subject) isa LineEmpty
-		subject = new MDLine("text   ")
+		subject = new MDLine(loc, "text   ")
 		assert v.line_kind(subject) isa LineOther
-		subject = new MDLine("  # Title")
+		subject = new MDLine(loc, "  # Title")
 		assert v.line_kind(subject) isa LineHeadline
-		subject = new MDLine("  ### Title")
+		subject = new MDLine(loc, "  ### Title")
 		assert v.line_kind(subject) isa LineHeadline
-		subject = new MDLine("    code")
+		subject = new MDLine(loc, "    code")
 		assert v.line_kind(subject) isa LineCode
-		subject = new MDLine("   Title  ")
-		subject.next = new MDLine("== ")
+		subject = new MDLine(loc, "   Title  ")
+		subject.next = new MDLine(loc, "== ")
 		assert v.line_kind(subject) isa LineHeadline1
-		subject = new MDLine("   Title  ")
-		subject.next = new MDLine("-- ")
+		subject = new MDLine(loc, "   Title  ")
+		subject.next = new MDLine(loc, "-- ")
 		assert v.line_kind(subject) isa LineHeadline2
-		subject = new MDLine("  *    *   * ")
+		subject = new MDLine(loc, "  *    *   * ")
 		assert v.line_kind(subject) isa LineHR
-		subject = new MDLine("  *** ")
+		subject = new MDLine(loc, "  *** ")
 		assert v.line_kind(subject) isa LineHR
-		subject = new MDLine("- -- ")
+		subject = new MDLine(loc, "- -- ")
 		assert v.line_kind(subject) isa LineHR
-		subject = new MDLine("--------- ")
+		subject = new MDLine(loc, "--------- ")
 		assert v.line_kind(subject) isa LineHR
-		subject = new MDLine(" >")
+		subject = new MDLine(loc, " >")
 		assert v.line_kind(subject) isa LineBlockquote
-		subject = new MDLine("<p></p>")
+		subject = new MDLine(loc, "<p></p>")
 		assert v.line_kind(subject) isa LineXML
-		subject = new MDLine("<p>")
+		subject = new MDLine(loc, "<p>")
 		assert v.line_kind(subject) isa LineOther
-		subject = new MDLine("  * foo")
+		subject = new MDLine(loc, "  * foo")
 		assert v.line_kind(subject) isa LineUList
-		subject = new MDLine("- foo")
+		subject = new MDLine(loc, "- foo")
 		assert v.line_kind(subject) isa LineUList
-		subject = new MDLine("+ foo")
+		subject = new MDLine(loc, "+ foo")
 		assert v.line_kind(subject) isa LineUList
-		subject = new MDLine("1. foo")
+		subject = new MDLine(loc, "1. foo")
 		assert v.line_kind(subject) isa LineOList
-		subject = new MDLine("   11111. foo")
+		subject = new MDLine(loc, "   11111. foo")
 		assert v.line_kind(subject) isa LineOList
 	end
 
 	fun test_line_type_ext do
 		var v = new MarkdownProcessor
-		subject = new MDLine("  ~~~")
+		subject = new MDLine(loc, "  ~~~")
 		assert v.line_kind(subject) isa LineFence
-		subject = new MDLine("  ```")
+		subject = new MDLine(loc, "  ```")
 		assert v.line_kind(subject) isa LineFence
 	end
 
 	fun test_count_chars do
-		subject = new MDLine("")
+		subject = new MDLine(loc, "")
 		assert subject.count_chars('*') == 0
-		subject = new MDLine("* ")
+		subject = new MDLine(loc, "* ")
 		assert subject.count_chars('*') == 1
-		subject = new MDLine(" * text")
+		subject = new MDLine(loc, " * text")
 		assert subject.count_chars('*') == 0
-		subject = new MDLine(" *    *    *")
+		subject = new MDLine(loc, " *    *    *")
 		assert subject.count_chars('*') == 3
-		subject = new MDLine("text ** ")
+		subject = new MDLine(loc, "text ** ")
 		assert subject.count_chars('*') == 0
 	end
 
 	fun test_count_chars_start do
-		subject = new MDLine("")
+		subject = new MDLine(loc, "")
 		assert subject.count_chars_start('*') == 0
-		subject = new MDLine("* ")
+		subject = new MDLine(loc, "* ")
 		assert subject.count_chars_start('*') == 1
-		subject = new MDLine(" * text")
+		subject = new MDLine(loc, " * text")
 		assert subject.count_chars_start('*') == 1
-		subject = new MDLine(" *    *    * text")
+		subject = new MDLine(loc, " *    *    * text")
 		assert subject.count_chars_start('*') == 3
-		subject = new MDLine("text ** ")
+		subject = new MDLine(loc, "text ** ")
 		assert subject.count_chars_start('*') == 0
 	end
 end
@@ -2679,6 +2685,133 @@ b.b:b.b
 b.c:b.c
 c:c
 """
+		assert res == exp
+	end
+end
+
+class TestTokenLocation
+	super TestSuite
+
+	fun test_token_location1 do
+		var string = "**Hello** `World`"
+		var stack =  [
+			"TokenStrongStar at 1,1--1,1",
+			"TokenStrongStar at 1,8--1,8",
+			"TokenCodeSingle at 1,11--1,11",
+			"TokenCodeSingle at 1,17--1,17"]
+		(new TestTokenProcessor(stack)).process(string)
+	end
+
+	fun test_token_location2 do
+		var string = "**Hello**\n`World`\n*Bonjour*\n[le monde]()"
+		var stack =  [
+			"TokenStrongStar at 1,1--1,1",
+			"TokenStrongStar at 1,8--1,8",
+			"TokenCodeSingle at 2,1--2,1",
+			"TokenCodeSingle at 2,7--2,7",
+			"TokenEmStar at 3,1--3,1",
+			"TokenEmStar at 3,9--3,9",
+			"TokenLink at 4,1--4,1"]
+		(new TestTokenProcessor(stack)).process(string)
+	end
+
+	fun test_token_location3 do
+		var string = """**Hello**
+		`World`
+		*Bonjour*
+		[le monde]()"""
+		var stack =  [
+			"TokenStrongStar at 1,1--1,1",
+			"TokenStrongStar at 1,8--1,8",
+			"TokenCodeSingle at 2,1--2,1",
+			"TokenCodeSingle at 2,7--2,7",
+			"TokenEmStar at 3,1--3,1",
+			"TokenEmStar at 3,9--3,9",
+			"TokenLink at 4,1--4,1"]
+		(new TestTokenProcessor(stack)).process(string)
+	end
+end
+
+class TestTokenProcessor
+	super MarkdownProcessor
+
+	var test_stack: Array[String]
+
+	redef fun token_at(input, pos) do
+		var token = super
+		if token isa TokenNone then return token
+		var res = "{token.class_name} at {token.location}"
+		print res
+		var exp = test_stack.shift
+		assert exp == res
+		return token
+	end
+end
+
+class TestBlockLocation
+	super TestSuite
+
+	var proc = new MarkdownProcessor
+
+	fun test_block_location1 do
+		var stack = [
+			"BlockHeadline: 1,1--1,8",
+			"BlockListItem: 2,1--2,6",
+			"BlockListItem: 3,1--3,5"
+		]
+		var string =
+		"# Title\n* li1\n* li2"
+		proc.emitter.decorator = new TestBlockDecorator(stack)
+		proc.process(string)
+	end
+
+	fun test_block_location2 do
+		var stack = [
+			"BlockHeadline: 1,1--1,11",
+			"BlockFence: 3,1--5,4",
+			"BlockListItem: 7,1--7,7",
+			"BlockListItem: 8,1--8,6"]
+		var string ="""#### Title
+
+~~~fence
+some code
+~~~
+
+1. li1
+1. li2"""
+		proc.emitter.decorator = new TestBlockDecorator(stack)
+		proc.process(string)
+	end
+end
+
+class TestBlockDecorator
+	super HTMLDecorator
+
+	var stack: Array[String]
+
+	redef fun add_headline(v, block) do
+		super
+		check_res(block)
+	end
+
+	redef fun add_listitem(v, block) do
+		super
+		check_res(block)
+	end
+
+	redef fun add_blockquote(v, block) do
+		super
+		check_res(block)
+	end
+
+	redef fun add_code(v, block) do
+		super
+		check_res(block)
+	end
+
+	fun check_res(block: Block) do
+		var res = "{block.class_name}: {block.block.location}"
+		var exp = stack.shift
 		assert res == exp
 	end
 end

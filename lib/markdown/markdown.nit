@@ -134,17 +134,21 @@ class MarkdownProcessor
 
 	# Split `input` string into `MDLines` and create a parent `MDBlock` with it.
 	private fun read_lines(input: String): MDBlock do
-		var block = new MDBlock
+		var block = new MDBlock(new MDLocation(1, 1, 1, 1))
 		var value = new FlatBuffer
 		var i = 0
+
+		var line_pos = 0
+		var col_pos = 0
+
 		while i < input.length do
 			value.clear
 			var pos = 0
 			var eol = false
 			while not eol and i < input.length do
+				col_pos += 1
 				var c = input[i]
 				if c == '\n' then
-					i += 1
 					eol = true
 				else if c == '\t' then
 					var np = pos + (4 - (pos.bin_and(3)))
@@ -152,18 +156,20 @@ class MarkdownProcessor
 						value.add ' '
 						pos += 1
 					end
-					i += 1
 				else
 					pos += 1
 					value.add c
-					i += 1
 				end
+				i += 1
 			end
+			line_pos += 1
 
-			var line = new MDLine(value.write_to_string)
+			var loc = new MDLocation(line_pos, 1, line_pos, col_pos)
+			var line = new MDLine(loc, value.write_to_string)
 			var is_link_ref = check_link_ref(line)
 			# Skip link refs
 			if not is_link_ref then block.add_line line
+			col_pos = 0
 		end
 		return block
 	end
@@ -370,70 +376,72 @@ class MarkdownProcessor
 			c2 = ' '
 		end
 
+		var loc = text.pos_to_loc(pos)
+
 		if c == '*' then
 			if c1 == '*' then
 				if c0 != ' ' or c2 != ' ' then
-					return new TokenStrongStar(pos, c)
+					return new TokenStrongStar(loc, pos, c)
 				else
-					return new TokenEmStar(pos, c)
+					return new TokenEmStar(loc, pos, c)
 				end
 			end
 			if c0 != ' ' or c1 != ' ' then
-				return new TokenEmStar(pos, c)
+				return new TokenEmStar(loc, pos, c)
 			else
-				return new TokenNone(pos, c)
+				return new TokenNone(loc, pos, c)
 			end
 		else if c == '_' then
 			if c1 == '_' then
 				if c0 != ' ' or c2 != ' 'then
-					return new TokenStrongUnderscore(pos, c)
+					return new TokenStrongUnderscore(loc, pos, c)
 				else
-					return new TokenEmUnderscore(pos, c)
+					return new TokenEmUnderscore(loc, pos, c)
 				end
 			end
 			if ext_mode then
 				if (c0.is_letter or c0.is_digit) and c0 != '_' and
 				   (c1.is_letter or c1.is_digit) then
-					return new TokenNone(pos, c)
+					return new TokenNone(loc, pos, c)
 				else
-					return new TokenEmUnderscore(pos, c)
+					return new TokenEmUnderscore(loc, pos, c)
 				end
 			end
 			if c0 != ' ' or c1 != ' ' then
-				return new TokenEmUnderscore(pos, c)
+				return new TokenEmUnderscore(loc, pos, c)
 			else
-				return new TokenNone(pos, c)
+				return new TokenNone(loc, pos, c)
 			end
 		else if c == '!' then
-			if c1 == '[' then return new TokenImage(pos, c)
-			return new TokenNone(pos, c)
+			if c1 == '[' then return new TokenImage(loc, pos, c)
+			return new TokenNone(loc, pos, c)
 		else if c == '[' then
-			return new TokenLink(pos, c)
+			return new TokenLink(loc, pos, c)
 		else if c == ']' then
-			return new TokenNone(pos, c)
+			return new TokenNone(loc, pos, c)
 		else if c == '`' then
 			if c1 == '`' then
-				return new TokenCodeDouble(pos, c)
+				return new TokenCodeDouble(loc, pos, c)
 			else
-				return new TokenCodeSingle(pos, c)
+				return new TokenCodeSingle(loc, pos, c)
 			end
 		else if c == '\\' then
 			if c1 == '\\' or c1 == '[' or c1 == ']' or c1 == '(' or c1 == ')' or c1 == '{' or c1 == '}' or c1 == '#' or c1 == '"' or c1 == '\'' or c1 == '.' or c1 == '<' or c1 == '>' or c1 == '*' or c1 == '+' or c1 == '-' or c1 == '_' or c1 == '!' or c1 == '`' or c1 == '~' or c1 == '^' then
-				return new TokenEscape(pos, c)
+				return new TokenEscape(loc, pos, c)
 			else
-				return new TokenNone(pos, c)
+				return new TokenNone(loc, pos, c)
 			end
 		else if c == '<' then
-			return new TokenHTML(pos, c)
+			return new TokenHTML(loc, pos, c)
 		else if c == '&' then
-			return new TokenEntity(pos, c)
+			return new TokenEntity(loc, pos, c)
 		else
 			if ext_mode then
 				if c == '~' and c1 == '~' then
-					return new TokenStrike(pos, c)
+					return new TokenStrike(loc, pos, c)
 				end
 			end
-			return new TokenNone(pos, c)
+			return new TokenNone(loc, pos, c)
 		end
 	end
 
@@ -856,9 +864,31 @@ class HTMLDecorator
 	private var allowed_id_chars: Array[Char] = ['-', '_', ':', '.']
 end
 
+# Location in a Markdown input.
+class MDLocation
+
+	# Starting line number (starting from 1).
+	var line_start: Int
+
+	# Starting column number (starting from 1).
+	var column_start: Int
+
+	# Stopping line number (starting from 1).
+	var line_end: Int
+
+	# Stopping column number (starting from 1).
+	var column_end: Int
+
+	redef fun to_s do return "{line_start},{column_start}--{line_end},{column_end}"
+end
+
 # A block of markdown lines.
 # A `MDBlock` can contains lines and/or sub-blocks.
 class MDBlock
+
+	# Position of `self` in the input.
+	var location: MDLocation
+
 	# Kind of block.
 	# See `Block`.
 	var kind: Block = new BlockNone(self) is writable
@@ -911,7 +941,14 @@ class MDBlock
 
 	# Split `self` creating a new sub-block having `line` has `last_line`.
 	fun split(line: MDLine): MDBlock do
-		var block = new MDBlock
+		# location for new block
+		var new_loc = new MDLocation(
+			first_line.location.line_start,
+			first_line.location.column_start,
+			line.location.line_end,
+			line.location.column_end)
+		# create block
+		var block = new MDBlock(new_loc)
 		block.first_line = first_line
 		block.last_line = line
 		first_line = line.next
@@ -920,6 +957,9 @@ class MDBlock
 			last_line = null
 		else
 			first_line.prev = null
+			# update current block loc
+			location.line_start = first_line.location.line_start
+			location.column_start = first_line.location.column_start
 		end
 		if first_block == null then
 			first_block = block
@@ -1291,6 +1331,9 @@ end
 
 # A markdown line.
 class MDLine
+
+	# Location of `self` in the original input.
+	var location: MDLocation
 
 	# Text contained in this line.
 	var value: String is writable
@@ -1799,7 +1842,10 @@ end
 # Some tokens have a specific markup behaviour that is handled here.
 abstract class Token
 
-	# Position of `self` in markdown input.
+	# Location of `self` in the original input.
+	var location: MDLocation
+
+	# Position of `self` in input independant from lines.
 	var pos: Int
 
 	# Character found at `pos` in the markdown input.
@@ -2426,6 +2472,24 @@ redef class Text
 			end
 		end
 		return null
+	end
+
+	# Init a `MDLocation` instance at `pos` in `self`.
+	private fun pos_to_loc(pos: Int): MDLocation do
+		assert pos <= length
+		var line = 1
+		var col = 0
+		var i = 0
+		while i <= pos do
+			col += 1
+			var c = self[i]
+			if c == '\n' then
+				line +=1
+				col = 0
+			end
+			i +=1
+		end
+		return new MDLocation(line, col, line, col)
 	end
 
 	# Is `self` an unsafe HTML element?
