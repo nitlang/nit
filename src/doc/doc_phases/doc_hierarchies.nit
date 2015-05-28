@@ -58,7 +58,7 @@ end
 redef class MClassPage
 	redef fun build_inh_list(v, doc) do
 		var id = mentity.nitdoc_id
-		var section = new InheritanceListSection("{id}.inheritance", mentity)
+		var section = new TabbedGroup("{id}.inheritance", "Inheritance")
 		var group = new PanelGroup("list.group", "List")
 		var parents = self.parents.to_a
 		v.name_sorter.sort(parents)
@@ -80,12 +80,6 @@ end
 
 # FIXME diff hack
 class ImportationListSection
-	super TabbedGroup
-	super MEntityComposite
-end
-
-# FIXME diff hack
-class InheritanceListSection
 	super TabbedGroup
 	super MEntityComposite
 end
