@@ -73,7 +73,7 @@ redef class DefinitionArticle
 		var lin = all_defs.to_a
 		doc.mainmodule.linearize_mpropdefs(lin)
 		if lin.length > 1 then
-			add_child new DefinitionLinArticle("{mentity.nitdoc_id}.lin", mentity, lin)
+			add_child new DefinitionLinArticle("{mentity.nitdoc_id}.lin", "Linearization", lin)
 		end
 	end
 
@@ -93,12 +93,11 @@ end
 
 # Display a linearized list of definitions.
 class DefinitionLinArticle
-	super MEntityArticle
+	super DocArticle
 
 	# The linearized list to display.
 	var mentities: Array[MEntity]
 
-	redef var toc_title = "Linearization"
 	redef fun is_hidden do return mentities.is_empty
 	redef var is_toc_hidden = true
 end
