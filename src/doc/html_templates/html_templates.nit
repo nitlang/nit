@@ -440,10 +440,6 @@ redef class ImportationListSection
 	redef var html_title is lazy do return "Dependencies"
 end
 
-redef class InheritanceListSection
-	redef var html_title is lazy do return "Inheritance"
-end
-
 redef class IntroArticle
 	redef var html_title = null
 
