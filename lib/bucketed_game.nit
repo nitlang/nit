@@ -147,16 +147,16 @@ end
 # Game logic on the client
 class ThinGame
 
-	# Game tick when `self` should act.
+	# Current game tick
 	#
 	# Default is 0.
-	var tick: Int = 0 is protected writable
+	var tick: Int = 0 is writable
 end
 
 # Game turn on the client
 class ThinGameTurn[G: ThinGame]
 
-	# Game tick when `self` should act.
+	# Game tick when happened this turn
 	var tick: Int is protected writable
 
 	# Game events occurred for `self`.
