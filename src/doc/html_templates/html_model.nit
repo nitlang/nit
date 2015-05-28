@@ -22,17 +22,6 @@ import html::bootstrap
 import ordered_tree
 
 redef class MEntity
-	# ID used as a HTML unique ID and in file names.
-	#
-	# **Must** match the following (POSIX ERE) regular expression:
-	#
-	# ~~~POSIX ERE
-	# ^[A-Za-z_][A-Za-z0-9._-]*$
-	# ~~~
-	#
-	# That way, the ID is always a valid URI component and a valid XML name.
-	fun nitdoc_id: String is abstract
-
 	# URL of this entity’s Nitdoc page.
 	fun nitdoc_url: String is abstract
 

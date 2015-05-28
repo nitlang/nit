@@ -27,16 +27,26 @@ import model_ext
 # It is a placeholder to share data between each phase.
 class DocModel
 
-	# `DocPage` composing the documentation.
+	# `DocPage` composing the documentation associated to their ids.
 	#
 	# This is where `DocPhase` store and access pages to produce documentation.
-	var pages = new Array[DocPage]
+	#
+	# See `add_page`.
+	var pages: Map[String, DocPage] = new HashMap[String, DocPage]
 
 	# Nit `Model` from which we extract the documentation.
 	var model: Model is writable
 
 	# The entry point of the `model`.
 	var mainmodule: MModule is writable
+
+	# Add a `page` to this documentation.
+	fun add_page(page: DocPage) do
+		if pages.has_key(page.id) then
+			print "Warning: multiple page with the same id `{page.id}`"
+		end
+		pages[page.id] = page
+	end
 end
 
 # A documentation page abstraction.
@@ -44,6 +54,17 @@ end
 # The page contains a link to the `root` of the `DocComposite` that compose the
 # the page.
 class DocPage
+
+	# Page uniq id.
+	#
+	# The `id` is used as name for the generated file corresponding to the page
+	# (if any).
+	# Because multiple pages can be generated in the same directory it should be
+	# uniq.
+	#
+	# The `id` can also be used to establish links between pages (HTML links,
+	# HTML anchors, vim links, etc.).
+	var id: String is writable
 
 	# Title of this page.
 	var title: String is writable
@@ -229,8 +250,28 @@ class PropertyGroup[E: MProperty]
 end
 
 redef class MEntity
+	# ID used as a unique ID and in file names.
+	#
+	# **Must** match the following (POSIX ERE) regular expression:
+	#
+	# ~~~POSIX ERE
+	# ^[A-Za-z_][A-Za-z0-9._-]*$
+	# ~~~
+	#
+	# That way, the ID is always a valid URI component and a valid XML name.
+	fun nitdoc_id: String do return full_name.to_cmangle
+
 	# Name displayed in console for debug and tests.
 	fun nitdoc_name: String do return name.html_escape
+end
+
+redef class MModule
+
+	# Avoid id conflict with group
+	redef fun nitdoc_id do
+		if mgroup == null then return super
+		return "{mgroup.full_name}::{full_name}".to_cmangle
+	end
 end
 
 redef class MClassDef

@@ -104,7 +104,7 @@ class RenderHTMLPhase
 
 	redef fun apply do
 		init_output_dir
-		for page in doc.pages do
+		for page in doc.pages.values do
 			page.render(self, doc).write_to_file("{ctx.output_dir.to_s}/{page.html_url}")
 		end
 	end
@@ -187,7 +187,7 @@ redef class DocPage
 	# all properties below are roughly copied from `doc_pages`
 
 	# Build page title string
-	fun init_title(v: RenderHTMLPhase, doc: DocModel) is abstract
+	fun init_title(v: RenderHTMLPhase, doc: DocModel) do end
 
 	# Build top menu template if any.
 	fun init_topmenu(v: RenderHTMLPhase, doc: DocModel) do

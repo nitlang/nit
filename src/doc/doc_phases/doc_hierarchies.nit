@@ -26,7 +26,7 @@ class InheritanceListsPhase
 	var name_sorter = new MEntityNameSorter
 
 	redef fun apply do
-		for page in doc.pages do
+		for page in doc.pages.values do
 			if page isa MEntityPage then page.build_inh_list(self, doc)
 		end
 	end

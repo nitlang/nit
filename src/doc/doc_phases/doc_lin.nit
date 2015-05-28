@@ -25,7 +25,7 @@ class LinListPhase
 	private var lin_sorter = new MEntityNameSorter
 
 	redef fun apply do
-		for page in doc.pages do page.apply_linearization(self, doc)
+		for page in doc.pages.values do page.apply_linearization(self, doc)
 	end
 end
 

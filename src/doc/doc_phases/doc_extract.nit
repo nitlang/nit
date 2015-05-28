@@ -146,4 +146,78 @@ redef class DocModel
 			end
 		end
 	end
+
+	# Lists all MEntities in the model.
+	#
+	# FIXME invalidate cache if `self` is modified.
+	var mentities: Collection[MEntity] is lazy do
+		var res = new HashSet[MEntity]
+		res.add_all mprojects
+		res.add_all mgroups
+		res.add_all mmodules
+		res.add_all mclasses
+		res.add_all mclassdefs
+		res.add_all mproperties
+		res.add_all mpropdefs
+		return res
+	end
+
+	# Searches MEntities that match `name`.
+	fun mentities_by_name(name: String): Array[MEntity] do
+		var res = new Array[MEntity]
+		for mentity in mentities do
+			if mentity.name != name then continue
+			res.add mentity
+		end
+		return res
+	end
+
+	# Looks up a MEntity by its `namespace`.
+	#
+	# Usefull when `mentities_by_name` by return conflicts.
+	#
+	# Path can be the shortest possible to disambiguise like `Class::property`.
+	# In case of larger conflicts, a more complex namespace can be given like
+	# `project::module::Class::prop`.
+	fun mentities_by_namespace(namespace: String): Array[MEntity] do
+		var res = new Array[MEntity]
+		for mentity in mentities do
+			mentity.mentities_by_namespace(namespace, res)
+		end
+		return res
+	end
+end
+
+redef class MEntity
+	# Looks up a MEntity by its `namespace` from `self`.
+	private fun mentities_by_namespace(namespace: String, res: Array[MEntity]) do end
+
+	private fun lookup_in(mentities: Collection[MEntity], namespace: String, res: Array[MEntity]) do
+		var parts = namespace.split_once_on("::")
+		var name = parts.shift
+		for mentity in mentities do
+			if mentity.name != name then continue
+			if parts.is_empty then
+				res.add mentity
+			else
+				mentity.mentities_by_namespace(parts.first, res)
+			end
+		end
+	end
+end
+
+redef class MProject
+	redef fun mentities_by_namespace(namespace, res) do lookup_in(mgroups, namespace, res)
+end
+
+redef class MGroup
+	redef fun mentities_by_namespace(namespace, res) do lookup_in(mmodules, namespace, res)
+end
+
+redef class MModule
+	redef fun mentities_by_namespace(namespace, res) do lookup_in(mclassdefs, namespace, res)
+end
+
+redef class MClassDef
+	redef fun mentities_by_namespace(namespace, res) do lookup_in(mpropdefs, namespace, res)
 end

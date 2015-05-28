@@ -33,7 +33,7 @@ class StructurePhase
 
 	# Populates the given DocModel.
 	redef fun apply do
-		for page in doc.pages do page.apply_structure(self, doc)
+		for page in doc.pages.values do page.apply_structure(self, doc)
 	end
 end
 
