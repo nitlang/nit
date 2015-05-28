@@ -100,15 +100,15 @@ extern class NativeEventBase `{ struct event_base * `}
 	#
 	# This loop will run the event base until either there are no more added
 	# events, or until something calls `exit_loop`.
-	fun dispatch `{ event_base_dispatch(recv); `}
+	fun dispatch `{ event_base_dispatch(self); `}
 
 	# Exit the event loop
 	#
 	# TODO support timer
-	fun exit_loop `{ event_base_loopexit(recv, NULL); `}
+	fun exit_loop `{ event_base_loopexit(self, NULL); `}
 
 	# Destroy this instance
-	fun destroy `{ event_base_free(recv); `}
+	fun destroy `{ event_base_free(self); `}
 end
 
 # Spawned to manage a specific connection
@@ -182,39 +182,39 @@ end
 extern class NativeBufferEvent `{ struct bufferevent * `}
 	# Write `length` bytes of `line`
 	fun write(line: NativeString, length: Int): Int `{
-		return bufferevent_write(recv, line, length);
+		return bufferevent_write(self, line, length);
 	`}
 
 	# Write the byte `value`
 	fun write_byte(value: Int): Int `{
 		unsigned char byt = (unsigned char)value;
-		return bufferevent_write(recv, &byt, 1);
+		return bufferevent_write(self, &byt, 1);
 	`}
 
 	# Check if we have anything left in our buffers. If so, we set our connection to be closed
 	# on a callback. Otherwise we close it and free it right away.
 	fun destroy: Bool `{
-		struct evbuffer* out = bufferevent_get_output(recv);
-		struct evbuffer* in = bufferevent_get_input(recv);
+		struct evbuffer* out = bufferevent_get_output(self);
+		struct evbuffer* in = bufferevent_get_input(self);
 		if(evbuffer_get_length(in) > 0 || evbuffer_get_length(out) > 0) {
 			return 0;
 		} else {
-			bufferevent_free(recv);
+			bufferevent_free(self);
 			return 1;
 		}
 	`}
 
 	# The output buffer associated to `self`
-	fun output_buffer: OutputNativeEvBuffer `{ return bufferevent_get_output(recv); `}
+	fun output_buffer: OutputNativeEvBuffer `{ return bufferevent_get_output(self); `}
 
 	# The input buffer associated to `self`
-	fun input_buffer: InputNativeEvBuffer `{ return bufferevent_get_input(recv); `}
+	fun input_buffer: InputNativeEvBuffer `{ return bufferevent_get_input(self); `}
 end
 
 # A single buffer
 extern class NativeEvBuffer `{ struct evbuffer * `}
 	# Length of data in this buffer
-	fun length: Int `{ return evbuffer_get_length(recv); `}
+	fun length: Int `{ return evbuffer_get_length(self); `}
 end
 
 # An input buffer
@@ -222,7 +222,7 @@ extern class InputNativeEvBuffer
 	super NativeEvBuffer
 
 	# Empty/clear `length` data from buffer
-	fun drain(length: Int) `{ evbuffer_drain(recv, length); `}
+	fun drain(length: Int) `{ evbuffer_drain(self, length); `}
 end
 
 # An output buffer
@@ -231,7 +231,7 @@ extern class OutputNativeEvBuffer
 
 	# Add file to buffer
 	fun add_file(fd, offset, length: Int): Bool `{
-		return evbuffer_add_file(recv, fd, offset, length);
+		return evbuffer_add_file(self, fd, offset, length);
 	`}
 end
 
@@ -266,7 +266,7 @@ extern class ConnectionListener `{ struct evconnlistener * `}
 	`}
 
 	# Get the `NativeEventBase` associated to `self`
-	fun base: NativeEventBase `{ return evconnlistener_get_base(recv); `}
+	fun base: NativeEventBase `{ return evconnlistener_get_base(self); `}
 
 	# Callback method on listening error
 	fun error_callback do

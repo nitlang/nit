@@ -84,35 +84,35 @@ extern class SDLInitFlags `{ Uint32 `}
 	new `{ return 0; `}
 
 	# Add the timer subsystem
-	fun timer: SDLInitFlags `{ return recv | SDL_INIT_TIMER; `}
+	fun timer: SDLInitFlags `{ return self | SDL_INIT_TIMER; `}
 
 	# Add the audio subsystem
-	fun audio: SDLInitFlags `{ return recv | SDL_INIT_AUDIO; `}
+	fun audio: SDLInitFlags `{ return self | SDL_INIT_AUDIO; `}
 
 	# Add the video subsystem
-	fun video: SDLInitFlags `{ return recv | SDL_INIT_VIDEO; `}
+	fun video: SDLInitFlags `{ return self | SDL_INIT_VIDEO; `}
 
 	# Add the joystick subsystem
 	#
 	# Implied by `gamecontroller`
-	fun joystick: SDLInitFlags `{ return recv | SDL_INIT_JOYSTICK; `}
+	fun joystick: SDLInitFlags `{ return self | SDL_INIT_JOYSTICK; `}
 
 	# Add the haptic subsystem
-	fun haptic: SDLInitFlags `{ return recv | SDL_INIT_HAPTIC; `}
+	fun haptic: SDLInitFlags `{ return self | SDL_INIT_HAPTIC; `}
 
 	# Add the gamecontroller subsystem
-	fun gamecontroller: SDLInitFlags `{ return recv | SDL_INIT_GAMECONTROLLER; `}
+	fun gamecontroller: SDLInitFlags `{ return self | SDL_INIT_GAMECONTROLLER; `}
 
 	# Add the events subsystem
 	#
 	# Implied by `video` and `joystick`
-	fun events: SDLInitFlags `{ return recv | SDL_INIT_EVENTS; `}
+	fun events: SDLInitFlags `{ return self | SDL_INIT_EVENTS; `}
 
 	# Add all subsystems
-	fun everything: SDLInitFlags `{ return recv | SDL_INIT_EVERYTHING; `}
+	fun everything: SDLInitFlags `{ return self | SDL_INIT_EVERYTHING; `}
 
 	# Is this flag set empty?
-	fun is_empty: Bool `{ return recv == 0; `}
+	fun is_empty: Bool `{ return self == 0; `}
 
 	# TODO add all other is_
 end
@@ -130,20 +130,20 @@ extern class SDLWindow `{ SDL_Window * `}
 	fun initialized: Bool do return not address_is_null
 
 	# Destroy this window
-	fun destroy `{ SDL_DestroyWindow(recv); `}
+	fun destroy `{ SDL_DestroyWindow(self); `}
 
 	# Get the `SDLWindowFlags` describing the status of the window
-	fun flags: SDLWindowFlags `{ return SDL_GetWindowFlags(recv); `}
+	fun flags: SDLWindowFlags `{ return SDL_GetWindowFlags(self); `}
 
 	# Show a simple message box
 	#
 	# Similar to `sys.sdl.show_simple_message_box` but attached to this window
 	fun show_simple_message_box(level: SDLMessageBoxFlags, title, content: NativeString) `{
-		SDL_ShowSimpleMessageBox(level, title, content, recv);
+		SDL_ShowSimpleMessageBox(level, title, content, self);
 	`}
 
 	# Set the icon of this window
-	fun icon=(icon: SDLSurface) `{ SDL_SetWindowIcon(recv, icon); `}
+	fun icon=(icon: SDLSurface) `{ SDL_SetWindowIcon(self, icon); `}
 end
 
 # Flags for `SDLWindow::new` and returned by `SDLWindow::flags`
@@ -152,62 +152,62 @@ extern class SDLWindowFlags `{ Uint32 `}
 	new `{ return 0; `}
 
 	# Add the flag requesting a fullscreen window
-	fun fullscreen: SDLWindowFlags `{ return recv | SDL_WINDOW_FULLSCREEN; `}
+	fun fullscreen: SDLWindowFlags `{ return self | SDL_WINDOW_FULLSCREEN; `}
 
 	# Add the flag requesting a fullscreen window for the current desktop
-	fun fullscreen_desktop: SDLWindowFlags `{ return recv | SDL_WINDOW_FULLSCREEN_DESKTOP; `}
+	fun fullscreen_desktop: SDLWindowFlags `{ return self | SDL_WINDOW_FULLSCREEN_DESKTOP; `}
 
 	# Add the flag requesting a window usable with an OpenGL context
-	fun opengl: SDLWindowFlags `{ return recv | SDL_WINDOW_OPENGL; `}
+	fun opengl: SDLWindowFlags `{ return self | SDL_WINDOW_OPENGL; `}
 
 	# Add the flag requesting a hidden window
-	fun hidden: SDLWindowFlags `{ return recv | SDL_WINDOW_HIDDEN; `}
+	fun hidden: SDLWindowFlags `{ return self | SDL_WINDOW_HIDDEN; `}
 
 	# Add the flag requesting a borderless window
-	fun borderless: SDLWindowFlags `{ return recv | SDL_WINDOW_BORDERLESS; `}
+	fun borderless: SDLWindowFlags `{ return self | SDL_WINDOW_BORDERLESS; `}
 
 	# Add the flag requesting a resizable window
-	fun resizable: SDLWindowFlags `{ return recv | SDL_WINDOW_RESIZABLE; `}
+	fun resizable: SDLWindowFlags `{ return self | SDL_WINDOW_RESIZABLE; `}
 
 	# Add the flag requesting a minimized window
-	fun minimized: SDLWindowFlags `{ return recv | SDL_WINDOW_MINIMIZED; `}
+	fun minimized: SDLWindowFlags `{ return self | SDL_WINDOW_MINIMIZED; `}
 
 	# Add the flag requesting a maximimez window
-	fun maximized: SDLWindowFlags `{ return recv | SDL_WINDOW_MAXIMIZED; `}
+	fun maximized: SDLWindowFlags `{ return self | SDL_WINDOW_MAXIMIZED; `}
 
 	# Add the flag to grab the input focus
-	fun input_grabbed: SDLWindowFlags `{ return recv | SDL_WINDOW_INPUT_GRABBED; `}
+	fun input_grabbed: SDLWindowFlags `{ return self | SDL_WINDOW_INPUT_GRABBED; `}
 
 	# Add the flag to request a window using the system High-DPI mode
 	fun allow_highdpi: SDLWindowFlags `{
 		#if SDL_VERSION_ATLEAST(2, 0, 2)
-			return recv | SDL_WINDOW_ALLOW_HIGHDPI;
+			return self | SDL_WINDOW_ALLOW_HIGHDPI;
 		#else
-			return recv;
+			return self;
 		#endif
 	`}
 
 	# Is the window shown?
 	#
 	# Can only be queried because it is ignored by `SDLWindow::new`
-	fun is_shown: Bool `{ return recv & SDL_WINDOW_SHOWN; `}
+	fun is_shown: Bool `{ return self & SDL_WINDOW_SHOWN; `}
 
 	# Does the window has the input focus?
 	#
 	# Can only be queried because it is ignored by `SDLWindow::new`
-	fun has_input_focus: Bool `{ return recv & SDL_WINDOW_INPUT_FOCUS; `}
+	fun has_input_focus: Bool `{ return self & SDL_WINDOW_INPUT_FOCUS; `}
 
 	# Does the window has the mouse focus?
 	#
 	# Can only be queried because it is ignored by `SDLWindow::new`
-	fun has_mouse_focus: Bool `{ return recv & SDL_WINDOW_MOUSE_FOCUS; `}
+	fun has_mouse_focus: Bool `{ return self & SDL_WINDOW_MOUSE_FOCUS; `}
 
 	# TODO add all other `is_` methods, as needed
 end
 
 redef universal Int
-	# Suspend execution for `recv` milliseconds
-	fun delay `{ SDL_Delay(recv); `}
+	# Suspend execution for `self` milliseconds
+	fun delay `{ SDL_Delay(self); `}
 end
 
 # A renderer, maybe software or hardware
@@ -225,10 +225,10 @@ extern class SDLRenderer `{ SDL_Renderer * `}
 	`}
 
 	# Destroy this renderer
-	fun destroy `{ SDL_DestroyRenderer(recv); `}
+	fun destroy `{ SDL_DestroyRenderer(self); `}
 
 	# Clear the rendering target with the current `draw_color`
-	fun clear `{ SDL_RenderClear(recv); `}
+	fun clear `{ SDL_RenderClear(self); `}
 
 	# Copy the rectangle at `src` from `texture` to fill the `dst` at the rendering `target`
 	#
@@ -245,18 +245,18 @@ extern class SDLRenderer `{ SDL_Renderer * `}
 	end
 
 	private fun native_copy(texture: SDLTexture, src, dst: SDLRect) `{
-		SDL_RenderCopy(recv, texture, src, dst);
+		SDL_RenderCopy(self, texture, src, dst);
 	`}
 
 	# Update the screen with all rendering since the previous call
-	fun present `{ SDL_RenderPresent(recv); `}
+	fun present `{ SDL_RenderPresent(self); `}
 
 	# Get the `SDLRendererInfo` for this renderer
-	fun info_copy(out: SDLRendererInfo) `{ SDL_GetRendererInfo(recv, out); `}
+	fun info_copy(out: SDLRendererInfo) `{ SDL_GetRendererInfo(self, out); `}
 
 	# Set the drawing color
 	fun draw_color=(val: SDLColor) `{
-		SDL_SetRenderDrawColor(recv, val->r, val->g, val->b, val->a);
+		SDL_SetRenderDrawColor(self, val->r, val->g, val->b, val->a);
 	`}
 
 	# Get the drawing color of this renderer
@@ -272,31 +272,31 @@ extern class SDLRenderer `{ SDL_Renderer * `}
 
 	# Copy the drawing color of this renderer in `color`
 	fun draw_color_copy(color: SDLColor) `{
-		SDL_GetRenderDrawColor(recv, &color->r, &color->g, &color->b, &color->a);
+		SDL_GetRenderDrawColor(self, &color->r, &color->g, &color->b, &color->a);
 	`}
 
 	# Fill a rectangle with the current `draw_color`
 	#
 	# If `rect.address_is_null` then fills the entire screen.
-	fun fill_rect(rect: SDLRect) `{ SDL_RenderFillRect(recv, rect); `}
+	fun fill_rect(rect: SDLRect) `{ SDL_RenderFillRect(self, rect); `}
 
 	# Draw a rectangle with the current `draw_color`
-	fun draw_rect(rect: SDLRect) `{ SDL_RenderDrawRect(recv, rect); `}
+	fun draw_rect(rect: SDLRect) `{ SDL_RenderDrawRect(self, rect); `}
 
 	# Draw a point with the current `draw_color`
-	fun draw_point(x, y: Int) `{ SDL_RenderDrawPoint(recv, x, y); `}
+	fun draw_point(x, y: Int) `{ SDL_RenderDrawPoint(self, x, y); `}
 
 	# Draw a line with the current `draw_color`
-	fun draw_line(x1, y1, x2, y2: Int) `{ SDL_RenderDrawLine(recv, x1, y1, x2, y2); `}
+	fun draw_line(x1, y1, x2, y2: Int) `{ SDL_RenderDrawLine(self, x1, y1, x2, y2); `}
 
 	# Set the viewport of this renderer
-	fun viewport=(rect: SDLRect) `{ SDL_RenderSetViewport(recv, rect); `}
+	fun viewport=(rect: SDLRect) `{ SDL_RenderSetViewport(self, rect); `}
 
 	# Get the rendering target of this renderer
-	fun target: SDLTexture `{ return SDL_GetRenderTarget(recv); `}
+	fun target: SDLTexture `{ return SDL_GetRenderTarget(self); `}
 
 	# Set the rendering target of this renderer
-	fun target=(val: SDLTexture) `{ SDL_SetRenderTarget(recv, val); `}
+	fun target=(val: SDLTexture) `{ SDL_SetRenderTarget(self, val); `}
 
 	# TODO add other renderer related methods:
 	#
@@ -329,28 +329,28 @@ extern class SDLColor `{ SDL_Color *`}
 	end
 
 	# The red component of this color `[0..255]`
-	fun r: Int `{ return recv->r; `}
+	fun r: Int `{ return self->r; `}
 
 	# Set the red component of this color `[0..255]`
-	fun r=(val: Int) `{ recv->r = val; `}
+	fun r=(val: Int) `{ self->r = val; `}
 
 	# The green component of this color `[0..255]`
-	fun g: Int `{ return recv->g; `}
+	fun g: Int `{ return self->g; `}
 
 	# Set the green component of this color `[0..255]`
-	fun g=(val: Int) `{ recv->g = val; `}
+	fun g=(val: Int) `{ self->g = val; `}
 
 	# The blue component of this color `[0..255]`
-	fun b: Int `{ return recv->b; `}
+	fun b: Int `{ return self->b; `}
 
 	# Set the blue component of this color `[0..255]`
-	fun b=(val: Int) `{ recv->b = val; `}
+	fun b=(val: Int) `{ self->b = val; `}
 
 	# The alpha component of this color `[0..255]`
-	fun a: Int `{ return recv->a; `}
+	fun a: Int `{ return self->a; `}
 
 	# Set the ralpha component of this color `[0..255]`
-	fun a=(val: Int) `{ recv->a = val; `}
+	fun a=(val: Int) `{ self->a = val; `}
 
 	# TODO implement the related `SDL_Palette` and related methods
 end
@@ -361,18 +361,18 @@ extern class SDLRendererFlags `{ Uint32 `}
 	new `{ return 0; `}
 
 	# Add the flag to request a software renderer
-	fun software: SDLRendererFlags `{ return recv | SDL_RENDERER_SOFTWARE; `}
+	fun software: SDLRendererFlags `{ return self | SDL_RENDERER_SOFTWARE; `}
 
 	# Add the flag to request an accelerated renderer
 	#
 	# This is the default option.
-	fun accelerated: SDLRendererFlags `{ return recv | SDL_RENDERER_ACCELERATED; `}
+	fun accelerated: SDLRendererFlags `{ return self | SDL_RENDERER_ACCELERATED; `}
 
 	# Add the flag to request a renderer where `SDLRenderer::present` is synchronized with the refresh rate
-	fun presentvsync: SDLRendererFlags `{ return recv | SDL_RENDERER_PRESENTVSYNC; `}
+	fun presentvsync: SDLRendererFlags `{ return self | SDL_RENDERER_PRESENTVSYNC; `}
 
 	# Add the flag to request a renderer able to render to a texture
-	fun targettexture: SDLRendererFlags `{ return recv | SDL_RENDERER_TARGETTEXTURE; `}
+	fun targettexture: SDLRendererFlags `{ return self | SDL_RENDERER_TARGETTEXTURE; `}
 end
 
 # A bitmap surface
@@ -381,10 +381,10 @@ extern class SDLSurface `{ SDL_Surface * `}
 	# Load the BMP file at `path`
 	new load_bmp(path: NativeString) `{ return SDL_LoadBMP(path); `}
 
-	redef fun free `{ SDL_FreeSurface(recv); `}
+	redef fun free `{ SDL_FreeSurface(self); `}
 
 	# Save this texture to a BMP file
-	fun save_bmp(path: NativeString) `{ SDL_SaveBMP(recv, path); `}
+	fun save_bmp(path: NativeString) `{ SDL_SaveBMP(self, path); `}
 end
 
 # A loaded bitmap texture
@@ -395,19 +395,19 @@ extern class SDLTexture `{ SDL_Texture * `}
 	`}
 
 	# Destroy this texture
-	fun destroy `{ SDL_DestroyTexture(recv); `}
+	fun destroy `{ SDL_DestroyTexture(self); `}
 
 	# Width of this texture
 	fun width: Int `{
 		int val;
-		SDL_QueryTexture(recv, NULL, NULL, &val, NULL);
+		SDL_QueryTexture(self, NULL, NULL, &val, NULL);
 		return val;
 	`}
 
 	# Height of this texture
 	fun height: Int `{
 		int val;
-		SDL_QueryTexture(recv, NULL, NULL, NULL, &val);
+		SDL_QueryTexture(self, NULL, NULL, NULL, &val);
 		return val;
 	`}
 
@@ -442,28 +442,28 @@ extern class SDLRect `{SDL_Rect *`}
 	end
 
 	# X coordinate of the top left corner
-	fun x: Int `{ return recv->x; `}
+	fun x: Int `{ return self->x; `}
 
 	# Set the X coordinate of the top left corner
-	fun x=(val: Int) `{ recv->x = val; `}
+	fun x=(val: Int) `{ self->x = val; `}
 
 	# Y coordinate of the top left corner
-	fun y: Int `{ return recv->y; `}
+	fun y: Int `{ return self->y; `}
 
 	# Set the Y coordinate of the top left corner
-	fun y=(val: Int) `{ recv->y = val; `}
+	fun y=(val: Int) `{ self->y = val; `}
 
 	# Width of this rectangle
-	fun w: Int `{ return recv->w; `}
+	fun w: Int `{ return self->w; `}
 
 	# Set the width of this rectangle
-	fun w=(val: Int) `{ recv->w = val; `}
+	fun w=(val: Int) `{ self->w = val; `}
 
 	# Height of this rectangle
-	fun h: Int `{ return recv->h; `}
+	fun h: Int `{ return self->h; `}
 
 	# Set the height of this rectangle
-	fun h=(val: Int) `{ recv->h = val; `}
+	fun h=(val: Int) `{ self->h = val; `}
 
 	# TODO implement other `SDLRect` related methods:
 	#
@@ -496,16 +496,16 @@ extern class SDLPoint `{SDL_Point *`}
 	end
 
 	# X coordinate of this point
-	fun x: Int `{ return recv->x; `}
+	fun x: Int `{ return self->x; `}
 
 	# Set the X coordinate of this point
-	fun x=(val: Int) `{ recv->x = val; `}
+	fun x=(val: Int) `{ self->x = val; `}
 
 	# Y coordinate of this point
-	fun y: Int `{ return recv->y; `}
+	fun y: Int `{ return self->y; `}
 
 	# Set the Y coordinate of this point
-	fun y=(val: Int) `{ recv->y = val; `}
+	fun y=(val: Int) `{ self->y = val; `}
 end
 
 # Flag to set the icon in `sys.sdl.show_simple_message_box` and `SDLWindow::show_simple_message_box`
@@ -526,11 +526,11 @@ extern class SDLRendererInfo `{ SDL_RendererInfo * `}
 	new malloc `{ return malloc(sizeof(SDL_RendererInfo)); `}
 
 	# Name of the renderer's driver
-	fun name: NativeString `{ return (char*)recv->name; `}
+	fun name: NativeString `{ return (char*)self->name; `}
 
 	# Maximum texture width supported by the renderer
-	fun max_texture_width: Int `{ return recv->max_texture_width; `}
+	fun max_texture_width: Int `{ return self->max_texture_width; `}
 
 	# Maximum texture height supported by the renderer
-	fun max_texture_height: Int `{ return recv->max_texture_height; `}
+	fun max_texture_height: Int `{ return self->max_texture_height; `}
 end

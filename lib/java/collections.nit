@@ -56,11 +56,11 @@ extern class JavaFloatArray in "Java" `{ float[] `}
 	# Get a new array of the given `size`
 	new(size: Int) in "Java" `{ return new float[(int)size]; `}
 
-	redef fun [](i) in "Java" `{ return (double)recv[(int)i]; `}
+	redef fun [](i) in "Java" `{ return (double)self[(int)i]; `}
 
-	redef fun []=(i, e) in "Java" `{ recv[(int)i] = (float)e; `}
+	redef fun []=(i, e) in "Java" `{ self[(int)i] = (float)e; `}
 
-	redef fun length in "Java" `{ return recv.length; `}
+	redef fun length in "Java" `{ return self.length; `}
 end
 
 # Java primitive array `double[]`
@@ -70,11 +70,11 @@ extern class JavaDoubleArray in "Java" `{ double[] `}
 	# Get a new array of the given `size`
 	new(size: Int) in "Java" `{ return new double[(int)size]; `}
 
-	redef fun [](i) in "Java" `{ return recv[(int)i]; `}
+	redef fun [](i) in "Java" `{ return self[(int)i]; `}
 
-	redef fun []=(i, e) in "Java" `{ recv[(int)i] = (float)e; `}
+	redef fun []=(i, e) in "Java" `{ self[(int)i] = (float)e; `}
 
-	redef fun length in "Java" `{ return recv.length; `}
+	redef fun length in "Java" `{ return self.length; `}
 end
 
 # Java primitive array `Object[]`
@@ -84,11 +84,11 @@ extern class JavaArray in "Java" `{ java.lang.Object[] `}
 	# Get a new array of the given `size`
 	new(size: Int) in "Java" `{ return new Object[(int)size]; `}
 
-	redef fun [](i) in "Java" `{ return recv[(int)i]; `}
+	redef fun [](i) in "Java" `{ return self[(int)i]; `}
 
-	redef fun []=(i, e) in "Java" `{ recv[(int)i] = e; `}
+	redef fun []=(i, e) in "Java" `{ self[(int)i] = e; `}
 
-	redef fun length in "Java" `{ return recv.length; `}
+	redef fun length in "Java" `{ return self.length; `}
 end
 
 # TODO other primitive arrays:

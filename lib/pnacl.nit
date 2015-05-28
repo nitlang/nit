@@ -366,9 +366,9 @@ in "C Header" `{
 extern class PepperDictionary `{ struct PP_Var* `}
 
 	new `{
-		struct PP_Var* recv = malloc( sizeof( struct PP_Var ) );
-		*recv = g_varDictionaryInterface->Create();
-		return recv;
+		struct PP_Var* self = malloc( sizeof( struct PP_Var ) );
+		*self = g_varDictionaryInterface->Create();
+		return self;
 	`}
 
 	# Get fonction using PepperVars.
@@ -377,7 +377,7 @@ extern class PepperDictionary `{ struct PP_Var* `}
 	# If 'key' is not a String typed PepperVar, or doesn't exist in the Dictionary, an undefined PepperVar is returned.
 	fun native_get(key: PepperVar): PepperVar `{
 		struct PP_Var* value = malloc( sizeof ( struct PP_Var ) );
-		*value = g_varDictionaryInterface->Get(*recv, *key);
+		*value = g_varDictionaryInterface->Get(*self, *key);
 		return value;
 	`}
 
@@ -401,7 +401,7 @@ extern class PepperDictionary `{ struct PP_Var* `}
 	# Returns a Boolean indicating whether the operation succeeds.
 	fun native_set(key: PepperVar, value: PepperVar): Bool `{
 		PP_Bool b;
-		b = g_varDictionaryInterface->Set(*recv, *key, *value);
+		b = g_varDictionaryInterface->Set(*self, *key, *value);
 		return b;
 	`}
 
@@ -422,7 +422,7 @@ extern class PepperDictionary `{ struct PP_Var* `}
 	#
 	# Takes a String typed PepperVar.
 	fun native_delete(key: PepperVar) `{
-		g_varDictionaryInterface->Delete(*recv, *key);
+		g_varDictionaryInterface->Delete(*self, *key);
 	`}
 	
 	# Deletes the specified key and its associated value, if the key exists.
@@ -439,7 +439,7 @@ extern class PepperDictionary `{ struct PP_Var* `}
 	# Takes a String typed PepperVar.
 	fun native_has_key(key: PepperVar): Bool `{
 		PP_Bool b;
-		b = g_varDictionaryInterface->HasKey(*recv, *key);
+		b = g_varDictionaryInterface->HasKey(*self, *key);
 		return b;
 	`}
 
@@ -457,7 +457,7 @@ extern class PepperDictionary `{ struct PP_Var* `}
 	# Returns a PepperArray which contains all the keys of the Dictionary. The elements are string vars.
 	fun get_keys: PepperArray `{
 		struct PP_Var* array = malloc( sizeof( struct PP_Var ) );
-		*array = g_varDictionaryInterface->GetKeys(*recv);
+		*array = g_varDictionaryInterface->GetKeys(*self);
 		return array;
 	`}
 
@@ -465,7 +465,7 @@ extern class PepperDictionary `{ struct PP_Var* `}
 	fun copy: PepperDictionary `{
 	        struct PP_Var* varDictionary = malloc( sizeof( struct PP_Var ) );
 		*varDictionary = g_varDictionaryInterface->Create();
-		*varDictionary = *recv;
+		*varDictionary = *self;
 		return varDictionary;
 	`}
 end
@@ -474,9 +474,9 @@ end
 extern class PepperArray `{ struct PP_Var* `}
 
 	new `{
-		struct PP_Var* recv = malloc( sizeof( struct PP_Var ) );
-		*recv = g_varArrayInterface->Create();
-		return recv;
+		struct PP_Var* self = malloc( sizeof( struct PP_Var ) );
+		*self = g_varArrayInterface->Create();
+		return self;
 	`}
 
 	# Returns the element at the specified position as a PepperVar.
@@ -484,7 +484,7 @@ extern class PepperArray `{ struct PP_Var* `}
 	# If 'index' is larger than or equal to the array length, an undefined PepperVar is returned.
 	fun native_get(index: Int): PepperVar `{
 		struct PP_Var* value = malloc( sizeof( struct PP_Var ) );
-		*value = g_varArrayInterface->Get(*recv, index);
+		*value = g_varArrayInterface->Get(*self, index);
 		return value;
 	`}
 
@@ -499,7 +499,7 @@ extern class PepperArray `{ struct PP_Var* `}
 
 	# Returns an int containing the length of the PepperArray.
 	fun length: Int `{
-		int length = g_varArrayInterface->GetLength(*recv);
+		int length = g_varArrayInterface->GetLength(*self);
 		return length;
 	`}
 
@@ -511,7 +511,7 @@ extern class PepperArray `{ struct PP_Var* `}
 	# Returns a Boolean indicating whether the operation succeeds.
 	fun native_set(index: Int, value: PepperVar): Bool `{
 		PP_Bool b;
-		b = g_varArrayInterface->Set(*recv, index, *value);
+		b = g_varArrayInterface->Set(*self, index, *value);
 		return b;
 	`}
 
@@ -534,7 +534,7 @@ extern class PepperArray `{ struct PP_Var* `}
 	# Returns a Boolean indicating whether the operation succeeds.
 	fun length=(length: Int): Bool `{
 		PP_Bool b;
-		b = g_varArrayInterface->SetLength(*recv, length);
+		b = g_varArrayInterface->SetLength(*self, length);
 		return b;
 	`}
 end
@@ -561,19 +561,19 @@ extern class PepperVar `{ struct PP_Var* `}
 		return null
 	end
 
-	private fun isa_null: Bool `{ return recv->type == PP_VARTYPE_NULL; `}
-	private fun isa_bool: Bool `{ return recv->type == PP_VARTYPE_BOOL; `}
-	private fun isa_int: Bool `{ return recv->type == PP_VARTYPE_INT32; `}
-	private fun isa_float: Bool `{ return recv->type == PP_VARTYPE_DOUBLE; `}
-	private fun isa_string: Bool `{ return recv->type == PP_VARTYPE_STRING; `}
-	private fun is_undefined: Bool `{ return recv->type == PP_VARTYPE_UNDEFINED; `}
+	private fun isa_null: Bool `{ return self->type == PP_VARTYPE_NULL; `}
+	private fun isa_bool: Bool `{ return self->type == PP_VARTYPE_BOOL; `}
+	private fun isa_int: Bool `{ return self->type == PP_VARTYPE_INT32; `}
+	private fun isa_float: Bool `{ return self->type == PP_VARTYPE_DOUBLE; `}
+	private fun isa_string: Bool `{ return self->type == PP_VARTYPE_STRING; `}
+	private fun is_undefined: Bool `{ return self->type == PP_VARTYPE_UNDEFINED; `}
 
-	private fun as_bool: Bool `{ return recv->value.as_bool; `}
-	private fun as_int: Int `{ return recv->value.as_int; `}
-	private fun as_float: Float `{ return recv->value.as_double; `}
+	private fun as_bool: Bool `{ return self->value.as_bool; `}
+	private fun as_int: Int `{ return self->value.as_int; `}
+	private fun as_float: Float `{ return self->value.as_double; `}
 	private fun as_string: String import NativeString.to_s_with_length `{
 		uint32_t len;
-		char* str = (char*)g_varInterface->VarToUtf8(*recv, &len);
+		char* str = (char*)g_varInterface->VarToUtf8(*self, &len);
 		return NativeString_to_s_with_length(str, len);
 	`}
 end
@@ -589,7 +589,7 @@ redef class Int
 	# Converts a Int into a PepperVar with Int type.
 	redef fun to_pepper `{
 		struct PP_Var* var = malloc( sizeof( struct PP_Var ) );
-	        *var = PP_MakeInt32(recv);
+	        *var = PP_MakeInt32(self);
 		return var;
 	`}
 end
@@ -600,7 +600,7 @@ redef class Float
 	# Converts a Float into a PepperVar with Float type.
 	redef fun to_pepper `{
 		struct PP_Var* var = malloc( sizeof( struct PP_Var ) );
-	        *var = PP_MakeDouble(recv);
+	        *var = PP_MakeDouble(self);
 		return var;
 	`}
 end
@@ -611,7 +611,7 @@ redef class Bool
 	# Converts a Bool into a PepperVar with Bool type.
 	redef fun to_pepper `{
 		struct PP_Var* var = malloc( sizeof( struct PP_Var ) );
-	        *var = PP_MakeBool(recv);
+	        *var = PP_MakeBool(self);
 		return var;
 	`}
 end
@@ -621,9 +621,9 @@ redef class String
 
 	# Converts a String into a PepperVar with String type.
 	redef fun to_pepper: PepperVar import String.to_cstring, String.length `{
-		char *str = String_to_cstring(recv);
+		char *str = String_to_cstring(self);
 		struct PP_Var* var = malloc( sizeof( struct PP_Var ) );
-		*var = g_varInterface->VarFromUtf8(str, String_length(recv));
+		*var = g_varInterface->VarFromUtf8(str, String_length(self));
 		return var;
 	`}
 end
@@ -680,7 +680,7 @@ class PnaclApp
 
 	# Sets everything up to work, need to be called at first.
 	fun initialize import PnaclApp.handle_message, PnaclApp.handle_dictionary, NativeString.to_s_with_length `{
-		app = recv;
+		app = self;
 	`}
 
 	# Posts a message to JS.

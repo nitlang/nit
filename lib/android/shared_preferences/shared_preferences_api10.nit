@@ -33,38 +33,38 @@ in "Java" `{
 
 extern class NativeSharedPreferences in "Java" `{ android.content.SharedPreferences `}
 	super JavaObject
-	
-	fun contains(key: JavaString): Bool in "Java" `{ return recv.contains(key); `}
+
+	fun contains(key: JavaString): Bool in "Java" `{ return self.contains(key); `}
 	fun get_all: HashMap[JavaString, JavaObject] import HashMap[JavaString, JavaObject],
-		HashMap[JavaString, JavaObject].[]= in "Java" `{ 
+		HashMap[JavaString, JavaObject].[]= in "Java" `{
 		Map<String, ?> java_map = null;
 		int nit_hashmap = new_HashMap_of_JavaString_JavaObject();
 		try {
-			java_map = recv.getAll();
+			java_map = self.getAll();
 		} catch (NullPointerException e) {
 			return nit_hashmap;
 		}
 
 		for (Map.Entry<String, ?> entry: java_map.entrySet())
-			HashMap_of_JavaString_JavaObject__index_assign(nit_hashmap, 
+			HashMap_of_JavaString_JavaObject__index_assign(nit_hashmap,
 				entry.getKey(), entry.getValue());
 
 		return nit_hashmap;
 	`}
-	fun get_boolean(key: JavaString, def_value: Bool): Bool in "Java" `{ 
+	fun get_boolean(key: JavaString, def_value: Bool): Bool in "Java" `{
 		boolean return_value;
 		try {
-			return_value = recv.getBoolean(key, def_value); 
+			return_value = self.getBoolean(key, def_value);
 		} catch (ClassCastException e) {
 			return def_value;
 		}
 
 		return return_value;
 	`}
-	fun get_float(key: JavaString, def_value: Float): Float in "Java" `{ 
+	fun get_float(key: JavaString, def_value: Float): Float in "Java" `{
 		float return_value;
 		try {
-			return_value = recv.getFloat(key, (float) def_value); 
+			return_value = self.getFloat(key, (float) def_value);
 		} catch (ClassCastException e) {
 			return def_value;
 		}
@@ -74,7 +74,7 @@ extern class NativeSharedPreferences in "Java" `{ android.content.SharedPreferen
 	fun get_int(key: JavaString, def_value: Int): Int in "Java" `{
 		int return_value;
 		try {
-			return_value = recv.getInt(key, (int)def_value); 
+			return_value = self.getInt(key, (int)def_value);
 		} catch (ClassCastException e) {
 			return def_value;
 		}
@@ -84,7 +84,7 @@ extern class NativeSharedPreferences in "Java" `{ android.content.SharedPreferen
 	fun get_long(key: JavaString, def_value: Int): Int in "Java" `{
 		long return_value;
 		try {
-			return_value = recv.getLong(key, def_value); 
+			return_value = self.getLong(key, def_value);
 		} catch (ClassCastException e) {
 			return def_value;
 		}
@@ -94,7 +94,7 @@ extern class NativeSharedPreferences in "Java" `{ android.content.SharedPreferen
 	fun get_string(key: JavaString, def_value: JavaString): JavaString in "Java" `{
 		String return_value = null;
 		try {
-			return_value = recv.getString(key, def_value); 
+			return_value = self.getString(key, def_value);
 		} catch (ClassCastException e) {
 			return def_value;
 		}
@@ -104,41 +104,41 @@ extern class NativeSharedPreferences in "Java" `{ android.content.SharedPreferen
 
 	# HACK for bug #845
 	redef fun new_global_ref import sys, Sys.jni_env `{
-		Sys sys = NativeSharedPreferences_sys(recv);
+		Sys sys = NativeSharedPreferences_sys(self);
 		JNIEnv *env = Sys_jni_env(sys);
-		return (*env)->NewGlobalRef(env, recv);
+		return (*env)->NewGlobalRef(env, self);
 	`}
 end
 
 extern class NativeSharedPreferencesEditor in "Java" `{ android.content.SharedPreferences$Editor `}
 	super JavaObject
 
-	fun clear: NativeSharedPreferencesEditor in "Java" `{ return recv.clear(); `}
-	fun commit: Bool in "Java" `{ return recv.commit(); `}
-	fun put_boolean(key: JavaString, value: Bool ): NativeSharedPreferencesEditor in "Java" `{ 
-		return recv.putBoolean (key, value); 
+	fun clear: NativeSharedPreferencesEditor in "Java" `{ return self.clear(); `}
+	fun commit: Bool in "Java" `{ return self.commit(); `}
+	fun put_boolean(key: JavaString, value: Bool): NativeSharedPreferencesEditor in "Java" `{
+		return self.putBoolean (key, value);
 	`}
 	fun put_float(key: JavaString, value: Float): NativeSharedPreferencesEditor in "Java" `{
-		return recv.putFloat(key, (float) value); 
+		return self.putFloat(key, (float) value);
 	`}
 	fun put_int(key: JavaString, value: Int): NativeSharedPreferencesEditor in "Java" `{
-		return recv.putInt(key, (int)value); 
+		return self.putInt(key, (int)value);
 	`}
 	fun put_long(key: JavaString, value: Int): NativeSharedPreferencesEditor in "Java" `{
-		return recv.putLong(key, value); 
+		return self.putLong(key, value);
 	`}
 	fun put_string(key: JavaString, value: JavaString): NativeSharedPreferencesEditor in "Java" `{
-		return recv.putString(key, value); 
+		return self.putString(key, value);
 	`}
-	fun remove(key: JavaString): NativeSharedPreferencesEditor in "Java" `{ 
-		return recv.remove(key); 
+	fun remove(key: JavaString): NativeSharedPreferencesEditor in "Java" `{
+		return self.remove(key);
 	`}
 
 	# HACK for bug #845
 	redef fun new_global_ref import sys, Sys.jni_env `{
-		Sys sys = NativeSharedPreferencesEditor_sys(recv);
+		Sys sys = NativeSharedPreferencesEditor_sys(self);
 		JNIEnv *env = Sys_jni_env(sys);
-		return (*env)->NewGlobalRef(env, recv);
+		return (*env)->NewGlobalRef(env, self);
 	`}
 end
 
@@ -150,8 +150,8 @@ class SharedPreferences
 
 	# Automatically commits every saving/removing instructions (`true` by default)
 	var auto_commit = true
-	
-	protected init(app: App, file_name: String, mode: Int) 
+
+	protected init(app: App, file_name: String, mode: Int)
 	do
 		self.context = app.native_activity
 		sys.jni_env.push_local_frame(1)
@@ -160,7 +160,7 @@ class SharedPreferences
 	end
 
 	# Restricts file access to the current application
-	init privately(app: App, file_name: String) 
+	init privately(app: App, file_name: String)
 	do
 		self.init(app, file_name, private_mode)
 	end
@@ -175,28 +175,28 @@ class SharedPreferences
 	end
 
 	private fun setup(file_name: JavaString, mode: Int) import context, set_vars in "Java" `{
-		Activity context = (Activity) SharedPreferences_context(recv);
+		Activity context = (Activity) SharedPreferences_context(self);
 		SharedPreferences sp;
 
 		// Uses default SharedPreferences if file_name is an empty String
 		if (file_name.equals("")) {
 			sp = context.getPreferences((int)mode);
-		} else { 
+		} else {
 			sp = context.getSharedPreferences(file_name, (int)mode);
 		}
 
 		SharedPreferences.Editor editor = sp.edit();
-		
-		SharedPreferences_set_vars(recv, sp, editor);
+
+		SharedPreferences_set_vars(self, sp, editor);
 	`}
 
 	private fun commit_if_auto do if auto_commit then self.commit
 
 	# Returns true if there's an entry corresponding the given key
-	fun has(key: String): Bool 
+	fun has(key: String): Bool
 	do
 		sys.jni_env.push_local_frame(2)
-		var return_value = shared_preferences.contains(key.to_java_string) 
+		var return_value = shared_preferences.contains(key.to_java_string)
 		sys.jni_env.pop_local_frame
 		return return_value
 	end
@@ -209,13 +209,13 @@ class SharedPreferences
 	# var foo = new HashMap[JavaString, JavaObject]
 	# # ...
 	# for key, value in foo do
-	#      key.delete_local_ref
-	#      value.delete_local_ref
+	#	  key.delete_local_ref
+	#	  value.delete_local_ref
 	# end
 	# ~~~
-	# *You should use Nit getters instead and get each value one by one* 
+	# *You should use Nit getters instead and get each value one by one*
 	fun all: nullable HashMap[JavaString, JavaObject]
-	do 
+	do
 		var hashmap = shared_preferences.get_all
 		if hashmap.is_empty then return null
 		return hashmap
@@ -223,8 +223,8 @@ class SharedPreferences
 
 	# Returns the `Bool` value corresponding the given key or `def_value` if none
 	# or if the value isn't of correct type
-	fun bool(key: String, def_value: Bool): Bool 
-	do 
+	fun bool(key: String, def_value: Bool): Bool
+	do
 		sys.jni_env.push_local_frame(2)
 		var return_value = shared_preferences.get_boolean(key.to_java_string, def_value)
 		sys.jni_env.pop_local_frame
@@ -233,8 +233,8 @@ class SharedPreferences
 
 	# Returns the `Float` value corresponding the given key or `def_value` if none
 	# or if the value isn't of correct type
-	fun float(key: String, def_value: Float): Float 
-	do 
+	fun float(key: String, def_value: Float): Float
+	do
 		sys.jni_env.push_local_frame(2)
 		var return_value = shared_preferences.get_float(key.to_java_string, def_value)
 		sys.jni_env.pop_local_frame
@@ -243,10 +243,10 @@ class SharedPreferences
 
 	# Returns the `Int` value corresponding the given key or `def_value` if none
 	# or if the value isn't of correct type
-	# Be aware of possible `def_value` integer overflow as the Nit `Int` corresponds 
+	# Be aware of possible `def_value` integer overflow as the Nit `Int` corresponds
 	# to Java `long`
-	fun int(key: String, def_value: Int): Int 
-	do 
+	fun int(key: String, def_value: Int): Int
+	do
 		sys.jni_env.push_local_frame(2)
 		var return_value = shared_preferences.get_int(key.to_java_string, def_value)
 		sys.jni_env.pop_local_frame
@@ -257,8 +257,8 @@ class SharedPreferences
 	# or if the value isn't of correct type
 	# Calls `getLong(key, value)` java method
 	# Nit `Int` is equivalent to Java `long` so that no integer overflow will occur
-	fun long(key: String, def_value: Int): Int 
-	do 
+	fun long(key: String, def_value: Int): Int
+	do
 		sys.jni_env.push_local_frame(2)
 		var return_value = shared_preferences.get_long(key.to_java_string, def_value)
 		sys.jni_env.pop_local_frame
@@ -267,29 +267,29 @@ class SharedPreferences
 
 	# Returns the `String` value corresponding the given key or `def_value` if none
 	# or if the value isn't of correct type
-	fun string(key: String, def_value: String): String 
-	do 
+	fun string(key: String, def_value: String): String
+	do
 		sys.jni_env.push_local_frame(3)
-		var java_return_value = shared_preferences.get_string(key.to_java_string, 
+		var java_return_value = shared_preferences.get_string(key.to_java_string,
 			def_value.to_java_string)
 		var nit_return_value = java_return_value.to_s
 		sys.jni_env.pop_local_frame
 		return nit_return_value
 	end
 
-	# Clears all the dictionnary entries in the specified file or the default file 
+	# Clears all the dictionnary entries in the specified file or the default file
 	# if none specified at instanciation
 	# Returns `self` allowing fluent programming
-	fun clear: SharedPreferences 
-	do 
+	fun clear: SharedPreferences
+	do
 		editor.clear
 		commit_if_auto
 		return self
 	end
-	
+
 	# If auto_commit is `false`, has to be called to save the data to persistant memory
-	fun commit: Bool 
-	do 
+	fun commit: Bool
+	do
 		sys.jni_env.push_local_frame(1)
 		var return_value = editor.commit
 		sys.jni_env.pop_local_frame
@@ -298,8 +298,8 @@ class SharedPreferences
 
 	# Set a key-value pair using a `Bool` value
 	# Returns `self` allowing fluent programming
-	fun add_bool(key: String, value: Bool ): SharedPreferences 
-	do 
+	fun add_bool(key: String, value: Bool): SharedPreferences
+	do
 		sys.jni_env.push_local_frame(1)
 		editor.put_boolean(key.to_java_string, value)
 		sys.jni_env.pop_local_frame
@@ -312,8 +312,8 @@ class SharedPreferences
 	#
 	# Be aware of possible loss of precision as Nit `Float` corresponds to Java `double`
 	# and the methods stores a Java `float`
-	fun add_float(key: String, value: Float): SharedPreferences 
-	do 
+	fun add_float(key: String, value: Float): SharedPreferences
+	do
 		sys.jni_env.push_local_frame(1)
 		editor.put_float(key.to_java_string, value)
 		sys.jni_env.pop_local_frame
@@ -327,8 +327,8 @@ class SharedPreferences
 	# Be aware of possible integer overflow as the Nit `Int` corresponds to Java `long`
 	# and the methods stores a Java `int`
 	# *You might want to use add_long instead*
-	fun add_int(key: String, value: Int): SharedPreferences 
-	do 
+	fun add_int(key: String, value: Int): SharedPreferences
+	do
 		sys.jni_env.push_local_frame(1)
 		editor.put_int(key.to_java_string, value)
 		sys.jni_env.pop_local_frame
@@ -338,8 +338,8 @@ class SharedPreferences
 
 	# Set a key-value pair using a `Int` type value
 	# Returns `self` allowing fluent programming
-	fun add_long(key: String, value: Int): SharedPreferences 
-	do 
+	fun add_long(key: String, value: Int): SharedPreferences
+	do
 		sys.jni_env.push_local_frame(1)
 		editor.put_long(key.to_java_string, value)
 		sys.jni_env.pop_local_frame
@@ -349,8 +349,8 @@ class SharedPreferences
 
 	# Set a key-value pair using a `String` type value
 	# Returns `self` allowing fluent programming
-	fun add_string(key: String, value: String): SharedPreferences 
-	do 
+	fun add_string(key: String, value: String): SharedPreferences
+	do
 		sys.jni_env.push_local_frame(2)
 		editor.put_string(key.to_java_string, value.to_java_string)
 		sys.jni_env.pop_local_frame
@@ -360,8 +360,8 @@ class SharedPreferences
 
 	# Removes the corresponding entry in the file
 	# Returns `self` allowing fluent programming
-	fun remove(key: String): SharedPreferences 
-	do 
+	fun remove(key: String): SharedPreferences
+	do
 		sys.jni_env.push_local_frame(1)
 		editor.remove(key.to_java_string)
 		sys.jni_env.pop_local_frame
@@ -370,7 +370,7 @@ class SharedPreferences
 	end
 
 	# Deallocate global references allocated by the SharedPreferences instance
-	fun destroy 
+	fun destroy
 	do
 		self.shared_preferences.delete_global_ref
 		self.editor.delete_global_ref

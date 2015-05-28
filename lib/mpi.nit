@@ -177,14 +177,14 @@ extern class Comm `{ MPI_Comm `}
 	# Number of processors in this communicator
 	fun size: Int `{
 		int size;
-		MPI_Comm_size(recv, &size);
+		MPI_Comm_size(self, &size);
 		return size;
 	`}
 
 	# Rank on this processor in this communicator
 	fun rank: Rank `{
 		int rank;
-		MPI_Comm_rank(recv, &rank);
+		MPI_Comm_rank(self, &rank);
 		return rank;
 	`}
 end
@@ -243,19 +243,19 @@ extern class Status `{ MPI_Status* `}
 	new `{ return malloc(sizeof(MPI_Status)); `}
 
 	# Source of this communication
-	fun source: Rank `{ return recv->MPI_SOURCE; `}
+	fun source: Rank `{ return self->MPI_SOURCE; `}
 
 	# Tag of this communication
-	fun tag: Tag `{ return recv->MPI_TAG; `}
+	fun tag: Tag `{ return self->MPI_TAG; `}
 
 	# Success or error on this communication
-	fun error: SuccessOrError `{ return recv->MPI_ERROR; `}
+	fun error: SuccessOrError `{ return self->MPI_ERROR; `}
 
 	# Count of the given `data_type` in this communication
 	fun count(data_type: DataType): Int
 	`{
 		int count;
-		MPI_Get_count(recv, data_type, &count);
+		MPI_Get_count(self, data_type, &count);
 		return count;
 	`}
 end
@@ -322,7 +322,7 @@ end
 # An MPI return code to report success or errors
 extern class SuccessOrError `{ int `}
 	# Is this a success?
-	fun is_success: Bool `{ return recv == MPI_SUCCESS; `}
+	fun is_success: Bool `{ return self == MPI_SUCCESS; `}
 
 	# Is this an error?
 	fun is_error: Bool do return not is_success
@@ -333,14 +333,14 @@ extern class SuccessOrError `{ int `}
 	fun error_class: ErrorClass
 	`{
 		int class;
-		MPI_Error_class(recv, &class);
+		MPI_Error_class(self, &class);
 		return class;
 	`}
 
 	redef fun to_s do return native_to_s.to_s
 	private fun native_to_s: NativeString `{
 		char *err = malloc(MPI_MAX_ERROR_STRING);
-		MPI_Error_string(recv, err, NULL);
+		MPI_Error_string(self, err, NULL);
 		return err;
 	`}
 end
@@ -350,7 +350,7 @@ extern class ErrorClass `{ int `}
 	redef fun to_s do return native_to_s.to_s
 	private fun native_to_s: NativeString `{
 		char *err = malloc(MPI_MAX_ERROR_STRING);
-		MPI_Error_string(recv, err, NULL);
+		MPI_Error_string(self, err, NULL);
 		return err;
 	`}
 end
@@ -361,7 +361,7 @@ extern class Rank `{ int `}
 	new any `{ return MPI_ANY_SOURCE; `}
 
 	# This Rank as an `Int`
-	fun to_i: Int `{ return recv; `}
+	fun to_i: Int `{ return self; `}
 	redef fun to_s do return to_i.to_s
 end
 
@@ -371,19 +371,19 @@ extern class Tag `{ int `}
 	new any `{ return MPI_ANY_TAG; `}
 
 	# This tag as an `Int`
-	fun to_i: Int `{ return recv; `}
+	fun to_i: Int `{ return self; `}
 	redef fun to_s do return to_i.to_s
 end
 
 redef universal Int
 	# `self`th MPI rank
-	fun rank: Rank `{ return recv; `}
+	fun rank: Rank `{ return self; `}
 
 	# Tag identified by `self`
-	fun tag: Tag `{ return recv; `}
+	fun tag: Tag `{ return self; `}
 
 	# Is this value undefined according to MPI? (may be returned by `Status::count`)
-	fun is_undefined: Bool `{ return recv == MPI_UNDEFINED; `}
+	fun is_undefined: Bool `{ return self == MPI_UNDEFINED; `}
 end
 
 # Something sendable directly and efficiently over MPI

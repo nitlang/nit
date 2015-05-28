@@ -35,7 +35,7 @@ end
 redef class NativeString
 	# Get a `NSString` from `self` with the specified `length`
 	fun to_nsstring(length: Int): NSString in "ObjC" `{
-		return [[NSString alloc] initWithBytes:recv
+		return [[NSString alloc] initWithBytes:self
 			length:length
 			encoding:NSASCIIStringEncoding];
 	`}

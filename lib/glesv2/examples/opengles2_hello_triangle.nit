@@ -84,7 +84,7 @@ end
 var config = configs.first
 
 # TODO android part
-# Opengles1Display_midway_init(recv, format);
+# Opengles1Display_midway_init(self, format);
 
 var surface = egl_display.create_window_surface(config, x11_window_handle, [0])
 assert surface.is_ok else print egl_display.error

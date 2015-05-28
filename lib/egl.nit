@@ -40,10 +40,10 @@ extern class EGLDisplay `{ EGLDisplay `}
 	new current `{ return eglGetCurrentDisplay(); `}
 	new(handle: Pointer) `{ return eglGetDisplay(handle); `}
 
-	fun is_valid: Bool `{ return recv != EGL_NO_DISPLAY; `}
+	fun is_valid: Bool `{ return self != EGL_NO_DISPLAY; `}
 
 	fun initialize: Bool `{
-		EGLBoolean r = eglInitialize(recv, NULL, NULL);
+		EGLBoolean r = eglInitialize(self, NULL, NULL);
 		if (r == EGL_FALSE) {
 			fprintf(stderr, "Unable to eglInitialize");
 			return 0;
@@ -53,12 +53,12 @@ extern class EGLDisplay `{ EGLDisplay `}
 
 	fun major_version: Int `{
 		EGLint val;
-		eglInitialize(recv, &val, NULL);
+		eglInitialize(self, &val, NULL);
 		return val;
 	`}
 	fun minor_version: Int `{
 		EGLint val;
-		eglInitialize(recv, NULL, &val);
+		eglInitialize(self, NULL, &val);
 		return val;
 	`}
 
@@ -78,22 +78,22 @@ extern class EGLDisplay `{ EGLDisplay `}
 		}
 
 		// get number of configs
-		EGLBoolean r = eglChooseConfig(recv, c_attribs, NULL, 0, &n_configs);
+		EGLBoolean r = eglChooseConfig(self, c_attribs, NULL, 0, &n_configs);
 
 		if (r == EGL_FALSE) {
-			EGLDisplay_report_egl_error(recv, "failed to get number of available configs.");
+			EGLDisplay_report_egl_error(self, "failed to get number of available configs.");
 			return null_Array_of_EGLConfig();
 		} else if (n_configs == 0) {
-			EGLDisplay_report_egl_error(recv, "no config available.");
+			EGLDisplay_report_egl_error(self, "no config available.");
 			return null_Array_of_EGLConfig();
 		}
 
 		configs = (EGLConfig*)malloc(sizeof(EGLConfig)*n_configs);
  
-		r = eglChooseConfig(recv, c_attribs, configs, n_configs, &n_configs);
+		r = eglChooseConfig(self, c_attribs, configs, n_configs, &n_configs);
 
 		if (r == EGL_FALSE) {
-			EGLDisplay_report_egl_error(recv, "failed to load config.");
+			EGLDisplay_report_egl_error(self, "failed to load config.");
 			return null_Array_of_EGLConfig();
 		} else {
 			Array_of_EGLConfig array = new_Array_of_EGLConfig();
@@ -107,7 +107,7 @@ extern class EGLDisplay `{ EGLDisplay `}
 	# Can be used directly, but it is preferable to use a `EGLConfigAttribs`
 	fun config_attrib(config: EGLConfig, attribute: Int): Int `{
 		EGLint val;
-		EGLBoolean r = eglGetConfigAttrib(recv, config, attribute, &val);
+		EGLBoolean r = eglGetConfigAttrib(self, config, attribute, &val);
 		if (r == EGL_FALSE)
 			return -1;
 		else
@@ -115,23 +115,23 @@ extern class EGLDisplay `{ EGLDisplay `}
 	`}
 
 	fun terminate: Bool `{
-		return eglTerminate(recv) == EGL_TRUE;
+		return eglTerminate(self) == EGL_TRUE;
 	`}
 
 	fun create_window_surface(config: EGLConfig, native_window: Pointer, attribs: Array[Int]): EGLSurface `{
-		EGLSurface surface = eglCreateWindowSurface(recv, config, (EGLNativeWindowType)native_window, NULL);
+		EGLSurface surface = eglCreateWindowSurface(self, config, (EGLNativeWindowType)native_window, NULL);
 		return surface;
 	`}
 
 	# TODO add share_context
 	fun create_context(config: EGLConfig): EGLContext `{
 		EGLint context_attribs[] = {EGL_CONTEXT_CLIENT_VERSION, 2, EGL_NONE, EGL_NONE}; // TODO move out!
-		EGLContext context = eglCreateContext(recv, config, EGL_NO_CONTEXT, context_attribs);
+		EGLContext context = eglCreateContext(self, config, EGL_NO_CONTEXT, context_attribs);
 		return context;
 	`}
 
 	fun make_current(draw, read: EGLSurface, context: EGLContext): Bool `{
-		if (eglMakeCurrent(recv, draw, read, context) == EGL_FALSE) {
+		if (eglMakeCurrent(self, draw, read, context) == EGL_FALSE) {
 			fprintf(stderr, "Unable to eglMakeCurrent");
 			return 0;
 		}
@@ -141,7 +141,7 @@ extern class EGLDisplay `{ EGLDisplay `}
 	# Can be used directly, but it is preferable to use a `EGLSurfaceAttribs`
 	fun query_surface(surface: EGLSurface, attribute: Int): Int `{
 		int val;
-		EGLBoolean r = eglQuerySurface(recv, surface, attribute, &val);
+		EGLBoolean r = eglQuerySurface(self, surface, attribute, &val);
 		if (r == EGL_FALSE)
 			return -1;
 		else
@@ -149,11 +149,11 @@ extern class EGLDisplay `{ EGLDisplay `}
 	`}
 
 	fun destroy_context(context: EGLContext): Bool `{
-		return eglDestroyContext(recv, context);
+		return eglDestroyContext(self, context);
 	`}
 
 	fun destroy_surface(surface: EGLSurface): Bool `{
-		return eglDestroySurface(recv, surface);
+		return eglDestroySurface(self, surface);
 	`}
 
 	fun error: EGLError `{ return eglGetError(); `}
@@ -169,7 +169,7 @@ extern class EGLDisplay `{ EGLDisplay `}
 	end
 
 	private fun query_string(name: Int): String import NativeString.to_s `{
-		return NativeString_to_s((char *)eglQueryString(recv, name));
+		return NativeString_to_s((char *)eglQueryString(self, name));
 	`}
 
 	fun vendor: String do return query_string(0x3053)
@@ -180,7 +180,7 @@ extern class EGLDisplay `{ EGLDisplay `}
 
 	fun client_apis: Array[String] do return query_string(0x308D).split_with(" ")
 
-	fun swap_buffers(surface: EGLSurface) `{ eglSwapBuffers(recv, surface); `}
+	fun swap_buffers(surface: EGLSurface) `{ eglSwapBuffers(self, surface); `}
 end
 
 extern class EGLConfig `{ EGLConfig `}
@@ -194,7 +194,7 @@ extern class EGLSurface `{ EGLSurface `}
 	new current_read `{ return eglGetCurrentSurface(EGL_READ); `}
 	new none `{ return EGL_NO_SURFACE; `}
 
-	fun is_ok: Bool `{ return recv != EGL_NO_SURFACE; `}
+	fun is_ok: Bool `{ return self != EGL_NO_SURFACE; `}
 
 	fun attribs(display: EGLDisplay): EGLSurfaceAttribs do
 		return new EGLSurfaceAttribs(display, self)
@@ -205,7 +205,7 @@ extern class EGLContext `{ EGLContext `}
 	new current `{ return eglGetCurrentContext(); `}
 	new none `{ return EGL_NO_CONTEXT; `}
 
-	fun is_ok: Bool `{ return recv != EGL_NO_CONTEXT; `}
+	fun is_ok: Bool `{ return self != EGL_NO_CONTEXT; `}
 end
 
 # Attributes of a config for a given EGL display
@@ -235,20 +235,20 @@ end
 
 extern class EGLConfigCaveat `{ EGLint `}
 	new from_i(val: Int) `{ return (EGLint)val; `}
-	fun to_i: Int `{ return recv; `}
+	fun to_i: Int `{ return self; `}
 
 	new none `{ return EGL_NONE; `}
-	fun is_none: Bool `{ return recv == EGL_NONE; `}
+	fun is_none: Bool `{ return self == EGL_NONE; `}
 
 	new dont_care `{ return EGL_DONT_CARE; `}
-	fun is_dont_care: Bool `{ return recv == EGL_DONT_CARE; `}
+	fun is_dont_care: Bool `{ return self == EGL_DONT_CARE; `}
 
 	new slow `{ return EGL_SLOW_CONFIG; `}
-	fun is_slow: Bool `{ return recv == EGL_SLOW_CONFIG; `}
+	fun is_slow: Bool `{ return self == EGL_SLOW_CONFIG; `}
 
 	# Obselete since EGL 1.3, use EGL_CONFORMANT instead
 	new non_conformant `{ return EGL_NON_CONFORMANT_CONFIG; `}
-	fun is_non_conformant: Bool `{ return recv == EGL_NON_CONFORMANT_CONFIG; `}
+	fun is_non_conformant: Bool `{ return self == EGL_NON_CONFORMANT_CONFIG; `}
 
 	redef fun to_s
 	do
@@ -263,19 +263,19 @@ end
 extern class EGLConformant `{ EGLint `}
 	new `{ return (EGLint)0; `}
 	new from_i(val: Int) `{ return (EGLint)val; `}
-	fun to_i: Int `{ return recv; `}
+	fun to_i: Int `{ return self; `}
 
-	fun opengl: Bool `{ return recv & EGL_OPENGL_BIT; `}
-	fun with_opengl: EGLConformant `{ return recv | EGL_OPENGL_BIT; `}
+	fun opengl: Bool `{ return self & EGL_OPENGL_BIT; `}
+	fun with_opengl: EGLConformant `{ return self | EGL_OPENGL_BIT; `}
 
-	fun opengl_es: Bool `{ return recv & EGL_OPENGL_ES_BIT; `}
-	fun with_opengl_es: EGLConformant `{ return recv | EGL_OPENGL_ES_BIT; `}
+	fun opengl_es: Bool `{ return self & EGL_OPENGL_ES_BIT; `}
+	fun with_opengl_es: EGLConformant `{ return self | EGL_OPENGL_ES_BIT; `}
 
-	fun opengl_es2: Bool `{ return recv & EGL_OPENGL_ES2_BIT; `}
-	fun with_opengl_es2: EGLConformant `{ return recv | EGL_OPENGL_ES2_BIT; `}
+	fun opengl_es2: Bool `{ return self & EGL_OPENGL_ES2_BIT; `}
+	fun with_opengl_es2: EGLConformant `{ return self | EGL_OPENGL_ES2_BIT; `}
 
-	fun openvg: Bool `{ return recv & EGL_OPENVG_BIT; `}
-	fun with_openvg: EGLConformant `{ return recv | EGL_OPENVG_BIT; `}
+	fun openvg: Bool `{ return self & EGL_OPENVG_BIT; `}
+	fun with_openvg: EGLConformant `{ return self | EGL_OPENVG_BIT; `}
 
 	fun to_a: Array[String]
 	do
@@ -313,22 +313,22 @@ class EGLSurfaceAttribs
 end
 
 extern class EGLError `{ EGLint `}
-	fun is_success: Bool `{ return recv == EGL_SUCCESS; `}
+	fun is_success: Bool `{ return self == EGL_SUCCESS; `}
 
-	fun is_not_initialized: Bool `{ return recv == EGL_NOT_INITIALIZED; `}
-	fun is_bad_access: Bool `{ return recv == EGL_BAD_ACCESS; `}
-	fun is_bad_alloc: Bool `{ return recv == EGL_BAD_ALLOC; `}
-	fun is_bad_attribute: Bool `{ return recv == EGL_BAD_ATTRIBUTE; `}
-	fun is_bad_config: Bool `{ return recv == EGL_BAD_CONFIG; `}
-	fun is_bad_context: Bool `{ return recv == EGL_BAD_CONTEXT; `}
-	fun is_bad_current_surface: Bool `{ return recv == EGL_BAD_CURRENT_SURFACE; `}
-	fun is_bad_display: Bool `{ return recv == EGL_BAD_DISPLAY; `}
-	fun is_bad_match: Bool `{ return recv == EGL_BAD_MATCH; `}
-	fun is_bad_native_pixmap: Bool `{ return recv == EGL_BAD_NATIVE_PIXMAP; `}
-	fun is_bad_native_window: Bool `{ return recv == EGL_BAD_NATIVE_WINDOW; `}
-	fun is_bad_parameter: Bool `{ return recv == EGL_BAD_PARAMETER; `}
-	fun is_bad_surface: Bool `{ return recv == EGL_BAD_SURFACE; `}
-	fun is_context_lost: Bool `{ return recv == EGL_CONTEXT_LOST; `}
+	fun is_not_initialized: Bool `{ return self == EGL_NOT_INITIALIZED; `}
+	fun is_bad_access: Bool `{ return self == EGL_BAD_ACCESS; `}
+	fun is_bad_alloc: Bool `{ return self == EGL_BAD_ALLOC; `}
+	fun is_bad_attribute: Bool `{ return self == EGL_BAD_ATTRIBUTE; `}
+	fun is_bad_config: Bool `{ return self == EGL_BAD_CONFIG; `}
+	fun is_bad_context: Bool `{ return self == EGL_BAD_CONTEXT; `}
+	fun is_bad_current_surface: Bool `{ return self == EGL_BAD_CURRENT_SURFACE; `}
+	fun is_bad_display: Bool `{ return self == EGL_BAD_DISPLAY; `}
+	fun is_bad_match: Bool `{ return self == EGL_BAD_MATCH; `}
+	fun is_bad_native_pixmap: Bool `{ return self == EGL_BAD_NATIVE_PIXMAP; `}
+	fun is_bad_native_window: Bool `{ return self == EGL_BAD_NATIVE_WINDOW; `}
+	fun is_bad_parameter: Bool `{ return self == EGL_BAD_PARAMETER; `}
+	fun is_bad_surface: Bool `{ return self == EGL_BAD_SURFACE; `}
+	fun is_context_lost: Bool `{ return self == EGL_CONTEXT_LOST; `}
 
 	redef fun to_s
 	do

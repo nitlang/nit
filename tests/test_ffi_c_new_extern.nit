@@ -24,9 +24,9 @@ extern class IntPtr `{ int* `}
 	`}
 
 	redef fun to_s import NativeString, NativeString.to_s `{
-		int len = snprintf(NULL, 0, "%d", *recv) + 1;
+		int len = snprintf(NULL, 0, "%d", *self) + 1;
 		char *c = new_NativeString(len);
-		sprintf(c, "%d", *recv);
+		sprintf(c, "%d", *self);
 		return NativeString_to_s(c);
 	`}
 end

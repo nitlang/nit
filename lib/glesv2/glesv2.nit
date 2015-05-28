@@ -50,15 +50,15 @@ extern class GLProgram `{GLuint`}
 	new `{ return glCreateProgram(); `}
 
 	# Is this a valid program?
-	fun is_ok: Bool `{ return glIsProgram(recv); `}
+	fun is_ok: Bool `{ return glIsProgram(self); `}
 
 	# Attach a `shader` to this program
-	fun attach_shader(shader: GLShader) `{ glAttachShader(recv, shader); `}
+	fun attach_shader(shader: GLShader) `{ glAttachShader(self, shader); `}
 
 	# Set the location for the attribute by `name`
 	fun bind_attrib_location(index: Int, name: String) import String.to_cstring `{
 		GLchar *c_name = String_to_cstring(name);
-		glBindAttribLocation(recv, index, c_name);
+		glBindAttribLocation(self, index, c_name);
 	`}
 
 	# Get the location of the attribute by `name`
@@ -66,7 +66,7 @@ extern class GLProgram `{GLuint`}
 	# Returns `-1` if there is no active attribute named `name`.
 	fun attrib_location(name: String): Int import String.to_cstring `{
 		GLchar *c_name = String_to_cstring(name);
-		return glGetAttribLocation(recv, c_name);
+		return glGetAttribLocation(self, c_name);
 	`}
 
 	# Get the location of the uniform by `name`
@@ -74,29 +74,29 @@ extern class GLProgram `{GLuint`}
 	# Returns `-1` if there is no active uniform named `name`.
 	fun uniform_location(name: String): Int import String.to_cstring `{
 		GLchar *c_name = String_to_cstring(name);
-		return glGetUniformLocation(recv, c_name);
+		return glGetUniformLocation(self, c_name);
 	`}
 
 	# Query information on this program
 	fun query(pname: Int): Int `{
 		int val;
-		glGetProgramiv(recv, pname, &val);
+		glGetProgramiv(self, pname, &val);
 		return val;
 	`}
 
 	# Try to link this program
 	#
 	# Check result using `in_linked` and `info_log`.
-	fun link `{ glLinkProgram(recv); `}
+	fun link `{ glLinkProgram(self); `}
 
 	# Is this program linked?
 	fun is_linked: Bool do return query(0x8B82) != 0
 
 	# Use this program for the following operations
-	fun use `{ glUseProgram(recv); `}
+	fun use `{ glUseProgram(self); `}
 
 	# Delete this program
-	fun delete `{ glDeleteProgram(recv); `}
+	fun delete `{ glDeleteProgram(self); `}
 
 	# Has this program been deleted?
 	fun is_deleted: Bool do return query(0x8B80) != 0
@@ -104,7 +104,7 @@ extern class GLProgram `{GLuint`}
 	# Validate whether this program can be executed in the current OpenGL state
 	#
 	# Check results using `is_validated` and `info_log`.
-	fun validate `{ glValidateProgram(recv); `}
+	fun validate `{ glValidateProgram(self); `}
 
 	# Boolean result of `validate`, must be called after `validate`
 	fun is_validated: Bool do return query(0x8B83) != 0
@@ -114,9 +114,9 @@ extern class GLProgram `{GLuint`}
 	# Useful with `link` and `validate`
 	fun info_log: String import NativeString.to_s `{
 		int size;
-		glGetProgramiv(recv, GL_INFO_LOG_LENGTH, &size);
+		glGetProgramiv(self, GL_INFO_LOG_LENGTH, &size);
 		GLchar *msg = malloc(size);
-		glGetProgramInfoLog(recv, size, NULL, msg);
+		glGetProgramInfoLog(self, size, NULL, msg);
 		return NativeString_to_s(msg);
 	`}
 
@@ -154,7 +154,7 @@ extern class GLProgram `{GLuint`}
 		char *name = malloc(max_size);
 		int size;
 		GLenum type;
-		glGetActiveAttrib(recv, index, max_size, NULL, &size, &type, name);
+		glGetActiveAttrib(self, index, max_size, NULL, &size, &type, name);
 		return name;
 	`}
 
@@ -162,7 +162,7 @@ extern class GLProgram `{GLuint`}
 	fun active_attrib_size(index: Int): Int `{
 		int size;
 		GLenum type;
-		glGetActiveAttrib(recv, index, 0, NULL, &size, &type, NULL);
+		glGetActiveAttrib(self, index, 0, NULL, &size, &type, NULL);
 		return size;
 	`}
 
@@ -172,7 +172,7 @@ extern class GLProgram `{GLuint`}
 	fun active_attrib_type(index: Int): GLFloatDataType `{
 		int size;
 		GLenum type;
-		glGetActiveAttrib(recv, index, 0, NULL, &size, &type, NULL);
+		glGetActiveAttrib(self, index, 0, NULL, &size, &type, NULL);
 		return type;
 	`}
 
@@ -186,7 +186,7 @@ extern class GLProgram `{GLuint`}
 		char *name = malloc(max_size);
 		int size;
 		GLenum type;
-		glGetActiveUniform(recv, index, max_size, NULL, &size, &type, name);
+		glGetActiveUniform(self, index, max_size, NULL, &size, &type, name);
 		return name;
 	`}
 
@@ -194,7 +194,7 @@ extern class GLProgram `{GLuint`}
 	fun active_uniform_size(index: Int): Int `{
 		int size;
 		GLenum type;
-		glGetActiveUniform(recv, index, 0, NULL, &size, &type, NULL);
+		glGetActiveUniform(self, index, 0, NULL, &size, &type, NULL);
 		return size;
 	`}
 
@@ -204,7 +204,7 @@ extern class GLProgram `{GLuint`}
 	fun active_uniform_type(index: Int): GLDataType `{
 		int size;
 		GLenum type = 0;
-		glGetActiveUniform(recv, index, 0, NULL, &size, &type, NULL);
+		glGetActiveUniform(self, index, 0, NULL, &size, &type, NULL);
 		return type;
 	`}
 end
@@ -213,7 +213,7 @@ end
 extern class GLShader `{GLuint`}
 	# Set the source of the shader
 	fun source=(code: NativeString) `{
-		glShaderSource(recv, 1, (GLchar const **)&code, NULL);
+		glShaderSource(self, 1, (GLchar const **)&code, NULL);
 	`}
 
 	# Source of the shader, if available
@@ -229,42 +229,42 @@ extern class GLShader `{GLuint`}
 
 	private fun source_native(size: Int): NativeString `{
 		GLchar *code = malloc(size);
-		glGetShaderSource(recv, size, NULL, code);
+		glGetShaderSource(self, size, NULL, code);
 		return code;
 	`}
 
 	# Query information on this shader
 	protected fun query(pname: Int): Int `{
 		int val;
-		glGetShaderiv(recv, pname, &val);
+		glGetShaderiv(self, pname, &val);
 		return val;
 	`}
 
 	# Try to compile `source` into a binary GPU program
 	#
 	# Check the result using `is_compiled` and `info_log`
-	fun compile `{ glCompileShader(recv); `}
+	fun compile `{ glCompileShader(self); `}
 
 	# Has this shader been compiled?
 	fun is_compiled: Bool do return query(0x8B81) != 0
 
 	# Delete this shader
-	fun delete `{ glDeleteShader(recv); `}
+	fun delete `{ glDeleteShader(self); `}
 
 	# Has this shader been deleted?
 	fun is_deleted: Bool do return query(0x8B80) != 0
 
 	# Is this a valid shader?
-	fun is_ok: Bool `{ return glIsShader(recv); `}
+	fun is_ok: Bool `{ return glIsShader(self); `}
 
 	# Retrieve the information log of this shader
 	#
 	# Useful with `link` and `validate`
 	fun info_log: String import NativeString.to_s `{
 		int size;
-		glGetShaderiv(recv, GL_INFO_LOG_LENGTH, &size);
+		glGetShaderiv(self, GL_INFO_LOG_LENGTH, &size);
 		GLchar *msg = malloc(size);
-		glGetShaderInfoLog(recv, size, NULL, msg);
+		glGetShaderInfoLog(self, size, NULL, msg);
 		return NativeString_to_s(msg);
 	`}
 end
@@ -333,7 +333,7 @@ end
 # General type for OpenGL enumerations
 extern class GLEnum `{ GLenum `}
 
-	redef fun hash `{ return recv; `}
+	redef fun hash `{ return self; `}
 
 	redef fun ==(o) do return o != null and is_same_type(o) and o.hash == self.hash
 end
@@ -346,13 +346,13 @@ extern class GLError
 	fun is_ok: Bool do return is_no_error
 
 	# Is this not an error?
-	fun is_no_error: Bool `{ return recv == GL_NO_ERROR; `}
+	fun is_no_error: Bool `{ return self == GL_NO_ERROR; `}
 
-	fun is_invalid_enum: Bool `{ return recv == GL_INVALID_ENUM; `}
-	fun is_invalid_value: Bool `{ return recv == GL_INVALID_VALUE; `}
-	fun is_invalid_operation: Bool `{ return recv == GL_INVALID_OPERATION; `}
-	fun is_invalid_framebuffer_operation: Bool `{ return recv == GL_INVALID_FRAMEBUFFER_OPERATION; `}
-	fun is_out_of_memory: Bool `{ return recv == GL_OUT_OF_MEMORY; `}
+	fun is_invalid_enum: Bool `{ return self == GL_INVALID_ENUM; `}
+	fun is_invalid_value: Bool `{ return self == GL_INVALID_VALUE; `}
+	fun is_invalid_operation: Bool `{ return self == GL_INVALID_OPERATION; `}
+	fun is_invalid_framebuffer_operation: Bool `{ return self == GL_INVALID_FRAMEBUFFER_OPERATION; `}
+	fun is_out_of_memory: Bool `{ return self == GL_OUT_OF_MEMORY; `}
 
 	redef fun to_s
 	do
@@ -742,13 +742,13 @@ end
 extern class GLFloatDataType
 	super GLEnum
 
-	fun is_float: Bool `{ return recv == GL_FLOAT; `}
-	fun is_float_vec2: Bool `{ return recv == GL_FLOAT_VEC2; `}
-	fun is_float_vec3: Bool `{ return recv == GL_FLOAT_VEC3; `}
-	fun is_float_vec4: Bool `{ return recv == GL_FLOAT_VEC4; `}
-	fun is_float_mat2: Bool `{ return recv == GL_FLOAT_MAT2; `}
-	fun is_float_mat3: Bool `{ return recv == GL_FLOAT_MAT3; `}
-	fun is_float_mat4: Bool `{ return recv == GL_FLOAT_MAT4; `}
+	fun is_float: Bool `{ return self == GL_FLOAT; `}
+	fun is_float_vec2: Bool `{ return self == GL_FLOAT_VEC2; `}
+	fun is_float_vec3: Bool `{ return self == GL_FLOAT_VEC3; `}
+	fun is_float_vec4: Bool `{ return self == GL_FLOAT_VEC4; `}
+	fun is_float_mat2: Bool `{ return self == GL_FLOAT_MAT2; `}
+	fun is_float_mat3: Bool `{ return self == GL_FLOAT_MAT3; `}
+	fun is_float_mat4: Bool `{ return self == GL_FLOAT_MAT4; `}
 
 	# Instances of `GLFloatDataType` can be equal to instances of `GLDataType`
 	redef fun ==(o)
@@ -764,16 +764,16 @@ end
 extern class GLDataType
 	super GLFloatDataType
 
-	fun is_int: Bool `{ return recv == GL_INT; `}
-	fun is_int_vec2: Bool `{ return recv == GL_INT_VEC2; `}
-	fun is_int_vec3: Bool `{ return recv == GL_INT_VEC3; `}
-	fun is_int_vec4: Bool `{ return recv == GL_INT_VEC4; `}
-	fun is_bool: Bool `{ return recv == GL_BOOL; `}
-	fun is_bool_vec2: Bool `{ return recv == GL_BOOL_VEC2; `}
-	fun is_bool_vec3: Bool `{ return recv == GL_BOOL_VEC3; `}
-	fun is_bool_vec4: Bool `{ return recv == GL_BOOL_VEC4; `}
-	fun is_sampler_2d: Bool `{ return recv == GL_SAMPLER_2D; `}
-	fun is_sampler_cube: Bool `{ return recv == GL_SAMPLER_CUBE; `}
+	fun is_int: Bool `{ return self == GL_INT; `}
+	fun is_int_vec2: Bool `{ return self == GL_INT_VEC2; `}
+	fun is_int_vec3: Bool `{ return self == GL_INT_VEC3; `}
+	fun is_int_vec4: Bool `{ return self == GL_INT_VEC4; `}
+	fun is_bool: Bool `{ return self == GL_BOOL; `}
+	fun is_bool_vec2: Bool `{ return self == GL_BOOL_VEC2; `}
+	fun is_bool_vec3: Bool `{ return self == GL_BOOL_VEC3; `}
+	fun is_bool_vec4: Bool `{ return self == GL_BOOL_VEC4; `}
+	fun is_sampler_2d: Bool `{ return self == GL_SAMPLER_2D; `}
+	fun is_sampler_cube: Bool `{ return self == GL_SAMPLER_CUBE; `}
 end
 
 # Kind of primitives to render with `GLES::draw_arrays`
@@ -864,11 +864,11 @@ extern class GLBuffer `{ GLbitfield `}
 	new `{ return 0; `}
 
 	# Add the color buffer to the returned buffer set
-	fun color: GLBuffer `{ return recv | GL_COLOR_BUFFER_BIT; `}
+	fun color: GLBuffer `{ return self | GL_COLOR_BUFFER_BIT; `}
 
 	# Add the depth buffer to the returned buffer set
-	fun depth: GLBuffer `{ return recv | GL_DEPTH_BUFFER_BIT; `}
+	fun depth: GLBuffer `{ return self | GL_DEPTH_BUFFER_BIT; `}
 
 	# Add the stencil buffer to the returned buffer set
-	fun stencil: GLBuffer `{ return recv | GL_STENCIL_BUFFER_BIT; `}
+	fun stencil: GLBuffer `{ return self | GL_STENCIL_BUFFER_BIT; `}
 end

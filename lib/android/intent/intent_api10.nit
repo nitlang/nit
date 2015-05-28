@@ -36,15 +36,15 @@ extern class NativeIntent in "Java" `{ android.content.Intent `}
 
 	new in "Java" `{ return new Intent(); `}
 
-	fun add_category(category: JavaString) in "Java" `{ recv.addCategory(category); `}
-	fun add_flags(flags: Int) in "Java" `{ recv.addFlags((int)flags); `}
+	fun add_category(category: JavaString) in "Java" `{ self.addCategory(category); `}
+	fun add_flags(flags: Int) in "Java" `{ self.addFlags((int)flags); `}
 	fun filter_equals(other: NativeIntent): Bool in "Java" `{
-		return recv.filterEquals(other);
+		return self.filterEquals(other);
 	`}
-	fun action: JavaString in "Java" `{ return recv.getAction(); `}
+	fun action: JavaString in "Java" `{ return self.getAction(); `}
 	fun boolean_array_extra(name: JavaString): Array[Bool] import Array[Bool],
 	  Array[Bool].push in "Java" `{
-		boolean[] java_array = recv.getBooleanArrayExtra(name);
+		boolean[] java_array = self.getBooleanArrayExtra(name);
 		int nit_array = new_Array_of_Bool();
 
 		for(int i=0; i < java_array.length; ++i)
@@ -53,11 +53,11 @@ extern class NativeIntent in "Java" `{ android.content.Intent `}
 		return nit_array;
 	`}
 	fun boolean_extra(name: JavaString, def_value: Bool): Bool in "Java" `{
-		return recv.getBooleanExtra(name, def_value);
+		return self.getBooleanExtra(name, def_value);
 	`}
 	fun byte_array_extra(name: JavaString): Array[Int] import Array[Int],
 	  Array[Int].add in "Java" `{
-		byte[] java_array = recv.getByteArrayExtra(name);
+		byte[] java_array = self.getByteArrayExtra(name);
 		int nit_array = new_Array_of_Int();
 
 		for (int i=0; i < java_array.length; ++i)
@@ -66,12 +66,12 @@ extern class NativeIntent in "Java" `{ android.content.Intent `}
 		return nit_array;
 	`}
 	fun byte_extra(name: JavaString, def_value: Int): Int in "Java" `{
-		return (int) recv.getByteExtra(name, (byte) def_value);
+		return (int) self.getByteExtra(name, (byte) def_value);
 	`}
 	# FIXME: Java's `char` are encoded on 16-bits whereas Nit's are on 8-bits.
 	fun char_array_extra(name: JavaString): Array[Char] import Array[Char],
 	  Array[Char].add in "Java" `{
-		char[] java_array = recv.getCharArrayExtra(name);
+		char[] java_array = self.getCharArrayExtra(name);
 		int nit_array = new_Array_of_Char();
 
 		for (int i = 0; i < java_array.length; ++i)
@@ -81,11 +81,11 @@ extern class NativeIntent in "Java" `{ android.content.Intent `}
 	`}
 	# FIXME: Java's `char` are encoded on 16-bits whereas Nit's are on 8-bits.
 	fun char_extra(name: JavaString, def_value: Char): Char in "Java" `{
-		return recv.getCharExtra(name, def_value);
+		return self.getCharExtra(name, def_value);
 	`}
 	fun char_sequence_array_extra(name: JavaString): Array[String]
 	  import StringCopyArray, StringCopyArray.add, StringCopyArray.collection in "Java" `{
-		CharSequence[] java_array = recv.getCharSequenceArrayExtra(name);
+		CharSequence[] java_array = self.getCharSequenceArrayExtra(name);
 		int nit_array = new_StringCopyArray();
 
 		for (int i = 0; i < java_array.length; ++i)
@@ -95,7 +95,7 @@ extern class NativeIntent in "Java" `{ android.content.Intent `}
 	`}
 	fun char_sequence_array_list_extra(name: JavaString): Array[String]
 	  import StringCopyArray, StringCopyArray.add, StringCopyArray.collection in "Java" `{
-		ArrayList<CharSequence> java_array = recv.getCharSequenceArrayListExtra(name);
+		ArrayList<CharSequence> java_array = self.getCharSequenceArrayListExtra(name);
 		int nit_array = new_StringCopyArray();
 
 		if (java_array == null) return nit_array;
@@ -106,11 +106,11 @@ extern class NativeIntent in "Java" `{ android.content.Intent `}
 		return StringCopyArray_collection(nit_array);
 	`}
 	fun char_sequence_extra(name: JavaString): JavaString in "Java" `{
-		return (String) recv.getCharSequenceExtra(name);
+		return (String) self.getCharSequenceExtra(name);
 	`}
 	fun categories: HashSet[String] import StringCopyHashSet,
 	  StringCopyHashSet.add, StringCopyHashSet.collection  in "Java" `{
-		Set<String> java_set = recv.getCategories();
+		Set<String> java_set = self.getCategories();
 		int nit_hashset = new_StringCopyHashSet();
 
 		if (java_set == null) return nit_hashset;
@@ -121,10 +121,10 @@ extern class NativeIntent in "Java" `{ android.content.Intent `}
 		return StringCopyHashSet_collection(nit_hashset);
 	`}
 	# Returns the Uri as an encoded String
-	fun data: JavaString in "Java" `{ return recv.getDataString(); `}
+	fun data: JavaString in "Java" `{ return self.getDataString(); `}
 	fun double_array_extra(name: JavaString): Array[Float] import Array[Float],
 	  Array[Float].push in "Java" `{
-		double[] java_array = recv.getDoubleArrayExtra(name);
+		double[] java_array = self.getDoubleArrayExtra(name);
 		int nit_array = new_Array_of_Float();
 
 		for(int i=0; i < java_array.length; ++i)
@@ -133,12 +133,12 @@ extern class NativeIntent in "Java" `{ android.content.Intent `}
 		return nit_array;
 	`}
 	fun double_extra(name: JavaString, def_value: Float): Float in "Java" `{
-		return recv.getDoubleExtra(name, def_value);
+		return self.getDoubleExtra(name, def_value);
 	`}
-	fun flags: Int in "Java" `{ return recv.getFlags(); `}
+	fun flags: Int in "Java" `{ return self.getFlags(); `}
 	fun float_array_extra(name: JavaString): Array[Float] import Array[Float],
 	  Array[Float].push in "Java" `{
-		float[] java_array = recv.getFloatArrayExtra(name);
+		float[] java_array = self.getFloatArrayExtra(name);
 		int nit_array = new_Array_of_Float();
 
 		for(int i=0; i < java_array.length; ++i)
@@ -147,11 +147,11 @@ extern class NativeIntent in "Java" `{ android.content.Intent `}
 		return nit_array;
 	`}
 	fun float_extra(name: JavaString, def_value: Float): Float in "Java" `{
-		return recv.getFloatExtra(name, (float) def_value);
+		return self.getFloatExtra(name, (float) def_value);
 	`}
 	fun int_array_extra(name: JavaString): Array[Int] import Array[Int],
 	  Array[Int].push in "Java" `{
-		int[] java_array = recv.getIntArrayExtra(name);
+		int[] java_array = self.getIntArrayExtra(name);
 		int nit_array = new_Array_of_Int();
 
 		for(int i=0; i < java_array.length; ++i)
@@ -160,11 +160,11 @@ extern class NativeIntent in "Java" `{ android.content.Intent `}
 		return nit_array;
 	`}
 	fun int_extra(name: JavaString, def_value: Int): Int in "Java" `{
-		return recv.getIntExtra(name, (int)def_value);
+		return self.getIntExtra(name, (int)def_value);
 	`}
 	fun long_array_extra(name: JavaString): Array[Int] import Array[Int],
 	  Array[Int].push in "Java" `{
-		long[] java_array = recv.getLongArrayExtra(name);
+		long[] java_array = self.getLongArrayExtra(name);
 		int nit_array = new_Array_of_Int();
 
 		for(int i=0; i < java_array.length; ++i)
@@ -173,13 +173,13 @@ extern class NativeIntent in "Java" `{ android.content.Intent `}
 		return nit_array;
 	`}
 	fun long_extra(name: JavaString, def_value: Int): Int in "Java" `{
-		return (int) recv.getLongExtra(name, def_value);
+		return (int) self.getLongExtra(name, def_value);
 	`}
-	fun get_package: JavaString in "Java" `{ return recv.getPackage(); `}
-	fun scheme: JavaString in "Java" `{ return recv.getScheme(); `}
+	fun get_package: JavaString in "Java" `{ return self.getPackage(); `}
+	fun scheme: JavaString in "Java" `{ return self.getScheme(); `}
 	fun short_array_extra(name: JavaString): Array[Int] import Array[Int],
 	  Array[Int].push in "Java" `{
-		short[] java_array = recv.getShortArrayExtra(name);
+		short[] java_array = self.getShortArrayExtra(name);
 		int nit_array = new_Array_of_Int();
 
 		for(int i=0; i < java_array.length; ++i)
@@ -188,11 +188,11 @@ extern class NativeIntent in "Java" `{ android.content.Intent `}
 		return nit_array;
 	`}
 	fun short_extra(name: JavaString, def_value: Int): Int in "Java" `{
-		return recv.getShortExtra(name, (short) def_value);
+		return self.getShortExtra(name, (short) def_value);
 	`}
 	fun string_array_extra(name: JavaString): Array[String]
 	  import StringCopyArray, StringCopyArray.add, StringCopyArray.collection in "Java" `{
-		String[] java_array = recv.getStringArrayExtra(name);
+		String[] java_array = self.getStringArrayExtra(name);
 		int nit_array = new_StringCopyArray();
 
 		for(int i=0; i < java_array.length; ++i)
@@ -202,7 +202,7 @@ extern class NativeIntent in "Java" `{ android.content.Intent `}
 	`}
 	fun string_array_list_extra(name: JavaString): Array[String]
 	  import StringCopyArray, StringCopyArray.add, StringCopyArray.collection in "Java" `{
-		ArrayList<String> java_array = recv.getStringArrayListExtra(name);
+		ArrayList<String> java_array = self.getStringArrayListExtra(name);
 		int nit_array = new_StringCopyArray();
 
 		for (String element: java_array)
@@ -211,19 +211,19 @@ extern class NativeIntent in "Java" `{ android.content.Intent `}
 		return StringCopyArray_collection(nit_array);
 	`}
 	fun string_extra(name: JavaString): JavaString in "Java" `{
-		String return_value = recv.getStringExtra(name);
+		String return_value = self.getStringExtra(name);
 		if (return_value == null) return "";
 
 		return return_value;
 	`}
-	fun get_type: JavaString in "Java" `{ return recv.getType(); `}
+	fun get_type: JavaString in "Java" `{ return self.getType(); `}
 	fun has_category(category: JavaString): Bool in "Java" `{
-		return recv.hasCategory(category);
+		return self.hasCategory(category);
 	`}
-	fun has_extra(extra: JavaString): Bool in "Java" `{ return recv.hasExtra(extra); `}
-	fun has_file_descriptors: Bool in "Java" `{ return recv.hasFileDescriptors(); `}
+	fun has_extra(extra: JavaString): Bool in "Java" `{ return self.hasExtra(extra); `}
+	fun has_file_descriptors: Bool in "Java" `{ return self.hasFileDescriptors(); `}
 	fun add_extra_double(name: JavaString, value: Float): NativeIntent in "Java" `{
-		return recv.putExtra(name, value);
+		return self.putExtra(name, value);
 	`}
 	fun add_extra_array_of_double(name: JavaString, value: Array[Float]): NativeIntent
 	  import Array[Float].length, Array[Float].[] in "Java" `{
@@ -232,11 +232,11 @@ extern class NativeIntent in "Java" `{ android.content.Intent `}
 		for (int i=0; i < java_array.length; ++i)
 			java_array[i] = Array_of_Float__index(value, i);
 
-		return recv.putExtra(name, java_array);
+		return self.putExtra(name, java_array);
 	`}
 	# FIXME: Java's `char` are encoded on 16-bits whereas Nit's are on 8-bits.
 	fun add_extra_char(name: JavaString, value: Char): NativeIntent in "Java" `{
-		return recv.putExtra(name, value);
+		return self.putExtra(name, value);
 	`}
 	# FIXME: Java's `char` are encoded on 16-bits whereas Nit's are on 8-bits.
 	fun add_extra_array_of_char(name: JavaString, value: Array[Char]): NativeIntent
@@ -246,11 +246,11 @@ extern class NativeIntent in "Java" `{ android.content.Intent `}
 		for (int i=0; i < java_array.length; ++i)
 			java_array[i] = Array_of_Char__index(value, i);
 
-		return recv.putExtra(name, java_array);
+		return self.putExtra(name, java_array);
 	`}
 	fun add_extra_char_sequence(name: JavaString, value: JavaString): NativeIntent
 	  in "Java" `{
-		return recv.putExtra(name, value);
+		return self.putExtra(name, value);
 	`}
 	fun add_extra_array_of_char_sequence(name: JavaString, value: Array[JavaString]):
 	  NativeIntent import Array[JavaString].length, Array[JavaString].[] in "Java" `{
@@ -259,14 +259,14 @@ extern class NativeIntent in "Java" `{ android.content.Intent `}
 		for (int i=0; i < java_array.length; ++i)
 			java_array[i] = Array_of_JavaString__index(value, i);
 
-		return recv.putExtra(name, java_array);
+		return self.putExtra(name, java_array);
 	`}
 	fun add_extra_bundle(name: JavaString, value: NativeBundle): NativeIntent
 	  in "Java" `{
-		return recv.putExtra(name, value);
+		return self.putExtra(name, value);
 	`}
 	fun add_extra_int(name: JavaString, value: Int): NativeIntent in "Java" `{
-		return recv.putExtra(name, value);
+		return self.putExtra(name, value);
 	`}
 	fun add_extra_array_of_int(name: JavaString, value: Array[Int]): NativeIntent
 	  import Array[Int].length, Array[Int].[] in "Java" `{
@@ -275,7 +275,7 @@ extern class NativeIntent in "Java" `{ android.content.Intent `}
 		for (int i=0; i < java_array.length; ++i)
 			java_array[i] = (int)Array_of_Int__index(value, i);
 
-		return recv.putExtra(name, java_array);
+		return self.putExtra(name, java_array);
 	`}
 	fun add_extra_array_list_of_int(name: JavaString, value: Array[Int]): NativeIntent
 	  import Array[Int].length, Array[Int].[] in "Java" `{
@@ -285,16 +285,16 @@ extern class NativeIntent in "Java" `{ android.content.Intent `}
 		for (int i=0; i < length; ++i)
 			java_array.add((int)Array_of_Int__index(value, i));
 
-		return recv.putExtra(name, java_array);
+		return self.putExtra(name, java_array);
 	`}
 	fun add_extra_byte(name: JavaString, value: Int): NativeIntent in "Java" `{
-		return recv.putExtra(name, (byte) value);
+		return self.putExtra(name, (byte) value);
 	`}
 	fun add_extra_array_of_byte(name: JavaString, value: Int): NativeIntent in "Java" `{
-		return recv.putExtra(name, (byte) value);
+		return self.putExtra(name, (byte) value);
 	`}
 	fun add_extra_long(name: JavaString, value: Int): NativeIntent in "Java" `{
-		return recv.putExtra(name, value);
+		return self.putExtra(name, value);
 	`}
 	fun add_extra_array_of_long(name: JavaString, value: Array[Int]): NativeIntent
 	  import Array[Int].length, Array[Int].[] in "Java" `{
@@ -303,10 +303,10 @@ extern class NativeIntent in "Java" `{ android.content.Intent `}
 		for (int i=0; i < java_array.length; ++i)
 			java_array[i] = Array_of_Int__index(value, i);
 
-		return recv.putExtra(name, java_array);
+		return self.putExtra(name, java_array);
 	`}
 	fun add_extra_float(name: JavaString, value: Float): NativeIntent in "Java" `{
-		return recv.putExtra(name, value);
+		return self.putExtra(name, value);
 	`}
 	fun add_extra_array_of_float(name: JavaString, value: Array[Float]): NativeIntent
 	  import Array[Float].length, Array[Float].[] in "Java" `{
@@ -315,10 +315,10 @@ extern class NativeIntent in "Java" `{ android.content.Intent `}
 		for (int i=0; i < java_array.length; ++i)
 			java_array[i] = (float) Array_of_Float__index(value, i);
 
-		return recv.putExtra(name, java_array);
+		return self.putExtra(name, java_array);
 	`}
 	fun add_extra_string(name: JavaString, value: JavaString): NativeIntent in "Java" `{
-		return recv.putExtra(name, value);
+		return self.putExtra(name, value);
 	`}
 	fun add_extra_array_of_string(name: JavaString, value: Array[JavaString]): NativeIntent
 	  import Array[JavaString].length, Array[JavaString].[] in "Java" `{
@@ -327,7 +327,7 @@ extern class NativeIntent in "Java" `{ android.content.Intent `}
 		for (int i=0; i < java_array.length; ++i)
 			java_array[i] = Array_of_JavaString__index(value, i);
 
-		return recv.putExtra(name, java_array);
+		return self.putExtra(name, java_array);
 	`}
 	fun add_extra_array_list_of_string(name: JavaString, value: Array[JavaString]): NativeIntent
 	  import Array[JavaString].length, Array[JavaString].[] in "Java" `{
@@ -338,10 +338,10 @@ extern class NativeIntent in "Java" `{ android.content.Intent `}
 			java_array.add(Array_of_JavaString__index(value, i));
 		}
 
-		return recv.putExtra(name, java_array);
+		return self.putExtra(name, java_array);
 	`}
 	fun add_extra_bool(name: JavaString, value: Bool): NativeIntent in "Java" `{
-		return recv.putExtra(name, value);
+		return self.putExtra(name, value);
 	`}
 	fun add_extra_array_of_bool(name: JavaString, value: Array[Bool]): NativeIntent
 	  import Array[Bool].length, Array[Bool].[] in "Java" `{
@@ -350,10 +350,10 @@ extern class NativeIntent in "Java" `{ android.content.Intent `}
 		for (int i=0; i < java_array.length; ++i)
 			java_array[i] = Array_of_Bool__index(value, i);
 
-		return recv.putExtra(name, java_array);
+		return self.putExtra(name, java_array);
 	`}
 	fun add_extra_short(name: JavaString, value: Int): NativeIntent in "Java" `{
-		return recv.putExtra(name, value);
+		return self.putExtra(name, value);
 	`}
 	fun add_extra_array_of_short(name: JavaString, value: Array[Int]): NativeIntent
 	  import Array[Int].length, Array[Int].[] in "Java" `{
@@ -362,22 +362,22 @@ extern class NativeIntent in "Java" `{ android.content.Intent `}
 		for (int i=0; i < java_array.length; ++i)
 			java_array[i] = (short) Array_of_Int__index(value, i);
 
-		return recv.putExtra(name, java_array);
+		return self.putExtra(name, java_array);
 	`}
-	fun copy_extras(src: NativeIntent): NativeIntent in "Java" `{ return recv.putExtras(src); `}
-	fun add_extras(src: NativeBundle): NativeIntent in "Java" `{ return recv.putExtras(src); `}
-	fun remove_category(category: JavaString) in "Java" `{ recv.removeCategory(category); `}
-	fun remove_extra(name: JavaString) in "Java" `{ recv.removeExtra(name); `}
+	fun copy_extras(src: NativeIntent): NativeIntent in "Java" `{ return self.putExtras(src); `}
+	fun add_extras(src: NativeBundle): NativeIntent in "Java" `{ return self.putExtras(src); `}
+	fun remove_category(category: JavaString) in "Java" `{ self.removeCategory(category); `}
+	fun remove_extra(name: JavaString) in "Java" `{ self.removeExtra(name); `}
 	fun replace_extras(src: NativeIntent): NativeIntent in "Java" `{
-		return recv.replaceExtras(src);
+		return self.replaceExtras(src);
 	`}
 	fun resolve_activity(pm: NativePackageManager): NativeComponentName in "Java" `{
-		return recv.resolveActivity(pm);
+		return self.resolveActivity(pm);
 	`}
 	fun resolve_type(context: NativeActivity): JavaString in "Java" `{
-		return recv.resolveType(context);
+		return self.resolveType(context);
 	`}
-	fun action=(action: JavaString): NativeIntent in "Java" `{ return recv.setAction(action); `}
+	fun action=(action: JavaString): NativeIntent in "Java" `{ return self.setAction(action); `}
 	fun class_=(package_context: NativeActivity, class_name: JavaString): NativeIntent
 	  in "Java" `{
 		Class<?> java_class = null;
@@ -386,40 +386,40 @@ extern class NativeIntent in "Java" `{ android.content.Intent `}
 		} catch (Exception e) {
 			e.getStackTrace();
 		}
-		return recv.setClass(package_context, java_class);
+		return self.setClass(package_context, java_class);
 	`}
 	fun class_name=(package_context: NativeActivity, class_name: JavaString): NativeIntent
 	  in "Java" `{
-		return recv.setClassName(package_context, class_name);
+		return self.setClassName(package_context, class_name);
 	`}
 	fun set_class_name(package_name: JavaString, class_name: JavaString): NativeIntent
 	  in "Java" `{
-		return recv.setClassName(package_name, class_name);
+		return self.setClassName(package_name, class_name);
 	`}
 	fun data=(data_uri: JavaString): NativeIntent in "Java" `{
-		return recv.setData(Uri.parse(data_uri));
+		return self.setData(Uri.parse(data_uri));
 	`}
 	fun data_and_type=(data_uri: JavaString, type_: JavaString): NativeIntent in "Java" `{
-		return recv.setDataAndType(Uri.parse(data_uri), type_);
+		return self.setDataAndType(Uri.parse(data_uri), type_);
 	`}
-	fun flags=(flags: Int): NativeIntent in "Java" `{ return recv.setFlags((int)flags); `}
+	fun flags=(flags: Int): NativeIntent in "Java" `{ return self.setFlags((int)flags); `}
 	fun package_name=(package_name: JavaString): NativeIntent in "Java" `{
-		return recv.setPackage(package_name);
+		return self.setPackage(package_name);
 	`}
 	fun source_bounds=(left, top, right, bottom: Int) in "Java" `{
-		recv.setSourceBounds(new Rect((int)left, (int)top, (int)right, (int)bottom));
+		self.setSourceBounds(new Rect((int)left, (int)top, (int)right, (int)bottom));
 	`}
 	fun mime_type=(mime_type: JavaString): NativeIntent in "Java" `{
-		return recv.setType(mime_type);
+		return self.setType(mime_type);
 	`}
-	fun to_native_s: JavaString in "Java" `{ return recv.toString(); `}
-	fun to_uri(flags: Int): JavaString in "Java" `{ return recv.toUri((int)flags); `}
+	fun to_native_s: JavaString in "Java" `{ return self.toString(); `}
+	fun to_uri(flags: Int): JavaString in "Java" `{ return self.toUri((int)flags); `}
 
 	# HACK for bug #845
 	redef fun new_global_ref import sys, Sys.jni_env `{
-		Sys sys = NativeIntent_sys(recv);
+		Sys sys = NativeIntent_sys(self);
 		JNIEnv *env = Sys_jni_env(sys);
-		return (*env)->NewGlobalRef(env, recv);
+		return (*env)->NewGlobalRef(env, self);
 	`}
 end
 
@@ -1306,9 +1306,9 @@ class Intent
 end
 
 redef extern class NativeActivity
-	private fun start_activity(intent: NativeIntent) in "Java" `{ recv.startActivity(intent); `}
-	private fun start_service(intent: NativeIntent) in "Java" `{ recv.startService(intent); `}
-	private fun stop_service(intent: NativeIntent) in "Java" `{ recv.stopService(intent); `}
+	private fun start_activity(intent: NativeIntent) in "Java" `{ self.startActivity(intent); `}
+	private fun start_service(intent: NativeIntent) in "Java" `{ self.startService(intent); `}
+	private fun stop_service(intent: NativeIntent) in "Java" `{ self.stopService(intent); `}
 end
 
 # Allows user to get values with enum-like syntax : `intent_action.main`

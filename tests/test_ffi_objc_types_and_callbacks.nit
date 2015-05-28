@@ -24,7 +24,7 @@ import bar, String.to_cstring, Int.+ in "ObjC" `{
 
 	printf("From Objective-C: %ld %f %s\n", ii, f, cstr);
 
-	Sys_bar(recv, ii, f, s);
+	Sys_bar(self, ii, f, s);
 `}
 
 fun bar(i: Int, f: Float, s: String)

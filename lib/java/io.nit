@@ -33,45 +33,45 @@ in "Java" `{
 extern class NativeFile in "Java" `{ java.io.File `}
 	super JavaObject
 
-	fun can_execute: Bool in "Java" `{ return recv.canExecute(); `}
-	fun can_read: Bool in "Java" `{ return recv.canRead(); `}
-	fun can_write: Bool in "Java" `{ return recv.canWrite(); `}
+	fun can_execute: Bool in "Java" `{ return self.canExecute(); `}
+	fun can_read: Bool in "Java" `{ return self.canRead(); `}
+	fun can_write: Bool in "Java" `{ return self.canWrite(); `}
 	fun create_file: Bool in "Java" `{
 		try {
-			return recv.createNewFile();
+			return self.createNewFile();
 		}catch(IOException e){
 			e.printStackTrace();
 			return false;
 		}
 	`}
-	fun delete: Bool in "Java" `{ return recv.delete(); `}
-	fun delete_on_exit in "Java" `{ recv.deleteOnExit(); `}
-	fun exists: Bool in "Java" `{ return recv.exists(); `}
-	fun absolute_file: NativeFile in "Java" `{ return recv.getAbsoluteFile(); `}
-	fun absolute_path: JavaString in "Java" `{ return recv.getAbsolutePath(); `}
+	fun delete: Bool in "Java" `{ return self.delete(); `}
+	fun delete_on_exit in "Java" `{ self.deleteOnExit(); `}
+	fun exists: Bool in "Java" `{ return self.exists(); `}
+	fun absolute_file: NativeFile in "Java" `{ return self.getAbsoluteFile(); `}
+	fun absolute_path: JavaString in "Java" `{ return self.getAbsolutePath(); `}
 	fun canonical_file: NativeFile in "Java" `{
 		try {
-			return recv.getCanonicalFile();
+			return self.getCanonicalFile();
 		}catch(IOException e){
 			e.printStackTrace();
 			return null;
 		}
 	`}
-	fun free_space: Int in "Java" `{ return (int)recv.getFreeSpace(); `}
-	fun name: JavaString in "Java" `{ return recv.getName(); `}
-	fun parent: JavaString in "Java" `{ return recv.getParent(); `}
-	fun parent_file: NativeFile in "Java" `{ return recv.getParentFile(); `}
-	fun path: JavaString in "Java" `{ return recv.getPath(); `}
-	fun total_space: Int in "Java" `{ return (int)recv.getTotalSpace(); `}
-	fun usable_space: Int in "Java" `{ return (int)recv.getUsableSpace(); `}
-	fun absolute: Bool in "Java" `{ return recv.isAbsolute(); `}
-	fun is_directory: Bool in "Java" `{ return recv.isDirectory(); `}
-	fun is_file: Bool in "Java" `{ return recv.isFile(); `}
-	fun is_hidden: Bool in "Java" `{ return recv.isHidden(); `}
-	fun last_modified: Int in "Java" `{ return (int)recv.lastModified(); `}
-	fun length: Int in "Java" `{ return (int)recv.length(); `}
-	fun set_readable(r: Bool, owner_only: Bool): Bool in "Java" `{ return recv.setReadable(r, owner_only); `}
-	fun set_writable(w: Bool, owner_only: Bool): Bool in "Java" `{ return recv.setWritable(w, owner_only); `}
+	fun free_space: Int in "Java" `{ return (int)self.getFreeSpace(); `}
+	fun name: JavaString in "Java" `{ return self.getName(); `}
+	fun parent: JavaString in "Java" `{ return self.getParent(); `}
+	fun parent_file: NativeFile in "Java" `{ return self.getParentFile(); `}
+	fun path: JavaString in "Java" `{ return self.getPath(); `}
+	fun total_space: Int in "Java" `{ return (int)self.getTotalSpace(); `}
+	fun usable_space: Int in "Java" `{ return (int)self.getUsableSpace(); `}
+	fun absolute: Bool in "Java" `{ return self.isAbsolute(); `}
+	fun is_directory: Bool in "Java" `{ return self.isDirectory(); `}
+	fun is_file: Bool in "Java" `{ return self.isFile(); `}
+	fun is_hidden: Bool in "Java" `{ return self.isHidden(); `}
+	fun last_modified: Int in "Java" `{ return (int)self.lastModified(); `}
+	fun length: Int in "Java" `{ return (int)self.length(); `}
+	fun set_readable(r: Bool, owner_only: Bool): Bool in "Java" `{ return self.setReadable(r, owner_only); `}
+	fun set_writable(w: Bool, owner_only: Bool): Bool in "Java" `{ return self.setWritable(w, owner_only); `}
 end
 
 extern class NativeFileInputStream in "Java" `{ java.io.FileInputStream `}
@@ -79,7 +79,7 @@ extern class NativeFileInputStream in "Java" `{ java.io.FileInputStream `}
 
 	fun available: Int in "Java" `{
 		try {
-			return recv.available();
+			return self.available();
 		}catch(IOException e){
 			e.printStackTrace();
 			return -1;
@@ -87,14 +87,14 @@ extern class NativeFileInputStream in "Java" `{ java.io.FileInputStream `}
 	`}
 	fun close in "Java" `{
 		try {
-			recv.close();
+			self.close();
 		}catch(IOException e){
 			e.printStackTrace();
 		}
 	`}
 	fun read: Int in "Java" `{
 		try {
-			return recv.read();
+			return self.read();
 		}catch(IOException e){
 			e.printStackTrace();
 			return -1;
@@ -102,7 +102,7 @@ extern class NativeFileInputStream in "Java" `{ java.io.FileInputStream `}
 	`}
 	fun skip(byte_count: Int): Int in "Java" `{
 		try {
-			return (int)recv.skip(byte_count);
+			return (int)self.skip(byte_count);
 		}catch(IOException e){
 			e.printStackTrace();
 			return -1;
@@ -115,21 +115,21 @@ extern class NativeFileOutputStream in "Java" `{ java.io.FileOutputStream `}
 
 	fun close in "Java" `{
 		try {
-			recv.close();
+			self.close();
 		}catch(IOException e){
 			e.printStackTrace();
 		}
 	`}
 	fun write(one_byte: Int) in "Java" `{
 		try {
-			recv.write((byte)one_byte);
+			self.write((byte)one_byte);
 		}catch(IOException e){
 			e.printStackTrace();
 		}
 	`}
 	fun flush in "Java" `{
 		try {
-			recv.flush();
+			self.flush();
 		}catch(IOException e){
 			e.printStackTrace();
 		}
@@ -141,12 +141,12 @@ extern class NativeFileDescriptor in "Java" `{ java.io.FileDescriptor `}
 
 	fun sync in "Java" `{
 		try{
-			recv.sync();
+			self.sync();
 		}catch(SyncFailedException e){
 			e.printStackTrace();
 		}
 	`}
-	fun valid: Bool in "Java" `{ return recv.valid(); `}
+	fun valid: Bool in "Java" `{ return self.valid(); `}
 end
 
 extern class NativeInputStream in "Java" `{ java.io.InputStream `}
@@ -154,7 +154,7 @@ extern class NativeInputStream in "Java" `{ java.io.InputStream `}
 
 	fun available: Int in "Java" `{
 		try {
-			return recv.available();
+			return self.available();
 		}catch(IOException e){
 			e.printStackTrace();
 			return -1;
@@ -163,7 +163,7 @@ extern class NativeInputStream in "Java" `{ java.io.InputStream `}
 
 	fun close in "Java" `{
 		try {
-			recv.close();
+			self.close();
 		}catch(IOException e){
 			e.printStackTrace();
 		}

@@ -35,14 +35,14 @@ redef extern class GtkEntry
 	#
 	# Can be used by on-screen keyboards and other input methods to adjust their behaviour.
 	fun input_purpose: GtkInputPurpose `{
-		return gtk_entry_get_input_purpose(recv);
+		return gtk_entry_get_input_purpose(self);
 	`}
 
 	# Input purpose, tweaks the behavior of this widget
 	#
 	# Can be used by on-screen keyboards and other input methods to adjust their behaviour.
 	fun input_purpose=(purpose: GtkInputPurpose) `{
-		gtk_entry_set_input_purpose(recv, purpose);
+		gtk_entry_set_input_purpose(self, purpose);
 	`}
 end
 

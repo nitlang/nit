@@ -29,10 +29,10 @@ class StringTest
 		char* string = "This is a test string";
 
 		FlatString ref_string = NativeString_to_s(string);
-		StringTest_ref_test(recv, ref_string);
+		StringTest_ref_test(self, ref_string);
 
 		FlatString copy_string = NativeString_to_s_with_copy(string);
-		StringTest_copy_test(recv, copy_string);
+		StringTest_copy_test(self, copy_string);
 
 		int same_refs = FlatString_items(copy_string) == FlatString_items(ref_string);
 

@@ -72,19 +72,19 @@ extern class NativeAudioManager in "Java" `{ android.media.AudioManager `}
 
 	# Current audio mode.
 	# ( MODE_NORMAL = 0, MODE_RINGTONE = 1, MODE_IN_CALL = 2 or MODE_IN_COMMUNICATION = 3 )
-	fun mode: Int in "Java" `{ return recv.getMode(); `}
+	fun mode: Int in "Java" `{ return self.getMode(); `}
 
 	# Sets the audio mode.
 	# ( MODE_NORMAL = 0, MODE_RINGTONE = 1, MODE_IN_CALL = 2 or MODE_IN_COMMUNICATION = 3 )
-	fun mode=(i: Int) in "Java" `{ recv.setMode((int)i); `}
+	fun mode=(i: Int) in "Java" `{ self.setMode((int)i); `}
 
 	# Sends a request to obtain audio focus
 	fun request_audio_focus: Int in "Java" `{
-		return recv.requestAudioFocus(afChangeListener, AudioManager.STREAM_MUSIC, AudioManager.AUDIOFOCUS_GAIN);
+		return self.requestAudioFocus(afChangeListener, AudioManager.STREAM_MUSIC, AudioManager.AUDIOFOCUS_GAIN);
 	`}
 
 	# Gives up audio focus
-	fun abandon_audio_focus: Int in "Java" `{ return recv.abandonAudioFocus(afChangeListener); `}
+	fun abandon_audio_focus: Int in "Java" `{ return self.abandonAudioFocus(afChangeListener); `}
 end
 
 # Media Player from Java, used to play long sounds or musics, not simultaneously
@@ -97,30 +97,30 @@ private extern class NativeMediaPlayer in "Java" `{ android.media.MediaPlayer `}
 		mp.setAudioStreamType(AudioManager.STREAM_MUSIC);
 		return mp;
 	`}
-	fun start in "Java" `{ recv.start(); `}
+	fun start in "Java" `{ self.start(); `}
 	fun prepare in "Java" `{
 		try {
-			recv.prepare();
+			self.prepare();
 		}catch(IOException e) {
 			Log.e("Error preparing the Media Player", e.getMessage());
 			e.printStackTrace();
 		}
 	`}
 
-	fun create(context: NativeActivity, id: Int): NativeMediaPlayer in "Java" `{ return recv.create(context, (int)id); `}
-	fun pause in "Java" `{ recv.pause(); `}
-	fun stop in "Java" `{ recv.stop(); `}
-	fun playing: Bool in "Java" `{ return recv.isPlaying(); `}
-	fun release in "Java" `{ recv.release(); `}
-	fun duration: Int in "Java" `{ return recv.getDuration(); `}
-	fun looping: Bool in "Java" `{ return recv.isLooping(); `}
-	fun looping=(b: Bool) in "Java" `{ recv.setLooping(b); `}
-	fun volume=(vol: Float) in "Java" `{ recv.setVolume((float)vol, (float)vol); `}
-	fun both_volume(left_volume, right_volume: Float) in "Java" `{ recv.setVolume((float)left_volume, (float)right_volume); `}
-	fun stream_type=(stream_type: Int) in "Java" `{ recv.setAudioStreamType((int)stream_type); `}
+	fun create(context: NativeActivity, id: Int): NativeMediaPlayer in "Java" `{ return self.create(context, (int)id); `}
+	fun pause in "Java" `{ self.pause(); `}
+	fun stop in "Java" `{ self.stop(); `}
+	fun playing: Bool in "Java" `{ return self.isPlaying(); `}
+	fun release in "Java" `{ self.release(); `}
+	fun duration: Int in "Java" `{ return self.getDuration(); `}
+	fun looping: Bool in "Java" `{ return self.isLooping(); `}
+	fun looping=(b: Bool) in "Java" `{ self.setLooping(b); `}
+	fun volume=(vol: Float) in "Java" `{ self.setVolume((float)vol, (float)vol); `}
+	fun both_volume(left_volume, right_volume: Float) in "Java" `{ self.setVolume((float)left_volume, (float)right_volume); `}
+	fun stream_type=(stream_type: Int) in "Java" `{ self.setAudioStreamType((int)stream_type); `}
 	fun data_source_fd(fd: NativeFileDescriptor, start_offset, length: Int) in "Java"  `{
 		try {
-			recv.setDataSource(fd, start_offset, length);
+			self.setDataSource(fd, start_offset, length);
 		}catch(IOException e) {
 			Log.e("Error loading the Media Player with a file descriptor", e.getMessage());
 			e.printStackTrace();
@@ -128,13 +128,13 @@ private extern class NativeMediaPlayer in "Java" `{ android.media.MediaPlayer `}
 	`}
 	fun data_source_path(path: JavaString) in "Java" `{
 		try {
-			recv.setDataSource(path);
+			self.setDataSource(path);
 		}catch(IOException e) {
 			Log.e("Error loading the Media Player", e.getMessage());
 			e.printStackTrace();
 		}
 	`}
-	fun reset in "Java" `{ recv.reset(); `}
+	fun reset in "Java" `{ self.reset(); `}
 end
 
 # Sound Pool from Java, used to play sounds simultaneously
@@ -145,23 +145,23 @@ private extern class NativeSoundPool in "Java" `{ android.media.SoundPool `}
 	new(max_streams, stream_type, src_quality: Int) in "Java" `{
 		return new SoundPool((int)max_streams, (int)stream_type, (int)src_quality);
 	`}
-	fun load_asset_fd(afd: NativeAssetFileDescriptor, priority: Int): Int in "Java" `{ return recv.load(afd, (int)priority); `}
-	fun load_id(context: NativeActivity, resid, priority: Int): Int in "Java" `{ return recv.load(context, (int)resid, (int)priority); `}
-	fun load_path(path: JavaString, priority: Int): Int in "Java" `{ return recv.load(path, (int)priority); `}
+	fun load_asset_fd(afd: NativeAssetFileDescriptor, priority: Int): Int in "Java" `{ return self.load(afd, (int)priority); `}
+	fun load_id(context: NativeActivity, resid, priority: Int): Int in "Java" `{ return self.load(context, (int)resid, (int)priority); `}
+	fun load_path(path: JavaString, priority: Int): Int in "Java" `{ return self.load(path, (int)priority); `}
 	fun play(sound_id: Int, left_volume, right_volume: Float, priority, l: Int, rate: Float): Int in "Java" `{
-		return recv.play((int)sound_id, (float)left_volume, (float)right_volume, (int)priority, (int)l, (float)rate);
+		return self.play((int)sound_id, (float)left_volume, (float)right_volume, (int)priority, (int)l, (float)rate);
 	`}
-	fun pause(stream_id: Int) in "Java" `{ recv.pause((int)stream_id); `}
-	fun auto_pause in "Java" `{ recv.autoPause(); `}
-	fun auto_resume in "Java" `{ recv.autoResume(); `}
-	fun resume(stream_id: Int) in "Java" `{ recv.resume((int)stream_id); `}
-	fun set_loop(stream_id, l: Int) in "Java" `{ recv.setLoop((int)stream_id, (int)l); `}
-	fun set_priority(stream_id, priority: Int) in "Java" `{ recv.setPriority((int)stream_id, (int)priority); `}
-	fun set_rate(stream_id: Int, rate: Float) in "Java" `{ recv.setRate((int)stream_id, (float)rate); `}
-	fun set_volume(stream_id: Int, left_volume, right_volume: Float) in "Java" `{ recv.setVolume((int)stream_id, (float)left_volume, (float)right_volume); `}
-	fun stop(stream_id: Int) in "Java" `{ recv.stop((int)stream_id); `}
-	fun unload(sound_id: Int): Bool in "Java" `{ return recv.unload((int)sound_id); `}
-	fun release in "Java" `{ recv.release(); `}
+	fun pause(stream_id: Int) in "Java" `{ self.pause((int)stream_id); `}
+	fun auto_pause in "Java" `{ self.autoPause(); `}
+	fun auto_resume in "Java" `{ self.autoResume(); `}
+	fun resume(stream_id: Int) in "Java" `{ self.resume((int)stream_id); `}
+	fun set_loop(stream_id, l: Int) in "Java" `{ self.setLoop((int)stream_id, (int)l); `}
+	fun set_priority(stream_id, priority: Int) in "Java" `{ self.setPriority((int)stream_id, (int)priority); `}
+	fun set_rate(stream_id: Int, rate: Float) in "Java" `{ self.setRate((int)stream_id, (float)rate); `}
+	fun set_volume(stream_id: Int, left_volume, right_volume: Float) in "Java" `{ self.setVolume((int)stream_id, (float)left_volume, (float)right_volume); `}
+	fun stop(stream_id: Int) in "Java" `{ self.stop((int)stream_id); `}
+	fun unload(sound_id: Int): Bool in "Java" `{ return self.unload((int)sound_id); `}
+	fun release in "Java" `{ self.release(); `}
 end
 
 
@@ -425,13 +425,13 @@ redef class App
 
 	# Get the native audio manager
 	fun audio_manager: NativeAudioManager import native_activity in "Java" `{
-		return (AudioManager)App_native_activity(recv).getSystemService(Context.AUDIO_SERVICE);
+		return (AudioManager)App_native_activity(self).getSystemService(Context.AUDIO_SERVICE);
 	`}
 
 	# Sets the stream of the app to STREAM_MUSIC.
 	# STREAM_MUSIC is the default stream used by android apps.
 	private fun manage_audio_stream import native_activity, native_app_glue in "Java" `{
-		App_native_activity(recv).setVolumeControlStream(AudioManager.STREAM_MUSIC);
+		App_native_activity(self).setVolumeControlStream(AudioManager.STREAM_MUSIC);
 	`}
 
 	# Retrieves a sound with a soundpool in the `assets` folder using its name.

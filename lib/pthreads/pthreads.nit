@@ -112,14 +112,14 @@ private extern class NativePthread in "C" `{ pthread_t * `}
 
 	fun join: nullable Object `{
 		void *thread_return;
-		pthread_join(*recv, &thread_return);
+		pthread_join(*self, &thread_return);
 		if(thread_return == NULL) thread_return = null_Object();
 		return (nullable_Object)thread_return;
 	`}
 
-	fun equal(other: NativePthread): Bool `{ return pthread_equal(*recv, *other); `}
+	fun equal(other: NativePthread): Bool `{ return pthread_equal(*self, *other); `}
 
-	fun kill(signal: Int) `{ pthread_kill(*recv, signal); `}
+	fun kill(signal: Int) `{ pthread_kill(*self, signal); `}
 end
 
 private extern class NativePthreadAttr in "C" `{ pthread_attr_t * `}
@@ -135,7 +135,7 @@ private extern class NativePthreadAttr in "C" `{ pthread_attr_t * `}
 	`}
 
 	fun destroy `{
-		pthread_attr_destroy(recv);
+		pthread_attr_destroy(self);
 	`}
 
 	# Most features of this class are still TODO
@@ -159,11 +159,11 @@ private extern class NativePthreadMutex in "C" `{ pthread_mutex_t * `}
 		return mutex;
 	`}
 
-	fun destroy `{ pthread_mutex_destroy(recv); `}
+	fun destroy `{ pthread_mutex_destroy(self); `}
 
-	fun lock `{ pthread_mutex_lock(recv); `}
-	fun try_lock: Bool `{ return pthread_mutex_trylock(recv); `}
-	fun unlock `{ pthread_mutex_unlock(recv); `}
+	fun lock `{ pthread_mutex_lock(self); `}
+	fun try_lock: Bool `{ return pthread_mutex_trylock(self); `}
+	fun unlock `{ pthread_mutex_unlock(self); `}
 end
 
 private extern class NativePthreadMutexAttr in "C" `{ pthread_mutexattr_t * `}
@@ -173,11 +173,11 @@ private extern class NativePthreadMutexAttr in "C" `{ pthread_mutexattr_t * `}
 		return attr;
 	`}
 
-	fun destroy `{ pthread_mutexattr_destroy(recv); `}
+	fun destroy `{ pthread_mutexattr_destroy(self); `}
 
-	fun set_type_normal `{ pthread_mutexattr_settype(recv, PTHREAD_MUTEX_NORMAL); `}
-	fun set_type_recursive `{ pthread_mutexattr_settype(recv, PTHREAD_MUTEX_RECURSIVE); `}
-	fun set_type_errorcheck `{ pthread_mutexattr_settype(recv, PTHREAD_MUTEX_ERRORCHECK); `}
+	fun set_type_normal `{ pthread_mutexattr_settype(self, PTHREAD_MUTEX_NORMAL); `}
+	fun set_type_recursive `{ pthread_mutexattr_settype(self, PTHREAD_MUTEX_RECURSIVE); `}
+	fun set_type_errorcheck `{ pthread_mutexattr_settype(self, PTHREAD_MUTEX_ERRORCHECK); `}
 
 	# pthread_mutexattr_setpshared
 	# pthread_mutexattr_setprotocol
@@ -193,13 +193,13 @@ private extern class NativePthreadKey in "C" `{ pthread_key_t * `}
 	`}
 
 	fun get: nullable Object `{
-		void *val = pthread_getspecific(*recv);
+		void *val = pthread_getspecific(*self);
 		if (val == NULL) val = null_Object();
 		return val;
 	`}
 
 	fun set(val: nullable Object) `{
-		pthread_setspecific(*recv, val);
+		pthread_setspecific(*self, val);
 	`}
 end
 
@@ -215,13 +215,13 @@ private extern class NativePthreadCond in "C" `{ pthread_cond_t * `}
 		return NULL;
 	`}
 
-	fun destroy `{ pthread_cond_destroy(recv); `}
+	fun destroy `{ pthread_cond_destroy(self); `}
 
-	fun signal `{ pthread_cond_signal(recv); `}
+	fun signal `{ pthread_cond_signal(self); `}
 
-	fun broadcast `{ pthread_cond_broadcast(recv);  `}
+	fun broadcast `{ pthread_cond_broadcast(self);  `}
 
-	fun wait(mutex: NativePthreadMutex) `{ pthread_cond_wait(recv, mutex); `}
+	fun wait(mutex: NativePthreadMutex) `{ pthread_cond_wait(self, mutex); `}
 end
 
 #

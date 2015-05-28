@@ -168,8 +168,8 @@ interface SignalHandler
 			if (last_handler != NULL)
 				SignalHandler_decr_ref(last_handler);
 
-			nit_signals_list[signal].handler = recv;
-			SignalHandler_incr_ref(recv);
+			nit_signals_list[signal].handler = self;
+			SignalHandler_incr_ref(self);
 
 			nit_signals_list[signal].safely = safely;
 		}

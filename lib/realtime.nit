@@ -48,7 +48,7 @@ extern class Timespec `{struct timespec*`}
 
 	# Update `self` clock.
 	fun update `{
-		clock_gettime( CLOCK_MONOTONIC, recv );
+		clock_gettime(CLOCK_MONOTONIC, self);
 	`}
 
 	# Substract a Timespec from `self`.
@@ -62,14 +62,14 @@ extern class Timespec `{struct timespec*`}
 
 	# Number of whole seconds of elapsed time.
 	fun sec : Int `{
-		return recv->tv_sec;
+		return self->tv_sec;
 	`}
 
 	# Rest of the elapsed time (a fraction of a second).
 	#
 	# Number of nanoseconds.
 	fun nanosec : Int `{
-		return recv->tv_nsec;
+		return self->tv_nsec;
 	`}
 
 	# Seconds in Float

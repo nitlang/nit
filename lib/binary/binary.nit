@@ -325,7 +325,7 @@ redef class Int
 			uint64_t conv;
 		} u;
 
-		u.val = recv;
+		u.val = self;
 
 		if (big_endian)
 			u.conv = htobe64(u.conv);
@@ -344,7 +344,7 @@ redef class Float
 			uint32_t conv;
 		} u;
 
-		u.val = recv;
+		u.val = self;
 
 		if (big_endian)
 			u.conv = htobe32(u.conv);
@@ -361,7 +361,7 @@ redef class Float
 			uint64_t conv;
 		} u;
 
-		u.val = recv;
+		u.val = self;
 
 		if (big_endian)
 			u.conv = htobe64(u.conv);

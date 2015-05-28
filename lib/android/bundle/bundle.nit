@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# A mapping class of `String` to various value types used by the 
+# A mapping class of `String` to various value types used by the
 # Android API for various data exchange purposes
 module bundle
 
@@ -36,17 +36,17 @@ extern class NativeBundle in "Java" `{ android.os.Bundle `}
 
 	new in "Java" `{ return new Bundle(); `}
 
-	fun clone: JavaObject in "Java" `{ return recv.clone(); `}
-	fun size: Int in "Java" `{ return recv.size(); `}
-	fun is_empty: Bool in "Java" `{ return recv.isEmpty(); `}
-	fun clear in "Java" `{ recv.clear(); `}
-	fun contains_key(key: JavaString): Bool in "Java" `{ return recv.containsKey(key); `}
-	fun get(key: JavaString): JavaObject in "Java" `{ return recv.get(key); `}
-	fun remove(key: JavaString) in "Java" `{ recv.remove(key); `}
-	fun put_all(bundle: NativeBundle) in "Java" `{ recv.putAll(bundle); `}
+	fun clone: JavaObject in "Java" `{ return self.clone(); `}
+	fun size: Int in "Java" `{ return self.size(); `}
+	fun is_empty: Bool in "Java" `{ return self.isEmpty(); `}
+	fun clear in "Java" `{ self.clear(); `}
+	fun contains_key(key: JavaString): Bool in "Java" `{ return self.containsKey(key); `}
+	fun get(key: JavaString): JavaObject in "Java" `{ return self.get(key); `}
+	fun remove(key: JavaString) in "Java" `{ self.remove(key); `}
+	fun put_all(bundle: NativeBundle) in "Java" `{ self.putAll(bundle); `}
 	fun key_set: HashSet[JavaString] import HashSet[JavaString], 
 	  HashSet[JavaString].add in "Java" `{ 
-	  	Set<String> java_set = recv.keySet(); 
+		Set<String> java_set = self.keySet();
 		int nit_hashset = new_HashSet_of_JavaString();
 
 		for (String element: java_set)
@@ -54,209 +54,209 @@ extern class NativeBundle in "Java" `{ android.os.Bundle `}
 
 		return nit_hashset;
 	`}
-	fun has_file_descriptors: Bool in "Java" `{ return recv.hasFileDescriptors(); `}
-	fun put_boolean(key: JavaString, value: Bool) in "Java" `{ 
-		recv.putBoolean(key, value); 
+	fun has_file_descriptors: Bool in "Java" `{ return self.hasFileDescriptors(); `}
+	fun put_boolean(key: JavaString, value: Bool) in "Java" `{
+		self.putBoolean(key, value);
 	`}
-	fun put_byte(key: JavaString, value: Int) in "Java" `{ 
-		recv.putByte(key, (byte) value); 
+	fun put_byte(key: JavaString, value: Int) in "Java" `{
+		self.putByte(key, (byte) value);
 	`}
 	# FIXME: Java's `char` are encoded on 16-bits whereas Nit's are on 8-bits.
-	fun put_char(key: JavaString, value: Char) in "Java" `{ 
-		recv.putChar(key, value); 
+	fun put_char(key: JavaString, value: Char) in "Java" `{
+		self.putChar(key, value);
 	`}
-	fun put_short(key: JavaString, value: Int) in "Java" `{ 
-		recv.putShort(key, (short) value); 
+	fun put_short(key: JavaString, value: Int) in "Java" `{
+		self.putShort(key, (short) value);
 	`}
-	fun put_int(key: JavaString, value: Int) in "Java" `{ 
-		recv.putInt(key, (int) value); 
+	fun put_int(key: JavaString, value: Int) in "Java" `{
+		self.putInt(key, (int) value);
 	`}
-	fun put_long(key: JavaString, value: Int) in "Java" `{ 
-		recv.putLong(key, value); 
+	fun put_long(key: JavaString, value: Int) in "Java" `{
+		self.putLong(key, value);
 	`}
-	fun put_float(key: JavaString, value: Float) in "Java" `{ 
-		recv.putFloat(key, (float) value); 
+	fun put_float(key: JavaString, value: Float) in "Java" `{
+		self.putFloat(key, (float) value);
 	`}
-	fun put_double(key: JavaString, value: Float) in "Java" `{ 
-		recv.putDouble(key, value); 
+	fun put_double(key: JavaString, value: Float) in "Java" `{
+		self.putDouble(key, value);
 	`}
-	fun put_string(key: JavaString, value: JavaString) in "Java" `{ 
-		recv.putString(key, value); 
+	fun put_string(key: JavaString, value: JavaString) in "Java" `{
+		self.putString(key, value);
 	`}
-	fun put_char_sequence(key: JavaString, value: JavaString) in "Java" `{ 
-		recv.putCharSequence(key, value); 
+	fun put_char_sequence(key: JavaString, value: JavaString) in "Java" `{
+		self.putCharSequence(key, value);
 	`}
-	fun put_integer_array_list(key: JavaString, value: Array[Int]) 
+	fun put_integer_array_list(key: JavaString, value: Array[Int])
 	  import Array[Int].length, Array[Int].[] in "Java" `{
-		ArrayList<Integer> java_array = 
+		ArrayList<Integer> java_array =
 			new ArrayList<Integer>((int) Array_of_Int_length(value));
-		
+
 		for(int i=0; i < java_array.size(); ++i)
 			java_array.add((int) Array_of_Int__index(value, i));
 
-		recv.putIntegerArrayList(key, java_array); 
+		self.putIntegerArrayList(key, java_array);
 	`}
 	fun put_string_array_list(key: JavaString, value: Array[JavaString])
 	  import Array[JavaString].length, Array[JavaString].[] in "Java" `{
 		ArrayList<String> java_array = new ArrayList<String>((int)Array_of_JavaString_length(value));
-		
+
 		for(int i=0; i < java_array.size(); ++i)
 			java_array.add(Array_of_JavaString__index(value, i));
 
-		recv.putStringArrayList(key, java_array); 
+		self.putStringArrayList(key, java_array);
 	`}
 	fun put_char_sequence_array_list(key: JavaString, value: Array[JavaString])
 	  import Array[JavaString].length, Array[JavaString].[] in "Java" `{
-		ArrayList<CharSequence> java_array = 
+		ArrayList<CharSequence> java_array =
 		  new ArrayList<CharSequence>((int)Array_of_JavaString_length(value));
-		
+
 		for(int i=0; i < java_array.size(); ++i)
 			java_array.add(Array_of_JavaString__index(value, i));
 
-		recv.putCharSequenceArrayList(key, java_array); 
+		self.putCharSequenceArrayList(key, java_array);
 	`}
 	fun put_boolean_array(key: JavaString, value: Array[Bool])
 	  import Array[Bool].length, Array[Bool].[] in "Java" `{
 		boolean[] java_array = new boolean[(int)Array_of_Bool_length(value)];
-		
+
 		for(int i=0; i < java_array.length; ++i)
 			java_array[i] = Array_of_Bool__index(value, i);
 
-		recv.putBooleanArray(key, java_array); 
+		self.putBooleanArray(key, java_array);
 	`}
 	fun put_byte_array(key: JavaString, value: Array[Int])
 	  import Array[Int].length, Array[Int].[] in "Java" `{
 		byte[] java_array = new byte[(int)Array_of_Int_length(value)];
-		
+
 		for(int i=0; i < java_array.length; ++i)
 			java_array[i] = (byte) Array_of_Int__index(value, i);
 
-		recv.putByteArray(key, java_array); 
+		self.putByteArray(key, java_array);
 	`}
 	fun put_short_array(key: JavaString, value: Array[Int])
 	  import Array[Int].length, Array[Int].[] in "Java" `{
 		short[] java_array = new short[(int)Array_of_Int_length(value)];
-		
+
 		for(int i=0; i < java_array.length; ++i)
 			java_array[i] = (short) Array_of_Int__index(value, i);
 
-		recv.putShortArray(key, java_array); 
+		self.putShortArray(key, java_array);
 	`}
 	# FIXME: Java's `char` are encoded on 16-bits whereas Nit's are on 8-bits.
 	fun put_char_array(key: JavaString, value: Array[Char])
 	  import Array[Char].length, Array[Char].[] in "Java" `{
 		char[] java_array = new char[(int)Array_of_Char_length(value)];
-		
+
 		for(int i=0; i < java_array.length; ++i)
 			java_array[i] = Array_of_Char__index(value, i);
 
-		recv.putCharArray(key, java_array); 
+		self.putCharArray(key, java_array);
 	`}
 	fun put_int_array(key: JavaString, value: Array[Int])
 	  import Array[Int].length, Array[Int].[] in "Java" `{
 		int[] java_array = new int[(int)Array_of_Int_length(value)];
-		
+
 		for(int i=0; i < java_array.length; ++i)
 			java_array[i] = (int) Array_of_Int__index(value, i);
 
-		recv.putIntArray(key, java_array); 
+		self.putIntArray(key, java_array);
 	`}
 	fun put_long_array(key: JavaString, value: Array[Int])
 	  import Array[Int].length, Array[Int].[] in "Java" `{
 		long[] java_array = new long[(int)Array_of_Int_length(value)];
-		
+
 		for(int i=0; i < java_array.length; ++i)
 			java_array[i] = Array_of_Int__index(value, i);
 
-		recv.putLongArray(key, java_array); 
+		self.putLongArray(key, java_array);
 	`}
 	fun put_float_array(key: JavaString, value: Array[Float])
 	  import Array[Float].length, Array[Float].[] in "Java" `{
 		float[] java_array = new float[(int)Array_of_Float_length(value)];
-		
+
 		for(int i=0; i < java_array.length; ++i)
 			java_array[i] = (float) Array_of_Float__index(value, i);
 
-		recv.putFloatArray(key, java_array); 
+		self.putFloatArray(key, java_array);
 	`}
 	fun put_double_array(key: JavaString, value: Array[Float])
 	  import Array[Float].length, Array[Float].[] in "Java" `{
 		double[] java_array = new double[(int)Array_of_Float_length(value)];
-		
+
 		for(int i=0; i < java_array.length; ++i)
 			java_array[i] = Array_of_Float__index(value, i);
 
-		recv.putDoubleArray(key, java_array); 
+		self.putDoubleArray(key, java_array);
 	`}
 	fun put_string_array(key: JavaString, value: Array[JavaString])
 	  import Array[JavaString].length, Array[JavaString].[] in "Java" `{
 		String[] java_array = new String[(int)Array_of_JavaString_length(value)];
-		
+
 		for(int i=0; i < java_array.length; ++i)
 			java_array[i] = Array_of_JavaString__index(value, i);
 
-		recv.putStringArray(key, java_array); 
+		self.putStringArray(key, java_array);
 	`}
 	fun put_char_sequence_array(key: JavaString, value: Array[JavaString])
 	  import Array[JavaString].length, Array[JavaString].[] in "Java" `{
 		CharSequence[] java_array = new CharSequence[(int)Array_of_JavaString_length(value)];
-		
+
 		for(int i=0; i < java_array.length; ++i)
 			java_array[i] = Array_of_JavaString__index(value, i);
 
-		recv.putCharSequenceArray(key, java_array); 
+		self.putCharSequenceArray(key, java_array);
 	`}
-	fun put_bundle(key: JavaString, value: NativeBundle) in "Java" `{ 
-		recv.putBundle(key, value); 
+	fun put_bundle(key: JavaString, value: NativeBundle) in "Java" `{
+		self.putBundle(key, value);
 	`}
-	fun get_boolean(key: JavaString): Bool in "Java" `{ return recv.getBoolean(key); `}
+	fun get_boolean(key: JavaString): Bool in "Java" `{ return self.getBoolean(key); `}
 	fun get_boolean_with_def_value(key: JavaString, def_value: Bool): Bool in "Java" `{
-		return recv.getBoolean(key, def_value); 
+		return self.getBoolean(key, def_value);
 	`}
-	fun get_byte(key: JavaString): Int in "Java" `{ return recv.getByte(key); `}
-	fun get_byte_with_def_value(key: JavaString, def_value: Int): Int in "Java" `{ 
-		return recv.getByte(key, (byte) def_value); 
+	fun get_byte(key: JavaString): Int in "Java" `{ return self.getByte(key); `}
+	fun get_byte_with_def_value(key: JavaString, def_value: Int): Int in "Java" `{
+		return self.getByte(key, (byte) def_value);
 	`}
 	# FIXME: Java's `char` are encoded on 16-bits whereas Nit's are on 8-bits.
-	fun get_char(key: JavaString): Char in "Java" `{ return recv.getChar(key); `}
+	fun get_char(key: JavaString): Char in "Java" `{ return self.getChar(key); `}
 	# FIXME: Java's `char` are encoded on 16-bits whereas Nit's are on 8-bits.
 	fun get_char_with_def_value(key: JavaString, def_value: Char): Char in "Java" `{
-		return recv.getChar(key, def_value); 
+		return self.getChar(key, def_value);
 	`}
-	fun get_short(key: JavaString): Int in "Java" `{ return (short) recv.getShort(key); `}
+	fun get_short(key: JavaString): Int in "Java" `{ return (short) self.getShort(key); `}
 	fun get_short_with_def_value(key: JavaString, def_value: Int): Int in "Java" `{
-		return (short) recv.getShort(key, (short) def_value); 
+		return (short) self.getShort(key, (short) def_value);
 	`}
-	fun get_int(key: JavaString): Int in "Java" `{ return recv.getInt(key); `}
+	fun get_int(key: JavaString): Int in "Java" `{ return self.getInt(key); `}
 	fun get_int_with_def_value(key: JavaString, def_value: Int): Int in "Java" `{
-		return recv.getInt(key, (int) def_value);
+		return self.getInt(key, (int) def_value);
 	`}
-	fun get_long(key: JavaString): Int in "Java" `{ return recv.getLong(key); `}
+	fun get_long(key: JavaString): Int in "Java" `{ return self.getLong(key); `}
 	fun get_long_with_def_value(key: JavaString, def_value: Int): Int in "Java" `{
-		return recv.getLong(key); 
+		return self.getLong(key);
 	`}
 	fun get_float(key: JavaString): Float in "Java" `{
-		return (float) recv.getFloat(key); 
+		return (float) self.getFloat(key);
 	`}
 	fun get_float_with_def_value(key: JavaString, def_value: Float): Float in "Java" `{
-		return (float) recv.getFloat(key, (float) def_value);
+		return (float) self.getFloat(key, (float) def_value);
 	`}
-	fun get_double(key: JavaString): Float in "Java" `{ return recv.getDouble(key); `}
-	fun get_double_with_def_value(key: JavaString, def_value: Float): Float in "Java" `{ 
-		return recv.getDouble(key, def_value); 
+	fun get_double(key: JavaString): Float in "Java" `{ return self.getDouble(key); `}
+	fun get_double_with_def_value(key: JavaString, def_value: Float): Float in "Java" `{
+		return self.getDouble(key, def_value);
 	`}
 	fun get_string(key: JavaString): JavaString in "Java" `{
-		return recv.getString(key);
+		return self.getString(key);
 	`}
 	fun get_char_sequence(key: JavaString): JavaString in "Java" `{
-		return (String) recv.getCharSequence(key); 
+		return (String) self.getCharSequence(key);
 	`}
 	fun get_bundle(key: JavaString): NativeBundle in "Java" `{
-		return recv.getBundle(key); 
+		return self.getBundle(key);
 	`}
 	fun get_integer_array_list(key: JavaString): Array[Int]
 		import Array[Int], Array[Int].add in "Java" `{
-		ArrayList<Integer> java_array = recv.getIntegerArrayList(key); 
+		ArrayList<Integer> java_array = self.getIntegerArrayList(key);
 		int nit_array = new_Array_of_Int();
 
 		if (java_array == null) return nit_array;
@@ -268,7 +268,7 @@ extern class NativeBundle in "Java" `{ android.os.Bundle `}
 	`}
 	fun get_string_array_list(key: JavaString): Array[String]
 		import StringCopyArray, StringCopyArray.add, StringCopyArray.collection in "Java" `{
-		ArrayList<String> java_array = recv.getStringArrayList(key); 
+		ArrayList<String> java_array = self.getStringArrayList(key);
 		int nit_array = new_StringCopyArray();
 
 		if (java_array == null) return nit_array;
@@ -280,7 +280,7 @@ extern class NativeBundle in "Java" `{ android.os.Bundle `}
 	`}
 	fun get_char_sequence_array_list(key: JavaString): Array[String]
 		import StringCopyArray, StringCopyArray.add, StringCopyArray.collection in "Java" `{
-		ArrayList<CharSequence> java_array = recv.getCharSequenceArrayList(key); 
+		ArrayList<CharSequence> java_array = self.getCharSequenceArrayList(key);
 		int nit_array = new_StringCopyArray();
 
 		if (java_array == null) return nit_array;
@@ -291,8 +291,8 @@ extern class NativeBundle in "Java" `{ android.os.Bundle `}
 		return StringCopyArray_collection(nit_array);
 	`}
 	fun get_boolean_array(key: JavaString): Array[Bool]
-		import Array[Bool], Array[Bool].add in "Java" `{ 
-		boolean[] java_array = recv.getBooleanArray(key); 
+		import Array[Bool], Array[Bool].add in "Java" `{
+		boolean[] java_array = self.getBooleanArray(key);
 		int nit_array = new_Array_of_Bool();
 
 		if (java_array == null) return nit_array;
@@ -303,123 +303,123 @@ extern class NativeBundle in "Java" `{ android.os.Bundle `}
 		return nit_array;
 	`}
 	fun get_byte_array(key: JavaString): Array[Int]
-		import Array[Int], Array[Int].add in "Java" `{ 
-		byte[] java_array = recv.getByteArray(key); 
+		import Array[Int], Array[Int].add in "Java" `{
+		byte[] java_array = self.getByteArray(key);
 		int nit_array = new_Array_of_Int();
-		
+
 		if (java_array == null) return nit_array;
 
 		for(int i=0; i < java_array.length; ++i)
 			Array_of_Int_add(nit_array, java_array[i]);
-			
+
 		return nit_array;
 	`}
 	fun get_short_array(key: JavaString): Array[Int]
-		import Array[Int], Array[Int].add in "Java" `{ 
-		short[] java_array = recv.getShortArray(key); 
+		import Array[Int], Array[Int].add in "Java" `{
+		short[] java_array = self.getShortArray(key);
 		int nit_array = new_Array_of_Int();
-		
+
 		if (java_array == null) return nit_array;
 
 		for(int i=0; i < java_array.length; ++i)
 			Array_of_Int_add(nit_array, java_array[i]);
-			
+
 		return nit_array;
 	`}
 	# FIXME: Java's `char` are encoded on 16-bits whereas Nit's are on 8-bits.
 	fun get_char_array(key: JavaString): Array[Char]
-		import Array[Char], Array[Char].add in "Java" `{ 
-		char[] java_array = recv.getCharArray(key); 
+		import Array[Char], Array[Char].add in "Java" `{
+		char[] java_array = self.getCharArray(key);
 		int nit_array = new_Array_of_Char();
-		
+
 		if (java_array == null) return nit_array;
 
 		for(int i=0; i < java_array.length; ++i)
 			Array_of_Char_add(nit_array, java_array[i]);
-			
+
 		return nit_array;
 	`}
 	fun get_int_array(key: JavaString): Array[Int]
-		import Array[Int], Array[Int].add in "Java" `{ 
-		int[] java_array = recv.getIntArray(key); 
+		import Array[Int], Array[Int].add in "Java" `{
+		int[] java_array = self.getIntArray(key);
 		int nit_array = new_Array_of_Int();
-		
+
 		if (java_array == null) return nit_array;
 
 		for(int i=0; i < java_array.length; ++i)
 			Array_of_Int_add(nit_array, java_array[i]);
-			
+
 		return nit_array;
 	`}
 	# FIXME: Get rid of the int cast as soon as the ffi is fixed
 	fun get_long_array(key: JavaString): Array[Int]
-		import Array[Int], Array[Int].add in "Java" `{ 
-		long[] java_array = recv.getLongArray(key); 
+		import Array[Int], Array[Int].add in "Java" `{
+		long[] java_array = self.getLongArray(key);
 		int nit_array = new_Array_of_Int();
-		
+
 		if (java_array == null) return nit_array;
 
 		for(int i=0; i < java_array.length; ++i)
 			Array_of_Int_add(nit_array, java_array[i]);
-			
+
 		return nit_array;
 	`}
 	fun get_float_array(key: JavaString): Array[Float]
-		import Array[Float], Array[Float].add in "Java" `{ 
-		float[] java_array = recv.getFloatArray(key); 
+		import Array[Float], Array[Float].add in "Java" `{
+		float[] java_array = self.getFloatArray(key);
 		int nit_array = new_Array_of_Float();
-		
+
 		if (java_array == null) return nit_array;
 
 		for(int i=0; i < java_array.length; ++i)
 		Array_of_Float_add(nit_array, (double) java_array[i]);
-			
+
 		return nit_array;
 	`}
 	fun get_double_array(key: JavaString): Array[Float]
-		import Array[Float], Array[Float].add in "Java" `{ 
-		double[] java_array = recv.getDoubleArray(key); 
+		import Array[Float], Array[Float].add in "Java" `{
+		double[] java_array = self.getDoubleArray(key);
 		int nit_array = new_Array_of_Float();
-		
+
 		if (java_array == null) return nit_array;
 
 		for(int i=0; i < java_array.length; ++i)
 			Array_of_Float_add(nit_array, java_array[i]);
-			
+
 		return nit_array;
 	`}
 	fun get_string_array(key: JavaString): Array[String]
 		import StringCopyArray, StringCopyArray.add, StringCopyArray.collection in "Java" `{
-		String[] java_array = recv.getStringArray(key); 
+		String[] java_array = self.getStringArray(key);
 		int nit_array = new_StringCopyArray();
-		
+
 		if (java_array == null) return nit_array;
 
 		for(int i=0; i < java_array.length; ++i)
 			StringCopyArray_add(nit_array, java_array[i]);
-			
+
 		return StringCopyArray_collection(nit_array);
 	`}
 	fun get_char_sequence_array(key: JavaString): Array[String]
 		import StringCopyArray, StringCopyArray.add, StringCopyArray.collection in "Java" `{
-		CharSequence[] java_array = recv.getCharSequenceArray(key); 
+		CharSequence[] java_array = self.getCharSequenceArray(key);
 		int nit_array = new_StringCopyArray();
-		
+
 		if (java_array == null) return nit_array;
 
 		for(int i=0; i < java_array.length; ++i)
 			StringCopyArray_add(nit_array, (String)java_array[i]);
-			
+
 		return StringCopyArray_collection(nit_array);
 	`}
-	fun describe_contents: Int in "Java" `{ return recv.describeContents(); `}
-	fun to_string: JavaString in "Java" `{ return recv.toString(); `}
+	fun describe_contents: Int in "Java" `{ return self.describeContents(); `}
+	fun to_string: JavaString in "Java" `{ return self.toString(); `}
 
 	# HACK for bug #845
 	redef fun new_global_ref import sys, Sys.jni_env `{
-		Sys sys = NativeBundle_sys(recv);
+		Sys sys = NativeBundle_sys(self);
 		JNIEnv *env = Sys_jni_env(sys);
-		return (*env)->NewGlobalRef(env, recv);
+		return (*env)->NewGlobalRef(env, self);
 	`}
 end
 
@@ -438,7 +438,7 @@ class Bundle
 		sys.jni_env.pop_local_frame
 		return return_value
 	end
-		
+
 	# Returns the number of entries in the current `Bundle`
 	fun size: Int do return native_bundle.size
 
@@ -470,27 +470,27 @@ class Bundle
 		return string_set
 	end
 
-	# Add key-value information by dynamically choosing the appropriate 
+	# Add key-value information by dynamically choosing the appropriate
 	# java method according to value type
-	# If there's already a value associated with this key, the new value 
+	# If there's already a value associated with this key, the new value
 	# overwrites it
 	#
 	# To retrieve entries, you'll have to call the type corresponding method
-	# conforming to these rules :
+	# conforming to these rules:
 	#
 	# | Nit type              | corresponding getter            |
 	# |:----------------------|:--------------------------------|
-	# ! `Int`                 | `long`                          |
+	# | `Int`                 | `long`                          |
 	# | `Float`               | `double`                        |
 	# | `Bool`                | `bool`                          |
 	# | `Char`                | `char`                          |
-	# ! `String`              | `string`                        |
-	# ! `Serializable`        | `deserialize`                   |
-	# ! `Array[Int]`          | `array_of_long`                 |
-	# ! `Array[Float]`        | `array_of_double`               |
-	# ! `Array[Bool]`         | `array_of_bool`                 |
-	# ! `Array[Char]`         | `array_of_char`                 |
-	# ! `Array[String]`       | `array_of_string`               |
+	# | `String`              | `string`                        |
+	# | `Serializable`        | `deserialize`                   |
+	# | `Array[Int]`          | `array_of_long`                 |
+	# | `Array[Float]`        | `array_of_double`               |
+	# | `Array[Bool]`         | `array_of_bool`                 |
+	# | `Array[Char]`         | `array_of_char`                 |
+	# | `Array[String]`       | `array_of_string`               |
 	# | `Array[Serializable]` | `deserialize_array`             |
 	fun []=(key: String, value: Serializable): Bundle
 	do
@@ -503,7 +503,7 @@ class Bundle
 	# Retrieve an `Object` serialized via `[]=` function
 	# Returns `null` if there's no serialized object corresponding to the given key
 	# or if it's the wrong value type
-	# Make sure that the serialized object is `auto_serializable` or that it 
+	# Make sure that the serialized object is `auto_serializable` or that it
 	# redefines the appropriate methods. Refer to `Serializable` documentation
 	# for further details
 	fun deserialize(key: String): nullable Object
@@ -520,7 +520,7 @@ class Bundle
 	# Retrieve an `Array` of `Object` serialized via `[]=` function
 	# Returns `null` if there's no serialized `Array` corresponding to the given key
 	# or if it's the wrong value type
-	# Make sure that the serialized objects are `auto_serializable` or that they 
+	# Make sure that the serialized objects are `auto_serializable` or that they
 	# redefine the appropriate methods. Refer to `Serializable` documentation
 	# for further details
 	fun deserialize_array(key: String): nullable Array[nullable Object]
@@ -557,7 +557,7 @@ class Bundle
 	fun bool(key: String, def_value: Bool): Bool
 	do
 		sys.jni_env.push_local_frame(1)
-		var return_value = 
+		var return_value =
 			native_bundle.get_boolean_with_def_value(key.to_java_string, def_value)
 		sys.jni_env.pop_local_frame
 		return return_value
@@ -569,7 +569,7 @@ class Bundle
 	fun char(key: String, def_value: Char): Char
 	do
 		sys.jni_env.push_local_frame(1)
-		var return_value = 
+		var return_value =
 			native_bundle.get_char_with_def_value(key.to_java_string, def_value)
 		sys.jni_env.pop_local_frame
 		return return_value
@@ -580,18 +580,18 @@ class Bundle
 	fun int(key: String, def_value: Int): Int
 	do
 		sys.jni_env.push_local_frame(1)
-		var return_value = 
+		var return_value =
 			native_bundle.get_long_with_def_value(key.to_java_string, def_value)
 		sys.jni_env.pop_local_frame
 		return return_value
 	end
-	
+
 	# Retrieves the `Float` value corresponding to the given key
 	# Returns the `def_value` if none or if it's the wrong value type
 	fun float(key: String, def_value: Float): Float
 	do
 		sys.jni_env.push_local_frame(1)
-		var return_value = 
+		var return_value =
 			native_bundle.get_double_with_def_value(key.to_java_string, def_value)
 		sys.jni_env.pop_local_frame
 		return return_value
@@ -657,7 +657,7 @@ class Bundle
 
 		var return_value = native_bundle.get_string_array(key.to_java_string)
 		sys.jni_env.pop_local_frame
-		
+
 		if return_value.is_empty then return null
 
 		return return_value
@@ -728,7 +728,7 @@ redef class Array[E]
 			bundle.put_char_array(key, self)
 		else if self isa Array[String] then
 			sys.jni_env.push_local_frame(self.length)
-			var java_string_array = new Array[JavaString] 
+			var java_string_array = new Array[JavaString]
 
 			for element in self do
 				java_string_array.push(element.to_s.to_java_string)

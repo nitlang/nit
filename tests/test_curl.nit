@@ -99,7 +99,7 @@ assert infoResp:info != null
 info = curl.easy_getinfo_long(new CURLInfoLong.rtsp_server_cseq)
 assert infoResp:info != null
 
-info = curl.easy_getinfo_long(new CURLInfoLong.rtsp_cseq_recv)
+info = curl.easy_getinfo_long(new CURLInfoLong.rtsp_cseq_self)
 assert infoResp:info != null
 
 # Double

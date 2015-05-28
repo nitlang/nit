@@ -24,7 +24,7 @@ in "Java" `{
 `}
 
 redef extern class NativeIntent
-	fun selector=(selector: NativeIntent) in "Java" `{ recv.setSelector(selector); `}
+	fun selector=(selector: NativeIntent) in "Java" `{ self.setSelector(selector); `}
 end
 
 redef class Category

@@ -85,7 +85,7 @@ class CPPLanguage
 		# Will convert C arguments to C++ and call the C++ implementation function.
 		fc = new CFunction(indirection_sig)
 		if not mproperty.is_init then
-			var param_name = "recv"
+			var param_name = "self"
 			var type_name = to_cpp_call_context.name_mtype(mclass_type)
 			if mclass_type.mclass.ftype isa ForeignCppType then
 				fc.exprs.add("{type_name} {param_name}_for_cpp = static_cast<{type_name}>({param_name});\n")

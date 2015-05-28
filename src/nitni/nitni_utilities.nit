@@ -72,7 +72,7 @@ redef class MMethod
 
 		var cparams = new List[String]
 		if not self.is_init then
-			cparams.add( "{call_context.name_mtype(recv_mtype)} recv" )
+			cparams.add( "{call_context.name_mtype(recv_mtype)} self" )
 		end
 		for p in signature.mparameters do
 			var param_mtype = p.mtype.resolve_for(recv_mtype, recv_mtype, from_mmodule, true)
@@ -110,7 +110,7 @@ redef class MMethod
 
 		var cparams = new List[String]
 		if not self.is_init then
-			cparams.add(call_context.cast_to(recv_mtype, "recv{param_suffix}"))
+			cparams.add(call_context.cast_to(recv_mtype, "self{param_suffix}"))
 		end
 
 		for p in signature.mparameters do

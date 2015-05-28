@@ -29,36 +29,36 @@ extern class GtkCalendar `{GtkCalendar *`}
 	`}
 
 	fun month=(month: Int, year: Int) `{
-		gtk_calendar_select_month(recv, month, year);
+		gtk_calendar_select_month(self, month, year);
 	`}
 
 	fun day=(day: Int) `{
-		gtk_calendar_select_day(recv, day);
+		gtk_calendar_select_day(self, day);
 	`}
 
 	fun mark_day(day: Int) `{
-		gtk_calendar_mark_day(recv, day);
+		gtk_calendar_mark_day(self, day);
 	`}
 
 	fun unmark_day(day: Int) `{
-		gtk_calendar_unmark_day(recv, day);
+		gtk_calendar_unmark_day(self, day);
 	`}
 
 	fun is_marked(day: Int): Bool `{
-		return gtk_calendar_get_day_is_marked(recv, day);
+		return gtk_calendar_get_day_is_marked(self, day);
 	`}
 
    fun clear_marks `{
-		gtk_calendar_clear_marks(recv);
+		gtk_calendar_clear_marks(self);
 	`}
 
 	fun display_options: GtkCalendarDisplayOptions `{
-		return gtk_calendar_get_display_options(recv);
+		return gtk_calendar_get_display_options(self);
 	`}
 
 
 	fun display_options=(options: GtkCalendarDisplayOptions) `{
-		gtk_calendar_set_display_options(recv, options);
+		gtk_calendar_set_display_options(self, options);
 	`}
 
 	# date en nit...
@@ -96,47 +96,47 @@ extern class GtkProgressBar `{GtkProgressBar *`}
 	`}
 
 	fun pulse `{
-		gtk_progress_bar_pulse(recv);
+		gtk_progress_bar_pulse(self);
 	`}
 
 	fun pulse_step: Float `{
-		return gtk_progress_bar_get_pulse_step(recv);
+		return gtk_progress_bar_get_pulse_step(self);
 	`}
 
 	fun pulse_step=(step: Float) `{
-		gtk_progress_bar_set_pulse_step(recv, step);
+		gtk_progress_bar_set_pulse_step(self, step);
 	`}
 
 	fun fraction: Float `{
-		return gtk_progress_bar_get_fraction(recv);
+		return gtk_progress_bar_get_fraction(self);
 	`}
 
 	fun fraction=(fraction: Float) `{
-		gtk_progress_bar_set_fraction(recv, fraction);
+		gtk_progress_bar_set_fraction(self, fraction);
 	`}
 
 	fun inverted: Bool `{
-		return gtk_progress_bar_get_inverted(recv);
+		return gtk_progress_bar_get_inverted(self);
 	`}
 
 	fun inverted=(is_inverted: Bool) `{
-		gtk_progress_bar_set_inverted(recv, is_inverted);
+		gtk_progress_bar_set_inverted(self, is_inverted);
 	`}
 
 	fun show_text: Bool `{
-		return gtk_progress_bar_get_show_text(recv);
+		return gtk_progress_bar_get_show_text(self);
 	`}
 
 	fun show_text=(show: Bool) `{
-		gtk_progress_bar_set_show_text(recv, show);
+		gtk_progress_bar_set_show_text(self, show);
 	`}
 
 	fun text: String import NativeString.to_s `{
-		return NativeString_to_s((char *)gtk_progress_bar_get_text(recv));
+		return NativeString_to_s((char *)gtk_progress_bar_get_text(self));
 	`}
 
 	fun text=(value: String) import String.to_cstring `{
-		gtk_progress_bar_set_text(recv, String_to_cstring(value));
+		gtk_progress_bar_set_text(self, String_to_cstring(value));
 	`}
 
 	fun ellipsize is abstract
@@ -150,11 +150,11 @@ extern class GtkColorSelectionDialog
 	`}
 
 	# fun color_selection:  `{
-	#	return gtk_color_selection_dialog_get_color_selection(GTK_COLOR_SELECTION_DIALOG(recv));
+	#	return gtk_color_selection_dialog_get_color_selection(GTK_COLOR_SELECTION_DIALOG(self));
 	# `}
 
 	# fun color: Float `{
-	#	return gtk_color_selection_dialog_get_color_selection(GTK_COLOR_SELECTION_DIALOG(recv));
+	#	return gtk_color_selection_dialog_get_color_selection(GTK_COLOR_SELECTION_DIALOG(self));
 	# `}
 end
 
@@ -172,35 +172,35 @@ extern class GtkSpinButton `{GtkSpinButton *`}
 	`}
 
 	fun configure (adjustment: GtkAdjustment, climb_rate: Float, digits: Int) `{
-		gtk_spin_button_configure(recv, adjustment, climb_rate, digits);
+		gtk_spin_button_configure(self, adjustment, climb_rate, digits);
 	`}
 
 	fun adjustment: GtkAdjustment `{
-		return gtk_spin_button_get_adjustment(recv);
+		return gtk_spin_button_get_adjustment(self);
 	`}
 
 	fun adjustment=(value: GtkAdjustment) `{
-		gtk_spin_button_set_adjustment(recv, value);
+		gtk_spin_button_set_adjustment(self, value);
 	`}
 
 	fun digits: Int `{
-		return gtk_spin_button_get_digits(recv);
+		return gtk_spin_button_get_digits(self);
 	`}
 
 	fun digits=(nb_digits: Int) `{
-		gtk_spin_button_set_digits(recv, nb_digits);
+		gtk_spin_button_set_digits(self, nb_digits);
 	`}
 
 	fun value: Float `{
-		return gtk_spin_button_get_value(recv);
+		return gtk_spin_button_get_value(self);
 	`}
 
 	fun val=(val: Float) `{
-		gtk_spin_button_set_value(recv, val);
+		gtk_spin_button_set_value(self, val);
 	`}
 
 	fun spin(direction: GtkSpinType, increment: Float)`{
-		gtk_spin_button_spin(recv, direction, increment);
+		gtk_spin_button_spin(self, direction, increment);
 	`}
 end
 

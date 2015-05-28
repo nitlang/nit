@@ -221,7 +221,7 @@ redef class App
 		int event;
 		void* source;
 		while ((ident=ALooper_pollAll(timeout_ms, NULL, &event, &source)) >= 0) {
-			App_handle_looper_event(recv, ident, event, source);
+			App_handle_looper_event(self, ident, event, source);
 		}
 	`}
 
@@ -231,7 +231,7 @@ redef class App
 		destroy, start, resume, low_memory, config_changed, input_changed,
 		window_resized, window_redraw_needed, content_rect_changed `{
 
-		struct android_app *app_glue = App_native_app_glue(recv);
+		struct android_app *app_glue = App_native_app_glue(self);
 		struct android_poll_source* source = (struct android_poll_source*)data;
 
 		// Process this event.
@@ -251,33 +251,33 @@ extern class NdkNativeActivity `{ ANativeActivity * `}
 	#fun set_callbacks_handler(handler: App) or callbacks= ...
 
 	# Java VM associated to `self`
-	fun vm: JavaVM `{ return recv->vm; `}
+	fun vm: JavaVM `{ return self->vm; `}
 
 	# JNI environmnet associated to `self`
-	fun env: JniEnv `{ return recv->env; `}
+	fun env: JniEnv `{ return self->env; `}
 
 	# The `NativeActivity`, as in the Java object, associated to `self`
-	fun java_native_activity: NativeActivity `{ return recv->clazz; `}
+	fun java_native_activity: NativeActivity `{ return self->clazz; `}
 
 	# Path to this application's internal data directory.
-	fun internal_data_path: NativeString `{ return (char*)recv->internalDataPath; `}
+	fun internal_data_path: NativeString `{ return (char*)self->internalDataPath; `}
 
 	# Path to this application's external (removable/mountable) data directory.
-	fun external_data_path: NativeString `{ return (char*)recv->externalDataPath; `}
+	fun external_data_path: NativeString `{ return (char*)self->externalDataPath; `}
 
 	# The platform's SDK version code.
-	fun sdk_version: Int `{ return recv->sdkVersion; `}
+	fun sdk_version: Int `{ return self->sdkVersion; `}
 
 	# This is the native instance of the application.  It is not used by
 	# the framework, but can be set by the application to its own instance
 	# state.
-	fun instance: Pointer `{ return recv->instance; `}
+	fun instance: Pointer `{ return self->instance; `}
 
 	# Pointer to the Asset Manager instance for the application.  The application
 	# uses this to access binary assets bundled inside its own .apk file.
 	#
 	# TODO activate in a future `asset_manager` module if it cannot be done in Java
-	#fun asset_manager: AssetManager `{ return recv->assetManager; `}
+	#fun asset_manager: AssetManager `{ return self->assetManager; `}
 
 	# Available starting with Honeycomb: path to the directory containing
 	# the application's OBB files (if any).  If the app doesn't have any
@@ -285,7 +285,7 @@ extern class NdkNativeActivity `{ ANativeActivity * `}
 	# api?
 	#
 	# TODO activate in a future module at API 11
-	#fun obb_path: NativeString `{ return (char*)recv->obbPath; `}
+	#fun obb_path: NativeString `{ return (char*)self->obbPath; `}
 end
 
 # This is the interface for the standard glue code of a threaded
@@ -297,10 +297,10 @@ end
 extern class NativeAppGlue `{ struct android_app* `}
 	# We use the `userData` field of the C structure to store an handle to
 	# the associated App
-	private fun user_data: App `{ return recv->userData; `}
+	private fun user_data: App `{ return self->userData; `}
 	private fun user_data=(val: App) `{
 		App_incr_ref(val);
-		recv->userData = val;
+		self->userData = val;
 	`}
 
 	# Fill this in with the function to process input events.  At this point
@@ -311,10 +311,10 @@ extern class NativeAppGlue `{ struct android_app* `}
 	#fun set_input_event_handler(handler: App) `{  `}
 
 	# The ANativeActivity object instance that this app is running in.
-	fun ndk_native_activity: NdkNativeActivity `{ return recv->activity; `}
+	fun ndk_native_activity: NdkNativeActivity `{ return self->activity; `}
 
 	# The current configuration the app is running in.
-	fun config: AConfiguration `{ return recv->config; `}
+	fun config: AConfiguration `{ return self->config; `}
 
 	# This is the last instance's saved state, as provided at creation time.
 	# It is NULL if there was no state.  You can use this as you need; the
@@ -324,32 +324,32 @@ extern class NativeAppGlue `{ struct android_app* `}
 	# at which point they will be initialized to NULL and you can malloc your
 	# state and place the information here.  In that case the memory will be
 	# freed for you later.
-	fun saved_state: Pointer `{ return recv->savedState; `}
-	fun saved_state_size: Int `{ return recv->savedStateSize; `}
+	fun saved_state: Pointer `{ return self->savedState; `}
+	fun saved_state_size: Int `{ return self->savedStateSize; `}
 
 	# The ALooper associated with the app's thread.
-	fun looper: ALooper `{ return recv->looper; `}
+	fun looper: ALooper `{ return self->looper; `}
 
 	# When non-NULL, this is the input queue from which the app will
 	# receive user input events.
-	fun input_queue: AInputQueue `{ return recv->inputQueue; `}
+	fun input_queue: AInputQueue `{ return self->inputQueue; `}
 
 	# When non-NULL, this is the window surface that the app can draw in.
-	fun window: ANativeWindow `{ return recv->window; `}
+	fun window: ANativeWindow `{ return self->window; `}
 
 	# Current content rectangle of the window; this is the area where the
 	# window's content should be placed to be seen by the user.
 	#
 	# TODO activate when we know what to return (returns a struct not a pointer)
-	#fun content_recv: ARect `{ return recv->contentRect; `}
+	#fun content_self: ARect `{ return self->contentRect; `}
 
 	# Current state of the app's activity.  May be either APP_CMD_START,
 	# APP_CMD_RESUME, APP_CMD_PAUSE, or APP_CMD_STOP; see below.
-	fun activity_state: Int `{ return recv->activityState; `}
+	fun activity_state: Int `{ return self->activityState; `}
 
 	# This is non-zero when the application's NativeActivity is being
 	# destroyed and waiting for the app thread to complete.
-	fun detroy_request: Bool `{ return recv->destroyRequested; `}
+	fun detroy_request: Bool `{ return self->destroyRequested; `}
 end
 
 # Android NDK's struture holding configurations of the native app

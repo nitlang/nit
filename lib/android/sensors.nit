@@ -45,15 +45,15 @@ in "C header" `{
 
 extern class ASensorType `{int`}
 	new accelerometer: ASensorType `{return ASENSOR_TYPE_ACCELEROMETER;`}
-	fun is_accelerometer: Bool `{return recv == ASENSOR_TYPE_ACCELEROMETER;`}
+	fun is_accelerometer: Bool `{return self == ASENSOR_TYPE_ACCELEROMETER;`}
 	new magnetic_field: ASensorType `{return ASENSOR_TYPE_MAGNETIC_FIELD;`}
-	fun is_magnetic_field: Bool `{return recv == ASENSOR_TYPE_MAGNETIC_FIELD;`}
+	fun is_magnetic_field: Bool `{return self == ASENSOR_TYPE_MAGNETIC_FIELD;`}
 	new gyroscope:ASensorType `{return ASENSOR_TYPE_GYROSCOPE;`}
-	fun is_gyroscope: Bool `{ return recv == ASENSOR_TYPE_GYROSCOPE;`}
+	fun is_gyroscope: Bool `{ return self == ASENSOR_TYPE_GYROSCOPE;`}
 	new light: ASensorType `{return ASENSOR_TYPE_LIGHT;`}
-	fun is_light: Bool `{return recv == ASENSOR_TYPE_LIGHT;`}
+	fun is_light: Bool `{return self == ASENSOR_TYPE_LIGHT;`}
 	new proximity: ASensorType `{return ASENSOR_TYPE_PROXIMITY;`}
-	fun is_proximity:Bool `{return recv == ASENSOR_TYPE_PROXIMITY;`}
+	fun is_proximity:Bool `{return self == ASENSOR_TYPE_PROXIMITY;`}
 end
 
 # Manages the sensors
@@ -64,23 +64,23 @@ extern class ASensorManager `{ASensorManager*`}
 	# Returns the list of available sensors
 	fun get_sensor_list: Pointer `{
 		ASensorList *list;
-		ASensorManager_getSensorList(recv, list);
+		ASensorManager_getSensorList(self, list);
 		return list;
 	`}
 
 	# Create a new sensor event queue and associate it with a looper
 	fun create_event_queue(app: NativeAppGlue): ASensorEventQueue `{
-		return ASensorManager_createEventQueue(recv, app->looper, LOOPER_ID_USER, NULL, NULL);
+		return ASensorManager_createEventQueue(self, app->looper, LOOPER_ID_USER, NULL, NULL);
 	`}
 
 	# Returns the default sensor of the given type
 	fun get_default_sensor(sensortype: ASensorType): ASensor `{
-		return ASensorManager_getDefaultSensor(recv, sensortype);
+		return ASensorManager_getDefaultSensor(self, sensortype);
 	`}
 
 	# Destroys the event queue and free all resources associated to it
 	fun destroy_event_queue(queue: ASensorEventQueue) `{
-		ASensorManager_destroyEventQueue(recv, queue);
+		ASensorManager_destroyEventQueue(self, queue);
 	`}
 end
 
@@ -89,29 +89,29 @@ extern class ASensorEventQueue `{ASensorEventQueue*`}
 
 	# Enable the selected sensor, returns a negative value on error
 	fun enable_sensor(sensor: ASensor): Int `{
-		return ASensorEventQueue_enableSensor(recv, sensor);
+		return ASensorEventQueue_enableSensor(self, sensor);
 	`}
 
 	# Disable the selected sensor, returns a negative value on error
 	fun disable_sensor(sensor: ASensor): Int `{
-		return ASensorEventQueue_disableSensor(recv, sensor);
+		return ASensorEventQueue_disableSensor(self, sensor);
 	`}
 
 	# Set the delivery rate of events in microseconds for the given sensor
 	fun set_event_rate(sensor: ASensor, usec: Int): Int `{
-		return ASensorEventQueue_setEventRate(recv, sensor, usec);
+		return ASensorEventQueue_setEventRate(self, sensor, usec);
 	`}
 	# Returns 1 if the queue has events, 0 if it does not have events,
 	# and a negative value if there is an error
 	fun has_events: Int `{
-		return ASensorEventQueue_hasEvents(recv);
+		return ASensorEventQueue_hasEvents(self);
 	`}
 
 	# Returns the next available events from the queue.
 	# Returns a negative value if no events are available or an error has occured
 	# otherwise the number of events returned
 	fun get_events(events: ASensorEvents, count: Int): Int `{
-		return ASensorEventQueue_getEvents(recv, events, (size_t)count);
+		return ASensorEventQueue_getEvents(self, events, (size_t)count);
 	`}
 end
 
@@ -119,11 +119,11 @@ end
 extern class ASensor `{ASensorRef`}
 
 	new  `{return malloc(sizeof(ASensorRef));`}
-	fun name: NativeString `{return (char*)ASensor_getName(recv);`}
-	fun vendor: NativeString `{return (char*)ASensor_getVendor(recv);`}
-	fun sensor_type: ASensorType `{return ASensor_getType(recv);`}
-	fun resolution: Float `{return ASensor_getResolution(recv);`}
-	fun min_delay: Int `{return ASensor_getMinDelay(recv);`}
+	fun name: NativeString `{return (char*)ASensor_getName(self);`}
+	fun vendor: NativeString `{return (char*)ASensor_getVendor(self);`}
+	fun sensor_type: ASensorType `{return ASensor_getType(self);`}
+	fun resolution: Float `{return ASensor_getResolution(self);`}
+	fun min_delay: Int `{return ASensor_getMinDelay(self);`}
 end
 
 # NIT representation of an Android Sensor used in android_app to initialize sensors
@@ -144,77 +144,77 @@ end
 extern class ASensorEvent `{ASensorEvent*`}
 		super SensorEvent
 
-	fun version: Int `{return recv->version;`}
-	fun sensor: ASensor `{return (ASensorRef)recv->sensor;`}
-	fun sensor_type: ASensorType `{return recv->type;`}
-	fun timestamp: Int `{return recv->timestamp;`}
+	fun version: Int `{return self->version;`}
+	fun sensor: ASensor `{return (ASensorRef)self->sensor;`}
+	fun sensor_type: ASensorType `{return self->type;`}
+	fun timestamp: Int `{return self->timestamp;`}
 end
 
 extern class FullSensor `{ASensorEvent*`}
 		super ASensorLight
 		super ASensorProximity
 
-	fun temperature: Float `{return recv->temperature;`}
-	fun pressure: Float `{return recv->pressure;`}
-	fun data: Pointer `{return recv->data;`}
-	fun vector: ASensorVector `{return &(recv->vector);`}
-	fun acceleration: ASensorVector `{return &(recv->acceleration);`}
-	fun magnetic: ASensorVector `{return &(recv->magnetic);`}
+	fun temperature: Float `{return self->temperature;`}
+	fun pressure: Float `{return self->pressure;`}
+	fun data: Pointer `{return self->data;`}
+	fun vector: ASensorVector `{return &(self->vector);`}
+	fun acceleration: ASensorVector `{return &(self->acceleration);`}
+	fun magnetic: ASensorVector `{return &(self->magnetic);`}
 end
 
 # Extern class referencing a ASensorVector, attribute of ASensorRef
 extern class ASensorVector `{ASensorVector*`}
 
-	fun v: Pointer `{return recv->v;`}
-	fun x: Float `{	return recv->x;`}
-	fun y: Float `{return recv->y;`}
-	fun z: Float `{return recv->z;`}
-	fun azimuth: Float `{return recv->azimuth;`}
-	fun pitch: Float `{return recv->pitch;`}
-	fun roll: Float `{return recv->roll;`}
-	fun status: Int `{return recv->status;`}
-	fun reserved: Pointer `{return recv->reserved;`}
+	fun v: Pointer `{return self->v;`}
+	fun x: Float `{	return self->x;`}
+	fun y: Float `{return self->y;`}
+	fun z: Float `{return self->z;`}
+	fun azimuth: Float `{return self->azimuth;`}
+	fun pitch: Float `{return self->pitch;`}
+	fun roll: Float `{return self->roll;`}
+	fun status: Int `{return self->status;`}
+	fun reserved: Pointer `{return self->reserved;`}
 end
 
 # Sensor event returned by the Accelerometer sensor
 extern class ASensorAccelerometer `{ASensorEvent*`}
 	super ASensorEvent
 
-	fun x: Float `{return recv->acceleration.x;`}
-	fun y: Float `{return recv->acceleration.y;`}
-	fun z: Float `{return recv->acceleration.z;`}
+	fun x: Float `{return self->acceleration.x;`}
+	fun y: Float `{return self->acceleration.y;`}
+	fun z: Float `{return self->acceleration.z;`}
 end
 
 # Sensor event returned by the Magnetic Field sensor
 extern class ASensorMagneticField `{ASensorEvent*`}
 	super ASensorEvent
 
-	fun x: Float `{return recv->magnetic.x;`}
-	fun y: Float `{return recv->magnetic.y;`}
-	fun z: Float `{	return recv->magnetic.z;`}
+	fun x: Float `{return self->magnetic.x;`}
+	fun y: Float `{return self->magnetic.y;`}
+	fun z: Float `{	return self->magnetic.z;`}
 end
 
 # Sensor event returned by the gyroscope sensor
 extern class ASensorGyroscope `{ASensorEvent*`}
 	super ASensorEvent
 
-	fun x: Float `{return recv->vector.x;`}
-	fun y: Float `{return recv->vector.y;`}
-	fun z: Float `{return recv->vector.y;`}
+	fun x: Float `{return self->vector.x;`}
+	fun y: Float `{return self->vector.y;`}
+	fun z: Float `{return self->vector.y;`}
 end
 
 # Sensor event returned by the Light sensor
 extern class ASensorLight `{ASensorEvent*`}
 	super ASensorEvent
 
-	fun light: Float `{return recv->light;`}
+	fun light: Float `{return self->light;`}
 end
 
 # sensor event returned by the Proximity Sensor
 extern class ASensorProximity `{ASensorEvent*`}
 	super ASensorEvent
 
-	fun distance: Float `{return recv->distance;`}
+	fun distance: Float `{return self->distance;`}
 end
 
 # Array of SensorEvents
@@ -223,7 +223,7 @@ extern class ASensorEvents `{ASensorEvent*`}
 	new (length: Int) `{return malloc(sizeof(ASensorEvent)*length);`}
 
 	fun [](index: Int): ASensorEvent `{
-		return recv+index;
+		return self+index;
 	`}
 end
 
@@ -341,26 +341,26 @@ redef class App
 			//maybe add a boolean to the app to know if we want to use Sensor API or ASensorEvent directly ...
 			ASensorEvent* events = malloc(sizeof(ASensorEvent)*10);
 			int nbevents;
-			ASensorEventQueue* queue = App_eventqueue(recv);
+			ASensorEventQueue* queue = App_eventqueue(self);
 			while((nbevents = ASensorEventQueue_getEvents(queue, events, 10)) > 0) {
 				int i;
 				for(i = 0; i < nbevents; i++){
 					ASensorEvent event = events[i];
 					switch (event.type) {
 						case ASENSOR_TYPE_ACCELEROMETER:
-							App_extern_input_sensor_accelerometer(recv, &event);
+							App_extern_input_sensor_accelerometer(self, &event);
 							break;
 						case ASENSOR_TYPE_MAGNETIC_FIELD:
-							App_extern_input_sensor_magnetic_field(recv, &event);
+							App_extern_input_sensor_magnetic_field(self, &event);
 							break;
 						case ASENSOR_TYPE_GYROSCOPE:
-							App_extern_input_sensor_gyroscope(recv, &event);
+							App_extern_input_sensor_gyroscope(self, &event);
 							break;
 						case ASENSOR_TYPE_LIGHT:
-							App_extern_input_sensor_light(recv, &event);
+							App_extern_input_sensor_light(self, &event);
 							break;
 						case ASENSOR_TYPE_PROXIMITY:
-							App_extern_input_sensor_proximity(recv, &event);
+							App_extern_input_sensor_proximity(self, &event);
 							break;
 					}
 				}

@@ -37,7 +37,7 @@ extern class XdgBasedir `{ xdgHandle* `}
 	fun is_valid: Bool do return not address_is_null
 
 	# Wipe handle of XDG data cache.
-	fun destroy `{ xdgWipeHandle(recv); `}
+	fun destroy `{ xdgWipeHandle(self); `}
 
 	# Update the data cache.
 	#
@@ -46,21 +46,21 @@ extern class XdgBasedir `{ xdgHandle* `}
 	# be used to access XDG data as it was before `update` was called.
 	#
 	# Returns `true` if the update was successful.
-	fun update: Bool `{ return xdgUpdateData(recv); `}
+	fun update: Bool `{ return xdgUpdateData(self); `}
 
 	# Base directory for user specific data files.
 	fun data_home: String import NativeString.to_s `{
-		return NativeString_to_s((char*)xdgDataHome(recv));
+		return NativeString_to_s((char*)xdgDataHome(self));
 	`}
 
 	# Base directory for user specific configuration files.
 	fun config_home: String import NativeString.to_s `{
-		return NativeString_to_s((char*)xdgConfigHome(recv));
+		return NativeString_to_s((char*)xdgConfigHome(self));
 	`}
 
 	# Base directory for user specific non-essential data files.
 	fun cache_home: String import NativeString.to_s `{
-		return NativeString_to_s((char*)xdgCacheHome(recv));
+		return NativeString_to_s((char*)xdgCacheHome(self));
 	`}
 
 	# Preference-ordered set of base directories to search for data files
@@ -68,7 +68,7 @@ extern class XdgBasedir `{ xdgHandle* `}
 	fun data_dirs: Array[String] do return native_data_dirs.to_string_array
 
 	private fun native_data_dirs: ConstPointer `{
-		return xdgDataDirectories(recv);
+		return xdgDataDirectories(self);
 	`}
 
 	# Preference-ordered set of base directories to search for data files
@@ -82,7 +82,7 @@ extern class XdgBasedir `{ xdgHandle* `}
 	end
 
 	private fun native_searchable_data_dirs: ConstPointer `{
-		return xdgSearchableDataDirectories(recv);
+		return xdgSearchableDataDirectories(self);
 	`}
 
 	# Preference-ordered set of base directories to search for configuration
@@ -90,7 +90,7 @@ extern class XdgBasedir `{ xdgHandle* `}
 	fun config_dirs: Array[String] do return native_config_dirs.to_string_array
 
 	private fun native_config_dirs: ConstPointer `{
-		return xdgConfigDirectories(recv);
+		return xdgConfigDirectories(self);
 	`}
 
 	# Preference-ordered set of base directories to search for configuration
@@ -104,7 +104,7 @@ extern class XdgBasedir `{ xdgHandle* `}
 	end
 
 	private fun native_searchable_config_dirs: ConstPointer `{
-		return xdgSearchableConfigDirectories(recv);
+		return xdgSearchableConfigDirectories(self);
 	`}
 end
 
@@ -112,7 +112,7 @@ private extern class ConstPointer `{ const void * `}
 	# Convert a C `char **` to a Nit `Array[String]`
 	fun to_string_array: Array[String]
 	import Array[String], Array[String].add, NativeString.to_s `{
-		char **strings = (char**)recv;
+		char **strings = (char**)self;
 
 		Array_of_String aos = new_Array_of_String();
 		int p = 0;

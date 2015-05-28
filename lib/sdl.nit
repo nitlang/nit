@@ -70,19 +70,19 @@ extern class SDLDisplay `{SDL_Surface *`}
 			TTF_Quit();
 	`}
 
-	redef fun finish `{ SDL_Flip(recv); `}
+	redef fun finish `{ SDL_Flip(self); `}
 
 	# Clear the entire window with given RGB color (integer values)
 	fun clear_int(r, g, b: Int) `{
-		SDL_FillRect(recv, NULL, SDL_MapRGB(recv->format,r,g,b)); 
+		SDL_FillRect(self, NULL, SDL_MapRGB(self->format,r,g,b));
 	`}
 
-	redef fun width: Int `{ return recv->w; `}
-	redef fun height: Int `{ return recv->h; `}
+	redef fun width: Int `{ return self->w; `}
+	redef fun height: Int `{ return self->h; `}
 
 	# Fill a rectangle with given color
 	fun fill_rect(rect: SDLRectangle, r, g, b: Int) `{
-		SDL_FillRect(recv, rect,  SDL_MapRGB(recv->format,r,g,b));
+		SDL_FillRect(self, rect,  SDL_MapRGB(self->format,r,g,b));
 	`}
 
 	redef fun clear(r, g, b: Float) `{
@@ -90,7 +90,7 @@ extern class SDLDisplay `{SDL_Surface *`}
 		ri = (Uint8)r*255;
 		gi = (Uint8)g*255;
 		bi = (Uint8)b*255;
-		SDL_FillRect(recv, NULL, SDL_MapRGB(recv->format,ri,gi,bi));
+		SDL_FillRect(self, NULL, SDL_MapRGB(self->format,ri,gi,bi));
 	`}
 
 	# SDL events since the last call to this method
@@ -203,7 +203,7 @@ extern class SDLDrawable `{SDL_Surface*`}
 		dst.w = 0;
 		dst.h = 0;
 
-		SDL_BlitSurface(img, NULL, recv, &dst);
+		SDL_BlitSurface(img, NULL, self, &dst);
 	`}
 
 	redef fun blit_centered(img, x, y)
@@ -245,18 +245,18 @@ extern class SDLImage
 	fun save_to_file(path: String) import String.to_cstring `{ `}
 
 	# Destroy the image and free the memory
-	redef fun destroy `{ SDL_FreeSurface(recv); `}
+	redef fun destroy `{ SDL_FreeSurface(self); `}
 
-	redef fun width: Int `{ return recv->w; `}
-	redef fun height: Int `{ return recv->h; `}
+	redef fun width: Int `{ return self->w; `}
+	redef fun height: Int `{ return self->h; `}
 
 	fun is_ok: Bool do return not address_is_null
 
 	# Returns a reference to the pixels of the texture
-	fun pixels: NativeCByteArray `{ return recv->pixels; `}
+	fun pixels: NativeCByteArray `{ return self->pixels; `}
 
 	# Does this texture has an alpha mask?
-	fun amask: Bool `{ return recv->format->Amask; `}
+	fun amask: Bool `{ return self->format->Amask; `}
 end
 
 # A simple rectangle
@@ -271,17 +271,17 @@ extern class SDLRectangle `{SDL_Rect*`}
 		return rect;
 	`}
 
-	fun x=(v: Int) `{ recv->x = (Sint16)v; `}
-	fun x: Int `{ return recv->x; `}
+	fun x=(v: Int) `{ self->x = (Sint16)v; `}
+	fun x: Int `{ return self->x; `}
 
-	fun y=(v: Int) `{ recv->y = (Sint16)v; `}
-	fun y: Int `{ return recv->y; `}
+	fun y=(v: Int) `{ self->y = (Sint16)v; `}
+	fun y: Int `{ return self->y; `}
 
-	fun w=(v: Int) `{ recv->w = (Uint16)v; `}
-	fun w: Int `{ return recv->w; `}
+	fun w=(v: Int) `{ self->w = (Uint16)v; `}
+	fun w: Int `{ return self->w; `}
 
-	fun h=(v: Int) `{ recv->h = (Uint16)v; `}
-	fun h: Int `{ return recv->h; `}
+	fun h=(v: Int) `{ self->h = (Uint16)v; `}
+	fun h: Int `{ return self->h; `}
 end
 
 interface SDLInputEvent
@@ -418,7 +418,7 @@ class SDLQuitEvent
 end
 
 redef class Int
-	fun delay `{ SDL_Delay(recv); `}
+	fun delay `{ SDL_Delay(self); `}
 end
 
 # Class to load and use TTF_Font
@@ -436,7 +436,7 @@ extern class SDLFont `{TTF_Font *`}
 	return font;
 	`}
 
-	fun destroy `{ TTF_CloseFont(recv); `}
+	fun destroy `{ TTF_CloseFont(self); `}
 
 	# Create a String with the specified color, return an SDLImage
 	fun render(text: String, r, g, b: Int): SDLImage import String.to_cstring `{
@@ -449,7 +449,7 @@ extern class SDLFont `{TTF_Font *`}
 		color.b = b;
 
 		ctext = String_to_cstring(text);
-		if(!(text_surface=TTF_RenderText_Blended(recv, ctext, color)))
+		if(!(text_surface=TTF_RenderText_Blended(self, ctext, color)))
 		{
 			fprintf(stderr, "SDL TFF error: %s\n", TTF_GetError());
 			exit(1);
@@ -467,30 +467,30 @@ extern class SDLFont `{TTF_Font *`}
 
 	# Maximum pixel height of all glyphs of this font.
 	fun height: Int `{
-		return TTF_FontHeight(recv);
+		return TTF_FontHeight(self);
 	`}
 
 	fun ascent: Int `{
-		return TTF_FontAscent(recv);
+		return TTF_FontAscent(self);
 	`}
 
 	fun descent: Int `{
-		return TTF_FontDescent(recv);
+		return TTF_FontDescent(self);
 	`}
 
 	# Get the recommended pixel height of a rendered line of text of the loaded font. This is usually larger than the Font.height.
 	fun line_skip: Int `{
-		return TTF_FontLineSkip(recv);
+		return TTF_FontLineSkip(self);
 	`}
 
 	# Return true is the font used fixed width for each char
 	fun is_fixed_width: Bool `{
-		return TTF_FontFaceIsFixedWidth(recv);
+		return TTF_FontFaceIsFixedWidth(self);
 	`}
 
 	# Return the family name of the font
 	fun family_name: nullable String import String.to_cstring, String.as nullable  `{
-		char *fn = TTF_FontFaceFamilyName(recv);
+		char *fn = TTF_FontFaceFamilyName(self);
 
 		if (fn == NULL)
 			return null_String();
@@ -500,7 +500,7 @@ extern class SDLFont `{TTF_Font *`}
 
 	# Return the style name of the font
 	fun style_name: nullable String import String.to_cstring, String.as nullable  `{
-		char *sn = TTF_FontFaceStyleName(recv);
+		char *sn = TTF_FontFaceStyleName(self);
 
 		if (sn == NULL)
 			return null_String();
@@ -512,7 +512,7 @@ extern class SDLFont `{TTF_Font *`}
 	fun width_of(text: String): Int import NativeString.to_s `{
 		char *ctext = String_to_cstring(text);
 		int w;
-		if (TTF_SizeText(recv, ctext, &w, NULL))
+		if (TTF_SizeText(self, ctext, &w, NULL))
 		{
 			fprintf(stderr, "SDL TFF error: %s\n", TTF_GetError());
 			exit(1);
@@ -541,6 +541,6 @@ extern class SDLSystemWindowManagerInfo `{SDL_SysWMinfo *`}
 
 	# Returns the handle of this window on a X11 window system
 	fun x11_window_handle: Pointer `{
-		return (void*)recv->info.x11.window;
+		return (void*)self->info.x11.window;
 	`}
 end

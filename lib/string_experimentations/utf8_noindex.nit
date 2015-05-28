@@ -63,7 +63,7 @@ extern class UnicodeChar `{ uint32_t* `}
 	#  4       | 11110xxx 10xxxxxx 10xxxxxx 10xxxxxx
 	# ~~~
 	fun len: Int `{
-		uint32_t s = *recv;
+		uint32_t s = *self;
 		if(s <= 127) {return 1;}
 		if(s >= 49280 && s <= 57279) {return 2;}
 		if(s >= 14712960 && s <= 15712191) {return 3;}
@@ -76,11 +76,11 @@ extern class UnicodeChar `{ uint32_t* `}
 	#
 	# Note : A unicode character might not be a visible glyph, but it will be used to determine canonical equivalence
 	fun code_point: Int import UnicodeChar.len `{
-		uint32_t val = *recv;
+		uint32_t val = *self;
 		uint32_t ret = 0;
-		switch(UnicodeChar_len(recv)){
+		switch(UnicodeChar_len(self)){
 			case 1:
-				ret = *recv;
+				ret = *self;
 				break;
 			case 2:
 				ret = 0 | ((val & 0x00001F00) >> 2) | (val & 0x0000003F);
@@ -106,9 +106,9 @@ extern class UnicodeChar `{ uint32_t* `}
 	# NOTE : Works only on ASCII chars
 	# TODO : Support unicode for to_upper
 	fun to_upper: UnicodeChar import UnicodeChar.code_point `{
-		if(*recv < 97 || *recv > 122){ return recv; }
+		if(*self < 97 || *self > 122){ return self; }
 		uint32_t* ret = calloc(1,4);
-		*ret = *recv - 32;
+		*ret = *self - 32;
 		return ret;
 	`}
 
@@ -117,9 +117,9 @@ extern class UnicodeChar `{ uint32_t* `}
 	# NOTE : Works only on ASCII chars
 	# TODO : Support unicode for to_upper
 	fun to_lower: UnicodeChar import UnicodeChar.code_point `{
-		if(*recv < 65 || *recv > 90){ return recv; }
+		if(*self < 65 || *self > 90){ return self; }
 		uint32_t* ret = calloc(1,4);
-		*ret = *recv + 32;
+		*ret = *self + 32;
 		return ret;
 	`}
 
@@ -131,13 +131,13 @@ extern class UnicodeChar `{ uint32_t* `}
 	end
 
 	redef fun output import UnicodeChar.len `{
-		uint32_t self = *recv;
+		uint32_t self0 = *self;
 		if(!IS_BIG_ENDIAN){
-			uint32_t tmp = ntohl(self);
-			memcpy(&self, &tmp, 4);
+			uint32_t tmp = ntohl(self0);
+			memcpy(&self0, &tmp, 4);
 		}
-		unsigned char* s = (unsigned char*) &self;
-		switch(UnicodeChar_len(recv)){
+		unsigned char* s = (unsigned char*) &self0;
+		switch(UnicodeChar_len(self0)){
 			case 1:
 				printf("%c", s[3]);
 				break;
@@ -154,10 +154,10 @@ extern class UnicodeChar `{ uint32_t* `}
 	`}
 
 	redef fun to_s: FlatString import FlatString.full, UnicodeChar.len `{
-		int len = UnicodeChar_len(recv);
+		int len = UnicodeChar_len(self);
 		char* r = malloc(len + 1);
 		r[len] = '\0';
-		uint32_t src = *recv;
+		uint32_t src = *self;
 		if(!IS_BIG_ENDIAN){
 			uint32_t tmp = htonl(src);
 			memcpy(&src, &tmp, 4);
@@ -289,9 +289,9 @@ redef class FlatString
 
 	# Length implementation
 	private fun length_l: Int import FlatString.items, FlatString.index_to, FlatString.index_from `{
-		char* ns = FlatString_items(recv);
-		int i = FlatString_index_from(recv);
-		int max = FlatString_index_to(recv);
+		char* ns = FlatString_items(self);
+		int i = FlatString_index_from(self);
+		int max = FlatString_index_to(self);
 		int length = 0;
 		while(i <= max){
 			char c = ns[i];
@@ -558,20 +558,20 @@ redef class FlatBuffer
 
 	# Shifts the content of the buffer by `len` bytes to the right, starting at byte `from`
 	fun rshift_bytes(from: Int, len: Int) import FlatBuffer.bytelen, FlatBuffer.bytelen=, FlatBuffer.items `{
-		long bt = FlatBuffer_bytelen(recv);
-		char* ns = FlatBuffer_items(recv);
+		long bt = FlatBuffer_bytelen(self);
+		char* ns = FlatBuffer_items(self);
 		int off = from + len;
 		memmove(ns + off, ns + from, bt - from);
-		FlatBuffer_bytelen__assign(recv, bt + len);
+		FlatBuffer_bytelen__assign(self, bt + len);
 	`}
 
 	# Shifts the content of the buffer by `len` bytes to the left, starting at `from`
 	fun lshift_bytes(from: Int, len: Int) import FlatBuffer.bytelen, FlatBuffer.bytelen=, FlatBuffer.items `{
-		long bt = FlatBuffer_bytelen(recv);
-		char* ns = FlatBuffer_items(recv);
+		long bt = FlatBuffer_bytelen(self);
+		char* ns = FlatBuffer_items(self);
 		int off = from - len;
 		memmove(ns + off, ns + from, bt - from);
-		FlatBuffer_bytelen__assign(recv, bt - len);
+		FlatBuffer_bytelen__assign(self, bt - len);
 	`}
 
 	# Get the Unicode char stored at `index` in `self`

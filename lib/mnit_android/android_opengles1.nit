@@ -30,7 +30,7 @@ in "C" `{
 
 redef class Opengles1Display
 	redef fun midway_init(format) import app_native_window `{
-		mnit_window = Opengles1Display_app_native_window(recv);
+		mnit_window = Opengles1Display_app_native_window(self);
 		if (ANativeWindow_setBuffersGeometry(mnit_window, 0, 0, (EGLint)format) != 0) {
 			LOGW("Unable to ANativeWindow_setBuffersGeometry");
 		}

@@ -20,11 +20,11 @@ module draw_operation
 redef enum Int
 	fun n_chars: Int `{
 		int c;
-		if ( abs(recv) >= 10 )
-			c = 1+(int)log10f( (float)abs(recv) );
+		if ( abs(self) >= 10 )
+			c = 1+(int)log10f( (float)abs(self) );
 		else
 			c = 1;
-		if ( recv < 0 ) c ++;
+		if ( self < 0 ) c ++;
 		return c;
 	`}
 end

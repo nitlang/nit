@@ -33,83 +33,83 @@ extern class GtkAssistant `{GtkAssistant *`}
 	`}
 
 	fun current_page: Int `{
-		return gtk_assistant_get_current_page (recv);
+		return gtk_assistant_get_current_page (self);
 	`}
 
 	fun current_page=(page_num: Int) `{
-		gtk_assistant_set_current_page(recv, page_num);
+		gtk_assistant_set_current_page(self, page_num);
 	`}
 
 	fun number_pages: Int `{
-		return gtk_assistant_get_n_pages(recv);
+		return gtk_assistant_get_n_pages(self);
 	`}
 
 	fun get_page(page_num: Int): GtkWidget `{
-		return gtk_assistant_get_nth_page(recv, page_num);
+		return gtk_assistant_get_nth_page(self, page_num);
 	`}
 
 	fun prepend(page: GtkWidget): Int `{
-		return gtk_assistant_prepend_page(recv, page);
+		return gtk_assistant_prepend_page(self, page);
 	`}
 
 	fun append(page: GtkWidget): Int `{
-		return gtk_assistant_append_page(recv, page);
+		return gtk_assistant_append_page(self, page);
 	`}
 
 	fun insert(page: GtkWidget, position: Int): Int `{
-		return gtk_assistant_insert_page(recv, page, position);
+		return gtk_assistant_insert_page(self, page, position);
 	`}
 
 	fun remove(page_num: Int) `{
-		gtk_assistant_remove_page(recv, page_num);
+		gtk_assistant_remove_page(self, page_num);
 	`}
 
 	fun get_page_type(page: GtkWidget): GtkAssistantPageType `{
-		return gtk_assistant_get_page_type(recv, page);
+		return gtk_assistant_get_page_type(self, page);
 	`}
 
 	fun set_page_type(page: GtkWidget, t: GtkAssistantPageType) `{
-		gtk_assistant_set_page_type(recv, page, t);
+		gtk_assistant_set_page_type(self, page, t);
 	`}
 
 	fun get_page_title(page: GtkWidget): String import NativeString.to_s `{
-		return NativeString_to_s((char *)gtk_assistant_get_page_title(recv, page));
+		return NativeString_to_s((char *)gtk_assistant_get_page_title(self, page));
 	`}
 
 	fun set_page_title(page: GtkWidget, title: String) import String.to_cstring `{
-		gtk_assistant_set_page_title(recv, page, String_to_cstring(title));
+		gtk_assistant_set_page_title(self, page, String_to_cstring(title));
 	`}
 
 	fun set_page_complete(page: GtkWidget, is_complete: Bool) `{
-		gtk_assistant_set_page_complete(recv, page, is_complete);
+		gtk_assistant_set_page_complete(self, page, is_complete);
 	`}
 
 	fun get_page_complete(page: GtkWidget): Bool `{
-		return gtk_assistant_get_page_complete(recv, page);
+		return gtk_assistant_get_page_complete(self, page);
 	`}
 
 	fun remove_action_widget(child: GtkWidget) `{
-		gtk_assistant_remove_action_widget(recv, child);
+		gtk_assistant_remove_action_widget(self, child);
 	`}
 
 	fun add_action_widget(child: GtkWidget) `{
-		gtk_assistant_add_action_widget(recv, child);
+		gtk_assistant_add_action_widget(self, child);
 	`}
 
 	fun update_buttons_state `{
-		gtk_assistant_update_buttons_state(recv);
+		gtk_assistant_update_buttons_state(self);
 	`}
 
 	fun commit `{
-		gtk_assistant_commit(recv);
+		gtk_assistant_commit(self);
 	`}
 
 	fun next_page `{
-		gtk_assistant_next_page(recv);
+		gtk_assistant_next_page(self);
 	`}
 
 	fun previous_page `{
-		gtk_assistant_previous_page(recv);
+		gtk_assistant_previous_page(self);
 	`}
 end
 

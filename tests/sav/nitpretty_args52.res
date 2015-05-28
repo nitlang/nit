@@ -53,7 +53,7 @@ private class A
 		printf( "received msg: %s, of length = %d\n", c_msg, msg_len );
 
 		/* A_my_attr is a callback to the getter of self.my_attr */
-		printf( "old attr %d\n", A_my_attr(recv) );
+		printf( "old attr %d\n", A_my_attr(self) );
 
 		if(chose)
 			truc;
@@ -61,7 +61,7 @@ private class A
 			chose;
 
 		/* A_my_attr is a callback to the setter of self.my_attr= */
-		A_my_attr__assign( recv, msg_len );
+		A_my_attr__assign( self, msg_len );
 	`}
 end
 
@@ -69,14 +69,14 @@ extern class TimeT `{time_t`}
 	new `{ return time(NULL); `}
 	new from_i(i: Int) `{ return i; `}
 
-	fun update `{ time(&recv); `}
+	fun update `{ time(&self); `}
 
 	fun ctime: String import NativeString.to_s_with_copy `{
-		return NativeString_to_s_with_copy( ctime(&recv) );
+		return NativeString_to_s_with_copy( ctime(&self) );
 	`}
 
 	# Difference in secondes from start (self if the end time)
-	fun difftime(start: TimeT): Float `{ return difftime(recv, start); `}
+	fun difftime(start: TimeT): Float `{ return difftime(self, start); `}
 
 	private fun intern_poll(in_fds: Array[Int], out_fds: Array[Int]): nullable Int is
 		extern import Array[Int].length, Array[Int].[], Int.as(nullable Int) `{`}
@@ -84,5 +84,5 @@ end
 
 fun address_is_null: Bool is extern "address_is_null"
 
-fun free `{ free(recv); `}
+fun free `{ free(self); `}
 

@@ -28,12 +28,12 @@ extern class JavaQueueOfString in "Java" `{ java.util.Queue<String> `}
 		return new LinkedBlockingQueue<String>();
 	`}
 
-	fun offer(o: JavaString) in "Java" `{ recv.offer(o); `}
+	fun offer(o: JavaString) in "Java" `{ self.offer(o); `}
 
-	fun remove: JavaString in "Java" `{ return recv.remove(); `}
+	fun remove: JavaString in "Java" `{ return self.remove(); `}
 
 	redef fun output in "Java" `{
-		for (String s: recv) {
+		for (String s: self) {
 			System.out.println(s);
 		}
 	`}

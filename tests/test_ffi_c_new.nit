@@ -32,7 +32,7 @@ extern class A `{int *`}
 
 	fun a do print "a"
 	fun p `{
-	    printf( "allo from %i\n", *recv );
+	    printf( "allo from %i\n", *self );
 	`}
 	fun d : A import d, A `{
         return new_A();

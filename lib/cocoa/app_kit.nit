@@ -31,8 +31,8 @@ extern class NSAlert in "ObjC" `{ NSAlert * `}
 	new in "ObjC" `{ return [[NSAlert alloc] init]; `}
 
 	# Set the content of this message box
-	fun message_text=(text: NSString) in "ObjC" `{ [recv setMessageText:text]; `}
+	fun message_text=(text: NSString) in "ObjC" `{ [self setMessageText:text]; `}
 
 	# Show this message box
-	fun run_modal in "ObjC" `{ [recv runModal]; `}
+	fun run_modal in "ObjC" `{ [self runModal]; `}
 end
