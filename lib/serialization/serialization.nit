@@ -16,7 +16,7 @@
 
 # Abstract services to serialize Nit objects to different formats
 #
-# This module declares the `auto_serializable` annotation to mark Nit classes as serializable.
+# This module declares the `serialize` annotation to mark Nit classes as serializable.
 # For an introduction to this service, refer to the documentation of the `serialization` group.
 # This documentation provides more technical information on interesting entitie of this module.
 #

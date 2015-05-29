@@ -1,11 +1,11 @@
 # Abstract serialization services
 
-The serialization services are centered around the `auto_serializable` annotation,
+The serialization services are centered around the `serialize` annotation,
 the `Serializable` interface and the implementations of `Serializer` and `Deserializer`.
 
-## The `auto_serializable` annotation
+## The `serialize` annotation
 
-A class annotated with `auto_serializable` identifies it as a subclass of Serializable and
+A class annotated with `serialize` identifies it as a subclass of Serializable and
 triggers the generation of customized serialization and deserialization services.
 
 ~~~
@@ -13,7 +13,7 @@ import serialization
 
 # Simple serializable class identifying a human
 class Person
-	auto_serializable
+	serialize
 
 	# First and last name
 	var name: String
@@ -31,19 +31,19 @@ By definition of a serializable class, an instance can be serialized to a stream
 The deserialized instance will not be the same instance, but they should be equal.
 So, in this case, we can compare both instances with `==` to test their equality.
 
-Some conditions applies to the classes that can be annotated as `auto_serializable`.
+Some conditions applies to the classes that can be annotated as `serialize`.
 All attributes of the class must be serializable, runtime errors will be
 raised when trying to serialize non-serializable attributes.
 
 In the class `Person`, all attributes are typed with classes the standards library.
 These common types are defined defined as serializable by this project.
-The attributes could also be typed with user-defined `auto_serializable`
+The attributes could also be typed with user-defined `serialize`
 classes or any other subclass of `Serializable`.
 
 ~~~
-# This `auto_serializable` class is composed of two `auto_serializable` attributes
+# This `serialize` class is composed of two `serialize` attributes
 class Partnership
-	auto_serializable
+	serialize
 
 	var partner_a: Person
 	var partner_b: Person
@@ -53,14 +53,14 @@ class Partnership
 end
 ~~~
 
-The `auto_serializable` applies only to the class definition,
+The `serialize` applies only to the class definition,
 only attributes declared locally will be serialized.
 However, each definition of a class (a refinement or specialization)
-can declare `auto_serializable`.
+can declare `serialize`.
 
 ## Custom serializable classes
 
-The annotation `auto_serializable` should be enough for most cases,
+The annotation `serialize` should be enough for most cases,
 but in some cases you need more control over the serialization process.
 
 For more control, create a subclass to `Serializable` and redefine `core_serialize_to`.
@@ -72,7 +72,7 @@ The method should only act on known class names, and call super otherwise.
 
 ### Example: the User class
 
-The following example cannot use the `auto_serializable` annotations
+The following example cannot use the `serialize` annotations
 because some of the arguments to the `User` class need special treatment:
 
 * The `name` attribute is perfectly normal, it can be serialized and deserialized
@@ -160,7 +160,7 @@ information on the services to redefine.
 
 ## Serialization services
 
-The `auto_serializable` annotation and the `Serializable` class are used on
+The `serialize` annotation and the `Serializable` class are used on
 classes specific to the business domain.
 To write (and read) instances of these classes to a persistent format
 you must use implementations of `Serializer` and `Deserializer`.
@@ -198,7 +198,7 @@ The serialization has some limitations:
 * Not enough classes from the standard library are supported.
   This only requires someone to actually code the support.
   It should not be especially hard for most classes, some can
-  simply declare the `auto_serializable` annotation.
+  simply declare the `serialize` annotation.
 
 * A limitation of the Json parser prevents deserializing from files
   with more than one object.
@@ -206,9 +206,9 @@ The serialization has some limitations:
   serialize a single object to each filesand use different instances of
   serializer and deserializer each time.
 
-* The `auto_serializable` annotation does not handle very well
+* The `serialize` annotation does not handle very well
   complex constructors. This could be improved in the compiler.
-  For now, you may prefer to use `auto_serializable` on simple classes,
+  For now, you may prefer to use `serialize` on simple classes,
   of by using custom `Serializable`.
 
 * The serialization uses only the short name of a class, not its qualified name.

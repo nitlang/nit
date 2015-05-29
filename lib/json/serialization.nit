@@ -39,7 +39,7 @@
 # import json::serialization
 #
 # class Person
-#     auto_serializable
+#     serialize
 #
 #     var name: String
 #     var year_of_birth: Int
