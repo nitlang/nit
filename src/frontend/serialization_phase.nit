@@ -116,10 +116,34 @@ private class SerializationPhasePreModel
 		generate_deserialization_init(nclassdef)
 	redef fun process_nclassdef(nclassdef)
 	do
+		if not nclassdef isa AStdClassdef then return
+
+		# Is there a declaration on the classdef or the module?
+		var serialize = nclassdef.is_serialize
+
+		if not serialize and not nclassdef.is_noserialize then
+			# Is the module marked serialize?
+			serialize = nclassdef.parent.as(AModule).is_serialize
+		end
+
+		var per_attribute = false
+		if not serialize then
+			# Is there an attribute marked serialize?
+			for npropdef in nclassdef.n_propdefs do
+				if npropdef.is_serialize then
+					serialize = true
+					per_attribute = true
+					break
+				end
+			end
+		end
+
+		if serialize then
 			# Add `super Serializable`
 			var sc = toolcontext.parse_superclass("Serializable")
 			sc.location = nclassdef.location
 			nclassdef.n_propdefs.add sc
+		end
 	end
 
 	redef fun process_nmodule(nmodule)
