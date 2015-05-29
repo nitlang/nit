@@ -101,7 +101,6 @@ private class SerializationPhasePreModel
 				end
 			end
 
-		generate_serialization_method(nclassdef)
 			# Check for useless double declarations
 			if serialize and up_serialize then
 				toolcontext.warning(node.location, "useless-serialize",
@@ -113,7 +112,6 @@ private class SerializationPhasePreModel
 		end
 	end
 
-		generate_deserialization_init(nclassdef)
 	redef fun process_nclassdef(nclassdef)
 	do
 		if not nclassdef isa AStdClassdef then return
@@ -143,6 +141,10 @@ private class SerializationPhasePreModel
 			var sc = toolcontext.parse_superclass("Serializable")
 			sc.location = nclassdef.location
 			nclassdef.n_propdefs.add sc
+
+			# Add services
+			generate_serialization_method(nclassdef, per_attribute)
+			generate_deserialization_init(nclassdef, per_attribute)
 		end
 	end
 
@@ -164,7 +166,7 @@ private class SerializationPhasePreModel
 		end
 	end
 
-	fun generate_serialization_method(nclassdef: AClassdef)
+	fun generate_serialization_method(nclassdef: AClassdef, per_attribute: Bool)
 	do
 		var npropdefs = nclassdef.n_propdefs
 
@@ -174,6 +176,11 @@ private class SerializationPhasePreModel
 		code.add "	super"
 
 		for attribute in npropdefs do if attribute isa AAttrPropdef then
+
+			# Is `attribute` to be skipped?
+			if (per_attribute and not attribute.is_serialize) or
+				attribute.is_noserialize then continue
+
 			var name = attribute.name
 			code.add "	v.serialize_attribute(\"{name}\", {name})"
 		end
@@ -185,7 +192,7 @@ private class SerializationPhasePreModel
 	end
 
 	# Add a constructor to the automated nclassdef
-	fun generate_deserialization_init(nclassdef: AStdClassdef)
+	fun generate_deserialization_init(nclassdef: AClassdef, per_attribute: Bool)
 	do
 		var npropdefs = nclassdef.n_propdefs
 
@@ -196,6 +203,11 @@ private class SerializationPhasePreModel
 		code.add "	v.notify_of_creation self"
 
 		for attribute in npropdefs do if attribute isa AAttrPropdef then
+
+			# Is `attribute` to be skipped?
+			if (per_attribute and not attribute.is_serialize) or
+				attribute.is_noserialize then continue
+
 			var n_type = attribute.n_type
 			var type_name
 			if n_type == null then
