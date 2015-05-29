@@ -22,6 +22,7 @@ import json::serialization
 # Simple class
 class A
 	serialize
+#alt5#	serialize
 
 	var b = false
 	var c: Char#alt2#
