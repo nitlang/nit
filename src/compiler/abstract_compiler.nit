@@ -142,13 +142,20 @@ class Toolchain
 	# Compiler of the target program
 	var compiler: AbstractCompiler
 
-	# Directory where to generate all C files
-	fun compile_dir: String
+	# Directory where to generate all files
+	#
+	# The option `--compile_dir` change this directory.
+	fun root_compile_dir: String
 	do
 		var compile_dir = toolcontext.opt_compile_dir.value
 		if compile_dir == null then compile_dir = "nit_compile"
 		return compile_dir
 	end
+
+	# Directory where to generate all C files
+	#
+	# By default it is `root_compile_dir` but some platform may require that it is a subdirectory.
+	fun compile_dir: String do return root_compile_dir
 
 	# Write all C files and compile them
 	fun write_and_make is abstract
@@ -168,6 +175,7 @@ class MakefileToolchain
 		var time0 = get_time
 		self.toolcontext.info("*** WRITING C ***", 1)
 
+		root_compile_dir.mkdir
 		compile_dir.mkdir
 
 		var cfiles = new Array[String]

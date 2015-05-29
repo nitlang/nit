@@ -56,7 +56,7 @@ private class IOSToolchain
 	# Compile C files in `ios_project_root/app_project.name`
 	redef fun compile_dir
 	do
-		ios_project_root = super/"ios"
+		ios_project_root = root_compile_dir/"ios"
 		return ios_project_root/app_project.short_name
 	end
 
