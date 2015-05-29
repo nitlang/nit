@@ -252,7 +252,7 @@ redef class DocComposite
 	# Title to display if any.
 	#
 	# This title can be decorated with HTML.
-	var html_title: nullable Writable is noinit, writable
+	var html_title: nullable Writable is writable, lazy do return title
 
 	# Subtitle to display if any.
 	var html_subtitle: nullable Writable is noinit, writable
@@ -327,6 +327,12 @@ redef class DocComposite
 	end
 end
 
+redef class DocRoot
+	redef fun rendering do
+		for child in children do addn child.write_to_string
+	end
+end
+
 redef class DocSection
 	super BSComponent
 
@@ -367,7 +373,7 @@ end
 
 redef class PanelGroup
 	redef var html_title = null
-	redef var toc_title is lazy do return group_title
+	redef var toc_title is lazy do return title or else ""
 	redef var is_toc_hidden = true
 end
 
@@ -545,7 +551,6 @@ redef class DefinitionArticle
 end
 
 redef class HierarchyListArticle
-	redef var html_title is lazy do return list_title
 	redef fun is_empty do return mentities.is_empty
 	redef var is_toc_hidden = true
 
@@ -567,7 +572,6 @@ redef class IntrosRedefsSection
 end
 
 redef class IntrosRedefsListArticle
-	redef var html_title is lazy do return list_title
 	redef fun is_hidden do return mentities.is_empty
 	redef var is_toc_hidden = true
 
@@ -620,7 +624,7 @@ redef class GraphArticle
 	redef fun render_body do
 		addn "<div class=\"text-center\">"
 		addn " <img src='{graph_id}.png' usemap='#{graph_id}' style='margin:auto'"
-		addn "  alt='{graph_title}'/>"
+		addn "  alt='{title or else ""}'/>"
 		add map
 		addn "</div>"
 	end

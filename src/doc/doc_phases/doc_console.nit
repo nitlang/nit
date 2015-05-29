@@ -140,7 +140,7 @@ interface NitxQuery
 	# Pretty prints the results for the console.
 	fun make_results(nitx: Nitx, results: Array[NitxMatch]): DocPage do
 		var page = new DocPage("results", "Results")
-		page.root.add_child(new QueryResultArticle("results.article", self, results))
+		page.root.add_child(new QueryResultArticle("results.article", "Results", self, results))
 		return page
 	end
 
@@ -216,7 +216,7 @@ class CommentQuery
 			var res = results.first.as(MEntityMatch)
 			var mentity = res.mentity
 			var page = new DocPage("results", "Results")
-			var article = new DefinitionArticle("results.article", mentity)
+			var article = new DefinitionArticle("results.article", "Results", mentity)
 			article.cs_title = mentity.name
 			article.cs_subtitle = mentity.cs_declaration
 			page.root.add_child article
@@ -389,7 +389,7 @@ class CodeQuery
 	redef fun make_results(nitx, results) do
 		var page = new DocPage("results", "Code Results")
 		for res in results do
-			page.add new CodeQueryArticle("results.article", self, res.as(CodeMatch))
+			page.add new CodeQueryArticle("results.article", "Results", self, res.as(CodeMatch))
 		end
 		return page
 	end
