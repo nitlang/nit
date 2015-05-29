@@ -211,7 +211,7 @@ end
 
 # Link between two nodes and associated to a graph
 class Link
-	auto_serializable
+	serialize
 
 	# Type of the nodes in `graph`
 	type N: Node
@@ -287,7 +287,7 @@ end
 
 # Result from path finding and a walkable path
 class AStarPath[N]
-	auto_serializable
+	serialize
 
 	# Total cost of this path
 	var total_cost: Int
@@ -317,7 +317,7 @@ end
 
 # Context related to an evocation of pathfinding
 class PathContext
-	auto_serializable
+	serialize
 
 	# Type of the nodes in `graph`
 	type N: Node
@@ -352,7 +352,7 @@ end
 # Warning: A* is not optimize for such a case
 class ConstantPathContext
 	super PathContext
-	auto_serializable
+	serialize
 
 	redef fun worst_cost do return 1
 	redef fun cost(l) do return 1
@@ -364,7 +364,7 @@ end
 # A `PathContext` for graphs with `WeightedLink`
 class WeightedPathContext
 	super PathContext
-	auto_serializable
+	serialize
 
 	redef type L: WeightedLink
 
@@ -393,7 +393,7 @@ end
 # A `Link` with a `weight`
 class WeightedLink
 	super Link
-	auto_serializable
+	serialize
 
 	# The `weight`, or cost, of this link
 	var weight: Int
@@ -401,7 +401,7 @@ end
 
 # Advanced path conditions with customizable accept states
 class TargetCondition[N: Node]
-	auto_serializable
+	serialize
 
 	# Should the pathfinding accept `node` as a goal?
 	fun accept(node: N): Bool is abstract
