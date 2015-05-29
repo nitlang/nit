@@ -8,9 +8,9 @@ alt/error_expr_not_ok_alt6.nit:41,16--19: Type Error: expected `Int`, got `null`
 alt/error_expr_not_ok_alt6.nit:42,7--9: Type Error: expected `A`, got `Int`.
 alt/error_expr_not_ok_alt6.nit:43,5--8: Error: method `fail` does not exists in `Int`.
 alt/error_expr_not_ok_alt6.nit:45,7--10: Type Error: expected `A`, got `null`.
-alt/error_expr_not_ok_alt6.nit:46,6--9: Error: method `fail` called on `null`.
+alt/error_expr_not_ok_alt6.nit:46,6--9: Error: method `fail` does not exists in `null`.
 alt/error_expr_not_ok_alt6.nit:49,7--10: Type Error: expected `A`, got `null`.
-alt/error_expr_not_ok_alt6.nit:50,6--10: Error: method `trash` called on `null`.
+alt/error_expr_not_ok_alt6.nit:50,6--10: Error: method `trash` does not exists in `null`.
 alt/error_expr_not_ok_alt6.nit:60,4--7: Type Error: expected `Bool`, got `Int`.
 alt/error_expr_not_ok_alt6.nit:60,20: Type Error: expected `A`, got `Int`.
 alt/error_expr_not_ok_alt6.nit:62,10--13: Type Error: expected `Bool`, got `Int`.
