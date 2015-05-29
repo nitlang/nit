@@ -138,14 +138,14 @@ extern class NativeSocket `{ int* `}
 		return write(*self, &byt, 1);
 	`}
 
-	fun read: String import NativeString.to_s_with_length, NativeString.to_s_with_copy `{
-		static char c[1024];
+	fun read: String import NativeString.to_s_with_length, NativeString `{
+		char *c = new_NativeString(1024);
 		int n = read(*self, c, 1023);
 		if(n < 0) {
 			return NativeString_to_s_with_length("",0);
 		}
 		c[n] = 0;
-		return NativeString_to_s_with_copy(c);
+		return NativeString_to_s_with_length(c, n);
 	`}
 
 	# Sets an option for the socket
