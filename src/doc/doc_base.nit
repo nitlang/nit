@@ -101,6 +101,9 @@ abstract class DocComposite
 	# (HTML links, HTML anchors, vim links, etc.).
 	var id: String is writable
 
+	# Item title if any.
+	var title: nullable String
+
 	# Does `self` have a `parent`?
 	fun is_root: Bool do return parent == null
 
@@ -136,6 +139,8 @@ class DocRoot
 	super DocComposite
 
 	redef var id = "<root>"
+	redef var title = "<root>"
+
 	# No op for `RootSection`.
 	redef fun parent=(p) do end
 end

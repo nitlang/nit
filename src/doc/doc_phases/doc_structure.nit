@@ -47,13 +47,13 @@ end
 
 redef class OverviewPage
 	redef fun apply_structure(v, doc) do
-		var article = new HomeArticle("home.article")
+		var article = new HomeArticle("home.article", "Home")
 		root.add_child article
 		# Projects list
 		var mprojects = doc.model.mprojects.to_a
 		var sorter = new MConcernRankSorter
 		sorter.sort mprojects
-		var section = new ProjectsSection("projects.section")
+		var section = new ProjectsSection("projects.section", "Projects")
 		for mproject in mprojects do
 			section.add_child new DefinitionArticle("{mproject.nitdoc_id}.definition", mproject)
 		end
@@ -295,14 +295,13 @@ end
 # A group of sections that can be displayed together in a tab panel.
 class PanelGroup
 	super DocSection
-
-	# The title of this group.
-	var group_title: String
 end
 
 # A DocComposite element about a MEntity.
 class MEntityComposite
 	super DocComposite
+
+	redef fun title do return mentity.nitdoc_name
 
 	# MEntity documented by this page element.
 	var mentity: MEntity

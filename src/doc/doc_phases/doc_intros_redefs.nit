@@ -58,10 +58,10 @@ redef class DefinitionArticle
 		var group = new PanelGroup("list.group", "List")
 		var intros = mmodule.intro_mclassdefs(v.ctx.min_visibility).to_a
 		doc.mainmodule.linearize_mclassdefs(intros)
-		group.add_child new IntrosRedefsListArticle("{mentity.nitdoc_id}.intros", mentity, "Introduces", intros)
+		group.add_child new IntrosRedefsListArticle("{mentity.nitdoc_id}.intros", "Introduces", intros)
 		var redefs = mmodule.redef_mclassdefs(v.ctx.min_visibility).to_a
 		doc.mainmodule.linearize_mclassdefs(redefs)
-		group.add_child new IntrosRedefsListArticle("{mentity.nitdoc_id}.redefs", mentity, "Redefines", redefs)
+		group.add_child new IntrosRedefsListArticle("{mentity.nitdoc_id}.redefs", "Redefines", redefs)
 		section.add_child group
 		add_child(section)
 	end
@@ -73,11 +73,11 @@ redef class DefinitionArticle
 		var intros = mclassdef.collect_intro_mpropdefs(v.ctx.min_visibility).to_a
 		# FIXME avoid diff changes
 		# v.ctx.mainmodule.linearize_mpropdefs(intros)
-		group.add_child new IntrosRedefsListArticle("{mentity.nitdoc_id}.intros", mentity, "Introduces", intros)
+		group.add_child new IntrosRedefsListArticle("{mentity.nitdoc_id}.intros", "Introduces", intros)
 		var redefs = mclassdef.collect_redef_mpropdefs(v.ctx.min_visibility).to_a
 		# FIXME avoid diff changes
 		# v.ctx.mainmodule.linearize_mpropdefs(redefs)
-		group.add_child new IntrosRedefsListArticle("{mentity.nitdoc_id}.redefs", mentity, "Redefines", redefs)
+		group.add_child new IntrosRedefsListArticle("{mentity.nitdoc_id}.redefs", "Redefines", redefs)
 		section.add_child group
 		add_child(section)
 	end
@@ -95,10 +95,7 @@ end
 # FIXME diff hack
 # This can merged with InheritanceListArticle in a more generic class.
 class IntrosRedefsListArticle
-	super MEntityArticle
-
-	# Title displayed as header of the list.
-	var list_title: String
+	super DocArticle
 
 	# Intro mentities to list.
 	var mentities: Array[MEntity]
