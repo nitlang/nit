@@ -19,8 +19,8 @@ class A
 	var b: Object is noautoinit
 	#alt1#var b2: Object = get(-4) is noautoinit
 	var c: Object is noautoinit
-	var d: Object = get(2) is autoinit
-	#alt2#var d2: Object = get(-2) is autoinit, lazy
+	var d: Object = get(2) is lateinit
+	#alt2#var d2: Object = get(-2) is lateinit, lazy
 	var e: Object = get(1)
 	fun setc(v: Object) is autoinit do self.c = get(v)
 	init do

@@ -206,9 +206,9 @@ redef class ModelBuilder
 				var mreadpropdef = npropdef.mreadpropdef
 				if mreadpropdef == null or mreadpropdef.msignature == null then return # Skip broken attribute
 				if npropdef.noinit then continue # Skip noinit attribute
-				var atautoinit = npropdef.get_single_annotation("autoinit", self)
-				if atautoinit != null then
-					# For autoinit attributes, call the reader to force
+				var atlateinit = npropdef.get_single_annotation("lateinit", self)
+				if atlateinit != null then
+					# For lateinit attributes, call the reader to force
 					# the lazy initialization of the attribute.
 					initializers.add(mreadpropdef.mproperty)
 					mreadpropdef.mproperty.is_autoinit = true
@@ -1215,17 +1215,17 @@ redef class AAttrPropdef
 		end
 
 		var atlazy = self.get_single_annotation("lazy", modelbuilder)
-		var atautoinit = self.get_single_annotation("autoinit", modelbuilder)
-		if atlazy != null or atautoinit != null then
-			if atlazy != null and atautoinit != null then
-				modelbuilder.error(atlazy, "Error: `lazy` incompatible with `autoinit`.")
+		var atlateinit = self.get_single_annotation("lateinit", modelbuilder)
+		if atlazy != null or atlateinit != null then
+			if atlazy != null and atlateinit != null then
+				modelbuilder.error(atlazy, "Error: `lazy` incompatible with `lateinit`.")
 				return
 			end
 			if not has_value then
 				if atlazy != null then
 					modelbuilder.error(atlazy, "Error: `lazy` attributes need a value.")
-				else if atautoinit != null then
-					modelbuilder.error(atautoinit, "Error: `autoinit` attributes need a value.")
+				else if atlateinit != null then
+					modelbuilder.error(atlateinit, "Error: `lateinit` attributes need a value.")
 				end
 				has_value = true
 				return
