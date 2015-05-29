@@ -53,5 +53,5 @@ parser/parser.nit:
 	cd parser; make
 
 clean:
-	rm -rf -- .nit_compile* version.nit nitc_0 2> /dev/null || true
+	rm -rf -- version.nit nitc_0 2> /dev/null || true
 	cd parser; make clean
