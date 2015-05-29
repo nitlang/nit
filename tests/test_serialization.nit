@@ -24,9 +24,10 @@ class A
 	serialize
 
 	var b = false
-	var f: Float
 	var c: Char#alt2#
 	#alt2#var c: Char is noserialize
+	var f: Float#alt4#
+	#alt4#var f: Float is serialize
 	var i = 123
 	var s = "asdf"
 	var n: nullable Int
