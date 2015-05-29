@@ -182,17 +182,10 @@ redef class ModelBuilder
 		var initializers = new Array[MProperty]
 		for npropdef in nclassdef.n_propdefs do
 			if npropdef isa AMethPropdef then
+				if not npropdef.is_autoinit then continue # Skip non tagged autoinit
 				if npropdef.mpropdef == null then return # Skip broken method
-				var at = npropdef.get_single_annotation("autoinit", self)
-				if at == null then continue # Skip non tagged init
-
 				var sig = npropdef.mpropdef.msignature
 				if sig == null then continue # Skip broken method
-
-				if not npropdef.mpropdef.is_intro then
-					self.error(at, "Error: `autoinit` cannot be set on redefinitions.")
-					continue
-				end
 
 				for param in sig.mparameters do
 					var ret_type = param.mtype
@@ -743,6 +736,8 @@ end
 redef class AMethPropdef
 	redef type MPROPDEF: MMethodDef
 
+	# Is the method annotated `autoinit`?
+	var is_autoinit = false
 
 	# Can self be used as a root init?
 	private fun look_like_a_root_init(modelbuilder: ModelBuilder, mclassdef: MClassDef): Bool
@@ -988,6 +983,15 @@ redef class AMethPropdef
 		# Check annotations
 		var at = self.get_single_annotation("lazy", modelbuilder)
 		if at != null then modelbuilder.error(at, "Syntax Error: `lazy` must be used on attributes.")
+
+		var atautoinit = self.get_single_annotation("autoinit", modelbuilder)
+		if atautoinit != null then
+			if not mpropdef.is_intro then
+				modelbuilder.error(atautoinit, "Error: `autoinit` cannot be set on redefinitions.")
+			else
+				self.is_autoinit = true
+			end
+		end
 	end
 
 	redef fun check_signature(modelbuilder)
