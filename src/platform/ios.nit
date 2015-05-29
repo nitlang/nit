@@ -45,7 +45,7 @@ end
 private class IOSToolchain
 	super MakefileToolchain
 
-	# Root of the iOS project, usually `.nit_compile/ios/`
+	# Root of the iOS project, usually `nit_compile/ios/`
 	var ios_project_root: String is noinit
 
 	# `app.nit` project for the current compilation target

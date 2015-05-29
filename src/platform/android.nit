@@ -288,7 +288,7 @@ $(call import-module,android/native_app_glue)
 		# Android resources folder
 		var res_dir = project_root / "res"
 		if res_dir.file_exists then
-			# copy the res folder to .nit_compile
+			# copy the res folder to the compile dir
 			res_dir = res_dir.realpath
 			toolcontext.exec_and_check(["cp", "-R", res_dir, android_project_root], "Android project error")
 		end
