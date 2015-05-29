@@ -353,6 +353,8 @@ redef class AModule
 	end
 
 	private var inits_to_retype = new Array[AMethPropdef]
+
+	redef fun is_serialize do return n_moduledecl != null and n_moduledecl.is_serialize
 end
 
 redef class AStdClassdef
