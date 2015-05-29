@@ -44,6 +44,8 @@
 #   `notify_of_creation` must be redefined.
 module serialization is
 	new_annotation auto_serializable
+	new_annotation serialize
+	new_annotation noserialize
 end
 
 # Abstract serialization service to be sub-classed by specialized services.
