@@ -1,6 +1,6 @@
 # Abstract serialization services
 
-The serialization services are centered around the `serialize` annotation,
+The serialization services are based on the `serialize` and the `noserialize` annotations,
 the `Serializable` interface and the implementations of `Serializer` and `Deserializer`.
 
 ## The `serialize` annotation
@@ -53,10 +53,55 @@ class Partnership
 end
 ~~~
 
-The `serialize` applies only to the class definition,
-only attributes declared locally will be serialized.
-However, each definition of a class (a refinement or specialization)
-can declare `serialize`.
+### Scope of the `serialize` annotation
+
+`serialize` can annotate class definitions, modules and attributes:
+
+* The annotation on a class applies only to the class definition,
+  only attributes declared locally will be serialized.
+  However, each definition of a class (a refinement or specialization) can be annotated with `serialize`.
+
+* A module declaration annotated with `serialize` states that all its class definitions
+  and locally declared attributes are serializable.
+
+  ~~~
+  module shared_between_clients is serialize
+  ~~~
+
+* Attribute annotated with `serialize` states that it is to be serialized, when the rest of the class does not.
+  The class will become subclass to `Serializable` but its attributes are not to be serialized by default.
+  Only the attributes with the `serialize` annotation will be serialized.
+
+  ~~~
+  # Only serialize the `name`
+  class UserCredentials
+      var name: String is serialize
+      var avatar_path: String = "/somepath/"+name is lazy
+  end
+  ~~~
+
+## The `noserialize` annotation
+
+The `noserialize` annotation mark an exception in a `serialize` module or class definition.
+
+* By default a module is `noserialize`. There is no need to declare it as such.
+
+* A class definition annotated with `noserialize` within a `serialize` module will not be made serializable.
+
+* A `noserialize` attribute within a class or module annotated with `serialize` will not serialize this attribute.
+  The class will still be made subclass of `Serializable` and it won't affect the other attributes.
+  The `noserialize` attribute will not be set at deserialization.
+  Usually, it will also be annotated with `lazy` to get its value by another mean after the object has been deserialized.
+
+  ~~~
+  # Once again, only serialize the `name`
+  class UserCredentials
+      serialize
+
+      var name: String
+      var avatar_path: String = "/somepath/"+name is noserialize, lazy
+  end
+  ~~~
 
 ## Custom serializable classes
 
