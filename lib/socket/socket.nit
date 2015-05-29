@@ -182,7 +182,7 @@ class TCPStream
 
 	fun enlarge(len: Int) do
 		if _buffer_capacity >= len then return
-		while _buffer_capacity < len do _buffer_capacity *= 2
+		while _buffer_capacity < len do _buffer_capacity = _buffer_capacity * 2 + 2
 		var ns = new NativeString(_buffer_capacity)
 		_buffer.copy_to(ns, _buffer_length - _buffer_pos, _buffer_pos, 0)
 		_buffer = ns
