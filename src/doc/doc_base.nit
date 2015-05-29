@@ -91,6 +91,16 @@ abstract class DocComposite
 	# Parent element.
 	var parent: nullable DocComposite = null is writable
 
+	# Element uniq id.
+	#
+	# The `id` is used as name for the generated element (if any).
+	# Because multiple elements can be generated in the same container
+	# it should be uniq.
+	#
+	# The `id` can also be used to establish links between elements
+	# (HTML links, HTML anchors, vim links, etc.).
+	var id: String is writable
+
 	# Does `self` have a `parent`?
 	fun is_root: Bool do return parent == null
 
@@ -122,8 +132,10 @@ end
 # The root uses a specific subclass to provide different a different behavior
 # than other `DocComposite` elements.
 class DocRoot
+	noautoinit
 	super DocComposite
 
+	redef var id = "<root>"
 	# No op for `RootSection`.
 	redef fun parent=(p) do end
 end

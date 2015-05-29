@@ -40,14 +40,15 @@ end
 
 redef class MModulePage
 	redef fun build_inh_list(v, doc) do
-		var section = new ImportationListSection(mentity)
-		var group = new PanelGroup("List")
+		var id = mentity.nitdoc_id
+		var section = new ImportationListSection("section:{id}.importation", mentity)
+		var group = new PanelGroup("group:list", "List")
 		var imports = self.imports.to_a
 		v.name_sorter.sort(imports)
-		group.add_child new HierarchyListArticle(mentity, "Imports", imports)
+		group.add_child new HierarchyListArticle("article:Imports_{id}.hierarchy", mentity, "Imports", imports)
 		var clients = self.clients.to_a
 		v.name_sorter.sort(clients)
-		group.add_child new HierarchyListArticle(mentity, "Clients", clients)
+		group.add_child new HierarchyListArticle("article:Clients_{id}.hierarchy", mentity, "Clients", clients)
 		section.add_child group
 		section.parent = root.children.first
 		root.children.first.children.insert(section, 1)
@@ -56,20 +57,21 @@ end
 
 redef class MClassPage
 	redef fun build_inh_list(v, doc) do
-		var section = new InheritanceListSection(mentity)
-		var group = new PanelGroup("List")
+		var id = mentity.nitdoc_id
+		var section = new InheritanceListSection("section:{id}.inheritance", mentity)
+		var group = new PanelGroup("group:list", "List")
 		var parents = self.parents.to_a
 		v.name_sorter.sort(parents)
-		group.add_child new HierarchyListArticle(mentity, "Parents", parents)
+		group.add_child new HierarchyListArticle("article:Parents_{id}.hierarchy", mentity, "Parents", parents)
 		var ancestors = self.ancestors.to_a
 		v.name_sorter.sort(ancestors)
-		group.add_child new HierarchyListArticle(mentity, "Ancestors", ancestors)
+		group.add_child new HierarchyListArticle("article:Ancestors_{id}.hierarchy", mentity, "Ancestors", ancestors)
 		var children = self.children.to_a
 		v.name_sorter.sort(children)
-		group.add_child new HierarchyListArticle(mentity, "Children", children)
+		group.add_child new HierarchyListArticle("article:Children_{id}.hierarchy", mentity, "Children", children)
 		var descendants = self.descendants.to_a
 		v.name_sorter.sort(descendants)
-		group.add_child new HierarchyListArticle(mentity, "Descendants", descendants)
+		group.add_child new HierarchyListArticle("article:Descendants_{id}.hierarchy", mentity, "Descendants", descendants)
 		section.add_child group
 		section.parent = root.children.first
 		root.children.first.children.insert(section, 1)

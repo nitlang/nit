@@ -586,7 +586,7 @@ end
 redef class GraphArticle
 	redef fun init_html_render(v, doc, page) do
 		var output_dir = v.ctx.output_dir
-		var path = output_dir / id
+		var path = output_dir / graph_id
 		var path_sh = path.escape_to_sh
 		var file = new FileWriter.open("{path}.dot")
 		file.write(dot)

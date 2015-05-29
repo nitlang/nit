@@ -54,30 +54,30 @@ redef class DefinitionArticle
 
 	# TODO this should move to MEntity?
 	private fun build_mmodule_list(v: IntroRedefListPhase, doc: DocModel, mmodule: MModule) do
-		var section = new IntrosRedefsSection(mentity)
-		var group = new PanelGroup("List")
+		var section = new IntrosRedefsSection("article:{mentity.nitdoc_id}.intros_redefs", mentity)
+		var group = new PanelGroup("group:list", "List")
 		var intros = mmodule.intro_mclassdefs(v.ctx.min_visibility).to_a
 		doc.mainmodule.linearize_mclassdefs(intros)
-		group.add_child new IntrosRedefsListArticle(mentity, "Introduces", intros)
+		group.add_child new IntrosRedefsListArticle("article:Introduces_{mentity.nitdoc_id}.intros_redefs", mentity, "Introduces", intros)
 		var redefs = mmodule.redef_mclassdefs(v.ctx.min_visibility).to_a
 		doc.mainmodule.linearize_mclassdefs(redefs)
-		group.add_child new IntrosRedefsListArticle(mentity, "Redefines", redefs)
+		group.add_child new IntrosRedefsListArticle("article:Redefines_{mentity.nitdoc_id}.intros_redefs", mentity, "Redefines", redefs)
 		section.add_child group
 		add_child(section)
 	end
 
 	# TODO this should move to MEntity?
 	private fun build_mclassdef_list(v: IntroRedefListPhase, doc: DocModel, mclassdef: MClassDef) do
-		var section = new IntrosRedefsSection(mentity)
-		var group = new PanelGroup("List")
+		var section = new IntrosRedefsSection("article:{mentity.nitdoc_id}.intros_redefs", mentity)
+		var group = new PanelGroup("group:list", "List")
 		var intros = mclassdef.collect_intro_mpropdefs(v.ctx.min_visibility).to_a
 		# FIXME avoid diff changes
 		# v.ctx.mainmodule.linearize_mpropdefs(intros)
-		group.add_child new IntrosRedefsListArticle(mentity, "Introduces", intros)
+		group.add_child new IntrosRedefsListArticle("article:Introduces_{mentity.nitdoc_id}.intros_redefs", mentity, "Introduces", intros)
 		var redefs = mclassdef.collect_redef_mpropdefs(v.ctx.min_visibility).to_a
 		# FIXME avoid diff changes
 		# v.ctx.mainmodule.linearize_mpropdefs(redefs)
-		group.add_child new IntrosRedefsListArticle(mentity, "Redefines", redefs)
+		group.add_child new IntrosRedefsListArticle("article:Redefines_{mentity.nitdoc_id}.intros_redefs", mentity, "Redefines", redefs)
 		section.add_child group
 		add_child(section)
 	end
