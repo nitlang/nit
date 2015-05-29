@@ -2452,7 +2452,7 @@ extern class NativeString `{ char* `}
 end
 
 redef class Sys
-	private var args_cache: nullable Sequence[String]
+	private var args_cache: nullable Sequence[String] = null
 
 	# The arguments of the program as given by the OS
 	fun program_args: Sequence[String]
