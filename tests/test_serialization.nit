@@ -19,7 +19,7 @@ import json::serialization
 
 # Simple class
 class A
-	auto_serializable
+	serialize
 
 	var b = false
 	var c: Char
