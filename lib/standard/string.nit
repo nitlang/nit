@@ -2228,6 +2228,12 @@ redef class Collection[E]
 	# Concatenate elements.
 	redef fun to_s
 	do
+		return plain_to_s
+	end
+
+	# Concatenate element without separators
+	fun plain_to_s: String
+	do
 		var s = new FlatBuffer
 		for e in self do if e != null then s.append(e.to_s)
 		return s.to_s
@@ -2263,7 +2269,7 @@ end
 redef class Array[E]
 
 	# Fast implementation
-	redef fun to_s
+	redef fun plain_to_s
 	do
 		var l = length
 		if l == 0 then return ""

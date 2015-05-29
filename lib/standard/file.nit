@@ -1236,7 +1236,7 @@ end
 # Print `objects` on the standard output (`stdout`).
 fun printn(objects: Object...)
 do
-	sys.stdout.write(objects.to_s)
+	sys.stdout.write(objects.plain_to_s)
 end
 
 # Print an `object` on the standard output (`stdout`) and add a newline.

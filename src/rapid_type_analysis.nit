@@ -559,7 +559,7 @@ redef class ASuperstringExpr
 	redef fun accept_rapid_type_visitor(v)
 	do
 		var mmodule = v.analysis.mainmodule
-		var object_type = mmodule.object_type
+		var object_type = mmodule.string_type
 		var arraytype = mmodule.array_type(object_type)
 		v.add_type(arraytype)
 		var nattype = mmodule.native_array_type(object_type)
