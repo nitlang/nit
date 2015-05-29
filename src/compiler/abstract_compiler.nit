@@ -115,15 +115,12 @@ redef class ToolContext
 end
 
 redef class ModelBuilder
-	# The compilation directory
-	var compile_dir: String
-
 	# Simple indirection to `Toolchain::write_and_make`
 	protected fun write_and_make(compiler: AbstractCompiler)
 	do
 		var platform = compiler.target_platform
 		var toolchain = platform.toolchain(toolcontext, compiler)
-		compile_dir = toolchain.compile_dir
+		compiler.toolchain = toolchain
 		toolchain.write_and_make
 	end
 end
@@ -496,6 +493,11 @@ abstract class AbstractCompiler
 	# The modelbuilder used to know the model and the AST
 	var modelbuilder: ModelBuilder is protected writable
 
+	# The associated toolchain
+	#
+	# Set by `modelbuilder.write_and_make` and permit sub-routines to access the current toolchain if required.
+	var toolchain: Toolchain is noinit
+
 	# Is hardening asked? (see --hardening)
 	fun hardening: Bool do return self.modelbuilder.toolcontext.opt_hardening.value
 
@@ -559,7 +561,7 @@ abstract class AbstractCompiler
 	# Binds the generated C function names to Nit function names
 	fun build_c_to_nit_bindings
 	do
-		var compile_dir = modelbuilder.compile_dir
+		var compile_dir = toolchain.compile_dir
 
 		var stream = new FileWriter.open("{compile_dir}/c_functions_hash.c")
 		stream.write("#include <string.h>\n")
