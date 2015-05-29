@@ -60,13 +60,29 @@ end
 private class SerializationPhasePreModel
 	super Phase
 
-	redef fun process_annotated_node(nclassdef, nat)
+	redef fun process_annotated_node(node, nat)
 	do
 		# Skip if we are not interested
-		if nat.n_atid.n_id.text != "auto_serializable" then return
-		if not nclassdef isa AStdClassdef then
-			toolcontext.error(nclassdef.location, "Syntax Error: only a concrete class can be automatically serialized.")
+		var text = nat.n_atid.n_id.text
+		var serialize = text == "auto_serializable" or text == "serialize"
+		var noserialize = text == "noserialize"
+		if not (serialize or noserialize) then return
+
+		# Check legality of annotation
+		if node isa AModuledecl then
+			if noserialize then toolcontext.error(node.location, "Syntax Error: superfluous use of `{text}`, by default a module is `{text}`")
 			return
+		else if not (node isa AStdClassdef or node isa AAttrPropdef) then
+			toolcontext.error(node.location,
+				"Syntax Error: only a class, a module or an attribute can be annotated with `{text}`.")
+			return
+		else if serialize and node.is_noserialize then
+			toolcontext.error(node.location,
+				"Syntax Error: an entity cannot be both `{text}` and `noserialize`.")
+			return
+		else if node.as(Prod).get_annotations(text).length > 1 then
+			toolcontext.warning(node.location, "useless-{text}",
+				"Warning: duplicated annotation `{text}`.")
 		end
 
 		# Add `super Serializable`
