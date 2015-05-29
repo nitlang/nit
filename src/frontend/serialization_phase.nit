@@ -85,8 +85,32 @@ private class SerializationPhasePreModel
 				"Warning: duplicated annotation `{text}`.")
 		end
 
+		# Check the `serialize` state of the parent
+		if not node isa AModuledecl then
+			var up_serialize = false
+			var up: nullable ANode = node
+			loop
+				up = up.parent
+				if up == null then
+					break
+				else if up.is_serialize then
+					up_serialize = true
+					break
+				else if up.is_noserialize then
+					break
+				end
+			end
 
 		generate_serialization_method(nclassdef)
+			# Check for useless double declarations
+			if serialize and up_serialize then
+				toolcontext.warning(node.location, "useless-serialize",
+					"Warning: superfluous use of `{text}`.")
+			else if noserialize and not up_serialize then
+				toolcontext.warning(node.location, "useless-noserialize",
+					"Warning: superfluous use of `{text}`.")
+			end
+		end
 	end
 
 		generate_deserialization_init(nclassdef)
