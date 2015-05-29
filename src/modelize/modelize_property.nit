@@ -660,6 +660,8 @@ redef class APropdef
 		return true
 	end
 
+	# Checks for useless type in redef signatures.
+	private fun check_repeated_types(modelbuilder: ModelBuilder) do end
 end
 
 redef class ASignature
@@ -1055,6 +1057,28 @@ redef class AMethPropdef
 			var nt = nsig.n_type
 			if nt != null then modelbuilder.check_visibility(nt, nt.mtype.as(not null), mpropdef)
 		end
+		check_repeated_types(modelbuilder)
+	end
+
+	# For parameters, type is always useless in a redef.
+	# For return type, type is useless if not covariant with introduction.
+	redef fun check_repeated_types(modelbuilder) do
+		if mpropdef.is_intro or n_signature == null then return
+		# check params
+		for param in n_signature.n_params do
+			if param.n_type != null then
+				modelbuilder.advice(param.n_type, "useless-signature", "Warning: useless type repetition on parameter `{param.n_id.text}` for redefined method `{mpropdef.name}`")
+			end
+		end
+		# get intro
+		var intro = mpropdef.mproperty.intro
+		var n_intro = modelbuilder.mpropdef2npropdef.get_or_null(intro)
+		if n_intro == null or not n_intro isa AMethPropdef then return
+		# check return type
+		var ret_type = n_signature.ret_type
+		if ret_type != null and ret_type == n_intro.n_signature.ret_type then
+			modelbuilder.advice(n_signature.n_type, "useless-signature", "Warning: useless return type repetition for redefined method `{mpropdef.name}`")
+		end
 	end
 end
 
@@ -1350,6 +1374,7 @@ redef class AAttrPropdef
 		if mlazypropdef != null then
 			mlazypropdef.static_mtype = modelbuilder.model.get_mclasses_by_name("Bool").first.mclass_type
 		end
+		check_repeated_types(modelbuilder)
 	end
 
 	redef fun check_signature(modelbuilder)
@@ -1453,6 +1478,25 @@ redef class AAttrPropdef
 				end
 			end
 		end
+	end
+
+	# Type is useless if the attribute type is the same thant the intro.
+	redef fun check_repeated_types(modelbuilder) do
+		if mreadpropdef.is_intro or n_type == null then return
+		# get intro
+		var intro = mreadpropdef.mproperty.intro
+		var n_intro = modelbuilder.mpropdef2npropdef.get_or_null(intro)
+		if n_intro == null then return
+		# get intro type
+		var ntype = null
+		if n_intro isa AMethPropdef then
+			ntype = n_intro.n_signature.ret_type
+		else if n_intro isa AAttrPropdef and n_intro.n_type != null then
+			ntype = n_intro.n_type.mtype
+		end
+		# check
+		if ntype ==null or ntype != n_type.mtype then return
+		modelbuilder.advice(n_type, "useless-signature", "Warning: useless type repetition on redefined attribute `{mpropdef.name}`")
 	end
 end
 

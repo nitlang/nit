@@ -31,7 +31,7 @@ class Bytes
 	private var items: NativeString
 
 	# Number of bytes in the array
-	redef var length: Int
+	redef var length
 
 	# Capacity of the array
 	private var capacity: Int
@@ -58,7 +58,7 @@ class Bytes
 	#     var b = new Bytes.empty
 	#     b.add 101
 	#     assert b[0] == 101
-	redef fun [](i: Int): Int do
+	redef fun [](i) do
 		assert i >= 0
 		assert i < length
 		return items[i].ascii
@@ -67,7 +67,7 @@ class Bytes
 	#     var b = new Bytes.with_capacity(1)
 	#     b[0] = 101
 	#     assert b.to_s == "e"
-	redef fun []=(i: Int, v: Int) do
+	redef fun []=(i, v) do
 		if persisted then regen
 		assert i >= 0
 		assert i <= length
@@ -78,7 +78,7 @@ class Bytes
 	#     var b = new Bytes.empty
 	#     b.add 101
 	#     assert b.to_s == "e"
-	redef fun add(c: Int) do
+	redef fun add(c) do
 		if persisted then regen
 		if length >= capacity then
 			enlarge(length)
@@ -90,7 +90,7 @@ class Bytes
 	#     var b = new Bytes.empty
 	#     b.append([104, 101, 108, 108, 111])
 	#     assert b.to_s == "hello"
-	redef fun append(arr: Collection[Int]) do
+	redef fun append(arr) do
 		if arr isa Bytes then
 			append_ns(arr.items, arr.length)
 		else
@@ -147,7 +147,7 @@ private class BytesIterator
 
 	var tgt: NativeString
 
-	redef var index: Int
+	redef var index
 
 	var max: Int
 

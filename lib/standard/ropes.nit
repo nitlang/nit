@@ -74,7 +74,7 @@ end
 private class Concat
 	super RopeString
 
-	redef var length: Int is noinit
+	redef var length is noinit
 
 	redef fun substrings do return new RopeSubstrings(self)
 
@@ -159,7 +159,6 @@ private class Concat
 	end
 
 	redef fun copy_to_native(dest, n, src_offset, dest_offset) do
-		var remlen = n
 		var subs = new RopeSubstrings.from(self, src_offset)
 		var st = src_offset - subs.pos
 		var off = dest_offset
@@ -827,7 +826,7 @@ class RopeBufferIter
 	# Maximum position iterable.
 	var maxpos: Int
 
-	redef var index: Int
+	redef var index
 
 	# Init the iterator from a RopeBuffer.
 	init(t: RopeBuffer) is old_style_init do
@@ -877,7 +876,7 @@ class RopeBufferReviter
 	# Current position in `ns`.
 	var pns: Int
 
-	redef var index: Int
+	redef var index
 
 	# Init the iterator from a RopeBuffer.
 	init(tgt: RopeBuffer) is old_style_init do

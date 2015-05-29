@@ -135,7 +135,7 @@ class FileReader
 	end
 
 	# End of file?
-	redef var end_reached: Bool = false
+	redef var end_reached = false
 
 	# Open the file at `path` for reading.
 	#
@@ -299,7 +299,7 @@ class Stdin
 		prepare_buffer(1)
 	end
 
-	redef fun poll_in: Bool is extern "file_stdin_poll_in"
+	redef fun poll_in is extern "file_stdin_poll_in"
 end
 
 # Standard output stream.

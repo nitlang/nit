@@ -898,8 +898,8 @@ abstract class Text
 	#
 	# REQUIRE: `n` must be large enough to contain `len` bytes
 	#
-	# 	var ns = new NativeString(8)
-	# 	"Text is String".copy_to_native(ns, 8, 2, 0)
+	#	var ns = new NativeString(8)
+	#	"Text is String".copy_to_native(ns, 8, 2, 0)
 	#	assert ns.to_s_with_length(8) == "xt is St"
 	#
 	fun copy_to_native(dest: NativeString, n, src_offset, dest_offset: Int) do
@@ -945,7 +945,7 @@ abstract class FlatText
 	# copy locally the char* as Nit Strings are immutable.
 	private fun fast_cstring: NativeString is abstract
 
-	redef var length: Int = 0
+	redef var length = 0
 
 	redef fun output
 	do
@@ -1194,7 +1194,7 @@ class FlatString
 	# Indes in _items of the last item of the string
 	private var index_to: Int is noinit
 
-	redef var chars: SequenceRead[Char] = new FlatStringCharView(self) is lazy
+	redef var chars = new FlatStringCharView(self) is lazy
 
 	redef fun [](index)
 	do
@@ -1319,8 +1319,7 @@ class FlatString
 		index_to = to
 	end
 
-	redef fun to_cstring: NativeString
-	do
+	redef fun to_cstring do
 		if real_items != null then
 			return real_items.as(not null)
 		else
@@ -1738,8 +1737,7 @@ class FlatBuffer
 		capacity = c
 	end
 
-	redef fun to_s: String
-	do
+	redef fun to_s do
 		written = true
 		if length == 0 then items = new NativeString(1)
 		return new FlatString.with_infos(items, length, 0, length - 1)

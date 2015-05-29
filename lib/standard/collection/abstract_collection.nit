@@ -317,7 +317,7 @@ private class ContainerIterator[E]
 
 	redef fun next do is_ok = false
 
-	redef var is_ok: Bool = true
+	redef var is_ok = true
 
 	var container: Container[E]
 end
@@ -1100,7 +1100,7 @@ end
 private class CoupleMapIterator[K, V]
 	super MapIterator[K, V]
 	redef fun item do return _iter.item.second
-	
+
 	#redef fun item=(e) do _iter.item.second = e
 
 	redef fun key do return _iter.item.first

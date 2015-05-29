@@ -66,7 +66,7 @@ extern class Sqlite3Code `{int`}
 	new done `{ return SQLITE_DONE; `} #       101  /* sqlite3_step() has finished executing */
 	fun is_done: Bool `{ return self == SQLITE_DONE; `}
 
-	redef fun to_s: String import NativeString.to_s `{
+	redef fun to_s import NativeString.to_s `{
 #if SQLITE_VERSION_NUMBER >= 3007015
 		char *err = (char *)sqlite3_errstr(self);
 #else

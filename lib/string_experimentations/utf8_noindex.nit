@@ -271,7 +271,7 @@ redef class FlatString
 	redef type OTHER: FlatString
 
 	# Length in bytes of the string (e.g. the length of the C string)
-	redef var bytelen: Int
+	redef var bytelen
 
 	# Cache for the last accessed character in the char
 	var cache = new CharCache(-1,-1)
@@ -475,7 +475,7 @@ redef class FlatString
 	end
 
 	# O(n)
-	redef fun substring(from: Int, count: Int) do
+	redef fun substring(from, count) do
 		assert count >= 0
 
 		if from < 0 then
@@ -518,7 +518,7 @@ end
 
 redef class FlatBuffer
 
-	redef var bytelen: Int
+	redef var bytelen
 
 	redef init from(s) do
 		if s isa Concat then
@@ -717,7 +717,7 @@ redef class NativeString
 		return to_s_with_length(len)
 	end
 
-	redef fun to_s_with_length(len: Int): FlatString
+	redef fun to_s_with_length(len)
 	do
 		return new FlatString.with_bytelen(self, 0, len - 1, len)
 	end

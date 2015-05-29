@@ -297,7 +297,7 @@ redef class NeoNode
 	redef fun to_s do return to_json
 
 	# Append the JSON representation of the node to the specified buffer.
-	redef fun append_json_for(graph: NeoGraph, buffer: Buffer) do
+	redef fun append_json_for(graph, buffer) do
 		append_json(buffer)
 	end
 end
@@ -307,7 +307,7 @@ redef class NeoEdge
 	# Append the JSON representation of the relationship to the specified buffer.
 	#
 	# Use the IDs specfied by `graph.nodes`.
-	redef fun append_json_for(graph: NeoGraph, buffer: Buffer) do
+	redef fun append_json_for(graph, buffer) do
 		buffer.append "\{\"type\":"
 		rel_type.append_json(buffer)
 		buffer.append ",\"properties\":"

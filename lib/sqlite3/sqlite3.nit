@@ -257,7 +257,7 @@ class StatementIterator
 
 	redef var item: StatementRow is noinit
 
-	redef var is_ok: Bool is noinit
+	redef var is_ok is noinit
 
 	# require: `self.statement.is_open`
 	redef fun next

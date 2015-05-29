@@ -211,7 +211,7 @@ interface Boxed3d[N: Numeric]
 			(self.back <= other.front and other.back <= self.front))
 	end
 
-	redef fun padded(dist: N): Box3d[N] do return new Box3d[N].lrtbfb(left - dist, right + dist, top + dist, bottom - dist, front + dist, back - dist)
+	redef fun padded(dist): Box3d[N] do return new Box3d[N].lrtbfb(left - dist, right + dist, top + dist, bottom - dist, front + dist, back - dist)
 end
 
 # A 3d bounded object and an implementation of Boxed
@@ -344,8 +344,8 @@ class BoxedArray[E: Boxed[Numeric]]
 
 	private var data: Array[E] = new Array[E]
 
-	redef fun add(item: E) do data.add(item)
-	redef fun items_overlapping(item: Boxed[Numeric]): SimpleCollection[E]
+	redef fun add(item) do data.add(item)
+	redef fun items_overlapping(item): SimpleCollection[E]
 	do
 		var arr = new Array[E]
 		for i in data do

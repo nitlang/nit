@@ -115,8 +115,7 @@ class DisjointSet[E]
 	#     s.add(1)
 	#     assert s.has(1)
 	#     assert not s.has(2)
-	redef fun has(e)
-	do
+	redef fun has(e) do
 		return nodes.has_key(e)
 	end
 
@@ -126,8 +125,7 @@ class DisjointSet[E]
 	# Initially it is in its own disjoint subset
 	#
 	# ENSURE: `has(e)`
-	redef fun add(e:E)
-	do
+	redef fun add(e) do
 		if nodes.has_key(e) then return
 		var ne = new DisjointSetNode
 		nodes[e] = ne

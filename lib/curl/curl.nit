@@ -377,8 +377,7 @@ class CurlResponseSuccess
 	var status_code = 0
 
 	# Receive body from request due to body callback registering
-	redef fun body_callback(line: String)
-	do
+	redef fun body_callback(line) do
 		self.body_str = "{self.body_str}{line}"
 	end
 end
