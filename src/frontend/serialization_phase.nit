@@ -85,14 +85,17 @@ private class SerializationPhasePreModel
 				"Warning: duplicated annotation `{text}`.")
 		end
 
-		# Add `super Serializable`
-		var sc = toolcontext.parse_superclass("Serializable")
-		sc.location = nat.location
-		nclassdef.n_propdefs.add sc
 
 		generate_serialization_method(nclassdef)
+	end
 
 		generate_deserialization_init(nclassdef)
+	redef fun process_nclassdef(nclassdef)
+	do
+			# Add `super Serializable`
+			var sc = toolcontext.parse_superclass("Serializable")
+			sc.location = nclassdef.location
+			nclassdef.n_propdefs.add sc
 	end
 
 	redef fun process_nmodule(nmodule)
