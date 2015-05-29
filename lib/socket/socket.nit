@@ -175,7 +175,7 @@ class TCPStream
 			close
 			end_reached = true
 		end
-		enlarge(_buffer_capacity + read.length)
+		enlarge(_buffer_length + read.length)
 		read.copy_to_native(_buffer, read.length, 0, 0)
 		_buffer_length = read.length
 	end
