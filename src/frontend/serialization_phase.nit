@@ -38,6 +38,9 @@ redef class ANode
 	# Is this node annotated to be made serializable?
 	private fun is_serialize: Bool do return false
 
+	# Is this node annotated to not be made serializable?
+	private fun is_noserialize: Bool do return false
+
 	private fun accept_precise_type_visitor(v: PreciseTypeVisitor) do visit_all(v)
 end
 
@@ -46,6 +49,10 @@ redef class ADefinition
 	redef fun is_serialize do
 		return get_annotations("serialize").not_empty or
 			get_annotations("auto_serializable").not_empty
+	end
+
+	redef fun is_noserialize do
+		return get_annotations("noserialize").not_empty
 	end
 end
 
