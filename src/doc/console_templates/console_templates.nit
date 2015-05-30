@@ -81,11 +81,6 @@ redef class ConcernSection
 	end
 end
 
-redef class ConstructorsSection
-	redef var cs_title = "Constructors"
-	redef var cs_subtitle = null
-end
-
 redef class MEntityComposite
 	redef var cs_title is lazy do return mentity.cs_name
 	redef var cs_subtitle is lazy do return mentity.cs_namespace

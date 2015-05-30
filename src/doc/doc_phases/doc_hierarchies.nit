@@ -40,14 +40,15 @@ end
 
 redef class MModulePage
 	redef fun build_inh_list(v, doc) do
-		var section = new ImportationListSection(mentity)
-		var group = new PanelGroup("List")
+		var id = mentity.nitdoc_id
+		var section = new TabbedGroup("{id}.importation", "Dependencies")
+		var group = new PanelGroup("list.group", "List")
 		var imports = self.imports.to_a
 		v.name_sorter.sort(imports)
-		group.add_child new HierarchyListArticle(mentity, "Imports", imports)
+		group.add_child new MEntitiesListArticle("{id}.imports", "Imports", imports)
 		var clients = self.clients.to_a
 		v.name_sorter.sort(clients)
-		group.add_child new HierarchyListArticle(mentity, "Clients", clients)
+		group.add_child new MEntitiesListArticle("{id}.clients", "Clients", clients)
 		section.add_child group
 		section.parent = root.children.first
 		root.children.first.children.insert(section, 1)
@@ -56,45 +57,23 @@ end
 
 redef class MClassPage
 	redef fun build_inh_list(v, doc) do
-		var section = new InheritanceListSection(mentity)
-		var group = new PanelGroup("List")
+		var id = mentity.nitdoc_id
+		var section = new TabbedGroup("{id}.inheritance", "Inheritance")
+		var group = new PanelGroup("list.group", "List")
 		var parents = self.parents.to_a
 		v.name_sorter.sort(parents)
-		group.add_child new HierarchyListArticle(mentity, "Parents", parents)
+		group.add_child new MEntitiesListArticle("{id}.parents", "Parents", parents)
 		var ancestors = self.ancestors.to_a
 		v.name_sorter.sort(ancestors)
-		group.add_child new HierarchyListArticle(mentity, "Ancestors", ancestors)
+		group.add_child new MEntitiesListArticle("{id}.ancestors", "Ancestors", ancestors)
 		var children = self.children.to_a
 		v.name_sorter.sort(children)
-		group.add_child new HierarchyListArticle(mentity, "Children", children)
+		group.add_child new MEntitiesListArticle("{id}.children", "Children", children)
 		var descendants = self.descendants.to_a
 		v.name_sorter.sort(descendants)
-		group.add_child new HierarchyListArticle(mentity, "Descendants", descendants)
+		group.add_child new MEntitiesListArticle("{id}.descendants", "Descendants", descendants)
 		section.add_child group
 		section.parent = root.children.first
 		root.children.first.children.insert(section, 1)
 	end
-end
-
-# FIXME diff hack
-class ImportationListSection
-	super TabbedGroup
-	super MEntityComposite
-end
-
-# FIXME diff hack
-class InheritanceListSection
-	super TabbedGroup
-	super MEntityComposite
-end
-
-# Dislay a hierarchical list of mentities.
-class HierarchyListArticle
-	super MEntityArticle
-
-	# Title displayed in the top of this list.
-	var list_title: String
-
-	# MEntities to display in this list.
-	var mentities: Array[MEntity]
 end

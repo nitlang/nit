@@ -372,7 +372,7 @@ redef class MClassPage
 		if not mprop_is_local(mprop) then
 			classes.add "inherit"
 			var cls_url = mprop.intro.mclassdef.mclass.nitdoc_url
-			var def_url = "{cls_url}#article:{mprop.nitdoc_id}.definition"
+			var def_url = "{cls_url}#{mprop.nitdoc_id}.definition"
 			var lnk = new Link(def_url, mprop.html_name)
 			var mdoc = mprop.intro.mdoc_or_fallback
 			if mdoc != null then lnk.title = mdoc.short_comment
@@ -388,7 +388,7 @@ redef class MClassPage
 		end
 		var def = select_mpropdef(mprop)
 		var anc = def.html_link_to_anchor
-		anc.href = "#article:{def.nitdoc_id}.definition"
+		anc.href = "#{def.nitdoc_id}.definition"
 		var lnk = new Template
 		lnk.add new DocHTMLLabel.with_classes(classes)
 		lnk.add anc
@@ -471,7 +471,7 @@ redef class MEntitySection
 			title.add mentity.html_signature
 			html_title = title
 			html_subtitle = mentity.html_namespace
-			toc_title = mentity.html_name
+			html_toc_title = mentity.html_name
 		end
 		super
 	end
@@ -484,16 +484,16 @@ redef class ConcernSection
 		var mentity = self.mentity
 		if page isa MGroupPage then
 			html_title = null
-			toc_title = mentity.html_name
+			html_toc_title = mentity.html_name
 			is_toc_hidden = false
 		else if page.mentity isa MModule and mentity isa MModule then
 			var title = new Template
 			if mentity == page.mentity then
 				title.add "in "
-				toc_title = "in {mentity.html_name}"
+				html_toc_title = "in {mentity.html_name}"
 			else
 				title.add "from "
-				toc_title = "from {mentity.html_name}"
+				html_toc_title = "from {mentity.html_name}"
 			end
 			title.add mentity.html_namespace
 			html_title = title
@@ -503,7 +503,7 @@ redef class ConcernSection
 			title.add "in "
 			title.add mentity.html_namespace
 			html_title = title
-			toc_title = "in {mentity.html_name}"
+			html_toc_title = "in {mentity.html_name}"
 		end
 		super
 	end
@@ -532,7 +532,7 @@ redef class DefinitionArticle
 			title.add mentity.html_icon
 			title.add mentity.html_namespace
 			html_title = title
-			toc_title = mentity.html_name
+			html_toc_title = mentity.html_name
 			if mentity isa MModule then
 				html_source_link = v.html_source_link(mentity.location)
 			end
@@ -542,7 +542,7 @@ redef class DefinitionArticle
 			title.add mentity.mmodule.html_namespace
 			html_title = mentity.html_declaration
 			html_subtitle = title
-			toc_title = "in {mentity.html_name}"
+			html_toc_title = "in {mentity.html_name}"
 			html_source_link = v.html_source_link(mentity.location)
 			if page isa MEntityPage and mentity.is_intro and mentity.mmodule != page.mentity then
 				is_short_comment = true
@@ -555,13 +555,13 @@ redef class DefinitionArticle
 				title.add mentity.html_declaration
 				html_title = title
 				html_subtitle = mentity.html_namespace
-				toc_title = mentity.html_name
+				html_toc_title = mentity.html_name
 			else
 				var title = new Template
 				title.add "in "
 				title.add mentity.mclassdef.html_link
 				html_title = title
-				toc_title = "in {mentity.mclassdef.html_name}"
+				html_toc_title = "in {mentity.mclassdef.html_name}"
 			end
 			html_source_link = v.html_source_link(mentity.location)
 		end
@@ -576,7 +576,7 @@ redef class HomeArticle
 	redef fun init_html_render(v, doc, page) do
 		if v.ctx.opt_custom_title.value != null then
 			self.html_title = v.ctx.opt_custom_title.value.to_s
-			self.toc_title = v.ctx.opt_custom_title.value.to_s
+			self.html_toc_title = v.ctx.opt_custom_title.value.to_s
 		end
 		self.content = v.ctx.opt_custom_intro.value
 		super
@@ -586,7 +586,7 @@ end
 redef class GraphArticle
 	redef fun init_html_render(v, doc, page) do
 		var output_dir = v.ctx.output_dir
-		var path = output_dir / id
+		var path = output_dir / graph_id
 		var path_sh = path.escape_to_sh
 		var file = new FileWriter.open("{path}.dot")
 		file.write(dot)

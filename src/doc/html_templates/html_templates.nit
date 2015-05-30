@@ -247,12 +247,12 @@ redef class DocComposite
 	super Template
 
 	# HTML anchor id
-	var html_id: String is noinit, writable
+	var html_id: String is writable, lazy do return id
 
 	# Title to display if any.
 	#
 	# This title can be decorated with HTML.
-	var html_title: nullable Writable is noinit, writable
+	var html_title: nullable Writable is writable, lazy do return title
 
 	# Subtitle to display if any.
 	var html_subtitle: nullable Writable is noinit, writable
@@ -286,26 +286,20 @@ redef class DocComposite
 	# Level <hX> for HTML heading.
 	private fun hlvl: Int do return depth
 
-	# Is `self` not displayed in the page.
-	#
-	# By default, empty elements are hidden.
-	fun is_hidden: Bool do return is_empty
-
 	# A short, undecorated title that goes in the table of contents.
 	#
 	# By default, returns `html_title.to_s`, subclasses should redefine it.
-	var toc_title: String is lazy, writable do return html_title.to_s
-
-	# Is `self` hidden in the table of content?
-	var is_toc_hidden = false is writable
+	var html_toc_title: nullable String is lazy, writable do
+		if html_title == null then return toc_title
+		return html_title.write_to_string
+	end
 
 	# Render this element in a table of contents.
 	private fun render_toc_item(lst: UnorderedList) do
-		if is_toc_hidden then return
+		if is_toc_hidden or html_toc_title == null then return
 
 		var content = new Template
-		content.add new Link("#{html_id}", toc_title)
-
+		content.add new Link("#{html_id}", html_toc_title.to_s)
 		if not children.is_empty then
 			var sublst = new UnorderedList
 			sublst.css_classes.add "nav"
@@ -324,6 +318,12 @@ redef class DocComposite
 		var id = html_id.replace(":", "")
 		id = id.replace(".", "")
 		return "{id}-tab"
+	end
+end
+
+redef class DocRoot
+	redef fun rendering do
+		for child in children do addn child.write_to_string
 	end
 end
 
@@ -359,21 +359,20 @@ redef class TabbedGroup
 		var tabs = new DocTabs("{html_id}.tabs", "")
 		for child in children do
 			if child.is_hidden then continue
-			tabs.add_panel new DocTabPanel(child.html_tab_id, child.toc_title, child)
+			var title = child.html_toc_title or else child.toc_title or else ""
+			tabs.add_panel new DocTabPanel(child.html_tab_id, title, child)
 		end
 		addn tabs
 	end
 end
 
 redef class PanelGroup
-	redef var html_id is lazy do return "group:{group_title.to_lower.to_snake_case}"
 	redef var html_title = null
-	redef var toc_title is lazy do return group_title
+	redef var toc_title is lazy do return title or else ""
 	redef var is_toc_hidden = true
 end
 
 redef class HomeArticle
-	redef var html_id = "article:home"
 	redef var html_title = "Overview"
 
 	# HTML content to display on the home page.
@@ -389,11 +388,7 @@ redef class HomeArticle
 end
 
 redef class IndexArticle
-	redef var html_id = "article:index"
 	redef var html_title = "Index"
-	redef fun is_empty do
-		return mmodules.is_empty and mclasses.is_empty and mprops.is_empty
-	end
 
 	redef fun render_body do
 		addn "<div class='container-fluid'>"
@@ -428,50 +423,21 @@ redef class IndexArticle
 	end
 end
 
-redef class ProjectsSection
-	redef var html_id = "section:projects"
-	redef var html_title = "Projects"
-end
-
 redef class MEntityComposite
-	redef var html_id is lazy do return mentity.nitdoc_id
 	redef var html_title is lazy do return mentity.nitdoc_name
 end
 
 redef class MEntitySection
-	redef var html_id is lazy do return "section:{mentity.nitdoc_name}"
 	redef var html_title is lazy do return mentity.html_name
 	redef var html_subtitle is lazy do return mentity.html_declaration
 end
 
-redef class ConstructorsSection
-	redef var html_id is lazy do return "article:{mentity.nitdoc_id}.constructors"
-	redef var html_title = "Constructors"
-	redef var html_subtitle = null
-	redef fun is_toc_hidden do return is_empty
-end
-
 redef class ConcernSection
-	redef var html_id is lazy do return "concern:{mentity.nitdoc_id}"
 	redef var html_title is lazy do return "in {mentity.nitdoc_name}"
-	redef fun is_toc_hidden do return is_empty
-end
-
-redef class ImportationListSection
-	redef var html_id is lazy do return "section:{mentity.nitdoc_id}.importation"
-	redef var html_title is lazy do return "Dependencies"
-end
-
-redef class InheritanceListSection
-	redef var html_id is lazy do return "section:{mentity.nitdoc_id}.inheritance"
-	redef var html_title is lazy do return "Inheritance"
 end
 
 redef class IntroArticle
-	redef var html_id is lazy do return "article:{mentity.nitdoc_id}.intro"
 	redef var html_title = null
-	redef var is_hidden = false
-	redef var is_toc_hidden = true
 
 	# Link to source to display if any.
 	var html_source_link: nullable Writable is noinit, writable
@@ -484,7 +450,8 @@ redef class IntroArticle
 		end
 		for child in children do
 			if child.is_hidden then continue
-			tabs.add_panel new DocTabPanel(child.html_tab_id, child.toc_title, child)
+			var title = child.html_toc_title or else child.toc_title or else ""
+			tabs.add_panel new DocTabPanel(child.html_tab_id, title, child)
 		end
 		var lnk = html_source_link
 		if lnk != null then
@@ -495,15 +462,11 @@ redef class IntroArticle
 end
 
 redef class ConcernsArticle
-	redef var html_id is lazy do return "article:{mentity.nitdoc_id}.concerns"
 	redef var html_title = "Concerns"
-	redef fun is_hidden do return concerns.is_empty
 	redef fun render_body do add concerns.html_list
 end
 
 redef class DefinitionListArticle
-	redef var html_id is lazy do return "article:{mentity.nitdoc_id}.definition-list"
-
 	redef var html_title is lazy do
 		var title = new Template
 		title.add mentity.html_icon
@@ -512,14 +475,12 @@ redef class DefinitionListArticle
 	end
 
 	redef var html_subtitle is lazy do return mentity.html_namespace
-	redef var toc_title is lazy do return mentity.html_name
+	redef var html_toc_title is lazy do return mentity.html_name
 end
 
 redef class DefinitionArticle
-	redef var html_id is lazy do return "article:{mentity.nitdoc_id}.definition"
 	redef var html_title is lazy do return mentity.html_name
 	redef var html_subtitle is lazy do return mentity.html_declaration
-	redef var is_hidden = false
 
 	# Does `self` display only it's title and no body?
 	#
@@ -549,7 +510,8 @@ redef class DefinitionArticle
 		end
 		for child in children do
 			if child.is_hidden then continue
-			tabs.add_panel new DocTabPanel(child.html_tab_id, child.toc_title, child)
+			var title = child.html_toc_title or else child.toc_title or else ""
+			tabs.add_panel new DocTabPanel(child.html_tab_id, title, child)
 		end
 		var lnk = html_source_link
 		if lnk != null then
@@ -559,39 +521,10 @@ redef class DefinitionArticle
 	end
 end
 
-redef class HierarchyListArticle
-	redef var html_id is lazy do return "article:{list_title}_{mentity.nitdoc_id}.hierarchy"
-	redef var html_title is lazy do return list_title
-	redef fun is_empty do return mentities.is_empty
-	redef var is_toc_hidden = true
-
+redef class MEntitiesListArticle
 	redef fun render_body do
 		var lst = new UnorderedList
 		lst.css_classes.add "list-unstyled list-definition"
-		for mentity in mentities do
-			lst.add_li mentity.html_list_item
-		end
-		addn lst
-	end
-end
-
-redef class IntrosRedefsSection
-	redef var html_id is lazy do return "article:{mentity.nitdoc_id}.intros_redefs"
-	redef var toc_title do return "Intros / Redefs"
-	redef var html_title = null
-	redef var html_subtitle = null
-	redef var is_toc_hidden = true
-end
-
-redef class IntrosRedefsListArticle
-	redef var html_id is lazy do return "article:{list_title}_{mentity.nitdoc_id}.intros_redefs"
-	redef var html_title is lazy do return list_title
-	redef fun is_hidden do return mentities.is_empty
-	redef var is_toc_hidden = true
-
-	redef fun render_body do
-		var lst = new UnorderedList
-		lst.css_classes.add "list-unstyled list-labeled"
 		for mentity in mentities do
 			lst.add_li mentity.html_list_item
 		end
@@ -600,11 +533,6 @@ redef class IntrosRedefsListArticle
 end
 
 redef class DefinitionLinArticle
-	redef var html_id is lazy do return "article:{mentity.nitdoc_id}.lin"
-	redef var html_title is lazy do return "Linearization"
-	redef fun is_hidden do return mentities.is_empty
-	redef var is_toc_hidden = true
-
 	redef fun render_body do
 		var lst = new UnorderedList
 		lst.css_classes.add "list-unstyled list-labeled"
@@ -626,11 +554,7 @@ redef class DefinitionLinArticle
 end
 
 redef class GraphArticle
-	redef var html_id is lazy do return "article:{mentity.nitdoc_id}.graph"
 	redef var html_title = null
-	redef var toc_title do return "Graph"
-	redef var is_hidden = false
-	redef var is_toc_hidden = true
 
 	# HTML map used to display link.
 	#
@@ -639,8 +563,8 @@ redef class GraphArticle
 
 	redef fun render_body do
 		addn "<div class=\"text-center\">"
-		addn " <img src='{id}.png' usemap='#{id}' style='margin:auto'"
-		addn "  alt='{graph_title}'/>"
+		addn " <img src='{graph_id}.png' usemap='#{graph_id}' style='margin:auto'"
+		addn "  alt='{title or else ""}'/>"
 		add map
 		addn "</div>"
 	end

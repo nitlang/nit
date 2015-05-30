@@ -46,7 +46,7 @@ redef class MModulePage
 	# Imported modules that should appear in the documentation.
 	var imports = new HashSet[MModule]
 
-	# Clients modules that shjould appear in the documentation.
+	# Clients modules that should appear in the documentation.
 	var clients = new HashSet[MModule]
 
 	redef fun build_poset(v, doc) do

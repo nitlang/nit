@@ -75,6 +75,15 @@ class DocPage
 	var root = new DocRoot
 
 	redef fun to_s do return title
+
+	# Pretty prints the content of this page.
+	fun pretty_print: Writable do
+		var res = new Template
+		res.addn "page: {title}"
+		res.addn ""
+		root.pretty_print_in(res)
+		return res
+	end
 end
 
 # `DocPage` elements that can be nested in another.
@@ -91,6 +100,19 @@ abstract class DocComposite
 	# Parent element.
 	var parent: nullable DocComposite = null is writable
 
+	# Element uniq id.
+	#
+	# The `id` is used as name for the generated element (if any).
+	# Because multiple elements can be generated in the same container
+	# it should be uniq.
+	#
+	# The `id` can also be used to establish links between elements
+	# (HTML links, HTML anchors, vim links, etc.).
+	var id: String is writable
+
+	# Item title if any.
+	var title: nullable String
+
 	# Does `self` have a `parent`?
 	fun is_root: Bool do return parent == null
 
@@ -99,8 +121,18 @@ abstract class DocComposite
 	# Children are ordered, this order can be changed by the `DocPhase`.
 	var children = new Array[DocComposite]
 
-	# Does `self` have `children`?
-	fun is_empty: Bool do return children.is_empty
+	# Is `self` not displayed in the page.
+	#
+	# By default, empty elements are hidden.
+	fun is_hidden: Bool do return children.is_empty
+
+	# Title used in table of content if any.
+	var toc_title: nullable String is writable, lazy do return title
+
+	# Is `self` hidden in the table of content?
+	var is_toc_hidden: Bool is writable, lazy do
+		return toc_title == null or is_hidden
+	end
 
 	# Add a `child` to `self`.
 	#
@@ -115,6 +147,20 @@ abstract class DocComposite
 		if parent == null then return 0
 		return parent.depth + 1
 	end
+
+	# Pretty prints this composite recursively.
+	fun pretty_print: Writable do
+		var res = new Template
+		pretty_print_in(res)
+		return res
+	end
+
+	# Appends the Pretty print of this composite in `res`.
+	private fun pretty_print_in(res: Template) do
+		res.add "#" * depth
+		res.addn " {id}"
+		for child in children do child.pretty_print_in(res)
+	end
 end
 
 # The `DocComposite` element that contains all the other.
@@ -122,7 +168,11 @@ end
 # The root uses a specific subclass to provide different a different behavior
 # than other `DocComposite` elements.
 class DocRoot
+	noautoinit
 	super DocComposite
+
+	redef var id = "<root>"
+	redef var title = "<root>"
 
 	# No op for `RootSection`.
 	redef fun parent=(p) do end

@@ -73,7 +73,7 @@ redef class MModulePage
 			end
 		end
 		op.append("\}\n")
-		return new GraphArticle(mentity, name, "Importation Graph", op)
+		return new GraphArticle("{mentity.nitdoc_id}.graph", "Importation Graph", name, op)
 	end
 end
 
@@ -107,7 +107,7 @@ redef class MClassPage
 			end
 		end
 		op.append("\}\n")
-		return new GraphArticle(mentity, name, "Inheritance Graph", op)
+		return new GraphArticle("{mentity.nitdoc_id}.graph", "Inheritance Graph", name, op)
 	end
 end
 
@@ -116,16 +116,14 @@ end
 # The graph is stored in dot format.
 # The final output is delayed untill rendering.
 class GraphArticle
-	super MEntityComposite
+	super DocArticle
 
 	# Graph ID (used for outputing file with names).
-	var id: String
-
-	# Graph title to display.
-	var graph_title: String
+	var graph_id: String
 
 	# Dot script of the graph.
 	var dot: Text
 
-	redef var is_empty = false
+	redef var is_hidden = false
+	redef var is_toc_hidden = true
 end
