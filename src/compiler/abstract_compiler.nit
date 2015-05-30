@@ -1455,6 +1455,14 @@ abstract class AbstractCompilerVisitor
 		return res
 	end
 
+	# Generate a byte value
+	fun byte_instance(value: Byte): RuntimeVariable
+	do
+		var t = mmodule.byte_type
+		var res = new RuntimeVariable("((unsigned char){value.to_s})", t, t)
+		return res
+	end
+
 	# Generate a char value
 	fun char_instance(value: Char): RuntimeVariable
 	do
@@ -1838,6 +1846,8 @@ redef class MClassType
 			return "char"
 		else if mclass.name == "Float" then
 			return "double"
+		else if mclass.name == "Byte" then
+			return "unsigned char"
 		else if mclass.name == "NativeString" then
 			return "char*"
 		else if mclass.name == "NativeArray" then
@@ -1868,6 +1878,8 @@ redef class MClassType
 			return "c"
 		else if mclass.name == "Float" then
 			return "d"
+		else if mclass.name == "Byte" then
+			return "b"
 		else if mclass.name == "NativeString" then
 			return "str"
 		else if mclass.name == "NativeArray" then
@@ -2098,6 +2110,9 @@ redef class AMethPropdef
 			else if pname == "to_f" then
 				v.ret(v.new_expr("(double){arguments[0]}", ret.as(not null)))
 				return true
+			else if pname == "to_b" then
+				v.ret(v.new_expr("(unsigned char){arguments[0]}", ret.as(not null)))
+				return true
 			else if pname == "ascii" then
 				v.ret(v.new_expr("{arguments[0]}", ret.as(not null)))
 				return true
@@ -2139,6 +2154,69 @@ redef class AMethPropdef
 				return true
 			else if pname == "ascii" then
 				v.ret(v.new_expr("(unsigned char){arguments[0]}", ret.as(not null)))
+				return true
+			end
+		else if cname == "Byte" then
+			if pname == "output" then
+				v.add("printf(\"%x\\n\", {arguments.first});")
+				return true
+			else if pname == "object_id" then
+				v.ret(v.new_expr("(long){arguments.first}", ret.as(not null)))
+				return true
+			else if pname == "+" then
+				v.ret(v.new_expr("{arguments[0]} + {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == "-" then
+				v.ret(v.new_expr("{arguments[0]} - {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == "unary -" then
+				v.ret(v.new_expr("-{arguments[0]}", ret.as(not null)))
+				return true
+			else if pname == "unary +" then
+				v.ret(arguments[0])
+				return true
+			else if pname == "*" then
+				v.ret(v.new_expr("{arguments[0]} * {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == "/" then
+				v.ret(v.new_expr("{arguments[0]} / {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == "%" then
+				v.ret(v.new_expr("{arguments[0]} % {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == "lshift" then
+				v.ret(v.new_expr("{arguments[0]} << {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == "rshift" then
+				v.ret(v.new_expr("{arguments[0]} >> {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == "==" then
+				v.ret(v.equal_test(arguments[0], arguments[1]))
+				return true
+			else if pname == "!=" then
+				var res = v.equal_test(arguments[0], arguments[1])
+				v.ret(v.new_expr("!{res}", ret.as(not null)))
+				return true
+			else if pname == "<" then
+				v.ret(v.new_expr("{arguments[0]} < {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == ">" then
+				v.ret(v.new_expr("{arguments[0]} > {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == "<=" then
+				v.ret(v.new_expr("{arguments[0]} <= {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == ">=" then
+				v.ret(v.new_expr("{arguments[0]} >= {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == "to_i" then
+				v.ret(v.new_expr("(long){arguments[0]}", ret.as(not null)))
+				return true
+			else if pname == "to_f" then
+				v.ret(v.new_expr("(double){arguments[0]}", ret.as(not null)))
+				return true
+			else if pname == "ascii" then
+				v.ret(v.new_expr("{arguments[0]}", ret.as(not null)))
 				return true
 			end
 		else if cname == "Bool" then
@@ -2208,6 +2286,9 @@ redef class AMethPropdef
 				return true
 			else if pname == "to_i" then
 				v.ret(v.new_expr("(long){arguments[0]}", ret.as(not null)))
+				return true
+			else if pname == "to_b" then
+				v.ret(v.new_expr("(unsigned char){arguments[0]}", ret.as(not null)))
 				return true
 			end
 		else if cname == "NativeString" then

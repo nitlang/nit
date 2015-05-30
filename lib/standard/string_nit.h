@@ -15,5 +15,7 @@
 
 long native_int_length_str(long recv);
 void native_int_to_s(long recv, char* str, long buflen);
+long native_byte_length_str(unsigned char recv);
+void native_byte_to_s(unsigned char recv, char* str, long buflen);
 
 #endif

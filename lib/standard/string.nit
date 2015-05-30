@@ -2035,6 +2035,26 @@ redef class Bool
 	end
 end
 
+redef class Byte
+	# C function to calculate the length of the `NativeString` to receive `self`
+	private fun byte_to_s_len: Int is extern "native_byte_length_str"
+
+	# C function to convert an nit Int to a NativeString (char*)
+	private fun native_byte_to_s(nstr: NativeString, strlen: Int) is extern "native_byte_to_s"
+
+	# Displayable byte in its hexadecimal form (0x..)
+	#
+	#     assert 1.to_b.to_s       == "0x01"
+	#     assert (-123).to_b.to_s  == "0x85"
+	redef fun to_s do
+		var nslen = byte_to_s_len
+		var ns = new NativeString(nslen + 1)
+		ns[nslen] = '\0'
+		native_byte_to_s(ns, nslen + 1)
+		return ns.to_s_with_length(nslen)
+	end
+end
+
 redef class Int
 
 	# Wrapper of strerror C function

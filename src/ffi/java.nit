@@ -483,6 +483,7 @@ redef class MClassType
 		if mclass.name == "Char" then return "char"
 		if mclass.name == "Int" then return "long"
 		if mclass.name == "Float" then return "double"
+		if mclass.name == "Byte" then return "byte"
 		return super
 	end
 
@@ -494,6 +495,7 @@ redef class MClassType
 		if mclass.name == "Char" then return "jchar"
 		if mclass.name == "Int" then return "jlong"
 		if mclass.name == "Float" then return "jdouble"
+		if mclass.name == "Byte" then return "jbyte"
 		return super
 	end
 
@@ -553,6 +555,7 @@ redef class MClassType
 		if mclass.name == "Char" then return "C"
 		if mclass.name == "Int" then return "J"
 		if mclass.name == "Float" then return "D"
+		if mclass.name == "Byte" then return "B"
 		return super
 	end
 
@@ -565,6 +568,7 @@ redef class MClassType
 		if mclass.name == "Char" then return "Char"
 		if mclass.name == "Int" then return "Long"
 		if mclass.name == "Float" then return "Double"
+		if mclass.name == "Byte" then return "Byte"
 		return super
 	end
 end

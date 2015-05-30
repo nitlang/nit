@@ -207,6 +207,15 @@ class NaiveInterpreter
 		return instance
 	end
 
+	# Return the byte instance associated with `val`.
+	fun byte_instance(val: Byte): Instance
+	do
+		var t = mainmodule.byte_type
+		var instance = new PrimitiveInstance[Byte](t, val)
+		init_instance_primitive(instance)
+		return instance
+	end
+
 	# Return the char instance associated with `val`.
 	fun char_instance(val: Char): Instance
 	do
@@ -632,6 +641,10 @@ abstract class Instance
 	# else aborts
 	fun to_f: Float do abort
 
+	# Return the integer value if the instance is a byte.
+	# else aborts
+	fun to_b: Byte do abort
+
 	# The real value encapsulated if the instance is primitive.
 	# Else aborts.
 	fun val: nullable Object do abort
@@ -677,6 +690,8 @@ class PrimitiveInstance[E]
 	redef fun to_i do return val.as(Int)
 
 	redef fun to_f do return val.as(Float)
+
+	redef fun to_b do return val.as(Byte)
 end
 
 # Information about local variables in a running method
@@ -867,6 +882,8 @@ redef class AMethPropdef
 				return v.char_instance(args[0].to_i.ascii)
 			else if pname == "to_f" then
 				return v.float_instance(args[0].to_i.to_f)
+			else if pname == "to_b" then
+				return v.byte_instance(args[0].to_i.to_b)
 			else if pname == "lshift" then
 				return v.int_instance(args[0].to_i.lshift(args[1].to_i))
 			else if pname == "rshift" then
@@ -893,6 +910,50 @@ redef class AMethPropdef
 				return null
 			else if pname == "strerror_ext" then
 				return v.native_string_instance(recvval.strerror)
+			end
+		else if cname == "Byte" then
+			var recvval = args[0].to_b
+			if pname == "unary -" then
+				return v.byte_instance(-args[0].to_b)
+			else if pname == "unary +" then
+				return args[0]
+			else if pname == "+" then
+				return v.byte_instance(args[0].to_b + args[1].to_b)
+			else if pname == "-" then
+				return v.byte_instance(args[0].to_b - args[1].to_b)
+			else if pname == "*" then
+				return v.byte_instance(args[0].to_b * args[1].to_b)
+			else if pname == "%" then
+				return v.byte_instance(args[0].to_b % args[1].to_b)
+			else if pname == "/" then
+				return v.byte_instance(args[0].to_b / args[1].to_b)
+			else if pname == "<" then
+				return v.bool_instance(args[0].to_b < args[1].to_b)
+			else if pname == ">" then
+				return v.bool_instance(args[0].to_b > args[1].to_b)
+			else if pname == "<=" then
+				return v.bool_instance(args[0].to_b <= args[1].to_b)
+			else if pname == ">=" then
+				return v.bool_instance(args[0].to_b >= args[1].to_b)
+			else if pname == "<=>" then
+				return v.int_instance(args[0].to_b <=> args[1].to_b)
+			else if pname == "to_f" then
+				return v.float_instance(args[0].to_b.to_f)
+			else if pname == "to_i" then
+				return v.int_instance(args[0].to_b.to_i)
+			else if pname == "lshift" then
+				return v.byte_instance(args[0].to_b.lshift(args[1].to_i))
+			else if pname == "rshift" then
+				return v.byte_instance(args[0].to_b.rshift(args[1].to_i))
+			else if pname == "byte_to_s_len" then
+				return v.int_instance(recvval.to_s.length)
+			else if pname == "native_byte_to_s" then
+				var s = recvval.to_s
+				var srecv = args[1].val.as(Buffer)
+				srecv.clear
+				srecv.append(s)
+				srecv.add('\0')
+				return null
 			end
 		else if cname == "Char" then
 			var recv = args[0].val.as(Char)
@@ -937,6 +998,8 @@ redef class AMethPropdef
 				return v.bool_instance(recv >= args[1].to_f)
 			else if pname == "to_i" then
 				return v.int_instance(recv.to_i)
+			else if pname == "to_b" then
+				return v.byte_instance(recv.to_b)
 			else if pname == "cos" then
 				return v.float_instance(args[0].to_f.cos)
 			else if pname == "sin" then
