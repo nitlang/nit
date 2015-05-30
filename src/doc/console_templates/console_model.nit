@@ -94,7 +94,10 @@ redef class MEntity
 		return mdoc.cs_short_comment
 	end
 
-	# Returns 1self` as a list element that can be displayed in console.
+	# Returns `self` as a list element that can be displayed in console.
+	#
+	# Displays `cs_icon`, `cs_name`, `cs_short_comment, `cs_namespace`,
+	# `cs_declaration` and `cs_location`.
 	fun cs_list_item: String do
 		var tpl = new FlatBuffer
 		tpl.append " {cs_visibility_color(cs_icon).bold} {cs_name.blue.bold}"
@@ -108,6 +111,18 @@ redef class MEntity
 		tpl.append cs_declaration
 		tpl.append "\n   "
 		tpl.append cs_location.gray
+		return tpl.write_to_string
+	end
+
+	# Returns `self` as a short list element that can be displayed in console.
+	# Displays `cs_icon`, `cs_name`, and `cs_short_comment.
+	fun cs_short_list_item: String do
+		var tpl = new FlatBuffer
+		tpl.append " {cs_visibility_color(cs_icon).bold} {cs_name.blue.bold}"
+		var comment = cs_short_comment
+		if comment != null then
+			tpl.append " # {comment}".green
+		end
 		return tpl.write_to_string
 	end
 
