@@ -1245,6 +1245,10 @@ redef class AAttrPropdef
 			return
 		end
 
+		if not mclassdef.is_intro and not has_value and not noinit then
+			modelbuilder.advice(self, "attr-in-refinement", "Warning: attributes in refinement need a value or `noautoinit`.")
+		end
+
 		var writename = name + "="
 		var atwritable = self.get_single_annotation("writable", modelbuilder)
 		if atwritable != null then
