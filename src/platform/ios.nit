@@ -45,7 +45,7 @@ end
 private class IOSToolchain
 	super MakefileToolchain
 
-	# Root of the iOS project, usually `.nit_compile/ios/`
+	# Root of the iOS project, usually `nit_compile/ios/`
 	var ios_project_root: String is noinit
 
 	# `app.nit` project for the current compilation target
@@ -56,7 +56,7 @@ private class IOSToolchain
 	# Compile C files in `ios_project_root/app_project.name`
 	redef fun compile_dir
 	do
-		ios_project_root = super/"ios"
+		ios_project_root = root_compile_dir/"ios"
 		return ios_project_root/app_project.short_name
 	end
 

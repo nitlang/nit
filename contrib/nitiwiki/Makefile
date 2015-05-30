@@ -12,4 +12,3 @@ doc:
 
 clean:
 	rm -rf bin
-	rm -rf -- .nit_compile 2> /dev/null || true

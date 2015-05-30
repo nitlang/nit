@@ -4,7 +4,6 @@
 .project
 EIFGENs
 
-.nit_compile*
 .nitunit
 .nitpretty
 *.orig

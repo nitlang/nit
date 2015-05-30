@@ -115,15 +115,12 @@ redef class ToolContext
 end
 
 redef class ModelBuilder
-	# The compilation directory
-	var compile_dir: String
-
 	# Simple indirection to `Toolchain::write_and_make`
 	protected fun write_and_make(compiler: AbstractCompiler)
 	do
 		var platform = compiler.target_platform
 		var toolchain = platform.toolchain(toolcontext, compiler)
-		compile_dir = toolchain.compile_dir
+		compiler.toolchain = toolchain
 		toolchain.write_and_make
 	end
 end
@@ -145,13 +142,20 @@ class Toolchain
 	# Compiler of the target program
 	var compiler: AbstractCompiler
 
-	# Directory where to generate all C files
-	fun compile_dir: String
+	# Directory where to generate all files
+	#
+	# The option `--compile_dir` change this directory.
+	fun root_compile_dir: String
 	do
 		var compile_dir = toolcontext.opt_compile_dir.value
-		if compile_dir == null then compile_dir = ".nit_compile"
+		if compile_dir == null then compile_dir = "nit_compile"
 		return compile_dir
 	end
+
+	# Directory where to generate all C files
+	#
+	# By default it is `root_compile_dir` but some platform may require that it is a subdirectory.
+	fun compile_dir: String do return root_compile_dir
 
 	# Write all C files and compile them
 	fun write_and_make is abstract
@@ -165,12 +169,16 @@ class MakefileToolchain
 	do
 		var compile_dir = compile_dir
 
+		# Remove the compilation directory unless explicitly set
+		var auto_remove = toolcontext.opt_compile_dir.value == null
+
 		# Generate the .h and .c files
 		# A single C file regroups many compiled rumtime functions
 		# Note that we do not try to be clever an a small change in a Nit source file may change the content of all the generated .c files
 		var time0 = get_time
 		self.toolcontext.info("*** WRITING C ***", 1)
 
+		root_compile_dir.mkdir
 		compile_dir.mkdir
 
 		var cfiles = new Array[String]
@@ -191,6 +199,10 @@ class MakefileToolchain
 		self.toolcontext.info("*** COMPILING C ***", 1)
 
 		compile_c_code(compile_dir)
+
+		if auto_remove then
+			sys.system("rm -r -- '{root_compile_dir.escape_to_sh}/'")
+		end
 
 		time1 = get_time
 		self.toolcontext.info("*** END COMPILING C: {time1-time0} ***", 2)
@@ -327,7 +339,7 @@ class MakefileToolchain
 		var outpath = real_outpath.escape_to_mk
 		if outpath != real_outpath then
 			# If the name is crazy and need escaping, we will do an indirection
-			# 1. generate the binary in the .nit_compile dir under an escaped name
+			# 1. generate the binary in the nit_compile dir under an escaped name
 			# 2. copy the binary at the right place in the `all` goal.
 			outpath = mainmodule.c_name
 		end
@@ -496,6 +508,11 @@ abstract class AbstractCompiler
 	# The modelbuilder used to know the model and the AST
 	var modelbuilder: ModelBuilder is protected writable
 
+	# The associated toolchain
+	#
+	# Set by `modelbuilder.write_and_make` and permit sub-routines to access the current toolchain if required.
+	var toolchain: Toolchain is noinit
+
 	# Is hardening asked? (see --hardening)
 	fun hardening: Bool do return self.modelbuilder.toolcontext.opt_hardening.value
 
@@ -559,7 +576,7 @@ abstract class AbstractCompiler
 	# Binds the generated C function names to Nit function names
 	fun build_c_to_nit_bindings
 	do
-		var compile_dir = modelbuilder.compile_dir
+		var compile_dir = toolchain.compile_dir
 
 		var stream = new FileWriter.open("{compile_dir}/c_functions_hash.c")
 		stream.write("#include <string.h>\n")

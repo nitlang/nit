@@ -35,7 +35,7 @@ JNI_LIB_PATH=`dirname ${paths[0]}`
 shopt -u nullglob
 
 outdir="out"
-compdir=".nit_compile"
+compdir="nit_compile"
 
 usage()
 {
@@ -48,7 +48,7 @@ Usage: $e [options] modulenames
 --engine    Use a specific engine (default=nitc)
 --noskip    Do not skip a test even if the .skip file matches
 --outdir    Use a specific output folder (default=out/)
---compdir   Use a specific temporary compilation folder (default=.nit_compile)
+--compdir   Use a specific temporary compilation folder (default=$compdir)
 --node      Run as a node in parallel, will not output context information
 --autosav   Copy the .res files directly in the sav folder overriding existing .res files
 END
@@ -564,6 +564,8 @@ END
 				cat -- "$ff.compile.log"
 				cat >&2 -- "$ff.cmp.err"
 			fi
+			# Clean
+			rm -r "$compdir" 2>/dev/null
 		fi
 		if [ "$engine" = "emscripten" ]; then
 			echo > "$ff.bin" "nodejs $ffout \"\$@\""

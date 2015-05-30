@@ -37,7 +37,7 @@ redef class MModule
 		var n = nmodule(v)
 		if n == null then return
 		n.ensure_compile_ffi_wrapper
-		finalize_ffi_wrapper(v.compiler.modelbuilder.compile_dir, v.compiler.mainmodule)
+		finalize_ffi_wrapper(v.compiler.toolchain.compile_dir, v.compiler.mainmodule)
 		for file in ffi_files do v.compiler.extern_bodies.add(file)
 
 		ensure_compile_nitni_base(v)
@@ -49,7 +49,7 @@ extern void nitni_global_ref_decr(void*);
 """
 
 		var cflags = self.cflags[""].join(" ")
-		nitni_ccu.write_as_nitni(self, v.compiler.modelbuilder.compile_dir)
+		nitni_ccu.write_as_nitni(self, v.compiler.toolchain.compile_dir)
 
 		for file in nitni_ccu.files do
 			var f = new ExternCFile(file, cflags)

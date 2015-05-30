@@ -35,6 +35,7 @@ $(BINS): nitc_0 parser/parser.nit
 	@echo '***************************************************************'
 	./git-gen-version.sh
 	./nitc_0 ${NITCOPT} -v --dir ../bin $(SRCS)
+	rm -r .nit_compile || true # to clean old .nit_compile generated file
 
 $(OBJS): nitc_0 parser/parser.nit
 	./git-gen-version.sh
@@ -45,6 +46,7 @@ $(OBJS): nitc_0 parser/parser.nit
 	@echo '* Compile nitc from C source files                            *'
 	@echo '***************************************************************'
 	cd ../c_src; make
+	rm ../c_src/*.o || true # to reduce disc used
 
 parser/parser.nit:
 	@echo '***************************************************************'
@@ -53,5 +55,5 @@ parser/parser.nit:
 	cd parser; make
 
 clean:
-	rm -rf -- .nit_compile* version.nit nitc_0 2> /dev/null || true
+	rm -rf -- version.nit nitc_0 2> /dev/null || true
 	cd parser; make clean

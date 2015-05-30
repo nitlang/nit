@@ -20,7 +20,7 @@ By default, the generated executables are produced in the current directory.
 
 Internally, nitc rely on the presence of a C compiler. Usually gcc (but nitc was successfully tested with clang).
 A compilation directory is therefore created and (re-)used.
-By default, the compilation directory is named `.nit_compile`.
+By default, the compilation directory is named `nit_compile` and is removed after the compilation.
 (see `--compile-dir` for details.)
 
 Currently, because Nit is still in heavy development, the compilation directory is not cleaned after the compilation.
@@ -168,7 +168,9 @@ See the documentation of these specific modules for details.
 `--compile-dir`
 :   Directory used to generate temporary files.
 
-    By default, it is named `.nit_compile`.
+    By default, it is named `nit_compile` and created in the current directory and destroyed after the compilation.
+
+    If the option `--compile_dir` or `--no-cc` is used, then the directory is not destroyed and let as is.
 
 `--no-cc`
 :   Do not invoke the C compiler.
@@ -183,6 +185,8 @@ See the documentation of these specific modules for details.
     Will produce a `hello` directory that contains the required C files to finish the compilation.
     Only the C files required for the program are generated.
     The final binary will be generated in the same directory.
+
+    Note that, to be useful, the compilation directory is not destroyed when `--no-cc` is used.
 
 `-m`
 :   Additional module to mix-in.

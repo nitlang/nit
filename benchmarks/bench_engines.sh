@@ -81,7 +81,7 @@ function run_compiler()
 		bench_command "nitmd" "markdown" "./nitmd.$title.bin" markdown/benches/out/mixed.md 80
 	fi
 
-	rm -r *.bin .nit_compile out 2> /dev/null
+	rm -r *.bin out 2> /dev/null
 }
 
 ## HANDLE OPTIONS ##

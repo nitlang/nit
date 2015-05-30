@@ -52,7 +52,7 @@ class AndroidToolchain
 
 	redef fun compile_dir
 	do
-		var android_project_root = "{super}/android/"
+		var android_project_root = "{root_compile_dir}/android/"
 		self.android_project_root = android_project_root
 		return "{android_project_root}/jni/nit_compile/"
 	end
@@ -255,7 +255,7 @@ $(call import-module,android/native_app_glue)
 		end
 
 		toolcontext.exec_and_check(["ln", "-s", "{share_dir}/libgc/arm/include/gc/",
-			"{android_project_root}/jni/nit_compile/gc"], "Android project error")
+			"{compile_dir}/gc"], "Android project error")
 
 		### Link to assets (for mnit and others)
 		# This will be accessed from `android_project_root`
@@ -288,7 +288,7 @@ $(call import-module,android/native_app_glue)
 		# Android resources folder
 		var res_dir = project_root / "res"
 		if res_dir.file_exists then
-			# copy the res folder to .nit_compile
+			# copy the res folder to the compile dir
 			res_dir = res_dir.realpath
 			toolcontext.exec_and_check(["cp", "-R", res_dir, android_project_root], "Android project error")
 		end
