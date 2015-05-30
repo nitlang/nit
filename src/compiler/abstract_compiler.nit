@@ -2866,6 +2866,10 @@ redef class AIntExpr
 	redef fun expr(v) do return v.int_instance(self.value.as(not null))
 end
 
+redef class AByteExpr
+	redef fun expr(v) do return v.byte_instance(self.value.as(not null))
+end
+
 redef class AFloatExpr
 	redef fun expr(v) do return v.float_instance("{self.n_float.text}") # FIXME use value, not n_float
 end

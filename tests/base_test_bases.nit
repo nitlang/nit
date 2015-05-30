@@ -22,3 +22,7 @@ assert 256 == 0x100
 assert 0o400 == 256
 assert 0b1_1100_1101 == 0o715
 assert 0b1_1100_1101 == 0x1_CD
+assert 0b1000_1001 == 0x89
+assert 0b1000_1001u8 == 0x89u8
+assert 0o151u8 == 0b0110_1001u8
+assert 0x69u8 == 0o151u8

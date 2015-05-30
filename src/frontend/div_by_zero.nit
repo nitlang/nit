@@ -66,7 +66,7 @@ private class DivByZeroVisitor
 		# 1. We need a `/` operation
 		if not node isa ASlashExpr then return
 
-		# 2. The second operand must be a integer literal
+		# 2. The second operand must be an integer literal
 		var op2 = node.n_expr2
 		if not op2 isa AIntExpr then return
 

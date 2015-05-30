@@ -1342,6 +1342,15 @@ redef class AIntExpr
 	end
 end
 
+redef class AByteExpr
+	redef fun accept_typing(v)
+	do
+		var mclass = v.get_mclass(self, "Byte")
+		if mclass == null then return # Forward error
+		self.mtype = mclass.mclass_type
+	end
+end
+
 redef class AFloatExpr
 	redef fun accept_typing(v)
 	do

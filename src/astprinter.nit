@@ -97,6 +97,13 @@ redef class AIntExpr
 	end
 end
 
+redef class AByteExpr
+	redef fun accept_printer(v)
+	do
+		v.write(value.to_s)
+	end
+end
+
 redef class ANewExpr
 	redef fun accept_printer(v)
 	do

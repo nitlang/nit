@@ -956,6 +956,26 @@ class TOctNumber
 	super TokenLiteral
 end
 
+# A literal decimal byte
+class TBytenum
+	super TokenLiteral
+end
+
+# A literal hexadecimal byte
+class THexBytenum
+	super TokenLiteral
+end
+
+# A literal binary byte
+class TBinBytenum
+	super TokenLiteral
+end
+
+# A literal octal byte
+class TOctBytenum
+	super TokenLiteral
+end
+
 # A literal floating point number
 class TFloat
 	super TokenLiteral
@@ -2486,6 +2506,43 @@ class AOctIntExpr
 
 	# The octal token
 	var n_oct_number: TOctNumber is writable, noinit
+end
+
+# An byte literal
+class AByteExpr
+	super AExpr
+end
+
+# An byte literal in decimal format
+class ADecByteExpr
+	super AByteExpr
+
+	# The decimal token
+	var n_bytenum: TBytenum is writable, noinit
+end
+
+# An byte literal in hexadecimal format
+class AHexByteExpr
+	super AByteExpr
+
+	# The hexadecimal token
+	var n_hex_bytenum: THexBytenum is writable, noinit
+end
+
+# An byte literal in binary format
+class ABinByteExpr
+	super AByteExpr
+
+	# The binary token
+	var n_bin_bytenum: TBinBytenum is writable, noinit
+end
+
+# An byte literal in octal format
+class AOctByteExpr
+	super AByteExpr
+
+	# The octal token
+	var n_oct_bytenum: TOctBytenum is writable, noinit
 end
 
 # A float literal
