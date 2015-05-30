@@ -14,16 +14,21 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+#alt2#module test_serialization_alt2 is serialize
+
 import serialization
 import json::serialization
 
 # Simple class
 class A
-	auto_serializable
+	serialize
+#alt5#	serialize
 
 	var b = false
-	var c: Char
-	var f: Float
+	var c: Char#alt2#
+	#alt2#var c: Char is noserialize
+	var f: Float#alt4#
+	#alt4#var f: Float is serialize
 	var i = 123
 	var s = "asdf"
 	var n: nullable Int
@@ -43,7 +48,9 @@ end
 
 # Sub-class of A
 class B
-	auto_serializable
+	auto_serializable#alt2##alt3#
+#alt2#	noserialize
+#alt3#	noserialize
 	super A
 
 	var ii: Int

@@ -34,27 +34,118 @@ redef class ToolContext
 	private fun place_holder_type_name: String do return "PlaceHolderTypeWhichShouldNotExist"
 end
 
+redef class ANode
+	# Is this node annotated to be made serializable?
+	private fun is_serialize: Bool do return false
+
+	# Is this node annotated to not be made serializable?
+	private fun is_noserialize: Bool do return false
+
+	private fun accept_precise_type_visitor(v: PreciseTypeVisitor) do visit_all(v)
+end
+
+redef class ADefinition
+
+	redef fun is_serialize do
+		return get_annotations("serialize").not_empty or
+			get_annotations("auto_serializable").not_empty
+	end
+
+	redef fun is_noserialize do
+		return get_annotations("noserialize").not_empty
+	end
+end
+
 # TODO add annotations on attributes (volatile, sensitive or do_not_serialize?)
 private class SerializationPhasePreModel
 	super Phase
 
-	redef fun process_annotated_node(nclassdef, nat)
+	redef fun process_annotated_node(node, nat)
 	do
 		# Skip if we are not interested
-		if nat.n_atid.n_id.text != "auto_serializable" then return
-		if not nclassdef isa AStdClassdef then
-			toolcontext.error(nclassdef.location, "Syntax Error: only a concrete class can be automatically serialized.")
+		var text = nat.n_atid.n_id.text
+		var serialize = text == "auto_serializable" or text == "serialize"
+		var noserialize = text == "noserialize"
+		if not (serialize or noserialize) then return
+
+		# Check legality of annotation
+		if node isa AModuledecl then
+			if noserialize then toolcontext.error(node.location, "Syntax Error: superfluous use of `{text}`, by default a module is `{text}`")
 			return
+		else if not (node isa AStdClassdef or node isa AAttrPropdef) then
+			toolcontext.error(node.location,
+				"Syntax Error: only a class, a module or an attribute can be annotated with `{text}`.")
+			return
+		else if serialize and node.is_noserialize then
+			toolcontext.error(node.location,
+				"Syntax Error: an entity cannot be both `{text}` and `noserialize`.")
+			return
+		else if node.as(Prod).get_annotations(text).length > 1 then
+			toolcontext.warning(node.location, "useless-{text}",
+				"Warning: duplicated annotation `{text}`.")
 		end
 
-		# Add `super Serializable`
-		var sc = toolcontext.parse_superclass("Serializable")
-		sc.location = nat.location
-		nclassdef.n_propdefs.add sc
+		# Check the `serialize` state of the parent
+		if not node isa AModuledecl then
+			var up_serialize = false
+			var up: nullable ANode = node
+			loop
+				up = up.parent
+				if up == null then
+					break
+				else if up.is_serialize then
+					up_serialize = true
+					break
+				else if up.is_noserialize then
+					break
+				end
+			end
 
-		generate_serialization_method(nclassdef)
+			# Check for useless double declarations
+			if serialize and up_serialize then
+				toolcontext.warning(node.location, "useless-serialize",
+					"Warning: superfluous use of `{text}`.")
+			else if noserialize and not up_serialize then
+				toolcontext.warning(node.location, "useless-noserialize",
+					"Warning: superfluous use of `{text}`.")
+			end
+		end
+	end
 
-		generate_deserialization_init(nclassdef)
+	redef fun process_nclassdef(nclassdef)
+	do
+		if not nclassdef isa AStdClassdef then return
+
+		# Is there a declaration on the classdef or the module?
+		var serialize = nclassdef.is_serialize
+
+		if not serialize and not nclassdef.is_noserialize then
+			# Is the module marked serialize?
+			serialize = nclassdef.parent.as(AModule).is_serialize
+		end
+
+		var per_attribute = false
+		if not serialize then
+			# Is there an attribute marked serialize?
+			for npropdef in nclassdef.n_propdefs do
+				if npropdef.is_serialize then
+					serialize = true
+					per_attribute = true
+					break
+				end
+			end
+		end
+
+		if serialize then
+			# Add `super Serializable`
+			var sc = toolcontext.parse_superclass("Serializable")
+			sc.location = nclassdef.location
+			nclassdef.n_propdefs.add sc
+
+			# Add services
+			generate_serialization_method(nclassdef, per_attribute)
+			generate_deserialization_init(nclassdef, per_attribute)
+		end
 	end
 
 	redef fun process_nmodule(nmodule)
@@ -65,8 +156,7 @@ private class SerializationPhasePreModel
 		# collect all classes
 		var auto_serializable_nclassdefs = new Array[AStdClassdef]
 		for nclassdef in nmodule.n_classdefs do
-			if nclassdef isa AStdClassdef and
-			   not nclassdef.get_annotations("auto_serializable").is_empty then
+			if nclassdef isa AStdClassdef and nclassdef.is_serialize then
 				auto_serializable_nclassdefs.add nclassdef
 			end
 		end
@@ -76,7 +166,7 @@ private class SerializationPhasePreModel
 		end
 	end
 
-	fun generate_serialization_method(nclassdef: AClassdef)
+	fun generate_serialization_method(nclassdef: AClassdef, per_attribute: Bool)
 	do
 		var npropdefs = nclassdef.n_propdefs
 
@@ -86,6 +176,11 @@ private class SerializationPhasePreModel
 		code.add "	super"
 
 		for attribute in npropdefs do if attribute isa AAttrPropdef then
+
+			# Is `attribute` to be skipped?
+			if (per_attribute and not attribute.is_serialize) or
+				attribute.is_noserialize then continue
+
 			var name = attribute.name
 			code.add "	v.serialize_attribute(\"{name}\", {name})"
 		end
@@ -97,7 +192,7 @@ private class SerializationPhasePreModel
 	end
 
 	# Add a constructor to the automated nclassdef
-	fun generate_deserialization_init(nclassdef: AStdClassdef)
+	fun generate_deserialization_init(nclassdef: AClassdef, per_attribute: Bool)
 	do
 		var npropdefs = nclassdef.n_propdefs
 
@@ -108,6 +203,11 @@ private class SerializationPhasePreModel
 		code.add "	v.notify_of_creation self"
 
 		for attribute in npropdefs do if attribute isa AAttrPropdef then
+
+			# Is `attribute` to be skipped?
+			if (per_attribute and not attribute.is_serialize) or
+				attribute.is_noserialize then continue
+
 			var n_type = attribute.n_type
 			var type_name
 			if n_type == null then
@@ -201,10 +301,6 @@ private class PreciseTypeVisitor
 	redef fun visit(n) do n.accept_precise_type_visitor(self)
 end
 
-redef class ANode
-	private fun accept_precise_type_visitor(v: PreciseTypeVisitor) do visit_all(v)
-end
-
 redef class AIsaExpr
 	redef fun accept_precise_type_visitor(v)
 	do
@@ -257,6 +353,8 @@ redef class AModule
 	end
 
 	private var inits_to_retype = new Array[AMethPropdef]
+
+	redef fun is_serialize do return n_moduledecl != null and n_moduledecl.is_serialize
 end
 
 redef class AStdClassdef

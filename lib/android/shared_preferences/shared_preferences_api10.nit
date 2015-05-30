@@ -390,7 +390,7 @@ class SharedPreferences
 	# Retrieve an `Object` stored via `[]=` function
 	#
 	# Returns `null` if there's no serialized object corresponding to the given key
-	# Make sure that the serialized object is `auto_serializable` or that it redefines
+	# Make sure that the serialized object is `serialize` or that it redefines
 	# the appropriate methods. Refer to `Serializable` documentation for further details
 	fun [](key: String): nullable Object
 	do

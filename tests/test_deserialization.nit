@@ -26,6 +26,7 @@ class A
 	var i = 123
 	var s = "asdf"
 	var n: nullable Int
+	var password = "p4ssw0rd" is lazy, noserialize
 
 	init(b: Bool, c: Char, f: Float, i: Int, s: String, n: nullable Int)
 	do
@@ -36,7 +37,7 @@ class A
 		self.s = s
 	end
 
-	redef fun to_s do return "<A: {b} {c} {f} {i} {s} {n != null}>"
+	redef fun to_s do return "<A: {b} {c} {f} {i} {s} {n != null} {password}>"
 end
 
 # Sub-class of A

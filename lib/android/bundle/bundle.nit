@@ -503,7 +503,7 @@ class Bundle
 	# Retrieve an `Object` serialized via `[]=` function
 	# Returns `null` if there's no serialized object corresponding to the given key
 	# or if it's the wrong value type
-	# Make sure that the serialized object is `auto_serializable` or that it
+	# Make sure that the serialized object is `serialize` or that it
 	# redefines the appropriate methods. Refer to `Serializable` documentation
 	# for further details
 	fun deserialize(key: String): nullable Object
@@ -520,7 +520,7 @@ class Bundle
 	# Retrieve an `Array` of `Object` serialized via `[]=` function
 	# Returns `null` if there's no serialized `Array` corresponding to the given key
 	# or if it's the wrong value type
-	# Make sure that the serialized objects are `auto_serializable` or that they
+	# Make sure that the serialized objects are `serialize` or that they
 	# redefine the appropriate methods. Refer to `Serializable` documentation
 	# for further details
 	fun deserialize_array(key: String): nullable Array[nullable Object]
