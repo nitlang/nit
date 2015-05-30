@@ -517,6 +517,18 @@ class MClass
 
 	# Is there a `new` factory to allow the pseudo instantiation?
 	var has_new_factory = false is writable
+
+	# Is `self` a standard or abstract class kind?
+	var is_class: Bool is lazy do return kind == concrete_kind or kind == abstract_kind
+
+	# Is `self` an interface kind?
+	var is_interface: Bool is lazy do return kind == interface_kind
+
+	# Is `self` an enum kind?
+	var is_enum: Bool is lazy do return kind == enum_kind
+
+	# Is `self` and abstract class?
+	var is_abstract: Bool is lazy do return kind == abstract_kind
 end
 
 

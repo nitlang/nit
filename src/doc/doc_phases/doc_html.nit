@@ -302,8 +302,8 @@ redef class MModulePage
 		# TODO filter here?
 		super
 		var mclasses = new HashSet[MClass]
-		mclasses.add_all mentity.filter_intro_mclasses(v.ctx.min_visibility)
-		mclasses.add_all mentity.filter_redef_mclasses(v.ctx.min_visibility)
+		mclasses.add_all mentity.collect_intro_mclasses(v.ctx.min_visibility)
+		mclasses.add_all mentity.collect_redef_mclasses(v.ctx.min_visibility)
 		if mclasses.is_empty then return
 		var list = new UnorderedList
 		list.css_classes.add "list-unstyled list-labeled"
@@ -410,8 +410,8 @@ redef class MClassPage
 
 	private fun mclass_inherited_mprops(v: RenderHTMLPhase, doc: DocModel): Set[MProperty] do
 		var res = new HashSet[MProperty]
-		var local = mentity.local_mproperties(v.ctx.min_visibility)
-		for mprop in mentity.inherited_mproperties(doc.mainmodule, v.ctx.min_visibility) do
+		var local = mentity.collect_local_mproperties(v.ctx.min_visibility)
+		for mprop in mentity.collect_inherited_mproperties(v.ctx.min_visibility) do
 			if local.has(mprop) then continue
 			#if mprop isa MMethod and mprop.is_init then continue
 			if mprop.intro.mclassdef.mclass.name == "Object" and

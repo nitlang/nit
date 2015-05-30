@@ -16,6 +16,7 @@
 module uml_class
 
 import uml_base
+import model::model_collect
 
 redef class UMLModel
 	# Generates a UML class diagram from a `Model`
@@ -62,7 +63,7 @@ end
 
 redef class MClass
 
-	redef fun tpl_class(ctx, main): Writable do
+	redef fun tpl_class(ctx, main) do
 		var t = new Template
 		t.add "{name} [\n label = \"\{"
 		if kind == abstract_kind then
@@ -84,9 +85,9 @@ redef class MClass
 		t.add "|"
 		var props: Collection[MProperty]
 		if ctx.private_gen then
-			props = intro_mproperties(none_visibility)
+			props = collect_intro_mproperties(none_visibility)
 		else
-			props = intro_mproperties(public_visibility)
+			props = collect_intro_mproperties(public_visibility)
 		end
 		for i in props do
 			if i isa MAttribute then
@@ -95,8 +96,13 @@ redef class MClass
 			end
 		end
 		t.add "|"
-		for i in intro_methods do
-			if not ctx.private_gen and i.visibility != public_visibility then continue
+		var meths
+		if ctx.private_gen then
+			meths = collect_intro_mmethods(none_visibility)
+		else
+			meths = collect_intro_mmethods(public_visibility)
+		end
+		for i in meths do
 			t.add i.tpl_class(ctx, main)
 			t.add "\\l"
 		end

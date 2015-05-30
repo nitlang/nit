@@ -16,6 +16,7 @@
 module doc_poset
 
 import doc_pages
+import model::model_collect
 
 # This phase computes importation and inheritance POSet for pages.
 class POSetPhase
@@ -82,7 +83,10 @@ redef class MModulePage
 		end
 		# make poset
 		var mmodules = new HashSet[MModule]
-		mmodules.add_all mentity.nested_mmodules
+		var mgroup = mentity.mgroup
+		if mgroup != null and mgroup.default_mmodule == mentity then
+			mmodules.add_all mgroup.mmodules
+		end
 		mmodules.add_all imports
 		if clients.length < 10 then mmodules.add_all clients
 		mmodules.add mentity

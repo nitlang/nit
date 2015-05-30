@@ -18,7 +18,6 @@
 # Helpers for various statistics tools.
 module metrics_base
 
-import model_utils
 import modelbuilder
 import csv
 import counter

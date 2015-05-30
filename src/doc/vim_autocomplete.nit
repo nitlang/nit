@@ -31,7 +31,7 @@ module vim_autocomplete
 import modelbuilder
 import phase
 import modelize::modelize_class
-import model_utils
+import model::model_collect
 
 redef class ToolContext
 	# Phase generating the files for the Vim plugin
@@ -197,7 +197,7 @@ redef class MClassType
 		stream.write line_separator*2
 		stream.write "## Properties"
 		stream.write line_separator
-		var props = mclass.all_mproperties(mainmodule, protected_visibility).to_a
+		var props = mclass.collect_accessible_mproperties(protected_visibility).to_a
 		alpha_comparator.sort props
 		for prop in props do
 			if mclass.name == "Object" or prop.intro.mclassdef.mclass.name != "Object" then
@@ -263,7 +263,7 @@ private class AutocompletePhase
 			# Can it be instantiated?
 			if mclass.kind != interface_kind and mclass.kind != abstract_kind then
 
-				for prop in mclass.all_mproperties(mainmodule, public_visibility) do
+				for prop in mclass.collect_accessible_mproperties(public_visibility) do
 					if prop isa MMethod and prop.is_init then
 						mclass_intro.target_constructor = prop.intro
 						mclass_intro.write_doc(mainmodule, constructors_stream)

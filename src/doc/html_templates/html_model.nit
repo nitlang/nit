@@ -20,6 +20,7 @@ import doc_down
 import html_components
 import html::bootstrap
 import ordered_tree
+import model::model_collect
 
 redef class MEntity
 	# URL of this entity’s Nitdoc page.
@@ -330,8 +331,8 @@ redef class MClassDef
 	redef fun css_classes do
 		var set = new HashSet[String]
 		if is_intro then set.add "intro"
-		for m in mclass.intro.modifiers do set.add m.to_cmangle
-		for m in modifiers do set.add m.to_cmangle
+		for m in mclass.intro.collect_modifiers do set.add m.to_cmangle
+		for m in collect_modifiers do set.add m.to_cmangle
 		return set.to_a
 	end
 end
@@ -421,8 +422,8 @@ redef class MPropDef
 	redef fun css_classes do
 		var set = new HashSet[String]
 		if is_intro then set.add "intro"
-		for m in mproperty.intro.modifiers do set.add m.to_cmangle
-		for m in modifiers do set.add m.to_cmangle
+		for m in mproperty.intro.collect_modifiers do set.add m.to_cmangle
+		for m in collect_modifiers do set.add m.to_cmangle
 		return set.to_a
 	end
 end

@@ -18,6 +18,7 @@
 module doc_intros_redefs
 
 import doc_structure
+import model::model_collect
 
 # Computes intro / redef mentity list for each DefinitionArticle.
 class IntroRedefListPhase
@@ -57,10 +58,10 @@ redef class DefinitionArticle
 		var section = new TabbedGroup("{mentity.nitdoc_id}.intros_redefs")
 		section.toc_title = "Intros / Redefs"
 		var group = new PanelGroup("list.group", "List")
-		var intros = mmodule.intro_mclassdefs(v.ctx.min_visibility).to_a
+		var intros = mmodule.collect_intro_mclassdefs(v.ctx.min_visibility).to_a
 		doc.mainmodule.linearize_mclassdefs(intros)
 		group.add_child new MEntitiesListArticle("{mentity.nitdoc_id}.intros", "Introduces", intros)
-		var redefs = mmodule.redef_mclassdefs(v.ctx.min_visibility).to_a
+		var redefs = mmodule.collect_redef_mclassdefs(v.ctx.min_visibility).to_a
 		doc.mainmodule.linearize_mclassdefs(redefs)
 		group.add_child new MEntitiesListArticle("{mentity.nitdoc_id}.redefs", "Redefines", redefs)
 		section.add_child group
