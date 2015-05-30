@@ -129,3 +129,11 @@ redef class DefinitionArticle
 		super
 	end
 end
+
+redef class MEntitiesListArticle
+	redef fun render_body do
+		for mentity in mentities do
+			addn mentity.cs_short_list_item
+		end
+	end
+end
