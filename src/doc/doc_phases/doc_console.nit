@@ -58,16 +58,19 @@ class Nitx
 
 	# Displays the list of available commands.
 	fun help do
-		print "\nCommands:"
-		print "\tname\t\tlookup module, class and property with the corresponding 'name'"
+		print "\nCommands:\n"
+		print "\tname\t\t\tlookup module, class and property with the corresponding 'name'"
 		print "\tdoc: <name::space>\tdisplay the documentation page of 'namespace'"
-		print "\tparam: <Type>\tlookup methods using the corresponding 'Type' as parameter"
-		print "\treturn: <Type>\tlookup methods returning the corresponding 'Type'"
-		print "\tnew: <Type>\tlookup methods creating new instances of 'Type'"
-		print "\tcall: <name>\tlookup methods calling 'name'"
-		print "\tcode: <name>\tdisplay the source code associated to the 'name' entity"
-		print "\t:h\t\tdisplay this help message"
-		print "\t:q\t\tquit interactive mode"
+		print "\nType lookup:"
+		print "\tparam: <Type>\t\tlookup methods using the corresponding 'Type' as parameter"
+		print "\treturn: <Type>\t\tlookup methods returning the corresponding 'Type'"
+		print "\tnew: <Type>\t\tlookup methods creating new instances of 'Type'"
+		print "\tcall: <name>\t\tlookup methods calling 'name'"
+		print "\nCode lookup:"
+		print "\tcode: <name>\t\tdisplay the source code associated to the 'name' entity"
+		print "\n"
+		print "\t:h\t\t\tdisplay this help message"
+		print "\t:q\t\t\tquit interactive mode"
 		print ""
 	end
 
