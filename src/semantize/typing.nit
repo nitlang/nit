@@ -301,15 +301,9 @@ private class TypeVisitor
 
 		#debug("recv: {recvtype} (aka {unsafe_type})")
 		if recvtype isa MNullType then
-			# `null` only accepts some methods of object.
-			if name == "==" or name == "!=" or name == "is_same_instance" then
-				var objclass = get_mclass(node, "Object")
-				if objclass == null then return null # Forward error
-				unsafe_type = objclass.mclass_type
-			else
-				self.error(node, "Error: method `{name}` called on `null`.")
-				return null
-			end
+			var objclass = get_mclass(node, "Object")
+			if objclass == null then return null # Forward error
+			unsafe_type = objclass.mclass_type
 		end
 
 		var mproperty = self.try_get_mproperty_by_name2(node, unsafe_type, name)
@@ -330,6 +324,14 @@ private class TypeVisitor
 		end
 
 		assert mproperty isa MMethod
+
+		# `null` only accepts some methods of object.
+		if recvtype isa MNullType and not mproperty.is_null_safe then
+			self.error(node, "Error: method `{name}` called on `null`.")
+			return null
+		else if unsafe_type isa MNullableType and not mproperty.is_null_safe then
+			modelbuilder.advice(node, "call-on-nullable", "Warning: method call on a nullable receiver `{recvtype}`.")
+		end
 
 		if is_toplevel_context and recv_is_self and not mproperty.is_toplevel then
 			error(node, "Error: `{name}` is not a top-level method, thus need a receiver.")

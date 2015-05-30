@@ -131,8 +131,8 @@ private class NullableSends
 			end
 			t = t.anchor_to(self.nclassdef.mclassdef.mmodule, self.nclassdef.mclassdef.bound_mtype)
 			if t isa MNullableType then
-				var name = n.callsite.mproperty.name
-				if name == "==" or name == "!=" or name == "is_same_instance" then
+				var p = n.callsite.mproperty
+				if p.is_null_safe then
 					self.nullable_eq_sends += 1
 				else
 					self.nullable_sends += 1
