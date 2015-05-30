@@ -80,19 +80,14 @@ class Nitx
 
 	# Processes the query string and performs it.
 	fun do_query(str: String) do
-		var query = parse_query(str)
-		var res = query.perform(self, doc)
-		var page = query.make_results(self, res)
-		print page.write_to_string
-	end
-
-	# Returns an `NitxQuery` from a raw query string.
-	fun parse_query(str: String): NitxQuery do
 		var query = new NitxQuery(str)
 		if query isa NitxCommand then
 			query.execute(self)
+			return
 		end
-		return query
+		var res = query.perform(self, doc)
+		var page = query.make_results(self, res)
+		print page.write_to_string
 	end
 end
 
