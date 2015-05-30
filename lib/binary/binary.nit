@@ -45,10 +45,13 @@ in "C" `{
 	#include <endian.h>
 
 	// Android compatibility
+	#ifndef be32toh
+		#define be32toh(val) betoh32(val)
+		#define le32toh(val) letoh32(val)
+	#endif
+
 	#ifndef be64toh
 		#define be64toh(val) betoh64(val)
-	#endif
-	#ifndef le64toh
 		#define le64toh(val) letoh64(val)
 	#endif
 `}
