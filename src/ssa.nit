@@ -208,6 +208,10 @@ redef class APropdef
 	# Generate all basic blocks for this code
 	fun generate_basic_blocks(ssa: SSA) is abstract
 
+	# Contain all AST-parts related to object mechanisms the propdef has:
+	# instantiation, method dispatch, attribute access, subtyping-test
+	var object_sites: Array[AExpr] = new Array[AExpr]
+
 	# Compute the three steps of SSA-algorithm
 	# `ssa` A new instance of SSA class initialized with `self`
 	fun compute_ssa(ssa: SSA)
@@ -796,6 +800,8 @@ end
 redef class AIsaExpr
 	redef fun generate_basic_blocks(ssa, old_block)
 	do
+		ssa.propdef.object_sites.add(self)
+
 		return self.n_expr.generate_basic_blocks(ssa, old_block)
 	end
 end
@@ -803,6 +809,8 @@ end
 redef class AAsCastExpr
 	redef fun generate_basic_blocks(ssa, old_block)
 	do
+		ssa.propdef.object_sites.add(self)
+
 		return self.n_expr.generate_basic_blocks(ssa, old_block)
 	end
 end
@@ -834,6 +842,8 @@ redef class ASendExpr
 		# A call does not finish the current block,
 		# because we create intra-procedural basic blocks here
 
+		ssa.propdef.object_sites.add(self)
+
 		# Recursively goes into arguments to find variables if any
 		for e in self.raw_arguments do e.generate_basic_blocks(ssa, old_block)
 
@@ -845,6 +855,8 @@ redef class ASendReassignFormExpr
 	redef fun generate_basic_blocks(ssa, old_block)
 	do
 		self.n_expr.generate_basic_blocks(ssa, old_block)
+
+		ssa.propdef.object_sites.add(self)
 
 		# Recursively goes into arguments to find variables if any
 		for e in self.raw_arguments do e.generate_basic_blocks(ssa, old_block)
@@ -868,6 +880,8 @@ redef class ANewExpr
 	do
 		for e in self.n_args.n_exprs do e.generate_basic_blocks(ssa, old_block)
 
+		ssa.propdef.object_sites.add(self)
+
 		return old_block
 	end
 end
@@ -875,6 +889,8 @@ end
 redef class AAttrExpr
 	redef fun generate_basic_blocks(ssa, old_block)
 	do
+		ssa.propdef.object_sites.add(self)
+
 		return self.n_expr.generate_basic_blocks(ssa, old_block)
 	end
 end
@@ -882,6 +898,8 @@ end
 redef class AAttrAssignExpr
 	redef fun generate_basic_blocks(ssa, old_block)
 	do
+		ssa.propdef.object_sites.add(self)
+
 		return self.n_expr.generate_basic_blocks(ssa, old_block)
 	end
 end
@@ -889,6 +907,8 @@ end
 redef class AAttrReassignExpr
 	redef fun generate_basic_blocks(ssa, old_block)
 	do
+		ssa.propdef.object_sites.add(self)
+
 		return self.n_expr.generate_basic_blocks(ssa, old_block)
 	end
 end
