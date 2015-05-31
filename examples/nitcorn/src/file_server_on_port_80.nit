@@ -33,7 +33,7 @@ opts.parse(args)
 
 # Check options errors and help
 if not opts.errors.is_empty or opt_help.value then
-	print opts.errors
+	print opts.errors.join("\n")
 	print "Usage: file_server [Options]"
 	opts.usage
 	exit 1
