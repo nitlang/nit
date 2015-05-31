@@ -74,14 +74,10 @@ private class ParallelizationPhase
 		nmethdef.n_signature.n_type = n_type
 
 		var params = new Array[String]
-		# case if the method has parameters
-		if nmethdef.n_signature.n_params.not_empty then
-			for param in nmethdef.n_signature.n_params do
-				params.add("""
+		for param in nmethdef.n_signature.n_params do
+			params.add """
 var {{{param.n_id.text}}} : {{{param.n_type.n_id.text}}}
-
-""")
-			end
+"""
 		end
 
 		# String corresponding to the generated class
