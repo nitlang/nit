@@ -75,8 +75,10 @@ private class ParallelizationPhase
 
 		var params = new Array[String]
 		for param in nmethdef.n_signature.n_params do
+			var typ = param.n_type.n_id.text
+			if param.n_type.n_kwnullable != null then typ = "nullable {typ}"
 			params.add """
-var {{{param.n_id.text}}} : {{{param.n_type.n_id.text}}}
+var {{{param.n_id.text}}}: {{{typ}}}
 """
 		end
 
