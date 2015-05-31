@@ -600,7 +600,7 @@ class StringWriter
 	super Writer
 
 	private var content = new Array[String]
-	redef fun to_s do return content.to_s
+	redef fun to_s do return content.plain_to_s
 	redef fun is_writable do return not closed
 
 	redef fun write_bytes(b) do
