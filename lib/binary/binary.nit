@@ -168,7 +168,7 @@ redef abstract class Reader
 		var buf = new FlatBuffer
 		loop
 			var byte = read_byte
-			if byte == 0x00 then return buf.to_s
+			if byte == null or byte == 0x00 then return buf.to_s
 			buf.chars.add byte.ascii
 		end
 	end
