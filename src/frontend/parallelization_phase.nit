@@ -47,8 +47,7 @@ private class ParallelizationPhase
 		assert amod isa AModule
 
 		# Construct the name of the generated class
-		var modulename = amod.n_moduledecl.n_name.n_id.text
-		var classname = "Threaded" + modulename
+		var classname = "Threaded"
 
 		# Try to get the name of the class
 		if nmethdef.parent isa AStdClassdef then
