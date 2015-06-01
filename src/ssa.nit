@@ -18,6 +18,7 @@
 module ssa
 
 import semantize
+import astbuilder
 
 # Represent a sequence of the program
 # A basic block is composed of several instructions without a jump
@@ -203,6 +204,256 @@ redef class APropdef
 
 	# Generate all basic blocks for this code
 	fun generate_basic_blocks(ssa: SSA) is abstract
+
+	# Compute the three steps of SSA-algorithm
+	# `ssa` A new instance of SSA class initialized with `self`
+	fun compute_ssa(ssa: SSA)
+	do
+		if is_generated then return
+
+		# The first step is to generate the basic blocks
+		generate_basic_blocks(ssa)
+
+		# The propdef has no body (abstract)
+		if not is_generated then return
+
+		# Once basic blocks were generated, compute SSA algorithm
+		compute_phi(ssa)
+		rename_variables(ssa)
+		ssa_destruction(ssa)
+	end
+
+	# Compute the first phase of SSA algorithm: placing phi-functions
+	fun compute_phi(ssa: SSA)
+	do
+		var root_block = basic_block.as(not null)
+
+		# Compute the iterated dominance frontier of the graph of basic blocks
+		root_block.compute_df
+
+		# Places where a phi-function is added per variable
+		var phi_blocks = new HashMap[Variable, Array[BasicBlock]]
+
+		# For each variables in the propdef
+		for v in variables do
+			var phi_variables = new Array[BasicBlock]
+
+			var read_blocks = new Array[BasicBlock]
+			read_blocks.add_all(v.read_blocks)
+			read_blocks.add_all(v.assignment_blocks)
+
+			# While we have not treated each part accessing `v`
+			while not read_blocks.is_empty do
+				# Remove a block from the array
+				var block = read_blocks.shift
+
+				# For each block in the dominance frontier of `block`
+				for df in block.dominance_frontier do
+					# If we have not yet put a phi-function at the beginning of this block
+					if not phi_variables.has(df) then
+						phi_variables.add(df)
+
+						# Create a new phi-function and set its dependences
+						var phi = new PhiFunction("phi", df)
+						phi.add_dependences(df, v)
+						phi.block = df
+						phi.original_variable = phi
+						phi.declared_type = v.declared_type
+
+						# Indicate this phi-function is assigned in this block
+						phi.assignment_blocks.add(block)
+						ssa.phi_functions.add(phi)
+
+						# Add a phi-function at the beginning of df for variable v
+						df.phi_functions.add(phi)
+
+						if not v.read_blocks.has(df) or not v.assignment_blocks.has(df) then read_blocks.add(df)
+					end
+				end
+			end
+
+			# Add `phi-variables` to the global map
+			phi_blocks[v] = phi_variables
+		end
+	end
+
+	# Compute the second phase of SSA algorithm: renaming variables
+	# NOTE: `compute_phi` must has been called before
+	fun rename_variables(ssa: SSA)
+	do
+		# A counter for each variable
+		# The key is the variable, the value the number of assignment into the variable
+		var counter = new HashMap[Variable, Int]
+
+		for v in variables do
+			counter[v] = 0
+			v.stack.push(v)
+		end
+
+		for phi in ssa.phi_functions do counter[phi] = 0
+
+		# Launch the recursive renaming from the root block
+		rename(basic_block.as(not null), counter, ssa)
+	end
+
+	# Recursively rename each variable from `block`
+	# *`block` The starting basic block
+	# *`counter` The key is the variable, the value the number of assignment into the variable
+	fun rename(block: BasicBlock, counter: HashMap[Variable, Int], ssa: SSA)
+	do
+		if block.is_renaming then return
+
+		block.is_renaming = true
+
+		# For each phi-function of this block
+		for phi in block.phi_functions do
+			generate_name(phi, counter, block.first, ssa)
+
+			# Replace the phi into the block
+			block.phi_functions[block.phi_functions.index_of(phi)] = phi.original_variable.stack.last.as(PhiFunction)
+		end
+
+		# For each variable read in `block`
+		for vread in block.read_sites do
+			# Replace the old variable in AST
+			vread.variable = vread.variable.original_variable.stack.last
+		end
+
+		# For each variable write
+		for vwrite in block.write_sites do
+			generate_name(vwrite.variable.as(not null), counter, vwrite, ssa)
+
+			var new_version = vwrite.variable.original_variable.stack.last
+
+			# Set dependence of the new variable
+			if vwrite isa AVarReassignExpr then
+				new_version.dep_exprs.add(vwrite.n_value)
+			else if vwrite isa AVarAssignExpr then
+				new_version.dep_exprs.add(vwrite.n_value)
+			end
+
+			# Replace the old variable by the last created
+			vwrite.variable = new_version
+		end
+
+		# Rename occurrence of old names in phi-function
+		for successor in block.dominance_frontier do
+			for sphi in successor.phi_functions do
+				# Go over the couples in the phi dependences to rename variables
+				for couple in sphi.dependences do
+					if couple.second == block then
+						# Rename this variable
+						couple.first = couple.first.original_variable.stack.last
+					end
+				end
+			end
+		end
+
+		# Recurse in successor blocks
+		for successor in block.successors do
+			rename(successor, counter, ssa)
+		end
+
+		# Pop old names off the stack for each phi-function
+		for phi in block.phi_functions do
+			if not phi.stack.is_empty then phi.stack.pop
+		end
+	end
+
+	# Generate a new version of the variable `v` and return it
+	# *`v` The variable for which we generate a name
+	# *`counter` The key is the variable, the value the number of assignment into the variable
+	# *`expr` The AST node in which the assignment of v is made
+	# *`ssa` The instance of SSA
+	fun generate_name(v: Variable, counter: HashMap[Variable, Int], expr: ANode, ssa: SSA): Variable
+	do
+		var original_variable = v.original_variable.as(not null)
+
+		var i = counter[original_variable]
+
+		var new_version: Variable
+
+		# Create a new version of Variable
+		if original_variable isa PhiFunction then
+			var block = original_variable.block
+			new_version = new PhiFunction(original_variable.name + i.to_s, block)
+			new_version.dependences.add_all(original_variable.dependences)
+			ssa.phi_functions.add(new_version)
+		else
+			new_version = new Variable(original_variable.name + i.to_s)
+			new_version.declared_type = expr.as(AVarFormExpr).variable.declared_type
+			variables.add(new_version)
+		end
+
+		# Recopy the fields into the new version
+		new_version.location = expr.location
+		new_version.original_variable = original_variable
+
+		# Push a new version on the stack
+		original_variable.stack.add(new_version)
+		counter[v] = i + 1
+
+		return new_version
+	end
+
+	# Transform SSA-representation into an executable code (delete phi-functions)
+	# `ssa` Current instance of SSA
+	fun ssa_destruction(ssa: SSA)
+	do
+		var builder = new ASTBuilder(mpropdef.mclassdef.mmodule, mpropdef.mclassdef.bound_mtype)
+
+		# Iterate over all phi-functions
+		for phi in ssa.phi_functions do
+			for dep in phi.dependences do
+				# dep.second is the block where we need to create a varassign
+				var var_read = builder.make_var_read(dep.first, dep.first.declared_type.as(not null))
+				var nvar = builder.make_var_assign(dep.first, var_read)
+
+				var block = dep.second.last.parent
+
+				# This variable read must be add to a ABlockExpr
+				if block isa ABlockExpr then
+					block.add(nvar)
+				end
+
+				propagate_dependences(phi, phi.block)
+				ssa.propdef.variables.add(dep.first)
+			end
+		end
+	end
+
+	# Propagate the dependences of the phi-functions into following variables
+	# `phi` The PhiFunction
+	# `block` Current block where we propagate dependences
+	fun propagate_dependences(phi: PhiFunction, block: BasicBlock)
+	do
+		# Treat each block once
+		if block.treated then return
+
+		# For each variable access site in the block
+		for site in block.variables_sites do
+			if site isa AVarExpr then
+				# Propagate the dependences of the phi-function in variables after the phi
+				for dep in phi.dependences do
+					for expr in dep.first.dep_exprs do
+						if site.variable.dep_exprs.has(expr) then break
+
+						if dep.first.original_variable == site.variable.original_variable then
+							site.variable.dep_exprs.add(expr)
+						end
+					end
+				end
+			else
+				# The site is a variable write, we stop the propagation
+				return
+			end
+		end
+
+		block.treated = true
+
+		# If we do not meet a variable write, continue the propagation
+		for b in block.successors do propagate_dependences(phi, b)
+	end
 end
 
 redef class AAttrPropdef
