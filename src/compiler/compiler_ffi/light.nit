@@ -43,6 +43,7 @@ redef class MModule
 		ensure_compile_nitni_base(v)
 
 		nitni_ccu.header_c_types.add("#include \"{c_name}._ffi.h\"\n")
+		nitni_ccu.header_c_types.add("#include <stdint.h>\n")
 		nitni_ccu.header_c_types.add """
 extern void nitni_global_ref_incr(void*);
 extern void nitni_global_ref_decr(void*);

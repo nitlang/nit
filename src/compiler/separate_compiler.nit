@@ -1193,7 +1193,7 @@ class SeparateCompilerVisitor
 				if mtype.name == "Int" then
 					return self.new_expr("(long)({value})>>2", mtype)
 				else if mtype.name == "Char" then
-					return self.new_expr("(char)((long)({value})>>2)", mtype)
+					return self.new_expr("(uint32_t)((long)({value})>>2)", mtype)
 				else if mtype.name == "Bool" then
 					return self.new_expr("(short int)((long)({value})>>2)", mtype)
 				else

@@ -31,6 +31,6 @@ end
 redef class NativeString
 	# Get `self` as a `CppString`
 	fun to_cpp_string(length: Int): CppString in "C++" `{
-		return new std::string(self, length);
+		return new std::string(reinterpret_cast<char*>(self), length);
 	`}
 end

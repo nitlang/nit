@@ -89,11 +89,11 @@ redef class MClassType
 	do
 		var name = mclass.name
 		if name == "Bool" then return "int"
-		if name == "Char" then return "char"
+		if name == "Char" then return "uint32_t"
 		if name == "Float" then return "double"
 		if name == "Int" then return "long"
 		if name == "Byte" then return "unsigned char"
-		if name == "NativeString" then return "char*"
+		if name == "NativeString" then return "unsigned char*"
 		if mclass.kind == extern_kind then
 			var ctype = mclass.ctype
 			assert ctype != null
@@ -105,11 +105,11 @@ redef class MClassType
 	redef fun cname_blind do
 		var name = mclass.name
 		if name == "Bool" then return "int"
-		if name == "Char" then return "char"
+		if name == "Char" then return "uint32_t"
 		if name == "Float" then return "double"
 		if name == "Int" then return "long"
 		if name == "Byte" then return "unsigned char"
-		if name == "NativeString" then return "char*"
+		if name == "NativeString" then return "unsigned char*"
 		if mclass.kind == extern_kind then return "void*"
 		return "struct nitni_instance *"
 	end

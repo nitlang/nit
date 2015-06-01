@@ -63,7 +63,7 @@ extern class NativeBundle in "Java" `{ android.os.Bundle `}
 	`}
 	# FIXME: Java's `char` are encoded on 16-bits whereas Nit's are on 8-bits.
 	fun put_char(key: JavaString, value: Char) in "Java" `{
-		self.putChar(key, value);
+		self.putChar(key, (char)value);
 	`}
 	fun put_short(key: JavaString, value: Int) in "Java" `{
 		self.putShort(key, (short) value);
@@ -148,7 +148,7 @@ extern class NativeBundle in "Java" `{ android.os.Bundle `}
 		char[] java_array = new char[(int)Array_of_Char_length(value)];
 
 		for(int i=0; i < java_array.length; ++i)
-			java_array[i] = Array_of_Char__index(value, i);
+			java_array[i] = (char)Array_of_Char__index(value, i);
 
 		self.putCharArray(key, java_array);
 	`}
@@ -218,10 +218,10 @@ extern class NativeBundle in "Java" `{ android.os.Bundle `}
 		return self.getByte(key, (byte) def_value);
 	`}
 	# FIXME: Java's `char` are encoded on 16-bits whereas Nit's are on 8-bits.
-	fun get_char(key: JavaString): Char in "Java" `{ return self.getChar(key); `}
+	fun get_char(key: JavaString): Char in "Java" `{ return (int)self.getChar(key); `}
 	# FIXME: Java's `char` are encoded on 16-bits whereas Nit's are on 8-bits.
 	fun get_char_with_def_value(key: JavaString, def_value: Char): Char in "Java" `{
-		return self.getChar(key, def_value);
+		return (int)self.getChar(key, (char)def_value);
 	`}
 	fun get_short(key: JavaString): Int in "Java" `{ return (short) self.getShort(key); `}
 	fun get_short_with_def_value(key: JavaString, def_value: Int): Int in "Java" `{
@@ -335,7 +335,7 @@ extern class NativeBundle in "Java" `{ android.os.Bundle `}
 		if (java_array == null) return nit_array;
 
 		for(int i=0; i < java_array.length; ++i)
-			Array_of_Char_add(nit_array, java_array[i]);
+			Array_of_Char_add(nit_array, (int)java_array[i]);
 
 		return nit_array;
 	`}
