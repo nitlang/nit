@@ -65,6 +65,7 @@ private class ParallelizationPhase
 		if has_rvalue then
 			vtype = "redef type E: " + nmethdef.n_signature.n_type.n_id.text
 		end
+
 		# create a return type
 		var n_id = new TClassid
 		n_id.text = classname
@@ -82,7 +83,7 @@ var {{{param.n_id.text}}}: {{{typ}}}
 		end
 
 		# String corresponding to the generated class
-		var s="""
+		var classdef_source = """
 class {{{classname}}}
 	super Thread
 
@@ -95,10 +96,11 @@ end
 """
 
 		# Parse newly obtained classdef
-		var classdef = toolcontext.parse_classdef(s).as(AStdClassdef)
+		var classdef = toolcontext.parse_classdef(classdef_source)
+		assert classdef isa AStdClassdef
 
 		# Get the `main` fun of the class
-		var mainfun : nullable AMethPropdef = null
+		var mainfun: nullable AMethPropdef = null
 		for prop in classdef.n_propdefs do
 			if prop isa AMethPropdef then mainfun = prop
 		end
