@@ -29,7 +29,7 @@ redef class Nitiwiki
 	#
 	# Returns `null` if no article can be found.
 	fun lookup_entry_by_name(context: WikiEntry, name: String): nullable WikiEntry do
-		var section = context.parent
+		var section: nullable WikiEntry = context.parent or else context
 		var res = section.lookup_entry_by_name(name)
 		if res != null then return res
 		while section != null do
@@ -50,7 +50,7 @@ redef class Nitiwiki
 	#
 	# Returns `null` if no article can be found.
 	fun lookup_entry_by_title(context: WikiEntry, title: String): nullable WikiEntry do
-		var section = context.parent
+		var section: nullable WikiEntry = context.parent or else context
 		var res = section.lookup_entry_by_title(title)
 		if res != null then return res
 		while section != null do
@@ -70,7 +70,7 @@ redef class Nitiwiki
 	#
 	# Returns `null` if no article can be found.
 	fun lookup_entry_by_path(context: WikiEntry, path: String): nullable WikiEntry do
-		var entry = context.parent
+		var entry: nullable WikiEntry = context.parent or else context
 		var parts = path.split_with("/")
 		if path.has_prefix("/") then
 			entry = root_section
