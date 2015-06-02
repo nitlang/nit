@@ -511,4 +511,21 @@ extern class HErrno `{ int `}
 
 	# A temporary error occurred on an authoritative name server, try again later
 	fun try_again: Bool `{ return self == TRY_AGAIN; `}
+
+	redef fun to_s
+	do
+		if host_not_found then
+			return "The specified host is unknown"
+		else if no_address then
+			return "The requested name is valid but does not have an IP address"
+		else if no_recovery then
+			return "A nonrecoverable name server error occurred"
+		else if try_again then
+			return "A temporary error occurred on an authoritative name server, try again later"
+		else
+			# This may happen if another call was made to `gethostbyname`
+			# before we fetch the error code.
+			return "Unknown error on `gethostbyname`"
+		end
+	end
 end
