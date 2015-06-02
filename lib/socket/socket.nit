@@ -85,12 +85,15 @@ class TCPStream
 		end
 
 		addrin = new NativeSocketAddrIn.with_hostent(hostname, port)
-
 		address = addrin.address
 		init(addrin.port, hostname.h_name)
 
 		closed = not internal_connect
 		end_reached = closed
+		if closed then
+			# Connection failed
+			last_error = new IOError(errno.strerror)
+		end
 	end
 
 	# Creates a client socket, this is meant to be used by accept only
