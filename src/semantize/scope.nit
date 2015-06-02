@@ -429,6 +429,14 @@ redef class AWithExpr
 	end
 end
 
+redef class AAssertExpr
+	redef fun accept_scope_visitor(v)
+	do
+		v.enter_visit(n_expr)
+		v.enter_visit_block(n_else, null)
+	end
+end
+
 redef class AVarFormExpr
 	# The associated variable
 	var variable: nullable Variable
