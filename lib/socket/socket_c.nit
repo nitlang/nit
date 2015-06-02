@@ -121,8 +121,6 @@ extern class NativeSocket `{ int* `}
 
 	fun descriptor: Int `{ return *self; `}
 
-	fun gethostbyname(n: String): NativeSocketHostent import String.to_cstring `{ return gethostbyname(String_to_cstring(n)); `}
-
 	fun connect(addrIn: NativeSocketAddrIn): Int `{
 		return connect(*self, (struct sockaddr*)addrIn, sizeof(*addrIn));
 	`}
@@ -480,5 +478,12 @@ extern class NativeSocketPollValues `{ int `}
 	# Combines two NativeSocketPollValues
 	private fun +(other: NativeSocketPollValues): NativeSocketPollValues `{
 		return self | other;
+	`}
+end
+
+redef class Sys
+	# Get network host entry
+	fun gethostbyname(name: NativeString): NativeSocketHostent `{
+		return gethostbyname(name);
 	`}
 end
