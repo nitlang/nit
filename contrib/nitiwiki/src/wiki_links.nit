@@ -118,6 +118,10 @@ redef class WikiEntry
 		end
 		return null
 	end
+
+	private var md_proc: NitiwikiMdProcessor is lazy do
+		return new NitiwikiMdProcessor(wiki, self)
+	end
 end
 
 redef class WikiSection
@@ -155,7 +159,6 @@ redef class WikiArticle
 	redef fun render do
 		super
 		if not is_dirty and not wiki.force_render or not has_source then return
-		var md_proc = new NitiwikiMdProcessor(wiki, self)
 		content = md_proc.process(md.as(not null))
 		headlines.recover_with(md_proc.emitter.decorator.headlines)
 	end
@@ -183,7 +186,7 @@ class NitiwikiMdProcessor
 	# Article parsed by `self`.
 	#
 	# Used to contextualize links.
-	var context: WikiArticle
+	var context: WikiEntry
 
 	init do
 		emitter = new MarkdownEmitter(self)
@@ -198,7 +201,7 @@ private class NitiwikiDecorator
 	var wiki: Nitiwiki
 
 	# Article used to contextualize links.
-	var context: WikiArticle
+	var context: WikiEntry
 
 	redef fun add_wikilink(v, link, name, comment) do
 		var wiki = v.processor.as(NitiwikiMdProcessor).wiki
@@ -222,7 +225,8 @@ private class NitiwikiDecorator
 			if name == null then name = target.title
 			link = target.url
 		else
-			wiki.message("Warning: unknown wikilink `{link}` (in {context.src_path.as(not null)})", 0)
+			var loc = context.src_path or else context.name
+			wiki.message("Warning: unknown wikilink `{link}` (in {loc})", 0)
 			v.add "class=\"broken\" "
 		end
 		v.add "href=\""
