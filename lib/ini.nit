@@ -184,6 +184,21 @@ class ConfigTree
 	#     assert config["foo.bar.baz"] == "foobarbaz"
 	#     assert config["goo.boo.bar"] == "gooboobar"
 	#     assert config["goo.boo.baz.bar"] == "gooboobazbar"
+	#
+	# Using the array notation
+	#
+	#     str = """
+	#     foo[]=a
+	#     foo[]=b
+	#     foo[]=c"""
+	#     str.write_to_file("config4.ini")
+	#     # load file
+	#     config = new ConfigTree("config4.ini")
+	#     print config.to_map.join(":", ",")
+	#     assert config["foo.0"] == "a"
+	#     assert config["foo.1"] == "b"
+	#     assert config["foo.2"] == "c"
+	#     assert config.at("foo").values.join(",") == "a,b,c"
 	fun load do
 		roots.clear
 		var stream = new FileReader.open(ini_file)
@@ -208,10 +223,11 @@ class ConfigTree
 				end
 				var key = parts[0].trim
 				var val = parts[1].trim
-				if path == null then
-					set_node(key, val)
+				if path != null then key = "{path}.{key}"
+				if key.has_suffix("[]") then
+					set_array(key, val)
 				else
-					set_node("{path}.{key}", val)
+					set_node(key,val)
 				end
 			end
 		end
@@ -222,6 +238,16 @@ class ConfigTree
 	fun save do write_to_file(ini_file)
 
 	private var roots = new Array[ConfigNode]
+
+	# Append `value` to array at `key`
+	private fun set_array(key: String, value: nullable String) do
+		key = key.substring(0, key.length - 2)
+		var len = 0
+		if has_key(key) then
+			len = get_node(key).children.length
+		end
+		set_node("{key}.{len.to_s}", value)
+	end
 
 	private fun set_node(key: String, value: nullable String) do
 		var parts = key.split(".").reversed
