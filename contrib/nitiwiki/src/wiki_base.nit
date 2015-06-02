@@ -702,6 +702,17 @@ class WikiConfig
 		return value_or_default("wiki.footer", "footer.html")
 	end
 
+	# Sidebar position.
+	#
+	# Position of the sidebar between `left`, `right` and `none`. Any other value
+	# will be considered as `none`.
+	#
+	# * key: `wiki.sidebar`
+	# * default: `left`
+	var sidebar: String is lazy do
+		return value_or_default("wiki.sidebar", "left")
+	end
+
 	# Directory used by rsync to upload wiki files.
 	#
 	# This information is used to update your distant wiki files (like the webserver).

@@ -214,6 +214,7 @@ redef class WikiArticle
 		article.breadcrumbs = new TplBreadcrumbs(self)
 		tpl_sidebar.blocks.add tpl_summary
 		article.sidebar = tpl_sidebar
+		article.sidebar_pos = wiki.config.sidebar
 		return article
 	end
 
@@ -327,6 +328,11 @@ class TplArticle
 	# Sidebar of this article (if any).
 	var sidebar: nullable TplSidebar = null
 
+	# Position of the sidebar.
+	#
+	# See `WikiConfig::sidebar`.
+	var sidebar_pos: String = "left"
+
 	# Breadcrumbs from wiki root to this article.
 	var breadcrumbs: nullable TplBreadcrumbs = null
 
@@ -336,13 +342,11 @@ class TplArticle
 	end
 
 	redef fun rendering do
-		if sidebar != null then
-			add "<div class=\"col-sm-3 sidebar\">"
-			add sidebar.as(not null)
-			add "</div>"
-			add "<div class=\"col-sm-9 content\">"
-		else
+		if sidebar_pos == "left" then render_sidebar
+		if sidebar == null then
 			add "<div class=\"col-sm-12 content\">"
+		else
+			add "<div class=\"col-sm-9 content\">"
 		end
 		if body != null then
 			add "<article>"
@@ -357,6 +361,14 @@ class TplArticle
 			add	body.as(not null)
 			add " </article>"
 		end
+		add "</div>"
+		if sidebar_pos == "right" then render_sidebar
+	end
+
+	private fun render_sidebar do
+		if sidebar == null then return
+		add "<div class=\"col-sm-3 sidebar\">"
+		add sidebar.as(not null)
 		add "</div>"
 	end
 end
