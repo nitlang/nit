@@ -148,11 +148,15 @@ redef abstract class Reader
 	super BinaryStream
 
 	# Read a single byte and return `true` if its value is different than 0
+	#
+	# Returns `false` when an error is pending (`last_error != null`).
 	fun read_bool: Bool do return read_byte != 0
 
 	# Get an `Array` of 8 `Bool` by reading a single byte
 	#
 	# To be used with `BinaryWriter::write_bits`.
+	#
+	# Returns an array of `false` when an error is pending (`last_error != null`).
 	fun read_bits: Array[Bool]
 	do
 		var int = read_byte
@@ -163,6 +167,8 @@ redef abstract class Reader
 	# Read a null terminated string
 	#
 	# To be used with `Writer::write_string`.
+	#
+	# Returns a truncated string when an error is pending (`last_error != null`).
 	fun read_string: String
 	do
 		var buf = new FlatBuffer
@@ -176,6 +182,8 @@ redef abstract class Reader
 	# Read the length as a 64 bits integer, then the content of the block
 	#
 	# To be used with `Writer::write_block`.
+	#
+	# Returns a truncated string when an error is pending (`last_error != null`).
 	fun read_block: String
 	do
 		var length = read_int64
@@ -187,6 +195,8 @@ redef abstract class Reader
 	#
 	# Using this format may result in a loss of precision as it uses less bits
 	# than Nit `Float`.
+	#
+	# Returns `0.0` when an error is pending (`last_error != null`).
 	fun read_float: Float
 	do
 		if last_error != null then return 0.0
@@ -223,6 +233,8 @@ redef abstract class Reader
 	`}
 
 	# Read a floating point on 64 bits and return it as a `Float`
+	#
+	# Returns `0.0` when an error is pending (`last_error != null`).
 	fun read_double: Float
 	do
 		if last_error != null then return 0.0
@@ -271,6 +283,8 @@ redef abstract class Reader
 	#
 	# Using this format may result in a loss of precision as the length of a
 	# Nit `Int` may be less than 64 bits on some platforms.
+	#
+	# Returns `0` when an error is pending (`last_error != null`).
 	fun read_int64: Int
 	do
 		if last_error != null then return 0
