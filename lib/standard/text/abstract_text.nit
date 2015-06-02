@@ -1,8 +1,5 @@
 # This file is part of NIT ( http://www.nitlanguage.org ).
 #
-# Copyright 2004-2008 Jean Privat <jean@pryen.org>
-# Copyright 2006-2008 Floréal Morandat <morandat@lirmm.fr>
-#
 # This file is free software, which comes along with NIT.  This software is
 # distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
 # without  even  the implied warranty of  MERCHANTABILITY or  FITNESS FOR A
@@ -11,21 +8,13 @@
 # You  are  allowed  to  redistribute it and sell it, alone or is a part of
 # another product.
 
-# Basic manipulations of strings of characters
-module string
+# Abstract class for manipulation of sequences of characters
+module abstract_text
 
+import native
 import math
 import collection
 intrude import collection::array
-
-`{
-#include <stdio.h>
-#include <string.h>
-`}
-
-###############################################################################
-# String                                                                      #
-###############################################################################
 
 # High-level abstraction for all text representations
 abstract class Text
@@ -976,17 +965,7 @@ private abstract class StringCharView
 	redef fun reverse_iterator do return self.reverse_iterator_from(self.length - 1)
 end
 
-# View on Buffer objects, extends Sequence
-# for mutation operations
-private abstract class BufferCharView
-	super StringCharView
-	super Sequence[Char]
-
-	redef type SELFTYPE: Buffer
-
-end
-
-# A `String` holds and manipulates an arbitrary sequence of characters.
+# Immutable sequence of characters.
 #
 # String objects may be created using literals.
 #
@@ -1163,389 +1142,15 @@ abstract class String
 	end
 end
 
-private class FlatSubstringsIter
-	super Iterator[FlatText]
-
-	var tgt: nullable FlatText
-
-	redef fun item do
-		assert is_ok
-		return tgt.as(not null)
-	end
-
-	redef fun is_ok do return tgt != null
-
-	redef fun next do tgt = null
-end
-
-# Immutable strings of characters.
-class FlatString
-	super FlatText
-	super String
-
-	# Index in _items of the start of the string
-	private var index_from: Int is noinit
-
-	# Indes in _items of the last item of the string
-	private var index_to: Int is noinit
-
-	redef var chars = new FlatStringCharView(self) is lazy
-
-	redef fun [](index)
-	do
-		# Check that the index (+ index_from) is not larger than indexTo
-		# In other terms, if the index is valid
-		assert index >= 0
-		assert (index + index_from) <= index_to
-		return items[index + index_from]
-	end
-
-	################################################
-	#       AbstractString specific methods        #
-	################################################
-
-	redef fun reversed
-	do
-		var native = new NativeString(self.length + 1)
-		var length = self.length
-		var items = self.items
-		var pos = 0
-		var ipos = length-1
-		while pos < length do
-			native[pos] = items[ipos]
-			pos += 1
-			ipos -= 1
-		end
-		return native.to_s_with_length(self.length)
-	end
-
-	redef fun fast_cstring do return items.fast_cstring(index_from)
-
-	redef fun substring(from, count)
-	do
-		assert count >= 0
-
-		if from < 0 then
-			count += from
-			if count < 0 then count = 0
-			from = 0
-		end
-
-		var new_from = index_from + from
-
-		if (new_from + count) > index_to then
-			var new_len = index_to - new_from + 1
-			if new_len <= 0 then return empty
-			return new FlatString.with_infos(items, new_len, new_from, index_to)
-		end
-
-		if count <= 0 then return empty
-
-		var to = new_from + count - 1
-
-		return new FlatString.with_infos(items, to - new_from + 1, new_from, to)
-	end
-
-	redef fun empty do return "".as(FlatString)
-
-	redef fun to_upper
-	do
-		var outstr = new NativeString(self.length + 1)
-		var out_index = 0
-
-		var myitems = self.items
-		var index_from = self.index_from
-		var max = self.index_to
-
-		while index_from <= max do
-			outstr[out_index] = myitems[index_from].to_upper
-			out_index += 1
-			index_from += 1
-		end
-
-		outstr[self.length] = '\0'
-
-		return outstr.to_s_with_length(self.length)
-	end
-
-	redef fun to_lower
-	do
-		var outstr = new NativeString(self.length + 1)
-		var out_index = 0
-
-		var myitems = self.items
-		var index_from = self.index_from
-		var max = self.index_to
-
-		while index_from <= max do
-			outstr[out_index] = myitems[index_from].to_lower
-			out_index += 1
-			index_from += 1
-		end
-
-		outstr[self.length] = '\0'
-
-		return outstr.to_s_with_length(self.length)
-	end
-
-	redef fun output
-	do
-		var i = self.index_from
-		var imax = self.index_to
-		while i <= imax do
-			items[i].output
-			i += 1
-		end
-	end
-
-	##################################################
-	#              String Specific Methods           #
-	##################################################
-
-	# Low-level creation of a new string with given data.
-	#
-	# `items` will be used as is, without copy, to retrieve the characters of the string.
-	# Aliasing issues is the responsibility of the caller.
-	private init with_infos(items: NativeString, length: Int, from: Int, to: Int)
-	do
-		self.items = items
-		self.length = length
-		index_from = from
-		index_to = to
-	end
-
-	redef fun to_cstring do
-		if real_items != null then
-			return real_items.as(not null)
-		else
-			var newItems = new NativeString(length + 1)
-			self.items.copy_to(newItems, length, index_from, 0)
-			newItems[length] = '\0'
-			self.real_items = newItems
-			return newItems
-		end
-	end
-
-	redef fun ==(other)
-	do
-		if not other isa FlatString then return super
-
-		if self.object_id == other.object_id then return true
-
-		var my_length = length
-
-		if other.length != my_length then return false
-
-		var my_index = index_from
-		var its_index = other.index_from
-
-		var last_iteration = my_index + my_length
-
-		var itsitems = other.items
-		var myitems = self.items
-
-		while my_index < last_iteration do
-			if myitems[my_index] != itsitems[its_index] then return false
-			my_index += 1
-			its_index += 1
-		end
-
-		return true
-	end
-
-	redef fun <(other)
-	do
-		if not other isa FlatString then return super
-
-		if self.object_id == other.object_id then return false
-
-		var my_curr_char : Char
-		var its_curr_char : Char
-
-		var curr_id_self = self.index_from
-		var curr_id_other = other.index_from
-
-		var my_items = self.items
-		var its_items = other.items
-
-		var my_length = self.length
-		var its_length = other.length
-
-		var max_iterations = curr_id_self + my_length
-
-		while curr_id_self < max_iterations do
-			my_curr_char = my_items[curr_id_self]
-			its_curr_char = its_items[curr_id_other]
-
-			if my_curr_char != its_curr_char then
-				if my_curr_char < its_curr_char then return true
-				return false
-			end
-
-			curr_id_self += 1
-			curr_id_other += 1
-		end
-
-		return my_length < its_length
-	end
-
-	redef fun +(s)
-	do
-		var my_length = self.length
-		var its_length = s.length
-
-		var total_length = my_length + its_length
-
-		var target_string = new NativeString(my_length + its_length + 1)
-
-		self.items.copy_to(target_string, my_length, index_from, 0)
-		if s isa FlatString then
-			s.items.copy_to(target_string, its_length, s.index_from, my_length)
-		else if s isa FlatBuffer then
-			s.items.copy_to(target_string, its_length, 0, my_length)
-		else
-			var curr_pos = my_length
-			for i in [0..s.length[ do
-				var c = s.chars[i]
-				target_string[curr_pos] = c
-				curr_pos += 1
-			end
-		end
-
-		target_string[total_length] = '\0'
-
-		return target_string.to_s_with_length(total_length)
-	end
-
-	redef fun *(i)
-	do
-		assert i >= 0
-
-		var my_length = self.length
-
-		var final_length = my_length * i
-
-		var my_items = self.items
-
-		var target_string = new NativeString(final_length + 1)
-
-		target_string[final_length] = '\0'
-
-		var current_last = 0
-
-		for iteration in [1 .. i] do
-			my_items.copy_to(target_string, my_length, 0, current_last)
-			current_last += my_length
-		end
-
-		return target_string.to_s_with_length(final_length)
-	end
-
-	redef fun hash
-	do
-		if hash_cache == null then
-			# djb2 hash algorithm
-			var h = 5381
-			var i = index_from
-
-			var myitems = items
-
-			while i <= index_to do
-				h = h.lshift(5) + h + myitems[i].ascii
-				i += 1
-			end
-
-			hash_cache = h
-		end
-
-		return hash_cache.as(not null)
-	end
-
-	redef fun substrings do return new FlatSubstringsIter(self)
-end
-
-private class FlatStringReverseIterator
-	super IndexedIterator[Char]
-
-	var target: FlatString
-
-	var target_items: NativeString
-
-	var curr_pos: Int
-
-	init with_pos(tgt: FlatString, pos: Int)
-	do
-		target = tgt
-		target_items = tgt.items
-		curr_pos = pos + tgt.index_from
-	end
-
-	redef fun is_ok do return curr_pos >= target.index_from
-
-	redef fun item do return target_items[curr_pos]
-
-	redef fun next do curr_pos -= 1
-
-	redef fun index do return curr_pos - target.index_from
-
-end
-
-private class FlatStringIterator
-	super IndexedIterator[Char]
-
-	var target: FlatString
-
-	var target_items: NativeString
-
-	var curr_pos: Int
-
-	init with_pos(tgt: FlatString, pos: Int)
-	do
-		target = tgt
-		target_items = tgt.items
-		curr_pos = pos + target.index_from
-	end
-
-	redef fun is_ok do return curr_pos <= target.index_to
-
-	redef fun item do return target_items[curr_pos]
-
-	redef fun next do curr_pos += 1
-
-	redef fun index do return curr_pos - target.index_from
-
-end
-
-private class FlatStringCharView
-	super StringCharView
-
-	redef type SELFTYPE: FlatString
-
-	redef fun [](index)
-	do
-		# Check that the index (+ index_from) is not larger than indexTo
-		# In other terms, if the index is valid
-		assert index >= 0
-		var target = self.target
-		assert (index + target.index_from) <= target.index_to
-		return target.items[index + target.index_from]
-	end
-
-	redef fun iterator_from(start) do return new FlatStringIterator.with_pos(target, start)
-
-	redef fun reverse_iterator_from(start) do return new FlatStringReverseIterator.with_pos(target, start)
-
-end
-
 # A mutable sequence of characters.
 abstract class Buffer
 	super Text
 
-	# New `Buffer` factory, will return a concrete `Buffer` type with default capacity
-	new do return new FlatBuffer
+	# Returns an arbitrary subclass of `Buffer` with default parameters
+	new is abstract
 
-	# New `Buffer` factory, returns a concrete `Buffer` with a capacity of `i`
-	new with_cap(i: Int) do return new FlatBuffer.with_capacity(i)
+	# Returns an instance of a subclass of `Buffer` with `i` base capacity
+	new with_cap(i: Int) is abstract
 
 	redef type SELFTYPE: Buffer is fixed
 
@@ -1665,336 +1270,15 @@ abstract class Buffer
 	redef fun chars: Sequence[Char] is abstract
 end
 
-# Mutable strings of characters.
-class FlatBuffer
-	super FlatText
-	super Buffer
+# View on Buffer objects, extends Sequence
+# for mutation operations
+private abstract class BufferCharView
+	super StringCharView
+	super Sequence[Char]
 
-	redef var chars: Sequence[Char] = new FlatBufferCharView(self) is lazy
-
-	private var capacity: Int = 0
-
-	redef fun fast_cstring do return items.fast_cstring(0)
-
-	redef fun substrings do return new FlatSubstringsIter(self)
-
-	# Re-copies the `NativeString` into a new one and sets it as the new `Buffer`
-	#
-	# This happens when an operation modifies the current `Buffer` and
-	# the Copy-On-Write flag `written` is set at true.
-	private fun reset do
-		var nns = new NativeString(capacity)
-		items.copy_to(nns, length, 0, 0)
-		items = nns
-		written = false
-	end
-
-	redef fun [](index)
-	do
-		assert index >= 0
-		assert index  < length
-		return items[index]
-	end
-
-	redef fun []=(index, item)
-	do
-		is_dirty = true
-		if index == length then
-			add(item)
-			return
-		end
-		if written then reset
-		assert index >= 0 and index < length
-		items[index] = item
-	end
-
-	redef fun add(c)
-	do
-		is_dirty = true
-		if capacity <= length then enlarge(length + 5)
-		items[length] = c
-		length += 1
-	end
-
-	redef fun clear do
-		is_dirty = true
-		if written then reset
-		length = 0
-	end
-
-	redef fun empty do return new Buffer
-
-	redef fun enlarge(cap)
-	do
-		var c = capacity
-		if cap <= c then return
-		while c <= cap do c = c * 2 + 2
-		# The COW flag can be set at false here, since
-		# it does a copy of the current `Buffer`
-		written = false
-		var a = new NativeString(c+1)
-		if length > 0 then items.copy_to(a, length, 0, 0)
-		items = a
-		capacity = c
-	end
-
-	redef fun to_s do
-		written = true
-		if length == 0 then items = new NativeString(1)
-		return new FlatString.with_infos(items, length, 0, length - 1)
-	end
-
-	redef fun to_cstring
-	do
-		if is_dirty then
-			var new_native = new NativeString(length + 1)
-			new_native[length] = '\0'
-			if length > 0 then items.copy_to(new_native, length, 0, 0)
-			real_items = new_native
-			is_dirty = false
-		end
-		return real_items.as(not null)
-	end
-
-	# Create a new empty string.
-	init do end
-
-	# Low-level creation a new buffer with given data.
-	#
-	# `items` will be used as is, without copy, to store the characters of the buffer.
-	# Aliasing issues is the responsibility of the caller.
-	#
-	# If `items` is shared, `written` should be set to true after the creation
-	# so that a modification will do a copy-on-write.
-	private init with_infos(items: NativeString, capacity, length: Int)
-	do
-		self.items = items
-		self.length = length
-		self.capacity = capacity
-	end
-
-	# Create a new string copied from `s`.
-	init from(s: Text)
-	do
-		capacity = s.length + 1
-		length = s.length
-		items = new NativeString(capacity)
-		if s isa FlatString then
-			s.items.copy_to(items, length, s.index_from, 0)
-		else if s isa FlatBuffer then
-			s.items.copy_to(items, length, 0, 0)
-		else
-			var curr_pos = 0
-			for i in [0..s.length[ do
-				var c = s.chars[i]
-				items[curr_pos] = c
-				curr_pos += 1
-			end
-		end
-	end
-
-	# Create a new empty string with a given capacity.
-	init with_capacity(cap: Int)
-	do
-		assert cap >= 0
-		items = new NativeString(cap+1)
-		capacity = cap
-		length = 0
-	end
-
-	redef fun append(s)
-	do
-		if s.is_empty then return
-		is_dirty = true
-		var sl = s.length
-		if capacity < length + sl then enlarge(length + sl)
-		if s isa FlatString then
-			s.items.copy_to(items, sl, s.index_from, length)
-		else if s isa FlatBuffer then
-			s.items.copy_to(items, sl, 0, length)
-		else
-			var curr_pos = self.length
-			for i in [0..s.length[ do
-				var c = s.chars[i]
-				items[curr_pos] = c
-				curr_pos += 1
-			end
-		end
-		length += sl
-	end
-
-	# Copies the content of self in `dest`
-	fun copy(start: Int, len: Int, dest: Buffer, new_start: Int)
-	do
-		var self_chars = self.chars
-		var dest_chars = dest.chars
-		for i in [0..len-1] do
-			dest_chars[new_start+i] = self_chars[start+i]
-		end
-	end
-
-	redef fun substring(from, count)
-	do
-		assert count >= 0
-		count += from
-		if from < 0 then from = 0
-		if count > length then count = length
-		if from < count then
-			var len = count - from
-			var r_items = new NativeString(len)
-			items.copy_to(r_items, len, from, 0)
-			var r = new FlatBuffer.with_infos(r_items, len, len)
-			return r
-		else
-			return new Buffer
-		end
-	end
-
-	redef fun reverse
-	do
-		written = false
-		var ns = new NativeString(capacity)
-		var si = length - 1
-		var ni = 0
-		var it = items
-		while si >= 0 do
-			ns[ni] = it[si]
-			ni += 1
-			si -= 1
-		end
-		items = ns
-	end
-
-	redef fun times(repeats)
-	do
-		var x = new FlatString.with_infos(items, length, 0, length - 1)
-		for i in [1..repeats[ do
-			append(x)
-		end
-	end
-
-	redef fun upper
-	do
-		if written then reset
-		var it = items
-		var id = length - 1
-		while id >= 0 do
-			it[id] = it[id].to_upper
-			id -= 1
-		end
-	end
-
-	redef fun lower
-	do
-		if written then reset
-		var it = items
-		var id = length - 1
-		while id >= 0 do
-			it[id] = it[id].to_lower
-			id -= 1
-		end
-	end
-end
-
-private class FlatBufferReverseIterator
-	super IndexedIterator[Char]
-
-	var target: FlatBuffer
-
-	var target_items: NativeString
-
-	var curr_pos: Int
-
-	init with_pos(tgt: FlatBuffer, pos: Int)
-	do
-		target = tgt
-		if tgt.length > 0 then target_items = tgt.items
-		curr_pos = pos
-	end
-
-	redef fun index do return curr_pos
-
-	redef fun is_ok do return curr_pos >= 0
-
-	redef fun item do return target_items[curr_pos]
-
-	redef fun next do curr_pos -= 1
+	redef type SELFTYPE: Buffer
 
 end
-
-private class FlatBufferCharView
-	super BufferCharView
-
-	redef type SELFTYPE: FlatBuffer
-
-	redef fun [](index) do return target.items[index]
-
-	redef fun []=(index, item)
-	do
-		assert index >= 0 and index <= length
-		if index == length then
-			add(item)
-			return
-		end
-		target.items[index] = item
-	end
-
-	redef fun push(c)
-	do
-		target.add(c)
-	end
-
-	redef fun add(c)
-	do
-		target.add(c)
-	end
-
-	fun enlarge(cap: Int)
-	do
-		target.enlarge(cap)
-	end
-
-	redef fun append(s)
-	do
-		var s_length = s.length
-		if target.capacity < s.length then enlarge(s_length + target.length)
-	end
-
-	redef fun iterator_from(pos) do return new FlatBufferIterator.with_pos(target, pos)
-
-	redef fun reverse_iterator_from(pos) do return new FlatBufferReverseIterator.with_pos(target, pos)
-
-end
-
-private class FlatBufferIterator
-	super IndexedIterator[Char]
-
-	var target: FlatBuffer
-
-	var target_items: NativeString
-
-	var curr_pos: Int
-
-	init with_pos(tgt: FlatBuffer, pos: Int)
-	do
-		target = tgt
-		if tgt.length > 0 then target_items = tgt.items
-		curr_pos = pos
-	end
-
-	redef fun index do return curr_pos
-
-	redef fun is_ok do return curr_pos < target.length
-
-	redef fun item do return target_items[curr_pos]
-
-	redef fun next do curr_pos += 1
-
-end
-
-###############################################################################
-# Refinement                                                                  #
-###############################################################################
 
 redef class Object
 	# User readable representation of `self`.
@@ -2094,36 +1378,14 @@ redef class Int
 	# C function to convert an nit Int to a NativeString (char*)
 	private fun native_int_to_s(nstr: NativeString, strlen: Int) is extern "native_int_to_s"
 
-	# return displayable int in base 10 and signed
-	#
-	#     assert 1.to_s            == "1"
-	#     assert (-123).to_s       == "-123"
-	redef fun to_s do
-		# Fast case for common numbers
-		if self == 0 then return "0"
-		if self == 1 then return "1"
-
-		var nslen = int_to_s_len
-		var ns = new NativeString(nslen + 1)
-		ns[nslen] = '\0'
-		native_int_to_s(ns, nslen + 1)
-		return ns.to_s_with_length(nslen)
-	end
+	# return displayable int in base base and signed
+	fun to_base(base: Int, signed: Bool): String is abstract
 
 	# return displayable int in hexadecimal
 	#
 	#     assert 1.to_hex  == "1"
 	#     assert (-255).to_hex  == "-ff"
 	fun to_hex: String do return to_base(16,false)
-
-	# return displayable int in base base and signed
-	fun to_base(base: Int, signed: Bool): String
-	do
-		var l = digit_count(base)
-		var s = new FlatBuffer.from(" " * l)
-		fill_buffer(s, base, signed)
-		return s.to_s
-	end
 end
 
 redef class Float
@@ -2287,97 +1549,6 @@ redef class Collection[E]
 	end
 end
 
-redef class Array[E]
-
-	# Fast implementation
-	redef fun plain_to_s
-	do
-		var l = length
-		if l == 0 then return ""
-		if l == 1 then if self[0] == null then return "" else return self[0].to_s
-		var its = _items
-		var na = new NativeArray[String](l)
-		var i = 0
-		var sl = 0
-		var mypos = 0
-		while i < l do
-			var itsi = its[i]
-			if itsi == null then
-				i += 1
-				continue
-			end
-			var tmp = itsi.to_s
-			sl += tmp.length
-			na[mypos] = tmp
-			i += 1
-			mypos += 1
-		end
-		var ns = new NativeString(sl + 1)
-		ns[sl] = '\0'
-		i = 0
-		var off = 0
-		while i < mypos do
-			var tmp = na[i]
-			var tpl = tmp.length
-			if tmp isa FlatString then
-				tmp.items.copy_to(ns, tpl, tmp.index_from, off)
-				off += tpl
-			else
-				for j in tmp.substrings do
-					var s = j.as(FlatString)
-					var slen = s.length
-					s.items.copy_to(ns, slen, s.index_from, off)
-					off += slen
-				end
-			end
-			i += 1
-		end
-		return ns.to_s_with_length(sl)
-	end
-end
-
-redef class NativeArray[E]
-	# Join all the elements using `to_s`
-	#
-	# REQUIRE: `self isa NativeArray[String]`
-	# REQUIRE: all elements are initialized
-	fun native_to_s: String
-	do
-		assert self isa NativeArray[String]
-		var l = length
-		var na = self
-		var i = 0
-		var sl = 0
-		var mypos = 0
-		while i < l do
-			sl += na[i].length
-			i += 1
-			mypos += 1
-		end
-		var ns = new NativeString(sl + 1)
-		ns[sl] = '\0'
-		i = 0
-		var off = 0
-		while i < mypos do
-			var tmp = na[i]
-			var tpl = tmp.length
-			if tmp isa FlatString then
-				tmp.items.copy_to(ns, tpl, tmp.index_from, off)
-				off += tpl
-			else
-				for j in tmp.substrings do
-					var s = j.as(FlatString)
-					var slen = s.length
-					s.items.copy_to(ns, slen, s.index_from, off)
-					off += slen
-				end
-			end
-			i += 1
-		end
-		return ns.to_s_with_length(sl)
-	end
-end
-
 redef class Map[K,V]
 	# Concatenate couple of 'key value'.
 	# key and value are separated by `couple_sep`.
@@ -2387,93 +1558,7 @@ redef class Map[K,V]
 	#     m[1] = "one"
 	#     m[10] = "ten"
 	#     assert m.join("; ", "=") == "1=one; 10=ten"
-	fun join(sep: String, couple_sep: String): String
-	do
-		if is_empty then return ""
-
-		var s = new Buffer # Result
-
-		# Concat first item
-		var i = iterator
-		var k = i.key
-		var e = i.item
-		s.append("{k or else "<null>"}{couple_sep}{e or else "<null>"}")
-
-		# Concat other items
-		i.next
-		while i.is_ok do
-			s.append(sep)
-			k = i.key
-			e = i.item
-			s.append("{k or else "<null>"}{couple_sep}{e or else "<null>"}")
-			i.next
-		end
-		return s.to_s
-	end
-end
-
-###############################################################################
-# Native classes                                                              #
-###############################################################################
-
-# Native strings are simple C char *
-extern class NativeString `{ char* `}
-	# Creates a new NativeString with a capacity of `length`
-	new(length: Int) is intern
-
-	# Returns a char* starting at `index`.
-	#
-	# WARNING: Unsafe for extern code, use only for temporary
-	# pointer manipulation purposes (e.g. write to file or such)
-	fun fast_cstring(index: Int): NativeString is intern
-
-	# Get char at `index`.
-	fun [](index: Int): Char is intern
-
-	# Set char `item` at index.
-	fun []=(index: Int, item: Char) is intern
-
-	# Copy `self` to `dest`.
-	fun copy_to(dest: NativeString, length: Int, from: Int, to: Int) is intern
-
-	# Position of the first nul character.
-	fun cstring_length: Int
-	do
-		var l = 0
-		while self[l] != '\0' do l += 1
-		return l
-	end
-
-	# Parse `self` as an Int.
-	fun atoi: Int is intern
-
-	# Parse `self` as a Float.
-	fun atof: Float is extern "atof"
-
-	redef fun to_s
-	do
-		return to_s_with_length(cstring_length)
-	end
-
-	# Returns `self` as a String of `length`.
-	fun to_s_with_length(length: Int): FlatString
-	do
-		assert length >= 0
-		var str = new FlatString.with_infos(self, length, 0, length - 1)
-		return str
-	end
-
-	# Returns `self` as a new String.
-	fun to_s_with_copy: FlatString
-	do
-		var length = cstring_length
-		var new_self = new NativeString(length + 1)
-		copy_to(new_self, length, 0, 0)
-		var str = new FlatString.with_infos(new_self, length, 0, length - 1)
-		new_self[length] = '\0'
-		str.real_items = new_self
-		return str
-	end
+	fun join(sep: String, couple_sep: String): String is abstract
 end
 
 redef class Sys
@@ -2562,4 +1647,20 @@ fun alpha_comparator: Comparator do return once new AlphaComparator
 fun args: Sequence[String]
 do
 	return sys.program_args
+end
+
+redef class NativeString
+	# Returns `self` as a new String.
+	fun to_s_with_copy: String is abstract
+
+	# Returns `self` as a String of `length`.
+	fun to_s_with_length(length: Int): String is abstract
+end
+
+redef class NativeArray[E]
+	# Join all the elements using `to_s`
+	#
+	# REQUIRE: `self isa NativeArray[String]`
+	# REQUIRE: all elements are initialized
+	fun native_to_s: String is abstract
 end

@@ -13,7 +13,7 @@
 # Basic string search, match and replace.
 module string_search
 
-import string
+import abstract_text
 
 # Patterns are abstract string motifs (include `String` and `Char`).
 interface Pattern
@@ -165,7 +165,7 @@ class BM_Pattern
 
 	# good shifts
 	private var gs: Array[Int] is noinit
-	
+
 	# bad characters
 	private var bc_table = new ArrayMap[Char, Int]
 
