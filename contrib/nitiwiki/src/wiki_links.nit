@@ -95,6 +95,7 @@ redef class WikiEntry
 	redef fun render do
 		super
 		if not is_dirty and not wiki.force_render then return
+		render_sidebar_wikilinks
 	end
 
 	# Search in `self` then `self.children` if an entry has the name `name`.
@@ -121,6 +122,15 @@ redef class WikiEntry
 
 	private var md_proc: NitiwikiMdProcessor is lazy do
 		return new NitiwikiMdProcessor(wiki, self)
+	end
+
+	# Process wikilinks from sidebar.
+	private fun render_sidebar_wikilinks do
+		var blocks = sidebar.blocks
+		for i in [0..blocks.length[ do
+			blocks[i] = md_proc.process(blocks[i].to_s).write_to_string
+			md_proc.emitter.decorator.headlines.clear
+		end
 	end
 end
 

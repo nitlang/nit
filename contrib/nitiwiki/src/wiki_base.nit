@@ -209,6 +209,26 @@ class Nitiwiki
 		return tpl
 	end
 
+	# Does a sideblock named `name` exists for this wiki?
+	fun has_sideblock(name: String): Bool do
+		name = "{name}.{config.md_ext}"
+		return expand_path(config.root_dir, config.sidebar_dir, name).file_exists
+	end
+
+	# Load a markdown block with `name` from `WikiConfig::sidebar_dir`.
+	private fun load_sideblock(name: String): nullable String do
+		if not has_sideblock(name) then
+			message("Error: can't load sideblock `{name}`", 0)
+			return null
+		end
+		name = "{name}.{config.md_ext}"
+		var path = expand_path(config.root_dir, config.sidebar_dir, name)
+		var file = new FileReader.open(path)
+		var res = file.read_all
+		file.close
+		return res
+	end
+
 	# Join `parts` as a path and simplify it
 	fun expand_path(parts: String...): String do
 		var path = ""
@@ -323,6 +343,9 @@ abstract class WikiEntry
 		end
 		return path.reversed
 	end
+
+	# Sidebar relative to this wiki entry.
+	var sidebar = new WikiSidebar(self)
 
 	# Relative path from `wiki.config.root_dir` to source if any.
 	fun src_path: nullable String is abstract
@@ -560,6 +583,28 @@ class WikiArticle
 	redef fun to_s do return "{name} ({parent or else "null"})"
 end
 
+# The sidebar is displayed in front of the main panel of a `WikiEntry`.
+class WikiSidebar
+
+	# Wiki used to parse sidebar blocks.
+	var wiki: Nitiwiki is lazy do return entry.wiki
+
+	# WikiEntry this panel is related to.
+	var entry: WikiEntry
+
+	# Blocks are ieces of markdown that will be rendered in the sidebar.
+	var blocks: Array[Text] is lazy do
+		var res = new Array[Text]
+		# TODO get blocks from the entry for more customization
+		for name in entry.wiki.config.sidebar_blocks do
+			var block = wiki.load_sideblock(name)
+			if block == null then continue
+			res.add block
+		end
+		return res
+	end
+end
+
 # Wiki configuration class.
 #
 # This class provides services that ensure static typing when accessing the `config.ini` file.
@@ -711,6 +756,32 @@ class WikiConfig
 	# * default: `left`
 	var sidebar: String is lazy do
 		return value_or_default("wiki.sidebar", "left")
+	end
+
+	# Sidebar markdown block to include.
+	#
+	# Blocks are specified by their filename without the extension.
+	#
+	# * key: `wiki.sidebar.blocks`
+	# * default: `[]`
+	var sidebar_blocks: Array[String] is lazy do
+		var res = new Array[String]
+		if not has_key("wiki.sidebar.blocks") then return res
+		for val in at("wiki.sidebar.blocks").values do
+			res.add val
+		end
+		return res
+	end
+
+	# Sidebar files directory.
+	#
+	# Directory where sidebar blocks are stored.
+	# **This path MUST be relative to `root_dir`.**
+	#
+	# * key: `wiki.sidebar_dir`
+	# * default: `sidebar/`
+	var sidebar_dir: String is lazy do
+		return value_or_default("wiki.sidebar_dir", "sidebar/").simplify_path
 	end
 
 	# Directory used by rsync to upload wiki files.

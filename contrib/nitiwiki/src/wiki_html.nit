@@ -212,14 +212,18 @@ redef class WikiArticle
 		var article = new TplArticle
 		article.body = content
 		article.breadcrumbs = new TplBreadcrumbs(self)
-		tpl_sidebar.blocks.add tpl_summary
 		article.sidebar = tpl_sidebar
 		article.sidebar_pos = wiki.config.sidebar
 		return article
 	end
 
 	# Sidebar for this page.
-	var tpl_sidebar = new TplSidebar
+	var tpl_sidebar: TplSidebar is lazy do
+		var res = new TplSidebar
+		res.blocks.add tpl_summary
+		res.blocks.add_all sidebar.blocks
+		return res
+	end
 
 	# Generate the HTML summary for this article.
 	#
@@ -382,9 +386,9 @@ class TplSidebar
 
 	redef fun rendering do
 		for block in blocks do
-			add "<div class=\"sideblock\">"
+			add "<nav class=\"sideblock\">"
 			add block
-			add "</div>"
+			add "</nav>"
 		end
 	end
 end
