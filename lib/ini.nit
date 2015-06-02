@@ -188,8 +188,10 @@ class ConfigTree
 		roots.clear
 		var stream = new FileReader.open(ini_file)
 		var path: nullable String = null
+		var line_number = 0
 		while not stream.eof do
 			var line = stream.read_line
+			line_number += 1
 			if line.is_empty then
 				continue
 			else if line.has_prefix(";") then
@@ -201,6 +203,9 @@ class ConfigTree
 				set_node(path, null)
 			else
 				var parts = line.split("=")
+				assert parts.length > 1 else
+					print "Error: malformed ini at line {line_number}"
+				end
 				var key = parts[0].trim
 				var val = parts[1].trim
 				if path == null then
