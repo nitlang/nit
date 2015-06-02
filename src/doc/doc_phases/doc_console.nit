@@ -20,6 +20,7 @@ module doc_console
 
 import semantize
 import doc_extract
+import doc_poset
 import doc::console_templates
 
 # Nitx handles console I/O.
@@ -58,16 +59,24 @@ class Nitx
 
 	# Displays the list of available commands.
 	fun help do
-		print "\nCommands:"
-		print "\tname\t\tlookup module, class and property with the corresponding 'name'"
+		print "\nCommands:\n"
+		print "\tname\t\t\tlookup module, class and property with the corresponding 'name'"
 		print "\tdoc: <name::space>\tdisplay the documentation page of 'namespace'"
-		print "\tparam: <Type>\tlookup methods using the corresponding 'Type' as parameter"
-		print "\treturn: <Type>\tlookup methods returning the corresponding 'Type'"
-		print "\tnew: <Type>\tlookup methods creating new instances of 'Type'"
-		print "\tcall: <name>\tlookup methods calling 'name'"
-		print "\tcode: <name>\tdisplay the source code associated to the 'name' entity"
-		print "\t:h\t\tdisplay this help message"
-		print "\t:q\t\tquit interactive mode"
+		print "\nType lookup:"
+		print "\tparam: <Type>\t\tlookup methods using the corresponding 'Type' as parameter"
+		print "\treturn: <Type>\t\tlookup methods returning the corresponding 'Type'"
+		print "\tnew: <Type>\t\tlookup methods creating new instances of 'Type'"
+		print "\tcall: <name>\t\tlookup methods calling 'name'"
+		print "\nHierarchy lookup:"
+		print "\tparents: <Class>\tlist direct parents of 'Class'"
+		print "\tancestors: <Class>\tlist all ancestors of 'Class'"
+		print "\tchildren: <Class>\tlist direct children of 'Class'"
+		print "\tdescendants: <Class>\tlist all descendants of 'Class'"
+		print "\nCode lookup:"
+		print "\tcode: <name>\t\tdisplay the source code associated to the 'name' entity"
+		print "\n"
+		print "\t:h\t\t\tdisplay this help message"
+		print "\t:q\t\t\tquit interactive mode"
 		print ""
 	end
 
@@ -80,19 +89,14 @@ class Nitx
 
 	# Processes the query string and performs it.
 	fun do_query(str: String) do
-		var query = parse_query(str)
-		var res = query.perform(self, doc)
-		var page = query.make_results(self, res)
-		print page.write_to_string
-	end
-
-	# Returns an `NitxQuery` from a raw query string.
-	fun parse_query(str: String): NitxQuery do
 		var query = new NitxQuery(str)
 		if query isa NitxCommand then
 			query.execute(self)
+			return
 		end
-		return query
+		var res = query.perform(self, doc)
+		var page = query.make_results(self, res)
+		print page.write_to_string
 	end
 end
 
@@ -129,7 +133,14 @@ interface NitxQuery
 			return new CallQuery(query_string)
 		else if query_string.has_prefix("code:") then
 			return new CodeQuery(query_string)
-
+		else if query_string.has_prefix("parents:") then
+			return new ParentsQuery(query_string)
+		else if query_string.has_prefix("ancestors:") then
+			return new AncestorsQuery(query_string)
+		else if query_string.has_prefix("children:") then
+			return new ChildrenQuery(query_string)
+		else if query_string.has_prefix("descendants:") then
+			return new DescendantsQuery(query_string)
 		end
 		return new CommentQuery("comment: {query_string}")
 	end
@@ -358,6 +369,76 @@ class PageMatch
 			return page.mentity.cs_list_item
 		end
 		return " * {page.title}"
+	end
+end
+
+# Search in class or module hierarchy of a `MEntity`.
+#
+# It actually searches for pages about the mentity and extracts the
+# pre-calculated hierarchies by the `doc_post` phase.
+abstract class HierarchiesQuery
+	super DocQuery
+
+	redef fun make_results(nitx, results) do
+		var page = new DocPage("hierarchy", "Hierarchy")
+		for result in results do
+			if not result isa PageMatch then continue
+			var rpage = result.page
+			if not rpage isa MClassPage then continue
+			page.root.add_child build_article(rpage)
+		end
+		return page
+	end
+
+	# Build an article containing the hierarchy list depending on subclasses.
+	private fun build_article(page: MClassPage): DocArticle is abstract
+end
+
+# List all parents of a `MClass`.
+class AncestorsQuery
+	super HierarchiesQuery
+
+	redef fun build_article(page) do
+		return new MEntitiesListArticle(
+			"ancerstors",
+			"Ancestors for {page.mentity.name}",
+			page.ancestors.to_a)
+	end
+end
+
+# List direct parents of a `MClass`.
+class ParentsQuery
+	super HierarchiesQuery
+
+	redef fun build_article(page) do
+		return new MEntitiesListArticle(
+			"parents",
+			"Parents for {page.mentity.name}",
+			page.parents.to_a)
+	end
+end
+
+# List direct children of a `MClass`.
+class ChildrenQuery
+	super HierarchiesQuery
+
+	redef fun build_article(page) do
+		return new MEntitiesListArticle(
+			"children",
+			"Children for {page.mentity.name}",
+			page.children.to_a)
+	end
+end
+
+# List all descendants of a `MClass`.
+class DescendantsQuery
+	super HierarchiesQuery
+
+	redef fun build_article(page) do
+		return new MEntitiesListArticle(
+			"descendants",
+			"Descendants for {page.mentity.name}",
+			page.children.to_a)
 	end
 end
 

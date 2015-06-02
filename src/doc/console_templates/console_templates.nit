@@ -35,7 +35,7 @@ redef class DocComposite
 	# Title that can be decorated for console display.
 	#
 	# Set as `null` if you don't want to display a title.
-	var cs_title: nullable String is noinit, writable
+	var cs_title: nullable String is writable, lazy do return title
 
 	# Subtitle that can be decorated for console display.
 	#
@@ -87,9 +87,6 @@ redef class MEntityComposite
 end
 
 redef class IntroArticle
-	redef var cs_title = null
-	redef var cs_subtitle = null
-
 	redef fun render_body do
 		addn "    {mentity.cs_declaration.bold}"
 		addn "    {mentity.cs_location.gray.bold}"
@@ -104,9 +101,6 @@ redef class IntroArticle
 end
 
 redef class ConcernsArticle
-	redef var cs_title = "Concerns"
-	redef var cs_subtitle = null
-
 	redef fun render_body do
 		var w = new StringWriter
 		concerns.write_to(w)
@@ -133,5 +127,13 @@ redef class DefinitionArticle
 		end
 		addn ""
 		super
+	end
+end
+
+redef class MEntitiesListArticle
+	redef fun render_body do
+		for mentity in mentities do
+			addn mentity.cs_short_list_item
+		end
 	end
 end
