@@ -47,7 +47,7 @@ loop
 		x = gets
 		if x == "exit" then break
 		if x == "paper" or x == "rock" or x == "scissors" then test = true
-		if test == false then print"Unknow input!"
+		if test == false then print"Invalid choice (rock/paper/scissors"
 	end
 	test = false
 	var z = computer_player
