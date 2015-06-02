@@ -71,7 +71,19 @@ class TCPStream
 			closed = true
 			return
 		end
-		var hostname = socket.gethostbyname(host)
+
+		var hostname = sys.gethostbyname(host.to_cstring)
+		if hostname.address_is_null then
+			# Error in name lookup
+			var err = sys.h_errno
+			last_error = new IOError(err.to_s)
+
+			closed = true
+			end_reached = true
+
+			return
+		end
+
 		addrin = new NativeSocketAddrIn.with_hostent(hostname, port)
 
 		address = addrin.address
