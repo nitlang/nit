@@ -486,4 +486,29 @@ redef class Sys
 	fun gethostbyname(name: NativeString): NativeSocketHostent `{
 		return gethostbyname(name);
 	`}
+
+	# Last error raised by `gethostbyname`
+	fun h_errno: HErrno `{ return h_errno; `}
+end
+
+# Error code of `Sys::h_errno`
+extern class HErrno `{ int `}
+	# The specified host is unknown
+	fun host_not_found: Bool `{ return self == HOST_NOT_FOUND; `}
+
+	# The requested name is valid but does not have an IP address
+	#
+	# Same as `no_data`.
+	fun no_address: Bool `{ return self == NO_ADDRESS; `}
+
+	# The requested name is valid byt does not have an IP address
+	#
+	# Same as `no_address`.
+	fun no_data: Bool `{ return self == NO_DATA; `}
+
+	# A nonrecoverable name server error occurred
+	fun no_recovery: Bool `{ return self == NO_RECOVERY; `}
+
+	# A temporary error occurred on an authoritative name server, try again later
+	fun try_again: Bool `{ return self == TRY_AGAIN; `}
 end
