@@ -18,6 +18,6 @@
 module test_mod2 # second comment
 
 import standard::kernel
-#import standard::string
+#import standard::text
 import template # no need for string
 # import standard

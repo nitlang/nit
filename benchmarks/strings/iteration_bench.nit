@@ -12,7 +12,7 @@
 module iteration_bench
 
 import opts
-intrude import standard::ropes
+intrude import standard::text::ropes
 
 redef class Concat
 	redef fun +(o) do

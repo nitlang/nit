@@ -15,7 +15,7 @@
 module ropes_debug
 
 import standard
-intrude import standard::ropes
+intrude import standard::text::ropes
 
 redef class Text
 	# Writes self as a dot file on the hard drive

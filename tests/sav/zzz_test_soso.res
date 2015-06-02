@@ -1,3 +1,2 @@
-Error: other error
-Warning: some warning
 0
+Error: bla bla
