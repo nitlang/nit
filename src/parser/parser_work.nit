@@ -142,7 +142,7 @@ class Parser
 				assert node1 isa AModule
 				var node = new Start(node1, node2)
 				node2.parent = node
-				(new ComputeProdLocationVisitor).enter_visit(node)
+				(new ComputeProdLocationVisitor(lexer.file.first_token)).enter_visit(node)
 				return node
 			else if action_type == 3 then # ERROR
 				# skip injected tokens
@@ -177,6 +177,10 @@ end
 # Uses existing token locations to infer location of productions.
 private class ComputeProdLocationVisitor
 	super Visitor
+
+	# The current (or starting) cursor on the token sequence used to collect loose tokens
+	var token: nullable Token
+
 	# Currently visited productions that need a first token
 	var need_first_prods = new Array[Prod]
 
@@ -189,7 +193,37 @@ private class ComputeProdLocationVisitor
 	redef fun visit(n: ANode)
 	do
 		if n isa Token then
+			# Skip injected tokens
 			if not isset n._location then return
+
+			# Collect loose tokens (not in the AST) and attach them to token in the AST
+			var cursor = token
+			if n != cursor then
+				var lt = last_token
+				# In order, we have the tokens:
+				# * `lt` the previous visited token in the AST (if any)
+				# * then `cursor` the loose tokens to attach
+				# * then `n` the current visited token in the AST
+
+				# In the following, we advance `cursor` to add them to `lt.next_looses` or to `n.prev_looses`.
+				if lt != null then
+					var ltl = lt.location.line_end
+					# floating tokens on the same line of a AST-token follows it
+					while cursor != null and cursor != n and ltl == cursor.location.line_start do
+						cursor.is_loose = true
+						lt.next_looses.add cursor
+						cursor = cursor.next_token
+					end
+				end
+				# other loose tokens precede the next AST-token
+				while cursor != null and cursor != n do
+					cursor.is_loose = true
+					n.prev_looses.add cursor
+					cursor = cursor.next_token
+				end
+			end
+			token = n.next_token
+
 			var loc = n._location
 			_last_token = n
 
