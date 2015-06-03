@@ -1219,8 +1219,7 @@ redef class AAttrPropdef
 				return
 			end
 			if atabstract != null then
-				modelbuilder.error(atnoinit, "Error: `noautoinit` attributes cannot be abstract.")
-				return
+				modelbuilder.warning(atnoinit, "useless-noautoinit", "Warning: superfluous `noautoinit` on abstract attribute.")
 			end
 		end
 
@@ -1292,6 +1291,22 @@ redef class AAttrPropdef
 		modelbuilder.mpropdef2npropdef[mwritepropdef] = self
 		mwritepropdef.mdoc = mreadpropdef.mdoc
 		if atabstract != null then mwritepropdef.is_abstract = true
+
+		var atautoinit = self.get_single_annotation("autoinit", modelbuilder)
+		if atautoinit != null then
+			if has_value then
+				modelbuilder.error(atautoinit, "Error: `autoinit` attributes cannot have an initial value.")
+			else if not mwritepropdef.is_intro then
+				modelbuilder.error(atautoinit, "Error: `autoinit` attributes cannot be set on redefinitions.")
+			else if not mclassdef.is_intro then
+				modelbuilder.error(atautoinit, "Error: `autoinit` attributes cannot be used in class refinements.")
+			else if atabstract == null then
+				modelbuilder.warning(atautoinit, "useless-autoinit", "Warning: superfluous `autoinit` on attribute.")
+			end
+		else if atabstract != null then
+			# By default, abstract attribute are not autoinit
+			noinit = true
+		end
 	end
 
 	redef fun build_signature(modelbuilder)
