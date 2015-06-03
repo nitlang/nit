@@ -50,7 +50,7 @@ redef class ModelBuilder
 		end
 
 		var nit_dir = toolcontext.nit_dir
-		var libname = "{nit_dir}/lib"
+		var libname = nit_dir/"lib"
 		if libname.file_exists then paths.add(libname)
 	end
 
