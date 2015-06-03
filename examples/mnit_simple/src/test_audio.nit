@@ -21,30 +21,50 @@ import simple_android
 import android::audio
 
 redef class App
-	var soundsp: nullable Sound
-	var soundmp: nullable Sound
+	# Sound
+	var soundsp: Sound
+	# Music
+	var soundmp: Music
+	# Sound
+	var easy_soundsp = new Sound("testsound")
+	# Music
+	var easy_soundmp = new Music("xylofon")
+	# testing from assets ?
 	var test_assets = false
+	# testinf from resources ?
 	var test_ressources = true
+	# testing the automatic way ?
+	var test_easy_sounds = false
 
 	redef fun on_create
 	do
 		super
+		default_mediaplayer.looping = true
 		if test_assets then
-			soundsp = load_sound("testsound.ogg")
-			soundmp = load_music("xylofon.ogg")
+			soundsp = load_sound("testsound.og")
+			soundmp = load_music("xylofon.og")
+			soundmp.play
 		end
 		if test_ressources then
 			soundsp = load_sound_from_res("testsound")
 			soundmp = load_music_from_res("xylofon")
+			soundmp.play
 		end
-		default_mediaplayer.looping = true
-		soundmp.play
+		if test_easy_sounds then
+			easy_soundsp.load
+			easy_soundmp.load
+			easy_soundmp.play
+		end
 	end
 
 	redef fun input( ie )
 	do
 		if ie isa PointerEvent and ie.depressed then
-			soundsp.play
+			if test_assets or test_ressources then
+				soundsp.play
+			else if test_easy_sounds then
+				easy_soundsp.play
+			end
 		end
 		return super
 	end
