@@ -158,9 +158,6 @@ redef class ModelBuilder
 			return
 		end
 
-		# Is the class forbid constructors?
-		if not mclassdef.mclass.kind.need_init then return
-
 		# Is there already a constructor defined?
 		var defined_init: nullable MMethodDef = null
 		for mpropdef in mclassdef.mpropdefs do
