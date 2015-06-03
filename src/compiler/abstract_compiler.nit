@@ -200,7 +200,7 @@ class MakefileToolchain
 	fun write_files(compile_dir: String, cfiles: Array[String])
 	do
 		var platform = compiler.target_platform
-		if self.toolcontext.opt_stacktrace.value == "nitstack" and platform.supports_libunwind then compiler.build_c_to_nit_bindings
+		if platform.supports_libunwind then compiler.build_c_to_nit_bindings
 		var cc_opt_with_libgc = "-DWITH_LIBGC"
 		if not platform.supports_libgc then cc_opt_with_libgc = ""
 
@@ -713,19 +713,14 @@ extern void nitni_global_ref_decr( struct nitni_ref *ref );
 	do
 		var v = self.new_visitor
 		v.add_decl("#include <signal.h>")
-		var ost = modelbuilder.toolcontext.opt_stacktrace.value
 		var platform = target_platform
-
-		if not platform.supports_libunwind then ost = "none"
 
 		var no_main = platform.no_main or modelbuilder.toolcontext.opt_no_main.value
 
-		if ost == "nitstack" or ost == "libunwind" then
+		if platform.supports_libunwind then
 			v.add_decl("#define UNW_LOCAL_ONLY")
 			v.add_decl("#include <libunwind.h>")
-			if ost == "nitstack" then
-				v.add_decl("#include \"c_functions_hash.h\"")
-			end
+			v.add_decl("#include \"c_functions_hash.h\"")
 		end
 		v.add_decl("int glob_argc;")
 		v.add_decl("char **glob_argv;")
@@ -759,7 +754,7 @@ extern void nitni_global_ref_decr( struct nitni_ref *ref );
 		end
 
 		v.add_decl("static void show_backtrace(void) \{")
-		if ost == "nitstack" or ost == "libunwind" then
+		if platform.supports_libunwind then
 			v.add_decl("char* opt = getenv(\"NIT_NO_STACK\");")
 			v.add_decl("unw_cursor_t cursor;")
 			v.add_decl("if(opt==NULL)\{")
@@ -773,16 +768,12 @@ extern void nitni_global_ref_decr( struct nitni_ref *ref );
 			v.add_decl("PRINT_ERROR(\"-------------------------------------------------\\n\");")
 			v.add_decl("while (unw_step(&cursor) > 0) \{")
 			v.add_decl("	unw_get_proc_name(&cursor, procname, 100, &ip);")
-			if ost == "nitstack" then
 			v.add_decl("	const char* recv = get_nit_name(procname, strlen(procname));")
 			v.add_decl("	if (recv != NULL)\{")
 			v.add_decl("		PRINT_ERROR(\"` %s\\n\", recv);")
 			v.add_decl("	\}else\{")
 			v.add_decl("		PRINT_ERROR(\"` %s\\n\", procname);")
 			v.add_decl("	\}")
-			else
-			v.add_decl("	PRINT_ERROR(\"` %s \\n\",procname);")
-			end
 			v.add_decl("\}")
 			v.add_decl("PRINT_ERROR(\"-------------------------------------------------\\n\");")
 			v.add_decl("free(procname);")
