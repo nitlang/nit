@@ -141,6 +141,7 @@ class Parser
 				var node1 = pop
 				assert node1 isa AModule
 				var node = new Start(node1, node2)
+				node2.parent = node
 				(new ComputeProdLocationVisitor).enter_visit(node)
 				return node
 			else if action_type == 3 then # ERROR
