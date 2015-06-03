@@ -623,6 +623,7 @@ abstract class AbstractCompiler
 		self.header.add_decl("#include <string.h>")
 		self.header.add_decl("#include <sys/types.h>\n")
 		self.header.add_decl("#include <unistd.h>\n")
+		self.header.add_decl("#include <stdint.h>\n")
 		self.header.add_decl("#include \"gc_chooser.h\"")
 		self.header.add_decl("#ifdef ANDROID")
 		self.header.add_decl("	#include <android/log.h>")
@@ -1860,13 +1861,13 @@ redef class MClassType
 		else if mclass.name == "Bool" then
 			return "short int"
 		else if mclass.name == "Char" then
-			return "char"
+			return "uint32_t"
 		else if mclass.name == "Float" then
 			return "double"
 		else if mclass.name == "Byte" then
 			return "unsigned char"
 		else if mclass.name == "NativeString" then
-			return "char*"
+			return "unsigned char*"
 		else if mclass.name == "NativeArray" then
 			return "val*"
 		else
@@ -2131,12 +2132,12 @@ redef class AMethPropdef
 				v.ret(v.new_expr("(unsigned char){arguments[0]}", ret.as(not null)))
 				return true
 			else if pname == "ascii" then
-				v.ret(v.new_expr("{arguments[0]}", ret.as(not null)))
+				v.ret(v.new_expr("(uint32_t){arguments[0]}", ret.as(not null)))
 				return true
 			end
 		else if cname == "Char" then
 			if pname == "output" then
-				v.add("printf(\"%c\", {arguments.first});")
+				v.add("printf(\"%c\", ((unsigned char){arguments.first}));")
 				return true
 			else if pname == "object_id" then
 				v.ret(v.new_expr("(long){arguments.first}", ret.as(not null)))
@@ -2170,7 +2171,7 @@ redef class AMethPropdef
 				v.ret(v.new_expr("{arguments[0]}-'0'", ret.as(not null)))
 				return true
 			else if pname == "ascii" then
-				v.ret(v.new_expr("(unsigned char){arguments[0]}", ret.as(not null)))
+				v.ret(v.new_expr("(long){arguments[0]}", ret.as(not null)))
 				return true
 			end
 		else if cname == "Byte" then
@@ -2310,10 +2311,10 @@ redef class AMethPropdef
 			end
 		else if cname == "NativeString" then
 			if pname == "[]" then
-				v.ret(v.new_expr("{arguments[0]}[{arguments[1]}]", ret.as(not null)))
+				v.ret(v.new_expr("(uint32_t){arguments[0]}[{arguments[1]}]", ret.as(not null)))
 				return true
 			else if pname == "[]=" then
-				v.add("{arguments[0]}[{arguments[1]}]={arguments[2]};")
+				v.add("{arguments[0]}[{arguments[1]}]=(unsigned char){arguments[2]};")
 				return true
 			else if pname == "copy_to" then
 				v.add("memmove({arguments[1]}+{arguments[4]},{arguments[0]}+{arguments[3]},{arguments[2]});")
@@ -2325,7 +2326,7 @@ redef class AMethPropdef
 				v.ret(v.new_expr("{arguments[0]} + {arguments[1]}", ret.as(not null)))
 				return true
 			else if pname == "new" then
-				v.ret(v.new_expr("(char*)nit_alloc({arguments[1]})", ret.as(not null)))
+				v.ret(v.new_expr("(unsigned char*)nit_alloc({arguments[1]})", ret.as(not null)))
 				return true
 			end
 		else if cname == "NativeArray" then
@@ -2339,7 +2340,7 @@ redef class AMethPropdef
 			v.ret(v.new_expr("glob_sys", ret.as(not null)))
 			return true
 		else if pname == "calloc_string" then
-			v.ret(v.new_expr("(char*)nit_alloc({arguments[1]})", ret.as(not null)))
+			v.ret(v.new_expr("(unsigned char*)nit_alloc({arguments[1]})", ret.as(not null)))
 			return true
 		else if pname == "calloc_array" then
 			v.calloc_array(ret.as(not null), arguments)

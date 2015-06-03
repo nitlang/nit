@@ -81,7 +81,7 @@ extern class NativeIntent in "Java" `{ android.content.Intent `}
 	`}
 	# FIXME: Java's `char` are encoded on 16-bits whereas Nit's are on 8-bits.
 	fun char_extra(name: JavaString, def_value: Char): Char in "Java" `{
-		return self.getCharExtra(name, def_value);
+		return (int)self.getCharExtra(name, (char)def_value);
 	`}
 	fun char_sequence_array_extra(name: JavaString): Array[String]
 	  import StringCopyArray, StringCopyArray.add, StringCopyArray.collection in "Java" `{
@@ -244,7 +244,7 @@ extern class NativeIntent in "Java" `{ android.content.Intent `}
 		char[] java_array = new char[(int)Array_of_Char_length(value)];
 
 		for (int i=0; i < java_array.length; ++i)
-			java_array[i] = Array_of_Char__index(value, i);
+			java_array[i] = (char)Array_of_Char__index(value, i);
 
 		return self.putExtra(name, java_array);
 	`}
