@@ -349,19 +349,33 @@ class MakefileToolchain
 		# Dynamic adaptations
 		# While `platform` enable complex toolchains, they are statically applied
 		# For a dynamic adaptsation of the compilation, the generated Makefile should check and adapt things itself
+		makefile.write "\n\n"
 
 		# Check and adapt the targeted system
 		makefile.write("uname_S := $(shell sh -c 'uname -s 2>/dev/null || echo not')\n")
-		makefile.write("ifeq ($(uname_S),Darwin)\n")
-		# remove -lunwind since it is already included on macosx
-		makefile.write("\tNEED_LIBUNWIND :=\n")
-		makefile.write("endif\n\n")
 
 		# Check and adapt for the compiler used
 		# clang need an additionnal `-Qunused-arguments`
 		makefile.write("clang_check := $(shell sh -c '$(CC) -v 2>&1 | grep -q clang; echo $$?')\nifeq ($(clang_check), 0)\n\tCFLAGS += -Qunused-arguments\nendif\n")
 
-		makefile.write("ifdef NEED_LIBUNWIND\n\tLDLIBS += -lunwind\nendif\n")
+		if platform.supports_libunwind then
+			makefile.write """
+  # Check and include lib-unwind in a portable way
+  ifneq ($(uname_S),Darwin)
+    # already included on macosx, but need to get the correct flags in other supported platforms.
+    ifeq ($(shell pkg-config --exists 'libunwind'; echo $$?), 0)
+      LDLIBS += `pkg-config --libs libunwind`
+      CFLAGS += `pkg-config --cflags libunwind`
+    else
+      $(warning "[_] stack-traces disabled. Please install libunwind-dev.")
+      CFLAGS += -D NO_STACKTRACE
+    endif
+  endif
+
+"""
+		else
+			makefile.write("CFLAGS += -D NO_STACKTRACE\n\n")
+		end
 
 		makefile.write("all: {outpath}\n")
 		if outpath != real_outpath then
@@ -718,9 +732,11 @@ extern void nitni_global_ref_decr( struct nitni_ref *ref );
 		var no_main = platform.no_main or modelbuilder.toolcontext.opt_no_main.value
 
 		if platform.supports_libunwind then
+			v.add_decl("#ifndef NO_STACKTRACE")
 			v.add_decl("#define UNW_LOCAL_ONLY")
 			v.add_decl("#include <libunwind.h>")
 			v.add_decl("#include \"c_functions_hash.h\"")
+			v.add_decl("#endif")
 		end
 		v.add_decl("int glob_argc;")
 		v.add_decl("char **glob_argv;")
@@ -755,6 +771,7 @@ extern void nitni_global_ref_decr( struct nitni_ref *ref );
 
 		v.add_decl("static void show_backtrace(void) \{")
 		if platform.supports_libunwind then
+			v.add_decl("#ifndef NO_STACKTRACE")
 			v.add_decl("char* opt = getenv(\"NIT_NO_STACK\");")
 			v.add_decl("unw_cursor_t cursor;")
 			v.add_decl("if(opt==NULL)\{")
@@ -778,6 +795,7 @@ extern void nitni_global_ref_decr( struct nitni_ref *ref );
 			v.add_decl("PRINT_ERROR(\"-------------------------------------------------\\n\");")
 			v.add_decl("free(procname);")
 			v.add_decl("\}")
+			v.add_decl("#endif /* NO_STACKTRACE */")
 		end
 		v.add_decl("\}")
 
