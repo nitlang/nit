@@ -400,8 +400,18 @@ They are useless for a normal user.
 `--no-main`
 :   Do not generate main entry point.
 
-`--stacktrace`
-:   Control the generation of stack traces.
+`--no-stacktrace`
+:   The compiled program will not display stack traces on runtime errors.
+
+    Because stack traces rely on libunwind, this option might be useful in order to generate more portable binaries
+    since libunwind might be non available on the runtime system (or available with an ABI incompatible version).
+
+    The generated C is API-portable and can be reused, distributed and compiled on any supported system.
+    If the option `--no-stacktrace` is not used but the development files of the library `libunwind` are not available, then a warning will be displayed
+    and stack trace will be disabled.
+
+    Note that the `--no-stacktrace` option (or this absence) can be toggled manually in the generated Makefile (search `NO_STACKTRACE` in the Makefile).
+    Moreover, the environment variable `NIT_NO_STACK` (see bellow) can also be used at runtime to disable stack traces.
 
 `--max-c-lines`
 :   Maximum number of lines in generated C files. Use 0 for unlimited.
@@ -476,6 +486,20 @@ This option is used to test the robustness of the tools by allowing phases to pr
     * malloc: disable the GC and just use `malloc` without doing any `free`.
     * large: disable the GC and just allocate a large memory area to use for all instantiation.
     * help: show the list of available options.
+
+`NIT_NO_STACK`
+:   Runtime control of stack traces.
+
+    By default, stack traces are printed when a runtime errors occurs during the execution of a compiled program.
+    When setting this environment variable to a non empty value, such stack traces are disabled.
+
+    The environment variable is used when programs are executed, not when they are compiled.
+    Thus, you do not need to recompile programs in order to disable generated stack traces.
+
+    Note that stack traces require that, during the compilation, development files of the library `libunwind` are available.
+    If they are not available, then programs are compiled without any stack trace support.
+
+    To completely disable stack traces, see the option `--no-stacktrace`.
 
 # SEE ALSO
 
