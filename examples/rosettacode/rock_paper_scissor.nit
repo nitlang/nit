@@ -3,7 +3,7 @@
 # Task: Programming_Task/Rock-paper-scissors
 # SEE: <http://rosettacode.org/wiki/Rock-paper-scissors>
 #
-# author: Istvan szalai 03/06/2015
+# author: Istvan SZALAI 03/06/2015
 
 # Return a value to dertermine who win the match.
 # Return 0 for lose, 1 for win, 2 for equality.
