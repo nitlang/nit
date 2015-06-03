@@ -13,7 +13,8 @@ module friendz_android
 import friendz
 import mnit_android
 import android::landscape
-
+import android::audio
+import android::assets_and_resources
 redef class App
 	# Zoom applied for the device display from the game logic coordinates
 	var zoom = 1.0
@@ -21,11 +22,20 @@ redef class App
 	redef fun on_create
 	do
 		super
-
 		var h = screen_height
 		display.set_viewport(0,0,h*display.width/display.height,h)
 
 		zoom = display.height.to_f / h.to_f
+		default_mediaplayer.looping = true
+	end
+
+	redef fun input(input_event)
+	do
+		if input_event isa KeyEvent then
+			return false
+		else
+			return super
+		end
 	end
 end
 
