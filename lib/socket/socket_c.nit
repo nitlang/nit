@@ -121,8 +121,6 @@ extern class NativeSocket `{ int* `}
 
 	fun descriptor: Int `{ return *self; `}
 
-	fun gethostbyname(n: String): NativeSocketHostent import String.to_cstring `{ return gethostbyname(String_to_cstring(n)); `}
-
 	fun connect(addrIn: NativeSocketAddrIn): Int `{
 		return connect(*self, (struct sockaddr*)addrIn, sizeof(*addrIn));
 	`}
@@ -481,4 +479,53 @@ extern class NativeSocketPollValues `{ int `}
 	private fun +(other: NativeSocketPollValues): NativeSocketPollValues `{
 		return self | other;
 	`}
+end
+
+redef class Sys
+	# Get network host entry
+	fun gethostbyname(name: NativeString): NativeSocketHostent `{
+		return gethostbyname(name);
+	`}
+
+	# Last error raised by `gethostbyname`
+	fun h_errno: HErrno `{ return h_errno; `}
+end
+
+# Error code of `Sys::h_errno`
+extern class HErrno `{ int `}
+	# The specified host is unknown
+	fun host_not_found: Bool `{ return self == HOST_NOT_FOUND; `}
+
+	# The requested name is valid but does not have an IP address
+	#
+	# Same as `no_data`.
+	fun no_address: Bool `{ return self == NO_ADDRESS; `}
+
+	# The requested name is valid byt does not have an IP address
+	#
+	# Same as `no_address`.
+	fun no_data: Bool `{ return self == NO_DATA; `}
+
+	# A nonrecoverable name server error occurred
+	fun no_recovery: Bool `{ return self == NO_RECOVERY; `}
+
+	# A temporary error occurred on an authoritative name server, try again later
+	fun try_again: Bool `{ return self == TRY_AGAIN; `}
+
+	redef fun to_s
+	do
+		if host_not_found then
+			return "The specified host is unknown"
+		else if no_address then
+			return "The requested name is valid but does not have an IP address"
+		else if no_recovery then
+			return "A nonrecoverable name server error occurred"
+		else if try_again then
+			return "A temporary error occurred on an authoritative name server, try again later"
+		else
+			# This may happen if another call was made to `gethostbyname`
+			# before we fetch the error code.
+			return "Unknown error on `gethostbyname`"
+		end
+	end
 end
