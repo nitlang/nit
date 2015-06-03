@@ -1,10 +1,9 @@
-# This file is part of NIT ( http://www.nitlanguage.org ).
+# This file is part of NIT ( http://www.nitlanguage.org )
 # This program is public domain
-#
 # Task: Programming_Task/Rock-paper-scissors
 # SEE: <http://rosettacode.org/wiki/Rock-paper-scissors>
 #
-# author: Istvan szalai 22/05/2015
+# author: Istvan szalai 03/06/2015
 
 # Return a value to dertermine who win the match.
 # Return 0 for lose, 1 for win, 2 for equality.
@@ -18,17 +17,10 @@ fun win_or_lose(player, computer: String): Int do
 	return 0
 end
 
-# Return a string with about the match winner or looser.
-fun result_of_the_match_message(number: Int): String do
-	if number == 2 then return "It's a tie!"
-	if number == 1 then return "You win!"
-	return "You lose!"
-end
-
 # Return a String for the player about what the computer player did.
-fun computer_message(number: String): String do
-	if number == "rock" then return "The computer played rock"
-	if number == "scissors" then return "The computer played scissors"
+fun computer_message(str: String): String do
+	if str == "rock" then return "The computer played rock"
+	if str == "scissors" then return "The computer played scissors"
 	return "The computer played paper"
 end
 
@@ -39,18 +31,18 @@ fun computer_player : String do
 end
 
 # Game loop.
-var x = ""
-var test = false
+var player_input = ""
+var tab = ["rock", "scissors", "paper"]
+var tab_message = ["You lose", "You win!", "It's a tie!"]
 loop
-	while not test do
+	loop
 		print "Choose your weapon|exit"
-		x = gets
-		if x == "exit" then break
-		if x == "paper" or x == "rock" or x == "scissors" then test = true
-		if test == false then print"Invalid choice (rock/paper/scissors"
+		player_input = gets
+		if player_input == "exit" then exit 0
+		if tab.has(player_input) then break
+		if not tab.has(player_input) then print "(Invalid choice (rock/paper/scissors)"
 	end
-	test = false
-	var z = computer_player
-	print computer_message(z)
-	print result_of_the_match_message(win_or_lose(x,computer_player))
+	var computer_input = computer_player
+	print computer_message(computer_input)
+	print tab_message[win_or_lose(player_input,computer_input)]
 end
