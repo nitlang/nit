@@ -26,6 +26,7 @@ class MakePagePhase
 		doc.add_page new OverviewPage("overview", "Overview")
 		doc.add_page new SearchPage("search", "Index")
 		for mgroup in doc.mgroups do
+			doc.add_page new ReadmePage(mgroup)
 			doc.add_page new MGroupPage(mgroup)
 		end
 		for mmodule in doc.mmodules do
@@ -63,6 +64,14 @@ class MEntityPage
 
 	redef var id is lazy do return mentity.nitdoc_id
 	redef var title is lazy do return mentity.nitdoc_name
+end
+
+# A page that displays a `MGroup` README.
+class ReadmePage
+	super MEntityPage
+
+	redef type MENTITY: MGroup
+	redef var id is lazy do return "readme_{mentity.nitdoc_id}"
 end
 
 # A documentation page about a MGroup.

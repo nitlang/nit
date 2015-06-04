@@ -51,7 +51,8 @@ private class Nitdoc
 			new InheritanceListsPhase(toolcontext, doc),
 			new IntroRedefListPhase(toolcontext, doc),
 			new LinListPhase(toolcontext, doc),
-			new GraphPhase(toolcontext, doc): DocPhase]
+			new GraphPhase(toolcontext, doc),
+			new ReadmePhase(toolcontext, doc): DocPhase]
 
 		if not toolcontext.opt_test.value then
 			phases.add new RenderHTMLPhase(toolcontext, doc)

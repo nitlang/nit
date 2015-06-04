@@ -238,13 +238,39 @@ redef class SearchPage
 end
 
 redef class MEntityPage
-	redef var html_url is lazy do return mentity.nitdoc_url
+	redef var html_url is lazy do
+		if mentity isa MGroup and mentity.mdoc != null then
+			return "api_{mentity.nitdoc_url}"
+		end
+		return mentity.nitdoc_url
+	end
+
 	redef fun init_title(v, doc) do title = mentity.html_name
 end
 
 # FIXME all clases below are roughly copied from `doc_pages` and adapted to new
 # doc phases. This is to preserve the compatibility with the current
 # `doc_templates` module.
+
+redef class ReadmePage
+	redef var html_url is lazy do return mentity.nitdoc_url
+
+	redef fun init_topmenu(v, doc) do
+		super
+		var mproject = mentity.mproject
+		if not mentity.is_root then
+			topmenu.add_li new ListItem(new Link(mproject.nitdoc_url, mproject.html_name))
+		end
+		topmenu.add_li new ListItem(new Link(html_url, mproject.html_name))
+		topmenu.active_item = topmenu.items.last
+	end
+
+	redef fun init_sidebar(v, doc) do
+		super
+		var api_lnk = """<a href="api_{{{mentity.nitdoc_url}}}">Go to API</a>"""
+		sidebar.boxes.unshift new DocSideBox(api_lnk, "")
+	end
+end
 
 redef class MGroupPage
 	redef fun init_topmenu(v, doc) do
@@ -259,6 +285,12 @@ redef class MGroupPage
 
 	redef fun init_sidebar(v, doc) do
 		super
+		# README link
+		if mentity.mdoc != null then
+			var doc_lnk = """<a href="{{{mentity.nitdoc_url}}}">Go to README</a>"""
+			sidebar.boxes.unshift new DocSideBox(doc_lnk, "")
+		end
+		# MClasses list
 		var mclasses = new HashSet[MClass]
 		mclasses.add_all intros
 		mclasses.add_all redefs
