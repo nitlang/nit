@@ -45,6 +45,8 @@ interface DocCommand
 			return new ArticleCommand(command_string)
 		else if command_string.has_prefix("comment:") then
 			return new CommentCommand(command_string)
+		else if command_string.has_prefix("list:") then
+			return new ListCommand(command_string)
 		else if command_string.has_prefix("param:") then
 			return new ParamCommand(command_string)
 		else if command_string.has_prefix("return:") then
@@ -104,6 +106,13 @@ end
 #
 # Syntax: `comment: MEntity::name`.
 class CommentCommand
+	super AbstractDocCommand
+end
+
+# A `DocCommand` that includes a list of something.
+#
+# Syntax: `list:kind: <arg>`.
+class ListCommand
 	super AbstractDocCommand
 end
 
