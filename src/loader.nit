@@ -479,11 +479,21 @@ redef class ModelBuilder
 	# Load a markdown file as a documentation object
 	fun load_markdown(filepath: String): MDoc
 	do
-		var mdoc = new MDoc(new Location(new SourceFile.from_string(filepath, ""),0,0,0,0))
 		var s = new FileReader.open(filepath)
+		var lines = new Array[String]
+		var line_starts = new Array[Int]
+		var len = 1
 		while not s.eof do
-			mdoc.content.add(s.read_line)
+			var line = s.read_line
+			lines.add(line)
+			line_starts.add(len)
+			len += line.length + 1
 		end
+		s.close
+		var source = new SourceFile.from_string(filepath, lines.join("\n"))
+		source.line_starts.add_all line_starts
+		var mdoc = new MDoc(new Location(source, 1, lines.length, 0, 0))
+		mdoc.content.add_all(lines)
 		return mdoc
 	end
 

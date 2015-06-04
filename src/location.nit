@@ -42,7 +42,9 @@ class SourceFile
 		line_starts[0] = 0
 	end
 
-	# Position of each line start
+	# Offset of each line start in the content `string`.
+	#
+	# Used for fast access to each line when rendering parts of the `string`.
 	var line_starts = new Array[Int]
 end
 
