@@ -104,7 +104,12 @@ redef class AExpr
 			var nadd = v.builder.make_call(recv, na.push_callsite.as(not null), [self])
 			place.replace_with(nadd)
 		end
-		super
+
+		visit_all(v)
+
+		if mtype == null and not is_typed then return # Skip broken
+
+		accept_transform_visitor(v)
 	end
 
 	redef fun replace_with(other)
