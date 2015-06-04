@@ -356,7 +356,7 @@ redef class Meetup
 		end
 		t.add """
 <tr id="total">
-	<th>Total</th>
+	<th>Total ({{{participants(db).length}}})</th>
 		"""
 		for i in answers(db) do
 			t.add """<th id="total{{{i.id}}}"><center>{{{i.count(db)}}}"""
