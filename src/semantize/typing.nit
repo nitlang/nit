@@ -958,7 +958,7 @@ redef class AVarReassignExpr
 
 		v.set_variable(self, variable, rettype)
 
-		self.is_typed = true
+		self.is_typed = rettype != null
 	end
 end
 
@@ -1004,9 +1004,11 @@ redef class AReturnExpr
 			else
 				v.visit_expr(nexpr)
 				v.error(nexpr, "Error: `return` with value in a procedure.")
+				return
 			end
 		else if ret_type != null then
 			v.error(self, "Error: `return` without value in a function.")
+			return
 		end
 		self.is_typed = true
 	end
@@ -2050,7 +2052,7 @@ redef class AAttrAssignExpr
 		var mtype = self.attr_type
 
 		v.visit_expr_subtype(self.n_value, mtype)
-		self.is_typed = true
+		self.is_typed = mtype != null
 	end
 end
 
@@ -2061,9 +2063,9 @@ redef class AAttrReassignExpr
 		var mtype = self.attr_type
 		if mtype == null then return # Skip error
 
-		self.resolve_reassignment(v, mtype, mtype)
+		var rettype = self.resolve_reassignment(v, mtype, mtype)
 
-		self.is_typed = true
+		self.is_typed = rettype != null
 	end
 end
 
