@@ -63,8 +63,8 @@ redef class ToolContext
 	var opt_invocation_metrics = new OptionBool("Enable static and dynamic count of all method invocations", "--invocation-metrics")
 	# --isset-checks-metrics
 	var opt_isset_checks_metrics = new OptionBool("Enable static and dynamic count of isset checks before attributes access", "--isset-checks-metrics")
-	# --stacktrace
-	var opt_stacktrace = new OptionString("Control the generation of stack traces", "--stacktrace")
+	# --no-stacktrace
+	var opt_no_stacktrace = new OptionBool("Disable the generation of stack traces", "--no-stacktrace")
 	# --no-gcc-directives
 	var opt_no_gcc_directive = new OptionArray("Disable a advanced gcc directives for optimization", "--no-gcc-directive")
 	# --release
@@ -76,7 +76,7 @@ redef class ToolContext
 		self.option_context.add_option(self.opt_output, self.opt_dir, self.opt_no_cc, self.opt_no_main, self.opt_make_flags, self.opt_compile_dir, self.opt_hardening)
 		self.option_context.add_option(self.opt_no_check_covariance, self.opt_no_check_attr_isset, self.opt_no_check_assert, self.opt_no_check_autocast, self.opt_no_check_null, self.opt_no_check_all)
 		self.option_context.add_option(self.opt_typing_test_metrics, self.opt_invocation_metrics, self.opt_isset_checks_metrics)
-		self.option_context.add_option(self.opt_stacktrace)
+		self.option_context.add_option(self.opt_no_stacktrace)
 		self.option_context.add_option(self.opt_no_gcc_directive)
 		self.option_context.add_option(self.opt_release)
 		self.option_context.add_option(self.opt_max_c_lines, self.opt_group_c_files)
@@ -87,17 +87,6 @@ redef class ToolContext
 	redef fun process_options(args)
 	do
 		super
-
-		var st = opt_stacktrace.value
-		if st == "none" or st == "libunwind" or st == "nitstack" then
-			# Fine, do nothing
-		else if st == "auto" or st == null then
-			# Default is nitstack
-			opt_stacktrace.value = "nitstack"
-		else
-			print "Option Error: unknown value `{st}` for --stacktrace. Use `none`, `libunwind`, `nitstack` or `auto`."
-			exit(1)
-		end
 
 		if opt_output.value != null and opt_dir.value != null then
 			print "Option Error: cannot use both --dir and --output"
@@ -212,7 +201,7 @@ class MakefileToolchain
 	fun write_files(compile_dir: String, cfiles: Array[String])
 	do
 		var platform = compiler.target_platform
-		if self.toolcontext.opt_stacktrace.value == "nitstack" and platform.supports_libunwind then compiler.build_c_to_nit_bindings
+		if platform.supports_libunwind then compiler.build_c_to_nit_bindings
 		var cc_opt_with_libgc = "-DWITH_LIBGC"
 		if not platform.supports_libgc then cc_opt_with_libgc = ""
 
@@ -355,25 +344,50 @@ class MakefileToolchain
 
 		makefile.write("CC = ccache cc\nCXX = ccache c++\nCFLAGS = -g -O2 -Wno-unused-value -Wno-switch -Wno-attributes\nCINCL =\nLDFLAGS ?= \nLDLIBS  ?= -lm {linker_options.join(" ")}\n\n")
 
-		var ost = toolcontext.opt_stacktrace.value
-		if (ost == "libunwind" or ost == "nitstack") and platform.supports_libunwind then makefile.write("NEED_LIBUNWIND := YesPlease\n")
+		makefile.write "\n# SPECIAL CONFIGURATION FLAGS\n"
+		if platform.supports_libunwind then
+			if toolcontext.opt_no_stacktrace.value then
+				makefile.write "NO_STACKTRACE=True"
+			else
+				makefile.write "NO_STACKTRACE= # Set to `True` to enable"
+			end
+		end
 
 		# Dynamic adaptations
 		# While `platform` enable complex toolchains, they are statically applied
 		# For a dynamic adaptsation of the compilation, the generated Makefile should check and adapt things itself
+		makefile.write "\n\n"
 
 		# Check and adapt the targeted system
 		makefile.write("uname_S := $(shell sh -c 'uname -s 2>/dev/null || echo not')\n")
-		makefile.write("ifeq ($(uname_S),Darwin)\n")
-		# remove -lunwind since it is already included on macosx
-		makefile.write("\tNEED_LIBUNWIND :=\n")
-		makefile.write("endif\n\n")
 
 		# Check and adapt for the compiler used
 		# clang need an additionnal `-Qunused-arguments`
 		makefile.write("clang_check := $(shell sh -c '$(CC) -v 2>&1 | grep -q clang; echo $$?')\nifeq ($(clang_check), 0)\n\tCFLAGS += -Qunused-arguments\nendif\n")
 
-		makefile.write("ifdef NEED_LIBUNWIND\n\tLDLIBS += -lunwind\nendif\n")
+		if platform.supports_libunwind then
+			makefile.write """
+ifneq ($(NO_STACKTRACE), True)
+  # Check and include lib-unwind in a portable way
+  ifneq ($(uname_S),Darwin)
+    # already included on macosx, but need to get the correct flags in other supported platforms.
+    ifeq ($(shell pkg-config --exists 'libunwind'; echo $$?), 0)
+      LDLIBS += `pkg-config --libs libunwind`
+      CFLAGS += `pkg-config --cflags libunwind`
+    else
+      $(warning "[_] stack-traces disabled. Please install libunwind-dev.")
+      CFLAGS += -D NO_STACKTRACE
+    endif
+  endif
+else
+  # Stacktraces disabled
+  CFLAGS += -D NO_STACKTRACE
+endif
+
+"""
+		else
+			makefile.write("CFLAGS += -D NO_STACKTRACE\n\n")
+		end
 
 		makefile.write("all: {outpath}\n")
 		if outpath != real_outpath then
@@ -731,19 +745,16 @@ extern void nitni_global_ref_decr( struct nitni_ref *ref );
 	do
 		var v = self.new_visitor
 		v.add_decl("#include <signal.h>")
-		var ost = modelbuilder.toolcontext.opt_stacktrace.value
 		var platform = target_platform
-
-		if not platform.supports_libunwind then ost = "none"
 
 		var no_main = platform.no_main or modelbuilder.toolcontext.opt_no_main.value
 
-		if ost == "nitstack" or ost == "libunwind" then
+		if platform.supports_libunwind then
+			v.add_decl("#ifndef NO_STACKTRACE")
 			v.add_decl("#define UNW_LOCAL_ONLY")
 			v.add_decl("#include <libunwind.h>")
-			if ost == "nitstack" then
-				v.add_decl("#include \"c_functions_hash.h\"")
-			end
+			v.add_decl("#include \"c_functions_hash.h\"")
+			v.add_decl("#endif")
 		end
 		v.add_decl("int glob_argc;")
 		v.add_decl("char **glob_argv;")
@@ -777,7 +788,8 @@ extern void nitni_global_ref_decr( struct nitni_ref *ref );
 		end
 
 		v.add_decl("static void show_backtrace(void) \{")
-		if ost == "nitstack" or ost == "libunwind" then
+		if platform.supports_libunwind then
+			v.add_decl("#ifndef NO_STACKTRACE")
 			v.add_decl("char* opt = getenv(\"NIT_NO_STACK\");")
 			v.add_decl("unw_cursor_t cursor;")
 			v.add_decl("if(opt==NULL)\{")
@@ -791,20 +803,17 @@ extern void nitni_global_ref_decr( struct nitni_ref *ref );
 			v.add_decl("PRINT_ERROR(\"-------------------------------------------------\\n\");")
 			v.add_decl("while (unw_step(&cursor) > 0) \{")
 			v.add_decl("	unw_get_proc_name(&cursor, procname, 100, &ip);")
-			if ost == "nitstack" then
 			v.add_decl("	const char* recv = get_nit_name(procname, strlen(procname));")
 			v.add_decl("	if (recv != NULL)\{")
 			v.add_decl("		PRINT_ERROR(\"` %s\\n\", recv);")
 			v.add_decl("	\}else\{")
 			v.add_decl("		PRINT_ERROR(\"` %s\\n\", procname);")
 			v.add_decl("	\}")
-			else
-			v.add_decl("	PRINT_ERROR(\"` %s \\n\",procname);")
-			end
 			v.add_decl("\}")
 			v.add_decl("PRINT_ERROR(\"-------------------------------------------------\\n\");")
 			v.add_decl("free(procname);")
 			v.add_decl("\}")
+			v.add_decl("#endif /* NO_STACKTRACE */")
 		end
 		v.add_decl("\}")
 
