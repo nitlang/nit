@@ -454,10 +454,14 @@ class RapidTypeVisitor
 
 	redef fun visit(n)
 	do
-		n.accept_rapid_type_visitor(self)
 		if n isa AExpr then
-			var implicit_cast_to = n.implicit_cast_to
-			if implicit_cast_to != null then self.add_cast_type(implicit_cast_to)
+			if n.mtype != null or n.is_typed then
+				n.accept_rapid_type_visitor(self)
+				var implicit_cast_to = n.implicit_cast_to
+				if implicit_cast_to != null then self.add_cast_type(implicit_cast_to)
+			end
+		else
+			n.accept_rapid_type_visitor(self)
 		end
 
 		# RTA does not enter in AAnnotations
