@@ -625,6 +625,7 @@ class SeparateCompiler
 		for cd in mmodule.mclassdefs do
 			for pd in cd.mpropdefs do
 				if not pd isa MMethodDef then continue
+				if pd.msignature == null then continue # Skip broken method
 				var rta = runtime_type_analysis
 				if modelbuilder.toolcontext.opt_skip_dead_methods.value and rta != null and not rta.live_methoddefs.has(pd) then continue
 				#print "compile {pd} @ {cd} @ {mmodule}"
