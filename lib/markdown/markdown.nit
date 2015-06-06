@@ -396,7 +396,11 @@ class MarkdownProcessor
 			c2 = ' '
 		end
 
-		var loc = text.pos_to_loc(pos)
+		var loc = new MDLocation(
+			current_loc.line_start,
+			current_loc.column_start + pos,
+			current_loc.line_start,
+			current_loc.column_start + pos)
 
 		if c == '*' then
 			if c1 == '*' then
@@ -476,6 +480,12 @@ class MarkdownProcessor
 		end
 		return -1
 	end
+
+	# Location used for next parsed token.
+	#
+	# This location can be changed by the emitter to adjust with `\n` found
+	# in the input.
+	private fun current_loc: MDLocation do return emitter.current_loc
 end
 
 # Emit output corresponding to blocks content.
@@ -519,15 +529,19 @@ class MarkdownEmitter
 	# Transform and emit mardown text
 	fun emit_text(text: Text) do emit_text_until(text, 0, null)
 
-	# Transform and emit mardown text starting at `from` and
+	# Transform and emit mardown text starting at `start` and
 	# until a token with the same type as `token` is found.
-	# Go until the end of text if `token` is null.
+	# Go until the end of `text` if `token` is null.
 	fun emit_text_until(text: Text, start: Int, token: nullable Token): Int do
 		var old_text = current_text
 		var old_pos = current_pos
 		current_text = text
 		current_pos = start
 		while current_pos < text.length do
+			if text[current_pos] == '\n' then
+				current_loc.line_start += 1
+				current_loc.column_start = -current_pos
+			end
 			var mt = processor.token_at(text, current_pos)
 			if (token != null and not token isa TokenNone) and
 			(mt.is_same_type(token) or
@@ -568,6 +582,21 @@ class MarkdownEmitter
 	private fun current_buffer: FlatBuffer do
 		assert not buffer_stack.is_empty
 		return buffer_stack.last
+	end
+
+	# Stacked locations.
+	private var loc_stack = new List[MDLocation]
+
+	# Push a new MDLocation on the stack.
+	private fun push_loc(location: MDLocation) do loc_stack.add location
+
+	# Pop the last buffer.
+	private fun pop_loc: MDLocation do return loc_stack.pop
+
+	# Current output buffer.
+	private fun current_loc: MDLocation do
+		assert not loc_stack.is_empty
+		return loc_stack.last
 	end
 
 	# Append `e` to current buffer.
@@ -900,6 +929,11 @@ class MDLocation
 	var column_end: Int
 
 	redef fun to_s do return "{line_start},{column_start}--{line_end},{column_end}"
+
+	# Return a copy of `self`.
+	fun copy: MDLocation do
+		return new MDLocation(line_start, column_start, line_end, column_end)
+	end
 end
 
 # A block of markdown lines.
@@ -1128,7 +1162,9 @@ abstract class Block
 	fun emit_blocks(v: MarkdownEmitter) do
 		var block = self.block.first_block
 		while block != null do
+			v.push_loc(block.location)
 			block.kind.emit(v)
+			v.pop_loc
 			block = block.next
 		end
 	end
@@ -1209,7 +1245,15 @@ end
 class BlockHeadline
 	super Block
 
-	redef fun emit(v) do v.decorator.add_headline(v, self)
+	redef fun emit(v) do
+		var loc = block.location.copy
+		loc.column_start += start
+		v.push_loc(loc)
+		v.decorator.add_headline(v, self)
+		v.pop_loc
+	end
+
+	private var start = 0
 
 	# Depth of the headline used to determine the headline level.
 	var depth = 0
@@ -1238,6 +1282,7 @@ class BlockHeadline
 			line.leading = 0
 			line.trailing = 0
 		end
+		self.start = start
 		depth = level.min(6)
 	end
 end
@@ -2493,24 +2538,6 @@ redef class Text
 			end
 		end
 		return null
-	end
-
-	# Init a `MDLocation` instance at `pos` in `self`.
-	private fun pos_to_loc(pos: Int): MDLocation do
-		assert pos <= length
-		var line = 1
-		var col = 0
-		var i = 0
-		while i <= pos do
-			col += 1
-			var c = self[i]
-			if c == '\n' then
-				line +=1
-				col = 0
-			end
-			i +=1
-		end
-		return new MDLocation(line, col, line, col)
 	end
 
 	# Is `self` an unsafe HTML element?
