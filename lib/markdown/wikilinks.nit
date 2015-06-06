@@ -41,11 +41,11 @@ end
 redef class Decorator
 
 	# Renders a `[[wikilink]]` item.
-	fun add_wikilink(v: EMITTER, link: Text, name, comment: nullable Text) do
-		if name != null then
-			v.add "[[{name}|{link}]]"
+	fun add_wikilink(v: EMITTER, token: TokenWikiLink) do
+		if token.name != null then
+			v.add "[[{token.name.to_s}|{token.link.to_s}]]"
 		else
-			v.add "[[{link}]]"
+			v.add "[[{token.link.to_s}]]"
 		end
 	end
 end
@@ -67,7 +67,7 @@ class TokenWikiLink
 	super TokenLink
 
 	redef fun emit_hyper(v) do
-		v.decorator.add_wikilink(v, link.as(not null), name, comment)
+		v.decorator.add_wikilink(v, self)
 	end
 
 	redef fun check_link(v, out, start, token) do
