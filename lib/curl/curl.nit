@@ -17,7 +17,7 @@
 # Network functionnalities based on Curl_c module.
 module curl
 
-import curl_c
+import native_curl
 
 # Top level of Curl
 class Curl

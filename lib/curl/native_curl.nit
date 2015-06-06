@@ -15,7 +15,7 @@
 # limitations under the License.
 
 # Binding of C libCurl which allow us to interact with network.
-module curl_c is pkgconfig("libcurl")
+module native_curl is pkgconfig "libcurl"
 
 intrude import standard::file
 import standard
@@ -86,28 +86,28 @@ extern class CCurl `{ CURL * `}
 	# Set options to tell CURL how to behave. Obj parameter type can be Int, Bool, String, FileWriter, CURLSList.
 	fun easy_setopt(opt: CURLOption, obj: Object): CURLCode
 	do
-		if obj isa Int then return i_setopt_int(opt, obj)
-		if obj isa Bool and obj == true then return i_setopt_int(opt, 1)
-		if obj isa Bool and obj == false then return i_setopt_int(opt, 0)
-		if obj isa String then return i_setopt_string(opt, obj)
-		if obj isa FileWriter then return i_setopt_file(opt, obj._file.as(not null))
-		if obj isa CURLSList then return i_setopt_slist(opt, obj)
+		if obj isa Int then return native_setopt_int(opt, obj)
+		if obj isa Bool and obj == true then return native_setopt_int(opt, 1)
+		if obj isa Bool and obj == false then return native_setopt_int(opt, 0)
+		if obj isa String then return native_setopt_string(opt, obj)
+		if obj isa FileWriter then return native_setopt_file(opt, obj._file.as(not null))
+		if obj isa CURLSList then return native_setopt_slist(opt, obj)
 		return once new CURLCode.unknown_option
 	end
 
 	# Internal method to set options to CURL using NativeFile parameter.
-	private fun i_setopt_file(opt: CURLOption, file: NativeFile): CURLCode `{
+	private fun native_setopt_file(opt: CURLOption, file: NativeFile): CURLCode `{
 		return curl_easy_setopt( self, opt, file);
 	`}
 
 	# Internal method to set options to CURL using Int parameter.
-	private fun i_setopt_int(opt: CURLOption, num: Int): CURLCode `{ return curl_easy_setopt( self, opt, num); `}
+	private fun native_setopt_int(opt: CURLOption, num: Int): CURLCode `{ return curl_easy_setopt( self, opt, num); `}
 
 	# Internal method to set options to CURL using CURLSList parameter.
-	private fun i_setopt_slist(opt: CURLOption, list: CURLSList): CURLCode `{ return curl_easy_setopt( self, opt, list); `}
+	private fun native_setopt_slist(opt: CURLOption, list: CURLSList): CURLCode `{ return curl_easy_setopt( self, opt, list); `}
 
 	# Internal method to set options to CURL using String parameter.
-	private fun i_setopt_string(opt: CURLOption, str: String): CURLCode import String.to_cstring `{
+	private fun native_setopt_string(opt: CURLOption, str: String): CURLCode import String.to_cstring `{
 		char *rStr = String_to_cstring(str);
 		return curl_easy_setopt( self, opt, rStr);
 	`}
@@ -116,12 +116,12 @@ extern class CCurl `{ CURL * `}
 	fun easy_getinfo_chars(opt: CURLInfoChars): nullable CURLInfoResponseString
 	do
 		 var answ = new CURLInfoResponseString
-		 if not i_getinfo_chars(opt, answ).is_ok then return null
+		 if not native_getinfo_chars(opt, answ).is_ok then return null
 		 return answ
 	end
 
 	# Internal method used to get String object information initially knowns as C Chars type
-	private fun i_getinfo_chars(opt: CURLInfoChars, res: CURLInfoResponseString): CURLCode import CURLInfoResponseString.response=, NativeString.to_s_with_copy `{
+	private fun native_getinfo_chars(opt: CURLInfoChars, res: CURLInfoResponseString): CURLCode import CURLInfoResponseString.response=, NativeString.to_s_with_copy `{
 		char *r = NULL;
 		CURLcode c = curl_easy_getinfo( self, opt, &r);
 		if((c == CURLE_OK) && r != NULL){
@@ -135,12 +135,12 @@ extern class CCurl `{ CURL * `}
 	fun easy_getinfo_long(opt: CURLInfoLong): nullable CURLInfoResponseLong
 	do
 		 var answ = new CURLInfoResponseLong
-		 if not i_getinfo_long(opt, answ).is_ok then return null
+		 if not native_getinfo_long(opt, answ).is_ok then return null
 		 return answ
 	end
 
 	# Internal method used to get Int object information initially knowns as C Long type
-	private fun i_getinfo_long(opt: CURLInfoLong, res: CURLInfoResponseLong): CURLCode import CURLInfoResponseLong.response= `{
+	private fun native_getinfo_long(opt: CURLInfoLong, res: CURLInfoResponseLong): CURLCode import CURLInfoResponseLong.response= `{
 		long *r = NULL;
 		r = malloc(sizeof(long));
 		CURLcode c = curl_easy_getinfo( self, opt, r);
@@ -153,12 +153,12 @@ extern class CCurl `{ CURL * `}
 	fun easy_getinfo_double(opt: CURLInfoDouble): nullable CURLInfoResponseDouble
 	do
 		 var answ = new CURLInfoResponseDouble
-		 if not i_getinfo_double(opt, answ).is_ok then return null
+		 if not native_getinfo_double(opt, answ).is_ok then return null
 		 return answ
 	end
 
 	# Internal method used to get Int object information initially knowns as C Double type
-	private fun i_getinfo_double(opt: CURLInfoDouble, res: CURLInfoResponseDouble): CURLCode import CURLInfoResponseDouble.response= `{
+	private fun native_getinfo_double(opt: CURLInfoDouble, res: CURLInfoResponseDouble): CURLCode import CURLInfoResponseDouble.response= `{
 		double *r = NULL;
 		r = malloc(sizeof(double));
 		CURLcode c = curl_easy_getinfo( self, opt, r);
@@ -171,14 +171,14 @@ extern class CCurl `{ CURL * `}
 	fun easy_getinfo_slist(opt: CURLInfoSList): nullable CURLInfoResponseArray
 	do
 		var answ = new CURLInfoResponseArray
-		if not i_getinfo_slist(opt, answ).is_ok then return null
+		if not native_getinfo_slist(opt, answ).is_ok then return null
 		answ.response = answ.prim_response.to_a
 		answ.prim_response.destroy
 		return answ
 	end
 
 	# Internal method used to get Array[String] object information initially knowns as C SList type
-	private fun i_getinfo_slist(opt: CURLInfoSList, res: CURLInfoResponseArray): CURLCode import CURLInfoResponseArray.prim_response= `{
+	private fun native_getinfo_slist(opt: CURLInfoSList, res: CURLInfoResponseArray): CURLCode import CURLInfoResponseArray.prim_response= `{
 		struct curl_slist* csl = NULL;
 		CURLcode ce = curl_easy_getinfo( self, opt, &csl);
 		CURLInfoResponseArray_prim_response__assign(res, csl);
@@ -188,12 +188,12 @@ extern class CCurl `{ CURL * `}
 	# Register delegate to read datas from given buffer
 	fun register_read_datas_callback(delegate: CCurlCallbacks, datas: String): CURLCode
 	do
-		if datas.length > 0 then return i_register_read_datas_callback(delegate, datas, datas.length)
+		if datas.length > 0 then return native_register_read_datas_callback(delegate, datas, datas.length)
 		return once new CURLCode.unknown_option
 	end
 
 	# Internal method used to configure read callback
-	private fun i_register_read_datas_callback(delegate: CCurlCallbacks, datas: String, size: Int): CURLCode import String.to_cstring `{
+	private fun native_register_read_datas_callback(delegate: CCurlCallbacks, datas: String, size: Int): CURLCode import String.to_cstring `{
 		CURLCallbackReadDatas *d = NULL;
 		d = malloc(sizeof(CURLCallbackReadDatas));
 		d->data = (char*)String_to_cstring(datas);
@@ -307,16 +307,16 @@ extern class CURLSList `{ struct curl_slist * `}
 	`}
 
 	# Internal method to check for reachability of current data
-	private fun i_data_reachable(c: CURLSList): Bool `{ return (c != NULL && c->data != NULL); `}
+	private fun native_data_reachable(c: CURLSList): Bool `{ return (c != NULL && c->data != NULL); `}
 
 	# Internal method to check for reachability of next element
-	private fun i_next_reachable(c: CURLSList): Bool `{ return (c != NULL && c->next != NULL); `}
+	private fun native_next_reachable(c: CURLSList): Bool `{ return (c != NULL && c->next != NULL); `}
 
 	# Internal method to get current data
-	private fun i_data(c: CURLSList): String import NativeString.to_s `{ return NativeString_to_s(c->data); `}
+	private fun native_data(c: CURLSList): String import NativeString.to_s `{ return NativeString_to_s(c->data); `}
 
 	# Internal method to get next element
-	private fun i_next(c: CURLSList): CURLSList `{ return c->next; `}
+	private fun native_next(c: CURLSList): CURLSList `{ return c->next; `}
 
 	# Convert current low level List to an Array[String] object
 	fun to_a: Array[String]
@@ -324,9 +324,9 @@ extern class CURLSList `{ struct curl_slist * `}
 		var r = new Array[String]
 		var cursor = self
 		loop
-			if i_data_reachable(cursor) != true then break
-			r.add(i_data(cursor))
-			cursor = i_next(cursor)
+			if native_data_reachable(cursor) != true then break
+			r.add(native_data(cursor))
+			cursor = native_next(cursor)
 		end
 		return r
 	end
