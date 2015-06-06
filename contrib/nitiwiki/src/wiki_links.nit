@@ -70,7 +70,7 @@ redef class Nitiwiki
 	#
 	# Returns `null` if no article can be found.
 	fun lookup_entry_by_path(context: WikiEntry, path: String): nullable WikiEntry do
-		var entry: nullable WikiEntry = context.parent or else context
+		var entry = context.parent or else context
 		var parts = path.split_with("/")
 		if path.has_prefix("/") then
 			entry = root_section
@@ -80,6 +80,7 @@ redef class Nitiwiki
 		while not parts.is_empty do
 			var name = parts.shift
 			if name.is_empty then continue
+			if entry.name == name then continue
 			if not entry.children.has_key(name) then return null
 			entry = entry.children[name]
 		end
