@@ -108,10 +108,10 @@ class CurlHTTPRequest
 		if not err.is_ok then return answer_failure(err.to_i, err.to_s)
 
 		# Callbacks
-		err = self.curl.prim_curl.register_callback(callback_receiver, new CURLCallbackType.header)
+		err = self.curl.prim_curl.register_callback_header(callback_receiver)
 		if not err.is_ok then return answer_failure(err.to_i, err.to_s)
 
-		err = self.curl.prim_curl.register_callback(callback_receiver, new CURLCallbackType.body)
+		err = self.curl.prim_curl.register_callback_body(callback_receiver)
 		if not err.is_ok then return answer_failure(err.to_i, err.to_s)
 
 		# HTTP Header
@@ -153,10 +153,10 @@ class CurlHTTPRequest
 		err = self.curl.prim_curl.easy_setopt(new CURLOption.url, url)
 		if not err.is_ok then return answer_failure(err.to_i, err.to_s)
 
-		err = self.curl.prim_curl.register_callback(callback_receiver, new CURLCallbackType.header)
+		err = self.curl.prim_curl.register_callback_header(callback_receiver)
 		if not err.is_ok then return answer_failure(err.to_i, err.to_s)
 
-		err = self.curl.prim_curl.register_callback(callback_receiver, new CURLCallbackType.stream)
+		err = self.curl.prim_curl.register_callback_stream(callback_receiver)
 		if not err.is_ok then return answer_failure(err.to_i, err.to_s)
 
 		var opt_name
@@ -317,7 +317,7 @@ class CurlMailRequest
 		content = add_conventional_space(content)
 		content = add_pair_to_content(content, "", self.body)
 		content = add_conventional_space(content)
-		err = self.curl.prim_curl.register_callback(self, once new CURLCallbackType.read)
+		err = self.curl.prim_curl.register_callback_read(self)
 		if not err.is_ok then return answer_failure(err.to_i, err.to_s)
 		err = self.curl.prim_curl.register_read_datas_callback(self, content)
 		if not err.is_ok then return answer_failure(err.to_i, err.to_s)
@@ -398,7 +398,7 @@ class CurlFileResponseSuccess
 	private var i_file: nullable OFile = null
 
 	# Receive bytes stream from request due to stream callback registering
-	redef fun stream_callback(buffer, size, count)
+	redef fun stream_callback(buffer)
 	do
 		self.i_file.write(buffer, size, count)
 	end

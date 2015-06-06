@@ -20,18 +20,6 @@ module curl_c is pkgconfig("libcurl")
 in "C header" `{
 	#include <curl/curl.h>
 
-	typedef enum {
-		CURLcallbackTypeHeader,
-		CURLcallbackTypeBody,
-		CURLcallbackTypeStream,
-		CURLcallbackTypeRead,
-	} CURLcallbackType;
-
-	typedef struct {
-		CCurlCallbacks delegate;
-		CURLcallbackType type;
-	} CURLCallbackDatas;
-
 	typedef struct {
 		char *data;
 		int len;
@@ -44,26 +32,6 @@ in "C body" `{
 	#include <stdlib.h>
 	#include <string.h>
 
-	// Callbacks method for Header, Body, Stream.
-	size_t nit_curl_callback_func(void *buffer, size_t size, size_t count, CURLCallbackDatas *datas){
-		if(datas->type == CURLcallbackTypeHeader){
-			char *line_c = (char*)buffer;
-			String line_o = NativeString_to_s_with_copy(line_c);
-			CCurlCallbacks_header_callback(datas->delegate, line_o);
-		}
-		else if(datas->type == CURLcallbackTypeBody){
-			char *line_c = (char*)buffer;
-			String line_o = NativeString_to_s_with_copy(line_c);
-			CCurlCallbacks_body_callback(datas->delegate, line_o);
-		}
-		else if(datas->type == CURLcallbackTypeStream){
-			char *line_c = (char*)buffer;
-			String line_o = NativeString_to_s(line_c);
-			CCurlCallbacks_stream_callback(datas->delegate, line_o, size, count);
-		}
-		return count;
-	}
-
 	// Callback method to read datas from buffer.
 	size_t nit_curl_callback_read_func(void *buffer, size_t size, size_t count, CURLCallbackReadDatas *datas){
 		int len = datas->len - datas->pos;
@@ -73,6 +41,30 @@ in "C body" `{
 		return len;
 	}
 `}
+
+redef extern class NativeString
+	private fun native_callback_header(size, count: Int, target: CCurlCallbacks): Int
+	do
+		target.header_callback to_s_with_length(size*count)
+
+		# FIXME we probably should return a value from the user
+		return count
+	end
+
+	private fun native_callback_body(size, count: Int, target: CCurlCallbacks): Int
+	do
+		target.body_callback to_s_with_length(size*count)
+
+		return count
+	end
+
+	private fun native_callback_stream(size, count: Int, target: CCurlCallbacks): Int
+	do
+		target.stream_callback to_s_with_length(size*count)
+
+		return count
+	end
+end
 
 # CURL Extern Type, reproduce CURL low level behaviors
 extern class CCurl `{ CURL * `}
@@ -186,15 +178,6 @@ extern class CCurl `{ CURL * `}
 		return ce;
 	`}
 
-	# Register delegate to get callbacks about the CURL transfer performed
-	fun register_callback(delegate: CCurlCallbacks, cbtype: CURLCallbackType): CURLCode
-	do
-		if once [new CURLCallbackType.header, new CURLCallbackType.body, new CURLCallbackType.stream, new CURLCallbackType.read].has(cbtype) then
-			return i_register_callback(delegate, cbtype)
-		end
-		return once new CURLCode.unknown_option
-	end
-
 	# Register delegate to read datas from given buffer
 	fun register_read_datas_callback(delegate: CCurlCallbacks, datas: String): CURLCode
 	do
@@ -212,31 +195,51 @@ extern class CCurl `{ CURL * `}
 		return curl_easy_setopt( self, CURLOPT_READDATA, d);
 	`}
 
-	# Internal method used to configure callbacks in terms of given type
-	private fun i_register_callback(delegate: CCurlCallbacks, cbtype: CURLCallbackType):CURLCode is extern import CCurlCallbacks.native_header_callback, CCurlCallbacks.native_body_callback, CCurlCallbacks.native_stream_callback `{
-		CURLCallbackDatas *d = malloc(sizeof(CURLCallbackDatas));
-		CCurlCallbacks_incr_ref(delegate);
-		d->type = cbtype;
-		d->delegate = delegate;
+	# Register `delegate` to get callbacks about the CURL transfer
+	fun register_callback_header(delegate: CCurlCallbacks): CURLCode
+	import NativeString.native_callback_header `{
 		CURLcode e;
-		switch(cbtype){
-			case CURLcallbackTypeHeader:
-				e = curl_easy_setopt( self, CURLOPT_HEADERFUNCTION, (curl_write_callback)&nit_curl_callback_func);
-				if(e != CURLE_OK) return e;
-				e = curl_easy_setopt( self, CURLOPT_WRITEHEADER, d);
-			break;
-			case CURLcallbackTypeBody:
-			case CURLcallbackTypeStream:
-				e = curl_easy_setopt( self, CURLOPT_WRITEFUNCTION, (curl_write_callback)&nit_curl_callback_func);
-				if(e != CURLE_OK) return e;
-				e = curl_easy_setopt( self, CURLOPT_WRITEDATA, d);
-			break;
-			case CURLcallbackTypeRead:
-				e = curl_easy_setopt( self, CURLOPT_READFUNCTION, (curl_write_callback)&nit_curl_callback_read_func);
-			default:
-			break;
-		}
+		CCurlCallbacks_incr_ref(delegate); // FIXME deallocated these when download completes?
+
+		e = curl_easy_setopt(self, CURLOPT_HEADERFUNCTION, (curl_write_callback)&NativeString_native_callback_header);
+		if(e != CURLE_OK) return e;
+
+		e = curl_easy_setopt(self, CURLOPT_WRITEHEADER, delegate);
 		return e;
+	`}
+
+	# Register `delegate` to get callbacks about the CURL transfer
+	fun register_callback_body(delegate: CCurlCallbacks): CURLCode
+	import NativeString.native_callback_body `{
+		CURLcode e;
+		CCurlCallbacks_incr_ref(delegate);
+
+		e = curl_easy_setopt(self, CURLOPT_WRITEFUNCTION, (curl_write_callback)&NativeString_native_callback_body);
+		if(e != CURLE_OK) return e;
+
+		e = curl_easy_setopt(self, CURLOPT_WRITEDATA, delegate);
+		return e;
+	`}
+
+	# Register `delegate` to get callbacks about the CURL transfer
+	fun register_callback_stream(delegate: CCurlCallbacks): CURLCode
+	import NativeString.native_callback_stream `{
+		CURLcode e;
+		CCurlCallbacks_incr_ref(delegate);
+
+		e = curl_easy_setopt(self, CURLOPT_WRITEFUNCTION, (curl_write_callback)&NativeString_native_callback_stream);
+		if(e != CURLE_OK) return e;
+
+		e = curl_easy_setopt(self, CURLOPT_WRITEDATA, delegate);
+		return e;
+	`}
+
+	# Register `delegate` to get callbacks about the CURL transfer
+	fun register_callback_read(delegate: CCurlCallbacks): CURLCode
+	import NativeString.native_callback_stream `{
+		CCurlCallbacks_incr_ref(delegate);
+
+		return curl_easy_setopt(self, CURLOPT_READFUNCTION, (curl_write_callback)&nit_curl_callback_read_func);
 	`}
 
 	# Convert given string to URL encoded string
@@ -276,19 +279,9 @@ end
 
 # Interface for internal information callbacks methods
 interface CCurlCallbacks
-	fun header_callback(line: String) is abstract
-	fun body_callback(line: String) is abstract
-	fun stream_callback(buffer: String, size: Int, count: Int) is abstract
-end
-
-# Extern Type to reproduce Enum of available Callback type
-extern class CURLCallbackType `{ CURLcallbackType `}
-	new header `{ return CURLcallbackTypeHeader; `}
-	new body `{ return CURLcallbackTypeBody; `}
-	new stream `{ return CURLcallbackTypeStream; `}
-	new read `{ return CURLcallbackTypeRead; `}
-
-	fun to_i: Int `{ return self; `}
+	fun header_callback(buffer: String) do end
+	fun body_callback(buffer: String) do end
+	fun stream_callback(buffer: String) do end
 end
 
 # CURL Code binding and helpers
