@@ -17,6 +17,9 @@
 # Binding of C libCurl which allow us to interact with network.
 module curl_c is pkgconfig("libcurl")
 
+intrude import standard::file
+import standard
+
 in "C header" `{
 	#include <curl/curl.h>
 
@@ -78,20 +81,24 @@ extern class CCurl `{ CURL * `}
 	fun easy_clean `{ curl_easy_cleanup( self ); `}
 
 	# Perform the transfer described by setted options
-	# Set options to tell CURL how to behave. Obj parameter type can be Int, Bool, String, OFile, CURLSList.
 	fun easy_perform: CURLCode `{ return curl_easy_perform( self ); `}
+
+	# Set options to tell CURL how to behave. Obj parameter type can be Int, Bool, String, FileWriter, CURLSList.
 	fun easy_setopt(opt: CURLOption, obj: Object): CURLCode
 	do
 		if obj isa Int then return i_setopt_int(opt, obj)
 		if obj isa Bool and obj == true then return i_setopt_int(opt, 1)
 		if obj isa Bool and obj == false then return i_setopt_int(opt, 0)
 		if obj isa String then return i_setopt_string(opt, obj)
-		if obj isa OFile then return i_setopt_file(opt, obj)
+		if obj isa FileWriter then return i_setopt_file(opt, obj._file.as(not null))
 		if obj isa CURLSList then return i_setopt_slist(opt, obj)
 		return once new CURLCode.unknown_option
 	end
-	# Internal method to set options to CURL using OFile parameter.
-	private fun i_setopt_file(opt: CURLOption, fl: OFile):CURLCode `{ return curl_easy_setopt( self, opt, fl); `}
+
+	# Internal method to set options to CURL using NativeFile parameter.
+	private fun i_setopt_file(opt: CURLOption, file: NativeFile): CURLCode `{
+		return curl_easy_setopt( self, opt, file);
+	`}
 
 	# Internal method to set options to CURL using Int parameter.
 	private fun i_setopt_int(opt: CURLOption, num: Int): CURLCode `{ return curl_easy_setopt( self, opt, num); `}
@@ -251,30 +258,6 @@ extern class CCurl `{ CURL * `}
 		curl_free(encoded_url);
 		return b_url;
 	`}
-end
-
-# FILE Extern type, reproduce basic FILE I/O
-extern class OFile `{ FILE* `}
-	# Open / Create a file from given name
-	new open(str: NativeString) `{ return fopen(str, "wb"); `}
-	# Check for File validity
-	fun is_valid:Bool `{ return self != NULL; `}
-	# Internal method to write to the current file
-	private fun n_write(buffer: NativeString, size: Int, count: Int):Int `{ return fwrite(buffer, size, count, self); `}
-	# Write datas to the current file
-	fun write(buffer: String, size: Int, count: Int):Int
-	do
-		if is_valid == true then return n_write(buffer.to_cstring, size, count)
-		return 0
-	end
-	# Internal method to close the current file
-	private fun n_close:Int `{ return fclose(self); `}
-	# Close the current file
-	fun close:Bool
-	do
-		if is_valid == true then return n_close == 0
-		return false
-	end
 end
 
 # Interface for internal information callbacks methods

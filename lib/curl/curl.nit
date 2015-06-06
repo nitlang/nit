@@ -168,9 +168,8 @@ class CurlHTTPRequest
 			return answer_failure(0, "Unable to extract file name, please specify one")
 		end
 
-		success_response.i_file = new OFile.open(opt_name.to_cstring)
-		if not success_response.i_file.is_valid then
-			success_response.i_file.close
+		success_response.i_file = new FileWriter.open(opt_name)
+		if not success_response.i_file.is_writable then
 			return answer_failure(0, "Unable to create associated file")
 		end
 
@@ -395,12 +394,12 @@ class CurlFileResponseSuccess
 	var speed_download = 0
 	var size_download = 0
 	var total_time = 0
-	private var i_file: nullable OFile = null
+	private var i_file: nullable FileWriter = null
 
 	# Receive bytes stream from request due to stream callback registering
 	redef fun stream_callback(buffer)
 	do
-		self.i_file.write(buffer, size, count)
+		i_file.write buffer
 	end
 end
 
