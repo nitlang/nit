@@ -293,6 +293,14 @@ redef class WikiArticle
 		if tpl.has_macro("GEN_TIME") then
 			tpl.replace("GEN_TIME", time.to_s)
 		end
+		if tpl.has_macro("LAST_CHANGES") then
+			var url = "{wiki.config.last_changes}{src_path or else ""}"
+			tpl.replace("LAST_CHANGES", url)
+		end
+		if tpl.has_macro("EDIT") then
+			var url = "{wiki.config.edit}{src_path or else ""}"
+			tpl.replace("EDIT", url)
+		end
 		return tpl
 	end
 end

@@ -819,6 +819,18 @@ class WikiConfig
 	# * key: `wiki.git_branch`
 	# * default: `master`
 	var git_branch: String is lazy do return value_or_default("wiki.git_branch", "master")
+
+	# URL to source versionning used to display last changes
+	#
+	# * key: `wiki.last_changes`
+	# * default: ``
+	var last_changes: String is lazy do return value_or_default("wiki.last_changes", "")
+
+	# URL to source edition.
+	#
+	# * key: `wiki.edit`
+	# * default: ``
+	var edit: String is lazy do return value_or_default("wiki.edit", "")
 end
 
 # WikiSection custom configuration.
