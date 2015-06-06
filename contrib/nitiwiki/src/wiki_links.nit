@@ -214,30 +214,32 @@ private class NitiwikiDecorator
 	var context: WikiEntry
 
 	redef fun add_wikilink(v, link, name, comment) do
-		var wiki = v.processor.as(NitiwikiMdProcessor).wiki
-		var target: nullable WikiEntry = null
 		var anchor: nullable String = null
-		if link.has("#") then
-			var parts = link.split_with("#")
-			link = parts.first
-			anchor = parts.subarray(1, parts.length - 1).join("#")
-		end
-		if link.has("/") then
-			target = wiki.lookup_entry_by_path(context, link.to_s)
-		else
-			target = wiki.lookup_entry_by_name(context, link.to_s)
-			if target == null then
-				target = wiki.lookup_entry_by_title(context, link.to_s)
-			end
-		end
 		v.add "<a "
-		if target != null then
-			if name == null then name = target.title
-			link = target.url
-		else
-			var loc = context.src_path or else context.name
-			wiki.message("Warning: unknown wikilink `{link}` (in {loc})", 0)
-			v.add "class=\"broken\" "
+		if not link.has_prefix("http://") and not link.has_prefix("https://") then
+			var wiki = v.processor.as(NitiwikiMdProcessor).wiki
+			var target: nullable WikiEntry = null
+			if link.has("#") then
+				var parts = link.split_with("#")
+				link = parts.first
+				anchor = parts.subarray(1, parts.length - 1).join("#")
+			end
+			if link.has("/") then
+				target = wiki.lookup_entry_by_path(context, link.to_s)
+			else
+				target = wiki.lookup_entry_by_name(context, link.to_s)
+				if target == null then
+					target = wiki.lookup_entry_by_title(context, link.to_s)
+				end
+			end
+			if target != null then
+				if name == null then name = target.title
+				link = target.url
+			else
+				var loc = context.src_path or else context.name
+				wiki.message("Warning: unknown wikilink `{link}` (in {loc})", 0)
+				v.add "class=\"broken\" "
+			end
 		end
 		v.add "href=\""
 		append_value(v, link)
