@@ -747,6 +747,14 @@ class WikiConfig
 		return value_or_default("wiki.footer", "footer.html")
 	end
 
+	# Automatically add a summary.
+	#
+	# * key: `wiki.auto_summary`
+	# * default: `true`
+	var auto_summary: Bool is lazy do
+		return value_or_default("wiki.auto_summary", "true") == "true"
+	end
+
 	# Sidebar position.
 	#
 	# Position of the sidebar between `left`, `right` and `none`. Any other value

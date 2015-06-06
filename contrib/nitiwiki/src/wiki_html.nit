@@ -220,7 +220,9 @@ redef class WikiArticle
 	# Sidebar for this page.
 	var tpl_sidebar: TplSidebar is lazy do
 		var res = new TplSidebar
-		res.blocks.add tpl_summary
+		if wiki.config.auto_summary then
+			res.blocks.add tpl_summary
+		end
 		res.blocks.add_all sidebar.blocks
 		return res
 	end
