@@ -755,6 +755,14 @@ class WikiConfig
 		return value_or_default("wiki.auto_summary", "true") == "true"
 	end
 
+	# Automatically add breadcrumbs.
+	#
+	# * key: `wiki.auto_breadcrumbs`
+	# * default: `true`
+	var auto_breadcrumbs: Bool is lazy do
+		return value_or_default("wiki.auto_breadcrumbs", "true") == "true"
+	end
+
 	# Sidebar position.
 	#
 	# Position of the sidebar between `left`, `right` and `none`. Any other value

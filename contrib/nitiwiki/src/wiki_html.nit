@@ -211,7 +211,9 @@ redef class WikiArticle
 	fun tpl_article: TplArticle do
 		var article = new TplArticle
 		article.body = content
-		article.breadcrumbs = new TplBreadcrumbs(self)
+		if wiki.config.auto_breadcrumbs then
+			article.breadcrumbs = new TplBreadcrumbs(self)
+		end
 		article.sidebar = tpl_sidebar
 		article.sidebar_pos = wiki.config.sidebar
 		return article
