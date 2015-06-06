@@ -28,6 +28,10 @@ fun multiply_by_100(v: Float): Float `{
 	return v * 100;
 `}
 
+fun plus_0x10(v: Byte): Byte `{
+	return v + 0x10;
+`}
+
 fun print_ns(s: NativeString) `{
 	printf("%s\n", s);
 `}
@@ -41,6 +45,6 @@ print plus_1000(1234)
 
 print multiply_by_100(123.45)
 
-print multiply_by_100( 123.45 )
+print plus_0x10(0x2u8)
 
 print_ns("hello world".to_cstring)
