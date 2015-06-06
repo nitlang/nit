@@ -84,6 +84,11 @@ redef class AModule
 		var srcs = [for file in ccu.files do new ExternCFile(file, ""): ExternFile]
 		srcs.add_all mmodule.ffi_files
 
+		if mmodule.pkgconfigs.not_empty then
+			fatal(v, "NOT YET IMPLEMENTED annotation `pkgconfig`")
+			return false
+		end
+
 		var ldflags = mmodule.ldflags[""].join(" ")
 		# TODO pkgconfig
 
