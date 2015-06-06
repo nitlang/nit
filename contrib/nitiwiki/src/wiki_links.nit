@@ -54,9 +54,9 @@ redef class Nitiwiki
 		var res = section.lookup_entry_by_title(title)
 		if res != null then return res
 		while section != null do
-			if section.title == title then return section
+			if section.title.to_lower == title.to_lower then return section
 			for child in section.children.values do
-				if child.title == title then return child
+				if child.title.to_lower == title.to_lower then return child
 			end
 			section = section.parent
 		end
@@ -111,7 +111,7 @@ redef class WikiEntry
 	# Search in `self` then `self.children` if an entry has the title `title`.
 	fun lookup_entry_by_title(title: String): nullable WikiEntry do
 		for child in children.values do
-			if child.title == title then return child
+			if child.title.to_lower == title.to_lower then return child
 		end
 		for child in children.values do
 			var res = child.lookup_entry_by_title(title)
