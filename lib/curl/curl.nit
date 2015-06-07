@@ -368,6 +368,8 @@ class CurlResponseFailed
 
 	var error_code: Int
 	var error_msg: String
+
+	redef fun to_s do return "{error_msg} ({error_code})"
 end
 
 # Success Abstract Response Success Class
