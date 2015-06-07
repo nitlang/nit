@@ -21,14 +21,14 @@ import native_curl
 
 # Top level of Curl
 class Curl
+	super FinalizableOnce
 
 	protected var native = new NativeCurl.easy_init
 
 	# Check for correct initialization
 	fun is_ok: Bool do return self.native.is_init
 
-	# Release Curl instance
-	fun destroy do self.native.easy_clean
+	redef fun finalize_once do if is_ok then native.easy_clean
 end
 
 # CURL Request
