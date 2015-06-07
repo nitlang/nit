@@ -188,36 +188,52 @@ class CurlHTTPRequest
 end
 
 # CURL Mail Request
-class CurlMailRequest
+class CurlMail
 	super CurlRequest
 	super NativeCurlCallbacks
 
-	var headers: nullable HeaderMap = null is writable
-	var headers_body: nullable HeaderMap = null is writable
-	var from: nullable String = null is writable
-	var to: nullable Array[String] = null is writable
-	var cc: nullable Array[String] = null is writable
-	var bcc: nullable Array[String] = null is writable
-	var subject: nullable String = "" is writable
-	var body: nullable String = "" is writable
+	# Address of the sender
+	var from: nullable String is writable
+
+	# Main recipients
+	var to: nullable Array[String] is writable
+
+	# Subject line
+	var subject: nullable String is writable
+
+	# Text content
+	var body: nullable String is writable
+
+	# CC recipients
+	var cc: nullable Array[String] is writable
+
+	# BCC recipients (hidden from other recipients)
+	var bcc: nullable Array[String] is writable
+
+	# HTTP header
+	var headers = new HeaderMap is lazy, writable
+
+	# Content header
+	var headers_body = new HeaderMap is lazy, writable
+
 	private var supported_outgoing_protocol: Array[String] = ["smtp", "smtps"]
 
 	# Helper method to add pair values to mail content while building it (ex: "To:", "address@mail.com")
-	private fun add_pair_to_content(str: String, att: String, val: nullable String):String
+	private fun add_pair_to_content(str: String, att: String, val: nullable String): String
 	do
 		if val != null then return "{str}{att}{val}\n"
 		return "{str}{att}\n"
 	end
 
 	# Helper method to add entire list of pairs to mail content
-	private fun add_pairs_to_content(content: String, pairs: HeaderMap):String
+	private fun add_pairs_to_content(content: String, pairs: HeaderMap): String
 	do
 		for h_key, h_val in pairs do content = add_pair_to_content(content, h_key, h_val)
 		return content
 	end
 
 	# Check for host and protocol availability
-	private fun is_supported_outgoing_protocol(host: String):CURLCode
+	private fun is_supported_outgoing_protocol(host: String): CURLCode
 	do
 		var host_reach = host.split_with("://")
 		if host_reach.length > 1 and supported_outgoing_protocol.has(host_reach[0]) then return once new CURLCode.ok
@@ -235,6 +251,7 @@ class CurlMailRequest
 		# Host & Protocol
 		err = is_supported_outgoing_protocol(host)
 		if not err.is_ok then return answer_failure(err.to_i, err.to_s)
+
 		err = self.curl.native.easy_setopt(new CURLOption.url, host)
 		if not err.is_ok then return answer_failure(err.to_i, err.to_s)
 
@@ -242,6 +259,7 @@ class CurlMailRequest
 		if not user == null and not pwd == null then
 			err = self.curl.native.easy_setopt(new CURLOption.username, user)
 			if not err.is_ok then return answer_failure(err.to_i, err.to_s)
+
 			err = self.curl.native.easy_setopt(new CURLOption.password, pwd)
 			if not err.is_ok then return answer_failure(err.to_i, err.to_s)
 		end
@@ -254,70 +272,78 @@ class CurlMailRequest
 	do
 		if not self.curl.is_ok then return answer_failure(0, "Curl instance is not correctly initialized")
 
-		var success_response = new CurlMailResponseSuccess
-		var content = ""
+		var lines = new Array[String]
+
 		# Headers
-		if self.headers != null then
-			content = add_pairs_to_content(content, self.headers.as(not null))
+		var headers = self.headers
+		if not headers.is_empty then
+			for k, v in headers do lines.add "{k}{v}"
 		end
 
 		# Recipients
-		var g_rec = new Array[String]
-		if self.to != null and self.to.length > 0 then
-			content = add_pair_to_content(content, "To:", self.to.join(","))
-			g_rec.append(self.to.as(not null))
+		var all_recipients = new Array[String]
+		var to = self.to
+		if to != null and to.length > 0 then
+			lines.add "To:{to.join(",")}"
+			all_recipients.append to
 		end
-		if self.cc != null and self.cc.length > 0 then
-			content = add_pair_to_content(content, "Cc:", self.cc.join(","))
-			g_rec.append(self.cc.as(not null))
+
+		var cc = self.cc
+		if cc != null and cc.length > 0 then
+			lines.add "Cc:{cc.join(",")}"
+			all_recipients.append cc
 		end
-		if self.bcc != null and self.bcc.length > 0 then g_rec.append(self.bcc.as(not null))
 
-		if g_rec.length < 1 then return answer_failure(0, "The mail recipients can not be empty")
+		var bcc = self.bcc
+		if bcc != null and bcc.length > 0 then all_recipients.append bcc
 
-		var err
+		if all_recipients.is_empty then return answer_failure(0, "There must be at lease one recipient")
 
-		err = self.curl.native.easy_setopt(new CURLOption.follow_location, 1)
+		var err = self.curl.native.easy_setopt(new CURLOption.follow_location, 1)
 		if not err.is_ok then return answer_failure(err.to_i, err.to_s)
 
-		err = self.curl.native.easy_setopt(new CURLOption.mail_rcpt, g_rec.to_curlslist)
+		err = self.curl.native.easy_setopt(new CURLOption.mail_rcpt, all_recipients.to_curlslist)
 		if not err.is_ok then return answer_failure(err.to_i, err.to_s)
 
 		# From
-		if not self.from == null then
-			content = add_pair_to_content(content, "From:", self.from)
-			err = self.curl.native.easy_setopt(new CURLOption.mail_from, self.from.as(not null))
+		var from = self.from
+		if not from == null then
+			lines.add "From:{from}"
+
+			err = self.curl.native.easy_setopt(new CURLOption.mail_from, from)
 			if not err.is_ok then return answer_failure(err.to_i, err.to_s)
 		end
 
 		# Subject
 		var subject = self.subject
-		if subject == null then subject = ""
-		content = add_pair_to_content(content, "Subject:", subject)
+		if subject == null then subject = "" # Default
+		lines.add "Subject: {subject}"
 
 		# Headers body
-		if self.headers_body != null then
-			content = add_pairs_to_content(content, self.headers_body.as(not null))
+		var headers_body = self.headers_body
+		if not headers_body.is_empty then
+			for k, v in headers_body do lines.add "{k}{v}"
 		end
 
 		# Body
 		var body = self.body
-		if body == null then body = ""
+		if body == null then body = "" # Default
 
-		content += "\n"
-		content = add_pair_to_content(content, "", body)
-		content += "\n"
+		lines.add ""
+		lines.add body
+		lines.add ""
 
 		err = self.curl.native.register_callback_read(self)
 		if not err.is_ok then return answer_failure(err.to_i, err.to_s)
 
+		var content = lines.join("\n")
 		err = self.curl.native.register_read_datas_callback(self, content)
 		if not err.is_ok then return answer_failure(err.to_i, err.to_s)
 
 		var err_resp = perform
 		if err_resp != null then return err_resp
 
-		return success_response
+		return new CurlMailResponseSuccess
 	end
 end
 
