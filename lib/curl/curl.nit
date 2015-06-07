@@ -134,7 +134,7 @@ class CurlHTTPRequest
 		if err_resp != null then return err_resp
 
 		var st_code = self.curl.native.easy_getinfo_long(new CURLInfoLong.response_code)
-		if not st_code == null then success_response.status_code = st_code.response
+		if not st_code == null then success_response.status_code = st_code
 
 		return success_response
 	end
@@ -179,16 +179,16 @@ class CurlHTTPRequest
 		if err_resp != null then return err_resp
 
 		var st_code = self.curl.native.easy_getinfo_long(new CURLInfoLong.response_code)
-		if not st_code == null then success_response.status_code = st_code.response
+		if not st_code == null then success_response.status_code = st_code
 
 		var speed = self.curl.native.easy_getinfo_double(new CURLInfoDouble.speed_download)
-		if not speed == null then success_response.speed_download = speed.response
+		if not speed == null then success_response.speed_download = speed
 
 		var size = self.curl.native.easy_getinfo_double(new CURLInfoDouble.size_download)
-		if not size == null then success_response.size_download = size.response
+		if not size == null then success_response.size_download = size
 
 		var time = self.curl.native.easy_getinfo_double(new CURLInfoDouble.total_time)
-		if not time == null then success_response.total_time = time.response
+		if not time == null then success_response.total_time = time
 
 		success_response.file.close
 
@@ -438,9 +438,9 @@ class CurlFileResponseSuccess
 	super CurlResponseSuccessIntern
 
 	var status_code = 0
-	var speed_download = 0
-	var size_download = 0
-	var total_time = 0
+	var speed_download = 0.0
+	var size_download = 0.0
+	var total_time = 0.0
 	private var file: nullable FileWriter = null
 
 	# Receive bytes stream from request due to stream callback registering
