@@ -415,6 +415,7 @@ class HeaderMap
 		return res
 	end
 
+	# Iterate over all the associations in `self`
 	fun iterator: MapIterator[String, String] do return new HeaderMapIterator(self)
 
 	# Convert Self to a single string used to post http fields
@@ -450,11 +451,11 @@ class HeaderMap
 	fun is_empty: Bool do return arr.is_empty
 end
 
-class HeaderMapIterator
+private class HeaderMapIterator
 	super MapIterator[String, String]
 
-	private var iterator: Iterator[Couple[String, String]]
-	init(map: HeaderMap) is old_style_init do self.iterator = map.arr.iterator
+	var map: HeaderMap
+	var iterator: Iterator[Couple[String, String]] = map.array.iterator is lazy
 
 	redef fun is_ok do return self.iterator.is_ok
 	redef fun next do self.iterator.next
