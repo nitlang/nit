@@ -14,12 +14,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Network functionnalities based on Curl_c module.
+# Curl services: `CurlHTTPRequest` and `CurlMail`
 module curl
 
 import native_curl
 
-# Top level of Curl
+# Curl library handle, it is initialized and released with this class
 class Curl
 	super FinalizableOnce
 
