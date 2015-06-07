@@ -202,10 +202,6 @@ class CurlMailRequest
 	var body: nullable String = "" is writable
 	private var supported_outgoing_protocol: Array[String] = ["smtp", "smtps"]
 
-
-	# Helper method to add conventional space while building entire mail
-	private fun add_conventional_space(str: String):String do return "{str}\n" end
-
 	# Helper method to add pair values to mail content while building it (ex: "To:", "address@mail.com")
 	private fun add_pair_to_content(str: String, att: String, val: nullable String):String
 	do
@@ -305,12 +301,12 @@ class CurlMailRequest
 		end
 
 		# Body
-		content = add_conventional_space(content)
-		content = add_conventional_space(content)
 		var body = self.body
 		if body == null then body = ""
 
+		content += "\n"
 		content = add_pair_to_content(content, "", body)
+		content += "\n"
 
 		err = self.curl.native.register_callback_read(self)
 		if not err.is_ok then return answer_failure(err.to_i, err.to_s)
