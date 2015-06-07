@@ -82,10 +82,7 @@ class CurlHTTPRequest
 	var delegate: nullable CurlCallbacks = null is writable
 
 	# Set the user agent for all following HTTP requests
-	fun user_agent=(name: String)
-	do
-		curl.native.easy_setopt(new CURLOption.user_agent, name)
-	end
+	var user_agent: nullable String = null is writable
 
 	# Execute HTTP request with settings configured through attribute
 	fun execute: CurlResponse
@@ -103,6 +100,12 @@ class CurlHTTPRequest
 
 		err = self.curl.native.easy_setopt(new CURLOption.url, url)
 		if not err.is_ok then return answer_failure(err.to_i, err.to_s)
+
+		var user_agent = user_agent
+		if user_agent != null then
+			err = curl.native.easy_setopt(new CURLOption.user_agent, user_agent)
+			if not err.is_ok then return answer_failure(err.to_i, err.to_s)
+		end
 
 		# Callbacks
 		err = self.curl.native.register_callback_header(callback_receiver)
