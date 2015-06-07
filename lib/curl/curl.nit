@@ -106,15 +106,17 @@ class CurlHTTPRequest
 		if not err.is_ok then return answer_failure(err.to_i, err.to_s)
 
 		# HTTP Header
-		if self.headers != null then
-			var headers_joined = self.headers.join_pairs(": ")
+		var headers = self.headers
+		if headers != null then
+			var headers_joined = headers.join_pairs(": ")
 			err = self.curl.native.easy_setopt(new CURLOption.httpheader, headers_joined.to_curlslist)
 			if not err.is_ok then return answer_failure(err.to_i, err.to_s)
 		end
 
 		# Datas
-		if self.datas != null then
-			var postdatas = self.datas.to_url_encoded(self.curl.native)
+		var datas = self.datas
+		if datas != null then
+			var postdatas = datas.to_url_encoded(self.curl)
 			err = self.curl.native.easy_setopt(new CURLOption.postfields, postdatas)
 			if not err.is_ok then return answer_failure(err.to_i, err.to_s)
 		end
@@ -293,7 +295,9 @@ class CurlMailRequest
 		end
 
 		# Subject
-		content = add_pair_to_content(content, "Subject:", self.subject)
+		var subject = self.subject
+		if subject == null then subject = ""
+		content = add_pair_to_content(content, "Subject:", subject)
 
 		# Headers body
 		if self.headers_body != null then
@@ -302,8 +306,11 @@ class CurlMailRequest
 
 		# Body
 		content = add_conventional_space(content)
-		content = add_pair_to_content(content, "", self.body)
 		content = add_conventional_space(content)
+		var body = self.body
+		if body == null then body = ""
+
+		content = add_pair_to_content(content, "", body)
 
 		err = self.curl.native.register_callback_read(self)
 		if not err.is_ok then return answer_failure(err.to_i, err.to_s)
