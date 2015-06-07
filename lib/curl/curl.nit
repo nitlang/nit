@@ -22,12 +22,6 @@ import native_curl
 # Top level of Curl
 class Curl
 
-	init
-	do
-		assert curlInstance:self.prim_curl.is_init else
-			print "Curl must be instancied to be used"
-		end
-	end
 	protected var native = new NativeCurl.easy_init
 
 	# Check for correct initialization
@@ -40,8 +34,10 @@ end
 # CURL Request
 class CurlRequest
 
+	private var curl: Curl
+
+	# Shall this request be verbose?
 	var verbose: Bool = false is writable
-	private var curl: nullable Curl = null
 
 	# Launch request method
 	fun execute: CurlResponse is abstract
@@ -83,11 +79,6 @@ class CurlHTTPRequest
 	fun user_agent=(name: String)
 	do
 		curl.native.easy_setopt(new CURLOption.user_agent, name)
-	end
-
-	init (url: String, curl: nullable Curl) is old_style_init do
-		self.url = url
-		self.curl = curl
 	end
 
 	# Execute HTTP request with settings configured through attribute
@@ -209,9 +200,6 @@ class CurlMailRequest
 	var body: nullable String = "" is writable
 	private var supported_outgoing_protocol: Array[String] = ["smtp", "smtps"]
 
-	init (curl: nullable Curl) is old_style_init do
-		self.curl = curl
-	end
 
 	# Helper method to add conventional space while building entire mail
 	private fun add_conventional_space(str: String):String do return "{str}\n" end
