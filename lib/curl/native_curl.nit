@@ -113,76 +113,76 @@ extern class NativeCurl `{ CURL * `}
 	`}
 
 	# Request Chars internal information from the CURL session
-	fun easy_getinfo_chars(opt: CURLInfoChars): nullable CURLInfoResponseString
+	fun easy_getinfo_chars(opt: CURLInfoChars): nullable String
 	do
-		 var answ = new CURLInfoResponseString
+		 var answ = new Container[NativeString]("".to_cstring)
 		 if not native_getinfo_chars(opt, answ).is_ok then return null
-		 return answ
+		 if answ.item.address_is_null then return null
+		 return answ.item.to_s
 	end
 
 	# Internal method used to get String object information initially knowns as C Chars type
-	private fun native_getinfo_chars(opt: CURLInfoChars, res: CURLInfoResponseString): CURLCode import CURLInfoResponseString.response=, NativeString.to_s_with_copy `{
-		char *r = NULL;
+	private fun native_getinfo_chars(opt: CURLInfoChars, res: Container[NativeString]): CURLCode
+	import Container[NativeString].item= `{
+		char *r;
 		CURLcode c = curl_easy_getinfo( self, opt, &r);
-		if((c == CURLE_OK) && r != NULL){
-			String ro = NativeString_to_s_with_copy(r);
-			CURLInfoResponseString_response__assign( res, ro);
-		}
+		if (c == CURLE_OK) Container_of_NativeString_item__assign(res, r);
 		return c;
 	`}
 
 	# Request Long internal information from the CURL session
-	fun easy_getinfo_long(opt: CURLInfoLong): nullable CURLInfoResponseLong
+	fun easy_getinfo_long(opt: CURLInfoLong): nullable Int
 	do
-		 var answ = new CURLInfoResponseLong
+		 var answ = new Container[Int](0)
 		 if not native_getinfo_long(opt, answ).is_ok then return null
-		 return answ
+		 return answ.item
 	end
 
 	# Internal method used to get Int object information initially knowns as C Long type
-	private fun native_getinfo_long(opt: CURLInfoLong, res: CURLInfoResponseLong): CURLCode import CURLInfoResponseLong.response= `{
-		long *r = NULL;
-		r = malloc(sizeof(long));
-		CURLcode c = curl_easy_getinfo( self, opt, r);
-		if((c == CURLE_OK) && r != NULL) CURLInfoResponseLong_response__assign( res, *r);
-		free(r);
+	private fun native_getinfo_long(opt: CURLInfoLong, res: Container[Int]): CURLCode
+	import Container[Int].item= `{
+		long r;
+		CURLcode c = curl_easy_getinfo( self, opt, &r);
+		if (c == CURLE_OK) Container_of_Int_item__assign(res, r);
 		return c;
 	`}
 
 	# Request Double internal information from the CURL session
-	fun easy_getinfo_double(opt: CURLInfoDouble): nullable CURLInfoResponseDouble
+	fun easy_getinfo_double(opt: CURLInfoDouble): nullable Float
 	do
-		 var answ = new CURLInfoResponseDouble
+		 var answ = new Container[Float](0.0)
 		 if not native_getinfo_double(opt, answ).is_ok then return null
-		 return answ
+		 return answ.item
 	end
 
 	# Internal method used to get Int object information initially knowns as C Double type
-	private fun native_getinfo_double(opt: CURLInfoDouble, res: CURLInfoResponseDouble): CURLCode import CURLInfoResponseDouble.response= `{
-		double *r = NULL;
-		r = malloc(sizeof(double));
-		CURLcode c = curl_easy_getinfo( self, opt, r);
-		if((c == CURLE_OK) && r != NULL) CURLInfoResponseDouble_response__assign( res, *r);
-		free(r);
+	private fun native_getinfo_double(opt: CURLInfoDouble, res: Container[Float]): CURLCode
+	import Container[Float].item= `{
+		double r;
+		CURLcode c = curl_easy_getinfo(self, opt, &r);
+		if (c == CURLE_OK) Container_of_Float_item__assign(res, r);
 		return c;
 	`}
 
 	# Request SList internal information from the CURL session
-	fun easy_getinfo_slist(opt: CURLInfoSList): nullable CURLInfoResponseArray
+	fun easy_getinfo_slist(opt: CURLInfoSList): nullable Array[String]
 	do
-		var answ = new CURLInfoResponseArray
+		var answ = new Container[CURLSList](new CURLSList)
 		if not native_getinfo_slist(opt, answ).is_ok then return null
-		answ.response = answ.prim_response.to_a
-		answ.prim_response.destroy
-		return answ
+
+		var native = answ.item
+		var nity = native.to_a
+		native.destroy
+		return nity
 	end
 
 	# Internal method used to get Array[String] object information initially knowns as C SList type
-	private fun native_getinfo_slist(opt: CURLInfoSList, res: CURLInfoResponseArray): CURLCode import CURLInfoResponseArray.prim_response= `{
-		struct curl_slist* csl = NULL;
-		CURLcode ce = curl_easy_getinfo( self, opt, &csl);
-		CURLInfoResponseArray_prim_response__assign(res, csl);
-		return ce;
+	private fun native_getinfo_slist(opt: CURLInfoSList, res: Container[CURLSList]): CURLCode
+	import Container[CURLSList].item= `{
+		struct curl_slist* csl;
+		CURLcode c = curl_easy_getinfo(self, opt, &csl);
+		if (c == CURLE_OK) Container_of_CURLSList_item__assign(res, csl);
+		return c;
 	`}
 
 	# Register delegate to read datas from given buffer
@@ -350,27 +350,6 @@ redef class Collection[E]
 		end
 		return primList
 	end
-end
-
-# Array Response type of NativeCurl.easy_getinfo method
-class CURLInfoResponseArray
-	var response: Array[String] = new Array[String]
-	private var prim_response: CURLSList = new CURLSList
-end
-
-# Long Response type of NativeCurl.easy_getinfo method
-class CURLInfoResponseLong
-	var response = 0
-end
-
-# Double Response type of NativeCurl.easy_getinfo method
-class CURLInfoResponseDouble
-	var response = 0
-end
-
-# String Response type of NativeCurl::easy_getinfo method
-class CURLInfoResponseString
-	var response = ""
 end
 
 # Reproduce Enum of available CURL SList information, used for NativeCurl.easy_getinfo
