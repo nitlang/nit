@@ -19,11 +19,20 @@ module curl
 
 import native_curl
 
+redef class Sys
+	# Shared Curl library handle
+	#
+	# Usually, you do not have to use this attribute, it instancied by `CurlHTTPRequest` and `CurlMail`.
+	# But in some cases you may want to finalize it to free some small resources.
+	# However, if Curl services are needed once again, this attribute must be manually set.
+	var curl: Curl = new Curl is lazy, writable
+end
+
 # Curl library handle, it is initialized and released with this class
 class Curl
 	super FinalizableOnce
 
-	protected var native = new NativeCurl.easy_init
+	private var native = new NativeCurl.easy_init
 
 	# Check for correct initialization
 	fun is_ok: Bool do return self.native.is_init
@@ -34,7 +43,7 @@ end
 # CURL Request
 class CurlRequest
 
-	private var curl: Curl
+	private var curl: Curl = sys.curl
 
 	# Shall this request be verbose?
 	var verbose: Bool = false is writable
