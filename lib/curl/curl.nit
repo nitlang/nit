@@ -72,12 +72,12 @@ end
 # CURL HTTP Request
 class CurlHTTPRequest
 	super CurlRequest
-	super CurlCallbacksRegisterIntern
 	super NativeCurlCallbacks
 
 	var url: String
 	var datas: nullable HeaderMap = null is writable
 	var headers: nullable HeaderMap = null is writable
+	var delegate: nullable CurlCallbacks = null is writable
 
 	# Set the user agent for all following HTTP requests
 	fun user_agent=(name: String)
@@ -332,11 +332,6 @@ end
 
 # Callbacks Interface, allow you to manage in your way the different streams
 interface CurlCallbacks
-end
-
-# Callbacks attributes
-abstract class CurlCallbacksRegisterIntern
-	var delegate: nullable CurlCallbacks = null is writable
 	super NativeCurlCallbacks
 end
 
