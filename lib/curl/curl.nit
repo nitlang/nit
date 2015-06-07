@@ -400,43 +400,46 @@ class CurlFileResponseSuccess
 	end
 end
 
-# Pseudo map associating Strings to Strings,
-# each key can have multiple associations
-# and the order of insertion is important.
+# Pseudo map associating `String` to `String` for HTTP exchanges
+#
+# This structure differs from `Map` as each key can have multiple associations
+# and the order of insertion is important to some services.
 class HeaderMap
-	private var arr = new Array[Couple[String, String]]
+	private var array = new Array[Couple[String, String]]
 
-	fun []=(k, v: String) do arr.add(new Couple[String, String](k, v))
+	# Add a `value` associated to `key`
+	fun []=(key, value: String)
+	do
+		array.add new Couple[String, String](key, value)
+	end
 
+	# Get a list of the keys associated to `key`
 	fun [](k: String): Array[String]
 	do
 		var res = new Array[String]
-		for c in arr do if c.first == k then res.add(c.second)
+		for c in array do if c.first == k then res.add c.second
 		return res
 	end
 
 	# Iterate over all the associations in `self`
 	fun iterator: MapIterator[String, String] do return new HeaderMapIterator(self)
 
-	# Convert Self to a single string used to post http fields
-	fun to_url_encoded(curl: NativeCurl): String
+	# Get `self` as a single string for HTTP POST
+	#
+	# Require: `curl.is_ok`
+	fun to_url_encoded(curl: Curl): String
 	do
-		assert curlNotInitialized: curl.is_init else
-			print "to_url_encoded required a valid instance of NativeCurl Object."
-		end
-		var str = ""
-		var length = self.length
-		var i = 0
+		assert curl.is_ok
+
+		var lines = new Array[String]
 		for k, v in self do
-			if k.length > 0 then
-				k = curl.escape(k)
-				v = curl.escape(v)
-				str = "{str}{k}={v}"
-				if i < length-1 then str = "{str}&"
-			end
-			i += 1
+			if k.length == 0 then continue
+
+			k = curl.native.escape(k)
+			v = curl.native.escape(v)
+			lines.add "{k}={v}"
 		end
-		return str
+		return lines.join("&")
 	end
 
 	# Concatenate couple of 'key value' separated by 'sep' in Array
@@ -447,8 +450,11 @@ class HeaderMap
 		return col
 	end
 
-	fun length: Int do return arr.length
-	fun is_empty: Bool do return arr.is_empty
+	# Number of values in `self`
+	fun length: Int do return array.length
+
+	# Is this map empty?
+	fun is_empty: Bool do return array.is_empty
 end
 
 private class HeaderMapIterator
