@@ -48,9 +48,6 @@ class CurlRequest
 	# Shall this request be verbose?
 	var verbose: Bool = false is writable
 
-	# Launch request method
-	fun execute: CurlResponse is abstract
-
 	# Intern perform method, lowest level of request launching
 	private fun perform: nullable CurlResponseFailed
 	do
@@ -91,7 +88,7 @@ class CurlHTTPRequest
 	end
 
 	# Execute HTTP request with settings configured through attribute
-	redef fun execute
+	fun execute: CurlResponse
 	do
 		if not self.curl.is_ok then return answer_failure(0, "Curl instance is not correctly initialized")
 
@@ -277,7 +274,7 @@ class CurlMail
 	end
 
 	# Execute Mail request with settings configured through attribute
-	redef fun execute
+	fun execute: nullable CurlResponseFailed
 	do
 		if not self.curl.is_ok then return answer_failure(0, "Curl instance is not correctly initialized")
 
@@ -352,7 +349,7 @@ class CurlMail
 		var err_resp = perform
 		if err_resp != null then return err_resp
 
-		return new CurlMailResponseSuccess
+		return null
 	end
 end
 
@@ -402,11 +399,6 @@ class CurlResponseSuccess
 	redef fun body_callback(line) do
 		self.body_str = "{self.body_str}{line}"
 	end
-end
-
-# Success Response Class of mail request
-class CurlMailResponseSuccess
-	super CurlResponseSuccessIntern
 end
 
 # Success Response Class of a downloaded File
