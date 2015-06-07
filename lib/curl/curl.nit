@@ -194,6 +194,33 @@ class CurlHTTPRequest
 end
 
 # CURL Mail Request
+#
+# ~~~
+# # Craft mail
+# var mail = new CurlMail("sender@example.org",
+#                            to=["to@example.org"], cc=["bob@example.org"])
+#
+# mail.headers_body["Content-Type:"] = """text/html; charset="UTF-8""""
+# mail.headers_body["Content-Transfer-Encoding:"] = "quoted-printable"
+#
+# mail.body = "<h1>Here you can write HTML stuff.</h1>"
+# mail.subject = "Hello From My Nit Program"
+#
+# # Set mail server
+# var error = mail.set_outgoing_server("smtps://smtp.example.org:465",
+#                                      "user@example.org", "mypassword")
+# if error != null then
+#     print "Mail Server Error: {error}"
+#     exit 0
+# end
+#
+# # Send
+# error = mail.execute
+# if error != null then
+#     print "Transfer Error: {error}"
+#     exit 0
+# end
+# ~~~
 class CurlMail
 	super CurlRequest
 	super NativeCurlCallbacks
