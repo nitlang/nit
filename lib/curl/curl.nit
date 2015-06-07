@@ -28,7 +28,7 @@ class Curl
 			print "Curl must be instancied to be used"
 		end
 	end
-	protected var native = new CCurl.easy_init
+	protected var native = new NativeCurl.easy_init
 
 	# Check for correct initialization
 	fun is_ok: Bool do return self.native.is_init
@@ -72,8 +72,8 @@ end
 # CURL HTTP Request
 class CurlHTTPRequest
 	super CurlRequest
-	super CCurlCallbacks
 	super CurlCallbacksRegisterIntern
+	super NativeCurlCallbacks
 
 	var url: String
 	var datas: nullable HeaderMap = null is writable
@@ -197,7 +197,7 @@ end
 # CURL Mail Request
 class CurlMailRequest
 	super CurlRequest
-	super CCurlCallbacks
+	super NativeCurlCallbacks
 
 	var headers: nullable HeaderMap = null is writable
 	var headers_body: nullable HeaderMap = null is writable
@@ -332,12 +332,12 @@ end
 
 # Callbacks Interface, allow you to manage in your way the different streams
 interface CurlCallbacks
-	super CCurlCallbacks
 end
 
 # Callbacks attributes
 abstract class CurlCallbacksRegisterIntern
 	var delegate: nullable CurlCallbacks = null is writable
+	super NativeCurlCallbacks
 end
 
 # Abstract Curl request response
@@ -423,10 +423,10 @@ class HeaderMap
 	fun iterator: MapIterator[String, String] do return new HeaderMapIterator(self)
 
 	# Convert Self to a single string used to post http fields
-	fun to_url_encoded(curl: CCurl): String
+	fun to_url_encoded(curl: NativeCurl): String
 	do
 		assert curlNotInitialized: curl.is_init else
-			print "to_url_encoded required a valid instance of CCurl Object."
+			print "to_url_encoded required a valid instance of NativeCurl Object."
 		end
 		var str = ""
 		var length = self.length

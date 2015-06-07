@@ -46,7 +46,7 @@ in "C body" `{
 `}
 
 redef extern class NativeString
-	private fun native_callback_header(size, count: Int, target: CCurlCallbacks): Int
+	private fun native_callback_header(size, count: Int, target: NativeCurlCallbacks): Int
 	do
 		target.header_callback to_s_with_length(size*count)
 
@@ -54,14 +54,14 @@ redef extern class NativeString
 		return count
 	end
 
-	private fun native_callback_body(size, count: Int, target: CCurlCallbacks): Int
+	private fun native_callback_body(size, count: Int, target: NativeCurlCallbacks): Int
 	do
 		target.body_callback to_s_with_length(size*count)
 
 		return count
 	end
 
-	private fun native_callback_stream(size, count: Int, target: CCurlCallbacks): Int
+	private fun native_callback_stream(size, count: Int, target: NativeCurlCallbacks): Int
 	do
 		target.stream_callback to_s_with_length(size*count)
 
@@ -70,7 +70,7 @@ redef extern class NativeString
 end
 
 # CURL Extern Type, reproduce CURL low level behaviors
-extern class CCurl `{ CURL * `}
+extern class NativeCurl `{ CURL * `}
 	# Constructor, CURL low level initializer
 	new easy_init `{ return curl_easy_init(); `}
 
@@ -186,14 +186,14 @@ extern class CCurl `{ CURL * `}
 	`}
 
 	# Register delegate to read datas from given buffer
-	fun register_read_datas_callback(delegate: CCurlCallbacks, datas: String): CURLCode
+	fun register_read_datas_callback(delegate: NativeCurlCallbacks, datas: String): CURLCode
 	do
 		if datas.length > 0 then return native_register_read_datas_callback(delegate, datas, datas.length)
 		return once new CURLCode.unknown_option
 	end
 
 	# Internal method used to configure read callback
-	private fun native_register_read_datas_callback(delegate: CCurlCallbacks, datas: String, size: Int): CURLCode import String.to_cstring `{
+	private fun native_register_read_datas_callback(delegate: NativeCurlCallbacks, datas: String, size: Int): CURLCode import String.to_cstring `{
 		CURLCallbackReadDatas *d = NULL;
 		d = malloc(sizeof(CURLCallbackReadDatas));
 		d->data = (char*)String_to_cstring(datas);
@@ -203,10 +203,10 @@ extern class CCurl `{ CURL * `}
 	`}
 
 	# Register `delegate` to get callbacks about the CURL transfer
-	fun register_callback_header(delegate: CCurlCallbacks): CURLCode
+	fun register_callback_header(delegate: NativeCurlCallbacks): CURLCode
 	import NativeString.native_callback_header `{
 		CURLcode e;
-		CCurlCallbacks_incr_ref(delegate); // FIXME deallocated these when download completes?
+		NativeCurlCallbacks_incr_ref(delegate); // FIXME deallocated these when download completes?
 
 		e = curl_easy_setopt(self, CURLOPT_HEADERFUNCTION, (curl_write_callback)&NativeString_native_callback_header);
 		if(e != CURLE_OK) return e;
@@ -216,10 +216,10 @@ extern class CCurl `{ CURL * `}
 	`}
 
 	# Register `delegate` to get callbacks about the CURL transfer
-	fun register_callback_body(delegate: CCurlCallbacks): CURLCode
+	fun register_callback_body(delegate: NativeCurlCallbacks): CURLCode
 	import NativeString.native_callback_body `{
 		CURLcode e;
-		CCurlCallbacks_incr_ref(delegate);
+		NativeCurlCallbacks_incr_ref(delegate);
 
 		e = curl_easy_setopt(self, CURLOPT_WRITEFUNCTION, (curl_write_callback)&NativeString_native_callback_body);
 		if(e != CURLE_OK) return e;
@@ -229,10 +229,10 @@ extern class CCurl `{ CURL * `}
 	`}
 
 	# Register `delegate` to get callbacks about the CURL transfer
-	fun register_callback_stream(delegate: CCurlCallbacks): CURLCode
+	fun register_callback_stream(delegate: NativeCurlCallbacks): CURLCode
 	import NativeString.native_callback_stream `{
 		CURLcode e;
-		CCurlCallbacks_incr_ref(delegate);
+		NativeCurlCallbacks_incr_ref(delegate);
 
 		e = curl_easy_setopt(self, CURLOPT_WRITEFUNCTION, (curl_write_callback)&NativeString_native_callback_stream);
 		if(e != CURLE_OK) return e;
@@ -242,9 +242,9 @@ extern class CCurl `{ CURL * `}
 	`}
 
 	# Register `delegate` to get callbacks about the CURL transfer
-	fun register_callback_read(delegate: CCurlCallbacks): CURLCode
+	fun register_callback_read(delegate: NativeCurlCallbacks): CURLCode
 	import NativeString.native_callback_stream `{
-		CCurlCallbacks_incr_ref(delegate);
+		NativeCurlCallbacks_incr_ref(delegate);
 
 		return curl_easy_setopt(self, CURLOPT_READFUNCTION, (curl_write_callback)&nit_curl_callback_read_func);
 	`}
@@ -261,7 +261,7 @@ extern class CCurl `{ CURL * `}
 end
 
 # Interface for internal information callbacks methods
-interface CCurlCallbacks
+interface NativeCurlCallbacks
 	fun header_callback(buffer: String) do end
 	fun body_callback(buffer: String) do end
 	fun stream_callback(buffer: String) do end
@@ -352,34 +352,34 @@ redef class Collection[E]
 	end
 end
 
-# Array Response type of CCurl.easy_getinfo method
+# Array Response type of NativeCurl.easy_getinfo method
 class CURLInfoResponseArray
 	var response: Array[String] = new Array[String]
 	private var prim_response: CURLSList = new CURLSList
 end
 
-# Long Response type of CCurl.easy_getinfo method
+# Long Response type of NativeCurl.easy_getinfo method
 class CURLInfoResponseLong
 	var response = 0
 end
 
-# Double Response type of CCurl.easy_getinfo method
+# Double Response type of NativeCurl.easy_getinfo method
 class CURLInfoResponseDouble
 	var response = 0
 end
 
-# String Response type of CCurl::easy_getinfo method
+# String Response type of NativeCurl::easy_getinfo method
 class CURLInfoResponseString
 	var response = ""
 end
 
-# Reproduce Enum of available CURL SList information, used for CCurl.easy_getinfo
+# Reproduce Enum of available CURL SList information, used for NativeCurl.easy_getinfo
 extern class CURLInfoSList `{ CURLINFO `}
 	new ssl_engines `{ return CURLINFO_SSL_ENGINES; `}
 	new cookielist `{ return CURLINFO_COOKIELIST; `}
 end
 
-# Reproduce Enum of available CURL Long information, used for CCurl.easy_getinfo
+# Reproduce Enum of available CURL Long information, used for NativeCurl.easy_getinfo
 extern class CURLInfoLong `{ CURLINFO `}
 	new response_code `{ return CURLINFO_RESPONSE_CODE; `}
 	new header_size `{ return CURLINFO_HEADER_SIZE; `}
@@ -401,7 +401,7 @@ extern class CURLInfoLong `{ CURLINFO `}
 	new rtsp_cseq_self `{ return CURLINFO_RTSP_CSEQ_RECV; `}
 end
 
-# Reproduce Enum of available CURL Double information, used for CCurl.easy_getinfo
+# Reproduce Enum of available CURL Double information, used for NativeCurl.easy_getinfo
 extern class CURLInfoDouble `{ CURLINFO `}
 	new total_time `{ return CURLINFO_TOTAL_TIME; `}
 	new namelookup_time `{ return CURLINFO_NAMELOOKUP_TIME; `}
@@ -418,7 +418,7 @@ extern class CURLInfoDouble `{ CURLINFO `}
 	new content_length_upload `{ return CURLINFO_CONTENT_LENGTH_UPLOAD; `}
 end
 
-# Reproduce Enum of available CURL Chars information, used for CCurl.easy_getinfo
+# Reproduce Enum of available CURL Chars information, used for NativeCurl.easy_getinfo
 extern class CURLInfoChars `{ CURLINFO `}
 	new content_type `{ return CURLINFO_CONTENT_TYPE; `}
 	new effective_url `{ return CURLINFO_EFFECTIVE_URL; `}
@@ -472,7 +472,7 @@ extern class CURLStatusCode `{ int `}
 	fun to_i: Int `{ return self; `}
 end
 
-# Reproduce Enum of CURL Options usable, used for CCurl.easy_setopt
+# Reproduce Enum of CURL Options usable, used for NativeCurl.easy_setopt
 extern class CURLOption `{ CURLoption `}
 
 	# Behavior options
