@@ -21,7 +21,6 @@ import native_curl
 
 # Top level of Curl
 class Curl
-	protected var prim_curl = new CCurl.easy_init
 
 	init
 	do
@@ -29,12 +28,13 @@ class Curl
 			print "Curl must be instancied to be used"
 		end
 	end
+	protected var native = new CCurl.easy_init
 
 	# Check for correct initialization
-	fun is_ok: Bool do return self.prim_curl.is_init
+	fun is_ok: Bool do return self.native.is_init
 
 	# Release Curl instance
-	fun destroy do self.prim_curl.easy_clean
+	fun destroy do self.native.easy_clean
 end
 
 # CURL Request
@@ -53,10 +53,10 @@ class CurlRequest
 
 		var err
 
-		err = self.curl.prim_curl.easy_setopt(new CURLOption.verbose, self.verbose)
+		err = self.curl.native.easy_setopt(new CURLOption.verbose, self.verbose)
 		if not err.is_ok then return answer_failure(err.to_i, err.to_s)
 
-		err = self.curl.prim_curl.easy_perform
+		err = self.curl.native.easy_perform
 		if not err.is_ok then return answer_failure(err.to_i, err.to_s)
 
 		return null
@@ -82,7 +82,7 @@ class CurlHTTPRequest
 	# Set the user agent for all following HTTP requests
 	fun user_agent=(name: String)
 	do
-		curl.prim_curl.easy_setopt(new CURLOption.user_agent, name)
+		curl.native.easy_setopt(new CURLOption.user_agent, name)
 	end
 
 	init (url: String, curl: nullable Curl) is old_style_init do
@@ -101,37 +101,37 @@ class CurlHTTPRequest
 
 		var err
 
-		err = self.curl.prim_curl.easy_setopt(new CURLOption.follow_location, 1)
+		err = self.curl.native.easy_setopt(new CURLOption.follow_location, 1)
 		if not err.is_ok then return answer_failure(err.to_i, err.to_s)
 
-		err = self.curl.prim_curl.easy_setopt(new CURLOption.url, url)
+		err = self.curl.native.easy_setopt(new CURLOption.url, url)
 		if not err.is_ok then return answer_failure(err.to_i, err.to_s)
 
 		# Callbacks
-		err = self.curl.prim_curl.register_callback_header(callback_receiver)
+		err = self.curl.native.register_callback_header(callback_receiver)
 		if not err.is_ok then return answer_failure(err.to_i, err.to_s)
 
-		err = self.curl.prim_curl.register_callback_body(callback_receiver)
+		err = self.curl.native.register_callback_body(callback_receiver)
 		if not err.is_ok then return answer_failure(err.to_i, err.to_s)
 
 		# HTTP Header
 		if self.headers != null then
 			var headers_joined = self.headers.join_pairs(": ")
-			err = self.curl.prim_curl.easy_setopt(new CURLOption.httpheader, headers_joined.to_curlslist)
+			err = self.curl.native.easy_setopt(new CURLOption.httpheader, headers_joined.to_curlslist)
 			if not err.is_ok then return answer_failure(err.to_i, err.to_s)
 		end
 
 		# Datas
 		if self.datas != null then
-			var postdatas = self.datas.to_url_encoded(self.curl.prim_curl)
-			err = self.curl.prim_curl.easy_setopt(new CURLOption.postfields, postdatas)
+			var postdatas = self.datas.to_url_encoded(self.curl.native)
+			err = self.curl.native.easy_setopt(new CURLOption.postfields, postdatas)
 			if not err.is_ok then return answer_failure(err.to_i, err.to_s)
 		end
 
 		var err_resp = perform
 		if err_resp != null then return err_resp
 
-		var st_code = self.curl.prim_curl.easy_getinfo_long(new CURLInfoLong.response_code)
+		var st_code = self.curl.native.easy_getinfo_long(new CURLInfoLong.response_code)
 		if not st_code == null then success_response.status_code = st_code.response
 
 		return success_response
@@ -147,16 +147,16 @@ class CurlHTTPRequest
 
 		var err
 
-		err = self.curl.prim_curl.easy_setopt(new CURLOption.follow_location, 1)
+		err = self.curl.native.easy_setopt(new CURLOption.follow_location, 1)
 		if not err.is_ok then return answer_failure(err.to_i, err.to_s)
 
-		err = self.curl.prim_curl.easy_setopt(new CURLOption.url, url)
+		err = self.curl.native.easy_setopt(new CURLOption.url, url)
 		if not err.is_ok then return answer_failure(err.to_i, err.to_s)
 
-		err = self.curl.prim_curl.register_callback_header(callback_receiver)
+		err = self.curl.native.register_callback_header(callback_receiver)
 		if not err.is_ok then return answer_failure(err.to_i, err.to_s)
 
-		err = self.curl.prim_curl.register_callback_stream(callback_receiver)
+		err = self.curl.native.register_callback_stream(callback_receiver)
 		if not err.is_ok then return answer_failure(err.to_i, err.to_s)
 
 		var opt_name
@@ -176,16 +176,16 @@ class CurlHTTPRequest
 		var err_resp = perform
 		if err_resp != null then return err_resp
 
-		var st_code = self.curl.prim_curl.easy_getinfo_long(new CURLInfoLong.response_code)
+		var st_code = self.curl.native.easy_getinfo_long(new CURLInfoLong.response_code)
 		if not st_code == null then success_response.status_code = st_code.response
 
-		var speed = self.curl.prim_curl.easy_getinfo_double(new CURLInfoDouble.speed_download)
+		var speed = self.curl.native.easy_getinfo_double(new CURLInfoDouble.speed_download)
 		if not speed == null then success_response.speed_download = speed.response
 
-		var size = self.curl.prim_curl.easy_getinfo_double(new CURLInfoDouble.size_download)
+		var size = self.curl.native.easy_getinfo_double(new CURLInfoDouble.size_download)
 		if not size == null then success_response.size_download = size.response
 
-		var time = self.curl.prim_curl.easy_getinfo_double(new CURLInfoDouble.total_time)
+		var time = self.curl.native.easy_getinfo_double(new CURLInfoDouble.total_time)
 		if not time == null then success_response.total_time = time.response
 
 		success_response.i_file.close
@@ -249,14 +249,14 @@ class CurlMailRequest
 		# Host & Protocol
 		err = is_supported_outgoing_protocol(host)
 		if not err.is_ok then return answer_failure(err.to_i, err.to_s)
-		err = self.curl.prim_curl.easy_setopt(new CURLOption.url, host)
+		err = self.curl.native.easy_setopt(new CURLOption.url, host)
 		if not err.is_ok then return answer_failure(err.to_i, err.to_s)
 
 		# Credentials
 		if not user == null and not pwd == null then
-			err = self.curl.prim_curl.easy_setopt(new CURLOption.username, user)
+			err = self.curl.native.easy_setopt(new CURLOption.username, user)
 			if not err.is_ok then return answer_failure(err.to_i, err.to_s)
-			err = self.curl.prim_curl.easy_setopt(new CURLOption.password, pwd)
+			err = self.curl.native.easy_setopt(new CURLOption.password, pwd)
 			if not err.is_ok then return answer_failure(err.to_i, err.to_s)
 		end
 
@@ -291,16 +291,16 @@ class CurlMailRequest
 
 		var err
 
-		err = self.curl.prim_curl.easy_setopt(new CURLOption.follow_location, 1)
+		err = self.curl.native.easy_setopt(new CURLOption.follow_location, 1)
 		if not err.is_ok then return answer_failure(err.to_i, err.to_s)
 
-		err = self.curl.prim_curl.easy_setopt(new CURLOption.mail_rcpt, g_rec.to_curlslist)
+		err = self.curl.native.easy_setopt(new CURLOption.mail_rcpt, g_rec.to_curlslist)
 		if not err.is_ok then return answer_failure(err.to_i, err.to_s)
 
 		# From
 		if not self.from == null then
 			content = add_pair_to_content(content, "From:", self.from)
-			err = self.curl.prim_curl.easy_setopt(new CURLOption.mail_from, self.from.as(not null))
+			err = self.curl.native.easy_setopt(new CURLOption.mail_from, self.from.as(not null))
 			if not err.is_ok then return answer_failure(err.to_i, err.to_s)
 		end
 
@@ -316,9 +316,11 @@ class CurlMailRequest
 		content = add_conventional_space(content)
 		content = add_pair_to_content(content, "", self.body)
 		content = add_conventional_space(content)
-		err = self.curl.prim_curl.register_callback_read(self)
+
+		err = self.curl.native.register_callback_read(self)
 		if not err.is_ok then return answer_failure(err.to_i, err.to_s)
-		err = self.curl.prim_curl.register_read_datas_callback(self, content)
+
+		err = self.curl.native.register_read_datas_callback(self, content)
 		if not err.is_ok then return answer_failure(err.to_i, err.to_s)
 
 		var err_resp = perform
