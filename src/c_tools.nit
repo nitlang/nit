@@ -47,7 +47,7 @@ class CCompilationUnit
 	# files to compile TODO check is appropriate
 	var files = new Array[String]
 
-	# Add `c_function` as a `static` function local to this unit
+	# Add a `static` `c_function` to be strictly local to this unit
 	fun add_local_function(c_function: CFunction)
 	do
 		body_decl.add "static {c_function.signature};\n"
@@ -55,10 +55,10 @@ class CCompilationUnit
 		body_impl.add c_function.to_writer
 	end
 
-	# Add `c_function` as a public function to this unit
+	# Add a public `c_function` accessible from outside this compilation unit
 	fun add_exported_function(c_function: CFunction)
 	do
-		header_decl.add "{c_function.signature};\n"
+		body_decl.add "{c_function.signature};\n"
 		body_impl.add "\n"
 		body_impl.add c_function.to_writer
 	end
