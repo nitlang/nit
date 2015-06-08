@@ -77,12 +77,12 @@ class CurlHTTPRequest
 	super NativeCurlCallbacks
 
 	var url: String
-	var datas: nullable HeaderMap = null is writable
-	var headers: nullable HeaderMap = null is writable
-	var delegate: nullable CurlCallbacks = null is writable
+	var datas: nullable HeaderMap is writable
+	var headers: nullable HeaderMap is writable
+	var delegate: nullable CurlCallbacks is writable
 
 	# Set the user agent for all following HTTP requests
-	var user_agent: nullable String = null is writable
+	var user_agent: nullable String is writable
 
 	# Execute HTTP request with settings configured through attribute
 	fun execute: CurlResponse
