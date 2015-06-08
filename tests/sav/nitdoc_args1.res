@@ -52,4 +52,12 @@ property_module_95d1-__B__all25.html
 quicksearch-list.js
 resources/
 search.html
+uml_classdiag_module_95d0-.dot
+uml_classdiag_module_95d0-.map
+uml_classdiag_module_95d0-.png
+uml_classdiag_module_95d0-.s.dot
+uml_classdiag_module_95d1-.dot
+uml_classdiag_module_95d1-.map
+uml_classdiag_module_95d1-.png
+uml_classdiag_module_95d1-.s.dot
 vendors/

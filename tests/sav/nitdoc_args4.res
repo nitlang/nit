@@ -24,6 +24,7 @@ MModulePage test_prog
 		## test_prog-.intro
 		## test_prog-.importation
 			### test_prog-.graph
+			### test_prog-.classdiag
 			### list.group
 				#### test_prog-.imports
 				#### test_prog-.clients
@@ -106,6 +107,7 @@ MModulePage game
 		## test_prog__game-.intro
 		## test_prog__game-.importation
 			### test_prog__game-.graph
+			### test_prog__game-.classdiag
 			### list.group
 				#### test_prog__game-.imports
 				#### test_prog__game-.clients
@@ -183,6 +185,7 @@ MModulePage platform
 		## test_prog__platform-.intro
 		## test_prog__platform-.importation
 			### test_prog__platform-.graph
+			### test_prog__platform-.classdiag
 			### list.group
 				#### test_prog__platform-.imports
 				#### test_prog__platform-.clients
@@ -453,6 +456,7 @@ MModulePage careers
 		## test_prog__rpg__careers.intro
 		## test_prog__rpg__careers.importation
 			### test_prog__rpg__careers.graph
+			### test_prog__rpg__careers.classdiag
 			### list.group
 				#### test_prog__rpg__careers.imports
 				#### test_prog__rpg__careers.clients
@@ -582,6 +586,7 @@ MModulePage character
 		## test_prog__rpg__character.intro
 		## test_prog__rpg__character.importation
 			### test_prog__rpg__character.graph
+			### test_prog__rpg__character.classdiag
 			### list.group
 				#### test_prog__rpg__character.imports
 				#### test_prog__rpg__character.clients
@@ -684,6 +689,7 @@ MModulePage combat
 		## test_prog__rpg__combat.intro
 		## test_prog__rpg__combat.importation
 			### test_prog__rpg__combat.graph
+			### test_prog__rpg__combat.classdiag
 			### list.group
 				#### test_prog__rpg__combat.imports
 				#### test_prog__rpg__combat.clients
@@ -804,6 +810,7 @@ MModulePage races
 		## test_prog__rpg__races.intro
 		## test_prog__rpg__races.importation
 			### test_prog__rpg__races.graph
+			### test_prog__rpg__races.classdiag
 			### list.group
 				#### test_prog__rpg__races.imports
 				#### test_prog__rpg__races.clients
@@ -936,6 +943,7 @@ MModulePage rpg
 		## test_prog__rpg__rpg.intro
 		## test_prog__rpg__rpg.importation
 			### test_prog__rpg__rpg.graph
+			### test_prog__rpg__rpg.classdiag
 			### list.group
 				#### test_prog__rpg__rpg.imports
 				#### test_prog__rpg__rpg.clients
