@@ -65,6 +65,14 @@ private class SimpleMiscVisitor
 	do
 		toolcontext.warning(node.hot_location, tag, msg)
 	end
+
+	# Issue a warning if `sub` is a standalone `do` block.
+	fun check_do_expr(sub: nullable AExpr)
+	do
+		if sub isa ADoExpr then
+			warning(sub, "useless-do", "Warning: superfluous `do` block.")
+		end
+	end
 end
 
 
@@ -143,6 +151,21 @@ redef class AWhileExpr
 		else
 			n_expr.warn_parentheses(v)
 		end
+		v.check_do_expr(n_block)
+	end
+end
+
+redef class ADoExpr
+	redef fun after_simple_misc(v)
+	do
+		v.check_do_expr(n_block)
+	end
+end
+
+redef class ALoopExpr
+	redef fun after_simple_misc(v)
+	do
+		v.check_do_expr(n_block)
 	end
 end
 
@@ -150,6 +173,14 @@ redef class AForExpr
 	redef fun after_simple_misc(v)
 	do
 		n_expr.warn_parentheses(v)
+		v.check_do_expr(n_block)
+	end
+end
+
+redef class AWithExpr
+	redef fun after_simple_misc(v)
+	do
+		v.check_do_expr(n_block)
 	end
 end
 
