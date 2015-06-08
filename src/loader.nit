@@ -50,7 +50,9 @@ redef class ModelBuilder
 		end
 
 		var nit_dir = toolcontext.nit_dir
-		var libname = "{nit_dir}/lib"
+		var libname = nit_dir/"lib"
+		if libname.file_exists then paths.add(libname)
+		libname = nit_dir/"contrib"
 		if libname.file_exists then paths.add(libname)
 	end
 
@@ -222,6 +224,14 @@ redef class ModelBuilder
 				return res
 			end
 
+			# Fourth, try if the requested module is itself a group with a src
+			try_file = dirname + "/" + name + "/src/" + name + ".nit"
+			if try_file.file_exists then
+				var res = self.identify_file(try_file.simplify_path)
+				assert res != null
+				return res
+			end
+
 			c = c.parent
 		end
 
@@ -289,6 +299,19 @@ redef class ModelBuilder
 				end
 			end
 			try_file = (dirname + "/" + name + "/" + name + ".nit").simplify_path
+			if try_file.file_exists then
+				if candidate == null then
+					candidate = try_file
+				else if candidate != try_file then
+					# try to disambiguate conflicting modules
+					var abs_candidate = module_absolute_path(candidate)
+					var abs_try_file = module_absolute_path(try_file)
+					if abs_candidate != abs_try_file then
+						toolcontext.error(location, "Error: conflicting module file for `{name}`: `{candidate}` `{try_file}`")
+					end
+				end
+			end
+			try_file = (dirname + "/" + name + "/src/" + name + ".nit").simplify_path
 			if try_file.file_exists then
 				if candidate == null then
 					candidate = try_file
