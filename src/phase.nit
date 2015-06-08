@@ -115,7 +115,6 @@ redef class ToolContext
 				phase.process_nmodule(nmodule)
 				if errcount != self.error_count then
 					self.check_errors
-					break
 				end
 				errcount = self.error_count
 				for nclassdef in nmodule.n_classdefs do
@@ -128,7 +127,6 @@ redef class ToolContext
 				end
 				if errcount != self.error_count then
 					self.check_errors
-					break
 				end
 				for na in vannot.annotations do
 					var p = na.parent
@@ -138,7 +136,6 @@ redef class ToolContext
 				end
 				if errcount != self.error_count then
 					self.check_errors
-					break
 				end
 			end
 			self.check_errors

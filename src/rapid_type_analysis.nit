@@ -218,13 +218,16 @@ class RapidTypeAnalysis
 		while not todo.is_empty do
 			var mmethoddef = todo.shift
 			var mmeth = mmethoddef.mproperty
+			var msignature = mmethoddef.msignature
+			if msignature == null then continue # Skip broken method
+
 			#print "# visit {mmethoddef}"
 			var v = new RapidTypeVisitor(self, mmethoddef.mclassdef.bound_mtype, mmethoddef)
 
-			var vararg_rank = mmethoddef.msignature.vararg_rank
+			var vararg_rank = msignature.vararg_rank
 			if vararg_rank > -1 then
 				var node = self.modelbuilder.mpropdef2node(mmethoddef)
-				var elttype = mmethoddef.msignature.mparameters[vararg_rank].mtype
+				var elttype = msignature.mparameters[vararg_rank].mtype
 				#elttype = elttype.anchor_to(self.mainmodule, v.receiver)
 				var vararg = self.mainmodule.array_type(elttype)
 				v.add_type(vararg)
@@ -234,7 +237,7 @@ class RapidTypeAnalysis
 			end
 
 			# TODO? new_msignature
-			var sig = mmethoddef.msignature.as(not null)
+			var sig = msignature
 			var osig = mmeth.intro.msignature.as(not null)
 			for i in [0..sig.arity[ do
 				var origtype = osig.mparameters[i].mtype
@@ -255,7 +258,7 @@ class RapidTypeAnalysis
 				continue
 			else if mmethoddef.constant_value != null then
 				# Make the return type live
-				v.add_type(mmethoddef.msignature.return_mtype.as(MClassType))
+				v.add_type(msignature.return_mtype.as(MClassType))
 				continue
 			else if npropdef == null then
 				abort
@@ -275,7 +278,7 @@ class RapidTypeAnalysis
 
 			if mmethoddef.is_intern or mmethoddef.is_extern then
 				# UGLY: We force the "instantation" of the concrete return type if any
-				var ret = mmethoddef.msignature.return_mtype
+				var ret = msignature.return_mtype
 				if ret != null and ret isa MClassType and ret.mclass.kind != abstract_kind and ret.mclass.kind != interface_kind then
 					v.add_type(ret)
 				end
@@ -297,10 +300,10 @@ class RapidTypeAnalysis
 				if not ot.can_resolve_for(t, t, mainmodule) then continue
 				var rt = ot.anchor_to(mainmodule, t)
 				if live_types.has(rt) then continue
+				if not check_depth(rt) then continue
 				#print "{ot}/{t} -> {rt}"
 				live_types.add(rt)
 				todo_types.add(rt)
-				check_depth(rt)
 			end
 		end
 		#print "MType {live_types.length}: {live_types.join(", ")}"
@@ -318,12 +321,14 @@ class RapidTypeAnalysis
 		#print "cast MType {live_cast_types.length}: {live_cast_types.join(", ")}"
 	end
 
-	private fun check_depth(mtype: MClassType)
+	private fun check_depth(mtype: MClassType): Bool
 	do
 		var d = mtype.length
 		if d > 255 then
 			self.modelbuilder.toolcontext.fatal_error(null, "Fatal Error: limitation in the rapidtype analysis engine: a type depth of {d} is too important, the problematic type is `{mtype}`.")
+			return false
 		end
+		return true
 	end
 
 	fun add_new(recv: MClassType, mtype: MClassType)
@@ -450,10 +455,14 @@ class RapidTypeVisitor
 
 	redef fun visit(n)
 	do
-		n.accept_rapid_type_visitor(self)
 		if n isa AExpr then
-			var implicit_cast_to = n.implicit_cast_to
-			if implicit_cast_to != null then self.add_cast_type(implicit_cast_to)
+			if n.mtype != null or n.is_typed then
+				n.accept_rapid_type_visitor(self)
+				var implicit_cast_to = n.implicit_cast_to
+				if implicit_cast_to != null then self.add_cast_type(implicit_cast_to)
+			end
+		else
+			n.accept_rapid_type_visitor(self)
 		end
 
 		# RTA does not enter in AAnnotations

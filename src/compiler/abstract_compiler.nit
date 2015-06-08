@@ -1672,8 +1672,9 @@ abstract class AbstractCompilerVisitor
 		if nexpr == null then return
 		if nexpr.mtype == null and not nexpr.is_typed then
 			# Untyped expression.
-			# Might mean dead code
-			# So just return
+			# Might mean dead code or invalid code
+			# so aborts
+			add_abort("FATAL: bad statement executed.")
 			return
 		end
 
@@ -1697,8 +1698,10 @@ abstract class AbstractCompilerVisitor
 	do
 		if nexpr.mtype == null then
 			# Untyped expression.
-			# Might mean dead code
-			# so return a placebo result
+			# Might mean dead code or invalid code.
+			# so aborts
+			add_abort("FATAL: bad expression executed.")
+			# and return a placebo result to please the C compiler
 			if mtype == null then mtype = compiler.mainmodule.object_type
 			return new_var(mtype)
 		end

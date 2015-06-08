@@ -12,20 +12,36 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import standard::kernel
-
-redef class Int
-	fun next: nullable Int do if self < 20 then return self + 1 else return null
+fun plop: Fail
+do
+	print 1
 end
 
-var t2: nullable Int = 10
-t2.output
-while t2 != null do
-	t2 = t2.next #alt1# t2 = null
-	while t2 != null do
-		t2.output
-		t2 = t2.next #alt2# t2 = null
-	end
-	#alt3#t2 = t2.next
-	#alt3#exit(0)
+1.output
+if false then
+	plop
 end
+2.output
+if false then
+	fail
+end
+3.output
+if false then
+	var x = new Fail
+	x.output
+end
+4.output
+if false then
+	if 1 then abort
+end
+5.output
+if false then
+	abort
+	999.output
+end
+6.output
+if false then
+	var a = new Sys.fail
+	a.output
+end
+7.output
