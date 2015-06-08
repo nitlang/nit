@@ -30,8 +30,17 @@ redef class AMethPropdef
 	fun supported_by_dynamic_ffi: Bool
 	do
 		var n_extern_code_block = n_extern_code_block
-		return n_extern_calls == null and n_extern_code_block != null and
-			   n_extern_code_block.is_c
+		if not (n_extern_calls == null and n_extern_code_block != null and
+		        n_extern_code_block.is_c) then return false
+
+		for mparam in mpropdef.msignature.mparameters do
+			var mtype = mparam.mtype
+			if not mtype.is_cprimitive then
+				return false
+			end
+		end
+
+		return true
 	end
 end
 
