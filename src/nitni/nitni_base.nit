@@ -120,7 +120,7 @@ redef class MClassType
 	redef fun mangled_cname do return mclass.name
 
 	redef fun is_cprimitive do return mclass.kind == extern_kind or
-			(once ["Bool", "Char", "Float", "Int", "NativeString"]).has(mclass.name)
+			(once ["Bool", "Char", "Float", "Int", "NativeString", "Byte"]).has(mclass.name)
 end
 
 redef class MNullableType
