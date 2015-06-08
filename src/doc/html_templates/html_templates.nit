@@ -565,10 +565,8 @@ redef class GraphArticle
 	var map: String is noinit, writable
 
 	redef fun render_body do
-		addn "<div class=\"text-center\">"
-		addn " <img src='{graph_id}.png' usemap='#{graph_id}' style='margin:auto'"
-		addn "  alt='{title or else ""}'/>"
+		addn """<img src="{{{graph_id}}}.png" usemap="#{{{graph_id}}}"
+				  class="img-responsive center-block" alt="{{{title or else ""}}}"/>"""
 		add map
-		addn "</div>"
 	end
 end

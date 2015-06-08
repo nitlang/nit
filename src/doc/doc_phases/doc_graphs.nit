@@ -18,6 +18,7 @@ module doc_graphs
 import doc_structure
 import doc_poset
 import html_templates::html_model # FIXME maybe this phase should depend on `html_render`
+import uml
 
 redef class ToolContext
 
@@ -49,6 +50,7 @@ end
 
 redef class MModulePage
 	redef fun build_graphs(v, doc) do
+		build_class_diagram(v, doc)
 		build_dependencies_graph(v, doc)
 	end
 
@@ -70,6 +72,19 @@ redef class MModulePage
 		op.append("\}\n")
 		dependencies_section.prepend_child new GraphArticle(
 			"{mentity.nitdoc_id}.graph", "Importation Graph", name, op)
+	end
+
+	# Builds a class diagram with the classes contained in self.
+	fun build_class_diagram(v: GraphPhase, doc: DocModel) do
+		var name = "uml_classdiag_{mentity.nitdoc_id}"
+		var uml = new UMLModel(doc.model, doc.mainmodule, v.ctx)
+		var mclasses = new Array[MClass]
+		for mclass in mentity.intro_mclasses do
+			if doc.mentities.has(mclass) then mclasses.add mclass
+		end
+		var dot = uml.class_diagram(mclasses)
+		dependencies_section.prepend_child new GraphArticle(
+			"{mentity.nitdoc_id}.classdiag", "Class Diagram", name, dot.write_to_string)
 	end
 end
 
