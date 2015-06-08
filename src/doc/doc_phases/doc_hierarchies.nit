@@ -41,7 +41,7 @@ end
 redef class MModulePage
 	redef fun build_inh_list(v, doc) do
 		var id = mentity.nitdoc_id
-		var section = new TabbedGroup("{id}.importation", "Dependencies")
+		var section = dependencies_section
 		var group = new PanelGroup("list.group", "List")
 		var imports = self.imports.to_a
 		v.name_sorter.sort(imports)
@@ -50,15 +50,13 @@ redef class MModulePage
 		v.name_sorter.sort(clients)
 		group.add_child new MEntitiesListArticle("{id}.clients", "Clients", clients)
 		section.add_child group
-		section.parent = root.children.first
-		root.children.first.children.insert(section, 1)
 	end
 end
 
 redef class MClassPage
 	redef fun build_inh_list(v, doc) do
 		var id = mentity.nitdoc_id
-		var section = new TabbedGroup("{id}.inheritance", "Inheritance")
+		var section = inheritance_section
 		var group = new PanelGroup("list.group", "List")
 		var parents = self.parents.to_a
 		v.name_sorter.sort(parents)
@@ -73,7 +71,5 @@ redef class MClassPage
 		v.name_sorter.sort(descendants)
 		group.add_child new MEntitiesListArticle("{id}.descendants", "Descendants", descendants)
 		section.add_child group
-		section.parent = root.children.first
-		root.children.first.children.insert(section, 1)
 	end
 end
