@@ -19,6 +19,7 @@
 module doc_console
 
 import semantize
+import doc_commands
 import doc_extract
 import doc_poset
 import doc::console_templates
@@ -89,7 +90,7 @@ class Nitx
 
 	# Processes the query string and performs it.
 	fun do_query(str: String) do
-		var query = new NitxQuery(str)
+		var query = new DocCommand(str)
 		if query isa NitxCommand then
 			query.execute(self)
 			return
@@ -100,49 +101,19 @@ class Nitx
 	end
 end
 
-# A query performed on Nitx.
-#
-# Queries are responsible to collect matching results and render them as a
-# DocPage.
-#
-# Used as a factory to concrete instances.
-interface NitxQuery
+redef interface DocCommand
 
-	# Original query string.
-	fun query_string: String is abstract
-
-	# Query factory.
-	#
-	# Will return a concrete instance of NitxQuery.
-	new(query_string: String) do
+	redef new(query_string) do
 		if query_string == ":q" then
 			return new NitxQuit
 		else if query_string == ":h" then
 			return new NitxHelp
-		else if query_string.has_prefix("comment:") then
-			return new CommentQuery(query_string)
-		else if query_string.has_prefix("doc:") then
-			return new DocQuery(query_string)
-		else if query_string.has_prefix("param:") then
-			return new ParamQuery(query_string)
-		else if query_string.has_prefix("return:") then
-			return new ReturnQuery(query_string)
-		else if query_string.has_prefix("new:") then
-			return new NewQuery(query_string)
-		else if query_string.has_prefix("call:") then
-			return new CallQuery(query_string)
-		else if query_string.has_prefix("code:") then
-			return new CodeQuery(query_string)
-		else if query_string.has_prefix("parents:") then
-			return new ParentsQuery(query_string)
-		else if query_string.has_prefix("ancestors:") then
-			return new AncestorsQuery(query_string)
-		else if query_string.has_prefix("children:") then
-			return new ChildrenQuery(query_string)
-		else if query_string.has_prefix("descendants:") then
-			return new DescendantsQuery(query_string)
 		end
-		return new CommentQuery("comment: {query_string}")
+		var cmd = super(query_string)
+		if cmd isa UnknownCommand then
+			return new CommentCommand("comment: {query_string}")
+		end
+		return cmd
 	end
 
 	# Looks up the `doc` model and returns possible matches.
@@ -151,54 +122,22 @@ interface NitxQuery
 	# Pretty prints the results for the console.
 	fun make_results(nitx: Nitx, results: Array[NitxMatch]): DocPage do
 		var page = new DocPage("results", "Results")
-		page.root.add_child(new QueryResultArticle("results.article", "Results", self, results))
+		page.root.add_child(new QueryResultArticle("results", "Results", self, results))
 		return page
 	end
-
-	redef fun to_s do return query_string
 end
 
-# Something that matches a `NitxQuery`.
+# Something that matches a `DocCommand`.
 abstract class NitxMatch
 
 	# Query matched by `self`.
-	var query: NitxQuery
+	var query: DocCommand
 
 	# Pretty prints `self` for console.
 	fun make_list_item: String is abstract
 end
 
-# A query that contains a meta command.
-#
-# In Nitx, commands are written such as `command: args...`.
-abstract class MetaQuery
-	super NitxQuery
-
-	redef var query_string
-
-	# Meta command used.
-	var command: String is noinit
-
-	# Arguments passed to the `command`.
-	var args = new Array[String]
-
-	init do
-		# parse command
-		var str = new FlatBuffer
-		var i = 0
-		while i < query_string.length do
-			var c = query_string[i]
-			i += 1
-			if c == ':' then break
-			str.add c
-		end
-		command = str.write_to_string
-		# parse args
-		args.add query_string.substring_from(i).trim
-	end
-end
-
-# A match between a `NitxQuery` and a `MEntity`.
+# A match between a `DocCommand` and a `MEntity`.
 class MEntityMatch
 	super NitxMatch
 
@@ -208,10 +147,7 @@ class MEntityMatch
 	redef fun make_list_item do return mentity.cs_list_item
 end
 
-# A query to search a `MEntity` comment by its name or namespace.
-class CommentQuery
-	super MetaQuery
-
+redef class CommentCommand
 	redef fun perform(nitx, doc) do
 		var name = args.first
 		var res = new Array[NitxMatch]
@@ -226,8 +162,8 @@ class CommentQuery
 		if len == 1 then
 			var res = results.first.as(MEntityMatch)
 			var mentity = res.mentity
-			var page = new DocPage("results", "Results")
-			var article = new DefinitionArticle("results.article", "Results", mentity)
+			var page = new DocPage("resultats", "Results")
+			var article = new DefinitionArticle("results", "Results", mentity)
 			article.cs_title = mentity.name
 			article.cs_subtitle = mentity.cs_declaration
 			page.root.add_child article
@@ -239,9 +175,7 @@ class CommentQuery
 end
 
 # A query to search signatures using a specific `MType` as parameter.
-class ParamQuery
-	super MetaQuery
-
+redef class ParamCommand
 	redef fun perform(nitx, doc) do
 		var res = new Array[NitxMatch]
 		var mtype_name = args.first
@@ -261,9 +195,7 @@ class ParamQuery
 end
 
 # A query to search signatures using a specific `MType` as return.
-class ReturnQuery
-	super MetaQuery
-
+redef class ReturnCommand
 	redef fun perform(nitx, doc) do
 		var res = new Array[NitxMatch]
 		var mtype_name = args.first
@@ -282,9 +214,7 @@ class ReturnQuery
 end
 
 # A query to search methods creating new instances of a specific `MType`.
-class NewQuery
-	super MetaQuery
-
+redef class NewCommand
 	redef fun perform(nitx, doc) do
 		var res = new Array[NitxMatch]
 		var mtype_name = args.first
@@ -302,9 +232,7 @@ class NewQuery
 end
 
 # A query to search methods calling a specific `MProperty`.
-class CallQuery
-	super MetaQuery
-
+redef class CallCommand
 	redef fun perform(nitx, doc) do
 		var res = new Array[NitxMatch]
 		var mprop_name = args.first
@@ -323,9 +251,7 @@ class CallQuery
 end
 
 # A query to search a Nitdoc documentation page by its name.
-class DocQuery
-	super MetaQuery
-
+redef class ArticleCommand
 	redef fun perform(nitx, doc) do
 		var res = new Array[NitxMatch]
 		var name = args.first
@@ -377,7 +303,7 @@ end
 # It actually searches for pages about the mentity and extracts the
 # pre-calculated hierarchies by the `doc_post` phase.
 abstract class HierarchiesQuery
-	super DocQuery
+	super DocCommand
 
 	redef fun make_results(nitx, results) do
 		var page = new DocPage("hierarchy", "Hierarchy")
@@ -443,9 +369,7 @@ class DescendantsQuery
 end
 
 # A query to search source code from a file name.
-class CodeQuery
-	super MetaQuery
-
+redef class CodeCommand
 	# FIXME refactor this!
 	redef fun perform(nitx, doc) do
 		var res = new Array[NitxMatch]
@@ -470,7 +394,7 @@ class CodeQuery
 	redef fun make_results(nitx, results) do
 		var page = new DocPage("results", "Code Results")
 		for res in results do
-			page.add new CodeQueryArticle("results.article", "Results", self, res.as(CodeMatch))
+			page.add new CodeQueryArticle("results", "Results", self, res.as(CodeMatch))
 		end
 		return page
 	end
@@ -495,7 +419,7 @@ end
 # These commands are prefixed with `:` and are used to control the execution of
 # `nitx` like displaying the help or quiting.
 interface NitxCommand
-	super NitxQuery
+	super DocCommand
 
 	# Executes the command.
 	fun execute(nitx: Nitx) is abstract
@@ -548,7 +472,7 @@ private class MPropertyCallVisitor
 	do
 		node.visit_all(self)
 		if not node isa ASendExpr then return
-		calls.add node.callsite.mproperty
+		calls.add node.callsite.as(not null).mproperty
 	end
 end
 
@@ -559,7 +483,7 @@ private class QueryResultArticle
 	super DocArticle
 
 	# Query linked to the results to display.
-	var query: NitxQuery
+	var query: DocCommand
 
 	# Results to display.
 	var results: Array[NitxMatch]
@@ -567,9 +491,9 @@ private class QueryResultArticle
 	redef fun render_title do
 		var len = results.length
 		if len == 0 then
-			add "No result found for '{query.query_string}'..."
+			add "No result found for '{query.string}'..."
 		else
-			add "# {len} result(s) for '{query.query_string}'".green.bold
+			add "# {len} result(s) for '{query.string}'".green.bold
 		end
 	end
 
@@ -587,7 +511,7 @@ private class CodeQueryArticle
 	super DocArticle
 
 	# The query linked to the result to display.
-	var query: NitxQuery
+	var query: DocCommand
 
 	# The result to display.
 	var result: CodeMatch
