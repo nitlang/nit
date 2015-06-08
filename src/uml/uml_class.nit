@@ -21,6 +21,16 @@ import model::model_collect
 redef class UMLModel
 	# Generates a UML class diagram from a `Model`
 	fun generate_class_uml: Writable do
+		var mclasses = new Array[MClass]
+		for mclass in model.mclasses do
+			if not ctx.private_gen and mclass.visibility != public_visibility then continue
+			mclasses.add mclass
+		end
+		return class_diagram(mclasses)
+	end
+
+	# Generates a UML class diagram containing `mclasses`.
+	fun class_diagram(mclasses: Array[MClass]): Writable do
 		var tpl = new Template
 		tpl.add "digraph G \{\n"
 		tpl.add """	fontname = "Bitstream Vera Sans"
@@ -35,25 +45,13 @@ redef class UMLModel
 					fontname = "Bitstream Vera Sans"
 					fontsize = 8
 				]\n"""
-		tpl.add model.tpl_class(ctx, mainmodule)
+		for mclass in mclasses do
+			tpl.add mclass.tpl_class(ctx, mainmodule)
+			tpl.add "\n"
+		end
 		tpl.add "\}"
 		return tpl
 	end
-end
-
-redef class Model
-
-	# Generates a UML Class diagram from the entities of a `Model`
-	fun tpl_class(ctx: ToolContext, main: MModule): Writable do
-		var t = new Template
-		for i in mclasses do
-			if not ctx.private_gen and i.visibility != public_visibility then continue
-			t.add i.tpl_class(ctx, main)
-			t.add "\n"
-		end
-		return t
-	end
-
 end
 
 redef class MEntity
