@@ -78,7 +78,7 @@ redef class MType
 	#   Pointer -> Pointer
 	fun mangled_cname: String is abstract
 
-	# Does this types has a primitive representation?
+	# Does this type have a primitive representation?
 	#
 	#   type Object is_primitive? false
 	#   type Pointer is_primitive? true
