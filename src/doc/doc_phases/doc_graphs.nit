@@ -36,29 +36,24 @@ class GraphPhase
 
 	redef fun apply do
 		if ctx.opt_nodot.value then return
-		for page in doc.pages.values do
-			var article = page.build_graph(self, doc)
-			if article == null then continue
-			# FIXME avoid diff
-			# page.root.add article
-			article.parent = page.root.children.first.children[1]
-			page.root.children.first.children[1].children.insert(article, 0)
-		end
+		for page in doc.pages.values do page.build_graphs(self, doc)
 	end
 end
 
 redef class DocPage
-	# Build dot graph articles from `mmodules` list.
-	#
-	# Since only `MEntity pages` contain a graph, this method returns null in all
-	# other cases.
-	private fun build_graph(v: GraphPhase, doc: DocModel): nullable GraphArticle do return null
+	# Build dot graph articles from this page.
+	private fun build_graphs(v: GraphPhase, doc: DocModel) do end
 end
 
 # TODO graph generation can be factorized in POSet.
 
 redef class MModulePage
-	redef fun build_graph(v, doc) do
+	redef fun build_graphs(v, doc) do
+		build_dependencies_graph(v, doc)
+	end
+
+	# Builds a dependencies graph for this module and its direct parents.
+	fun build_dependencies_graph(v: GraphPhase, doc: DocModel) do
 		var op = new FlatBuffer
 		var name = "dep_module_{mentity.nitdoc_id}"
 		op.append("digraph \"{name.escape_to_dot}\" \{ rankdir=BT; node[shape=none,margin=0,width=0,height=0,fontsize=10]; edge[dir=none,color=gray]; ranksep=0.2; nodesep=0.1;\n")
@@ -73,12 +68,13 @@ redef class MModulePage
 			end
 		end
 		op.append("\}\n")
-		return new GraphArticle("{mentity.nitdoc_id}.graph", "Importation Graph", name, op)
+		dependencies_section.prepend_child new GraphArticle(
+			"{mentity.nitdoc_id}.graph", "Importation Graph", name, op)
 	end
 end
 
 redef class MClassPage
-	redef fun build_graph(v, doc) do
+	redef fun build_graphs(v, doc) do
 		var op = new FlatBuffer
 		var name = "dep_class_{mentity.nitdoc_id}"
 		op.append("digraph \"{name.escape_to_dot}\" \{ rankdir=BT; node[shape=none,margin=0,width=0,height=0,fontsize=10]; edge[dir=none,color=gray]; ranksep=0.2; nodesep=0.1;\n")
@@ -107,7 +103,8 @@ redef class MClassPage
 			end
 		end
 		op.append("\}\n")
-		return new GraphArticle("{mentity.nitdoc_id}.graph", "Inheritance Graph", name, op)
+		inheritance_section.prepend_child new GraphArticle(
+			"{mentity.nitdoc_id}.graph", "Inheritance Graph", name, op)
 	end
 end
 
