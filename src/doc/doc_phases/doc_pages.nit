@@ -31,6 +31,7 @@ class MakePagePhase
 		end
 		for mmodule in doc.mmodules do
 			doc.add_page new MModulePage(mmodule)
+			doc.add_page new CodePage(mmodule)
 		end
 		for mclass in doc.mclasses do
 			doc.add_page new MClassPage(mclass)
@@ -86,6 +87,14 @@ class MModulePage
 	super MEntityPage
 
 	redef type MENTITY: MModule
+end
+
+# A documentation page that contains only code.
+class CodePage
+	super MEntityPage
+
+	redef type MENTITY: MModule
+	redef var id is lazy do return "{mentity.nitdoc_id}.code"
 end
 
 # A documentation page about a MClass.

@@ -229,6 +229,21 @@ redef class MEntityPage
 	redef fun init_title(v, doc) do title = mentity.html_name
 end
 
+redef class CodePage
+	redef var html_url is lazy do return "code_{mentity.nitdoc_url}"
+	redef fun init_title(v, doc) do title = "{mentity.html_name} source code"
+	redef fun init_sidebar(v, doc) do end
+
+	redef fun init_topmenu(v, doc) do
+		super
+		var mpackage = mentity.mpackage
+		topmenu.add_li new ListItem(new Link(mpackage.nitdoc_url, mpackage.html_name))
+		topmenu.add_li new ListItem(new Link(mentity.nitdoc_url, mentity.html_name))
+		topmenu.add_li new ListItem(new Link(html_url, "source code"))
+		topmenu.active_item = topmenu.items.last
+	end
+end
+
 # FIXME all clases below are roughly copied from `doc_pages` and adapted to new
 # doc phases. This is to preserve the compatibility with the current
 # `doc_templates` module.
