@@ -45,6 +45,7 @@ private class Nitdoc
 			new IntroRedefListPhase(toolcontext, doc),
 			new LinListPhase(toolcontext, doc),
 			new GraphPhase(toolcontext, doc),
+			new CodePhase(toolcontext, doc),
 			new ReadmePhase(toolcontext, doc),
 			new RenderHTMLPhase(toolcontext, doc),
 			new DocTestPhase(toolcontext, doc): DocPhase]

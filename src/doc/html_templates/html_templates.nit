@@ -22,6 +22,7 @@ import doc_phases::doc_hierarchies
 import doc_phases::doc_graphs
 import doc_phases::doc_intros_redefs
 import doc_phases::doc_lin
+import doc_phases::doc_code
 import doc_phases::doc_readme
 intrude import doc_down
 
@@ -437,8 +438,13 @@ redef class MEntitySection
 end
 
 redef class MEntityArticle
-	# Link to source to display if any.
-	var html_source_link: nullable Writable is noinit, writable
+	# Render link to source code if any.
+	fun render_source_link(tabs: DocTabs) do
+		var loc = formatted_location
+		if loc == null then return
+		var lnk = """<a target="_blank" href="{{{loc.html_escape}}}">View Source</a>"""
+		tabs.drop_list.items.add new ListItem(lnk)
+	end
 end
 
 redef class ConcernSection
@@ -463,10 +469,7 @@ redef class IntroArticle
 			var title = child.html_toc_title or else child.toc_title or else ""
 			tabs.add_panel new DocTabPanel(child.html_tab_id, title, child)
 		end
-		var lnk = html_source_link
-		if lnk != null then
-			tabs.drop_list.items.add new ListItem(lnk)
-		end
+		render_source_link(tabs)
 		addn tabs
 	end
 end
@@ -520,10 +523,7 @@ redef class DefinitionArticle
 			var title = child.html_toc_title or else child.toc_title or else ""
 			tabs.add_panel new DocTabPanel(child.html_tab_id, title, child)
 		end
-		var lnk = html_source_link
-		if lnk != null then
-			tabs.drop_list.items.add new ListItem(lnk)
-		end
+		render_source_link(tabs)
 		addn tabs
 	end
 end
