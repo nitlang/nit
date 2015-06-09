@@ -347,8 +347,7 @@ end
 #
 # Used at the top of a documentation page to introduce the documented MEntity.
 class IntroArticle
-	super MEntityComposite
-	super DocArticle
+	super MEntityArticle
 
 	redef var is_hidden = false
 	redef var is_toc_hidden = true

@@ -436,15 +436,18 @@ redef class MEntitySection
 	redef var html_subtitle is lazy do return mentity.html_declaration
 end
 
+redef class MEntityArticle
+	# Link to source to display if any.
+	var html_source_link: nullable Writable is noinit, writable
+end
+
 redef class ConcernSection
 	redef var html_title is lazy do return "in {mentity.nitdoc_name}"
 end
 
 redef class IntroArticle
 	redef var html_title = null
-
-	# Link to source to display if any.
-	var html_source_link: nullable Writable is noinit, writable
+	redef var html_subtitle = null
 
 	redef fun render_body do
 		var tabs = new DocTabs("{html_id}.tabs", "")
@@ -498,9 +501,6 @@ redef class DefinitionArticle
 	#
 	# FIXME diff hack
 	var is_short_comment: Bool = false is writable
-
-	# Link to source to display if any.
-	var html_source_link: nullable Writable is noinit, writable
 
 	redef fun render_body do
 		var tabs = new DocTabs("{html_id}.tabs", "")
