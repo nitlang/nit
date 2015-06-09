@@ -23,9 +23,12 @@ redef class ToolContext
 	var opt_source = new OptionString("link for source (%f for filename, " +
 		"%l for first line, %L for last line)", "--source")
 
+	# Do not generate code pages.
+	var opt_nocode = new OptionBool("do not generate source code pages", "--no-code")
+
 	redef init do
 		super
-		option_context.add_option(opt_source)
+		option_context.add_option(opt_source, opt_nocode)
 	end
 end
 
@@ -35,6 +38,8 @@ class CodePhase
 
 	redef fun apply do
 		for page in doc.pages.values do page.apply_source_link(self, doc)
+		if ctx.opt_nocode.value then return
+		for page in doc.pages.values do page.apply_code(self, doc)
 	end
 end
 
@@ -46,6 +51,11 @@ redef class DocPage
 	fun apply_source_link(v: CodePhase, doc: DocModel) do
 		root.apply_source_link(v, doc, self)
 	end
+
+	# Populates `self` with source code.
+	#
+	# See `CodePhase`.
+	fun apply_code(v: CodePhase, doc: DocModel) do end
 end
 
 redef class DocComposite
@@ -88,4 +98,25 @@ redef class MEntityArticle
 			formatted_location = format.simplify_path
 		end
 	end
+end
+
+redef class CodePage
+	redef fun apply_code(v, doc) do
+		var mbuilder = v.ctx.modelbuilder
+		var mentity = self.mentity
+		var nentity = mbuilder.mmodule2node(mentity)
+		root.add_child new CodeArticle("{mentity.nitdoc_id}.code", nentity)
+	end
+end
+
+# A DocArticle that display the code from a ANode.
+class CodeArticle
+	autoinit(id, anode)
+	super DocArticle
+
+	# ANode to display code from.
+	var anode: nullable ANode
+
+	redef var title is lazy do return anode.location.file.filename
+	redef fun is_hidden do return anode == null
 end

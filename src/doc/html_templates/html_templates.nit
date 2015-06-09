@@ -621,3 +621,18 @@ redef class DocumentationArticle
 		addn tabs
 	end
 end
+
+redef class CodeArticle
+
+	# HighlightVisitor used to hilight source code.
+	var hl = new HighlightVisitor
+
+	redef fun render_body do
+		var anode = self.anode
+		if anode == null then return
+		hl.enter_visit anode
+		addn "<pre class=\"nit_code\">"
+		addn hl.html
+		addn "</pre>"
+	end
+end
