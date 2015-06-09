@@ -267,7 +267,7 @@ class ModelBuilder
 		var mclass = try_get_mclass_by_name(ntype, mmodule, name)
 		if mclass != null then
 			var arity = ntype.n_types.length
-			if arity != mclass.arity then
+			if arity > mclass.arity then
 				if arity == 0 then
 					error(ntype, "Type Error: `{mclass.signature_to_s}` is a generic class.")
 				else if mclass.arity == 0 then
@@ -277,7 +277,7 @@ class ModelBuilder
 				end
 				return null
 			end
-			if arity == 0 then
+			if mclass.arity == 0 then
 				res = mclass.mclass_type
 				if ntype.n_kwnullable != null then res = res.as_nullable
 				ntype.mtype = res
@@ -289,6 +289,14 @@ class ModelBuilder
 					if mt == null then return null # Forward error
 					mtypes.add(mt)
 				end
+				# Add missing formal argument (use the bound instead)
+				var intro = mclass.try_intro
+				if intro == null then return null # skip error
+				for i in [mtypes.length..mclass.arity[ do
+					var bound = intro.bound_mtype.arguments[i]
+					mtypes.add(bound)
+				end
+
 				res = mclass.get_mtype(mtypes)
 				if ntype.n_kwnullable != null then res = res.as_nullable
 				ntype.mtype = res
@@ -314,11 +322,12 @@ class ModelBuilder
 		if ntype.checked_mtype then return mtype
 		if mtype isa MGenericType then
 			var mclass = mtype.mclass
-			for i in [0..mclass.arity[ do
+			var ntypes = ntype.n_types
+			for i in [0..ntypes.length[ do
 				var intro = mclass.try_intro
 				if intro == null then return null # skip error
 				var bound = intro.bound_mtype.arguments[i]
-				var nt = ntype.n_types[i]
+				var nt = ntypes[i]
 				var mt = resolve_mtype(mmodule, mclassdef, nt)
 				if mt == null then return null # forward error
 				var anchor
