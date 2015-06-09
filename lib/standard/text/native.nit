@@ -14,7 +14,7 @@ module native
 import kernel
 
 # Native strings are simple C char *
-extern class NativeString `{ char* `}
+extern class NativeString
 	# Creates a new NativeString with a capacity of `length`
 	new(length: Int) is intern
 
