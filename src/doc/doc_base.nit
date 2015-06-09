@@ -111,7 +111,7 @@ abstract class DocComposite
 	var id: String is writable
 
 	# Item title if any.
-	var title: nullable String
+	var title: nullable String is writable
 
 	# Does `self` have a `parent`?
 	fun is_root: Bool do return parent == null
