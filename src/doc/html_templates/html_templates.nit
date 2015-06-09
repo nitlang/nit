@@ -440,10 +440,16 @@ end
 redef class MEntityArticle
 	# Render link to source code if any.
 	fun render_source_link(tabs: DocTabs) do
-		var loc = formatted_location
-		if loc == null then return
-		var lnk = """<a target="_blank" href="{{{loc.html_escape}}}">View Source</a>"""
-		tabs.drop_list.items.add new ListItem(lnk)
+		var loc = source_location
+		if loc != null then
+			var lnk = """<a target="_blank" href="{{{loc.html_escape}}}">View Source</a>"""
+			tabs.drop_list.items.add new ListItem(lnk)
+		end
+		loc = github_location
+		if loc != null then
+			var lnk = """<a target="_blank" href="{{{loc.html_escape}}}">View on Github</a>"""
+			tabs.drop_list.items.add new ListItem(lnk)
+		end
 	end
 end
 

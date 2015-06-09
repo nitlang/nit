@@ -16,6 +16,7 @@
 module doc_code
 
 import doc_structure
+import html_templates::html_model # FIXME maybe this phase should depend on `html_render`
 
 redef class ToolContext
 
@@ -68,35 +69,53 @@ redef class MEntityArticle
 	# Location where source code links should point.
 	var location: nullable Location = null
 
-	# Location once formated with `ToolContext::opt_source`.
-	var formatted_location: nullable String = null
+	# Nit source location once formated with `ToolContext::opt_source`.
+	var source_location: nullable String = null
+
+	# Github source location.
+	var github_location: nullable String = null
 
 	redef fun apply_source_link(v, doc, page) do
 		super
 		# MEntity location
+		var mmodule = null
 		var mentity = self.mentity
 		if mentity isa MModule then
 			location = mentity.location
+			mmodule = mentity
 		else if mentity isa MClass then
 			location = mentity.intro.location
+			mmodule = mentity.intro.mmodule
 		else if mentity isa MClassDef then
 			location = mentity.location
+			mmodule = mentity.mmodule
 		else if mentity isa MProperty then
 			location = mentity.intro.location
+			mmodule = mentity.intro.mclassdef.mmodule
 		else if mentity isa MPropDef then
 			location = mentity.location
+			mmodule = mentity.mclassdef.mmodule
 		end
 		if location == null then return
-		# Format source location according to `opt_source`
-		var format = v.ctx.opt_source.value
-		if format == null then
-			formatted_location = location.file.filename.simplify_path
+
+		# Show source link according to `opt_nocode`
+		if v.ctx.opt_nocode.value then
+			source_location = location.file.filename.simplify_path
 		else
-			format = format.replace("%f", location.file.filename.simplify_path)
-			format = format.replace("%l", location.line_start.to_s)
-			format = format.replace("%L", location.line_end.to_s)
-			formatted_location = format.simplify_path
+			var code_link = "code_{mmodule.nitdoc_url}"
+			if not mentity isa MModule then
+				code_link += "#L{location.line_start}"
+			end
+			source_location = code_link
 		end
+
+		# Github source location according to `opt_source`
+		var format = v.ctx.opt_source.value
+		if format == null then return
+		format = format.replace("%f", location.file.filename.simplify_path)
+		format = format.replace("%l", location.line_start.to_s)
+		format = format.replace("%L", location.line_end.to_s)
+		github_location = format.simplify_path
 	end
 end
 
