@@ -16,7 +16,7 @@ import standard::kernel
 
 abstract class A
 	var x: Int
-	var y: Int is abstract
+	var y: Int is abstract, autoinit
 end
 
 class B

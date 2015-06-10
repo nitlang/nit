@@ -161,10 +161,10 @@ redef class CCompilationUnit
 
 		var h_file = "{base_name}.h"
 		var guard = "{mmodule.c_name.to_upper}_NIT_H"
-		write_header_to_file(mmodule, "{compdir}/{h_file}", new Array[String], guard)
+		write_header_to_file(mmodule, "{compdir}/{h_file}", ["<stdint.h>"], guard)
 
 		var c_file = "{base_name}.c"
-		write_body_to_file(mmodule, "{compdir}/{c_file}", ["<stdlib.h>", "<stdio.h>", "\"{h_file}\""])
+		write_body_to_file(mmodule, "{compdir}/{c_file}", ["<stdlib.h>", "<stdio.h>", "<stdint.h>", "\"{h_file}\""])
 
 		files.add( "{compdir}/{c_file}" )
 	end

@@ -231,7 +231,7 @@ redef universal Int
 	# The first power of `exp` greater or equal to `self`
 	private fun next_pow(exp: Int): Int
 	do
-		var p = 0
+		var p = 1
 		while p < self do p = p*exp
 		return p
 	end

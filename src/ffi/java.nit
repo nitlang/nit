@@ -243,7 +243,6 @@ redef class MModule
 	private fun insert_compiler_options
 	do
 		cflags.add_one("", "-I $(JAVA_HOME)/include/ -I $(JAVA_HOME)/include/linux/")
-		ldflags.add_one("", "-L $(JNI_LIB_PATH) -ljvm")
 	end
 
 	# Name of the generated Java class where to store all implementation methods of this module
@@ -480,7 +479,7 @@ redef class MClassType
 		if ftype isa ForeignJavaType then return ftype.java_type.
 			replace('/', ".").replace('$', ".").replace(' ', "").replace('\n',"")
 		if mclass.name == "Bool" then return "boolean"
-		if mclass.name == "Char" then return "char"
+		if mclass.name == "Char" then return "int"
 		if mclass.name == "Int" then return "long"
 		if mclass.name == "Float" then return "double"
 		if mclass.name == "Byte" then return "byte"
@@ -492,7 +491,7 @@ redef class MClassType
 		var ftype = mclass.ftype
 		if ftype isa ForeignJavaType then return "jobject"
 		if mclass.name == "Bool" then return "jboolean"
-		if mclass.name == "Char" then return "jchar"
+		if mclass.name == "Char" then return "jint"
 		if mclass.name == "Int" then return "jlong"
 		if mclass.name == "Float" then return "jdouble"
 		if mclass.name == "Byte" then return "jbyte"
@@ -552,7 +551,7 @@ redef class MClassType
 			return "L{jni_type};"
 		end
 		if mclass.name == "Bool" then return "Z"
-		if mclass.name == "Char" then return "C"
+		if mclass.name == "Char" then return "I"
 		if mclass.name == "Int" then return "J"
 		if mclass.name == "Float" then return "D"
 		if mclass.name == "Byte" then return "B"
@@ -565,7 +564,7 @@ redef class MClassType
 
 		if ftype isa ForeignJavaType then return "Object"
 		if mclass.name == "Bool" then return "Boolean"
-		if mclass.name == "Char" then return "Char"
+		if mclass.name == "Char" then return "Int"
 		if mclass.name == "Int" then return "Long"
 		if mclass.name == "Float" then return "Double"
 		if mclass.name == "Byte" then return "Byte"

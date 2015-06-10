@@ -17,7 +17,7 @@ in "C++ Header" `{
 `}
 
 fun print_a(str: String) import String.to_cstring in "C++" `{
-	puts(String_to_cstring(str));
+	puts(reinterpret_cast<char*>(String_to_cstring(str)));
 `}
 
 print_a "Hello from `a`."

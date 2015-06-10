@@ -63,8 +63,8 @@ redef class ToolContext
 	var opt_invocation_metrics = new OptionBool("Enable static and dynamic count of all method invocations", "--invocation-metrics")
 	# --isset-checks-metrics
 	var opt_isset_checks_metrics = new OptionBool("Enable static and dynamic count of isset checks before attributes access", "--isset-checks-metrics")
-	# --stacktrace
-	var opt_stacktrace = new OptionString("Control the generation of stack traces", "--stacktrace")
+	# --no-stacktrace
+	var opt_no_stacktrace = new OptionBool("Disable the generation of stack traces", "--no-stacktrace")
 	# --no-gcc-directives
 	var opt_no_gcc_directive = new OptionArray("Disable a advanced gcc directives for optimization", "--no-gcc-directive")
 	# --release
@@ -76,7 +76,7 @@ redef class ToolContext
 		self.option_context.add_option(self.opt_output, self.opt_dir, self.opt_no_cc, self.opt_no_main, self.opt_make_flags, self.opt_compile_dir, self.opt_hardening)
 		self.option_context.add_option(self.opt_no_check_covariance, self.opt_no_check_attr_isset, self.opt_no_check_assert, self.opt_no_check_autocast, self.opt_no_check_null, self.opt_no_check_all)
 		self.option_context.add_option(self.opt_typing_test_metrics, self.opt_invocation_metrics, self.opt_isset_checks_metrics)
-		self.option_context.add_option(self.opt_stacktrace)
+		self.option_context.add_option(self.opt_no_stacktrace)
 		self.option_context.add_option(self.opt_no_gcc_directive)
 		self.option_context.add_option(self.opt_release)
 		self.option_context.add_option(self.opt_max_c_lines, self.opt_group_c_files)
@@ -87,17 +87,6 @@ redef class ToolContext
 	redef fun process_options(args)
 	do
 		super
-
-		var st = opt_stacktrace.value
-		if st == "none" or st == "libunwind" or st == "nitstack" then
-			# Fine, do nothing
-		else if st == "auto" or st == null then
-			# Default is nitstack
-			opt_stacktrace.value = "nitstack"
-		else
-			print "Option Error: unknown value `{st}` for --stacktrace. Use `none`, `libunwind`, `nitstack` or `auto`."
-			exit(1)
-		end
 
 		if opt_output.value != null and opt_dir.value != null then
 			print "Option Error: cannot use both --dir and --output"
@@ -212,7 +201,7 @@ class MakefileToolchain
 	fun write_files(compile_dir: String, cfiles: Array[String])
 	do
 		var platform = compiler.target_platform
-		if self.toolcontext.opt_stacktrace.value == "nitstack" and platform.supports_libunwind then compiler.build_c_to_nit_bindings
+		if platform.supports_libunwind then compiler.build_c_to_nit_bindings
 		var cc_opt_with_libgc = "-DWITH_LIBGC"
 		if not platform.supports_libgc then cc_opt_with_libgc = ""
 
@@ -355,25 +344,50 @@ class MakefileToolchain
 
 		makefile.write("CC = ccache cc\nCXX = ccache c++\nCFLAGS = -g -O2 -Wno-unused-value -Wno-switch -Wno-attributes\nCINCL =\nLDFLAGS ?= \nLDLIBS  ?= -lm {linker_options.join(" ")}\n\n")
 
-		var ost = toolcontext.opt_stacktrace.value
-		if (ost == "libunwind" or ost == "nitstack") and platform.supports_libunwind then makefile.write("NEED_LIBUNWIND := YesPlease\n")
+		makefile.write "\n# SPECIAL CONFIGURATION FLAGS\n"
+		if platform.supports_libunwind then
+			if toolcontext.opt_no_stacktrace.value then
+				makefile.write "NO_STACKTRACE=True"
+			else
+				makefile.write "NO_STACKTRACE= # Set to `True` to enable"
+			end
+		end
 
 		# Dynamic adaptations
 		# While `platform` enable complex toolchains, they are statically applied
 		# For a dynamic adaptsation of the compilation, the generated Makefile should check and adapt things itself
+		makefile.write "\n\n"
 
 		# Check and adapt the targeted system
 		makefile.write("uname_S := $(shell sh -c 'uname -s 2>/dev/null || echo not')\n")
-		makefile.write("ifeq ($(uname_S),Darwin)\n")
-		# remove -lunwind since it is already included on macosx
-		makefile.write("\tNEED_LIBUNWIND :=\n")
-		makefile.write("endif\n\n")
 
 		# Check and adapt for the compiler used
 		# clang need an additionnal `-Qunused-arguments`
 		makefile.write("clang_check := $(shell sh -c '$(CC) -v 2>&1 | grep -q clang; echo $$?')\nifeq ($(clang_check), 0)\n\tCFLAGS += -Qunused-arguments\nendif\n")
 
-		makefile.write("ifdef NEED_LIBUNWIND\n\tLDLIBS += -lunwind\nendif\n")
+		if platform.supports_libunwind then
+			makefile.write """
+ifneq ($(NO_STACKTRACE), True)
+  # Check and include lib-unwind in a portable way
+  ifneq ($(uname_S),Darwin)
+    # already included on macosx, but need to get the correct flags in other supported platforms.
+    ifeq ($(shell pkg-config --exists 'libunwind'; echo $$?), 0)
+      LDLIBS += `pkg-config --libs libunwind`
+      CFLAGS += `pkg-config --cflags libunwind`
+    else
+      $(warning "[_] stack-traces disabled. Please install libunwind-dev.")
+      CFLAGS += -D NO_STACKTRACE
+    endif
+  endif
+else
+  # Stacktraces disabled
+  CFLAGS += -D NO_STACKTRACE
+endif
+
+"""
+		else
+			makefile.write("CFLAGS += -D NO_STACKTRACE\n\n")
+		end
 
 		makefile.write("all: {outpath}\n")
 		if outpath != real_outpath then
@@ -623,6 +637,7 @@ abstract class AbstractCompiler
 		self.header.add_decl("#include <string.h>")
 		self.header.add_decl("#include <sys/types.h>\n")
 		self.header.add_decl("#include <unistd.h>\n")
+		self.header.add_decl("#include <stdint.h>\n")
 		self.header.add_decl("#include \"gc_chooser.h\"")
 		self.header.add_decl("#ifdef ANDROID")
 		self.header.add_decl("	#include <android/log.h>")
@@ -730,19 +745,16 @@ extern void nitni_global_ref_decr( struct nitni_ref *ref );
 	do
 		var v = self.new_visitor
 		v.add_decl("#include <signal.h>")
-		var ost = modelbuilder.toolcontext.opt_stacktrace.value
 		var platform = target_platform
-
-		if not platform.supports_libunwind then ost = "none"
 
 		var no_main = platform.no_main or modelbuilder.toolcontext.opt_no_main.value
 
-		if ost == "nitstack" or ost == "libunwind" then
+		if platform.supports_libunwind then
+			v.add_decl("#ifndef NO_STACKTRACE")
 			v.add_decl("#define UNW_LOCAL_ONLY")
 			v.add_decl("#include <libunwind.h>")
-			if ost == "nitstack" then
-				v.add_decl("#include \"c_functions_hash.h\"")
-			end
+			v.add_decl("#include \"c_functions_hash.h\"")
+			v.add_decl("#endif")
 		end
 		v.add_decl("int glob_argc;")
 		v.add_decl("char **glob_argv;")
@@ -776,7 +788,8 @@ extern void nitni_global_ref_decr( struct nitni_ref *ref );
 		end
 
 		v.add_decl("static void show_backtrace(void) \{")
-		if ost == "nitstack" or ost == "libunwind" then
+		if platform.supports_libunwind then
+			v.add_decl("#ifndef NO_STACKTRACE")
 			v.add_decl("char* opt = getenv(\"NIT_NO_STACK\");")
 			v.add_decl("unw_cursor_t cursor;")
 			v.add_decl("if(opt==NULL)\{")
@@ -790,20 +803,17 @@ extern void nitni_global_ref_decr( struct nitni_ref *ref );
 			v.add_decl("PRINT_ERROR(\"-------------------------------------------------\\n\");")
 			v.add_decl("while (unw_step(&cursor) > 0) \{")
 			v.add_decl("	unw_get_proc_name(&cursor, procname, 100, &ip);")
-			if ost == "nitstack" then
 			v.add_decl("	const char* recv = get_nit_name(procname, strlen(procname));")
 			v.add_decl("	if (recv != NULL)\{")
 			v.add_decl("		PRINT_ERROR(\"` %s\\n\", recv);")
 			v.add_decl("	\}else\{")
 			v.add_decl("		PRINT_ERROR(\"` %s\\n\", procname);")
 			v.add_decl("	\}")
-			else
-			v.add_decl("	PRINT_ERROR(\"` %s \\n\",procname);")
-			end
 			v.add_decl("\}")
 			v.add_decl("PRINT_ERROR(\"-------------------------------------------------\\n\");")
 			v.add_decl("free(procname);")
 			v.add_decl("\}")
+			v.add_decl("#endif /* NO_STACKTRACE */")
 		end
 		v.add_decl("\}")
 
@@ -1662,8 +1672,9 @@ abstract class AbstractCompilerVisitor
 		if nexpr == null then return
 		if nexpr.mtype == null and not nexpr.is_typed then
 			# Untyped expression.
-			# Might mean dead code
-			# So just return
+			# Might mean dead code or invalid code
+			# so aborts
+			add_abort("FATAL: bad statement executed.")
 			return
 		end
 
@@ -1687,8 +1698,10 @@ abstract class AbstractCompilerVisitor
 	do
 		if nexpr.mtype == null then
 			# Untyped expression.
-			# Might mean dead code
-			# so return a placebo result
+			# Might mean dead code or invalid code.
+			# so aborts
+			add_abort("FATAL: bad expression executed.")
+			# and return a placebo result to please the C compiler
 			if mtype == null then mtype = compiler.mainmodule.object_type
 			return new_var(mtype)
 		end
@@ -1860,13 +1873,13 @@ redef class MClassType
 		else if mclass.name == "Bool" then
 			return "short int"
 		else if mclass.name == "Char" then
-			return "char"
+			return "uint32_t"
 		else if mclass.name == "Float" then
 			return "double"
 		else if mclass.name == "Byte" then
 			return "unsigned char"
 		else if mclass.name == "NativeString" then
-			return "char*"
+			return "unsigned char*"
 		else if mclass.name == "NativeArray" then
 			return "val*"
 		else
@@ -2131,12 +2144,12 @@ redef class AMethPropdef
 				v.ret(v.new_expr("(unsigned char){arguments[0]}", ret.as(not null)))
 				return true
 			else if pname == "ascii" then
-				v.ret(v.new_expr("{arguments[0]}", ret.as(not null)))
+				v.ret(v.new_expr("(uint32_t){arguments[0]}", ret.as(not null)))
 				return true
 			end
 		else if cname == "Char" then
 			if pname == "output" then
-				v.add("printf(\"%c\", {arguments.first});")
+				v.add("printf(\"%c\", ((unsigned char){arguments.first}));")
 				return true
 			else if pname == "object_id" then
 				v.ret(v.new_expr("(long){arguments.first}", ret.as(not null)))
@@ -2170,7 +2183,7 @@ redef class AMethPropdef
 				v.ret(v.new_expr("{arguments[0]}-'0'", ret.as(not null)))
 				return true
 			else if pname == "ascii" then
-				v.ret(v.new_expr("(unsigned char){arguments[0]}", ret.as(not null)))
+				v.ret(v.new_expr("(long){arguments[0]}", ret.as(not null)))
 				return true
 			end
 		else if cname == "Byte" then
@@ -2310,10 +2323,10 @@ redef class AMethPropdef
 			end
 		else if cname == "NativeString" then
 			if pname == "[]" then
-				v.ret(v.new_expr("{arguments[0]}[{arguments[1]}]", ret.as(not null)))
+				v.ret(v.new_expr("(uint32_t){arguments[0]}[{arguments[1]}]", ret.as(not null)))
 				return true
 			else if pname == "[]=" then
-				v.add("{arguments[0]}[{arguments[1]}]={arguments[2]};")
+				v.add("{arguments[0]}[{arguments[1]}]=(unsigned char){arguments[2]};")
 				return true
 			else if pname == "copy_to" then
 				v.add("memmove({arguments[1]}+{arguments[4]},{arguments[0]}+{arguments[3]},{arguments[2]});")
@@ -2325,7 +2338,7 @@ redef class AMethPropdef
 				v.ret(v.new_expr("{arguments[0]} + {arguments[1]}", ret.as(not null)))
 				return true
 			else if pname == "new" then
-				v.ret(v.new_expr("(char*)nit_alloc({arguments[1]})", ret.as(not null)))
+				v.ret(v.new_expr("(unsigned char*)nit_alloc({arguments[1]})", ret.as(not null)))
 				return true
 			end
 		else if cname == "NativeArray" then
@@ -2339,7 +2352,7 @@ redef class AMethPropdef
 			v.ret(v.new_expr("glob_sys", ret.as(not null)))
 			return true
 		else if pname == "calloc_string" then
-			v.ret(v.new_expr("(char*)nit_alloc({arguments[1]})", ret.as(not null)))
+			v.ret(v.new_expr("(unsigned char*)nit_alloc({arguments[1]})", ret.as(not null)))
 			return true
 		else if pname == "calloc_array" then
 			v.calloc_array(ret.as(not null), arguments)
@@ -2444,7 +2457,7 @@ redef class AAttrPropdef
 			var res
 			if is_lazy then
 				var set
-				var ret = self.mpropdef.static_mtype
+				var ret = self.mtype
 				var useiset = not ret.is_c_primitive and not ret isa MNullableType
 				var guard = self.mlazypropdef.mproperty
 				if useiset then
@@ -2472,7 +2485,7 @@ redef class AAttrPropdef
 			assert arguments.length == 2
 			v.write_attribute(self.mpropdef.mproperty, arguments.first, arguments[1])
 			if is_lazy then
-				var ret = self.mpropdef.static_mtype
+				var ret = self.mtype
 				var useiset = not ret.is_c_primitive and not ret isa MNullableType
 				if not useiset then
 					v.write_attribute(self.mlazypropdef.mproperty, arguments.first, v.bool_instance(true))
@@ -2494,11 +2507,11 @@ redef class AAttrPropdef
 		var oldnode = v.current_node
 		v.current_node = self
 		var old_frame = v.frame
-		var frame = new StaticFrame(v, self.mpropdef.as(not null), recv.mcasttype.undecorate.as(MClassType), [recv])
+		var frame = new StaticFrame(v, self.mreadpropdef.as(not null), recv.mcasttype.undecorate.as(MClassType), [recv])
 		v.frame = frame
 
 		var value
-		var mtype = self.mpropdef.static_mtype
+		var mtype = self.mtype
 		assert mtype != null
 
 		var nexpr = self.n_expr

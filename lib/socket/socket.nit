@@ -71,14 +71,29 @@ class TCPStream
 			closed = true
 			return
 		end
-		var hostname = socket.gethostbyname(host)
-		addrin = new NativeSocketAddrIn.with_hostent(hostname, port)
 
+		var hostname = sys.gethostbyname(host.to_cstring)
+		if hostname.address_is_null then
+			# Error in name lookup
+			var err = sys.h_errno
+			last_error = new IOError(err.to_s)
+
+			closed = true
+			end_reached = true
+
+			return
+		end
+
+		addrin = new NativeSocketAddrIn.with_hostent(hostname, port)
 		address = addrin.address
 		init(addrin.port, hostname.h_name)
 
 		closed = not internal_connect
 		end_reached = closed
+		if closed then
+			# Connection failed
+			last_error = new IOError(errno.strerror)
+		end
 	end
 
 	# Creates a client socket, this is meant to be used by accept only

@@ -320,14 +320,14 @@ class Neo4jClient
 
 	# GET JSON data from `url`
 	fun get(url: String): Jsonable do
-		var request = new JsonGET(url, curl)
+		var request = new JsonGET(url)
 		var response = request.execute
 		return parse_response(response)
 	end
 
 	# POST `params` to `url`
 	fun post(url: String, params: Jsonable): Jsonable do
-		var request = new JsonPOST(url, curl)
+		var request = new JsonPOST(url)
 		request.data = params
 		var response = request.execute
 		return parse_response(response)
@@ -335,7 +335,7 @@ class Neo4jClient
 
 	# PUT `params` at `url`
 	fun put(url: String, params: Jsonable): Jsonable do
-		var request = new JsonPUT(url, curl)
+		var request = new JsonPUT(url)
 		request.data = params
 		var response = request.execute
 		return parse_response(response)
@@ -343,7 +343,7 @@ class Neo4jClient
 
 	# DELETE `url`
 	fun delete(url: String): Jsonable do
-		var request = new JsonDELETE(url, curl)
+		var request = new JsonDELETE(url)
 		var response = request.execute
 		return parse_response(response)
 	end
@@ -912,7 +912,7 @@ class NeoBatch
 
 	# Execute the batch and update local nodes
 	fun execute: List[NeoError] do
-		var request = new JsonPOST(client.batch_url, client.curl)
+		var request = new JsonPOST(client.batch_url)
 		# request.headers["X-Stream"] = "true"
 		var json_jobs = new JsonArray
 		for job in jobs.values do json_jobs.add job.to_rest

@@ -23,3 +23,14 @@ print(f.to_s)
 print(f.to_precision(3))
 print(f.to_precision(1))
 print(f.to_precision(0))
+f = 5.0e-1
+print(f)
+f = 3.125e-6
+print(f.to_precision(3))
+print(f.to_precision(9))
+f = 3.41e3
+print f
+f = 4e2
+print f
+f = .1e2
+print f

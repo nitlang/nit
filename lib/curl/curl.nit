@@ -14,37 +14,39 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Network functionnalities based on Curl_c module.
+# Curl services: `CurlHTTPRequest` and `CurlMail`
 module curl
 
-import curl_c
+import native_curl
 
-# Top level of Curl
+redef class Sys
+	# Shared Curl library handle
+	#
+	# Usually, you do not have to use this attribute, it instancied by `CurlHTTPRequest` and `CurlMail`.
+	# But in some cases you may want to finalize it to free some small resources.
+	# However, if Curl services are needed once again, this attribute must be manually set.
+	var curl: Curl = new Curl is lazy, writable
+end
+
+# Curl library handle, it is initialized and released with this class
 class Curl
-	protected var prim_curl = new CCurl.easy_init
+	super FinalizableOnce
 
-	init
-	do
-		assert curlInstance:self.prim_curl.is_init else
-			print "Curl must be instancied to be used"
-		end
-	end
+	private var native = new NativeCurl.easy_init
 
 	# Check for correct initialization
-	fun is_ok: Bool do return self.prim_curl.is_init
+	fun is_ok: Bool do return self.native.is_init
 
-	# Release Curl instance
-	fun destroy do self.prim_curl.easy_clean
+	redef fun finalize_once do if is_ok then native.easy_clean
 end
 
 # CURL Request
 class CurlRequest
 
-	var verbose: Bool = false is writable
-	private var curl: nullable Curl = null
+	private var curl: Curl = sys.curl
 
-	# Launch request method
-	fun execute: CurlResponse is abstract
+	# Shall this request be verbose?
+	var verbose: Bool = false is writable
 
 	# Intern perform method, lowest level of request launching
 	private fun perform: nullable CurlResponseFailed
@@ -53,10 +55,10 @@ class CurlRequest
 
 		var err
 
-		err = self.curl.prim_curl.easy_setopt(new CURLOption.verbose, self.verbose)
+		err = self.curl.native.easy_setopt(new CURLOption.verbose, self.verbose)
 		if not err.is_ok then return answer_failure(err.to_i, err.to_s)
 
-		err = self.curl.prim_curl.easy_perform
+		err = self.curl.native.easy_perform
 		if not err.is_ok then return answer_failure(err.to_i, err.to_s)
 
 		return null
@@ -72,26 +74,18 @@ end
 # CURL HTTP Request
 class CurlHTTPRequest
 	super CurlRequest
-	super CCurlCallbacks
-	super CurlCallbacksRegisterIntern
+	super NativeCurlCallbacks
 
 	var url: String
-	var datas: nullable HeaderMap = null is writable
-	var headers: nullable HeaderMap = null is writable
+	var datas: nullable HeaderMap is writable
+	var headers: nullable HeaderMap is writable
+	var delegate: nullable CurlCallbacks is writable
 
 	# Set the user agent for all following HTTP requests
-	fun user_agent=(name: String)
-	do
-		curl.prim_curl.easy_setopt(new CURLOption.user_agent, name)
-	end
-
-	init (url: String, curl: nullable Curl) is old_style_init do
-		self.url = url
-		self.curl = curl
-	end
+	var user_agent: nullable String is writable
 
 	# Execute HTTP request with settings configured through attribute
-	redef fun execute
+	fun execute: CurlResponse
 	do
 		if not self.curl.is_ok then return answer_failure(0, "Curl instance is not correctly initialized")
 
@@ -101,38 +95,46 @@ class CurlHTTPRequest
 
 		var err
 
-		err = self.curl.prim_curl.easy_setopt(new CURLOption.follow_location, 1)
+		err = self.curl.native.easy_setopt(new CURLOption.follow_location, 1)
 		if not err.is_ok then return answer_failure(err.to_i, err.to_s)
 
-		err = self.curl.prim_curl.easy_setopt(new CURLOption.url, url)
+		err = self.curl.native.easy_setopt(new CURLOption.url, url)
 		if not err.is_ok then return answer_failure(err.to_i, err.to_s)
+
+		var user_agent = user_agent
+		if user_agent != null then
+			err = curl.native.easy_setopt(new CURLOption.user_agent, user_agent)
+			if not err.is_ok then return answer_failure(err.to_i, err.to_s)
+		end
 
 		# Callbacks
-		err = self.curl.prim_curl.register_callback(callback_receiver, new CURLCallbackType.header)
+		err = self.curl.native.register_callback_header(callback_receiver)
 		if not err.is_ok then return answer_failure(err.to_i, err.to_s)
 
-		err = self.curl.prim_curl.register_callback(callback_receiver, new CURLCallbackType.body)
+		err = self.curl.native.register_callback_body(callback_receiver)
 		if not err.is_ok then return answer_failure(err.to_i, err.to_s)
 
 		# HTTP Header
-		if self.headers != null then
-			var headers_joined = self.headers.join_pairs(": ")
-			err = self.curl.prim_curl.easy_setopt(new CURLOption.httpheader, headers_joined.to_curlslist)
+		var headers = self.headers
+		if headers != null then
+			var headers_joined = headers.join_pairs(": ")
+			err = self.curl.native.easy_setopt(new CURLOption.httpheader, headers_joined.to_curlslist)
 			if not err.is_ok then return answer_failure(err.to_i, err.to_s)
 		end
 
 		# Datas
-		if self.datas != null then
-			var postdatas = self.datas.to_url_encoded(self.curl.prim_curl)
-			err = self.curl.prim_curl.easy_setopt(new CURLOption.postfields, postdatas)
+		var datas = self.datas
+		if datas != null then
+			var postdatas = datas.to_url_encoded(self.curl)
+			err = self.curl.native.easy_setopt(new CURLOption.postfields, postdatas)
 			if not err.is_ok then return answer_failure(err.to_i, err.to_s)
 		end
 
 		var err_resp = perform
 		if err_resp != null then return err_resp
 
-		var st_code = self.curl.prim_curl.easy_getinfo_long(new CURLInfoLong.response_code)
-		if not st_code == null then success_response.status_code = st_code.response
+		var st_code = self.curl.native.easy_getinfo_long(new CURLInfoLong.response_code)
+		if not st_code == null then success_response.status_code = st_code
 
 		return success_response
 	end
@@ -147,16 +149,16 @@ class CurlHTTPRequest
 
 		var err
 
-		err = self.curl.prim_curl.easy_setopt(new CURLOption.follow_location, 1)
+		err = self.curl.native.easy_setopt(new CURLOption.follow_location, 1)
 		if not err.is_ok then return answer_failure(err.to_i, err.to_s)
 
-		err = self.curl.prim_curl.easy_setopt(new CURLOption.url, url)
+		err = self.curl.native.easy_setopt(new CURLOption.url, url)
 		if not err.is_ok then return answer_failure(err.to_i, err.to_s)
 
-		err = self.curl.prim_curl.register_callback(callback_receiver, new CURLCallbackType.header)
+		err = self.curl.native.register_callback_header(callback_receiver)
 		if not err.is_ok then return answer_failure(err.to_i, err.to_s)
 
-		err = self.curl.prim_curl.register_callback(callback_receiver, new CURLCallbackType.stream)
+		err = self.curl.native.register_callback_stream(callback_receiver)
 		if not err.is_ok then return answer_failure(err.to_i, err.to_s)
 
 		var opt_name
@@ -168,71 +170,109 @@ class CurlHTTPRequest
 			return answer_failure(0, "Unable to extract file name, please specify one")
 		end
 
-		success_response.i_file = new OFile.open(opt_name.to_cstring)
-		if not success_response.i_file.is_valid then
-			success_response.i_file.close
+		success_response.file = new FileWriter.open(opt_name)
+		if not success_response.file.is_writable then
 			return answer_failure(0, "Unable to create associated file")
 		end
 
 		var err_resp = perform
 		if err_resp != null then return err_resp
 
-		var st_code = self.curl.prim_curl.easy_getinfo_long(new CURLInfoLong.response_code)
-		if not st_code == null then success_response.status_code = st_code.response
+		var st_code = self.curl.native.easy_getinfo_long(new CURLInfoLong.response_code)
+		if not st_code == null then success_response.status_code = st_code
 
-		var speed = self.curl.prim_curl.easy_getinfo_double(new CURLInfoDouble.speed_download)
-		if not speed == null then success_response.speed_download = speed.response
+		var speed = self.curl.native.easy_getinfo_double(new CURLInfoDouble.speed_download)
+		if not speed == null then success_response.speed_download = speed
 
-		var size = self.curl.prim_curl.easy_getinfo_double(new CURLInfoDouble.size_download)
-		if not size == null then success_response.size_download = size.response
+		var size = self.curl.native.easy_getinfo_double(new CURLInfoDouble.size_download)
+		if not size == null then success_response.size_download = size
 
-		var time = self.curl.prim_curl.easy_getinfo_double(new CURLInfoDouble.total_time)
-		if not time == null then success_response.total_time = time.response
+		var time = self.curl.native.easy_getinfo_double(new CURLInfoDouble.total_time)
+		if not time == null then success_response.total_time = time
 
-		success_response.i_file.close
+		success_response.file.close
 
 		return success_response
 	end
 end
 
 # CURL Mail Request
-class CurlMailRequest
+#
+# ~~~
+# # Craft mail
+# var mail = new CurlMail("sender@example.org",
+#                            to=["to@example.org"], cc=["bob@example.org"])
+#
+# mail.headers_body["Content-Type:"] = """text/html; charset="UTF-8""""
+# mail.headers_body["Content-Transfer-Encoding:"] = "quoted-printable"
+#
+# mail.body = "<h1>Here you can write HTML stuff.</h1>"
+# mail.subject = "Hello From My Nit Program"
+#
+# # Set mail server
+# var error = mail.set_outgoing_server("smtps://smtp.example.org:465",
+#                                      "user@example.org", "mypassword")
+# if error != null then
+#     print "Mail Server Error: {error}"
+#     exit 0
+# end
+#
+# # Send
+# error = mail.execute
+# if error != null then
+#     print "Transfer Error: {error}"
+#     exit 0
+# end
+# ~~~
+class CurlMail
 	super CurlRequest
-	super CCurlCallbacks
+	super NativeCurlCallbacks
 
-	var headers: nullable HeaderMap = null is writable
-	var headers_body: nullable HeaderMap = null is writable
-	var from: nullable String = null is writable
-	var to: nullable Array[String] = null is writable
-	var cc: nullable Array[String] = null is writable
-	var bcc: nullable Array[String] = null is writable
-	var subject: nullable String = "" is writable
-	var body: nullable String = "" is writable
-	private var supported_outgoing_protocol: Array[String] = ["smtp", "smtps"]
+	# Address of the sender
+	var from: nullable String is writable
 
-	init (curl: nullable Curl) is old_style_init do
-		self.curl = curl
-	end
+	# Main recipients
+	var to: nullable Array[String] is writable
 
-	# Helper method to add conventional space while building entire mail
-	private fun add_conventional_space(str: String):String do return "{str}\n" end
+	# Subject line
+	var subject: nullable String is writable
+
+	# Text content
+	var body: nullable String is writable
+
+	# CC recipients
+	var cc: nullable Array[String] is writable
+
+	# BCC recipients (hidden from other recipients)
+	var bcc: nullable Array[String] is writable
+
+	# HTTP header
+	var headers = new HeaderMap is lazy, writable
+
+	# Content header
+	var headers_body = new HeaderMap is lazy, writable
+
+	# Protocols supported to send mail to a server
+	#
+	# Default value at `["smtp", "smtps"]`
+	var supported_outgoing_protocol: Array[String] = ["smtp", "smtps"]
 
 	# Helper method to add pair values to mail content while building it (ex: "To:", "address@mail.com")
-	private fun add_pair_to_content(str: String, att: String, val: nullable String):String
+	private fun add_pair_to_content(str: String, att: String, val: nullable String): String
 	do
 		if val != null then return "{str}{att}{val}\n"
 		return "{str}{att}\n"
 	end
 
 	# Helper method to add entire list of pairs to mail content
-	private fun add_pairs_to_content(content: String, pairs: HeaderMap):String
+	private fun add_pairs_to_content(content: String, pairs: HeaderMap): String
 	do
 		for h_key, h_val in pairs do content = add_pair_to_content(content, h_key, h_val)
 		return content
 	end
 
 	# Check for host and protocol availability
-	private fun is_supported_outgoing_protocol(host: String):CURLCode
+	private fun is_supported_outgoing_protocol(host: String): CURLCode
 	do
 		var host_reach = host.split_with("://")
 		if host_reach.length > 1 and supported_outgoing_protocol.has(host_reach[0]) then return once new CURLCode.ok
@@ -250,14 +290,16 @@ class CurlMailRequest
 		# Host & Protocol
 		err = is_supported_outgoing_protocol(host)
 		if not err.is_ok then return answer_failure(err.to_i, err.to_s)
-		err = self.curl.prim_curl.easy_setopt(new CURLOption.url, host)
+
+		err = self.curl.native.easy_setopt(new CURLOption.url, host)
 		if not err.is_ok then return answer_failure(err.to_i, err.to_s)
 
 		# Credentials
 		if not user == null and not pwd == null then
-			err = self.curl.prim_curl.easy_setopt(new CURLOption.username, user)
+			err = self.curl.native.easy_setopt(new CURLOption.username, user)
 			if not err.is_ok then return answer_failure(err.to_i, err.to_s)
-			err = self.curl.prim_curl.easy_setopt(new CURLOption.password, pwd)
+
+			err = self.curl.native.easy_setopt(new CURLOption.password, pwd)
 			if not err.is_ok then return answer_failure(err.to_i, err.to_s)
 		end
 
@@ -265,78 +307,88 @@ class CurlMailRequest
 	end
 
 	# Execute Mail request with settings configured through attribute
-	redef fun execute
+	fun execute: nullable CurlResponseFailed
 	do
 		if not self.curl.is_ok then return answer_failure(0, "Curl instance is not correctly initialized")
 
-		var success_response = new CurlMailResponseSuccess
-		var content = ""
+		var lines = new Array[String]
+
 		# Headers
-		if self.headers != null then
-			content = add_pairs_to_content(content, self.headers.as(not null))
+		var headers = self.headers
+		if not headers.is_empty then
+			for k, v in headers do lines.add "{k}{v}"
 		end
 
 		# Recipients
-		var g_rec = new Array[String]
-		if self.to != null and self.to.length > 0 then
-			content = add_pair_to_content(content, "To:", self.to.join(","))
-			g_rec.append(self.to.as(not null))
+		var all_recipients = new Array[String]
+		var to = self.to
+		if to != null and to.length > 0 then
+			lines.add "To:{to.join(",")}"
+			all_recipients.append to
 		end
-		if self.cc != null and self.cc.length > 0 then
-			content = add_pair_to_content(content, "Cc:", self.cc.join(","))
-			g_rec.append(self.cc.as(not null))
+
+		var cc = self.cc
+		if cc != null and cc.length > 0 then
+			lines.add "Cc:{cc.join(",")}"
+			all_recipients.append cc
 		end
-		if self.bcc != null and self.bcc.length > 0 then g_rec.append(self.bcc.as(not null))
 
-		if g_rec.length < 1 then return answer_failure(0, "The mail recipients can not be empty")
+		var bcc = self.bcc
+		if bcc != null and bcc.length > 0 then all_recipients.append bcc
 
-		var err
+		if all_recipients.is_empty then return answer_failure(0, "There must be at lease one recipient")
 
-		err = self.curl.prim_curl.easy_setopt(new CURLOption.follow_location, 1)
+		var err = self.curl.native.easy_setopt(new CURLOption.follow_location, 1)
 		if not err.is_ok then return answer_failure(err.to_i, err.to_s)
 
-		err = self.curl.prim_curl.easy_setopt(new CURLOption.mail_rcpt, g_rec.to_curlslist)
+		err = self.curl.native.easy_setopt(new CURLOption.mail_rcpt, all_recipients.to_curlslist)
 		if not err.is_ok then return answer_failure(err.to_i, err.to_s)
 
 		# From
-		if not self.from == null then
-			content = add_pair_to_content(content, "From:", self.from)
-			err = self.curl.prim_curl.easy_setopt(new CURLOption.mail_from, self.from.as(not null))
+		var from = self.from
+		if not from == null then
+			lines.add "From:{from}"
+
+			err = self.curl.native.easy_setopt(new CURLOption.mail_from, from)
 			if not err.is_ok then return answer_failure(err.to_i, err.to_s)
 		end
 
 		# Subject
-		content = add_pair_to_content(content, "Subject:", self.subject)
+		var subject = self.subject
+		if subject == null then subject = "" # Default
+		lines.add "Subject: {subject}"
 
 		# Headers body
-		if self.headers_body != null then
-			content = add_pairs_to_content(content, self.headers_body.as(not null))
+		var headers_body = self.headers_body
+		if not headers_body.is_empty then
+			for k, v in headers_body do lines.add "{k}{v}"
 		end
 
 		# Body
-		content = add_conventional_space(content)
-		content = add_pair_to_content(content, "", self.body)
-		content = add_conventional_space(content)
-		err = self.curl.prim_curl.register_callback(self, once new CURLCallbackType.read)
+		var body = self.body
+		if body == null then body = "" # Default
+
+		lines.add ""
+		lines.add body
+		lines.add ""
+
+		err = self.curl.native.register_callback_read(self)
 		if not err.is_ok then return answer_failure(err.to_i, err.to_s)
-		err = self.curl.prim_curl.register_read_datas_callback(self, content)
+
+		var content = lines.join("\n")
+		err = self.curl.native.register_read_datas_callback(self, content)
 		if not err.is_ok then return answer_failure(err.to_i, err.to_s)
 
 		var err_resp = perform
 		if err_resp != null then return err_resp
 
-		return success_response
+		return null
 	end
 end
 
 # Callbacks Interface, allow you to manage in your way the different streams
 interface CurlCallbacks
-	super CCurlCallbacks
-end
-
-# Callbacks attributes
-abstract class CurlCallbacksRegisterIntern
-	var delegate: nullable CurlCallbacks = null is writable
+	super NativeCurlCallbacks
 end
 
 # Abstract Curl request response
@@ -349,6 +401,8 @@ class CurlResponseFailed
 
 	var error_code: Int
 	var error_msg: String
+
+	redef fun to_s do return "{error_msg} ({error_code})"
 end
 
 # Success Abstract Response Success Class
@@ -382,64 +436,63 @@ class CurlResponseSuccess
 	end
 end
 
-# Success Response Class of mail request
-class CurlMailResponseSuccess
-	super CurlResponseSuccessIntern
-end
-
 # Success Response Class of a downloaded File
 class CurlFileResponseSuccess
 	super CurlResponseSuccessIntern
 
 	var status_code = 0
-	var speed_download = 0
-	var size_download = 0
-	var total_time = 0
-	private var i_file: nullable OFile = null
+	var speed_download = 0.0
+	var size_download = 0.0
+	var total_time = 0.0
+	private var file: nullable FileWriter = null
 
 	# Receive bytes stream from request due to stream callback registering
-	redef fun stream_callback(buffer, size, count)
+	redef fun stream_callback(buffer)
 	do
-		self.i_file.write(buffer, size, count)
+		file.write buffer
 	end
 end
 
-# Pseudo map associating Strings to Strings,
-# each key can have multiple associations
-# and the order of insertion is important.
+# Pseudo map associating `String` to `String` for HTTP exchanges
+#
+# This structure differs from `Map` as each key can have multiple associations
+# and the order of insertion is important to some services.
 class HeaderMap
-	private var arr = new Array[Couple[String, String]]
+	private var array = new Array[Couple[String, String]]
 
-	fun []=(k, v: String) do arr.add(new Couple[String, String](k, v))
+	# Add a `value` associated to `key`
+	fun []=(key, value: String)
+	do
+		array.add new Couple[String, String](key, value)
+	end
 
+	# Get a list of the keys associated to `key`
 	fun [](k: String): Array[String]
 	do
 		var res = new Array[String]
-		for c in arr do if c.first == k then res.add(c.second)
+		for c in array do if c.first == k then res.add c.second
 		return res
 	end
 
+	# Iterate over all the associations in `self`
 	fun iterator: MapIterator[String, String] do return new HeaderMapIterator(self)
 
-	# Convert Self to a single string used to post http fields
-	fun to_url_encoded(curl: CCurl): String
+	# Get `self` as a single string for HTTP POST
+	#
+	# Require: `curl.is_ok`
+	fun to_url_encoded(curl: Curl): String
 	do
-		assert curlNotInitialized: curl.is_init else
-			print "to_url_encoded required a valid instance of CCurl Object."
-		end
-		var str = ""
-		var length = self.length
-		var i = 0
+		assert curl.is_ok
+
+		var lines = new Array[String]
 		for k, v in self do
-			if k.length > 0 then
-				k = curl.escape(k)
-				v = curl.escape(v)
-				str = "{str}{k}={v}"
-				if i < length-1 then str = "{str}&"
-			end
-			i += 1
+			if k.length == 0 then continue
+
+			k = curl.native.escape(k)
+			v = curl.native.escape(v)
+			lines.add "{k}={v}"
 		end
-		return str
+		return lines.join("&")
 	end
 
 	# Concatenate couple of 'key value' separated by 'sep' in Array
@@ -450,15 +503,18 @@ class HeaderMap
 		return col
 	end
 
-	fun length: Int do return arr.length
-	fun is_empty: Bool do return arr.is_empty
+	# Number of values in `self`
+	fun length: Int do return array.length
+
+	# Is this map empty?
+	fun is_empty: Bool do return array.is_empty
 end
 
-class HeaderMapIterator
+private class HeaderMapIterator
 	super MapIterator[String, String]
 
-	private var iterator: Iterator[Couple[String, String]]
-	init(map: HeaderMap) is old_style_init do self.iterator = map.arr.iterator
+	var map: HeaderMap
+	var iterator: Iterator[Couple[String, String]] = map.array.iterator is lazy
 
 	redef fun is_ok do return self.iterator.is_ok
 	redef fun next do self.iterator.next

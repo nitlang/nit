@@ -625,6 +625,7 @@ class SeparateCompiler
 		for cd in mmodule.mclassdefs do
 			for pd in cd.mpropdefs do
 				if not pd isa MMethodDef then continue
+				if pd.msignature == null then continue # Skip broken method
 				var rta = runtime_type_analysis
 				if modelbuilder.toolcontext.opt_skip_dead_methods.value and rta != null and not rta.live_methoddefs.has(pd) then continue
 				#print "compile {pd} @ {cd} @ {mmodule}"
@@ -1193,7 +1194,7 @@ class SeparateCompilerVisitor
 				if mtype.name == "Int" then
 					return self.new_expr("(long)({value})>>2", mtype)
 				else if mtype.name == "Char" then
-					return self.new_expr("(char)((long)({value})>>2)", mtype)
+					return self.new_expr("(uint32_t)((long)({value})>>2)", mtype)
 				else if mtype.name == "Bool" then
 					return self.new_expr("(short int)((long)({value})>>2)", mtype)
 				else

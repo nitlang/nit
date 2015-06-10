@@ -648,7 +648,7 @@ end
 
 redef class Variable
 	# The declared type of the variable
-	var declared_type: nullable MType
+	var declared_type: nullable MType is writable
 
 	# Was the variable type-adapted?
 	# This is used to speedup type retrieval while it remains `false`
@@ -760,15 +760,15 @@ redef class AAttrPropdef
 	do
 		if not has_value then return
 
-		var mpropdef = self.mpropdef
-		if mpropdef == null then return # skip error
+		var mpropdef = self.mreadpropdef
+		if mpropdef == null or mpropdef.msignature == null then return # skip error
 
 		var v = new TypeVisitor(modelbuilder, mpropdef.mclassdef.mmodule, mpropdef)
 		self.selfvariable = v.selfvariable
 
 		var nexpr = self.n_expr
 		if nexpr != null then
-			var mtype = self.mpropdef.static_mtype
+			var mtype = self.mtype
 			v.visit_expr_subtype(nexpr, mtype)
 		end
 		var nblock = self.n_block
@@ -960,7 +960,7 @@ redef class AVarReassignExpr
 
 		v.set_variable(self, variable, rettype)
 
-		self.is_typed = true
+		self.is_typed = rettype != null
 	end
 end
 
@@ -1006,9 +1006,11 @@ redef class AReturnExpr
 			else
 				v.visit_expr(nexpr)
 				v.error(nexpr, "Error: `return` with value in a procedure.")
+				return
 			end
 		else if ret_type != null then
 			v.error(self, "Error: `return` without value in a function.")
+			return
 		end
 		self.is_typed = true
 	end
@@ -2061,7 +2063,7 @@ redef class AAttrAssignExpr
 		var mtype = self.attr_type
 
 		v.visit_expr_subtype(self.n_value, mtype)
-		self.is_typed = true
+		self.is_typed = mtype != null
 	end
 end
 
@@ -2072,9 +2074,9 @@ redef class AAttrReassignExpr
 		var mtype = self.attr_type
 		if mtype == null then return # Skip error
 
-		self.resolve_reassignment(v, mtype, mtype)
+		var rettype = self.resolve_reassignment(v, mtype, mtype)
 
-		self.is_typed = true
+		self.is_typed = rettype != null
 	end
 end
 

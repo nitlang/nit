@@ -33,13 +33,13 @@ end
 # A local variable (including parameters, automatic variables and self)
 class Variable
 	# The name of the variable (as used in the program)
-	var name: String
+	var name: String is writable
 
 	# Alias of `name`
 	redef fun to_s do return self.name
 
 	# The declaration of the variable, if any
-	var location: nullable Location = null
+	var location: nullable Location = null is writable
 
 	# Is the local variable not read and need a warning?
 	var warn_unread = false is writable
@@ -439,7 +439,7 @@ end
 
 redef class AVarFormExpr
 	# The associated variable
-	var variable: nullable Variable
+	var variable: nullable Variable is writable
 end
 
 redef class ACallFormExpr

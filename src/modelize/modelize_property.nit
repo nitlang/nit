@@ -158,9 +158,6 @@ redef class ModelBuilder
 			return
 		end
 
-		# Is the class forbid constructors?
-		if not mclassdef.mclass.kind.need_init then return
-
 		# Is there already a constructor defined?
 		var defined_init: nullable MMethodDef = null
 		for mpropdef in mclassdef.mpropdefs do
@@ -182,17 +179,10 @@ redef class ModelBuilder
 		var initializers = new Array[MProperty]
 		for npropdef in nclassdef.n_propdefs do
 			if npropdef isa AMethPropdef then
+				if not npropdef.is_autoinit then continue # Skip non tagged autoinit
 				if npropdef.mpropdef == null then return # Skip broken method
-				var at = npropdef.get_single_annotation("autoinit", self)
-				if at == null then continue # Skip non tagged init
-
 				var sig = npropdef.mpropdef.msignature
 				if sig == null then continue # Skip broken method
-
-				if not npropdef.mpropdef.is_intro then
-					self.error(at, "Error: `autoinit` cannot be set on redefinitions.")
-					continue
-				end
 
 				for param in sig.mparameters do
 					var ret_type = param.mtype
@@ -743,6 +733,8 @@ end
 redef class AMethPropdef
 	redef type MPROPDEF: MMethodDef
 
+	# Is the method annotated `autoinit`?
+	var is_autoinit = false
 
 	# Can self be used as a root init?
 	private fun look_like_a_root_init(modelbuilder: ModelBuilder, mclassdef: MClassDef): Bool
@@ -988,6 +980,17 @@ redef class AMethPropdef
 		# Check annotations
 		var at = self.get_single_annotation("lazy", modelbuilder)
 		if at != null then modelbuilder.error(at, "Syntax Error: `lazy` must be used on attributes.")
+
+		var atautoinit = self.get_single_annotation("autoinit", modelbuilder)
+		if atautoinit != null then
+			if not mpropdef.is_intro then
+				modelbuilder.error(atautoinit, "Error: `autoinit` cannot be set on redefinitions.")
+			else if not mclassdef.is_intro then
+				modelbuilder.error(atautoinit, "Error: `autoinit` cannot be used in class refinements.")
+			else
+				self.is_autoinit = true
+			end
+		end
 	end
 
 	redef fun check_signature(modelbuilder)
@@ -1135,6 +1138,10 @@ end
 redef class AAttrPropdef
 	redef type MPROPDEF: MAttributeDef
 
+	# The static type of the property (declared, inferred or inherited)
+	# This attribute is also used to check if the property was analyzed and is valid.
+	var mtype: nullable MType
+
 	# Is the node tagged `noinit`?
 	var noinit = false
 
@@ -1209,8 +1216,7 @@ redef class AAttrPropdef
 				return
 			end
 			if atabstract != null then
-				modelbuilder.error(atnoinit, "Error: `noautoinit` attributes cannot be abstract.")
-				return
+				modelbuilder.warning(atnoinit, "useless-noautoinit", "Warning: superfluous `noautoinit` on abstract attribute.")
 			end
 		end
 
@@ -1282,6 +1288,22 @@ redef class AAttrPropdef
 		modelbuilder.mpropdef2npropdef[mwritepropdef] = self
 		mwritepropdef.mdoc = mreadpropdef.mdoc
 		if atabstract != null then mwritepropdef.is_abstract = true
+
+		var atautoinit = self.get_single_annotation("autoinit", modelbuilder)
+		if atautoinit != null then
+			if has_value then
+				modelbuilder.error(atautoinit, "Error: `autoinit` attributes cannot have an initial value.")
+			else if not mwritepropdef.is_intro then
+				modelbuilder.error(atautoinit, "Error: `autoinit` attributes cannot be set on redefinitions.")
+			else if not mclassdef.is_intro then
+				modelbuilder.error(atautoinit, "Error: `autoinit` attributes cannot be used in class refinements.")
+			else if atabstract == null then
+				modelbuilder.warning(atautoinit, "useless-autoinit", "Warning: superfluous `autoinit` on attribute.")
+			end
+		else if atabstract != null then
+			# By default, abstract attribute are not autoinit
+			noinit = true
+		end
 	end
 
 	redef fun build_signature(modelbuilder)
@@ -1359,6 +1381,8 @@ redef class AAttrPropdef
 			return
 		end
 
+		self.mtype = mtype
+
 		if mpropdef != null then
 			mpropdef.static_mtype = mtype
 		end
@@ -1389,7 +1413,7 @@ redef class AAttrPropdef
 		var mpropdef = self.mpropdef
 		if mpropdef == null then return # Error thus skipped
 		var ntype = self.n_type
-		var mtype = self.mpropdef.static_mtype
+		var mtype = self.mtype
 		if mtype == null then return # Error thus skipped
 
 		var mclassdef = mpropdef.mclassdef

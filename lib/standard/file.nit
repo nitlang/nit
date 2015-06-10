@@ -767,11 +767,12 @@ redef class String
 		return res
 	end
 
-	# Simplify a file path by remove useless ".", removing "//", and resolving ".."
+	# Simplify a file path by remove useless `.`, removing `//`, and resolving `..`
 	#
-	# * ".." are not resolved if they start the path
-	# * starting "/" is not removed
-	# * trailing "/" is removed
+	# * `..` are not resolved if they start the path
+	# * starting `.` is simplified unless the path is empty
+	# * starting `/` is not removed
+	# * trailing `/` is removed
 	#
 	# Note that the method only work on the string:
 	#
@@ -785,17 +786,29 @@ redef class String
 	# assert "dir/..".simplify_path            ==  "."
 	# assert "//absolute//path/".simplify_path ==  "/absolute/path"
 	# assert "//absolute//../".simplify_path   ==  "/"
+	# assert "/".simplify_path                 == "/"
+	# assert "../".simplify_path               == ".."
+	# assert "./".simplify_path                == "."
+	# assert "././././././".simplify_path      == "."
+	# assert "./../dir".simplify_path		   == "../dir"
+	# assert "./dir".simplify_path			   == "dir"
 	# ~~~
 	fun simplify_path: String
 	do
 		var a = self.split_with("/")
 		var a2 = new Array[String]
 		for x in a do
-			if x == "." then continue
-			if x == "" and not a2.is_empty then continue
+			if x == "." and not a2.is_empty then continue # skip `././`
+			if x == "" and not a2.is_empty then continue # skip `//`
 			if x == ".." and not a2.is_empty and a2.last != ".." then
-				a2.pop
-				continue
+				if a2.last == "." then # do not skip `./../`
+					a2.pop # reduce `./../` in `../`
+				else # reduce `dir/../` in `/`
+					a2.pop
+					continue
+				end
+			else if not a2.is_empty and a2.last == "." then
+				a2.pop # reduce `./dir` in `dir`
 			end
 			a2.push(x)
 		end
@@ -1182,7 +1195,6 @@ redef class Sys
 	private fun intern_poll(in_fds: Array[Int], out_fds: Array[Int]) : nullable Int is extern import Array[Int].length, Array[Int].[], Int.as(nullable Int) `{
 		int in_len, out_len, total_len;
 		struct pollfd *c_fds;
-		sigset_t sigmask;
 		int i;
 		int first_polled_fd = -1;
 		int result;
