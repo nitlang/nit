@@ -20,6 +20,5 @@ var degrees = [0.0, 16.87, 16.88, 33.75, 50.62, 50.63, 67.5,
 
 for d in degrees do
     var h = (d / 11.25 + 0.5).floor.to_i % 32
-    #{ names[(j.to_i % 32) * 22]}
     print "{ h+1 } { names[h] } { d }"
 end
