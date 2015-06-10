@@ -1,3 +1,11 @@
+#!/usr/bin/env nit
+#
+# This file is part of NIT ( http://www.nitlanguage.org ).
+# This program is public domain
+
+# Task: Factorial
+# SEE: <http://rosettacode.org/wiki/Factorial>
+
 module factorial
 
 redef class Int
