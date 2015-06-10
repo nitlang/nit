@@ -760,15 +760,15 @@ redef class AAttrPropdef
 	do
 		if not has_value then return
 
-		var mpropdef = self.mpropdef
-		if mpropdef == null then return # skip error
+		var mpropdef = self.mreadpropdef
+		if mpropdef == null or mpropdef.msignature == null then return # skip error
 
 		var v = new TypeVisitor(modelbuilder, mpropdef.mclassdef.mmodule, mpropdef)
 		self.selfvariable = v.selfvariable
 
 		var nexpr = self.n_expr
 		if nexpr != null then
-			var mtype = self.mpropdef.static_mtype
+			var mtype = self.mtype
 			v.visit_expr_subtype(nexpr, mtype)
 		end
 		var nblock = self.n_block

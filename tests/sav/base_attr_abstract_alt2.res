@@ -1,2 +1,3 @@
-alt/base_attr_abstract_alt2.nit:20,6: Error: untyped attribute `base_attr_abstract_alt2#Foo#b`.
-alt/base_attr_abstract_alt2.nit:20,21--30: Error: `noautoinit` attributes cannot be abstract.
+alt/base_attr_abstract_alt2.nit:19,24--31: Error: `abstract` attributes cannot have an initial value.
+alt/base_attr_abstract_alt2.nit:37,12--13: Error: no property `Baz::b=` is inherited. Remove the `redef` keyword to define a new property.
+alt/base_attr_abstract_alt2.nit:37,15: Error: untyped parameter `x'.

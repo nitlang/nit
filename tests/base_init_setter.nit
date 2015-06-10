@@ -14,15 +14,24 @@
 
 import standard::kernel
 
-abstract class A
-	var x: Int
-	var y: Int is abstract, autoinit
+class A
+	var i: Int = 1
 end
 
 class B
 	super A
-	redef fun y=(v) do v.output
+	redef fun i=(v)
+	do
+		super
+		'i'.output
+		v.output
+	end
 end
 
-var b = new B(1,2)
-b.x.output
+var a = new A
+a.i.output
+
+'\n'.output
+
+var b = new B
+b.i.output
