@@ -6,3 +6,4 @@ show_basedir
 langannot
 loops_infinite
 read_entire_file
+letter_frequency
