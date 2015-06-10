@@ -332,7 +332,9 @@ class NativeSocketObserver
 	# are boxed objects, passing them to a C function is illegal.
 	fun select(max: NativeSocket, reads: nullable NativeSocketSet, write: nullable NativeSocketSet,
 			 except: nullable NativeSocketSet, timeout: NativeTimeval): Int `{
-		fd_set *rds, *wts, *exs = NULL;
+		fd_set *rds = NULL,
+		       *wts = NULL,
+		       *exs = NULL;
 		struct timeval *tm = NULL;
 		if (reads != NULL) rds = (fd_set*)reads;
 		if (write != NULL) wts = (fd_set*)write;

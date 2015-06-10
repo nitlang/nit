@@ -1195,7 +1195,6 @@ redef class Sys
 	private fun intern_poll(in_fds: Array[Int], out_fds: Array[Int]) : nullable Int is extern import Array[Int].length, Array[Int].[], Int.as(nullable Int) `{
 		int in_len, out_len, total_len;
 		struct pollfd *c_fds;
-		sigset_t sigmask;
 		int i;
 		int first_polled_fd = -1;
 		int result;

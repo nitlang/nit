@@ -148,7 +148,7 @@ class ExternCFile
 		if not pkgconfigs.is_empty then
 			pkg = "`pkg-config --cflags {pkgconfigs.join(" ")}`"
 		end
-		return "$(CC) $(CFLAGS) {self.cflags} {pkg} -c -o {o} {ff}"
+		return "$(CC) $(CFLAGS) -Wall {self.cflags} {pkg} -c -o {o} {ff}"
 	end
 
 	redef fun compiles_to_o_file do return true
