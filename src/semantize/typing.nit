@@ -648,7 +648,7 @@ end
 
 redef class Variable
 	# The declared type of the variable
-	var declared_type: nullable MType
+	var declared_type: nullable MType is writable
 
 	# Was the variable type-adapted?
 	# This is used to speedup type retrieval while it remains `false`

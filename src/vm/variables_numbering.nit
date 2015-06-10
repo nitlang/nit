@@ -39,19 +39,10 @@ redef class VirtualMachine
 	do
 		var f = new VmFrame(node, mpropdef, args)
 
-		# If this Frame is for a method then number variables into the body of the method
-		if node isa AMethPropdef then
-			# Number the variables
-			if not node.is_numbering then node.numbering_variables(self, mpropdef.as(MMethodDef))
-
-			# Create an empty environment
-			f.variables = new Array[Instance].filled_with(initialization_value, node.environment_size)
-		end
-
-		# If this Frame is for an attribute with a block then number the block
-		if node isa AAttrPropdef then
-			# Number the variables
-			if not node.is_numbering then node.numbering_variables(self)
+		# If this Frame is for a method or an attribute block then number variables into the body of the method
+		if node isa APropdef then
+			# Compile the code (number its local variables)
+			if not node.is_compiled then node.compile(self)
 
 			# Create an empty environment
 			f.variables = new Array[Instance].filled_with(initialization_value, node.environment_size)
@@ -77,7 +68,7 @@ end
 
 redef class Variable
 	# The position in the environment
-	var position: Int
+	var position: Int is writable
 end
 
 # Implementation of a Frame with numbered variables
@@ -102,18 +93,33 @@ redef class AExpr
 end
 
 redef class APropdef
+	# Indicite if this propdef was compile
+	var is_compiled: Bool = false
+
 	# Indicate if the variables numbering has been done
 	private var is_numbering: Bool = false
 
 	# The size of the environment to create to call this method
 	private var environment_size: Int = 0
+
+	# Compile this propdef
+	# *`vm` The running instance of `VirtualMachine`
+	fun compile(vm: VirtualMachine)
+	do
+		# Number the variables
+		if not is_numbering then numbering_variables(vm)
+
+		is_compiled = true
+	end
+
+	# Numbering the variable inside the propdef
+	fun numbering_variables(vm: VirtualMachine) is abstract
 end
 
 redef class AMethPropdef
-	# Assign a position in the environment to each local variable of `mpropdef`
-	# *`v` The current VirtualMachine
-	# *`mpropdef` The method to number
-	private fun numbering_variables(v: VirtualMachine, mpropdef: MMethodDef)
+	# Assign a position in the environment to each local variable
+	# *`vm` The current VirtualMachine
+	redef fun numbering_variables(vm: VirtualMachine)
 	do
 		# The position in the environment
 		var position = 0
@@ -133,7 +139,7 @@ redef class AMethPropdef
 
 		# Recursively go into the AST nodes to number all local variables
 		if n_block != null then
-			position = v.numbering(self.n_block, position)
+			position = vm.numbering(self.n_block, position)
 		end
 
 		is_numbering = true
@@ -144,9 +150,9 @@ redef class AMethPropdef
 end
 
 redef class AAttrPropdef
-	# Assign a position in the environment to each local variable of `mpropdef`
-	# *`v` The current VirtualMachine
-	private fun numbering_variables(v: VirtualMachine)
+	# Assign a position in the environment to each local variable
+	# *`vm` The current VirtualMachine
+	redef fun numbering_variables(vm: VirtualMachine)
 	do
 		# The position in the environment
 		var position = 0
@@ -159,7 +165,7 @@ redef class AAttrPropdef
 
 		# Recursively go into the AST nodes to number all local variables
 		if n_block != null then
-			position = v.numbering(self.n_block, position)
+			position = vm.numbering(self.n_block, position)
 		end
 
 		is_numbering = true
