@@ -46,9 +46,9 @@ int file_NativeFile_NativeFile_set_buffering_type_0(FILE* f, int buf_sz, int mod
 #define file_Sys_Sys_buffer_mode_line_0(self) _IOLBF
 #define file_Sys_Sys_buffer_mode_none_0(self) _IONBF
 
-#define string_NativeString_NativeString_file_mkdir_0(p) (mkdir(p, 0777))
+#define string_NativeString_NativeString_file_mkdir_0(p) (!mkdir(p, 0777))
 #define string_NativeString_NativeString_file_getcwd_0(p) (getcwd(NULL, 0))
-#define string_NativeString_NativeString_file_chdir_0(p) (chdir(p)?-1:0) /* hack to avoid warn_unused_result */
+#define string_NativeString_NativeString_file_chdir_0(p) (!chdir(p))
 #define file_NativeString_realpath(p) (realpath(p, NULL))
 
 #define file_stdin_poll_in(self) file_stdin_poll_in_()

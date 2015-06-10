@@ -6,12 +6,13 @@ void standard___standard__Array___standard__abstract_collection__SimpleCollectio
 void template___template__Template___add(val* self, val* p0);
 val* standard___standard__NativeString___to_s_with_length(char* self, long p0);
 #define COLOR_template__Template___render_done 2
-void nit___nit__BashCompletion___template__Template__rendering(val* self);
+#define COLOR_template__Template__rendering 22
 void template___template__Template___freeze(val* self);
 #define COLOR_template__Template___is_writing 3
 void template___template__Template___force_render(val* self);
 val* standard___standard__AbstractArrayRead___standard__abstract_collection__Collection__iterator(val* self);
 short int standard__array___standard__array__ArrayIterator___standard__abstract_collection__Iterator__is_ok(val* self);
 val* standard__array___standard__array__ArrayIterator___standard__abstract_collection__Iterator__item(val* self);
-#define COLOR_standard__stream__Streamable__write_to 45
+#define COLOR_standard__stream__Writable__write_to 32
 void standard__array___standard__array__ArrayIterator___standard__abstract_collection__Iterator__next(val* self);
+void standard__array___standard__array__ArrayIterator___standard__abstract_collection__Iterator__finish(val* self);

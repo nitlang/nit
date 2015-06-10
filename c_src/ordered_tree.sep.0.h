@@ -1,0 +1,54 @@
+#include "nit.common.h"
+#define COLOR_ordered_tree__OrderedTree___roots 1
+extern const char FILE_ordered_tree[];
+#define COLOR_ordered_tree__OrderedTree___sub 2
+#define COLOR_nullable__ordered_tree__OrderedTree___35dE 3
+#define COLOR_ordered_tree__OrderedTree___35dE 4
+#define COLOR_standard__kernel__Object___61d_61d 4
+void standard___standard__Array___standard__abstract_collection__SimpleCollection__add(val* self, val* p0);
+short int standard___standard__HashMap___standard__abstract_collection__MapRead__has_key(val* self, val* p0);
+val* standard___standard__HashMap___standard__abstract_collection__MapRead___91d_93d(val* self, val* p0);
+val* NEW_standard__Array(const struct type* type);
+#define COLOR_standard__Array__ordered_tree__OrderedTree___35dE 0
+void standard___standard__Array___with_capacity(val* self, long p0);
+void standard___standard__AbstractArray___standard__abstract_collection__Sequence__push(val* self, val* p0);
+void standard___standard__HashMap___standard__abstract_collection__Map___91d_93d_61d(val* self, val* p0, val* p1);
+val* standard___standard__AbstractArrayRead___standard__abstract_collection__Collection__iterator(val* self);
+short int standard__array___standard__array__ArrayIterator___standard__abstract_collection__Iterator__is_ok(val* self);
+val* standard__array___standard__array__ArrayIterator___standard__abstract_collection__Iterator__item(val* self);
+val* ordered_tree___ordered_tree__OrderedTree___display(val* self, val* p0);
+void standard___standard__FileWriter___standard__stream__Writer__write(val* self, val* p0);
+val* standard___standard__NativeString___to_s_with_length(char* self, long p0);
+void ordered_tree___ordered_tree__OrderedTree___sub_write_to(val* self, val* p0, val* p1, val* p2);
+void standard__array___standard__array__ArrayIterator___standard__abstract_collection__Iterator__next(val* self);
+void standard__array___standard__array__ArrayIterator___standard__abstract_collection__Iterator__finish(val* self);
+val* standard___standard__SequenceRead___last(val* self);
+#define COLOR_standard__kernel__Object___33d_61d 1
+val* NEW_standard__NativeArray(int length, const struct type* type);
+extern const struct type type_standard__NativeArray__standard__String;
+#define COLOR_standard__string__NativeArray__native_to_s 16
+#define COLOR_standard__string__String___43d 71
+void standard___standard__Comparator___sort(val* self, val* p0);
+val* standard___standard__HashMap___standard__abstract_collection__MapRead__values(val* self);
+#define COLOR_standard__abstract_collection__Collection__iterator 25
+#define COLOR_standard__abstract_collection__Iterator__is_ok 16
+#define COLOR_standard__abstract_collection__Iterator__item 17
+#define COLOR_standard__abstract_collection__Iterator__next 18
+#define COLOR_standard__abstract_collection__Iterator__finish 19
+#define COLOR_standard__string__Object__to_s 3
+void standard___standard__Array___standard__kernel__Object__init(val* self);
+void ordered_tree___ordered_tree__OrderedTree___sub_to_a(val* self, val* p0, val* p1);
+short int standard___standard__AbstractArrayRead___standard__abstract_collection__Collection__is_empty(val* self);
+val* standard___standard__SequenceRead___Collection__first(val* self);
+val* NEW_ordered_tree__OrderedTreeIterator(const struct type* type);
+#define COLOR_ordered_tree__OrderedTreeIterator__ordered_tree__OrderedTree___35dE 5
+#define COLOR_ordered_tree__OrderedTreeIterator__tree_61d 22
+#define COLOR_standard__kernel__Object__init 0
+#define COLOR_ordered_tree__OrderedTreeIterator___tree 0
+#define COLOR_ordered_tree__OrderedTree__ordered_tree__OrderedTreeIterator___35dE 2
+#define COLOR_ordered_tree__OrderedTreeIterator___iterators 1
+short int ordered_tree___ordered_tree__OrderedTree___standard__abstract_collection__Collection__is_empty(val* self);
+short int ordered_tree___ordered_tree__OrderedTreeIterator___standard__abstract_collection__Iterator__is_ok(val* self);
+val* ordered_tree___ordered_tree__OrderedTreeIterator___standard__abstract_collection__Iterator__item(val* self);
+val* standard___standard__AbstractArray___standard__abstract_collection__Sequence__pop(val* self);
+#define COLOR_ordered_tree__OrderedTreeIterator__ordered_tree__OrderedTreeIterator___35dE 3
