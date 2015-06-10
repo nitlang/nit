@@ -129,14 +129,11 @@ class Benitlux
 	# Fetch the Web page at `url`
 	fun download_html_page: String
 	do
-		var curl = new Curl
-
-		var request = new CurlHTTPRequest(url, curl)
+		var request = new CurlHTTPRequest(url)
 		var response = request.execute
 
 		if response isa CurlResponseSuccess then
 			var body = response.body_str
-			curl.destroy
 			return body
 		else if response isa CurlResponseFailed then
 			print "Failed downloading URL '{url}' with: {response.error_msg} ({response.error_code})"

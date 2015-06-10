@@ -20,30 +20,10 @@ intrude import curl
 
 # An abstract request that defines most of the standard options for Neo4j REST API
 abstract class JsonCurlRequest
-	super CurlRequest
-	super CCurlCallbacks
-	super CurlCallbacksRegisterIntern
-
-	# REST API service URL
-	var url: String
-
-	init (url: String, curl: nullable Curl) do
-		self.url = url
-		self.curl = curl
-
-		init_headers
-	end
+	super CurlHTTPRequest
 
 	# OAuth token
 	var auth: nullable String is writable
-
-	# User agent (is used by github to contact devs in case of problems)
-	# Eg. "Awesome-Octocat-App"
-	var user_agent: nullable String is writable
-
-	# HTTP headers to send
-	var headers: nullable HeaderMap = null is writable
-
 
 	# init HTTP headers for Neo4j REST API
 	protected fun init_headers do
@@ -54,6 +34,8 @@ abstract class JsonCurlRequest
 		if auth != null then
 			headers["Authorization"] = "token {auth.to_s}"
 		end
+
+		# User agent (is used by github to contact devs in case of problems)
 		if user_agent != null then
 			headers["User-Agent"] = user_agent.to_s
 		end
@@ -61,6 +43,7 @@ abstract class JsonCurlRequest
 
 	redef fun execute do
 		init_headers
+
 		if not self.curl.is_ok then
 			return answer_failure(0, "Curl instance is not correctly initialized")
 		end
@@ -69,28 +52,25 @@ abstract class JsonCurlRequest
 		var callback_receiver: CurlCallbacks = success_response
 		if self.delegate != null then callback_receiver = self.delegate.as(not null)
 
-		var err
-
-		err = self.curl.prim_curl.easy_setopt(new CURLOption.follow_location, 1)
+		var err = self.curl.native.easy_setopt(new CURLOption.follow_location, 1)
 		if not err.is_ok then return answer_failure(err.to_i, err.to_s)
 
-		err = self.curl.prim_curl.easy_setopt(new CURLOption.http_version, 1)
+		err = self.curl.native.easy_setopt(new CURLOption.http_version, 1)
 		if not err.is_ok then return answer_failure(err.to_i, err.to_s)
 
-
-		err = self.curl.prim_curl.easy_setopt(new CURLOption.url, url)
+		err = self.curl.native.easy_setopt(new CURLOption.url, url)
 		if not err.is_ok then return answer_failure(err.to_i, err.to_s)
 
-		err = self.curl.prim_curl.register_callback(callback_receiver, new CURLCallbackType.header)
+		err = self.curl.native.register_callback_header(callback_receiver)
 		if not err.is_ok then return answer_failure(err.to_i, err.to_s)
 
-		err = self.curl.prim_curl.register_callback(callback_receiver, new CURLCallbackType.body)
+		err = self.curl.native.register_callback_body(callback_receiver)
 		if not err.is_ok then return answer_failure(err.to_i, err.to_s)
 
 		# HTTP Header
 		if self.headers != null then
 			var headers_joined = self.headers.join_pairs(": ")
-			err = self.curl.prim_curl.easy_setopt(
+			err = self.curl.native.easy_setopt(
 				new CURLOption.httpheader, headers_joined.to_curlslist)
 			if not err.is_ok then return answer_failure(err.to_i, err.to_s)
 		end
@@ -101,8 +81,8 @@ abstract class JsonCurlRequest
 		var err_resp = perform
 		if err_resp != null then return err_resp
 
-		var st_code = self.curl.prim_curl.easy_getinfo_long(new CURLInfoLong.response_code)
-		if not st_code == null then success_response.status_code = st_code.response
+		var st_code = self.curl.native.easy_getinfo_long(new CURLInfoLong.response_code)
+		if not st_code == null then success_response.status_code = st_code
 
 		return success_response
 	end
@@ -116,7 +96,7 @@ class JsonGET
 	super JsonCurlRequest
 
 	redef fun execute_hook do
-		var err = self.curl.prim_curl.easy_setopt(new CURLOption.get, true)
+		var err = self.curl.native.easy_setopt(new CURLOption.get, true)
 		if not err.is_ok then return answer_failure(err.to_i, err.to_s)
 		return null
 	end
@@ -134,12 +114,12 @@ class JsonPOST
 	end
 
 	redef fun execute_hook do
-		var err = self.curl.prim_curl.easy_setopt(new CURLOption.post, true)
+		var err = self.curl.native.easy_setopt(new CURLOption.post, true)
 		if not err.is_ok then return answer_failure(err.to_i, err.to_s)
 
 		if self.data != null then
 			var postdatas = self.data.to_json
-			err = self.curl.prim_curl.easy_setopt(new CURLOption.postfields, postdatas)
+			err = self.curl.native.easy_setopt(new CURLOption.postfields, postdatas)
 			if not err.is_ok then return answer_failure(err.to_i, err.to_s)
 		end
 		return null
@@ -151,7 +131,7 @@ class JsonDELETE
 	super JsonCurlRequest
 
 	redef fun execute_hook do
-		var err = self.curl.prim_curl.easy_setopt(new CURLOption.custom_request, "DELETE")
+		var err = self.curl.native.easy_setopt(new CURLOption.custom_request, "DELETE")
 		if not err.is_ok then return answer_failure(err.to_i, err.to_s)
 		return null
 	end
@@ -169,12 +149,12 @@ class JsonPUT
 	end
 
 	redef fun execute_hook do
-		var err = self.curl.prim_curl.easy_setopt(new CURLOption.custom_request, "PUT")
+		var err = self.curl.native.easy_setopt(new CURLOption.custom_request, "PUT")
 		if not err.is_ok then return answer_failure(err.to_i, err.to_s)
 
 		if self.data != null then
 			var postdatas = self.data.to_json
-			err = self.curl.prim_curl.easy_setopt(new CURLOption.postfields, postdatas)
+			err = self.curl.native.easy_setopt(new CURLOption.postfields, postdatas)
 			if not err.is_ok then return answer_failure(err.to_i, err.to_s)
 		end
 		return null

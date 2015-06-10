@@ -14,100 +14,91 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Sample of the Curl module.
+# Example use of the Curl module
 module curl_http
 
 import curl
 
-# Small class to represent an Http Fetcher
+# Custom delegate to receive callbacks from a Curl transfer
 class MyHttpFetcher
 	super CurlCallbacks
 
-	var curl: Curl
-	var our_body: String = ""
+	# Body of the downloaded file
+	var fetched_body = ""
 
-	init(curl: Curl) do self.curl = curl
-
-	# Release curl object
-	fun destroy do self.curl.destroy
-
-	# Header callback
 	redef fun header_callback(line) do
 		# We keep this callback silent for testing purposes
-		#if not line.has_prefix("Date:") then print "Header_callback : {line}"
+		#if not line.has_prefix("Date:") then print "Header_callback: {line}"
 	end
 
-	# Body callback
-	redef fun body_callback(line) do self.our_body = "{self.our_body}{line}"
+	redef fun body_callback(line) do self.fetched_body += line
 
-	# Stream callback - Cf : No one is registered
-	redef fun stream_callback(buffer, size, count) do print "Stream_callback : {buffer} - {size} - {count}"
+	redef fun stream_callback(buffer) do print "Stream_callback: {buffer}"
 end
 
+private fun print_usage do print "Usage: curl_http [POST|GET|GET_FILE] url"
 
-# Program
 if args.length < 2 then
-	print "Usage: curl_http <method wished [POST, GET, GET_FILE]> <target url>"
-else
-	var curl = new Curl
-	var url = args[1]
-	var request = new CurlHTTPRequest(url, curl)
+	print_usage
+	exit 1
+end
 
+var url = args[1]
+var request = new CurlHTTPRequest(url)
+request.verbose = false # Set to `true` to debug
+
+if args[0] == "GET" then
 	# HTTP Get Request
-	if args[0] == "GET" then
-		request.verbose = false
-		var getResponse = request.execute
+	var response = request.execute
 
-		if getResponse isa CurlResponseSuccess then
-			print "Status code : {getResponse.status_code}"
-			print "Body : {getResponse.body_str}"
-		else if getResponse isa CurlResponseFailed then
-			print "Error code : {getResponse.error_code}"
-			print "Error msg : {getResponse.error_msg}"
-		end
-
-	# HTTP Post Request
-	else if args[0] == "POST" then
-		var myHttpFetcher = new MyHttpFetcher(curl)
-		request.delegate = myHttpFetcher
-
-		var postDatas = new HeaderMap
-		postDatas["Bugs Bunny"] = "Daffy Duck"
-		postDatas["Batman"] = "Robin likes special characters @#ùà!è§'(\"é&://,;<>∞~*"
-		postDatas["Batman"] = "Yes you can set multiple identical keys, but APACHE will consider only once, the last one"
-		request.datas = postDatas
-		request.verbose = false
-		var postResponse = request.execute
-
-		print "Our body from the callback : {myHttpFetcher.our_body}"
-
-		if postResponse isa CurlResponseSuccess then
-			print "*** Answer ***"
-			print "Status code : {postResponse.status_code}"
-			print "Body should be empty, because we decided to manage callbacks : {postResponse.body_str.length}"
-		else if postResponse isa CurlResponseFailed then
-			print "Error code : {postResponse.error_code}"
-			print "Error msg : {postResponse.error_msg}"
-		end
-
-	# HTTP Get to file Request
-	else if args[0] == "GET_FILE" then
-		var headers = new HeaderMap
-		headers["Accept"] = "Moo"
-		request.headers = headers
-		request.verbose = false
-		var downloadResponse = request.download_to_file(null)
-
-		if downloadResponse isa CurlFileResponseSuccess then
-			print "*** Answer ***"
-			print "Status code : {downloadResponse.status_code}"
-			print "Size downloaded : {downloadResponse.size_download}"
-		else if downloadResponse isa CurlResponseFailed then
-			print "Error code : {downloadResponse.error_code}"
-			print "Error msg : {downloadResponse.error_msg}"
-		end
-	# Program logic
-	else
-		print "Usage : Method[POST, GET, GET_FILE]"
+	if response isa CurlResponseSuccess then
+		print "Status code: {response.status_code}"
+		print "Body: {response.body_str}"
+	else if response isa CurlResponseFailed then
+		print "Error code: {response.error_code}"
+		print "Error msg: {response.error_msg}"
 	end
+
+else if args[0] == "POST" then
+	# HTTP Post Request
+	var my_http_fetcher = new MyHttpFetcher
+	request.delegate = my_http_fetcher
+
+	var post_datas = new HeaderMap
+	post_datas["Bugs Bunny"] = "Daffy Duck"
+	post_datas["Batman"] = "Robin likes special characters @#ùà!è§'(\"é&://,;<>∞~*"
+	post_datas["Batman"] = "Yes you can set multiple identical keys, but APACHE will consider only one, the last one"
+	request.datas = post_datas
+	var response = request.execute
+
+	print "Our body from the callback: {my_http_fetcher.fetched_body}"
+
+	if response isa CurlResponseSuccess then
+		print "*** Answer ***"
+		print "Status code: {response.status_code}"
+		print "Body should be empty, because we decided to manage callbacks: {response.body_str.length}"
+	else if response isa CurlResponseFailed then
+		print "Error code: {response.error_code}"
+		print "Error msg: {response.error_msg}"
+	end
+
+else if args[0] == "GET_FILE" then
+	# HTTP Get to file Request
+	var headers = new HeaderMap
+	headers["Accept"] = "Moo"
+	request.headers = headers
+	var response = request.download_to_file(null)
+
+	if response isa CurlFileResponseSuccess then
+		print "*** Answer ***"
+		print "Status code: {response.status_code}"
+		print "Size downloaded: {response.size_download}"
+	else if response isa CurlResponseFailed then
+		print "Error code: {response.error_code}"
+		print "Error msg: {response.error_msg}"
+	end
+
+else
+	print_usage
+	exit 1
 end

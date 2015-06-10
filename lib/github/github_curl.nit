@@ -21,7 +21,6 @@ import json::static
 
 # Specific Curl that know hot to talk to the github API
 class GithubCurl
-	super Curl
 
 	# Headers to use on all requests
 	var header: HeaderMap is noinit
@@ -42,7 +41,7 @@ class GithubCurl
 	# and check for Github errors.
 	fun get_and_check(uri: String): nullable Jsonable
 	do
-		var request = new CurlHTTPRequest(uri, self)
+		var request = new CurlHTTPRequest(uri)
 		request.user_agent = user_agent
 		request.headers = header
 		var response = request.execute
@@ -73,7 +72,7 @@ class GithubCurl
 	# are reported as `GithubError`.
 	fun get_and_parse(uri: String): nullable Jsonable
 	do
-		var request = new CurlHTTPRequest(uri, self)
+		var request = new CurlHTTPRequest(uri)
 		request.user_agent = user_agent
 		request.headers = header
 		var response = request.execute

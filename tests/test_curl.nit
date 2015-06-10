@@ -14,7 +14,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-module test_curl
 
 import curl
 
@@ -28,7 +27,7 @@ fun error_manager(err: CURLCode) do if not err.is_ok then print err
 
 var url = "http://example.org/"
 
-var curl = new CCurl.easy_init
+var curl = new NativeCurl.easy_init
 if not curl.is_init then print "failed init"
 
 var error:CURLCode
@@ -40,15 +39,14 @@ error_manager(error)
 #error_manager(error)
 
 var cbManager = new CallbackManager
-error = curl.register_callback(cbManager, new CURLCallbackType.body)
+error = curl.register_callback_body(cbManager)
 error_manager(error)
 
 error = curl.easy_perform
 error_manager(error)
 
 # Long set
-var info:nullable CURLInfoResponseLong
-info = curl.easy_getinfo_long(new CURLInfoLong.header_size)
+var info = curl.easy_getinfo_long(new CURLInfoLong.header_size)
 assert infoResp:info != null
 
 info = curl.easy_getinfo_long(new CURLInfoLong.response_code)
@@ -103,8 +101,7 @@ info = curl.easy_getinfo_long(new CURLInfoLong.rtsp_cseq_self)
 assert infoResp:info != null
 
 # Double
-var infoDouble: nullable CURLInfoResponseDouble
-infoDouble = curl.easy_getinfo_double(new CURLInfoDouble.total_time)
+var infoDouble = curl.easy_getinfo_double(new CURLInfoDouble.total_time)
 assert infoResp:infoDouble != null
 
 infoDouble = curl.easy_getinfo_double(new CURLInfoDouble.namelookup_time)
@@ -144,15 +141,15 @@ infoDouble = curl.easy_getinfo_double(new CURLInfoDouble.content_length_upload)
 assert infoResp:infoDouble != null
 
 # String set
-var infoStr:nullable CURLInfoResponseString
-infoStr = curl.easy_getinfo_chars(new CURLInfoChars.content_type)
+var infoStr = curl.easy_getinfo_chars(new CURLInfoChars.content_type)
 assert infoResp:infoStr != null
 
 infoStr = curl.easy_getinfo_chars(new CURLInfoChars.effective_url)
 assert infoResp:infoStr != null
 
+# follow_location not set, so returns null
 infoStr = curl.easy_getinfo_chars(new CURLInfoChars.redirect_url)
-assert infoResp:infoStr != null
+assert infoStr == null
 
 infoStr = curl.easy_getinfo_chars(new CURLInfoChars.primary_ip)
 assert infoResp:infoStr != null
@@ -160,18 +157,20 @@ assert infoResp:infoStr != null
 infoStr = curl.easy_getinfo_chars(new CURLInfoChars.local_ip)
 assert infoResp:infoStr != null
 
+# Not connecting to FTP so `null`
 infoStr = curl.easy_getinfo_chars(new CURLInfoChars.ftp_entry_path)
-assert infoResp:infoStr != null
+assert infoStr == null
 
+# opt private not set nor implemented, so returns null
 infoStr = curl.easy_getinfo_chars(new CURLInfoChars.private_data)
-assert infoResp:infoStr != null
+assert infoStr == null
 
+# Not an RTSP connection so `null`
 infoStr = curl.easy_getinfo_chars(new CURLInfoChars.rtsp_session_id)
-assert infoResp:infoStr != null
+assert infoStr == null
 
 # CURLSList set
-var infoList:nullable CURLInfoResponseArray
-infoList = curl.easy_getinfo_slist(new CURLInfoSList.ssl_engines)
+var infoList = curl.easy_getinfo_slist(new CURLInfoSList.ssl_engines)
 assert infoResp:infoList != null
 
 infoList = curl.easy_getinfo_slist(new CURLInfoSList.cookielist)
@@ -211,4 +210,4 @@ var hashMapRefined = new HeaderMap
 hashMapRefined["hello"] = "toto"
 hashMapRefined["hello"] = "tata"
 hashMapRefined["allo"] = "foo"
-print hashMapRefined.to_url_encoded(new CCurl.easy_init)
+print hashMapRefined.to_url_encoded(sys.curl)
