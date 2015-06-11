@@ -1,0 +1,8919 @@
+OverviewPage Overview
+	# home.article
+		## projects.section
+			### standard.definition
+
+SearchPage Index
+	# index.article
+
+MGroupPage standard
+	# standard.section
+		## standard.intro
+		## standard.concerns
+		## standard.concern
+		## standard.concern
+		## standard__kernel.concern
+			### standard__kernel.definition
+				#### standard__kernel.intros_redefs
+					##### list.group
+						###### standard__kernel.intros
+						###### standard__kernel.redefs
+		## standard__gc.concern
+			### standard__gc.definition
+				#### standard__gc.intros_redefs
+					##### list.group
+						###### standard__gc.intros
+						###### standard__gc.redefs
+		## standard__math.concern
+			### standard__math.definition
+				#### standard__math.intros_redefs
+					##### list.group
+						###### standard__math.intros
+						###### standard__math.redefs
+		## standard__bitset.concern
+			### standard__bitset.definition
+				#### standard__bitset.intros_redefs
+					##### list.group
+						###### standard__bitset.intros
+						###### standard__bitset.redefs
+		## standard__queue.concern
+			### standard__queue.definition
+				#### standard__queue.intros_redefs
+					##### list.group
+						###### standard__queue.intros
+						###### standard__queue.redefs
+		## standard__string.concern
+			### standard__string.definition
+				#### standard__string.intros_redefs
+					##### list.group
+						###### standard__string.intros
+						###### standard__string.redefs
+		## standard__bytes.concern
+			### standard__bytes.definition
+				#### standard__bytes.intros_redefs
+					##### list.group
+						###### standard__bytes.intros
+						###### standard__bytes.redefs
+		## standard__error.concern
+			### standard__error.definition
+				#### standard__error.intros_redefs
+					##### list.group
+						###### standard__error.intros
+						###### standard__error.redefs
+		## standard__numeric.concern
+			### standard__numeric.definition
+				#### standard__numeric.intros_redefs
+					##### list.group
+						###### standard__numeric.intros
+						###### standard__numeric.redefs
+		## standard__posix.concern
+			### standard__posix.definition
+				#### standard__posix.intros_redefs
+					##### list.group
+						###### standard__posix.intros
+						###### standard__posix.redefs
+		## standard__ropes.concern
+			### standard__ropes.definition
+				#### standard__ropes.intros_redefs
+					##### list.group
+						###### standard__ropes.intros
+						###### standard__ropes.redefs
+		## standard__string_search.concern
+			### standard__string_search.definition
+				#### standard__string_search.intros_redefs
+					##### list.group
+						###### standard__string_search.intros
+						###### standard__string_search.redefs
+		## standard__re.concern
+			### standard__re.definition
+				#### standard__re.intros_redefs
+					##### list.group
+						###### standard__re.intros
+						###### standard__re.redefs
+		## standard__stream.concern
+			### standard__stream.definition
+				#### standard__stream.intros_redefs
+					##### list.group
+						###### standard__stream.intros
+						###### standard__stream.redefs
+		## standard__time.concern
+			### standard__time.definition
+				#### standard__time.intros_redefs
+					##### list.group
+						###### standard__time.intros
+						###### standard__time.redefs
+		## standard__file.concern
+			### standard__file.definition
+				#### standard__file.intros_redefs
+					##### list.group
+						###### standard__file.intros
+						###### standard__file.redefs
+		## standard__environ.concern
+			### standard__environ.definition
+				#### standard__environ.intros_redefs
+					##### list.group
+						###### standard__environ.intros
+						###### standard__environ.redefs
+		## standard__exec.concern
+			### standard__exec.definition
+				#### standard__exec.intros_redefs
+					##### list.group
+						###### standard__exec.intros
+						###### standard__exec.redefs
+		## standard__standard.concern
+			### standard__standard.definition
+				#### standard__standard.intros_redefs
+					##### list.group
+						###### standard__standard.intros
+						###### standard__standard.redefs
+
+MModulePage bitset
+	# bitset.section
+		## standard__bitset.intro
+		## standard__bitset.importation
+			### standard__bitset.graph
+			### list.group
+				#### standard__bitset.imports
+				#### standard__bitset.clients
+		## standard__bitset.concerns
+		## standard.concern
+		## standard.concern
+		## standard__kernel.concern
+			### standard__kernel__Int.definition-list
+				#### standard__kernel__Int.definition
+				#### standard__bitset__Int.definition
+					##### standard__bitset__Int.intros_redefs
+						###### list.group
+							####### standard__bitset__Int.intros
+							####### standard__bitset__Int.redefs
+
+CodePage bitset
+	# standard__bitset.code
+
+MModulePage bytes
+	# bytes.section
+		## standard__bytes.intro
+		## standard__bytes.importation
+			### standard__bytes.graph
+			### list.group
+				#### standard__bytes.imports
+				#### standard__bytes.clients
+		## standard__bytes.concerns
+		## standard.concern
+		## standard.concern
+		## standard__bytes.concern
+			### standard__bytes__Bytes.definition-list
+				#### standard__bytes__Bytes.definition
+					##### standard__bytes__Bytes.intros_redefs
+						###### list.group
+							####### standard__bytes__Bytes.intros
+							####### standard__bytes__Bytes.redefs
+		## standard__string.concern
+			### standard__string__NativeString.definition-list
+				#### standard__string__NativeString.definition
+				#### standard__bytes__NativeString.definition
+					##### standard__bytes__NativeString.intros_redefs
+						###### list.group
+							####### standard__bytes__NativeString.intros
+							####### standard__bytes__NativeString.redefs
+
+CodePage bytes
+	# standard__bytes.code
+
+MClassPage Bytes
+	# Bytes.section
+		## standard__bytes__Bytes.intro
+		## standard__bytes__Bytes.inheritance
+			### standard__bytes__Bytes.graph
+			### list.group
+				#### standard__bytes__Bytes.parents
+				#### standard__bytes__Bytes.ancestors
+				#### standard__bytes__Bytes.children
+				#### standard__bytes__Bytes.descendants
+		## standard__bytes__Bytes.constructors
+			### standard__bytes__Bytes__init.definition
+				#### standard__bytes__Bytes__init.lin
+			### standard__bytes__Bytes__empty.definition
+			### standard__bytes__Bytes__with_capacity.definition
+		## standard__bytes__Bytes.concerns
+		## standard.concern
+		## standard.concern
+		## standard__bytes.concern
+			### standard__bytes__Bytes__SELF.definition
+				#### standard__bytes__Bytes__SELF.lin
+			### standard__bytes__Bytes___91d_93d.definition
+				#### standard__bytes__Bytes___91d_93d.lin
+			### standard__bytes__Bytes___91d_93d_61d.definition
+				#### standard__bytes__Bytes___91d_93d_61d.lin
+			### standard__bytes__Bytes__add.definition
+				#### standard__bytes__Bytes__add.lin
+			### standard__bytes__Bytes__append.definition
+				#### standard__bytes__Bytes__append.lin
+			### standard__bytes__Bytes__append_ns.definition
+			### standard__bytes__Bytes__append_ns_from.definition
+			### standard__bytes__Bytes__clear.definition
+				#### standard__bytes__Bytes__clear.lin
+			### standard__bytes__Bytes__enlarge.definition
+				#### standard__bytes__Bytes__enlarge.lin
+			### standard__bytes__Bytes__is_empty.definition
+				#### standard__bytes__Bytes__is_empty.lin
+			### standard__bytes__Bytes__iterator.definition
+				#### standard__bytes__Bytes__iterator.lin
+			### standard__bytes__Bytes__length.definition
+				#### standard__bytes__Bytes__length.lin
+			### standard__bytes__Bytes__to_s.definition
+				#### standard__bytes__Bytes__to_s.lin
+
+MPropertyPage append_ns
+	# append_ns.section
+		## standard__bytes__Bytes__append_ns.intro
+
+MPropertyPage append_ns_from
+	# append_ns_from.section
+		## standard__bytes__Bytes__append_ns_from.intro
+
+MPropertyPage empty
+	# empty.section
+		## standard__bytes__Bytes__empty.intro
+
+MPropertyPage with_capacity
+	# with_capacity.section
+		## standard__bytes__Bytes__with_capacity.intro
+
+MGroupPage collection
+	# collection.section
+		## standard__collection.intro
+		## standard__collection.concerns
+		## standard.concern
+		## standard.concern
+		## standard__collection.concern
+		## standard__collection__abstract_collection.concern
+			### standard__collection__abstract_collection.definition
+				#### standard__collection__abstract_collection.intros_redefs
+					##### list.group
+						###### standard__collection__abstract_collection.intros
+						###### standard__collection__abstract_collection.redefs
+		## standard__collection__array.concern
+			### standard__collection__array.definition
+				#### standard__collection__array.intros_redefs
+					##### list.group
+						###### standard__collection__array.intros
+						###### standard__collection__array.redefs
+		## standard__collection__list.concern
+			### standard__collection__list.definition
+				#### standard__collection__list.intros_redefs
+					##### list.group
+						###### standard__collection__list.intros
+						###### standard__collection__list.redefs
+		## standard__collection__range.concern
+			### standard__collection__range.definition
+				#### standard__collection__range.intros_redefs
+					##### list.group
+						###### standard__collection__range.intros
+						###### standard__collection__range.redefs
+		## standard__collection__hash_collection.concern
+			### standard__collection__hash_collection.definition
+				#### standard__collection__hash_collection.intros_redefs
+					##### list.group
+						###### standard__collection__hash_collection.intros
+						###### standard__collection__hash_collection.redefs
+		## standard__collection__sorter.concern
+			### standard__collection__sorter.definition
+				#### standard__collection__sorter.intros_redefs
+					##### list.group
+						###### standard__collection__sorter.intros
+						###### standard__collection__sorter.redefs
+		## standard__collection__union_find.concern
+			### standard__collection__union_find.definition
+				#### standard__collection__union_find.intros_redefs
+					##### list.group
+						###### standard__collection__union_find.intros
+						###### standard__collection__union_find.redefs
+		## standard__collection__collection.concern
+			### standard__collection__collection.definition
+				#### standard__collection__collection.intros_redefs
+					##### list.group
+						###### standard__collection__collection.intros
+						###### standard__collection__collection.redefs
+
+MModulePage abstract_collection
+	# abstract_collection.section
+		## standard__collection__abstract_collection.intro
+		## standard__collection__abstract_collection.importation
+			### standard__collection__abstract_collection.graph
+			### list.group
+				#### standard__collection__abstract_collection.imports
+				#### standard__collection__abstract_collection.clients
+		## standard__collection__abstract_collection.concerns
+		## standard.concern
+		## standard.concern
+		## standard__collection.concern
+		## standard__collection__abstract_collection.concern
+			### standard__collection__abstract_collection__Collection.definition-list
+				#### standard__collection__abstract_collection__Collection.definition
+					##### standard__collection__abstract_collection__Collection.intros_redefs
+						###### list.group
+							####### standard__collection__abstract_collection__Collection.intros
+							####### standard__collection__abstract_collection__Collection.redefs
+			### standard__collection__abstract_collection__Container.definition-list
+				#### standard__collection__abstract_collection__Container.definition
+					##### standard__collection__abstract_collection__Container.intros_redefs
+						###### list.group
+							####### standard__collection__abstract_collection__Container.intros
+							####### standard__collection__abstract_collection__Container.redefs
+			### standard__collection__abstract_collection__Couple.definition-list
+				#### standard__collection__abstract_collection__Couple.definition
+					##### standard__collection__abstract_collection__Couple.intros_redefs
+						###### list.group
+							####### standard__collection__abstract_collection__Couple.intros
+							####### standard__collection__abstract_collection__Couple.redefs
+			### standard__collection__abstract_collection__CoupleMap.definition-list
+				#### standard__collection__abstract_collection__CoupleMap.definition
+					##### standard__collection__abstract_collection__CoupleMap.intros_redefs
+						###### list.group
+							####### standard__collection__abstract_collection__CoupleMap.intros
+							####### standard__collection__abstract_collection__CoupleMap.redefs
+			### standard__collection__abstract_collection__IndexedIterator.definition-list
+				#### standard__collection__abstract_collection__IndexedIterator.definition
+					##### standard__collection__abstract_collection__IndexedIterator.intros_redefs
+						###### list.group
+							####### standard__collection__abstract_collection__IndexedIterator.intros
+							####### standard__collection__abstract_collection__IndexedIterator.redefs
+			### standard__collection__abstract_collection__IteratorDecorator.definition-list
+				#### standard__collection__abstract_collection__IteratorDecorator.definition
+					##### standard__collection__abstract_collection__IteratorDecorator.intros_redefs
+						###### list.group
+							####### standard__collection__abstract_collection__IteratorDecorator.intros
+							####### standard__collection__abstract_collection__IteratorDecorator.redefs
+			### standard__collection__abstract_collection__Iterator.definition-list
+				#### standard__collection__abstract_collection__Iterator.definition
+					##### standard__collection__abstract_collection__Iterator.intros_redefs
+						###### list.group
+							####### standard__collection__abstract_collection__Iterator.intros
+							####### standard__collection__abstract_collection__Iterator.redefs
+			### standard__collection__abstract_collection__MapIterator.definition-list
+				#### standard__collection__abstract_collection__MapIterator.definition
+					##### standard__collection__abstract_collection__MapIterator.intros_redefs
+						###### list.group
+							####### standard__collection__abstract_collection__MapIterator.intros
+							####### standard__collection__abstract_collection__MapIterator.redefs
+			### standard__collection__abstract_collection__Map.definition-list
+				#### standard__collection__abstract_collection__Map.definition
+					##### standard__collection__abstract_collection__Map.intros_redefs
+						###### list.group
+							####### standard__collection__abstract_collection__Map.intros
+							####### standard__collection__abstract_collection__Map.redefs
+			### standard__collection__abstract_collection__MapKeysIterator.definition-list
+				#### standard__collection__abstract_collection__MapKeysIterator.definition
+					##### standard__collection__abstract_collection__MapKeysIterator.intros_redefs
+						###### list.group
+							####### standard__collection__abstract_collection__MapKeysIterator.intros
+							####### standard__collection__abstract_collection__MapKeysIterator.redefs
+			### standard__collection__abstract_collection__MapRead.definition-list
+				#### standard__collection__abstract_collection__MapRead.definition
+					##### standard__collection__abstract_collection__MapRead.intros_redefs
+						###### list.group
+							####### standard__collection__abstract_collection__MapRead.intros
+							####### standard__collection__abstract_collection__MapRead.redefs
+			### standard__collection__abstract_collection__MapValuesIterator.definition-list
+				#### standard__collection__abstract_collection__MapValuesIterator.definition
+					##### standard__collection__abstract_collection__MapValuesIterator.intros_redefs
+						###### list.group
+							####### standard__collection__abstract_collection__MapValuesIterator.intros
+							####### standard__collection__abstract_collection__MapValuesIterator.redefs
+			### standard__collection__abstract_collection__RemovableCollection.definition-list
+				#### standard__collection__abstract_collection__RemovableCollection.definition
+					##### standard__collection__abstract_collection__RemovableCollection.intros_redefs
+						###### list.group
+							####### standard__collection__abstract_collection__RemovableCollection.intros
+							####### standard__collection__abstract_collection__RemovableCollection.redefs
+			### standard__collection__abstract_collection__Sequence.definition-list
+				#### standard__collection__abstract_collection__Sequence.definition
+					##### standard__collection__abstract_collection__Sequence.intros_redefs
+						###### list.group
+							####### standard__collection__abstract_collection__Sequence.intros
+							####### standard__collection__abstract_collection__Sequence.redefs
+			### standard__collection__abstract_collection__SequenceRead.definition-list
+				#### standard__collection__abstract_collection__SequenceRead.definition
+					##### standard__collection__abstract_collection__SequenceRead.intros_redefs
+						###### list.group
+							####### standard__collection__abstract_collection__SequenceRead.intros
+							####### standard__collection__abstract_collection__SequenceRead.redefs
+			### standard__collection__abstract_collection__Set.definition-list
+				#### standard__collection__abstract_collection__Set.definition
+					##### standard__collection__abstract_collection__Set.intros_redefs
+						###### list.group
+							####### standard__collection__abstract_collection__Set.intros
+							####### standard__collection__abstract_collection__Set.redefs
+			### standard__collection__abstract_collection__SimpleCollection.definition-list
+				#### standard__collection__abstract_collection__SimpleCollection.definition
+					##### standard__collection__abstract_collection__SimpleCollection.intros_redefs
+						###### list.group
+							####### standard__collection__abstract_collection__SimpleCollection.intros
+							####### standard__collection__abstract_collection__SimpleCollection.redefs
+
+CodePage abstract_collection
+	# standard__collection__abstract_collection.code
+
+MClassPage Collection
+	# Collection.section
+		## standard__collection__abstract_collection__Collection.intro
+		## standard__collection__abstract_collection__Collection.inheritance
+			### standard__collection__abstract_collection__Collection.graph
+			### list.group
+				#### standard__collection__abstract_collection__Collection.parents
+				#### standard__collection__abstract_collection__Collection.ancestors
+				#### standard__collection__abstract_collection__Collection.children
+				#### standard__collection__abstract_collection__Collection.descendants
+		## standard__collection__abstract_collection__Collection.constructors
+		## standard__collection__abstract_collection__Collection.concerns
+		## standard.concern
+		## standard.concern
+		## standard__collection.concern
+		## standard__collection__abstract_collection.concern
+			### standard__collection__abstract_collection__Collection__SELF.definition
+				#### standard__collection__abstract_collection__Collection__SELF.lin
+			### standard__collection__abstract_collection__Collection__count.definition
+			### standard__collection__abstract_collection__Collection__first.definition
+			### standard__collection__abstract_collection__Collection__has.definition
+			### standard__collection__abstract_collection__Collection__has_all.definition
+			### standard__collection__abstract_collection__Collection__has_exactly.definition
+			### standard__collection__abstract_collection__Collection__has_only.definition
+			### standard__collection__abstract_collection__Collection__is_empty.definition
+			### standard__collection__abstract_collection__Collection__iterator.definition
+			### standard__collection__abstract_collection__Collection__length.definition
+			### standard__collection__abstract_collection__Collection__not_empty.definition
+		## standard__collection__array.concern
+			### standard__collection__array__Collection__to_a.definition
+		## standard__math.concern
+			### standard__math__Collection__rand.definition
+			### standard__math__Collection__to_shuffle.definition
+		## standard__string.concern
+			### standard__string__Collection__join.definition
+			### standard__string__Collection__plain_to_s.definition
+			### standard__string__Collection__to_s.definition
+				#### standard__string__Collection__to_s.lin
+
+MPropertyPage count
+	# count.section
+		## standard__collection__abstract_collection__Collection__count.intro
+		## standard__collection__abstract_collection__Collection__count.concerns
+		## standard.concern
+		## standard.concern
+		## standard__collection.concern
+		## standard__collection__abstract_collection.concern
+			### standard__collection__abstract_collection__Container__count.definition
+			### standard__collection__abstract_collection__Set__count.definition
+		## standard__collection__array.concern
+			### standard__collection__array__AbstractArrayRead__count.definition
+		## standard__collection__list.concern
+			### standard__collection__list__List__count.definition
+		## standard__collection__range.concern
+			### standard__collection__range__Range__count.definition
+
+MPropertyPage first
+	# first.section
+		## standard__collection__abstract_collection__Collection__first.intro
+		## standard__collection__abstract_collection__Collection__first.concerns
+		## standard.concern
+		## standard.concern
+		## standard__collection.concern
+		## standard__collection__abstract_collection.concern
+			### standard__collection__abstract_collection__Container__first.definition
+			### standard__collection__abstract_collection__SequenceRead__first.definition
+		## standard__collection__array.concern
+			### standard__collection__array__ArraySet__first.definition
+		## standard__collection__list.concern
+			### standard__collection__list__List__first.definition
+		## standard__collection__range.concern
+			### standard__collection__range__Range__first.definition
+		## standard__collection__hash_collection.concern
+			### standard__collection__hash_collection__HashSet__first.definition
+		## standard__queue.concern
+			### standard__queue__Queue__first.definition
+
+MPropertyPage has
+	# has.section
+		## standard__collection__abstract_collection__Collection__has.intro
+		## standard__collection__abstract_collection__Collection__has.concerns
+		## standard.concern
+		## standard.concern
+		## standard__collection.concern
+		## standard__collection__abstract_collection.concern
+			### standard__collection__abstract_collection__Container__has.definition
+		## standard__collection__array.concern
+			### standard__collection__array__AbstractArrayRead__has.definition
+			### standard__collection__array__ArraySet__has.definition
+		## standard__collection__list.concern
+			### standard__collection__list__List__has.definition
+		## standard__collection__range.concern
+			### standard__collection__range__Range__has.definition
+		## standard__collection__hash_collection.concern
+			### standard__collection__hash_collection__HashSet__has.definition
+		## standard__collection__union_find.concern
+			### standard__collection__union_find__DisjointSet__has.definition
+
+MPropertyPage has_all
+	# has_all.section
+		## standard__collection__abstract_collection__Collection__has_all.intro
+
+MPropertyPage has_exactly
+	# has_exactly.section
+		## standard__collection__abstract_collection__Collection__has_exactly.intro
+
+MPropertyPage has_only
+	# has_only.section
+		## standard__collection__abstract_collection__Collection__has_only.intro
+		## standard__collection__abstract_collection__Collection__has_only.concerns
+		## standard.concern
+		## standard.concern
+		## standard__collection.concern
+		## standard__collection__abstract_collection.concern
+			### standard__collection__abstract_collection__Container__has_only.definition
+			### standard__collection__abstract_collection__Set__has_only.definition
+		## standard__collection__array.concern
+			### standard__collection__array__AbstractArrayRead__has_only.definition
+		## standard__collection__list.concern
+			### standard__collection__list__List__has_only.definition
+		## standard__collection__range.concern
+			### standard__collection__range__Range__has_only.definition
+
+MPropertyPage is_empty
+	# is_empty.section
+		## standard__collection__abstract_collection__Collection__is_empty.intro
+		## standard__collection__abstract_collection__Collection__is_empty.concerns
+		## standard.concern
+		## standard.concern
+		## standard__collection.concern
+		## standard__collection__abstract_collection.concern
+			### standard__collection__abstract_collection__Container__is_empty.definition
+		## standard__collection__array.concern
+			### standard__collection__array__AbstractArrayRead__is_empty.definition
+			### standard__collection__array__ArraySet__is_empty.definition
+		## standard__collection__list.concern
+			### standard__collection__list__List__is_empty.definition
+		## standard__collection__range.concern
+			### standard__collection__range__Range__is_empty.definition
+		## standard__collection__hash_collection.concern
+			### standard__collection__hash_collection__HashSet__is_empty.definition
+		## standard__queue.concern
+			### standard__queue__MinHeap__is_empty.definition
+		## standard__bytes.concern
+			### standard__bytes__Bytes__is_empty.definition
+
+MPropertyPage iterator
+	# iterator.section
+		## standard__collection__abstract_collection__Collection__iterator.intro
+		## standard__collection__abstract_collection__Collection__iterator.concerns
+		## standard.concern
+		## standard.concern
+		## standard__collection.concern
+		## standard__collection__abstract_collection.concern
+			### standard__collection__abstract_collection__Container__iterator.definition
+			### standard__collection__abstract_collection__SequenceRead__iterator.definition
+		## standard__collection__array.concern
+			### standard__collection__array__AbstractArrayRead__iterator.definition
+			### standard__collection__array__ArraySet__iterator.definition
+		## standard__collection__list.concern
+			### standard__collection__list__List__iterator.definition
+		## standard__collection__range.concern
+			### standard__collection__range__Range__iterator.definition
+		## standard__collection__hash_collection.concern
+			### standard__collection__hash_collection__HashSet__iterator.definition
+		## standard__collection__union_find.concern
+			### standard__collection__union_find__DisjointSet__iterator.definition
+		## standard__queue.concern
+			### standard__queue__MinHeap__iterator.definition
+		## standard__bytes.concern
+			### standard__bytes__Bytes__iterator.definition
+
+MPropertyPage join
+	# join.section
+		## standard__collection__abstract_collection__Collection__join.intro
+
+MPropertyPage length
+	# length.section
+		## standard__collection__abstract_collection__Collection__length.intro
+		## standard__collection__abstract_collection__Collection__length.concerns
+		## standard.concern
+		## standard.concern
+		## standard__collection.concern
+		## standard__collection__abstract_collection.concern
+			### standard__collection__abstract_collection__Container__length.definition
+		## standard__collection__array.concern
+			### standard__collection__array__AbstractArrayRead__length.definition
+			### standard__collection__array__ArraySet__length.definition
+		## standard__collection__list.concern
+			### standard__collection__list__List__length.definition
+		## standard__collection__range.concern
+			### standard__collection__range__Range__length.definition
+		## standard__collection__hash_collection.concern
+			### standard__collection__hash_collection__HashSet__length.definition
+		## standard__queue.concern
+			### standard__queue__MinHeap__length.definition
+		## standard__bytes.concern
+			### standard__bytes__Bytes__length.definition
+
+MPropertyPage not_empty
+	# not_empty.section
+		## standard__collection__abstract_collection__Collection__not_empty.intro
+
+MPropertyPage plain_to_s
+	# plain_to_s.section
+		## standard__collection__abstract_collection__Collection__plain_to_s.intro
+		## standard__collection__abstract_collection__Collection__plain_to_s.concerns
+		## standard.concern
+		## standard.concern
+		## standard__string.concern
+			### standard__string__Array__plain_to_s.definition
+
+MPropertyPage rand
+	# rand.section
+		## standard__collection__abstract_collection__Collection__rand.intro
+		## standard__collection__abstract_collection__Collection__rand.concerns
+		## standard.concern
+		## standard.concern
+		## standard__math.concern
+			### standard__math__SequenceRead__rand.definition
+
+MPropertyPage to_a
+	# to_a.section
+		## standard__collection__abstract_collection__Collection__to_a.intro
+
+MPropertyPage to_shuffle
+	# to_shuffle.section
+		## standard__collection__abstract_collection__Collection__to_shuffle.intro
+
+MClassPage Container
+	# Container.section
+		## standard__collection__abstract_collection__Container.intro
+		## standard__collection__abstract_collection__Container.inheritance
+			### standard__collection__abstract_collection__Container.graph
+			### list.group
+				#### standard__collection__abstract_collection__Container.parents
+				#### standard__collection__abstract_collection__Container.ancestors
+				#### standard__collection__abstract_collection__Container.children
+				#### standard__collection__abstract_collection__Container.descendants
+		## standard__collection__abstract_collection__Container.constructors
+			### standard__collection__abstract_collection__Container__init.definition
+				#### standard__collection__abstract_collection__Container__init.lin
+		## standard__collection__abstract_collection__Container.concerns
+		## standard.concern
+		## standard.concern
+		## standard__collection.concern
+		## standard__collection__abstract_collection.concern
+			### standard__collection__abstract_collection__Container__SELF.definition
+				#### standard__collection__abstract_collection__Container__SELF.lin
+			### standard__collection__abstract_collection__Container__count.definition
+				#### standard__collection__abstract_collection__Container__count.lin
+			### standard__collection__abstract_collection__Container__first.definition
+				#### standard__collection__abstract_collection__Container__first.lin
+			### standard__collection__abstract_collection__Container__has.definition
+				#### standard__collection__abstract_collection__Container__has.lin
+			### standard__collection__abstract_collection__Container__has_only.definition
+				#### standard__collection__abstract_collection__Container__has_only.lin
+			### standard__collection__abstract_collection__Container__is_empty.definition
+				#### standard__collection__abstract_collection__Container__is_empty.lin
+			### standard__collection__abstract_collection__Container__item.definition
+			### standard__collection__abstract_collection__Container__item_61d.definition
+			### standard__collection__abstract_collection__Container__iterator.definition
+				#### standard__collection__abstract_collection__Container__iterator.lin
+			### standard__collection__abstract_collection__Container__length.definition
+				#### standard__collection__abstract_collection__Container__length.lin
+
+MPropertyPage item
+	# item.section
+		## standard__collection__abstract_collection__Container__item.intro
+
+MPropertyPage item=
+	# item=.section
+		## standard__collection__abstract_collection__Container__item_61d.intro
+
+MClassPage Couple
+	# Couple.section
+		## standard__collection__abstract_collection__Couple.intro
+		## standard__collection__abstract_collection__Couple.inheritance
+			### standard__collection__abstract_collection__Couple.graph
+			### list.group
+				#### standard__collection__abstract_collection__Couple.parents
+				#### standard__collection__abstract_collection__Couple.ancestors
+				#### standard__collection__abstract_collection__Couple.children
+				#### standard__collection__abstract_collection__Couple.descendants
+		## standard__collection__abstract_collection__Couple.constructors
+			### standard__collection__abstract_collection__Couple__init.definition
+				#### standard__collection__abstract_collection__Couple__init.lin
+		## standard__collection__abstract_collection__Couple.concerns
+		## standard.concern
+		## standard.concern
+		## standard__collection.concern
+		## standard__collection__abstract_collection.concern
+			### standard__collection__abstract_collection__Couple__SELF.definition
+				#### standard__collection__abstract_collection__Couple__SELF.lin
+			### standard__collection__abstract_collection__Couple__first.definition
+			### standard__collection__abstract_collection__Couple__first_61d.definition
+			### standard__collection__abstract_collection__Couple__second.definition
+			### standard__collection__abstract_collection__Couple__second_61d.definition
+
+MClassPage CoupleMap
+	# CoupleMap.section
+		## standard__collection__abstract_collection__CoupleMap.intro
+		## standard__collection__abstract_collection__CoupleMap.inheritance
+			### standard__collection__abstract_collection__CoupleMap.graph
+			### list.group
+				#### standard__collection__abstract_collection__CoupleMap.parents
+				#### standard__collection__abstract_collection__CoupleMap.ancestors
+				#### standard__collection__abstract_collection__CoupleMap.children
+				#### standard__collection__abstract_collection__CoupleMap.descendants
+		## standard__collection__abstract_collection__CoupleMap.constructors
+		## standard__collection__abstract_collection__CoupleMap.concerns
+		## standard.concern
+		## standard.concern
+		## standard__collection.concern
+		## standard__collection__abstract_collection.concern
+			### standard__collection__abstract_collection__CoupleMap__SELF.definition
+				#### standard__collection__abstract_collection__CoupleMap__SELF.lin
+			### standard__collection__abstract_collection__CoupleMap___91d_93d.definition
+				#### standard__collection__abstract_collection__CoupleMap___91d_93d.lin
+			### standard__collection__abstract_collection__CoupleMap__couple_at.definition
+			### standard__collection__abstract_collection__CoupleMap__couple_iterator.definition
+			### standard__collection__abstract_collection__CoupleMap__has_key.definition
+				#### standard__collection__abstract_collection__CoupleMap__has_key.lin
+			### standard__collection__abstract_collection__CoupleMap__iterator.definition
+				#### standard__collection__abstract_collection__CoupleMap__iterator.lin
+
+MPropertyPage couple_at
+	# couple_at.section
+		## standard__collection__abstract_collection__CoupleMap__couple_at.intro
+		## standard__collection__abstract_collection__CoupleMap__couple_at.concerns
+		## standard.concern
+		## standard.concern
+		## standard__collection.concern
+		## standard__collection__array.concern
+			### standard__collection__array__ArrayMap__couple_at.definition
+
+MPropertyPage couple_iterator
+	# couple_iterator.section
+		## standard__collection__abstract_collection__CoupleMap__couple_iterator.intro
+		## standard__collection__abstract_collection__CoupleMap__couple_iterator.concerns
+		## standard.concern
+		## standard.concern
+		## standard__collection.concern
+		## standard__collection__array.concern
+			### standard__collection__array__ArrayMap__couple_iterator.definition
+
+MPropertyPage first
+	# first.section
+		## standard__collection__abstract_collection__Couple__first.intro
+
+MPropertyPage first=
+	# first=.section
+		## standard__collection__abstract_collection__Couple__first_61d.intro
+
+MPropertyPage second
+	# second.section
+		## standard__collection__abstract_collection__Couple__second.intro
+
+MPropertyPage second=
+	# second=.section
+		## standard__collection__abstract_collection__Couple__second_61d.intro
+
+MClassPage IndexedIterator
+	# IndexedIterator.section
+		## standard__collection__abstract_collection__IndexedIterator.intro
+		## standard__collection__abstract_collection__IndexedIterator.inheritance
+			### standard__collection__abstract_collection__IndexedIterator.graph
+			### list.group
+				#### standard__collection__abstract_collection__IndexedIterator.parents
+				#### standard__collection__abstract_collection__IndexedIterator.ancestors
+				#### standard__collection__abstract_collection__IndexedIterator.children
+				#### standard__collection__abstract_collection__IndexedIterator.descendants
+		## standard__collection__abstract_collection__IndexedIterator.constructors
+		## standard__collection__abstract_collection__IndexedIterator.concerns
+		## standard.concern
+		## standard.concern
+		## standard__collection.concern
+		## standard__collection__abstract_collection.concern
+			### standard__collection__abstract_collection__IndexedIterator__SELF.definition
+				#### standard__collection__abstract_collection__IndexedIterator__SELF.lin
+			### standard__collection__abstract_collection__IndexedIterator__index.definition
+
+MPropertyPage index
+	# index.section
+		## standard__collection__abstract_collection__IndexedIterator__index.intro
+		## standard__collection__abstract_collection__IndexedIterator__index.concerns
+		## standard.concern
+		## standard.concern
+		## standard__collection.concern
+		## standard__collection__list.concern
+			### standard__collection__list__ListIterator__index.definition
+		## standard__ropes.concern
+			### standard__ropes__RopeBufferIter__index.definition
+			### standard__ropes__RopeBufferReviter__index.definition
+
+MClassPage Iterator
+	# Iterator.section
+		## standard__collection__abstract_collection__Iterator.intro
+		## standard__collection__abstract_collection__Iterator.inheritance
+			### standard__collection__abstract_collection__Iterator.graph
+			### list.group
+				#### standard__collection__abstract_collection__Iterator.parents
+				#### standard__collection__abstract_collection__Iterator.ancestors
+				#### standard__collection__abstract_collection__Iterator.children
+				#### standard__collection__abstract_collection__Iterator.descendants
+		## standard__collection__abstract_collection__Iterator.constructors
+		## standard__collection__abstract_collection__Iterator.concerns
+		## standard.concern
+		## standard.concern
+		## standard__collection.concern
+		## standard__collection__abstract_collection.concern
+			### standard__collection__abstract_collection__Iterator__SELF.definition
+				#### standard__collection__abstract_collection__Iterator__SELF.lin
+			### standard__collection__abstract_collection__Iterator__finish.definition
+			### standard__collection__abstract_collection__Iterator__is_ok.definition
+			### standard__collection__abstract_collection__Iterator__item.definition
+			### standard__collection__abstract_collection__Iterator__iterator.definition
+			### standard__collection__abstract_collection__Iterator__next.definition
+			### standard__collection__abstract_collection__Iterator__next_by.definition
+			### standard__collection__abstract_collection__Iterator__to_step.definition
+		## standard__collection__array.concern
+			### standard__collection__array__Iterator__to_a.definition
+
+MClassPage IteratorDecorator
+	# IteratorDecorator.section
+		## standard__collection__abstract_collection__IteratorDecorator.intro
+		## standard__collection__abstract_collection__IteratorDecorator.inheritance
+			### standard__collection__abstract_collection__IteratorDecorator.graph
+			### list.group
+				#### standard__collection__abstract_collection__IteratorDecorator.parents
+				#### standard__collection__abstract_collection__IteratorDecorator.ancestors
+				#### standard__collection__abstract_collection__IteratorDecorator.children
+				#### standard__collection__abstract_collection__IteratorDecorator.descendants
+		## standard__collection__abstract_collection__IteratorDecorator.constructors
+			### standard__collection__abstract_collection__IteratorDecorator__init.definition
+				#### standard__collection__abstract_collection__IteratorDecorator__init.lin
+		## standard__collection__abstract_collection__IteratorDecorator.concerns
+		## standard.concern
+		## standard.concern
+		## standard__collection.concern
+		## standard__collection__abstract_collection.concern
+			### standard__collection__abstract_collection__IteratorDecorator__SELF.definition
+				#### standard__collection__abstract_collection__IteratorDecorator__SELF.lin
+			### standard__collection__abstract_collection__IteratorDecorator__finish.definition
+				#### standard__collection__abstract_collection__IteratorDecorator__finish.lin
+			### standard__collection__abstract_collection__IteratorDecorator__is_ok.definition
+				#### standard__collection__abstract_collection__IteratorDecorator__is_ok.lin
+			### standard__collection__abstract_collection__IteratorDecorator__item.definition
+				#### standard__collection__abstract_collection__IteratorDecorator__item.lin
+			### standard__collection__abstract_collection__IteratorDecorator__next.definition
+				#### standard__collection__abstract_collection__IteratorDecorator__next.lin
+			### standard__collection__abstract_collection__IteratorDecorator__next_by.definition
+				#### standard__collection__abstract_collection__IteratorDecorator__next_by.lin
+			### standard__collection__abstract_collection__IteratorDecorator__real.definition
+
+MPropertyPage real
+	# real.section
+		## standard__collection__abstract_collection__IteratorDecorator__real.intro
+
+MPropertyPage finish
+	# finish.section
+		## standard__collection__abstract_collection__Iterator__finish.intro
+		## standard__collection__abstract_collection__Iterator__finish.concerns
+		## standard.concern
+		## standard.concern
+		## standard__collection.concern
+		## standard__collection__abstract_collection.concern
+			### standard__collection__abstract_collection__IteratorDecorator__finish.definition
+		## standard__stream.concern
+			### standard__stream__LineIterator__finish.definition
+
+MPropertyPage is_ok
+	# is_ok.section
+		## standard__collection__abstract_collection__Iterator__is_ok.intro
+		## standard__collection__abstract_collection__Iterator__is_ok.concerns
+		## standard.concern
+		## standard.concern
+		## standard__collection.concern
+		## standard__collection__abstract_collection.concern
+			### standard__collection__abstract_collection__IteratorDecorator__is_ok.definition
+			### standard__collection__abstract_collection__MapKeysIterator__is_ok.definition
+			### standard__collection__abstract_collection__MapValuesIterator__is_ok.definition
+		## standard__collection__list.concern
+			### standard__collection__list__ListIterator__is_ok.definition
+		## standard__ropes.concern
+			### standard__ropes__RopeBufferIter__is_ok.definition
+			### standard__ropes__RopeBufferReviter__is_ok.definition
+		## standard__stream.concern
+			### standard__stream__LineIterator__is_ok.definition
+
+MPropertyPage item
+	# item.section
+		## standard__collection__abstract_collection__Iterator__item.intro
+		## standard__collection__abstract_collection__Iterator__item.concerns
+		## standard.concern
+		## standard.concern
+		## standard__collection.concern
+		## standard__collection__abstract_collection.concern
+			### standard__collection__abstract_collection__IteratorDecorator__item.definition
+			### standard__collection__abstract_collection__MapKeysIterator__item.definition
+			### standard__collection__abstract_collection__MapValuesIterator__item.definition
+		## standard__collection__list.concern
+			### standard__collection__list__ListIterator__item.definition
+		## standard__ropes.concern
+			### standard__ropes__RopeBufferIter__item.definition
+			### standard__ropes__RopeBufferReviter__item.definition
+		## standard__stream.concern
+			### standard__stream__LineIterator__item.definition
+
+MPropertyPage iterator
+	# iterator.section
+		## standard__collection__abstract_collection__Iterator__iterator.intro
+
+MPropertyPage next
+	# next.section
+		## standard__collection__abstract_collection__Iterator__next.intro
+		## standard__collection__abstract_collection__Iterator__next.concerns
+		## standard.concern
+		## standard.concern
+		## standard__collection.concern
+		## standard__collection__abstract_collection.concern
+			### standard__collection__abstract_collection__IteratorDecorator__next.definition
+			### standard__collection__abstract_collection__MapKeysIterator__next.definition
+			### standard__collection__abstract_collection__MapValuesIterator__next.definition
+		## standard__collection__list.concern
+			### standard__collection__list__ListIterator__next.definition
+		## standard__ropes.concern
+			### standard__ropes__RopeBufferIter__next.definition
+			### standard__ropes__RopeBufferReviter__next.definition
+		## standard__stream.concern
+			### standard__stream__LineIterator__next.definition
+
+MPropertyPage next_by
+	# next_by.section
+		## standard__collection__abstract_collection__Iterator__next_by.intro
+		## standard__collection__abstract_collection__Iterator__next_by.concerns
+		## standard.concern
+		## standard.concern
+		## standard__collection.concern
+		## standard__collection__abstract_collection.concern
+			### standard__collection__abstract_collection__IteratorDecorator__next_by.definition
+
+MPropertyPage to_a
+	# to_a.section
+		## standard__collection__abstract_collection__Iterator__to_a.intro
+
+MPropertyPage to_step
+	# to_step.section
+		## standard__collection__abstract_collection__Iterator__to_step.intro
+
+MClassPage Map
+	# Map.section
+		## standard__collection__abstract_collection__Map.intro
+		## standard__collection__abstract_collection__Map.inheritance
+			### standard__collection__abstract_collection__Map.graph
+			### list.group
+				#### standard__collection__abstract_collection__Map.parents
+				#### standard__collection__abstract_collection__Map.ancestors
+				#### standard__collection__abstract_collection__Map.children
+				#### standard__collection__abstract_collection__Map.descendants
+		## standard__collection__abstract_collection__Map.constructors
+			### standard__collection__hash_collection__Map__new.definition
+		## standard__collection__abstract_collection__Map.concerns
+		## standard.concern
+		## standard.concern
+		## standard__collection.concern
+		## standard__collection__abstract_collection.concern
+			### standard__collection__abstract_collection__Map__SELF.definition
+				#### standard__collection__abstract_collection__Map__SELF.lin
+			### standard__collection__abstract_collection__Map___91d_93d_61d.definition
+			### standard__collection__abstract_collection__Map__clear.definition
+			### standard__collection__abstract_collection__Map__keys.definition
+				#### standard__collection__abstract_collection__Map__keys.lin
+			### standard__collection__abstract_collection__Map__recover_with.definition
+			### standard__collection__abstract_collection__Map__values.definition
+				#### standard__collection__abstract_collection__Map__values.lin
+		## standard__collection__hash_collection.concern
+		## standard__string.concern
+			### standard__string__Map__join.definition
+
+MClassPage MapIterator
+	# MapIterator.section
+		## standard__collection__abstract_collection__MapIterator.intro
+		## standard__collection__abstract_collection__MapIterator.inheritance
+			### standard__collection__abstract_collection__MapIterator.graph
+			### list.group
+				#### standard__collection__abstract_collection__MapIterator.parents
+				#### standard__collection__abstract_collection__MapIterator.ancestors
+				#### standard__collection__abstract_collection__MapIterator.children
+				#### standard__collection__abstract_collection__MapIterator.descendants
+		## standard__collection__abstract_collection__MapIterator.constructors
+		## standard__collection__abstract_collection__MapIterator.concerns
+		## standard.concern
+		## standard.concern
+		## standard__collection.concern
+		## standard__collection__abstract_collection.concern
+			### standard__collection__abstract_collection__MapIterator__SELF.definition
+				#### standard__collection__abstract_collection__MapIterator__SELF.lin
+			### standard__collection__abstract_collection__MapIterator__finish.definition
+			### standard__collection__abstract_collection__MapIterator__is_ok.definition
+			### standard__collection__abstract_collection__MapIterator__item.definition
+			### standard__collection__abstract_collection__MapIterator__key.definition
+			### standard__collection__abstract_collection__MapIterator__next.definition
+
+MPropertyPage finish
+	# finish.section
+		## standard__collection__abstract_collection__MapIterator__finish.intro
+
+MPropertyPage is_ok
+	# is_ok.section
+		## standard__collection__abstract_collection__MapIterator__is_ok.intro
+		## standard__collection__abstract_collection__MapIterator__is_ok.concerns
+		## standard.concern
+		## standard.concern
+		## standard__collection.concern
+		## standard__collection__hash_collection.concern
+			### standard__collection__hash_collection__HashMapIterator__is_ok.definition
+
+MPropertyPage item
+	# item.section
+		## standard__collection__abstract_collection__MapIterator__item.intro
+		## standard__collection__abstract_collection__MapIterator__item.concerns
+		## standard.concern
+		## standard.concern
+		## standard__collection.concern
+		## standard__collection__hash_collection.concern
+			### standard__collection__hash_collection__HashMapIterator__item.definition
+
+MPropertyPage key
+	# key.section
+		## standard__collection__abstract_collection__MapIterator__key.intro
+		## standard__collection__abstract_collection__MapIterator__key.concerns
+		## standard.concern
+		## standard.concern
+		## standard__collection.concern
+		## standard__collection__hash_collection.concern
+			### standard__collection__hash_collection__HashMapIterator__key.definition
+
+MPropertyPage next
+	# next.section
+		## standard__collection__abstract_collection__MapIterator__next.intro
+		## standard__collection__abstract_collection__MapIterator__next.concerns
+		## standard.concern
+		## standard.concern
+		## standard__collection.concern
+		## standard__collection__hash_collection.concern
+			### standard__collection__hash_collection__HashMapIterator__next.definition
+
+MClassPage MapKeysIterator
+	# MapKeysIterator.section
+		## standard__collection__abstract_collection__MapKeysIterator.intro
+		## standard__collection__abstract_collection__MapKeysIterator.inheritance
+			### standard__collection__abstract_collection__MapKeysIterator.graph
+			### list.group
+				#### standard__collection__abstract_collection__MapKeysIterator.parents
+				#### standard__collection__abstract_collection__MapKeysIterator.ancestors
+				#### standard__collection__abstract_collection__MapKeysIterator.children
+				#### standard__collection__abstract_collection__MapKeysIterator.descendants
+		## standard__collection__abstract_collection__MapKeysIterator.constructors
+			### standard__collection__abstract_collection__MapKeysIterator__init.definition
+				#### standard__collection__abstract_collection__MapKeysIterator__init.lin
+		## standard__collection__abstract_collection__MapKeysIterator.concerns
+		## standard.concern
+		## standard.concern
+		## standard__collection.concern
+		## standard__collection__abstract_collection.concern
+			### standard__collection__abstract_collection__MapKeysIterator__SELF.definition
+				#### standard__collection__abstract_collection__MapKeysIterator__SELF.lin
+			### standard__collection__abstract_collection__MapKeysIterator__is_ok.definition
+				#### standard__collection__abstract_collection__MapKeysIterator__is_ok.lin
+			### standard__collection__abstract_collection__MapKeysIterator__item.definition
+				#### standard__collection__abstract_collection__MapKeysIterator__item.lin
+			### standard__collection__abstract_collection__MapKeysIterator__next.definition
+				#### standard__collection__abstract_collection__MapKeysIterator__next.lin
+			### standard__collection__abstract_collection__MapKeysIterator__original_iterator.definition
+
+MPropertyPage original_iterator
+	# original_iterator.section
+		## standard__collection__abstract_collection__MapKeysIterator__original_iterator.intro
+
+MClassPage MapRead
+	# MapRead.section
+		## standard__collection__abstract_collection__MapRead.intro
+		## standard__collection__abstract_collection__MapRead.inheritance
+			### standard__collection__abstract_collection__MapRead.graph
+			### list.group
+				#### standard__collection__abstract_collection__MapRead.parents
+				#### standard__collection__abstract_collection__MapRead.ancestors
+				#### standard__collection__abstract_collection__MapRead.children
+				#### standard__collection__abstract_collection__MapRead.descendants
+		## standard__collection__abstract_collection__MapRead.constructors
+		## standard__collection__abstract_collection__MapRead.concerns
+		## standard.concern
+		## standard.concern
+		## standard__collection.concern
+		## standard__collection__abstract_collection.concern
+			### standard__collection__abstract_collection__MapRead__SELF.definition
+				#### standard__collection__abstract_collection__MapRead__SELF.lin
+			### standard__collection__abstract_collection__MapRead___61d_61d.definition
+				#### standard__collection__abstract_collection__MapRead___61d_61d.lin
+			### standard__collection__abstract_collection__MapRead___91d_93d.definition
+			### standard__collection__abstract_collection__MapRead__get_or_default.definition
+			### standard__collection__abstract_collection__MapRead__get_or_null.definition
+			### standard__collection__abstract_collection__MapRead__has_key.definition
+			### standard__collection__abstract_collection__MapRead__hash.definition
+				#### standard__collection__abstract_collection__MapRead__hash.lin
+			### standard__collection__abstract_collection__MapRead__is_empty.definition
+			### standard__collection__abstract_collection__MapRead__iterator.definition
+			### standard__collection__abstract_collection__MapRead__keys.definition
+			### standard__collection__abstract_collection__MapRead__length.definition
+			### standard__collection__abstract_collection__MapRead__provide_default_value.definition
+			### standard__collection__abstract_collection__MapRead__values.definition
+		## standard__collection__sorter.concern
+			### standard__collection__sorter__MapRead__keys_sorted_by_values.definition
+			### standard__collection__sorter__MapRead__to_map_comparator.definition
+			### standard__collection__sorter__MapRead__values_sorted_by_key.definition
+
+MPropertyPage []
+	# [].section
+		## standard__collection__abstract_collection__MapRead___91d_93d.intro
+		## standard__collection__abstract_collection__MapRead___91d_93d.concerns
+		## standard.concern
+		## standard.concern
+		## standard__collection.concern
+		## standard__collection__abstract_collection.concern
+			### standard__collection__abstract_collection__CoupleMap___91d_93d.definition
+		## standard__collection__array.concern
+			### standard__collection__array__ArrayMap___91d_93d.definition
+		## standard__collection__hash_collection.concern
+			### standard__collection__hash_collection__HashMap___91d_93d.definition
+
+MPropertyPage get_or_default
+	# get_or_default.section
+		## standard__collection__abstract_collection__MapRead__get_or_default.intro
+
+MPropertyPage get_or_null
+	# get_or_null.section
+		## standard__collection__abstract_collection__MapRead__get_or_null.intro
+		## standard__collection__abstract_collection__MapRead__get_or_null.concerns
+		## standard.concern
+		## standard.concern
+		## standard__collection.concern
+		## standard__collection__hash_collection.concern
+			### standard__collection__hash_collection__HashMap__get_or_null.definition
+
+MPropertyPage has_key
+	# has_key.section
+		## standard__collection__abstract_collection__MapRead__has_key.intro
+		## standard__collection__abstract_collection__MapRead__has_key.concerns
+		## standard.concern
+		## standard.concern
+		## standard__collection.concern
+		## standard__collection__abstract_collection.concern
+			### standard__collection__abstract_collection__CoupleMap__has_key.definition
+		## standard__collection__hash_collection.concern
+			### standard__collection__hash_collection__HashMap__has_key.definition
+
+MPropertyPage is_empty
+	# is_empty.section
+		## standard__collection__abstract_collection__MapRead__is_empty.intro
+		## standard__collection__abstract_collection__MapRead__is_empty.concerns
+		## standard.concern
+		## standard.concern
+		## standard__collection.concern
+		## standard__collection__array.concern
+			### standard__collection__array__ArrayMap__is_empty.definition
+		## standard__collection__hash_collection.concern
+			### standard__collection__hash_collection__HashMap__is_empty.definition
+
+MPropertyPage iterator
+	# iterator.section
+		## standard__collection__abstract_collection__MapRead__iterator.intro
+		## standard__collection__abstract_collection__MapRead__iterator.concerns
+		## standard.concern
+		## standard.concern
+		## standard__collection.concern
+		## standard__collection__abstract_collection.concern
+			### standard__collection__abstract_collection__CoupleMap__iterator.definition
+		## standard__collection__hash_collection.concern
+			### standard__collection__hash_collection__HashMap__iterator.definition
+
+MPropertyPage keys
+	# keys.section
+		## standard__collection__abstract_collection__MapRead__keys.intro
+		## standard__collection__abstract_collection__MapRead__keys.concerns
+		## standard.concern
+		## standard.concern
+		## standard__collection.concern
+		## standard__collection__abstract_collection.concern
+			### standard__collection__abstract_collection__Map__keys.definition
+		## standard__collection__array.concern
+			### standard__collection__array__ArrayMap__keys.definition
+		## standard__collection__hash_collection.concern
+			### standard__collection__hash_collection__HashMap__keys.definition
+
+MPropertyPage keys_sorted_by_values
+	# keys_sorted_by_values.section
+		## standard__collection__abstract_collection__MapRead__keys_sorted_by_values.intro
+
+MPropertyPage length
+	# length.section
+		## standard__collection__abstract_collection__MapRead__length.intro
+		## standard__collection__abstract_collection__MapRead__length.concerns
+		## standard.concern
+		## standard.concern
+		## standard__collection.concern
+		## standard__collection__array.concern
+			### standard__collection__array__ArrayMap__length.definition
+		## standard__collection__hash_collection.concern
+			### standard__collection__hash_collection__HashMap__length.definition
+
+MPropertyPage provide_default_value
+	# provide_default_value.section
+		## standard__collection__abstract_collection__MapRead__provide_default_value.intro
+
+MPropertyPage to_map_comparator
+	# to_map_comparator.section
+		## standard__collection__abstract_collection__MapRead__to_map_comparator.intro
+
+MPropertyPage values
+	# values.section
+		## standard__collection__abstract_collection__MapRead__values.intro
+		## standard__collection__abstract_collection__MapRead__values.concerns
+		## standard.concern
+		## standard.concern
+		## standard__collection.concern
+		## standard__collection__abstract_collection.concern
+			### standard__collection__abstract_collection__Map__values.definition
+		## standard__collection__array.concern
+			### standard__collection__array__ArrayMap__values.definition
+		## standard__collection__hash_collection.concern
+			### standard__collection__hash_collection__HashMap__values.definition
+
+MPropertyPage values_sorted_by_key
+	# values_sorted_by_key.section
+		## standard__collection__abstract_collection__MapRead__values_sorted_by_key.intro
+
+MClassPage MapValuesIterator
+	# MapValuesIterator.section
+		## standard__collection__abstract_collection__MapValuesIterator.intro
+		## standard__collection__abstract_collection__MapValuesIterator.inheritance
+			### standard__collection__abstract_collection__MapValuesIterator.graph
+			### list.group
+				#### standard__collection__abstract_collection__MapValuesIterator.parents
+				#### standard__collection__abstract_collection__MapValuesIterator.ancestors
+				#### standard__collection__abstract_collection__MapValuesIterator.children
+				#### standard__collection__abstract_collection__MapValuesIterator.descendants
+		## standard__collection__abstract_collection__MapValuesIterator.constructors
+			### standard__collection__abstract_collection__MapValuesIterator__init.definition
+				#### standard__collection__abstract_collection__MapValuesIterator__init.lin
+		## standard__collection__abstract_collection__MapValuesIterator.concerns
+		## standard.concern
+		## standard.concern
+		## standard__collection.concern
+		## standard__collection__abstract_collection.concern
+			### standard__collection__abstract_collection__MapValuesIterator__SELF.definition
+				#### standard__collection__abstract_collection__MapValuesIterator__SELF.lin
+			### standard__collection__abstract_collection__MapValuesIterator__is_ok.definition
+				#### standard__collection__abstract_collection__MapValuesIterator__is_ok.lin
+			### standard__collection__abstract_collection__MapValuesIterator__item.definition
+				#### standard__collection__abstract_collection__MapValuesIterator__item.lin
+			### standard__collection__abstract_collection__MapValuesIterator__next.definition
+				#### standard__collection__abstract_collection__MapValuesIterator__next.lin
+			### standard__collection__abstract_collection__MapValuesIterator__original_iterator.definition
+
+MPropertyPage original_iterator
+	# original_iterator.section
+		## standard__collection__abstract_collection__MapValuesIterator__original_iterator.intro
+
+MPropertyPage []=
+	# []=.section
+		## standard__collection__abstract_collection__Map___91d_93d_61d.intro
+		## standard__collection__abstract_collection__Map___91d_93d_61d.concerns
+		## standard.concern
+		## standard.concern
+		## standard__collection.concern
+		## standard__collection__array.concern
+			### standard__collection__array__ArrayMap___91d_93d_61d.definition
+		## standard__collection__hash_collection.concern
+			### standard__collection__hash_collection__HashMap___91d_93d_61d.definition
+
+MPropertyPage clear
+	# clear.section
+		## standard__collection__abstract_collection__Map__clear.intro
+		## standard__collection__abstract_collection__Map__clear.concerns
+		## standard.concern
+		## standard.concern
+		## standard__collection.concern
+		## standard__collection__array.concern
+			### standard__collection__array__ArrayMap__clear.definition
+		## standard__collection__hash_collection.concern
+			### standard__collection__hash_collection__HashMap__clear.definition
+
+MPropertyPage join
+	# join.section
+		## standard__collection__abstract_collection__Map__join.intro
+
+MPropertyPage new
+	# new.section
+		## standard__collection__abstract_collection__Map__new.intro
+
+MPropertyPage recover_with
+	# recover_with.section
+		## standard__collection__abstract_collection__Map__recover_with.intro
+
+MClassPage RemovableCollection
+	# RemovableCollection.section
+		## standard__collection__abstract_collection__RemovableCollection.intro
+		## standard__collection__abstract_collection__RemovableCollection.inheritance
+			### standard__collection__abstract_collection__RemovableCollection.graph
+			### list.group
+				#### standard__collection__abstract_collection__RemovableCollection.parents
+				#### standard__collection__abstract_collection__RemovableCollection.ancestors
+				#### standard__collection__abstract_collection__RemovableCollection.children
+				#### standard__collection__abstract_collection__RemovableCollection.descendants
+		## standard__collection__abstract_collection__RemovableCollection.constructors
+		## standard__collection__abstract_collection__RemovableCollection.concerns
+		## standard.concern
+		## standard.concern
+		## standard__collection.concern
+		## standard__collection__abstract_collection.concern
+			### standard__collection__abstract_collection__RemovableCollection__SELF.definition
+				#### standard__collection__abstract_collection__RemovableCollection__SELF.lin
+			### standard__collection__abstract_collection__RemovableCollection__clear.definition
+			### standard__collection__abstract_collection__RemovableCollection__remove.definition
+			### standard__collection__abstract_collection__RemovableCollection__remove_all.definition
+
+MPropertyPage clear
+	# clear.section
+		## standard__collection__abstract_collection__RemovableCollection__clear.intro
+		## standard__collection__abstract_collection__RemovableCollection__clear.concerns
+		## standard.concern
+		## standard.concern
+		## standard__collection.concern
+		## standard__collection__array.concern
+			### standard__collection__array__AbstractArray__clear.definition
+			### standard__collection__array__ArraySet__clear.definition
+		## standard__collection__list.concern
+			### standard__collection__list__List__clear.definition
+		## standard__collection__hash_collection.concern
+			### standard__collection__hash_collection__HashSet__clear.definition
+		## standard__bytes.concern
+			### standard__bytes__Bytes__clear.definition
+
+MPropertyPage remove
+	# remove.section
+		## standard__collection__abstract_collection__RemovableCollection__remove.intro
+		## standard__collection__abstract_collection__RemovableCollection__remove.concerns
+		## standard.concern
+		## standard.concern
+		## standard__collection.concern
+		## standard__collection__array.concern
+			### standard__collection__array__AbstractArray__remove.definition
+			### standard__collection__array__ArraySet__remove.definition
+		## standard__collection__list.concern
+			### standard__collection__list__List__remove.definition
+		## standard__collection__hash_collection.concern
+			### standard__collection__hash_collection__HashSet__remove.definition
+
+MPropertyPage remove_all
+	# remove_all.section
+		## standard__collection__abstract_collection__RemovableCollection__remove_all.intro
+		## standard__collection__abstract_collection__RemovableCollection__remove_all.concerns
+		## standard.concern
+		## standard.concern
+		## standard__collection.concern
+		## standard__collection__abstract_collection.concern
+			### standard__collection__abstract_collection__Set__remove_all.definition
+		## standard__collection__array.concern
+			### standard__collection__array__AbstractArray__remove_all.definition
+			### standard__collection__array__ArraySet__remove_all.definition
+
+MClassPage Sequence
+	# Sequence.section
+		## standard__collection__abstract_collection__Sequence.intro
+		## standard__collection__abstract_collection__Sequence.inheritance
+			### standard__collection__abstract_collection__Sequence.graph
+			### list.group
+				#### standard__collection__abstract_collection__Sequence.parents
+				#### standard__collection__abstract_collection__Sequence.ancestors
+				#### standard__collection__abstract_collection__Sequence.children
+				#### standard__collection__abstract_collection__Sequence.descendants
+		## standard__collection__abstract_collection__Sequence.constructors
+		## standard__collection__abstract_collection__Sequence.concerns
+		## standard.concern
+		## standard.concern
+		## standard__collection.concern
+		## standard__collection__abstract_collection.concern
+			### standard__collection__abstract_collection__Sequence__SELF.definition
+				#### standard__collection__abstract_collection__Sequence__SELF.lin
+			### standard__collection__abstract_collection__Sequence___91d_93d_61d.definition
+			### standard__collection__abstract_collection__Sequence__add.definition
+				#### standard__collection__abstract_collection__Sequence__add.lin
+			### standard__collection__abstract_collection__Sequence__append.definition
+			### standard__collection__abstract_collection__Sequence__first_61d.definition
+			### standard__collection__abstract_collection__Sequence__insert.definition
+			### standard__collection__abstract_collection__Sequence__insert_all.definition
+			### standard__collection__abstract_collection__Sequence__last_61d.definition
+			### standard__collection__abstract_collection__Sequence__pop.definition
+			### standard__collection__abstract_collection__Sequence__prepend.definition
+			### standard__collection__abstract_collection__Sequence__push.definition
+			### standard__collection__abstract_collection__Sequence__remove_at.definition
+			### standard__collection__abstract_collection__Sequence__shift.definition
+			### standard__collection__abstract_collection__Sequence__unshift.definition
+		## standard__collection__collection.concern
+			### standard__collection__collection__Sequence__subarray.definition
+		## standard__queue.concern
+			### standard__queue__Sequence__as_fifo.definition
+			### standard__queue__Sequence__as_lifo.definition
+
+MClassPage SequenceRead
+	# SequenceRead.section
+		## standard__collection__abstract_collection__SequenceRead.intro
+		## standard__collection__abstract_collection__SequenceRead.inheritance
+			### standard__collection__abstract_collection__SequenceRead.graph
+			### list.group
+				#### standard__collection__abstract_collection__SequenceRead.parents
+				#### standard__collection__abstract_collection__SequenceRead.ancestors
+				#### standard__collection__abstract_collection__SequenceRead.children
+				#### standard__collection__abstract_collection__SequenceRead.descendants
+		## standard__collection__abstract_collection__SequenceRead.constructors
+		## standard__collection__abstract_collection__SequenceRead.concerns
+		## standard.concern
+		## standard.concern
+		## standard__collection.concern
+		## standard__collection__abstract_collection.concern
+			### standard__collection__abstract_collection__SequenceRead__SELF.definition
+				#### standard__collection__abstract_collection__SequenceRead__SELF.lin
+			### standard__collection__abstract_collection__SequenceRead___61d_61d.definition
+				#### standard__collection__abstract_collection__SequenceRead___61d_61d.lin
+			### standard__collection__abstract_collection__SequenceRead___91d_93d.definition
+			### standard__collection__abstract_collection__SequenceRead__first.definition
+				#### standard__collection__abstract_collection__SequenceRead__first.lin
+			### standard__collection__abstract_collection__SequenceRead__hash.definition
+				#### standard__collection__abstract_collection__SequenceRead__hash.lin
+			### standard__collection__abstract_collection__SequenceRead__index_of.definition
+			### standard__collection__abstract_collection__SequenceRead__index_of_from.definition
+			### standard__collection__abstract_collection__SequenceRead__iterator.definition
+				#### standard__collection__abstract_collection__SequenceRead__iterator.lin
+			### standard__collection__abstract_collection__SequenceRead__iterator_from.definition
+			### standard__collection__abstract_collection__SequenceRead__last.definition
+			### standard__collection__abstract_collection__SequenceRead__last_index_of.definition
+			### standard__collection__abstract_collection__SequenceRead__last_index_of_from.definition
+			### standard__collection__abstract_collection__SequenceRead__reverse_iterator.definition
+			### standard__collection__abstract_collection__SequenceRead__reverse_iterator_from.definition
+		## standard__math.concern
+			### standard__math__SequenceRead__rand.definition
+				#### standard__math__SequenceRead__rand.lin
+
+MPropertyPage []
+	# [].section
+		## standard__collection__abstract_collection__SequenceRead___91d_93d.intro
+		## standard__collection__abstract_collection__SequenceRead___91d_93d.concerns
+		## standard.concern
+		## standard.concern
+		## standard__collection.concern
+		## standard__collection__array.concern
+			### standard__collection__array__Array___91d_93d.definition
+		## standard__collection__list.concern
+			### standard__collection__list__List___91d_93d.definition
+		## standard__bytes.concern
+			### standard__bytes__Bytes___91d_93d.definition
+		## standard__ropes.concern
+			### standard__ropes__RopeBufferChars___91d_93d.definition
+
+MPropertyPage index_of
+	# index_of.section
+		## standard__collection__abstract_collection__SequenceRead__index_of.intro
+		## standard__collection__abstract_collection__SequenceRead__index_of.concerns
+		## standard.concern
+		## standard.concern
+		## standard__collection.concern
+		## standard__collection__array.concern
+			### standard__collection__array__AbstractArrayRead__index_of.definition
+
+MPropertyPage index_of_from
+	# index_of_from.section
+		## standard__collection__abstract_collection__SequenceRead__index_of_from.intro
+		## standard__collection__abstract_collection__SequenceRead__index_of_from.concerns
+		## standard.concern
+		## standard.concern
+		## standard__collection.concern
+		## standard__collection__array.concern
+			### standard__collection__array__AbstractArrayRead__index_of_from.definition
+
+MPropertyPage iterator_from
+	# iterator_from.section
+		## standard__collection__abstract_collection__SequenceRead__iterator_from.intro
+		## standard__collection__abstract_collection__SequenceRead__iterator_from.concerns
+		## standard.concern
+		## standard.concern
+		## standard__ropes.concern
+			### standard__ropes__RopeBufferChars__iterator_from.definition
+
+MPropertyPage last
+	# last.section
+		## standard__collection__abstract_collection__SequenceRead__last.intro
+		## standard__collection__abstract_collection__SequenceRead__last.concerns
+		## standard.concern
+		## standard.concern
+		## standard__collection.concern
+		## standard__collection__list.concern
+			### standard__collection__list__List__last.definition
+
+MPropertyPage last_index_of
+	# last_index_of.section
+		## standard__collection__abstract_collection__SequenceRead__last_index_of.intro
+		## standard__collection__abstract_collection__SequenceRead__last_index_of.concerns
+		## standard.concern
+		## standard.concern
+		## standard__collection.concern
+		## standard__collection__array.concern
+			### standard__collection__array__AbstractArrayRead__last_index_of.definition
+
+MPropertyPage last_index_of_from
+	# last_index_of_from.section
+		## standard__collection__abstract_collection__SequenceRead__last_index_of_from.intro
+		## standard__collection__abstract_collection__SequenceRead__last_index_of_from.concerns
+		## standard.concern
+		## standard.concern
+		## standard__collection.concern
+		## standard__collection__array.concern
+			### standard__collection__array__AbstractArrayRead__last_index_of_from.definition
+
+MPropertyPage reverse_iterator
+	# reverse_iterator.section
+		## standard__collection__abstract_collection__SequenceRead__reverse_iterator.intro
+		## standard__collection__abstract_collection__SequenceRead__reverse_iterator.concerns
+		## standard.concern
+		## standard.concern
+		## standard__collection.concern
+		## standard__collection__array.concern
+			### standard__collection__array__AbstractArrayRead__reverse_iterator.definition
+		## standard__collection__list.concern
+			### standard__collection__list__List__reverse_iterator.definition
+
+MPropertyPage reverse_iterator_from
+	# reverse_iterator_from.section
+		## standard__collection__abstract_collection__SequenceRead__reverse_iterator_from.intro
+		## standard__collection__abstract_collection__SequenceRead__reverse_iterator_from.concerns
+		## standard.concern
+		## standard.concern
+		## standard__ropes.concern
+			### standard__ropes__RopeBufferChars__reverse_iterator_from.definition
+
+MPropertyPage []=
+	# []=.section
+		## standard__collection__abstract_collection__Sequence___91d_93d_61d.intro
+		## standard__collection__abstract_collection__Sequence___91d_93d_61d.concerns
+		## standard.concern
+		## standard.concern
+		## standard__collection.concern
+		## standard__collection__array.concern
+			### standard__collection__array__Array___91d_93d_61d.definition
+		## standard__collection__list.concern
+			### standard__collection__list__List___91d_93d_61d.definition
+		## standard__bytes.concern
+			### standard__bytes__Bytes___91d_93d_61d.definition
+		## standard__ropes.concern
+			### standard__ropes__RopeBufferChars___91d_93d_61d.definition
+
+MPropertyPage append
+	# append.section
+		## standard__collection__abstract_collection__Sequence__append.intro
+		## standard__collection__abstract_collection__Sequence__append.concerns
+		## standard.concern
+		## standard.concern
+		## standard__bytes.concern
+			### standard__bytes__Bytes__append.definition
+
+MPropertyPage as_fifo
+	# as_fifo.section
+		## standard__collection__abstract_collection__Sequence__as_fifo.intro
+
+MPropertyPage as_lifo
+	# as_lifo.section
+		## standard__collection__abstract_collection__Sequence__as_lifo.intro
+
+MPropertyPage first=
+	# first=.section
+		## standard__collection__abstract_collection__Sequence__first_61d.intro
+		## standard__collection__abstract_collection__Sequence__first_61d.concerns
+		## standard.concern
+		## standard.concern
+		## standard__collection.concern
+		## standard__collection__list.concern
+			### standard__collection__list__List__first_61d.definition
+
+MPropertyPage insert
+	# insert.section
+		## standard__collection__abstract_collection__Sequence__insert.intro
+		## standard__collection__abstract_collection__Sequence__insert.concerns
+		## standard.concern
+		## standard.concern
+		## standard__collection.concern
+		## standard__collection__array.concern
+			### standard__collection__array__AbstractArray__insert.definition
+		## standard__collection__list.concern
+			### standard__collection__list__List__insert.definition
+
+MPropertyPage insert_all
+	# insert_all.section
+		## standard__collection__abstract_collection__Sequence__insert_all.intro
+		## standard__collection__abstract_collection__Sequence__insert_all.concerns
+		## standard.concern
+		## standard.concern
+		## standard__collection.concern
+		## standard__collection__array.concern
+			### standard__collection__array__AbstractArray__insert_all.definition
+
+MPropertyPage last=
+	# last=.section
+		## standard__collection__abstract_collection__Sequence__last_61d.intro
+		## standard__collection__abstract_collection__Sequence__last_61d.concerns
+		## standard.concern
+		## standard.concern
+		## standard__collection.concern
+		## standard__collection__list.concern
+			### standard__collection__list__List__last_61d.definition
+
+MPropertyPage pop
+	# pop.section
+		## standard__collection__abstract_collection__Sequence__pop.intro
+		## standard__collection__abstract_collection__Sequence__pop.concerns
+		## standard.concern
+		## standard.concern
+		## standard__collection.concern
+		## standard__collection__array.concern
+			### standard__collection__array__AbstractArray__pop.definition
+		## standard__collection__list.concern
+			### standard__collection__list__List__pop.definition
+
+MPropertyPage prepend
+	# prepend.section
+		## standard__collection__abstract_collection__Sequence__prepend.intro
+
+MPropertyPage push
+	# push.section
+		## standard__collection__abstract_collection__Sequence__push.intro
+		## standard__collection__abstract_collection__Sequence__push.concerns
+		## standard.concern
+		## standard.concern
+		## standard__collection.concern
+		## standard__collection__array.concern
+			### standard__collection__array__AbstractArray__push.definition
+		## standard__collection__list.concern
+			### standard__collection__list__List__push.definition
+		## standard__ropes.concern
+			### standard__ropes__RopeBufferChars__push.definition
+
+MPropertyPage remove_at
+	# remove_at.section
+		## standard__collection__abstract_collection__Sequence__remove_at.intro
+		## standard__collection__abstract_collection__Sequence__remove_at.concerns
+		## standard.concern
+		## standard.concern
+		## standard__collection.concern
+		## standard__collection__array.concern
+			### standard__collection__array__AbstractArray__remove_at.definition
+		## standard__collection__list.concern
+			### standard__collection__list__List__remove_at.definition
+
+MPropertyPage shift
+	# shift.section
+		## standard__collection__abstract_collection__Sequence__shift.intro
+		## standard__collection__abstract_collection__Sequence__shift.concerns
+		## standard.concern
+		## standard.concern
+		## standard__collection.concern
+		## standard__collection__array.concern
+			### standard__collection__array__AbstractArray__shift.definition
+		## standard__collection__list.concern
+			### standard__collection__list__List__shift.definition
+
+MPropertyPage subarray
+	# subarray.section
+		## standard__collection__abstract_collection__Sequence__subarray.intro
+
+MPropertyPage unshift
+	# unshift.section
+		## standard__collection__abstract_collection__Sequence__unshift.intro
+		## standard__collection__abstract_collection__Sequence__unshift.concerns
+		## standard.concern
+		## standard.concern
+		## standard__collection.concern
+		## standard__collection__array.concern
+			### standard__collection__array__AbstractArray__unshift.definition
+		## standard__collection__list.concern
+			### standard__collection__list__List__unshift.definition
+
+MClassPage Set
+	# Set.section
+		## standard__collection__abstract_collection__Set.intro
+		## standard__collection__abstract_collection__Set.inheritance
+			### standard__collection__abstract_collection__Set.graph
+			### list.group
+				#### standard__collection__abstract_collection__Set.parents
+				#### standard__collection__abstract_collection__Set.ancestors
+				#### standard__collection__abstract_collection__Set.children
+				#### standard__collection__abstract_collection__Set.descendants
+		## standard__collection__abstract_collection__Set.constructors
+		## standard__collection__abstract_collection__Set.concerns
+		## standard.concern
+		## standard.concern
+		## standard__collection.concern
+		## standard__collection__abstract_collection.concern
+			### standard__collection__abstract_collection__Set__SELF.definition
+				#### standard__collection__abstract_collection__Set__SELF.lin
+			### standard__collection__abstract_collection__Set___61d_61d.definition
+				#### standard__collection__abstract_collection__Set___61d_61d.lin
+			### standard__collection__abstract_collection__Set__count.definition
+				#### standard__collection__abstract_collection__Set__count.lin
+			### standard__collection__abstract_collection__Set__has_only.definition
+				#### standard__collection__abstract_collection__Set__has_only.lin
+			### standard__collection__abstract_collection__Set__hash.definition
+				#### standard__collection__abstract_collection__Set__hash.lin
+			### standard__collection__abstract_collection__Set__intersection.definition
+			### standard__collection__abstract_collection__Set__new_set.definition
+			### standard__collection__abstract_collection__Set__remove_all.definition
+				#### standard__collection__abstract_collection__Set__remove_all.lin
+			### standard__collection__abstract_collection__Set__union.definition
+
+MPropertyPage intersection
+	# intersection.section
+		## standard__collection__abstract_collection__Set__intersection.intro
+
+MPropertyPage new_set
+	# new_set.section
+		## standard__collection__abstract_collection__Set__new_set.intro
+		## standard__collection__abstract_collection__Set__new_set.concerns
+		## standard.concern
+		## standard.concern
+		## standard__collection.concern
+		## standard__collection__array.concern
+			### standard__collection__array__ArraySet__new_set.definition
+		## standard__collection__hash_collection.concern
+			### standard__collection__hash_collection__HashSet__new_set.definition
+
+MPropertyPage union
+	# union.section
+		## standard__collection__abstract_collection__Set__union.intro
+
+MClassPage SimpleCollection
+	# SimpleCollection.section
+		## standard__collection__abstract_collection__SimpleCollection.intro
+		## standard__collection__abstract_collection__SimpleCollection.inheritance
+			### standard__collection__abstract_collection__SimpleCollection.graph
+			### list.group
+				#### standard__collection__abstract_collection__SimpleCollection.parents
+				#### standard__collection__abstract_collection__SimpleCollection.ancestors
+				#### standard__collection__abstract_collection__SimpleCollection.children
+				#### standard__collection__abstract_collection__SimpleCollection.descendants
+		## standard__collection__abstract_collection__SimpleCollection.constructors
+		## standard__collection__abstract_collection__SimpleCollection.concerns
+		## standard.concern
+		## standard.concern
+		## standard__collection.concern
+		## standard__collection__abstract_collection.concern
+			### standard__collection__abstract_collection__SimpleCollection__SELF.definition
+				#### standard__collection__abstract_collection__SimpleCollection__SELF.lin
+			### standard__collection__abstract_collection__SimpleCollection__add.definition
+			### standard__collection__abstract_collection__SimpleCollection__add_all.definition
+		## standard__queue.concern
+			### standard__queue__SimpleCollection__as_random.definition
+
+MPropertyPage add
+	# add.section
+		## standard__collection__abstract_collection__SimpleCollection__add.intro
+		## standard__collection__abstract_collection__SimpleCollection__add.concerns
+		## standard.concern
+		## standard.concern
+		## standard__collection.concern
+		## standard__collection__abstract_collection.concern
+			### standard__collection__abstract_collection__Sequence__add.definition
+		## standard__collection__array.concern
+			### standard__collection__array__AbstractArray__add.definition
+			### standard__collection__array__Array__add.definition
+			### standard__collection__array__ArraySet__add.definition
+		## standard__collection__hash_collection.concern
+			### standard__collection__hash_collection__HashSet__add.definition
+		## standard__collection__union_find.concern
+			### standard__collection__union_find__DisjointSet__add.definition
+		## standard__queue.concern
+			### standard__queue__MinHeap__add.definition
+		## standard__bytes.concern
+			### standard__bytes__Bytes__add.definition
+		## standard__ropes.concern
+			### standard__ropes__RopeBufferChars__add.definition
+
+MPropertyPage add_all
+	# add_all.section
+		## standard__collection__abstract_collection__SimpleCollection__add_all.intro
+		## standard__collection__abstract_collection__SimpleCollection__add_all.concerns
+		## standard.concern
+		## standard.concern
+		## standard__collection.concern
+		## standard__collection__array.concern
+			### standard__collection__array__Array__add_all.definition
+
+MPropertyPage as_random
+	# as_random.section
+		## standard__collection__abstract_collection__SimpleCollection__as_random.intro
+
+MModulePage array
+	# array.section
+		## standard__collection__array.intro
+		## standard__collection__array.importation
+			### standard__collection__array.graph
+			### list.group
+				#### standard__collection__array.imports
+				#### standard__collection__array.clients
+		## standard__collection__array.concerns
+		## standard.concern
+		## standard.concern
+		## standard__collection.concern
+		## standard__collection__array.concern
+			### standard__collection__array__AbstractArrayRead.definition-list
+				#### standard__collection__array__AbstractArrayRead.definition
+					##### standard__collection__array__AbstractArrayRead.intros_redefs
+						###### list.group
+							####### standard__collection__array__AbstractArrayRead.intros
+							####### standard__collection__array__AbstractArrayRead.redefs
+			### standard__collection__array__AbstractArray.definition-list
+				#### standard__collection__array__AbstractArray.definition
+					##### standard__collection__array__AbstractArray.intros_redefs
+						###### list.group
+							####### standard__collection__array__AbstractArray.intros
+							####### standard__collection__array__AbstractArray.redefs
+			### standard__collection__array__Array.definition-list
+				#### standard__collection__array__Array.definition
+					##### standard__collection__array__Array.intros_redefs
+						###### list.group
+							####### standard__collection__array__Array.intros
+							####### standard__collection__array__Array.redefs
+			### standard__collection__array__ArrayCmp.definition-list
+				#### standard__collection__array__ArrayCmp.definition
+					##### standard__collection__array__ArrayCmp.intros_redefs
+						###### list.group
+							####### standard__collection__array__ArrayCmp.intros
+							####### standard__collection__array__ArrayCmp.redefs
+			### standard__collection__array__ArrayMap.definition-list
+				#### standard__collection__array__ArrayMap.definition
+					##### standard__collection__array__ArrayMap.intros_redefs
+						###### list.group
+							####### standard__collection__array__ArrayMap.intros
+							####### standard__collection__array__ArrayMap.redefs
+			### standard__collection__array__ArraySet.definition-list
+				#### standard__collection__array__ArraySet.definition
+					##### standard__collection__array__ArraySet.intros_redefs
+						###### list.group
+							####### standard__collection__array__ArraySet.intros
+							####### standard__collection__array__ArraySet.redefs
+			### standard__collection__array__NativeArray.definition-list
+				#### standard__collection__array__NativeArray.definition
+					##### standard__collection__array__NativeArray.intros_redefs
+						###### list.group
+							####### standard__collection__array__NativeArray.intros
+							####### standard__collection__array__NativeArray.redefs
+		## standard__collection__abstract_collection.concern
+			### standard__collection__abstract_collection__Collection.definition-list
+				#### standard__collection__abstract_collection__Collection.definition
+				#### standard__collection__array__Collection.definition
+					##### standard__collection__array__Collection.intros_redefs
+						###### list.group
+							####### standard__collection__array__Collection.intros
+							####### standard__collection__array__Collection.redefs
+			### standard__collection__abstract_collection__Iterator.definition-list
+				#### standard__collection__abstract_collection__Iterator.definition
+				#### standard__collection__array__Iterator.definition
+					##### standard__collection__array__Iterator.intros_redefs
+						###### list.group
+							####### standard__collection__array__Iterator.intros
+							####### standard__collection__array__Iterator.redefs
+
+CodePage array
+	# standard__collection__array.code
+
+MClassPage AbstractArray
+	# AbstractArray.section
+		## standard__collection__array__AbstractArray.intro
+		## standard__collection__array__AbstractArray.inheritance
+			### standard__collection__array__AbstractArray.graph
+			### list.group
+				#### standard__collection__array__AbstractArray.parents
+				#### standard__collection__array__AbstractArray.ancestors
+				#### standard__collection__array__AbstractArray.children
+				#### standard__collection__array__AbstractArray.descendants
+		## standard__collection__array__AbstractArray.constructors
+			### standard__kernel__Object__init.definition
+		## standard__collection__array__AbstractArray.concerns
+		## standard.concern
+		## standard.concern
+		## standard__collection.concern
+		## standard__collection__array.concern
+			### standard__collection__array__AbstractArray__SELF.definition
+				#### standard__collection__array__AbstractArray__SELF.lin
+			### standard__collection__array__AbstractArray__add.definition
+				#### standard__collection__array__AbstractArray__add.lin
+			### standard__collection__array__AbstractArray__clear.definition
+				#### standard__collection__array__AbstractArray__clear.lin
+			### standard__collection__array__AbstractArray__enlarge.definition
+			### standard__collection__array__AbstractArray__insert.definition
+				#### standard__collection__array__AbstractArray__insert.lin
+			### standard__collection__array__AbstractArray__insert_all.definition
+				#### standard__collection__array__AbstractArray__insert_all.lin
+			### standard__collection__array__AbstractArray__pop.definition
+				#### standard__collection__array__AbstractArray__pop.lin
+			### standard__collection__array__AbstractArray__push.definition
+				#### standard__collection__array__AbstractArray__push.lin
+			### standard__collection__array__AbstractArray__remove.definition
+				#### standard__collection__array__AbstractArray__remove.lin
+			### standard__collection__array__AbstractArray__remove_all.definition
+				#### standard__collection__array__AbstractArray__remove_all.lin
+			### standard__collection__array__AbstractArray__remove_at.definition
+				#### standard__collection__array__AbstractArray__remove_at.lin
+			### standard__collection__array__AbstractArray__shift.definition
+				#### standard__collection__array__AbstractArray__shift.lin
+			### standard__collection__array__AbstractArray__swap_at.definition
+			### standard__collection__array__AbstractArray__unshift.definition
+				#### standard__collection__array__AbstractArray__unshift.lin
+		## standard__math.concern
+			### standard__math__AbstractArray__shuffle.definition
+
+MClassPage AbstractArrayRead
+	# AbstractArrayRead.section
+		## standard__collection__array__AbstractArrayRead.intro
+		## standard__collection__array__AbstractArrayRead.inheritance
+			### standard__collection__array__AbstractArrayRead.graph
+			### list.group
+				#### standard__collection__array__AbstractArrayRead.parents
+				#### standard__collection__array__AbstractArrayRead.ancestors
+				#### standard__collection__array__AbstractArrayRead.children
+				#### standard__collection__array__AbstractArrayRead.descendants
+		## standard__collection__array__AbstractArrayRead.constructors
+			### standard__kernel__Object__init.definition
+		## standard__collection__array__AbstractArrayRead.concerns
+		## standard.concern
+		## standard.concern
+		## standard__collection.concern
+		## standard__collection__array.concern
+			### standard__collection__array__AbstractArrayRead__SELF.definition
+				#### standard__collection__array__AbstractArrayRead__SELF.lin
+			### standard__collection__array__AbstractArrayRead__copy_to.definition
+			### standard__collection__array__AbstractArrayRead__count.definition
+				#### standard__collection__array__AbstractArrayRead__count.lin
+			### standard__collection__array__AbstractArrayRead__has.definition
+				#### standard__collection__array__AbstractArrayRead__has.lin
+			### standard__collection__array__AbstractArrayRead__has_only.definition
+				#### standard__collection__array__AbstractArrayRead__has_only.lin
+			### standard__collection__array__AbstractArrayRead__index_of.definition
+				#### standard__collection__array__AbstractArrayRead__index_of.lin
+			### standard__collection__array__AbstractArrayRead__index_of_from.definition
+				#### standard__collection__array__AbstractArrayRead__index_of_from.lin
+			### standard__collection__array__AbstractArrayRead__is_empty.definition
+				#### standard__collection__array__AbstractArrayRead__is_empty.lin
+			### standard__collection__array__AbstractArrayRead__iterator.definition
+				#### standard__collection__array__AbstractArrayRead__iterator.lin
+			### standard__collection__array__AbstractArrayRead__last_index_of.definition
+				#### standard__collection__array__AbstractArrayRead__last_index_of.lin
+			### standard__collection__array__AbstractArrayRead__last_index_of_from.definition
+				#### standard__collection__array__AbstractArrayRead__last_index_of_from.lin
+			### standard__collection__array__AbstractArrayRead__length.definition
+				#### standard__collection__array__AbstractArrayRead__length.lin
+			### standard__collection__array__AbstractArrayRead__output.definition
+				#### standard__collection__array__AbstractArrayRead__output.lin
+			### standard__collection__array__AbstractArrayRead__reverse_iterator.definition
+				#### standard__collection__array__AbstractArrayRead__reverse_iterator.lin
+			### standard__collection__array__AbstractArrayRead__reversed.definition
+			### standard__collection__array__AbstractArrayRead__sub.definition
+
+MPropertyPage copy_to
+	# copy_to.section
+		## standard__collection__array__AbstractArrayRead__copy_to.intro
+
+MPropertyPage reversed
+	# reversed.section
+		## standard__collection__array__AbstractArrayRead__reversed.intro
+
+MPropertyPage sub
+	# sub.section
+		## standard__collection__array__AbstractArrayRead__sub.intro
+
+MPropertyPage enlarge
+	# enlarge.section
+		## standard__collection__array__AbstractArray__enlarge.intro
+		## standard__collection__array__AbstractArray__enlarge.concerns
+		## standard.concern
+		## standard.concern
+		## standard__collection.concern
+		## standard__collection__array.concern
+			### standard__collection__array__Array__enlarge.definition
+		## standard__bytes.concern
+			### standard__bytes__Bytes__enlarge.definition
+
+MPropertyPage shuffle
+	# shuffle.section
+		## standard__collection__array__AbstractArray__shuffle.intro
+
+MPropertyPage swap_at
+	# swap_at.section
+		## standard__collection__array__AbstractArray__swap_at.intro
+
+MClassPage Array
+	# Array.section
+		## standard__collection__array__Array.intro
+		## standard__collection__array__Array.inheritance
+			### standard__collection__array__Array.graph
+			### list.group
+				#### standard__collection__array__Array.parents
+				#### standard__collection__array__Array.ancestors
+				#### standard__collection__array__Array.children
+				#### standard__collection__array__Array.descendants
+		## standard__collection__array__Array.constructors
+			### standard__collection__array__Array__init.definition
+				#### standard__collection__array__Array__init.lin
+			### standard__collection__array__Array__filled_with.definition
+			### standard__collection__array__Array__from.definition
+			### standard__collection__array__Array__with_capacity.definition
+			### standard__collection__array__Array__with_items.definition
+			### standard__collection__array__Array__with_native.definition
+		## standard__collection__array__Array.concerns
+		## standard.concern
+		## standard.concern
+		## standard__collection.concern
+		## standard__collection__array.concern
+			### standard__collection__array__Array__SELF.definition
+				#### standard__collection__array__Array__SELF.lin
+			### standard__collection__array__Array___42d.definition
+			### standard__collection__array__Array___43d.definition
+			### standard__collection__array__Array___61d_61d.definition
+				#### standard__collection__array__Array___61d_61d.lin
+			### standard__collection__array__Array___91d_93d.definition
+				#### standard__collection__array__Array___91d_93d.lin
+			### standard__collection__array__Array___91d_93d_61d.definition
+				#### standard__collection__array__Array___91d_93d_61d.lin
+			### standard__collection__array__Array__add.definition
+				#### standard__collection__array__Array__add.lin
+			### standard__collection__array__Array__add_all.definition
+				#### standard__collection__array__Array__add_all.lin
+			### standard__collection__array__Array__clone.definition
+				#### standard__collection__array__Array__clone.lin
+			### standard__collection__array__Array__enlarge.definition
+				#### standard__collection__array__Array__enlarge.lin
+		## standard__string.concern
+			### standard__string__Array__plain_to_s.definition
+				#### standard__string__Array__plain_to_s.lin
+
+MClassPage ArrayCmp
+	# ArrayCmp.section
+		## standard__collection__array__ArrayCmp.intro
+		## standard__collection__array__ArrayCmp.inheritance
+			### standard__collection__array__ArrayCmp.graph
+			### list.group
+				#### standard__collection__array__ArrayCmp.parents
+				#### standard__collection__array__ArrayCmp.ancestors
+				#### standard__collection__array__ArrayCmp.children
+				#### standard__collection__array__ArrayCmp.descendants
+		## standard__collection__array__ArrayCmp.constructors
+			### standard__collection__array__Array__init.definition
+		## standard__collection__array__ArrayCmp.concerns
+		## standard.concern
+		## standard.concern
+		## standard__collection.concern
+		## standard__collection__array.concern
+			### standard__collection__array__ArrayCmp__OTHER.definition
+				#### standard__collection__array__ArrayCmp__OTHER.lin
+			### standard__collection__array__ArrayCmp__SELF.definition
+				#### standard__collection__array__ArrayCmp__SELF.lin
+			### standard__collection__array__ArrayCmp___60d.definition
+				#### standard__collection__array__ArrayCmp___60d.lin
+			### standard__collection__array__ArrayCmp___60d_61d_62d.definition
+				#### standard__collection__array__ArrayCmp___60d_61d_62d.lin
+
+MClassPage ArrayMap
+	# ArrayMap.section
+		## standard__collection__array__ArrayMap.intro
+		## standard__collection__array__ArrayMap.inheritance
+			### standard__collection__array__ArrayMap.graph
+			### list.group
+				#### standard__collection__array__ArrayMap.parents
+				#### standard__collection__array__ArrayMap.ancestors
+				#### standard__collection__array__ArrayMap.children
+				#### standard__collection__array__ArrayMap.descendants
+		## standard__collection__array__ArrayMap.constructors
+			### standard__kernel__Object__init.definition
+		## standard__collection__array__ArrayMap.concerns
+		## standard.concern
+		## standard.concern
+		## standard__collection.concern
+		## standard__collection__array.concern
+			### standard__collection__array__ArrayMap__SELF.definition
+				#### standard__collection__array__ArrayMap__SELF.lin
+			### standard__collection__array__ArrayMap___91d_93d.definition
+				#### standard__collection__array__ArrayMap___91d_93d.lin
+			### standard__collection__array__ArrayMap___91d_93d_61d.definition
+				#### standard__collection__array__ArrayMap___91d_93d_61d.lin
+			### standard__collection__array__ArrayMap__clear.definition
+				#### standard__collection__array__ArrayMap__clear.lin
+			### standard__collection__array__ArrayMap__clone.definition
+				#### standard__collection__array__ArrayMap__clone.lin
+			### standard__collection__array__ArrayMap__couple_at.definition
+				#### standard__collection__array__ArrayMap__couple_at.lin
+			### standard__collection__array__ArrayMap__couple_iterator.definition
+				#### standard__collection__array__ArrayMap__couple_iterator.lin
+			### standard__collection__array__ArrayMap__enlarge.definition
+			### standard__collection__array__ArrayMap__is_empty.definition
+				#### standard__collection__array__ArrayMap__is_empty.lin
+			### standard__collection__array__ArrayMap__keys.definition
+				#### standard__collection__array__ArrayMap__keys.lin
+			### standard__collection__array__ArrayMap__length.definition
+				#### standard__collection__array__ArrayMap__length.lin
+			### standard__collection__array__ArrayMap__values.definition
+				#### standard__collection__array__ArrayMap__values.lin
+
+MPropertyPage enlarge
+	# enlarge.section
+		## standard__collection__array__ArrayMap__enlarge.intro
+
+MClassPage ArraySet
+	# ArraySet.section
+		## standard__collection__array__ArraySet.intro
+		## standard__collection__array__ArraySet.inheritance
+			### standard__collection__array__ArraySet.graph
+			### list.group
+				#### standard__collection__array__ArraySet.parents
+				#### standard__collection__array__ArraySet.ancestors
+				#### standard__collection__array__ArraySet.children
+				#### standard__collection__array__ArraySet.descendants
+		## standard__collection__array__ArraySet.constructors
+			### standard__collection__array__ArraySet__init.definition
+				#### standard__collection__array__ArraySet__init.lin
+			### standard__collection__array__ArraySet__with_capacity.definition
+		## standard__collection__array__ArraySet.concerns
+		## standard.concern
+		## standard.concern
+		## standard__collection.concern
+		## standard__collection__array.concern
+			### standard__collection__array__ArraySet__SELF.definition
+				#### standard__collection__array__ArraySet__SELF.lin
+			### standard__collection__array__ArraySet__add.definition
+				#### standard__collection__array__ArraySet__add.lin
+			### standard__collection__array__ArraySet__clear.definition
+				#### standard__collection__array__ArraySet__clear.lin
+			### standard__collection__array__ArraySet__clone.definition
+				#### standard__collection__array__ArraySet__clone.lin
+			### standard__collection__array__ArraySet__enlarge.definition
+			### standard__collection__array__ArraySet__first.definition
+				#### standard__collection__array__ArraySet__first.lin
+			### standard__collection__array__ArraySet__has.definition
+				#### standard__collection__array__ArraySet__has.lin
+			### standard__collection__array__ArraySet__is_empty.definition
+				#### standard__collection__array__ArraySet__is_empty.lin
+			### standard__collection__array__ArraySet__iterator.definition
+				#### standard__collection__array__ArraySet__iterator.lin
+			### standard__collection__array__ArraySet__length.definition
+				#### standard__collection__array__ArraySet__length.lin
+			### standard__collection__array__ArraySet__new_set.definition
+				#### standard__collection__array__ArraySet__new_set.lin
+			### standard__collection__array__ArraySet__remove.definition
+				#### standard__collection__array__ArraySet__remove.lin
+			### standard__collection__array__ArraySet__remove_all.definition
+				#### standard__collection__array__ArraySet__remove_all.lin
+
+MPropertyPage enlarge
+	# enlarge.section
+		## standard__collection__array__ArraySet__enlarge.intro
+
+MPropertyPage with_capacity
+	# with_capacity.section
+		## standard__collection__array__ArraySet__with_capacity.intro
+
+MPropertyPage *
+	# *.section
+		## standard__collection__array__Array___42d.intro
+
+MPropertyPage +
+	# +.section
+		## standard__collection__array__Array___43d.intro
+
+MPropertyPage filled_with
+	# filled_with.section
+		## standard__collection__array__Array__filled_with.intro
+
+MPropertyPage from
+	# from.section
+		## standard__collection__array__Array__from.intro
+
+MPropertyPage with_capacity
+	# with_capacity.section
+		## standard__collection__array__Array__with_capacity.intro
+
+MPropertyPage with_items
+	# with_items.section
+		## standard__collection__array__Array__with_items.intro
+
+MPropertyPage with_native
+	# with_native.section
+		## standard__collection__array__Array__with_native.intro
+
+MClassPage NativeArray
+	# NativeArray.section
+		## standard__collection__array__NativeArray.intro
+		## standard__collection__array__NativeArray.inheritance
+			### standard__collection__array__NativeArray.graph
+			### list.group
+				#### standard__collection__array__NativeArray.parents
+				#### standard__collection__array__NativeArray.ancestors
+				#### standard__collection__array__NativeArray.children
+				#### standard__collection__array__NativeArray.descendants
+		## standard__collection__array__NativeArray.constructors
+			### standard__collection__array__NativeArray__new.definition
+		## standard__collection__array__NativeArray.concerns
+		## standard.concern
+		## standard.concern
+		## standard__collection.concern
+		## standard__collection__array.concern
+			### standard__collection__array__NativeArray__SELF.definition
+				#### standard__collection__array__NativeArray__SELF.lin
+			### standard__collection__array__NativeArray___91d_93d.definition
+			### standard__collection__array__NativeArray___91d_93d_61d.definition
+			### standard__collection__array__NativeArray__copy_to.definition
+			### standard__collection__array__NativeArray__length.definition
+			### standard__collection__array__NativeArray__to_a.definition
+		## standard__string.concern
+			### standard__string__NativeArray__native_to_s.definition
+
+MPropertyPage []
+	# [].section
+		## standard__collection__array__NativeArray___91d_93d.intro
+
+MPropertyPage []=
+	# []=.section
+		## standard__collection__array__NativeArray___91d_93d_61d.intro
+
+MPropertyPage copy_to
+	# copy_to.section
+		## standard__collection__array__NativeArray__copy_to.intro
+
+MPropertyPage length
+	# length.section
+		## standard__collection__array__NativeArray__length.intro
+
+MPropertyPage native_to_s
+	# native_to_s.section
+		## standard__collection__array__NativeArray__native_to_s.intro
+
+MPropertyPage new
+	# new.section
+		## standard__collection__array__NativeArray__new.intro
+
+MPropertyPage to_a
+	# to_a.section
+		## standard__collection__array__NativeArray__to_a.intro
+
+MModulePage collection
+	# collection.section
+		## standard__collection__collection.intro
+		## standard__collection__collection.importation
+			### standard__collection__collection.graph
+			### list.group
+				#### standard__collection__collection.imports
+				#### standard__collection__collection.clients
+		## standard__collection__collection.concerns
+		## standard.concern
+		## standard.concern
+		## standard__collection.concern
+		## standard__collection__abstract_collection.concern
+			### standard__collection__abstract_collection__Sequence.definition-list
+				#### standard__collection__abstract_collection__Sequence.definition
+				#### standard__collection__collection__Sequence.definition
+					##### standard__collection__collection__Sequence.intros_redefs
+						###### list.group
+							####### standard__collection__collection__Sequence.intros
+							####### standard__collection__collection__Sequence.redefs
+
+CodePage collection
+	# standard__collection__collection.code
+
+MModulePage hash_collection
+	# hash_collection.section
+		## standard__collection__hash_collection.intro
+		## standard__collection__hash_collection.importation
+			### standard__collection__hash_collection.graph
+			### list.group
+				#### standard__collection__hash_collection.imports
+				#### standard__collection__hash_collection.clients
+		## standard__collection__hash_collection.concerns
+		## standard.concern
+		## standard.concern
+		## standard__collection.concern
+		## standard__collection__hash_collection.concern
+			### standard__collection__hash_collection__HashMap.definition-list
+				#### standard__collection__hash_collection__HashMap.definition
+					##### standard__collection__hash_collection__HashMap.intros_redefs
+						###### list.group
+							####### standard__collection__hash_collection__HashMap.intros
+							####### standard__collection__hash_collection__HashMap.redefs
+			### standard__collection__hash_collection__HashMapIterator.definition-list
+				#### standard__collection__hash_collection__HashMapIterator.definition
+					##### standard__collection__hash_collection__HashMapIterator.intros_redefs
+						###### list.group
+							####### standard__collection__hash_collection__HashMapIterator.intros
+							####### standard__collection__hash_collection__HashMapIterator.redefs
+			### standard__collection__hash_collection__HashSet.definition-list
+				#### standard__collection__hash_collection__HashSet.definition
+					##### standard__collection__hash_collection__HashSet.intros_redefs
+						###### list.group
+							####### standard__collection__hash_collection__HashSet.intros
+							####### standard__collection__hash_collection__HashSet.redefs
+		## standard__collection__abstract_collection.concern
+			### standard__collection__abstract_collection__Map.definition-list
+				#### standard__collection__abstract_collection__Map.definition
+				#### standard__collection__hash_collection__Map.definition
+					##### standard__collection__hash_collection__Map.intros_redefs
+						###### list.group
+							####### standard__collection__hash_collection__Map.intros
+							####### standard__collection__hash_collection__Map.redefs
+
+CodePage hash_collection
+	# standard__collection__hash_collection.code
+
+MClassPage HashMap
+	# HashMap.section
+		## standard__collection__hash_collection__HashMap.intro
+		## standard__collection__hash_collection__HashMap.inheritance
+			### standard__collection__hash_collection__HashMap.graph
+			### list.group
+				#### standard__collection__hash_collection__HashMap.parents
+				#### standard__collection__hash_collection__HashMap.ancestors
+				#### standard__collection__hash_collection__HashMap.children
+				#### standard__collection__hash_collection__HashMap.descendants
+		## standard__collection__hash_collection__HashMap.constructors
+			### standard__collection__hash_collection__HashMap__init.definition
+				#### standard__collection__hash_collection__HashMap__init.lin
+		## standard__collection__hash_collection__HashMap.concerns
+		## standard.concern
+		## standard.concern
+		## standard__collection.concern
+		## standard__collection__hash_collection.concern
+			### standard__collection__hash_collection__HashMap__SELF.definition
+				#### standard__collection__hash_collection__HashMap__SELF.lin
+			### standard__collection__hash_collection__HashMap___91d_93d.definition
+				#### standard__collection__hash_collection__HashMap___91d_93d.lin
+			### standard__collection__hash_collection__HashMap___91d_93d_61d.definition
+				#### standard__collection__hash_collection__HashMap___91d_93d_61d.lin
+			### standard__collection__hash_collection__HashMap__clear.definition
+				#### standard__collection__hash_collection__HashMap__clear.lin
+			### standard__collection__hash_collection__HashMap__get_or_null.definition
+				#### standard__collection__hash_collection__HashMap__get_or_null.lin
+			### standard__collection__hash_collection__HashMap__has_key.definition
+				#### standard__collection__hash_collection__HashMap__has_key.lin
+			### standard__collection__hash_collection__HashMap__is_empty.definition
+				#### standard__collection__hash_collection__HashMap__is_empty.lin
+			### standard__collection__hash_collection__HashMap__iterator.definition
+				#### standard__collection__hash_collection__HashMap__iterator.lin
+			### standard__collection__hash_collection__HashMap__keys.definition
+				#### standard__collection__hash_collection__HashMap__keys.lin
+			### standard__collection__hash_collection__HashMap__length.definition
+				#### standard__collection__hash_collection__HashMap__length.lin
+			### standard__collection__hash_collection__HashMap__values.definition
+				#### standard__collection__hash_collection__HashMap__values.lin
+
+MClassPage HashMapIterator
+	# HashMapIterator.section
+		## standard__collection__hash_collection__HashMapIterator.intro
+		## standard__collection__hash_collection__HashMapIterator.inheritance
+			### standard__collection__hash_collection__HashMapIterator.graph
+			### list.group
+				#### standard__collection__hash_collection__HashMapIterator.parents
+				#### standard__collection__hash_collection__HashMapIterator.ancestors
+				#### standard__collection__hash_collection__HashMapIterator.children
+				#### standard__collection__hash_collection__HashMapIterator.descendants
+		## standard__collection__hash_collection__HashMapIterator.constructors
+			### standard__collection__hash_collection__HashMapIterator__init.definition
+				#### standard__collection__hash_collection__HashMapIterator__init.lin
+		## standard__collection__hash_collection__HashMapIterator.concerns
+		## standard.concern
+		## standard.concern
+		## standard__collection.concern
+		## standard__collection__hash_collection.concern
+			### standard__collection__hash_collection__HashMapIterator__SELF.definition
+				#### standard__collection__hash_collection__HashMapIterator__SELF.lin
+			### standard__collection__hash_collection__HashMapIterator__is_ok.definition
+				#### standard__collection__hash_collection__HashMapIterator__is_ok.lin
+			### standard__collection__hash_collection__HashMapIterator__item.definition
+				#### standard__collection__hash_collection__HashMapIterator__item.lin
+			### standard__collection__hash_collection__HashMapIterator__key.definition
+				#### standard__collection__hash_collection__HashMapIterator__key.lin
+			### standard__collection__hash_collection__HashMapIterator__next.definition
+				#### standard__collection__hash_collection__HashMapIterator__next.lin
+
+MClassPage HashSet
+	# HashSet.section
+		## standard__collection__hash_collection__HashSet.intro
+		## standard__collection__hash_collection__HashSet.inheritance
+			### standard__collection__hash_collection__HashSet.graph
+			### list.group
+				#### standard__collection__hash_collection__HashSet.parents
+				#### standard__collection__hash_collection__HashSet.ancestors
+				#### standard__collection__hash_collection__HashSet.children
+				#### standard__collection__hash_collection__HashSet.descendants
+		## standard__collection__hash_collection__HashSet.constructors
+			### standard__collection__hash_collection__HashSet__init.definition
+				#### standard__collection__hash_collection__HashSet__init.lin
+			### standard__collection__hash_collection__HashSet__from.definition
+		## standard__collection__hash_collection__HashSet.concerns
+		## standard.concern
+		## standard.concern
+		## standard__collection.concern
+		## standard__collection__hash_collection.concern
+			### standard__collection__hash_collection__HashSet__SELF.definition
+				#### standard__collection__hash_collection__HashSet__SELF.lin
+			### standard__collection__hash_collection__HashSet__add.definition
+				#### standard__collection__hash_collection__HashSet__add.lin
+			### standard__collection__hash_collection__HashSet__clear.definition
+				#### standard__collection__hash_collection__HashSet__clear.lin
+			### standard__collection__hash_collection__HashSet__first.definition
+				#### standard__collection__hash_collection__HashSet__first.lin
+			### standard__collection__hash_collection__HashSet__has.definition
+				#### standard__collection__hash_collection__HashSet__has.lin
+			### standard__collection__hash_collection__HashSet__is_empty.definition
+				#### standard__collection__hash_collection__HashSet__is_empty.lin
+			### standard__collection__hash_collection__HashSet__iterator.definition
+				#### standard__collection__hash_collection__HashSet__iterator.lin
+			### standard__collection__hash_collection__HashSet__length.definition
+				#### standard__collection__hash_collection__HashSet__length.lin
+			### standard__collection__hash_collection__HashSet__new_set.definition
+				#### standard__collection__hash_collection__HashSet__new_set.lin
+			### standard__collection__hash_collection__HashSet__remove.definition
+				#### standard__collection__hash_collection__HashSet__remove.lin
+
+MPropertyPage from
+	# from.section
+		## standard__collection__hash_collection__HashSet__from.intro
+
+MModulePage list
+	# list.section
+		## standard__collection__list.intro
+		## standard__collection__list.importation
+			### standard__collection__list.graph
+			### list.group
+				#### standard__collection__list.imports
+				#### standard__collection__list.clients
+		## standard__collection__list.concerns
+		## standard.concern
+		## standard.concern
+		## standard__collection.concern
+		## standard__collection__list.concern
+			### standard__collection__list__List.definition-list
+				#### standard__collection__list__List.definition
+					##### standard__collection__list__List.intros_redefs
+						###### list.group
+							####### standard__collection__list__List.intros
+							####### standard__collection__list__List.redefs
+			### standard__collection__list__ListIterator.definition-list
+				#### standard__collection__list__ListIterator.definition
+					##### standard__collection__list__ListIterator.intros_redefs
+						###### list.group
+							####### standard__collection__list__ListIterator.intros
+							####### standard__collection__list__ListIterator.redefs
+
+CodePage list
+	# standard__collection__list.code
+
+MClassPage List
+	# List.section
+		## standard__collection__list__List.intro
+		## standard__collection__list__List.inheritance
+			### standard__collection__list__List.graph
+			### list.group
+				#### standard__collection__list__List.parents
+				#### standard__collection__list__List.ancestors
+				#### standard__collection__list__List.children
+				#### standard__collection__list__List.descendants
+		## standard__collection__list__List.constructors
+			### standard__collection__list__List__init.definition
+				#### standard__collection__list__List__init.lin
+			### standard__collection__list__List__from.definition
+		## standard__collection__list__List.concerns
+		## standard.concern
+		## standard.concern
+		## standard__collection.concern
+		## standard__collection__list.concern
+			### standard__collection__list__List__SELF.definition
+				#### standard__collection__list__List__SELF.lin
+			### standard__collection__list__List___91d_93d.definition
+				#### standard__collection__list__List___91d_93d.lin
+			### standard__collection__list__List___91d_93d_61d.definition
+				#### standard__collection__list__List___91d_93d_61d.lin
+			### standard__collection__list__List__clear.definition
+				#### standard__collection__list__List__clear.lin
+			### standard__collection__list__List__count.definition
+				#### standard__collection__list__List__count.lin
+			### standard__collection__list__List__first.definition
+				#### standard__collection__list__List__first.lin
+			### standard__collection__list__List__first_61d.definition
+				#### standard__collection__list__List__first_61d.lin
+			### standard__collection__list__List__has.definition
+				#### standard__collection__list__List__has.lin
+			### standard__collection__list__List__has_only.definition
+				#### standard__collection__list__List__has_only.lin
+			### standard__collection__list__List__insert.definition
+				#### standard__collection__list__List__insert.lin
+			### standard__collection__list__List__is_empty.definition
+				#### standard__collection__list__List__is_empty.lin
+			### standard__collection__list__List__iterator.definition
+				#### standard__collection__list__List__iterator.lin
+			### standard__collection__list__List__last.definition
+				#### standard__collection__list__List__last.lin
+			### standard__collection__list__List__last_61d.definition
+				#### standard__collection__list__List__last_61d.lin
+			### standard__collection__list__List__length.definition
+				#### standard__collection__list__List__length.lin
+			### standard__collection__list__List__link.definition
+			### standard__collection__list__List__pop.definition
+				#### standard__collection__list__List__pop.lin
+			### standard__collection__list__List__push.definition
+				#### standard__collection__list__List__push.lin
+			### standard__collection__list__List__remove.definition
+				#### standard__collection__list__List__remove.lin
+			### standard__collection__list__List__remove_at.definition
+				#### standard__collection__list__List__remove_at.lin
+			### standard__collection__list__List__reverse_iterator.definition
+				#### standard__collection__list__List__reverse_iterator.lin
+			### standard__collection__list__List__shift.definition
+				#### standard__collection__list__List__shift.lin
+			### standard__collection__list__List__slice.definition
+			### standard__collection__list__List__unshift.definition
+				#### standard__collection__list__List__unshift.lin
+
+MClassPage ListIterator
+	# ListIterator.section
+		## standard__collection__list__ListIterator.intro
+		## standard__collection__list__ListIterator.inheritance
+			### standard__collection__list__ListIterator.graph
+			### list.group
+				#### standard__collection__list__ListIterator.parents
+				#### standard__collection__list__ListIterator.ancestors
+				#### standard__collection__list__ListIterator.children
+				#### standard__collection__list__ListIterator.descendants
+		## standard__collection__list__ListIterator.constructors
+			### standard__collection__list__ListIterator__init.definition
+				#### standard__collection__list__ListIterator__init.lin
+		## standard__collection__list__ListIterator.concerns
+		## standard.concern
+		## standard.concern
+		## standard__collection.concern
+		## standard__collection__list.concern
+			### standard__collection__list__ListIterator__SELF.definition
+				#### standard__collection__list__ListIterator__SELF.lin
+			### standard__collection__list__ListIterator__delete.definition
+			### standard__collection__list__ListIterator__index.definition
+				#### standard__collection__list__ListIterator__index.lin
+			### standard__collection__list__ListIterator__insert_before.definition
+			### standard__collection__list__ListIterator__is_ok.definition
+				#### standard__collection__list__ListIterator__is_ok.lin
+			### standard__collection__list__ListIterator__item.definition
+				#### standard__collection__list__ListIterator__item.lin
+			### standard__collection__list__ListIterator__item_61d.definition
+			### standard__collection__list__ListIterator__next.definition
+				#### standard__collection__list__ListIterator__next.lin
+
+MPropertyPage delete
+	# delete.section
+		## standard__collection__list__ListIterator__delete.intro
+
+MPropertyPage insert_before
+	# insert_before.section
+		## standard__collection__list__ListIterator__insert_before.intro
+
+MPropertyPage item=
+	# item=.section
+		## standard__collection__list__ListIterator__item_61d.intro
+
+MPropertyPage from
+	# from.section
+		## standard__collection__list__List__from.intro
+
+MPropertyPage link
+	# link.section
+		## standard__collection__list__List__link.intro
+
+MPropertyPage slice
+	# slice.section
+		## standard__collection__list__List__slice.intro
+
+MModulePage range
+	# range.section
+		## standard__collection__range.intro
+		## standard__collection__range.importation
+			### standard__collection__range.graph
+			### list.group
+				#### standard__collection__range.imports
+				#### standard__collection__range.clients
+		## standard__collection__range.concerns
+		## standard.concern
+		## standard.concern
+		## standard__collection.concern
+		## standard__collection__range.concern
+			### standard__collection__range__Range.definition-list
+				#### standard__collection__range__Range.definition
+					##### standard__collection__range__Range.intros_redefs
+						###### list.group
+							####### standard__collection__range__Range.intros
+							####### standard__collection__range__Range.redefs
+		## standard__kernel.concern
+			### standard__kernel__Int.definition-list
+				#### standard__kernel__Int.definition
+				#### standard__collection__range__Int.definition
+					##### standard__collection__range__Int.intros_redefs
+						###### list.group
+							####### standard__collection__range__Int.intros
+							####### standard__collection__range__Int.redefs
+
+CodePage range
+	# standard__collection__range.code
+
+MClassPage Range
+	# Range.section
+		## standard__collection__range__Range.intro
+		## standard__collection__range__Range.inheritance
+			### standard__collection__range__Range.graph
+			### list.group
+				#### standard__collection__range__Range.parents
+				#### standard__collection__range__Range.ancestors
+				#### standard__collection__range__Range.children
+				#### standard__collection__range__Range.descendants
+		## standard__collection__range__Range.constructors
+			### standard__collection__range__Range__init.definition
+			### standard__collection__range__Range__without_last.definition
+		## standard__collection__range__Range.concerns
+		## standard.concern
+		## standard.concern
+		## standard__collection.concern
+		## standard__collection__range.concern
+			### standard__collection__range__Range__SELF.definition
+				#### standard__collection__range__Range__SELF.lin
+			### standard__collection__range__Range___61d_61d.definition
+				#### standard__collection__range__Range___61d_61d.lin
+			### standard__collection__range__Range__after.definition
+			### standard__collection__range__Range__count.definition
+				#### standard__collection__range__Range__count.lin
+			### standard__collection__range__Range__first.definition
+				#### standard__collection__range__Range__first.lin
+			### standard__collection__range__Range__has.definition
+				#### standard__collection__range__Range__has.lin
+			### standard__collection__range__Range__has_only.definition
+				#### standard__collection__range__Range__has_only.lin
+			### standard__collection__range__Range__hash.definition
+				#### standard__collection__range__Range__hash.lin
+			### standard__collection__range__Range__is_empty.definition
+				#### standard__collection__range__Range__is_empty.lin
+			### standard__collection__range__Range__iterator.definition
+				#### standard__collection__range__Range__iterator.lin
+			### standard__collection__range__Range__last.definition
+			### standard__collection__range__Range__length.definition
+				#### standard__collection__range__Range__length.lin
+			### standard__collection__range__Range__reverse_iterator.definition
+			### standard__collection__range__Range__step.definition
+
+MPropertyPage after
+	# after.section
+		## standard__collection__range__Range__after.intro
+
+MPropertyPage init
+	# init.section
+		## standard__collection__range__Range__init.intro
+
+MPropertyPage last
+	# last.section
+		## standard__collection__range__Range__last.intro
+
+MPropertyPage reverse_iterator
+	# reverse_iterator.section
+		## standard__collection__range__Range__reverse_iterator.intro
+
+MPropertyPage step
+	# step.section
+		## standard__collection__range__Range__step.intro
+
+MPropertyPage without_last
+	# without_last.section
+		## standard__collection__range__Range__without_last.intro
+
+MModulePage sorter
+	# sorter.section
+		## standard__collection__sorter.intro
+		## standard__collection__sorter.importation
+			### standard__collection__sorter.graph
+			### list.group
+				#### standard__collection__sorter.imports
+				#### standard__collection__sorter.clients
+		## standard__collection__sorter.concerns
+		## standard.concern
+		## standard.concern
+		## standard__collection.concern
+		## standard__collection__sorter.concern
+			### standard__collection__sorter__Comparator.definition-list
+				#### standard__collection__sorter__Comparator.definition
+					##### standard__collection__sorter__Comparator.intros_redefs
+						###### list.group
+							####### standard__collection__sorter__Comparator.intros
+							####### standard__collection__sorter__Comparator.redefs
+			### standard__collection__sorter__DefaultComparator.definition-list
+				#### standard__collection__sorter__DefaultComparator.definition
+					##### standard__collection__sorter__DefaultComparator.intros_redefs
+						###### list.group
+							####### standard__collection__sorter__DefaultComparator.intros
+							####### standard__collection__sorter__DefaultComparator.redefs
+			### standard__collection__sorter__DefaultReverseComparator.definition-list
+				#### standard__collection__sorter__DefaultReverseComparator.definition
+					##### standard__collection__sorter__DefaultReverseComparator.intros_redefs
+						###### list.group
+							####### standard__collection__sorter__DefaultReverseComparator.intros
+							####### standard__collection__sorter__DefaultReverseComparator.redefs
+			### standard__collection__sorter__MapComparator.definition-list
+				#### standard__collection__sorter__MapComparator.definition
+					##### standard__collection__sorter__MapComparator.intros_redefs
+						###### list.group
+							####### standard__collection__sorter__MapComparator.intros
+							####### standard__collection__sorter__MapComparator.redefs
+		## standard__collection__abstract_collection.concern
+			### standard__collection__abstract_collection__MapRead.definition-list
+				#### standard__collection__abstract_collection__MapRead.definition
+				#### standard__collection__sorter__MapRead.definition
+					##### standard__collection__sorter__MapRead.intros_redefs
+						###### list.group
+							####### standard__collection__sorter__MapRead.intros
+							####### standard__collection__sorter__MapRead.redefs
+		## standard__kernel.concern
+			### standard__kernel__Sys.definition-list
+				#### standard__kernel__Sys.definition
+				#### standard__collection__sorter__Sys.definition
+					##### standard__collection__sorter__Sys.intros_redefs
+						###### list.group
+							####### standard__collection__sorter__Sys.intros
+							####### standard__collection__sorter__Sys.redefs
+
+CodePage sorter
+	# standard__collection__sorter.code
+
+MClassPage Comparator
+	# Comparator.section
+		## standard__collection__sorter__Comparator.intro
+		## standard__collection__sorter__Comparator.inheritance
+			### standard__collection__sorter__Comparator.graph
+			### list.group
+				#### standard__collection__sorter__Comparator.parents
+				#### standard__collection__sorter__Comparator.ancestors
+				#### standard__collection__sorter__Comparator.children
+				#### standard__collection__sorter__Comparator.descendants
+		## standard__collection__sorter__Comparator.constructors
+		## standard__collection__sorter__Comparator.concerns
+		## standard.concern
+		## standard.concern
+		## standard__collection.concern
+		## standard__collection__sorter.concern
+			### standard__collection__sorter__Comparator__COMPARED.definition
+			### standard__collection__sorter__Comparator__SELF.definition
+				#### standard__collection__sorter__Comparator__SELF.lin
+			### standard__collection__sorter__Comparator__bubble_sort.definition
+			### standard__collection__sorter__Comparator__compare.definition
+			### standard__collection__sorter__Comparator__heap_sort.definition
+			### standard__collection__sorter__Comparator__insertion_sort.definition
+			### standard__collection__sorter__Comparator__is_sorted.definition
+			### standard__collection__sorter__Comparator__max.definition
+			### standard__collection__sorter__Comparator__merge_sort.definition
+			### standard__collection__sorter__Comparator__min.definition
+			### standard__collection__sorter__Comparator__quick_sort.definition
+			### standard__collection__sorter__Comparator__sort.definition
+
+MPropertyPage COMPARED
+	# COMPARED.section
+		## standard__collection__sorter__Comparator__COMPARED.intro
+		## standard__collection__sorter__Comparator__COMPARED.concerns
+		## standard.concern
+		## standard.concern
+		## standard__collection.concern
+		## standard__collection__sorter.concern
+			### standard__collection__sorter__MapComparator__COMPARED.definition
+			### standard__collection__sorter__DefaultComparator__COMPARED.definition
+			### standard__collection__sorter__DefaultReverseComparator__COMPARED.definition
+		## standard__string.concern
+			### standard__string__CachedAlphaComparator__COMPARED.definition
+
+MPropertyPage bubble_sort
+	# bubble_sort.section
+		## standard__collection__sorter__Comparator__bubble_sort.intro
+
+MPropertyPage compare
+	# compare.section
+		## standard__collection__sorter__Comparator__compare.intro
+		## standard__collection__sorter__Comparator__compare.concerns
+		## standard.concern
+		## standard.concern
+		## standard__collection.concern
+		## standard__collection__sorter.concern
+			### standard__collection__sorter__MapComparator__compare.definition
+			### standard__collection__sorter__DefaultComparator__compare.definition
+			### standard__collection__sorter__DefaultReverseComparator__compare.definition
+		## standard__string.concern
+			### standard__string__CachedAlphaComparator__compare.definition
+
+MPropertyPage heap_sort
+	# heap_sort.section
+		## standard__collection__sorter__Comparator__heap_sort.intro
+
+MPropertyPage insertion_sort
+	# insertion_sort.section
+		## standard__collection__sorter__Comparator__insertion_sort.intro
+
+MPropertyPage is_sorted
+	# is_sorted.section
+		## standard__collection__sorter__Comparator__is_sorted.intro
+
+MPropertyPage max
+	# max.section
+		## standard__collection__sorter__Comparator__max.intro
+
+MPropertyPage merge_sort
+	# merge_sort.section
+		## standard__collection__sorter__Comparator__merge_sort.intro
+
+MPropertyPage min
+	# min.section
+		## standard__collection__sorter__Comparator__min.intro
+
+MPropertyPage quick_sort
+	# quick_sort.section
+		## standard__collection__sorter__Comparator__quick_sort.intro
+
+MPropertyPage sort
+	# sort.section
+		## standard__collection__sorter__Comparator__sort.intro
+
+MClassPage DefaultComparator
+	# DefaultComparator.section
+		## standard__collection__sorter__DefaultComparator.intro
+		## standard__collection__sorter__DefaultComparator.inheritance
+			### standard__collection__sorter__DefaultComparator.graph
+			### list.group
+				#### standard__collection__sorter__DefaultComparator.parents
+				#### standard__collection__sorter__DefaultComparator.ancestors
+				#### standard__collection__sorter__DefaultComparator.children
+				#### standard__collection__sorter__DefaultComparator.descendants
+		## standard__collection__sorter__DefaultComparator.constructors
+			### standard__kernel__Object__init.definition
+		## standard__collection__sorter__DefaultComparator.concerns
+		## standard.concern
+		## standard.concern
+		## standard__collection.concern
+		## standard__collection__sorter.concern
+			### standard__collection__sorter__DefaultComparator__COMPARED.definition
+				#### standard__collection__sorter__DefaultComparator__COMPARED.lin
+			### standard__collection__sorter__DefaultComparator__SELF.definition
+				#### standard__collection__sorter__DefaultComparator__SELF.lin
+			### standard__collection__sorter__DefaultComparator__compare.definition
+				#### standard__collection__sorter__DefaultComparator__compare.lin
+
+MClassPage DefaultReverseComparator
+	# DefaultReverseComparator.section
+		## standard__collection__sorter__DefaultReverseComparator.intro
+		## standard__collection__sorter__DefaultReverseComparator.inheritance
+			### standard__collection__sorter__DefaultReverseComparator.graph
+			### list.group
+				#### standard__collection__sorter__DefaultReverseComparator.parents
+				#### standard__collection__sorter__DefaultReverseComparator.ancestors
+				#### standard__collection__sorter__DefaultReverseComparator.children
+				#### standard__collection__sorter__DefaultReverseComparator.descendants
+		## standard__collection__sorter__DefaultReverseComparator.constructors
+			### standard__kernel__Object__init.definition
+		## standard__collection__sorter__DefaultReverseComparator.concerns
+		## standard.concern
+		## standard.concern
+		## standard__collection.concern
+		## standard__collection__sorter.concern
+			### standard__collection__sorter__DefaultReverseComparator__COMPARED.definition
+				#### standard__collection__sorter__DefaultReverseComparator__COMPARED.lin
+			### standard__collection__sorter__DefaultReverseComparator__SELF.definition
+				#### standard__collection__sorter__DefaultReverseComparator__SELF.lin
+			### standard__collection__sorter__DefaultReverseComparator__compare.definition
+				#### standard__collection__sorter__DefaultReverseComparator__compare.lin
+
+MClassPage MapComparator
+	# MapComparator.section
+		## standard__collection__sorter__MapComparator.intro
+		## standard__collection__sorter__MapComparator.inheritance
+			### standard__collection__sorter__MapComparator.graph
+			### list.group
+				#### standard__collection__sorter__MapComparator.parents
+				#### standard__collection__sorter__MapComparator.ancestors
+				#### standard__collection__sorter__MapComparator.children
+				#### standard__collection__sorter__MapComparator.descendants
+		## standard__collection__sorter__MapComparator.constructors
+			### standard__collection__sorter__MapComparator__init.definition
+				#### standard__collection__sorter__MapComparator__init.lin
+		## standard__collection__sorter__MapComparator.concerns
+		## standard.concern
+		## standard.concern
+		## standard__collection.concern
+		## standard__collection__sorter.concern
+			### standard__collection__sorter__MapComparator__COMPARED.definition
+				#### standard__collection__sorter__MapComparator__COMPARED.lin
+			### standard__collection__sorter__MapComparator__SELF.definition
+				#### standard__collection__sorter__MapComparator__SELF.lin
+			### standard__collection__sorter__MapComparator__comparator.definition
+			### standard__collection__sorter__MapComparator__compare.definition
+				#### standard__collection__sorter__MapComparator__compare.lin
+			### standard__collection__sorter__MapComparator__map.definition
+
+MPropertyPage comparator
+	# comparator.section
+		## standard__collection__sorter__MapComparator__comparator.intro
+
+MPropertyPage map
+	# map.section
+		## standard__collection__sorter__MapComparator__map.intro
+
+MModulePage union_find
+	# union_find.section
+		## standard__collection__union_find.intro
+		## standard__collection__union_find.importation
+			### standard__collection__union_find.graph
+			### list.group
+				#### standard__collection__union_find.imports
+				#### standard__collection__union_find.clients
+		## standard__collection__union_find.concerns
+		## standard.concern
+		## standard.concern
+		## standard__collection.concern
+		## standard__collection__union_find.concern
+			### standard__collection__union_find__DisjointSet.definition-list
+				#### standard__collection__union_find__DisjointSet.definition
+					##### standard__collection__union_find__DisjointSet.intros_redefs
+						###### list.group
+							####### standard__collection__union_find__DisjointSet.intros
+							####### standard__collection__union_find__DisjointSet.redefs
+
+CodePage union_find
+	# standard__collection__union_find.code
+
+MClassPage DisjointSet
+	# DisjointSet.section
+		## standard__collection__union_find__DisjointSet.intro
+		## standard__collection__union_find__DisjointSet.inheritance
+			### standard__collection__union_find__DisjointSet.graph
+			### list.group
+				#### standard__collection__union_find__DisjointSet.parents
+				#### standard__collection__union_find__DisjointSet.ancestors
+				#### standard__collection__union_find__DisjointSet.children
+				#### standard__collection__union_find__DisjointSet.descendants
+		## standard__collection__union_find__DisjointSet.constructors
+			### standard__kernel__Object__init.definition
+			### standard__collection__union_find__DisjointSet__from.definition
+		## standard__collection__union_find__DisjointSet.concerns
+		## standard.concern
+		## standard.concern
+		## standard__collection.concern
+		## standard__collection__union_find.concern
+			### standard__collection__union_find__DisjointSet__SELF.definition
+				#### standard__collection__union_find__DisjointSet__SELF.lin
+			### standard__collection__union_find__DisjointSet__add.definition
+				#### standard__collection__union_find__DisjointSet__add.lin
+			### standard__collection__union_find__DisjointSet__all_in_same_subset.definition
+			### standard__collection__union_find__DisjointSet__clone.definition
+				#### standard__collection__union_find__DisjointSet__clone.lin
+			### standard__collection__union_find__DisjointSet__has.definition
+				#### standard__collection__union_find__DisjointSet__has.lin
+			### standard__collection__union_find__DisjointSet__in_same_subset.definition
+			### standard__collection__union_find__DisjointSet__iterator.definition
+				#### standard__collection__union_find__DisjointSet__iterator.lin
+			### standard__collection__union_find__DisjointSet__number_of_subsets.definition
+			### standard__collection__union_find__DisjointSet__to_partitions.definition
+			### standard__collection__union_find__DisjointSet__to_subpartition.definition
+			### standard__collection__union_find__DisjointSet__union.definition
+			### standard__collection__union_find__DisjointSet__union_all.definition
+
+MPropertyPage all_in_same_subset
+	# all_in_same_subset.section
+		## standard__collection__union_find__DisjointSet__all_in_same_subset.intro
+
+MPropertyPage from
+	# from.section
+		## standard__collection__union_find__DisjointSet__from.intro
+
+MPropertyPage in_same_subset
+	# in_same_subset.section
+		## standard__collection__union_find__DisjointSet__in_same_subset.intro
+
+MPropertyPage number_of_subsets
+	# number_of_subsets.section
+		## standard__collection__union_find__DisjointSet__number_of_subsets.intro
+
+MPropertyPage to_partitions
+	# to_partitions.section
+		## standard__collection__union_find__DisjointSet__to_partitions.intro
+
+MPropertyPage to_subpartition
+	# to_subpartition.section
+		## standard__collection__union_find__DisjointSet__to_subpartition.intro
+
+MPropertyPage union
+	# union.section
+		## standard__collection__union_find__DisjointSet__union.intro
+
+MPropertyPage union_all
+	# union_all.section
+		## standard__collection__union_find__DisjointSet__union_all.intro
+
+MModulePage environ
+	# environ.section
+		## standard__environ.intro
+		## standard__environ.importation
+			### standard__environ.graph
+			### list.group
+				#### standard__environ.imports
+				#### standard__environ.clients
+		## standard__environ.concerns
+		## standard.concern
+		## standard.concern
+		## standard__kernel.concern
+			### standard__kernel__Sys.definition-list
+				#### standard__kernel__Sys.definition
+				#### standard__environ__Sys.definition
+					##### standard__environ__Sys.intros_redefs
+						###### list.group
+							####### standard__environ__Sys.intros
+							####### standard__environ__Sys.redefs
+		## standard__string.concern
+			### standard__string__NativeString.definition-list
+				#### standard__string__NativeString.definition
+				#### standard__environ__NativeString.definition
+					##### standard__environ__NativeString.intros_redefs
+						###### list.group
+							####### standard__environ__NativeString.intros
+							####### standard__environ__NativeString.redefs
+			### standard__string__String.definition-list
+				#### standard__string__String.definition
+				#### standard__environ__String.definition
+					##### standard__environ__String.intros_redefs
+						###### list.group
+							####### standard__environ__String.intros
+							####### standard__environ__String.redefs
+
+CodePage environ
+	# standard__environ.code
+
+MModulePage error
+	# error.section
+		## standard__error.intro
+		## standard__error.importation
+			### standard__error.graph
+			### list.group
+				#### standard__error.imports
+				#### standard__error.clients
+		## standard__error.concerns
+		## standard.concern
+		## standard.concern
+		## standard__error.concern
+			### standard__error__Error.definition-list
+				#### standard__error__Error.definition
+					##### standard__error__Error.intros_redefs
+						###### list.group
+							####### standard__error__Error.intros
+							####### standard__error__Error.redefs
+			### standard__error__MaybeError.definition-list
+				#### standard__error__MaybeError.definition
+					##### standard__error__MaybeError.intros_redefs
+						###### list.group
+							####### standard__error__MaybeError.intros
+							####### standard__error__MaybeError.redefs
+
+CodePage error
+	# standard__error.code
+
+MClassPage Error
+	# Error.section
+		## standard__error__Error.intro
+		## standard__error__Error.inheritance
+			### standard__error__Error.graph
+			### list.group
+				#### standard__error__Error.parents
+				#### standard__error__Error.ancestors
+				#### standard__error__Error.children
+				#### standard__error__Error.descendants
+		## standard__error__Error.constructors
+			### standard__error__Error__init.definition
+				#### standard__error__Error__init.lin
+		## standard__error__Error.concerns
+		## standard.concern
+		## standard.concern
+		## standard__error.concern
+			### standard__error__Error__SELF.definition
+				#### standard__error__Error__SELF.lin
+			### standard__error__Error__cause.definition
+			### standard__error__Error__cause_61d.definition
+			### standard__error__Error__message.definition
+			### standard__error__Error__to_s.definition
+				#### standard__error__Error__to_s.lin
+
+MPropertyPage cause
+	# cause.section
+		## standard__error__Error__cause.intro
+
+MPropertyPage cause=
+	# cause=.section
+		## standard__error__Error__cause_61d.intro
+
+MPropertyPage message
+	# message.section
+		## standard__error__Error__message.intro
+
+MClassPage MaybeError
+	# MaybeError.section
+		## standard__error__MaybeError.intro
+		## standard__error__MaybeError.inheritance
+			### standard__error__MaybeError.graph
+			### list.group
+				#### standard__error__MaybeError.parents
+				#### standard__error__MaybeError.ancestors
+				#### standard__error__MaybeError.children
+				#### standard__error__MaybeError.descendants
+		## standard__error__MaybeError.constructors
+			### standard__error__MaybeError__init.definition
+				#### standard__error__MaybeError__init.lin
+		## standard__error__MaybeError.concerns
+		## standard.concern
+		## standard.concern
+		## standard__error.concern
+			### standard__error__MaybeError__SELF.definition
+				#### standard__error__MaybeError__SELF.lin
+			### standard__error__MaybeError__error.definition
+			### standard__error__MaybeError__is_error.definition
+			### standard__error__MaybeError__maybe_error.definition
+			### standard__error__MaybeError__maybe_value.definition
+			### standard__error__MaybeError__to_s.definition
+				#### standard__error__MaybeError__to_s.lin
+			### standard__error__MaybeError__value.definition
+
+MPropertyPage error
+	# error.section
+		## standard__error__MaybeError__error.intro
+
+MPropertyPage is_error
+	# is_error.section
+		## standard__error__MaybeError__is_error.intro
+
+MPropertyPage maybe_error
+	# maybe_error.section
+		## standard__error__MaybeError__maybe_error.intro
+
+MPropertyPage maybe_value
+	# maybe_value.section
+		## standard__error__MaybeError__maybe_value.intro
+
+MPropertyPage value
+	# value.section
+		## standard__error__MaybeError__value.intro
+
+MModulePage exec
+	# exec.section
+		## standard__exec.intro
+		## standard__exec.importation
+			### standard__exec.graph
+			### list.group
+				#### standard__exec.imports
+				#### standard__exec.clients
+		## standard__exec.concerns
+		## standard.concern
+		## standard.concern
+		## standard__exec.concern
+			### standard__exec__Process.definition-list
+				#### standard__exec__Process.definition
+					##### standard__exec__Process.intros_redefs
+						###### list.group
+							####### standard__exec__Process.intros
+							####### standard__exec__Process.redefs
+			### standard__exec__ProcessDuplex.definition-list
+				#### standard__exec__ProcessDuplex.definition
+					##### standard__exec__ProcessDuplex.intros_redefs
+						###### list.group
+							####### standard__exec__ProcessDuplex.intros
+							####### standard__exec__ProcessDuplex.redefs
+			### standard__exec__ProcessReader.definition-list
+				#### standard__exec__ProcessReader.definition
+					##### standard__exec__ProcessReader.intros_redefs
+						###### list.group
+							####### standard__exec__ProcessReader.intros
+							####### standard__exec__ProcessReader.redefs
+			### standard__exec__ProcessWriter.definition-list
+				#### standard__exec__ProcessWriter.definition
+					##### standard__exec__ProcessWriter.intros_redefs
+						###### list.group
+							####### standard__exec__ProcessWriter.intros
+							####### standard__exec__ProcessWriter.redefs
+		## standard__kernel.concern
+			### standard__kernel__Sys.definition-list
+				#### standard__kernel__Sys.definition
+				#### standard__exec__Sys.definition
+					##### standard__exec__Sys.intros_redefs
+						###### list.group
+							####### standard__exec__Sys.intros
+							####### standard__exec__Sys.redefs
+		## standard__string.concern
+			### standard__string__NativeString.definition-list
+				#### standard__string__NativeString.definition
+				#### standard__exec__NativeString.definition
+					##### standard__exec__NativeString.intros_redefs
+						###### list.group
+							####### standard__exec__NativeString.intros
+							####### standard__exec__NativeString.redefs
+
+CodePage exec
+	# standard__exec.code
+
+MClassPage Process
+	# Process.section
+		## standard__exec__Process.intro
+		## standard__exec__Process.inheritance
+			### standard__exec__Process.graph
+			### list.group
+				#### standard__exec__Process.parents
+				#### standard__exec__Process.ancestors
+				#### standard__exec__Process.children
+				#### standard__exec__Process.descendants
+		## standard__exec__Process.constructors
+			### standard__exec__Process__from_a.definition
+			### standard__exec__Process__init.definition
+		## standard__exec__Process.concerns
+		## standard.concern
+		## standard.concern
+		## standard__exec.concern
+			### standard__exec__Process__SELF.definition
+				#### standard__exec__Process__SELF.lin
+			### standard__exec__Process__arguments.definition
+			### standard__exec__Process__command.definition
+			### standard__exec__Process__execute.definition
+			### standard__exec__Process__id.definition
+			### standard__exec__Process__is_finished.definition
+			### standard__exec__Process__status.definition
+			### standard__exec__Process__wait.definition
+
+MClassPage ProcessDuplex
+	# ProcessDuplex.section
+		## standard__exec__ProcessDuplex.intro
+		## standard__exec__ProcessDuplex.inheritance
+			### standard__exec__ProcessDuplex.graph
+			### list.group
+				#### standard__exec__ProcessDuplex.parents
+				#### standard__exec__ProcessDuplex.ancestors
+				#### standard__exec__ProcessDuplex.children
+				#### standard__exec__ProcessDuplex.descendants
+		## standard__exec__ProcessDuplex.constructors
+			### standard__kernel__Object__init.definition
+		## standard__exec__ProcessDuplex.concerns
+		## standard.concern
+		## standard.concern
+		## standard__exec.concern
+			### standard__exec__ProcessDuplex__SELF.definition
+				#### standard__exec__ProcessDuplex__SELF.lin
+			### standard__exec__ProcessDuplex__close.definition
+				#### standard__exec__ProcessDuplex__close.lin
+			### standard__exec__ProcessDuplex__execute.definition
+				#### standard__exec__ProcessDuplex__execute.lin
+
+MClassPage ProcessReader
+	# ProcessReader.section
+		## standard__exec__ProcessReader.intro
+		## standard__exec__ProcessReader.inheritance
+			### standard__exec__ProcessReader.graph
+			### list.group
+				#### standard__exec__ProcessReader.parents
+				#### standard__exec__ProcessReader.ancestors
+				#### standard__exec__ProcessReader.children
+				#### standard__exec__ProcessReader.descendants
+		## standard__exec__ProcessReader.constructors
+			### standard__kernel__Object__init.definition
+		## standard__exec__ProcessReader.concerns
+		## standard.concern
+		## standard.concern
+		## standard__exec.concern
+			### standard__exec__ProcessReader__SELF.definition
+				#### standard__exec__ProcessReader__SELF.lin
+			### standard__exec__ProcessReader__close.definition
+				#### standard__exec__ProcessReader__close.lin
+			### standard__exec__ProcessReader__eof.definition
+				#### standard__exec__ProcessReader__eof.lin
+			### standard__exec__ProcessReader__execute.definition
+				#### standard__exec__ProcessReader__execute.lin
+			### standard__exec__ProcessReader__read_byte.definition
+				#### standard__exec__ProcessReader__read_byte.lin
+			### standard__exec__ProcessReader__read_char.definition
+				#### standard__exec__ProcessReader__read_char.lin
+			### standard__exec__ProcessReader__stream_in.definition
+
+MPropertyPage stream_in
+	# stream_in.section
+		## standard__exec__ProcessReader__stream_in.intro
+
+MClassPage ProcessWriter
+	# ProcessWriter.section
+		## standard__exec__ProcessWriter.intro
+		## standard__exec__ProcessWriter.inheritance
+			### standard__exec__ProcessWriter.graph
+			### list.group
+				#### standard__exec__ProcessWriter.parents
+				#### standard__exec__ProcessWriter.ancestors
+				#### standard__exec__ProcessWriter.children
+				#### standard__exec__ProcessWriter.descendants
+		## standard__exec__ProcessWriter.constructors
+			### standard__kernel__Object__init.definition
+		## standard__exec__ProcessWriter.concerns
+		## standard.concern
+		## standard.concern
+		## standard__exec.concern
+			### standard__exec__ProcessWriter__SELF.definition
+				#### standard__exec__ProcessWriter__SELF.lin
+			### standard__exec__ProcessWriter__close.definition
+				#### standard__exec__ProcessWriter__close.lin
+			### standard__exec__ProcessWriter__execute.definition
+				#### standard__exec__ProcessWriter__execute.lin
+			### standard__exec__ProcessWriter__is_writable.definition
+				#### standard__exec__ProcessWriter__is_writable.lin
+			### standard__exec__ProcessWriter__stream_out.definition
+			### standard__exec__ProcessWriter__write.definition
+				#### standard__exec__ProcessWriter__write.lin
+
+MPropertyPage stream_out
+	# stream_out.section
+		## standard__exec__ProcessWriter__stream_out.intro
+
+MPropertyPage arguments
+	# arguments.section
+		## standard__exec__Process__arguments.intro
+
+MPropertyPage command
+	# command.section
+		## standard__exec__Process__command.intro
+
+MPropertyPage execute
+	# execute.section
+		## standard__exec__Process__execute.intro
+		## standard__exec__Process__execute.concerns
+		## standard.concern
+		## standard.concern
+		## standard__exec.concern
+			### standard__exec__ProcessReader__execute.definition
+			### standard__exec__ProcessWriter__execute.definition
+			### standard__exec__ProcessDuplex__execute.definition
+
+MPropertyPage from_a
+	# from_a.section
+		## standard__exec__Process__from_a.intro
+
+MPropertyPage id
+	# id.section
+		## standard__exec__Process__id.intro
+
+MPropertyPage init
+	# init.section
+		## standard__exec__Process__init.intro
+
+MPropertyPage is_finished
+	# is_finished.section
+		## standard__exec__Process__is_finished.intro
+
+MPropertyPage status
+	# status.section
+		## standard__exec__Process__status.intro
+
+MPropertyPage wait
+	# wait.section
+		## standard__exec__Process__wait.intro
+
+MModulePage file
+	# file.section
+		## standard__file.intro
+		## standard__file.importation
+			### standard__file.graph
+			### list.group
+				#### standard__file.imports
+				#### standard__file.clients
+		## standard__file.concerns
+		## standard.concern
+		## standard.concern
+		## standard__file.concern
+			### standard__file__FileReader.definition-list
+				#### standard__file__FileReader.definition
+					##### standard__file__FileReader.intros_redefs
+						###### list.group
+							####### standard__file__FileReader.intros
+							####### standard__file__FileReader.redefs
+			### standard__file__FileStat.definition-list
+				#### standard__file__FileStat.definition
+					##### standard__file__FileStat.intros_redefs
+						###### list.group
+							####### standard__file__FileStat.intros
+							####### standard__file__FileStat.redefs
+			### standard__file__FileStream.definition-list
+				#### standard__file__FileStream.definition
+					##### standard__file__FileStream.intros_redefs
+						###### list.group
+							####### standard__file__FileStream.intros
+							####### standard__file__FileStream.redefs
+			### standard__file__FileWriter.definition-list
+				#### standard__file__FileWriter.definition
+					##### standard__file__FileWriter.intros_redefs
+						###### list.group
+							####### standard__file__FileWriter.intros
+							####### standard__file__FileWriter.redefs
+			### standard__file__Path.definition-list
+				#### standard__file__Path.definition
+					##### standard__file__Path.intros_redefs
+						###### list.group
+							####### standard__file__Path.intros
+							####### standard__file__Path.redefs
+			### standard__file__Stderr.definition-list
+				#### standard__file__Stderr.definition
+					##### standard__file__Stderr.intros_redefs
+						###### list.group
+							####### standard__file__Stderr.intros
+							####### standard__file__Stderr.redefs
+			### standard__file__Stdin.definition-list
+				#### standard__file__Stdin.definition
+					##### standard__file__Stdin.intros_redefs
+						###### list.group
+							####### standard__file__Stdin.intros
+							####### standard__file__Stdin.redefs
+			### standard__file__Stdout.definition-list
+				#### standard__file__Stdout.definition
+					##### standard__file__Stdout.intros_redefs
+						###### list.group
+							####### standard__file__Stdout.intros
+							####### standard__file__Stdout.redefs
+		## standard__kernel.concern
+			### standard__kernel__Int.definition-list
+				#### standard__kernel__Int.definition
+				#### standard__file__Int.definition
+					##### standard__file__Int.intros_redefs
+						###### list.group
+							####### standard__file__Int.intros
+							####### standard__file__Int.redefs
+			### standard__kernel__Sys.definition-list
+				#### standard__kernel__Sys.definition
+				#### standard__file__Sys.definition
+					##### standard__file__Sys.intros_redefs
+						###### list.group
+							####### standard__file__Sys.intros
+							####### standard__file__Sys.redefs
+		## standard__string.concern
+			### standard__string__NativeString.definition-list
+				#### standard__string__NativeString.definition
+				#### standard__file__NativeString.definition
+					##### standard__file__NativeString.intros_redefs
+						###### list.group
+							####### standard__file__NativeString.intros
+							####### standard__file__NativeString.redefs
+			### standard__string__String.definition-list
+				#### standard__string__String.definition
+				#### standard__file__String.definition
+					##### standard__file__String.intros_redefs
+						###### list.group
+							####### standard__file__String.intros
+							####### standard__file__String.redefs
+			### standard__string__Text.definition-list
+				#### standard__string__Text.definition
+				#### standard__file__Text.definition
+					##### standard__file__Text.intros_redefs
+						###### list.group
+							####### standard__file__Text.intros
+							####### standard__file__Text.redefs
+		## standard__stream.concern
+			### standard__stream__Writable.definition-list
+				#### standard__stream__Writable.definition
+				#### standard__file__Writable.definition
+					##### standard__file__Writable.intros_redefs
+						###### list.group
+							####### standard__file__Writable.intros
+							####### standard__file__Writable.redefs
+
+CodePage file
+	# standard__file.code
+
+MClassPage FileReader
+	# FileReader.section
+		## standard__file__FileReader.intro
+		## standard__file__FileReader.inheritance
+			### standard__file__FileReader.graph
+			### list.group
+				#### standard__file__FileReader.parents
+				#### standard__file__FileReader.ancestors
+				#### standard__file__FileReader.children
+				#### standard__file__FileReader.descendants
+		## standard__file__FileReader.constructors
+			### standard__kernel__Object__init.definition
+			### standard__file__FileReader__from_fd.definition
+			### standard__file__FileReader__open.definition
+		## standard__file__FileReader.concerns
+		## standard.concern
+		## standard.concern
+		## standard__file.concern
+			### standard__file__FileReader__SELF.definition
+				#### standard__file__FileReader__SELF.lin
+			### standard__file__FileReader__close.definition
+				#### standard__file__FileReader__close.lin
+			### standard__file__FileReader__end_reached.definition
+				#### standard__file__FileReader__end_reached.lin
+			### standard__file__FileReader__fill_buffer.definition
+				#### standard__file__FileReader__fill_buffer.lin
+			### standard__file__FileReader__reopen.definition
+
+MPropertyPage from_fd
+	# from_fd.section
+		## standard__file__FileReader__from_fd.intro
+
+MPropertyPage open
+	# open.section
+		## standard__file__FileReader__open.intro
+
+MPropertyPage reopen
+	# reopen.section
+		## standard__file__FileReader__reopen.intro
+
+MClassPage FileStat
+	# FileStat.section
+		## standard__file__FileStat.intro
+		## standard__file__FileStat.inheritance
+			### standard__file__FileStat.graph
+			### list.group
+				#### standard__file__FileStat.parents
+				#### standard__file__FileStat.ancestors
+				#### standard__file__FileStat.children
+				#### standard__file__FileStat.descendants
+		## standard__file__FileStat.constructors
+			### standard__file__FileStat__init.definition
+				#### standard__file__FileStat__init.lin
+		## standard__file__FileStat.concerns
+		## standard.concern
+		## standard.concern
+		## standard__file.concern
+			### standard__file__FileStat__SELF.definition
+				#### standard__file__FileStat__SELF.lin
+			### standard__file__FileStat__atime.definition
+			### standard__file__FileStat__ctime.definition
+			### standard__file__FileStat__finalize.definition
+				#### standard__file__FileStat__finalize.lin
+			### standard__file__FileStat__is_blk.definition
+			### standard__file__FileStat__is_chr.definition
+			### standard__file__FileStat__is_dir.definition
+			### standard__file__FileStat__is_fifo.definition
+			### standard__file__FileStat__is_file.definition
+			### standard__file__FileStat__is_link.definition
+			### standard__file__FileStat__is_reg.definition
+			### standard__file__FileStat__is_sock.definition
+			### standard__file__FileStat__last_access_time.definition
+			### standard__file__FileStat__last_modification_time.definition
+			### standard__file__FileStat__last_status_change_time.definition
+			### standard__file__FileStat__mode.definition
+			### standard__file__FileStat__mtime.definition
+			### standard__file__FileStat__size.definition
+
+MPropertyPage atime
+	# atime.section
+		## standard__file__FileStat__atime.intro
+
+MPropertyPage ctime
+	# ctime.section
+		## standard__file__FileStat__ctime.intro
+
+MPropertyPage is_blk
+	# is_blk.section
+		## standard__file__FileStat__is_blk.intro
+
+MPropertyPage is_chr
+	# is_chr.section
+		## standard__file__FileStat__is_chr.intro
+
+MPropertyPage is_dir
+	# is_dir.section
+		## standard__file__FileStat__is_dir.intro
+
+MPropertyPage is_fifo
+	# is_fifo.section
+		## standard__file__FileStat__is_fifo.intro
+
+MPropertyPage is_file
+	# is_file.section
+		## standard__file__FileStat__is_file.intro
+
+MPropertyPage is_link
+	# is_link.section
+		## standard__file__FileStat__is_link.intro
+
+MPropertyPage is_reg
+	# is_reg.section
+		## standard__file__FileStat__is_reg.intro
+
+MPropertyPage is_sock
+	# is_sock.section
+		## standard__file__FileStat__is_sock.intro
+
+MPropertyPage last_access_time
+	# last_access_time.section
+		## standard__file__FileStat__last_access_time.intro
+
+MPropertyPage last_modification_time
+	# last_modification_time.section
+		## standard__file__FileStat__last_modification_time.intro
+
+MPropertyPage last_status_change_time
+	# last_status_change_time.section
+		## standard__file__FileStat__last_status_change_time.intro
+
+MPropertyPage mode
+	# mode.section
+		## standard__file__FileStat__mode.intro
+
+MPropertyPage mtime
+	# mtime.section
+		## standard__file__FileStat__mtime.intro
+
+MPropertyPage size
+	# size.section
+		## standard__file__FileStat__size.intro
+
+MClassPage FileStream
+	# FileStream.section
+		## standard__file__FileStream.intro
+		## standard__file__FileStream.inheritance
+			### standard__file__FileStream.graph
+			### list.group
+				#### standard__file__FileStream.parents
+				#### standard__file__FileStream.ancestors
+				#### standard__file__FileStream.children
+				#### standard__file__FileStream.descendants
+		## standard__file__FileStream.constructors
+			### standard__kernel__Object__init.definition
+		## standard__file__FileStream.concerns
+		## standard.concern
+		## standard.concern
+		## standard__file.concern
+			### standard__file__FileStream__SELF.definition
+				#### standard__file__FileStream__SELF.lin
+			### standard__file__FileStream__close.definition
+				#### standard__file__FileStream__close.lin
+			### standard__file__FileStream__fd.definition
+			### standard__file__FileStream__file_stat.definition
+			### standard__file__FileStream__path.definition
+			### standard__file__FileStream__set_buffering_mode.definition
+
+MPropertyPage fd
+	# fd.section
+		## standard__file__FileStream__fd.intro
+
+MPropertyPage file_stat
+	# file_stat.section
+		## standard__file__FileStream__file_stat.intro
+
+MPropertyPage path
+	# path.section
+		## standard__file__FileStream__path.intro
+
+MPropertyPage set_buffering_mode
+	# set_buffering_mode.section
+		## standard__file__FileStream__set_buffering_mode.intro
+
+MClassPage FileWriter
+	# FileWriter.section
+		## standard__file__FileWriter.intro
+		## standard__file__FileWriter.inheritance
+			### standard__file__FileWriter.graph
+			### list.group
+				#### standard__file__FileWriter.parents
+				#### standard__file__FileWriter.ancestors
+				#### standard__file__FileWriter.children
+				#### standard__file__FileWriter.descendants
+		## standard__file__FileWriter.constructors
+			### standard__kernel__Object__init.definition
+			### standard__file__FileWriter__from_fd.definition
+			### standard__file__FileWriter__open.definition
+		## standard__file__FileWriter.concerns
+		## standard.concern
+		## standard.concern
+		## standard__file.concern
+			### standard__file__FileWriter__SELF.definition
+				#### standard__file__FileWriter__SELF.lin
+			### standard__file__FileWriter__close.definition
+				#### standard__file__FileWriter__close.lin
+			### standard__file__FileWriter__is_writable.definition
+				#### standard__file__FileWriter__is_writable.lin
+			### standard__file__FileWriter__write.definition
+				#### standard__file__FileWriter__write.lin
+			### standard__file__FileWriter__write_byte.definition
+				#### standard__file__FileWriter__write_byte.lin
+			### standard__file__FileWriter__write_bytes.definition
+				#### standard__file__FileWriter__write_bytes.lin
+
+MPropertyPage from_fd
+	# from_fd.section
+		## standard__file__FileWriter__from_fd.intro
+
+MPropertyPage open
+	# open.section
+		## standard__file__FileWriter__open.intro
+
+MClassPage Path
+	# Path.section
+		## standard__file__Path.intro
+		## standard__file__Path.inheritance
+			### standard__file__Path.graph
+			### list.group
+				#### standard__file__Path.parents
+				#### standard__file__Path.ancestors
+				#### standard__file__Path.children
+				#### standard__file__Path.descendants
+		## standard__file__Path.constructors
+			### standard__file__Path__init.definition
+				#### standard__file__Path__init.lin
+		## standard__file__Path.concerns
+		## standard.concern
+		## standard.concern
+		## standard__file.concern
+			### standard__file__Path__SELF.definition
+				#### standard__file__Path__SELF.lin
+			### standard__file__Path___61d_61d.definition
+				#### standard__file__Path___61d_61d.lin
+			### standard__file__Path__copy.definition
+			### standard__file__Path__delete.definition
+			### standard__file__Path__each_line.definition
+			### standard__file__Path__exists.definition
+			### standard__file__Path__filename.definition
+			### standard__file__Path__files.definition
+			### standard__file__Path__hash.definition
+				#### standard__file__Path__hash.lin
+			### standard__file__Path__link_stat.definition
+			### standard__file__Path__open_ro.definition
+			### standard__file__Path__open_wo.definition
+			### standard__file__Path__read_all.definition
+			### standard__file__Path__read_all_bytes.definition
+			### standard__file__Path__read_lines.definition
+			### standard__file__Path__rmdir.definition
+			### standard__file__Path__stat.definition
+			### standard__file__Path__to_s.definition
+				#### standard__file__Path__to_s.lin
+
+MPropertyPage copy
+	# copy.section
+		## standard__file__Path__copy.intro
+
+MPropertyPage delete
+	# delete.section
+		## standard__file__Path__delete.intro
+
+MPropertyPage each_line
+	# each_line.section
+		## standard__file__Path__each_line.intro
+
+MPropertyPage exists
+	# exists.section
+		## standard__file__Path__exists.intro
+
+MPropertyPage filename
+	# filename.section
+		## standard__file__Path__filename.intro
+
+MPropertyPage files
+	# files.section
+		## standard__file__Path__files.intro
+
+MPropertyPage link_stat
+	# link_stat.section
+		## standard__file__Path__link_stat.intro
+
+MPropertyPage open_ro
+	# open_ro.section
+		## standard__file__Path__open_ro.intro
+
+MPropertyPage open_wo
+	# open_wo.section
+		## standard__file__Path__open_wo.intro
+
+MPropertyPage read_all
+	# read_all.section
+		## standard__file__Path__read_all.intro
+
+MPropertyPage read_all_bytes
+	# read_all_bytes.section
+		## standard__file__Path__read_all_bytes.intro
+
+MPropertyPage read_lines
+	# read_lines.section
+		## standard__file__Path__read_lines.intro
+
+MPropertyPage rmdir
+	# rmdir.section
+		## standard__file__Path__rmdir.intro
+
+MPropertyPage stat
+	# stat.section
+		## standard__file__Path__stat.intro
+
+MClassPage Stderr
+	# Stderr.section
+		## standard__file__Stderr.intro
+		## standard__file__Stderr.inheritance
+			### standard__file__Stderr.graph
+			### list.group
+				#### standard__file__Stderr.parents
+				#### standard__file__Stderr.ancestors
+				#### standard__file__Stderr.children
+				#### standard__file__Stderr.descendants
+		## standard__file__Stderr.constructors
+			### standard__file__Stderr__init.definition
+				#### standard__file__Stderr__init.lin
+		## standard__file__Stderr.concerns
+		## standard.concern
+		## standard.concern
+		## standard__file.concern
+			### standard__file__Stderr__SELF.definition
+				#### standard__file__Stderr__SELF.lin
+
+MClassPage Stdin
+	# Stdin.section
+		## standard__file__Stdin.intro
+		## standard__file__Stdin.inheritance
+			### standard__file__Stdin.graph
+			### list.group
+				#### standard__file__Stdin.parents
+				#### standard__file__Stdin.ancestors
+				#### standard__file__Stdin.children
+				#### standard__file__Stdin.descendants
+		## standard__file__Stdin.constructors
+			### standard__file__Stdin__init.definition
+				#### standard__file__Stdin__init.lin
+		## standard__file__Stdin.concerns
+		## standard.concern
+		## standard.concern
+		## standard__file.concern
+			### standard__file__Stdin__SELF.definition
+				#### standard__file__Stdin__SELF.lin
+			### standard__file__Stdin__poll_in.definition
+				#### standard__file__Stdin__poll_in.lin
+
+MClassPage Stdout
+	# Stdout.section
+		## standard__file__Stdout.intro
+		## standard__file__Stdout.inheritance
+			### standard__file__Stdout.graph
+			### list.group
+				#### standard__file__Stdout.parents
+				#### standard__file__Stdout.ancestors
+				#### standard__file__Stdout.children
+				#### standard__file__Stdout.descendants
+		## standard__file__Stdout.constructors
+			### standard__file__Stdout__init.definition
+				#### standard__file__Stdout__init.lin
+		## standard__file__Stdout.concerns
+		## standard.concern
+		## standard.concern
+		## standard__file.concern
+			### standard__file__Stdout__SELF.definition
+				#### standard__file__Stdout__SELF.lin
+
+MModulePage gc
+	# gc.section
+		## standard__gc.intro
+		## standard__gc.importation
+			### standard__gc.graph
+			### list.group
+				#### standard__gc.imports
+				#### standard__gc.clients
+		## standard__gc.concerns
+		## standard.concern
+		## standard.concern
+		## standard__gc.concern
+			### standard__gc__Finalizable.definition-list
+				#### standard__gc__Finalizable.definition
+					##### standard__gc__Finalizable.intros_redefs
+						###### list.group
+							####### standard__gc__Finalizable.intros
+							####### standard__gc__Finalizable.redefs
+			### standard__gc__FinalizableOnce.definition-list
+				#### standard__gc__FinalizableOnce.definition
+					##### standard__gc__FinalizableOnce.intros_redefs
+						###### list.group
+							####### standard__gc__FinalizableOnce.intros
+							####### standard__gc__FinalizableOnce.redefs
+		## standard__kernel.concern
+			### standard__kernel__Sys.definition-list
+				#### standard__kernel__Sys.definition
+				#### standard__gc__Sys.definition
+					##### standard__gc__Sys.intros_redefs
+						###### list.group
+							####### standard__gc__Sys.intros
+							####### standard__gc__Sys.redefs
+
+CodePage gc
+	# standard__gc.code
+
+MClassPage Finalizable
+	# Finalizable.section
+		## standard__gc__Finalizable.intro
+		## standard__gc__Finalizable.inheritance
+			### standard__gc__Finalizable.graph
+			### list.group
+				#### standard__gc__Finalizable.parents
+				#### standard__gc__Finalizable.ancestors
+				#### standard__gc__Finalizable.children
+				#### standard__gc__Finalizable.descendants
+		## standard__gc__Finalizable.constructors
+			### standard__kernel__Object__init.definition
+		## standard__gc__Finalizable.concerns
+		## standard.concern
+		## standard.concern
+		## standard__gc.concern
+			### standard__gc__Finalizable__SELF.definition
+				#### standard__gc__Finalizable__SELF.lin
+			### standard__gc__Finalizable__finalize.definition
+
+MClassPage FinalizableOnce
+	# FinalizableOnce.section
+		## standard__gc__FinalizableOnce.intro
+		## standard__gc__FinalizableOnce.inheritance
+			### standard__gc__FinalizableOnce.graph
+			### list.group
+				#### standard__gc__FinalizableOnce.parents
+				#### standard__gc__FinalizableOnce.ancestors
+				#### standard__gc__FinalizableOnce.children
+				#### standard__gc__FinalizableOnce.descendants
+		## standard__gc__FinalizableOnce.constructors
+			### standard__kernel__Object__init.definition
+		## standard__gc__FinalizableOnce.concerns
+		## standard.concern
+		## standard.concern
+		## standard__gc.concern
+			### standard__gc__FinalizableOnce__SELF.definition
+				#### standard__gc__FinalizableOnce__SELF.lin
+			### standard__gc__FinalizableOnce__finalize.definition
+				#### standard__gc__FinalizableOnce__finalize.lin
+			### standard__gc__FinalizableOnce__finalize_once.definition
+			### standard__gc__FinalizableOnce__finalized.definition
+
+MPropertyPage finalize_once
+	# finalize_once.section
+		## standard__gc__FinalizableOnce__finalize_once.intro
+
+MPropertyPage finalized
+	# finalized.section
+		## standard__gc__FinalizableOnce__finalized.intro
+
+MPropertyPage finalize
+	# finalize.section
+		## standard__gc__Finalizable__finalize.intro
+		## standard__gc__Finalizable__finalize.concerns
+		## standard.concern
+		## standard.concern
+		## standard__gc.concern
+			### standard__gc__FinalizableOnce__finalize.definition
+		## standard__re.concern
+			### standard__re__Regex__finalize.definition
+		## standard__file.concern
+			### standard__file__FileStat__finalize.definition
+
+MModulePage kernel
+	# kernel.section
+		## standard__kernel.intro
+		## standard__kernel.importation
+			### standard__kernel.graph
+			### list.group
+				#### standard__kernel.imports
+				#### standard__kernel.clients
+		## standard__kernel.concerns
+		## standard.concern
+		## standard.concern
+		## standard__kernel.concern
+			### standard__kernel__Bool.definition-list
+				#### standard__kernel__Bool.definition
+					##### standard__kernel__Bool.intros_redefs
+						###### list.group
+							####### standard__kernel__Bool.intros
+							####### standard__kernel__Bool.redefs
+			### standard__kernel__Byte.definition-list
+				#### standard__kernel__Byte.definition
+					##### standard__kernel__Byte.intros_redefs
+						###### list.group
+							####### standard__kernel__Byte.intros
+							####### standard__kernel__Byte.redefs
+			### standard__kernel__Char.definition-list
+				#### standard__kernel__Char.definition
+					##### standard__kernel__Char.intros_redefs
+						###### list.group
+							####### standard__kernel__Char.intros
+							####### standard__kernel__Char.redefs
+			### standard__kernel__Cloneable.definition-list
+				#### standard__kernel__Cloneable.definition
+					##### standard__kernel__Cloneable.intros_redefs
+						###### list.group
+							####### standard__kernel__Cloneable.intros
+							####### standard__kernel__Cloneable.redefs
+			### standard__kernel__Comparable.definition-list
+				#### standard__kernel__Comparable.definition
+					##### standard__kernel__Comparable.intros_redefs
+						###### list.group
+							####### standard__kernel__Comparable.intros
+							####### standard__kernel__Comparable.redefs
+			### standard__kernel__Discrete.definition-list
+				#### standard__kernel__Discrete.definition
+					##### standard__kernel__Discrete.intros_redefs
+						###### list.group
+							####### standard__kernel__Discrete.intros
+							####### standard__kernel__Discrete.redefs
+			### standard__kernel__Float.definition-list
+				#### standard__kernel__Float.definition
+					##### standard__kernel__Float.intros_redefs
+						###### list.group
+							####### standard__kernel__Float.intros
+							####### standard__kernel__Float.redefs
+			### standard__kernel__Int.definition-list
+				#### standard__kernel__Int.definition
+					##### standard__kernel__Int.intros_redefs
+						###### list.group
+							####### standard__kernel__Int.intros
+							####### standard__kernel__Int.redefs
+			### standard__kernel__Numeric.definition-list
+				#### standard__kernel__Numeric.definition
+					##### standard__kernel__Numeric.intros_redefs
+						###### list.group
+							####### standard__kernel__Numeric.intros
+							####### standard__kernel__Numeric.redefs
+			### standard__kernel__Object.definition-list
+				#### standard__kernel__Object.definition
+					##### standard__kernel__Object.intros_redefs
+						###### list.group
+							####### standard__kernel__Object.intros
+							####### standard__kernel__Object.redefs
+			### standard__kernel__Pointer.definition-list
+				#### standard__kernel__Pointer.definition
+					##### standard__kernel__Pointer.intros_redefs
+						###### list.group
+							####### standard__kernel__Pointer.intros
+							####### standard__kernel__Pointer.redefs
+			### standard__kernel__Sys.definition-list
+				#### standard__kernel__Sys.definition
+					##### standard__kernel__Sys.intros_redefs
+						###### list.group
+							####### standard__kernel__Sys.intros
+							####### standard__kernel__Sys.redefs
+
+CodePage kernel
+	# standard__kernel.code
+
+MClassPage Bool
+	# Bool.section
+		## standard__kernel__Bool.intro
+		## standard__kernel__Bool.inheritance
+			### standard__kernel__Bool.graph
+			### list.group
+				#### standard__kernel__Bool.parents
+				#### standard__kernel__Bool.ancestors
+				#### standard__kernel__Bool.children
+				#### standard__kernel__Bool.descendants
+		## standard__kernel__Bool.constructors
+		## standard__kernel__Bool.concerns
+		## standard.concern
+		## standard.concern
+		## standard__kernel.concern
+			### standard__kernel__Bool__SELF.definition
+				#### standard__kernel__Bool__SELF.lin
+			### standard__kernel__Bool___33d_61d.definition
+				#### standard__kernel__Bool___33d_61d.lin
+			### standard__kernel__Bool___61d_61d.definition
+				#### standard__kernel__Bool___61d_61d.lin
+			### standard__kernel__Bool__hash.definition
+				#### standard__kernel__Bool__hash.lin
+			### standard__kernel__Bool__object_id.definition
+				#### standard__kernel__Bool__object_id.lin
+			### standard__kernel__Bool__output.definition
+				#### standard__kernel__Bool__output.lin
+			### standard__kernel__Bool__to_i.definition
+		## standard__string.concern
+			### standard__string__Bool__to_s.definition
+				#### standard__string__Bool__to_s.lin
+
+MPropertyPage to_i
+	# to_i.section
+		## standard__kernel__Bool__to_i.intro
+
+MClassPage Byte
+	# Byte.section
+		## standard__kernel__Byte.intro
+		## standard__kernel__Byte.inheritance
+			### standard__kernel__Byte.graph
+			### list.group
+				#### standard__kernel__Byte.parents
+				#### standard__kernel__Byte.ancestors
+				#### standard__kernel__Byte.children
+				#### standard__kernel__Byte.descendants
+		## standard__kernel__Byte.constructors
+		## standard__kernel__Byte.concerns
+		## standard.concern
+		## standard.concern
+		## standard__kernel.concern
+			### standard__kernel__Byte__OTHER.definition
+				#### standard__kernel__Byte__OTHER.lin
+			### standard__kernel__Byte__SELF.definition
+				#### standard__kernel__Byte__SELF.lin
+			### standard__kernel__Byte___33d_61d.definition
+				#### standard__kernel__Byte___33d_61d.lin
+			### standard__kernel__Byte___37d.definition
+			### standard__kernel__Byte___42d.definition
+				#### standard__kernel__Byte___42d.lin
+			### standard__kernel__Byte___43d.definition
+				#### standard__kernel__Byte___43d.lin
+			### standard__kernel__Byte___45d.definition
+				#### standard__kernel__Byte___45d.lin
+			### standard__kernel__Byte___47d.definition
+				#### standard__kernel__Byte___47d.lin
+			### standard__kernel__Byte___60d.definition
+				#### standard__kernel__Byte___60d.lin
+			### standard__kernel__Byte___60d_60d.definition
+			### standard__kernel__Byte___60d_61d.definition
+				#### standard__kernel__Byte___60d_61d.lin
+			### standard__kernel__Byte___60d_61d_62d.definition
+				#### standard__kernel__Byte___60d_61d_62d.lin
+			### standard__kernel__Byte___61d_61d.definition
+				#### standard__kernel__Byte___61d_61d.lin
+			### standard__kernel__Byte___62d.definition
+				#### standard__kernel__Byte___62d.lin
+			### standard__kernel__Byte___62d_61d.definition
+				#### standard__kernel__Byte___62d_61d.lin
+			### standard__kernel__Byte___62d_62d.definition
+			### standard__kernel__Byte__distance.definition
+				#### standard__kernel__Byte__distance.lin
+			### standard__kernel__Byte__hash.definition
+				#### standard__kernel__Byte__hash.lin
+			### standard__kernel__Byte__is_between.definition
+				#### standard__kernel__Byte__is_between.lin
+			### standard__kernel__Byte__lshift.definition
+			### standard__kernel__Byte__max.definition
+				#### standard__kernel__Byte__max.lin
+			### standard__kernel__Byte__min.definition
+				#### standard__kernel__Byte__min.lin
+			### standard__kernel__Byte__object_id.definition
+				#### standard__kernel__Byte__object_id.lin
+			### standard__kernel__Byte__output.definition
+				#### standard__kernel__Byte__output.lin
+			### standard__kernel__Byte__predecessor.definition
+				#### standard__kernel__Byte__predecessor.lin
+			### standard__kernel__Byte__rshift.definition
+			### standard__kernel__Byte__successor.definition
+				#### standard__kernel__Byte__successor.lin
+			### standard__kernel__Byte__to_b.definition
+				#### standard__kernel__Byte__to_b.lin
+			### standard__kernel__Byte__to_f.definition
+				#### standard__kernel__Byte__to_f.lin
+			### standard__kernel__Byte__to_i.definition
+				#### standard__kernel__Byte__to_i.lin
+			### standard__kernel__Byte__unary_32d_45d.definition
+				#### standard__kernel__Byte__unary_32d_45d.lin
+			### standard__kernel__Byte__value_of.definition
+				#### standard__kernel__Byte__value_of.lin
+			### standard__kernel__Byte__zero.definition
+				#### standard__kernel__Byte__zero.lin
+		## standard__string.concern
+			### standard__string__Byte__to_s.definition
+				#### standard__string__Byte__to_s.lin
+
+MPropertyPage %
+	# %.section
+		## standard__kernel__Byte___37d.intro
+
+MPropertyPage &lt;&lt;
+	# &lt;&lt;.section
+		## standard__kernel__Byte___60d_60d.intro
+
+MPropertyPage &gt;&gt;
+	# &gt;&gt;.section
+		## standard__kernel__Byte___62d_62d.intro
+
+MPropertyPage lshift
+	# lshift.section
+		## standard__kernel__Byte__lshift.intro
+
+MPropertyPage rshift
+	# rshift.section
+		## standard__kernel__Byte__rshift.intro
+
+MClassPage Char
+	# Char.section
+		## standard__kernel__Char.intro
+		## standard__kernel__Char.inheritance
+			### standard__kernel__Char.graph
+			### list.group
+				#### standard__kernel__Char.parents
+				#### standard__kernel__Char.ancestors
+				#### standard__kernel__Char.children
+				#### standard__kernel__Char.descendants
+		## standard__kernel__Char.constructors
+		## standard__kernel__Char.concerns
+		## standard.concern
+		## standard.concern
+		## standard__kernel.concern
+			### standard__kernel__Char__OTHER.definition
+				#### standard__kernel__Char__OTHER.lin
+			### standard__kernel__Char__SELF.definition
+				#### standard__kernel__Char__SELF.lin
+			### standard__kernel__Char___33d_61d.definition
+				#### standard__kernel__Char___33d_61d.lin
+			### standard__kernel__Char___60d.definition
+				#### standard__kernel__Char___60d.lin
+			### standard__kernel__Char___60d_61d.definition
+				#### standard__kernel__Char___60d_61d.lin
+			### standard__kernel__Char___61d_61d.definition
+				#### standard__kernel__Char___61d_61d.lin
+			### standard__kernel__Char___62d.definition
+				#### standard__kernel__Char___62d.lin
+			### standard__kernel__Char___62d_61d.definition
+				#### standard__kernel__Char___62d_61d.lin
+			### standard__kernel__Char__ascii.definition
+			### standard__kernel__Char__distance.definition
+				#### standard__kernel__Char__distance.lin
+			### standard__kernel__Char__hash.definition
+				#### standard__kernel__Char__hash.lin
+			### standard__kernel__Char__is_digit.definition
+			### standard__kernel__Char__is_letter.definition
+			### standard__kernel__Char__is_lower.definition
+			### standard__kernel__Char__is_upper.definition
+			### standard__kernel__Char__is_whitespace.definition
+			### standard__kernel__Char__object_id.definition
+				#### standard__kernel__Char__object_id.lin
+			### standard__kernel__Char__output.definition
+				#### standard__kernel__Char__output.lin
+			### standard__kernel__Char__predecessor.definition
+				#### standard__kernel__Char__predecessor.lin
+			### standard__kernel__Char__successor.definition
+				#### standard__kernel__Char__successor.lin
+			### standard__kernel__Char__to_i.definition
+			### standard__kernel__Char__to_lower.definition
+			### standard__kernel__Char__to_upper.definition
+		## standard__string.concern
+			### standard__string__Char__is_alpha.definition
+			### standard__string__Char__is_alphanumeric.definition
+			### standard__string__Char__is_numeric.definition
+			### standard__string__Char__to_s.definition
+				#### standard__string__Char__to_s.lin
+		## standard__string_search.concern
+			### standard__string_search__Char__search_in.definition
+				#### standard__string_search__Char__search_in.lin
+			### standard__string_search__Char__search_index_in.definition
+				#### standard__string_search__Char__search_index_in.lin
+
+MPropertyPage ascii
+	# ascii.section
+		## standard__kernel__Char__ascii.intro
+
+MPropertyPage is_alpha
+	# is_alpha.section
+		## standard__kernel__Char__is_alpha.intro
+
+MPropertyPage is_alphanumeric
+	# is_alphanumeric.section
+		## standard__kernel__Char__is_alphanumeric.intro
+
+MPropertyPage is_digit
+	# is_digit.section
+		## standard__kernel__Char__is_digit.intro
+
+MPropertyPage is_letter
+	# is_letter.section
+		## standard__kernel__Char__is_letter.intro
+
+MPropertyPage is_lower
+	# is_lower.section
+		## standard__kernel__Char__is_lower.intro
+
+MPropertyPage is_numeric
+	# is_numeric.section
+		## standard__kernel__Char__is_numeric.intro
+
+MPropertyPage is_upper
+	# is_upper.section
+		## standard__kernel__Char__is_upper.intro
+
+MPropertyPage is_whitespace
+	# is_whitespace.section
+		## standard__kernel__Char__is_whitespace.intro
+
+MPropertyPage to_i
+	# to_i.section
+		## standard__kernel__Char__to_i.intro
+
+MPropertyPage to_lower
+	# to_lower.section
+		## standard__kernel__Char__to_lower.intro
+
+MPropertyPage to_upper
+	# to_upper.section
+		## standard__kernel__Char__to_upper.intro
+
+MClassPage Cloneable
+	# Cloneable.section
+		## standard__kernel__Cloneable.intro
+		## standard__kernel__Cloneable.inheritance
+			### standard__kernel__Cloneable.graph
+			### list.group
+				#### standard__kernel__Cloneable.parents
+				#### standard__kernel__Cloneable.ancestors
+				#### standard__kernel__Cloneable.children
+				#### standard__kernel__Cloneable.descendants
+		## standard__kernel__Cloneable.constructors
+		## standard__kernel__Cloneable.concerns
+		## standard.concern
+		## standard.concern
+		## standard__kernel.concern
+			### standard__kernel__Cloneable__SELF.definition
+				#### standard__kernel__Cloneable__SELF.lin
+			### standard__kernel__Cloneable__clone.definition
+
+MPropertyPage clone
+	# clone.section
+		## standard__kernel__Cloneable__clone.intro
+		## standard__kernel__Cloneable__clone.concerns
+		## standard.concern
+		## standard.concern
+		## standard__collection.concern
+		## standard__collection__array.concern
+			### standard__collection__array__Array__clone.definition
+			### standard__collection__array__ArraySet__clone.definition
+			### standard__collection__array__ArrayMap__clone.definition
+		## standard__collection__union_find.concern
+			### standard__collection__union_find__DisjointSet__clone.definition
+
+MClassPage Comparable
+	# Comparable.section
+		## standard__kernel__Comparable.intro
+		## standard__kernel__Comparable.inheritance
+			### standard__kernel__Comparable.graph
+			### list.group
+				#### standard__kernel__Comparable.parents
+				#### standard__kernel__Comparable.ancestors
+				#### standard__kernel__Comparable.children
+				#### standard__kernel__Comparable.descendants
+		## standard__kernel__Comparable.constructors
+		## standard__kernel__Comparable.concerns
+		## standard.concern
+		## standard.concern
+		## standard__kernel.concern
+			### standard__kernel__Comparable__OTHER.definition
+			### standard__kernel__Comparable__SELF.definition
+				#### standard__kernel__Comparable__SELF.lin
+			### standard__kernel__Comparable___60d.definition
+			### standard__kernel__Comparable___60d_61d.definition
+			### standard__kernel__Comparable___60d_61d_62d.definition
+			### standard__kernel__Comparable___62d.definition
+			### standard__kernel__Comparable___62d_61d.definition
+			### standard__kernel__Comparable__is_between.definition
+			### standard__kernel__Comparable__max.definition
+			### standard__kernel__Comparable__min.definition
+
+MPropertyPage OTHER
+	# OTHER.section
+		## standard__kernel__Comparable__OTHER.intro
+		## standard__kernel__Comparable__OTHER.concerns
+		## standard.concern
+		## standard.concern
+		## standard__kernel.concern
+			### standard__kernel__Discrete__OTHER.definition
+			### standard__kernel__Numeric__OTHER.definition
+			### standard__kernel__Float__OTHER.definition
+			### standard__kernel__Byte__OTHER.definition
+			### standard__kernel__Int__OTHER.definition
+			### standard__kernel__Char__OTHER.definition
+		## standard__collection.concern
+		## standard__collection__array.concern
+			### standard__collection__array__ArrayCmp__OTHER.definition
+		## standard__string.concern
+			### standard__string__Text__OTHER.definition
+		## standard__time.concern
+			### standard__time__ISODate__OTHER.definition
+
+MPropertyPage &lt;
+	# &lt;.section
+		## standard__kernel__Comparable___60d.intro
+		## standard__kernel__Comparable___60d.concerns
+		## standard.concern
+		## standard.concern
+		## standard__kernel.concern
+			### standard__kernel__Float___60d.definition
+			### standard__kernel__Byte___60d.definition
+			### standard__kernel__Int___60d.definition
+			### standard__kernel__Char___60d.definition
+		## standard__collection.concern
+		## standard__collection__array.concern
+			### standard__collection__array__ArrayCmp___60d.definition
+		## standard__string.concern
+			### standard__string__Text___60d.definition
+			### standard__string__FlatString___60d.definition
+		## standard__time.concern
+			### standard__time__ISODate___60d.definition
+
+MPropertyPage &lt;=
+	# &lt;=.section
+		## standard__kernel__Comparable___60d_61d.intro
+		## standard__kernel__Comparable___60d_61d.concerns
+		## standard.concern
+		## standard.concern
+		## standard__kernel.concern
+			### standard__kernel__Float___60d_61d.definition
+			### standard__kernel__Byte___60d_61d.definition
+			### standard__kernel__Int___60d_61d.definition
+			### standard__kernel__Char___60d_61d.definition
+
+MPropertyPage &lt;=&gt;
+	# &lt;=&gt;.section
+		## standard__kernel__Comparable___60d_61d_62d.intro
+		## standard__kernel__Comparable___60d_61d_62d.concerns
+		## standard.concern
+		## standard.concern
+		## standard__kernel.concern
+			### standard__kernel__Float___60d_61d_62d.definition
+			### standard__kernel__Byte___60d_61d_62d.definition
+			### standard__kernel__Int___60d_61d_62d.definition
+		## standard__collection.concern
+		## standard__collection__array.concern
+			### standard__collection__array__ArrayCmp___60d_61d_62d.definition
+
+MPropertyPage &gt;
+	# &gt;.section
+		## standard__kernel__Comparable___62d.intro
+		## standard__kernel__Comparable___62d.concerns
+		## standard.concern
+		## standard.concern
+		## standard__kernel.concern
+			### standard__kernel__Float___62d.definition
+			### standard__kernel__Byte___62d.definition
+			### standard__kernel__Int___62d.definition
+			### standard__kernel__Char___62d.definition
+
+MPropertyPage &gt;=
+	# &gt;=.section
+		## standard__kernel__Comparable___62d_61d.intro
+		## standard__kernel__Comparable___62d_61d.concerns
+		## standard.concern
+		## standard.concern
+		## standard__kernel.concern
+			### standard__kernel__Float___62d_61d.definition
+			### standard__kernel__Byte___62d_61d.definition
+			### standard__kernel__Int___62d_61d.definition
+			### standard__kernel__Char___62d_61d.definition
+
+MPropertyPage is_between
+	# is_between.section
+		## standard__kernel__Comparable__is_between.intro
+		## standard__kernel__Comparable__is_between.concerns
+		## standard.concern
+		## standard.concern
+		## standard__kernel.concern
+			### standard__kernel__Float__is_between.definition
+			### standard__kernel__Byte__is_between.definition
+			### standard__kernel__Int__is_between.definition
+
+MPropertyPage max
+	# max.section
+		## standard__kernel__Comparable__max.intro
+		## standard__kernel__Comparable__max.concerns
+		## standard.concern
+		## standard.concern
+		## standard__kernel.concern
+			### standard__kernel__Float__max.definition
+			### standard__kernel__Byte__max.definition
+			### standard__kernel__Int__max.definition
+
+MPropertyPage min
+	# min.section
+		## standard__kernel__Comparable__min.intro
+		## standard__kernel__Comparable__min.concerns
+		## standard.concern
+		## standard.concern
+		## standard__kernel.concern
+			### standard__kernel__Float__min.definition
+			### standard__kernel__Byte__min.definition
+			### standard__kernel__Int__min.definition
+
+MClassPage Discrete
+	# Discrete.section
+		## standard__kernel__Discrete.intro
+		## standard__kernel__Discrete.inheritance
+			### standard__kernel__Discrete.graph
+			### list.group
+				#### standard__kernel__Discrete.parents
+				#### standard__kernel__Discrete.ancestors
+				#### standard__kernel__Discrete.children
+				#### standard__kernel__Discrete.descendants
+		## standard__kernel__Discrete.constructors
+		## standard__kernel__Discrete.concerns
+		## standard.concern
+		## standard.concern
+		## standard__kernel.concern
+			### standard__kernel__Discrete__OTHER.definition
+				#### standard__kernel__Discrete__OTHER.lin
+			### standard__kernel__Discrete__SELF.definition
+				#### standard__kernel__Discrete__SELF.lin
+			### standard__kernel__Discrete__distance.definition
+			### standard__kernel__Discrete__predecessor.definition
+			### standard__kernel__Discrete__successor.definition
+
+MPropertyPage distance
+	# distance.section
+		## standard__kernel__Discrete__distance.intro
+		## standard__kernel__Discrete__distance.concerns
+		## standard.concern
+		## standard.concern
+		## standard__kernel.concern
+			### standard__kernel__Byte__distance.definition
+			### standard__kernel__Int__distance.definition
+			### standard__kernel__Char__distance.definition
+
+MPropertyPage predecessor
+	# predecessor.section
+		## standard__kernel__Discrete__predecessor.intro
+		## standard__kernel__Discrete__predecessor.concerns
+		## standard.concern
+		## standard.concern
+		## standard__kernel.concern
+			### standard__kernel__Byte__predecessor.definition
+			### standard__kernel__Int__predecessor.definition
+			### standard__kernel__Char__predecessor.definition
+
+MPropertyPage successor
+	# successor.section
+		## standard__kernel__Discrete__successor.intro
+		## standard__kernel__Discrete__successor.concerns
+		## standard.concern
+		## standard.concern
+		## standard__kernel.concern
+			### standard__kernel__Byte__successor.definition
+			### standard__kernel__Int__successor.definition
+			### standard__kernel__Char__successor.definition
+
+MClassPage Float
+	# Float.section
+		## standard__kernel__Float.intro
+		## standard__kernel__Float.inheritance
+			### standard__kernel__Float.graph
+			### list.group
+				#### standard__kernel__Float.parents
+				#### standard__kernel__Float.ancestors
+				#### standard__kernel__Float.children
+				#### standard__kernel__Float.descendants
+		## standard__kernel__Float.constructors
+		## standard__kernel__Float.concerns
+		## standard.concern
+		## standard.concern
+		## standard__kernel.concern
+			### standard__kernel__Float__OTHER.definition
+				#### standard__kernel__Float__OTHER.lin
+			### standard__kernel__Float__SELF.definition
+				#### standard__kernel__Float__SELF.lin
+			### standard__kernel__Float___33d_61d.definition
+				#### standard__kernel__Float___33d_61d.lin
+			### standard__kernel__Float___42d.definition
+				#### standard__kernel__Float___42d.lin
+			### standard__kernel__Float___43d.definition
+				#### standard__kernel__Float___43d.lin
+			### standard__kernel__Float___45d.definition
+				#### standard__kernel__Float___45d.lin
+			### standard__kernel__Float___47d.definition
+				#### standard__kernel__Float___47d.lin
+			### standard__kernel__Float___60d.definition
+				#### standard__kernel__Float___60d.lin
+			### standard__kernel__Float___60d_61d.definition
+				#### standard__kernel__Float___60d_61d.lin
+			### standard__kernel__Float___60d_61d_62d.definition
+				#### standard__kernel__Float___60d_61d_62d.lin
+			### standard__kernel__Float___61d_61d.definition
+				#### standard__kernel__Float___61d_61d.lin
+			### standard__kernel__Float___62d.definition
+				#### standard__kernel__Float___62d.lin
+			### standard__kernel__Float___62d_61d.definition
+				#### standard__kernel__Float___62d_61d.lin
+			### standard__kernel__Float__is_approx.definition
+			### standard__kernel__Float__is_between.definition
+				#### standard__kernel__Float__is_between.lin
+			### standard__kernel__Float__max.definition
+				#### standard__kernel__Float__max.lin
+			### standard__kernel__Float__min.definition
+				#### standard__kernel__Float__min.lin
+			### standard__kernel__Float__object_id.definition
+				#### standard__kernel__Float__object_id.lin
+			### standard__kernel__Float__output.definition
+				#### standard__kernel__Float__output.lin
+			### standard__kernel__Float__to_b.definition
+				#### standard__kernel__Float__to_b.lin
+			### standard__kernel__Float__to_f.definition
+				#### standard__kernel__Float__to_f.lin
+			### standard__kernel__Float__to_i.definition
+				#### standard__kernel__Float__to_i.lin
+			### standard__kernel__Float__unary_32d_45d.definition
+				#### standard__kernel__Float__unary_32d_45d.lin
+			### standard__kernel__Float__value_of.definition
+				#### standard__kernel__Float__value_of.lin
+			### standard__kernel__Float__zero.definition
+				#### standard__kernel__Float__zero.lin
+		## standard__math.concern
+			### standard__math__Float__abs.definition
+			### standard__math__Float__acos.definition
+			### standard__math__Float__asin.definition
+			### standard__math__Float__atan.definition
+			### standard__math__Float__ceil.definition
+			### standard__math__Float__cos.definition
+			### standard__math__Float__exp.definition
+			### standard__math__Float__floor.definition
+			### standard__math__Float__hypot_with.definition
+			### standard__math__Float__is_inf.definition
+			### standard__math__Float__is_nan.definition
+			### standard__math__Float__lerp.definition
+			### standard__math__Float__log.definition
+			### standard__math__Float__log_base.definition
+			### standard__math__Float__pow.definition
+			### standard__math__Float__rand.definition
+			### standard__math__Float__round.definition
+			### standard__math__Float__sin.definition
+			### standard__math__Float__sqrt.definition
+			### standard__math__Float__tan.definition
+		## standard__string.concern
+			### standard__string__Float__to_precision.definition
+			### standard__string__Float__to_s.definition
+				#### standard__string__Float__to_s.lin
+		## standard__numeric.concern
+			### standard__numeric__Float__add.definition
+				#### standard__numeric__Float__add.lin
+			### standard__numeric__Float__div.definition
+				#### standard__numeric__Float__div.lin
+			### standard__numeric__Float__mul.definition
+				#### standard__numeric__Float__mul.lin
+			### standard__numeric__Float__sub.definition
+				#### standard__numeric__Float__sub.lin
+
+MPropertyPage abs
+	# abs.section
+		## standard__kernel__Float__abs.intro
+
+MPropertyPage acos
+	# acos.section
+		## standard__kernel__Float__acos.intro
+
+MPropertyPage asin
+	# asin.section
+		## standard__kernel__Float__asin.intro
+
+MPropertyPage atan
+	# atan.section
+		## standard__kernel__Float__atan.intro
+
+MPropertyPage ceil
+	# ceil.section
+		## standard__kernel__Float__ceil.intro
+
+MPropertyPage cos
+	# cos.section
+		## standard__kernel__Float__cos.intro
+
+MPropertyPage exp
+	# exp.section
+		## standard__kernel__Float__exp.intro
+
+MPropertyPage floor
+	# floor.section
+		## standard__kernel__Float__floor.intro
+
+MPropertyPage hypot_with
+	# hypot_with.section
+		## standard__kernel__Float__hypot_with.intro
+
+MPropertyPage is_approx
+	# is_approx.section
+		## standard__kernel__Float__is_approx.intro
+
+MPropertyPage is_inf
+	# is_inf.section
+		## standard__kernel__Float__is_inf.intro
+
+MPropertyPage is_nan
+	# is_nan.section
+		## standard__kernel__Float__is_nan.intro
+
+MPropertyPage lerp
+	# lerp.section
+		## standard__kernel__Float__lerp.intro
+
+MPropertyPage log
+	# log.section
+		## standard__kernel__Float__log.intro
+
+MPropertyPage log_base
+	# log_base.section
+		## standard__kernel__Float__log_base.intro
+
+MPropertyPage pow
+	# pow.section
+		## standard__kernel__Float__pow.intro
+
+MPropertyPage rand
+	# rand.section
+		## standard__kernel__Float__rand.intro
+
+MPropertyPage round
+	# round.section
+		## standard__kernel__Float__round.intro
+
+MPropertyPage sin
+	# sin.section
+		## standard__kernel__Float__sin.intro
+
+MPropertyPage sqrt
+	# sqrt.section
+		## standard__kernel__Float__sqrt.intro
+
+MPropertyPage tan
+	# tan.section
+		## standard__kernel__Float__tan.intro
+
+MPropertyPage to_precision
+	# to_precision.section
+		## standard__kernel__Float__to_precision.intro
+
+MClassPage Int
+	# Int.section
+		## standard__kernel__Int.intro
+		## standard__kernel__Int.inheritance
+			### standard__kernel__Int.graph
+			### list.group
+				#### standard__kernel__Int.parents
+				#### standard__kernel__Int.ancestors
+				#### standard__kernel__Int.children
+				#### standard__kernel__Int.descendants
+		## standard__kernel__Int.constructors
+		## standard__kernel__Int.concerns
+		## standard.concern
+		## standard.concern
+		## standard__kernel.concern
+			### standard__kernel__Int__OTHER.definition
+				#### standard__kernel__Int__OTHER.lin
+			### standard__kernel__Int__SELF.definition
+				#### standard__kernel__Int__SELF.lin
+			### standard__kernel__Int___33d_61d.definition
+				#### standard__kernel__Int___33d_61d.lin
+			### standard__kernel__Int___37d.definition
+			### standard__kernel__Int___42d.definition
+				#### standard__kernel__Int___42d.lin
+			### standard__kernel__Int___43d.definition
+				#### standard__kernel__Int___43d.lin
+			### standard__kernel__Int___45d.definition
+				#### standard__kernel__Int___45d.lin
+			### standard__kernel__Int___47d.definition
+				#### standard__kernel__Int___47d.lin
+			### standard__kernel__Int___60d.definition
+				#### standard__kernel__Int___60d.lin
+			### standard__kernel__Int___60d_60d.definition
+			### standard__kernel__Int___60d_61d.definition
+				#### standard__kernel__Int___60d_61d.lin
+			### standard__kernel__Int___60d_61d_62d.definition
+				#### standard__kernel__Int___60d_61d_62d.lin
+			### standard__kernel__Int___61d_61d.definition
+				#### standard__kernel__Int___61d_61d.lin
+			### standard__kernel__Int___62d.definition
+				#### standard__kernel__Int___62d.lin
+			### standard__kernel__Int___62d_61d.definition
+				#### standard__kernel__Int___62d_61d.lin
+			### standard__kernel__Int___62d_62d.definition
+			### standard__kernel__Int__abs.definition
+			### standard__kernel__Int__ascii.definition
+			### standard__kernel__Int__digit_count.definition
+			### standard__kernel__Int__digit_count_base_95d10.definition
+			### standard__kernel__Int__distance.definition
+				#### standard__kernel__Int__distance.lin
+			### standard__kernel__Int__hash.definition
+				#### standard__kernel__Int__hash.lin
+			### standard__kernel__Int__is_between.definition
+				#### standard__kernel__Int__is_between.lin
+			### standard__kernel__Int__lshift.definition
+			### standard__kernel__Int__max.definition
+				#### standard__kernel__Int__max.lin
+			### standard__kernel__Int__min.definition
+				#### standard__kernel__Int__min.lin
+			### standard__kernel__Int__object_id.definition
+				#### standard__kernel__Int__object_id.lin
+			### standard__kernel__Int__output.definition
+				#### standard__kernel__Int__output.lin
+			### standard__kernel__Int__predecessor.definition
+				#### standard__kernel__Int__predecessor.lin
+			### standard__kernel__Int__rshift.definition
+			### standard__kernel__Int__successor.definition
+				#### standard__kernel__Int__successor.lin
+			### standard__kernel__Int__to_b.definition
+				#### standard__kernel__Int__to_b.lin
+			### standard__kernel__Int__to_c.definition
+			### standard__kernel__Int__to_f.definition
+				#### standard__kernel__Int__to_f.lin
+			### standard__kernel__Int__to_i.definition
+				#### standard__kernel__Int__to_i.lin
+			### standard__kernel__Int__unary_32d_45d.definition
+				#### standard__kernel__Int__unary_32d_45d.lin
+			### standard__kernel__Int__value_of.definition
+				#### standard__kernel__Int__value_of.lin
+			### standard__kernel__Int__zero.definition
+				#### standard__kernel__Int__zero.lin
+		## standard__collection.concern
+		## standard__collection__range.concern
+			### standard__collection__range__Int__times.definition
+		## standard__math.concern
+			### standard__math__Int___42d_42d.definition
+			### standard__math__Int__bin_and.definition
+			### standard__math__Int__bin_not.definition
+			### standard__math__Int__bin_or.definition
+			### standard__math__Int__bin_xor.definition
+			### standard__math__Int__factorial.definition
+			### standard__math__Int__gcd.definition
+			### standard__math__Int__is_even.definition
+			### standard__math__Int__is_odd.definition
+			### standard__math__Int__rand.definition
+			### standard__math__Int__sqrt.definition
+		## standard__bitset.concern
+			### standard__bitset__Int__bits.definition
+			### standard__bitset__Int__getbit.definition
+			### standard__bitset__Int__highest_bit.definition
+			### standard__bitset__Int__number_bits.definition
+			### standard__bitset__Int__setbit.definition
+		## standard__string.concern
+			### standard__string__Int__strerror.definition
+			### standard__string__Int__to_base.definition
+			### standard__string__Int__to_hex.definition
+			### standard__string__Int__to_s.definition
+				#### standard__string__Int__to_s.lin
+		## standard__numeric.concern
+			### standard__numeric__Int__add.definition
+				#### standard__numeric__Int__add.lin
+			### standard__numeric__Int__div.definition
+				#### standard__numeric__Int__div.lin
+			### standard__numeric__Int__mul.definition
+				#### standard__numeric__Int__mul.lin
+			### standard__numeric__Int__sub.definition
+				#### standard__numeric__Int__sub.lin
+
+MPropertyPage %
+	# %.section
+		## standard__kernel__Int___37d.intro
+
+MPropertyPage **
+	# **.section
+		## standard__kernel__Int___42d_42d.intro
+
+MPropertyPage &lt;&lt;
+	# &lt;&lt;.section
+		## standard__kernel__Int___60d_60d.intro
+
+MPropertyPage &gt;&gt;
+	# &gt;&gt;.section
+		## standard__kernel__Int___62d_62d.intro
+
+MPropertyPage abs
+	# abs.section
+		## standard__kernel__Int__abs.intro
+
+MPropertyPage ascii
+	# ascii.section
+		## standard__kernel__Int__ascii.intro
+
+MPropertyPage bin_and
+	# bin_and.section
+		## standard__kernel__Int__bin_and.intro
+
+MPropertyPage bin_not
+	# bin_not.section
+		## standard__kernel__Int__bin_not.intro
+
+MPropertyPage bin_or
+	# bin_or.section
+		## standard__kernel__Int__bin_or.intro
+
+MPropertyPage bin_xor
+	# bin_xor.section
+		## standard__kernel__Int__bin_xor.intro
+
+MPropertyPage bits
+	# bits.section
+		## standard__kernel__Int__bits.intro
+
+MPropertyPage digit_count
+	# digit_count.section
+		## standard__kernel__Int__digit_count.intro
+
+MPropertyPage digit_count_base_10
+	# digit_count_base_10.section
+		## standard__kernel__Int__digit_count_base_95d10.intro
+
+MPropertyPage factorial
+	# factorial.section
+		## standard__kernel__Int__factorial.intro
+
+MPropertyPage gcd
+	# gcd.section
+		## standard__kernel__Int__gcd.intro
+
+MPropertyPage getbit
+	# getbit.section
+		## standard__kernel__Int__getbit.intro
+
+MPropertyPage highest_bit
+	# highest_bit.section
+		## standard__kernel__Int__highest_bit.intro
+
+MPropertyPage is_even
+	# is_even.section
+		## standard__kernel__Int__is_even.intro
+
+MPropertyPage is_odd
+	# is_odd.section
+		## standard__kernel__Int__is_odd.intro
+
+MPropertyPage lshift
+	# lshift.section
+		## standard__kernel__Int__lshift.intro
+
+MPropertyPage number_bits
+	# number_bits.section
+		## standard__kernel__Int__number_bits.intro
+
+MPropertyPage rand
+	# rand.section
+		## standard__kernel__Int__rand.intro
+
+MPropertyPage rshift
+	# rshift.section
+		## standard__kernel__Int__rshift.intro
+
+MPropertyPage setbit
+	# setbit.section
+		## standard__kernel__Int__setbit.intro
+
+MPropertyPage sqrt
+	# sqrt.section
+		## standard__kernel__Int__sqrt.intro
+
+MPropertyPage strerror
+	# strerror.section
+		## standard__kernel__Int__strerror.intro
+
+MPropertyPage times
+	# times.section
+		## standard__kernel__Int__times.intro
+
+MPropertyPage to_base
+	# to_base.section
+		## standard__kernel__Int__to_base.intro
+
+MPropertyPage to_c
+	# to_c.section
+		## standard__kernel__Int__to_c.intro
+
+MPropertyPage to_hex
+	# to_hex.section
+		## standard__kernel__Int__to_hex.intro
+
+MClassPage Numeric
+	# Numeric.section
+		## standard__kernel__Numeric.intro
+		## standard__kernel__Numeric.inheritance
+			### standard__kernel__Numeric.graph
+			### list.group
+				#### standard__kernel__Numeric.parents
+				#### standard__kernel__Numeric.ancestors
+				#### standard__kernel__Numeric.children
+				#### standard__kernel__Numeric.descendants
+		## standard__kernel__Numeric.constructors
+		## standard__kernel__Numeric.concerns
+		## standard.concern
+		## standard.concern
+		## standard__kernel.concern
+			### standard__kernel__Numeric__OTHER.definition
+				#### standard__kernel__Numeric__OTHER.lin
+			### standard__kernel__Numeric__SELF.definition
+				#### standard__kernel__Numeric__SELF.lin
+			### standard__kernel__Numeric___42d.definition
+			### standard__kernel__Numeric___43d.definition
+			### standard__kernel__Numeric___45d.definition
+			### standard__kernel__Numeric___47d.definition
+			### standard__kernel__Numeric__is_zero.definition
+			### standard__kernel__Numeric__to_b.definition
+			### standard__kernel__Numeric__to_f.definition
+			### standard__kernel__Numeric__to_i.definition
+			### standard__kernel__Numeric__unary_32d_45d.definition
+			### standard__kernel__Numeric__value_of.definition
+			### standard__kernel__Numeric__zero.definition
+		## standard__numeric.concern
+			### standard__numeric__Numeric__add.definition
+			### standard__numeric__Numeric__div.definition
+			### standard__numeric__Numeric__mul.definition
+			### standard__numeric__Numeric__sub.definition
+
+MPropertyPage *
+	# *.section
+		## standard__kernel__Numeric___42d.intro
+		## standard__kernel__Numeric___42d.concerns
+		## standard.concern
+		## standard.concern
+		## standard__kernel.concern
+			### standard__kernel__Float___42d.definition
+			### standard__kernel__Byte___42d.definition
+			### standard__kernel__Int___42d.definition
+
+MPropertyPage +
+	# +.section
+		## standard__kernel__Numeric___43d.intro
+		## standard__kernel__Numeric___43d.concerns
+		## standard.concern
+		## standard.concern
+		## standard__kernel.concern
+			### standard__kernel__Float___43d.definition
+			### standard__kernel__Byte___43d.definition
+			### standard__kernel__Int___43d.definition
+
+MPropertyPage -
+	# -.section
+		## standard__kernel__Numeric___45d.intro
+		## standard__kernel__Numeric___45d.concerns
+		## standard.concern
+		## standard.concern
+		## standard__kernel.concern
+			### standard__kernel__Float___45d.definition
+			### standard__kernel__Byte___45d.definition
+			### standard__kernel__Int___45d.definition
+
+MPropertyPage &#47;
+	# &#47;.section
+		## standard__kernel__Numeric___47d.intro
+		## standard__kernel__Numeric___47d.concerns
+		## standard.concern
+		## standard.concern
+		## standard__kernel.concern
+			### standard__kernel__Float___47d.definition
+			### standard__kernel__Byte___47d.definition
+			### standard__kernel__Int___47d.definition
+
+MPropertyPage add
+	# add.section
+		## standard__kernel__Numeric__add.intro
+		## standard__kernel__Numeric__add.concerns
+		## standard.concern
+		## standard.concern
+		## standard__numeric.concern
+			### standard__numeric__Int__add.definition
+			### standard__numeric__Float__add.definition
+
+MPropertyPage div
+	# div.section
+		## standard__kernel__Numeric__div.intro
+		## standard__kernel__Numeric__div.concerns
+		## standard.concern
+		## standard.concern
+		## standard__numeric.concern
+			### standard__numeric__Int__div.definition
+			### standard__numeric__Float__div.definition
+
+MPropertyPage is_zero
+	# is_zero.section
+		## standard__kernel__Numeric__is_zero.intro
+
+MPropertyPage mul
+	# mul.section
+		## standard__kernel__Numeric__mul.intro
+		## standard__kernel__Numeric__mul.concerns
+		## standard.concern
+		## standard.concern
+		## standard__numeric.concern
+			### standard__numeric__Int__mul.definition
+			### standard__numeric__Float__mul.definition
+
+MPropertyPage sub
+	# sub.section
+		## standard__kernel__Numeric__sub.intro
+		## standard__kernel__Numeric__sub.concerns
+		## standard.concern
+		## standard.concern
+		## standard__numeric.concern
+			### standard__numeric__Int__sub.definition
+			### standard__numeric__Float__sub.definition
+
+MPropertyPage to_b
+	# to_b.section
+		## standard__kernel__Numeric__to_b.intro
+		## standard__kernel__Numeric__to_b.concerns
+		## standard.concern
+		## standard.concern
+		## standard__kernel.concern
+			### standard__kernel__Float__to_b.definition
+			### standard__kernel__Byte__to_b.definition
+			### standard__kernel__Int__to_b.definition
+
+MPropertyPage to_f
+	# to_f.section
+		## standard__kernel__Numeric__to_f.intro
+		## standard__kernel__Numeric__to_f.concerns
+		## standard.concern
+		## standard.concern
+		## standard__kernel.concern
+			### standard__kernel__Float__to_f.definition
+			### standard__kernel__Byte__to_f.definition
+			### standard__kernel__Int__to_f.definition
+
+MPropertyPage to_i
+	# to_i.section
+		## standard__kernel__Numeric__to_i.intro
+		## standard__kernel__Numeric__to_i.concerns
+		## standard.concern
+		## standard.concern
+		## standard__kernel.concern
+			### standard__kernel__Float__to_i.definition
+			### standard__kernel__Byte__to_i.definition
+			### standard__kernel__Int__to_i.definition
+
+MPropertyPage unary -
+	# unary -.section
+		## standard__kernel__Numeric__unary_32d_45d.intro
+		## standard__kernel__Numeric__unary_32d_45d.concerns
+		## standard.concern
+		## standard.concern
+		## standard__kernel.concern
+			### standard__kernel__Float__unary_32d_45d.definition
+			### standard__kernel__Byte__unary_32d_45d.definition
+			### standard__kernel__Int__unary_32d_45d.definition
+
+MPropertyPage value_of
+	# value_of.section
+		## standard__kernel__Numeric__value_of.intro
+		## standard__kernel__Numeric__value_of.concerns
+		## standard.concern
+		## standard.concern
+		## standard__kernel.concern
+			### standard__kernel__Float__value_of.definition
+			### standard__kernel__Byte__value_of.definition
+			### standard__kernel__Int__value_of.definition
+
+MPropertyPage zero
+	# zero.section
+		## standard__kernel__Numeric__zero.intro
+		## standard__kernel__Numeric__zero.concerns
+		## standard.concern
+		## standard.concern
+		## standard__kernel.concern
+			### standard__kernel__Float__zero.definition
+			### standard__kernel__Byte__zero.definition
+			### standard__kernel__Int__zero.definition
+
+MClassPage Object
+	# Object.section
+		## standard__kernel__Object.intro
+		## standard__kernel__Object.inheritance
+			### standard__kernel__Object.graph
+			### list.group
+				#### standard__kernel__Object.parents
+				#### standard__kernel__Object.ancestors
+				#### standard__kernel__Object.children
+				#### standard__kernel__Object.descendants
+		## standard__kernel__Object.constructors
+			### standard__kernel__Object__init.definition
+		## standard__kernel__Object.concerns
+		## standard.concern
+		## standard.concern
+		## standard__kernel.concern
+			### standard__kernel__Object__SELF.definition
+			### standard__kernel__Object___33d_61d.definition
+			### standard__kernel__Object___61d_61d.definition
+			### standard__kernel__Object__hash.definition
+			### standard__kernel__Object__is_same_instance.definition
+			### standard__kernel__Object__is_same_type.definition
+			### standard__kernel__Object__object_id.definition
+			### standard__kernel__Object__output.definition
+			### standard__kernel__Object__output_class_name.definition
+			### standard__kernel__Object__sys.definition
+		## standard__string.concern
+			### standard__string__Object__class_name.definition
+			### standard__string__Object__inspect.definition
+			### standard__string__Object__inspect_head.definition
+			### standard__string__Object__to_s.definition
+		## standard__time.concern
+			### standard__time__Object__get_time.definition
+
+MPropertyPage SELF
+	# SELF.section
+		## standard__kernel__Object__SELF.intro
+		## standard__kernel__Object__SELF.concerns
+		## standard.concern
+		## standard.concern
+		## standard__kernel.concern
+			### standard__kernel__Int__SELF.definition
+			### standard__kernel__Comparable__SELF.definition
+			### standard__kernel__Discrete__SELF.definition
+			### standard__kernel__Cloneable__SELF.definition
+			### standard__kernel__Numeric__SELF.definition
+			### standard__kernel__Bool__SELF.definition
+			### standard__kernel__Float__SELF.definition
+			### standard__kernel__Byte__SELF.definition
+			### standard__kernel__Char__SELF.definition
+			### standard__kernel__Pointer__SELF.definition
+			### standard__kernel__Sys__SELF.definition
+		## standard__gc.concern
+			### standard__gc__Finalizable__SELF.definition
+			### standard__gc__FinalizableOnce__SELF.definition
+		## standard__collection.concern
+		## standard__collection__abstract_collection.concern
+			### standard__collection__abstract_collection__Map__SELF.definition
+			### standard__collection__abstract_collection__Iterator__SELF.definition
+			### standard__collection__abstract_collection__IteratorDecorator__SELF.definition
+			### standard__collection__abstract_collection__Container__SELF.definition
+			### standard__collection__abstract_collection__RemovableCollection__SELF.definition
+			### standard__collection__abstract_collection__SimpleCollection__SELF.definition
+			### standard__collection__abstract_collection__Set__SELF.definition
+			### standard__collection__abstract_collection__MapRead__SELF.definition
+			### standard__collection__abstract_collection__MapIterator__SELF.definition
+			### standard__collection__abstract_collection__MapKeysIterator__SELF.definition
+			### standard__collection__abstract_collection__MapValuesIterator__SELF.definition
+			### standard__collection__abstract_collection__SequenceRead__SELF.definition
+			### standard__collection__abstract_collection__Sequence__SELF.definition
+			### standard__collection__abstract_collection__IndexedIterator__SELF.definition
+			### standard__collection__abstract_collection__CoupleMap__SELF.definition
+			### standard__collection__abstract_collection__Couple__SELF.definition
+			### standard__collection__abstract_collection__Collection__SELF.definition
+		## standard__collection__array.concern
+			### standard__collection__array__AbstractArrayRead__SELF.definition
+			### standard__collection__array__AbstractArray__SELF.definition
+			### standard__collection__array__Array__SELF.definition
+			### standard__collection__array__ArraySet__SELF.definition
+			### standard__collection__array__ArrayMap__SELF.definition
+			### standard__collection__array__ArrayCmp__SELF.definition
+			### standard__collection__array__NativeArray__SELF.definition
+		## standard__collection__list.concern
+			### standard__collection__list__List__SELF.definition
+			### standard__collection__list__ListIterator__SELF.definition
+		## standard__collection__range.concern
+			### standard__collection__range__Range__SELF.definition
+		## standard__collection__hash_collection.concern
+			### standard__collection__hash_collection__HashMap__SELF.definition
+			### standard__collection__hash_collection__HashMapIterator__SELF.definition
+			### standard__collection__hash_collection__HashSet__SELF.definition
+		## standard__collection__sorter.concern
+			### standard__collection__sorter__Comparator__SELF.definition
+			### standard__collection__sorter__MapComparator__SELF.definition
+			### standard__collection__sorter__DefaultComparator__SELF.definition
+			### standard__collection__sorter__DefaultReverseComparator__SELF.definition
+		## standard__collection__union_find.concern
+			### standard__collection__union_find__DisjointSet__SELF.definition
+		## standard__queue.concern
+			### standard__queue__Queue__SELF.definition
+			### standard__queue__MinHeap__SELF.definition
+		## standard__string.concern
+			### standard__string__Text__SELF.definition
+			### standard__string__FlatText__SELF.definition
+			### standard__string__String__SELF.definition
+			### standard__string__FlatString__SELF.definition
+			### standard__string__Buffer__SELF.definition
+			### standard__string__FlatBuffer__SELF.definition
+			### standard__string__NativeString__SELF.definition
+			### standard__string__CachedAlphaComparator__SELF.definition
+		## standard__bytes.concern
+			### standard__bytes__Bytes__SELF.definition
+		## standard__error.concern
+			### standard__error__Error__SELF.definition
+			### standard__error__MaybeError__SELF.definition
+		## standard__posix.concern
+			### standard__posix__Passwd__SELF.definition
+			### standard__posix__Group__SELF.definition
+		## standard__ropes.concern
+			### standard__ropes__RopeBuffer__SELF.definition
+			### standard__ropes__RopeBufferIter__SELF.definition
+			### standard__ropes__RopeBufferReviter__SELF.definition
+			### standard__ropes__RopeBufferChars__SELF.definition
+		## standard__string_search.concern
+			### standard__string_search__Pattern__SELF.definition
+			### standard__string_search__BM_Pattern__SELF.definition
+			### standard__string_search__Match__SELF.definition
+		## standard__re.concern
+			### standard__re__Regex__SELF.definition
+		## standard__stream.concern
+			### standard__stream__Duplex__SELF.definition
+			### standard__stream__Stream__SELF.definition
+			### standard__stream__Reader__SELF.definition
+			### standard__stream__LineIterator__SELF.definition
+			### standard__stream__PollableReader__SELF.definition
+			### standard__stream__Writer__SELF.definition
+			### standard__stream__Writable__SELF.definition
+			### standard__stream__BufferedReader__SELF.definition
+			### standard__stream__StringWriter__SELF.definition
+			### standard__stream__StringReader__SELF.definition
+			### standard__stream__IOError__SELF.definition
+		## standard__time.concern
+			### standard__time__TimeT__SELF.definition
+			### standard__time__Tm__SELF.definition
+			### standard__time__ISODate__SELF.definition
+		## standard__file.concern
+			### standard__file__FileStream__SELF.definition
+			### standard__file__FileReader__SELF.definition
+			### standard__file__FileWriter__SELF.definition
+			### standard__file__Stdin__SELF.definition
+			### standard__file__Stdout__SELF.definition
+			### standard__file__Stderr__SELF.definition
+			### standard__file__Path__SELF.definition
+			### standard__file__FileStat__SELF.definition
+		## standard__exec.concern
+			### standard__exec__Process__SELF.definition
+			### standard__exec__ProcessReader__SELF.definition
+			### standard__exec__ProcessWriter__SELF.definition
+			### standard__exec__ProcessDuplex__SELF.definition
+
+MPropertyPage !=
+	# !=.section
+		## standard__kernel__Object___33d_61d.intro
+		## standard__kernel__Object___33d_61d.concerns
+		## standard.concern
+		## standard.concern
+		## standard__kernel.concern
+			### standard__kernel__Bool___33d_61d.definition
+			### standard__kernel__Float___33d_61d.definition
+			### standard__kernel__Byte___33d_61d.definition
+			### standard__kernel__Int___33d_61d.definition
+			### standard__kernel__Char___33d_61d.definition
+
+MPropertyPage ==
+	# ==.section
+		## standard__kernel__Object___61d_61d.intro
+		## standard__kernel__Object___61d_61d.concerns
+		## standard.concern
+		## standard.concern
+		## standard__kernel.concern
+			### standard__kernel__Bool___61d_61d.definition
+			### standard__kernel__Float___61d_61d.definition
+			### standard__kernel__Byte___61d_61d.definition
+			### standard__kernel__Int___61d_61d.definition
+			### standard__kernel__Char___61d_61d.definition
+		## standard__collection.concern
+		## standard__collection__abstract_collection.concern
+			### standard__collection__abstract_collection__Set___61d_61d.definition
+			### standard__collection__abstract_collection__MapRead___61d_61d.definition
+			### standard__collection__abstract_collection__SequenceRead___61d_61d.definition
+		## standard__collection__array.concern
+			### standard__collection__array__Array___61d_61d.definition
+		## standard__collection__range.concern
+			### standard__collection__range__Range___61d_61d.definition
+		## standard__string.concern
+			### standard__string__Text___61d_61d.definition
+			### standard__string__FlatString___61d_61d.definition
+		## standard__string_search.concern
+			### standard__string_search__BM_Pattern___61d_61d.definition
+		## standard__file.concern
+			### standard__file__Path___61d_61d.definition
+
+MPropertyPage class_name
+	# class_name.section
+		## standard__kernel__Object__class_name.intro
+
+MPropertyPage get_time
+	# get_time.section
+		## standard__kernel__Object__get_time.intro
+
+MPropertyPage hash
+	# hash.section
+		## standard__kernel__Object__hash.intro
+		## standard__kernel__Object__hash.concerns
+		## standard.concern
+		## standard.concern
+		## standard__kernel.concern
+			### standard__kernel__Bool__hash.definition
+			### standard__kernel__Byte__hash.definition
+			### standard__kernel__Int__hash.definition
+			### standard__kernel__Char__hash.definition
+		## standard__collection.concern
+		## standard__collection__abstract_collection.concern
+			### standard__collection__abstract_collection__Set__hash.definition
+			### standard__collection__abstract_collection__MapRead__hash.definition
+			### standard__collection__abstract_collection__SequenceRead__hash.definition
+		## standard__collection__range.concern
+			### standard__collection__range__Range__hash.definition
+		## standard__string.concern
+			### standard__string__Text__hash.definition
+			### standard__string__FlatString__hash.definition
+			### standard__string__Buffer__hash.definition
+		## standard__string_search.concern
+			### standard__string_search__BM_Pattern__hash.definition
+		## standard__file.concern
+			### standard__file__Path__hash.definition
+
+MPropertyPage init
+	# init.section
+		## standard__kernel__Object__init.intro
+		## standard__kernel__Object__init.concerns
+		## standard.concern
+		## standard.concern
+		## standard__collection.concern
+		## standard__collection__abstract_collection.concern
+			### standard__collection__abstract_collection__IteratorDecorator__init.definition
+			### standard__collection__abstract_collection__Container__init.definition
+			### standard__collection__abstract_collection__MapKeysIterator__init.definition
+			### standard__collection__abstract_collection__MapValuesIterator__init.definition
+			### standard__collection__abstract_collection__Couple__init.definition
+		## standard__collection__array.concern
+			### standard__collection__array__Array__init.definition
+			### standard__collection__array__ArraySet__init.definition
+		## standard__collection__list.concern
+			### standard__collection__list__List__init.definition
+			### standard__collection__list__ListIterator__init.definition
+		## standard__collection__hash_collection.concern
+			### standard__collection__hash_collection__HashMap__init.definition
+			### standard__collection__hash_collection__HashMapIterator__init.definition
+			### standard__collection__hash_collection__HashSet__init.definition
+		## standard__collection__sorter.concern
+			### standard__collection__sorter__MapComparator__init.definition
+		## standard__math.concern
+			### standard__math__Sys__init.definition
+		## standard__queue.concern
+			### standard__queue__MinHeap__init.definition
+		## standard__string.concern
+			### standard__string__FlatBuffer__init.definition
+		## standard__bytes.concern
+			### standard__bytes__Bytes__init.definition
+		## standard__error.concern
+			### standard__error__Error__init.definition
+			### standard__error__MaybeError__init.definition
+		## standard__ropes.concern
+			### standard__ropes__RopeBuffer__init.definition
+		## standard__string_search.concern
+			### standard__string_search__BM_Pattern__init.definition
+			### standard__string_search__Match__init.definition
+		## standard__re.concern
+			### standard__re__Regex__init.definition
+		## standard__stream.concern
+			### standard__stream__LineIterator__init.definition
+			### standard__stream__StringReader__init.definition
+		## standard__time.concern
+			### standard__time__ISODate__init.definition
+		## standard__file.concern
+			### standard__file__Stdin__init.definition
+			### standard__file__Stdout__init.definition
+			### standard__file__Stderr__init.definition
+			### standard__file__Path__init.definition
+			### standard__file__FileStat__init.definition
+		## standard__environ.concern
+			### standard__environ__Sys__init.definition
+
+MPropertyPage inspect
+	# inspect.section
+		## standard__kernel__Object__inspect.intro
+
+MPropertyPage inspect_head
+	# inspect_head.section
+		## standard__kernel__Object__inspect_head.intro
+
+MPropertyPage is_same_instance
+	# is_same_instance.section
+		## standard__kernel__Object__is_same_instance.intro
+
+MPropertyPage is_same_type
+	# is_same_type.section
+		## standard__kernel__Object__is_same_type.intro
+
+MPropertyPage object_id
+	# object_id.section
+		## standard__kernel__Object__object_id.intro
+		## standard__kernel__Object__object_id.concerns
+		## standard.concern
+		## standard.concern
+		## standard__kernel.concern
+			### standard__kernel__Bool__object_id.definition
+			### standard__kernel__Float__object_id.definition
+			### standard__kernel__Byte__object_id.definition
+			### standard__kernel__Int__object_id.definition
+			### standard__kernel__Char__object_id.definition
+
+MPropertyPage output
+	# output.section
+		## standard__kernel__Object__output.intro
+		## standard__kernel__Object__output.concerns
+		## standard.concern
+		## standard.concern
+		## standard__kernel.concern
+			### standard__kernel__Bool__output.definition
+			### standard__kernel__Float__output.definition
+			### standard__kernel__Byte__output.definition
+			### standard__kernel__Int__output.definition
+			### standard__kernel__Char__output.definition
+		## standard__collection.concern
+		## standard__collection__array.concern
+			### standard__collection__array__AbstractArrayRead__output.definition
+		## standard__string.concern
+			### standard__string__FlatText__output.definition
+			### standard__string__FlatString__output.definition
+		## standard__ropes.concern
+			### standard__ropes__RopeBuffer__output.definition
+
+MPropertyPage output_class_name
+	# output_class_name.section
+		## standard__kernel__Object__output_class_name.intro
+
+MPropertyPage sys
+	# sys.section
+		## standard__kernel__Object__sys.intro
+
+MPropertyPage to_s
+	# to_s.section
+		## standard__kernel__Object__to_s.intro
+		## standard__kernel__Object__to_s.concerns
+		## standard.concern
+		## standard.concern
+		## standard__string.concern
+			### standard__string__NativeString__to_s.definition
+			### standard__string__String__to_s.definition
+			### standard__string__FlatBuffer__to_s.definition
+			### standard__string__Bool__to_s.definition
+			### standard__string__Byte__to_s.definition
+			### standard__string__Int__to_s.definition
+			### standard__string__Float__to_s.definition
+			### standard__string__Char__to_s.definition
+			### standard__string__Collection__to_s.definition
+		## standard__bytes.concern
+			### standard__bytes__Bytes__to_s.definition
+		## standard__error.concern
+			### standard__error__Error__to_s.definition
+			### standard__error__MaybeError__to_s.definition
+		## standard__ropes.concern
+			### standard__ropes__RopeBuffer__to_s.definition
+		## standard__string_search.concern
+			### standard__string_search__BM_Pattern__to_s.definition
+			### standard__string_search__Match__to_s.definition
+		## standard__re.concern
+			### standard__re__Regex__to_s.definition
+		## standard__stream.concern
+			### standard__stream__StringWriter__to_s.definition
+		## standard__time.concern
+			### standard__time__TimeT__to_s.definition
+			### standard__time__Tm__to_s.definition
+			### standard__time__ISODate__to_s.definition
+		## standard__file.concern
+			### standard__file__Path__to_s.definition
+
+MClassPage Pointer
+	# Pointer.section
+		## standard__kernel__Pointer.intro
+		## standard__kernel__Pointer.inheritance
+			### standard__kernel__Pointer.graph
+			### list.group
+				#### standard__kernel__Pointer.parents
+				#### standard__kernel__Pointer.ancestors
+				#### standard__kernel__Pointer.children
+				#### standard__kernel__Pointer.descendants
+		## standard__kernel__Pointer.constructors
+		## standard__kernel__Pointer.concerns
+		## standard.concern
+		## standard.concern
+		## standard__kernel.concern
+			### standard__kernel__Pointer__SELF.definition
+				#### standard__kernel__Pointer__SELF.lin
+			### standard__kernel__Pointer__address_is_null.definition
+			### standard__kernel__Pointer__free.definition
+
+MPropertyPage address_is_null
+	# address_is_null.section
+		## standard__kernel__Pointer__address_is_null.intro
+
+MPropertyPage free
+	# free.section
+		## standard__kernel__Pointer__free.intro
+
+MClassPage Sys
+	# Sys.section
+		## standard__kernel__Sys.intro
+		## standard__kernel__Sys.inheritance
+			### standard__kernel__Sys.graph
+			### list.group
+				#### standard__kernel__Sys.parents
+				#### standard__kernel__Sys.ancestors
+				#### standard__kernel__Sys.children
+				#### standard__kernel__Sys.descendants
+		## standard__kernel__Sys.constructors
+			### standard__kernel__Object__init.definition
+				#### standard__kernel__Object__init.lin
+			### standard__math__Sys__init.definition
+				#### standard__math__Sys__init.lin
+			### standard__environ__Sys__init.definition
+				#### standard__environ__Sys__init.lin
+		## standard__kernel__Sys.concerns
+		## standard.concern
+		## standard.concern
+		## standard__kernel.concern
+			### standard__kernel__Sys__SELF.definition
+				#### standard__kernel__Sys__SELF.lin
+			### standard__kernel__Sys__errno.definition
+			### standard__kernel__Sys__exit.definition
+			### standard__kernel__Sys__main.definition
+			### standard__kernel__Sys__run.definition
+		## standard__gc.concern
+			### standard__gc__Sys__force_garbage_collection.definition
+		## standard__collection.concern
+		## standard__collection__sorter.concern
+			### standard__collection__sorter__Sys__default_comparator.definition
+			### standard__collection__sorter__Sys__default_reverse_comparator.definition
+		## standard__math.concern
+			### standard__math__Sys__atan2.definition
+			### standard__math__Sys__pi.definition
+			### standard__math__Sys__srand.definition
+			### standard__math__Sys__srand_from.definition
+		## standard__string.concern
+			### standard__string__Sys__alpha_comparator.definition
+			### standard__string__Sys__args.definition
+			### standard__string__Sys__program_args.definition
+			### standard__string__Sys__program_name.definition
+		## standard__posix.concern
+			### standard__posix__Sys__egid.definition
+			### standard__posix__Sys__egid_61d.definition
+			### standard__posix__Sys__euid.definition
+			### standard__posix__Sys__euid_61d.definition
+			### standard__posix__Sys__gid.definition
+			### standard__posix__Sys__gid_61d.definition
+			### standard__posix__Sys__uid.definition
+			### standard__posix__Sys__uid_61d.definition
+		## standard__ropes.concern
+			### standard__ropes__Sys__maxlen.definition
+		## standard__time.concern
+			### standard__time__Sys__nanosleep.definition
+		## standard__file.concern
+			### standard__file__Sys__buffer_mode_full.definition
+			### standard__file__Sys__buffer_mode_line.definition
+			### standard__file__Sys__buffer_mode_none.definition
+			### standard__file__Sys__getc.definition
+			### standard__file__Sys__getcwd.definition
+			### standard__file__Sys__gets.definition
+			### standard__file__Sys__poll.definition
+			### standard__file__Sys__print.definition
+			### standard__file__Sys__print_error.definition
+			### standard__file__Sys__printn.definition
+			### standard__file__Sys__stderr.definition
+			### standard__file__Sys__stderr_61d.definition
+			### standard__file__Sys__stdin.definition
+			### standard__file__Sys__stdin_61d.definition
+			### standard__file__Sys__stdout.definition
+			### standard__file__Sys__stdout_61d.definition
+		## standard__environ.concern
+		## standard__exec.concern
+			### standard__exec__Sys__system.definition
+
+MPropertyPage alpha_comparator
+	# alpha_comparator.section
+		## standard__kernel__Sys__alpha_comparator.intro
+
+MPropertyPage args
+	# args.section
+		## standard__kernel__Sys__args.intro
+
+MPropertyPage atan2
+	# atan2.section
+		## standard__kernel__Sys__atan2.intro
+
+MPropertyPage buffer_mode_full
+	# buffer_mode_full.section
+		## standard__kernel__Sys__buffer_mode_full.intro
+
+MPropertyPage buffer_mode_line
+	# buffer_mode_line.section
+		## standard__kernel__Sys__buffer_mode_line.intro
+
+MPropertyPage buffer_mode_none
+	# buffer_mode_none.section
+		## standard__kernel__Sys__buffer_mode_none.intro
+
+MPropertyPage default_comparator
+	# default_comparator.section
+		## standard__kernel__Sys__default_comparator.intro
+
+MPropertyPage default_reverse_comparator
+	# default_reverse_comparator.section
+		## standard__kernel__Sys__default_reverse_comparator.intro
+
+MPropertyPage egid
+	# egid.section
+		## standard__kernel__Sys__egid.intro
+
+MPropertyPage egid=
+	# egid=.section
+		## standard__kernel__Sys__egid_61d.intro
+
+MPropertyPage errno
+	# errno.section
+		## standard__kernel__Sys__errno.intro
+
+MPropertyPage euid
+	# euid.section
+		## standard__kernel__Sys__euid.intro
+
+MPropertyPage euid=
+	# euid=.section
+		## standard__kernel__Sys__euid_61d.intro
+
+MPropertyPage exit
+	# exit.section
+		## standard__kernel__Sys__exit.intro
+
+MPropertyPage force_garbage_collection
+	# force_garbage_collection.section
+		## standard__kernel__Sys__force_garbage_collection.intro
+
+MPropertyPage getc
+	# getc.section
+		## standard__kernel__Sys__getc.intro
+
+MPropertyPage getcwd
+	# getcwd.section
+		## standard__kernel__Sys__getcwd.intro
+
+MPropertyPage gets
+	# gets.section
+		## standard__kernel__Sys__gets.intro
+
+MPropertyPage gid
+	# gid.section
+		## standard__kernel__Sys__gid.intro
+
+MPropertyPage gid=
+	# gid=.section
+		## standard__kernel__Sys__gid_61d.intro
+
+MPropertyPage main
+	# main.section
+		## standard__kernel__Sys__main.intro
+
+MPropertyPage maxlen
+	# maxlen.section
+		## standard__kernel__Sys__maxlen.intro
+
+MPropertyPage nanosleep
+	# nanosleep.section
+		## standard__kernel__Sys__nanosleep.intro
+
+MPropertyPage pi
+	# pi.section
+		## standard__kernel__Sys__pi.intro
+
+MPropertyPage poll
+	# poll.section
+		## standard__kernel__Sys__poll.intro
+
+MPropertyPage print
+	# print.section
+		## standard__kernel__Sys__print.intro
+
+MPropertyPage print_error
+	# print_error.section
+		## standard__kernel__Sys__print_error.intro
+
+MPropertyPage printn
+	# printn.section
+		## standard__kernel__Sys__printn.intro
+
+MPropertyPage program_args
+	# program_args.section
+		## standard__kernel__Sys__program_args.intro
+
+MPropertyPage program_name
+	# program_name.section
+		## standard__kernel__Sys__program_name.intro
+
+MPropertyPage run
+	# run.section
+		## standard__kernel__Sys__run.intro
+
+MPropertyPage srand
+	# srand.section
+		## standard__kernel__Sys__srand.intro
+
+MPropertyPage srand_from
+	# srand_from.section
+		## standard__kernel__Sys__srand_from.intro
+
+MPropertyPage stderr
+	# stderr.section
+		## standard__kernel__Sys__stderr.intro
+
+MPropertyPage stderr=
+	# stderr=.section
+		## standard__kernel__Sys__stderr_61d.intro
+
+MPropertyPage stdin
+	# stdin.section
+		## standard__kernel__Sys__stdin.intro
+
+MPropertyPage stdin=
+	# stdin=.section
+		## standard__kernel__Sys__stdin_61d.intro
+
+MPropertyPage stdout
+	# stdout.section
+		## standard__kernel__Sys__stdout.intro
+
+MPropertyPage stdout=
+	# stdout=.section
+		## standard__kernel__Sys__stdout_61d.intro
+
+MPropertyPage system
+	# system.section
+		## standard__kernel__Sys__system.intro
+
+MPropertyPage uid
+	# uid.section
+		## standard__kernel__Sys__uid.intro
+
+MPropertyPage uid=
+	# uid=.section
+		## standard__kernel__Sys__uid_61d.intro
+
+MModulePage math
+	# math.section
+		## standard__math.intro
+		## standard__math.importation
+			### standard__math.graph
+			### list.group
+				#### standard__math.imports
+				#### standard__math.clients
+		## standard__math.concerns
+		## standard.concern
+		## standard.concern
+		## standard__kernel.concern
+			### standard__kernel__Float.definition-list
+				#### standard__kernel__Float.definition
+				#### standard__math__Float.definition
+					##### standard__math__Float.intros_redefs
+						###### list.group
+							####### standard__math__Float.intros
+							####### standard__math__Float.redefs
+			### standard__kernel__Int.definition-list
+				#### standard__kernel__Int.definition
+				#### standard__math__Int.definition
+					##### standard__math__Int.intros_redefs
+						###### list.group
+							####### standard__math__Int.intros
+							####### standard__math__Int.redefs
+			### standard__kernel__Sys.definition-list
+				#### standard__kernel__Sys.definition
+				#### standard__math__Sys.definition
+					##### standard__math__Sys.intros_redefs
+						###### list.group
+							####### standard__math__Sys.intros
+							####### standard__math__Sys.redefs
+		## standard__collection.concern
+		## standard__collection__abstract_collection.concern
+			### standard__collection__abstract_collection__Collection.definition-list
+				#### standard__collection__abstract_collection__Collection.definition
+				#### standard__math__Collection.definition
+					##### standard__math__Collection.intros_redefs
+						###### list.group
+							####### standard__math__Collection.intros
+							####### standard__math__Collection.redefs
+			### standard__collection__abstract_collection__SequenceRead.definition-list
+				#### standard__collection__abstract_collection__SequenceRead.definition
+				#### standard__math__SequenceRead.definition
+					##### standard__math__SequenceRead.intros_redefs
+						###### list.group
+							####### standard__math__SequenceRead.intros
+							####### standard__math__SequenceRead.redefs
+		## standard__collection__array.concern
+			### standard__collection__array__AbstractArray.definition-list
+				#### standard__collection__array__AbstractArray.definition
+				#### standard__math__AbstractArray.definition
+					##### standard__math__AbstractArray.intros_redefs
+						###### list.group
+							####### standard__math__AbstractArray.intros
+							####### standard__math__AbstractArray.redefs
+
+CodePage math
+	# standard__math.code
+
+MModulePage numeric
+	# numeric.section
+		## standard__numeric.intro
+		## standard__numeric.importation
+			### standard__numeric.graph
+			### list.group
+				#### standard__numeric.imports
+				#### standard__numeric.clients
+		## standard__numeric.concerns
+		## standard.concern
+		## standard.concern
+		## standard__kernel.concern
+			### standard__kernel__Float.definition-list
+				#### standard__kernel__Float.definition
+				#### standard__numeric__Float.definition
+					##### standard__numeric__Float.intros_redefs
+						###### list.group
+							####### standard__numeric__Float.intros
+							####### standard__numeric__Float.redefs
+			### standard__kernel__Int.definition-list
+				#### standard__kernel__Int.definition
+				#### standard__numeric__Int.definition
+					##### standard__numeric__Int.intros_redefs
+						###### list.group
+							####### standard__numeric__Int.intros
+							####### standard__numeric__Int.redefs
+			### standard__kernel__Numeric.definition-list
+				#### standard__kernel__Numeric.definition
+				#### standard__numeric__Numeric.definition
+					##### standard__numeric__Numeric.intros_redefs
+						###### list.group
+							####### standard__numeric__Numeric.intros
+							####### standard__numeric__Numeric.redefs
+		## standard__string.concern
+			### standard__string__Text.definition-list
+				#### standard__string__Text.definition
+				#### standard__numeric__Text.definition
+					##### standard__numeric__Text.intros_redefs
+						###### list.group
+							####### standard__numeric__Text.intros
+							####### standard__numeric__Text.redefs
+
+CodePage numeric
+	# standard__numeric.code
+
+MModulePage posix
+	# posix.section
+		## standard__posix.intro
+		## standard__posix.importation
+			### standard__posix.graph
+			### list.group
+				#### standard__posix.imports
+				#### standard__posix.clients
+		## standard__posix.concerns
+		## standard.concern
+		## standard.concern
+		## standard__posix.concern
+			### standard__posix__Group.definition-list
+				#### standard__posix__Group.definition
+					##### standard__posix__Group.intros_redefs
+						###### list.group
+							####### standard__posix__Group.intros
+							####### standard__posix__Group.redefs
+			### standard__posix__Passwd.definition-list
+				#### standard__posix__Passwd.definition
+					##### standard__posix__Passwd.intros_redefs
+						###### list.group
+							####### standard__posix__Passwd.intros
+							####### standard__posix__Passwd.redefs
+		## standard__kernel.concern
+			### standard__kernel__Sys.definition-list
+				#### standard__kernel__Sys.definition
+				#### standard__posix__Sys.definition
+					##### standard__posix__Sys.intros_redefs
+						###### list.group
+							####### standard__posix__Sys.intros
+							####### standard__posix__Sys.redefs
+
+CodePage posix
+	# standard__posix.code
+
+MClassPage Group
+	# Group.section
+		## standard__posix__Group.intro
+		## standard__posix__Group.inheritance
+			### standard__posix__Group.graph
+			### list.group
+				#### standard__posix__Group.parents
+				#### standard__posix__Group.ancestors
+				#### standard__posix__Group.children
+				#### standard__posix__Group.descendants
+		## standard__posix__Group.constructors
+			### standard__posix__Group__from_gid.definition
+			### standard__posix__Group__from_name.definition
+		## standard__posix__Group.concerns
+		## standard.concern
+		## standard.concern
+		## standard__posix.concern
+			### standard__posix__Group__SELF.definition
+				#### standard__posix__Group__SELF.lin
+			### standard__posix__Group__gid.definition
+			### standard__posix__Group__mem.definition
+			### standard__posix__Group__name.definition
+			### standard__posix__Group__passwd.definition
+
+MPropertyPage from_gid
+	# from_gid.section
+		## standard__posix__Group__from_gid.intro
+
+MPropertyPage from_name
+	# from_name.section
+		## standard__posix__Group__from_name.intro
+
+MPropertyPage gid
+	# gid.section
+		## standard__posix__Group__gid.intro
+
+MPropertyPage mem
+	# mem.section
+		## standard__posix__Group__mem.intro
+
+MPropertyPage name
+	# name.section
+		## standard__posix__Group__name.intro
+
+MPropertyPage passwd
+	# passwd.section
+		## standard__posix__Group__passwd.intro
+
+MClassPage Passwd
+	# Passwd.section
+		## standard__posix__Passwd.intro
+		## standard__posix__Passwd.inheritance
+			### standard__posix__Passwd.graph
+			### list.group
+				#### standard__posix__Passwd.parents
+				#### standard__posix__Passwd.ancestors
+				#### standard__posix__Passwd.children
+				#### standard__posix__Passwd.descendants
+		## standard__posix__Passwd.constructors
+			### standard__posix__Passwd__from_name.definition
+			### standard__posix__Passwd__from_uid.definition
+		## standard__posix__Passwd.concerns
+		## standard.concern
+		## standard.concern
+		## standard__posix.concern
+			### standard__posix__Passwd__SELF.definition
+				#### standard__posix__Passwd__SELF.lin
+			### standard__posix__Passwd__dir.definition
+			### standard__posix__Passwd__gid.definition
+			### standard__posix__Passwd__name.definition
+			### standard__posix__Passwd__passwd.definition
+			### standard__posix__Passwd__shell.definition
+			### standard__posix__Passwd__uid.definition
+
+MPropertyPage dir
+	# dir.section
+		## standard__posix__Passwd__dir.intro
+
+MPropertyPage from_name
+	# from_name.section
+		## standard__posix__Passwd__from_name.intro
+
+MPropertyPage from_uid
+	# from_uid.section
+		## standard__posix__Passwd__from_uid.intro
+
+MPropertyPage gid
+	# gid.section
+		## standard__posix__Passwd__gid.intro
+
+MPropertyPage name
+	# name.section
+		## standard__posix__Passwd__name.intro
+
+MPropertyPage passwd
+	# passwd.section
+		## standard__posix__Passwd__passwd.intro
+
+MPropertyPage shell
+	# shell.section
+		## standard__posix__Passwd__shell.intro
+
+MPropertyPage uid
+	# uid.section
+		## standard__posix__Passwd__uid.intro
+
+MModulePage queue
+	# queue.section
+		## standard__queue.intro
+		## standard__queue.importation
+			### standard__queue.graph
+			### list.group
+				#### standard__queue.imports
+				#### standard__queue.clients
+		## standard__queue.concerns
+		## standard.concern
+		## standard.concern
+		## standard__queue.concern
+			### standard__queue__MinHeap.definition-list
+				#### standard__queue__MinHeap.definition
+					##### standard__queue__MinHeap.intros_redefs
+						###### list.group
+							####### standard__queue__MinHeap.intros
+							####### standard__queue__MinHeap.redefs
+			### standard__queue__Queue.definition-list
+				#### standard__queue__Queue.definition
+					##### standard__queue__Queue.intros_redefs
+						###### list.group
+							####### standard__queue__Queue.intros
+							####### standard__queue__Queue.redefs
+		## standard__collection.concern
+		## standard__collection__abstract_collection.concern
+			### standard__collection__abstract_collection__Sequence.definition-list
+				#### standard__collection__abstract_collection__Sequence.definition
+				#### standard__queue__Sequence.definition
+					##### standard__queue__Sequence.intros_redefs
+						###### list.group
+							####### standard__queue__Sequence.intros
+							####### standard__queue__Sequence.redefs
+			### standard__collection__abstract_collection__SimpleCollection.definition-list
+				#### standard__collection__abstract_collection__SimpleCollection.definition
+				#### standard__queue__SimpleCollection.definition
+					##### standard__queue__SimpleCollection.intros_redefs
+						###### list.group
+							####### standard__queue__SimpleCollection.intros
+							####### standard__queue__SimpleCollection.redefs
+
+CodePage queue
+	# standard__queue.code
+
+MClassPage MinHeap
+	# MinHeap.section
+		## standard__queue__MinHeap.intro
+		## standard__queue__MinHeap.inheritance
+			### standard__queue__MinHeap.graph
+			### list.group
+				#### standard__queue__MinHeap.parents
+				#### standard__queue__MinHeap.ancestors
+				#### standard__queue__MinHeap.children
+				#### standard__queue__MinHeap.descendants
+		## standard__queue__MinHeap.constructors
+			### standard__queue__MinHeap__init.definition
+				#### standard__queue__MinHeap__init.lin
+			### standard__queue__MinHeap__default.definition
+		## standard__queue__MinHeap.concerns
+		## standard.concern
+		## standard.concern
+		## standard__queue.concern
+			### standard__queue__MinHeap__SELF.definition
+				#### standard__queue__MinHeap__SELF.lin
+			### standard__queue__MinHeap__add.definition
+				#### standard__queue__MinHeap__add.lin
+			### standard__queue__MinHeap__comparator.definition
+			### standard__queue__MinHeap__is_empty.definition
+				#### standard__queue__MinHeap__is_empty.lin
+			### standard__queue__MinHeap__iterator.definition
+				#### standard__queue__MinHeap__iterator.lin
+			### standard__queue__MinHeap__length.definition
+				#### standard__queue__MinHeap__length.lin
+			### standard__queue__MinHeap__peek.definition
+				#### standard__queue__MinHeap__peek.lin
+			### standard__queue__MinHeap__take.definition
+				#### standard__queue__MinHeap__take.lin
+
+MPropertyPage comparator
+	# comparator.section
+		## standard__queue__MinHeap__comparator.intro
+
+MPropertyPage default
+	# default.section
+		## standard__queue__MinHeap__default.intro
+
+MClassPage Queue
+	# Queue.section
+		## standard__queue__Queue.intro
+		## standard__queue__Queue.inheritance
+			### standard__queue__Queue.graph
+			### list.group
+				#### standard__queue__Queue.parents
+				#### standard__queue__Queue.ancestors
+				#### standard__queue__Queue.children
+				#### standard__queue__Queue.descendants
+		## standard__queue__Queue.constructors
+		## standard__queue__Queue.concerns
+		## standard.concern
+		## standard.concern
+		## standard__queue.concern
+			### standard__queue__Queue__SELF.definition
+				#### standard__queue__Queue__SELF.lin
+			### standard__queue__Queue__first.definition
+				#### standard__queue__Queue__first.lin
+			### standard__queue__Queue__peek.definition
+			### standard__queue__Queue__take.definition
+			### standard__queue__Queue__take_all.definition
+
+MPropertyPage peek
+	# peek.section
+		## standard__queue__Queue__peek.intro
+		## standard__queue__Queue__peek.concerns
+		## standard.concern
+		## standard.concern
+		## standard__queue.concern
+			### standard__queue__MinHeap__peek.definition
+
+MPropertyPage take
+	# take.section
+		## standard__queue__Queue__take.intro
+		## standard__queue__Queue__take.concerns
+		## standard.concern
+		## standard.concern
+		## standard__queue.concern
+			### standard__queue__MinHeap__take.definition
+
+MPropertyPage take_all
+	# take_all.section
+		## standard__queue__Queue__take_all.intro
+
+MModulePage re
+	# re.section
+		## standard__re.intro
+		## standard__re.importation
+			### standard__re.graph
+			### list.group
+				#### standard__re.imports
+				#### standard__re.clients
+		## standard__re.concerns
+		## standard.concern
+		## standard.concern
+		## standard__re.concern
+			### standard__re__Regex.definition-list
+				#### standard__re__Regex.definition
+					##### standard__re__Regex.intros_redefs
+						###### list.group
+							####### standard__re__Regex.intros
+							####### standard__re__Regex.redefs
+		## standard__kernel.concern
+			### standard__kernel__Int.definition-list
+				#### standard__kernel__Int.definition
+				#### standard__re__Int.definition
+					##### standard__re__Int.intros_redefs
+						###### list.group
+							####### standard__re__Int.intros
+							####### standard__re__Int.redefs
+			### standard__kernel__Sys.definition-list
+				#### standard__kernel__Sys.definition
+				#### standard__re__Sys.definition
+					##### standard__re__Sys.intros_redefs
+						###### list.group
+							####### standard__re__Sys.intros
+							####### standard__re__Sys.redefs
+		## standard__string.concern
+			### standard__string__NativeString.definition-list
+				#### standard__string__NativeString.definition
+				#### standard__re__NativeString.definition
+					##### standard__re__NativeString.intros_redefs
+						###### list.group
+							####### standard__re__NativeString.intros
+							####### standard__re__NativeString.redefs
+			### standard__string__Text.definition-list
+				#### standard__string__Text.definition
+				#### standard__re__Text.definition
+					##### standard__re__Text.intros_redefs
+						###### list.group
+							####### standard__re__Text.intros
+							####### standard__re__Text.redefs
+		## standard__string_search.concern
+			### standard__string_search__Match.definition-list
+				#### standard__string_search__Match.definition
+				#### standard__re__Match.definition
+					##### standard__re__Match.intros_redefs
+						###### list.group
+							####### standard__re__Match.intros
+							####### standard__re__Match.redefs
+
+CodePage re
+	# standard__re.code
+
+MClassPage Regex
+	# Regex.section
+		## standard__re__Regex.intro
+		## standard__re__Regex.inheritance
+			### standard__re__Regex.graph
+			### list.group
+				#### standard__re__Regex.parents
+				#### standard__re__Regex.ancestors
+				#### standard__re__Regex.children
+				#### standard__re__Regex.descendants
+		## standard__re__Regex.constructors
+			### standard__re__Regex__init.definition
+				#### standard__re__Regex__init.lin
+		## standard__re__Regex.concerns
+		## standard.concern
+		## standard.concern
+		## standard__re.concern
+			### standard__re__Regex__SELF.definition
+				#### standard__re__Regex__SELF.lin
+			### standard__re__Regex__compile.definition
+			### standard__re__Regex__extended.definition
+			### standard__re__Regex__extended_61d.definition
+			### standard__re__Regex__finalize.definition
+				#### standard__re__Regex__finalize.lin
+			### standard__re__Regex__ignore_case.definition
+			### standard__re__Regex__ignore_case_61d.definition
+			### standard__re__Regex__is_in.definition
+				#### standard__re__Regex__is_in.lin
+			### standard__re__Regex__newline.definition
+			### standard__re__Regex__newline_61d.definition
+			### standard__re__Regex__not_bol.definition
+			### standard__re__Regex__not_bol_61d.definition
+			### standard__re__Regex__not_eol.definition
+			### standard__re__Regex__not_eol_61d.definition
+			### standard__re__Regex__optimize_is_in.definition
+			### standard__re__Regex__optimize_is_in_61d.definition
+			### standard__re__Regex__search_all_in.definition
+				#### standard__re__Regex__search_all_in.lin
+			### standard__re__Regex__search_in.definition
+				#### standard__re__Regex__search_in.lin
+			### standard__re__Regex__search_index_in.definition
+				#### standard__re__Regex__search_index_in.lin
+			### standard__re__Regex__string.definition
+			### standard__re__Regex__string_61d.definition
+			### standard__re__Regex__to_s.definition
+				#### standard__re__Regex__to_s.lin
+
+MPropertyPage compile
+	# compile.section
+		## standard__re__Regex__compile.intro
+
+MPropertyPage extended
+	# extended.section
+		## standard__re__Regex__extended.intro
+
+MPropertyPage extended=
+	# extended=.section
+		## standard__re__Regex__extended_61d.intro
+
+MPropertyPage ignore_case
+	# ignore_case.section
+		## standard__re__Regex__ignore_case.intro
+
+MPropertyPage ignore_case=
+	# ignore_case=.section
+		## standard__re__Regex__ignore_case_61d.intro
+
+MPropertyPage newline
+	# newline.section
+		## standard__re__Regex__newline.intro
+
+MPropertyPage newline=
+	# newline=.section
+		## standard__re__Regex__newline_61d.intro
+
+MPropertyPage not_bol
+	# not_bol.section
+		## standard__re__Regex__not_bol.intro
+
+MPropertyPage not_bol=
+	# not_bol=.section
+		## standard__re__Regex__not_bol_61d.intro
+
+MPropertyPage not_eol
+	# not_eol.section
+		## standard__re__Regex__not_eol.intro
+
+MPropertyPage not_eol=
+	# not_eol=.section
+		## standard__re__Regex__not_eol_61d.intro
+
+MPropertyPage optimize_is_in
+	# optimize_is_in.section
+		## standard__re__Regex__optimize_is_in.intro
+
+MPropertyPage optimize_is_in=
+	# optimize_is_in=.section
+		## standard__re__Regex__optimize_is_in_61d.intro
+
+MPropertyPage string
+	# string.section
+		## standard__re__Regex__string.intro
+
+MPropertyPage string=
+	# string=.section
+		## standard__re__Regex__string_61d.intro
+
+MModulePage ropes
+	# ropes.section
+		## standard__ropes.intro
+		## standard__ropes.importation
+			### standard__ropes.graph
+			### list.group
+				#### standard__ropes.imports
+				#### standard__ropes.clients
+		## standard__ropes.concerns
+		## standard.concern
+		## standard.concern
+		## standard__ropes.concern
+			### standard__ropes__RopeBuffer.definition-list
+				#### standard__ropes__RopeBuffer.definition
+					##### standard__ropes__RopeBuffer.intros_redefs
+						###### list.group
+							####### standard__ropes__RopeBuffer.intros
+							####### standard__ropes__RopeBuffer.redefs
+			### standard__ropes__RopeBufferChars.definition-list
+				#### standard__ropes__RopeBufferChars.definition
+					##### standard__ropes__RopeBufferChars.intros_redefs
+						###### list.group
+							####### standard__ropes__RopeBufferChars.intros
+							####### standard__ropes__RopeBufferChars.redefs
+			### standard__ropes__RopeBufferIter.definition-list
+				#### standard__ropes__RopeBufferIter.definition
+					##### standard__ropes__RopeBufferIter.intros_redefs
+						###### list.group
+							####### standard__ropes__RopeBufferIter.intros
+							####### standard__ropes__RopeBufferIter.redefs
+			### standard__ropes__RopeBufferReviter.definition-list
+				#### standard__ropes__RopeBufferReviter.definition
+					##### standard__ropes__RopeBufferReviter.intros_redefs
+						###### list.group
+							####### standard__ropes__RopeBufferReviter.intros
+							####### standard__ropes__RopeBufferReviter.redefs
+		## standard__kernel.concern
+			### standard__kernel__Sys.definition-list
+				#### standard__kernel__Sys.definition
+				#### standard__ropes__Sys.definition
+					##### standard__ropes__Sys.intros_redefs
+						###### list.group
+							####### standard__ropes__Sys.intros
+							####### standard__ropes__Sys.redefs
+		## standard__string.concern
+			### standard__string__FlatString.definition-list
+				#### standard__string__FlatString.definition
+				#### standard__ropes__FlatString.definition
+					##### standard__ropes__FlatString.intros_redefs
+						###### list.group
+							####### standard__ropes__FlatString.intros
+							####### standard__ropes__FlatString.redefs
+
+CodePage ropes
+	# standard__ropes.code
+
+MClassPage RopeBuffer
+	# RopeBuffer.section
+		## standard__ropes__RopeBuffer.intro
+		## standard__ropes__RopeBuffer.inheritance
+			### standard__ropes__RopeBuffer.graph
+			### list.group
+				#### standard__ropes__RopeBuffer.parents
+				#### standard__ropes__RopeBuffer.ancestors
+				#### standard__ropes__RopeBuffer.children
+				#### standard__ropes__RopeBuffer.descendants
+		## standard__ropes__RopeBuffer.constructors
+			### standard__ropes__RopeBuffer__init.definition
+				#### standard__ropes__RopeBuffer__init.lin
+			### standard__ropes__RopeBuffer__from.definition
+		## standard__ropes__RopeBuffer.concerns
+		## standard.concern
+		## standard.concern
+		## standard__ropes.concern
+			### standard__ropes__RopeBuffer__SELF.definition
+				#### standard__ropes__RopeBuffer__SELF.lin
+			### standard__ropes__RopeBuffer__add.definition
+				#### standard__ropes__RopeBuffer__add.lin
+			### standard__ropes__RopeBuffer__append.definition
+				#### standard__ropes__RopeBuffer__append.lin
+			### standard__ropes__RopeBuffer__chars.definition
+				#### standard__ropes__RopeBuffer__chars.lin
+			### standard__ropes__RopeBuffer__clear.definition
+				#### standard__ropes__RopeBuffer__clear.lin
+			### standard__ropes__RopeBuffer__empty.definition
+				#### standard__ropes__RopeBuffer__empty.lin
+			### standard__ropes__RopeBuffer__enlarge.definition
+				#### standard__ropes__RopeBuffer__enlarge.lin
+			### standard__ropes__RopeBuffer__length.definition
+				#### standard__ropes__RopeBuffer__length.lin
+			### standard__ropes__RopeBuffer__lower.definition
+				#### standard__ropes__RopeBuffer__lower.lin
+			### standard__ropes__RopeBuffer__output.definition
+				#### standard__ropes__RopeBuffer__output.lin
+			### standard__ropes__RopeBuffer__reverse.definition
+				#### standard__ropes__RopeBuffer__reverse.lin
+			### standard__ropes__RopeBuffer__substring.definition
+				#### standard__ropes__RopeBuffer__substring.lin
+			### standard__ropes__RopeBuffer__substrings.definition
+				#### standard__ropes__RopeBuffer__substrings.lin
+			### standard__ropes__RopeBuffer__to_s.definition
+				#### standard__ropes__RopeBuffer__to_s.lin
+			### standard__ropes__RopeBuffer__upper.definition
+				#### standard__ropes__RopeBuffer__upper.lin
+
+MClassPage RopeBufferChars
+	# RopeBufferChars.section
+		## standard__ropes__RopeBufferChars.intro
+		## standard__ropes__RopeBufferChars.inheritance
+			### standard__ropes__RopeBufferChars.graph
+			### list.group
+				#### standard__ropes__RopeBufferChars.parents
+				#### standard__ropes__RopeBufferChars.ancestors
+				#### standard__ropes__RopeBufferChars.children
+				#### standard__ropes__RopeBufferChars.descendants
+		## standard__ropes__RopeBufferChars.constructors
+			### standard__string__StringCharView__init.definition
+		## standard__ropes__RopeBufferChars.concerns
+		## standard.concern
+		## standard.concern
+		## standard__ropes.concern
+			### standard__ropes__RopeBufferChars__SELF.definition
+				#### standard__ropes__RopeBufferChars__SELF.lin
+			### standard__ropes__RopeBufferChars___91d_93d.definition
+				#### standard__ropes__RopeBufferChars___91d_93d.lin
+			### standard__ropes__RopeBufferChars___91d_93d_61d.definition
+				#### standard__ropes__RopeBufferChars___91d_93d_61d.lin
+			### standard__ropes__RopeBufferChars__add.definition
+				#### standard__ropes__RopeBufferChars__add.lin
+			### standard__ropes__RopeBufferChars__iterator_from.definition
+				#### standard__ropes__RopeBufferChars__iterator_from.lin
+			### standard__ropes__RopeBufferChars__push.definition
+				#### standard__ropes__RopeBufferChars__push.lin
+			### standard__ropes__RopeBufferChars__reverse_iterator_from.definition
+				#### standard__ropes__RopeBufferChars__reverse_iterator_from.lin
+
+MClassPage RopeBufferIter
+	# RopeBufferIter.section
+		## standard__ropes__RopeBufferIter.intro
+		## standard__ropes__RopeBufferIter.inheritance
+			### standard__ropes__RopeBufferIter.graph
+			### list.group
+				#### standard__ropes__RopeBufferIter.parents
+				#### standard__ropes__RopeBufferIter.ancestors
+				#### standard__ropes__RopeBufferIter.children
+				#### standard__ropes__RopeBufferIter.descendants
+		## standard__ropes__RopeBufferIter.constructors
+			### standard__ropes__RopeBufferIter__from.definition
+			### standard__ropes__RopeBufferIter__init.definition
+		## standard__ropes__RopeBufferIter.concerns
+		## standard.concern
+		## standard.concern
+		## standard__ropes.concern
+			### standard__ropes__RopeBufferIter__SELF.definition
+				#### standard__ropes__RopeBufferIter__SELF.lin
+			### standard__ropes__RopeBufferIter__index.definition
+				#### standard__ropes__RopeBufferIter__index.lin
+			### standard__ropes__RopeBufferIter__is_ok.definition
+				#### standard__ropes__RopeBufferIter__is_ok.lin
+			### standard__ropes__RopeBufferIter__item.definition
+				#### standard__ropes__RopeBufferIter__item.lin
+			### standard__ropes__RopeBufferIter__maxpos.definition
+			### standard__ropes__RopeBufferIter__next.definition
+				#### standard__ropes__RopeBufferIter__next.lin
+			### standard__ropes__RopeBufferIter__ns.definition
+			### standard__ropes__RopeBufferIter__pns.definition
+			### standard__ropes__RopeBufferIter__sit.definition
+
+MPropertyPage from
+	# from.section
+		## standard__ropes__RopeBufferIter__from.intro
+
+MPropertyPage init
+	# init.section
+		## standard__ropes__RopeBufferIter__init.intro
+
+MPropertyPage maxpos
+	# maxpos.section
+		## standard__ropes__RopeBufferIter__maxpos.intro
+
+MPropertyPage ns
+	# ns.section
+		## standard__ropes__RopeBufferIter__ns.intro
+
+MPropertyPage pns
+	# pns.section
+		## standard__ropes__RopeBufferIter__pns.intro
+
+MPropertyPage sit
+	# sit.section
+		## standard__ropes__RopeBufferIter__sit.intro
+
+MClassPage RopeBufferReviter
+	# RopeBufferReviter.section
+		## standard__ropes__RopeBufferReviter.intro
+		## standard__ropes__RopeBufferReviter.inheritance
+			### standard__ropes__RopeBufferReviter.graph
+			### list.group
+				#### standard__ropes__RopeBufferReviter.parents
+				#### standard__ropes__RopeBufferReviter.ancestors
+				#### standard__ropes__RopeBufferReviter.children
+				#### standard__ropes__RopeBufferReviter.descendants
+		## standard__ropes__RopeBufferReviter.constructors
+			### standard__ropes__RopeBufferReviter__from.definition
+			### standard__ropes__RopeBufferReviter__init.definition
+		## standard__ropes__RopeBufferReviter.concerns
+		## standard.concern
+		## standard.concern
+		## standard__ropes.concern
+			### standard__ropes__RopeBufferReviter__SELF.definition
+				#### standard__ropes__RopeBufferReviter__SELF.lin
+			### standard__ropes__RopeBufferReviter__index.definition
+				#### standard__ropes__RopeBufferReviter__index.lin
+			### standard__ropes__RopeBufferReviter__is_ok.definition
+				#### standard__ropes__RopeBufferReviter__is_ok.lin
+			### standard__ropes__RopeBufferReviter__item.definition
+				#### standard__ropes__RopeBufferReviter__item.lin
+			### standard__ropes__RopeBufferReviter__next.definition
+				#### standard__ropes__RopeBufferReviter__next.lin
+			### standard__ropes__RopeBufferReviter__ns.definition
+			### standard__ropes__RopeBufferReviter__pns.definition
+			### standard__ropes__RopeBufferReviter__sit.definition
+
+MPropertyPage from
+	# from.section
+		## standard__ropes__RopeBufferReviter__from.intro
+
+MPropertyPage init
+	# init.section
+		## standard__ropes__RopeBufferReviter__init.intro
+
+MPropertyPage ns
+	# ns.section
+		## standard__ropes__RopeBufferReviter__ns.intro
+
+MPropertyPage pns
+	# pns.section
+		## standard__ropes__RopeBufferReviter__pns.intro
+
+MPropertyPage sit
+	# sit.section
+		## standard__ropes__RopeBufferReviter__sit.intro
+
+MPropertyPage from
+	# from.section
+		## standard__ropes__RopeBuffer__from.intro
+
+MModulePage standard
+	# standard.section
+		## standard__standard.intro
+		## standard__standard.importation
+			### standard__standard.graph
+			### list.group
+				#### standard__standard.imports
+				#### standard__standard.clients
+
+CodePage standard
+	# standard__standard.code
+
+MModulePage stream
+	# stream.section
+		## standard__stream.intro
+		## standard__stream.importation
+			### standard__stream.graph
+			### list.group
+				#### standard__stream.imports
+				#### standard__stream.clients
+		## standard__stream.concerns
+		## standard.concern
+		## standard.concern
+		## standard__stream.concern
+			### standard__stream__BufferedReader.definition-list
+				#### standard__stream__BufferedReader.definition
+					##### standard__stream__BufferedReader.intros_redefs
+						###### list.group
+							####### standard__stream__BufferedReader.intros
+							####### standard__stream__BufferedReader.redefs
+			### standard__stream__Duplex.definition-list
+				#### standard__stream__Duplex.definition
+					##### standard__stream__Duplex.intros_redefs
+						###### list.group
+							####### standard__stream__Duplex.intros
+							####### standard__stream__Duplex.redefs
+			### standard__stream__IOError.definition-list
+				#### standard__stream__IOError.definition
+					##### standard__stream__IOError.intros_redefs
+						###### list.group
+							####### standard__stream__IOError.intros
+							####### standard__stream__IOError.redefs
+			### standard__stream__LineIterator.definition-list
+				#### standard__stream__LineIterator.definition
+					##### standard__stream__LineIterator.intros_redefs
+						###### list.group
+							####### standard__stream__LineIterator.intros
+							####### standard__stream__LineIterator.redefs
+			### standard__stream__PollableReader.definition-list
+				#### standard__stream__PollableReader.definition
+					##### standard__stream__PollableReader.intros_redefs
+						###### list.group
+							####### standard__stream__PollableReader.intros
+							####### standard__stream__PollableReader.redefs
+			### standard__stream__Reader.definition-list
+				#### standard__stream__Reader.definition
+					##### standard__stream__Reader.intros_redefs
+						###### list.group
+							####### standard__stream__Reader.intros
+							####### standard__stream__Reader.redefs
+			### standard__stream__Stream.definition-list
+				#### standard__stream__Stream.definition
+					##### standard__stream__Stream.intros_redefs
+						###### list.group
+							####### standard__stream__Stream.intros
+							####### standard__stream__Stream.redefs
+			### standard__stream__StringReader.definition-list
+				#### standard__stream__StringReader.definition
+					##### standard__stream__StringReader.intros_redefs
+						###### list.group
+							####### standard__stream__StringReader.intros
+							####### standard__stream__StringReader.redefs
+			### standard__stream__StringWriter.definition-list
+				#### standard__stream__StringWriter.definition
+					##### standard__stream__StringWriter.intros_redefs
+						###### list.group
+							####### standard__stream__StringWriter.intros
+							####### standard__stream__StringWriter.redefs
+			### standard__stream__Writable.definition-list
+				#### standard__stream__Writable.definition
+					##### standard__stream__Writable.intros_redefs
+						###### list.group
+							####### standard__stream__Writable.intros
+							####### standard__stream__Writable.redefs
+			### standard__stream__Writer.definition-list
+				#### standard__stream__Writer.definition
+					##### standard__stream__Writer.intros_redefs
+						###### list.group
+							####### standard__stream__Writer.intros
+							####### standard__stream__Writer.redefs
+		## standard__string.concern
+			### standard__string__Text.definition-list
+				#### standard__string__Text.definition
+				#### standard__stream__Text.definition
+					##### standard__stream__Text.intros_redefs
+						###### list.group
+							####### standard__stream__Text.intros
+							####### standard__stream__Text.redefs
+
+CodePage stream
+	# standard__stream.code
+
+MClassPage BufferedReader
+	# BufferedReader.section
+		## standard__stream__BufferedReader.intro
+		## standard__stream__BufferedReader.inheritance
+			### standard__stream__BufferedReader.graph
+			### list.group
+				#### standard__stream__BufferedReader.parents
+				#### standard__stream__BufferedReader.ancestors
+				#### standard__stream__BufferedReader.children
+				#### standard__stream__BufferedReader.descendants
+		## standard__stream__BufferedReader.constructors
+			### standard__kernel__Object__init.definition
+		## standard__stream__BufferedReader.concerns
+		## standard.concern
+		## standard.concern
+		## standard__stream.concern
+			### standard__stream__BufferedReader__SELF.definition
+				#### standard__stream__BufferedReader__SELF.lin
+			### standard__stream__BufferedReader__append_line_to.definition
+				#### standard__stream__BufferedReader__append_line_to.lin
+			### standard__stream__BufferedReader__buffer_reset.definition
+			### standard__stream__BufferedReader__end_reached.definition
+			### standard__stream__BufferedReader__eof.definition
+				#### standard__stream__BufferedReader__eof.lin
+			### standard__stream__BufferedReader__fill_buffer.definition
+			### standard__stream__BufferedReader__peek.definition
+			### standard__stream__BufferedReader__prepare_buffer.definition
+			### standard__stream__BufferedReader__read_all_bytes.definition
+				#### standard__stream__BufferedReader__read_all_bytes.lin
+			### standard__stream__BufferedReader__read_byte.definition
+				#### standard__stream__BufferedReader__read_byte.lin
+			### standard__stream__BufferedReader__read_bytes.definition
+				#### standard__stream__BufferedReader__read_bytes.lin
+			### standard__stream__BufferedReader__read_char.definition
+				#### standard__stream__BufferedReader__read_char.lin
+
+MPropertyPage buffer_reset
+	# buffer_reset.section
+		## standard__stream__BufferedReader__buffer_reset.intro
+
+MPropertyPage end_reached
+	# end_reached.section
+		## standard__stream__BufferedReader__end_reached.intro
+		## standard__stream__BufferedReader__end_reached.concerns
+		## standard.concern
+		## standard.concern
+		## standard__file.concern
+			### standard__file__FileReader__end_reached.definition
+
+MPropertyPage fill_buffer
+	# fill_buffer.section
+		## standard__stream__BufferedReader__fill_buffer.intro
+		## standard__stream__BufferedReader__fill_buffer.concerns
+		## standard.concern
+		## standard.concern
+		## standard__file.concern
+			### standard__file__FileReader__fill_buffer.definition
+
+MPropertyPage peek
+	# peek.section
+		## standard__stream__BufferedReader__peek.intro
+
+MPropertyPage prepare_buffer
+	# prepare_buffer.section
+		## standard__stream__BufferedReader__prepare_buffer.intro
+
+MClassPage Duplex
+	# Duplex.section
+		## standard__stream__Duplex.intro
+		## standard__stream__Duplex.inheritance
+			### standard__stream__Duplex.graph
+			### list.group
+				#### standard__stream__Duplex.parents
+				#### standard__stream__Duplex.ancestors
+				#### standard__stream__Duplex.children
+				#### standard__stream__Duplex.descendants
+		## standard__stream__Duplex.constructors
+			### standard__kernel__Object__init.definition
+		## standard__stream__Duplex.concerns
+		## standard.concern
+		## standard.concern
+		## standard__stream.concern
+			### standard__stream__Duplex__SELF.definition
+				#### standard__stream__Duplex__SELF.lin
+
+MClassPage IOError
+	# IOError.section
+		## standard__stream__IOError.intro
+		## standard__stream__IOError.inheritance
+			### standard__stream__IOError.graph
+			### list.group
+				#### standard__stream__IOError.parents
+				#### standard__stream__IOError.ancestors
+				#### standard__stream__IOError.children
+				#### standard__stream__IOError.descendants
+		## standard__stream__IOError.constructors
+			### standard__error__Error__init.definition
+		## standard__stream__IOError.concerns
+		## standard.concern
+		## standard.concern
+		## standard__stream.concern
+			### standard__stream__IOError__SELF.definition
+				#### standard__stream__IOError__SELF.lin
+
+MClassPage LineIterator
+	# LineIterator.section
+		## standard__stream__LineIterator.intro
+		## standard__stream__LineIterator.inheritance
+			### standard__stream__LineIterator.graph
+			### list.group
+				#### standard__stream__LineIterator.parents
+				#### standard__stream__LineIterator.ancestors
+				#### standard__stream__LineIterator.children
+				#### standard__stream__LineIterator.descendants
+		## standard__stream__LineIterator.constructors
+			### standard__stream__LineIterator__init.definition
+				#### standard__stream__LineIterator__init.lin
+		## standard__stream__LineIterator.concerns
+		## standard.concern
+		## standard.concern
+		## standard__stream.concern
+			### standard__stream__LineIterator__SELF.definition
+				#### standard__stream__LineIterator__SELF.lin
+			### standard__stream__LineIterator__close_on_finish.definition
+			### standard__stream__LineIterator__close_on_finish_61d.definition
+			### standard__stream__LineIterator__finish.definition
+				#### standard__stream__LineIterator__finish.lin
+			### standard__stream__LineIterator__is_ok.definition
+				#### standard__stream__LineIterator__is_ok.lin
+			### standard__stream__LineIterator__item.definition
+				#### standard__stream__LineIterator__item.lin
+			### standard__stream__LineIterator__next.definition
+				#### standard__stream__LineIterator__next.lin
+			### standard__stream__LineIterator__stream.definition
+
+MPropertyPage close_on_finish
+	# close_on_finish.section
+		## standard__stream__LineIterator__close_on_finish.intro
+
+MPropertyPage close_on_finish=
+	# close_on_finish=.section
+		## standard__stream__LineIterator__close_on_finish_61d.intro
+
+MPropertyPage stream
+	# stream.section
+		## standard__stream__LineIterator__stream.intro
+
+MClassPage PollableReader
+	# PollableReader.section
+		## standard__stream__PollableReader.intro
+		## standard__stream__PollableReader.inheritance
+			### standard__stream__PollableReader.graph
+			### list.group
+				#### standard__stream__PollableReader.parents
+				#### standard__stream__PollableReader.ancestors
+				#### standard__stream__PollableReader.children
+				#### standard__stream__PollableReader.descendants
+		## standard__stream__PollableReader.constructors
+			### standard__kernel__Object__init.definition
+		## standard__stream__PollableReader.concerns
+		## standard.concern
+		## standard.concern
+		## standard__stream.concern
+			### standard__stream__PollableReader__SELF.definition
+				#### standard__stream__PollableReader__SELF.lin
+			### standard__stream__PollableReader__poll_in.definition
+
+MPropertyPage poll_in
+	# poll_in.section
+		## standard__stream__PollableReader__poll_in.intro
+		## standard__stream__PollableReader__poll_in.concerns
+		## standard.concern
+		## standard.concern
+		## standard__file.concern
+			### standard__file__Stdin__poll_in.definition
+
+MClassPage Reader
+	# Reader.section
+		## standard__stream__Reader.intro
+		## standard__stream__Reader.inheritance
+			### standard__stream__Reader.graph
+			### list.group
+				#### standard__stream__Reader.parents
+				#### standard__stream__Reader.ancestors
+				#### standard__stream__Reader.children
+				#### standard__stream__Reader.descendants
+		## standard__stream__Reader.constructors
+			### standard__kernel__Object__init.definition
+		## standard__stream__Reader.concerns
+		## standard.concern
+		## standard.concern
+		## standard__stream.concern
+			### standard__stream__Reader__SELF.definition
+				#### standard__stream__Reader__SELF.lin
+			### standard__stream__Reader__append_line_to.definition
+			### standard__stream__Reader__each_line.definition
+			### standard__stream__Reader__eof.definition
+			### standard__stream__Reader__read.definition
+			### standard__stream__Reader__read_all.definition
+			### standard__stream__Reader__read_all_bytes.definition
+			### standard__stream__Reader__read_byte.definition
+			### standard__stream__Reader__read_bytes.definition
+			### standard__stream__Reader__read_char.definition
+			### standard__stream__Reader__read_line.definition
+			### standard__stream__Reader__read_lines.definition
+			### standard__stream__Reader__read_nonwhitespace.definition
+			### standard__stream__Reader__read_word.definition
+
+MPropertyPage append_line_to
+	# append_line_to.section
+		## standard__stream__Reader__append_line_to.intro
+		## standard__stream__Reader__append_line_to.concerns
+		## standard.concern
+		## standard.concern
+		## standard__stream.concern
+			### standard__stream__BufferedReader__append_line_to.definition
+
+MPropertyPage each_line
+	# each_line.section
+		## standard__stream__Reader__each_line.intro
+
+MPropertyPage eof
+	# eof.section
+		## standard__stream__Reader__eof.intro
+		## standard__stream__Reader__eof.concerns
+		## standard.concern
+		## standard.concern
+		## standard__stream.concern
+			### standard__stream__BufferedReader__eof.definition
+			### standard__stream__StringReader__eof.definition
+		## standard__exec.concern
+			### standard__exec__ProcessReader__eof.definition
+
+MPropertyPage read
+	# read.section
+		## standard__stream__Reader__read.intro
+
+MPropertyPage read_all
+	# read_all.section
+		## standard__stream__Reader__read_all.intro
+
+MPropertyPage read_all_bytes
+	# read_all_bytes.section
+		## standard__stream__Reader__read_all_bytes.intro
+		## standard__stream__Reader__read_all_bytes.concerns
+		## standard.concern
+		## standard.concern
+		## standard__stream.concern
+			### standard__stream__BufferedReader__read_all_bytes.definition
+			### standard__stream__StringReader__read_all_bytes.definition
+
+MPropertyPage read_byte
+	# read_byte.section
+		## standard__stream__Reader__read_byte.intro
+		## standard__stream__Reader__read_byte.concerns
+		## standard.concern
+		## standard.concern
+		## standard__stream.concern
+			### standard__stream__BufferedReader__read_byte.definition
+			### standard__stream__StringReader__read_byte.definition
+		## standard__exec.concern
+			### standard__exec__ProcessReader__read_byte.definition
+
+MPropertyPage read_bytes
+	# read_bytes.section
+		## standard__stream__Reader__read_bytes.intro
+		## standard__stream__Reader__read_bytes.concerns
+		## standard.concern
+		## standard.concern
+		## standard__stream.concern
+			### standard__stream__BufferedReader__read_bytes.definition
+
+MPropertyPage read_char
+	# read_char.section
+		## standard__stream__Reader__read_char.intro
+		## standard__stream__Reader__read_char.concerns
+		## standard.concern
+		## standard.concern
+		## standard__stream.concern
+			### standard__stream__BufferedReader__read_char.definition
+			### standard__stream__StringReader__read_char.definition
+		## standard__exec.concern
+			### standard__exec__ProcessReader__read_char.definition
+
+MPropertyPage read_line
+	# read_line.section
+		## standard__stream__Reader__read_line.intro
+
+MPropertyPage read_lines
+	# read_lines.section
+		## standard__stream__Reader__read_lines.intro
+
+MPropertyPage read_nonwhitespace
+	# read_nonwhitespace.section
+		## standard__stream__Reader__read_nonwhitespace.intro
+
+MPropertyPage read_word
+	# read_word.section
+		## standard__stream__Reader__read_word.intro
+
+MClassPage Stream
+	# Stream.section
+		## standard__stream__Stream.intro
+		## standard__stream__Stream.inheritance
+			### standard__stream__Stream.graph
+			### list.group
+				#### standard__stream__Stream.parents
+				#### standard__stream__Stream.ancestors
+				#### standard__stream__Stream.children
+				#### standard__stream__Stream.descendants
+		## standard__stream__Stream.constructors
+			### standard__kernel__Object__init.definition
+		## standard__stream__Stream.concerns
+		## standard.concern
+		## standard.concern
+		## standard__stream.concern
+			### standard__stream__Stream__SELF.definition
+				#### standard__stream__Stream__SELF.lin
+			### standard__stream__Stream__close.definition
+			### standard__stream__Stream__last_error.definition
+
+MPropertyPage close
+	# close.section
+		## standard__stream__Stream__close.intro
+		## standard__stream__Stream__close.concerns
+		## standard.concern
+		## standard.concern
+		## standard__stream.concern
+			### standard__stream__StringWriter__close.definition
+			### standard__stream__StringReader__close.definition
+		## standard__file.concern
+			### standard__file__FileStream__close.definition
+			### standard__file__FileReader__close.definition
+			### standard__file__FileWriter__close.definition
+		## standard__exec.concern
+			### standard__exec__ProcessReader__close.definition
+			### standard__exec__ProcessWriter__close.definition
+			### standard__exec__ProcessDuplex__close.definition
+
+MPropertyPage last_error
+	# last_error.section
+		## standard__stream__Stream__last_error.intro
+
+MClassPage StringReader
+	# StringReader.section
+		## standard__stream__StringReader.intro
+		## standard__stream__StringReader.inheritance
+			### standard__stream__StringReader.graph
+			### list.group
+				#### standard__stream__StringReader.parents
+				#### standard__stream__StringReader.ancestors
+				#### standard__stream__StringReader.children
+				#### standard__stream__StringReader.descendants
+		## standard__stream__StringReader.constructors
+			### standard__stream__StringReader__init.definition
+				#### standard__stream__StringReader__init.lin
+		## standard__stream__StringReader.concerns
+		## standard.concern
+		## standard.concern
+		## standard__stream.concern
+			### standard__stream__StringReader__SELF.definition
+				#### standard__stream__StringReader__SELF.lin
+			### standard__stream__StringReader__close.definition
+				#### standard__stream__StringReader__close.lin
+			### standard__stream__StringReader__eof.definition
+				#### standard__stream__StringReader__eof.lin
+			### standard__stream__StringReader__read_all_bytes.definition
+				#### standard__stream__StringReader__read_all_bytes.lin
+			### standard__stream__StringReader__read_byte.definition
+				#### standard__stream__StringReader__read_byte.lin
+			### standard__stream__StringReader__read_char.definition
+				#### standard__stream__StringReader__read_char.lin
+			### standard__stream__StringReader__source.definition
+
+MPropertyPage source
+	# source.section
+		## standard__stream__StringReader__source.intro
+
+MClassPage StringWriter
+	# StringWriter.section
+		## standard__stream__StringWriter.intro
+		## standard__stream__StringWriter.inheritance
+			### standard__stream__StringWriter.graph
+			### list.group
+				#### standard__stream__StringWriter.parents
+				#### standard__stream__StringWriter.ancestors
+				#### standard__stream__StringWriter.children
+				#### standard__stream__StringWriter.descendants
+		## standard__stream__StringWriter.constructors
+			### standard__kernel__Object__init.definition
+		## standard__stream__StringWriter.concerns
+		## standard.concern
+		## standard.concern
+		## standard__stream.concern
+			### standard__stream__StringWriter__SELF.definition
+				#### standard__stream__StringWriter__SELF.lin
+			### standard__stream__StringWriter__close.definition
+				#### standard__stream__StringWriter__close.lin
+			### standard__stream__StringWriter__closed.definition
+			### standard__stream__StringWriter__is_writable.definition
+				#### standard__stream__StringWriter__is_writable.lin
+			### standard__stream__StringWriter__to_s.definition
+				#### standard__stream__StringWriter__to_s.lin
+			### standard__stream__StringWriter__write.definition
+				#### standard__stream__StringWriter__write.lin
+			### standard__stream__StringWriter__write_bytes.definition
+				#### standard__stream__StringWriter__write_bytes.lin
+
+MPropertyPage closed
+	# closed.section
+		## standard__stream__StringWriter__closed.intro
+
+MClassPage Writable
+	# Writable.section
+		## standard__stream__Writable.intro
+		## standard__stream__Writable.inheritance
+			### standard__stream__Writable.graph
+			### list.group
+				#### standard__stream__Writable.parents
+				#### standard__stream__Writable.ancestors
+				#### standard__stream__Writable.children
+				#### standard__stream__Writable.descendants
+		## standard__stream__Writable.constructors
+		## standard__stream__Writable.concerns
+		## standard.concern
+		## standard.concern
+		## standard__stream.concern
+			### standard__stream__Writable__SELF.definition
+				#### standard__stream__Writable__SELF.lin
+			### standard__stream__Writable__write_to.definition
+			### standard__stream__Writable__write_to_string.definition
+		## standard__file.concern
+			### standard__file__Writable__write_to_file.definition
+
+MPropertyPage write_to
+	# write_to.section
+		## standard__stream__Writable__write_to.intro
+		## standard__stream__Writable__write_to.concerns
+		## standard.concern
+		## standard.concern
+		## standard__stream.concern
+			### standard__stream__Text__write_to.definition
+
+MPropertyPage write_to_file
+	# write_to_file.section
+		## standard__stream__Writable__write_to_file.intro
+
+MPropertyPage write_to_string
+	# write_to_string.section
+		## standard__stream__Writable__write_to_string.intro
+
+MClassPage Writer
+	# Writer.section
+		## standard__stream__Writer.intro
+		## standard__stream__Writer.inheritance
+			### standard__stream__Writer.graph
+			### list.group
+				#### standard__stream__Writer.parents
+				#### standard__stream__Writer.ancestors
+				#### standard__stream__Writer.children
+				#### standard__stream__Writer.descendants
+		## standard__stream__Writer.constructors
+			### standard__kernel__Object__init.definition
+		## standard__stream__Writer.concerns
+		## standard.concern
+		## standard.concern
+		## standard__stream.concern
+			### standard__stream__Writer__SELF.definition
+				#### standard__stream__Writer__SELF.lin
+			### standard__stream__Writer__is_writable.definition
+			### standard__stream__Writer__write.definition
+			### standard__stream__Writer__write_byte.definition
+			### standard__stream__Writer__write_bytes.definition
+
+MPropertyPage is_writable
+	# is_writable.section
+		## standard__stream__Writer__is_writable.intro
+		## standard__stream__Writer__is_writable.concerns
+		## standard.concern
+		## standard.concern
+		## standard__stream.concern
+			### standard__stream__StringWriter__is_writable.definition
+		## standard__file.concern
+			### standard__file__FileWriter__is_writable.definition
+		## standard__exec.concern
+			### standard__exec__ProcessWriter__is_writable.definition
+
+MPropertyPage write
+	# write.section
+		## standard__stream__Writer__write.intro
+		## standard__stream__Writer__write.concerns
+		## standard.concern
+		## standard.concern
+		## standard__stream.concern
+			### standard__stream__StringWriter__write.definition
+		## standard__file.concern
+			### standard__file__FileWriter__write.definition
+		## standard__exec.concern
+			### standard__exec__ProcessWriter__write.definition
+
+MPropertyPage write_byte
+	# write_byte.section
+		## standard__stream__Writer__write_byte.intro
+		## standard__stream__Writer__write_byte.concerns
+		## standard.concern
+		## standard.concern
+		## standard__file.concern
+			### standard__file__FileWriter__write_byte.definition
+
+MPropertyPage write_bytes
+	# write_bytes.section
+		## standard__stream__Writer__write_bytes.intro
+		## standard__stream__Writer__write_bytes.concerns
+		## standard.concern
+		## standard.concern
+		## standard__stream.concern
+			### standard__stream__StringWriter__write_bytes.definition
+		## standard__file.concern
+			### standard__file__FileWriter__write_bytes.definition
+
+MModulePage string
+	# string.section
+		## standard__string.intro
+		## standard__string.importation
+			### standard__string.graph
+			### list.group
+				#### standard__string.imports
+				#### standard__string.clients
+		## standard__string.concerns
+		## standard.concern
+		## standard.concern
+		## standard__string.concern
+			### standard__string__Buffer.definition-list
+				#### standard__string__Buffer.definition
+					##### standard__string__Buffer.intros_redefs
+						###### list.group
+							####### standard__string__Buffer.intros
+							####### standard__string__Buffer.redefs
+			### standard__string__CachedAlphaComparator.definition-list
+				#### standard__string__CachedAlphaComparator.definition
+					##### standard__string__CachedAlphaComparator.intros_redefs
+						###### list.group
+							####### standard__string__CachedAlphaComparator.intros
+							####### standard__string__CachedAlphaComparator.redefs
+			### standard__string__FlatBuffer.definition-list
+				#### standard__string__FlatBuffer.definition
+					##### standard__string__FlatBuffer.intros_redefs
+						###### list.group
+							####### standard__string__FlatBuffer.intros
+							####### standard__string__FlatBuffer.redefs
+			### standard__string__FlatString.definition-list
+				#### standard__string__FlatString.definition
+					##### standard__string__FlatString.intros_redefs
+						###### list.group
+							####### standard__string__FlatString.intros
+							####### standard__string__FlatString.redefs
+			### standard__string__FlatText.definition-list
+				#### standard__string__FlatText.definition
+					##### standard__string__FlatText.intros_redefs
+						###### list.group
+							####### standard__string__FlatText.intros
+							####### standard__string__FlatText.redefs
+			### standard__string__NativeString.definition-list
+				#### standard__string__NativeString.definition
+					##### standard__string__NativeString.intros_redefs
+						###### list.group
+							####### standard__string__NativeString.intros
+							####### standard__string__NativeString.redefs
+			### standard__string__String.definition-list
+				#### standard__string__String.definition
+					##### standard__string__String.intros_redefs
+						###### list.group
+							####### standard__string__String.intros
+							####### standard__string__String.redefs
+			### standard__string__Text.definition-list
+				#### standard__string__Text.definition
+					##### standard__string__Text.intros_redefs
+						###### list.group
+							####### standard__string__Text.intros
+							####### standard__string__Text.redefs
+		## standard__kernel.concern
+			### standard__kernel__Bool.definition-list
+				#### standard__kernel__Bool.definition
+				#### standard__string__Bool.definition
+					##### standard__string__Bool.intros_redefs
+						###### list.group
+							####### standard__string__Bool.intros
+							####### standard__string__Bool.redefs
+			### standard__kernel__Byte.definition-list
+				#### standard__kernel__Byte.definition
+				#### standard__string__Byte.definition
+					##### standard__string__Byte.intros_redefs
+						###### list.group
+							####### standard__string__Byte.intros
+							####### standard__string__Byte.redefs
+			### standard__kernel__Char.definition-list
+				#### standard__kernel__Char.definition
+				#### standard__string__Char.definition
+					##### standard__string__Char.intros_redefs
+						###### list.group
+							####### standard__string__Char.intros
+							####### standard__string__Char.redefs
+			### standard__kernel__Float.definition-list
+				#### standard__kernel__Float.definition
+				#### standard__string__Float.definition
+					##### standard__string__Float.intros_redefs
+						###### list.group
+							####### standard__string__Float.intros
+							####### standard__string__Float.redefs
+			### standard__kernel__Int.definition-list
+				#### standard__kernel__Int.definition
+				#### standard__string__Int.definition
+					##### standard__string__Int.intros_redefs
+						###### list.group
+							####### standard__string__Int.intros
+							####### standard__string__Int.redefs
+			### standard__kernel__Object.definition-list
+				#### standard__kernel__Object.definition
+				#### standard__string__Object.definition
+					##### standard__string__Object.intros_redefs
+						###### list.group
+							####### standard__string__Object.intros
+							####### standard__string__Object.redefs
+			### standard__kernel__Sys.definition-list
+				#### standard__kernel__Sys.definition
+				#### standard__string__Sys.definition
+					##### standard__string__Sys.intros_redefs
+						###### list.group
+							####### standard__string__Sys.intros
+							####### standard__string__Sys.redefs
+		## standard__collection.concern
+		## standard__collection__abstract_collection.concern
+			### standard__collection__abstract_collection__Collection.definition-list
+				#### standard__collection__abstract_collection__Collection.definition
+				#### standard__string__Collection.definition
+					##### standard__string__Collection.intros_redefs
+						###### list.group
+							####### standard__string__Collection.intros
+							####### standard__string__Collection.redefs
+			### standard__collection__abstract_collection__Map.definition-list
+				#### standard__collection__abstract_collection__Map.definition
+				#### standard__string__Map.definition
+					##### standard__string__Map.intros_redefs
+						###### list.group
+							####### standard__string__Map.intros
+							####### standard__string__Map.redefs
+		## standard__collection__array.concern
+			### standard__collection__array__Array.definition-list
+				#### standard__collection__array__Array.definition
+				#### standard__string__Array.definition
+					##### standard__string__Array.intros_redefs
+						###### list.group
+							####### standard__string__Array.intros
+							####### standard__string__Array.redefs
+			### standard__collection__array__NativeArray.definition-list
+				#### standard__collection__array__NativeArray.definition
+				#### standard__string__NativeArray.definition
+					##### standard__string__NativeArray.intros_redefs
+						###### list.group
+							####### standard__string__NativeArray.intros
+							####### standard__string__NativeArray.redefs
+
+CodePage string
+	# standard__string.code
+
+MClassPage Buffer
+	# Buffer.section
+		## standard__string__Buffer.intro
+		## standard__string__Buffer.inheritance
+			### standard__string__Buffer.graph
+			### list.group
+				#### standard__string__Buffer.parents
+				#### standard__string__Buffer.ancestors
+				#### standard__string__Buffer.children
+				#### standard__string__Buffer.descendants
+		## standard__string__Buffer.constructors
+			### standard__kernel__Object__init.definition
+			### standard__string__Buffer__new.definition
+			### standard__string__Buffer__with_cap.definition
+		## standard__string__Buffer.concerns
+		## standard.concern
+		## standard.concern
+		## standard__string.concern
+			### standard__string__Buffer__SELF.definition
+				#### standard__string__Buffer__SELF.lin
+			### standard__string__Buffer__SELFTYPE.definition
+				#### standard__string__Buffer__SELFTYPE.lin
+			### standard__string__Buffer___91d_93d_61d.definition
+			### standard__string__Buffer__add.definition
+			### standard__string__Buffer__append.definition
+			### standard__string__Buffer__capitalize.definition
+			### standard__string__Buffer__chars.definition
+				#### standard__string__Buffer__chars.lin
+			### standard__string__Buffer__clear.definition
+			### standard__string__Buffer__enlarge.definition
+			### standard__string__Buffer__hash.definition
+				#### standard__string__Buffer__hash.lin
+			### standard__string__Buffer__is_dirty.definition
+			### standard__string__Buffer__lower.definition
+			### standard__string__Buffer__reverse.definition
+			### standard__string__Buffer__times.definition
+			### standard__string__Buffer__upper.definition
+			### standard__string__Buffer__written.definition
+
+MPropertyPage []=
+	# []=.section
+		## standard__string__Buffer___91d_93d_61d.intro
+		## standard__string__Buffer___91d_93d_61d.concerns
+		## standard.concern
+		## standard.concern
+		## standard__string.concern
+			### standard__string__FlatBuffer___91d_93d_61d.definition
+
+MPropertyPage add
+	# add.section
+		## standard__string__Buffer__add.intro
+		## standard__string__Buffer__add.concerns
+		## standard.concern
+		## standard.concern
+		## standard__string.concern
+			### standard__string__FlatBuffer__add.definition
+		## standard__ropes.concern
+			### standard__ropes__RopeBuffer__add.definition
+
+MPropertyPage append
+	# append.section
+		## standard__string__Buffer__append.intro
+		## standard__string__Buffer__append.concerns
+		## standard.concern
+		## standard.concern
+		## standard__string.concern
+			### standard__string__FlatBuffer__append.definition
+		## standard__ropes.concern
+			### standard__ropes__RopeBuffer__append.definition
+
+MPropertyPage capitalize
+	# capitalize.section
+		## standard__string__Buffer__capitalize.intro
+
+MPropertyPage clear
+	# clear.section
+		## standard__string__Buffer__clear.intro
+		## standard__string__Buffer__clear.concerns
+		## standard.concern
+		## standard.concern
+		## standard__string.concern
+			### standard__string__FlatBuffer__clear.definition
+		## standard__ropes.concern
+			### standard__ropes__RopeBuffer__clear.definition
+
+MPropertyPage enlarge
+	# enlarge.section
+		## standard__string__Buffer__enlarge.intro
+		## standard__string__Buffer__enlarge.concerns
+		## standard.concern
+		## standard.concern
+		## standard__string.concern
+			### standard__string__FlatBuffer__enlarge.definition
+		## standard__ropes.concern
+			### standard__ropes__RopeBuffer__enlarge.definition
+
+MPropertyPage is_dirty
+	# is_dirty.section
+		## standard__string__Buffer__is_dirty.intro
+
+MPropertyPage lower
+	# lower.section
+		## standard__string__Buffer__lower.intro
+		## standard__string__Buffer__lower.concerns
+		## standard.concern
+		## standard.concern
+		## standard__string.concern
+			### standard__string__FlatBuffer__lower.definition
+		## standard__ropes.concern
+			### standard__ropes__RopeBuffer__lower.definition
+
+MPropertyPage new
+	# new.section
+		## standard__string__Buffer__new.intro
+
+MPropertyPage reverse
+	# reverse.section
+		## standard__string__Buffer__reverse.intro
+		## standard__string__Buffer__reverse.concerns
+		## standard.concern
+		## standard.concern
+		## standard__string.concern
+			### standard__string__FlatBuffer__reverse.definition
+		## standard__ropes.concern
+			### standard__ropes__RopeBuffer__reverse.definition
+
+MPropertyPage times
+	# times.section
+		## standard__string__Buffer__times.intro
+		## standard__string__Buffer__times.concerns
+		## standard.concern
+		## standard.concern
+		## standard__string.concern
+			### standard__string__FlatBuffer__times.definition
+
+MPropertyPage upper
+	# upper.section
+		## standard__string__Buffer__upper.intro
+		## standard__string__Buffer__upper.concerns
+		## standard.concern
+		## standard.concern
+		## standard__string.concern
+			### standard__string__FlatBuffer__upper.definition
+		## standard__ropes.concern
+			### standard__ropes__RopeBuffer__upper.definition
+
+MPropertyPage with_cap
+	# with_cap.section
+		## standard__string__Buffer__with_cap.intro
+
+MPropertyPage written
+	# written.section
+		## standard__string__Buffer__written.intro
+
+MClassPage CachedAlphaComparator
+	# CachedAlphaComparator.section
+		## standard__string__CachedAlphaComparator.intro
+		## standard__string__CachedAlphaComparator.inheritance
+			### standard__string__CachedAlphaComparator.graph
+			### list.group
+				#### standard__string__CachedAlphaComparator.parents
+				#### standard__string__CachedAlphaComparator.ancestors
+				#### standard__string__CachedAlphaComparator.children
+				#### standard__string__CachedAlphaComparator.descendants
+		## standard__string__CachedAlphaComparator.constructors
+			### standard__kernel__Object__init.definition
+		## standard__string__CachedAlphaComparator.concerns
+		## standard.concern
+		## standard.concern
+		## standard__string.concern
+			### standard__string__CachedAlphaComparator__COMPARED.definition
+				#### standard__string__CachedAlphaComparator__COMPARED.lin
+			### standard__string__CachedAlphaComparator__SELF.definition
+				#### standard__string__CachedAlphaComparator__SELF.lin
+			### standard__string__CachedAlphaComparator__compare.definition
+				#### standard__string__CachedAlphaComparator__compare.lin
+
+MClassPage FlatBuffer
+	# FlatBuffer.section
+		## standard__string__FlatBuffer.intro
+		## standard__string__FlatBuffer.inheritance
+			### standard__string__FlatBuffer.graph
+			### list.group
+				#### standard__string__FlatBuffer.parents
+				#### standard__string__FlatBuffer.ancestors
+				#### standard__string__FlatBuffer.children
+				#### standard__string__FlatBuffer.descendants
+		## standard__string__FlatBuffer.constructors
+			### standard__string__FlatBuffer__init.definition
+				#### standard__string__FlatBuffer__init.lin
+			### standard__string__FlatBuffer__from.definition
+			### standard__string__FlatBuffer__with_capacity.definition
+		## standard__string__FlatBuffer.concerns
+		## standard.concern
+		## standard.concern
+		## standard__string.concern
+			### standard__string__FlatBuffer__SELF.definition
+				#### standard__string__FlatBuffer__SELF.lin
+			### standard__string__FlatBuffer___91d_93d.definition
+				#### standard__string__FlatBuffer___91d_93d.lin
+			### standard__string__FlatBuffer___91d_93d_61d.definition
+				#### standard__string__FlatBuffer___91d_93d_61d.lin
+			### standard__string__FlatBuffer__add.definition
+				#### standard__string__FlatBuffer__add.lin
+			### standard__string__FlatBuffer__append.definition
+				#### standard__string__FlatBuffer__append.lin
+			### standard__string__FlatBuffer__chars.definition
+				#### standard__string__FlatBuffer__chars.lin
+			### standard__string__FlatBuffer__clear.definition
+				#### standard__string__FlatBuffer__clear.lin
+			### standard__string__FlatBuffer__copy.definition
+			### standard__string__FlatBuffer__empty.definition
+				#### standard__string__FlatBuffer__empty.lin
+			### standard__string__FlatBuffer__enlarge.definition
+				#### standard__string__FlatBuffer__enlarge.lin
+			### standard__string__FlatBuffer__lower.definition
+				#### standard__string__FlatBuffer__lower.lin
+			### standard__string__FlatBuffer__reverse.definition
+				#### standard__string__FlatBuffer__reverse.lin
+			### standard__string__FlatBuffer__substring.definition
+				#### standard__string__FlatBuffer__substring.lin
+			### standard__string__FlatBuffer__substrings.definition
+				#### standard__string__FlatBuffer__substrings.lin
+			### standard__string__FlatBuffer__times.definition
+				#### standard__string__FlatBuffer__times.lin
+			### standard__string__FlatBuffer__to_cstring.definition
+				#### standard__string__FlatBuffer__to_cstring.lin
+			### standard__string__FlatBuffer__to_s.definition
+				#### standard__string__FlatBuffer__to_s.lin
+			### standard__string__FlatBuffer__upper.definition
+				#### standard__string__FlatBuffer__upper.lin
+
+MPropertyPage copy
+	# copy.section
+		## standard__string__FlatBuffer__copy.intro
+
+MPropertyPage from
+	# from.section
+		## standard__string__FlatBuffer__from.intro
+
+MPropertyPage with_capacity
+	# with_capacity.section
+		## standard__string__FlatBuffer__with_capacity.intro
+
+MClassPage FlatString
+	# FlatString.section
+		## standard__string__FlatString.intro
+		## standard__string__FlatString.inheritance
+			### standard__string__FlatString.graph
+			### list.group
+				#### standard__string__FlatString.parents
+				#### standard__string__FlatString.ancestors
+				#### standard__string__FlatString.children
+				#### standard__string__FlatString.descendants
+		## standard__string__FlatString.constructors
+			### standard__kernel__Object__init.definition
+		## standard__string__FlatString.concerns
+		## standard.concern
+		## standard.concern
+		## standard__string.concern
+			### standard__string__FlatString__SELF.definition
+				#### standard__string__FlatString__SELF.lin
+			### standard__string__FlatString___42d.definition
+				#### standard__string__FlatString___42d.lin
+			### standard__string__FlatString___43d.definition
+				#### standard__string__FlatString___43d.lin
+			### standard__string__FlatString___60d.definition
+				#### standard__string__FlatString___60d.lin
+			### standard__string__FlatString___61d_61d.definition
+				#### standard__string__FlatString___61d_61d.lin
+			### standard__string__FlatString___91d_93d.definition
+				#### standard__string__FlatString___91d_93d.lin
+			### standard__string__FlatString__chars.definition
+				#### standard__string__FlatString__chars.lin
+			### standard__string__FlatString__empty.definition
+				#### standard__string__FlatString__empty.lin
+			### standard__string__FlatString__hash.definition
+				#### standard__string__FlatString__hash.lin
+			### standard__string__FlatString__output.definition
+				#### standard__string__FlatString__output.lin
+			### standard__string__FlatString__reversed.definition
+				#### standard__string__FlatString__reversed.lin
+			### standard__string__FlatString__substring.definition
+				#### standard__string__FlatString__substring.lin
+			### standard__string__FlatString__substrings.definition
+				#### standard__string__FlatString__substrings.lin
+			### standard__string__FlatString__to_cstring.definition
+				#### standard__string__FlatString__to_cstring.lin
+			### standard__string__FlatString__to_lower.definition
+				#### standard__string__FlatString__to_lower.lin
+			### standard__string__FlatString__to_upper.definition
+				#### standard__string__FlatString__to_upper.lin
+		## standard__ropes.concern
+			### standard__ropes__FlatString___43d.definition
+				#### standard__ropes__FlatString___43d.lin
+			### standard__ropes__FlatString__insert_at.definition
+				#### standard__ropes__FlatString__insert_at.lin
+
+MClassPage FlatText
+	# FlatText.section
+		## standard__string__FlatText.intro
+		## standard__string__FlatText.inheritance
+			### standard__string__FlatText.graph
+			### list.group
+				#### standard__string__FlatText.parents
+				#### standard__string__FlatText.ancestors
+				#### standard__string__FlatText.children
+				#### standard__string__FlatText.descendants
+		## standard__string__FlatText.constructors
+			### standard__kernel__Object__init.definition
+		## standard__string__FlatText.concerns
+		## standard.concern
+		## standard.concern
+		## standard__string.concern
+			### standard__string__FlatText__SELF.definition
+				#### standard__string__FlatText__SELF.lin
+			### standard__string__FlatText__copy_to_native.definition
+				#### standard__string__FlatText__copy_to_native.lin
+			### standard__string__FlatText__length.definition
+				#### standard__string__FlatText__length.lin
+			### standard__string__FlatText__output.definition
+				#### standard__string__FlatText__output.lin
+
+MClassPage NativeString
+	# NativeString.section
+		## standard__string__NativeString.intro
+		## standard__string__NativeString.inheritance
+			### standard__string__NativeString.graph
+			### list.group
+				#### standard__string__NativeString.parents
+				#### standard__string__NativeString.ancestors
+				#### standard__string__NativeString.children
+				#### standard__string__NativeString.descendants
+		## standard__string__NativeString.constructors
+			### standard__string__NativeString__new.definition
+		## standard__string__NativeString.concerns
+		## standard.concern
+		## standard.concern
+		## standard__string.concern
+			### standard__string__NativeString__SELF.definition
+				#### standard__string__NativeString__SELF.lin
+			### standard__string__NativeString___91d_93d.definition
+			### standard__string__NativeString___91d_93d_61d.definition
+			### standard__string__NativeString__atof.definition
+			### standard__string__NativeString__atoi.definition
+			### standard__string__NativeString__copy_to.definition
+			### standard__string__NativeString__cstring_length.definition
+			### standard__string__NativeString__fast_cstring.definition
+			### standard__string__NativeString__to_s.definition
+				#### standard__string__NativeString__to_s.lin
+			### standard__string__NativeString__to_s_with_copy.definition
+			### standard__string__NativeString__to_s_with_length.definition
+		## standard__bytes.concern
+			### standard__bytes__NativeString__to_bytes.definition
+		## standard__exec.concern
+			### standard__exec__NativeString__system.definition
+
+MPropertyPage []
+	# [].section
+		## standard__string__NativeString___91d_93d.intro
+
+MPropertyPage []=
+	# []=.section
+		## standard__string__NativeString___91d_93d_61d.intro
+
+MPropertyPage atof
+	# atof.section
+		## standard__string__NativeString__atof.intro
+
+MPropertyPage atoi
+	# atoi.section
+		## standard__string__NativeString__atoi.intro
+
+MPropertyPage copy_to
+	# copy_to.section
+		## standard__string__NativeString__copy_to.intro
+
+MPropertyPage cstring_length
+	# cstring_length.section
+		## standard__string__NativeString__cstring_length.intro
+
+MPropertyPage fast_cstring
+	# fast_cstring.section
+		## standard__string__NativeString__fast_cstring.intro
+
+MPropertyPage new
+	# new.section
+		## standard__string__NativeString__new.intro
+
+MPropertyPage system
+	# system.section
+		## standard__string__NativeString__system.intro
+
+MPropertyPage to_bytes
+	# to_bytes.section
+		## standard__string__NativeString__to_bytes.intro
+
+MPropertyPage to_s_with_copy
+	# to_s_with_copy.section
+		## standard__string__NativeString__to_s_with_copy.intro
+
+MPropertyPage to_s_with_length
+	# to_s_with_length.section
+		## standard__string__NativeString__to_s_with_length.intro
+
+MClassPage String
+	# String.section
+		## standard__string__String.intro
+		## standard__string__String.inheritance
+			### standard__string__String.graph
+			### list.group
+				#### standard__string__String.parents
+				#### standard__string__String.ancestors
+				#### standard__string__String.children
+				#### standard__string__String.descendants
+		## standard__string__String.constructors
+			### standard__kernel__Object__init.definition
+		## standard__string__String.concerns
+		## standard.concern
+		## standard.concern
+		## standard__string.concern
+			### standard__string__String__SELF.definition
+				#### standard__string__String__SELF.lin
+			### standard__string__String__SELFTYPE.definition
+				#### standard__string__String__SELFTYPE.lin
+			### standard__string__String___42d.definition
+			### standard__string__String___43d.definition
+			### standard__string__String__capitalized.definition
+			### standard__string__String__insert_at.definition
+			### standard__string__String__reversed.definition
+			### standard__string__String__substrings.definition
+				#### standard__string__String__substrings.lin
+			### standard__string__String__to_camel_case.definition
+			### standard__string__String__to_lower.definition
+			### standard__string__String__to_s.definition
+				#### standard__string__String__to_s.lin
+			### standard__string__String__to_snake_case.definition
+			### standard__string__String__to_upper.definition
+		## standard__file.concern
+			### standard__file__String___47d.definition
+			### standard__file__String__basename.definition
+			### standard__file__String__chdir.definition
+			### standard__file__String__dirname.definition
+			### standard__file__String__file_copy_to.definition
+			### standard__file__String__file_delete.definition
+			### standard__file__String__file_exists.definition
+			### standard__file__String__file_extension.definition
+			### standard__file__String__file_lstat.definition
+			### standard__file__String__file_stat.definition
+			### standard__file__String__files.definition
+			### standard__file__String__join_path.definition
+			### standard__file__String__mkdir.definition
+			### standard__file__String__realpath.definition
+			### standard__file__String__relpath.definition
+			### standard__file__String__rmdir.definition
+			### standard__file__String__simplify_path.definition
+			### standard__file__String__strip_extension.definition
+			### standard__file__String__to_program_name.definition
+		## standard__environ.concern
+			### standard__environ__String__environ.definition
+			### standard__environ__String__program_is_in_path.definition
+			### standard__environ__String__setenv.definition
+
+MPropertyPage *
+	# *.section
+		## standard__string__String___42d.intro
+		## standard__string__String___42d.concerns
+		## standard.concern
+		## standard.concern
+		## standard__string.concern
+			### standard__string__FlatString___42d.definition
+
+MPropertyPage +
+	# +.section
+		## standard__string__String___43d.intro
+		## standard__string__String___43d.concerns
+		## standard.concern
+		## standard.concern
+		## standard__string.concern
+			### standard__string__FlatString___43d.definition
+		## standard__ropes.concern
+			### standard__ropes__FlatString___43d.definition
+
+MPropertyPage &#47;
+	# &#47;.section
+		## standard__string__String___47d.intro
+
+MPropertyPage basename
+	# basename.section
+		## standard__string__String__basename.intro
+
+MPropertyPage capitalized
+	# capitalized.section
+		## standard__string__String__capitalized.intro
+
+MPropertyPage chdir
+	# chdir.section
+		## standard__string__String__chdir.intro
+
+MPropertyPage dirname
+	# dirname.section
+		## standard__string__String__dirname.intro
+
+MPropertyPage environ
+	# environ.section
+		## standard__string__String__environ.intro
+
+MPropertyPage file_copy_to
+	# file_copy_to.section
+		## standard__string__String__file_copy_to.intro
+
+MPropertyPage file_delete
+	# file_delete.section
+		## standard__string__String__file_delete.intro
+
+MPropertyPage file_exists
+	# file_exists.section
+		## standard__string__String__file_exists.intro
+
+MPropertyPage file_extension
+	# file_extension.section
+		## standard__string__String__file_extension.intro
+
+MPropertyPage file_lstat
+	# file_lstat.section
+		## standard__string__String__file_lstat.intro
+
+MPropertyPage file_stat
+	# file_stat.section
+		## standard__string__String__file_stat.intro
+
+MPropertyPage files
+	# files.section
+		## standard__string__String__files.intro
+
+MPropertyPage insert_at
+	# insert_at.section
+		## standard__string__String__insert_at.intro
+		## standard__string__String__insert_at.concerns
+		## standard.concern
+		## standard.concern
+		## standard__ropes.concern
+			### standard__ropes__FlatString__insert_at.definition
+
+MPropertyPage join_path
+	# join_path.section
+		## standard__string__String__join_path.intro
+
+MPropertyPage mkdir
+	# mkdir.section
+		## standard__string__String__mkdir.intro
+
+MPropertyPage program_is_in_path
+	# program_is_in_path.section
+		## standard__string__String__program_is_in_path.intro
+
+MPropertyPage realpath
+	# realpath.section
+		## standard__string__String__realpath.intro
+
+MPropertyPage relpath
+	# relpath.section
+		## standard__string__String__relpath.intro
+
+MPropertyPage reversed
+	# reversed.section
+		## standard__string__String__reversed.intro
+		## standard__string__String__reversed.concerns
+		## standard.concern
+		## standard.concern
+		## standard__string.concern
+			### standard__string__FlatString__reversed.definition
+
+MPropertyPage rmdir
+	# rmdir.section
+		## standard__string__String__rmdir.intro
+
+MPropertyPage setenv
+	# setenv.section
+		## standard__string__String__setenv.intro
+
+MPropertyPage simplify_path
+	# simplify_path.section
+		## standard__string__String__simplify_path.intro
+
+MPropertyPage strip_extension
+	# strip_extension.section
+		## standard__string__String__strip_extension.intro
+
+MPropertyPage to_camel_case
+	# to_camel_case.section
+		## standard__string__String__to_camel_case.intro
+
+MPropertyPage to_lower
+	# to_lower.section
+		## standard__string__String__to_lower.intro
+		## standard__string__String__to_lower.concerns
+		## standard.concern
+		## standard.concern
+		## standard__string.concern
+			### standard__string__FlatString__to_lower.definition
+
+MPropertyPage to_program_name
+	# to_program_name.section
+		## standard__string__String__to_program_name.intro
+
+MPropertyPage to_snake_case
+	# to_snake_case.section
+		## standard__string__String__to_snake_case.intro
+
+MPropertyPage to_upper
+	# to_upper.section
+		## standard__string__String__to_upper.intro
+		## standard__string__String__to_upper.concerns
+		## standard.concern
+		## standard.concern
+		## standard__string.concern
+			### standard__string__FlatString__to_upper.definition
+
+MClassPage Text
+	# Text.section
+		## standard__string__Text.intro
+		## standard__string__Text.inheritance
+			### standard__string__Text.graph
+			### list.group
+				#### standard__string__Text.parents
+				#### standard__string__Text.ancestors
+				#### standard__string__Text.children
+				#### standard__string__Text.descendants
+		## standard__string__Text.constructors
+			### standard__kernel__Object__init.definition
+		## standard__string__Text.concerns
+		## standard.concern
+		## standard.concern
+		## standard__string.concern
+			### standard__string__Text__OTHER.definition
+				#### standard__string__Text__OTHER.lin
+			### standard__string__Text__SELF.definition
+				#### standard__string__Text__SELF.lin
+			### standard__string__Text__SELFTYPE.definition
+			### standard__string__Text___60d.definition
+				#### standard__string__Text___60d.lin
+			### standard__string__Text___61d_61d.definition
+				#### standard__string__Text___61d_61d.lin
+			### standard__string__Text___91d_93d.definition
+			### standard__string__Text__a_to.definition
+			### standard__string__Text__chars.definition
+			### standard__string__Text__chomp.definition
+			### standard__string__Text__copy_to_native.definition
+			### standard__string__Text__empty.definition
+			### standard__string__Text__escape_more_to_c.definition
+			### standard__string__Text__escape_to_c.definition
+			### standard__string__Text__escape_to_dot.definition
+			### standard__string__Text__escape_to_mk.definition
+			### standard__string__Text__escape_to_nit.definition
+			### standard__string__Text__escape_to_sh.definition
+			### standard__string__Text__first.definition
+			### standard__string__Text__format.definition
+			### standard__string__Text__from_percent_encoding.definition
+			### standard__string__Text__has_prefix.definition
+			### standard__string__Text__has_substring.definition
+			### standard__string__Text__has_suffix.definition
+			### standard__string__Text__hash.definition
+				#### standard__string__Text__hash.lin
+			### standard__string__Text__html_escape.definition
+			### standard__string__Text__index_of.definition
+			### standard__string__Text__index_of_from.definition
+			### standard__string__Text__is_empty.definition
+			### standard__string__Text__is_hex.definition
+			### standard__string__Text__is_lower.definition
+			### standard__string__Text__is_numeric.definition
+			### standard__string__Text__is_upper.definition
+			### standard__string__Text__is_whitespace.definition
+			### standard__string__Text__iterator.definition
+			### standard__string__Text__justify.definition
+			### standard__string__Text__l_trim.definition
+			### standard__string__Text__last.definition
+			### standard__string__Text__last_index_of.definition
+			### standard__string__Text__last_index_of_from.definition
+			### standard__string__Text__length.definition
+			### standard__string__Text__r_trim.definition
+			### standard__string__Text__substring.definition
+			### standard__string__Text__substring_from.definition
+			### standard__string__Text__substrings.definition
+			### standard__string__Text__to_a.definition
+			### standard__string__Text__to_bin.definition
+			### standard__string__Text__to_cmangle.definition
+			### standard__string__Text__to_cstring.definition
+			### standard__string__Text__to_f.definition
+			### standard__string__Text__to_hex.definition
+			### standard__string__Text__to_i.definition
+			### standard__string__Text__to_oct.definition
+			### standard__string__Text__to_percent_encoding.definition
+			### standard__string__Text__trim.definition
+			### standard__string__Text__unescape_nit.definition
+		## standard__numeric.concern
+			### standard__numeric__Text__to_n.definition
+		## standard__string_search.concern
+			### standard__string_search__Text__has.definition
+			### standard__string_search__Text__replace.definition
+			### standard__string_search__Text__search.definition
+			### standard__string_search__Text__search_all.definition
+			### standard__string_search__Text__search_from.definition
+			### standard__string_search__Text__search_in.definition
+				#### standard__string_search__Text__search_in.lin
+			### standard__string_search__Text__search_index_in.definition
+				#### standard__string_search__Text__search_index_in.lin
+			### standard__string_search__Text__search_last.definition
+			### standard__string_search__Text__search_last_up_to.definition
+			### standard__string_search__Text__split.definition
+			### standard__string_search__Text__split_once_on.definition
+			### standard__string_search__Text__split_with.definition
+		## standard__re.concern
+			### standard__re__Text__to_re.definition
+		## standard__stream.concern
+			### standard__stream__Text__write_to.definition
+				#### standard__stream__Text__write_to.lin
+		## standard__file.concern
+			### standard__file__Text__to_path.definition
+
+MPropertyPage SELFTYPE
+	# SELFTYPE.section
+		## standard__string__Text__SELFTYPE.intro
+		## standard__string__Text__SELFTYPE.concerns
+		## standard.concern
+		## standard.concern
+		## standard__string.concern
+			### standard__string__String__SELFTYPE.definition
+			### standard__string__Buffer__SELFTYPE.definition
+
+MPropertyPage []
+	# [].section
+		## standard__string__Text___91d_93d.intro
+		## standard__string__Text___91d_93d.concerns
+		## standard.concern
+		## standard.concern
+		## standard__string.concern
+			### standard__string__FlatString___91d_93d.definition
+			### standard__string__FlatBuffer___91d_93d.definition
+
+MPropertyPage a_to
+	# a_to.section
+		## standard__string__Text__a_to.intro
+
+MPropertyPage chars
+	# chars.section
+		## standard__string__Text__chars.intro
+		## standard__string__Text__chars.concerns
+		## standard.concern
+		## standard.concern
+		## standard__string.concern
+			### standard__string__FlatString__chars.definition
+			### standard__string__Buffer__chars.definition
+			### standard__string__FlatBuffer__chars.definition
+		## standard__ropes.concern
+			### standard__ropes__RopeBuffer__chars.definition
+
+MPropertyPage chomp
+	# chomp.section
+		## standard__string__Text__chomp.intro
+
+MPropertyPage copy_to_native
+	# copy_to_native.section
+		## standard__string__Text__copy_to_native.intro
+		## standard__string__Text__copy_to_native.concerns
+		## standard.concern
+		## standard.concern
+		## standard__string.concern
+			### standard__string__FlatText__copy_to_native.definition
+
+MPropertyPage empty
+	# empty.section
+		## standard__string__Text__empty.intro
+		## standard__string__Text__empty.concerns
+		## standard.concern
+		## standard.concern
+		## standard__string.concern
+			### standard__string__FlatString__empty.definition
+			### standard__string__FlatBuffer__empty.definition
+		## standard__ropes.concern
+			### standard__ropes__RopeBuffer__empty.definition
+
+MPropertyPage escape_more_to_c
+	# escape_more_to_c.section
+		## standard__string__Text__escape_more_to_c.intro
+
+MPropertyPage escape_to_c
+	# escape_to_c.section
+		## standard__string__Text__escape_to_c.intro
+
+MPropertyPage escape_to_dot
+	# escape_to_dot.section
+		## standard__string__Text__escape_to_dot.intro
+
+MPropertyPage escape_to_mk
+	# escape_to_mk.section
+		## standard__string__Text__escape_to_mk.intro
+
+MPropertyPage escape_to_nit
+	# escape_to_nit.section
+		## standard__string__Text__escape_to_nit.intro
+
+MPropertyPage escape_to_sh
+	# escape_to_sh.section
+		## standard__string__Text__escape_to_sh.intro
+
+MPropertyPage first
+	# first.section
+		## standard__string__Text__first.intro
+
+MPropertyPage format
+	# format.section
+		## standard__string__Text__format.intro
+
+MPropertyPage from_percent_encoding
+	# from_percent_encoding.section
+		## standard__string__Text__from_percent_encoding.intro
+
+MPropertyPage has
+	# has.section
+		## standard__string__Text__has.intro
+
+MPropertyPage has_prefix
+	# has_prefix.section
+		## standard__string__Text__has_prefix.intro
+
+MPropertyPage has_substring
+	# has_substring.section
+		## standard__string__Text__has_substring.intro
+
+MPropertyPage has_suffix
+	# has_suffix.section
+		## standard__string__Text__has_suffix.intro
+
+MPropertyPage html_escape
+	# html_escape.section
+		## standard__string__Text__html_escape.intro
+
+MPropertyPage index_of
+	# index_of.section
+		## standard__string__Text__index_of.intro
+
+MPropertyPage index_of_from
+	# index_of_from.section
+		## standard__string__Text__index_of_from.intro
+
+MPropertyPage is_empty
+	# is_empty.section
+		## standard__string__Text__is_empty.intro
+
+MPropertyPage is_hex
+	# is_hex.section
+		## standard__string__Text__is_hex.intro
+
+MPropertyPage is_lower
+	# is_lower.section
+		## standard__string__Text__is_lower.intro
+
+MPropertyPage is_numeric
+	# is_numeric.section
+		## standard__string__Text__is_numeric.intro
+
+MPropertyPage is_upper
+	# is_upper.section
+		## standard__string__Text__is_upper.intro
+
+MPropertyPage is_whitespace
+	# is_whitespace.section
+		## standard__string__Text__is_whitespace.intro
+
+MPropertyPage iterator
+	# iterator.section
+		## standard__string__Text__iterator.intro
+
+MPropertyPage justify
+	# justify.section
+		## standard__string__Text__justify.intro
+
+MPropertyPage l_trim
+	# l_trim.section
+		## standard__string__Text__l_trim.intro
+
+MPropertyPage last
+	# last.section
+		## standard__string__Text__last.intro
+
+MPropertyPage last_index_of
+	# last_index_of.section
+		## standard__string__Text__last_index_of.intro
+
+MPropertyPage last_index_of_from
+	# last_index_of_from.section
+		## standard__string__Text__last_index_of_from.intro
+
+MPropertyPage length
+	# length.section
+		## standard__string__Text__length.intro
+		## standard__string__Text__length.concerns
+		## standard.concern
+		## standard.concern
+		## standard__string.concern
+			### standard__string__FlatText__length.definition
+		## standard__ropes.concern
+			### standard__ropes__RopeBuffer__length.definition
+
+MPropertyPage r_trim
+	# r_trim.section
+		## standard__string__Text__r_trim.intro
+
+MPropertyPage replace
+	# replace.section
+		## standard__string__Text__replace.intro
+
+MPropertyPage search
+	# search.section
+		## standard__string__Text__search.intro
+
+MPropertyPage search_all
+	# search_all.section
+		## standard__string__Text__search_all.intro
+
+MPropertyPage search_from
+	# search_from.section
+		## standard__string__Text__search_from.intro
+
+MPropertyPage search_last
+	# search_last.section
+		## standard__string__Text__search_last.intro
+
+MPropertyPage search_last_up_to
+	# search_last_up_to.section
+		## standard__string__Text__search_last_up_to.intro
+
+MPropertyPage split
+	# split.section
+		## standard__string__Text__split.intro
+
+MPropertyPage split_once_on
+	# split_once_on.section
+		## standard__string__Text__split_once_on.intro
+
+MPropertyPage split_with
+	# split_with.section
+		## standard__string__Text__split_with.intro
+
+MPropertyPage substring
+	# substring.section
+		## standard__string__Text__substring.intro
+		## standard__string__Text__substring.concerns
+		## standard.concern
+		## standard.concern
+		## standard__string.concern
+			### standard__string__FlatString__substring.definition
+			### standard__string__FlatBuffer__substring.definition
+		## standard__ropes.concern
+			### standard__ropes__RopeBuffer__substring.definition
+
+MPropertyPage substring_from
+	# substring_from.section
+		## standard__string__Text__substring_from.intro
+
+MPropertyPage substrings
+	# substrings.section
+		## standard__string__Text__substrings.intro
+		## standard__string__Text__substrings.concerns
+		## standard.concern
+		## standard.concern
+		## standard__string.concern
+			### standard__string__String__substrings.definition
+			### standard__string__FlatString__substrings.definition
+			### standard__string__FlatBuffer__substrings.definition
+		## standard__ropes.concern
+			### standard__ropes__RopeBuffer__substrings.definition
+
+MPropertyPage to_a
+	# to_a.section
+		## standard__string__Text__to_a.intro
+
+MPropertyPage to_bin
+	# to_bin.section
+		## standard__string__Text__to_bin.intro
+
+MPropertyPage to_cmangle
+	# to_cmangle.section
+		## standard__string__Text__to_cmangle.intro
+
+MPropertyPage to_cstring
+	# to_cstring.section
+		## standard__string__Text__to_cstring.intro
+		## standard__string__Text__to_cstring.concerns
+		## standard.concern
+		## standard.concern
+		## standard__string.concern
+			### standard__string__FlatString__to_cstring.definition
+			### standard__string__FlatBuffer__to_cstring.definition
+
+MPropertyPage to_f
+	# to_f.section
+		## standard__string__Text__to_f.intro
+
+MPropertyPage to_hex
+	# to_hex.section
+		## standard__string__Text__to_hex.intro
+
+MPropertyPage to_i
+	# to_i.section
+		## standard__string__Text__to_i.intro
+
+MPropertyPage to_n
+	# to_n.section
+		## standard__string__Text__to_n.intro
+
+MPropertyPage to_oct
+	# to_oct.section
+		## standard__string__Text__to_oct.intro
+
+MPropertyPage to_path
+	# to_path.section
+		## standard__string__Text__to_path.intro
+
+MPropertyPage to_percent_encoding
+	# to_percent_encoding.section
+		## standard__string__Text__to_percent_encoding.intro
+
+MPropertyPage to_re
+	# to_re.section
+		## standard__string__Text__to_re.intro
+
+MPropertyPage trim
+	# trim.section
+		## standard__string__Text__trim.intro
+
+MPropertyPage unescape_nit
+	# unescape_nit.section
+		## standard__string__Text__unescape_nit.intro
+
+MModulePage string_search
+	# string_search.section
+		## standard__string_search.intro
+		## standard__string_search.importation
+			### standard__string_search.graph
+			### list.group
+				#### standard__string_search.imports
+				#### standard__string_search.clients
+		## standard__string_search.concerns
+		## standard.concern
+		## standard.concern
+		## standard__string_search.concern
+			### standard__string_search__BM_Pattern.definition-list
+				#### standard__string_search__BM_Pattern.definition
+					##### standard__string_search__BM_Pattern.intros_redefs
+						###### list.group
+							####### standard__string_search__BM_Pattern.intros
+							####### standard__string_search__BM_Pattern.redefs
+			### standard__string_search__Match.definition-list
+				#### standard__string_search__Match.definition
+					##### standard__string_search__Match.intros_redefs
+						###### list.group
+							####### standard__string_search__Match.intros
+							####### standard__string_search__Match.redefs
+			### standard__string_search__Pattern.definition-list
+				#### standard__string_search__Pattern.definition
+					##### standard__string_search__Pattern.intros_redefs
+						###### list.group
+							####### standard__string_search__Pattern.intros
+							####### standard__string_search__Pattern.redefs
+		## standard__kernel.concern
+			### standard__kernel__Char.definition-list
+				#### standard__kernel__Char.definition
+				#### standard__string_search__Char.definition
+					##### standard__string_search__Char.intros_redefs
+						###### list.group
+							####### standard__string_search__Char.intros
+							####### standard__string_search__Char.redefs
+		## standard__string.concern
+			### standard__string__Text.definition-list
+				#### standard__string__Text.definition
+				#### standard__string_search__Text.definition
+					##### standard__string_search__Text.intros_redefs
+						###### list.group
+							####### standard__string_search__Text.intros
+							####### standard__string_search__Text.redefs
+
+CodePage string_search
+	# standard__string_search.code
+
+MClassPage BM_Pattern
+	# BM_Pattern.section
+		## standard__string_search__BM_Pattern.intro
+		## standard__string_search__BM_Pattern.inheritance
+			### standard__string_search__BM_Pattern.graph
+			### list.group
+				#### standard__string_search__BM_Pattern.parents
+				#### standard__string_search__BM_Pattern.ancestors
+				#### standard__string_search__BM_Pattern.children
+				#### standard__string_search__BM_Pattern.descendants
+		## standard__string_search__BM_Pattern.constructors
+			### standard__string_search__BM_Pattern__init.definition
+				#### standard__string_search__BM_Pattern__init.lin
+		## standard__string_search__BM_Pattern.concerns
+		## standard.concern
+		## standard.concern
+		## standard__string_search.concern
+			### standard__string_search__BM_Pattern__SELF.definition
+				#### standard__string_search__BM_Pattern__SELF.lin
+			### standard__string_search__BM_Pattern___61d_61d.definition
+				#### standard__string_search__BM_Pattern___61d_61d.lin
+			### standard__string_search__BM_Pattern__hash.definition
+				#### standard__string_search__BM_Pattern__hash.lin
+			### standard__string_search__BM_Pattern__search_in.definition
+				#### standard__string_search__BM_Pattern__search_in.lin
+			### standard__string_search__BM_Pattern__search_index_in.definition
+				#### standard__string_search__BM_Pattern__search_index_in.lin
+			### standard__string_search__BM_Pattern__to_s.definition
+				#### standard__string_search__BM_Pattern__to_s.lin
+
+MClassPage Match
+	# Match.section
+		## standard__string_search__Match.intro
+		## standard__string_search__Match.inheritance
+			### standard__string_search__Match.graph
+			### list.group
+				#### standard__string_search__Match.parents
+				#### standard__string_search__Match.ancestors
+				#### standard__string_search__Match.children
+				#### standard__string_search__Match.descendants
+		## standard__string_search__Match.constructors
+			### standard__string_search__Match__init.definition
+				#### standard__string_search__Match__init.lin
+		## standard__string_search__Match.concerns
+		## standard.concern
+		## standard.concern
+		## standard__string_search.concern
+			### standard__string_search__Match__SELF.definition
+				#### standard__string_search__Match__SELF.lin
+			### standard__string_search__Match__after.definition
+			### standard__string_search__Match__from.definition
+			### standard__string_search__Match__length.definition
+			### standard__string_search__Match__string.definition
+			### standard__string_search__Match__to_s.definition
+				#### standard__string_search__Match__to_s.lin
+		## standard__re.concern
+			### standard__re__Match___91d_93d.definition
+			### standard__re__Match__subs.definition
+
+MPropertyPage []
+	# [].section
+		## standard__string_search__Match___91d_93d.intro
+
+MPropertyPage after
+	# after.section
+		## standard__string_search__Match__after.intro
+
+MPropertyPage from
+	# from.section
+		## standard__string_search__Match__from.intro
+
+MPropertyPage length
+	# length.section
+		## standard__string_search__Match__length.intro
+
+MPropertyPage string
+	# string.section
+		## standard__string_search__Match__string.intro
+
+MPropertyPage subs
+	# subs.section
+		## standard__string_search__Match__subs.intro
+
+MClassPage Pattern
+	# Pattern.section
+		## standard__string_search__Pattern.intro
+		## standard__string_search__Pattern.inheritance
+			### standard__string_search__Pattern.graph
+			### list.group
+				#### standard__string_search__Pattern.parents
+				#### standard__string_search__Pattern.ancestors
+				#### standard__string_search__Pattern.children
+				#### standard__string_search__Pattern.descendants
+		## standard__string_search__Pattern.constructors
+		## standard__string_search__Pattern.concerns
+		## standard.concern
+		## standard.concern
+		## standard__string_search.concern
+			### standard__string_search__Pattern__SELF.definition
+				#### standard__string_search__Pattern__SELF.lin
+			### standard__string_search__Pattern__is_in.definition
+			### standard__string_search__Pattern__search_all_in.definition
+			### standard__string_search__Pattern__search_in.definition
+			### standard__string_search__Pattern__search_index_in.definition
+			### standard__string_search__Pattern__split_in.definition
+
+MPropertyPage is_in
+	# is_in.section
+		## standard__string_search__Pattern__is_in.intro
+		## standard__string_search__Pattern__is_in.concerns
+		## standard.concern
+		## standard.concern
+		## standard__re.concern
+			### standard__re__Regex__is_in.definition
+
+MPropertyPage search_all_in
+	# search_all_in.section
+		## standard__string_search__Pattern__search_all_in.intro
+		## standard__string_search__Pattern__search_all_in.concerns
+		## standard.concern
+		## standard.concern
+		## standard__re.concern
+			### standard__re__Regex__search_all_in.definition
+
+MPropertyPage search_in
+	# search_in.section
+		## standard__string_search__Pattern__search_in.intro
+		## standard__string_search__Pattern__search_in.concerns
+		## standard.concern
+		## standard.concern
+		## standard__string_search.concern
+			### standard__string_search__BM_Pattern__search_in.definition
+			### standard__string_search__Char__search_in.definition
+			### standard__string_search__Text__search_in.definition
+		## standard__re.concern
+			### standard__re__Regex__search_in.definition
+
+MPropertyPage search_index_in
+	# search_index_in.section
+		## standard__string_search__Pattern__search_index_in.intro
+		## standard__string_search__Pattern__search_index_in.concerns
+		## standard.concern
+		## standard.concern
+		## standard__string_search.concern
+			### standard__string_search__BM_Pattern__search_index_in.definition
+			### standard__string_search__Char__search_index_in.definition
+			### standard__string_search__Text__search_index_in.definition
+		## standard__re.concern
+			### standard__re__Regex__search_index_in.definition
+
+MPropertyPage split_in
+	# split_in.section
+		## standard__string_search__Pattern__split_in.intro
+
+MModulePage time
+	# time.section
+		## standard__time.intro
+		## standard__time.importation
+			### standard__time.graph
+			### list.group
+				#### standard__time.imports
+				#### standard__time.clients
+		## standard__time.concerns
+		## standard.concern
+		## standard.concern
+		## standard__time.concern
+			### standard__time__ISODate.definition-list
+				#### standard__time__ISODate.definition
+					##### standard__time__ISODate.intros_redefs
+						###### list.group
+							####### standard__time__ISODate.intros
+							####### standard__time__ISODate.redefs
+			### standard__time__TimeT.definition-list
+				#### standard__time__TimeT.definition
+					##### standard__time__TimeT.intros_redefs
+						###### list.group
+							####### standard__time__TimeT.intros
+							####### standard__time__TimeT.redefs
+			### standard__time__Tm.definition-list
+				#### standard__time__Tm.definition
+					##### standard__time__Tm.intros_redefs
+						###### list.group
+							####### standard__time__Tm.intros
+							####### standard__time__Tm.redefs
+		## standard__kernel.concern
+			### standard__kernel__Object.definition-list
+				#### standard__kernel__Object.definition
+				#### standard__time__Object.definition
+					##### standard__time__Object.intros_redefs
+						###### list.group
+							####### standard__time__Object.intros
+							####### standard__time__Object.redefs
+			### standard__kernel__Sys.definition-list
+				#### standard__kernel__Sys.definition
+				#### standard__time__Sys.definition
+					##### standard__time__Sys.intros_redefs
+						###### list.group
+							####### standard__time__Sys.intros
+							####### standard__time__Sys.redefs
+
+CodePage time
+	# standard__time.code
+
+MClassPage ISODate
+	# ISODate.section
+		## standard__time__ISODate.intro
+		## standard__time__ISODate.inheritance
+			### standard__time__ISODate.graph
+			### list.group
+				#### standard__time__ISODate.parents
+				#### standard__time__ISODate.ancestors
+				#### standard__time__ISODate.children
+				#### standard__time__ISODate.descendants
+		## standard__time__ISODate.constructors
+			### standard__time__ISODate__init.definition
+				#### standard__time__ISODate__init.lin
+			### standard__time__ISODate__from_string.definition
+		## standard__time__ISODate.concerns
+		## standard.concern
+		## standard.concern
+		## standard__time.concern
+			### standard__time__ISODate__OTHER.definition
+				#### standard__time__ISODate__OTHER.lin
+			### standard__time__ISODate__SELF.definition
+				#### standard__time__ISODate__SELF.lin
+			### standard__time__ISODate___60d.definition
+				#### standard__time__ISODate___60d.lin
+			### standard__time__ISODate__day.definition
+			### standard__time__ISODate__hours.definition
+			### standard__time__ISODate__minutes.definition
+			### standard__time__ISODate__month.definition
+			### standard__time__ISODate__seconds.definition
+			### standard__time__ISODate__timezone.definition
+			### standard__time__ISODate__to_s.definition
+				#### standard__time__ISODate__to_s.lin
+			### standard__time__ISODate__year.definition
+
+MPropertyPage day
+	# day.section
+		## standard__time__ISODate__day.intro
+
+MPropertyPage from_string
+	# from_string.section
+		## standard__time__ISODate__from_string.intro
+
+MPropertyPage hours
+	# hours.section
+		## standard__time__ISODate__hours.intro
+
+MPropertyPage minutes
+	# minutes.section
+		## standard__time__ISODate__minutes.intro
+
+MPropertyPage month
+	# month.section
+		## standard__time__ISODate__month.intro
+
+MPropertyPage seconds
+	# seconds.section
+		## standard__time__ISODate__seconds.intro
+
+MPropertyPage timezone
+	# timezone.section
+		## standard__time__ISODate__timezone.intro
+
+MPropertyPage year
+	# year.section
+		## standard__time__ISODate__year.intro
+
+MClassPage TimeT
+	# TimeT.section
+		## standard__time__TimeT.intro
+		## standard__time__TimeT.inheritance
+			### standard__time__TimeT.graph
+			### list.group
+				#### standard__time__TimeT.parents
+				#### standard__time__TimeT.ancestors
+				#### standard__time__TimeT.children
+				#### standard__time__TimeT.descendants
+		## standard__time__TimeT.constructors
+			### standard__time__TimeT__from_i.definition
+			### standard__time__TimeT__new.definition
+		## standard__time__TimeT.concerns
+		## standard.concern
+		## standard.concern
+		## standard__time.concern
+			### standard__time__TimeT__SELF.definition
+				#### standard__time__TimeT__SELF.lin
+			### standard__time__TimeT__ctime.definition
+			### standard__time__TimeT__difftime.definition
+			### standard__time__TimeT__to_i.definition
+			### standard__time__TimeT__to_s.definition
+				#### standard__time__TimeT__to_s.lin
+			### standard__time__TimeT__update.definition
+
+MPropertyPage ctime
+	# ctime.section
+		## standard__time__TimeT__ctime.intro
+
+MPropertyPage difftime
+	# difftime.section
+		## standard__time__TimeT__difftime.intro
+
+MPropertyPage from_i
+	# from_i.section
+		## standard__time__TimeT__from_i.intro
+
+MPropertyPage new
+	# new.section
+		## standard__time__TimeT__new.intro
+
+MPropertyPage to_i
+	# to_i.section
+		## standard__time__TimeT__to_i.intro
+
+MPropertyPage update
+	# update.section
+		## standard__time__TimeT__update.intro
+
+MClassPage Tm
+	# Tm.section
+		## standard__time__Tm.intro
+		## standard__time__Tm.inheritance
+			### standard__time__Tm.graph
+			### list.group
+				#### standard__time__Tm.parents
+				#### standard__time__Tm.ancestors
+				#### standard__time__Tm.children
+				#### standard__time__Tm.descendants
+		## standard__time__Tm.constructors
+			### standard__time__Tm__gmtime.definition
+			### standard__time__Tm__gmtime_from_timet.definition
+			### standard__time__Tm__localtime.definition
+			### standard__time__Tm__localtime_from_timet.definition
+		## standard__time__Tm.concerns
+		## standard.concern
+		## standard.concern
+		## standard__time.concern
+			### standard__time__Tm__SELF.definition
+				#### standard__time__Tm__SELF.lin
+			### standard__time__Tm__asctime.definition
+			### standard__time__Tm__hour.definition
+			### standard__time__Tm__is_dst.definition
+			### standard__time__Tm__mday.definition
+			### standard__time__Tm__min.definition
+			### standard__time__Tm__mon.definition
+			### standard__time__Tm__sec.definition
+			### standard__time__Tm__strftime.definition
+			### standard__time__Tm__to_s.definition
+				#### standard__time__Tm__to_s.lin
+			### standard__time__Tm__to_timet.definition
+			### standard__time__Tm__wday.definition
+			### standard__time__Tm__yday.definition
+			### standard__time__Tm__year.definition
+
+MPropertyPage asctime
+	# asctime.section
+		## standard__time__Tm__asctime.intro
+
+MPropertyPage gmtime
+	# gmtime.section
+		## standard__time__Tm__gmtime.intro
+
+MPropertyPage gmtime_from_timet
+	# gmtime_from_timet.section
+		## standard__time__Tm__gmtime_from_timet.intro
+
+MPropertyPage hour
+	# hour.section
+		## standard__time__Tm__hour.intro
+
+MPropertyPage is_dst
+	# is_dst.section
+		## standard__time__Tm__is_dst.intro
+
+MPropertyPage localtime
+	# localtime.section
+		## standard__time__Tm__localtime.intro
+
+MPropertyPage localtime_from_timet
+	# localtime_from_timet.section
+		## standard__time__Tm__localtime_from_timet.intro
+
+MPropertyPage mday
+	# mday.section
+		## standard__time__Tm__mday.intro
+
+MPropertyPage min
+	# min.section
+		## standard__time__Tm__min.intro
+
+MPropertyPage mon
+	# mon.section
+		## standard__time__Tm__mon.intro
+
+MPropertyPage sec
+	# sec.section
+		## standard__time__Tm__sec.intro
+
+MPropertyPage strftime
+	# strftime.section
+		## standard__time__Tm__strftime.intro
+
+MPropertyPage to_timet
+	# to_timet.section
+		## standard__time__Tm__to_timet.intro
+
+MPropertyPage wday
+	# wday.section
+		## standard__time__Tm__wday.intro
+
+MPropertyPage yday
+	# yday.section
+		## standard__time__Tm__yday.intro
+
+MPropertyPage year
+	# year.section
+		## standard__time__Tm__year.intro
+
+Generated 770 pages
+ list:
+  MPropertyPage: 614 (79.74%)
+  MClassPage: 98 (12.72%)
+  CodePage: 27 (3.50%)
+  MModulePage: 27 (3.50%)
+  MGroupPage: 2 (0.25%)
+  SearchPage: 1 (0.12%)
+  OverviewPage: 1 (0.12%)
+Found 2073 mentities
+ list:
+  MMethodDef: 1060 (51.13%)
+  MMethod: 610 (29.42%)
+  MClassDef: 155 (7.47%)
+  MVirtualTypeDef: 116 (5.59%)
+  MClass: 98 (4.72%)
+  MModule: 27 (1.30%)
+  MVirtualTypeProp: 4 (0.19%)
+  MGroup: 2 (0.09%)
+  MProject: 1 (0.04%)
+quicksearch-list.js
