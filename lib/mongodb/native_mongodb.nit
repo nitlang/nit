@@ -103,11 +103,35 @@ extern class BSONError `{ bson_error_t * `}
 	fun message: NativeString `{ return self->message; `}
 end
 
+# Wrapper for `bson_oid_t`.
+#
+# The `bson_oid_t` structure contains the 12-byte ObjectId notation defined by the
+# [BSON ObjectID specificiation](http://docs.mongodb.org/manual/reference/object-id/).
+#
+# ObjectId is a 12-byte BSON type, constructed using:
+# * a 4-byte value representing the seconds since the Unix epoch (in Big Endian)
+# * a 3-byte machine identifier
+# * a 2-byte process id (Big Endian), and
+# * a 3-byte counter (Big Endian), starting with a random value.
+extern class BSONObjectId `{ bson_oid_t * `}
+	# Object id.
+	fun id: String import NativeString.to_s_with_copy `{
+		char str[25];
+		bson_oid_to_string(self, str);
+		return NativeString_to_s_with_copy(str);
+	`}
+end
+
 redef class Sys
 	# Last error raised by `monogdb::MongoClient`.
 	#
 	# See `MongoClient::last_error`.
 	var last_mongoc_error: nullable BSONError = null
+
+	# Last auto generated id if any.
+	#
+	# See `MongoCollection::insert`.
+	var last_mongoc_id: nullable BSONObjectId = null is writable
 end
 
 # Wrapper for `char**`.
@@ -287,10 +311,16 @@ extern class NativeMongoCollection `{ mongoc_collection_t * `}
 	# If no `_id` element is found in document, then a `bson_oid_t` will be
 	# generated locally and added to the document.
 	#
-	# You can retrieve a generated `_id` from `mongoc_collection_get_last_error()`.
-	fun insert(doc: NativeBSON): Bool import set_mongoc_error `{
+	# You can retrieve a generated `_id` from `sys.last_mongoc_id`.
+	fun insert(document: NativeBSON): Bool import set_mongoc_error, set_mongoc_last_id `{
+		bson_oid_t oid;
+		if(!bson_has_field(document, "_id")) {
+			bson_oid_init (&oid, NULL);
+			BSON_APPEND_OID (document, "_id", &oid);
+			NativeMongoCollection_set_mongoc_last_id(self, &oid);
+		}
 		bson_error_t error;
-		if(!mongoc_collection_insert(self, MONGOC_INSERT_NONE, doc, NULL, &error)) {
+		if(!mongoc_collection_insert(self, MONGOC_INSERT_NONE, document, NULL, &error)) {
 			NativeMongoCollection_set_mongoc_error(self, &error);
 			return false;
 		}
@@ -302,7 +332,15 @@ extern class NativeMongoCollection `{ mongoc_collection_t * `}
 	# This function shall save a document into the collection.
 	# If the document has an `_id` field it will be updated.
 	# Otherwise it will be inserted.
-	fun save(document: NativeBSON): Bool import set_mongoc_error `{
+	#
+	# You can retrieve a generated `_id` from `sys.last_mongoc_id`.
+	fun save(document: NativeBSON): Bool import set_mongoc_error, set_mongoc_last_id `{
+		bson_oid_t oid;
+		if(!bson_has_field(document, "_id")) {
+			bson_oid_init (&oid, NULL);
+			BSON_APPEND_OID (document, "_id", &oid);
+			NativeMongoCollection_set_mongoc_last_id(self, &oid);
+		}
 		bson_error_t error;
 		if(!mongoc_collection_save(self, document, NULL, &error)) {
 			NativeMongoCollection_set_mongoc_error(self, &error);
@@ -442,6 +480,9 @@ extern class NativeMongoCollection `{ mongoc_collection_t * `}
 	#
 	# This instance should not be used beyond this point!
 	fun destroy `{ mongoc_collection_destroy(self); `}
+
+	# Utility method to set `Sys.last_mongoc_last_id`.
+	fun set_mongoc_last_id(id: BSONObjectId) do sys.last_mongoc_id = id
 
 	# Utility method to set `Sys.last_mongoc_error`.
 	fun set_mongoc_error(err: BSONError) do sys.last_mongoc_error = err
