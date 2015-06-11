@@ -69,6 +69,7 @@ private class ParallelizationPhase
 
 		# create a return type
 		var n_id = new TClassid
+		n_id.location = nmethdef.location
 		n_id.text = classname
 		var n_qid = new AQclassid
 		n_qid.n_id = n_id
