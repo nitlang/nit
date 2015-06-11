@@ -559,16 +559,15 @@ end
 redef class GraphArticle
 	redef var html_title = null
 
-	# HTML map used to display link.
+	# Graph in SVG with clickable map.
 	#
 	# This attribute is set by the `doc_render` phase who knows the context.
-	var map: String is noinit, writable
+	var svg: nullable String = null is writable
 
 	redef fun render_body do
 		addn "<div class=\"text-center\">"
-		addn " <img src='{graph_id}.png' usemap='#{graph_id}' style='margin:auto'"
-		addn "  alt='{title or else ""}'/>"
-		add map
+		var svg = self.svg
+		if svg != null then add svg
 		addn "</div>"
 	end
 end
