@@ -108,6 +108,11 @@ See niunit(1) for details.
 `--piwik-site-id`
 :   Piwik site ID
 
+## TESTING
+
+`--test`
+:   Only print the pages structure. Nothing is generated.
+
 # SEE ALSO
 
 The Nit language documentation and the source code of its tools and libraries may be downloaded from <http://nitlanguage.org>
