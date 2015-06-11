@@ -36,7 +36,7 @@ function die()
 
 function usage()
 {
-	echo "bench_nitdoc [options]* benchname"
+	echo "bench_nitdoc [options]* git-ref"
 	echo "  -v: verbose mode"
 	echo "  -n count: number of execution for each bar (default: $count)"
 	echo "  --dry: Do not run the commands, just reuse the data and generate the graph"
@@ -54,9 +54,9 @@ while [ "$stop" = false ]; do
 	esac
 done
 
-NOTSKIPED="$*"
+REF="$*"
 
-if test -z "$NOTSKIPED"; then
+if test -z "$REF"; then
 	usage
 fi
 
@@ -73,7 +73,7 @@ function bench_nitdoc()
 	tests=(../tests/test_prog ../lib/standard/kernel.nit ../lib/standard)
 	mkdir -p $basedir
 
-	prepare_res $basedir/orig.dat "origin/master" "nitdoc.orig"
+	prepare_res $basedir/orig.dat $REF "nitdoc.orig"
 	for path in ${tests[@]}; do
 		run_gen $basedir ./nitdoc.orig $path
 	done
