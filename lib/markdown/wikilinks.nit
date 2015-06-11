@@ -88,7 +88,6 @@ class TokenWikiLink
 		pos += 1
 		pos = md.skip_spaces(pos)
 		if pos < start then return -1
-		pos += 1
 		return pos
 	end
 end

@@ -211,14 +211,23 @@ redef class WikiArticle
 	fun tpl_article: TplArticle do
 		var article = new TplArticle
 		article.body = content
-		article.breadcrumbs = new TplBreadcrumbs(self)
-		tpl_sidebar.blocks.add tpl_summary
+		if wiki.config.auto_breadcrumbs then
+			article.breadcrumbs = new TplBreadcrumbs(self)
+		end
 		article.sidebar = tpl_sidebar
+		article.sidebar_pos = wiki.config.sidebar
 		return article
 	end
 
 	# Sidebar for this page.
-	var tpl_sidebar = new TplSidebar
+	var tpl_sidebar: TplSidebar is lazy do
+		var res = new TplSidebar
+		if wiki.config.auto_summary then
+			res.blocks.add tpl_summary
+		end
+		res.blocks.add_all sidebar.blocks
+		return res
+	end
 
 	# Generate the HTML summary for this article.
 	#
@@ -284,6 +293,14 @@ redef class WikiArticle
 		if tpl.has_macro("GEN_TIME") then
 			tpl.replace("GEN_TIME", time.to_s)
 		end
+		if tpl.has_macro("LAST_CHANGES") then
+			var url = "{wiki.config.last_changes}{src_path or else ""}"
+			tpl.replace("LAST_CHANGES", url)
+		end
+		if tpl.has_macro("EDIT") then
+			var url = "{wiki.config.edit}{src_path or else ""}"
+			tpl.replace("EDIT", url)
+		end
 		return tpl
 	end
 end
@@ -327,6 +344,11 @@ class TplArticle
 	# Sidebar of this article (if any).
 	var sidebar: nullable TplSidebar = null
 
+	# Position of the sidebar.
+	#
+	# See `WikiConfig::sidebar`.
+	var sidebar_pos: String = "left"
+
 	# Breadcrumbs from wiki root to this article.
 	var breadcrumbs: nullable TplBreadcrumbs = null
 
@@ -336,13 +358,11 @@ class TplArticle
 	end
 
 	redef fun rendering do
-		if sidebar != null then
-			add "<div class=\"col-sm-3 sidebar\">"
-			add sidebar.as(not null)
-			add "</div>"
-			add "<div class=\"col-sm-9 content\">"
-		else
+		if sidebar_pos == "left" then render_sidebar
+		if sidebar == null then
 			add "<div class=\"col-sm-12 content\">"
+		else
+			add "<div class=\"col-sm-9 content\">"
 		end
 		if body != null then
 			add "<article>"
@@ -358,6 +378,14 @@ class TplArticle
 			add " </article>"
 		end
 		add "</div>"
+		if sidebar_pos == "right" then render_sidebar
+	end
+
+	private fun render_sidebar do
+		if sidebar == null then return
+		add "<div class=\"col-sm-3 sidebar\">"
+		add sidebar.as(not null)
+		add "</div>"
 	end
 end
 
@@ -370,9 +398,9 @@ class TplSidebar
 
 	redef fun rendering do
 		for block in blocks do
-			add "<div class=\"sideblock\">"
+			add "<nav class=\"sideblock\">"
 			add block
-			add "</div>"
+			add "</nav>"
 		end
 	end
 end
