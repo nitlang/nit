@@ -531,8 +531,6 @@ class MongoCollection
 	# var query = new JsonObject
 	# query["foo"] = 10
 	# var doc = col.find(query)
-	# print doc or else "nullllllllllllllllll"
-	# print doc.to_json
 	# assert doc["foo"] == 10
 	# ~~~
 	fun find(query: JsonObject): nullable JsonObject do
