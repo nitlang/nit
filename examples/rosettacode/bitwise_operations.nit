@@ -6,7 +6,6 @@
 # Task: Bitwise operations
 # SEE: <http://rosettacode.org/wiki/Bitwise_operations>
 # Without logical right shift
-
 module bitwise_operations
 
 fun bitwise(a, b: Int)
@@ -22,5 +21,5 @@ end
 if args.length >= 2 then
 	bitwise(args[0].to_i, args[1].to_i)
 else
-	print "Usage ./bitwise_operations X X"
+	print "Usage : ./bitwise_operations X X"
 end
