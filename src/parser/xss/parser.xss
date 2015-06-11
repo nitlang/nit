@@ -20,11 +20,11 @@ $ template make_parser()
 redef class Parser
 	redef fun build_reduce_table
 	do
-		_reduce_table = new Array[ReduceAction].with_items(
+		var reduce_table = new Array[ReduceAction].with_capacity(${count(rules/rule)})
+		self.reduce_table = reduce_table
 $ foreach {rules/rule}
-			new ReduceAction@index(@leftside)[-sep ','-]
+		reduce_table.add new ReduceAction@index(@leftside)
 $ end foreach
-		)
 	end
 end
 
