@@ -82,7 +82,7 @@ redef class MType
 	#
 	#   type Object is_primitive? false
 	#   type Pointer is_primitive? true
-	fun is_cprimitive: Bool is abstract
+	fun is_cprimitive: Bool do return false
 end
 
 redef class MClassType
@@ -127,7 +127,6 @@ end
 redef class MNullableType
 	redef fun cname do return mangled_cname
 	redef fun mangled_cname do return "nullable_{mtype.mangled_cname}"
-	redef fun is_cprimitive do return false
 end
 
 redef class MVirtualType
