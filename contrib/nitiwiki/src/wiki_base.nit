@@ -550,8 +550,10 @@ class WikiArticle
 	redef var src_full_path: nullable String = null
 
 	redef fun src_path do
+		var src_full_path = self.src_full_path
 		if src_full_path == null then return null
-		return src_full_path.substring_from(wiki.config.root_dir.length)
+		var res = wiki.config.root_dir.relpath(src_full_path)
+		return res
 	end
 
 	# The page markdown source content.
