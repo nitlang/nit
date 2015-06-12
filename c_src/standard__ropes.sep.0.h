@@ -1,78 +1,122 @@
 #include "nit.common.h"
-#define COLOR_standard__ropes__RopeString___64dchars_60dis_cached_62d 2
-#define COLOR_standard__ropes__RopeString___64dchars_60dcache_62d 1
-val* standard__ropes___standard__ropes__RopeString___chars_60dreal_62d(val* self);
+#define COLOR_standard__ropes__RopeString___chars 1
+extern const char FILE_standard__ropes[];
 val* NEW_standard__ropes__RopeChars(const struct type* type);
 extern const struct type type_standard__ropes__RopeChars;
-#define COLOR_standard__string__StringCharView__target_61d 55
-#define COLOR_standard__kernel__Object__init 7
+#define COLOR_standard__string__StringCharView__target_61d 16
+#define COLOR_standard__kernel__Object__init 0
 #define COLOR_standard__ropes__Concat___length 3
 val* NEW_standard__ropes__RopeSubstrings(const struct type* type);
 extern const struct type type_standard__ropes__RopeSubstrings;
 void standard__ropes___standard__ropes__RopeSubstrings___init(val* self, val* p0);
 val* standard___standard__NativeString___to_s_with_length(char* self, long p0);
-#define COLOR_standard__ropes__Concat___64dto_cstring_60dis_cached_62d 7
-#define COLOR_standard__ropes__Concat___64dto_cstring_60dcache_62d 6
-char* standard__ropes___standard__ropes__Concat___to_cstring_60dreal_62d(val* self);
-val* BOX_standard__NativeString(void*);
-#define COLOR_standard__ropes__Concat___left 4
-extern const char FILE_standard__ropes[];
-#define COLOR_standard__ropes__Concat___right 5
-#define COLOR_standard__ropes___standard__ropes__Concat___standard__kernel__Object__init 106
-#define COLOR_standard__string__Text__length 47
+#define COLOR_standard__ropes__Concat__lazy_32d_to_cstring 5
+#define COLOR_standard__ropes__Concat___to_cstring 4
 extern const struct type type_standard__Int;
 extern const char FILE_standard__kernel[];
-#define COLOR_standard__string__String___43d 82
-long standard___standard__Int___Discrete__successor(long self, long p0);
-#define COLOR_standard__string__Text___91d_93d 52
-#define COLOR_standard__string__Text__substring 48
-val* standard___standard__Text___substring_from(val* self, long p0);
-val* NEW_standard__ropes__Concat(const struct type* type);
-extern const struct type type_standard__ropes__Concat;
-#define COLOR_standard__string__String__to_upper 84
-#define COLOR_standard__ropes__Concat__left_61d 102
-#define COLOR_standard__ropes__Concat__right_61d 104
-#define COLOR_standard__string__String__to_lower 85
-#define COLOR_standard__string__Object__to_s 9
-long standard__ropes___Object___maxlen(val* self);
 val* standard__ropes___standard__ropes__Concat___standard__string__Text__substrings(val* self);
-val* standard___standard__Iterator___iterator(val* self);
-#define COLOR_standard__abstract_collection__Iterator__is_ok 34
-#define COLOR_standard__abstract_collection__Iterator__item 32
+#define COLOR_standard__abstract_collection__Iterator__iterator 20
+#define COLOR_standard__abstract_collection__Iterator__is_ok 16
+#define COLOR_standard__abstract_collection__Iterator__item 17
+#define COLOR_standard__string__FlatText___length 3
 extern const struct type type_standard__FlatString;
 #define COLOR_standard__string__FlatText___items 1
 #define COLOR_standard__string__FlatString___index_from 4
-#define COLOR_standard__abstract_collection__Iterator__next 33
-#define COLOR_standard__string__FlatText___length 3
+#define COLOR_standard__abstract_collection__Iterator__next 18
+#define COLOR_standard__abstract_collection__Iterator__finish 19
+#define COLOR_standard__ropes__Concat___left 6
+#define COLOR_standard__ropes__Concat___right 7
+#define COLOR_standard__ropes___standard__ropes__Concat___standard__kernel__Object__init 84
+#define COLOR_standard__string__Text__length 26
+#define COLOR_standard__string__String___43d 71
+long standard___standard__Int___Discrete__successor(long self, long p0);
+#define COLOR_standard__string__Text___91d_93d 44
+#define COLOR_standard__string__Text__substring 28
+val* standard___standard__Text___substring_from(val* self, long p0);
+val* NEW_standard__ropes__Concat(const struct type* type);
+extern const struct type type_standard__ropes__Concat;
+#define COLOR_standard__string__String__to_upper 78
+#define COLOR_standard__ropes__Concat__left_61d 61
+#define COLOR_standard__ropes__Concat__right_61d 62
+#define COLOR_standard__string__String__to_lower 81
+#define COLOR_standard__string__Object__to_s 3
+long standard__ropes___Sys___maxlen(val* self);
+#define COLOR_standard__ropes__RopeBuffer___chars 1
+val* NEW_standard__RopeBufferChars(const struct type* type);
+extern const struct type type_standard__RopeBufferChars;
+#define COLOR_standard__ropes__RopeBuffer___str 3
+#define COLOR_standard__ropes__RopeBuffer___ns 6
+#define COLOR_standard__ropes__RopeBuffer___rpos 7
+#define COLOR_standard__ropes__RopeBuffer___dumped 8
+#define COLOR_standard__ropes__RopeBuffer___length 9
+#define COLOR_standard__ropes__RopeBuffer___buf_size 10
+val* NEW_standard__ropes__RopeBufSubstringIterator(const struct type* type);
+extern const struct type type_standard__ropes__RopeBufSubstringIterator;
+void standard__ropes___standard__ropes__RopeBufSubstringIterator___init(val* self, val* p0);
+#define COLOR_standard___standard__RopeBuffer___standard__kernel__Object__init 83
+void standard___standard__RopeBuffer___standard__kernel__Object__init(val* self);
+val* NEW_standard__RopeBuffer(const struct type* type);
+extern const struct type type_standard__RopeBuffer;
+val* standard___standard__RopeBuffer___standard__string__Text__empty(val* self);
+void standard___standard__RopeBuffer___from(val* self, val* p0);
+extern const struct type type_standard__ropes__Rope;
+val* NEW_standard__FlatString(const struct type* type);
+void standard___standard__FlatString___with_infos(val* self, char* p0, long p1, long p2, long p3);
+extern const struct type type_standard__FlatBuffer;
+#define COLOR_standard__string__Text__chars 27
+#define COLOR_standard__abstract_collection__Collection__iterator 25
+void standard___standard__RopeBuffer___dump_buffer(val* self);
+#define COLOR_standard__string__Buffer___written 5
 val* standard__ropes___FlatString___standard__string__String___43d(val* self, val* p0);
 #define COLOR_standard__ropes__RopeIterPiece___node 0
 #define COLOR_standard__ropes__RopeIterPiece___ldone 1
 #define COLOR_standard__ropes__RopeIterPiece___rdone 2
 #define COLOR_standard__ropes__RopeIterPiece___prev 3
-#define COLOR_standard__ropes___standard__ropes__RopeIterPiece___standard__kernel__Object__init 40
+#define COLOR_standard__ropes___standard__ropes__RopeIterPiece___standard__kernel__Object__init 24
 #define COLOR_standard__ropes__RopeIter___pns 0
 #define COLOR_standard__ropes__RopeIter___str 1
 #define COLOR_standard__ropes__RopeIter___subs 2
 #define COLOR_standard__ropes__RopeIter___max 3
 #define COLOR_standard__ropes__RopeIter___pos 4
 void standard__ropes___standard__ropes__RopeSubstrings___from(val* self, val* p0, long p1);
-#define COLOR_standard__abstract_collection__IndexedIterator__index 38
-char standard__ropes___standard__ropes__RopeIter___standard__abstract_collection__Iterator__item(val* self);
-val* BOX_standard__Char(char);
+#define COLOR_standard__abstract_collection__IndexedIterator__index 22
+uint32_t standard__ropes___standard__ropes__RopeIter___standard__abstract_collection__Iterator__item(val* self);
+#define COLOR_standard__ropes__RopeBufSubstringIterator___iter 0
+#define COLOR_standard__ropes__RopeBufSubstringIterator___nsstr 1
+#define COLOR_standard__ropes__RopeBufSubstringIterator___nsstr_done 2
+#define COLOR_standard__string__Text__substrings 29
+short int standard__ropes___standard__ropes__RopeBufSubstringIterator___standard__abstract_collection__Iterator__is_ok(val* self);
 #define COLOR_standard__ropes__RopeSubstrings___iter 0
 #define COLOR_standard__ropes__RopeSubstrings___pos 1
 #define COLOR_standard__ropes__RopeSubstrings___max 2
 #define COLOR_standard__ropes__RopeSubstrings___str 3
 val* NEW_standard__ropes__RopeIterPiece(const struct type* type);
 extern const struct type type_standard__ropes__RopeIterPiece;
-#define COLOR_standard__ropes__RopeIterPiece__node_61d 33
-#define COLOR_standard__ropes__RopeIterPiece__ldone_61d 35
-#define COLOR_standard__ropes__RopeIterPiece__rdone_61d 37
-#define COLOR_standard__ropes__RopeIterPiece__prev_61d 39
+#define COLOR_standard__ropes__RopeIterPiece__node_61d 21
+#define COLOR_standard__ropes__RopeIterPiece__ldone_61d 18
+#define COLOR_standard__ropes__RopeIterPiece__rdone_61d 19
+#define COLOR_standard__ropes__RopeIterPiece__prev_61d 22
 #define COLOR_standard__string__StringCharView___target 0
 extern const char FILE_standard__string[];
-char standard__ropes___standard__ropes__Concat___standard__string__Text___91d_93d(val* self, long p0);
-char standard__ropes___standard__ropes__RopeChars___standard__abstract_collection__SequenceRead___91d_93d(val* self, long p0);
+uint32_t standard__ropes___standard__ropes__Concat___standard__string__Text___91d_93d(val* self, long p0);
+uint32_t standard__ropes___standard__ropes__RopeChars___standard__abstract_collection__SequenceRead___91d_93d(val* self, long p0);
 val* NEW_standard__ropes__RopeIter(const struct type* type);
 extern const struct type type_standard__ropes__RopeIter;
 void standard__ropes___standard__ropes__RopeIter___from(val* self, val* p0, long p1);
+#define COLOR_standard__ropes__RopeBufferIter___sit 0
+#define COLOR_standard__ropes__RopeBufferIter___ns 1
+#define COLOR_standard__ropes__RopeBufferIter___pns 2
+#define COLOR_standard__ropes__RopeBufferIter___maxpos 3
+#define COLOR_standard__ropes__RopeBufferIter___index 4
+#define COLOR_standard__abstract_collection__SequenceRead__iterator_from 32
+uint32_t standard___standard__RopeBufferIter___standard__abstract_collection__Iterator__item(val* self);
+uint32_t standard___standard__RopeBufferChars___standard__abstract_collection__SequenceRead___91d_93d(val* self, long p0);
+extern const struct type type_standard__Char;
+void standard___standard__RopeBuffer___standard__string__Buffer__add(val* self, uint32_t p0);
+val* standard__string___Char___Object__to_s(uint32_t self);
+void standard___standard__RopeBufferChars___standard__abstract_collection__Sequence___91d_93d_61d(val* self, long p0, uint32_t p1);
+void standard___standard__RopeBufferChars___standard__abstract_collection__SimpleCollection__add(val* self, uint32_t p0);
+void standard___standard__RopeBufferChars___standard__abstract_collection__Sequence__push(val* self, uint32_t p0);
+val* NEW_standard__RopeBufferIter(const struct type* type);
+extern const struct type type_standard__RopeBufferIter;
+void standard___standard__RopeBufferIter___from(val* self, val* p0, long p1);

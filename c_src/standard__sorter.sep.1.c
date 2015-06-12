@@ -8,18 +8,16 @@ const struct type* type_struct;
 const char* var_class_name;
 val* var_array /* var array: Array[nullable Object] */;
 long var1 /* : Int */;
-long var2 /* : Int */;
+long var3 /* : Int */;
 long var4 /* : Int */;
-long var5 /* : Int */;
-long var6 /* : Int */;
-short int var8 /* : Bool */;
-int cltype9;
-int idtype10;
-const char* var_class_name11;
-long var12 /* : Int */;
+short int var6 /* : Bool */;
+int cltype7;
+int idtype8;
+const char* var_class_name9;
+long var10 /* : Int */;
 /* Covariant cast for argument 0 (array) <p0:Array[nullable Object]> isa Array[COMPARED] */
 /* <p0:Array[nullable Object]> isa Array[COMPARED] */
-type_struct = self->type->resolution_table->types[COLOR_standard__Array__standard__sorter__Comparator__COMPARED];
+type_struct = (((long)self&3)?type_info[((long)self&3)]:self->type)->resolution_table->types[COLOR_standard__Array__standard__sorter__Comparator__COMPARED];
 cltype = type_struct->color;
 idtype = type_struct->id;
 if(cltype >= p0->type->table_size) {
@@ -31,37 +29,35 @@ if (unlikely(!var)) {
 var_class_name = p0 == NULL ? "null" : p0->type->name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "Array[COMPARED]", var_class_name);
 PRINT_ERROR(" (%s:%d)\n", FILE_standard__sorter, 80);
-show_backtrace(1);
+fatal_exit(1);
 }
 var_array = p0;
-var1 = 0;
 {
 { /* Inline array#AbstractArrayRead#length (var_array) on <var_array:Array[nullable Object]> */
-var4 = var_array->attrs[COLOR_standard__array__AbstractArrayRead___length].l; /* _length on <var_array:Array[nullable Object]> */
-var2 = var4;
-RET_LABEL3:(void)0;
-}
-}
-var5 = 1;
-{
-{ /* Inline kernel#Int#- (var2,var5) on <var2:Int> */
-/* Covariant cast for argument 0 (i) <var5:Int> isa OTHER */
-/* <var5:Int> isa OTHER */
-var8 = 1; /* easy <var5:Int> isa OTHER*/
-if (unlikely(!var8)) {
-var_class_name11 = type_standard__Int.name;
-PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name11);
-PRINT_ERROR(" (%s:%d)\n", FILE_standard__kernel, 416);
-show_backtrace(1);
-}
-var12 = var2 - var5;
-var6 = var12;
-goto RET_LABEL7;
-RET_LABEL7:(void)0;
+var3 = var_array->attrs[COLOR_standard__array__AbstractArrayRead___length].l; /* _length on <var_array:Array[nullable Object]> */
+var1 = var3;
+RET_LABEL2:(void)0;
 }
 }
 {
-standard___standard__Comparator___sub_sort(self, var_array, var1, var6); /* Direct call sorter#Comparator#sub_sort on <self:Comparator>*/
+{ /* Inline kernel#Int#- (var1,1l) on <var1:Int> */
+/* Covariant cast for argument 0 (i) <1l:Int> isa OTHER */
+/* <1l:Int> isa OTHER */
+var6 = 1; /* easy <1l:Int> isa OTHER*/
+if (unlikely(!var6)) {
+var_class_name9 = type_standard__Int.name;
+PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name9);
+PRINT_ERROR(" (%s:%d)\n", FILE_standard__kernel, 540);
+fatal_exit(1);
+}
+var10 = var1 - 1l;
+var4 = var10;
+goto RET_LABEL5;
+RET_LABEL5:(void)0;
+}
+}
+{
+standard___standard__Comparator___sub_sort(self, var_array, 0l, var4); /* Direct call sorter#Comparator#sub_sort on <self:Comparator>*/
 }
 RET_LABEL:;
 }
@@ -82,21 +78,20 @@ int idtype5;
 const char* var_class_name6;
 short int var7 /* : Bool */;
 long var8 /* : Int */;
-long var9 /* : Int */;
-short int var11 /* : Bool */;
-int cltype12;
-int idtype13;
-const char* var_class_name14;
-long var15 /* : Int */;
-short int var16 /* : Bool */;
-short int var18 /* : Bool */;
-int cltype19;
-int idtype20;
-const char* var_class_name21;
-short int var22 /* : Bool */;
+short int var10 /* : Bool */;
+int cltype11;
+int idtype12;
+const char* var_class_name13;
+long var14 /* : Int */;
+short int var15 /* : Bool */;
+short int var17 /* : Bool */;
+int cltype18;
+int idtype19;
+const char* var_class_name20;
+short int var21 /* : Bool */;
 /* Covariant cast for argument 0 (array) <p0:Array[nullable Object]> isa Array[COMPARED] */
 /* <p0:Array[nullable Object]> isa Array[COMPARED] */
-type_struct = self->type->resolution_table->types[COLOR_standard__Array__standard__sorter__Comparator__COMPARED];
+type_struct = (((long)self&3)?type_info[((long)self&3)]:self->type)->resolution_table->types[COLOR_standard__Array__standard__sorter__Comparator__COMPARED];
 cltype = type_struct->color;
 idtype = type_struct->id;
 if(cltype >= p0->type->table_size) {
@@ -108,7 +103,7 @@ if (unlikely(!var)) {
 var_class_name = p0 == NULL ? "null" : p0->type->name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "Array[COMPARED]", var_class_name);
 PRINT_ERROR(" (%s:%d)\n", FILE_standard__sorter, 89);
-show_backtrace(1);
+fatal_exit(1);
 }
 var_array = p0;
 var_from = p1;
@@ -121,8 +116,8 @@ var3 = 1; /* easy <var_to:Int> isa OTHER*/
 if (unlikely(!var3)) {
 var_class_name6 = type_standard__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name6);
-PRINT_ERROR(" (%s:%d)\n", FILE_standard__kernel, 411);
-show_backtrace(1);
+PRINT_ERROR(" (%s:%d)\n", FILE_standard__kernel, 535);
+fatal_exit(1);
 }
 var7 = var_from >= var_to;
 var1 = var7;
@@ -133,42 +128,41 @@ RET_LABEL2:(void)0;
 if (var1){
 goto RET_LABEL;
 } else {
-var8 = 7;
 {
-{ /* Inline kernel#Int#+ (var_from,var8) on <var_from:Int> */
-/* Covariant cast for argument 0 (i) <var8:Int> isa OTHER */
-/* <var8:Int> isa OTHER */
-var11 = 1; /* easy <var8:Int> isa OTHER*/
-if (unlikely(!var11)) {
-var_class_name14 = type_standard__Int.name;
-PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name14);
-PRINT_ERROR(" (%s:%d)\n", FILE_standard__kernel, 413);
-show_backtrace(1);
+{ /* Inline kernel#Int#+ (var_from,7l) on <var_from:Int> */
+/* Covariant cast for argument 0 (i) <7l:Int> isa OTHER */
+/* <7l:Int> isa OTHER */
+var10 = 1; /* easy <7l:Int> isa OTHER*/
+if (unlikely(!var10)) {
+var_class_name13 = type_standard__Int.name;
+PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name13);
+PRINT_ERROR(" (%s:%d)\n", FILE_standard__kernel, 537);
+fatal_exit(1);
 }
-var15 = var_from + var8;
-var9 = var15;
-goto RET_LABEL10;
-RET_LABEL10:(void)0;
+var14 = var_from + 7l;
+var8 = var14;
+goto RET_LABEL9;
+RET_LABEL9:(void)0;
 }
 }
 {
-{ /* Inline kernel#Int#< (var9,var_to) on <var9:Int> */
+{ /* Inline kernel#Int#< (var8,var_to) on <var8:Int> */
 /* Covariant cast for argument 0 (i) <var_to:Int> isa OTHER */
 /* <var_to:Int> isa OTHER */
-var18 = 1; /* easy <var_to:Int> isa OTHER*/
-if (unlikely(!var18)) {
-var_class_name21 = type_standard__Int.name;
-PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name21);
-PRINT_ERROR(" (%s:%d)\n", FILE_standard__kernel, 410);
-show_backtrace(1);
+var17 = 1; /* easy <var_to:Int> isa OTHER*/
+if (unlikely(!var17)) {
+var_class_name20 = type_standard__Int.name;
+PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name20);
+PRINT_ERROR(" (%s:%d)\n", FILE_standard__kernel, 534);
+fatal_exit(1);
 }
-var22 = var9 < var_to;
-var16 = var22;
-goto RET_LABEL17;
-RET_LABEL17:(void)0;
+var21 = var8 < var_to;
+var15 = var21;
+goto RET_LABEL16;
+RET_LABEL16:(void)0;
 }
 }
-if (var16){
+if (var15){
 {
 standard___standard__Comparator___quick_sort(self, var_array, var_from, var_to); /* Direct call sorter#Comparator#quick_sort on <self:Comparator>*/
 }
@@ -210,78 +204,71 @@ short int var16 /* : Bool */;
 short int var_ /* var : Bool */;
 val* var17 /* : nullable Object */;
 long var18 /* : Int */;
-long var19 /* : Int */;
-short int var20 /* : Bool */;
-short int var22 /* : Bool */;
-int cltype23;
-int idtype24;
-const char* var_class_name25;
-short int var26 /* : Bool */;
-long var27 /* : Int */;
-long var28 /* : Int */;
-short int var30 /* : Bool */;
-int cltype31;
-int idtype32;
-const char* var_class_name33;
-long var34 /* : Int */;
-short int var35 /* : Bool */;
+short int var19 /* : Bool */;
+short int var21 /* : Bool */;
+int cltype22;
+int idtype23;
+const char* var_class_name24;
+short int var25 /* : Bool */;
+long var26 /* : Int */;
+short int var28 /* : Bool */;
+int cltype29;
+int idtype30;
+const char* var_class_name31;
+long var32 /* : Int */;
+short int var33 /* : Bool */;
+short int var34 /* : Bool */;
 short int var36 /* : Bool */;
-short int var38 /* : Bool */;
-int cltype39;
-int idtype40;
-const char* var_class_name41;
-short int var42 /* : Bool */;
-short int var_43 /* var : Bool */;
-val* var44 /* : nullable Object */;
-long var45 /* : Int */;
-long var46 /* : Int */;
-short int var47 /* : Bool */;
-short int var49 /* : Bool */;
-int cltype50;
-int idtype51;
-const char* var_class_name52;
+int cltype37;
+int idtype38;
+const char* var_class_name39;
+short int var40 /* : Bool */;
+short int var_41 /* var : Bool */;
+val* var42 /* : nullable Object */;
+long var43 /* : Int */;
+short int var44 /* : Bool */;
+short int var46 /* : Bool */;
+int cltype47;
+int idtype48;
+const char* var_class_name49;
+short int var50 /* : Bool */;
+long var51 /* : Int */;
 short int var53 /* : Bool */;
-long var54 /* : Int */;
-long var55 /* : Int */;
-short int var57 /* : Bool */;
-int cltype58;
-int idtype59;
-const char* var_class_name60;
-long var61 /* : Int */;
-short int var63 /* : Bool */;
+int cltype54;
+int idtype55;
+const char* var_class_name56;
+long var57 /* : Int */;
+short int var59 /* : Bool */;
+short int var61 /* : Bool */;
+int cltype62;
+int idtype63;
+const char* var_class_name64;
 short int var65 /* : Bool */;
-int cltype66;
-int idtype67;
-const char* var_class_name68;
-short int var69 /* : Bool */;
-val* var70 /* : nullable Object */;
+val* var66 /* : nullable Object */;
 val* var_t /* var t: nullable Object */;
-val* var71 /* : nullable Object */;
-long var73 /* : Int */;
-long var74 /* : Int */;
-short int var76 /* : Bool */;
-int cltype77;
-int idtype78;
-const char* var_class_name79;
-long var80 /* : Int */;
-val* var81 /* : nullable Object */;
-long var82 /* : Int */;
+val* var67 /* : nullable Object */;
+long var69 /* : Int */;
+short int var71 /* : Bool */;
+int cltype72;
+int idtype73;
+const char* var_class_name74;
+long var75 /* : Int */;
+val* var76 /* : nullable Object */;
+long var77 /* : Int */;
+short int var79 /* : Bool */;
+int cltype80;
+int idtype81;
+const char* var_class_name82;
 long var83 /* : Int */;
-short int var85 /* : Bool */;
-int cltype86;
-int idtype87;
-const char* var_class_name88;
-long var89 /* : Int */;
+long var84 /* : Int */;
+short int var86 /* : Bool */;
+int cltype87;
+int idtype88;
+const char* var_class_name89;
 long var90 /* : Int */;
-long var91 /* : Int */;
-short int var93 /* : Bool */;
-int cltype94;
-int idtype95;
-const char* var_class_name96;
-long var97 /* : Int */;
 /* Covariant cast for argument 0 (array) <p0:Array[nullable Object]> isa Array[COMPARED] */
 /* <p0:Array[nullable Object]> isa Array[COMPARED] */
-type_struct = self->type->resolution_table->types[COLOR_standard__Array__standard__sorter__Comparator__COMPARED];
+type_struct = (((long)self&3)?type_info[((long)self&3)]:self->type)->resolution_table->types[COLOR_standard__Array__standard__sorter__Comparator__COMPARED];
 cltype = type_struct->color;
 idtype = type_struct->id;
 if(cltype >= p0->type->table_size) {
@@ -293,7 +280,7 @@ if (unlikely(!var)) {
 var_class_name = p0 == NULL ? "null" : p0->type->name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "Array[COMPARED]", var_class_name);
 PRINT_ERROR(" (%s:%d)\n", FILE_standard__sorter, 101);
-show_backtrace(1);
+fatal_exit(1);
 }
 var_array = p0;
 var_from = p1;
@@ -313,8 +300,8 @@ var4 = 1; /* easy <var_i:Int> isa OTHER*/
 if (unlikely(!var4)) {
 var_class_name7 = type_standard__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name7);
-PRINT_ERROR(" (%s:%d)\n", FILE_standard__kernel, 412);
-show_backtrace(1);
+PRINT_ERROR(" (%s:%d)\n", FILE_standard__kernel, 536);
+fatal_exit(1);
 }
 var8 = var_j > var_i;
 var2 = var8;
@@ -332,8 +319,8 @@ var12 = 1; /* easy <var_to:Int> isa OTHER*/
 if (unlikely(!var12)) {
 var_class_name15 = type_standard__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name15);
-PRINT_ERROR(" (%s:%d)\n", FILE_standard__kernel, 409);
-show_backtrace(1);
+PRINT_ERROR(" (%s:%d)\n", FILE_standard__kernel, 533);
+fatal_exit(1);
 }
 var16 = var_i <= var_to;
 var10 = var16;
@@ -347,50 +334,48 @@ if (var10){
 var17 = standard___standard__Array___standard__abstract_collection__SequenceRead___91d_93d(var_array, var_i);
 }
 {
-var18 = ((long (*)(val* self, val* p0, val* p1))(self->class->vft[COLOR_standard__sorter__Comparator__compare]))(self, var17, var_pivot) /* compare on <self:Comparator>*/;
+var18 = ((long(*)(val* self, val* p0, val* p1))((((long)self&3)?class_info[((long)self&3)]:self->class)->vft[COLOR_standard__sorter__Comparator__compare]))(self, var17, var_pivot); /* compare on <self:Comparator>*/
 }
-var19 = 0;
 {
-{ /* Inline kernel#Int#<= (var18,var19) on <var18:Int> */
-/* Covariant cast for argument 0 (i) <var19:Int> isa OTHER */
-/* <var19:Int> isa OTHER */
-var22 = 1; /* easy <var19:Int> isa OTHER*/
-if (unlikely(!var22)) {
-var_class_name25 = type_standard__Int.name;
-PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name25);
-PRINT_ERROR(" (%s:%d)\n", FILE_standard__kernel, 409);
-show_backtrace(1);
+{ /* Inline kernel#Int#<= (var18,0l) on <var18:Int> */
+/* Covariant cast for argument 0 (i) <0l:Int> isa OTHER */
+/* <0l:Int> isa OTHER */
+var21 = 1; /* easy <0l:Int> isa OTHER*/
+if (unlikely(!var21)) {
+var_class_name24 = type_standard__Int.name;
+PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name24);
+PRINT_ERROR(" (%s:%d)\n", FILE_standard__kernel, 533);
+fatal_exit(1);
 }
-var26 = var18 <= var19;
-var20 = var26;
-goto RET_LABEL21;
-RET_LABEL21:(void)0;
+var25 = var18 <= 0l;
+var19 = var25;
+goto RET_LABEL20;
+RET_LABEL20:(void)0;
 }
 }
-var9 = var20;
+var9 = var19;
 } else {
 var9 = var_;
 }
 if (var9){
-var27 = 1;
 {
-{ /* Inline kernel#Int#+ (var_i,var27) on <var_i:Int> */
-/* Covariant cast for argument 0 (i) <var27:Int> isa OTHER */
-/* <var27:Int> isa OTHER */
-var30 = 1; /* easy <var27:Int> isa OTHER*/
-if (unlikely(!var30)) {
-var_class_name33 = type_standard__Int.name;
-PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name33);
-PRINT_ERROR(" (%s:%d)\n", FILE_standard__kernel, 413);
-show_backtrace(1);
+{ /* Inline kernel#Int#+ (var_i,1l) on <var_i:Int> */
+/* Covariant cast for argument 0 (i) <1l:Int> isa OTHER */
+/* <1l:Int> isa OTHER */
+var28 = 1; /* easy <1l:Int> isa OTHER*/
+if (unlikely(!var28)) {
+var_class_name31 = type_standard__Int.name;
+PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name31);
+PRINT_ERROR(" (%s:%d)\n", FILE_standard__kernel, 537);
+fatal_exit(1);
 }
-var34 = var_i + var27;
-var28 = var34;
-goto RET_LABEL29;
-RET_LABEL29:(void)0;
+var32 = var_i + 1l;
+var26 = var32;
+goto RET_LABEL27;
+RET_LABEL27:(void)0;
 }
 }
-var_i = var28;
+var_i = var26;
 } else {
 goto BREAK_label;
 }
@@ -401,101 +386,99 @@ for(;;) {
 { /* Inline kernel#Int#> (var_j,var_i) on <var_j:Int> */
 /* Covariant cast for argument 0 (i) <var_i:Int> isa OTHER */
 /* <var_i:Int> isa OTHER */
-var38 = 1; /* easy <var_i:Int> isa OTHER*/
-if (unlikely(!var38)) {
-var_class_name41 = type_standard__Int.name;
-PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name41);
-PRINT_ERROR(" (%s:%d)\n", FILE_standard__kernel, 412);
-show_backtrace(1);
+var36 = 1; /* easy <var_i:Int> isa OTHER*/
+if (unlikely(!var36)) {
+var_class_name39 = type_standard__Int.name;
+PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name39);
+PRINT_ERROR(" (%s:%d)\n", FILE_standard__kernel, 536);
+fatal_exit(1);
 }
-var42 = var_j > var_i;
-var36 = var42;
-goto RET_LABEL37;
-RET_LABEL37:(void)0;
+var40 = var_j > var_i;
+var34 = var40;
+goto RET_LABEL35;
+RET_LABEL35:(void)0;
 }
 }
-var_43 = var36;
-if (var36){
+var_41 = var34;
+if (var34){
 {
-var44 = standard___standard__Array___standard__abstract_collection__SequenceRead___91d_93d(var_array, var_j);
+var42 = standard___standard__Array___standard__abstract_collection__SequenceRead___91d_93d(var_array, var_j);
 }
 {
-var45 = ((long (*)(val* self, val* p0, val* p1))(self->class->vft[COLOR_standard__sorter__Comparator__compare]))(self, var44, var_pivot) /* compare on <self:Comparator>*/;
+var43 = ((long(*)(val* self, val* p0, val* p1))((((long)self&3)?class_info[((long)self&3)]:self->class)->vft[COLOR_standard__sorter__Comparator__compare]))(self, var42, var_pivot); /* compare on <self:Comparator>*/
 }
-var46 = 0;
 {
-{ /* Inline kernel#Int#>= (var45,var46) on <var45:Int> */
-/* Covariant cast for argument 0 (i) <var46:Int> isa OTHER */
-/* <var46:Int> isa OTHER */
-var49 = 1; /* easy <var46:Int> isa OTHER*/
-if (unlikely(!var49)) {
-var_class_name52 = type_standard__Int.name;
-PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name52);
-PRINT_ERROR(" (%s:%d)\n", FILE_standard__kernel, 411);
-show_backtrace(1);
+{ /* Inline kernel#Int#>= (var43,0l) on <var43:Int> */
+/* Covariant cast for argument 0 (i) <0l:Int> isa OTHER */
+/* <0l:Int> isa OTHER */
+var46 = 1; /* easy <0l:Int> isa OTHER*/
+if (unlikely(!var46)) {
+var_class_name49 = type_standard__Int.name;
+PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name49);
+PRINT_ERROR(" (%s:%d)\n", FILE_standard__kernel, 535);
+fatal_exit(1);
 }
-var53 = var45 >= var46;
-var47 = var53;
-goto RET_LABEL48;
-RET_LABEL48:(void)0;
+var50 = var43 >= 0l;
+var44 = var50;
+goto RET_LABEL45;
+RET_LABEL45:(void)0;
 }
 }
-var35 = var47;
+var33 = var44;
 } else {
-var35 = var_43;
+var33 = var_41;
 }
-if (var35){
-var54 = 1;
+if (var33){
 {
-{ /* Inline kernel#Int#- (var_j,var54) on <var_j:Int> */
-/* Covariant cast for argument 0 (i) <var54:Int> isa OTHER */
-/* <var54:Int> isa OTHER */
-var57 = 1; /* easy <var54:Int> isa OTHER*/
-if (unlikely(!var57)) {
-var_class_name60 = type_standard__Int.name;
-PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name60);
-PRINT_ERROR(" (%s:%d)\n", FILE_standard__kernel, 416);
-show_backtrace(1);
+{ /* Inline kernel#Int#- (var_j,1l) on <var_j:Int> */
+/* Covariant cast for argument 0 (i) <1l:Int> isa OTHER */
+/* <1l:Int> isa OTHER */
+var53 = 1; /* easy <1l:Int> isa OTHER*/
+if (unlikely(!var53)) {
+var_class_name56 = type_standard__Int.name;
+PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name56);
+PRINT_ERROR(" (%s:%d)\n", FILE_standard__kernel, 540);
+fatal_exit(1);
 }
-var61 = var_j - var54;
-var55 = var61;
-goto RET_LABEL56;
-RET_LABEL56:(void)0;
+var57 = var_j - 1l;
+var51 = var57;
+goto RET_LABEL52;
+RET_LABEL52:(void)0;
 }
 }
-var_j = var55;
+var_j = var51;
 } else {
-goto BREAK_label62;
+goto BREAK_label58;
 }
 }
-BREAK_label62: (void)0;
+BREAK_label58: (void)0;
 {
 { /* Inline kernel#Int#> (var_j,var_i) on <var_j:Int> */
 /* Covariant cast for argument 0 (i) <var_i:Int> isa OTHER */
 /* <var_i:Int> isa OTHER */
-var65 = 1; /* easy <var_i:Int> isa OTHER*/
-if (unlikely(!var65)) {
-var_class_name68 = type_standard__Int.name;
-PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name68);
-PRINT_ERROR(" (%s:%d)\n", FILE_standard__kernel, 412);
-show_backtrace(1);
+var61 = 1; /* easy <var_i:Int> isa OTHER*/
+if (unlikely(!var61)) {
+var_class_name64 = type_standard__Int.name;
+PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name64);
+PRINT_ERROR(" (%s:%d)\n", FILE_standard__kernel, 536);
+fatal_exit(1);
 }
-var69 = var_j > var_i;
-var63 = var69;
-goto RET_LABEL64;
-RET_LABEL64:(void)0;
+var65 = var_j > var_i;
+var59 = var65;
+goto RET_LABEL60;
+RET_LABEL60:(void)0;
 }
 }
-if (var63){
+if (var59){
 {
-var70 = standard___standard__Array___standard__abstract_collection__SequenceRead___91d_93d(var_array, var_i);
+var66 = standard___standard__Array___standard__abstract_collection__SequenceRead___91d_93d(var_array, var_i);
 }
-var_t = var70;
+var_t = var66;
 {
-var71 = standard___standard__Array___standard__abstract_collection__SequenceRead___91d_93d(var_array, var_j);
+var67 = standard___standard__Array___standard__abstract_collection__SequenceRead___91d_93d(var_array, var_j);
 }
 {
-standard___standard__Array___standard__abstract_collection__Sequence___91d_93d_61d(var_array, var_i, var71); /* Direct call array#Array#[]= on <var_array:Array[nullable Object]>*/
+standard___standard__Array___standard__abstract_collection__Sequence___91d_93d_61d(var_array, var_i, var67); /* Direct call array#Array#[]= on <var_array:Array[nullable Object]>*/
 }
 {
 standard___standard__Array___standard__abstract_collection__Sequence___91d_93d_61d(var_array, var_j, var_t); /* Direct call array#Array#[]= on <var_array:Array[nullable Object]>*/
@@ -503,75 +486,72 @@ standard___standard__Array___standard__abstract_collection__Sequence___91d_93d_6
 } else {
 }
 } else {
-goto BREAK_label72;
+goto BREAK_label68;
 }
 }
-BREAK_label72: (void)0;
-var73 = 1;
+BREAK_label68: (void)0;
 {
-{ /* Inline kernel#Int#- (var_i,var73) on <var_i:Int> */
-/* Covariant cast for argument 0 (i) <var73:Int> isa OTHER */
-/* <var73:Int> isa OTHER */
-var76 = 1; /* easy <var73:Int> isa OTHER*/
-if (unlikely(!var76)) {
-var_class_name79 = type_standard__Int.name;
-PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name79);
-PRINT_ERROR(" (%s:%d)\n", FILE_standard__kernel, 416);
-show_backtrace(1);
+{ /* Inline kernel#Int#- (var_i,1l) on <var_i:Int> */
+/* Covariant cast for argument 0 (i) <1l:Int> isa OTHER */
+/* <1l:Int> isa OTHER */
+var71 = 1; /* easy <1l:Int> isa OTHER*/
+if (unlikely(!var71)) {
+var_class_name74 = type_standard__Int.name;
+PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name74);
+PRINT_ERROR(" (%s:%d)\n", FILE_standard__kernel, 540);
+fatal_exit(1);
 }
-var80 = var_i - var73;
-var74 = var80;
-goto RET_LABEL75;
-RET_LABEL75:(void)0;
-}
-}
-{
-var81 = standard___standard__Array___standard__abstract_collection__SequenceRead___91d_93d(var_array, var74);
-}
-{
-standard___standard__Array___standard__abstract_collection__Sequence___91d_93d_61d(var_array, var_from, var81); /* Direct call array#Array#[]= on <var_array:Array[nullable Object]>*/
-}
-var82 = 1;
-{
-{ /* Inline kernel#Int#- (var_i,var82) on <var_i:Int> */
-/* Covariant cast for argument 0 (i) <var82:Int> isa OTHER */
-/* <var82:Int> isa OTHER */
-var85 = 1; /* easy <var82:Int> isa OTHER*/
-if (unlikely(!var85)) {
-var_class_name88 = type_standard__Int.name;
-PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name88);
-PRINT_ERROR(" (%s:%d)\n", FILE_standard__kernel, 416);
-show_backtrace(1);
-}
-var89 = var_i - var82;
-var83 = var89;
-goto RET_LABEL84;
-RET_LABEL84:(void)0;
+var75 = var_i - 1l;
+var69 = var75;
+goto RET_LABEL70;
+RET_LABEL70:(void)0;
 }
 }
 {
-standard___standard__Array___standard__abstract_collection__Sequence___91d_93d_61d(var_array, var83, var_pivot); /* Direct call array#Array#[]= on <var_array:Array[nullable Object]>*/
-}
-var90 = 2;
-{
-{ /* Inline kernel#Int#- (var_i,var90) on <var_i:Int> */
-/* Covariant cast for argument 0 (i) <var90:Int> isa OTHER */
-/* <var90:Int> isa OTHER */
-var93 = 1; /* easy <var90:Int> isa OTHER*/
-if (unlikely(!var93)) {
-var_class_name96 = type_standard__Int.name;
-PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name96);
-PRINT_ERROR(" (%s:%d)\n", FILE_standard__kernel, 416);
-show_backtrace(1);
-}
-var97 = var_i - var90;
-var91 = var97;
-goto RET_LABEL92;
-RET_LABEL92:(void)0;
-}
+var76 = standard___standard__Array___standard__abstract_collection__SequenceRead___91d_93d(var_array, var69);
 }
 {
-standard___standard__Comparator___sub_sort(self, var_array, var_from, var91); /* Direct call sorter#Comparator#sub_sort on <self:Comparator>*/
+standard___standard__Array___standard__abstract_collection__Sequence___91d_93d_61d(var_array, var_from, var76); /* Direct call array#Array#[]= on <var_array:Array[nullable Object]>*/
+}
+{
+{ /* Inline kernel#Int#- (var_i,1l) on <var_i:Int> */
+/* Covariant cast for argument 0 (i) <1l:Int> isa OTHER */
+/* <1l:Int> isa OTHER */
+var79 = 1; /* easy <1l:Int> isa OTHER*/
+if (unlikely(!var79)) {
+var_class_name82 = type_standard__Int.name;
+PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name82);
+PRINT_ERROR(" (%s:%d)\n", FILE_standard__kernel, 540);
+fatal_exit(1);
+}
+var83 = var_i - 1l;
+var77 = var83;
+goto RET_LABEL78;
+RET_LABEL78:(void)0;
+}
+}
+{
+standard___standard__Array___standard__abstract_collection__Sequence___91d_93d_61d(var_array, var77, var_pivot); /* Direct call array#Array#[]= on <var_array:Array[nullable Object]>*/
+}
+{
+{ /* Inline kernel#Int#- (var_i,2l) on <var_i:Int> */
+/* Covariant cast for argument 0 (i) <2l:Int> isa OTHER */
+/* <2l:Int> isa OTHER */
+var86 = 1; /* easy <2l:Int> isa OTHER*/
+if (unlikely(!var86)) {
+var_class_name89 = type_standard__Int.name;
+PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name89);
+PRINT_ERROR(" (%s:%d)\n", FILE_standard__kernel, 540);
+fatal_exit(1);
+}
+var90 = var_i - 2l;
+var84 = var90;
+goto RET_LABEL85;
+RET_LABEL85:(void)0;
+}
+}
+{
+standard___standard__Comparator___sub_sort(self, var_array, var_from, var84); /* Direct call sorter#Comparator#sub_sort on <self:Comparator>*/
 }
 {
 standard___standard__Comparator___sub_sort(self, var_array, var_i, var_to); /* Direct call sorter#Comparator#sub_sort on <self:Comparator>*/
@@ -607,35 +587,32 @@ const char* var_class_name14;
 short int var15 /* : Bool */;
 val* var16 /* : nullable Object */;
 long var17 /* : Int */;
-long var18 /* : Int */;
-short int var19 /* : Bool */;
-short int var21 /* : Bool */;
-int cltype22;
-int idtype23;
-const char* var_class_name24;
-short int var25 /* : Bool */;
-val* var26 /* : nullable Object */;
-long var27 /* : Int */;
-long var28 /* : Int */;
-short int var30 /* : Bool */;
-int cltype31;
-int idtype32;
-const char* var_class_name33;
-long var34 /* : Int */;
+short int var18 /* : Bool */;
+short int var20 /* : Bool */;
+int cltype21;
+int idtype22;
+const char* var_class_name23;
+short int var24 /* : Bool */;
+val* var25 /* : nullable Object */;
+long var26 /* : Int */;
+short int var28 /* : Bool */;
+int cltype29;
+int idtype30;
+const char* var_class_name31;
+long var32 /* : Int */;
+short int var33 /* : Bool */;
 short int var35 /* : Bool */;
-short int var37 /* : Bool */;
-short int var38 /* : Bool */;
-val* var39 /* : nullable Object */;
-long var40 /* : Int */;
-long var41 /* : Int */;
-short int var43 /* : Bool */;
-int cltype44;
-int idtype45;
-const char* var_class_name46;
-long var47 /* : Int */;
+short int var36 /* : Bool */;
+val* var37 /* : nullable Object */;
+long var38 /* : Int */;
+short int var40 /* : Bool */;
+int cltype41;
+int idtype42;
+const char* var_class_name43;
+long var44 /* : Int */;
 /* Covariant cast for argument 0 (array) <p0:Array[nullable Object]> isa Array[COMPARED] */
 /* <p0:Array[nullable Object]> isa Array[COMPARED] */
-type_struct = self->type->resolution_table->types[COLOR_standard__Array__standard__sorter__Comparator__COMPARED];
+type_struct = (((long)self&3)?type_info[((long)self&3)]:self->type)->resolution_table->types[COLOR_standard__Array__standard__sorter__Comparator__COMPARED];
 cltype = type_struct->color;
 idtype = type_struct->id;
 if(cltype >= p0->type->table_size) {
@@ -647,7 +624,7 @@ if (unlikely(!var)) {
 var_class_name = p0 == NULL ? "null" : p0->type->name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "Array[COMPARED]", var_class_name);
 PRINT_ERROR(" (%s:%d)\n", FILE_standard__sorter, 126);
-show_backtrace(1);
+fatal_exit(1);
 }
 var_array = p0;
 var_from = p1;
@@ -662,8 +639,8 @@ var3 = 1; /* easy <var_to:Int> isa OTHER*/
 if (unlikely(!var3)) {
 var_class_name6 = type_standard__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name6);
-PRINT_ERROR(" (%s:%d)\n", FILE_standard__kernel, 410);
-show_backtrace(1);
+PRINT_ERROR(" (%s:%d)\n", FILE_standard__kernel, 534);
+fatal_exit(1);
 }
 var7 = var_i < var_to;
 var1 = var7;
@@ -687,8 +664,8 @@ var11 = 1; /* easy <var_to:Int> isa OTHER*/
 if (unlikely(!var11)) {
 var_class_name14 = type_standard__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name14);
-PRINT_ERROR(" (%s:%d)\n", FILE_standard__kernel, 409);
-show_backtrace(1);
+PRINT_ERROR(" (%s:%d)\n", FILE_standard__kernel, 533);
+fatal_exit(1);
 }
 var15 = var_j <= var_to;
 var9 = var15;
@@ -701,53 +678,51 @@ if (var9){
 var16 = standard___standard__Array___standard__abstract_collection__SequenceRead___91d_93d(var_array, var_j);
 }
 {
-var17 = ((long (*)(val* self, val* p0, val* p1))(self->class->vft[COLOR_standard__sorter__Comparator__compare]))(self, var_min_v, var16) /* compare on <self:Comparator>*/;
+var17 = ((long(*)(val* self, val* p0, val* p1))((((long)self&3)?class_info[((long)self&3)]:self->class)->vft[COLOR_standard__sorter__Comparator__compare]))(self, var_min_v, var16); /* compare on <self:Comparator>*/
 }
-var18 = 0;
 {
-{ /* Inline kernel#Int#> (var17,var18) on <var17:Int> */
-/* Covariant cast for argument 0 (i) <var18:Int> isa OTHER */
-/* <var18:Int> isa OTHER */
-var21 = 1; /* easy <var18:Int> isa OTHER*/
-if (unlikely(!var21)) {
-var_class_name24 = type_standard__Int.name;
-PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name24);
-PRINT_ERROR(" (%s:%d)\n", FILE_standard__kernel, 412);
-show_backtrace(1);
+{ /* Inline kernel#Int#> (var17,0l) on <var17:Int> */
+/* Covariant cast for argument 0 (i) <0l:Int> isa OTHER */
+/* <0l:Int> isa OTHER */
+var20 = 1; /* easy <0l:Int> isa OTHER*/
+if (unlikely(!var20)) {
+var_class_name23 = type_standard__Int.name;
+PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name23);
+PRINT_ERROR(" (%s:%d)\n", FILE_standard__kernel, 536);
+fatal_exit(1);
 }
-var25 = var17 > var18;
-var19 = var25;
-goto RET_LABEL20;
-RET_LABEL20:(void)0;
+var24 = var17 > 0l;
+var18 = var24;
+goto RET_LABEL19;
+RET_LABEL19:(void)0;
 }
 }
-if (var19){
+if (var18){
 var_min = var_j;
 {
-var26 = standard___standard__Array___standard__abstract_collection__SequenceRead___91d_93d(var_array, var_j);
+var25 = standard___standard__Array___standard__abstract_collection__SequenceRead___91d_93d(var_array, var_j);
 }
-var_min_v = var26;
+var_min_v = var25;
 } else {
 }
-var27 = 1;
 {
-{ /* Inline kernel#Int#+ (var_j,var27) on <var_j:Int> */
-/* Covariant cast for argument 0 (i) <var27:Int> isa OTHER */
-/* <var27:Int> isa OTHER */
-var30 = 1; /* easy <var27:Int> isa OTHER*/
-if (unlikely(!var30)) {
-var_class_name33 = type_standard__Int.name;
-PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name33);
-PRINT_ERROR(" (%s:%d)\n", FILE_standard__kernel, 413);
-show_backtrace(1);
+{ /* Inline kernel#Int#+ (var_j,1l) on <var_j:Int> */
+/* Covariant cast for argument 0 (i) <1l:Int> isa OTHER */
+/* <1l:Int> isa OTHER */
+var28 = 1; /* easy <1l:Int> isa OTHER*/
+if (unlikely(!var28)) {
+var_class_name31 = type_standard__Int.name;
+PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name31);
+PRINT_ERROR(" (%s:%d)\n", FILE_standard__kernel, 537);
+fatal_exit(1);
 }
-var34 = var_j + var27;
-var28 = var34;
-goto RET_LABEL29;
-RET_LABEL29:(void)0;
+var32 = var_j + 1l;
+var26 = var32;
+goto RET_LABEL27;
+RET_LABEL27:(void)0;
 }
 }
-var_j = var28;
+var_j = var26;
 } else {
 goto BREAK_label;
 }
@@ -755,49 +730,48 @@ goto BREAK_label;
 BREAK_label: (void)0;
 {
 { /* Inline kernel#Int#!= (var_min,var_i) on <var_min:Int> */
-var37 = var_min == var_i;
-var38 = !var37;
-var35 = var38;
-goto RET_LABEL36;
-RET_LABEL36:(void)0;
+var35 = var_min == var_i;
+var36 = !var35;
+var33 = var36;
+goto RET_LABEL34;
+RET_LABEL34:(void)0;
 }
 }
-if (var35){
+if (var33){
 {
-var39 = standard___standard__Array___standard__abstract_collection__SequenceRead___91d_93d(var_array, var_i);
+var37 = standard___standard__Array___standard__abstract_collection__SequenceRead___91d_93d(var_array, var_i);
 }
 {
-standard___standard__Array___standard__abstract_collection__Sequence___91d_93d_61d(var_array, var_min, var39); /* Direct call array#Array#[]= on <var_array:Array[nullable Object]>*/
+standard___standard__Array___standard__abstract_collection__Sequence___91d_93d_61d(var_array, var_min, var37); /* Direct call array#Array#[]= on <var_array:Array[nullable Object]>*/
 }
 {
 standard___standard__Array___standard__abstract_collection__Sequence___91d_93d_61d(var_array, var_i, var_min_v); /* Direct call array#Array#[]= on <var_array:Array[nullable Object]>*/
 }
 } else {
 }
-var40 = 1;
 {
-{ /* Inline kernel#Int#+ (var_i,var40) on <var_i:Int> */
-/* Covariant cast for argument 0 (i) <var40:Int> isa OTHER */
-/* <var40:Int> isa OTHER */
-var43 = 1; /* easy <var40:Int> isa OTHER*/
-if (unlikely(!var43)) {
-var_class_name46 = type_standard__Int.name;
-PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name46);
-PRINT_ERROR(" (%s:%d)\n", FILE_standard__kernel, 413);
-show_backtrace(1);
+{ /* Inline kernel#Int#+ (var_i,1l) on <var_i:Int> */
+/* Covariant cast for argument 0 (i) <1l:Int> isa OTHER */
+/* <1l:Int> isa OTHER */
+var40 = 1; /* easy <1l:Int> isa OTHER*/
+if (unlikely(!var40)) {
+var_class_name43 = type_standard__Int.name;
+PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name43);
+PRINT_ERROR(" (%s:%d)\n", FILE_standard__kernel, 537);
+fatal_exit(1);
 }
-var47 = var_i + var40;
-var41 = var47;
-goto RET_LABEL42;
-RET_LABEL42:(void)0;
+var44 = var_i + 1l;
+var38 = var44;
+goto RET_LABEL39;
+RET_LABEL39:(void)0;
 }
 }
-var_i = var41;
+var_i = var38;
 } else {
-goto BREAK_label48;
+goto BREAK_label45;
 }
 }
-BREAK_label48: (void)0;
+BREAK_label45: (void)0;
 RET_LABEL:;
 }
 /* method sorter#DefaultComparator#compare for (self: DefaultComparator, Comparable, Comparable): Int */
@@ -821,51 +795,51 @@ long var7 /* : Int */;
 type_struct = self->type->resolution_table->types[COLOR_standard__sorter__Comparator__COMPARED];
 cltype = type_struct->color;
 idtype = type_struct->id;
-if(cltype >= p0->type->table_size) {
+if(cltype >= (((long)p0&3)?type_info[((long)p0&3)]:p0->type)->table_size) {
 var1 = 0;
 } else {
-var1 = p0->type->type_table[cltype] == idtype;
+var1 = (((long)p0&3)?type_info[((long)p0&3)]:p0->type)->type_table[cltype] == idtype;
 }
 if (unlikely(!var1)) {
-var_class_name = p0 == NULL ? "null" : p0->type->name;
+var_class_name = p0 == NULL ? "null" : (((long)p0&3)?type_info[((long)p0&3)]:p0->type)->name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "COMPARED", var_class_name);
-PRINT_ERROR(" (%s:%d)\n", FILE_standard__sorter, 258);
-show_backtrace(1);
+PRINT_ERROR(" (%s:%d)\n", FILE_standard__sorter, 333);
+fatal_exit(1);
 }
 /* Covariant cast for argument 1 (b) <p1:Comparable> isa COMPARED */
 /* <p1:Comparable> isa COMPARED */
 type_struct5 = self->type->resolution_table->types[COLOR_standard__sorter__Comparator__COMPARED];
 cltype3 = type_struct5->color;
 idtype4 = type_struct5->id;
-if(cltype3 >= p1->type->table_size) {
+if(cltype3 >= (((long)p1&3)?type_info[((long)p1&3)]:p1->type)->table_size) {
 var2 = 0;
 } else {
-var2 = p1->type->type_table[cltype3] == idtype4;
+var2 = (((long)p1&3)?type_info[((long)p1&3)]:p1->type)->type_table[cltype3] == idtype4;
 }
 if (unlikely(!var2)) {
-var_class_name6 = p1 == NULL ? "null" : p1->type->name;
+var_class_name6 = p1 == NULL ? "null" : (((long)p1&3)?type_info[((long)p1&3)]:p1->type)->name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "COMPARED", var_class_name6);
-PRINT_ERROR(" (%s:%d)\n", FILE_standard__sorter, 258);
-show_backtrace(1);
+PRINT_ERROR(" (%s:%d)\n", FILE_standard__sorter, 333);
+fatal_exit(1);
 }
 var_a = p0;
 var_b = p1;
 {
-var7 = ((long (*)(val* self, val* p0))(var_a->class->vft[COLOR_standard__kernel__Comparable___60d_61d_62d]))(var_a, var_b) /* <=> on <var_a:Comparable>*/;
+var7 = ((long(*)(val* self, val* p0))((((long)var_a&3)?class_info[((long)var_a&3)]:var_a->class)->vft[COLOR_standard__kernel__Comparable___60d_61d_62d]))(var_a, var_b); /* <=> on <var_a:Comparable>*/
 }
 var = var7;
 goto RET_LABEL;
 RET_LABEL:;
 return var;
 }
-/* method sorter#Object#default_comparator for (self: Object): DefaultComparator */
-val* standard__sorter___Object___default_comparator(val* self) {
+/* method sorter#Sys#default_comparator for (self: Sys): DefaultComparator */
+val* standard__sorter___Sys___default_comparator(val* self) {
 val* var /* : DefaultComparator */;
 static val* varonce;
 static int varonce_guard;
 val* var1 /* : DefaultComparator */;
 val* var2 /* : DefaultComparator */;
-if (varonce_guard) {
+if (likely(varonce_guard)) {
 var1 = varonce;
 } else {
 var2 = NEW_standard__DefaultComparator(&type_standard__DefaultComparator);
