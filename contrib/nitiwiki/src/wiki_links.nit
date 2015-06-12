@@ -248,7 +248,7 @@ private class NitiwikiDecorator
 			end
 			if target != null then
 				if name == null then name = target.title
-				link = target.url
+				link = target.href_from(context)
 			else
 				var loc = context.src_path or else context.name
 				wiki.message("Warning: unknown wikilink `{link}` (in {loc})", 0)
