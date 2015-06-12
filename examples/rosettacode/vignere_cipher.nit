@@ -1,5 +1,3 @@
-#!/usr/bin/env nit
-#
 # This file is part of NIT ( http://www.nitlanguage.org ).
 # This program is public domain
 
@@ -9,12 +7,12 @@
 
 module vignere_cipher
 
-fun encrypt(src:String, key:String):String do
+fun encrypt(src, key:String):String do
     var out = new Buffer
-    var j:Int = 0
+    var j = 0
 
     for i in [0..src.length-1] do
-        var c:Char = src[i]
+        var c = src[i]
 
         if c >= 'a' and c <= 'z' then
             c = c.to_upper
@@ -26,10 +24,10 @@ fun encrypt(src:String, key:String):String do
         j = (j + 1) % key.length
     end
 
-    return out.write_to_string
+    return out.to_s
 end
 
-fun decrypt(src:String, key:String):String do
+fun decrypt(src, key:String):String do
     var out = new Buffer
     var j:Int = 0
 
@@ -50,10 +48,10 @@ fun decrypt(src:String, key:String):String do
 end
 
 # Main part
-var str:String = "All your base are belong to us"
-var key:String = "CRYPTONIT"
-var code:String = encrypt(str, key)
-var decode:String = decrypt(code, key)
+var str = "All your base are belong to us"
+var key = "CRYPTONIT"
+var code = encrypt(str, key)
+var decode = decrypt(code, key)
 
 print "Text: " + str 
 print "Key : " + key
