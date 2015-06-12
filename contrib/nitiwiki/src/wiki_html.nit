@@ -133,15 +133,15 @@ redef class WikiSection
 	# </ul>
 	# ~~~
 	fun tpl_tree(limit: Int): Template do
-		return tpl_tree_intern(limit, 1)
+		return tpl_tree_intern(limit, 1, self)
 	end
 
 	# Build the template tree for this section recursively.
-	protected fun tpl_tree_intern(limit, count: Int): Template do
+	protected fun tpl_tree_intern(limit, count: Int, context: WikiEntry): Template do
 		var out = new Template
 		var index = index
 		out.add "<li>"
-		out.add tpl_link(self)
+		out.add tpl_link(context)
 		if (limit < 0 or count < limit) and
 		   (children.length > 1 or (children.length == 1)) then
 			out.add " <ul>"
@@ -149,10 +149,10 @@ redef class WikiSection
 				if child == index then continue
 				if child isa WikiArticle then
 					out.add "<li>"
-					out.add child.tpl_link(self)
+					out.add child.tpl_link(context)
 					out.add "</li>"
 				else if child isa WikiSection and not child.is_hidden then
-					out.add child.tpl_tree_intern(limit, count + 1)
+					out.add child.tpl_tree_intern(limit, count + 1, context)
 				end
 			end
 			out.add " </ul>"
