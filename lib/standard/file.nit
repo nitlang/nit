@@ -16,8 +16,8 @@
 module file
 
 intrude import stream
-intrude import ropes
-import string_search
+intrude import text::ropes
+import text
 import time
 import gc
 

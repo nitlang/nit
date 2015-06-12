@@ -47,7 +47,7 @@
 # height (hence, this rope here might actually be a `FlatString` !).
 module ropes
 
-intrude import string
+intrude import flat
 
 # Maxlen is the maximum length of a Leaf node
 #

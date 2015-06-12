@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-intrude import string
+intrude import text::flat
 
 # Check Bool.object_id
 assert true.object_id.to_s.is_numeric

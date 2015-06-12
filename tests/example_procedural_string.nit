@@ -15,7 +15,7 @@
 # limitations under the License.
 
 #alt1 import standard
-#alt1 import standard::ropes
+#alt1 import standard::text::ropes
 
 # A procedural program (without explicit class).
 

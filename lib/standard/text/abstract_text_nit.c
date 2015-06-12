@@ -9,7 +9,7 @@
  * another product.
  */
 
-#include "string_nit.h"
+#include "abstract_text_nit.h"
 
 // Returns the length of `recv` as a `char*` (excluding the null character)
 long native_int_length_str(long recv){
