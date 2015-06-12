@@ -4,22 +4,15 @@
 # Task: Random numbers
 #
 # See: <http://rosettacode.org/wiki/Random_numbers>
-
 module random_numbers
 
-# Uniform distribution, (0..1] 
-fun drand:Float do
-    return 1.0.rand
-end
+# Uniform distribution, (0..1]
+fun drand: Float do return 1.0.rand
 
-# This function returns a pseudorandom numbers with 
-# a mean of 1.0 and a standard deviation of 0.5 
-fun random_normal:Float do
-    return (-2.0*drand.log).sqrt * (2.0*pi*drand).cos
-end
+# This function returns a pseudorandom numbers with
+# a mean of 1.0 and a standard deviation of 0.5
+fun random_normal: Float do return (-2.0 * drand.log).sqrt * (2.0 * pi * drand).cos
 
 # Main part
 
-for i in [0..1000] do
-   print random_normal
-end
+for i in [0..1000] do print random_normal
