@@ -37,7 +37,7 @@ fi
 # Make basic bootstrap
 $tools_dir/unitrun.sh "run-make-csrc" make -C c_src
 $tools_dir/unitrun.sh "run-make-version" src/git-gen-version.sh
-$tools_dir/unitrun.sh "run-make-nitg_0" c_src/nitg -o bin/nitc_0 src/nitc.nit
+$tools_dir/unitrun.sh "run-make-nitc_0" c_src/nitc -o bin/nitc_0 src/nitc.nit
 $tools_dir/unitrun.sh "run-make-nitc" bin/nitc_0 --dir bin/ src/nitc.nit
 $tools_dir/unitrun.sh "run-make-nit-and-nitvm" bin/nitc --dir bin/ src/nit.nit src/nitvm.nit
 
