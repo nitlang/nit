@@ -182,9 +182,15 @@ redef class WikiArticle
 	end
 
 
+	# Load a template and resolve page-related macros
+	fun load_template(template_file: String): TemplateString do
+		var tpl = wiki.load_template(template_file)
+		return tpl
+	end
+
 	# Replace macros in the template by wiki data.
 	private fun tpl_page: TemplateString do
-		var tpl = wiki.load_template(template_file)
+		var tpl = load_template(template_file)
 		if tpl.has_macro("TOP_MENU") then
 			tpl.replace("TOP_MENU", tpl_menu)
 		end
@@ -204,7 +210,7 @@ redef class WikiArticle
 	fun tpl_header: Writable do
 		var file = header_file
 		if not wiki.has_template(file) then return ""
-		return wiki.load_template(file)
+		return load_template(file)
 	end
 
 	# Generate the HTML page for this article.
@@ -262,7 +268,7 @@ redef class WikiArticle
 	fun tpl_menu: Writable do
 		var file = menu_file
 		if not wiki.has_template(file) then return ""
-		var tpl = wiki.load_template(file)
+		var tpl = load_template(file)
 		if tpl.has_macro("MENUS") then
 			var items = new Template
 			for child in wiki.root_section.children.values do
@@ -285,7 +291,7 @@ redef class WikiArticle
 	fun tpl_footer: Writable do
 		var file = footer_file
 		if not wiki.has_template(file) then return ""
-		var tpl = wiki.load_template(file)
+		var tpl = load_template(file)
 		var time = new Tm.gmtime
 		if tpl.has_macro("YEAR") then
 			tpl.replace("YEAR", (time.year + 1900).to_s)
