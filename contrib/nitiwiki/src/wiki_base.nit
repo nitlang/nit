@@ -194,9 +194,6 @@ class Nitiwiki
 		end
 		var file = expand_path(config.root_dir, config.templates_dir, name)
 		var tpl = new TemplateString.from_file(file)
-		if tpl.has_macro("ROOT_URL") then
-			tpl.replace("ROOT_URL", config.root_url)
-		end
 		if tpl.has_macro("TITLE") then
 			tpl.replace("TITLE", config.wiki_name)
 		end
