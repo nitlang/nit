@@ -1,5 +1,3 @@
-#!/usr/bin/env nit
-#
 # This file is part of NIT ( http://www.nitlanguage.org ).
 # This program is public domain
 
@@ -14,6 +12,8 @@ fun drand:Float do
     return 1.0.rand
 end
 
+# This function returns a pseudorandom numbers with 
+# a mean of 1.0 and a standard deviation of 0.5 
 fun random_normal:Float do
     return (-2.0*drand.log).sqrt * (2.0*pi*drand).cos
 end
