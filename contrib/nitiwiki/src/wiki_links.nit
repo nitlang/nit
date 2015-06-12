@@ -90,8 +90,21 @@ end
 
 redef class WikiEntry
 
-	# Url to `self` once generated.
-	fun url: String do return wiki.config.root_url.join_path(breadcrumbs.join("/"))
+	# Absolute url to `self` once generated.
+	# If you use this, the generated files will hard-code `root_url`
+	fun url: String do return wiki.config.root_url / href
+
+	# Relative path to `self` from the target root_url
+	fun href: String do return breadcrumbs.join("/")
+
+	# A relative `href` to `self` from the page `context`.
+	#
+	# Should be used to navigate between documents.
+	fun href_from(context: WikiEntry): String
+	do
+		var res = context.href.dirname.relpath(href)
+		return res
+	end
 
 	redef fun render do
 		super
@@ -159,11 +172,11 @@ redef class WikiArticle
 	# Checks if `self.name == "index"`.
 	fun is_index: Bool do return name == "index"
 
-	redef fun url do
+	redef fun href do
 		if parent == null then
-			return wiki.config.root_url.join_path("{name}.html")
+			return "{name}.html"
 		else
-			return parent.url.join_path("{name}.html")
+			return parent.href.join_path("{name}.html")
 		end
 	end
 
@@ -184,7 +197,7 @@ class WikiSectionIndex
 
 	redef fun title do return section.title
 
-	redef fun url do return section.url
+	redef fun href do return section.href
 end
 
 # A MarkdownProcessor able to parse wiki links.
