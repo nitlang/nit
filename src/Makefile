@@ -34,6 +34,7 @@ $(BINS): nitc_0 parser/parser.nit
 	@echo '* Compile binaries from NIT source files                      *'
 	@echo '***************************************************************'
 	./git-gen-version.sh
+	test -d ../bin || mkdir ../bin
 	./nitc_0 ${NITCOPT} -v --dir ../bin $(SRCS)
 	rm -r .nit_compile || true # to clean old .nit_compile generated file
 
