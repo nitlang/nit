@@ -578,6 +578,44 @@ print "Hello World!"
 		assert res == exp
 	end
 
+	fun test_process_code_ext6 do
+		var test = """
+~~~
+print "Hello"
+~~~
+~~~
+print "World"
+~~~
+"""
+		var exp = """
+<pre><code>print "Hello"
+</code></pre>
+<pre><code>print "World"
+</code></pre>
+"""
+		var res = test.md_to_html.write_to_string
+		assert res == exp
+	end
+
+	fun test_process_code_ext7 do
+		var test = """
+~~~
+print "Hello"
+~~~
+~~~
+print "World"
+~~~
+"""
+		var exp = """
+<pre><code>print "Hello"
+</code></pre>
+<pre><code>print "World"
+</code></pre>
+"""
+		var res = test.md_to_html.write_to_string
+		assert res == exp
+	end
+
 	fun test_process_nesting1 do
 		var test = """
 > ## This is a header.
@@ -2618,6 +2656,8 @@ class TestLine
 		subject = new MDLine(loc, "  ~~~")
 		assert v.line_kind(subject) isa LineFence
 		subject = new MDLine(loc, "  ```")
+		assert v.line_kind(subject) isa LineFence
+		subject = new MDLine(loc, "~~~raw")
 		assert v.line_kind(subject) isa LineFence
 	end
 

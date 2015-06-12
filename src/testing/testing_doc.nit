@@ -15,12 +15,17 @@
 # Testing from code comments.
 module testing_doc
 
+private import parser_util
 import testing_base
-intrude import docdown
+import markdown
+import html
 
 # Extractor, Executor and Reporter for the tests in a module
 class NitUnitExecutor
-	super Doc2Mdwn
+	super HTMLDecorator
+
+	# Toolcontext used to parse Nit code blocks.
+	var toolcontext: ToolContext
 
 	# The prefix of the generated Nit source-file
 	var prefix: String
@@ -32,44 +37,16 @@ class NitUnitExecutor
 	var testsuite: HTMLTag
 
 	# All blocks of code from a same `ADoc`
-	var blocks = new Array[Array[String]]
+	var blocks = new Array[Buffer]
 
 	# All failures from a same `ADoc`
 	var failures = new Array[String]
 
-	redef fun process_code(n: HTMLTag, text: String, tag: nullable String)
-	do
-		# Skip non-blocks
-		if n.tag != "pre" then return
+	# Markdown processor used to parse markdown comments and extract code.
+	var mdproc = new MarkdownProcessor
 
-		# Skip strict non-nit
-		if tag != null and tag != "nit" and tag != "" then
-			return
-		end
-
-		# Try to parse it
-		var ast = toolcontext.parse_something(text)
-
-		# Skip pure comments
-		if ast isa TComment then return
-
-		# We want executable code
-		if not (ast isa AModule or ast isa ABlockExpr or ast isa AExpr) then
-			var message = ""
-			if ast isa AError then message = " At {ast.location}: {ast.message}."
-			toolcontext.warning(mdoc.location, "invalid-block", "Error: there is a block of invalid Nit code, thus not considered a nitunit. To suppress this warning, enclose the block with a fence tagged `nitish` or `raw` (see `man nitdoc`).{message}")
-			failures.add("{mdoc.location}: Invalid block of code.{message}")
-			return
-		end
-
-		# Create a first block
-		# Or create a new block for modules that are more than a main part
-		if blocks.is_empty or ast isa AModule then
-			blocks.add(new Array[String])
-		end
-
-		# Add it to the file
-		blocks.last.add(text)
+	init do
+		mdproc.emitter.decorator = new NitunitDecorator(self)
 	end
 
 	# The associated documentation object
@@ -89,7 +66,9 @@ class NitUnitExecutor
 
 		self.mdoc = mdoc
 
-		work(mdoc)
+		# Populate `blocks` from the markdown decorator
+		mdproc.process(mdoc.content.join("\n"))
+		if blocks.is_empty then return
 
 		toolcontext.check_errors
 
@@ -103,10 +82,8 @@ class NitUnitExecutor
 			if blocks.is_empty then testsuite.add(tc)
 		end
 
-		if blocks.is_empty then return
-
 		for block in blocks do
-			docunits.add new DocUnit(mdoc, tc, block.join(""))
+			docunits.add new DocUnit(mdoc, tc, block.write_to_string)
 		end
 	end
 
@@ -303,6 +280,65 @@ class NitUnitExecutor
 		var cmd = "{nitc} --ignore-visibility --no-color '{file}' {opts.join(" ")} >'{file}.out1' 2>&1 </dev/null -o '{file}.bin'"
 		var res = sys.system(cmd)
 		return res
+	end
+end
+
+private class NitunitDecorator
+	super HTMLDecorator
+
+	var executor: NitUnitExecutor
+
+	redef fun add_code(v, block) do
+		var code = code_from_block(block)
+		var meta = "nit"
+		if block isa BlockFence and block.meta != null then
+			meta = block.meta.to_s
+		end
+		# Do not try to test non-nit code.
+		if meta != "nit" then return
+		# Try to parse code blocks
+		var ast = executor.toolcontext.parse_something(code)
+
+		# Skip pure comments
+		if ast isa TComment then return
+
+		# We want executable code
+		if not (ast isa AModule or ast isa ABlockExpr or ast isa AExpr) then
+			var message = ""
+			if ast isa AError then message = " At {ast.location}: {ast.message}."
+			executor.toolcontext.warning(executor.mdoc.location, "invalid-block", "Error: there is a block of invalid Nit code, thus not considered a nitunit. To suppress this warning, enclose the block with a fence tagged `nitish` or `raw` (see `man nitdoc`).{message}")
+			executor.failures.add("{executor.mdoc.location}: Invalid block of code.{message}")
+			return
+		end
+
+		# Create a first block
+		# Or create a new block for modules that are more than a main part
+		if executor.blocks.is_empty or ast isa AModule then
+			executor.blocks.add(new Buffer)
+		end
+
+		# Add it to the file
+		executor.blocks.last.append code
+	end
+
+	# Extracts code as String from a `BlockCode`.
+	fun code_from_block(block: BlockCode): String do
+		var infence = block isa BlockFence
+		var text = new FlatBuffer
+		var line = block.block.first_line
+		while line != null do
+			if not line.is_empty then
+				var str = line.value
+				if not infence and str.has_prefix("    ") then
+					text.append str.substring(4, str.length - line.trailing)
+				else
+					text.append str
+				end
+			end
+			text.append "\n"
+			line = line.next
+		end
+		return text.write_to_string
 	end
 end
 

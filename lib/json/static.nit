@@ -70,9 +70,9 @@ interface Jsonable
 	# obj["baz"] = arr
 	# var res = obj.to_pretty_json
 	# var exp = """{
-	#	"foo": 1,
-	#	"bar": true,
-	#	"baz": [2, false, "baz"]
+	# \t"foo": 1,
+	# \t"bar": true,
+	# \t"baz": [2, false, "baz"]
 	# }\n"""
 	# assert res == exp
 	# ~~~

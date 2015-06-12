@@ -25,19 +25,19 @@ fun foo1 do end
 
 # a block unit
 #
-#    if true then
+#     if true then
 #
-#        assert true
+#         assert true
 #
-#    end
+#     end
 fun bar2 do end
 
 # a context continuation
 #
-#    var a = 1
-#    assert a == 1
+#     var a = 1
+#     assert a == 1
 #
 # bla bla
 #
-#    assert a == 1
+#     assert a == 1
 fun foo3 do end

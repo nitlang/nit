@@ -19,18 +19,18 @@ module ini
 #
 # Write example:
 #
-#    var config = new ConfigTree("config.ini")
-#    config["goo"] = "goo"
-#    config["foo.bar"] = "foobar"
-#    config["foo.baz"] = "foobaz"
-#    config.save
-#    assert config.to_map.length == 3
+#     var config = new ConfigTree("config.ini")
+#     config["goo"] = "goo"
+#     config["foo.bar"] = "foobar"
+#     config["foo.baz"] = "foobaz"
+#     config.save
+#     assert config.to_map.length == 3
 #
 # Read example:
 #
-#    config = new ConfigTree("config.ini")
-#    assert config.has_key("foo.bar")
-#    assert config["foo.bar"] == "foobar"
+#     config = new ConfigTree("config.ini")
+#     assert config.has_key("foo.bar")
+#     assert config["foo.bar"] == "foobar"
 class ConfigTree
 	super Writable
 
@@ -43,10 +43,10 @@ class ConfigTree
 	#
 	# REQUIRE: `has_key(key)`
 	#
-	#    var config = new ConfigTree("config.ini")
-	#    assert config["goo"] == "goo"
-	#    assert config["foo.bar"] == "foobar"
-	#    assert config["foo.baz"] == "foobaz"
+	#     var config = new ConfigTree("config.ini")
+	#     assert config["goo"] == "goo"
+	#     assert config["foo.bar"] == "foobar"
+	#     assert config["foo.baz"] == "foobaz"
 	fun [](key: String): String do
 		if not has_key(key) then
 			print "error: config key `{key}` not found"
@@ -64,11 +64,11 @@ class ConfigTree
 	#
 	# REQUIRE: `has_key(key)`
 	#
-	#    var config = new ConfigTree("config.ini")
-	#    var values = config.at("foo")
-	#    assert values.has_key("bar")
-	#    assert values.has_key("baz")
-	#    assert not values.has_key("goo")
+	#     var config = new ConfigTree("config.ini")
+	#     var values = config.at("foo")
+	#     assert values.has_key("bar")
+	#     assert values.has_key("baz")
+	#     assert not values.has_key("goo")
 	fun at(key: String): Map[String, String] do
 		if not has_key(key) then
 			print "error: config key `{key}` not found"
@@ -85,20 +85,20 @@ class ConfigTree
 
 	# Set `value` at `key`
 	#
-	#    var config = new ConfigTree("config.ini")
-	#    assert config["foo.bar"] == "foobar"
-	#    config["foo.bar"] = "baz"
-	#    assert config["foo.bar"] == "baz"
+	#     var config = new ConfigTree("config.ini")
+	#     assert config["foo.bar"] == "foobar"
+	#     config["foo.bar"] = "baz"
+	#     assert config["foo.bar"] == "baz"
 	fun []=(key: String, value: nullable String) do
 		set_node(key, value)
 	end
 
 	# Is `key` in the config?
 	#
-	#    var config = new ConfigTree("config.ini")
-	#    assert config.has_key("goo")
-	#    assert config.has_key("foo.bar")
-	#    assert not config.has_key("zoo")
+	#     var config = new ConfigTree("config.ini")
+	#     assert config.has_key("goo")
+	#     assert config.has_key("foo.bar")
+	#     assert not config.has_key("zoo")
 	fun has_key(key: String): Bool do
 		var parts = key.split(".").reversed
 		var node = get_root(parts.pop)
@@ -112,12 +112,12 @@ class ConfigTree
 
 	# Get `self` as a Map of `key`, `value`
 	#
-	#    var config = new ConfigTree("config.ini")
-	#    var map = config.to_map
-	#    assert map.has_key("goo")
-	#    assert map.has_key("foo.bar")
-	#    assert map.has_key("foo.baz")
-	#    assert map.length == 3
+	#     var config = new ConfigTree("config.ini")
+	#     var map = config.to_map
+	#     assert map.has_key("goo")
+	#     assert map.has_key("foo.bar")
+	#     assert map.has_key("foo.baz")
+	#     assert map.length == 3
 	fun to_map: Map[String, String] do
 		var map = new HashMap[String, String]
 		for node in leaves do
@@ -328,4 +328,3 @@ private class ConfigNode
 		return null
 	end
 end
-

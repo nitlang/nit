@@ -17,15 +17,19 @@
 # The Bitmap class represents a 24-bit bitmap image. An instance can be constructed
 # by calling load or with_size:
 #
-#	new Bitmap.load(path_to_a_bmp_file)
-#	new Bitmap.with_size(400, 300)
+# ~~~nitish
+# var bm1 = new Bitmap.load(path_to_a_bmp_file)
+# var bm2 = new Bitmap.with_size(400, 300)
+# ~~~
 #
 # The width and height attributes contain the image's width and height,
 # respectively.
 #
 # Individual pixels can be manipulated by calling the set_pixel function:
 #
+# ~~~nitish
 #	set_pixel(x, y, color)
+# ~~~
 #
 # The no-argument grayscale function converts the bitmap to grayscale and is an
 # implementation of this Rossetacode task:
@@ -33,7 +37,9 @@
 #
 # Finally, the bitmap can be saved to a file by calling save:
 #
+# ~~~nitish
 #	save(path_to_a_file)
+# ~~~
 #
 # For information on the bitmap format, see
 # http://en.wikipedia.org/wiki/BMP_file_format
