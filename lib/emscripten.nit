@@ -16,7 +16,7 @@
 
 # Platform for the _emscripten_ framework
 #
-# Importing this module from your project will tell `nitg` to compile
+# Importing this module from your project will tell `nitc` to compile
 # to JavaScript for the _emscripten_ framework.
 module emscripten is platform
 
