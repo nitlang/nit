@@ -82,6 +82,10 @@ class RapidTypeAnalysis
 	# Live methods.
 	var live_methods = new HashSet[MMethod]
 
+	# Live mmodules.
+	# Those with a live method definitions (see `live_methoddefs`)
+	var live_mmodules = new HashSet[MModule]
+
 	# Live callsites.
 	var live_callsites = new HashSet[CallSite]
 
@@ -389,6 +393,7 @@ class RapidTypeAnalysis
 	do
 		if live_methoddefs.has(mpropdef) then return
 		live_methoddefs.add(mpropdef)
+		live_mmodules.add(mpropdef.mclassdef.mmodule)
 		todo.add(mpropdef)
 
 		var mproperty = mpropdef.mproperty
