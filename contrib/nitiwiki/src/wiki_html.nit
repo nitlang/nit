@@ -62,8 +62,8 @@ end
 
 redef class WikiEntry
 	# Get a `<a>` template link to `self`
-	fun tpl_link: Writable do
-		return "<a href=\"{url}\">{title}</a>"
+	fun tpl_link(context: WikiEntry): Writable do
+		return "<a href=\"{href_from(context)}\">{title}</a>"
 	end
 end
 
@@ -113,7 +113,7 @@ redef class WikiSection
 		end
 	end
 
-	redef fun tpl_link do return index.tpl_link
+	redef fun tpl_link(context) do return index.tpl_link(context)
 
 	# Render the section hierarchy as a html tree.
 	#
@@ -141,7 +141,7 @@ redef class WikiSection
 		var out = new Template
 		var index = index
 		out.add "<li>"
-		out.add tpl_link
+		out.add tpl_link(self)
 		if (limit < 0 or count < limit) and
 		   (children.length > 1 or (children.length == 1)) then
 			out.add " <ul>"
@@ -149,7 +149,7 @@ redef class WikiSection
 				if child == index then continue
 				if child isa WikiArticle then
 					out.add "<li>"
-					out.add child.tpl_link
+					out.add child.tpl_link(self)
 					out.add "</li>"
 				else if child isa WikiSection and not child.is_hidden then
 					out.add child.tpl_tree_intern(limit, count + 1)
@@ -279,7 +279,7 @@ redef class WikiArticle
 					items.add " class=\"active\""
 				end
 				items.add ">"
-				items.add child.tpl_link
+				items.add child.tpl_link(self)
 				items.add "</li>"
 			end
 			tpl.replace("MENUS", items)
@@ -430,7 +430,7 @@ class TplBreadcrumbs
 			else
 				if article.parent == entry and article.is_index then continue
 				add "<li>"
-				add entry.tpl_link
+				add entry.tpl_link(article)
 				add "</li>"
 			end
 		end
