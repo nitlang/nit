@@ -156,4 +156,15 @@ class Clock
 		time_at_last_lapse = nt
 		return dt
 	end
+
+	# Seconds since the last call to `lapse`, without resetting the lapse counter
+	fun peek_lapse: Float
+	do
+		var nt = new Timespec.monotonic_now
+		var dt = nt - time_at_last_lapse
+		var r = dt.to_f
+		nt.free
+		dt.free
+		return r
+	end
 end
