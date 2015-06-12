@@ -902,7 +902,7 @@ class ArrayCmp[E: nullable Comparable]
 			var b = oit[i]
 			if a != null then
 				if b == null then return 1
-				var d = a <=> b.as(Comparable)
+				var d = a <=> b
 				if d != 0 then return d
 			else
 				if b != null then return -1
