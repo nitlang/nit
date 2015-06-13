@@ -37,6 +37,11 @@ shopt -u nullglob
 outdir="out"
 compdir="nit_compile"
 
+# Real-time limit (in seconds)
+# Is used to avoid waiting or sleeping tests.
+# Require timeout or timelimit, or else is not used.
+realtimelimit=300 # 5 min
+
 usage()
 {
 	e=`basename "$0"`
@@ -95,9 +100,9 @@ timestamp()
 
 # Detect a working timeout
 if sh -c "timelimit echo" 1>/dev/null 2>&1; then
-	TIMEOUT="timelimit -t 600"
+	TIMEOUT="timelimit -t $realtimelimit"
 elif sh -c "timeout 1 echo" 1>/dev/null 2>&1; then
-	TIMEOUT="timeout 600s"
+	TIMEOUT="timeout ${realtimelimit}s"
 else
 	echo "No timelimit or timeout command detected. Tests may hang :("
 fi
