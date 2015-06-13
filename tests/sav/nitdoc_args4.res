@@ -132,6 +132,7 @@ MClassPage Game
 				#### test_prog__game-__Game.children
 				#### test_prog__game-__Game.descendants
 		## test_prog__game-__Game.constructors
+			### test_prog__platform-__Object__init.definition
 		## test_prog__game-__Game.concerns
 		## test_prog.concern
 		## test_prog.concern
@@ -731,6 +732,7 @@ MClassPage Combatable
 				#### test_prog__rpg__combat__Combatable.children
 				#### test_prog__rpg__combat__Combatable.descendants
 		## test_prog__rpg__combat__Combatable.constructors
+			### test_prog__platform-__Object__init.definition
 		## test_prog__rpg__combat__Combatable.concerns
 		## test_prog.concern
 		## test_prog.concern
@@ -779,6 +781,7 @@ MClassPage Weapon
 				#### test_prog__rpg__combat__Weapon.children
 				#### test_prog__rpg__combat__Weapon.descendants
 		## test_prog__rpg__combat__Weapon.constructors
+			### test_prog__platform-__Object__init.definition
 		## test_prog__rpg__combat__Weapon.concerns
 		## test_prog.concern
 		## test_prog.concern
