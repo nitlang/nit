@@ -88,7 +88,10 @@ redef class DocPage
 		addn "<script src='{vendors}/jquery/jquery-1.11.1.min.js'></script>"
 		addn "<script src='{vendors}/jquery/jquery-ui-1.10.4.custom.min.js'></script>"
 		addn "<script src='{vendors}/bootstrap/js/bootstrap.min.js'></script>"
-		addn "<script data-main='{js}/nitdoc' src='{js}/lib/require.js'></script>"
+		addn "<script src='{js}/lib/utils.js'></script>"
+		addn "<script src='{js}/plugins/filtering.js'></script>"
+		addn "<script src='quicksearch-list.js'></script>"
+		addn "<script src='{js}/plugins/quicksearch.js'></script>"
 		for script in scripts do add script
 		addn """<script>
 			$(function () {

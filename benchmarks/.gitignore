@@ -5,3 +5,5 @@
 *.xml
 index.html
 nitc
+nitdoc
+nitdoc.*
