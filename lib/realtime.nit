@@ -72,8 +72,23 @@ extern class Timespec `{struct timespec*`}
 		return self->tv_nsec;
 	`}
 
-	# Seconds in Float
-	# Loss of precision but great to print
+	# Elapsed time in microseconds, with both whole seconds and the rest
+	#
+	# May cause an `Int` overflow, use only with a low number of seconds.
+	fun microsec: Int `{
+		return self->tv_sec*1000000 + self->tv_nsec/1000;
+	`}
+
+	# Elapsed time in milliseconds, with both whole seconds and the rest
+	#
+	# May cause an `Int` overflow, use only with a low number of seconds.
+	fun millisec: Int `{
+		return self->tv_sec*1000 + self->tv_nsec/1000000;
+	`}
+
+	# Number of seconds as a `Float`
+	#
+	# Incurs a loss of precision, but the result is pretty to print.
 	fun to_f: Float do return sec.to_f + nanosec.to_f / 1000000000.0
 
 	redef fun to_s do return "{to_f}s"
