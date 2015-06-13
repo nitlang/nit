@@ -15,7 +15,7 @@
 # limitations under the License.
 
 #alt1 import standard
-#alt1 import standard::ropes
+#alt1 import standard::text::ropes
 
 var s = "Bonjour !\n"
 var r: Buffer = new FlatBuffer.with_capacity(50)

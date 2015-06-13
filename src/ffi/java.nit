@@ -243,7 +243,6 @@ redef class MModule
 	private fun insert_compiler_options
 	do
 		cflags.add_one("", "-I $(JAVA_HOME)/include/ -I $(JAVA_HOME)/include/linux/")
-		ldflags.add_one("", "-L $(JNI_LIB_PATH) -ljvm")
 	end
 
 	# Name of the generated Java class where to store all implementation methods of this module

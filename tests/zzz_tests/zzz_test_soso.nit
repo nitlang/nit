@@ -12,6 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import string
+import text
 0.output
 "Error: bla bla".output

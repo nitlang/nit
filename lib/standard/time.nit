@@ -14,7 +14,7 @@
 # Management of time and dates
 module time
 
-import string_search
+import text
 import stream
 
 in "C Header" `{
@@ -129,12 +129,11 @@ extern class Tm `{struct tm *`}
 	# TODO document allowed format.
 	fun strftime(format: String): String import String.to_cstring, NativeString.to_s `{
 		char* buf, *c_format;
-		size_t res;
 
 		buf = (char*)malloc(100);
 		c_format = String_to_cstring(format);
 
-		res = strftime(buf, 100, c_format, self);
+		strftime(buf, 100, c_format, self);
 		String s = NativeString_to_s_with_copy(buf);
 		free(buf);
 		return s;

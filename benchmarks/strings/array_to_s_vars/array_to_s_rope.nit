@@ -14,7 +14,7 @@
 module array_to_s_rope
 
 intrude import standard::collection::array
-intrude import standard::ropes
+intrude import standard::text::ropes
 
 redef class Array[E]
 

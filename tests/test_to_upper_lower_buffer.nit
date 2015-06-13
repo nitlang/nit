@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-#alt1 import standard::ropes
+#alt1 import standard::text::ropes
 
 var x: Buffer = new FlatBuffer.from("test")
 #alt1 x = new RopeBuffer.from("test")

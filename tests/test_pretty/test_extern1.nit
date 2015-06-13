@@ -14,7 +14,7 @@
 
 import end
 intrude import standard::kernel
-private import standard::string
+private import standard::text
 
 `{`}
 

@@ -7,7 +7,7 @@ var1 = self->attrs[COLOR_nit__phase__ToolContext___phases].val; /* _phases on <s
 if (unlikely(var1 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _phases");
 PRINT_ERROR(" (%s:%d)\n", FILE_nit__phase, 23);
-show_backtrace(1);
+fatal_exit(1);
 }
 var = var1;
 RET_LABEL:;
@@ -21,7 +21,7 @@ var1 = self->attrs[COLOR_nit__phase__ToolContext___opt_disable_phase].val; /* _o
 if (unlikely(var1 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _opt_disable_phase");
 PRINT_ERROR(" (%s:%d)\n", FILE_nit__phase, 30);
-show_backtrace(1);
+fatal_exit(1);
 }
 var = var1;
 RET_LABEL:;
@@ -35,7 +35,7 @@ var1 = self->attrs[COLOR_nit__phase__ToolContext___opt_sloppy].val; /* _opt_slop
 if (unlikely(var1 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _opt_sloppy");
 PRINT_ERROR(" (%s:%d)\n", FILE_nit__phase, 33);
-show_backtrace(1);
+fatal_exit(1);
 }
 var = var1;
 RET_LABEL:;
@@ -50,18 +50,17 @@ val* var5 /* : OptionArray */;
 val* var6 /* : OptionBool */;
 val* var8 /* : OptionBool */;
 val* var9 /* : Array[Option] */;
-long var10 /* : Int */;
-val* var11 /* : NativeArray[Option] */;
+val* var10 /* : NativeArray[Option] */;
 {
-((void (*)(val* self))(self->class->vft[COLOR_nit__phase___ToolContext___standard__kernel__Object__init]))(self) /* init on <self:ToolContext>*/;
+((void(*)(val* self))(self->class->vft[COLOR_nit__phase___ToolContext___standard__kernel__Object__init]))(self); /* init on <self:ToolContext>*/
 }
 {
 { /* Inline toolcontext#ToolContext#option_context (self) on <self:ToolContext> */
 var2 = self->attrs[COLOR_nit__toolcontext__ToolContext___option_context].val; /* _option_context on <self:ToolContext> */
 if (unlikely(var2 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _option_context");
-PRINT_ERROR(" (%s:%d)\n", FILE_nit__toolcontext, 270);
-show_backtrace(1);
+PRINT_ERROR(" (%s:%d)\n", FILE_nit__toolcontext, 332);
+fatal_exit(1);
 }
 var = var2;
 RET_LABEL1:(void)0;
@@ -73,7 +72,7 @@ var5 = self->attrs[COLOR_nit__phase__ToolContext___opt_disable_phase].val; /* _o
 if (unlikely(var5 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _opt_disable_phase");
 PRINT_ERROR(" (%s:%d)\n", FILE_nit__phase, 30);
-show_backtrace(1);
+fatal_exit(1);
 }
 var3 = var5;
 RET_LABEL4:(void)0;
@@ -85,7 +84,7 @@ var8 = self->attrs[COLOR_nit__phase__ToolContext___opt_sloppy].val; /* _opt_slop
 if (unlikely(var8 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _opt_sloppy");
 PRINT_ERROR(" (%s:%d)\n", FILE_nit__phase, 33);
-show_backtrace(1);
+fatal_exit(1);
 }
 var6 = var8;
 RET_LABEL7:(void)0;
@@ -93,12 +92,11 @@ RET_LABEL7:(void)0;
 }
 var9 = NEW_standard__Array(&type_standard__Array__opts__Option);
 { /* var9 = array_instance Array[Option] */
-var10 = 2;
-var11 = NEW_standard__NativeArray(var10, &type_standard__NativeArray__opts__Option);
-((struct instance_standard__NativeArray*)var11)->values[0] = (val*) var3;
-((struct instance_standard__NativeArray*)var11)->values[1] = (val*) var6;
+var10 = NEW_standard__NativeArray(2l, &type_standard__NativeArray__opts__Option);
+((struct instance_standard__NativeArray*)var10)->values[0] = (val*) var3;
+((struct instance_standard__NativeArray*)var10)->values[1] = (val*) var6;
 {
-((void (*)(val* self, val* p0, long p1))(var9->class->vft[COLOR_standard__array__Array__with_native]))(var9, var11, var10) /* with_native on <var9:Array[Option]>*/;
+((void(*)(val* self, val* p0, long p1))(var9->class->vft[COLOR_standard__array__Array__with_native]))(var9, var10, 2l); /* with_native on <var9:Array[Option]>*/
 }
 }
 {
@@ -122,84 +120,74 @@ val* var_v /* var v: String */;
 static val* varonce;
 val* var10 /* : String */;
 char* var11 /* : NativeString */;
-long var12 /* : Int */;
-val* var13 /* : FlatString */;
-short int var14 /* : Bool */;
-val* var15 /* : Sequence[Phase] */;
-val* var_16 /* var : Sequence[Phase] */;
-val* var17 /* : Iterator[nullable Object] */;
-val* var_18 /* var : IndexedIterator[Phase] */;
-short int var19 /* : Bool */;
-val* var20 /* : nullable Object */;
+val* var12 /* : FlatString */;
+short int var13 /* : Bool */;
+val* var14 /* : Sequence[Phase] */;
+val* var_15 /* var : Sequence[Phase] */;
+val* var16 /* : Iterator[nullable Object] */;
+val* var_17 /* var : IndexedIterator[Phase] */;
+short int var18 /* : Bool */;
+val* var19 /* : nullable Object */;
 val* var_p /* var p: Phase */;
-val* var21 /* : POSetElement[Phase] */;
-val* var23 /* : POSetElement[Phase] */;
-val* var24 /* : Collection[nullable Object] */;
+val* var20 /* : POSetElement[Phase] */;
+val* var22 /* : POSetElement[Phase] */;
+val* var23 /* : Collection[nullable Object] */;
 val* var_deps /* var deps: Collection[Phase] */;
-short int var25 /* : Bool */;
-static val* varonce26;
-val* var27 /* : String */;
-char* var28 /* : NativeString */;
-long var29 /* : Int */;
-val* var30 /* : FlatString */;
-static val* varonce31;
-val* var32 /* : String */;
-char* var33 /* : NativeString */;
-long var34 /* : Int */;
-val* var35 /* : FlatString */;
-val* var36 /* : String */;
-static val* varonce37;
-val* var38 /* : String */;
-char* var39 /* : NativeString */;
-long var40 /* : Int */;
+short int var24 /* : Bool */;
+val* var25 /* : Sys */;
+val* var26 /* : Sys */;
+val* var28 /* : NativeArray[String] */;
+static val* varonce27;
+static val* varonce29;
+val* var30 /* : String */;
+char* var31 /* : NativeString */;
+val* var32 /* : FlatString */;
+static val* varonce33;
+val* var34 /* : String */;
+char* var35 /* : NativeString */;
+val* var36 /* : FlatString */;
+val* var37 /* : String */;
+static val* varonce38;
+val* var39 /* : String */;
+char* var40 /* : NativeString */;
 val* var41 /* : FlatString */;
-val* var42 /* : Array[Object] */;
-long var43 /* : Int */;
-val* var44 /* : NativeArray[Object] */;
-val* var45 /* : String */;
-long var47 /* : Int */;
-short int var49 /* : Bool */;
+val* var42 /* : String */;
+val* var43 /* : String */;
+val* var44 /* : Sys */;
 short int var_found /* var found: Bool */;
-val* var50 /* : POSet[Phase] */;
-val* var52 /* : POSet[Phase] */;
-val* var_53 /* var : POSet[Phase] */;
-val* var54 /* : Iterator[nullable Object] */;
-val* var_55 /* var : Iterator[Phase] */;
+val* var46 /* : POSet[Phase] */;
+val* var48 /* : POSet[Phase] */;
+val* var_49 /* var : POSet[Phase] */;
+val* var50 /* : Iterator[nullable Object] */;
+val* var_51 /* var : Iterator[Phase] */;
+short int var52 /* : Bool */;
+val* var53 /* : nullable Object */;
+val* var_p54 /* var p: Phase */;
+val* var55 /* : String */;
 short int var56 /* : Bool */;
-val* var57 /* : nullable Object */;
-val* var_p58 /* var p: Phase */;
-val* var59 /* : String */;
-short int var60 /* : Bool */;
 val* var_other /* var other: nullable Object */;
-short int var62 /* : Bool */;
+short int var58 /* : Bool */;
+short int var59 /* : Bool */;
 short int var63 /* : Bool */;
-short int var65 /* : Bool */;
-short int var66 /* : Bool */;
-short int var70 /* : Bool */;
-val* var71 /* : null */;
-static val* varonce72;
-val* var73 /* : String */;
-char* var74 /* : NativeString */;
-long var75 /* : Int */;
-val* var76 /* : FlatString */;
-static val* varonce77;
-val* var78 /* : String */;
-char* var79 /* : NativeString */;
-long var80 /* : Int */;
-val* var81 /* : FlatString */;
-val* var82 /* : Array[Object] */;
-long var83 /* : Int */;
-val* var84 /* : NativeArray[Object] */;
-val* var85 /* : String */;
-val* var88 /* : OptionBool */;
-val* var90 /* : OptionBool */;
-val* var91 /* : nullable Object */;
-val* var93 /* : nullable Object */;
-short int var94 /* : Bool */;
-short int var95 /* : Bool */;
+val* var65 /* : NativeArray[String] */;
+static val* varonce64;
+static val* varonce66;
+val* var67 /* : String */;
+char* var68 /* : NativeString */;
+val* var69 /* : FlatString */;
+static val* varonce70;
+val* var71 /* : String */;
+char* var72 /* : NativeString */;
+val* var73 /* : FlatString */;
+val* var74 /* : String */;
+val* var76 /* : OptionBool */;
+val* var78 /* : OptionBool */;
+val* var79 /* : nullable Object */;
+val* var81 /* : nullable Object */;
+short int var82 /* : Bool */;
 var_args = p0;
 {
-((void (*)(val* self, val* p0))(self->class->vft[COLOR_nit__phase___ToolContext___process_options]))(self, p0) /* process_options on <self:ToolContext>*/;
+((void(*)(val* self, val* p0))(self->class->vft[COLOR_nit__phase___ToolContext___process_options]))(self, p0); /* process_options on <self:ToolContext>*/
 }
 {
 { /* Inline phase#ToolContext#opt_disable_phase (self) on <self:ToolContext> */
@@ -207,7 +195,7 @@ var2 = self->attrs[COLOR_nit__phase__ToolContext___opt_disable_phase].val; /* _o
 if (unlikely(var2 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _opt_disable_phase");
 PRINT_ERROR(" (%s:%d)\n", FILE_nit__phase, 30);
-show_backtrace(1);
+fatal_exit(1);
 }
 var = var2;
 RET_LABEL1:(void)0;
@@ -234,111 +222,111 @@ if (var8){
 var9 = standard__array___standard__array__ArrayIterator___standard__abstract_collection__Iterator__item(var_7);
 }
 var_v = var9;
-if (varonce) {
+if (likely(varonce!=NULL)) {
 var10 = varonce;
 } else {
 var11 = "list";
-var12 = 4;
-var13 = standard___standard__NativeString___to_s_with_length(var11, var12);
-var10 = var13;
+var12 = standard___standard__NativeString___to_s_with_length(var11, 4l);
+var10 = var12;
 varonce = var10;
 }
 {
-var14 = ((short int (*)(val* self, val* p0))(var_v->class->vft[COLOR_standard__kernel__Object___61d_61d]))(var_v, var10) /* == on <var_v:String>*/;
+var13 = ((short int(*)(val* self, val* p0))(var_v->class->vft[COLOR_standard__kernel__Object___61d_61d]))(var_v, var10); /* == on <var_v:String>*/
 }
-if (var14){
+if (var13){
 {
-var15 = nit__phase___ToolContext___phases_list(self);
+var14 = nit__phase___ToolContext___phases_list(self);
 }
-var_16 = var15;
+var_15 = var14;
 {
-var17 = ((val* (*)(val* self))(var_16->class->vft[COLOR_standard__abstract_collection__Collection__iterator]))(var_16) /* iterator on <var_16:Sequence[Phase]>*/;
+var16 = ((val*(*)(val* self))((((long)var_15&3)?class_info[((long)var_15&3)]:var_15->class)->vft[COLOR_standard__abstract_collection__Collection__iterator]))(var_15); /* iterator on <var_15:Sequence[Phase]>*/
 }
-var_18 = var17;
+var_17 = var16;
 for(;;) {
 {
-var19 = ((short int (*)(val* self))(var_18->class->vft[COLOR_standard__abstract_collection__Iterator__is_ok]))(var_18) /* is_ok on <var_18:IndexedIterator[Phase]>*/;
+var18 = ((short int(*)(val* self))((((long)var_17&3)?class_info[((long)var_17&3)]:var_17->class)->vft[COLOR_standard__abstract_collection__Iterator__is_ok]))(var_17); /* is_ok on <var_17:IndexedIterator[Phase]>*/
 }
-if (var19){
+if (var18){
 {
-var20 = ((val* (*)(val* self))(var_18->class->vft[COLOR_standard__abstract_collection__Iterator__item]))(var_18) /* item on <var_18:IndexedIterator[Phase]>*/;
+var19 = ((val*(*)(val* self))((((long)var_17&3)?class_info[((long)var_17&3)]:var_17->class)->vft[COLOR_standard__abstract_collection__Iterator__item]))(var_17); /* item on <var_17:IndexedIterator[Phase]>*/
 }
-var_p = var20;
+var_p = var19;
 {
 { /* Inline phase#Phase#in_hierarchy (var_p) on <var_p:Phase> */
-var23 = var_p->attrs[COLOR_nit__phase__Phase___in_hierarchy].val; /* _in_hierarchy on <var_p:Phase> */
-if (unlikely(var23 == NULL)) {
+var22 = var_p->attrs[COLOR_nit__phase__Phase___in_hierarchy].val; /* _in_hierarchy on <var_p:Phase> */
+if (unlikely(var22 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _in_hierarchy");
-PRINT_ERROR(" (%s:%d)\n", FILE_nit__phase, 204);
-show_backtrace(1);
+PRINT_ERROR(" (%s:%d)\n", FILE_nit__phase, 203);
+fatal_exit(1);
 }
-var21 = var23;
-RET_LABEL22:(void)0;
+var20 = var22;
+RET_LABEL21:(void)0;
 }
 }
 {
-var24 = poset___poset__POSetElement___direct_greaters(var21);
+var23 = poset___poset__POSetElement___direct_greaters(var20);
 }
-var_deps = var24;
+var_deps = var23;
 {
-var25 = ((short int (*)(val* self))(var_deps->class->vft[COLOR_standard__abstract_collection__Collection__is_empty]))(var_deps) /* is_empty on <var_deps:Collection[Phase]>*/;
+var24 = ((short int(*)(val* self))((((long)var_deps&3)?class_info[((long)var_deps&3)]:var_deps->class)->vft[COLOR_standard__abstract_collection__Collection__is_empty]))(var_deps); /* is_empty on <var_deps:Collection[Phase]>*/
 }
-if (var25){
+if (var24){
+var25 = glob_sys;
 {
-standard__file___Object___print(self, var_p); /* Direct call file#Object#print on <self:ToolContext>*/
+standard__file___Sys___print(var25, var_p); /* Direct call file#Sys#print on <var25:Sys>*/
 }
 } else {
-if (varonce26) {
-var27 = varonce26;
+var26 = glob_sys;
+if (unlikely(varonce27==NULL)) {
+var28 = NEW_standard__NativeArray(4l, &type_standard__NativeArray__standard__String);
+if (likely(varonce29!=NULL)) {
+var30 = varonce29;
 } else {
-var28 = " (dep: ";
-var29 = 7;
-var30 = standard___standard__NativeString___to_s_with_length(var28, var29);
-var27 = var30;
-varonce26 = var27;
+var31 = " (dep: ";
+var32 = standard___standard__NativeString___to_s_with_length(var31, 7l);
+var30 = var32;
+varonce29 = var30;
 }
-if (varonce31) {
-var32 = varonce31;
+((struct instance_standard__NativeArray*)var28)->values[1]=var30;
+if (likely(varonce33!=NULL)) {
+var34 = varonce33;
 } else {
-var33 = ", ";
-var34 = 2;
-var35 = standard___standard__NativeString___to_s_with_length(var33, var34);
-var32 = var35;
-varonce31 = var32;
+var35 = ")";
+var36 = standard___standard__NativeString___to_s_with_length(var35, 1l);
+var34 = var36;
+varonce33 = var34;
 }
-{
-var36 = standard__string___Collection___join(var_deps, var32);
-}
-if (varonce37) {
-var38 = varonce37;
+((struct instance_standard__NativeArray*)var28)->values[3]=var34;
 } else {
-var39 = ")";
-var40 = 1;
-var41 = standard___standard__NativeString___to_s_with_length(var39, var40);
-var38 = var41;
-varonce37 = var38;
-}
-var42 = NEW_standard__Array(&type_standard__Array__standard__Object);
-{ /* var42 = array_instance Array[Object] */
-var43 = 4;
-var44 = NEW_standard__NativeArray(var43, &type_standard__NativeArray__standard__Object);
-((struct instance_standard__NativeArray*)var44)->values[0] = (val*) var_p;
-((struct instance_standard__NativeArray*)var44)->values[1] = (val*) var27;
-((struct instance_standard__NativeArray*)var44)->values[2] = (val*) var36;
-((struct instance_standard__NativeArray*)var44)->values[3] = (val*) var38;
-{
-((void (*)(val* self, val* p0, long p1))(var42->class->vft[COLOR_standard__array__Array__with_native]))(var42, var44, var43) /* with_native on <var42:Array[Object]>*/;
-}
+var28 = varonce27;
+varonce27 = NULL;
 }
 {
-var45 = ((val* (*)(val* self))(var42->class->vft[COLOR_standard__string__Object__to_s]))(var42) /* to_s on <var42:Array[Object]>*/;
+var37 = ((val*(*)(val* self))(var_p->class->vft[COLOR_standard__string__Object__to_s]))(var_p); /* to_s on <var_p:Phase>*/
+}
+((struct instance_standard__NativeArray*)var28)->values[0]=var37;
+if (likely(varonce38!=NULL)) {
+var39 = varonce38;
+} else {
+var40 = ", ";
+var41 = standard___standard__NativeString___to_s_with_length(var40, 2l);
+var39 = var41;
+varonce38 = var39;
 }
 {
-standard__file___Object___print(self, var45); /* Direct call file#Object#print on <self:ToolContext>*/
+var42 = standard__string___Collection___join(var_deps, var39);
+}
+((struct instance_standard__NativeArray*)var28)->values[2]=var42;
+{
+var43 = ((val*(*)(val* self))(var28->class->vft[COLOR_standard__string__NativeArray__native_to_s]))(var28); /* native_to_s on <var28:NativeArray[String]>*/
+}
+varonce27 = var28;
+{
+standard__file___Sys___print(var26, var43); /* Direct call file#Sys#print on <var26:Sys>*/
 }
 }
 {
-((void (*)(val* self))(var_18->class->vft[COLOR_standard__abstract_collection__Iterator__next]))(var_18) /* next on <var_18:IndexedIterator[Phase]>*/;
+((void(*)(val* self))((((long)var_17&3)?class_info[((long)var_17&3)]:var_17->class)->vft[COLOR_standard__abstract_collection__Iterator__next]))(var_17); /* next on <var_17:IndexedIterator[Phase]>*/
 }
 } else {
 goto BREAK_label;
@@ -346,126 +334,115 @@ goto BREAK_label;
 }
 BREAK_label: (void)0;
 {
-{ /* Inline abstract_collection#Iterator#finish (var_18) on <var_18:IndexedIterator[Phase]> */
-RET_LABEL46:(void)0;
+((void(*)(val* self))((((long)var_17&3)?class_info[((long)var_17&3)]:var_17->class)->vft[COLOR_standard__abstract_collection__Iterator__finish]))(var_17); /* finish on <var_17:IndexedIterator[Phase]>*/
 }
-}
-var47 = 0;
+var44 = glob_sys;
 {
-{ /* Inline kernel#Object#exit (self,var47) on <self:ToolContext> */
-exit(var47);
-RET_LABEL48:(void)0;
+{ /* Inline kernel#Sys#exit (var44,0l) on <var44:Sys> */
+exit(0l);
+RET_LABEL45:(void)0;
 }
 }
 } else {
 }
-var49 = 0;
-var_found = var49;
+var_found = 0;
 {
 { /* Inline phase#ToolContext#phases (self) on <self:ToolContext> */
-var52 = self->attrs[COLOR_nit__phase__ToolContext___phases].val; /* _phases on <self:ToolContext> */
-if (unlikely(var52 == NULL)) {
+var48 = self->attrs[COLOR_nit__phase__ToolContext___phases].val; /* _phases on <self:ToolContext> */
+if (unlikely(var48 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _phases");
 PRINT_ERROR(" (%s:%d)\n", FILE_nit__phase, 23);
-show_backtrace(1);
+fatal_exit(1);
 }
-var50 = var52;
-RET_LABEL51:(void)0;
+var46 = var48;
+RET_LABEL47:(void)0;
 }
 }
-var_53 = var50;
+var_49 = var46;
 {
-var54 = poset___poset__POSet___standard__abstract_collection__Collection__iterator(var_53);
+var50 = poset___poset__POSet___standard__abstract_collection__Collection__iterator(var_49);
 }
-var_55 = var54;
+var_51 = var50;
 for(;;) {
 {
-var56 = ((short int (*)(val* self))(var_55->class->vft[COLOR_standard__abstract_collection__Iterator__is_ok]))(var_55) /* is_ok on <var_55:Iterator[Phase]>*/;
+var52 = ((short int(*)(val* self))((((long)var_51&3)?class_info[((long)var_51&3)]:var_51->class)->vft[COLOR_standard__abstract_collection__Iterator__is_ok]))(var_51); /* is_ok on <var_51:Iterator[Phase]>*/
+}
+if (var52){
+{
+var53 = ((val*(*)(val* self))((((long)var_51&3)?class_info[((long)var_51&3)]:var_51->class)->vft[COLOR_standard__abstract_collection__Iterator__item]))(var_51); /* item on <var_51:Iterator[Phase]>*/
+}
+var_p54 = var53;
+{
+var55 = nit___nit__Phase___standard__string__Object__to_s(var_p54);
+}
+{
+{ /* Inline kernel#Object#!= (var_v,var55) on <var_v:String> */
+var_other = var55;
+{
+var58 = ((short int(*)(val* self, val* p0))(var_v->class->vft[COLOR_standard__kernel__Object___61d_61d]))(var_v, var_other); /* == on <var_v:String>*/
+}
+var59 = !var58;
+var56 = var59;
+goto RET_LABEL57;
+RET_LABEL57:(void)0;
+}
 }
 if (var56){
-{
-var57 = ((val* (*)(val* self))(var_55->class->vft[COLOR_standard__abstract_collection__Iterator__item]))(var_55) /* item on <var_55:Iterator[Phase]>*/;
+goto BREAK_label60;
+} else {
 }
-var_p58 = var57;
+var_found = 1;
 {
-var59 = nit___nit__Phase___standard__string__Object__to_s(var_p58);
-}
-{
-{ /* Inline kernel#Object#!= (var_v,var59) on <var_v:String> */
-var_other = var59;
-{
-var62 = ((short int (*)(val* self, val* p0))(var_v->class->vft[COLOR_standard__kernel__Object___61d_61d]))(var_v, var_other) /* == on <var_v:String>*/;
-}
-var63 = !var62;
-var60 = var63;
-goto RET_LABEL61;
+{ /* Inline phase#Phase#disabled= (var_p54,1) on <var_p54:Phase> */
+var_p54->attrs[COLOR_nit__phase__Phase___disabled].s = 1; /* _disabled on <var_p54:Phase> */
 RET_LABEL61:(void)0;
 }
 }
-if (var60){
-goto BREAK_label64;
-} else {
-}
-var65 = 1;
-var_found = var65;
-var66 = 1;
+BREAK_label60: (void)0;
 {
-{ /* Inline phase#Phase#disabled= (var_p58,var66) on <var_p58:Phase> */
-var_p58->attrs[COLOR_nit__phase__Phase___disabled].s = var66; /* _disabled on <var_p58:Phase> */
-RET_LABEL67:(void)0;
-}
-}
-BREAK_label64: (void)0;
-{
-((void (*)(val* self))(var_55->class->vft[COLOR_standard__abstract_collection__Iterator__next]))(var_55) /* next on <var_55:Iterator[Phase]>*/;
+((void(*)(val* self))((((long)var_51&3)?class_info[((long)var_51&3)]:var_51->class)->vft[COLOR_standard__abstract_collection__Iterator__next]))(var_51); /* next on <var_51:Iterator[Phase]>*/
 }
 } else {
-goto BREAK_label68;
+goto BREAK_label62;
 }
 }
-BREAK_label68: (void)0;
+BREAK_label62: (void)0;
 {
-{ /* Inline abstract_collection#Iterator#finish (var_55) on <var_55:Iterator[Phase]> */
-RET_LABEL69:(void)0;
+((void(*)(val* self))((((long)var_51&3)?class_info[((long)var_51&3)]:var_51->class)->vft[COLOR_standard__abstract_collection__Iterator__finish]))(var_51); /* finish on <var_51:Iterator[Phase]>*/
 }
-}
-var70 = !var_found;
-if (var70){
-var71 = NULL;
-if (varonce72) {
-var73 = varonce72;
+var63 = !var_found;
+if (var63){
+if (unlikely(varonce64==NULL)) {
+var65 = NEW_standard__NativeArray(3l, &type_standard__NativeArray__standard__String);
+if (likely(varonce66!=NULL)) {
+var67 = varonce66;
 } else {
-var74 = "Error: no phase named `";
-var75 = 23;
-var76 = standard___standard__NativeString___to_s_with_length(var74, var75);
-var73 = var76;
-varonce72 = var73;
+var68 = "Error: no phase named `";
+var69 = standard___standard__NativeString___to_s_with_length(var68, 23l);
+var67 = var69;
+varonce66 = var67;
 }
-if (varonce77) {
-var78 = varonce77;
+((struct instance_standard__NativeArray*)var65)->values[0]=var67;
+if (likely(varonce70!=NULL)) {
+var71 = varonce70;
 } else {
-var79 = "`. Use `list` to list all phases.";
-var80 = 33;
-var81 = standard___standard__NativeString___to_s_with_length(var79, var80);
-var78 = var81;
-varonce77 = var78;
+var72 = "`. Use `list` to list all phases.";
+var73 = standard___standard__NativeString___to_s_with_length(var72, 33l);
+var71 = var73;
+varonce70 = var71;
 }
-var82 = NEW_standard__Array(&type_standard__Array__standard__Object);
-{ /* var82 = array_instance Array[Object] */
-var83 = 3;
-var84 = NEW_standard__NativeArray(var83, &type_standard__NativeArray__standard__Object);
-((struct instance_standard__NativeArray*)var84)->values[0] = (val*) var73;
-((struct instance_standard__NativeArray*)var84)->values[1] = (val*) var_v;
-((struct instance_standard__NativeArray*)var84)->values[2] = (val*) var78;
+((struct instance_standard__NativeArray*)var65)->values[2]=var71;
+} else {
+var65 = varonce64;
+varonce64 = NULL;
+}
+((struct instance_standard__NativeArray*)var65)->values[1]=var_v;
 {
-((void (*)(val* self, val* p0, long p1))(var82->class->vft[COLOR_standard__array__Array__with_native]))(var82, var84, var83) /* with_native on <var82:Array[Object]>*/;
+var74 = ((val*(*)(val* self))(var65->class->vft[COLOR_standard__string__NativeArray__native_to_s]))(var65); /* native_to_s on <var65:NativeArray[String]>*/
 }
-}
+varonce64 = var65;
 {
-var85 = ((val* (*)(val* self))(var82->class->vft[COLOR_standard__string__Object__to_s]))(var82) /* to_s on <var82:Array[Object]>*/;
-}
-{
-nit___nit__ToolContext___fatal_error(self, var71, var85); /* Direct call toolcontext#ToolContext#fatal_error on <self:ToolContext>*/
+nit___nit__ToolContext___fatal_error(self, ((val*)NULL), var74); /* Direct call toolcontext#ToolContext#fatal_error on <self:ToolContext>*/
 }
 } else {
 }
@@ -473,41 +450,38 @@ nit___nit__ToolContext___fatal_error(self, var71, var85); /* Direct call toolcon
 standard__array___standard__array__ArrayIterator___standard__abstract_collection__Iterator__next(var_7); /* Direct call array#ArrayIterator#next on <var_7:ArrayIterator[String]>*/
 }
 } else {
-goto BREAK_label86;
+goto BREAK_label75;
 }
 }
-BREAK_label86: (void)0;
+BREAK_label75: (void)0;
 {
-{ /* Inline abstract_collection#Iterator#finish (var_7) on <var_7:ArrayIterator[String]> */
-RET_LABEL87:(void)0;
-}
+standard__array___standard__array__ArrayIterator___standard__abstract_collection__Iterator__finish(var_7); /* Direct call array#ArrayIterator#finish on <var_7:ArrayIterator[String]>*/
 }
 {
 { /* Inline phase#ToolContext#opt_sloppy (self) on <self:ToolContext> */
-var90 = self->attrs[COLOR_nit__phase__ToolContext___opt_sloppy].val; /* _opt_sloppy on <self:ToolContext> */
-if (unlikely(var90 == NULL)) {
+var78 = self->attrs[COLOR_nit__phase__ToolContext___opt_sloppy].val; /* _opt_sloppy on <self:ToolContext> */
+if (unlikely(var78 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _opt_sloppy");
 PRINT_ERROR(" (%s:%d)\n", FILE_nit__phase, 33);
-show_backtrace(1);
+fatal_exit(1);
 }
-var88 = var90;
-RET_LABEL89:(void)0;
+var76 = var78;
+RET_LABEL77:(void)0;
 }
 }
 {
-{ /* Inline opts#Option#value (var88) on <var88:OptionBool> */
-var93 = var88->attrs[COLOR_opts__Option___value].val; /* _value on <var88:OptionBool> */
-var91 = var93;
-RET_LABEL92:(void)0;
+{ /* Inline opts#Option#value (var76) on <var76:OptionBool> */
+var81 = var76->attrs[COLOR_opts__Option___value].val; /* _value on <var76:OptionBool> */
+var79 = var81;
+RET_LABEL80:(void)0;
 }
 }
-var94 = ((struct instance_standard__Bool*)var91)->value; /* autounbox from nullable Object to Bool */;
-if (var94){
-var95 = 1;
+var82 = (short int)((long)(var79)>>2);
+if (var82){
 {
-{ /* Inline phase#ToolContext#semantize_is_lazy= (self,var95) on <self:ToolContext> */
-self->attrs[COLOR_nit__phase__ToolContext___semantize_is_lazy].s = var95; /* _semantize_is_lazy on <self:ToolContext> */
-RET_LABEL96:(void)0;
+{ /* Inline phase#ToolContext#semantize_is_lazy= (self,1) on <self:ToolContext> */
+self->attrs[COLOR_nit__phase__ToolContext___semantize_is_lazy].s = 1; /* _semantize_is_lazy on <self:ToolContext> */
+RET_LABEL83:(void)0;
 }
 }
 } else {
@@ -532,7 +506,7 @@ var2 = self->attrs[COLOR_nit__phase__ToolContext___phases_list].val; /* _phases_
 if (unlikely(var2 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _phases_list");
 PRINT_ERROR(" (%s:%d)\n", FILE_nit__phase, 72);
-show_backtrace(1);
+fatal_exit(1);
 }
 } else {
 {
@@ -542,7 +516,7 @@ var7 = self->attrs[COLOR_nit__phase__ToolContext___phases].val; /* _phases on <s
 if (unlikely(var7 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _phases");
 PRINT_ERROR(" (%s:%d)\n", FILE_nit__phase, 23);
-show_backtrace(1);
+fatal_exit(1);
 }
 var5 = var7;
 RET_LABEL6:(void)0;
@@ -558,7 +532,7 @@ var11 = self->attrs[COLOR_nit__phase__ToolContext___phases].val; /* _phases on <
 if (unlikely(var11 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _phases");
 PRINT_ERROR(" (%s:%d)\n", FILE_nit__phase, 23);
-show_backtrace(1);
+fatal_exit(1);
 }
 var9 = var11;
 RET_LABEL10:(void)0;
@@ -600,7 +574,7 @@ var1 = self->attrs[COLOR_nit__phase__ToolContext___phased_modules].val; /* _phas
 if (unlikely(var1 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _phased_modules");
 PRINT_ERROR(" (%s:%d)\n", FILE_nit__phase, 86);
-show_backtrace(1);
+fatal_exit(1);
 }
 var = var1;
 RET_LABEL:;
@@ -615,171 +589,159 @@ long var_time0 /* var time0: Int */;
 static val* varonce;
 val* var3 /* : String */;
 char* var4 /* : NativeString */;
-long var5 /* : Int */;
-val* var6 /* : FlatString */;
-long var7 /* : Int */;
-val* var8 /* : Sequence[Phase] */;
+val* var5 /* : FlatString */;
+val* var6 /* : Sequence[Phase] */;
 val* var_phases /* var phases: Sequence[Phase] */;
 val* var_ /* var : Sequence[Phase] */;
-val* var9 /* : Iterator[nullable Object] */;
-val* var_10 /* var : IndexedIterator[Phase] */;
-short int var11 /* : Bool */;
-val* var12 /* : nullable Object */;
+val* var7 /* : Iterator[nullable Object] */;
+val* var_8 /* var : IndexedIterator[Phase] */;
+short int var9 /* : Bool */;
+val* var10 /* : nullable Object */;
 val* var_phase /* var phase: Phase */;
+val* var12 /* : NativeArray[String] */;
+static val* varonce11;
 static val* varonce13;
 val* var14 /* : String */;
 char* var15 /* : NativeString */;
-long var16 /* : Int */;
-val* var17 /* : FlatString */;
-val* var18 /* : Array[Object] */;
-long var19 /* : Int */;
-val* var20 /* : NativeArray[Object] */;
-val* var21 /* : String */;
-long var22 /* : Int */;
-val* var_24 /* var : Collection[AModule] */;
-val* var25 /* : Iterator[nullable Object] */;
-val* var_26 /* var : Iterator[AModule] */;
-short int var27 /* : Bool */;
-val* var28 /* : nullable Object */;
+val* var16 /* : FlatString */;
+val* var17 /* : String */;
+val* var18 /* : String */;
+val* var_19 /* var : Collection[AModule] */;
+val* var20 /* : Iterator[nullable Object] */;
+val* var_21 /* var : Iterator[AModule] */;
+short int var22 /* : Bool */;
+val* var23 /* : nullable Object */;
 val* var_nmodule /* var nmodule: AModule */;
+val* var24 /* : HashSet[AModule] */;
+val* var26 /* : HashSet[AModule] */;
+short int var27 /* : Bool */;
 val* var29 /* : HashSet[AModule] */;
 val* var31 /* : HashSet[AModule] */;
-short int var32 /* : Bool */;
-val* var34 /* : HashSet[AModule] */;
-val* var36 /* : HashSet[AModule] */;
-static val* varonce37;
-val* var38 /* : String */;
-char* var39 /* : NativeString */;
-long var40 /* : Int */;
-val* var41 /* : FlatString */;
-val* var42 /* : Location */;
-val* var44 /* : Location */;
-val* var45 /* : nullable SourceFile */;
-val* var47 /* : nullable SourceFile */;
-val* var48 /* : String */;
-val* var50 /* : String */;
-val* var51 /* : Array[Object] */;
-long var52 /* : Int */;
-val* var53 /* : NativeArray[Object] */;
-val* var54 /* : String */;
-long var55 /* : Int */;
-val* var56 /* : AnnotationPhaseVisitor */;
+val* var33 /* : NativeArray[String] */;
+static val* varonce32;
+static val* varonce34;
+val* var35 /* : String */;
+char* var36 /* : NativeString */;
+val* var37 /* : FlatString */;
+val* var38 /* : Location */;
+val* var40 /* : Location */;
+val* var41 /* : nullable SourceFile */;
+val* var43 /* : nullable SourceFile */;
+val* var44 /* : String */;
+val* var46 /* : String */;
+val* var47 /* : String */;
+val* var48 /* : AnnotationPhaseVisitor */;
 val* var_vannot /* var vannot: AnnotationPhaseVisitor */;
-val* var_58 /* var : Sequence[Phase] */;
-val* var59 /* : Iterator[nullable Object] */;
-val* var_60 /* var : IndexedIterator[Phase] */;
-short int var61 /* : Bool */;
-val* var62 /* : nullable Object */;
-val* var_phase63 /* var phase: Phase */;
-short int var64 /* : Bool */;
-short int var66 /* : Bool */;
-static val* varonce68;
-val* var69 /* : String */;
-char* var70 /* : NativeString */;
-long var71 /* : Int */;
-val* var72 /* : FlatString */;
-val* var73 /* : Array[Object] */;
-long var74 /* : Int */;
-val* var75 /* : NativeArray[Object] */;
-val* var76 /* : String */;
-long var77 /* : Int */;
-val* var78 /* : ToolContext */;
-val* var80 /* : ToolContext */;
-short int var81 /* : Bool */;
+val* var_50 /* var : Sequence[Phase] */;
+val* var51 /* : Iterator[nullable Object] */;
+val* var_52 /* var : IndexedIterator[Phase] */;
+short int var53 /* : Bool */;
+val* var54 /* : nullable Object */;
+val* var_phase55 /* var phase: Phase */;
+short int var56 /* : Bool */;
+short int var58 /* : Bool */;
+val* var60 /* : ToolContext */;
+val* var62 /* : ToolContext */;
+short int var63 /* : Bool */;
 val* var_other /* var other: nullable Object */;
-short int var83 /* : Bool */;
-short int var85 /* : Bool */;
-long var86 /* : Int */;
-long var88 /* : Int */;
+short int var65 /* : Bool */;
+short int var67 /* : Bool */;
+long var68 /* : Int */;
+long var70 /* : Int */;
 long var_errcount /* var errcount: Int */;
-long var89 /* : Int */;
-long var91 /* : Int */;
-short int var92 /* : Bool */;
-short int var94 /* : Bool */;
-short int var95 /* : Bool */;
-short int var96 /* : Bool */;
-long var98 /* : Int */;
-long var100 /* : Int */;
-val* var101 /* : ANodes[AClassdef] */;
-val* var103 /* : ANodes[AClassdef] */;
-val* var_104 /* var : ANodes[AClassdef] */;
-val* var105 /* : Iterator[ANode] */;
-val* var_106 /* var : Iterator[AClassdef] */;
-short int var107 /* : Bool */;
-val* var108 /* : nullable Object */;
+long var71 /* : Int */;
+long var73 /* : Int */;
+short int var74 /* : Bool */;
+short int var76 /* : Bool */;
+short int var77 /* : Bool */;
+short int var78 /* : Bool */;
+long var79 /* : Int */;
+long var81 /* : Int */;
+val* var82 /* : ANodes[AClassdef] */;
+val* var84 /* : ANodes[AClassdef] */;
+val* var_85 /* var : ANodes[AClassdef] */;
+val* var86 /* : Iterator[ANode] */;
+val* var_87 /* var : Iterator[AClassdef] */;
+short int var88 /* : Bool */;
+val* var89 /* : nullable Object */;
 val* var_nclassdef /* var nclassdef: AClassdef */;
-val* var109 /* : ToolContext */;
-val* var111 /* : ToolContext */;
-short int var112 /* : Bool */;
-short int var114 /* : Bool */;
-short int var116 /* : Bool */;
-val* var_nclassdef118 /* var nclassdef: AClassdef */;
-short int var119 /* : Bool */;
-short int var121 /* : Bool */;
-short int var122 /* : Bool */;
-val* var123 /* : ANodes[APropdef] */;
-val* var125 /* : ANodes[APropdef] */;
-val* var_126 /* var : ANodes[APropdef] */;
-val* var127 /* : Iterator[ANode] */;
-val* var_128 /* var : Iterator[APropdef] */;
-short int var129 /* : Bool */;
-val* var130 /* : nullable Object */;
+val* var90 /* : ToolContext */;
+val* var92 /* : ToolContext */;
+short int var93 /* : Bool */;
+short int var95 /* : Bool */;
+short int var97 /* : Bool */;
+short int var98 /* : Bool */;
+short int var100 /* : Bool */;
+short int var101 /* : Bool */;
+val* var102 /* : ANodes[APropdef] */;
+val* var104 /* : ANodes[APropdef] */;
+val* var_105 /* var : ANodes[APropdef] */;
+val* var106 /* : Iterator[ANode] */;
+val* var_107 /* var : Iterator[APropdef] */;
+short int var108 /* : Bool */;
+val* var109 /* : nullable Object */;
 val* var_npropdef /* var npropdef: APropdef */;
-val* var131 /* : ToolContext */;
-val* var133 /* : ToolContext */;
+val* var110 /* : ToolContext */;
+val* var112 /* : ToolContext */;
+short int var113 /* : Bool */;
+short int var115 /* : Bool */;
+short int var117 /* : Bool */;
+long var120 /* : Int */;
+long var122 /* : Int */;
+short int var123 /* : Bool */;
+short int var125 /* : Bool */;
+short int var126 /* : Bool */;
+short int var127 /* : Bool */;
+val* var128 /* : Array[AAnnotation] */;
+val* var130 /* : Array[AAnnotation] */;
+val* var_131 /* var : Array[AAnnotation] */;
+val* var132 /* : ArrayIterator[nullable Object] */;
+val* var_133 /* var : ArrayIterator[AAnnotation] */;
 short int var134 /* : Bool */;
-short int var136 /* : Bool */;
-short int var138 /* : Bool */;
-long var143 /* : Int */;
-long var145 /* : Int */;
-short int var146 /* : Bool */;
-short int var148 /* : Bool */;
-short int var149 /* : Bool */;
-short int var150 /* : Bool */;
-val* var151 /* : Array[AAnnotation] */;
-val* var153 /* : Array[AAnnotation] */;
-val* var_154 /* var : Array[AAnnotation] */;
-val* var155 /* : ArrayIterator[nullable Object] */;
-val* var_156 /* var : ArrayIterator[AAnnotation] */;
-short int var157 /* : Bool */;
-val* var158 /* : nullable Object */;
+val* var135 /* : nullable Object */;
 val* var_na /* var na: AAnnotation */;
-val* var159 /* : nullable ANode */;
-val* var161 /* : nullable ANode */;
-val* var162 /* : nullable ANode */;
-val* var164 /* : nullable ANode */;
-long var167 /* : Int */;
-long var169 /* : Int */;
-short int var170 /* : Bool */;
-short int var172 /* : Bool */;
-short int var173 /* : Bool */;
-short int var174 /* : Bool */;
-short int var176 /* : Bool */;
-long var179 /* : Int */;
-long var181 /* : Int for extern */;
-long var_time1 /* var time1: Int */;
-static val* varonce182;
-val* var183 /* : String */;
-char* var184 /* : NativeString */;
-long var185 /* : Int */;
-val* var186 /* : FlatString */;
-long var187 /* : Int */;
-short int var189 /* : Bool */;
+val* var136 /* : nullable ANode */;
+val* var138 /* : nullable ANode */;
+val* var_p /* var p: nullable ANode */;
+short int var139 /* : Bool */;
 int cltype;
 int idtype;
+val* var140 /* : nullable ANode */;
+val* var142 /* : nullable ANode */;
+short int var143 /* : Bool */;
+short int var144 /* : Bool */;
+val* var_other146 /* var other: nullable Object */;
+short int var147 /* : Bool */;
+short int var148 /* : Bool */;
+long var150 /* : Int */;
+long var152 /* : Int */;
+short int var153 /* : Bool */;
+short int var155 /* : Bool */;
+short int var156 /* : Bool */;
+short int var157 /* : Bool */;
+short int var159 /* : Bool */;
+long var161 /* : Int */;
+long var163 /* : Int for extern */;
+long var_time1 /* var time1: Int */;
+val* var165 /* : NativeArray[String] */;
+static val* varonce164;
+static val* varonce166;
+val* var167 /* : String */;
+char* var168 /* : NativeString */;
+val* var169 /* : FlatString */;
+static val* varonce170;
+val* var171 /* : String */;
+char* var172 /* : NativeString */;
+val* var173 /* : FlatString */;
+long var174 /* : Int */;
+short int var176 /* : Bool */;
+int cltype177;
+int idtype178;
 const char* var_class_name;
-long var190 /* : Int */;
-static val* varonce191;
-val* var192 /* : String */;
-char* var193 /* : NativeString */;
-long var194 /* : Int */;
-val* var195 /* : FlatString */;
-val* var196 /* : Array[Object] */;
-long var197 /* : Int */;
-val* var198 /* : NativeArray[Object] */;
-val* var199 /* : Object */;
-val* var200 /* : String */;
-long var201 /* : Int */;
+long var179 /* : Int */;
+val* var180 /* : String */;
+val* var181 /* : String */;
+short int var182 /* : Bool */;
 var_nmodules = p0;
 {
 { /* Inline time#Object#get_time (self) on <self:ToolContext> */
@@ -790,65 +752,63 @@ RET_LABEL1:(void)0;
 }
 }
 var_time0 = var;
-if (varonce) {
+if (likely(varonce!=NULL)) {
 var3 = varonce;
 } else {
 var4 = "*** SEMANTIC ANALYSIS ***";
-var5 = 25;
-var6 = standard___standard__NativeString___to_s_with_length(var4, var5);
-var3 = var6;
+var5 = standard___standard__NativeString___to_s_with_length(var4, 25l);
+var3 = var5;
 varonce = var3;
 }
-var7 = 1;
 {
-nit___nit__ToolContext___info(self, var3, var7); /* Direct call toolcontext#ToolContext#info on <self:ToolContext>*/
+nit___nit__ToolContext___info(self, var3, 1l); /* Direct call toolcontext#ToolContext#info on <self:ToolContext>*/
 }
 {
-var8 = nit__phase___ToolContext___phases_list(self);
+var6 = nit__phase___ToolContext___phases_list(self);
 }
-var_phases = var8;
+var_phases = var6;
 var_ = var_phases;
 {
-var9 = ((val* (*)(val* self))(var_->class->vft[COLOR_standard__abstract_collection__Collection__iterator]))(var_) /* iterator on <var_:Sequence[Phase]>*/;
+var7 = ((val*(*)(val* self))((((long)var_&3)?class_info[((long)var_&3)]:var_->class)->vft[COLOR_standard__abstract_collection__Collection__iterator]))(var_); /* iterator on <var_:Sequence[Phase]>*/
 }
-var_10 = var9;
+var_8 = var7;
 for(;;) {
 {
-var11 = ((short int (*)(val* self))(var_10->class->vft[COLOR_standard__abstract_collection__Iterator__is_ok]))(var_10) /* is_ok on <var_10:IndexedIterator[Phase]>*/;
+var9 = ((short int(*)(val* self))((((long)var_8&3)?class_info[((long)var_8&3)]:var_8->class)->vft[COLOR_standard__abstract_collection__Iterator__is_ok]))(var_8); /* is_ok on <var_8:IndexedIterator[Phase]>*/
 }
-if (var11){
+if (var9){
 {
-var12 = ((val* (*)(val* self))(var_10->class->vft[COLOR_standard__abstract_collection__Iterator__item]))(var_10) /* item on <var_10:IndexedIterator[Phase]>*/;
+var10 = ((val*(*)(val* self))((((long)var_8&3)?class_info[((long)var_8&3)]:var_8->class)->vft[COLOR_standard__abstract_collection__Iterator__item]))(var_8); /* item on <var_8:IndexedIterator[Phase]>*/
 }
-var_phase = var12;
-if (varonce13) {
+var_phase = var10;
+if (unlikely(varonce11==NULL)) {
+var12 = NEW_standard__NativeArray(2l, &type_standard__NativeArray__standard__String);
+if (likely(varonce13!=NULL)) {
 var14 = varonce13;
 } else {
 var15 = " registered phases: ";
-var16 = 20;
-var17 = standard___standard__NativeString___to_s_with_length(var15, var16);
-var14 = var17;
+var16 = standard___standard__NativeString___to_s_with_length(var15, 20l);
+var14 = var16;
 varonce13 = var14;
 }
-var18 = NEW_standard__Array(&type_standard__Array__standard__Object);
-{ /* var18 = array_instance Array[Object] */
-var19 = 2;
-var20 = NEW_standard__NativeArray(var19, &type_standard__NativeArray__standard__Object);
-((struct instance_standard__NativeArray*)var20)->values[0] = (val*) var14;
-((struct instance_standard__NativeArray*)var20)->values[1] = (val*) var_phase;
-{
-((void (*)(val* self, val* p0, long p1))(var18->class->vft[COLOR_standard__array__Array__with_native]))(var18, var20, var19) /* with_native on <var18:Array[Object]>*/;
-}
+((struct instance_standard__NativeArray*)var12)->values[0]=var14;
+} else {
+var12 = varonce11;
+varonce11 = NULL;
 }
 {
-var21 = ((val* (*)(val* self))(var18->class->vft[COLOR_standard__string__Object__to_s]))(var18) /* to_s on <var18:Array[Object]>*/;
+var17 = ((val*(*)(val* self))(var_phase->class->vft[COLOR_standard__string__Object__to_s]))(var_phase); /* to_s on <var_phase:Phase>*/
 }
-var22 = 2;
+((struct instance_standard__NativeArray*)var12)->values[1]=var17;
 {
-nit___nit__ToolContext___info(self, var21, var22); /* Direct call toolcontext#ToolContext#info on <self:ToolContext>*/
+var18 = ((val*(*)(val* self))(var12->class->vft[COLOR_standard__string__NativeArray__native_to_s]))(var12); /* native_to_s on <var12:NativeArray[String]>*/
+}
+varonce11 = var12;
+{
+nit___nit__ToolContext___info(self, var18, 2l); /* Direct call toolcontext#ToolContext#info on <self:ToolContext>*/
 }
 {
-((void (*)(val* self))(var_10->class->vft[COLOR_standard__abstract_collection__Iterator__next]))(var_10) /* next on <var_10:IndexedIterator[Phase]>*/;
+((void(*)(val* self))((((long)var_8&3)?class_info[((long)var_8&3)]:var_8->class)->vft[COLOR_standard__abstract_collection__Iterator__next]))(var_8); /* next on <var_8:IndexedIterator[Phase]>*/
 }
 } else {
 goto BREAK_label;
@@ -856,636 +816,611 @@ goto BREAK_label;
 }
 BREAK_label: (void)0;
 {
-{ /* Inline abstract_collection#Iterator#finish (var_10) on <var_10:IndexedIterator[Phase]> */
-RET_LABEL23:(void)0;
+((void(*)(val* self))((((long)var_8&3)?class_info[((long)var_8&3)]:var_8->class)->vft[COLOR_standard__abstract_collection__Iterator__finish]))(var_8); /* finish on <var_8:IndexedIterator[Phase]>*/
 }
-}
-var_24 = var_nmodules;
+var_19 = var_nmodules;
 {
-var25 = ((val* (*)(val* self))(var_24->class->vft[COLOR_standard__abstract_collection__Collection__iterator]))(var_24) /* iterator on <var_24:Collection[AModule]>*/;
+var20 = ((val*(*)(val* self))((((long)var_19&3)?class_info[((long)var_19&3)]:var_19->class)->vft[COLOR_standard__abstract_collection__Collection__iterator]))(var_19); /* iterator on <var_19:Collection[AModule]>*/
 }
-var_26 = var25;
+var_21 = var20;
 for(;;) {
 {
-var27 = ((short int (*)(val* self))(var_26->class->vft[COLOR_standard__abstract_collection__Iterator__is_ok]))(var_26) /* is_ok on <var_26:Iterator[AModule]>*/;
+var22 = ((short int(*)(val* self))((((long)var_21&3)?class_info[((long)var_21&3)]:var_21->class)->vft[COLOR_standard__abstract_collection__Iterator__is_ok]))(var_21); /* is_ok on <var_21:Iterator[AModule]>*/
+}
+if (var22){
+{
+var23 = ((val*(*)(val* self))((((long)var_21&3)?class_info[((long)var_21&3)]:var_21->class)->vft[COLOR_standard__abstract_collection__Iterator__item]))(var_21); /* item on <var_21:Iterator[AModule]>*/
+}
+var_nmodule = var23;
+{
+{ /* Inline phase#ToolContext#phased_modules (self) on <self:ToolContext> */
+var26 = self->attrs[COLOR_nit__phase__ToolContext___phased_modules].val; /* _phased_modules on <self:ToolContext> */
+if (unlikely(var26 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _phased_modules");
+PRINT_ERROR(" (%s:%d)\n", FILE_nit__phase, 86);
+fatal_exit(1);
+}
+var24 = var26;
+RET_LABEL25:(void)0;
+}
+}
+{
+var27 = standard___standard__HashSet___standard__abstract_collection__Collection__has(var24, var_nmodule);
 }
 if (var27){
-{
-var28 = ((val* (*)(val* self))(var_26->class->vft[COLOR_standard__abstract_collection__Iterator__item]))(var_26) /* item on <var_26:Iterator[AModule]>*/;
+goto BREAK_label28;
+} else {
 }
-var_nmodule = var28;
 {
 { /* Inline phase#ToolContext#phased_modules (self) on <self:ToolContext> */
 var31 = self->attrs[COLOR_nit__phase__ToolContext___phased_modules].val; /* _phased_modules on <self:ToolContext> */
 if (unlikely(var31 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _phased_modules");
 PRINT_ERROR(" (%s:%d)\n", FILE_nit__phase, 86);
-show_backtrace(1);
+fatal_exit(1);
 }
 var29 = var31;
 RET_LABEL30:(void)0;
 }
 }
 {
-var32 = standard___standard__HashSet___standard__abstract_collection__Collection__has(var29, var_nmodule);
+standard___standard__HashSet___standard__abstract_collection__SimpleCollection__add(var29, var_nmodule); /* Direct call hash_collection#HashSet#add on <var29:HashSet[AModule]>*/
 }
-if (var32){
-goto BREAK_label33;
+if (unlikely(varonce32==NULL)) {
+var33 = NEW_standard__NativeArray(2l, &type_standard__NativeArray__standard__String);
+if (likely(varonce34!=NULL)) {
+var35 = varonce34;
 } else {
+var36 = "Semantic analysis module ";
+var37 = standard___standard__NativeString___to_s_with_length(var36, 25l);
+var35 = var37;
+varonce34 = var35;
 }
-{
-{ /* Inline phase#ToolContext#phased_modules (self) on <self:ToolContext> */
-var36 = self->attrs[COLOR_nit__phase__ToolContext___phased_modules].val; /* _phased_modules on <self:ToolContext> */
-if (unlikely(var36 == NULL)) {
-PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _phased_modules");
-PRINT_ERROR(" (%s:%d)\n", FILE_nit__phase, 86);
-show_backtrace(1);
-}
-var34 = var36;
-RET_LABEL35:(void)0;
-}
-}
-{
-standard___standard__HashSet___standard__abstract_collection__SimpleCollection__add(var34, var_nmodule); /* Direct call hash_collection#HashSet#add on <var34:HashSet[AModule]>*/
-}
-if (varonce37) {
-var38 = varonce37;
+((struct instance_standard__NativeArray*)var33)->values[0]=var35;
 } else {
-var39 = "Semantic analysis module ";
-var40 = 25;
-var41 = standard___standard__NativeString___to_s_with_length(var39, var40);
-var38 = var41;
-varonce37 = var38;
+var33 = varonce32;
+varonce32 = NULL;
 }
 {
 { /* Inline parser_nodes#ANode#location (var_nmodule) on <var_nmodule:AModule> */
-var44 = var_nmodule->attrs[COLOR_nit__parser_nodes__ANode___location].val; /* _location on <var_nmodule:AModule> */
-if (unlikely(var44 == NULL)) {
+var40 = var_nmodule->attrs[COLOR_nit__parser_nodes__ANode___location].val; /* _location on <var_nmodule:AModule> */
+if (unlikely(var40 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _location");
-PRINT_ERROR(" (%s:%d)\n", FILE_nit__parser_nodes, 23);
-show_backtrace(1);
+PRINT_ERROR(" (%s:%d)\n", FILE_nit__parser_nodes, 24);
+fatal_exit(1);
 }
-var42 = var44;
-RET_LABEL43:(void)0;
+var38 = var40;
+RET_LABEL39:(void)0;
 }
 }
 {
-{ /* Inline location#Location#file (var42) on <var42:Location> */
-var47 = var42->attrs[COLOR_nit__location__Location___file].val; /* _file on <var42:Location> */
-var45 = var47;
-RET_LABEL46:(void)0;
+{ /* Inline location#Location#file (var38) on <var38:Location> */
+var43 = var38->attrs[COLOR_nit__location__Location___file].val; /* _file on <var38:Location> */
+var41 = var43;
+RET_LABEL42:(void)0;
 }
 }
-if (var45 == NULL) {
+if (var41 == NULL) {
 PRINT_ERROR("Runtime error: %s", "Receiver is null");
 PRINT_ERROR(" (%s:%d)\n", FILE_nit__phase, 106);
-show_backtrace(1);
+fatal_exit(1);
 } else {
-{ /* Inline location#SourceFile#filename (var45) on <var45:nullable SourceFile> */
-if (unlikely(var45 == NULL)) {
+{ /* Inline location#SourceFile#filename (var41) on <var41:nullable SourceFile> */
+if (unlikely(var41 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Receiver is null");
 PRINT_ERROR(" (%s:%d)\n", FILE_nit__location, 22);
-show_backtrace(1);
+fatal_exit(1);
 }
-var50 = var45->attrs[COLOR_nit__location__SourceFile___filename].val; /* _filename on <var45:nullable SourceFile> */
-if (unlikely(var50 == NULL)) {
+var46 = var41->attrs[COLOR_nit__location__SourceFile___filename].val; /* _filename on <var41:nullable SourceFile> */
+if (unlikely(var46 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _filename");
 PRINT_ERROR(" (%s:%d)\n", FILE_nit__location, 22);
-show_backtrace(1);
+fatal_exit(1);
 }
-var48 = var50;
+var44 = var46;
+RET_LABEL45:(void)0;
+}
+}
+((struct instance_standard__NativeArray*)var33)->values[1]=var44;
+{
+var47 = ((val*(*)(val* self))(var33->class->vft[COLOR_standard__string__NativeArray__native_to_s]))(var33); /* native_to_s on <var33:NativeArray[String]>*/
+}
+varonce32 = var33;
+{
+nit___nit__ToolContext___info(self, var47, 2l); /* Direct call toolcontext#ToolContext#info on <self:ToolContext>*/
+}
+var48 = NEW_nit__phase__AnnotationPhaseVisitor(&type_nit__phase__AnnotationPhaseVisitor);
+{
+{ /* Inline kernel#Object#init (var48) on <var48:AnnotationPhaseVisitor> */
 RET_LABEL49:(void)0;
 }
 }
-var51 = NEW_standard__Array(&type_standard__Array__standard__Object);
-{ /* var51 = array_instance Array[Object] */
-var52 = 2;
-var53 = NEW_standard__NativeArray(var52, &type_standard__NativeArray__standard__Object);
-((struct instance_standard__NativeArray*)var53)->values[0] = (val*) var38;
-((struct instance_standard__NativeArray*)var53)->values[1] = (val*) var48;
-{
-((void (*)(val* self, val* p0, long p1))(var51->class->vft[COLOR_standard__array__Array__with_native]))(var51, var53, var52) /* with_native on <var51:Array[Object]>*/;
-}
-}
-{
-var54 = ((val* (*)(val* self))(var51->class->vft[COLOR_standard__string__Object__to_s]))(var51) /* to_s on <var51:Array[Object]>*/;
-}
-var55 = 2;
-{
-nit___nit__ToolContext___info(self, var54, var55); /* Direct call toolcontext#ToolContext#info on <self:ToolContext>*/
-}
-var56 = NEW_nit__phase__AnnotationPhaseVisitor(&type_nit__phase__AnnotationPhaseVisitor);
-{
-{ /* Inline kernel#Object#init (var56) on <var56:AnnotationPhaseVisitor> */
-RET_LABEL57:(void)0;
-}
-}
-var_vannot = var56;
+var_vannot = var48;
 {
 nit___nit__Visitor___enter_visit(var_vannot, var_nmodule); /* Direct call parser_nodes#Visitor#enter_visit on <var_vannot:AnnotationPhaseVisitor>*/
 }
-var_58 = var_phases;
+var_50 = var_phases;
 {
-var59 = ((val* (*)(val* self))(var_58->class->vft[COLOR_standard__abstract_collection__Collection__iterator]))(var_58) /* iterator on <var_58:Sequence[Phase]>*/;
+var51 = ((val*(*)(val* self))((((long)var_50&3)?class_info[((long)var_50&3)]:var_50->class)->vft[COLOR_standard__abstract_collection__Collection__iterator]))(var_50); /* iterator on <var_50:Sequence[Phase]>*/
 }
-var_60 = var59;
+var_52 = var51;
 for(;;) {
 {
-var61 = ((short int (*)(val* self))(var_60->class->vft[COLOR_standard__abstract_collection__Iterator__is_ok]))(var_60) /* is_ok on <var_60:IndexedIterator[Phase]>*/;
+var53 = ((short int(*)(val* self))((((long)var_52&3)?class_info[((long)var_52&3)]:var_52->class)->vft[COLOR_standard__abstract_collection__Iterator__is_ok]))(var_52); /* is_ok on <var_52:IndexedIterator[Phase]>*/
 }
-if (var61){
+if (var53){
 {
-var62 = ((val* (*)(val* self))(var_60->class->vft[COLOR_standard__abstract_collection__Iterator__item]))(var_60) /* item on <var_60:IndexedIterator[Phase]>*/;
+var54 = ((val*(*)(val* self))((((long)var_52&3)?class_info[((long)var_52&3)]:var_52->class)->vft[COLOR_standard__abstract_collection__Iterator__item]))(var_52); /* item on <var_52:IndexedIterator[Phase]>*/
 }
-var_phase63 = var62;
+var_phase55 = var54;
 {
-{ /* Inline phase#Phase#disabled (var_phase63) on <var_phase63:Phase> */
-var66 = var_phase63->attrs[COLOR_nit__phase__Phase___disabled].s; /* _disabled on <var_phase63:Phase> */
-var64 = var66;
-RET_LABEL65:(void)0;
+{ /* Inline phase#Phase#disabled (var_phase55) on <var_phase55:Phase> */
+var58 = var_phase55->attrs[COLOR_nit__phase__Phase___disabled].s; /* _disabled on <var_phase55:Phase> */
+var56 = var58;
+RET_LABEL57:(void)0;
 }
 }
-if (var64){
-goto BREAK_label67;
+if (var56){
+goto BREAK_label59;
 } else {
 }
-if (varonce68) {
-var69 = varonce68;
-} else {
-var70 = " phase: ";
-var71 = 8;
-var72 = standard___standard__NativeString___to_s_with_length(var70, var71);
-var69 = var72;
-varonce68 = var69;
-}
-var73 = NEW_standard__Array(&type_standard__Array__standard__Object);
-{ /* var73 = array_instance Array[Object] */
-var74 = 2;
-var75 = NEW_standard__NativeArray(var74, &type_standard__NativeArray__standard__Object);
-((struct instance_standard__NativeArray*)var75)->values[0] = (val*) var69;
-((struct instance_standard__NativeArray*)var75)->values[1] = (val*) var_phase63;
 {
-((void (*)(val* self, val* p0, long p1))(var73->class->vft[COLOR_standard__array__Array__with_native]))(var73, var75, var74) /* with_native on <var73:Array[Object]>*/;
-}
-}
-{
-var76 = ((val* (*)(val* self))(var73->class->vft[COLOR_standard__string__Object__to_s]))(var73) /* to_s on <var73:Array[Object]>*/;
-}
-var77 = 3;
-{
-nit___nit__ToolContext___info(self, var76, var77); /* Direct call toolcontext#ToolContext#info on <self:ToolContext>*/
-}
-{
-{ /* Inline phase#Phase#toolcontext (var_phase63) on <var_phase63:Phase> */
-var80 = var_phase63->attrs[COLOR_nit__phase__Phase___toolcontext].val; /* _toolcontext on <var_phase63:Phase> */
-if (unlikely(var80 == NULL)) {
+{ /* Inline phase#Phase#toolcontext (var_phase55) on <var_phase55:Phase> */
+var62 = var_phase55->attrs[COLOR_nit__phase__Phase___toolcontext].val; /* _toolcontext on <var_phase55:Phase> */
+if (unlikely(var62 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _toolcontext");
-PRINT_ERROR(" (%s:%d)\n", FILE_nit__phase, 201);
-show_backtrace(1);
+PRINT_ERROR(" (%s:%d)\n", FILE_nit__phase, 200);
+fatal_exit(1);
 }
-var78 = var80;
-RET_LABEL79:(void)0;
+var60 = var62;
+RET_LABEL61:(void)0;
 }
 }
 {
-{ /* Inline kernel#Object#== (var78,self) on <var78:ToolContext> */
+{ /* Inline kernel#Object#== (var60,self) on <var60:ToolContext> */
 var_other = self;
 {
-{ /* Inline kernel#Object#is_same_instance (var78,var_other) on <var78:ToolContext> */
-var85 = var78 == var_other;
-var83 = var85;
-goto RET_LABEL84;
-RET_LABEL84:(void)0;
+{ /* Inline kernel#Object#is_same_instance (var60,var_other) on <var60:ToolContext> */
+var67 = var60 == var_other;
+var65 = var67;
+goto RET_LABEL66;
+RET_LABEL66:(void)0;
 }
 }
-var81 = var83;
-goto RET_LABEL82;
-RET_LABEL82:(void)0;
+var63 = var65;
+goto RET_LABEL64;
+RET_LABEL64:(void)0;
 }
 }
-if (unlikely(!var81)) {
+if (unlikely(!var63)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nit__phase, 114);
-show_backtrace(1);
+PRINT_ERROR(" (%s:%d)\n", FILE_nit__phase, 113);
+fatal_exit(1);
 }
 {
 { /* Inline toolcontext#ToolContext#error_count (self) on <self:ToolContext> */
-var88 = self->attrs[COLOR_nit__toolcontext__ToolContext___error_count].l; /* _error_count on <self:ToolContext> */
-var86 = var88;
-RET_LABEL87:(void)0;
+var70 = self->attrs[COLOR_nit__toolcontext__ToolContext___error_count].l; /* _error_count on <self:ToolContext> */
+var68 = var70;
+RET_LABEL69:(void)0;
 }
 }
-var_errcount = var86;
+var_errcount = var68;
 {
-((void (*)(val* self, val* p0))(var_phase63->class->vft[COLOR_nit__phase__Phase__process_nmodule]))(var_phase63, var_nmodule) /* process_nmodule on <var_phase63:Phase>*/;
+((void(*)(val* self, val* p0))(var_phase55->class->vft[COLOR_nit__phase__Phase__process_nmodule]))(var_phase55, var_nmodule); /* process_nmodule on <var_phase55:Phase>*/
 }
 {
 { /* Inline toolcontext#ToolContext#error_count (self) on <self:ToolContext> */
-var91 = self->attrs[COLOR_nit__toolcontext__ToolContext___error_count].l; /* _error_count on <self:ToolContext> */
-var89 = var91;
-RET_LABEL90:(void)0;
+var73 = self->attrs[COLOR_nit__toolcontext__ToolContext___error_count].l; /* _error_count on <self:ToolContext> */
+var71 = var73;
+RET_LABEL72:(void)0;
 }
 }
 {
-{ /* Inline kernel#Int#!= (var_errcount,var89) on <var_errcount:Int> */
-var94 = var_errcount == var89;
-var95 = !var94;
-var92 = var95;
-goto RET_LABEL93;
-RET_LABEL93:(void)0;
+{ /* Inline kernel#Int#!= (var_errcount,var71) on <var_errcount:Int> */
+var76 = var_errcount == var71;
+var77 = !var76;
+var74 = var77;
+goto RET_LABEL75;
+RET_LABEL75:(void)0;
 }
 }
-if (var92){
+if (var74){
 {
-var96 = nit___nit__ToolContext___check_errors(self);
+var78 = nit___nit__ToolContext___check_errors(self);
 }
-goto BREAK_label97;
 } else {
 }
 {
 { /* Inline toolcontext#ToolContext#error_count (self) on <self:ToolContext> */
-var100 = self->attrs[COLOR_nit__toolcontext__ToolContext___error_count].l; /* _error_count on <self:ToolContext> */
+var81 = self->attrs[COLOR_nit__toolcontext__ToolContext___error_count].l; /* _error_count on <self:ToolContext> */
+var79 = var81;
+RET_LABEL80:(void)0;
+}
+}
+var_errcount = var79;
+{
+{ /* Inline parser_nodes#AModule#n_classdefs (var_nmodule) on <var_nmodule:AModule> */
+var84 = var_nmodule->attrs[COLOR_nit__parser_nodes__AModule___n_classdefs].val; /* _n_classdefs on <var_nmodule:AModule> */
+if (unlikely(var84 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _n_classdefs");
+PRINT_ERROR(" (%s:%d)\n", FILE_nit__parser_nodes, 1096);
+fatal_exit(1);
+}
+var82 = var84;
+RET_LABEL83:(void)0;
+}
+}
+var_85 = var82;
+{
+var86 = nit___nit__ANodes___standard__abstract_collection__Collection__iterator(var_85);
+}
+var_87 = var86;
+for(;;) {
+{
+var88 = ((short int(*)(val* self))((((long)var_87&3)?class_info[((long)var_87&3)]:var_87->class)->vft[COLOR_standard__abstract_collection__Iterator__is_ok]))(var_87); /* is_ok on <var_87:Iterator[AClassdef]>*/
+}
+if (var88){
+{
+var89 = ((val*(*)(val* self))((((long)var_87&3)?class_info[((long)var_87&3)]:var_87->class)->vft[COLOR_standard__abstract_collection__Iterator__item]))(var_87); /* item on <var_87:Iterator[AClassdef]>*/
+}
+var_nclassdef = var89;
+{
+{ /* Inline phase#Phase#toolcontext (var_phase55) on <var_phase55:Phase> */
+var92 = var_phase55->attrs[COLOR_nit__phase__Phase___toolcontext].val; /* _toolcontext on <var_phase55:Phase> */
+if (unlikely(var92 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _toolcontext");
+PRINT_ERROR(" (%s:%d)\n", FILE_nit__phase, 200);
+fatal_exit(1);
+}
+var90 = var92;
+RET_LABEL91:(void)0;
+}
+}
+{
+{ /* Inline kernel#Object#== (var90,self) on <var90:ToolContext> */
+var_other = self;
+{
+{ /* Inline kernel#Object#is_same_instance (var90,var_other) on <var90:ToolContext> */
+var97 = var90 == var_other;
+var95 = var97;
+goto RET_LABEL96;
+RET_LABEL96:(void)0;
+}
+}
+var93 = var95;
+goto RET_LABEL94;
+RET_LABEL94:(void)0;
+}
+}
+if (unlikely(!var93)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", FILE_nit__phase, 121);
+fatal_exit(1);
+}
+{
+((void(*)(val* self, val* p0))(var_phase55->class->vft[COLOR_nit__phase__Phase__process_nclassdef]))(var_phase55, var_nclassdef); /* process_nclassdef on <var_phase55:Phase>*/
+}
+{
+{ /* Inline phase#ToolContext#semantize_is_lazy (self) on <self:ToolContext> */
+var100 = self->attrs[COLOR_nit__phase__ToolContext___semantize_is_lazy].s; /* _semantize_is_lazy on <self:ToolContext> */
 var98 = var100;
 RET_LABEL99:(void)0;
 }
 }
-var_errcount = var98;
-{
-{ /* Inline parser_nodes#AModule#n_classdefs (var_nmodule) on <var_nmodule:AModule> */
-var103 = var_nmodule->attrs[COLOR_nit__parser_nodes__AModule___n_classdefs].val; /* _n_classdefs on <var_nmodule:AModule> */
-if (unlikely(var103 == NULL)) {
-PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _n_classdefs");
-PRINT_ERROR(" (%s:%d)\n", FILE_nit__parser_nodes, 919);
-show_backtrace(1);
-}
-var101 = var103;
-RET_LABEL102:(void)0;
-}
-}
-var_104 = var101;
-{
-var105 = nit___nit__ANodes___standard__abstract_collection__Collection__iterator(var_104);
-}
-var_106 = var105;
-for(;;) {
-{
-var107 = ((short int (*)(val* self))(var_106->class->vft[COLOR_standard__abstract_collection__Iterator__is_ok]))(var_106) /* is_ok on <var_106:Iterator[AClassdef]>*/;
-}
-if (var107){
-{
-var108 = ((val* (*)(val* self))(var_106->class->vft[COLOR_standard__abstract_collection__Iterator__item]))(var_106) /* item on <var_106:Iterator[AClassdef]>*/;
-}
-var_nclassdef = var108;
-{
-{ /* Inline phase#Phase#toolcontext (var_phase63) on <var_phase63:Phase> */
-var111 = var_phase63->attrs[COLOR_nit__phase__Phase___toolcontext].val; /* _toolcontext on <var_phase63:Phase> */
-if (unlikely(var111 == NULL)) {
-PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _toolcontext");
-PRINT_ERROR(" (%s:%d)\n", FILE_nit__phase, 201);
-show_backtrace(1);
-}
-var109 = var111;
-RET_LABEL110:(void)0;
-}
-}
-{
-{ /* Inline kernel#Object#== (var109,self) on <var109:ToolContext> */
-var_other = self;
-{
-{ /* Inline kernel#Object#is_same_instance (var109,var_other) on <var109:ToolContext> */
-var116 = var109 == var_other;
-var114 = var116;
-goto RET_LABEL115;
-RET_LABEL115:(void)0;
-}
-}
-var112 = var114;
-goto RET_LABEL113;
-RET_LABEL113:(void)0;
-}
-}
-if (unlikely(!var112)) {
-PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nit__phase, 123);
-show_backtrace(1);
-}
-{
-{ /* Inline phase#Phase#process_nclassdef (var_phase63,var_nclassdef) on <var_phase63:Phase> */
-var_nclassdef118 = var_nclassdef;
-RET_LABEL117:(void)0;
-}
-}
-{
-{ /* Inline phase#ToolContext#semantize_is_lazy (self) on <self:ToolContext> */
-var121 = self->attrs[COLOR_nit__phase__ToolContext___semantize_is_lazy].s; /* _semantize_is_lazy on <self:ToolContext> */
-var119 = var121;
-RET_LABEL120:(void)0;
-}
-}
-var122 = !var119;
-if (var122){
+var101 = !var98;
+if (var101){
 {
 { /* Inline parser_nodes#AClassdef#n_propdefs (var_nclassdef) on <var_nclassdef:AClassdef> */
-var125 = var_nclassdef->attrs[COLOR_nit__parser_nodes__AClassdef___n_propdefs].val; /* _n_propdefs on <var_nclassdef:AClassdef> */
-if (unlikely(var125 == NULL)) {
+var104 = var_nclassdef->attrs[COLOR_nit__parser_nodes__AClassdef___n_propdefs].val; /* _n_propdefs on <var_nclassdef:AClassdef> */
+if (unlikely(var104 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _n_propdefs");
-PRINT_ERROR(" (%s:%d)\n", FILE_nit__parser_nodes, 1012);
-show_backtrace(1);
+PRINT_ERROR(" (%s:%d)\n", FILE_nit__parser_nodes, 1189);
+fatal_exit(1);
 }
-var123 = var125;
-RET_LABEL124:(void)0;
+var102 = var104;
+RET_LABEL103:(void)0;
 }
 }
-var_126 = var123;
+var_105 = var102;
 {
-var127 = nit___nit__ANodes___standard__abstract_collection__Collection__iterator(var_126);
+var106 = nit___nit__ANodes___standard__abstract_collection__Collection__iterator(var_105);
 }
-var_128 = var127;
+var_107 = var106;
 for(;;) {
 {
-var129 = ((short int (*)(val* self))(var_128->class->vft[COLOR_standard__abstract_collection__Iterator__is_ok]))(var_128) /* is_ok on <var_128:Iterator[APropdef]>*/;
+var108 = ((short int(*)(val* self))((((long)var_107&3)?class_info[((long)var_107&3)]:var_107->class)->vft[COLOR_standard__abstract_collection__Iterator__is_ok]))(var_107); /* is_ok on <var_107:Iterator[APropdef]>*/
 }
-if (var129){
+if (var108){
 {
-var130 = ((val* (*)(val* self))(var_128->class->vft[COLOR_standard__abstract_collection__Iterator__item]))(var_128) /* item on <var_128:Iterator[APropdef]>*/;
+var109 = ((val*(*)(val* self))((((long)var_107&3)?class_info[((long)var_107&3)]:var_107->class)->vft[COLOR_standard__abstract_collection__Iterator__item]))(var_107); /* item on <var_107:Iterator[APropdef]>*/
 }
-var_npropdef = var130;
+var_npropdef = var109;
 {
-{ /* Inline phase#Phase#toolcontext (var_phase63) on <var_phase63:Phase> */
-var133 = var_phase63->attrs[COLOR_nit__phase__Phase___toolcontext].val; /* _toolcontext on <var_phase63:Phase> */
-if (unlikely(var133 == NULL)) {
+{ /* Inline phase#Phase#toolcontext (var_phase55) on <var_phase55:Phase> */
+var112 = var_phase55->attrs[COLOR_nit__phase__Phase___toolcontext].val; /* _toolcontext on <var_phase55:Phase> */
+if (unlikely(var112 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _toolcontext");
-PRINT_ERROR(" (%s:%d)\n", FILE_nit__phase, 201);
-show_backtrace(1);
+PRINT_ERROR(" (%s:%d)\n", FILE_nit__phase, 200);
+fatal_exit(1);
 }
-var131 = var133;
-RET_LABEL132:(void)0;
+var110 = var112;
+RET_LABEL111:(void)0;
 }
 }
 {
-{ /* Inline kernel#Object#== (var131,self) on <var131:ToolContext> */
+{ /* Inline kernel#Object#== (var110,self) on <var110:ToolContext> */
 var_other = self;
 {
-{ /* Inline kernel#Object#is_same_instance (var131,var_other) on <var131:ToolContext> */
-var138 = var131 == var_other;
-var136 = var138;
-goto RET_LABEL137;
-RET_LABEL137:(void)0;
+{ /* Inline kernel#Object#is_same_instance (var110,var_other) on <var110:ToolContext> */
+var117 = var110 == var_other;
+var115 = var117;
+goto RET_LABEL116;
+RET_LABEL116:(void)0;
 }
 }
-var134 = var136;
-goto RET_LABEL135;
-RET_LABEL135:(void)0;
+var113 = var115;
+goto RET_LABEL114;
+RET_LABEL114:(void)0;
 }
 }
-if (unlikely(!var134)) {
+if (unlikely(!var113)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nit__phase, 126);
-show_backtrace(1);
+PRINT_ERROR(" (%s:%d)\n", FILE_nit__phase, 124);
+fatal_exit(1);
 }
 {
-nit__phase___ToolContext___phase_process_npropdef(self, var_phase63, var_npropdef); /* Direct call phase#ToolContext#phase_process_npropdef on <self:ToolContext>*/
+nit__phase___ToolContext___phase_process_npropdef(self, var_phase55, var_npropdef); /* Direct call phase#ToolContext#phase_process_npropdef on <self:ToolContext>*/
 }
 {
-((void (*)(val* self))(var_128->class->vft[COLOR_standard__abstract_collection__Iterator__next]))(var_128) /* next on <var_128:Iterator[APropdef]>*/;
+((void(*)(val* self))((((long)var_107&3)?class_info[((long)var_107&3)]:var_107->class)->vft[COLOR_standard__abstract_collection__Iterator__next]))(var_107); /* next on <var_107:Iterator[APropdef]>*/
 }
 } else {
-goto BREAK_label139;
+goto BREAK_label118;
 }
 }
-BREAK_label139: (void)0;
+BREAK_label118: (void)0;
 {
-{ /* Inline abstract_collection#Iterator#finish (var_128) on <var_128:Iterator[APropdef]> */
-RET_LABEL140:(void)0;
-}
+((void(*)(val* self))((((long)var_107&3)?class_info[((long)var_107&3)]:var_107->class)->vft[COLOR_standard__abstract_collection__Iterator__finish]))(var_107); /* finish on <var_107:Iterator[APropdef]>*/
 }
 } else {
 }
 {
-((void (*)(val* self))(var_106->class->vft[COLOR_standard__abstract_collection__Iterator__next]))(var_106) /* next on <var_106:Iterator[AClassdef]>*/;
+((void(*)(val* self))((((long)var_87&3)?class_info[((long)var_87&3)]:var_87->class)->vft[COLOR_standard__abstract_collection__Iterator__next]))(var_87); /* next on <var_87:Iterator[AClassdef]>*/
 }
 } else {
-goto BREAK_label141;
+goto BREAK_label119;
 }
 }
-BREAK_label141: (void)0;
+BREAK_label119: (void)0;
 {
-{ /* Inline abstract_collection#Iterator#finish (var_106) on <var_106:Iterator[AClassdef]> */
-RET_LABEL142:(void)0;
-}
+((void(*)(val* self))((((long)var_87&3)?class_info[((long)var_87&3)]:var_87->class)->vft[COLOR_standard__abstract_collection__Iterator__finish]))(var_87); /* finish on <var_87:Iterator[AClassdef]>*/
 }
 {
 { /* Inline toolcontext#ToolContext#error_count (self) on <self:ToolContext> */
-var145 = self->attrs[COLOR_nit__toolcontext__ToolContext___error_count].l; /* _error_count on <self:ToolContext> */
-var143 = var145;
-RET_LABEL144:(void)0;
+var122 = self->attrs[COLOR_nit__toolcontext__ToolContext___error_count].l; /* _error_count on <self:ToolContext> */
+var120 = var122;
+RET_LABEL121:(void)0;
 }
 }
 {
-{ /* Inline kernel#Int#!= (var_errcount,var143) on <var_errcount:Int> */
-var148 = var_errcount == var143;
-var149 = !var148;
-var146 = var149;
-goto RET_LABEL147;
-RET_LABEL147:(void)0;
+{ /* Inline kernel#Int#!= (var_errcount,var120) on <var_errcount:Int> */
+var125 = var_errcount == var120;
+var126 = !var125;
+var123 = var126;
+goto RET_LABEL124;
+RET_LABEL124:(void)0;
 }
 }
-if (var146){
+if (var123){
 {
-var150 = nit___nit__ToolContext___check_errors(self);
+var127 = nit___nit__ToolContext___check_errors(self);
 }
-goto BREAK_label97;
 } else {
 }
 {
 { /* Inline phase#AnnotationPhaseVisitor#annotations (var_vannot) on <var_vannot:AnnotationPhaseVisitor> */
-var153 = var_vannot->attrs[COLOR_nit__phase__AnnotationPhaseVisitor___annotations].val; /* _annotations on <var_vannot:AnnotationPhaseVisitor> */
-if (unlikely(var153 == NULL)) {
+var130 = var_vannot->attrs[COLOR_nit__phase__AnnotationPhaseVisitor___annotations].val; /* _annotations on <var_vannot:AnnotationPhaseVisitor> */
+if (unlikely(var130 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _annotations");
-PRINT_ERROR(" (%s:%d)\n", FILE_nit__phase, 188);
-show_backtrace(1);
+PRINT_ERROR(" (%s:%d)\n", FILE_nit__phase, 187);
+fatal_exit(1);
 }
-var151 = var153;
-RET_LABEL152:(void)0;
+var128 = var130;
+RET_LABEL129:(void)0;
 }
 }
-var_154 = var151;
+var_131 = var128;
 {
-var155 = standard___standard__AbstractArrayRead___standard__abstract_collection__Collection__iterator(var_154);
+var132 = standard___standard__AbstractArrayRead___standard__abstract_collection__Collection__iterator(var_131);
 }
-var_156 = var155;
+var_133 = var132;
 for(;;) {
 {
-var157 = standard__array___standard__array__ArrayIterator___standard__abstract_collection__Iterator__is_ok(var_156);
+var134 = standard__array___standard__array__ArrayIterator___standard__abstract_collection__Iterator__is_ok(var_133);
 }
-if (var157){
+if (var134){
 {
-var158 = standard__array___standard__array__ArrayIterator___standard__abstract_collection__Iterator__item(var_156);
+var135 = standard__array___standard__array__ArrayIterator___standard__abstract_collection__Iterator__item(var_133);
 }
-var_na = var158;
+var_na = var135;
 {
 { /* Inline parser_nodes#ANode#parent (var_na) on <var_na:AAnnotation> */
-var161 = var_na->attrs[COLOR_nit__parser_nodes__ANode___parent].val; /* _parent on <var_na:AAnnotation> */
-var159 = var161;
-RET_LABEL160:(void)0;
+var138 = var_na->attrs[COLOR_nit__parser_nodes__ANode___parent].val; /* _parent on <var_na:AAnnotation> */
+var136 = var138;
+RET_LABEL137:(void)0;
 }
 }
-if (var159 == NULL) {
-PRINT_ERROR("Runtime error: %s", "Receiver is null");
-PRINT_ERROR(" (%s:%d)\n", FILE_nit__phase, 135);
-show_backtrace(1);
+var_p = var136;
+/* <var_p:nullable ANode> isa AAnnotations */
+cltype = type_nit__AAnnotations.color;
+idtype = type_nit__AAnnotations.id;
+if(var_p == NULL) {
+var139 = 0;
 } else {
-{ /* Inline parser_nodes#ANode#parent (var159) on <var159:nullable ANode> */
-if (unlikely(var159 == NULL)) {
-PRINT_ERROR("Runtime error: %s", "Receiver is null");
-PRINT_ERROR(" (%s:%d)\n", FILE_nit__parser_nodes, 36);
-show_backtrace(1);
-}
-var164 = var159->attrs[COLOR_nit__parser_nodes__ANode___parent].val; /* _parent on <var159:nullable ANode> */
-var162 = var164;
-RET_LABEL163:(void)0;
+if(cltype >= var_p->type->table_size) {
+var139 = 0;
+} else {
+var139 = var_p->type->type_table[cltype] == idtype;
 }
 }
-if (unlikely(var162 == NULL)) {
-PRINT_ERROR("Runtime error: %s", "Cast failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nit__phase, 135);
-show_backtrace(1);
+if (var139){
+{
+{ /* Inline parser_nodes#ANode#parent (var_p) on <var_p:nullable ANode(AAnnotations)> */
+var142 = var_p->attrs[COLOR_nit__parser_nodes__ANode___parent].val; /* _parent on <var_p:nullable ANode(AAnnotations)> */
+var140 = var142;
+RET_LABEL141:(void)0;
+}
+}
+var_p = var140;
+} else {
+}
+if (var_p == NULL) {
+var143 = 0; /* is null */
+} else {
+var143 = 1; /* arg is null and recv is not */
+}
+if (0) {
+{ /* Inline kernel#Object#!= (var_p,((val*)NULL)) on <var_p:nullable ANode> */
+var_other146 = ((val*)NULL);
+{
+var147 = ((short int(*)(val* self, val* p0))(var_p->class->vft[COLOR_standard__kernel__Object___61d_61d]))(var_p, var_other146); /* == on <var_p:nullable ANode(ANode)>*/
+}
+var148 = !var147;
+var144 = var148;
+goto RET_LABEL145;
+RET_LABEL145:(void)0;
+}
+var143 = var144;
+}
+if (unlikely(!var143)) {
+PRINT_ERROR("Runtime error: %s", "Assert failed");
+PRINT_ERROR(" (%s:%d)\n", FILE_nit__phase, 134);
+fatal_exit(1);
 }
 {
-((void (*)(val* self, val* p0, val* p1))(var_phase63->class->vft[COLOR_nit__phase__Phase__process_annotated_node]))(var_phase63, var162, var_na) /* process_annotated_node on <var_phase63:Phase>*/;
+((void(*)(val* self, val* p0, val* p1))(var_phase55->class->vft[COLOR_nit__phase__Phase__process_annotated_node]))(var_phase55, var_p, var_na); /* process_annotated_node on <var_phase55:Phase>*/
 }
 {
-standard__array___standard__array__ArrayIterator___standard__abstract_collection__Iterator__next(var_156); /* Direct call array#ArrayIterator#next on <var_156:ArrayIterator[AAnnotation]>*/
+standard__array___standard__array__ArrayIterator___standard__abstract_collection__Iterator__next(var_133); /* Direct call array#ArrayIterator#next on <var_133:ArrayIterator[AAnnotation]>*/
 }
 } else {
-goto BREAK_label165;
+goto BREAK_label149;
 }
 }
-BREAK_label165: (void)0;
+BREAK_label149: (void)0;
 {
-{ /* Inline abstract_collection#Iterator#finish (var_156) on <var_156:ArrayIterator[AAnnotation]> */
-RET_LABEL166:(void)0;
-}
+standard__array___standard__array__ArrayIterator___standard__abstract_collection__Iterator__finish(var_133); /* Direct call array#ArrayIterator#finish on <var_133:ArrayIterator[AAnnotation]>*/
 }
 {
 { /* Inline toolcontext#ToolContext#error_count (self) on <self:ToolContext> */
-var169 = self->attrs[COLOR_nit__toolcontext__ToolContext___error_count].l; /* _error_count on <self:ToolContext> */
-var167 = var169;
-RET_LABEL168:(void)0;
+var152 = self->attrs[COLOR_nit__toolcontext__ToolContext___error_count].l; /* _error_count on <self:ToolContext> */
+var150 = var152;
+RET_LABEL151:(void)0;
 }
 }
 {
-{ /* Inline kernel#Int#!= (var_errcount,var167) on <var_errcount:Int> */
-var172 = var_errcount == var167;
-var173 = !var172;
-var170 = var173;
-goto RET_LABEL171;
-RET_LABEL171:(void)0;
+{ /* Inline kernel#Int#!= (var_errcount,var150) on <var_errcount:Int> */
+var155 = var_errcount == var150;
+var156 = !var155;
+var153 = var156;
+goto RET_LABEL154;
+RET_LABEL154:(void)0;
 }
 }
-if (var170){
+if (var153){
 {
-var174 = nit___nit__ToolContext___check_errors(self);
+var157 = nit___nit__ToolContext___check_errors(self);
 }
-goto BREAK_label97;
 } else {
 }
-BREAK_label67: (void)0;
+BREAK_label59: (void)0;
 {
-((void (*)(val* self))(var_60->class->vft[COLOR_standard__abstract_collection__Iterator__next]))(var_60) /* next on <var_60:IndexedIterator[Phase]>*/;
+((void(*)(val* self))((((long)var_52&3)?class_info[((long)var_52&3)]:var_52->class)->vft[COLOR_standard__abstract_collection__Iterator__next]))(var_52); /* next on <var_52:IndexedIterator[Phase]>*/
 }
 } else {
-goto BREAK_label97;
+goto BREAK_label158;
 }
 }
-BREAK_label97: (void)0;
+BREAK_label158: (void)0;
 {
-{ /* Inline abstract_collection#Iterator#finish (var_60) on <var_60:IndexedIterator[Phase]> */
-RET_LABEL175:(void)0;
-}
+((void(*)(val* self))((((long)var_52&3)?class_info[((long)var_52&3)]:var_52->class)->vft[COLOR_standard__abstract_collection__Iterator__finish]))(var_52); /* finish on <var_52:IndexedIterator[Phase]>*/
 }
 {
-var176 = nit___nit__ToolContext___check_errors(self);
+var159 = nit___nit__ToolContext___check_errors(self);
 }
-BREAK_label33: (void)0;
+BREAK_label28: (void)0;
 {
-((void (*)(val* self))(var_26->class->vft[COLOR_standard__abstract_collection__Iterator__next]))(var_26) /* next on <var_26:Iterator[AModule]>*/;
+((void(*)(val* self))((((long)var_21&3)?class_info[((long)var_21&3)]:var_21->class)->vft[COLOR_standard__abstract_collection__Iterator__next]))(var_21); /* next on <var_21:Iterator[AModule]>*/
 }
 } else {
-goto BREAK_label177;
+goto BREAK_label160;
 }
 }
-BREAK_label177: (void)0;
+BREAK_label160: (void)0;
 {
-{ /* Inline abstract_collection#Iterator#finish (var_26) on <var_26:Iterator[AModule]> */
-RET_LABEL178:(void)0;
-}
+((void(*)(val* self))((((long)var_21&3)?class_info[((long)var_21&3)]:var_21->class)->vft[COLOR_standard__abstract_collection__Iterator__finish]))(var_21); /* finish on <var_21:Iterator[AModule]>*/
 }
 {
 { /* Inline time#Object#get_time (self) on <self:ToolContext> */
-var181 = kernel_Any_Any_get_time_0(self);
-var179 = var181;
-goto RET_LABEL180;
-RET_LABEL180:(void)0;
+var163 = kernel_Any_Any_get_time_0(self);
+var161 = var163;
+goto RET_LABEL162;
+RET_LABEL162:(void)0;
 }
 }
-var_time1 = var179;
-if (varonce182) {
-var183 = varonce182;
+var_time1 = var161;
+if (unlikely(varonce164==NULL)) {
+var165 = NEW_standard__NativeArray(3l, &type_standard__NativeArray__standard__String);
+if (likely(varonce166!=NULL)) {
+var167 = varonce166;
 } else {
-var184 = "*** END SEMANTIC ANALYSIS: ";
-var185 = 27;
-var186 = standard___standard__NativeString___to_s_with_length(var184, var185);
-var183 = var186;
-varonce182 = var183;
+var168 = "*** END SEMANTIC ANALYSIS: ";
+var169 = standard___standard__NativeString___to_s_with_length(var168, 27l);
+var167 = var169;
+varonce166 = var167;
+}
+((struct instance_standard__NativeArray*)var165)->values[0]=var167;
+if (likely(varonce170!=NULL)) {
+var171 = varonce170;
+} else {
+var172 = " ***";
+var173 = standard___standard__NativeString___to_s_with_length(var172, 4l);
+var171 = var173;
+varonce170 = var171;
+}
+((struct instance_standard__NativeArray*)var165)->values[2]=var171;
+} else {
+var165 = varonce164;
+varonce164 = NULL;
 }
 {
 { /* Inline kernel#Int#- (var_time1,var_time0) on <var_time1:Int> */
 /* Covariant cast for argument 0 (i) <var_time0:Int> isa OTHER */
 /* <var_time0:Int> isa OTHER */
-var189 = 1; /* easy <var_time0:Int> isa OTHER*/
-if (unlikely(!var189)) {
+var176 = 1; /* easy <var_time0:Int> isa OTHER*/
+if (unlikely(!var176)) {
 var_class_name = type_standard__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
-PRINT_ERROR(" (%s:%d)\n", FILE_standard__kernel, 416);
-show_backtrace(1);
+PRINT_ERROR(" (%s:%d)\n", FILE_standard__kernel, 540);
+fatal_exit(1);
 }
-var190 = var_time1 - var_time0;
-var187 = var190;
-goto RET_LABEL188;
-RET_LABEL188:(void)0;
+var179 = var_time1 - var_time0;
+var174 = var179;
+goto RET_LABEL175;
+RET_LABEL175:(void)0;
 }
 }
-if (varonce191) {
-var192 = varonce191;
-} else {
-var193 = " ***";
-var194 = 4;
-var195 = standard___standard__NativeString___to_s_with_length(var193, var194);
-var192 = var195;
-varonce191 = var192;
-}
-var196 = NEW_standard__Array(&type_standard__Array__standard__Object);
-{ /* var196 = array_instance Array[Object] */
-var197 = 3;
-var198 = NEW_standard__NativeArray(var197, &type_standard__NativeArray__standard__Object);
-((struct instance_standard__NativeArray*)var198)->values[0] = (val*) var183;
-var199 = BOX_standard__Int(var187); /* autobox from Int to Object */
-((struct instance_standard__NativeArray*)var198)->values[1] = (val*) var199;
-((struct instance_standard__NativeArray*)var198)->values[2] = (val*) var192;
+var180 = standard__string___Int___Object__to_s(var174);
+((struct instance_standard__NativeArray*)var165)->values[1]=var180;
 {
-((void (*)(val* self, val* p0, long p1))(var196->class->vft[COLOR_standard__array__Array__with_native]))(var196, var198, var197) /* with_native on <var196:Array[Object]>*/;
+var181 = ((val*(*)(val* self))(var165->class->vft[COLOR_standard__string__NativeArray__native_to_s]))(var165); /* native_to_s on <var165:NativeArray[String]>*/
 }
+varonce164 = var165;
+{
+nit___nit__ToolContext___info(self, var181, 2l); /* Direct call toolcontext#ToolContext#info on <self:ToolContext>*/
 }
 {
-var200 = ((val* (*)(val* self))(var196->class->vft[COLOR_standard__string__Object__to_s]))(var196) /* to_s on <var196:Array[Object]>*/;
-}
-var201 = 2;
-{
-nit___nit__ToolContext___info(self, var200, var201); /* Direct call toolcontext#ToolContext#info on <self:ToolContext>*/
-}
-{
-nit___nit__ToolContext___errors_info(self); /* Direct call toolcontext#ToolContext#errors_info on <self:ToolContext>*/
+var182 = nit___nit__ToolContext___check_errors(self);
 }
 RET_LABEL:;
 }
@@ -1496,7 +1431,7 @@ val* var_npropdef /* var npropdef: APropdef */;
 var_phase = p0;
 var_npropdef = p1;
 {
-((void (*)(val* self, val* p0))(var_phase->class->vft[COLOR_nit__phase__Phase__process_npropdef]))(var_phase, var_npropdef) /* process_npropdef on <var_phase:Phase>*/;
+((void(*)(val* self, val* p0))(var_phase->class->vft[COLOR_nit__phase__Phase__process_npropdef]))(var_phase, var_npropdef); /* process_npropdef on <var_phase:Phase>*/
 }
 RET_LABEL:;
 }
@@ -1508,24 +1443,23 @@ short int var2 /* : Bool */;
 short int var3 /* : Bool */;
 short int var4 /* : Bool */;
 short int var6 /* : Bool */;
-short int var7 /* : Bool */;
-val* var9 /* : Sequence[Phase] */;
+val* var8 /* : Sequence[Phase] */;
 val* var_phases /* var phases: Sequence[Phase] */;
 val* var_ /* var : Sequence[Phase] */;
-val* var10 /* : Iterator[nullable Object] */;
-val* var_11 /* var : IndexedIterator[Phase] */;
-short int var12 /* : Bool */;
-val* var13 /* : nullable Object */;
+val* var9 /* : Iterator[nullable Object] */;
+val* var_10 /* var : IndexedIterator[Phase] */;
+short int var11 /* : Bool */;
+val* var12 /* : nullable Object */;
 val* var_phase /* var phase: Phase */;
-short int var14 /* : Bool */;
-short int var16 /* : Bool */;
-val* var17 /* : ToolContext */;
-val* var19 /* : ToolContext */;
-short int var20 /* : Bool */;
+short int var13 /* : Bool */;
+short int var15 /* : Bool */;
+val* var16 /* : ToolContext */;
+val* var18 /* : ToolContext */;
+short int var19 /* : Bool */;
 val* var_other /* var other: nullable Object */;
-short int var22 /* : Bool */;
+short int var21 /* : Bool */;
+short int var23 /* : Bool */;
 short int var24 /* : Bool */;
-short int var25 /* : Bool */;
 var_npropdef = p0;
 {
 { /* Inline phase#ToolContext#semantize_is_lazy (self) on <self:ToolContext> */
@@ -1550,94 +1484,91 @@ if (var4){
 goto RET_LABEL;
 } else {
 }
-var7 = 1;
 {
-{ /* Inline phase#APropdef#is_phased= (var_npropdef,var7) on <var_npropdef:APropdef> */
-var_npropdef->attrs[COLOR_nit__phase__APropdef___is_phased].s = var7; /* _is_phased on <var_npropdef:APropdef> */
-RET_LABEL8:(void)0;
+{ /* Inline phase#APropdef#is_phased= (var_npropdef,1) on <var_npropdef:APropdef> */
+var_npropdef->attrs[COLOR_nit__phase__APropdef___is_phased].s = 1; /* _is_phased on <var_npropdef:APropdef> */
+RET_LABEL7:(void)0;
 }
 }
 {
-var9 = nit__phase___ToolContext___phases_list(self);
+var8 = nit__phase___ToolContext___phases_list(self);
 }
-var_phases = var9;
+var_phases = var8;
 var_ = var_phases;
 {
-var10 = ((val* (*)(val* self))(var_->class->vft[COLOR_standard__abstract_collection__Collection__iterator]))(var_) /* iterator on <var_:Sequence[Phase]>*/;
+var9 = ((val*(*)(val* self))((((long)var_&3)?class_info[((long)var_&3)]:var_->class)->vft[COLOR_standard__abstract_collection__Collection__iterator]))(var_); /* iterator on <var_:Sequence[Phase]>*/
 }
-var_11 = var10;
+var_10 = var9;
 for(;;) {
 {
-var12 = ((short int (*)(val* self))(var_11->class->vft[COLOR_standard__abstract_collection__Iterator__is_ok]))(var_11) /* is_ok on <var_11:IndexedIterator[Phase]>*/;
+var11 = ((short int(*)(val* self))((((long)var_10&3)?class_info[((long)var_10&3)]:var_10->class)->vft[COLOR_standard__abstract_collection__Iterator__is_ok]))(var_10); /* is_ok on <var_10:IndexedIterator[Phase]>*/
 }
-if (var12){
+if (var11){
 {
-var13 = ((val* (*)(val* self))(var_11->class->vft[COLOR_standard__abstract_collection__Iterator__item]))(var_11) /* item on <var_11:IndexedIterator[Phase]>*/;
+var12 = ((val*(*)(val* self))((((long)var_10&3)?class_info[((long)var_10&3)]:var_10->class)->vft[COLOR_standard__abstract_collection__Iterator__item]))(var_10); /* item on <var_10:IndexedIterator[Phase]>*/
 }
-var_phase = var13;
+var_phase = var12;
 {
 { /* Inline phase#Phase#disabled (var_phase) on <var_phase:Phase> */
-var16 = var_phase->attrs[COLOR_nit__phase__Phase___disabled].s; /* _disabled on <var_phase:Phase> */
-var14 = var16;
-RET_LABEL15:(void)0;
+var15 = var_phase->attrs[COLOR_nit__phase__Phase___disabled].s; /* _disabled on <var_phase:Phase> */
+var13 = var15;
+RET_LABEL14:(void)0;
 }
 }
-if (var14){
+if (var13){
 goto BREAK_label;
 } else {
 }
 {
 { /* Inline phase#Phase#toolcontext (var_phase) on <var_phase:Phase> */
-var19 = var_phase->attrs[COLOR_nit__phase__Phase___toolcontext].val; /* _toolcontext on <var_phase:Phase> */
-if (unlikely(var19 == NULL)) {
+var18 = var_phase->attrs[COLOR_nit__phase__Phase___toolcontext].val; /* _toolcontext on <var_phase:Phase> */
+if (unlikely(var18 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _toolcontext");
-PRINT_ERROR(" (%s:%d)\n", FILE_nit__phase, 201);
-show_backtrace(1);
+PRINT_ERROR(" (%s:%d)\n", FILE_nit__phase, 200);
+fatal_exit(1);
 }
-var17 = var19;
-RET_LABEL18:(void)0;
+var16 = var18;
+RET_LABEL17:(void)0;
 }
 }
 {
-{ /* Inline kernel#Object#== (var17,self) on <var17:ToolContext> */
+{ /* Inline kernel#Object#== (var16,self) on <var16:ToolContext> */
 var_other = self;
 {
-{ /* Inline kernel#Object#is_same_instance (var17,var_other) on <var17:ToolContext> */
-var24 = var17 == var_other;
-var22 = var24;
-goto RET_LABEL23;
-RET_LABEL23:(void)0;
+{ /* Inline kernel#Object#is_same_instance (var16,var_other) on <var16:ToolContext> */
+var23 = var16 == var_other;
+var21 = var23;
+goto RET_LABEL22;
+RET_LABEL22:(void)0;
 }
 }
-var20 = var22;
-goto RET_LABEL21;
-RET_LABEL21:(void)0;
+var19 = var21;
+goto RET_LABEL20;
+RET_LABEL20:(void)0;
 }
 }
-if (unlikely(!var20)) {
+if (unlikely(!var19)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_nit__phase, 171);
-show_backtrace(1);
+PRINT_ERROR(" (%s:%d)\n", FILE_nit__phase, 170);
+fatal_exit(1);
 }
 {
 nit__phase___ToolContext___phase_process_npropdef(self, var_phase, var_npropdef); /* Direct call phase#ToolContext#phase_process_npropdef on <self:ToolContext>*/
 }
 {
-var25 = nit___nit__ToolContext___check_errors(self);
+var24 = nit___nit__ToolContext___check_errors(self);
 }
 BREAK_label: (void)0;
 {
-((void (*)(val* self))(var_11->class->vft[COLOR_standard__abstract_collection__Iterator__next]))(var_11) /* next on <var_11:IndexedIterator[Phase]>*/;
+((void(*)(val* self))((((long)var_10&3)?class_info[((long)var_10&3)]:var_10->class)->vft[COLOR_standard__abstract_collection__Iterator__next]))(var_10); /* next on <var_10:IndexedIterator[Phase]>*/
 }
 } else {
-goto BREAK_label26;
+goto BREAK_label25;
 }
 }
-BREAK_label26: (void)0;
+BREAK_label25: (void)0;
 {
-{ /* Inline abstract_collection#Iterator#finish (var_11) on <var_11:IndexedIterator[Phase]> */
-RET_LABEL27:(void)0;
-}
+((void(*)(val* self))((((long)var_10&3)?class_info[((long)var_10&3)]:var_10->class)->vft[COLOR_standard__abstract_collection__Iterator__finish]))(var_10); /* finish on <var_10:IndexedIterator[Phase]>*/
 }
 RET_LABEL:;
 }
@@ -1662,8 +1593,8 @@ val* var1 /* : Array[AAnnotation] */;
 var1 = self->attrs[COLOR_nit__phase__AnnotationPhaseVisitor___annotations].val; /* _annotations on <self:AnnotationPhaseVisitor> */
 if (unlikely(var1 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _annotations");
-PRINT_ERROR(" (%s:%d)\n", FILE_nit__phase, 188);
-show_backtrace(1);
+PRINT_ERROR(" (%s:%d)\n", FILE_nit__phase, 187);
+fatal_exit(1);
 }
 var = var1;
 RET_LABEL:;
@@ -1679,7 +1610,7 @@ val* var1 /* : Array[AAnnotation] */;
 val* var3 /* : Array[AAnnotation] */;
 var_n = p0;
 {
-((void (*)(val* self, val* p0))(var_n->class->vft[COLOR_nit__parser_nodes__ANode__visit_all]))(var_n, self) /* visit_all on <var_n:ANode>*/;
+((void(*)(val* self, val* p0))(var_n->class->vft[COLOR_nit__parser_nodes__ANode__visit_all]))(var_n, self); /* visit_all on <var_n:ANode>*/
 }
 /* <var_n:ANode> isa AAnnotation */
 cltype = type_nit__AAnnotation.color;
@@ -1695,8 +1626,8 @@ if (var){
 var3 = self->attrs[COLOR_nit__phase__AnnotationPhaseVisitor___annotations].val; /* _annotations on <self:AnnotationPhaseVisitor> */
 if (unlikely(var3 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _annotations");
-PRINT_ERROR(" (%s:%d)\n", FILE_nit__phase, 188);
-show_backtrace(1);
+PRINT_ERROR(" (%s:%d)\n", FILE_nit__phase, 187);
+fatal_exit(1);
 }
 var1 = var3;
 RET_LABEL2:(void)0;
@@ -1716,8 +1647,8 @@ val* var1 /* : ToolContext */;
 var1 = self->attrs[COLOR_nit__phase__Phase___toolcontext].val; /* _toolcontext on <self:Phase> */
 if (unlikely(var1 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _toolcontext");
-PRINT_ERROR(" (%s:%d)\n", FILE_nit__phase, 201);
-show_backtrace(1);
+PRINT_ERROR(" (%s:%d)\n", FILE_nit__phase, 200);
+fatal_exit(1);
 }
 var = var1;
 RET_LABEL:;
@@ -1735,8 +1666,8 @@ val* var1 /* : POSetElement[Phase] */;
 var1 = self->attrs[COLOR_nit__phase__Phase___in_hierarchy].val; /* _in_hierarchy on <self:Phase> */
 if (unlikely(var1 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _in_hierarchy");
-PRINT_ERROR(" (%s:%d)\n", FILE_nit__phase, 204);
-show_backtrace(1);
+PRINT_ERROR(" (%s:%d)\n", FILE_nit__phase, 203);
+fatal_exit(1);
 }
 var = var1;
 RET_LABEL:;
@@ -1771,29 +1702,28 @@ val* var6 /* : POSetElement[nullable Object] */;
 val* var8 /* : nullable Collection[Phase] */;
 val* var10 /* : nullable Collection[Phase] */;
 val* var_depends /* var depends: nullable Collection[Phase] */;
-val* var11 /* : null */;
+short int var11 /* : Bool */;
 short int var12 /* : Bool */;
-short int var13 /* : Bool */;
 val* var_other /* var other: nullable Object */;
+short int var14 /* : Bool */;
 short int var15 /* : Bool */;
-short int var16 /* : Bool */;
 val* var_ /* var : Collection[Phase] */;
-val* var17 /* : Iterator[nullable Object] */;
-val* var_18 /* var : Iterator[Phase] */;
-short int var19 /* : Bool */;
-val* var20 /* : nullable Object */;
+val* var16 /* : Iterator[nullable Object] */;
+val* var_17 /* var : Iterator[Phase] */;
+short int var18 /* : Bool */;
+val* var19 /* : nullable Object */;
 val* var_d /* var d: Phase */;
-val* var21 /* : ToolContext */;
-val* var23 /* : ToolContext */;
-val* var24 /* : POSet[Phase] */;
-val* var26 /* : POSet[Phase] */;
+val* var20 /* : ToolContext */;
+val* var22 /* : ToolContext */;
+val* var23 /* : POSet[Phase] */;
+val* var25 /* : POSet[Phase] */;
 {
 { /* Inline phase#Phase#toolcontext (self) on <self:Phase> */
 var2 = self->attrs[COLOR_nit__phase__Phase___toolcontext].val; /* _toolcontext on <self:Phase> */
 if (unlikely(var2 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _toolcontext");
-PRINT_ERROR(" (%s:%d)\n", FILE_nit__phase, 201);
-show_backtrace(1);
+PRINT_ERROR(" (%s:%d)\n", FILE_nit__phase, 200);
+fatal_exit(1);
 }
 var = var2;
 RET_LABEL1:(void)0;
@@ -1805,7 +1735,7 @@ var5 = var->attrs[COLOR_nit__phase__ToolContext___phases].val; /* _phases on <va
 if (unlikely(var5 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _phases");
 PRINT_ERROR(" (%s:%d)\n", FILE_nit__phase, 23);
-show_backtrace(1);
+fatal_exit(1);
 }
 var3 = var5;
 RET_LABEL4:(void)0;
@@ -1828,69 +1758,68 @@ RET_LABEL9:(void)0;
 }
 }
 var_depends = var8;
-var11 = NULL;
 if (var_depends == NULL) {
-var12 = 0; /* is null */
+var11 = 0; /* is null */
 } else {
-var12 = 1; /* arg is null and recv is not */
+var11 = 1; /* arg is null and recv is not */
 }
 if (0) {
-{ /* Inline kernel#Object#!= (var_depends,var11) on <var_depends:nullable Collection[Phase]> */
-var_other = var11;
+{ /* Inline kernel#Object#!= (var_depends,((val*)NULL)) on <var_depends:nullable Collection[Phase]> */
+var_other = ((val*)NULL);
 {
-var15 = ((short int (*)(val* self, val* p0))(var_depends->class->vft[COLOR_standard__kernel__Object___61d_61d]))(var_depends, var_other) /* == on <var_depends:nullable Collection[Phase](Collection[Phase])>*/;
+var14 = ((short int(*)(val* self, val* p0))((((long)var_depends&3)?class_info[((long)var_depends&3)]:var_depends->class)->vft[COLOR_standard__kernel__Object___61d_61d]))(var_depends, var_other); /* == on <var_depends:nullable Collection[Phase](Collection[Phase])>*/
 }
-var16 = !var15;
-var13 = var16;
-goto RET_LABEL14;
-RET_LABEL14:(void)0;
+var15 = !var14;
+var12 = var15;
+goto RET_LABEL13;
+RET_LABEL13:(void)0;
 }
-var12 = var13;
+var11 = var12;
 }
-if (var12){
+if (var11){
 var_ = var_depends;
 {
-var17 = ((val* (*)(val* self))(var_->class->vft[COLOR_standard__abstract_collection__Collection__iterator]))(var_) /* iterator on <var_:Collection[Phase]>*/;
+var16 = ((val*(*)(val* self))((((long)var_&3)?class_info[((long)var_&3)]:var_->class)->vft[COLOR_standard__abstract_collection__Collection__iterator]))(var_); /* iterator on <var_:Collection[Phase]>*/
 }
-var_18 = var17;
+var_17 = var16;
 for(;;) {
 {
-var19 = ((short int (*)(val* self))(var_18->class->vft[COLOR_standard__abstract_collection__Iterator__is_ok]))(var_18) /* is_ok on <var_18:Iterator[Phase]>*/;
+var18 = ((short int(*)(val* self))((((long)var_17&3)?class_info[((long)var_17&3)]:var_17->class)->vft[COLOR_standard__abstract_collection__Iterator__is_ok]))(var_17); /* is_ok on <var_17:Iterator[Phase]>*/
 }
-if (var19){
+if (var18){
 {
-var20 = ((val* (*)(val* self))(var_18->class->vft[COLOR_standard__abstract_collection__Iterator__item]))(var_18) /* item on <var_18:Iterator[Phase]>*/;
+var19 = ((val*(*)(val* self))((((long)var_17&3)?class_info[((long)var_17&3)]:var_17->class)->vft[COLOR_standard__abstract_collection__Iterator__item]))(var_17); /* item on <var_17:Iterator[Phase]>*/
 }
-var_d = var20;
+var_d = var19;
 {
 { /* Inline phase#Phase#toolcontext (self) on <self:Phase> */
-var23 = self->attrs[COLOR_nit__phase__Phase___toolcontext].val; /* _toolcontext on <self:Phase> */
-if (unlikely(var23 == NULL)) {
+var22 = self->attrs[COLOR_nit__phase__Phase___toolcontext].val; /* _toolcontext on <self:Phase> */
+if (unlikely(var22 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _toolcontext");
-PRINT_ERROR(" (%s:%d)\n", FILE_nit__phase, 201);
-show_backtrace(1);
+PRINT_ERROR(" (%s:%d)\n", FILE_nit__phase, 200);
+fatal_exit(1);
 }
-var21 = var23;
-RET_LABEL22:(void)0;
+var20 = var22;
+RET_LABEL21:(void)0;
 }
 }
 {
-{ /* Inline phase#ToolContext#phases (var21) on <var21:ToolContext> */
-var26 = var21->attrs[COLOR_nit__phase__ToolContext___phases].val; /* _phases on <var21:ToolContext> */
-if (unlikely(var26 == NULL)) {
+{ /* Inline phase#ToolContext#phases (var20) on <var20:ToolContext> */
+var25 = var20->attrs[COLOR_nit__phase__ToolContext___phases].val; /* _phases on <var20:ToolContext> */
+if (unlikely(var25 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _phases");
 PRINT_ERROR(" (%s:%d)\n", FILE_nit__phase, 23);
-show_backtrace(1);
+fatal_exit(1);
 }
-var24 = var26;
-RET_LABEL25:(void)0;
+var23 = var25;
+RET_LABEL24:(void)0;
 }
-}
-{
-poset___poset__POSet___add_edge(var24, self, var_d); /* Direct call poset#POSet#add_edge on <var24:POSet[Phase]>*/
 }
 {
-((void (*)(val* self))(var_18->class->vft[COLOR_standard__abstract_collection__Iterator__next]))(var_18) /* next on <var_18:Iterator[Phase]>*/;
+poset___poset__POSet___add_edge(var23, self, var_d); /* Direct call poset#POSet#add_edge on <var23:POSet[Phase]>*/
+}
+{
+((void(*)(val* self))((((long)var_17&3)?class_info[((long)var_17&3)]:var_17->class)->vft[COLOR_standard__abstract_collection__Iterator__next]))(var_17); /* next on <var_17:Iterator[Phase]>*/
 }
 } else {
 goto BREAK_label;
@@ -1898,9 +1827,7 @@ goto BREAK_label;
 }
 BREAK_label: (void)0;
 {
-{ /* Inline abstract_collection#Iterator#finish (var_18) on <var_18:Iterator[Phase]> */
-RET_LABEL27:(void)0;
-}
+((void(*)(val* self))((((long)var_17&3)?class_info[((long)var_17&3)]:var_17->class)->vft[COLOR_standard__abstract_collection__Iterator__finish]))(var_17); /* finish on <var_17:Iterator[Phase]>*/
 }
 } else {
 }
@@ -1913,29 +1840,27 @@ val* var1 /* : String */;
 static val* varonce;
 val* var2 /* : String */;
 char* var3 /* : NativeString */;
-long var4 /* : Int */;
-val* var5 /* : FlatString */;
+val* var4 /* : FlatString */;
+val* var5 /* : String */;
 val* var6 /* : String */;
-val* var7 /* : String */;
 {
 var1 = standard__string___Object___class_name(self);
 }
-if (varonce) {
+if (likely(varonce!=NULL)) {
 var2 = varonce;
 } else {
 var3 = "Phase";
-var4 = 5;
-var5 = standard___standard__NativeString___to_s_with_length(var3, var4);
-var2 = var5;
+var4 = standard___standard__NativeString___to_s_with_length(var3, 5l);
+var2 = var4;
 varonce = var2;
 }
 {
-var6 = standard__file___String___strip_extension(var1, var2);
+var5 = standard__file___String___strip_extension(var1, var2);
 }
 {
-var7 = ((val* (*)(val* self))(var6->class->vft[COLOR_standard__string__String__to_lower]))(var6) /* to_lower on <var6:String>*/;
+var6 = standard___standard__String___to_snake_case(var5);
 }
-var = var7;
+var = var6;
 goto RET_LABEL;
 RET_LABEL:;
 return var;

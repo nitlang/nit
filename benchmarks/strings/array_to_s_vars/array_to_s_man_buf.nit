@@ -14,7 +14,7 @@
 module array_to_s_man_buf
 
 intrude import standard::collection::array
-import standard::string
+import standard::text
 
 redef class Array[E]
 	redef fun to_s: String do

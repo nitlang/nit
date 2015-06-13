@@ -1672,8 +1672,9 @@ abstract class AbstractCompilerVisitor
 		if nexpr == null then return
 		if nexpr.mtype == null and not nexpr.is_typed then
 			# Untyped expression.
-			# Might mean dead code
-			# So just return
+			# Might mean dead code or invalid code
+			# so aborts
+			add_abort("FATAL: bad statement executed.")
 			return
 		end
 
@@ -1697,8 +1698,10 @@ abstract class AbstractCompilerVisitor
 	do
 		if nexpr.mtype == null then
 			# Untyped expression.
-			# Might mean dead code
-			# so return a placebo result
+			# Might mean dead code or invalid code.
+			# so aborts
+			add_abort("FATAL: bad expression executed.")
+			# and return a placebo result to please the C compiler
 			if mtype == null then mtype = compiler.mainmodule.object_type
 			return new_var(mtype)
 		end
@@ -1876,7 +1879,7 @@ redef class MClassType
 		else if mclass.name == "Byte" then
 			return "unsigned char"
 		else if mclass.name == "NativeString" then
-			return "unsigned char*"
+			return "char*"
 		else if mclass.name == "NativeArray" then
 			return "val*"
 		else
@@ -2320,7 +2323,7 @@ redef class AMethPropdef
 			end
 		else if cname == "NativeString" then
 			if pname == "[]" then
-				v.ret(v.new_expr("(uint32_t){arguments[0]}[{arguments[1]}]", ret.as(not null)))
+				v.ret(v.new_expr("(uint32_t)(unsigned char){arguments[0]}[{arguments[1]}]", ret.as(not null)))
 				return true
 			else if pname == "[]=" then
 				v.add("{arguments[0]}[{arguments[1]}]=(unsigned char){arguments[2]};")
@@ -2335,7 +2338,7 @@ redef class AMethPropdef
 				v.ret(v.new_expr("{arguments[0]} + {arguments[1]}", ret.as(not null)))
 				return true
 			else if pname == "new" then
-				v.ret(v.new_expr("(unsigned char*)nit_alloc({arguments[1]})", ret.as(not null)))
+				v.ret(v.new_expr("(char*)nit_alloc({arguments[1]})", ret.as(not null)))
 				return true
 			end
 		else if cname == "NativeArray" then
@@ -2349,7 +2352,7 @@ redef class AMethPropdef
 			v.ret(v.new_expr("glob_sys", ret.as(not null)))
 			return true
 		else if pname == "calloc_string" then
-			v.ret(v.new_expr("(unsigned char*)nit_alloc({arguments[1]})", ret.as(not null)))
+			v.ret(v.new_expr("(char*)nit_alloc({arguments[1]})", ret.as(not null)))
 			return true
 		else if pname == "calloc_array" then
 			v.calloc_array(ret.as(not null), arguments)
@@ -2454,7 +2457,7 @@ redef class AAttrPropdef
 			var res
 			if is_lazy then
 				var set
-				var ret = self.mpropdef.static_mtype
+				var ret = self.mtype
 				var useiset = not ret.is_c_primitive and not ret isa MNullableType
 				var guard = self.mlazypropdef.mproperty
 				if useiset then
@@ -2482,7 +2485,7 @@ redef class AAttrPropdef
 			assert arguments.length == 2
 			v.write_attribute(self.mpropdef.mproperty, arguments.first, arguments[1])
 			if is_lazy then
-				var ret = self.mpropdef.static_mtype
+				var ret = self.mtype
 				var useiset = not ret.is_c_primitive and not ret isa MNullableType
 				if not useiset then
 					v.write_attribute(self.mlazypropdef.mproperty, arguments.first, v.bool_instance(true))
@@ -2504,11 +2507,11 @@ redef class AAttrPropdef
 		var oldnode = v.current_node
 		v.current_node = self
 		var old_frame = v.frame
-		var frame = new StaticFrame(v, self.mpropdef.as(not null), recv.mcasttype.undecorate.as(MClassType), [recv])
+		var frame = new StaticFrame(v, self.mreadpropdef.as(not null), recv.mcasttype.undecorate.as(MClassType), [recv])
 		v.frame = frame
 
 		var value
-		var mtype = self.mpropdef.static_mtype
+		var mtype = self.mtype
 		assert mtype != null
 
 		var nexpr = self.n_expr

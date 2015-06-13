@@ -13,6 +13,7 @@ module friendz is
 	app_version(0, 1, git_revision)
 end
 
+import app::audio
 import mnit
 import realtime
 import solver
@@ -168,7 +169,7 @@ class TextButton
 	do
 		if over1 == null then return
 		if not self.enabled then return
-		game.snd_click.replay
+		game.snd_click.play
 		self.ttl = 10
 		self.dirty = true
 		self.enter2
@@ -181,14 +182,14 @@ class TextButton
 	redef fun click(ev)
 	do
 		if not self.enabled then
-			game.snd_bing.replay
+			game.snd_bing.play
 		else
 			if self.toggleable then
 				self.toggled = not self.toggled
 				if self.toggled then self.over = self.over2 else self.over = self.over1
 				game.statusbar.over_txt = self.over
 			end
-			game.snd_whip.replay
+			game.snd_whip.play
 		end
 		self.click2(ev)
 	end
@@ -250,10 +251,10 @@ class LevelButton
 	redef fun click(ev)
 	do
 		if self.enabled then
-			game.snd_whip.replay
+			game.snd_whip.play
 			game.play(self.level)
 		else
-			game.snd_bing.replay
+			game.snd_bing.play
 			game.statusbar.set_tmp("Locked level", "red")
 		end
 	end
@@ -293,10 +294,10 @@ class Achievement
 	redef fun click(ev)
 	do
 		if not self.enabled then
-			game.snd_bing.replay
+			game.snd_bing.play
 			game.statusbar.set_tmp("Locked achievement!", "red")
 		else
-			game.snd_whip.replay
+			game.snd_whip.play
 			self.click2(ev)
 		end
 	end
@@ -455,7 +456,7 @@ class Button
 		if game.selected_button == game.button_size then game.board.dirty=true
 		if sel != null then sel.dirty=true
 		game.selected_button = self
-		game.snd_click.replay
+		game.snd_click.play
 	end
 
 	# Current inputed chain
@@ -469,36 +470,36 @@ class Button
 		if ev.drag and self.kind>0 and not chain.is_empty then
 			if self.chain.length >= 2 and self.chain[1] == t then
 				var t2 = self.chain.shift
-				game.snd_click.replay
+				game.snd_click.play
 				if t2.fixed and not game.editing then return
 				t2.update(0)
 				return
 			end
 			if t.fixed and t.kind == self.kind then
 				self.chain.unshift(t)
-				game.snd_click.replay
+				game.snd_click.play
 				return
 			end
 			if (self.chain[0].x - t.x).abs + (self.chain[0].y - t.y).abs != 1 then return
 			if t.fixed and not game.editing then
-				game.snd_bing.replay
+				game.snd_bing.play
 				return
 			end
 			if t.kind != 0 and t.kind != self.kind then
 				t.shocked = 5
-				game.snd_duh.replay
+				game.snd_duh.play
 				return
 			end
 			self.chain.unshift(t)
 			if t.kind == self.kind then return
-			game.snd_click.replay
+			game.snd_click.play
 			t.update(self.kind)
 			return
 		end
 
 		if t.fixed and not game.editing then
 			if t.kind == 0 then
-				game.snd_bing.replay
+				game.snd_bing.play
 				return
 			end
 			if t.kind != self.kind and not ev.drag then
@@ -506,13 +507,13 @@ class Button
 				game.buttons[t.kind].chain = [t]
 			else
 				self.chain = [t]
-				game.snd_bing.replay
+				game.snd_bing.play
 			end
 			return
 		end
 		if t.fixed and game.editing and self == game.button_erase and t.kind == 0 then
 			t.fixed = false
-			game.snd_click.replay
+			game.snd_click.play
 			return
 		end
 
@@ -522,7 +523,7 @@ class Button
 			if t.kind == 0 then return
 			if self.kind != 0 and t.kind != self.kind then
 				t.shocked = 5
-				game.snd_duh.replay
+				game.snd_duh.play
 				return
 			end
 			nkind = 0
@@ -534,7 +535,7 @@ class Button
 			self.chain.clear
 		end
 		if nkind == t.kind then return
-		game.snd_click.replay
+		game.snd_click.play
 		t.update(nkind)
 	end
 end
@@ -641,7 +642,7 @@ class MetalButton
 		if not ev.drag then self.fixed = not t.fixed
 		if t.fixed == self.fixed then return
 		t.fixed = self.fixed
-		game.snd_click.replay
+		game.snd_click.play
 	end
 end
 
@@ -684,7 +685,7 @@ class ResizeButton
 		var w = t.x+1
 		var h = t.y+1
 		if w < 3 or h < 3 then
-			game.snd_bing.replay
+			game.snd_bing.play
 			game.statusbar.set_tmp("Too small!", "red")
 			return
 		end
@@ -701,11 +702,11 @@ class ResizeButton
 			end
 		end
 		if aborts then
-			game.snd_duh.replay
+			game.snd_duh.play
 			game.statusbar.set_tmp("Monsters on the way!", "red")
 			return
 		end
-		game.snd_click.replay
+		game.snd_click.play
 		grid.resize(w,h)
 	end
 end
@@ -805,23 +806,6 @@ end
 
 # ************************************************************************/
 
-# Simple audio asset
-class Audio
-	var path: String
-
-	# placebo
-	fun play do end
-
-	# placebo
-	fun pause do end
-
-	# Play a sound.
-	fun replay
-	do
-		sys.system("aplay assets/{path} &")
-	end
-end
-
 redef class Display
 	# Display a text
 	fun textx(str: String, x, y, height: Int, color, color2: nullable String)
@@ -920,28 +904,29 @@ redef class Game
 	# SOUND
 
 	# Is the music muted?
-	var music_muted: Bool = true #read_cookie("music_muted")
+	var music_muted: Bool = false #read_cookie("music_muted")
 
 	# Is the sound effects muted?
-	var sfx_muted: Bool = true #read_cookie("sfx_muted")
+	var sfx_muted: Bool = false #read_cookie("sfx_muted")
 
 	# The background music resource. */
-	var music = new Audio("music.ogg")
+	var music = new Music("music.ogg")
 
 	# Click sound
-	var snd_click = new Audio("click.wav")
+	var snd_click = new Sound("click.wav")
 
 	# Wining soulf
-	var snd_win = new Audio("level.wav")
+	var snd_win = new Sound("level.wav")
 
 	# Shocked sound
-	var snd_duh = new Audio("duh.wav")
+	var snd_duh = new Sound("duh.wav")
 
 	# metal sound
-	var snd_bing = new Audio("bing.wav")
+	var snd_bing = new Sound("bing.wav")
 
 	# transition sound
-	var snd_whip = new Audio("whip.wav")
+	var snd_whip = new Sound("whip.wav")
+
 
 	# INPUT ******************************************************************
 
@@ -971,6 +956,14 @@ redef class Game
 
 	# ResizeButton
 	var button_size = new ResizeButton(self)
+
+	init
+	do
+		load_levels
+		init_buttons
+		entities.clear
+		title
+	end
 
 	# fill `buttons`
 	fun init_buttons
@@ -1117,14 +1110,6 @@ redef class Game
 	# Last function called when the lauch state is ready
 	fun run do
 		dirty_all = true
-	end
-
-	init
-	do
-		load_levels
-		init_buttons
-		entities.clear
-		title
 	end
 
 	# Should all entity redrawn?
@@ -1297,7 +1282,7 @@ class Splash
 	end
 	redef fun click(ev)
 	do
-		game.snd_whip.replay
+		game.snd_whip.play
 		game.menu
 	end
 end
@@ -1317,7 +1302,7 @@ class NextLevelButton
 			self.dirty = true
 			self.enabled = w
 			if w then
-				game.snd_win.replay
+				game.snd_win.play
 				game.statusbar.set_tmp("Level solved!", "cyan")
 			end
 		end
@@ -1326,7 +1311,7 @@ class NextLevelButton
 	redef fun click(ev)
 	do
 		if not self.enabled then
-			game.snd_duh.replay
+			game.snd_duh.play
 			var grid = game.grid
 			var monsters = grid.monsters
 			var angry = new Array[Tile]
@@ -1364,7 +1349,7 @@ class NextLevelButton
 			return
 		end
 
-		game.snd_whip.replay
+		game.snd_whip.play
 		game.play_next
 	end
 end
@@ -1393,7 +1378,7 @@ class SFXButton
 	redef fun click2(ev)
 	do
 		game.sfx_muted = self.toggled
-		if not game.sfx_muted then game.snd_whip.replay # Because the automatic one was muted
+		if not game.sfx_muted then game.snd_whip.play # Because the automatic one was muted
 		#save_cookie("sfx_muted",sfx_muted?"true":"")
 	end
 end
@@ -1471,10 +1456,10 @@ class WonButton
 		if not self.enabled then
 			game.statusbar.set_tmp("Solve the level first!", "red")
 		else if ge != null then
-			game.snd_whip.replay
+			game.snd_whip.play
 			game.edit_grid(ge)
 		else
-			game.snd_whip.replay
+			game.snd_whip.play
 			game.menu
 		end
 	end
@@ -1486,7 +1471,7 @@ class WonButton
 			self.dirty = true
 			self.enabled = w
 			if w then
-				game.snd_win.replay
+				game.snd_win.play
 				game.statusbar.set_tmp("Level solved!", "cyan")
 			end
 		end

@@ -13,7 +13,7 @@
 # limitations under the License.
 
 import standard
-intrude import standard::ropes
+intrude import standard::text::ropes
 
 # Force building a Rope
 redef fun maxlen: Int do return once 2

@@ -16,7 +16,7 @@
 
 module string_ffi_ref_test
 
-intrude import string
+intrude import text::flat
 import file
 
 class StringTest

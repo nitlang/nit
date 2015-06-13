@@ -62,16 +62,12 @@ class Element
 	# Download this element to `path`
 	fun download_to(path: Text)
 	do
-		var curl = new Curl
-
-		var request = new CurlHTTPRequest(link, curl)
+		var request = new CurlHTTPRequest(link)
 		var response = request.download_to_file(path.to_s)
 
-		if response isa CurlFileResponseSuccess then
-			curl.destroy
-		else if response isa CurlResponseFailed then
+		if response isa CurlResponseFailed then
 			sys.stderr.write "Failed downloading URL '{link}' with: {response.error_msg} ({response.error_code})\n"
-		else abort
+		end
 	end
 
 	# Get an unique identifier for this element, uses `Config::unique_pattern`
@@ -232,16 +228,13 @@ redef class Text
 	# Get the content of the RSS feed at `self`
 	fun fetch_rss_content: Text
 	do
-		var curl = new Curl
-
 		if sys.verbose then print "\n# Downloading RSS file from '{self}'"
 
-		var request = new CurlHTTPRequest(to_s, curl)
+		var request = new CurlHTTPRequest(to_s)
 		var response = request.execute
 
 		if response isa CurlResponseSuccess then
 			var body = response.body_str
-			curl.destroy
 			if sys.verbose then print "Download successful"
 			return body
 		else if response isa CurlResponseFailed then

@@ -1703,6 +1703,7 @@ class LineFence
 		else
 			block = v.current_block.split(v.current_block.last_line.as(not null))
 		end
+		block.remove_surrounding_empty_lines
 		var meta = block.first_line.value.meta_from_fence
 		block.kind = new BlockFence(block, meta)
 		block.first_line.clear

@@ -12,7 +12,7 @@
 module substr_bench
 
 import opts
-intrude import standard::ropes
+intrude import standard::text::ropes
 
 fun bench_flatstr(nb_cct: Int, loops: Int, strlen: Int)
 do

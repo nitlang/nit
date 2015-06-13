@@ -18,7 +18,7 @@
 module test_assets_and_resources
 
 import simple_android
-import android::assets_and_resources
+intrude import android::assets_and_resources
 
 redef class App
 	redef fun input( ie )
@@ -33,7 +33,7 @@ redef class App
 	# Testing the assets manager
 	fun test_assets
 	do
-		assert asset_manager.bitmap("fighter.png").width == 32
+		assert not asset_manager.open_fd("testsound.ogg").is_java_null
 	end
 
 	# Testing the resources manager

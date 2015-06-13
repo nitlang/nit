@@ -27,12 +27,6 @@ _nit_lazy() {
 	# and setup a new `complete` for the command
 	eval "$($1 --bash-completion)"
 
-	# Special case for `nitg` that uses the completion of `nitc`
-	if test "$cmd" = "nitg"; then
-		cmd=nitc
-		complete -F _nitc -o default nitg
-	fi
-
 	if [[ $(type -t _$cmd) == function ]]; then
 		# All if fine, finish the job by invoking the function _$cmd
                 _$cmd
@@ -42,4 +36,4 @@ _nit_lazy() {
                 return 1
         fi
 } &&
-complete -F _nit_lazy -o default nit nitc nitdoc nitg nitlight nitls nitmetrics nitunit nitx
+complete -F _nit_lazy -o default nit nitc nitdoc nitlight nitls nitmetrics nitunit nitx

@@ -31,7 +31,7 @@ struct se_exec_data {
 
 se_exec_data_t* exec_Process_Process_basic_exec_execute_4(void *, char *, char *, int, int);
 
-#define string_NativeString_NativeString_system_0(self) (system(self))
+int string_NativeString_NativeString_system_0(const char*);
 
 #define exec_NativeProcess_NativeProcess_id_0(self) (((se_exec_data_t*)self)->id)
 #define exec_NativeProcess_NativeProcess_status_0(self) (((se_exec_data_t*)self)->status)

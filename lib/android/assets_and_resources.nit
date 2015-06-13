@@ -44,11 +44,13 @@ in "Java" `{
 
 # AssetManager from Java, used by `AssetManager` to access resources in `assets` app's directory
 # This is a low-level class, use `AssetManager` instead
-extern class NativeAssetManager in "Java" `{ android.content.res.AssetManager `}
+private extern class NativeAssetManager in "Java" `{ android.content.res.AssetManager `}
 	super JavaObject
 
+	# Close this asset manager
 	fun close in "Java" `{ self.close(); `}
 
+	# Get the locales that this assets manager contains data for
 	fun get_locales: Array[JavaString] import Array[JavaString], Array[JavaString].add in "Java" `{
 		int arr = new_Array_of_JavaString();
 		for (String s : self.getLocales()) {
@@ -57,6 +59,7 @@ extern class NativeAssetManager in "Java" `{ android.content.res.AssetManager `}
 		return arr;
 	`}
 
+	# String Array of all the assets at the given path
 	fun list(path: JavaString): Array[JavaString] import Array[JavaString], Array[JavaString].add  in "Java" `{
 		int arr = new_Array_of_JavaString();
 		try {
@@ -70,42 +73,45 @@ extern class NativeAssetManager in "Java" `{ android.content.res.AssetManager `}
 		return arr;
 	`}
 
+	# Open an asset using ACCESS_STREAMING mode
 	fun open(file_name: JavaString): NativeInputStream in "Java" `{
 		InputStream stream = null;
 		try {
 			stream = self.open(file_name);
 		}catch (IOException e) {
 			Log.e("Error while opening " + file_name, e.getMessage());
-			e.printStackTrace();
+			return null;
 		}
 		return stream;
 	`}
 
+	# Open an asset and return it's file descriptor
 	fun open_fd(file_name: JavaString): NativeAssetFileDescriptor in "Java" `{
 		AssetFileDescriptor afd = null;
 		try {
 			afd = self.openFd(file_name);
 		}catch(IOException e){
 			Log.e("Error while opening " + file_name, e.getMessage());
-			e.printStackTrace();
+			return null;
 		}
 		return afd;
 	`}
 
+	# Open a ,non-asset and return it's file descriptor
 	fun open_non_asset_fd(file_name: JavaString): NativeAssetFileDescriptor in "Java" `{
 		AssetFileDescriptor afd = null;
 		try {
 			afd =  self.openNonAssetFd(file_name);
 		}catch(IOException e){
 			Log.e("Error while opening " + file_name, e.getMessage());
-			e.printStackTrace();
+			return null;
 		}
 		return afd;
 	`}
 
 	# HACK for bug #845
 	redef fun new_global_ref import sys, Sys.jni_env `{
-		Sys sys = NativeResources_sys(self);
+		Sys sys = NativeAssetManager_sys(self);
 		JNIEnv *env = Sys_jni_env(sys);
 		return (*env)->NewGlobalRef(env, self);
 	`}
@@ -113,10 +119,15 @@ end
 
 # Assets manager using a `NativeAssetManager` to manage android assets
 class AssetManager
-	# Native asset manager
-	var native_assets_manager: NativeAssetManager
 
-	init(app: App) do self.native_assets_manager = app.assets.new_global_ref
+	# App instance used to initalize the NativeAssetManager
+	var app: App
+
+	# Native asset manager
+	private var native_assets_manager: NativeAssetManager is noinit
+
+	# Instanciate this AssetManager with the context of the app
+	init do self.native_assets_manager = app.assets.new_global_ref
 
 	# Close this asset manager
 	fun close do native_assets_manager.close
@@ -144,7 +155,7 @@ class AssetManager
 	end
 
 	# Open an asset using ACCESS_STREAMING mode, returning a NativeInputStream
-	fun open(file_name: String): NativeInputStream do
+	private fun open(file_name: String): NativeInputStream do
 		sys.jni_env.push_local_frame(1)
 		var return_value =  native_assets_manager.open(file_name.to_java_string)
 		sys.jni_env.pop_local_frame
@@ -153,7 +164,7 @@ class AssetManager
 
 	# Open an asset using it's name and returning a NativeAssetFileDescriptor
 	# `file_name` is
-	fun open_fd(file_name: String): NativeAssetFileDescriptor do
+	private fun open_fd(file_name: String): NativeAssetFileDescriptor do
 		sys.jni_env.push_local_frame(1)
 		var return_value = native_assets_manager.open_fd(file_name.to_java_string).new_global_ref
 		sys.jni_env.pop_local_frame
@@ -161,13 +172,13 @@ class AssetManager
 	end
 
 	# Open a file that is not an asset returning a NativeAssetFileDescriptor
-	fun open_non_asset_fd(file_name: String): NativeAssetFileDescriptor do
+	private fun open_non_asset_fd(file_name: String): NativeAssetFileDescriptor do
 		var return_value =  native_assets_manager.open_non_asset_fd(file_name.to_java_string)
 		return return_value
 	end
 
 	# Return a bitmap from the assets
-	fun bitmap(name: String): NativeBitmap do
+	private fun bitmap(name: String): NativeBitmap do
 		sys.jni_env.push_local_frame(1)
 		var return_value = new NativeBitmap.from_stream(native_assets_manager.open(name.to_java_string)).new_global_ref
 		sys.jni_env.pop_local_frame
@@ -180,7 +191,7 @@ end
 
 # Resource manager for android resources placed in the `res` folder of your app
 # This is a low-level class, use `ResourcesManager` instead
-extern class NativeResources in "Java" `{ android.content.res.Resources `}
+private extern class NativeResources in "Java" `{ android.content.res.Resources `}
 	super JavaObject
 
 	fun get_assets:NativeAssetManager in "Java" `{ return self.getAssets(); `}
@@ -207,12 +218,12 @@ end
 # Resource manager for android resources placed in the `res` folder of your app
 class ResourcesManager
 	# Native resources
-	var android_resources: NativeResources
+	private var android_resources: NativeResources
 
 	# The name of the app_package
-	var app_package: String
+	private var app_package: String
 
-	init(res: NativeResources, app_package: String)
+	private init native(res: NativeResources, app_package: String)
 	do
 		self.android_resources = res.new_global_ref
 		self.app_package = app_package
@@ -270,7 +281,7 @@ class ResourcesManager
 	end
 
 	# Get a drawable from `res/drawable` folder
-	fun drawable(name: String): NativeDrawable do
+	private fun drawable(name: String): NativeDrawable do
 		sys.jni_env.push_local_frame(3)
 		var return_value = android_resources.get_drawable(android_resources.get_identifier(name.to_java_string, "drawable".to_java_string, app_package.to_java_string))
 		sys.jni_env.pop_local_frame
@@ -290,7 +301,7 @@ class ResourcesManager
 end
 
 # An android Bitmap, get an instance using the AssetManager or the ResourceManager
-extern class NativeBitmap in "Java" `{ android.graphics.Bitmap `}
+private extern class NativeBitmap in "Java" `{ android.graphics.Bitmap `}
 	super JavaObject
 
 	# Create a NativeBitmap from a NativeInputStream retrieved with `open` function of the AssetManager
@@ -305,7 +316,7 @@ extern class NativeBitmap in "Java" `{ android.graphics.Bitmap `}
 
 	# HACK for bug #845
 	redef fun new_global_ref import sys, Sys.jni_env `{
-		Sys sys = NativeResources_sys(self);
+		Sys sys = NativeBitmap_sys(self);
 		JNIEnv *env = Sys_jni_env(sys);
 		return (*env)->NewGlobalRef(env, self);
 	`}
@@ -355,11 +366,11 @@ extern class NativeAssetFileDescriptor in "Java" `{ android.content.res.AssetFil
 
 	fun length: Int in "Java" `{ return (int)self.getLength(); `}
 	fun start_offset: Int in "Java" `{ return (int)self.getStartOffset(); `}
-	redef fun to_s: String import JavaString.to_s in "Java" `{ return JavaString_to_s(self.toString()); `}
+	redef fun to_s import JavaString.to_s in "Java" `{ return JavaString_to_s(self.toString()); `}
 
 	# HACK for bug #845
 	redef fun new_global_ref import sys, Sys.jni_env `{
-		Sys sys = NativeResources_sys(self);
+		Sys sys = NativeAssetFileDescriptor_sys(self);
 		JNIEnv *env = Sys_jni_env(sys);
 		return (*env)->NewGlobalRef(env, self);
 	`}
@@ -367,12 +378,12 @@ end
 
 # Native class representing something drawable, can be retrieved from the resources
 # will be used by the GUI
-extern class NativeDrawable in "Java" `{ android.graphics.drawable.Drawable `}
+private extern class NativeDrawable in "Java" `{ android.graphics.drawable.Drawable `}
 end
 
 redef class App
 	# Resource Manager used to manage resources placed in the `res` folder of the app
-	var resource_manager: ResourcesManager is lazy  do return new ResourcesManager(self.resources, self.package_name.to_s)
+	var resource_manager: ResourcesManager is lazy  do return new ResourcesManager.native(self.resources, self.package_name.to_s)
 
 	# Assets Manager used to manage resources placed in the `assets` folder of the app
 	var asset_manager: AssetManager is lazy do return new AssetManager(self)

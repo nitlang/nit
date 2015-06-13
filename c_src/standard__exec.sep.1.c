@@ -8,7 +8,7 @@ long var2 /* : Int */;
 long var4 /* : Int for extern */;
 var_command = p0;
 {
-var1 = ((char* (*)(val* self))(var_command->class->vft[COLOR_standard__string__Text__to_cstring]))(var_command) /* to_cstring on <var_command:String>*/;
+var1 = ((char*(*)(val* self))(var_command->class->vft[COLOR_standard__string__Text__to_cstring]))(var_command); /* to_cstring on <var_command:String>*/
 }
 {
 { /* Inline exec#NativeString#system (var1) on <var1:NativeString> */

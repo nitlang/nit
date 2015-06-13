@@ -71,14 +71,15 @@ redef class MType
 
 	# Representation of this type in C for the internal of the system
 	# Hides extern types.
-	fun cname_blind: String is abstract
+	fun cname_blind: String do return "struct nitni_instance *"
 
 	# Representation of this type in mangled C
 	#   Object -> Object
 	#   Pointer -> Pointer
 	fun mangled_cname: String is abstract
 
-	# Does this types has a primitive reprensentation
+	# Does this type have a primitive representation?
+	#
 	#   type Object is_primitive? false
 	#   type Pointer is_primitive? true
 	fun is_cprimitive: Bool is abstract
@@ -93,7 +94,7 @@ redef class MClassType
 		if name == "Float" then return "double"
 		if name == "Int" then return "long"
 		if name == "Byte" then return "unsigned char"
-		if name == "NativeString" then return "unsigned char*"
+		if name == "NativeString" then return "char*"
 		if mclass.kind == extern_kind then
 			var ctype = mclass.ctype
 			assert ctype != null
@@ -109,9 +110,9 @@ redef class MClassType
 		if name == "Float" then return "double"
 		if name == "Int" then return "long"
 		if name == "Byte" then return "unsigned char"
-		if name == "NativeString" then return "unsigned char*"
+		if name == "NativeString" then return "char*"
 		if mclass.kind == extern_kind then return "void*"
-		return "struct nitni_instance *"
+		return super
 	end
 
 	# Name of this type in C for normal classes (not extern and not primitive)
@@ -120,18 +121,17 @@ redef class MClassType
 	redef fun mangled_cname do return mclass.name
 
 	redef fun is_cprimitive do return mclass.kind == extern_kind or
-			(once ["Bool", "Char", "Float", "Int", "NativeString"]).has(mclass.name)
+			(once ["Bool", "Char", "Float", "Int", "NativeString", "Byte"]).has(mclass.name)
 end
 
 redef class MNullableType
 	redef fun cname do return mangled_cname
-	redef fun cname_blind do return "struct nitni_instance *"
 	redef fun mangled_cname do return "nullable_{mtype.mangled_cname}"
 	redef fun is_cprimitive do return false
 end
 
 redef class MVirtualType
-	redef fun mangled_cname: String do return to_s
+	redef fun mangled_cname do return to_s
 end
 
 redef class MGenericType

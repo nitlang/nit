@@ -46,6 +46,48 @@ extern class AbstractJavaArray[E: Object]
 	redef fun reverse_iterator do return new JavaArrayReverseIterator[E](self)
 end
 
+# Java primitive array `int[]`
+extern class JavaIntArray in "Java" `{ int[] `}
+	super AbstractJavaArray[Int]
+
+	# Get a new array of the given `size`
+	new (size: Int) in "Java" `{ return new int[(int)size]; `}
+
+	redef fun [](i) in "Java" `{ return self[(int)i]; `}
+
+	redef fun []=(i, e) in "Java" `{ self[(int)i] = (int)e; `}
+
+	redef fun length in "Java" `{ return self.length; `}
+end
+
+# Java primitive array `short[]`
+extern class JavaShortArray in "Java" `{ short[] `}
+	super AbstractJavaArray[Int]
+
+	# Get a new array of the given `size`
+	new (size: Int) in "Java" `{ return new short[(int)size]; `}
+
+	redef fun [](i) in "Java" `{ return (short)self[(int)i]; `}
+
+	redef fun []=(i, e) in "Java" `{ self[(int)i] = (short)e; `}
+
+	redef fun length in "Java" `{ return self.length; `}
+end
+
+# Java primitive array `long[]`
+extern class JavaLongArray in "Java" `{ long[] `}
+	super AbstractJavaArray[Int]
+
+	# Get a new array of the given `size`
+	new (size: Int) in "Java" `{ return new long[(int)size]; `}
+
+	redef fun [](i) in "Java" `{ return self[(int)i]; `}
+
+	redef fun []=(i, e) in "Java" `{ self[(int)i] = (long)e; `}
+
+	redef fun length in "Java" `{ return self.length; `}
+end
+
 # Java primitive array `float[]`
 #
 # Note that Nit `Float` is the size of a double, so storing them in a
@@ -91,13 +133,47 @@ extern class JavaArray in "Java" `{ java.lang.Object[] `}
 	redef fun length in "Java" `{ return self.length; `}
 end
 
-# TODO other primitive arrays:
-# * Java primitive array `byte[]`
-# * Java primitive array `short[]`
-# * Java primitive array `int[]`
-# * Java primitive array `long[]`
-# * Java primitive array `boolean[]`
-# * Java primitive array `char[]`
+# Java primitive array `boolean[]`
+extern class JavaBoolArray in "Java" `{ boolean[] `}
+	super AbstractJavaArray[Bool]
+
+	# Get a new array of the given `size`
+	new (size: Int) in "Java" `{ return new boolean[(int)size]; `}
+
+	redef fun [](i) in "Java" `{ return self[(int)i]; `}
+
+	redef fun []=(i, e) in "Java" `{self[(int)i] = (boolean)e; `}
+
+	redef fun length in "Java" `{ return self.length; `}
+end
+
+# Java primitive array `byte[]`
+extern class JavaByteArray in "Java" `{ byte[] `}
+	super AbstractJavaArray[Int]
+
+	# Get a new array of the given `size`
+	new (size: Int) in "Java" `{ return new byte[(int)size]; `}
+
+	redef fun [](i) in "Java" `{ return (byte)self[(int)i]; `}
+
+	redef fun []=(i, e) in "Java" `{ self[(int)i] = (byte)e; `}
+
+	redef fun length in "Java" `{ return self.length; `}
+end
+
+# Java primitive array `char[]`
+extern class JavaCharArray in "Java" `{ char[] `}
+	super AbstractJavaArray[Char]
+
+	# Get a new array of the given `size`
+	new (size: Int) in "Java" `{ return new char[(int)size]; `}
+
+	redef fun [](i) in "Java" `{ return (char)self[(int)i]; `}
+
+	redef fun []=(i, e) in "Java" `{ self[(int)i] = (char)e; `}
+
+	redef fun length in "Java" `{ return self.length; `}
+end
 
 # An `Iterator` on Java primitive arrays
 private class JavaArrayIterator[E: Object]

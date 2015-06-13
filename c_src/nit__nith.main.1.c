@@ -54,15 +54,50 @@ extern void nitni_global_ref_decr( struct nitni_ref *ref ) {
 }
 
 #include <signal.h>
+#ifndef NO_STACKTRACE
+#define UNW_LOCAL_ONLY
+#include <libunwind.h>
+#include "c_functions_hash.h"
+#endif
 int glob_argc;
 char **glob_argv;
 val *glob_sys;
+static void show_backtrace(void) {
+#ifndef NO_STACKTRACE
+char* opt = getenv("NIT_NO_STACK");
+unw_cursor_t cursor;
+if(opt==NULL){
+unw_context_t uc;
+unw_word_t ip;
+char* procname = malloc(sizeof(char) * 100);
+unw_getcontext(&uc);
+unw_init_local(&cursor, &uc);
+PRINT_ERROR("-------------------------------------------------\n");
+PRINT_ERROR("--   Stack Trace   ------------------------------\n");
+PRINT_ERROR("-------------------------------------------------\n");
+while (unw_step(&cursor) > 0) {
+	unw_get_proc_name(&cursor, procname, 100, &ip);
+	const char* recv = get_nit_name(procname, strlen(procname));
+	if (recv != NULL){
+		PRINT_ERROR("` %s\n", recv);
+	}else{
+		PRINT_ERROR("` %s\n", procname);
+	}
+}
+PRINT_ERROR("-------------------------------------------------\n");
+free(procname);
+}
+#endif /* NO_STACKTRACE */
+}
 void sig_handler(int signo){
 PRINT_ERROR("Caught signal : %s\n", strsignal(signo));
-show_backtrace(signo);
+show_backtrace();
+signal(signo, SIG_DFL);
+kill(getpid(), signo);
 }
-void show_backtrace (int signo) {
-exit(signo);
+void fatal_exit(int status) {
+show_backtrace();
+exit(status);
 }
 int main(int argc, char** argv) {
 val* var /* : Sys */;
@@ -79,10 +114,10 @@ initialize_nitni_global_refs();
 var = NEW_standard__Sys(&type_standard__Sys);
 glob_sys = var;
 {
-((void (*)(val* self))(var->class->vft[COLOR_standard__kernel__Object__init]))(var) /* init on <var:Sys>*/;
+((void(*)(val* self))(var->class->vft[COLOR_standard__kernel__Object__init]))(var); /* init on <var:Sys>*/
 }
 {
-((void (*)(val* self))(var->class->vft[COLOR_standard__kernel__Sys__run]))(var) /* run on <var:Sys>*/;
+((void(*)(val* self))(var->class->vft[COLOR_standard__kernel__Sys__run]))(var); /* run on <var:Sys>*/
 }
 return 0;
 }
@@ -114,6 +149,7 @@ const char FILE_standard__file[] = "../lib/standard/file.nit";
 const char FILE_standard__stream[] = "../lib/standard/stream.nit";
 const char FILE_standard__ropes[] = "../lib/standard/ropes.nit";
 const char FILE_standard__error[] = "../lib/standard/error.nit";
+const char FILE_standard__bytes[] = "../lib/standard/bytes.nit";
 const char FILE_standard__string_search[] = "../lib/standard/string_search.nit";
 const char FILE_standard__time[] = "../lib/standard/time.nit";
 const char FILE_standard__gc[] = "../lib/standard/gc.nit";
@@ -125,6 +161,7 @@ const char FILE_standard__re[] = "../lib/standard/re.nit";
 const char FILE_nit__mproject[] = "model/mproject.nit";
 const char FILE_nit__model_base[] = "model/model_base.nit";
 const char FILE_more_collections[] = "../lib/more_collections.nit";
+const char FILE_serialization[] = "../lib/serialization/serialization.nit";
 const char FILE_poset[] = "../lib/poset.nit";
 const char FILE_nit__mdoc[] = "model/mdoc.nit";
 const char FILE_ordered_tree[] = "../lib/ordered_tree.nit";
@@ -161,11 +198,20 @@ const char FILE_nit__platform[] = "platform/platform.nit";
 const char FILE_nit__parser_util[] = "parser_util.nit";
 const char FILE_nit__c_tools[] = "c_tools.nit";
 const char FILE_nit__mixin[] = "mixin.nit";
+const char FILE_counter[] = "../lib/counter.nit";
 const char FILE_nit__coloring[] = "compiler/coloring.nit";
+const char FILE_nit__light_only[] = "compiler/compiler_ffi/light_only.nit";
+const char FILE_nit__light[] = "compiler/compiler_ffi/light.nit";
+const char FILE_nit__light_ffi[] = "ffi/light_ffi.nit";
+const char FILE_nit__nitni_utilities[] = "nitni/nitni_utilities.nit";
+const char FILE_nit__nitni_base[] = "nitni/nitni_base.nit";
+const char FILE_nit__light_ffi_base[] = "ffi/light_ffi_base.nit";
+const char FILE_nit__extern_classes[] = "ffi/extern_classes.nit";
+const char FILE_nit__light_c[] = "ffi/light_c.nit";
 void gc_finalize (void *obj, void *client_data) {
 val* var /* : Finalizable */;
 var = obj;
 {
-((void (*)(val* self))(var->class->vft[COLOR_standard__gc__Finalizable__finalize]))(var) /* finalize on <var:Finalizable>*/;
+((void(*)(val* self))(var->class->vft[COLOR_standard__gc__Finalizable__finalize]))(var); /* finalize on <var:Finalizable>*/
 }
 }
