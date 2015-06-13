@@ -783,7 +783,7 @@ end
 redef class Array[E]
 
 	# Fast implementation
-	redef fun to_s
+	redef fun plain_to_s
 	do
 		var l = length
 		if l == 0 then return ""
