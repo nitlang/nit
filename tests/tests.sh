@@ -42,6 +42,11 @@ compdir="nit_compile"
 # Require timeout or timelimit, or else is not used.
 realtimelimit=300 # 5 min
 
+# Limit (in bytes) for generated .res file.
+# Larger ones are truncated and will fail tests
+# Is used to avoid processing huge crappy res file (diff, xml, etc)
+reslimit=100000 # ~100KB
+
 usage()
 {
 	e=`basename "$0"`
@@ -177,6 +182,15 @@ function process_result()
 	OLD=""
 	LIST=""
 	FIRST=""
+
+	# Truncate too big res file
+	size=$(wc -c < "$outdir/$pattern.res")
+	if test -n "$reslimit" -a "$size" -gt "$reslimit"; then
+		# The most portable way to truncate a file is with Perl
+		perl -e "truncate \"$outdir/$pattern.res\", $reslimit;"
+		echo "***TRUNCATED***" >> "$outdir/$pattern.res"
+	fi
+
 	echo >>$xml "<testcase classname='`xmlesc "$pack"`' name='`xmlesc "$description"`' time='`cat -- "$outdir/$pattern.time.out"`' `timestamp`>"
 	#for sav in "sav/$engine/fixme/$pattern.res" "sav/$engine/$pattern.res" "sav/fixme/$pattern.res" "sav/$pattern.res" "sav/$pattern.sav"; do
 	for savdir in $savdirs; do
