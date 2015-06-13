@@ -875,7 +875,7 @@ abstract class Text
 			i += 1
 		end
 		s.push substring(curr_st, length - curr_st)
-		return s.to_s
+		return s.plain_to_s
 	end
 
 	# Copies `n` bytes from `self` at `src_offset` into `dest` starting at `dest_offset`
