@@ -125,6 +125,40 @@ redef class Int
 	end
 end
 
+redef class Byte
+	# Returns the result of a binary AND operation on `self` and `i`
+	#
+	#     assert 0x10.bin_and(0x01) == 0
+	fun bin_and(i: Byte): Byte `{ return self & i; `}
+
+	# Alias of `bin_and`
+	fun &(i: Byte): Byte do return bin_and(i)
+
+	# Returns the result of a binary OR operation on `self` and `i`
+	#
+	#     assert 0x10.bin_or(0x01) == 0x11
+	fun bin_or(i: Byte): Byte `{ return self | i; `}
+
+	# Alias of `bin_or`
+	fun |(i: Byte): Byte do return bin_or(i)
+
+	# Returns the result of a binary XOR operation on `self` and `i`
+	#
+	#     assert 0x101.bin_xor(0x110) == 0x11
+	fun bin_xor(i: Byte): Byte `{ return self ^ i; `}
+
+	# Alias of `bin_xor`
+	fun ^(i: Byte): Byte do return bin_xor(i)
+
+	# Returns the 1's complement of `self`
+	#
+	#     assert 0x2F.bin_not == -48
+	fun bin_not: Byte `{ return ~self; `}
+
+	# Alias of `bin_not`
+	fun ~: Byte do return bin_not
+end
+
 redef class Float
 
 	# Returns the non-negative square root of `self`.
