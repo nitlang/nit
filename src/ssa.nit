@@ -212,6 +212,11 @@ redef class APropdef
 	# instantiation, method dispatch, attribute access, subtyping-test
 	var object_sites: Array[AExpr] = new Array[AExpr]
 
+	# The return variable of the propdef
+	# Create an empty variable for the return of the method
+	# and treat returns like variable assignments
+	var returnvar: Variable = new Variable("returnvar")
+
 	# Compute the three steps of SSA-algorithm
 	# `ssa` A new instance of SSA class initialized with `self`
 	fun compute_ssa(ssa: SSA)
@@ -470,6 +475,9 @@ redef class AAttrPropdef
 		basic_block.first = self
 		basic_block.last = self
 
+		# Add the return variable
+		variables.add(returnvar)
+
 		# Add the self variable
 		if self.selfvariable != null then variables.add(selfvariable.as(not null))
 
@@ -482,12 +490,6 @@ redef class AAttrPropdef
 end
 
 redef class AMethPropdef
-
-	# The return variable of the propdef
-	# Create an empty variable for the return of the method
-	# and treat returns like variable assignments
-	var returnvar: Variable = new Variable("returnvar")
-
 	redef fun generate_basic_blocks(ssa: SSA)
 	do
 		basic_block = new BasicBlock
@@ -678,9 +680,7 @@ redef class AReturnExpr
 			old_block = self.n_expr.generate_basic_blocks(ssa, old_block)
 
 			# Store the return expression in the dependences of the dedicated returnvar
-			if ssa.propdef isa AMethPropdef then
-				ssa.propdef.as(AMethPropdef).returnvar.dep_exprs.add(n_expr.as(not null))
-			end
+			ssa.propdef.returnvar.dep_exprs.add(n_expr.as(not null))
 		end
 
 		old_block.last = self
