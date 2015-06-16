@@ -48,7 +48,7 @@ class CLanguage
 		var fc = new ExternCFunction(m, mmodule)
 		fc.decls.add( block.location.as_line_pragma )
 		fc.exprs.add( block.code )
-		ecc.add_exported_function( fc )
+		ecc.body_impl.add fc.to_writer
 	end
 
 	redef fun compile_extern_class(block, m, ecc, mmodule) do end
