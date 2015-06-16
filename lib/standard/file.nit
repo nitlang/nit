@@ -299,7 +299,15 @@ class Stdin
 		prepare_buffer(1)
 	end
 
-	redef fun poll_in is extern "file_stdin_poll_in"
+	redef fun poll_in `{
+		struct pollfd fd = {0, POLLIN, 0};
+		int res = poll(&fd, 1, 0);
+		if (res == -1) {
+			perror("Error poll stdin");
+			exit(EXIT_FAILURE);
+		}
+		return res > 0;
+	`}
 end
 
 # Standard output stream.
@@ -1063,8 +1071,24 @@ redef class String
 end
 
 redef class NativeString
-	private fun file_exists: Bool is extern "string_NativeString_NativeString_file_exists_0"
-	private fun file_stat: NativeFileStat is extern "string_NativeString_NativeString_file_stat_0"
+	private fun file_exists: Bool `{
+		FILE *hdl = fopen(self,"r");
+		if(hdl != NULL){
+			fclose(hdl);
+		}
+		return hdl != NULL;
+	`}
+
+	private fun file_stat: NativeFileStat `{
+		struct stat buff;
+		if(stat(self, &buff) != -1) {
+			struct stat* stat_element;
+			stat_element = malloc(sizeof(struct stat));
+			return memcpy(stat_element, &buff, sizeof(struct stat));
+		}
+		return 0;
+	`}
+
 	private fun file_lstat: NativeFileStat `{
 		struct stat* stat_element;
 		int res;
@@ -1124,7 +1148,16 @@ private extern class NativeFile `{ FILE* `}
 		return fwrite(&b, 1, 1, self);
 	`}
 	fun io_close: Int is extern "file_NativeFile_NativeFile_io_close_0"
-	fun file_stat: NativeFileStat is extern "file_NativeFile_NativeFile_file_stat_0"
+	fun file_stat: NativeFileStat `{
+		struct stat buff;
+		if(fstat(fileno(self), &buff) != -1) {
+			struct stat* stat_element;
+			stat_element = malloc(sizeof(struct stat));
+			return memcpy(stat_element, &buff, sizeof(struct stat));
+		}
+		return 0;
+	`}
+
 	fun fileno: Int `{ return fileno(self); `}
 
 	# Flushes the buffer, forcing the write operation
