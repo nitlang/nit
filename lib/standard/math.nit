@@ -17,32 +17,36 @@ import kernel
 import collection
 
 in "C header" `{
-#include <math.h>
+	#include <stdlib.h>
+	#include <math.h>
+	#include <time.h>
 `}
 
 redef class Int
 	# Returns a random `Int` in `[0 .. self[`.
-	fun rand: Int is extern "kernel_Int_Int_rand_0"
+	fun rand: Int `{
+		return (long)(((double)self)*rand()/(RAND_MAX+1.0));
+	`}
 
 	# Returns the result of a binary AND operation on `self` and `i`
 	#
 	#     assert 0x10.bin_and(0x01) == 0
-	fun bin_and(i: Int): Int is extern "kernel_Int_Int_binand_0"
+	fun bin_and(i: Int): Int `{ return self & i; `}
 
 	# Returns the result of a binary OR operation on `self` and `i`
 	#
 	#     assert 0x10.bin_or(0x01) == 0x11
-	fun bin_or(i: Int): Int is extern "kernel_Int_Int_binor_0"
+	fun bin_or(i: Int): Int `{ return self | i; `}
 
 	# Returns the result of a binary XOR operation on `self` and `i`
 	#
 	#     assert 0x101.bin_xor(0x110) == 0x11
-	fun bin_xor(i: Int): Int is extern "kernel_Int_Int_binxor_0"
+	fun bin_xor(i: Int): Int `{ return self ^ i; `}
 
 	# Returns the 1's complement of `self`
 	#
 	#     assert 0x2F.bin_not == -48
-	fun bin_not: Int is extern "kernel_Int_Int_binnot_0"
+	fun bin_not: Int `{ return ~self; `}
 
 	# Returns the square root of `self`
 	#
@@ -121,37 +125,37 @@ redef class Float
 	#     #assert 3.0.sqrt == 1.732
 	#     assert 1.0.sqrt == 1.0
 	#     assert 0.0.sqrt == 0.0
-	fun sqrt: Float is extern "kernel_Float_Float_sqrt_0"
+	fun sqrt: Float `{ return sqrt(self); `}
 
 	# Computes the cosine of `self` (expressed in radians).
 	#
 	#     #assert pi.cos == -1.0
-	fun cos: Float is extern "kernel_Float_Float_cos_0"
+	fun cos: Float `{ return cos(self); `}
 
 	# Computes the sine of `self` (expressed in radians).
 	#
 	#     #assert pi.sin == 0.0
-	fun sin: Float is extern "kernel_Float_Float_sin_0"
+	fun sin: Float `{ return sin(self); `}
 
 	# Computes the cosine of x (expressed in radians).
 	#
 	#     #assert 0.0.tan == 0.0
-	fun tan: Float is extern "kernel_Float_Float_tan_0"
+	fun tan: Float `{ return tan(self); `}
 
 	# Computes the arc cosine of `self`.
 	#
 	#     #assert 0.0.acos == pi / 2.0
-	fun acos: Float is extern "kernel_Float_Float_acos_0"
+	fun acos: Float `{ return acos(self); `}
 
 	# Computes the arc sine of `self`.
 	#
 	#     #assert 1.0.asin == pi / 2.0
-	fun asin: Float is extern "kernel_Float_Float_asin_0"
+	fun asin: Float `{ return asin(self); `}
 
 	# Computes the arc tangent of `self`.
 	#
 	#     #assert 0.0.tan == 0.0
-	fun atan: Float is extern "kernel_Float_Float_atan_0"
+	fun atan: Float `{ return atan(self); `}
 
 	# Returns the absolute value of `self`.
 	#
@@ -165,13 +169,13 @@ redef class Float
 	#     #assert 2.0.pow(0.0) == 1.0
 	#     #assert 2.0.pow(3.0) == 8.0
 	#     #assert 0.0.pow(9.0) == 0.0
-	fun pow(e: Float): Float is extern "kernel_Float_Float_pow_1"
+	fun pow(e: Float): Float `{ return pow(self, e); `}
 
 	# Natural logarithm of `self`.
 	#
 	#     assert 0.0.log.is_inf == -1
 	#     #assert 1.0.log == 0.0
-	fun log: Float is extern "kernel_Float_Float_log_0"
+	fun log: Float `{ return log(self); `}
 
 	# Logarithm of `self` to base `base`.
 	#
@@ -180,7 +184,7 @@ redef class Float
 	fun log_base(base: Float): Float do return log/base.log
 
 	# Returns *e* raised to `self`.
-	fun exp: Float is extern "kernel_Float_Float_exp_0"
+	fun exp: Float `{ return exp(self); `}
 
 	#     assert 1.1.ceil == 2.0
 	#     assert 1.9.ceil == 2.0
@@ -200,16 +204,16 @@ redef class Float
 	#     assert 1.34.round == 1.0
 	#     assert -1.34.round == -1.0
 	#     assert -1.67.round == -2.0
-	fun round: Float is extern "round"
+	fun round: Float `{ return round(self); `}
 
 	# Returns a random `Float` in `[0.0 .. self[`.
-	fun rand: Float is extern "kernel_Float_Float_rand_0"
+	fun rand: Float `{ return ((self)*rand())/(RAND_MAX+1.0); `}
 
 	# Returns the euclidean distance from `b`.
-	fun hypot_with(b : Float): Float is extern "hypotf"
+	fun hypot_with(b: Float): Float `{ return hypotf(self, b); `}
 
 	# Returns true is self is not a number.
-	fun is_nan: Bool is extern "isnan"
+	fun is_nan: Bool `{ return isnan(self); `}
 
 	# Is the float an infinite value
 	# this function returns:
@@ -218,14 +222,14 @@ redef class Float
 	#  * -1 if self is negative infinity
 	#  * 0 otherwise
 	fun is_inf: Int do
-		if is_inf_extern then
+		if native_is_inf then
 			if self < 0.0 then return -1
 			return 1
 		end
 		return 0
 	end
 
-	private fun is_inf_extern: Bool is extern "isinf"
+	private fun native_is_inf: Bool `{ return isinf(self); `}
 
 	# Linear interpolation between `a` and `b` using `self` as weight
 	#
@@ -322,10 +326,10 @@ end
 #
 #     assert atan2(-0.0, 1.0) == -0.0
 #     assert atan2(0.0, 1.0) == 0.0
-fun atan2(x: Float, y: Float): Float is extern "kernel_Any_Any_atan2_2"
+fun atan2(x: Float, y: Float): Float `{ return atan2(x, y); `}
 
 # Approximate value of **pi**.
-fun pi: Float is extern "kernel_Any_Any_pi_0"
+fun pi: Float do return 3.14159265
 
 # Initialize the pseudo-random generator with the given seed.
 # The pseudo-random generator is used by the method `rand` and other to generate sequence of numbers.
@@ -339,9 +343,9 @@ fun pi: Float is extern "kernel_Any_Any_pi_0"
 # assert 10.rand == a
 # assert 100.rand == b
 # ~~~~
-fun srand_from(x: Int) is extern "kernel_Any_Any_srand_from_1"
+fun srand_from(x: Int) `{ srand(x); `}
 
 # Reinitialize the pseudo-random generator used by the method `rand` and other.
 # This method is automatically invoked at the begin of the program, so usually, there is no need to manually invoke it.
 # The only exception is in conjunction with `srand_from` to reset the pseudo-random generator.
-fun srand is extern "kernel_Any_Any_srand_0"
+fun srand `{ srand(time(NULL)); `}
