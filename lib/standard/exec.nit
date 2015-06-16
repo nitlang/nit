@@ -17,6 +17,13 @@ module exec
 
 import file
 
+in "C" `{
+	#include <stdlib.h>
+	#include <string.h>
+	#include <errno.h>
+	#include <stdio.h>
+`}
+
 # Simple sub-process
 class Process
 	# The pid of the process
@@ -84,7 +91,102 @@ class Process
 	end
 
 	private var data: NativeProcess
-	private fun basic_exec_execute(p: NativeString, av: NativeString, ac: Int, pf: Int): NativeProcess is extern "exec_Process_Process_basic_exec_execute_4"
+	private fun basic_exec_execute(prog, args: NativeString, argc: Int, pipeflag: Int): NativeProcess `{
+		se_exec_data_t* result = NULL;
+		int id;
+		int in_fd[2];
+		int out_fd[2];
+		int err_fd[2];
+		if (pipeflag & 1) {
+			int res = pipe(in_fd);
+			if ( res == -1 ) {
+				return NULL;
+			}
+		}
+		if (pipeflag & 2) {
+			int res = pipe(out_fd);
+			if ( res == -1 ) {
+				return NULL;
+			}
+		}
+		if (pipeflag & 4) {
+			int res = pipe(err_fd);
+			if ( res == -1 ) {
+				return NULL;
+			}
+		}
+
+		id = fork();
+		if (id == 0)
+			{ /* child */
+			char **arg = malloc(sizeof(char*) * (argc+1));
+			char *c = args;
+			int i;
+
+			/* Prepare args */
+			for(i=0; i<argc; i++)
+			{
+				arg[i] = c;
+				c += strlen(c) + 1;
+			}
+			arg[argc] = NULL;
+
+			/* Connect pipe */
+			if (pipeflag & 1)
+			{
+				close(0);
+				dup2(in_fd[0], 0);
+				close(in_fd[0]);
+				close(in_fd[1]);
+			}
+			if (pipeflag & 2)
+			{
+				close(1);
+				dup2(out_fd[1], 1);
+				close(out_fd[0]);
+				close(out_fd[1]);
+			}
+			if (pipeflag & 4)
+			{
+				close(2);
+				dup2(err_fd[1], 2);
+				close(err_fd[0]);
+				close(err_fd[1]);
+			}
+
+			/* calls */
+			execvp(prog, arg);
+			_exit(127);
+		}
+		else if (id > 0)
+			{ /* father */
+			result = (se_exec_data_t*)malloc(sizeof(se_exec_data_t));
+			result->id = id;
+			result->running = 1;
+			if (pipeflag & 1)
+			{
+				result->in_fd = in_fd[1];
+				close(in_fd[0]);
+			} else
+				result->in_fd = -1;
+
+			if (pipeflag & 2)
+			{
+				result->out_fd = out_fd[0];
+				close(out_fd[1]);
+			} else
+				result->out_fd = -1;
+
+			if (pipeflag & 4)
+			{
+				result->err_fd = err_fd[0];
+				close(err_fd[1]);
+			} else
+				result->err_fd = -1;
+		}
+
+		return result;
+	`}
 end
 
 # `Process` on which the `stdout` is readable like a `Reader`
@@ -169,14 +271,46 @@ redef class NativeString
 	# Execute self as a shell command.
 	#
 	# See the posix function system(3).
-	fun system: Int is extern "string_NativeString_NativeString_system_0"
+	fun system: Int `{
+		int status = system(self);
+		if (WIFSIGNALED(status) && WTERMSIG(status) == SIGINT) {
+			// system exited on SIGINT: in my opinion the user wants the main to be discontinued
+			kill(getpid(), SIGINT);
+		}
+		return status;
+	`}
 end
 
 private extern class NativeProcess
 	fun id: Int is extern "exec_NativeProcess_NativeProcess_id_0"
-	fun is_finished: Bool is extern "exec_NativeProcess_NativeProcess_is_finished_0"
+
+	fun is_finished: Bool `{
+		int result = (int)0;
+		int status;
+		if (self->running) {
+			int id = waitpid(self->id, &status, WNOHANG);
+			if (id != 0) {
+				/* child is finished */
+				result = (int)(id == self->id);
+				self->status = WEXITSTATUS(status);
+				self->running = 0;
+			}
+		}
+		else{
+			result = (int)1;
+		}
+		return result;
+	`}
+
 	fun status: Int is extern "exec_NativeProcess_NativeProcess_status_0"
-	fun wait is extern "exec_NativeProcess_NativeProcess_wait_0"
+	fun wait `{
+		int status;
+		if (self->running) {
+			waitpid(self->id, &status, 0);
+			self->status = WEXITSTATUS(status);
+			self->running = 0;
+		}
+	`}
 
 	fun in_fd: Int is extern "exec_NativeProcess_NativeProcess_in_fd_0"
 	fun out_fd: Int is extern "exec_NativeProcess_NativeProcess_out_fd_0"
