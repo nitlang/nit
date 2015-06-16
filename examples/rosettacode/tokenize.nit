@@ -1,0 +1,1 @@
+for x in "Hello,How,Are,You,Today".split(",") do print x
