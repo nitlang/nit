@@ -151,7 +151,9 @@ private extern class CallArg `{ nit_call_arg* `}
 			return v.native_string_instance(self.native_string.to_s)
 		else if static_type isa MClassType and static_type.mclass.kind == extern_kind then
 			# We tag it with the most precise known type
-			return new PrimitiveInstance[Pointer](static_type, self.pointer)
+			var instance = new PrimitiveInstance[Pointer](static_type, self.pointer)
+			v.init_instance_primitive instance
+			return instance
 		else
 			return self.instance
 		end
