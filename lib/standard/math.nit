@@ -96,6 +96,24 @@ redef class Int
 	#     assert not 13.is_even
 	fun is_odd: Bool do return not is_even
 
+	# Is self a prime number ?
+	#
+	# assert 3.is_prime
+	# assert not 1.is_prime
+	# assert not 12.is_prime
+	fun is_prime: Bool
+	do
+		if self == 2 then
+			return true
+		else if self <= 1 or self.is_even then
+			return false
+		end
+		for i in [3..self.sqrt[ do
+			if self % i == 0 then return false
+		end
+		return true
+	end
+
 	# Returns the `self` raised to the power of `e`.
 	#
 	#     assert 2 ** 3 == 8
