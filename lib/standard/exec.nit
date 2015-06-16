@@ -22,6 +22,25 @@ in "C" `{
 	#include <string.h>
 	#include <errno.h>
 	#include <stdio.h>
+	#include <unistd.h>
+	#include <sys/wait.h>
+	#include <signal.h>
+`}
+
+in "C Header" `{
+	#include <sys/types.h>
+
+	// FIXME this should be in the "C" block when bug on module blocks is fixed
+	// or, even better, replace the C structure by a Nit object.
+	typedef struct se_exec_data se_exec_data_t;
+	struct se_exec_data {
+		pid_t id;
+		int running;
+		int status;
+		int in_fd;
+		int out_fd;
+		int err_fd;
+	};
 `}
 
 # Simple sub-process
@@ -281,8 +300,13 @@ redef class NativeString
 	`}
 end
 
-private extern class NativeProcess
-	fun id: Int is extern "exec_NativeProcess_NativeProcess_id_0"
+private extern class NativeProcess `{ se_exec_data_t* `}
+
+	fun id: Int `{ return self->id; `}
+	fun status: Int `{ return self->status; `}
+	fun in_fd: Int `{ return self->in_fd; `}
+	fun out_fd: Int `{ return self->out_fd; `}
+	fun err_fd: Int `{ return self->err_fd; `}
 
 	fun is_finished: Bool `{
 		int result = (int)0;
@@ -302,7 +326,6 @@ private extern class NativeProcess
 		return result;
 	`}
 
-	fun status: Int is extern "exec_NativeProcess_NativeProcess_status_0"
 	fun wait `{
 		int status;
 		if (self->running) {
@@ -311,9 +334,5 @@ private extern class NativeProcess
 			self->running = 0;
 		}
 	`}
-
-	fun in_fd: Int is extern "exec_NativeProcess_NativeProcess_in_fd_0"
-	fun out_fd: Int is extern "exec_NativeProcess_NativeProcess_out_fd_0"
-	fun err_fd: Int is extern "exec_NativeProcess_NativeProcess_err_fd_0"
 end
 
