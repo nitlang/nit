@@ -5,6 +5,6 @@ url: http://localhost/
 
 There is modified files:
  + pages
- + /pages/index.md
+ + pages/index.md
 
 Use nitiwiki --render to render modified files
