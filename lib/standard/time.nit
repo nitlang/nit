@@ -23,12 +23,15 @@ in "C Header" `{
 
 redef class Object
 	# Unix time: the number of seconds elapsed since January 1, 1970
-	protected fun get_time: Int is extern "kernel_Any_Any_get_time_0"
+	protected fun get_time: Int `{ return time(NULL); `}
 end
 
 redef class Sys
 	# Wait a specific number of second and nanoseconds
-	fun nanosleep(sec, nanosec: Int) is extern "std_nanosleep"
+	fun nanosleep(sec, nanosec: Int) `{
+		const struct timespec req = {sec, nanosec};
+		nanosleep(&req, NULL);
+	`}
 end
 
 # Time since epoch
