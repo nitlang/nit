@@ -45,5 +45,5 @@ extern class NativeString `{ char* `}
 	fun atoi: Int is intern
 
 	# Parse `self` as a Float.
-	fun atof: Float is extern "atof"
+	fun atof: Float `{ return atof(self); `}
 end
