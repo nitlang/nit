@@ -1095,16 +1095,22 @@ private extern class NativeFileStat `{ struct stat * `}
 
 	# Returns true if it is a regular file (not a device file, pipe, sockect, ...)
 	fun is_reg: Bool `{ return S_ISREG(self->st_mode); `}
+
 	# Returns true if it is a directory
 	fun is_dir: Bool `{ return S_ISDIR(self->st_mode); `}
+
 	# Returns true if it is a character device
 	fun is_chr: Bool `{ return S_ISCHR(self->st_mode); `}
+
 	# Returns true if it is a block device
 	fun is_blk: Bool `{ return S_ISBLK(self->st_mode); `}
+
 	# Returns true if the type is fifo
 	fun is_fifo: Bool `{ return S_ISFIFO(self->st_mode); `}
+
 	# Returns true if the type is a link
 	fun is_lnk: Bool `{ return S_ISLNK(self->st_mode); `}
+
 	# Returns true if the type is a socket
 	fun is_sock: Bool `{ return S_ISSOCK(self->st_mode); `}
 end
@@ -1120,6 +1126,7 @@ private extern class NativeFile `{ FILE* `}
 	fun io_close: Int is extern "file_NativeFile_NativeFile_io_close_0"
 	fun file_stat: NativeFileStat is extern "file_NativeFile_NativeFile_file_stat_0"
 	fun fileno: Int `{ return fileno(self); `}
+
 	# Flushes the buffer, forcing the write operation
 	fun flush: Int is extern "fflush"
 	# Used to specify how the buffering will be handled for the current stream.
@@ -1192,7 +1199,8 @@ redef class Sys
 		end
 	end
 
-	private fun intern_poll(in_fds: Array[Int], out_fds: Array[Int]) : nullable Int is extern import Array[Int].length, Array[Int].[], Int.as(nullable Int) `{
+	private fun intern_poll(in_fds: Array[Int], out_fds: Array[Int]): nullable Int
+	import Array[Int].length, Array[Int].[], Int.as(nullable Int) `{
 		int in_len, out_len, total_len;
 		struct pollfd *c_fds;
 		int i;
