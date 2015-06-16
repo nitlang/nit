@@ -143,7 +143,7 @@ class Opengles1Display
 
 	init do extern_init
 	fun midway_init( format: Int ) do end
-	fun extern_init: Bool is extern import midway_init `{
+	fun extern_init: Bool import midway_init `{
 		/* initialize OpenGL ES and EGL */
 		const EGLint attribs[] = {
 				EGL_SURFACE_TYPE, EGL_WINDOW_BIT,
@@ -216,7 +216,7 @@ class Opengles1Display
 		return 0;
 	`}
 
-	fun close is extern `{
+	fun close `{
 		if ( mnit_display != EGL_NO_DISPLAY) {
 			eglMakeCurrent( mnit_display, EGL_NO_SURFACE, EGL_NO_SURFACE, EGL_NO_CONTEXT);
 			if ( mnit_context != EGL_NO_CONTEXT) {
@@ -232,23 +232,23 @@ class Opengles1Display
 		 mnit_surface = EGL_NO_SURFACE;
 	`}
 
-	redef fun begin is extern `{
+	redef fun begin `{
 		glClear(GL_COLOR_BUFFER_BIT);
 		glLoadIdentity();
 	`}
 
-	redef fun width: Int is extern `{
+	redef fun width: Int `{
 		return mnit_width;
 	`}
-	redef fun height: Int is extern `{
+	redef fun height: Int `{
 		return mnit_height;
 	`}
 
-	redef fun finish is extern `{
+	redef fun finish `{
 		eglSwapBuffers( mnit_display, mnit_surface );
 	`}
 
-	redef fun set_viewport( x, y, w, h ) is extern `{
+	redef fun set_viewport( x, y, w, h ) `{
 		glLoadIdentity();
 		glViewport(0,0, mnit_width, mnit_height );
 		glMatrixMode(GL_PROJECTION);
@@ -406,12 +406,12 @@ class Opengles1Display
 		}
 	`}
 
-	redef fun clear( r, g, b: Float ) is extern `{
+	redef fun clear( r, g, b: Float ) `{
 		glClearColor( r, g, b, 1.0 );
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	`}
 
-	fun clear_alpha( r, g, b, a: Float ) is extern `{
+	fun clear_alpha( r, g, b, a: Float ) `{
 		glClearColor( r, g, b, a );
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	`}
@@ -428,26 +428,26 @@ end
 extern class Opengles1Image in "C" `{struct mnit_opengles_Texture *`}
 	super Image
 
-    redef fun destroy is extern `{ free( self ); `}
+    redef fun destroy `{ free( self ); `}
 
-    redef fun width: Int is extern `{ return self->width; `}
-    redef fun height: Int is extern `{ return self->height; `}
+    redef fun width: Int `{ return self->width; `}
+    redef fun height: Int `{ return self->height; `}
 
 	fun center_x: Int `{ return self->center_x; `}
 	fun center_y: Int `{ return self->center_y; `}
 
-    redef fun scale=( v: Float ) is extern `{
+    redef fun scale=( v: Float ) `{
 		self->scale = v;
 		self->center_x = v*self->width/2;
 		self->center_y = v*self->height/2;
     `}
-    redef fun scale: Float is extern `{ return self->scale; `}
+    redef fun scale: Float `{ return self->scale; `}
 
-    redef fun blended=( v: Bool ) is extern `{ self->blended = v; `}
-    redef fun blended: Bool is extern `{ return self->blended; `}
+    redef fun blended=( v: Bool ) `{ self->blended = v; `}
+    redef fun blended: Bool `{ return self->blended; `}
 
     # inherits scale and blend from source
-    redef fun subimage( x, y, w, h: Int ): Image is extern import Opengles1Image.as( Image ) `{
+    redef fun subimage( x, y, w, h: Int ): Image import Opengles1Image.as( Image ) `{
 		struct mnit_opengles_Texture* image =
 			malloc( sizeof( struct mnit_opengles_Texture ) );
 

@@ -52,7 +52,7 @@ in "C" `{
 
 extern class AndroidAsset in "C" `{struct AAsset*`}
 
-	fun read(count: Int): nullable String is extern import String.as nullable, NativeString.to_s `{
+	fun read(count: Int): nullable String import String.as nullable, NativeString.to_s `{
 		char *buffer = malloc(sizeof(char) * (count+1));
 		int read = AAsset_read(self, buffer, count);
 		if (read != count)
@@ -64,18 +64,18 @@ extern class AndroidAsset in "C" `{struct AAsset*`}
 		}
 	`}
 
-	fun length: Int is extern `{
+	fun length: Int `{
 		return AAsset_getLength(self);
 	`}
 
-	fun to_fd: Int is extern `{
+	fun to_fd: Int `{
 		off_t start;
 		off_t length;
 		int fd = AAsset_openFileDescriptor(self, &start, &length);
 		return fd;
 	`}
 
-	fun close is extern `{
+	fun close `{
 		AAsset_close(self);
 	`}
 end
@@ -101,7 +101,7 @@ redef class App
 		return null
 	end
 
-	protected fun load_asset_from_apk(path: String): nullable AndroidAsset is extern import String.to_cstring, AndroidAsset.as nullable, native_app_glue  `{
+	protected fun load_asset_from_apk(path: String): nullable AndroidAsset import String.to_cstring, AndroidAsset.as nullable, native_app_glue  `{
 		struct android_app *native_app_glue = App_native_app_glue(self);
 		struct AAsset* a = AAssetManager_open(native_app_glue->activity->assetManager, String_to_cstring(path), AASSET_MODE_BUFFER);
 		if (a == NULL)
