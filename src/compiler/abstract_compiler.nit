@@ -3044,7 +3044,9 @@ redef class AIsaExpr
 	redef fun expr(v)
 	do
 		var i = v.expr(self.n_expr, null)
-		return v.type_test(i, self.cast_type.as(not null), "isa")
+		var cast_type = self.cast_type
+		if cast_type == null then return null # no-no on broken node
+		return v.type_test(i, cast_type, "isa")
 	end
 end
 
