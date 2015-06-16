@@ -7,7 +7,7 @@ var1 = self->attrs[COLOR_nit__mproject__MProject___name].val; /* _name on <self:
 if (unlikely(var1 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _name");
 PRINT_ERROR(" (%s:%d)\n", FILE_nit__mproject, 27);
-show_backtrace(1);
+fatal_exit(1);
 }
 var = var1;
 RET_LABEL:;
@@ -29,7 +29,7 @@ var3 = self->attrs[COLOR_nit__mproject__MProject___name].val; /* _name on <self:
 if (unlikely(var3 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _name");
 PRINT_ERROR(" (%s:%d)\n", FILE_nit__mproject, 27);
-show_backtrace(1);
+fatal_exit(1);
 }
 var1 = var3;
 RET_LABEL2:(void)0;
@@ -54,7 +54,7 @@ var2 = self->attrs[COLOR_nit__mproject__MProject___c_name].val; /* _c_name on <s
 if (unlikely(var2 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _c_name");
 PRINT_ERROR(" (%s:%d)\n", FILE_nit__mproject, 32);
-show_backtrace(1);
+fatal_exit(1);
 }
 } else {
 {
@@ -63,7 +63,7 @@ var5 = self->attrs[COLOR_nit__mproject__MProject___name].val; /* _name on <self:
 if (unlikely(var5 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _name");
 PRINT_ERROR(" (%s:%d)\n", FILE_nit__mproject, 27);
-show_backtrace(1);
+fatal_exit(1);
 }
 var3 = var5;
 RET_LABEL4:(void)0;
@@ -87,7 +87,7 @@ var1 = self->attrs[COLOR_nit__mproject__MProject___model].val; /* _model on <sel
 if (unlikely(var1 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _model");
 PRINT_ERROR(" (%s:%d)\n", FILE_nit__mproject, 34);
-show_backtrace(1);
+fatal_exit(1);
 }
 var = var1;
 RET_LABEL:;
@@ -120,7 +120,7 @@ var1 = self->attrs[COLOR_nit__mproject__MProject___mgroups].val; /* _mgroups on 
 if (unlikely(var1 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mgroups");
 PRINT_ERROR(" (%s:%d)\n", FILE_nit__mproject, 40);
-show_backtrace(1);
+fatal_exit(1);
 }
 var = var1;
 RET_LABEL:;
@@ -137,7 +137,7 @@ var3 = self->attrs[COLOR_nit__mproject__MProject___name].val; /* _name on <self:
 if (unlikely(var3 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _name");
 PRINT_ERROR(" (%s:%d)\n", FILE_nit__mproject, 27);
-show_backtrace(1);
+fatal_exit(1);
 }
 var1 = var3;
 RET_LABEL2:(void)0;
@@ -161,7 +161,7 @@ val* var11 /* : MultiHashMap[String, MProject] */;
 val* var12 /* : String */;
 val* var14 /* : String */;
 {
-((void (*)(val* self))(self->class->vft[COLOR_nit___nit__MProject___standard__kernel__Object__init]))(self) /* init on <self:MProject>*/;
+((void(*)(val* self))(self->class->vft[COLOR_nit___nit__MProject___standard__kernel__Object__init]))(self); /* init on <self:MProject>*/
 }
 {
 { /* Inline mproject#MProject#model (self) on <self:MProject> */
@@ -169,7 +169,7 @@ var2 = self->attrs[COLOR_nit__mproject__MProject___model].val; /* _model on <sel
 if (unlikely(var2 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _model");
 PRINT_ERROR(" (%s:%d)\n", FILE_nit__mproject, 34);
-show_backtrace(1);
+fatal_exit(1);
 }
 var = var2;
 RET_LABEL1:(void)0;
@@ -181,7 +181,7 @@ var5 = var->attrs[COLOR_nit__mproject__Model___mprojects].val; /* _mprojects on 
 if (unlikely(var5 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mprojects");
 PRINT_ERROR(" (%s:%d)\n", FILE_nit__mproject, 117);
-show_backtrace(1);
+fatal_exit(1);
 }
 var3 = var5;
 RET_LABEL4:(void)0;
@@ -196,7 +196,7 @@ var8 = self->attrs[COLOR_nit__mproject__MProject___model].val; /* _model on <sel
 if (unlikely(var8 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _model");
 PRINT_ERROR(" (%s:%d)\n", FILE_nit__mproject, 34);
-show_backtrace(1);
+fatal_exit(1);
 }
 var6 = var8;
 RET_LABEL7:(void)0;
@@ -208,7 +208,7 @@ var11 = var6->attrs[COLOR_nit__mproject__Model___mproject_by_name].val; /* _mpro
 if (unlikely(var11 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mproject_by_name");
 PRINT_ERROR(" (%s:%d)\n", FILE_nit__mproject, 120);
-show_backtrace(1);
+fatal_exit(1);
 }
 var9 = var11;
 RET_LABEL10:(void)0;
@@ -220,7 +220,7 @@ var14 = self->attrs[COLOR_nit__mproject__MProject___name].val; /* _name on <self
 if (unlikely(var14 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _name");
 PRINT_ERROR(" (%s:%d)\n", FILE_nit__mproject, 27);
-show_backtrace(1);
+fatal_exit(1);
 }
 var12 = var14;
 RET_LABEL13:(void)0;
@@ -239,7 +239,7 @@ var1 = self->attrs[COLOR_nit__mproject__MGroup___name].val; /* _name on <self:MG
 if (unlikely(var1 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _name");
 PRINT_ERROR(" (%s:%d)\n", FILE_nit__mproject, 65);
-show_backtrace(1);
+fatal_exit(1);
 }
 var = var1;
 RET_LABEL:;
@@ -258,7 +258,7 @@ var1 = self->attrs[COLOR_nit__mproject__MGroup___mproject].val; /* _mproject on 
 if (unlikely(var1 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mproject");
 PRINT_ERROR(" (%s:%d)\n", FILE_nit__mproject, 69);
-show_backtrace(1);
+fatal_exit(1);
 }
 var = var1;
 RET_LABEL:;
@@ -289,26 +289,23 @@ val* var /* : String */;
 val* var1 /* : nullable MGroup */;
 val* var3 /* : nullable MGroup */;
 val* var_p /* var p: nullable MGroup */;
-val* var4 /* : null */;
+short int var4 /* : Bool */;
 short int var5 /* : Bool */;
-short int var6 /* : Bool */;
 val* var_other /* var other: nullable Object */;
-short int var8 /* : Bool */;
-short int var10 /* : Bool */;
-val* var11 /* : String */;
-val* var13 /* : String */;
-val* var14 /* : String */;
+short int var7 /* : Bool */;
+short int var9 /* : Bool */;
+val* var10 /* : String */;
+val* var12 /* : String */;
+val* var13 /* : NativeArray[String] */;
 static val* varonce;
+static val* varonce14;
 val* var15 /* : String */;
 char* var16 /* : NativeString */;
-long var17 /* : Int */;
-val* var18 /* : FlatString */;
+val* var17 /* : FlatString */;
+val* var18 /* : String */;
 val* var19 /* : String */;
 val* var21 /* : String */;
-val* var22 /* : Array[Object] */;
-long var23 /* : Int */;
-val* var24 /* : NativeArray[Object] */;
-val* var25 /* : String */;
+val* var22 /* : String */;
 {
 { /* Inline mproject#MGroup#parent (self) on <self:MGroup> */
 var3 = self->attrs[COLOR_nit__mproject__MGroup___parent].val; /* _parent on <self:MGroup> */
@@ -317,85 +314,82 @@ RET_LABEL2:(void)0;
 }
 }
 var_p = var1;
-var4 = NULL;
 if (var_p == NULL) {
-var5 = 1; /* is null */
+var4 = 1; /* is null */
 } else {
-var5 = 0; /* arg is null but recv is not */
+var4 = 0; /* arg is null but recv is not */
 }
 if (0) {
-{ /* Inline kernel#Object#== (var_p,var4) on <var_p:nullable MGroup> */
-var_other = var4;
+{ /* Inline kernel#Object#== (var_p,((val*)NULL)) on <var_p:nullable MGroup> */
+var_other = ((val*)NULL);
 {
 { /* Inline kernel#Object#is_same_instance (var_p,var_other) on <var_p:nullable MGroup(MGroup)> */
-var10 = var_p == var_other;
-var8 = var10;
-goto RET_LABEL9;
-RET_LABEL9:(void)0;
+var9 = var_p == var_other;
+var7 = var9;
+goto RET_LABEL8;
+RET_LABEL8:(void)0;
 }
 }
-var6 = var8;
-goto RET_LABEL7;
-RET_LABEL7:(void)0;
+var5 = var7;
+goto RET_LABEL6;
+RET_LABEL6:(void)0;
 }
-var5 = var6;
+var4 = var5;
 }
-if (var5){
+if (var4){
 {
 { /* Inline mproject#MGroup#name (self) on <self:MGroup> */
-var13 = self->attrs[COLOR_nit__mproject__MGroup___name].val; /* _name on <self:MGroup> */
-if (unlikely(var13 == NULL)) {
+var12 = self->attrs[COLOR_nit__mproject__MGroup___name].val; /* _name on <self:MGroup> */
+if (unlikely(var12 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _name");
 PRINT_ERROR(" (%s:%d)\n", FILE_nit__mproject, 65);
-show_backtrace(1);
+fatal_exit(1);
 }
-var11 = var13;
-RET_LABEL12:(void)0;
+var10 = var12;
+RET_LABEL11:(void)0;
 }
 }
-var = var11;
+var = var10;
 goto RET_LABEL;
 } else {
 }
-{
-var14 = nit___nit__MGroup___nit__model_base__MEntity__full_name(var_p);
-}
-if (varonce) {
-var15 = varonce;
+if (unlikely(varonce==NULL)) {
+var13 = NEW_standard__NativeArray(3l, &type_standard__NativeArray__standard__String);
+if (likely(varonce14!=NULL)) {
+var15 = varonce14;
 } else {
 var16 = "/";
-var17 = 1;
-var18 = standard___standard__NativeString___to_s_with_length(var16, var17);
-var15 = var18;
-varonce = var15;
+var17 = standard___standard__NativeString___to_s_with_length(var16, 1l);
+var15 = var17;
+varonce14 = var15;
 }
+((struct instance_standard__NativeArray*)var13)->values[1]=var15;
+} else {
+var13 = varonce;
+varonce = NULL;
+}
+{
+var18 = nit___nit__MGroup___nit__model_base__MEntity__full_name(var_p);
+}
+((struct instance_standard__NativeArray*)var13)->values[0]=var18;
 {
 { /* Inline mproject#MGroup#name (self) on <self:MGroup> */
 var21 = self->attrs[COLOR_nit__mproject__MGroup___name].val; /* _name on <self:MGroup> */
 if (unlikely(var21 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _name");
 PRINT_ERROR(" (%s:%d)\n", FILE_nit__mproject, 65);
-show_backtrace(1);
+fatal_exit(1);
 }
 var19 = var21;
 RET_LABEL20:(void)0;
 }
 }
-var22 = NEW_standard__Array(&type_standard__Array__standard__Object);
-{ /* var22 = array_instance Array[Object] */
-var23 = 3;
-var24 = NEW_standard__NativeArray(var23, &type_standard__NativeArray__standard__Object);
-((struct instance_standard__NativeArray*)var24)->values[0] = (val*) var14;
-((struct instance_standard__NativeArray*)var24)->values[1] = (val*) var15;
-((struct instance_standard__NativeArray*)var24)->values[2] = (val*) var19;
+((struct instance_standard__NativeArray*)var13)->values[2]=var19;
 {
-((void (*)(val* self, val* p0, long p1))(var22->class->vft[COLOR_standard__array__Array__with_native]))(var22, var24, var23) /* with_native on <var22:Array[Object]>*/;
+var22 = ((val*(*)(val* self))(var13->class->vft[COLOR_standard__string__NativeArray__native_to_s]))(var13); /* native_to_s on <var13:NativeArray[String]>*/
 }
-}
-{
-var25 = ((val* (*)(val* self))(var22->class->vft[COLOR_standard__string__Object__to_s]))(var22) /* to_s on <var22:Array[Object]>*/;
-}
-var = var25;
+varonce = var13;
+var = var22;
 goto RET_LABEL;
 RET_LABEL:;
 return var;
@@ -430,14 +424,13 @@ val* var6 /* : POSetElement[nullable Object] */;
 val* var8 /* : nullable MGroup */;
 val* var10 /* : nullable MGroup */;
 val* var_parent /* var parent: nullable MGroup */;
-val* var11 /* : null */;
+short int var11 /* : Bool */;
 short int var12 /* : Bool */;
-short int var13 /* : Bool */;
 val* var_other /* var other: nullable Object */;
+short int var14 /* : Bool */;
 short int var15 /* : Bool */;
-short int var16 /* : Bool */;
 {
-((void (*)(val* self))(self->class->vft[COLOR_nit___nit__MGroup___standard__kernel__Object__init]))(self) /* init on <self:MGroup>*/;
+((void(*)(val* self))(self->class->vft[COLOR_nit___nit__MGroup___standard__kernel__Object__init]))(self); /* init on <self:MGroup>*/
 }
 {
 { /* Inline mproject#MGroup#mproject (self) on <self:MGroup> */
@@ -445,7 +438,7 @@ var2 = self->attrs[COLOR_nit__mproject__MGroup___mproject].val; /* _mproject on 
 if (unlikely(var2 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mproject");
 PRINT_ERROR(" (%s:%d)\n", FILE_nit__mproject, 69);
-show_backtrace(1);
+fatal_exit(1);
 }
 var = var2;
 RET_LABEL1:(void)0;
@@ -457,7 +450,7 @@ var5 = var->attrs[COLOR_nit__mproject__MProject___mgroups].val; /* _mgroups on <
 if (unlikely(var5 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mgroups");
 PRINT_ERROR(" (%s:%d)\n", FILE_nit__mproject, 40);
-show_backtrace(1);
+fatal_exit(1);
 }
 var3 = var5;
 RET_LABEL4:(void)0;
@@ -481,26 +474,25 @@ RET_LABEL9:(void)0;
 }
 }
 var_parent = var8;
-var11 = NULL;
 if (var_parent == NULL) {
-var12 = 0; /* is null */
+var11 = 0; /* is null */
 } else {
-var12 = 1; /* arg is null and recv is not */
+var11 = 1; /* arg is null and recv is not */
 }
 if (0) {
-{ /* Inline kernel#Object#!= (var_parent,var11) on <var_parent:nullable MGroup> */
-var_other = var11;
+{ /* Inline kernel#Object#!= (var_parent,((val*)NULL)) on <var_parent:nullable MGroup> */
+var_other = ((val*)NULL);
 {
-var15 = ((short int (*)(val* self, val* p0))(var_parent->class->vft[COLOR_standard__kernel__Object___61d_61d]))(var_parent, var_other) /* == on <var_parent:nullable MGroup(MGroup)>*/;
+var14 = ((short int(*)(val* self, val* p0))(var_parent->class->vft[COLOR_standard__kernel__Object___61d_61d]))(var_parent, var_other); /* == on <var_parent:nullable MGroup(MGroup)>*/
 }
-var16 = !var15;
-var13 = var16;
-goto RET_LABEL14;
-RET_LABEL14:(void)0;
+var15 = !var14;
+var12 = var15;
+goto RET_LABEL13;
+RET_LABEL13:(void)0;
 }
-var12 = var13;
+var11 = var12;
 }
-if (var12){
+if (var11){
 {
 poset___poset__POSet___add_edge(var_tree, self, var_parent); /* Direct call poset#POSet#add_edge on <var_tree:POSet[MGroup]>*/
 }
@@ -521,7 +513,7 @@ var3 = self->attrs[COLOR_nit__mproject__MGroup___mproject].val; /* _mproject on 
 if (unlikely(var3 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mproject");
 PRINT_ERROR(" (%s:%d)\n", FILE_nit__mproject, 69);
-show_backtrace(1);
+fatal_exit(1);
 }
 var1 = var3;
 RET_LABEL2:(void)0;
@@ -533,7 +525,7 @@ var6 = var1->attrs[COLOR_nit__mproject__MProject___model].val; /* _model on <var
 if (unlikely(var6 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _model");
 PRINT_ERROR(" (%s:%d)\n", FILE_nit__mproject, 34);
-show_backtrace(1);
+fatal_exit(1);
 }
 var4 = var6;
 RET_LABEL5:(void)0;
@@ -555,7 +547,7 @@ var3 = self->attrs[COLOR_nit__mproject__MGroup___name].val; /* _name on <self:MG
 if (unlikely(var3 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _name");
 PRINT_ERROR(" (%s:%d)\n", FILE_nit__mproject, 65);
-show_backtrace(1);
+fatal_exit(1);
 }
 var1 = var3;
 RET_LABEL2:(void)0;
@@ -574,7 +566,7 @@ var1 = self->attrs[COLOR_nit__mproject__Model___mprojects].val; /* _mprojects on
 if (unlikely(var1 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mprojects");
 PRINT_ERROR(" (%s:%d)\n", FILE_nit__mproject, 117);
-show_backtrace(1);
+fatal_exit(1);
 }
 var = var1;
 RET_LABEL:;
@@ -588,7 +580,7 @@ var1 = self->attrs[COLOR_nit__mproject__Model___mproject_by_name].val; /* _mproj
 if (unlikely(var1 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _mproject_by_name");
 PRINT_ERROR(" (%s:%d)\n", FILE_nit__mproject, 120);
-show_backtrace(1);
+fatal_exit(1);
 }
 var = var1;
 RET_LABEL:;

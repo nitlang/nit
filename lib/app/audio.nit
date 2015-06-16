@@ -22,9 +22,22 @@
 module audio
 
 import app_base
+import standard::error
 
-# Abstraction of a sound
-abstract class Sound
+# Abstraction of a playable Audio
+abstract class PlayableAudio
+
+	# Name of this playable audio
+	var name: String
+
+	# Error which is not null if an error happened
+	var error: nullable Error = null is writable
+
+	# Is this already loaded ?
+	protected var is_loaded = false is writable
+
+	# load this playable audio
+	fun load is abstract
 
 	# Plays the sound
 	fun play is abstract
@@ -36,8 +49,21 @@ abstract class Sound
 	fun resume is abstract
 end
 
+# Abstraction of a short sound
+class Sound
+	super PlayableAudio
+end
+
+# Abstraction of a long song, that can bee looped
+class Music
+	super PlayableAudio
+end
+
 redef class App
 
-	# Loads a sound from the assets of the app, returns `null` if the loading failed
-	fun load_sound(name: String): nullable Sound do return null
+	# Load a sound
+	fun load_sound(name: String): Sound is abstract
+
+	# Load a music
+	fun load_music(name: String): Music is abstract
 end

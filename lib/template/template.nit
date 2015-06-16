@@ -133,9 +133,9 @@ class Template
 	# Append a bunch of elements at the end of the template with separations.
 	# see `add`.
 	#
-	#      var t = new Template
-	#      t.add_list(["1", "2", "3"], ", ", " and ")
-	#      assert t.write_to_string == "1, 2 and 3"
+	#     var t = new Template
+	#     t.add_list(["1", "2", "3"], ", ", " and ")
+	#     assert t.write_to_string == "1, 2 and 3"
 	fun add_list(elements: Collection[Writable], sep, last_sep: Writable) do
 		var last = elements.length - 2
 		var i = 0

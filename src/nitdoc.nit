@@ -19,10 +19,19 @@ module nitdoc
 
 import modelbuilder
 import doc
+import counter
 
 redef class ToolContext
 	# Nitdoc generation phase.
 	var docphase: Phase = new Nitdoc(self, null)
+
+	# File pattern used to link documentation to source code.
+	var opt_test = new OptionBool("do not render anything, only print test data", "--test")
+
+	redef init do
+		super
+		option_context.add_option(opt_test)
+	end
 end
 
 # Nitdoc phase explores the model and generate pages for each mentities found
@@ -42,12 +51,36 @@ private class Nitdoc
 			new InheritanceListsPhase(toolcontext, doc),
 			new IntroRedefListPhase(toolcontext, doc),
 			new LinListPhase(toolcontext, doc),
-			new GraphPhase(toolcontext, doc),
-			new RenderHTMLPhase(toolcontext, doc): DocPhase]
+			new GraphPhase(toolcontext, doc): DocPhase]
+
+		if not toolcontext.opt_test.value then
+			phases.add new RenderHTMLPhase(toolcontext, doc)
+		end
 
 		for phase in phases do
 			toolcontext.info("# {phase.class_name}", 1)
 			phase.apply
+		end
+
+		if toolcontext.opt_test.value then
+			# Pages metrics
+			var page_counter = new Counter[String]
+			var pages = doc.pages.keys.to_a
+			default_comparator.sort(pages)
+			for title in pages do
+				var page = doc.pages[title]
+				page_counter.inc page.class_name
+				print page.pretty_print.write_to_string
+			end
+			print "Generated {doc.pages.length} pages"
+			page_counter.print_elements(100)
+			# Model metrics
+			var model_counter = new Counter[String]
+			for mentity in doc.mentities do
+				model_counter.inc mentity.class_name
+			end
+			print "Found {doc.mentities.length} mentities"
+			model_counter.print_elements(100)
 		end
 	end
 end

@@ -1,4 +1,4 @@
-% NITG(1)
+% NITC(1)
 
 # NAME
 

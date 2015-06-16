@@ -1,9 +1,9 @@
---global ../examples/hello_world.nit -o out/nitg-hello_world ; out/nitg-hello_world
---global base_simple3.nit -o out/nitg-base_simple3 ; out/nitg-base_simple3
---separate ../examples/hello_world.nit -o out/nitgs-hello_world ; out/nitgs-hello_world
---separate base_simple3.nit -o out/nitgs-base_simple3 ; out/nitgs-base_simple3
---global ../examples/hello_world.nit -m test_mixin.nit -o out/nitg-hello_world_mixed ; out/nitg-hello_world_mixed
---separate ../examples/hello_world.nit -m test_mixin.nit -o out/nitgs-hello_world_mixed ; out/nitgs-hello_world_mixed
+--global ../examples/hello_world.nit -o out/nitc-hello_world ; out/nitc-hello_world
+--global base_simple3.nit -o out/nitc-base_simple3 ; out/nitc-base_simple3
+--separate ../examples/hello_world.nit -o out/nitcs-hello_world ; out/nitcs-hello_world
+--separate base_simple3.nit -o out/nitcs-base_simple3 ; out/nitcs-base_simple3
+--global ../examples/hello_world.nit -m test_mixin.nit -o out/nitc-hello_world_mixed ; out/nitc-hello_world_mixed
+--separate ../examples/hello_world.nit -m test_mixin.nit -o out/nitcs-hello_world_mixed ; out/nitcs-hello_world_mixed
 base_simple_import.nit base_simple.nit --dir out/ ; out/base_simple ; out/base_simple_import
 test_define.nit -D text=hello -D num=42 -D flag --dir out/ ; out/test_define
 --log --log-dir $WRITE test_prog -o out/test_prog.bin

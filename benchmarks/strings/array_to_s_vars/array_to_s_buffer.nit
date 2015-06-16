@@ -14,7 +14,7 @@
 module array_to_s_buffer
 
 intrude import standard::collection::array
-import standard::string
+import standard::text
 
 redef class Array[E]
 	redef fun to_s: String do

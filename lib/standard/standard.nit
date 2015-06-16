@@ -18,13 +18,12 @@ module standard
 import posix
 import environ 
 import time
-import string_search
 import file
 import exec
 import stream
 import collection
 import math
-import ropes
+import text
 import kernel
 import gc
 import bitset

@@ -208,18 +208,18 @@ Use the various skipping or controls to try to produce reproducible results.
 Engines are selected with the option `--engine`.
 
 ~~~
-./tests.sh --engine nitg-e base_class_name.nit
+./tests.sh --engine nitce base_class_name.nit
 ~~~
 
 Current engines are:
 
-* `nitg-s`, for `nitg --separate` (this is the default)
-* `nitg-e`, for `nitg --erasure`
-* `nitg-sg`, for `nitg --separate --semi-global`
-* `nitg-g`, for `nitg --global`
+* `nitcs`, for `nitc --separate` (this is the default)
+* `nitce`, for `nitc --erasure`
+* `nitcsg`, for `nitc --separate --semi-global`
+* `nitcg`, for `nitc --global`
 * `niti`, for `nit`, the interpreter
-* `nitvm`, for `nitvm` (not automatically executed by `testall.sh`)
-* `emscripten`, for `nitg --semi-global -m emscripten` (not automatically executed by `testall.sh`)
+* `nitvm`, for `nit --vm`, the virtual machine
+* `emscripten`, for `nitc --semi-global -m emscripten` (not automatically executed by `testall.sh`)
 
 Engines control:
 

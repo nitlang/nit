@@ -1879,7 +1879,7 @@ redef class MClassType
 		else if mclass.name == "Byte" then
 			return "unsigned char"
 		else if mclass.name == "NativeString" then
-			return "unsigned char*"
+			return "char*"
 		else if mclass.name == "NativeArray" then
 			return "val*"
 		else
@@ -2323,7 +2323,7 @@ redef class AMethPropdef
 			end
 		else if cname == "NativeString" then
 			if pname == "[]" then
-				v.ret(v.new_expr("(uint32_t){arguments[0]}[{arguments[1]}]", ret.as(not null)))
+				v.ret(v.new_expr("(uint32_t)(unsigned char){arguments[0]}[{arguments[1]}]", ret.as(not null)))
 				return true
 			else if pname == "[]=" then
 				v.add("{arguments[0]}[{arguments[1]}]=(unsigned char){arguments[2]};")
@@ -2338,7 +2338,7 @@ redef class AMethPropdef
 				v.ret(v.new_expr("{arguments[0]} + {arguments[1]}", ret.as(not null)))
 				return true
 			else if pname == "new" then
-				v.ret(v.new_expr("(unsigned char*)nit_alloc({arguments[1]})", ret.as(not null)))
+				v.ret(v.new_expr("(char*)nit_alloc({arguments[1]})", ret.as(not null)))
 				return true
 			end
 		else if cname == "NativeArray" then
@@ -2352,7 +2352,7 @@ redef class AMethPropdef
 			v.ret(v.new_expr("glob_sys", ret.as(not null)))
 			return true
 		else if pname == "calloc_string" then
-			v.ret(v.new_expr("(unsigned char*)nit_alloc({arguments[1]})", ret.as(not null)))
+			v.ret(v.new_expr("(char*)nit_alloc({arguments[1]})", ret.as(not null)))
 			return true
 		else if pname == "calloc_array" then
 			v.calloc_array(ret.as(not null), arguments)

@@ -29,7 +29,7 @@ redef class Nitiwiki
 	#
 	# Returns `null` if no article can be found.
 	fun lookup_entry_by_name(context: WikiEntry, name: String): nullable WikiEntry do
-		var section = context.parent
+		var section: nullable WikiEntry = context.parent or else context
 		var res = section.lookup_entry_by_name(name)
 		if res != null then return res
 		while section != null do
@@ -50,13 +50,13 @@ redef class Nitiwiki
 	#
 	# Returns `null` if no article can be found.
 	fun lookup_entry_by_title(context: WikiEntry, title: String): nullable WikiEntry do
-		var section = context.parent
+		var section: nullable WikiEntry = context.parent or else context
 		var res = section.lookup_entry_by_title(title)
 		if res != null then return res
 		while section != null do
-			if section.title == title then return section
+			if section.title.to_lower == title.to_lower then return section
 			for child in section.children.values do
-				if child.title == title then return child
+				if child.title.to_lower == title.to_lower then return child
 			end
 			section = section.parent
 		end
@@ -70,7 +70,7 @@ redef class Nitiwiki
 	#
 	# Returns `null` if no article can be found.
 	fun lookup_entry_by_path(context: WikiEntry, path: String): nullable WikiEntry do
-		var entry = context.parent
+		var entry = context.parent or else context
 		var parts = path.split_with("/")
 		if path.has_prefix("/") then
 			entry = root_section
@@ -80,6 +80,7 @@ redef class Nitiwiki
 		while not parts.is_empty do
 			var name = parts.shift
 			if name.is_empty then continue
+			if entry.name == name then continue
 			if not entry.children.has_key(name) then return null
 			entry = entry.children[name]
 		end
@@ -95,6 +96,7 @@ redef class WikiEntry
 	redef fun render do
 		super
 		if not is_dirty and not wiki.force_render then return
+		render_sidebar_wikilinks
 	end
 
 	# Search in `self` then `self.children` if an entry has the name `name`.
@@ -110,13 +112,26 @@ redef class WikiEntry
 	# Search in `self` then `self.children` if an entry has the title `title`.
 	fun lookup_entry_by_title(title: String): nullable WikiEntry do
 		for child in children.values do
-			if child.title == title then return child
+			if child.title.to_lower == title.to_lower then return child
 		end
 		for child in children.values do
 			var res = child.lookup_entry_by_title(title)
 			if res != null then return res
 		end
 		return null
+	end
+
+	private var md_proc: NitiwikiMdProcessor is lazy do
+		return new NitiwikiMdProcessor(wiki, self)
+	end
+
+	# Process wikilinks from sidebar.
+	private fun render_sidebar_wikilinks do
+		var blocks = sidebar.blocks
+		for i in [0..blocks.length[ do
+			blocks[i] = md_proc.process(blocks[i].to_s).write_to_string
+			md_proc.emitter.decorator.headlines.clear
+		end
 	end
 end
 
@@ -155,7 +170,6 @@ redef class WikiArticle
 	redef fun render do
 		super
 		if not is_dirty and not wiki.force_render or not has_source then return
-		var md_proc = new NitiwikiMdProcessor(wiki, self)
 		content = md_proc.process(md.as(not null))
 		headlines.recover_with(md_proc.emitter.decorator.headlines)
 	end
@@ -183,7 +197,7 @@ class NitiwikiMdProcessor
 	# Article parsed by `self`.
 	#
 	# Used to contextualize links.
-	var context: WikiArticle
+	var context: WikiEntry
 
 	init do
 		emitter = new MarkdownEmitter(self)
@@ -198,32 +212,35 @@ private class NitiwikiDecorator
 	var wiki: Nitiwiki
 
 	# Article used to contextualize links.
-	var context: WikiArticle
+	var context: WikiEntry
 
 	redef fun add_wikilink(v, link, name, comment) do
-		var wiki = v.processor.as(NitiwikiMdProcessor).wiki
-		var target: nullable WikiEntry = null
 		var anchor: nullable String = null
-		if link.has("#") then
-			var parts = link.split_with("#")
-			link = parts.first
-			anchor = parts.subarray(1, parts.length - 1).join("#")
-		end
-		if link.has("/") then
-			target = wiki.lookup_entry_by_path(context, link.to_s)
-		else
-			target = wiki.lookup_entry_by_name(context, link.to_s)
-			if target == null then
-				target = wiki.lookup_entry_by_title(context, link.to_s)
-			end
-		end
 		v.add "<a "
-		if target != null then
-			if name == null then name = target.title
-			link = target.url
-		else
-			wiki.message("Warning: unknown wikilink `{link}` (in {context.src_path.as(not null)})", 0)
-			v.add "class=\"broken\" "
+		if not link.has_prefix("http://") and not link.has_prefix("https://") then
+			var wiki = v.processor.as(NitiwikiMdProcessor).wiki
+			var target: nullable WikiEntry = null
+			if link.has("#") then
+				var parts = link.split_with("#")
+				link = parts.first
+				anchor = parts.subarray(1, parts.length - 1).join("#")
+			end
+			if link.has("/") then
+				target = wiki.lookup_entry_by_path(context, link.to_s)
+			else
+				target = wiki.lookup_entry_by_name(context, link.to_s)
+				if target == null then
+					target = wiki.lookup_entry_by_title(context, link.to_s)
+				end
+			end
+			if target != null then
+				if name == null then name = target.title
+				link = target.url
+			else
+				var loc = context.src_path or else context.name
+				wiki.message("Warning: unknown wikilink `{link}` (in {loc})", 0)
+				v.add "class=\"broken\" "
+			end
 		end
 		v.add "href=\""
 		append_value(v, link)

@@ -19,28 +19,28 @@ fun foo1 do end
 
 # Test code
 #
-# ~~~~
+# ~~~
 # assert true # tested
-# ~~~~
+# ~~~
 fun foo2 do end
 
 # Test code
 #
-# ~~~~nit
+# ~~~nit
 # assert true # tested
-# ~~~~
+# ~~~
 fun foo3 do end
 
 # Test code
 #
-# ~~~~raw
+# ~~~raw
 # assert false # not tested (and not highlighted)
-# ~~~~
+# ~~~
 fun foo4 do end
 
 # Test code
 #
-# ~~~~nitish
+# ~~~nitish
 # assert false # not tested (but highlighted)
-# ~~~~
+# ~~~
 fun foo5 do end

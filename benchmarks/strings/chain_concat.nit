@@ -11,7 +11,7 @@
 # Benches measuring the performance of several concatenations on Text variants
 module chain_concat
 
-intrude import standard::ropes
+intrude import standard::text::ropes
 import opts
 
 redef class FlatString

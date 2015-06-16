@@ -13,7 +13,7 @@
 # limitations under the License.
 
 import standard
-intrude import standard::ropes
+intrude import standard::text::ropes
 
 var rp: String = new Concat("xxx", "yyy")
 rp += "zzz"

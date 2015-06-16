@@ -12,7 +12,7 @@
 #
 module error
 
-import string
+import text
 
 # Standard class for error messages
 class Error

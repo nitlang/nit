@@ -1,19 +1,18 @@
 #include "nit.common.h"
 #define COLOR_poset__POSet___elements 0
 extern const char FILE_poset[];
-#define COLOR_standard__hash_collection__HashMap___keys 7
-extern const char FILE_standard__hash_collection[];
-#define COLOR_standard__abstract_collection__Collection__iterator 37
-#define COLOR_poset__POSet___35dE 1
-#define COLOR_standard__abstract_collection__Collection__has 40
+val* standard___standard__HashMap___standard__abstract_collection__MapRead__keys(val* self);
+#define COLOR_standard__abstract_collection__Collection__iterator 25
+#define COLOR_standard__abstract_collection__Collection__has 28
+#define COLOR_poset__POSet___35dE 2
 val* standard___standard__HashMap___standard__abstract_collection__MapRead___91d_93d(val* self, val* p0);
 val* NEW_poset__POSetElement(const struct type* type);
-#define COLOR_poset__POSetElement__poset__POSet___35dE 2
+#define COLOR_poset__POSetElement__poset__POSet___35dE 3
 long standard___standard__HashMap___standard__abstract_collection__MapRead__length(val* self);
-#define COLOR_poset__POSetElement__poset_61d 33
-#define COLOR_poset__POSetElement__element_61d 35
-#define COLOR_poset__POSetElement__count_61d 41
-#define COLOR_standard__kernel__Object__init 7
+#define COLOR_poset__POSetElement__poset_61d 16
+#define COLOR_poset__POSetElement__element_61d 17
+#define COLOR_poset__POSetElement__count_61d 18
+#define COLOR_standard__kernel__Object__init 0
 #define COLOR_poset__POSetElement___tos 2
 void standard___standard__HashSet___standard__abstract_collection__SimpleCollection__add(val* self, val* p0);
 #define COLOR_poset__POSetElement___froms 3
@@ -21,25 +20,34 @@ void standard___standard__HashMap___standard__abstract_collection__Map___91d_93d
 val* poset___poset__POSet___add_node(val* self, val* p0);
 short int standard___standard__HashSet___standard__abstract_collection__Collection__has(val* self, val* p0);
 val* standard___standard__HashSet___standard__abstract_collection__Collection__iterator(val* self);
-#define COLOR_standard__abstract_collection__Iterator__is_ok 34
-#define COLOR_standard__abstract_collection__Iterator__item 32
-#define COLOR_standard__abstract_collection__Iterator__next 33
+#define COLOR_standard__abstract_collection__Iterator__is_ok 16
+#define COLOR_standard__abstract_collection__Iterator__item 17
+#define COLOR_standard__abstract_collection__Iterator__next 18
+#define COLOR_standard__abstract_collection__Iterator__finish 19
 #define COLOR_poset__POSetElement___dfroms 5
-val* standard__array___Collection___to_a(val* self);
+short int standard___standard__Array___standard__kernel__Object___61d_61d(val* self, val* p0);
+val* NEW_standard__Array(const struct type* type);
+#define COLOR_standard__Array__poset__POSet___35dE 4
+void standard___standard__Array___standard__kernel__Object__init(val* self);
+void standard___standard__Array___standard__abstract_collection__SimpleCollection__add(val* self, val* p0);
+#define COLOR_poset__POSetElement___dtos 4
+void standard___standard__HashSet___standard__abstract_collection__RemovableCollection__remove(val* self, val* p0);
+#define COLOR_standard__kernel__Object___61d_61d 4
 val* standard___standard__AbstractArrayRead___standard__abstract_collection__Collection__iterator(val* self);
 short int standard__array___standard__array__ArrayIterator___standard__abstract_collection__Iterator__is_ok(val* self);
 val* standard__array___standard__array__ArrayIterator___standard__abstract_collection__Iterator__item(val* self);
-void standard___standard__HashSet___standard__abstract_collection__RemovableCollection__remove(val* self, val* p0);
-#define COLOR_poset__POSetElement___dtos 4
 void standard__array___standard__array__ArrayIterator___standard__abstract_collection__Iterator__next(val* self);
+void standard__array___standard__array__ArrayIterator___standard__abstract_collection__Iterator__finish(val* self);
+void standard___standard__AbstractArray___standard__abstract_collection__RemovableCollection__clear(val* self);
 long standard___standard__HashSet___standard__abstract_collection__Collection__length(val* self);
 long standard___standard__Int___Comparable___60d_61d_62d(long self, long p0);
 #define COLOR_poset__POSetElement___count 6
-#define COLOR_standard__Collection__poset__POSet___35dE 3
+#define COLOR_standard__Collection__poset__POSet___35dE 5
+#define COLOR_standard__array__Collection__to_a 22
 void standard___standard__Comparator___sort(val* self, val* p0);
 #define COLOR_poset__POSetElement___poset 0
 #define COLOR_poset__POSet__poset__POSetElement___35dE 1
 #define COLOR_poset__POSetElement___element 1
 #define COLOR_poset__POSetElement___35dE 2
-#define COLOR_standard__kernel__Object___33d_61d 3
-#define COLOR_poset___poset__POSetElement___standard__kernel__Object__init 48
+#define COLOR_standard__kernel__Object___33d_61d 1
+#define COLOR_poset___poset__POSetElement___standard__kernel__Object__init 31
