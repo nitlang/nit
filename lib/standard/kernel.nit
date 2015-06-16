@@ -17,6 +17,11 @@ module kernel
 
 import end # Mark this module is a top level one. (must be only one)
 
+in "C" `{
+	#include <stdlib.h>
+	#include <errno.h>
+`}
+
 ###############################################################################
 # System Classes                                                              #
 ###############################################################################
@@ -107,7 +112,7 @@ class Sys
 	fun run do main
 
 	# Number of the last error
-	fun errno: Int is extern "sys_errno"
+	fun errno: Int `{ return errno; `}
 end
 
 # Quit the program with a specific return code
@@ -851,8 +856,8 @@ end
 # Pointer classes are used to manipulate extern C structures.
 extern class Pointer
 	# Is the address behind this Object at NULL?
-	fun address_is_null: Bool is extern "address_is_null"
+	fun address_is_null: Bool `{ return self == NULL; `}
 
 	# Free the memory pointed by this pointer
-	fun free is extern "free"
+	fun free `{ free(self); `}
 end
