@@ -12,6 +12,6 @@ fun catalan_number(number: Int): Int do
 	return numerator/denominator
 end
 
-for number in [0..10] do
+for number in [0..10[ do
 	print "{number} = {catalan_number(number)}"
 end
