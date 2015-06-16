@@ -26,10 +26,18 @@ redef class MDoc
 	# Full comment HTML escaped
 	var full_comment: String is lazy do return content.join("\n").html_escape
 
+	private var markdown_proc: MarkdownProcessor is lazy do
+		return original_mentity.model.nitdoc_md_processor
+	end
+
+	private var inline_proc: MarkdownProcessor is lazy do
+		return original_mentity.model.nitdoc_inline_processor
+	end
+
 	# Synopsys in a template
 	var tpl_short_comment: Writable is lazy do
 		var res = new Template
-		var syn = nitdoc_inline_processor.process(content.first)
+		var syn = inline_proc.process(content.first)
 		res.add "<span class=\"synopsys nitdoc\">{syn}</span>"
 		return res
 
@@ -44,22 +52,22 @@ redef class MDoc
 		if not content.first.has_prefix("    ") and
 		   not content.first.has_prefix("\t") then
 			# parse synopsys
-			var syn = nitdoc_inline_processor.process(lines.shift)
+			var syn = inline_proc.process(lines.shift)
 			res.add "<p class=\"synopsys\">{syn}</p>"
 		end
 		# check for annotations
 		for i in [0 .. lines.length[ do
 			var line = lines[i]
 			if line.to_upper.has_prefix("ENSURE") or line.to_upper.has_prefix("REQUIRE") then
-				var html = nitdoc_inline_processor.process(line)
+				var html = inline_proc.process(line)
 				lines[i] = "<p class=\"contract\">{html}</p>"
 			else if line.to_upper.has_prefix("TODO") or line.to_upper.has_prefix("FIXME") then
-				var html = nitdoc_inline_processor.process(line)
+				var html = inline_proc.process(line)
 				lines[i] = "<p class=\"todo\">{html}</p>"
 			end
 		end
 		# add other lines
-		res.add nitdoc_md_processor.process(lines.join("\n"))
+		res.add markdown_proc.process(lines.join("\n"))
 		res.add "</div>"
 		return res
 	end
@@ -175,18 +183,20 @@ private class InlineDecorator
 	end
 end
 
-# Get a markdown processor for Nitdoc comments.
-private fun nitdoc_md_processor: MarkdownProcessor do
-	var proc = new MarkdownProcessor
-	proc.emitter.decorator = new NitdocDecorator
-	return once proc
-end
+redef class Model
+	# Get a markdown processor for Nitdoc comments.
+	private var nitdoc_md_processor: MarkdownProcessor is lazy do
+		var proc = new MarkdownProcessor
+		proc.emitter.decorator = new NitdocDecorator
+		return proc
+	end
 
-# Get a markdown inline processor for Nitdoc comments.
-#
-# This processor is specificaly designed to inlinable doc elements like synopsys.
-private fun nitdoc_inline_processor: MarkdownProcessor do
-	var proc = new MarkdownProcessor
-	proc.emitter.decorator = new InlineDecorator
-	return once proc
+	# Get a markdown inline processor for Nitdoc comments.
+	#
+	# This processor is specificaly designed to inlinable doc elements like synopsys.
+	private var nitdoc_inline_processor: MarkdownProcessor is lazy do
+		var proc = new MarkdownProcessor
+		proc.emitter.decorator = new InlineDecorator
+		return proc
+	end
 end

@@ -17,7 +17,7 @@
 # Services conforming to POSIX
 module posix
 
-import string
+import text
 
 in "C Header" `{
 #include <sys/types.h>

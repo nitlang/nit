@@ -130,7 +130,7 @@ class JsonValue
 	#     assert "\"str\"".to_json_value.to_s == "str"
 	#     assert "123".to_json_value.to_s == "123"
 	#     assert "true".to_json_value.to_s == "true"
-	#     assert "[1, 2, 3]".to_json_value.to_s == "123"
+	#     assert "[1, 2, 3]".to_json_value.to_s == "[1,2,3]"
 	redef fun to_s do
 		if value == null then return "null"
 		return value.to_s
@@ -228,7 +228,7 @@ class JsonValue
 	#
 	#     assert """{"a": 123}""".to_json_value["a"].to_i == 123
 	#     assert """{"123": "a"}""".to_json_value[123].to_s == "a"
-	#     assert """{"John Smith": 1980}""".to_json_value[["John ", "Smith"]].to_i == 1980
+	#     assert """{"John Smith": 1980}""".to_json_value["John Smith"].to_i == 1980
 	#     assert """{"a": 123}""".to_json_value["b"].is_error
 	#
 	#     assert """["a", "b", "c"]""".to_json_value[0].to_s == "a"

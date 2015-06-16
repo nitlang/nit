@@ -19,7 +19,7 @@
 # It exhibs ways to concatenate strings.
 
 #alt1 import standard
-#alt1 import standard::ropes
+#alt1 import standard::text::ropes
 
 var a = 10
 # First way: Multiple parameters.

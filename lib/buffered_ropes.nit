@@ -22,7 +22,7 @@
 # and reallocations when concatenating `String` objects.
 module buffered_ropes
 
-intrude import standard::ropes
+intrude import standard::text::ropes
 
 # Hidden buffer, used to simulate a `FlatBuffer` on a short string.
 #

@@ -7,7 +7,7 @@ var1 = self->attrs[COLOR_nit__scope__ToolContext___scope_phase].val; /* _scope_p
 if (unlikely(var1 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _scope_phase");
 PRINT_ERROR(" (%s:%d)\n", FILE_nit__scope, 23);
-show_backtrace(1);
+fatal_exit(1);
 }
 var = var1;
 RET_LABEL:;
@@ -24,8 +24,8 @@ var_npropdef = p0;
 var2 = self->attrs[COLOR_nit__phase__Phase___toolcontext].val; /* _toolcontext on <self:ScopePhase> */
 if (unlikely(var2 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _toolcontext");
-PRINT_ERROR(" (%s:%d)\n", FILE_nit__phase, 201);
-show_backtrace(1);
+PRINT_ERROR(" (%s:%d)\n", FILE_nit__phase, 200);
+fatal_exit(1);
 }
 var = var2;
 RET_LABEL1:(void)0;
@@ -44,7 +44,7 @@ var1 = self->attrs[COLOR_nit__scope__Variable___name].val; /* _name on <self:Var
 if (unlikely(var1 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _name");
 PRINT_ERROR(" (%s:%d)\n", FILE_nit__scope, 35);
-show_backtrace(1);
+fatal_exit(1);
 }
 var = var1;
 RET_LABEL:;
@@ -66,7 +66,7 @@ var3 = self->attrs[COLOR_nit__scope__Variable___name].val; /* _name on <self:Var
 if (unlikely(var3 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _name");
 PRINT_ERROR(" (%s:%d)\n", FILE_nit__scope, 35);
-show_backtrace(1);
+fatal_exit(1);
 }
 var1 = var3;
 RET_LABEL2:(void)0;
@@ -108,7 +108,7 @@ RET_LABEL:;
 /* method scope#Variable#init for (self: Variable) */
 void nit___nit__Variable___standard__kernel__Object__init(val* self) {
 {
-((void (*)(val* self))(self->class->vft[COLOR_nit___nit__Variable___standard__kernel__Object__init]))(self) /* init on <self:Variable>*/;
+((void(*)(val* self))(self->class->vft[COLOR_nit___nit__Variable___standard__kernel__Object__init]))(self); /* init on <self:Variable>*/
 }
 RET_LABEL:;
 }
@@ -148,7 +148,7 @@ var1 = self->attrs[COLOR_nit__scope__EscapeMark___escapes].val; /* _escapes on <
 if (unlikely(var1 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _escapes");
 PRINT_ERROR(" (%s:%d)\n", FILE_nit__scope, 58);
-show_backtrace(1);
+fatal_exit(1);
 }
 var = var1;
 RET_LABEL:;
@@ -157,7 +157,7 @@ return var;
 /* method scope#EscapeMark#init for (self: EscapeMark) */
 void nit___nit__EscapeMark___standard__kernel__Object__init(val* self) {
 {
-((void (*)(val* self))(self->class->vft[COLOR_nit___nit__EscapeMark___standard__kernel__Object__init]))(self) /* init on <self:EscapeMark>*/;
+((void(*)(val* self))(self->class->vft[COLOR_nit___nit__EscapeMark___standard__kernel__Object__init]))(self); /* init on <self:EscapeMark>*/
 }
 RET_LABEL:;
 }
@@ -169,7 +169,7 @@ var1 = self->attrs[COLOR_nit__scope__ScopeVisitor___toolcontext].val; /* _toolco
 if (unlikely(var1 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _toolcontext");
 PRINT_ERROR(" (%s:%d)\n", FILE_nit__scope, 70);
-show_backtrace(1);
+fatal_exit(1);
 }
 var = var1;
 RET_LABEL:;
@@ -188,7 +188,7 @@ var1 = self->attrs[COLOR_nit__scope__ScopeVisitor___selfvariable].val; /* _selfv
 if (unlikely(var1 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _selfvariable");
 PRINT_ERROR(" (%s:%d)\n", FILE_nit__scope, 73);
-show_backtrace(1);
+fatal_exit(1);
 }
 var = var1;
 RET_LABEL:;
@@ -200,7 +200,7 @@ val* var /* : List[Scope] */;
 val* var2 /* : List[Scope] */;
 val* var3 /* : Scope */;
 {
-((void (*)(val* self))(self->class->vft[COLOR_nit__scope___nit__scope__ScopeVisitor___standard__kernel__Object__init]))(self) /* init on <self:ScopeVisitor>*/;
+((void(*)(val* self))(self->class->vft[COLOR_nit__scope___nit__scope__ScopeVisitor___standard__kernel__Object__init]))(self); /* init on <self:ScopeVisitor>*/
 }
 {
 { /* Inline scope#ScopeVisitor#scopes (self) on <self:ScopeVisitor> */
@@ -208,7 +208,7 @@ var2 = self->attrs[COLOR_nit__scope__ScopeVisitor___scopes].val; /* _scopes on <
 if (unlikely(var2 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _scopes");
 PRINT_ERROR(" (%s:%d)\n", FILE_nit__scope, 80);
-show_backtrace(1);
+fatal_exit(1);
 }
 var = var2;
 RET_LABEL1:(void)0;
@@ -233,7 +233,7 @@ var1 = self->attrs[COLOR_nit__scope__ScopeVisitor___scopes].val; /* _scopes on <
 if (unlikely(var1 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _scopes");
 PRINT_ERROR(" (%s:%d)\n", FILE_nit__scope, 80);
-show_backtrace(1);
+fatal_exit(1);
 }
 var = var1;
 RET_LABEL:;
@@ -252,47 +252,43 @@ val* var_scope /* var scope: Scope */;
 val* var9 /* : HashMap[String, Variable] */;
 val* var11 /* : HashMap[String, Variable] */;
 val* var12 /* : RemovableCollection[nullable Object] */;
-val* var14 /* : RemovableCollection[nullable Object] */;
 val* var_ /* var : RemovableCollection[Variable] */;
-val* var15 /* : Iterator[nullable Object] */;
-val* var_16 /* var : Iterator[Variable] */;
-short int var17 /* : Bool */;
-val* var18 /* : nullable Object */;
+val* var13 /* : Iterator[nullable Object] */;
+val* var_14 /* var : Iterator[Variable] */;
+short int var15 /* : Bool */;
+val* var16 /* : nullable Object */;
 val* var_v /* var v: Variable */;
+short int var17 /* : Bool */;
 short int var19 /* : Bool */;
-short int var21 /* : Bool */;
+val* var20 /* : ToolContext */;
 val* var22 /* : ToolContext */;
-val* var24 /* : ToolContext */;
+val* var23 /* : nullable Location */;
 val* var25 /* : nullable Location */;
-val* var27 /* : nullable Location */;
 static val* varonce;
-val* var28 /* : String */;
-char* var29 /* : NativeString */;
-long var30 /* : Int */;
-val* var31 /* : FlatString */;
-static val* varonce32;
-val* var33 /* : String */;
-char* var34 /* : NativeString */;
-long var35 /* : Int */;
-val* var36 /* : FlatString */;
-val* var37 /* : String */;
+val* var26 /* : String */;
+char* var27 /* : NativeString */;
+val* var28 /* : FlatString */;
+val* var30 /* : NativeArray[String] */;
+static val* varonce29;
+static val* varonce31;
+val* var32 /* : String */;
+char* var33 /* : NativeString */;
+val* var34 /* : FlatString */;
+static val* varonce35;
+val* var36 /* : String */;
+char* var37 /* : NativeString */;
+val* var38 /* : FlatString */;
 val* var39 /* : String */;
-static val* varonce40;
 val* var41 /* : String */;
-char* var42 /* : NativeString */;
-long var43 /* : Int */;
-val* var44 /* : FlatString */;
-val* var45 /* : Array[Object] */;
-long var46 /* : Int */;
-val* var47 /* : NativeArray[Object] */;
-val* var48 /* : String */;
+val* var42 /* : String */;
+val* var43 /* : nullable Message */;
 {
 { /* Inline scope#ScopeVisitor#scopes (self) on <self:ScopeVisitor> */
 var2 = self->attrs[COLOR_nit__scope__ScopeVisitor___scopes].val; /* _scopes on <self:ScopeVisitor> */
 if (unlikely(var2 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _scopes");
 PRINT_ERROR(" (%s:%d)\n", FILE_nit__scope, 80);
-show_backtrace(1);
+fatal_exit(1);
 }
 var = var2;
 RET_LABEL1:(void)0;
@@ -305,7 +301,7 @@ var4 = !var3;
 if (unlikely(!var4)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
 PRINT_ERROR(" (%s:%d)\n", FILE_nit__scope, 86);
-show_backtrace(1);
+fatal_exit(1);
 }
 {
 { /* Inline scope#ScopeVisitor#scopes (self) on <self:ScopeVisitor> */
@@ -313,7 +309,7 @@ var7 = self->attrs[COLOR_nit__scope__ScopeVisitor___scopes].val; /* _scopes on <
 if (unlikely(var7 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _scopes");
 PRINT_ERROR(" (%s:%d)\n", FILE_nit__scope, 80);
-show_backtrace(1);
+fatal_exit(1);
 }
 var5 = var7;
 RET_LABEL6:(void)0;
@@ -329,125 +325,112 @@ var11 = var_scope->attrs[COLOR_nit__scope__Scope___variables].val; /* _variables
 if (unlikely(var11 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _variables");
 PRINT_ERROR(" (%s:%d)\n", FILE_nit__scope, 225);
-show_backtrace(1);
+fatal_exit(1);
 }
 var9 = var11;
 RET_LABEL10:(void)0;
 }
 }
 {
-{ /* Inline hash_collection#HashMap#values (var9) on <var9:HashMap[String, Variable]> */
-var14 = var9->attrs[COLOR_standard__hash_collection__HashMap___values].val; /* _values on <var9:HashMap[String, Variable]> */
-if (unlikely(var14 == NULL)) {
-PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _values");
-PRINT_ERROR(" (%s:%d)\n", FILE_standard__hash_collection, 276);
-show_backtrace(1);
-}
-var12 = var14;
-RET_LABEL13:(void)0;
-}
+var12 = standard___standard__HashMap___standard__abstract_collection__MapRead__values(var9);
 }
 var_ = var12;
 {
-var15 = ((val* (*)(val* self))(var_->class->vft[COLOR_standard__abstract_collection__Collection__iterator]))(var_) /* iterator on <var_:RemovableCollection[Variable]>*/;
+var13 = ((val*(*)(val* self))((((long)var_&3)?class_info[((long)var_&3)]:var_->class)->vft[COLOR_standard__abstract_collection__Collection__iterator]))(var_); /* iterator on <var_:RemovableCollection[Variable]>*/
 }
-var_16 = var15;
+var_14 = var13;
 for(;;) {
 {
-var17 = ((short int (*)(val* self))(var_16->class->vft[COLOR_standard__abstract_collection__Iterator__is_ok]))(var_16) /* is_ok on <var_16:Iterator[Variable]>*/;
+var15 = ((short int(*)(val* self))((((long)var_14&3)?class_info[((long)var_14&3)]:var_14->class)->vft[COLOR_standard__abstract_collection__Iterator__is_ok]))(var_14); /* is_ok on <var_14:Iterator[Variable]>*/
+}
+if (var15){
+{
+var16 = ((val*(*)(val* self))((((long)var_14&3)?class_info[((long)var_14&3)]:var_14->class)->vft[COLOR_standard__abstract_collection__Iterator__item]))(var_14); /* item on <var_14:Iterator[Variable]>*/
+}
+var_v = var16;
+{
+{ /* Inline scope#Variable#warn_unread (var_v) on <var_v:Variable> */
+var19 = var_v->attrs[COLOR_nit__scope__Variable___warn_unread].s; /* _warn_unread on <var_v:Variable> */
+var17 = var19;
+RET_LABEL18:(void)0;
+}
 }
 if (var17){
 {
-var18 = ((val* (*)(val* self))(var_16->class->vft[COLOR_standard__abstract_collection__Iterator__item]))(var_16) /* item on <var_16:Iterator[Variable]>*/;
-}
-var_v = var18;
-{
-{ /* Inline scope#Variable#warn_unread (var_v) on <var_v:Variable> */
-var21 = var_v->attrs[COLOR_nit__scope__Variable___warn_unread].s; /* _warn_unread on <var_v:Variable> */
-var19 = var21;
-RET_LABEL20:(void)0;
-}
-}
-if (var19){
-{
 { /* Inline scope#ScopeVisitor#toolcontext (self) on <self:ScopeVisitor> */
-var24 = self->attrs[COLOR_nit__scope__ScopeVisitor___toolcontext].val; /* _toolcontext on <self:ScopeVisitor> */
-if (unlikely(var24 == NULL)) {
+var22 = self->attrs[COLOR_nit__scope__ScopeVisitor___toolcontext].val; /* _toolcontext on <self:ScopeVisitor> */
+if (unlikely(var22 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _toolcontext");
 PRINT_ERROR(" (%s:%d)\n", FILE_nit__scope, 70);
-show_backtrace(1);
+fatal_exit(1);
 }
-var22 = var24;
-RET_LABEL23:(void)0;
+var20 = var22;
+RET_LABEL21:(void)0;
 }
 }
 {
 { /* Inline scope#Variable#location (var_v) on <var_v:Variable> */
-var27 = var_v->attrs[COLOR_nit__scope__Variable___location].val; /* _location on <var_v:Variable> */
-var25 = var27;
-RET_LABEL26:(void)0;
+var25 = var_v->attrs[COLOR_nit__scope__Variable___location].val; /* _location on <var_v:Variable> */
+var23 = var25;
+RET_LABEL24:(void)0;
 }
 }
-if (varonce) {
-var28 = varonce;
+if (likely(varonce!=NULL)) {
+var26 = varonce;
 } else {
-var29 = "unread-variable";
-var30 = 15;
-var31 = standard___standard__NativeString___to_s_with_length(var29, var30);
-var28 = var31;
-varonce = var28;
+var27 = "unread-variable";
+var28 = standard___standard__NativeString___to_s_with_length(var27, 15l);
+var26 = var28;
+varonce = var26;
 }
-if (varonce32) {
-var33 = varonce32;
+if (unlikely(varonce29==NULL)) {
+var30 = NEW_standard__NativeArray(3l, &type_standard__NativeArray__standard__String);
+if (likely(varonce31!=NULL)) {
+var32 = varonce31;
 } else {
-var34 = "Warning: local variable ";
-var35 = 24;
-var36 = standard___standard__NativeString___to_s_with_length(var34, var35);
-var33 = var36;
-varonce32 = var33;
+var33 = "Warning: local variable ";
+var34 = standard___standard__NativeString___to_s_with_length(var33, 24l);
+var32 = var34;
+varonce31 = var32;
+}
+((struct instance_standard__NativeArray*)var30)->values[0]=var32;
+if (likely(varonce35!=NULL)) {
+var36 = varonce35;
+} else {
+var37 = " is never read.";
+var38 = standard___standard__NativeString___to_s_with_length(var37, 15l);
+var36 = var38;
+varonce35 = var36;
+}
+((struct instance_standard__NativeArray*)var30)->values[2]=var36;
+} else {
+var30 = varonce29;
+varonce29 = NULL;
 }
 {
 { /* Inline scope#Variable#name (var_v) on <var_v:Variable> */
-var39 = var_v->attrs[COLOR_nit__scope__Variable___name].val; /* _name on <var_v:Variable> */
-if (unlikely(var39 == NULL)) {
+var41 = var_v->attrs[COLOR_nit__scope__Variable___name].val; /* _name on <var_v:Variable> */
+if (unlikely(var41 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _name");
 PRINT_ERROR(" (%s:%d)\n", FILE_nit__scope, 35);
-show_backtrace(1);
+fatal_exit(1);
 }
-var37 = var39;
-RET_LABEL38:(void)0;
+var39 = var41;
+RET_LABEL40:(void)0;
 }
 }
-if (varonce40) {
-var41 = varonce40;
-} else {
-var42 = " is never read.";
-var43 = 15;
-var44 = standard___standard__NativeString___to_s_with_length(var42, var43);
-var41 = var44;
-varonce40 = var41;
-}
-var45 = NEW_standard__Array(&type_standard__Array__standard__Object);
-{ /* var45 = array_instance Array[Object] */
-var46 = 3;
-var47 = NEW_standard__NativeArray(var46, &type_standard__NativeArray__standard__Object);
-((struct instance_standard__NativeArray*)var47)->values[0] = (val*) var33;
-((struct instance_standard__NativeArray*)var47)->values[1] = (val*) var37;
-((struct instance_standard__NativeArray*)var47)->values[2] = (val*) var41;
+((struct instance_standard__NativeArray*)var30)->values[1]=var39;
 {
-((void (*)(val* self, val* p0, long p1))(var45->class->vft[COLOR_standard__array__Array__with_native]))(var45, var47, var46) /* with_native on <var45:Array[Object]>*/;
+var42 = ((val*(*)(val* self))(var30->class->vft[COLOR_standard__string__NativeArray__native_to_s]))(var30); /* native_to_s on <var30:NativeArray[String]>*/
 }
-}
+varonce29 = var30;
 {
-var48 = ((val* (*)(val* self))(var45->class->vft[COLOR_standard__string__Object__to_s]))(var45) /* to_s on <var45:Array[Object]>*/;
-}
-{
-nit___nit__ToolContext___advice(var22, var25, var28, var48); /* Direct call toolcontext#ToolContext#advice on <var22:ToolContext>*/
+var43 = nit___nit__ToolContext___advice(var20, var23, var26, var42);
 }
 } else {
 }
 {
-((void (*)(val* self))(var_16->class->vft[COLOR_standard__abstract_collection__Iterator__next]))(var_16) /* next on <var_16:Iterator[Variable]>*/;
+((void(*)(val* self))((((long)var_14&3)?class_info[((long)var_14&3)]:var_14->class)->vft[COLOR_standard__abstract_collection__Iterator__next]))(var_14); /* next on <var_14:Iterator[Variable]>*/
 }
 } else {
 goto BREAK_label;
@@ -455,9 +438,7 @@ goto BREAK_label;
 }
 BREAK_label: (void)0;
 {
-{ /* Inline abstract_collection#Iterator#finish (var_16) on <var_16:Iterator[Variable]> */
-RET_LABEL49:(void)0;
-}
+((void(*)(val* self))((((long)var_14&3)?class_info[((long)var_14&3)]:var_14->class)->vft[COLOR_standard__abstract_collection__Iterator__finish]))(var_14); /* finish on <var_14:Iterator[Variable]>*/
 }
 RET_LABEL:;
 }
@@ -471,35 +452,29 @@ val* var3 /* : String */;
 val* var_name /* var name: String */;
 val* var4 /* : nullable Variable */;
 val* var_found /* var found: nullable Variable */;
-val* var5 /* : null */;
+short int var5 /* : Bool */;
 short int var6 /* : Bool */;
-short int var7 /* : Bool */;
 val* var_other /* var other: nullable Object */;
+short int var8 /* : Bool */;
 short int var9 /* : Bool */;
-short int var10 /* : Bool */;
+val* var10 /* : NativeArray[String] */;
 static val* varonce;
-val* var11 /* : String */;
-char* var12 /* : NativeString */;
-long var13 /* : Int */;
+static val* varonce11;
+val* var12 /* : String */;
+char* var13 /* : NativeString */;
 val* var14 /* : FlatString */;
 static val* varonce15;
 val* var16 /* : String */;
 char* var17 /* : NativeString */;
-long var18 /* : Int */;
-val* var19 /* : FlatString */;
-val* var20 /* : Array[Object] */;
-long var21 /* : Int */;
-val* var22 /* : NativeArray[Object] */;
-val* var23 /* : String */;
-short int var24 /* : Bool */;
-val* var25 /* : List[Scope] */;
-val* var27 /* : List[Scope] */;
-val* var28 /* : nullable Object */;
-val* var29 /* : HashMap[String, Variable] */;
-val* var31 /* : HashMap[String, Variable] */;
-val* var32 /* : Location */;
-val* var34 /* : Location */;
-short int var36 /* : Bool */;
+val* var18 /* : FlatString */;
+val* var19 /* : String */;
+val* var20 /* : List[Scope] */;
+val* var22 /* : List[Scope] */;
+val* var23 /* : nullable Object */;
+val* var24 /* : HashMap[String, Variable] */;
+val* var26 /* : HashMap[String, Variable] */;
+val* var27 /* : Location */;
+val* var29 /* : Location */;
 var_node = p0;
 var_variable = p1;
 {
@@ -508,7 +483,7 @@ var3 = var_variable->attrs[COLOR_nit__scope__Variable___name].val; /* _name on <
 if (unlikely(var3 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _name");
 PRINT_ERROR(" (%s:%d)\n", FILE_nit__scope, 35);
-show_backtrace(1);
+fatal_exit(1);
 }
 var1 = var3;
 RET_LABEL2:(void)0;
@@ -519,116 +494,110 @@ var_name = var1;
 var4 = nit__scope___nit__scope__ScopeVisitor___search_variable(self, var_name);
 }
 var_found = var4;
-var5 = NULL;
 if (var_found == NULL) {
-var6 = 0; /* is null */
+var5 = 0; /* is null */
 } else {
-var6 = 1; /* arg is null and recv is not */
+var5 = 1; /* arg is null and recv is not */
 }
 if (0) {
-{ /* Inline kernel#Object#!= (var_found,var5) on <var_found:nullable Variable> */
-var_other = var5;
+{ /* Inline kernel#Object#!= (var_found,((val*)NULL)) on <var_found:nullable Variable> */
+var_other = ((val*)NULL);
 {
-var9 = ((short int (*)(val* self, val* p0))(var_found->class->vft[COLOR_standard__kernel__Object___61d_61d]))(var_found, var_other) /* == on <var_found:nullable Variable(Variable)>*/;
+var8 = ((short int(*)(val* self, val* p0))(var_found->class->vft[COLOR_standard__kernel__Object___61d_61d]))(var_found, var_other); /* == on <var_found:nullable Variable(Variable)>*/
 }
-var10 = !var9;
-var7 = var10;
-goto RET_LABEL8;
-RET_LABEL8:(void)0;
+var9 = !var8;
+var6 = var9;
+goto RET_LABEL7;
+RET_LABEL7:(void)0;
 }
-var6 = var7;
+var5 = var6;
 }
-if (var6){
-if (varonce) {
-var11 = varonce;
+if (var5){
+if (unlikely(varonce==NULL)) {
+var10 = NEW_standard__NativeArray(3l, &type_standard__NativeArray__standard__String);
+if (likely(varonce11!=NULL)) {
+var12 = varonce11;
 } else {
-var12 = "Error: A variable named `";
-var13 = 25;
-var14 = standard___standard__NativeString___to_s_with_length(var12, var13);
-var11 = var14;
-varonce = var11;
+var13 = "Error: a variable named `";
+var14 = standard___standard__NativeString___to_s_with_length(var13, 25l);
+var12 = var14;
+varonce11 = var12;
 }
-if (varonce15) {
+((struct instance_standard__NativeArray*)var10)->values[0]=var12;
+if (likely(varonce15!=NULL)) {
 var16 = varonce15;
 } else {
-var17 = "\' already exists";
-var18 = 16;
-var19 = standard___standard__NativeString___to_s_with_length(var17, var18);
-var16 = var19;
+var17 = "` already exists.";
+var18 = standard___standard__NativeString___to_s_with_length(var17, 17l);
+var16 = var18;
 varonce15 = var16;
 }
-var20 = NEW_standard__Array(&type_standard__Array__standard__Object);
-{ /* var20 = array_instance Array[Object] */
-var21 = 3;
-var22 = NEW_standard__NativeArray(var21, &type_standard__NativeArray__standard__Object);
-((struct instance_standard__NativeArray*)var22)->values[0] = (val*) var11;
-((struct instance_standard__NativeArray*)var22)->values[1] = (val*) var_name;
-((struct instance_standard__NativeArray*)var22)->values[2] = (val*) var16;
+((struct instance_standard__NativeArray*)var10)->values[2]=var16;
+} else {
+var10 = varonce;
+varonce = NULL;
+}
+((struct instance_standard__NativeArray*)var10)->values[1]=var_name;
 {
-((void (*)(val* self, val* p0, long p1))(var20->class->vft[COLOR_standard__array__Array__with_native]))(var20, var22, var21) /* with_native on <var20:Array[Object]>*/;
+var19 = ((val*(*)(val* self))(var10->class->vft[COLOR_standard__string__NativeArray__native_to_s]))(var10); /* native_to_s on <var10:NativeArray[String]>*/
 }
-}
+varonce = var10;
 {
-var23 = ((val* (*)(val* self))(var20->class->vft[COLOR_standard__string__Object__to_s]))(var20) /* to_s on <var20:Array[Object]>*/;
+nit__scope___nit__scope__ScopeVisitor___error(self, var_node, var19); /* Direct call scope#ScopeVisitor#error on <self:ScopeVisitor>*/
 }
-{
-nit__scope___nit__scope__ScopeVisitor___error(self, var_node, var23); /* Direct call scope#ScopeVisitor#error on <self:ScopeVisitor>*/
-}
-var24 = 0;
-var = var24;
+var = 0;
 goto RET_LABEL;
 } else {
 }
 {
 { /* Inline scope#ScopeVisitor#scopes (self) on <self:ScopeVisitor> */
-var27 = self->attrs[COLOR_nit__scope__ScopeVisitor___scopes].val; /* _scopes on <self:ScopeVisitor> */
-if (unlikely(var27 == NULL)) {
+var22 = self->attrs[COLOR_nit__scope__ScopeVisitor___scopes].val; /* _scopes on <self:ScopeVisitor> */
+if (unlikely(var22 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _scopes");
 PRINT_ERROR(" (%s:%d)\n", FILE_nit__scope, 80);
-show_backtrace(1);
+fatal_exit(1);
 }
-var25 = var27;
-RET_LABEL26:(void)0;
+var20 = var22;
+RET_LABEL21:(void)0;
 }
-}
-{
-var28 = standard___standard__List___standard__abstract_collection__Collection__first(var25);
 }
 {
-{ /* Inline scope#Scope#variables (var28) on <var28:nullable Object(Scope)> */
-var31 = var28->attrs[COLOR_nit__scope__Scope___variables].val; /* _variables on <var28:nullable Object(Scope)> */
-if (unlikely(var31 == NULL)) {
+var23 = standard___standard__List___standard__abstract_collection__Collection__first(var20);
+}
+{
+{ /* Inline scope#Scope#variables (var23) on <var23:nullable Object(Scope)> */
+var26 = var23->attrs[COLOR_nit__scope__Scope___variables].val; /* _variables on <var23:nullable Object(Scope)> */
+if (unlikely(var26 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _variables");
 PRINT_ERROR(" (%s:%d)\n", FILE_nit__scope, 225);
-show_backtrace(1);
+fatal_exit(1);
 }
-var29 = var31;
-RET_LABEL30:(void)0;
+var24 = var26;
+RET_LABEL25:(void)0;
 }
 }
 {
-standard___standard__HashMap___standard__abstract_collection__Map___91d_93d_61d(var29, var_name, var_variable); /* Direct call hash_collection#HashMap#[]= on <var29:HashMap[String, Variable]>*/
+standard___standard__HashMap___standard__abstract_collection__Map___91d_93d_61d(var24, var_name, var_variable); /* Direct call hash_collection#HashMap#[]= on <var24:HashMap[String, Variable]>*/
 }
 {
 { /* Inline parser_nodes#ANode#location (var_node) on <var_node:ANode> */
-var34 = var_node->attrs[COLOR_nit__parser_nodes__ANode___location].val; /* _location on <var_node:ANode> */
-if (unlikely(var34 == NULL)) {
+var29 = var_node->attrs[COLOR_nit__parser_nodes__ANode___location].val; /* _location on <var_node:ANode> */
+if (unlikely(var29 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _location");
-PRINT_ERROR(" (%s:%d)\n", FILE_nit__parser_nodes, 23);
-show_backtrace(1);
+PRINT_ERROR(" (%s:%d)\n", FILE_nit__parser_nodes, 24);
+fatal_exit(1);
 }
-var32 = var34;
-RET_LABEL33:(void)0;
+var27 = var29;
+RET_LABEL28:(void)0;
 }
 }
 {
-{ /* Inline scope#Variable#location= (var_variable,var32) on <var_variable:Variable> */
-var_variable->attrs[COLOR_nit__scope__Variable___location].val = var32; /* _location on <var_variable:Variable> */
-RET_LABEL35:(void)0;
+{ /* Inline scope#Variable#location= (var_variable,var27) on <var_variable:Variable> */
+var_variable->attrs[COLOR_nit__scope__Variable___location].val = var27; /* _location on <var_variable:Variable> */
+RET_LABEL30:(void)0;
 }
 }
-var36 = 1;
-var = var36;
+var = 1;
 goto RET_LABEL;
 RET_LABEL:;
 return var;
@@ -647,13 +616,11 @@ val* var7 /* : nullable Object */;
 val* var_scope /* var scope: Scope */;
 val* var8 /* : nullable Variable */;
 val* var_res /* var res: nullable Variable */;
-val* var9 /* : null */;
+short int var9 /* : Bool */;
 short int var10 /* : Bool */;
-short int var11 /* : Bool */;
 val* var_other /* var other: nullable Object */;
+short int var12 /* : Bool */;
 short int var13 /* : Bool */;
-short int var14 /* : Bool */;
-val* var16 /* : null */;
 var_name = p0;
 {
 { /* Inline scope#ScopeVisitor#scopes (self) on <self:ScopeVisitor> */
@@ -661,7 +628,7 @@ var3 = self->attrs[COLOR_nit__scope__ScopeVisitor___scopes].val; /* _scopes on <
 if (unlikely(var3 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _scopes");
 PRINT_ERROR(" (%s:%d)\n", FILE_nit__scope, 80);
-show_backtrace(1);
+fatal_exit(1);
 }
 var1 = var3;
 RET_LABEL2:(void)0;
@@ -685,26 +652,25 @@ var_scope = var7;
 var8 = nit__scope___nit__scope__Scope___get_variable(var_scope, var_name);
 }
 var_res = var8;
-var9 = NULL;
 if (var_res == NULL) {
-var10 = 0; /* is null */
+var9 = 0; /* is null */
 } else {
-var10 = 1; /* arg is null and recv is not */
+var9 = 1; /* arg is null and recv is not */
 }
 if (0) {
-{ /* Inline kernel#Object#!= (var_res,var9) on <var_res:nullable Variable> */
-var_other = var9;
+{ /* Inline kernel#Object#!= (var_res,((val*)NULL)) on <var_res:nullable Variable> */
+var_other = ((val*)NULL);
 {
-var13 = ((short int (*)(val* self, val* p0))(var_res->class->vft[COLOR_standard__kernel__Object___61d_61d]))(var_res, var_other) /* == on <var_res:nullable Variable(Variable)>*/;
+var12 = ((short int(*)(val* self, val* p0))(var_res->class->vft[COLOR_standard__kernel__Object___61d_61d]))(var_res, var_other); /* == on <var_res:nullable Variable(Variable)>*/
 }
-var14 = !var13;
-var11 = var14;
-goto RET_LABEL12;
-RET_LABEL12:(void)0;
+var13 = !var12;
+var10 = var13;
+goto RET_LABEL11;
+RET_LABEL11:(void)0;
 }
-var10 = var11;
+var9 = var10;
 }
-if (var10){
+if (var9){
 var = var_res;
 goto RET_LABEL;
 } else {
@@ -719,11 +685,10 @@ goto BREAK_label;
 BREAK_label: (void)0;
 {
 { /* Inline abstract_collection#Iterator#finish (var_5) on <var_5:ListIterator[Scope]> */
-RET_LABEL15:(void)0;
+RET_LABEL14:(void)0;
 }
 }
-var16 = NULL;
-var = var16;
+var = ((val*)NULL);
 goto RET_LABEL;
 RET_LABEL:;
 return var;
@@ -733,7 +698,7 @@ void nit__scope___nit__scope__ScopeVisitor___nit__parser_nodes__Visitor__visit(v
 val* var_n /* var n: ANode */;
 var_n = p0;
 {
-((void (*)(val* self, val* p0))(var_n->class->vft[COLOR_nit__scope__ANode__accept_scope_visitor]))(var_n, self) /* accept_scope_visitor on <var_n:ANode>*/;
+((void(*)(val* self, val* p0))(var_n->class->vft[COLOR_nit__scope__ANode__accept_scope_visitor]))(var_n, self); /* accept_scope_visitor on <var_n:ANode>*/
 }
 RET_LABEL:;
 }
@@ -741,72 +706,70 @@ RET_LABEL:;
 void nit__scope___nit__scope__ScopeVisitor___enter_visit_block(val* self, val* p0, val* p1) {
 val* var_node /* var node: nullable AExpr */;
 val* var_escapemark /* var escapemark: nullable EscapeMark */;
-val* var /* : null */;
+short int var /* : Bool */;
 short int var1 /* : Bool */;
-short int var2 /* : Bool */;
 val* var_other /* var other: nullable Object */;
-short int var4 /* : Bool */;
-short int var6 /* : Bool */;
-val* var7 /* : Scope */;
+short int var3 /* : Bool */;
+short int var5 /* : Bool */;
+val* var6 /* : Scope */;
 val* var_scope /* var scope: Scope */;
-val* var10 /* : List[Scope] */;
-val* var12 /* : List[Scope] */;
+val* var9 /* : List[Scope] */;
+val* var11 /* : List[Scope] */;
 var_node = p0;
 var_escapemark = p1;
-var = NULL;
 if (var_node == NULL) {
-var1 = 1; /* is null */
+var = 1; /* is null */
 } else {
-var1 = 0; /* arg is null but recv is not */
+var = 0; /* arg is null but recv is not */
 }
 if (0) {
-{ /* Inline kernel#Object#== (var_node,var) on <var_node:nullable AExpr> */
-var_other = var;
+{ /* Inline kernel#Object#== (var_node,((val*)NULL)) on <var_node:nullable AExpr> */
+var_other = ((val*)NULL);
 {
 { /* Inline kernel#Object#is_same_instance (var_node,var_other) on <var_node:nullable AExpr(AExpr)> */
-var6 = var_node == var_other;
-var4 = var6;
-goto RET_LABEL5;
-RET_LABEL5:(void)0;
+var5 = var_node == var_other;
+var3 = var5;
+goto RET_LABEL4;
+RET_LABEL4:(void)0;
 }
 }
-var2 = var4;
-goto RET_LABEL3;
-RET_LABEL3:(void)0;
+var1 = var3;
+goto RET_LABEL2;
+RET_LABEL2:(void)0;
 }
-var1 = var2;
+var = var1;
 }
-if (var1){
+if (var){
 goto RET_LABEL;
 } else {
 }
-var7 = NEW_nit__scope__Scope(&type_nit__scope__Scope);
+var6 = NEW_nit__scope__Scope(&type_nit__scope__Scope);
 {
-{ /* Inline kernel#Object#init (var7) on <var7:Scope> */
-RET_LABEL8:(void)0;
+{ /* Inline kernel#Object#init (var6) on <var6:Scope> */
+RET_LABEL7:(void)0;
 }
 }
-var_scope = var7;
+var_scope = var6;
 {
 { /* Inline scope#Scope#escapemark= (var_scope,var_escapemark) on <var_scope:Scope> */
 var_scope->attrs[COLOR_nit__scope__Scope___escapemark].val = var_escapemark; /* _escapemark on <var_scope:Scope> */
-RET_LABEL9:(void)0;
+RET_LABEL8:(void)0;
 }
 }
 {
 { /* Inline scope#ScopeVisitor#scopes (self) on <self:ScopeVisitor> */
-var12 = self->attrs[COLOR_nit__scope__ScopeVisitor___scopes].val; /* _scopes on <self:ScopeVisitor> */
-if (unlikely(var12 == NULL)) {
+var11 = self->attrs[COLOR_nit__scope__ScopeVisitor___scopes].val; /* _scopes on <self:ScopeVisitor> */
+if (unlikely(var11 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _scopes");
 PRINT_ERROR(" (%s:%d)\n", FILE_nit__scope, 80);
-show_backtrace(1);
+fatal_exit(1);
 }
-var10 = var12;
-RET_LABEL11:(void)0;
+var9 = var11;
+RET_LABEL10:(void)0;
 }
 }
 {
-standard___standard__List___standard__abstract_collection__Sequence__unshift(var10, var_scope); /* Direct call list#List#unshift on <var10:List[Scope]>*/
+standard___standard__List___standard__abstract_collection__Sequence__unshift(var9, var_scope); /* Direct call list#List#unshift on <var9:List[Scope]>*/
 }
 {
 nit___nit__Visitor___enter_visit(self, var_node); /* Direct call parser_nodes#Visitor#enter_visit on <self:ScopeVisitor>*/
@@ -832,18 +795,16 @@ val* var8 /* : nullable EscapeMark */;
 val* var10 /* : nullable EscapeMark */;
 val* var_res /* var res: nullable EscapeMark */;
 short int var11 /* : Bool */;
-val* var12 /* : null */;
+short int var12 /* : Bool */;
 short int var13 /* : Bool */;
-short int var14 /* : Bool */;
 val* var_other /* var other: nullable Object */;
+short int var15 /* : Bool */;
 short int var16 /* : Bool */;
-short int var17 /* : Bool */;
-short int var_18 /* var : Bool */;
-val* var19 /* : nullable String */;
-val* var21 /* : nullable String */;
+short int var_17 /* var : Bool */;
+val* var18 /* : nullable String */;
+val* var20 /* : nullable String */;
+short int var21 /* : Bool */;
 short int var22 /* : Bool */;
-short int var23 /* : Bool */;
-val* var25 /* : null */;
 var_name = p0;
 {
 { /* Inline scope#ScopeVisitor#scopes (self) on <self:ScopeVisitor> */
@@ -851,7 +812,7 @@ var3 = self->attrs[COLOR_nit__scope__ScopeVisitor___scopes].val; /* _scopes on <
 if (unlikely(var3 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _scopes");
 PRINT_ERROR(" (%s:%d)\n", FILE_nit__scope, 80);
-show_backtrace(1);
+fatal_exit(1);
 }
 var1 = var3;
 RET_LABEL2:(void)0;
@@ -879,43 +840,42 @@ RET_LABEL9:(void)0;
 }
 }
 var_res = var8;
-var12 = NULL;
 if (var_res == NULL) {
-var13 = 0; /* is null */
+var12 = 0; /* is null */
 } else {
-var13 = 1; /* arg is null and recv is not */
+var12 = 1; /* arg is null and recv is not */
 }
 if (0) {
-{ /* Inline kernel#Object#!= (var_res,var12) on <var_res:nullable EscapeMark> */
-var_other = var12;
+{ /* Inline kernel#Object#!= (var_res,((val*)NULL)) on <var_res:nullable EscapeMark> */
+var_other = ((val*)NULL);
 {
-var16 = ((short int (*)(val* self, val* p0))(var_res->class->vft[COLOR_standard__kernel__Object___61d_61d]))(var_res, var_other) /* == on <var_res:nullable EscapeMark(EscapeMark)>*/;
+var15 = ((short int(*)(val* self, val* p0))(var_res->class->vft[COLOR_standard__kernel__Object___61d_61d]))(var_res, var_other); /* == on <var_res:nullable EscapeMark(EscapeMark)>*/
 }
-var17 = !var16;
-var14 = var17;
-goto RET_LABEL15;
-RET_LABEL15:(void)0;
+var16 = !var15;
+var13 = var16;
+goto RET_LABEL14;
+RET_LABEL14:(void)0;
 }
-var13 = var14;
+var12 = var13;
 }
-var_18 = var13;
-if (var13){
+var_17 = var12;
+if (var12){
 {
 { /* Inline scope#EscapeMark#name (var_res) on <var_res:nullable EscapeMark(EscapeMark)> */
-var21 = var_res->attrs[COLOR_nit__scope__EscapeMark___name].val; /* _name on <var_res:nullable EscapeMark(EscapeMark)> */
-var19 = var21;
-RET_LABEL20:(void)0;
+var20 = var_res->attrs[COLOR_nit__scope__EscapeMark___name].val; /* _name on <var_res:nullable EscapeMark(EscapeMark)> */
+var18 = var20;
+RET_LABEL19:(void)0;
 }
 }
-if (var19 == NULL) {
-var22 = 0; /* <var_name:String> cannot be null */
+if (var18 == NULL) {
+var21 = 0; /* <var_name:String> cannot be null */
 } else {
-var23 = ((short int (*)(val* self, val* p0))(var19->class->vft[COLOR_standard__kernel__Object___61d_61d]))(var19, var_name) /* == on <var19:nullable String>*/;
-var22 = var23;
+var22 = ((short int(*)(val* self, val* p0))(var18->class->vft[COLOR_standard__kernel__Object___61d_61d]))(var18, var_name); /* == on <var18:nullable String>*/
+var21 = var22;
 }
-var11 = var22;
+var11 = var21;
 } else {
-var11 = var_18;
+var11 = var_17;
 }
 if (var11){
 var = var_res;
@@ -932,11 +892,10 @@ goto BREAK_label;
 BREAK_label: (void)0;
 {
 { /* Inline abstract_collection#Iterator#finish (var_5) on <var_5:ListIterator[Scope]> */
-RET_LABEL24:(void)0;
+RET_LABEL23:(void)0;
 }
 }
-var25 = NULL;
-var = var25;
+var = ((val*)NULL);
 goto RET_LABEL;
 RET_LABEL:;
 return var;
@@ -946,277 +905,255 @@ val* nit__scope___nit__scope__ScopeVisitor___make_escape_mark(val* self, val* p0
 val* var /* : EscapeMark */;
 val* var_nlabel /* var nlabel: nullable ALabel */;
 short int var_for_loop /* var for_loop: Bool */;
-val* var1 /* : null */;
+short int var1 /* : Bool */;
 short int var2 /* : Bool */;
-short int var3 /* : Bool */;
 val* var_other /* var other: nullable Object */;
+short int var4 /* : Bool */;
 short int var5 /* : Bool */;
-short int var6 /* : Bool */;
-val* var7 /* : nullable TId */;
-val* var9 /* : nullable TId */;
+val* var6 /* : nullable TId */;
+val* var8 /* : nullable TId */;
 val* var_nid /* var nid: nullable TId */;
-val* var10 /* : null */;
-short int var11 /* : Bool */;
-short int var12 /* : Bool */;
-val* var_other14 /* var other: nullable Object */;
+short int var9 /* : Bool */;
+short int var10 /* : Bool */;
+val* var_other12 /* var other: nullable Object */;
+short int var13 /* : Bool */;
 short int var15 /* : Bool */;
-short int var17 /* : Bool */;
 static val* varonce;
-val* var18 /* : String */;
-char* var19 /* : NativeString */;
-long var20 /* : Int */;
-val* var21 /* : FlatString */;
-val* var22 /* : nullable EscapeMark */;
+val* var16 /* : String */;
+char* var17 /* : NativeString */;
+val* var18 /* : FlatString */;
+val* var19 /* : nullable EscapeMark */;
 val* var_res /* var res: nullable EscapeMark */;
-val* var23 /* : null */;
+short int var20 /* : Bool */;
+short int var21 /* : Bool */;
+short int var23 /* : Bool */;
 short int var24 /* : Bool */;
-short int var25 /* : Bool */;
-short int var27 /* : Bool */;
-short int var28 /* : Bool */;
+static val* varonce25;
+val* var26 /* : String */;
+char* var27 /* : NativeString */;
+val* var28 /* : FlatString */;
 static val* varonce29;
 val* var30 /* : String */;
 char* var31 /* : NativeString */;
-long var32 /* : Int */;
-val* var33 /* : FlatString */;
-static val* varonce34;
-val* var35 /* : String */;
-char* var36 /* : NativeString */;
-long var37 /* : Int */;
-val* var38 /* : FlatString */;
+val* var32 /* : FlatString */;
 val* var_name /* var name: nullable String */;
-val* var39 /* : String */;
-val* var40 /* : nullable EscapeMark */;
+val* var33 /* : String */;
+val* var34 /* : nullable EscapeMark */;
 val* var_found /* var found: nullable EscapeMark */;
-val* var41 /* : null */;
-short int var42 /* : Bool */;
-short int var43 /* : Bool */;
-short int var45 /* : Bool */;
-short int var46 /* : Bool */;
-static val* varonce47;
-val* var48 /* : String */;
-char* var49 /* : NativeString */;
-long var50 /* : Int */;
-val* var51 /* : FlatString */;
-static val* varonce52;
-val* var53 /* : String */;
-char* var54 /* : NativeString */;
-long var55 /* : Int */;
-val* var56 /* : FlatString */;
-val* var57 /* : Array[Object] */;
-long var58 /* : Int */;
-val* var59 /* : NativeArray[Object] */;
-val* var60 /* : String */;
-val* var61 /* : null */;
-val* var62 /* : EscapeMark */;
-val* var_res63 /* var res: EscapeMark */;
-val* var64 /* : EscapeMark */;
+short int var35 /* : Bool */;
+short int var36 /* : Bool */;
+short int var38 /* : Bool */;
+short int var39 /* : Bool */;
+val* var41 /* : NativeArray[String] */;
+static val* varonce40;
+static val* varonce42;
+val* var43 /* : String */;
+char* var44 /* : NativeString */;
+val* var45 /* : FlatString */;
+static val* varonce46;
+val* var47 /* : String */;
+char* var48 /* : NativeString */;
+val* var49 /* : FlatString */;
+val* var50 /* : String */;
+val* var51 /* : EscapeMark */;
+val* var_res52 /* var res: EscapeMark */;
+val* var53 /* : EscapeMark */;
 var_nlabel = p0;
 var_for_loop = p1;
-var1 = NULL;
 if (var_nlabel == NULL) {
-var2 = 0; /* is null */
+var1 = 0; /* is null */
 } else {
-var2 = 1; /* arg is null and recv is not */
+var1 = 1; /* arg is null and recv is not */
 }
 if (0) {
-{ /* Inline kernel#Object#!= (var_nlabel,var1) on <var_nlabel:nullable ALabel> */
-var_other = var1;
+{ /* Inline kernel#Object#!= (var_nlabel,((val*)NULL)) on <var_nlabel:nullable ALabel> */
+var_other = ((val*)NULL);
 {
-var5 = ((short int (*)(val* self, val* p0))(var_nlabel->class->vft[COLOR_standard__kernel__Object___61d_61d]))(var_nlabel, var_other) /* == on <var_nlabel:nullable ALabel(ALabel)>*/;
+var4 = ((short int(*)(val* self, val* p0))(var_nlabel->class->vft[COLOR_standard__kernel__Object___61d_61d]))(var_nlabel, var_other); /* == on <var_nlabel:nullable ALabel(ALabel)>*/
 }
-var6 = !var5;
-var3 = var6;
-goto RET_LABEL4;
-RET_LABEL4:(void)0;
+var5 = !var4;
+var2 = var5;
+goto RET_LABEL3;
+RET_LABEL3:(void)0;
 }
-var2 = var3;
+var1 = var2;
 }
-if (var2){
+if (var1){
 {
 { /* Inline parser_nodes#ALabel#n_id (var_nlabel) on <var_nlabel:nullable ALabel(ALabel)> */
-var9 = var_nlabel->attrs[COLOR_nit__parser_nodes__ALabel___n_id].val; /* _n_id on <var_nlabel:nullable ALabel(ALabel)> */
-var7 = var9;
-RET_LABEL8:(void)0;
+var8 = var_nlabel->attrs[COLOR_nit__parser_nodes__ALabel___n_id].val; /* _n_id on <var_nlabel:nullable ALabel(ALabel)> */
+var6 = var8;
+RET_LABEL7:(void)0;
 }
 }
-var_nid = var7;
-var10 = NULL;
+var_nid = var6;
 if (var_nid == NULL) {
-var11 = 1; /* is null */
+var9 = 1; /* is null */
 } else {
-var11 = 0; /* arg is null but recv is not */
+var9 = 0; /* arg is null but recv is not */
 }
 if (0) {
-{ /* Inline kernel#Object#== (var_nid,var10) on <var_nid:nullable TId> */
-var_other14 = var10;
+{ /* Inline kernel#Object#== (var_nid,((val*)NULL)) on <var_nid:nullable TId> */
+var_other12 = ((val*)NULL);
 {
-{ /* Inline kernel#Object#is_same_instance (var_nid,var_other14) on <var_nid:nullable TId(TId)> */
-var17 = var_nid == var_other14;
-var15 = var17;
-goto RET_LABEL16;
-RET_LABEL16:(void)0;
+{ /* Inline kernel#Object#is_same_instance (var_nid,var_other12) on <var_nid:nullable TId(TId)> */
+var15 = var_nid == var_other12;
+var13 = var15;
+goto RET_LABEL14;
+RET_LABEL14:(void)0;
 }
 }
-var12 = var15;
-goto RET_LABEL13;
-RET_LABEL13:(void)0;
+var10 = var13;
+goto RET_LABEL11;
+RET_LABEL11:(void)0;
 }
-var11 = var12;
+var9 = var10;
 }
-if (var11){
-if (varonce) {
-var18 = varonce;
+if (var9){
+if (likely(varonce!=NULL)) {
+var16 = varonce;
 } else {
-var19 = "";
-var20 = 0;
-var21 = standard___standard__NativeString___to_s_with_length(var19, var20);
-var18 = var21;
-varonce = var18;
+var17 = "";
+var18 = standard___standard__NativeString___to_s_with_length(var17, 0l);
+var16 = var18;
+varonce = var16;
 }
 {
-var22 = nit__scope___nit__scope__ScopeVisitor___search_label(self, var18);
+var19 = nit__scope___nit__scope__ScopeVisitor___search_label(self, var16);
 }
-var_res = var22;
-var23 = NULL;
+var_res = var19;
 if (var_res == NULL) {
-var24 = 0; /* is null */
+var20 = 0; /* is null */
 } else {
-var24 = 1; /* arg is null and recv is not */
+var20 = 1; /* arg is null and recv is not */
 }
 if (0) {
-{ /* Inline kernel#Object#!= (var_res,var23) on <var_res:nullable EscapeMark> */
-var_other = var23;
+{ /* Inline kernel#Object#!= (var_res,((val*)NULL)) on <var_res:nullable EscapeMark> */
+var_other = ((val*)NULL);
 {
-var27 = ((short int (*)(val* self, val* p0))(var_res->class->vft[COLOR_standard__kernel__Object___61d_61d]))(var_res, var_other) /* == on <var_res:nullable EscapeMark(EscapeMark)>*/;
+var23 = ((short int(*)(val* self, val* p0))(var_res->class->vft[COLOR_standard__kernel__Object___61d_61d]))(var_res, var_other); /* == on <var_res:nullable EscapeMark(EscapeMark)>*/
 }
-var28 = !var27;
-var25 = var28;
-goto RET_LABEL26;
-RET_LABEL26:(void)0;
+var24 = !var23;
+var21 = var24;
+goto RET_LABEL22;
+RET_LABEL22:(void)0;
 }
-var24 = var25;
+var20 = var21;
 }
-if (var24){
-if (varonce29) {
+if (var20){
+if (likely(varonce25!=NULL)) {
+var26 = varonce25;
+} else {
+var27 = "Syntax Error: anonymous label already defined.";
+var28 = standard___standard__NativeString___to_s_with_length(var27, 46l);
+var26 = var28;
+varonce25 = var26;
+}
+{
+nit__scope___nit__scope__ScopeVisitor___error(self, var_nlabel, var26); /* Direct call scope#ScopeVisitor#error on <self:ScopeVisitor>*/
+}
+} else {
+}
+if (likely(varonce29!=NULL)) {
 var30 = varonce29;
 } else {
-var31 = "Syntax error: anonymous label already defined.";
-var32 = 46;
-var33 = standard___standard__NativeString___to_s_with_length(var31, var32);
-var30 = var33;
+var31 = "";
+var32 = standard___standard__NativeString___to_s_with_length(var31, 0l);
+var30 = var32;
 varonce29 = var30;
 }
-{
-nit__scope___nit__scope__ScopeVisitor___error(self, var_nlabel, var30); /* Direct call scope#ScopeVisitor#error on <self:ScopeVisitor>*/
-}
-} else {
-}
-if (varonce34) {
-var35 = varonce34;
-} else {
-var36 = "";
-var37 = 0;
-var38 = standard___standard__NativeString___to_s_with_length(var36, var37);
-var35 = var38;
-varonce34 = var35;
-}
-var_name = var35;
+var_name = var30;
 } else {
 {
-var39 = nit__lexer_work___Token___text(var_nid);
+var33 = nit__lexer_work___Token___text(var_nid);
 }
-var_name = var39;
+var_name = var33;
 {
-var40 = nit__scope___nit__scope__ScopeVisitor___search_label(self, var_name);
+var34 = nit__scope___nit__scope__ScopeVisitor___search_label(self, var_name);
 }
-var_found = var40;
-var41 = NULL;
+var_found = var34;
 if (var_found == NULL) {
-var42 = 0; /* is null */
+var35 = 0; /* is null */
 } else {
-var42 = 1; /* arg is null and recv is not */
+var35 = 1; /* arg is null and recv is not */
 }
 if (0) {
-{ /* Inline kernel#Object#!= (var_found,var41) on <var_found:nullable EscapeMark> */
-var_other = var41;
+{ /* Inline kernel#Object#!= (var_found,((val*)NULL)) on <var_found:nullable EscapeMark> */
+var_other = ((val*)NULL);
 {
-var45 = ((short int (*)(val* self, val* p0))(var_found->class->vft[COLOR_standard__kernel__Object___61d_61d]))(var_found, var_other) /* == on <var_found:nullable EscapeMark(EscapeMark)>*/;
+var38 = ((short int(*)(val* self, val* p0))(var_found->class->vft[COLOR_standard__kernel__Object___61d_61d]))(var_found, var_other); /* == on <var_found:nullable EscapeMark(EscapeMark)>*/
 }
-var46 = !var45;
-var43 = var46;
-goto RET_LABEL44;
-RET_LABEL44:(void)0;
+var39 = !var38;
+var36 = var39;
+goto RET_LABEL37;
+RET_LABEL37:(void)0;
 }
-var42 = var43;
+var35 = var36;
 }
-if (var42){
-if (varonce47) {
-var48 = varonce47;
+if (var35){
+if (unlikely(varonce40==NULL)) {
+var41 = NEW_standard__NativeArray(3l, &type_standard__NativeArray__standard__String);
+if (likely(varonce42!=NULL)) {
+var43 = varonce42;
 } else {
-var49 = "Syntax error: label ";
-var50 = 20;
-var51 = standard___standard__NativeString___to_s_with_length(var49, var50);
-var48 = var51;
-varonce47 = var48;
+var44 = "Syntax Error: label `";
+var45 = standard___standard__NativeString___to_s_with_length(var44, 21l);
+var43 = var45;
+varonce42 = var43;
 }
-if (varonce52) {
-var53 = varonce52;
+((struct instance_standard__NativeArray*)var41)->values[0]=var43;
+if (likely(varonce46!=NULL)) {
+var47 = varonce46;
 } else {
-var54 = " already defined.";
-var55 = 17;
-var56 = standard___standard__NativeString___to_s_with_length(var54, var55);
-var53 = var56;
-varonce52 = var53;
+var48 = "` already defined.";
+var49 = standard___standard__NativeString___to_s_with_length(var48, 18l);
+var47 = var49;
+varonce46 = var47;
 }
-var57 = NEW_standard__Array(&type_standard__Array__standard__Object);
-{ /* var57 = array_instance Array[Object] */
-var58 = 3;
-var59 = NEW_standard__NativeArray(var58, &type_standard__NativeArray__standard__Object);
-((struct instance_standard__NativeArray*)var59)->values[0] = (val*) var48;
-((struct instance_standard__NativeArray*)var59)->values[1] = (val*) var_name;
-((struct instance_standard__NativeArray*)var59)->values[2] = (val*) var53;
+((struct instance_standard__NativeArray*)var41)->values[2]=var47;
+} else {
+var41 = varonce40;
+varonce40 = NULL;
+}
+((struct instance_standard__NativeArray*)var41)->values[1]=var_name;
 {
-((void (*)(val* self, val* p0, long p1))(var57->class->vft[COLOR_standard__array__Array__with_native]))(var57, var59, var58) /* with_native on <var57:Array[Object]>*/;
+var50 = ((val*(*)(val* self))(var41->class->vft[COLOR_standard__string__NativeArray__native_to_s]))(var41); /* native_to_s on <var41:NativeArray[String]>*/
 }
-}
+varonce40 = var41;
 {
-var60 = ((val* (*)(val* self))(var57->class->vft[COLOR_standard__string__Object__to_s]))(var57) /* to_s on <var57:Array[Object]>*/;
-}
-{
-nit__scope___nit__scope__ScopeVisitor___error(self, var_nlabel, var60); /* Direct call scope#ScopeVisitor#error on <self:ScopeVisitor>*/
+nit__scope___nit__scope__ScopeVisitor___error(self, var_nlabel, var50); /* Direct call scope#ScopeVisitor#error on <self:ScopeVisitor>*/
 }
 } else {
 }
 }
 } else {
-var61 = NULL;
-var_name = var61;
+var_name = ((val*)NULL);
 }
-var62 = NEW_nit__EscapeMark(&type_nit__EscapeMark);
+var51 = NEW_nit__EscapeMark(&type_nit__EscapeMark);
 {
-((void (*)(val* self, val* p0))(var62->class->vft[COLOR_nit__scope__EscapeMark__name_61d]))(var62, var_name) /* name= on <var62:EscapeMark>*/;
+((void(*)(val* self, val* p0))(var51->class->vft[COLOR_nit__scope__EscapeMark__name_61d]))(var51, var_name); /* name= on <var51:EscapeMark>*/
 }
 {
-((void (*)(val* self))(var62->class->vft[COLOR_standard__kernel__Object__init]))(var62) /* init on <var62:EscapeMark>*/;
+((void(*)(val* self))(var51->class->vft[COLOR_standard__kernel__Object__init]))(var51); /* init on <var51:EscapeMark>*/
 }
-var_res63 = var62;
+var_res52 = var51;
 if (var_for_loop){
-var64 = NEW_nit__EscapeMark(&type_nit__EscapeMark);
+var53 = NEW_nit__EscapeMark(&type_nit__EscapeMark);
 {
-((void (*)(val* self, val* p0))(var64->class->vft[COLOR_nit__scope__EscapeMark__name_61d]))(var64, var_name) /* name= on <var64:EscapeMark>*/;
+((void(*)(val* self, val* p0))(var53->class->vft[COLOR_nit__scope__EscapeMark__name_61d]))(var53, var_name); /* name= on <var53:EscapeMark>*/
 }
 {
-((void (*)(val* self))(var64->class->vft[COLOR_standard__kernel__Object__init]))(var64) /* init on <var64:EscapeMark>*/;
+((void(*)(val* self))(var53->class->vft[COLOR_standard__kernel__Object__init]))(var53); /* init on <var53:EscapeMark>*/
 }
 {
-{ /* Inline scope#EscapeMark#continue_mark= (var_res63,var64) on <var_res63:EscapeMark> */
-var_res63->attrs[COLOR_nit__scope__EscapeMark___continue_mark].val = var64; /* _continue_mark on <var_res63:EscapeMark> */
-RET_LABEL65:(void)0;
+{ /* Inline scope#EscapeMark#continue_mark= (var_res52,var53) on <var_res52:EscapeMark> */
+var_res52->attrs[COLOR_nit__scope__EscapeMark___continue_mark].val = var53; /* _continue_mark on <var_res52:EscapeMark> */
+RET_LABEL54:(void)0;
 }
 }
 } else {
 }
-var = var_res63;
+var = var_res52;
 goto RET_LABEL;
 RET_LABEL:;
 return var;
@@ -1226,190 +1163,170 @@ val* nit__scope___nit__scope__ScopeVisitor___get_escapemark(val* self, val* p0, 
 val* var /* : nullable EscapeMark */;
 val* var_node /* var node: ANode */;
 val* var_nlabel /* var nlabel: nullable ALabel */;
-val* var1 /* : null */;
+short int var1 /* : Bool */;
 short int var2 /* : Bool */;
-short int var3 /* : Bool */;
 val* var_other /* var other: nullable Object */;
+short int var4 /* : Bool */;
 short int var5 /* : Bool */;
-short int var6 /* : Bool */;
-val* var7 /* : nullable TId */;
-val* var9 /* : nullable TId */;
+val* var6 /* : nullable TId */;
+val* var8 /* : nullable TId */;
 val* var_nid /* var nid: nullable TId */;
-val* var10 /* : null */;
-short int var11 /* : Bool */;
-short int var12 /* : Bool */;
-val* var_other14 /* var other: nullable Object */;
+short int var9 /* : Bool */;
+short int var10 /* : Bool */;
+val* var_other12 /* var other: nullable Object */;
+short int var13 /* : Bool */;
 short int var15 /* : Bool */;
-short int var17 /* : Bool */;
 static val* varonce;
-val* var18 /* : String */;
-char* var19 /* : NativeString */;
-long var20 /* : Int */;
-val* var21 /* : FlatString */;
-val* var22 /* : nullable EscapeMark */;
+val* var16 /* : String */;
+char* var17 /* : NativeString */;
+val* var18 /* : FlatString */;
+val* var19 /* : nullable EscapeMark */;
 val* var_res /* var res: nullable EscapeMark */;
-val* var23 /* : null */;
-short int var24 /* : Bool */;
+short int var20 /* : Bool */;
+short int var21 /* : Bool */;
+short int var23 /* : Bool */;
 short int var25 /* : Bool */;
-short int var27 /* : Bool */;
-short int var29 /* : Bool */;
-static val* varonce30;
-val* var31 /* : String */;
-char* var32 /* : NativeString */;
-long var33 /* : Int */;
-val* var34 /* : FlatString */;
-val* var35 /* : null */;
-val* var36 /* : String */;
+static val* varonce26;
+val* var27 /* : String */;
+char* var28 /* : NativeString */;
+val* var29 /* : FlatString */;
+val* var30 /* : String */;
 val* var_name /* var name: String */;
-val* var37 /* : nullable EscapeMark */;
-val* var_res38 /* var res: nullable EscapeMark */;
-val* var39 /* : null */;
-short int var40 /* : Bool */;
-short int var41 /* : Bool */;
-short int var43 /* : Bool */;
-short int var45 /* : Bool */;
-static val* varonce46;
-val* var47 /* : String */;
-char* var48 /* : NativeString */;
-long var49 /* : Int */;
-val* var50 /* : FlatString */;
-static val* varonce51;
-val* var52 /* : String */;
-char* var53 /* : NativeString */;
-long var54 /* : Int */;
-val* var55 /* : FlatString */;
-val* var56 /* : Array[Object] */;
-long var57 /* : Int */;
-val* var58 /* : NativeArray[Object] */;
-val* var59 /* : String */;
-val* var60 /* : null */;
-val* var61 /* : List[Scope] */;
-val* var63 /* : List[Scope] */;
+val* var31 /* : nullable EscapeMark */;
+val* var_res32 /* var res: nullable EscapeMark */;
+short int var33 /* : Bool */;
+short int var34 /* : Bool */;
+short int var36 /* : Bool */;
+short int var38 /* : Bool */;
+val* var40 /* : NativeArray[String] */;
+static val* varonce39;
+static val* varonce41;
+val* var42 /* : String */;
+char* var43 /* : NativeString */;
+val* var44 /* : FlatString */;
+static val* varonce45;
+val* var46 /* : String */;
+char* var47 /* : NativeString */;
+val* var48 /* : FlatString */;
+val* var49 /* : String */;
+val* var50 /* : List[Scope] */;
+val* var52 /* : List[Scope] */;
 val* var_ /* var : List[Scope] */;
-val* var64 /* : ListIterator[nullable Object] */;
-val* var_65 /* var : ListIterator[Scope] */;
-short int var66 /* : Bool */;
-val* var67 /* : nullable Object */;
+val* var53 /* : ListIterator[nullable Object] */;
+val* var_54 /* var : ListIterator[Scope] */;
+short int var55 /* : Bool */;
+val* var56 /* : nullable Object */;
 val* var_scope /* var scope: Scope */;
-val* var68 /* : nullable EscapeMark */;
-val* var70 /* : nullable EscapeMark */;
-val* var_res71 /* var res: nullable EscapeMark */;
-val* var72 /* : null */;
-short int var73 /* : Bool */;
-short int var74 /* : Bool */;
-short int var76 /* : Bool */;
-short int var77 /* : Bool */;
-static val* varonce79;
-val* var80 /* : String */;
-char* var81 /* : NativeString */;
-long var82 /* : Int */;
-val* var83 /* : FlatString */;
-val* var84 /* : null */;
+val* var57 /* : nullable EscapeMark */;
+val* var59 /* : nullable EscapeMark */;
+val* var_res60 /* var res: nullable EscapeMark */;
+short int var61 /* : Bool */;
+short int var62 /* : Bool */;
+short int var64 /* : Bool */;
+short int var65 /* : Bool */;
+static val* varonce67;
+val* var68 /* : String */;
+char* var69 /* : NativeString */;
+val* var70 /* : FlatString */;
 var_node = p0;
 var_nlabel = p1;
-var1 = NULL;
 if (var_nlabel == NULL) {
-var2 = 0; /* is null */
+var1 = 0; /* is null */
 } else {
-var2 = 1; /* arg is null and recv is not */
+var1 = 1; /* arg is null and recv is not */
 }
 if (0) {
-{ /* Inline kernel#Object#!= (var_nlabel,var1) on <var_nlabel:nullable ALabel> */
-var_other = var1;
+{ /* Inline kernel#Object#!= (var_nlabel,((val*)NULL)) on <var_nlabel:nullable ALabel> */
+var_other = ((val*)NULL);
 {
-var5 = ((short int (*)(val* self, val* p0))(var_nlabel->class->vft[COLOR_standard__kernel__Object___61d_61d]))(var_nlabel, var_other) /* == on <var_nlabel:nullable ALabel(ALabel)>*/;
+var4 = ((short int(*)(val* self, val* p0))(var_nlabel->class->vft[COLOR_standard__kernel__Object___61d_61d]))(var_nlabel, var_other); /* == on <var_nlabel:nullable ALabel(ALabel)>*/
 }
-var6 = !var5;
-var3 = var6;
-goto RET_LABEL4;
-RET_LABEL4:(void)0;
+var5 = !var4;
+var2 = var5;
+goto RET_LABEL3;
+RET_LABEL3:(void)0;
 }
-var2 = var3;
+var1 = var2;
 }
-if (var2){
+if (var1){
 {
 { /* Inline parser_nodes#ALabel#n_id (var_nlabel) on <var_nlabel:nullable ALabel(ALabel)> */
-var9 = var_nlabel->attrs[COLOR_nit__parser_nodes__ALabel___n_id].val; /* _n_id on <var_nlabel:nullable ALabel(ALabel)> */
-var7 = var9;
-RET_LABEL8:(void)0;
+var8 = var_nlabel->attrs[COLOR_nit__parser_nodes__ALabel___n_id].val; /* _n_id on <var_nlabel:nullable ALabel(ALabel)> */
+var6 = var8;
+RET_LABEL7:(void)0;
 }
 }
-var_nid = var7;
-var10 = NULL;
+var_nid = var6;
 if (var_nid == NULL) {
-var11 = 1; /* is null */
+var9 = 1; /* is null */
 } else {
-var11 = 0; /* arg is null but recv is not */
+var9 = 0; /* arg is null but recv is not */
 }
 if (0) {
-{ /* Inline kernel#Object#== (var_nid,var10) on <var_nid:nullable TId> */
-var_other14 = var10;
+{ /* Inline kernel#Object#== (var_nid,((val*)NULL)) on <var_nid:nullable TId> */
+var_other12 = ((val*)NULL);
 {
-{ /* Inline kernel#Object#is_same_instance (var_nid,var_other14) on <var_nid:nullable TId(TId)> */
-var17 = var_nid == var_other14;
-var15 = var17;
-goto RET_LABEL16;
-RET_LABEL16:(void)0;
+{ /* Inline kernel#Object#is_same_instance (var_nid,var_other12) on <var_nid:nullable TId(TId)> */
+var15 = var_nid == var_other12;
+var13 = var15;
+goto RET_LABEL14;
+RET_LABEL14:(void)0;
 }
 }
-var12 = var15;
-goto RET_LABEL13;
-RET_LABEL13:(void)0;
+var10 = var13;
+goto RET_LABEL11;
+RET_LABEL11:(void)0;
 }
-var11 = var12;
+var9 = var10;
 }
-if (var11){
-if (varonce) {
-var18 = varonce;
+if (var9){
+if (likely(varonce!=NULL)) {
+var16 = varonce;
 } else {
-var19 = "";
-var20 = 0;
-var21 = standard___standard__NativeString___to_s_with_length(var19, var20);
-var18 = var21;
-varonce = var18;
+var17 = "";
+var18 = standard___standard__NativeString___to_s_with_length(var17, 0l);
+var16 = var18;
+varonce = var16;
 }
 {
-var22 = nit__scope___nit__scope__ScopeVisitor___search_label(self, var18);
+var19 = nit__scope___nit__scope__ScopeVisitor___search_label(self, var16);
 }
-var_res = var22;
-var23 = NULL;
+var_res = var19;
 if (var_res == NULL) {
-var24 = 1; /* is null */
+var20 = 1; /* is null */
 } else {
-var24 = 0; /* arg is null but recv is not */
+var20 = 0; /* arg is null but recv is not */
 }
 if (0) {
-{ /* Inline kernel#Object#== (var_res,var23) on <var_res:nullable EscapeMark> */
-var_other14 = var23;
+{ /* Inline kernel#Object#== (var_res,((val*)NULL)) on <var_res:nullable EscapeMark> */
+var_other12 = ((val*)NULL);
 {
-{ /* Inline kernel#Object#is_same_instance (var_res,var_other14) on <var_res:nullable EscapeMark(EscapeMark)> */
-var29 = var_res == var_other14;
-var27 = var29;
-goto RET_LABEL28;
-RET_LABEL28:(void)0;
+{ /* Inline kernel#Object#is_same_instance (var_res,var_other12) on <var_res:nullable EscapeMark(EscapeMark)> */
+var25 = var_res == var_other12;
+var23 = var25;
+goto RET_LABEL24;
+RET_LABEL24:(void)0;
 }
 }
-var25 = var27;
-goto RET_LABEL26;
-RET_LABEL26:(void)0;
+var21 = var23;
+goto RET_LABEL22;
+RET_LABEL22:(void)0;
 }
-var24 = var25;
+var20 = var21;
 }
-if (var24){
-if (varonce30) {
-var31 = varonce30;
+if (var20){
+if (likely(varonce26!=NULL)) {
+var27 = varonce26;
 } else {
-var32 = "Syntax error: invalid anonymous label.";
-var33 = 38;
-var34 = standard___standard__NativeString___to_s_with_length(var32, var33);
-var31 = var34;
-varonce30 = var31;
+var28 = "Syntax Error: invalid anonymous label.";
+var29 = standard___standard__NativeString___to_s_with_length(var28, 38l);
+var27 = var29;
+varonce26 = var27;
 }
 {
-nit__scope___nit__scope__ScopeVisitor___error(self, var_nlabel, var31); /* Direct call scope#ScopeVisitor#error on <self:ScopeVisitor>*/
+nit__scope___nit__scope__ScopeVisitor___error(self, var_nlabel, var27); /* Direct call scope#ScopeVisitor#error on <self:ScopeVisitor>*/
 }
-var35 = NULL;
-var = var35;
+var = ((val*)NULL);
 goto RET_LABEL;
 } else {
 }
@@ -1418,140 +1335,134 @@ goto RET_LABEL;
 } else {
 }
 {
-var36 = nit__lexer_work___Token___text(var_nid);
+var30 = nit__lexer_work___Token___text(var_nid);
 }
-var_name = var36;
+var_name = var30;
 {
-var37 = nit__scope___nit__scope__ScopeVisitor___search_label(self, var_name);
+var31 = nit__scope___nit__scope__ScopeVisitor___search_label(self, var_name);
 }
-var_res38 = var37;
-var39 = NULL;
-if (var_res38 == NULL) {
-var40 = 1; /* is null */
+var_res32 = var31;
+if (var_res32 == NULL) {
+var33 = 1; /* is null */
 } else {
-var40 = 0; /* arg is null but recv is not */
+var33 = 0; /* arg is null but recv is not */
 }
 if (0) {
-{ /* Inline kernel#Object#== (var_res38,var39) on <var_res38:nullable EscapeMark> */
-var_other14 = var39;
+{ /* Inline kernel#Object#== (var_res32,((val*)NULL)) on <var_res32:nullable EscapeMark> */
+var_other12 = ((val*)NULL);
 {
-{ /* Inline kernel#Object#is_same_instance (var_res38,var_other14) on <var_res38:nullable EscapeMark(EscapeMark)> */
-var45 = var_res38 == var_other14;
-var43 = var45;
-goto RET_LABEL44;
-RET_LABEL44:(void)0;
+{ /* Inline kernel#Object#is_same_instance (var_res32,var_other12) on <var_res32:nullable EscapeMark(EscapeMark)> */
+var38 = var_res32 == var_other12;
+var36 = var38;
+goto RET_LABEL37;
+RET_LABEL37:(void)0;
 }
 }
-var41 = var43;
-goto RET_LABEL42;
-RET_LABEL42:(void)0;
+var34 = var36;
+goto RET_LABEL35;
+RET_LABEL35:(void)0;
 }
-var40 = var41;
+var33 = var34;
 }
-if (var40){
-if (varonce46) {
-var47 = varonce46;
+if (var33){
+if (unlikely(varonce39==NULL)) {
+var40 = NEW_standard__NativeArray(3l, &type_standard__NativeArray__standard__String);
+if (likely(varonce41!=NULL)) {
+var42 = varonce41;
 } else {
-var48 = "Syntax error: invalid label ";
-var49 = 28;
-var50 = standard___standard__NativeString___to_s_with_length(var48, var49);
-var47 = var50;
-varonce46 = var47;
+var43 = "Syntax Error: invalid label `";
+var44 = standard___standard__NativeString___to_s_with_length(var43, 29l);
+var42 = var44;
+varonce41 = var42;
 }
-if (varonce51) {
-var52 = varonce51;
+((struct instance_standard__NativeArray*)var40)->values[0]=var42;
+if (likely(varonce45!=NULL)) {
+var46 = varonce45;
 } else {
-var53 = ".";
-var54 = 1;
-var55 = standard___standard__NativeString___to_s_with_length(var53, var54);
-var52 = var55;
-varonce51 = var52;
+var47 = "`.";
+var48 = standard___standard__NativeString___to_s_with_length(var47, 2l);
+var46 = var48;
+varonce45 = var46;
 }
-var56 = NEW_standard__Array(&type_standard__Array__standard__Object);
-{ /* var56 = array_instance Array[Object] */
-var57 = 3;
-var58 = NEW_standard__NativeArray(var57, &type_standard__NativeArray__standard__Object);
-((struct instance_standard__NativeArray*)var58)->values[0] = (val*) var47;
-((struct instance_standard__NativeArray*)var58)->values[1] = (val*) var_name;
-((struct instance_standard__NativeArray*)var58)->values[2] = (val*) var52;
+((struct instance_standard__NativeArray*)var40)->values[2]=var46;
+} else {
+var40 = varonce39;
+varonce39 = NULL;
+}
+((struct instance_standard__NativeArray*)var40)->values[1]=var_name;
 {
-((void (*)(val* self, val* p0, long p1))(var56->class->vft[COLOR_standard__array__Array__with_native]))(var56, var58, var57) /* with_native on <var56:Array[Object]>*/;
+var49 = ((val*(*)(val* self))(var40->class->vft[COLOR_standard__string__NativeArray__native_to_s]))(var40); /* native_to_s on <var40:NativeArray[String]>*/
 }
-}
+varonce39 = var40;
 {
-var59 = ((val* (*)(val* self))(var56->class->vft[COLOR_standard__string__Object__to_s]))(var56) /* to_s on <var56:Array[Object]>*/;
+nit__scope___nit__scope__ScopeVisitor___error(self, var_nlabel, var49); /* Direct call scope#ScopeVisitor#error on <self:ScopeVisitor>*/
 }
-{
-nit__scope___nit__scope__ScopeVisitor___error(self, var_nlabel, var59); /* Direct call scope#ScopeVisitor#error on <self:ScopeVisitor>*/
-}
-var60 = NULL;
-var = var60;
+var = ((val*)NULL);
 goto RET_LABEL;
 } else {
 }
-var = var_res38;
+var = var_res32;
 goto RET_LABEL;
 } else {
 {
 { /* Inline scope#ScopeVisitor#scopes (self) on <self:ScopeVisitor> */
-var63 = self->attrs[COLOR_nit__scope__ScopeVisitor___scopes].val; /* _scopes on <self:ScopeVisitor> */
-if (unlikely(var63 == NULL)) {
+var52 = self->attrs[COLOR_nit__scope__ScopeVisitor___scopes].val; /* _scopes on <self:ScopeVisitor> */
+if (unlikely(var52 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _scopes");
 PRINT_ERROR(" (%s:%d)\n", FILE_nit__scope, 80);
-show_backtrace(1);
+fatal_exit(1);
 }
-var61 = var63;
-RET_LABEL62:(void)0;
+var50 = var52;
+RET_LABEL51:(void)0;
 }
 }
-var_ = var61;
+var_ = var50;
 {
-var64 = standard___standard__List___standard__abstract_collection__Collection__iterator(var_);
+var53 = standard___standard__List___standard__abstract_collection__Collection__iterator(var_);
 }
-var_65 = var64;
+var_54 = var53;
 for(;;) {
 {
-var66 = standard___standard__ListIterator___standard__abstract_collection__Iterator__is_ok(var_65);
+var55 = standard___standard__ListIterator___standard__abstract_collection__Iterator__is_ok(var_54);
 }
-if (var66){
+if (var55){
 {
-var67 = standard___standard__ListIterator___standard__abstract_collection__Iterator__item(var_65);
+var56 = standard___standard__ListIterator___standard__abstract_collection__Iterator__item(var_54);
 }
-var_scope = var67;
+var_scope = var56;
 {
 { /* Inline scope#Scope#escapemark (var_scope) on <var_scope:Scope> */
-var70 = var_scope->attrs[COLOR_nit__scope__Scope___escapemark].val; /* _escapemark on <var_scope:Scope> */
-var68 = var70;
-RET_LABEL69:(void)0;
+var59 = var_scope->attrs[COLOR_nit__scope__Scope___escapemark].val; /* _escapemark on <var_scope:Scope> */
+var57 = var59;
+RET_LABEL58:(void)0;
 }
 }
-var_res71 = var68;
-var72 = NULL;
-if (var_res71 == NULL) {
-var73 = 0; /* is null */
+var_res60 = var57;
+if (var_res60 == NULL) {
+var61 = 0; /* is null */
 } else {
-var73 = 1; /* arg is null and recv is not */
+var61 = 1; /* arg is null and recv is not */
 }
 if (0) {
-{ /* Inline kernel#Object#!= (var_res71,var72) on <var_res71:nullable EscapeMark> */
-var_other = var72;
+{ /* Inline kernel#Object#!= (var_res60,((val*)NULL)) on <var_res60:nullable EscapeMark> */
+var_other = ((val*)NULL);
 {
-var76 = ((short int (*)(val* self, val* p0))(var_res71->class->vft[COLOR_standard__kernel__Object___61d_61d]))(var_res71, var_other) /* == on <var_res71:nullable EscapeMark(EscapeMark)>*/;
+var64 = ((short int(*)(val* self, val* p0))(var_res60->class->vft[COLOR_standard__kernel__Object___61d_61d]))(var_res60, var_other); /* == on <var_res60:nullable EscapeMark(EscapeMark)>*/
 }
-var77 = !var76;
-var74 = var77;
-goto RET_LABEL75;
-RET_LABEL75:(void)0;
+var65 = !var64;
+var62 = var65;
+goto RET_LABEL63;
+RET_LABEL63:(void)0;
 }
-var73 = var74;
+var61 = var62;
 }
-if (var73){
-var = var_res71;
+if (var61){
+var = var_res60;
 goto RET_LABEL;
 } else {
 }
 {
-standard___standard__ListIterator___standard__abstract_collection__Iterator__next(var_65); /* Direct call list#ListIterator#next on <var_65:ListIterator[Scope]>*/
+standard___standard__ListIterator___standard__abstract_collection__Iterator__next(var_54); /* Direct call list#ListIterator#next on <var_54:ListIterator[Scope]>*/
 }
 } else {
 goto BREAK_label;
@@ -1559,24 +1470,22 @@ goto BREAK_label;
 }
 BREAK_label: (void)0;
 {
-{ /* Inline abstract_collection#Iterator#finish (var_65) on <var_65:ListIterator[Scope]> */
-RET_LABEL78:(void)0;
+{ /* Inline abstract_collection#Iterator#finish (var_54) on <var_54:ListIterator[Scope]> */
+RET_LABEL66:(void)0;
 }
 }
-if (varonce79) {
-var80 = varonce79;
+if (likely(varonce67!=NULL)) {
+var68 = varonce67;
 } else {
-var81 = "Syntax Error: \'break\' statement outside block.";
-var82 = 46;
-var83 = standard___standard__NativeString___to_s_with_length(var81, var82);
-var80 = var83;
-varonce79 = var80;
+var69 = "Syntax Error: `break` statement outside block.";
+var70 = standard___standard__NativeString___to_s_with_length(var69, 46l);
+var68 = var70;
+varonce67 = var68;
 }
 {
-nit__scope___nit__scope__ScopeVisitor___error(self, var_node, var80); /* Direct call scope#ScopeVisitor#error on <self:ScopeVisitor>*/
+nit__scope___nit__scope__ScopeVisitor___error(self, var_node, var68); /* Direct call scope#ScopeVisitor#error on <self:ScopeVisitor>*/
 }
-var84 = NULL;
-var = var84;
+var = ((val*)NULL);
 goto RET_LABEL;
 }
 RET_LABEL:;
@@ -1589,6 +1498,7 @@ val* var_message /* var message: String */;
 val* var /* : ToolContext */;
 val* var2 /* : ToolContext */;
 val* var3 /* : Location */;
+val* var4 /* : Message */;
 var_node = p0;
 var_message = p1;
 {
@@ -1597,17 +1507,17 @@ var2 = self->attrs[COLOR_nit__scope__ScopeVisitor___toolcontext].val; /* _toolco
 if (unlikely(var2 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _toolcontext");
 PRINT_ERROR(" (%s:%d)\n", FILE_nit__scope, 70);
-show_backtrace(1);
+fatal_exit(1);
 }
 var = var2;
 RET_LABEL1:(void)0;
 }
 }
 {
-var3 = ((val* (*)(val* self))(var_node->class->vft[COLOR_nit__parser_nodes__ANode__hot_location]))(var_node) /* hot_location on <var_node:ANode>*/;
+var3 = ((val*(*)(val* self))(var_node->class->vft[COLOR_nit__parser_nodes__ANode__hot_location]))(var_node); /* hot_location on <var_node:ANode>*/
 }
 {
-nit___nit__ToolContext___error(var, var3, var_message); /* Direct call toolcontext#ToolContext#error on <var:ToolContext>*/
+var4 = nit___nit__ToolContext___error(var, var3, var_message);
 }
 RET_LABEL:;
 }
@@ -1619,7 +1529,7 @@ var1 = self->attrs[COLOR_nit__scope__Scope___variables].val; /* _variables on <s
 if (unlikely(var1 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _variables");
 PRINT_ERROR(" (%s:%d)\n", FILE_nit__scope, 225);
-show_backtrace(1);
+fatal_exit(1);
 }
 var = var1;
 RET_LABEL:;
@@ -1649,7 +1559,6 @@ short int var4 /* : Bool */;
 val* var5 /* : HashMap[String, Variable] */;
 val* var7 /* : HashMap[String, Variable] */;
 val* var8 /* : nullable Object */;
-val* var9 /* : null */;
 var_name = p0;
 {
 { /* Inline scope#Scope#variables (self) on <self:Scope> */
@@ -1657,14 +1566,14 @@ var3 = self->attrs[COLOR_nit__scope__Scope___variables].val; /* _variables on <s
 if (unlikely(var3 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _variables");
 PRINT_ERROR(" (%s:%d)\n", FILE_nit__scope, 225);
-show_backtrace(1);
+fatal_exit(1);
 }
 var1 = var3;
 RET_LABEL2:(void)0;
 }
 }
 {
-var4 = standard___standard__MapRead___has_key(var1, var_name);
+var4 = standard___standard__HashMap___standard__abstract_collection__MapRead__has_key(var1, var_name);
 }
 if (var4){
 {
@@ -1673,7 +1582,7 @@ var7 = self->attrs[COLOR_nit__scope__Scope___variables].val; /* _variables on <s
 if (unlikely(var7 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _variables");
 PRINT_ERROR(" (%s:%d)\n", FILE_nit__scope, 225);
-show_backtrace(1);
+fatal_exit(1);
 }
 var5 = var7;
 RET_LABEL6:(void)0;
@@ -1685,8 +1594,7 @@ var8 = standard___standard__HashMap___standard__abstract_collection__MapRead___9
 var = var8;
 goto RET_LABEL;
 } else {
-var9 = NULL;
-var = var9;
+var = ((val*)NULL);
 goto RET_LABEL;
 }
 RET_LABEL:;
@@ -1697,7 +1605,7 @@ void nit__scope___ANode___accept_scope_visitor(val* self, val* p0) {
 val* var_v /* var v: ScopeVisitor */;
 var_v = p0;
 {
-((void (*)(val* self, val* p0))(self->class->vft[COLOR_nit__parser_nodes__ANode__visit_all]))(self, var_v) /* visit_all on <self:ANode>*/;
+((void(*)(val* self, val* p0))(self->class->vft[COLOR_nit__parser_nodes__ANode__visit_all]))(self, var_v); /* visit_all on <self:ANode>*/
 }
 RET_LABEL:;
 }
@@ -1709,10 +1617,10 @@ val* var_v /* var v: ScopeVisitor */;
 var_toolcontext = p0;
 var = NEW_nit__scope__ScopeVisitor(&type_nit__scope__ScopeVisitor);
 {
-((void (*)(val* self, val* p0))(var->class->vft[COLOR_nit__scope__ScopeVisitor__toolcontext_61d]))(var, var_toolcontext) /* toolcontext= on <var:ScopeVisitor>*/;
+((void(*)(val* self, val* p0))(var->class->vft[COLOR_nit__scope__ScopeVisitor__toolcontext_61d]))(var, var_toolcontext); /* toolcontext= on <var:ScopeVisitor>*/
 }
 {
-((void (*)(val* self))(var->class->vft[COLOR_standard__kernel__Object__init]))(var) /* init on <var:ScopeVisitor>*/;
+((void(*)(val* self))(var->class->vft[COLOR_standard__kernel__Object__init]))(var); /* init on <var:ScopeVisitor>*/
 }
 var_v = var;
 {
@@ -1749,15 +1657,15 @@ val* var_variable /* var variable: Variable */;
 short int var5 /* : Bool */;
 var_v = p0;
 {
-((void (*)(val* self, val* p0))(self->class->vft[COLOR_nit__scope___AParam___ANode__accept_scope_visitor]))(self, p0) /* accept_scope_visitor on <self:AParam>*/;
+((void(*)(val* self, val* p0))(self->class->vft[COLOR_nit__scope___AParam___ANode__accept_scope_visitor]))(self, p0); /* accept_scope_visitor on <self:AParam>*/
 }
 {
 { /* Inline parser_nodes#AParam#n_id (self) on <self:AParam> */
 var2 = self->attrs[COLOR_nit__parser_nodes__AParam___n_id].val; /* _n_id on <self:AParam> */
 if (unlikely(var2 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _n_id");
-PRINT_ERROR(" (%s:%d)\n", FILE_nit__parser_nodes, 1520);
-show_backtrace(1);
+PRINT_ERROR(" (%s:%d)\n", FILE_nit__parser_nodes, 1707);
+fatal_exit(1);
 }
 var = var2;
 RET_LABEL1:(void)0;
@@ -1769,10 +1677,10 @@ var3 = NEW_nit__Variable(&type_nit__Variable);
 var4 = nit__lexer_work___Token___text(var_nid);
 }
 {
-((void (*)(val* self, val* p0))(var3->class->vft[COLOR_nit__scope__Variable__name_61d]))(var3, var4) /* name= on <var3:Variable>*/;
+((void(*)(val* self, val* p0))(var3->class->vft[COLOR_nit__scope__Variable__name_61d]))(var3, var4); /* name= on <var3:Variable>*/
 }
 {
-((void (*)(val* self))(var3->class->vft[COLOR_standard__kernel__Object__init]))(var3) /* init on <var3:Variable>*/;
+((void(*)(val* self))(var3->class->vft[COLOR_standard__kernel__Object__init]))(var3); /* init on <var3:Variable>*/
 }
 var_variable = var3;
 {
@@ -1810,18 +1718,17 @@ val* var3 /* : Variable */;
 val* var4 /* : String */;
 val* var_variable /* var variable: Variable */;
 short int var5 /* : Bool */;
-short int var6 /* : Bool */;
 var_v = p0;
 {
-((void (*)(val* self, val* p0))(self->class->vft[COLOR_nit__scope___AVardeclExpr___ANode__accept_scope_visitor]))(self, p0) /* accept_scope_visitor on <self:AVardeclExpr>*/;
+((void(*)(val* self, val* p0))(self->class->vft[COLOR_nit__scope___AVardeclExpr___ANode__accept_scope_visitor]))(self, p0); /* accept_scope_visitor on <self:AVardeclExpr>*/
 }
 {
 { /* Inline parser_nodes#AVardeclExpr#n_id (self) on <self:AVardeclExpr> */
 var2 = self->attrs[COLOR_nit__parser_nodes__AVardeclExpr___n_id].val; /* _n_id on <self:AVardeclExpr> */
 if (unlikely(var2 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _n_id");
-PRINT_ERROR(" (%s:%d)\n", FILE_nit__parser_nodes, 1580);
-show_backtrace(1);
+PRINT_ERROR(" (%s:%d)\n", FILE_nit__parser_nodes, 1773);
+fatal_exit(1);
 }
 var = var2;
 RET_LABEL1:(void)0;
@@ -1833,26 +1740,25 @@ var3 = NEW_nit__Variable(&type_nit__Variable);
 var4 = nit__lexer_work___Token___text(var_nid);
 }
 {
-((void (*)(val* self, val* p0))(var3->class->vft[COLOR_nit__scope__Variable__name_61d]))(var3, var4) /* name= on <var3:Variable>*/;
+((void(*)(val* self, val* p0))(var3->class->vft[COLOR_nit__scope__Variable__name_61d]))(var3, var4); /* name= on <var3:Variable>*/
 }
 {
-((void (*)(val* self))(var3->class->vft[COLOR_standard__kernel__Object__init]))(var3) /* init on <var3:Variable>*/;
+((void(*)(val* self))(var3->class->vft[COLOR_standard__kernel__Object__init]))(var3); /* init on <var3:Variable>*/
 }
 var_variable = var3;
 {
 var5 = nit__scope___nit__scope__ScopeVisitor___register_variable(var_v, var_nid, var_variable);
 }
-var6 = 1;
 {
-{ /* Inline scope#Variable#warn_unread= (var_variable,var6) on <var_variable:Variable> */
-var_variable->attrs[COLOR_nit__scope__Variable___warn_unread].s = var6; /* _warn_unread on <var_variable:Variable> */
-RET_LABEL7:(void)0;
+{ /* Inline scope#Variable#warn_unread= (var_variable,1) on <var_variable:Variable> */
+var_variable->attrs[COLOR_nit__scope__Variable___warn_unread].s = 1; /* _warn_unread on <var_variable:Variable> */
+RET_LABEL6:(void)0;
 }
 }
 {
 { /* Inline scope#AVardeclExpr#variable= (self,var_variable) on <self:AVardeclExpr> */
 self->attrs[COLOR_nit__scope__AVardeclExpr___variable].val = var_variable; /* _variable on <self:AVardeclExpr> */
-RET_LABEL8:(void)0;
+RET_LABEL7:(void)0;
 }
 }
 RET_LABEL:;
@@ -1869,7 +1775,7 @@ val* var /* : Variable */;
 val* var2 /* : Variable */;
 var_v = p0;
 {
-((void (*)(val* self, val* p0))(self->class->vft[COLOR_nit__scope___ASelfExpr___ANode__accept_scope_visitor]))(self, p0) /* accept_scope_visitor on <self:ASelfExpr>*/;
+((void(*)(val* self, val* p0))(self->class->vft[COLOR_nit__scope___ASelfExpr___ANode__accept_scope_visitor]))(self, p0); /* accept_scope_visitor on <self:ASelfExpr>*/
 }
 {
 { /* Inline scope#ScopeVisitor#selfvariable (var_v) on <var_v:ScopeVisitor> */
@@ -1877,7 +1783,7 @@ var2 = var_v->attrs[COLOR_nit__scope__ScopeVisitor___selfvariable].val; /* _self
 if (unlikely(var2 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _selfvariable");
 PRINT_ERROR(" (%s:%d)\n", FILE_nit__scope, 73);
-show_backtrace(1);
+fatal_exit(1);
 }
 var = var2;
 RET_LABEL1:(void)0;
@@ -1912,29 +1818,26 @@ val* var /* : nullable ALabel */;
 val* var2 /* : nullable ALabel */;
 val* var3 /* : nullable EscapeMark */;
 val* var_escapemark /* var escapemark: nullable EscapeMark */;
-val* var4 /* : null */;
+short int var4 /* : Bool */;
 short int var5 /* : Bool */;
-short int var6 /* : Bool */;
 val* var_other /* var other: nullable Object */;
-short int var8 /* : Bool */;
-short int var10 /* : Bool */;
-val* var11 /* : nullable EscapeMark */;
-val* var13 /* : nullable EscapeMark */;
-val* var14 /* : null */;
-short int var15 /* : Bool */;
+short int var7 /* : Bool */;
+short int var9 /* : Bool */;
+val* var10 /* : nullable EscapeMark */;
+val* var12 /* : nullable EscapeMark */;
+short int var13 /* : Bool */;
+short int var14 /* : Bool */;
 short int var16 /* : Bool */;
 short int var18 /* : Bool */;
-short int var20 /* : Bool */;
 static val* varonce;
-val* var21 /* : String */;
-char* var22 /* : NativeString */;
-long var23 /* : Int */;
-val* var24 /* : FlatString */;
-val* var25 /* : Array[AEscapeExpr] */;
-val* var27 /* : Array[AEscapeExpr] */;
+val* var19 /* : String */;
+char* var20 /* : NativeString */;
+val* var21 /* : FlatString */;
+val* var22 /* : Array[AEscapeExpr] */;
+val* var24 /* : Array[AEscapeExpr] */;
 var_v = p0;
 {
-((void (*)(val* self, val* p0))(self->class->vft[COLOR_nit__scope___AContinueExpr___ANode__accept_scope_visitor]))(self, p0) /* accept_scope_visitor on <self:AContinueExpr>*/;
+((void(*)(val* self, val* p0))(self->class->vft[COLOR_nit__scope___AContinueExpr___ANode__accept_scope_visitor]))(self, p0); /* accept_scope_visitor on <self:AContinueExpr>*/
 }
 {
 { /* Inline parser_nodes#ALabelable#n_label (self) on <self:AContinueExpr> */
@@ -1947,99 +1850,96 @@ RET_LABEL1:(void)0;
 var3 = nit__scope___nit__scope__ScopeVisitor___get_escapemark(var_v, self, var);
 }
 var_escapemark = var3;
-var4 = NULL;
 if (var_escapemark == NULL) {
-var5 = 1; /* is null */
+var4 = 1; /* is null */
 } else {
-var5 = 0; /* arg is null but recv is not */
+var4 = 0; /* arg is null but recv is not */
 }
 if (0) {
-{ /* Inline kernel#Object#== (var_escapemark,var4) on <var_escapemark:nullable EscapeMark> */
-var_other = var4;
+{ /* Inline kernel#Object#== (var_escapemark,((val*)NULL)) on <var_escapemark:nullable EscapeMark> */
+var_other = ((val*)NULL);
 {
 { /* Inline kernel#Object#is_same_instance (var_escapemark,var_other) on <var_escapemark:nullable EscapeMark(EscapeMark)> */
-var10 = var_escapemark == var_other;
-var8 = var10;
-goto RET_LABEL9;
-RET_LABEL9:(void)0;
+var9 = var_escapemark == var_other;
+var7 = var9;
+goto RET_LABEL8;
+RET_LABEL8:(void)0;
 }
 }
-var6 = var8;
-goto RET_LABEL7;
-RET_LABEL7:(void)0;
+var5 = var7;
+goto RET_LABEL6;
+RET_LABEL6:(void)0;
 }
-var5 = var6;
+var4 = var5;
 }
-if (var5){
+if (var4){
 goto RET_LABEL;
 } else {
 }
 {
 { /* Inline scope#EscapeMark#continue_mark (var_escapemark) on <var_escapemark:nullable EscapeMark(EscapeMark)> */
-var13 = var_escapemark->attrs[COLOR_nit__scope__EscapeMark___continue_mark].val; /* _continue_mark on <var_escapemark:nullable EscapeMark(EscapeMark)> */
-var11 = var13;
-RET_LABEL12:(void)0;
+var12 = var_escapemark->attrs[COLOR_nit__scope__EscapeMark___continue_mark].val; /* _continue_mark on <var_escapemark:nullable EscapeMark(EscapeMark)> */
+var10 = var12;
+RET_LABEL11:(void)0;
 }
 }
-var_escapemark = var11;
-var14 = NULL;
+var_escapemark = var10;
 if (var_escapemark == NULL) {
-var15 = 1; /* is null */
+var13 = 1; /* is null */
 } else {
-var15 = 0; /* arg is null but recv is not */
+var13 = 0; /* arg is null but recv is not */
 }
 if (0) {
-{ /* Inline kernel#Object#== (var_escapemark,var14) on <var_escapemark:nullable EscapeMark> */
-var_other = var14;
+{ /* Inline kernel#Object#== (var_escapemark,((val*)NULL)) on <var_escapemark:nullable EscapeMark> */
+var_other = ((val*)NULL);
 {
 { /* Inline kernel#Object#is_same_instance (var_escapemark,var_other) on <var_escapemark:nullable EscapeMark(EscapeMark)> */
-var20 = var_escapemark == var_other;
-var18 = var20;
-goto RET_LABEL19;
-RET_LABEL19:(void)0;
-}
-}
+var18 = var_escapemark == var_other;
 var16 = var18;
 goto RET_LABEL17;
 RET_LABEL17:(void)0;
 }
-var15 = var16;
 }
-if (var15){
-if (varonce) {
-var21 = varonce;
+var14 = var16;
+goto RET_LABEL15;
+RET_LABEL15:(void)0;
+}
+var13 = var14;
+}
+if (var13){
+if (likely(varonce!=NULL)) {
+var19 = varonce;
 } else {
-var22 = "Error: cannot \'continue\', only \'break\'.";
-var23 = 39;
-var24 = standard___standard__NativeString___to_s_with_length(var22, var23);
-var21 = var24;
-varonce = var21;
+var20 = "Error: cannot \'continue\', only \'break\'.";
+var21 = standard___standard__NativeString___to_s_with_length(var20, 39l);
+var19 = var21;
+varonce = var19;
 }
 {
-nit__scope___nit__scope__ScopeVisitor___error(var_v, self, var21); /* Direct call scope#ScopeVisitor#error on <var_v:ScopeVisitor>*/
+nit__scope___nit__scope__ScopeVisitor___error(var_v, self, var19); /* Direct call scope#ScopeVisitor#error on <var_v:ScopeVisitor>*/
 }
 goto RET_LABEL;
 } else {
 }
 {
 { /* Inline scope#EscapeMark#escapes (var_escapemark) on <var_escapemark:nullable EscapeMark(EscapeMark)> */
-var27 = var_escapemark->attrs[COLOR_nit__scope__EscapeMark___escapes].val; /* _escapes on <var_escapemark:nullable EscapeMark(EscapeMark)> */
-if (unlikely(var27 == NULL)) {
+var24 = var_escapemark->attrs[COLOR_nit__scope__EscapeMark___escapes].val; /* _escapes on <var_escapemark:nullable EscapeMark(EscapeMark)> */
+if (unlikely(var24 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _escapes");
 PRINT_ERROR(" (%s:%d)\n", FILE_nit__scope, 58);
-show_backtrace(1);
+fatal_exit(1);
 }
-var25 = var27;
-RET_LABEL26:(void)0;
+var22 = var24;
+RET_LABEL23:(void)0;
 }
 }
 {
-standard___standard__Array___standard__abstract_collection__SimpleCollection__add(var25, self); /* Direct call array#Array#add on <var25:Array[AEscapeExpr]>*/
+standard___standard__Array___standard__abstract_collection__SimpleCollection__add(var22, self); /* Direct call array#Array#add on <var22:Array[AEscapeExpr]>*/
 }
 {
 { /* Inline scope#AEscapeExpr#escapemark= (self,var_escapemark) on <self:AContinueExpr> */
 self->attrs[COLOR_nit__scope__AEscapeExpr___escapemark].val = var_escapemark; /* _escapemark on <self:AContinueExpr> */
-RET_LABEL28:(void)0;
+RET_LABEL25:(void)0;
 }
 }
 RET_LABEL:;
@@ -2051,17 +1951,16 @@ val* var /* : nullable ALabel */;
 val* var2 /* : nullable ALabel */;
 val* var3 /* : nullable EscapeMark */;
 val* var_escapemark /* var escapemark: nullable EscapeMark */;
-val* var4 /* : null */;
+short int var4 /* : Bool */;
 short int var5 /* : Bool */;
-short int var6 /* : Bool */;
 val* var_other /* var other: nullable Object */;
-short int var8 /* : Bool */;
-short int var10 /* : Bool */;
-val* var11 /* : Array[AEscapeExpr] */;
-val* var13 /* : Array[AEscapeExpr] */;
+short int var7 /* : Bool */;
+short int var9 /* : Bool */;
+val* var10 /* : Array[AEscapeExpr] */;
+val* var12 /* : Array[AEscapeExpr] */;
 var_v = p0;
 {
-((void (*)(val* self, val* p0))(self->class->vft[COLOR_nit__scope___ABreakExpr___ANode__accept_scope_visitor]))(self, p0) /* accept_scope_visitor on <self:ABreakExpr>*/;
+((void(*)(val* self, val* p0))(self->class->vft[COLOR_nit__scope___ABreakExpr___ANode__accept_scope_visitor]))(self, p0); /* accept_scope_visitor on <self:ABreakExpr>*/
 }
 {
 { /* Inline parser_nodes#ALabelable#n_label (self) on <self:ABreakExpr> */
@@ -2074,52 +1973,51 @@ RET_LABEL1:(void)0;
 var3 = nit__scope___nit__scope__ScopeVisitor___get_escapemark(var_v, self, var);
 }
 var_escapemark = var3;
-var4 = NULL;
 if (var_escapemark == NULL) {
-var5 = 1; /* is null */
+var4 = 1; /* is null */
 } else {
-var5 = 0; /* arg is null but recv is not */
+var4 = 0; /* arg is null but recv is not */
 }
 if (0) {
-{ /* Inline kernel#Object#== (var_escapemark,var4) on <var_escapemark:nullable EscapeMark> */
-var_other = var4;
+{ /* Inline kernel#Object#== (var_escapemark,((val*)NULL)) on <var_escapemark:nullable EscapeMark> */
+var_other = ((val*)NULL);
 {
 { /* Inline kernel#Object#is_same_instance (var_escapemark,var_other) on <var_escapemark:nullable EscapeMark(EscapeMark)> */
-var10 = var_escapemark == var_other;
-var8 = var10;
-goto RET_LABEL9;
-RET_LABEL9:(void)0;
+var9 = var_escapemark == var_other;
+var7 = var9;
+goto RET_LABEL8;
+RET_LABEL8:(void)0;
 }
 }
-var6 = var8;
-goto RET_LABEL7;
-RET_LABEL7:(void)0;
+var5 = var7;
+goto RET_LABEL6;
+RET_LABEL6:(void)0;
 }
-var5 = var6;
+var4 = var5;
 }
-if (var5){
+if (var4){
 goto RET_LABEL;
 } else {
 }
 {
 { /* Inline scope#EscapeMark#escapes (var_escapemark) on <var_escapemark:nullable EscapeMark(EscapeMark)> */
-var13 = var_escapemark->attrs[COLOR_nit__scope__EscapeMark___escapes].val; /* _escapes on <var_escapemark:nullable EscapeMark(EscapeMark)> */
-if (unlikely(var13 == NULL)) {
+var12 = var_escapemark->attrs[COLOR_nit__scope__EscapeMark___escapes].val; /* _escapes on <var_escapemark:nullable EscapeMark(EscapeMark)> */
+if (unlikely(var12 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _escapes");
 PRINT_ERROR(" (%s:%d)\n", FILE_nit__scope, 58);
-show_backtrace(1);
+fatal_exit(1);
 }
-var11 = var13;
-RET_LABEL12:(void)0;
+var10 = var12;
+RET_LABEL11:(void)0;
 }
 }
 {
-standard___standard__Array___standard__abstract_collection__SimpleCollection__add(var11, self); /* Direct call array#Array#add on <var11:Array[AEscapeExpr]>*/
+standard___standard__Array___standard__abstract_collection__SimpleCollection__add(var10, self); /* Direct call array#Array#add on <var10:Array[AEscapeExpr]>*/
 }
 {
 { /* Inline scope#AEscapeExpr#escapemark= (self,var_escapemark) on <self:ABreakExpr> */
 self->attrs[COLOR_nit__scope__AEscapeExpr___escapemark].val = var_escapemark; /* _escapemark on <self:ABreakExpr> */
-RET_LABEL14:(void)0;
+RET_LABEL13:(void)0;
 }
 }
 RET_LABEL:;
@@ -2143,12 +2041,11 @@ void nit__scope___ADoExpr___ANode__accept_scope_visitor(val* self, val* p0) {
 val* var_v /* var v: ScopeVisitor */;
 val* var /* : nullable ALabel */;
 val* var2 /* : nullable ALabel */;
-short int var3 /* : Bool */;
-val* var4 /* : EscapeMark */;
-val* var6 /* : nullable AExpr */;
-val* var8 /* : nullable AExpr */;
-val* var9 /* : nullable EscapeMark */;
-val* var11 /* : nullable EscapeMark */;
+val* var3 /* : EscapeMark */;
+val* var5 /* : nullable AExpr */;
+val* var7 /* : nullable AExpr */;
+val* var8 /* : nullable EscapeMark */;
+val* var10 /* : nullable EscapeMark */;
 var_v = p0;
 {
 { /* Inline parser_nodes#ALabelable#n_label (self) on <self:ADoExpr> */
@@ -2157,32 +2054,31 @@ var = var2;
 RET_LABEL1:(void)0;
 }
 }
-var3 = 0;
 {
-var4 = nit__scope___nit__scope__ScopeVisitor___make_escape_mark(var_v, var, var3);
+var3 = nit__scope___nit__scope__ScopeVisitor___make_escape_mark(var_v, var, 0);
 }
 {
-{ /* Inline scope#ADoExpr#break_mark= (self,var4) on <self:ADoExpr> */
-self->attrs[COLOR_nit__scope__ADoExpr___break_mark].val = var4; /* _break_mark on <self:ADoExpr> */
-RET_LABEL5:(void)0;
+{ /* Inline scope#ADoExpr#break_mark= (self,var3) on <self:ADoExpr> */
+self->attrs[COLOR_nit__scope__ADoExpr___break_mark].val = var3; /* _break_mark on <self:ADoExpr> */
+RET_LABEL4:(void)0;
 }
 }
 {
 { /* Inline parser_nodes#ADoExpr#n_block (self) on <self:ADoExpr> */
-var8 = self->attrs[COLOR_nit__parser_nodes__ADoExpr___n_block].val; /* _n_block on <self:ADoExpr> */
-var6 = var8;
-RET_LABEL7:(void)0;
+var7 = self->attrs[COLOR_nit__parser_nodes__ADoExpr___n_block].val; /* _n_block on <self:ADoExpr> */
+var5 = var7;
+RET_LABEL6:(void)0;
 }
 }
 {
 { /* Inline scope#ADoExpr#break_mark (self) on <self:ADoExpr> */
-var11 = self->attrs[COLOR_nit__scope__ADoExpr___break_mark].val; /* _break_mark on <self:ADoExpr> */
-var9 = var11;
-RET_LABEL10:(void)0;
+var10 = self->attrs[COLOR_nit__scope__ADoExpr___break_mark].val; /* _break_mark on <self:ADoExpr> */
+var8 = var10;
+RET_LABEL9:(void)0;
 }
 }
 {
-nit__scope___nit__scope__ScopeVisitor___enter_visit_block(var_v, var6, var9); /* Direct call scope#ScopeVisitor#enter_visit_block on <var_v:ScopeVisitor>*/
+nit__scope___nit__scope__ScopeVisitor___enter_visit_block(var_v, var5, var8); /* Direct call scope#ScopeVisitor#enter_visit_block on <var_v:ScopeVisitor>*/
 }
 RET_LABEL:;
 }
@@ -2193,18 +2089,16 @@ val* var /* : AExpr */;
 val* var2 /* : AExpr */;
 val* var3 /* : nullable AExpr */;
 val* var5 /* : nullable AExpr */;
-val* var6 /* : null */;
-val* var7 /* : nullable AExpr */;
-val* var9 /* : nullable AExpr */;
-val* var10 /* : null */;
+val* var6 /* : nullable AExpr */;
+val* var8 /* : nullable AExpr */;
 var_v = p0;
 {
 { /* Inline parser_nodes#AIfExpr#n_expr (self) on <self:AIfExpr> */
 var2 = self->attrs[COLOR_nit__parser_nodes__AIfExpr___n_expr].val; /* _n_expr on <self:AIfExpr> */
 if (unlikely(var2 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _n_expr");
-PRINT_ERROR(" (%s:%d)\n", FILE_nit__parser_nodes, 1664);
-show_backtrace(1);
+PRINT_ERROR(" (%s:%d)\n", FILE_nit__parser_nodes, 1857);
+fatal_exit(1);
 }
 var = var2;
 RET_LABEL1:(void)0;
@@ -2220,20 +2114,18 @@ var3 = var5;
 RET_LABEL4:(void)0;
 }
 }
-var6 = NULL;
 {
-nit__scope___nit__scope__ScopeVisitor___enter_visit_block(var_v, var3, var6); /* Direct call scope#ScopeVisitor#enter_visit_block on <var_v:ScopeVisitor>*/
+nit__scope___nit__scope__ScopeVisitor___enter_visit_block(var_v, var3, ((val*)NULL)); /* Direct call scope#ScopeVisitor#enter_visit_block on <var_v:ScopeVisitor>*/
 }
 {
 { /* Inline parser_nodes#AIfExpr#n_else (self) on <self:AIfExpr> */
-var9 = self->attrs[COLOR_nit__parser_nodes__AIfExpr___n_else].val; /* _n_else on <self:AIfExpr> */
-var7 = var9;
-RET_LABEL8:(void)0;
+var8 = self->attrs[COLOR_nit__parser_nodes__AIfExpr___n_else].val; /* _n_else on <self:AIfExpr> */
+var6 = var8;
+RET_LABEL7:(void)0;
 }
 }
-var10 = NULL;
 {
-nit__scope___nit__scope__ScopeVisitor___enter_visit_block(var_v, var7, var10); /* Direct call scope#ScopeVisitor#enter_visit_block on <var_v:ScopeVisitor>*/
+nit__scope___nit__scope__ScopeVisitor___enter_visit_block(var_v, var6, ((val*)NULL)); /* Direct call scope#ScopeVisitor#enter_visit_block on <var_v:ScopeVisitor>*/
 }
 RET_LABEL:;
 }
@@ -2270,15 +2162,14 @@ void nit__scope___AWhileExpr___ANode__accept_scope_visitor(val* self, val* p0) {
 val* var_v /* var v: ScopeVisitor */;
 val* var /* : nullable ALabel */;
 val* var2 /* : nullable ALabel */;
-short int var3 /* : Bool */;
-val* var4 /* : EscapeMark */;
+val* var3 /* : EscapeMark */;
 val* var_escapemark /* var escapemark: EscapeMark */;
-val* var6 /* : nullable EscapeMark */;
-val* var8 /* : nullable EscapeMark */;
-val* var10 /* : AExpr */;
-val* var12 /* : AExpr */;
-val* var13 /* : nullable AExpr */;
-val* var15 /* : nullable AExpr */;
+val* var5 /* : nullable EscapeMark */;
+val* var7 /* : nullable EscapeMark */;
+val* var9 /* : AExpr */;
+val* var11 /* : AExpr */;
+val* var12 /* : nullable AExpr */;
+val* var14 /* : nullable AExpr */;
 var_v = p0;
 {
 { /* Inline parser_nodes#ALabelable#n_label (self) on <self:AWhileExpr> */
@@ -2287,54 +2178,53 @@ var = var2;
 RET_LABEL1:(void)0;
 }
 }
-var3 = 1;
 {
-var4 = nit__scope___nit__scope__ScopeVisitor___make_escape_mark(var_v, var, var3);
+var3 = nit__scope___nit__scope__ScopeVisitor___make_escape_mark(var_v, var, 1);
 }
-var_escapemark = var4;
+var_escapemark = var3;
 {
 { /* Inline scope#AWhileExpr#break_mark= (self,var_escapemark) on <self:AWhileExpr> */
 self->attrs[COLOR_nit__scope__AWhileExpr___break_mark].val = var_escapemark; /* _break_mark on <self:AWhileExpr> */
-RET_LABEL5:(void)0;
+RET_LABEL4:(void)0;
 }
 }
 {
 { /* Inline scope#EscapeMark#continue_mark (var_escapemark) on <var_escapemark:EscapeMark> */
-var8 = var_escapemark->attrs[COLOR_nit__scope__EscapeMark___continue_mark].val; /* _continue_mark on <var_escapemark:EscapeMark> */
-var6 = var8;
-RET_LABEL7:(void)0;
+var7 = var_escapemark->attrs[COLOR_nit__scope__EscapeMark___continue_mark].val; /* _continue_mark on <var_escapemark:EscapeMark> */
+var5 = var7;
+RET_LABEL6:(void)0;
 }
 }
 {
-{ /* Inline scope#AWhileExpr#continue_mark= (self,var6) on <self:AWhileExpr> */
-self->attrs[COLOR_nit__scope__AWhileExpr___continue_mark].val = var6; /* _continue_mark on <self:AWhileExpr> */
-RET_LABEL9:(void)0;
+{ /* Inline scope#AWhileExpr#continue_mark= (self,var5) on <self:AWhileExpr> */
+self->attrs[COLOR_nit__scope__AWhileExpr___continue_mark].val = var5; /* _continue_mark on <self:AWhileExpr> */
+RET_LABEL8:(void)0;
 }
 }
 {
 { /* Inline parser_nodes#AWhileExpr#n_expr (self) on <self:AWhileExpr> */
-var12 = self->attrs[COLOR_nit__parser_nodes__AWhileExpr___n_expr].val; /* _n_expr on <self:AWhileExpr> */
-if (unlikely(var12 == NULL)) {
+var11 = self->attrs[COLOR_nit__parser_nodes__AWhileExpr___n_expr].val; /* _n_expr on <self:AWhileExpr> */
+if (unlikely(var11 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _n_expr");
-PRINT_ERROR(" (%s:%d)\n", FILE_nit__parser_nodes, 1705);
-show_backtrace(1);
+PRINT_ERROR(" (%s:%d)\n", FILE_nit__parser_nodes, 1904);
+fatal_exit(1);
 }
-var10 = var12;
-RET_LABEL11:(void)0;
+var9 = var11;
+RET_LABEL10:(void)0;
 }
 }
 {
-nit___nit__Visitor___enter_visit(var_v, var10); /* Direct call parser_nodes#Visitor#enter_visit on <var_v:ScopeVisitor>*/
+nit___nit__Visitor___enter_visit(var_v, var9); /* Direct call parser_nodes#Visitor#enter_visit on <var_v:ScopeVisitor>*/
 }
 {
 { /* Inline parser_nodes#AWhileExpr#n_block (self) on <self:AWhileExpr> */
-var15 = self->attrs[COLOR_nit__parser_nodes__AWhileExpr___n_block].val; /* _n_block on <self:AWhileExpr> */
-var13 = var15;
-RET_LABEL14:(void)0;
+var14 = self->attrs[COLOR_nit__parser_nodes__AWhileExpr___n_block].val; /* _n_block on <self:AWhileExpr> */
+var12 = var14;
+RET_LABEL13:(void)0;
 }
 }
 {
-nit__scope___nit__scope__ScopeVisitor___enter_visit_block(var_v, var13, var_escapemark); /* Direct call scope#ScopeVisitor#enter_visit_block on <var_v:ScopeVisitor>*/
+nit__scope___nit__scope__ScopeVisitor___enter_visit_block(var_v, var12, var_escapemark); /* Direct call scope#ScopeVisitor#enter_visit_block on <var_v:ScopeVisitor>*/
 }
 RET_LABEL:;
 }
@@ -2371,13 +2261,12 @@ void nit__scope___ALoopExpr___ANode__accept_scope_visitor(val* self, val* p0) {
 val* var_v /* var v: ScopeVisitor */;
 val* var /* : nullable ALabel */;
 val* var2 /* : nullable ALabel */;
-short int var3 /* : Bool */;
-val* var4 /* : EscapeMark */;
+val* var3 /* : EscapeMark */;
 val* var_escapemark /* var escapemark: EscapeMark */;
-val* var6 /* : nullable EscapeMark */;
-val* var8 /* : nullable EscapeMark */;
-val* var10 /* : nullable AExpr */;
-val* var12 /* : nullable AExpr */;
+val* var5 /* : nullable EscapeMark */;
+val* var7 /* : nullable EscapeMark */;
+val* var9 /* : nullable AExpr */;
+val* var11 /* : nullable AExpr */;
 var_v = p0;
 {
 { /* Inline parser_nodes#ALabelable#n_label (self) on <self:ALoopExpr> */
@@ -2386,39 +2275,38 @@ var = var2;
 RET_LABEL1:(void)0;
 }
 }
-var3 = 1;
 {
-var4 = nit__scope___nit__scope__ScopeVisitor___make_escape_mark(var_v, var, var3);
+var3 = nit__scope___nit__scope__ScopeVisitor___make_escape_mark(var_v, var, 1);
 }
-var_escapemark = var4;
+var_escapemark = var3;
 {
 { /* Inline scope#ALoopExpr#break_mark= (self,var_escapemark) on <self:ALoopExpr> */
 self->attrs[COLOR_nit__scope__ALoopExpr___break_mark].val = var_escapemark; /* _break_mark on <self:ALoopExpr> */
-RET_LABEL5:(void)0;
+RET_LABEL4:(void)0;
 }
 }
 {
 { /* Inline scope#EscapeMark#continue_mark (var_escapemark) on <var_escapemark:EscapeMark> */
-var8 = var_escapemark->attrs[COLOR_nit__scope__EscapeMark___continue_mark].val; /* _continue_mark on <var_escapemark:EscapeMark> */
-var6 = var8;
-RET_LABEL7:(void)0;
+var7 = var_escapemark->attrs[COLOR_nit__scope__EscapeMark___continue_mark].val; /* _continue_mark on <var_escapemark:EscapeMark> */
+var5 = var7;
+RET_LABEL6:(void)0;
 }
 }
 {
-{ /* Inline scope#ALoopExpr#continue_mark= (self,var6) on <self:ALoopExpr> */
-self->attrs[COLOR_nit__scope__ALoopExpr___continue_mark].val = var6; /* _continue_mark on <self:ALoopExpr> */
-RET_LABEL9:(void)0;
+{ /* Inline scope#ALoopExpr#continue_mark= (self,var5) on <self:ALoopExpr> */
+self->attrs[COLOR_nit__scope__ALoopExpr___continue_mark].val = var5; /* _continue_mark on <self:ALoopExpr> */
+RET_LABEL8:(void)0;
 }
 }
 {
 { /* Inline parser_nodes#ALoopExpr#n_block (self) on <self:ALoopExpr> */
-var12 = self->attrs[COLOR_nit__parser_nodes__ALoopExpr___n_block].val; /* _n_block on <self:ALoopExpr> */
-var10 = var12;
-RET_LABEL11:(void)0;
+var11 = self->attrs[COLOR_nit__parser_nodes__ALoopExpr___n_block].val; /* _n_block on <self:ALoopExpr> */
+var9 = var11;
+RET_LABEL10:(void)0;
 }
 }
 {
-nit__scope___nit__scope__ScopeVisitor___enter_visit_block(var_v, var10, var_escapemark); /* Direct call scope#ScopeVisitor#enter_visit_block on <var_v:ScopeVisitor>*/
+nit__scope___nit__scope__ScopeVisitor___enter_visit_block(var_v, var9, var_escapemark); /* Direct call scope#ScopeVisitor#enter_visit_block on <var_v:ScopeVisitor>*/
 }
 RET_LABEL:;
 }
@@ -2486,23 +2374,22 @@ val* var17 /* : Variable */;
 val* var18 /* : String */;
 val* var_va /* var va: Variable */;
 short int var19 /* : Bool */;
-val* var21 /* : nullable ALabel */;
-val* var23 /* : nullable ALabel */;
-short int var24 /* : Bool */;
-val* var25 /* : EscapeMark */;
+val* var20 /* : nullable ALabel */;
+val* var22 /* : nullable ALabel */;
+val* var23 /* : EscapeMark */;
 val* var_escapemark /* var escapemark: EscapeMark */;
+val* var25 /* : nullable EscapeMark */;
 val* var27 /* : nullable EscapeMark */;
-val* var29 /* : nullable EscapeMark */;
+val* var29 /* : nullable AExpr */;
 val* var31 /* : nullable AExpr */;
-val* var33 /* : nullable AExpr */;
 var_v = p0;
 {
 { /* Inline parser_nodes#AForExpr#n_expr (self) on <self:AForExpr> */
 var2 = self->attrs[COLOR_nit__parser_nodes__AForExpr___n_expr].val; /* _n_expr on <self:AForExpr> */
 if (unlikely(var2 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _n_expr");
-PRINT_ERROR(" (%s:%d)\n", FILE_nit__parser_nodes, 1738);
-show_backtrace(1);
+PRINT_ERROR(" (%s:%d)\n", FILE_nit__parser_nodes, 1940);
+fatal_exit(1);
 }
 var = var2;
 RET_LABEL1:(void)0;
@@ -2517,7 +2404,7 @@ var5 = var_v->attrs[COLOR_nit__scope__ScopeVisitor___scopes].val; /* _scopes on 
 if (unlikely(var5 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _scopes");
 PRINT_ERROR(" (%s:%d)\n", FILE_nit__scope, 80);
-show_backtrace(1);
+fatal_exit(1);
 }
 var3 = var5;
 RET_LABEL4:(void)0;
@@ -2548,8 +2435,8 @@ RET_LABEL9:(void)0;
 var12 = self->attrs[COLOR_nit__parser_nodes__AForExpr___n_ids].val; /* _n_ids on <self:AForExpr> */
 if (unlikely(var12 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _n_ids");
-PRINT_ERROR(" (%s:%d)\n", FILE_nit__parser_nodes, 1735);
-show_backtrace(1);
+PRINT_ERROR(" (%s:%d)\n", FILE_nit__parser_nodes, 1934);
+fatal_exit(1);
 }
 var10 = var12;
 RET_LABEL11:(void)0;
@@ -2562,11 +2449,11 @@ var13 = nit___nit__ANodes___standard__abstract_collection__Collection__iterator(
 var_14 = var13;
 for(;;) {
 {
-var15 = ((short int (*)(val* self))(var_14->class->vft[COLOR_standard__abstract_collection__Iterator__is_ok]))(var_14) /* is_ok on <var_14:Iterator[TId]>*/;
+var15 = ((short int(*)(val* self))((((long)var_14&3)?class_info[((long)var_14&3)]:var_14->class)->vft[COLOR_standard__abstract_collection__Iterator__is_ok]))(var_14); /* is_ok on <var_14:Iterator[TId]>*/
 }
 if (var15){
 {
-var16 = ((val* (*)(val* self))(var_14->class->vft[COLOR_standard__abstract_collection__Iterator__item]))(var_14) /* item on <var_14:Iterator[TId]>*/;
+var16 = ((val*(*)(val* self))((((long)var_14&3)?class_info[((long)var_14&3)]:var_14->class)->vft[COLOR_standard__abstract_collection__Iterator__item]))(var_14); /* item on <var_14:Iterator[TId]>*/
 }
 var_nid = var16;
 var17 = NEW_nit__Variable(&type_nit__Variable);
@@ -2574,10 +2461,10 @@ var17 = NEW_nit__Variable(&type_nit__Variable);
 var18 = nit__lexer_work___Token___text(var_nid);
 }
 {
-((void (*)(val* self, val* p0))(var17->class->vft[COLOR_nit__scope__Variable__name_61d]))(var17, var18) /* name= on <var17:Variable>*/;
+((void(*)(val* self, val* p0))(var17->class->vft[COLOR_nit__scope__Variable__name_61d]))(var17, var18); /* name= on <var17:Variable>*/
 }
 {
-((void (*)(val* self))(var17->class->vft[COLOR_standard__kernel__Object__init]))(var17) /* init on <var17:Variable>*/;
+((void(*)(val* self))(var17->class->vft[COLOR_standard__kernel__Object__init]))(var17); /* init on <var17:Variable>*/
 }
 var_va = var17;
 {
@@ -2587,7 +2474,7 @@ var19 = nit__scope___nit__scope__ScopeVisitor___register_variable(var_v, var_nid
 standard___standard__Array___standard__abstract_collection__SimpleCollection__add(var_variables, var_va); /* Direct call array#Array#add on <var_variables:Array[Variable]>*/
 }
 {
-((void (*)(val* self))(var_14->class->vft[COLOR_standard__abstract_collection__Iterator__next]))(var_14) /* next on <var_14:Iterator[TId]>*/;
+((void(*)(val* self))((((long)var_14&3)?class_info[((long)var_14&3)]:var_14->class)->vft[COLOR_standard__abstract_collection__Iterator__next]))(var_14); /* next on <var_14:Iterator[TId]>*/
 }
 } else {
 goto BREAK_label;
@@ -2595,53 +2482,182 @@ goto BREAK_label;
 }
 BREAK_label: (void)0;
 {
-{ /* Inline abstract_collection#Iterator#finish (var_14) on <var_14:Iterator[TId]> */
-RET_LABEL20:(void)0;
-}
+((void(*)(val* self))((((long)var_14&3)?class_info[((long)var_14&3)]:var_14->class)->vft[COLOR_standard__abstract_collection__Iterator__finish]))(var_14); /* finish on <var_14:Iterator[TId]>*/
 }
 {
 { /* Inline parser_nodes#ALabelable#n_label (self) on <self:AForExpr> */
-var23 = self->attrs[COLOR_nit__parser_nodes__ALabelable___n_label].val; /* _n_label on <self:AForExpr> */
-var21 = var23;
-RET_LABEL22:(void)0;
+var22 = self->attrs[COLOR_nit__parser_nodes__ALabelable___n_label].val; /* _n_label on <self:AForExpr> */
+var20 = var22;
+RET_LABEL21:(void)0;
 }
 }
-var24 = 1;
 {
-var25 = nit__scope___nit__scope__ScopeVisitor___make_escape_mark(var_v, var21, var24);
+var23 = nit__scope___nit__scope__ScopeVisitor___make_escape_mark(var_v, var20, 1);
 }
-var_escapemark = var25;
+var_escapemark = var23;
 {
 { /* Inline scope#AForExpr#break_mark= (self,var_escapemark) on <self:AForExpr> */
 self->attrs[COLOR_nit__scope__AForExpr___break_mark].val = var_escapemark; /* _break_mark on <self:AForExpr> */
-RET_LABEL26:(void)0;
+RET_LABEL24:(void)0;
 }
 }
 {
 { /* Inline scope#EscapeMark#continue_mark (var_escapemark) on <var_escapemark:EscapeMark> */
-var29 = var_escapemark->attrs[COLOR_nit__scope__EscapeMark___continue_mark].val; /* _continue_mark on <var_escapemark:EscapeMark> */
-var27 = var29;
+var27 = var_escapemark->attrs[COLOR_nit__scope__EscapeMark___continue_mark].val; /* _continue_mark on <var_escapemark:EscapeMark> */
+var25 = var27;
+RET_LABEL26:(void)0;
+}
+}
+{
+{ /* Inline scope#AForExpr#continue_mark= (self,var25) on <self:AForExpr> */
+self->attrs[COLOR_nit__scope__AForExpr___continue_mark].val = var25; /* _continue_mark on <self:AForExpr> */
 RET_LABEL28:(void)0;
 }
 }
 {
-{ /* Inline scope#AForExpr#continue_mark= (self,var27) on <self:AForExpr> */
-self->attrs[COLOR_nit__scope__AForExpr___continue_mark].val = var27; /* _continue_mark on <self:AForExpr> */
+{ /* Inline parser_nodes#AForExpr#n_block (self) on <self:AForExpr> */
+var31 = self->attrs[COLOR_nit__parser_nodes__AForExpr___n_block].val; /* _n_block on <self:AForExpr> */
+var29 = var31;
 RET_LABEL30:(void)0;
 }
 }
 {
-{ /* Inline parser_nodes#AForExpr#n_block (self) on <self:AForExpr> */
-var33 = self->attrs[COLOR_nit__parser_nodes__AForExpr___n_block].val; /* _n_block on <self:AForExpr> */
-var31 = var33;
-RET_LABEL32:(void)0;
-}
-}
-{
-nit__scope___nit__scope__ScopeVisitor___enter_visit_block(var_v, var31, var_escapemark); /* Direct call scope#ScopeVisitor#enter_visit_block on <var_v:ScopeVisitor>*/
+nit__scope___nit__scope__ScopeVisitor___enter_visit_block(var_v, var29, var_escapemark); /* Direct call scope#ScopeVisitor#enter_visit_block on <var_v:ScopeVisitor>*/
 }
 {
 nit__scope___nit__scope__ScopeVisitor___shift_scope(var_v); /* Direct call scope#ScopeVisitor#shift_scope on <var_v:ScopeVisitor>*/
+}
+RET_LABEL:;
+}
+/* method scope#AWithExpr#break_mark for (self: AWithExpr): nullable EscapeMark */
+val* nit__scope___AWithExpr___break_mark(val* self) {
+val* var /* : nullable EscapeMark */;
+val* var1 /* : nullable EscapeMark */;
+var1 = self->attrs[COLOR_nit__scope__AWithExpr___break_mark].val; /* _break_mark on <self:AWithExpr> */
+var = var1;
+RET_LABEL:;
+return var;
+}
+/* method scope#AWithExpr#break_mark= for (self: AWithExpr, nullable EscapeMark) */
+void nit__scope___AWithExpr___break_mark_61d(val* self, val* p0) {
+self->attrs[COLOR_nit__scope__AWithExpr___break_mark].val = p0; /* _break_mark on <self:AWithExpr> */
+RET_LABEL:;
+}
+/* method scope#AWithExpr#accept_scope_visitor for (self: AWithExpr, ScopeVisitor) */
+void nit__scope___AWithExpr___ANode__accept_scope_visitor(val* self, val* p0) {
+val* var_v /* var v: ScopeVisitor */;
+val* var /* : List[Scope] */;
+val* var2 /* : List[Scope] */;
+val* var3 /* : Scope */;
+val* var5 /* : nullable ALabel */;
+val* var7 /* : nullable ALabel */;
+val* var8 /* : EscapeMark */;
+val* var_escapemark /* var escapemark: EscapeMark */;
+val* var10 /* : AExpr */;
+val* var12 /* : AExpr */;
+val* var13 /* : nullable AExpr */;
+val* var15 /* : nullable AExpr */;
+var_v = p0;
+{
+{ /* Inline scope#ScopeVisitor#scopes (var_v) on <var_v:ScopeVisitor> */
+var2 = var_v->attrs[COLOR_nit__scope__ScopeVisitor___scopes].val; /* _scopes on <var_v:ScopeVisitor> */
+if (unlikely(var2 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _scopes");
+PRINT_ERROR(" (%s:%d)\n", FILE_nit__scope, 80);
+fatal_exit(1);
+}
+var = var2;
+RET_LABEL1:(void)0;
+}
+}
+var3 = NEW_nit__scope__Scope(&type_nit__scope__Scope);
+{
+{ /* Inline kernel#Object#init (var3) on <var3:Scope> */
+RET_LABEL4:(void)0;
+}
+}
+{
+standard___standard__List___standard__abstract_collection__Sequence__unshift(var, var3); /* Direct call list#List#unshift on <var:List[Scope]>*/
+}
+{
+{ /* Inline parser_nodes#ALabelable#n_label (self) on <self:AWithExpr> */
+var7 = self->attrs[COLOR_nit__parser_nodes__ALabelable___n_label].val; /* _n_label on <self:AWithExpr> */
+var5 = var7;
+RET_LABEL6:(void)0;
+}
+}
+{
+var8 = nit__scope___nit__scope__ScopeVisitor___make_escape_mark(var_v, var5, 1);
+}
+var_escapemark = var8;
+{
+{ /* Inline scope#AWithExpr#break_mark= (self,var_escapemark) on <self:AWithExpr> */
+self->attrs[COLOR_nit__scope__AWithExpr___break_mark].val = var_escapemark; /* _break_mark on <self:AWithExpr> */
+RET_LABEL9:(void)0;
+}
+}
+{
+{ /* Inline parser_nodes#AWithExpr#n_expr (self) on <self:AWithExpr> */
+var12 = self->attrs[COLOR_nit__parser_nodes__AWithExpr___n_expr].val; /* _n_expr on <self:AWithExpr> */
+if (unlikely(var12 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _n_expr");
+PRINT_ERROR(" (%s:%d)\n", FILE_nit__parser_nodes, 1958);
+fatal_exit(1);
+}
+var10 = var12;
+RET_LABEL11:(void)0;
+}
+}
+{
+nit___nit__Visitor___enter_visit(var_v, var10); /* Direct call parser_nodes#Visitor#enter_visit on <var_v:ScopeVisitor>*/
+}
+{
+{ /* Inline parser_nodes#AWithExpr#n_block (self) on <self:AWithExpr> */
+var15 = self->attrs[COLOR_nit__parser_nodes__AWithExpr___n_block].val; /* _n_block on <self:AWithExpr> */
+var13 = var15;
+RET_LABEL14:(void)0;
+}
+}
+{
+nit__scope___nit__scope__ScopeVisitor___enter_visit_block(var_v, var13, var_escapemark); /* Direct call scope#ScopeVisitor#enter_visit_block on <var_v:ScopeVisitor>*/
+}
+{
+nit__scope___nit__scope__ScopeVisitor___shift_scope(var_v); /* Direct call scope#ScopeVisitor#shift_scope on <var_v:ScopeVisitor>*/
+}
+RET_LABEL:;
+}
+/* method scope#AAssertExpr#accept_scope_visitor for (self: AAssertExpr, ScopeVisitor) */
+void nit__scope___AAssertExpr___ANode__accept_scope_visitor(val* self, val* p0) {
+val* var_v /* var v: ScopeVisitor */;
+val* var /* : AExpr */;
+val* var2 /* : AExpr */;
+val* var3 /* : nullable AExpr */;
+val* var5 /* : nullable AExpr */;
+var_v = p0;
+{
+{ /* Inline parser_nodes#AAssertExpr#n_expr (self) on <self:AAssertExpr> */
+var2 = self->attrs[COLOR_nit__parser_nodes__AAssertExpr___n_expr].val; /* _n_expr on <self:AAssertExpr> */
+if (unlikely(var2 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _n_expr");
+PRINT_ERROR(" (%s:%d)\n", FILE_nit__parser_nodes, 1978);
+fatal_exit(1);
+}
+var = var2;
+RET_LABEL1:(void)0;
+}
+}
+{
+nit___nit__Visitor___enter_visit(var_v, var); /* Direct call parser_nodes#Visitor#enter_visit on <var_v:ScopeVisitor>*/
+}
+{
+{ /* Inline parser_nodes#AAssertExpr#n_else (self) on <self:AAssertExpr> */
+var5 = self->attrs[COLOR_nit__parser_nodes__AAssertExpr___n_else].val; /* _n_else on <self:AAssertExpr> */
+var3 = var5;
+RET_LABEL4:(void)0;
+}
+}
+{
+nit__scope___nit__scope__ScopeVisitor___enter_visit_block(var_v, var3, ((val*)NULL)); /* Direct call scope#ScopeVisitor#enter_visit_block on <var_v:ScopeVisitor>*/
 }
 RET_LABEL:;
 }
@@ -2673,40 +2689,36 @@ val* var7 /* : String */;
 val* var_name /* var name: String */;
 val* var8 /* : nullable Variable */;
 val* var_variable /* var variable: nullable Variable */;
-val* var9 /* : null */;
+short int var9 /* : Bool */;
 short int var10 /* : Bool */;
-short int var11 /* : Bool */;
 val* var_other /* var other: nullable Object */;
+short int var12 /* : Bool */;
 short int var13 /* : Bool */;
 short int var14 /* : Bool */;
-short int var15 /* : Bool */;
-val* var16 /* : AExprs */;
-val* var18 /* : AExprs */;
-val* var19 /* : ANodes[AExpr] */;
-val* var21 /* : ANodes[AExpr] */;
+val* var15 /* : AExprs */;
+val* var17 /* : AExprs */;
+val* var18 /* : ANodes[AExpr] */;
+val* var20 /* : ANodes[AExpr] */;
+short int var21 /* : Bool */;
 short int var22 /* : Bool */;
-short int var23 /* : Bool */;
 short int var_ /* var : Bool */;
-val* var24 /* : AExprs */;
-val* var26 /* : AExprs */;
-short int var27 /* : Bool */;
-int cltype28;
-int idtype29;
+val* var23 /* : AExprs */;
+val* var25 /* : AExprs */;
+short int var26 /* : Bool */;
+int cltype27;
+int idtype28;
+val* var29 /* : NativeArray[String] */;
 static val* varonce;
-val* var30 /* : String */;
-char* var31 /* : NativeString */;
-long var32 /* : Int */;
+static val* varonce30;
+val* var31 /* : String */;
+char* var32 /* : NativeString */;
 val* var33 /* : FlatString */;
 static val* varonce34;
 val* var35 /* : String */;
 char* var36 /* : NativeString */;
-long var37 /* : Int */;
-val* var38 /* : FlatString */;
-val* var39 /* : Array[Object] */;
-long var40 /* : Int */;
-val* var41 /* : NativeArray[Object] */;
-val* var42 /* : String */;
-val* var43 /* : AVarFormExpr */;
+val* var37 /* : FlatString */;
+val* var38 /* : String */;
+val* var39 /* : AVarFormExpr */;
 val* var_n /* var n: AExpr */;
 var_v = p0;
 {
@@ -2714,8 +2726,8 @@ var_v = p0;
 var2 = self->attrs[COLOR_nit__parser_nodes__ASendExpr___n_expr].val; /* _n_expr on <self:ACallFormExpr> */
 if (unlikely(var2 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _n_expr");
-PRINT_ERROR(" (%s:%d)\n", FILE_nit__parser_nodes, 1802);
-show_backtrace(1);
+PRINT_ERROR(" (%s:%d)\n", FILE_nit__parser_nodes, 2025);
+fatal_exit(1);
 }
 var = var2;
 RET_LABEL1:(void)0;
@@ -2735,8 +2747,8 @@ if (var3){
 var6 = self->attrs[COLOR_nit__parser_nodes__ACallFormExpr___n_id].val; /* _n_id on <self:ACallFormExpr> */
 if (unlikely(var6 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _n_id");
-PRINT_ERROR(" (%s:%d)\n", FILE_nit__parser_nodes, 1999);
-show_backtrace(1);
+PRINT_ERROR(" (%s:%d)\n", FILE_nit__parser_nodes, 2292);
+fatal_exit(1);
 }
 var4 = var6;
 RET_LABEL5:(void)0;
@@ -2750,131 +2762,127 @@ var_name = var7;
 var8 = nit__scope___nit__scope__ScopeVisitor___search_variable(var_v, var_name);
 }
 var_variable = var8;
-var9 = NULL;
 if (var_variable == NULL) {
-var10 = 0; /* is null */
+var9 = 0; /* is null */
 } else {
-var10 = 1; /* arg is null and recv is not */
+var9 = 1; /* arg is null and recv is not */
 }
 if (0) {
-{ /* Inline kernel#Object#!= (var_variable,var9) on <var_variable:nullable Variable> */
-var_other = var9;
+{ /* Inline kernel#Object#!= (var_variable,((val*)NULL)) on <var_variable:nullable Variable> */
+var_other = ((val*)NULL);
 {
-var13 = ((short int (*)(val* self, val* p0))(var_variable->class->vft[COLOR_standard__kernel__Object___61d_61d]))(var_variable, var_other) /* == on <var_variable:nullable Variable(Variable)>*/;
+var12 = ((short int(*)(val* self, val* p0))(var_variable->class->vft[COLOR_standard__kernel__Object___61d_61d]))(var_variable, var_other); /* == on <var_variable:nullable Variable(Variable)>*/
 }
-var14 = !var13;
-var11 = var14;
-goto RET_LABEL12;
-RET_LABEL12:(void)0;
+var13 = !var12;
+var10 = var13;
+goto RET_LABEL11;
+RET_LABEL11:(void)0;
 }
-var10 = var11;
+var9 = var10;
 }
-if (var10){
+if (var9){
 {
 { /* Inline parser_nodes#ACallFormExpr#n_args (self) on <self:ACallFormExpr> */
-var18 = self->attrs[COLOR_nit__parser_nodes__ACallFormExpr___n_args].val; /* _n_args on <self:ACallFormExpr> */
-if (unlikely(var18 == NULL)) {
+var17 = self->attrs[COLOR_nit__parser_nodes__ACallFormExpr___n_args].val; /* _n_args on <self:ACallFormExpr> */
+if (unlikely(var17 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _n_args");
-PRINT_ERROR(" (%s:%d)\n", FILE_nit__parser_nodes, 2002);
-show_backtrace(1);
+PRINT_ERROR(" (%s:%d)\n", FILE_nit__parser_nodes, 2295);
+fatal_exit(1);
 }
-var16 = var18;
-RET_LABEL17:(void)0;
+var15 = var17;
+RET_LABEL16:(void)0;
 }
 }
 {
-{ /* Inline parser_nodes#AExprs#n_exprs (var16) on <var16:AExprs> */
-var21 = var16->attrs[COLOR_nit__parser_nodes__AExprs___n_exprs].val; /* _n_exprs on <var16:AExprs> */
-if (unlikely(var21 == NULL)) {
+{ /* Inline parser_nodes#AExprs#n_exprs (var15) on <var15:AExprs> */
+var20 = var15->attrs[COLOR_nit__parser_nodes__AExprs___n_exprs].val; /* _n_exprs on <var15:AExprs> */
+if (unlikely(var20 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _n_exprs");
-PRINT_ERROR(" (%s:%d)\n", FILE_nit__parser_nodes, 2408);
-show_backtrace(1);
+PRINT_ERROR(" (%s:%d)\n", FILE_nit__parser_nodes, 2771);
+fatal_exit(1);
 }
-var19 = var21;
-RET_LABEL20:(void)0;
+var18 = var20;
+RET_LABEL19:(void)0;
 }
 }
 {
-var22 = nit___nit__ANodes___standard__abstract_collection__Collection__is_empty(var19);
+var21 = nit___nit__ANodes___standard__abstract_collection__Collection__is_empty(var18);
 }
-var23 = !var22;
-var_ = var23;
-if (var23){
-var15 = var_;
+var22 = !var21;
+var_ = var22;
+if (var22){
+var14 = var_;
 } else {
 {
 { /* Inline parser_nodes#ACallFormExpr#n_args (self) on <self:ACallFormExpr> */
-var26 = self->attrs[COLOR_nit__parser_nodes__ACallFormExpr___n_args].val; /* _n_args on <self:ACallFormExpr> */
-if (unlikely(var26 == NULL)) {
+var25 = self->attrs[COLOR_nit__parser_nodes__ACallFormExpr___n_args].val; /* _n_args on <self:ACallFormExpr> */
+if (unlikely(var25 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _n_args");
-PRINT_ERROR(" (%s:%d)\n", FILE_nit__parser_nodes, 2002);
-show_backtrace(1);
+PRINT_ERROR(" (%s:%d)\n", FILE_nit__parser_nodes, 2295);
+fatal_exit(1);
 }
-var24 = var26;
-RET_LABEL25:(void)0;
+var23 = var25;
+RET_LABEL24:(void)0;
 }
 }
-/* <var24:AExprs> isa AParExprs */
-cltype28 = type_nit__AParExprs.color;
-idtype29 = type_nit__AParExprs.id;
-if(cltype28 >= var24->type->table_size) {
-var27 = 0;
+/* <var23:AExprs> isa AParExprs */
+cltype27 = type_nit__AParExprs.color;
+idtype28 = type_nit__AParExprs.id;
+if(cltype27 >= var23->type->table_size) {
+var26 = 0;
 } else {
-var27 = var24->type->type_table[cltype28] == idtype29;
+var26 = var23->type->type_table[cltype27] == idtype28;
 }
-var15 = var27;
+var14 = var26;
 }
-if (var15){
-if (varonce) {
-var30 = varonce;
+if (var14){
+if (unlikely(varonce==NULL)) {
+var29 = NEW_standard__NativeArray(3l, &type_standard__NativeArray__standard__String);
+if (likely(varonce30!=NULL)) {
+var31 = varonce30;
 } else {
-var31 = "Error: ";
-var32 = 7;
-var33 = standard___standard__NativeString___to_s_with_length(var31, var32);
-var30 = var33;
-varonce = var30;
+var32 = "Error: `";
+var33 = standard___standard__NativeString___to_s_with_length(var32, 8l);
+var31 = var33;
+varonce30 = var31;
 }
-if (varonce34) {
+((struct instance_standard__NativeArray*)var29)->values[0]=var31;
+if (likely(varonce34!=NULL)) {
 var35 = varonce34;
 } else {
-var36 = " is variable, not a function.";
-var37 = 29;
-var38 = standard___standard__NativeString___to_s_with_length(var36, var37);
-var35 = var38;
+var36 = "` is a variable, not a method.";
+var37 = standard___standard__NativeString___to_s_with_length(var36, 30l);
+var35 = var37;
 varonce34 = var35;
 }
-var39 = NEW_standard__Array(&type_standard__Array__standard__Object);
-{ /* var39 = array_instance Array[Object] */
-var40 = 3;
-var41 = NEW_standard__NativeArray(var40, &type_standard__NativeArray__standard__Object);
-((struct instance_standard__NativeArray*)var41)->values[0] = (val*) var30;
-((struct instance_standard__NativeArray*)var41)->values[1] = (val*) var_name;
-((struct instance_standard__NativeArray*)var41)->values[2] = (val*) var35;
-{
-((void (*)(val* self, val* p0, long p1))(var39->class->vft[COLOR_standard__array__Array__with_native]))(var39, var41, var40) /* with_native on <var39:Array[Object]>*/;
+((struct instance_standard__NativeArray*)var29)->values[2]=var35;
+} else {
+var29 = varonce;
+varonce = NULL;
 }
-}
+((struct instance_standard__NativeArray*)var29)->values[1]=var_name;
 {
-var42 = ((val* (*)(val* self))(var39->class->vft[COLOR_standard__string__Object__to_s]))(var39) /* to_s on <var39:Array[Object]>*/;
+var38 = ((val*(*)(val* self))(var29->class->vft[COLOR_standard__string__NativeArray__native_to_s]))(var29); /* native_to_s on <var29:NativeArray[String]>*/
 }
+varonce = var29;
 {
-nit__scope___nit__scope__ScopeVisitor___error(var_v, self, var42); /* Direct call scope#ScopeVisitor#error on <var_v:ScopeVisitor>*/
+nit__scope___nit__scope__ScopeVisitor___error(var_v, self, var38); /* Direct call scope#ScopeVisitor#error on <var_v:ScopeVisitor>*/
 }
 goto RET_LABEL;
 } else {
 }
 {
-var43 = ((val* (*)(val* self, val* p0))(self->class->vft[COLOR_nit__scope__ACallFormExpr__variable_create]))(self, var_variable) /* variable_create on <self:ACallFormExpr>*/;
+var39 = ((val*(*)(val* self, val* p0))(self->class->vft[COLOR_nit__scope__ACallFormExpr__variable_create]))(self, var_variable); /* variable_create on <self:ACallFormExpr>*/
 }
-var_n = var43;
+var_n = var39;
 {
 { /* Inline scope#AVarFormExpr#variable= (var_n,var_variable) on <var_n:AExpr(AVarFormExpr)> */
 var_n->attrs[COLOR_nit__scope__AVarFormExpr___variable].val = var_variable; /* _variable on <var_n:AExpr(AVarFormExpr)> */
-RET_LABEL44:(void)0;
+RET_LABEL40:(void)0;
 }
 }
 {
-nit___nit__Prod___ANode__replace_with(self, var_n); /* Direct call parser_nodes#Prod#replace_with on <self:ACallFormExpr>*/
+nit__transform___AExpr___nit__parser_nodes__ANode__replace_with(self, var_n); /* Direct call transform#AExpr#replace_with on <self:ACallFormExpr>*/
 }
 {
 nit__scope___ANode___accept_scope_visitor(var_n, var_v); /* Direct call scope#ANode#accept_scope_visitor on <var_n:AExpr(AVarFormExpr)>*/
@@ -2885,7 +2893,7 @@ goto RET_LABEL;
 } else {
 }
 {
-((void (*)(val* self, val* p0))(self->class->vft[COLOR_nit__scope___ACallFormExpr___ANode__accept_scope_visitor]))(self, p0) /* accept_scope_visitor on <self:ACallFormExpr>*/;
+((void(*)(val* self, val* p0))(self->class->vft[COLOR_nit__scope___ACallFormExpr___ANode__accept_scope_visitor]))(self, p0); /* accept_scope_visitor on <self:ACallFormExpr>*/
 }
 RET_LABEL:;
 }
@@ -2893,35 +2901,33 @@ RET_LABEL:;
 val* nit__scope___ACallExpr___ACallFormExpr__variable_create(val* self, val* p0) {
 val* var /* : AVarFormExpr */;
 val* var_variable /* var variable: Variable */;
-short int var1 /* : Bool */;
-val* var3 /* : AVarExpr */;
-val* var4 /* : TId */;
-val* var6 /* : TId */;
+val* var2 /* : AVarExpr */;
+val* var3 /* : TId */;
+val* var5 /* : TId */;
 var_variable = p0;
-var1 = 0;
 {
-{ /* Inline scope#Variable#warn_unread= (var_variable,var1) on <var_variable:Variable> */
-var_variable->attrs[COLOR_nit__scope__Variable___warn_unread].s = var1; /* _warn_unread on <var_variable:Variable> */
-RET_LABEL2:(void)0;
+{ /* Inline scope#Variable#warn_unread= (var_variable,0) on <var_variable:Variable> */
+var_variable->attrs[COLOR_nit__scope__Variable___warn_unread].s = 0; /* _warn_unread on <var_variable:Variable> */
+RET_LABEL1:(void)0;
 }
 }
-var3 = NEW_nit__AVarExpr(&type_nit__AVarExpr);
+var2 = NEW_nit__AVarExpr(&type_nit__AVarExpr);
 {
 { /* Inline parser_nodes#ACallFormExpr#n_id (self) on <self:ACallExpr> */
-var6 = self->attrs[COLOR_nit__parser_nodes__ACallFormExpr___n_id].val; /* _n_id on <self:ACallExpr> */
-if (unlikely(var6 == NULL)) {
+var5 = self->attrs[COLOR_nit__parser_nodes__ACallFormExpr___n_id].val; /* _n_id on <self:ACallExpr> */
+if (unlikely(var5 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _n_id");
-PRINT_ERROR(" (%s:%d)\n", FILE_nit__parser_nodes, 1999);
-show_backtrace(1);
+PRINT_ERROR(" (%s:%d)\n", FILE_nit__parser_nodes, 2292);
+fatal_exit(1);
 }
-var4 = var6;
-RET_LABEL5:(void)0;
+var3 = var5;
+RET_LABEL4:(void)0;
 }
 }
 {
-nit__parser_prod___AVarExpr___init_avarexpr(var3, var4); /* Direct call parser_prod#AVarExpr#init_avarexpr on <var3:AVarExpr>*/
+nit__parser_prod___AVarExpr___init_avarexpr(var2, var3); /* Direct call parser_prod#AVarExpr#init_avarexpr on <var2:AVarExpr>*/
 }
-var = var3;
+var = var2;
 goto RET_LABEL;
 RET_LABEL:;
 return var;
@@ -2944,8 +2950,8 @@ var1 = NEW_nit__AVarAssignExpr(&type_nit__AVarAssignExpr);
 var4 = self->attrs[COLOR_nit__parser_nodes__ACallFormExpr___n_id].val; /* _n_id on <self:ACallAssignExpr> */
 if (unlikely(var4 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _n_id");
-PRINT_ERROR(" (%s:%d)\n", FILE_nit__parser_nodes, 1999);
-show_backtrace(1);
+PRINT_ERROR(" (%s:%d)\n", FILE_nit__parser_nodes, 2292);
+fatal_exit(1);
 }
 var2 = var4;
 RET_LABEL3:(void)0;
@@ -2956,8 +2962,8 @@ RET_LABEL3:(void)0;
 var7 = self->attrs[COLOR_nit__parser_nodes__AAssignFormExpr___n_assign].val; /* _n_assign on <self:ACallAssignExpr> */
 if (unlikely(var7 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _n_assign");
-PRINT_ERROR(" (%s:%d)\n", FILE_nit__parser_nodes, 1769);
-show_backtrace(1);
+PRINT_ERROR(" (%s:%d)\n", FILE_nit__parser_nodes, 1992);
+fatal_exit(1);
 }
 var5 = var7;
 RET_LABEL6:(void)0;
@@ -2968,8 +2974,8 @@ RET_LABEL6:(void)0;
 var10 = self->attrs[COLOR_nit__parser_nodes__AAssignFormExpr___n_value].val; /* _n_value on <self:ACallAssignExpr> */
 if (unlikely(var10 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _n_value");
-PRINT_ERROR(" (%s:%d)\n", FILE_nit__parser_nodes, 1772);
-show_backtrace(1);
+PRINT_ERROR(" (%s:%d)\n", FILE_nit__parser_nodes, 1995);
+fatal_exit(1);
 }
 var8 = var10;
 RET_LABEL9:(void)0;
@@ -2987,63 +2993,61 @@ return var;
 val* nit__scope___ACallReassignExpr___ACallFormExpr__variable_create(val* self, val* p0) {
 val* var /* : AVarFormExpr */;
 val* var_variable /* var variable: Variable */;
-short int var1 /* : Bool */;
-val* var3 /* : AVarReassignExpr */;
-val* var4 /* : TId */;
-val* var6 /* : TId */;
-val* var7 /* : AAssignOp */;
-val* var9 /* : AAssignOp */;
-val* var10 /* : AExpr */;
-val* var12 /* : AExpr */;
+val* var2 /* : AVarReassignExpr */;
+val* var3 /* : TId */;
+val* var5 /* : TId */;
+val* var6 /* : AAssignOp */;
+val* var8 /* : AAssignOp */;
+val* var9 /* : AExpr */;
+val* var11 /* : AExpr */;
 var_variable = p0;
-var1 = 0;
 {
-{ /* Inline scope#Variable#warn_unread= (var_variable,var1) on <var_variable:Variable> */
-var_variable->attrs[COLOR_nit__scope__Variable___warn_unread].s = var1; /* _warn_unread on <var_variable:Variable> */
-RET_LABEL2:(void)0;
+{ /* Inline scope#Variable#warn_unread= (var_variable,0) on <var_variable:Variable> */
+var_variable->attrs[COLOR_nit__scope__Variable___warn_unread].s = 0; /* _warn_unread on <var_variable:Variable> */
+RET_LABEL1:(void)0;
 }
 }
-var3 = NEW_nit__AVarReassignExpr(&type_nit__AVarReassignExpr);
+var2 = NEW_nit__AVarReassignExpr(&type_nit__AVarReassignExpr);
 {
 { /* Inline parser_nodes#ACallFormExpr#n_id (self) on <self:ACallReassignExpr> */
-var6 = self->attrs[COLOR_nit__parser_nodes__ACallFormExpr___n_id].val; /* _n_id on <self:ACallReassignExpr> */
-if (unlikely(var6 == NULL)) {
+var5 = self->attrs[COLOR_nit__parser_nodes__ACallFormExpr___n_id].val; /* _n_id on <self:ACallReassignExpr> */
+if (unlikely(var5 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _n_id");
-PRINT_ERROR(" (%s:%d)\n", FILE_nit__parser_nodes, 1999);
-show_backtrace(1);
+PRINT_ERROR(" (%s:%d)\n", FILE_nit__parser_nodes, 2292);
+fatal_exit(1);
 }
-var4 = var6;
-RET_LABEL5:(void)0;
+var3 = var5;
+RET_LABEL4:(void)0;
 }
 }
 {
 { /* Inline parser_nodes#AReassignFormExpr#n_assign_op (self) on <self:ACallReassignExpr> */
-var9 = self->attrs[COLOR_nit__parser_nodes__AReassignFormExpr___n_assign_op].val; /* _n_assign_op on <self:ACallReassignExpr> */
-if (unlikely(var9 == NULL)) {
+var8 = self->attrs[COLOR_nit__parser_nodes__AReassignFormExpr___n_assign_op].val; /* _n_assign_op on <self:ACallReassignExpr> */
+if (unlikely(var8 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _n_assign_op");
-PRINT_ERROR(" (%s:%d)\n", FILE_nit__parser_nodes, 1780);
-show_backtrace(1);
+PRINT_ERROR(" (%s:%d)\n", FILE_nit__parser_nodes, 2003);
+fatal_exit(1);
 }
-var7 = var9;
-RET_LABEL8:(void)0;
+var6 = var8;
+RET_LABEL7:(void)0;
 }
 }
 {
 { /* Inline parser_nodes#AReassignFormExpr#n_value (self) on <self:ACallReassignExpr> */
-var12 = self->attrs[COLOR_nit__parser_nodes__AReassignFormExpr___n_value].val; /* _n_value on <self:ACallReassignExpr> */
-if (unlikely(var12 == NULL)) {
+var11 = self->attrs[COLOR_nit__parser_nodes__AReassignFormExpr___n_value].val; /* _n_value on <self:ACallReassignExpr> */
+if (unlikely(var11 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _n_value");
-PRINT_ERROR(" (%s:%d)\n", FILE_nit__parser_nodes, 1783);
-show_backtrace(1);
+PRINT_ERROR(" (%s:%d)\n", FILE_nit__parser_nodes, 2006);
+fatal_exit(1);
 }
-var10 = var12;
-RET_LABEL11:(void)0;
+var9 = var11;
+RET_LABEL10:(void)0;
 }
 }
 {
-nit__parser_prod___AVarReassignExpr___init_avarreassignexpr(var3, var4, var7, var10); /* Direct call parser_prod#AVarReassignExpr#init_avarreassignexpr on <var3:AVarReassignExpr>*/
+nit__parser_prod___AVarReassignExpr___init_avarreassignexpr(var2, var3, var6, var9); /* Direct call parser_prod#AVarReassignExpr#init_avarreassignexpr on <var2:AVarReassignExpr>*/
 }
-var = var3;
+var = var2;
 goto RET_LABEL;
 RET_LABEL:;
 return var;

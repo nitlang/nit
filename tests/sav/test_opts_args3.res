@@ -24,5 +24,5 @@ OptionBool: true
 OptionCount: 2
 OptionString: 2
 OptionInt: 2
-OptionArray: 12
+OptionArray: [1,2]
 OptionEnum: 2

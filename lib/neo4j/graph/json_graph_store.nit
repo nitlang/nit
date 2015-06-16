@@ -20,14 +20,14 @@ import graph
 #
 # * `"nodes"`: An array with all nodes. Each node is an object with the
 # following properties:
-# 	* `"labels"`: An array of all applied labels.
-# 	* `"properties"`: An object mapping each defined property to its value.
+#	* `"labels"`: An array of all applied labels.
+#	* `"properties"`: An object mapping each defined property to its value.
 # * `"edges"`: An array with all relationships. Each relationship is an object
 # with the following properties:
-# 	* `"type"`: The type (`String`) of the relationship.
-# 	* `"properties"`: An object mapping each defined property to its value.
-# 	* `"from"`: The local ID of the source node.
-# 	* `"to"`: The local ID of the destination node.
+#	* `"type"`: The type (`String`) of the relationship.
+#	* `"properties"`: An object mapping each defined property to its value.
+#	* `"from"`: The local ID of the source node.
+#	* `"to"`: The local ID of the destination node.
 #
 # ~~~nit
 # import neo4j::graph::sequential_id
@@ -37,7 +37,7 @@ import graph
 # a.labels.add "Foo"
 # a["answer"] = 42
 # a["Ultimate question of"] = new JsonArray.from(["life",
-# 		"the Universe", "and Everything."])
+#		"the Universe", "and Everything."])
 # graph.nodes.register a
 # var b = graph.create_node
 # b.labels.add "Foo"
@@ -61,11 +61,11 @@ import graph
 # store.load
 # assert 1 == graph.edges.length
 # for edge in graph.edges do
-# 	assert "BAZ" == edge.rel_type
-# 	assert a.labels == edge.from.labels
-# 	for k, v in a.properties do assert v == edge.from.properties[k]
-# 	assert b.labels == edge.to.labels
-# 	for k, v in b.properties do assert v == edge.to.properties[k]
+#	assert "BAZ" == edge.rel_type
+#	assert a.labels == edge.from.labels
+#	for k, v in a.properties do assert v == edge.from.properties[k]
+#	assert b.labels == edge.to.labels
+#	for k, v in b.properties do assert v == edge.to.properties[k]
 # end
 # assert 2 == graph.nodes.length
 # ~~~
@@ -125,7 +125,7 @@ redef class NeoGraph
 	# a.labels.add "Foo"
 	# a["answer"] = 42
 	# a["Ultimate question of"] = new JsonArray.from(["life",
-	# 		"the Universe", "and Everything."])
+	#		"the Universe", "and Everything."])
 	# graph.nodes.register a
 	# var b = graph.create_node
 	# b.labels.add "Foo"
@@ -133,14 +133,14 @@ redef class NeoGraph
 	# graph.edges.add new NeoEdge(a, "BAZ", b)
 	#
 	# graph = new NeoGraph.from_json(
-	# 		new SequentialNodeCollection("node_id"), graph.to_json)
+	#		new SequentialNodeCollection("node_id"), graph.to_json)
 	# assert 1 == graph.edges.length
 	# for edge in graph.edges do
-	# 	assert "BAZ" == edge.rel_type
-	# 	assert a.labels == edge.from.labels
-	# 	for k, v in a.properties do assert v == edge.from.properties[k]
-	# 	assert b.labels == edge.to.labels
-	# 	for k, v in b.properties do assert v == edge.to.properties[k]
+	#	assert "BAZ" == edge.rel_type
+	#	assert a.labels == edge.from.labels
+	#	for k, v in a.properties do assert v == edge.from.properties[k]
+	#	assert b.labels == edge.to.labels
+	#	for k, v in b.properties do assert v == edge.to.properties[k]
 	# end
 	# assert 2 == graph.nodes.length
 	# ~~~
@@ -248,10 +248,10 @@ redef class NeoNode
 	#
 	#     var node = new NeoNode.from_json("""
 	#     {
-	#     	"labels": ["foo", "Bar"],
-	#     	"properties": {
-	#     		"baz": 42
-	#     	}
+	#	"labels": ["foo", "Bar"],
+	#	"properties": {
+	#		"baz": 42
+	#	}
 	#     }
 	#     """)
 	#     assert ["foo", "Bar"] == node.labels

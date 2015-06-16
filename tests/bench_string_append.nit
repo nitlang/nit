@@ -15,7 +15,7 @@
 # limitations under the License.
 
 #alt1 import standard
-#alt1 import standard::ropes
+#alt1 import standard::text::ropes
 
 var n = 4
 if not args.is_empty then

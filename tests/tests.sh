@@ -395,30 +395,34 @@ enginebinname=$engine
 isinterpret=
 case $engine in
 	nitc|nitg)
-		engine=nitg-s;
+		engine=nitcs;
 		enginebinname=nitc;
 		OPT="--separate $OPT --compile-dir $compdir"
-		savdirs="sav/nitg-common/"
+		savdirs="sav/nitc-common/"
 		;;
 	nitcs|nitg-s)
+		engine=nitcs;
 		enginebinname=nitc;
 		OPT="--separate $OPT --compile-dir $compdir"
-		savdirs="sav/nitg-common/"
+		savdirs="sav/nitc-common/"
 		;;
 	nitce|nitg-e)
+		engine=nitce;
 		enginebinname=nitc;
 		OPT="--erasure $OPT --compile-dir $compdir"
-		savdirs="sav/nitg-common/"
+		savdirs="sav/nitc-common/"
 		;;
 	nitcsg|nitg-sg)
+		engine=nitcsg;
 		enginebinname=nitc;
 		OPT="--semi-global $OPT --compile-dir $compdir"
-		savdirs="sav/nitg-common/"
+		savdirs="sav/nitc-common/"
 		;;
 	nitcg|nitg-g)
+		engine=nitcg;
 		enginebinname=nitc;
 		OPT="--global $OPT --compile-dir $compdir"
-		savdirs="sav/nitg-common/"
+		savdirs="sav/nitc-common/"
 		;;
 	nit)
 		engine=niti
@@ -437,11 +441,7 @@ case $engine in
 	emscripten)
 		enginebinname=nitc
 		OPT="-m emscripten_nodejs.nit --semi-global $OPT --compile-dir $compdir"
-		savdirs="sav/nitg-sg/"
-		;;
-	nitc)
-		echo "disabled engine $engine"
-		exit 0
+		savdirs="sav/nitcsg/"
 		;;
 	*)
 		echo "unknown engine $engine"

@@ -78,9 +78,10 @@ class DocPage
 	# Pretty prints the content of this page.
 	fun pretty_print: Writable do
 		var res = new Template
-		res.addn "page: {title}"
-		res.addn ""
-		root.pretty_print_in(res)
+		res.addn "{class_name} {title}"
+		for child in root.children do
+			child.pretty_print_in(res)
+		end
 		return res
 	end
 end
@@ -156,6 +157,7 @@ abstract class DocComposite
 
 	# Appends the Pretty print of this composite in `res`.
 	private fun pretty_print_in(res: Template) do
+		res.add "\t" * depth
 		res.add "#" * depth
 		res.addn " {id}"
 		for child in children do child.pretty_print_in(res)

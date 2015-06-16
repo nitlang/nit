@@ -7,7 +7,7 @@ var1 = self->attrs[COLOR_standard__error__Error___message].val; /* _message on <
 if (unlikely(var1 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _message");
 PRINT_ERROR(" (%s:%d)\n", FILE_standard__error, 19);
-show_backtrace(1);
+fatal_exit(1);
 }
 var = var1;
 RET_LABEL:;
@@ -29,7 +29,7 @@ var3 = self->attrs[COLOR_standard__error__Error___message].val; /* _message on <
 if (unlikely(var3 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _message");
 PRINT_ERROR(" (%s:%d)\n", FILE_standard__error, 19);
-show_backtrace(1);
+fatal_exit(1);
 }
 var1 = var3;
 RET_LABEL2:(void)0;
@@ -43,7 +43,7 @@ return var;
 /* method error#Error#init for (self: Error) */
 void standard___standard__Error___standard__kernel__Object__init(val* self) {
 {
-((void (*)(val* self))(self->class->vft[COLOR_standard___standard__Error___standard__kernel__Object__init]))(self) /* init on <self:Error>*/;
+((void(*)(val* self))(self->class->vft[COLOR_standard___standard__Error___standard__kernel__Object__init]))(self); /* init on <self:Error>*/
 }
 RET_LABEL:;
 }

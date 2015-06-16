@@ -22,43 +22,43 @@
 #
 # In order to connect to Neo4j you need a connector:
 #
-#    # Create new Neo4j client
-#    var client = new Neo4jClient("http://localhost:7474")
-#    assert client.is_ok
+#     # Create new Neo4j client
+#     var client = new Neo4jClient("http://localhost:7474")
+#     assert client.is_ok
 #
 # The fundamental units that form a graph are nodes and relationships.
 #
 # Nodes are used to represent entities stored in base:
 #
-#    # Create a disconnected node
-#    var andres = new NeoNode
-#    andres["name"] = "Andres"
-#    # Connect the node to Neo4j
-#    client.save_node(andres)
-#    assert andres.is_linked
-#    #
-#    # Create a second node
-#    var kate = new NeoNode
-#    kate["name"] = "Kate"
-#    client.save_node(kate)
-#    assert kate.is_linked
+#     # Create a disconnected node
+#     var andres = new NeoNode
+#     andres["name"] = "Andres"
+#     # Connect the node to Neo4j
+#     client.save_node(andres)
+#     assert andres.is_linked
+#
+#     # Create a second node
+#     var kate = new NeoNode
+#     kate["name"] = "Kate"
+#     client.save_node(kate)
+#     assert kate.is_linked
 #
 # Relationships between nodes are a key part of a graph database.
 # They allow for finding related data. Just like nodes, relationships can have properties.
 #
-#    # Create a relationship
-#    var loves = new NeoEdge(andres, "LOVES", kate)
-#    client.save_edge(loves)
-#    assert loves.is_linked
+#     # Create a relationship
+#     var loves = new NeoEdge(andres, "LOVES", kate)
+#     client.save_edge(loves)
+#     assert loves.is_linked
 #
 # Nodes can also be loaded fron Neo4j:
 #
-#    # Get a node from DB and explore edges
-#    var url = andres.url.to_s
-#    var from = client.load_node(url)
-#    assert from["name"].to_s == "Andres"
-#    var to = from.out_nodes("LOVES").first		# follow the first LOVES relationship
-#    assert to["name"].to_s == "Kate"
+#     # Get a node from DB and explore edges
+#     var url = andres.url.to_s
+#     var from = client.load_node(url)
+#     assert from["name"].to_s == "Andres"
+#     var to = from.out_nodes("LOVES").first		# follow the first LOVES relationship
+#     assert to["name"].to_s == "Kate"
 #
 # For more details, see http://docs.neo4j.org/chunked/milestone/rest-api.html
 module neo4j
@@ -98,8 +98,8 @@ end
 
 # `Neo4jClient` is needed to communicate through the REST API
 #
-#    var client = new Neo4jClient("http://localhost:7474")
-#    assert client.is_ok
+#     var client = new Neo4jClient("http://localhost:7474")
+#     assert client.is_ok
 class Neo4jClient
 
 	# Neo4j REST services baseurl
@@ -143,7 +143,7 @@ class Neo4jClient
 	# Save the node in base
 	#
 	#     var client = new Neo4jClient("http://localhost:7474")
-	#     #
+	#
 	#     # Create a node
 	#     var andres = new NeoNode
 	#     andres["name"] = "Andres"
@@ -199,7 +199,7 @@ class Neo4jClient
 	# From and to nodes will be created.
 	#
 	#     var client = new Neo4jClient("http://localhost:7474")
-	#     #
+	#
 	#     var andres = new NeoNode
 	#     var kate = new NeoNode
 	#     var edge = new NeoEdge(andres, "LOVES", kate)
@@ -248,14 +248,14 @@ class Neo4jClient
 	# Retrieve all nodes with specified `lbl`
 	#
 	#     var client = new Neo4jClient("http://localhost:7474")
-	#     #
+	#
 	#     var andres = new NeoNode
 	#     andres.labels.add_all(["Human", "Male"])
 	#     client.save_node(andres)
 	#     var kate = new NeoNode
 	#     kate.labels.add_all(["Human", "Female"])
 	#     client.save_node(kate)
-	#     #
+	#
 	#     var nodes = client.nodes_with_label("Human")
 	#     assert nodes.has(andres)
 	#     assert nodes.has(kate)
@@ -274,14 +274,14 @@ class Neo4jClient
 	# Retrieve nodes belonging to all the specified `labels`.
 	#
 	#     var client = new Neo4jClient("http://localhost:7474")
-	#     #
+	#
 	#     var andres = new NeoNode
 	#     andres.labels.add_all(["Human", "Male"])
 	#     client.save_node(andres)
 	#     var kate = new NeoNode
 	#     kate.labels.add_all(["Human", "Female"])
 	#     client.save_node(kate)
-	#     #
+	#
 	#     var nodes = client.nodes_with_labels(["Human", "Male"])
 	#     assert nodes.has(andres)
 	#     assert not nodes.has(kate)
@@ -389,13 +389,13 @@ end
 #
 # Example:
 #
-#    var client = new Neo4jClient("http://localhost:7474")
-#    var query = new CypherQuery
-#    query.nmatch("(n)-[r:LOVES]->(m)")
-#    query.nwhere("n.name=\"Andres\"")
-#    query.nreturn("m.name")
-#    var res = client.cypher(query).as(JsonObject)
-#    assert res["data"].as(JsonArray).first.as(JsonArray).first == "Kate"
+#     var client = new Neo4jClient("http://localhost:7474")
+#     var query = new CypherQuery
+#     query.nmatch("(n)-[r:LOVES]->(m)")
+#     query.nwhere("n.name=\"Andres\"")
+#     query.nreturn("m.name")
+#     var res = client.cypher(query).as(JsonObject)
+#     assert res["data"].as(JsonArray).first.as(JsonArray).first == "Kate"
 #
 # For more details, see: http://docs.neo4j.org/chunked/milestone/rest-api-cypher.html
 class CypherQuery
@@ -473,11 +473,11 @@ end
 #
 # If the entity is initialized unlinked from neo4j:
 #
-#    # Create a disconnected node
-#    var andres = new NeoNode
-#    andres["name"] = "Andres"
-#    # At this point, the node is not linked
-#    assert not andres.is_linked
+#     # Create a disconnected node
+#     var andres = new NeoNode
+#     andres["name"] = "Andres"
+#     # At this point, the node is not linked
+#     assert not andres.is_linked
 #
 # Then we can link the entity to the base:
 #
@@ -574,21 +574,21 @@ end
 #
 # Creating new nodes:
 #
-#    var client = new Neo4jClient("http://localhost:7474")
-#    #
-#    var andres = new NeoNode
-#    andres.labels.add "Person"
-#    andres["name"] = "Andres"
-#    andres["age"] = 22
-#    client.save_node(andres)
-#    assert andres.is_linked
+#     var client = new Neo4jClient("http://localhost:7474")
+#
+#     var andres = new NeoNode
+#     andres.labels.add "Person"
+#     andres["name"] = "Andres"
+#     andres["age"] = 22
+#     client.save_node(andres)
+#     assert andres.is_linked
 #
 # Get nodes from Neo4j:
 #
-#    var url = andres.url.to_s
-#    var node = client.load_node(url)
-#    assert node["name"] == "Andres"
-#    assert node["age"].to_s.to_i	== 22
+#     var url = andres.url.to_s
+#     var node = client.load_node(url)
+#     assert node["name"] == "Andres"
+#     assert node["age"].to_s.to_i	== 22
 class NeoNode
 	super NeoEntity
 
@@ -687,23 +687,23 @@ end
 #
 # Create a relationship:
 #
-#    var client = new Neo4jClient("http://localhost:7474")
-#    # Create nodes
-#    var andres = new NeoNode
-#    andres["name"] = "Andres"
-#    var kate = new NeoNode
-#    kate["name"] = "Kate"
-#    # Create a relationship of type `LOVES`
-#    var loves = new NeoEdge(andres, "LOVES", kate)
-#    client.save_edge(loves)
-#    assert loves.is_linked
+#     var client = new Neo4jClient("http://localhost:7474")
+#     # Create nodes
+#     var andres = new NeoNode
+#     andres["name"] = "Andres"
+#     var kate = new NeoNode
+#     kate["name"] = "Kate"
+#     # Create a relationship of type `LOVES`
+#     var loves = new NeoEdge(andres, "LOVES", kate)
+#     client.save_edge(loves)
+#     assert loves.is_linked
 #
 # Get an edge from DB:
 #
-#    var url = loves.url.to_s
-#    var edge = client.load_edge(url)
-#    assert edge.from["name"].to_s == "Andres"
-#    assert edge.to["name"].to_s == "Kate"
+#     var url = loves.url.to_s
+#     var edge = client.load_edge(url)
+#     assert edge.from["name"].to_s == "Andres"
+#     assert edge.to["name"].to_s == "Kate"
 class NeoEdge
 	super NeoEntity
 
@@ -780,21 +780,21 @@ end
 #
 # Example:
 #
-#    var client = new Neo4jClient("http://localhost:7474")
-#    #
-#    var node1 = new NeoNode
-#    var node2 = new NeoNode
-#    var edge = new NeoEdge(node1, "TO", node2)
-#    #
-#    var batch = new NeoBatch(client)
-#    batch.save_node(node1)
-#    batch.save_node(node2)
-#    batch.save_edge(edge)
-#    batch.execute
-#    #
-#    assert node1.is_linked
-#    assert node2.is_linked
-#    assert edge.is_linked
+#     var client = new Neo4jClient("http://localhost:7474")
+#
+#     var node1 = new NeoNode
+#     var node2 = new NeoNode
+#     var edge = new NeoEdge(node1, "TO", node2)
+#
+#     var batch = new NeoBatch(client)
+#     batch.save_node(node1)
+#     batch.save_node(node2)
+#     batch.save_edge(edge)
+#     batch.execute
+#
+#     assert node1.is_linked
+#     assert node2.is_linked
+#     assert edge.is_linked
 class NeoBatch
 
 	# Neo4j client connector
@@ -1027,4 +1027,3 @@ class NeoJob
 		return job
 	end
 end
-

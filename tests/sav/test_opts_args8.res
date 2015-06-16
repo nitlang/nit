@@ -5,5 +5,5 @@ OptionBool: true
 OptionCount: 2
 OptionString: 
 OptionInt: 10
-OptionArray: 
+OptionArray: []
 OptionEnum: 1

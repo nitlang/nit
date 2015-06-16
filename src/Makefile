@@ -22,18 +22,19 @@ BINS=$(patsubst %,../bin/%,$(OBJS))
 
 all: $(BINS)
 
-nitc_0: ../c_src/nitg parser/parser.nit
+nitc_0: ../c_src/nitc parser/parser.nit
 	@echo '***************************************************************'
 	@echo '* Compile nitc_0 from NIT source files                        *'
 	@echo '***************************************************************'
 	./git-gen-version.sh
-	../c_src/nitg ${OLDNITCOPT} -o nitc_0 -v nitc.nit
+	../c_src/nitc ${OLDNITCOPT} -o nitc_0 -v nitc.nit
 
 $(BINS): nitc_0 parser/parser.nit
 	@echo '***************************************************************'
 	@echo '* Compile binaries from NIT source files                      *'
 	@echo '***************************************************************'
 	./git-gen-version.sh
+	test -d ../bin || mkdir ../bin
 	./nitc_0 ${NITCOPT} -v --dir ../bin $(SRCS)
 	rm -r .nit_compile || true # to clean old .nit_compile generated file
 
@@ -41,7 +42,7 @@ $(OBJS): nitc_0 parser/parser.nit
 	./git-gen-version.sh
 	./nitc_0 ${NITCOPT} -v $@.nit
 
-../c_src/nitg: ../c_src/*.c ../c_src/*.h ../c_src/Makefile
+../c_src/nitc: ../c_src/*.c ../c_src/*.h ../c_src/Makefile
 	@echo '***************************************************************'
 	@echo '* Compile nitc from C source files                            *'
 	@echo '***************************************************************'

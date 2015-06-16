@@ -20,3 +20,13 @@ long native_int_length_str(long recv){
 void native_int_to_s(long recv, char* str, long buflen){
 	snprintf(str, buflen, "%ld", recv);
 }
+
+// Returns the length of `recv` as a `char*` (excluding the null character)
+long native_byte_length_str(unsigned char recv){
+	return snprintf(NULL, 0, "0x%02x", recv);
+}
+
+// Byte to NativeString method
+void native_byte_to_s(unsigned char recv, char* str, long buflen){
+	snprintf(str, buflen, "0x%02x", recv);
+}

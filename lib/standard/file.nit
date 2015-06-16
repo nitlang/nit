@@ -16,8 +16,8 @@
 module file
 
 intrude import stream
-intrude import ropes
-import string_search
+intrude import text::ropes
+import text
 import time
 import gc
 
@@ -975,7 +975,7 @@ redef class String
 	#
 	# Return an error object in case of error.
 	#
-	#    assert "/fail/does not/exist".rmdir != null
+	#     assert "/fail/does not/exist".rmdir != null
 	fun rmdir: nullable Error
 	do
 		var res = to_path.rmdir

@@ -28,7 +28,7 @@ opts.add_option(opt_ug)
 # parse and check command line options
 opts.parse(args)
 if not opts.errors.is_empty then
-	print opts.errors
+	print opts.errors.join("\n")
 	print "Usage: drop_privileges [options]"
 	opts.usage
 	exit 1
