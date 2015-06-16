@@ -519,31 +519,42 @@ redef class ANode
 	end
 end
 
+redef class AExpr
+	# Make the `mtype` of the expression live
+	# Used by literals and instantiations
+	fun allocate_mtype(v: RapidTypeVisitor)
+	do
+		var mtype = self.mtype
+		if not mtype isa MClassType then return
+		v.add_type(self.mtype.as(MClassType))
+	end
+end
+
 redef class AIntExpr
 	redef fun accept_rapid_type_visitor(v)
 	do
-		v.add_type(self.mtype.as(MClassType))
+		allocate_mtype(v)
 	end
 end
 
 redef class AByteExpr
 	redef fun accept_rapid_type_visitor(v)
 	do
-		v.add_type(self.mtype.as(MClassType))
+		allocate_mtype(v)
 	end
 end
 
 redef class AFloatExpr
 	redef fun accept_rapid_type_visitor(v)
 	do
-		v.add_type(self.mtype.as(MClassType))
+		allocate_mtype(v)
 	end
 end
 
 redef class ACharExpr
 	redef fun accept_rapid_type_visitor(v)
 	do
-		v.add_type(self.mtype.as(MClassType))
+		allocate_mtype(v)
 	end
 end
 
@@ -610,14 +621,14 @@ end
 redef class ATrueExpr
 	redef fun accept_rapid_type_visitor(v)
 	do
-		v.add_type(self.mtype.as(MClassType))
+		allocate_mtype(v)
 	end
 end
 
 redef class AFalseExpr
 	redef fun accept_rapid_type_visitor(v)
 	do
-		v.add_type(self.mtype.as(MClassType))
+		allocate_mtype(v)
 	end
 end
 
