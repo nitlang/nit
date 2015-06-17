@@ -77,9 +77,10 @@ abstract class FileStream
 	# If the buf_size is <= 0, its value will be 512 by default
 	#
 	# The mode is any of the buffer_mode enumeration in `Sys`:
-	#	- buffer_mode_full
-	#	- buffer_mode_line
-	#	- buffer_mode_none
+	#
+	# * `buffer_mode_full`
+	# * `buffer_mode_line`
+	# * `buffer_mode_none`
 	fun set_buffering_mode(buf_size, mode: Int) do
 		if buf_size <= 0 then buf_size = 512
 		if _file.set_buffering_type(buf_size, mode) != 0 then

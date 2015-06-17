@@ -36,11 +36,13 @@
 #
 # Example :
 #
+# ~~~raw
 #	            Concat
 #	          /        \
 #	    Concat          Concat
 #	   /      \        /      \
 #	"My"     " Name"  " is"   " Simon."
+# ~~~
 #
 # Note that the above example is not representative of the actual implementation
 # of `Ropes`, since short leaves are merged to keep the rope at an acceptable
