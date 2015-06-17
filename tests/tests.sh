@@ -37,6 +37,25 @@ shopt -u nullglob
 outdir="out"
 compdir="nit_compile"
 
+# User CPU time limit (in seconds)
+# Is used to avoid to CPU intensive test (infinite loops). See ulimit -t
+usertimelimit=600 # 1 CPU minute
+
+# Real-time limit (in seconds)
+# Is used to avoid waiting or sleeping tests.
+# Require timeout or timelimit, or else is not used.
+realtimelimit=300 # 5 min
+
+# User limit for write files (in kilo-bytes)
+# Is used to avoid execution that loop and fill the hard drive. See ulimit -f
+# Note that a test might require a lot of temporary disk space (eg. nitc+gcc)
+filelimit=100000 # ~100MB
+
+# Limit (in bytes) for generated .res file.
+# Larger ones are truncated and will fail tests
+# Is used to avoid processing huge crappy res file (diff, xml, etc)
+reslimit=100000 # ~100KB
+
 usage()
 {
 	e=`basename "$0"`
@@ -70,6 +89,9 @@ saferun()
 			*) stop=true
 		esac
 	done
+	(
+	ulimit -f "$filelimit"
+	ulimit -t "$usertimelimit"
 	if test -d "$1"; then
 		find $1 | sort
 	elif test -n "$TIME"; then
@@ -78,6 +100,7 @@ saferun()
 		if test -n "$a"; then echo 0 >> "$o"; else echo 0 > "$o"; fi
 		$TIMEOUT "$@"
 	fi
+	)
 }
 
 # Output a timestamp attribute for XML, or an empty line
@@ -95,9 +118,9 @@ timestamp()
 
 # Detect a working timeout
 if sh -c "timelimit echo" 1>/dev/null 2>&1; then
-	TIMEOUT="timelimit -t 600"
+	TIMEOUT="timelimit -t $realtimelimit"
 elif sh -c "timeout 1 echo" 1>/dev/null 2>&1; then
-	TIMEOUT="timeout 600s"
+	TIMEOUT="timeout ${realtimelimit}s"
 else
 	echo "No timelimit or timeout command detected. Tests may hang :("
 fi
@@ -172,6 +195,15 @@ function process_result()
 	OLD=""
 	LIST=""
 	FIRST=""
+
+	# Truncate too big res file
+	size=$(wc -c < "$outdir/$pattern.res")
+	if test -n "$reslimit" -a "$size" -gt "$reslimit"; then
+		# The most portable way to truncate a file is with Perl
+		perl -e "truncate \"$outdir/$pattern.res\", $reslimit;"
+		echo "***TRUNCATED***" >> "$outdir/$pattern.res"
+	fi
+
 	echo >>$xml "<testcase classname='`xmlesc "$pack"`' name='`xmlesc "$description"`' time='`cat -- "$outdir/$pattern.time.out"`' `timestamp`>"
 	#for sav in "sav/$engine/fixme/$pattern.res" "sav/$engine/$pattern.res" "sav/fixme/$pattern.res" "sav/$pattern.res" "sav/$pattern.sav"; do
 	for savdir in $savdirs; do
