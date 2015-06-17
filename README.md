@@ -23,9 +23,11 @@ Requirement:
 	* graphviz	http://www.graphviz.org/	to enable graphes with the nitdoc tool
 	* libunwind	http://nongnu.org/libunwind
 
-Those are available in most linux distributions
+Those are available in most Linux distributions
 
     # sudo apt-get install build-essential ccache libgc-dev graphviz libunwind pkg-config
+    or
+    # make prepare (This command is available for Debian and Ubuntu for the moment)
 
 Important files and directory:
 
@@ -56,7 +58,7 @@ How to start:
     $ bin/nitc examples/hello_world.nit
     $ ./hello_world
 
-You can put the `bin/` directoty in your PATH
+You can put the `bin/` directory in your PATH
 
 Using bash completion with Nit tools:
 
