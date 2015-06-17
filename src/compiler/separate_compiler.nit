@@ -2281,8 +2281,10 @@ class SeparateRuntimeFunction
 	fun compile_trampolines(compiler: SeparateCompiler)
 	do
 		var recv = self.mmethoddef.mclassdef.bound_mtype
-		var selfvar = arguments.first
+		var selfvar = new RuntimeVariable("self", called_recv, recv)
 		var ret = called_signature.return_mtype
+		var arguments = ["self"]
+		for i in [0..called_signature.arity[ do arguments.add "p{i}"
 
 		if mmethoddef.is_intro and not recv.is_c_primitive then
 			var m = mmethoddef.mproperty
