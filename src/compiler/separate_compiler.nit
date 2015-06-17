@@ -2214,7 +2214,7 @@ class SeparateRuntimeFunction
 		var mmethoddef = self.mmethoddef
 
 		var sig = "{c_ret} {c_name}{c_sig}"
-		compiler.provide_declaration(self.c_name, "{sig};")
+		compiler.provide_declaration(self.c_name, "{sig} __attribute__((weak));")
 
 		var rta = compiler.as(SeparateCompiler).runtime_type_analysis
 		if rta != null and not rta.live_mmodules.has(mmethoddef.mclassdef.mmodule) then
