@@ -2213,6 +2213,9 @@ class SeparateRuntimeFunction
 	do
 		var mmethoddef = self.mmethoddef
 
+		var sig = "{c_ret} {c_name}{c_sig}"
+		compiler.provide_declaration(self.c_name, "{sig};")
+
 		var recv = self.mmethoddef.mclassdef.bound_mtype
 		var v = compiler.new_visitor
 		var selfvar = new RuntimeVariable("self", called_recv, recv)
@@ -2223,12 +2226,7 @@ class SeparateRuntimeFunction
 		var msignature = called_signature
 		var ret = called_signature.return_mtype
 
-		var sig = new FlatBuffer
 		var comment = new FlatBuffer
-		sig.append(c_ret)
-		sig.append(" ")
-		sig.append(self.c_name)
-		sig.append(c_sig)
 		comment.append("({selfvar}: {selfvar.mtype}")
 		arguments.add(selfvar)
 		for i in [0..msignature.arity[ do
@@ -2244,7 +2242,6 @@ class SeparateRuntimeFunction
 		if ret != null then
 			comment.append(": {ret}")
 		end
-		compiler.provide_declaration(self.c_name, "{sig};")
 
 		v.add_decl("/* method {self} for {comment} */")
 		v.add_decl("{sig} \{")
