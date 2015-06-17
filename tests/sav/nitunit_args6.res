@@ -2,7 +2,7 @@ test_nitunit3/README.md: Error: there is a block of invalid Nit code, thus not c
 test_nitunit3/README.md: ERROR: nitunit.test_nitunit3.<group> (in .nitunit/test_nitunit3-0.nit): Runtime error: Assert failed (.nitunit/test_nitunit3-0.nit:7)
 
 DocUnits:
-Entities: 2; Documented ones: 2; With nitunits: 2; Failures: 2
+Entities: 2; Documented ones: 2; With nitunits: 3; Failures: 2
 
 TestSuites:
 No test cases found
