@@ -2216,6 +2216,11 @@ class SeparateRuntimeFunction
 		var sig = "{c_ret} {c_name}{c_sig}"
 		compiler.provide_declaration(self.c_name, "{sig};")
 
+		var rta = compiler.as(SeparateCompiler).runtime_type_analysis
+		if rta != null and not rta.live_mmodules.has(mmethoddef.mclassdef.mmodule) then
+			return
+		end
+
 		var recv = self.mmethoddef.mclassdef.bound_mtype
 		var v = compiler.new_visitor
 		var selfvar = new RuntimeVariable("self", called_recv, recv)
