@@ -141,7 +141,6 @@ interface SignalHandler
 	# otherwise the receiver is invoked when the signal is raised, it may
 	# crash the Nit system but is unavoidable for unstoppable signals.
 	fun handle_signal(signal: Int, safely: Bool) import receive_signal `{
-		SignalHandler last_handler;
 		if (signal < 32 && signal >=0) {
 			struct sigaction act;
 			sigemptyset(&act.sa_mask);
@@ -150,21 +149,26 @@ interface SignalHandler
 
 			sigaction(signal, &act, NULL);
 
-			last_handler = (SignalHandler)nit_signals_list[signal].handler;
+		#ifdef SignalHandler_decr_ref
+			SignalHandler last_handler = (SignalHandler)nit_signals_list[signal].handler;
 			if (last_handler != NULL)
 				SignalHandler_decr_ref(last_handler);
+		#endif
 
 			nit_signals_list[signal].handler = self;
+
+		#ifdef SignalHandler_incr_ref
 			SignalHandler_incr_ref(self);
+		#endif
 
 			nit_signals_list[signal].safely = safely;
+
 			nit_SignalHandler_receive_signal = SignalHandler_receive_signal;
 		}
 	`}
 
 	# Set to ignore the signal
 	fun ignore_signal(signal: Int) `{
-		SignalHandler last_handler;
 		if (signal < 32 && signal >=0) {
 			struct sigaction act;
 			sigemptyset(&act.sa_mask);
@@ -172,15 +176,16 @@ interface SignalHandler
 			act.sa_handler = SIG_IGN;
 			sigaction(signal, &act, NULL);
 
-			last_handler = (SignalHandler)nit_signals_list[signal].handler;
+		#ifdef SignalHandler_decr_ref
+			SignalHandler last_handler = (SignalHandler)nit_signals_list[signal].handler;
 			if (last_handler != NULL)
 				SignalHandler_decr_ref(last_handler);
+		#endif
 		}
 	`}
 
 	# Set default action for the signal
 	fun default_signal(signal: Int) `{
-		SignalHandler last_handler;
 		if (signal < 32 && signal >=0) {
 			struct sigaction act;
 			sigemptyset(&act.sa_mask);
@@ -188,9 +193,11 @@ interface SignalHandler
 			act.sa_handler = SIG_DFL;
 			sigaction(signal, &act, NULL);
 
-			last_handler = (SignalHandler)nit_signals_list[signal].handler;
+		#ifdef SignalHandler_decr_ref
+			SignalHandler last_handler = (SignalHandler)nit_signals_list[signal].handler;
 			if (last_handler != NULL)
 				SignalHandler_decr_ref(last_handler);
+		#endif
 		}
 	`}
 end
