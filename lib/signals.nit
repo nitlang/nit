@@ -66,19 +66,8 @@ module signals
 	#include <stdio.h>
 
 	/*
-		This guard prevents errors by the C compiler when the Nit code imports this
-		module but do not use handle_signal. When it is _not_ used, the C type
-		SignalHandler and C function SignalHandler_receive_signal are not generated.
-		Which does not please the C compiler. This guard ensure that we compile this
-		code only if the type SignalHandler has been defined.
-
-		This is a HACK, FIXME by:
-		* Adding the macro to the FFI spec, or
-		* Attach the callbacks to this code block (or the module itself)
-		* Avoid using Nit types and callbacks or use them only in the C implementation
-		  of Nit method.
 	*/
-	#ifdef NIT_TYPE_SignalHandler
+	void (*nit_SignalHandler_receive_signal)(void* self, long signal);
 
 	/*
 		Structure to manage each possible signals
@@ -87,7 +76,7 @@ module signals
 	*/
 	struct nit_signals_ent {
 		char raised; /* !=0 if has been raised */
-		SignalHandler handler; /* instance to receive call */
+		void* handler; /* instance to receive call */
 		char safely; /* if !=0 then manage signal safely, otherwise react when raised */
 	} nit_signals_list[32] = {0x0};
 
@@ -102,12 +91,10 @@ module signals
 			if (nit_signals_list[sig].safely) {
 				nit_signals_list[sig].raised += 1;
 			} else {
-				SignalHandler_receive_signal(nit_signals_list[sig].handler, sig);
+				nit_SignalHandler_receive_signal(nit_signals_list[sig].handler, sig);
 			}
 		}
 	}
-
-	#endif
 `}
 
 # Receives the callback from system when a given signal arise
@@ -164,7 +151,7 @@ interface SignalHandler
 
 			sigaction(signal, &act, NULL);
 
-			last_handler = nit_signals_list[signal].handler;
+			last_handler = (SignalHandler)nit_signals_list[signal].handler;
 			if (last_handler != NULL)
 				SignalHandler_decr_ref(last_handler);
 
@@ -172,6 +159,7 @@ interface SignalHandler
 			SignalHandler_incr_ref(self);
 
 			nit_signals_list[signal].safely = safely;
+			nit_SignalHandler_receive_signal = SignalHandler_receive_signal;
 		}
 	`}
 
@@ -185,7 +173,7 @@ interface SignalHandler
 			act.sa_handler = SIG_IGN;
 			sigaction(signal, &act, NULL);
 
-			last_handler = nit_signals_list[signal].handler;
+			last_handler = (SignalHandler)nit_signals_list[signal].handler;
 			if (last_handler != NULL)
 				SignalHandler_decr_ref(last_handler);
 		}
@@ -201,7 +189,7 @@ interface SignalHandler
 			act.sa_handler = SIG_DFL;
 			sigaction(signal, &act, NULL);
 
-			last_handler = nit_signals_list[signal].handler;
+			last_handler = (SignalHandler)nit_signals_list[signal].handler;
 			if (last_handler != NULL)
 				SignalHandler_decr_ref(last_handler);
 		}
@@ -221,7 +209,8 @@ redef interface Object
 			if (nit_signals_list[sig].raised) {
 				nit_signals_list[sig].raised = 0;
 				raised_something = 1;
-				SignalHandler_receive_signal(nit_signals_list[sig].handler, sig);
+				SignalHandler handler = (SignalHandler)nit_signals_list[sig].handler;
+				SignalHandler_receive_signal(handler, sig);
 			}
 
 		return raised_something;
