@@ -25,10 +25,12 @@ interface Comparator
 	type COMPARED: nullable Object
 
 	# Compare `a` and `b`.
+	#
 	# Returns:
-	#	-1 if a < b
-	#	0  if a = b
-	#	1  if a > b
+	#
+	# * -1 if a < b
+	# * 0  if a = b
+	# * 1  if a > b
 	fun compare(a: COMPARED, b: COMPARED): Int is abstract
 
 	# Is `seq` sorted?

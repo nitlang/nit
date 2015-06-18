@@ -62,8 +62,8 @@ end
 
 redef class WikiEntry
 	# Get a `<a>` template link to `self`
-	fun tpl_link: Writable do
-		return "<a href=\"{url}\">{title}</a>"
+	fun tpl_link(context: WikiEntry): Writable do
+		return "<a href=\"{href_from(context)}\">{title}</a>"
 	end
 end
 
@@ -113,7 +113,7 @@ redef class WikiSection
 		end
 	end
 
-	redef fun tpl_link do return index.tpl_link
+	redef fun tpl_link(context) do return index.tpl_link(context)
 
 	# Render the section hierarchy as a html tree.
 	#
@@ -133,15 +133,15 @@ redef class WikiSection
 	# </ul>
 	# ~~~
 	fun tpl_tree(limit: Int): Template do
-		return tpl_tree_intern(limit, 1)
+		return tpl_tree_intern(limit, 1, self)
 	end
 
 	# Build the template tree for this section recursively.
-	protected fun tpl_tree_intern(limit, count: Int): Template do
+	protected fun tpl_tree_intern(limit, count: Int, context: WikiEntry): Template do
 		var out = new Template
 		var index = index
 		out.add "<li>"
-		out.add tpl_link
+		out.add tpl_link(context)
 		if (limit < 0 or count < limit) and
 		   (children.length > 1 or (children.length == 1)) then
 			out.add " <ul>"
@@ -149,10 +149,10 @@ redef class WikiSection
 				if child == index then continue
 				if child isa WikiArticle then
 					out.add "<li>"
-					out.add child.tpl_link
+					out.add child.tpl_link(context)
 					out.add "</li>"
 				else if child isa WikiSection and not child.is_hidden then
-					out.add child.tpl_tree_intern(limit, count + 1)
+					out.add child.tpl_tree_intern(limit, count + 1, context)
 				end
 			end
 			out.add " </ul>"
@@ -182,9 +182,21 @@ redef class WikiArticle
 	end
 
 
+	# Load a template and resolve page-related macros
+	fun load_template(template_file: String): TemplateString do
+		var tpl = wiki.load_template(template_file)
+		if tpl.has_macro("ROOT_URL") then
+			var root_dir = href.dirname.relpath("")
+			# Avoid issues if the macro is just followed by a `/` (as with url prefix)
+			if root_dir == "" then root_dir = "."
+			tpl.replace("ROOT_URL", root_dir)
+		end
+		return tpl
+	end
+
 	# Replace macros in the template by wiki data.
 	private fun tpl_page: TemplateString do
-		var tpl = wiki.load_template(template_file)
+		var tpl = load_template(template_file)
 		if tpl.has_macro("TOP_MENU") then
 			tpl.replace("TOP_MENU", tpl_menu)
 		end
@@ -204,7 +216,7 @@ redef class WikiArticle
 	fun tpl_header: Writable do
 		var file = header_file
 		if not wiki.has_template(file) then return ""
-		return wiki.load_template(file)
+		return load_template(file)
 	end
 
 	# Generate the HTML page for this article.
@@ -262,7 +274,7 @@ redef class WikiArticle
 	fun tpl_menu: Writable do
 		var file = menu_file
 		if not wiki.has_template(file) then return ""
-		var tpl = wiki.load_template(file)
+		var tpl = load_template(file)
 		if tpl.has_macro("MENUS") then
 			var items = new Template
 			for child in wiki.root_section.children.values do
@@ -273,7 +285,7 @@ redef class WikiArticle
 					items.add " class=\"active\""
 				end
 				items.add ">"
-				items.add child.tpl_link
+				items.add child.tpl_link(self)
 				items.add "</li>"
 			end
 			tpl.replace("MENUS", items)
@@ -285,7 +297,7 @@ redef class WikiArticle
 	fun tpl_footer: Writable do
 		var file = footer_file
 		if not wiki.has_template(file) then return ""
-		var tpl = wiki.load_template(file)
+		var tpl = load_template(file)
 		var time = new Tm.gmtime
 		if tpl.has_macro("YEAR") then
 			tpl.replace("YEAR", (time.year + 1900).to_s)
@@ -424,7 +436,7 @@ class TplBreadcrumbs
 			else
 				if article.parent == entry and article.is_index then continue
 				add "<li>"
-				add entry.tpl_link
+				add entry.tpl_link(article)
 				add "</li>"
 			end
 		end

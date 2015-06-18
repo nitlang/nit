@@ -87,7 +87,8 @@ end
 
 # Leaf of a `Rope`, used as a buffered area for speedy concatenation.
 private class Leaf
-	super RopeString
+	super String
+	super Rope
 
 	var buf: ManualBuffer
 	var bns: NativeString is noinit

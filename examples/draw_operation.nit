@@ -17,6 +17,10 @@
 # Draws an arithmetic operation to the terminal
 module draw_operation
 
+`{
+	#include <math.h>
+`}
+
 redef enum Int
 	fun n_chars: Int `{
 		int c;

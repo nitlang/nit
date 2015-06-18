@@ -4,14 +4,14 @@
 #
 # This file is free software, which comes along with NIT.  This software is
 # distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
-# without  even  the implied warranty of  MERCHANTABILITY or  FITNESS FOR A 
+# without  even  the implied warranty of  MERCHANTABILITY or  FITNESS FOR A
 # PARTICULAR PURPOSE.  You can modify it is you want,  provided this header
 # is kept unaltered, and a notification of the changes is added.
 # You  are  allowed  to  redistribute it and sell it, alone or is a part of
 # another product.
 
 # Mathematical operations
-module math
+module math is ldflags "-lm"
 
 import kernel
 import collection
@@ -33,20 +33,32 @@ redef class Int
 	#     assert 0x10.bin_and(0x01) == 0
 	fun bin_and(i: Int): Int `{ return self & i; `}
 
+	# Alias of `bin_and`
+	fun &(i: Int): Int do return bin_and(i)
+
 	# Returns the result of a binary OR operation on `self` and `i`
 	#
 	#     assert 0x10.bin_or(0x01) == 0x11
 	fun bin_or(i: Int): Int `{ return self | i; `}
+
+	# Alias of `bin_or`
+	fun |(i: Int): Int do return bin_or(i)
 
 	# Returns the result of a binary XOR operation on `self` and `i`
 	#
 	#     assert 0x101.bin_xor(0x110) == 0x11
 	fun bin_xor(i: Int): Int `{ return self ^ i; `}
 
+	# Alias of `bin_xor`
+	fun ^(i: Int): Int do return bin_xor(i)
+
 	# Returns the 1's complement of `self`
 	#
 	#     assert 0x2F.bin_not == -48
 	fun bin_not: Int `{ return ~self; `}
+
+	# Alias of `bin_not`
+	fun ~: Int do return bin_not
 
 	# Returns the square root of `self`
 	#
@@ -88,6 +100,24 @@ redef class Int
 	#     assert not 13.is_even
 	fun is_odd: Bool do return not is_even
 
+	# Is self a prime number ?
+	#
+	# assert 3.is_prime
+	# assert not 1.is_prime
+	# assert not 12.is_prime
+	fun is_prime: Bool
+	do
+		if self == 2 then
+			return true
+		else if self <= 1 or self.is_even then
+			return false
+		end
+		for i in [3..self.sqrt[ do
+			if self % i == 0 then return false
+		end
+		return true
+	end
+
 	# Returns the `self` raised to the power of `e`.
 	#
 	#     assert 2 ** 3 == 8
@@ -115,6 +145,40 @@ redef class Int
 		end
 		return res
 	end
+end
+
+redef class Byte
+	# Returns the result of a binary AND operation on `self` and `i`
+	#
+	#     assert 0x10.bin_and(0x01) == 0
+	fun bin_and(i: Byte): Byte `{ return self & i; `}
+
+	# Alias of `bin_and`
+	fun &(i: Byte): Byte do return bin_and(i)
+
+	# Returns the result of a binary OR operation on `self` and `i`
+	#
+	#     assert 0x10.bin_or(0x01) == 0x11
+	fun bin_or(i: Byte): Byte `{ return self | i; `}
+
+	# Alias of `bin_or`
+	fun |(i: Byte): Byte do return bin_or(i)
+
+	# Returns the result of a binary XOR operation on `self` and `i`
+	#
+	#     assert 0x101.bin_xor(0x110) == 0x11
+	fun bin_xor(i: Byte): Byte `{ return self ^ i; `}
+
+	# Alias of `bin_xor`
+	fun ^(i: Byte): Byte do return bin_xor(i)
+
+	# Returns the 1's complement of `self`
+	#
+	#     assert 0x2F.bin_not == -48
+	fun bin_not: Byte `{ return ~self; `}
+
+	# Alias of `bin_not`
+	fun ~: Byte do return bin_not
 end
 
 redef class Float

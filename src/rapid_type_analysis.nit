@@ -519,31 +519,42 @@ redef class ANode
 	end
 end
 
+redef class AExpr
+	# Make the `mtype` of the expression live
+	# Used by literals and instantiations
+	fun allocate_mtype(v: RapidTypeVisitor)
+	do
+		var mtype = self.mtype
+		if not mtype isa MClassType then return
+		v.add_type(self.mtype.as(MClassType))
+	end
+end
+
 redef class AIntExpr
 	redef fun accept_rapid_type_visitor(v)
 	do
-		v.add_type(self.mtype.as(MClassType))
+		allocate_mtype(v)
 	end
 end
 
 redef class AByteExpr
 	redef fun accept_rapid_type_visitor(v)
 	do
-		v.add_type(self.mtype.as(MClassType))
+		allocate_mtype(v)
 	end
 end
 
 redef class AFloatExpr
 	redef fun accept_rapid_type_visitor(v)
 	do
-		v.add_type(self.mtype.as(MClassType))
+		allocate_mtype(v)
 	end
 end
 
 redef class ACharExpr
 	redef fun accept_rapid_type_visitor(v)
 	do
-		v.add_type(self.mtype.as(MClassType))
+		allocate_mtype(v)
 	end
 end
 
@@ -592,7 +603,8 @@ end
 redef class ACrangeExpr
 	redef fun accept_rapid_type_visitor(v)
 	do
-		var mtype = self.mtype.as(MClassType)
+		var mtype = self.mtype
+		if not mtype isa MClassType then return
 		v.add_type(mtype)
 		v.add_callsite(init_callsite)
 	end
@@ -601,7 +613,8 @@ end
 redef class AOrangeExpr
 	redef fun accept_rapid_type_visitor(v)
 	do
-		var mtype = self.mtype.as(MClassType)
+		var mtype = self.mtype
+		if not mtype isa MClassType then return
 		v.add_type(mtype)
 		v.add_callsite(init_callsite)
 	end
@@ -610,28 +623,32 @@ end
 redef class ATrueExpr
 	redef fun accept_rapid_type_visitor(v)
 	do
-		v.add_type(self.mtype.as(MClassType))
+		allocate_mtype(v)
 	end
 end
 
 redef class AFalseExpr
 	redef fun accept_rapid_type_visitor(v)
 	do
-		v.add_type(self.mtype.as(MClassType))
+		allocate_mtype(v)
 	end
 end
 
 redef class AIsaExpr
 	redef fun accept_rapid_type_visitor(v)
 	do
-		v.add_cast_type(self.cast_type.as(not null))
+		var cast_type = self.cast_type
+		if cast_type == null then return
+		v.add_cast_type(cast_type)
 	end
 end
 
 redef class AAsCastExpr
 	redef fun accept_rapid_type_visitor(v)
 	do
-		v.add_cast_type(self.mtype.as(not null))
+		var mtype = self.mtype
+		if mtype == null then return
+		v.add_cast_type(mtype)
 	end
 end
 

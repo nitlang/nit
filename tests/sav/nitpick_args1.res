@@ -1,7 +1,7 @@
 ../lib/standard/bytes.nit:51,7--19: Documentation warning: Undocumented property `with_capacity`
 ../lib/standard/bytes.nit:164,6--13: Documentation warning: Undocumented property `to_bytes`
 ../lib/standard/stream.nit:425,6--17: Documentation warning: Undocumented property `buffer_reset`
-../lib/standard/file.nit:454,6--19: Documentation warning: Undocumented property `read_all_bytes`
+../lib/standard/file.nit:455,6--19: Documentation warning: Undocumented property `read_all_bytes`
 test_advice_repeated_types.nit:36,15--20: Warning: useless type repetition on redefined attribute `_a`
 test_advice_repeated_types.nit:37,18--20: Warning: useless type repetition on parameter `b1` for redefined method `b`
 test_advice_repeated_types.nit:38,18--20: Warning: useless type repetition on parameter `c1` for redefined method `c`

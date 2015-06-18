@@ -24,7 +24,7 @@ var r2: Buffer = new FlatBuffer
 #alt1 r2 = new RopeBuffer
 
 var i = 0
-while i < 5000 do
+while i < 1000 do
     var j = 0
     while j < s.length do
         r.add(s.chars[j])

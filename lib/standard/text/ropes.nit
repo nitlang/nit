@@ -36,11 +36,13 @@
 #
 # Example :
 #
+# ~~~raw
 #	            Concat
 #	          /        \
 #	    Concat          Concat
 #	   /      \        /      \
 #	"My"     " Name"  " is"   " Simon."
+# ~~~
 #
 # Note that the above example is not representative of the actual implementation
 # of `Ropes`, since short leaves are merged to keep the rope at an acceptable
@@ -63,16 +65,12 @@ private abstract class Rope
 	super Text
 end
 
-private abstract class RopeString
+# Node that represents a concatenation between two `String`
+private class Concat
 	super Rope
 	super String
 
 	redef var chars is lazy do return new RopeChars(self)
-end
-
-# Node that represents a concatenation between two `String`
-private class Concat
-	super RopeString
 
 	redef var length is noinit
 
@@ -499,14 +497,14 @@ private class RopeReviter
 	# the Rope traversal.
 	var subs: IndexedIterator[String]
 
-	init(root: RopeString) is old_style_init do
+	init(root: Concat) is old_style_init do
 		pos = root.length - 1
 		subs = new ReverseRopeSubstrings(root)
 		ns = subs.item
 		pns = ns.length - 1
 	end
 
-	init from(root: RopeString, pos: Int) do
+	init from(root: Concat, pos: Int) do
 		self.pos = pos
 		subs = new ReverseRopeSubstrings.from(root, pos)
 		ns = subs.item
@@ -546,7 +544,7 @@ private class RopeIter
 	# Position (char) in the Rope (0-indexed)
 	var pos: Int
 
-	init(root: RopeString) is old_style_init do
+	init(root: Concat) is old_style_init do
 		subs = new RopeSubstrings(root)
 		pns = 0
 		str = subs.item
@@ -554,7 +552,7 @@ private class RopeIter
 		pos = 0
 	end
 
-	init from(root: RopeString, pos: Int) do
+	init from(root: Concat, pos: Int) do
 		subs = new RopeSubstrings.from(root, pos)
 		pns = pos - subs.index
 		self.pos = pos
@@ -592,7 +590,7 @@ private class ReverseRopeSubstrings
 	# Current leaf
 	var str: String is noinit
 
-	init(root: RopeString) is old_style_init do
+	init(root: Concat) is old_style_init do
 		var r = new RopeIterPiece(root, false, true, null)
 		pos = root.length - 1
 		var lnod: String = root
@@ -608,7 +606,7 @@ private class ReverseRopeSubstrings
 		end
 	end
 
-	init from(root: RopeString, pos: Int) do
+	init from(root: Concat, pos: Int) do
 		var r = new RopeIterPiece(root, false, true, null)
 		var rnod: String = root
 		var off = pos
@@ -714,7 +712,7 @@ private class RopeSubstrings
 	# Current leaf
 	var str: FlatString is noinit
 
-	init(root: RopeString) is old_style_init do
+	init(root: Concat) is old_style_init do
 		var r = new RopeIterPiece(root, true, false, null)
 		pos = 0
 		max = root.length - 1
@@ -732,7 +730,7 @@ private class RopeSubstrings
 		end
 	end
 
-	init from(root: RopeString, pos: Int) do
+	init from(root: Concat, pos: Int) do
 		var r = new RopeIterPiece(root, true, false, null)
 		max = root.length - 1
 		var rnod: String = root
@@ -794,11 +792,11 @@ private class RopeSubstrings
 	end
 end
 
-# Implementation of a `StringCharView` for `RopeString` objects
+# Implementation of a `StringCharView` for `Concat` objects
 private class RopeChars
 	super StringCharView
 
-	redef type SELFTYPE: RopeString
+	redef type SELFTYPE: Concat
 
 	redef fun [](i) do
 		return target[i]

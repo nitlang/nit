@@ -800,11 +800,19 @@ redef class AMethPropdef
 		if mpropdef.is_intern then
 			fatal(v, "NOT YET IMPLEMENTED intern {mpropdef}")
 		else if mpropdef.is_extern then
-			fatal(v, "NOT YET IMPLEMENTED extern {mpropdef}")
+			var res = call_extern(v, mpropdef, arguments, f)
+			if res != v.error_instance then return res
 		else
 			fatal(v, "NOT YET IMPLEMENTED <wat?> {mpropdef}")
 		end
 		abort
+	end
+
+	# Call this extern method
+	protected fun call_extern(v: NaiveInterpreter, mpropdef: MMethodDef, arguments: Array[Instance], f: Frame): nullable Instance
+	do
+		fatal(v, "NOT YET IMPLEMENTED extern {mpropdef}")
+		return v.error_instance
 	end
 
 	# Interprets a intern or a shortcut extern method.

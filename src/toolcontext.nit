@@ -574,16 +574,18 @@ end
 #
 # On some Linux systems `bash_completion` allow the program to control command line behaviour.
 #
-#	$ nitls [TAB][TAB]
-#	file1.nit              file2.nit              file3.nit
+# ~~~sh
+# $ nitls [TAB][TAB]
+# file1.nit              file2.nit              file3.nit
 #
-#	$ nitls --[TAB][TAB]
-#	--bash-toolname        --keep                 --path                 --tree
-#	--depends              --log                  --project              --verbose
-#	--disable-phase        --log-dir              --quiet                --version
-#	--gen-bash-completion  --no-color             --recursive            --warn
-#	--help                 --only-metamodel       --source
-#	--ignore-visibility    --only-parse           --stop-on-first-error
+# $ nitls --[TAB][TAB]
+# --bash-toolname        --keep                 --path                 --tree
+# --depends              --log                  --project              --verbose
+# --disable-phase        --log-dir              --quiet                --version
+# --gen-bash-completion  --no-color             --recursive            --warn
+# --help                 --only-metamodel       --source
+# --ignore-visibility    --only-parse           --stop-on-first-error
+# ~~~
 #
 # Generated file can be placed in system bash_completion directory `/etc/bash_completion.d/`
 # or source it in `~/.bash_completion`.

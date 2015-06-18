@@ -1696,18 +1696,27 @@ abstract class AbstractCompilerVisitor
 	# `mtype` is the expected return type, pass null if no specific type is expected.
 	fun expr(nexpr: AExpr, mtype: nullable MType): RuntimeVariable
 	do
-		if nexpr.mtype == null then
+		var old = self.current_node
+		self.current_node = nexpr
+
+		var res = null
+		if nexpr.mtype != null then
+			res = nexpr.expr(self)
+		end
+
+		if res == null then
 			# Untyped expression.
 			# Might mean dead code or invalid code.
 			# so aborts
 			add_abort("FATAL: bad expression executed.")
 			# and return a placebo result to please the C compiler
 			if mtype == null then mtype = compiler.mainmodule.object_type
-			return new_var(mtype)
+			res = new_var(mtype)
+
+			self.current_node = old
+			return res
 		end
-		var old = self.current_node
-		self.current_node = nexpr
-		var res = nexpr.expr(self).as(not null)
+
 		if mtype != null then
 			mtype = self.anchor(mtype)
 			res = self.autobox(res, mtype)
@@ -3035,7 +3044,9 @@ redef class AIsaExpr
 	redef fun expr(v)
 	do
 		var i = v.expr(self.n_expr, null)
-		return v.type_test(i, self.cast_type.as(not null), "isa")
+		var cast_type = self.cast_type
+		if cast_type == null then return null # no-no on broken node
+		return v.type_test(i, cast_type, "isa")
 	end
 end
 

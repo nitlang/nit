@@ -194,9 +194,6 @@ class Nitiwiki
 		end
 		var file = expand_path(config.root_dir, config.templates_dir, name)
 		var tpl = new TemplateString.from_file(file)
-		if tpl.has_macro("ROOT_URL") then
-			tpl.replace("ROOT_URL", config.root_url)
-		end
 		if tpl.has_macro("TITLE") then
 			tpl.replace("TITLE", config.wiki_name)
 		end
@@ -553,8 +550,10 @@ class WikiArticle
 	redef var src_full_path: nullable String = null
 
 	redef fun src_path do
+		var src_full_path = self.src_full_path
 		if src_full_path == null then return null
-		return src_full_path.substring_from(wiki.config.root_dir.length)
+		var res = wiki.config.root_dir.relpath(src_full_path)
+		return res
 	end
 
 	# The page markdown source content.

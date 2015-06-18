@@ -439,16 +439,21 @@ end
 # No coloring order is garantied
 #
 # Example:
-#	buckets[A] = {x1, x2}
-#   buckets[B] = {x1, x3, x4}
-#	buckets[C] = {x2, x3}
+#
+# * buckets[A] = {x1, x2}
+# * buckets[B] = {x1, x3, x4}
+# * buckets[C] = {x2, x3}
+#
 # Conflicts:
-#	x1: {x2, x3, x4}
-#   x2: {x1, x3}
-#   x3: {x1, x2, x4}
-#   x4: {x1, x3}
+#
+# * x1: {x2, x3, x4}
+# * x2: {x1, x3}
+# * x3: {x1, x2, x4}
+# * x4: {x1, x3}
+#
 # Possible colors:
-#	x1: 0, x2: 1, x3: 2, x4: 1
+#
+# * x1: 0, x2: 1, x3: 2, x4: 1
 class BucketsColorer[H: Object, E: Object]
 	private var colors = new HashMap[E, Int]
 	private var conflicts = new HashMap[E, Set[E]]
