@@ -107,10 +107,10 @@ interface SignalHandler
 	#
 	#     class MyReceiver
 	#         super SignalHandler
-	#     
+	#
 	#         redef fun receive_signal(signal) do print "received safely {signal}"
 	#     end
-	#     
+	#
 	#     var r = new MyReceiver
 	#     r.handle_signal(sigint, true) # will call back when "check_signals" is called
 	#     # ...
@@ -127,10 +127,10 @@ interface SignalHandler
 	#
 	#     class MyReceiver
 	#         super SignalHandler
-	#     
+	#
 	#         redef fun receive_signal_unsafe(signal) do print "received unsafely {signal}"
 	#     end
-	#     
+	#
 	#     var r = new MyReceiver
 	#     r.handle_signal(sigsegv, false) # `r.receive_signal_unsafe` will be invoked on sigsegv
 	fun receive_signal_unsafe(signal: Int) do end
@@ -140,8 +140,7 @@ interface SignalHandler
 	# If `safely`, receiver will be called when `check_signals` in invoked
 	# otherwise the receiver is invoked when the signal is raised, it may
 	# crash the Nit system but is unavoidable for unstoppable signals.
-	fun handle_signal(signal: Int, safely: Bool) import
-		receive_signal `{
+	fun handle_signal(signal: Int, safely: Bool) import receive_signal `{
 		SignalHandler last_handler;
 		if (signal < 32 && signal >=0) {
 			struct sigaction act;
@@ -227,7 +226,7 @@ redef class Process
 
 	# Send the kill signal to the process
 	fun kill do signal(sigkill)
-	
+
 	# Native implementation of `signal`
 	private fun native_kill(pid, signal: Int) `{ kill(pid, signal); `}
 end
@@ -304,7 +303,7 @@ fun sigvtalrm: Int do return 26
 # Profiling timer expired
 fun sigprof: Int do return 27
 
-# Sent to a process when its controlling terminal changes its window size 
+# Sent to a process when its controlling terminal changes its window size
 fun sigwinch: Int do return 28
 
 # Sent to a process when the system experiences a power failure
