@@ -1076,7 +1076,7 @@ redef class AWhileExpr
 		old_block.link(block)
 
 		self.n_expr.generate_basic_blocks(ssa, old_block)
-		var inside_block = self.n_block.generate_basic_blocks(ssa, block)
+		self.n_block.generate_basic_blocks(ssa, block)
 
 		# Link the inside of the block to the previous block
 		block.link_special(old_block)
