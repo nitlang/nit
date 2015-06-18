@@ -1689,14 +1689,8 @@ redef class ABinopExpr
 	redef fun property_name do return operator
 	redef fun property_node do return n_op
 end
-redef class AEqExpr
-	redef fun accept_typing(v)
-	do
-		super
-		v.null_test(self)
-	end
-end
-redef class ANeExpr
+
+redef class AEqFormExpr
 	redef fun accept_typing(v)
 	do
 		super
