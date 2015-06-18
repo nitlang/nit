@@ -1304,7 +1304,8 @@ redef class AOrElseExpr
 		end
 
 		if t1 isa MNullType then
-			v.error(n_expr, "Type Error: `or else` on `null`.")
+			self.mtype = t2
+			return
 		else if v.check_can_be_null(n_expr, t1) then
 			t1 = t1.as_notnull
 		end
