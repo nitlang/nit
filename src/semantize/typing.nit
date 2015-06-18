@@ -184,12 +184,12 @@ private class TypeVisitor
 	end
 
 
-	fun visit_expr_cast(node: ANode, nexpr: AExpr, ntype: AType): nullable MType
+	fun check_expr_cast(node: ANode, nexpr: AExpr, ntype: AType): nullable MType
 	do
-		var sub = visit_expr(nexpr)
+		var sub = nexpr.mtype
 		if sub == null then return null # Forward error
 
-		var sup = self.resolve_mtype(ntype)
+		var sup = ntype.mtype
 		if sup == null then return null # Forward error
 
 		if sup == sub then
@@ -240,7 +240,7 @@ private class TypeVisitor
 		if not mtype2 isa MNullType then return
 
 		# Check of useless null
-		if not check_can_be_null(anode.n_expr, mtype) then return
+		if not can_be_null(mtype) then return
 
 		if mtype isa MNullType then
 			# Because of type adaptation, we cannot just stop here
@@ -1322,7 +1322,7 @@ redef class AOrElseExpr
 		if t1 isa MNullType then
 			self.mtype = t2
 			return
-		else if v.check_can_be_null(n_expr, t1) then
+		else if v.can_be_null(t1) then
 			t1 = t1.as_notnull
 		end
 
@@ -1337,6 +1337,16 @@ redef class AOrElseExpr
 			#v.error(self, "Type Error: ambiguous type {t1} vs {t2}")
 		end
 		self.mtype = t
+	end
+
+	redef fun accept_post_typing(v)
+	do
+		var t1 = n_expr.mtype
+		if t1 == null then
+			return
+		else
+			v.check_can_be_null(n_expr, t1)
+		end
 	end
 end
 
@@ -1541,7 +1551,10 @@ redef class AIsaExpr
 	var cast_type: nullable MType
 	redef fun accept_typing(v)
 	do
-		var mtype = v.visit_expr_cast(self, self.n_expr, self.n_type)
+		v.visit_expr(n_expr)
+
+		var mtype = v.resolve_mtype(n_type)
+
 		self.cast_type = mtype
 
 		var variable = self.n_expr.its_variable
@@ -1555,12 +1568,24 @@ redef class AIsaExpr
 
 		self.mtype = v.type_bool(self)
 	end
+
+	redef fun accept_post_typing(v)
+	do
+		v.check_expr_cast(self, self.n_expr, self.n_type)
+	end
 end
 
 redef class AAsCastExpr
 	redef fun accept_typing(v)
 	do
-		self.mtype = v.visit_expr_cast(self, self.n_expr, self.n_type)
+		v.visit_expr(n_expr)
+
+		self.mtype = v.resolve_mtype(n_type)
+	end
+
+	redef fun accept_post_typing(v)
+	do
+		v.check_expr_cast(self, self.n_expr, self.n_type)
 	end
 end
 
@@ -1575,11 +1600,18 @@ redef class AAsNotnullExpr
 			return
 		end
 
-		if v.check_can_be_null(n_expr, mtype) then
+		if v.can_be_null(mtype) then
 			mtype = mtype.as_notnull
 		end
 
 		self.mtype = mtype
+	end
+
+	redef fun accept_post_typing(v)
+	do
+		var mtype = n_expr.mtype
+		if mtype == null then return
+		v.check_can_be_null(n_expr, mtype)
 	end
 end
 
@@ -1711,6 +1743,18 @@ redef class AEqFormExpr
 	do
 		super
 		v.null_test(self)
+	end
+
+	redef fun accept_post_typing(v)
+	do
+		var mtype = n_expr.mtype
+		var mtype2 = n_expr2.mtype
+
+		if mtype == null or mtype2 == null then return
+
+		if not mtype2 isa MNullType then return
+
+		v.check_can_be_null(n_expr, mtype)
 	end
 end
 
