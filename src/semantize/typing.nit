@@ -217,6 +217,10 @@ private class TypeVisitor
 	# Else return true.
 	fun check_can_be_null(anode: ANode, mtype: MType): Bool
 	do
+		if mtype isa MNullType then
+			modelbuilder.warning(anode, "useless-null-test", "Warning: expression is always `null`.")
+			return true
+		end
 		if can_be_null(mtype) then return true
 
 		if mtype isa MFormalType then
