@@ -748,11 +748,27 @@ redef class AMethPropdef
 			if not v.has_loop or not v.dirty then break
 		end
 
+		var post_visitor = new PostTypingVisitor(v)
+		post_visitor.enter_visit(self)
+
 		if not nblock.after_flow_context.is_unreachable and msignature.return_mtype != null then
 			# We reach the end of the function without having a return, it is bad
 			v.error(self, "Error: reached end of function; expected `return` with a value.")
 		end
 	end
+end
+
+private class PostTypingVisitor
+	super Visitor
+	var type_visitor: TypeVisitor
+	redef fun visit(n) do
+		n.visit_all(self)
+		n.accept_post_typing(type_visitor)
+	end
+end
+
+redef class ANode
+	private fun accept_post_typing(v: TypeVisitor) do end
 end
 
 redef class AAttrPropdef
