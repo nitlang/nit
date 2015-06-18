@@ -64,6 +64,7 @@ module signals
 	#define _POSIX_SOURCE 1
 	#include <signal.h>
 	#include <stdio.h>
+	#include <unistd.h>
 
 	/*
 	*/
@@ -78,7 +79,7 @@ module signals
 		char raised; /* !=0 if has been raised */
 		void* handler; /* instance to receive call */
 		char safely; /* if !=0 then manage signal safely, otherwise react when raised */
-	} nit_signals_list[32] = {0x0};
+	} nit_signals_list[32] = {{0}};
 
 	/* Receiver to all signals
 		If unsafe, it calls directly the Nit receiver,
