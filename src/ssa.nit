@@ -706,7 +706,7 @@ redef class AAssertExpr
 			self.n_else.generate_basic_blocks(ssa, block_false)
 		else
 			block_false.first = self
-			block_false.first = self
+			block_false.last = self
 		end
 
 		old_block.link(block_false)
@@ -1083,6 +1083,8 @@ redef class AWhileExpr
 
 		# Create a new Block after the while
 		var new_block = new BasicBlock
+		new_block.first = self
+		new_block.last = self
 		new_block.need_update = true
 
 		old_block.link_special(new_block)
@@ -1131,6 +1133,9 @@ redef class AForExpr
 		block.link(old_block)
 
 		var new_block = new BasicBlock
+		new_block.first = self
+		new_block.last = self
+
 		new_block.need_update = true
 
 		return new_block
