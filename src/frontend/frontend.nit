@@ -27,6 +27,7 @@ import check_annotation
 import glsl_validation
 import parallelization_phase
 import i18n_phase
+import regex_phase
 
 redef class ToolContext
 	# FIXME: there is conflict in linex in nitc, so use this trick to force invocation
