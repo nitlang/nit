@@ -143,7 +143,8 @@ redef class ASuperstringExpr
 		var fmt = ""
 		var exprs = new Array[AExpr]
 		for i in n_exprs do
-			if i isa AStringFormExpr then
+			if i isa AStartStringExpr or i isa AEndStringExpr or i isa AMidStringExpr then
+				assert i isa AStringFormExpr
 				fmt += i.value.as(not null)
 			else
 				fmt += "%"
