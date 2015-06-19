@@ -23,7 +23,7 @@ class OpportunityHeader
 	super Template
 
 	# Javascript code that is included in the `OpportunityPage`
-	var page_js = "" is writable
+	var page_js: String = "" is writable # FIXME remove static type when #1530 is fixed
 
 	redef fun rendering do
 		add """
