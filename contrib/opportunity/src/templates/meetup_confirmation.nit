@@ -13,7 +13,7 @@
 # limitations under the License
 
 # Page to show when the creation of a Meetup is successful
-module meetup_confirmation
+module meetup_confirmation is i18n
 
 import boilerplate
 import opportunity_model
@@ -27,14 +27,14 @@ class MeetupConfirmation
 	init do
 		body = """
 		<div class="page-header">
-			<center><h1>Your meetup was successfully created</h1></center>
+			<center><h1>{{{"Your meetup was successfully created"}}}</h1></center>
 		</div>
 		<div class="container">
 			<div class="alert alert-success text-center" role="alert">
-			Invite participants by sharing this link: <a href="./?meetup_id={{{meetup.id}}}">{{{meetup.name}}}</a>
+			{{{"Invite participants by sharing this link:"}}} <a href="./?meetup_id={{{meetup.id}}}">{{{meetup.name}}}</a>
 			</div>
 			<p class="text-center">
-			See you soon for more Opportunities!
+			{{{"See you soon for more Opportunities!"}}}
 			</p>
 		</div>
 		"""
