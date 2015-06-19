@@ -212,6 +212,11 @@ redef class APropdef
 	# instantiation, method dispatch, attribute access, subtyping-test
 	var object_sites: Array[AExpr] = new Array[AExpr]
 
+	# The return variable of the propdef
+	# Create an empty variable for the return of the method
+	# and treat returns like variable assignments
+	var returnvar: Variable = new Variable("returnvar")
+
 	# Compute the three steps of SSA-algorithm
 	# `ssa` A new instance of SSA class initialized with `self`
 	fun compute_ssa(ssa: SSA)
@@ -470,6 +475,9 @@ redef class AAttrPropdef
 		basic_block.first = self
 		basic_block.last = self
 
+		# Add the return variable
+		variables.add(returnvar)
+
 		# Add the self variable
 		if self.selfvariable != null then variables.add(selfvariable.as(not null))
 
@@ -482,12 +490,6 @@ redef class AAttrPropdef
 end
 
 redef class AMethPropdef
-
-	# The return variable of the propdef
-	# Create an empty variable for the return of the method
-	# and treat returns like variable assignments
-	var returnvar: Variable = new Variable("returnvar")
-
 	redef fun generate_basic_blocks(ssa: SSA)
 	do
 		basic_block = new BasicBlock
@@ -678,9 +680,7 @@ redef class AReturnExpr
 			old_block = self.n_expr.generate_basic_blocks(ssa, old_block)
 
 			# Store the return expression in the dependences of the dedicated returnvar
-			if ssa.propdef isa AMethPropdef then
-				ssa.propdef.as(AMethPropdef).returnvar.dep_exprs.add(n_expr.as(not null))
-			end
+			ssa.propdef.returnvar.dep_exprs.add(n_expr.as(not null))
 		end
 
 		old_block.last = self
@@ -706,7 +706,7 @@ redef class AAssertExpr
 			self.n_else.generate_basic_blocks(ssa, block_false)
 		else
 			block_false.first = self
-			block_false.first = self
+			block_false.last = self
 		end
 
 		old_block.link(block_false)
@@ -1076,13 +1076,15 @@ redef class AWhileExpr
 		old_block.link(block)
 
 		self.n_expr.generate_basic_blocks(ssa, old_block)
-		var inside_block = self.n_block.generate_basic_blocks(ssa, block)
+		self.n_block.generate_basic_blocks(ssa, block)
 
 		# Link the inside of the block to the previous block
 		block.link_special(old_block)
 
 		# Create a new Block after the while
 		var new_block = new BasicBlock
+		new_block.first = self
+		new_block.last = self
 		new_block.need_update = true
 
 		old_block.link_special(new_block)
@@ -1131,6 +1133,9 @@ redef class AForExpr
 		block.link(old_block)
 
 		var new_block = new BasicBlock
+		new_block.first = self
+		new_block.last = self
+
 		new_block.need_update = true
 
 		return new_block
