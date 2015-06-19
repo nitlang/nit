@@ -130,8 +130,8 @@ end
 redef class AStringExpr
 
 	redef fun accept_string_finder(v) do
-		var str = value.as(not null).escape_to_c
 		var parse = v.toolcontext.parse_expr("\"{str}\".get_translation(\"{v.domain}\", \"{v.languages_location}\").unescape_nit")
+		var str = value.as(not null).escape_to_gettext
 		replace_with(parse)
 		v.add_string(str, location)
 	end
@@ -152,7 +152,7 @@ redef class ASuperstringExpr
 				fmt += exprs.length.to_s
 			end
 		end
-		fmt = fmt.escape_to_c
+		fmt = fmt.escape_to_gettext
 		v.add_string(fmt, location)
 		var parse = v.toolcontext.parse_expr("\"{fmt}\".get_translation(\"{v.domain}\", \"{v.languages_location}\").unescape_nit.format()")
 		if not parse isa ACallExpr then
@@ -215,5 +215,12 @@ class POFile
 		var f = new FileWriter.open(path)
 		write_to(f)
 		f.close
+	end
+end
+
+redef class Text
+	private fun escape_to_gettext: String
+	do
+		return escape_to_c.replace("\{", "\\\{").replace("\}", "\\\}")
 	end
 end
