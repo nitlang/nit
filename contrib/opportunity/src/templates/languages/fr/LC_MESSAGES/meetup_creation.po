@@ -1,0 +1,53 @@
+#: templates::meetup_creation 52--109:129, templates::meetup_creation 125--24:44
+msgid "Another opportunity"
+msgstr "Une autre opportunité"
+
+#: templates::meetup_creation 66--126:132
+msgid "Close"
+msgstr "Fermer"
+
+#: templates::meetup_creation 79--64:76
+msgid "Meetup name"
+msgstr "Nom de l'événement"
+
+#: templates::meetup_creation 81--98:107
+msgid "My Event"
+msgstr "Mon événement"
+
+#: templates::meetup_creation 85--64:70
+msgid "When?"
+msgstr "Quand?"
+
+#: templates::meetup_creation 87--98:116
+msgid "Time of the event"
+msgstr "Moment de l'événement"
+
+#: templates::meetup_creation 91--66:73
+msgid "Where?"
+msgstr "Où?"
+
+#: templates::meetup_creation 93--100:119
+msgid "Place of the event"
+msgstr "Endroit de l'événement"
+
+#: templates::meetup_creation 97--65:85
+msgid "Add a Maybe option?"
+msgstr "Ajouter l'option 'peut-être'"
+
+#: templates::meetup_creation 124--20:38
+msgid "First opportunity"
+msgstr "Première opportunité"
+
+#: templates::meetup_creation 142--76:95
+msgid "Add an opportunity"
+msgstr "Ajouter une opportunité"
+
+#: templates::meetup_creation 143--61:75
+msgid "Create meetup"
+msgstr "Créer l'événement"
+
+msgid "Create a meetup"
+msgstr "Créer un nouvel événement"
+
+msgid "Opportunities"
+msgstr "Opportunités"
