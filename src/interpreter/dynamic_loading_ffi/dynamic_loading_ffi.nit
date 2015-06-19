@@ -96,7 +96,7 @@ private extern class CallArg `{ nit_call_arg* `}
 	fun instance=(value: Instance) `{ self->value_Pointer = value; `}
 
 	# The `NativeString` held by this cell
-	fun native_string: NativeString `{ return (unsigned char*)self->value_Pointer; `}
+	fun native_string: NativeString `{ return (char*)self->value_Pointer; `}
 
 	# Set the content of this cell according to `static_type`
 	#
