@@ -868,8 +868,12 @@ abstract class Text
 				i -= 1
 				var fmt_end = i
 				var ciph_len = fmt_end - ciph_st + 1
+
+				var arg_index = substring(ciph_st, ciph_len).to_i - 1
+				if arg_index >= args.length then continue
+
 				s.push substring(curr_st, fmt_st - curr_st)
-				s.push args[substring(ciph_st, ciph_len).to_i - 1].to_s
+				s.push args[arg_index].to_s
 				curr_st = i + 1
 			end
 			i += 1
