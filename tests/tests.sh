@@ -481,7 +481,7 @@ case $engine in
 		;;
 esac
 
-savdirs="sav/$engine $savdirs sav/"
+savdirs="sav/`hostname -s` sav/`uname` sav/$engine $savdirs sav/"
 
 # The default nitc compiler
 [ -z "$NITC" ] && find_nitc
