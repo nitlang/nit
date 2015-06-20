@@ -131,7 +131,7 @@ redef class AStringExpr
 
 	redef fun accept_string_finder(v) do
 		var str = value.as(not null).escape_to_gettext
-		var code = "\"{str}\".get_translation(\"{v.domain}\", \"{v.languages_location}\").unescape_nit"
+		var code = "\"{str}\".get_translation(\"{v.domain}\", \"{v.languages_location}\")"
 		var parse = v.toolcontext.parse_expr(code)
 		replace_with(parse)
 		v.add_string(str, location)
@@ -155,7 +155,7 @@ redef class ASuperstringExpr
 		end
 		fmt = fmt.escape_to_gettext
 		v.add_string(fmt, location)
-		var code = "\"{fmt}\".get_translation(\"{v.domain}\", \"{v.languages_location}\").unescape_nit.format()"
+		var code = "\"{fmt}\".get_translation(\"{v.domain}\", \"{v.languages_location}\").format()"
 		var parse = v.toolcontext.parse_expr(code)
 		if not parse isa ACallExpr then
 			v.toolcontext.error(location, "Fatal error in i18n annotation, the parsed superstring could not be generated properly")
