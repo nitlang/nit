@@ -318,8 +318,8 @@ redef class ILine[N]
 
 	redef fun left do return point_left.x
 	redef fun right do return point_right.x
-	redef fun top do return point_left.y.min(point_right.y)
-	redef fun bottom do return point_left.y.max(point_right.y)
+	redef fun top do return point_left.y.max(point_right.y)
+	redef fun bottom do return point_left.y.min(point_right.y)
 end
 
 redef class ILine3d[N]
