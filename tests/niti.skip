@@ -9,6 +9,7 @@ nitc_args3
 nitc_args5
 nitc_args6
 nitc_args8
+nitpick_args1
 nitunit_args
 test_docdown_args
 pep8analysis

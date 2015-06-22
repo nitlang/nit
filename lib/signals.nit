@@ -64,21 +64,11 @@ module signals
 	#define _POSIX_SOURCE 1
 	#include <signal.h>
 	#include <stdio.h>
+	#include <unistd.h>
 
 	/*
-		This guard prevents errors by the C compiler when the Nit code imports this
-		module but do not use handle_signal. When it is _not_ used, the C type
-		SignalHandler and C function SignalHandler_receive_signal are not generated.
-		Which does not please the C compiler. This guard ensure that we compile this
-		code only if the type SignalHandler has been defined.
-
-		This is a HACK, FIXME by:
-		* Adding the macro to the FFI spec, or
-		* Attach the callbacks to this code block (or the module itself)
-		* Avoid using Nit types and callbacks or use them only in the C implementation
-		  of Nit method.
 	*/
-	#ifdef NIT_TYPE_SignalHandler
+	void (*nit_SignalHandler_receive_signal)(void* self, long signal);
 
 	/*
 		Structure to manage each possible signals
@@ -87,9 +77,9 @@ module signals
 	*/
 	struct nit_signals_ent {
 		char raised; /* !=0 if has been raised */
-		SignalHandler handler; /* instance to receive call */
+		void* handler; /* instance to receive call */
 		char safely; /* if !=0 then manage signal safely, otherwise react when raised */
-	} nit_signals_list[32] = {0x0};
+	} nit_signals_list[32] = {{0}};
 
 	/* Receiver to all signals
 		If unsafe, it calls directly the Nit receiver,
@@ -102,12 +92,10 @@ module signals
 			if (nit_signals_list[sig].safely) {
 				nit_signals_list[sig].raised += 1;
 			} else {
-				SignalHandler_receive_signal(nit_signals_list[sig].handler, sig);
+				nit_SignalHandler_receive_signal(nit_signals_list[sig].handler, sig);
 			}
 		}
 	}
-
-	#endif
 `}
 
 # Receives the callback from system when a given signal arise
@@ -120,10 +108,10 @@ interface SignalHandler
 	#
 	#     class MyReceiver
 	#         super SignalHandler
-	#     
+	#
 	#         redef fun receive_signal(signal) do print "received safely {signal}"
 	#     end
-	#     
+	#
 	#     var r = new MyReceiver
 	#     r.handle_signal(sigint, true) # will call back when "check_signals" is called
 	#     # ...
@@ -140,10 +128,10 @@ interface SignalHandler
 	#
 	#     class MyReceiver
 	#         super SignalHandler
-	#     
+	#
 	#         redef fun receive_signal_unsafe(signal) do print "received unsafely {signal}"
 	#     end
-	#     
+	#
 	#     var r = new MyReceiver
 	#     r.handle_signal(sigsegv, false) # `r.receive_signal_unsafe` will be invoked on sigsegv
 	fun receive_signal_unsafe(signal: Int) do end
@@ -153,9 +141,7 @@ interface SignalHandler
 	# If `safely`, receiver will be called when `check_signals` in invoked
 	# otherwise the receiver is invoked when the signal is raised, it may
 	# crash the Nit system but is unavoidable for unstoppable signals.
-	fun handle_signal(signal: Int, safely: Bool) import
-		receive_signal `{
-		SignalHandler last_handler;
+	fun handle_signal(signal: Int, safely: Bool) import receive_signal `{
 		if (signal < 32 && signal >=0) {
 			struct sigaction act;
 			sigemptyset(&act.sa_mask);
@@ -164,20 +150,26 @@ interface SignalHandler
 
 			sigaction(signal, &act, NULL);
 
-			last_handler = nit_signals_list[signal].handler;
+		#ifdef SignalHandler_decr_ref
+			SignalHandler last_handler = (SignalHandler)nit_signals_list[signal].handler;
 			if (last_handler != NULL)
 				SignalHandler_decr_ref(last_handler);
+		#endif
 
 			nit_signals_list[signal].handler = self;
+
+		#ifdef SignalHandler_incr_ref
 			SignalHandler_incr_ref(self);
+		#endif
 
 			nit_signals_list[signal].safely = safely;
+
+			nit_SignalHandler_receive_signal = SignalHandler_receive_signal;
 		}
 	`}
 
 	# Set to ignore the signal
 	fun ignore_signal(signal: Int) `{
-		SignalHandler last_handler;
 		if (signal < 32 && signal >=0) {
 			struct sigaction act;
 			sigemptyset(&act.sa_mask);
@@ -185,15 +177,16 @@ interface SignalHandler
 			act.sa_handler = SIG_IGN;
 			sigaction(signal, &act, NULL);
 
-			last_handler = nit_signals_list[signal].handler;
+		#ifdef SignalHandler_decr_ref
+			SignalHandler last_handler = (SignalHandler)nit_signals_list[signal].handler;
 			if (last_handler != NULL)
 				SignalHandler_decr_ref(last_handler);
+		#endif
 		}
 	`}
 
 	# Set default action for the signal
 	fun default_signal(signal: Int) `{
-		SignalHandler last_handler;
 		if (signal < 32 && signal >=0) {
 			struct sigaction act;
 			sigemptyset(&act.sa_mask);
@@ -201,9 +194,11 @@ interface SignalHandler
 			act.sa_handler = SIG_DFL;
 			sigaction(signal, &act, NULL);
 
-			last_handler = nit_signals_list[signal].handler;
+		#ifdef SignalHandler_decr_ref
+			SignalHandler last_handler = (SignalHandler)nit_signals_list[signal].handler;
 			if (last_handler != NULL)
 				SignalHandler_decr_ref(last_handler);
+		#endif
 		}
 	`}
 end
@@ -221,7 +216,8 @@ redef interface Object
 			if (nit_signals_list[sig].raised) {
 				nit_signals_list[sig].raised = 0;
 				raised_something = 1;
-				SignalHandler_receive_signal(nit_signals_list[sig].handler, sig);
+				SignalHandler handler = (SignalHandler)nit_signals_list[sig].handler;
+				SignalHandler_receive_signal(handler, sig);
 			}
 
 		return raised_something;
@@ -238,7 +234,7 @@ redef class Process
 
 	# Send the kill signal to the process
 	fun kill do signal(sigkill)
-	
+
 	# Native implementation of `signal`
 	private fun native_kill(pid, signal: Int) `{ kill(pid, signal); `}
 end
@@ -315,7 +311,7 @@ fun sigvtalrm: Int do return 26
 # Profiling timer expired
 fun sigprof: Int do return 27
 
-# Sent to a process when its controlling terminal changes its window size 
+# Sent to a process when its controlling terminal changes its window size
 fun sigwinch: Int do return 28
 
 # Sent to a process when the system experiences a power failure

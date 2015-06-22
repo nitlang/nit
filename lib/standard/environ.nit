@@ -57,8 +57,8 @@ redef class String
 end
 
 redef class NativeString
-	private fun get_environ: NativeString is extern "string_NativeString_NativeString_get_environ_0"
-	private fun setenv( v : NativeString ) is extern "string_NativeString_NativeString_setenv_1"
+	private fun get_environ: NativeString `{ return getenv(self); `}
+	private fun setenv(value: NativeString) `{ setenv(self, value, 1); `}
 end
 
 redef class Sys

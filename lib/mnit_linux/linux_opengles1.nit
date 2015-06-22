@@ -43,7 +43,7 @@ redef class Opengles1Display
 		return super
 	end
 
-	fun init_from_sdl( sdl_display: SDLDisplay ): Bool is extern `{
+	fun init_from_sdl( sdl_display: SDLDisplay ): Bool `{
 		mnit_sdl_surface = sdl_display;
 
 		mnit_window = (NativeWindowType)XOpenDisplay(NULL);
@@ -77,14 +77,14 @@ redef class Opengles1Display
 end
 
 redef extern class Opengles1Image
-	new from_sdl_image( sdl_image: SDLImage ) is extern `{
+	new from_sdl_image( sdl_image: SDLImage ) `{
 		return mnit_opengles_load_image( sdl_image->pixels,
 			sdl_image->w, sdl_image->h,
 			sdl_image->w, sdl_image->h, sdl_image->format->Amask );
 	`}
 
 	# using sdl
-	new from_file( path: String ) is extern import String.to_cstring `{
+	new from_file( path: String ) import String.to_cstring `{
 		SDL_Surface *sdl_image;
 		struct mnit_opengles_Texture *opengles_image;
 

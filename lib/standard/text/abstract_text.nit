@@ -16,6 +16,12 @@ import math
 import collection
 intrude import collection::array
 
+in "C" `{
+	#include <stdio.h>
+	#include <stdlib.h>
+	#include <string.h>
+`}
+
 # High-level abstraction for all text representations
 abstract class Text
 	super Comparable
@@ -1322,10 +1328,14 @@ end
 
 redef class Byte
 	# C function to calculate the length of the `NativeString` to receive `self`
-	private fun byte_to_s_len: Int is extern "native_byte_length_str"
+	private fun byte_to_s_len: Int `{
+		return snprintf(NULL, 0, "0x%02x", self);
+	`}
 
 	# C function to convert an nit Int to a NativeString (char*)
-	private fun native_byte_to_s(nstr: NativeString, strlen: Int) is extern "native_byte_to_s"
+	private fun native_byte_to_s(nstr: NativeString, strlen: Int) `{
+		snprintf(nstr, strlen, "0x%02x", self);
+	`}
 
 	# Displayable byte in its hexadecimal form (0x..)
 	#
@@ -1343,7 +1353,7 @@ end
 redef class Int
 
 	# Wrapper of strerror C function
-	private fun strerror_ext: NativeString is extern "strerror"
+	private fun strerror_ext: NativeString `{ return strerror(self); `}
 
 	# Returns a string describing error number
 	fun strerror: String do return strerror_ext.to_s
@@ -1373,10 +1383,14 @@ redef class Int
 	end
 
 	# C function to calculate the length of the `NativeString` to receive `self`
-	private fun int_to_s_len: Int is extern "native_int_length_str"
+	private fun int_to_s_len: Int `{
+		return snprintf(NULL, 0, "%ld", self);
+	`}
 
 	# C function to convert an nit Int to a NativeString (char*)
-	private fun native_int_to_s(nstr: NativeString, strlen: Int) is extern "native_int_to_s"
+	private fun native_int_to_s(nstr: NativeString, strlen: Int) `{
+		snprintf(nstr, strlen, "%ld", self);
+	`}
 
 	# return displayable int in base base and signed
 	fun to_base(base: Int, signed: Bool): String is abstract

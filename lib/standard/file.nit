@@ -273,7 +273,9 @@ redef class Int
 	# Creates a file stream from a file descriptor `fd` using the file access `mode`.
 	#
 	# NOTE: The `mode` specified must be compatible with the one used in the file descriptor.
-	private fun fd_to_stream(mode: NativeString): NativeFile is extern "file_int_fdtostream"
+	private fun fd_to_stream(mode: NativeString): NativeFile `{
+		return fdopen(self, mode);
+	`}
 end
 
 # Constant for read-only file streams
@@ -300,7 +302,15 @@ class Stdin
 		prepare_buffer(1)
 	end
 
-	redef fun poll_in is extern "file_stdin_poll_in"
+	redef fun poll_in `{
+		struct pollfd fd = {0, POLLIN, 0};
+		int res = poll(&fd, 1, 0);
+		if (res == -1) {
+			perror("Error poll stdin");
+			exit(EXIT_FAILURE);
+		}
+		return res > 0;
+	`}
 end
 
 # Standard output stream.
@@ -1064,8 +1074,24 @@ redef class String
 end
 
 redef class NativeString
-	private fun file_exists: Bool is extern "string_NativeString_NativeString_file_exists_0"
-	private fun file_stat: NativeFileStat is extern "string_NativeString_NativeString_file_stat_0"
+	private fun file_exists: Bool `{
+		FILE *hdl = fopen(self,"r");
+		if(hdl != NULL){
+			fclose(hdl);
+		}
+		return hdl != NULL;
+	`}
+
+	private fun file_stat: NativeFileStat `{
+		struct stat buff;
+		if(stat(self, &buff) != -1) {
+			struct stat* stat_element;
+			stat_element = malloc(sizeof(struct stat));
+			return memcpy(stat_element, &buff, sizeof(struct stat));
+		}
+		return 0;
+	`}
+
 	private fun file_lstat: NativeFileStat `{
 		struct stat* stat_element;
 		int res;
@@ -1074,63 +1100,106 @@ redef class NativeString
 		if (res == -1) return NULL;
 		return stat_element;
 	`}
-	private fun file_mkdir: Bool is extern "string_NativeString_NativeString_file_mkdir_0"
+
+	private fun file_mkdir: Bool `{ return !mkdir(self, 0777); `}
+
 	private fun rmdir: Bool `{ return !rmdir(self); `}
-	private fun file_delete: Bool is extern "string_NativeString_NativeString_file_delete_0"
-	private fun file_chdir: Bool is extern "string_NativeString_NativeString_file_chdir_0"
-	private fun file_realpath: NativeString is extern "file_NativeString_realpath"
+
+	private fun file_delete: Bool `{
+		return remove(self) == 0;
+	`}
+
+	private fun file_chdir: Bool `{ return !chdir(self); `}
+
+	private fun file_realpath: NativeString `{ return realpath(self, NULL); `}
 end
 
 # This class is system dependent ... must reify the vfs
 private extern class NativeFileStat `{ struct stat * `}
+
 	# Returns the permission bits of file
-	fun mode: Int is extern "file_FileStat_FileStat_mode_0"
+	fun mode: Int `{ return self->st_mode; `}
+
 	# Returns the last access time
-	fun atime: Int is extern "file_FileStat_FileStat_atime_0"
+	fun atime: Int `{ return self->st_atime; `}
+
 	# Returns the last status change time
-	fun ctime: Int is extern "file_FileStat_FileStat_ctime_0"
+	fun ctime: Int `{ return self->st_ctime; `}
+
 	# Returns the last modification time
-	fun mtime: Int is extern "file_FileStat_FileStat_mtime_0"
+	fun mtime: Int `{ return self->st_mtime; `}
+
 	# Returns the size
-	fun size: Int is extern "file_FileStat_FileStat_size_0"
+	fun size: Int `{ return self->st_size; `}
 
 	# Returns true if it is a regular file (not a device file, pipe, sockect, ...)
 	fun is_reg: Bool `{ return S_ISREG(self->st_mode); `}
+
 	# Returns true if it is a directory
 	fun is_dir: Bool `{ return S_ISDIR(self->st_mode); `}
+
 	# Returns true if it is a character device
 	fun is_chr: Bool `{ return S_ISCHR(self->st_mode); `}
+
 	# Returns true if it is a block device
 	fun is_blk: Bool `{ return S_ISBLK(self->st_mode); `}
+
 	# Returns true if the type is fifo
 	fun is_fifo: Bool `{ return S_ISFIFO(self->st_mode); `}
+
 	# Returns true if the type is a link
 	fun is_lnk: Bool `{ return S_ISLNK(self->st_mode); `}
+
 	# Returns true if the type is a socket
 	fun is_sock: Bool `{ return S_ISSOCK(self->st_mode); `}
 end
 
 # Instance of this class are standard FILE * pointers
 private extern class NativeFile `{ FILE* `}
-	fun io_read(buf: NativeString, len: Int): Int is extern "file_NativeFile_NativeFile_io_read_2"
-	fun io_write(buf: NativeString, len: Int): Int is extern "file_NativeFile_NativeFile_io_write_2"
+	fun io_read(buf: NativeString, len: Int): Int `{
+		return fread(buf, 1, len, self);
+	`}
+
+	fun io_write(buf: NativeString, len: Int): Int `{
+		return fwrite(buf, 1, len, self);
+	`}
+
 	fun write_byte(value: Int): Int `{
 		unsigned char b = (unsigned char)value;
 		return fwrite(&b, 1, 1, self);
 	`}
-	fun io_close: Int is extern "file_NativeFile_NativeFile_io_close_0"
-	fun file_stat: NativeFileStat is extern "file_NativeFile_NativeFile_file_stat_0"
-	fun fileno: Int `{ return fileno(self); `}
-	# Flushes the buffer, forcing the write operation
-	fun flush: Int is extern "fflush"
-	# Used to specify how the buffering will be handled for the current stream.
-	fun set_buffering_type(buf_length: Int, mode: Int): Int is extern "file_NativeFile_NativeFile_set_buffering_type_0"
 
-	new io_open_read(path: NativeString) is extern "file_NativeFileCapable_NativeFileCapable_io_open_read_1"
-	new io_open_write(path: NativeString) is extern "file_NativeFileCapable_NativeFileCapable_io_open_write_1"
-	new native_stdin is extern "file_NativeFileCapable_NativeFileCapable_native_stdin_0"
-	new native_stdout is extern "file_NativeFileCapable_NativeFileCapable_native_stdout_0"
-	new native_stderr is extern "file_NativeFileCapable_NativeFileCapable_native_stderr_0"
+	fun io_close: Int `{ return fclose(self); `}
+
+	fun file_stat: NativeFileStat `{
+		struct stat buff;
+		if(fstat(fileno(self), &buff) != -1) {
+			struct stat* stat_element;
+			stat_element = malloc(sizeof(struct stat));
+			return memcpy(stat_element, &buff, sizeof(struct stat));
+		}
+		return 0;
+	`}
+
+	fun fileno: Int `{ return fileno(self); `}
+
+	# Flushes the buffer, forcing the write operation
+	fun flush: Int `{ return fflush(self); `}
+
+	# Used to specify how the buffering will be handled for the current stream.
+	fun set_buffering_type(buf_length: Int, mode: Int): Int `{
+		return setvbuf(self, NULL, mode, buf_length);
+	`}
+
+	new io_open_read(path: NativeString) `{ return fopen(path, "r"); `}
+
+	new io_open_write(path: NativeString) `{ return fopen(path, "w"); `}
+
+	new native_stdin `{ return stdin; `}
+
+	new native_stdout `{ return stdout; `}
+
+	new native_stderr `{ return stderr; `}
 end
 
 # Standard `DIR*` pointer
@@ -1163,11 +1232,13 @@ redef class Sys
 	var stderr: Writer = new Stderr is protected writable, lazy
 
 	# Enumeration for buffer mode full (flushes when buffer is full)
-	fun buffer_mode_full: Int is extern "file_Sys_Sys_buffer_mode_full_0"
+	fun buffer_mode_full: Int `{ return _IOFBF; `}
+
 	# Enumeration for buffer mode line (flushes when a `\n` is encountered)
-	fun buffer_mode_line: Int is extern "file_Sys_Sys_buffer_mode_line_0"
+	fun buffer_mode_line: Int `{ return _IONBF; `}
+
 	# Enumeration for buffer mode none (flushes ASAP when something is written)
-	fun buffer_mode_none: Int is extern "file_Sys_Sys_buffer_mode_none_0"
+	fun buffer_mode_none: Int `{ return _IOLBF; `}
 
 	# returns first available stream to read or write to
 	# return null on interruption (possibly a signal)
@@ -1193,7 +1264,8 @@ redef class Sys
 		end
 	end
 
-	private fun intern_poll(in_fds: Array[Int], out_fds: Array[Int]) : nullable Int is extern import Array[Int].length, Array[Int].[], Int.as(nullable Int) `{
+	private fun intern_poll(in_fds: Array[Int], out_fds: Array[Int]): nullable Int
+	import Array[Int].length, Array[Int].[], Int.as(nullable Int) `{
 		int in_len, out_len, total_len;
 		struct pollfd *c_fds;
 		int i;
@@ -1281,5 +1353,6 @@ do
 end
 
 # Return the working (current) directory
-fun getcwd: String do return file_getcwd.to_s
-private fun file_getcwd: NativeString is extern "string_NativeString_NativeString_file_getcwd_0"
+fun getcwd: String do return native_getcwd.to_s
+
+private fun native_getcwd: NativeString `{ return getcwd(NULL, 0); `}
