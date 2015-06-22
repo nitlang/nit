@@ -215,6 +215,11 @@ class SQuadTree[E: Boxed[Numeric]]
 	# the height of the current node of the QuadTree
 	var height: Numeric
 
+	init
+	do
+		center = new Point[Numeric](width.div(2), height.div(2))
+	end
+
 	init with_parent(l: Int, c: Point[Numeric], w: Numeric, h: Numeric, p: QuadTree[E])
 	do
 		init(l, w, h)
@@ -224,11 +229,22 @@ class SQuadTree[E: Boxed[Numeric]]
 
 	redef fun subdivide
 	do
-		var two = self.center.x.value_of(2)
-		var tree = self.center.x.value_of(3)
-		child0 = new SQuadTree[E].with_parent(self.item_limit, new Point[Numeric](self.center.x/two, self.center.y/two), self.width/two, self.height/two, self)
-		child1 = new SQuadTree[E].with_parent(self.item_limit, new Point[Numeric](self.center.x/two, (self.center.y*tree)/two), self.width/two, self.height/two, self)
-		child2 = new SQuadTree[E].with_parent(self.item_limit, new Point[Numeric]((self.center.x*tree)/two, (self.center.y*tree)/two), self.width/two, self.height/two, self)
-		child3 = new SQuadTree[E].with_parent(self.item_limit, new Point[Numeric]((self.center.x*tree)/two, self.center.y/two), self.width/two, self.height/two, self)
+		child0 = new SQuadTree[E].with_parent(self.item_limit, new Point[Numeric](self.center.x.div(2), self.center.y.div(2)), self.width.div(2), self.height.div(2), self)
+		child1 = new SQuadTree[E].with_parent(self.item_limit, new Point[Numeric](self.center.x.div(2), (self.center.y.mul(3)).div(2)), self.width.div(2), self.height.div(2), self)
+		child2 = new SQuadTree[E].with_parent(self.item_limit, new Point[Numeric]((self.center.x.mul(3)).div(2), (self.center.y.mul(3)).div(2)), self.width.div(2), self.height.div(2), self)
+		child3 = new SQuadTree[E].with_parent(self.item_limit, new Point[Numeric]((self.center.x.mul(3)).div(2), self.center.y.div(2)), self.width.div(2), self.height.div(2), self)
+	end
+
+	redef fun to_s
+	do
+		var s = "center : {center.to_s}\n"
+		for d in data do s += d.to_s
+		if child0 != null then
+			s += "\nchild0: {child0.to_s}\n"
+			s += "   child1: {child1.to_s}\n"
+			s += "   child2: {child2.to_s}\n"
+			s += "   child3: {child3.to_s}\n"
+		end
+		return s
 	end
 end
