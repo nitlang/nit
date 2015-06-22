@@ -41,33 +41,39 @@ class MarkdownProcessor
 	#
 	#   In normal markdown the following:
 	#
-	#		This is a paragraph
-	#		* and this is not a list
+	# ~~~md
+	# This is a paragraph
+	# * and this is not a list
+	# ~~~
 	#
 	#   Will produce:
 	#
-	#		<p>This is a paragraph
-	#		* and this is not a list</p>
+	# ~~~html
+	# <p>This is a paragraph
+	# * and this is not a list</p>
+	# ~~~
 	#
-	#	When using extended mode this changes to:
+	#   When using extended mode this changes to:
 	#
-	#		<p>This is a paragraph</p>
-	#		<ul>
-	#		<li>and this is not a list</li>
-	#		</ul>
+	# ~~~html
+	# <p>This is a paragraph</p>
+	# <ul>
+	# <li>and this is not a list</li>
+	# </ul>
+	# ~~~
 	#
 	# * Fences code blocks
 	#
 	#   If you don't want to indent your all your code with 4 spaces,
 	#   you can wrap your code in ``` ``` ``` or `~~~`.
 	#
-	#	Here's an example:
+	#   Here's an example:
 	#
-	#		```
-	#		fun test do
-	#			print "Hello World!"
-	#		end
-	#		```
+	# ~~~md
+	# fun test do
+	#    print "Hello World!"
+	# end
+	# ~~~
 	#
 	# * Code blocks meta
 	#
@@ -76,43 +82,55 @@ class MarkdownProcessor
 	#   You can add an optional language identifier after the fence declaration to output
 	#   it in the HTML render.
 	#
-	#		```nit
-	#		import markdown
+	# ```nit
+	# import markdown
 	#
-	#		print "# Hello World!".md_to_html
-	#		```
+	# print "# Hello World!".md_to_html
+	# ```
 	#
 	#   Becomes
 	#
-	#		<pre class="nit"><code>import markdown
+	# ~~~html
+	# <pre class="nit"><code>import markdown
 	#
-	#		print "Hello World!".md_to_html
-	#		</code></pre>
+	# print "Hello World!".md_to_html
+	# </code></pre>
+	# ~~~
 	#
 	# * Underscores (Emphasis)
 	#
 	#   Underscores in the middle of a word like:
 	#
-	#		Con_cat_this
+	# ~~~md
+	# Con_cat_this
+	# ~~~
 	#
-	#	normally produces this:
+	#   normally produces this:
 	#
-	#		<p>Con<em>cat</em>this</p>
+	# ~~~html
+	# <p>Con<em>cat</em>this</p>
+	# ~~~
 	#
 	#   With extended mode they don't result in emphasis.
 	#
-	#		<p>Con_cat_this</p>
+	# ~~~html
+	# <p>Con_cat_this</p>
+	# ~~~
 	#
 	# * Strikethrough
 	#
 	#   Like in [GFM](https://help.github.com/articles/github-flavored-markdown),
 	#   strikethrought span is marked with `~~`.
 	#
-	#		~~Mistaken text.~~
+	# ~~~md
+	# ~~Mistaken text.~~
+	# ~~~
 	#
 	#   becomes
 	#
-	#		<del>Mistaken text.</del>
+	# ~~~html
+	# <del>Mistaken text.</del>
+	# ~~~
 	var ext_mode = true
 
 	init do self.emitter = new MarkdownEmitter(self)
@@ -250,8 +268,10 @@ class MarkdownProcessor
 	#
 	# Markdown allows link refs to be defined over two lines:
 	#
-	#	[id]: http://example.com/longish/path/to/resource/here
-	#		"Optional Title Here"
+	# ~~~md
+	# [id]: http://example.com/longish/path/to/resource/here
+	#	"Optional Title Here"
+	# ~~~
 	#
 	private var last_link_ref: nullable LinkRef = null
 

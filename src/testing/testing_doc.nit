@@ -68,7 +68,6 @@ class NitUnitExecutor
 
 		# Populate `blocks` from the markdown decorator
 		mdproc.process(mdoc.content.join("\n"))
-		if blocks.is_empty then return
 
 		toolcontext.check_errors
 
@@ -77,11 +76,13 @@ class NitUnitExecutor
 				var ne = new HTMLTag("failure")
 				ne.attr("message", msg)
 				tc.add ne
+				toolcontext.modelbuilder.unit_entities += 1
 				toolcontext.modelbuilder.failed_entities += 1
 			end
 			if blocks.is_empty then testsuite.add(tc)
 		end
 
+		if blocks.is_empty then return
 		for block in blocks do
 			docunits.add new DocUnit(mdoc, tc, block.write_to_string)
 		end
