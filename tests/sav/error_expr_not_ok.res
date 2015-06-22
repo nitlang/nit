@@ -131,6 +131,7 @@ error_expr_not_ok.nit:147,8--11: Error: method or variable `fail` unknown in `Sy
 error_expr_not_ok.nit:149,14--17: Error: method or variable `fail` unknown in `Sys`.
 error_expr_not_ok.nit:149,7--24: Type Error: expected `A`, got `String`.
 error_expr_not_ok.nit:150,7--10: Error: method or variable `fail` unknown in `Sys`.
+error_expr_not_ok.nit:150,7--18: Type Error: expected `A`, got `Int`.
 error_expr_not_ok.nit:151,7--10: Error: method or variable `fail` unknown in `Sys`.
 error_expr_not_ok.nit:152,7--10: Error: method or variable `fail` unknown in `Sys`.
 error_expr_not_ok.nit:152,7--18: Type Error: expected `A`, got `Bool`.

@@ -2094,15 +2094,22 @@ class ANotExpr
 	var n_expr: AExpr is writable, noinit
 end
 
+# A `==` or a `!=` expression
+#
+# Both have a similar effect on adaptive typing, so this class factorizes the common behavior.
+class AEqFormExpr
+	super ABinopExpr
+end
+
 # A `==` expression
 class AEqExpr
-	super ABinopExpr
+	super AEqFormExpr
 	redef fun operator do return "=="
 end
 
 # A `!=` expression
 class ANeExpr
-	super ABinopExpr
+	super AEqFormExpr
 	redef fun operator do return "!="
 end
 

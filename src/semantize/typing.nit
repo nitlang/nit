@@ -184,12 +184,12 @@ private class TypeVisitor
 	end
 
 
-	fun visit_expr_cast(node: ANode, nexpr: AExpr, ntype: AType): nullable MType
+	fun check_expr_cast(node: ANode, nexpr: AExpr, ntype: AType): nullable MType
 	do
-		var sub = visit_expr(nexpr)
+		var sub = nexpr.mtype
 		if sub == null then return null # Forward error
 
-		var sup = self.resolve_mtype(ntype)
+		var sup = ntype.mtype
 		if sup == null then return null # Forward error
 
 		if sup == sub then
@@ -217,6 +217,10 @@ private class TypeVisitor
 	# Else return true.
 	fun check_can_be_null(anode: ANode, mtype: MType): Bool
 	do
+		if mtype isa MNullType then
+			modelbuilder.warning(anode, "useless-null-test", "Warning: expression is always `null`.")
+			return true
+		end
 		if can_be_null(mtype) then return true
 
 		if mtype isa MFormalType then
@@ -240,7 +244,7 @@ private class TypeVisitor
 		if not mtype2 isa MNullType then return
 
 		# Check of useless null
-		if not check_can_be_null(anode.n_expr, mtype) then return
+		if not can_be_null(mtype) then return
 
 		if mtype isa MNullType then
 			# Because of type adaptation, we cannot just stop here
@@ -748,11 +752,27 @@ redef class AMethPropdef
 			if not v.has_loop or not v.dirty then break
 		end
 
+		var post_visitor = new PostTypingVisitor(v)
+		post_visitor.enter_visit(self)
+
 		if not nblock.after_flow_context.is_unreachable and msignature.return_mtype != null then
 			# We reach the end of the function without having a return, it is bad
 			v.error(self, "Error: reached end of function; expected `return` with a value.")
 		end
 	end
+end
+
+private class PostTypingVisitor
+	super Visitor
+	var type_visitor: TypeVisitor
+	redef fun visit(n) do
+		n.visit_all(self)
+		n.accept_post_typing(type_visitor)
+	end
+end
+
+redef class ANode
+	private fun accept_post_typing(v: TypeVisitor) do end
 end
 
 redef class AAttrPropdef
@@ -1304,8 +1324,9 @@ redef class AOrElseExpr
 		end
 
 		if t1 isa MNullType then
-			v.error(n_expr, "Type Error: `or else` on `null`.")
-		else if v.check_can_be_null(n_expr, t1) then
+			self.mtype = t2
+			return
+		else if v.can_be_null(t1) then
 			t1 = t1.as_notnull
 		end
 
@@ -1320,6 +1341,16 @@ redef class AOrElseExpr
 			#v.error(self, "Type Error: ambiguous type {t1} vs {t2}")
 		end
 		self.mtype = t
+	end
+
+	redef fun accept_post_typing(v)
+	do
+		var t1 = n_expr.mtype
+		if t1 == null then
+			return
+		else
+			v.check_can_be_null(n_expr, t1)
+		end
 	end
 end
 
@@ -1524,7 +1555,10 @@ redef class AIsaExpr
 	var cast_type: nullable MType
 	redef fun accept_typing(v)
 	do
-		var mtype = v.visit_expr_cast(self, self.n_expr, self.n_type)
+		v.visit_expr(n_expr)
+
+		var mtype = v.resolve_mtype(n_type)
+
 		self.cast_type = mtype
 
 		var variable = self.n_expr.its_variable
@@ -1538,12 +1572,24 @@ redef class AIsaExpr
 
 		self.mtype = v.type_bool(self)
 	end
+
+	redef fun accept_post_typing(v)
+	do
+		v.check_expr_cast(self, self.n_expr, self.n_type)
+	end
 end
 
 redef class AAsCastExpr
 	redef fun accept_typing(v)
 	do
-		self.mtype = v.visit_expr_cast(self, self.n_expr, self.n_type)
+		v.visit_expr(n_expr)
+
+		self.mtype = v.resolve_mtype(n_type)
+	end
+
+	redef fun accept_post_typing(v)
+	do
+		v.check_expr_cast(self, self.n_expr, self.n_type)
 	end
 end
 
@@ -1558,11 +1604,18 @@ redef class AAsNotnullExpr
 			return
 		end
 
-		if v.check_can_be_null(n_expr, mtype) then
+		if v.can_be_null(mtype) then
 			mtype = mtype.as_notnull
 		end
 
 		self.mtype = mtype
+	end
+
+	redef fun accept_post_typing(v)
+	do
+		var mtype = n_expr.mtype
+		if mtype == null then return
+		v.check_can_be_null(n_expr, mtype)
 	end
 end
 
@@ -1688,18 +1741,24 @@ redef class ABinopExpr
 	redef fun property_name do return operator
 	redef fun property_node do return n_op
 end
-redef class AEqExpr
+
+redef class AEqFormExpr
 	redef fun accept_typing(v)
 	do
 		super
 		v.null_test(self)
 	end
-end
-redef class ANeExpr
-	redef fun accept_typing(v)
+
+	redef fun accept_post_typing(v)
 	do
-		super
-		v.null_test(self)
+		var mtype = n_expr.mtype
+		var mtype2 = n_expr2.mtype
+
+		if mtype == null or mtype2 == null then return
+
+		if not mtype2 isa MNullType then return
+
+		v.check_can_be_null(n_expr, mtype)
 	end
 end
 

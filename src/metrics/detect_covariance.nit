@@ -318,7 +318,7 @@ redef class TypeVisitor
 
 	fun dcp: DetectCovariancePhase do return modelbuilder.toolcontext.detect_covariance_phase
 
-	redef fun visit_expr_cast(node, nexpr, ntype)
+	redef fun check_expr_cast(node, nexpr, ntype)
 	do
 		var sub = super
 
