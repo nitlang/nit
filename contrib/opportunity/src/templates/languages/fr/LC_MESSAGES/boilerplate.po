@@ -1,0 +1,11 @@
+msgid "Opportunity - The meetup planner"
+msgstr "Opportunité - L'organisateur d'événements"
+
+msgid "Opportunity"
+msgstr "Opportunité"
+
+msgid "Opportunity, the meetup planner."
+msgstr "Opportunité, l'organisateur d'événements."
+
+msgid "Proudly powered by %1!"
+msgstr "Fièrement codé en %1!"

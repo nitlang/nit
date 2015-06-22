@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License
 
-module meetup_creation
+module meetup_creation is i18n
 
 import boilerplate
 import opportunity_model
@@ -49,7 +49,7 @@ function new_answer(sender){
 	ansdiv.append('<div class="form-group">' +
 		'<label for="answer_' + nb + '" class="col-sm-4 control-label">' + nb + '</label>' +
 		'<div class="col-sm-8">' +
-			'<input name="answer_' + nb + '" id="answer_' + nb + '" class="form-control" type="text" placeholder="Another opportunity">' +
+			'<input name="answer_' + nb + '" id="answer_' + nb + '" class="form-control" type="text" placeholder="{{{"Another opportunity"}}}">' +
 		'</div></div>')
 }
 """
@@ -63,7 +63,7 @@ function new_answer(sender){
 		if error != null then
 			bdy.add "<p></p>"
 			bdy.add """<div class="alert alert-danger alert-dismissible" role="alert">
-				<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+				<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">{{{"Close"}}}</span></button>
 				"""
 			bdy.add error.as(not null)
 			bdy.add "</div>"
@@ -71,35 +71,35 @@ function new_answer(sender){
 
 		bdy.add """
 		<div class="page-header">
-			<center><h1>Create a meetup</h1></center>
+			<center><h1>{{{"Create a meetup"}}}</h1></center>
 		</div>
 		"""
 		bdy.add """<form class="form-horizontal" action="meetup_create" method="POST" role="form">
 			<div class = "form-group">
-				<label for="meetup_name" class="col-sm-4 control-label">Meetup name</label>
+				<label for="meetup_name" class="col-sm-4 control-label">{{{"Meetup name"}}}</label>
 				<div class="col-sm-8">
-					<input name="meetup_name" id="meetup_name" type="text" class="form-control" placeholder="My Event" value="{{{if meet != null then meet.name else ""}}}" />
+					<input name="meetup_name" id="meetup_name" type="text" class="form-control" placeholder="{{{"My Event"}}}" value="{{{if meet != null then meet.name else ""}}}" />
 				</div>
 			</div>
 			<div class = "form-group">
-				<label for="meetup_date" class="col-sm-4 control-label">When?</label>
+				<label for="meetup_date" class="col-sm-4 control-label">{{{"When?"}}}</label>
 				<div class="col-sm-8">
-					<input name="meetup_date" id="meetup_date" type="text" class="form-control" placeholder="Time of the event" value="{{{if meet != null then meet.date else ""}}}">
+					<input name="meetup_date" id="meetup_date" type="text" class="form-control" placeholder="{{{"Time of the event"}}}" value="{{{if meet != null then meet.date else ""}}}">
 				</div>
 			</div>
 			<div class = "form-group">
-				<label for="meetup=place" class="col-sm-4 control-label">Where?</label>
+				<label for="meetup=place" class="col-sm-4 control-label">{{{"Where?"}}}</label>
 				<div class="col-sm-8">
-					<input name="meetup_place" id="meetup_place" type="text" class="form-control" placeholder="Place of the event" value="{{{if meet != null then meet.place else ""}}}">
+					<input name="meetup_place" id="meetup_place" type="text" class="form-control" placeholder="{{{"Place of the event"}}}" value="{{{if meet != null then meet.place else ""}}}">
 				</div>
 			</div>
 			<div class = "form-group">
-				<label for="meetup=maybe" class="col-sm-4 control-label">Add a Maybe option?</label>
+				<label for="meetup=maybe" class="col-sm-4 control-label">{{{"Add a Maybe option?"}}}</label>
 				<div class="col-sm-8">
 					<input name="meetup_mode" id="meetup_mode" type="checkbox" class="form-control">
 				</div>
 			</div>
-				<h2>Opportunities</h2>
+				<h2>{{{"Opportunities"}}}</h2>
 <div id="answers">
 """
 
@@ -139,8 +139,8 @@ function new_answer(sender){
 		bdy.add """
 			</div>
 			<div class="form-group">
-				<button type="button" class="btn btn-lg" onclick="new_answer(this)">Add an opportunity</button>
-				<button type="submit" class="btn btn-lg btn-success">Create meetup</button>
+				<button type="button" class="btn btn-lg" onclick="new_answer(this)">{{{"Add an opportunity"}}}</button>
+				<button type="submit" class="btn btn-lg btn-success">{{{"Create meetup"}}}</button>
 			</div>
 		</form>
 		</center>

@@ -1,0 +1,20 @@
+msgid "When:"
+msgstr "Quand:"
+
+msgid "Where:"
+msgstr "Où:"
+
+msgid "Participant name"
+msgstr "Nom du participant"
+
+msgid "Modify or delete"
+msgstr "Modifier ou effacer"
+
+msgid "Delete"
+msgstr "Effacer"
+
+msgid "Your name"
+msgstr "Votre nom"
+
+msgid "Done"
+msgstr "Fait"

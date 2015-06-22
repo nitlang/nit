@@ -13,7 +13,7 @@
 # limitations under the License
 
 # Shows a meetup and allows to modify its participants
-module meetup
+module meetup is i18n
 
 import opportunity_model
 import boilerplate
@@ -231,14 +231,14 @@ class OpportunityMeetupPage
 		function modify_people(ele, id){
 			if (in_modification_id != null) {
 				// reset to normal values
-				$('#modify_'+in_modification_id).text("Modify or delete");
+				$('#modify_'+in_modification_id).text("{{{"Modify or delete"}}}");
 				$('#modify_'+in_modification_id).attr("class", "btn btn-xs btn-warning");
 				$('#line_'+in_modification_id).css("background-color", "");
 				$('#delete_'+in_modification_id).css("display", "none");
 			}
 			if (in_modification_id != id) {
 				// activate modifiable mode
-				$('#modify_'+id).text("Done");
+				$('#modify_'+id).text("{{{"Done"}}}");
 				$('#modify_'+id).attr("class", "btn btn-xs btn-success");
 				$('#line_'+id).css("background-color", "LightYellow");
 				$('#delete_'+id).show();
@@ -274,16 +274,16 @@ redef class Meetup
 	<center><h1>{{{name}}}</h1></center>
 """
 		if not date.is_empty then t.add """
-	<center><h4>When: {{{date}}}</h4></center>"""
+	<center><h4>{{{"When:"}}} {{{date}}}</h4></center>"""
 
 		if not place.is_empty then t.add """
-	<center><h4>Where: {{{place}}}</h4></center>"""
+	<center><h4>{{{"Where:"}}} {{{place}}}</h4></center>"""
 
 		t.add """
 </div>
 <table class="table">
 """
-		t.add "<th>Participant name</th>"
+		t.add "<th>{"Participant name"}</th>"
 		for i in answers(db) do
 			t.add "<th class=\"text-center\">"
 			t.add i.to_s
@@ -333,19 +333,19 @@ redef class Meetup
 				end
 				t.add "</center></td>"
 			end
-			t.add """<td class="opportunity-action"><center><button class="btn btn-xs btn-warning" type="button" onclick="modify_people(this, {{{i.id}}})" id="modify_{{{i.id}}}">Modify or delete</button>&nbsp;"""
-			t.add """<button class="btn btn-xs btn-danger" type="button" onclick="remove_people(this)" id="delete_{{{i.id}}}" style="display: none;">Delete</button></center></td>"""
+			t.add """<td class="opportunity-action"><center><button class="btn btn-xs btn-warning" type="button" onclick="modify_people(this, {{{i.id}}})" id="modify_{{{i.id}}}">{{{"Modify or delete"}}}</button>&nbsp;"""
+			t.add """<button class="btn btn-xs btn-danger" type="button" onclick="remove_people(this)" id="delete_{{{i.id}}}" style="display: none;">{{{"Delete"}}}</button></center></td>"""
 			t.add "</tr>"
 		end
 		t.add """
 <tr id="newrow" style="background-color: LightYellow">
-	<td><input id="new_name" type="text" placeholder="Your name" class="input-large"></td>
+	<td><input id="new_name" type="text" placeholder="{{{"Your name"}}}" class="input-large"></td>
 		"""
 		for i in answers(db) do
 			t.add "<td class=\"answer\" id=\"newans_{i.id}\" onclick=\"change_temp_answer(this)\" style=\"color:red;\"><center>✘</center></td>"
 		end
 		t.add """
-	<td><center><span id="add_{{{id}}}" onclick="add_part(this)" style="color:green;" class="action"><button class="btn btn-xs btn-success" type="button">Done</button></span></center></td>"""
+	<td><center><span id="add_{{{id}}}" onclick="add_part(this)" style="color:green;" class="action"><button class="btn btn-xs btn-success" type="button">{{{"Done"}}}</button></span></center></td>"""
 		t.add "</tr>"
 		# Compute score for each answer
 		var scores = new HashMap[Int, Int]

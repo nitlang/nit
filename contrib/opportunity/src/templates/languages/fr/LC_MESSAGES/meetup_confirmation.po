@@ -1,0 +1,8 @@
+msgid "Your meetup was successfully created"
+msgstr "Votre événement a été créé avec succès"
+
+msgid "Invite participants by sharing this link:"
+msgstr "Invitez les participants en partageant ce lien:"
+
+msgid "See you soon for more Opportunities!"
+msgstr "Revenez bientôt pour plus d'Opportunités!"

@@ -13,23 +13,24 @@
 # limitations under the License
 
 # Contains the main components of a webpage for Opportunity
-module boilerplate
+module boilerplate is i18n
 
 import template
+import gettext
 
 # Header for a Opportunity page
 class OpportunityHeader
 	super Template
 
 	# Javascript code that is included in the `OpportunityPage`
-	var page_js = "" is writable
+	var page_js: String = "" is writable # FIXME remove static type when #1530 is fixed
 
 	redef fun rendering do
 		add """
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Opportunity - The meetup planner</title>
+	<title>{{{"Opportunity - The meetup planner"}}}</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
@@ -69,14 +70,13 @@ class OpportunityHeader
 <nav class="menu" role="navigation">
 	<div class="container">
 		<div class="navbar-header">
-			<a class="navbar-brand" href="./" >Opportunity</a>
+			<a class="navbar-brand" href="./" >{{{"Opportunity"}}}</a>
 		</div>
 	</div>
 </nav>
 <div class="container">
 """
 	end
-
 end
 
 # Footer for a Opportunity page
@@ -89,10 +89,10 @@ class OpportunityFooter
 <div class="footer">
 	<div class="well well-sm">
 		<p class="text-muted text-center">
-			Opportunity, the meetup planner.
+			{{{"Opportunity, the meetup planner."}}}
 		</p>
 		<p class="text-muted text-center">
-			Proudly powered by <a href="http://nitlanguage.org/">Nit</a>!
+			{{{"Proudly powered by %1!".format("<a href=\"http://nitlanguage.org/\">Nit</a>")}}}
 		</p>
 	</div>
 </div>
@@ -100,7 +100,6 @@ class OpportunityFooter
 </html>
 """
 	end
-
 end
 
 # Any Opportunity page that contains the header, body and footer.
