@@ -60,6 +60,10 @@ msgstr "Thème d'opportunités"
 msgid "Apply a template"
 msgstr "Appliquer un thème"
 
+#: templates::meetup_creation 149--92:98
+msgid "Clear"
+msgstr "Vide"
+
 #: templates::meetup_creation 35--7:24
 msgid "4 kinds of pizza"
 msgstr "4 variétés de pizza"

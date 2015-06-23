@@ -146,6 +146,7 @@ function apply_template(opportunities){
 """
 
 		bdy.add """
+		<li role="presentation"><a role="menuitem" tabindex="-1" onclick="apply_template([])">{{{"Clear"}}}</a></li>
 						</ul>
 					</div>
 				</div>
