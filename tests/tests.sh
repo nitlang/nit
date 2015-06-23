@@ -372,19 +372,25 @@ need_skip()
 skip_exec()
 {
 	test "$noskip" = true && return 1
-	if echo "$1" | grep -f "exec.skip" >/dev/null 2>&1; then
-		echo -n "_ "
-		return 0
-	fi
+	for savdir in $savdirs .; do
+		f="$savdir/exec.skip"
+		if echo "$1" | grep -f "$f" >/dev/null 2>&1; then
+			echo -n "_ no exec by $f; "
+			return 0
+		fi
+	done
 	return 1
 }
 
 skip_cc()
 {
 	test "$noskip" = true && return 1
-	if echo "$1" | grep -f "cc.skip" >/dev/null 2>&1; then
-		return 0
-	fi
+	for savdir in $savdirs .; do
+		f="$savdir/cc.skip"
+		if echo "$1" | grep -f "$f" >/dev/null 2>&1; then
+			return 0
+		fi
+	done
 	return 1
 }
 
