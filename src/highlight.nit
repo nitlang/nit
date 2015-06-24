@@ -300,6 +300,7 @@ redef class HTMLTag
 		end
 		attrs["data-content"] = infobox.content.write_to_string
 		attrs["data-toggle"] = "popover"
+		attrs["data-html"] = "true"
 	end
 end
 
