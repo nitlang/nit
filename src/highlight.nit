@@ -189,7 +189,7 @@ class HighlightVisitor
 			end
 
 			# Add the token
-			if c isa TEol then 
+			if c isa TEol then
 				html.append "\n"
 			else
 				var tag = full_tag(c, hv)
@@ -306,7 +306,7 @@ end
 
 # A generic information container that can be used to decorate AST entities
 class HInfoBox
-	# The visitor used for contextualisation, if needed 
+	# The visitor used for contextualisation, if needed
 	var visitor: HighlightVisitor
 
 	# A short title for the AST element
