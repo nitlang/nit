@@ -185,7 +185,7 @@ end
 
 redef class Model
 	# Get a markdown processor for Nitdoc comments.
-	private var nitdoc_md_processor: MarkdownProcessor is lazy do
+	var nitdoc_md_processor: MarkdownProcessor is lazy do
 		var proc = new MarkdownProcessor
 		proc.emitter.decorator = new NitdocDecorator
 		return proc
@@ -194,7 +194,7 @@ redef class Model
 	# Get a markdown inline processor for Nitdoc comments.
 	#
 	# This processor is specificaly designed to inlinable doc elements like synopsys.
-	private var nitdoc_inline_processor: MarkdownProcessor is lazy do
+	var nitdoc_inline_processor: MarkdownProcessor is lazy do
 		var proc = new MarkdownProcessor
 		proc.emitter.decorator = new InlineDecorator
 		return proc
