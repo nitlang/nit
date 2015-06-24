@@ -604,10 +604,7 @@ class MongoCollection
 		assert is_alive # FIXME used to avoid segfault (so `self` isn't garbage collected to soon)
 		if c == null then return null
 		var cursor = new MongoCursor(c)
-		if cursor.is_ok then
-			cursor.next
-			return cursor.item
-		end
+		if cursor.is_ok then return cursor.item
 		return null
 	end
 
