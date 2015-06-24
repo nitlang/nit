@@ -19,4 +19,5 @@ base_prot_sig2D [
 	label = "{D|- _vpubA: nullable A\l- _vpriA: nullable A\l- _vpubA2: A\l- _vpriA2: A\l|- pubA(a: A)\l- priA(a: A)\l- vpubA(): nullable A\l- vpubA=(vpubA: nullable A)\l- vpriA(): nullable A\l- vpriA=(vpriA: nullable A)\l- vpubA2(): A\l- vpubA2=(vpubA2: A)\l- vpriA2(): A\l- vpriA2=(vpriA2: A)\l+ init()\l}"color="#58B26A"
 ]
 }
+
 }
