@@ -34,11 +34,6 @@ redef class Game
 
 	redef var stats is lazy do return new GameStatsManager(game, self)
 
-	redef fun save do
-		super
-		stats.save_in(self.key)
-	end
-
 	redef fun pretty do
 		var res = new FlatBuffer
 		res.append super
@@ -46,16 +41,16 @@ redef class Game
 		res.append stats.pretty
 		return res.write_to_string
 	end
+
+	redef fun save do
+		super
+		stats.save
+	end
 end
 
 redef class Player
 
 	redef var stats is lazy do return new GameStatsManager(game, self)
-
-	redef fun save do
-		super
-		stats.save_in(self.key)
-	end
 
 	redef fun nitcoins do return stats["nitcoins"]
 	redef fun nitcoins=(nc) do stats["nitcoins"] = nc
@@ -66,6 +61,11 @@ redef class Player
 		res.append "# stats:\n"
 		res.append stats.pretty
 		return res.write_to_string
+	end
+
+	redef fun save do
+		super
+		stats.save
 	end
 end
 
@@ -99,12 +99,15 @@ class GameStatsManager
 
 	# Load statistics for a `period` key.
 	fun load_stats_for(period: String): GameStats do
-		var key = owner.key / self.key / period
-		if not game.store.has_key(key) then
+		var req = new JsonObject
+		req["period"] = period
+		req["owner"] = owner.key
+		var obj = game.db.collection("statistics").find(req)
+		if obj isa JsonObject then
+			return new GameStats.from_json(game, period, owner, obj)
+		else
 			return new GameStats(game, period, owner)
 		end
-		var json = game.store.load_object(key)
-		return new GameStats.from_json(game, period, owner, json)
 	end
 
 	redef fun [](key) do return overall[key]
@@ -133,12 +136,12 @@ class GameStatsManager
 		weekly.dec(e)
 	end
 
-	redef fun save_in(key) do
-		overall.save_in(key / self.key)
-		yearly.save_in(key / self.key)
-		monthly.save_in(key / self.key)
-		daily.save_in(key / self.key)
-		weekly.save_in(key / self.key)
+	redef fun save do
+		overall.save
+		yearly.save
+		monthly.save
+		daily.save
+		weekly.save
 	end
 
 	redef fun pretty do return overall.pretty
@@ -150,6 +153,8 @@ class GameStats
 	super Counter[String]
 
 	redef var game
+
+	redef var collection_name = "statistics"
 
 	# The period these stats are about.
 	var period: String

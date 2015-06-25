@@ -32,22 +32,28 @@ redef class GameEntity
 	#
 	# TODO should update the achievement?
 	fun add_achievement(achievement: Achievement) do
-		var key = self.key / achievement.key
-		if game.store.has_key(key) then return
 		stats.inc("achievements")
-		achievement.save_in(self.key)
-		save
+		achievement.owner = self
+		achievement.save
 	end
+
+	# Is `a` unlocked for this `Player`?
+	fun has_achievement(a: Achievement): Bool do return load_achievement(a.id) != null
 
 	# Load the event from its `id`.
 	#
 	# Looks for the event save file in game data.
 	# Returns `null` if the event cannot be found.
 	fun load_achievement(id: String): nullable Achievement do
-		var key = self.key / "achievements" / id
-		if not game.store.has_key(key) then return null
-		var json = game.store.load_object(key)
-		return new Achievement.from_json(game, json)
+		var req = new JsonObject
+		req["id"] = id
+		req["game"] = game.key
+		req["owner"] = key
+		var obj = game.db.collection("achievements").find(req)
+		if obj isa JsonObject then
+			return new Achievement.from_json(game, obj)
+		end
+		return null
 	end
 
 	# List all events registered in this entity.
@@ -56,12 +62,13 @@ redef class GameEntity
 	#
 	# To add events see `add_event`.
 	fun load_achievements: MapRead[String, Achievement] do
+		var req = new JsonObject
+		req["game"] = game.key
+		req["owner"] = key
 		var res = new HashMap[String, Achievement]
-		var key = self.key / "achievements"
-		if not game.store.has_collection(key) then return res
-		var coll = game.store.list_collection(key)
-		for id in coll do
-			res[id.to_s] = load_achievement(id.to_s).as(not null)
+		for obj in game.db.collection("achievements").find_all(req) do
+			var achievement = new Achievement.from_json(game, obj)
+			res[achievement.id] = achievement
 		end
 		return res
 	end
@@ -74,10 +81,11 @@ end
 class Achievement
 	super GameEntity
 
+	redef var collection_name = "achievements"
 
 	redef var game
 
-	redef var key is lazy do
+	redef fun key do
 		var owner = self.owner
 		if owner == null then return id
 		return "{owner.key}-{id}"
@@ -121,12 +129,6 @@ class Achievement
 end
 
 redef class Player
-
-	# Is `a` unlocked for this `Player`?
-	fun has_achievement(a: Achievement): Bool do
-		return load_achievement(a.id) != null
-	end
-
 	# Unlocks an achievement for this Player based on a GithubEvent.
 	#
 	# Register the achievement and adds the achievement reward to the player
@@ -140,6 +142,7 @@ redef class Player
 		nitcoins += a.reward
 		add_achievement(a)
 		trigger_unlock_event(a, event)
+		save
 	end
 
 	# Create a new event that marks the achievement unlocking.

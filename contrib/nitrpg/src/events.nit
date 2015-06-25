@@ -35,13 +35,12 @@ redef class GameEntity
 	#
 	# To add events see `add_event`.
 	fun load_events: Array[GameEvent] do
-		var key = key / "events"
+		var req = new JsonObject
+		req["game"] = game.key
+		req["owner"] = key
 		var res = new Array[GameEvent]
-		if not game.store.has_collection(key) then return res
-		var coll = game.store.list_collection(key)
-		for id in coll do
-			var name = id.to_s
-			res.add load_event(name).as(not null)
+		for obj in game.db.collection("events").find_all(req) do
+			res.add new GameEvent.from_json(game, obj)
 		end
 		(new EventTimeComparator).sort(res)
 		return res
@@ -52,10 +51,13 @@ redef class GameEntity
 	# Looks for the event save file in game data.
 	# Returns `null` if the event cannot be found.
 	fun load_event(id: String): nullable GameEvent do
-		var key = key / "events" / id
-		if not game.store.has_key(key) then return null
-		var json = game.store.load_object(key)
-		return new GameEvent.from_json(game, json)
+		var req = new JsonObject
+		req["game"] = game.key
+		req["owner"] = key
+		req["internal_id"] = id
+		var res = game.db.collection("events").find(req)
+		if res != null then return new GameEvent.from_json(game, res)
+		return null
 	end
 end
 
@@ -63,6 +65,7 @@ end
 class GameEvent
 	super GameEntity
 
+	redef var collection_name = "events"
 
 	redef var game
 

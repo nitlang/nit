@@ -25,7 +25,7 @@
 # the `GameReactor` abstraction.
 module game
 
-intrude import json::store
+import mongodb
 import github::events
 
 # An entity within a `Game`.
@@ -35,23 +35,21 @@ interface GameEntity
 	# The game instance containing `self`.
 	fun game: Game is abstract
 
-	# Uniq key used for data storage.
+	# Collection `self` should be saved in.
+	fun collection_name: String is abstract
+
+	# Uniq key of this entity within the collection.
 	fun key: String is abstract
 
-	# Saves the `self` state in game data.
-	#
-	# Date are stored under `self.key`.
-	fun save do game.store.store_object(key, to_json)
-
-	# Saves `self` state under `key` data.
-	#
-	# Data are stored under `key / self.key`.
-	fun save_in(key: String) do
-		game.store.store_object(key / self.key, to_json)
-	end
+	# Saves `self` in db.
+	fun save do game.db.collection(collection_name).save(to_json)
 
 	# Json representation of `self`.
-	fun to_json: JsonObject  do return new JsonObject
+	fun to_json: JsonObject do
+		var json = new JsonObject
+		json["_id"] = key
+		return json
+	end
 
 	# Pretty print `self` to be displayed in a terminal.
 	fun pretty: String is abstract
@@ -74,18 +72,29 @@ class Game
 	# Game name
 	var name: String = repo.full_name is lazy
 
-	# Directory where game data are stored.
-	var game_dir: String is lazy do return "nitrpg_data" / repo.full_name
-
 	redef var key = name is lazy
 
-	# Used for data storage.
-	#
-	# File are stored in `game_dir`.
-	var store: JsonStore is lazy do return new JsonStore(game_dir)
+	# Mongo server url where this game data are stored.
+	var mongo_url = "mongodb://localhost:27017" is writable
+
+	# Mongo db client.
+	var client = new MongoClient(mongo_url) is lazy
+
+	# Mongo db name where this game data are stored.
+	var db_name = "nitrpg" is writable
+
+	# Mongo db instance for this game.
+	var db: MongoDb is lazy do return client.database(db_name)
+
+	redef var collection_name = "games"
 
 	# Init the Game and try to load saved data.
-	init do if store.has_key(key) then from_json(store.load_object(key))
+	init do
+		var req = new JsonObject
+		req["name"] = repo.full_name
+		var res = db.collection("games").find(req)
+		if res != null then from_json(res)
+	end
 
 	# Init `self` from a JsonObject.
 	#
@@ -118,10 +127,12 @@ class Game
 	# Returns `null` if the player cannot be found.
 	# In this case, the player can be created with `add_player`.
 	fun load_player(name: String): nullable Player do
-		var key = "players" / name
-		if not store.has_key(key) then return null
-		var json = store.load_object(key)
-		return new Player.from_json(self, json)
+		var req = new JsonObject
+		req["name"] = name
+		req["game"] = game.key
+		var res = db.collection("players").find(req)
+		if res != null then return new Player.from_json(self, res)
+		return null
 	end
 
 	# List known players.
@@ -130,12 +141,12 @@ class Game
 	#
 	# To add players see `add_player`.
 	fun load_players: MapRead[String, Player] do
+		var req = new JsonObject
+		req["game"] = game.key
 		var res = new HashMap[String, Player]
-		if not store.has_collection("players") then return res
-		var coll = store.list_collection("players")
-		for id in coll do
-			var name = id.to_s
-			res[name] = load_player(name).as(not null)
+		for obj in db.collection("players").find_all(req) do
+			var player = new Player.from_json(self, obj)
+			res[player.name] = player
 		end
 		return res
 	end
@@ -154,7 +165,7 @@ class Game
 	end
 
 	# Erase all saved data for this game.
-	fun clear do store.clear
+	fun clear do db.collection(collection_name).remove(to_json)
 
 	# Verbosity level used fo stdout.
 	#
@@ -185,6 +196,9 @@ end
 # A `Player` is linked to a `Github::User`.
 class Player
 	super GameEntity
+
+	# Stored in collection `players`.
+	redef var collection_name = "players"
 
 	redef var game
 
