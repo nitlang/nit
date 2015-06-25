@@ -61,7 +61,6 @@ end
 class GameEvent
 	super GameEntity
 
-	redef var key is lazy do return "events" / internal_id
 
 	redef var game
 
@@ -75,6 +74,8 @@ class GameEvent
 
 	# GameEvent uniq id used for storage.
 	var internal_id: String is noinit
+
+	redef var key = internal_id is lazy
 
 	# Date and time of the event.
 	var time: ISODate is noinit, writable

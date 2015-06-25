@@ -74,7 +74,6 @@ end
 class Achievement
 	super GameEntity
 
-	redef var key is lazy do return "achievements" / id
 
 	redef var game
 

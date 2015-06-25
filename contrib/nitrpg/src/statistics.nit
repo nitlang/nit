@@ -79,7 +79,6 @@ class GameStatsManager
 	# The GameEntity monitored by these statistics.
 	var owner: GameEntity
 
-	redef var key = "stats"
 
 	# Returns the `GameStats` instance for the overall statistics.
 	var overall: GameStats is lazy do
@@ -118,10 +117,10 @@ class GameStatsManager
 	fun load_stats_for(period: String): GameStats do
 		var key = owner.key / self.key / period
 		if not game.store.has_key(key) then
-			return new GameStats(game, period)
+			return new GameStats(game, period, owner)
 		end
 		var json = game.store.load_object(key)
-		return new GameStats.from_json(game, period, json)
+		return new GameStats.from_json(game, period, owner, json)
 	end
 
 	redef fun [](key) do return overall[key]
@@ -171,7 +170,6 @@ class GameStats
 	# The pedriod these stats are about.
 	var period: String
 
-	redef fun key do return period
 
 	# Load `self` from saved data.
 	init from_json(game: Game, period: String, json: JsonObject) do

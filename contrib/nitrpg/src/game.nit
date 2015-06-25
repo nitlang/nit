@@ -65,19 +65,19 @@ class Game
 
 	redef fun game do return self
 
-	# Returns the repo `full_name`.
-	#
-	# Example: `"nitlang/nit"`
-	redef fun key do return repo.full_name
-
 	# We need a `GithubAPI` client to load Github data.
 	var api: GithubAPI
 
 	# A game takes place in a `github::Repo`.
 	var repo: Repo
 
+	# Game name
+	var name: String = repo.full_name is lazy
+
 	# Directory where game data are stored.
 	var game_dir: String is lazy do return "nitrpg_data" / repo.full_name
+
+	redef var key = name is lazy
 
 	# Used for data storage.
 	#
@@ -91,6 +91,12 @@ class Game
 	#
 	# Used to load entities from saved data.
 	fun from_json(json: JsonObject) do end
+
+	redef fun to_json do
+		var json = super
+		json["name"] = name
+		return json
+	end
 
 	# Create a player from a Github `User`.
 	#
@@ -180,9 +186,6 @@ end
 class Player
 	super GameEntity
 
-	# Key is based on player `name`.
-	redef var key is lazy do return "players" / name
-
 	redef var game
 
 	# FIXME contructor should be private
@@ -194,6 +197,8 @@ class Player
 	#
 	# The name is also used to load the user data lazilly from Github API.
 	var name: String
+
+	redef var key = name is lazy
 
 	# Player amount of nitcoins.
 	#
@@ -218,6 +223,7 @@ class Player
 
 	redef fun to_json do
 		var json = super
+		json["game"] = game.key
 		json["name"] = name
 		json["nitcoins"] = nitcoins
 		return json
