@@ -31,7 +31,7 @@ class MeetupConfirmation
 		</div>
 		<div class="container">
 			<div class="alert alert-success text-center" role="alert">
-			{{{"Invite participants by sharing this link:"}}} <a href="./?meetup_id={{{meetup.id}}}">{{{meetup.name}}}</a>
+			{{{"Invite participants by sharing this link:"}}} <a href="./?meetup_id={{{meetup.id}}}">{{{meetup.name.html_escape}}}</a>
 			</div>
 			<p class="text-center">
 			{{{"See you soon for more Opportunities!"}}}
