@@ -77,6 +77,12 @@ class Achievement
 
 	redef var game
 
+	redef var key is lazy do
+		var owner = self.owner
+		if owner == null then return id
+		return "{owner.key}-{id}"
+	end
+
 	# Uniq ID for this achievement.
 	var id: String
 
@@ -92,6 +98,9 @@ class Achievement
 	# Is this achievement unlocked by somebody?
 	var is_unlocked: Bool is lazy do return not load_events.is_empty
 
+	# Game entity this achievement is about.
+	var owner: nullable GameEntity = null
+
 	# Init `self` from a `json` object.
 	#
 	# Used to load achievements from storage.
@@ -105,6 +114,8 @@ class Achievement
 		json["name"] = name
 		json["desc"] = desc
 		json["reward"] = reward
+		json["game"] = game.key
+		if owner != null then json["owner"] = owner.key
 		return json
 	end
 end

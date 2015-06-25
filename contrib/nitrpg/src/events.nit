@@ -24,8 +24,10 @@ import game
 
 redef class GameEntity
 
-	# Saves `event` in `self`.
-	fun add_event(event: GameEvent) do event.save_in(self.key)
+	fun add_event(event: GameEvent) do
+		event.owner = self
+		event.save
+	end
 
 	# List all events registered in this entity.
 	#
@@ -64,6 +66,9 @@ class GameEvent
 
 	redef var game
 
+	# Entity this event belongs to.
+	var owner: nullable GameEntity = null
+
 	# String used to dissociate events in the display.
 	var kind: String
 
@@ -101,6 +106,8 @@ class GameEvent
 		json["kind"] = kind
 		json["time"] = time.to_s
 		json["data"] = data
+		json["game"] = game.key
+		if owner != null then json["owner"] = owner.key
 		return json
 	end
 end
