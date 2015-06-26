@@ -907,17 +907,6 @@ redef class AMethPropdef
 				return v.int_instance(args[0].to_i.bin_xor(args[1].to_i))
 			else if pname == "bin_not" then
 				return v.int_instance(args[0].to_i.bin_not)
-			else if pname == "int_to_s_len" then
-				return v.int_instance(recvval.to_s.length)
-			else if pname == "native_int_to_s" then
-				var s = recvval.to_s
-				var srecv = args[1].val.as(Buffer)
-				srecv.clear
-				srecv.append(s)
-				srecv.add('\0')
-				return null
-			else if pname == "strerror_ext" then
-				return v.native_string_instance(recvval.strerror)
 			end
 		else if cname == "Byte" then
 			var recvval = args[0].to_b
@@ -955,13 +944,6 @@ redef class AMethPropdef
 				return v.byte_instance(args[0].to_b.rshift(args[1].to_i))
 			else if pname == "byte_to_s_len" then
 				return v.int_instance(recvval.to_s.length)
-			else if pname == "native_byte_to_s" then
-				var s = recvval.to_s
-				var srecv = args[1].val.as(Buffer)
-				srecv.clear
-				srecv.append(s)
-				srecv.add('\0')
-				return null
 			end
 		else if cname == "Char" then
 			var recv = args[0].val.as(Char)
@@ -1081,35 +1063,9 @@ redef class AMethPropdef
 				return null
 			else if pname == "atoi" then
 				return v.int_instance(recvval.to_i)
-			else if pname == "file_exists" then
-				return v.bool_instance(recvval.to_s.file_exists)
-			else if pname == "file_mkdir" then
-				var res = recvval.to_s.mkdir
-				return v.bool_instance(res == null)
-			else if pname == "file_chdir" then
-				var res = recvval.to_s.chdir
-				return v.bool_instance(res == null)
-			else if pname == "file_realpath" then
-				return v.native_string_instance(recvval.to_s.realpath)
-			else if pname == "get_environ" then
-				var txt = recvval.to_s.environ
-				return v.native_string_instance(txt)
-			else if pname == "system" then
-				var res = sys.system(recvval.to_s)
-				return v.int_instance(res)
-			else if pname == "atof" then
-				return v.float_instance(recvval.to_f)
 			else if pname == "fast_cstring" then
 				var ns = recvval.to_cstring.to_s.substring_from(args[1].to_i)
 				return v.native_string_instance(ns)
-			end
-		else if cname == "String" then
-			var cs = v.send(v.force_get_primitive_method("to_cstring", args.first.mtype), [args.first])
-			var str = cs.val.to_s
-			if pname == "files" then
-				var res = new Array[Instance]
-				for f in str.files do res.add v.string_instance(f)
-				return v.array_instance(res, v.mainmodule.string_type)
 			end
 		else if pname == "calloc_string" then
 			return v.native_string_instance("!" * args[1].to_i)
@@ -1193,18 +1149,6 @@ redef class AMethPropdef
 		else if pname == "native_argv" then
 			var txt = v.arguments[args[1].to_i]
 			return v.native_string_instance(txt)
-		else if pname == "get_time" then
-			return v.int_instance(get_time)
-		else if pname == "srand" then
-			srand
-			return null
-		else if pname == "srand_from" then
-			srand_from(args[1].to_i)
-			return null
-		else if pname == "atan2" then
-			return v.float_instance(atan2(args[1].to_f, args[2].to_f))
-		else if pname == "pi" then
-			return v.float_instance(pi)
 		else if pname == "lexer_goto" then
 			return v.int_instance(lexer_goto(args[1].to_i, args[2].to_i))
 		else if pname == "lexer_accept" then
@@ -1213,16 +1157,6 @@ redef class AMethPropdef
 			return v.int_instance(parser_goto(args[1].to_i, args[2].to_i))
 		else if pname == "parser_action" then
 			return v.int_instance(parser_action(args[1].to_i, args[2].to_i))
-		else if pname == "file_getcwd" then
-			return v.native_string_instance(getcwd)
-		else if pname == "errno" then
-			return v.int_instance(sys.errno)
-		else if pname == "address_is_null" then
-			var recv = args[0]
-			if recv isa PrimitiveInstance[PrimitiveNativeFile] then
-				return v.bool_instance(recv.val.address_is_null)
-			end
-			return v.false_instance
 		end
 		return v.error_instance
 	end
