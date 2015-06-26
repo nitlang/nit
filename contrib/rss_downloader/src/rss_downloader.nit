@@ -51,6 +51,13 @@ class Config
 
 	# XML tag used for pattern recognition
 	fun tag_title: String do return "title"
+
+	# Action to apply on each selected RSS element
+	fun act_on(element: Element)
+	do
+		var local_path = download_destination_folder.to_s / element.title
+		element.download_to(local_path)
+	end
 end
 
 # An element from an RSS feed
@@ -142,7 +149,6 @@ class Downloader
 		end
 
 		for element in matches do
-			var local_path = config.download_destination_folder.to_s / element.title
 			var unique_id = element.unique_id(config)
 
 			if local_path.to_path.exists then
@@ -159,8 +165,9 @@ class Downloader
 			end
 
 			# Download element
-			if sys.verbose then print "Fetching {element} as {local_path}"
-			element.download_to(local_path)
+			if sys.verbose then print "Acting on {element}"
+
+			tool_config.act_on element
 
 			# Add `unique_id` to log
 			history.add unique_id
