@@ -953,6 +953,14 @@ redef class AMethPropdef
 				return v.byte_instance(args[0].to_b.lshift(args[1].to_i))
 			else if pname == "rshift" then
 				return v.byte_instance(args[0].to_b.rshift(args[1].to_i))
+			else if pname == "bin_and" then
+				return v.byte_instance(args[0].to_b.bin_and(args[1].to_b))
+			else if pname == "bin_or" then
+				return v.byte_instance(args[0].to_b.bin_or(args[1].to_b))
+			else if pname == "bin_xor" then
+				return v.byte_instance(args[0].to_b.bin_xor(args[1].to_b))
+			else if pname == "bin_not" then
+				return v.byte_instance(args[0].to_b.bin_not)
 			else if pname == "byte_to_s_len" then
 				return v.int_instance(recvval.to_s.length)
 			else if pname == "native_byte_to_s" then
