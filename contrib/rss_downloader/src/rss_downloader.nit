@@ -199,7 +199,7 @@ class Downloader
 			end
 
 			for dir in source_folder.files do if dir.stat.is_dir then
-				folder_names.add dir.to_s
+				folder_names.add dir.filename
 			end
 		end
 
