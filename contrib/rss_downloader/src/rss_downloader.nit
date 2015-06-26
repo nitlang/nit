@@ -151,11 +151,7 @@ class Downloader
 		for element in matches do
 			var unique_id = element.unique_id(config)
 
-			if local_path.to_path.exists then
-				# Do not redownload a file (we assume that the file name is unique by itself)
-				if sys.verbose then print "File exists, skipping {element}"
-				continue
-			else if history.has(unique_id) then
+			if history.has(unique_id) then
 				# Do not download a file that is not unique according to `unique_id`
 				if not element.is_unique_exception(config) then
 					# We make some exceptions
