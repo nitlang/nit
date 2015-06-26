@@ -58,7 +58,7 @@ redef class PullRequestEvent
 
 	# Rewards player for opened pull requests.
 	redef fun react_player_event(r, game) do
-		if action == "opened" then
+		if action == "opened" or action == "reopened" then
 			react_pull_open(r, game)
 		else if action == "closed" then
 			react_pull_close(r, game)
