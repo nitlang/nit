@@ -275,10 +275,21 @@ class NaiveInterpreter
 	# Return a new native string initialized with `txt`
 	fun native_string_instance(txt: String): Instance
 	do
-		var val = new FlatBuffer.from(txt)
-		val.add('\0')
+		var instance = native_string_instance_len(txt.length+1)
+		var val = instance.val
+		val[txt.length] = '\0'
+		txt.to_cstring.copy_to(val, txt.length, 0, 0)
+
+		return instance
+	end
+
+	# Return a new native string initialized of `length`
+	fun native_string_instance_len(length: Int): PrimitiveInstance[NativeString]
+	do
+		var val = new NativeString(length)
+
 		var t = mainmodule.native_string_type
-		var instance = new PrimitiveInstance[Buffer](t, val)
+		var instance = new PrimitiveInstance[NativeString](t, val)
 		init_instance_primitive(instance)
 		return instance
 	end
@@ -1025,50 +1036,32 @@ redef class AMethPropdef
 			end
 		else if cname == "NativeString" then
 			if pname == "new" then
-				return v.native_string_instance("!" * args[1].to_i)
+				return v.native_string_instance_len(args[1].to_i)
 			end
-			var recvval = args.first.val.as(Buffer)
+			var recvval = args.first.val.as(NativeString)
 			if pname == "[]" then
 				var arg1 = args[1].to_i
-				if arg1 >= recvval.length or arg1 < 0 then
-					debug("Illegal access on {recvval} for element {arg1}/{recvval.length}")
-				end
-				return v.char_instance(recvval.chars[arg1])
+				return v.char_instance(recvval[arg1])
 			else if pname == "[]=" then
 				var arg1 = args[1].to_i
-				if arg1 >= recvval.length or arg1 < 0 then
-					debug("Illegal access on {recvval} for element {arg1}/{recvval.length}")
-				end
-				recvval.chars[arg1] = args[2].val.as(Char)
+				recvval[arg1] = args[2].val.as(Char)
 				return null
 			else if pname == "copy_to" then
 				# sig= copy_to(dest: NativeString, length: Int, from: Int, to: Int)
-				var destval = args[1].val.as(FlatBuffer)
+				var destval = args[1].val.as(NativeString)
 				var lenval = args[2].to_i
 				var fromval = args[3].to_i
 				var toval = args[4].to_i
-				if fromval < 0 then
-					debug("Illegal access on {recvval} for element {fromval}/{recvval.length}")
-				end
-				if fromval + lenval > recvval.length then
-					debug("Illegal access on {recvval} for element {fromval}+{lenval}/{recvval.length}")
-				end
-				if toval < 0 then
-					debug("Illegal access on {destval} for element {toval}/{destval.length}")
-				end
-				if toval + lenval > destval.length then
-					debug("Illegal access on {destval} for element {toval}+{lenval}/{destval.length}")
-				end
-				recvval.as(FlatBuffer).copy(fromval, lenval, destval, toval)
+				recvval.copy_to(destval, lenval, fromval, toval)
 				return null
 			else if pname == "atoi" then
-				return v.int_instance(recvval.to_i)
+				return v.int_instance(recvval.atoi)
 			else if pname == "fast_cstring" then
-				var ns = recvval.to_cstring.to_s.substring_from(args[1].to_i)
+				var ns = recvval.to_s.substring_from(args[1].to_i)
 				return v.native_string_instance(ns)
 			end
 		else if pname == "calloc_string" then
-			return v.native_string_instance("!" * args[1].to_i)
+			return v.native_string_instance_len(args[1].to_i)
 		else if cname == "NativeArray" then
 			if pname == "new" then
 				var val = new Array[Instance].filled_with(v.null_instance, args[1].to_i)
@@ -1078,9 +1071,6 @@ redef class AMethPropdef
 			end
 			var recvval = args.first.val.as(Array[Instance])
 			if pname == "[]" then
-				if args[1].to_i >= recvval.length or args[1].to_i < 0 then
-					debug("Illegal access on {recvval} for element {args[1].to_i}/{recvval.length}")
-				end
 				return recvval[args[1].to_i]
 			else if pname == "[]=" then
 				recvval[args[1].to_i] = args[2]
