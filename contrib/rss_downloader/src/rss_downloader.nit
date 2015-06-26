@@ -18,6 +18,7 @@
 module rss_downloader
 
 import curl
+import dom
 
 redef class Sys
 	# Lazy man's verbose option
@@ -47,6 +48,9 @@ class Config
 
 	# Exception where we ignore uniqueness and can be downloaded again (may be empty)
 	var unique_exceptions: Array[Pattern]
+
+	# XML tag used for pattern recognition
+	fun tag_title: String do return "title"
 end
 
 # An element from an RSS feed
@@ -248,22 +252,14 @@ redef class Text
 	# Get this RSS feed content as an `Array[Element]`
 	fun to_rss_elements: Array[Element]
 	do
-		var title_re = "<title><![^/]*</title>".to_re
-		var link_re = "<link>[^<]*download[^<]*</link>".to_re
-
-		var title_prefix_len = "<title><![CDATA[".length
-		var title_suffix_len = "]]</title>".length+1
-
-		var titles = search_all(title_re)
-		var links = search_all(link_re)
-
-		if sys.verbose then print "\n# Found {titles.length} titles and {links.length} links"
-		assert titles.length == links.length
+		var xml = to_xml
+		var items = xml["rss"].first["channel"].first["item"]
 
 		var elements = new Array[Element]
-		for i in titles.length.times do
-			var title = titles[i].to_s.substring(title_prefix_len, titles[i].length - title_prefix_len - title_suffix_len)
-			var link = links[i].to_s.substring(6, links[i].length - 6 - 7)
+		for item in items do
+			var title = item[tool_config.tag_title].first.as(XMLStartTag).data
+			var link = item["link"].first.as(XMLStartTag).data
+
 			elements.add new Element(title, link)
 		end
 
