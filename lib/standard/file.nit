@@ -360,7 +360,7 @@ class Path
 	# Path to this file
 	redef fun to_s do return path
 
-	# Name of the file name at `to_s`
+	# Short name of the file at `to_s`
 	#
 	# ~~~
 	# var path = "/tmp/somefile".to_path
