@@ -103,21 +103,21 @@ class DeploymentEvent
 
 	# Optional extra information for this deployment.
 	fun payload: nullable String do
-		if not json.has_key("payload") then return null
-		return json["payload"].as(String)
+		var res = json.get_or_null("payload")
+		if res isa String then return res else return null
 	end
 
 	# Optional environment to deploy to.
 	# Default: "production"
 	fun environment: nullable String do
-		if not json.has_key("environment") then return null
-		return json["environment"].as(String)
+		var res = json.get_or_null("environment")
+		if res isa String then return res else return null
 	end
 
 	# Optional human-readable description added to the deployment.
 	fun description: nullable String do
-		if not json.has_key("description") then return null
-		return json["description"].as(String)
+		var res = json.get_or_null("description")
+		if res isa String then return res else return null
 	end
 end
 
@@ -132,8 +132,8 @@ class DeploymentStatusEvent
 
 	# Optional link added to the status.
 	fun target_url: nullable String do
-		if not json.has_key("target_url") then return null
-		return json["target_url"].as(String)
+		var res = json.get_or_null("target_url")
+		if res isa String then return res else return null
 	end
 
 	# Deployment hash that this status is associated with.
@@ -141,8 +141,8 @@ class DeploymentStatusEvent
 
 	# Optional human-readable description added to the status.
 	fun description: nullable String do
-		if not json.has_key("description") then return null
-		return json["description"].as(String)
+		var res = json.get_or_null("description")
+		if res isa String then return res else return null
 	end
 end
 
@@ -181,14 +181,14 @@ class IssuesEvent
 
 	# Optional `Label` that was added or removed from the issue.
 	fun lbl: nullable Label do
-		if not json.has_key("label") then return null
-		return new Label.from_json(api, repo, json["label"].as(JsonObject))
+		var res = json.get_or_null("label")
+		if res isa JsonObject then return new Label.from_json(api, repo, res) else return null
 	end
 
 	# Optional `User` that was assigned or unassigned from the issue.
 	fun assignee: nullable User do
-		if not json.has_key("assignee") then return null
-		return new User.from_json(api, json["assignee"].as(JsonObject))
+		var res = json.get_or_null("assignee")
+		if res isa JsonObject then return new User.from_json(api, res) else return null
 	end
 end
 
@@ -274,14 +274,14 @@ class StatusEvent
 
 	# Optional human-readable description added to the status.
 	fun description: nullable String do
-		if not json.has_key("description") then return null
-		return json["description"].as(String)
+		var res = json.get_or_null("description")
+		if res isa String then return res else return null
 	end
 
 	# Optional link added to the status.
 	fun target_url: nullable String do
-		if not json.has_key("target_url") then return null
-		return json["target_url"].as(String)
+		var res = json.get_or_null("target_url")
+		if res isa String then return res else return null
 	end
 
 	# Array of branches containing the status' SHA.

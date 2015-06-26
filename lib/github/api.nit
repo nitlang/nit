@@ -616,7 +616,7 @@ class Commit
 	# Parent commits of `self`.
 	fun parents: Array[Commit] do
 		var res = new Array[Commit]
-		var parents = json["parents"]
+		var parents = json.get_or_null("parents")
 		if not parents isa JsonArray then return res
 		for obj in parents do
 			if not obj isa JsonObject then continue
@@ -627,18 +627,16 @@ class Commit
 
 	# Author of the commit.
 	fun author: nullable User do
-		if not json.has_key("author") then return null
-		var user = json["author"]
-		if not user isa JsonObject then return null
-		return new User.from_json(api, user)
+		var user = json.get_or_null("author")
+		if user isa JsonObject then return new User.from_json(api, user)
+		return null
 	end
 
 	# Committer of the commit.
 	fun committer: nullable User do
-		if not json.has_key("committer") then return null
-		var user = json["author"]
-		if not user isa JsonObject then return null
-		return new User.from_json(api, user)
+		var user = json.get_or_null("author")
+		if user isa JsonObject then return new User.from_json(api, user)
+		return null
 	end
 
 	# Authoring date as ISODate.
@@ -658,7 +656,7 @@ class Commit
 	# List files staged in this commit.
 	fun files: Array[GithubFile] do
 		var res = new Array[GithubFile]
-		var files = json["files"]
+		var files = json.get_or_null("files")
 		if not files isa JsonArray then return res
 		for obj in files do
 			res.add(new GithubFile(obj.as(JsonObject)))
@@ -699,8 +697,9 @@ class Issue
 	# List of labels on this issue associated to their names.
 	fun labels: Map[String, Label] do
 		var res = new HashMap[String, Label]
-		if not json.has_key("labels") then return res
-		for obj in json["labels"].as(JsonArray) do
+		var lbls = json.get_or_null("labels")
+		if not lbls isa JsonArray then return res
+		for obj in lbls do
 			if not obj isa JsonObject then continue
 			var name = obj["name"].as(String)
 			res[name] = new Label.from_json(api, repo, obj)
@@ -716,16 +715,16 @@ class Issue
 
 	# Assigned `User` (if any).
 	fun assignee: nullable User do
-		var assignee = json["assignee"]
-		if not assignee isa JsonObject then return null
-		return new User.from_json(api, assignee)
+		var assignee = json.get_or_null("assignee")
+		if assignee isa JsonObject then return new User.from_json(api, assignee)
+		return null
 	end
 
 	# `Milestone` (if any).
 	fun milestone: nullable Milestone do
-		var milestone = json["milestone"]
-		if not milestone isa JsonObject then return null
-		return new Milestone.from_json(api, repo, milestone)
+		var milestone = json.get_or_null("milestone")
+		if milestone isa JsonObject then return new Milestone.from_json(api, repo, milestone)
+		return null
 	end
 
 	# List of comments made on this issue.
@@ -759,16 +758,16 @@ class Issue
 
 	# Last update time in ISODate format (if any).
 	fun updated_at: nullable ISODate do
-		var res = json["updated_at"]
-		if res == null then return null
-		return new ISODate.from_string(res.as(String))
+		var res = json.get_or_null("updated_at")
+		if res isa String then return new ISODate.from_string(res)
+		return null
 	end
 
 	# Close time in ISODate format (if any).
 	fun closed_at: nullable ISODate do
-		var res = json["closed_at"]
-		if res == null then return null
-		return new ISODate.from_string(res.as(String))
+		var res = json.get_or_null("closed_at")
+		if res isa String then return new ISODate.from_string(res)
+		return null
 	end
 
 	# TODO link to pull request
@@ -780,7 +779,8 @@ class Issue
 	fun events: Array[IssueEvent] do
 		var res = new Array[IssueEvent]
 		var page = 1
-		var array = api.get("{key}/events?page={page}").as(JsonArray)
+		var array = api.get("{key}/events?page={page}")
+		if not array isa JsonArray then return res
 		while not array.is_empty do
 			for obj in array do
 				if not obj isa JsonObject then continue
@@ -794,9 +794,9 @@ class Issue
 
 	# User that closed this issue (if any).
 	fun closed_by: nullable User do
-		var closer = json["closed_by"]
-		if not closer isa JsonObject then return null
-		return new User.from_json(api, closer)
+		var closer = json.get_or_null("closed_by")
+		if closer isa JsonObject then return new User.from_json(api, closer)
+		return null
 	end
 end
 
@@ -813,9 +813,9 @@ class PullRequest
 
 	# Merge time in ISODate format (if any).
 	fun merged_at: nullable ISODate do
-		var res = json["merged_at"]
-		if res == null then return null
-		return new ISODate.from_string(res.to_s)
+		var res = json.get_or_null("merged_at")
+		if res isa String then return new ISODate.from_string(res)
+		return null
 	end
 
 	# Merge commit SHA.
@@ -849,9 +849,9 @@ class PullRequest
 
 	# User that merged this pull request (if any).
 	fun merged_by: nullable User do
-		var merger = json["merged_by"]
-		if not merger isa JsonObject then return null
-		return new User.from_json(api, merger)
+		var merger = json.get_or_null("merged_by")
+		if merger isa JsonObject then return new User.from_json(api, merger)
+		return null
 	end
 
 	# Count of commits in this pull request.
@@ -963,23 +963,23 @@ class Milestone
 
 	# Due time in ISODate format (if any).
 	fun due_on: nullable ISODate do
-		var res = json["updated_at"]
-		if res == null then return null
-		return new ISODate.from_string(res.to_s)
+		var res = json.get_or_null("updated_at")
+		if res isa String then return new ISODate.from_string(res)
+		return null
 	end
 
 	# Update time in ISODate format (if any).
 	fun updated_at: nullable ISODate do
-		var res = json["updated_at"]
-		if res == null then return null
-		return new ISODate.from_string(res.to_s)
+		var res = json.get_or_null("updated_at")
+		if res isa String then return new ISODate.from_string(res)
+		return null
 	end
 
 	# Close time in ISODate format (if any).
 	fun closed_at: nullable ISODate do
-		var res = json["closed_at"]
-		if res == null then return null
-		return new ISODate.from_string(res.to_s)
+		var res = json.get_or_null("closed_at")
+		if res isa String then return new ISODate.from_string(res)
+		return null
 	end
 end
 
@@ -1013,8 +1013,9 @@ abstract class Comment
 
 	# Last update time in ISODate format (if any).
 	fun updated_at: nullable ISODate do
-		if not json.has_key("updated_at") then return null
-		return new ISODate.from_string(json["updated_at"].as(String))
+		var res = json.get_or_null("updated_at")
+		if res isa String then return new ISODate.from_string(res)
+		return null
 	end
 
 	# Comment body text.
@@ -1040,18 +1041,16 @@ class CommitComment
 
 	# Position of the comment on the line.
 	fun position: nullable String do
-		if not json.has_key("position") then return null
-		var res = json["position"]
-		if res == null then return null
-		return res.to_s
+		var res = json.get_or_null("position")
+		if res isa String then return res
+		return null
 	end
 
 	# Line of the comment.
 	fun line: nullable String do
-		if not json.has_key("line") then return null
-		var res = json["line"]
-		if res == null then return null
-		return res.to_s
+		var res = json.get_or_null("line")
+		if res isa String then return res
+		return null
 	end
 
 	# Path of the commented file.
@@ -1154,37 +1153,37 @@ class IssueEvent
 
 	# Commit linked to this event (if any).
 	fun commit_id: nullable String do
-		var res = json["commit_id"]
-		if res == null then return null
-		return res.to_s
+		var res = json.get_or_null("commit_id")
+		if res isa String then return res
+		return null
 	end
 
 	# Label linked to this event (if any).
 	fun labl: nullable Label do
-		var res = json["label"]
-		if not res isa JsonObject then return null
-		return new Label.from_json(api, repo, res)
+		var res = json.get_or_null("label")
+		if res isa JsonObject then return new Label.from_json(api, repo, res)
+		return null
 	end
 
 	# User linked to this event (if any).
 	fun assignee: nullable User do
-		var res = json["assignee"]
-		if not res isa JsonObject then return null
-		return new User.from_json(api, res)
+		var res = json.get_or_null("assignee")
+		if res isa JsonObject then return new User.from_json(api, res)
+		return null
 	end
 
 	# Milestone linked to this event (if any).
 	fun milestone: nullable Milestone do
-		var res = json["milestone"]
-		if not res isa JsonObject then return null
-		return new Milestone.from_json(api, repo, res)
+		var res = json.get_or_null("milestone")
+		if res isa JsonObject then return new Milestone.from_json(api, repo, res)
+		return null
 	end
 
 	# Rename linked to this event (if any).
 	fun rename: nullable RenameAction do
-		var res = json["rename"]
-		if res == null then return null
-		return new RenameAction(res.as(JsonObject))
+		var res = json.get_or_null("rename")
+		if res isa JsonObject then return new RenameAction(res)
+		return null
 	end
 end
 
