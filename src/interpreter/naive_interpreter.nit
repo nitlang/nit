@@ -1091,54 +1091,6 @@ redef class AMethPropdef
 				recvval.copy_to(0, args[2].to_i, args[1].val.as(Array[Instance]), 0)
 				return null
 			end
-		else if cname == "NativeFile" then
-			if pname == "native_stdout" then
-				var inst = new PrimitiveNativeFile.native_stdout
-				var instance = new PrimitiveInstance[PrimitiveNativeFile](mpropdef.mclassdef.mclass.mclass_type, inst)
-				v.init_instance_primitive(instance)
-				return instance
-			else if pname == "native_stdin" then
-				var inst = new PrimitiveNativeFile.native_stdin
-				var instance = new PrimitiveInstance[PrimitiveNativeFile](mpropdef.mclassdef.mclass.mclass_type, inst)
-				v.init_instance_primitive(instance)
-				return instance
-			else if pname == "native_stderr" then
-				var inst = new PrimitiveNativeFile.native_stderr
-				var instance = new PrimitiveInstance[PrimitiveNativeFile](mpropdef.mclassdef.mclass.mclass_type, inst)
-				v.init_instance_primitive(instance)
-				return instance
-			else if pname == "io_open_read" then
-				var a1 = args[1].val.as(Buffer)
-				var inst = new PrimitiveNativeFile.io_open_read(a1.to_s)
-				var instance = new PrimitiveInstance[PrimitiveNativeFile](mpropdef.mclassdef.mclass.mclass_type, inst)
-				v.init_instance_primitive(instance)
-				return instance
-			else if pname == "io_open_write" then
-				var a1 = args[1].val.as(Buffer)
-				var inst = new PrimitiveNativeFile.io_open_write(a1.to_s)
-				var instance = new PrimitiveInstance[PrimitiveNativeFile](mpropdef.mclassdef.mclass.mclass_type, inst)
-				v.init_instance_primitive(instance)
-				return instance
-			end
-			var recvval = args.first.val
-			if pname == "io_write" then
-				var a1 = args[1].val.as(Buffer)
-				return v.int_instance(recvval.as(PrimitiveNativeFile).io_write(a1.to_cstring, args[2].to_i))
-			else if pname == "io_read" then
-				var a1 = args[1].val.as(Buffer)
-				var ns = new NativeString(a1.length)
-				var len = recvval.as(PrimitiveNativeFile).io_read(ns, args[2].to_i)
-				a1.clear
-				a1.append(ns.to_s_with_length(len))
-				return v.int_instance(len)
-			else if pname == "flush" then
-				recvval.as(PrimitiveNativeFile).flush
-				return null
-			else if pname == "io_close" then
-				return v.int_instance(recvval.as(PrimitiveNativeFile).io_close)
-			else if pname == "set_buffering_type" then
-				return v.int_instance(recvval.as(PrimitiveNativeFile).set_buffering_type(args[1].to_i, args[2].to_i))
-			end
 		else if pname == "native_argc" then
 			return v.int_instance(v.arguments.length)
 		else if pname == "native_argv" then
