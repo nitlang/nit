@@ -447,7 +447,7 @@ end
 class Player1KComments
 	super PlayerXComments
 
-	redef var id = "player_1000__comments"
+	redef var id = "player_1000_comments"
 	redef var name = "You sir, talk a lot!"
 	redef var desc = "Comment 1000 times on issues."
 	redef var reward = 1000
