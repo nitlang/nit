@@ -39,7 +39,7 @@ class GithubEvent
 	end
 
 	# Action performed by the event.
-	fun action: String do return json["action"].to_s
+	fun action: String do return json["action"].as(String)
 
 	# Repo where this event occured.
 	fun repo: Repo do
@@ -64,16 +64,16 @@ class CreateEvent
 	# Oject type that was created.
 	#
 	# Can be one of `repository`, `branch`, or `tag`.
-	fun ref_type: String do return json["ref_type"].to_s
+	fun ref_type: String do return json["ref_type"].as(String)
 
 	# Git ref (or null if only a repository was created).
-	fun ref: String do return json["ref"].to_s
+	fun ref: String do return json["ref"].as(String)
 
 	# Name of the repo's default branch (usually master).
-	fun master_branch: String do return json["master_branch"].to_s
+	fun master_branch: String do return json["master_branch"].as(String)
 
 	# Repo's current description.
-	fun description: String do return json["description"].to_s
+	fun description: String do return json["description"].as(String)
 end
 
 # Triggered when a branch or a tag is deleted.
@@ -83,10 +83,10 @@ class DeleteEvent
 	# Object type that was deleted.
 	#
 	# Can be one of `repository`, `branch`, or `tag`.
-	fun ref_type: String do return json["ref_type"].to_s
+	fun ref_type: String do return json["ref_type"].as(String)
 
 	# Git ref (or null if only a repository was deleted).
-	fun ref: String do return json["ref"].to_s
+	fun ref: String do return json["ref"].as(String)
 end
 
 # Triggered when a new snapshot is deployed.
@@ -96,28 +96,28 @@ class DeploymentEvent
 	super GithubEvent
 
 	# Commit SHA for which this deployment was created.
-	fun sha: String do return json["sha"].to_s
+	fun sha: String do return json["sha"].as(String)
 
 	# Name of repository for this deployment, formatted as :owner/:repo.
-	fun name: String do return json["name"].to_s
+	fun name: String do return json["name"].as(String)
 
 	# Optional extra information for this deployment.
 	fun payload: nullable String do
 		if not json.has_key("payload") then return null
-		return json["payload"].to_s
+		return json["payload"].as(String)
 	end
 
 	# Optional environment to deploy to.
 	# Default: "production"
 	fun environment: nullable String do
 		if not json.has_key("environment") then return null
-		return json["environment"].to_s
+		return json["environment"].as(String)
 	end
 
 	# Optional human-readable description added to the deployment.
 	fun description: nullable String do
 		if not json.has_key("description") then return null
-		return json["description"].to_s
+		return json["description"].as(String)
 	end
 end
 
@@ -128,21 +128,21 @@ class DeploymentStatusEvent
 	# New deployment state.
 	#
 	# Can be `pending`, `success`, `failure`, or `error`.
-	fun state: String do return json["state"].to_s
+	fun state: String do return json["state"].as(String)
 
 	# Optional link added to the status.
 	fun target_url: nullable String do
 		if not json.has_key("target_url") then return null
-		return json["target_url"].to_s
+		return json["target_url"].as(String)
 	end
 
 	# Deployment hash that this status is associated with.
-	fun deployment: String do return json["deployment"].to_s
+	fun deployment: String do return json["deployment"].as(String)
 
 	# Optional human-readable description added to the status.
 	fun description: nullable String do
 		if not json.has_key("description") then return null
-		return json["description"].to_s
+		return json["description"].as(String)
 	end
 end
 
@@ -236,12 +236,12 @@ class PushEvent
 	super GithubEvent
 
 	# SHA of the HEAD commit on the repository.
-	fun head: String do return json["head"].to_s
+	fun head: String do return json["head"].as(String)
 
 	# Full Git ref that was pushed.
 	#
 	# Example: “refs/heads/master”
-	fun ref: String do return json["ref"].to_s
+	fun ref: String do return json["ref"].as(String)
 
 	# Number of commits in the push.
 	fun size: Int do return json["size"].as(Int)
@@ -252,7 +252,7 @@ class PushEvent
 		var arr = json["commits"].as(JsonArray)
 		for obj in arr do
 			if not obj isa JsonObject then continue
-			res.add api.load_commit(repo, obj["sha"].to_s).as(not null)
+			res.add api.load_commit(repo, obj["sha"].as(String)).as(not null)
 		end
 		return res
 	end
@@ -264,24 +264,24 @@ class StatusEvent
 
 	# The `Commit` itself.
 	fun commit: Commit do
-		return api.load_commit(repo, json["sha"].to_s).as(not null)
+		return api.load_commit(repo, json["sha"].as(String)).as(not null)
 	end
 
 	# New state.
 	#
 	# Can be `pending`, `success`, `failure`, or `error`.
-	fun state: String do return json["state"].to_s
+	fun state: String do return json["state"].as(String)
 
 	# Optional human-readable description added to the status.
 	fun description: nullable String do
 		if not json.has_key("description") then return null
-		return json["description"].to_s
+		return json["description"].as(String)
 	end
 
 	# Optional link added to the status.
 	fun target_url: nullable String do
 		if not json.has_key("target_url") then return null
-		return json["target_url"].to_s
+		return json["target_url"].as(String)
 	end
 
 	# Array of branches containing the status' SHA.
@@ -295,7 +295,7 @@ class StatusEvent
 		var arr = json["branches"].as(JsonArray)
 		for obj in arr do
 			if not obj isa JsonObject then continue
-			res.add api.load_branch(repo, obj["name"].to_s).as(not null)
+			res.add api.load_branch(repo, obj["name"].as(String)).as(not null)
 		end
 		return res
 	end

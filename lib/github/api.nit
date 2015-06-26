@@ -351,7 +351,7 @@ abstract class GithubEntity
 	redef fun to_s do return json.to_json
 
 	# Github page url.
-	fun html_url: String do return json["html_url"].to_s
+	fun html_url: String do return json["html_url"].as(String)
 end
 
 # A Github user
@@ -368,12 +368,12 @@ class User
 
 	# Init `self` from a `json` object.
 	init from_json(api: GithubAPI, json: JsonObject) do
-		init(api, json["login"].to_s)
+		init(api, json["login"].as(String))
 		self.json = json
 	end
 
 	# Avatar image url for this user.
-	fun avatar_url: String do return json["avatar_url"].to_s
+	fun avatar_url: String do return json["avatar_url"].as(String)
 end
 
 # A Github repository.
@@ -390,12 +390,12 @@ class Repo
 
 	# Init `self` from a `json` object.
 	init from_json(api: GithubAPI, json: JsonObject) do
-		init(api, json["full_name"].to_s)
+		init(api, json["full_name"].as(String))
 		self.json = json
 	end
 
 	# Repo short name on Github.
-	fun name: String do return json["name"].to_s
+	fun name: String do return json["name"].as(String)
 
 	# Get the repo owner.
 	fun owner: User do
@@ -410,7 +410,7 @@ class Repo
 		if not array isa JsonArray then return res
 		for obj in array do
 			if not obj isa JsonObject then continue
-			var name = obj["name"].to_s
+			var name = obj["name"].as(String)
 			res[name] = new Branch.from_json(api, self, obj)
 		end
 		return res
@@ -470,7 +470,7 @@ class Repo
 		if not array isa JsonArray then return res
 		for obj in array do
 			if not obj isa JsonObject then continue
-			var name = obj["name"].to_s
+			var name = obj["name"].as(String)
 			res[name] = new Label.from_json(api, self, obj)
 		end
 		return res
@@ -528,7 +528,7 @@ class Repo
 
 	# Repo default branch.
 	fun default_branch: Branch do
-		var name = json["default_branch"].to_s
+		var name = json["default_branch"].as(String)
 		var branch = api.load_branch(self, name)
 		assert branch isa Branch
 		return branch
@@ -564,7 +564,7 @@ class Branch
 	var name: String
 
 	redef init from_json(api, repo, json) do
-		self.name = json["name"].to_s
+		self.name = json["name"].as(String)
 		super
 	end
 
@@ -609,7 +609,7 @@ class Commit
 	var sha: String
 
 	redef init from_json(api, repo, json) do
-		self.sha = json["sha"].to_s
+		self.sha = json["sha"].as(String)
 		super
 	end
 
@@ -620,7 +620,7 @@ class Commit
 		if not parents isa JsonArray then return res
 		for obj in parents do
 			if not obj isa JsonObject then continue
-			res.add(api.load_commit(repo, obj["sha"].to_s).as(not null))
+			res.add(api.load_commit(repo, obj["sha"].as(String)).as(not null))
 		end
 		return res
 	end
@@ -645,14 +645,14 @@ class Commit
 	fun author_date: ISODate do
 		var commit = json["commit"].as(JsonObject)
 		var author = commit["author"].as(JsonObject)
-		return new ISODate.from_string(author["date"].to_s)
+		return new ISODate.from_string(author["date"].as(String))
 	end
 
 	# Commit date as ISODate.
 	fun commit_date: ISODate do
 		var commit = json["commit"].as(JsonObject)
 		var author = commit["committer"].as(JsonObject)
-		return new ISODate.from_string(author["date"].to_s)
+		return new ISODate.from_string(author["date"].as(String))
 	end
 
 	# List files staged in this commit.
@@ -667,7 +667,7 @@ class Commit
 	end
 
 	# Commit message.
-	fun message: String do return json["commit"].as(JsonObject)["message"].to_s
+	fun message: String do return json["commit"].as(JsonObject)["message"].as(String)
 end
 
 # A Github issue.
@@ -689,7 +689,7 @@ class Issue
 	end
 
 	# Issue title.
-	fun title: String do return json["title"].to_s
+	fun title: String do return json["title"].as(String)
 
 	# User that created this issue.
 	fun user: User do
@@ -702,14 +702,14 @@ class Issue
 		if not json.has_key("labels") then return res
 		for obj in json["labels"].as(JsonArray) do
 			if not obj isa JsonObject then continue
-			var name = obj["name"].to_s
+			var name = obj["name"].as(String)
 			res[name] = new Label.from_json(api, repo, obj)
 		end
 		return res
 	end
 
 	# State of the issue on Github.
-	fun state: String do return json["state"].to_s
+	fun state: String do return json["state"].as(String)
 
 	# Is the issue locked?
 	fun locked: Bool do return json["locked"].as(Bool)
@@ -750,31 +750,31 @@ class Issue
 	end
 
 	# Number of comments on this issue.
-	fun comments_count: Int do return json["comments"].to_s.to_i
+	fun comments_count: Int do return json["comments"].as(Int)
 
 	# Creation time in ISODate format.
 	fun created_at: ISODate do
-		return new ISODate.from_string(json["created_at"].to_s)
+		return new ISODate.from_string(json["created_at"].as(String))
 	end
 
 	# Last update time in ISODate format (if any).
 	fun updated_at: nullable ISODate do
 		var res = json["updated_at"]
 		if res == null then return null
-		return new ISODate.from_string(res.to_s)
+		return new ISODate.from_string(res.as(String))
 	end
 
 	# Close time in ISODate format (if any).
 	fun closed_at: nullable ISODate do
 		var res = json["closed_at"]
 		if res == null then return null
-		return new ISODate.from_string(res.to_s)
+		return new ISODate.from_string(res.as(String))
 	end
 
 	# TODO link to pull request
 
 	# Full description of the issue.
-	fun body: String  do return json["body"].to_s
+	fun body: String  do return json["body"].as(String)
 
 	# List of events on this issue.
 	fun events: Array[IssueEvent] do
@@ -819,10 +819,10 @@ class PullRequest
 	end
 
 	# Merge commit SHA.
-	fun merge_commit_sha: String do return json["merge_commit_sha"].to_s
+	fun merge_commit_sha: String do return json["merge_commit_sha"].as(String)
 
 	# Count of comments made on the pull request diff.
-	fun review_comments: Int do return json["review_comments"].to_s.to_i
+	fun review_comments: Int do return json["review_comments"].as(Int)
 
 	# Pull request head (can be a commit SHA or a branch name).
 	fun head: PullRef do
@@ -845,7 +845,7 @@ class PullRequest
 	# Mergeable state of this pull request.
 	#
 	# See <https://developer.github.com/v3/pulls/#list-pull-requests>.
-	fun mergeable_state: Int do return json["mergeable_state"].to_s.to_i
+	fun mergeable_state: Int do return json["mergeable_state"].as(Int)
 
 	# User that merged this pull request (if any).
 	fun merged_by: nullable User do
@@ -855,16 +855,16 @@ class PullRequest
 	end
 
 	# Count of commits in this pull request.
-	fun commits: Int do return json["commits"].to_s.to_i
+	fun commits: Int do return json["commits"].as(Int)
 
 	# Added line count.
-	fun additions: Int do return json["additions"].to_s.to_i
+	fun additions: Int do return json["additions"].as(Int)
 
 	# Deleted line count.
-	fun deletions: Int do return json["deletions"].to_s.to_i
+	fun deletions: Int do return json["deletions"].as(Int)
 
 	# Changed files count.
-	fun changed_files: Int do return json["changed_files"].to_s.to_i
+	fun changed_files: Int do return json["changed_files"].as(Int)
 end
 
 # A pull request reference (used for head and base).
@@ -877,13 +877,13 @@ class PullRef
 	var json: JsonObject
 
 	# Label pointed by `self`.
-	fun labl: String do return json["label"].to_s
+	fun labl: String do return json["label"].as(String)
 
 	# Reference pointed by `self`.
-	fun ref: String do return json["ref"].to_s
+	fun ref: String do return json["ref"].as(String)
 
 	# Commit SHA pointed by `self`.
-	fun sha: String do return json["sha"].to_s
+	fun sha: String do return json["sha"].as(String)
 
 	# User pointed by `self`.
 	fun user: User do
@@ -910,12 +910,12 @@ class Label
 	var name: String
 
 	redef init from_json(api, repo, json) do
-		self.name = json["name"].to_s
+		self.name = json["name"].as(String)
 		super
 	end
 
 	# Label color code.
-	fun color: String do return json["color"].to_s
+	fun color: String do return json["color"].as(String)
 end
 
 # A Github milestone.
@@ -937,23 +937,23 @@ class Milestone
 	end
 
 	# Milestone title.
-	fun title: String do return json["title"].to_s
+	fun title: String do return json["title"].as(String)
 
 	# Milestone long description.
-	fun description: String do return json["description"].to_s
+	fun description: String do return json["description"].as(String)
 
 	# Count of opened issues linked to this milestone.
-	fun open_issues: Int do return json["open_issues"].to_s.to_i
+	fun open_issues: Int do return json["open_issues"].as(Int)
 
 	# Count of closed issues linked to this milestone.
-	fun closed_issues: Int do return json["closed_issues"].to_s.to_i
+	fun closed_issues: Int do return json["closed_issues"].as(Int)
 
 	# Milestone state.
-	fun state: String do return json["state"].to_s
+	fun state: String do return json["state"].as(String)
 
 	# Creation time in ISODate format.
 	fun created_at: ISODate do
-		return new ISODate.from_string(json["created_at"].to_s)
+		return new ISODate.from_string(json["created_at"].as(String))
 	end
 
 	# User that created this milestone.
@@ -1008,17 +1008,17 @@ abstract class Comment
 
 	# Creation time in ISODate format.
 	fun created_at: ISODate do
-		return new ISODate.from_string(json["created_at"].to_s)
+		return new ISODate.from_string(json["created_at"].as(String))
 	end
 
 	# Last update time in ISODate format (if any).
 	fun updated_at: nullable ISODate do
 		if not json.has_key("updated_at") then return null
-		return new ISODate.from_string(json["updated_at"].to_s)
+		return new ISODate.from_string(json["updated_at"].as(String))
 	end
 
 	# Comment body text.
-	fun body: String do return json["body"].to_s
+	fun body: String do return json["body"].as(String)
 
 	# Does the comment contain an acknowledgement (+1)
 	fun is_ack: Bool
@@ -1035,7 +1035,7 @@ class CommitComment
 
 	# Commented commit.
 	fun commit: Commit do
-		return api.load_commit(repo, json["commit_id"].to_s).as(not null)
+		return api.load_commit(repo, json["commit_id"].as(String)).as(not null)
 	end
 
 	# Position of the comment on the line.
@@ -1055,7 +1055,7 @@ class CommitComment
 	end
 
 	# Path of the commented file.
-	fun path: String do return json["path"].to_s
+	fun path: String do return json["path"].as(String)
 end
 
 # Comments made on Github issue and pull request pages.
@@ -1075,7 +1075,7 @@ class IssueComment
 	end
 
 	# Link to the issue document on API.
-	fun issue_url: String do return json["issue_url"].to_s
+	fun issue_url: String do return json["issue_url"].as(String)
 end
 
 # Comments made on Github pull request diffs.
@@ -1095,25 +1095,25 @@ class ReviewComment
 	end
 
 	# Link to the pull request on API.
-	fun pull_request_url: String do return json["pull_request_url"].to_s
+	fun pull_request_url: String do return json["pull_request_url"].as(String)
 
 	# Diff hunk.
-	fun diff_hunk: String do return json["diff_hunk"].to_s
+	fun diff_hunk: String do return json["diff_hunk"].as(String)
 
 	# Path of commented file.
-	fun path: String do return json["path"].to_s
+	fun path: String do return json["path"].as(String)
 
 	# Position of the comment on the file.
-	fun position: Int do return json["position"].to_s.to_i
+	fun position: Int do return json["position"].as(Int)
 
 	# Original position in the diff.
-	fun original_position: Int do return json["original_position"].to_s.to_i
+	fun original_position: Int do return json["original_position"].as(Int)
 
 	# Commit referenced by this comment.
-	fun commit_id: String do return json["commit_id"].to_s
+	fun commit_id: String do return json["commit_id"].as(String)
 
 	# Original commit id.
-	fun original_commit_id: String do return json["original_commit_id"].to_s
+	fun original_commit_id: String do return json["original_commit_id"].as(String)
 end
 
 # An event that occurs on a Github `Issue`.
@@ -1146,11 +1146,11 @@ class IssueEvent
 
 	# Creation time in ISODate format.
 	fun created_at: ISODate do
-		return new ISODate.from_string(json["created_at"].to_s)
+		return new ISODate.from_string(json["created_at"].as(String))
 	end
 
 	# Event descriptor.
-	fun event: String do return json["event"].to_s
+	fun event: String do return json["event"].as(String)
 
 	# Commit linked to this event (if any).
 	fun commit_id: nullable String do
@@ -1195,10 +1195,10 @@ class RenameAction
 	var json: JsonObject
 
 	# Name before renaming.
-	fun from: String do return json["from"].to_s
+	fun from: String do return json["from"].as(String)
 
 	# Name after renaming.
-	fun to: String do return json["to"].to_s
+	fun to: String do return json["to"].as(String)
 end
 
 # Contributors list with additions, deletions, and commit counts.
@@ -1229,7 +1229,7 @@ class ContributorStats
 	end
 
 	# Total number of commit.
-	fun total: Int do return json["total"].to_s.to_i
+	fun total: Int do return json["total"].as(Int)
 
 	# Are of weeks of activity with detailed statistics.
 	fun weeks: JsonArray do return json["weeks"].as(JsonArray)
@@ -1247,5 +1247,5 @@ class GithubFile
 	var json: JsonObject
 
 	# File name.
-	fun filename: String do return json["filename"].to_s
+	fun filename: String do return json["filename"].as(String)
 end
