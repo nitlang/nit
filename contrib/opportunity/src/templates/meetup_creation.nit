@@ -29,6 +29,16 @@ class MeetupCreationPage
 	# Minimum number of input fields for answer
 	var min_answer_fields = 5
 
+	# Templates of answers offered as starting point in the Web interface
+	var templates: HashMap[String, Array[String]] do
+		var map = new HashMap[String, Array[String]]
+		map["4 kinds of pizza"] = ["Cheese", "Pepperoni", "Veggie", "All-dressed"]
+		map["5 days work week"] = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]
+		map["7 days week"] = ["Sunday", "Monday", "Tuesday", "Wednesday",
+		                      "Thursday", "Friday", "Saturday"]
+		return map
+	end
+
 	init do
 		header.page_js = """
 """
@@ -51,6 +61,27 @@ function new_answer(sender){
 		'<div class="col-sm-8">' +
 			'<input name="answer_' + nb + '" id="answer_' + nb + '" class="form-control" type="text" placeholder="{{{"Another opportunity"}}}">' +
 		'</div></div>')
+}
+
+// Clear all answers
+function clear(){
+	for(count = 1;; count ++){
+		var ctrl = "#answer_"+count
+		if ($(ctrl).length == 0) break
+		$(ctrl).val("")
+	}
+}
+
+// Apply a template of opportunities
+function apply_template(opportunities){
+	clear()
+
+	var count = 1
+	for (op of opportunities){
+		if (count > nb_answers) new_answer()
+		$("#answer_"+count).val(op)
+		count ++
+	}
 }
 """
 
@@ -88,17 +119,39 @@ function new_answer(sender){
 				</div>
 			</div>
 			<div class = "form-group">
-				<label for="meetup=place" class="col-sm-4 control-label">{{{"Where?"}}}</label>
+				<label for="meetup_place" class="col-sm-4 control-label">{{{"Where?"}}}</label>
 				<div class="col-sm-8">
 					<input name="meetup_place" id="meetup_place" type="text" class="form-control" placeholder="{{{"Place of the event"}}}" value="{{{if meet != null then meet.place else ""}}}">
 				</div>
 			</div>
 			<div class = "form-group">
-				<label for="meetup=maybe" class="col-sm-4 control-label">{{{"Add a Maybe option?"}}}</label>
-				<div class="col-sm-8">
-					<input name="meetup_mode" id="meetup_mode" type="checkbox" class="form-control">
+				<label for="meetup_mode" class="col-sm-4 control-label">{{{"Add a Maybe option?"}}}</label>
+				<div class="col-sm-8 text-left">
+					<input name="meetup_mode" id="meetup_mode" type="checkbox">
 				</div>
 			</div>
+
+			<div class = "form-group">
+				<label for="meetup_template" class="col-sm-4 control-label text-left">{{{"Template of opportunities"}}}</label>
+				<div class="col-sm-8 text-left">
+					<div class="dropdown">
+						<button class="btn btn-default dropdown-toggle" type="button" id="meetup_template" data-toggle="dropdown" aria-expanded="true">
+							{{{"Apply a template"}}}
+							<span class="caret"></span>
+						</button>
+						<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+"""
+		for name, answers in templates do bdy.add """
+		<li role="presentation"><a role="menuitem" tabindex="-1" onclick="apply_template([{{{[for ans in answers do "'"+ans+"'"].join(", ")}}}])">{{{name}}}</a></li>
+"""
+
+		bdy.add """
+		<li role="presentation"><a role="menuitem" tabindex="-1" onclick="apply_template([])">{{{"Clear"}}}</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+
 				<h2>{{{"Opportunities"}}}</h2>
 <div id="answers">
 """

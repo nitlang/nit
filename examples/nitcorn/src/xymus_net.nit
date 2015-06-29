@@ -1,6 +1,6 @@
 # This file is part of NIT ( http://www.nitlanguage.org ).
 #
-# Copyright 2014 Alexis Laferrière <alexis.laf@xymus.net>
+# Copyright 2014-2015 Alexis Laferrière <alexis.laf@xymus.net>
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -60,7 +60,7 @@ class MasterHeader
         <li><a href="http://pep8.xymus.net/">Pep/8 Analysis</a></li>
         <li{{{actives.get_or_default("tnitter", "")}}}><a href="http://tnitter.xymus.net/">Tnitter</a></li>
         <li{{{actives.get_or_default("benitlux", "")}}}><a href="http://benitlux.xymus.net/">Benitlux</a></li>
-        <li{{{actives.get_or_default("opportunity", "")}}}><a href="http://xymus.net/opportunity/">Opportunity</a></li>
+        <li{{{actives.get_or_default("opportunity", "")}}}><a href="http://xymus.net/opportunity/">Opportunité</a></li>
         <li><a href="http://nitlanguage.org/">Nit</a></li>
       </ul>
 
@@ -126,6 +126,16 @@ end
 
 redef class OpportunityPage
 	redef var header = new OpportunityMasterHeader(new MasterHeader("opportunity", false))
+end
+
+redef class MeetupCreationPage
+	redef var templates do
+		var map = super
+		map["Pizzas spécial LATECE"] = ["Végétarienne", "Pepperoni", "Viandes", "Poulet BBQ"]
+		map["Heures de réunion à l'UQAM"] = ["7h 30", "9h", "10h 30", "12h",
+		                                     "13h 30", "15h", "16h 30", "18h"]
+		return map
+	end
 end
 
 # Avoid executing when running tests

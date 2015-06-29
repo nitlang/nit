@@ -51,3 +51,71 @@ msgstr "Créer un nouvel événement"
 
 msgid "Opportunities"
 msgstr "Opportunités"
+
+#: templates::meetup_creation 135--78:104
+msgid "Template of opportunities"
+msgstr "Thème d'opportunités"
+
+#: templates::meetup_creation 139--11:28
+msgid "Apply a template"
+msgstr "Appliquer un thème"
+
+#: templates::meetup_creation 149--92:98
+msgid "Clear"
+msgstr "Vide"
+
+#: templates::meetup_creation 35--7:24
+msgid "4 kinds of pizza"
+msgstr "4 variétés de pizza"
+
+#: templates::meetup_creation 35--30:37
+msgid "Cheese"
+msgstr "Fromage"
+
+#: templates::meetup_creation 35--40:50
+msgid "Pepperoni"
+msgstr "Pepperoni"
+
+#: templates::meetup_creation 35--53:60
+msgid "Veggie"
+msgstr "Végétarienne"
+
+#: templates::meetup_creation 35--63:75
+msgid "All-dressed"
+msgstr "Toute garnie"
+
+#: templates::meetup_creation 36--7:24
+msgid "5 days work week"
+msgstr "5 jours de la semaine de travail"
+
+#: templates::meetup_creation 36--30:37, templates::meetup_creation 37--35:42
+msgid "Monday"
+msgstr "Lundi"
+
+#: templates::meetup_creation 36--40:48, templates::meetup_creation 37--45:53
+msgid "Tuesday"
+msgstr "Mardi"
+
+#: templates::meetup_creation 36--51:61, templates::meetup_creation 37--56:66
+msgid "Wednesday"
+msgstr "Mercredi"
+
+#: templates::meetup_creation 36--64:73, templates::meetup_creation 38--25:34
+msgid "Thursday"
+msgstr "Jeudi"
+
+#: templates::meetup_creation 36--76:83, templates::meetup_creation 38--37:44
+msgid "Friday"
+msgstr "Vendredi"
+
+#: templates::meetup_creation 37--7:19
+msgid "7 days week"
+msgstr "7 jours de la semaine"
+
+#: templates::meetup_creation 37--25:32
+msgid "Sunday"
+msgstr "Dimanche"
+
+#: templates::meetup_creation 38--47:56
+msgid "Saturday"
+msgstr "Samedi"
