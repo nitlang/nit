@@ -256,6 +256,7 @@ class MongoClient
 		assert is_alive
 		var res = new Array[String]
 		var nas = native.database_names
+		if nas == null then return res
 		var i = 0
 		var name = nas[i]
 		while not name.address_is_null do
@@ -360,6 +361,7 @@ class MongoDb
 		assert is_alive
 		var res = new Array[String]
 		var nas = native.collection_names
+		if nas == null then return res
 		var i = 0
 		var name = nas[i]
 		while not name.address_is_null do
