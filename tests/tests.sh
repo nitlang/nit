@@ -382,6 +382,7 @@ skip_exec()
 	test "$noskip" = true && return 1
 	for savdir in $savdirs .; do
 		local f="$savdir/exec.skip"
+		test -f "$f" || continue
 		if echo "$1" | grep -f "$f" >/dev/null 2>&1; then
 			echo -n "_ no exec by $f; "
 			return 0
@@ -395,6 +396,7 @@ skip_cc()
 	test "$noskip" = true && return 1
 	for savdir in $savdirs .; do
 		local f="$savdir/cc.skip"
+		test -f "$f" || continue
 		if echo "$1" | grep -f "$f" >/dev/null 2>&1; then
 			return 0
 		fi
