@@ -301,10 +301,56 @@ class JsonDeserializer
 			return object
 		end
 
+		# Simple JSON array without serialization metadata
 		if object isa Array[nullable Object] then
-			# special case, isa Array[nullable Serializable]
-			var array = new Array[nullable Serializable]
-			for e in object do array.add e.as(nullable Serializable)
+			var array = new Array[nullable Object]
+			var types = new HashSet[String]
+			var has_nullable = false
+			for e in object do
+				var res = convert_object(e)
+				array.add res
+
+				if res != null then
+					types.add res.class_name
+				else has_nullable = true
+			end
+
+			if types.length == 1 then
+				var array_type = types.first
+
+				var typed_array
+				if array_type == "FlatString" then
+					if has_nullable then
+						typed_array = new Array[nullable FlatString]
+					else typed_array = new Array[FlatString]
+				else if array_type == "Int" then
+					if has_nullable then
+						typed_array = new Array[nullable Int]
+					else typed_array = new Array[Int]
+				else if array_type == "Float" then
+					if has_nullable then
+						typed_array = new Array[nullable Float]
+					else typed_array = new Array[Float]
+				else
+					# TODO support all array types when we separate the constructor
+					# `from_deserializer` from the filling of the items.
+
+					if not has_nullable then
+						typed_array = new Array[Object]
+					else
+						# Unsupported array type, return as `Array[nullable Object]`
+						return array
+					end
+				end
+
+				assert typed_array isa Array[nullable Object]
+
+				# Copy item to the new array
+				for e in array do typed_array.add e
+				return typed_array
+			end
+
+			# Uninferable type, return as `Array[nullable Object]`
 			return array
 		end
 
