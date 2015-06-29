@@ -411,9 +411,7 @@ redef class SimpleCollection[E]
 			v.stream.write id.to_s
 			v.stream.write """, "__class": """"
 			v.stream.write class_name
-			v.stream.write """", "__length": """
-			v.stream.write length.to_s
-			v.stream.write """, "__items": """
+			v.stream.write """", "__items": """
 		end
 
 		serialize_to_pure_json v
@@ -430,10 +428,9 @@ redef class SimpleCollection[E]
 			v.notify_of_creation self
 			init
 
-			var length = v.deserialize_attribute("__length").as(Int)
 			var arr = v.path.last["__items"].as(SequenceRead[nullable Object])
-			for i in length.times do
-				var obj = v.convert_object(arr[i])
+			for o in arr do
+				var obj = v.convert_object(o)
 				self.add obj
 			end
 		end
