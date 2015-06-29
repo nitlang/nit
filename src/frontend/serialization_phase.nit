@@ -259,10 +259,10 @@ do
 
 		if deserializer_npropdef == null then
 			# create the property
-			code.add "	redef fun deserialize_class(name)"
+			code.add "	redef fun deserialize_class_intern(name)"
 			code.add "	do"
 		else
-			toolcontext.error(deserializer_npropdef.location, "Error: you cannot define `Deserializer::deserialize_class` in a module where you use `auto_serializable`.")
+			toolcontext.error(deserializer_npropdef.location, "Error: `Deserializer::deserialize_class_intern` is generated and must not be defined, use `deserialize_class` instead.")
 			return
 		end
 
@@ -373,7 +373,7 @@ redef class AStdClassdef
 	do
 		for npropdef in n_propdefs do if npropdef isa AMethPropdef then
 			var id = npropdef.n_methid
-			if id isa AIdMethid and id.n_id.text == "deserialize_class" then
+			if id isa AIdMethid and id.n_id.text == "deserialize_class_intern" then
 				return npropdef
 			end
 		end
