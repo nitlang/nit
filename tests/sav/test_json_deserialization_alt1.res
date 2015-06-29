@@ -40,7 +40,7 @@
 <E: a: hello, 1234, 123.4; b: hella, 2345, 234.5>
 
 # Json:
-{"__kind": "obj", "__id": 0, "__class": "E", "a": {"__kind": "obj", "__id": 1, "__class": "Array[Object]", "__items": ["hello", 1234, 123.4]}, "b": ["hella", 2345, 234.5]}
+{"__kind": "obj", "__id": 0, "__class": "E", "a": {"__kind": "obj", "__id": 1, "__class": "Array[Object]", "__items": ["hello", 1234, 123.4]}, "b": {"__kind": "obj", "__id": 2, "__class": "Array[nullable Serializable]", "__items": ["hella", 2345, 234.5]}}
 
 # Back in Nit:
 <E: a: hello, 1234, 123.4; b: hella, 2345, 234.5>

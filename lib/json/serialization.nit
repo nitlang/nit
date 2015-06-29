@@ -437,18 +437,6 @@ redef class SimpleCollection[E]
 	end
 end
 
-redef class Array[E]
-	redef fun serialize_to_json(v)
-	do
-		if v.plain_json or class_name == "Array[nullable Serializable]" then
-			# Using class_name to get the exact type,
-			# we do not want Array[Int] or anything else here.
-
-			serialize_to_pure_json v
-		else super
-	end
-end
-
 redef class Map[K, V]
 	redef fun serialize_to_json(v)
 	do
