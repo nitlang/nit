@@ -366,25 +366,39 @@ need_skip()
 		echo >>$xml "<testcase classname='`xmlesc "$3"`' name='`xmlesc "$2"`' `timestamp`><skipped/></testcase>"
 		return 0
 	fi
+
+	# Skip by hostname
+	host_skip_file=`hostname -s`.skip
+	if test -e $host_skip_file && echo "$1" | grep -f "$host_skip_file" >/dev/null 2>&1; then
+		echo "=> $2: [skip hostname]"
+		echo >>$xml "<testcase classname='`xmlesc "$3"`' name='`xmlesc "$2"`' `timestamp`><skipped/></testcase>"
+		return 0
+	fi
 	return 1
 }
 
 skip_exec()
 {
 	test "$noskip" = true && return 1
-	if echo "$1" | grep -f "exec.skip" >/dev/null 2>&1; then
-		echo -n "_ "
-		return 0
-	fi
+	for savdir in $savdirs .; do
+		f="$savdir/exec.skip"
+		if echo "$1" | grep -f "$f" >/dev/null 2>&1; then
+			echo -n "_ no exec by $f; "
+			return 0
+		fi
+	done
 	return 1
 }
 
 skip_cc()
 {
 	test "$noskip" = true && return 1
-	if echo "$1" | grep -f "cc.skip" >/dev/null 2>&1; then
-		return 0
-	fi
+	for savdir in $savdirs .; do
+		f="$savdir/cc.skip"
+		if echo "$1" | grep -f "$f" >/dev/null 2>&1; then
+			return 0
+		fi
+	done
 	return 1
 }
 
@@ -481,7 +495,7 @@ case $engine in
 		;;
 esac
 
-savdirs="sav/$engine $savdirs sav/"
+savdirs="sav/`hostname -s` sav/`uname` sav/$engine $savdirs sav/"
 
 # The default nitc compiler
 [ -z "$NITC" ] && find_nitc
