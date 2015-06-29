@@ -213,7 +213,7 @@ do
 			var n_type = attribute.n_type
 			var type_name
 			if n_type == null then
-				# Use a place holder, we will replace it with the infered type after the model phases
+				# Use a place holder, we will replace it with the inferred type after the model phases
 				type_name = toolcontext.place_holder_type_name
 			else
 				type_name = n_type.type_name
@@ -222,8 +222,17 @@ do
 
 			code.add """
 	var {{{name}}} = v.deserialize_attribute("{{{name}}}")
-	assert {{{name}}} isa {{{type_name}}} else print "Unsupported type for `{class_name}::{{{name}}}`, got '{{{{name}}}.class_name}'; expected {{{type_name}}}"
-	self.{{{name}}} = {{{name}}}"""
+	if not {{{name}}} isa {{{type_name}}} then
+		# Check if it was a subjectent error
+		v.errors.add new AttributeTypeError("TODO remove this arg on c_src regen",
+			self, "{{{name}}}", {{{name}}}, "{{{type_name}}}")
+
+		# Clear subjacent error
+		if v.keep_going == false then return
+	else
+		self.{{{name}}} = {{{name}}}
+	end
+"""
 		end
 
 		code.add "end"
