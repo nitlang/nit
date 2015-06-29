@@ -207,6 +207,11 @@ class JsonDeserializer
 	# Convert from simple Json object to Nit object
 	private fun convert_object(object: nullable Object): nullable Object
 	do
+		if object isa JsonParseError then
+			errors.add object
+			return null
+		end
+
 		if object isa JsonObject then
 			assert object.keys.has("__kind")
 			var kind = object["__kind"]
