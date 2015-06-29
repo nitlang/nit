@@ -355,7 +355,7 @@ redef class AModule
 	private fun deserializer_nclassdef: nullable AStdClassdef
 	do
 		for nclassdef in n_classdefs do
-			if nclassdef isa AStdClassdef and nclassdef.n_id.text == "Deserialization" then
+			if nclassdef isa AStdClassdef and nclassdef.n_id.text == "Deserializer" then
 				return nclassdef
 			end
 		end
