@@ -219,15 +219,25 @@ class JsonDeserializer
 
 			# obj?
 			if kind == "obj" then
-				assert object.keys.has("__id")
-				var id = object["__id"]
-				assert id isa Int
+				var id = null
+				if object.keys.has("__id") then
+					id = object["__id"]
+
+					if not id isa Int then
+						errors.add new Error("Serialization Error: JSON object declaration declares a non-integer `__id`.")
+						return object
+					end
+
+					if cache.has_id(id) then
+						errors.add new Error("Serialization Error: JSON object with `__id` {id} is deserialized twice.")
+						# Keep going
+					end
+				end
 
 				assert object.keys.has("__class")
 				var class_name = object["__class"]
 				assert class_name isa String
 
-				assert not cache.has_id(id) else print "Error: Object with id '{id}' of {class_name} is deserialized twice."
 
 				# advance on path
 				path.push object
