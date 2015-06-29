@@ -55,6 +55,37 @@
 # assert alice.to_plain_json == """
 # {"name": "Alice", "year_of_birth": 1978, "next_of_kin": {"name": "Bob", "year_of_birth": 1986, "next_of_kin": null}}"""
 # ~~~
+#
+# ## JSON to Nit objects
+#
+# The `JsonDeserializer` support reading JSON code with minimal meta-data
+# to easily create Nit object from client-side code or configuration files.
+# Each JSON object must define the `__class` attribute with the corresponding
+# Nit class and the expected attributes with its name in Nit followed by its value.
+#
+# ### Usage Example
+#
+# ~~~nitish
+# import json::serialization
+#
+# class MeetupConfig
+#     serialize
+#
+#     var description: String
+#     var max_participants: nullable Int
+#     var answers: Array[FlatString]
+# end
+#
+# var json_code = """
+# {"__class": "MeetupConfig", "description": "My Awesome Meetup", "max_participants": null, "answers": ["Pepperoni", "Chicken"]}"""
+# var deserializer = new JsonDeserializer(json_code)
+#
+# var meet = deserializer.deserialize
+# assert meet isa MeetupConfig
+# assert meet.description == "My Awesome Meetup"
+# assert meet.max_participants == null
+# assert meet.answers == ["Pepperoni", "Chicken"]
+# ~~~
 module serialization
 
 import ::serialization::caching
