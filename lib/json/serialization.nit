@@ -311,7 +311,11 @@ class JsonDeserializer
 		return object
 	end
 
-	redef fun deserialize do return convert_object(root)
+	redef fun deserialize
+	do
+		errors.clear
+		return convert_object(root)
+	end
 end
 
 redef class Serializable
