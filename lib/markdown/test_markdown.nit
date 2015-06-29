@@ -776,6 +776,36 @@ This is an image <img src="foo/bar" alt="baz"/> in a regular paragraph.
 		assert res == exp
 	end
 
+	fun test_process_xml4 do
+		var test = """
+<p>This is an example of a block element that should be escaped.</p>
+<p>Idem for the second paragraph.</p>
+"""
+		var exp = test
+		var res = test.md_to_html.write_to_string
+		assert res == exp
+	end
+
+	fun test_process_xml5 do
+		var test = """
+# Some more XML tests
+
+<p>This is an example of a block element that should be escaped.</p>
+<p>Idem for the second paragraph.</p>
+
+With a *md paragraph*!
+"""
+		var exp = """
+<h1 id="Some_more_XML_tests">Some more XML tests</h1>
+<p>This is an example of a block element that should be escaped.</p>
+<p>Idem for the second paragraph.</p>
+<p>With a <em>md paragraph</em>!</p>
+"""
+		var res = test.md_to_html.write_to_string
+		print res
+		assert res == exp
+	end
+
 	fun test_process_span_code1 do
 		var test = "Use the `printf()` function."
 		var exp = "<p>Use the <code>printf()</code> function.</p>\n"
