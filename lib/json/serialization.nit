@@ -213,8 +213,10 @@ class JsonDeserializer
 		end
 
 		if object isa JsonObject then
-			assert object.keys.has("__kind")
-			var kind = object["__kind"]
+			var kind = null
+			if object.keys.has("__kind") then
+				kind = object["__kind"]
+			end
 
 			# ref?
 			if kind == "ref" then
@@ -238,7 +240,7 @@ class JsonDeserializer
 			end
 
 			# obj?
-			if kind == "obj" then
+			if kind == "obj" or kind == null then
 				var id = null
 				if object.keys.has("__id") then
 					id = object["__id"]
