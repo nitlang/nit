@@ -1,4 +1,4 @@
-Runtime error: Aborted (../lib/serialization/serialization.nit:111)
+Runtime error: Aborted (../lib/serialization/serialization.nit:120)
 # Nit:
 <A: true a 0.123 1234 asdf false p4ssw0rd>
 
