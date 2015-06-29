@@ -90,7 +90,7 @@ module serialization
 
 import ::serialization::caching
 private import ::serialization::engine_tools
-private import static
+import static
 
 # Serializer of Nit objects to Json string.
 class JsonSerializer
@@ -287,12 +287,17 @@ class JsonDeserializer
 					end
 				end
 
-				if not object.keys.has("__class") then
+				var class_name = object.get_or_null("__class")
+				if class_name == null then
+					# Fallback to custom heuristic
+					class_name = class_name_heuristic(object)
+				end
+
+				if class_name == null then
 					errors.add new Error("Serialization Error: JSON object declaration does not declare a `__class`.")
 					return object
 				end
 
-				var class_name = object["__class"]
 				if not class_name isa String then
 					errors.add new Error("Serialization Error: JSON object declaration declares a non-string `__class`.")
 					return object
@@ -392,6 +397,54 @@ class JsonDeserializer
 	do
 		errors.clear
 		return convert_object(root)
+	end
+
+	# User customizable heuristic to get the name of the Nit class to deserialize `json_object`
+	#
+	# This method is called only when deserializing an object without the metadata `__class`.
+	# Return the class name as a `String` when it can be inferred.
+	# Return `null` when the class name cannot be found.
+	#
+	# If a valid class name is returned, `json_object` will then be deserialized normally.
+	# So it must contain the attributes of the corresponding class, as usual.
+	#
+	# ~~~nitish
+	# class MyData
+	#     serialize
+	#
+	#     var data: String
+	# end
+	#
+	# class MyError
+	#     serialize
+	#
+	#     var error: String
+	# end
+	#
+	# class MyJsonDeserializer
+	#     super JsonDeserializer
+	#
+	#     redef fun class_name_heuristic(json_object)
+	#     do
+	#         if json_object.keys.has("error") then return "MyError"
+	#         if json_object.keys.has("data") then return "MyData"
+	#         return null
+	#     end
+	# end
+	#
+	# var json = """{"data": "some other data"}"""
+	# var deserializer = new MyJsonDeserializer(json)
+	# var deserialized = deserializer.deserialize
+	# assert deserialized isa MyData
+	#
+	# json = """{"error": "some error message"}"""
+	# deserializer = new MyJsonDeserializer(json)
+	# deserialized = deserializer.deserialize
+	# assert deserialized isa MyError
+	# ~~~
+	protected fun class_name_heuristic(json_object: JsonObject): nullable String
+	do
+		return null
 	end
 end
 
