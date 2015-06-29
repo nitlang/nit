@@ -182,10 +182,14 @@ class JsonDeserializer
 
 	redef fun deserialize_attribute(name)
 	do
-		assert not path.is_empty
+		assert not path.is_empty # This is an internal error, abort
 		var current = path.last
 
-		assert current.keys.has(name)
+		if not current.keys.has(name) then
+			errors.add new Error("Deserialization Error: JSON object has not attribute '{name}'.")
+			return null
+		end
+
 		var value = current[name]
 
 		return convert_object(value)
@@ -209,11 +213,22 @@ class JsonDeserializer
 
 			# ref?
 			if kind == "ref" then
-				assert object.keys.has("__id")
-				var id = object["__id"]
-				assert id isa Int
+				if not object.keys.has("__id") then
+					errors.add new Error("Serialization Error: JSON object reference does not declare a `__id`.")
+					return object
+				end
 
-				assert cache.has_id(id)
+				var id = object["__id"]
+				if not id isa Int then
+					errors.add new Error("Serialization Error: JSON object reference declares a non-integer `__id`.")
+					return object
+				end
+
+				if not cache.has_id(id) then
+					errors.add new Error("Serialization Error: JSON object reference has an unknown `__id`.")
+					return object
+				end
+
 				return cache.object_for(id)
 			end
 
@@ -234,10 +249,16 @@ class JsonDeserializer
 					end
 				end
 
-				assert object.keys.has("__class")
-				var class_name = object["__class"]
-				assert class_name isa String
+				if not object.keys.has("__class") then
+					errors.add new Error("Serialization Error: JSON object declaration does not declare a `__class`.")
+					return object
+				end
 
+				var class_name = object["__class"]
+				if not class_name isa String then
+					errors.add new Error("Serialization Error: JSON object declaration declares a non-string `__class`.")
+					return object
+				end
 
 				# advance on path
 				path.push object
@@ -254,17 +275,23 @@ class JsonDeserializer
 
 			# char?
 			if kind == "char" then
-				assert object.keys.has("__val")
-				var val = object["__val"]
-				assert val isa String
+				if not object.keys.has("__val") then
+					errors.add new Error("Serialization Error: JSON `char` object does not declare a `__val`.")
+					return object
+				end
 
-				if val.length != 1 then print "Error: expected a single char when deserializing '{val}'."
+				var val = object["__val"]
+
+				if not val isa String or val.is_empty then
+					errors.add new Error("Serialization Error: JSON `char` object does not declare a single char in `__val`.")
+					return object
+				end
 
 				return val.chars.first
 			end
 
-			print "Malformed Json string: unexpected Json Object kind '{kind or else "null"}'"
-			abort
+			errors.add new Error("Serialization Error: JSON object has an unknown `__kind`.")
+			return object
 		end
 
 		if object isa Array[nullable Object] then
