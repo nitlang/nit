@@ -106,7 +106,7 @@ abstract class Deserializer
 	# This method should be redefined for each custom subclass of `Serializable`.
 	# All refinement should look for a precise `class_name` and call super
 	# on unsupported classes.
-	fun deserialize_class(class_name: String): Object do
+	protected fun deserialize_class(class_name: String): Object do
 		print "Error: doesn't know how to deserialize class \"{class_name}\""
 		abort
 	end
