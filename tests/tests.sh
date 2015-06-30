@@ -181,23 +181,23 @@ EOF
 function process_result()
 {
 	# Result
-	pattern=$1
-	description=$2
-	pack=$3
-	SAV=""
-	NSAV=""
-	FIXME=""
-	NFIXME=""
-	SOSO=""
-	NSOSO=""
-	SOSOF=""
-	NSOSOF=""
-	OLD=""
-	LIST=""
-	FIRST=""
+	local pattern=$1
+	local description=$2
+	local pack=$3
+	local SAV=""
+	local NSAV=""
+	local FIXME=""
+	local NFIXME=""
+	local SOSO=""
+	local NSOSO=""
+	local SOSOF=""
+	local NSOSOF=""
+	local OLD=""
+	local LIST=""
+	local FIRST=""
 
 	# Truncate too big res file
-	size=$(wc -c < "$outdir/$pattern.res")
+	local size=$(wc -c < "$outdir/$pattern.res")
 	if test -n "$reslimit" -a "$size" -gt "$reslimit"; then
 		# The most portable way to truncate a file is with Perl
 		perl -e "truncate \"$outdir/$pattern.res\", $reslimit;"
@@ -207,7 +207,7 @@ function process_result()
 	echo >>$xml "<testcase classname='`xmlesc "$pack"`' name='`xmlesc "$description"`' time='`cat -- "$outdir/$pattern.time.out"`' `timestamp`>"
 	#for sav in "sav/$engine/fixme/$pattern.res" "sav/$engine/$pattern.res" "sav/fixme/$pattern.res" "sav/$pattern.res" "sav/$pattern.sav"; do
 	for savdir in $savdirs; do
-		sav=$savdir/fixme/$pattern.res
+		local sav=$savdir/fixme/$pattern.res
 		compare_to_result "$pattern" "$sav"
 		case "$?" in
 			0)
@@ -360,7 +360,7 @@ need_skip()
 	fi
 
 	# Skip by OS
-	os_skip_file=`uname`.skip
+	local os_skip_file=`uname`.skip
 	if test -e $os_skip_file && echo "$1" | grep -f "$os_skip_file" >/dev/null 2>&1; then
 		echo "=> $2: [skip os]"
 		echo >>$xml "<testcase classname='`xmlesc "$3"`' name='`xmlesc "$2"`' `timestamp`><skipped/></testcase>"
@@ -368,7 +368,7 @@ need_skip()
 	fi
 
 	# Skip by hostname
-	host_skip_file=`hostname -s`.skip
+	local host_skip_file=`hostname -s`.skip
 	if test -e $host_skip_file && echo "$1" | grep -f "$host_skip_file" >/dev/null 2>&1; then
 		echo "=> $2: [skip hostname]"
 		echo >>$xml "<testcase classname='`xmlesc "$3"`' name='`xmlesc "$2"`' `timestamp`><skipped/></testcase>"
@@ -381,7 +381,8 @@ skip_exec()
 {
 	test "$noskip" = true && return 1
 	for savdir in $savdirs .; do
-		f="$savdir/exec.skip"
+		local f="$savdir/exec.skip"
+		test -f "$f" || continue
 		if echo "$1" | grep -f "$f" >/dev/null 2>&1; then
 			echo -n "_ no exec by $f; "
 			return 0
@@ -394,7 +395,8 @@ skip_cc()
 {
 	test "$noskip" = true && return 1
 	for savdir in $savdirs .; do
-		f="$savdir/cc.skip"
+		local f="$savdir/cc.skip"
+		test -f "$f" || continue
 		if echo "$1" | grep -f "$f" >/dev/null 2>&1; then
 			return 0
 		fi
@@ -404,8 +406,8 @@ skip_cc()
 
 find_nitc()
 {
-	name="$enginebinname"
-	recent=`ls -t ../src/$name ../src/$name_[0-9] ../bin/$name ../c_src/$name 2>/dev/null | head -1`
+	local name="$enginebinname"
+	local recent=`ls -t ../src/$name ../src/$name_[0-9] ../bin/$name ../c_src/$name 2>/dev/null | head -1`
 	if [[ "x$recent" == "x" ]]; then
 		echo "Could not find binary for engine $engine, aborting"
 		exit 1
