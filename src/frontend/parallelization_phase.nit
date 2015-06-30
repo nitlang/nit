@@ -47,8 +47,7 @@ private class ParallelizationPhase
 		assert amod isa AModule
 
 		# Construct the name of the generated class
-		var modulename = amod.n_moduledecl.n_name.n_id.text
-		var classname = "Threaded" + modulename
+		var classname = "Threaded"
 
 		# Try to get the name of the class
 		if nmethdef.parent isa AStdClassdef then
@@ -66,6 +65,7 @@ private class ParallelizationPhase
 		if has_rvalue then
 			vtype = "redef type E: " + nmethdef.n_signature.n_type.n_id.text
 		end
+
 		# create a return type
 		var n_id = new TClassid
 		n_id.text = classname
@@ -74,18 +74,16 @@ private class ParallelizationPhase
 		nmethdef.n_signature.n_type = n_type
 
 		var params = new Array[String]
-		# case if the method has parameters
-		if nmethdef.n_signature.n_params.not_empty then
-			for param in nmethdef.n_signature.n_params do
-				params.add("""
-var {{{param.n_id.text}}} : {{{param.n_type.n_id.text}}}
-
-""")
-			end
+		for param in nmethdef.n_signature.n_params do
+			var typ = param.n_type.n_id.text
+			if param.n_type.n_kwnullable != null then typ = "nullable {typ}"
+			params.add """
+var {{{param.n_id.text}}}: {{{typ}}}
+"""
 		end
 
 		# String corresponding to the generated class
-		var s="""
+		var classdef_source = """
 class {{{classname}}}
 	super Thread
 
@@ -98,10 +96,11 @@ end
 """
 
 		# Parse newly obtained classdef
-		var classdef = toolcontext.parse_classdef(s).as(AStdClassdef)
+		var classdef = toolcontext.parse_classdef(classdef_source)
+		assert classdef isa AStdClassdef
 
 		# Get the `main` fun of the class
-		var mainfun : nullable AMethPropdef = null
+		var mainfun: nullable AMethPropdef = null
 		for prop in classdef.n_propdefs do
 			if prop isa AMethPropdef then mainfun = prop
 		end
