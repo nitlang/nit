@@ -197,10 +197,12 @@ private class SerializationPhasePreModel
 		var npropdefs = nclassdef.n_propdefs
 
 		var code = new Array[String]
-		code.add "redef init from_deserializer(v: Deserializer)"
-		code.add "do"
-		code.add "	super"
-		code.add "	v.notify_of_creation self"
+		code.add """
+redef init from_deserializer(v: Deserializer)
+do
+	super
+	v.notify_of_creation self
+"""
 
 		for attribute in npropdefs do if attribute isa AAttrPropdef then
 
@@ -211,17 +213,26 @@ private class SerializationPhasePreModel
 			var n_type = attribute.n_type
 			var type_name
 			if n_type == null then
-				# Use a place holder, we will replace it with the infered type after the model phases
+				# Use a place holder, we will replace it with the inferred type after the model phases
 				type_name = toolcontext.place_holder_type_name
 			else
 				type_name = n_type.type_name
 			end
 			var name = attribute.name
 
-			code.add ""
-			code.add "\tvar {name} = v.deserialize_attribute(\"{name}\")"
-			code.add "\tassert {name} isa {type_name} else print \"Unsupported type for `\{class_name\}::{name}`, got '\{{name}.class_name\}'; expected {type_name}\""
-			code.add "\tself.{name} = {name}"
+			code.add """
+	var {{{name}}} = v.deserialize_attribute("{{{name}}}")
+	if not {{{name}}} isa {{{type_name}}} then
+		# Check if it was a subjectent error
+		v.errors.add new AttributeTypeError("TODO remove this arg on c_src regen",
+			self, "{{{name}}}", {{{name}}}, "{{{type_name}}}")
+
+		# Clear subjacent error
+		if v.keep_going == false then return
+	else
+		self.{{{name}}} = {{{name}}}
+	end
+"""
 		end
 
 		code.add "end"
@@ -248,10 +259,10 @@ private class SerializationPhasePreModel
 
 		if deserializer_npropdef == null then
 			# create the property
-			code.add "	redef fun deserialize_class(name)"
+			code.add "	redef fun deserialize_class_intern(name)"
 			code.add "	do"
 		else
-			toolcontext.error(deserializer_npropdef.location, "Error: you cannot define `Deserializer::deserialize_class` in a module where you use `auto_serializable`.")
+			toolcontext.error(deserializer_npropdef.location, "Error: `Deserializer::deserialize_class_intern` is generated and must not be defined, use `deserialize_class` instead.")
 			return
 		end
 
@@ -344,7 +355,7 @@ redef class AModule
 	private fun deserializer_nclassdef: nullable AStdClassdef
 	do
 		for nclassdef in n_classdefs do
-			if nclassdef isa AStdClassdef and nclassdef.n_id.text == "Deserialization" then
+			if nclassdef isa AStdClassdef and nclassdef.n_id.text == "Deserializer" then
 				return nclassdef
 			end
 		end
@@ -362,7 +373,7 @@ redef class AStdClassdef
 	do
 		for npropdef in n_propdefs do if npropdef isa AMethPropdef then
 			var id = npropdef.n_methid
-			if id isa AIdMethid and id.n_id.text == "deserialize_class" then
+			if id isa AIdMethid and id.n_id.text == "deserialize_class_intern" then
 				return npropdef
 			end
 		end

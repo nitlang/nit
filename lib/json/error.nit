@@ -23,7 +23,7 @@ class JsonParseError
 	redef fun to_s do
 		var p = position
 		if p isa Position then
-			return "[{p}] {super}"
+			return "Error Parsing JSON: [{p}] {super}"
 		else
 			return super
 		end

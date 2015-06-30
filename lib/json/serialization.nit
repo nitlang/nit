@@ -55,11 +55,42 @@
 # assert alice.to_plain_json == """
 # {"name": "Alice", "year_of_birth": 1978, "next_of_kin": {"name": "Bob", "year_of_birth": 1986, "next_of_kin": null}}"""
 # ~~~
+#
+# ## JSON to Nit objects
+#
+# The `JsonDeserializer` support reading JSON code with minimal meta-data
+# to easily create Nit object from client-side code or configuration files.
+# Each JSON object must define the `__class` attribute with the corresponding
+# Nit class and the expected attributes with its name in Nit followed by its value.
+#
+# ### Usage Example
+#
+# ~~~nitish
+# import json::serialization
+#
+# class MeetupConfig
+#     serialize
+#
+#     var description: String
+#     var max_participants: nullable Int
+#     var answers: Array[FlatString]
+# end
+#
+# var json_code = """
+# {"__class": "MeetupConfig", "description": "My Awesome Meetup", "max_participants": null, "answers": ["Pepperoni", "Chicken"]}"""
+# var deserializer = new JsonDeserializer(json_code)
+#
+# var meet = deserializer.deserialize
+# assert meet isa MeetupConfig
+# assert meet.description == "My Awesome Meetup"
+# assert meet.max_participants == null
+# assert meet.answers == ["Pepperoni", "Chicken"]
+# ~~~
 module serialization
 
 import ::serialization::caching
 private import ::serialization::engine_tools
-private import static
+import static
 
 # Serializer of Nit objects to Json string.
 class JsonSerializer
@@ -182,10 +213,14 @@ class JsonDeserializer
 
 	redef fun deserialize_attribute(name)
 	do
-		assert not path.is_empty
+		assert not path.is_empty # This is an internal error, abort
 		var current = path.last
 
-		assert current.keys.has(name)
+		if not current.keys.has(name) then
+			errors.add new Error("Deserialization Error: JSON object has not attribute '{name}'.")
+			return null
+		end
+
 		var value = current[name]
 
 		return convert_object(value)
@@ -203,31 +238,70 @@ class JsonDeserializer
 	# Convert from simple Json object to Nit object
 	private fun convert_object(object: nullable Object): nullable Object
 	do
+		if object isa JsonParseError then
+			errors.add object
+			return null
+		end
+
 		if object isa JsonObject then
-			assert object.keys.has("__kind")
-			var kind = object["__kind"]
+			var kind = null
+			if object.keys.has("__kind") then
+				kind = object["__kind"]
+			end
 
 			# ref?
 			if kind == "ref" then
-				assert object.keys.has("__id")
-				var id = object["__id"]
-				assert id isa Int
+				if not object.keys.has("__id") then
+					errors.add new Error("Serialization Error: JSON object reference does not declare a `__id`.")
+					return object
+				end
 
-				assert cache.has_id(id)
+				var id = object["__id"]
+				if not id isa Int then
+					errors.add new Error("Serialization Error: JSON object reference declares a non-integer `__id`.")
+					return object
+				end
+
+				if not cache.has_id(id) then
+					errors.add new Error("Serialization Error: JSON object reference has an unknown `__id`.")
+					return object
+				end
+
 				return cache.object_for(id)
 			end
 
 			# obj?
-			if kind == "obj" then
-				assert object.keys.has("__id")
-				var id = object["__id"]
-				assert id isa Int
+			if kind == "obj" or kind == null then
+				var id = null
+				if object.keys.has("__id") then
+					id = object["__id"]
 
-				assert object.keys.has("__class")
-				var class_name = object["__class"]
-				assert class_name isa String
+					if not id isa Int then
+						errors.add new Error("Serialization Error: JSON object declaration declares a non-integer `__id`.")
+						return object
+					end
 
-				assert not cache.has_id(id) else print "Error: Object with id '{id}' of {class_name} is deserialized twice."
+					if cache.has_id(id) then
+						errors.add new Error("Serialization Error: JSON object with `__id` {id} is deserialized twice.")
+						# Keep going
+					end
+				end
+
+				var class_name = object.get_or_null("__class")
+				if class_name == null then
+					# Fallback to custom heuristic
+					class_name = class_name_heuristic(object)
+				end
+
+				if class_name == null then
+					errors.add new Error("Serialization Error: JSON object declaration does not declare a `__class`.")
+					return object
+				end
+
+				if not class_name isa String then
+					errors.add new Error("Serialization Error: JSON object declaration declares a non-string `__class`.")
+					return object
+				end
 
 				# advance on path
 				path.push object
@@ -244,30 +318,134 @@ class JsonDeserializer
 
 			# char?
 			if kind == "char" then
-				assert object.keys.has("__val")
-				var val = object["__val"]
-				assert val isa String
+				if not object.keys.has("__val") then
+					errors.add new Error("Serialization Error: JSON `char` object does not declare a `__val`.")
+					return object
+				end
 
-				if val.length != 1 then print "Error: expected a single char when deserializing '{val}'."
+				var val = object["__val"]
+
+				if not val isa String or val.is_empty then
+					errors.add new Error("Serialization Error: JSON `char` object does not declare a single char in `__val`.")
+					return object
+				end
 
 				return val.chars.first
 			end
 
-			print "Malformed Json string: unexpected Json Object kind '{kind or else "null"}'"
-			abort
+			errors.add new Error("Serialization Error: JSON object has an unknown `__kind`.")
+			return object
 		end
 
+		# Simple JSON array without serialization metadata
 		if object isa Array[nullable Object] then
-			# special case, isa Array[nullable Serializable]
-			var array = new Array[nullable Serializable]
-			for e in object do array.add e.as(nullable Serializable)
+			var array = new Array[nullable Object]
+			var types = new HashSet[String]
+			var has_nullable = false
+			for e in object do
+				var res = convert_object(e)
+				array.add res
+
+				if res != null then
+					types.add res.class_name
+				else has_nullable = true
+			end
+
+			if types.length == 1 then
+				var array_type = types.first
+
+				var typed_array
+				if array_type == "FlatString" then
+					if has_nullable then
+						typed_array = new Array[nullable FlatString]
+					else typed_array = new Array[FlatString]
+				else if array_type == "Int" then
+					if has_nullable then
+						typed_array = new Array[nullable Int]
+					else typed_array = new Array[Int]
+				else if array_type == "Float" then
+					if has_nullable then
+						typed_array = new Array[nullable Float]
+					else typed_array = new Array[Float]
+				else
+					# TODO support all array types when we separate the constructor
+					# `from_deserializer` from the filling of the items.
+
+					if not has_nullable then
+						typed_array = new Array[Object]
+					else
+						# Unsupported array type, return as `Array[nullable Object]`
+						return array
+					end
+				end
+
+				assert typed_array isa Array[nullable Object]
+
+				# Copy item to the new array
+				for e in array do typed_array.add e
+				return typed_array
+			end
+
+			# Uninferable type, return as `Array[nullable Object]`
 			return array
 		end
 
 		return object
 	end
 
-	redef fun deserialize do return convert_object(root)
+	redef fun deserialize
+	do
+		errors.clear
+		return convert_object(root)
+	end
+
+	# User customizable heuristic to get the name of the Nit class to deserialize `json_object`
+	#
+	# This method is called only when deserializing an object without the metadata `__class`.
+	# Return the class name as a `String` when it can be inferred.
+	# Return `null` when the class name cannot be found.
+	#
+	# If a valid class name is returned, `json_object` will then be deserialized normally.
+	# So it must contain the attributes of the corresponding class, as usual.
+	#
+	# ~~~nitish
+	# class MyData
+	#     serialize
+	#
+	#     var data: String
+	# end
+	#
+	# class MyError
+	#     serialize
+	#
+	#     var error: String
+	# end
+	#
+	# class MyJsonDeserializer
+	#     super JsonDeserializer
+	#
+	#     redef fun class_name_heuristic(json_object)
+	#     do
+	#         if json_object.keys.has("error") then return "MyError"
+	#         if json_object.keys.has("data") then return "MyData"
+	#         return null
+	#     end
+	# end
+	#
+	# var json = """{"data": "some other data"}"""
+	# var deserializer = new MyJsonDeserializer(json)
+	# var deserialized = deserializer.deserialize
+	# assert deserialized isa MyData
+	#
+	# json = """{"error": "some error message"}"""
+	# deserializer = new MyJsonDeserializer(json)
+	# deserialized = deserializer.deserialize
+	# assert deserialized isa MyError
+	# ~~~
+	protected fun class_name_heuristic(json_object: JsonObject): nullable String
+	do
+		return null
+	end
 end
 
 redef class Serializable
@@ -363,9 +541,7 @@ redef class SimpleCollection[E]
 			v.stream.write id.to_s
 			v.stream.write """, "__class": """"
 			v.stream.write class_name
-			v.stream.write """", "__length": """
-			v.stream.write length.to_s
-			v.stream.write """, "__items": """
+			v.stream.write """", "__items": """
 		end
 
 		serialize_to_pure_json v
@@ -382,25 +558,12 @@ redef class SimpleCollection[E]
 			v.notify_of_creation self
 			init
 
-			var length = v.deserialize_attribute("__length").as(Int)
 			var arr = v.path.last["__items"].as(SequenceRead[nullable Object])
-			for i in length.times do
-				var obj = v.convert_object(arr[i])
+			for o in arr do
+				var obj = v.convert_object(o)
 				self.add obj
 			end
 		end
-	end
-end
-
-redef class Array[E]
-	redef fun serialize_to_json(v)
-	do
-		if v.plain_json or class_name == "Array[nullable Serializable]" then
-			# Using class_name to get the exact type,
-			# we do not want Array[Int] or anything else here.
-
-			serialize_to_pure_json v
-		else super
 	end
 end
 
