@@ -21,12 +21,67 @@ import serialization
 
 # An abstract 2d point, strongly linked to its implementation `Point`
 interface IPoint[N: Numeric]
-	# horizontal coordinate
+
+	# Horizontal coordinate
 	fun x: N is abstract
-	# vertical coordinate
+
+	# Vertical coordinate
 	fun y: N is abstract
 
 	redef fun to_s do return "({x}, {y})"
+
+	# Distance with `other`
+	#
+	# ~~~
+	# var p0 = new Point[Float](0.0, 0.0)
+	# var p1 = new Point[Float](2.0, 3.0)
+	# assert p0.dist(p1).is_approx(3.6, 0.01)
+	# ~~~
+	#
+	# TODO 3D implementation.
+	fun dist(other: Point[Numeric]): N
+	do
+		return x.value_of(dist2(other).to_f.sqrt)
+	end
+
+	# Square of the distance with `other`
+	#
+	# May be used as an approximation to compare distance between two points.
+	#
+	# ~~~
+	# var p0 = new Point[Float](0.0, 0.0)
+	# var p1 = new Point[Float](2.0, 3.0)
+	# assert p0.dist2(p1) == 13.0
+	# ~~~
+	#
+	# TODO 3D implementation.
+	fun dist2(other: Point[Numeric]): N
+	do
+		var dx = other.x.sub(x)
+		var dy = other.y.sub(y)
+		var s = (dx.mul(dx)).add(dy.mul(dy))
+		return x.value_of(s)
+	end
+
+	# Linear interpolation between `self` and `other` at `p` out of `1.0`
+	#
+	# ~~~
+	# var p0 = new Point[Float](0.0, 0.0)
+	# var p1 = new Point[Float](2.0, 3.0)
+	# assert p0.lerp(p1, 0.0) == p0
+	# assert p0.lerp(p1, 1.0) == p1
+	# assert p0.lerp(p1, 0.5) == new Point[Float](1.0, 1.5)
+	# ~~~
+	#
+	# TODO 3D implementation.
+	fun lerp(other: Point[Numeric], p: Float): Point[N]
+	do
+		var xx = x.to_f + (other.x.to_f - x.to_f).to_f * p
+		var yy = y.to_f + (other.y.to_f - y.to_f).to_f * p
+		return new Point[N](x.value_of(xx), y.value_of(yy))
+	end
+
+	redef fun ==(o) do return o isa IPoint[Numeric] and o.x == x and o.y == y
 end
 
 # A 2d point and an implementation of `IPoint`
@@ -85,7 +140,6 @@ class Line[N: Numeric]
 			point_right = a
 		end
 	end
-
 end
 
 # An abstract 3d line segment
