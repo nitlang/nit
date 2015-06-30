@@ -371,7 +371,7 @@ redef class MClass
 		v.add("  protected static RTClass instance;")
 		v.add("  private {rt_name}() \{")
 		v.add("    this.class_name = \"{name}\";")
-		# TODO compile_vft(v)
+		compile_vft(v)
 		# TODO compile_type_table(v)
 		v.add("  \}")
 		v.add("  public static RTClass get{rt_name}() \{")
@@ -381,6 +381,32 @@ redef class MClass
 		v.add("    return instance;")
 		v.add("  \}")
 		v.add("\}")
+	end
+
+	# Compile the virtual function table for the mclass
+	private fun compile_vft(v: JavaCompilerVisitor) do
+		# TODO handle generics
+		if mclass_type.need_anchor then return
+		var mclassdefs = mclass_type.collect_mclassdefs(v.compiler.mainmodule).to_a
+		v.compiler.mainmodule.linearize_mclassdefs(mclassdefs)
+
+		var mainmodule = v.compiler.mainmodule
+		for mclassdef in mclassdefs.reversed do
+			for mprop in mclassdef.intro_mproperties do
+				var mpropdef = mprop.lookup_first_definition(mainmodule, intro.bound_mtype)
+				if not mpropdef isa MMethodDef then continue
+				var rt_name = mpropdef.rt_name
+				v.add("this.vft.put(\"{mprop.full_name}\", {rt_name}.get{rt_name}());")
+
+				# fill super next definitions
+				while mpropdef.has_supercall do
+					var prefix = mpropdef.full_name
+					mpropdef = mpropdef.lookup_next_definition(mainmodule, intro.bound_mtype)
+					rt_name = mpropdef.rt_name
+					v.add("this.vft.put(\"{prefix}\", {rt_name}.get{rt_name}());")
+				end
+			end
+		end
 	end
 end
 
