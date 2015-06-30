@@ -585,15 +585,19 @@ end
 
 redef class GraphArticle
 	redef fun init_html_render(v, doc, page) do
-		var output_dir = v.ctx.output_dir
-		var path = output_dir / graph_id
-		var path_sh = path.escape_to_sh
+		var path = v.ctx.output_dir / graph_id
 		var file = new FileWriter.open("{path}.dot")
 		file.write(dot)
 		file.close
-		sys.system("\{ test -f {path_sh}.png && test -f {path_sh}.s.dot && diff -- {path_sh}.dot {path_sh}.s.dot >/dev/null 2>&1 ; \} || \{ cp -- {path_sh}.dot {path_sh}.s.dot && dot -Tpng -o{path_sh}.png -Tcmapx -o{path_sh}.map {path_sh}.s.dot ; \}")
-		var fmap = new FileReader.open("{path}.map")
-		self.map = fmap.read_all
-		fmap.close
+		var proc = new ProcessReader("dot", "-Tsvg", "-Tcmapx", "{path}.dot")
+		var svg = new Buffer
+		var i = 0
+		while not proc.eof do
+			i += 1
+			if i < 6 then continue # skip dot default header
+			svg.append proc.read_line
+		end
+		proc.close
+		self.svg = svg.write_to_string
 	end
 end
