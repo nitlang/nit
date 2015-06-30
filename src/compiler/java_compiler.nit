@@ -217,8 +217,8 @@ class JavaCompiler
 		# compile method structures
 		compile_mmethods_to_java
 
-		# TODO compile main
-		modelbuilder.toolcontext.info("NOT YET IMPLEMENTED", 0)
+		# compile main
+		compile_main_function
 	end
 
 	# Prepare the boxes used to represent Java primitive types
@@ -259,6 +259,17 @@ class JavaCompiler
 				end
 			end
 		end
+	end
+
+	# Generate Java main that call Sys.main
+	fun compile_main_function do
+		var v = new_visitor("{mainmodule.jname}_Main.java")
+		v.add("public class {mainmodule.jname}_Main \{")
+		v.add("  public static void main(String[] args) \{")
+		modelbuilder.toolcontext.info("NOT YET IMPLEMENTED", 0)
+		# TODO compile call to Sys::main
+		v.add("  \}")
+		v.add("\}")
 	end
 end
 
