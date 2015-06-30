@@ -102,10 +102,17 @@ redef class MGroupPage
 end
 
 redef class MModulePage
+
+	# Place holder for dependencies and inheritance
+	var dependencies_section: DocSection is lazy do
+		return new TabbedGroup("{mentity.nitdoc_id}.importation", "Dependencies")
+	end
+
 	redef fun apply_structure(v, doc) do
 		var section = new MEntitySection("{mentity.nitdoc_name}.section", mentity)
 		root.add_child section
 		section.add_child new IntroArticle("{mentity.nitdoc_id}.intro", mentity)
+		section.add_child dependencies_section
 		var concerns = self.concerns
 		if concerns == null or concerns.is_empty then return
 		# FIXME avoid diff
@@ -167,10 +174,17 @@ redef class MModulePage
 end
 
 redef class MClassPage
+
+	# Place holder for inheritance section
+	var inheritance_section: DocSection is lazy do
+		return new TabbedGroup("{mentity.nitdoc_id}.inheritance", "Inheritance")
+	end
+
 	redef fun apply_structure(v, doc) do
 		var section = new MEntitySection("{mentity.nitdoc_name}.section", mentity)
 		root.add_child section
 		section.add_child new IntroArticle("{mentity.nitdoc_id}.intro", mentity)
+		section.add_child inheritance_section
 		var concerns = self.concerns
 		if concerns == null or concerns.is_empty then return
 		# FIXME diff hack

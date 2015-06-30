@@ -134,12 +134,31 @@ abstract class DocComposite
 		return toc_title == null or is_hidden
 	end
 
-	# Add a `child` to `self`.
+	# Append a `child` to `self`.
 	#
-	# Shortcut for `children.add`.
+	# This method should be prefered to `children.add` since it also sets the
+	# `child.parent`.
 	fun add_child(child: DocComposite) do
 		child.parent = self
 		children.add child
+	end
+
+	# Insert `child` before existing `children`.
+	#
+	# This method should be prefered to `children.prepend` since it also sets the
+	# `child.parent`.
+	fun prepend_child(child: DocComposite) do
+		child.parent = self
+		children.unshift child
+	end
+
+	# Insert `child` at position `pos` in `children`.
+	#
+	# This method should be prefered to `children.insert` since it also sets the
+	# `child.parent`.
+	fun insert_child(child: DocComposite, pos: Int) do
+		child.parent = self
+		children.insert(child, pos)
 	end
 
 	# Depth of `self` in the composite tree.

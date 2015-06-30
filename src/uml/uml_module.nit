@@ -21,6 +21,16 @@ import uml_class
 redef class UMLModel
 	# Generates a UML package diagram from a `Model`
 	fun generate_package_uml: Writable do
+		var mclasses = new Array[MClass]
+		for mclass in model.mclasses do
+			if not ctx.private_gen and mclass.visibility != public_visibility then continue
+			mclasses.add mclass
+		end
+		return package_diagram([mainmodule])
+	end
+
+	# Generates a UML package diagram containing `mmodules`
+	fun package_diagram(mmodules: Array[MModule]): Writable do
 		var tpl = new Template
 		tpl.add "digraph G \{\n"
 		tpl.add """	fontname = "Bitstream Vera Sans"
@@ -34,17 +44,14 @@ redef class UMLModel
 				fontname = "Bitstream Vera Sans"
 				fontsize = 8
 			]\n"""
-		tpl.add model.tpl_module(ctx, mainmodule)
+		for mmodule in mmodules do
+			tpl.add mmodule.tpl_module(ctx, mainmodule)
+			tpl.add "\n"
+		end
 		tpl.add "\}"
 		return tpl
 	end
-end
 
-redef class Model
-	# Returns a UML package diagram of `main`
-	fun tpl_module(ctx: ToolContext, main: MModule): Writable do
-		return main.tpl_module(ctx, main)
-	end
 end
 
 redef class MModule

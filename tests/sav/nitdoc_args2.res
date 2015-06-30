@@ -59,4 +59,8 @@ property_base_attr_nullable-__Sys__main.html
 quicksearch-list.js
 resources/
 search.html
+uml_classdiag_base_attr_nullable-.dot
+uml_classdiag_base_attr_nullable-.map
+uml_classdiag_base_attr_nullable-.png
+uml_classdiag_base_attr_nullable-.s.dot
 vendors/
