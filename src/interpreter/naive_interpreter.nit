@@ -275,10 +275,21 @@ class NaiveInterpreter
 	# Return a new native string initialized with `txt`
 	fun native_string_instance(txt: String): Instance
 	do
-		var val = new FlatBuffer.from(txt)
-		val.add('\0')
+		var instance = native_string_instance_len(txt.length+1)
+		var val = instance.val
+		val[txt.length] = '\0'
+		txt.to_cstring.copy_to(val, txt.length, 0, 0)
+
+		return instance
+	end
+
+	# Return a new native string initialized of `length`
+	fun native_string_instance_len(length: Int): PrimitiveInstance[NativeString]
+	do
+		var val = new NativeString(length)
+
 		var t = mainmodule.native_string_type
-		var instance = new PrimitiveInstance[Buffer](t, val)
+		var instance = new PrimitiveInstance[NativeString](t, val)
 		init_instance_primitive(instance)
 		return instance
 	end
@@ -907,17 +918,6 @@ redef class AMethPropdef
 				return v.int_instance(args[0].to_i.bin_xor(args[1].to_i))
 			else if pname == "bin_not" then
 				return v.int_instance(args[0].to_i.bin_not)
-			else if pname == "int_to_s_len" then
-				return v.int_instance(recvval.to_s.length)
-			else if pname == "native_int_to_s" then
-				var s = recvval.to_s
-				var srecv = args[1].val.as(Buffer)
-				srecv.clear
-				srecv.append(s)
-				srecv.add('\0')
-				return null
-			else if pname == "strerror_ext" then
-				return v.native_string_instance(recvval.strerror)
 			end
 		else if cname == "Byte" then
 			var recvval = args[0].to_b
@@ -955,13 +955,6 @@ redef class AMethPropdef
 				return v.byte_instance(args[0].to_b.rshift(args[1].to_i))
 			else if pname == "byte_to_s_len" then
 				return v.int_instance(recvval.to_s.length)
-			else if pname == "native_byte_to_s" then
-				var s = recvval.to_s
-				var srecv = args[1].val.as(Buffer)
-				srecv.clear
-				srecv.append(s)
-				srecv.add('\0')
-				return null
 			end
 		else if cname == "Char" then
 			var recv = args[0].val.as(Char)
@@ -1043,76 +1036,32 @@ redef class AMethPropdef
 			end
 		else if cname == "NativeString" then
 			if pname == "new" then
-				return v.native_string_instance("!" * args[1].to_i)
+				return v.native_string_instance_len(args[1].to_i)
 			end
-			var recvval = args.first.val.as(Buffer)
+			var recvval = args.first.val.as(NativeString)
 			if pname == "[]" then
 				var arg1 = args[1].to_i
-				if arg1 >= recvval.length or arg1 < 0 then
-					debug("Illegal access on {recvval} for element {arg1}/{recvval.length}")
-				end
-				return v.char_instance(recvval.chars[arg1])
+				return v.char_instance(recvval[arg1])
 			else if pname == "[]=" then
 				var arg1 = args[1].to_i
-				if arg1 >= recvval.length or arg1 < 0 then
-					debug("Illegal access on {recvval} for element {arg1}/{recvval.length}")
-				end
-				recvval.chars[arg1] = args[2].val.as(Char)
+				recvval[arg1] = args[2].val.as(Char)
 				return null
 			else if pname == "copy_to" then
 				# sig= copy_to(dest: NativeString, length: Int, from: Int, to: Int)
-				var destval = args[1].val.as(FlatBuffer)
+				var destval = args[1].val.as(NativeString)
 				var lenval = args[2].to_i
 				var fromval = args[3].to_i
 				var toval = args[4].to_i
-				if fromval < 0 then
-					debug("Illegal access on {recvval} for element {fromval}/{recvval.length}")
-				end
-				if fromval + lenval > recvval.length then
-					debug("Illegal access on {recvval} for element {fromval}+{lenval}/{recvval.length}")
-				end
-				if toval < 0 then
-					debug("Illegal access on {destval} for element {toval}/{destval.length}")
-				end
-				if toval + lenval > destval.length then
-					debug("Illegal access on {destval} for element {toval}+{lenval}/{destval.length}")
-				end
-				recvval.as(FlatBuffer).copy(fromval, lenval, destval, toval)
+				recvval.copy_to(destval, lenval, fromval, toval)
 				return null
 			else if pname == "atoi" then
-				return v.int_instance(recvval.to_i)
-			else if pname == "file_exists" then
-				return v.bool_instance(recvval.to_s.file_exists)
-			else if pname == "file_mkdir" then
-				var res = recvval.to_s.mkdir
-				return v.bool_instance(res == null)
-			else if pname == "file_chdir" then
-				var res = recvval.to_s.chdir
-				return v.bool_instance(res == null)
-			else if pname == "file_realpath" then
-				return v.native_string_instance(recvval.to_s.realpath)
-			else if pname == "get_environ" then
-				var txt = recvval.to_s.environ
-				return v.native_string_instance(txt)
-			else if pname == "system" then
-				var res = sys.system(recvval.to_s)
-				return v.int_instance(res)
-			else if pname == "atof" then
-				return v.float_instance(recvval.to_f)
+				return v.int_instance(recvval.atoi)
 			else if pname == "fast_cstring" then
-				var ns = recvval.to_cstring.to_s.substring_from(args[1].to_i)
+				var ns = recvval.to_s.substring_from(args[1].to_i)
 				return v.native_string_instance(ns)
 			end
-		else if cname == "String" then
-			var cs = v.send(v.force_get_primitive_method("to_cstring", args.first.mtype), [args.first])
-			var str = cs.val.to_s
-			if pname == "files" then
-				var res = new Array[Instance]
-				for f in str.files do res.add v.string_instance(f)
-				return v.array_instance(res, v.mainmodule.string_type)
-			end
 		else if pname == "calloc_string" then
-			return v.native_string_instance("!" * args[1].to_i)
+			return v.native_string_instance_len(args[1].to_i)
 		else if cname == "NativeArray" then
 			if pname == "new" then
 				var val = new Array[Instance].filled_with(v.null_instance, args[1].to_i)
@@ -1122,9 +1071,6 @@ redef class AMethPropdef
 			end
 			var recvval = args.first.val.as(Array[Instance])
 			if pname == "[]" then
-				if args[1].to_i >= recvval.length or args[1].to_i < 0 then
-					debug("Illegal access on {recvval} for element {args[1].to_i}/{recvval.length}")
-				end
 				return recvval[args[1].to_i]
 			else if pname == "[]=" then
 				recvval[args[1].to_i] = args[2]
@@ -1135,54 +1081,6 @@ redef class AMethPropdef
 				recvval.copy_to(0, args[2].to_i, args[1].val.as(Array[Instance]), 0)
 				return null
 			end
-		else if cname == "NativeFile" then
-			if pname == "native_stdout" then
-				var inst = new PrimitiveNativeFile.native_stdout
-				var instance = new PrimitiveInstance[PrimitiveNativeFile](mpropdef.mclassdef.mclass.mclass_type, inst)
-				v.init_instance_primitive(instance)
-				return instance
-			else if pname == "native_stdin" then
-				var inst = new PrimitiveNativeFile.native_stdin
-				var instance = new PrimitiveInstance[PrimitiveNativeFile](mpropdef.mclassdef.mclass.mclass_type, inst)
-				v.init_instance_primitive(instance)
-				return instance
-			else if pname == "native_stderr" then
-				var inst = new PrimitiveNativeFile.native_stderr
-				var instance = new PrimitiveInstance[PrimitiveNativeFile](mpropdef.mclassdef.mclass.mclass_type, inst)
-				v.init_instance_primitive(instance)
-				return instance
-			else if pname == "io_open_read" then
-				var a1 = args[1].val.as(Buffer)
-				var inst = new PrimitiveNativeFile.io_open_read(a1.to_s)
-				var instance = new PrimitiveInstance[PrimitiveNativeFile](mpropdef.mclassdef.mclass.mclass_type, inst)
-				v.init_instance_primitive(instance)
-				return instance
-			else if pname == "io_open_write" then
-				var a1 = args[1].val.as(Buffer)
-				var inst = new PrimitiveNativeFile.io_open_write(a1.to_s)
-				var instance = new PrimitiveInstance[PrimitiveNativeFile](mpropdef.mclassdef.mclass.mclass_type, inst)
-				v.init_instance_primitive(instance)
-				return instance
-			end
-			var recvval = args.first.val
-			if pname == "io_write" then
-				var a1 = args[1].val.as(Buffer)
-				return v.int_instance(recvval.as(PrimitiveNativeFile).io_write(a1.to_cstring, args[2].to_i))
-			else if pname == "io_read" then
-				var a1 = args[1].val.as(Buffer)
-				var ns = new NativeString(a1.length)
-				var len = recvval.as(PrimitiveNativeFile).io_read(ns, args[2].to_i)
-				a1.clear
-				a1.append(ns.to_s_with_length(len))
-				return v.int_instance(len)
-			else if pname == "flush" then
-				recvval.as(PrimitiveNativeFile).flush
-				return null
-			else if pname == "io_close" then
-				return v.int_instance(recvval.as(PrimitiveNativeFile).io_close)
-			else if pname == "set_buffering_type" then
-				return v.int_instance(recvval.as(PrimitiveNativeFile).set_buffering_type(args[1].to_i, args[2].to_i))
-			end
 		else if pname == "native_argc" then
 			return v.int_instance(v.arguments.length)
 		else if pname == "native_argv" then
@@ -1193,18 +1091,6 @@ redef class AMethPropdef
 		else if pname == "native_argv" then
 			var txt = v.arguments[args[1].to_i]
 			return v.native_string_instance(txt)
-		else if pname == "get_time" then
-			return v.int_instance(get_time)
-		else if pname == "srand" then
-			srand
-			return null
-		else if pname == "srand_from" then
-			srand_from(args[1].to_i)
-			return null
-		else if pname == "atan2" then
-			return v.float_instance(atan2(args[1].to_f, args[2].to_f))
-		else if pname == "pi" then
-			return v.float_instance(pi)
 		else if pname == "lexer_goto" then
 			return v.int_instance(lexer_goto(args[1].to_i, args[2].to_i))
 		else if pname == "lexer_accept" then
@@ -1213,16 +1099,6 @@ redef class AMethPropdef
 			return v.int_instance(parser_goto(args[1].to_i, args[2].to_i))
 		else if pname == "parser_action" then
 			return v.int_instance(parser_action(args[1].to_i, args[2].to_i))
-		else if pname == "file_getcwd" then
-			return v.native_string_instance(getcwd)
-		else if pname == "errno" then
-			return v.int_instance(sys.errno)
-		else if pname == "address_is_null" then
-			var recv = args[0]
-			if recv isa PrimitiveInstance[PrimitiveNativeFile] then
-				return v.bool_instance(recv.val.address_is_null)
-			end
-			return v.false_instance
 		end
 		return v.error_instance
 	end

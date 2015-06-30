@@ -842,7 +842,7 @@ extern void nitni_global_ref_decr( struct nitni_ref *ref );
 		v.add("signal(SIGINT, sig_handler);")
 		v.add("signal(SIGTERM, sig_handler);")
 		v.add("signal(SIGSEGV, sig_handler);")
-		v.add("signal(SIGPIPE, sig_handler);")
+		v.add("signal(SIGPIPE, SIG_IGN);")
 
 		v.add("glob_argc = argc; glob_argv = argv;")
 		v.add("initialize_gc_option();")

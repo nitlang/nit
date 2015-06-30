@@ -75,7 +75,7 @@ redef class AModule
 		var compile_dir = v.compile_dir
 		var foreign_code_lib_path = v.foreign_code_lib_path(mmodule)
 
-		compile_dir.mkdir
+		if not compile_dir.file_exists then compile_dir.mkdir
 
 		# Compile the common FFI part
 		ensure_compile_ffi_wrapper

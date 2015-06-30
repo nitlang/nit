@@ -119,8 +119,8 @@ private extern class CallArg `{ nit_call_arg* `}
 			assert value isa PrimitiveInstance[Float]
 			self.float = value.val
 		else if static_type.name == "NativeString" then
-			assert value isa PrimitiveInstance[Buffer]
-			self.pointer = value.val.to_cstring
+			assert value isa PrimitiveInstance[NativeString]
+			self.pointer = value.val
 		else if static_type isa MClassType and static_type.mclass.kind == extern_kind then
 			assert value isa PrimitiveInstance[Pointer] else print value.class_name
 			self.pointer = value.val
@@ -148,7 +148,9 @@ private extern class CallArg `{ nit_call_arg* `}
 		else if name == "Float" then
 			return v.float_instance(self.float)
 		else if name == "NativeString" then
-			return v.native_string_instance(self.native_string.to_s)
+			var instance = new PrimitiveInstance[NativeString](static_type, self.native_string)
+			v.init_instance_primitive instance
+			return instance
 		else if static_type isa MClassType and static_type.mclass.kind == extern_kind then
 			# We tag it with the most precise known type
 			var instance = new PrimitiveInstance[Pointer](static_type, self.pointer)
