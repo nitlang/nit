@@ -261,6 +261,62 @@ class JavaCompilerVisitor
 	# The file to write generated code into
 	var file: JavaCodeFile
 
+	# Names handling
+
+	private var names = new HashSet[String]
+	private var last: Int = 0
+
+	# Return a new name based on `s` and unique in the visitor
+	fun get_name(s: String): String do
+		if not self.names.has(s) then
+			self.names.add(s)
+			return s
+		end
+		var i = self.last + 1
+		loop
+			var s2 = s + i.to_s
+			if not self.names.has(s2) then
+				self.last = i
+				self.names.add(s2)
+				return s2
+			end
+			i = i + 1
+		end
+	end
+
+	# Variables handling
+
+	# Registered variables
+	protected var variables = new HashMap[Variable, RuntimeVariable]
+
+	# Return the local RuntimeVariable associated to a Nit local variable
+	fun variable(variable: Variable): RuntimeVariable do
+		if variables.has_key(variable) then
+			return variables[variable]
+		else
+			var name = get_name("var_{variable.name}")
+			var mtype = variable.declared_type.as(not null)
+			# TODO mtype = self.anchor(mtype)
+			var res = decl_var(name, mtype)
+			variables[variable] = res
+			return res
+		end
+	end
+
+	# Return a new uninitialized local RuntimeVariable with `name`
+	fun decl_var(name: String, mtype: MType): RuntimeVariable do
+		var res = new RuntimeVariable(name, mtype, mtype)
+		add("{mtype.java_type} {name} /* : {mtype} */;")
+		return res
+	end
+
+	# Return a new uninitialized local RuntimeVariable
+	fun new_var(mtype: MType): RuntimeVariable do
+		# TODO mtype = self.anchor(mtype)
+		var name = self.get_name("var")
+		return decl_var(name, mtype)
+	end
+
 	# Code generation
 
 	# Add a line (will be suffixed by `\n`)
@@ -268,6 +324,25 @@ class JavaCompilerVisitor
 
 	# Add a new partial line (no `\n` suffix)
 	fun addn(line: String) do file.lines.add(line)
+
+	# Correctly assign a left and a right value
+	# Boxing and unboxing is performed if required
+	fun assign(left, right: RuntimeVariable) do
+		# TODO right = autobox(right, left.mtype)
+		add("{left} = {right};")
+	end
+
+	# Return a new local RuntimeVariable initialized with the Java expression `jexpr`.
+	#
+	# `mtype` is used for the Java return variable initialization.
+	fun new_expr(jexpr: String, mtype: MType): RuntimeVariable do
+		var res = new_var(mtype)
+		add("{res} = {jexpr};")
+		return res
+	end
+
+	# Display a info message
+	fun info(str: String) do compiler.modelbuilder.toolcontext.info(str, 0)
 end
 
 # A file containing Java code.
@@ -357,6 +432,78 @@ class JavaRuntimeModel
 		v.add("  \}")
 		v.add("  public boolean is_null() \{ return rtclass == null && value == null; \}")
 		v.add("\}")
+	end
+end
+
+# A runtime variable hold a runtime value in Java.
+# Runtime variables are associated to Nit local variables and intermediate results in Nit expressions.
+class RuntimeVariable
+
+	# The name of the variable in the Java code
+	var name: String
+
+	# The static type of the variable (as declard in Java)
+	var mtype: MType
+
+	# The current casted type of the variable (as known in Nit)
+	var mcasttype: MType is writable
+
+	# If the variable exaclty a mcasttype?
+	# false (usual value) means that the variable is a mcasttype or a subtype.
+	var is_exact: Bool = false is writable
+
+	# Is this variable declared as a RTVal or a Java primitive one?
+	var is_boxed = false
+
+	redef fun to_s do return name
+
+	redef fun inspect
+	do
+		var exact_str
+		if self.is_exact then
+			exact_str = " exact"
+		else
+			exact_str = ""
+		end
+		var type_str
+		if self.mtype == self.mcasttype then
+			type_str = "{mtype}{exact_str}"
+		else
+			type_str = "{mtype}({mcasttype}{exact_str})"
+		end
+		return "<{name}:{type_str}>"
+	end
+end
+
+redef class MType
+	# Return the Java type associated to a given Nit static type
+	fun java_type: String do return "RTVal"
+
+	# Is the associated Java type a primitive one?
+	#
+	# ENSURE `result == (java_type != "Object")`
+	var is_java_primitive: Bool is lazy do return java_type != "RTVal"
+end
+
+redef class MClassType
+
+	redef var java_type is lazy do
+		if mclass.name == "Int" then
+			return "int"
+		else if mclass.name == "Bool" then
+			return "boolean"
+		else if mclass.name == "Char" then
+			return "char"
+		else if mclass.name == "Float" then
+			return "double"
+		else if mclass.name == "Byte" then
+			return "byte"
+		else if mclass.name == "NativeString" then
+			return "String"
+		else if mclass.name == "NativeArray" then
+			return "Array"
+		end
+		return "RTVal"
 	end
 end
 
