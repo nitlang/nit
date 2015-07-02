@@ -301,7 +301,8 @@ class InterpolatedNoise
 		var ix1 = sx.lerp(n0, n1)
 		var val = sy.lerp(ix0, ix1)
 
-		# Return value in [min...max] from val in [-0.5...0.5]
+		# Return value in [min...max] from val in [-1.0...1.0]
+		val /= 2.0
 		val += 0.5
 		return val.lerp(min, max)
 	end
