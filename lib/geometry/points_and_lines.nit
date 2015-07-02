@@ -15,7 +15,9 @@
 # limitations under the License.
 
 # Provides interfaces and classes to represent basic geometry needs.
-module points_and_lines
+module points_and_lines is serialize
+
+import serialization
 
 # An abstract 2d point, strongly linked to its implementation `Point`
 interface IPoint[N: Numeric]
