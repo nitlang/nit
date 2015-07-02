@@ -253,7 +253,7 @@ do
 		for nclassdef in nclassdefs do
 			var name = nclassdef.n_id.text
 			if nclassdef.n_formaldefs.is_empty and
-				not nclassdef.n_classkind isa AAbstractClasskind then
+			   nclassdef.n_classkind isa AConcreteClasskind then
 
 				code.add "		if name == \"{name}\" then return new {name}.from_deserializer(self)"
 			end
