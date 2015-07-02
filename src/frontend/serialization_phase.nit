@@ -116,33 +116,17 @@ private class SerializationPhasePreModel
 	do
 		if not nclassdef isa AStdClassdef then return
 
-		# Is there a declaration on the classdef or the module?
-		var serialize = nclassdef.is_serialize
+		var serialize_by_default = nclassdef.how_serialize
 
-		if not serialize and not nclassdef.is_noserialize then
-			# Is the module marked serialize?
-			serialize = nclassdef.parent.as(AModule).is_serialize
-		end
+		if serialize_by_default != null then
 
-		var per_attribute = false
-		if not serialize then
-			# Is there an attribute marked serialize?
-			for npropdef in nclassdef.n_propdefs do
-				if npropdef.is_serialize then
-					serialize = true
-					per_attribute = true
-					break
-				end
-			end
-		end
-
-		if serialize then
 			# Add `super Serializable`
 			var sc = toolcontext.parse_superclass("Serializable")
 			sc.location = nclassdef.location
 			nclassdef.n_propdefs.add sc
 
 			# Add services
+			var per_attribute = not serialize_by_default
 			generate_serialization_method(nclassdef, per_attribute)
 			generate_deserialization_init(nclassdef, per_attribute)
 		end
@@ -375,6 +359,36 @@ redef class AStdClassdef
 			var id = npropdef.n_methid
 			if id isa AIdMethid and id.n_id.text == "deserialize_class_intern" then
 				return npropdef
+			end
+		end
+
+		return null
+	end
+
+	# Is this classed marked `serialize`? in part or fully?
+	#
+	# This method returns 3 possible values:
+	# * `null`, this class is not to be serialized.
+	# * `true`, the attributes of this class are to be serialized by default.
+	# * `false`, the attributes of this class are to be serialized on demand only.
+	fun how_serialize: nullable Bool
+	do
+		# Is there a declaration on the classdef or the module?
+		var serialize = is_serialize
+
+		if not serialize and not is_noserialize then
+			# Is the module marked serialize?
+			serialize = parent.as(AModule).is_serialize
+		end
+
+		if serialize then return true
+
+		if not serialize then
+			# Is there an attribute marked serialize?
+			for npropdef in n_propdefs do
+				if npropdef.is_serialize then
+					return false
+				end
 			end
 		end
 
