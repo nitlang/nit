@@ -140,7 +140,7 @@ private class SerializationPhasePreModel
 		# collect all classes
 		var auto_serializable_nclassdefs = new Array[AStdClassdef]
 		for nclassdef in nmodule.n_classdefs do
-			if nclassdef isa AStdClassdef and nclassdef.is_serialize then
+			if nclassdef isa AStdClassdef and nclassdef.how_serialize != null then
 				auto_serializable_nclassdefs.add nclassdef
 			end
 		end
