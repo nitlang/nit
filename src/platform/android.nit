@@ -257,16 +257,22 @@ $(call import-module,android/native_app_glue)
 		toolcontext.exec_and_check(["ln", "-s", "{share_dir}/libgc/arm/include/gc/",
 			"{compile_dir}/gc"], "Android project error")
 
-		### Link to assets (for mnit and others)
-		# This will be accessed from `android_project_root`
-		var assets_dir
-		if compiler.mainmodule.location.file != null then
-			# it is a real file, use "{file}/../assets"
-			assets_dir = "{compiler.mainmodule.location.file.filename.dirname}/../assets"
-		else
-			# probably used -m, use "."
-			assets_dir = "assets"
+		# Copy assets, resources and libs where expected by the SDK
+
+		var project_root = "."
+		var mproject = compiler.mainmodule.first_real_mmodule.mproject
+		if mproject != null then
+			var root = mproject.root
+			if root != null then
+				var filepath = root.filepath
+				if filepath != null then
+					project_root = filepath / ".."
+				end
+			end
 		end
+
+		# Link to assets (for mnit and others)
+		var assets_dir = project_root / "assets"
 		if assets_dir.file_exists then
 			assets_dir = assets_dir.realpath
 			var target_assets_dir = "{android_project_root}/assets"
@@ -275,17 +281,7 @@ $(call import-module,android/native_app_glue)
 			end
 		end
 
-		### Copy resources and libs where expected by the SDK
-		var project_root
-		if compiler.mainmodule.location.file != null then
-			# it is a real file, use "{file}/../res"
-			project_root = "{compiler.mainmodule.location.file.filename.dirname}/.."
-		else
-			# probably used -m, use "."
-			project_root = "."
-		end
-
-		# Android resources folder
+		# Copy the res folder
 		var res_dir = project_root / "res"
 		if res_dir.file_exists then
 			# copy the res folder to the compile dir
@@ -301,7 +297,7 @@ $(call import-module,android/native_app_glue)
 </resources>""".write_to_file "{android_project_root}/res/values/strings.xml"
 		end
 
-		# Android libs folder
+		# Copy the libs folder
 		var libs_dir = project_root / "libs"
 		if libs_dir.file_exists then
 			toolcontext.exec_and_check(["cp", "-r", libs_dir, android_project_root], "Android project error")
