@@ -101,23 +101,9 @@ class AndroidMotionEvent
 
 	private var native: NativeAndroidMotionEvent
 
-	private var pointers_cache: nullable Array[AndroidPointerEvent] = null
-
 	# Pointers (or fingers) composing this motion event
-	fun pointers: Array[AndroidPointerEvent]
-	do
-		if pointers_cache != null then
-			return pointers_cache.as(not null)
-		else
-			var pointers = new Array[AndroidPointerEvent]
-			var pointers_count = native.pointers_count
-			for i in [0 .. pointers_count [do
-				var pointer_event = new AndroidPointerEvent(self, i)
-				pointers.add(pointer_event)
-			end
-			pointers_cache = pointers
-			return pointers
-		end
+	var pointers: Array[AndroidPointerEvent] is lazy do
+		return [for i in native.pointers_count.times do new AndroidPointerEvent(self, i)]
 	end
 
 	redef fun just_went_down: Bool do return native.just_went_down
