@@ -158,25 +158,25 @@ class AndroidPointerEvent
 
 	private var motion_event: AndroidMotionEvent
 
-	private var pointer_id: Int
+	private var pointer_index: Int
 
-	redef fun x: Float do return native_x(motion_event.native, pointer_id)
+	redef fun x: Float do return native_x(motion_event.native, pointer_index)
 
-	private fun native_x(motion_event: NativeAndroidMotionEvent, pointer_id: Int): Float `{
-		return AMotionEvent_getX(motion_event, pointer_id);
+	private fun native_x(motion_event: NativeAndroidMotionEvent, pointer_index: Int): Float `{
+		return AMotionEvent_getX(motion_event, pointer_index);
 	`}
 
-	redef fun y: Float do return native_y(motion_event.native, pointer_id)
+	redef fun y: Float do return native_y(motion_event.native, pointer_index)
 
-	private fun native_y(motion_event: NativeAndroidMotionEvent, pointer_id: Int): Float `{
-		return AMotionEvent_getY(motion_event, pointer_id);
+	private fun native_y(motion_event: NativeAndroidMotionEvent, pointer_index: Int): Float `{
+		return AMotionEvent_getY(motion_event, pointer_index);
 	`}
 
 	# Pressure applied by this pointer
-	fun pressure: Float do return native_pressure(motion_event.native, pointer_id)
+	fun pressure: Float do return native_pressure(motion_event.native, pointer_index)
 
-	private fun native_pressure(motion_event: NativeAndroidMotionEvent, pointer_id: Int): Float `{
-		return AMotionEvent_getPressure(motion_event, pointer_id);
+	private fun native_pressure(motion_event: NativeAndroidMotionEvent, pointer_index: Int): Float `{
+		return AMotionEvent_getPressure(motion_event, pointer_index);
 	`}
 
 	redef fun pressed
