@@ -192,6 +192,13 @@ class AndroidPointerEvent
 	do
 		return motion_event.down_pointer == self
 	end
+
+	# Unique id of this pointer since the beginning of the gesture
+	fun pointer_id: Int do return native_pointer_id(motion_event.native, pointer_index)
+
+	private fun native_pointer_id(motion_event: NativeAndroidMotionEvent, pointer_index: Int): Int `{
+		return AMotionEvent_getPointerId(motion_event, pointer_index);
+	`}
 end
 
 # An hardware key event
