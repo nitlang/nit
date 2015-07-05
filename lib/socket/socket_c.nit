@@ -202,7 +202,7 @@ extern class NativeSocket `{ int* `}
 		return new SocketAcceptResult(s, addrIn)
 	end
 
-	# Set wether this socket is non blocking
+	# Set whether this socket is non blocking
 	fun non_blocking=(value: Bool) `{
 		int flags = fcntl(*self, F_GETFL, 0);
 		if (flags == -1) flags = 0;
@@ -215,6 +215,22 @@ extern class NativeSocket `{ int* `}
 			return;
 		}
 		fcntl(*self, F_SETFL, flags);
+	`}
+
+	# Send `len` bytes from `buf` to `dest_addr`
+	fun sendto(buf: NativeString, len: Int, flags: Int, dest_addr: NativeSocketAddrIn): Int `{
+		return sendto(*self, buf, len, flags, (struct sockaddr*)dest_addr, sizeof(struct sockaddr_in));
+	`}
+
+	# Receive a message into `buf` of maximum `len` bytes
+	fun recv(buf: NativeString, len: Int, flags: Int): Int `{
+		return recv(*self, buf, len, flags);
+	`}
+
+	# Receive a message into `buf` of maximum `len` bytes and store sender info into `src_addr`
+	fun recvfrom(buf: NativeString, len: Int, flags: Int, src_addr: NativeSocketAddrIn): Int `{
+		socklen_t srclen = sizeof(struct sockaddr_in);
+		return recvfrom(*self, buf, len, flags, (struct sockaddr*)src_addr, &srclen);
 	`}
 end
 
@@ -404,6 +420,7 @@ extern class NativeSocketProtocolFamilies `{ int `}
 	new pf_key `{ return PF_KEY; `}
 	new pf_inet6 `{ return PF_INET6; `}
 	new pf_max `{ return PF_MAX; `}
+	new ipproto_udp `{ return IPPROTO_UDP; `}
 end
 
 # Level on which to set options
