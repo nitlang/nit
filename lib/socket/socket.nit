@@ -24,7 +24,7 @@ intrude import standard::stream
 abstract class Socket
 
 	# Underlying C socket
-	private var socket: NativeSocket is noinit
+	private var native: NativeSocket is noinit
 
 	# Port used by the socket
 	var port: Int
@@ -59,14 +59,14 @@ class TCPStream
 	do
 		_buffer = new NativeString(1024)
 		_buffer_pos = 0
-		socket = new NativeSocket.socket(new NativeSocketAddressFamilies.af_inet,
+		native = new NativeSocket.socket(new NativeSocketAddressFamilies.af_inet,
 			new NativeSocketTypes.sock_stream, new NativeSocketProtocolFamilies.pf_null)
-		if socket.address_is_null then
+		if native.address_is_null then
 			end_reached = true
 			closed = true
 			return
 		end
-		if not socket.setsockopt(new NativeSocketOptLevels.socket, new NativeSocketOptNames.reuseaddr, 1) then
+		if not native.setsockopt(new NativeSocketOptLevels.socket, new NativeSocketOptNames.reuseaddr, 1) then
 			end_reached = true
 			closed = true
 			return
@@ -101,7 +101,7 @@ class TCPStream
 	do
 		_buffer = new NativeString(1024)
 		_buffer_pos = 0
-		socket = h.socket
+		native = h.socket
 		addrin = h.addr_in
 		address = addrin.address
 
@@ -117,7 +117,7 @@ class TCPStream
 	# timeout : Time in milliseconds before stopping listening for events on this socket
 	private fun pollin(event_types: Array[NativeSocketPollValues], timeout: Int): Array[NativeSocketPollValues] do
 		if end_reached then return new Array[NativeSocketPollValues]
-		return socket.socket_poll(new PollFD(socket.descriptor, event_types), timeout)
+		return native.socket_poll(new PollFD(native.descriptor, event_types), timeout)
 	end
 
 	# Easier use of pollin to check for something to read on all channels of any priority
@@ -152,25 +152,25 @@ class TCPStream
 	private fun internal_connect: Bool
 	do
 		assert not closed
-		return socket.connect(addrin) >= 0
+		return native.connect(addrin) >= 0
 	end
 
 	# If socket.end_reached, nothing will happen
 	redef fun write(msg)
 	do
 		if closed then return
-		socket.write(msg.to_s)
+		native.write(msg.to_s)
 	end
 
 	redef fun write_byte(value)
 	do
 		if closed then return
-		socket.write_byte value
+		native.write_byte value
 	end
 
 	redef fun write_bytes(s) do
 		if closed then return
-		socket.write(s.to_s)
+		native.write(s.to_s)
 	end
 
 	fun write_ln(msg: Text)
@@ -185,7 +185,7 @@ class TCPStream
 		_buffer_length = 0
 		_buffer_pos = 0
 		if not connected then return
-		var read = socket.read
+		var read = native.read
 		if read.length == 0 then
 			close
 			end_reached = true
@@ -206,7 +206,7 @@ class TCPStream
 	redef fun close
 	do
 		if closed then return
-		if socket.close >= 0 then
+		if native.close >= 0 then
 			closed = true
 			end_reached = true
 		end
@@ -215,8 +215,8 @@ class TCPStream
 	# Send the data present in the socket buffer
 	fun flush
 	do
-		if not socket.setsockopt(new NativeSocketOptLevels.tcp, new NativeSocketOptNames.tcp_nodelay, 1) or
-		   not socket.setsockopt(new NativeSocketOptLevels.tcp, new NativeSocketOptNames.tcp_nodelay, 0) then
+		if not native.setsockopt(new NativeSocketOptLevels.tcp, new NativeSocketOptNames.tcp_nodelay, 1) or
+		   not native.setsockopt(new NativeSocketOptLevels.tcp, new NativeSocketOptNames.tcp_nodelay, 0) then
 			closed = true
 		end
 	end
@@ -233,10 +233,10 @@ class TCPServer
 	# Create and bind a listening server socket on port `port`
 	init
 	do
-		socket = new NativeSocket.socket(new NativeSocketAddressFamilies.af_inet,
+		native = new NativeSocket.socket(new NativeSocketAddressFamilies.af_inet,
 			new NativeSocketTypes.sock_stream, new NativeSocketProtocolFamilies.pf_null)
-		assert not socket.address_is_null
-		if not socket.setsockopt(new NativeSocketOptLevels.socket, new NativeSocketOptNames.reuseaddr, 1) then
+		assert not native.address_is_null
+		if not native.setsockopt(new NativeSocketOptLevels.socket, new NativeSocketOptNames.reuseaddr, 1) then
 			closed = true
 			return
 		end
@@ -251,14 +251,14 @@ class TCPServer
 	#
 	# Returns whether the socket has been be bound.
 	private fun bind: Bool do
-		return socket.bind(addrin) >= 0
+		return native.bind(addrin) >= 0
 	end
 
 	# Sets the socket as ready to accept incoming connections, `size` is the maximum number of queued clients
 	#
 	# Returns `true` if the socket could be set, `false` otherwise
 	fun listen(size: Int): Bool do
-		return socket.listen(size) >= 0
+		return native.listen(size) >= 0
 	end
 
 	# Accepts an incoming connection from a client
@@ -271,7 +271,7 @@ class TCPServer
 	fun accept: nullable TCPStream
 	do
 		assert not closed
-		var native = socket.accept
+		var native = native.accept
 		if native == null then return null
 		return new TCPStream.server_side(native)
 	end
@@ -282,7 +282,7 @@ class TCPServer
 		# We use the opposite from the native version as the native API
 		# is closer to the C API. In the Nity API, we use a positive version
 		# of the name.
-		socket.non_blocking = not value
+		native.non_blocking = not value
 	end
 
 	# Close this socket
@@ -291,7 +291,7 @@ class TCPServer
 		# FIXME unify with `SocketStream::close` when we can use qualified names
 
 		if closed then return
-		if socket.close >= 0 then
+		if native.close >= 0 then
 			closed = true
 		end
 	end
@@ -304,13 +304,13 @@ class SocketSet
 	init do clear
 
 	# Add `socket` to this set
-	fun add(socket: Socket) do native.set(socket.socket)
+	fun add(socket: Socket) do native.set(socket.native)
 
 	# Remove `socket` from this set
-	fun remove(socket: Socket) do native.clear(socket.socket)
+	fun remove(socket: Socket) do native.clear(socket.native)
 
 	# Does this set has `socket`?
-	fun has(socket: Socket): Bool do return native.is_set(socket.socket)
+	fun has(socket: Socket): Bool do return native.is_set(socket.native)
 
 	# Clear all sockets from this set
 	fun clear do native.zero
@@ -339,6 +339,6 @@ class SocketObserver
 		# `NativeSockectObserver::select` is not stable.
 
 		var timeval = new NativeTimeval(seconds, microseconds)
-		return native.select(max.socket, read_set.native, write_set.native, except_set.native, timeval) > 0
+		return native.select(max.native, read_set.native, write_set.native, except_set.native, timeval) > 0
 	end
 end
