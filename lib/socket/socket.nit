@@ -85,7 +85,7 @@ class TCPStream
 		end
 
 		addrin = new NativeSocketAddrIn.with_hostent(hostname, port)
-		address = addrin.address
+		address = addrin.address.to_s
 		init(addrin.port, hostname.h_name)
 
 		closed = not internal_connect
@@ -103,7 +103,7 @@ class TCPStream
 		_buffer_pos = 0
 		native = h.socket
 		addrin = h.addr_in
-		address = addrin.address
+		address = addrin.address.to_s
 
 		init(addrin.port, address)
 	end
@@ -241,7 +241,7 @@ class TCPServer
 			return
 		end
 		addrin = new NativeSocketAddrIn.with_port(port, new NativeSocketAddressFamilies.af_inet)
-		address = addrin.address
+		address = addrin.address.to_s
 
 		# Bind it
 		closed = not bind

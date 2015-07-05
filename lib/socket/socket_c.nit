@@ -258,7 +258,7 @@ extern class NativeSocketAddrIn `{ struct sockaddr_in* `}
 		return sai;
 	`}
 
-	fun address: String import NativeString.to_s `{ return NativeString_to_s((char*)inet_ntoa(self->sin_addr)); `}
+	fun address: NativeString `{ return (char*)inet_ntoa(self->sin_addr); `}
 
 	fun family: NativeSocketAddressFamilies `{ return self->sin_family; `}
 
@@ -267,30 +267,33 @@ extern class NativeSocketAddrIn `{ struct sockaddr_in* `}
 	fun destroy `{ free(self); `}
 end
 
+# Host entry information, a pointer to a `struct hostent`
 extern class NativeSocketHostent `{ struct hostent* `}
-	private fun native_h_aliases(i: Int): String import NativeString.to_s `{ return NativeString_to_s(self->h_aliases[i]); `}
+	private fun native_h_aliases(i: Int): NativeString `{
+		return self->h_aliases[i];
+	`}
 
-	private fun native_h_aliases_reachable(i: Int): Bool `{ return (self->h_aliases[i] != NULL); `}
-
+	# Alternative names for the host
 	fun h_aliases: Array[String]
 	do
-		var i=0
-		var d=new Array[String]
+		var res = new Array[String]
 		loop
-			d.add(native_h_aliases(i))
-			if native_h_aliases_reachable(i+1) == false then break
-			i += 1
+			var ha = native_h_aliases(res.length)
+			if ha.address_is_null then break
+			res.add ha.to_s
 		end
-		return d
+		return res
 	end
 
-	fun h_addr: String import NativeString.to_s `{ return NativeString_to_s((char*)inet_ntoa(*(struct in_addr*)self->h_addr)); `}
+	fun h_addr: NativeString `{
+		return (char*)inet_ntoa(*(struct in_addr*)self->h_addr);
+	`}
 
 	fun h_addrtype: Int `{ return self->h_addrtype; `}
 
 	fun h_length: Int `{ return self->h_length; `}
 
-	fun h_name: String import NativeString.to_s `{ return NativeString_to_s(self->h_name); `}
+	fun h_name: NativeString `{ return self->h_name; `}
 end
 
 extern class NativeTimeval `{ struct timeval* `}
