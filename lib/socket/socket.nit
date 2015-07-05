@@ -29,6 +29,14 @@ abstract class Socket
 	# Is this socket closed?
 	var closed = false
 
+	# Set whether calls to `accept` are blocking
+	fun blocking=(value: Bool)
+	do
+		# We use the opposite from the native version as the native API
+		# is closer to the C API. In the Nity API, we use a positive version
+		# of the name.
+		native.non_blocking = not value
+	end
 end
 
 # A general TCP socket, either a `TCPStream` or a `TCPServer`
@@ -291,15 +299,6 @@ class TCPServer
 		var native = native.accept
 		if native == null then return null
 		return new TCPStream.server_side(native)
-	end
-
-	# Set whether calls to `accept` are blocking
-	fun blocking=(value: Bool)
-	do
-		# We use the opposite from the native version as the native API
-		# is closer to the C API. In the Nity API, we use a positive version
-		# of the name.
-		native.non_blocking = not value
 	end
 
 	# Close this socket
