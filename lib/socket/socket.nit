@@ -20,11 +20,20 @@ module socket
 private import socket_c
 intrude import standard::stream
 
-# A general TCP socket, either a `TCPStream` or a `TCPServer`
+# A general Socket, either TCP or UDP
 abstract class Socket
 
 	# Underlying C socket
 	private var native: NativeSocket is noinit
+
+	# Is this socket closed?
+	var closed = false
+
+end
+
+# A general TCP socket, either a `TCPStream` or a `TCPServer`
+abstract class TCPSocket
+	super Socket
 
 	# Port used by the socket
 	var port: Int
@@ -33,14 +42,11 @@ abstract class Socket
 	#
 	# Formatted as xxx.xxx.xxx.xxx.
 	var address: String is noinit
-
-	# Is this socket closed?
-	var closed = false
 end
 
 # Simple communication stream with a remote socket
 class TCPStream
-	super Socket
+	super TCPSocket
 	super BufferedReader
 	super Writer
 	super PollableReader
@@ -232,7 +238,7 @@ end
 #
 # Create streams to communicate with clients using `accept`.
 class TCPServer
-	super Socket
+	super TCPSocket
 
 	private var addrin: NativeSocketAddrIn is noinit
 
