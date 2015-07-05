@@ -72,8 +72,8 @@ class TCPStream
 			return
 		end
 
-		var hostname = sys.gethostbyname(host.to_cstring)
-		if hostname.address_is_null then
+		var hostent = sys.gethostbyname(host.to_cstring)
+		if hostent.address_is_null then
 			# Error in name lookup
 			var err = sys.h_errno
 			last_error = new IOError(err.to_s)
@@ -84,9 +84,12 @@ class TCPStream
 			return
 		end
 
-		addrin = new NativeSocketAddrIn.with_hostent(hostname, port)
+		addrin = new NativeSocketAddrIn
+		addrin.fill_from_hostent hostent
+		addrin.port = port
+
 		address = addrin.address.to_s
-		init(addrin.port, hostname.h_name)
+		init(addrin.port, hostent.h_name.to_s)
 
 		closed = not internal_connect
 		end_reached = closed
@@ -240,7 +243,12 @@ class TCPServer
 			closed = true
 			return
 		end
-		addrin = new NativeSocketAddrIn.with_port(port, new NativeSocketAddressFamilies.af_inet)
+
+		addrin = new NativeSocketAddrIn
+		addrin.family = new NativeSocketAddressFamilies.af_inet
+		addrin.port = port
+		addrin.address_any
+
 		address = addrin.address.to_s
 
 		# Bind it

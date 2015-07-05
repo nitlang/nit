@@ -233,38 +233,47 @@ class SocketAcceptResult
 	var addr_in: NativeSocketAddrIn
 end
 
+# Socket address in the Internet namespace, pointer to a `struct sockaddr_in`
 extern class NativeSocketAddrIn `{ struct sockaddr_in* `}
+
+	# `NULL` pointer
+	new nul `{ return NULL; `}
+
+	# `malloc` a new instance
 	new `{
 		struct sockaddr_in *sai = NULL;
 		sai = malloc(sizeof(struct sockaddr_in));
 		return sai;
 	`}
 
-	new with_port(port: Int, family: NativeSocketAddressFamilies) `{
-		struct sockaddr_in *sai = NULL;
-		sai = malloc(sizeof(struct sockaddr_in));
-		sai->sin_family = family;
-		sai->sin_port = htons(port);
-		sai->sin_addr.s_addr = INADDR_ANY;
-		return sai;
+	# Set `address` and `family` from `hostent` (to use with `Sys::gethostbyname`)
+	fun fill_from_hostent(hostent: NativeSocketHostent) `{
+		self->sin_family = hostent->h_addrtype;
+		memcpy((char*)&self->sin_addr.s_addr,
+		       (char*)hostent->h_addr,
+			   hostent->h_length);
 	`}
 
-	new with_hostent(hostent: NativeSocketHostent, port: Int) `{
-		struct sockaddr_in *sai = NULL;
-		sai = malloc(sizeof(struct sockaddr_in));
-		sai->sin_family = hostent->h_addrtype;
-		sai->sin_port = htons(port);
-		memcpy((char*)&sai->sin_addr.s_addr, (char*)hostent->h_addr, hostent->h_length);
-		return sai;
-	`}
-
+	# Internet address as then IPV4 numbers-and-dots notation
 	fun address: NativeString `{ return (char*)inet_ntoa(self->sin_addr); `}
 
+	# Set `address` to `INADDR_ANY`
+	fun address_any `{ self->sin_addr.s_addr = INADDR_ANY; `}
+
+	# Set `address` to `INADDR_BROADCAST`
+	fun address_broadcast `{ self->sin_addr.s_addr = INADDR_BROADCAST; `}
+
+	# Address family
 	fun family: NativeSocketAddressFamilies `{ return self->sin_family; `}
 
+	# Address family
+	fun family=(value: NativeSocketAddressFamilies) `{ self->sin_family = value; `}
+
+	# Port
 	fun port: Int `{ return ntohs(self->sin_port); `}
 
-	fun destroy `{ free(self); `}
+	# Port
+	fun port=(value: Int) `{ self->sin_port = htons(value); `}
 end
 
 # Host entry information, a pointer to a `struct hostent`
