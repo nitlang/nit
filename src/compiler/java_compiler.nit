@@ -390,6 +390,48 @@ class JavaCompilerVisitor
 		add("System.exit(1);")
 	end
 
+	# Native instances
+
+	# Generate an integer value
+	fun int_instance(value: Int): RuntimeVariable do
+		var t = compiler.mainmodule.int_type
+		return new RuntimeVariable(value.to_s, t, t)
+	end
+
+	# Generate a byte value
+	fun byte_instance(value: Byte): RuntimeVariable do
+		var t = compiler.mainmodule.byte_type
+		return new RuntimeVariable(value.to_s, t, t)
+	end
+
+	# Generate a char value
+	fun char_instance(value: Char): RuntimeVariable do
+		var t = compiler.mainmodule.char_type
+		return new RuntimeVariable("'{value.to_s.escape_to_c}'", t, t)
+	end
+
+	# Generate a float value
+	#
+	# FIXME pass a Float, not a string
+	fun float_instance(value: String): RuntimeVariable do
+		var t = compiler.mainmodule.float_type
+		return new RuntimeVariable(value.to_s, t, t)
+	end
+
+	# Generate an integer value
+	fun bool_instance(value: Bool): RuntimeVariable do
+		var t = compiler.mainmodule.bool_type
+		return new RuntimeVariable(value.to_s, t, t)
+	end
+
+	# Generate the `null` value
+	fun null_instance: RuntimeVariable do
+		var t = compiler.mainmodule.model.null_type
+		return new RuntimeVariable("null", t, t)
+	end
+
+	# Utils
+
 	# Display a info message
 	fun info(str: String) do compiler.modelbuilder.toolcontext.info(str, 0)
 end
@@ -761,6 +803,34 @@ end
 
 redef class AImplicitSelfExpr
 	redef fun expr(v) do return v.frame.as(not null).arguments.first
+end
+
+redef class AIntExpr
+	redef fun expr(v) do return v.int_instance(self.value.as(not null))
+end
+
+redef class AByteExpr
+	redef fun expr(v) do return v.byte_instance(self.value.as(not null))
+end
+
+redef class AFloatExpr
+	redef fun expr(v) do return v.float_instance("{self.n_float.text}") # FIXME use value, not n_float
+end
+
+redef class ACharExpr
+	redef fun expr(v) do return v.char_instance(self.value.as(not null))
+end
+
+redef class ATrueExpr
+	redef fun expr(v) do return v.bool_instance(true)
+end
+
+redef class AFalseExpr
+	redef fun expr(v) do return v.bool_instance(false)
+end
+
+redef class ANullExpr
+	redef fun expr(v) do return v.null_instance
 end
 
 redef class AAbortExpr
