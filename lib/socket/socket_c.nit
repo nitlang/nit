@@ -125,9 +125,9 @@ extern class NativeSocket `{ int* `}
 		return connect(*self, (struct sockaddr*)addrIn, sizeof(*addrIn));
 	`}
 
-	fun write(buffer: String): Int
-	import String.to_cstring, String.length `{
-		return write(*self, (char*)String_to_cstring(buffer), String_length(buffer));
+	# Write `length` bytes from `buffer`
+	fun write(buffer: NativeString, length: Int): Int `{
+		return write(*self, buffer, length);
 	`}
 
 	# Write `value` as a single byte
@@ -136,14 +136,9 @@ extern class NativeSocket `{ int* `}
 		return write(*self, &byt, 1);
 	`}
 
-	fun read: String import NativeString.to_s_with_length, NativeString `{
-		char *c = new_NativeString(1024);
-		int n = read(*self, c, 1023);
-		if(n < 0) {
-			return NativeString_to_s_with_length("",0);
-		}
-		c[n] = 0;
-		return NativeString_to_s_with_length(c, n);
+	# Read `length` bytes into `buffer`, returns the number of bytes read
+	fun read(buffer: NativeString, length: Int): Int `{
+		return read(*self, buffer, length);
 	`}
 
 	# Sets an option for the socket
