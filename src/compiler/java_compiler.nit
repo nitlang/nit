@@ -754,6 +754,17 @@ class JavaCompilerVisitor
 		# TODO return array_instance(varargs, elttype)
 	end
 
+	# Nit instances
+
+	# Generate a alloc-instance + init-attributes
+	fun init_instance(mtype: MClassType): RuntimeVariable do
+		var recv = new_recv(mtype)
+		var mclass = mtype.mclass
+		add("{recv} = new RTVal({mclass.rt_name}.get{mclass.rt_name}());")
+		# TODO init attributes
+		return recv
+	end
+
 	# Utils
 
 	# Display a info message
@@ -1136,6 +1147,31 @@ redef class ASendExpr
 		var callsite = callsite.as(not null)
 		var args = v.varargize(callsite.mpropdef, callsite.signaturemap, recv, raw_arguments)
 		return v.compile_callsite(callsite, args)
+	end
+end
+
+redef class ANewExpr
+	redef fun expr(v)
+	do
+		var mtype = self.recvtype
+		assert mtype != null
+
+		if mtype.mclass.name == "NativeArray" then
+			# TODO handle native arrays
+			v.info("NOT YET IMPLEMENTED new NativeArray")
+		end
+
+		var recv = v.init_instance(mtype)
+
+		var callsite = self.callsite
+		if callsite == null then return recv
+
+		var args = v.varargize(callsite.mpropdef, callsite.signaturemap, recv, self.n_args.n_exprs)
+		var res2 = v.compile_callsite(callsite, args)
+		if res2 != null then
+			return res2
+		end
+		return recv
 	end
 end
 
