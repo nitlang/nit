@@ -452,6 +452,10 @@ class JavaCompilerVisitor
 
 	#  Generate a polymorphic send for `method` with `arguments`
 	fun send(mmethod: MMethod, arguments: Array[RuntimeVariable]): nullable RuntimeVariable do
+		# Shortcut calls on primitives
+		if arguments.first.mcasttype.is_java_primitive then
+			return monomorphic_send(mmethod, arguments.first.mcasttype, arguments)
+		end
 		# Polymorphic send
 		return table_send(mmethod, arguments)
 	end
@@ -560,6 +564,13 @@ class JavaCompilerVisitor
 		add("\}") # closes the null case
 
 		return res
+	end
+
+	# Generate a monomorphic send for the method `m`, the type `t` and the arguments `args`
+	fun monomorphic_send(m: MMethod, t: MType, args: Array[RuntimeVariable]): nullable RuntimeVariable do
+		assert t isa MClassType
+		var propdef = m.lookup_first_definition(self.compiler.mainmodule, t)
+		return self.static_call(propdef, args)
 	end
 
 	# Code generation
