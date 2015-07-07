@@ -16,16 +16,24 @@ import test_deserialization
 import binary::serialization
 #alt1# import test_deserialization_serial
 
+class NoSerializeClass
+	super Serializable
+
+	var some_attribute: String
+end
+
 var entities = new TestEntities
 
-var tests = entities.without_generics#alt1#
+var tests = entities.without_generics#alt1##alt2#
 #alt1#var tests = entities.with_generics
+#alt2#var tests = [new NoSerializeClass("will not deserialize")]
 
 var dir = "out/test_binary_deserialization"
 if not dir.file_exists then dir.mkdir
 
-var path = dir / "alt0"#alt1#
+var path = dir / "alt0"#alt1##alt2#
 #alt1#var path = dir / "alt1"
+#alt2#var path = dir / "alt2"
 
 var writer = new FileWriter.open(path)
 var serializer = new BinarySerializer(writer)
@@ -39,10 +47,15 @@ var deserializer = new BinaryDeserializer(reader)
 for o in tests do
 	var dst = deserializer.deserialize
 
-	assert dst != null
-	assert o.is_same_type(dst)
+	if deserializer.errors.not_empty then
+		print deserializer.errors.join(", ")
+	end
 
-	print "# Src:\n{o}"
-	print "# Dst:\n{dst}\n"
+	if dst != null then
+		assert o.is_same_type(dst)
+
+		print "# Src:\n{o}"
+		print "# Dst:\n{dst}\n"
+	end
 end
 reader.close

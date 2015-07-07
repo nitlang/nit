@@ -1,4 +1,3 @@
-Runtime error: Aborted (../lib/serialization/serialization.nit:120)
 # Nit:
 <A: true a 0.123 1234 asdf false p4ssw0rd>
 
@@ -37,4 +36,39 @@ Runtime error: Aborted (../lib/serialization/serialization.nit:120)
 <D: <B: <A: false b 123.123 2345 new line ->
 <- false p4ssw0rd> 1111 	f"\/> true>
 
-Error: doesn't know how to deserialize class "Array"
+# Nit:
+<E: a: hello, 1234, 123.4; b: hella, 2345, 234.5>
+
+# Json:
+{"__kind": "obj", "__id": 0, "__class": "E", "a": {"__kind": "obj", "__id": 1, "__class": "Array", "__items": ["hello", 1234, 123.4]}, "b": {"__kind": "obj", "__id": 2, "__class": "Array", "__items": ["hella", 2345, 234.5]}}
+
+# Back in Nit:
+<E: a: hello, 1234, 123.4; b: hella, 2345, 234.5>
+
+# Nit:
+<E: 2222>
+
+# Json:
+{"__kind": "obj", "__id": 0, "__class": "F", "n": 2222}
+
+# Back in Nit:
+null
+
+# Nit:
+<E: 33.33>
+
+# Json:
+{"__kind": "obj", "__id": 0, "__class": "F", "n": 33.33}
+
+# Back in Nit:
+null
+
+# Nit:
+<G: hs: -1, 0; s: one, two; hm: one. 1, two. 2; am: three. 3, four. 4>
+
+# Json:
+{"__kind": "obj", "__id": 0, "__class": "G", "hs": {"__kind": "obj", "__id": 1, "__class": "HashSet", "__items": [-1, 0]}, "s": {"__kind": "obj", "__id": 2, "__class": "ArraySet", "__items": ["one", "two"]}, "hm": {"__kind": "obj", "__id": 3, "__class": "HashMap", "__length": 2, "__keys": ["one", "two"], "__values": [1, 2]}, "am": {"__kind": "obj", "__id": 4, "__class": "ArrayMap", "__length": 2, "__keys": ["three", "four"], "__values": ["3", "4"]}}
+
+# Back in Nit:
+<G: hs: ; s: ; hm: ; am: >
+
