@@ -13,7 +13,9 @@
 # limitations under the License.
 
 # Provides the noise generators `PerlinNoise` and `InterpolatedNoise`
-module noise
+module noise is serialize
+
+import serialization
 
 # 2D noise generator
 abstract class Noise
