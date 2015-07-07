@@ -227,38 +227,39 @@ private class NitiwikiDecorator
 	# Article used to contextualize links.
 	var context: WikiEntry
 
-	redef fun add_wikilink(v, link, name, comment) do
+	redef fun add_wikilink(v, token) do
+		var wiki = v.processor.as(NitiwikiMdProcessor).wiki
+		var target: nullable WikiEntry = null
 		var anchor: nullable String = null
+		var link = token.link
+		if link == null then return
+		if link.has("#") then
+			var parts = link.split_with("#")
+			link = parts.first
+			anchor = parts.subarray(1, parts.length - 1).join("#")
+		end
+		if link.has("/") then
+			target = wiki.lookup_entry_by_path(context, link.to_s)
+		else
+			target = wiki.lookup_entry_by_name(context, link.to_s)
+			if target == null then
+				target = wiki.lookup_entry_by_title(context, link.to_s)
+			end
+		end
 		v.add "<a "
-		if not link.has_prefix("http://") and not link.has_prefix("https://") then
-			var wiki = v.processor.as(NitiwikiMdProcessor).wiki
-			var target: nullable WikiEntry = null
-			if link.has("#") then
-				var parts = link.split_with("#")
-				link = parts.first
-				anchor = parts.subarray(1, parts.length - 1).join("#")
-			end
-			if link.has("/") then
-				target = wiki.lookup_entry_by_path(context, link.to_s)
-			else
-				target = wiki.lookup_entry_by_name(context, link.to_s)
-				if target == null then
-					target = wiki.lookup_entry_by_title(context, link.to_s)
-				end
-			end
-			if target != null then
-				if name == null then name = target.title
-				link = target.href_from(context)
-			else
-				var loc = context.src_path or else context.name
-				wiki.message("Warning: unknown wikilink `{link}` (in {loc})", 0)
-				v.add "class=\"broken\" "
-			end
+		var name = token.name
+		if target != null then
+			if name == null then name = target.title
+			link = target.url
+		else
+			wiki.message("Warning: unknown wikilink `{link}` (in {context.src_path.as(not null)})", 0)
+			v.add "class=\"broken\" "
 		end
 		v.add "href=\""
 		append_value(v, link)
 		if anchor != null then append_value(v, "#{anchor}")
 		v.add "\""
+		var comment = token.comment
 		if comment != null and not comment.is_empty then
 			v.add " title=\""
 			append_value(v, comment)

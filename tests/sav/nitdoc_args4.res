@@ -3,6 +3,18 @@ OverviewPage Overview
 		## projects.section
 			### test_prog.definition
 
+ReadmePage test_prog
+	# mdarticle-0
+
+ReadmePage game
+	# mdarticle-0
+
+ReadmePage platform
+	# mdarticle-0
+
+ReadmePage rpg
+	# mdarticle-0
+
 SearchPage Index
 	# index.article
 
@@ -940,14 +952,15 @@ MModulePage rpg
 				#### test_prog__rpg__rpg.imports
 				#### test_prog__rpg__rpg.clients
 
-Generated 81 pages
+Generated 85 pages
  list:
-  MPropertyPage: 47 (58.02%)
-  MClassPage: 20 (24.69%)
-  MModulePage: 8 (9.87%)
-  MGroupPage: 4 (4.93%)
-  SearchPage: 1 (1.23%)
-  OverviewPage: 1 (1.23%)
+  MPropertyPage: 47 (55.29%)
+  MClassPage: 20 (23.52%)
+  MModulePage: 8 (9.41%)
+  MGroupPage: 4 (4.70%)
+  ReadmePage: 4 (4.70%)
+  SearchPage: 1 (1.17%)
+  OverviewPage: 1 (1.17%)
 Found 160 mentities
  list:
   MMethodDef: 57 (35.62%)

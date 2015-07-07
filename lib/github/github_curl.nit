@@ -131,8 +131,10 @@ class GithubError
 	redef fun to_s do return "[{name}] {super}"
 end
 
+# Gets the Github token from `git` configuration
+#
 # Return the value of `git config --get github.oauthtoken`
-# return "" if no such a key
+# or `""` if no key exists.
 fun get_github_oauth: String
 do
 	var p = new ProcessReader("git", "config", "--get", "github.oauthtoken")

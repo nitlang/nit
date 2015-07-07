@@ -22,6 +22,8 @@ import doc_phases::doc_hierarchies
 import doc_phases::doc_graphs
 import doc_phases::doc_intros_redefs
 import doc_phases::doc_lin
+import doc_phases::doc_readme
+intrude import doc_down
 
 # Renders the page as HTML.
 redef class DocPage
@@ -265,7 +267,6 @@ redef class DocComposite
 		if html_title != null then
 		var header = new Header(hlvl, html_title.write_to_string)
 		header.css_classes.add "signature"
-		if hlvl == 2 then header.css_classes.add "well well-sm"
 		addn header
 		end
 		if html_subtitle != null then
@@ -447,7 +448,10 @@ redef class IntroArticle
 
 	redef fun render_body do
 		var tabs = new DocTabs("{html_id}.tabs", "")
-		var comment = mentity.html_comment
+		var comment = mentity.html_documentation
+		if mentity isa MProject then
+			comment = mentity.html_synopsis
+		end
 		if comment != null then
 			tabs.add_panel new DocTabPanel("{html_tab_id}-comment", "Comment", comment)
 		end
@@ -502,10 +506,10 @@ redef class DefinitionArticle
 		var tabs = new DocTabs("{html_id}.tabs", "")
 		if not is_no_body then
 			var comment
-			if is_short_comment then
-				comment = mentity.html_short_comment
+			if is_short_comment or mentity isa MProject then
+				comment = mentity.html_synopsis
 			else
-				comment = mentity.html_comment
+				comment = mentity.html_documentation
 			end
 			if comment != null then
 				tabs.add_panel new DocTabPanel("{html_tab_id}-comment", "Comment", comment)
@@ -543,7 +547,7 @@ redef class DefinitionLinArticle
 			if not mentity isa MPropDef then continue # TODO handle all mentities
 			var tpl = new Template
 			tpl.add mentity.mclassdef.html_namespace
-			var comment = mentity.mclassdef.html_short_comment
+			var comment = mentity.mclassdef.html_synopsis
 			if comment != null then
 				tpl.add ": "
 				tpl.add comment
@@ -569,5 +573,51 @@ redef class GraphArticle
 		var svg = self.svg
 		if svg != null then add svg
 		addn "</div>"
+	end
+end
+
+redef class ReadmeSection
+	redef var html_id is lazy do
+		return markdown_processor.emitter.decorator.strip_id(html_title.as(not null).to_s)
+	end
+
+	redef var html_title is lazy do
+		return markdown_processor.process(title.as(not null))
+	end
+end
+
+redef class ReadmeArticle
+	redef var html_id = ""
+	redef var html_title = null
+	redef var is_toc_hidden = true
+
+	redef fun render_body do
+		add markdown_processor.process(md.trim.write_to_string)
+	end
+end
+
+redef class DocumentationArticle
+	redef var html_title is lazy do
+		var synopsis = mentity.html_synopsis
+		if synopsis == null then return mentity.html_link
+		return "{mentity.html_link.write_to_string} &ndash; {synopsis.write_to_string}"
+	end
+
+	redef var html_subtitle is lazy do return null
+	redef var html_toc_title is lazy do return mentity.html_name
+	redef var is_toc_hidden is lazy do return depth > 3
+
+	redef fun render_body do
+		var tabs = new DocTabs("{html_id}.tabs", "")
+		var comment = mentity.html_comment
+		if comment != null then
+			tabs.add_panel new DocTabPanel("{html_tab_id}-comment", "Comment", comment)
+		end
+		for child in children do
+			if child.is_hidden then continue
+			var title = child.html_toc_title or else child.toc_title or else ""
+			tabs.add_panel new DocTabPanel(child.html_tab_id, title, child)
+		end
+		addn tabs
 	end
 end

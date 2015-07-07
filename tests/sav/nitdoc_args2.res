@@ -1,3 +1,5 @@
+Empty README for group `base_attr_nullable` (readme-warning)
+Errors: 0. Warnings: 1.
 class_base_attr_nullable-__Bar.html
 class_base_attr_nullable-__Bool.html
 class_base_attr_nullable-__Foo.html

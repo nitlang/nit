@@ -44,7 +44,7 @@ redef class MEntity
 		var tpl = new Link(nitdoc_url, html_name)
 		var mdoc = mdoc_or_fallback
 		if mdoc != null then
-			tpl.title = mdoc.short_comment
+			tpl.title = mdoc.synopsis
 		end
 		return tpl
 	end
@@ -56,7 +56,7 @@ redef class MEntity
 		var tpl = new Link("#{nitdoc_id}", html_name)
 		var mdoc = mdoc_or_fallback
 		if mdoc != null then
-			tpl.title = mdoc.short_comment
+			tpl.title = mdoc.synopsis
 		end
 		return tpl
 	end
@@ -94,18 +94,25 @@ redef class MEntity
 	# * MPropdef: `mclassdef:mpropdef`
 	fun html_namespace: Template is abstract
 
-	# Returns the comment of this MEntity formatted as HTML.
+	# Returns the synopsis and the comment of this MEntity formatted as HTML.
+	var html_documentation: nullable Writable is lazy do
+		var mdoc = mdoc_or_fallback
+		if mdoc == null then return null
+		return mdoc.html_documentation
+	end
+
+	# Returns the synopsis of this MEntity formatted as HTML.
+	var html_synopsis: nullable Writable is lazy do
+		var mdoc = mdoc_or_fallback
+		if mdoc == null then return null
+		return mdoc.html_synopsis
+	end
+
+	# Returns the the comment without the synopsis formatted as HTML.
 	var html_comment: nullable Writable is lazy do
 		var mdoc = mdoc_or_fallback
 		if mdoc == null then return null
-		return mdoc.tpl_comment
-	end
-
-	# Returns the comment of this MEntity formatted as HTML.
-	var html_short_comment: nullable Writable is lazy do
-		var mdoc = mdoc_or_fallback
-		if mdoc == null then return null
-		return mdoc.tpl_short_comment
+		return mdoc.html_comment
 	end
 
 	# Icon that will be displayed before the title
@@ -125,7 +132,7 @@ redef class MEntity
 		var tpl = new Template
 		tpl.add new DocHTMLLabel.with_classes(css_classes)
 		tpl.add html_link
-		var comment = html_short_comment
+		var comment = html_synopsis
 		if comment != null then
 			tpl.add ": "
 			tpl.add comment
@@ -688,7 +695,7 @@ redef class MConcern
 		var lnk = html_link
 		var tpl = new Template
 		tpl.add new Link.with_title("#{nitdoc_id}.concern", lnk.text, lnk.title)
-		var comment = html_short_comment
+		var comment = html_synopsis
 		if comment != null then
 			tpl.add ": "
 			tpl.add comment

@@ -2800,6 +2800,26 @@ class TestTokenLocation
 			"TokenLink at 4,1--4,1"]
 		(new TestTokenProcessor(stack)).process(string)
 	end
+
+	fun test_token_location4 do
+		var string = "**Hello**\n\n`World`"
+		var stack =  [
+			"TokenStrongStar at 1,1--1,1",
+			"TokenStrongStar at 1,8--1,8",
+			"TokenCodeSingle at 3,1--3,1",
+			"TokenCodeSingle at 3,7--3,7"]
+		(new TestTokenProcessor(stack)).process(string)
+	end
+
+	fun test_token_location5 do
+		var string = "# *Title1*\n\n# *Title2*"
+		var stack =  [
+			"TokenEmStar at 1,3--1,3",
+			"TokenEmStar at 1,10--1,10",
+			"TokenEmStar at 3,3--3,3",
+			"TokenEmStar at 3,10--3,10"]
+		(new TestTokenProcessor(stack)).process(string)
+	end
 end
 
 class TestTokenProcessor
@@ -2811,8 +2831,10 @@ class TestTokenProcessor
 		var token = super
 		if token isa TokenNone then return token
 		var res = "{token.class_name} at {token.location}"
-		print res
 		var exp = test_stack.shift
+		print ""
+		print "EXP {exp}"
+		print "RES {res}"
 		assert exp == res
 		return token
 	end
@@ -2849,6 +2871,15 @@ some code
 
 1. li1
 1. li2"""
+		proc.emitter.decorator = new TestBlockDecorator(stack)
+		proc.process(string)
+	end
+
+	fun test_block_location3 do
+		var stack = [
+			"BlockHeadline: 1,1--1,8",
+			"BlockHeadline: 3,1--3,10"]
+		var string ="""# Title\n\n## Title 2"""
 		proc.emitter.decorator = new TestBlockDecorator(stack)
 		proc.process(string)
 	end

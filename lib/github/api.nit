@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Nit object oriented interface to Github api.
+# Nit object oriented interface to [Github api](https://developer.github.com/v3/).
 #
 # This modules reifies Github API elements as Nit classes.
 #
@@ -21,11 +21,9 @@ module api
 
 import github_curl
 
-# Interface to Github REST API.
+# Client to Github API
 #
-# Used by all `GithubEntity` to perform requests.
-#
-# Usage:
+# To access the API you need an instance of a `GithubAPI` client.
 #
 # ~~~
 # # Get Github authentification token.
@@ -36,7 +34,7 @@ import github_curl
 # var api = new GithubAPI(token)
 # ~~~
 #
-# The API client allows to get Github API entities:
+# The API client allows you to get Github API entities.
 #
 # ~~~
 # var repo = api.load_repo("privat/nit")
@@ -49,9 +47,16 @@ import github_curl
 # ~~~
 class GithubAPI
 
-	# Github API OAuth token.
+	# Github API OAuth token
 	#
-	# This token is used to authenticate the application on Github API.
+	# To access your private ressources, you must
+	# [authenticate](https://developer.github.com/guides/basics-of-authentication/).
+	#
+	# For client applications, Github recommands to use the
+	# [OAuth tokens](https://developer.github.com/v3/oauth/) authentification method.
+	#
+	#
+	#
 	# Be aware that there is [rate limits](https://developer.github.com/v3/rate_limit/)
 	# associated to the key.
 	var auth: String
@@ -140,9 +145,9 @@ class GithubAPI
 		return res.as(JsonObject)
 	end
 
-	# Get the Github user with `login`.
+	# Get the Github user with `login`
 	#
-	# Returns `null` if the user cannot be found.
+	# Loads the `User` from the API or returns `null` if the user cannot be found.
 	#
 	#     var api = new GithubAPI(get_github_oauth)
 	#     var user = api.load_user("Morriar")
@@ -154,7 +159,7 @@ class GithubAPI
 
 	# Get the Github repo with `full_name`.
 	#
-	# Returns `null` if the repo cannot be found.
+	# Loads the `Repo` from the API or returns `null` if the repo cannot be found.
 	#
 	#     var api = new GithubAPI(get_github_oauth)
 	#     var repo = api.load_repo("privat/nit")
@@ -349,11 +354,10 @@ abstract class GithubEntity
 	fun html_url: String do return json["html_url"].to_s
 end
 
-# A Github user.
+# A Github user
 #
+# Provides access to [Github user data](https://developer.github.com/v3/users/).
 # Should be accessed from `GithubAPI::load_user`.
-#
-# See <https://developer.github.com/v3/users/>.
 class User
 	super GithubEntity
 
@@ -374,9 +378,8 @@ end
 
 # A Github repository.
 #
+# Provides access to [Github repo data](https://developer.github.com/v3/repos/).
 # Should be accessed from `GithubAPI::load_repo`.
-#
-# See <https://developer.github.com/v3/repos/>.
 class Repo
 	super GithubEntity
 
