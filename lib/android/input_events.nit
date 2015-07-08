@@ -187,7 +187,7 @@ class AndroidPointerEvent
 	redef fun pressed
 	do
 		var action = motion_event.native.action
-		return action.is_down or action.is_move
+		return action.is_down or action.is_move or action.is_pointer_down
 	end
 
 	redef fun depressed do return not pressed
