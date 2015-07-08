@@ -12,29 +12,40 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-var s = new NativeString(4)
-s[0] = 0x4Eu8
-s[2] = 0x74u8
-s[1] = 0x69u8
-s[3] = 0u8
-print s.class_name
-print s[0]
-print s.to_s
+var x = "This string is cool"
 
-var a: NativeArray[Object] = new NativeArray[Int](3)
-a[0] = 1
-a[1] = 10
-a[2] = 100
-#alt1#a[1] = true
-print a.class_name
-print a.length
-print a[0]
-print a.to_a.join(",")
+var y = x + x + x + x
 
-var i
-i = 3
-a = new NativeArray[Int](i)
-i = 1
-a[i] = i
-print a[i]
-print a[1]
+var z = x * 4
+
+print x.bytes.iterator.to_a
+print y.bytes.iterator.to_a
+print z.bytes.iterator.to_a
+
+print x.bytes.reverse_iterator.to_a
+print y.bytes.reverse_iterator.to_a
+print z.bytes.reverse_iterator.to_a
+
+var b = new FlatBuffer.from(x)
+
+print b
+
+b.bytes.add 0x41u8
+
+print b
+
+b.bytes[0] = 0x41u8
+
+print b
+
+var c = new RopeBuffer.from(x)
+
+print c
+
+c.bytes.add 0x41u8
+
+print c
+
+c.bytes[0] = 0x41u8
+
+print c
