@@ -696,26 +696,26 @@ end
 
 # Substrings of a Rope (i.e. Reverse postfix iterator on leaves)
 private class ReverseRopeSubstrings
-	super IndexedIterator[String]
+	super IndexedIterator[FlatString]
 
 	# Visit Stack
-	var iter: RopeIterPiece is noinit
+	var iter: RopeCharIteratorPiece is noinit
 	# Position in `Rope`
 	var pos: Int is noinit
 
 	# Current leaf
-	var str: String is noinit
+	var str: FlatString is noinit
 
 	init(root: Concat) is old_style_init do
-		var r = new RopeIterPiece(root, false, true, null)
+		var r = new RopeCharIteratorPiece(root, false, true, null)
 		pos = root.length - 1
 		var lnod: String = root
 		loop
 			if lnod isa Concat then
 				lnod = lnod.right
-				r = new RopeIterPiece(lnod, false, true, r)
+				r = new RopeCharIteratorPiece(lnod, false, true, r)
 			else
-				str = lnod
+				str = lnod.as(FlatString)
 				iter = r
 				break
 			end
@@ -723,7 +723,7 @@ private class ReverseRopeSubstrings
 	end
 
 	init from(root: Concat, pos: Int) do
-		var r = new RopeIterPiece(root, false, true, null)
+		var r = new RopeCharIteratorPiece(root, false, true, null)
 		var rnod: String = root
 		var off = pos
 		loop
@@ -731,14 +731,14 @@ private class ReverseRopeSubstrings
 				if off >= rnod.left.length then
 					off -= rnod.left.length
 					rnod = rnod.right
-					r = new RopeIterPiece(rnod, false, true, r)
+					r = new RopeCharIteratorPiece(rnod, false, true, r)
 				else
 					r.ldone = true
 					rnod = rnod.left
-					r = new RopeIterPiece(rnod, false, true, r)
+					r = new RopeCharIteratorPiece(rnod, false, true, r)
 				end
 			else
-				str = rnod
+				str = rnod.as(FlatString)
 				r.ldone = true
 				iter = r
 				self.pos = pos - off
@@ -760,19 +760,19 @@ private class ReverseRopeSubstrings
 		while curr != null do
 			currit = curr.node
 			if not currit isa Concat then
-				str = currit
+				str = currit.as(FlatString)
 				pos -= str.length
 				iter = curr
 				return
 			end
 			if not curr.rdone then
 				curr.rdone = true
-				curr = new RopeIterPiece(currit.right, false, false, curr)
+				curr = new RopeCharIteratorPiece(currit.right, false, false, curr)
 				continue
 			end
 			if not curr.ldone then
 				curr.ldone = true
-				curr = new RopeIterPiece(currit.left, false, false, curr)
+				curr = new RopeCharIteratorPiece(currit.left, false, false, curr)
 				continue
 			end
 			curr = curr.prev
@@ -819,7 +819,7 @@ private class RopeSubstrings
 	super IndexedIterator[FlatString]
 
 	# Visit Stack
-	var iter: RopeIterPiece is noinit
+	var iter: RopeCharIteratorPiece is noinit
 	# Position in `Rope`
 	var pos: Int is noinit
 	# Maximum position in `Rope` (i.e. length - 1)
@@ -829,14 +829,14 @@ private class RopeSubstrings
 	var str: FlatString is noinit
 
 	init(root: Concat) is old_style_init do
-		var r = new RopeIterPiece(root, true, false, null)
+		var r = new RopeCharIteratorPiece(root, true, false, null)
 		pos = 0
 		max = root.length - 1
 		var rnod: String = root
 		loop
 			if rnod isa Concat then
 				rnod = rnod.left
-				r = new RopeIterPiece(rnod, true, false, r)
+				r = new RopeCharIteratorPiece(rnod, true, false, r)
 			else
 				str = rnod.as(FlatString)
 				r.rdone = true
@@ -847,7 +847,7 @@ private class RopeSubstrings
 	end
 
 	init from(root: Concat, pos: Int) do
-		var r = new RopeIterPiece(root, true, false, null)
+		var r = new RopeCharIteratorPiece(root, true, false, null)
 		max = root.length - 1
 		var rnod: String = root
 		var off = pos
@@ -857,10 +857,10 @@ private class RopeSubstrings
 					r.rdone = true
 					off -= rnod.left.length
 					rnod = rnod.right
-					r = new RopeIterPiece(rnod, true, false, r)
+					r = new RopeCharIteratorPiece(rnod, true, false, r)
 				else
 					rnod = rnod.left
-					r = new RopeIterPiece(rnod, true, false, r)
+					r = new RopeCharIteratorPiece(rnod, true, false, r)
 				end
 			else
 				str = rnod.as(FlatString)
@@ -894,11 +894,11 @@ private class RopeSubstrings
 			if not it.ldone then
 				rnod = rnod.left
 				it.ldone = true
-				it = new RopeIterPiece(rnod, false, false, it)
+				it = new RopeCharIteratorPiece(rnod, false, false, it)
 			else if not it.rdone then
 				it.rdone = true
 				rnod = rnod.right
-				it = new RopeIterPiece(rnod, false, false, it)
+				it = new RopeCharIteratorPiece(rnod, false, false, it)
 			else
 				it = it.prev
 				rnod = it.node
