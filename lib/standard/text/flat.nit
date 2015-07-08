@@ -107,52 +107,37 @@ class FlatString
 
 	redef fun to_upper
 	do
-		var outstr = new NativeString(self.length + 1)
-		var out_index = 0
+		var outstr = new FlatBuffer.with_capacity(self.bytelen + 1)
 
-		var myitems = self.items
-		var index_from = self.index_from
-		var max = self.index_to
+		var mylen = length
+		var pos = 0
 
-		while index_from <= max do
-			outstr[out_index] = myitems[index_from].to_upper
-			out_index += 1
-			index_from += 1
+		while pos < mylen do
+			outstr.add(chars[pos].to_upper)
+			pos += 1
 		end
 
-		outstr[self.length] = '\0'
-
-		return outstr.to_s_with_length(self.length)
+		return outstr.to_s
 	end
 
 	redef fun to_lower
 	do
-		var outstr = new NativeString(self.length + 1)
-		var out_index = 0
+		var outstr = new FlatBuffer.with_capacity(self.bytelen + 1)
 
-		var myitems = self.items
-		var index_from = self.index_from
-		var max = self.index_to
+		var mylen = length
+		var pos = 0
 
-		while index_from <= max do
-			outstr[out_index] = myitems[index_from].to_lower
-			out_index += 1
-			index_from += 1
+		while pos < mylen do
+			outstr.add(chars[pos].to_lower)
+			pos += 1
 		end
 
-		outstr[self.length] = '\0'
-
-		return outstr.to_s_with_length(self.length)
+		return outstr.to_s
 	end
 
 	redef fun output
 	do
-		var i = self.index_from
-		var imax = self.index_to
-		while i <= imax do
-			items[i].output
-			i += 1
-		end
+		for i in chars do i.output
 	end
 
 	##################################################
@@ -220,28 +205,30 @@ class FlatString
 		var my_curr_char : Char
 		var its_curr_char : Char
 
-		var curr_id_self = self.index_from
-		var curr_id_other = other.index_from
-
-		var my_items = self.items
-		var its_items = other.items
-
 		var my_length = self.length
 		var its_length = other.length
+		var max
 
-		var max_iterations = curr_id_self + my_length
+		if my_length < its_length then
+			max = my_length
+		else
+			max = its_length
+		end
 
-		while curr_id_self < max_iterations do
-			my_curr_char = my_items[curr_id_self]
-			its_curr_char = its_items[curr_id_other]
+		var my_chars = chars
+		var its_chars = other.chars
+
+		var pos = 0
+		while pos < max do
+			my_curr_char = my_chars[pos]
+			its_curr_char = its_chars[pos]
 
 			if my_curr_char != its_curr_char then
 				if my_curr_char < its_curr_char then return true
 				return false
 			end
 
-			curr_id_self += 1
-			curr_id_other += 1
+			pos += 1
 		end
 
 		return my_length < its_length
@@ -263,9 +250,8 @@ class FlatString
 			s.items.copy_to(target_string, its_length, 0, my_length)
 		else
 			var curr_pos = my_length
-			for i in [0..s.length[ do
-				var c = s.chars[i]
-				target_string[curr_pos] = c
+			for i in [0 .. s.bytelen[ do
+				target_string[curr_pos] = s.bytes[i]
 				curr_pos += 1
 			end
 		end
@@ -684,10 +670,9 @@ class FlatBuffer
 	redef fun upper
 	do
 		if written then reset
-		var it = items
 		var id = length - 1
 		while id >= 0 do
-			it[id] = it[id].to_upper
+			self[id] = self[id].to_upper
 			id -= 1
 		end
 	end
@@ -695,10 +680,9 @@ class FlatBuffer
 	redef fun lower
 	do
 		if written then reset
-		var it = items
 		var id = length - 1
 		while id >= 0 do
-			it[id] = it[id].to_lower
+			self[id] = self[id].to_lower
 			id -= 1
 		end
 	end
@@ -861,11 +845,12 @@ private class FlatBufferCharView
 	do
 		var s_length = s.length
 		if target.capacity < s.length then enlarge(s_length + target.length)
+		for i in s do target.add i
 	end
 
-	redef fun iterator_from(pos) do return new FlatBufferIterator.with_pos(target, pos)
+	redef fun iterator_from(pos) do return new FlatBufferCharIterator.with_pos(target, pos)
 
-	redef fun reverse_iterator_from(pos) do return new FlatBufferReverseIterator.with_pos(target, pos)
+	redef fun reverse_iterator_from(pos) do return new FlatBufferCharReverseIterator.with_pos(target, pos)
 
 end
 

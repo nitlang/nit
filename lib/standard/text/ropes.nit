@@ -326,20 +326,20 @@ class RopeBuffer
 			sits = s.items
 		else
 			if slen <= remsp then
-				for i in s.chars do
+				for i in s.bytes do
 					ns[rpos] = i
 					rpos += 1
 				end
 			else
 				var spos = 0
 				for i in [0..remsp[ do
-					ns[rpos] = s[spos]
+					ns[rpos] = s.bytes[spos]
 					rpos += 1
 					spos += 1
 				end
 				dump_buffer
 				while spos < slen do
-					ns[rpos] = s[spos]
+					ns[rpos] = s.bytes[spos]
 					spos += 1
 					rpos += 1
 				end
@@ -402,6 +402,13 @@ class RopeBuffer
 		dumped = 0
 	end
 
+	# Similar to dump_buffer, but does not reallocate a new NativeString
+	private fun persist_buffer do
+		var nstr = new FlatString.with_infos(ns, rpos - dumped, dumped, rpos - 1)
+		str += nstr
+		dumped = rpos
+	end
+
 	redef fun output do
 		str.output
 		new FlatString.with_infos(ns, rpos - dumped, dumped, rpos - 1).output
@@ -435,20 +442,14 @@ class RopeBuffer
 
 	redef fun upper do
 		if written then reset
+		persist_buffer
 		str = str.to_upper
-		var mits = ns
-		for i in [0 .. rpos[ do
-			mits[i] = mits[i].to_upper
-		end
 	end
 
 	redef fun lower do
 		if written then reset
+		persist_buffer
 		str = str.to_lower
-		var mits = ns
-		for i in [0 .. rpos[ do
-			mits[i] = mits[i].to_lower
-		end
 	end
 end
 
