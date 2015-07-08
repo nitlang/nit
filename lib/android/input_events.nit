@@ -80,6 +80,13 @@ end
 private extern class AMotionEventAction `{ int32_t `}
 	fun action: Int `{ return self & AMOTION_EVENT_ACTION_MASK; `}
 
+	# Pointer index concerned by this action
+	#
+	# Require: `is_pointer_down or is_pointer_up`
+	fun pointer_index: Int `{
+		return (self & AMOTION_EVENT_ACTION_POINTER_INDEX_MASK) >> AMOTION_EVENT_ACTION_POINTER_INDEX_SHIFT;
+	`}
+
 	fun is_down: Bool do return action == 0
 	fun is_up: Bool do return action == 1
 	fun is_move: Bool do return action == 2
@@ -106,7 +113,19 @@ class AndroidMotionEvent
 		return [for i in native.pointers_count.times do new AndroidPointerEvent(self, i)]
 	end
 
-	redef fun just_went_down: Bool do return native.just_went_down
+	# The pointer (or finger) causing this event
+	var acting_pointer: AndroidPointerEvent is lazy do
+		var action = native.action
+		var index = 0
+
+		if action.is_pointer_down or action.is_pointer_up then
+			index = native.action.pointer_index
+		end
+
+		return new AndroidPointerEvent(self, index)
+	end
+
+	redef fun just_went_down do return native.just_went_down
 
 	# Was the top edge of the screen intersected by this event?
 	fun touch_to_edge: Bool do return native.edge == 1
