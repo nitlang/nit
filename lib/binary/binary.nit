@@ -81,9 +81,9 @@ redef abstract class Writer
 	do
 		assert bits.length <= 8
 
-		var int = 0
+		var int = 0u8
 		for b in bits.length.times do
-			if bits[b] then int += 2**b
+			if bits[b] then int |= 1u8 << (7 - b)
 		end
 
 		write_byte int
@@ -153,7 +153,7 @@ redef abstract class Reader
 	# Read a single byte and return `true` if its value is different than 0
 	#
 	# Returns `false` when an error is pending (`last_error != null`).
-	fun read_bool: Bool do return read_byte != 0
+	fun read_bool: Bool do return read_byte != 0u8
 
 	# Get an `Array` of 8 `Bool` by reading a single byte
 	#
@@ -164,7 +164,11 @@ redef abstract class Reader
 	do
 		var int = read_byte
 		if int == null then return new Array[Bool]
-		return [for b in 8.times do int.bin_and(2**b) > 0]
+		var arr = new Array[Bool]
+		for i in [7 .. 0].step(-1) do
+			arr.push(((int >> i) & 1u8) != 0u8)
+		end
+		return arr
 	end
 
 	# Read a null terminated string
@@ -177,7 +181,7 @@ redef abstract class Reader
 		var buf = new FlatBuffer
 		loop
 			var byte = read_byte
-			if byte == null or byte == 0x00 then return buf.to_s
+			if byte == null or byte == 0x00u8 then return buf.to_s
 			buf.bytes.add byte
 		end
 	end
@@ -216,7 +220,7 @@ redef abstract class Reader
 	end
 
 	# Utility for `read_float`
-	private fun native_read_float(b0, b1, b2, b3: Int, big_endian: Bool): Float `{
+	private fun native_read_float(b0, b1, b2, b3: Byte, big_endian: Bool): Float `{
 		union {
 			unsigned char b[4];
 			float val;
@@ -259,7 +263,7 @@ redef abstract class Reader
 	end
 
 	# Utility for `read_double`
-	private fun native_read_double(b0, b1, b2, b3, b4, b5, b6, b7: Int, big_endian: Bool): Float `{
+	private fun native_read_double(b0, b1, b2, b3, b4, b5, b6, b7: Byte, big_endian: Bool): Float `{
 		union {
 			unsigned char b[8];
 			double val;
@@ -309,7 +313,7 @@ redef abstract class Reader
 	end
 
 	# Utility for `read_int64`
-	private fun native_read_int64(b0, b1, b2, b3, b4, b5, b6, b7: Int, big_endian: Bool): Int `{
+	private fun native_read_int64(b0, b1, b2, b3, b4, b5, b6, b7: Byte, big_endian: Bool): Int `{
 		union {
 			unsigned char b[8];
 			int64_t val;
@@ -335,7 +339,7 @@ end
 
 redef class Int
 	# Utility for `BinaryWriter`
-	private fun int64_byte_at(index: Int, big_endian: Bool): Int `{
+	private fun int64_byte_at(index: Int, big_endian: Bool): Byte `{
 		union {
 			unsigned char bytes[8];
 			int64_t val;
@@ -354,7 +358,7 @@ end
 
 redef class Float
 	# Utility for `BinaryWriter`
-	private fun float_byte_at(index: Int, big_endian: Bool): Int `{
+	private fun float_byte_at(index: Int, big_endian: Bool): Byte `{
 		union {
 			unsigned char bytes[4];
 			float val;
@@ -371,7 +375,7 @@ redef class Float
 	`}
 
 	# Utility for `BinaryWriter`
-	private fun double_byte_at(index: Int, big_endian: Bool): Int `{
+	private fun double_byte_at(index: Int, big_endian: Bool): Byte `{
 		union {
 			unsigned char bytes[8];
 			double val;
