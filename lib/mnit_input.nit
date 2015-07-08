@@ -66,7 +66,7 @@ interface KeyEvent
 	fun is_down: Bool is abstract
 
 	# Key is currently up?
-	fun is_up: Bool is abstract
+	fun is_up: Bool do return not is_down
 
 	# Key is the up arrow key?
 	fun is_arrow_up: Bool is abstract

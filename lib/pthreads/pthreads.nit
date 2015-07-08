@@ -155,7 +155,11 @@ end
 private extern class NativePthreadMutex in "C" `{ pthread_mutex_t * `}
 	new (attr: NativePthreadMutexAttr) `{
 		pthread_mutex_t *mutex = malloc(sizeof(pthread_mutex_t));
-		int res = pthread_mutex_init(mutex, attr);
+		int r = pthread_mutex_init(mutex, attr);
+		if (r != 0) {
+			free(mutex);
+			return NULL;
+		}
 		return mutex;
 	`}
 
@@ -169,7 +173,11 @@ end
 private extern class NativePthreadMutexAttr in "C" `{ pthread_mutexattr_t * `}
 	new `{
 		pthread_mutexattr_t *attr = malloc(sizeof(pthread_mutexattr_t));
-		int res = pthread_mutexattr_init(attr);
+		int r = pthread_mutexattr_init(attr);
+		if (r != 0) {
+			free(attr);
+			return NULL;
+		}
 		return attr;
 	`}
 
@@ -188,7 +196,11 @@ end
 private extern class NativePthreadKey in "C" `{ pthread_key_t * `}
 	new `{
 		pthread_key_t *key = malloc(sizeof(pthread_key_t));
-		int res = pthread_key_create(key, NULL);
+		int r = pthread_key_create(key, NULL);
+		if (r != 0) {
+			free(key);
+			return NULL;
+		}
 		return key;
 	`}
 

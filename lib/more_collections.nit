@@ -97,6 +97,13 @@ class HashMap2[K1, K2, V]
 		level2.keys.remove(k2)
 	end
 
+	# Is there a value at `k1, k2`?
+	fun has(k1: K1, k2: K2): Bool
+	do
+		if not level1.keys.has(k1) then return false
+		return level1[k1].keys.has(k2)
+	end
+
 	# Remove all items
 	fun clear do level1.clear
 end
@@ -143,6 +150,13 @@ class HashMap3[K1, K2, K3, V]
 		var level2 = level1.get_or_null(k1)
 		if level2 == null then return
 		level2.remove_at(k2, k3)
+	end
+
+	# Is there a value at `k1, k2, k3`?
+	fun has(k1: K1, k2: K2, k3: K3): Bool
+	do
+		if not level1.keys.has(k1) then return false
+		return level1[k1].has(k2, k3)
 	end
 
 	# Remove all items
