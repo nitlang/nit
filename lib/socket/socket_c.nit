@@ -131,7 +131,7 @@ extern class NativeSocket `{ int* `}
 	`}
 
 	# Write `value` as a single byte
-	fun write_byte(value: Int): Int `{
+	fun write_byte(value: Byte): Int `{
 		unsigned char byt = (unsigned char)value;
 		return write(*self, &byt, 1);
 	`}

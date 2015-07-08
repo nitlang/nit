@@ -47,7 +47,7 @@ abstract class Reader
 	fun read_char: nullable Char is abstract
 
 	# Reads a byte. Returns `null` on EOF or timeout
-	fun read_byte: nullable Int is abstract
+	fun read_byte: nullable Byte is abstract
 
 	# Reads a String of at most `i` length
 	fun read(i: Int): String do return read_bytes(i).to_s
@@ -360,7 +360,7 @@ abstract class Writer
 	fun write(s: Text) is abstract
 
 	# Write a single byte
-	fun write_byte(value: Int) is abstract
+	fun write_byte(value: Byte) is abstract
 
 	# Can the stream be used to write
 	fun is_writable: Bool is abstract

@@ -1164,7 +1164,7 @@ private extern class NativeFile `{ FILE* `}
 		return fwrite(buf, 1, len, self);
 	`}
 
-	fun write_byte(value: Int): Int `{
+	fun write_byte(value: Byte): Int `{
 		unsigned char b = (unsigned char)value;
 		return fwrite(&b, 1, 1, self);
 	`}

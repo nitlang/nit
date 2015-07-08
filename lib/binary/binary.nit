@@ -18,7 +18,7 @@
 # var w = new FileWriter.open("/tmp/data.bin")
 # w.write "hello"
 # w.write_int64 123456789
-# w.write_byte 3
+# w.write_byte 3u8
 # w.write_float 1.25
 # w.write_double 1.234567
 # w.write_bits(true, false, true)
@@ -28,7 +28,7 @@
 # var r = new FileReader.open("/tmp/data.bin")
 # assert r.read(5) == "hello"
 # assert r.read_int64 == 123456789
-# assert r.read_byte == 3
+# assert r.read_byte == 3u8
 # assert r.read_float == 1.25
 # assert r.read_double == 1.234567
 #
@@ -70,7 +70,7 @@ redef abstract class Writer
 	super BinaryStream
 
 	# Write a boolean `value` on a byte, using 0 for `false` and 1 for `true`
-	fun write_bool(value: Bool) do write_byte if value then 1 else 0
+	fun write_bool(value: Bool) do write_byte if value then 1u8 else 0u8
 
 	# Write up to 8 `Bool` in a byte
 	#
@@ -97,7 +97,7 @@ redef abstract class Writer
 	fun write_string(text: Text)
 	do
 		write text
-		write_byte 0x00
+		write_byte 0x00u8
 	end
 
 	# Write the length as a 64 bits integer, then the content of `text`
@@ -178,7 +178,7 @@ redef abstract class Reader
 		loop
 			var byte = read_byte
 			if byte == null or byte == 0x00 then return buf.to_s
-			buf.chars.add byte.ascii
+			buf.bytes.add byte
 		end
 	end
 
