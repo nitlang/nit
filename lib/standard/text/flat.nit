@@ -46,6 +46,8 @@ class FlatString
 
 	redef var chars = new FlatStringCharView(self) is lazy
 
+	redef var bytes = new FlatStringByteView(self) is lazy
+
 	redef fun [](index)
 	do
 		# Check that the index (+ index_from) is not larger than indexTo
@@ -320,8 +322,70 @@ class FlatString
 	redef fun substrings do return new FlatSubstringsIter(self)
 end
 
-private class FlatStringReverseIterator
+private class FlatStringCharReverseIterator
 	super IndexedIterator[Char]
+
+	var target: FlatString
+
+	var curr_pos: Int
+
+	init with_pos(tgt: FlatString, pos: Int)
+	do
+		target = tgt
+		curr_pos = pos
+	end
+
+	redef fun is_ok do return curr_pos >= 0
+
+	redef fun item do return target[curr_pos]
+
+	redef fun next do curr_pos -= 1
+
+	redef fun index do return curr_pos
+
+end
+
+private class FlatStringCharIterator
+	super IndexedIterator[Char]
+
+	var target: FlatString
+
+	var max: Int
+
+	var curr_pos: Int
+
+	init with_pos(tgt: FlatString, pos: Int)
+	do
+		target = tgt
+		curr_pos = pos
+		max = tgt.length - 1
+	end
+
+	redef fun is_ok do return curr_pos <= max
+
+	redef fun item do return target[curr_pos]
+
+	redef fun next do curr_pos += 1
+
+	redef fun index do return curr_pos
+
+end
+
+private class FlatStringCharView
+	super StringCharView
+
+	redef type SELFTYPE: FlatString
+
+	redef fun [](index) do return target[index]
+
+	redef fun iterator_from(start) do return new FlatStringCharIterator.with_pos(target, start)
+
+	redef fun reverse_iterator_from(start) do return new FlatStringCharReverseIterator.with_pos(target, start)
+
+end
+
+private class FlatStringByteReverseIterator
+	super IndexedIterator[Byte]
 
 	var target: FlatString
 
@@ -346,8 +410,8 @@ private class FlatStringReverseIterator
 
 end
 
-private class FlatStringIterator
-	super IndexedIterator[Char]
+private class FlatStringByteIterator
+	super IndexedIterator[Byte]
 
 	var target: FlatString
 
@@ -372,8 +436,8 @@ private class FlatStringIterator
 
 end
 
-private class FlatStringCharView
-	super StringCharView
+private class FlatStringByteView
+	super StringByteView
 
 	redef type SELFTYPE: FlatString
 
@@ -387,9 +451,9 @@ private class FlatStringCharView
 		return target.items[index + target.index_from]
 	end
 
-	redef fun iterator_from(start) do return new FlatStringIterator.with_pos(target, start)
+	redef fun iterator_from(start) do return new FlatStringByteIterator.with_pos(target, start)
 
-	redef fun reverse_iterator_from(start) do return new FlatStringReverseIterator.with_pos(target, start)
+	redef fun reverse_iterator_from(start) do return new FlatStringByteReverseIterator.with_pos(target, start)
 
 end
 
@@ -405,6 +469,8 @@ class FlatBuffer
 	super Buffer
 
 	redef var chars: Sequence[Char] = new FlatBufferCharView(self) is lazy
+
+	redef var bytes: Sequence[Byte] = new FlatBufferByteView(self) is lazy
 
 	private var capacity: Int = 0
 
@@ -446,7 +512,14 @@ class FlatBuffer
 	do
 		is_dirty = true
 		if capacity <= length then enlarge(length + 5)
-		items[length] = c
+		items[length] = c.ascii.to_b
+		length += 1
+	end
+
+	private fun add_byte(b: Byte) do
+		is_dirty = true
+		if capacity <= length then enlarge(length + 5)
+		items[bytelen] = b
 		length += 1
 	end
 
@@ -631,8 +704,8 @@ class FlatBuffer
 	end
 end
 
-private class FlatBufferReverseIterator
-	super IndexedIterator[Char]
+private class FlatBufferByteReverseIterator
+	super IndexedIterator[Byte]
 
 	var target: FlatBuffer
 
@@ -657,12 +730,107 @@ private class FlatBufferReverseIterator
 
 end
 
+private class FlatBufferByteView
+	super BufferByteView
+
+	redef type SELFTYPE: FlatBuffer
+
+	redef fun [](index) do return target.items[index]
+
+	redef fun []=(index, item)
+	do
+		assert index >= 0 and index <= target.bytelen
+		if index == target.bytelen then
+			add(item)
+			return
+		end
+		target.items[index] = item
+	end
+
+	redef fun push(c)
+	do
+		target.add_byte(c)
+	end
+
+	fun enlarge(cap: Int)
+	do
+		target.enlarge(cap)
+	end
+
+	redef fun append(s)
+	do
+		var s_length = s.length
+		if target.capacity < (target.length + s_length) then enlarge(s_length + target.length)
+		var pos = target.length
+		var its = target.items
+		for i in s do
+			its[pos] = i
+			pos += 1
+		end
+		target.length += s.length
+	end
+
+	redef fun iterator_from(pos) do return new FlatBufferByteIterator.with_pos(target, pos)
+
+	redef fun reverse_iterator_from(pos) do return new FlatBufferByteReverseIterator.with_pos(target, pos)
+
+end
+
+private class FlatBufferByteIterator
+	super IndexedIterator[Byte]
+
+	var target: FlatBuffer
+
+	var target_items: NativeString
+
+	var curr_pos: Int
+
+	init with_pos(tgt: FlatBuffer, pos: Int)
+	do
+		target = tgt
+		if tgt.length > 0 then target_items = tgt.items
+		curr_pos = pos
+	end
+
+	redef fun index do return curr_pos
+
+	redef fun is_ok do return curr_pos < target.length
+
+	redef fun item do return target_items[curr_pos]
+
+	redef fun next do curr_pos += 1
+
+end
+
+private class FlatBufferCharReverseIterator
+	super IndexedIterator[Char]
+
+	var target: FlatBuffer
+
+	var curr_pos: Int
+
+	init with_pos(tgt: FlatBuffer, pos: Int)
+	do
+		target = tgt
+		curr_pos = pos
+	end
+
+	redef fun index do return curr_pos
+
+	redef fun is_ok do return curr_pos >= 0
+
+	redef fun item do return target[curr_pos]
+
+	redef fun next do curr_pos -= 1
+
+end
+
 private class FlatBufferCharView
 	super BufferCharView
 
 	redef type SELFTYPE: FlatBuffer
 
-	redef fun [](index) do return target.items[index]
+	redef fun [](index) do return target[index]
 
 	redef fun []=(index, item)
 	do
@@ -671,7 +839,7 @@ private class FlatBufferCharView
 			add(item)
 			return
 		end
-		target.items[index] = item
+		target[index] = item
 	end
 
 	redef fun push(c)

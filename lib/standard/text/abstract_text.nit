@@ -36,6 +36,11 @@ abstract class Text
 	#     assert "hello".chars.to_a == ['h', 'e', 'l', 'l', 'o']
 	fun chars: SequenceRead[Char] is abstract
 
+	# Gets a view on the bytes of the Text object
+	#
+	#     assert "hello".bytes.to_a == [104u8, 101u8, 108u8, 108u8, 111u8]
+	fun bytes: SequenceRead[Byte] is abstract
+
 	# Number of characters contained in self.
 	#
 	#     assert "12345".length == 5
@@ -963,7 +968,7 @@ abstract class FlatText
 end
 
 # Abstract class for the SequenceRead compatible
-# views on String and Buffer objects
+# views on the chars of any Text
 private abstract class StringCharView
 	super SequenceRead[Char]
 
@@ -976,6 +981,24 @@ private abstract class StringCharView
 	redef fun length do return target.length
 
 	redef fun iterator: IndexedIterator[Char] do return self.iterator_from(0)
+
+	redef fun reverse_iterator do return self.reverse_iterator_from(self.length - 1)
+end
+
+# Abstract class for the SequenceRead compatible
+# views on the bytes of any Text
+private abstract class StringByteView
+	super SequenceRead[Byte]
+
+	type SELFTYPE: Text
+
+	var target: SELFTYPE
+
+	redef fun is_empty do return target.is_empty
+
+	redef fun length do return target.length
+
+	redef fun iterator do return self.iterator_from(0)
 
 	redef fun reverse_iterator do return self.reverse_iterator_from(self.length - 1)
 end
@@ -1283,13 +1306,27 @@ abstract class Buffer
 	# In Buffers, the internal sequence of character is mutable
 	# Thus, `chars` can be used to modify the buffer.
 	redef fun chars: Sequence[Char] is abstract
+
+	# In Buffers, the internal sequence of bytes is mutable
+	# Thus, `bytes` can be used to modify the buffer.
+	redef fun bytes: Sequence[Byte] is abstract
 end
 
-# View on Buffer objects, extends Sequence
+# View for chars on Buffer objects, extends Sequence
 # for mutation operations
 private abstract class BufferCharView
 	super StringCharView
 	super Sequence[Char]
+
+	redef type SELFTYPE: Buffer
+
+end
+
+# View for bytes on Buffer objects, extends Sequence
+# for mutation operations
+private abstract class BufferByteView
+	super StringByteView
+	super Sequence[Byte]
 
 	redef type SELFTYPE: Buffer
 
