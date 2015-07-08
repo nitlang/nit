@@ -66,7 +66,7 @@ abstract class Noise
 	# Seed to the random number generator `gradient_vector`
 	#
 	# By default, `seed` has a random value created with `Int::rand`.
-	var seed: Int = 19559.rand is lazy, writable
+	var seed: Int = 19511359.rand is lazy, writable
 end
 
 # 2D Perlin noise generator using layered `InterpolatedNoise`
@@ -197,7 +197,7 @@ class PerlinNoise
 	# Used to get seeds for layers from the previous layers or `seed`.
 	protected fun pseudo_random(value: Int): Int
 	do
-		return value + 2935391 % 954847
+		return (value * 3537391).mask % 1291377
 	end
 end
 
@@ -336,5 +336,16 @@ class InterpolatedNoise
 		var dy = y - iy.to_f
 
 		return dx*gradient_vector(ix, iy, 0) + dy*gradient_vector(ix, iy, 1)
+	end
+end
+
+redef universal Int
+	# The value of the least-significant 30 bits of `self`
+	#
+	# This mask is used as compatibility with 32 bits architecture.
+	# The missing 2 bits are used to tag integers by the Nit system.
+	private fun mask: Int
+	do
+		return bin_and(0x3FFF_FFFF)
 	end
 end
