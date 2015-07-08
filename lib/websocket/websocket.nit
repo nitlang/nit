@@ -127,14 +127,14 @@ class WebsocketConnection
 		var ans_buffer = new Bytes.with_capacity(msg.length)
 		# Flag for final frame set to 1
 		# opcode set to 1 (for text)
-		ans_buffer.add(129)
+		ans_buffer.add(129u8)
 		if msg.length < 126 then
-			ans_buffer.add(msg.length)
+			ans_buffer.add(msg.length.to_b)
 		end
 		if msg.length >= 126 and msg.length <= 65535 then
-			ans_buffer.add(126)
-			ans_buffer.add(msg.length.rshift(8))
-			ans_buffer.add(msg.length)
+			ans_buffer.add(126u8)
+			ans_buffer.add((msg.length >> 8).to_b)
+			ans_buffer.add(msg.length.to_b)
 		end
 		if msg isa FlatString then
 			ans_buffer.append_ns_from(msg.items, msg.length, msg.index_from)
@@ -149,8 +149,9 @@ class WebsocketConnection
 	# Reads an HTTP frame
 	protected fun read_http_frame(buf: Buffer): String
 	do
-		buf.append client.read_line
-		buf.append("\r\n")
+		var ln = client.read_line
+		buf.append ln
+		buf.append "\r\n"
 		if buf.has_suffix("\r\n\r\n") then return buf.to_s
 		return read_http_frame(buf)
 	end
@@ -180,12 +181,12 @@ class WebsocketConnection
 			#	%x9 denotes a ping
 			#	%xA denotes a pong
 			#	%xB-F are reserved for further control frames
-			var fin_flag = fst_byte.bin_and(128)
+			var fin_flag = fst_byte & 0b1000_0000u8
 			if fin_flag != 0 then fin = true
-			var opcode = fst_byte.bin_and(15)
+			var opcode = fst_byte & 0b0000_1111u8
 			if opcode == 9 then
-				bf.add(138)
-				bf.add(0)
+				bf.add(138u8)
+				bf.add(0u8)
 				client.write(bf.to_s)
 				_buffer_pos = _buffer_length
 				return
@@ -198,8 +199,8 @@ class WebsocketConnection
 			# |(mask - 1bit)|(payload length - 7 bits)
 			# As specified, if the payload length is 126 or 127
 			# The next 16 or 64 bits contain an extended payload length
-			var mask_flag = snd_byte.bin_and(128)
-			var len = snd_byte.bin_and(127)
+			var mask_flag = snd_byte & 0b1000_0000u8
+			var len = (snd_byte & 0b0111_1111u8).to_i
 			var payload_ext_len = 0
 			if len == 126 then
 				var tmp = client.read_bytes(2)
@@ -208,19 +209,17 @@ class WebsocketConnection
 					client.close
 					return
 				end
-				payload_ext_len = tmp[1] + tmp[0].lshift(8)
+				payload_ext_len += tmp[0].to_i << 8
+				payload_ext_len += tmp[1].to_i
 			else if len == 127 then
-				# 64 bits for length are not supported,
-				# only the last 32 will be interpreted as a Nit Integer
 				var tmp = client.read_bytes(8)
 				if tmp.length != 8 then
 					last_error = new IOError("Error: received interrupted frame")
 					client.close
 					return
 				end
-				for pos in [0 .. tmp.length[ do
-					var i = tmp[pos]
-					payload_ext_len += i.lshift(8 * (7 - pos))
+				for i in [0 .. 8[ do
+					payload_ext_len += tmp[i].to_i << (8 * (7 - i))
 				end
 			end
 			if mask_flag != 0 then
@@ -242,7 +241,7 @@ class WebsocketConnection
 		var return_message = new NativeString(len)
 
 		for i in [0 .. len[ do
-			return_message[i] = message[i].ascii.bin_xor(key[i%4].ascii).ascii
+			return_message[i] = message[i] ^ key[i % 4]
 		end
 
 		return return_message
