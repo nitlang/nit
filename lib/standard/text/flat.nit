@@ -54,7 +54,7 @@ class FlatString
 		# In other terms, if the index is valid
 		assert index >= 0
 		assert (index + index_from) <= index_to
-		return items[index + index_from]
+		return items[index + index_from].to_i.ascii
 	end
 
 	################################################
@@ -163,7 +163,7 @@ class FlatString
 		else
 			var newItems = new NativeString(length + 1)
 			self.items.copy_to(newItems, length, index_from, 0)
-			newItems[length] = '\0'
+			newItems[length] = 0u8
 			self.real_items = newItems
 			return newItems
 		end
@@ -256,7 +256,7 @@ class FlatString
 			end
 		end
 
-		target_string[total_length] = '\0'
+		target_string[total_length] = 0u8
 
 		return target_string.to_s_with_length(total_length)
 	end
@@ -273,7 +273,7 @@ class FlatString
 
 		var target_string = new NativeString(final_length + 1)
 
-		target_string[final_length] = '\0'
+		target_string[final_length] = 0u8
 
 		var current_last = 0
 
@@ -295,7 +295,7 @@ class FlatString
 			var myitems = items
 
 			while i <= index_to do
-				h = h.lshift(5) + h + myitems[i].ascii
+				h = h.lshift(5) + h + myitems[i].to_i
 				i += 1
 			end
 
@@ -478,8 +478,8 @@ class FlatBuffer
 	redef fun [](index)
 	do
 		assert index >= 0
-		assert index  < length
-		return items[index]
+		assert index < length
+		return items[index].to_i.ascii
 	end
 
 	redef fun []=(index, item)
@@ -491,7 +491,7 @@ class FlatBuffer
 		end
 		if written then reset
 		assert index >= 0 and index < length
-		items[index] = item
+		items[index] = item.ascii.to_b
 	end
 
 	redef fun add(c)
@@ -542,7 +542,7 @@ class FlatBuffer
 	do
 		if is_dirty then
 			var new_native = new NativeString(length + 1)
-			new_native[length] = '\0'
+			new_native[length] = 0u8
 			if length > 0 then items.copy_to(new_native, length, 0, 0)
 			real_items = new_native
 			is_dirty = false
@@ -579,9 +579,8 @@ class FlatBuffer
 			s.items.copy_to(items, length, 0, 0)
 		else
 			var curr_pos = 0
-			for i in [0..s.length[ do
-				var c = s.chars[i]
-				items[curr_pos] = c
+			for i in s.bytes do
+				items[curr_pos] = i
 				curr_pos += 1
 			end
 		end
@@ -608,9 +607,8 @@ class FlatBuffer
 			s.items.copy_to(items, sl, 0, length)
 		else
 			var curr_pos = self.length
-			for i in [0..s.length[ do
-				var c = s.chars[i]
-				items[curr_pos] = c
+			for i in s.bytes do
+				items[curr_pos] = i
 				curr_pos += 1
 			end
 		end
@@ -854,27 +852,27 @@ private class FlatBufferCharView
 
 end
 
-private class FlatBufferIterator
+private class FlatBufferCharIterator
 	super IndexedIterator[Char]
 
 	var target: FlatBuffer
 
-	var target_items: NativeString
+	var max: Int
 
 	var curr_pos: Int
 
 	init with_pos(tgt: FlatBuffer, pos: Int)
 	do
 		target = tgt
-		if tgt.length > 0 then target_items = tgt.items
+		max = tgt.length - 1
 		curr_pos = pos
 	end
 
 	redef fun index do return curr_pos
 
-	redef fun is_ok do return curr_pos < target.length
+	redef fun is_ok do return curr_pos <= max
 
-	redef fun item do return target_items[curr_pos]
+	redef fun item do return target[curr_pos]
 
 	redef fun next do curr_pos += 1
 
@@ -901,7 +899,7 @@ redef class NativeString
 		var new_self = new NativeString(length + 1)
 		copy_to(new_self, length, 0, 0)
 		var str = new FlatString.with_infos(new_self, length, 0, length - 1)
-		new_self[length] = '\0'
+		new_self[length] = 0u8
 		str.real_items = new_self
 		return str
 	end
@@ -927,7 +925,7 @@ redef class Int
 
 		var nslen = int_to_s_len
 		var ns = new NativeString(nslen + 1)
-		ns[nslen] = '\0'
+		ns[nslen] = 0u8
 		native_int_to_s(ns, nslen + 1)
 		return ns.to_s_with_length(nslen)
 	end
@@ -959,7 +957,7 @@ redef class Array[E]
 			mypos += 1
 		end
 		var ns = new NativeString(sl + 1)
-		ns[sl] = '\0'
+		ns[sl] = 0u8
 		i = 0
 		var off = 0
 		while i < mypos do
@@ -996,7 +994,7 @@ redef class NativeArray[E]
 			mypos += 1
 		end
 		var ns = new NativeString(sl + 1)
-		ns[sl] = '\0'
+		ns[sl] = 0u8
 		i = 0
 		var off = 0
 		while i < mypos do

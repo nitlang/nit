@@ -59,7 +59,7 @@ private class ManualBuffer
 
 	init do ns = new NativeString(maxlen)
 
-	fun [](i: Int): Char do return ns[i]
+	fun [](i: Int): Byte do return ns[i]
 end
 
 # Simple implementation of the iterator on Substrings for `Leaf`
@@ -92,21 +92,21 @@ private class Leaf
 
 	var buf: ManualBuffer
 	var bns: NativeString is noinit
-	redef var length: Int is noinit
+	redef var length is noinit
 
 	redef fun empty do return new Leaf(new ManualBuffer)
 
 	redef fun to_cstring do
 		var len = length
 		var ns = new NativeString(len + 1)
-		ns[len] = '\0'
+		ns[len] = 0u8
 		buf.ns.copy_to(ns, len, 0, 0)
 		return ns
 	end
 
 	redef fun substrings do return new LeafSubstrings(self)
 
-	redef fun [](i) do return buf[i]
+	redef fun [](i) do return buf[i].to_i.ascii
 
 	init do
 		bns = buf.ns
@@ -116,27 +116,15 @@ private class Leaf
 	redef fun output do new FlatString.with_infos(buf.ns, length, 0, length - 1).output
 
 	redef fun to_upper do
-		var x = new ManualBuffer
-		var nns = x.ns
-		var ns = bns
-		var mlen = length
-		for i in [0..mlen[ do
-			nns[i] = ns[i].to_upper
-		end
-		x.pos = mlen - 1
-		return new Leaf(x)
+		var x = new FlatBuffer
+		for i in chars do x.add(i.to_upper)
+		return x.to_s
 	end
 
 	redef fun to_lower do
-		var x = new ManualBuffer
-		var nns = x.ns
-		var ns = bns
-		var mlen = length
-		for i in [0..mlen[ do
-			nns[i] = ns[i].to_lower
-		end
-		x.pos = mlen - 1
-		return new Leaf(x)
+		var x = new FlatBuffer
+		for i in chars do x.add(i.to_lower)
+		return x.to_s
 	end
 
 	redef fun reversed do
@@ -165,8 +153,8 @@ private class Leaf
 
 	redef fun +(o) do
 		var s = o.to_s
-		var slen = s.length
-		var mlen = length
+		var slen = s.bytelen
+		var mlen = bytelen
 		if slen == 0 then return self
 		if mlen == 0 then return s
 		var nlen = mlen + slen
@@ -213,7 +201,7 @@ private class Leaf
 				b = new ManualBuffer
 				bns.copy_to(b.ns, mlen, 0, 0)
 			end
-			for i in s.chars do
+			for i in s.bytes do
 				bns[bpos] = i
 				bpos += 1
 			end
@@ -226,7 +214,7 @@ redef class Concat
 	redef fun to_cstring do
 		var len = length
 		var ns = new NativeString(len + 1)
-		ns[len] = '\0'
+		ns[len] = 0u8
 		var off = 0
 		for i in substrings do
 			var ilen = i.length
@@ -328,7 +316,7 @@ redef class Array[E]
 			mypos += 1
 		end
 		var ns = new NativeString(sl + 1)
-		ns[sl] = '\0'
+		ns[sl] = 0u8
 		i = 0
 		var off = 0
 		while i < mypos do

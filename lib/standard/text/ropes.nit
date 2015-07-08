@@ -83,7 +83,7 @@ private class Concat
 	redef var to_cstring is lazy do
 		var len = length
 		var ns = new NativeString(len + 1)
-		ns[len] = '\0'
+		ns[len] = 0u8
 		var off = 0
 		for i in substrings do
 			var ilen = i.length

@@ -259,7 +259,7 @@ class XophonLexer
 			last_char = -1
 			return
 		end
-		last_char = s
+		last_char = s.to_i
 
 		# XML 1.0 end-of-line handling
 		# Note: Regardless the XML version, any EOL defined by the
@@ -267,8 +267,11 @@ class XophonLexer
 		if was_cr and last_char == '\n'.ascii then
 			# EOL already reported. => Skip this byte.
 			s = input.read_byte
-			if s == null then s = -1
-			last_char = s
+			if s == null then
+				last_char = -1
+			else
+				last_char = s.to_i
+			end
 		end
 		was_cr = last_char == '\r'.ascii
 		if was_cr then

@@ -912,7 +912,7 @@ abstract class Text
 		var mypos = src_offset
 		var itspos = dest_offset
 		while n > 0 do
-			dest[itspos] = self.chars[mypos]
+			dest[itspos] = self.bytes[mypos]
 			itspos += 1
 			mypos += 1
 			n -= 1
@@ -1390,7 +1390,7 @@ redef class Byte
 	redef fun to_s do
 		var nslen = byte_to_s_len
 		var ns = new NativeString(nslen + 1)
-		ns[nslen] = '\0'
+		ns[nslen] = 0u8
 		native_byte_to_s(ns, nslen + 1)
 		return ns.to_s_with_length(nslen)
 	end

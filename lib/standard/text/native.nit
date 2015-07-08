@@ -25,10 +25,10 @@ extern class NativeString `{ char* `}
 	fun fast_cstring(index: Int): NativeString is intern
 
 	# Get char at `index`.
-	fun [](index: Int): Char is intern
+	fun [](index: Int): Byte is intern
 
 	# Set char `item` at index.
-	fun []=(index: Int, item: Char) is intern
+	fun []=(index: Int, item: Byte) is intern
 
 	# Copy `self` to `dest`.
 	fun copy_to(dest: NativeString, length: Int, from: Int, to: Int) is intern
@@ -37,7 +37,7 @@ extern class NativeString `{ char* `}
 	fun cstring_length: Int
 	do
 		var l = 0
-		while self[l] != '\0' do l += 1
+		while self[l] != 0u8 do l += 1
 		return l
 	end
 
