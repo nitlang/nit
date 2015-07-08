@@ -277,7 +277,7 @@ class NaiveInterpreter
 	do
 		var instance = native_string_instance_len(txt.length+1)
 		var val = instance.val
-		val[txt.length] = '\0'
+		val[txt.length] = 0u8
 		txt.to_cstring.copy_to(val, txt.length, 0, 0)
 
 		return instance
@@ -1041,10 +1041,10 @@ redef class AMethPropdef
 			var recvval = args.first.val.as(NativeString)
 			if pname == "[]" then
 				var arg1 = args[1].to_i
-				return v.char_instance(recvval[arg1])
+				return v.byte_instance(recvval[arg1])
 			else if pname == "[]=" then
 				var arg1 = args[1].to_i
-				recvval[arg1] = args[2].val.as(Char)
+				recvval[arg1] = args[2].val.as(Byte)
 				return null
 			else if pname == "copy_to" then
 				# sig= copy_to(dest: NativeString, length: Int, from: Int, to: Int)
