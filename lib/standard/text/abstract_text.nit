@@ -42,6 +42,11 @@ abstract class Text
 	#     assert "".length == 0
 	fun length: Int is abstract
 
+	# Number of bytes in `self`
+	#
+	# TODO: Implement correctly once UTF-8 is supported
+	fun bytelen: Int do return length
+
 	# Create a substring.
 	#
 	#     assert "abcd".substring(1, 2)      ==  "bc"
