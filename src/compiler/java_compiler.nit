@@ -372,7 +372,7 @@ redef class MClass
 		v.add("  private {rt_name}() \{")
 		v.add("    this.class_name = \"{name}\";")
 		compile_vft(v)
-		# TODO compile_type_table(v)
+		compile_type_table(v)
 		v.add("  \}")
 		v.add("  public static RTClass get{rt_name}() \{")
 		v.add("    if(instance == null) \{")
@@ -405,6 +405,17 @@ redef class MClass
 					rt_name = mpropdef.rt_name
 					v.add("this.vft.put(\"{prefix}\", {rt_name}.get{rt_name}());")
 				end
+			end
+		end
+	end
+
+	# Compile the type table for the MClass
+	fun compile_type_table(v: JavaCompilerVisitor) do
+		for pclass in in_hierarchy(v.compiler.mainmodule).greaters do
+			if pclass == self then
+				v.add("supers.put(\"{pclass.jname}\", this);")
+			else
+				v.add("supers.put(\"{pclass.jname}\", {pclass.rt_name}.get{pclass.rt_name}());")
 			end
 		end
 	end
