@@ -477,7 +477,7 @@ class WikiSection
 	private fun try_load_config do
 		var cfile = wiki.expand_path(wiki.config.root_dir, src_path, wiki.config_filename)
 		if not cfile.file_exists then return
-		wiki.message("Custom config for section {name}", 1)
+		wiki.message("Custom config for section {name}", 2)
 		config = new SectionConfig(cfile)
 	end
 
