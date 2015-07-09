@@ -765,6 +765,120 @@ class JavaCompilerVisitor
 		return recv
 	end
 
+	#  Generate a Nit "is" for two runtime_variables
+	fun equal_test(value1, value2: RuntimeVariable): RuntimeVariable do
+		var res = new_var(compiler.mainmodule.bool_type)
+		if value2.mtype.is_java_primitive and not value1.mtype.is_java_primitive then
+			var tmp = value1
+			value1 = value2
+			value2 = tmp
+		end
+		if value1.mtype.is_java_primitive then
+			if value2.mtype == value1.mtype then
+				add("{res} = {value1} == {value2}; /* == with two primitives */")
+			else if value2.mtype.is_java_primitive then
+				add("{res} = true; /* incompatible types {value1.mtype} vs. {value2.mtype}*/")
+			# else if value1.mtype.is_tagged then
+				# add("{res} = ({value2} != NULL) && ({autobox(value2, value1.mtype)} == {value1});")
+			else
+				var rt_name = value1.mtype.as(MClassType).mclass.rt_name
+				add("{res} = ({value2} != null) && ({value2}.rtclass == {rt_name}.get{rt_name}());")
+				add("if ({res}) \{")
+				add("{res} = ({self.autobox(value2, value1.mtype)} == {value1});")
+				add("\}")
+			end
+			return res
+		end
+		var maybe_null = true
+		var test = new Array[String]
+		var t1 = value1.mcasttype
+		if t1 isa MNullableType then
+			test.add("{value1} != null && !{value1}.is_null()")
+			t1 = t1.mtype
+		else
+			maybe_null = false
+		end
+		var t2 = value2.mcasttype
+		if t2 isa MNullableType then
+			test.add("{value2} != null && !{value2}.is_null()")
+			t2 = t2.mtype
+		else
+			maybe_null = false
+		end
+
+		var incompatible = false
+		var primitive
+		if t1.is_java_primitive then
+			primitive = t1
+			if t1 == t2 then
+				# No need to compare class
+			else if t2.is_java_primitive then
+				incompatible = true
+			else if can_be_primitive(value2) then
+				if t1.is_java_primitive then
+					self.add("{res} = {value1} == {value2}; /* t1 is primitive and t2 can be */")
+					return res
+				end
+				# if not compiler.modelbuilder.toolcontext.opt_no_tag_primitives.value then
+					# test.add("(!{extract_tag(value2)})")
+				# end
+				test.add("{value1}.rtclass == {value2}.rtclass")
+			else
+				incompatible = true
+			end
+		else if t2.is_java_primitive then
+			primitive = t2
+			if can_be_primitive(value1) then
+				if t2.is_java_primitive then
+					self.add("{res} = {value1} == {value2}; /* t2 is primitive and t1 can be */")
+					return res
+				end
+				test.add("{value1}.rtclass == {value2}.rtclass")
+			else
+				incompatible = true
+			end
+		else
+			primitive = null
+		end
+
+		if incompatible then
+			if maybe_null then
+				self.add("{res} = {value1} == {value2}; /* incompatible types {t1} vs. {t2}; but may be NULL*/")
+				return res
+			else
+				self.add("{res} = false; /* incompatible types {t1} vs. {t2}; cannot be NULL */")
+				return res
+			end
+		end
+		if primitive != null then
+			if primitive.is_java_primitive then
+				self.add("{res} = {value1} == {value2};")
+				return res
+			end
+			test.add("({value1}.value == {value2}.value")
+		else if can_be_primitive(value1) and can_be_primitive(value2) then
+			test.add("{value1}.rtclass == {value2}.rtclass")
+			var s = new Array[String]
+			for b in compiler.box_kinds do
+				var rt_name = b.mclass.rt_name
+				s.add "({value1}.rtclass == {rt_name}.get{rt_name}()) && ({value1}.value.equals({value2}.value))"
+				if b.mclass.name == "Float" then
+					s.add "({value1}.rtclass == RTClass_kernel_Float.getRTClass_kernel_Float() && {value1}.rtclass == {value2}.rtclass && Math.abs((double)({value1}.value)) == 0.0 && Math.abs((double)({value2}.value)) == 0.0)"
+				end
+			end
+			if s.is_empty then
+				self.add("{res} = {value1} == {value2}; /* both can be primitive */")
+				return res
+			end
+			test.add("({s.join(" || ")})")
+		else
+			self.add("{res} = {value1} == {value2}; /* no primitives */")
+			return res
+		end
+		self.add("{res} = {value1} == {value2} || ({test.join(" && ")});")
+		return res
+	end
+
 	# Utils
 
 	# Display a info message
@@ -1147,8 +1261,8 @@ redef class AMethPropdef
 	private fun compile_inside_to_java(v: JavaCompilerVisitor, mpropdef: MMethodDef) do
 		# Compile intern methods
 		if mpropdef.is_intern then
-			v.info("NOT YET IMPLEMENTED {class_name}::compile_intern")
-			# TODO if compile_intern_to_java(v, mpropdef, arguments) then return
+			if compile_intern_to_java(v, mpropdef, arguments) then return
+			v.info("NOT YET IMPLEMENTED compile_intern for {mpropdef}")
 			v.ret(v.null_instance)
 			return
 		end
@@ -1159,6 +1273,289 @@ redef class AMethPropdef
 			v.stmt(n_block)
 			return
 		end
+	end
+
+	# Compile an intern method using Java primitives
+	fun compile_intern_to_java(v: JavaCompilerVisitor, mpropdef: MMethodDef, arguments: Array[RuntimeVariable]): Bool do
+		var pname = mpropdef.mproperty.name
+		var cname = mpropdef.mclassdef.mclass.name
+		var ret = mpropdef.msignature.as(not null).return_mtype
+		if cname == "Int" then
+			if pname == "output" then
+				v.add("System.out.println({arguments[0]});")
+				v.ret(v.null_instance)
+				return true
+			else if pname == "object_id" then
+				v.ret(arguments.first)
+				return true
+			else if pname == "+" then
+				v.ret(v.new_expr("{arguments[0]} + {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == "-" then
+				v.ret(v.new_expr("{arguments[0]} - {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == "unary -" then
+				v.ret(v.new_expr("-{arguments[0]}", ret.as(not null)))
+				return true
+			else if pname == "unary +" then
+				v.ret(arguments[0])
+				return true
+			else if pname == "*" then
+				v.ret(v.new_expr("{arguments[0]} * {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == "/" then
+				v.ret(v.new_expr("{arguments[0]} / {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == "%" then
+				v.ret(v.new_expr("{arguments[0]} % {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == "lshift" then
+				v.ret(v.new_expr("{arguments[0]} << {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == "rshift" then
+				v.ret(v.new_expr("{arguments[0]} >> {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == "==" then
+				v.ret(v.equal_test(arguments[0], arguments[1]))
+				return true
+			else if pname == "!=" then
+				var res = v.equal_test(arguments[0], arguments[1])
+				v.ret(v.new_expr("!{res}", ret.as(not null)))
+				return true
+			else if pname == "<" then
+				v.ret(v.new_expr("{arguments[0]} < {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == ">" then
+				v.ret(v.new_expr("{arguments[0]} > {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == "<=" then
+				v.ret(v.new_expr("{arguments[0]} <= {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == ">=" then
+				v.ret(v.new_expr("{arguments[0]} >= {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == "to_f" then
+				v.ret(v.new_expr("(double){arguments[0]}", ret.as(not null)))
+				return true
+			else if pname == "to_b" then
+				v.ret(v.new_expr("(byte){arguments[0]}", ret.as(not null)))
+				return true
+			else if pname == "ascii" then
+				v.ret(v.new_expr("(char){arguments[0]}", ret.as(not null)))
+				return true
+			end
+		else if cname == "Char" then
+			if pname == "output" then
+				v.add("System.out.print({arguments[0]});")
+				v.ret(v.null_instance)
+				return true
+			else if pname == "object_id" then
+				v.ret(v.new_expr("(int){arguments[0]}", ret.as(not null)))
+				return true
+			else if pname == "successor" then
+				v.ret(v.new_expr("(char)({arguments[0]} + {arguments[1]})", ret.as(not null)))
+				return true
+			else if pname == "predecessor" then
+				v.ret(v.new_expr("(char)({arguments[0]} - {arguments[1]})", ret.as(not null)))
+				return true
+			else if pname == "==" then
+				v.ret(v.equal_test(arguments[0], arguments[1]))
+				return true
+			else if pname == "!=" then
+				var res = v.equal_test(arguments[0], arguments[1])
+				v.ret(v.new_expr("!{res}", ret.as(not null)))
+				return true
+			else if pname == "<" then
+				v.ret(v.new_expr("{arguments[0]} < {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == ">" then
+				v.ret(v.new_expr("{arguments[0]} > {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == "<=" then
+				v.ret(v.new_expr("{arguments[0]} <= {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == ">=" then
+				v.ret(v.new_expr("{arguments[0]} >= {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == "to_i" then
+				v.ret(v.new_expr("(int){arguments[0]}", ret.as(not null)))
+				return true
+			else if pname == "ascii" then
+				v.ret(v.new_expr("(int){arguments[0]}", ret.as(not null)))
+				return true
+			end
+		else if cname == "Byte" then
+			if pname == "output" then
+				v.add("System.out.println({arguments[0]});")
+				v.ret(v.null_instance)
+				return true
+			else if pname == "object_id" then
+				v.ret(v.new_expr("(int){arguments[0]}", ret.as(not null)))
+				return true
+			else if pname == "+" then
+				v.ret(v.new_expr("(byte)({arguments[0]} + {arguments[1]})", ret.as(not null)))
+				return true
+			else if pname == "-" then
+				v.ret(v.new_expr("(byte)({arguments[0]} - {arguments[1]})", ret.as(not null)))
+				return true
+			else if pname == "unary -" then
+				v.ret(v.new_expr("(byte)(-{arguments[0]})", ret.as(not null)))
+				return true
+			else if pname == "unary +" then
+				v.ret(arguments[0])
+				return true
+			else if pname == "*" then
+				v.ret(v.new_expr("(byte)({arguments[0]} * {arguments[1]})", ret.as(not null)))
+				return true
+			else if pname == "/" then
+				v.ret(v.new_expr("(byte)({arguments[0]} / {arguments[1]})", ret.as(not null)))
+				return true
+			else if pname == "%" then
+				v.ret(v.new_expr("(byte)({arguments[0]} % {arguments[1]})", ret.as(not null)))
+				return true
+			else if pname == "lshift" then
+				v.ret(v.new_expr("(byte)({arguments[0]} << {arguments[1]})", ret.as(not null)))
+				return true
+			else if pname == "rshift" then
+				v.ret(v.new_expr("(byte)({arguments[0]} >> {arguments[1]})", ret.as(not null)))
+				return true
+			else if pname == "==" then
+				v.ret(v.equal_test(arguments[0], arguments[1]))
+				return true
+			else if pname == "!=" then
+				var res = v.equal_test(arguments[0], arguments[1])
+				v.ret(v.new_expr("!{res}", ret.as(not null)))
+				return true
+			else if pname == "<" then
+				v.ret(v.new_expr("{arguments[0]} < {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == ">" then
+				v.ret(v.new_expr("{arguments[0]} > {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == "<=" then
+				v.ret(v.new_expr("{arguments[0]} <= {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == ">=" then
+				v.ret(v.new_expr("{arguments[0]} >= {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == "to_i" then
+				v.ret(v.new_expr("(int){arguments[0]}", ret.as(not null)))
+				return true
+			else if pname == "to_f" then
+				v.ret(v.new_expr("(double){arguments[0]}", ret.as(not null)))
+				return true
+			else if pname == "ascii" then
+				v.ret(v.new_expr("{arguments[0]}", ret.as(not null)))
+				return true
+			end
+		else if cname == "Bool" then
+			if pname == "output" then
+				v.add("System.out.println({arguments[0]});")
+				v.ret(v.null_instance)
+				return true
+			else if pname == "object_id" then
+				v.ret(v.new_expr("{arguments[0]}?1:0", ret.as(not null)))
+				return true
+			else if pname == "==" then
+				v.ret(v.equal_test(arguments[0], arguments[1]))
+				return true
+			else if pname == "!=" then
+				var res = v.equal_test(arguments[0], arguments[1])
+				v.ret(v.new_expr("!{res}", ret.as(not null)))
+				return true
+			end
+		else if cname == "Float" then
+			if pname == "output" then
+				v.add "if({arguments[0]} == Double.POSITIVE_INFINITY) \{"
+				v.add "System.out.println(\"inf\");"
+				v.add "\} else if({arguments[0]} == Double.POSITIVE_INFINITY) \{"
+				v.add "System.out.println(\"-inf\");"
+				v.add "\} else \{"
+				var df = v.get_name("df")
+				v.add "java.text.DecimalFormat {df} = new java.text.DecimalFormat(\"0.000000\");"
+				v.add "System.out.println({df}.format({arguments[0]}));"
+				v.add "\}"
+				v.ret(v.null_instance)
+				return true
+			else if pname == "object_id" then
+				v.ret(v.new_expr("(int){arguments[0]}", ret.as(not null)))
+				return true
+			else if pname == "+" then
+				v.ret(v.new_expr("{arguments[0]} + {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == "-" then
+				v.ret(v.new_expr("{arguments[0]} - {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == "unary -" then
+				v.ret(v.new_expr("-{arguments[0]}", ret.as(not null)))
+				return true
+			else if pname == "unary +" then
+				v.ret(arguments[0])
+				return true
+			else if pname == "succ" then
+				v.ret(v.new_expr("{arguments[0]} + 1", ret.as(not null)))
+				return true
+			else if pname == "prec" then
+				v.ret(v.new_expr("{arguments[0]} - 1", ret.as(not null)))
+				return true
+			else if pname == "*" then
+				v.ret(v.new_expr("{arguments[0]} * {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == "/" then
+				v.ret(v.new_expr("{arguments[0]} / {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == "==" then
+				v.ret(v.equal_test(arguments[0], arguments[1]))
+				return true
+			else if pname == "!=" then
+				var res = v.equal_test(arguments[0], arguments[1])
+				v.ret(v.new_expr("!{res}", ret.as(not null)))
+				return true
+			else if pname == "<" then
+				v.ret(v.new_expr("{arguments[0]} < {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == ">" then
+				v.ret(v.new_expr("{arguments[0]} > {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == "<=" then
+				v.ret(v.new_expr("{arguments[0]} <= {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == ">=" then
+				v.ret(v.new_expr("{arguments[0]} >= {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == "to_i" then
+				v.ret(v.new_expr("(int){arguments[0]}", ret.as(not null)))
+				return true
+			else if pname == "to_b" then
+				v.ret(v.new_expr("(byte){arguments[0]}", ret.as(not null)))
+				return true
+			end
+		end
+		if pname == "exit" then
+			v.add("System.exit({arguments[1]});")
+			v.ret(v.null_instance)
+			return true
+		else if pname == "sys" then
+			# TODO singleton
+			var main_type = v.compiler.mainmodule.sys_type.as(not null)
+			var sys = main_type.mclass
+			v.ret(v.new_expr("new RTVal({sys.rt_name}.get{sys.rt_name}())", main_type))
+			return true
+		else if pname == "object_id" then
+			v.ret(v.new_expr("{arguments[0]}.hashCode()", ret.as(not null)))
+			return true
+		else if pname == "is_same_type" then
+			v.ret(v.is_same_type_test(arguments[0], arguments[1]))
+			return true
+		else if pname == "is_same_instance" then
+			v.ret(v.equal_test(arguments[0], arguments[1]))
+			return true
+		else if pname == "output_class_name" then
+			v.add("System.out.println({arguments[0]}.rtclass.class_name);")
+			v.ret(v.null_instance)
+			return true
+		end
+		return false
 	end
 end
 
