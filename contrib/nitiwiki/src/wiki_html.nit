@@ -36,7 +36,7 @@ redef class Nitiwiki
 		var src = expand_path(config.root_dir, config.assets_dir)
 		var out = expand_path(config.root_dir, config.out_dir)
 		if need_render(src, expand_path(out, config.assets_dir)) then
-			if src.file_exists then sys.system "cp -R {src} {out}"
+			if src.file_exists then sys.system "cp -R -- {src.escape_to_sh} {out.escape_to_sh}"
 		end
 	end
 
@@ -83,15 +83,15 @@ redef class WikiSection
 		if is_new then
 			out_full_path.mkdir
 		else
-			sys.system "touch {out_full_path}"
+			sys.system "touch -- {out_full_path.escape_to_sh}"
 		end
 		if has_source then
-			wiki.message("Render section {out_path}", 1)
+			wiki.message("Render section {name} -> {out_path}", 1)
 			copy_files
 		end
 		var index = self.index
 		if index isa WikiSectionIndex then
-			wiki.message("Render auto-index for section {out_path}", 1)
+			wiki.message("Render auto-index for section {name} -> {out_path}", 1)
 			index.is_dirty = true
 			add_child index
 		end
@@ -109,7 +109,7 @@ redef class WikiSection
 			var src = wiki.expand_path(dir, name)
 			var out = wiki.expand_path(out_full_path, name)
 			if not wiki.need_render(src, out) then continue
-			sys.system "cp -R {src} {out_full_path}"
+			sys.system "cp -R -- {src.escape_to_sh} {out_full_path.escape_to_sh}"
 		end
 	end
 
@@ -175,8 +175,8 @@ redef class WikiArticle
 	redef fun render do
 		super
 		if not is_dirty and not wiki.force_render then return
-		wiki.message("Render article {name}", 2)
 		var file = out_full_path
+		wiki.message("Render article {name} -> {file}", 1)
 		file.dirname.mkdir
 		tpl_page.write_to_file file
 	end

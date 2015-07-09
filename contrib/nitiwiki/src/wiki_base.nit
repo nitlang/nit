@@ -50,12 +50,17 @@ class Nitiwiki
 	# Synchronize local output with the distant `WikiConfig::rsync_dir`.
 	fun sync do
 		var root = expand_path(config.root_dir, config.out_dir)
-		sys.system "rsync -vr --delete {root}/ {config.rsync_dir}"
+		var rsync_dir = config.rsync_dir
+		if rsync_dir == "" then
+			message("Error: configure `wiki.rsync_dir` to use rsync.", 0)
+			return
+		end
+		sys.system "rsync -vr --delete -- {root.escape_to_sh}/ {rsync_dir.escape_to_sh}"
 	end
 
 	# Pull data from git repository.
 	fun fetch do
-		sys.system "git pull {config.git_origin} {config.git_branch}"
+		sys.system "git pull {config.git_origin.escape_to_sh} {config.git_branch.escape_to_sh}"
 	end
 
 	# Analyze wiki files from `dir` to build wiki entries.
@@ -79,7 +84,6 @@ class Nitiwiki
 		print "nitiWiki"
 		print "name: {config.wiki_name}"
 		print "config: {config.ini_file}"
-		print "url: {config.root_url}"
 		print ""
 		if root_section.is_dirty then
 			print "There is modified files:"
@@ -473,7 +477,7 @@ class WikiSection
 	private fun try_load_config do
 		var cfile = wiki.expand_path(wiki.config.root_dir, src_path, wiki.config_filename)
 		if not cfile.file_exists then return
-		wiki.message("Custom config for section {name}", 1)
+		wiki.message("Custom config for section {name}", 2)
 		config = new SectionConfig(cfile)
 	end
 
@@ -639,12 +643,6 @@ class WikiConfig
 	# * key: `wiki.logo`
 	# * default: ``
 	var wiki_logo: String is lazy do return value_or_default("wiki.logo", "")
-
-	# Root url of the wiki.
-	#
-	# * key: `wiki.root_url`
-	# * default: `http://localhost/`
-	var root_url: String is lazy do return value_or_default("wiki.root_url", "http://localhost/")
 
 	# Markdown extension recognized by this wiki.
 	#
