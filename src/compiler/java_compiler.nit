@@ -317,6 +317,11 @@ class JavaCompilerVisitor
 		return decl_var(name, mtype)
 	end
 
+	# Calls handling
+
+	# The current `JavaStaticFrame`
+	var frame: nullable JavaStaticFrame = null is writable
+
 	# Code generation
 
 	# Add a line (will be suffixed by `\n`)
@@ -490,6 +495,28 @@ class RuntimeVariable
 		end
 		return "<{name}:{type_str}>"
 	end
+end
+
+# The static context of a visited property in a `JavaCompilerVisitor`
+class JavaStaticFrame
+	# The associated visitor
+	var visitor: JavaCompilerVisitor
+
+	# The executed property.
+	# A Method in case of a call, an attribute in case of a default initialization.
+	var mpropdef: MPropDef
+
+	# The static type of the receiver
+	var receiver: MClassType
+
+	# Arguments of the method (the first is the receiver)
+	var arguments: Array[RuntimeVariable]
+
+	# The runtime_variable associated to the return (in a function)
+	var returnvar: nullable RuntimeVariable = null is writable
+
+	# The label at the end of the property
+	var returnlabel: nullable String = null is writable
 end
 
 redef class MType
