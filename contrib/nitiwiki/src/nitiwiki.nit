@@ -107,7 +107,7 @@ if opt_init.value then
 		print "You can initialize nitiwiki manually by copying the default skeletton here."
 		exit 1
 	end
-	sys.system "cp -R {tpl}/* ."
+	sys.system "cp -R -- {tpl.escape_to_sh}/* ."
 	print "Initialized new nitiwiki."
 	print "Set wiki settings by editing {config_filename}."
 	exit 0

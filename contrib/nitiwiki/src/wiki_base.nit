@@ -50,12 +50,13 @@ class Nitiwiki
 	# Synchronize local output with the distant `WikiConfig::rsync_dir`.
 	fun sync do
 		var root = expand_path(config.root_dir, config.out_dir)
-		sys.system "rsync -vr --delete {root}/ {config.rsync_dir}"
+		var rsync_dir = config.rsync_dir
+		sys.system "rsync -vr --delete -- {root.escape_to_sh}/ {rsync_dir.escape_to_sh}"
 	end
 
 	# Pull data from git repository.
 	fun fetch do
-		sys.system "git pull {config.git_origin} {config.git_branch}"
+		sys.system "git pull {config.git_origin.escape_to_sh} {config.git_branch.escape_to_sh}"
 	end
 
 	# Analyze wiki files from `dir` to build wiki entries.
