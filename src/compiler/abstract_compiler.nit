@@ -2332,7 +2332,7 @@ redef class AMethPropdef
 			end
 		else if cname == "NativeString" then
 			if pname == "[]" then
-				v.ret(v.new_expr("(uint32_t)(unsigned char){arguments[0]}[{arguments[1]}]", ret.as(not null)))
+				v.ret(v.new_expr("(unsigned char)((int){arguments[0]}[{arguments[1]}])", ret.as(not null)))
 				return true
 			else if pname == "[]=" then
 				v.add("{arguments[0]}[{arguments[1]}]=(unsigned char){arguments[2]};")

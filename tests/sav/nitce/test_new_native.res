@@ -1,5 +1,5 @@
 NativeString
-N
+0x4e
 Nit
 NativeArray
 3

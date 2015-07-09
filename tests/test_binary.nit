@@ -19,7 +19,7 @@ var writer = new FileWriter.open(path)
 #alt1# writer.big_endian = false
 #alt3# writer.big_endian = false
 writer.write "hello"
-writer.write_byte 77
+writer.write_byte 77u8
 writer.write_float 1.23456789
 writer.write_double 1.23456789
 writer.write_int64 123456789

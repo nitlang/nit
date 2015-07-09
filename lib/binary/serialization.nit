@@ -45,18 +45,18 @@ import more_collections
 # ---
 # Special bytes, marking the kind of objects in the stream and the end on an object
 
-private fun kind_null: Int do return 0x01
-private fun kind_object_new: Int do return 0x02
-private fun kind_object_ref: Int do return 0x03
-private fun kind_int: Int do return 0x04
-private fun kind_bool: Int do return 0x05
-private fun kind_char: Int do return 0x06
-private fun kind_float: Int do return 0x07
-private fun kind_string: Int do return 0x08
-private fun kind_native_string: Int do return 0x09
-private fun kind_flat_array: Int do return 0x0A
+private fun kind_null: Byte do return 0x01u8
+private fun kind_object_new: Byte do return 0x02u8
+private fun kind_object_ref: Byte do return 0x03u8
+private fun kind_int: Byte do return 0x04u8
+private fun kind_bool: Byte do return 0x05u8
+private fun kind_char: Byte do return 0x06u8
+private fun kind_float: Byte do return 0x07u8
+private fun kind_string: Byte do return 0x08u8
+private fun kind_native_string: Byte do return 0x09u8
+private fun kind_flat_array: Byte do return 0x0Au8
 
-private fun new_object_end: Int do return 0x00
+private fun new_object_end: Byte do return 0x00u8
 
 #---
 # Engines
@@ -133,7 +133,7 @@ class BinaryDeserializer
 	# A `peeked_char` can suffix the next attribute name.
 	#
 	# Returns `null` on error.
-	private fun deserialize_next_attribute(peeked_char: nullable Char):
+	private fun deserialize_next_attribute(peeked_char: nullable Byte):
 		nullable Couple[String, nullable Object]
 	do
 		# Try the next attribute
@@ -205,7 +205,7 @@ class BinaryDeserializer
 	private fun deserialize_next_object: nullable Object
 	do
 		var kind = stream.read_byte
-		assert kind isa Int else
+		assert kind isa Byte else
 			# TODO break even on keep_going
 			return null
 		end
@@ -216,7 +216,11 @@ class BinaryDeserializer
 		if kind == kind_int then return stream.read_int64
 		if kind == kind_bool then return stream.read_bool
 		if kind == kind_float then return stream.read_double
-		if kind == kind_char then return (stream.read_byte or else 0).ascii
+		if kind == kind_char then
+			var b = stream.read_byte
+			if b == null then return 0
+			return b.to_i.ascii
+		end
 		if kind == kind_string then return stream.read_block
 		if kind == kind_native_string then return stream.read_block.to_cstring
 
@@ -274,7 +278,7 @@ class BinaryDeserializer
 				if next_byte == new_object_end then break
 
 				# Fetch an additional attribute, even if it isn't expected
-				deserialize_next_attribute((next_byte or else 0).ascii)
+				deserialize_next_attribute(next_byte)
 			end
 
 			# Close object
@@ -378,7 +382,8 @@ redef class Char
 	redef fun serialize_to_binary(v)
 	do
 		v.stream.write_byte kind_char
-		v.stream.write_byte self.ascii
+		# Fix when UTF-8
+		v.stream.write_byte self.ascii.to_b
 	end
 end
 

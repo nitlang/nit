@@ -47,7 +47,7 @@ abstract class Reader
 	fun read_char: nullable Char is abstract
 
 	# Reads a byte. Returns `null` on EOF or timeout
-	fun read_byte: nullable Int is abstract
+	fun read_byte: nullable Byte is abstract
 
 	# Reads a String of at most `i` length
 	fun read(i: Int): String do return read_bytes(i).to_s
@@ -360,7 +360,7 @@ abstract class Writer
 	fun write(s: Text) is abstract
 
 	# Write a single byte
-	fun write_byte(value: Int) is abstract
+	fun write_byte(value: Byte) is abstract
 
 	# Can the stream be used to write
 	fun is_writable: Bool is abstract
@@ -405,7 +405,8 @@ abstract class BufferedReader
 			last_error = new IOError("Stream has reached eof")
 			return null
 		end
-		var c = _buffer[_buffer_pos]
+		# TODO: Fix when supporting UTF-8
+		var c = _buffer[_buffer_pos].to_i.ascii
 		_buffer_pos += 1
 		return c
 	end
@@ -417,7 +418,7 @@ abstract class BufferedReader
 			last_error = new IOError("Stream has reached eof")
 			return null
 		end
-		var c = _buffer[_buffer_pos].ascii
+		var c = _buffer[_buffer_pos]
 		_buffer_pos += 1
 		return c
 	end
@@ -496,7 +497,7 @@ abstract class BufferedReader
 			var j = _buffer_pos
 			var k = _buffer_length
 			while j < k do
-				s.add(_buffer[j].ascii)
+				s.add(_buffer[j])
 				j += 1
 			end
 			_buffer_pos = j
@@ -510,13 +511,13 @@ abstract class BufferedReader
 		loop
 			# First phase: look for a '\n'
 			var i = _buffer_pos
-			while i < _buffer_length and _buffer[i] != '\n' do
+			while i < _buffer_length and _buffer[i] != 0xAu8 do
 				i += 1
 			end
 
 			var eol
 			if i < _buffer_length then
-				assert _buffer[i] == '\n'
+				assert _buffer[i] == 0xAu8
 				i += 1
 				eol = true
 			else
@@ -531,7 +532,7 @@ abstract class BufferedReader
 				# Copy from the buffer to the string
 				var j = _buffer_pos
 				while j < i do
-					s.add(_buffer[j])
+					s.bytes.add(_buffer[j])
 					j += 1
 				end
 				_buffer_pos = i
@@ -628,13 +629,13 @@ class StringReader
 	# The string to read from.
 	var source: String
 
-	# The current position in the string.
+	# The current position in the string (bytewise).
 	private var cursor: Int = 0
 
 	redef fun read_char do
 		if cursor < source.length then
+			# Fix when supporting UTF-8
 			var c = source[cursor]
-
 			cursor += 1
 			return c
 		else
@@ -644,10 +645,9 @@ class StringReader
 
 	redef fun read_byte do
 		if cursor < source.length then
-			var c = source[cursor]
-
+			var c = source.bytes[cursor]
 			cursor += 1
-			return c.ascii
+			return c
 		else
 			return null
 		end

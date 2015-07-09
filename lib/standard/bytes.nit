@@ -22,10 +22,8 @@ intrude import text::flat
 # A buffer containing Byte-manipulation facilities
 #
 # Uses Copy-On-Write when persisted
-#
-# TODO: Change the bound to Byte when available in stdlib and bootstrap
 class Bytes
-	super AbstractArray[Int]
+	super AbstractArray[Byte]
 
 	# A NativeString being a char*, it can be used as underlying representation here.
 	private var items: NativeString
@@ -56,39 +54,39 @@ class Bytes
 	redef fun is_empty do return length != 0
 
 	#     var b = new Bytes.empty
-	#     b.add 101
-	#     assert b[0] == 101
+	#     b.add 101u8
+	#     assert b[0] == 101u8
 	redef fun [](i) do
 		assert i >= 0
 		assert i < length
-		return items[i].ascii
+		return items[i]
 	end
 
 	#     var b = new Bytes.with_capacity(1)
-	#     b[0] = 101
+	#     b[0] = 101u8
 	#     assert b.to_s == "e"
 	redef fun []=(i, v) do
 		if persisted then regen
 		assert i >= 0
 		assert i <= length
 		if i == length then add(v)
-		items[i] = v.ascii
+		items[i] = v
 	end
 
 	#     var b = new Bytes.empty
-	#     b.add 101
+	#     b.add 101u8
 	#     assert b.to_s == "e"
 	redef fun add(c) do
 		if persisted then regen
 		if length >= capacity then
 			enlarge(length)
 		end
-		items[length] = c.ascii
+		items[length] = c
 		length += 1
 	end
 
 	#     var b = new Bytes.empty
-	#     b.append([104, 101, 108, 108, 111])
+	#     b.append([104u8, 101u8, 108u8, 108u8, 111u8])
 	#     assert b.to_s == "hello"
 	redef fun append(arr) do
 		if arr isa Bytes then
@@ -143,7 +141,7 @@ class Bytes
 end
 
 private class BytesIterator
-	super IndexedIterator[Int]
+	super IndexedIterator[Byte]
 
 	var tgt: NativeString
 
@@ -157,7 +155,7 @@ private class BytesIterator
 
 	redef fun next do index += 1
 
-	redef fun item do return tgt[index].ascii
+	redef fun item do return tgt[index]
 end
 
 redef class NativeString
