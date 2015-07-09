@@ -51,6 +51,10 @@ class Nitiwiki
 	fun sync do
 		var root = expand_path(config.root_dir, config.out_dir)
 		var rsync_dir = config.rsync_dir
+		if rsync_dir == "" then
+			message("Error: configure `wiki.rsync_dir` to use rsync.", 0)
+			return
+		end
 		sys.system "rsync -vr --delete -- {root.escape_to_sh}/ {rsync_dir.escape_to_sh}"
 	end
 
