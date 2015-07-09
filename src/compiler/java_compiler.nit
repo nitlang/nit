@@ -1095,6 +1095,56 @@ redef class AMethPropdef
 	redef fun compile_to_java(v, mpropdef) do
 		# TODO Call the implicit super-init
 
+		var recv = mpropdef.mclassdef.bound_mtype
+		var arguments = new Array[RuntimeVariable]
+		var frame = new JavaStaticFrame(v, mpropdef, recv, arguments)
+		v.frame = frame
+
+		var selfvar = v.decl_var("self", recv)
+		arguments.add(selfvar)
+		var boxed = v.new_expr("args[0];", v.compiler.mainmodule.object_type)
+		v.add "{selfvar} = {v.unbox(boxed, recv)};"
+
+		var msignature = mpropdef.msignature
+		var ret = null
+		if msignature != null then
+			ret = msignature.return_mtype
+			if ret != null then frame.returnvar = v.new_var(ret)
+		end
+		frame.returnlabel = v.get_name("RET_LABEL")
+
+		if not mpropdef.is_intern and msignature != null then
+			var i = 0
+			for mparam in msignature.mparameters do
+				var variable = n_signature.as(not null).n_params[i].variable
+				if variable == null then continue
+				var argvar = v.variable(variable)
+				boxed = v.new_expr("args[{i + 1}];", v.compiler.mainmodule.object_type)
+				v.add "{argvar} = {v.unbox(boxed, mparam.mtype)};"
+				arguments.add(argvar)
+				i += 1
+			end
+		end
+
+		v.add("{frame.returnlabel.as(not null)}: \{")
+		compile_inside_to_java(v, mpropdef)
+		v.add("\}")
+
+		if ret != null then
+			if ret.is_java_primitive then
+				boxed = v.box(frame.returnvar.as(not null), v.compiler.mainmodule.object_type)
+				v.add("return {boxed};")
+			else
+				v.add("return {frame.returnvar.as(not null)};")
+			end
+		else
+			v.add("return null;")
+		end
+		v.frame = null
+	end
+
+	# Compile the inside of the method body
+	private fun compile_inside_to_java(v: JavaCompilerVisitor, mpropdef: MMethodDef) do
 		# Compile intern methods
 		if mpropdef.is_intern then
 			v.info("NOT YET IMPLEMENTED {class_name}::compile_intern")
