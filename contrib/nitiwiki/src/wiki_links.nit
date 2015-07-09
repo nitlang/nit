@@ -90,10 +90,6 @@ end
 
 redef class WikiEntry
 
-	# Absolute url to `self` once generated.
-	# If you use this, the generated files will hard-code `root_url`
-	fun url: String do return wiki.config.root_url / href
-
 	# Relative path to `self` from the target root_url
 	fun href: String do return breadcrumbs.join("/")
 

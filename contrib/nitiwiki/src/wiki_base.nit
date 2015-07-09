@@ -79,7 +79,6 @@ class Nitiwiki
 		print "nitiWiki"
 		print "name: {config.wiki_name}"
 		print "config: {config.ini_file}"
-		print "url: {config.root_url}"
 		print ""
 		if root_section.is_dirty then
 			print "There is modified files:"
@@ -639,12 +638,6 @@ class WikiConfig
 	# * key: `wiki.logo`
 	# * default: ``
 	var wiki_logo: String is lazy do return value_or_default("wiki.logo", "")
-
-	# Root url of the wiki.
-	#
-	# * key: `wiki.root_url`
-	# * default: `http://localhost/`
-	var root_url: String is lazy do return value_or_default("wiki.root_url", "http://localhost/")
 
 	# Markdown extension recognized by this wiki.
 	#
