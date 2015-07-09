@@ -322,6 +322,13 @@ class JavaCompilerVisitor
 	# The current `JavaStaticFrame`
 	var frame: nullable JavaStaticFrame = null is writable
 
+	# Return a new local RuntimeVariable initialized from `args[0]`
+	fun new_recv(mtype: MType): RuntimeVariable do
+		var res = new_var(mtype)
+		add("{res} = args[0];")
+		return res
+	end
+
 	# Code generation
 
 	# Add a line (will be suffixed by `\n`)
@@ -746,6 +753,14 @@ redef class ABlockExpr
 		end
 		return v.expr(last, null)
 	end
+end
+
+redef class ASelfExpr
+	redef fun expr(v) do return v.frame.as(not null).arguments.first
+end
+
+redef class AImplicitSelfExpr
+	redef fun expr(v) do return v.frame.as(not null).arguments.first
 end
 
 redef class AAbortExpr
