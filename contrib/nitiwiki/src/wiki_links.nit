@@ -250,7 +250,7 @@ private class NitiwikiDecorator
 		var name = token.name
 		if target != null then
 			if name == null then name = target.title
-			link = target.url
+			link = target.href_from(context)
 		else
 			wiki.message("Warning: unknown wikilink `{link}` (in {context.src_path.as(not null)})", 0)
 			v.add "class=\"broken\" "
