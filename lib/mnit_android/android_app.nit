@@ -61,9 +61,7 @@ redef class App
 		var handled = input(ie)
 
 		if not handled then
-			for pe in ie.pointers do
-				input(pe)
-			end
+			input ie.acting_pointer
 		end
 
 		return handled
