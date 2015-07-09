@@ -233,27 +233,29 @@ private class NitiwikiDecorator
 		var anchor: nullable String = null
 		var link = token.link
 		if link == null then return
-		if link.has("#") then
-			var parts = link.split_with("#")
-			link = parts.first
-			anchor = parts.subarray(1, parts.length - 1).join("#")
-		end
-		if link.has("/") then
-			target = wiki.lookup_entry_by_path(context, link.to_s)
-		else
-			target = wiki.lookup_entry_by_name(context, link.to_s)
-			if target == null then
-				target = wiki.lookup_entry_by_title(context, link.to_s)
-			end
-		end
-		v.add "<a "
 		var name = token.name
-		if target != null then
-			if name == null then name = target.title
-			link = target.href_from(context)
-		else
-			wiki.message("Warning: unknown wikilink `{link}` (in {context.src_path.as(not null)})", 0)
-			v.add "class=\"broken\" "
+		v.add "<a "
+		if not link.has_prefix("http://") and not link.has_prefix("https://") then
+			if link.has("#") then
+				var parts = link.split_with("#")
+				link = parts.first
+				anchor = parts.subarray(1, parts.length - 1).join("#")
+			end
+			if link.has("/") then
+				target = wiki.lookup_entry_by_path(context, link.to_s)
+			else
+				target = wiki.lookup_entry_by_name(context, link.to_s)
+				if target == null then
+					target = wiki.lookup_entry_by_title(context, link.to_s)
+				end
+			end
+			if target != null then
+				if name == null then name = target.title
+				link = target.href_from(context)
+			else
+				wiki.message("Warning: unknown wikilink `{link}` (in {context.src_path.as(not null)})", 0)
+				v.add "class=\"broken\" "
+			end
 		end
 		v.add "href=\""
 		append_value(v, link)
