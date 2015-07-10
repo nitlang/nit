@@ -640,6 +640,11 @@ class JavaCompilerVisitor
 		return res
 	end
 
+	# Alias for `self.expr(nexpr, self.bool_type)`
+	fun expr_bool(nexpr: AExpr): RuntimeVariable do
+		return expr(nexpr, compiler.mainmodule.bool_type)
+	end
+
 	# Correctly assign a left and a right value
 	# Boxing and unboxing is performed if required
 	fun assign(left, right: RuntimeVariable) do
@@ -1916,6 +1921,28 @@ redef class AReturnExpr
 		else
 			v.ret(v.null_instance)
 		end
+	end
+end
+
+redef class AIfExpr
+	redef fun stmt(v) do
+		var cond = v.expr_bool(self.n_expr)
+		v.add("if ({cond})\{")
+		v.stmt(self.n_then)
+		v.add("\} else \{")
+		v.stmt(self.n_else)
+		v.add("\}")
+	end
+
+	redef fun expr(v) do
+		var res = v.new_var(self.mtype.as(not null))
+		var cond = v.expr_bool(self.n_expr)
+		v.add("if ({cond})\{")
+		v.assign(res, v.expr(self.n_then.as(not null), null))
+		v.add("\} else \{")
+		v.assign(res, v.expr(self.n_else.as(not null), null))
+		v.add("\}")
+		return res
 	end
 end
 
