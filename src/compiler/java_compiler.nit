@@ -25,6 +25,7 @@
 module java_compiler
 
 import rapid_type_analysis
+import transform
 import frontend
 
 redef class ToolContext
@@ -915,6 +916,24 @@ class JavaCompilerVisitor
 
 	# Attributes
 
+	# Generate a polymorphic attribute is_set test
+	fun isset_attribute(a: MAttribute, recv: RuntimeVariable): RuntimeVariable do
+		# TODO self.check_recv_notnull(recv)
+		var res = new_var(compiler.mainmodule.bool_type)
+
+		# What is the declared type of the attribute?
+		var mtype = a.intro.static_mtype.as(not null)
+		var intromclassdef = a.intro.mclassdef
+		mtype = mtype.resolve_for(intromclassdef.bound_mtype, intromclassdef.bound_mtype, intromclassdef.mmodule, true)
+
+		if mtype isa MNullableType then
+			add("{res} = true; /* easy isset: {a} on {recv.inspect} */")
+			return res
+		end
+		add("{res} = {recv}.attrs.get(\"{a.jname}\") != null; /* {a} on {recv.inspect} */")
+		return res
+	end
+
 	# Generate a polymorphic attribute read
 	fun read_attribute(a: MAttribute, recv: RuntimeVariable): RuntimeVariable do
 		# TODO check_recv_notnull(recv)
@@ -924,6 +943,9 @@ class JavaCompilerVisitor
 		var intromclassdef = a.intro.mclassdef
 		ret = ret.resolve_for(intromclassdef.bound_mtype, intromclassdef.bound_mtype, intromclassdef.mmodule, true)
 
+		# Check for Uninitialized attribute
+		if not ret isa MNullableType then check_attribute(a, recv)
+
 		return new_expr("{recv}.attrs.get(\"{a.jname}\")", ret)
 	end
 
@@ -931,6 +953,13 @@ class JavaCompilerVisitor
 	fun write_attribute(a: MAttribute, recv: RuntimeVariable, value: RuntimeVariable) do
 		# TODO check_recv_notnull(recv)
 		add "{recv}.attrs.put(\"{a.jname}\", {autobox(value, compiler.mainmodule.object_type)});"
+	end
+
+	# Check uninitialized attribute
+	fun check_attribute(a: MAttribute, recv: RuntimeVariable) do
+		add "if({recv}.attrs.get(\"{a.jname}\") == null) \{"
+		add_abort "Uninitialized attribute {a.name}"
+		add "\}"
 	end
 
 	# Utils
@@ -1675,9 +1704,8 @@ redef class AAttrPropdef
 			value = v.new_var(mtype)
 			frame.returnvar = value
 			frame.returnlabel = v.get_name("RET_LABEL")
-			v.add("\{")
+			v.add("{frame.returnlabel.as(not null)}: \{")
 			v.stmt(nblock)
-			v.add("{frame.returnlabel.as(not null)}:(void)0;")
 			v.add("\}")
 		else
 			abort
@@ -1758,6 +1786,44 @@ end
 
 redef class AImplicitSelfExpr
 	redef fun expr(v) do return v.frame.as(not null).arguments.first
+end
+
+redef class AAttrExpr
+	redef fun expr(v) do
+		var recv = v.expr(self.n_expr, null)
+		var mproperty = self.mproperty.as(not null)
+		return v.read_attribute(mproperty, recv)
+	end
+end
+
+redef class AAttrAssignExpr
+	redef fun expr(v) do
+		var recv = v.expr(self.n_expr, null)
+		var i = v.expr(self.n_value, null)
+		var mproperty = self.mproperty.as(not null)
+		v.write_attribute(mproperty, recv, i)
+		return i
+	end
+end
+
+redef class AAttrReassignExpr
+	redef fun stmt(v) do
+		var recv = v.expr(self.n_expr, null)
+		var value = v.expr(self.n_value, null)
+		var mproperty = self.mproperty.as(not null)
+		var attr = v.read_attribute(mproperty, recv)
+		var res = v.compile_callsite(self.reassign_callsite.as(not null), [attr, value])
+		assert res != null
+		v.write_attribute(mproperty, recv, res)
+	end
+end
+
+redef class AIssetAttrExpr
+	redef fun expr(v) do
+		var recv = v.expr(self.n_expr, null)
+		var mproperty = self.mproperty.as(not null)
+		return v.isset_attribute(mproperty, recv)
+	end
 end
 
 redef class AReturnExpr
