@@ -256,6 +256,24 @@ class Counter[E]
 	end
 end
 
+redef class Collection[E]
+	# Create and fill up a counter with the elements of `self.
+	#
+	# ~~~
+	# var cpt = "abaa".chars.to_counter
+	# assert cpt['a'] == 3
+	# assert cpt['b'] == 1
+	# assert cpt.length == 2
+	# assert cpt.sum == 4
+	# ~~~
+	fun to_counter: Counter[E]
+	do
+		var res = new Counter[E]
+		res.inc_all(self)
+		return res
+	end
+end
+
 private class CounterComparator[E]
 	super Comparator
 	redef type COMPARED: E
