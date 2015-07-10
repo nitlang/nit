@@ -1974,6 +1974,10 @@ redef class ANullExpr
 	redef fun expr(v) do return v.null_instance
 end
 
+redef class AParExpr
+	redef fun expr(v) do return v.expr(self.n_expr, null)
+end
+
 redef class AAbortExpr
 	redef fun stmt(v) do v.add_abort("Aborted")
 end
