@@ -63,17 +63,13 @@ class FlatString
 
 	redef fun reversed
 	do
-		var native = new NativeString(self.length + 1)
-		var length = self.length
-		var items = self.items
-		var pos = 0
-		var ipos = length-1
-		while pos < length do
-			native[pos] = items[ipos]
-			pos += 1
-			ipos -= 1
+		var b = new FlatBuffer.with_capacity(bytelen + 1)
+		for i in [length - 1 .. 0].step(-1) do
+			b.add self[i]
 		end
-		return native.to_s_with_length(self.length)
+		var s = b.to_s.as(FlatString)
+		s.length = self.length
+		return s
 	end
 
 	redef fun fast_cstring do return items.fast_cstring(index_from)
@@ -234,55 +230,39 @@ class FlatString
 		return my_length < its_length
 	end
 
-	redef fun +(s)
-	do
-		var my_length = self.length
-		var its_length = s.length
-
-		var total_length = my_length + its_length
-
-		var target_string = new NativeString(my_length + its_length + 1)
-
-		self.items.copy_to(target_string, my_length, index_from, 0)
-		if s isa FlatString then
-			s.items.copy_to(target_string, its_length, s.index_from, my_length)
-		else if s isa FlatBuffer then
-			s.items.copy_to(target_string, its_length, 0, my_length)
+	redef fun +(o) do
+		var s = o.to_s
+		var slen = s.bytelen
+		var mlen = bytelen
+		var nlen = mlen + slen
+		var mits = items
+		var mifrom = first_byte
+		if s isa FlatText then
+			var sits = s.items
+			var sifrom = s.as(FlatString).first_byte
+			var ns = new NativeString(nlen + 1)
+			mits.copy_to(ns, mlen, mifrom, 0)
+			sits.copy_to(ns, slen, sifrom, mlen)
+			return ns.to_s_with_length(nlen)
 		else
-			var curr_pos = my_length
-			for i in [0 .. s.bytelen[ do
-				target_string[curr_pos] = s.bytes[i]
-				curr_pos += 1
-			end
+			abort
 		end
-
-		target_string[total_length] = 0u8
-
-		return target_string.to_s_with_length(total_length)
 	end
 
-	redef fun *(i)
-	do
-		assert i >= 0
-
-		var my_length = self.length
-
-		var final_length = my_length * i
-
-		var my_items = self.items
-
-		var target_string = new NativeString(final_length + 1)
-
-		target_string[final_length] = 0u8
-
-		var current_last = 0
-
-		for iteration in [1 .. i] do
-			my_items.copy_to(target_string, my_length, 0, current_last)
-			current_last += my_length
+	redef fun *(i) do
+		var mybtlen = bytelen
+		var new_bytelen = mybtlen * i
+		var mylen = length
+		var newlen = mylen * i
+		var ns = new NativeString(new_bytelen + 1)
+		ns[new_bytelen] = 0u8
+		var offset = 0
+		while i > 0 do
+			items.copy_to(ns, bytelen, first_byte, offset)
+			offset += mybtlen
+			i -= 1
 		end
-
-		return target_string.to_s_with_length(final_length)
+		return new FlatString.full(ns, new_bytelen, 0, new_bytelen - 1, newlen)
 	end
 
 	redef fun hash
