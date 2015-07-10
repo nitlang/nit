@@ -591,6 +591,11 @@ class JavaCompilerVisitor
 		return res
 	end
 
+	# Generate a super call from a method definition
+	fun supercall(m: MMethodDef, recvtype: MClassType, args: Array[RuntimeVariable]): nullable RuntimeVariable do
+		return table_send(m, args)
+	end
+
 	# Generate a monomorphic send for the method `m`, the type `t` and the arguments `args`
 	fun monomorphic_send(m: MMethod, t: MType, args: Array[RuntimeVariable]): nullable RuntimeVariable do
 		assert t isa MClassType
@@ -1280,9 +1285,27 @@ end
 redef class AClassdef
 	private fun compile_to_java(v: JavaCompilerVisitor, mpropdef: MMethodDef) do
 		if mpropdef == self.mfree_init then
+			var recv = mpropdef.mclassdef.bound_mtype
+			var arguments = new Array[RuntimeVariable]
+			var frame = new JavaStaticFrame(v, mpropdef, recv, arguments)
+			v.frame = frame
+
+			var selfvar = v.decl_var("self", recv)
+			arguments.add(selfvar)
+			var boxed = v.new_expr("args[0];", v.compiler.mainmodule.object_type)
+			v.add "{selfvar} = {v.unbox(boxed, recv)};"
+
+			var msignature = mpropdef.msignature
+			var ret = null
+			if msignature != null then
+				ret = msignature.return_mtype
+				if ret != null then frame.returnvar = v.new_var(ret)
+			end
+			frame.returnlabel = v.get_name("RET_LABEL")
+
 			assert mpropdef.mproperty.is_root_init
 			if not mpropdef.is_intro then
-				# TODO v.supercall(mpropdef, arguments.first.mtype.as(MClassType), arguments)
+				v.supercall(mpropdef, arguments.first.mtype.as(MClassType), arguments)
 			end
 		else
 			abort
@@ -1302,8 +1325,6 @@ end
 
 redef class AMethPropdef
 	redef fun compile_to_java(v, mpropdef) do
-		# TODO Call the implicit super-init
-
 		var recv = mpropdef.mclassdef.bound_mtype
 		var arguments = new Array[RuntimeVariable]
 		var frame = new JavaStaticFrame(v, mpropdef, recv, arguments)
@@ -1336,6 +1357,25 @@ redef class AMethPropdef
 		end
 
 		v.add("{frame.returnlabel.as(not null)}: \{")
+
+		# Call the implicit super-init
+		var auto_super_inits = self.auto_super_inits
+		if auto_super_inits != null then
+			var args = [arguments.first]
+			for auto_super_init in auto_super_inits do
+				assert auto_super_init.mproperty != mpropdef.mproperty
+				args.clear
+				for i in [0..auto_super_init.msignature.arity+1[ do
+					args.add(arguments[i])
+				end
+				assert auto_super_init.mproperty != mpropdef.mproperty
+				v.compile_callsite(auto_super_init, args)
+			end
+		end
+		if auto_super_call then
+			v.supercall(mpropdef, arguments.first.mtype.as(MClassType), arguments)
+		end
+
 		compile_inside_to_java(v, mpropdef)
 		v.add("\}")
 
@@ -1777,6 +1817,46 @@ redef class ANewExpr
 			return res2
 		end
 		return recv
+	end
+end
+
+redef class ASuperExpr
+	redef fun expr(v)
+	do
+		var frame = v.frame
+		assert frame != null
+		var recv = frame.arguments.first
+
+		var callsite = self.callsite
+		if callsite != null then
+			var args
+
+			if self.n_args.n_exprs.is_empty then
+				# Add automatic arguments for the super init call
+				args = [recv]
+				for i in [0..callsite.msignature.arity[ do
+					args.add(frame.arguments[i+1])
+				end
+			else
+				args = v.varargize(callsite.mpropdef, callsite.signaturemap, recv, self.n_args.n_exprs)
+			end
+
+			# Super init call
+			var res = v.compile_callsite(callsite, args)
+			return res
+		end
+
+		var mpropdef = self.mpropdef.as(not null)
+
+		var args
+		if self.n_args.n_exprs.is_empty then
+			args = frame.arguments
+		else
+			args = v.varargize(mpropdef, signaturemap, recv, self.n_args.n_exprs)
+		end
+
+		# Standard call-next-method
+		return v.supercall(mpropdef, recv.mtype.as(MClassType), args)
 	end
 end
 
