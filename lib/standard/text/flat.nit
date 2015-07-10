@@ -869,6 +869,38 @@ redef class NativeString
 		str.real_items = new_self
 		return str
 	end
+
+	# Sets the next bytes at position `pos` to the value of `c`, encoded in UTF-8
+	#
+	# Very unsafe, make sure to have room for this char prior to calling this function.
+	private fun set_char_at(pos: Int, c: Char) do
+		var ln = c.u8char_len
+		native_set_char(pos, c, ln)
+	end
+
+	private fun native_set_char(pos: Int, c: Char, ln: Int) `{
+		char* dst = self + pos;
+		switch(ln){
+			case 1:
+				dst[0] = c;
+				break;
+			case 2:
+				dst[0] = 0xC0 | ((c & 0x7C0) >> 6);
+				dst[1] = 0x80 | (c & 0x3F);
+				break;
+			case 3:
+				dst[0] = 0xE0 | ((c & 0xF000) >> 12);
+				dst[1] = 0x80 | ((c & 0xFC0) >> 6);
+				dst[2] = 0x80 | (c & 0x3F);
+				break;
+			case 4:
+				dst[0] = 0xF0 | ((c & 0x1C0000) >> 18);
+				dst[1] = 0x80 | ((c & 0x3F000) >> 12);
+				dst[2] = 0x80 | ((c & 0xFC0) >> 6);
+				dst[3] = 0x80 | (c & 0x3F);
+				break;
+		}
+	`}
 end
 
 redef class Int

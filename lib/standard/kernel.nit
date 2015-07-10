@@ -719,10 +719,23 @@ universal Char
 	redef type OTHER: Char
 
 	redef fun object_id is intern
+	redef fun output `{
+		if(self < 128){
+			printf("%c", self);
+		}else if(self < 2048){
+			printf("%c%c", 0xC0 | ((0x7C0 & self) >> 6), 0x80 | (0x3F & self));
+		}else if(self < 65536){
+			printf("%c%c%c", 0xE0 | ((0xF000 & self) >> 12), 0x80 | ((0xFC0 & self) >> 6) ,0x80 | (0x3F & self));
+		}else if(self < 2097152){
+			printf("%c%c%c%c", 0xF0 | ((0x1C0000 & self) >> 18), 0x80 | ((0x3F000 & self) >> 12), 0x80 | ((0xFC0 & self) >> 6), 0x80 | (0x3F & self));
+		}else{
+			// Bad char
+			printf("%c", self);
+		}
+	`}
 	redef fun hash do return ascii
 	redef fun ==(o) is intern
 	redef fun !=(o) is intern
-	redef fun output is intern
 
 	redef fun <=(i) is intern
 	redef fun <(i) is intern

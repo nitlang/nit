@@ -1524,13 +1524,49 @@ redef class Float
 end
 
 redef class Char
-	#     assert 'x'.to_s    == "x"
-	redef fun to_s
-	do
-		var s = new Buffer.with_cap(1)
-		s.chars[0] = self
-		return s.to_s
+
+	# Length of `self` in a UTF-8 String
+	private fun u8char_len: Int do
+		var c = self.ascii
+		if c < 0x80 then return 1
+		if c <= 0x7FF then return 2
+		if c <= 0xFFFF then return 3
+		if c <= 0x10FFFF then return 4
+		# Bad character format
+		return 1
 	end
+
+	#     assert 'x'.to_s    == "x"
+	redef fun to_s do
+		var ln = u8char_len
+		var ns = new NativeString(ln + 1)
+		u8char_tos(ns, ln)
+		return ns.to_s_with_length(ln)
+	end
+
+	private fun u8char_tos(r: NativeString, len: Int) `{
+		r[len] = '\0';
+		switch(len){
+			case 1:
+				r[0] = self;
+				break;
+			case 2:
+				r[0] = 0xC0 | ((self & 0x7C0) >> 6);
+				r[1] = 0x80 | (self & 0x3F);
+				break;
+			case 3:
+				r[0] = 0xE0 | ((self & 0xF000) >> 12);
+				r[1] = 0x80 | ((self & 0xFC0) >> 6);
+				r[2] = 0x80 | (self & 0x3F);
+				break;
+			case 4:
+				r[0] = 0xF0 | ((self & 0x1C0000) >> 18);
+				r[1] = 0x80 | ((self & 0x3F000) >> 12);
+				r[2] = 0x80 | ((self & 0xFC0) >> 6);
+				r[3] = 0x80 | (self & 0x3F);
+				break;
+		}
+	`}
 
 	# Returns true if the char is a numerical digit
 	#
