@@ -879,6 +879,26 @@ class JavaCompilerVisitor
 		return res
 	end
 
+	# Attributes
+
+	# Generate a polymorphic attribute read
+	fun read_attribute(a: MAttribute, recv: RuntimeVariable): RuntimeVariable do
+		# TODO check_recv_notnull(recv)
+		# TODO compile_check(v)
+		# What is the declared type of the attribute?
+		var ret = a.intro.static_mtype.as(not null)
+		var intromclassdef = a.intro.mclassdef
+		ret = ret.resolve_for(intromclassdef.bound_mtype, intromclassdef.bound_mtype, intromclassdef.mmodule, true)
+
+		return new_expr("{recv}.attrs.get(\"{a.jname}\")", ret)
+	end
+
+	# Generate a polymorphic attribute write
+	fun write_attribute(a: MAttribute, recv: RuntimeVariable, value: RuntimeVariable) do
+		# TODO check_recv_notnull(recv)
+		add "{recv}.attrs.put(\"{a.jname}\", {autobox(value, compiler.mainmodule.object_type)});"
+	end
+
 	# Utils
 
 	# Display a info message
@@ -1556,6 +1576,35 @@ redef class AMethPropdef
 			return true
 		end
 		return false
+	end
+end
+
+redef class AAttrPropdef
+	redef fun compile_to_java(v, mpropdef, arguments) do
+		v.current_node = self
+		if mpropdef == mreadpropdef then
+			compile_getter(v, mpropdef, arguments)
+		else if mpropdef == mwritepropdef then
+			compile_setter(v, mpropdef, arguments)
+		else
+			abort
+		end
+		v.current_node = null
+	end
+
+	# Compile the setter method
+	private fun compile_setter(v: JavaCompilerVisitor, mpropdef: MPropDef, arguments: Array[RuntimeVariable]) do
+		var mtype = v.compiler.mainmodule.object_type
+		var recv = arguments.first
+		var val = v.new_expr("args[1]", mtype)
+		v.write_attribute(self.mpropdef.as(not null).mproperty, recv, val)
+		v.ret v.null_instance
+	end
+
+	# Compile the getter method
+	private fun compile_getter(v: JavaCompilerVisitor, mpropdef: MPropDef, arguments: Array[RuntimeVariable]) do
+		var recv = arguments.first
+		v.ret v.read_attribute(self.mpropdef.as(not null).mproperty, recv)
 	end
 end
 
