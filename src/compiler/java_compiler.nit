@@ -1323,43 +1323,62 @@ redef class MMethodDef
 		var modelbuilder = v.compiler.modelbuilder
 		var node = modelbuilder.mpropdef2node(self)
 
+		var recv = mclassdef.bound_mtype
+		var arguments = new Array[RuntimeVariable]
+		var frame = new JavaStaticFrame(v, self, recv, arguments)
+		v.frame = frame
+
+		var selfvar = v.decl_var("self", recv)
+		arguments.add(selfvar)
+		var boxed = v.new_expr("args[0]", v.compiler.mainmodule.object_type)
+		v.add "{selfvar} = {v.autobox(boxed, recv)};"
+
+		var msignature = self.msignature
+		var ret = null
+		if msignature != null then
+			ret = msignature.return_mtype
+			if ret != null then
+				var retvar = v.decl_var("ret", ret)
+				if ret.name == "Int" then v.add "{retvar} = 0;"
+				if ret.name == "Float" then v.add "{retvar} = 0.0;"
+				if ret.name == "Bool" then v.add "{retvar} = false;"
+				if ret.name == "Char" then v.add "{retvar} = 0;"
+				if ret.name == "Byte" then v.add "{retvar} = 0;"
+				frame.returnvar = retvar
+			end
+		end
+		frame.returnlabel = v.get_name("RET_LABEL")
+
+		v.current_node = node
 		if is_abstract then
 			v.add_abort("Abstract method `{mproperty.name}` called on `\"  + {selfvar}.rtclass.class_name +\"`")
 			v.add("return null;")
 			return
 		end
+		v.current_node = null
+
+		v.add("{frame.returnlabel.as(not null)}: \{")
 
 		if node isa APropdef then
-			node.compile_to_java(v, self)
+			node.compile_to_java(v, self, arguments)
 		else if node isa AClassdef then
-			node.compile_to_java(v, self)
+			node.compile_to_java(v, self, arguments)
 		else
 			abort
+		end
+
+		v.add("\}")
+		if ret != null then
+			v.add("return {v.autobox(frame.returnvar.as(not null), v.compiler.mainmodule.object_type)};")
+		else
+			v.add("return null;")
 		end
 	end
 end
 
 redef class AClassdef
-	private fun compile_to_java(v: JavaCompilerVisitor, mpropdef: MMethodDef) do
+	private fun compile_to_java(v: JavaCompilerVisitor, mpropdef: MMethodDef, arguments: Array[RuntimeVariable]) do
 		if mpropdef == self.mfree_init then
-			var recv = mpropdef.mclassdef.bound_mtype
-			var arguments = new Array[RuntimeVariable]
-			var frame = new JavaStaticFrame(v, mpropdef, recv, arguments)
-			v.frame = frame
-
-			var selfvar = v.decl_var("self", recv)
-			arguments.add(selfvar)
-			var boxed = v.new_expr("args[0];", v.compiler.mainmodule.object_type)
-			v.add "{selfvar} = {v.unbox(boxed, recv)};"
-
-			var msignature = mpropdef.msignature
-			var ret = null
-			if msignature != null then
-				ret = msignature.return_mtype
-				if ret != null then frame.returnvar = v.new_var(ret)
-			end
-			frame.returnlabel = v.get_name("RET_LABEL")
-
 			assert mpropdef.mproperty.is_root_init
 			if not mpropdef.is_intro then
 				v.supercall(mpropdef, arguments.first.mtype.as(MClassType), arguments)
@@ -1367,53 +1386,30 @@ redef class AClassdef
 		else
 			abort
 		end
-		v.add("return null;")
 	end
 end
 
 redef class APropdef
 
 	# Compile that property definition to java code
-	fun compile_to_java(v: JavaCompilerVisitor, mpropdef: MMethodDef) do
+	fun compile_to_java(v: JavaCompilerVisitor, mpropdef: MMethodDef, arguments: Array[RuntimeVariable]) do
 		v.info("NOT YET IMPLEMENTED {class_name}::compile_to_java")
-		v.add("return null;")
 	end
 end
 
 redef class AMethPropdef
-	redef fun compile_to_java(v, mpropdef) do
-		var recv = mpropdef.mclassdef.bound_mtype
-		var arguments = new Array[RuntimeVariable]
-		var frame = new JavaStaticFrame(v, mpropdef, recv, arguments)
-		v.frame = frame
-
-		var selfvar = v.decl_var("self", recv)
-		arguments.add(selfvar)
-		var boxed = v.new_expr("args[0];", v.compiler.mainmodule.object_type)
-		v.add "{selfvar} = {v.unbox(boxed, recv)};"
-
-		var msignature = mpropdef.msignature
-		var ret = null
-		if msignature != null then
-			ret = msignature.return_mtype
-			if ret != null then frame.returnvar = v.new_var(ret)
-		end
-		frame.returnlabel = v.get_name("RET_LABEL")
-
-		if not mpropdef.is_intern and msignature != null then
+	redef fun compile_to_java(v, mpropdef, arguments) do
+		if mpropdef.msignature != null then
 			var i = 0
-			for mparam in msignature.mparameters do
+			for mparam in mpropdef.msignature.as(not null).mparameters do
 				var variable = n_signature.as(not null).n_params[i].variable
 				if variable == null then continue
 				var argvar = v.variable(variable)
-				boxed = v.new_expr("args[{i + 1}];", v.compiler.mainmodule.object_type)
-				v.add "{argvar} = {v.unbox(boxed, mparam.mtype)};"
+				v.assign(argvar, v.new_expr("args[{i + 1}]", v.compiler.mainmodule.object_type))
 				arguments.add(argvar)
 				i += 1
 			end
 		end
-
-		v.add("{frame.returnlabel.as(not null)}: \{")
 
 		# Call the implicit super-init
 		var auto_super_inits = self.auto_super_inits
@@ -1433,24 +1429,11 @@ redef class AMethPropdef
 			v.supercall(mpropdef, arguments.first.mtype.as(MClassType), arguments)
 		end
 
-		compile_inside_to_java(v, mpropdef)
-		v.add("\}")
-
-		if ret != null then
-			if ret.is_java_primitive then
-				boxed = v.box(frame.returnvar.as(not null), v.compiler.mainmodule.object_type)
-				v.add("return {boxed};")
-			else
-				v.add("return {frame.returnvar.as(not null)};")
-			end
-		else
-			v.add("return null;")
-		end
-		v.frame = null
+		compile_inside_to_java(v, mpropdef, arguments)
 	end
 
 	# Compile the inside of the method body
-	private fun compile_inside_to_java(v: JavaCompilerVisitor, mpropdef: MMethodDef) do
+	private fun compile_inside_to_java(v: JavaCompilerVisitor, mpropdef: MMethodDef, arguments: Array[RuntimeVariable]) do
 		# Compile intern methods
 		if mpropdef.is_intern then
 			if compile_intern_to_java(v, mpropdef, arguments) then return
