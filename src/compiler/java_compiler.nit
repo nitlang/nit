@@ -758,11 +758,21 @@ class JavaCompilerVisitor
 
 	# Generate a alloc-instance + init-attributes
 	fun init_instance(mtype: MClassType): RuntimeVariable do
-		var recv = new_recv(mtype)
-		var mclass = mtype.mclass
-		add("{recv} = new RTVal({mclass.rt_name}.get{mclass.rt_name}());")
-		# TODO init attributes
-		return recv
+		var rt_name = mtype.mclass.rt_name
+		var res = new_expr("new RTVal({rt_name}.get{rt_name}())", mtype)
+		generate_init_attr(self, res, mtype)
+		return res
+	end
+
+	# Generate code that initialize the attributes on a new instance
+	fun generate_init_attr(v: JavaCompilerVisitor, recv: RuntimeVariable, mtype: MClassType) do
+		var cds = mtype.collect_mclassdefs(v.compiler.mainmodule).to_a
+		v.compiler.mainmodule.linearize_mclassdefs(cds)
+		for cd in cds do
+			for npropdef in v.compiler.modelbuilder.collect_attr_propdef(cd) do
+				npropdef.init_expr(v, recv)
+			end
+		end
 	end
 
 	#  Generate a Nit "is" for two runtime_variables
@@ -1207,12 +1217,24 @@ redef class MMethodDef
 		if node isa APropdef then
 			node.compile_to_java(v, self)
 		else if node isa AClassdef then
-			# TODO compile attributes
-			v.info("NOT YET IMPLEMENTED attribute handling")
+			node.compile_to_java(v, self)
 		else
 			abort
 		end
+	end
+end
 
+redef class AClassdef
+	private fun compile_to_java(v: JavaCompilerVisitor, mpropdef: MMethodDef) do
+		if mpropdef == self.mfree_init then
+			assert mpropdef.mproperty.is_root_init
+			if not mpropdef.is_intro then
+				# TODO v.supercall(mpropdef, arguments.first.mtype.as(MClassType), arguments)
+			end
+		else
+			abort
+		end
+		v.add("return null;")
 	end
 end
 
@@ -1605,6 +1627,41 @@ redef class AAttrPropdef
 	private fun compile_getter(v: JavaCompilerVisitor, mpropdef: MPropDef, arguments: Array[RuntimeVariable]) do
 		var recv = arguments.first
 		v.ret v.read_attribute(self.mpropdef.as(not null).mproperty, recv)
+	end
+
+	private fun init_expr(v: JavaCompilerVisitor, recv: RuntimeVariable) do
+		if has_value and not is_lazy and not n_expr isa ANullExpr then evaluate_expr(v, recv)
+	end
+
+	# Evaluate, store and return the default value of the attribute
+	private fun evaluate_expr(v: JavaCompilerVisitor, recv: RuntimeVariable): RuntimeVariable do
+		var old = v.frame
+		var frame = new JavaStaticFrame(v, self.mreadpropdef.as(not null), recv.mcasttype.undecorate.as(MClassType), [recv])
+		v.frame = frame
+
+		var value
+		var mtype = self.mtype
+		assert mtype != null
+
+		var nexpr = self.n_expr
+		var nblock = self.n_block
+		if nexpr != null then
+			value = v.expr(nexpr, mtype)
+		else if nblock != null then
+			value = v.new_var(mtype)
+			frame.returnvar = value
+			frame.returnlabel = v.get_name("RET_LABEL")
+			v.add("\{")
+			v.stmt(nblock)
+			v.add("{frame.returnlabel.as(not null)}:(void)0;")
+			v.add("\}")
+		else
+			abort
+		end
+
+		v.write_attribute(self.mpropdef.as(not null).mproperty, recv, value)
+		v.frame = old
+		return value
 	end
 end
 
