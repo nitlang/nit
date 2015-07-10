@@ -259,6 +259,49 @@ class RopeBuffer
 		written = false
 	end
 
+	redef fun [](i) do
+		if i < str.length then
+			return str[i]
+		else
+			var index = ns.char_to_byte_index_cached(i - str.length, 0, dumped)
+			return ns.char_at(index)
+		end
+	end
+
+	redef fun []=(i, c) do
+		assert i >= 0 and i <= length
+		if i == length then add c
+		if i < str.length then
+			bytelen += c.u8char_len - str[i].u8char_len
+			var s = str
+			var l = s.substring(0, i)
+			var r = s.substring_from(i + 1)
+			str = l + c.to_s + r
+		else
+			var reali = i - str.length
+			var index = ns.char_to_byte_index_cached(reali, 0, dumped)
+			var st_nxt = ns.char_to_byte_index_cached(reali + 1, reali, index)
+			var loc_c = ns.char_at(index)
+			if loc_c.u8char_len != c.u8char_len then
+				var delta = c.u8char_len - loc_c.u8char_len
+				var remsp = buf_size - rpos
+				if remsp < delta then
+					buf_size *= 2
+					var nns = new NativeString(buf_size)
+					ns.copy_to(nns, index - dumped, dumped, 0)
+					ns.copy_to(nns, rpos - index - loc_c.u8char_len, index + loc_c.u8char_len, index - dumped + delta)
+					ns = nns
+					index = index - dumped
+				else
+					ns.copy_to(ns, rpos - st_nxt, st_nxt, st_nxt + delta)
+				end
+				bytelen += delta
+				rpos += delta
+			end
+			ns.set_char_at(index, c)
+		end
+	end
+
 	redef fun empty do return new RopeBuffer
 
 	redef fun clear do
@@ -1019,27 +1062,9 @@ class RopeBufferChars
 
 	redef type SELFTYPE: RopeBuffer
 
-	redef fun [](i) do
-		if i < target.str.length then
-			return target.str[i]
-		else
-			# TODO: Fix when supporting UTF-8
-			return target.ns[i - target.str.length].to_i.ascii
-		end
-	end
+	redef fun [](i) do return target[i]
 
-	redef fun []=(i,c) do
-		if i == target.length then target.add c
-		if i < target.str.length then
-			var s = target.str
-			var l = s.substring(0, i)
-			var r = s.substring_from(i + 1)
-			target.str = l + c.to_s + r
-		else
-			# TODO: Fix when supporting UTF-8
-			target.ns[i - target.str.length] = c.to_i.to_b
-		end
-	end
+	redef fun []=(i,c) do target[i] = c
 
 	redef fun add(c) do target.add c
 
