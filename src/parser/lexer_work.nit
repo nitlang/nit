@@ -164,7 +164,17 @@ class Lexer
 			if sp >= string_len then
 				dfa_state = -1
 			else
+				# Very ugly hack, this is because of the way SableCC generates its tables.
+				# Due to the 0xFFFF limit of a Java char, when a big Nit char is read (i.e.
+				# code point > 65535), it crashes.
+				#
+				# Hence, if a char has a code point <= 255 (ISO8859 range), it is left as is.
+				# Else, it is replaced by 255.
+				# This does not corrupt the lexer and works perfectly on any character.
+				#
+				# TL;DR: Java fucked up, need retarded solution to cope for retarded decision
 				var c = string[sp].ascii
+				if c >= 256 then c = 255
 				sp += 1
 
 				var cr = _cr

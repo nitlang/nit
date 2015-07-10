@@ -1494,8 +1494,12 @@ abstract class AbstractCompilerVisitor
 	fun char_instance(value: Char): RuntimeVariable
 	do
 		var t = mmodule.char_type
-		var res = new RuntimeVariable("'{value.to_s.escape_to_c}'", t, t)
-		return res
+
+		if value.ascii < 128 then
+			return new RuntimeVariable("'{value.to_s.escape_to_c}'", t, t)
+		else
+			return new RuntimeVariable("{value.ascii}", t, t)
+		end
 	end
 
 	# Generate a float value
@@ -1537,7 +1541,7 @@ abstract class AbstractCompilerVisitor
 		var native_mtype = mmodule.native_string_type
 		var nat = self.new_var(native_mtype)
 		self.add("{nat} = \"{string.escape_to_c}\";")
-		var length = self.int_instance(string.length)
+		var length = self.int_instance(string.bytelen)
 		self.add("{res} = {self.send(self.get_property("to_s_with_length", native_mtype), [nat, length]).as(not null)};")
 		self.add("{name} = {res};")
 		self.add("\}")
@@ -2157,10 +2161,7 @@ redef class AMethPropdef
 				return true
 			end
 		else if cname == "Char" then
-			if pname == "output" then
-				v.add("printf(\"%c\", ((unsigned char){arguments.first}));")
-				return true
-			else if pname == "object_id" then
+			if pname == "object_id" then
 				v.ret(v.new_expr("(long){arguments.first}", ret.as(not null)))
 				return true
 			else if pname == "successor" then
