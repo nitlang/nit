@@ -761,6 +761,34 @@ class JavaCompilerVisitor
 		return k == interface_kind or t.is_java_primitive
 	end
 
+	#  Generate a polymorphic subtype test
+	fun type_test(value: RuntimeVariable, mtype: MType): RuntimeVariable do
+		add("/* {value.inspect} isa {mtype} */")
+		var res = self.new_var(compiler.mainmodule.bool_type)
+
+		# check color is in table
+		var maybenull = (value.mcasttype isa MNullableType or value.mcasttype isa MNullType)
+		if maybenull then
+			add("if({value} == null || {value}.is_null()) \{")
+			add("{res} = true && {mtype isa MNullableType};")
+			add("\} else \{")
+		end
+		if mtype isa MNullableType then mtype = mtype.mtype
+		var mclass = mtype.as(MClassType).mclass
+		add("{res} = {value}.rtclass.supers.get(\"{mclass.jname}\") == {mclass.rt_name}.get{mclass.rt_name}();")
+		if maybenull then
+			add("\}")
+		end
+		return res
+	end
+
+	# Generate the code required to dynamically check if 2 objects share the same runtime type
+	fun is_same_type_test(value1, value2: RuntimeVariable): RuntimeVariable do
+		var res = self.new_var(compiler.mainmodule.bool_type)
+		add("{res} = {value1}.rtclass == {value2}.rtclass;")
+		return res
+	end
+
 	# Native instances
 
 	# Generate an integer value
@@ -2069,6 +2097,16 @@ end
 
 redef class ANullExpr
 	redef fun expr(v) do return v.null_instance
+end
+
+redef class AIsaExpr
+	redef fun expr(v)
+	do
+		var i = v.expr(self.n_expr, null)
+		var cast_type = self.cast_type
+		if cast_type == null then return null # no-no on broken node
+		return v.type_test(i, cast_type)
+	end
 end
 
 redef class AParExpr
