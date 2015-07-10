@@ -80,6 +80,13 @@ end
 private extern class AMotionEventAction `{ int32_t `}
 	fun action: Int `{ return self & AMOTION_EVENT_ACTION_MASK; `}
 
+	# Pointer index concerned by this action
+	#
+	# Require: `is_pointer_down or is_pointer_up`
+	fun pointer_index: Int `{
+		return (self & AMOTION_EVENT_ACTION_POINTER_INDEX_MASK) >> AMOTION_EVENT_ACTION_POINTER_INDEX_SHIFT;
+	`}
+
 	fun is_down: Bool do return action == 0
 	fun is_up: Bool do return action == 1
 	fun is_move: Bool do return action == 2
@@ -101,26 +108,24 @@ class AndroidMotionEvent
 
 	private var native: NativeAndroidMotionEvent
 
-	private var pointers_cache: nullable Array[AndroidPointerEvent] = null
-
 	# Pointers (or fingers) composing this motion event
-	fun pointers: Array[AndroidPointerEvent]
-	do
-		if pointers_cache != null then
-			return pointers_cache.as(not null)
-		else
-			var pointers = new Array[AndroidPointerEvent]
-			var pointers_count = native.pointers_count
-			for i in [0 .. pointers_count [do
-				var pointer_event = new AndroidPointerEvent(self, i)
-				pointers.add(pointer_event)
-			end
-			pointers_cache = pointers
-			return pointers
-		end
+	var pointers: Array[AndroidPointerEvent] is lazy do
+		return [for i in native.pointers_count.times do new AndroidPointerEvent(self, i)]
 	end
 
-	redef fun just_went_down: Bool do return native.just_went_down
+	# The pointer (or finger) causing this event
+	var acting_pointer: AndroidPointerEvent is lazy do
+		var action = native.action
+		var index = 0
+
+		if action.is_pointer_down or action.is_pointer_up then
+			index = native.action.pointer_index
+		end
+
+		return new AndroidPointerEvent(self, index)
+	end
+
+	redef fun just_went_down do return native.just_went_down
 
 	# Was the top edge of the screen intersected by this event?
 	fun touch_to_edge: Bool do return native.edge == 1
@@ -158,31 +163,31 @@ class AndroidPointerEvent
 
 	private var motion_event: AndroidMotionEvent
 
-	private var pointer_id: Int
+	private var pointer_index: Int
 
-	redef fun x: Float do return native_x(motion_event.native, pointer_id)
+	redef fun x: Float do return native_x(motion_event.native, pointer_index)
 
-	private fun native_x(motion_event: NativeAndroidMotionEvent, pointer_id: Int): Float `{
-		return AMotionEvent_getX(motion_event, pointer_id);
+	private fun native_x(motion_event: NativeAndroidMotionEvent, pointer_index: Int): Float `{
+		return AMotionEvent_getX(motion_event, pointer_index);
 	`}
 
-	redef fun y: Float do return native_y(motion_event.native, pointer_id)
+	redef fun y: Float do return native_y(motion_event.native, pointer_index)
 
-	private fun native_y(motion_event: NativeAndroidMotionEvent, pointer_id: Int): Float `{
-		return AMotionEvent_getY(motion_event, pointer_id);
+	private fun native_y(motion_event: NativeAndroidMotionEvent, pointer_index: Int): Float `{
+		return AMotionEvent_getY(motion_event, pointer_index);
 	`}
 
 	# Pressure applied by this pointer
-	fun pressure: Float do return native_pressure(motion_event.native, pointer_id)
+	fun pressure: Float do return native_pressure(motion_event.native, pointer_index)
 
-	private fun native_pressure(motion_event: NativeAndroidMotionEvent, pointer_id: Int): Float `{
-		return AMotionEvent_getPressure(motion_event, pointer_id);
+	private fun native_pressure(motion_event: NativeAndroidMotionEvent, pointer_index: Int): Float `{
+		return AMotionEvent_getPressure(motion_event, pointer_index);
 	`}
 
 	redef fun pressed
 	do
 		var action = motion_event.native.action
-		return action.is_down or action.is_move
+		return action.is_down or action.is_move or action.is_pointer_down
 	end
 
 	redef fun depressed do return not pressed
@@ -192,6 +197,13 @@ class AndroidPointerEvent
 	do
 		return motion_event.down_pointer == self
 	end
+
+	# Unique id of this pointer since the beginning of the gesture
+	fun pointer_id: Int do return native_pointer_id(motion_event.native, pointer_index)
+
+	private fun native_pointer_id(motion_event: NativeAndroidMotionEvent, pointer_index: Int): Int `{
+		return AMotionEvent_getPointerId(motion_event, pointer_index);
+	`}
 end
 
 # An hardware key event

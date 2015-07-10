@@ -12,9 +12,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Config to set the landscape orientation
-module landscape is android_manifest_activity """
-		android:screenOrientation="landscape"
-"""
+# Lock the application in the landscape orientation
+#
+# Adds `android:screenOrientation=="sensorLandscape"` to the manifest.
+module landscape is
+	android_api_min 9
+	android_manifest_activity """android:screenOrientation="sensorLandscape" """
+end
 
 import platform
