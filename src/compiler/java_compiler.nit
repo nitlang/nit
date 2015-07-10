@@ -2047,6 +2047,78 @@ redef class AVarAssignExpr
 end
 
 
+redef class AAssertExpr
+	redef fun stmt(v) do
+		var cond = v.expr_bool(self.n_expr)
+		v.add("if (!{cond}) \{")
+		v.stmt(self.n_else)
+		var nid = self.n_id
+		if nid != null then
+			v.add_abort("Assert '{nid.text}' failed")
+		else
+			v.add_abort("Assert failed")
+		end
+		v.add("\}")
+	end
+end
+
+redef class AImpliesExpr
+	redef fun expr(v) do
+		var res = v.new_var(mtype.as(not null))
+		var i1 = v.expr_bool(n_expr)
+		v.add("if (!{i1}) \{")
+		v.add("{res} = true;")
+		v.add("\} else \{")
+		var i2 = v.expr_bool(n_expr2)
+		v.add("{res} = {i2};")
+		v.add("\}")
+		return res
+	end
+end
+
+redef class AOrElseExpr
+	redef fun expr(v)
+	do
+		var res = v.new_var(self.mtype.as(not null))
+		var i1 = v.expr(self.n_expr, null)
+		v.add("if ({i1} != null && !{i1}.is_null()) \{")
+		v.assign(res, i1)
+		v.add("\} else \{")
+		var i2 = v.expr(self.n_expr2, null)
+		v.assign(res, i2)
+		v.add("\}")
+		return res
+	end
+end
+
+redef class AOrExpr
+	redef fun expr(v) do
+		var res = v.new_var(self.mtype.as(not null))
+		var i1 = v.expr_bool(self.n_expr)
+		v.add("if ({i1}) \{")
+		v.add("{res} = true;")
+		v.add("\} else \{")
+		var i2 = v.expr_bool(self.n_expr2)
+		v.add("{res} = {i2};")
+		v.add("\}")
+		return res
+	end
+end
+
+redef class AAndExpr
+	redef fun expr(v) do
+		var res = v.new_var(self.mtype.as(not null))
+		var i1 = v.expr_bool(self.n_expr)
+		v.add("if (!{i1}) \{")
+		v.add("{res} = false;")
+		v.add("\} else \{")
+		var i2 = v.expr_bool(self.n_expr2)
+		v.add("{res} = {i2};")
+		v.add("\}")
+		return res
+	end
+end
+
 redef class ANotExpr
 	redef fun expr(v) do
 		var cond = v.expr_bool(self.n_expr)
