@@ -266,8 +266,21 @@ class JavaCompiler
 		var v = new_visitor("{mainmodule.jname}_Main.java")
 		v.add("public class {mainmodule.jname}_Main \{")
 		v.add("  public static void main(String[] args) \{")
-		modelbuilder.toolcontext.info("NOT YET IMPLEMENTED", 0)
-		# TODO compile call to Sys::main
+
+		var main_type = mainmodule.sys_type
+		if main_type != null then
+			var mainmodule = v.compiler.mainmodule
+			var glob_sys = v.init_instance(main_type)
+			var main_init = mainmodule.try_get_primitive_method("init", main_type.mclass)
+			if main_init != null then
+				v.send(main_init, [glob_sys])
+			end
+			var main_method = mainmodule.try_get_primitive_method("run", main_type.mclass) or else
+				mainmodule.try_get_primitive_method("main", main_type.mclass)
+			if main_method != null then
+				v.send(main_method, [glob_sys])
+			end
+		end
 		v.add("  \}")
 		v.add("\}")
 	end
