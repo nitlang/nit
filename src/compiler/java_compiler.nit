@@ -325,6 +325,26 @@ class JavaCompilerVisitor
 		end
 	end
 
+	# Return an unique and stable identifier associated with an escapemark
+	fun escapemark_name(e: nullable EscapeMark): String do
+		assert e != null
+		var frame = self.frame
+		assert frame != null
+		if frame.escapemark_names.has_key(e) then return frame.escapemark_names[e]
+		var name = e.name
+		if name == null then name = "label"
+		name = get_name(name)
+		frame.escapemark_names[e] = name
+		return name
+	end
+
+	# Insert a C label for associated with an escapemark
+	fun add_escape_label(e: nullable EscapeMark) do
+		if e == null then return
+		if e.escapes.is_empty then return
+		add("BREAK_{escapemark_name(e)}: ")
+	end
+
 	# Variables handling
 
 	# Registered variables
@@ -1128,6 +1148,10 @@ class JavaStaticFrame
 
 	# The label at the end of the property
 	var returnlabel: nullable String = null is writable
+
+	# Labels associated to a each escapemarks.
+	# Because of inlinings, escape-marks must be associated to their context (the frame)
+	private var escapemark_names = new HashMap[EscapeMark, String]
 end
 
 redef class Location
@@ -1944,6 +1968,44 @@ redef class AIfExpr
 		v.add("\}")
 		return res
 	end
+end
+
+redef class ADoExpr
+	redef fun stmt(v)
+	do
+		v.add_escape_label(break_mark)
+		v.add "\{"
+		v.stmt(self.n_block)
+		v.add "\}"
+	end
+end
+
+redef class AWhileExpr
+	redef fun stmt(v)
+	do
+		v.add_escape_label(break_mark)
+		v.add_escape_label(continue_mark)
+		v.add("for(;;) \{")
+		var cond = v.expr_bool(self.n_expr)
+		v.add("if (!{cond}) break;")
+		v.stmt(self.n_block)
+		v.add("\}")
+	end
+end
+
+redef class ALoopExpr
+	redef fun stmt(v)
+	do
+		v.add_escape_label(break_mark)
+		v.add_escape_label(continue_mark)
+		v.add("for(;;) \{")
+		v.stmt(self.n_block)
+		v.add("\}")
+	end
+end
+
+redef class AEscapeExpr
+	redef fun stmt(v) do v.add("break BREAK_{v.escapemark_name(escapemark)};")
 end
 
 redef class AVardeclExpr
