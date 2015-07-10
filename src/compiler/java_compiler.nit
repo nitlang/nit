@@ -1973,6 +1973,14 @@ redef class AVarAssignExpr
 	end
 end
 
+
+redef class ANotExpr
+	redef fun expr(v) do
+		var cond = v.expr_bool(self.n_expr)
+		return v.new_expr("!{cond}", self.mtype.as(not null))
+	end
+end
+
 redef class AIntExpr
 	redef fun expr(v) do return v.int_instance(self.value.as(not null))
 end
