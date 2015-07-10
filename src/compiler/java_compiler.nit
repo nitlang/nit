@@ -616,6 +616,17 @@ class JavaCompilerVisitor
 		add("{left} = {autobox(right, left.mtype)};")
 	end
 
+	# Generate a return with `value`
+	fun ret(value: RuntimeVariable) do
+		var frame = self.frame
+		assert frame != null
+		var returnvar = frame.returnvar
+		if returnvar != null then
+			assign(returnvar, value)
+		end
+		self.add("break {frame.returnlabel.as(not null)};")
+	end
+
 	# Return a new local RuntimeVariable initialized with the Java expression `jexpr`.
 	#
 	# `mtype` is used for the Java return variable initialization.
@@ -1054,10 +1065,10 @@ redef class MMethodDef
 		else if node isa AClassdef then
 			# TODO compile attributes
 			v.info("NOT YET IMPLEMENTED attribute handling")
-			v.add("return null;")
 		else
 			abort
 		end
+
 	end
 end
 
@@ -1066,6 +1077,7 @@ redef class APropdef
 	# Compile that property definition to java code
 	fun compile_to_java(v: JavaCompilerVisitor, mpropdef: MMethodDef) do
 		v.info("NOT YET IMPLEMENTED {class_name}::compile_to_java")
+		v.add("return null;")
 	end
 end
 
@@ -1077,7 +1089,7 @@ redef class AMethPropdef
 		if mpropdef.is_intern then
 			v.info("NOT YET IMPLEMENTED {class_name}::compile_intern")
 			# TODO if compile_intern_to_java(v, mpropdef, arguments) then return
-			v.add("return null;")
+			v.ret(v.null_instance)
 			return
 		end
 
@@ -1134,6 +1146,19 @@ end
 
 redef class AImplicitSelfExpr
 	redef fun expr(v) do return v.frame.as(not null).arguments.first
+end
+
+redef class AReturnExpr
+	redef fun stmt(v) do
+		var nexpr = self.n_expr
+		var frame = v.frame
+		assert frame != null
+		if nexpr != null then
+			v.ret(v.expr(nexpr, frame.returnvar.as(not null).mtype))
+		else
+			v.ret(v.null_instance)
+		end
+	end
 end
 
 redef class AVardeclExpr
