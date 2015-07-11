@@ -1598,11 +1598,14 @@ redef class Collection[E]
 		return s.to_s
 	end
 
-	# Concatenate and separate each elements with `sep`.
+	# Concatenate and separate each elements with `separator`.
 	#
-	#     assert [1, 2, 3].join(":")         == "1:2:3"
-	#     assert [1..3].join(":")            == "1:2:3"
-	fun join(sep: Text): String
+	# Only concatenate if `separator == null`.
+	#
+	#     assert [1, 2, 3].join(":")    == "1:2:3"
+	#     assert [1..3].join(":")       == "1:2:3"
+	#     assert [1..3].join            == "123"
+	fun join(separator: nullable Text): String
 	do
 		if is_empty then return ""
 
@@ -1616,7 +1619,7 @@ redef class Collection[E]
 		# Concat other items
 		i.next
 		while i.is_ok do
-			s.append(sep)
+			if separator != null then s.append(separator)
 			e = i.item
 			if e != null then s.append(e.to_s)
 			i.next
