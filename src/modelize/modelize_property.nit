@@ -305,7 +305,12 @@ redef class ModelBuilder
 					var i = 0
 					for p in spd.initializers do
 						if p != longest.initializers[i] then
-							self.error(nclassdef, "Error: conflict for inherited inits {spd}({spd.initializers.join(", ")}) and {longest}({longest.initializers.join(", ")})")
+							var proposal = new ArraySet[MProperty]
+							for spd2 in spropdefs do
+								proposal.add_all spd2.initializers
+							end
+							proposal.add_all initializers
+							self.error(nclassdef, "Error: cannot generate automatic init for class {mclassdef.mclass}. Conflict in the order in inherited initializers {spd}({spd.initializers.join(", ")}) and {longest}({longest.initializers.join(", ")}). Use `autoinit` to order initializers. eg `autoinit {proposal.join(", ")}`")
 							# TODO: invalidate the initializer to avoid more errors
 							return
 						end
