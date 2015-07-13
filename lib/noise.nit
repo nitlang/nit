@@ -322,10 +322,20 @@ class InterpolatedNoise
 		#
 		# These magic prime numbers were determined good enough by
 		# non-emperical experimentation. They may need to be changed/improved.
-		var i = 17957*seed + 45127*x + 22613*y
-		var mod = 19031
+		var seed = 817721 + self.seed
+		var i = seed * (x+seed) * 25111217 * (y+seed) * 72233613
+		var mod = 137121
+		var angle = (i.mask.abs%mod).to_f*2.0*pi/mod.to_f
 
-		var angle = (i%mod).to_f*2.0*pi/mod.to_f
+		# Debug code to evaluate the efficiency of the random angle generator
+		# The average of the produced angles should be at pi
+		#
+		#var sum = once new Container[Float](0.0)
+		#var count = once new Container[Float](0.0)
+		#sum.item += angle
+		#count.item += 1.0
+		#if count.item.to_i % 1000 == 0 then print "avg:{sum.item/count.item}/{count.item} i:{i} a:{angle} ({x}, {y}: {seed})"
+
 		if w == 0 then return angle.cos
 		return angle.sin
 	end
