@@ -717,12 +717,28 @@ class JavaCompilerVisitor
 	# Used by aborts, asserts, casts, etc.
 	fun add_abort(message: String) do
 		add("System.err.print(\"Runtime error: {message}\");")
+		add_raw_abort
+	end
+
+	# Abort without displaying the cause.
+	#
+	# Used to customizable errors.
+	private fun add_raw_abort do
 		var node = current_node
 		if node != null then
 			add("System.err.print(\" ({node.location.short_location})\");")
 		end
 		add("System.err.println(\"\");")
 		add("System.exit(1);")
+	end
+
+	# Add a dynamic cast
+	fun add_cast(value: RuntimeVariable, mtype: MType) do
+		var res = type_test(value, mtype)
+		add("if (!{res}) \{")
+		add("System.err.print(\"Runtime error: Cast failed. Expected `{mtype.to_s.escape_to_c}`, got `\" + {value}.rtclass.class_name + \"`\");")
+		add_raw_abort
+		add("\}")
 	end
 
 	# Types handling
@@ -2173,6 +2189,27 @@ end
 
 redef class ANullExpr
 	redef fun expr(v) do return v.null_instance
+end
+
+redef class AAsCastExpr
+	redef fun expr(v)
+	do
+		var i = v.expr(n_expr, null)
+		v.add_cast(i, mtype.as(not null))
+		return i
+	end
+end
+
+redef class AAsNotnullExpr
+	redef fun expr(v) do
+		var i = v.expr(n_expr, null)
+		if i.mtype.is_java_primitive then return i
+
+		v.add("if ({i} == null || {i}.is_null()) \{")
+		v.add_abort("Cast failed")
+		v.add("\}")
+		return i
+	end
 end
 
 redef class AIsaExpr
