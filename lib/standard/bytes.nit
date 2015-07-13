@@ -46,6 +46,7 @@ class Bytes
 		init(ns, 0, 0)
 	end
 
+	# Init a `Bytes` with capacity `cap`
 	init with_capacity(cap: Int) do
 		var ns = new NativeString(cap)
 		init(ns, 0, cap)
@@ -94,6 +95,16 @@ class Bytes
 		else
 			for i in arr do add i
 		end
+	end
+
+	#     var b = new Bytes.empty
+	#     b.append([0x41u8, 0x41u8, 0x18u8])
+	#     b.pop
+	#     assert b.to_s == "AA"
+	redef fun pop do
+		assert length >= 1
+		length -= 1
+		return items[length]
 	end
 
 	redef fun clear do length = 0
@@ -159,6 +170,7 @@ private class BytesIterator
 end
 
 redef class NativeString
+	# Creates a new `Bytes` object from `self` with `strlen` as length
 	fun to_bytes: Bytes do
 		var len = cstring_length
 		return new Bytes(self, len, len)
