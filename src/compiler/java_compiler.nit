@@ -325,6 +325,23 @@ class JavaCompilerVisitor
 	# Add a new partial line (no `\n` suffix)
 	fun addn(line: String) do file.lines.add(line)
 
+	# Compile a statement (if any)
+	fun stmt(nexpr: nullable AExpr) do
+		if nexpr == null then return
+		nexpr.stmt(self)
+	end
+
+	# Compile an expression an return its result
+	# `mtype` is the expected return type, pass null if no specific type is expected.
+	fun expr(nexpr: AExpr, mtype: nullable MType): RuntimeVariable do
+		var res = null
+		if nexpr.mtype != null then
+			res = nexpr.expr(self)
+		end
+		assert res != null
+		return res
+	end
+
 	# Correctly assign a left and a right value
 	# Boxing and unboxing is performed if required
 	fun assign(left, right: RuntimeVariable) do
@@ -587,9 +604,94 @@ redef class MMethodDef
 		v.add("  \}")
 		v.add("  @Override")
 		v.add("  public RTVal exec(RTVal[] args) \{")
-		# TODO compile_inside_to_java(v)
-		v.add("    return null;")
+		compile_inside_to_java(v)
 		v.add("  \}")
 		v.add("\}")
 	end
+
+	# Compile the body of this function
+	fun compile_inside_to_java(v: JavaCompilerVisitor) do
+
+		var modelbuilder = v.compiler.modelbuilder
+		var node = modelbuilder.mpropdef2node(self)
+
+		if is_abstract then
+			# TODO compile abstract
+			v.info("NOT YET IMPLEMENTED call to abstract method")
+			v.add("return null;")
+			return
+		end
+
+		if node isa APropdef then
+			node.compile_to_java(v, self)
+		else if node isa AClassdef then
+			# TODO compile attributes
+			v.info("NOT YET IMPLEMENTED attribute handling")
+			v.add("return null;")
+		else
+			abort
+		end
+	end
+end
+
+redef class APropdef
+
+	# Compile that property definition to java code
+	fun compile_to_java(v: JavaCompilerVisitor, mpropdef: MMethodDef) do
+		v.info("NOT YET IMPLEMENTED {class_name}::compile_to_java")
+	end
+end
+
+redef class AMethPropdef
+	redef fun compile_to_java(v, mpropdef) do
+		# TODO Call the implicit super-init
+
+		# Compile intern methods
+		if mpropdef.is_intern then
+			v.info("NOT YET IMPLEMENTED {class_name}::compile_intern")
+			# TODO if compile_intern_to_java(v, mpropdef, arguments) then return
+			v.add("return null;")
+			return
+		end
+
+		# Compile block if any
+		var n_block = n_block
+		if n_block != null then
+			v.stmt(n_block)
+			return
+		end
+	end
+end
+
+redef class AExpr
+	# Try to compile self as an expression
+	# Do not call this method directly, use `v.expr` instead
+	private fun expr(v: JavaCompilerVisitor): nullable RuntimeVariable do
+		v.info("NOT YET IMPLEMENTED {class_name}::expr")
+		return null
+	end
+
+	# Try to compile self as a statement
+	# Do not call this method directly, use `v.stmt` instead
+	private fun stmt(v: JavaCompilerVisitor) do expr(v)
+end
+
+redef class ABlockExpr
+	redef fun stmt(v)
+	do
+		for e in self.n_expr do v.stmt(e)
+	end
+	redef fun expr(v)
+	do
+		var last = self.n_expr.last
+		for e in self.n_expr do
+			if e == last then break
+			v.stmt(e)
+		end
+		return v.expr(last, null)
+	end
+end
+
+redef class ADebugTypeExpr
+	redef fun stmt(v) do end # do nothing
 end
