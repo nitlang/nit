@@ -358,6 +358,157 @@ class SocketObserver
 	end
 end
 
+# Socket over UDP, sends and receive data without the need for a connection
+class UDPSocket
+	super Socket
+
+	# Last error raised by this socket
+	var error: nullable Error = null
+
+	init do native = new NativeSocket.socket(
+			new NativeSocketAddressFamilies.af_inet,
+			new NativeSocketTypes.sock_dgram,
+			new NativeSocketProtocolFamilies.pf_null)
+
+	# Bind this socket to an `address`, on `port` (to all addresses if `null`)
+	#
+	# On error, sets `error` appropriately.
+	fun bind(address: nullable Text, port: Int)
+	do
+		var addr_in = new NativeSocketAddrIn
+		addr_in.port = port
+		if address != null then
+			# FIXME replace all use of gethostbyname with something not obsolete
+			var hostent = sys.gethostbyname(address.to_cstring)
+			if hostent.address_is_null then
+				error = new IOError.from_h_errno
+				addr_in.free
+				return
+			end
+
+			addr_in.fill_from_hostent hostent
+		else
+			addr_in.family = new NativeSocketAddressFamilies.af_inet
+			addr_in.address_any
+		end
+
+		if native.bind(addr_in) != 0 then error = new IOError.from_errno
+
+		addr_in.free
+	end
+
+	# Receive `length` bytes of data from any sender
+	#
+	# On error, returns an empty string and sets `error` appropriately.
+	fun recv(length: Int): String
+	do
+		var buf = new NativeString(length)
+		var len = native.recvfrom(buf, length, 0, new NativeSocketAddrIn.nul)
+		if len == -1 then
+			error = new IOError.from_errno
+			return ""
+		end
+		return buf.to_s_with_length(len)
+	end
+
+	# Receive `length` bytes of data from any sender and store the sender info in `sender.item`
+	#
+	# On error, returns an empty string and sets `error` appropriately.
+	fun recv_from(length: Int, sender: Ref[nullable SocketAddress]): String
+	do
+		var src = new NativeSocketAddrIn
+		var buf = new NativeString(length)
+
+		var len = native.recvfrom(buf, length, 0, src)
+		if len == -1 then
+			error = new IOError.from_errno
+			src.free
+			return ""
+		end
+
+		sender.item = new SocketAddress(src)
+		return buf.to_s_with_length(len)
+	end
+
+	# Send `data` to `dest_address` on `port`
+	#
+	# On error, sets `error` appropriately.
+	fun send_to(dest_address: Text, port: Int, data: Text)
+	do
+		var hostent = sys.gethostbyname(dest_address.to_cstring)
+		if hostent.address_is_null then
+			error = new IOError.from_h_errno
+			return
+		end
+
+		var dest = new NativeSocketAddrIn
+		dest.fill_from_hostent hostent
+		dest.port = port
+		native.setsockopt(new NativeSocketOptLevels.socket, new NativeSocketOptNames.broadcast, 1)
+
+		var buf = data.to_cstring
+		if native.sendto(buf, data.length, 0, dest) == -1 then
+			error = new IOError.from_errno
+		end
+		dest.free
+	end
+
+	# Enable broadcasting for this socket
+	#
+	# On error, sets `error` appropriately.
+	fun enable_broadcast=(value: Bool) do
+		var res = native.setsockopt(new NativeSocketOptLevels.socket, new NativeSocketOptNames.broadcast, value.to_i)
+		if res == -1 then error = new IOError.from_errno
+	end
+
+	# Broadcast `data` on the network on `port`
+	#
+	# On error, sets `error` appropriately.
+	#
+	# Require: setting `enable_broadcast = true`
+	fun broadcast(port: Int, data: Text)
+	do
+		var addr_in = new NativeSocketAddrIn
+		addr_in.port = port
+		addr_in.family = new NativeSocketAddressFamilies.af_inet
+		addr_in.address_broadcast
+
+		var buf = data.to_cstring
+		if native.sendto(buf, data.length, 0, addr_in) == -1 then
+			error = new IOError.from_errno
+		end
+
+		addr_in.free
+	end
+end
+
+# Address of a socket in the Internet namespace
+#
+# Used in one of the out parameters of `UDPSocket::recv_from`.
+class SocketAddress
+	super FinalizableOnce
+
+	# FIXME make init private
+
+	private var native: NativeSocketAddrIn
+
+	init
+	do
+		address = native.address.to_s
+		port = native.port
+	end
+
+	# Internet address
+	var address: String is noinit
+
+	# Port of the socket
+	var port: Int is noinit
+
+	redef fun ==(o) do return o isa SocketAddress and o.address == address and o.port == port
+
+	redef fun finalize_once do native.free
+end
+
 redef class IOError
 	# Fill a new `IOError` from the message of `errno`
 	init from_errno do init errno.strerror
