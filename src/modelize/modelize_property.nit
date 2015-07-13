@@ -1270,7 +1270,9 @@ redef class AAttrPropdef
 			if atwritable != null then
 				mvisibility = new_property_visibility(modelbuilder, mclassdef, atwritable.n_visibility)
 			else
-				mvisibility = private_visibility
+				mvisibility = mreadprop.visibility
+				# By default, use protected visibility at most
+				if mvisibility > protected_visibility then mvisibility = protected_visibility
 			end
 			mwriteprop = new MMethod(mclassdef, writename, mvisibility)
 			if not self.check_redef_keyword(modelbuilder, mclassdef, nwkwredef, false, mwriteprop) then return
