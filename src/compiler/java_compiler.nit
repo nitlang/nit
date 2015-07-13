@@ -634,6 +634,14 @@ class JavaCompilerVisitor
 	# Compile a statement (if any)
 	fun stmt(nexpr: nullable AExpr) do
 		if nexpr == null then return
+		if nexpr.mtype == null and not nexpr.is_typed then
+			# Untyped expression.
+			# Might mean dead code or invalid code
+			# so aborts
+			add_abort("FATAL: bad statement executed.")
+			return
+		end
+
 		var old = self.current_node
 		current_node = nexpr
 		nexpr.stmt(self)
@@ -649,6 +657,19 @@ class JavaCompilerVisitor
 		var res = null
 		if nexpr.mtype != null then
 			res = nexpr.expr(self)
+		end
+
+		if res == null then
+			# Untyped expression.
+			# Might mean dead code or invalid code.
+			# so aborts
+			add_abort("FATAL: bad expression executed.")
+			# and return a placebo result to please the C compiler
+			if mtype == null then mtype = compiler.mainmodule.object_type
+			res = null_instance
+
+			self.current_node = old
+			return res
 		end
 
 		if mtype != null then
