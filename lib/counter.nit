@@ -254,6 +254,36 @@ class Counter[E]
 		end
 		return (sum / map.length.to_f).sqrt
 	end
+
+	# The information entropy (Shannon entropy) of the elements in the counter (in bits).
+	fun entropy: Float
+	do
+		var res = 0.0
+		var sum = self.sum.to_f
+		for k, v in self do
+			var f = v.to_f / sum
+			res = res - f * f.log_base(2.0)
+		end
+		return res
+	end
+end
+
+redef class Collection[E]
+	# Create and fill up a counter with the elements of `self.
+	#
+	# ~~~
+	# var cpt = "abaa".chars.to_counter
+	# assert cpt['a'] == 3
+	# assert cpt['b'] == 1
+	# assert cpt.length == 2
+	# assert cpt.sum == 4
+	# ~~~
+	fun to_counter: Counter[E]
+	do
+		var res = new Counter[E]
+		res.inc_all(self)
+		return res
+	end
 end
 
 private class CounterComparator[E]
