@@ -73,13 +73,6 @@ redef class AMethPropdef
 			return
 		end
 
-		# Do we inherit for a constructor?
-		var skip = true
-		for cd in mclassdef.in_hierarchy.direct_greaters do
-			if cd.mclass.kind.need_init then skip = false
-		end
-		if skip then return
-
 		# Now we search for the absence of any explicit super-init invocation
 		#  * via a "super"
 		#  * via a call of an other init
