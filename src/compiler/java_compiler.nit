@@ -1054,8 +1054,7 @@ redef class MMethodDef
 		var node = modelbuilder.mpropdef2node(self)
 
 		if is_abstract then
-			# TODO compile abstract
-			v.info("NOT YET IMPLEMENTED call to abstract method")
+			v.add_abort("Abstract method `{mproperty.name}` called on `\"  + {selfvar}.rtclass.class_name +\"`")
 			v.add("return null;")
 			return
 		end
