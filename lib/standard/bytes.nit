@@ -46,6 +46,7 @@ class Bytes
 		init(ns, 0, 0)
 	end
 
+	# Init a `Bytes` with capacity `cap`
 	init with_capacity(cap: Int) do
 		var ns = new NativeString(cap)
 		init(ns, 0, cap)
@@ -169,6 +170,7 @@ private class BytesIterator
 end
 
 redef class NativeString
+	# Creates a new `Bytes` object from `self` with `strlen` as length
 	fun to_bytes: Bytes do
 		var len = cstring_length
 		return new Bytes(self, len, len)
