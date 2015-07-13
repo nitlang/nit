@@ -96,6 +96,16 @@ class Bytes
 		end
 	end
 
+	#     var b = new Bytes.empty
+	#     b.append([0x41u8, 0x41u8, 0x18u8])
+	#     b.pop
+	#     assert b.to_s == "AA"
+	redef fun pop do
+		assert length >= 1
+		length -= 1
+		return items[length]
+	end
+
 	redef fun clear do length = 0
 
 	# Regenerates the buffer, necessary when it was persisted
