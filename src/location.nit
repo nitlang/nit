@@ -35,7 +35,8 @@ class SourceFile
 	end
 
 	# Create a new sourcefile using a dummy filename and a given content
-	init from_string(filename: String, string: String)
+	init from_string(filename: String, string: String) is
+		nosuper
 	do
 		self.filename = filename
 		self.string = string
@@ -99,7 +100,9 @@ class Location
 	# loc = new Location.from_string("location.nit:82--105,8")
 	# assert loc.to_s == "location.nit:82,0--105,8"
 	# ~~~
-	init from_string(string: String) do
+	init from_string(string: String) is
+		nosuper
+	do
 		self.line_start = 0
 		self.line_end = 0
 		self.column_start = 0
