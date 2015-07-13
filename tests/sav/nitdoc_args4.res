@@ -536,20 +536,35 @@ MClassPage Career
 		## test_prog__rpg.concern
 		## test_prog__rpg__careers.concern
 			### test_prog__rpg__careers__Career__endurance_bonus.definition
+			### test_prog__rpg__careers__Career__endurance_bonus_61d.definition
 			### test_prog__rpg__careers__Career__intelligence_bonus.definition
+			### test_prog__rpg__careers__Career__intelligence_bonus_61d.definition
 			### test_prog__rpg__careers__Career__strength_bonus.definition
+			### test_prog__rpg__careers__Career__strength_bonus_61d.definition
 
 MPropertyPage endurance_bonus
 	# endurance_bonus.section
 		## test_prog__rpg__careers__Career__endurance_bonus.intro
 
+MPropertyPage endurance_bonus=
+	# endurance_bonus=.section
+		## test_prog__rpg__careers__Career__endurance_bonus_61d.intro
+
 MPropertyPage intelligence_bonus
 	# intelligence_bonus.section
 		## test_prog__rpg__careers__Career__intelligence_bonus.intro
 
+MPropertyPage intelligence_bonus=
+	# intelligence_bonus=.section
+		## test_prog__rpg__careers__Career__intelligence_bonus_61d.intro
+
 MPropertyPage strength_bonus
 	# strength_bonus.section
 		## test_prog__rpg__careers__Career__strength_bonus.intro
+
+MPropertyPage strength_bonus=
+	# strength_bonus=.section
+		## test_prog__rpg__careers__Career__strength_bonus_61d.intro
 
 MClassPage Magician
 	# Magician.section
@@ -628,14 +643,19 @@ MClassPage Character
 		## test_prog__rpg.concern
 		## test_prog__rpg__character.concern
 			### test_prog__rpg__character__Character__age.definition
+			### test_prog__rpg__character__Character__age_61d.definition
 			### test_prog__rpg__character__Character__career.definition
 			### test_prog__rpg__character__Character__career_61d.definition
 			### test_prog__rpg__character__Character__health.definition
+			### test_prog__rpg__character__Character__health_61d.definition
 			### test_prog__rpg__character__Character__max_health.definition
 			### test_prog__rpg__character__Character__name.definition
+			### test_prog__rpg__character__Character__name_61d.definition
 			### test_prog__rpg__character__Character__quit.definition
 			### test_prog__rpg__character__Character__race.definition
+			### test_prog__rpg__character__Character__race_61d.definition
 			### test_prog__rpg__character__Character__sex.definition
+			### test_prog__rpg__character__Character__sex_61d.definition
 			### test_prog__rpg__character__Character__total_endurance.definition
 			### test_prog__rpg__character__Character__total_intelligence.definition
 			### test_prog__rpg__character__Character__total_strengh.definition
@@ -646,6 +666,10 @@ MClassPage Character
 MPropertyPage age
 	# age.section
 		## test_prog__rpg__character__Character__age.intro
+
+MPropertyPage age=
+	# age=.section
+		## test_prog__rpg__character__Character__age_61d.intro
 
 MPropertyPage career
 	# career.section
@@ -659,6 +683,10 @@ MPropertyPage health
 	# health.section
 		## test_prog__rpg__character__Character__health.intro
 
+MPropertyPage health=
+	# health=.section
+		## test_prog__rpg__character__Character__health_61d.intro
+
 MPropertyPage max_health
 	# max_health.section
 		## test_prog__rpg__character__Character__max_health.intro
@@ -666,6 +694,10 @@ MPropertyPage max_health
 MPropertyPage name
 	# name.section
 		## test_prog__rpg__character__Character__name.intro
+
+MPropertyPage name=
+	# name=.section
+		## test_prog__rpg__character__Character__name_61d.intro
 
 MPropertyPage quit
 	# quit.section
@@ -675,9 +707,17 @@ MPropertyPage race
 	# race.section
 		## test_prog__rpg__character__Character__race.intro
 
+MPropertyPage race=
+	# race=.section
+		## test_prog__rpg__character__Character__race_61d.intro
+
 MPropertyPage sex
 	# sex.section
 		## test_prog__rpg__character__Character__sex.intro
+
+MPropertyPage sex=
+	# sex=.section
+		## test_prog__rpg__character__Character__sex_61d.intro
 
 MPropertyPage total_endurance
 	# total_endurance.section
@@ -928,20 +968,35 @@ MClassPage Race
 		## test_prog__rpg.concern
 		## test_prog__rpg__races.concern
 			### test_prog__rpg__races__Race__base_endurance.definition
+			### test_prog__rpg__races__Race__base_endurance_61d.definition
 			### test_prog__rpg__races__Race__base_intelligence.definition
+			### test_prog__rpg__races__Race__base_intelligence_61d.definition
 			### test_prog__rpg__races__Race__base_strength.definition
+			### test_prog__rpg__races__Race__base_strength_61d.definition
 
 MPropertyPage base_endurance
 	# base_endurance.section
 		## test_prog__rpg__races__Race__base_endurance.intro
 
+MPropertyPage base_endurance=
+	# base_endurance=.section
+		## test_prog__rpg__races__Race__base_endurance_61d.intro
+
 MPropertyPage base_intelligence
 	# base_intelligence.section
 		## test_prog__rpg__races__Race__base_intelligence.intro
 
+MPropertyPage base_intelligence=
+	# base_intelligence=.section
+		## test_prog__rpg__races__Race__base_intelligence_61d.intro
+
 MPropertyPage base_strength
 	# base_strength.section
 		## test_prog__rpg__races__Race__base_strength.intro
+
+MPropertyPage base_strength=
+	# base_strength=.section
+		## test_prog__rpg__races__Race__base_strength_61d.intro
 
 MModulePage rpg
 	# rpg.section
@@ -952,24 +1007,24 @@ MModulePage rpg
 				#### test_prog__rpg__rpg.imports
 				#### test_prog__rpg__rpg.clients
 
-Generated 85 pages
+Generated 96 pages
  list:
-  MPropertyPage: 47 (55.29%)
-  MClassPage: 20 (23.52%)
-  MModulePage: 8 (9.41%)
-  MGroupPage: 4 (4.70%)
-  ReadmePage: 4 (4.70%)
-  SearchPage: 1 (1.17%)
-  OverviewPage: 1 (1.17%)
-Found 160 mentities
+  MPropertyPage: 58 (60.41%)
+  MClassPage: 20 (20.83%)
+  MModulePage: 8 (8.33%)
+  MGroupPage: 4 (4.16%)
+  ReadmePage: 4 (4.16%)
+  SearchPage: 1 (1.04%)
+  OverviewPage: 1 (1.04%)
+Found 182 mentities
  list:
-  MMethodDef: 57 (35.62%)
-  MMethod: 46 (28.75%)
-  MClassDef: 22 (13.75%)
-  MClass: 20 (12.50%)
-  MModule: 8 (5.00%)
-  MGroup: 4 (2.50%)
-  MVirtualTypeDef: 1 (0.62%)
-  MVirtualTypeProp: 1 (0.62%)
-  MProject: 1 (0.62%)
+  MMethodDef: 68 (37.36%)
+  MMethod: 57 (31.31%)
+  MClassDef: 22 (12.08%)
+  MClass: 20 (10.98%)
+  MModule: 8 (4.39%)
+  MGroup: 4 (2.19%)
+  MVirtualTypeDef: 1 (0.54%)
+  MVirtualTypeProp: 1 (0.54%)
+  MProject: 1 (0.54%)
 quicksearch-list.js
