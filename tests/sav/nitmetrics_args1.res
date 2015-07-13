@@ -857,49 +857,49 @@ Number of buggy sends (cannot determine the type of the receiver): 0 (0.00%)
 	  sum: 0
 
  ## Callsites
-* 22 live callsites
+* 23 live callsites
 MMethodDef locally designated (by number of CallSites)
- population: 13
+ population: 14
  minimum value: 1
  maximum value: 10
- total value: 22
- average value: 1.69
+ total value: 23
+ average value: 1.64
  distribution:
-  <=1: sub-population=12 (92.30%); cumulated value=12 (54.54%)
-  <=16: sub-population=1 (7.69%); cumulated value=10 (45.45%)
+  <=1: sub-population=13 (92.85%); cumulated value=13 (56.52%)
+  <=16: sub-population=1 (7.14%); cumulated value=10 (43.47%)
  list:
-  base_simple3#Int#output: 10 (45.45%)
-  base_simple3#B#val: 1 (4.54%)
-  base_simple3#B#val=: 1 (4.54%)
-  base_simple3#C#val2: 1 (4.54%)
-  base_simple3#C#val1: 1 (4.54%)
+  base_simple3#Int#output: 10 (43.47%)
+  base_simple3#B#val: 1 (4.34%)
+  base_simple3#B#val=: 1 (4.34%)
+  base_simple3#Object#init: 1 (4.34%)
+  base_simple3#C#val2: 1 (4.34%)
   ...
-  base_simple3#A#init: 1 (4.54%)
-  base_simple3#Sys#baz: 1 (4.54%)
-  base_simple3#Sys#bar: 1 (4.54%)
-  base_simple3#Sys#foo: 1 (4.54%)
-  base_simple3#C#init: 1 (4.54%)
+  base_simple3#A#init: 1 (4.34%)
+  base_simple3#Sys#baz: 1 (4.34%)
+  base_simple3#Sys#bar: 1 (4.34%)
+  base_simple3#Sys#foo: 1 (4.34%)
+  base_simple3#C#init: 1 (4.34%)
 MMethodDef possibly invoked at runtime (by number of CallSites)
- population: 13
+ population: 14
  minimum value: 1
  maximum value: 10
- total value: 22
- average value: 1.69
+ total value: 23
+ average value: 1.64
  distribution:
-  <=1: sub-population=12 (92.30%); cumulated value=12 (54.54%)
-  <=16: sub-population=1 (7.69%); cumulated value=10 (45.45%)
+  <=1: sub-population=13 (92.85%); cumulated value=13 (56.52%)
+  <=16: sub-population=1 (7.14%); cumulated value=10 (43.47%)
  list:
-  base_simple3#Int#output: 10 (45.45%)
-  base_simple3#B#val: 1 (4.54%)
-  base_simple3#B#val=: 1 (4.54%)
-  base_simple3#C#val2: 1 (4.54%)
-  base_simple3#C#val1: 1 (4.54%)
+  base_simple3#Int#output: 10 (43.47%)
+  base_simple3#B#val: 1 (4.34%)
+  base_simple3#B#val=: 1 (4.34%)
+  base_simple3#Object#init: 1 (4.34%)
+  base_simple3#C#val2: 1 (4.34%)
   ...
-  base_simple3#A#init: 1 (4.54%)
-  base_simple3#Sys#baz: 1 (4.54%)
-  base_simple3#Sys#bar: 1 (4.54%)
-  base_simple3#Sys#foo: 1 (4.54%)
-  base_simple3#C#init: 1 (4.54%)
+  base_simple3#A#init: 1 (4.34%)
+  base_simple3#Sys#baz: 1 (4.34%)
+  base_simple3#Sys#bar: 1 (4.34%)
+  base_simple3#Sys#foo: 1 (4.34%)
+  base_simple3#C#init: 1 (4.34%)
 class_hierarchy.dot
 classdef_hierarchy.dot
 inheritance/
