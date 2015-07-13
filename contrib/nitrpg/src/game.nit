@@ -212,8 +212,7 @@ class Player
 	#
 	# Used to load players from saved data.
 	init from_json(game: Game, json: JsonObject) do
-		self.game = game
-		name = json["name"].to_s
+		init(game, json["name"].to_s)
 		nitcoins = json["nitcoins"].as(Int)
 	end
 

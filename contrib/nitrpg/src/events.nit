@@ -89,11 +89,9 @@ class GameEvent
 	#
 	# Used to load events from json storage.
 	init from_json(game: Game, json: JsonObject) do
-		self.game = game
+		init(game, json["kind"].to_s, json["data"].as(JsonObject))
 		internal_id = json["internal_id"].to_s
-		kind = json["kind"].to_s
 		time = new ISODate.from_string(json["time"].to_s)
-		data = json["data"].as(JsonObject)
 	end
 
 	redef fun to_json do
