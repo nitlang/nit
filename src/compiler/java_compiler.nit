@@ -209,6 +209,7 @@ class JavaCompiler
 	fun do_compilation do
 		# compile java classes used to represents the runtime model of the program
 		rt_model.compile_rtmodel(self)
+		compile_box_kinds
 
 		# compile class structures
 		compile_mclasses_to_java
@@ -219,6 +220,21 @@ class JavaCompiler
 		# TODO compile main
 		modelbuilder.toolcontext.info("NOT YET IMPLEMENTED", 0)
 	end
+
+	# Prepare the boxes used to represent Java primitive types
+	fun compile_box_kinds do
+		# Collect all bas box class
+		# FIXME: this is not completely fine with a separate compilation scheme
+		for classname in ["Int", "Bool", "Byte", "Char", "Float"] do
+			var classes = mainmodule.model.get_mclasses_by_name(classname)
+			if classes == null then continue
+			assert classes.length == 1 else print classes.join(", ")
+			box_kinds.add(classes.first.mclass_type)
+		end
+	end
+
+	# Types of boxes used to represent Java primitive types
+	var box_kinds = new Array[MClassType]
 
 	# Generate a `RTClass` for each `MClass` found in model
 	#
@@ -296,7 +312,7 @@ class JavaCompilerVisitor
 		else
 			var name = get_name("var_{variable.name}")
 			var mtype = variable.declared_type.as(not null)
-			# TODO mtype = self.anchor(mtype)
+			mtype = anchor(mtype)
 			var res = decl_var(name, mtype)
 			variables[variable] = res
 			return res
@@ -306,13 +322,14 @@ class JavaCompilerVisitor
 	# Return a new uninitialized local RuntimeVariable with `name`
 	fun decl_var(name: String, mtype: MType): RuntimeVariable do
 		var res = new RuntimeVariable(name, mtype, mtype)
+		res.is_boxed = not mtype.is_java_primitive
 		add("{mtype.java_type} {name} /* : {mtype} */;")
 		return res
 	end
 
 	# Return a new uninitialized local RuntimeVariable
 	fun new_var(mtype: MType): RuntimeVariable do
-		# TODO mtype = self.anchor(mtype)
+		mtype = anchor(mtype)
 		var name = self.get_name("var")
 		return decl_var(name, mtype)
 	end
@@ -356,7 +373,12 @@ class JavaCompilerVisitor
 		if nexpr.mtype != null then
 			res = nexpr.expr(self)
 		end
-		assert res != null
+
+		if mtype != null then
+			mtype = anchor(mtype)
+			res = autobox(res, mtype)
+		end
+
 		current_node = old
 		return res
 	end
@@ -364,8 +386,7 @@ class JavaCompilerVisitor
 	# Correctly assign a left and a right value
 	# Boxing and unboxing is performed if required
 	fun assign(left, right: RuntimeVariable) do
-		# TODO right = autobox(right, left.mtype)
-		add("{left} = {right};")
+		add("{left} = {autobox(right, left.mtype)};")
 	end
 
 	# Return a new local RuntimeVariable initialized with the Java expression `jexpr`.
@@ -388,6 +409,63 @@ class JavaCompilerVisitor
 		end
 		add("System.err.println(\"\");")
 		add("System.exit(1);")
+	end
+
+	# Types handling
+
+	# Anchor a type to the main module and the current receiver
+	fun anchor(mtype: MType): MType do
+		if not mtype.need_anchor then return mtype
+		return mtype.anchor_to(compiler.mainmodule, frame.as(not null).receiver)
+	end
+
+	# Adapt the arguments of a method according to targetted `MMethodDef`
+	fun adapt_signature(m: MMethodDef, args: Array[RuntimeVariable]) do
+		var msignature = m.msignature.as(not null).resolve_for(
+			m.mclassdef.bound_mtype,
+			m.mclassdef.bound_mtype,
+			m.mclassdef.mmodule, true)
+		args.first = autobox(args.first, compiler.mainmodule.object_type)
+		for i in [0..msignature.arity[ do
+			args[i+1] = autobox(args[i + 1], compiler.mainmodule.object_type)
+		end
+	end
+
+	# Box primitive `value` to `mtype`.
+	private fun box(value: RuntimeVariable, mtype: MType): RuntimeVariable do
+		if value.is_boxed then return value
+		var obj_type = compiler.mainmodule.object_type
+		if value.mtype isa MNullType then
+			return new_expr("new RTVal(null, null)", compiler.mainmodule.model.null_type)
+		end
+		var mbox = value.mtype.as(MClassType).mclass
+		return new_expr("new RTVal({mbox.rt_name}.get{mbox.rt_name}(), {value})", obj_type)
+	end
+
+	# Unbox primitive `value` to `mtype`.
+	private fun unbox(value: RuntimeVariable, mtype: MType): RuntimeVariable do
+		if not value.is_boxed then return value
+		if not mtype.is_java_primitive then return value
+		if compiler.box_kinds.has(mtype) then
+			return new_expr("({mtype.java_type}){value}.value", mtype)
+		else
+			info "NOT YET IMPLEMENTED unbox for {value} ({mtype})"
+			abort
+		end
+	end
+
+	# Box or unbox primitive `value` to `mtype` if needed.
+	private fun autobox(value: RuntimeVariable, mtype: MType): RuntimeVariable do
+		if mtype.is_java_primitive then return unbox(value, mtype)
+		return box(value, mtype)
+	end
+
+	# Can this `value` be a primitive Java value?
+	private fun can_be_primitive(value: RuntimeVariable): Bool do
+		var t = value.mcasttype.undecorate
+		if not t isa MClassType then return false
+		var k = t.mclass.kind
+		return k == interface_kind or t.is_java_primitive
 	end
 
 	# Native instances
