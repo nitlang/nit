@@ -89,8 +89,7 @@ class TCPStream
 		var hostent = sys.gethostbyname(host.to_cstring)
 		if hostent.address_is_null then
 			# Error in name lookup
-			var err = sys.h_errno
-			last_error = new IOError(err.to_s)
+			last_error = new IOError.from_h_errno
 
 			closed = true
 			end_reached = true
@@ -109,7 +108,7 @@ class TCPStream
 		end_reached = closed
 		if closed then
 			# Connection failed
-			last_error = new IOError(errno.strerror)
+			last_error = new IOError.from_errno
 		end
 
 		prepare_buffer(1024)
@@ -357,4 +356,14 @@ class SocketObserver
 		var timeval = new NativeTimeval(seconds, microseconds)
 		return native.select(max.native, read_set.native, write_set.native, except_set.native, timeval) > 0
 	end
+end
+
+redef class IOError
+	# Fill a new `IOError` from the message of `errno`
+	init from_errno do init errno.strerror
+
+	# Fill a new `IOError` from the message of `h_errno`
+	#
+	# Used with `gethostbyname`.
+	init from_h_errno do init h_errno.to_s
 end
