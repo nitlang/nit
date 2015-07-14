@@ -58,9 +58,7 @@ class Time
 	# Get the current time of the day
 	init now do
 		var tm = new Tm.localtime
-		hour = tm.hour
-		minute = tm.min
-		second = tm.sec
+		init(tm.hour, tm.min, tm.sec)
 	end
 
 	# Get the difference between two times in second
@@ -104,9 +102,7 @@ class Date
 	# The date of this day
 	init today do
 		var tm = new Tm.localtime
-		year = 1900 + tm.year
-		month = tm.mon + 1
-		day = tm.mday
+		init(1900 + tm.year, tm.mon + 1, tm.mday)
 	end
 
 	# `self` formatted according to ISO 8601
