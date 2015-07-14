@@ -120,48 +120,31 @@ class Box[N: Numeric]
 
 		assert left != null and right != null and top != null and bottom != null
 
-		self.left = left
-		self.right = right
-		self.top = top
-		self.bottom = bottom
+		init(left, right, top, bottom)
 	end
 
 	# Create a `Box` using left, right, bottom and top
 	init lrbt(left, right, bottom, top: N)
 	do
-		self.left = left
-		self.right = right
-		self.top = top
-		self.bottom = bottom
+		init(left, right, top, bottom)
 	end
 
 	# Create a `Box` using left, right, top and bottom
 	init lrtb(left, right, top, bottom: N)
 	do
-		self.left = left
-		self.right = right
-		self.top = top
-		self.bottom = bottom
+		init(left, right, top, bottom)
 	end
 
 	# Create a `Box` using left, bottom, width and height
 	init lbwh(left, bottom, width, height: N)
 	do
-		self.left = left
-		self.bottom = bottom
-
-		self.right = left + width
-		self.top = bottom + height
+		init(left, left + width, bottom + height, bottom)
 	end
 
 	# Create a `Box` using left, top, width and height
 	init ltwh(left, top, width, height: N)
 	do
-		self.left = left
-		self.top = top
-
-		self.right = left + width
-		self.bottom = top - height
+		init(left, left+width, top, top - height)
 	end
 
 	redef fun to_s do return "<left: {left}, right: {right}, top: {top}, bottom: {bottom}>"

@@ -302,7 +302,7 @@ private abstract class PolygonSorter
 
 	# init calculating the center
 	init with_center(pts : Array[Array[Float]]) do
-		center = calc_center(pts)
+		init(calc_center(pts))
 	end
 
 	# Calculate the center
