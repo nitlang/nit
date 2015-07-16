@@ -195,7 +195,7 @@ class FileWriter
 			last_error = new IOError("cannot write to non-writable stream")
 			return
 		end
-		for i in s.substrings do write_native(i.to_cstring, i.length)
+		s.write_native_to(self)
 	end
 
 	redef fun write_byte(value)
@@ -676,6 +676,11 @@ end
 redef class Text
 	# Access file system related services on the path at `self`
 	fun to_path: Path do return new Path(to_s)
+
+	private fun write_native_to(s: FileWriter)
+	do
+		for i in substrings do s.write_native(i.to_cstring, 0, i.length)
+	end
 end
 
 redef class String
