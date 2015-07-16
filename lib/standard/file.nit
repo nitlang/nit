@@ -1078,6 +1078,13 @@ redef class String
 	end
 end
 
+redef class FlatString
+	redef fun write_native_to(s)
+	do
+		s.write_native(items, index_from, length)
+	end
+end
+
 redef class NativeString
 	private fun file_exists: Bool `{
 		FILE *hdl = fopen(self,"r");
