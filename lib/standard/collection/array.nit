@@ -553,6 +553,9 @@ private class ArrayReverseIterator[E]
 	do
 		_index = _array.length - 1
 	end
+
+	# Do not cache `self`
+	redef fun finish do end
 end
 
 # Others collections ##########################################################
