@@ -1224,11 +1224,6 @@ class SeparateCompilerVisitor
 				valtype = compiler.mainmodule.pointer_type
 			end
 			var res = self.new_var(mtype)
-			if compiler.runtime_type_analysis != null and not compiler.runtime_type_analysis.live_types.has(valtype) then
-				self.add("/*no autobox from {value.mtype} to {mtype}: {value.mtype} is not live! */")
-				self.add("PRINT_ERROR(\"Dead code executed!\\n\"); fatal_exit(1);")
-				return res
-			end
 			self.require_declaration("BOX_{valtype.c_name}")
 			self.add("{res} = BOX_{valtype.c_name}({value}); /* autobox from {value.mtype} to {mtype} */")
 			return res
@@ -1264,11 +1259,7 @@ class SeparateCompilerVisitor
 		   mtype.mclass.name != "NativeString" then
 			var valtype = compiler.mainmodule.pointer_type
 			var res = self.new_var(mtype)
-			if compiler.runtime_type_analysis != null and not compiler.runtime_type_analysis.live_types.has(value.mtype.as(MClassType)) then
-				self.add("/*no boxing of {value.mtype}: {value.mtype} is not live! */")
-				self.add("PRINT_ERROR(\"Dead code executed!\\n\"); fatal_exit(1);")
-				return res
-			end
+			compiler.undead_types.add(mtype)
 			self.require_declaration("BOX_{valtype.c_name}")
 			self.add("{res} = BOX_{valtype.c_name}({value}); /* boxing {value.mtype} */")
 			self.require_declaration("type_{mtype.c_name}")
