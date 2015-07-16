@@ -90,12 +90,30 @@ redef class ModelBuilder
 	fun write_java_files(compiler: JavaCompiler): Array[String] do
 		var jfiles = new Array[String]
 		for f in compiler.files do
-			var file = new FileWriter.open("{compiler.compile_dir}/{f.filename}")
+			var filepath = "{compiler.compile_dir}/{f.filename}"
+			var file = cache_file(filepath)
 			for line in f.lines do file.write(line)
-			file.close
+			close_cache(filepath, file)
 			jfiles.add(f.filename)
 		end
 		return jfiles
+	end
+
+	# Cache a file as `{filepath}.tmp` and replace the original if different
+	private fun cache_file(filepath: String): FileWriter do
+		if toolcontext.opt_ant.value and filepath.file_exists then
+			return new FileWriter.open("{filepath}.tmp")
+		else
+			return new FileWriter.open(filepath)
+		end
+	end
+
+	# Close the writer and move tmp file to original if modified
+	private fun close_cache(filepath: String, file: FileWriter) do
+		file.close
+		if "{filepath}.tmp".file_exists then
+			sys.system("if ! diff {filepath}.tmp {filepath} > /dev/null; then mv {filepath}.tmp {filepath}; else rm {filepath}.tmp; fi")
+		end
 	end
 
 	# Compile Java generated files using `make`
@@ -172,18 +190,18 @@ redef class ModelBuilder
 		antfile.write("<project>")
 		antfile.write(" <target name=\"compile\">")
 		antfile.write("  <mkdir dir=\"classes\"/>")
-        antfile.write("  <javac includes=\"{compiler.mainmodule.jname}_Main.java {jfiles.join(" ")}\" srcdir=\".\" destdir=\"classes\"/>")
+		antfile.write("  <javac includes=\"{compiler.mainmodule.jname}_Main.java {jfiles.join(" ")}\" srcdir=\".\" destdir=\"classes\"/>")
 		antfile.write(" </target>")
 		antfile.write(" <target name=\"jar\" depends=\"compile\">")
 		antfile.write("  <jar destfile=\"{outpath}.jar\" basedir=\"classes\">")
 		antfile.write("   <manifest>")
-        antfile.write("    <attribute name=\"Main-Class\" value=\"{jname}_Main\"/>")
+		antfile.write("    <attribute name=\"Main-Class\" value=\"{jname}_Main\"/>")
 		antfile.write("   </manifest>")
 		antfile.write("  </jar>")
 		antfile.write(" </target>")
 		antfile.write("</project>")
 		antfile.close
-		self.toolcontext.info("Generated antfile: {antname}", 2)
+		toolcontext.info("Generated antfile: {antname}", 2)
 	end
 
 	# Write the Java manifest file
