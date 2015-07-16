@@ -1208,22 +1208,29 @@ class SeparateCompilerVisitor
 			end
 			return self.new_expr("((struct instance_{mtype.c_name}*){value})->value; /* autounbox from {value.mtype} to {mtype} */", mtype)
 		else if not mtype.is_c_primitive then
+			assert value.mtype == value.mcasttype
 			if value.mtype.is_tagged then
+				var res
 				if value.mtype.name == "Int" then
-					return self.new_expr("(val*)({value}<<2|1)", mtype)
+					res = self.new_expr("(val*)({value}<<2|1)", mtype)
 				else if value.mtype.name == "Char" then
-					return self.new_expr("(val*)((long)({value})<<2|2)", mtype)
+					res = self.new_expr("(val*)((long)({value})<<2|2)", mtype)
 				else if value.mtype.name == "Bool" then
-					return self.new_expr("(val*)((long)({value})<<2|3)", mtype)
+					res = self.new_expr("(val*)((long)({value})<<2|3)", mtype)
 				else
 					abort
 				end
+				# Do not loose type info
+				res.mcasttype = value.mcasttype
+				return res
 			end
 			var valtype = value.mtype.as(MClassType)
 			if mtype isa MClassType and mtype.mclass.kind == extern_kind and mtype.mclass.name != "NativeString" then
 				valtype = compiler.mainmodule.pointer_type
 			end
 			var res = self.new_var(mtype)
+			# Do not loose type info
+			res.mcasttype = value.mcasttype
 			self.require_declaration("BOX_{valtype.c_name}")
 			self.add("{res} = BOX_{valtype.c_name}({value}); /* autobox from {value.mtype} to {mtype} */")
 			return res
