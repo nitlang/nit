@@ -36,9 +36,12 @@ redef class ToolContext
 	# Where to output tmp files
 	var opt_compile_dir = new OptionString("Directory used to generate temporary files", "--compile-dir")
 
+	# Compile using ant instead of make (faster, but no error display)
+	var opt_ant = new OptionBool("Batch with ant (faster, but no error display)", "--ant")
+
 	redef init do
 		super
-		option_context.add_option(opt_output, opt_compile_dir)
+		option_context.add_option(opt_output, opt_compile_dir, opt_ant)
 	end
 end
 
@@ -72,7 +75,11 @@ redef class ModelBuilder
 		time0 = time1
 		toolcontext.info("*** COMPILING JAVA ***", 1)
 
-		build_with_make(compiler, jfiles)
+		if toolcontext.opt_ant.value then
+			build_with_ant(compiler, jfiles)
+		else
+			build_with_make(compiler, jfiles)
+		end
 		write_shell_script(compiler)
 
 		time1 = get_time
@@ -107,6 +114,23 @@ redef class ModelBuilder
 		if res != 0 then toolcontext.error(null, "make failed! Error code: {res}.")
 	end
 
+	# Compile Java sources using `ant`
+	fun build_with_ant(compiler: JavaCompiler, jfiles: Array[String]) do
+		compile_antfile(compiler, jfiles)
+		var outname = compiler.outname.to_path.filename
+		var antpath = "{compiler.compile_dir}/{outname}.xml"
+		self.toolcontext.info("ant jar -f {antpath}", 2)
+		var res
+		if self.toolcontext.verbose_level >= 3 then
+			res = sys.system("ant jar -f {antpath} 2>&1")
+		else
+			res = sys.system("ant jar -f {antpath} 2>&1 > /dev/null")
+		end
+		if res != 0 then
+			toolcontext.error(null, "ant compile failed! Error code: {res}.")
+		end
+	end
+
 	# Write the Makefile used to compile Java generated files into an executable jar
 	fun write_makefile(compiler: JavaCompiler, jfiles: Array[String]) do
 		# list class files from jfiles
@@ -135,6 +159,31 @@ redef class ModelBuilder
 
 		makefile.close
 		toolcontext.info("Generated makefile: {makename}", 2)
+	end
+
+	# The Ant `build.xml` script used to compile build the final jar
+	fun compile_antfile(compiler: JavaCompiler, jfiles: Array[String]) do
+		var compile_dir = compiler.compile_dir
+		var outname = compiler.outname.to_path.filename
+		var outpath = (sys.getcwd / compiler.outname).simplify_path
+		var antname = "{compile_dir}/{outname}.xml"
+		var antfile = new FileWriter.open(antname)
+		var jname = compiler.mainmodule.jname
+		antfile.write("<project>")
+		antfile.write(" <target name=\"compile\">")
+		antfile.write("  <mkdir dir=\"classes\"/>")
+        antfile.write("  <javac includes=\"{compiler.mainmodule.jname}_Main.java {jfiles.join(" ")}\" srcdir=\".\" destdir=\"classes\"/>")
+		antfile.write(" </target>")
+		antfile.write(" <target name=\"jar\" depends=\"compile\">")
+		antfile.write("  <jar destfile=\"{outpath}.jar\" basedir=\"classes\">")
+		antfile.write("   <manifest>")
+        antfile.write("    <attribute name=\"Main-Class\" value=\"{jname}_Main\"/>")
+		antfile.write("   </manifest>")
+		antfile.write("  </jar>")
+		antfile.write(" </target>")
+		antfile.write("</project>")
+		antfile.close
+		self.toolcontext.info("Generated antfile: {antname}", 2)
 	end
 
 	# Write the Java manifest file

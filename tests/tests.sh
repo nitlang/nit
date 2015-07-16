@@ -472,7 +472,7 @@ case $engine in
 		;;
 	nitj)
 		engine=nitj;
-		OPT="--compile-dir $compdir"
+		OPT="--compile-dir $compdir --ant"
 		enginebinname=nitj;
 		savdirs="sav/nitc-common/"
 		;;
