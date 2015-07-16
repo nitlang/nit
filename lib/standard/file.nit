@@ -185,7 +185,7 @@ class FileWriter
 			last_error = new IOError("cannot write to non-writable stream")
 			return
 		end
-		write_native(s.items, s.length)
+		write_native(s.items, 0, s.length)
 	end
 
 	redef fun write(s)
@@ -226,7 +226,7 @@ class FileWriter
 	redef var is_writable = false
 
 	# Write `len` bytes from `native`.
-	private fun write_native(native: NativeString, len: Int)
+	private fun write_native(native: NativeString, from, len: Int)
 	do
 		if last_error != null then return
 		if not _is_writable then
@@ -238,7 +238,7 @@ class FileWriter
 			_is_writable = false
 			return
 		end
-		var err = _file.io_write(native, len)
+		var err = _file.io_write(native, from, len)
 		if err != len then
 			# Big problem
 			last_error = new IOError("Problem in writing : {err} {len} \n")
@@ -1160,8 +1160,8 @@ private extern class NativeFile `{ FILE* `}
 		return fread(buf, 1, len, self);
 	`}
 
-	fun io_write(buf: NativeString, len: Int): Int `{
-		return fwrite(buf, 1, len, self);
+	fun io_write(buf: NativeString, from, len: Int): Int `{
+		return fwrite(buf+from, 1, len, self);
 	`}
 
 	fun write_byte(value: Byte): Int `{
