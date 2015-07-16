@@ -819,12 +819,15 @@ class SeparateCompiler
 		var v = new_visitor
 
 		var rta = runtime_type_analysis
-		var is_dead = rta != null and not rta.live_classes.has(mclass) and not mtype.is_c_primitive and mclass.name != "NativeArray" and mclass.name != "Pointer"
+		var is_dead = rta != null and not rta.live_classes.has(mclass)
+		# While the class may be dead, some part of separately compiled code may use symbols associated to the class, so
+		# in order to compile and link correctly the C code, these symbols should be declared and defined.
+		var need_corpse = is_dead and mtype.is_c_primitive or mclass.kind == extern_kind or mclass.kind == enum_kind
 
-		v.add_decl("/* runtime class {c_name} */")
+		v.add_decl("/* runtime class {c_name}: {mclass.full_name} (dead={is_dead}; need_corpse={need_corpse})*/")
 
 		# Build class vft
-		if not is_dead then
+		if not is_dead or need_corpse then
 			self.provide_declaration("class_{c_name}", "extern const struct class class_{c_name};")
 			v.add_decl("const struct class class_{c_name} = \{")
 			v.add_decl("{self.box_kind_of(mclass)}, /* box_kind */")
@@ -861,7 +864,8 @@ class SeparateCompiler
 			self.header.add_decl("{mtype.ctype_extern} value;")
 			self.header.add_decl("\};")
 
-			if not rta.live_types.has(mtype) and mtype.mclass.name != "Pointer" then return
+			# Pointer is needed by extern types, live or not
+			if is_dead and mtype.mclass.name != "Pointer" then return
 
 			#Build BOX
 			self.provide_declaration("BOX_{c_name}", "val* BOX_{c_name}({mtype.ctype_extern});")
@@ -877,6 +881,7 @@ class SeparateCompiler
 			v.add("return (val*)res;")
 			v.add("\}")
 
+			# A Pointer class also need its constructor
 			if mtype.mclass.name != "Pointer" then return
 
 			v = new_visitor
@@ -931,7 +936,7 @@ class SeparateCompiler
 			var pointer_type = mainmodule.pointer_type
 
 			self.provide_declaration("NEW_{c_name}", "{mtype.ctype} NEW_{c_name}(const struct type* type);")
-			v.add_decl("/* allocate {mtype} */")
+			v.add_decl("/* allocate extern {mtype} */")
 			v.add_decl("{mtype.ctype} NEW_{c_name}(const struct type* type) \{")
 			if is_dead then
 				v.add_abort("{mclass} is DEAD")
