@@ -282,7 +282,7 @@ end
 #
 # Also used when one want to give a single element when a full
 # collection is expected
-class Container[E]
+class Ref[E]
 	super Collection[E]
 
 	redef fun first do return item
@@ -304,14 +304,14 @@ class Container[E]
 		end
 	end
 
-	redef fun iterator do return new ContainerIterator[E](self)
+	redef fun iterator do return new RefIterator[E](self)
 
 	# The stored item
 	var item: E is writable
 end
 
 # This iterator is quite stupid since it is used for only one item.
-private class ContainerIterator[E]
+private class RefIterator[E]
 	super Iterator[E]
 	redef fun item do return _container.item
 
@@ -319,7 +319,7 @@ private class ContainerIterator[E]
 
 	redef var is_ok = true
 
-	var container: Container[E]
+	var container: Ref[E]
 end
 
 # Items can be removed from this collection

@@ -242,7 +242,7 @@ redef class Couple[F, S]
 	end
 end
 
-redef class Container[E]
+redef class Ref[E]
 	super Serializable
 
 	redef init from_deserializer(v)

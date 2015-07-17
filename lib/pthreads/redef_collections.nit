@@ -27,7 +27,7 @@
 # - [ ] `List`
 # - [ ] `HashMap`
 # - [ ] `HashSet`
-# - [ ] `Container`
+# - [ ] `Ref`
 # - [ ] `Queue`
 module redef_collections
 

@@ -327,7 +327,7 @@ end
 
 # Linked nodes that constitute a linked list.
 private class ListNode[E]
-	super Container[E]
+	super Ref[E]
 
 	# The next node.
 	var next: nullable ListNode[E] = null
