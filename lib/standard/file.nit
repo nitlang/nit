@@ -704,21 +704,32 @@ redef class String
 	# Copy content of file at `self` to `dest`
 	fun file_copy_to(dest: String) do to_path.copy(dest.to_path)
 
-	# Remove the trailing extension `ext`.
+	# Remove the trailing `extension`.
 	#
-	# `ext` usually starts with a dot but could be anything.
+	# `extension` usually starts with a dot but could be anything.
 	#
-	#     assert "file.txt".strip_extension(".txt")  == "file"
-	#     assert "file.txt".strip_extension("le.txt")  == "fi"
-	#     assert "file.txt".strip_extension("xt")  == "file.t"
+	#     assert "file.txt".strip_extension(".txt")   == "file"
+	#     assert "file.txt".strip_extension("le.txt") == "fi"
+	#     assert "file.txt".strip_extension("xt")     == "file.t"
 	#
-	# if `ext` is not present, `self` is returned unmodified.
+	# If `extension == null`, the rightmost extension is stripped, including the last dot.
+	#
+	#     assert "file.txt".strip_extension           == "file"
+	#
+	# If `extension` is not present, `self` is returned unmodified.
 	#
 	#     assert "file.txt".strip_extension(".tar.gz")  == "file.txt"
-	fun strip_extension(ext: String): String
+	fun strip_extension(extension: nullable String): String
 	do
-		if has_suffix(ext) then
-			return substring(0, length - ext.length)
+		if extension == null then
+			extension = file_extension
+			if extension == null then
+				return self
+			else extension = ".{extension}"
+		end
+
+		if has_suffix(extension) then
+			return substring(0, length - extension.length)
 		end
 		return self
 	end
