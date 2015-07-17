@@ -13,7 +13,9 @@
 # limitations under the License.
 
 # Provides the noise generators `PerlinNoise` and `InterpolatedNoise`
-module noise
+module noise is serialize
+
+import serialization
 
 # 2D noise generator
 abstract class Noise
@@ -64,7 +66,7 @@ abstract class Noise
 	# Seed to the random number generator `gradient_vector`
 	#
 	# By default, `seed` has a random value created with `Int::rand`.
-	var seed: Int = 19559.rand is lazy, writable
+	var seed: Int = 19511359.rand is lazy, writable
 end
 
 # 2D Perlin noise generator using layered `InterpolatedNoise`
@@ -195,7 +197,7 @@ class PerlinNoise
 	# Used to get seeds for layers from the previous layers or `seed`.
 	protected fun pseudo_random(value: Int): Int
 	do
-		return value + 2935391 % 954847
+		return (value * 3537391).mask % 1291377
 	end
 end
 
@@ -299,7 +301,8 @@ class InterpolatedNoise
 		var ix1 = sx.lerp(n0, n1)
 		var val = sy.lerp(ix0, ix1)
 
-		# Return value in [min...max] from val in [-0.5...0.5]
+		# Return value in [min...max] from val in [-1.0...1.0]
+		val /= 2.0
 		val += 0.5
 		return val.lerp(min, max)
 	end
@@ -319,10 +322,20 @@ class InterpolatedNoise
 		#
 		# These magic prime numbers were determined good enough by
 		# non-emperical experimentation. They may need to be changed/improved.
-		var i = 17957*seed + 45127*x + 22613*y
-		var mod = 19031
+		var seed = 817721 + self.seed
+		var i = seed * (x+seed) * 25111217 * (y+seed) * 72233613
+		var mod = 137121
+		var angle = (i.mask.abs%mod).to_f*2.0*pi/mod.to_f
 
-		var angle = (i%mod).to_f*2.0*pi/mod.to_f
+		# Debug code to evaluate the efficiency of the random angle generator
+		# The average of the produced angles should be at pi
+		#
+		#var sum = once new Container[Float](0.0)
+		#var count = once new Container[Float](0.0)
+		#sum.item += angle
+		#count.item += 1.0
+		#if count.item.to_i % 1000 == 0 then print "avg:{sum.item/count.item}/{count.item} i:{i} a:{angle} ({x}, {y}: {seed})"
+
 		if w == 0 then return angle.cos
 		return angle.sin
 	end
@@ -333,5 +346,16 @@ class InterpolatedNoise
 		var dy = y - iy.to_f
 
 		return dx*gradient_vector(ix, iy, 0) + dy*gradient_vector(ix, iy, 1)
+	end
+end
+
+redef universal Int
+	# The value of the least-significant 30 bits of `self`
+	#
+	# This mask is used as compatibility with 32 bits architecture.
+	# The missing 2 bits are used to tag integers by the Nit system.
+	private fun mask: Int
+	do
+		return bin_and(0x3FFF_FFFF)
 	end
 end
