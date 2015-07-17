@@ -213,7 +213,10 @@ class JavaCompiler
 		# compile class structures
 		compile_mclasses_to_java
 
-		# TODO compile methods
+		# compile method structures
+		compile_mmethods_to_java
+
+		# TODO compile main
 		modelbuilder.toolcontext.info("NOT YET IMPLEMENTED", 0)
 	end
 
@@ -224,6 +227,21 @@ class JavaCompiler
 	fun compile_mclasses_to_java do
 		for mclass in mainmodule.model.mclasses do
 			mclass.compile_to_java(new_visitor("{mclass.rt_name}.java"))
+		end
+	end
+
+	# Generate a `RTMethod` for each `MMethodDef` found in model
+	#
+	# This is a separate phase.
+	fun compile_mmethods_to_java do
+		for mmodule in mainmodule.in_importation.greaters do
+			for mclassdef in mmodule.mclassdefs do
+				for mdef in mclassdef.mpropdefs do
+					if mdef isa MMethodDef then
+						mdef.compile_to_java(new_visitor("{mdef.rt_name}.java"))
+					end
+				end
+			end
 		end
 	end
 end
@@ -371,5 +389,23 @@ redef class MMethodDef
 	# Runtime name
 	private fun rt_name: String do
 		return "RTMethod_{mclassdef.mmodule.jname}_{mclassdef.mclass.jname}_{mproperty.jname}"
+	end
+
+	# Generate a Java RTMethod for `self`
+	fun compile_to_java(v: JavaCompilerVisitor) do
+		v.add("public class {rt_name} extends RTMethod \{")
+		v.add("  protected static RTMethod instance;")
+		v.add("  public static RTMethod get{rt_name}() \{")
+		v.add("    if(instance == null) \{")
+		v.add("      instance = new {rt_name}();")
+		v.add("    \}")
+		v.add("    return instance;")
+		v.add("  \}")
+		v.add("  @Override")
+		v.add("  public RTVal exec(RTVal[] args) \{")
+		# TODO compile_inside_to_java(v)
+		v.add("    return null;")
+		v.add("  \}")
+		v.add("\}")
 	end
 end
