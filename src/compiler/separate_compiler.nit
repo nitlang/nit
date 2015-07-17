@@ -819,12 +819,15 @@ class SeparateCompiler
 		var v = new_visitor
 
 		var rta = runtime_type_analysis
-		var is_dead = rta != null and not rta.live_classes.has(mclass) and not mtype.is_c_primitive and mclass.name != "NativeArray" and mclass.name != "Pointer"
+		var is_dead = rta != null and not rta.live_classes.has(mclass)
+		# While the class may be dead, some part of separately compiled code may use symbols associated to the class, so
+		# in order to compile and link correctly the C code, these symbols should be declared and defined.
+		var need_corpse = is_dead and mtype.is_c_primitive or mclass.kind == extern_kind or mclass.kind == enum_kind
 
-		v.add_decl("/* runtime class {c_name} */")
+		v.add_decl("/* runtime class {c_name}: {mclass.full_name} (dead={is_dead}; need_corpse={need_corpse})*/")
 
 		# Build class vft
-		if not is_dead then
+		if not is_dead or need_corpse then
 			self.provide_declaration("class_{c_name}", "extern const struct class class_{c_name};")
 			v.add_decl("const struct class class_{c_name} = \{")
 			v.add_decl("{self.box_kind_of(mclass)}, /* box_kind */")
@@ -861,7 +864,8 @@ class SeparateCompiler
 			self.header.add_decl("{mtype.ctype_extern} value;")
 			self.header.add_decl("\};")
 
-			if not rta.live_types.has(mtype) and mtype.mclass.name != "Pointer" then return
+			# Pointer is needed by extern types, live or not
+			if is_dead and mtype.mclass.name != "Pointer" then return
 
 			#Build BOX
 			self.provide_declaration("BOX_{c_name}", "val* BOX_{c_name}({mtype.ctype_extern});")
@@ -877,6 +881,7 @@ class SeparateCompiler
 			v.add("return (val*)res;")
 			v.add("\}")
 
+			# A Pointer class also need its constructor
 			if mtype.mclass.name != "Pointer" then return
 
 			v = new_visitor
@@ -931,7 +936,7 @@ class SeparateCompiler
 			var pointer_type = mainmodule.pointer_type
 
 			self.provide_declaration("NEW_{c_name}", "{mtype.ctype} NEW_{c_name}(const struct type* type);")
-			v.add_decl("/* allocate {mtype} */")
+			v.add_decl("/* allocate extern {mtype} */")
 			v.add_decl("{mtype.ctype} NEW_{c_name}(const struct type* type) \{")
 			if is_dead then
 				v.add_abort("{mclass} is DEAD")
@@ -1203,27 +1208,29 @@ class SeparateCompilerVisitor
 			end
 			return self.new_expr("((struct instance_{mtype.c_name}*){value})->value; /* autounbox from {value.mtype} to {mtype} */", mtype)
 		else if not mtype.is_c_primitive then
+			assert value.mtype == value.mcasttype
 			if value.mtype.is_tagged then
+				var res
 				if value.mtype.name == "Int" then
-					return self.new_expr("(val*)({value}<<2|1)", mtype)
+					res = self.new_expr("(val*)({value}<<2|1)", mtype)
 				else if value.mtype.name == "Char" then
-					return self.new_expr("(val*)((long)({value})<<2|2)", mtype)
+					res = self.new_expr("(val*)((long)({value})<<2|2)", mtype)
 				else if value.mtype.name == "Bool" then
-					return self.new_expr("(val*)((long)({value})<<2|3)", mtype)
+					res = self.new_expr("(val*)((long)({value})<<2|3)", mtype)
 				else
 					abort
 				end
+				# Do not loose type info
+				res.mcasttype = value.mcasttype
+				return res
 			end
 			var valtype = value.mtype.as(MClassType)
 			if mtype isa MClassType and mtype.mclass.kind == extern_kind and mtype.mclass.name != "NativeString" then
 				valtype = compiler.mainmodule.pointer_type
 			end
 			var res = self.new_var(mtype)
-			if compiler.runtime_type_analysis != null and not compiler.runtime_type_analysis.live_types.has(valtype) then
-				self.add("/*no autobox from {value.mtype} to {mtype}: {value.mtype} is not live! */")
-				self.add("PRINT_ERROR(\"Dead code executed!\\n\"); fatal_exit(1);")
-				return res
-			end
+			# Do not loose type info
+			res.mcasttype = value.mcasttype
 			self.require_declaration("BOX_{valtype.c_name}")
 			self.add("{res} = BOX_{valtype.c_name}({value}); /* autobox from {value.mtype} to {mtype} */")
 			return res
@@ -1259,11 +1266,7 @@ class SeparateCompilerVisitor
 		   mtype.mclass.name != "NativeString" then
 			var valtype = compiler.mainmodule.pointer_type
 			var res = self.new_var(mtype)
-			if compiler.runtime_type_analysis != null and not compiler.runtime_type_analysis.live_types.has(value.mtype.as(MClassType)) then
-				self.add("/*no boxing of {value.mtype}: {value.mtype} is not live! */")
-				self.add("PRINT_ERROR(\"Dead code executed!\\n\"); fatal_exit(1);")
-				return res
-			end
+			compiler.undead_types.add(mtype)
 			self.require_declaration("BOX_{valtype.c_name}")
 			self.add("{res} = BOX_{valtype.c_name}({value}); /* boxing {value.mtype} */")
 			self.require_declaration("type_{mtype.c_name}")
