@@ -470,6 +470,12 @@ case $engine in
 		OPT="--vm $OPT"
 		savdirs="sav/niti/"
 		;;
+	nitj)
+		engine=nitj;
+		OPT="--compile-dir $compdir"
+		enginebinname=nitj;
+		savdirs="sav/nitc-common/"
+		;;
 	emscripten)
 		enginebinname=nitc
 		OPT="-m emscripten_nodejs.nit --semi-global $OPT --compile-dir $compdir"
