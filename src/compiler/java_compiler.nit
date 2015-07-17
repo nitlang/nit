@@ -210,8 +210,21 @@ class JavaCompiler
 		# compile java classes used to represents the runtime model of the program
 		rt_model.compile_rtmodel(self)
 
-		# TODO compile classes and methods
+		# compile class structures
+		compile_mclasses_to_java
+
+		# TODO compile methods
 		modelbuilder.toolcontext.info("NOT YET IMPLEMENTED", 0)
+	end
+
+	# Generate a `RTClass` for each `MClass` found in model
+	#
+	# This is a global phase because we need to know all the program to build
+	# attributes, fill vft and type table.
+	fun compile_mclasses_to_java do
+		for mclass in mainmodule.model.mclasses do
+			mclass.compile_to_java(new_visitor("{mclass.rt_name}.java"))
+		end
 	end
 end
 
@@ -333,6 +346,24 @@ redef class MClass
 
 	# Runtime name
 	private fun rt_name: String do return "RTClass_{intro.mmodule.jname}_{jname}"
+
+	# Generate a Java RTClass for a Nit MClass
+	fun compile_to_java(v: JavaCompilerVisitor) do
+		v.add("public class {rt_name} extends RTClass \{")
+		v.add("  protected static RTClass instance;")
+		v.add("  private {rt_name}() \{")
+		v.add("    this.class_name = \"{name}\";")
+		# TODO compile_vft(v)
+		# TODO compile_type_table(v)
+		v.add("  \}")
+		v.add("  public static RTClass get{rt_name}() \{")
+		v.add("    if(instance == null) \{")
+		v.add("      instance = new {rt_name}();")
+		v.add("    \}")
+		v.add("    return instance;")
+		v.add("  \}")
+		v.add("\}")
+	end
 end
 
 redef class MMethodDef
