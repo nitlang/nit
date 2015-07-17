@@ -734,17 +734,21 @@ redef class String
 		return self
 	end
 
-	# Extract the basename of a path and remove the extension
+	# Extract the basename of a path and strip the `extension`
 	#
-	#     assert "/path/to/a_file.ext".basename(".ext")         == "a_file"
-	#     assert "path/to/a_file.ext".basename(".ext")          == "a_file"
-	#     assert "path/to".basename(".ext")                     == "to"
-	#     assert "path/to/".basename(".ext")                    == "to"
+	# The extension is stripped only if `extension != null`.
+	#
+	#     assert "/path/to/a_file.ext".basename(".ext")     == "a_file"
+	#     assert "path/to/a_file.ext".basename(".ext")      == "a_file"
+	#     assert "path/to/a_file.ext".basename              == "a_file.ext"
+	#     assert "path/to".basename(".ext")                 == "to"
+	#     assert "path/to/".basename(".ext")                == "to"
+	#     assert "path/to".basename                         == "to"
 	#     assert "path".basename("")                        == "path"
 	#     assert "/path".basename("")                       == "path"
 	#     assert "/".basename("")                           == "/"
 	#     assert "".basename("")                            == ""
-	fun basename(ext: String): String
+	fun basename(extension: nullable String): String
 	do
 		var l = length - 1 # Index of the last char
 		while l > 0 and self.chars[l] == '/' do l -= 1 # remove all trailing `/`
@@ -754,7 +758,10 @@ redef class String
 		if pos >= 0 then
 			n = substring(pos+1, l-pos)
 		end
-		return n.strip_extension(ext)
+
+		if extension != null then
+			return n.strip_extension(extension)
+		else return n
 	end
 
 	# Extract the dirname of a path
