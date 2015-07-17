@@ -1629,15 +1629,15 @@ redef class Collection[E]
 end
 
 redef class Map[K,V]
-	# Concatenate couple of 'key value'.
-	# key and value are separated by `couple_sep`.
-	# each couple is separated each couple with `sep`.
+	# Concatenate couples of key value.
+	# Key and value are separated by `couple_sep`.
+	# Couples are separated by `sep`.
 	#
-	#     var m = new ArrayMap[Int, String]
+	#     var m = new HashMap[Int, String]
 	#     m[1] = "one"
 	#     m[10] = "ten"
 	#     assert m.join("; ", "=") == "1=one; 10=ten"
-	fun join(sep: String, couple_sep: String): String is abstract
+	fun join(sep, couple_sep: String): String is abstract
 end
 
 redef class Sys
