@@ -49,4 +49,4 @@ printn("The value of a is: " + a.to_s + ".\n")
 # Fiveth way: Join arrays.
 # Pro: Sometime efficient on complex concatenation.
 # Con: Crazy.
-printn(["The value of a is: ", a.to_s, ".\n"].join(""))
+printn(["The value of a is: ", a.to_s, ".\n"].join)

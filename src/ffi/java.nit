@@ -606,7 +606,7 @@ redef class MMethod
 			else format.add "V"
 		end
 
-		return format.join("")
+		return format.join
 	end
 
 	# Similar to `build_c_signature` but adapted to create the signature expected by JNI for C functions

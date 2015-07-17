@@ -34,6 +34,6 @@ if args.not_empty then n = args.first.to_i
 for i in [0..10[ do
 	var a = (['[', ']'] * n)
 	a.shuffle
-	var b = a.join("")
+	var b = a.join
 	if is_balanced(b) then print "{b} is well-balanced" else print "{b} is not well-balanced"
 end

@@ -84,10 +84,10 @@ class CodeGenerator
 		if module_name != null then file_out.write "module {module_name}\n"
 
 		file_out.write("\n")
-		file_out.write(imports.join(""))
+		file_out.write(imports.join)
 		file_out.write("\n")
-		file_out.write(class_content.join(""))
-		file_out.write(wrappers.join(""))
+		file_out.write(class_content.join)
+		file_out.write(wrappers.join)
 	end
 
 	fun gen_licence: String
@@ -117,7 +117,7 @@ class CodeGenerator
 		temp.add("extern class Native{jtype.id} in \"Java\" `\{ {jtype} `\}\n")
 		temp.add("\tsuper JavaObject\n\n")
 
-		return temp.join("")
+		return temp.join
 	end
 
 	fun gen_unknown_class_header(jtype: JavaType): String
@@ -133,7 +133,7 @@ class CodeGenerator
 		temp.add("extern class {nit_type} in \"Java\" `\{ {jtype.to_package_name} `\}\n")
 		temp.add("\tsuper JavaObject\n\nend\n")
 
-		return temp.join("")
+		return temp.join
 	end
 
 	fun gen_attribute(jid: String, jtype: JavaType): String
@@ -219,7 +219,7 @@ class CodeGenerator
 
 		var temp = new Array[String]
 
-		temp.add(comment + nit_signature.join(""))
+		temp.add(comment + nit_signature.join)
 
 		# FIXME : This huge `if` block is only necessary to copy primitive arrays as long as there's no better way to do it
 		if comment == "#" then
@@ -235,7 +235,7 @@ class CodeGenerator
 			temp.add(" in \"Java\" `\{\n{comment}\t\tself.{jmethod_id}({java_params});\n{comment}\t`\}\n")
 		end
 
-		return temp.join("")
+		return temp.join
 	end
 end
 
