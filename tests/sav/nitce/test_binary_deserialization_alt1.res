@@ -32,5 +32,5 @@ Deserialization Error: Doesn't know how to deserialize class "HashSet", Deserial
 # Src:
 <G: hs: -1, 0; s: one, two; hm: one. 1, two. 2; am: three. 3, four. 4>
 # Dst:
-<G: hs: ; s: ; hm: ; am: >
+<G: hs: -1, 0; s: one, two; hm: one. 1, two. 2; am: three. 3, four. 4>
 
