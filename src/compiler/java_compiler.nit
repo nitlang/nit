@@ -194,10 +194,42 @@ class JavaCompiler
 		return file
 	end
 
+	# Kind of visitor to use
+	type VISITOR: JavaCompilerVisitor
+
+	# Initialize a visitor specific for the compiler engine
+	fun new_visitor(filename: String): VISITOR do
+		return new JavaCompilerVisitor(self, new_file(filename))
+	end
+
 	# Compile Nit code to Java
 	fun do_compilation do
 		modelbuilder.toolcontext.info("NOT YET IMPLEMENTED", 0)
 	end
+end
+
+# The class visiting the AST
+#
+# A visitor is attached to one JavaCodeFile it writes into.
+class JavaCompilerVisitor
+	super Visitor
+
+	# JavaCompiler used with this visitor
+	type COMPILER: JavaCompiler
+
+	# The associated compiler
+	var compiler: JavaCompiler
+
+	# The file to write generated code into
+	var file: JavaCodeFile
+
+	# Code generation
+
+	# Add a line (will be suffixed by `\n`)
+	fun add(line: String) do file.lines.add("{line}\n")
+
+	# Add a new partial line (no `\n` suffix)
+	fun addn(line: String) do file.lines.add(line)
 end
 
 # A file containing Java code.
