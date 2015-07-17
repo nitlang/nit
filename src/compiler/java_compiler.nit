@@ -333,17 +333,24 @@ class JavaCompilerVisitor
 	# Compile a statement (if any)
 	fun stmt(nexpr: nullable AExpr) do
 		if nexpr == null then return
+		var old = self.current_node
+		current_node = nexpr
 		nexpr.stmt(self)
+		current_node = old
 	end
 
 	# Compile an expression an return its result
 	# `mtype` is the expected return type, pass null if no specific type is expected.
 	fun expr(nexpr: AExpr, mtype: nullable MType): RuntimeVariable do
+		var old = current_node
+		current_node = nexpr
+
 		var res = null
 		if nexpr.mtype != null then
 			res = nexpr.expr(self)
 		end
 		assert res != null
+		current_node = old
 		return res
 	end
 
@@ -361,6 +368,19 @@ class JavaCompilerVisitor
 		var res = new_var(mtype)
 		add("{res} = {jexpr};")
 		return res
+	end
+
+	# Generate generic abort
+	#
+	# Used by aborts, asserts, casts, etc.
+	fun add_abort(message: String) do
+		add("System.err.print(\"Runtime error: {message}\");")
+		var node = current_node
+		if node != null then
+			add("System.err.print(\" ({node.location.short_location})\");")
+		end
+		add("System.err.println(\"\");")
+		add("System.exit(1);")
 	end
 
 	# Display a info message
@@ -517,6 +537,15 @@ class JavaStaticFrame
 
 	# The label at the end of the property
 	var returnlabel: nullable String = null is writable
+end
+
+redef class Location
+	# Return a shortened version of the location with `"{file}:{line_start}"`
+	fun short_location: String do
+		var file = self.file
+		if file == null then return "<no file>:{line_start}"
+		return "{file.filename.escape_to_c}:{line_start}"
+	end
 end
 
 redef class MType
@@ -717,6 +746,10 @@ redef class ABlockExpr
 		end
 		return v.expr(last, null)
 	end
+end
+
+redef class AAbortExpr
+	redef fun stmt(v) do v.add_abort("Aborted")
 end
 
 redef class ADebugTypeExpr
