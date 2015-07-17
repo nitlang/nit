@@ -115,59 +115,59 @@ extern class NativeCurl `{ CURL * `}
 	# Request Chars internal information from the CURL session
 	fun easy_getinfo_chars(opt: CURLInfoChars): nullable String
 	do
-		 var answ = new Container[NativeString]("".to_cstring)
+		 var answ = new Ref[NativeString]("".to_cstring)
 		 if not native_getinfo_chars(opt, answ).is_ok then return null
 		 if answ.item.address_is_null then return null
 		 return answ.item.to_s
 	end
 
 	# Internal method used to get String object information initially knowns as C Chars type
-	private fun native_getinfo_chars(opt: CURLInfoChars, res: Container[NativeString]): CURLCode
-	import Container[NativeString].item= `{
+	private fun native_getinfo_chars(opt: CURLInfoChars, res: Ref[NativeString]): CURLCode
+	import Ref[NativeString].item= `{
 		char *r;
 		CURLcode c = curl_easy_getinfo( self, opt, &r);
-		if (c == CURLE_OK) Container_of_NativeString_item__assign(res, r);
+		if (c == CURLE_OK) Ref_of_NativeString_item__assign(res, r);
 		return c;
 	`}
 
 	# Request Long internal information from the CURL session
 	fun easy_getinfo_long(opt: CURLInfoLong): nullable Int
 	do
-		 var answ = new Container[Int](0)
+		 var answ = new Ref[Int](0)
 		 if not native_getinfo_long(opt, answ).is_ok then return null
 		 return answ.item
 	end
 
 	# Internal method used to get Int object information initially knowns as C Long type
-	private fun native_getinfo_long(opt: CURLInfoLong, res: Container[Int]): CURLCode
-	import Container[Int].item= `{
+	private fun native_getinfo_long(opt: CURLInfoLong, res: Ref[Int]): CURLCode
+	import Ref[Int].item= `{
 		long r;
 		CURLcode c = curl_easy_getinfo( self, opt, &r);
-		if (c == CURLE_OK) Container_of_Int_item__assign(res, r);
+		if (c == CURLE_OK) Ref_of_Int_item__assign(res, r);
 		return c;
 	`}
 
 	# Request Double internal information from the CURL session
 	fun easy_getinfo_double(opt: CURLInfoDouble): nullable Float
 	do
-		 var answ = new Container[Float](0.0)
+		 var answ = new Ref[Float](0.0)
 		 if not native_getinfo_double(opt, answ).is_ok then return null
 		 return answ.item
 	end
 
 	# Internal method used to get Int object information initially knowns as C Double type
-	private fun native_getinfo_double(opt: CURLInfoDouble, res: Container[Float]): CURLCode
-	import Container[Float].item= `{
+	private fun native_getinfo_double(opt: CURLInfoDouble, res: Ref[Float]): CURLCode
+	import Ref[Float].item= `{
 		double r;
 		CURLcode c = curl_easy_getinfo(self, opt, &r);
-		if (c == CURLE_OK) Container_of_Float_item__assign(res, r);
+		if (c == CURLE_OK) Ref_of_Float_item__assign(res, r);
 		return c;
 	`}
 
 	# Request SList internal information from the CURL session
 	fun easy_getinfo_slist(opt: CURLInfoSList): nullable Array[String]
 	do
-		var answ = new Container[CURLSList](new CURLSList)
+		var answ = new Ref[CURLSList](new CURLSList)
 		if not native_getinfo_slist(opt, answ).is_ok then return null
 
 		var native = answ.item
@@ -177,11 +177,11 @@ extern class NativeCurl `{ CURL * `}
 	end
 
 	# Internal method used to get Array[String] object information initially knowns as C SList type
-	private fun native_getinfo_slist(opt: CURLInfoSList, res: Container[CURLSList]): CURLCode
-	import Container[CURLSList].item= `{
+	private fun native_getinfo_slist(opt: CURLInfoSList, res: Ref[CURLSList]): CURLCode
+	import Ref[CURLSList].item= `{
 		struct curl_slist* csl;
 		CURLcode c = curl_easy_getinfo(self, opt, &csl);
-		if (c == CURLE_OK) Container_of_CURLSList_item__assign(res, csl);
+		if (c == CURLE_OK) Ref_of_CURLSList_item__assign(res, csl);
 		return c;
 	`}
 
