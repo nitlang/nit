@@ -805,6 +805,33 @@ redef class AImplicitSelfExpr
 	redef fun expr(v) do return v.frame.as(not null).arguments.first
 end
 
+redef class AVardeclExpr
+	redef fun stmt(v) do
+		var variable = self.variable.as(not null)
+		var ne = self.n_expr
+		var decl = v.variable(variable)
+		if ne != null then
+			var i = v.expr(ne, variable.declared_type)
+			v.assign(decl, i)
+		end
+	end
+end
+
+redef class AVarExpr
+	redef fun expr(v) do
+		return v.variable(self.variable.as(not null))
+	end
+end
+
+redef class AVarAssignExpr
+	redef fun expr(v) do
+		var variable = self.variable.as(not null)
+		var i = v.expr(self.n_value, variable.declared_type)
+		v.assign(v.variable(variable), i)
+		return i
+	end
+end
+
 redef class AIntExpr
 	redef fun expr(v) do return v.int_instance(self.value.as(not null))
 end
