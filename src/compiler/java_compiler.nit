@@ -346,6 +346,222 @@ class JavaCompilerVisitor
 		return res
 	end
 
+	# Calls handling
+
+	# Compile a call within a callsite
+	fun compile_callsite(callsite: CallSite, arguments: Array[RuntimeVariable]): nullable RuntimeVariable do
+		var initializers = callsite.mpropdef.initializers
+		if not initializers.is_empty then
+			var recv = arguments.first
+
+			var i = 1
+			for p in initializers do
+				if p isa MMethod then
+					var args = [recv]
+					var msignature = p.intro.msignature
+					if msignature != null then
+						for x in msignature.mparameters do
+							args.add arguments[i]
+							i += 1
+						end
+					end
+					send(p, args)
+				else if p isa MAttribute then
+					info("NOT YET IMPLEMENTED {class_name}::compile_callsite for MAttribute `{p}`")
+					#self.write_attribute(p, recv, arguments[i])
+					i += 1
+				else abort
+			end
+			assert i == arguments.length
+
+			return send(callsite.mproperty, [recv])
+		end
+
+		return send(callsite.mproperty, arguments)
+	end
+
+	# Evaluate `args` as expressions in the call of `mpropdef` on `recv`.
+	#
+	# This method is used to manage varargs in signatures and returns the real array
+	# of runtime variables to use in the call.
+	fun varargize(mpropdef: MMethodDef, map: nullable SignatureMap, recv: RuntimeVariable, args: SequenceRead[AExpr]): Array[RuntimeVariable] do
+		var msignature = mpropdef.new_msignature or else mpropdef.msignature.as(not null)
+		var res = new Array[RuntimeVariable]
+		res.add(recv)
+
+		if msignature.arity == 0 then return res
+
+		if map == null then
+			assert args.length == msignature.arity
+			for ne in args do
+				res.add expr(ne, null)
+			end
+			return res
+		end
+
+		# Eval in order of arguments, not parameters
+		var exprs = new Array[RuntimeVariable].with_capacity(args.length)
+		for ne in args do
+			exprs.add expr(ne, null)
+		end
+
+		# Fill `res` with the result of the evaluation according to the mapping
+		for i in [0..msignature.arity[ do
+			var param = msignature.mparameters[i]
+			var j = map.map.get_or_null(i)
+			if j == null then
+				# default value
+				res.add(null_instance)
+				continue
+			end
+			if param.is_vararg and map.vararg_decl > 0 then
+				var vararg = exprs.sub(j, map.vararg_decl)
+				var elttype = param.mtype
+				var arg = self.vararg_instance(mpropdef, recv, vararg, elttype)
+				res.add(arg)
+				continue
+			end
+			res.add exprs[j]
+		end
+		return res
+	end
+
+	#  Generate a static call on a method definition (no receiver needed).
+	fun static_call(mmethoddef: MMethodDef, arguments: Array[RuntimeVariable]): nullable RuntimeVariable do
+		var res: nullable RuntimeVariable
+		var ret = mmethoddef.msignature.as(not null).return_mtype
+		if ret == null then
+			res = null
+		else
+			ret = ret.resolve_for(mmethoddef.mclassdef.bound_mtype, mmethoddef.mclassdef.bound_mtype, mmethoddef.mclassdef.mmodule, true)
+			res = self.new_var(ret)
+		end
+
+		# Autobox arguments
+		adapt_signature(mmethoddef, arguments)
+
+		var rt_name = mmethoddef.rt_name
+		if res == null then
+			add("{rt_name}.get{rt_name}().exec(new RTVal[]\{{arguments.join(",")}\});")
+			return null
+		end
+		var ress = new_expr("{rt_name}.get{rt_name}().exec(new RTVal[]\{{arguments.join(",")}\});", compiler.mainmodule.object_type)
+		assign(res, ress)
+		return res
+	end
+
+	#  Generate a polymorphic send for `method` with `arguments`
+	fun send(mmethod: MMethod, arguments: Array[RuntimeVariable]): nullable RuntimeVariable do
+		# Polymorphic send
+		return table_send(mmethod, arguments)
+	end
+
+
+	# Handle common special cases before doing the effective method invocation
+	# This methods handle the `==` and `!=` methods and the case of the null receiver.
+	# Note: a { is open in the generated C, that enclose and protect the effective method invocation.
+	# Client must not forget to close the } after them.
+	#
+	# The value returned is the result of the common special cases.
+	# If not null, client must compile it with the result of their own effective method invocation.
+	#
+	# If `before_send` can shortcut the whole message sending, a dummy `if(0){`
+	# is generated to cancel the effective method invocation that will follow
+	# TODO: find a better approach
+	private fun before_send(res: nullable RuntimeVariable, mmethod: MMethodDef, arguments: Array[RuntimeVariable]) do
+		var bool_type = compiler.mainmodule.bool_type
+		var recv = arguments.first
+		var consider_null = mmethod.name == "==" or mmethod.name == "!=" or mmethod.name == "is_same_instance"
+		if recv.mcasttype isa MNullableType or recv.mcasttype isa MNullType then
+			add("if ({recv} == null || {recv}.is_null()) \{")
+			if mmethod.name == "==" or mmethod.name == "is_same_instance" then
+				if res == null then res = new_var(bool_type)
+				var arg = arguments[1]
+				if arg.mcasttype isa MNullableType then
+					add("{res} = ({arg} == null || {arg}.is_null());")
+				else if arg.mcasttype isa MNullType then
+					add("{res} = true; /* is null */")
+				else
+					add("{res} = false; /* {arg.inspect} cannot be null */")
+				end
+			else if mmethod.name == "!=" then
+				if res == null then res = new_var(bool_type)
+				# res = self.new_var(bool_type)
+				var arg = arguments[1]
+				if arg.mcasttype isa MNullableType then
+					add("{res} = ({arg} != null && !{arg}.is_null());")
+				else if arg.mcasttype isa MNullType then
+					add("{res} = false; /* is null */")
+				else
+					add("{res} = true; /* {arg.inspect} cannot be null */")
+				end
+			else
+				add_abort("Receiver is null")
+				ret(null_instance)
+			end
+			add("\} else \{")
+		else
+			add "\{"
+			add "/* recv ({recv}) cannot be null since it's a {recv.mcasttype}"
+		end
+		if consider_null then
+			var arg = arguments[1]
+			if arg.mcasttype isa MNullType then
+				if res == null then res = new_var(bool_type)
+				if mmethod.name == "!=" then
+					add("{res} = true; /* arg is null and recv is not */")
+				else # `==` and `is_same_instance`
+					add("{res} = false; /* arg is null but recv is not */")
+				end
+				add("\}") # closes the null case
+				add("if (false) \{") # what follow is useless, Javac will drop it
+			end
+		end
+	end
+
+	# Perform a method call through vft
+	private fun table_send(mmethod: TableCallable, arguments: Array[RuntimeVariable]): nullable RuntimeVariable do
+		var mdef: MMethodDef
+		var name: String
+		if mmethod isa MMethod then
+			mdef = mmethod.intro
+			name = mmethod.full_name
+		else if mmethod isa MMethodDef then
+			mdef = mmethod
+			name = mmethod.full_name
+		else
+			abort
+		end
+
+		var recv = arguments.first
+		var rect = mdef.mclassdef.bound_mtype
+		var msignature = mdef.msignature.as(not null)
+		msignature = msignature.resolve_for(rect, rect, compiler.mainmodule, true)
+		adapt_signature(mdef, arguments)
+
+		var res: nullable RuntimeVariable
+		var ret = msignature.return_mtype
+		if ret == null then
+			res = null
+		else
+			res = self.new_var(ret)
+		end
+
+		before_send(res, mdef, arguments)
+
+		add "/* concrete call to {mdef} */"
+		if res != null then
+			var ress = new_expr("{recv}.rtclass.vft.get(\"{name}\").exec(new RTVal[]\{{arguments.join(",")}\});", compiler.mainmodule.object_type)
+			assign(res, ress)
+		else
+			add("{recv}.rtclass.vft.get(\"{name}\").exec(new RTVal[]\{{arguments.join(",")}\});")
+		end
+
+		add("\}") # closes the null case
+
+		return res
+	end
+
 	# Code generation
 
 	# Add a line (will be suffixed by `\n`)
@@ -506,6 +722,14 @@ class JavaCompilerVisitor
 	fun null_instance: RuntimeVariable do
 		var t = compiler.mainmodule.model.null_type
 		return new RuntimeVariable("null", t, t)
+	end
+
+	# Get an instance of a array for a vararg
+	fun vararg_instance(mpropdef: MPropDef, recv: RuntimeVariable, varargs: Array[RuntimeVariable], elttype: MType): RuntimeVariable do
+		# TODO handle dynamic types
+		info("NOT YET IMPLEMENTED vararg_instance")
+		return null_instance
+		# TODO return array_instance(varargs, elttype)
 	end
 
 	# Utils
@@ -768,7 +992,16 @@ redef class MClass
 	end
 end
 
+# Used as a common type between MMethod and MMethodDef for `table_send`
+private interface TableCallable
+end
+
+redef class MMethod
+	super TableCallable
+end
+
 redef class MMethodDef
+	super TableCallable
 
 	# Runtime name
 	private fun rt_name: String do
@@ -872,6 +1105,15 @@ redef class ABlockExpr
 			v.stmt(e)
 		end
 		return v.expr(last, null)
+	end
+end
+
+redef class ASendExpr
+	redef fun expr(v) do
+		var recv = v.expr(n_expr, null)
+		var callsite = callsite.as(not null)
+		var args = v.varargize(callsite.mpropdef, callsite.signaturemap, recv, raw_arguments)
+		return v.compile_callsite(callsite, args)
 	end
 end
 
