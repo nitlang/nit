@@ -202,8 +202,15 @@ class JavaCompiler
 		return new JavaCompilerVisitor(self, new_file(filename))
 	end
 
+	# RuntimeModel representation
+	private var rt_model: JavaRuntimeModel is lazy do return new JavaRuntimeModel
+
 	# Compile Nit code to Java
 	fun do_compilation do
+		# compile java classes used to represents the runtime model of the program
+		rt_model.compile_rtmodel(self)
+
+		# TODO compile classes and methods
 		modelbuilder.toolcontext.info("NOT YET IMPLEMENTED", 0)
 	end
 end
@@ -245,4 +252,93 @@ end
 redef class MEntity
 	# A Java compatible name for `self`
 	private fun jname: String do return name.to_cmangle
+end
+
+# Handler for runtime classes generation
+#
+# We need 3 kinds of runtime structures:
+# * `RTClass` to represent a global class
+# * `RTMethod` to represent a method definition
+# * `RTVal` to represent runtime variables
+class JavaRuntimeModel
+
+	# Compile JavaRuntimeModel structures
+	fun compile_rtmodel(compiler: JavaCompiler) do
+		compile_rtclass(compiler)
+		compile_rtmethod(compiler)
+		compile_rtval(compiler)
+	end
+
+	# Compile the abstract runtime class structure
+	#
+	# Runtime classes have 3 attributes:
+	# * `class_name`: the class name as a String
+	# * `vft`: the virtual function table for the class (flattened)
+	# * `supers`: the super type table (used for type tests)
+	fun compile_rtclass(compiler: JavaCompiler) do
+		var v = compiler.new_visitor("RTClass.java")
+		v.add("import java.util.HashMap;")
+		v.add("public abstract class RTClass \{")
+		v.add("  public String class_name;")
+		v.add("  public HashMap<String, RTMethod> vft = new HashMap<>();")
+		v.add("  public HashMap<String, RTClass> supers = new HashMap<>();")
+		v.add("  protected RTClass() \{\}")
+		v.add("\}")
+	end
+
+	# Compile the abstract runtime method structure
+	#
+	# Method body is executed through the `exec` method:
+	# * `exec` always take an array of RTVal as arg, the first one must be the receiver
+	# * `exec` always returns a RTVal (or null if the Nit return type is void)
+	fun compile_rtmethod(compiler: JavaCompiler) do
+		var v = compiler.new_visitor("RTMethod.java")
+		v.add("public abstract class RTMethod \{")
+		v.add("  protected RTMethod() \{\}")
+		v.add("  public abstract RTVal exec(RTVal[] args);")
+		v.add("\}")
+	end
+
+	# Compile the runtime value structure
+	#
+	# RTVal both represents object instances and primitives values:
+	# * object instances:
+	#   * `rtclass` the class of the RTVal is instance of
+	#   * `attrs` contains the attributes of the instance
+	# * primitive values:
+	#   * `rtclass` represents the class of the primitive value Nit type
+	#   * `value` contains the primitive value of the instance
+	# * null values:
+	#   * they must have both `rtclass` and `value` as null
+	fun compile_rtval(compiler: JavaCompiler) do
+		var v = compiler.new_visitor("RTVal.java")
+		v.add("import java.util.HashMap;")
+		v.add("public class RTVal \{")
+		v.add("  public RTClass rtclass;")
+		v.add("  public HashMap<String, RTVal> attrs = new HashMap<>();")
+		v.add("  Object value;")
+		v.add("  public RTVal(RTClass rtclass) \{")
+		v.add("    this.rtclass = rtclass;")
+		v.add("  \}")
+		v.add("  public RTVal(RTClass rtclass, Object value) \{")
+		v.add("    this.rtclass = rtclass;")
+		v.add("    this.value = value;")
+		v.add("  \}")
+		v.add("  public boolean is_null() \{ return rtclass == null && value == null; \}")
+		v.add("\}")
+	end
+end
+
+redef class MClass
+
+	# Runtime name
+	private fun rt_name: String do return "RTClass_{intro.mmodule.jname}_{jname}"
+end
+
+redef class MMethodDef
+
+	# Runtime name
+	private fun rt_name: String do
+		return "RTMethod_{mclassdef.mmodule.jname}_{mclassdef.mclass.jname}_{mproperty.jname}"
+	end
 end
