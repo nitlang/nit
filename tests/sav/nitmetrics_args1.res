@@ -695,12 +695,13 @@ Statistics of type usage:
   A: 1 (11.11%)
 
 # Mendel metrics
-	large mclasses (threshold: 3.354)
+	large mclasses (threshold: 3.915)
+	   C: 5
+	   B: 4
 	   Sys: 4
-	budding mclasses (threshold: 4.177)
-	   Sys: 5.0
-	blooming mclasses (threshold: 14.626)
-	   Sys: 20.0
+	budding mclasses (threshold: 5.033)
+	blooming mclasses (threshold: 21.874)
+	   C: 25.0
 --- Detection of the usage of covariance static type conformance ---
 -- Total --
 - Kinds of the subtype -

@@ -1,5 +1,3 @@
-alt/base_attr3_alt1.nit:22,3--4: Error: method or variable `a1=` unknown in `B`.
-alt/base_attr3_alt1.nit:24,3--4: Error: method or variable `a2=` unknown in `B`.
 alt/base_attr3_alt1.nit:25,3--4: Error: method or variable `a3` unknown in `B`.
 alt/base_attr3_alt1.nit:26,3--4: Error: method or variable `a3=` unknown in `B`.
 alt/base_attr3_alt1.nit:31,3--4: Error: method or variable `a6` unknown in `B`.
