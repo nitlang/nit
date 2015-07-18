@@ -70,5 +70,5 @@ null
 {"__kind": "obj", "__id": 0, "__class": "G", "hs": {"__kind": "obj", "__id": 1, "__class": "HashSet", "__items": [-1, 0]}, "s": {"__kind": "obj", "__id": 2, "__class": "ArraySet", "__items": ["one", "two"]}, "hm": {"__kind": "obj", "__id": 3, "__class": "HashMap", "__length": 2, "__keys": ["one", "two"], "__values": [1, 2]}, "am": {"__kind": "obj", "__id": 4, "__class": "ArrayMap", "__length": 2, "__keys": ["three", "four"], "__values": ["3", "4"]}}
 
 # Back in Nit:
-<G: hs: ; s: ; hm: ; am: >
+<G: hs: -1, 0; s: one, two; hm: one. 1, two. 2; am: three. 3, four. 4>
 

@@ -23,23 +23,23 @@ class PrimitiveNativeFile
 	var file: Stream
 
 	init native_stdin do
-		file = sys.stdin
+		init(sys.stdin)
 	end
 
 	init native_stdout do
-		file = sys.stdout
+		init(sys.stdout)
 	end
 
 	init native_stderr do
-		file = sys.stderr
+		init(sys.stderr)
 	end
 
 	init io_open_read(path: String) do
-		file = new FileReader.open(path.to_s)
+		init(new FileReader.open(path.to_s))
 	end
 
 	init io_open_write(path: String) do
-		file = new FileWriter.open(path.to_s)
+		init(new FileWriter.open(path.to_s))
 	end
 
 	fun address_is_null: Bool do

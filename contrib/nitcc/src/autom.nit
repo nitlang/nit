@@ -21,7 +21,7 @@ import grammar
 # A finite automaton
 class Automaton
 	# The start state
-	var start: State
+	var start: State is noinit
 
 	# State that are accept states
 	var accept = new Array[State]

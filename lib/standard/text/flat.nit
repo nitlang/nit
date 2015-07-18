@@ -317,8 +317,7 @@ private class FlatStringCharReverseIterator
 
 	init with_pos(tgt: FlatString, pos: Int)
 	do
-		target = tgt
-		curr_pos = pos
+		init(tgt, pos)
 	end
 
 	redef fun is_ok do return curr_pos >= 0
@@ -342,9 +341,7 @@ private class FlatStringCharIterator
 
 	init with_pos(tgt: FlatString, pos: Int)
 	do
-		target = tgt
-		curr_pos = pos
-		max = tgt.length - 1
+		init(tgt, tgt.length - 1, pos)
 	end
 
 	redef fun is_ok do return curr_pos <= max
@@ -381,9 +378,7 @@ private class FlatStringByteReverseIterator
 
 	init with_pos(tgt: FlatString, pos: Int)
 	do
-		target = tgt
-		target_items = tgt.items
-		curr_pos = pos + tgt.index_from
+		init(tgt, tgt.items, pos + tgt.index_from)
 	end
 
 	redef fun is_ok do return curr_pos >= target.index_from
@@ -407,9 +402,7 @@ private class FlatStringByteIterator
 
 	init with_pos(tgt: FlatString, pos: Int)
 	do
-		target = tgt
-		target_items = tgt.items
-		curr_pos = pos + target.index_from
+		init(tgt, tgt.items, pos + tgt.index_from)
 	end
 
 	redef fun is_ok do return curr_pos <= target.index_to
@@ -697,9 +690,7 @@ private class FlatBufferByteReverseIterator
 
 	init with_pos(tgt: FlatBuffer, pos: Int)
 	do
-		target = tgt
-		if tgt.length > 0 then target_items = tgt.items
-		curr_pos = pos
+		init(tgt, tgt.items, pos)
 	end
 
 	redef fun index do return curr_pos
@@ -769,9 +760,7 @@ private class FlatBufferByteIterator
 
 	init with_pos(tgt: FlatBuffer, pos: Int)
 	do
-		target = tgt
-		if tgt.length > 0 then target_items = tgt.items
-		curr_pos = pos
+		init(tgt, tgt.items, pos)
 	end
 
 	redef fun index do return curr_pos
@@ -793,8 +782,7 @@ private class FlatBufferCharReverseIterator
 
 	init with_pos(tgt: FlatBuffer, pos: Int)
 	do
-		target = tgt
-		curr_pos = pos
+		init(tgt, pos)
 	end
 
 	redef fun index do return curr_pos
@@ -863,9 +851,7 @@ private class FlatBufferCharIterator
 
 	init with_pos(tgt: FlatBuffer, pos: Int)
 	do
-		target = tgt
-		max = tgt.length - 1
-		curr_pos = pos
+		init(tgt, tgt.length - 1, pos)
 	end
 
 	redef fun index do return curr_pos

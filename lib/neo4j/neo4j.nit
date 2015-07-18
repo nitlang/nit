@@ -509,13 +509,13 @@ abstract class NeoEntity
 	private var batch_id: nullable Int = null
 
 	# Load the entity from base
-	private init from_neo(neo: Neo4jClient, url: String) do
+	private init from_neo(neo: Neo4jClient, url: String) is nosuper do
 		self.neo = neo
 		self.url = url
 	end
 
 	# Init entity from JSON representation
-	private init from_json(neo: Neo4jClient, obj: JsonObject) do
+	private init from_json(neo: Neo4jClient, obj: JsonObject) is nosuper do
 		self.neo = neo
 		self.url = obj["self"].to_s
 		self.internal_properties = obj["data"].as(JsonObject)

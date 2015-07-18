@@ -53,13 +53,13 @@ class Tower
 		end
 	end
 
-	var t: Array[Int] # The stack of discus (only the diameter is stored).
+	var t = new Array[Int] # The stack of discus (only the diameter is stored).
 
 	init full(n: Int)
 	# Build a new tower with `n' discus.
 	do
 		assert positive: n >= 0
-		_t = new Array[Int].with_capacity(n)
+		t.enlarge(n)
 		for i in [0..n[ do
 			push(n-i)
 		end
@@ -68,7 +68,6 @@ class Tower
 	init empty
 	# Build a empty tower.
 	do
-		_t = new Array[Int]
 	end
 end
 
