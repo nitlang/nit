@@ -109,7 +109,7 @@ class AndroidToolchain
 
 		# Gather extra C files generated elsewhere than in super
 		for f in compiler.extern_bodies do
-			if f isa ExternCFile then cfiles.add(f.filename.basename(""))
+			if f isa ExternCFile then cfiles.add(f.filename.basename)
 		end
 
 		# Is there an icon?
@@ -134,7 +134,7 @@ class AndroidToolchain
 			var extra_java_files = mmodule.extra_java_files
 			if extra_java_files != null then for file in extra_java_files do
 				var path = file.filename
-				path.file_copy_to(dir/path.basename(""))
+				path.file_copy_to(dir/path.basename)
 			end
 		end
 

@@ -152,7 +152,7 @@ for mmodule in mmodules do
 	else if module_path.has_suffix(".nit") then
 		module_name = module_path.basename(".nit")
 	else
-		module_name = module_path.basename("")
+		module_name = module_path.basename
 		module_path += ".nit"
 	end
 

@@ -366,7 +366,7 @@ class Path
 	# var path = "/tmp/somefile".to_path
 	# assert path.filename == "somefile"
 	# ~~~
-	var filename: String = path.basename("") is lazy
+	var filename: String = path.basename is lazy
 
 	# Does the file at `path` exists?
 	fun exists: Bool do return stat != null
@@ -920,7 +920,7 @@ redef class String
 	# In other cases, parts of the current directory may be exhibited:
 	#
 	#     var p = "../foo/bar".relpath("baz")
-	#     var c = getcwd.basename("")
+	#     var c = getcwd.basename
 	#     assert p == "../../{c}/baz"
 	#
 	# For path resolution independent of the current directory (eg. for paths in URL),

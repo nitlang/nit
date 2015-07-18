@@ -97,7 +97,7 @@ redef class JavaLanguage
 		var extra_java_files = mmodule.extra_java_files
 		if extra_java_files != null then for file in extra_java_files do
 			var path = file.filename
-			path.file_copy_to("{compdir}/{path.basename("")}")
+			path.file_copy_to("{compdir}/{path.basename}")
 		end
 	end
 end

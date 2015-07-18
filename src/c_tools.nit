@@ -142,7 +142,7 @@ class ExternCFile
 	end
 
 	redef fun makefile_rule_content do
-		var ff = filename.basename("")
+		var ff = filename.basename
 		var o = makefile_rule_name
 		var pkg = ""
 		if not pkgconfigs.is_empty then

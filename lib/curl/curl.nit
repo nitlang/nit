@@ -165,7 +165,7 @@ class CurlHTTPRequest
 		if not output_file_name == null then
 			opt_name = output_file_name
 		else if not self.url.substring(self.url.length-1, self.url.length) == "/" then
-			opt_name = self.url.basename("")
+			opt_name = self.url.basename
 		else
 			return answer_failure(0, "Unable to extract file name, please specify one")
 		end

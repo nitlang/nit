@@ -56,7 +56,7 @@ class PnaclToolchain
 
 		# Gather extra C files generated elsewhere than in super
 		for f in compiler.extern_bodies do
-			if f isa ExternCFile then cfiles.add(f.filename.basename(""))
+			if f isa ExternCFile then cfiles.add(f.filename.basename)
 		end
 
 		# Outname

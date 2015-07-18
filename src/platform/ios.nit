@@ -83,7 +83,7 @@ private class IOSToolchain
 		## Register all source files
 		for file in cfiles do pbx.add_file new PbxFile(file)
 		for file in compiler.extern_bodies do
-			pbx.add_file new PbxFile(file.filename.basename(""))
+			pbx.add_file new PbxFile(file.filename.basename)
 		end
 
 		## TODO Register asset files

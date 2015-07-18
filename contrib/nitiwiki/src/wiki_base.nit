@@ -151,7 +151,7 @@ class Nitiwiki
 		path = path.simplify_path
 		if entries.has_key(path) then return entries[path].as(WikiSection)
 		var root = expand_path(config.root_dir, config.source_dir)
-		var name = path.basename("")
+		var name = path.basename
 		var section = new WikiSection(self, name)
 		entries[path] = section
 		if path == root then return section

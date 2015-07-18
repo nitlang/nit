@@ -362,7 +362,7 @@ class JavaFile
 	super ExternFile
 
 	redef fun makefile_rule_name do return "{filename.basename(".java")}.class"
-	redef fun makefile_rule_content do return "javac {filename.basename("")} -d ."
+	redef fun makefile_rule_content do return "javac {filename.basename} -d ."
 	redef fun add_to_jar do return true
 end
 

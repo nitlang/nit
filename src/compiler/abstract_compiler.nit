@@ -220,7 +220,7 @@ class MakefileToolchain
 
 		# Copy original .[ch] files to compile_dir
 		for src in compiler.files_to_copy do
-			var basename = src.basename("")
+			var basename = src.basename
 			var dst = "{compile_dir}/{basename}"
 			src.file_copy_to dst
 		end
@@ -444,7 +444,7 @@ endif
 		# Compile each required extern body into a specific .o
 		for f in compiler.extern_bodies do
 			var o = f.makefile_rule_name
-			var ff = f.filename.basename("")
+			var ff = f.filename.basename
 			makefile.write("{o}: {ff}\n")
 			makefile.write("\t{f.makefile_rule_content}\n\n")
 			dep_rules.add(f.makefile_rule_name)
@@ -1598,12 +1598,12 @@ abstract class AbstractCompilerVisitor
 		file = file.strip_extension(".nit")
 		var tryfile = file + ".nit.h"
 		if tryfile.file_exists then
-			self.declare_once("#include \"{tryfile.basename("")}\"")
+			self.declare_once("#include \"{tryfile.basename}\"")
 			self.compiler.files_to_copy.add(tryfile)
 		end
 		tryfile = file + "_nit.h"
 		if tryfile.file_exists then
-			self.declare_once("#include \"{tryfile.basename("")}\"")
+			self.declare_once("#include \"{tryfile.basename}\"")
 			self.compiler.files_to_copy.add(tryfile)
 		end
 
@@ -1614,7 +1614,7 @@ abstract class AbstractCompilerVisitor
 			tryfile = file + "_nit.c"
 			if not tryfile.file_exists then return
 		end
-		var f = new ExternCFile(tryfile.basename(""), "")
+		var f = new ExternCFile(tryfile.basename, "")
 		self.compiler.extern_bodies.add(f)
 		self.compiler.files_to_copy.add(tryfile)
 	end
