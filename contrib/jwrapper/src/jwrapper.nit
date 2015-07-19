@@ -32,19 +32,13 @@ import javap_visitor
 
 var opts = new OptionContext
 
-var opt_attr = new OptionBool("Generate attributes", "-a", "--with-attributes")
-var opt_comment = new OptionBool("Comment methods/attributes containing unknown types", "-c", "--comment")
-var opt_wrap = new OptionBool("Create extern classes wrapping unknown types (Default)", "-w", "--wrap")
+var opt_unknown = new OptionEnum(["comment", "stub", "ignore"], "How to deal with unknown types", 0, "-u")
+var opt_verbose = new OptionCount("Verbosity", "-v")
+var opt_output = new OptionString("Output file", "-o")
 var opt_help = new OptionBool("Show this help message", "-h", "--help")
 
-opts.add_option(opt_attr, opt_comment, opt_wrap, opt_help)
-
-opts.parse(args)
-
-if opt_wrap.value and opt_comment.value then
-	print "Error: Can't use both '-c' and '-w'"
-	exit 1
-end
+opts.add_option(opt_output, opt_unknown, opt_verbose, opt_help)
+opts.parse args
 
 if not opts.errors.is_empty or opts.rest.length != 2 or opt_help.value then
 	print "USAGE: jwrapper [OPTIONS] class_file nit_file"
@@ -55,8 +49,8 @@ if not opts.errors.is_empty or opts.rest.length != 2 or opt_help.value then
 	exit 1
 end
 
-var dot_class = opts.rest[0]
-var out_file = opts.rest[1]
+var out_file = opt_output.value
+if out_file == null then out_file = "out.nit"
 
 if not "javap".program_is_in_path then
 	print "ERROR: 'javap' not found."
