@@ -31,6 +31,9 @@ class CodeGenerator
 	# Comment out methods with unknown (unwrapped) types
 	var comment_unknown_types: Bool
 
+	# Generate stub classes for unknown types used in the generated module
+	var stub_for_unknown_types: Bool
+
 	# Output file
 	var file_out: Writer = new FileWriter.open(file_name) is lazy, writable
 
@@ -60,10 +63,12 @@ class CodeGenerator
 		class_content.add("\nend\n")
 
 		var wrappers = new Array[String]
-		for jtype in jclass.unknown_types do
-			if jtype == jclass.class_type then continue
-			wrappers.add("\n")
-			wrappers.add(gen_unknown_class_header(jtype))
+		if stub_for_unknown_types then
+			for jtype in jclass.unknown_types do
+				if jtype == jclass.class_type then continue
+				wrappers.add("\n")
+				wrappers.add(gen_unknown_class_header(jtype))
+			end
 		end
 
 		var imports = new Array[String]
@@ -148,11 +153,11 @@ class CodeGenerator
 				if jparam.is_wrapped then
 					java_class.imports.add nit_type.mod.as(not null)
 				else
+					java_class.unknown_types.add jparam
 					if comment_unknown_types then
 						comment = "#"
 					else
 						nit_type = jparam.extern_name
-						java_class.unknown_types.add(jparam)
 					end
 				end
 			end
@@ -194,11 +199,11 @@ class CodeGenerator
 				if jreturn_type.is_wrapped then
 					java_class.imports.add return_type.mod.as(not null)
 				else
+					java_class.unknown_types.add jreturn_type
 					if comment_unknown_types then
 						comment = "#"
 					else
 						return_type = jreturn_type.extern_name
-						java_class.unknown_types.add(jreturn_type)
 					end
 				end
 			end
