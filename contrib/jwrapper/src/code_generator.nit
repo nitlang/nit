@@ -77,7 +77,7 @@ class CodeGenerator
 			imports.add("import android::{import_}\n")
 		end
 
-		file_out.write(gen_licence)
+		file_out.write license
 
 		var module_name = module_name
 		if module_name != null then file_out.write "module {module_name}\n"
@@ -89,9 +89,8 @@ class CodeGenerator
 		file_out.write(wrappers.join)
 	end
 
-	fun gen_licence: String
-	do
-		return """
+	# License for the header of the generated Nit module
+	var license = """
 # This file is part of NIT (http://www.nitlanguage.org).
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -107,8 +106,7 @@ class CodeGenerator
 # limitations under the License.
 
 # This code has been generated using `jwrapper`
-"""
-	end
+""" is writable
 
 	fun gen_class_header(jtype: JavaType): String
 	do
