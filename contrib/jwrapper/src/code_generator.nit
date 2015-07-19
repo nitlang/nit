@@ -52,10 +52,6 @@ class CodeGenerator
 		var class_content = new Array[String]
 		class_content.add(gen_class_header(jclass.class_type))
 
-		if with_attributes then
-			for id, jtype in jclass.attributes do class_content.add(gen_attribute(id, jtype))
-		end
-
 		for id, methods_info in jclass.methods do
 			for method_info in methods_info do
 				var nid = id
@@ -134,11 +130,6 @@ class CodeGenerator
 		temp.add("\tsuper JavaObject\n\nend\n")
 
 		return temp.join
-	end
-
-	fun gen_attribute(jid: String, jtype: JavaType): String
-	do
-		return "\tvar {jid.to_nit_method_name}: {jtype.to_nit_type}\n"
 	end
 
 	fun gen_method(jmethod_id: String, nmethod_id: String, jreturn_type: JavaType, jparam_list: Array[JavaType]): String
