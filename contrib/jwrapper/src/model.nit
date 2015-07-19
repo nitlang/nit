@@ -1,6 +1,7 @@
 # This file is part of NIT (http://www.nitlanguage.org).
 #
 # Copyright 2014 Frédéric Vachon <fredvac@gmail.com>
+# Copyright 2015 Alexis Laferrière <alexis.laf@xymus.net>
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -288,15 +289,28 @@ class NitType
 	end
 end
 
+# Model of a single Java class
 class JavaClass
+	# Type of this class
 	var class_type = new JavaType(new JavaTypeConverter)
+
+	# Attributes of this class
 	var attributes = new HashMap[String, JavaType]
 
 	# Methods of this class organized by their name
 	var methods = new MultiHashMap[String, JavaMethod]
 
-	var unknown_types = new HashSet[JavaType]
+	# Importations from this class
 	var imports = new HashSet[NitModule]
+end
+
+# Model of all the Java class analyzed in one run
+class JavaModel
+	# Unknown Java types used in `classes`
+	var unknown_types = new HashSet[JavaType]
+
+	# All analyzed classes
+	var classes = new Array[JavaClass]
 end
 
 # A Java method, with its signature
