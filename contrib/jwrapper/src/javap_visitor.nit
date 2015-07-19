@@ -24,15 +24,20 @@ import code_generator
 import jtype_converter
 intrude import model
 
+# Visitor of the AST generated from javap output
 class JavaVisitor
 	super Visitor
 
 	var converter: JavaTypeConverter
 
-	var java_class = new JavaClass
+	# Model of all the analyzed classes
+	var model: JavaModel
+
+	var java_class: JavaClass is noinit
+
 	var declaration_type: nullable String =  null
 	var declaration_element: nullable String = null
-	var class_type = new JavaType(self.converter) is lazy
+	var class_type: JavaType is noinit
 
 	var variable_id = ""
 	var variable_type = new JavaType(self.converter) is lazy
@@ -101,7 +106,7 @@ redef class Nidentifier
 			if v.declaration_element == "id" then
 				v.method_id = self.text
 			else if v.declaration_element == "return_type" then
-				if self.text == "void" then 
+				if self.text == "void" then
 					v.method_return_type.is_void = true
 				else if v.is_generic_param then
 					v.method_return_type.generic_params[v.gen_params_index].identifier.add(self.text)
@@ -208,6 +213,10 @@ end
 redef class Nclass_declaration
 	redef fun accept_visitor(v)
 	do
+		v.java_class = new JavaClass
+		v.model.classes.add v.java_class
+		v.class_type = new JavaType(v.converter)
+
 		v.declaration_type = "class_header"
 		v.declaration_element = "id"
 		super

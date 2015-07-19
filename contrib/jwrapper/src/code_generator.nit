@@ -26,7 +26,7 @@ class CodeGenerator
 	var file_name: String
 
 	# Model of Java class being wrapped
-	var java_class: JavaClass
+	var model: JavaModel
 
 	# Comment out methods with unknown (unwrapped) types
 	var comment_unknown_types: Bool
@@ -48,45 +48,46 @@ class CodeGenerator
 	# Generate the Nit module into `file_out`
 	fun generate
 	do
-		var jclass = self.java_class
-
-		var class_content = new Array[String]
-		class_content.add(gen_class_header(jclass.class_type))
-
-		for id, methods_info in jclass.methods do
-			for method_info in methods_info do
-				var nid = id
-				if methods_info.length > 1 then nid += "{methods_info.index_of(method_info)}"
-				class_content.add gen_method(id, nid, method_info.return_type, method_info.params)
-			end
-		end
-		class_content.add("\nend\n")
-
-		var wrappers = new Array[String]
-		if stub_for_unknown_types then
-			for jtype in jclass.unknown_types do
-				if jtype == jclass.class_type then continue
-				wrappers.add("\n")
-				wrappers.add(gen_unknown_class_header(jtype))
-			end
-		end
-
-		var imports = new Array[String]
-		imports.add("import mnit_android\n")
-		for import_ in jclass.imports do
-			imports.add("import android::{import_}\n")
-		end
-
+		# License
 		file_out.write license
 
+		# Module declaration
 		var module_name = module_name
 		if module_name != null then file_out.write "module {module_name}\n"
+		file_out.write "\n"
 
-		file_out.write("\n")
-		file_out.write(imports.join)
-		file_out.write("\n")
-		file_out.write(class_content.join)
-		file_out.write(wrappers.join)
+		# All importations
+		var imports = new HashSet[String]
+		imports.add "import mnit_android\n"
+		for jclass in model.classes do
+			for import_ in jclass.imports do imports.add "import android::{import_}\n"
+		end
+		file_out.write imports.join("\n")
+
+		for jclass in model.classes do
+
+			file_out.write gen_class_header(jclass.class_type)
+
+			for id, signatures in jclass.methods do
+				var c = 0
+				for signature in signatures do
+					var nid = id
+					if c > 0 then nid += c.to_s
+					c += 1
+
+					file_out.write gen_method(jclass, id, nid, signature.return_type, signature.params)
+					file_out.write "\n"
+				end
+			end
+			file_out.write "end\n\n"
+		end
+
+		if stub_for_unknown_types then
+			for jtype in model.unknown_types do
+				file_out.write gen_unknown_class_header(jtype)
+				file_out.write "\n"
+			end
+		end
 	end
 
 	# License for the header of the generated Nit module
@@ -133,7 +134,7 @@ class CodeGenerator
 		return temp.join
 	end
 
-	fun gen_method(jmethod_id: String, nmethod_id: String, jreturn_type: JavaType, jparam_list: Array[JavaType]): String
+	fun gen_method(java_class: JavaClass, jmethod_id, nmethod_id: String, jreturn_type: JavaType, jparam_list: Array[JavaType]): String
 	do
 		var java_params = ""
 		var nit_params  = ""
@@ -151,7 +152,7 @@ class CodeGenerator
 				if jparam.is_wrapped then
 					java_class.imports.add nit_type.mod.as(not null)
 				else
-					java_class.unknown_types.add jparam
+					model.unknown_types.add jparam
 					if comment_unknown_types then
 						comment = "#"
 					else
@@ -197,7 +198,7 @@ class CodeGenerator
 				if jreturn_type.is_wrapped then
 					java_class.imports.add return_type.mod.as(not null)
 				else
-					java_class.unknown_types.add jreturn_type
+					model.unknown_types.add jreturn_type
 					if comment_unknown_types then
 						comment = "#"
 					else
