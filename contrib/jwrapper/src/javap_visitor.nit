@@ -1,6 +1,7 @@
 # This file is part of NIT (http://www.nitlanguage.org).
 #
 # Copyright 2014 Frédéric Vachon <fredvac@gmail.com>
+# Copyright 2015 Alexis Laferrière <alexis.laf@xymus.net>
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -31,10 +32,10 @@ class JavaVisitor
 	var java_class = new JavaClass
 	var declaration_type: nullable String =  null
 	var declaration_element: nullable String = null
-	var class_type: JavaType
+	var class_type = new JavaType(self.converter) is lazy
 
 	var variable_id = ""
-	var variable_type: JavaType
+	var variable_type = new JavaType(self.converter) is lazy
 
 	var is_generic_param = false
 	var is_generic_id = false
@@ -47,20 +48,11 @@ class JavaVisitor
 	var is_primitive_array = false
 
 	var method_id = ""
-	var method_return_type: JavaType
+	var method_return_type = new JavaType(self.converter) is lazy
 	var method_params = new Array[JavaType]
 	var param_index = 0
 
 	redef fun visit(n) do n.accept_visitor(self)
-
-	init(converter: JavaTypeConverter)
-	do
-		self.converter = converter
-		self.class_type = new JavaType(self.converter)
-		self.method_return_type = new JavaType(self.converter)
-		self.variable_type = new JavaType(self.converter)
-		super
-	end
 
 	# Add the identifier from `token` to the current context
 	fun add_identifier(token: NToken)

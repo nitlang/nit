@@ -1,6 +1,7 @@
 # This file is part of NIT (http://www.nitlanguage.org).
 #
 # Copyright 2014 Frédéric Vachon <fredvac@gmail.com>
+# Copyright 2015 Alexis Laferrière <alexis.laf@xymus.net>
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -21,30 +22,27 @@ intrude import model
 
 class CodeGenerator
 
-	var with_attributes: Bool
-	var comment_unknown_types: Bool
-	var file_out: FileWriter
+	# Path to the output file
+	var file_name: String
+
+	# Model of Java class being wrapped
 	var java_class: JavaClass
-	var nb_params: Int
-	var module_name: nullable String = null
 
-	init (file_name: String, jclass: JavaClass, with_attributes, comment: Bool)
-	do
-		file_out = new FileWriter.open(file_name)
+	# Comment out methods with unknown (unwrapped) types
+	var comment_unknown_types: Bool
 
-		var nit_ext = ".nit"
-		if file_name.has_suffix(nit_ext) then
+	# Output file
+	var file_out: Writer = new FileWriter.open(file_name) is lazy, writable
+
+	# Name of the Nit module to generate
+	var module_name: nullable String is lazy do
+		if file_name.file_extension == "nit" then
 			# Output file ends with .nit, we expect it to be a valid name
-			module_name = file_name.strip_extension(nit_ext)
-
-			# Otherwise, it may be anything so do not declare a module
-		end
-
-		self.java_class = jclass
-		self.with_attributes = with_attributes
-		self.comment_unknown_types = comment
+			return file_name.basename(".nit")
+		else return null
 	end
 
+	# Generate the Nit module into `file_out`
 	fun generate
 	do
 		var jclass = self.java_class
