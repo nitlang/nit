@@ -254,7 +254,9 @@ redef class Nproperty_declaration_method
 		v.declaration_type = null
 
 		if v.method_return_type.has_unresolved_types then v.method_return_type.resolve_types(v.generic_map)
-		v.java_class.add_method(v.method_id, v.method_return_type, v.method_params)
+
+		var method = new JavaMethod(v.method_return_type, v.method_params.clone)
+		v.java_class.methods[v.method_id].add method
 
 		v.method_params.clear
 		v.method_id = ""

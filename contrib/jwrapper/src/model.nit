@@ -17,6 +17,8 @@
 # Contains the java and nit type representation used to convert java to nit code
 module model
 
+import more_collections
+
 import jtype_converter
 
 class JavaType
@@ -291,17 +293,10 @@ class JavaClass
 	var attributes = new HashMap[String, JavaType]
 
 	# Methods of this class organized by their name
-	var methods = new HashMap[String, Array[JavaMethod]]
+	var methods = new MultiHashMap[String, JavaMethod]
 
 	var unknown_types = new HashSet[JavaType]
 	var imports = new HashSet[NitModule]
-
-	fun add_method(id: String, return_type: JavaType, params: Array[JavaType])
-	do
-		var signatures = methods.get_or_default(id, new Array[JavaMethod])
-		signatures.add(new JavaMethod(return_type, new Array[JavaType].from(params)))
-		methods[id] = signatures
-	end
 end
 
 # A Java method, with its signature
