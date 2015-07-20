@@ -65,8 +65,8 @@ property_declaration
 	| {static:} modifier* '{' '}' ';'
 	| ';';
 
-implements_declaration = 'implements' interface_list*;
-extends_declaration = 'extends' type;
+implements_declaration = 'implements' interface_list;
+extends_declaration = 'extends' interface_list;
 interface_list
 	= {tail:} interface_list ',' full_class_name
 	| {head:} full_class_name;
