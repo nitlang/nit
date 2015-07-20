@@ -431,7 +431,7 @@ redef class ModelBuilder
 			if pn == "src" then
 				# With a src directory, the group name is the name of the parent directory
 				dirpath2 = rdp.dirname
-				pn = dirpath2.basename("")
+				pn = dirpath2.basename
 			else
 				# Check a `src` subdirectory
 				dirpath = dirpath2 / "src"

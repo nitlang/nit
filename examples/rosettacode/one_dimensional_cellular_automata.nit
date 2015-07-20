@@ -33,7 +33,7 @@ end
 
 var ary = "_###_##_#_#_#_#__#__".chars
 loop
-	print ary.join("")
+	print ary.join
 	var nxt = evolve(ary)
 	if ary == nxt then break
 	ary = nxt

@@ -129,7 +129,7 @@ end
 class XMLDocument
 	super XMLEntity
 
-	redef fun to_s do return children.join("")
+	redef fun to_s do return children.join
 end
 
 # PCDATA is any kind of non-xml formatted text

@@ -515,7 +515,7 @@ The Nit language documentation and the source code of its tools and libraries ma
 		if opt_set_dummy_tool.value then
 			return "DUMMY_TOOL"
 		end
-		return sys.program_name.basename("")
+		return sys.program_name.basename
 	end
 
 	# The identified root directory of the Nit project

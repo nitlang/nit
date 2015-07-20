@@ -112,7 +112,7 @@ abstract class LinkedText
 		var text = self["text"]
 
 		if text isa JsonArray then
-			return text.join("")
+			return text.join
 		else
 			return "UNDEFINED"
 		end

@@ -45,7 +45,7 @@ private class LinuxStore
 
 		# Find DB path
 		var config_home = xdg_basedir.config_home.to_s
-		var config_dir = config_home.join_path(sys.program_name.basename(""))
+		var config_dir = config_home.join_path(sys.program_name.basename)
 		if not config_dir.file_exists then config_dir.mkdir
 		var db_path = config_dir.join_path(db_file)
 

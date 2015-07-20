@@ -366,7 +366,7 @@ class Path
 	# var path = "/tmp/somefile".to_path
 	# assert path.filename == "somefile"
 	# ~~~
-	var filename: String = path.basename("") is lazy
+	var filename: String = path.basename is lazy
 
 	# Does the file at `path` exists?
 	fun exists: Bool do return stat != null
@@ -704,36 +704,51 @@ redef class String
 	# Copy content of file at `self` to `dest`
 	fun file_copy_to(dest: String) do to_path.copy(dest.to_path)
 
-	# Remove the trailing extension `ext`.
+	# Remove the trailing `extension`.
 	#
-	# `ext` usually starts with a dot but could be anything.
+	# `extension` usually starts with a dot but could be anything.
 	#
-	#     assert "file.txt".strip_extension(".txt")  == "file"
-	#     assert "file.txt".strip_extension("le.txt")  == "fi"
-	#     assert "file.txt".strip_extension("xt")  == "file.t"
+	#     assert "file.txt".strip_extension(".txt")   == "file"
+	#     assert "file.txt".strip_extension("le.txt") == "fi"
+	#     assert "file.txt".strip_extension("xt")     == "file.t"
 	#
-	# if `ext` is not present, `self` is returned unmodified.
+	# If `extension == null`, the rightmost extension is stripped, including the last dot.
+	#
+	#     assert "file.txt".strip_extension           == "file"
+	#
+	# If `extension` is not present, `self` is returned unmodified.
 	#
 	#     assert "file.txt".strip_extension(".tar.gz")  == "file.txt"
-	fun strip_extension(ext: String): String
+	fun strip_extension(extension: nullable String): String
 	do
-		if has_suffix(ext) then
-			return substring(0, length - ext.length)
+		if extension == null then
+			extension = file_extension
+			if extension == null then
+				return self
+			else extension = ".{extension}"
+		end
+
+		if has_suffix(extension) then
+			return substring(0, length - extension.length)
 		end
 		return self
 	end
 
-	# Extract the basename of a path and remove the extension
+	# Extract the basename of a path and strip the `extension`
 	#
-	#     assert "/path/to/a_file.ext".basename(".ext")         == "a_file"
-	#     assert "path/to/a_file.ext".basename(".ext")          == "a_file"
-	#     assert "path/to".basename(".ext")                     == "to"
-	#     assert "path/to/".basename(".ext")                    == "to"
+	# The extension is stripped only if `extension != null`.
+	#
+	#     assert "/path/to/a_file.ext".basename(".ext")     == "a_file"
+	#     assert "path/to/a_file.ext".basename(".ext")      == "a_file"
+	#     assert "path/to/a_file.ext".basename              == "a_file.ext"
+	#     assert "path/to".basename(".ext")                 == "to"
+	#     assert "path/to/".basename(".ext")                == "to"
+	#     assert "path/to".basename                         == "to"
 	#     assert "path".basename("")                        == "path"
 	#     assert "/path".basename("")                       == "path"
 	#     assert "/".basename("")                           == "/"
 	#     assert "".basename("")                            == ""
-	fun basename(ext: String): String
+	fun basename(extension: nullable String): String
 	do
 		var l = length - 1 # Index of the last char
 		while l > 0 and self.chars[l] == '/' do l -= 1 # remove all trailing `/`
@@ -743,7 +758,10 @@ redef class String
 		if pos >= 0 then
 			n = substring(pos+1, l-pos)
 		end
-		return n.strip_extension(ext)
+
+		if extension != null then
+			return n.strip_extension(extension)
+		else return n
 	end
 
 	# Extract the dirname of a path
@@ -902,7 +920,7 @@ redef class String
 	# In other cases, parts of the current directory may be exhibited:
 	#
 	#     var p = "../foo/bar".relpath("baz")
-	#     var c = getcwd.basename("")
+	#     var c = getcwd.basename
 	#     assert p == "../../{c}/baz"
 	#
 	# For path resolution independent of the current directory (eg. for paths in URL),

@@ -362,7 +362,7 @@ class JavaFile
 	super ExternFile
 
 	redef fun makefile_rule_name do return "{filename.basename(".java")}.class"
-	redef fun makefile_rule_content do return "javac {filename.basename("")} -d ."
+	redef fun makefile_rule_content do return "javac {filename.basename} -d ."
 	redef fun add_to_jar do return true
 end
 
@@ -606,7 +606,7 @@ redef class MMethod
 			else format.add "V"
 		end
 
-		return format.join("")
+		return format.join
 	end
 
 	# Similar to `build_c_signature` but adapted to create the signature expected by JNI for C functions
