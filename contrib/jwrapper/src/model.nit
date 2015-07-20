@@ -95,9 +95,9 @@ class JavaType
 		var name
 		if is_primitive_array then
 			# Primitive arrays have a special naming convention
-			name = "Native" + extern_class_name.join.capitalized + "Array"
+			name = "Java" + extern_class_name.join.capitalized + "Array"
 		else
-			name = "Native" + extern_class_name.join
+			name = "Java" + extern_class_name.join
 		end
 
 		var nit_type = new NitType(name)
