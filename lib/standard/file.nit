@@ -350,9 +350,13 @@ redef class Writable
 	end
 end
 
-# Utility class to access file system services
+# Utility class to access file system services.
 #
 # Usually created with `Text::to_path`.
+#
+# `Path` objects does not necessarily represent existing files in a file system.
+# They are sate-less objects that efficiently represent path information.
+# They also provide an easy to use API on file-system services and are used to store their error status (see `last_error`)
 class Path
 
 	private var path: String
