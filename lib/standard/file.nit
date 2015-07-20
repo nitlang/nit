@@ -185,7 +185,7 @@ class FileWriter
 			last_error = new IOError("cannot write to non-writable stream")
 			return
 		end
-		write_native(s.items, s.length)
+		write_native(s.items, 0, s.length)
 	end
 
 	redef fun write(s)
@@ -195,7 +195,7 @@ class FileWriter
 			last_error = new IOError("cannot write to non-writable stream")
 			return
 		end
-		for i in s.substrings do write_native(i.to_cstring, i.length)
+		s.write_native_to(self)
 	end
 
 	redef fun write_byte(value)
@@ -226,7 +226,7 @@ class FileWriter
 	redef var is_writable = false
 
 	# Write `len` bytes from `native`.
-	private fun write_native(native: NativeString, len: Int)
+	private fun write_native(native: NativeString, from, len: Int)
 	do
 		if last_error != null then return
 		if not _is_writable then
@@ -238,7 +238,7 @@ class FileWriter
 			_is_writable = false
 			return
 		end
-		var err = _file.io_write(native, len)
+		var err = _file.io_write(native, from, len)
 		if err != len then
 			# Big problem
 			last_error = new IOError("Problem in writing : {err} {len} \n")
@@ -676,6 +676,11 @@ end
 redef class Text
 	# Access file system related services on the path at `self`
 	fun to_path: Path do return new Path(to_s)
+
+	private fun write_native_to(s: FileWriter)
+	do
+		for i in substrings do s.write_native(i.to_cstring, 0, i.length)
+	end
 end
 
 redef class String
@@ -1091,6 +1096,13 @@ redef class String
 	end
 end
 
+redef class FlatString
+	redef fun write_native_to(s)
+	do
+		s.write_native(items, index_from, length)
+	end
+end
+
 redef class NativeString
 	private fun file_exists: Bool `{
 		FILE *hdl = fopen(self,"r");
@@ -1178,8 +1190,8 @@ private extern class NativeFile `{ FILE* `}
 		return fread(buf, 1, len, self);
 	`}
 
-	fun io_write(buf: NativeString, len: Int): Int `{
-		return fwrite(buf, 1, len, self);
+	fun io_write(buf: NativeString, from, len: Int): Int `{
+		return fwrite(buf+from, 1, len, self);
 	`}
 
 	fun write_byte(value: Byte): Int `{
