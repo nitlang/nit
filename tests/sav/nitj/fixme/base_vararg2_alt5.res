@@ -1,0 +1,39 @@
+Array
+ Int
+ Bool
+Array
+ Int
+ Int
+Array
+ Int
+ Int
+Array
+ Int
+ Int
+Array
+ Int
+ Int
+Array
+ Int
+ Int
+Array
+ Bool
+ Bool
+Array
+ Int
+ Int
+Array
+ Int
+ Int
+Array
+ Int
+ Int
+Array
+ Int
+ Int
+Array
+ Bool
+ Bool
+Array
+ Int
+ Int
