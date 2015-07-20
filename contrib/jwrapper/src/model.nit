@@ -100,6 +100,8 @@ class JavaType
 			name = "Java" + extern_class_name.join
 		end
 
+		name = name.replace("-", "_")
+
 		var nit_type = new NitType(name)
 		nit_type.is_complete = false
 		return nit_type

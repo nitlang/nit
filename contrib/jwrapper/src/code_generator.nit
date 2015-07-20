@@ -232,7 +232,19 @@ class CodeGenerator
 	end
 end
 
+redef class Sys
+	# List of Nit keywords
+	#
+	# These may also be keywords in Java, but there they would be used capitalized.
+	private var nit_keywords: Array[String] = ["abort", "abstract", "and", "assert",
+		"break", "class", "continue", "do", "else", "end", "enum", "extern", "implies",
+		"import", "init", "interface", "intrude", "if", "in", "is", "isa", "for", "label",
+		"loop", "module", "new", "not", "null",	"nullable", "or", "package", "private",
+		"protected", "public", "return", "self", "super", "then", "type", "var", "while"]
+end
+
 redef class String
+
 	# Convert the Java method name `self` to the Nit style
 	#
 	# * Converts to snake case
@@ -244,8 +256,21 @@ redef class String
 		if name.has_prefix("get_") then
 			name = name.substring_from(4)
 		else if name.has_prefix("set_") then
-			name = name.substring_from(4) + "="
+			name = name.substring_from(4)
+			if nit_keywords.has(name) then name += "_"
+			name += "="
 		end
+
+		# Strip the '_' prefix
+		while name.has_prefix("_") do name = name.substring(1, name.length-1)
+
+		# Escape Nit keywords
+		if nit_keywords.has(name) then name += "_"
+
+		# If the name starts by something other than a letter, prefix with `java_`
+		if not name.chars.first.is_letter then name = "java_" + name
+
+		name = name.replace("$", "_")
 
 		return name
 	end
