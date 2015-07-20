@@ -60,7 +60,7 @@ class PerfMap
 		return ts
 	end
 
-	redef fun to_s do return "* " + join(": ", "\n* ")
+	redef fun to_s do return "* " + join("\n* ", ": ")
 end
 
 # Statistics on wall clock execution time of a category of events by `name`
