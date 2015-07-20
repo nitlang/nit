@@ -13,9 +13,10 @@ wildcard = '?';
 Parser
 Ignored blank;
 
-multi_files = compiled_from? class_declaration;
 
 compiled_from = 'Compiled from "' identifier+ '.java"';
+files = file+;
+file = compiled_from? class_declaration;
 
 class_declaration = modifier* class_or_interface full_class_name
 	extends_declaration? implements_declaration? throws_declaration?
