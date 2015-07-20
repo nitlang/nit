@@ -206,6 +206,11 @@ redef class N_39dlong_39d
 	redef fun accept_visitor(v) do v.add_identifier self
 end
 
+redef class Nwildcard
+	# TODO use the lower bound
+	redef fun accept_visitor(v) do v.add_identifier "Object"
+end
+
 #                                  #
 #    C L A S S     H E A D E R     #
 #                                  #
