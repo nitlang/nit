@@ -17,3 +17,15 @@ clean:
 	rm -f bin/javap_test_parser bin/jwrapper
 	rm -f gen/*
 	rm src/javap_lexer.nit src/javap_parser.nit src/javap_test_parser.nit
+
+check: bin/jwrapper tests/wildcards.javap
+	mkdir -p tmp
+	bin/jwrapper -v -u comment -o tests/wildcards.nit tests/wildcards.javap
+	../../bin/nitpick -q tests/wildcards.nit
+
+check-libs: bin/jwrapper
+	# This config dependent rule must be tweaked according to each system
+	bin/jwrapper -v -u ignore -o tests/rt.nit /usr/lib/jvm/default-java/jre/lib/rt.jar
+	bin/jwrapper -v -u ignore -o tests/java_tools.nit /usr/lib/jvm/default-java/lib/tools.jar
+	bin/jwrapper -v -u ignore -o tests/sablecc.nit ~/apps/sablecc-3-beta.3.altgen.20041114/lib/sablecc.jar
+	bin/jwrapper -v -u ignore -o tests/android.nit ~/sdks/android-sdk/platforms/android-10/android.jar
