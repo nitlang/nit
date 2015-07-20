@@ -24,7 +24,7 @@ class_declaration = modifier* class_or_interface full_class_name
 class_or_interface = 'class'|'interface';
 
 modifier
-	= 'public'|'private'|'protected'|'static'|'final'|'native'|'synchronized'|'abstract'|'threadsafe'|'transient'|'volatile';
+	= 'public'|'private'|'protected'|'static'|'final'|'native'|'synchronized'|'abstract'|'threadsafe'|'transient'|'volatile'|'strictfp';
 type = primitive_type brackets*;
 primitive_type
 	= 'boolean'|'byte'|'char'|'short'|'int'|'float'|'long'|'double'
