@@ -32,8 +32,11 @@ primitive_type
 
 type_ref
 	= full_class_name
-	| generic_identifier 'extends' full_class_name
-	| question_mark;
+	| generic_identifier 'extends' type_bound
+	| wildcard;
+type_bound
+	= {tail:} type_bound '&' full_class_name
+	| {head:} full_class_name;
 
 generic_param = '<' generic_parameter_list '>';
 generic_parameter_list
