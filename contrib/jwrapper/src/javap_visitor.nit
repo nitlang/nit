@@ -60,17 +60,29 @@ class JavaVisitor
 	redef fun visit(n) do n.accept_visitor(self)
 
 	# Add the identifier from `token` to the current context
-	fun add_identifier(token: NToken)
+	fun add_identifier(token: String)
 	do
 		if declaration_type == "variable" then
 			if declaration_element == "type" then
-				variable_type.identifier.add(token.text)
+				if is_generic_param then
+					variable_type.generic_params[gen_params_index].identifier.add token
+				else
+					variable_type.identifier.add(token)
+				end
 			end
 		else if declaration_type == "method" then
 			if declaration_element == "return_type" then
-				method_return_type.identifier.add(token.text)
+				if is_generic_param then
+					method_return_type.generic_params[gen_params_index].identifier.add token
+				else
+					method_return_type.identifier.add(token)
+				end
 			else if declaration_element == "parameter_list" then
-				method_params[param_index].identifier.add(token.text)
+				if is_generic_param then
+					method_params[param_index].generic_params[gen_params_index].identifier.add token
+				else
+					method_params[param_index].identifier.add(token)
+				end
 			end
 		end
 	end
@@ -84,58 +96,49 @@ redef class Nidentifier
 	redef fun accept_visitor(v)
 	do
 		if v.declaration_type == "class_header" then
-
+			# Class declaration
 			if v.declaration_element == "id" then
-				v.class_type.identifier.add(self.text)
+				v.class_type.identifier.add text
+				return
 			end
 
 		else if v.declaration_type == "variable" then
-
+			# Attribute declaration
 			if v.declaration_element == "id" then
-				v.variable_id += self.text
-			else if v.declaration_element == "type" then
-				if v.is_generic_param then
-					v.variable_type.generic_params[v.gen_params_index].identifier.add(self.text)
-				else
-					v.variable_type.identifier.add(self.text)
-				end
+				v.variable_id += text
+				return
 			end
 
 		else if v.declaration_type == "method" then
 
 			if v.declaration_element == "id" then
+				# Method id
 				v.method_id = self.text
+				return
 			else if v.declaration_element == "return_type" then
 				if self.text == "void" then
+					# void return type
 					v.method_return_type.is_void = true
-				else if v.is_generic_param then
-					v.method_return_type.generic_params[v.gen_params_index].identifier.add(self.text)
-				else
-					v.method_return_type.identifier.add(self.text)
+					return
 				end
 			else if v.declaration_element == "parameter_list" then
-				if v.is_generic_param then
-					v.method_params[v.param_index].generic_params[v.gen_params_index].identifier.add(self.text)
-				else
-					v.method_params[v.param_index].identifier.add(self.text)
-				end
+				# Parameters, leave it to add_identifier
 
-			# Creates a map to resolve generic return types
-			# Exemple : public **<T extends android/os/Bundle>** T foo();
 			else if v.is_generic_param then
+				# Creates a map to resolve generic return types
+				# Example : public **<T extends android/os/Bundle>** T foo();
 				if v.is_generic_id then
 					v.generic_id = self.text
 					v.generic_map[self.text] = new Array[String]
 
 					if not v.method_return_type.has_unresolved_types then v.method_return_type.has_unresolved_types = true
 				else
-					v.generic_map[v.generic_id].add(self.text)
+					v.generic_map[v.generic_id].add text
 				end
 			end
-
 		end
 
-		super
+		v.add_identifier text
 	end
 end
 
@@ -175,35 +178,35 @@ redef class Nbrackets
 end
 
 redef class N_39dchar_39d
-	redef fun accept_visitor(v) do v.add_identifier self
+	redef fun accept_visitor(v) do v.add_identifier text
 end
 
 redef class N_39dboolean_39d
-	redef fun accept_visitor(v) do v.add_identifier self
+	redef fun accept_visitor(v) do v.add_identifier text
 end
 
 redef class N_39dfloat_39d
-	redef fun accept_visitor(v) do v.add_identifier self
+	redef fun accept_visitor(v) do v.add_identifier text
 end
 
 redef class N_39ddouble_39d
-	redef fun accept_visitor(v) do v.add_identifier self
+	redef fun accept_visitor(v) do v.add_identifier text
 end
 
 redef class N_39dbyte_39d
-	redef fun accept_visitor(v) do v.add_identifier self
+	redef fun accept_visitor(v) do v.add_identifier text
 end
 
 redef class N_39dshort_39d
-	redef fun accept_visitor(v) do v.add_identifier self
+	redef fun accept_visitor(v) do v.add_identifier text
 end
 
 redef class N_39dint_39d
-	redef fun accept_visitor(v) do v.add_identifier self
+	redef fun accept_visitor(v) do v.add_identifier text
 end
 
 redef class N_39dlong_39d
-	redef fun accept_visitor(v) do v.add_identifier self
+	redef fun accept_visitor(v) do v.add_identifier text
 end
 
 redef class Nwildcard
