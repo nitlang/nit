@@ -385,11 +385,14 @@ class Path
 	var last_error: nullable IOError = null is writable
 
 	# Does the file at `path` exists?
+	#
+	# If the file does not exists, `last_error` is set to the information.
 	fun exists: Bool do return stat != null
 
 	# Information on the file at `self` following symbolic links
 	#
 	# Returns `null` if there is no file at `self`.
+	# `last_error` is updated to contains the error information on error, and null on success.
 	#
 	#     assert "/etc/".to_path.stat.is_dir
 	#     assert "/etc/issue".to_path.stat.is_file
@@ -401,12 +404,18 @@ class Path
 	# if stat != null then # Does `p` exist?
 	#     print "It's size is {stat.size}"
 	#     if stat.is_dir then print "It's a directory"
+	# else
+	#     print p.last_error.to_s
 	# end
 	# ~~~
 	fun stat: nullable FileStat
 	do
 		var stat = path.to_cstring.file_stat
-		if stat.address_is_null then return null
+		if stat.address_is_null then
+			last_error = new IOError("Cannot open `{path}`: {sys.errno.strerror}")
+			return null
+		end
+		last_error = null
 		return new FileStat(stat)
 	end
 
@@ -416,7 +425,11 @@ class Path
 	fun link_stat: nullable FileStat
 	do
 		var stat = path.to_cstring.file_lstat
-		if stat.address_is_null then return null
+		if stat.address_is_null then
+			last_error = new IOError("Cannot open `{path}`: {sys.errno.strerror}")
+			return null
+		end
+		last_error = null
 		return new FileStat(stat)
 	end
 
