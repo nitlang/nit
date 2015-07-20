@@ -1,6 +1,7 @@
 # This file is part of NIT (http://www.nitlanguage.org).
 #
 # Copyright 2014 Frédéric Vachon <fredvac@gmail.com>
+# Copyright 2015 Alexis Laferrière <alexis.laf@xymus.net>
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -29,6 +30,8 @@
 module jwrapper
 
 import opts
+import performance_analysis
+
 import javap_test_parser
 import code_generator
 import javap_visitor
@@ -62,15 +65,126 @@ if not "javap".program_is_in_path then
 	exit 1
 end
 
-var javap = new ProcessReader("javap", "-public", dot_class)
+# List of bytecode Java classes and javap output files
+var class_files = new Array[String]
+var javap_files = new Array[String]
+var clock = new Clock
 
-var p = new TestParser_javap
-var tree = p.work(javap.read_all)
+# Sort through input files passed as arguments
+for input in opts.rest do
+	var ext = input.file_extension
+	if ext == "class" then
+		class_files.add input
+	else if ext == "javap" then
+		javap_files.add input
+	else if ext == "jar" then
+		var out_dir = "tmp"
+		clock.lapse
 
+		if opt_verbose.value > 0 then print "# Extracting {input}"
+
+		# Extract all files
+		var cmd = "cd {out_dir}; jar -xf {input}"
+		var status = system(cmd)
+		if status != 0 then
+			print_error "Warning: Failed to extract Jar archive '{input}'"
+			continue
+		end
+
+		# List .class files
+		var javap = new ProcessReader("jar", "-tf", input)
+		var output = javap.read_all
+		javap.wait
+		for path in output.split("\n") do
+			if path.file_extension == "class" then
+				class_files.add out_dir / path
+			end
+		end
+		javap.close
+
+		sys.perfs["jar extract"].add clock.lapse
+	else
+		print_error "Warning: Unsupported file extension for input file '{input}'"
+	end
+end
+
+if class_files.is_empty and javap_files.is_empty then
+	print_error "Error: No valid input files, quitting"
+	exit 1
+end
+
+var model = new JavaModel
 var converter = new JavaTypeConverter
 
-var visitor = new JavaVisitor(converter)
-visitor.enter_visit(tree)
+# Concatenated javap output for all the target files
+var javap_output = ""
 
-var generator = new CodeGenerator(out_file, visitor.java_class, opt_attr.value, opt_comment.value)
+# Parse and analyze all the classes at once
+if class_files.not_empty then
+
+	if opt_verbose.value > 0 then print "# Running javap on {class_files.length} Java classes"
+	clock.lapse
+
+	# Run javap of the class file
+	class_files.unshift "-public"
+	var javap = new ProcessReader("javap", class_files...)
+	javap_output += javap.read_all
+	javap.wait
+	javap.close
+	var status = javap.status
+
+	if status != 0 then
+		print_error "Warning: javap failed to parse all class files, is it a valid class file?"
+		exit 1
+	end
+
+	sys.perfs["javap"].add clock.lapse
+end
+
+# Concatenate the preprocessed javap outputs
+for class_file in javap_files do
+	if opt_verbose.value > 0 then print "# Using the preprocessed file {class_file}"
+
+	var ext = class_file.file_extension
+	assert ext == "javap"
+
+	javap_output += class_file.to_path.read_all
+end
+
+if opt_verbose.value > 0 then print "# Parsing javap output"
+if opt_verbose.value > 1 then javap_output.write_to_file "tests/javap.javap"
+
+# Lexer
+var lexer = new Lexer_javap(javap_output)
+var parser = new Parser_javap
+var tokens = lexer.lex
+parser.tokens.add_all tokens
+sys.perfs["core lexer"].add clock.lapse
+
+# Parser
+var root_node = parser.parse
+if root_node isa NError then
+	print_error "Warning: Parsing failed with {root_node.message}:{root_node.position or else ""}"
+	exit 1
+end
+sys.perfs["core parser"].add clock.lapse
+
+# Build model
+if opt_verbose.value > 0 then print "# Building model"
+assert root_node isa NStart
+var visitor = new JavaVisitor(converter, model)
+visitor.enter_visit root_node
+sys.perfs["core model"].add clock.lapse
+
+if opt_verbose.value > 0 then print "# Generating Nit code"
+
+var use_comment = opt_unknown.value == 0
+var use_stub = opt_unknown.value == 1
+var generator = new CodeGenerator(out_file, model, use_comment, use_stub)
 generator.generate
+sys.perfs["code generator"].add clock.lapse
+
+if opt_verbose.value > 1 then
+	print "# Performance Analysis:"
+	print sys.perfs
+end
