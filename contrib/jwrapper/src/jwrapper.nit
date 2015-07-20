@@ -14,14 +14,17 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# jwrapper is a Nit extern class generator `in "Java"`.
-# It takes a .class file and output a Nit file. For further details on installation and usage, refer to the README file.
+# jwrapper wraps Java classes in extern Nit classes
+#
+# This tool takes class file, Jar archives and javap files as input,
+# and it outputs a Nit source file.
+# For further details on installation and usage, refer to the README file.
 #
 # Here's an overview of the project design :
 # * Grammar and lexer : `grammar/javap.sablecc`
 # * The `javap_visitor` implements the visitor that extracts data from the AST
 # * The `code_generator` takes these data and converts it to Nit code via the `jtype_converter` module and generate the output Nit file.
-# * The `types` contains data structures used to represent the data
+# * The `model` contains data structures used to represent the data
 # * The `jwrapper` module implements the user interface
 module jwrapper
 
@@ -40,9 +43,11 @@ var opt_help = new OptionBool("Show this help message", "-h", "--help")
 opts.add_option(opt_output, opt_unknown, opt_verbose, opt_help)
 opts.parse args
 
-if not opts.errors.is_empty or opts.rest.length != 2 or opt_help.value then
-	print "USAGE: jwrapper [OPTIONS] class_file nit_file"
-	print "Options:"
+if opts.errors.not_empty or opts.rest.is_empty or opt_help.value then
+	print """
+Usage: jwrapper [options] file [other_file [...]]
+Input files: bytecode Java class (.class), Jar archive (.jar) or javap output (.javap)
+Options:"""
 	opts.usage
 
 	if opt_help.value then exit 0
@@ -53,7 +58,7 @@ var out_file = opt_output.value
 if out_file == null then out_file = "out.nit"
 
 if not "javap".program_is_in_path then
-	print "ERROR: 'javap' not found."
+	print "Error: 'javap' must be in PATH"
 	exit 1
 end
 
