@@ -1,15 +1,15 @@
-all: nitcc grammar bin/jwrapper
+all: bin/jwrapper
 
-nitcc:
+../nitcc/src/nitcc:
 	make -C ../nitcc
 
-grammar:
+src/javap_test_parser.nit: ../nitcc/src/nitcc grammar/javap.sablecc
 	../nitcc/src/nitcc grammar/javap.sablecc
 	mkdir -p src gen
-	mv *.nit src/
+	mv javap_*.nit src/
 	mv javap* gen/
 
-bin/jwrapper:
+bin/jwrapper: src/javap_test_parser.nit $(shell ../../bin/nitls -M src/jwrapper.nit) ../../bin/nitc
 	mkdir -p bin
 	../../bin/nitc src/jwrapper.nit -o bin/jwrapper
 
@@ -17,5 +17,3 @@ clean:
 	rm -f bin/javap_test_parser bin/jwrapper
 	rm -f gen/*
 	rm src/javap_lexer.nit src/javap_parser.nit src/javap_test_parser.nit
-
-.PHONY: grammar bin/jwrapper
