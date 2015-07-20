@@ -60,7 +60,7 @@ method_id = identifier;
 
 property_declaration
 	= {method:} modifier* generic_param? type method_id '(' parameter_list? ')' throws_declaration? ';'
-	| {constructor:} modifier* full_class_name '(' parameter_list? ')' throws_declaration? ';'
+	| {constructor:} modifier* generic_param? full_class_name '(' parameter_list? ')' throws_declaration? ';'
 	| {attribute:} modifier* type attribute_id throws_declaration? ';'
 	| {static:} modifier* '{' '}' ';'
 	| ';';
