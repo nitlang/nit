@@ -112,8 +112,10 @@ class CodeGenerator
 	fun gen_class_header(jtype: JavaType): String
 	do
 		var temp = new Array[String]
-		temp.add("extern class Native{jtype.id} in \"Java\" `\{ {jtype} `\}\n")
-		temp.add("\tsuper JavaObject\n\n")
+		var nit_type = jtype.to_nit_type
+		temp.add "# Java class: {jtype.to_package_name}\n"
+		temp.add "extern class {nit_type} in \"Java\" `\{ {jtype.to_package_name} `\}\n"
+		temp.add "\tsuper JavaObject\n\n"
 
 		return temp.join
 	end
@@ -179,6 +181,9 @@ class CodeGenerator
 			nit_id_no += 1
 		end
 
+		# Method documentation
+		var doc = "\t# Java implementation: {java_class}.{jmethod_id}\n"
+
 		# Method identifier
 		var method_id = nmethod_id.to_nit_method_name
 		var nit_signature = new Array[String]
@@ -212,9 +217,9 @@ class CodeGenerator
 
 		var temp = new Array[String]
 
+		temp.add doc
 		temp.add(comment + nit_signature.join)
 
-		# FIXME : This huge `if` block is only necessary to copy primitive arrays as long as there's no better way to do it
 		if comment == "#" then
 			temp.add(" in \"Java\" `\{\n{comment}\t\tself.{jmethod_id}({java_params});\n{comment}\t`\}\n")
 		# Methods with return type

@@ -297,6 +297,8 @@ class JavaClass
 
 	# Importations from this class
 	var imports = new HashSet[NitModule]
+
+	redef fun to_s do return class_type.to_s
 end
 
 # Model of all the Java class analyzed in one run
