@@ -172,6 +172,8 @@ class JavaType
 
 		var regex = "extern class [a-zA-Z1-9]\\\+[ ]\\\+in[ ]\\\+\"Java\"[ ]*`\{[ ]*" + self.to_s + "\\\+[ ]*`\}"
 		var nit_dir = "NIT_DIR".environ
+		if nit_dir.is_empty then return null
+
 		var grep = new ProcessReader("grep", "-r", regex, nit_dir/"lib/android/", nit_dir/"lib/java/")
 		var to_eat = ["private", "extern", "class"]
 
