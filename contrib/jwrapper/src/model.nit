@@ -84,8 +84,6 @@ class JavaType
 		return nit_type
 	end
 
-	fun is_iterable: Bool do return iterable.has(self.id)
-
 	fun is_collection: Bool do return is_primitive_array or collections_list.has(self.id)
 
 	fun is_wrapped: Bool do return find_extern_class != null
@@ -116,22 +114,15 @@ class JavaType
 		return converter.cast_as_return(jtype)
 	end
 
-	redef fun to_s: String
+	redef fun to_s
 	do
 		var id = self.full_id
 
 		if self.is_primitive_array then
-			for i in [0..array_dimension[ do
-				id += "[]"
-			end
+			id += "[]" * array_dimension
 		else if self.has_generic_params then
-			var gen_list = new Array[String]
-
-			for param in generic_params do
-				gen_list.add(param.to_s)
-			end
-
-			id += "<{gen_list.join(", ")}>"
+			var params = [for param in generic_params do param.to_s]
+			id += "<{params.join(", ")}>"
 		end
 
 		return id
