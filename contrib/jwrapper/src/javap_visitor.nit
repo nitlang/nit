@@ -143,7 +143,7 @@ redef class Nidentifier
 end
 
 # Primitive array node
-redef class N_39d_91d_93d_39d
+redef class Nbrackets
 	redef fun accept_visitor(v)
 	do
 		if v.declaration_type == "variable" then
@@ -253,7 +253,7 @@ end
 #                                            #
 
 # Method declaration
-redef class Nmethod_declaration
+redef class Nproperty_declaration_method
 	redef fun accept_visitor(v)
 	do
 		v.declaration_type = "method"
@@ -270,7 +270,7 @@ redef class Nmethod_declaration
 end
 
 # Constructor declaration
-redef class Nconstructor_declaration
+redef class Nproperty_declaration_constructor
 	redef fun accept_visitor(v)
 	do
 		v.declaration_type = "constructor"
@@ -280,7 +280,7 @@ redef class Nconstructor_declaration
 end
 
 # Variable property declaration
-redef class Nvariable_declaration
+redef class Nproperty_declaration_attribute
 	redef fun accept_visitor(v)
 	do
 		v.declaration_type = "variable"
@@ -295,7 +295,7 @@ redef class Nvariable_declaration
 end
 
 # Static property declaration
-redef class Nstatic_declaration
+redef class Nproperty_declaration_static
 	redef fun accept_visitor(v)
 	do
 		v.declaration_type = "static"
@@ -305,7 +305,7 @@ redef class Nstatic_declaration
 end
 
 # Identifier of a variable
-redef class Nvariable_id
+redef class Nattribute_id
 	redef fun accept_visitor(v)
 	do
 		v.declaration_element = "id"
