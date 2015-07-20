@@ -416,8 +416,18 @@ class Path
 		return new FileStat(stat)
 	end
 
-	# Delete a file from the file system, return `true` on success
-	fun delete: Bool do return path.to_cstring.file_delete
+	# Delete a file from the file system.
+	#
+	# `last_error` is updated to contains the error information on error, and null on success.
+	fun delete
+	do
+		var res = path.to_cstring.file_delete
+		if not res then
+			last_error = new IOError("Cannot delete `{path}`: {sys.errno.strerror}")
+		else
+			last_error = null
+		end
+	end
 
 	# Copy content of file at `path` to `dest`.
 	#
@@ -557,38 +567,80 @@ class Path
 	end
 
 
-	# Lists the name of the files contained within the directory at `path`
+	# Lists the files contained within the directory at `path`.
 	#
-	# Require: `exists and is_dir`
+	#     var files = "/etc".to_path.files
+	#     assert files.has("/etc/issue".to_path)
+	#
+	# `last_error` is updated to contains the error information on error, and null on success.
+	# In case of error, the result might be empty or truncated.
+	#
+	#     var path = "/etc/issue".to_path
+	#     files = path.files
+	#     assert files.is_empty
+	#     assert path.last_error != null
 	fun files: Array[Path]
 	do
-		var files = new Array[Path]
-		for filename in path.files do
-			files.add new Path(path / filename)
+		last_error = null
+		var res = new Array[Path]
+		var d = new NativeDir.opendir(path.to_cstring)
+		if d.address_is_null then
+			last_error = new IOError("Cannot list directory `{path}`: {sys.errno.strerror}")
+			return res
 		end
-		return files
+
+		loop
+			var de = d.readdir
+			if de.address_is_null then
+				# readdir cannot fail, so null means end of list
+				break
+			end
+			var name = de.to_s_with_copy
+			if name == "." or name == ".." then continue
+			res.add new Path(path / name)
+		end
+		d.closedir
+
+		return res
 	end
 
-	# Delete a directory and all of its content, return `true` on success
+	# Delete a directory and all of its content
 	#
 	# Does not go through symbolic links and may get stuck in a cycle if there
 	# is a cycle in the file system.
-	fun rmdir: Bool
+	#
+	# `last_error` is updated to contains the error information on error, and null on success.
+	# The method does not stop on the first error and try to remove most file and directories.
+	#
+	# ~~~
+	# var path = "/does/not/exists/".to_path
+	# path.rmdir
+	# assert path.last_error != null
+	# ~~~
+	fun rmdir
 	do
-		var ok = true
+		last_error = null
 		for file in self.files do
 			var stat = file.link_stat
-			if stat.is_dir then
-				ok = file.rmdir and ok
-			else
-				ok = file.delete and ok
+			if stat == null then
+				last_error = file.last_error
+				continue
 			end
+			if stat.is_dir then
+				# Recursively rmdir
+				file.rmdir
+			else
+				file.delete
+			end
+			if last_error == null then last_error = file.last_error
 		end
 
-		# Delete the directory itself
-		if ok then ok = path.to_cstring.rmdir and ok
-
-		return ok
+		# Delete the directory itself if things are fine
+		if last_error == null then
+			if path.to_cstring.rmdir then
+				last_error = new IOError("Cannot remove `{self}`: {sys.errno.strerror}")
+			end
+		end
 	end
 
 	redef fun ==(other) do return other isa Path and path.simplify_path == other.path.simplify_path
@@ -1066,10 +1118,9 @@ redef class String
 	#     assert "/fail/does not/exist".rmdir != null
 	fun rmdir: nullable Error
 	do
-		var res = to_path.rmdir
-		if res then return null
-		var error = new IOError("Cannot change remove `{self}`: {sys.errno.strerror}")
-		return error
+		var p = to_path
+		p.rmdir
+		return p.last_error
 	end
 
 	# Change the current working directory
