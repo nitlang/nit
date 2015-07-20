@@ -8,13 +8,12 @@ blank = (' '|'\n'|'\t'|'\r')+;
 separator = ('.'|'/');
 brackets = '[]';
 wildcard = '?';
+compiled_from = 'Compiled from "' (Any-'"')* '"';
 
 // ---
 Parser
 Ignored blank;
 
-
-compiled_from = 'Compiled from "' identifier+ '.java"';
 files = file+;
 file = compiled_from? class_declaration;
 
