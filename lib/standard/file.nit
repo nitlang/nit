@@ -368,6 +368,18 @@ class Path
 	# ~~~
 	var filename: String = path.basename is lazy
 
+	# Last error produced by I/O operations.
+	#
+	# ~~~
+	# var path = "/does/not/exists".to_path
+	# assert path.last_error == null
+	# path.read_all
+	# assert path.last_error != null
+	# ~~~
+	#
+	# Since `Path` objects are stateless, `last_error` is reset on most operations and reflect its status.
+	var last_error: nullable IOError = null is writable
+
 	# Does the file at `path` exists?
 	fun exists: Bool do return stat != null
 
@@ -407,11 +419,12 @@ class Path
 	# Delete a file from the file system, return `true` on success
 	fun delete: Bool do return path.to_cstring.file_delete
 
-	# Copy content of file at `path` to `dest`
+	# Copy content of file at `path` to `dest`.
 	#
-	# Require: `exists`
+	# `last_error` is updated to contains the error information on error, and null on success.
 	fun copy(dest: Path)
 	do
+		last_error = null
 		var input = open_ro
 		var output = dest.open_wo
 
@@ -422,41 +435,75 @@ class Path
 
 		input.close
 		output.close
+		last_error = input.last_error or else output.last_error
 	end
 
-	# Open this file for reading
+	# Open this file for reading.
 	#
-	# Require: `exists and not link_stat.is_dir`
+	# ~~~
+	# var file = "/etc/issue".to_path.open_ro
+	# print file.read_line
+	# file.close
+	# ~~~
+	#
+	# Note that it is the user's responsibility to close the stream.
+	# Therefore, for simple use case, look at `read_all` or `each_line`.
+	#
+	# ENSURE `last_error == result.last_error`
 	fun open_ro: FileReader
 	do
-		# TODO manage streams error when they are merged
-		return new FileReader.open(path)
+		var res = new FileReader.open(path)
+		last_error = res.last_error
+		return res
 	end
 
 	# Open this file for writing
 	#
-	# Require: `not exists or not stat.is_dir`
+	# ~~~
+	# var file = "bla.log".to_path.open_wo
+	# file.write "Blabla\n"
+	# file.close
+	# ~~~
+	#
+	# Note that it is the user's responsibility to close the stream.
+	# Therefore, for simple use case, look at `Writable::write_to_file`.
+	#
+	# ENSURE `last_error == result.last_error`
 	fun open_wo: FileWriter
 	do
-		# TODO manage streams error when they are merged
-		return new FileWriter.open(path)
+		var res = new FileWriter.open(path)
+		last_error = res.last_error
+		return res
 	end
 
-	# Read all the content of the file
+	# Read all the content of the file as a string.
 	#
 	# ~~~
 	# var content = "/etc/issue".to_path.read_all
 	# print content
 	# ~~~
 	#
+	# `last_error` is updated to contains the error information on error, and null on success.
+	# In case of error, the result might be empty or truncated.
+	#
 	# See `Reader::read_all` for details.
 	fun read_all: String do return read_all_bytes.to_s
 
+	# Read all the content on the file as a raw sequence of bytes.
+	#
+	# ~~~
+	# var content = "/etc/issue".to_path.read_all_bytes
+	# print content.to_s
+	# ~~~
+	#
+	# `last_error` is updated to contains the error information on error, and null on success.
+	# In case of error, the result might be empty or truncated.
 	fun read_all_bytes: Bytes
 	do
 		var s = open_ro
 		var res = s.read_all_bytes
 		s.close
+		last_error = s.last_error
 		return res
 	end
 
@@ -473,12 +520,16 @@ class Path
 	# end
 	# ~~~
 	#
+	# `last_error` is updated to contains the error information on error, and null on success.
+	# In case of error, the result might be empty or truncated.
+	#
 	# See `Reader::read_lines` for details.
 	fun read_lines: Array[String]
 	do
 		var s = open_ro
 		var res = s.read_lines
 		s.close
+		last_error = s.last_error
 		return res
 	end
 
@@ -493,12 +544,15 @@ class Path
 	#
 	# Note: the stream is automatically closed at the end of the file (see `LineIterator::close_on_finish`)
 	#
+	# `last_error` is updated to contains the error information on error, and null on success.
+	#
 	# See `Reader::each_line` for details.
 	fun each_line: LineIterator
 	do
 		var s = open_ro
 		var res = s.each_line
 		res.close_on_finish = true
+		last_error = s.last_error
 		return res
 	end
 
