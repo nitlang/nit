@@ -48,7 +48,9 @@ full_class_name
 	| {head:} class_name;
 class_name = identifier generic_param?;
 
-parameter = type '...'?;
+parameter
+	= type '...'?
+	| {wildcard:} wildcard 'super' full_class_name ;
 parameter_list
 	= {tail:} parameter_list ',' parameter
 	| {head:} parameter;
