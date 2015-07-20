@@ -257,6 +257,7 @@ redef class Nproperty_declaration_method
 	redef fun accept_visitor(v)
 	do
 		v.declaration_type = "method"
+		v.declaration_element = null
 		super
 		v.declaration_type = null
 
