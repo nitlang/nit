@@ -28,8 +28,6 @@ intrude import model
 class JavaVisitor
 	super Visitor
 
-	var converter: JavaTypeConverter
-
 	# Model of all the analyzed classes
 	var model: JavaModel
 
@@ -40,7 +38,7 @@ class JavaVisitor
 	var class_type: JavaType is noinit
 
 	var variable_id = ""
-	var variable_type = new JavaType(self.converter) is lazy
+	var variable_type = new JavaType is lazy
 
 	var is_generic_param = false
 	var is_generic_id = false
@@ -53,7 +51,7 @@ class JavaVisitor
 	var is_primitive_array = false
 
 	var method_id = ""
-	var method_return_type = new JavaType(self.converter) is lazy
+	var method_return_type = new JavaType is lazy
 	var method_params = new Array[JavaType]
 	var param_index = 0
 
@@ -223,7 +221,7 @@ redef class Nclass_declaration
 	do
 		v.java_class = new JavaClass
 		v.model.classes.add v.java_class
-		v.class_type = new JavaType(v.converter)
+		v.class_type = new JavaType
 
 		v.declaration_type = "class_header"
 		v.declaration_element = "id"
@@ -277,7 +275,7 @@ redef class Nproperty_declaration_method
 
 		v.method_params.clear
 		v.method_id = ""
-		v.method_return_type = new JavaType(v.converter)
+		v.method_return_type = new JavaType
 	end
 end
 
@@ -302,7 +300,7 @@ redef class Nproperty_declaration_attribute
 		v.java_class.attributes[v.variable_id] = v.variable_type
 
 		v.variable_id = ""
-		v.variable_type = new JavaType(v.converter)
+		v.variable_type = new JavaType
 	end
 end
 
@@ -423,13 +421,13 @@ redef class Nparameter
 		if v.declaration_type == "method" then
 			if v.declaration_element == "parameter_list" then
 				if v.is_generic_param then
-					v.method_params[v.param_index].generic_params.add(new JavaType(v.converter))
+					v.method_params[v.param_index].generic_params.add new JavaType
 
 					super
 
 					v.gen_params_index += 1
 				else
-					v.method_params.add(new JavaType(v.converter))
+					v.method_params.add new JavaType
 
 					super
 
@@ -437,7 +435,7 @@ redef class Nparameter
 				end
 			else if v.declaration_element == "return_type" and v.is_generic_param then
 
-				v.method_return_type.generic_params.add(new JavaType(v.converter))
+				v.method_return_type.generic_params.add new JavaType
 
 				super
 
@@ -449,7 +447,7 @@ redef class Nparameter
 			end
 		else if v.declaration_type == "variable" then
 			if v.declaration_element == "type" and v.is_generic_param then
-				v.variable_type.generic_params.add(new JavaType(v.converter))
+				v.variable_type.generic_params.add new JavaType
 
 				super
 

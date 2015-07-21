@@ -23,7 +23,6 @@ import more_collections
 import jtype_converter
 
 class JavaType
-	private var converter: JavaTypeConverter
 	var identifier = new Array[String]
 	var generic_params: nullable Array[JavaType] = null
 	var is_void = false
@@ -39,8 +38,6 @@ class JavaType
 	fun has_generic_params: Bool do return not generic_params == null
 	fun full_id: String do return identifier.join(".")
 	fun id: String do return identifier.last.replace("$", "")
-
-	init(converter: JavaTypeConverter) do self.converter = converter
 
 	fun return_cast: String do return converter.cast_as_return(self.id)
 
@@ -287,7 +284,7 @@ end
 # Model of a single Java class
 class JavaClass
 	# Type of this class
-	var class_type = new JavaType(new JavaTypeConverter)
+	var class_type = new JavaType
 
 	# Attributes of this class
 	var attributes = new HashMap[String, JavaType]

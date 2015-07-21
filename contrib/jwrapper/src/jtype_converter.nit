@@ -17,6 +17,11 @@
 # Services to convert java type to nit type and get casts if needed
 module jtype_converter
 
+redef class Sys
+	# Converter between Java and Nit type
+	var converter = new JavaTypeConverter
+end
+
 class JavaTypeConverter
 
 	var type_map = new HashMap[String, String]

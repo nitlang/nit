@@ -172,7 +172,7 @@ sys.perfs["core parser"].add clock.lapse
 # Build model
 if opt_verbose.value > 0 then print "# Building model"
 assert root_node isa NStart
-var visitor = new JavaVisitor(converter, model)
+var visitor = new JavaVisitor(model)
 visitor.enter_visit root_node
 sys.perfs["core model"].add clock.lapse
 
