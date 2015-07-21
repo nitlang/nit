@@ -151,7 +151,7 @@ class Downloader
 
 		if sys.verbose then
 			print "\n# {matches.length} matching elements:"
-			print matches.join("\n")
+			print "* " + matches.join("\n* ")
 			print "\n# Downloading..."
 		end
 
@@ -162,13 +162,13 @@ class Downloader
 				# Do not download a file that is not unique according to `unique_id`
 				if not element.is_unique_exception(config) then
 					# We make some exceptions
-					if sys.verbose then print "File in log, skipping {element}"
+					if sys.verbose then print "- Skipping {element}"
 					continue
 				end
 			end
 
 			# Download element
-			if sys.verbose then print "Acting on {element}"
+			if sys.verbose then print "+ Acting on {element}"
 
 			tool_config.act_on element
 
