@@ -720,6 +720,10 @@ redef class ModelBuilder
 		var stdimport = true
 		var imported_modules = new Array[MModule]
 		for aimport in nmodule.n_imports do
+			# Do not imports conditional
+			var atconditionals = aimport.get_annotations("conditional")
+			if atconditionals.not_empty then continue
+
 			stdimport = false
 			if not aimport isa AStdImport then
 				continue
@@ -766,8 +770,55 @@ redef class ModelBuilder
 				mmodule.set_visibility_for(sup, public_visibility)
 			end
 		end
-		self.toolcontext.info("{mmodule} imports {imported_modules.join(", ")}", 3)
+
+		# Declare conditional importation
+		for aimport in nmodule.n_imports do
+			if not aimport isa AStdImport then continue
+			var atconditionals = aimport.get_annotations("conditional")
+			if atconditionals.is_empty then continue
+
+			var suppath = seach_module_by_amodule_name(aimport.n_name, mmodule.mgroup)
+			if suppath == null then continue # skip error
+
+			for atconditional in atconditionals do
+				var nargs = atconditional.n_args
+				if nargs.is_empty then
+					error(atconditional, "Syntax Error: `conditional` expects module identifiers as arguments.")
+					continue
+				end
+
+				# The rule
+				var rule = new Array[Object]
+
+				# First element is the goal, thus
+				rule.add suppath
+
+				# Second element is the first condition, that is to be a client of the current module
+				rule.add mmodule
+
+				# Other condition are to be also a client of each modules indicated as arguments of the annotation
+				for narg in nargs do
+					var id = narg.as_id
+					if id == null then
+						error(narg, "Syntax Error: `conditional` expects module identifier as arguments.")
+						continue
+					end
+
+					var mp = search_mmodule_by_name(narg, mmodule.mgroup, id)
+					if mp == null then continue
+
+					rule.add mp
+				end
+
+				conditional_importations.add rule
+			end
+		end
+
 		mmodule.set_imported_mmodules(imported_modules)
+
+		apply_conditional_importations(mmodule)
+
+		self.toolcontext.info("{mmodule} imports {mmodule.in_importation.direct_greaters.join(", ")}", 3)
 
 		# Force standard to be public if imported
 		for sup in mmodule.in_importation.greaters do
@@ -786,6 +837,72 @@ redef class ModelBuilder
 			if directs.has(im) then continue
 			# This generates so much noise that it is simpler to just comment it
 			#warning(nim, "Warning: possible useless importation of {im}")
+		end
+	end
+
+	# Global list of conditional importation rules.
+	#
+	# Each rule is a "Horn clause"-like sequence of modules.
+	# It means that the first module is the module to automatically import.
+	# The remaining modules are the conditions of the rule.
+	#
+	# Each module is either represented by a MModule (if the module is already loaded)
+	# or by a ModulePath (if the module is not yet loaded).
+	#
+	# Rules are declared by `build_module_importation` and are applied by `apply_conditional_importations`
+	# (and `build_module_importation` that calls it).
+	#
+	# TODO (when the loader will be rewritten): use a better representation and move up rules in the model.
+	private var conditional_importations = new Array[SequenceRead[Object]]
+
+	# Extends the current importations according to imported rules about conditional importation
+	fun apply_conditional_importations(mmodule: MModule)
+	do
+		# Because a conditional importation may cause additional conditional importation, use a fixed point
+		# The rules are checked naively because we assume that it does not worth to be optimized
+		var check_conditional_importations = true
+		while check_conditional_importations do
+			check_conditional_importations = false
+
+			for ci in conditional_importations do
+				# Check conditions
+				for i in [1..ci.length[ do
+					var rule_element = ci[i]
+					# An element of a rule is either a MModule or a ModulePath
+					# We need the mmodule to resonate on the importation
+					var m
+					if rule_element isa MModule then
+						m = rule_element
+					else if rule_element isa ModulePath then
+						m = rule_element.mmodule
+						# Is loaded?
+						if m == null then continue label
+					else
+						abort
+					end
+					# Is imported?
+					if not mmodule.in_importation.greaters.has(m) then continue label
+				end
+				# Still here? It means that all conditions modules are loaded and imported
+
+				# Identify the module to automatically import
+				var suppath = ci.first.as(ModulePath)
+				var sup = load_module_path(suppath)
+				if sup == null then continue
+
+				# Do nothing if already imported
+				if mmodule.in_importation.greaters.has(sup) then continue label
+
+				# Import it
+				self.toolcontext.info("{mmodule} conditionally imports {sup}", 3)
+				# TODO visibility rules (currently always public)
+				mmodule.set_visibility_for(sup, public_visibility)
+				# TODO linearization rules (currently added at the end in the order of the rules)
+				mmodule.set_imported_mmodules([sup])
+
+				# Prepare to reapply the rules
+				check_conditional_importations = true
+			end label
 		end
 	end
 
