@@ -82,6 +82,12 @@ private class Concat
 
 	redef fun empty do return ""
 
+	# Cache for the latest accessed FlatString in `self`
+	var flat_cache: String = ""
+
+	# Position of the beginning of `flat_cache` in `self`
+	var flat_last_pos_start: Int = -1
+
 	redef var to_cstring is lazy do
 		var len = bytelen
 		var ns = new NativeString(len + 1)
@@ -119,9 +125,27 @@ private class Concat
 	end
 
 	redef fun [](i) do
-		var llen = left.length
-		if i >= llen then return right[i - llen]
-		return left[i]
+		if flat_last_pos_start != -1 then
+			var fsp = i - flat_last_pos_start
+			if fsp >= 0 and fsp < flat_cache.length then return flat_cache[fsp]
+		end
+		var s: String = self
+		var st = i
+		loop
+			if s isa FlatString then break
+			s = s.as(Concat)
+			var lft = s.left
+			var llen = lft.length
+			if i >= llen then
+				s = s.right
+				i -= llen
+			else
+				s = s.left
+			end
+		end
+		flat_last_pos_start = st - i
+		flat_cache = s
+		return s[i]
 	end
 
 	redef fun substring(from, len) do
