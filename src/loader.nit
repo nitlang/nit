@@ -272,6 +272,14 @@ redef class ModelBuilder
 	do
 		var path = search_mmodule_by_name(anode, mgroup, name)
 		if path == null then return null # Forward error
+		return load_module_path(path)
+	end
+
+	# Load and process importation of a given ModulePath.
+	#
+	# Basically chains `load_module` and `build_module_importation`.
+	fun load_module_path(path: ModulePath): nullable MModule
+	do
 		var res = self.load_module(path.filepath)
 		if res == null then return null # Forward error
 		# Load imported module
