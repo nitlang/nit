@@ -168,7 +168,6 @@ class CodeGenerator
 			if not jparam.is_collection then cast = jparam.param_cast
 
 			nit_types.add(nit_type)
-			nit_type.arg_id = "{nit_id}{nit_id_no}"
 
 			if i == jparam_list.length - 1 then
 				java_params += "{cast}{nit_id}{nit_id_no}"

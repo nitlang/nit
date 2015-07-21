@@ -232,7 +232,6 @@ end
 
 class NitType
 	var identifier: String
-	var arg_id: String
 	var generic_params: nullable Array[NitType] = null
 
 	# If this NitType was found in `lib/android`, contains the module name to import
