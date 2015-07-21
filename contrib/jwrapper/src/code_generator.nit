@@ -58,11 +58,12 @@ class CodeGenerator
 
 		# All importations
 		var imports = new HashSet[String]
-		imports.add "import mnit_android\n"
+		imports.add "import java\n"
 		for jclass in model.classes do
 			for import_ in jclass.imports do imports.add "import android::{import_}\n"
 		end
 		file_out.write imports.join("\n")
+		file_out.write "\n"
 
 		for jclass in model.classes do
 
