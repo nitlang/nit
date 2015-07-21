@@ -122,12 +122,7 @@ class CodeGenerator
 
 	fun gen_unknown_class_header(jtype: JavaType): String
 	do
-		var nit_type: NitType
-		if jtype.extern_name.has_generic_params then
-			nit_type = jtype.extern_name.generic_params.first
-		else
-			nit_type = jtype.extern_name
-		end
+		var nit_type = jtype.extern_name
 
 		var temp = new Array[String]
 		temp.add("extern class {nit_type} in \"Java\" `\{ {jtype.to_package_name} `\}\n")

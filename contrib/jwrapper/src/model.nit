@@ -66,18 +66,6 @@ class JavaType
 			nit_type = new NitType(type_id)
 		end
 
-		if not self.has_generic_params then return nit_type
-
-		nit_type.generic_params = new Array[NitType]
-
-		for param in generic_params do
-			var nit_param = param.to_nit_type
-
-			nit_type.generic_params.add(nit_param)
-
-			if not nit_param.is_complete then nit_type.is_complete = false
-		end
-
 		return nit_type
 	end
 
@@ -198,32 +186,9 @@ class JavaType
 
 	# Comparison based on fully qualified named and generic params
 	# Ignores primitive array so `a.b.c[][] == a.b.c`
-	redef fun ==(other)
-	do
-		if other isa JavaType then
-			return self.repr == other.repr
-		end
-		return false
-	end
+	redef fun ==(other) do return other isa JavaType and self.full_id == other.full_id
 
-	redef fun hash do return self.repr.hash
-
-	private fun repr: String
-	do
-		var id = self.full_id
-
-		if self.has_generic_params then
-			var gen_list = new Array[String]
-
-			for param in generic_params do
-				gen_list.add(param.to_s)
-			end
-
-			id += "<{gen_list.join(", ")}>"
-		end
-
-		return id
-	end
+	redef fun hash do return self.full_id.hash
 
 	var collections_list: Array[String] is lazy do return ["List", "ArrayList", "LinkedList", "Vector", "Set", "SortedSet", "HashSet", "TreeSet", "LinkedHashSet", "Map", "SortedMap", "HashMap", "TreeMap", "Hashtable", "LinkedHashMap"]
 	var iterable: Array[String] is lazy do return ["ArrayList", "Set", "HashSet", "LinkedHashSet", "LinkedList", "Stack", "TreeSet", "Vector"]
@@ -233,7 +198,6 @@ end
 class NitType
 	# Nit class name
 	var identifier: String
-	var generic_params: nullable Array[NitType] = null
 
 	# If this NitType was found in `lib/android`, contains the module name to import
 	var mod: nullable NitModule
@@ -241,25 +205,7 @@ class NitType
 	# Returns `true` if all types have been successfully converted to Nit type
 	var is_complete: Bool = true
 
-	fun has_generic_params: Bool do return not generic_params == null
-
-
-	redef fun to_s: String
-	do
-		var id = self.identifier
-
-		if self.has_generic_params then
-			var gen_list = new Array[String]
-
-			for param in generic_params do
-				gen_list.add(param.to_s)
-			end
-
-			id += "[{gen_list.join(", ")}]"
-		end
-
-		return id
-	end
+	redef fun to_s do return identifier
 end
 
 # Model of a single Java class
