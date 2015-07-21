@@ -80,6 +80,12 @@ class CodeGenerator
 					file_out.write "\n"
 				end
 			end
+
+			# Attributes
+			for id, java_type in jclass.attributes do
+				generate_getter_setter(jclass, id, java_type)
+			end
+
 			file_out.write "end\n\n"
 		end
 
@@ -230,6 +236,30 @@ class CodeGenerator
 		end
 
 		return temp.join
+	end
+
+	# Generate getter and setter to access an attribute, of field
+	private fun generate_getter_setter(java_class: JavaClass, java_id: String, java_type: JavaType)
+	do
+		var nit_type = model.java_to_nit_type(java_type)
+		var nit_id = java_id.to_nit_method_name
+		nit_id = java_class.nit_name_for(nit_id, [java_type], false)
+
+		var c = ""
+		if not nit_type.is_known then c = "#"
+
+		file_out.write """
+	# Java getter: {{{java_class}}}.{{{java_id}}}
+{{{c}}}	fun {{{nit_id}}}: {{{nit_type}}} in "Java" `{
+{{{c}}}		return self.{{{java_id}}};
+{{{c}}}	`}
+
+	# Java setter: {{{java_class}}}.{{{java_id}}}
+{{{c}}}	fun {{{nit_id}}}=(value: {{{nit_type}}}) in "Java" `{
+{{{c}}}		self.{{{java_id}}} = value;
+{{{c}}}	`}
+
+"""
 	end
 end
 
