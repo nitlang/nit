@@ -374,7 +374,41 @@ class Path
 	# var path = "/tmp/somefile".to_path
 	# assert path.filename == "somefile"
 	# ~~~
+	#
+	# The result does not depend of the file system, thus is cached for efficiency.
 	var filename: String = path.basename is lazy
+
+	# The path simplified by removing useless `.`, removing `//`, and resolving `..`
+	#
+	# ~~~
+	# var path = "somedir/./tmp/../somefile".to_path
+	# assert path.simplified.to_s == "somedir/somefile"
+	# ~~~
+	#
+	# See `String:simplify_path` for details.
+	#
+	# The result does not depend of the file system, thus is cached for efficiency.
+	var simplified: Path is lazy do
+		var res = path.simplify_path.to_path
+		res.simplified = res
+		return res
+	end
+
+	# Return the directory part of the path.
+	#
+	# ~~~
+	# var path = "/foo/bar/baz".to_path
+	# assert path.dir.to_s == "/foo/bar"
+	# assert path.dir.dir.to_s == "/foo"
+	# assert path.dir.dir.dir.to_s == "/"
+	# ~~~
+	#
+	# See `String:dirname` for details.
+	#
+	# The result does not depend of the file system, thus is cached for efficiency.
+	var dir: Path is lazy do
+		return path.dirname.to_path
+	end
 
 	# Last error produced by I/O operations.
 	#
@@ -664,8 +698,8 @@ class Path
 		end
 	end
 
-	redef fun ==(other) do return other isa Path and path.simplify_path == other.path.simplify_path
-	redef fun hash do return path.simplify_path.hash
+	redef fun ==(other) do return other isa Path and simplified.path == other.simplified.path
+	redef fun hash do return simplified.path.hash
 end
 
 # Information on a file
