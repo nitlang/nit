@@ -68,3 +68,18 @@ class B # class 2
 	   a123
    end
 end
+
+var a = new A
+a.a1
+a.a12
+a.a13
+a.a123
+
+var b = new B
+b.a1
+b.a12
+b.a13
+b.a123
+
+b.all2
+b.all25
