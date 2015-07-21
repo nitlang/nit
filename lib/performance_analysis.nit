@@ -60,7 +60,7 @@ class PerfMap
 		return ts
 	end
 
-	redef fun to_s do return "* " + join(": ", "\n* ")
+	redef fun to_s do return "* " + join("\n* ", ": ")
 end
 
 # Statistics on wall clock execution time of a category of events by `name`
@@ -81,6 +81,9 @@ class PerfEntry
 	# Number of registered events
 	var count = 0
 
+	# Total execution time of this event
+	var sum = 0.0
+
 	# Register a new event execution time with a `Timespec`
 	fun add(lapse: Timespec) do add_float lapse.to_f
 
@@ -90,9 +93,10 @@ class PerfEntry
 		if time.to_f < min.to_f or count == 0 then min = time
 		if time.to_f > max.to_f then max = time
 
-		avg = (avg * count.to_f + time) / (count+1).to_f
+		sum += time
 		count += 1
+		avg = sum / count.to_f
 	end
 
-	redef fun to_s do return "min {min}, max {max}, avg {avg}, count {count}"
+	redef fun to_s do return "min {min}, max {max}, avg {avg}, sum {sum}, count {count}"
 end

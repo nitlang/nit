@@ -1,17 +1,21 @@
 Grammar javap;
 
+// ---
 Lexer
 
-identifier = ('a'..'z'|'A'..'Z'|'_'|'$') ('a'..'z'|'A'..'Z'|'_'|'$'|'0'..'9')*;
+identifier = ('a'..'z'|'A'..'Z'|'_'|'$') ('a'..'z'|'A'..'Z'|'_'|'-'|'$'|'0'..'9')*;
 blank = (' '|'\n'|'\t'|'\r')+;
 separator = ('.'|'/');
+brackets = '[]';
+wildcard = '?';
+compiled_from = 'Compiled from "' (Any-'"')* '"';
 
+// ---
 Parser
 Ignored blank;
 
-multi_files = compiled_from? class_declaration;
-
-compiled_from = 'Compiled from "' identifier+ '.java"';
+files = file+;
+file = compiled_from? class_declaration;
 
 class_declaration = modifier* class_or_interface full_class_name
 	extends_declaration? implements_declaration? throws_declaration?
@@ -19,42 +23,58 @@ class_declaration = modifier* class_or_interface full_class_name
 
 class_or_interface = 'class'|'interface';
 
-modifier = 'public'|'private'|'protected'|'static'|'final'|'native'|'synchronized'|'abstract'|'threadsafe'|'transient'|'volatile';
-type = type_specifier '[]'*;
-type_specifier = 'boolean'|'byte'|'char'|'short'|'int'|'float'|'long'|'double' | type_ref;
+modifier
+	= 'public'|'private'|'protected'|'static'|'final'|'native'|'synchronized'|'abstract'|'threadsafe'|'transient'|'volatile'|'strictfp';
+type = primitive_type brackets*;
+primitive_type
+	= 'boolean'|'byte'|'char'|'short'|'int'|'float'|'long'|'double'
+	| type_ref;
 
-type_ref = full_class_name | generic_identifier 'extends' full_class_name | '?';
-type_refs = {tail:} type_refs ',' type_ref | {head:} type_ref;
+type_ref
+	= full_class_name
+	| generic_identifier 'extends' type_bound
+	| wildcard;
+type_bound
+	= {tail:} type_bound '&' full_class_name
+	| {head:} full_class_name;
 
 generic_param = '<' generic_parameter_list '>';
-generic_parameter_list = {tail:} generic_parameter_list ',' parameter | {head:} parameter;
-generic_identifier = full_class_name | '?';
+generic_parameter_list
+	= {tail:} generic_parameter_list ',' parameter
+	| {head:} parameter;
+generic_identifier
+	= full_class_name
+	| wildcard;
 
-full_class_name = full_class_name separator class_name | class_name;
+full_class_name
+	= {tail:} full_class_name separator class_name
+	| {head:} class_name;
 class_name = identifier generic_param?;
 
-interface_name = full_class_name;
-interface_list = {tail:} interface_list ',' interface_name | {head:} interface_name;
+parameter
+	= type '...'?
+	| {wildcard:} wildcard 'super' full_class_name ;
+parameter_list
+	= {tail:} parameter_list ',' parameter
+	| {head:} parameter;
 
-parameter = type '...'?;
-parameter_list_comp = {tail:} parameter_list_comp ',' parameter | {head:} parameter;
-parameter_list = parameter_list_comp;
-
-exception = type;
-exception_list = exception_list ',' exception | exception;
-
-statement = variable_declaration | statement_block | ';';
-statement_block = '{' statement* '}';
-
-variable_id = identifier '[]'*;
+attribute_id = identifier brackets*;
 method_id = identifier;
 
-property_declaration = method_declaration | constructor_declaration | variable_declaration | static_declaration | ';';
-variable_declaration = modifier* type variable_id throws_declaration? ';';
-method_declaration = modifier* generic_param? type method_id '(' parameter_list? ')' throws_declaration? ';';
-constructor_declaration = modifier* full_class_name '(' parameter_list? ')' throws_declaration? ';';
-implements_declaration = 'implements' interface_list*;
-extends_interface_declaration = 'extends' interface_list*;
-extends_declaration = 'extends' type;
-static_declaration = modifier* '{' '}' ';';
+property_declaration
+	= {method:} modifier* generic_param? type method_id '(' parameter_list? ')' throws_declaration? ';'
+	| {constructor:} modifier* generic_param? full_class_name '(' parameter_list? ')' throws_declaration? ';'
+	| {attribute:} modifier* type attribute_id throws_declaration? ';'
+	| {static:} modifier* '{' '}' ';'
+	| ';';
+
+implements_declaration = 'implements' interface_list;
+extends_declaration = 'extends' interface_list;
+interface_list
+	= {tail:} interface_list ',' full_class_name
+	| {head:} full_class_name;
+
 throws_declaration = 'throws' exception_list?;
+exception_list
+	= {tail:} exception_list ',' type
+	| {head:} type;

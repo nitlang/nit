@@ -1,15 +1,15 @@
-all: nitcc grammar bin/jwrapper
+all: bin/jwrapper
 
-nitcc:
+../nitcc/src/nitcc:
 	make -C ../nitcc
 
-grammar:
+src/javap_test_parser.nit: ../nitcc/src/nitcc grammar/javap.sablecc
 	../nitcc/src/nitcc grammar/javap.sablecc
 	mkdir -p src gen
-	mv *.nit src/
+	mv javap_*.nit src/
 	mv javap* gen/
 
-bin/jwrapper:
+bin/jwrapper: src/javap_test_parser.nit $(shell ../../bin/nitls -M src/jwrapper.nit) ../../bin/nitc
 	mkdir -p bin
 	../../bin/nitc src/jwrapper.nit -o bin/jwrapper
 
@@ -18,4 +18,14 @@ clean:
 	rm -f gen/*
 	rm src/javap_lexer.nit src/javap_parser.nit src/javap_test_parser.nit
 
-.PHONY: grammar bin/jwrapper
+check: bin/jwrapper tests/wildcards.javap
+	mkdir -p tmp
+	bin/jwrapper -v -u comment -o tests/wildcards.nit tests/wildcards.javap
+	../../bin/nitpick -q tests/wildcards.nit
+
+check-libs: bin/jwrapper
+	# This config dependent rule must be tweaked according to each system
+	bin/jwrapper -v -u ignore -o tests/rt.nit /usr/lib/jvm/default-java/jre/lib/rt.jar
+	bin/jwrapper -v -u ignore -o tests/java_tools.nit /usr/lib/jvm/default-java/lib/tools.jar
+	bin/jwrapper -v -u ignore -o tests/sablecc.nit ~/apps/sablecc-3-beta.3.altgen.20041114/lib/sablecc.jar
+	bin/jwrapper -v -u ignore -o tests/android.nit ~/sdks/android-sdk/platforms/android-10/android.jar

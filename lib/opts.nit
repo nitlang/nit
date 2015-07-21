@@ -163,7 +163,7 @@ abstract class OptionParameter
 	end
 end
 
-# An option with a String as parameter
+# An option with a `String` as parameter
 class OptionString
 	super OptionParameter
 	redef type VALUE: nullable String
@@ -174,9 +174,10 @@ class OptionString
 	redef fun convert(str) do return str
 end
 
-# An option with an enum as parameter
-# In the code, declaring an option enum (-e) with an enum like `["zero", "one", "two"]
-# In the command line, typing `myprog -e one` is giving 1 as value
+# An option to choose from an enumeration
+#
+# Declare an enumeration option with all its possible values as an array.
+# Once the arguments are processed, `value` is set as the index of the selected value, if any.
 class OptionEnum
 	super OptionParameter
 	redef type VALUE: Int

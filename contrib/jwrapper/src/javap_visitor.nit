@@ -1,6 +1,7 @@
 # This file is part of NIT (http://www.nitlanguage.org).
 #
 # Copyright 2014 Frédéric Vachon <fredvac@gmail.com>
+# Copyright 2015 Alexis Laferrière <alexis.laf@xymus.net>
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -23,18 +24,23 @@ import code_generator
 import jtype_converter
 intrude import model
 
+# Visitor of the AST generated from javap output
 class JavaVisitor
 	super Visitor
 
 	var converter: JavaTypeConverter
 
-	var java_class = new JavaClass
+	# Model of all the analyzed classes
+	var model: JavaModel
+
+	var java_class: JavaClass is noinit
+
 	var declaration_type: nullable String =  null
 	var declaration_element: nullable String = null
-	var class_type: JavaType
+	var class_type: JavaType is noinit
 
 	var variable_id = ""
-	var variable_type: JavaType
+	var variable_type = new JavaType(self.converter) is lazy
 
 	var is_generic_param = false
 	var is_generic_id = false
@@ -47,33 +53,36 @@ class JavaVisitor
 	var is_primitive_array = false
 
 	var method_id = ""
-	var method_return_type: JavaType
+	var method_return_type = new JavaType(self.converter) is lazy
 	var method_params = new Array[JavaType]
 	var param_index = 0
 
 	redef fun visit(n) do n.accept_visitor(self)
 
-	init(converter: JavaTypeConverter)
-	do
-		self.converter = converter
-		self.class_type = new JavaType(self.converter)
-		self.method_return_type = new JavaType(self.converter)
-		self.variable_type = new JavaType(self.converter)
-		super
-	end
-
 	# Add the identifier from `token` to the current context
-	fun add_identifier(token: NToken)
+	fun add_identifier(token: String)
 	do
 		if declaration_type == "variable" then
 			if declaration_element == "type" then
-				variable_type.identifier.add(token.text)
+				if is_generic_param then
+					variable_type.generic_params[gen_params_index].identifier.add token
+				else
+					variable_type.identifier.add(token)
+				end
 			end
 		else if declaration_type == "method" then
 			if declaration_element == "return_type" then
-				method_return_type.identifier.add(token.text)
+				if is_generic_param then
+					method_return_type.generic_params[gen_params_index].identifier.add token
+				else
+					method_return_type.identifier.add(token)
+				end
 			else if declaration_element == "parameter_list" then
-				method_params[param_index].identifier.add(token.text)
+				if is_generic_param then
+					method_params[param_index].generic_params[gen_params_index].identifier.add token
+				else
+					method_params[param_index].identifier.add(token)
+				end
 			end
 		end
 	end
@@ -87,63 +96,54 @@ redef class Nidentifier
 	redef fun accept_visitor(v)
 	do
 		if v.declaration_type == "class_header" then
-
+			# Class declaration
 			if v.declaration_element == "id" then
-				v.class_type.identifier.add(self.text)
+				v.class_type.identifier.add text
+				return
 			end
 
 		else if v.declaration_type == "variable" then
-
+			# Attribute declaration
 			if v.declaration_element == "id" then
-				v.variable_id += self.text
-			else if v.declaration_element == "type" then
-				if v.is_generic_param then
-					v.variable_type.generic_params[v.gen_params_index].identifier.add(self.text)
-				else
-					v.variable_type.identifier.add(self.text)
-				end
+				v.variable_id += text
+				return
 			end
 
 		else if v.declaration_type == "method" then
 
 			if v.declaration_element == "id" then
+				# Method id
 				v.method_id = self.text
+				return
 			else if v.declaration_element == "return_type" then
-				if self.text == "void" then 
+				if self.text == "void" then
+					# void return type
 					v.method_return_type.is_void = true
-				else if v.is_generic_param then
-					v.method_return_type.generic_params[v.gen_params_index].identifier.add(self.text)
-				else
-					v.method_return_type.identifier.add(self.text)
+					return
 				end
 			else if v.declaration_element == "parameter_list" then
-				if v.is_generic_param then
-					v.method_params[v.param_index].generic_params[v.gen_params_index].identifier.add(self.text)
-				else
-					v.method_params[v.param_index].identifier.add(self.text)
-				end
+				# Parameters, leave it to add_identifier
 
-			# Creates a map to resolve generic return types
-			# Exemple : public **<T extends android/os/Bundle>** T foo();
 			else if v.is_generic_param then
+				# Creates a map to resolve generic return types
+				# Example : public **<T extends android/os/Bundle>** T foo();
 				if v.is_generic_id then
 					v.generic_id = self.text
 					v.generic_map[self.text] = new Array[String]
 
 					if not v.method_return_type.has_unresolved_types then v.method_return_type.has_unresolved_types = true
 				else
-					v.generic_map[v.generic_id].add(self.text)
+					v.generic_map[v.generic_id].add text
 				end
 			end
-
 		end
 
-		super
+		v.add_identifier text
 	end
 end
 
 # Primitive array node
-redef class N_39d_91d_93d_39d
+redef class Nbrackets
 	redef fun accept_visitor(v)
 	do
 		if v.declaration_type == "variable" then
@@ -178,35 +178,40 @@ redef class N_39d_91d_93d_39d
 end
 
 redef class N_39dchar_39d
-	redef fun accept_visitor(v) do v.add_identifier self
+	redef fun accept_visitor(v) do v.add_identifier text
 end
 
 redef class N_39dboolean_39d
-	redef fun accept_visitor(v) do v.add_identifier self
+	redef fun accept_visitor(v) do v.add_identifier text
 end
 
 redef class N_39dfloat_39d
-	redef fun accept_visitor(v) do v.add_identifier self
+	redef fun accept_visitor(v) do v.add_identifier text
 end
 
 redef class N_39ddouble_39d
-	redef fun accept_visitor(v) do v.add_identifier self
+	redef fun accept_visitor(v) do v.add_identifier text
 end
 
 redef class N_39dbyte_39d
-	redef fun accept_visitor(v) do v.add_identifier self
+	redef fun accept_visitor(v) do v.add_identifier text
 end
 
 redef class N_39dshort_39d
-	redef fun accept_visitor(v) do v.add_identifier self
+	redef fun accept_visitor(v) do v.add_identifier text
 end
 
 redef class N_39dint_39d
-	redef fun accept_visitor(v) do v.add_identifier self
+	redef fun accept_visitor(v) do v.add_identifier text
 end
 
 redef class N_39dlong_39d
-	redef fun accept_visitor(v) do v.add_identifier self
+	redef fun accept_visitor(v) do v.add_identifier text
+end
+
+redef class Nwildcard
+	# TODO use the lower bound
+	redef fun accept_visitor(v) do v.add_identifier "Object"
 end
 
 #                                  #
@@ -216,6 +221,10 @@ end
 redef class Nclass_declaration
 	redef fun accept_visitor(v)
 	do
+		v.java_class = new JavaClass
+		v.model.classes.add v.java_class
+		v.class_type = new JavaType(v.converter)
+
 		v.declaration_type = "class_header"
 		v.declaration_element = "id"
 		super
@@ -253,15 +262,18 @@ end
 #                                            #
 
 # Method declaration
-redef class Nmethod_declaration
+redef class Nproperty_declaration_method
 	redef fun accept_visitor(v)
 	do
 		v.declaration_type = "method"
+		v.declaration_element = null
 		super
 		v.declaration_type = null
 
 		if v.method_return_type.has_unresolved_types then v.method_return_type.resolve_types(v.generic_map)
-		v.java_class.add_method(v.method_id, v.method_return_type, v.method_params)
+
+		var method = new JavaMethod(v.method_return_type, v.method_params.clone)
+		v.java_class.methods[v.method_id].add method
 
 		v.method_params.clear
 		v.method_id = ""
@@ -270,7 +282,7 @@ redef class Nmethod_declaration
 end
 
 # Constructor declaration
-redef class Nconstructor_declaration
+redef class Nproperty_declaration_constructor
 	redef fun accept_visitor(v)
 	do
 		v.declaration_type = "constructor"
@@ -280,7 +292,7 @@ redef class Nconstructor_declaration
 end
 
 # Variable property declaration
-redef class Nvariable_declaration
+redef class Nproperty_declaration_attribute
 	redef fun accept_visitor(v)
 	do
 		v.declaration_type = "variable"
@@ -295,7 +307,7 @@ redef class Nvariable_declaration
 end
 
 # Static property declaration
-redef class Nstatic_declaration
+redef class Nproperty_declaration_static
 	redef fun accept_visitor(v)
 	do
 		v.declaration_type = "static"
@@ -305,7 +317,7 @@ redef class Nstatic_declaration
 end
 
 # Identifier of a variable
-redef class Nvariable_id
+redef class Nattribute_id
 	redef fun accept_visitor(v)
 	do
 		v.declaration_element = "id"

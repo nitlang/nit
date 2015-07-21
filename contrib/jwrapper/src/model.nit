@@ -1,6 +1,7 @@
 # This file is part of NIT (http://www.nitlanguage.org).
 #
 # Copyright 2014 Frédéric Vachon <fredvac@gmail.com>
+# Copyright 2015 Alexis Laferrière <alexis.laf@xymus.net>
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -16,6 +17,8 @@
 
 # Contains the java and nit type representation used to convert java to nit code
 module model
+
+import more_collections
 
 import jtype_converter
 
@@ -81,8 +84,6 @@ class JavaType
 		return nit_type
 	end
 
-	fun is_iterable: Bool do return iterable.has(self.id)
-
 	fun is_collection: Bool do return is_primitive_array or collections_list.has(self.id)
 
 	fun is_wrapped: Bool do return find_extern_class != null
@@ -94,10 +95,12 @@ class JavaType
 		var name
 		if is_primitive_array then
 			# Primitive arrays have a special naming convention
-			name = "Native" + extern_class_name.join.capitalized + "Array"
+			name = "Java" + extern_class_name.join.capitalized + "Array"
 		else
-			name = "Native" + extern_class_name.join
+			name = "Java" + extern_class_name.join
 		end
+
+		name = name.replace("-", "_")
 
 		var nit_type = new NitType(name)
 		nit_type.is_complete = false
@@ -113,22 +116,15 @@ class JavaType
 		return converter.cast_as_return(jtype)
 	end
 
-	redef fun to_s: String
+	redef fun to_s
 	do
 		var id = self.full_id
 
 		if self.is_primitive_array then
-			for i in [0..array_dimension[ do
-				id += "[]"
-			end
+			id += "[]" * array_dimension
 		else if self.has_generic_params then
-			var gen_list = new Array[String]
-
-			for param in generic_params do
-				gen_list.add(param.to_s)
-			end
-
-			id += "<{gen_list.join(", ")}>"
+			var params = [for param in generic_params do param.to_s]
+			id += "<{params.join(", ")}>"
 		end
 
 		return id
@@ -176,6 +172,8 @@ class JavaType
 
 		var regex = "extern class [a-zA-Z1-9]\\\+[ ]\\\+in[ ]\\\+\"Java\"[ ]*`\{[ ]*" + self.to_s + "\\\+[ ]*`\}"
 		var nit_dir = "NIT_DIR".environ
+		if nit_dir.is_empty then return null
+
 		var grep = new ProcessReader("grep", "-r", regex, nit_dir/"lib/android/", nit_dir/"lib/java/")
 		var to_eat = ["private", "extern", "class"]
 
@@ -286,22 +284,30 @@ class NitType
 	end
 end
 
+# Model of a single Java class
 class JavaClass
+	# Type of this class
 	var class_type = new JavaType(new JavaTypeConverter)
+
+	# Attributes of this class
 	var attributes = new HashMap[String, JavaType]
 
 	# Methods of this class organized by their name
-	var methods = new HashMap[String, Array[JavaMethod]]
+	var methods = new MultiHashMap[String, JavaMethod]
 
-	var unknown_types = new HashSet[JavaType]
+	# Importations from this class
 	var imports = new HashSet[NitModule]
 
-	fun add_method(id: String, return_type: JavaType, params: Array[JavaType])
-	do
-		var signatures = methods.get_or_default(id, new Array[JavaMethod])
-		signatures.add(new JavaMethod(return_type, new Array[JavaType].from(params)))
-		methods[id] = signatures
-	end
+	redef fun to_s do return class_type.to_s
+end
+
+# Model of all the Java class analyzed in one run
+class JavaModel
+	# Unknown Java types used in `classes`
+	var unknown_types = new HashSet[JavaType]
+
+	# All analyzed classes
+	var classes = new Array[JavaClass]
 end
 
 # A Java method, with its signature
