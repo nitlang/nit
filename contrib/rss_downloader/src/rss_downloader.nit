@@ -256,6 +256,10 @@ redef class Text
 	fun to_rss_elements: Array[Element]
 	do
 		var xml = to_xml
+		if xml isa XMLError then
+			print_error "RSS Parse Error: {xml.message}:{xml.location or else "null"}"
+			return new Array[Element]
+		end
 		var items = xml["rss"].first["channel"].first["item"]
 
 		var elements = new Array[Element]
