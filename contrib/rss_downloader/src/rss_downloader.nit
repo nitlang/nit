@@ -52,6 +52,9 @@ class Config
 	# XML tag used for pattern recognition
 	fun tag_title: String do return "title"
 
+	# XML tag of the link to act upon
+	fun tag_link: String do return "link"
+
 	# Action to apply on each selected RSS element
 	fun act_on(element: Element)
 	do
@@ -265,7 +268,7 @@ redef class Text
 		var elements = new Array[Element]
 		for item in items do
 			var title = item[tool_config.tag_title].first.as(XMLStartTag).data
-			var link = item["link"].first.as(XMLStartTag).data
+			var link = item[tool_config.tag_link].first.as(XMLStartTag).data
 
 			elements.add new Element(title, link)
 		end
