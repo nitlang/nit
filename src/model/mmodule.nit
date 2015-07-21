@@ -171,11 +171,9 @@ class MModule
 	end
 
 	# Register the imported modules (ie "import some_module")
-	# This function can only invoked once by mmodule.
 	# The visibility must be set with `set_visibility_for`.
 	fun set_imported_mmodules(imported_mmodules: Array[MModule])
 	do
-		assert unique_invocation: self.in_importation.direct_greaters.is_empty
 		for m in imported_mmodules do
 			self.model.mmodule_importation_hierarchy.add_edge(self, m)
 		end
