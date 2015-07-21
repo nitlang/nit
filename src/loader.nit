@@ -694,6 +694,21 @@ redef class ModelBuilder
 		return mmodule
 	end
 
+	# Resolve the module identification for a given `AModuleName`.
+	#
+	# This method handles qualified names as used in `AModuleName`.
+	fun seach_module_by_amodule_name(n_name: AModuleName, mgroup: nullable MGroup): nullable ModulePath
+	do
+		if n_name.n_quad != null then mgroup = null # Start from top level
+		for grp in n_name.n_path do
+			var path = search_mmodule_by_name(grp, mgroup, grp.text)
+			if path == null then return null # Forward error
+			mgroup = path.mgroup
+		end
+		var mod_name = n_name.n_id.text
+		return search_mmodule_by_name(n_name, mgroup, mod_name)
+	end
+
 	# Analyze the module importation and fill the module_importation_hierarchy
 	#
 	# Unless you used `load_module`, the importation is already done and this method does a no-op.
@@ -709,22 +724,19 @@ redef class ModelBuilder
 			if not aimport isa AStdImport then
 				continue
 			end
-			var mgroup = mmodule.mgroup
-			if aimport.n_name.n_quad != null then mgroup = null # Start from top level
-			for grp in aimport.n_name.n_path do
-				var path = search_mmodule_by_name(grp, mgroup, grp.text)
-				if path == null then
-					nmodule.mmodule = null # invalidate the module
-					return # Skip error
-				end
-				mgroup = path.mgroup
+
+			# Load the imported module
+			var suppath = seach_module_by_amodule_name(aimport.n_name, mmodule.mgroup)
+			if suppath == null then
+				nmodule.mmodule = null # invalidate the module
+				continue # Skip error
 			end
-			var mod_name = aimport.n_name.n_id.text
-			var sup = self.get_mmodule_by_name(aimport.n_name, mgroup, mod_name)
+			var sup = load_module_path(suppath)
 			if sup == null then
 				nmodule.mmodule = null # invalidate the module
 				continue # Skip error
 			end
+
 			aimport.mmodule = sup
 			imported_modules.add(sup)
 			var mvisibility = aimport.n_visibility.mvisibility
