@@ -109,7 +109,7 @@ class FileReader
 		last_error = null
 		_file = new NativeFile.io_open_read(path.to_cstring)
 		if _file.address_is_null then
-			last_error = new IOError("Error: Opening file at '{path.as(not null)}' failed with '{sys.errno.strerror}'")
+			last_error = new IOError("Cannot open `{path.as(not null)}`: {sys.errno.strerror}")
 			end_reached = true
 			return
 		end
@@ -155,7 +155,7 @@ class FileReader
 		prepare_buffer(10)
 		_file = new NativeFile.io_open_read(path.to_cstring)
 		if _file.address_is_null then
-			last_error = new IOError("Error: Opening file at '{path}' failed with '{sys.errno.strerror}'")
+			last_error = new IOError("Cannot open `{path}`: {sys.errno.strerror}")
 			end_reached = true
 		end
 	end
@@ -252,7 +252,7 @@ class FileWriter
 		self.path = path
 		_is_writable = true
 		if _file.address_is_null then
-			last_error = new IOError("Error: Opening file at '{path}' failed with '{sys.errno.strerror}'")
+			last_error = new IOError("Cannot open `{path}`: {sys.errno.strerror}")
 			is_writable = false
 		end
 	end
