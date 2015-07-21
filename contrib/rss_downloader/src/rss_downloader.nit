@@ -55,6 +55,9 @@ class Config
 	# XML tag of the link to act upon
 	fun tag_link: String do return "link"
 
+	# Are the feeds at `rss_source_urls` compressed?
+	var compressed: nullable Bool
+
 	# Action to apply on each selected RSS element
 	fun act_on(element: Element)
 	do
@@ -134,6 +137,7 @@ class Downloader
 		var elements = new HashSet[Element]
 		for rss_url in config.rss_source_urls do
 			var rss = rss_url.fetch_rss_content
+			if config.compressed == true then rss = rss.gunzip
 			elements.add_all rss.to_rss_elements
 		end
 
@@ -275,10 +279,23 @@ redef class Text
 
 		if sys.verbose then
 			print "# Found elements:"
-			print elements.join("\n")
+			print "* " + elements.join("\n* ")
 		end
 
 		return elements
+	end
+
+	# Expand the Lempel-Ziv encoded `self`
+	fun gunzip: String
+	do
+		var proc = new ProcessDuplex("gunzip", new Array[String]...)
+		proc.write self
+		proc.stream_out.close
+		var res = proc.read_all
+		proc.stream_in.close
+		proc.wait
+		assert proc.status == 0
+		return res
 	end
 end
 
