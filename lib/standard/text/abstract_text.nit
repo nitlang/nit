@@ -45,12 +45,14 @@ abstract class Text
 	#
 	#     assert "12345".length == 5
 	#     assert "".length == 0
+	#     assert "あいうえお".length == 5
 	fun length: Int is abstract
 
 	# Number of bytes in `self`
 	#
-	# TODO: Implement correctly once UTF-8 is supported
-	fun bytelen: Int do return length
+	#     assert "12345".bytelen == 5
+	#     assert "あいうえお".bytelen == 15
+	fun bytelen: Int is abstract
 
 	# Create a substring.
 	#
@@ -58,6 +60,7 @@ abstract class Text
 	#     assert "abcd".substring(-1, 2)     ==  "a"
 	#     assert "abcd".substring(1, 0)      ==  ""
 	#     assert "abcd".substring(2, 5)      ==  "cd"
+	#     assert "あいうえお".substring(1,3) ==  "いうえ"
 	#
 	# A `from` index < 0 will be replaced by 0.
 	# Unless a `count` value is > 0 at the same time.
@@ -934,7 +937,7 @@ abstract class FlatText
 	# Real items, used as cache for to_cstring is called
 	private var real_items: nullable NativeString = null
 
-	# Returns a char* starting at position `index_from`
+	# Returns a char* starting at position `first_byte`
 	#
 	# WARNING: If you choose to use this service, be careful of the following.
 	#
@@ -952,6 +955,8 @@ abstract class FlatText
 	private fun fast_cstring: NativeString is abstract
 
 	redef var length = 0
+
+	redef var bytelen = 0
 
 	redef fun output
 	do
@@ -1000,7 +1005,7 @@ private abstract class StringByteView
 
 	redef fun iterator do return self.iterator_from(0)
 
-	redef fun reverse_iterator do return self.reverse_iterator_from(self.length - 1)
+	redef fun reverse_iterator do return self.reverse_iterator_from(target.bytelen - 1)
 end
 
 # Immutable sequence of characters.
@@ -1329,7 +1334,6 @@ private abstract class BufferByteView
 	super Sequence[Byte]
 
 	redef type SELFTYPE: Buffer
-
 end
 
 redef class Object
@@ -1574,6 +1578,8 @@ redef class Char
 	#     assert '9'.is_numeric
 	#     assert not 'a'.is_numeric
 	#     assert not '?'.is_numeric
+	#
+	# FIXME: Works on ASCII-range only
 	fun is_numeric: Bool
 	do
 		return self >= '0' and self <= '9'
@@ -1585,6 +1591,8 @@ redef class Char
 	#     assert 'Z'.is_alpha
 	#     assert not '0'.is_alpha
 	#     assert not '?'.is_alpha
+	#
+	# FIXME: Works on ASCII-range only
 	fun is_alpha: Bool
 	do
 		return (self >= 'a' and self <= 'z') or (self >= 'A' and self <= 'Z')
@@ -1597,6 +1605,8 @@ redef class Char
 	#     assert '0'.is_alphanumeric
 	#     assert '9'.is_alphanumeric
 	#     assert not '?'.is_alphanumeric
+	#
+	# FIXME: Works on ASCII-range only
 	fun is_alphanumeric: Bool
 	do
 		return self.is_numeric or self.is_alpha

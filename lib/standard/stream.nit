@@ -527,7 +527,7 @@ abstract class BufferedReader
 			# if there is something to append
 			if i > _buffer_pos then
 				# Enlarge the string (if needed)
-				s.enlarge(s.length + i - _buffer_pos)
+				s.enlarge(s.bytelen + i - _buffer_pos)
 
 				# Copy from the buffer to the string
 				var j = _buffer_pos
@@ -664,5 +664,5 @@ class StringReader
 		return new Bytes(nns, nslen, nslen)
 	end
 
-	redef fun eof do return cursor >= source.length
+	redef fun eof do return cursor >= source.bytelen
 end

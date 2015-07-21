@@ -338,6 +338,7 @@ class Lexer
 				dfa_state = -1
 			else
 				var c = string[sp].ascii
+				if c >= 255 then c = 255
 				sp += 1
 
 				var cr = _cr
