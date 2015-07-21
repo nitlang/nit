@@ -87,7 +87,7 @@ class JavaType
 
 	fun extern_name: NitType
 	do
-		if is_wrapped then return new NitType.with_module(find_extern_class.as(not null).first, find_extern_class.as(not null).second)
+		if is_wrapped then return new NitType(find_extern_class.as(not null).first, find_extern_class.as(not null).second)
 
 		var name
 		if is_primitive_array then
@@ -231,6 +231,7 @@ class JavaType
 end
 
 class NitType
+	# Nit class name
 	var identifier: String
 	var generic_params: nullable Array[NitType] = null
 
@@ -242,25 +243,6 @@ class NitType
 
 	fun has_generic_params: Bool do return not generic_params == null
 
-	fun id: String do return identifier
-
-	init (id: String)
-	do
-		self.identifier = id
-	end
-
-	init with_generic_params(id: String, gen_params: String...)
-	do
-		self.init(id)
-		self.generic_params = new Array[NitType]
-		for param in gen_params do self.generic_params.add new NitType(param)
-	end
-
-	init with_module(id: String, mod: NitModule)
-	do
-		self.init(id)
-		self.mod = mod
-	end
 
 	redef fun to_s: String
 	do
