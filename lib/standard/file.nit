@@ -127,6 +127,10 @@ class FileReader
 	redef fun fill_buffer
 	do
 		var nb = _file.io_read(_buffer, _buffer_capacity)
+		if last_error == null and _file.ferror then
+			last_error = new IOError("Cannot read `{path.as(not null)}`: {sys.errno.strerror}")
+			end_reached = true
+		end
 		if nb <= 0 then
 			end_reached = true
 			nb = 0
@@ -1332,6 +1336,8 @@ private extern class NativeFile `{ FILE* `}
 		}
 		return 0;
 	`}
+
+	fun ferror: Bool `{ return ferror(self); `}
 
 	fun fileno: Int `{ return fileno(self); `}
 
