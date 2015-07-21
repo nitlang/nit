@@ -204,6 +204,50 @@ private class Concat
 			st = 0
 		end
 	end
+
+	# Returns a balanced version of `self`
+	fun balance: String do
+		var children = new Array[String]
+		var rnod: String
+		var iter: nullable RopeCharIteratorPiece = new RopeCharIteratorPiece(self, false, false, null)
+		loop
+			if iter == null then break
+			rnod = iter.node
+			if not rnod isa Concat then
+				children.push rnod
+				iter = iter.prev
+				continue
+			end
+			if not iter.ldone then
+				iter.ldone = true
+				iter = new RopeCharIteratorPiece(rnod.left, false, false, iter)
+			else if not iter.rdone then
+				iter.rdone = true
+				iter = new RopeCharIteratorPiece(rnod.right, false, false, iter)
+			else
+				iter = iter.prev
+			end
+
+		end
+		return recurse_balance(children, children.length)
+	end
+
+	fun recurse_balance(nodes: Array[String], len: Int): String do
+		var finpos = 0
+		var stpos = 0
+		while stpos < len do
+			if len - stpos > 1 then
+				nodes[finpos] = new Concat(nodes[stpos], nodes[stpos + 1])
+				stpos += 2
+			else
+				nodes[finpos] = nodes[stpos]
+				stpos += 1
+			end
+			finpos += 1
+		end
+		if finpos == 1 then return nodes[0]
+		return recurse_balance(nodes, finpos)
+	end
 end
 
 # Mutable `Rope`, optimized for concatenation operations
