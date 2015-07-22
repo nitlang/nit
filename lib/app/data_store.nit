@@ -22,6 +22,11 @@ module data_store
 import app_base
 import serialization
 
+# Platform variations
+# TODO: move on the platform once qualified names are understand in the condition
+import linux::data_store is conditional(linux)
+import android::data_store is conditional(android)
+
 redef class App
 	# Services to store and load data
 	fun data_store: DataStore is abstract

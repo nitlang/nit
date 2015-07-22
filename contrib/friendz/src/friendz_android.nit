@@ -13,8 +13,7 @@ module friendz_android
 import friendz
 import mnit_android
 import android::landscape
-import android::audio
-import android::assets_and_resources
+
 redef class App
 	# Zoom applied for the device display from the game logic coordinates
 	var zoom = 1.0

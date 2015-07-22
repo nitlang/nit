@@ -76,6 +76,8 @@ private class CheckAnnotationPhase
 	var primtives_annotations_list = """
 new_annotation
 
+conditional
+
 deprecated
 fixed
 lazy

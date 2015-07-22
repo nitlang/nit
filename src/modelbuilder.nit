@@ -45,6 +45,8 @@ redef class ToolContext
 			mainmodule = new MModule(modelbuilder.model, null, mmodules.first.name + "-m", new Location(mmodules.first.location.file, 0, 0, 0, 0))
 			mainmodule.is_fictive = true
 			mainmodule.set_imported_mmodules(mmodules)
+			modelbuilder.apply_conditional_importations(mainmodule)
+			modelbuilder.run_phases
 		end
 		return mainmodule
 	end

@@ -1,7 +1,5 @@
 # This file is part of NIT ( http://www.nitlanguage.org ).
 #
-# Copyright 2014 Alexis Laferrière <alexis.laf@xymus.net>
-#
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
@@ -14,7 +12,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Implementation of app.nit for the Linux platform
-module linux
-
-import app
+import module_0
+import module_1 is conditional(module_2)
+#alt1#import module_1 is conditional
+#alt1#import module_1 is conditional("foo")
+#alt1#import module_1 is conditional(fail)
+#alt1#import fail is conditional(module_2)
