@@ -722,9 +722,6 @@ end
 redef class AMethPropdef
 	redef fun do_typing(modelbuilder: ModelBuilder)
 	do
-		var nblock = self.n_block
-		if nblock == null then return
-
 		var mpropdef = self.mpropdef
 		if mpropdef == null then return # skip error
 
@@ -745,6 +742,9 @@ redef class AMethPropdef
 			assert variable != null
 			variable.declared_type = mtype
 		end
+
+		var nblock = self.n_block
+		if nblock == null then return
 
 		loop
 			v.dirty = false
