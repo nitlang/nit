@@ -76,11 +76,12 @@ class JavaType
 
 	fun is_collection: Bool do return is_primitive_array or collections_list.has(self.id)
 
-	fun is_wrapped: Bool do return find_extern_class != null
+	fun is_wrapped: Bool do return find_extern_class[full_id] != null
 
 	fun extern_name: NitType
 	do
-		if is_wrapped then return new NitType(find_extern_class.as(not null).first, find_extern_class.as(not null).second)
+		var nit_type = find_extern_class[full_id]
+		if nit_type != null then return nit_type
 
 		var name
 		if is_primitive_array then
@@ -156,39 +157,6 @@ class JavaType
 		return class_name
 	end
 
-	# Search inside `lib/android` directory for already wrapped classes
-	# If found, contains the class identifier and the Nit Module name
-	var find_extern_class: nullable Couple[String, NitModule] is lazy do
-
-		var regex = "extern class [a-zA-Z1-9]\\\+[ ]\\\+in[ ]\\\+\"Java\"[ ]*`\{[ ]*" + self.to_s + "\\\+[ ]*`\}"
-		var nit_dir = "NIT_DIR".environ
-		if nit_dir.is_empty then return null
-
-		var grep = new ProcessReader("grep", "-r", regex, nit_dir/"lib/android/", nit_dir/"lib/java/")
-		var to_eat = ["private", "extern", "class"]
-
-		var output = grep.read_line
-
-		var output_class = output.substring_from(output.index_of(':') + 1)
-		var tokens = output_class.split(" ")
-
-		var nclass_name = ""
-
-		for token in tokens do
-			if to_eat.has(token) then continue
-			nclass_name = token
-			break
-		end
-
-		if nclass_name == "" then return null
-
-		var str = output.substring(0, output.search(".nit").from)
-		str = str.substring_from(str.last_index_of('/') + 1)
-		var mod = new NitModule(str)
-
-		return new Couple[String, NitModule](nclass_name, mod)
-	end
-
 	# Comparison based on fully qualified named and generic params
 	# Ignores primitive array so `a.b.c[][] == a.b.c`
 	redef fun ==(other) do return other isa JavaType and self.full_id == other.full_id
@@ -257,10 +225,67 @@ end
 
 # A Nit module, use to import the referenced extern classes
 class NitModule
-	# Name of the module
-	var name: String
+	# Relative path to the module
+	var path: String
 
-	redef fun ==(other): Bool do return self.to_s == other.to_s
-	redef fun to_s: String do return self.name
-	redef fun hash: Int do return self.name.hash
+	# Name of the module
+	var name: String is lazy do return path.basename(".nit")
+
+	redef fun to_s do return self.name
+	redef fun ==(other) do return other isa NitModule and self.path == other.path
+	redef fun hash do return self.path.hash
+end
+
+redef class Sys
+	# Collection of Java classes already wrapped in the library
+	#
+	# * The key is from `JavaType.full_id`.
+	# * The value is the corresponding `NitType`.
+	var find_extern_class: DefaultMap[String, nullable NitType] is lazy do
+		var map = new DefaultMap[String, nullable NitType](null)
+		var modules = new HashMap[String, NitModule]
+
+		var nit_dir = "NIT_DIR".environ
+		if nit_dir.is_empty then
+			# Simple heuristic to find the Nit lib
+			var dir = sys.program_name.dirname / "../../../"
+			nit_dir = dir.simplify_path
+			if not nit_dir.file_exists then return map
+		end
+
+		# Use grep to find all extern classes implemented in Java
+		var grep_regex = "extern class [a-zA-Z0-9]\\\+[ ]\\\+in[ ]\\\+\"Java\""
+		var grep_args = ["-r", grep_regex,
+			nit_dir/"lib/android/",
+			nit_dir/"lib/java/"]
+
+		var grep = new ProcessReader("grep", grep_args...)
+		var lines = grep.read_lines
+		grep.close
+		grep.wait
+
+		# Sort out the modules, Nit class names and Java types
+		var regex = """(.+):\\s*extern +class +([a-zA-Z0-9]+) *in *"Java" *`\\{ *([a-zA-Z0-9.$/]+) *`\\}""".to_re
+		for line in lines do
+			var matches = line.search_all(regex)
+			for match in matches do
+				var path = match[1].to_s
+				var nit_name = match[2].to_s
+				var java_name = match[3].to_s
+
+				# Debug code
+				# print "+ Found {nit_name}:{java_name} at {path}"
+
+				var mod = modules.get_or_null(path)
+				if mod == null then
+					mod = new NitModule(path)
+					modules[path] = mod
+				end
+
+				map[java_name] = new NitType(nit_name, mod)
+			end
+		end
+
+		return map
+	end
 end
