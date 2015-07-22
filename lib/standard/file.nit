@@ -109,7 +109,7 @@ class FileReader
 		last_error = null
 		_file = new NativeFile.io_open_read(path.to_cstring)
 		if _file.address_is_null then
-			last_error = new IOError("Error: Opening file at '{path.as(not null)}' failed with '{sys.errno.strerror}'")
+			last_error = new IOError("Cannot open `{path.as(not null)}`: {sys.errno.strerror}")
 			end_reached = true
 			return
 		end
@@ -127,6 +127,10 @@ class FileReader
 	redef fun fill_buffer
 	do
 		var nb = _file.io_read(_buffer, _buffer_capacity)
+		if last_error == null and _file.ferror then
+			last_error = new IOError("Cannot read `{path.as(not null)}`: {sys.errno.strerror}")
+			end_reached = true
+		end
 		if nb <= 0 then
 			end_reached = true
 			nb = 0
@@ -155,7 +159,7 @@ class FileReader
 		prepare_buffer(10)
 		_file = new NativeFile.io_open_read(path.to_cstring)
 		if _file.address_is_null then
-			last_error = new IOError("Error: Opening file at '{path}' failed with '{sys.errno.strerror}'")
+			last_error = new IOError("Cannot open `{path}`: {sys.errno.strerror}")
 			end_reached = true
 		end
 	end
@@ -252,7 +256,7 @@ class FileWriter
 		self.path = path
 		_is_writable = true
 		if _file.address_is_null then
-			last_error = new IOError("Error: Opening file at '{path}' failed with '{sys.errno.strerror}'")
+			last_error = new IOError("Cannot open `{path}`: {sys.errno.strerror}")
 			is_writable = false
 		end
 	end
@@ -350,9 +354,13 @@ redef class Writable
 	end
 end
 
-# Utility class to access file system services
+# Utility class to access file system services.
 #
 # Usually created with `Text::to_path`.
+#
+# `Path` objects does not necessarily represent existing files in a file system.
+# They are sate-less objects that efficiently represent path information.
+# They also provide an easy to use API on file-system services and are used to store their error status (see `last_error`)
 class Path
 
 	private var path: String
@@ -366,14 +374,63 @@ class Path
 	# var path = "/tmp/somefile".to_path
 	# assert path.filename == "somefile"
 	# ~~~
+	#
+	# The result does not depend of the file system, thus is cached for efficiency.
 	var filename: String = path.basename is lazy
 
+	# The path simplified by removing useless `.`, removing `//`, and resolving `..`
+	#
+	# ~~~
+	# var path = "somedir/./tmp/../somefile".to_path
+	# assert path.simplified.to_s == "somedir/somefile"
+	# ~~~
+	#
+	# See `String:simplify_path` for details.
+	#
+	# The result does not depend of the file system, thus is cached for efficiency.
+	var simplified: Path is lazy do
+		var res = path.simplify_path.to_path
+		res.simplified = res
+		return res
+	end
+
+	# Return the directory part of the path.
+	#
+	# ~~~
+	# var path = "/foo/bar/baz".to_path
+	# assert path.dir.to_s == "/foo/bar"
+	# assert path.dir.dir.to_s == "/foo"
+	# assert path.dir.dir.dir.to_s == "/"
+	# ~~~
+	#
+	# See `String:dirname` for details.
+	#
+	# The result does not depend of the file system, thus is cached for efficiency.
+	var dir: Path is lazy do
+		return path.dirname.to_path
+	end
+
+	# Last error produced by I/O operations.
+	#
+	# ~~~
+	# var path = "/does/not/exists".to_path
+	# assert path.last_error == null
+	# path.read_all
+	# assert path.last_error != null
+	# ~~~
+	#
+	# Since `Path` objects are stateless, `last_error` is reset on most operations and reflect its status.
+	var last_error: nullable IOError = null is writable
+
 	# Does the file at `path` exists?
+	#
+	# If the file does not exists, `last_error` is set to the information.
 	fun exists: Bool do return stat != null
 
 	# Information on the file at `self` following symbolic links
 	#
 	# Returns `null` if there is no file at `self`.
+	# `last_error` is updated to contains the error information on error, and null on success.
 	#
 	#     assert "/etc/".to_path.stat.is_dir
 	#     assert "/etc/issue".to_path.stat.is_file
@@ -385,12 +442,18 @@ class Path
 	# if stat != null then # Does `p` exist?
 	#     print "It's size is {stat.size}"
 	#     if stat.is_dir then print "It's a directory"
+	# else
+	#     print p.last_error.to_s
 	# end
 	# ~~~
 	fun stat: nullable FileStat
 	do
 		var stat = path.to_cstring.file_stat
-		if stat.address_is_null then return null
+		if stat.address_is_null then
+			last_error = new IOError("Cannot open `{path}`: {sys.errno.strerror}")
+			return null
+		end
+		last_error = null
 		return new FileStat(stat)
 	end
 
@@ -400,18 +463,33 @@ class Path
 	fun link_stat: nullable FileStat
 	do
 		var stat = path.to_cstring.file_lstat
-		if stat.address_is_null then return null
+		if stat.address_is_null then
+			last_error = new IOError("Cannot open `{path}`: {sys.errno.strerror}")
+			return null
+		end
+		last_error = null
 		return new FileStat(stat)
 	end
 
-	# Delete a file from the file system, return `true` on success
-	fun delete: Bool do return path.to_cstring.file_delete
-
-	# Copy content of file at `path` to `dest`
+	# Delete a file from the file system.
 	#
-	# Require: `exists`
+	# `last_error` is updated to contains the error information on error, and null on success.
+	fun delete
+	do
+		var res = path.to_cstring.file_delete
+		if not res then
+			last_error = new IOError("Cannot delete `{path}`: {sys.errno.strerror}")
+		else
+			last_error = null
+		end
+	end
+
+	# Copy content of file at `path` to `dest`.
+	#
+	# `last_error` is updated to contains the error information on error, and null on success.
 	fun copy(dest: Path)
 	do
+		last_error = null
 		var input = open_ro
 		var output = dest.open_wo
 
@@ -422,41 +500,75 @@ class Path
 
 		input.close
 		output.close
+		last_error = input.last_error or else output.last_error
 	end
 
-	# Open this file for reading
+	# Open this file for reading.
 	#
-	# Require: `exists and not link_stat.is_dir`
+	# ~~~
+	# var file = "/etc/issue".to_path.open_ro
+	# print file.read_line
+	# file.close
+	# ~~~
+	#
+	# Note that it is the user's responsibility to close the stream.
+	# Therefore, for simple use case, look at `read_all` or `each_line`.
+	#
+	# ENSURE `last_error == result.last_error`
 	fun open_ro: FileReader
 	do
-		# TODO manage streams error when they are merged
-		return new FileReader.open(path)
+		var res = new FileReader.open(path)
+		last_error = res.last_error
+		return res
 	end
 
 	# Open this file for writing
 	#
-	# Require: `not exists or not stat.is_dir`
+	# ~~~
+	# var file = "bla.log".to_path.open_wo
+	# file.write "Blabla\n"
+	# file.close
+	# ~~~
+	#
+	# Note that it is the user's responsibility to close the stream.
+	# Therefore, for simple use case, look at `Writable::write_to_file`.
+	#
+	# ENSURE `last_error == result.last_error`
 	fun open_wo: FileWriter
 	do
-		# TODO manage streams error when they are merged
-		return new FileWriter.open(path)
+		var res = new FileWriter.open(path)
+		last_error = res.last_error
+		return res
 	end
 
-	# Read all the content of the file
+	# Read all the content of the file as a string.
 	#
 	# ~~~
 	# var content = "/etc/issue".to_path.read_all
 	# print content
 	# ~~~
 	#
+	# `last_error` is updated to contains the error information on error, and null on success.
+	# In case of error, the result might be empty or truncated.
+	#
 	# See `Reader::read_all` for details.
 	fun read_all: String do return read_all_bytes.to_s
 
+	# Read all the content on the file as a raw sequence of bytes.
+	#
+	# ~~~
+	# var content = "/etc/issue".to_path.read_all_bytes
+	# print content.to_s
+	# ~~~
+	#
+	# `last_error` is updated to contains the error information on error, and null on success.
+	# In case of error, the result might be empty or truncated.
 	fun read_all_bytes: Bytes
 	do
 		var s = open_ro
 		var res = s.read_all_bytes
 		s.close
+		last_error = s.last_error
 		return res
 	end
 
@@ -473,12 +585,16 @@ class Path
 	# end
 	# ~~~
 	#
+	# `last_error` is updated to contains the error information on error, and null on success.
+	# In case of error, the result might be empty or truncated.
+	#
 	# See `Reader::read_lines` for details.
 	fun read_lines: Array[String]
 	do
 		var s = open_ro
 		var res = s.read_lines
 		s.close
+		last_error = s.last_error
 		return res
 	end
 
@@ -493,52 +609,97 @@ class Path
 	#
 	# Note: the stream is automatically closed at the end of the file (see `LineIterator::close_on_finish`)
 	#
+	# `last_error` is updated to contains the error information on error, and null on success.
+	#
 	# See `Reader::each_line` for details.
 	fun each_line: LineIterator
 	do
 		var s = open_ro
 		var res = s.each_line
 		res.close_on_finish = true
+		last_error = s.last_error
 		return res
 	end
 
 
-	# Lists the name of the files contained within the directory at `path`
+	# Lists the files contained within the directory at `path`.
 	#
-	# Require: `exists and is_dir`
+	#     var files = "/etc".to_path.files
+	#     assert files.has("/etc/issue".to_path)
+	#
+	# `last_error` is updated to contains the error information on error, and null on success.
+	# In case of error, the result might be empty or truncated.
+	#
+	#     var path = "/etc/issue".to_path
+	#     files = path.files
+	#     assert files.is_empty
+	#     assert path.last_error != null
 	fun files: Array[Path]
 	do
-		var files = new Array[Path]
-		for filename in path.files do
-			files.add new Path(path / filename)
+		last_error = null
+		var res = new Array[Path]
+		var d = new NativeDir.opendir(path.to_cstring)
+		if d.address_is_null then
+			last_error = new IOError("Cannot list directory `{path}`: {sys.errno.strerror}")
+			return res
 		end
-		return files
+
+		loop
+			var de = d.readdir
+			if de.address_is_null then
+				# readdir cannot fail, so null means end of list
+				break
+			end
+			var name = de.to_s_with_copy
+			if name == "." or name == ".." then continue
+			res.add new Path(path / name)
+		end
+		d.closedir
+
+		return res
 	end
 
-	# Delete a directory and all of its content, return `true` on success
+	# Delete a directory and all of its content
 	#
 	# Does not go through symbolic links and may get stuck in a cycle if there
 	# is a cycle in the file system.
-	fun rmdir: Bool
+	#
+	# `last_error` is updated to contains the error information on error, and null on success.
+	# The method does not stop on the first error and try to remove most file and directories.
+	#
+	# ~~~
+	# var path = "/does/not/exists/".to_path
+	# path.rmdir
+	# assert path.last_error != null
+	# ~~~
+	fun rmdir
 	do
-		var ok = true
+		last_error = null
 		for file in self.files do
 			var stat = file.link_stat
-			if stat.is_dir then
-				ok = file.rmdir and ok
-			else
-				ok = file.delete and ok
+			if stat == null then
+				last_error = file.last_error
+				continue
 			end
+			if stat.is_dir then
+				# Recursively rmdir
+				file.rmdir
+			else
+				file.delete
+			end
+			if last_error == null then last_error = file.last_error
 		end
 
-		# Delete the directory itself
-		if ok then ok = path.to_cstring.rmdir and ok
-
-		return ok
+		# Delete the directory itself if things are fine
+		if last_error == null then
+			if path.to_cstring.rmdir then
+				last_error = new IOError("Cannot remove `{self}`: {sys.errno.strerror}")
+			end
+		end
 	end
 
-	redef fun ==(other) do return other isa Path and path.simplify_path == other.path.simplify_path
-	redef fun hash do return path.simplify_path.hash
+	redef fun ==(other) do return other isa Path and simplified.path == other.simplified.path
+	redef fun hash do return simplified.path.hash
 end
 
 # Information on a file
@@ -1012,10 +1173,9 @@ redef class String
 	#     assert "/fail/does not/exist".rmdir != null
 	fun rmdir: nullable Error
 	do
-		var res = to_path.rmdir
-		if res then return null
-		var error = new IOError("Cannot change remove `{self}`: {sys.errno.strerror}")
-		return error
+		var p = to_path
+		p.rmdir
+		return p.last_error
 	end
 
 	# Change the current working directory
@@ -1210,6 +1370,8 @@ private extern class NativeFile `{ FILE* `}
 		}
 		return 0;
 	`}
+
+	fun ferror: Bool `{ return ferror(self); `}
 
 	fun fileno: Int `{ return fileno(self); `}
 
