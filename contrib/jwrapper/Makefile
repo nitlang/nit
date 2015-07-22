@@ -20,6 +20,14 @@ clean:
 
 check: bin/jwrapper tests/wildcards.javap
 	mkdir -p tmp
+	bin/jwrapper -v -u comment -o tests/long.nit tests/long.javap
+	../../bin/nitpick -q tests/long.nit
+	bin/jwrapper -v -u comment -o tests/inits.nit tests/inits.javap
+	../../bin/nitpick -q tests/inits.nit
+	bin/jwrapper -v -u comment -o tests/testjvm.nit tests/testjvm.javap
+	../../bin/nitpick -q tests/testjvm.nit
+	bin/jwrapper -v -u comment -o tests/many.nit tests/many.javap
+	../../bin/nitpick -q tests/many.nit
 	bin/jwrapper -v -u comment -o tests/wildcards.nit tests/wildcards.javap
 	../../bin/nitpick -q tests/wildcards.nit
 

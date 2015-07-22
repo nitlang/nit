@@ -1,0 +1,8 @@
+public class org.example.ClassA {
+	public org.example.ClassB Foo(org.example.ClassC);
+	public org.example.ClassB Bar(org.example.ClassC);
+	public org.example.ClassB an_attribute;
+}
+public class org.example.ClassB extends org.example.ClassA {
+	public org.example.ClassA Foo(org.example.ClassC);
+}

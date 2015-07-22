@@ -1,0 +1,5 @@
+public class org.example.ClassA {
+	public org.example.ClassA();
+	public org.example.ClassA(long);
+	public org.example.ClassA(java.lang.Object);
+}
