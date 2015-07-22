@@ -55,3 +55,4 @@ toolcontext.mmodules_to_check.add_all mmodules
 
 modelbuilder.run_phases
 toolcontext.run_global_phases(mmodules)
+if toolcontext.error_count > 0 then exit(1)
