@@ -25,7 +25,12 @@ import jtype_converter
 class JavaType
 	var identifier = new Array[String]
 	var generic_params: nullable Array[JavaType] = null
+
+	# Is this a void return type?
 	var is_void = false
+
+	# Is this type a vararg?
+	var is_vararg = false is writable
 
 	# Has some generic type to be resolved (T extends foo => T is resolved to foo)
 	var has_unresolved_types = false
@@ -211,7 +216,7 @@ end
 # Model of a single Java class
 class JavaClass
 	# Type of this class
-	var class_type = new JavaType
+	var class_type: JavaType
 
 	# Attributes of this class
 	var attributes = new HashMap[String, JavaType]

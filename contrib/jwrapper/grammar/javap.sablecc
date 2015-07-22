@@ -9,6 +9,7 @@ separator = ('.'|'/');
 brackets = '[]';
 wildcard = '?';
 compiled_from = 'Compiled from "' (Any-'"')* '"';
+dots = '...';
 
 // ---
 Parser
@@ -25,23 +26,23 @@ class_or_interface = 'class'|'interface';
 
 modifier
 	= 'public'|'private'|'protected'|'static'|'final'|'native'|'synchronized'|'abstract'|'threadsafe'|'transient'|'volatile'|'strictfp';
-type = primitive_type brackets*;
-primitive_type
-	= 'boolean'|'byte'|'char'|'short'|'int'|'float'|'long'|'double'
-	| type_ref;
 
-type_ref
-	= full_class_name
-	| generic_identifier 'extends' type_bound
-	| wildcard;
+type = base_type brackets*;
+
+base_type
+	= {primitive:} primitive_base_type
+	| {class:} full_class_name
+	| {extends:} generic_identifier 'extends' type_bound
+	| {super:} generic_identifier 'super' type_bound
+	| {wildcard:} wildcard
+	| {void:} 'void';
+
+primitive_base_type = 'boolean'|'byte'|'char'|'short'|'int'|'float'|'long'|'double';
+
 type_bound
 	= {tail:} type_bound '&' full_class_name
 	| {head:} full_class_name;
 
-generic_param = '<' generic_parameter_list '>';
-generic_parameter_list
-	= {tail:} generic_parameter_list ',' parameter
-	| {head:} parameter;
 generic_identifier
 	= full_class_name
 	| wildcard;
@@ -49,22 +50,19 @@ generic_identifier
 full_class_name
 	= {tail:} full_class_name separator class_name
 	| {head:} class_name;
-class_name = identifier generic_param?;
+class_name = identifier generic_parameters?;
 
-parameter
-	= type '...'?
-	| {wildcard:} wildcard 'super' full_class_name ;
-parameter_list
-	= {tail:} parameter_list ',' parameter
+generic_parameters = '<' parameters '>';
+
+parameter = type dots?;
+parameters
+	= {tail:} parameters ',' parameter
 	| {head:} parameter;
 
-attribute_id = identifier brackets*;
-method_id = identifier;
-
 property_declaration
-	= {method:} modifier* generic_param? type method_id '(' parameter_list? ')' throws_declaration? ';'
-	| {constructor:} modifier* generic_param? full_class_name '(' parameter_list? ')' throws_declaration? ';'
-	| {attribute:} modifier* type attribute_id throws_declaration? ';'
+	= {method:} modifier* generic_parameters? type identifier '(' parameters? ')' throws_declaration? ';'
+	| {constructor:} modifier* generic_parameters? full_class_name '(' parameters? ')' throws_declaration? ';'
+	| {attribute:} modifier* type identifier brackets* throws_declaration? ';'
 	| {static:} modifier* '{' '}' ';'
 	| ';';
 
