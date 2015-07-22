@@ -50,7 +50,7 @@ redef class Nclass_declaration
 		var jtype = n_full_class_name.to_java_type
 
 		v.java_class = new JavaClass(jtype)
-		v.model.classes.add v.java_class
+		v.model.add_class v.java_class
 
 		# Visit all properties
 		super

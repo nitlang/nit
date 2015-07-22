@@ -236,7 +236,14 @@ class JavaModel
 	var unknown_types = new HashSet[JavaType]
 
 	# All analyzed classes
-	var classes = new Array[JavaClass]
+	var classes = new HashMap[String, JavaClass]
+
+	# Add a class in `classes`
+	fun add_class(jclass: JavaClass)
+	do
+		var key = jclass.class_type.full_id
+		classes[key] = jclass
+	end
 end
 
 # A Java method, with its signature
