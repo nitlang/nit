@@ -237,10 +237,10 @@ redef class Sys
 	#
 	# These may also be keywords in Java, but there they would be used capitalized.
 	private var nit_keywords: Array[String] = ["abort", "abstract", "and", "assert",
-		"break", "class", "continue", "do", "else", "end", "enum", "extern", "implies",
-		"import", "init", "interface", "intrude", "if", "in", "is", "isa", "for", "label",
+		"break", "class", "continue", "do", "else", "end", "enum", "extern", "false", "implies",
+		"import", "init", "interface", "intrude", "if", "in", "is", "isa", "isset", "for", "label",
 		"loop", "module", "new", "not", "null",	"nullable", "or", "package", "private",
-		"protected", "public", "return", "self", "super", "then", "type", "var", "while"]
+		"protected", "public", "return", "self", "super", "then", "true", "type", "var", "while"]
 end
 
 redef class String
