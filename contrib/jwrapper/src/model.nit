@@ -121,9 +121,10 @@ class JavaType
 		end
 	end
 
-	# Comparison based on fully qualified named and generic params
-	# Ignores primitive array so `a.b.c[][] == a.b.c`
-	redef fun ==(other) do return other isa JavaType and self.full_id == other.full_id
+	# Comparison based on fully qualified named
+	redef fun ==(other) do return other isa JavaType and
+		self.full_id == other.full_id and
+		self.is_primitive_array == other.is_primitive_array
 
 	redef fun hash do return self.full_id.hash
 end
