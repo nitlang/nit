@@ -152,6 +152,7 @@ class CodeGenerator
 			var nit_type = model.java_to_nit_type(jparam)
 
 			if not nit_type.is_known then comment = "#"
+			if jparam.is_primitive_array then comment = "#"
 
 			var cast = jparam.param_cast
 
@@ -187,6 +188,7 @@ class CodeGenerator
 			return_type = model.java_to_nit_type(jreturn_type)
 
 			if not return_type.is_known then comment = "#"
+			if jreturn_type.is_primitive_array then comment = "#"
 
 			nit_signature.add ": {return_type} "
 		end
@@ -217,6 +219,7 @@ class CodeGenerator
 
 		var c = ""
 		if not nit_type.is_known then c = "#"
+		if java_type.is_primitive_array then c = "#"
 
 		file_out.write """
 	# Java getter: {{{java_class}}}.{{{java_id}}}
@@ -252,6 +255,7 @@ class CodeGenerator
 				param_id = param_id.successor(1)
 
 				if not nit_type.is_known then c = "#"
+				if java_type.is_primitive_array then c = "#"
 			end
 
 			nit_params_s = "(" + nit_params.join(", ") + ")"
