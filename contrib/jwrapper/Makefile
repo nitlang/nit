@@ -30,6 +30,7 @@ check: bin/jwrapper tests/wildcards.javap
 	../../bin/nitpick -q tests/many.nit
 	bin/jwrapper -v -u comment -o tests/wildcards.nit tests/wildcards.javap
 	../../bin/nitpick -q tests/wildcards.nit
+	make -C examples/queue/ check
 
 check-libs: bin/jwrapper
 	# This config dependent rule must be tweaked according to each system
