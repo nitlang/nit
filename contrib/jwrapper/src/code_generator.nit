@@ -70,13 +70,8 @@ class CodeGenerator
 			generate_class_header(jclass.class_type)
 
 			for id, signatures in jclass.methods do
-				var c = 0
 				for signature in signatures do
-					var nid = id
-					if c > 0 then nid += c.to_s
-					c += 1
-
-					generate_method(jclass, id, nid, signature.return_type, signature.params)
+					generate_method(jclass, id, id, signature.return_type, signature.params)
 					file_out.write "\n"
 				end
 			end
