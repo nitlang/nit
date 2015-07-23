@@ -457,7 +457,7 @@ redef class MType
 	# JNI type name (in C)
 	#
 	# So this is a C type, usually defined in `jni.h`
-	private fun jni_type: String do return "jint"
+	private fun jni_type: String do return "long"
 
 	# JNI short type name (for signatures)
 	#
