@@ -104,7 +104,7 @@ extern class JavaString in "Java" `{ java.lang.String `}
 		JNIEnv *env = Sys_jni_env(sys);
 
 		// Get the data from Java
-		const jbyte *java_cstr = (char*)(*env)->GetStringUTFChars(env, self, NULL);
+		const char *java_cstr = (*env)->GetStringUTFChars(env, self, NULL);
 		jsize len = (*env)->GetStringUTFLength(env, self);
 
 		// Copy it in control of Nit
