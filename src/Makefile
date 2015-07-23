@@ -20,7 +20,7 @@ OBJS=nitc nitpick nit nitdoc nitls nitunit nitpretty nitmetrics nitx nitlight ni
 SRCS=$(patsubst %,%.nit,$(OBJS))
 BINS=$(patsubst %,../bin/%,$(OBJS))
 
-all: $(BINS)
+all: bin/nitc
 
 nitc_0: ../c_src/nitc parser/parser.nit
 	@echo '***************************************************************'
@@ -29,7 +29,7 @@ nitc_0: ../c_src/nitc parser/parser.nit
 	./git-gen-version.sh
 	../c_src/nitc ${OLDNITCOPT} -o nitc_0 -v nitc.nit
 
-$(BINS): nitc_0 parser/parser.nit
+bin/nitc: nitc_0 parser/parser.nit
 	@echo '***************************************************************'
 	@echo '* Compile binaries from NIT source files                      *'
 	@echo '***************************************************************'
