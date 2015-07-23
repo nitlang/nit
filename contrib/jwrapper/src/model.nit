@@ -56,10 +56,6 @@ class JavaType
 		return converter.cast_as_param(self.id)
 	end
 
-	fun is_collection: Bool do return is_primitive_array or collections_list.has(self.id)
-
-	fun is_wrapped: Bool do return find_extern_class[full_id] != null
-
 	# Name to give an extern class wrapping this type
 	fun extern_name: String
 	do
@@ -87,15 +83,6 @@ class JavaType
 		name = name.replace("-", "_")
 		name = name.replace("$", "_")
 		return name
-	end
-
-	fun to_cast(jtype: String, is_param: Bool): String
-	do
-		if is_param then
-			return converter.cast_as_param(jtype)
-		end
-
-		return converter.cast_as_return(jtype)
 	end
 
 	redef fun to_s
@@ -139,10 +126,6 @@ class JavaType
 	redef fun ==(other) do return other isa JavaType and self.full_id == other.full_id
 
 	redef fun hash do return self.full_id.hash
-
-	var collections_list: Array[String] is lazy do return ["List", "ArrayList", "LinkedList", "Vector", "Set", "SortedSet", "HashSet", "TreeSet", "LinkedHashSet", "Map", "SortedMap", "HashMap", "TreeMap", "Hashtable", "LinkedHashMap"]
-	var iterable: Array[String] is lazy do return ["ArrayList", "Set", "HashSet", "LinkedHashSet", "LinkedList", "Stack", "TreeSet", "Vector"]
-	var maps: Array[String] is lazy do return ["Map", "SortedMap", "HashMap", "TreeMap", "Hashtable", "LinkedHashMap"]
 end
 
 class NitType
