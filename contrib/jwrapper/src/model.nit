@@ -56,25 +56,6 @@ class JavaType
 		return converter.cast_as_param(self.id)
 	end
 
-	fun to_nit_type: NitType
-	do
-		var nit_type: NitType
-		var type_id = null
-
-		if not is_primitive_array then
-			type_id = converter.to_nit_type(self.id)
-		end
-
-		if type_id == null then
-			nit_type = self.extern_name
-			nit_type.is_complete = false
-		else
-			nit_type = new NitType(type_id)
-		end
-
-		return nit_type
-	end
-
 	fun is_collection: Bool do return is_primitive_array or collections_list.has(self.id)
 
 	fun is_wrapped: Bool do return find_extern_class[full_id] != null
@@ -171,8 +152,8 @@ class NitType
 	# If this NitType was found in `lib/android`, contains the module name to import
 	var mod: nullable NitModule
 
-	# Returns `true` if all types have been successfully converted to Nit type
-	var is_complete: Bool = true
+	# Is this type known, wrapped and available in Nit?
+	var is_known: Bool = true
 
 	redef fun to_s do return identifier
 end
@@ -199,8 +180,6 @@ end
 
 # Model of all the Java class analyzed in one run
 class JavaModel
-	# Unknown Java types used in `classes`
-	var unknown_types = new HashSet[JavaType]
 
 	# All analyzed classes
 	var classes = new HashMap[String, JavaClass]
@@ -210,6 +189,56 @@ class JavaModel
 	do
 		var key = jclass.class_type.full_id
 		classes[key] = jclass
+	end
+
+	# Unknown types, not already wrapped and not in this pass
+	private var unknown_types = new HashMap[JavaType, NitType]
+
+	# Wrapped types, or classes analyzed in this pass
+	private var known_types = new HashMap[JavaType, NitType]
+
+	# Get the `NitType` corresponding to the `JavaType`
+	#
+	# Also registers types so they can be reused and
+	# to keep track of unknown types.
+	fun java_to_nit_type(jtype: JavaType): NitType
+	do
+		# Check cache
+		if known_types.keys.has(jtype) then return known_types[jtype]
+		if unknown_types.keys.has(jtype) then return unknown_types[jtype]
+
+		# Is it a compatible primitive type?
+		if not jtype.is_primitive_array then
+			var name = converter.to_nit_type(jtype.id)
+			if name != null then
+				# We got a Nit equivalent
+				var nit_type = new NitType(name)
+				known_types[jtype] = nit_type
+				return nit_type
+			end
+		end
+
+		# Is being wrapped in this pass?
+		var key = jtype.full_id
+		if classes.keys.has(key) then
+			var nit_type = new NitType(jtype.extern_name)
+			known_types[jtype] = nit_type
+
+			return nit_type
+		end
+
+		# Search in lib
+		var nit_type = find_extern_class[jtype.full_id]
+		if nit_type != null then
+			known_types[jtype] = nit_type
+			return nit_type
+		end
+
+		# Unknown type
+		nit_type = new NitType(jtype.extern_name)
+		nit_type.is_known = false
+		unknown_types[jtype] = nit_type
+		return nit_type
 	end
 end
 
