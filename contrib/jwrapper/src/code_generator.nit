@@ -81,6 +81,15 @@ class CodeGenerator
 				end
 			end
 
+			# Constructors
+			for constructor in jclass.constructors do
+				var complex = jclass.constructors.length != 1 and constructor.params.not_empty
+				var base_name = if complex then "from" else ""
+				var name = jclass.nit_name_for(base_name, constructor.params, complex)
+
+				generate_constructor(jclass, constructor, name)
+			end
+
 			# Attributes
 			for id, java_type in jclass.attributes do
 				generate_getter_setter(jclass, id, java_type)
@@ -257,6 +266,41 @@ class CodeGenerator
 	# Java setter: {{{java_class}}}.{{{java_id}}}
 {{{c}}}	fun {{{nit_id}}}=(value: {{{nit_type}}}) in "Java" `{
 {{{c}}}		self.{{{java_id}}} = value;
+{{{c}}}	`}
+
+"""
+	end
+
+	# Generate getter and setter to access an attribute, of field
+	private fun generate_constructor(java_class: JavaClass, constructor: JavaConstructor, name: String)
+	do
+		var c = ""
+		var nit_params_s = ""
+		var java_params_s = ""
+
+		if constructor.params.not_empty then
+			var nit_params = new Array[String]
+			var java_params = new Array[String]
+			var param_id = 'a'
+			for java_type in constructor.params do
+
+				java_params.add "{java_type.param_cast}{param_id}"
+
+				var nit_type = model.java_to_nit_type(java_type)
+				nit_params.add  "{param_id}: {nit_type}"
+				param_id = param_id.successor(1)
+
+				if not nit_type.is_known then c = "#"
+			end
+
+			nit_params_s = "(" + nit_params.join(", ") + ")"
+			java_params_s = java_params.join(", ")
+		end
+
+		file_out.write """
+	# Java constructor: {{{java_class}}}
+{{{c}}}	new {{{name}}}{{{nit_params_s}}} in "Java" `{
+{{{c}}}		return new {{{java_class}}}({{{java_params_s}}});
 {{{c}}}	`}
 
 """

@@ -192,6 +192,9 @@ class JavaClass
 	# Methods of this class organized by their name
 	var methods = new MultiHashMap[String, JavaMethod]
 
+	# Constructors of this class
+	var constructors = new Array[JavaConstructor]
+
 	# Importations from this class
 	var imports = new HashSet[NitModule]
 
@@ -220,6 +223,12 @@ class JavaMethod
 	var return_type: JavaType
 
 	# Type of the arguments of the method
+	var params: Array[JavaType]
+end
+
+# A Java method, with its signature
+class JavaConstructor
+	# Type of the parameters of this constructor
 	var params: Array[JavaType]
 end
 

@@ -99,7 +99,15 @@ end
 redef class Nproperty_declaration_constructor
 	redef fun accept_visitor(v)
 	do
-		# TODO
+		# Collect parameters
+		var n_parameters = n_parameters
+		var params
+		if n_parameters != null then
+			params = n_parameters.to_a
+		else params = new Array[JavaType]
+
+		var method = new JavaConstructor(params)
+		v.java_class.constructors.add method
 	end
 end
 
