@@ -79,24 +79,33 @@ class JavaType
 
 	fun is_wrapped: Bool do return find_extern_class[full_id] != null
 
-	fun extern_name: NitType
+	# Name to give an extern class wrapping this type
+	fun extern_name: String
 	do
-		var nit_type = find_extern_class[full_id]
-		if nit_type != null then return nit_type
-
 		var name
-		if is_primitive_array then
-			# Primitive arrays have a special naming convention
-			name = "Java" + extern_class_name.join.capitalized + "Array"
+		var prefix = extern_class_prefix
+		if prefix == null then
+			# Use the namespace, e.g. java.lang.String -> Java_lang_String
+			assert not identifier.is_empty
+			if identifier.length == 1 then
+				name = identifier.last
+			else
+				var first = identifier.first
+				var last = identifier.last
+				var mid = identifier.subarray(1, identifier.length-2)
+				name = first.simple_capitalized + "_"
+				if mid.not_empty then name += mid.join("_") + "_"
+				name += last
+			end
 		else
-			name = "Java" + extern_class_name.join
+			# Use the prefix and the short class name
+			# e.g. given the prefix Native: java.lang.String -> NativeString
+			name = prefix + id
 		end
 
 		name = name.replace("-", "_")
-
-		var nit_type = new NitType(name)
-		nit_type.is_complete = false
-		return nit_type
+		name = name.replace("$", "_")
+		return name
 	end
 
 	fun to_cast(jtype: String, is_param: Bool): String
@@ -142,20 +151,6 @@ class JavaType
 		if self.has_generic_params then
 			for params in generic_params do params.resolve_types(conversion_map)
 		end
-	end
-
-	private fun extern_class_name: Array[String]
-	do
-		var class_name = new Array[String]
-		class_name.add(self.id)
-
-		if not self.has_generic_params then return class_name
-
-		class_name.add "Of"
-
-		for param in generic_params do class_name.add_all param.extern_class_name
-
-		return class_name
 	end
 
 	# Comparison based on fully qualified named and generic params
@@ -304,4 +299,16 @@ redef class Sys
 
 	# Prefix used to name extern classes, if `null` use the full namespace
 	var extern_class_prefix: nullable String is lazy do return opt_extern_class_prefix.value
+end
+
+redef class Text
+	# Get a copy of `self` where the first letter is capitalized
+	fun simple_capitalized: String
+	do
+		if is_empty then return to_s
+
+		var c = chars.first.to_upper
+		var s = c.to_s + substring_from(1)
+		return s
+	end
 end
