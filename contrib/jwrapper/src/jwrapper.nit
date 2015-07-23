@@ -41,9 +41,10 @@ var opts = new OptionContext
 var opt_unknown = new OptionEnum(["comment", "stub", "ignore"], "How to deal with unknown types", 0, "-u")
 var opt_verbose = new OptionCount("Verbosity", "-v")
 var opt_output = new OptionString("Output file", "-o")
+var opt_regex = new OptionString("Regex pattern to filter classes in Jar archives", "-r")
 var opt_help = new OptionBool("Show this help message", "-h", "--help")
 
-opts.add_option(opt_output, opt_unknown, opt_extern_class_prefix, opt_verbose, opt_help)
+opts.add_option(opt_output, opt_unknown, opt_extern_class_prefix, opt_regex, opt_verbose, opt_help)
 opts.parse args
 
 if opts.errors.not_empty or opts.rest.is_empty or opt_help.value then
@@ -63,6 +64,17 @@ if out_file == null then out_file = "out.nit"
 if not "javap".program_is_in_path then
 	print "Error: 'javap' must be in PATH"
 	exit 1
+end
+
+var regex = null
+var regex_code = opt_regex.value
+if regex_code != null then
+	regex = regex_code.to_re
+	var error = regex.compile
+	if error != null then
+		print_error "Regex Error: {error}"
+		exit 1
+	end
 end
 
 # List of bytecode Java classes and javap output files
@@ -97,6 +109,10 @@ for input in opts.rest do
 		javap.wait
 		for path in output.split("\n") do
 			if path.file_extension == "class" then
+
+				# Filter out the classes that do not answer to the Regex
+				if regex != null and not path.has(regex) then continue
+
 				class_files.add out_dir / path
 			end
 		end
