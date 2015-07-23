@@ -181,6 +181,7 @@ class CodeGenerator
 
 		# Method identifier
 		var method_id = nmethod_id.to_nit_method_name
+		method_id = java_class.nit_name_for(method_id, jparam_list, java_class.methods[jmethod_id].length > 1)
 		var nit_signature = new Array[String]
 
 		nit_signature.add "\tfun {method_id}"
@@ -272,6 +273,36 @@ redef class String
 
 		name = name.replace("$", "_")
 
+		return name
+	end
+end
+
+redef class JavaClass
+	# Property names used in this class
+	private var used_name = new HashSet[String]
+
+	# Get an available property name for the Java property with `name` and parameters
+	#
+	# If `use_parameters_name` then expect that there will be conflicts,
+	# so use the types of `parameters` to build the name.
+	private fun nit_name_for(name: String, parameters: Array[JavaType], use_parameters_name: Bool): String
+	do
+		# Append the name of each parameter
+		if use_parameters_name then
+			for param in parameters do
+				name += "_" + param.id
+			end
+		end
+
+		# As a last resort, append numbers to the name
+		var base_name = name
+		var count = 1
+		while used_name.has(name) do
+			name = base_name + count.to_s
+			count += 1
+		end
+
+		used_name.add name
 		return name
 	end
 end
