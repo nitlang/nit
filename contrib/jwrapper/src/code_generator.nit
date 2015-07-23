@@ -99,7 +99,7 @@ class CodeGenerator
 		end
 
 		if stub_for_unknown_types then
-			for jtype in model.unknown_types do
+			for jtype, nit_type in model.unknown_types do
 				generate_unknown_class_header(jtype)
 				file_out.write "\n"
 			end
@@ -127,7 +127,7 @@ class CodeGenerator
 
 	private fun generate_class_header(jtype: JavaType)
 	do
-		var nit_type = jtype.to_nit_type
+		var nit_type = model.java_to_nit_type(jtype)
 		file_out.write "# Java class: {jtype.to_package_name}\n"
 		file_out.write "extern class {nit_type} in \"Java\" `\{ {jtype.to_package_name} `\}\n"
 		file_out.write "\tsuper JavaObject\n\n"
@@ -154,24 +154,11 @@ class CodeGenerator
 		# Parameters
 		for i in [0..jparam_list.length[ do
 			var jparam = jparam_list[i]
-			var nit_type = jparam.to_nit_type
+			var nit_type = model.java_to_nit_type(jparam)
 
-			if not nit_type.is_complete then
-				if jparam.is_wrapped then
-					java_class.imports.add nit_type.mod.as(not null)
-				else
-					model.unknown_types.add jparam
-					if comment_unknown_types then
-						comment = "#"
-					else
-						nit_type = jparam.extern_name
-					end
-				end
-			end
+			if not nit_type.is_known then comment = "#"
 
-			var cast = ""
-
-			if not jparam.is_collection then cast = jparam.param_cast
+			var cast = jparam.param_cast
 
 			nit_types.add(nit_type)
 
@@ -201,22 +188,10 @@ class CodeGenerator
 		end
 
 		var return_type = null
-
 		if not jreturn_type.is_void then
-			return_type = jreturn_type.to_nit_type
+			return_type = model.java_to_nit_type(jreturn_type)
 
-			if not return_type.is_complete then
-				if jreturn_type.is_wrapped then
-					java_class.imports.add return_type.mod.as(not null)
-				else
-					model.unknown_types.add jreturn_type
-					if comment_unknown_types then
-						comment = "#"
-					else
-						return_type = jreturn_type.extern_name
-					end
-				end
-			end
+			if not return_type.is_known then comment = "#"
 
 			nit_signature.add ": {return_type} "
 		end
