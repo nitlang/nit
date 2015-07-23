@@ -1,7 +1,5 @@
 # This file is part of NIT ( http://www.nitlanguage.org ).
 #
-# Copyright 2005-2008 Jean Privat <jean@pryen.org>
-#
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
@@ -14,11 +12,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import c
-
 class Bitarray
 
-	var narr: CByteArray
+	var narr: Bytes
 
 	init do
 		for x in [0 .. narr.length[ do narr[x] = 0xFFu8
@@ -43,7 +39,7 @@ fun nsieve(n: Int): Int
 do
 	var count = 0
 	var b_arrsz = ((n - 1).to_f / 8.0).ceil.to_i
-	var bitarr = new Bitarray(new CByteArray(b_arrsz))
+	var bitarr = new Bitarray(new Bytes(new NativeString(b_arrsz), b_arrsz, b_arrsz))
 	for i in [2 .. n[ do
 		# If self is already false, then no need to check for multiples
 		if not bitarr[i] then continue

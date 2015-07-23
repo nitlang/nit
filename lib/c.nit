@@ -119,7 +119,7 @@ end
 
 # Wrapper around an array of `unsigned char` in C (`unsigned char*`) with length and destroy state
 class CByteArray
-	super CArray[Int]
+	super CArray[Byte]
 	redef type NATIVE: NativeCByteArray
 
 	# Allocate a new array of `size`
@@ -128,8 +128,8 @@ class CByteArray
 		super size
 	end
 
-	# Build from an `Array[Int]`
-	new from(array: Array[Int])
+	# Build from a `SequenceRead[Byte]`
+	new from(array: SequenceRead[Byte])
 	do
 		var carray = new CByteArray(array.length)
 		for i in array.length.times do
@@ -142,7 +142,7 @@ end
 # An array of `unsigned char` in C (`unsigned char*`)
 extern class NativeCByteArray `{ unsigned char* `}
 	super NativeCArray
-	redef type E: Int
+	redef type E: Byte
 
 	# Allocate a new array of `size`
 	new(size: Int) `{ return calloc(size, sizeof(unsigned char)); `}
