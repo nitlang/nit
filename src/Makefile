@@ -15,12 +15,12 @@
 # limitations under the License.
 
 NITCOPT=--semi-global
-OLDNITCOPT=
+OLDNITCOPT=--semi-global
 OBJS=nitc nitpick nit nitdoc nitls nitunit nitpretty nitmetrics nitx nitlight nitdbg_client nitserial
 SRCS=$(patsubst %,%.nit,$(OBJS))
 BINS=$(patsubst %,../bin/%,$(OBJS))
 
-all: $(BINS)
+all: bin/nitc
 
 nitc_0: ../c_src/nitc parser/parser.nit
 	@echo '***************************************************************'
@@ -29,14 +29,13 @@ nitc_0: ../c_src/nitc parser/parser.nit
 	./git-gen-version.sh
 	../c_src/nitc ${OLDNITCOPT} -o nitc_0 -v nitc.nit
 
-$(BINS): nitc_0 parser/parser.nit
+bin/nitc: nitc_0 parser/parser.nit
 	@echo '***************************************************************'
 	@echo '* Compile binaries from NIT source files                      *'
 	@echo '***************************************************************'
 	./git-gen-version.sh
 	test -d ../bin || mkdir ../bin
 	./nitc_0 ${NITCOPT} -v --dir ../bin $(SRCS)
-	rm -r .nit_compile || true # to clean old .nit_compile generated file
 
 $(OBJS): nitc_0 parser/parser.nit
 	./git-gen-version.sh
