@@ -272,11 +272,17 @@ redef class Sys
 	# List of Nit keywords
 	#
 	# These may also be keywords in Java, but there they would be used capitalized.
-	private var nit_keywords: Array[String] = ["abort", "abstract", "and", "assert",
+	private var nit_keywords = new HashSet[String].from(["abort", "abstract", "and", "assert",
 		"break", "class", "continue", "do", "else", "end", "enum", "extern", "false", "implies",
 		"import", "init", "interface", "intrude", "if", "in", "is", "isa", "isset", "for", "label",
 		"loop", "module", "new", "not", "null",	"nullable", "or", "package", "private",
-		"protected", "public", "return", "self", "super", "then", "true", "type", "var", "while"]
+		"protected", "public", "return", "self", "super", "then", "true", "type", "var", "while",
+
+	# Top-level methods
+		"class_name", "get_time", "hash", "is_same_type", "is_same_instance", "output",
+
+	# Pointer or JavaObject methods
+		"free"])
 end
 
 redef class String
