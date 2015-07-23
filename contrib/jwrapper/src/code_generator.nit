@@ -67,7 +67,7 @@ class CodeGenerator
 
 		for key, jclass in model.classes do
 
-			file_out.write gen_class_header(jclass.class_type)
+			generate_class_header(jclass.class_type)
 
 			for id, signatures in jclass.methods do
 				var c = 0
@@ -76,7 +76,7 @@ class CodeGenerator
 					if c > 0 then nid += c.to_s
 					c += 1
 
-					file_out.write gen_method(jclass, id, nid, signature.return_type, signature.params)
+					generate_method(jclass, id, nid, signature.return_type, signature.params)
 					file_out.write "\n"
 				end
 			end
@@ -100,7 +100,7 @@ class CodeGenerator
 
 		if stub_for_unknown_types then
 			for jtype in model.unknown_types do
-				file_out.write gen_unknown_class_header(jtype)
+				generate_unknown_class_header(jtype)
 				file_out.write "\n"
 			end
 		end
@@ -125,29 +125,24 @@ class CodeGenerator
 # This code has been generated using `jwrapper`
 """ is writable
 
-	fun gen_class_header(jtype: JavaType): String
+	private fun generate_class_header(jtype: JavaType)
 	do
-		var temp = new Array[String]
 		var nit_type = jtype.to_nit_type
-		temp.add "# Java class: {jtype.to_package_name}\n"
-		temp.add "extern class {nit_type} in \"Java\" `\{ {jtype.to_package_name} `\}\n"
-		temp.add "\tsuper JavaObject\n\n"
-
-		return temp.join
+		file_out.write "# Java class: {jtype.to_package_name}\n"
+		file_out.write "extern class {nit_type} in \"Java\" `\{ {jtype.to_package_name} `\}\n"
+		file_out.write "\tsuper JavaObject\n\n"
 	end
 
-	fun gen_unknown_class_header(jtype: JavaType): String
+	private fun generate_unknown_class_header(jtype: JavaType)
 	do
 		var nit_type = jtype.extern_name
 
-		var temp = new Array[String]
-		temp.add("extern class {nit_type} in \"Java\" `\{ {jtype.to_package_name} `\}\n")
-		temp.add("\tsuper JavaObject\n\nend\n")
-
-		return temp.join
+		file_out.write "extern class {nit_type} in \"Java\" `\{ {jtype.to_package_name} `\}\n"
+		file_out.write "\tsuper JavaObject\n\nend\n"
 	end
 
-	fun gen_method(java_class: JavaClass, jmethod_id, nmethod_id: String, jreturn_type: JavaType, jparam_list: Array[JavaType]): String
+	private fun generate_method(java_class: JavaClass, jmethod_id, method_id: String,
+		jreturn_type: JavaType, jparam_list: Array[JavaType])
 	do
 		var java_params = ""
 		var nit_params  = ""
@@ -195,7 +190,7 @@ class CodeGenerator
 		var doc = "\t# Java implementation: {java_class}.{jmethod_id}\n"
 
 		# Method identifier
-		var method_id = nmethod_id.to_nit_method_name
+		method_id = method_id.to_nit_method_name
 		method_id = java_class.nit_name_for(method_id, jparam_list, java_class.methods[jmethod_id].length > 1)
 		var nit_signature = new Array[String]
 
@@ -226,25 +221,21 @@ class CodeGenerator
 			nit_signature.add ": {return_type} "
 		end
 
-		var temp = new Array[String]
-
-		temp.add doc
-		temp.add(comment + nit_signature.join)
+		file_out.write doc
+		file_out.write comment + nit_signature.join
 
 		if comment == "#" then
-			temp.add(" in \"Java\" `\{\n{comment}\t\tself.{jmethod_id}({java_params});\n{comment}\t`\}\n")
+			file_out.write " in \"Java\" `\{\n{comment}\t\tself.{jmethod_id}({java_params});\n{comment}\t`\}\n"
 		# Methods with return type
 		else if return_type != null then
-			temp.add(" in \"Java\" `\{\n{comment}\t\treturn {jreturn_type.return_cast}self.{jmethod_id}({java_params});\n{comment}\t`\}\n")
+			file_out.write " in \"Java\" `\{\n{comment}\t\treturn {jreturn_type.return_cast}self.{jmethod_id}({java_params});\n{comment}\t`\}\n"
 		# Methods without return type
 		else if jreturn_type.is_void then
-			temp.add(" in \"Java\" `\{\n{comment}\t\tself.{jmethod_id}({java_params});\n{comment}\t`\}\n")
+			file_out.write " in \"Java\" `\{\n{comment}\t\tself.{jmethod_id}({java_params});\n{comment}\t`\}\n"
 		# No copy
 		else
-			temp.add(" in \"Java\" `\{\n{comment}\t\tself.{jmethod_id}({java_params});\n{comment}\t`\}\n")
+			file_out.write " in \"Java\" `\{\n{comment}\t\tself.{jmethod_id}({java_params});\n{comment}\t`\}\n"
 		end
-
-		return temp.join
 	end
 
 	# Generate getter and setter to access an attribute, of field
