@@ -299,13 +299,6 @@ redef class String
 	fun to_nit_method_name: String
 	do
 		var name = self.to_snake_case
-		if name.has_prefix("get_") then
-			name = name.substring_from(4)
-		else if name.has_prefix("set_") then
-			name = name.substring_from(4)
-			if nit_keywords.has(name) then name += "_"
-			name += "="
-		end
 
 		# Strip the '_' prefix
 		while name.has_prefix("_") do name = name.substring(1, name.length-1)
