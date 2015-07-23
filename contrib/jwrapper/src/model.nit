@@ -19,6 +19,7 @@
 module model
 
 import more_collections
+import opts
 
 import jtype_converter
 
@@ -297,4 +298,10 @@ redef class Sys
 
 		return map
 	end
+
+	# Option to set `extern_class_prefix`
+	var opt_extern_class_prefix = new OptionString("Prefix to extern classes (By default uses the full namespace)", "-p")
+
+	# Prefix used to name extern classes, if `null` use the full namespace
+	var extern_class_prefix: nullable String is lazy do return opt_extern_class_prefix.value
 end

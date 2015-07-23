@@ -43,7 +43,7 @@ var opt_verbose = new OptionCount("Verbosity", "-v")
 var opt_output = new OptionString("Output file", "-o")
 var opt_help = new OptionBool("Show this help message", "-h", "--help")
 
-opts.add_option(opt_output, opt_unknown, opt_verbose, opt_help)
+opts.add_option(opt_output, opt_unknown, opt_extern_class_prefix, opt_verbose, opt_help)
 opts.parse args
 
 if opts.errors.not_empty or opts.rest.is_empty or opt_help.value then
