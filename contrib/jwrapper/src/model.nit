@@ -263,19 +263,26 @@ redef class Sys
 		var map = new DefaultMap[String, nullable NitType](null)
 		var modules = new HashMap[String, NitModule]
 
-		var nit_dir = "NIT_DIR".environ
-		if nit_dir.is_empty then
-			# Simple heuristic to find the Nit lib
-			var dir = sys.program_name.dirname / "../../../"
-			nit_dir = dir.simplify_path
-			if not nit_dir.file_exists then return map
+		var lib_paths = opt_libs.value
+		if lib_paths == null then lib_paths = new Array[String]
+
+		if lib_paths.has("auto") then
+			lib_paths.remove "auto"
+			var nit_dir = "NIT_DIR".environ
+			if nit_dir.is_empty then
+				# Simple heuristic to find the Nit lib
+				var dir = sys.program_name.dirname / "../../../lib/"
+				dir = dir.simplify_path
+				if dir.file_exists then lib_paths.add dir.simplify_path
+			end
 		end
+
+		if lib_paths.is_empty then return map
 
 		# Use grep to find all extern classes implemented in Java
 		var grep_regex = "extern class [a-zA-Z0-9]\\\+[ ]\\\+in[ ]\\\+\"Java\""
-		var grep_args = ["-r", grep_regex,
-			nit_dir/"lib/android/",
-			nit_dir/"lib/java/"]
+		var grep_args = ["-r", "--with-filename", grep_regex]
+		grep_args.add_all lib_paths
 
 		var grep = new ProcessReader("grep", grep_args...)
 		var lines = grep.read_lines
@@ -312,6 +319,9 @@ redef class Sys
 
 	# Prefix used to name extern classes, if `null` use the full namespace
 	var extern_class_prefix: nullable String is lazy do return opt_extern_class_prefix.value
+
+	# Libraries to search for existing wrappers
+	var opt_libs = new OptionArray("Paths to libraries with wrappers of Java classes ('auto' to use the full Nit lib)", "-i")
 end
 
 redef class Text
