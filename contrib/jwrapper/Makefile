@@ -38,3 +38,4 @@ check-libs: bin/jwrapper
 	bin/jwrapper -v -u ignore -o tests/java_tools.nit /usr/lib/jvm/default-java/lib/tools.jar
 	bin/jwrapper -v -u ignore -o tests/sablecc.nit ~/apps/sablecc-3-beta.3.altgen.20041114/lib/sablecc.jar
 	bin/jwrapper -v -u ignore -o tests/android.nit ~/sdks/android-sdk/platforms/android-10/android.jar
+	make -C examples/android_api/ check
