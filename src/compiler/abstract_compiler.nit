@@ -389,6 +389,15 @@ endif
 			makefile.write("CFLAGS += -D NO_STACKTRACE\n\n")
 		end
 
+		makefile.write """
+# Special configuration for Darwin
+ifeq ($(uname_S),Darwin)
+	# Remove POSIX flag -lrt
+	LDLIBS := $(filter-out -lrt,$(LDLIBS))
+endif
+
+"""
+
 		makefile.write("all: {outpath}\n")
 		if outpath != real_outpath then
 			makefile.write("\tcp -- {outpath.escape_to_sh} {real_outpath.escape_to_sh.replace("$","$$")}")
