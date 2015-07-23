@@ -2,31 +2,31 @@ sans nom
 
 Montpellier
 
-*** Entrepôt Lunel ***
-L'entrepôt est vide
+*** Entrepï¿½t Lunel ***
+L'entrepï¿½t est vide
 
 Carotte:15
 Carotte:20
 
-* Rayon : Légumes
+* Rayon : Lï¿½gumes
 
-* Rayon : Légumes
+* Rayon : Lï¿½gumes
 Carotte:15
 Navet:10
 Chou:3
-* Rayon : Légumes
+* Rayon : Lï¿½gumes
 Carotte:15
 Navet:10
 Chou:13
 Courge:1
 
-*** Entrepôt Lunel ***
-* Rayon : Légumes
+*** Entrepï¿½t Lunel ***
+* Rayon : Lï¿½gumes
 Carotte:15
 Navet:10
 Chou:13
 Courge:1
-* Rayon Réfrigéré : Surgelés - t° max : -5
+* Rayon Rï¿½frigï¿½rï¿½ : Surgelï¿½s - tï¿½ max : -5
 Pizza:12
-Poisson pané:4
+Poisson panï¿½:4
 

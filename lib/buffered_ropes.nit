@@ -94,6 +94,9 @@ private class Leaf
 	var bns: NativeString is noinit
 	redef var length is noinit
 
+	# Unsafe, but since it is an experiment, don't mind
+	redef fun bytelen do return length
+
 	redef fun empty do return new Leaf(new ManualBuffer)
 
 	redef fun to_cstring do
@@ -163,14 +166,14 @@ private class Leaf
 			var bpos = buf.pos
 			var sits = s.items
 			if bpos == mlen then
-				sits.copy_to(buf.ns, slen, s.index_from, bpos)
+				sits.copy_to(buf.ns, slen, s.first_byte, bpos)
 				buf.pos = bpos + slen
 				return new Leaf(buf)
 			else
 				var b = new ManualBuffer
 				var nbns = b.ns
 				bns.copy_to(nbns, mlen, 0, 0)
-				sits.copy_to(nbns, slen, s.index_from, mlen)
+				sits.copy_to(nbns, slen, s.first_byte, mlen)
 				b.pos = nlen
 				return new Leaf(b)
 			end
@@ -219,7 +222,7 @@ redef class Concat
 		for i in substrings do
 			var ilen = i.length
 			if i isa FlatString then
-				i.items.copy_to(ns, ilen, i.index_from, off)
+				i.items.copy_to(ns, ilen, i.first_byte, off)
 			else if i isa Leaf then
 				i.buf.ns.copy_to(ns, ilen, 0, off)
 			else
@@ -261,8 +264,8 @@ redef class FlatString
 		if s isa FlatString then
 			if slen + mlen > maxlen then return new Concat(self, s)
 			var mits = items
-			var sifrom = s.index_from
-			var mifrom = index_from
+			var sifrom = s.first_byte
+			var mifrom = first_byte
 			var sits = s.items
 			var b = new ManualBuffer
 			var bns = b.ns
@@ -277,7 +280,7 @@ redef class FlatString
 			return new Concat(sl + self, s.right)
 		else if s isa Leaf then
 			if slen + mlen > maxlen then return new Concat(self, s)
-			var mifrom = index_from
+			var mifrom = first_byte
 			var sb = s.buf
 			var b = new ManualBuffer
 			var bns = b.ns
@@ -323,13 +326,13 @@ redef class Array[E]
 			var tmp = na[i]
 			var tpl = tmp.length
 			if tmp isa FlatString then
-				tmp.items.copy_to(ns, tpl, tmp.index_from, off)
+				tmp.items.copy_to(ns, tpl, tmp.first_byte, off)
 				off += tpl
 			else
 				for j in tmp.substrings do
 					var slen = j.length
 					if j isa FlatString then
-						j.items.copy_to(ns, slen, j.index_from, off)
+						j.items.copy_to(ns, slen, j.first_byte, off)
 					else if j isa Leaf then
 						j.buf.ns.copy_to(ns, slen, 0, off)
 					end

@@ -76,18 +76,20 @@ private class Concat
 
 	redef var length is noinit
 
+	redef var bytelen is noinit
+
 	redef fun substrings do return new RopeSubstrings(self)
 
 	redef fun empty do return ""
 
 	redef var to_cstring is lazy do
-		var len = length
+		var len = bytelen
 		var ns = new NativeString(len + 1)
 		ns[len] = 0u8
 		var off = 0
 		for i in substrings do
-			var ilen = i.length
-			i.as(FlatString).items.copy_to(ns, ilen, i.as(FlatString).index_from, off)
+			var ilen = i.bytelen
+			i.as(FlatString).items.copy_to(ns, ilen, i.as(FlatString).first_byte, off)
 			off += ilen
 		end
 		return ns
@@ -100,6 +102,7 @@ private class Concat
 
 	init do
 		length = left.length + right.length
+		bytelen = left.bytelen + right.bytelen
 	end
 
 	redef fun output do
@@ -147,12 +150,12 @@ private class Concat
 
 	redef fun +(o) do
 		var s = o.to_s
-		var slen = s.length
+		var slen = s.bytelen
 		if s isa Concat then
 			return new Concat(self, s)
 		else
 			var r = right
-			var rlen = r.length
+			var rlen = r.bytelen
 			if rlen + slen > maxlen then return new Concat(self, s)
 			return new Concat(left, r + s)
 		end
@@ -202,7 +205,7 @@ class RopeBuffer
 	redef var bytes: Sequence[Byte] is lazy do return new RopeBufferBytes(self)
 
 	# The final string being built on the fly
-	private var str: String is noinit
+	private var str: String = ""
 
 	# Current concatenation buffer
 	private var ns: NativeString is noinit
@@ -217,10 +220,21 @@ class RopeBuffer
 	# a long string (length > maxlen) is appended.
 	private var dumped: Int is noinit
 
-	# Length of the complete rope
-	redef var length = 0
+	# Length of the complete rope in chars (0)
+	redef fun length do
+		var st = dumped
+		var len = str.length
+		while st < rpos do
+			st += ns[st].u8len
+			len += 1
+		end
+		return len
+	end
 
-	# Length of the mutable part
+	# Length of the complete rope in bytes
+	redef var bytelen = 0
+
+	# Length of the mutable part (in bytes)
 	#
 	# Is also used as base to compute the size of the next
 	# mutable native string (`ns`)
@@ -230,7 +244,6 @@ class RopeBuffer
 
 	# Builds an empty `RopeBuffer`
 	init do
-		str = ""
 		ns = new NativeString(maxlen)
 		buf_size = maxlen
 		dumped = 0
@@ -241,7 +254,7 @@ class RopeBuffer
 		self.str = str
 		ns = new NativeString(maxlen)
 		buf_size = maxlen
-		length = str.length
+		bytelen = str.length
 		dumped = 0
 	end
 
@@ -259,11 +272,54 @@ class RopeBuffer
 		written = false
 	end
 
+	redef fun [](i) do
+		if i < str.length then
+			return str[i]
+		else
+			var index = ns.char_to_byte_index_cached(i - str.length, 0, dumped)
+			return ns.char_at(index)
+		end
+	end
+
+	redef fun []=(i, c) do
+		assert i >= 0 and i <= length
+		if i == length then add c
+		if i < str.length then
+			bytelen += c.u8char_len - str[i].u8char_len
+			var s = str
+			var l = s.substring(0, i)
+			var r = s.substring_from(i + 1)
+			str = l + c.to_s + r
+		else
+			var reali = i - str.length
+			var index = ns.char_to_byte_index_cached(reali, 0, dumped)
+			var st_nxt = ns.char_to_byte_index_cached(reali + 1, reali, index)
+			var loc_c = ns.char_at(index)
+			if loc_c.u8char_len != c.u8char_len then
+				var delta = c.u8char_len - loc_c.u8char_len
+				var remsp = buf_size - rpos
+				if remsp < delta then
+					buf_size *= 2
+					var nns = new NativeString(buf_size)
+					ns.copy_to(nns, index - dumped, dumped, 0)
+					ns.copy_to(nns, rpos - index - loc_c.u8char_len, index + loc_c.u8char_len, index - dumped + delta)
+					ns = nns
+					index = index - dumped
+				else
+					ns.copy_to(ns, rpos - st_nxt, st_nxt, st_nxt + delta)
+				end
+				bytelen += delta
+				rpos += delta
+			end
+			ns.set_char_at(index, c)
+		end
+	end
+
 	redef fun empty do return new RopeBuffer
 
 	redef fun clear do
 		str = ""
-		length = 0
+		bytelen = 0
 		rpos = 0
 		dumped = 0
 		if written then
@@ -304,63 +360,29 @@ class RopeBuffer
 	end
 
 	redef fun append(s) do
-		var slen = s.length
-		length += slen
-		var rp = rpos
-		if s isa Rope or slen > maxlen then
-			if rp > 0 and dumped != rp then
-				str += new FlatString.with_infos(ns, rp - dumped, dumped, rp - 1)
-				dumped = rp
-			end
-			str = str + s
+		var slen = s.bytelen
+		if slen >= maxlen then
+			persist_buffer
+			str += s.to_s
 			return
 		end
-		var remsp = buf_size - rp
-		var sits: NativeString
-		var begin: Int
-		if s isa FlatString then
-			begin = s.index_from
-			sits = s.items
-		else if s isa FlatBuffer then
-			begin = 0
-			sits = s.items
-		else
+		if s isa FlatText then
+			var oits = s.items
+			var from = if s isa FlatString then s.first_byte else 0
+			var remsp = buf_size - rpos
 			if slen <= remsp then
-				for i in s.bytes do
-					ns[rpos] = i
-					rpos += 1
-				end
-			else
-				var spos = 0
-				for i in [0..remsp[ do
-					ns[rpos] = s.bytes[spos]
-					rpos += 1
-					spos += 1
-				end
-				dump_buffer
-				while spos < slen do
-					ns[rpos] = s.bytes[spos]
-					spos += 1
-					rpos += 1
-				end
-			end
-			return
-		end
-		if slen <= remsp then
-			if remsp <= 0 then
-				dump_buffer
-				rpos = 0
-			else
-				sits.copy_to(ns, slen, begin, rp)
+				oits.copy_to(ns, slen, from, rpos)
 				rpos += slen
+				return
 			end
-		else
-			sits.copy_to(ns, remsp, begin, rp)
-			rpos = buf_size
+			var brk = oits.find_beginning_of_char_at(from + remsp)
+			oits.copy_to(ns, brk, from, rpos)
+			rpos += brk
 			dump_buffer
-			var nlen = slen - remsp
-			sits.copy_to(ns, nlen, begin + remsp, 0)
-			rpos = nlen
+			oits.copy_to(ns, slen - remsp, brk, 0)
+			rpos = slen - remsp
+		else
+			for i in s.substrings do append i
 		end
 	end
 
@@ -373,7 +395,7 @@ class RopeBuffer
 		# TODO: Fix when supporting UTF-8
 		ns[rp] = c.ascii.to_b
 		rp += 1
-		length += 1
+		bytelen += 1
 		rpos = rp
 	end
 
@@ -385,7 +407,7 @@ class RopeBuffer
 		end
 		ns[rp] = b
 		rp += 1
-		length += 1
+		bytelen += 1
 		rpos = rp
 	end
 
@@ -400,10 +422,12 @@ class RopeBuffer
 		ns = new NativeString(bs)
 		buf_size = bs
 		dumped = 0
+		rpos = 0
 	end
 
 	# Similar to dump_buffer, but does not reallocate a new NativeString
 	private fun persist_buffer do
+		if rpos == dumped then return
 		var nstr = new FlatString.with_infos(ns, rpos - dumped, dumped, rpos - 1)
 		str += nstr
 		dumped = rpos
@@ -425,10 +449,8 @@ class RopeBuffer
 	redef fun enlarge(i) do end
 
 	redef fun to_s do
-		written = true
-		var nnslen = rpos - dumped
-		if nnslen == 0 then return str
-		return str + new FlatString.with_infos(ns, rpos - dumped, dumped, rpos - 1)
+		dump_buffer
+		return str
 	end
 
 	redef fun reverse do
@@ -463,16 +485,16 @@ redef class FlatString
 
 	redef fun +(o) do
 		var s = o.to_s
-		var slen = s.length
-		var mlen = length
+		var slen = s.bytelen
+		var mlen = bytelen
 		if slen == 0 then return self
 		if mlen == 0 then return s
 		var nlen = slen + mlen
 		if s isa FlatString then
 			if nlen > maxlen then return new Concat(self, s)
 			var mits = items
-			var sifrom = s.index_from
-			var mifrom = index_from
+			var sifrom = s.first_byte
+			var mifrom = first_byte
 			var sits = s.items
 			var ns = new NativeString(nlen + 1)
 			mits.copy_to(ns, mlen, mifrom, 0)
@@ -480,7 +502,7 @@ redef class FlatString
 			return ns.to_s_with_length(nlen)
 		else if s isa Concat then
 			var sl = s.left
-			var sllen = sl.length
+			var sllen = sl.bytelen
 			if sllen + mlen > maxlen then return new Concat(self, s)
 			return new Concat(self + sl, s.right)
 		else
@@ -516,11 +538,11 @@ private class RopeByteReverseIterator
 	var subs: IndexedIterator[FlatString]
 
 	init(root: Concat) is old_style_init do
-		pos = root.length - 1
+		pos = root.bytelen - 1
 		subs = new ReverseRopeSubstrings(root)
 		var s = subs.item
 		ns = s.items
-		pns = s.index_to
+		pns = s.last_byte
 	end
 
 	init from(root: Concat, pos: Int) do
@@ -546,7 +568,7 @@ private class RopeByteReverseIterator
 		if not subs.is_ok then return
 		var s = subs.item
 		ns = s.items
-		pns = s.index_to
+		pns = s.last_byte
 	end
 end
 
@@ -590,7 +612,7 @@ private class RopeByteIterator
 	redef fun next do
 		pns += 1
 		pos += 1
-		if pns < subs.item.length then return
+		if pns < subs.item.bytelen then return
 		if not subs.is_ok then return
 		subs.next
 		if not subs.is_ok then return
@@ -932,7 +954,6 @@ private class RopeBytes
 	redef type SELFTYPE: Concat
 
 	redef fun [](i) do
-		var b: Int
 		var nod: String = target
 		loop
 			if nod isa FlatString then return nod.items[i]
@@ -1019,27 +1040,9 @@ class RopeBufferChars
 
 	redef type SELFTYPE: RopeBuffer
 
-	redef fun [](i) do
-		if i < target.str.length then
-			return target.str[i]
-		else
-			# TODO: Fix when supporting UTF-8
-			return target.ns[i - target.str.length].to_i.ascii
-		end
-	end
+	redef fun [](i) do return target[i]
 
-	redef fun []=(i,c) do
-		if i == target.length then target.add c
-		if i < target.str.length then
-			var s = target.str
-			var l = s.substring(0, i)
-			var r = s.substring_from(i + 1)
-			target.str = l + c.to_s + r
-		else
-			# TODO: Fix when supporting UTF-8
-			target.ns[i - target.str.length] = c.to_i.to_b
-		end
-	end
+	redef fun []=(i,c) do target[i] = c
 
 	redef fun add(c) do target.add c
 
@@ -1071,7 +1074,7 @@ class RopeBufferByteIterator
 	# Init the iterator from a RopeBuffer.
 	init(t: RopeBuffer) is old_style_init do
 		ns = t.ns
-		maxpos = t.rpos
+		maxpos = t.bytelen
 		sit = t.str.bytes.iterator
 		pns = t.dumped
 		index = 0
@@ -1080,7 +1083,7 @@ class RopeBufferByteIterator
 	# Init the iterator from a RopeBuffer starting from `pos`.
 	init from(t: RopeBuffer, pos: Int) do
 		ns = t.ns
-		maxpos = t.length
+		maxpos = t.bytelen
 		sit = t.str.bytes.iterator_from(pos)
 		pns = pos - t.str.length
 		index = pos
@@ -1122,19 +1125,19 @@ class RopeBufferByteReverseIterator
 	init(tgt: RopeBuffer) is old_style_init do
 		sit = tgt.str.bytes.reverse_iterator
 		pns = tgt.rpos - 1
-		index = tgt.length - 1
+		index = tgt.bytelen - 1
 		ns = tgt.ns
 	end
 
 	# Init the iterator from a RopeBuffer starting from `pos`.
 	init from(tgt: RopeBuffer, pos: Int) do
-		sit = tgt.str.bytes.reverse_iterator_from(pos - tgt.rpos - tgt.dumped)
-		pns = pos - tgt.str.length
+		sit = tgt.str.bytes.reverse_iterator_from(pos - (tgt.rpos - tgt.dumped))
+		pns = pos - tgt.str.bytelen + tgt.rpos
 		index = pos
 		ns = tgt.ns
 	end
 
-	redef fun is_ok do return index > 0
+	redef fun is_ok do return index >= 0
 
 	redef fun item do
 		if pns >= 0 then return ns[pns]
@@ -1143,7 +1146,7 @@ class RopeBufferByteReverseIterator
 
 	redef fun next do
 		index -= 1
-		if pns >= 0 then
+		if pns > 0 then
 			pns -= 1
 		else
 			sit.next
@@ -1161,7 +1164,7 @@ class RopeBufferBytes
 		if i < target.str.bytelen then
 			return target.str.bytes[i]
 		else
-			return target.ns[i - target.str.length]
+			return target.ns[i - target.str.bytelen]
 		end
 	end
 

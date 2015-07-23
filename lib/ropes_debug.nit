@@ -45,7 +45,7 @@ redef class RopeBuffer
 		s += "n{object_id} -> n{str.object_id} [label = \"str\"];\n"
 		s += str.internal_to_dot
 		s += "n{object_id} -> n{ns.object_id} [label = \"ns\"];\n"
-		s += "n{ns.object_id}[label = \"NativeString\", content=\"{ns.to_s_with_length(rpos)}\"];\n"
+		s += "n{ns.object_id}[label = \"Items\", content=\"{ns}\"];\n"
 		return s
 	end
 end
@@ -53,14 +53,14 @@ end
 redef class FlatString
 	redef fun internal_to_dot: String
 	do
-		return "n{object_id} [label=\"FlatString\\nindex_from = {index_from}\\nindex_to = {index_to}\\nNativeString = {items.to_s_with_length(items.cstring_length)}\"];\n"
+		return "n{object_id} [label=\"FlatString\\nlength = {length}\\nbytelen = {bytelen}\\nfirst_byte = {first_byte}\\nlast_byte = {last_byte}\\nText = {self.escape_to_dot}\"];\n"
 	end
 end
 
 redef class FlatBuffer
 	redef fun internal_to_dot: String
 	do
-		return "n{object_id} [label=\"FlatBuffer\\length = {length}\\ncapacity = {capacity}\\nitems = {items.to_s_with_length(items.cstring_length)}\"];\n"
+		return "n{object_id} [label=\"FlatBuffer\\nbytelen = {bytelen}\\nlength = {length}\\ncapacity = {capacity}\\nText = {escape_to_dot}\"];\n"
 	end
 end
 

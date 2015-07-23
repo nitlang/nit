@@ -45,12 +45,14 @@ abstract class Text
 	#
 	#     assert "12345".length == 5
 	#     assert "".length == 0
+	#     assert "あいうえお".length == 5
 	fun length: Int is abstract
 
 	# Number of bytes in `self`
 	#
-	# TODO: Implement correctly once UTF-8 is supported
-	fun bytelen: Int do return length
+	#     assert "12345".bytelen == 5
+	#     assert "あいうえお".bytelen == 15
+	fun bytelen: Int is abstract
 
 	# Create a substring.
 	#
@@ -58,6 +60,7 @@ abstract class Text
 	#     assert "abcd".substring(-1, 2)     ==  "a"
 	#     assert "abcd".substring(1, 0)      ==  ""
 	#     assert "abcd".substring(2, 5)      ==  "cd"
+	#     assert "あいうえお".substring(1,3) ==  "いうえ"
 	#
 	# A `from` index < 0 will be replaced by 0.
 	# Unless a `count` value is > 0 at the same time.
@@ -934,7 +937,7 @@ abstract class FlatText
 	# Real items, used as cache for to_cstring is called
 	private var real_items: nullable NativeString = null
 
-	# Returns a char* starting at position `index_from`
+	# Returns a char* starting at position `first_byte`
 	#
 	# WARNING: If you choose to use this service, be careful of the following.
 	#
@@ -952,6 +955,8 @@ abstract class FlatText
 	private fun fast_cstring: NativeString is abstract
 
 	redef var length = 0
+
+	redef var bytelen = 0
 
 	redef fun output
 	do
@@ -1000,7 +1005,7 @@ private abstract class StringByteView
 
 	redef fun iterator do return self.iterator_from(0)
 
-	redef fun reverse_iterator do return self.reverse_iterator_from(self.length - 1)
+	redef fun reverse_iterator do return self.reverse_iterator_from(target.bytelen - 1)
 end
 
 # Immutable sequence of characters.
@@ -1329,7 +1334,6 @@ private abstract class BufferByteView
 	super Sequence[Byte]
 
 	redef type SELFTYPE: Buffer
-
 end
 
 redef class Object
@@ -1524,13 +1528,49 @@ redef class Float
 end
 
 redef class Char
-	#     assert 'x'.to_s    == "x"
-	redef fun to_s
-	do
-		var s = new Buffer.with_cap(1)
-		s.chars[0] = self
-		return s.to_s
+
+	# Length of `self` in a UTF-8 String
+	private fun u8char_len: Int do
+		var c = self.ascii
+		if c < 0x80 then return 1
+		if c <= 0x7FF then return 2
+		if c <= 0xFFFF then return 3
+		if c <= 0x10FFFF then return 4
+		# Bad character format
+		return 1
 	end
+
+	#     assert 'x'.to_s    == "x"
+	redef fun to_s do
+		var ln = u8char_len
+		var ns = new NativeString(ln + 1)
+		u8char_tos(ns, ln)
+		return ns.to_s_with_length(ln)
+	end
+
+	private fun u8char_tos(r: NativeString, len: Int) `{
+		r[len] = '\0';
+		switch(len){
+			case 1:
+				r[0] = self;
+				break;
+			case 2:
+				r[0] = 0xC0 | ((self & 0x7C0) >> 6);
+				r[1] = 0x80 | (self & 0x3F);
+				break;
+			case 3:
+				r[0] = 0xE0 | ((self & 0xF000) >> 12);
+				r[1] = 0x80 | ((self & 0xFC0) >> 6);
+				r[2] = 0x80 | (self & 0x3F);
+				break;
+			case 4:
+				r[0] = 0xF0 | ((self & 0x1C0000) >> 18);
+				r[1] = 0x80 | ((self & 0x3F000) >> 12);
+				r[2] = 0x80 | ((self & 0xFC0) >> 6);
+				r[3] = 0x80 | (self & 0x3F);
+				break;
+		}
+	`}
 
 	# Returns true if the char is a numerical digit
 	#
@@ -1538,6 +1578,8 @@ redef class Char
 	#     assert '9'.is_numeric
 	#     assert not 'a'.is_numeric
 	#     assert not '?'.is_numeric
+	#
+	# FIXME: Works on ASCII-range only
 	fun is_numeric: Bool
 	do
 		return self >= '0' and self <= '9'
@@ -1549,6 +1591,8 @@ redef class Char
 	#     assert 'Z'.is_alpha
 	#     assert not '0'.is_alpha
 	#     assert not '?'.is_alpha
+	#
+	# FIXME: Works on ASCII-range only
 	fun is_alpha: Bool
 	do
 		return (self >= 'a' and self <= 'z') or (self >= 'A' and self <= 'Z')
@@ -1561,6 +1605,8 @@ redef class Char
 	#     assert '0'.is_alphanumeric
 	#     assert '9'.is_alphanumeric
 	#     assert not '?'.is_alphanumeric
+	#
+	# FIXME: Works on ASCII-range only
 	fun is_alphanumeric: Bool
 	do
 		return self.is_numeric or self.is_alpha

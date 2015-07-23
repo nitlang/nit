@@ -23,7 +23,7 @@ Read 4 chars: 3 Al
 Read 4 chars: exis
 Read 4 chars:  Laf
 Read 4 chars: erri
-Read 4 chars: ère
+Read 3 chars: ère
 Read 4 chars:  <al
 Read 4 chars: exis
 Read 4 chars: .laf

@@ -1,7 +1,5 @@
 # This file is part of NIT ( http://www.nitlanguage.org ).
 #
-# Copyright 2004-2008 Jean Privat <jean@pryen.org>
-#
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
@@ -14,13 +12,43 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-var n = 10
-if args.not_empty then n = args.first.to_i
+var fb: Buffer = new RopeBuffer
+#alt1 fb = new FlatBuffer
 
-var s = "*"
-var i = 1
-while i < n do
-	s = "Je dis «{s}» et redis «{s}» et trois fois de plus : «{s}{s}{s}».\n"
-	i = i + 1
+for i in [0 .. 64[ do fb.add 'A'
+
+fb[63] = 'あ'
+
+fb[32] = 'き'
+
+fb[0] = '𐏓'
+
+fb[32] = 'Z'
+
+var l = 0
+
+for i in fb.chars do
+	print "Char {l} = {i}"
+	l += 1
 end
-print s.bytelen
+
+l = 0
+
+for i in fb.bytes do
+	print "Byte {l} = {i}"
+	l += 1
+end
+
+l = fb.length - 1
+
+for i in fb.chars.reverse_iterator do
+	print "Char {l} = {i}"
+	l -= 1
+end
+
+l = fb.bytelen - 1
+
+for i in fb.bytes.reverse_iterator do
+	print "Byte {l} = {i}"
+	l -= 1
+end

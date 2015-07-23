@@ -137,10 +137,10 @@ class WebsocketConnection
 			ans_buffer.add(msg.length.to_b)
 		end
 		if msg isa FlatString then
-			ans_buffer.append_ns_from(msg.items, msg.length, msg.index_from)
+			ans_buffer.append_ns_from(msg.items, msg.length, msg.first_byte)
 		else
 			for i in msg.substrings do
-				ans_buffer.append_ns_from(i.as(FlatString).items, i.length, i.as(FlatString).index_from)
+				ans_buffer.append_ns_from(i.as(FlatString).items, i.length, i.as(FlatString).first_byte)
 			end
 		end
 		return ans_buffer

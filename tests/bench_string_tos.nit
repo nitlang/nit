@@ -23,4 +23,4 @@ while i < n do
 	s = ["Je dis «", s, "» et redis «", s, "» et trois fois de plus : «", s, s, s, "».\n"].plain_to_s
 	i = i + 1
 end
-print(s.length)
+print(s.bytelen)
