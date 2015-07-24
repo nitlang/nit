@@ -280,7 +280,7 @@ redef class Sys
 		if lib_paths.is_empty then return map
 
 		# Use grep to find all extern classes implemented in Java
-		var grep_regex = "extern class [a-zA-Z0-9]\\\+[ ]\\\+in[ ]\\\+\"Java\""
+		var grep_regex = "extern class [a-zA-Z0-9_]\\\+[ ]\\\+in[ ]\\\+\"Java\""
 		var grep_args = ["-r", "--with-filename", grep_regex]
 		grep_args.add_all lib_paths
 
@@ -290,7 +290,7 @@ redef class Sys
 		grep.wait
 
 		# Sort out the modules, Nit class names and Java types
-		var regex = """(.+):\\s*extern +class +([a-zA-Z0-9]+) *in *"Java" *`\\{ *([a-zA-Z0-9.$/]+) *`\\}""".to_re
+		var regex = """(.+):\\s*extern +class +([a-zA-Z0-9_]+) *in *"Java" *`\\{ *([a-zA-Z0-9.$/]+) *`\\}""".to_re
 		for line in lines do
 			var matches = line.search_all(regex)
 			for match in matches do
