@@ -15,6 +15,8 @@
 # limitations under the License.
 
 # App audio abstraction
+# Default behaviour is loading the audio from the `assets` folder of the project with its name and extension
+# Platforms implementations can modify this comportement
 #
 # Once the application has started (after `App.setup`)
 # use `App.load_sound` to get a sound
@@ -41,7 +43,7 @@ abstract class PlayableAudio
 	# Is this already loaded ?
 	protected var is_loaded = false is writable
 
-	# load this playable audio
+	# Load this playable audio
 	fun load is abstract
 
 	# Plays the sound

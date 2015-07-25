@@ -15,6 +15,13 @@
 # limitations under the License.
 
 # Android audio services, wraps a part of android audio API
+# This module modifies the default behaviour of the audio loading:
+# It is first loaded from the `res/raw` folder.
+# The file extension is not needed for the `res/raw` loading part.
+# If it didn't work, it is loaded from the `assets` folder.
+# The file extension is needed for the `assets` loading part.
+#
+# `assets` contains the portable version of sounds, since the `res` folder exsists only in android projects.
 #
 # For this example, the sounds "test_sound" and "test_music" are located in the "assets/sounds" folder,
 # they both have ".ogg" extension. "test_sound" is a short sound and "test_music" a music track
@@ -503,28 +510,28 @@ redef class Sound
 
 	redef fun load do
 		if is_loaded then return
-		var nam = app.asset_manager.open_fd(self.name)
-		if nam.is_java_null then
-			self.error = new Error("Failed to get file descriptor for " + self.name)
-			var retval_resources = app.default_soundpool.load_name_rid(app.resource_manager, app.native_activity, self.name)
-			if retval_resources == -1 then
-				self.error = new Error("Failed to load" + self.name)
+		var retval_resources = app.default_soundpool.load_name_rid(app.resource_manager, app.native_activity, self.name.strip_extension)
+		if retval_resources == -1 then
+			self.error = new Error("failed to load" + self.name)
+			var nam = app.asset_manager.open_fd(self.name)
+			if nam.is_java_null then
+				self.error = new Error("Failed to get file descriptor for " + self.name)
 			else
-				self.soundpool_id = retval_resources
-				self.soundpool = app.default_soundpool
-				self.error = null
-				self.soundpool.error = null
+				var retval_assets = app.default_soundpool.load_asset_fd_rid(nam)
+				if retval_assets == -1 then
+					self.error = new Error("Failed to load" + self.name)
+				else
+					self.soundpool_id = retval_assets
+					self.soundpool = app.default_soundpool
+					self.error = null
+					self.soundpool.error = null
+				end
 			end
 		else
-			var retval_assets = app.default_soundpool.load_asset_fd_rid(nam)
-			if retval_assets == -1 then
-				self.error = new Error("Failed to load" + self.name)
-			else
-				self.soundpool_id = retval_assets
-				self.soundpool = app.default_soundpool
-				self.error = null
-				self.soundpool.error = null
-			end
+			self.soundpool_id = retval_resources
+			self.soundpool = app.default_soundpool
+			self.error = null
+			self.soundpool.error = null
 		end
 		is_loaded = true
 	end
@@ -567,26 +574,26 @@ redef class Music
 
 	redef fun load do
 		if is_loaded then return
-		var nam = app.asset_manager.open_fd(self.name)
-		if nam.is_java_null then
-			self.error = new Error("Failed to get file descriptor for " + self.name)
-			var mp_sound_resources = app.default_mediaplayer.load_sound(app.resource_manager.raw_id(self.name), app.native_activity)
-			if mp_sound_resources.error != null then
-				self.error = mp_sound_resources.error
+		var mp_sound_resources = app.default_mediaplayer.load_sound(app.resource_manager.raw_id(self.name.strip_extension), app.native_activity)
+		if mp_sound_resources.error != null then
+			self.error = mp_sound_resources.error
+			var nam = app.asset_manager.open_fd(self.name)
+			if nam.is_java_null then
+				self.error = new Error("Failed to get file descriptor for " + self.name)
 			else
-				self.media_player = app.default_mediaplayer
-				self.error = null
-				self.media_player.error = null
+				var mp_sound_assets = app.default_mediaplayer.data_source_fd(nam)
+				if mp_sound_assets.error != null then
+					self.error = mp_sound_assets.error
+				else
+					self.media_player = app.default_mediaplayer
+					self.error = null
+					self.media_player.error = null
+				end
 			end
 		else
-			var mp_sound_assets = app.default_mediaplayer.data_source_fd(nam)
-			if mp_sound_assets.error != null then
-				self.error = mp_sound_assets.error
-			else
-				self.media_player = app.default_mediaplayer
-				self.error = null
-				self.media_player.error = null
-			end
+			self.media_player = app.default_mediaplayer
+			self.error = null
+			self.media_player.error = null
 		end
 		is_loaded = true
 	end
@@ -649,7 +656,7 @@ redef class App
 
 	# Retrieves a music with a media player in the `assets` folder using its name.
 	# Used to play long sounds or musics, can't play multiple sounds simultaneously
-	redef fun load_music(path: String): Music do
+	redef fun load_music(path) do
 		var fd = asset_manager.open_fd(path)
 		if not fd.is_java_null then
 			return add_to_sounds(default_mediaplayer.data_source_fd(fd)).as(Music)
