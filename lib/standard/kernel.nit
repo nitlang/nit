@@ -11,8 +11,11 @@
 # You  are  allowed  to  redistribute it and sell it, alone or is a part of
 # another product.
 
-# Most minimal classes and methods.
-# This module is the root of the standard module hierarchy.
+# Most basic classes and methods.
+#
+# This module is the root of the module hierarchy.
+# It provides a very minimal set of classes and services used as a
+# foundation to define other classes and methods.
 module kernel
 
 import end # Mark this module is a top level one. (must be only one)
@@ -27,9 +30,13 @@ in "C" `{
 ###############################################################################
 
 # The root of the class hierarchy.
-# Each class implicitly specialize Object.
 #
-# Currently, Object is also used to collect all top-level methods.
+# Each other class implicitly specializes Object,
+# therefore the services of Object are inherited by every other class and are usable
+# on each value, including primitive types like integers (`Int`), strings (`String`) and arrays (`Array`).
+#
+# Note that `nullable Object`, not `Object`, is the root of the type hierarchy
+# since the special value `null` is not considered as an instance of Object.
 interface Object
 	# Type of this instance, automatically specialized in every class
 	#
@@ -53,33 +60,124 @@ interface Object
 	# `SELF`, pretty much the same things as you would do with parameter types.
 	type SELF: Object
 
-	# The unique object identifier in the class.
-	# Unless specific code, you should not use this method.
-	# The identifier is used internally to provide a hash value.
+	# An internal hash code for the object based on its identity.
+	#
+	# Unless specific code, you should not use this method but
+	# use `hash` instead.
+	#
+	# As its name hints it, the internal hash code, is used internally
+	# to provide a hash value.
+	# It is also used by the `inspect` method to loosely identify objects
+	# and helps debugging.
+	#
+	# ~~~
+	# var a = "Hello"
+	# var b = a
+	# assert a.object_id == b.object_id
+	# ~~~
+	#
+	# The specific details of the internal hash code it let to the specific
+	# engine. The rules are the following:
+	#
+	# * The `object_id` MUST be invariant for the whole life of the object.
+	# * Two living instances of the same classes SHOULD NOT share the same `object_id`.
+	# * Two instances of different classes MIGHT share the same `object_id`.
+	# * The `object_id` of a garbage-collected instance MIGHT be reused by new instances.
+	# * The `object_id` of an object MIGHT be non constant across different executions.
+	#
+	# For instance, the `nitc` compiler uses the address of the object in memory
+	# as its `object_id`.
+	#
+	# TODO rename in something like `internal_hash_code`
 	fun object_id: Int is intern
 
 	# Return true if `self` and `other` have the same dynamic type.
-	# Unless specific code, you should not use this method.
+	#
+	# ~~~
+	# assert 1.is_same_type(2)
+	# assert "Hello".is_same_type("World")
+	# assert not "Hello".is_same_type(2)
+	# ~~~
+	#
+	# The method returns false if the dynamic type of `other` is a subtype of the dynamic type of `self`
+	# (or the other way around).
+	#
+	# Unless specific code, you should not use this method because it is inconsistent
+	# with the fact that a subclass can be used in lieu of a superclass.
 	fun is_same_type(other: Object): Bool is intern
 
-	# Return true if `self` and `other` are the same instance.
-	# Unless specific code, you should use `==` instead.
+	# Return true if `self` and `other` are the same instance (i.e. same identity).
+	#
+	# ~~~
+	# var a = new Buffer
+	# var b = a
+	# var c = new Buffer
+	# assert a.is_same_instance(b)
+	# assert not a.is_same_instance(c)
+	# assert a == c # because both buffers are empty
+	# ~~~
+	#
+	# Obviously, the identity of an object is preserved even if the object is mutated.
+	#
+	# ~~~
+	# var x = [1]
+	# var y = x
+	# x.add 2
+	# assert x.is_same_instance(y)
+	# ~~~
+	#
+	# Unless specific code, you should use `==` instead of `is_same_instance` because
+	# most of the time is it the semantic (and user-defined) comparison that make sense.
+	#
+	# Moreover, relying on `is_same_instance` on objects you do not control
+	# might have unexpected effects when libraries reuse objects or intern them.
 	fun is_same_instance(other: nullable Object): Bool is intern
 
 	# Have `self` and `other` the same value?
 	#
-	# The exact meaning of "same value" is left to the subclasses.
-	# Implicitly, the default implementation, is `is_same_instance`
+	# ~~~
+	# assert 1 + 1 == 2
+	# assert not 1 == "1"
+	# assert 1.to_s == "1"
+	# ~~~
+	#
+	# The exact meaning of *same value* is left to the subclasses.
+	# Implicitly, the default implementation, is `is_same_instance`.
+	#
+	# The laws of `==` are the following:
+	#
+	# * reflexivity `a.is_same_instance(b) implies a == b`
+	# * symmetry: `(a == b) == (b == a)`
+	# * transitivity: `(a == b) and (b == c) implies (a == c)`
+	#
+	# `==` might not be constant on some objects overtime because of their evolution.
+	#
+	# ~~~
+	# var a = [1]
+	# var b = [1]
+	# var c = [1,2]
+	# assert a == b and not a == c
+	# a.add 2
+	# assert not a == b and a == c
+	# ~~~
+	#
+	# Lastly, `==` is highly linked with `hash` and a specific redefinition of `==` should
+	# usually be associated with a specific redefinition of `hash`.
+	#
+	# ENSURE `result implies self.hash == other.hash`
 	fun ==(other: nullable Object): Bool do return self.is_same_instance(other)
 
 	# Have `self` and `other` different values?
 	#
-	# != is equivalent with "not ==".
+	# `!=` is equivalent with `not ==`.
 	fun !=(other: nullable Object): Bool do return not (self == other)
 
 	# Display self on stdout (debug only).
+	#
 	# This method MUST not be used by programs, it is here for debugging
-	# only and can be removed without any notice
+	# only and can be removed without any notice.
+	#
+	# TODO: rename to avoid blocking a good identifier like `output`.
 	fun output
 	do
 		'<'.output
@@ -88,26 +186,112 @@ interface Object
 	end
 
 	# Display class name on stdout (debug only).
+	#
 	# This method MUST not be used by programs, it is here for debugging
-	# only and can be removed without any notice
+	# only and can be removed without any notice.
+	#
+	# TODO: rename to avoid blocking a good identifier like `output`.
 	fun output_class_name is intern
 
 	# The hash code of the object.
-	# Assuming that a == b -> a.hash == b.hash
 	#
-	# Without redefinition, it is based on the `object_id` of the instance.
+	# The hash code is used in many data-structures and algorithms to identify objects that might be equal.
+	# Therefore, the precise semantic of `hash` is highly linked with the semantic of `==`
+	# and the only law of `hash` is that `a == b implies a.hash == b.hash`.
+	#
+	# ~~~
+	# assert (1+1).hash == 2.hash
+	# assert 1.to_s.hash == "1".hash
+	# ~~~
+	#
+	# `hash` (like `==`) might not be constant on some objects over time because of their evolution.
+	#
+	# ~~~
+	# var a = [1]
+	# var b = [1]
+	# var c = [1,2]
+	# assert a.hash == b.hash
+	# a.add 2
+	# assert a.hash == c.hash
+	# # There is a very high probability that `b.hash != c.hash`
+	# ~~~
+	#
+	# A specific redefinition of `==` should usually be associated with a specific redefinition of `hash`.
+	# Note that, unfortunately, a correct definition of `hash` that is lawful with `==` is sometime tricky
+	# and a cause of bugs.
+	#
+	# Without redefinition, `hash` is based on the `object_id` of the instance.
 	fun hash: Int do return object_id / 8
 end
 
 # The main class of the program.
-# `Sys` is a singleton class, its only instance is `sys` defined in `Object`.
-# `sys` is used to invoke methods on the program on the system.
+#
+# `Sys` is a singleton class, its only instance is accessible from everywhere with `sys`.
+#
+# Because of this, methods that should be accessible from everywhere, like `print` or `exit`,
+# are defined in `Sys`.
+# Moreover, unless there is an ambiguity with `self`, the receiver of a call to these methods is implicitly `sys`.
+# Basically it means that the two following instructions are equivalent.
+#
+# ~~~nit
+# print "Hello World"
+# sys.print "Hello World"
+# ~~~
+#
+# ## Methods Implicitly Defined in Sys
+#
+# `Sys` is the class where are defined top-level methods,
+# i.e. those defined outside of any class like in a procedural language.
+# Basically it means that
+#
+# ~~~nitish
+# redef class Sys
+#    fun foo do print "hello"
+# end
+# ~~~
+#
+# is equivalent with
+#
+# ~~~nitish
+# fun foo print "hello"
+# ~~~
+#
+# As a corollary, in a top-level method, `self` (the current receiver) is always `sys`.
 class Sys
-	# Instructions outside classes implicitly redefine this method.
+	# The main method of a program.
+	#
+	# In a module, the instructions defined outside any classes or methods
+	# (usually called the *main* of the module) is
+	# an implicit definition of this `main` method.
+	# Basically it means that the following program
+	#
+	# ~~~nit
+	# print "Hello World"
+	# ~~~
+	#
+	# is equivalent with
+	#
+	# ~~~nit
+	# redef class Sys
+	#    redef fun main do
+	#       print "Hello World"
+	#    end
+	# end
+	# ~~~
 	fun main do end
 
 	# The entry point for the execution of the whole program.
-	# Its job is to call `main` but some modules may want to refine it
+	#
+	# When a program starts, the following implicit sequence of instructions is executed
+	#
+	# ~~~nitish
+	# sys = new Sys
+	# sys.run
+	# ~~~
+	#
+	# Whereas the job of the `run` method is just to execute `main`.
+	#
+	# The only reason of the existence of `run` is to allow modules to refine it
 	# and inject specific work before or after the main part.
 	fun run do main
 
