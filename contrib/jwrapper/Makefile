@@ -20,12 +20,41 @@ clean:
 
 check: bin/jwrapper tests/wildcards.javap
 	mkdir -p tmp
+	bin/jwrapper -v -u comment -o tests/long.nit tests/long.javap
+	../../bin/nitpick -q tests/long.nit
+	bin/jwrapper -v -u comment -o tests/inits.nit tests/inits.javap
+	../../bin/nitpick -q tests/inits.nit
+	bin/jwrapper -v -u comment -o tests/testjvm.nit tests/testjvm.javap
+	../../bin/nitpick -q tests/testjvm.nit
+	bin/jwrapper -v -u comment -o tests/many.nit tests/many.javap
+	../../bin/nitpick -q tests/many.nit
 	bin/jwrapper -v -u comment -o tests/wildcards.nit tests/wildcards.javap
 	../../bin/nitpick -q tests/wildcards.nit
+	make -C examples/queue/ check
 
 check-libs: bin/jwrapper
 	# This config dependent rule must be tweaked according to each system
-	bin/jwrapper -v -u ignore -o tests/rt.nit /usr/lib/jvm/default-java/jre/lib/rt.jar
-	bin/jwrapper -v -u ignore -o tests/java_tools.nit /usr/lib/jvm/default-java/lib/tools.jar
-	bin/jwrapper -v -u ignore -o tests/sablecc.nit ~/apps/sablecc-3-beta.3.altgen.20041114/lib/sablecc.jar
-	bin/jwrapper -v -u ignore -o tests/android.nit ~/sdks/android-sdk/platforms/android-10/android.jar
+
+	# The full local Java standard library
+	bin/jwrapper -v -u comment -o tests/rt_full.nit /usr/lib/jvm/default-java/jre/lib/rt.jar
+	echo "+ Disabled functions: `grep '#	fun' tests/rt_full.nit | wc -l` / `grep '^	fun' tests/rt_full.nit | wc -l`"
+	nitpick tests/rt_full.nit
+
+	# Only the `java` namespace of the standard library to avoid conflicts with other libs
+	bin/jwrapper -v -u comment -o tests/rt.nit /usr/lib/jvm/default-java/jre/lib/rt.jar -r ^java
+	echo "+ Disabled functions: `grep '#	fun' tests/rt.nit | wc -l` / `grep '^	fun' tests/rt.nit | wc -l`"
+	nitpick tests/rt.nit
+
+	# tools.jar, not using the standard library because of conflicts on sun.tools.jar.*
+	bin/jwrapper -v -u comment -o tests/java_tools.nit /usr/lib/jvm/default-java/lib/tools.jar -i tests/rt.nit
+	sed -i -e "s/import java/import java\nimport rt/" tests/java_tools.nit
+	echo "+ Disabled functions: `grep '#	fun' tests/java_tools.nit | wc -l` / `grep '^	fun' tests/java_tools.nit | wc -l`"
+	nitpick tests/java_tools.nit
+
+	# SableCC using the standard Java library
+	bin/jwrapper -v -u comment -o tests/sablecc.nit ~/apps/sablecc-3-beta.3.altgen.20041114/lib/sablecc.jar -i tests/rt.nit
+	sed -i -e "s/import java/import java\nimport rt/" tests/sablecc.nit
+	echo "+ Disabled functions: `grep '#	fun' tests/sablecc.nit | wc -l` / `grep '^	fun' tests/sablecc.nit | wc -l`"
+	nitpick tests/sablecc.nit
+
+	make -C examples/android_api/ check

@@ -28,212 +28,32 @@ intrude import model
 class JavaVisitor
 	super Visitor
 
-	var converter: JavaTypeConverter
-
 	# Model of all the analyzed classes
 	var model: JavaModel
 
+	# Java class in construction
 	var java_class: JavaClass is noinit
 
-	var declaration_type: nullable String =  null
-	var declaration_element: nullable String = null
-	var class_type: JavaType is noinit
-
-	var variable_id = ""
-	var variable_type = new JavaType(self.converter) is lazy
-
-	var is_generic_param = false
-	var is_generic_id = false
-	var generic_id = ""
-	var gen_params_index = 0
-
-	# Used to resolve generic return types (T -> foo.faz.Bar)
-	var generic_map = new HashMap[String, Array[String]]
-
-	var is_primitive_array = false
-
-	var method_id = ""
-	var method_return_type = new JavaType(self.converter) is lazy
-	var method_params = new Array[JavaType]
-	var param_index = 0
-
 	redef fun visit(n) do n.accept_visitor(self)
-
-	# Add the identifier from `token` to the current context
-	fun add_identifier(token: String)
-	do
-		if declaration_type == "variable" then
-			if declaration_element == "type" then
-				if is_generic_param then
-					variable_type.generic_params[gen_params_index].identifier.add token
-				else
-					variable_type.identifier.add(token)
-				end
-			end
-		else if declaration_type == "method" then
-			if declaration_element == "return_type" then
-				if is_generic_param then
-					method_return_type.generic_params[gen_params_index].identifier.add token
-				else
-					method_return_type.identifier.add(token)
-				end
-			else if declaration_element == "parameter_list" then
-				if is_generic_param then
-					method_params[param_index].generic_params[gen_params_index].identifier.add token
-				else
-					method_params[param_index].identifier.add(token)
-				end
-			end
-		end
-	end
 end
 
 redef class Node
-	fun accept_visitor(v: JavaVisitor) do visit_children(v)
+	private fun accept_visitor(v: JavaVisitor) do visit_children(v)
 end
 
-redef class Nidentifier
-	redef fun accept_visitor(v)
-	do
-		if v.declaration_type == "class_header" then
-			# Class declaration
-			if v.declaration_element == "id" then
-				v.class_type.identifier.add text
-				return
-			end
-
-		else if v.declaration_type == "variable" then
-			# Attribute declaration
-			if v.declaration_element == "id" then
-				v.variable_id += text
-				return
-			end
-
-		else if v.declaration_type == "method" then
-
-			if v.declaration_element == "id" then
-				# Method id
-				v.method_id = self.text
-				return
-			else if v.declaration_element == "return_type" then
-				if self.text == "void" then
-					# void return type
-					v.method_return_type.is_void = true
-					return
-				end
-			else if v.declaration_element == "parameter_list" then
-				# Parameters, leave it to add_identifier
-
-			else if v.is_generic_param then
-				# Creates a map to resolve generic return types
-				# Example : public **<T extends android/os/Bundle>** T foo();
-				if v.is_generic_id then
-					v.generic_id = self.text
-					v.generic_map[self.text] = new Array[String]
-
-					if not v.method_return_type.has_unresolved_types then v.method_return_type.has_unresolved_types = true
-				else
-					v.generic_map[v.generic_id].add text
-				end
-			end
-		end
-
-		v.add_identifier text
-	end
-end
-
-# Primitive array node
-redef class Nbrackets
-	redef fun accept_visitor(v)
-	do
-		if v.declaration_type == "variable" then
-			if v.declaration_element == "type" then
-				if v.is_generic_param then
-					v.variable_type.generic_params[v.gen_params_index].array_dimension += 1
-				else
-					v.variable_type.array_dimension += 1
-				end
-			end
-
-		else if v.declaration_type == "method" then
-
-			if v.declaration_element == "return_type" then
-				if v.is_generic_param then
-					v.method_return_type.generic_params[v.gen_params_index].array_dimension += 1
-				else
-					v.method_return_type.array_dimension += 1
-				end
-			else if v.declaration_element == "parameter_list" then
-				if v.is_generic_param then
-					v.method_params[v.param_index].generic_params[v.gen_params_index].array_dimension += 1
-				else
-					v.method_params[v.param_index].array_dimension += 1
-				end
-			end
-
-		end
-
-		super
-	end
-end
-
-redef class N_39dchar_39d
-	redef fun accept_visitor(v) do v.add_identifier text
-end
-
-redef class N_39dboolean_39d
-	redef fun accept_visitor(v) do v.add_identifier text
-end
-
-redef class N_39dfloat_39d
-	redef fun accept_visitor(v) do v.add_identifier text
-end
-
-redef class N_39ddouble_39d
-	redef fun accept_visitor(v) do v.add_identifier text
-end
-
-redef class N_39dbyte_39d
-	redef fun accept_visitor(v) do v.add_identifier text
-end
-
-redef class N_39dshort_39d
-	redef fun accept_visitor(v) do v.add_identifier text
-end
-
-redef class N_39dint_39d
-	redef fun accept_visitor(v) do v.add_identifier text
-end
-
-redef class N_39dlong_39d
-	redef fun accept_visitor(v) do v.add_identifier text
-end
-
-redef class Nwildcard
-	# TODO use the lower bound
-	redef fun accept_visitor(v) do v.add_identifier "Object"
-end
-
-#                                  #
-#    C L A S S     H E A D E R     #
-#                                  #
+# ---
+# Class Header
 
 redef class Nclass_declaration
 	redef fun accept_visitor(v)
 	do
-		v.java_class = new JavaClass
-		v.model.classes.add v.java_class
-		v.class_type = new JavaType(v.converter)
+		var jtype = n_full_class_name.to_java_type
 
-		v.declaration_type = "class_header"
-		v.declaration_element = "id"
+		v.java_class = new JavaClass(jtype)
+		v.model.add_class v.java_class
+
+		# Visit all properties
 		super
-
-		# Exit class declaration
-		v.declaration_type = null
-		v.declaration_element = null
-
-		v.java_class.class_type = v.class_type
 	end
 end
 
@@ -241,9 +61,7 @@ end
 redef class Nextends_declaration
 	redef fun accept_visitor(v)
 	do
-		v.declaration_element = "extends"
-		super
-		v.declaration_element = null
+		# TODO
 	end
 end
 
@@ -251,33 +69,29 @@ end
 redef class Nimplements_declaration
 	redef fun accept_visitor(v)
 	do
-		v.declaration_element = "implements"
-		super
-		v.declaration_element = null
+		# TODO
 	end
 end
 
-#                                            #
-# P R O P E R T Y    D E C L A R A T I O N S #
-#                                            #
+# ---
+# Properties
 
 # Method declaration
 redef class Nproperty_declaration_method
 	redef fun accept_visitor(v)
 	do
-		v.declaration_type = "method"
-		v.declaration_element = null
-		super
-		v.declaration_type = null
+		var id = n_identifier.text
+		var return_jtype = n_type.to_java_type
 
-		if v.method_return_type.has_unresolved_types then v.method_return_type.resolve_types(v.generic_map)
+		# Collect parameters
+		var n_parameters = n_parameters
+		var params
+		if n_parameters != null then
+			params = n_parameters.to_a
+		else params = new Array[JavaType]
 
-		var method = new JavaMethod(v.method_return_type, v.method_params.clone)
-		v.java_class.methods[v.method_id].add method
-
-		v.method_params.clear
-		v.method_id = ""
-		v.method_return_type = new JavaType(v.converter)
+		var method = new JavaMethod(return_jtype, params)
+		v.java_class.methods[id].add method
 	end
 end
 
@@ -285,9 +99,15 @@ end
 redef class Nproperty_declaration_constructor
 	redef fun accept_visitor(v)
 	do
-		v.declaration_type = "constructor"
-		super
-		v.declaration_type = null
+		# Collect parameters
+		var n_parameters = n_parameters
+		var params
+		if n_parameters != null then
+			params = n_parameters.to_a
+		else params = new Array[JavaType]
+
+		var method = new JavaConstructor(params)
+		v.java_class.constructors.add method
 	end
 end
 
@@ -295,14 +115,14 @@ end
 redef class Nproperty_declaration_attribute
 	redef fun accept_visitor(v)
 	do
-		v.declaration_type = "variable"
-		super
-		v.declaration_type = null
+		var id = n_identifier.text
+		var jtype = n_type.to_java_type
 
-		v.java_class.attributes[v.variable_id] = v.variable_type
+		# Manually count the array depth as it is after the id
+		var brackets = n_brackets
+		if brackets != null then jtype.array_dimension += brackets.children.length
 
-		v.variable_id = ""
-		v.variable_type = new JavaType(v.converter)
+		v.java_class.attributes[id] = jtype
 	end
 end
 
@@ -310,153 +130,130 @@ end
 redef class Nproperty_declaration_static
 	redef fun accept_visitor(v)
 	do
-		v.declaration_type = "static"
-		super
-		v.declaration_type = null
+		# TODO
 	end
 end
 
-# Identifier of a variable
-redef class Nattribute_id
-	redef fun accept_visitor(v)
-	do
-		v.declaration_element = "id"
-		super
-		v.declaration_element = null
-	end
-end
-
-# Identifier of the method
-redef class Nmethod_id
-	redef fun accept_visitor(v)
-	do
-		v.declaration_element = "id"
-		super
-		v.declaration_element = null
-	end
-end
+# ---
+# Services
 
 redef class Ntype
-	redef fun accept_visitor(v)
+	private fun to_java_type: JavaType
 	do
-		if v.declaration_type == "variable" and v.declaration_element != "id" then
-			v.declaration_element = "type"
-		end
+		var jtype = n_base_type.to_java_type
 
-		if v.declaration_type == "method" and v.declaration_element == null then
-			# Makes sure it is not the generic return type definition
-			if not (v.method_return_type.identifier.is_empty and v.is_generic_param) then
-				v.declaration_element = "return_type"
-			end
-		end
+		var brackets = n_brackets
+		if brackets != null then jtype.array_dimension += brackets.children.length
 
-		super
-
-		if v.declaration_element == "variable" then
-			v.declaration_element = null
-		end
+		return jtype
 	end
 end
 
-redef class Ngeneric_param
-	redef fun accept_visitor(v)
+redef class Nbase_type
+	private fun to_java_type: JavaType
 	do
-		# Ignore the weird generic return type declaration
-		if v.declaration_type == "method" then
-			if v.declaration_element == null then
-				v.is_generic_param = true
-			else
-				v.is_generic_param = true
-				v.gen_params_index = 0
-
-				if v.declaration_element == "return_type" then
-					v.method_return_type.generic_params = new Array[JavaType]
-				else if v.declaration_element == "parameter_list" then
-					v.method_params[v.param_index].generic_params = new Array[JavaType]
-				end
-			end
-		else if v.declaration_type == "variable" then
-			if v.declaration_element == "type" then
-				v.is_generic_param = true
-				v.gen_params_index = 0
-				v.variable_type.generic_params = new Array[JavaType]
-			end
-		end
-
-		super
-
-		v.declaration_element = null
-		v.is_generic_param = false
+		# By default, everything is bound by object
+		# TODO use a more precise bound
+		var jtype = new JavaType
+		jtype.identifier.add_all(["java", "lang", "object"])
+		return jtype
 	end
 end
 
-redef class Ngeneric_identifier
-	redef fun accept_visitor(v)
+redef class Nbase_type_class
+	redef fun to_java_type do return n_full_class_name.to_java_type
+end
+
+redef class Nbase_type_primitive
+	redef fun to_java_type
 	do
-		if v.declaration_type == "method" then
-			if v.declaration_element == null then
-				v.is_generic_id = true
-			end
+		# All the concrete nodes under this production are tokens
+		for node in depth do
+			if not node isa NToken then continue
+
+			var jtype = new JavaType
+			jtype.identifier.add node.text
+			return jtype
 		end
 
-		super
-
-		v.is_generic_id = false
-
+		abort
 	end
 end
 
-redef class Nparameter_list
-	redef fun accept_visitor(v)
+redef class Nbase_type_void
+	redef fun to_java_type
 	do
-		v.declaration_element = "parameter_list"
-		v.param_index = 0
-		super
-		v.declaration_element = null
-		v.param_index = 0
+		var jtype = new JavaType
+		jtype.is_void = true
+		return jtype
+	end
+end
+
+redef class Nfull_class_name
+	# All the identifiers composing this class name
+	private fun to_a: Array[String] is abstract
+
+	# Access `n_class_name` on both alternatives
+	private fun n_class_name_common: Nclass_name is abstract
+
+	private fun to_java_type: JavaType
+	do
+		var jtype = new JavaType
+		jtype.identifier = to_a
+
+		# Generic parameters
+		var n_params = n_class_name_common.n_generic_parameters
+		if n_params != null then jtype.generic_params = n_params.n_parameters.to_a
+
+		return jtype
+	end
+end
+
+redef class Nfull_class_name_head
+	redef fun n_class_name_common do return n_class_name
+
+	redef fun to_a do return [n_class_name.n_identifier.text]
+end
+
+redef class Nfull_class_name_tail
+	redef fun n_class_name_common do return n_class_name
+
+	redef fun to_a
+	do
+		var a = n_full_class_name.to_a
+		a.add n_class_name.n_identifier.text
+		return a
+	end
+end
+
+redef class Nparameters
+	# Get the types composing this list of parameters
+	#
+	# This is used both on methods signatures and type parameters.
+	private fun to_a: Array[JavaType] is abstract
+end
+
+redef class Nparameters_head
+	redef fun to_a do return [n_parameter.to_java_type]
+end
+
+redef class Nparameters_tail
+	redef fun to_a
+	do
+		var a = n_parameters.to_a
+		a.add n_parameter.to_java_type
+		return a
 	end
 end
 
 redef class Nparameter
-	redef fun accept_visitor(v)
+	private fun to_java_type: JavaType
 	do
-		if v.declaration_type == "method" then
-			if v.declaration_element == "parameter_list" then
-				if v.is_generic_param then
-					v.method_params[v.param_index].generic_params.add(new JavaType(v.converter))
+		var jtype = n_type.to_java_type
 
-					super
+		var dots = n_dots
+		if dots != null then jtype.is_vararg = true
 
-					v.gen_params_index += 1
-				else
-					v.method_params.add(new JavaType(v.converter))
-
-					super
-
-					v.param_index += 1
-				end
-			else if v.declaration_element == "return_type" and v.is_generic_param then
-
-				v.method_return_type.generic_params.add(new JavaType(v.converter))
-
-				super
-
-				v.gen_params_index += 1
-
-			# For generic return type definition
-			else if v.declaration_element == null then
-				super
-			end
-		else if v.declaration_type == "variable" then
-			if v.declaration_element == "type" and v.is_generic_param then
-				v.variable_type.generic_params.add(new JavaType(v.converter))
-
-				super
-
-				v.gen_params_index += 1
-			end
-		else
-			super
-		end
+		return jtype
 	end
 end

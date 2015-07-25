@@ -19,14 +19,19 @@
 module model
 
 import more_collections
+import opts
 
 import jtype_converter
 
 class JavaType
-	private var converter: JavaTypeConverter
 	var identifier = new Array[String]
 	var generic_params: nullable Array[JavaType] = null
+
+	# Is this a void return type?
 	var is_void = false
+
+	# Is this type a vararg?
+	var is_vararg = false is writable
 
 	# Has some generic type to be resolved (T extends foo => T is resolved to foo)
 	var has_unresolved_types = false
@@ -40,8 +45,6 @@ class JavaType
 	fun full_id: String do return identifier.join(".")
 	fun id: String do return identifier.last.replace("$", "")
 
-	init(converter: JavaTypeConverter) do self.converter = converter
-
 	fun return_cast: String do return converter.cast_as_return(self.id)
 
 	fun param_cast: String
@@ -53,67 +56,33 @@ class JavaType
 		return converter.cast_as_param(self.id)
 	end
 
-	fun to_nit_type: NitType
+	# Name to give an extern class wrapping this type
+	fun extern_name: String
 	do
-		var nit_type: NitType
-		var type_id = null
-
-		if not is_primitive_array then
-			type_id = converter.to_nit_type(self.id)
-		end
-
-		if type_id == null then
-			nit_type = self.extern_name
-			nit_type.is_complete = false
-		else
-			nit_type = new NitType(type_id)
-		end
-
-		if not self.has_generic_params then return nit_type
-
-		nit_type.generic_params = new Array[NitType]
-
-		for param in generic_params do
-			var nit_param = param.to_nit_type
-
-			nit_type.generic_params.add(nit_param)
-
-			if not nit_param.is_complete then nit_type.is_complete = false
-		end
-
-		return nit_type
-	end
-
-	fun is_collection: Bool do return is_primitive_array or collections_list.has(self.id)
-
-	fun is_wrapped: Bool do return find_extern_class != null
-
-	fun extern_name: NitType
-	do
-		if is_wrapped then return new NitType.with_module(find_extern_class.as(not null).first, find_extern_class.as(not null).second)
-
 		var name
-		if is_primitive_array then
-			# Primitive arrays have a special naming convention
-			name = "Java" + extern_class_name.join.capitalized + "Array"
+		var prefix = extern_class_prefix
+		if prefix == null then
+			# Use the namespace, e.g. java.lang.String -> Java_lang_String
+			assert not identifier.is_empty
+			if identifier.length == 1 then
+				name = identifier.last
+			else
+				var first = identifier.first
+				var last = identifier.last
+				var mid = identifier.subarray(1, identifier.length-2)
+				name = first.simple_capitalized + "_"
+				if mid.not_empty then name += mid.join("_") + "_"
+				name += last
+			end
 		else
-			name = "Java" + extern_class_name.join
+			# Use the prefix and the short class name
+			# e.g. given the prefix Native: java.lang.String -> NativeString
+			name = prefix + id
 		end
 
 		name = name.replace("-", "_")
-
-		var nit_type = new NitType(name)
-		nit_type.is_complete = false
-		return nit_type
-	end
-
-	fun to_cast(jtype: String, is_param: Bool): String
-	do
-		if is_param then
-			return converter.cast_as_param(jtype)
-		end
-
-		return converter.cast_as_return(jtype)
+		name = name.replace("$", "_")
+		return name
 	end
 
 	redef fun to_s
@@ -152,148 +121,40 @@ class JavaType
 		end
 	end
 
-	private fun extern_class_name: Array[String]
-	do
-		var class_name = new Array[String]
-		class_name.add(self.id)
+	# Comparison based on fully qualified named
+	redef fun ==(other) do return other isa JavaType and
+		self.full_id == other.full_id and
+		self.is_primitive_array == other.is_primitive_array
 
-		if not self.has_generic_params then return class_name
-
-		class_name.add "Of"
-
-		for param in generic_params do class_name.add_all param.extern_class_name
-
-		return class_name
-	end
-
-	# Search inside `lib/android` directory for already wrapped classes
-	# If found, contains the class identifier and the Nit Module name
-	var find_extern_class: nullable Couple[String, NitModule] is lazy do
-
-		var regex = "extern class [a-zA-Z1-9]\\\+[ ]\\\+in[ ]\\\+\"Java\"[ ]*`\{[ ]*" + self.to_s + "\\\+[ ]*`\}"
-		var nit_dir = "NIT_DIR".environ
-		if nit_dir.is_empty then return null
-
-		var grep = new ProcessReader("grep", "-r", regex, nit_dir/"lib/android/", nit_dir/"lib/java/")
-		var to_eat = ["private", "extern", "class"]
-
-		var output = grep.read_line
-
-		var output_class = output.substring_from(output.index_of(':') + 1)
-		var tokens = output_class.split(" ")
-
-		var nclass_name = ""
-
-		for token in tokens do
-			if to_eat.has(token) then continue
-			nclass_name = token
-			break
-		end
-
-		if nclass_name == "" then return null
-
-		var str = output.substring(0, output.search(".nit").from)
-		str = str.substring_from(str.last_index_of('/') + 1)
-		var mod = new NitModule(str)
-
-		return new Couple[String, NitModule](nclass_name, mod)
-	end
-
-	# Comparison based on fully qualified named and generic params
-	# Ignores primitive array so `a.b.c[][] == a.b.c`
-	redef fun ==(other)
-	do
-		if other isa JavaType then
-			return self.repr == other.repr
-		end
-		return false
-	end
-
-	redef fun hash do return self.repr.hash
-
-	private fun repr: String
-	do
-		var id = self.full_id
-
-		if self.has_generic_params then
-			var gen_list = new Array[String]
-
-			for param in generic_params do
-				gen_list.add(param.to_s)
-			end
-
-			id += "<{gen_list.join(", ")}>"
-		end
-
-		return id
-	end
-
-	var collections_list: Array[String] is lazy do return ["List", "ArrayList", "LinkedList", "Vector", "Set", "SortedSet", "HashSet", "TreeSet", "LinkedHashSet", "Map", "SortedMap", "HashMap", "TreeMap", "Hashtable", "LinkedHashMap"]
-	var iterable: Array[String] is lazy do return ["ArrayList", "Set", "HashSet", "LinkedHashSet", "LinkedList", "Stack", "TreeSet", "Vector"]
-	var maps: Array[String] is lazy do return ["Map", "SortedMap", "HashMap", "TreeMap", "Hashtable", "LinkedHashMap"]
+	redef fun hash do return self.full_id.hash
 end
 
 class NitType
+	# Nit class name
 	var identifier: String
-	var arg_id: String
-	var generic_params: nullable Array[NitType] = null
 
 	# If this NitType was found in `lib/android`, contains the module name to import
 	var mod: nullable NitModule
 
-	# Returns `true` if all types have been successfully converted to Nit type
-	var is_complete: Bool = true
+	# Is this type known, wrapped and available in Nit?
+	var is_known: Bool = true
 
-	fun has_generic_params: Bool do return not generic_params == null
-
-	fun id: String do return identifier
-
-	init (id: String)
-	do
-		self.identifier = id
-	end
-
-	init with_generic_params(id: String, gen_params: String...)
-	do
-		self.init(id)
-		self.generic_params = new Array[NitType]
-		for param in gen_params do self.generic_params.add new NitType(param)
-	end
-
-	init with_module(id: String, mod: NitModule)
-	do
-		self.init(id)
-		self.mod = mod
-	end
-
-	redef fun to_s: String
-	do
-		var id = self.identifier
-
-		if self.has_generic_params then
-			var gen_list = new Array[String]
-
-			for param in generic_params do
-				gen_list.add(param.to_s)
-			end
-
-			id += "[{gen_list.join(", ")}]"
-		end
-
-		return id
-	end
+	redef fun to_s do return identifier
 end
 
 # Model of a single Java class
 class JavaClass
 	# Type of this class
-	var class_type = new JavaType(new JavaTypeConverter)
+	var class_type: JavaType
 
 	# Attributes of this class
 	var attributes = new HashMap[String, JavaType]
 
 	# Methods of this class organized by their name
 	var methods = new MultiHashMap[String, JavaMethod]
+
+	# Constructors of this class
+	var constructors = new Array[JavaConstructor]
 
 	# Importations from this class
 	var imports = new HashSet[NitModule]
@@ -303,11 +164,66 @@ end
 
 # Model of all the Java class analyzed in one run
 class JavaModel
-	# Unknown Java types used in `classes`
-	var unknown_types = new HashSet[JavaType]
 
 	# All analyzed classes
-	var classes = new Array[JavaClass]
+	var classes = new HashMap[String, JavaClass]
+
+	# Add a class in `classes`
+	fun add_class(jclass: JavaClass)
+	do
+		var key = jclass.class_type.full_id
+		classes[key] = jclass
+	end
+
+	# Unknown types, not already wrapped and not in this pass
+	private var unknown_types = new HashMap[JavaType, NitType]
+
+	# Wrapped types, or classes analyzed in this pass
+	private var known_types = new HashMap[JavaType, NitType]
+
+	# Get the `NitType` corresponding to the `JavaType`
+	#
+	# Also registers types so they can be reused and
+	# to keep track of unknown types.
+	fun java_to_nit_type(jtype: JavaType): NitType
+	do
+		# Check cache
+		if known_types.keys.has(jtype) then return known_types[jtype]
+		if unknown_types.keys.has(jtype) then return unknown_types[jtype]
+
+		# Is it a compatible primitive type?
+		if not jtype.is_primitive_array then
+			var name = converter.to_nit_type(jtype.id)
+			if name != null then
+				# We got a Nit equivalent
+				var nit_type = new NitType(name)
+				known_types[jtype] = nit_type
+				return nit_type
+			end
+		end
+
+		# Is being wrapped in this pass?
+		var key = jtype.full_id
+		if classes.keys.has(key) then
+			var nit_type = new NitType(jtype.extern_name)
+			known_types[jtype] = nit_type
+
+			return nit_type
+		end
+
+		# Search in lib
+		var nit_type = find_extern_class[jtype.full_id]
+		if nit_type != null then
+			known_types[jtype] = nit_type
+			return nit_type
+		end
+
+		# Unknown type
+		nit_type = new NitType(jtype.extern_name)
+		nit_type.is_known = false
+		unknown_types[jtype] = nit_type
+		return nit_type
+	end
 end
 
 # A Java method, with its signature
@@ -319,12 +235,103 @@ class JavaMethod
 	var params: Array[JavaType]
 end
 
+# A Java method, with its signature
+class JavaConstructor
+	# Type of the parameters of this constructor
+	var params: Array[JavaType]
+end
+
 # A Nit module, use to import the referenced extern classes
 class NitModule
-	# Name of the module
-	var name: String
+	# Relative path to the module
+	var path: String
 
-	redef fun ==(other): Bool do return self.to_s == other.to_s
-	redef fun to_s: String do return self.name
-	redef fun hash: Int do return self.name.hash
+	# Name of the module
+	var name: String is lazy do return path.basename(".nit")
+
+	redef fun to_s do return self.name
+	redef fun ==(other) do return other isa NitModule and self.path == other.path
+	redef fun hash do return self.path.hash
+end
+
+redef class Sys
+	# Collection of Java classes already wrapped in the library
+	#
+	# * The key is from `JavaType.full_id`.
+	# * The value is the corresponding `NitType`.
+	var find_extern_class: DefaultMap[String, nullable NitType] is lazy do
+		var map = new DefaultMap[String, nullable NitType](null)
+		var modules = new HashMap[String, NitModule]
+
+		var lib_paths = opt_libs.value
+		if lib_paths == null then lib_paths = new Array[String]
+
+		if lib_paths.has("auto") then
+			lib_paths.remove "auto"
+			var nit_dir = "NIT_DIR".environ
+			if nit_dir.is_empty then
+				# Simple heuristic to find the Nit lib
+				var dir = sys.program_name.dirname / "../../../lib/"
+				dir = dir.simplify_path
+				if dir.file_exists then lib_paths.add dir.simplify_path
+			end
+		end
+
+		if lib_paths.is_empty then return map
+
+		# Use grep to find all extern classes implemented in Java
+		var grep_regex = "extern class [a-zA-Z0-9_]\\\+[ ]\\\+in[ ]\\\+\"Java\""
+		var grep_args = ["-r", "--with-filename", grep_regex]
+		grep_args.add_all lib_paths
+
+		var grep = new ProcessReader("grep", grep_args...)
+		var lines = grep.read_lines
+		grep.close
+		grep.wait
+
+		# Sort out the modules, Nit class names and Java types
+		var regex = """(.+):\\s*extern +class +([a-zA-Z0-9_]+) *in *"Java" *`\\{ *([a-zA-Z0-9.$/]+) *`\\}""".to_re
+		for line in lines do
+			var matches = line.search_all(regex)
+			for match in matches do
+				var path = match[1].to_s
+				var nit_name = match[2].to_s
+				var java_name = match[3].to_s
+
+				# Debug code
+				# print "+ Found {nit_name}:{java_name} at {path}"
+
+				var mod = modules.get_or_null(path)
+				if mod == null then
+					mod = new NitModule(path)
+					modules[path] = mod
+				end
+
+				map[java_name] = new NitType(nit_name, mod)
+			end
+		end
+
+		return map
+	end
+
+	# Option to set `extern_class_prefix`
+	var opt_extern_class_prefix = new OptionString("Prefix to extern classes (By default uses the full namespace)", "-p")
+
+	# Prefix used to name extern classes, if `null` use the full namespace
+	var extern_class_prefix: nullable String is lazy do return opt_extern_class_prefix.value
+
+	# Libraries to search for existing wrappers
+	var opt_libs = new OptionArray("Paths to libraries with wrappers of Java classes ('auto' to use the full Nit lib)", "-i")
+end
+
+redef class Text
+	# Get a copy of `self` where the first letter is capitalized
+	fun simple_capitalized: String
+	do
+		if is_empty then return to_s
+
+		var c = chars.first.to_upper
+		var s = c.to_s + substring_from(1)
+		return s
+	end
 end

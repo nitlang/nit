@@ -1,0 +1,3 @@
+
+class com.sun.xml.internal.bind.v2.model.impl.RuntimeElementInfoImpl$RuntimePropertyImpl extends com.sun.xml.internal.bind.v2.model.impl.ElementInfoImpl<java.lang.reflect.Type, java.lang.Class, java.lang.reflect.Field, java.lang.reflect.Method>.PropertyImpl implements com.sun.xml.internal.bind.v2.model.runtime.RuntimeElementPropertyInfo, com.sun.xml.internal.bind.v2.model.runtime.RuntimeTypeRef {
+}
