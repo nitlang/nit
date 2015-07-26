@@ -483,7 +483,7 @@ class MediaPlayer
 end
 
 redef class PlayableAudio
-	redef init do app.add_to_sounds(self)
+	redef init do add_to_sounds(self)
 end
 
 redef class Sound
@@ -617,9 +617,6 @@ end
 
 redef class App
 
-	# Sounds handled by the application, when you load a sound, it's added to this list.
-	# This array is used in `pause` and `resume`
-	private var sounds = new Array[PlayableAudio]
 
 	# Returns the default MediaPlayer of the application.
 	# When you load a music, it goes in this MediaPlayer.
@@ -676,12 +673,6 @@ redef class App
 		return add_to_sounds(default_mediaplayer.load_sound(resource_manager.raw_id(music), self.native_activity)).as(Music)
 	end
 
-	# Factorizes `sounds.add` to use it in `load_music`, `load_sound`, `load_music_from_res` and `load_sound_from_res`
-	private fun add_to_sounds(sound: PlayableAudio): PlayableAudio do
-		sounds.add(sound)
-		return sound
-	end
-
 	redef fun on_pause do
 		super
 		for s in sounds do s.pause
@@ -698,5 +689,18 @@ redef class App
 		super
 		audio_manager.request_audio_focus
 		for s in sounds do s.resume
+	end
+end
+
+redef class Sys
+
+	# Sounds handled by the application, when you load a sound, it's added to this list.
+	# This array is used in `pause` and `resume`
+	private var sounds = new Array[PlayableAudio]
+
+	# Factorizes `sounds.add` to use it in `load_music`, `load_sound`, `load_music_from_res` and `load_sound_from_res`
+	private fun add_to_sounds(sound: PlayableAudio): PlayableAudio do
+		sounds.add(sound)
+		return sound
 	end
 end
