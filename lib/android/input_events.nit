@@ -165,13 +165,13 @@ class AndroidPointerEvent
 
 	private var pointer_index: Int
 
-	redef fun x: Float do return native_x(motion_event.native, pointer_index)
+	redef fun x do return native_x(motion_event.native, pointer_index)
 
 	private fun native_x(motion_event: NativeAndroidMotionEvent, pointer_index: Int): Float `{
 		return AMotionEvent_getX(motion_event, pointer_index);
 	`}
 
-	redef fun y: Float do return native_y(motion_event.native, pointer_index)
+	redef fun y do return native_y(motion_event.native, pointer_index)
 
 	private fun native_y(motion_event: NativeAndroidMotionEvent, pointer_index: Int): Float `{
 		return AMotionEvent_getY(motion_event, pointer_index);
@@ -213,8 +213,8 @@ extern class AndroidKeyEvent `{AInputEvent *`}
 
 	private fun action: Int `{ return AKeyEvent_getAction(self); `}
 
-	redef fun is_down: Bool do return action == 0
-	redef fun is_up: Bool do return action == 1
+	redef fun is_down do return action == 0
+	redef fun is_up do return action == 1
 
 	# Hardware code of the key raising this event
 	fun key_code: Int `{ return AKeyEvent_getKeyCode(self); `}
