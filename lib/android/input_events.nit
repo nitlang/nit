@@ -190,6 +190,10 @@ class AndroidPointerEvent
 		return action.is_down or action.is_move or action.is_pointer_down
 	end
 
+	# Is this a move event?
+	fun is_move: Bool do return motion_event.acting_pointer == self and
+		motion_event.native.action.is_move
+
 	redef fun depressed do return not pressed
 
 	# Does this pointer just began touching the screen?
