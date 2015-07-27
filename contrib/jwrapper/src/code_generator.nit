@@ -136,78 +136,59 @@ class CodeGenerator
 		file_out.write "\tsuper JavaObject\n\nend\n"
 	end
 
-	private fun generate_method(java_class: JavaClass, jmethod_id, method_id: String,
-		jreturn_type: JavaType, jparam_list: Array[JavaType])
+	private fun generate_method(java_class: JavaClass, java_method_id, method_id: String,
+		java_return_type: JavaType, java_params: Array[JavaType])
 	do
-		var java_params = ""
-		var nit_params  = ""
+		var java_args = new Array[String]
+		var nit_params = new Array[String]
 		var nit_id = "arg"
 		var nit_id_no = 0
-		var nit_types = new Array[NitType]
-		var comment = ""
+		var c = ""
 
 		# Parameters
-		for i in [0..jparam_list.length[ do
-			var jparam = jparam_list[i]
+		for jparam in java_params do
 			var nit_type = model.java_to_nit_type(jparam)
 
-			if not nit_type.is_known and comment_unknown_types then comment = "#"
-			if jparam.is_primitive_array then comment = "#"
+			if not nit_type.is_known and comment_unknown_types then c = "#"
+			if jparam.is_primitive_array then c = "#"
 
-			var cast = jparam.param_cast
-
-			nit_types.add(nit_type)
-
-			if i == jparam_list.length - 1 then
-				java_params += "{cast}{nit_id}{nit_id_no}"
-				nit_params  += "{nit_id}{nit_id_no}: {nit_type}"
-			else
-				java_params += "{cast}{nit_id}{nit_id_no}" + ", "
-				nit_params  += "{nit_id}{nit_id_no}: {nit_type}, "
-			end
+			java_args.add "{jparam.param_cast}{nit_id}{nit_id_no}"
+			nit_params.add "{nit_id}{nit_id_no}: {nit_type}"
 
 			nit_id_no += 1
 		end
 
-		# Method documentation
-		var doc = "\t# Java implementation: {java_class}.{jmethod_id}\n"
-
 		# Method identifier
 		method_id = method_id.to_nit_method_name
-		method_id = java_class.nit_name_for(method_id, jparam_list, java_class.methods[jmethod_id].length > 1)
+		method_id = java_class.nit_name_for(method_id, java_params, java_class.methods[java_method_id].length > 1)
+
+		# Build the signature
 		var nit_signature = new Array[String]
+		nit_signature.add "fun {method_id}"
+		if not java_params.is_empty then nit_signature.add "({nit_params.join(", ")})"
 
-		nit_signature.add "\tfun {method_id}"
-
-		if not jparam_list.is_empty then
-			nit_signature.add "({nit_params})"
-		end
-
+		# Return value
 		var return_type = null
-		if not jreturn_type.is_void then
-			return_type = model.java_to_nit_type(jreturn_type)
+		if not java_return_type.is_void then
+			return_type = model.java_to_nit_type(java_return_type)
 
-			if not return_type.is_known and comment_unknown_types then comment = "#"
-			if jreturn_type.is_primitive_array then comment = "#"
+			if not return_type.is_known and comment_unknown_types then c = "#"
+			if java_return_type.is_primitive_array then c = "#"
 
-			nit_signature.add ": {return_type} "
+			nit_signature.add ": " + return_type.to_s
 		end
 
-		file_out.write doc
-		file_out.write comment + nit_signature.join
+		# Build the call in Java
+		var java_call = "self.{java_method_id}({java_args.join(", ")})"
+		if return_type != null then java_call = "return {java_return_type.return_cast}" + java_call
 
-		if comment == "#" then
-			file_out.write " in \"Java\" `\{\n{comment}\t\tself.{jmethod_id}({java_params});\n{comment}\t`\}\n"
-		# Methods with return type
-		else if return_type != null then
-			file_out.write " in \"Java\" `\{\n{comment}\t\treturn {jreturn_type.return_cast}self.{jmethod_id}({java_params});\n{comment}\t`\}\n"
-		# Methods without return type
-		else if jreturn_type.is_void then
-			file_out.write " in \"Java\" `\{\n{comment}\t\tself.{jmethod_id}({java_params});\n{comment}\t`\}\n"
-		# No copy
-		else
-			file_out.write " in \"Java\" `\{\n{comment}\t\tself.{jmethod_id}({java_params});\n{comment}\t`\}\n"
-		end
+		# Write
+		file_out.write """
+	# Java implementation: {{{java_class}}}.{{{java_method_id}}}
+{{{c}}}	{{{nit_signature.join}}} in "Java" `{
+{{{c}}}		{{{java_call}}};
+{{{c}}}	`}
+"""
 	end
 
 	# Generate getter and setter to access an attribute, of field
