@@ -86,8 +86,8 @@ class CodeGenerator
 			end
 
 			# Attributes
-			for id, java_type in jclass.attributes do
-				generate_getter_setter(jclass, id, java_type)
+			for id, attribute in jclass.attributes do if not attribute.is_static then
+				generate_getter_setter(jclass, id, attribute)
 			end
 
 			# Close the class
@@ -101,6 +101,11 @@ class CodeGenerator
 					generate_method(jclass, id, nit_id, signature.return_type, signature.params, is_static=true)
 					file_out.write "\n"
 				end
+			end
+
+			# Static attributes as top-level getters and setters
+			for id, attribute in jclass.attributes do if attribute.is_static then
+				generate_getter_setter(jclass, id, attribute)
 			end
 		end
 
@@ -213,26 +218,41 @@ class CodeGenerator
 	end
 
 	# Generate getter and setter to access an attribute, of field
-	private fun generate_getter_setter(java_class: JavaClass, java_id: String, java_type: JavaType)
+	private fun generate_getter_setter(java_class: JavaClass, java_id: String,
+		attribute: JavaAttribute)
 	do
+		var java_type = attribute.java_type
 		var nit_type = model.java_to_nit_type(java_type)
-		var nit_id = java_id.to_nit_method_name
+
+		var nit_id = java_id
+		if attribute.is_static then nit_id = java_class.class_type.extern_name.to_snake_case + "_" + nit_id
+		nit_id = nit_id.to_nit_method_name
 		nit_id = java_class.nit_name_for(nit_id, [java_type], false)
 
 		var c = ""
 		if not nit_type.is_known and comment_unknown_types then c = "#"
 		if java_type.is_primitive_array then c = "#"
 
-		file_out.write """
-	# Java getter: {{{java_class}}}.{{{java_id}}}
-{{{c}}}	fun {{{nit_id}}}: {{{nit_type}}} in "Java" `{
-{{{c}}}		return self.{{{java_id}}};
-{{{c}}}	`}
+		var recv
+		if attribute.is_static == true then
+			recv = java_class.class_type.to_package_name
+		else recv = "self"
 
-	# Java setter: {{{java_class}}}.{{{java_id}}}
-{{{c}}}	fun {{{nit_id}}}=(value: {{{nit_type}}}) in "Java" `{
-{{{c}}}		self.{{{java_id}}} = value;
-{{{c}}}	`}
+		# Tabulation
+		var t = "\t"
+		if attribute.is_static then t = ""
+		var ct = c+t
+
+		file_out.write """
+{{{t}}}# Java getter: {{{java_class}}}.{{{java_id}}}
+{{{ct}}}fun {{{nit_id}}}: {{{nit_type}}} in "Java" `{
+{{{ct}}}	return {{{recv}}}.{{{java_id}}};
+{{{ct}}}`}
+
+{{{t}}}# Java setter: {{{java_class}}}.{{{java_id}}}
+{{{ct}}}fun {{{nit_id}}}=(value: {{{nit_type}}}) in "Java" `{
+{{{ct}}}	{{{recv}}}.{{{java_id}}} = value;
+{{{ct}}}`}
 
 """
 	end

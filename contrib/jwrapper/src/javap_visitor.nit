@@ -126,7 +126,11 @@ redef class Nproperty_declaration_attribute
 		var brackets = n_brackets
 		if brackets != null then jtype.array_dimension += brackets.children.length
 
-		v.java_class.attributes[id] = jtype
+		var is_static = false
+		var modifiers = n_modifier
+		if modifiers != null then is_static = modifiers.has_static
+
+		v.java_class.attributes[id] = new JavaAttribute(is_static, jtype)
 	end
 end
 

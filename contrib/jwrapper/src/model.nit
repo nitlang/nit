@@ -148,7 +148,7 @@ class JavaClass
 	var class_type: JavaType
 
 	# Attributes of this class
-	var attributes = new HashMap[String, JavaType]
+	var attributes = new HashMap[String, JavaAttribute]
 
 	# Methods of this class organized by their name
 	var methods = new MultiHashMap[String, JavaMethod]
@@ -242,6 +242,14 @@ class JavaMethod
 
 	# Type of the arguments of the method
 	var params: Array[JavaType]
+end
+
+# An attribute in a Java class
+class JavaAttribute
+	super JavaProperty
+
+	# Type of the attribute
+	var java_type: JavaType
 end
 
 # A Java method, with its signature
