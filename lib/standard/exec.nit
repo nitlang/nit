@@ -272,9 +272,49 @@ class ProcessDuplex
 
 	redef fun pipeflags do return 3
 
-	redef fun execute
+	redef fun execute do super
+
+	# Write `input` to process and return its output
+	#
+	# Writing and reading are processed line by line,
+	# reading only when something is available.
+	#
+	# ~~~
+	# var proc = new ProcessDuplex("tr", "[:lower:]", "[:upper:]")
+	# assert proc.write_and_read("""
+	#     Alice
+	#     Bob
+	# """) == """
+	#     ALICE
+	#     BOB
+	# """
+	# ~~~
+	fun write_and_read(input: Text): String
 	do
-		super
+		var read = new Buffer #new Array[String]
+
+		# Main loop, read and write line by line
+		var prev = 0
+		for delimiter in input.search_all('\n') do
+			write input.substring(prev, delimiter.after-prev)
+			prev = delimiter.after
+
+			while stream_in.poll_in do
+				read.append stream_in.read_line
+			end
+		end
+
+		# Write the last line
+		write input.substring_from(prev)
+		stream_out.close
+
+		# Read the rest, may be everything for some programs
+		read.append stream_in.read_all
+		stream_in.close
+
+		# Clean up
+		wait
+		return read.to_s
 	end
 end
 
