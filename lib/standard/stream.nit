@@ -166,7 +166,32 @@ abstract class Reader
 	# var i = new StringReader(txt)
 	# assert i.read_all == txt
 	# ~~~
-	fun read_all: String do return read_all_bytes.to_s
+	fun read_all: String do
+		var s = read_all_bytes
+		var slen = s.length
+		if slen == 0 then return ""
+		var rets = ""
+		var pos = 0
+		var sits = s.items
+		var remsp = slen
+		while pos < slen do
+			# The 129 size was decided more or less arbitrarily
+			# It will require some more benchmarking to compute
+			# if this is the best size or not
+			var chunksz = 129
+			if chunksz > remsp then
+				rets += new FlatString.with_infos(sits, remsp, pos, pos + remsp - 1)
+				break
+			end
+			var st = sits.find_beginning_of_char_at(pos + chunksz - 1)
+			var bytelen = st - pos
+			rets += new FlatString.with_infos(sits, bytelen, pos, st - 1)
+			pos = st
+			remsp -= bytelen
+		end
+		if rets isa Concat then return rets.balance
+		return rets
+	end
 
 	# Read all the stream until the eof.
 	#
