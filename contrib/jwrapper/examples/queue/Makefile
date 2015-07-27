@@ -1,5 +1,5 @@
 # Nit test program
-user_test: queue.nit $(shell ../../../../bin/nitls -M user_test.nit) ../../../../bin/nitc
+user_test: queue.nit $(shell ../../../../bin/nitls -M user_test.nit) ../../../../bin/nitc ../../bin/jwrapper
 	CLASSPATH=`pwd` ../../../../bin/nitc user_test.nit
 
 	# Manually add our class file to the Jar for easy access
