@@ -80,6 +80,10 @@ end
 redef class Nproperty_declaration_method
 	redef fun accept_visitor(v)
 	do
+		var is_static = false
+		var modifiers = n_modifier
+		if modifiers != null then is_static = modifiers.has_static
+
 		var id = n_identifier.text
 		var return_jtype = n_type.to_java_type
 
@@ -90,7 +94,7 @@ redef class Nproperty_declaration_method
 			params = n_parameters.to_a
 		else params = new Array[JavaType]
 
-		var method = new JavaMethod(return_jtype, params)
+		var method = new JavaMethod(is_static, return_jtype, params)
 		v.java_class.methods[id].add method
 	end
 end
@@ -255,5 +259,16 @@ redef class Nparameter
 		if dots != null then jtype.is_vararg = true
 
 		return jtype
+	end
+end
+
+redef class Nodes
+	private fun has_static: Bool
+	do
+		for modifier in depth do
+			if modifier isa NToken and modifier.text == "static" then return true
+		end
+
+		return false
 	end
 end

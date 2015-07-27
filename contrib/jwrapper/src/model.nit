@@ -226,8 +226,17 @@ class JavaModel
 	end
 end
 
+# A property to a Java class
+abstract class JavaProperty
+
+	# Is this property marked static?
+	var is_static: Bool
+end
+
 # A Java method, with its signature
 class JavaMethod
+	super JavaProperty
+
 	# Type returned by the method
 	var return_type: JavaType
 

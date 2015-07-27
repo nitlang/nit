@@ -70,7 +70,7 @@ class CodeGenerator
 			generate_class_header(jclass.class_type)
 
 			for id, signatures in jclass.methods do
-				for signature in signatures do
+				for signature in signatures do if not signature.is_static then
 					generate_method(jclass, id, id, signature.return_type, signature.params)
 					file_out.write "\n"
 				end
@@ -90,7 +90,18 @@ class CodeGenerator
 				generate_getter_setter(jclass, id, java_type)
 			end
 
+			# Close the class
 			file_out.write "end\n\n"
+
+			# Static functions as top-level methods
+			var static_functions_prefix = jclass.class_type.extern_name.to_snake_case
+			for id, signatures in jclass.methods do
+				for signature in signatures do if signature.is_static then
+					var nit_id = static_functions_prefix + "_" + id
+					generate_method(jclass, id, nit_id, signature.return_type, signature.params, is_static=true)
+					file_out.write "\n"
+				end
+			end
 		end
 
 		if stub_for_unknown_types then
@@ -137,7 +148,7 @@ class CodeGenerator
 	end
 
 	private fun generate_method(java_class: JavaClass, java_method_id, method_id: String,
-		java_return_type: JavaType, java_params: Array[JavaType])
+		java_return_type: JavaType, java_params: Array[JavaType], is_static: nullable Bool)
 	do
 		var java_args = new Array[String]
 		var nit_params = new Array[String]
@@ -179,15 +190,25 @@ class CodeGenerator
 		end
 
 		# Build the call in Java
-		var java_call = "self.{java_method_id}({java_args.join(", ")})"
+		var java_call
+		if is_static == true then
+			java_call = java_class.class_type.to_package_name
+		else java_call = "self"
+		java_call += ".{java_method_id}({java_args.join(", ")})"
+
 		if return_type != null then java_call = "return {java_return_type.return_cast}" + java_call
+
+		# Tabulation
+		var t = "\t"
+		if is_static == true then t = ""
+		var ct = c+t
 
 		# Write
 		file_out.write """
-	# Java implementation: {{{java_return_type}}} {{{java_class}}}.{{{java_method_id}}}({{{java_params.join(", ")}}})
-{{{c}}}	{{{nit_signature.join}}} in "Java" `{
-{{{c}}}		{{{java_call}}};
-{{{c}}}	`}
+{{{t}}}# Java implementation: {{{java_return_type}}} {{{java_class}}}.{{{java_method_id}}}({{{java_params.join(", ")}}})
+{{{ct}}}{{{nit_signature.join}}} in "Java" `{
+{{{ct}}}	{{{java_call}}};
+{{{ct}}}`}
 """
 	end
 
