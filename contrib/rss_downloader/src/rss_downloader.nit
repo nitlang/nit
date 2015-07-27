@@ -289,12 +289,8 @@ redef class Text
 	fun gunzip: String
 	do
 		var proc = new ProcessDuplex("gunzip", new Array[String]...)
-		proc.write self
-		proc.stream_out.close
-		var res = proc.read_all
-		proc.stream_in.close
-		proc.wait
-		assert proc.status == 0
+		var res = proc.write_and_read(self)
+		assert proc.status == 0 else print_error "gunzip failed: {proc.last_error or else "Unknown"}"
 		return res
 	end
 end
