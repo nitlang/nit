@@ -1,0 +1,18 @@
+public final class com.oracle.net.Sdp {
+  public static java.net.Socket openSocket() throws java.io.IOException;
+  public static java.net.ServerSocket openServerSocket() throws java.io.IOException;
+  public static java.nio.channels.SocketChannel openSocketChannel() throws java.io.IOException;
+  public static java.nio.channels.ServerSocketChannel openServerSocketChannel() throws java.io.IOException;
+}
+public class com.sun.activation.registries.LogSupport {
+  public static void log(java.lang.String);
+  public static void log(java.lang.String, java.lang.Throwable);
+  public static boolean isLoggable();
+}
+public class com.sun.activation.registries.MailcapTokenizer {
+  public static final int UNKNOWN_TOKEN;
+}
+public final class com.sun.beans.TypeResolver {
+  public com.sun.beans.TypeResolver();
+  public static java.lang.reflect.Type resolveInClass(java.lang.Class<?>, java.lang.reflect.Type);
+}

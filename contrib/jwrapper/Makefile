@@ -20,6 +20,10 @@ clean:
 
 check: bin/jwrapper tests/wildcards.javap
 	mkdir -p tmp
+	bin/jwrapper -v -u stub -o tests/statics.nit tests/statics.javap
+	../../bin/nitpick -q tests/statics.nit
+	bin/jwrapper -v -u comment -o tests/generics.nit tests/generics.javap
+	../../bin/nitpick -q tests/generics.nit
 	bin/jwrapper -v -u comment -o tests/long.nit tests/long.javap
 	../../bin/nitpick -q tests/long.nit
 	bin/jwrapper -v -u comment -o tests/inits.nit tests/inits.javap

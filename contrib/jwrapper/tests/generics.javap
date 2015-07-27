@@ -1,0 +1,6 @@
+public abstract class android.os.asynctask<params, progress, result> {
+  public android.os.asynctask();
+  public final android.os.asynctask$status getstatus();
+  public final result get(long, java.util.concurrent.timeunit) throws java.lang.interruptedexception, java.util.concurrent.executionexception, java.util.concurrent.timeoutexception;
+  public final android.os.asynctask<params, progress, result> execute(params...);
+}
