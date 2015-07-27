@@ -184,7 +184,7 @@ class CodeGenerator
 
 		# Write
 		file_out.write """
-	# Java implementation: {{{java_class}}}.{{{java_method_id}}}
+	# Java implementation: {{{java_return_type}}} {{{java_class}}}.{{{java_method_id}}}({{{java_params.join(", ")}}})
 {{{c}}}	{{{nit_signature.join}}} in "Java" `{
 {{{c}}}		{{{java_call}}};
 {{{c}}}	`}
