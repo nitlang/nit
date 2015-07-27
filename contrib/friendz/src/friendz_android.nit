@@ -39,7 +39,7 @@ redef class App
 end
 
 redef class AndroidPointerEvent
-	redef fun is_motion do return not just_went_down
+	redef fun is_motion do return is_move
 
 	redef fun x do return super / app.zoom
 	redef fun y do return super / app.zoom
