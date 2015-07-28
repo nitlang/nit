@@ -28,7 +28,7 @@
 # ~~~
 module collections
 
-import java
+import base
 
 # Java primitive array
 #
