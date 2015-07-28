@@ -26,7 +26,12 @@ import jtype_converter
 class JavaType
 	super Cloneable
 
+	# Identifiers composing the namespace and class name
+	#
+	# An array of all the names that would be separated by `.`.
+	# Each name may contain `$`.
 	var identifier = new Array[String]
+
 	var generic_params: nullable Array[JavaType] = null
 
 	# Is this a void return type?
@@ -44,8 +49,6 @@ class JavaType
 	fun is_primitive_array: Bool do return array_dimension > 0
 
 	fun has_generic_params: Bool do return not generic_params == null
-	fun full_id: String do return identifier.join(".")
-	fun id: String do return identifier.last.replace("$", "")
 
 	fun return_cast: String do return converter.cast_as_return(self.id)
 
@@ -91,9 +94,18 @@ class JavaType
 		return name
 	end
 
-	redef fun to_s
-	do
-		var id = self.full_id
+	# Short name of the class, mangled to remove `$` (e.g. `Set`)
+	fun id: String do return identifier.last.replace("$", "")
+
+	# Full name of this class as used in an importation (e.g. `java.lang.Set`)
+	fun package_name: String do return identifier.join(".")
+
+	# Name of this class for the extern declaration in Nit (e.g. `java.lang.Set[]`)
+	fun extern_equivalent: String do return package_name + "[]" * array_dimension
+
+	# Full name of this class with arrays and generic values (e.g. `java.lang.Set<E>[]`)
+	redef fun to_s do
+		var id = self.package_name
 
 		if self.is_primitive_array then
 			id += "[]" * array_dimension
@@ -103,16 +115,6 @@ class JavaType
 		end
 
 		return id
-	end
-
-	# To fully qualified package name
-	# Cuts the primitive array `[]`
-	fun to_package_name: String
-	do
-		var str = self.to_s
-		var len = str.length
-
-		return str.substring(0, len - (2*array_dimension))
 	end
 
 	fun resolve_types(conversion_map: HashMap[String, Array[String]])
@@ -141,10 +143,10 @@ class JavaType
 
 	# Comparison based on fully qualified named
 	redef fun ==(other) do return other isa JavaType and
-		self.full_id == other.full_id and
+		self.package_name == other.package_name and
 		self.is_primitive_array == other.is_primitive_array
 
-	redef fun hash do return self.full_id.hash
+	redef fun hash do return self.package_name.hash
 end
 
 class NitType
@@ -189,7 +191,7 @@ class JavaModel
 	# Add a class in `classes`
 	fun add_class(jclass: JavaClass)
 	do
-		var key = jclass.class_type.full_id
+		var key = jclass.class_type.package_name
 		classes[key] = jclass
 	end
 
@@ -221,7 +223,7 @@ class JavaModel
 		end
 
 		# Is being wrapped in this pass?
-		var key = jtype.full_id
+		var key = jtype.package_name
 		if classes.keys.has(key) then
 			if jtype.array_dimension <= opt_arrays.value then
 				var nit_type = new NitType(jtype.extern_name)
@@ -231,7 +233,7 @@ class JavaModel
 		end
 
 		# Search in lib
-		var nit_type = find_extern_class[jtype.full_id]
+		var nit_type = find_extern_class[jtype.extern_equivalent]
 		if nit_type != null then
 			known_types[jtype] = nit_type
 			return nit_type
@@ -293,7 +295,7 @@ end
 redef class Sys
 	# Collection of Java classes already wrapped in the library
 	#
-	# * The key is from `JavaType.full_id`.
+	# * The key uses `JavaType.to_s`.
 	# * The value is the corresponding `NitType`.
 	var find_extern_class: DefaultMap[String, nullable NitType] is lazy do
 		var map = new DefaultMap[String, nullable NitType](null)

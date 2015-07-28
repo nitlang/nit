@@ -147,8 +147,8 @@ class CodeGenerator
 	private fun generate_class_header(jtype: JavaType)
 	do
 		var nit_type = model.java_to_nit_type(jtype)
-		file_out.write "# Java class: {jtype.to_package_name}\n"
-		file_out.write "extern class {nit_type} in \"Java\" `\{ {jtype.to_package_name} `\}\n"
+		file_out.write "# Java class: {jtype}\n"
+		file_out.write "extern class {nit_type} in \"Java\" `\{ {jtype.extern_equivalent} `\}\n"
 		file_out.write "\tsuper JavaObject\n\n"
 	end
 
@@ -156,7 +156,7 @@ class CodeGenerator
 	do
 		var nit_type = jtype.extern_name
 
-		file_out.write "extern class {nit_type} in \"Java\" `\{ {jtype.to_package_name} `\}\n"
+		file_out.write "extern class {nit_type} in \"Java\" `\{ {jtype.extern_equivalent} `\}\n"
 		file_out.write "\tsuper JavaObject\n\nend\n"
 	end
 
@@ -203,7 +203,7 @@ class CodeGenerator
 		# Build the call in Java
 		var java_call
 		if is_static == true then
-			java_call = java_class.class_type.to_package_name
+			java_call = java_class.class_type.package_name
 		else java_call = "self"
 		java_call += ".{java_method_id}({java_args.join(", ")})"
 
@@ -239,8 +239,8 @@ class CodeGenerator
 		if not nit_type.is_known and comment_unknown_types then c = "#"
 
 		var recv
-		if attribute.is_static == true then
-			recv = java_class.class_type.to_package_name
+		if attribute.is_static then
+			recv = java_class.class_type.package_name
 		else recv = "self"
 
 		# Tabulation
