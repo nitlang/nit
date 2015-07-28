@@ -82,6 +82,10 @@ class JavaType
 			name = prefix + id
 		end
 
+		if is_primitive_array then
+			name += "_" + "Array" * array_dimension
+		end
+
 		name = name.replace("-", "_")
 		name = name.replace("$", "_")
 		return name
@@ -219,10 +223,11 @@ class JavaModel
 		# Is being wrapped in this pass?
 		var key = jtype.full_id
 		if classes.keys.has(key) then
-			var nit_type = new NitType(jtype.extern_name)
-			known_types[jtype] = nit_type
-
-			return nit_type
+			if jtype.array_dimension <= opt_arrays.value then
+				var nit_type = new NitType(jtype.extern_name)
+				known_types[jtype] = nit_type
+				return nit_type
+			end
 		end
 
 		# Search in lib
@@ -353,6 +358,9 @@ redef class Sys
 
 	# Libraries to search for existing wrappers
 	var opt_libs = new OptionArray("Paths to libraries with wrappers of Java classes ('auto' to use the full Nit lib)", "-i")
+
+	# Generate the primitive array version of each class up to the given depth
+	var opt_arrays = new OptionInt("Depth of the primitive array for each wrapped class (default: 1)", 1, "-a")
 end
 
 redef class Text

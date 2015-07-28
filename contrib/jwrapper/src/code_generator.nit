@@ -107,6 +107,11 @@ class CodeGenerator
 			for id, attribute in jclass.attributes do if attribute.is_static then
 				generate_getter_setter(jclass, id, attribute)
 			end
+
+			# Primitive arrays
+			for d in [1..opt_arrays.value] do
+				generate_primitive_array(jclass, d)
+			end
 		end
 
 		if stub_for_unknown_types then
@@ -289,6 +294,33 @@ class CodeGenerator
 {{{c}}}	new {{{name}}}{{{nit_params_s}}} in "Java" `{
 {{{c}}}		return new {{{java_class}}}({{{java_params_s}}});
 {{{c}}}	`}
+
+"""
+	end
+
+	private fun generate_primitive_array(java_class: JavaClass, dimensions: Int)
+	do
+		var base_java_type = java_class.class_type
+		var java_type = base_java_type.clone
+		java_type.array_dimension = dimensions
+
+		var base_nit_type = model.java_to_nit_type(base_java_type)
+		var nit_type = model.java_to_nit_type(java_type)
+
+		file_out.write """
+# Java primitive array: {{{java_type}}}
+extern class {{{nit_type}}} in "Java" `{ {{{java_type.extern_equivalent}}} `}
+	super AbstractJavaArray[{{{base_nit_type}}}]
+
+	# Get a new array of the given `size`
+	new(size: Int) in "Java" `{ return new {{{base_java_type}}}[(int)size]; `}
+
+	redef fun [](i) in "Java" `{ return self[(int)i]; `}
+
+	redef fun []=(i, e) in "Java" `{ self[(int)i] = e; `}
+
+	redef fun length in "Java" `{ return self.length; `}
+end
 
 """
 	end
