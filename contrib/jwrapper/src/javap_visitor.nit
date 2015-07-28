@@ -87,6 +87,13 @@ redef class Nproperty_declaration_method
 		var id = n_identifier.text
 		var return_jtype = n_type.to_java_type
 
+		# Generic parameters
+		var n_params = n_generic_parameters
+		var generic_params
+		if n_params != null then
+			generic_params = n_params.n_parameters.to_a
+		else generic_params = new Array[JavaType]
+
 		# Collect parameters
 		var n_parameters = n_parameters
 		var params
@@ -94,7 +101,7 @@ redef class Nproperty_declaration_method
 			params = n_parameters.to_a
 		else params = new Array[JavaType]
 
-		var method = new JavaMethod(is_static, return_jtype, params)
+		var method = new JavaMethod(is_static, return_jtype, params, generic_params)
 		v.java_class.methods[id].add method
 	end
 end
@@ -110,7 +117,14 @@ redef class Nproperty_declaration_constructor
 			params = n_parameters.to_a
 		else params = new Array[JavaType]
 
-		var method = new JavaConstructor(params)
+		# Generic parameters
+		var n_params = n_generic_parameters
+		var generic_params
+		if n_params != null then
+			generic_params = n_params.n_parameters.to_a
+		else generic_params = new Array[JavaType]
+
+		var method = new JavaConstructor(params, generic_params)
 		v.java_class.constructors.add method
 	end
 end
@@ -193,6 +207,27 @@ redef class Nbase_type_void
 	do
 		var jtype = new JavaType
 		jtype.is_void = true
+		return jtype
+	end
+end
+
+redef class Nbase_type_extends
+	redef fun to_java_type do return n_generic_identifier.to_java_type
+end
+
+redef class Ngeneric_identifier
+	private fun to_java_type: JavaType is abstract
+end
+
+redef class Ngeneric_identifier_class
+	redef fun to_java_type do return n_full_class_name.to_java_type
+end
+
+redef class Ngeneric_identifier_wildcard
+	redef fun to_java_type
+	do
+		var jtype = new JavaType
+		jtype.identifier.add_all(["java", "lang", "Object"])
 		return jtype
 	end
 end

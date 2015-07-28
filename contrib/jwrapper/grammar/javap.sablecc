@@ -44,8 +44,8 @@ type_bound
 	| {head:} full_class_name;
 
 generic_identifier
-	= full_class_name
-	| wildcard;
+	= {class:} full_class_name
+	| {wildcard:} wildcard;
 
 full_class_name
 	= {tail:} full_class_name separator class_name

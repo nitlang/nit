@@ -192,6 +192,9 @@ var visitor = new JavaVisitor(model)
 visitor.enter_visit root_node
 sys.perfs["core model"].add clock.lapse
 
+model.resolve_types
+sys.perfs["core resolve"].add clock.lapse
+
 if opt_verbose.value > 0 then print "# Generating Nit code"
 
 var use_comment = opt_unknown.value == 0

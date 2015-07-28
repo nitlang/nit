@@ -263,6 +263,9 @@ class JavaMethod
 
 	# Type of the arguments of the method
 	var params: Array[JavaType]
+
+	# Generic parameters of this method
+	var generic_params: Array[JavaType]
 end
 
 # An attribute in a Java class
@@ -277,6 +280,9 @@ end
 class JavaConstructor
 	# Type of the parameters of this constructor
 	var params: Array[JavaType]
+
+	# Generic parameters of this constructor
+	var generic_params: Array[JavaType]
 end
 
 # A Nit module, use to import the referenced extern classes
