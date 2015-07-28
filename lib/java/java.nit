@@ -172,7 +172,8 @@ redef extern class JavaObject
 		return pop_from_local_frame_with_env(jni_env)
 	end
 
-	private fun pop_from_local_frame_with_env(jni_env: JniEnv): SELF `{
+	# Java implementation of `pop_from_local_frame`
+	protected fun pop_from_local_frame_with_env(jni_env: JniEnv): SELF `{
 		return (*jni_env)->PopLocalFrame(jni_env, self);
 	`}
 
