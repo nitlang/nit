@@ -321,16 +321,16 @@ redef class Sys
 		grep.wait
 
 		# Sort out the modules, Nit class names and Java types
-		var regex = """(.+):\\s*extern +class +([a-zA-Z0-9_]+) *in *"Java" *`\\{ *([a-zA-Z0-9.$/]+) *`\\}""".to_re
+		var regex = """(.+):\\s*extern +class +([a-zA-Z0-9_]+) *in *"Java" *`\\{(.+)`\\}""".to_re
 		for line in lines do
 			var matches = line.search_all(regex)
 			for match in matches do
 				var path = match[1].to_s
 				var nit_name = match[2].to_s
-				var java_name = match[3].to_s
+				var java_name = match[3].to_s.trim
 
 				# Debug code
-				# print "+ Found {nit_name}:{java_name} at {path}"
+				# print "+ Found {nit_name}: {java_name} at {path}"
 
 				var mod = modules.get_or_null(path)
 				if mod == null then
