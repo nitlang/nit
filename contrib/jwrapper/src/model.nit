@@ -117,18 +117,6 @@ class JavaType
 		return id
 	end
 
-	fun resolve_types(conversion_map: HashMap[String, Array[String]])
-	do
-		if identifier.length == 1 then
-			var resolved_id = conversion_map.get_or_null(self.id)
-			if resolved_id != null then self.identifier = new Array[String].from(resolved_id)
-		end
-
-		if self.has_generic_params then
-			for params in generic_params do params.resolve_types(conversion_map)
-		end
-	end
-
 	# Get a copy of `self`
 	redef fun clone
 	do
@@ -180,6 +168,58 @@ class JavaClass
 	var imports = new HashSet[NitModule]
 
 	redef fun to_s do return class_type.to_s
+
+	# Resolve the types in `other` in the context of this class
+	private fun resolve_types_of(other: JavaClass)
+	do
+		# Methods
+		for mid, method in other.methods do
+			for signature in method do
+				self.resolve(signature.return_type, signature.generic_params)
+				for param in signature.params do self.resolve(param, signature.generic_params)
+			end
+		end
+
+		# Constructors
+		for signature in other.constructors do
+			for param in signature.params do self.resolve(param, signature.generic_params)
+		end
+
+		# Attributes
+		for aid, attribute in other.attributes do
+			self.resolve attribute.java_type
+		end
+	end
+
+	# Resolve `java_type` in the context of this class
+	#
+	# Replace, in place, parameter types by their bound.
+	private fun resolve(java_type: JavaType, property_generic_params: nullable Array[JavaType])
+	do
+		# Skip types with a full package name
+		if java_type.identifier.length != 1 then return
+
+		# Skip primitive types
+		if converter.type_map.keys.has(java_type.id) then return
+
+		# Gather the generic parameters of the method, then the class
+		var params = new Array[JavaType]
+		if property_generic_params != null then params.add_all property_generic_params
+		var class_generic_params = class_type.generic_params
+		if class_generic_params != null then params.add_all class_generic_params
+
+		# Skip if there is not parameters usable to resolve
+		if params.is_empty then return
+
+		for param in params do
+			if param.identifier == java_type.identifier then
+				# Found a marching parameter type
+				# TODO use a more precise bound
+				java_type.identifier = ["java", "lang", "Object"]
+				return
+			end
+		end
+	end
 end
 
 # Model of all the Java class analyzed in one run
@@ -244,6 +284,24 @@ class JavaModel
 		nit_type.is_known = false
 		unknown_types[jtype] = nit_type
 		return nit_type
+	end
+
+	# Resolve the types in methods and attributes of this class
+	fun resolve_types
+	do
+		for id, java_class in classes do
+			java_class.resolve_types_of java_class
+
+			# Ask nester classes for resolve too
+			var matches = id.search_all("$")
+			for match in matches do
+				var nester_name = id.substring(0, match.from)
+				if classes.keys.has(nester_name) then
+					var nester = classes[nester_name]
+					nester.resolve_types_of java_class
+				end
+			end
+		end
 	end
 end
 
