@@ -196,10 +196,10 @@ class JavaModel
 	end
 
 	# Unknown types, not already wrapped and not in this pass
-	private var unknown_types = new HashMap[JavaType, NitType]
+	var unknown_types = new HashMap[JavaType, NitType]
 
 	# Wrapped types, or classes analyzed in this pass
-	private var known_types = new HashMap[JavaType, NitType]
+	var known_types = new HashMap[JavaType, NitType]
 
 	# Get the `NitType` corresponding to the `JavaType`
 	#

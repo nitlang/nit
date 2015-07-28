@@ -203,4 +203,15 @@ sys.perfs["code generator"].add clock.lapse
 if opt_verbose.value > 1 then
 	print "# Performance Analysis:"
 	print sys.perfs
+
+	print "# {model.unknown_types.length} unknown types:"
+	var c = 0
+	for id, ntype in model.unknown_types do
+		print "* {id}"
+		c += 1
+		if c > 100 then
+			print "* ..."
+			break
+		end
+	end
 end
