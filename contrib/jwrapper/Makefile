@@ -62,3 +62,4 @@ check-libs: bin/jwrapper
 	nitpick tests/sablecc.nit
 
 	make -C examples/android_api/ check
+	make -C examples/java_api/ check
