@@ -80,7 +80,7 @@ class CodeGenerator
 			for constructor in jclass.constructors do
 				var complex = jclass.constructors.length != 1 and constructor.params.not_empty
 				var base_name = if complex then "from" else ""
-				var name = jclass.nit_name_for(base_name, constructor.params, complex)
+				var name = jclass.nit_name_for(base_name, constructor.params, complex, false)
 
 				generate_constructor(jclass, constructor, name)
 			end
@@ -183,7 +183,7 @@ class CodeGenerator
 
 		# Method identifier
 		method_id = method_id.to_nit_method_name
-		method_id = java_class.nit_name_for(method_id, java_params, java_class.methods[java_method_id].length > 1)
+		method_id = java_class.nit_name_for(method_id, java_params, java_class.methods[java_method_id].length > 1, is_static == true)
 
 		# Build the signature
 		var nit_signature = new Array[String]
@@ -233,7 +233,7 @@ class CodeGenerator
 		var nit_id = java_id
 		if attribute.is_static then nit_id = java_class.class_type.extern_name.to_snake_case + "_" + nit_id
 		nit_id = nit_id.to_nit_method_name
-		nit_id = java_class.nit_name_for(nit_id, [java_type], false)
+		nit_id = java_class.nit_name_for(nit_id, [java_type], false, attribute.is_static)
 
 		var c = ""
 		if not nit_type.is_known and comment_unknown_types then c = "#"
@@ -364,6 +364,11 @@ redef class Sys
 
 	# Pointer or JavaObject methods
 		"free"])
+
+	# Name of methods used at the top-level
+	#
+	# Used by `JavaClass::nit_name_for` with static properties.
+	private var top_level_used_names = new HashSet[String]
 end
 
 redef class String
@@ -394,13 +399,13 @@ end
 
 redef class JavaClass
 	# Property names used in this class
-	private var used_name = new HashSet[String]
+	private var used_names = new HashSet[String]
 
 	# Get an available property name for the Java property with `name` and parameters
 	#
 	# If `use_parameters_name` then expect that there will be conflicts,
 	# so use the types of `parameters` to build the name.
-	private fun nit_name_for(name: String, parameters: Array[JavaType], use_parameters_name: Bool): String
+	private fun nit_name_for(name: String, parameters: Array[JavaType], use_parameters_name: Bool, is_static: Bool): String
 	do
 		# Append the name of each parameter
 		if use_parameters_name then
@@ -409,15 +414,21 @@ redef class JavaClass
 			end
 		end
 
+		# Set of property names, local or top-level
+		var used_names
+		if is_static then
+			used_names = sys.top_level_used_names
+		else used_names = self.used_names
+
 		# As a last resort, append numbers to the name
 		var base_name = name
 		var count = 1
-		while used_name.has(name) do
+		while used_names.has(name) do
 			name = base_name + count.to_s
 			count += 1
 		end
 
-		used_name.add name
+		used_names.add name
 		return name
 	end
 end
