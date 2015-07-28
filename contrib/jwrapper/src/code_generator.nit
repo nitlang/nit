@@ -171,7 +171,6 @@ class CodeGenerator
 			var nit_type = model.java_to_nit_type(jparam)
 
 			if not nit_type.is_known and comment_unknown_types then c = "#"
-			if jparam.is_primitive_array then c = "#"
 
 			java_args.add "{jparam.param_cast}{nit_id}{nit_id_no}"
 			nit_params.add "{nit_id}{nit_id_no}: {nit_type}"
@@ -194,7 +193,6 @@ class CodeGenerator
 			return_type = model.java_to_nit_type(java_return_type)
 
 			if not return_type.is_known and comment_unknown_types then c = "#"
-			if java_return_type.is_primitive_array then c = "#"
 
 			nit_signature.add ": " + return_type.to_s
 		end
@@ -236,7 +234,6 @@ class CodeGenerator
 
 		var c = ""
 		if not nit_type.is_known and comment_unknown_types then c = "#"
-		if java_type.is_primitive_array then c = "#"
 
 		var recv
 		if attribute.is_static == true then
@@ -282,7 +279,6 @@ class CodeGenerator
 				param_id = param_id.successor(1)
 
 				if not nit_type.is_known and comment_unknown_types then c = "#"
-				if java_type.is_primitive_array then c = "#"
 			end
 
 			nit_params_s = "(" + nit_params.join(", ") + ")"
