@@ -1,3 +1,3 @@
-android.nit
-std.nit
+android_api.nit
+java_api.nit
 tmp/
