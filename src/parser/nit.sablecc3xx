@@ -199,11 +199,11 @@ classid = uppercase letter*;
 id = lowercase letter*;
 attrid = '_' lowercase letter*;
 
-number = digit+;
+number = digit (digit | '_')*;
 hex_number = ('0x' | '0X') hexdigit+;
 bin_number = ('0b' | '0B') bindigit+;
 oct_number = ('0o' | '0O') octdigit+;
-bytenum = digit+ 'u8';
+bytenum = digit (digit | '_')* 'u8';
 hex_bytenum = ('0x' | '0X') hexdigit+ 'u8';
 bin_bytenum = ('0b' | '0B') bindigit+ 'u8';
 oct_bytenum = ('0o' | '0O') octdigit+ 'u8';
