@@ -360,7 +360,8 @@ redef class Sys
 		"protected", "public", "return", "self", "super", "then", "true", "type", "var", "while",
 
 	# Top-level methods
-		"class_name", "get_time", "hash", "is_same_type", "is_same_instance", "output",
+		"class_name", "get_time", "hash", "inspect", "inspect_head", "is_same_type",
+		"is_same_instance", "object_id", "output", "output_class_name", "sys", "to_s",
 
 	# Pointer or JavaObject methods
 		"free"])
