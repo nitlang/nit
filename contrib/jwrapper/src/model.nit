@@ -24,6 +24,8 @@ import opts
 import jtype_converter
 
 class JavaType
+	super Cloneable
+
 	var identifier = new Array[String]
 	var generic_params: nullable Array[JavaType] = null
 
@@ -119,6 +121,18 @@ class JavaType
 		if self.has_generic_params then
 			for params in generic_params do params.resolve_types(conversion_map)
 		end
+	end
+
+	# Get a copy of `self`
+	redef fun clone
+	do
+		var jtype = new JavaType
+		jtype.identifier = identifier
+		jtype.generic_params = generic_params
+		jtype.is_void = is_void
+		jtype.is_vararg = is_vararg
+		jtype.array_dimension = array_dimension
+		return jtype
 	end
 
 	# Comparison based on fully qualified named
