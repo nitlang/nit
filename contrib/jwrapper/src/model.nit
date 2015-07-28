@@ -144,7 +144,7 @@ class JavaType
 	# Comparison based on fully qualified named
 	redef fun ==(other) do return other isa JavaType and
 		self.package_name == other.package_name and
-		self.is_primitive_array == other.is_primitive_array
+		self.array_dimension == other.array_dimension
 
 	redef fun hash do return self.package_name.hash
 end
