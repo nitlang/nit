@@ -291,7 +291,7 @@ class CodeGenerator
 		file_out.write """
 	# Java constructor: {{{java_class}}}
 {{{c}}}	new {{{name}}}{{{nit_params_s}}} in "Java" `{
-{{{c}}}		return new {{{java_class}}}({{{java_params_s}}});
+{{{c}}}		return new {{{java_class.class_type.package_name}}}({{{java_params_s}}});
 {{{c}}}	`}
 
 """
