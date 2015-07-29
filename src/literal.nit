@@ -93,7 +93,7 @@ end
 redef class ADecIntExpr
 	redef fun accept_literal(v)
 	do
-		value = self.n_number.text.to_i
+		value = self.n_number.text.remove_underscores.to_i
 	end
 end
 
@@ -142,7 +142,7 @@ redef class ADecByteExpr
 	redef fun accept_literal(v)
 	do
 		var t = self.n_bytenum.text
-		value = t.substring(0, t.length - 2).to_i.to_b
+		value = t.substring(0, t.length - 2).remove_underscores.to_i.to_b
 	end
 end
 
