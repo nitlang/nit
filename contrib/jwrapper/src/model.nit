@@ -20,6 +20,7 @@ module model
 
 import more_collections
 import opts
+import poset
 
 import jtype_converter
 
@@ -183,6 +184,9 @@ class JavaClass
 	# Super classes of this class
 	var extends = new HashSet[JavaType]
 
+	# Position of self in `model.class_hierarchy`
+	var in_hierarchy: nullable POSetElement[JavaClass] = null is noserialize
+
 	redef fun to_s do return class_type.to_s
 
 	# Resolve the types in `other` in the context of this class
@@ -319,6 +323,48 @@ class JavaModel
 					var nester = classes[nester_name]
 					nester.resolve_types_of java_class
 				end
+			end
+		end
+	end
+
+	# Specialization hierarchy of `classes`
+	var class_hierarchy = new POSet[JavaClass]
+
+	# Fill `class_hierarchy`
+	fun build_class_hierarchy
+	do
+		var object_type = new JavaType
+		object_type.identifier = ["java","lang","Object"]
+
+		# Fill POSet
+		for name, java_class in classes do
+			# Skip anonymous classes
+			if java_class.class_type.is_anonymous then continue
+
+			java_class.in_hierarchy = class_hierarchy.add_node(java_class)
+
+			# Collect explicit super classes
+			var super_classes = new Array[JavaType]
+			super_classes.add_all java_class.implements
+			super_classes.add_all java_class.extends
+
+			# Remove unavailable super classes
+			for super_type in super_classes.reverse_iterator do
+				# Is the super class available?
+				if not classes.keys.has(super_type.package_name) then super_classes.remove(super_type)
+			end
+
+			# If the is no explicit supers, add `java.lang.Object`
+			if super_classes.is_empty and java_class.class_type != object_type then
+				super_classes.add object_type
+			end
+
+			for super_type in super_classes do
+				# Is the super class available?
+				if not classes.keys.has(super_type.package_name) then continue
+
+				var super_class = classes[super_type.package_name]
+				class_hierarchy.add_edge(java_class, super_class)
 			end
 		end
 	end

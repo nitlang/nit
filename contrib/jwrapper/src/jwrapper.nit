@@ -194,8 +194,13 @@ var visitor = new JavaVisitor(model)
 visitor.enter_visit root_node
 sys.perfs["core model"].add clock.lapse
 
+# Resolve types
 model.resolve_types
 sys.perfs["core resolve"].add clock.lapse
+
+# Build class hierarchy
+model.build_class_hierarchy
+sys.perfs["core hierarchy"].add clock.lapse
 
 if opt_verbose.value > 0 then print "# Generating Nit code"
 
