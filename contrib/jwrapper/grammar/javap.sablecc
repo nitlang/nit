@@ -27,7 +27,7 @@ class_or_interface = 'class'|'interface';
 modifier
 	= 'public'|'private'|'protected'|'static'|'final'|'native'|'synchronized'|'abstract'|'threadsafe'|'transient'|'volatile'|'strictfp';
 
-type = base_type brackets*;
+type = base_type brackets* dots?;
 
 base_type
 	= {primitive:} primitive_base_type
@@ -52,27 +52,19 @@ full_class_name
 	| {head:} class_name;
 class_name = identifier generic_parameters?;
 
-generic_parameters = '<' parameters '>';
+generic_parameters = '<' types '>';
 
-parameter = type dots?;
-parameters
-	= {tail:} parameters ',' parameter
-	| {head:} parameter;
+types
+	= {tail:} types ',' type
+	| {head:} type;
 
 property_declaration
-	= {method:} modifier* generic_parameters? type identifier '(' parameters? ')' throws_declaration? ';'
-	| {constructor:} modifier* generic_parameters? full_class_name '(' parameters? ')' throws_declaration? ';'
+	= {method:} modifier* generic_parameters? type identifier '(' types? ')' throws_declaration? ';'
+	| {constructor:} modifier* generic_parameters? full_class_name '(' types? ')' throws_declaration? ';'
 	| {attribute:} modifier* type identifier brackets* throws_declaration? ';'
 	| {static:} modifier* '{' '}' ';'
 	| ';';
 
-implements_declaration = 'implements' interface_list;
-extends_declaration = 'extends' interface_list;
-interface_list
-	= {tail:} interface_list ',' full_class_name
-	| {head:} full_class_name;
-
-throws_declaration = 'throws' exception_list?;
-exception_list
-	= {tail:} exception_list ',' type
-	| {head:} type;
+implements_declaration = 'implements' types;
+extends_declaration = 'extends' types;
+throws_declaration = 'throws' types?;

@@ -91,14 +91,14 @@ redef class Nproperty_declaration_method
 		var n_params = n_generic_parameters
 		var generic_params
 		if n_params != null then
-			generic_params = n_params.n_parameters.to_a
+			generic_params = n_params.n_types.to_a
 		else generic_params = new Array[JavaType]
 
 		# Collect parameters
-		var n_parameters = n_parameters
+		var n_types = n_types
 		var params
-		if n_parameters != null then
-			params = n_parameters.to_a
+		if n_types != null then
+			params = n_types.to_a
 		else params = new Array[JavaType]
 
 		var method = new JavaMethod(is_static, return_jtype, params, generic_params)
@@ -111,17 +111,17 @@ redef class Nproperty_declaration_constructor
 	redef fun accept_visitor(v)
 	do
 		# Collect parameters
-		var n_parameters = n_parameters
+		var n_types = n_types
 		var params
-		if n_parameters != null then
-			params = n_parameters.to_a
+		if n_types != null then
+			params = n_types.to_a
 		else params = new Array[JavaType]
 
 		# Generic parameters
 		var n_params = n_generic_parameters
 		var generic_params
 		if n_params != null then
-			generic_params = n_params.n_parameters.to_a
+			generic_params = n_params.n_types.to_a
 		else generic_params = new Array[JavaType]
 
 		var method = new JavaConstructor(params, generic_params)
@@ -166,6 +166,9 @@ redef class Ntype
 
 		var brackets = n_brackets
 		if brackets != null then jtype.array_dimension += brackets.children.length
+
+		var dots = n_dots
+		if dots != null then jtype.is_vararg = true
 
 		return jtype
 	end
@@ -259,7 +262,7 @@ redef class Nfull_class_name
 
 		# Generic parameters
 		var n_params = n_class_name_common.n_generic_parameters
-		if n_params != null then jtype.generic_params = n_params.n_parameters.to_a
+		if n_params != null then jtype.generic_params = n_params.n_types.to_a
 
 		return jtype
 	end
@@ -282,35 +285,23 @@ redef class Nfull_class_name_tail
 	end
 end
 
-redef class Nparameters
+redef class Ntypes
 	# Get the types composing this list of parameters
 	#
 	# This is used both on methods signatures and type parameters.
 	private fun to_a: Array[JavaType] is abstract
 end
 
-redef class Nparameters_head
-	redef fun to_a do return [n_parameter.to_java_type]
+redef class Ntypes_head
+	redef fun to_a do return [n_type.to_java_type]
 end
 
-redef class Nparameters_tail
+redef class Ntypes_tail
 	redef fun to_a
 	do
-		var a = n_parameters.to_a
-		a.add n_parameter.to_java_type
+		var a = n_types.to_a
+		a.add n_type.to_java_type
 		return a
-	end
-end
-
-redef class Nparameter
-	private fun to_java_type: JavaType
-	do
-		var jtype = n_type.to_java_type
-
-		var dots = n_dots
-		if dots != null then jtype.is_vararg = true
-
-		return jtype
 	end
 end
 
