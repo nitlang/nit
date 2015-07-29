@@ -69,6 +69,9 @@ class CodeGenerator
 			# Skip anonymous classes
 			if jclass.class_type.is_anonymous then continue
 
+			# Skip classes with an invalid name at the Java language level
+			if jclass.class_type.extern_equivalent.has("-") then continue
+
 			generate_class_header(jclass.class_type)
 
 			for id, signatures in jclass.methods do
