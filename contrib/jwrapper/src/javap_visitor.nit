@@ -175,7 +175,6 @@ redef class Nbase_type
 	private fun to_java_type: JavaType
 	do
 		# By default, everything is bound by object
-		# TODO use a more precise bound
 		var jtype = new JavaType
 		jtype.identifier.add_all(["java", "lang", "object"])
 		return jtype
@@ -213,6 +212,20 @@ end
 
 redef class Nbase_type_extends
 	redef fun to_java_type do return n_generic_identifier.to_java_type
+end
+
+redef class Nbase_type_super
+	redef fun to_java_type
+	do
+		var bounds = n_type_bound.to_a
+
+		# Java use more than one lower bound,
+		# it can't be translated statically to Nit,
+		# so we use the only the first one.
+		# This may cause problems on complex generic types,
+		# but these cases can be handled manually.
+		return bounds.first
+	end
 end
 
 redef class Ngeneric_identifier
@@ -309,5 +322,23 @@ redef class Nodes
 		end
 
 		return false
+	end
+end
+
+redef class Ntype_bound
+	# Get the types composing this bound
+	private fun to_a: Array[JavaType] is abstract
+end
+
+redef class Ntype_bound_head
+	redef fun to_a do return [n_full_class_name.to_java_type]
+end
+
+redef class Ntype_bound_tail
+	redef fun to_a
+	do
+		var a = n_type_bound.to_a
+		a.add n_full_class_name.to_java_type
+		return a
 	end
 end
