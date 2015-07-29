@@ -90,6 +90,9 @@ class CodeGenerator
 				generate_getter_setter(jclass, id, attribute)
 			end
 
+			# JNI services
+			generate_jni_services jclass.class_type
+
 			# Close the class
 			file_out.write "end\n\n"
 
@@ -316,8 +319,32 @@ extern class {{{nit_type}}} in "Java" `{ {{{java_type.extern_equivalent}}} `}
 	redef fun []=(i, e) in "Java" `{ self[(int)i] = e; `}
 
 	redef fun length in "Java" `{ return self.length; `}
+
+"""
+		generate_jni_services(java_type)
+		file_out.write """
 end
 
+"""
+	end
+
+	# Generate JNI related services
+	#
+	# For now, mostly avoid issue #845, but more services could be generated as needed.
+	private fun generate_jni_services(java_type: JavaType)
+	do
+		var nit_type = model.java_to_nit_type(java_type)
+
+		file_out.write """
+	redef fun new_global_ref import sys, Sys.jni_env `{
+		Sys sys = {{{nit_type}}}_sys(self);
+		JNIEnv *env = Sys_jni_env(sys);
+		return (*env)->NewGlobalRef(env, self);
+	`}
+
+	redef fun pop_from_local_frame_with_env(jni_env) `{
+		return (*jni_env)->PopLocalFrame(jni_env, self);
+	`}
 """
 	end
 end
