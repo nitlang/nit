@@ -177,6 +177,12 @@ class JavaClass
 	# Importations from this class
 	var imports = new HashSet[NitModule]
 
+	# Interfaces implemented by this class
+	var implements = new HashSet[JavaType]
+
+	# Super classes of this class
+	var extends = new HashSet[JavaType]
+
 	redef fun to_s do return class_type.to_s
 
 	# Resolve the types in `other` in the context of this class

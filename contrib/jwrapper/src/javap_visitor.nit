@@ -61,7 +61,7 @@ end
 redef class Nextends_declaration
 	redef fun accept_visitor(v)
 	do
-		# TODO
+		v.java_class.extends.add_all n_types.to_a
 	end
 end
 
@@ -69,7 +69,7 @@ end
 redef class Nimplements_declaration
 	redef fun accept_visitor(v)
 	do
-		# TODO
+		v.java_class.implements.add_all n_types.to_a
 	end
 end
 
