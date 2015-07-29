@@ -40,6 +40,16 @@ class JavaType
 	# Is this type a vararg?
 	var is_vararg = false is writable
 
+	# Is this type based on an anonymous class?
+	var is_anonymous: Bool is lazy do
+		for id in identifier do
+			for part in id.split("$") do
+				if part.chars.first.is_digit then return true
+			end
+		end
+		return false
+	end
+
 	# Has some generic type to be resolved (T extends foo => T is resolved to foo)
 	var has_unresolved_types = false
 

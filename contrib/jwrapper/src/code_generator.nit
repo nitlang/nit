@@ -66,6 +66,8 @@ class CodeGenerator
 		file_out.write "\n"
 
 		for key, jclass in model.classes do
+			# Skip anonymous classes
+			if jclass.class_type.is_anonymous then continue
 
 			generate_class_header(jclass.class_type)
 
