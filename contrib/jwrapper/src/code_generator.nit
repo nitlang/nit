@@ -72,7 +72,7 @@ class CodeGenerator
 			# Skip classes with an invalid name at the Java language level
 			if jclass.class_type.extern_equivalent.has("-") then continue
 
-			generate_class_header(jclass.class_type)
+			generate_class_header(jclass)
 
 			for id, signatures in jclass.methods do
 				for signature in signatures do if not signature.is_static then
@@ -151,12 +151,19 @@ class CodeGenerator
 # This code has been generated using `jwrapper`
 """ is writable
 
-	private fun generate_class_header(jtype: JavaType)
+	private fun generate_class_header(java_class: JavaClass)
 	do
-		var nit_type = model.java_to_nit_type(jtype)
-		file_out.write "# Java class: {jtype}\n"
-		file_out.write "extern class {nit_type} in \"Java\" `\{ {jtype.extern_equivalent} `\}\n"
-		file_out.write "\tsuper JavaObject\n\n"
+		var java_type = java_class.class_type
+		var nit_type = model.java_to_nit_type(java_type)
+
+		var supers = ["super JavaObject"]
+
+		file_out.write """
+# Java class: {{{java_type}}}
+extern class {{{nit_type}}} in "Java" `{ {{{java_type.extern_equivalent}}} `}
+	{{{supers.join("\n\t")}}}
+
+"""
 	end
 
 	private fun generate_unknown_class_header(jtype: JavaType)
