@@ -52,6 +52,12 @@ class Config
 	# XML tag used for pattern recognition
 	fun tag_title: String do return "title"
 
+	# XML tag of the link to act upon
+	fun tag_link: String do return "link"
+
+	# Are the feeds at `rss_source_urls` compressed?
+	var compressed: nullable Bool
+
 	# Action to apply on each selected RSS element
 	fun act_on(element: Element)
 	do
@@ -131,6 +137,7 @@ class Downloader
 		var elements = new HashSet[Element]
 		for rss_url in config.rss_source_urls do
 			var rss = rss_url.fetch_rss_content
+			if config.compressed == true then rss = rss.gunzip
 			elements.add_all rss.to_rss_elements
 		end
 
@@ -144,7 +151,7 @@ class Downloader
 
 		if sys.verbose then
 			print "\n# {matches.length} matching elements:"
-			print matches.join("\n")
+			print "* " + matches.join("\n* ")
 			print "\n# Downloading..."
 		end
 
@@ -155,13 +162,13 @@ class Downloader
 				# Do not download a file that is not unique according to `unique_id`
 				if not element.is_unique_exception(config) then
 					# We make some exceptions
-					if sys.verbose then print "File in log, skipping {element}"
+					if sys.verbose then print "- Skipping {element}"
 					continue
 				end
 			end
 
 			# Download element
-			if sys.verbose then print "Acting on {element}"
+			if sys.verbose then print "+ Acting on {element}"
 
 			tool_config.act_on element
 
@@ -256,22 +263,35 @@ redef class Text
 	fun to_rss_elements: Array[Element]
 	do
 		var xml = to_xml
+		if xml isa XMLError then
+			print_error "RSS Parse Error: {xml.message}:{xml.location or else "null"}"
+			return new Array[Element]
+		end
 		var items = xml["rss"].first["channel"].first["item"]
 
 		var elements = new Array[Element]
 		for item in items do
 			var title = item[tool_config.tag_title].first.as(XMLStartTag).data
-			var link = item["link"].first.as(XMLStartTag).data
+			var link = item[tool_config.tag_link].first.as(XMLStartTag).data
 
 			elements.add new Element(title, link)
 		end
 
 		if sys.verbose then
 			print "# Found elements:"
-			print elements.join("\n")
+			print "* " + elements.join("\n* ")
 		end
 
 		return elements
+	end
+
+	# Expand the Lempel-Ziv encoded `self`
+	fun gunzip: String
+	do
+		var proc = new ProcessDuplex("gunzip", new Array[String]...)
+		var res = proc.write_and_read(self)
+		assert proc.status == 0 else print_error "gunzip failed: {proc.last_error or else "Unknown"}"
+		return res
 	end
 end
 

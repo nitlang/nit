@@ -176,6 +176,20 @@ class FileReader
 			end_reached = true
 		end
 	end
+
+	redef fun poll_in
+	do
+		var res = native_poll_in(fd)
+		if res == -1 then
+			last_error = new IOError(errno.to_s)
+			return false
+		else return res > 0
+	end
+
+	private fun native_poll_in(fd: Int): Int `{
+		struct pollfd fds = {fd, POLLIN, 0};
+		return poll(&fds, 1, 0);
+	`}
 end
 
 # `Stream` that can write to a File
@@ -305,16 +319,6 @@ class Stdin
 		path = "/dev/stdin"
 		prepare_buffer(1)
 	end
-
-	redef fun poll_in `{
-		struct pollfd fd = {0, POLLIN, 0};
-		int res = poll(&fd, 1, 0);
-		if (res == -1) {
-			perror("Error poll stdin");
-			exit(EXIT_FAILURE);
-		}
-		return res > 0;
-	`}
 end
 
 # Standard output stream.
