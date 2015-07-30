@@ -31,10 +31,18 @@ bin/server: src/server/server_serialize.nit $(shell ../../bin/nitls -M src/serve
 src/server/server_serialize.nit: $(shell ../../bin/nitls -M src/server/dedicated.nit)
 	../../bin/nitserial -o src/server/server_serialize.nit src/server/dedicated.nit
 
+# Android
+bin/tinks.apk: assets/images/drawing.png src/client/client_serialize.nit res/drawable-ldpi/icon.png $(shell ../../bin/nitls -M src/client/android_client.nit)
+	../../bin/nitc -o bin/tinks.apk src/client/android_client.nit -m src/client/client_serialize.nit --compile-dir nit_compile
+	adb install -r bin/tinks.apk
+
+res/drawable-ldpi/icon.png: art/icon.svg
+	../inkscape_tools/bin/svg_to_icons art/icon.svg --android --out res/
+
 # Archive
-pub: assets/images/drawing.png src/client/client_serialize.nit
+pub: assets/images/drawing.png src/client/client_serialize.nit bin/tinks.apk
 	../../bin/nitc --no-stacktrace -o bin/tinks src/client/linux_client.nit -m src/client/client_serialize.nit
 	tar -czvf bin/tinks.tar.gz bin/tinks assets/
-	scp bin/tinks.tar.gz xymus.net:/var/www/pub/
+	scp bin/tinks.tar.gz bin/tinks.apk xymus.net:/var/www/pub/
 
 .PHONY: pub
