@@ -80,8 +80,19 @@ end
 redef class Nproperty_declaration_method
 	redef fun accept_visitor(v)
 	do
+		var is_static = false
+		var modifiers = n_modifier
+		if modifiers != null then is_static = modifiers.has_static
+
 		var id = n_identifier.text
 		var return_jtype = n_type.to_java_type
+
+		# Generic parameters
+		var n_params = n_generic_parameters
+		var generic_params
+		if n_params != null then
+			generic_params = n_params.n_parameters.to_a
+		else generic_params = new Array[JavaType]
 
 		# Collect parameters
 		var n_parameters = n_parameters
@@ -90,7 +101,7 @@ redef class Nproperty_declaration_method
 			params = n_parameters.to_a
 		else params = new Array[JavaType]
 
-		var method = new JavaMethod(return_jtype, params)
+		var method = new JavaMethod(is_static, return_jtype, params, generic_params)
 		v.java_class.methods[id].add method
 	end
 end
@@ -106,7 +117,14 @@ redef class Nproperty_declaration_constructor
 			params = n_parameters.to_a
 		else params = new Array[JavaType]
 
-		var method = new JavaConstructor(params)
+		# Generic parameters
+		var n_params = n_generic_parameters
+		var generic_params
+		if n_params != null then
+			generic_params = n_params.n_parameters.to_a
+		else generic_params = new Array[JavaType]
+
+		var method = new JavaConstructor(params, generic_params)
 		v.java_class.constructors.add method
 	end
 end
@@ -122,7 +140,11 @@ redef class Nproperty_declaration_attribute
 		var brackets = n_brackets
 		if brackets != null then jtype.array_dimension += brackets.children.length
 
-		v.java_class.attributes[id] = jtype
+		var is_static = false
+		var modifiers = n_modifier
+		if modifiers != null then is_static = modifiers.has_static
+
+		v.java_class.attributes[id] = new JavaAttribute(is_static, jtype)
 	end
 end
 
@@ -153,7 +175,6 @@ redef class Nbase_type
 	private fun to_java_type: JavaType
 	do
 		# By default, everything is bound by object
-		# TODO use a more precise bound
 		var jtype = new JavaType
 		jtype.identifier.add_all(["java", "lang", "object"])
 		return jtype
@@ -185,6 +206,41 @@ redef class Nbase_type_void
 	do
 		var jtype = new JavaType
 		jtype.is_void = true
+		return jtype
+	end
+end
+
+redef class Nbase_type_extends
+	redef fun to_java_type do return n_generic_identifier.to_java_type
+end
+
+redef class Nbase_type_super
+	redef fun to_java_type
+	do
+		var bounds = n_type_bound.to_a
+
+		# Java use more than one lower bound,
+		# it can't be translated statically to Nit,
+		# so we use the only the first one.
+		# This may cause problems on complex generic types,
+		# but these cases can be handled manually.
+		return bounds.first
+	end
+end
+
+redef class Ngeneric_identifier
+	private fun to_java_type: JavaType is abstract
+end
+
+redef class Ngeneric_identifier_class
+	redef fun to_java_type do return n_full_class_name.to_java_type
+end
+
+redef class Ngeneric_identifier_wildcard
+	redef fun to_java_type
+	do
+		var jtype = new JavaType
+		jtype.identifier.add_all(["java", "lang", "Object"])
 		return jtype
 	end
 end
@@ -255,5 +311,34 @@ redef class Nparameter
 		if dots != null then jtype.is_vararg = true
 
 		return jtype
+	end
+end
+
+redef class Nodes
+	private fun has_static: Bool
+	do
+		for modifier in depth do
+			if modifier isa NToken and modifier.text == "static" then return true
+		end
+
+		return false
+	end
+end
+
+redef class Ntype_bound
+	# Get the types composing this bound
+	private fun to_a: Array[JavaType] is abstract
+end
+
+redef class Ntype_bound_head
+	redef fun to_a do return [n_full_class_name.to_java_type]
+end
+
+redef class Ntype_bound_tail
+	redef fun to_a
+	do
+		var a = n_type_bound.to_a
+		a.add n_full_class_name.to_java_type
+		return a
 	end
 end

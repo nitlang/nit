@@ -44,7 +44,7 @@ var opt_output = new OptionString("Output file", "-o")
 var opt_regex = new OptionString("Regex pattern to filter classes in Jar archives", "-r")
 var opt_help = new OptionBool("Show this help message", "-h", "--help")
 
-opts.add_option(opt_output, opt_unknown, opt_extern_class_prefix, opt_libs, opt_regex, opt_cast_objects, opt_verbose, opt_help)
+opts.add_option(opt_output, opt_unknown, opt_extern_class_prefix, opt_libs, opt_regex, opt_cast_objects, opt_arrays, opt_verbose, opt_help)
 opts.parse args
 
 if opts.errors.not_empty or opts.rest.is_empty or opt_help.value then
@@ -192,6 +192,9 @@ var visitor = new JavaVisitor(model)
 visitor.enter_visit root_node
 sys.perfs["core model"].add clock.lapse
 
+model.resolve_types
+sys.perfs["core resolve"].add clock.lapse
+
 if opt_verbose.value > 0 then print "# Generating Nit code"
 
 var use_comment = opt_unknown.value == 0
@@ -203,4 +206,15 @@ sys.perfs["code generator"].add clock.lapse
 if opt_verbose.value > 1 then
 	print "# Performance Analysis:"
 	print sys.perfs
+
+	print "# {model.unknown_types.length} unknown types:"
+	var c = 0
+	for id, ntype in model.unknown_types do
+		print "* {id}"
+		c += 1
+		if c > 100 then
+			print "* ..."
+			break
+		end
+	end
 end

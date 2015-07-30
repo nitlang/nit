@@ -534,6 +534,16 @@ interface MapRead[K, V]
 	#     assert x.is_empty  == false
 	fun is_empty: Bool is abstract
 
+	# Alias for `not is_empty`.
+	#
+	# Some people prefer to have conditions grammatically easier to read.
+	#
+	#     var map = new HashMap[String, Int]
+	#     assert map.not_empty == false
+	#     map["one"] = 1
+	#     assert map.not_empty == true
+	fun not_empty: Bool do return not self.is_empty
+
 	# Number of items in the collection.
 	#
 	#     var x = new HashMap[String, Int]

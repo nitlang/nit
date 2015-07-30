@@ -66,11 +66,16 @@ class CodeGenerator
 		file_out.write "\n"
 
 		for key, jclass in model.classes do
+			# Skip anonymous classes
+			if jclass.class_type.is_anonymous then continue
+
+			# Skip classes with an invalid name at the Java language level
+			if jclass.class_type.extern_equivalent.has("-") then continue
 
 			generate_class_header(jclass.class_type)
 
 			for id, signatures in jclass.methods do
-				for signature in signatures do
+				for signature in signatures do if not signature.is_static then
 					generate_method(jclass, id, id, signature.return_type, signature.params)
 					file_out.write "\n"
 				end
@@ -80,17 +85,41 @@ class CodeGenerator
 			for constructor in jclass.constructors do
 				var complex = jclass.constructors.length != 1 and constructor.params.not_empty
 				var base_name = if complex then "from" else ""
-				var name = jclass.nit_name_for(base_name, constructor.params, complex)
+				var name = jclass.nit_name_for(base_name, constructor.params, complex, false)
 
 				generate_constructor(jclass, constructor, name)
 			end
 
 			# Attributes
-			for id, java_type in jclass.attributes do
-				generate_getter_setter(jclass, id, java_type)
+			for id, attribute in jclass.attributes do if not attribute.is_static then
+				generate_getter_setter(jclass, id, attribute)
 			end
 
+			# JNI services
+			generate_jni_services jclass.class_type
+
+			# Close the class
 			file_out.write "end\n\n"
+
+			# Static functions as top-level methods
+			var static_functions_prefix = jclass.class_type.extern_name.to_snake_case
+			for id, signatures in jclass.methods do
+				for signature in signatures do if signature.is_static then
+					var nit_id = static_functions_prefix + "_" + id
+					generate_method(jclass, id, nit_id, signature.return_type, signature.params, is_static=true)
+					file_out.write "\n"
+				end
+			end
+
+			# Static attributes as top-level getters and setters
+			for id, attribute in jclass.attributes do if attribute.is_static then
+				generate_getter_setter(jclass, id, attribute)
+			end
+
+			# Primitive arrays
+			for d in [1..opt_arrays.value] do
+				generate_primitive_array(jclass, d)
+			end
 		end
 
 		if stub_for_unknown_types then
@@ -123,8 +152,8 @@ class CodeGenerator
 	private fun generate_class_header(jtype: JavaType)
 	do
 		var nit_type = model.java_to_nit_type(jtype)
-		file_out.write "# Java class: {jtype.to_package_name}\n"
-		file_out.write "extern class {nit_type} in \"Java\" `\{ {jtype.to_package_name} `\}\n"
+		file_out.write "# Java class: {jtype}\n"
+		file_out.write "extern class {nit_type} in \"Java\" `\{ {jtype.extern_equivalent} `\}\n"
 		file_out.write "\tsuper JavaObject\n\n"
 	end
 
@@ -132,105 +161,111 @@ class CodeGenerator
 	do
 		var nit_type = jtype.extern_name
 
-		file_out.write "extern class {nit_type} in \"Java\" `\{ {jtype.to_package_name} `\}\n"
+		file_out.write "extern class {nit_type} in \"Java\" `\{ {jtype.extern_equivalent} `\}\n"
 		file_out.write "\tsuper JavaObject\n\nend\n"
 	end
 
-	private fun generate_method(java_class: JavaClass, jmethod_id, method_id: String,
-		jreturn_type: JavaType, jparam_list: Array[JavaType])
+	private fun generate_method(java_class: JavaClass, java_method_id, method_id: String,
+		java_return_type: JavaType, java_params: Array[JavaType], is_static: nullable Bool)
 	do
-		var java_params = ""
-		var nit_params  = ""
+		var java_args = new Array[String]
+		var nit_params = new Array[String]
 		var nit_id = "arg"
 		var nit_id_no = 0
-		var nit_types = new Array[NitType]
-		var comment = ""
+		var c = ""
 
 		# Parameters
-		for i in [0..jparam_list.length[ do
-			var jparam = jparam_list[i]
+		for jparam in java_params do
 			var nit_type = model.java_to_nit_type(jparam)
 
-			if not nit_type.is_known and comment_unknown_types then comment = "#"
-			if jparam.is_primitive_array then comment = "#"
+			if not nit_type.is_known and comment_unknown_types then c = "#"
+			if jparam.is_vararg then c = "#"
 
-			var cast = jparam.param_cast
-
-			nit_types.add(nit_type)
-
-			if i == jparam_list.length - 1 then
-				java_params += "{cast}{nit_id}{nit_id_no}"
-				nit_params  += "{nit_id}{nit_id_no}: {nit_type}"
-			else
-				java_params += "{cast}{nit_id}{nit_id_no}" + ", "
-				nit_params  += "{nit_id}{nit_id_no}: {nit_type}, "
-			end
+			java_args.add "{jparam.param_cast}{nit_id}{nit_id_no}"
+			nit_params.add "{nit_id}{nit_id_no}: {nit_type}"
 
 			nit_id_no += 1
 		end
 
-		# Method documentation
-		var doc = "\t# Java implementation: {java_class}.{jmethod_id}\n"
-
 		# Method identifier
 		method_id = method_id.to_nit_method_name
-		method_id = java_class.nit_name_for(method_id, jparam_list, java_class.methods[jmethod_id].length > 1)
+		method_id = java_class.nit_name_for(method_id, java_params, java_class.methods[java_method_id].length > 1, is_static == true)
+
+		# Build the signature
 		var nit_signature = new Array[String]
+		nit_signature.add "fun {method_id}"
+		if not java_params.is_empty then nit_signature.add "({nit_params.join(", ")})"
 
-		nit_signature.add "\tfun {method_id}"
-
-		if not jparam_list.is_empty then
-			nit_signature.add "({nit_params})"
-		end
-
+		# Return value
 		var return_type = null
-		if not jreturn_type.is_void then
-			return_type = model.java_to_nit_type(jreturn_type)
+		if not java_return_type.is_void then
+			return_type = model.java_to_nit_type(java_return_type)
 
-			if not return_type.is_known and comment_unknown_types then comment = "#"
-			if jreturn_type.is_primitive_array then comment = "#"
+			if not return_type.is_known and comment_unknown_types then c = "#"
+			if java_return_type.is_vararg then c = "#"
 
-			nit_signature.add ": {return_type} "
+			nit_signature.add ": " + return_type.to_s
 		end
 
-		file_out.write doc
-		file_out.write comment + nit_signature.join
+		# Build the call in Java
+		var java_call
+		if is_static == true then
+			java_call = java_class.class_type.package_name
+		else java_call = "self"
+		java_call += ".{java_method_id}({java_args.join(", ")})"
 
-		if comment == "#" then
-			file_out.write " in \"Java\" `\{\n{comment}\t\tself.{jmethod_id}({java_params});\n{comment}\t`\}\n"
-		# Methods with return type
-		else if return_type != null then
-			file_out.write " in \"Java\" `\{\n{comment}\t\treturn {jreturn_type.return_cast}self.{jmethod_id}({java_params});\n{comment}\t`\}\n"
-		# Methods without return type
-		else if jreturn_type.is_void then
-			file_out.write " in \"Java\" `\{\n{comment}\t\tself.{jmethod_id}({java_params});\n{comment}\t`\}\n"
-		# No copy
-		else
-			file_out.write " in \"Java\" `\{\n{comment}\t\tself.{jmethod_id}({java_params});\n{comment}\t`\}\n"
-		end
+		if return_type != null then java_call = "return {java_return_type.return_cast}" + java_call
+
+		# Tabulation
+		var t = "\t"
+		if is_static == true then t = ""
+		var ct = c+t
+
+		# Write
+		file_out.write """
+{{{t}}}# Java implementation: {{{java_return_type}}} {{{java_class}}}.{{{java_method_id}}}({{{java_params.join(", ")}}})
+{{{ct}}}{{{nit_signature.join}}} in "Java" `{
+{{{ct}}}	{{{java_call}}};
+{{{ct}}}`}
+"""
 	end
 
 	# Generate getter and setter to access an attribute, of field
-	private fun generate_getter_setter(java_class: JavaClass, java_id: String, java_type: JavaType)
+	private fun generate_getter_setter(java_class: JavaClass, java_id: String,
+		attribute: JavaAttribute)
 	do
+		var java_type = attribute.java_type
 		var nit_type = model.java_to_nit_type(java_type)
-		var nit_id = java_id.to_nit_method_name
-		nit_id = java_class.nit_name_for(nit_id, [java_type], false)
+
+		var nit_id = java_id
+		if attribute.is_static then nit_id = java_class.class_type.extern_name.to_snake_case + "_" + nit_id
+		nit_id = nit_id.to_nit_method_name
+		nit_id = java_class.nit_name_for(nit_id, [java_type], false, attribute.is_static)
 
 		var c = ""
 		if not nit_type.is_known and comment_unknown_types then c = "#"
-		if java_type.is_primitive_array then c = "#"
+		if java_type.is_vararg then c = "#"
+
+		var recv
+		if attribute.is_static then
+			recv = java_class.class_type.package_name
+		else recv = "self"
+
+		# Tabulation
+		var t = "\t"
+		if attribute.is_static then t = ""
+		var ct = c+t
 
 		file_out.write """
-	# Java getter: {{{java_class}}}.{{{java_id}}}
-{{{c}}}	fun {{{nit_id}}}: {{{nit_type}}} in "Java" `{
-{{{c}}}		return self.{{{java_id}}};
-{{{c}}}	`}
+{{{t}}}# Java getter: {{{java_class}}}.{{{java_id}}}
+{{{ct}}}fun {{{nit_id}}}: {{{nit_type}}} in "Java" `{
+{{{ct}}}	return {{{recv}}}.{{{java_id}}};
+{{{ct}}}`}
 
-	# Java setter: {{{java_class}}}.{{{java_id}}}
-{{{c}}}	fun {{{nit_id}}}=(value: {{{nit_type}}}) in "Java" `{
-{{{c}}}		self.{{{java_id}}} = value;
-{{{c}}}	`}
+{{{t}}}# Java setter: {{{java_class}}}.{{{java_id}}}
+{{{ct}}}fun {{{nit_id}}}=(value: {{{nit_type}}}) in "Java" `{
+{{{ct}}}	{{{recv}}}.{{{java_id}}} = value;
+{{{ct}}}`}
 
 """
 	end
@@ -255,7 +290,7 @@ class CodeGenerator
 				param_id = param_id.successor(1)
 
 				if not nit_type.is_known and comment_unknown_types then c = "#"
-				if java_type.is_primitive_array then c = "#"
+				if java_type.is_vararg then c = "#"
 			end
 
 			nit_params_s = "(" + nit_params.join(", ") + ")"
@@ -265,9 +300,60 @@ class CodeGenerator
 		file_out.write """
 	# Java constructor: {{{java_class}}}
 {{{c}}}	new {{{name}}}{{{nit_params_s}}} in "Java" `{
-{{{c}}}		return new {{{java_class}}}({{{java_params_s}}});
+{{{c}}}		return new {{{java_class.class_type.package_name}}}({{{java_params_s}}});
 {{{c}}}	`}
 
+"""
+	end
+
+	private fun generate_primitive_array(java_class: JavaClass, dimensions: Int)
+	do
+		var base_java_type = java_class.class_type
+		var java_type = base_java_type.clone
+		java_type.array_dimension = dimensions
+
+		var base_nit_type = model.java_to_nit_type(base_java_type)
+		var nit_type = model.java_to_nit_type(java_type)
+
+		file_out.write """
+# Java primitive array: {{{java_type}}}
+extern class {{{nit_type}}} in "Java" `{ {{{java_type.extern_equivalent}}} `}
+	super AbstractJavaArray[{{{base_nit_type}}}]
+
+	# Get a new array of the given `size`
+	new(size: Int) in "Java" `{ return new {{{base_java_type}}}[(int)size]; `}
+
+	redef fun [](i) in "Java" `{ return self[(int)i]; `}
+
+	redef fun []=(i, e) in "Java" `{ self[(int)i] = e; `}
+
+	redef fun length in "Java" `{ return self.length; `}
+
+"""
+		generate_jni_services(java_type)
+		file_out.write """
+end
+
+"""
+	end
+
+	# Generate JNI related services
+	#
+	# For now, mostly avoid issue #845, but more services could be generated as needed.
+	private fun generate_jni_services(java_type: JavaType)
+	do
+		var nit_type = model.java_to_nit_type(java_type)
+
+		file_out.write """
+	redef fun new_global_ref import sys, Sys.jni_env `{
+		Sys sys = {{{nit_type}}}_sys(self);
+		JNIEnv *env = Sys_jni_env(sys);
+		return (*env)->NewGlobalRef(env, self);
+	`}
+
+	redef fun pop_from_local_frame_with_env(jni_env) `{
+		return (*jni_env)->PopLocalFrame(jni_env, self);
+	`}
 """
 	end
 end
@@ -283,10 +369,16 @@ redef class Sys
 		"protected", "public", "return", "self", "super", "then", "true", "type", "var", "while",
 
 	# Top-level methods
-		"class_name", "get_time", "hash", "is_same_type", "is_same_instance", "output",
+		"class_name", "get_time", "hash", "inspect", "inspect_head", "is_same_type",
+		"is_same_instance", "object_id", "output", "output_class_name", "sys", "to_s",
 
 	# Pointer or JavaObject methods
 		"free"])
+
+	# Name of methods used at the top-level
+	#
+	# Used by `JavaClass::nit_name_for` with static properties.
+	private var top_level_used_names = new HashSet[String]
 end
 
 redef class String
@@ -317,13 +409,13 @@ end
 
 redef class JavaClass
 	# Property names used in this class
-	private var used_name = new HashSet[String]
+	private var used_names = new HashSet[String]
 
 	# Get an available property name for the Java property with `name` and parameters
 	#
 	# If `use_parameters_name` then expect that there will be conflicts,
 	# so use the types of `parameters` to build the name.
-	private fun nit_name_for(name: String, parameters: Array[JavaType], use_parameters_name: Bool): String
+	private fun nit_name_for(name: String, parameters: Array[JavaType], use_parameters_name: Bool, is_static: Bool): String
 	do
 		# Append the name of each parameter
 		if use_parameters_name then
@@ -332,15 +424,21 @@ redef class JavaClass
 			end
 		end
 
+		# Set of property names, local or top-level
+		var used_names
+		if is_static then
+			used_names = sys.top_level_used_names
+		else used_names = self.used_names
+
 		# As a last resort, append numbers to the name
 		var base_name = name
 		var count = 1
-		while used_name.has(name) do
+		while used_names.has(name) do
 			name = base_name + count.to_s
 			count += 1
 		end
 
-		used_name.add name
+		used_names.add name
 		return name
 	end
 end
