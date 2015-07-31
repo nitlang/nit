@@ -119,6 +119,7 @@ class RemoteClient
 	do
 		# Setup serialization
 		writer = new BinarySerializer(socket)
+		writer.cache = new AsyncCache(true)
 		reader = new BinaryDeserializer(socket)
 		writer.link reader
 	end
