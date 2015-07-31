@@ -107,6 +107,8 @@ redef class Server
 		# Get orders from players
 		var clients_to_remove = new Array[RemoteClient]
 		for client in clients do
+			if not client.socket.poll_in then continue
+
 			var orders = client.reader.deserialize
 			var errors = client.reader.errors
 			if errors.not_empty then
