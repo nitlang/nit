@@ -149,12 +149,11 @@ class TCPStream
 		return pollin(events, timeout).length != 0
 	end
 
-	# Checks if the socket still is connected
+	# Is this socket still connected?
 	fun connected: Bool
 	do
 		if closed then return false
-		var events = [new NativeSocketPollValues.pollhup, new NativeSocketPollValues.pollerr]
-		if pollin(events, 0).length == 0 then
+		if native.poll_hup_err == 0 then
 			return true
 		else
 			closed = true
