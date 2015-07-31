@@ -276,6 +276,11 @@ abstract class Text
 	#     assert "101101".to_bin == 45
 	fun to_bin: Int do return a_to(2)
 
+	# If `self` contains only digits '0' .. '9', return the corresponding integer.
+	#
+	#     assert "108".to_dec == 108
+	fun to_dec: Int do return a_to(10)
+
 	# If `self` contains only digits and letters, return the corresponding integer in a given base
 	#
 	#     assert "120".a_to(3)     == 15
@@ -341,6 +346,33 @@ abstract class Text
 			   not (c >= 'A' and c <= 'F') and
 			   not (c >= '0' and c <= '9') then return false
 		end
+		return true
+	end
+
+	# Returns `true` if the string contains only Binary digits
+	#
+	#     assert "1101100".is_bin  == true
+	#     assert "1101020".is_bin  == false
+	fun is_bin: Bool do
+		for i in chars do if i != '0' and i != '1' then return false
+		return true
+	end
+
+	# Returns `true` if the string contains only Octal digits
+	#
+	#     assert "213453".is_oct  == true
+	#     assert "781".is_oct     == false
+	fun is_oct: Bool do
+		for i in chars do if i < '0' or i > '7' then return false
+		return true
+	end
+
+	# Returns `true` if the string contains only Decimal digits
+	#
+	#     assert "10839".is_dec == true
+	#     assert "164F".is_dec  == false
+	fun is_dec: Bool do
+		for i in chars do if i < '0' or i > '9' then return false
 		return true
 	end
 
