@@ -65,7 +65,7 @@ redef class ExplosionEvent
 		var d = 20
 		if local_tank != null then
 			d = local_tank.pos.dist(pos).to_i
-			d = 500 - d*20
+			d = 100 - d*5
 			d = d.max(10)
 		end
 
