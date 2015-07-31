@@ -74,17 +74,6 @@ redef class AExpr
 	end
 end
 
-redef class Text
-	private fun remove_underscores: Text do
-		var b = new FlatBuffer
-		for i in chars do
-			if i == '_' then continue
-			b.add i
-		end
-		return b
-	end
-end
-
 redef class AIntExpr
 	# The value of the literal int once computed.
 	var value: nullable Int
