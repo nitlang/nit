@@ -26,10 +26,17 @@ Helpers
 all = [0 .. 0xFF];
 lowercase = ['a' .. 'z'];
 uppercase = ['A' .. 'Z'];
+
 digit = ['0' .. '9'];
 hexdigit = ['0'..'9'] | ['a'..'f'] | ['A'..'F'] | '_';
 bindigit = '0' | '1' | '_';
 octdigit = ['0' .. '7'] | '_';
+number = digit (digit | '_')*;
+hex_number = ('0x' | '0X') hexdigit+;
+bin_number = ('0b' | '0B') bindigit+;
+oct_number = ('0o' | '0O') octdigit+;
+prec = '8' | '16' | '32';
+
 letter = lowercase | uppercase | digit | '_';
 
 tab = 9;
@@ -199,14 +206,7 @@ classid = uppercase letter*;
 id = lowercase letter*;
 attrid = '_' lowercase letter*;
 
-number = digit (digit | '_')*;
-hex_number = ('0x' | '0X') hexdigit+;
-bin_number = ('0b' | '0B') bindigit+;
-oct_number = ('0o' | '0O') octdigit+;
-bytenum = digit (digit | '_')* 'u8';
-hex_bytenum = ('0x' | '0X') hexdigit+ 'u8';
-bin_bytenum = ('0b' | '0B') bindigit+ 'u8';
-oct_bytenum = ('0o' | '0O') octdigit+ 'u8';
+integer = (number | hex_number | bin_number | oct_number) (('u' prec) | ('i' prec) |);
 float = digit* '.' digit+ | (digit+ | digit* '.' digit+) ('E'|'e') ('+'|'-'|) digit+;
 string = '"' str_body '"' | '"' '"' '"' long_str_body lsend1 | ''' ''' ''' long_sstr_body ''' ''' ''';
 start_string = '"' str_body '{' | '"' '"' '"' long_str_body lsend2;
@@ -640,14 +640,7 @@ expr_single~nopar~nobra {-> expr}
 	| {true} kwtrue annotations_o {-> New expr.true(kwtrue, annotations_o.annotations)}
 	| {false} kwfalse annotations_o {-> New expr.false(kwfalse, annotations_o.annotations)}
 	| {null} kwnull annotations_o {-> New expr.null(kwnull, annotations_o.annotations)}
-	| {int} number annotations_o {-> New expr.dec_int(number, annotations_o.annotations)}
-	| {hex_int} hex_number annotations_o {-> New expr.hex_int(hex_number, annotations_o.annotations)}
-	| {bin_int} bin_number annotations_o {-> New expr.bin_int(bin_number, annotations_o.annotations)}
-	| {oct_int} oct_number annotations_o {-> New expr.oct_int(oct_number, annotations_o.annotations)}
-	| {byte} bytenum annotations_o {-> New expr.dec_byte(bytenum, annotations_o.annotations)}
-	| {hex_byte} hex_bytenum annotations_o {-> New expr.hex_byte(hex_bytenum, annotations_o.annotations)}
-	| {bin_byte} bin_bytenum annotations_o {-> New expr.bin_byte(bin_bytenum, annotations_o.annotations)}
-	| {oct_byte} oct_bytenum annotations_o {-> New expr.oct_byte(oct_bytenum, annotations_o.annotations)}
+	| {integer} integer annotations_o {-> New expr.integer(integer, annotations_o.annotations)}
 	| {float} float annotations_o {-> New expr.float(float, annotations_o.annotations)}
 	| {char} char annotations_o {-> New expr.char(char, annotations_o.annotations)}
 	| {string} string annotations_o {-> New expr.string(string, annotations_o.annotations)}
@@ -1011,14 +1004,7 @@ expr	= {block} expr* kwend?
 	| {true} kwtrue annotations?
 	| {false} kwfalse annotations?
 	| {null} kwnull annotations?
-	| {dec_int} number annotations?
-	| {hex_int} hex_number annotations?
-	| {bin_int} bin_number annotations?
-	| {oct_int} oct_number annotations?
-	| {dec_byte} bytenum annotations?
-	| {hex_byte} hex_bytenum annotations?
-	| {bin_byte} bin_bytenum annotations?
-	| {oct_byte} oct_bytenum annotations?
+	| {integer} integer annotations?
 	| {float} float annotations?
 	| {char} char annotations?
 	| {string} string annotations?
