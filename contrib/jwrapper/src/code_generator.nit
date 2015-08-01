@@ -86,7 +86,7 @@ class CodeGenerator
 			for constructor in jclass.constructors do
 				var complex = jclass.constructors.length != 1 and constructor.params.not_empty
 				var base_name = if complex then "from" else ""
-				var name = jclass.nit_name_for(base_name, constructor.params, complex, false)
+				var name = jclass.nit_name_for(base_name, constructor.params, complex, false, local_only=true)
 
 				generate_constructor(jclass, constructor, name)
 			end
@@ -446,20 +446,36 @@ redef class JavaClass
 	#
 	# If `use_parameters_name` then expect that there will be conflicts,
 	# so use the types of `parameters` to build the name.
-	private fun nit_name_for(name: String, parameters: Array[JavaType], use_parameters_name: Bool, is_static: Bool): String
+	private fun nit_name_for(name: String, parameters: Array[JavaType], use_parameters_name: Bool, is_static: Bool, local_only: nullable Bool): String
 	do
 		# Append the name of each parameter
 		if use_parameters_name then
 			for param in parameters do
-				name += "_" + param.id
+				var id = param.id
+				id += "Array"*param.array_dimension
+				name += "_" + id
 			end
 		end
 
-		# Set of property names, local or top-level
+		# Set of sets of property names, local or top-level
+		var local_used_names
 		var used_names
 		if is_static then
+			# Top-level methods
+			local_used_names = sys.top_level_used_names
 			used_names = sys.top_level_used_names
-		else used_names = self.used_names
+		else if local_only == true then
+			# Local only: constructors
+			local_used_names = self.used_names
+			used_names = self.used_names
+		else
+			# Avoid conflicts with all super classes
+			local_used_names = self.used_names
+			used_names = new HashSet[String]
+			for sup in in_hierarchy.greaters do
+				used_names.add_all sup.used_names
+			end
+		end
 
 		# As a last resort, append numbers to the name
 		var base_name = name
@@ -469,7 +485,7 @@ redef class JavaClass
 			count += 1
 		end
 
-		used_names.add name
+		local_used_names.add name
 		return name
 	end
 end
