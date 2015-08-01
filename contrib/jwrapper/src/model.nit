@@ -172,6 +172,9 @@ class JavaClass
 	# Methods of this class organized by their name
 	var methods = new MultiHashMap[String, JavaMethod]
 
+	# Methods signatures introduced by this class
+	var local_intro_methods = new MultiHashMap[String, JavaMethod]
+
 	# Constructors of this class
 	var constructors = new Array[JavaConstructor]
 
@@ -365,6 +368,34 @@ class JavaModel
 
 				var super_class = classes[super_type.package_name]
 				class_hierarchy.add_edge(java_class, super_class)
+			end
+		end
+
+		# Flatten classes from the top one (Object like)
+		var linearized = class_hierarchy.linearize(class_hierarchy)
+
+		# Methods intro
+		for java_class in linearized do
+			var in_hierarchy = class_hierarchy[java_class]
+			var greaters = in_hierarchy.greaters
+
+			for mid, signatures in java_class.methods do
+				for signature in signatures do
+					if signature.is_static then continue
+
+					# Check if this signature exists in a parent
+					for parent in greaters do
+						if parent == java_class then continue
+
+						if not parent.methods.keys.has(mid) then continue
+
+						if parent.methods[mid].has(signature) then continue label
+					end
+
+					# This is an introduction! register it
+					java_class.local_intro_methods[mid].add signature
+
+				end label
 			end
 		end
 	end
