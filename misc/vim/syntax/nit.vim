@@ -36,8 +36,9 @@ syn match NITExprSubst "{\([^}]\|\n\)*}" contained
 syn match NITExprSubstLong "\\." contained
 syn match NITExprSubstLong "{*\zs{{{\([^}]\|\n\)*}}}\ze}*" contained
 
-" Numbers and ASCII Codes
-syn match NITNumber "\<\(\d\+\.\d\+\|\d\+\)\>"
+" Numbers
+syn match NITNumber "\<\([0-9_]\+\|0[bB][01_]\+\|0[oO][0-7_]\+\|0[xX][0-9a-fA-F_]\+\)\([iu]\(8\|16\|32\)\)\?\>"
+syn match NITNumber "\<[0-9_]\+\.[0-9_]\+\>"
 
 " Identifiers
 syn match NITClass		"\<\u\w*"
