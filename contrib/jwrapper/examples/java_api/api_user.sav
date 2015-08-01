@@ -1,4 +1,9 @@
 1234
 5678
-true
-0
+List is empty? true
+List size 0
+List is empty? false
+List size 1
+5678
+List is empty? true
+List size 0
