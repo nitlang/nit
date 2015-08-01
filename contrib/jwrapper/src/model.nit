@@ -230,6 +230,9 @@ class JavaClass
 			end
 		end
 	end
+
+	redef fun hash do return class_type.hash
+	redef fun ==(o) do return o isa JavaClass and o.class_type == class_type
 end
 
 # Model of all the Java class analyzed in one run
@@ -334,6 +337,9 @@ class JavaMethod
 
 	# Generic parameters of this method
 	var generic_params: Array[JavaType]
+
+	redef fun ==(o) do return o isa JavaMethod and o.is_static == is_static and o.params == params
+	redef fun hash do return params.hash
 end
 
 # An attribute in a Java class
