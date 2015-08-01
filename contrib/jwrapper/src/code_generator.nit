@@ -53,7 +53,7 @@ class CodeGenerator
 
 		# Module declaration
 		var module_name = module_name
-		if module_name != null then file_out.write "module {module_name}\n"
+		if module_name != null then file_out.write "module {module_name} is no_warning(\"useless-superclass\")\n"
 		file_out.write "\n"
 
 		# All importations
