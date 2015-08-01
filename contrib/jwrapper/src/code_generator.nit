@@ -74,8 +74,9 @@ class CodeGenerator
 
 			generate_class_header(jclass)
 
-			for id, signatures in jclass.methods do
-				for signature in signatures do if not signature.is_static then
+			for id, signatures in jclass.local_intro_methods do
+				for signature in signatures do
+					assert not signature.is_static
 					generate_method(jclass, id, id, signature.return_type, signature.params)
 					file_out.write "\n"
 				end
