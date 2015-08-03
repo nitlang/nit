@@ -90,8 +90,10 @@ for input in opts.rest do
 	else if ext == "javap" then
 		javap_files.add input
 	else if ext == "jar" then
-		var out_dir = "tmp"
 		clock.lapse
+
+		var out_dir = "tmp"
+		if not out_dir.file_exists then out_dir.mkdir
 
 		if opt_verbose.value > 0 then print "# Extracting {input}"
 
