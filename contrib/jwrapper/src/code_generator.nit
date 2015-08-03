@@ -444,7 +444,7 @@ end
 
 redef class JavaClass
 	# Property names used in this class
-	private var used_names = new HashSet[String]
+	private var used_names = new HashSet[String] is serialize
 
 	# Get an available property name for the Java property with `name` and parameters
 	#

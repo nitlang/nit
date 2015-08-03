@@ -15,12 +15,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Contains the java and nit type representation used to convert java to nit code
-module model
+# Model of the parsed Java classes and their corresponding Nit types
+module model is serialize
 
 import more_collections
 import opts
 import poset
+import binary::serialization
 
 import jtype_converter
 
@@ -262,10 +263,10 @@ class JavaModel
 	end
 
 	# Unknown types, not already wrapped and not in this pass
-	var unknown_types = new HashMap[JavaType, NitType]
+	var unknown_types = new HashMap[JavaType, NitType] is noserialize
 
 	# Wrapped types, or classes analyzed in this pass
-	var known_types = new HashMap[JavaType, NitType]
+	var known_types = new HashMap[JavaType, NitType] is noserialize
 
 	# Get the `NitType` corresponding to the `JavaType`
 	#
@@ -331,7 +332,7 @@ class JavaModel
 	end
 
 	# Specialization hierarchy of `classes`
-	var class_hierarchy = new POSet[JavaClass]
+	var class_hierarchy = new POSet[JavaClass] is noserialize
 
 	# Fill `class_hierarchy`
 	fun build_class_hierarchy
@@ -528,7 +529,7 @@ redef class Sys
 	var opt_arrays = new OptionInt("Depth of the primitive array for each wrapped class (default: 1)", 1, "-a")
 end
 
-redef class Text
+redef abstract class Text
 	# Get a copy of `self` where the first letter is capitalized
 	fun simple_capitalized: String
 	do
