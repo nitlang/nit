@@ -240,7 +240,58 @@ abstract class Text
 		return b.to_s
 	end
 
-	# If `self` contains only digits, return the corresponding integer
+	# Is `self` a well-formed Integer (i.e. parsable via `to_i`)
+	#
+	#     assert "123".is_int
+	#     assert "0b1011".is_int
+	#     assert not "0x_".is_int
+	#     assert not "0xGE".is_int
+	fun is_int: Bool do
+		var s = remove_all('_')
+		var pos = 0
+		while s[pos] == '-' do
+			pos += 1
+		end
+		s = s.substring_from(pos)
+		var rets = s.strip_numhead
+		if rets == "" then return false
+		var hd = get_numhead
+		if hd == "0x" or hd == "0X" then return rets.is_hex
+		if hd == "0b" or hd == "0B" then return rets.is_bin
+		if hd == "0o" or hd == "0O" then return rets.is_oct
+		return hd.is_dec
+	end
+
+	# Removes the numeric head of `self` if present
+	#
+	#     intrude import standard::text::abstract_text
+	#     assert "0xFFEF".strip_numhead  == "FFEF"
+	#     assert "0o7364".strip_numhead  == "7364"
+	#     assert "0b01001".strip_numhead == "01001"
+	#     assert "98".strip_numhead      == "98"
+	private fun strip_numhead: Text do
+		if get_numhead != "" then return substring_from(2)
+		return self
+	end
+
+	# Gets the numeric head of `self` if present
+	# Returns "" otherwise
+	#
+	#     intrude import standard::text::abstract_text
+	#     assert "0xFEFF".get_numhead  == "0x"
+	#     assert "0b01001".get_numhead == "0b"
+	#     assert "0o872".get_numhead   == "0o"
+	#     assert "98".get_numhead      == ""
+	private fun get_numhead: Text do
+		if self.length < 2 then return ""
+		var c = self[0]
+		if c != '0' then return ""
+		c = self[1]
+		if c == 'x' or c == 'b' or c == 'o' or
+		   c == 'X' or c == 'B' or c == 'O' then return substring(0, 2)
+		return ""
+	end
+
 	#
 	#     assert "123".to_i        == 123
 	#     assert "-1".to_i         == -1
