@@ -65,10 +65,14 @@ class CodeGenerator
 		file_out.write imports.join("\n")
 		file_out.write "\n"
 
-		for key, jclass in model.classes do
-			# Skip anonymous classes
-			if jclass.class_type.is_anonymous then continue
+		# Sort classes from top-level classes (java.lang.Object) to leaves
+		var standard_classes = new Array[JavaClass]
+		for name, jclass in model.classes do
+			if not jclass.class_type.is_anonymous then standard_classes.add jclass
+		end
+		var linearized = model.class_hierarchy.linearize(standard_classes)
 
+		for jclass in linearized do
 			# Skip classes with an invalid name at the Java language level
 			if jclass.class_type.extern_equivalent.has("-") then continue
 
