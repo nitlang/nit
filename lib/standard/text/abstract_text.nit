@@ -292,13 +292,42 @@ abstract class Text
 		return ""
 	end
 
+	# Returns `self` as the corresponding integer
 	#
 	#     assert "123".to_i        == 123
 	#     assert "-1".to_i         == -1
+	#     assert "0x64".to_i       == 100
+	#     assert "0b1100_0011".to_i== 195
+	#     assert "--12".to_i       == 12
+	#
+	# REQUIRE: `self`.`is_int`
 	fun to_i: Int
 	do
-		# Shortcut
-		return to_s.to_cstring.atoi
+		assert self.is_int
+		var s = remove_all('_')
+		var val = 0
+		var neg = false
+		var pos = 0
+		while s[pos] == '-' do
+			neg = not neg
+			pos += 1
+		end
+		s = s.substring_from(pos)
+		if s.length >= 2 then
+			var s1 = s[1]
+			if s1 == 'x' or s1 == 'X' then
+				val = s.substring_from(2).to_hex
+			else if s1 == 'o' or s1 == 'O' then
+				val = s.substring_from(2).to_oct
+			else if s1 == 'b' or s1 == 'B' then
+				val = s.substring_from(2).to_bin
+			else if s1.is_numeric then
+				val = s.to_dec
+			end
+		else
+			val = s.to_dec
+		end
+		return if neg then -val else val
 	end
 
 	# If `self` contains a float, return the corresponding float
