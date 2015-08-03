@@ -128,6 +128,8 @@ class CodeGenerator
 				file_out.write "\n"
 			end
 		end
+
+		file_out.close
 	end
 
 	# License for the header of the generated Nit module
