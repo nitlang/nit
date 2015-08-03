@@ -371,8 +371,10 @@ class PlayerReviewsPanel
 			"-involves:{player.name}"
 
 		var issues = new ArraySet[Issue]
-		issues.add_all game.repo.search_issues(q).as(not null)
-		issues.add_all game.repo.search_issues(q2).as(not null)
+		var rq = game.repo.search_issues(q)
+		if rq != null then issues.add_all rq
+		var rq2 = game.repo.search_issues(q2)
+		if rq2 != null then issues.add_all rq2
 		if issues.is_empty then
 			add "<em>No pull request or issue to review yet...</em>"
 			return
@@ -417,8 +419,10 @@ class PlayerWorkPanel
 		var q2 = "is:open sort:updated-asc assignee:{player.name}"
 
 		var issues = new ArraySet[Issue]
-		issues.add_all game.repo.search_issues(q).as(not null)
-		issues.add_all game.repo.search_issues(q2).as(not null)
+		var rq = game.repo.search_issues(q)
+		if rq != null then issues.add_all rq
+		var rq2 = game.repo.search_issues(q2)
+		if rq2 != null then issues.add_all rq2
 		if issues.is_empty then
 			add "<em>No work to do yet...</em>"
 			return
