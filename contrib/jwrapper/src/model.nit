@@ -373,7 +373,7 @@ class JavaModel
 		object_type.identifier = ["java","lang","Object"]
 
 		# Fill POSet
-		for name, java_class in classes do
+		for name, java_class in all_classes do
 			# Skip anonymous classes
 			if java_class.class_type.is_anonymous then continue
 
@@ -387,7 +387,7 @@ class JavaModel
 			# Remove unavailable super classes
 			for super_type in super_classes.reverse_iterator do
 				# Is the super class available?
-				if not classes.keys.has(super_type.package_name) then super_classes.remove(super_type)
+				if not all_classes.keys.has(super_type.package_name) then super_classes.remove(super_type)
 			end
 
 			# If the is no explicit supers, add `java.lang.Object`
@@ -397,9 +397,9 @@ class JavaModel
 
 			for super_type in super_classes do
 				# Is the super class available?
-				if not classes.keys.has(super_type.package_name) then continue
+				if not all_classes.keys.has(super_type.package_name) then continue
 
-				var super_class = classes[super_type.package_name]
+				var super_class = all_classes[super_type.package_name]
 				class_hierarchy.add_edge(java_class, super_class)
 			end
 		end
