@@ -96,6 +96,12 @@ class MediaTypes
 		types["asf"]        = "video/x-ms-asf"
 		types["mng"]        = "video/x-mng"
 		types["apk"]        = "application/vnd.android.package-archive"
+		types["svg"]        = "image/svg+xml"
+		types["ttf"]        = "application/x-font-ttf"
+		types["otf"]        = "application/x-font-opentype"
+		types["eof"]        = "application/vnd.ms-fontobject"
+		types["woff"]       = "application/font-woff"
+		types["woff2"]      = "application/font-woff2"
 	end
 end
 
