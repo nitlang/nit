@@ -4,11 +4,11 @@ all: android_api.nit
 
 java_api.nit:
 	mkdir -p tmp
-	../../bin/jwrapper -vv -u comment -o java_api.nit -r "^(java|javax|junit|org)" $(ANDROID_JAR) -i ../../../../lib/java/collections.nit
+	../../bin/jwrapper -vv -u comment -o java_api.nit -r "^(java|javax|junit|org)" $(ANDROID_JAR) -i ../../../../lib/java/collections.nit --save-model
 	echo "+ Disabled functions: `grep '#\s*fun' $@ | wc -l` / `grep '^\s*fun' $@ | wc -l`"
 
 android_api.nit: java_api.nit
-	../../bin/jwrapper -vv -u comment -o android_api.nit -r "^(android|com.android)" -i java_api.nit $(ANDROID_JAR) -i ../../../../lib/java/collections.nit
+	../../bin/jwrapper -vv -u comment -o android_api.nit -r "^(android|com.android)" -i java_api.nit $(ANDROID_JAR) -i ../../../../lib/java/collections.nit -m java_api.jwrapper.bin
 	echo "+ Disabled functions: `grep '#\s*fun' $@ | wc -l` / `grep '^\s*fun' $@ | wc -l`"
 
 	# Insert an import between the 2 modules
