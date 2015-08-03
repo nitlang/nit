@@ -231,14 +231,103 @@ abstract class Text
 	#     assert "abcd".has_suffix("bcd")	     ==  true
 	fun has_suffix(suffix: String): Bool do return has_substring(suffix, length - suffix.length)
 
-	# If `self` contains only digits, return the corresponding integer
+	# Returns a copy of `self` minus all occurences of `c`
+	#
+	#     assert "__init__".remove_all('_') == "init"
+	fun remove_all(c: Char): String do
+		var b = new Buffer
+		for i in chars do if i != c then b.add i
+		return b.to_s
+	end
+
+	# Is `self` a well-formed Integer (i.e. parsable via `to_i`)
+	#
+	#     assert "123".is_int
+	#     assert "0b1011".is_int
+	#     assert not "0x_".is_int
+	#     assert not "0xGE".is_int
+	fun is_int: Bool do
+		var s = remove_all('_')
+		var pos = 0
+		while s[pos] == '-' do
+			pos += 1
+		end
+		s = s.substring_from(pos)
+		var rets = s.strip_numhead
+		if rets == "" then return false
+		var hd = get_numhead
+		if hd == "0x" or hd == "0X" then return rets.is_hex
+		if hd == "0b" or hd == "0B" then return rets.is_bin
+		if hd == "0o" or hd == "0O" then return rets.is_oct
+		return hd.is_dec
+	end
+
+	# Removes the numeric head of `self` if present
+	#
+	#     intrude import standard::text::abstract_text
+	#     assert "0xFFEF".strip_numhead  == "FFEF"
+	#     assert "0o7364".strip_numhead  == "7364"
+	#     assert "0b01001".strip_numhead == "01001"
+	#     assert "98".strip_numhead      == "98"
+	private fun strip_numhead: Text do
+		if get_numhead != "" then return substring_from(2)
+		return self
+	end
+
+	# Gets the numeric head of `self` if present
+	# Returns "" otherwise
+	#
+	#     intrude import standard::text::abstract_text
+	#     assert "0xFEFF".get_numhead  == "0x"
+	#     assert "0b01001".get_numhead == "0b"
+	#     assert "0o872".get_numhead   == "0o"
+	#     assert "98".get_numhead      == ""
+	private fun get_numhead: Text do
+		if self.length < 2 then return ""
+		var c = self[0]
+		if c != '0' then return ""
+		c = self[1]
+		if c == 'x' or c == 'b' or c == 'o' or
+		   c == 'X' or c == 'B' or c == 'O' then return substring(0, 2)
+		return ""
+	end
+
+	# Returns `self` as the corresponding integer
 	#
 	#     assert "123".to_i        == 123
 	#     assert "-1".to_i         == -1
+	#     assert "0x64".to_i       == 100
+	#     assert "0b1100_0011".to_i== 195
+	#     assert "--12".to_i       == 12
+	#
+	# REQUIRE: `self`.`is_int`
 	fun to_i: Int
 	do
-		# Shortcut
-		return to_s.to_cstring.atoi
+		assert self.is_int
+		var s = remove_all('_')
+		var val = 0
+		var neg = false
+		var pos = 0
+		while s[pos] == '-' do
+			neg = not neg
+			pos += 1
+		end
+		s = s.substring_from(pos)
+		if s.length >= 2 then
+			var s1 = s[1]
+			if s1 == 'x' or s1 == 'X' then
+				val = s.substring_from(2).to_hex
+			else if s1 == 'o' or s1 == 'O' then
+				val = s.substring_from(2).to_oct
+			else if s1 == 'b' or s1 == 'B' then
+				val = s.substring_from(2).to_bin
+			else if s1.is_numeric then
+				val = s.to_dec
+			end
+		else
+			val = s.to_dec
+		end
+		return if neg then -val else val
 	end
 
 	# If `self` contains a float, return the corresponding float
@@ -266,6 +355,11 @@ abstract class Text
 	#
 	#     assert "101101".to_bin == 45
 	fun to_bin: Int do return a_to(2)
+
+	# If `self` contains only digits '0' .. '9', return the corresponding integer.
+	#
+	#     assert "108".to_dec == 108
+	fun to_dec: Int do return a_to(10)
 
 	# If `self` contains only digits and letters, return the corresponding integer in a given base
 	#
@@ -332,6 +426,33 @@ abstract class Text
 			   not (c >= 'A' and c <= 'F') and
 			   not (c >= '0' and c <= '9') then return false
 		end
+		return true
+	end
+
+	# Returns `true` if the string contains only Binary digits
+	#
+	#     assert "1101100".is_bin  == true
+	#     assert "1101020".is_bin  == false
+	fun is_bin: Bool do
+		for i in chars do if i != '0' and i != '1' then return false
+		return true
+	end
+
+	# Returns `true` if the string contains only Octal digits
+	#
+	#     assert "213453".is_oct  == true
+	#     assert "781".is_oct     == false
+	fun is_oct: Bool do
+		for i in chars do if i < '0' or i > '7' then return false
+		return true
+	end
+
+	# Returns `true` if the string contains only Decimal digits
+	#
+	#     assert "10839".is_dec == true
+	#     assert "164F".is_dec  == false
+	fun is_dec: Bool do
+		for i in chars do if i < '0' or i > '9' then return false
 		return true
 	end
 

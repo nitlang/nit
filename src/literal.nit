@@ -74,115 +74,69 @@ redef class AExpr
 	end
 end
 
-redef class Text
-	private fun remove_underscores: Text do
-		var b = new FlatBuffer
-		for i in chars do
-			if i == '_' then continue
-			b.add i
-		end
-		return b
-	end
-end
-
 redef class AIntExpr
 	# The value of the literal int once computed.
 	var value: nullable Int
+
+	redef fun accept_literal(v)
+	do
+		if not text.is_int then
+			v.toolcontext.error(hot_location, "Error: invalid literal `{text}`")
+			return
+		end
+		value = text.to_i
+	end
+
+	private fun text: String is abstract
 end
 
 redef class ADecIntExpr
-	redef fun accept_literal(v)
-	do
-		value = self.n_number.text.remove_underscores.to_i
-	end
+	redef fun text do return self.n_number.text
 end
 
 redef class AHexIntExpr
-	redef fun accept_literal(v)
-	do
-		var s = self.n_hex_number.text.substring_from(2).remove_underscores
-		if s.is_empty then
-			v.toolcontext.error(location, "Error: invalid hexadecimal literal")
-			return
-		end
-		value = s.to_hex
-	end
+	redef fun text do return self.n_hex_number.text
 end
 
 redef class ABinIntExpr
-	redef fun accept_literal(v)
-	do
-		var s = self.n_bin_number.text.substring_from(2).remove_underscores
-		if s.is_empty then
-			v.toolcontext.error(location, "Error: invalid binary literal")
-			return
-		end
-		value = s.to_bin
-	end
+	redef fun text do return self.n_bin_number.text
 end
 
 redef class AOctIntExpr
-	redef fun accept_literal(v)
-	do
-		var s = self.n_oct_number.text.substring_from(2).remove_underscores
-		if s.is_empty then
-			v.toolcontext.error(location, "Error: invalid octal literal")
-			return
-		end
-		value = s.to_oct
-	end
+	redef fun text do return self.n_oct_number.text
 end
 
 redef class AByteExpr
 	# The value of the literal int once computed.
 	var value: nullable Byte
+
+	redef fun accept_literal(v)
+	do
+		var s = text.substring(0, text.length - 2)
+		if not s.is_int then
+			v.toolcontext.error(hot_location, "Error: invalid byte literal `{text}`")
+			return
+		end
+		value = s.to_i.to_b
+	end
+
+	private fun text: String is abstract
 end
 
 redef class ADecByteExpr
-	redef fun accept_literal(v)
-	do
-		var t = self.n_bytenum.text
-		value = t.substring(0, t.length - 2).remove_underscores.to_i.to_b
-	end
+	redef fun text do return self.n_bytenum.text
 end
 
 redef class AHexByteExpr
-	redef fun accept_literal(v)
-	do
-		var t = self.n_hex_bytenum.text
-		var s = t.substring(2, t.length - 4).remove_underscores
-		if s.is_empty then
-			v.toolcontext.error(location, "Error: invalid hexadecimal literal")
-			return
-		end
-		value = s.to_hex.to_b
-	end
+	redef fun text do return self.n_hex_bytenum.text
 end
 
 redef class ABinByteExpr
-	redef fun accept_literal(v)
-	do
-		var t = self.n_bin_bytenum.text
-		var s = t.substring(2, t.length - 4).remove_underscores
-		if s.is_empty then
-			v.toolcontext.error(location, "Error: invalid binary literal")
-			return
-		end
-		value = s.to_bin.to_b
-	end
+	redef fun text do return self.n_bin_bytenum.text
 end
 
 redef class AOctByteExpr
-	redef fun accept_literal(v)
-	do
-		var t = self.n_oct_bytenum.text
-		var s = t.substring(2, t.length - 4).remove_underscores
-		if s.is_empty then
-			v.toolcontext.error(location, "Error: invalid octal literal")
-			return
-		end
-		value = s.to_oct.to_b
-	end
+	redef fun text do return self.n_oct_bytenum.text
 end
 
 redef class AFloatExpr
