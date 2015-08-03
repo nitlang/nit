@@ -292,6 +292,37 @@ abstract class Text
 		return ""
 	end
 
+	# Removes the numeric extension if present
+	#
+	#     intrude import standard::text::abstract_text
+	#     assert "0xFEFFu8".strip_numext  == "0xFEFF"
+	#     assert "0b01001u8".strip_numext == "0b01001"
+	#     assert "0o872u8".strip_numext   == "0o872"
+	#     assert "98".strip_numext        == "98"
+	private fun strip_numext: Text do
+		var ext = get_numext
+		if ext != "" then return substring(0, length - ext.length)
+		return self
+	end
+
+	# Gets the numeric extension (i/u 8/16/32) in `self` is present
+	# Returns "" otherwise
+	#
+	#     intrude import standard::text::abstract_text
+	#     assert "0xFEFFu8".get_numext  == "u8"
+	#     assert "0b01001u8".get_numext == "u8"
+	#     assert "0o872u8".get_numext   == "u8"
+	#     assert "98".get_numext        == ""
+	private fun get_numext: Text do
+		var len = self.length
+		var max = if self.length < 3 then self.length else 3
+		for i in [1 .. max] do
+			var c = self[len - i]
+			if c == 'i' or c == 'u' then return substring_from(len - i)
+		end
+		return ""
+	end
+
 	# Returns `self` as the corresponding integer
 	#
 	#     assert "123".to_i        == 123
@@ -328,6 +359,44 @@ abstract class Text
 			val = s.to_dec
 		end
 		return if neg then -val else val
+	end
+
+	# Is `self` a valid integer ?
+	#
+	#     assert "0xFE46u8".is_num
+	#     assert "0b0100".is_num
+	#     assert "0o645".is_num
+	#     assert "897u8".is_num
+	fun is_num: Bool do
+		var prefix = get_numhead
+		var s = strip_numhead.strip_numext.remove_all('_')
+		if prefix != "" then
+			var c = prefix[1]
+			if c == 'x' or c == 'X' then return s.is_hex
+			if c == 'o' or c == 'O' then return s.is_oct
+			if c == 'b' or c == 'B' then return s.is_bin
+		end
+		return s.is_dec
+	end
+
+	# Is `self` is a properly formatted integer, returns the corresponding value
+	#
+	#     assert "0xFEu8".to_num  == 254u8
+	#     assert "0b10_10".to_num != 10u8
+	fun to_num: nullable Numeric do
+		if not is_num then return null
+		var s = remove_all('_')
+		var ext = s.get_numext
+		var trunk = s.strip_numext
+		if trunk.strip_numhead == "" then return null
+		var trval = trunk.to_i
+		if ext == "u8" then
+			return trval.to_b
+		else if ext == "" then
+			return trval
+		else
+			return null
+		end
 	end
 
 	# If `self` contains a float, return the corresponding float
