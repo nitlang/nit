@@ -2911,12 +2911,13 @@ redef class AOrElseExpr
 	end
 end
 
-redef class AIntExpr
-	redef fun expr(v) do return v.int_instance(self.value.as(not null))
-end
-
-redef class AByteExpr
-	redef fun expr(v) do return v.byte_instance(self.value.as(not null))
+redef class AIntegerExpr
+	redef fun expr(v) do
+		if value isa Int then return v.int_instance(value.as(Int))
+		if value isa Byte then return v.byte_instance(value.as(Byte))
+		# Should never happen
+		abort
+	end
 end
 
 redef class AFloatExpr

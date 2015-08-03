@@ -69,74 +69,21 @@ redef class AExpr
 	# Return null if not an integer.
 	fun as_int: nullable Int
 	do
-		if not self isa AIntExpr then return null
-		return self.value.as(not null)
+		if not self isa AIntegerExpr then return null
+		return self.value.as(not null).to_i
 	end
 end
 
-redef class AIntExpr
+redef class AIntegerExpr
 	# The value of the literal int once computed.
-	var value: nullable Int
+	var value: nullable Numeric
 
-	redef fun accept_literal(v)
-	do
-		if not text.is_int then
-			v.toolcontext.error(hot_location, "Error: invalid literal `{text}`")
-			return
+	redef fun accept_literal(v) do
+		value = n_integer.text.to_num
+		if value == null then
+			v.toolcontext.error(hot_location, "Error: invalid literal `{n_integer.text}`")
 		end
-		value = text.to_i
 	end
-
-	private fun text: String is abstract
-end
-
-redef class ADecIntExpr
-	redef fun text do return self.n_number.text
-end
-
-redef class AHexIntExpr
-	redef fun text do return self.n_hex_number.text
-end
-
-redef class ABinIntExpr
-	redef fun text do return self.n_bin_number.text
-end
-
-redef class AOctIntExpr
-	redef fun text do return self.n_oct_number.text
-end
-
-redef class AByteExpr
-	# The value of the literal int once computed.
-	var value: nullable Byte
-
-	redef fun accept_literal(v)
-	do
-		var s = text.substring(0, text.length - 2)
-		if not s.is_int then
-			v.toolcontext.error(hot_location, "Error: invalid byte literal `{text}`")
-			return
-		end
-		value = s.to_i.to_b
-	end
-
-	private fun text: String is abstract
-end
-
-redef class ADecByteExpr
-	redef fun text do return self.n_bytenum.text
-end
-
-redef class AHexByteExpr
-	redef fun text do return self.n_hex_bytenum.text
-end
-
-redef class ABinByteExpr
-	redef fun text do return self.n_bin_bytenum.text
-end
-
-redef class AOctByteExpr
-	redef fun text do return self.n_oct_bytenum.text
 end
 
 redef class AFloatExpr

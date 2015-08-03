@@ -1515,17 +1515,12 @@ redef class AOrElseExpr
 	end
 end
 
-redef class AIntExpr
+redef class AIntegerExpr
 	redef fun expr(v)
 	do
-		return v.int_instance(self.value.as(not null))
-	end
-end
-
-redef class AByteExpr
-	redef fun expr(v)
-	do
-		return v.byte_instance(self.value.as(not null))
+		if value isa Int then return v.int_instance(value.as(Int))
+		if value isa Byte then return v.byte_instance(value.as(Byte))
+		return null
 	end
 end
 
