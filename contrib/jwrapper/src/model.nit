@@ -252,8 +252,40 @@ end
 # Model of all the Java class analyzed in one run
 class JavaModel
 
-	# All analyzed classes
+	# Classes analyzed in this pass
 	var classes = new HashMap[String, JavaClass]
+
+	# All classes, from this pass and from other passes
+	var all_classes: HashMap[String, JavaClass] is noserialize, lazy do
+		var classes = new HashMap[String, JavaClass]
+		classes.recover_with self.classes
+
+		for model_path in sys.opt_load_models.value do
+			if not model_path.file_exists then
+				print_error "Error: model file '{model_path}' does not exist"
+				continue
+			end
+
+			var file = model_path.to_path.open_ro
+			var d = new BinaryDeserializer(file)
+			var model = d.deserialize
+			file.close
+
+			if d.errors.not_empty then
+				print_error "Error: failed to deserialize model file '{model_path}' with: {d.errors.join(", ")}"
+				continue
+			end
+
+			if not model isa JavaModel then
+				print_error "Error: model file contained a '{if model == null then "null" else model.class_name}'"
+				continue
+			end
+
+			classes.recover_with model.classes
+		end
+
+		return classes
+	end
 
 	# Add a class in `classes`
 	fun add_class(jclass: JavaClass)
@@ -377,8 +409,7 @@ class JavaModel
 
 		# Methods intro
 		for java_class in linearized do
-			var in_hierarchy = class_hierarchy[java_class]
-			var greaters = in_hierarchy.greaters
+			var greaters = java_class.in_hierarchy.greaters
 
 			for mid, signatures in java_class.methods do
 				for signature in signatures do
@@ -527,6 +558,9 @@ redef class Sys
 
 	# Generate the primitive array version of each class up to the given depth
 	var opt_arrays = new OptionInt("Depth of the primitive array for each wrapped class (default: 1)", 1, "-a")
+
+	# Generate the primitive array version of each class up to the given depth
+	var opt_load_models = new OptionArray("Saved models to search for super-classes", "-m")
 end
 
 redef abstract class Text
