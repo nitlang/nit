@@ -44,7 +44,7 @@ var opt_output = new OptionString("Output file", "-o")
 var opt_regex = new OptionString("Regex pattern to filter classes in Jar archives", "-r")
 var opt_help = new OptionBool("Show this help message", "-h", "--help")
 
-opts.add_option(opt_output, opt_unknown, opt_extern_class_prefix, opt_libs, opt_regex, opt_cast_objects, opt_arrays, opt_load_models, opt_verbose, opt_help)
+opts.add_option(opt_output, opt_unknown, opt_extern_class_prefix, opt_libs, opt_regex, opt_cast_objects, opt_arrays, opt_load_models, opt_no_properties, opt_verbose, opt_help)
 opts.parse args
 
 if opts.errors.not_empty or opts.rest.is_empty or opt_help.value then

@@ -78,26 +78,29 @@ class CodeGenerator
 
 			generate_class_header(jclass)
 
-			for id, signatures in jclass.local_intro_methods do
-				for signature in signatures do
-					assert not signature.is_static
-					generate_method(jclass, id, id, signature.return_type, signature.params)
-					file_out.write "\n"
+			if not sys.opt_no_properties.value then
+
+				for id, signatures in jclass.local_intro_methods do
+					for signature in signatures do
+						assert not signature.is_static
+						generate_method(jclass, id, id, signature.return_type, signature.params)
+						file_out.write "\n"
+					end
 				end
-			end
 
-			# Constructors
-			for constructor in jclass.constructors do
-				var complex = jclass.constructors.length != 1 and constructor.params.not_empty
-				var base_name = if complex then "from" else ""
-				var name = jclass.nit_name_for(base_name, constructor.params, complex, false, local_only=true)
+				# Constructors
+				for constructor in jclass.constructors do
+					var complex = jclass.constructors.length != 1 and constructor.params.not_empty
+					var base_name = if complex then "from" else ""
+					var name = jclass.nit_name_for(base_name, constructor.params, complex, false, local_only=true)
 
-				generate_constructor(jclass, constructor, name)
-			end
+					generate_constructor(jclass, constructor, name)
+				end
 
-			# Attributes
-			for id, attribute in jclass.attributes do if not attribute.is_static then
-				generate_getter_setter(jclass, id, attribute)
+				# Attributes
+				for id, attribute in jclass.attributes do if not attribute.is_static then
+					generate_getter_setter(jclass, id, attribute)
+				end
 			end
 
 			# JNI services
@@ -106,19 +109,22 @@ class CodeGenerator
 			# Close the class
 			file_out.write "end\n\n"
 
-			# Static functions as top-level methods
-			var static_functions_prefix = jclass.class_type.extern_name.to_snake_case
-			for id, signatures in jclass.methods do
-				for signature in signatures do if signature.is_static then
-					var nit_id = static_functions_prefix + "_" + id
-					generate_method(jclass, id, nit_id, signature.return_type, signature.params, is_static=true)
-					file_out.write "\n"
-				end
-			end
+			if not sys.opt_no_properties.value then
 
-			# Static attributes as top-level getters and setters
-			for id, attribute in jclass.attributes do if attribute.is_static then
-				generate_getter_setter(jclass, id, attribute)
+				# Static functions as top-level methods
+				var static_functions_prefix = jclass.class_type.extern_name.to_snake_case
+				for id, signatures in jclass.methods do
+					for signature in signatures do if signature.is_static then
+						var nit_id = static_functions_prefix + "_" + id
+						generate_method(jclass, id, nit_id, signature.return_type, signature.params, is_static=true)
+						file_out.write "\n"
+					end
+				end
+
+				# Static attributes as top-level getters and setters
+				for id, attribute in jclass.attributes do if attribute.is_static then
+					generate_getter_setter(jclass, id, attribute)
+				end
 			end
 
 			# Primitive arrays
@@ -425,6 +431,9 @@ redef class Sys
 	#
 	# Used by `JavaClass::nit_name_for` with static properties.
 	private var top_level_used_names = new HashSet[String]
+
+	# Option to _not_ generate properties (static or from classes)
+	var opt_no_properties = new OptionBool("Do not wrap properties, only classes and basic services", "-n", "--no-properties")
 end
 
 redef class String
