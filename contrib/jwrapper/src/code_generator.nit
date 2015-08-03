@@ -137,6 +137,17 @@ class CodeGenerator
 		file_out.close
 	end
 
+	# Serialize `model` to a file next to `file_name`
+	fun write_model_to_file
+	do
+		# Write the model to file next to the Nit module
+		var model_path = file_name.strip_extension + ".jwrapper.bin"
+		var model_stream = model_path.to_path.open_wo
+		var serializer = new BinarySerializer(model_stream)
+		serializer.serialize model
+		model_stream.close
+	end
+
 	# License for the header of the generated Nit module
 	var license = """
 # This file is part of NIT (http://www.nitlanguage.org).

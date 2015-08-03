@@ -204,11 +204,16 @@ sys.perfs["core hierarchy"].add clock.lapse
 
 if opt_verbose.value > 0 then print "# Generating Nit code"
 
+# Generate the Nit module
 var use_comment = opt_unknown.value == 0
 var use_stub = opt_unknown.value == 1
 var generator = new CodeGenerator(out_file, model, use_comment, use_stub)
 generator.generate
 sys.perfs["code generator"].add clock.lapse
+
+# Write the model to a file, for use by subsequent passes
+generator.write_model_to_file
+sys.perfs["writing model"].add clock.lapse
 
 if opt_verbose.value > 1 then
 	print "# Performance Analysis:"
