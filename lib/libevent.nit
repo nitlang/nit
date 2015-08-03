@@ -157,7 +157,7 @@ class Connection
 	# Write a string to the connection
 	redef fun write(str)
 	do
-		native_buffer_event.write(str.to_cstring, str.length)
+		native_buffer_event.write(str.to_cstring, str.bytelen)
 	end
 
 	redef fun write_byte(byte) do native_buffer_event.write_byte(byte)
