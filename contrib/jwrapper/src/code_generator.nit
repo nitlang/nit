@@ -156,7 +156,28 @@ class CodeGenerator
 		var java_type = java_class.class_type
 		var nit_type = model.java_to_nit_type(java_type)
 
-		var supers = ["super JavaObject"]
+		var super_java_types = new HashSet[JavaType]
+		super_java_types.add_all java_class.extends
+		super_java_types.add_all java_class.implements
+
+		var supers = new Array[String]
+		var effective_supers = 0
+		for java_super in super_java_types do
+			var nit_super = model.java_to_nit_type(java_super)
+
+			# Comment out unknown types
+			var c = ""
+			if not nit_super.is_known and comment_unknown_types then c = "# "
+
+			supers.add "{c}super {nit_super}"
+			if c != "# " then effective_supers += 1
+		end
+
+		if effective_supers == 0 then
+			if java_class.class_type.package_name == "java.lang.Object" then
+				supers.add "super JavaObject"
+			else supers.add "super Java_lang_Object"
+		end
 
 		file_out.write """
 # Java class: {{{java_type}}}
