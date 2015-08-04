@@ -42,7 +42,7 @@ class HttpResponse
 	do
 		# Set the content length if not already set
 		if not header.keys.has("Content-Length") then
-			header["Content-Length"] = body.length.to_s
+			header["Content-Length"] = body.bytelen.to_s
 		end
 
 		# Set server ID
