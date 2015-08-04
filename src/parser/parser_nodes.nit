@@ -965,43 +965,8 @@ abstract class TokenLiteral
 	end
 end
 
-# A literal decimal integer
-class TNumber
-	super TokenLiteral
-end
-
-# A literal hexadecimal integer
-class THexNumber
-	super TokenLiteral
-end
-
-# A literal binary integer
-class TBinNumber
-	super TokenLiteral
-end
-
-# A literal octal integer
-class TOctNumber
-	super TokenLiteral
-end
-
-# A literal decimal byte
-class TBytenum
-	super TokenLiteral
-end
-
-# A literal hexadecimal byte
-class THexBytenum
-	super TokenLiteral
-end
-
-# A literal binary byte
-class TBinBytenum
-	super TokenLiteral
-end
-
-# A literal octal byte
-class TOctBytenum
+# A literal integer
+class TInteger
 	super TokenLiteral
 end
 
@@ -2508,77 +2473,11 @@ class ANullExpr
 end
 
 # An integer literal
-class AIntExpr
+class AIntegerExpr
 	super AExpr
-end
 
-# An integer literal in decimal format
-class ADecIntExpr
-	super AIntExpr
-
-	# The decimal token
-	var n_number: TNumber is writable, noinit
-end
-
-# An integer literal in hexadecimal format
-class AHexIntExpr
-	super AIntExpr
-
-	# The hexadecimal token
-	var n_hex_number: THexNumber is writable, noinit
-end
-
-# An integer literal in binary format
-class ABinIntExpr
-	super AIntExpr
-
-	# The binary token
-	var n_bin_number: TBinNumber is writable, noinit
-end
-
-# An integer literal in octal format
-class AOctIntExpr
-	super AIntExpr
-
-	# The octal token
-	var n_oct_number: TOctNumber is writable, noinit
-end
-
-# An byte literal
-class AByteExpr
-	super AExpr
-end
-
-# An byte literal in decimal format
-class ADecByteExpr
-	super AByteExpr
-
-	# The decimal token
-	var n_bytenum: TBytenum is writable, noinit
-end
-
-# An byte literal in hexadecimal format
-class AHexByteExpr
-	super AByteExpr
-
-	# The hexadecimal token
-	var n_hex_bytenum: THexBytenum is writable, noinit
-end
-
-# An byte literal in binary format
-class ABinByteExpr
-	super AByteExpr
-
-	# The binary token
-	var n_bin_bytenum: TBinBytenum is writable, noinit
-end
-
-# An byte literal in octal format
-class AOctByteExpr
-	super AByteExpr
-
-	# The octal token
-	var n_oct_bytenum: TOctBytenum is writable, noinit
+	# The integer token
+	var n_integer: TInteger is writable, noinit
 end
 
 # A float literal

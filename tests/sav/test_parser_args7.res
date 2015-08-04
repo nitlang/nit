@@ -1,5 +1,5 @@
---> ADecIntExpr 1,1
-  TNumber "1" 1,1
+--> AIntegerExpr 1,1
+  TInteger "1" 1,1
 --> ABlockExpr 1,1--11
   ACallExpr 1,1--11
     AImplicitSelfExpr 1,1

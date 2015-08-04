@@ -517,7 +517,8 @@ class RopeBuffer
 	redef fun enlarge(i) do end
 
 	redef fun to_s do
-		dump_buffer
+		persist_buffer
+		written = true
 		return str
 	end
 

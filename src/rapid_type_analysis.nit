@@ -535,14 +535,7 @@ redef class AExpr
 	end
 end
 
-redef class AIntExpr
-	redef fun accept_rapid_type_visitor(v)
-	do
-		allocate_mtype(v)
-	end
-end
-
-redef class AByteExpr
+redef class AIntegerExpr
 	redef fun accept_rapid_type_visitor(v)
 	do
 		allocate_mtype(v)

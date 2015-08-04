@@ -57,11 +57,6 @@ private extern class NativeAndroidMotionEvent `{AInputEvent *`}
 		return AMotionEvent_getPointerCount(self);
 	`}
 
-	# Did this motion event just started?
-	fun just_went_down: Bool `{
-		return (AMotionEvent_getAction(self) & AMOTION_EVENT_ACTION_MASK) == AMOTION_EVENT_ACTION_DOWN;
-	`}
-
 	fun edge: Int `{
 		return AMotionEvent_getEdgeFlags(self);
 	`}
@@ -125,7 +120,7 @@ class AndroidMotionEvent
 		return new AndroidPointerEvent(self, index)
 	end
 
-	redef fun just_went_down do return native.just_went_down
+	redef fun just_went_down do return native.action.is_down or native.action.is_pointer_down
 
 	# Was the top edge of the screen intersected by this event?
 	fun touch_to_edge: Bool do return native.edge == 1
@@ -197,10 +192,8 @@ class AndroidPointerEvent
 	redef fun depressed do return not pressed
 
 	# Does this pointer just began touching the screen?
-	fun just_went_down: Bool
-	do
-		return motion_event.down_pointer == self
-	end
+	fun just_went_down: Bool do return motion_event.acting_pointer == self and
+		motion_event.just_went_down
 
 	# Unique id of this pointer since the beginning of the gesture
 	fun pointer_id: Int do return native_pointer_id(motion_event.native, pointer_index)

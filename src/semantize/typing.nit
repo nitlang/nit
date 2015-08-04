@@ -20,6 +20,7 @@ module typing
 
 import modelize
 import local_var_init
+import literal
 
 redef class ToolContext
 	var typing_phase: Phase = new TypingPhase(self, [flow_phase, modelize_property_phase, local_var_init_phase])
@@ -1368,19 +1369,15 @@ redef class AFalseExpr
 	end
 end
 
-redef class AIntExpr
+redef class AIntegerExpr
 	redef fun accept_typing(v)
 	do
-		var mclass = v.get_mclass(self, "Int")
-		if mclass == null then return # Forward error
-		self.mtype = mclass.mclass_type
-	end
-end
-
-redef class AByteExpr
-	redef fun accept_typing(v)
-	do
-		var mclass = v.get_mclass(self, "Byte")
+		var mclass: nullable MClass = null
+		if value isa Byte then
+			mclass = v.get_mclass(self, "Byte")
+		else if value isa Int then
+			mclass = v.get_mclass(self, "Int")
+		end
 		if mclass == null then return # Forward error
 		self.mtype = mclass.mclass_type
 	end
