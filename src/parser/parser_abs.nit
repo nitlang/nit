@@ -301,28 +301,7 @@ end
 class TAttrid
 	super Token
 end
-class TNumber
-	super Token
-end
-class THexNumber
-	super Token
-end
-class TBinNumber
-	super Token
-end
-class TOctNumber
-	super Token
-end
-class TBytenum
-	super Token
-end
-class THexBytenum
-	super Token
-end
-class TBinBytenum
-	super Token
-end
-class TOctBytenum
+class TInteger
 	super Token
 end
 class TFloat
@@ -1098,44 +1077,9 @@ class ANullExpr
 	var n_kwnull: TKwnull is writable, noinit
 	var n_annotations: nullable AAnnotations = null is writable
 end
-class ADecIntExpr
+class AIntegerExpr
 	super AExpr
-	var n_number: TNumber is writable, noinit
-	var n_annotations: nullable AAnnotations = null is writable
-end
-class AHexIntExpr
-	super AExpr
-	var n_hex_number: THexNumber is writable, noinit
-	var n_annotations: nullable AAnnotations = null is writable
-end
-class ABinIntExpr
-	super AExpr
-	var n_bin_number: TBinNumber is writable, noinit
-	var n_annotations: nullable AAnnotations = null is writable
-end
-class AOctIntExpr
-	super AExpr
-	var n_oct_number: TOctNumber is writable, noinit
-	var n_annotations: nullable AAnnotations = null is writable
-end
-class ADecByteExpr
-	super AExpr
-	var n_bytenum: TBytenum is writable, noinit
-	var n_annotations: nullable AAnnotations = null is writable
-end
-class AHexByteExpr
-	super AExpr
-	var n_hex_bytenum: THexBytenum is writable, noinit
-	var n_annotations: nullable AAnnotations = null is writable
-end
-class ABinByteExpr
-	super AExpr
-	var n_bin_bytenum: TBinBytenum is writable, noinit
-	var n_annotations: nullable AAnnotations = null is writable
-end
-class AOctByteExpr
-	super AExpr
-	var n_oct_bytenum: TOctBytenum is writable, noinit
+	var n_integer: TInteger is writable, noinit
 	var n_annotations: nullable AAnnotations = null is writable
 end
 class AFloatExpr
