@@ -196,7 +196,8 @@ class CodeGenerator
 		end
 
 		if effective_supers == 0 then
-			if java_class.class_type.package_name == "java.lang.Object" then
+			if java_class.class_type.package_name == "java.lang.Object" or
+			   not model.knows_the_object_class then
 				supers.add "super JavaObject"
 			else supers.add "super Java_lang_Object"
 		end

@@ -287,6 +287,9 @@ class JavaModel
 		return classes
 	end
 
+	# Does this model have access to the `java.lang.Object`?
+	var knows_the_object_class: Bool = all_classes.keys.has("java.lang.Object") is lazy
+
 	# Add a class in `classes`
 	fun add_class(jclass: JavaClass)
 	do
@@ -390,8 +393,9 @@ class JavaModel
 				if not all_classes.keys.has(super_type.package_name) then super_classes.remove(super_type)
 			end
 
-			# If the is no explicit supers, add `java.lang.Object`
-			if super_classes.is_empty and java_class.class_type != object_type then
+			# If the is no explicit supers, add `java.lang.Object` (if it is known)
+			if super_classes.is_empty and java_class.class_type != object_type and
+			   knows_the_object_class then
 				super_classes.add object_type
 			end
 
