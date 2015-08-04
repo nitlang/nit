@@ -42,8 +42,8 @@ Start ../src/test_parser.nit:17,1--156,1
         AType ../src/test_parser.nit:27,20--22
           TClassid "Int" ../src/test_parser.nit:27,20--22
         TAssign "=" ../src/test_parser.nit:27,24
-        ADecIntExpr ../src/test_parser.nit:27,26
-          TNumber "0" ../src/test_parser.nit:27,26
+        AIntegerExpr ../src/test_parser.nit:27,26
+          TInteger "0" ../src/test_parser.nit:27,26
       AMethPropdef ../src/test_parser.nit:28,2--38,4
         TKwredef "redef" ../src/test_parser.nit:28,2--6
         APublicVisibility ../src/test_parser.nit:28,8
@@ -159,8 +159,8 @@ Start ../src/test_parser.nit:17,1--156,1
                 TId "rank" ../src/test_parser.nit:35,10--13
                 AListExprs ../src/test_parser.nit:35,13
               TPlus "+" ../src/test_parser.nit:35,15
-              ADecIntExpr ../src/test_parser.nit:35,17
-                TNumber "1" ../src/test_parser.nit:35,17
+              AIntegerExpr ../src/test_parser.nit:35,17
+                TInteger "1" ../src/test_parser.nit:35,17
           ACallExpr ../src/test_parser.nit:36,3--19
             ACallExpr ../src/test_parser.nit:36,3
               AImplicitSelfExpr ../src/test_parser.nit:36,3
@@ -183,8 +183,8 @@ Start ../src/test_parser.nit:17,1--156,1
                 TId "rank" ../src/test_parser.nit:37,10--13
                 AListExprs ../src/test_parser.nit:37,13
               TMinus "-" ../src/test_parser.nit:37,15
-              ADecIntExpr ../src/test_parser.nit:37,17
-                TNumber "1" ../src/test_parser.nit:37,17
+              AIntegerExpr ../src/test_parser.nit:37,17
+                TInteger "1" ../src/test_parser.nit:37,17
           TKwend "end" ../src/test_parser.nit:38,2--4
       TKwend "end" ../src/test_parser.nit:39,1--3
     AMainClassdef ../src/test_parser.nit:41,1--155,3
@@ -459,8 +459,8 @@ Start ../src/test_parser.nit:17,1--156,1
                                 TId "exit" ../src/test_parser.nit:65,3--6
                                 AParExprs ../src/test_parser.nit:65,7--9
                                   TOpar "(" ../src/test_parser.nit:65,7
-                                  ADecIntExpr ../src/test_parser.nit:65,8
-                                    TNumber "0" ../src/test_parser.nit:65,8
+                                  AIntegerExpr ../src/test_parser.nit:65,8
+                                    TInteger "0" ../src/test_parser.nit:65,8
                                   TCpar ")" ../src/test_parser.nit:65,9
                               TKwend "end" ../src/test_parser.nit:66,2--4
               ACallExpr ../src/test_parser.nit:67,2--11
@@ -622,8 +622,8 @@ Start ../src/test_parser.nit:17,1--156,1
                       AImplicitSelfExpr ../src/test_parser.nit:86,3
                       TId "exit" ../src/test_parser.nit:86,3--6
                       AListExprs ../src/test_parser.nit:86,8
-                        ADecIntExpr ../src/test_parser.nit:86,8
-                          TNumber "1" ../src/test_parser.nit:86,8
+                        AIntegerExpr ../src/test_parser.nit:86,8
+                          TInteger "1" ../src/test_parser.nit:86,8
                   TKwelse "else" ../src/test_parser.nit:87,2--5
                   AIfExpr ../src/test_parser.nit:87,7--93,4
                     TKwif "if" ../src/test_parser.nit:87,7--8
@@ -643,8 +643,8 @@ Start ../src/test_parser.nit:17,1--156,1
                         AImplicitSelfExpr ../src/test_parser.nit:89,3
                         TId "exit" ../src/test_parser.nit:89,3--6
                         AListExprs ../src/test_parser.nit:89,8
-                          ADecIntExpr ../src/test_parser.nit:89,8
-                            TNumber "1" ../src/test_parser.nit:89,8
+                          AIntegerExpr ../src/test_parser.nit:89,8
+                            TInteger "1" ../src/test_parser.nit:89,8
                     TKwelse "else" ../src/test_parser.nit:90,2--5
                     AIfExpr ../src/test_parser.nit:90,7--93,4
                       TKwif "if" ../src/test_parser.nit:90,7--8
@@ -669,8 +669,8 @@ Start ../src/test_parser.nit:17,1--156,1
                           AImplicitSelfExpr ../src/test_parser.nit:92,3
                           TId "exit" ../src/test_parser.nit:92,3--6
                           AListExprs ../src/test_parser.nit:92,8
-                            ADecIntExpr ../src/test_parser.nit:92,8
-                              TNumber "1" ../src/test_parser.nit:92,8
+                            AIntegerExpr ../src/test_parser.nit:92,8
+                              TInteger "1" ../src/test_parser.nit:92,8
                       ABlockExpr ../src/test_parser.nit:93,2--4
                         TKwend "end" ../src/test_parser.nit:93,2--4
                 AVardeclExpr ../src/test_parser.nit:95,2--25
