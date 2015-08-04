@@ -164,6 +164,15 @@ extern class NativeSocket `{ int* `}
 		return filedesc.check_response(result)
 	end
 
+	# Poll this socket with `POLLHUP|POLLERR`
+	#
+	# A return value of 0 means there is no errors.
+	fun poll_hup_err: Int `{
+		struct pollfd fd = {*self, POLLHUP|POLLERR, 0};
+		int res = poll(&fd, 1, 0);
+		return res;
+	`}
+
 	# Call to the poll function of the C socket
 	#
 	# Signature:

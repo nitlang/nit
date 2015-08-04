@@ -93,7 +93,7 @@ class RemoteGameContext
 
 		# Send orders to server
 		var local_player = local_player
-		if local_player != null then
+		if local_player != null and local_player.orders.not_empty then
 			remote_server.writer.serialize local_player.orders
 			remote_server.socket.flush
 			local_player.orders = new Array[TOrder]

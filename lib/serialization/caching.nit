@@ -74,10 +74,13 @@ class SerializerCache
 	# Require: `not has_object(object)`
 	fun new_id_for(object: Serializable): Int
 	do
-		var id = sent.length
+		var id = next_available_id
 		sent[object] = id
 		return id
 	end
+
+	# Get a free id to associate to an object in the cache
+	protected fun next_available_id: Int do return sent.length
 end
 
 # Cache of received objects sorted by there reference id
@@ -114,5 +117,21 @@ class DuplexCache
 		super
 		assert object isa Serializable
 		sent[object] = id
+	end
+end
+
+# A shared cache where 2 clients serialize objects at the same types, prevents references collision
+class AsyncCache
+	super DuplexCache
+
+	# Should this end use even numbers?
+	var use_even: Bool
+
+	private var last_id: Int is lazy do return if use_even then 0 else 1
+
+	redef fun next_available_id
+	do
+		last_id += 2
+		return last_id
 	end
 end

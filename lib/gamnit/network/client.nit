@@ -84,6 +84,7 @@ class RemoteServer
 
 		# Setup serialization
 		writer = new BinarySerializer(socket)
+		writer.cache = new AsyncCache(false)
 		reader = new BinaryDeserializer(socket)
 		writer.link reader
 
