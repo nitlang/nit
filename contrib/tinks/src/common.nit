@@ -21,6 +21,8 @@ redef class Sys
 	# Name of this app
 	redef fun handshake_app_name do return "tinks"
 
+	redef fun handshake_app_version do return "0.1"
+
 	# Default listening port of the server
 	fun default_listening_port: Int do return 18721
 
