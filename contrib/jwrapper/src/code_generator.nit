@@ -146,6 +146,8 @@ class CodeGenerator
 	# Serialize `model` to a file next to `file_name`
 	fun write_model_to_file
 	do
+		if not sys.opt_save_model.value then return
+
 		# Write the model to file next to the Nit module
 		var model_path = file_name.strip_extension + ".jwrapper.bin"
 		var model_stream = model_path.to_path.open_wo
@@ -435,6 +437,9 @@ redef class Sys
 
 	# Option to _not_ generate properties (static or from classes)
 	var opt_no_properties = new OptionBool("Do not wrap properties, only classes and basic services", "-n", "--no-properties")
+
+	# Should the model be serialized to a file?
+	var opt_save_model = new OptionBool("Save the model next to the generated Nit module", "-s", "--save-model")
 end
 
 redef class String
