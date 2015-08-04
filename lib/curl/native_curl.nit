@@ -696,8 +696,12 @@ extern class CURLOption `{ CURLoption `}
 
 	# Connection Options
 
-#	new	`{ return CURLOPT_TIMEOUT; `}
-#	new	`{ return CURLOPT_TIMEOUT_MS; `}
+	# Set maximum time the request is allowed to take.
+	new	timeout `{ return CURLOPT_TIMEOUT; `}
+
+	# Set maximum time the request is allowed to take (in ms).
+	new	timeout_ms `{ return CURLOPT_TIMEOUT_MS; `}
+
 #	new	`{ return CURLOPT_LOW_SPEED_LIMIT; `}
 #	new	`{ return CURLOPT_LOW_SPEED_TIME; `}
 #	new	`{ return CURLOPT_MAX_SEND_SPEED_LARGE; `}
