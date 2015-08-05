@@ -35,8 +35,8 @@
 # end
 #
 # assert sys.perfs["sleep 1ms"].count == 100
-# assert sys.perfs["sleep 1ms"].avg.is_approx(0.001, 0.0001)
-# assert sys.perfs["sleep 5ms"].avg.is_approx(0.005, 0.0005)
+# assert sys.perfs["sleep 1ms"].avg.is_approx(0.001, 0.001)
+# assert sys.perfs["sleep 5ms"].avg.is_approx(0.005, 0.005)
 # ~~~
 module performance_analysis
 
