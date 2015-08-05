@@ -26,6 +26,9 @@ class GithubCurl
 	var header: HeaderMap is noinit
 
 	# OAuth token
+	#
+	# Use an empty string to disable authentication and connect
+	# anonymously (thus less capabilities and more rate limits)
 	var auth: String
 
 	# User agent (is used by github to contact devs in case of problems)
@@ -34,7 +37,7 @@ class GithubCurl
 
 	init do
 		header = new HeaderMap
-		header["Authorization"] = "token {auth}"
+		if auth != "" then header["Authorization"] = "token {auth}"
 	end
 
 	# Get the requested URI, and check the HTTP response. Then convert to JSON
