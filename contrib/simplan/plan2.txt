@@ -1,0 +1,46 @@
+# 50 locations
+# 216 roads
+# 1 robot
+# 4 parcels
+# 1 goal
+# size of the problem: 312500000
+SimplePlan {
+Drive(r0,l28,l13);
+Drive(r0,l13,l29);
+Drive(r0,l29,l24);
+Drive(r0,l24,l9);
+Drive(r0,l9,l25);
+Load(r0,b2);
+Load(r0,b3);
+Drive(r0,l25,l10);
+Drive(r0,l10,l7);
+Drive(r0,l7,l23);
+Unload(r0,b2);
+Drive(r0,l23,l43);
+Drive(r0,l43,l27);
+Load(r0,b0);
+Drive(r0,l27,l43);
+Drive(r0,l43,l7);
+Drive(r0,l7,l10);
+Drive(r0,l10,l42);
+Drive(r0,l42,l46);
+Drive(r0,l46,l30);
+Drive(r0,l30,l47);
+Unload(r0,b0);
+Drive(r0,l47,l30);
+Drive(r0,l30,l14);
+Load(r0,b1);
+Unload(r0,b3);
+Drive(r0,l14,l26);
+Drive(r0,l26,l10);
+Drive(r0,l10,l7);
+Drive(r0,l7,l22);
+Drive(r0,l22,l18);
+Drive(r0,l18,l34);
+Drive(r0,l34,l2);
+Drive(r0,l2,l49);
+Unload(r0,b1);
+}
+# plan in 35 steps; cost=3817.866
+
+# solver infos: steps=642940 nodes=1735072 todo=1028967 n=3826575 (bf=5.952) mem=2275189 last=#642940/1735070 d=35 f=3817.866 g=3817.866 h=0.0: l49,l47,l49,l23,l14

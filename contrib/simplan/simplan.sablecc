@@ -1,0 +1,36 @@
+Grammar simplan;
+
+Lexer
+
+letter = 'a'..'z'|'a'..'Z';
+digit = '0'..'9';
+name = letter (letter|digit)*;
+nb = digit* '.' digit+ | digit+;
+
+eol = #10 | #13 | #10 #13;
+comment = '#' (Any-eol)* eol?;
+
+blank = #9 | #10 | #13 | ' ' | comment;
+
+Parser
+
+Ignored blank;
+
+file = problem | plan ;
+
+problem = locations roads robots parcels goal;
+locations = 'Locations' '{' [list:]location* '}';
+location = name [x:]nb [y:]nb ';';
+roads = 'Roads' '{' [list:]road* '}';
+road = [orig:]name [dest:]name ';' ;
+robots = 'Robots' '{' [list:]robot* '}';
+robot = name [emplacement:]name ';';
+parcels = 'Parcels' '{' [list:]parcel* '}';
+parcel = name [emplacement:]name ';';
+goal = 'Goals' '{' [list:]parcel* '}';
+
+plan = 'SimplePlan' '{' [actions:]action* '}';
+action =
+	{load:} 'Load' '(' [robot:]name ',' [parcel:]name ')' ';' |
+	{unload:} 'Unload' '(' [robot:]name ',' [parcel:]name ')' ';' |
+	{drive:} 'Drive' '(' [robot:]name ',' [orig:]name ',' [dest:]name ')' ';' ;
