@@ -342,6 +342,7 @@ redef class Collection[E]
 		assert collectionItemType: self isa Collection[String] else
 			print "Collection item must be strings."
 		end
+		if is_empty then return new CURLSList
 		var primList = new CURLSList.with_str(self.first)
 		var is_first = true
 		for s in self do
