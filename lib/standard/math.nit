@@ -277,6 +277,14 @@ redef class Float
 	fun hypot_with(b: Float): Float `{ return hypotf(self, b); `}
 
 	# Returns true is self is not a number.
+	#
+	# As `nan != nan`, `is_nan` should be used to test if a float is the special *not a number* value.
+	#
+	# ~~~
+	# assert nan != nan # By IEEE 754
+	# assert nan.is_nan
+	# assert not 10.0.is_nan
+	# ~~~
 	fun is_nan: Bool `{ return isnan(self); `}
 
 	# Is the float an infinite value
@@ -285,6 +293,12 @@ redef class Float
 	#  * 1 if self is positive infinity
 	#  * -1 if self is negative infinity
 	#  * 0 otherwise
+	#
+	# ~~~
+	# assert 10.0.is_inf == 0
+	# assert inf.is_inf == 1
+	# assert (-inf).is_inf == -1
+	# ~~~
 	fun is_inf: Int do
 		if native_is_inf then
 			if self < 0.0 then return -1
@@ -305,6 +319,42 @@ redef class Float
 	# ~~~
 	fun lerp(a, b: Float): Float do return (1.0 - self) * a + self * b
 end
+
+# Positive float infinite (IEEE 754)
+#
+#     assert inf > 10.0
+#     assert inf.is_inf == 1
+#
+# `inf` follows the arithmetic of infinites
+#
+#     assert (inf - 1.0) == inf
+#     assert (inf - inf).is_nan
+#
+# The negative infinite can be used as `-inf`.
+#
+#     assert -inf < -10.0
+#     assert (-inf).is_inf == -1
+fun inf: Float do return 1.0 / 0.0
+
+# Not a Number, representation of an undefined or unrepresentable float (IEEE 754).
+#
+# `nan` is not comparable with itself, you should use `Float::is_nan` to test it.
+#
+# ~~~
+# assert nan.is_nan
+# assert nan != nan # By IEEE 754
+# ~~~
+#
+# `nan` is the quiet result of some undefined operations.
+#
+# ~~~
+# assert (1.0 + nan).is_nan
+# assert (0.0 / 0.0).is_nan
+# assert (inf - inf).is_nan
+# assert (inf / inf).is_nan
+# assert (-1.0).sqrt.is_nan
+# ~~~
+fun nan: Float do return 0.0 / 0.0
 
 redef class Collection[ E ]
 	# Return a random element form the collection
