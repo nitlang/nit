@@ -1,0 +1,6 @@
+*_lexer.nit
+*_parser.nit
+
+*.dot
+*.out
+simplan
