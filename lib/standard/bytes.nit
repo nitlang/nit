@@ -169,6 +169,33 @@ private class BytesIterator
 	redef fun item do return tgt[index]
 end
 
+redef class Text
+	# Returns a mutable copy of `self`'s bytes
+	#
+	# ~~~nit
+	# assert "String".to_bytes isa Bytes
+	# assert "String".to_bytes == [83u8, 116u8, 114u8, 105u8, 110u8, 103u8]
+	# ~~~
+	fun to_bytes: Bytes do
+		var b = new Bytes.with_capacity(bytelen)
+		for s in substrings do
+			var from = if s isa FlatString then s.first_byte else 0
+			b.append_ns_from(s.items, s.bytelen, from)
+		end
+		return b
+	end
+end
+
+redef class FlatText
+	redef fun to_bytes do
+		var len = bytelen
+		var b = new Bytes.with_capacity(len)
+		var from = if self isa FlatString then first_byte else 0
+		b.append_ns_from(items, len, from)
+		return b
+	end
+end
+
 redef class NativeString
 	# Creates a new `Bytes` object from `self` with `strlen` as length
 	fun to_bytes: Bytes do
