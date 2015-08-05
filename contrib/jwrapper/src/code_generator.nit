@@ -53,7 +53,7 @@ class CodeGenerator
 
 		# Module declaration
 		var module_name = module_name
-		if module_name != null then file_out.write "module {module_name}\n"
+		if module_name != null then file_out.write "module {module_name} is no_warning(\"useless-superclass\")\n"
 		file_out.write "\n"
 
 		# All importations
@@ -65,34 +65,42 @@ class CodeGenerator
 		file_out.write imports.join("\n")
 		file_out.write "\n"
 
-		for key, jclass in model.classes do
-			# Skip anonymous classes
-			if jclass.class_type.is_anonymous then continue
+		# Sort classes from top-level classes (java.lang.Object) to leaves
+		var standard_classes = new Array[JavaClass]
+		for name, jclass in model.classes do
+			if not jclass.class_type.is_anonymous then standard_classes.add jclass
+		end
+		var linearized = model.class_hierarchy.linearize(standard_classes)
 
+		for jclass in linearized do
 			# Skip classes with an invalid name at the Java language level
 			if jclass.class_type.extern_equivalent.has("-") then continue
 
-			generate_class_header(jclass.class_type)
+			generate_class_header(jclass)
 
-			for id, signatures in jclass.methods do
-				for signature in signatures do if not signature.is_static then
-					generate_method(jclass, id, id, signature.return_type, signature.params)
-					file_out.write "\n"
+			if not sys.opt_no_properties.value then
+
+				for id, signatures in jclass.local_intro_methods do
+					for signature in signatures do
+						assert not signature.is_static
+						generate_method(jclass, id, id, signature.return_type, signature.params)
+						file_out.write "\n"
+					end
 				end
-			end
 
-			# Constructors
-			for constructor in jclass.constructors do
-				var complex = jclass.constructors.length != 1 and constructor.params.not_empty
-				var base_name = if complex then "from" else ""
-				var name = jclass.nit_name_for(base_name, constructor.params, complex, false)
+				# Constructors
+				for constructor in jclass.constructors do
+					var complex = jclass.constructors.length != 1 and constructor.params.not_empty
+					var base_name = if complex then "from" else ""
+					var name = jclass.nit_name_for(base_name, constructor.params, complex, false, local_only=true)
 
-				generate_constructor(jclass, constructor, name)
-			end
+					generate_constructor(jclass, constructor, name)
+				end
 
-			# Attributes
-			for id, attribute in jclass.attributes do if not attribute.is_static then
-				generate_getter_setter(jclass, id, attribute)
+				# Attributes
+				for id, attribute in jclass.attributes do if not attribute.is_static then
+					generate_getter_setter(jclass, id, attribute)
+				end
 			end
 
 			# JNI services
@@ -101,19 +109,22 @@ class CodeGenerator
 			# Close the class
 			file_out.write "end\n\n"
 
-			# Static functions as top-level methods
-			var static_functions_prefix = jclass.class_type.extern_name.to_snake_case
-			for id, signatures in jclass.methods do
-				for signature in signatures do if signature.is_static then
-					var nit_id = static_functions_prefix + "_" + id
-					generate_method(jclass, id, nit_id, signature.return_type, signature.params, is_static=true)
-					file_out.write "\n"
-				end
-			end
+			if not sys.opt_no_properties.value then
 
-			# Static attributes as top-level getters and setters
-			for id, attribute in jclass.attributes do if attribute.is_static then
-				generate_getter_setter(jclass, id, attribute)
+				# Static functions as top-level methods
+				var static_functions_prefix = jclass.class_type.extern_name.to_snake_case
+				for id, signatures in jclass.methods do
+					for signature in signatures do if signature.is_static then
+						var nit_id = static_functions_prefix + "_" + id
+						generate_method(jclass, id, nit_id, signature.return_type, signature.params, is_static=true)
+						file_out.write "\n"
+					end
+				end
+
+				# Static attributes as top-level getters and setters
+				for id, attribute in jclass.attributes do if attribute.is_static then
+					generate_getter_setter(jclass, id, attribute)
+				end
 			end
 
 			# Primitive arrays
@@ -128,6 +139,21 @@ class CodeGenerator
 				file_out.write "\n"
 			end
 		end
+
+		file_out.close
+	end
+
+	# Serialize `model` to a file next to `file_name`
+	fun write_model_to_file
+	do
+		if not sys.opt_save_model.value then return
+
+		# Write the model to file next to the Nit module
+		var model_path = file_name.strip_extension + ".jwrapper.bin"
+		var model_stream = model_path.to_path.open_wo
+		var serializer = new BinarySerializer(model_stream)
+		serializer.serialize model
+		model_stream.close
 	end
 
 	# License for the header of the generated Nit module
@@ -149,12 +175,41 @@ class CodeGenerator
 # This code has been generated using `jwrapper`
 """ is writable
 
-	private fun generate_class_header(jtype: JavaType)
+	private fun generate_class_header(java_class: JavaClass)
 	do
-		var nit_type = model.java_to_nit_type(jtype)
-		file_out.write "# Java class: {jtype}\n"
-		file_out.write "extern class {nit_type} in \"Java\" `\{ {jtype.extern_equivalent} `\}\n"
-		file_out.write "\tsuper JavaObject\n\n"
+		var java_type = java_class.class_type
+		var nit_type = model.java_to_nit_type(java_type)
+
+		var super_java_types = new HashSet[JavaType]
+		super_java_types.add_all java_class.extends
+		super_java_types.add_all java_class.implements
+
+		var supers = new Array[String]
+		var effective_supers = 0
+		for java_super in super_java_types do
+			var nit_super = model.java_to_nit_type(java_super)
+
+			# Comment out unknown types
+			var c = ""
+			if not nit_super.is_known and comment_unknown_types then c = "# "
+
+			supers.add "{c}super {nit_super}"
+			if c != "# " then effective_supers += 1
+		end
+
+		if effective_supers == 0 then
+			if java_class.class_type.package_name == "java.lang.Object" or
+			   not model.knows_the_object_class then
+				supers.add "super JavaObject"
+			else supers.add "super Java_lang_Object"
+		end
+
+		file_out.write """
+# Java class: {{{java_type}}}
+extern class {{{nit_type}}} in "Java" `{ {{{java_type.extern_equivalent}}} `}
+	{{{supers.join("\n\t")}}}
+
+"""
 	end
 
 	private fun generate_unknown_class_header(jtype: JavaType)
@@ -379,6 +434,12 @@ redef class Sys
 	#
 	# Used by `JavaClass::nit_name_for` with static properties.
 	private var top_level_used_names = new HashSet[String]
+
+	# Option to _not_ generate properties (static or from classes)
+	var opt_no_properties = new OptionBool("Do not wrap properties, only classes and basic services", "-n", "--no-properties")
+
+	# Should the model be serialized to a file?
+	var opt_save_model = new OptionBool("Save the model next to the generated Nit module", "-s", "--save-model")
 end
 
 redef class String
@@ -409,26 +470,42 @@ end
 
 redef class JavaClass
 	# Property names used in this class
-	private var used_names = new HashSet[String]
+	private var used_names = new HashSet[String] is serialize
 
 	# Get an available property name for the Java property with `name` and parameters
 	#
 	# If `use_parameters_name` then expect that there will be conflicts,
 	# so use the types of `parameters` to build the name.
-	private fun nit_name_for(name: String, parameters: Array[JavaType], use_parameters_name: Bool, is_static: Bool): String
+	private fun nit_name_for(name: String, parameters: Array[JavaType], use_parameters_name: Bool, is_static: Bool, local_only: nullable Bool): String
 	do
 		# Append the name of each parameter
 		if use_parameters_name then
 			for param in parameters do
-				name += "_" + param.id
+				var id = param.id
+				id += "Array"*param.array_dimension
+				name += "_" + id
 			end
 		end
 
-		# Set of property names, local or top-level
+		# Set of sets of property names, local or top-level
+		var local_used_names
 		var used_names
 		if is_static then
+			# Top-level methods
+			local_used_names = sys.top_level_used_names
 			used_names = sys.top_level_used_names
-		else used_names = self.used_names
+		else if local_only == true then
+			# Local only: constructors
+			local_used_names = self.used_names
+			used_names = self.used_names
+		else
+			# Avoid conflicts with all super classes
+			local_used_names = self.used_names
+			used_names = new HashSet[String]
+			for sup in in_hierarchy.greaters do
+				used_names.add_all sup.used_names
+			end
+		end
 
 		# As a last resort, append numbers to the name
 		var base_name = name
@@ -438,7 +515,7 @@ redef class JavaClass
 			count += 1
 		end
 
-		used_names.add name
+		local_used_names.add name
 		return name
 	end
 end

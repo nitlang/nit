@@ -15,6 +15,9 @@ dots = '...';
 Parser
 Ignored blank;
 
+// ---
+// Class and properties
+
 files = file+;
 file = compiled_from? class_declaration;
 
@@ -22,12 +25,31 @@ class_declaration = modifier* class_or_interface full_class_name
 	extends_declaration? implements_declaration? throws_declaration?
 	'{' property_declaration* '}';
 
+modifier
+	= 'public'|'private'|'protected'|'static'|'final'|'native'
+	|'synchronized'|'abstract'|'threadsafe'|'transient'|'volatile'|'strictfp';
+
 class_or_interface = 'class'|'interface';
 
-modifier
-	= 'public'|'private'|'protected'|'static'|'final'|'native'|'synchronized'|'abstract'|'threadsafe'|'transient'|'volatile'|'strictfp';
+implements_declaration = 'implements' types;
+extends_declaration = 'extends' types;
+throws_declaration = 'throws' types?;
 
-type = base_type brackets*;
+property_declaration
+	= {method:} modifier* generic_parameters? type identifier '(' types? ')' throws_declaration? ';'
+	| {constructor:} modifier* generic_parameters? full_class_name '(' types? ')' throws_declaration? ';'
+	| {attribute:} modifier* type identifier brackets* throws_declaration? ';'
+	| {static:} modifier* '{' '}' ';'
+	| ';';
+
+// ---
+// Types
+
+type = base_type brackets* dots?;
+
+types
+	= {tail:} types ',' type
+	| {head:} type;
 
 base_type
 	= {primitive:} primitive_base_type
@@ -47,32 +69,10 @@ generic_identifier
 	= {class:} full_class_name
 	| {wildcard:} wildcard;
 
+class_name = identifier generic_parameters?;
+
 full_class_name
 	= {tail:} full_class_name separator class_name
 	| {head:} class_name;
-class_name = identifier generic_parameters?;
 
-generic_parameters = '<' parameters '>';
-
-parameter = type dots?;
-parameters
-	= {tail:} parameters ',' parameter
-	| {head:} parameter;
-
-property_declaration
-	= {method:} modifier* generic_parameters? type identifier '(' parameters? ')' throws_declaration? ';'
-	| {constructor:} modifier* generic_parameters? full_class_name '(' parameters? ')' throws_declaration? ';'
-	| {attribute:} modifier* type identifier brackets* throws_declaration? ';'
-	| {static:} modifier* '{' '}' ';'
-	| ';';
-
-implements_declaration = 'implements' interface_list;
-extends_declaration = 'extends' interface_list;
-interface_list
-	= {tail:} interface_list ',' full_class_name
-	| {head:} full_class_name;
-
-throws_declaration = 'throws' exception_list?;
-exception_list
-	= {tail:} exception_list ',' type
-	| {head:} type;
+generic_parameters = '<' types '>';

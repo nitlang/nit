@@ -15,11 +15,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Contains the java and nit type representation used to convert java to nit code
-module model
+# Model of the parsed Java classes and their corresponding Nit types
+module model is serialize
 
 import more_collections
 import opts
+import poset
+import binary::serialization
 
 import jtype_converter
 
@@ -171,11 +173,23 @@ class JavaClass
 	# Methods of this class organized by their name
 	var methods = new MultiHashMap[String, JavaMethod]
 
+	# Methods signatures introduced by this class
+	var local_intro_methods = new MultiHashMap[String, JavaMethod]
+
 	# Constructors of this class
 	var constructors = new Array[JavaConstructor]
 
 	# Importations from this class
 	var imports = new HashSet[NitModule]
+
+	# Interfaces implemented by this class
+	var implements = new HashSet[JavaType]
+
+	# Super classes of this class
+	var extends = new HashSet[JavaType]
+
+	# Position of self in `model.class_hierarchy`
+	var in_hierarchy: nullable POSetElement[JavaClass] = null is noserialize
 
 	redef fun to_s do return class_type.to_s
 
@@ -230,13 +244,51 @@ class JavaClass
 			end
 		end
 	end
+
+	redef fun hash do return class_type.hash
+	redef fun ==(o) do return o isa JavaClass and o.class_type == class_type
 end
 
 # Model of all the Java class analyzed in one run
 class JavaModel
 
-	# All analyzed classes
+	# Classes analyzed in this pass
 	var classes = new HashMap[String, JavaClass]
+
+	# All classes, from this pass and from other passes
+	var all_classes: HashMap[String, JavaClass] is noserialize, lazy do
+		var classes = new HashMap[String, JavaClass]
+		classes.recover_with self.classes
+
+		for model_path in sys.opt_load_models.value do
+			if not model_path.file_exists then
+				print_error "Error: model file '{model_path}' does not exist"
+				continue
+			end
+
+			var file = model_path.to_path.open_ro
+			var d = new BinaryDeserializer(file)
+			var model = d.deserialize
+			file.close
+
+			if d.errors.not_empty then
+				print_error "Error: failed to deserialize model file '{model_path}' with: {d.errors.join(", ")}"
+				continue
+			end
+
+			if not model isa JavaModel then
+				print_error "Error: model file contained a '{if model == null then "null" else model.class_name}'"
+				continue
+			end
+
+			classes.recover_with model.classes
+		end
+
+		return classes
+	end
+
+	# Does this model have access to the `java.lang.Object`?
+	var knows_the_object_class: Bool = all_classes.keys.has("java.lang.Object") is lazy
 
 	# Add a class in `classes`
 	fun add_class(jclass: JavaClass)
@@ -246,10 +298,10 @@ class JavaModel
 	end
 
 	# Unknown types, not already wrapped and not in this pass
-	var unknown_types = new HashMap[JavaType, NitType]
+	var unknown_types = new HashMap[JavaType, NitType] is noserialize
 
 	# Wrapped types, or classes analyzed in this pass
-	var known_types = new HashMap[JavaType, NitType]
+	var known_types = new HashMap[JavaType, NitType] is noserialize
 
 	# Get the `NitType` corresponding to the `JavaType`
 	#
@@ -313,6 +365,76 @@ class JavaModel
 			end
 		end
 	end
+
+	# Specialization hierarchy of `classes`
+	var class_hierarchy = new POSet[JavaClass] is noserialize
+
+	# Fill `class_hierarchy`
+	fun build_class_hierarchy
+	do
+		var object_type = new JavaType
+		object_type.identifier = ["java","lang","Object"]
+
+		# Fill POSet
+		for name, java_class in all_classes do
+			# Skip anonymous classes
+			if java_class.class_type.is_anonymous then continue
+
+			java_class.in_hierarchy = class_hierarchy.add_node(java_class)
+
+			# Collect explicit super classes
+			var super_classes = new Array[JavaType]
+			super_classes.add_all java_class.implements
+			super_classes.add_all java_class.extends
+
+			# Remove unavailable super classes
+			for super_type in super_classes.reverse_iterator do
+				# Is the super class available?
+				if not all_classes.keys.has(super_type.package_name) then super_classes.remove(super_type)
+			end
+
+			# If the is no explicit supers, add `java.lang.Object` (if it is known)
+			if super_classes.is_empty and java_class.class_type != object_type and
+			   knows_the_object_class then
+				super_classes.add object_type
+			end
+
+			for super_type in super_classes do
+				# Is the super class available?
+				if not all_classes.keys.has(super_type.package_name) then continue
+
+				var super_class = all_classes[super_type.package_name]
+				class_hierarchy.add_edge(java_class, super_class)
+			end
+		end
+
+		# Flatten classes from the top one (Object like)
+		var linearized = class_hierarchy.linearize(class_hierarchy)
+
+		# Methods intro
+		for java_class in linearized do
+			var greaters = java_class.in_hierarchy.greaters
+
+			for mid, signatures in java_class.methods do
+				for signature in signatures do
+					if signature.is_static then continue
+
+					# Check if this signature exists in a parent
+					for parent in greaters do
+						if parent == java_class then continue
+
+						if not parent.methods.keys.has(mid) then continue
+
+						if parent.methods[mid].has(signature) then continue label
+					end
+
+					# This is an introduction! register it
+					java_class.local_intro_methods[mid].add signature
+
+				end label
+			end
+		end
+	end
 end
 
 # A property to a Java class
@@ -334,6 +456,9 @@ class JavaMethod
 
 	# Generic parameters of this method
 	var generic_params: Array[JavaType]
+
+	redef fun ==(o) do return o isa JavaMethod and o.is_static == is_static and o.params == params
+	redef fun hash do return params.hash
 end
 
 # An attribute in a Java class
@@ -437,9 +562,12 @@ redef class Sys
 
 	# Generate the primitive array version of each class up to the given depth
 	var opt_arrays = new OptionInt("Depth of the primitive array for each wrapped class (default: 1)", 1, "-a")
+
+	# Generate the primitive array version of each class up to the given depth
+	var opt_load_models = new OptionArray("Saved models to search for super-classes", "-m")
 end
 
-redef class Text
+redef abstract class Text
 	# Get a copy of `self` where the first letter is capitalized
 	fun simple_capitalized: String
 	do

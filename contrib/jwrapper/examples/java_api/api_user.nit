@@ -18,17 +18,22 @@ import java_api
 var str = java_lang_integer_to_string_int(5678)
 
 # Do some Java side printing
-var stdout = java_lang_system_out
-stdout.println_int 1234
-stdout.println_String str
+java_lang_system_out.println_int 1234
+java_lang_system_out.println_String str
 
 # Test a generic list
 var list = new Java_util_ArrayList
 
-print list.is_empty
-assert list.is_empty
+print "List is empty? {list.is_empty}"
+print "List size {list.size}"
 
-print list.size
-assert list.size == 0
+list.add str
+print "List is empty? {list.is_empty}"
+print "List size {list.size}"
+
+var str_back = list.get(0)
+java_lang_system_out.println_String str_back.to_string
 
 list.clear
+print "List is empty? {list.is_empty}"
+print "List size {list.size}"

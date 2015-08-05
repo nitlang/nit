@@ -44,7 +44,7 @@ var opt_output = new OptionString("Output file", "-o")
 var opt_regex = new OptionString("Regex pattern to filter classes in Jar archives", "-r")
 var opt_help = new OptionBool("Show this help message", "-h", "--help")
 
-opts.add_option(opt_output, opt_unknown, opt_extern_class_prefix, opt_libs, opt_regex, opt_cast_objects, opt_arrays, opt_verbose, opt_help)
+opts.add_option(opt_output, opt_unknown, opt_extern_class_prefix, opt_libs, opt_regex, opt_cast_objects, opt_arrays, opt_save_model, opt_load_models, opt_no_properties, opt_verbose, opt_help)
 opts.parse args
 
 if opts.errors.not_empty or opts.rest.is_empty or opt_help.value then
@@ -90,8 +90,10 @@ for input in opts.rest do
 	else if ext == "javap" then
 		javap_files.add input
 	else if ext == "jar" then
-		var out_dir = "tmp"
 		clock.lapse
+
+		var out_dir = "tmp"
+		if not out_dir.file_exists then out_dir.mkdir
 
 		if opt_verbose.value > 0 then print "# Extracting {input}"
 
@@ -192,16 +194,26 @@ var visitor = new JavaVisitor(model)
 visitor.enter_visit root_node
 sys.perfs["core model"].add clock.lapse
 
+# Resolve types
 model.resolve_types
 sys.perfs["core resolve"].add clock.lapse
 
+# Build class hierarchy
+model.build_class_hierarchy
+sys.perfs["core hierarchy"].add clock.lapse
+
 if opt_verbose.value > 0 then print "# Generating Nit code"
 
+# Generate the Nit module
 var use_comment = opt_unknown.value == 0
 var use_stub = opt_unknown.value == 1
 var generator = new CodeGenerator(out_file, model, use_comment, use_stub)
 generator.generate
 sys.perfs["code generator"].add clock.lapse
+
+# Write the model to a file, for use by subsequent passes
+generator.write_model_to_file
+sys.perfs["writing model"].add clock.lapse
 
 if opt_verbose.value > 1 then
 	print "# Performance Analysis:"
