@@ -86,9 +86,8 @@ if "NIT_TESTING".environ == "true" then exit 0
 var auth = get_github_oauth
 
 if auth == "" then
-	print "Not github token, please configure one with"
+	print "Warning: no github oauth token, you can configure one with"
 	print "    git config --add github.oauthtoken MYOAUTHTOKEN"
-	return
 end
 
 var curl = new GithubCurl(auth, "Merge-o-matic (privat/nit)")
