@@ -118,6 +118,33 @@ class DB
 		return events
 	end
 
+	# List known beers
+	#
+	# Return `null` on error.
+	fun beers: nullable Array[Beer]
+	do
+		var stmt = select("name, desc FROM beers")
+		if stmt == null then return null
+		return [for row in stmt do row.to_beer]
+	end
+
+	# Days where `beer` was available, all known days if `beer == null`
+	#
+	# Return `null` on error.
+	fun days(beer: nullable Beer): nullable Array[String]
+	do
+		var stmt
+		if beer == null then
+			stmt = select("DISTINCT day FROM daily")
+		else
+			stmt = select("""
+DISTINCT day FROM daily WHERE beer=(SELECT ROWID FROM beers WHERE name="{{{beer.name}}}")""")
+		end
+
+		if stmt == null then return null
+		return [for row in stmt do row[0].to_s]
+	end
+
 	# All the subscribers to the mailing list
 	fun subscribers: Array[String]
 	do
