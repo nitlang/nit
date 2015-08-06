@@ -61,7 +61,7 @@ private class XMLEntities
 	# The owner, aka, the parent
 	var owner: XMLEntity
 
-	private var entities = new List[XMLEntity]
+	var entities = new List[XMLEntity]
 
 	redef fun length do return entities.length
 
