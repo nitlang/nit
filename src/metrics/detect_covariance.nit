@@ -394,10 +394,15 @@ redef class TypeVisitor
 
 		if node isa AArrayExpr then
 			dcp.cpt_explanations.inc("lit-array")
-		else if p isa ACallExpr and (p.n_id.text == "sort" or p.n_id.text == "linearize_mpropdefs") then
-			dcp.cpt_explanations.inc("generic methods (sort-method)")
-		else if p isa ACallExpr and p.n_id.text == "visit_list" then
-			dcp.cpt_explanations.inc("use-site covariance (visit_list-method)")
+		else if p isa ACallExpr then
+			var name = p.n_qid.n_id.text
+			if name == "sort" or name == "linearize_mpropdefs" then
+				dcp.cpt_explanations.inc("generic methods (sort-method)")
+			else if name == "visit_list" then
+				dcp.cpt_explanations.inc("use-site covariance (visit_list-method)")
+			else
+				dcp.cpt_explanations.inc("other covariance")
+			end
 		else
 			dcp.cpt_explanations.inc("other covariance")
 		end

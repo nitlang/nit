@@ -1766,14 +1766,14 @@ end
 
 
 redef class ACallExpr
-	redef fun property_name do return n_id.text
-	redef fun property_node do return n_id
+	redef fun property_name do return n_qid.n_id.text
+	redef fun property_node do return n_qid
 	redef fun compute_raw_arguments do return n_args.to_a
 end
 
 redef class ACallAssignExpr
-	redef fun property_name do return n_id.text + "="
-	redef fun property_node do return n_id
+	redef fun property_name do return n_qid.n_id.text + "="
+	redef fun property_node do return n_qid
 	redef fun compute_raw_arguments
 	do
 		var res = n_args.to_a
@@ -1841,8 +1841,8 @@ redef class ASendReassignFormExpr
 end
 
 redef class ACallReassignExpr
-	redef fun property_name do return n_id.text
-	redef fun property_node do return n_id
+	redef fun property_name do return n_qid.n_id.text
+	redef fun property_node do return n_qid.n_id
 	redef fun compute_raw_arguments do return n_args.to_a
 end
 
@@ -2014,11 +2014,11 @@ redef class ANewExpr
 		var kind = recvtype.mclass.kind
 
 		var name: String
-		var nid = self.n_id
+		var nqid = self.n_qid
 		var node: ANode
-		if nid != null then
-			name = nid.text
-			node = nid
+		if nqid != null then
+			name = nqid.n_id.text
+			node = nqid
 		else
 			name = "new"
 			node = self.n_kwnew

@@ -51,7 +51,7 @@ redef class ACallExpr
 
 	redef fun accept_regex_visitor(v)
 	do
-		var method = n_id
+		var method = n_qid.n_id
 		var receiver = n_expr
 
 		# Check only string literals on which `to_re` is called

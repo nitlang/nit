@@ -446,7 +446,7 @@ redef class ACallFormExpr
 	redef fun accept_scope_visitor(v)
 	do
 		if n_expr isa AImplicitSelfExpr then
-			var name = n_id.text
+			var name = n_qid.n_id.text
 			var variable = v.search_variable(name)
 			if variable != null then
 				var n: AExpr
@@ -473,14 +473,14 @@ redef class ACallExpr
 	redef fun variable_create(variable)
 	do
 		variable.warn_unread = false
-		return new AVarExpr.init_avarexpr(n_id)
+		return new AVarExpr.init_avarexpr(n_qid.n_id)
 	end
 end
 
 redef class ACallAssignExpr
 	redef fun variable_create(variable)
 	do
-		return new AVarAssignExpr.init_avarassignexpr(n_id, n_assign, n_value)
+		return new AVarAssignExpr.init_avarassignexpr(n_qid.n_id, n_assign, n_value)
 	end
 end
 
@@ -488,6 +488,6 @@ redef class ACallReassignExpr
 	redef fun variable_create(variable)
 	do
 		variable.warn_unread = false
-		return new AVarReassignExpr.init_avarreassignexpr(n_id, n_assign_op, n_value)
+		return new AVarReassignExpr.init_avarreassignexpr(n_qid.n_id, n_assign_op, n_value)
 	end
 end

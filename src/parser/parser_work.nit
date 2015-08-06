@@ -311,6 +311,6 @@ redef class AExpr
 		if not self isa ACallExpr then return null
 		if not self.n_expr isa AImplicitSelfExpr then return null
 		if not self.n_args.n_exprs.is_empty then return null
-		return self.n_id.text
+		return self.n_qid.n_id.text
 	end
 end
