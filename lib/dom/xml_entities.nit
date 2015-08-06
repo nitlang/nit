@@ -214,6 +214,7 @@ end
 class XMLProcessingInstructionTag
 	super XMLTag
 
+	# Raw content usable by the third-party application
 	var content: String
 
 	redef fun to_s do return "<?{tag_name} {content}?>"
@@ -240,6 +241,7 @@ end
 class XMLDoctypeTag
 	super XMLTag
 
+	# Raw content
 	var content: String
 
 	redef fun to_s do return "<!DOCTYPE {content}>"
