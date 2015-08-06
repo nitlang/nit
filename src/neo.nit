@@ -845,7 +845,6 @@ class NeoModel
 		node.labels.add "MParameter"
 		node["name"] = mparameter.name
 		node["is_vararg"] = mparameter.is_vararg
-		node["is_default"] = mparameter.is_default
 		node.out_edges.add(new NeoEdge(node, "TYPE", to_node(mparameter.mtype)))
 		return node
 	end
@@ -861,8 +860,7 @@ class NeoModel
 		var name = node["name"].to_s
 		var mtype = to_mtype(model, node.out_nodes("TYPE").first)
 		var is_vararg = node["is_vararg"].as(Bool)
-		var is_default = node["is_default"].as(Bool)
-		var mparameter = new MParameter(name, mtype, is_vararg, is_default)
+		var mparameter = new MParameter(name, mtype, is_vararg)
 		mentities[node.id.as(Int)] = mparameter
 		return mparameter
 	end
