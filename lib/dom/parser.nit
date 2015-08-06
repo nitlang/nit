@@ -60,7 +60,8 @@ class XMLProcessor
 			else
 				var st = pos
 				var end_pc = ignore_until("<") - 1
-				var pc = new PCDATA(src.substring(st, end_pc - st + 1).trim)
+				var loc = new Location(line, line_offset)
+				var pc = new PCDATA(loc, src.substring(st, end_pc - st + 1).trim)
 				if stack.is_empty then
 					pc.parent = doc
 				else
@@ -121,7 +122,7 @@ class XMLProcessor
 				var cdend = ignore_until("]]>")
 				pos += 3
 				if pos >= srclen then return new XMLError(st_loc, "Unfinished CDATA block")
-				return new CDATA(src.substring(cdst, cdend - cdst))
+				return new CDATA(st_loc, src.substring(cdst, cdend - cdst))
 			else if spe_type == "DOCTYPE" then
 				pos += 7
 				return parse_doctype(st_loc)
@@ -262,7 +263,7 @@ class XMLProcessor
 		var st_loc = new Location(line, line_offset)
 		if pos >= srclen then return new BadXMLAttribute(st_loc, "Unfinished attribute name")
 		# FIXME: Ugly, but as long as it remains private, it is OK I guess
-		if endtags.has(src[pos]) then return new XMLAttributeEnd("")
+		if endtags.has(src[pos]) then return new XMLAttributeEnd(st_loc, "")
 		var attrname_st = pos
 		while pos < srclen and src[pos] != '=' and not endtags.has(src[pos]) do pos += 1
 		if pos >= srclen then return new BadXMLAttribute(st_loc, "Unfinished attribute name")
