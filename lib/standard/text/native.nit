@@ -84,7 +84,7 @@ extern class NativeString `{ char* `}
 		if((c & 0x80) == 0x00) return (uint32_t)c;
 		if(((c & 0xE0) == 0xC0) && ((self[pos + 1] & 0xC0) == 0x80)) return ((((uint32_t)c) & 0x1F) << 6) + ((((uint32_t)self[pos + 1] & 0x3F)));
 		if(((c & 0xF0) == 0xE0) && ((self[pos + 1] & 0xC0) == 0x80) && ((self[pos + 2] & 0xC0) == 0x80)) return ((((uint32_t)c) & 0xF) << 12) + ((((uint32_t)self[pos + 1]) & 0x3F) << 6) + ((((uint32_t)self[pos + 2] & 0x3F)));
-		if(((c & 0xF7) == 0xF0) && ((self[pos + 1] & 0xC0) == 0x80) && ((self[pos + 2] & 0xC0) == 0x80) && ((self[pos + 3] & 0xC0) == 0x80)) return ((((uint32_t)c) & 0x7) << 18) + ((((uint32_t)self[pos + 1]) & 0x3F) << 12) + ((((uint32_t)self[pos + 2]) & 0x3F) << 6) + ((((uint32_t)self[pos + 3] & 0x3F)));
+		if(((c & 0xF8) == 0xF0) && ((self[pos + 1] & 0xC0) == 0x80) && ((self[pos + 2] & 0xC0) == 0x80) && ((self[pos + 3] & 0xC0) == 0x80)) return ((((uint32_t)c) & 0x7) << 18) + ((((uint32_t)self[pos + 1]) & 0x3F) << 12) + ((((uint32_t)self[pos + 2]) & 0x3F) << 6) + ((((uint32_t)self[pos + 3] & 0x3F)));
 		return 0xFFFD;
 	`}
 
@@ -100,7 +100,7 @@ extern class NativeString `{ char* `}
 			return 2
 		else if c & 0xF0u8 == 0xE0u8 and self[pos + 1] & 0xC0u8 == 0x80u8 and self[pos + 2] & 0xC0u8 == 0x80u8 then
 			return 3
-		else if c & 0xF7u8 == 0xF0u8 and self[pos + 1] & 0xC0u8 == 0x80u8 and self[pos + 2] & 0xC0u8 == 0x80u8 and self[pos + 3] & 0xC0u8 == 0x80u8 then
+		else if c & 0xF8u8 == 0xF0u8 and self[pos + 1] & 0xC0u8 == 0x80u8 and self[pos + 2] & 0xC0u8 == 0x80u8 and self[pos + 3] & 0xC0u8 == 0x80u8 then
 			return 4
 		else
 			return 1
