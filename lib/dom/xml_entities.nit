@@ -36,7 +36,7 @@ import parser_base
 # Any kind of XML Entity
 abstract class XMLEntity
 	# Optional parent of `self`
-	var parent: nullable XMLEntity is private writable(set_parent)
+	var parent: nullable XMLEntity = null is private writable(set_parent)
 
 	# Optional location of the entity in source
 	var location: nullable Location
