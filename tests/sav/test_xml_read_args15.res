@@ -1,1 +1,1 @@
-XML Error: Malformatted attribute at line 7, position 7
+XML Error: Malformed attribute at line 7, position 7
