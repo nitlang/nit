@@ -69,6 +69,8 @@ redef class ToolContext
 	var opt_no_gcc_directive = new OptionArray("Disable a advanced gcc directives for optimization", "--no-gcc-directive")
 	# --release
 	var opt_release = new OptionBool("Compile in release mode and finalize application", "--release")
+	# -g
+	var opt_debug = new OptionBool("Compile in debug mode (no C-side optimization)", "--debug", "-g")
 
 	redef init
 	do
@@ -80,6 +82,7 @@ redef class ToolContext
 		self.option_context.add_option(self.opt_no_gcc_directive)
 		self.option_context.add_option(self.opt_release)
 		self.option_context.add_option(self.opt_max_c_lines, self.opt_group_c_files)
+		self.option_context.add_option(self.opt_debug)
 
 		opt_no_main.hidden = true
 	end
@@ -156,10 +159,13 @@ class MakefileToolchain
 
 	redef fun write_and_make
 	do
+		var debug = toolcontext.opt_debug.value
 		var compile_dir = compile_dir
 
 		# Remove the compilation directory unless explicitly set
 		var auto_remove = toolcontext.opt_compile_dir.value == null
+		# If debug flag is set, do not remove sources
+		if debug then auto_remove = false
 
 		# Generate the .h and .c files
 		# A single C file regroups many compiled rumtime functions
@@ -341,8 +347,9 @@ class MakefileToolchain
 			var libs = m.collect_linker_libs
 			if libs != null then linker_options.add_all(libs)
 		end
+		var debug = toolcontext.opt_debug.value
 
-		makefile.write("CC = ccache cc\nCXX = ccache c++\nCFLAGS = -g -O2 -Wno-unused-value -Wno-switch -Wno-attributes\nCINCL =\nLDFLAGS ?= \nLDLIBS  ?= -lm {linker_options.join(" ")}\n\n")
+		makefile.write("CC = ccache cc\nCXX = ccache c++\nCFLAGS = -g{ if not debug then " -O2 " else " "}-Wno-unused-value -Wno-switch -Wno-attributes\nCINCL =\nLDFLAGS ?= \nLDLIBS  ?= -lm {linker_options.join(" ")}\n\n")
 
 		makefile.write "\n# SPECIAL CONFIGURATION FLAGS\n"
 		if platform.supports_libunwind then
