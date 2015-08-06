@@ -131,7 +131,7 @@ abstract class Deserializer
 	# When at `true`, this may cause the accumulation of a lot of entries in `errors`.
 	#
 	# Default at `true`.
-	var keep_going: nullable Bool is writable
+	var keep_going: nullable Bool = null is writable
 
 	# Errors encountered in the last call to `deserialize`
 	var errors = new Array[Error]
