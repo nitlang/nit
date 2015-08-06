@@ -353,6 +353,7 @@ class AClasskind super Prod end
 class AFormaldef super Prod end
 class APropdef super Prod end
 class AMethid super Prod end
+class AQid super Prod end
 class ASignature super Prod end
 class AParam super Prod end
 class AType super Prod end
@@ -628,6 +629,11 @@ class ABraassignMethid
 	var n_obra: TObra is writable, noinit
 	var n_cbra: TCbra is writable, noinit
 	var n_assign: TAssign is writable, noinit
+end
+class AQid
+	super AQid
+	var n_qualified: nullable AQualified = null is writable
+	var n_id: TId is writable, noinit
 end
 class ASignature
 	super ASignature
@@ -931,7 +937,7 @@ class ANewExpr
 	super AExpr
 	var n_kwnew: TKwnew is writable, noinit
 	var n_type: AType is writable, noinit
-	var n_id: nullable TId = null is writable
+	var n_qid: nullable AQid = null is writable
 	var n_args: AExprs is writable, noinit
 end
 class AAttrExpr
@@ -956,13 +962,13 @@ end
 class ACallExpr
 	super AExpr
 	var n_expr: AExpr is writable, noinit
-	var n_id: TId is writable, noinit
+	var n_qid: AQid is writable, noinit
 	var n_args: AExprs is writable, noinit
 end
 class ACallAssignExpr
 	super AExpr
 	var n_expr: AExpr is writable, noinit
-	var n_id: TId is writable, noinit
+	var n_qid: AQid is writable, noinit
 	var n_args: AExprs is writable, noinit
 	var n_assign: TAssign is writable, noinit
 	var n_value: AExpr is writable, noinit
@@ -970,7 +976,7 @@ end
 class ACallReassignExpr
 	super AExpr
 	var n_expr: AExpr is writable, noinit
-	var n_id: TId is writable, noinit
+	var n_qid: AQid is writable, noinit
 	var n_args: AExprs is writable, noinit
 	var n_assign_op: AAssignOp is writable, noinit
 	var n_value: AExpr is writable, noinit

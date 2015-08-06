@@ -197,11 +197,11 @@ redef class Parser
 		reduce_table.add new ReduceAction183(44)
 		reduce_table.add new ReduceAction184(44)
 		reduce_table.add new ReduceAction185(44)
-		reduce_table.add new ReduceAction184(44)
+		reduce_table.add new ReduceAction186(44)
 		reduce_table.add new ReduceAction187(44)
 		reduce_table.add new ReduceAction188(44)
 		reduce_table.add new ReduceAction189(44)
-		reduce_table.add new ReduceAction188(44)
+		reduce_table.add new ReduceAction190(44)
 		reduce_table.add new ReduceAction191(44)
 		reduce_table.add new ReduceAction192(44)
 		reduce_table.add new ReduceAction193(44)
@@ -226,16 +226,16 @@ redef class Parser
 		reduce_table.add new ReduceAction212(47)
 		reduce_table.add new ReduceAction213(47)
 		reduce_table.add new ReduceAction214(47)
-		reduce_table.add new ReduceAction211(47)
-		reduce_table.add new ReduceAction212(47)
+		reduce_table.add new ReduceAction215(47)
+		reduce_table.add new ReduceAction216(47)
 		reduce_table.add new ReduceAction217(47)
 		reduce_table.add new ReduceAction218(47)
 		reduce_table.add new ReduceAction219(47)
 		reduce_table.add new ReduceAction220(47)
 		reduce_table.add new ReduceAction221(47)
 		reduce_table.add new ReduceAction222(47)
-		reduce_table.add new ReduceAction219(47)
-		reduce_table.add new ReduceAction220(47)
+		reduce_table.add new ReduceAction223(47)
+		reduce_table.add new ReduceAction224(47)
 		reduce_table.add new ReduceAction225(47)
 		reduce_table.add new ReduceAction226(47)
 		reduce_table.add new ReduceAction227(47)
@@ -245,16 +245,16 @@ redef class Parser
 		reduce_table.add new ReduceAction231(47)
 		reduce_table.add new ReduceAction232(47)
 		reduce_table.add new ReduceAction233(47)
-		reduce_table.add new ReduceAction230(47)
-		reduce_table.add new ReduceAction231(47)
+		reduce_table.add new ReduceAction234(47)
+		reduce_table.add new ReduceAction235(47)
 		reduce_table.add new ReduceAction236(47)
 		reduce_table.add new ReduceAction237(47)
 		reduce_table.add new ReduceAction238(47)
 		reduce_table.add new ReduceAction239(47)
 		reduce_table.add new ReduceAction240(47)
 		reduce_table.add new ReduceAction241(47)
-		reduce_table.add new ReduceAction238(47)
-		reduce_table.add new ReduceAction239(47)
+		reduce_table.add new ReduceAction242(47)
+		reduce_table.add new ReduceAction243(47)
 		reduce_table.add new ReduceAction244(47)
 		reduce_table.add new ReduceAction245(48)
 		reduce_table.add new ReduceAction246(48)
@@ -349,16 +349,16 @@ redef class Parser
 		reduce_table.add new ReduceAction335(72)
 		reduce_table.add new ReduceAction185(72)
 		reduce_table.add new ReduceAction337(72)
-		reduce_table.add new ReduceAction184(72)
-		reduce_table.add new ReduceAction335(72)
+		reduce_table.add new ReduceAction186(72)
+		reduce_table.add new ReduceAction339(72)
 		reduce_table.add new ReduceAction187(72)
 		reduce_table.add new ReduceAction341(72)
 		reduce_table.add new ReduceAction188(72)
 		reduce_table.add new ReduceAction343(72)
 		reduce_table.add new ReduceAction189(72)
 		reduce_table.add new ReduceAction345(72)
-		reduce_table.add new ReduceAction188(72)
-		reduce_table.add new ReduceAction343(72)
+		reduce_table.add new ReduceAction190(72)
+		reduce_table.add new ReduceAction347(72)
 		reduce_table.add new ReduceAction191(72)
 		reduce_table.add new ReduceAction349(72)
 		reduce_table.add new ReduceAction192(72)
@@ -372,8 +372,8 @@ redef class Parser
 		reduce_table.add new ReduceAction358(72)
 		reduce_table.add new ReduceAction359(72)
 		reduce_table.add new ReduceAction360(72)
-		reduce_table.add new ReduceAction357(72)
-		reduce_table.add new ReduceAction358(72)
+		reduce_table.add new ReduceAction361(72)
+		reduce_table.add new ReduceAction362(72)
 		reduce_table.add new ReduceAction363(72)
 		reduce_table.add new ReduceAction364(72)
 		reduce_table.add new ReduceAction365(72)
@@ -597,10 +597,10 @@ redef class Parser
 		reduce_table.add new ReduceAction189(137)
 		reduce_table.add new ReduceAction337(137)
 		reduce_table.add new ReduceAction345(137)
-		reduce_table.add new ReduceAction184(137)
-		reduce_table.add new ReduceAction188(137)
-		reduce_table.add new ReduceAction335(137)
-		reduce_table.add new ReduceAction343(137)
+		reduce_table.add new ReduceAction186(137)
+		reduce_table.add new ReduceAction190(137)
+		reduce_table.add new ReduceAction339(137)
+		reduce_table.add new ReduceAction347(137)
 		reduce_table.add new ReduceAction191(137)
 		reduce_table.add new ReduceAction349(137)
 		reduce_table.add new ReduceAction192(137)
@@ -613,8 +613,8 @@ redef class Parser
 		reduce_table.add new ReduceAction358(137)
 		reduce_table.add new ReduceAction359(137)
 		reduce_table.add new ReduceAction360(137)
-		reduce_table.add new ReduceAction357(137)
-		reduce_table.add new ReduceAction358(137)
+		reduce_table.add new ReduceAction361(137)
+		reduce_table.add new ReduceAction362(137)
 		reduce_table.add new ReduceAction363(137)
 		reduce_table.add new ReduceAction364(137)
 		reduce_table.add new ReduceAction365(137)
@@ -654,11 +654,11 @@ redef class Parser
 		reduce_table.add new ReduceAction183(141)
 		reduce_table.add new ReduceAction184(141)
 		reduce_table.add new ReduceAction185(141)
-		reduce_table.add new ReduceAction184(141)
+		reduce_table.add new ReduceAction186(141)
 		reduce_table.add new ReduceAction187(141)
 		reduce_table.add new ReduceAction188(141)
 		reduce_table.add new ReduceAction189(141)
-		reduce_table.add new ReduceAction188(141)
+		reduce_table.add new ReduceAction190(141)
 		reduce_table.add new ReduceAction191(141)
 		reduce_table.add new ReduceAction192(141)
 		reduce_table.add new ReduceAction193(141)
@@ -677,16 +677,16 @@ redef class Parser
 		reduce_table.add new ReduceAction212(142)
 		reduce_table.add new ReduceAction213(142)
 		reduce_table.add new ReduceAction214(142)
-		reduce_table.add new ReduceAction211(142)
-		reduce_table.add new ReduceAction212(142)
+		reduce_table.add new ReduceAction215(142)
+		reduce_table.add new ReduceAction216(142)
 		reduce_table.add new ReduceAction217(142)
 		reduce_table.add new ReduceAction218(142)
 		reduce_table.add new ReduceAction219(142)
 		reduce_table.add new ReduceAction220(142)
 		reduce_table.add new ReduceAction221(142)
 		reduce_table.add new ReduceAction222(142)
-		reduce_table.add new ReduceAction219(142)
-		reduce_table.add new ReduceAction220(142)
+		reduce_table.add new ReduceAction223(142)
+		reduce_table.add new ReduceAction224(142)
 		reduce_table.add new ReduceAction225(142)
 		reduce_table.add new ReduceAction226(142)
 		reduce_table.add new ReduceAction227(142)
@@ -696,16 +696,16 @@ redef class Parser
 		reduce_table.add new ReduceAction231(142)
 		reduce_table.add new ReduceAction232(142)
 		reduce_table.add new ReduceAction233(142)
-		reduce_table.add new ReduceAction230(142)
-		reduce_table.add new ReduceAction231(142)
+		reduce_table.add new ReduceAction234(142)
+		reduce_table.add new ReduceAction235(142)
 		reduce_table.add new ReduceAction236(142)
 		reduce_table.add new ReduceAction237(142)
 		reduce_table.add new ReduceAction238(142)
 		reduce_table.add new ReduceAction239(142)
 		reduce_table.add new ReduceAction240(142)
 		reduce_table.add new ReduceAction241(142)
-		reduce_table.add new ReduceAction238(142)
-		reduce_table.add new ReduceAction239(142)
+		reduce_table.add new ReduceAction242(142)
+		reduce_table.add new ReduceAction243(142)
 		reduce_table.add new ReduceAction244(142)
 		reduce_table.add new ReduceAction159(143)
 		reduce_table.add new ReduceAction284(143)
@@ -762,16 +762,16 @@ redef class Parser
 		reduce_table.add new ReduceAction335(156)
 		reduce_table.add new ReduceAction185(156)
 		reduce_table.add new ReduceAction337(156)
-		reduce_table.add new ReduceAction184(156)
-		reduce_table.add new ReduceAction335(156)
+		reduce_table.add new ReduceAction186(156)
+		reduce_table.add new ReduceAction339(156)
 		reduce_table.add new ReduceAction187(156)
 		reduce_table.add new ReduceAction341(156)
 		reduce_table.add new ReduceAction188(156)
 		reduce_table.add new ReduceAction343(156)
 		reduce_table.add new ReduceAction189(156)
 		reduce_table.add new ReduceAction345(156)
-		reduce_table.add new ReduceAction188(156)
-		reduce_table.add new ReduceAction343(156)
+		reduce_table.add new ReduceAction190(156)
+		reduce_table.add new ReduceAction347(156)
 		reduce_table.add new ReduceAction191(156)
 		reduce_table.add new ReduceAction349(156)
 		reduce_table.add new ReduceAction192(156)
@@ -785,8 +785,8 @@ redef class Parser
 		reduce_table.add new ReduceAction358(156)
 		reduce_table.add new ReduceAction359(156)
 		reduce_table.add new ReduceAction360(156)
-		reduce_table.add new ReduceAction357(156)
-		reduce_table.add new ReduceAction358(156)
+		reduce_table.add new ReduceAction361(156)
+		reduce_table.add new ReduceAction362(156)
 		reduce_table.add new ReduceAction363(156)
 		reduce_table.add new ReduceAction364(156)
 		reduce_table.add new ReduceAction365(156)
@@ -868,10 +868,10 @@ redef class Parser
 		reduce_table.add new ReduceAction854(179)
 		reduce_table.add new ReduceAction855(179)
 		reduce_table.add new ReduceAction856(179)
-		reduce_table.add new ReduceAction183(179)
-		reduce_table.add new ReduceAction333(179)
-		reduce_table.add new ReduceAction855(179)
-		reduce_table.add new ReduceAction856(179)
+		reduce_table.add new ReduceAction857(179)
+		reduce_table.add new ReduceAction858(179)
+		reduce_table.add new ReduceAction859(179)
+		reduce_table.add new ReduceAction860(179)
 		reduce_table.add new ReduceAction191(179)
 		reduce_table.add new ReduceAction349(179)
 		reduce_table.add new ReduceAction863(179)
@@ -882,8 +882,8 @@ redef class Parser
 		reduce_table.add new ReduceAction358(179)
 		reduce_table.add new ReduceAction359(179)
 		reduce_table.add new ReduceAction360(179)
-		reduce_table.add new ReduceAction357(179)
-		reduce_table.add new ReduceAction358(179)
+		reduce_table.add new ReduceAction361(179)
+		reduce_table.add new ReduceAction362(179)
 		reduce_table.add new ReduceAction363(179)
 		reduce_table.add new ReduceAction364(179)
 		reduce_table.add new ReduceAction365(179)
@@ -924,11 +924,11 @@ redef class Parser
 		reduce_table.add new ReduceAction183(184)
 		reduce_table.add new ReduceAction184(184)
 		reduce_table.add new ReduceAction185(184)
-		reduce_table.add new ReduceAction184(184)
+		reduce_table.add new ReduceAction186(184)
 		reduce_table.add new ReduceAction187(184)
 		reduce_table.add new ReduceAction188(184)
 		reduce_table.add new ReduceAction189(184)
-		reduce_table.add new ReduceAction188(184)
+		reduce_table.add new ReduceAction190(184)
 		reduce_table.add new ReduceAction191(184)
 		reduce_table.add new ReduceAction192(184)
 		reduce_table.add new ReduceAction193(184)
@@ -971,11 +971,11 @@ redef class Parser
 		reduce_table.add new ReduceAction183(192)
 		reduce_table.add new ReduceAction184(192)
 		reduce_table.add new ReduceAction185(192)
-		reduce_table.add new ReduceAction184(192)
+		reduce_table.add new ReduceAction186(192)
 		reduce_table.add new ReduceAction187(192)
 		reduce_table.add new ReduceAction188(192)
 		reduce_table.add new ReduceAction189(192)
-		reduce_table.add new ReduceAction188(192)
+		reduce_table.add new ReduceAction190(192)
 		reduce_table.add new ReduceAction191(192)
 		reduce_table.add new ReduceAction192(192)
 		reduce_table.add new ReduceAction193(192)
@@ -5284,14 +5284,18 @@ private class ReduceAction183
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
 					assert pexprnode2 isa nullable AExpr
-					var tidnode3 = nodearraylist4
-					assert tidnode3 isa nullable TId
-					var pexprsnode4 = nodearraylist5
-					assert pexprsnode4 isa nullable AExprs
+					var tidnode5 = nodearraylist4
+					assert tidnode5 isa nullable TId
+					var pqidnode3: nullable AQid = new AQid.init_aqid(
+						null,
+						tidnode5
+					)
+					var pexprsnode6 = nodearraylist5
+					assert pexprsnode6 isa nullable AExprs
 					var pexprnode1: nullable ACallExpr = new ACallExpr.init_acallexpr(
 						pexprnode2,
-						tidnode3,
-						pexprsnode4
+						pqidnode3,
+						pexprsnode6
 					)
 					node_list = pexprnode1
 					p.push(p.go_to(_goto), node_list)
@@ -5310,14 +5314,25 @@ private class ReduceAction184
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
 					assert pexprnode2 isa nullable AExpr
-					var tidnode3 = nodearraylist5
-					assert tidnode3 isa nullable TId
-					var pexprsnode4 = nodearraylist6
-					assert pexprsnode4 isa nullable AExprs
+					var listnode5 = new Array[Object]
+					var tclassidnode6 = nodearraylist4
+					assert tclassidnode6 isa nullable TClassid
+					var pqualifiednode4: nullable AQualified = new AQualified.init_aqualified(
+						listnode5,
+						tclassidnode6
+					)
+					var tidnode7 = nodearraylist5
+					assert tidnode7 isa nullable TId
+					var pqidnode3: nullable AQid = new AQid.init_aqid(
+						pqualifiednode4,
+						tidnode7
+					)
+					var pexprsnode8 = nodearraylist6
+					assert pexprsnode8 isa nullable AExprs
 					var pexprnode1: nullable ACallExpr = new ACallExpr.init_acallexpr(
 						pexprnode2,
-						tidnode3,
-						pexprsnode4
+						pqidnode3,
+						pexprsnode8
 					)
 					node_list = pexprnode1
 					p.push(p.go_to(_goto), node_list)
@@ -5337,14 +5352,66 @@ private class ReduceAction185
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
 					assert pexprnode2 isa nullable AExpr
-					var tidnode3 = nodearraylist6
-					assert tidnode3 isa nullable TId
-					var pexprsnode4 = nodearraylist7
-					assert pexprsnode4 isa nullable AExprs
+					var listnode6 = new Array[Object]
+					var listnode5 = nodearraylist4
+					assert listnode5 isa Array[Object]
+					listnode6 = concat(listnode6, listnode5)
+					var tclassidnode7 = nodearraylist5
+					assert tclassidnode7 isa nullable TClassid
+					var pqualifiednode4: nullable AQualified = new AQualified.init_aqualified(
+						listnode6,
+						tclassidnode7
+					)
+					var tidnode8 = nodearraylist6
+					assert tidnode8 isa nullable TId
+					var pqidnode3: nullable AQid = new AQid.init_aqid(
+						pqualifiednode4,
+						tidnode8
+					)
+					var pexprsnode9 = nodearraylist7
+					assert pexprsnode9 isa nullable AExprs
 					var pexprnode1: nullable ACallExpr = new ACallExpr.init_acallexpr(
 						pexprnode2,
-						tidnode3,
-						pexprsnode4
+						pqidnode3,
+						pexprsnode9
+					)
+					node_list = pexprnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction186
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pexprnode2 = nodearraylist1
+					assert pexprnode2 isa nullable AExpr
+					var listnode6 = new Array[Object]
+					var listnode5 = nodearraylist4
+					assert listnode5 isa Array[Object]
+					listnode6 = concat(listnode6, listnode5)
+					var pqualifiednode4: nullable AQualified = new AQualified.init_aqualified(
+						listnode6,
+						null
+					)
+					var tidnode8 = nodearraylist5
+					assert tidnode8 isa nullable TId
+					var pqidnode3: nullable AQid = new AQid.init_aqid(
+						pqualifiednode4,
+						tidnode8
+					)
+					var pexprsnode9 = nodearraylist6
+					assert pexprsnode9 isa nullable AExprs
+					var pexprnode1: nullable ACallExpr = new ACallExpr.init_acallexpr(
+						pexprnode2,
+						pqidnode3,
+						pexprsnode9
 					)
 					node_list = pexprnode1
 					p.push(p.go_to(_goto), node_list)
@@ -5358,14 +5425,18 @@ private class ReduceAction187
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2: nullable AImplicitSelfExpr = new AImplicitSelfExpr.init_aimplicitselfexpr
-					var tidnode3 = nodearraylist1
-					assert tidnode3 isa nullable TId
-					var pexprsnode4 = nodearraylist2
-					assert pexprsnode4 isa nullable AExprs
+					var tidnode5 = nodearraylist1
+					assert tidnode5 isa nullable TId
+					var pqidnode3: nullable AQid = new AQid.init_aqid(
+						null,
+						tidnode5
+					)
+					var pexprsnode6 = nodearraylist2
+					assert pexprsnode6 isa nullable AExprs
 					var pexprnode1: nullable ACallExpr = new ACallExpr.init_acallexpr(
 						pexprnode2,
-						tidnode3,
-						pexprsnode4
+						pqidnode3,
+						pexprsnode6
 					)
 					node_list = pexprnode1
 					p.push(p.go_to(_goto), node_list)
@@ -5380,14 +5451,25 @@ private class ReduceAction188
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2: nullable AImplicitSelfExpr = new AImplicitSelfExpr.init_aimplicitselfexpr
-					var tidnode3 = nodearraylist2
-					assert tidnode3 isa nullable TId
-					var pexprsnode4 = nodearraylist3
-					assert pexprsnode4 isa nullable AExprs
+					var listnode5 = new Array[Object]
+					var tclassidnode6 = nodearraylist1
+					assert tclassidnode6 isa nullable TClassid
+					var pqualifiednode4: nullable AQualified = new AQualified.init_aqualified(
+						listnode5,
+						tclassidnode6
+					)
+					var tidnode7 = nodearraylist2
+					assert tidnode7 isa nullable TId
+					var pqidnode3: nullable AQid = new AQid.init_aqid(
+						pqualifiednode4,
+						tidnode7
+					)
+					var pexprsnode8 = nodearraylist3
+					assert pexprsnode8 isa nullable AExprs
 					var pexprnode1: nullable ACallExpr = new ACallExpr.init_acallexpr(
 						pexprnode2,
-						tidnode3,
-						pexprsnode4
+						pqidnode3,
+						pexprsnode8
 					)
 					node_list = pexprnode1
 					p.push(p.go_to(_goto), node_list)
@@ -5403,14 +5485,62 @@ private class ReduceAction189
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2: nullable AImplicitSelfExpr = new AImplicitSelfExpr.init_aimplicitselfexpr
-					var tidnode3 = nodearraylist3
-					assert tidnode3 isa nullable TId
-					var pexprsnode4 = nodearraylist4
-					assert pexprsnode4 isa nullable AExprs
+					var listnode6 = new Array[Object]
+					var listnode5 = nodearraylist1
+					assert listnode5 isa Array[Object]
+					listnode6 = concat(listnode6, listnode5)
+					var tclassidnode7 = nodearraylist2
+					assert tclassidnode7 isa nullable TClassid
+					var pqualifiednode4: nullable AQualified = new AQualified.init_aqualified(
+						listnode6,
+						tclassidnode7
+					)
+					var tidnode8 = nodearraylist3
+					assert tidnode8 isa nullable TId
+					var pqidnode3: nullable AQid = new AQid.init_aqid(
+						pqualifiednode4,
+						tidnode8
+					)
+					var pexprsnode9 = nodearraylist4
+					assert pexprsnode9 isa nullable AExprs
 					var pexprnode1: nullable ACallExpr = new ACallExpr.init_acallexpr(
 						pexprnode2,
-						tidnode3,
-						pexprsnode4
+						pqidnode3,
+						pexprsnode9
+					)
+					node_list = pexprnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction190
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pexprnode2: nullable AImplicitSelfExpr = new AImplicitSelfExpr.init_aimplicitselfexpr
+					var listnode6 = new Array[Object]
+					var listnode5 = nodearraylist1
+					assert listnode5 isa Array[Object]
+					listnode6 = concat(listnode6, listnode5)
+					var pqualifiednode4: nullable AQualified = new AQualified.init_aqualified(
+						listnode6,
+						null
+					)
+					var tidnode8 = nodearraylist2
+					assert tidnode8 isa nullable TId
+					var pqidnode3: nullable AQid = new AQid.init_aqid(
+						pqualifiednode4,
+						tidnode8
+					)
+					var pexprsnode9 = nodearraylist3
+					assert pexprsnode9 isa nullable AExprs
+					var pexprnode1: nullable ACallExpr = new ACallExpr.init_acallexpr(
+						pexprnode2,
+						pqidnode3,
+						pexprsnode9
 					)
 					node_list = pexprnode1
 					p.push(p.go_to(_goto), node_list)
@@ -5840,20 +5970,24 @@ private class ReduceAction209
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
 					assert pexprnode2 isa nullable AExpr
-					var tidnode3 = nodearraylist4
-					assert tidnode3 isa nullable TId
-					var pexprsnode4 = nodearraylist5
-					assert pexprsnode4 isa nullable AExprs
-					var tassignnode5 = nodearraylist6
-					assert tassignnode5 isa nullable TAssign
-					var pexprnode6 = nodearraylist7
-					assert pexprnode6 isa nullable AExpr
+					var tidnode5 = nodearraylist4
+					assert tidnode5 isa nullable TId
+					var pqidnode3: nullable AQid = new AQid.init_aqid(
+						null,
+						tidnode5
+					)
+					var pexprsnode6 = nodearraylist5
+					assert pexprsnode6 isa nullable AExprs
+					var tassignnode7 = nodearraylist6
+					assert tassignnode7 isa nullable TAssign
+					var pexprnode8 = nodearraylist7
+					assert pexprnode8 isa nullable AExpr
 					var pexprnode1: nullable ACallAssignExpr = new ACallAssignExpr.init_acallassignexpr(
 						pexprnode2,
-						tidnode3,
-						pexprsnode4,
-						tassignnode5,
-						pexprnode6
+						pqidnode3,
+						pexprsnode6,
+						tassignnode7,
+						pexprnode8
 					)
 					node_list = pexprnode1
 					p.push(p.go_to(_goto), node_list)
@@ -5872,22 +6006,26 @@ private class ReduceAction210
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
 					assert pexprnode2 isa nullable AExpr
-					var tidnode3 = nodearraylist4
-					assert tidnode3 isa nullable TId
-					var listnode5 = new Array[Object]
-					var pexprsnode4: nullable AListExprs = new AListExprs.init_alistexprs(
-						listnode5
+					var tidnode5 = nodearraylist4
+					assert tidnode5 isa nullable TId
+					var pqidnode3: nullable AQid = new AQid.init_aqid(
+						null,
+						tidnode5
 					)
-					var tassignnode6 = nodearraylist5
-					assert tassignnode6 isa nullable TAssign
-					var pexprnode7 = nodearraylist6
-					assert pexprnode7 isa nullable AExpr
+					var listnode7 = new Array[Object]
+					var pexprsnode6: nullable AListExprs = new AListExprs.init_alistexprs(
+						listnode7
+					)
+					var tassignnode8 = nodearraylist5
+					assert tassignnode8 isa nullable TAssign
+					var pexprnode9 = nodearraylist6
+					assert pexprnode9 isa nullable AExpr
 					var pexprnode1: nullable ACallAssignExpr = new ACallAssignExpr.init_acallassignexpr(
 						pexprnode2,
-						tidnode3,
-						pexprsnode4,
-						tassignnode6,
-						pexprnode7
+						pqidnode3,
+						pexprsnode6,
+						tassignnode8,
+						pexprnode9
 					)
 					node_list = pexprnode1
 					p.push(p.go_to(_goto), node_list)
@@ -5908,20 +6046,31 @@ private class ReduceAction211
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
 					assert pexprnode2 isa nullable AExpr
-					var tidnode3 = nodearraylist5
-					assert tidnode3 isa nullable TId
-					var pexprsnode4 = nodearraylist6
-					assert pexprsnode4 isa nullable AExprs
-					var tassignnode5 = nodearraylist7
-					assert tassignnode5 isa nullable TAssign
-					var pexprnode6 = nodearraylist8
-					assert pexprnode6 isa nullable AExpr
+					var listnode5 = new Array[Object]
+					var tclassidnode6 = nodearraylist4
+					assert tclassidnode6 isa nullable TClassid
+					var pqualifiednode4: nullable AQualified = new AQualified.init_aqualified(
+						listnode5,
+						tclassidnode6
+					)
+					var tidnode7 = nodearraylist5
+					assert tidnode7 isa nullable TId
+					var pqidnode3: nullable AQid = new AQid.init_aqid(
+						pqualifiednode4,
+						tidnode7
+					)
+					var pexprsnode8 = nodearraylist6
+					assert pexprsnode8 isa nullable AExprs
+					var tassignnode9 = nodearraylist7
+					assert tassignnode9 isa nullable TAssign
+					var pexprnode10 = nodearraylist8
+					assert pexprnode10 isa nullable AExpr
 					var pexprnode1: nullable ACallAssignExpr = new ACallAssignExpr.init_acallassignexpr(
 						pexprnode2,
-						tidnode3,
-						pexprsnode4,
-						tassignnode5,
-						pexprnode6
+						pqidnode3,
+						pexprsnode8,
+						tassignnode9,
+						pexprnode10
 					)
 					node_list = pexprnode1
 					p.push(p.go_to(_goto), node_list)
@@ -5941,22 +6090,33 @@ private class ReduceAction212
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
 					assert pexprnode2 isa nullable AExpr
-					var tidnode3 = nodearraylist5
-					assert tidnode3 isa nullable TId
 					var listnode5 = new Array[Object]
-					var pexprsnode4: nullable AListExprs = new AListExprs.init_alistexprs(
-						listnode5
+					var tclassidnode6 = nodearraylist4
+					assert tclassidnode6 isa nullable TClassid
+					var pqualifiednode4: nullable AQualified = new AQualified.init_aqualified(
+						listnode5,
+						tclassidnode6
 					)
-					var tassignnode6 = nodearraylist6
-					assert tassignnode6 isa nullable TAssign
-					var pexprnode7 = nodearraylist7
-					assert pexprnode7 isa nullable AExpr
+					var tidnode7 = nodearraylist5
+					assert tidnode7 isa nullable TId
+					var pqidnode3: nullable AQid = new AQid.init_aqid(
+						pqualifiednode4,
+						tidnode7
+					)
+					var listnode9 = new Array[Object]
+					var pexprsnode8: nullable AListExprs = new AListExprs.init_alistexprs(
+						listnode9
+					)
+					var tassignnode10 = nodearraylist6
+					assert tassignnode10 isa nullable TAssign
+					var pexprnode11 = nodearraylist7
+					assert pexprnode11 isa nullable AExpr
 					var pexprnode1: nullable ACallAssignExpr = new ACallAssignExpr.init_acallassignexpr(
 						pexprnode2,
-						tidnode3,
-						pexprsnode4,
-						tassignnode6,
-						pexprnode7
+						pqidnode3,
+						pexprsnode8,
+						tassignnode10,
+						pexprnode11
 					)
 					node_list = pexprnode1
 					p.push(p.go_to(_goto), node_list)
@@ -5978,20 +6138,34 @@ private class ReduceAction213
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
 					assert pexprnode2 isa nullable AExpr
-					var tidnode3 = nodearraylist6
-					assert tidnode3 isa nullable TId
-					var pexprsnode4 = nodearraylist7
-					assert pexprsnode4 isa nullable AExprs
-					var tassignnode5 = nodearraylist8
-					assert tassignnode5 isa nullable TAssign
-					var pexprnode6 = nodearraylist9
-					assert pexprnode6 isa nullable AExpr
+					var listnode6 = new Array[Object]
+					var listnode5 = nodearraylist4
+					assert listnode5 isa Array[Object]
+					listnode6 = concat(listnode6, listnode5)
+					var tclassidnode7 = nodearraylist5
+					assert tclassidnode7 isa nullable TClassid
+					var pqualifiednode4: nullable AQualified = new AQualified.init_aqualified(
+						listnode6,
+						tclassidnode7
+					)
+					var tidnode8 = nodearraylist6
+					assert tidnode8 isa nullable TId
+					var pqidnode3: nullable AQid = new AQid.init_aqid(
+						pqualifiednode4,
+						tidnode8
+					)
+					var pexprsnode9 = nodearraylist7
+					assert pexprsnode9 isa nullable AExprs
+					var tassignnode10 = nodearraylist8
+					assert tassignnode10 isa nullable TAssign
+					var pexprnode11 = nodearraylist9
+					assert pexprnode11 isa nullable AExpr
 					var pexprnode1: nullable ACallAssignExpr = new ACallAssignExpr.init_acallassignexpr(
 						pexprnode2,
-						tidnode3,
-						pexprsnode4,
-						tassignnode5,
-						pexprnode6
+						pqidnode3,
+						pexprsnode9,
+						tassignnode10,
+						pexprnode11
 					)
 					node_list = pexprnode1
 					p.push(p.go_to(_goto), node_list)
@@ -6012,22 +6186,129 @@ private class ReduceAction214
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
 					assert pexprnode2 isa nullable AExpr
-					var tidnode3 = nodearraylist6
-					assert tidnode3 isa nullable TId
-					var listnode5 = new Array[Object]
-					var pexprsnode4: nullable AListExprs = new AListExprs.init_alistexprs(
-						listnode5
+					var listnode6 = new Array[Object]
+					var listnode5 = nodearraylist4
+					assert listnode5 isa Array[Object]
+					listnode6 = concat(listnode6, listnode5)
+					var tclassidnode7 = nodearraylist5
+					assert tclassidnode7 isa nullable TClassid
+					var pqualifiednode4: nullable AQualified = new AQualified.init_aqualified(
+						listnode6,
+						tclassidnode7
 					)
-					var tassignnode6 = nodearraylist7
-					assert tassignnode6 isa nullable TAssign
-					var pexprnode7 = nodearraylist8
-					assert pexprnode7 isa nullable AExpr
+					var tidnode8 = nodearraylist6
+					assert tidnode8 isa nullable TId
+					var pqidnode3: nullable AQid = new AQid.init_aqid(
+						pqualifiednode4,
+						tidnode8
+					)
+					var listnode10 = new Array[Object]
+					var pexprsnode9: nullable AListExprs = new AListExprs.init_alistexprs(
+						listnode10
+					)
+					var tassignnode11 = nodearraylist7
+					assert tassignnode11 isa nullable TAssign
+					var pexprnode12 = nodearraylist8
+					assert pexprnode12 isa nullable AExpr
 					var pexprnode1: nullable ACallAssignExpr = new ACallAssignExpr.init_acallassignexpr(
 						pexprnode2,
-						tidnode3,
-						pexprsnode4,
-						tassignnode6,
-						pexprnode7
+						pqidnode3,
+						pexprsnode9,
+						tassignnode11,
+						pexprnode12
+					)
+					node_list = pexprnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction215
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pexprnode2 = nodearraylist1
+					assert pexprnode2 isa nullable AExpr
+					var listnode6 = new Array[Object]
+					var listnode5 = nodearraylist4
+					assert listnode5 isa Array[Object]
+					listnode6 = concat(listnode6, listnode5)
+					var pqualifiednode4: nullable AQualified = new AQualified.init_aqualified(
+						listnode6,
+						null
+					)
+					var tidnode8 = nodearraylist5
+					assert tidnode8 isa nullable TId
+					var pqidnode3: nullable AQid = new AQid.init_aqid(
+						pqualifiednode4,
+						tidnode8
+					)
+					var pexprsnode9 = nodearraylist6
+					assert pexprsnode9 isa nullable AExprs
+					var tassignnode10 = nodearraylist7
+					assert tassignnode10 isa nullable TAssign
+					var pexprnode11 = nodearraylist8
+					assert pexprnode11 isa nullable AExpr
+					var pexprnode1: nullable ACallAssignExpr = new ACallAssignExpr.init_acallassignexpr(
+						pexprnode2,
+						pqidnode3,
+						pexprsnode9,
+						tassignnode10,
+						pexprnode11
+					)
+					node_list = pexprnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction216
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pexprnode2 = nodearraylist1
+					assert pexprnode2 isa nullable AExpr
+					var listnode6 = new Array[Object]
+					var listnode5 = nodearraylist4
+					assert listnode5 isa Array[Object]
+					listnode6 = concat(listnode6, listnode5)
+					var pqualifiednode4: nullable AQualified = new AQualified.init_aqualified(
+						listnode6,
+						null
+					)
+					var tidnode8 = nodearraylist5
+					assert tidnode8 isa nullable TId
+					var pqidnode3: nullable AQid = new AQid.init_aqid(
+						pqualifiednode4,
+						tidnode8
+					)
+					var listnode10 = new Array[Object]
+					var pexprsnode9: nullable AListExprs = new AListExprs.init_alistexprs(
+						listnode10
+					)
+					var tassignnode11 = nodearraylist6
+					assert tassignnode11 isa nullable TAssign
+					var pexprnode12 = nodearraylist7
+					assert pexprnode12 isa nullable AExpr
+					var pexprnode1: nullable ACallAssignExpr = new ACallAssignExpr.init_acallassignexpr(
+						pexprnode2,
+						pqidnode3,
+						pexprsnode9,
+						tassignnode11,
+						pexprnode12
 					)
 					node_list = pexprnode1
 					p.push(p.go_to(_goto), node_list)
@@ -6043,20 +6324,24 @@ private class ReduceAction217
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2: nullable AImplicitSelfExpr = new AImplicitSelfExpr.init_aimplicitselfexpr
-					var tidnode3 = nodearraylist1
-					assert tidnode3 isa nullable TId
-					var pexprsnode4 = nodearraylist2
-					assert pexprsnode4 isa nullable AExprs
-					var tassignnode5 = nodearraylist3
-					assert tassignnode5 isa nullable TAssign
-					var pexprnode6 = nodearraylist4
-					assert pexprnode6 isa nullable AExpr
+					var tidnode5 = nodearraylist1
+					assert tidnode5 isa nullable TId
+					var pqidnode3: nullable AQid = new AQid.init_aqid(
+						null,
+						tidnode5
+					)
+					var pexprsnode6 = nodearraylist2
+					assert pexprsnode6 isa nullable AExprs
+					var tassignnode7 = nodearraylist3
+					assert tassignnode7 isa nullable TAssign
+					var pexprnode8 = nodearraylist4
+					assert pexprnode8 isa nullable AExpr
 					var pexprnode1: nullable ACallAssignExpr = new ACallAssignExpr.init_acallassignexpr(
 						pexprnode2,
-						tidnode3,
-						pexprsnode4,
-						tassignnode5,
-						pexprnode6
+						pqidnode3,
+						pexprsnode6,
+						tassignnode7,
+						pexprnode8
 					)
 					node_list = pexprnode1
 					p.push(p.go_to(_goto), node_list)
@@ -6071,22 +6356,26 @@ private class ReduceAction218
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2: nullable AImplicitSelfExpr = new AImplicitSelfExpr.init_aimplicitselfexpr
-					var tidnode3 = nodearraylist1
-					assert tidnode3 isa nullable TId
-					var listnode5 = new Array[Object]
-					var pexprsnode4: nullable AListExprs = new AListExprs.init_alistexprs(
-						listnode5
+					var tidnode5 = nodearraylist1
+					assert tidnode5 isa nullable TId
+					var pqidnode3: nullable AQid = new AQid.init_aqid(
+						null,
+						tidnode5
 					)
-					var tassignnode6 = nodearraylist2
-					assert tassignnode6 isa nullable TAssign
-					var pexprnode7 = nodearraylist3
-					assert pexprnode7 isa nullable AExpr
+					var listnode7 = new Array[Object]
+					var pexprsnode6: nullable AListExprs = new AListExprs.init_alistexprs(
+						listnode7
+					)
+					var tassignnode8 = nodearraylist2
+					assert tassignnode8 isa nullable TAssign
+					var pexprnode9 = nodearraylist3
+					assert pexprnode9 isa nullable AExpr
 					var pexprnode1: nullable ACallAssignExpr = new ACallAssignExpr.init_acallassignexpr(
 						pexprnode2,
-						tidnode3,
-						pexprsnode4,
-						tassignnode6,
-						pexprnode7
+						pqidnode3,
+						pexprsnode6,
+						tassignnode8,
+						pexprnode9
 					)
 					node_list = pexprnode1
 					p.push(p.go_to(_goto), node_list)
@@ -6103,20 +6392,31 @@ private class ReduceAction219
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2: nullable AImplicitSelfExpr = new AImplicitSelfExpr.init_aimplicitselfexpr
-					var tidnode3 = nodearraylist2
-					assert tidnode3 isa nullable TId
-					var pexprsnode4 = nodearraylist3
-					assert pexprsnode4 isa nullable AExprs
-					var tassignnode5 = nodearraylist4
-					assert tassignnode5 isa nullable TAssign
-					var pexprnode6 = nodearraylist5
-					assert pexprnode6 isa nullable AExpr
+					var listnode5 = new Array[Object]
+					var tclassidnode6 = nodearraylist1
+					assert tclassidnode6 isa nullable TClassid
+					var pqualifiednode4: nullable AQualified = new AQualified.init_aqualified(
+						listnode5,
+						tclassidnode6
+					)
+					var tidnode7 = nodearraylist2
+					assert tidnode7 isa nullable TId
+					var pqidnode3: nullable AQid = new AQid.init_aqid(
+						pqualifiednode4,
+						tidnode7
+					)
+					var pexprsnode8 = nodearraylist3
+					assert pexprsnode8 isa nullable AExprs
+					var tassignnode9 = nodearraylist4
+					assert tassignnode9 isa nullable TAssign
+					var pexprnode10 = nodearraylist5
+					assert pexprnode10 isa nullable AExpr
 					var pexprnode1: nullable ACallAssignExpr = new ACallAssignExpr.init_acallassignexpr(
 						pexprnode2,
-						tidnode3,
-						pexprsnode4,
-						tassignnode5,
-						pexprnode6
+						pqidnode3,
+						pexprsnode8,
+						tassignnode9,
+						pexprnode10
 					)
 					node_list = pexprnode1
 					p.push(p.go_to(_goto), node_list)
@@ -6132,22 +6432,33 @@ private class ReduceAction220
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2: nullable AImplicitSelfExpr = new AImplicitSelfExpr.init_aimplicitselfexpr
-					var tidnode3 = nodearraylist2
-					assert tidnode3 isa nullable TId
 					var listnode5 = new Array[Object]
-					var pexprsnode4: nullable AListExprs = new AListExprs.init_alistexprs(
-						listnode5
+					var tclassidnode6 = nodearraylist1
+					assert tclassidnode6 isa nullable TClassid
+					var pqualifiednode4: nullable AQualified = new AQualified.init_aqualified(
+						listnode5,
+						tclassidnode6
 					)
-					var tassignnode6 = nodearraylist3
-					assert tassignnode6 isa nullable TAssign
-					var pexprnode7 = nodearraylist4
-					assert pexprnode7 isa nullable AExpr
+					var tidnode7 = nodearraylist2
+					assert tidnode7 isa nullable TId
+					var pqidnode3: nullable AQid = new AQid.init_aqid(
+						pqualifiednode4,
+						tidnode7
+					)
+					var listnode9 = new Array[Object]
+					var pexprsnode8: nullable AListExprs = new AListExprs.init_alistexprs(
+						listnode9
+					)
+					var tassignnode10 = nodearraylist3
+					assert tassignnode10 isa nullable TAssign
+					var pexprnode11 = nodearraylist4
+					assert pexprnode11 isa nullable AExpr
 					var pexprnode1: nullable ACallAssignExpr = new ACallAssignExpr.init_acallassignexpr(
 						pexprnode2,
-						tidnode3,
-						pexprsnode4,
-						tassignnode6,
-						pexprnode7
+						pqidnode3,
+						pexprsnode8,
+						tassignnode10,
+						pexprnode11
 					)
 					node_list = pexprnode1
 					p.push(p.go_to(_goto), node_list)
@@ -6165,20 +6476,34 @@ private class ReduceAction221
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2: nullable AImplicitSelfExpr = new AImplicitSelfExpr.init_aimplicitselfexpr
-					var tidnode3 = nodearraylist3
-					assert tidnode3 isa nullable TId
-					var pexprsnode4 = nodearraylist4
-					assert pexprsnode4 isa nullable AExprs
-					var tassignnode5 = nodearraylist5
-					assert tassignnode5 isa nullable TAssign
-					var pexprnode6 = nodearraylist6
-					assert pexprnode6 isa nullable AExpr
+					var listnode6 = new Array[Object]
+					var listnode5 = nodearraylist1
+					assert listnode5 isa Array[Object]
+					listnode6 = concat(listnode6, listnode5)
+					var tclassidnode7 = nodearraylist2
+					assert tclassidnode7 isa nullable TClassid
+					var pqualifiednode4: nullable AQualified = new AQualified.init_aqualified(
+						listnode6,
+						tclassidnode7
+					)
+					var tidnode8 = nodearraylist3
+					assert tidnode8 isa nullable TId
+					var pqidnode3: nullable AQid = new AQid.init_aqid(
+						pqualifiednode4,
+						tidnode8
+					)
+					var pexprsnode9 = nodearraylist4
+					assert pexprsnode9 isa nullable AExprs
+					var tassignnode10 = nodearraylist5
+					assert tassignnode10 isa nullable TAssign
+					var pexprnode11 = nodearraylist6
+					assert pexprnode11 isa nullable AExpr
 					var pexprnode1: nullable ACallAssignExpr = new ACallAssignExpr.init_acallassignexpr(
 						pexprnode2,
-						tidnode3,
-						pexprsnode4,
-						tassignnode5,
-						pexprnode6
+						pqidnode3,
+						pexprsnode9,
+						tassignnode10,
+						pexprnode11
 					)
 					node_list = pexprnode1
 					p.push(p.go_to(_goto), node_list)
@@ -6195,22 +6520,121 @@ private class ReduceAction222
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2: nullable AImplicitSelfExpr = new AImplicitSelfExpr.init_aimplicitselfexpr
-					var tidnode3 = nodearraylist3
-					assert tidnode3 isa nullable TId
-					var listnode5 = new Array[Object]
-					var pexprsnode4: nullable AListExprs = new AListExprs.init_alistexprs(
-						listnode5
+					var listnode6 = new Array[Object]
+					var listnode5 = nodearraylist1
+					assert listnode5 isa Array[Object]
+					listnode6 = concat(listnode6, listnode5)
+					var tclassidnode7 = nodearraylist2
+					assert tclassidnode7 isa nullable TClassid
+					var pqualifiednode4: nullable AQualified = new AQualified.init_aqualified(
+						listnode6,
+						tclassidnode7
 					)
-					var tassignnode6 = nodearraylist4
-					assert tassignnode6 isa nullable TAssign
-					var pexprnode7 = nodearraylist5
-					assert pexprnode7 isa nullable AExpr
+					var tidnode8 = nodearraylist3
+					assert tidnode8 isa nullable TId
+					var pqidnode3: nullable AQid = new AQid.init_aqid(
+						pqualifiednode4,
+						tidnode8
+					)
+					var listnode10 = new Array[Object]
+					var pexprsnode9: nullable AListExprs = new AListExprs.init_alistexprs(
+						listnode10
+					)
+					var tassignnode11 = nodearraylist4
+					assert tassignnode11 isa nullable TAssign
+					var pexprnode12 = nodearraylist5
+					assert pexprnode12 isa nullable AExpr
 					var pexprnode1: nullable ACallAssignExpr = new ACallAssignExpr.init_acallassignexpr(
 						pexprnode2,
-						tidnode3,
-						pexprsnode4,
-						tassignnode6,
-						pexprnode7
+						pqidnode3,
+						pexprsnode9,
+						tassignnode11,
+						pexprnode12
+					)
+					node_list = pexprnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction223
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pexprnode2: nullable AImplicitSelfExpr = new AImplicitSelfExpr.init_aimplicitselfexpr
+					var listnode6 = new Array[Object]
+					var listnode5 = nodearraylist1
+					assert listnode5 isa Array[Object]
+					listnode6 = concat(listnode6, listnode5)
+					var pqualifiednode4: nullable AQualified = new AQualified.init_aqualified(
+						listnode6,
+						null
+					)
+					var tidnode8 = nodearraylist2
+					assert tidnode8 isa nullable TId
+					var pqidnode3: nullable AQid = new AQid.init_aqid(
+						pqualifiednode4,
+						tidnode8
+					)
+					var pexprsnode9 = nodearraylist3
+					assert pexprsnode9 isa nullable AExprs
+					var tassignnode10 = nodearraylist4
+					assert tassignnode10 isa nullable TAssign
+					var pexprnode11 = nodearraylist5
+					assert pexprnode11 isa nullable AExpr
+					var pexprnode1: nullable ACallAssignExpr = new ACallAssignExpr.init_acallassignexpr(
+						pexprnode2,
+						pqidnode3,
+						pexprsnode9,
+						tassignnode10,
+						pexprnode11
+					)
+					node_list = pexprnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction224
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pexprnode2: nullable AImplicitSelfExpr = new AImplicitSelfExpr.init_aimplicitselfexpr
+					var listnode6 = new Array[Object]
+					var listnode5 = nodearraylist1
+					assert listnode5 isa Array[Object]
+					listnode6 = concat(listnode6, listnode5)
+					var pqualifiednode4: nullable AQualified = new AQualified.init_aqualified(
+						listnode6,
+						null
+					)
+					var tidnode8 = nodearraylist2
+					assert tidnode8 isa nullable TId
+					var pqidnode3: nullable AQid = new AQid.init_aqid(
+						pqualifiednode4,
+						tidnode8
+					)
+					var listnode10 = new Array[Object]
+					var pexprsnode9: nullable AListExprs = new AListExprs.init_alistexprs(
+						listnode10
+					)
+					var tassignnode11 = nodearraylist3
+					assert tassignnode11 isa nullable TAssign
+					var pexprnode12 = nodearraylist4
+					assert pexprnode12 isa nullable AExpr
+					var pexprnode1: nullable ACallAssignExpr = new ACallAssignExpr.init_acallassignexpr(
+						pexprnode2,
+						pqidnode3,
+						pexprsnode9,
+						tassignnode11,
+						pexprnode12
 					)
 					node_list = pexprnode1
 					p.push(p.go_to(_goto), node_list)
@@ -6313,20 +6737,24 @@ private class ReduceAction228
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
 					assert pexprnode2 isa nullable AExpr
-					var tidnode3 = nodearraylist4
-					assert tidnode3 isa nullable TId
-					var pexprsnode4 = nodearraylist5
-					assert pexprsnode4 isa nullable AExprs
-					var passignopnode5 = nodearraylist6
-					assert passignopnode5 isa nullable AAssignOp
-					var pexprnode6 = nodearraylist7
-					assert pexprnode6 isa nullable AExpr
+					var tidnode5 = nodearraylist4
+					assert tidnode5 isa nullable TId
+					var pqidnode3: nullable AQid = new AQid.init_aqid(
+						null,
+						tidnode5
+					)
+					var pexprsnode6 = nodearraylist5
+					assert pexprsnode6 isa nullable AExprs
+					var passignopnode7 = nodearraylist6
+					assert passignopnode7 isa nullable AAssignOp
+					var pexprnode8 = nodearraylist7
+					assert pexprnode8 isa nullable AExpr
 					var pexprnode1: nullable ACallReassignExpr = new ACallReassignExpr.init_acallreassignexpr(
 						pexprnode2,
-						tidnode3,
-						pexprsnode4,
-						passignopnode5,
-						pexprnode6
+						pqidnode3,
+						pexprsnode6,
+						passignopnode7,
+						pexprnode8
 					)
 					node_list = pexprnode1
 					p.push(p.go_to(_goto), node_list)
@@ -6345,22 +6773,26 @@ private class ReduceAction229
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
 					assert pexprnode2 isa nullable AExpr
-					var tidnode3 = nodearraylist4
-					assert tidnode3 isa nullable TId
-					var listnode5 = new Array[Object]
-					var pexprsnode4: nullable AListExprs = new AListExprs.init_alistexprs(
-						listnode5
+					var tidnode5 = nodearraylist4
+					assert tidnode5 isa nullable TId
+					var pqidnode3: nullable AQid = new AQid.init_aqid(
+						null,
+						tidnode5
 					)
-					var passignopnode6 = nodearraylist5
-					assert passignopnode6 isa nullable AAssignOp
-					var pexprnode7 = nodearraylist6
-					assert pexprnode7 isa nullable AExpr
+					var listnode7 = new Array[Object]
+					var pexprsnode6: nullable AListExprs = new AListExprs.init_alistexprs(
+						listnode7
+					)
+					var passignopnode8 = nodearraylist5
+					assert passignopnode8 isa nullable AAssignOp
+					var pexprnode9 = nodearraylist6
+					assert pexprnode9 isa nullable AExpr
 					var pexprnode1: nullable ACallReassignExpr = new ACallReassignExpr.init_acallreassignexpr(
 						pexprnode2,
-						tidnode3,
-						pexprsnode4,
-						passignopnode6,
-						pexprnode7
+						pqidnode3,
+						pexprsnode6,
+						passignopnode8,
+						pexprnode9
 					)
 					node_list = pexprnode1
 					p.push(p.go_to(_goto), node_list)
@@ -6381,20 +6813,31 @@ private class ReduceAction230
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
 					assert pexprnode2 isa nullable AExpr
-					var tidnode3 = nodearraylist5
-					assert tidnode3 isa nullable TId
-					var pexprsnode4 = nodearraylist6
-					assert pexprsnode4 isa nullable AExprs
-					var passignopnode5 = nodearraylist7
-					assert passignopnode5 isa nullable AAssignOp
-					var pexprnode6 = nodearraylist8
-					assert pexprnode6 isa nullable AExpr
+					var listnode5 = new Array[Object]
+					var tclassidnode6 = nodearraylist4
+					assert tclassidnode6 isa nullable TClassid
+					var pqualifiednode4: nullable AQualified = new AQualified.init_aqualified(
+						listnode5,
+						tclassidnode6
+					)
+					var tidnode7 = nodearraylist5
+					assert tidnode7 isa nullable TId
+					var pqidnode3: nullable AQid = new AQid.init_aqid(
+						pqualifiednode4,
+						tidnode7
+					)
+					var pexprsnode8 = nodearraylist6
+					assert pexprsnode8 isa nullable AExprs
+					var passignopnode9 = nodearraylist7
+					assert passignopnode9 isa nullable AAssignOp
+					var pexprnode10 = nodearraylist8
+					assert pexprnode10 isa nullable AExpr
 					var pexprnode1: nullable ACallReassignExpr = new ACallReassignExpr.init_acallreassignexpr(
 						pexprnode2,
-						tidnode3,
-						pexprsnode4,
-						passignopnode5,
-						pexprnode6
+						pqidnode3,
+						pexprsnode8,
+						passignopnode9,
+						pexprnode10
 					)
 					node_list = pexprnode1
 					p.push(p.go_to(_goto), node_list)
@@ -6414,22 +6857,33 @@ private class ReduceAction231
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
 					assert pexprnode2 isa nullable AExpr
-					var tidnode3 = nodearraylist5
-					assert tidnode3 isa nullable TId
 					var listnode5 = new Array[Object]
-					var pexprsnode4: nullable AListExprs = new AListExprs.init_alistexprs(
-						listnode5
+					var tclassidnode6 = nodearraylist4
+					assert tclassidnode6 isa nullable TClassid
+					var pqualifiednode4: nullable AQualified = new AQualified.init_aqualified(
+						listnode5,
+						tclassidnode6
 					)
-					var passignopnode6 = nodearraylist6
-					assert passignopnode6 isa nullable AAssignOp
-					var pexprnode7 = nodearraylist7
-					assert pexprnode7 isa nullable AExpr
+					var tidnode7 = nodearraylist5
+					assert tidnode7 isa nullable TId
+					var pqidnode3: nullable AQid = new AQid.init_aqid(
+						pqualifiednode4,
+						tidnode7
+					)
+					var listnode9 = new Array[Object]
+					var pexprsnode8: nullable AListExprs = new AListExprs.init_alistexprs(
+						listnode9
+					)
+					var passignopnode10 = nodearraylist6
+					assert passignopnode10 isa nullable AAssignOp
+					var pexprnode11 = nodearraylist7
+					assert pexprnode11 isa nullable AExpr
 					var pexprnode1: nullable ACallReassignExpr = new ACallReassignExpr.init_acallreassignexpr(
 						pexprnode2,
-						tidnode3,
-						pexprsnode4,
-						passignopnode6,
-						pexprnode7
+						pqidnode3,
+						pexprsnode8,
+						passignopnode10,
+						pexprnode11
 					)
 					node_list = pexprnode1
 					p.push(p.go_to(_goto), node_list)
@@ -6451,20 +6905,34 @@ private class ReduceAction232
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
 					assert pexprnode2 isa nullable AExpr
-					var tidnode3 = nodearraylist6
-					assert tidnode3 isa nullable TId
-					var pexprsnode4 = nodearraylist7
-					assert pexprsnode4 isa nullable AExprs
-					var passignopnode5 = nodearraylist8
-					assert passignopnode5 isa nullable AAssignOp
-					var pexprnode6 = nodearraylist9
-					assert pexprnode6 isa nullable AExpr
+					var listnode6 = new Array[Object]
+					var listnode5 = nodearraylist4
+					assert listnode5 isa Array[Object]
+					listnode6 = concat(listnode6, listnode5)
+					var tclassidnode7 = nodearraylist5
+					assert tclassidnode7 isa nullable TClassid
+					var pqualifiednode4: nullable AQualified = new AQualified.init_aqualified(
+						listnode6,
+						tclassidnode7
+					)
+					var tidnode8 = nodearraylist6
+					assert tidnode8 isa nullable TId
+					var pqidnode3: nullable AQid = new AQid.init_aqid(
+						pqualifiednode4,
+						tidnode8
+					)
+					var pexprsnode9 = nodearraylist7
+					assert pexprsnode9 isa nullable AExprs
+					var passignopnode10 = nodearraylist8
+					assert passignopnode10 isa nullable AAssignOp
+					var pexprnode11 = nodearraylist9
+					assert pexprnode11 isa nullable AExpr
 					var pexprnode1: nullable ACallReassignExpr = new ACallReassignExpr.init_acallreassignexpr(
 						pexprnode2,
-						tidnode3,
-						pexprsnode4,
-						passignopnode5,
-						pexprnode6
+						pqidnode3,
+						pexprsnode9,
+						passignopnode10,
+						pexprnode11
 					)
 					node_list = pexprnode1
 					p.push(p.go_to(_goto), node_list)
@@ -6485,22 +6953,129 @@ private class ReduceAction233
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
 					assert pexprnode2 isa nullable AExpr
-					var tidnode3 = nodearraylist6
-					assert tidnode3 isa nullable TId
-					var listnode5 = new Array[Object]
-					var pexprsnode4: nullable AListExprs = new AListExprs.init_alistexprs(
-						listnode5
+					var listnode6 = new Array[Object]
+					var listnode5 = nodearraylist4
+					assert listnode5 isa Array[Object]
+					listnode6 = concat(listnode6, listnode5)
+					var tclassidnode7 = nodearraylist5
+					assert tclassidnode7 isa nullable TClassid
+					var pqualifiednode4: nullable AQualified = new AQualified.init_aqualified(
+						listnode6,
+						tclassidnode7
 					)
-					var passignopnode6 = nodearraylist7
-					assert passignopnode6 isa nullable AAssignOp
-					var pexprnode7 = nodearraylist8
-					assert pexprnode7 isa nullable AExpr
+					var tidnode8 = nodearraylist6
+					assert tidnode8 isa nullable TId
+					var pqidnode3: nullable AQid = new AQid.init_aqid(
+						pqualifiednode4,
+						tidnode8
+					)
+					var listnode10 = new Array[Object]
+					var pexprsnode9: nullable AListExprs = new AListExprs.init_alistexprs(
+						listnode10
+					)
+					var passignopnode11 = nodearraylist7
+					assert passignopnode11 isa nullable AAssignOp
+					var pexprnode12 = nodearraylist8
+					assert pexprnode12 isa nullable AExpr
 					var pexprnode1: nullable ACallReassignExpr = new ACallReassignExpr.init_acallreassignexpr(
 						pexprnode2,
-						tidnode3,
-						pexprsnode4,
-						passignopnode6,
-						pexprnode7
+						pqidnode3,
+						pexprsnode9,
+						passignopnode11,
+						pexprnode12
+					)
+					node_list = pexprnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction234
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pexprnode2 = nodearraylist1
+					assert pexprnode2 isa nullable AExpr
+					var listnode6 = new Array[Object]
+					var listnode5 = nodearraylist4
+					assert listnode5 isa Array[Object]
+					listnode6 = concat(listnode6, listnode5)
+					var pqualifiednode4: nullable AQualified = new AQualified.init_aqualified(
+						listnode6,
+						null
+					)
+					var tidnode8 = nodearraylist5
+					assert tidnode8 isa nullable TId
+					var pqidnode3: nullable AQid = new AQid.init_aqid(
+						pqualifiednode4,
+						tidnode8
+					)
+					var pexprsnode9 = nodearraylist6
+					assert pexprsnode9 isa nullable AExprs
+					var passignopnode10 = nodearraylist7
+					assert passignopnode10 isa nullable AAssignOp
+					var pexprnode11 = nodearraylist8
+					assert pexprnode11 isa nullable AExpr
+					var pexprnode1: nullable ACallReassignExpr = new ACallReassignExpr.init_acallreassignexpr(
+						pexprnode2,
+						pqidnode3,
+						pexprsnode9,
+						passignopnode10,
+						pexprnode11
+					)
+					node_list = pexprnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction235
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pexprnode2 = nodearraylist1
+					assert pexprnode2 isa nullable AExpr
+					var listnode6 = new Array[Object]
+					var listnode5 = nodearraylist4
+					assert listnode5 isa Array[Object]
+					listnode6 = concat(listnode6, listnode5)
+					var pqualifiednode4: nullable AQualified = new AQualified.init_aqualified(
+						listnode6,
+						null
+					)
+					var tidnode8 = nodearraylist5
+					assert tidnode8 isa nullable TId
+					var pqidnode3: nullable AQid = new AQid.init_aqid(
+						pqualifiednode4,
+						tidnode8
+					)
+					var listnode10 = new Array[Object]
+					var pexprsnode9: nullable AListExprs = new AListExprs.init_alistexprs(
+						listnode10
+					)
+					var passignopnode11 = nodearraylist6
+					assert passignopnode11 isa nullable AAssignOp
+					var pexprnode12 = nodearraylist7
+					assert pexprnode12 isa nullable AExpr
+					var pexprnode1: nullable ACallReassignExpr = new ACallReassignExpr.init_acallreassignexpr(
+						pexprnode2,
+						pqidnode3,
+						pexprsnode9,
+						passignopnode11,
+						pexprnode12
 					)
 					node_list = pexprnode1
 					p.push(p.go_to(_goto), node_list)
@@ -6516,20 +7091,24 @@ private class ReduceAction236
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2: nullable AImplicitSelfExpr = new AImplicitSelfExpr.init_aimplicitselfexpr
-					var tidnode3 = nodearraylist1
-					assert tidnode3 isa nullable TId
-					var pexprsnode4 = nodearraylist2
-					assert pexprsnode4 isa nullable AExprs
-					var passignopnode5 = nodearraylist3
-					assert passignopnode5 isa nullable AAssignOp
-					var pexprnode6 = nodearraylist4
-					assert pexprnode6 isa nullable AExpr
+					var tidnode5 = nodearraylist1
+					assert tidnode5 isa nullable TId
+					var pqidnode3: nullable AQid = new AQid.init_aqid(
+						null,
+						tidnode5
+					)
+					var pexprsnode6 = nodearraylist2
+					assert pexprsnode6 isa nullable AExprs
+					var passignopnode7 = nodearraylist3
+					assert passignopnode7 isa nullable AAssignOp
+					var pexprnode8 = nodearraylist4
+					assert pexprnode8 isa nullable AExpr
 					var pexprnode1: nullable ACallReassignExpr = new ACallReassignExpr.init_acallreassignexpr(
 						pexprnode2,
-						tidnode3,
-						pexprsnode4,
-						passignopnode5,
-						pexprnode6
+						pqidnode3,
+						pexprsnode6,
+						passignopnode7,
+						pexprnode8
 					)
 					node_list = pexprnode1
 					p.push(p.go_to(_goto), node_list)
@@ -6544,22 +7123,26 @@ private class ReduceAction237
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2: nullable AImplicitSelfExpr = new AImplicitSelfExpr.init_aimplicitselfexpr
-					var tidnode3 = nodearraylist1
-					assert tidnode3 isa nullable TId
-					var listnode5 = new Array[Object]
-					var pexprsnode4: nullable AListExprs = new AListExprs.init_alistexprs(
-						listnode5
+					var tidnode5 = nodearraylist1
+					assert tidnode5 isa nullable TId
+					var pqidnode3: nullable AQid = new AQid.init_aqid(
+						null,
+						tidnode5
 					)
-					var passignopnode6 = nodearraylist2
-					assert passignopnode6 isa nullable AAssignOp
-					var pexprnode7 = nodearraylist3
-					assert pexprnode7 isa nullable AExpr
+					var listnode7 = new Array[Object]
+					var pexprsnode6: nullable AListExprs = new AListExprs.init_alistexprs(
+						listnode7
+					)
+					var passignopnode8 = nodearraylist2
+					assert passignopnode8 isa nullable AAssignOp
+					var pexprnode9 = nodearraylist3
+					assert pexprnode9 isa nullable AExpr
 					var pexprnode1: nullable ACallReassignExpr = new ACallReassignExpr.init_acallreassignexpr(
 						pexprnode2,
-						tidnode3,
-						pexprsnode4,
-						passignopnode6,
-						pexprnode7
+						pqidnode3,
+						pexprsnode6,
+						passignopnode8,
+						pexprnode9
 					)
 					node_list = pexprnode1
 					p.push(p.go_to(_goto), node_list)
@@ -6576,20 +7159,31 @@ private class ReduceAction238
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2: nullable AImplicitSelfExpr = new AImplicitSelfExpr.init_aimplicitselfexpr
-					var tidnode3 = nodearraylist2
-					assert tidnode3 isa nullable TId
-					var pexprsnode4 = nodearraylist3
-					assert pexprsnode4 isa nullable AExprs
-					var passignopnode5 = nodearraylist4
-					assert passignopnode5 isa nullable AAssignOp
-					var pexprnode6 = nodearraylist5
-					assert pexprnode6 isa nullable AExpr
+					var listnode5 = new Array[Object]
+					var tclassidnode6 = nodearraylist1
+					assert tclassidnode6 isa nullable TClassid
+					var pqualifiednode4: nullable AQualified = new AQualified.init_aqualified(
+						listnode5,
+						tclassidnode6
+					)
+					var tidnode7 = nodearraylist2
+					assert tidnode7 isa nullable TId
+					var pqidnode3: nullable AQid = new AQid.init_aqid(
+						pqualifiednode4,
+						tidnode7
+					)
+					var pexprsnode8 = nodearraylist3
+					assert pexprsnode8 isa nullable AExprs
+					var passignopnode9 = nodearraylist4
+					assert passignopnode9 isa nullable AAssignOp
+					var pexprnode10 = nodearraylist5
+					assert pexprnode10 isa nullable AExpr
 					var pexprnode1: nullable ACallReassignExpr = new ACallReassignExpr.init_acallreassignexpr(
 						pexprnode2,
-						tidnode3,
-						pexprsnode4,
-						passignopnode5,
-						pexprnode6
+						pqidnode3,
+						pexprsnode8,
+						passignopnode9,
+						pexprnode10
 					)
 					node_list = pexprnode1
 					p.push(p.go_to(_goto), node_list)
@@ -6605,22 +7199,33 @@ private class ReduceAction239
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2: nullable AImplicitSelfExpr = new AImplicitSelfExpr.init_aimplicitselfexpr
-					var tidnode3 = nodearraylist2
-					assert tidnode3 isa nullable TId
 					var listnode5 = new Array[Object]
-					var pexprsnode4: nullable AListExprs = new AListExprs.init_alistexprs(
-						listnode5
+					var tclassidnode6 = nodearraylist1
+					assert tclassidnode6 isa nullable TClassid
+					var pqualifiednode4: nullable AQualified = new AQualified.init_aqualified(
+						listnode5,
+						tclassidnode6
 					)
-					var passignopnode6 = nodearraylist3
-					assert passignopnode6 isa nullable AAssignOp
-					var pexprnode7 = nodearraylist4
-					assert pexprnode7 isa nullable AExpr
+					var tidnode7 = nodearraylist2
+					assert tidnode7 isa nullable TId
+					var pqidnode3: nullable AQid = new AQid.init_aqid(
+						pqualifiednode4,
+						tidnode7
+					)
+					var listnode9 = new Array[Object]
+					var pexprsnode8: nullable AListExprs = new AListExprs.init_alistexprs(
+						listnode9
+					)
+					var passignopnode10 = nodearraylist3
+					assert passignopnode10 isa nullable AAssignOp
+					var pexprnode11 = nodearraylist4
+					assert pexprnode11 isa nullable AExpr
 					var pexprnode1: nullable ACallReassignExpr = new ACallReassignExpr.init_acallreassignexpr(
 						pexprnode2,
-						tidnode3,
-						pexprsnode4,
-						passignopnode6,
-						pexprnode7
+						pqidnode3,
+						pexprsnode8,
+						passignopnode10,
+						pexprnode11
 					)
 					node_list = pexprnode1
 					p.push(p.go_to(_goto), node_list)
@@ -6638,20 +7243,34 @@ private class ReduceAction240
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2: nullable AImplicitSelfExpr = new AImplicitSelfExpr.init_aimplicitselfexpr
-					var tidnode3 = nodearraylist3
-					assert tidnode3 isa nullable TId
-					var pexprsnode4 = nodearraylist4
-					assert pexprsnode4 isa nullable AExprs
-					var passignopnode5 = nodearraylist5
-					assert passignopnode5 isa nullable AAssignOp
-					var pexprnode6 = nodearraylist6
-					assert pexprnode6 isa nullable AExpr
+					var listnode6 = new Array[Object]
+					var listnode5 = nodearraylist1
+					assert listnode5 isa Array[Object]
+					listnode6 = concat(listnode6, listnode5)
+					var tclassidnode7 = nodearraylist2
+					assert tclassidnode7 isa nullable TClassid
+					var pqualifiednode4: nullable AQualified = new AQualified.init_aqualified(
+						listnode6,
+						tclassidnode7
+					)
+					var tidnode8 = nodearraylist3
+					assert tidnode8 isa nullable TId
+					var pqidnode3: nullable AQid = new AQid.init_aqid(
+						pqualifiednode4,
+						tidnode8
+					)
+					var pexprsnode9 = nodearraylist4
+					assert pexprsnode9 isa nullable AExprs
+					var passignopnode10 = nodearraylist5
+					assert passignopnode10 isa nullable AAssignOp
+					var pexprnode11 = nodearraylist6
+					assert pexprnode11 isa nullable AExpr
 					var pexprnode1: nullable ACallReassignExpr = new ACallReassignExpr.init_acallreassignexpr(
 						pexprnode2,
-						tidnode3,
-						pexprsnode4,
-						passignopnode5,
-						pexprnode6
+						pqidnode3,
+						pexprsnode9,
+						passignopnode10,
+						pexprnode11
 					)
 					node_list = pexprnode1
 					p.push(p.go_to(_goto), node_list)
@@ -6668,22 +7287,121 @@ private class ReduceAction241
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2: nullable AImplicitSelfExpr = new AImplicitSelfExpr.init_aimplicitselfexpr
-					var tidnode3 = nodearraylist3
-					assert tidnode3 isa nullable TId
-					var listnode5 = new Array[Object]
-					var pexprsnode4: nullable AListExprs = new AListExprs.init_alistexprs(
-						listnode5
+					var listnode6 = new Array[Object]
+					var listnode5 = nodearraylist1
+					assert listnode5 isa Array[Object]
+					listnode6 = concat(listnode6, listnode5)
+					var tclassidnode7 = nodearraylist2
+					assert tclassidnode7 isa nullable TClassid
+					var pqualifiednode4: nullable AQualified = new AQualified.init_aqualified(
+						listnode6,
+						tclassidnode7
 					)
-					var passignopnode6 = nodearraylist4
-					assert passignopnode6 isa nullable AAssignOp
-					var pexprnode7 = nodearraylist5
-					assert pexprnode7 isa nullable AExpr
+					var tidnode8 = nodearraylist3
+					assert tidnode8 isa nullable TId
+					var pqidnode3: nullable AQid = new AQid.init_aqid(
+						pqualifiednode4,
+						tidnode8
+					)
+					var listnode10 = new Array[Object]
+					var pexprsnode9: nullable AListExprs = new AListExprs.init_alistexprs(
+						listnode10
+					)
+					var passignopnode11 = nodearraylist4
+					assert passignopnode11 isa nullable AAssignOp
+					var pexprnode12 = nodearraylist5
+					assert pexprnode12 isa nullable AExpr
 					var pexprnode1: nullable ACallReassignExpr = new ACallReassignExpr.init_acallreassignexpr(
 						pexprnode2,
-						tidnode3,
-						pexprsnode4,
-						passignopnode6,
-						pexprnode7
+						pqidnode3,
+						pexprsnode9,
+						passignopnode11,
+						pexprnode12
+					)
+					node_list = pexprnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction242
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pexprnode2: nullable AImplicitSelfExpr = new AImplicitSelfExpr.init_aimplicitselfexpr
+					var listnode6 = new Array[Object]
+					var listnode5 = nodearraylist1
+					assert listnode5 isa Array[Object]
+					listnode6 = concat(listnode6, listnode5)
+					var pqualifiednode4: nullable AQualified = new AQualified.init_aqualified(
+						listnode6,
+						null
+					)
+					var tidnode8 = nodearraylist2
+					assert tidnode8 isa nullable TId
+					var pqidnode3: nullable AQid = new AQid.init_aqid(
+						pqualifiednode4,
+						tidnode8
+					)
+					var pexprsnode9 = nodearraylist3
+					assert pexprsnode9 isa nullable AExprs
+					var passignopnode10 = nodearraylist4
+					assert passignopnode10 isa nullable AAssignOp
+					var pexprnode11 = nodearraylist5
+					assert pexprnode11 isa nullable AExpr
+					var pexprnode1: nullable ACallReassignExpr = new ACallReassignExpr.init_acallreassignexpr(
+						pexprnode2,
+						pqidnode3,
+						pexprsnode9,
+						passignopnode10,
+						pexprnode11
+					)
+					node_list = pexprnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction243
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pexprnode2: nullable AImplicitSelfExpr = new AImplicitSelfExpr.init_aimplicitselfexpr
+					var listnode6 = new Array[Object]
+					var listnode5 = nodearraylist1
+					assert listnode5 isa Array[Object]
+					listnode6 = concat(listnode6, listnode5)
+					var pqualifiednode4: nullable AQualified = new AQualified.init_aqualified(
+						listnode6,
+						null
+					)
+					var tidnode8 = nodearraylist2
+					assert tidnode8 isa nullable TId
+					var pqidnode3: nullable AQid = new AQid.init_aqid(
+						pqualifiednode4,
+						tidnode8
+					)
+					var listnode10 = new Array[Object]
+					var pexprsnode9: nullable AListExprs = new AListExprs.init_alistexprs(
+						listnode10
+					)
+					var passignopnode11 = nodearraylist3
+					assert passignopnode11 isa nullable AAssignOp
+					var pexprnode12 = nodearraylist4
+					assert pexprnode12 isa nullable AExpr
+					var pexprnode1: nullable ACallReassignExpr = new ACallReassignExpr.init_acallreassignexpr(
+						pexprnode2,
+						pqidnode3,
+						pexprsnode9,
+						passignopnode11,
+						pexprnode12
 					)
 					node_list = pexprnode1
 					p.push(p.go_to(_goto), node_list)
@@ -8477,16 +9195,20 @@ private class ReduceAction333
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
 					assert pexprnode2 isa nullable AExpr
-					var tidnode3 = nodearraylist4
-					assert tidnode3 isa nullable TId
-					var listnode5 = new Array[Object]
-					var pexprsnode4: nullable AListExprs = new AListExprs.init_alistexprs(
-						listnode5
+					var tidnode5 = nodearraylist4
+					assert tidnode5 isa nullable TId
+					var pqidnode3: nullable AQid = new AQid.init_aqid(
+						null,
+						tidnode5
+					)
+					var listnode7 = new Array[Object]
+					var pexprsnode6: nullable AListExprs = new AListExprs.init_alistexprs(
+						listnode7
 					)
 					var pexprnode1: nullable ACallExpr = new ACallExpr.init_acallexpr(
 						pexprnode2,
-						tidnode3,
-						pexprsnode4
+						pqidnode3,
+						pexprsnode6
 					)
 					node_list = pexprnode1
 					p.push(p.go_to(_goto), node_list)
@@ -8504,16 +9226,27 @@ private class ReduceAction335
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
 					assert pexprnode2 isa nullable AExpr
-					var tidnode3 = nodearraylist5
-					assert tidnode3 isa nullable TId
 					var listnode5 = new Array[Object]
-					var pexprsnode4: nullable AListExprs = new AListExprs.init_alistexprs(
-						listnode5
+					var tclassidnode6 = nodearraylist4
+					assert tclassidnode6 isa nullable TClassid
+					var pqualifiednode4: nullable AQualified = new AQualified.init_aqualified(
+						listnode5,
+						tclassidnode6
+					)
+					var tidnode7 = nodearraylist5
+					assert tidnode7 isa nullable TId
+					var pqidnode3: nullable AQid = new AQid.init_aqid(
+						pqualifiednode4,
+						tidnode7
+					)
+					var listnode9 = new Array[Object]
+					var pexprsnode8: nullable AListExprs = new AListExprs.init_alistexprs(
+						listnode9
 					)
 					var pexprnode1: nullable ACallExpr = new ACallExpr.init_acallexpr(
 						pexprnode2,
-						tidnode3,
-						pexprsnode4
+						pqidnode3,
+						pexprsnode8
 					)
 					node_list = pexprnode1
 					p.push(p.go_to(_goto), node_list)
@@ -8532,16 +9265,69 @@ private class ReduceAction337
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
 					assert pexprnode2 isa nullable AExpr
-					var tidnode3 = nodearraylist6
-					assert tidnode3 isa nullable TId
-					var listnode5 = new Array[Object]
-					var pexprsnode4: nullable AListExprs = new AListExprs.init_alistexprs(
-						listnode5
+					var listnode6 = new Array[Object]
+					var listnode5 = nodearraylist4
+					assert listnode5 isa Array[Object]
+					listnode6 = concat(listnode6, listnode5)
+					var tclassidnode7 = nodearraylist5
+					assert tclassidnode7 isa nullable TClassid
+					var pqualifiednode4: nullable AQualified = new AQualified.init_aqualified(
+						listnode6,
+						tclassidnode7
+					)
+					var tidnode8 = nodearraylist6
+					assert tidnode8 isa nullable TId
+					var pqidnode3: nullable AQid = new AQid.init_aqid(
+						pqualifiednode4,
+						tidnode8
+					)
+					var listnode10 = new Array[Object]
+					var pexprsnode9: nullable AListExprs = new AListExprs.init_alistexprs(
+						listnode10
 					)
 					var pexprnode1: nullable ACallExpr = new ACallExpr.init_acallexpr(
 						pexprnode2,
-						tidnode3,
-						pexprsnode4
+						pqidnode3,
+						pexprsnode9
+					)
+					node_list = pexprnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction339
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pexprnode2 = nodearraylist1
+					assert pexprnode2 isa nullable AExpr
+					var listnode6 = new Array[Object]
+					var listnode5 = nodearraylist4
+					assert listnode5 isa Array[Object]
+					listnode6 = concat(listnode6, listnode5)
+					var pqualifiednode4: nullable AQualified = new AQualified.init_aqualified(
+						listnode6,
+						null
+					)
+					var tidnode8 = nodearraylist5
+					assert tidnode8 isa nullable TId
+					var pqidnode3: nullable AQid = new AQid.init_aqid(
+						pqualifiednode4,
+						tidnode8
+					)
+					var listnode10 = new Array[Object]
+					var pexprsnode9: nullable AListExprs = new AListExprs.init_alistexprs(
+						listnode10
+					)
+					var pexprnode1: nullable ACallExpr = new ACallExpr.init_acallexpr(
+						pexprnode2,
+						pqidnode3,
+						pexprsnode9
 					)
 					node_list = pexprnode1
 					p.push(p.go_to(_goto), node_list)
@@ -8554,16 +9340,20 @@ private class ReduceAction341
 					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var pexprnode2: nullable AImplicitSelfExpr = new AImplicitSelfExpr.init_aimplicitselfexpr
-					var tidnode3 = nodearraylist1
-					assert tidnode3 isa nullable TId
-					var listnode5 = new Array[Object]
-					var pexprsnode4: nullable AListExprs = new AListExprs.init_alistexprs(
-						listnode5
+					var tidnode5 = nodearraylist1
+					assert tidnode5 isa nullable TId
+					var pqidnode3: nullable AQid = new AQid.init_aqid(
+						null,
+						tidnode5
+					)
+					var listnode7 = new Array[Object]
+					var pexprsnode6: nullable AListExprs = new AListExprs.init_alistexprs(
+						listnode7
 					)
 					var pexprnode1: nullable ACallExpr = new ACallExpr.init_acallexpr(
 						pexprnode2,
-						tidnode3,
-						pexprsnode4
+						pqidnode3,
+						pexprsnode6
 					)
 					node_list = pexprnode1
 					p.push(p.go_to(_goto), node_list)
@@ -8577,16 +9367,27 @@ private class ReduceAction343
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2: nullable AImplicitSelfExpr = new AImplicitSelfExpr.init_aimplicitselfexpr
-					var tidnode3 = nodearraylist2
-					assert tidnode3 isa nullable TId
 					var listnode5 = new Array[Object]
-					var pexprsnode4: nullable AListExprs = new AListExprs.init_alistexprs(
-						listnode5
+					var tclassidnode6 = nodearraylist1
+					assert tclassidnode6 isa nullable TClassid
+					var pqualifiednode4: nullable AQualified = new AQualified.init_aqualified(
+						listnode5,
+						tclassidnode6
+					)
+					var tidnode7 = nodearraylist2
+					assert tidnode7 isa nullable TId
+					var pqidnode3: nullable AQid = new AQid.init_aqid(
+						pqualifiednode4,
+						tidnode7
+					)
+					var listnode9 = new Array[Object]
+					var pexprsnode8: nullable AListExprs = new AListExprs.init_alistexprs(
+						listnode9
 					)
 					var pexprnode1: nullable ACallExpr = new ACallExpr.init_acallexpr(
 						pexprnode2,
-						tidnode3,
-						pexprsnode4
+						pqidnode3,
+						pexprsnode8
 					)
 					node_list = pexprnode1
 					p.push(p.go_to(_goto), node_list)
@@ -8601,16 +9402,65 @@ private class ReduceAction345
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2: nullable AImplicitSelfExpr = new AImplicitSelfExpr.init_aimplicitselfexpr
-					var tidnode3 = nodearraylist3
-					assert tidnode3 isa nullable TId
-					var listnode5 = new Array[Object]
-					var pexprsnode4: nullable AListExprs = new AListExprs.init_alistexprs(
-						listnode5
+					var listnode6 = new Array[Object]
+					var listnode5 = nodearraylist1
+					assert listnode5 isa Array[Object]
+					listnode6 = concat(listnode6, listnode5)
+					var tclassidnode7 = nodearraylist2
+					assert tclassidnode7 isa nullable TClassid
+					var pqualifiednode4: nullable AQualified = new AQualified.init_aqualified(
+						listnode6,
+						tclassidnode7
+					)
+					var tidnode8 = nodearraylist3
+					assert tidnode8 isa nullable TId
+					var pqidnode3: nullable AQid = new AQid.init_aqid(
+						pqualifiednode4,
+						tidnode8
+					)
+					var listnode10 = new Array[Object]
+					var pexprsnode9: nullable AListExprs = new AListExprs.init_alistexprs(
+						listnode10
 					)
 					var pexprnode1: nullable ACallExpr = new ACallExpr.init_acallexpr(
 						pexprnode2,
-						tidnode3,
-						pexprsnode4
+						pqidnode3,
+						pexprsnode9
+					)
+					node_list = pexprnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction347
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pexprnode2: nullable AImplicitSelfExpr = new AImplicitSelfExpr.init_aimplicitselfexpr
+					var listnode6 = new Array[Object]
+					var listnode5 = nodearraylist1
+					assert listnode5 isa Array[Object]
+					listnode6 = concat(listnode6, listnode5)
+					var pqualifiednode4: nullable AQualified = new AQualified.init_aqualified(
+						listnode6,
+						null
+					)
+					var tidnode8 = nodearraylist2
+					assert tidnode8 isa nullable TId
+					var pqidnode3: nullable AQid = new AQid.init_aqid(
+						pqualifiednode4,
+						tidnode8
+					)
+					var listnode10 = new Array[Object]
+					var pexprsnode9: nullable AListExprs = new AListExprs.init_alistexprs(
+						listnode10
+					)
+					var pexprnode1: nullable ACallExpr = new ACallExpr.init_acallexpr(
+						pexprnode2,
+						pqidnode3,
+						pexprsnode9
 					)
 					node_list = pexprnode1
 					p.push(p.go_to(_goto), node_list)
@@ -8723,15 +9573,19 @@ private class ReduceAction355
 					assert tkwnewnode2 isa nullable TKwnew
 					var ptypenode3 = nodearraylist3
 					assert ptypenode3 isa nullable AType
-					var tidnode4 = nodearraylist6
-					assert tidnode4 isa nullable TId
-					var pexprsnode5 = nodearraylist7
-					assert pexprsnode5 isa nullable AExprs
+					var tidnode6 = nodearraylist6
+					assert tidnode6 isa nullable TId
+					var pqidnode4: nullable AQid = new AQid.init_aqid(
+						null,
+						tidnode6
+					)
+					var pexprsnode7 = nodearraylist7
+					assert pexprsnode7 isa nullable AExprs
 					var pexprnode1: nullable ANewExpr = new ANewExpr.init_anewexpr(
 						tkwnewnode2,
 						ptypenode3,
-						tidnode4,
-						pexprsnode5
+						pqidnode4,
+						pexprsnode7
 					)
 					node_list = pexprnode1
 					p.push(p.go_to(_goto), node_list)
@@ -8752,17 +9606,21 @@ private class ReduceAction356
 					assert tkwnewnode2 isa nullable TKwnew
 					var ptypenode3 = nodearraylist3
 					assert ptypenode3 isa nullable AType
-					var tidnode4 = nodearraylist6
-					assert tidnode4 isa nullable TId
-					var listnode6 = new Array[Object]
-					var pexprsnode5: nullable AListExprs = new AListExprs.init_alistexprs(
-						listnode6
+					var tidnode6 = nodearraylist6
+					assert tidnode6 isa nullable TId
+					var pqidnode4: nullable AQid = new AQid.init_aqid(
+						null,
+						tidnode6
+					)
+					var listnode8 = new Array[Object]
+					var pexprsnode7: nullable AListExprs = new AListExprs.init_alistexprs(
+						listnode8
 					)
 					var pexprnode1: nullable ANewExpr = new ANewExpr.init_anewexpr(
 						tkwnewnode2,
 						ptypenode3,
-						tidnode4,
-						pexprsnode5
+						pqidnode4,
+						pexprsnode7
 					)
 					node_list = pexprnode1
 					p.push(p.go_to(_goto), node_list)
@@ -8785,15 +9643,26 @@ private class ReduceAction357
 					assert tkwnewnode2 isa nullable TKwnew
 					var ptypenode3 = nodearraylist3
 					assert ptypenode3 isa nullable AType
-					var tidnode4 = nodearraylist7
-					assert tidnode4 isa nullable TId
-					var pexprsnode5 = nodearraylist8
-					assert pexprsnode5 isa nullable AExprs
+					var listnode6 = new Array[Object]
+					var tclassidnode7 = nodearraylist6
+					assert tclassidnode7 isa nullable TClassid
+					var pqualifiednode5: nullable AQualified = new AQualified.init_aqualified(
+						listnode6,
+						tclassidnode7
+					)
+					var tidnode8 = nodearraylist7
+					assert tidnode8 isa nullable TId
+					var pqidnode4: nullable AQid = new AQid.init_aqid(
+						pqualifiednode5,
+						tidnode8
+					)
+					var pexprsnode9 = nodearraylist8
+					assert pexprsnode9 isa nullable AExprs
 					var pexprnode1: nullable ANewExpr = new ANewExpr.init_anewexpr(
 						tkwnewnode2,
 						ptypenode3,
-						tidnode4,
-						pexprsnode5
+						pqidnode4,
+						pexprsnode9
 					)
 					node_list = pexprnode1
 					p.push(p.go_to(_goto), node_list)
@@ -8815,17 +9684,28 @@ private class ReduceAction358
 					assert tkwnewnode2 isa nullable TKwnew
 					var ptypenode3 = nodearraylist3
 					assert ptypenode3 isa nullable AType
-					var tidnode4 = nodearraylist7
-					assert tidnode4 isa nullable TId
 					var listnode6 = new Array[Object]
-					var pexprsnode5: nullable AListExprs = new AListExprs.init_alistexprs(
-						listnode6
+					var tclassidnode7 = nodearraylist6
+					assert tclassidnode7 isa nullable TClassid
+					var pqualifiednode5: nullable AQualified = new AQualified.init_aqualified(
+						listnode6,
+						tclassidnode7
+					)
+					var tidnode8 = nodearraylist7
+					assert tidnode8 isa nullable TId
+					var pqidnode4: nullable AQid = new AQid.init_aqid(
+						pqualifiednode5,
+						tidnode8
+					)
+					var listnode10 = new Array[Object]
+					var pexprsnode9: nullable AListExprs = new AListExprs.init_alistexprs(
+						listnode10
 					)
 					var pexprnode1: nullable ANewExpr = new ANewExpr.init_anewexpr(
 						tkwnewnode2,
 						ptypenode3,
-						tidnode4,
-						pexprsnode5
+						pqidnode4,
+						pexprsnode9
 					)
 					node_list = pexprnode1
 					p.push(p.go_to(_goto), node_list)
@@ -8849,15 +9729,29 @@ private class ReduceAction359
 					assert tkwnewnode2 isa nullable TKwnew
 					var ptypenode3 = nodearraylist3
 					assert ptypenode3 isa nullable AType
-					var tidnode4 = nodearraylist8
-					assert tidnode4 isa nullable TId
-					var pexprsnode5 = nodearraylist9
-					assert pexprsnode5 isa nullable AExprs
+					var listnode7 = new Array[Object]
+					var listnode6 = nodearraylist6
+					assert listnode6 isa Array[Object]
+					listnode7 = concat(listnode7, listnode6)
+					var tclassidnode8 = nodearraylist7
+					assert tclassidnode8 isa nullable TClassid
+					var pqualifiednode5: nullable AQualified = new AQualified.init_aqualified(
+						listnode7,
+						tclassidnode8
+					)
+					var tidnode9 = nodearraylist8
+					assert tidnode9 isa nullable TId
+					var pqidnode4: nullable AQid = new AQid.init_aqid(
+						pqualifiednode5,
+						tidnode9
+					)
+					var pexprsnode10 = nodearraylist9
+					assert pexprsnode10 isa nullable AExprs
 					var pexprnode1: nullable ANewExpr = new ANewExpr.init_anewexpr(
 						tkwnewnode2,
 						ptypenode3,
-						tidnode4,
-						pexprsnode5
+						pqidnode4,
+						pexprsnode10
 					)
 					node_list = pexprnode1
 					p.push(p.go_to(_goto), node_list)
@@ -8880,17 +9774,118 @@ private class ReduceAction360
 					assert tkwnewnode2 isa nullable TKwnew
 					var ptypenode3 = nodearraylist3
 					assert ptypenode3 isa nullable AType
-					var tidnode4 = nodearraylist8
-					assert tidnode4 isa nullable TId
-					var listnode6 = new Array[Object]
-					var pexprsnode5: nullable AListExprs = new AListExprs.init_alistexprs(
-						listnode6
+					var listnode7 = new Array[Object]
+					var listnode6 = nodearraylist6
+					assert listnode6 isa Array[Object]
+					listnode7 = concat(listnode7, listnode6)
+					var tclassidnode8 = nodearraylist7
+					assert tclassidnode8 isa nullable TClassid
+					var pqualifiednode5: nullable AQualified = new AQualified.init_aqualified(
+						listnode7,
+						tclassidnode8
+					)
+					var tidnode9 = nodearraylist8
+					assert tidnode9 isa nullable TId
+					var pqidnode4: nullable AQid = new AQid.init_aqid(
+						pqualifiednode5,
+						tidnode9
+					)
+					var listnode11 = new Array[Object]
+					var pexprsnode10: nullable AListExprs = new AListExprs.init_alistexprs(
+						listnode11
 					)
 					var pexprnode1: nullable ANewExpr = new ANewExpr.init_anewexpr(
 						tkwnewnode2,
 						ptypenode3,
-						tidnode4,
-						pexprsnode5
+						pqidnode4,
+						pexprsnode10
+					)
+					node_list = pexprnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction361
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var tkwnewnode2 = nodearraylist1
+					assert tkwnewnode2 isa nullable TKwnew
+					var ptypenode3 = nodearraylist3
+					assert ptypenode3 isa nullable AType
+					var listnode7 = new Array[Object]
+					var listnode6 = nodearraylist6
+					assert listnode6 isa Array[Object]
+					listnode7 = concat(listnode7, listnode6)
+					var pqualifiednode5: nullable AQualified = new AQualified.init_aqualified(
+						listnode7,
+						null
+					)
+					var tidnode9 = nodearraylist7
+					assert tidnode9 isa nullable TId
+					var pqidnode4: nullable AQid = new AQid.init_aqid(
+						pqualifiednode5,
+						tidnode9
+					)
+					var pexprsnode10 = nodearraylist8
+					assert pexprsnode10 isa nullable AExprs
+					var pexprnode1: nullable ANewExpr = new ANewExpr.init_anewexpr(
+						tkwnewnode2,
+						ptypenode3,
+						pqidnode4,
+						pexprsnode10
+					)
+					node_list = pexprnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction362
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var tkwnewnode2 = nodearraylist1
+					assert tkwnewnode2 isa nullable TKwnew
+					var ptypenode3 = nodearraylist3
+					assert ptypenode3 isa nullable AType
+					var listnode7 = new Array[Object]
+					var listnode6 = nodearraylist6
+					assert listnode6 isa Array[Object]
+					listnode7 = concat(listnode7, listnode6)
+					var pqualifiednode5: nullable AQualified = new AQualified.init_aqualified(
+						listnode7,
+						null
+					)
+					var tidnode9 = nodearraylist7
+					assert tidnode9 isa nullable TId
+					var pqidnode4: nullable AQid = new AQid.init_aqid(
+						pqualifiednode5,
+						tidnode9
+					)
+					var listnode11 = new Array[Object]
+					var pexprsnode10: nullable AListExprs = new AListExprs.init_alistexprs(
+						listnode11
+					)
+					var pexprnode1: nullable ANewExpr = new ANewExpr.init_anewexpr(
+						tkwnewnode2,
+						ptypenode3,
+						pqidnode4,
+						pexprsnode10
 					)
 					node_list = pexprnode1
 					p.push(p.go_to(_goto), node_list)
@@ -10947,14 +11942,18 @@ private class ReduceAction853
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
 					assert pexprnode2 isa nullable AExpr
-					var tidnode3 = nodearraylist2
-					assert tidnode3 isa nullable TId
-					var pexprsnode4 = nodearraylist3
-					assert pexprsnode4 isa nullable AExprs
+					var tidnode5 = nodearraylist2
+					assert tidnode5 isa nullable TId
+					var pqidnode3: nullable AQid = new AQid.init_aqid(
+						null,
+						tidnode5
+					)
+					var pexprsnode6 = nodearraylist3
+					assert pexprsnode6 isa nullable AExprs
 					var pexprnode1: nullable ACallExpr = new ACallExpr.init_acallexpr(
 						pexprnode2,
-						tidnode3,
-						pexprsnode4
+						pqidnode3,
+						pexprsnode6
 					)
 					node_list = pexprnode1
 					p.push(p.go_to(_goto), node_list)
@@ -10969,16 +11968,20 @@ private class ReduceAction854
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
 					assert pexprnode2 isa nullable AExpr
-					var tidnode3 = nodearraylist2
-					assert tidnode3 isa nullable TId
-					var listnode5 = new Array[Object]
-					var pexprsnode4: nullable AListExprs = new AListExprs.init_alistexprs(
-						listnode5
+					var tidnode5 = nodearraylist2
+					assert tidnode5 isa nullable TId
+					var pqidnode3: nullable AQid = new AQid.init_aqid(
+						null,
+						tidnode5
+					)
+					var listnode7 = new Array[Object]
+					var pexprsnode6: nullable AListExprs = new AListExprs.init_alistexprs(
+						listnode7
 					)
 					var pexprnode1: nullable ACallExpr = new ACallExpr.init_acallexpr(
 						pexprnode2,
-						tidnode3,
-						pexprsnode4
+						pqidnode3,
+						pexprsnode6
 					)
 					node_list = pexprnode1
 					p.push(p.go_to(_goto), node_list)
@@ -10995,14 +11998,25 @@ private class ReduceAction855
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
 					assert pexprnode2 isa nullable AExpr
-					var tidnode3 = nodearraylist3
-					assert tidnode3 isa nullable TId
-					var pexprsnode4 = nodearraylist4
-					assert pexprsnode4 isa nullable AExprs
+					var listnode5 = new Array[Object]
+					var tclassidnode6 = nodearraylist2
+					assert tclassidnode6 isa nullable TClassid
+					var pqualifiednode4: nullable AQualified = new AQualified.init_aqualified(
+						listnode5,
+						tclassidnode6
+					)
+					var tidnode7 = nodearraylist3
+					assert tidnode7 isa nullable TId
+					var pqidnode3: nullable AQid = new AQid.init_aqid(
+						pqualifiednode4,
+						tidnode7
+					)
+					var pexprsnode8 = nodearraylist4
+					assert pexprsnode8 isa nullable AExprs
 					var pexprnode1: nullable ACallExpr = new ACallExpr.init_acallexpr(
 						pexprnode2,
-						tidnode3,
-						pexprsnode4
+						pqidnode3,
+						pexprsnode8
 					)
 					node_list = pexprnode1
 					p.push(p.go_to(_goto), node_list)
@@ -11018,16 +12032,179 @@ private class ReduceAction856
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
 					assert pexprnode2 isa nullable AExpr
-					var tidnode3 = nodearraylist3
-					assert tidnode3 isa nullable TId
 					var listnode5 = new Array[Object]
-					var pexprsnode4: nullable AListExprs = new AListExprs.init_alistexprs(
-						listnode5
+					var tclassidnode6 = nodearraylist2
+					assert tclassidnode6 isa nullable TClassid
+					var pqualifiednode4: nullable AQualified = new AQualified.init_aqualified(
+						listnode5,
+						tclassidnode6
+					)
+					var tidnode7 = nodearraylist3
+					assert tidnode7 isa nullable TId
+					var pqidnode3: nullable AQid = new AQid.init_aqid(
+						pqualifiednode4,
+						tidnode7
+					)
+					var listnode9 = new Array[Object]
+					var pexprsnode8: nullable AListExprs = new AListExprs.init_alistexprs(
+						listnode9
 					)
 					var pexprnode1: nullable ACallExpr = new ACallExpr.init_acallexpr(
 						pexprnode2,
-						tidnode3,
-						pexprsnode4
+						pqidnode3,
+						pexprsnode8
+					)
+					node_list = pexprnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction857
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pexprnode2 = nodearraylist1
+					assert pexprnode2 isa nullable AExpr
+					var listnode6 = new Array[Object]
+					var listnode5 = nodearraylist2
+					assert listnode5 isa Array[Object]
+					listnode6 = concat(listnode6, listnode5)
+					var tclassidnode7 = nodearraylist3
+					assert tclassidnode7 isa nullable TClassid
+					var pqualifiednode4: nullable AQualified = new AQualified.init_aqualified(
+						listnode6,
+						tclassidnode7
+					)
+					var tidnode8 = nodearraylist4
+					assert tidnode8 isa nullable TId
+					var pqidnode3: nullable AQid = new AQid.init_aqid(
+						pqualifiednode4,
+						tidnode8
+					)
+					var pexprsnode9 = nodearraylist5
+					assert pexprsnode9 isa nullable AExprs
+					var pexprnode1: nullable ACallExpr = new ACallExpr.init_acallexpr(
+						pexprnode2,
+						pqidnode3,
+						pexprsnode9
+					)
+					node_list = pexprnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction858
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pexprnode2 = nodearraylist1
+					assert pexprnode2 isa nullable AExpr
+					var listnode6 = new Array[Object]
+					var listnode5 = nodearraylist2
+					assert listnode5 isa Array[Object]
+					listnode6 = concat(listnode6, listnode5)
+					var tclassidnode7 = nodearraylist3
+					assert tclassidnode7 isa nullable TClassid
+					var pqualifiednode4: nullable AQualified = new AQualified.init_aqualified(
+						listnode6,
+						tclassidnode7
+					)
+					var tidnode8 = nodearraylist4
+					assert tidnode8 isa nullable TId
+					var pqidnode3: nullable AQid = new AQid.init_aqid(
+						pqualifiednode4,
+						tidnode8
+					)
+					var listnode10 = new Array[Object]
+					var pexprsnode9: nullable AListExprs = new AListExprs.init_alistexprs(
+						listnode10
+					)
+					var pexprnode1: nullable ACallExpr = new ACallExpr.init_acallexpr(
+						pexprnode2,
+						pqidnode3,
+						pexprsnode9
+					)
+					node_list = pexprnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction859
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pexprnode2 = nodearraylist1
+					assert pexprnode2 isa nullable AExpr
+					var listnode6 = new Array[Object]
+					var listnode5 = nodearraylist2
+					assert listnode5 isa Array[Object]
+					listnode6 = concat(listnode6, listnode5)
+					var pqualifiednode4: nullable AQualified = new AQualified.init_aqualified(
+						listnode6,
+						null
+					)
+					var tidnode8 = nodearraylist3
+					assert tidnode8 isa nullable TId
+					var pqidnode3: nullable AQid = new AQid.init_aqid(
+						pqualifiednode4,
+						tidnode8
+					)
+					var pexprsnode9 = nodearraylist4
+					assert pexprsnode9 isa nullable AExprs
+					var pexprnode1: nullable ACallExpr = new ACallExpr.init_acallexpr(
+						pexprnode2,
+						pqidnode3,
+						pexprsnode9
+					)
+					node_list = pexprnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction860
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pexprnode2 = nodearraylist1
+					assert pexprnode2 isa nullable AExpr
+					var listnode6 = new Array[Object]
+					var listnode5 = nodearraylist2
+					assert listnode5 isa Array[Object]
+					listnode6 = concat(listnode6, listnode5)
+					var pqualifiednode4: nullable AQualified = new AQualified.init_aqualified(
+						listnode6,
+						null
+					)
+					var tidnode8 = nodearraylist3
+					assert tidnode8 isa nullable TId
+					var pqidnode3: nullable AQid = new AQid.init_aqid(
+						pqualifiednode4,
+						tidnode8
+					)
+					var listnode10 = new Array[Object]
+					var pexprsnode9: nullable AListExprs = new AListExprs.init_alistexprs(
+						listnode10
+					)
+					var pexprnode1: nullable ACallExpr = new ACallExpr.init_acallexpr(
+						pexprnode2,
+						pqidnode3,
+						pexprsnode9
 					)
 					node_list = pexprnode1
 					p.push(p.go_to(_goto), node_list)
