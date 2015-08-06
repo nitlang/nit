@@ -26,9 +26,9 @@ end
 var a = new A #alt1# var a = new B
 a.foo(a=1,b=2,3,4,e=5,f=6)
 a.foo(f=6,3,e=5,b=2,4,a=1)
-a.foo(3,e=5,b=2,4)
+#alt3#a.foo(3,e=5,b=2,4)
 
 var b = new B #alt1# var b = new A
 b.foo(x=1,y=2,3,4,u=5,v=6)
 b.foo(v=6,3,u=5,y=2,4,x=1)
-b.foo(3,u=5,y=2,4)
+#alt3#b.foo(3,u=5,y=2,4)

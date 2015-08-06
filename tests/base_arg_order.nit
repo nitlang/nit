@@ -33,10 +33,10 @@ end
 
 var a = new A
 a.foo(order(1),order(2),order(3),order(4),order(5),order(6))
+a.foo(a=order(1),b=order(2),c=order(3),d=order(4),e=order(5),f=order(6))
 a.foo(a=order(1),b=order(2),order(3),order(4),e=order(5),f=order(6))
 a.foo(f=order(6),order(3),e=order(5),b=order(2),order(4),a=order(1))
-a.foo(order(3),e=order(5),b=order(2),order(4))
-a.foo(order(3),order(4))
+a.foo(f=order(6),d=order(4),e=order(5),b=order(2),c=order(3),a=order(1))
 
 bar(order(1),order(2),order(3))
 bar(order(1),order(2),order(3),order(4))

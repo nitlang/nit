@@ -71,11 +71,11 @@ a.foo
 #alt1#a = new B(1)
 #alt1#a.foo
 
-a = new B(1,4)
-a.foo
+#alt1#a = new B(1,4)
+#alt1#a.foo
 
-a = new B(1,2,4)
-a.foo
+#alt1#a = new B(1,2,4)
+#alt1#a.foo
 
 a = new B(1,2,3,4)
 a.foo
@@ -86,8 +86,8 @@ a.foo
 #alt1#a = new C(1)
 #alt1#a.foo
 
-a = new C(4,1)
-a.foo
+#alt1#a = new C(4,1)
+#alt1#a.foo
 
 a = new C(3,4,1)
 a.foo

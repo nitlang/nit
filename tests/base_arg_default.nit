@@ -80,8 +80,8 @@ var x
 
 #alt1#a.foo
 #alt1#a.foo(2)
-a.foo(1,2)
-a.foo(1,2,3)
+#alt1#a.foo(1,2)
+#alt1#a.foo(1,2,3)
 a.foo(1,2,3,4)
 a.foo(1,2,3,4,5)
 a.foo(1,2,3,4,5,6)
