@@ -46,6 +46,7 @@ abstract class XMLEntity
 
 	# Sets the parent of `self` to `e`
 	fun parent=(e: XMLEntity) do
+		var parent = self.parent
 		if parent != null then
 			parent.children.remove(self)
 		end
@@ -68,8 +69,9 @@ private class XMLEntities
 
 	redef fun []=(index, el) do
 		var olde = self[index]
-		if olde.parent != null then
-			olde.parent.children.remove(el)
+		var olde_parent = olde.parent
+		if olde_parent != null then
+			olde_parent.children.remove(el)
 		end
 		entities[index] = el
 		el.set_parent owner
@@ -198,6 +200,7 @@ class XMLStartTag
 		end
 		s += ">"
 		for i in children do s += i.to_s
+		var matching = self.matching
 		if matching != null then s += matching.to_s
 		return s
 	end
@@ -296,5 +299,12 @@ class XMLError
 	# Error message reported by the parser
 	var message: String
 
-	redef fun to_s do return "XML Error: {message} at {location.to_s}"
+	redef fun to_s do
+		var l = self.location
+		if l == null then
+			return "XML Error: {message}"
+		else
+			return "XML Error: {message} at {l}"
+		end
+	end
 end
