@@ -37,7 +37,7 @@ class XMLProcessor
 					stack.push tag
 				else if tag isa XMLEndTag then
 					if stack.is_empty then
-						return new XMLError(location = tag.location, "Missing matching tag for `{tag.tag_name}`")
+						return new XMLError(tag.location, "Missing matching tag for `{tag.tag_name}`")
 					end
 					var st_last = stack.last
 					if tag.tag_name == st_last.tag_name then
@@ -46,7 +46,7 @@ class XMLProcessor
 						stack.pop
 					else
 						var miss = stack.pop
-						return new XMLError("Missing matching tag for `{miss.tag_name}`", location=miss.location)
+						return new XMLError(miss.location, "Missing matching tag for `{miss.tag_name}`")
 					end
 				else if tag isa XMLError then
 					return tag
@@ -60,7 +60,8 @@ class XMLProcessor
 			else
 				var st = pos
 				var end_pc = ignore_until("<") - 1
-				var pc = new PCDATA(src.substring(st, end_pc - st + 1).trim)
+				var loc = new Location(line, line_offset)
+				var pc = new PCDATA(loc, src.substring(st, end_pc - st + 1).trim)
 				if stack.is_empty then
 					pc.parent = doc
 				else
@@ -70,7 +71,7 @@ class XMLProcessor
 		end
 		if not stack.is_empty then
 			var miss = stack.pop
-			return new XMLError("Missing matching tag for `{miss.tag_name}`", location=miss.location)
+			return new XMLError(miss.location, "Missing matching tag for `{miss.tag_name}`")
 		end
 		return doc
 	end
@@ -79,8 +80,7 @@ class XMLProcessor
 	private fun read_tag: XMLEntity do
 		var st_loc = new Location(line, line_offset)
 		var c = src[pos]
-		if not c == '<' then return new XMLError(location=st_loc, "Expected start of tag, got `{c}`")
-		var st = pos
+		if not c == '<' then return new XMLError(st_loc, "Expected start of tag, got `{c}`")
 		pos += 1
 		c = src[pos]
 		if c == '!' then
@@ -104,14 +104,14 @@ class XMLProcessor
 	private fun read_special_tag(st_loc: Location): XMLEntity do
 		var srclen = src.length
 		pos += 1
-		if (pos + 2) >= srclen then return new XMLError(location=st_loc, "Unexpected EOF on start of Special tag")
+		if (pos + 2) >= srclen then return new XMLError(st_loc, "Unexpected EOF on start of Special tag")
 		if src[pos] == '-' and src[pos + 1] == '-' then
 			pos += 2
 			var comst = pos
 			var endcom = ignore_until("-->")
-			if endcom == -1 then return new XMLError(location=st_loc, "Malformatted comment")
+			if endcom == -1 then return new XMLError(st_loc, "Malformed comment")
 			pos += 3
-			return new XMLCommentTag(location=st_loc ,src.substring(comst, endcom - comst + 1))
+			return new XMLCommentTag(st_loc ,src.substring(comst, endcom - comst + 1))
 		end
 		var st = pos
 		if srclen - pos >= 7 then
@@ -121,8 +121,8 @@ class XMLProcessor
 				var cdst = pos
 				var cdend = ignore_until("]]>")
 				pos += 3
-				if pos >= srclen then return new XMLError(location = st_loc, "Unfinished CDATA block")
-				return new CDATA(src.substring(cdst, cdend - cdst))
+				if pos >= srclen then return new XMLError(st_loc, "Unfinished CDATA block")
+				return new CDATA(st_loc, src.substring(cdst, cdend - cdst))
 			else if spe_type == "DOCTYPE" then
 				pos += 7
 				return parse_doctype(st_loc)
@@ -130,7 +130,7 @@ class XMLProcessor
 		end
 		var end_spec = ignore_until(">")
 		pos += 1
-		return new XMLSpecialTag(location=st_loc, src.substring(st, end_spec - st))
+		return new XMLSpecialTag(st_loc, src.substring(st, end_spec - st))
 	end
 
 	# Parse a Doctype declaration tag
@@ -139,27 +139,27 @@ class XMLProcessor
 		var srclen = src.length
 		loop
 			ignore_whitespaces
-			if pos >= srclen then return new XMLError(location = st_loc, "Malformatted doctype")
+			if pos >= srclen then return new XMLError(st_loc, "Malformed doctype")
 			var c = src[pos]
 			# TODO: Properly support intern DOCTYPE definitions
 			if c == '[' then
 				var intern_st = pos
 				var intern_end = ignore_until("]")
-				if intern_end == -1 then return new XMLError(location = st_loc, "Unfinished internal doctype declaration")
+				if intern_end == -1 then return new XMLError(st_loc, "Unfinished internal doctype declaration")
 				pos += 1
 				elemts.push src.substring(intern_st, intern_end - intern_st + 1)
 				continue
 			end
 			var elm_st = pos
 			while pos < srclen and not src[pos].is_whitespace and src[pos] != '>' do pos += 1
-			if pos >= srclen then return new XMLError(location = st_loc, "Malformatted doctype")
+			if pos >= srclen then return new XMLError(st_loc, "Malformed doctype")
 			if pos - elm_st > 1 then
 				var str = src.substring(elm_st, pos - elm_st)
 				elemts.push str
 			end
 			if src[pos] == '>' then
 				pos += 1
-				return new XMLDoctypeTag(location = st_loc, "DOCTYPE", elemts.join(" "))
+				return new XMLDoctypeTag(st_loc, "DOCTYPE", elemts.join(" "))
 			end
 		end
 	end
@@ -170,70 +170,67 @@ class XMLProcessor
 	private fun read_prolog_tag(st_loc: Location): XMLEntity do
 		var srclen = src.length
 		pos += 1
-		if pos >= srclen then return new XMLError(location=st_loc, "Invalid start of prolog")
-		var idst = pos
+		if pos >= srclen then return new XMLError(st_loc, "Invalid start of prolog")
 		var tag_name = parse_tag_name(['<', '>'])
 		var c = src[pos]
-		if c == '<' or c == '>' then return new XMLError(location=st_loc ,"Unexpected character `{c}` in prolog declaration")
+		if c == '<' or c == '>' then return new XMLError(st_loc ,"Unexpected character `{c}` in prolog declaration")
 		if tag_name == "xml" then
 			var args = parse_args(['?'])
 			for i in args do
-				if i isa BadXMLAttribute then return new XMLError(location = i.location, i.name)
+				if i isa BadXMLAttribute then return new XMLError(i.location, i.name)
 			end
 			if src[pos] == '?' then
 				if src[pos + 1] == '>' then
 					pos += 2
-					return new XMLPrologTag(location=st_loc, tag_name, args)
+					return new XMLPrologTag(st_loc, tag_name, args)
 				end
 			end
 		else
-			if tag_name.has("xml") then return new XMLError(location = st_loc, "Forbidden keyword xml in Processing Instruction")
+			if tag_name.has("xml") then return new XMLError(st_loc, "Forbidden keyword xml in Processing Instruction")
 			var cont_st = pos
 			var cont_end = ignore_until("?>")
 			if cont_end == -1 then
 				pos += 2
-				return new XMLError(location = st_loc, "Malformatted Processing Instruction tag")
+				return new XMLError(st_loc, "Malformed Processing Instruction tag")
 			end
 			pos += 2
-			return new XMLProcessingInstructionTag(location=st_loc, tag_name, src.substring(cont_st, cont_end - cont_st))
+			return new XMLProcessingInstructionTag(st_loc, tag_name, src.substring(cont_st, cont_end - cont_st))
 		end
 		pos += 1
-		return new XMLError(location=st_loc, "Malformatted prolog tag")
+		return new XMLError(st_loc, "Malformed prolog tag")
 	end
 
 	# Reads an End tag (starting with </)
 	#
 	# In case of error, returns a `XMLError`
 	private fun read_end_tag(st_loc: Location): XMLEntity do
-		var srclen = src.length
 		pos += 1
 		var tag_name = parse_tag_name(['<', '>'])
 		ignore_whitespaces
 		if src[pos] == '>' then
 			pos += 1
-			return new XMLEndTag(location=st_loc, tag_name)
+			return new XMLEndTag(st_loc, tag_name)
 		end
-		return new XMLError(location = st_loc, "Bad end tag `{tag_name}`")
+		return new XMLError(st_loc, "Bad end tag `{tag_name}`")
 	end
 
 	# Reads a Start tag (starting with <)
 	#
 	# In case of error, returns a `XMLError`
 	private fun read_start_tag(st_loc: Location): XMLEntity do
-		var srclen = src.length
 		var tag_name = parse_tag_name(['/', '>'])
 		var args = parse_args(['/', '>'])
 		for i in args do
-			if i isa BadXMLAttribute then return new XMLError(location=i.location, i.name)
+			if i isa BadXMLAttribute then return new XMLError(i.location, i.name)
 		end
 		if src[pos] == '/' then
 			if src[pos + 1] == '>' then
 				pos += 2
-				return new XMLOnelinerTag(location=st_loc, tag_name, args)
+				return new XMLOnelinerTag(st_loc, tag_name, args)
 			end
 		end
 		pos += 1
-		return new XMLStartTag(location=st_loc, tag_name, args)
+		return new XMLStartTag(st_loc, tag_name, args)
 	end
 
 	# Parses an xml tag name
@@ -262,31 +259,30 @@ class XMLProcessor
 	# Parses the next argument in `src`
 	private fun parse_arg(endtags: Array[Char]): XMLAttribute do
 		var srclen = src.length
-		var attr: XMLAttribute
 		ignore_whitespaces
 		var st_loc = new Location(line, line_offset)
-		if pos >= srclen then return new BadXMLAttribute(location = st_loc, "Unfinished attribute name")
+		if pos >= srclen then return new BadXMLAttribute(st_loc, "Unfinished attribute name")
 		# FIXME: Ugly, but as long as it remains private, it is OK I guess
-		if endtags.has(src[pos]) then return new XMLAttributeEnd("")
+		if endtags.has(src[pos]) then return new XMLAttributeEnd(st_loc, "")
 		var attrname_st = pos
 		while pos < srclen and src[pos] != '=' and not endtags.has(src[pos]) do pos += 1
-		if pos >= srclen then return new BadXMLAttribute(location = st_loc, "Unfinished attribute name")
-		if src[pos] != '=' then return new BadXMLAttribute(location = st_loc, "Malformatted attribute")
+		if pos >= srclen then return new BadXMLAttribute(st_loc, "Unfinished attribute name")
+		if src[pos] != '=' then return new BadXMLAttribute(st_loc, "Malformed attribute")
 		var attrname_end = pos - 1
 		var name = src.substring(attrname_st, attrname_end - attrname_st + 1).trim
 		pos += 1
 		ignore_whitespaces
 		var attrval_st = pos
-		if pos >= srclen then return new BadXMLAttribute(location=st_loc, "Unfinished attribute `{name}`")
+		if pos >= srclen then return new BadXMLAttribute(st_loc, "Unfinished attribute `{name}`")
 		var match = src[pos]
-		if match != '\'' and match != '"' then return new BadXMLAttribute(location=st_loc, "Invalid string delimiter `{match}` for attribute `{name}`")
+		if match != '\'' and match != '"' then return new BadXMLAttribute(st_loc, "Invalid string delimiter `{match}` for attribute `{name}`")
 		pos += 1
 		while pos < srclen and src[pos] != match do pos += 1
-		if pos >= srclen then return new BadXMLAttribute(location=st_loc, "Unfinished attribute `{name}`")
+		if pos >= srclen then return new BadXMLAttribute(st_loc, "Unfinished attribute `{name}`")
 		var attrval_end = pos
 		var val = src.substring(attrval_st, attrval_end - attrval_st + 1).trim
 		pos += 1
-		return new XMLStringAttr(location=st_loc, name, val.substring(1, val.length - 2), match)
+		return new XMLStringAttr(st_loc, name, val.substring(1, val.length - 2), match)
 	end
 end
 

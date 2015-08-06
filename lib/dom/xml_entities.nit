@@ -36,7 +36,7 @@ import parser_base
 # Any kind of XML Entity
 abstract class XMLEntity
 	# Optional parent of `self`
-	var parent: nullable XMLEntity is private writable(set_parent)
+	var parent: nullable XMLEntity = null is private writable(set_parent)
 
 	# Optional location of the entity in source
 	var location: nullable Location
@@ -46,6 +46,7 @@ abstract class XMLEntity
 
 	# Sets the parent of `self` to `e`
 	fun parent=(e: XMLEntity) do
+		var parent = self.parent
 		if parent != null then
 			parent.children.remove(self)
 		end
@@ -60,7 +61,7 @@ private class XMLEntities
 	# The owner, aka, the parent
 	var owner: XMLEntity
 
-	private var entities = new List[XMLEntity]
+	var entities = new List[XMLEntity]
 
 	redef fun length do return entities.length
 
@@ -68,8 +69,9 @@ private class XMLEntities
 
 	redef fun []=(index, el) do
 		var olde = self[index]
-		if olde.parent != null then
-			olde.parent.children.remove(el)
+		var olde_parent = olde.parent
+		if olde_parent != null then
+			olde_parent.children.remove(el)
 		end
 		entities[index] = el
 		el.set_parent owner
@@ -198,6 +200,7 @@ class XMLStartTag
 		end
 		s += ">"
 		for i in children do s += i.to_s
+		var matching = self.matching
 		if matching != null then s += matching.to_s
 		return s
 	end
@@ -214,6 +217,7 @@ end
 class XMLProcessingInstructionTag
 	super XMLTag
 
+	# Raw content usable by the third-party application
 	var content: String
 
 	redef fun to_s do return "<?{tag_name} {content}?>"
@@ -240,6 +244,7 @@ end
 class XMLDoctypeTag
 	super XMLTag
 
+	# Raw content
 	var content: String
 
 	redef fun to_s do return "<!DOCTYPE {content}>"
@@ -294,5 +299,12 @@ class XMLError
 	# Error message reported by the parser
 	var message: String
 
-	redef fun to_s do return "XML Error: {message} at {location.to_s}"
+	redef fun to_s do
+		var l = self.location
+		if l == null then
+			return "XML Error: {message}"
+		else
+			return "XML Error: {message} at {l}"
+		end
+	end
 end
