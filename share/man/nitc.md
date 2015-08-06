@@ -223,6 +223,14 @@ See the documentation of these specific modules for details.
 
     Currently, this only affect the android platform.
 
+`-g`, `--debug`
+:   Compile in debug mode.
+
+    Currently removes gcc optimizations.
+    Also preserves the source-files directory for C-debuggers.
+
+    For more debugging-related options, see also `--hardening` and `NIT_GC_OPTION`
+
 ## COMPILATION MODES
 
 `nitc` includes distinct compilation modes.
