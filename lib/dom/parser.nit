@@ -80,7 +80,6 @@ class XMLProcessor
 		var st_loc = new Location(line, line_offset)
 		var c = src[pos]
 		if not c == '<' then return new XMLError(location=st_loc, "Expected start of tag, got `{c}`")
-		var st = pos
 		pos += 1
 		c = src[pos]
 		if c == '!' then
@@ -171,7 +170,6 @@ class XMLProcessor
 		var srclen = src.length
 		pos += 1
 		if pos >= srclen then return new XMLError(location=st_loc, "Invalid start of prolog")
-		var idst = pos
 		var tag_name = parse_tag_name(['<', '>'])
 		var c = src[pos]
 		if c == '<' or c == '>' then return new XMLError(location=st_loc ,"Unexpected character `{c}` in prolog declaration")
@@ -205,7 +203,6 @@ class XMLProcessor
 	#
 	# In case of error, returns a `XMLError`
 	private fun read_end_tag(st_loc: Location): XMLEntity do
-		var srclen = src.length
 		pos += 1
 		var tag_name = parse_tag_name(['<', '>'])
 		ignore_whitespaces
@@ -220,7 +217,6 @@ class XMLProcessor
 	#
 	# In case of error, returns a `XMLError`
 	private fun read_start_tag(st_loc: Location): XMLEntity do
-		var srclen = src.length
 		var tag_name = parse_tag_name(['/', '>'])
 		var args = parse_args(['/', '>'])
 		for i in args do
@@ -262,7 +258,6 @@ class XMLProcessor
 	# Parses the next argument in `src`
 	private fun parse_arg(endtags: Array[Char]): XMLAttribute do
 		var srclen = src.length
-		var attr: XMLAttribute
 		ignore_whitespaces
 		var st_loc = new Location(line, line_offset)
 		if pos >= srclen then return new BadXMLAttribute(location = st_loc, "Unfinished attribute name")
