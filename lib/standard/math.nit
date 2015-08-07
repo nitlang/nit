@@ -22,9 +22,45 @@ in "C header" `{
 	#include <time.h>
 `}
 
+in "C" `{
+	/* Is rand shortcut? */
+	static int nit_rand_seeded;
+	/* Current rand seed if seeded */
+	static unsigned int nit_rand_seed;
+
+	#define NIT_RAND_MAX 0x7fffffff
+
+	/* This algorithm is mentioned in the ISO C standard, here extended
+	for 32 bits.  */
+	static int
+	nit_rand(void) {
+		unsigned int next = nit_rand_seed;
+		int result;
+
+		next *= 1103515245;
+		next += 12345;
+		result = (unsigned int) (next / 65536) % 2048;
+
+		next *= 1103515245;
+		next += 12345;
+		result <<= 10;
+		result ^= (unsigned int) (next / 65536) % 1024;
+
+		next *= 1103515245;
+		next += 12345;
+		result <<= 10;
+		result ^= (unsigned int) (next / 65536) % 1024;
+
+		nit_rand_seed = next;
+
+		return result;
+	}
+`}
+
 redef class Int
 	# Returns a random `Int` in `[0 .. self[`.
 	fun rand: Int `{
+		if (nit_rand_seeded) return (long)(((double)self)*nit_rand()/(NIT_RAND_MAX+1.0));
 		return (long)(((double)self)*rand()/(RAND_MAX+1.0));
 	`}
 
@@ -271,7 +307,10 @@ redef class Float
 	fun round: Float `{ return round(self); `}
 
 	# Returns a random `Float` in `[0.0 .. self[`.
-	fun rand: Float `{ return ((self)*rand())/(RAND_MAX+1.0); `}
+	fun rand: Float `{
+		if (nit_rand_seeded) return ((self)*nit_rand())/(NIT_RAND_MAX+1.0);
+		return ((self)*rand())/(RAND_MAX+1.0);
+	`}
 
 	# Returns the euclidean distance from `b`.
 	fun hypot_with(b: Float): Float `{ return hypotf(self, b); `}
@@ -457,9 +496,9 @@ fun pi: Float do return 3.14159265
 # assert 10.rand == a
 # assert 100.rand == b
 # ~~~~
-fun srand_from(x: Int) `{ srand(x); `}
+fun srand_from(x: Int) `{ nit_rand_seeded = 1; nit_rand_seed = x; `}
 
 # Reinitialize the pseudo-random generator used by the method `rand` and other.
 # This method is automatically invoked at the begin of the program, so usually, there is no need to manually invoke it.
 # The only exception is in conjunction with `srand_from` to reset the pseudo-random generator.
-fun srand `{ srand(time(NULL)); `}
+fun srand `{ nit_rand_seeded = 0; srand(time(NULL)); `}
