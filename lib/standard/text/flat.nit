@@ -317,7 +317,7 @@ class FlatString
 			var myitems = items
 
 			while i <= last_byte do
-				h = h.lshift(5) + h + myitems[i].to_i
+				h = (h << 5) + h + myitems[i].to_i
 				i += 1
 			end
 

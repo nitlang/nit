@@ -66,7 +66,7 @@ class Perfecthashing
 		var i = mask.highest_bit
 		while i != 0 do
 			if mask.getbit(i) == 1 then
-				newmask = mask.bin_xor(1.lshift(i))
+				newmask = mask.bin_xor(1 << i)
 
 				# If there is no collision, replace the old mask
 				if phandp(ids, newmask) then
@@ -112,10 +112,10 @@ class Perfecthashing
 	do
 		var mask = phand(ids) -1
 		var i = 0
-		while n+ids.length > (1.lshift(mask.number_bits(1))) do
+		while n+ids.length > (1 << mask.number_bits(1)) do
 			# When there are not enough 1-bits
 			if mask.getbit(i) == 0 then
-				mask = mask.bin_xor(1.lshift(i))
+				mask = mask ^ (1 << i)
 			end
 			i += 1
 		end

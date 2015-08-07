@@ -200,9 +200,9 @@ class Bitmap
 	private fun set_value(array: Array[Int], start_index: Int, value: Int)
 	do
 		array[start_index] = value.bin_and(0x000000FF)
-		array[start_index + 1] = value.rshift(8).bin_and(0x000000FF)
-		array[start_index + 2] = value.rshift(16).bin_and(0x000000FF)
-		array[start_index + 3] = value.rshift(24).bin_and(0x000000FF)
+		array[start_index + 1] = (value >> 8).bin_and(0x000000FF)
+		array[start_index + 2] = (value >> 16).bin_and(0x000000FF)
+		array[start_index + 3] = (value >> 24).bin_and(0x000000FF)
 	end
 
 	# Saves the bitmap into a file
@@ -223,8 +223,8 @@ class Bitmap
 			var row = self.data[x]
 			for y in [0..self.width[ do
 				var pixel = row[y]
-				var red = pixel.rshift(16)
-				var green = pixel.bin_and(0x00FF00).rshift(8)
+				var red = pixel >> 16
+				var green = pixel.bin_and(0x00FF00) >> 8
 				var blue = pixel.bin_and(0x000000FF)
 				fw.write(red.ascii.to_s)
 				fw.write(green.ascii.to_s)
@@ -241,8 +241,8 @@ class Bitmap
 			var row = self.data[x]
 			for y in [0..self.width[ do
 				var pixel = row[y]
-				var red = pixel.rshift(16)
-				var green = pixel.bin_and(0x00FF00).rshift(8)
+				var red = pixel >> 16
+				var green = pixel.bin_and(0x00FF00) >> 8
 				var blue = pixel.bin_and(0x000000FF)
 				var lum = (0.2126 * red.to_f + 0.7152 * green.to_f + 0.0722 * blue.to_f).to_i
 				pixel = lum * 256 * 256 + lum * 256 + lum

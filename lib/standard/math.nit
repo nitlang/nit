@@ -116,14 +116,14 @@ redef class Int
 		if o == 0 then return self
 		if self.bin_and(1) == 0 then
 			if o.bin_and(1) == 1 then
-				return self.rshift(1).gcd(o)
+				return (self >> 1).gcd(o)
 			else
-				return self.rshift(1).gcd(o.rshift(1)).lshift(1)
+				return (self >> 1).gcd(o >> 1) << 1
 			end
 		end
-		if o.bin_and(1) == 0 then return self.gcd(o.rshift(1))
-		if self > o then return (self - o).rshift(1).gcd(o)
-		return (o - self).rshift(1).gcd(self)
+		if o & 1 == 0 then return self.gcd(o >> 1)
+		if self > o then return ((self - o) >> 1).gcd(o)
+		return ((o - self) >> 1).gcd(self)
 	end
 
 	# Is `self` even ?

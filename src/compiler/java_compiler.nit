@@ -1588,10 +1588,10 @@ redef class AMethPropdef
 			else if pname == "%" then
 				v.ret(v.new_expr("{arguments[0]} % {arguments[1]}", ret.as(not null)))
 				return true
-			else if pname == "lshift" then
+			else if pname == "<<" then
 				v.ret(v.new_expr("{arguments[0]} << {arguments[1]}", ret.as(not null)))
 				return true
-			else if pname == "rshift" then
+			else if pname == ">>" then
 				v.ret(v.new_expr("{arguments[0]} >> {arguments[1]}", ret.as(not null)))
 				return true
 			else if pname == "==" then
@@ -1692,10 +1692,10 @@ redef class AMethPropdef
 			else if pname == "%" then
 				v.ret(v.new_expr("(byte)({arguments[0]} % {arguments[1]})", ret.as(not null)))
 				return true
-			else if pname == "lshift" then
+			else if pname == "<<" then
 				v.ret(v.new_expr("(byte)({arguments[0]} << {arguments[1]})", ret.as(not null)))
 				return true
-			else if pname == "rshift" then
+			else if pname == ">>" then
 				v.ret(v.new_expr("(byte)({arguments[0]} >> {arguments[1]})", ret.as(not null)))
 				return true
 			else if pname == "==" then
