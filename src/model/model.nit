@@ -209,6 +209,21 @@ redef class MModule
 	# The primitive type `Byte`
 	var byte_type: MClassType = self.get_primitive_class("Byte").mclass_type is lazy
 
+	# The primitive type `Int8`
+	var int8_type: MClassType = self.get_primitive_class("Int8").mclass_type is lazy
+
+	# The primitive type `Int16`
+	var int16_type: MClassType = self.get_primitive_class("Int16").mclass_type is lazy
+
+	# The primitive type `UInt16`
+	var uint16_type: MClassType = self.get_primitive_class("UInt16").mclass_type is lazy
+
+	# The primitive type `Int32`
+	var int32_type: MClassType = self.get_primitive_class("Int32").mclass_type is lazy
+
+	# The primitive type `UInt32`
+	var uint32_type: MClassType = self.get_primitive_class("UInt32").mclass_type is lazy
+
 	# The primitive type `Char`
 	var char_type: MClassType = self.get_primitive_class("Char").mclass_type is lazy
 
