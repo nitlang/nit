@@ -1586,7 +1586,7 @@ redef class ACallExpr
 			v.addt
 		end
 
-		v.visit n_id
+		v.visit n_qid
 
 		if not n_args.n_exprs.is_empty then
 			if is_stmt and n_args.n_exprs.length == 1 then
@@ -1607,7 +1607,7 @@ end
 redef class ACallAssignExpr
 	redef fun accept_pretty_printer(v) do
 		v.visit_recv n_expr
-		v.visit n_id
+		v.visit n_qid
 
 		if not n_args.n_exprs.is_empty then
 			v.consume "("
@@ -1625,7 +1625,7 @@ end
 redef class ACallReassignExpr
 	redef fun accept_pretty_printer(v) do
 		v.visit_recv n_expr
-		v.visit n_id
+		v.visit n_qid
 
 		if not n_args.n_exprs.is_empty then
 			v.consume "("
@@ -1727,7 +1727,7 @@ redef class ANewExpr
 		v.adds
 		v.visit n_type
 
-		if n_id != null then
+		if n_qid != null then
 			v.consume "."
 
 			if not can_inline then
@@ -1737,7 +1737,7 @@ redef class ANewExpr
 				v.indent -= 1
 			end
 
-			v.visit n_id
+			v.visit n_qid
 		end
 
 		v.visit_args n_args.n_exprs

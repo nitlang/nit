@@ -294,7 +294,8 @@ redef class ACallExpr
 	do
 		self._n_expr = recv
 		_n_args = new AListExprs
-		_n_id = new TId
+		_n_qid = new AQid
+		_n_qid.n_id = new TId
 		if args != null then
 			self.n_args.n_exprs.add_all(args)
 		end

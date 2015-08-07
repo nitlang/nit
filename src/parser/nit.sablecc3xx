@@ -448,7 +448,7 @@ stmt~withelse~noexpr~nopar {-> expr}
 	| {for} for~withelse {-> for~withelse.expr}
 	| {with} with~withelse {-> with~withelse.expr}
 	| {assert} assert~withelse {-> assert~withelse.expr}
-!noexpr	| {call} recv qid args_nopar {-> New expr.call(recv.expr, qid.id, args_nopar.exprs)}
+!noexpr	| {call} recv qid args_nopar {-> New expr.call(recv.expr, qid, args_nopar.exprs)}
 !noexpr	| {super} qualified_o kwsuper args_nopar {-> New expr.super(qualified_o.qualified, kwsuper, args_nopar.exprs)}
 !noexpr	| {init} recv qualified? kwinit args_nopar {-> New expr.init(recv.expr, kwinit, args_nopar.exprs)}
 	| {debug_type_is} kwdebug kwtype type column expr {-> New expr.debug_type(kwdebug, kwtype, expr.expr, type) }
@@ -463,10 +463,10 @@ vardecl{-> expr}
 
 assignment~nopar {-> expr}
 	= {attr} recv~nopar qualified_o attrid assign expr {-> New expr.attr_assign(recv~nopar.expr, attrid, assign, expr)}
-	| {call} recv~nopar qid args assign expr {-> New expr.call_assign(recv~nopar.expr, qid.id, args.exprs, assign,  expr)}
+	| {call} recv~nopar qid args assign expr {-> New expr.call_assign(recv~nopar.expr, qid, args.exprs, assign,  expr)}
 	| {bra} expr_atom~nopar braargs assign expr {-> New expr.bra_assign(expr_atom~nopar.expr, braargs.exprs, assign,  expr)}
 	| {attr_re} recv~nopar qualified_o attrid assign_op expr {-> New expr.attr_reassign(recv~nopar.expr, attrid, assign_op,  expr)}
-	| {call_re} recv~nopar qid args assign_op expr {-> New expr.call_reassign(recv~nopar.expr, qid.id, args.exprs, assign_op,  expr)}
+	| {call_re} recv~nopar qid args assign_op expr {-> New expr.call_reassign(recv~nopar.expr, qid, args.exprs, assign_op,  expr)}
 	| {bra_re} expr_atom~nopar braargs assign_op expr {-> New expr.bra_reassign(expr_atom~nopar.expr, braargs.exprs, assign_op,  expr)}
 	;
 assign_op
@@ -619,11 +619,11 @@ expr_new~nopar~nobra {-> expr}
 expr_atom~nopar~nobra {-> expr}
 	= expr_single~nopar~nobra {-> expr_single~nopar~nobra.expr}
 	| {attr} recv~nopar~nobra qualified_o attrid {-> New expr.attr(recv~nopar~nobra.expr, attrid)}
-	| {call} recv~nopar~nobra qid args {-> New expr.call(recv~nopar~nobra.expr, qid.id, args.exprs)}
+	| {call} recv~nopar~nobra qid args {-> New expr.call(recv~nopar~nobra.expr, qid, args.exprs)}
 	| {super} qualified_o kwsuper args {-> New expr.super(qualified_o.qualified, kwsuper, args.exprs)}
 	| {init} recv~nopar~nobra kwinit args {-> New expr.init(recv~nopar~nobra.expr, kwinit, args.exprs)}
 !nobra	| {bra} expr_atom~nopar braargs {-> New expr.bra(expr_atom~nopar.expr, braargs.exprs)}
-	| {new} kwnew no type~nobra_nopar dot [n2]:no qid args {-> New expr.new(kwnew, type~nobra_nopar.type, qid.id, args.exprs)}
+	| {new} kwnew no type~nobra_nopar dot [n2]:no qid args {-> New expr.new(kwnew, type~nobra_nopar.type, qid, args.exprs)}
         | {as_cast} expr_atom~nopar~nobra dot no kwas [n2]:no opar [n3]:no type [n4]:no cpar {-> New expr.as_cast(expr_atom~nopar~nobra.expr, kwas, opar, type, cpar)}
         | {as_notnull} expr_atom~nopar~nobra dot no kwas [n2]:no opar [n3]:no kwnot [n4]:no kwnull [n5]:no cpar {-> New expr.as_notnull(expr_atom~nopar~nobra.expr, kwas, opar, kwnot, kwnull, cpar)}
         | {as_notnull2}expr_atom~nopar~nobra dot no kwas [n2]:no kwnot [n4]:no kwnull {-> New expr.as_notnull(expr_atom~nopar~nobra.expr, kwas, Null, kwnot, kwnull, Null)}
@@ -813,8 +813,8 @@ qualified_o {-> qualified?}
 	= qualified {-> qualified}
 	| {null} {-> Null}
 	;
-qid {-> id}
-	= qualified? id {-> id}
+qid
+	= qualified? id
 	;
 qclassid {-> classid}
 	= qualified? classid {-> classid}
@@ -927,6 +927,10 @@ methid
 	| {braassign} obra cbra assign
 	;
 
+qid
+	= qualified? id
+	;
+
 signature = opar? [params]:param* cpar? type?;
 
 param	= id type? dotdotdot? annotations?
@@ -980,13 +984,13 @@ expr	= {block} expr* kwend?
 	| {uminus} [op]:minus expr
 	| {uplus} [op]:plus expr
 	| {utilde} [op]:tilde expr
-	| {new} kwnew type id? [args]:exprs
+	| {new} kwnew type qid? [args]:exprs
 	| {attr} expr [id]:attrid 
 	| {attr_assign} expr [id]:attrid assign [value]:expr 
 	| {attr_reassign} expr [id]:attrid assign_op [value]:expr 
-	| {call} expr id [args]:exprs
-	| {call_assign} expr id [args]:exprs assign [value]:expr
-	| {call_reassign} expr id [args]:exprs assign_op [value]:expr 
+	| {call} expr qid [args]:exprs
+	| {call_assign} expr qid [args]:exprs assign [value]:expr
+	| {call_reassign} expr qid [args]:exprs assign_op [value]:expr
 	| {super} qualified? kwsuper [args]:exprs
 	| {init} expr kwinit [args]:exprs 
 	| {bra} expr [args]:exprs

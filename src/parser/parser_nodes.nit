@@ -1648,6 +1648,16 @@ class ABraassignMethid
 	var n_assign: TAssign is writable, noinit
 end
 
+# A potentially qualified simple identifier `foo::bar::baz`
+class AQid
+	super Prod
+	# The qualifier, if any
+	var n_qualified: nullable AQualified = null is writable
+
+	# The final identifier
+	var n_id: TId is writable, noinit
+end
+
 # A signature in a method definition. eg `(x,y:X,z:Z):T`
 class ASignature
 	super Prod
@@ -2228,7 +2238,7 @@ class ANewExpr
 	var n_type: AType is writable, noinit
 
 	# The name of the named-constructor, if any
-	var n_id: nullable TId = null is writable
+	var n_qid: nullable AQid = null is writable
 
 	# The arguments of the `new`
 	var n_args: AExprs is writable, noinit
@@ -2262,7 +2272,7 @@ abstract class ACallFormExpr
 	super ASendExpr
 
 	# The name of the method
-	var n_id: TId is writable, noinit
+	var n_qid: AQid is writable, noinit
 
 	# The arguments of the call
 	var n_args: AExprs is writable, noinit
