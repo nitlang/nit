@@ -260,7 +260,7 @@ function process_result()
 		esac
 	done
 	OLD=`echo "$OLD" | sed -e 's/   */ /g' -e 's/^ //' -e 's/ $//'`
-	grep 'NOT YET IMPLEMENTED' "$outdir/$pattern.res" >/dev/null
+	istodo  "$outdir/$pattern.res"
 	NYI="$?"
 	if [ -n "$SAV" ]; then
 		if [ -n "$OLD" ]; then
@@ -398,6 +398,20 @@ skip_cc()
 		local f="$savdir/cc.skip"
 		test -f "$f" || continue
 		if echo "$1" | grep -f "$f" >/dev/null 2>&1; then
+			return 0
+		fi
+	done
+	return 1
+}
+
+# Check that the resfile ($1) matches some magic strings in `todo` files.
+istodo()
+{
+	test "$no" = true && return 1
+	for savdir in $savdirs .; do
+		local f="$savdir/todo"
+		test -f "$f" || continue
+		if grep -f "$f" "$1" >/dev/null 2>&1; then
 			return 0
 		fi
 	done

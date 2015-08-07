@@ -154,11 +154,14 @@ It is a failure, and analogous to the standard `fail`.
 
 `[todo] out/zzz_test_todo.res -> not yet implemented`
 
-The produced result file contains the magic string "NOT YET IMPLEMENTED".
+The produced result file contains a magic string, like `NOT YET IMPLEMENTED`.
 Those are considered the same as expected errors (like a fixme)
 It is a success.
 
-Some engines, libraries or program just print this to simplify the management of tests.
+The magic strings are listed in `todo` files in the root and `sav` directories.
+They are used by engines, libraries or program just print this to simplify the management of tests.
+
+Magic strings are used with `grep -f`, so each line is a pattern that is searched within the res files.
 
 ### Skipped
 
