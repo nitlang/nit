@@ -2189,7 +2189,7 @@ class AAmpExpr
 end
 
 # A unary operation on a method
-class AUnaryopExpr
+abstract class AUnaryopExpr
 	super ASendExpr
 
 	# The operator
