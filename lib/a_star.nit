@@ -316,7 +316,7 @@ class AStarPath[N]
 end
 
 # Context related to an evocation of pathfinding
-class PathContext
+abstract class PathContext
 	serialize
 
 	# Type of the nodes in `graph`
@@ -400,7 +400,7 @@ class WeightedLink
 end
 
 # Advanced path conditions with customizable accept states
-class TargetCondition[N: Node]
+abstract class TargetCondition[N: Node]
 	serialize
 
 	# Should the pathfinding accept `node` as a goal?

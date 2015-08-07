@@ -51,7 +51,7 @@ import events
 import nitcorn
 
 # A nitcorn listener for Github hooks.
-class HookListener
+abstract class HookListener
 
 	# Api client used to perform Github API requests.
 	var api: GithubAPI

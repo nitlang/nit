@@ -25,14 +25,14 @@ module bucketed_game is serialize
 import serialization
 
 # Something acting on the game
-class Turnable[G: Game]
+abstract class Turnable[G: Game]
 
 	# Execute `turn` for this instance.
 	fun do_turn(turn: GameTurn[G]) is abstract
 end
 
 # Something acting on the game from time to time
-class Bucketable[G: Game]
+abstract class Bucketable[G: Game]
 	super Turnable[G]
 
 	private var act_at: nullable Int = null

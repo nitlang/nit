@@ -21,7 +21,7 @@ module image_set
 import assets
 
 # A set of images, look for sub-classes in projects using svg_to_png_and_nit
-class ImageSet
+abstract class ImageSet
 
 	# Load images to fill this image set
 	fun load_all(app: App) is abstract
