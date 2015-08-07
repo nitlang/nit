@@ -71,7 +71,7 @@ redef class Prod
 	# var ast = (new ToolContext).parse_something(text)
 	# assert ast isa AExpr
 	# ast.parentize_tokens
-	# assert ast.to_xml.write_to_string == """<ACallReassignExpr><TId>y</TId> <APlusAssignOp><TPluseq>+=</TPluseq></APlusAssignOp> <ACallExpr><TId>foo</TId></ACallExpr></ACallReassignExpr>"""
+	# assert ast.to_xml.write_to_string == """<ACallReassignExpr><AQid><TId>y</TId></AQid> <APlusAssignOp><TPluseq>+=</TPluseq></APlusAssignOp> <ACallExpr><AQid><TId>foo</TId></AQid></ACallExpr></ACallReassignExpr>"""
 	# ~~~
 	fun to_xml: HTMLTag
 	do
