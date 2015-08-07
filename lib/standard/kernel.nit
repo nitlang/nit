@@ -623,8 +623,8 @@ universal Byte
 
 	# On an Byte, unary minus will return `(256 - self) % 256`
 	#
-	#     assert -(1.to_b) == 0xFF.to_b
-	#     assert -(0.to_b) == 0x00.to_b
+	#     assert -1u8 == 0xFFu8
+	#     assert -0u8 == 0x00u8
 	redef fun - is intern
 	redef fun -(i) is intern
 	redef fun *(i) is intern
@@ -634,8 +634,8 @@ universal Byte
 	#
 	# Finds the remainder of division of `self` by `i`.
 	#
-	#     assert 5.to_b % 2.to_b		== 1.to_b
-	#     assert 10.to_b % 2.to_b		== 0.to_b
+	#     assert 5u8 % 2u8		== 1u8
+	#     assert 10u8 % 2u8		== 0u8
 	fun %(i: Byte): Byte is intern
 
 	redef fun zero do return 0.to_b
