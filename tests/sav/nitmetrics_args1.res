@@ -275,41 +275,41 @@ Distribution of direct smallers
   <=8: sub-population=1 (14.28%); cumulated value=6 (100.00%)
 --- AST Metrics ---
 ## All nodes of the AST
- population: 50
+ population: 51
  minimum value: 1
  maximum value: 40
- total value: 270
- average value: 5.40
+ total value: 289
+ average value: 5.66
  distribution:
-  <=1: sub-population=16 (32.00%); cumulated value=16 (5.92%)
-  <=2: sub-population=5 (10.00%); cumulated value=10 (3.70%)
-  <=4: sub-population=9 (18.00%); cumulated value=28 (10.37%)
-  <=8: sub-population=12 (24.00%); cumulated value=76 (28.14%)
-  <=16: sub-population=4 (8.00%); cumulated value=44 (16.29%)
-  <=32: sub-population=3 (6.00%); cumulated value=56 (20.74%)
-  <=64: sub-population=1 (2.00%); cumulated value=40 (14.81%)
+  <=1: sub-population=16 (31.37%); cumulated value=16 (5.53%)
+  <=2: sub-population=5 (9.80%); cumulated value=10 (3.46%)
+  <=4: sub-population=9 (17.64%); cumulated value=28 (9.68%)
+  <=8: sub-population=12 (23.52%); cumulated value=76 (26.29%)
+  <=16: sub-population=4 (7.84%); cumulated value=44 (15.22%)
+  <=32: sub-population=4 (7.84%); cumulated value=75 (25.95%)
+  <=64: sub-population=1 (1.96%); cumulated value=40 (13.84%)
  list:
-  TId: 40 (14.81%)
-  APublicVisibility: 19 (7.03%)
-  AListExprs: 19 (7.03%)
-  ACallExpr: 18 (6.66%)
-  TClassid: 15 (5.55%)
-  TInteger: 10 (3.70%)
-  AIntegerExpr: 10 (3.70%)
-  AType: 9 (3.33%)
-  TKwend: 8 (2.96%)
-  ASignature: 8 (2.96%)
+  TId: 40 (13.84%)
+  APublicVisibility: 19 (6.57%)
+  AQid: 19 (6.57%)
+  AListExprs: 19 (6.57%)
+  ACallExpr: 18 (6.22%)
+  TClassid: 15 (5.19%)
+  TInteger: 10 (3.46%)
+  AIntegerExpr: 10 (3.46%)
+  AType: 9 (3.11%)
+  TKwend: 8 (2.76%)
   ...
-  ASelfExpr: 1 (0.37%)
-  AAnnotations: 1 (0.37%)
-  ACallAssignExpr: 1 (0.37%)
-  TKwreturn: 1 (0.37%)
-  AInterfaceClasskind: 1 (0.37%)
-  TKwinterface: 1 (0.37%)
-  ANoImport: 1 (0.37%)
-  AMainMethPropdef: 1 (0.37%)
-  AMainClassdef: 1 (0.37%)
-  TKwimport: 1 (0.37%)
+  ACallAssignExpr: 1 (0.34%)
+  AAnnotations: 1 (0.34%)
+  TKwreturn: 1 (0.34%)
+  AReturnExpr: 1 (0.34%)
+  AInterfaceClasskind: 1 (0.34%)
+  TKwinterface: 1 (0.34%)
+  ANoImport: 1 (0.34%)
+  AMainMethPropdef: 1 (0.34%)
+  AMainClassdef: 1 (0.34%)
+  TKwimport: 1 (0.34%)
 ## All identifiers of the AST
  population: 20
  minimum value: 1
