@@ -213,15 +213,15 @@ class HD44780
 	do
 		var fs = flag_function_set
 		if bits == 8 then
-			fs = fs.bin_or(16)
+			fs = fs | 16
 		else if bits != 4 then abort
 
 		if lines == 2 then
-			fs = fs.bin_or(8)
+			fs = fs | 8
 		else if lines != 1 then abort
 
 		if dots_wide == 10 then
-			fs = fs.bin_or(4)
+			fs = fs | 4
 		else if dots_wide != 8 then abort
 
 		write(true, fs)
@@ -231,17 +231,11 @@ class HD44780
 	do
 		var fs = flag_display_control
 
-		if on then
-			fs = fs.bin_or(flag_display_on)
-		else fs = fs.bin_or(flag_display_off)
+		fs |= if on then flag_display_on else flag_display_off
 
-		if cursor then
-			fs = fs.bin_or(flag_cursor_on)
-		else fs = fs.bin_or(flag_cursor_off)
+		fs |= if cursor then flag_cursor_on else flag_cursor_off
 
-		if blink then
-			fs = fs.bin_or(flag_blink_on)
-		else fs = fs.bin_or(flag_blink_off)
+		fs |= if blink then flag_blink_on else flag_blink_off
 
 		write(true, fs)
 	end
@@ -250,13 +244,9 @@ class HD44780
 	do
 		var fs = flag_entry_mode_set
 
-		if left then
-			fs = fs.bin_or(flag_entry_left)
-		else fs = fs.bin_or(flag_entry_right)
+		fs |= if left then flag_entry_left else flag_entry_right
 
-		if incr then
-			fs = fs.bin_or(flag_entry_shift_increment)
-		else fs = fs.bin_or(flag_entry_shift_decrement)
+		fs |= if incr then flag_entry_shift_increment else flag_entry_shift_decrement
 
 		write(true, fs)
 	end
@@ -349,7 +339,7 @@ class HD44780
 		var lb = once [1,2,4,8]
 		for i in [0..4[ do
 			var b = lb[i]
-			var r = b.bin_and(v) != 0
+			var r = b & v != 0
 			var d = ds[i]
 			d.write(r)
 		end
@@ -384,7 +374,7 @@ class HD44780
 		var hb = once [16,32,64,128]
 		for i in [0..4[ do
 			var b = hb[i]
-			var r = b.bin_and(cmd) != 0
+			var r = b & cmd != 0
 			var d = ds[i]
 			d.write(r)
 		end
@@ -403,7 +393,7 @@ class HD44780
 		var lb = once [1,2,4,8]
 		for i in [0..4[ do
 			var b = lb[i]
-			var r = b.bin_and(cmd) != 0
+			var r = b & cmd != 0
 			var d = ds[i]
 			d.write(r)
 		end
