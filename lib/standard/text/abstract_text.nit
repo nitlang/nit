@@ -392,6 +392,16 @@ abstract class Text
 		var trval = trunk.to_i
 		if ext == "u8" then
 			return trval.to_b
+		else if ext == "i8" then
+			return trval.to_i8
+		else if ext == "i16" then
+			return trval.to_i16
+		else if ext == "u16" then
+			return trval.to_u16
+		else if ext == "i32" then
+			return trval.to_i32
+		else if ext == "u32" then
+			return trval.to_u32
 		else if ext == "" then
 			return trval
 		else
