@@ -22,5 +22,8 @@ pngs:
 	mkdir -p assets/images
 	../mnit_dino/tools/svg-to-pngs art/drawing.svg assets/images
 
+check-android:
+	./check-android.sh
+
 clean:
 	rm -rf bin res
