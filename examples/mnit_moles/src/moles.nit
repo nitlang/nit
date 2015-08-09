@@ -210,7 +210,8 @@ end
 
 redef class App
 
-	var screen: nullable Screen = null
+	# Main play screen
+	var screen = new Screen
 
 	# Image set generate by inkscape_tools
 	var assets = new DrawingImages
@@ -229,33 +230,23 @@ redef class App
 		super
 
 		maximum_fps = 50
-		init_screen_and_game
 	end
-
-	fun init_screen_and_game do screen = new Screen
 
 	redef fun frame_core(display)
 	do
-		var screen = self.screen
-		if screen != null then
-			screen.game.do_turn
-			screen.do_frame(display)
-		end
+		screen.game.do_turn
+		screen.do_frame(display)
 	end
 
 	redef fun input(ie)
 	do
-		var screen = screen
 		if ie isa QuitEvent or
 			(ie isa KeyEvent and ie.to_c == 'q') then
 			quit = true
 			return true
-		else if screen != null then
-			return screen.input(ie)
-		else
-			print "unknown input: {ie}"
-			return false
 		end
+
+		return screen.input(ie)
 	end
 end
 

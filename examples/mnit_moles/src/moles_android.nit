@@ -27,7 +27,7 @@ redef class Game
 end
 
 redef class App
-	redef fun init_screen_and_game
+	redef fun on_start
 	do
 		# We use as a reference the Moto X
 		var tw = 720
