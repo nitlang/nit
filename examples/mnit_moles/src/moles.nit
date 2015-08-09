@@ -26,29 +26,26 @@ import mnit
 
 import drawing
 
+# A hole with a possible mole, or a trap in it
 class Hole
 	var game: Game
 
-	# Center of the hole
+	# Horizontal center of the hole
 	var x: Int
+
+	# Vertical center of the hole
 	var y: Int
 
 	# Half width of the hit box
 	var dx = 200.0
-	# Heigth of the hit box
+
+	# Height of the hit box
 	var dy = 800.0
 
 	# state
 	var up = false
 	var hitted = false
 	var trap = false
-
-	init (g: Game, x, y: Int)
-	do
-		game = g
-		self.x = x
-		self.y = y
-	end
 
 	fun do_turn
 	do
@@ -80,6 +77,7 @@ class Hole
 		end
 	end
 
+	# Does this hole intercepts `event`?
 	fun intercepts(event: PointerEvent): Bool
 	do
 		if not up or hitted then return false
@@ -92,6 +90,7 @@ class Hole
 			ey > y - dy and ey < y
 	end
 
+	# Hit this hole and the mole in this hole
 	fun hit
 	do
 		if hitted then return
@@ -108,20 +107,31 @@ class Hole
 end
 
 class Game
-	var holes = new Array[Hole].with_capacity(4)
+	# All holes, filled or not
+	var holes = new Array[Hole]
 
 	# rule / const
 	var modifier_half_life = 1000.0
+
+	# Row count
 	fun rows: Int do return 4
+
+	# Columns count
 	fun columns: Int do return 5
 
-	# state
+	# Score
 	var points = 0
+
+	# Acceleration
 	var speed_modifier = 1.0
 
-	# configs
+	# Vertical offset between rows
 	var dist_between_rows = 512
+
+	# Horizontal offset between columns
 	var dist_between_columns = 600
+
+	# Global accumulation control, applied to `speed_modifier`
 	fun global_speed_modifier: Float do return 2.0
 
 	init
@@ -144,6 +154,7 @@ end
 
 # Where all the UI stuff is done
 class Screen
+	# The running game
 	var game = new Game
 
 	fun do_frame(display: Display)
@@ -250,6 +261,7 @@ redef class App
 	end
 end
 
+# Main zoom
 fun display_scale: Float do return 1.0
 
 # Depends on the hole center in the uo image
