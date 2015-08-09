@@ -245,7 +245,7 @@ class Screen
 	fun input(event: InputEvent): Bool
 	do
 		if event isa PointerEvent then
-			for hole in game.holes do
+			for hole in game.holes.reverse_iterator do
 				if hole.intercepts(event) then
 					var hole_content = hole.content
 					if hole_content != null then hole_content.hit(game, hole, event)
