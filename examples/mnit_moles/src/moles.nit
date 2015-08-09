@@ -24,6 +24,8 @@ end
 
 import mnit
 
+import drawing
+
 class Hole
 	var game: Game
 
@@ -142,68 +144,45 @@ end
 
 # Where all the UI stuff is done
 class Screen
-	var empty_img: Image
-	var up_img: Image
-	var hit_img: Image
-	var trap_img: Image
-	var numbers: NumberImages
-
-	var sign_warning: Image
-	var sign_cute: Image
-	var sign_hits: Image
-
 	var game = new Game
-
-	init (app: App)
-	do
-		empty_img = app.load_image("images/empty.png")
-		up_img = app.load_image("images/up.png")
-		hit_img = app.load_image("images/hit.png")
-		trap_img = app.load_image("images/trap.png")
-		numbers = app.load_numbers("images/#.png")
-
-		sign_warning = app.load_image("images/sign-warning.png")
-		sign_cute = app.load_image("images/sign-cute.png")
-		sign_hits = app.load_image("images/sign-hits.png")
-	end
 
 	fun do_frame(display: Display)
 	do
 		display.clear(0.1, 0.65, 0.2)
 
-		sign_warning.scale = display_scale
-		sign_cute.scale = display_scale
-		sign_hits.scale = display_scale
-		for img in numbers.imgs do img.scale = display_scale
+		app.assets.sign_warning.scale = display_scale
+		app.assets.sign_cute.scale = display_scale
+		app.assets.sign_hits.scale = display_scale
+		for img in app.numbers.imgs do img.scale = display_scale
 
-		display.blit(sign_warning, (-120.0*display_scale).to_i, (-235.0*display_scale).to_i)
-		display.blit(sign_cute, (540.0*display_scale).to_i, (-180.0*display_scale).to_i)
-		display.blit(sign_hits, (1340.0*display_scale).to_i, (55.0*display_scale).to_i)
-		display.blit_number(numbers, game.points, (1460.0*display_scale).to_i, (270.0*display_scale).to_i)
+		display.blit(app.assets.sign_warning, (0.0*display_scale).to_i, (0.0*display_scale).to_i)
+		display.blit(app.assets.sign_cute, (740.0*display_scale).to_i, (0.0*display_scale).to_i)
+		display.blit(app.assets.sign_hits, (1640.0*display_scale).to_i, (55.0*display_scale).to_i)
+		display.blit_number(app.numbers, game.points, (1720.0*display_scale).to_i, (170.0*display_scale).to_i)
 
 		for hole in game.holes do
 			# Hole
-			var img = empty_img
-			var dx = 512.0*display_scale
-			var dy = 512.0*display_scale
+			var img = app.assets.empty
+			var dx = 300.0*display_scale
+			var dy = 256.0*display_scale
 			img.scale = display_scale
 			display.blit(img, hole.x-dx.to_i+display_offset_x, hole.y-dy.to_i+display_offset_y)
 
 			# Mole
 			var empty = false
 			if hole.hitted then
-				img = hit_img
-				dx = 256.0*display_scale
-				dy = 417.0*display_scale
+				img = app.assets.hit
+				dx = 250.0*display_scale
+				dy = 512.0*display_scale
 			else if hole.up then
 				if hole.trap then
-					img = trap_img
-					dx = 512.0*display_scale
+					img = app.assets.trap
+					dx = 212.0*display_scale
 					dy = 830.0*display_scale
 				else
-					img = up_img
-					dx = 512.0*display_scale
-					dy = 830.0*display_scale
+					img = app.assets.up
+					dx = 212.0*display_scale
+					dy = 820.0*display_scale
 				end
 			else empty = true
 
@@ -233,6 +212,18 @@ redef class App
 
 	var screen: nullable Screen = null
 
+	# Image set generate by inkscape_tools
+	var assets = new DrawingImages
+
+	# Numbers to display the score
+	var numbers = new NumberImages(assets.n)
+
+	redef fun on_start
+	do
+		super
+		assets.load_all self
+	end
+
 	redef fun on_create
 	do
 		super
@@ -241,7 +232,7 @@ redef class App
 		init_screen_and_game
 	end
 
-	fun init_screen_and_game do screen = new Screen(self)
+	fun init_screen_and_game do screen = new Screen
 
 	redef fun frame_core(display)
 	do

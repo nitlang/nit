@@ -20,7 +20,7 @@ android-install: android
 
 pngs:
 	mkdir -p assets/images
-	../mnit_dino/tools/svg-to-pngs art/drawing.svg assets/images
+	../../contrib/inkscape_tools/bin/svg_to_png_and_nit --src src/ --scale 2.0 art/drawing.svg
 
 check-android:
 	./check-android.sh
