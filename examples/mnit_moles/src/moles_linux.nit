@@ -20,5 +20,6 @@ import mnit_linux
 
 import moles
 import effects
+import more_traps
 
 redef fun display_scale do return 0.25

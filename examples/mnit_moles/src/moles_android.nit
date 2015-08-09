@@ -21,6 +21,7 @@ import android::portrait
 
 import moles
 import effects
+import more_traps
 
 redef class Game
 	redef fun columns do return 3

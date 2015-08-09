@@ -211,7 +211,8 @@ class Game
 		end
 	end
 
-	fun do_turn do
+	fun do_turn
+	do
 		for hole in holes do hole.do_turn
 
 		speed_modifier = modifier_half_life / (modifier_half_life+points.to_f) * global_speed_modifier
