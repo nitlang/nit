@@ -42,30 +42,25 @@ class Hole
 	# Height of the hit box
 	var dy = 800.0
 
-	# state
-	var up = false
-	var hitted = false
-	var trap = false
+	# Content (and state) of this hole
+	var content: nullable HoleContent = null
 
 	fun do_turn
 	do
-		if up then
-			if hitted then
+		var content = content
+		if content != null then
+			if content == game.down then
 				if (20.0*game.speed_modifier).to_i.rand == 0 then
 					# dead / hide
-					hitted = false
-					up = false
+					self.content = null
 				end
 			else if (80.0*game.speed_modifier).to_i.rand == 0 then
 				# hide
-				up = false
+				self.content = null
 			end
 		else if (100.0*game.speed_modifier).to_i.rand == 0 then
-			# show up
-			up = true
-
 			# shot traps only at 50 points and up
-			trap = false
+			var trap = false
 			if game.points > 50 then
 
 				# After 50 points we have more and more traps until point 1000
@@ -74,13 +69,17 @@ class Hole
 
 				if d.rand < 100 then trap = true
 			end
+
+			if trap then
+				self.content = game.trap
+			else self.content = game.up
 		end
 	end
 
 	# Does this hole intercepts `event`?
 	fun intercepts(event: PointerEvent): Bool
 	do
-		if not up or hitted then return false
+		if content == null then return false
 
 		var dx = (dx*display_scale).to_i
 		var dy = (dy*display_scale).to_i
@@ -90,19 +89,74 @@ class Hole
 			ey > y - dy and ey < y
 	end
 
-	# Hit this hole and the mole in this hole
-	fun hit
+	# Draw this hole and content to `display`
+	fun draw(display: Display)
 	do
-		if hitted then return
+		# The hole itself
+		var img = app.assets.empty
+		var dx = 300.0*display_scale
+		var dy = 256.0*display_scale
+		img.scale = display_scale
+		display.blit(img, x-dx.to_i+display_offset_x, y-dy.to_i+display_offset_y)
 
-		if trap then
-			up = false
-			game.points -= 5
-			if game.points < 0 then game.points = 0
-		else
-			hitted = true
-			game.points += 1
+		# The mole in the hole, or other content
+		var content = self.content
+		if content != null then
+			content.draw(display, x, y)
 		end
+	end
+end
+
+# Content of a `Hole`
+class HoleContent
+	# Image
+	var img: Image
+
+	# Offset of the horizontal center of the hole
+	var dx: Float
+
+	# Offset of the vertical center of the hole
+	var dy: Float
+
+	# Hit this hole content
+	fun hit(game: Game, hole: Hole, event: PointerEvent) do end
+
+	# Draw this content to `display`
+	fun draw(display: Display, x, y: Int)
+	do
+		img.scale = display_scale
+		display.blit(img,
+			x-dx.to_i+display_offset_x,
+			y-dy.to_i+display_offset_y)
+	end
+end
+
+# A mole in a hole
+class Mole
+	super HoleContent
+
+	# Points value when hit
+	var value: Int
+
+	redef fun hit(game, hole, event)
+	do
+		game.points += value
+		hole.content = game.down
+	end
+end
+
+# A trap held out of a hole
+class Trap
+	super HoleContent
+
+	# Points penalty when hit
+	var penalty: Int
+
+	redef fun hit(game, hole, event)
+	do
+		game.points -= penalty
+		if game.points < 0 then game.points = 0
+		hole.content = null
 	end
 end
 
@@ -133,6 +187,15 @@ class Game
 
 	# Global accumulation control, applied to `speed_modifier`
 	fun global_speed_modifier: Float do return 2.0
+
+	# A mole, in a hole
+	var up = new Mole(app.assets.up, 212.0*display_scale, 820.0*display_scale, 1) is lazy
+
+	# A mole that was hit
+	var down = new HoleContent(app.assets.hit, 250.0*display_scale, 512.0*display_scale) is lazy
+
+	# A trap out of the hole
+	var trap = new Trap(app.assets.trap, 212.0*display_scale, 830.0*display_scale, 10) is lazy
 
 	init
 	do
@@ -172,35 +235,7 @@ class Screen
 		display.blit_number(app.numbers, game.points, (1720.0*display_scale).to_i, (170.0*display_scale).to_i)
 
 		for hole in game.holes do
-			# Hole
-			var img = app.assets.empty
-			var dx = 300.0*display_scale
-			var dy = 256.0*display_scale
-			img.scale = display_scale
-			display.blit(img, hole.x-dx.to_i+display_offset_x, hole.y-dy.to_i+display_offset_y)
-
-			# Mole
-			var empty = false
-			if hole.hitted then
-				img = app.assets.hit
-				dx = 250.0*display_scale
-				dy = 512.0*display_scale
-			else if hole.up then
-				if hole.trap then
-					img = app.assets.trap
-					dx = 212.0*display_scale
-					dy = 830.0*display_scale
-				else
-					img = app.assets.up
-					dx = 212.0*display_scale
-					dy = 820.0*display_scale
-				end
-			else empty = true
-
-			if not empty then
-				img.scale = display_scale
-				display.blit(img, hole.x-dx.to_i+display_offset_x, hole.y-dy.to_i+display_offset_y)
-			end
+			hole.draw display
 		end
 	end
 
@@ -209,7 +244,8 @@ class Screen
 		if event isa PointerEvent then
 			for hole in game.holes do
 				if hole.intercepts(event) then
-					if hole.up then hole.hit
+					var hole_content = hole.content
+					if hole_content != null then hole_content.hit(game, hole, event)
 					return true
 				end
 			end
