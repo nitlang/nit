@@ -59,21 +59,24 @@ class Hole
 				self.content = null
 			end
 		else if (100.0*game.speed_modifier).to_i.rand == 0 then
-			# shot traps only at 50 points and up
-			var trap = false
-			if game.points > 50 then
-
-				# After 50 points we have more and more traps until point 1000
-				var d = 1250-(game.points - 50)
-				if d < 200 then d = 200
-
-				if d.rand < 100 then trap = true
-			end
-
-			if trap then
-				self.content = game.trap
-			else self.content = game.up
+			self.content = to_pop
 		end
+	end
+
+	# Get next `HoleContent` to pop
+	fun to_pop: HoleContent
+	do
+		# show traps only at 10 points and up
+		if game.points > 10 then
+
+			# After 50 points we have more and more traps until point 1000
+			var d = 1250-(game.points - 50)
+			if d < 200 then d = 200
+
+			if d.rand < 100 then return game.trap
+		end
+
+		return game.up
 	end
 
 	# Does this hole intercepts `event`?
