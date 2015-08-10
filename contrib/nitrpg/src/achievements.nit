@@ -356,7 +356,7 @@ abstract class PlayerXCommits
 		if not event.action == "closed" then return
 		if not event.pull.merged then return
 		var player = event.pull.user.player(game)
-		if player.stats["commits"] == threshold then
+		if player.stats["commits"] >= threshold then
 			var a = new_achievement(game)
 			player.unlock_achievement(a, event)
 		end
