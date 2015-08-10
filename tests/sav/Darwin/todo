@@ -1,0 +1,5 @@
+fatal error: 'endian.h' file not found
+Error: package `glesv1_cm` unknown by `pkg-config`, make sure the development package is be installed
+Error: package `glesv2` unknown by `pkg-config`, make sure the development package is be installed
+fatal error: 'libintl.h' file not found
+ld: unknown option: -soname
