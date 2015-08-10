@@ -57,8 +57,8 @@ class RpgAction
 	# Returns the game with `name` or null if no game exists with this name.
 	fun load_game(name: String): nullable Game do
 		var repo = api.load_repo(name)
-		if api.was_error or repo == null then return null
-		var game = new Game(api, repo)
+		if repo == null then return null
+		var game = new Game.from_mongo(api, repo)
 		game.root_url = root_url
 		return game
 	end
@@ -66,13 +66,16 @@ class RpgAction
 	# Returns the list of saved games from NitRPG data.
 	fun load_games: Array[Game] do
 		var res = new Array[Game]
-		var rpgdir = "nitrpg_data"
-		if not rpgdir.file_exists then return res
-		for user in rpgdir.files do
-			for repo in "{rpgdir}/{user}".files do
-				var game = load_game("{user}/{repo}")
-				if game != null then res.add game
-			end
+		# TODO should be option
+		var mongo = new MongoClient("mongodb://localhost:27017")
+		var db = mongo.database("nitrpg")
+		for obj in db.collection("games").find_all(new JsonObject) do
+			var repo = api.load_repo(obj["name"].to_s)
+			assert repo != null
+			var game = new Game(api, repo)
+			game.from_json(obj)
+			game.root_url = root_url
+			res.add game
 		end
 		return res
 	end

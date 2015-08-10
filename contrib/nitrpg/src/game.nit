@@ -89,7 +89,8 @@ class Game
 	redef var collection_name = "games"
 
 	# Init the Game and try to load saved data.
-	init do
+	init from_mongo(api: GithubAPI, repo: Repo) do
+		init(api, repo)
 		var req = new JsonObject
 		req["name"] = repo.full_name
 		var res = db.collection("games").find(req)
