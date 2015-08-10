@@ -1838,7 +1838,7 @@ end
 
 # A markdown list line.
 # Mainly used to factorize code between ordered and unordered lists.
-class LineList
+abstract class LineList
 	super Line
 
 	redef fun process(v) do

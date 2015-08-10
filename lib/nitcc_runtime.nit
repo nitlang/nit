@@ -494,7 +494,7 @@ class Nodes[T: Node]
 end
 
 # A production with a specific, named and statically typed children
-class NProd
+abstract class NProd
 	super Node
 	redef var children: SequenceRead[nullable Node] = new NProdChildren(self)
 
