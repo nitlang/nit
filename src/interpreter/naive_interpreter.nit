@@ -216,6 +216,51 @@ class NaiveInterpreter
 		return instance
 	end
 
+	# Return the int8 instance associated with `val`.
+	fun int8_instance(val: Int8): Instance
+	do
+		var t = mainmodule.int8_type
+		var instance = new PrimitiveInstance[Int8](t, val)
+		init_instance_primitive(instance)
+		return instance
+	end
+
+	# Return the int16 instance associated with `val`.
+	fun int16_instance(val: Int16): Instance
+	do
+		var t = mainmodule.int16_type
+		var instance = new PrimitiveInstance[Int16](t, val)
+		init_instance_primitive(instance)
+		return instance
+	end
+
+	# Return the uint16 instance associated with `val`.
+	fun uint16_instance(val: UInt16): Instance
+	do
+		var t = mainmodule.uint16_type
+		var instance = new PrimitiveInstance[UInt16](t, val)
+		init_instance_primitive(instance)
+		return instance
+	end
+
+	# Return the int32 instance associated with `val`.
+	fun int32_instance(val: Int32): Instance
+	do
+		var t = mainmodule.int32_type
+		var instance = new PrimitiveInstance[Int32](t, val)
+		init_instance_primitive(instance)
+		return instance
+	end
+
+	# Return the uint32 instance associated with `val`.
+	fun uint32_instance(val: UInt32): Instance
+	do
+		var t = mainmodule.uint32_type
+		var instance = new PrimitiveInstance[UInt32](t, val)
+		init_instance_primitive(instance)
+		return instance
+	end
+
 	# Return the char instance associated with `val`.
 	fun char_instance(val: Char): Instance
 	do
@@ -656,6 +701,26 @@ abstract class Instance
 	# else aborts
 	fun to_b: Byte do abort
 
+	# Return the integer value if the instance is a int8.
+	# else aborts
+	fun to_i8: Int8 do abort
+
+	# Return the integer value if the instance is a int16.
+	# else aborts
+	fun to_i16: Int16 do abort
+
+	# Return the integer value if the instance is a uint16.
+	# else aborts
+	fun to_u16: UInt16 do abort
+
+	# Return the integer value if the instance is a int32.
+	# else aborts
+	fun to_i32: Int32 do abort
+
+	# Return the integer value if the instance is a uint32.
+	# else aborts
+	fun to_u32: UInt32 do abort
+
 	# The real value encapsulated if the instance is primitive.
 	# Else aborts.
 	fun val: nullable Object do abort
@@ -703,6 +768,16 @@ class PrimitiveInstance[E]
 	redef fun to_f do return val.as(Float)
 
 	redef fun to_b do return val.as(Byte)
+
+	redef fun to_i8 do return val.as(Int8)
+
+	redef fun to_i16 do return val.as(Int16)
+
+	redef fun to_u16 do return val.as(UInt16)
+
+	redef fun to_i32 do return val.as(Int32)
+
+	redef fun to_u32 do return val.as(UInt32)
 end
 
 # Information about local variables in a running method
@@ -907,6 +982,16 @@ redef class AMethPropdef
 				return v.int_instance(recvval << args[1].to_i)
 			else if pname == ">>" then
 				return v.int_instance(recvval >> args[1].to_i)
+			else if pname == "to_i8" then
+				return v.int8_instance(recvval.to_i8)
+			else if pname == "to_i16" then
+				return v.int16_instance(recvval.to_i16)
+			else if pname == "to_u16" then
+				return v.uint16_instance(recvval.to_u16)
+			else if pname == "to_i32" then
+				return v.int32_instance(recvval.to_i32)
+			else if pname == "to_u32" then
+				return v.uint32_instance(recvval.to_u32)
 			else if pname == "rand" then
 				var res = recvval.rand
 				return v.int_instance(res)
@@ -945,6 +1030,16 @@ redef class AMethPropdef
 				return v.byte_instance(recvval << args[1].to_i)
 			else if pname == ">>" then
 				return v.byte_instance(recvval >> args[1].to_i)
+			else if pname == "to_i8" then
+				return v.int8_instance(recvval.to_i8)
+			else if pname == "to_i16" then
+				return v.int16_instance(recvval.to_i16)
+			else if pname == "to_u16" then
+				return v.uint16_instance(recvval.to_u16)
+			else if pname == "to_i32" then
+				return v.int32_instance(recvval.to_i32)
+			else if pname == "to_u32" then
+				return v.uint32_instance(recvval.to_u32)
 			else if pname == "byte_to_s_len" then
 				return v.int_instance(recvval.to_s.length)
 			end
@@ -993,6 +1088,16 @@ redef class AMethPropdef
 				return v.int_instance(recv.to_i)
 			else if pname == "to_b" then
 				return v.byte_instance(recv.to_b)
+			else if pname == "to_i8" then
+				return v.int8_instance(recv.to_i8)
+			else if pname == "to_i16" then
+				return v.int16_instance(recv.to_i16)
+			else if pname == "to_u16" then
+				return v.uint16_instance(recv.to_u16)
+			else if pname == "to_i32" then
+				return v.int32_instance(recv.to_i32)
+			else if pname == "to_u32" then
+				return v.uint32_instance(recv.to_u32)
 			else if pname == "cos" then
 				return v.float_instance(args[0].to_f.cos)
 			else if pname == "sin" then
@@ -1072,6 +1177,271 @@ redef class AMethPropdef
 			else if pname == "copy_to" then
 				recvval.copy_to(0, args[2].to_i, args[1].val.as(Array[Instance]), 0)
 				return null
+			end
+		else if cname == "Int8" then
+			var recvval = args[0].to_i8
+			if pname == "unary -" then
+				return v.int8_instance(-recvval)
+			else if pname == "unary +" then
+				return args[0]
+			else if pname == "+" then
+				return v.int8_instance(recvval + args[1].to_i8)
+			else if pname == "-" then
+				return v.int8_instance(recvval - args[1].to_i8)
+			else if pname == "*" then
+				return v.int8_instance(recvval * args[1].to_i8)
+			else if pname == "%" then
+				return v.int8_instance(recvval % args[1].to_i8)
+			else if pname == "/" then
+				return v.int8_instance(recvval / args[1].to_i8)
+			else if pname == "<" then
+				return v.bool_instance(recvval < args[1].to_i8)
+			else if pname == ">" then
+				return v.bool_instance(recvval > args[1].to_i8)
+			else if pname == "<=" then
+				return v.bool_instance(recvval <= args[1].to_i8)
+			else if pname == ">=" then
+				return v.bool_instance(recvval >= args[1].to_i8)
+			else if pname == "<=>" then
+				return v.int_instance(recvval <=> args[1].to_i8)
+			else if pname == "to_f" then
+				return v.float_instance(recvval.to_f)
+			else if pname == "to_i" then
+				return v.int_instance(recvval.to_i)
+			else if pname == "to_b" then
+				return v.byte_instance(recvval.to_b)
+			else if pname == "to_i16" then
+				return v.int16_instance(recvval.to_i16)
+			else if pname == "to_u16" then
+				return v.uint16_instance(recvval.to_u16)
+			else if pname == "to_i32" then
+				return v.int32_instance(recvval.to_i32)
+			else if pname == "to_u32" then
+				return v.uint32_instance(recvval.to_u32)
+			else if pname == "<<" then
+				return v.int8_instance(recvval << (args[1].to_i))
+			else if pname == ">>" then
+				return v.int8_instance(recvval >> (args[1].to_i))
+			else if pname == "&" then
+				return v.int8_instance(recvval & args[1].to_i8)
+			else if pname == "|" then
+				return v.int8_instance(recvval | args[1].to_i8)
+			else if pname == "^" then
+				return v.int8_instance(recvval ^ args[1].to_i8)
+			else if pname == "unary ~" then
+				return v.int8_instance(~recvval)
+			end
+		else if cname == "Int16" then
+			var recvval = args[0].to_i16
+			if pname == "unary -" then
+				return v.int16_instance(-recvval)
+			else if pname == "unary +" then
+				return args[0]
+			else if pname == "+" then
+				return v.int16_instance(recvval + args[1].to_i16)
+			else if pname == "-" then
+				return v.int16_instance(recvval - args[1].to_i16)
+			else if pname == "*" then
+				return v.int16_instance(recvval * args[1].to_i16)
+			else if pname == "%" then
+				return v.int16_instance(recvval % args[1].to_i16)
+			else if pname == "/" then
+				return v.int16_instance(recvval / args[1].to_i16)
+			else if pname == "<" then
+				return v.bool_instance(recvval < args[1].to_i16)
+			else if pname == ">" then
+				return v.bool_instance(recvval > args[1].to_i16)
+			else if pname == "<=" then
+				return v.bool_instance(recvval <= args[1].to_i16)
+			else if pname == ">=" then
+				return v.bool_instance(recvval >= args[1].to_i16)
+			else if pname == "<=>" then
+				return v.int_instance(recvval <=> args[1].to_i16)
+			else if pname == "to_f" then
+				return v.float_instance(recvval.to_f)
+			else if pname == "to_i" then
+				return v.int_instance(recvval.to_i)
+			else if pname == "to_b" then
+				return v.byte_instance(recvval.to_b)
+			else if pname == "to_i8" then
+				return v.int8_instance(recvval.to_i8)
+			else if pname == "to_u16" then
+				return v.uint16_instance(recvval.to_u16)
+			else if pname == "to_i32" then
+				return v.int32_instance(recvval.to_i32)
+			else if pname == "to_u32" then
+				return v.uint32_instance(recvval.to_u32)
+			else if pname == "<<" then
+				return v.int16_instance(recvval << (args[1].to_i))
+			else if pname == ">>" then
+				return v.int16_instance(recvval >> (args[1].to_i))
+			else if pname == "&" then
+				return v.int16_instance(recvval & args[1].to_i16)
+			else if pname == "|" then
+				return v.int16_instance(recvval | args[1].to_i16)
+			else if pname == "^" then
+				return v.int16_instance(recvval ^ args[1].to_i16)
+			else if pname == "unary ~" then
+				return v.int16_instance(~recvval)
+			end
+		else if cname == "UInt16" then
+			var recvval = args[0].to_u16
+			if pname == "unary -" then
+				return v.uint16_instance(-recvval)
+			else if pname == "unary +" then
+				return args[0]
+			else if pname == "+" then
+				return v.uint16_instance(recvval + args[1].to_u16)
+			else if pname == "-" then
+				return v.uint16_instance(recvval - args[1].to_u16)
+			else if pname == "*" then
+				return v.uint16_instance(recvval * args[1].to_u16)
+			else if pname == "%" then
+				return v.uint16_instance(recvval % args[1].to_u16)
+			else if pname == "/" then
+				return v.uint16_instance(recvval / args[1].to_u16)
+			else if pname == "<" then
+				return v.bool_instance(recvval < args[1].to_u16)
+			else if pname == ">" then
+				return v.bool_instance(recvval > args[1].to_u16)
+			else if pname == "<=" then
+				return v.bool_instance(recvval <= args[1].to_u16)
+			else if pname == ">=" then
+				return v.bool_instance(recvval >= args[1].to_u16)
+			else if pname == "<=>" then
+				return v.int_instance(recvval <=> args[1].to_u16)
+			else if pname == "to_f" then
+				return v.float_instance(recvval.to_f)
+			else if pname == "to_i" then
+				return v.int_instance(recvval.to_i)
+			else if pname == "to_b" then
+				return v.byte_instance(recvval.to_b)
+			else if pname == "to_i8" then
+				return v.int8_instance(recvval.to_i8)
+			else if pname == "to_i16" then
+				return v.int16_instance(recvval.to_i16)
+			else if pname == "to_i32" then
+				return v.int32_instance(recvval.to_i32)
+			else if pname == "to_u32" then
+				return v.uint32_instance(recvval.to_u32)
+			else if pname == "<<" then
+				return v.uint16_instance(recvval << (args[1].to_i))
+			else if pname == ">>" then
+				return v.uint16_instance(recvval >> (args[1].to_i))
+			else if pname == "&" then
+				return v.uint16_instance(recvval & args[1].to_u16)
+			else if pname == "|" then
+				return v.uint16_instance(recvval | args[1].to_u16)
+			else if pname == "^" then
+				return v.uint16_instance(recvval ^ args[1].to_u16)
+			else if pname == "unary ~" then
+				return v.uint16_instance(~recvval)
+			end
+		else if cname == "Int32" then
+			var recvval = args[0].to_i32
+			if pname == "unary -" then
+				return v.int32_instance(-recvval)
+			else if pname == "unary +" then
+				return args[0]
+			else if pname == "+" then
+				return v.int32_instance(recvval + args[1].to_i32)
+			else if pname == "-" then
+				return v.int32_instance(recvval - args[1].to_i32)
+			else if pname == "*" then
+				return v.int32_instance(recvval * args[1].to_i32)
+			else if pname == "%" then
+				return v.int32_instance(recvval % args[1].to_i32)
+			else if pname == "/" then
+				return v.int32_instance(recvval / args[1].to_i32)
+			else if pname == "<" then
+				return v.bool_instance(recvval < args[1].to_i32)
+			else if pname == ">" then
+				return v.bool_instance(recvval > args[1].to_i32)
+			else if pname == "<=" then
+				return v.bool_instance(recvval <= args[1].to_i32)
+			else if pname == ">=" then
+				return v.bool_instance(recvval >= args[1].to_i32)
+			else if pname == "<=>" then
+				return v.int_instance(recvval <=> args[1].to_i32)
+			else if pname == "to_f" then
+				return v.float_instance(recvval.to_f)
+			else if pname == "to_i" then
+				return v.int_instance(recvval.to_i)
+			else if pname == "to_b" then
+				return v.byte_instance(recvval.to_b)
+			else if pname == "to_i8" then
+				return v.int8_instance(recvval.to_i8)
+			else if pname == "to_i16" then
+				return v.int16_instance(recvval.to_i16)
+			else if pname == "to_u16" then
+				return v.uint16_instance(recvval.to_u16)
+			else if pname == "to_u32" then
+				return v.uint32_instance(recvval.to_u32)
+			else if pname == "<<" then
+				return v.int32_instance(recvval << (args[1].to_i))
+			else if pname == ">>" then
+				return v.int32_instance(recvval >> (args[1].to_i))
+			else if pname == "&" then
+				return v.int32_instance(recvval & args[1].to_i32)
+			else if pname == "|" then
+				return v.int32_instance(recvval | args[1].to_i32)
+			else if pname == "^" then
+				return v.int32_instance(recvval ^ args[1].to_i32)
+			else if pname == "unary ~" then
+				return v.int32_instance(~recvval)
+			end
+		else if cname == "UInt32" then
+			var recvval = args[0].to_u32
+			if pname == "unary -" then
+				return v.uint32_instance(-recvval)
+			else if pname == "unary +" then
+				return args[0]
+			else if pname == "+" then
+				return v.uint32_instance(recvval + args[1].to_u32)
+			else if pname == "-" then
+				return v.uint32_instance(recvval - args[1].to_u32)
+			else if pname == "*" then
+				return v.uint32_instance(recvval * args[1].to_u32)
+			else if pname == "%" then
+				return v.uint32_instance(recvval % args[1].to_u32)
+			else if pname == "/" then
+				return v.uint32_instance(recvval / args[1].to_u32)
+			else if pname == "<" then
+				return v.bool_instance(recvval < args[1].to_u32)
+			else if pname == ">" then
+				return v.bool_instance(recvval > args[1].to_u32)
+			else if pname == "<=" then
+				return v.bool_instance(recvval <= args[1].to_u32)
+			else if pname == ">=" then
+				return v.bool_instance(recvval >= args[1].to_u32)
+			else if pname == "<=>" then
+				return v.int_instance(recvval <=> args[1].to_u32)
+			else if pname == "to_f" then
+				return v.float_instance(recvval.to_f)
+			else if pname == "to_i" then
+				return v.int_instance(recvval.to_i)
+			else if pname == "to_b" then
+				return v.byte_instance(recvval.to_b)
+			else if pname == "to_i8" then
+				return v.int8_instance(recvval.to_i8)
+			else if pname == "to_i16" then
+				return v.int16_instance(recvval.to_i16)
+			else if pname == "to_u16" then
+				return v.uint16_instance(recvval.to_u16)
+			else if pname == "to_i32" then
+				return v.int32_instance(recvval.to_i32)
+			else if pname == "<<" then
+				return v.uint32_instance(recvval << (args[1].to_i))
+			else if pname == ">>" then
+				return v.uint32_instance(recvval >> (args[1].to_i))
+			else if pname == "&" then
+				return v.uint32_instance(recvval & args[1].to_u32)
+			else if pname == "|" then
+				return v.uint32_instance(recvval | args[1].to_u32)
+			else if pname == "^" then
+				return v.uint32_instance(recvval ^ args[1].to_u32)
+			else if pname == "unary ~" then
+				return v.uint32_instance(~recvval)
 			end
 		else if pname == "native_argc" then
 			return v.int_instance(v.arguments.length)
@@ -1512,6 +1882,11 @@ redef class AIntegerExpr
 	do
 		if value isa Int then return v.int_instance(value.as(Int))
 		if value isa Byte then return v.byte_instance(value.as(Byte))
+		if value isa Int8 then return v.int8_instance(value.as(Int8))
+		if value isa Int16 then return v.int16_instance(value.as(Int16))
+		if value isa UInt16 then return v.uint16_instance(value.as(UInt16))
+		if value isa Int32 then return v.int32_instance(value.as(Int32))
+		if value isa UInt32 then return v.uint32_instance(value.as(UInt32))
 		return null
 	end
 end
