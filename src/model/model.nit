@@ -1813,22 +1813,6 @@ class MSignature
 	# The number of parameters
 	fun arity: Int do return mparameters.length
 
-	# The number of non-default parameters
-	#
-	# The number of default parameters is then `arity-min_arity`.
-	#
-	# Note that there cannot be both varargs and default prameters, thus
-	# if `vararg_rank != -1` then `min_arity` == `arity`
-	fun min_arity: Int
-	do
-		if vararg_rank != -1 then return arity
-		var res = 0
-		for p in mparameters do
-			if not p.is_default then res += 1
-		end
-		return res
-	end
-
 	redef fun to_s
 	do
 		var b = new FlatBuffer
@@ -1882,9 +1866,6 @@ class MParameter
 	# Is the parameter a vararg?
 	var is_vararg: Bool
 
-	# Is the parameter a default one?
-	var is_default: Bool
-
 	redef fun to_s
 	do
 		if is_vararg then
@@ -1900,7 +1881,7 @@ class MParameter
 	do
 		if not self.mtype.need_anchor then return self
 		var newtype = self.mtype.resolve_for(mtype, anchor, mmodule, cleanup_virtual)
-		var res = new MParameter(self.name, newtype, self.is_vararg, self.is_default)
+		var res = new MParameter(self.name, newtype, self.is_vararg)
 		return res
 	end
 

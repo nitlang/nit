@@ -55,7 +55,7 @@ redef class OverviewPage
 		sorter.sort mprojects
 		var section = new DocSection("projects.section", "Projects")
 		for mproject in mprojects do
-			section.add_child new DefinitionArticle("{mproject.nitdoc_id}.definition", mproject)
+			section.add_child new DefinitionArticle("{mproject.nitdoc_id}.definition", null, mproject)
 		end
 		article.add_child section
 	end
@@ -69,18 +69,18 @@ redef class SearchPage
 		v.name_sorter.sort(mclasses)
 		var mprops = doc.mproperties.to_a
 		v.name_sorter.sort(mprops)
-		root.add_child new IndexArticle("index.article", mmodules, mclasses, mprops)
+		root.add_child new IndexArticle("index.article", null, mmodules, mclasses, mprops)
 	end
 end
 
 redef class MGroupPage
 	redef fun apply_structure(v, doc) do
-		var section = new MEntitySection("{mentity.nitdoc_name}.section", mentity)
+		var section = new MEntitySection("{mentity.nitdoc_name}.section", null, mentity)
 		root.add_child section
 		if mentity.is_root then
-			section.add_child new IntroArticle("{mentity.mproject.nitdoc_id}.intro", mentity.mproject)
+			section.add_child new IntroArticle("{mentity.mproject.nitdoc_id}.intro", null, mentity.mproject)
 		else
-			section.add_child new IntroArticle("{mentity.nitdoc_id}.intro", mentity)
+			section.add_child new IntroArticle("{mentity.nitdoc_id}.intro", null, mentity)
 		end
 		var concerns = self.concerns
 		if concerns == null or concerns.is_empty then return
@@ -90,11 +90,11 @@ redef class MGroupPage
 		concerns.sort_with(v.concerns_sorter)
 		mentity.mproject.booster_rank = 0
 		mentity.booster_rank = 0
-		section.add_child new ConcernsArticle("{mentity.nitdoc_id}.concerns", mentity, concerns)
+		section.add_child new ConcernsArticle("{mentity.nitdoc_id}.concerns", null, mentity, concerns)
 		for mentity in concerns do
-			var ssection = new ConcernSection("{mentity.nitdoc_id}.concern", mentity)
+			var ssection = new ConcernSection("{mentity.nitdoc_id}.concern", null, mentity)
 			if mentity isa MModule then
-				ssection.add_child new DefinitionArticle("{mentity.nitdoc_id}.definition", mentity)
+				ssection.add_child new DefinitionArticle("{mentity.nitdoc_id}.definition", null, mentity)
 			end
 			section.add_child ssection
 		end
@@ -103,9 +103,9 @@ end
 
 redef class MModulePage
 	redef fun apply_structure(v, doc) do
-		var section = new MEntitySection("{mentity.nitdoc_name}.section", mentity)
+		var section = new MEntitySection("{mentity.nitdoc_name}.section", null, mentity)
 		root.add_child section
-		section.add_child new IntroArticle("{mentity.nitdoc_id}.intro", mentity)
+		section.add_child new IntroArticle("{mentity.nitdoc_id}.intro", null, mentity)
 		var concerns = self.concerns
 		if concerns == null or concerns.is_empty then return
 		# FIXME avoid diff
@@ -116,25 +116,25 @@ redef class MModulePage
 		mentity.mgroup.mproject.booster_rank = 0
 		mentity.mgroup.booster_rank = 0
 		mentity.booster_rank = 0
-		section.add_child new ConcernsArticle("{mentity.nitdoc_id}.concerns", mentity, concerns)
+		section.add_child new ConcernsArticle("{mentity.nitdoc_id}.concerns", null, mentity, concerns)
 		# reference list
 		for mentity in concerns do
-			var ssection = new ConcernSection("{mentity.nitdoc_id}.concern", mentity)
+			var ssection = new ConcernSection("{mentity.nitdoc_id}.concern", null, mentity)
 			if mentity isa MModule then
 				var mclasses = mclasses_for_mmodule(mentity).to_a
 				v.name_sorter.sort(mclasses)
 				for mclass in mclasses do
 					var article = new DefinitionListArticle(
-						"{mclass.intro.nitdoc_id}.definition-list", mclass)
+						"{mclass.intro.nitdoc_id}.definition-list", null, mclass)
 					var mclassdefs = mclassdefs_for(mclass).to_a
 					if not mclassdefs.has(mclass.intro) then
 						article.add_child(new DefinitionArticle(
-							"{mclass.intro.nitdoc_id}.definition", mclass.intro))
+							"{mclass.intro.nitdoc_id}.definition", null, mclass.intro))
 					end
 					doc.mainmodule.linearize_mclassdefs(mclassdefs)
 					for mclassdef in mclassdefs do
 						article.add_child(new DefinitionArticle(
-							"{mclassdef.nitdoc_id}.definition", mclassdef))
+							"{mclassdef.nitdoc_id}.definition", null, mclassdef))
 					end
 					ssection.add_child article
 				end
@@ -168,9 +168,9 @@ end
 
 redef class MClassPage
 	redef fun apply_structure(v, doc) do
-		var section = new MEntitySection("{mentity.nitdoc_name}.section", mentity)
+		var section = new MEntitySection("{mentity.nitdoc_name}.section", null, mentity)
 		root.add_child section
-		section.add_child new IntroArticle("{mentity.nitdoc_id}.intro", mentity)
+		section.add_child new IntroArticle("{mentity.nitdoc_id}.intro", null, mentity)
 		var concerns = self.concerns
 		if concerns == null or concerns.is_empty then return
 		# FIXME diff hack
@@ -184,12 +184,12 @@ redef class MClassPage
 		var constructors = new DocSection("{mentity.nitdoc_id}.constructors", "Constructors")
 		var minit = mentity.root_init
 		if minit != null then
-			constructors.add_child new DefinitionArticle("{minit.nitdoc_id}.definition", minit)
+			constructors.add_child new DefinitionArticle("{minit.nitdoc_id}.definition", null, minit)
 		end
 		section.add_child constructors
-		section.add_child new ConcernsArticle("{mentity.nitdoc_id}.concerns", mentity, concerns)
+		section.add_child new ConcernsArticle("{mentity.nitdoc_id}.concerns", null, mentity, concerns)
 		for mentity in concerns do
-			var ssection = new ConcernSection("{mentity.nitdoc_id}.concern", mentity)
+			var ssection = new ConcernSection("{mentity.nitdoc_id}.concern", null, mentity)
 			if mentity isa MModule then
 				var mprops = mproperties_for(mentity)
 				var by_kind = new PropertiesByKind.with_elements(mprops)
@@ -200,10 +200,10 @@ redef class MClassPage
 							if mpropdef isa MMethodDef and mpropdef.mproperty.is_init then
 								if mpropdef == minit then continue
 								constructors.add_child new DefinitionArticle(
-									"{mpropdef.nitdoc_id}.definition", mpropdef)
+									"{mpropdef.nitdoc_id}.definition", null, mpropdef)
 							else
 								ssection.add_child new DefinitionArticle(
-									"{mpropdef.nitdoc_id}.definition", mpropdef)
+									"{mpropdef.nitdoc_id}.definition", null, mpropdef)
 							end
 						end
 					end
@@ -243,9 +243,9 @@ end
 
 redef class MPropertyPage
 	redef fun apply_structure(v, doc) do
-		var section = new MEntitySection("{mentity.nitdoc_name}.section", mentity)
+		var section = new MEntitySection("{mentity.nitdoc_name}.section", null, mentity)
 		root.add_child section
-		section.add_child new IntroArticle("{mentity.nitdoc_id}.intro", mentity)
+		section.add_child new IntroArticle("{mentity.nitdoc_id}.intro", null, mentity)
 		var concerns = self.concerns
 		if concerns == null or concerns.is_empty then return
 		# FIXME diff hack
@@ -256,16 +256,16 @@ redef class MPropertyPage
 		mentity.intro.mclassdef.mmodule.mgroup.mproject.booster_rank = 0
 		mentity.intro.mclassdef.mmodule.mgroup.booster_rank = 0
 		mentity.intro.mclassdef.mmodule.booster_rank = 0
-		section.add_child new ConcernsArticle("{mentity.nitdoc_id}.concerns", mentity, concerns)
+		section.add_child new ConcernsArticle("{mentity.nitdoc_id}.concerns", null, mentity, concerns)
 		for mentity in concerns do
-			var ssection = new ConcernSection("{mentity.nitdoc_id}.concern", mentity)
+			var ssection = new ConcernSection("{mentity.nitdoc_id}.concern", null, mentity)
 			if mentity isa MModule then
 				# Add mproperties
 				var mpropdefs = mpropdefs_for(mentity).to_a
 				v.name_sorter.sort(mpropdefs)
 				for mpropdef in mpropdefs do
 					ssection.add_child new DefinitionArticle(
-						"{mpropdef.nitdoc_id}.definition", mpropdef)
+						"{mpropdef.nitdoc_id}.definition", null, mpropdef)
 				end
 			end
 			section.add_child ssection

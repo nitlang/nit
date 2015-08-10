@@ -256,12 +256,12 @@ redef class ListCommand
 		end
 		var mentity = res.first
 		if mentity isa MModule then
-			v.add_article new MEntitiesListArticle("Classes", mentity.mclassdefs)
+			v.add_article new MEntitiesListArticle("Classes", null, mentity.mclassdefs)
 		else if mentity isa MClass then
 			var mprops = mentity.collect_intro_mproperties(public_visibility)
-			v.add_article new MEntitiesListArticle("Methods", mprops.to_a)
+			v.add_article new MEntitiesListArticle("Methods", null, mprops.to_a)
 		else if mentity isa MClassDef then
-			v.add_article new MEntitiesListArticle("Methods", mentity.mpropdefs)
+			v.add_article new MEntitiesListArticle("Methods", null, mentity.mpropdefs)
 		end
 	end
 end

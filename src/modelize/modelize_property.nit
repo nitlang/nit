@@ -186,7 +186,7 @@ redef class ModelBuilder
 
 				for param in sig.mparameters do
 					var ret_type = param.mtype
-					var mparameter = new MParameter(param.name, ret_type, false, ret_type isa MNullableType)
+					var mparameter = new MParameter(param.name, ret_type, false)
 					mparameters.add(mparameter)
 				end
 				initializers.add(npropdef.mpropdef.mproperty)
@@ -208,7 +208,7 @@ redef class ModelBuilder
 				var paramname = mreadpropdef.mproperty.name
 				var ret_type = mreadpropdef.msignature.return_mtype
 				if ret_type == null then return
-				var mparameter = new MParameter(paramname, ret_type, false, ret_type isa MNullableType)
+				var mparameter = new MParameter(paramname, ret_type, false)
 				mparameters.add(mparameter)
 				var msetter = npropdef.mwritepropdef
 				if msetter == null then
@@ -277,13 +277,7 @@ redef class ModelBuilder
 				if pd isa MMethodDef then
 					# Get the signature resolved for the current receiver
 					var sig = pd.msignature.resolve_for(mclassdef.mclass.mclass_type, mclassdef.bound_mtype, mclassdef.mmodule, false)
-					# Because the last parameter of setters is never default, try to default them for the autoinit.
-					for param in sig.mparameters do
-						if not param.is_default and param.mtype isa MNullableType then
-							param = new MParameter(param.name, param.mtype, param.is_vararg, true)
-						end
-						mparameters.add(param)
-					end
+					mparameters.add_all(sig.mparameters)
 				else
 					# TODO attributes?
 					abort
@@ -954,13 +948,7 @@ redef class AMethPropdef
 
 		var mparameters = new Array[MParameter]
 		for i in [0..param_names.length[ do
-			var is_default = false
-			if vararg_rank == -1 and param_types[i] isa MNullableType then
-				if i < param_names.length-1 or accept_special_last_parameter then
-					is_default = true
-				end
-			end
-			var mparameter = new MParameter(param_names[i], param_types[i], i == vararg_rank, is_default)
+			var mparameter = new MParameter(param_names[i], param_types[i], i == vararg_rank)
 			if nsig != null then nsig.n_params[i].mparameter = mparameter
 			mparameters.add(mparameter)
 		end
@@ -1408,7 +1396,7 @@ redef class AAttrPropdef
 		if mwritepropdef != null then
 			var name: String
 			name = n_id2.text
-			var mparameter = new MParameter(name, mtype, false, false)
+			var mparameter = new MParameter(name, mtype, false)
 			var msignature = new MSignature([mparameter], null)
 			mwritepropdef.msignature = msignature
 		end

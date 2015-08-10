@@ -99,9 +99,8 @@ class SExpProcessor
 		var srclen = src.length
 		var delims = once ['(', ')', '"']
 		ignore_whitespaces
-		if pos >= srclen then return new SExpError("Empty S-Expression", location = new Location(line, line_offset))
+		if pos >= srclen then return new SExpError(new Location(line, line_offset), "Empty S-Expression")
 		var c = src[pos]
-		if pos >= srclen then return new SExpError("Empty S-Expression")
 		if c == '(' then
 			var cnt = new SExp
 			var loc = new Location(line, line_offset)
@@ -116,30 +115,32 @@ class SExpProcessor
 				pos += 1
 				return cnt
 			else
-				return new SExpError("Incomplete S-Expression", location = loc)
+				return new SExpError(loc, "Incomplete S-Expression")
 			end
 		else if c == '"' then
 			var stdq = pos
+			var loc = new Location(line, line_offset)
 			pos += 1
 			ignore_until("\"")
 			pos += 1
 			var endq = pos
-			return new SExpDQString(src.substring(stdq, endq - stdq))
+			return new SExpDQString(loc, src.substring(stdq, endq - stdq))
 		else
 			var stid = pos
+			var loc = new Location(line, line_offset)
 			while pos < srclen and not c.is_whitespace and not delims.has(c) do
 				c = src[pos]
 				pos += 1
 			end
 			if delims.has(c) or c.is_whitespace then pos -= 1
-			if pos >= srclen then return new SExpError("Invalid S-Expression")
+			if pos >= srclen then return new SExpError(loc, "Invalid S-Expression")
 			var endid = pos
 			var cntstr = src.substring(stid, endid - stid)
 			var cnt: SExpEntity
 			if cntstr.is_numeric then
-				cnt = new SExpFloat(cntstr.to_f)
+				cnt = new SExpFloat(loc, cntstr.to_f)
 			else
-				cnt = new SExpId(cntstr)
+				cnt = new SExpId(loc, cntstr)
 			end
 			return cnt
 		end
