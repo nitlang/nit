@@ -623,8 +623,8 @@ universal Byte
 
 	# On an Byte, unary minus will return `(256 - self) % 256`
 	#
-	#     assert -(1.to_b) == 0xFF.to_b
-	#     assert -(0.to_b) == 0x00.to_b
+	#     assert -1u8 == 0xFFu8
+	#     assert -0u8 == 0x00u8
 	redef fun - is intern
 	redef fun -(i) is intern
 	redef fun *(i) is intern
@@ -634,28 +634,22 @@ universal Byte
 	#
 	# Finds the remainder of division of `self` by `i`.
 	#
-	#     assert 5.to_b % 2.to_b		== 1.to_b
-	#     assert 10.to_b % 2.to_b		== 0.to_b
+	#     assert 5u8 % 2u8		== 1u8
+	#     assert 10u8 % 2u8		== 0u8
 	fun %(i: Byte): Byte is intern
 
 	redef fun zero do return 0.to_b
 	redef fun value_of(val) do return val.to_b
 
-	# `i` bits shift fo the left (aka <<)
+	# `i` bits shift fo the left
 	#
-	#     assert 5.to_b.lshift(1)    == 10.to_b
-	fun lshift(i: Int): Byte is intern
+	#     assert 5u8 << 1    == 10u8
+	fun <<(i: Int): Byte `{ return self << i; `}
 
-	# alias of `lshift`
-	fun <<(i: Int): Byte do return lshift(i)
-
-	# `i` bits shift fo the right (aka >>)
+	# `i` bits shift fo the right
 	#
-	#     assert 5.to_b.rshift(1)    == 2.to_b
-	fun rshift(i: Int): Byte is intern
-
-	# alias of `rshift`
-	fun >>(i: Int): Byte do return rshift(i)
+	#     assert 5u8 >> 1    == 2u8
+	fun >>(i: Int): Byte `{ return self >> i; `}
 
 	redef fun to_i is intern
 	redef fun to_f is intern
@@ -741,21 +735,15 @@ universal Int
 	redef fun zero do return 0
 	redef fun value_of(val) do return val.to_i
 
-	# `i` bits shift fo the left (aka <<)
+	# `i` bits shift fo the left
 	#
-	#     assert 5.lshift(1)    == 10
-	fun lshift(i: Int): Int is intern
+	#     assert 5 << 1    == 10
+	fun <<(i: Int): Int `{ return self << i; `}
 
-	# alias of `lshift`
-	fun <<(i: Int): Int do return lshift(i)
-
-	# `i` bits shift fo the right (aka >>)
+	# `i` bits shift fo the right
 	#
-	#     assert 5.rshift(1)    == 2
-	fun rshift(i: Int): Int is intern
-
-	# alias of `rshift`
-	fun >>(i: Int): Int do return rshift(i)
+	#     assert 5 >> 1    == 2
+	fun >>(i: Int): Int `{ return self >> i; `}
 
 	redef fun to_i do return self
 	redef fun to_f is intern

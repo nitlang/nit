@@ -5,15 +5,14 @@
 
 # Task: Bitwise operations
 # SEE: <http://rosettacode.org/wiki/Bitwise_operations>
-# Without logical right shift
 module bitwise_operations
 
 fun bitwise(a, b: Int)
 do
-	print "a and b: { a.bin_and(b) }"
-	print "a or b: { a.bin_or(b) }"
-	print "a xor b: { a.bin_xor(b) }"
-	print "not a: { a.bin_not }"
+	print "a and b: { a & b }"
+	print "a or b: { a | b }"
+	print "a xor b: { a ^ b }"
+	print "not a: { ~a }"
 	print "a << b: { a << b }"
 	print "a >> b: { a >> b }"
 end

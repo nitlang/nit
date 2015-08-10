@@ -874,85 +874,77 @@ redef class AMethPropdef
 		else if cname == "Int" then
 			var recvval = args[0].to_i
 			if pname == "unary -" then
-				return v.int_instance(-args[0].to_i)
+				return v.int_instance(-recvval)
 			else if pname == "unary +" then
 				return args[0]
 			else if pname == "+" then
-				return v.int_instance(args[0].to_i + args[1].to_i)
+				return v.int_instance(recvval + args[1].to_i)
 			else if pname == "-" then
-				return v.int_instance(args[0].to_i - args[1].to_i)
+				return v.int_instance(recvval - args[1].to_i)
 			else if pname == "*" then
-				return v.int_instance(args[0].to_i * args[1].to_i)
+				return v.int_instance(recvval * args[1].to_i)
 			else if pname == "%" then
-				return v.int_instance(args[0].to_i % args[1].to_i)
+				return v.int_instance(recvval % args[1].to_i)
 			else if pname == "/" then
-				return v.int_instance(args[0].to_i / args[1].to_i)
+				return v.int_instance(recvval / args[1].to_i)
 			else if pname == "<" then
-				return v.bool_instance(args[0].to_i < args[1].to_i)
+				return v.bool_instance(recvval < args[1].to_i)
 			else if pname == ">" then
-				return v.bool_instance(args[0].to_i > args[1].to_i)
+				return v.bool_instance(recvval > args[1].to_i)
 			else if pname == "<=" then
-				return v.bool_instance(args[0].to_i <= args[1].to_i)
+				return v.bool_instance(recvval <= args[1].to_i)
 			else if pname == ">=" then
-				return v.bool_instance(args[0].to_i >= args[1].to_i)
+				return v.bool_instance(recvval >= args[1].to_i)
 			else if pname == "<=>" then
-				return v.int_instance(args[0].to_i <=> args[1].to_i)
+				return v.int_instance(recvval <=> args[1].to_i)
 			else if pname == "ascii" then
-				return v.char_instance(args[0].to_i.ascii)
+				return v.char_instance(recvval.ascii)
 			else if pname == "to_f" then
-				return v.float_instance(args[0].to_i.to_f)
+				return v.float_instance(recvval.to_f)
 			else if pname == "to_b" then
-				return v.byte_instance(args[0].to_i.to_b)
-			else if pname == "lshift" then
-				return v.int_instance(args[0].to_i.lshift(args[1].to_i))
-			else if pname == "rshift" then
-				return v.int_instance(args[0].to_i.rshift(args[1].to_i))
+				return v.byte_instance(recvval.to_b)
+			else if pname == "<<" then
+				return v.int_instance(recvval << args[1].to_i)
+			else if pname == ">>" then
+				return v.int_instance(recvval >> args[1].to_i)
 			else if pname == "rand" then
 				var res = recvval.rand
 				return v.int_instance(res)
-			else if pname == "bin_and" then
-				return v.int_instance(args[0].to_i.bin_and(args[1].to_i))
-			else if pname == "bin_or" then
-				return v.int_instance(args[0].to_i.bin_or(args[1].to_i))
-			else if pname == "bin_xor" then
-				return v.int_instance(args[0].to_i.bin_xor(args[1].to_i))
-			else if pname == "bin_not" then
-				return v.int_instance(args[0].to_i.bin_not)
 			end
 		else if cname == "Byte" then
 			var recvval = args[0].to_b
 			if pname == "unary -" then
-				return v.byte_instance(-args[0].to_b)
+				return v.byte_instance(-recvval)
 			else if pname == "unary +" then
 				return args[0]
 			else if pname == "+" then
-				return v.byte_instance(args[0].to_b + args[1].to_b)
+				return v.byte_instance(recvval + args[1].to_b)
 			else if pname == "-" then
-				return v.byte_instance(args[0].to_b - args[1].to_b)
+				return v.byte_instance(recvval - args[1].to_b)
 			else if pname == "*" then
-				return v.byte_instance(args[0].to_b * args[1].to_b)
+				return v.byte_instance(recvval * args[1].to_b)
 			else if pname == "%" then
-				return v.byte_instance(args[0].to_b % args[1].to_b)
+				return v.byte_instance(recvval % args[1].to_b)
 			else if pname == "/" then
-				return v.byte_instance(args[0].to_b / args[1].to_b)
+				return v.byte_instance(recvval / args[1].to_b)
 			else if pname == "<" then
-				return v.bool_instance(args[0].to_b < args[1].to_b)
+				return v.bool_instance(recvval < args[1].to_b)
 			else if pname == ">" then
-				return v.bool_instance(args[0].to_b > args[1].to_b)
+				return v.bool_instance(recvval > args[1].to_b)
 			else if pname == "<=" then
-				return v.bool_instance(args[0].to_b <= args[1].to_b)
+				return v.bool_instance(recvval <= args[1].to_b)
 			else if pname == ">=" then
-				return v.bool_instance(args[0].to_b >= args[1].to_b)
+				return v.bool_instance(recvval >= args[1].to_b)
 			else if pname == "<=>" then
-				return v.int_instance(args[0].to_b <=> args[1].to_b)
+				return v.int_instance(recvval <=> args[1].to_b)
 			else if pname == "to_f" then
-				return v.float_instance(args[0].to_b.to_f)
+				return v.float_instance(recvval.to_f)
 			else if pname == "to_i" then
-				return v.int_instance(args[0].to_b.to_i)
-			else if pname == "lshift" then
-				return v.byte_instance(args[0].to_b.lshift(args[1].to_i))
-			else if pname == "rshift" then
-				return v.byte_instance(args[0].to_b.rshift(args[1].to_i))
+				return v.int_instance(recvval.to_i)
+			else if pname == "<<" then
+				return v.byte_instance(recvval << args[1].to_i)
+			else if pname == ">>" then
+				return v.byte_instance(recvval >> args[1].to_i)
 			else if pname == "byte_to_s_len" then
 				return v.int_instance(recvval.to_s.length)
 			end

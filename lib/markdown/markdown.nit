@@ -169,7 +169,7 @@ class MarkdownProcessor
 				if c == '\n' then
 					eol = true
 				else if c == '\t' then
-					var np = pos + (4 - (pos.bin_and(3)))
+					var np = pos + (4 - (pos & 3))
 					while pos < np do
 						value.add ' '
 						pos += 1

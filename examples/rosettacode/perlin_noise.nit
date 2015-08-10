@@ -33,9 +33,9 @@ class ImprovedNoise
 	# Noise value in [-1..1] at 3d coordinates `x, y, z`
 	fun noise(x, y, z: Float): Float
 	do
-		var xx = x.to_i.bin_and(255)
-		var yy = y.to_i.bin_and(255)
-		var zz = z.to_i.bin_and(255)
+		var xx = x.to_i & 255
+		var yy = y.to_i & 255
+		var zz = z.to_i & 255
 
 		x -= x.floor
 		y -= y.floor
@@ -65,10 +65,10 @@ class ImprovedNoise
 	# Value at a corner of the grid
 	fun grad(hash: Int, x, y, z: Float): Float
 	do
-		var h = hash.bin_and(15)
+		var h = hash & 15
 		var u = if h < 8 then x else y
 		var v = if h < 4 then y else if h == 12 or h == 14 then x else z
-		return (if h.is_even then u else -u) + (if h.bin_and(2) == 0 then v else -v)
+		return (if h.is_even then u else -u) + (if h & 2 == 0 then v else -v)
 	end
 end
 

@@ -25,7 +25,7 @@ fun hailstone (n: Int): Array[Int]
 do
 	var sequence = [n]
 	while n != 1 do
-		if n.bin_and(0x01) == 0 then
+		if n & 0x01 == 0 then
 			n = n / 2
 		else
 			n = 3 * n + 1

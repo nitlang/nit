@@ -356,6 +356,6 @@ redef universal Int
 	# The missing 2 bits are used to tag integers by the Nit system.
 	private fun mask: Int
 	do
-		return bin_and(0x3FFF_FFFF)
+		return self & 0x3FFF_FFFF
 	end
 end

@@ -59,7 +59,7 @@ end
 
 fun test(n: Int)
 do
-	var m = 10000.lshift(n)
+	var m = 10000 << n
 	print("Primes up to {m} {nsieve(m)}")
 end
 

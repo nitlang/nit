@@ -17,7 +17,7 @@
 var n = 10
 if args.not_empty then n = args.first.to_i
 
-var nn = 1.lshift(n)
+var nn = 1 << n
 
 var a = new Array[Numeric]
 var b = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]

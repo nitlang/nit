@@ -205,10 +205,10 @@ class Regex
 	fun compile: nullable Error
 	do
 		var cflags = 0
-		if extended then cflags = cflags.bin_or(flag_extended)
-		if ignore_case then cflags = cflags.bin_or(flag_icase)
-		if optimize_is_in then cflags = cflags.bin_or(flag_nosub)
-		if newline then cflags = cflags.bin_or(flag_newline)
+		if extended then cflags |= flag_extended
+		if ignore_case then cflags |= flag_icase
+		if optimize_is_in then cflags |= flag_nosub
+		if newline then cflags |= flag_newline
 
 		var native = self.native
 		var need_compilation = native == null or cflags != cflags_cache or string != string_cache
@@ -264,8 +264,8 @@ class Regex
 	private fun gather_eflags: Int
 	do
 		var eflags = 0
-		if not_bol then eflags = eflags.bin_or(flag_notbol)
-		if not_eol then eflags = eflags.bin_or(flag_noteol)
+		if not_bol then eflags |= flag_notbol
+		if not_eol then eflags |= flag_noteol
 		return eflags
 	end
 
@@ -401,7 +401,7 @@ class Regex
 		text = text.to_s
 		var cstr = text.to_cstring
 		var eflags = gather_eflags
-		var eflags_or_notbol = eflags.bin_or(flag_notbol)
+		var eflags_or_notbol = eflags | flag_notbol
 		var native_match = self.native_match
 		var matches = new Array[Match]
 

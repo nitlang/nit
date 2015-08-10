@@ -1046,7 +1046,7 @@ abstract class Text
 
 			for i in [0..length[ do
 				var char = chars[i]
-				h = h.lshift(5) + h + char.ascii
+				h = (h << 5) + h + char.ascii
 			end
 
 			hash_cache = h

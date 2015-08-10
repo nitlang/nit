@@ -66,35 +66,23 @@ redef class Int
 
 	# Returns the result of a binary AND operation on `self` and `i`
 	#
-	#     assert 0x10.bin_and(0x01) == 0
-	fun bin_and(i: Int): Int `{ return self & i; `}
-
-	# Alias of `bin_and`
-	fun &(i: Int): Int do return bin_and(i)
+	#     assert 0x10 & 0x01 == 0
+	fun &(i: Int): Int `{ return self & i; `}
 
 	# Returns the result of a binary OR operation on `self` and `i`
 	#
-	#     assert 0x10.bin_or(0x01) == 0x11
-	fun bin_or(i: Int): Int `{ return self | i; `}
-
-	# Alias of `bin_or`
-	fun |(i: Int): Int do return bin_or(i)
+	#     assert 0x10 | 0x01 == 0x11
+	fun |(i: Int): Int `{ return self | i; `}
 
 	# Returns the result of a binary XOR operation on `self` and `i`
 	#
-	#     assert 0x101.bin_xor(0x110) == 0x11
-	fun bin_xor(i: Int): Int `{ return self ^ i; `}
-
-	# Alias of `bin_xor`
-	fun ^(i: Int): Int do return bin_xor(i)
+	#     assert 0x101 ^ 0x110 == 0x11
+	fun ^(i: Int): Int `{ return self ^ i; `}
 
 	# Returns the 1's complement of `self`
 	#
-	#     assert 0x2F.bin_not == -48
-	fun bin_not: Int `{ return ~self; `}
-
-	# Alias of `bin_not`
-	fun ~: Int do return bin_not
+	#     assert ~0x2F == -48
+	fun ~: Int `{ return ~self; `}
 
 	# Returns the square root of `self`
 	#
@@ -114,16 +102,16 @@ redef class Int
 		if o < 0 then return -(self.gcd(-o))
 		if self == 0 or o == self then return o
 		if o == 0 then return self
-		if self.bin_and(1) == 0 then
-			if o.bin_and(1) == 1 then
-				return self.rshift(1).gcd(o)
+		if self & 1 == 0 then
+			if o & 1 == 1 then
+				return (self >> 1).gcd(o)
 			else
-				return self.rshift(1).gcd(o.rshift(1)).lshift(1)
+				return (self >> 1).gcd(o >> 1) << 1
 			end
 		end
-		if o.bin_and(1) == 0 then return self.gcd(o.rshift(1))
-		if self > o then return (self - o).rshift(1).gcd(o)
-		return (o - self).rshift(1).gcd(self)
+		if o & 1 == 0 then return self.gcd(o >> 1)
+		if self > o then return ((self - o) >> 1).gcd(o)
+		return ((o - self) >> 1).gcd(self)
 	end
 
 	# Is `self` even ?
@@ -186,35 +174,23 @@ end
 redef class Byte
 	# Returns the result of a binary AND operation on `self` and `i`
 	#
-	#     assert 0x10.bin_and(0x01) == 0
-	fun bin_and(i: Byte): Byte `{ return self & i; `}
-
-	# Alias of `bin_and`
-	fun &(i: Byte): Byte do return bin_and(i)
+	#     assert 0x10u8 & 0x01u8 == 0u8
+	fun &(i: Byte): Byte `{ return self & i; `}
 
 	# Returns the result of a binary OR operation on `self` and `i`
 	#
-	#     assert 0x10.bin_or(0x01) == 0x11
-	fun bin_or(i: Byte): Byte `{ return self | i; `}
-
-	# Alias of `bin_or`
-	fun |(i: Byte): Byte do return bin_or(i)
+	#     assert 0x10u8 | 0x01u8 == 0x11u8
+	fun |(i: Byte): Byte `{ return self | i; `}
 
 	# Returns the result of a binary XOR operation on `self` and `i`
 	#
-	#     assert 0x101.bin_xor(0x110) == 0x11
-	fun bin_xor(i: Byte): Byte `{ return self ^ i; `}
-
-	# Alias of `bin_xor`
-	fun ^(i: Byte): Byte do return bin_xor(i)
+	#     assert 0x101u8 ^ 0x110u8 == 0x11u8
+	fun ^(i: Byte): Byte `{ return self ^ i; `}
 
 	# Returns the 1's complement of `self`
 	#
-	#     assert 0x2F.bin_not == -48
-	fun bin_not: Byte `{ return ~self; `}
-
-	# Alias of `bin_not`
-	fun ~: Byte do return bin_not
+	#     assert ~0x2Fu8 == 0xD0u8
+	fun ~: Byte `{ return ~self; `}
 end
 
 redef class Float

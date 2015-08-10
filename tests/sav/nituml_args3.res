@@ -51,13 +51,13 @@ Float [
 Numeric -> Float [dir=back arrowtail=open style=dashed];
 
 Byte [
- label = "{Byte||+ %(i: Byte): Byte\l+ lshift(i: Int): Byte\l+ \<\<(i: Int): Byte\l+ rshift(i: Int): Byte\l+ \>\>(i: Int): Byte\l}"
+ label = "{Byte||+ %(i: Byte): Byte\l+ \<\<(i: Int): Byte\l+ \>\>(i: Int): Byte\l}"
 ]
 Discrete -> Byte [dir=back arrowtail=open style=dashed];
 Numeric -> Byte [dir=back arrowtail=open style=dashed];
 
 Int [
- label = "{Int||+ %(i: Int): Int\l+ lshift(i: Int): Int\l+ \<\<(i: Int): Int\l+ rshift(i: Int): Int\l+ \>\>(i: Int): Int\l+ ascii(): Char\l+ digit_count(b: Int): Int\l+ digit_count_base_10(): Int\l+ to_c(): Char\l+ abs(): Int\l}"
+ label = "{Int||+ %(i: Int): Int\l+ \<\<(i: Int): Int\l+ \>\>(i: Int): Int\l+ ascii(): Char\l+ digit_count(b: Int): Int\l+ digit_count_base_10(): Int\l+ to_c(): Char\l+ abs(): Int\l}"
 ]
 Discrete -> Int [dir=back arrowtail=open style=dashed];
 Numeric -> Int [dir=back arrowtail=open style=dashed];
