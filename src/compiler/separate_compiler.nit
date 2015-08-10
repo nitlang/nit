@@ -2217,12 +2217,9 @@ class SeparateRuntimeFunction
 		var mmethoddef = self.mmethoddef
 
 		var sig = "{c_ret} {c_name}{c_sig}"
-		compiler.provide_declaration(self.c_name, "{sig} __attribute__((weak));")
+		compiler.provide_declaration(self.c_name, "{sig};")
 
 		var rta = compiler.as(SeparateCompiler).runtime_type_analysis
-		if rta != null and not rta.live_mmodules.has(mmethoddef.mclassdef.mmodule) then
-			return
-		end
 
 		var recv = self.mmethoddef.mclassdef.bound_mtype
 		var v = compiler.new_visitor
@@ -2264,6 +2261,8 @@ class SeparateRuntimeFunction
 				assert subret != null
 				v.assign(frame.returnvar.as(not null), subret)
 			end
+		else if rta != null and not rta.live_mmodules.has(mmethoddef.mclassdef.mmodule) then
+			v.add_abort("FATAL: Dead method executed.")
 		else
 			mmethoddef.compile_inside_to_c(v, arguments)
 		end
