@@ -225,7 +225,7 @@ class Screen
 
 	fun do_frame(display: Display)
 	do
-		display.clear(0.1, 0.65, 0.2)
+		display.clear(0.0, 0.45, 0.0)
 
 		app.assets.sign_warning.scale = display_scale
 		app.assets.sign_cute.scale = display_scale
