@@ -178,11 +178,13 @@ redef abstract class Reader
 	# Returns a truncated string when an error is pending (`last_error != null`).
 	fun read_string: String
 	do
-		var buf = new FlatBuffer
+		var buf = new Bytes.empty
 		loop
 			var byte = read_byte
-			if byte == null or byte == 0x00u8 then return buf.to_s
-			buf.bytes.add byte
+			if byte == null or byte == 0u8 then
+				return buf.to_s
+			end
+			buf.add byte
 		end
 	end
 
