@@ -228,18 +228,16 @@ class Screen
 		display.clear(0.0, 0.45, 0.0)
 
 		app.assets.sign_warning.scale = display_scale
-		app.assets.sign_cute.scale = display_scale
-		app.assets.sign_hits.scale = display_scale
-		for img in app.numbers.imgs do img.scale = display_scale
+		display.blit(app.assets.sign_warning, (380.0*display_scale).to_i, (256.0*display_scale).to_i)
 
-		display.blit(app.assets.sign_warning, (0.0*display_scale).to_i, (0.0*display_scale).to_i)
-		display.blit(app.assets.sign_cute, (740.0*display_scale).to_i, (0.0*display_scale).to_i)
-		display.blit(app.assets.sign_hits, (1640.0*display_scale).to_i, (55.0*display_scale).to_i)
-		display.blit_number(app.numbers, game.points, (1720.0*display_scale).to_i, (170.0*display_scale).to_i)
+		app.assets.sign_cute.scale = display_scale
+		display.blit(app.assets.sign_cute, (1024.0*display_scale).to_i, (64.0*display_scale).to_i)
 
 		for hole in game.holes do
 			hole.draw display
 		end
+
+		draw_hud display
 	end
 
 	fun input(event: InputEvent): Bool
@@ -255,6 +253,28 @@ class Screen
 		end
 
 		return false
+	end
+
+	# Draw the HUD as the topmost layer of the screen
+	fun draw_hud(display: Display)
+	do
+		var board = app.assets.points_board
+		board.scale = display_scale
+		display.blit(board, (32.0*display_scale).to_i, -10)
+
+		draw_score(display)
+	end
+
+	# Draw the score
+	fun draw_score(display: Display, score: nullable Int)
+	do
+		if score == null then score = game.points
+
+		# Draw the score itself
+		for img in app.numbers.imgs do img.scale = display_scale
+		display.blit_number(app.numbers, score,
+			(92.0*display_scale).to_i,
+			(172.0*display_scale).to_i)
 	end
 end
 
