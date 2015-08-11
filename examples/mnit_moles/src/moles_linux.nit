@@ -16,7 +16,9 @@
 
 module moles_linux
 
-import moles
 import mnit_linux
+
+import moles
+import effects
 
 redef fun display_scale do return 0.25

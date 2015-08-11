@@ -20,6 +20,7 @@ import mnit_android
 import android::portrait
 
 import moles
+import effects
 
 redef class Game
 	redef fun columns do return 3
