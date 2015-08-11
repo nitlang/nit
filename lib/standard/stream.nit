@@ -457,6 +457,7 @@ abstract class BufferedReader
 		return c
 	end
 
+	# Resets the internal buffer
 	fun buffer_reset do
 		_buffer_length = 0
 		_buffer_pos = 0
