@@ -471,23 +471,11 @@ class FlatBuffer
 
 	redef var chars: Sequence[Char] = new FlatBufferCharView(self) is lazy
 
-	redef var bytes: Sequence[Byte] = new FlatBufferByteView(self) is lazy
+	redef var bytes = new FlatBufferByteView(self) is lazy
 
 	redef var bytelen = 0
 
-	# O(n)
-	redef fun length do
-		var max = bytelen
-		if max == 0 then return 0
-		var pos = 0
-		var ln = 0
-		var its = items
-		while pos < max do
-			pos += its.length_of_char_at(pos)
-			ln += 1
-		end
-		return ln
-	end
+	redef var length = 0
 
 	private var capacity = 0
 
@@ -564,21 +552,14 @@ class FlatBuffer
 		enlarge(bytelen + clen)
 		items.set_char_at(bytelen, c)
 		bytelen += clen
-	end
-
-	private fun add_byte(b: Byte) do
-		if written then reset
-		is_dirty = true
-		enlarge(bytelen + 1)
-		items[bytelen] = b
-		# FIXME: Might trigger errors
-		bytelen += 1
+		length += 1
 	end
 
 	redef fun clear do
 		is_dirty = true
 		if written then reset
 		bytelen = 0
+		length = 0
 	end
 
 	redef fun empty do return new Buffer
@@ -626,11 +607,12 @@ class FlatBuffer
 	#
 	# If `items` is shared, `written` should be set to true after the creation
 	# so that a modification will do a copy-on-write.
-	private init with_infos(items: NativeString, capacity, bytelen: Int)
+	private init with_infos(items: NativeString, capacity, bytelen, length: Int)
 	do
 		self.items = items
 		self.capacity = capacity
 		self.bytelen = bytelen
+		self.length = length
 	end
 
 	# Create a new string copied from `s`.
@@ -643,6 +625,7 @@ class FlatBuffer
 			for i in substrings do i.as(FlatString).items.copy_to(items, i.bytelen, 0, 0)
 		end
 		bytelen = s.bytelen
+		length = s.length
 		capacity = s.bytelen
 		written = true
 	end
@@ -671,6 +654,7 @@ class FlatBuffer
 			return
 		end
 		bytelen += sl
+		length += s.length
 	end
 
 	# Copies the content of self in `dest`
@@ -695,7 +679,7 @@ class FlatBuffer
 			var byte_length = byteto - bytefrom + 1
 			var r_items = new NativeString(byte_length)
 			items.copy_to(r_items, byte_length, bytefrom, 0)
-			return new FlatBuffer.with_infos(r_items, byte_length, byte_length)
+			return new FlatBuffer.with_infos(r_items, byte_length, byte_length, count)
 		else
 			return new Buffer
 		end
@@ -760,39 +744,6 @@ private class FlatBufferByteView
 	redef type SELFTYPE: FlatBuffer
 
 	redef fun [](index) do return target.items[index]
-
-	redef fun []=(index, item)
-	do
-		assert index >= 0 and index <= target.bytelen
-		if index == target.bytelen then
-			add(item)
-			return
-		end
-		target.items[index] = item
-	end
-
-	redef fun push(c)
-	do
-		target.add_byte(c)
-	end
-
-	fun enlarge(cap: Int)
-	do
-		target.enlarge(cap)
-	end
-
-	redef fun append(s)
-	do
-		var s_length = s.length
-		if target.capacity < (target.length + s_length) then enlarge(s_length + target.length)
-		var pos = target.length
-		var its = target.items
-		for i in s do
-			its[pos] = i
-			pos += 1
-		end
-		target.length += s.length
-	end
 
 	redef fun iterator_from(pos) do return new FlatBufferByteIterator.with_pos(target, pos)
 

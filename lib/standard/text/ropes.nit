@@ -270,7 +270,7 @@ class RopeBuffer
 
 	redef var chars: Sequence[Char] is lazy do return new RopeBufferChars(self)
 
-	redef var bytes: Sequence[Byte] is lazy do return new RopeBufferBytes(self)
+	redef var bytes is lazy do return new RopeBufferBytes(self)
 
 	# The final string being built on the fly
 	private var str: String = ""
@@ -280,6 +280,9 @@ class RopeBuffer
 
 	# Next available (e.g. unset) character in the `Buffer`
 	private var rpos = 0
+
+	# Length (in chars) of the buffered part
+	private var nslen = 0
 
 	# Keeps track of the buffer's currently dumped part
 	#
@@ -462,18 +465,6 @@ class RopeBuffer
 		end
 		# TODO: Fix when supporting UTF-8
 		ns[rp] = c.ascii.to_b
-		rp += 1
-		bytelen += 1
-		rpos = rp
-	end
-
-	private fun add_byte(b: Byte) do
-		var rp = rpos
-		if rp >= buf_size then
-			dump_buffer
-			rp = 0
-		end
-		ns[rp] = b
 		rp += 1
 		bytelen += 1
 		rpos = rp
@@ -1236,23 +1227,6 @@ class RopeBufferBytes
 			return target.ns[i - target.str.bytelen]
 		end
 	end
-
-	redef fun []=(i,c) do
-		if i == target.length then target.add_byte c
-		if i < target.str.length then
-			# FIXME: Will need to be optimized and rewritten with Unicode
-			var s = target.str
-			var l = s.substring(0, i)
-			var r = s.substring_from(i + 1)
-			target.str = l + c.to_i.ascii.to_s + r
-		else
-			target.ns[i - target.str.length] = c
-		end
-	end
-
-	redef fun add(c) do target.add_byte c
-
-	redef fun push(c) do target.add_byte c
 
 	redef fun iterator_from(i) do return new RopeBufferByteIterator.from(target, i)
 
