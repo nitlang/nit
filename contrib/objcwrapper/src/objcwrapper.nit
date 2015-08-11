@@ -27,13 +27,24 @@ var v = new Interpretor
 var g = new CodeGenerator
 
 for arg in args do
-	var file = new FileReader.open(arg)
-	var lexer = new Lexer_objc(file.read_all)
+	# Read input
+	var content = arg.to_path.read_all
+
+	# Parse
+	var lexer = new Lexer_objc(content)
 	var parser = new Parser_objc
 	var tokens = lexer.lex
 	parser.tokens.add_all(tokens)
-	v.enter_visit(parser.parse)
-	file.close
+	var root = parser.parse
+
+	# Check for errors
+	if root isa NError then
+		print_error "Syntax Error: {root.message}: {root.position or else ""}"
+		continue
+	end
+
+	# Run analysis
+	v.enter_visit root
 end
 
 g.generator v.model.classes
