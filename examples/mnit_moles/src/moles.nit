@@ -23,6 +23,7 @@ module moles is
 end
 
 import mnit
+import realtime
 
 import drawing
 
@@ -45,21 +46,35 @@ class Hole
 	# Content (and state) of this hole
 	var content: nullable HoleContent = null
 
+	# Time at witch this hole can act again
+	var timeout_until: Float = app.clock.total.to_f is lazy
+
+	# Timeout for 1/2 sec or less with a higher score
+	private fun reset_timeout do
+		timeout_until = app.clock.total.to_f +
+		                0.5 - 0.4 * (game.points.to_f / 1000.0).min(1.0)
+	end
+
 	fun do_turn
 	do
+		if timeout_until > app.clock.total.to_f then return
+
 		var content = content
 		if content != null then
 			if content == game.down then
 				if (20.0*game.speed_modifier).to_i.rand == 0 then
 					# dead / hide
 					self.content = null
+					reset_timeout
 				end
 			else if (80.0*game.speed_modifier).to_i.rand == 0 then
 				# hide
 				self.content = null
+				reset_timeout
 			end
 		else if (100.0*game.speed_modifier).to_i.rand == 0 then
 			self.content = to_pop
+			reset_timeout
 		end
 	end
 
@@ -289,6 +304,9 @@ redef class App
 
 	# Numbers to display the score
 	var numbers = new NumberImages(assets.n)
+
+	# Elapsed time since program launch
+	var clock = new Clock
 
 	redef fun on_start
 	do
