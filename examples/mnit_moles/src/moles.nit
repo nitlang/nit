@@ -222,7 +222,7 @@ end
 # Where all the UI stuff is done
 class Screen
 	# The running game
-	var game = new Game
+	var game = new Game is lazy
 
 	fun do_frame(display: Display)
 	do
