@@ -40,10 +40,7 @@ redef class App
 		var ys = display.height.to_f/th.to_f*0.4
 
 		# Use the smaller scale so everything fits
-		# FIXME replace these conditions with xs.min(ys) when Float isa Comparable
-		if xs < ys then
-			display_scale_container.item = xs
-		else display_scale_container.item = ys
+		display_scale_container.item = xs.min(ys)
 
 		super
 	end
