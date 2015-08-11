@@ -34,40 +34,17 @@ private class FlatSubstringsIter
 	redef fun next do tgt = null
 end
 
-# Immutable strings of characters.
-class FlatString
-	super FlatText
-	super String
+redef class FlatText
 
-	# Index at which `self` begins in `items`, inclusively
-	private var first_byte: Int is noinit
+	private fun first_byte: Int do return 0
 
-	# Index at which `self` ends in `items`, inclusively
-	private var last_byte: Int is noinit
-
-	redef var chars = new FlatStringCharView(self) is lazy
-
-	redef var bytes = new FlatStringByteView(self) is lazy
+	private fun last_byte: Int do return bytelen - 1
 
 	# Cache of the latest position (char) explored in the string
 	var position: Int = 0
+
 	# Cached position (bytes) in the NativeString underlying the String
 	var bytepos: Int = first_byte is lateinit
-
-	redef var length is lazy do
-		if bytelen == 0 then return 0
-		var st = first_byte
-		var its = items
-		var ln = 0
-		var lst = last_byte
-		while st <= lst do
-			st += its.length_of_char_at(st)
-			ln += 1
-		end
-		return ln
-	end
-
-	redef fun [](index) do return items.char_at(char_to_byte_index(index))
 
 	# Index of the character `index` in `items`
 	private fun char_to_byte_index(index: Int): Int do
@@ -105,6 +82,37 @@ class FlatString
 		bytepos = ns_i
 
 		return ns_i
+	end
+
+	redef fun [](index) do return items.char_at(char_to_byte_index(index))
+end
+
+# Immutable strings of characters.
+class FlatString
+	super FlatText
+	super String
+
+	# Index at which `self` begins in `items`, inclusively
+	redef var first_byte is noinit
+
+	# Index at which `self` ends in `items`, inclusively
+	redef var last_byte is noinit
+
+	redef var chars = new FlatStringCharView(self) is lazy
+
+	redef var bytes = new FlatStringByteView(self) is lazy
+
+	redef var length is lazy do
+		if bytelen == 0 then return 0
+		var st = first_byte
+		var its = items
+		var ln = 0
+		var lst = last_byte
+		while st <= lst do
+			st += its.length_of_char_at(st)
+			ln += 1
+		end
+		return ln
 	end
 
 	redef fun reversed
@@ -280,7 +288,7 @@ class FlatString
 		var mifrom = first_byte
 		if s isa FlatText then
 			var sits = s.items
-			var sifrom = s.as(FlatString).first_byte
+			var sifrom = s.first_byte
 			var ns = new NativeString(nlen + 1)
 			mits.copy_to(ns, mlen, mifrom, 0)
 			sits.copy_to(ns, slen, sifrom, mlen)
@@ -477,6 +485,10 @@ class FlatBuffer
 
 	redef var length = 0
 
+	private var char_cache: Int = -1
+
+	private var byte_cache: Int = -1
+
 	private var capacity = 0
 
 	redef fun fast_cstring do return items.fast_cstring(0)
@@ -515,12 +527,6 @@ class FlatBuffer
 		items.copy_to(items, bytelen - from, from, from - len)
 	end
 
-	redef fun [](i)
-	do
-		assert i < length and i >= 0
-		return items.char_at(items.char_to_byte_index(i))
-	end
-
 	redef fun []=(index, item)
 	do
 		assert index >= 0 and index <= length
@@ -541,6 +547,7 @@ class FlatBuffer
 			lshift_bytes(ip + clen, -size_diff)
 		end
 		bytelen += size_diff
+		bytepos += size_diff
 		items.set_char_at(ip, item)
 	end
 
@@ -645,10 +652,8 @@ class FlatBuffer
 		is_dirty = true
 		var sl = s.bytelen
 		enlarge(bytelen + sl)
-		if s isa FlatString then
+		if s isa FlatText then
 			s.items.copy_to(items, sl, s.first_byte, bytelen)
-		else if s isa FlatBuffer then
-			s.items.copy_to(items, sl, 0, bytelen)
 		else
 			for i in s.substrings do append i
 			return
