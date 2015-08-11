@@ -52,4 +52,3 @@ end
 fun display_scale_container: Ref[Float] do return once new Ref[Float](0.1)
 redef fun display_scale do return display_scale_container.item
 redef fun display_offset_x: Int do return (300.0*display_scale).to_i
-redef fun display_offset_y: Int do return (800.0*display_scale).to_i

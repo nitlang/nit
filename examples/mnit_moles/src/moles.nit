@@ -183,7 +183,7 @@ class Game
 	var speed_modifier = 1.0
 
 	# Vertical offset between rows
-	var dist_between_rows = 512
+	var dist_between_rows = 448
 
 	# Horizontal offset between columns
 	var dist_between_columns = 600
@@ -328,4 +328,4 @@ fun display_scale: Float do return 1.0
 fun display_offset_x: Int do return (512.0*display_scale).to_i
 
 # Depends on the width of the holes
-fun display_offset_y: Int do return (800.0*display_scale).to_i
+fun display_offset_y: Int do return (1000.0*display_scale).to_i
