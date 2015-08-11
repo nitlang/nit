@@ -1501,10 +1501,6 @@ abstract class Buffer
 	# In Buffers, the internal sequence of character is mutable
 	# Thus, `chars` can be used to modify the buffer.
 	redef fun chars: Sequence[Char] is abstract
-
-	# In Buffers, the internal sequence of bytes is mutable
-	# Thus, `bytes` can be used to modify the buffer.
-	redef fun bytes: Sequence[Byte] is abstract
 end
 
 # View for chars on Buffer objects, extends Sequence
@@ -1521,7 +1517,6 @@ end
 # for mutation operations
 private abstract class BufferByteView
 	super StringByteView
-	super Sequence[Byte]
 
 	redef type SELFTYPE: Buffer
 end
