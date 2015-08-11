@@ -439,7 +439,7 @@ class RopeBuffer
 		end
 		if s isa FlatText then
 			var oits = s.items
-			var from = if s isa FlatString then s.first_byte else 0
+			var from = s.first_byte
 			var remsp = buf_size - rpos
 			if slen <= remsp then
 				oits.copy_to(ns, slen, from, rpos)
