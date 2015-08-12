@@ -37,3 +37,6 @@ check-apple:
 	| bin/header_static > tests/NSArray.pre.h
 	bin/objcwrapper tests/NSArray.pre.h
 	../../bin/nitpick NSArray.nit
+
+bin/header_static:
+	../../bin/nitc --dir bin src/header_static.nit
