@@ -145,7 +145,12 @@ class Bytes
 
 	redef fun to_s do
 		persisted = true
-		return new FlatString.with_infos(items, length, 0, length -1)
+		var b = self
+		if not is_utf8 then
+			b = clean_utf8
+			persisted = false
+		end
+		return new FlatString.with_infos(b.items, b.length, 0, b.length -1)
 	end
 
 	redef fun iterator do return new BytesIterator.with_buffer(self)
