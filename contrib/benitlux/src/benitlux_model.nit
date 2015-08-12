@@ -23,12 +23,6 @@ import serialization
 class Beer
 	auto_serializable
 
-	init(name, desc: String)
-	do
-		self.name = name
-		self.desc = desc
-	end
-
 	# Name of the beer
 	var name: String
 
