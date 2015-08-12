@@ -1,3 +1,4 @@
 src/benitlux_serial.nit
 *.db
 *.email
+benitlux_corrections.txt

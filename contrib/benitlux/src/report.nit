@@ -14,6 +14,7 @@
 
 import benitlux_model
 import benitlux_db
+import correct
 
 # Sort beers by their availability
 class BeerComparator
