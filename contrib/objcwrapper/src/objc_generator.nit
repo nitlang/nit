@@ -84,7 +84,7 @@ class CodeGenerator
 			nit_method_generator(commented_method, file, init_with_alloc)
 			if commented_method != commented_methods.last then file.write("\n")
 		end
-		file.write("\nend")
+		file.write "\nend\n"
 	end
 
 	fun new_nit_generator(classe: nullable ObjcClass, file: FileWriter, init_with_alloc: Bool) do
