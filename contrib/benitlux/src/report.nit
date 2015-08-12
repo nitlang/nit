@@ -32,6 +32,20 @@ class BeerComparator
 	                                  else map1[a] <=> map1[b]
 end
 
+redef class Text
+
+	# Get the background for the date `self` of format `yyyy-mm-dd`
+	private fun date_to_back: String
+	do
+		assert length == 10
+
+		var m = substring(5, 2)
+		var month = m.to_i
+		if [4..9].has(month) then return " "
+		return "-"
+	end
+end
+
 # Use the local DB
 var db_path = "benitlux_sherbrooke.db"
 var db = new DB.open(db_path)
@@ -107,8 +121,8 @@ for beer in beers do
 	# Skip never-available beers, usually name errors
 	if days.is_empty then continue
 
-	# Print a line looking like: "  ############ ######         ######## : Beer"
-	for s in days_sample do printn if days.has(s) then "#" else " "
+	# Print a line looking like: "  ############ ######    -----########-: Beer"
+	for s in days_sample do printn if days.has(s) then "#" else s.date_to_back
 	print ": {beer.name}"
 end
 
