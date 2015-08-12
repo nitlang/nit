@@ -109,11 +109,44 @@ sorter = new BeerComparator(appearances, availability)
 sorter.sort beers
 
 # Display the batch graph
-print "\nBatches:"
+print "\nAvailability graph:"
 
 # Compute `column_width` days from all the known days
 var column_width = 70
 var days_sample = [for i in column_width.times do all_days[i*all_days.length/column_width]]
+
+# Gather columns headers for each month
+var headers = new Array[nullable String]
+var pre = ""
+for day in days_sample do
+	var new_pre = day.substring(0, 7)
+
+	if not day.has_prefix(pre) then
+		headers.add new_pre
+	else headers.add null
+
+	pre = new_pre
+end
+
+# Draw the headers from top to bottom so they look like:
+#
+# ~~~
+# 2
+# 0
+# 1
+# 5
+# -
+# 0
+# 1
+# ~~~
+for l in 7.times do
+	for header in headers do
+		if header != null then
+			printn header[l]
+		else printn " "
+	end
+	print ""
+end
 
 for beer in beers do
 	var days = beer2days[beer]
