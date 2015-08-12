@@ -2102,6 +2102,7 @@ abstract class TokenLinkOrImage
 					if pos == -1 then return -1
 				end
 			end
+			if pos < start then return -1
 			if md[pos] != ')' then return -1
 		else if md[pos] == '[' then
 			pos += 1
