@@ -20,6 +20,8 @@ import mnit_android
 import android::portrait
 
 import moles
+import effects
+import more_traps
 
 redef class Game
 	redef fun columns do return 3
@@ -27,7 +29,7 @@ redef class Game
 end
 
 redef class App
-	redef fun init_screen_and_game
+	redef fun on_start
 	do
 		# We use as a reference the Moto X
 		var tw = 720
@@ -38,10 +40,7 @@ redef class App
 		var ys = display.height.to_f/th.to_f*0.4
 
 		# Use the smaller scale so everything fits
-		# FIXME replace these conditions with xs.min(ys) when Float isa Comparable
-		if xs < ys then
-			display_scale_container.item = xs
-		else display_scale_container.item = ys
+		display_scale_container.item = xs.min(ys)
 
 		super
 	end
@@ -50,4 +49,3 @@ end
 fun display_scale_container: Ref[Float] do return once new Ref[Float](0.1)
 redef fun display_scale do return display_scale_container.item
 redef fun display_offset_x: Int do return (300.0*display_scale).to_i
-redef fun display_offset_y: Int do return (800.0*display_scale).to_i
