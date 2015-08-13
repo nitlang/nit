@@ -51,7 +51,7 @@ extern class NativeBSON `{ bson_t * `}
 	new from_json_string(data: NativeString) import set_mongoc_error `{
 		bson_error_t error;
 		bson_t *bson;
-		bson = bson_new_from_json(data, -1, &error);
+		bson = bson_new_from_json((uint8_t *)data, -1, &error);
 		if(!bson) {
 			NativeBSON_set_mongoc_error(bson, &error);
 			return NULL;
@@ -183,7 +183,7 @@ extern class NativeMongoClient `{ mongoc_client_t * `}
 		import set_mongoc_error, NativeCStringArray, NativeCStringArray.as nullable `{
 		bson_error_t error;
 		char **strv;
-		if(strv = mongoc_client_get_database_names(self, &error)) {
+		if((strv = mongoc_client_get_database_names(self, &error))) {
 			return NativeCStringArray_as_nullable(strv);
 		}
 		NativeMongoClient_set_mongoc_error(self, &error);
@@ -230,7 +230,7 @@ extern class NativeMongoDb `{ mongoc_database_t * `}
 		import set_mongoc_error, NativeCStringArray, NativeCStringArray.as nullable `{
 		bson_error_t error;
 		char **strv;
-		if(strv = mongoc_database_get_collection_names(self, &error)) {
+		if((strv = mongoc_database_get_collection_names(self, &error))) {
 			return NativeCStringArray_as_nullable(strv);
 		}
 		NativeMongoDb_set_mongoc_error(self, &error);
@@ -426,12 +426,10 @@ extern class NativeMongoCollection `{ mongoc_collection_t * `}
 		bson_error_t error;
 		mongoc_cursor_t	*cursor;
 		cursor = mongoc_collection_find(self, MONGOC_QUERY_NONE, 0, 0, 0, query, NULL, NULL);
-
 		if (mongoc_cursor_error(cursor, &error)) {
 			NativeMongoCollection_set_mongoc_error(self, &error);
 			return null_NativeMongoCursor();
 		}
-
 		return NativeMongoCursor_as_nullable(cursor);
 	`}
 
