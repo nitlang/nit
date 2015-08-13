@@ -14,6 +14,7 @@
 
 import benitlux_model
 import benitlux_db
+import correct
 
 # Sort beers by their availability
 class BeerComparator
@@ -29,6 +30,20 @@ class BeerComparator
 	redef fun compare(a, b) do return if map1[a] == map1[b] then
 	                                      map2[a] <=> map2[b]
 	                                  else map1[a] <=> map1[b]
+end
+
+redef class Text
+
+	# Get the background for the date `self` of format `yyyy-mm-dd`
+	private fun date_to_back: String
+	do
+		assert length == 10
+
+		var m = substring(5, 2)
+		var month = m.to_i
+		if [4..9].has(month) then return " "
+		return "-"
+	end
 end
 
 # Use the local DB
@@ -94,11 +109,44 @@ sorter = new BeerComparator(appearances, availability)
 sorter.sort beers
 
 # Display the batch graph
-print "\nBatches:"
+print "\nAvailability graph:"
 
 # Compute `column_width` days from all the known days
 var column_width = 70
 var days_sample = [for i in column_width.times do all_days[i*all_days.length/column_width]]
+
+# Gather columns headers for each month
+var headers = new Array[nullable String]
+var pre = ""
+for day in days_sample do
+	var new_pre = day.substring(0, 7)
+
+	if not day.has_prefix(pre) then
+		headers.add new_pre
+	else headers.add null
+
+	pre = new_pre
+end
+
+# Draw the headers from top to bottom so they look like:
+#
+# ~~~
+# 2
+# 0
+# 1
+# 5
+# -
+# 0
+# 1
+# ~~~
+for l in 7.times do
+	for header in headers do
+		if header != null then
+			printn header[l]
+		else printn " "
+	end
+	print ""
+end
 
 for beer in beers do
 	var days = beer2days[beer]
@@ -106,8 +154,8 @@ for beer in beers do
 	# Skip never-available beers, usually name errors
 	if days.is_empty then continue
 
-	# Print a line looking like: "  ############ ######         ######## : Beer"
-	for s in days_sample do printn if days.has(s) then "#" else " "
+	# Print a line looking like: "  ############ ######    -----########-: Beer"
+	for s in days_sample do printn if days.has(s) then "#" else s.date_to_back
 	print ": {beer.name}"
 end
 

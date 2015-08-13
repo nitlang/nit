@@ -75,21 +75,13 @@ class Benitlux
 	var street: String
 
 	# The url of this precise Benelux
-	var url: String
+	var url = "www.brasseriebenelux.com/{street}" is lazy
 
 	# Path to the database
-	var db_path: String
+	var db_path = "benitlux_{street}.db" is lazy
 
 	# Where to save the sample email
-	var sample_email_path: String
-
-	init(street: String)
-	do
-		self.street = street
-		self.url = "www.brasseriebenelux.com/{street}"
-		self.db_path = "benitlux_{street}.db"
-		self.sample_email_path = "benitlux_{street}.email"
-	end
+	var sample_email_path = "benitlux_{street}.email" is lazy
 
 	# Execute the main program logic
 	fun run(send_emails: Bool)
@@ -171,10 +163,10 @@ class Benitlux
 	end
 
 	# Content lines of the email
-	var email_content: Array[String]
+	var email_content: Array[String] is noautoinit
 
 	# Title of the email
-	var email_title: String
+	var email_title: String is noautoinit
 
 	# Generate email and fill the attributes `email_content` and `email_title`
 	fun generate_email(beer_events: BeerEvents)
@@ -229,7 +221,7 @@ end
 var ben = new Benitlux("sherbrooke")
 ben.run(opts.send_emails.value)
 
-# The parsing logic for the wellington locaiton is active (to gather data)
+# The parsing logic for the wellington location is active (to gather data)
 # but the web interface do not allow to subscribe to its mailing list.
 #
 # TODO revamp mailing list Web interface
