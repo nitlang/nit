@@ -145,10 +145,81 @@ class Bytes
 
 	redef fun to_s do
 		persisted = true
-		return new FlatString.with_infos(items, length, 0, length -1)
+		var b = self
+		if not is_utf8 then
+			b = clean_utf8
+			persisted = false
+		end
+		return new FlatString.with_infos(b.items, b.length, 0, b.length -1)
 	end
 
 	redef fun iterator do return new BytesIterator.with_buffer(self)
+
+	# Is the byte collection valid UTF-8 ?
+	fun is_utf8: Bool do
+		var charst = once [0x80u8, 0u8, 0xE0u8, 0xC0u8, 0xF0u8, 0xE0u8, 0xF8u8, 0xF0u8]
+		var lobounds = once [0, 0x80, 0x800, 0x10000]
+		var hibounds = once [0x7F, 0x7FF, 0xFFFF, 0x10FFFF]
+		var pos = 0
+		var len = length
+		var mits = items
+		while pos < len do
+			var nxst = mits.length_of_char_at(pos)
+			var charst_index = (nxst - 1) * 2
+			if mits[pos] & charst[charst_index] == charst[charst_index + 1] then
+				var c = mits.char_at(pos)
+				var cp = c.ascii
+				if cp <= hibounds[nxst - 1] and cp >= lobounds[nxst - 1] then
+					if cp >= 0xD800 and cp <= 0xDFFF or
+					   cp == 0xFFFE or cp == 0xFFFF then return false
+				else
+					return false
+				end
+			else
+				return false
+			end
+			pos += nxst
+		end
+		return true
+	end
+
+	# Cleans the bytes of `self` to be UTF-8 compliant
+	private fun clean_utf8: Bytes do
+		var charst = once [0x80u8, 0u8, 0xE0u8, 0xC0u8, 0xF0u8, 0xE0u8, 0xF8u8, 0xF0u8]
+		var badchar = once [0xEFu8, 0xBFu8, 0xBDu8]
+		var lobounds = once [0, 0x80, 0x800, 0x10000]
+		var hibounds = once [0x7F, 0x7FF, 0xFFFF, 0x10FFFF]
+		var pos = 0
+		var len = length
+		var ret = new Bytes.with_capacity(len)
+		var mits = items
+		while pos < len do
+			var nxst = mits.length_of_char_at(pos)
+			var charst_index = (nxst - 1) * 2
+			if mits[pos] & charst[charst_index] == charst[charst_index + 1] then
+				var c = mits.char_at(pos)
+				var cp = c.ascii
+				if cp <= hibounds[nxst - 1] and cp >= lobounds[nxst - 1] then
+					if cp >= 0xD800 and cp <= 0xDFFF or
+					   cp == 0xFFFE or cp == 0xFFFF then
+						ret.append badchar
+						pos += 1
+					else
+						var pend = pos + nxst
+						for i in [pos .. pend[ do ret.add mits[i]
+						pos += nxst
+					end
+				else
+					ret.append badchar
+					pos += 1
+				end
+			else
+				ret.append badchar
+				pos += 1
+			end
+		end
+		return ret
+	end
 end
 
 private class BytesIterator

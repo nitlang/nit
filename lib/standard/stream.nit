@@ -14,6 +14,7 @@ module stream
 intrude import text::ropes
 import error
 intrude import bytes
+import codecs
 
 in "C" `{
 	#include <unistd.h>
@@ -43,6 +44,10 @@ end
 # A `Stream` that can be read from
 abstract class Reader
 	super Stream
+
+	# Decoder used to transform input bytes to UTF-8
+	var decoder: Decoder = utf8_decoder is writable
+
 	# Reads a character. Returns `null` on EOF or timeout
 	fun read_char: nullable Char is abstract
 
@@ -168,6 +173,7 @@ abstract class Reader
 	# ~~~
 	fun read_all: String do
 		var s = read_all_bytes
+		if not s.is_utf8 then s = s.clean_utf8
 		var slen = s.length
 		if slen == 0 then return ""
 		var rets = ""
@@ -378,6 +384,9 @@ end
 abstract class Writer
 	super Stream
 
+	# The coder from a nit UTF-8 String to the output file
+	var coder: Coder = utf8_coder is writable
+
 	# Writes bytes from `s`
 	fun write_bytes(s: Bytes) is abstract
 
@@ -448,6 +457,7 @@ abstract class BufferedReader
 		return c
 	end
 
+	# Resets the internal buffer
 	fun buffer_reset do
 		_buffer_length = 0
 		_buffer_pos = 0
@@ -533,6 +543,7 @@ abstract class BufferedReader
 
 	redef fun append_line_to(s)
 	do
+		var lb = new Bytes.with_capacity(10)
 		loop
 			# First phase: look for a '\n'
 			var i = _buffer_pos
@@ -551,27 +562,29 @@ abstract class BufferedReader
 
 			# if there is something to append
 			if i > _buffer_pos then
-				# Enlarge the string (if needed)
-				s.enlarge(s.bytelen + i - _buffer_pos)
-
 				# Copy from the buffer to the string
 				var j = _buffer_pos
 				while j < i do
-					s.bytes.add(_buffer[j])
+					lb.add(_buffer[j])
 					j += 1
 				end
 				_buffer_pos = i
 			else
 				assert end_reached
+				s.append lb.to_s
 				return
 			end
 
 			if eol then
 				# so \n is found
+				s.append lb.to_s
 				return
 			else
 				# so \n is not found
-				if end_reached then return
+				if end_reached then
+					s.append lb.to_s
+					return
+				end
 				fill_buffer
 			end
 		end
