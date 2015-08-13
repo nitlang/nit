@@ -276,26 +276,7 @@ redef class App
 		end
 
 		# Events
-		for event in turn.events do
-			event.client_react(display, turn)
-
-			if event isa ExplosionEvent then
-				var pos = event.pos.to_screen(camera)
-				display.blit_centered(assets.drawing.explosion, pos.x, pos.y)
-			else if event isa OpenFireEvent then
-				var tank = event.tank
-				var screen_pos = tank.pos.to_screen(camera)
-				display.blit_rotated(assets.drawing.turret_firing, screen_pos.x, screen_pos.y, tank.turret.heading)
-
-				if tank.pos.dist2(camera.center(display)) < far_dist2 then
-					assets.turret_fire.play
-				end
-			else if event isa TurretReadyEvent then
-				if event.tank.pos.dist2(camera.center(display)) < far_dist2 then
-					assets.turret_ready.play
-				end
-			end
-		end
+		for event in turn.events do event.client_react(display, turn)
 
 		# Gather and show some performance stats!
 		sys.perfs["draw"].add clock.lapse
