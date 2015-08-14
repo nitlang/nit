@@ -691,11 +691,9 @@ class FlatBuffer
 			var byteto = items.char_to_byte_index(count + from - 1)
 			byteto += items.char_at(byteto).u8char_len - 1
 			var byte_length = byteto - bytefrom + 1
-			var r_items = new NativeString(byte_length)
-			items.copy_to(r_items, byte_length, bytefrom, 0)
-			return new FlatBuffer.with_infos(r_items, byte_length, byte_length, count)
+			return new FlatBuffer.from(new FlatString.full(items, byte_length, bytefrom, byteto, count))
 		else
-			return new Buffer
+			return new FlatBuffer.from("")
 		end
 	end
 
