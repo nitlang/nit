@@ -625,16 +625,25 @@ class FlatBuffer
 	# Create a new string copied from `s`.
 	init from(s: Text)
 	do
-		items = new NativeString(s.bytelen)
 		if s isa FlatText then
-			items = s.items
+			if s.first_byte == 0 then
+				items = s.items
+				written = true
+			else
+				items = new NativeString(s.bytelen)
+				s.items.copy_to(items, s.bytelen, s.first_byte, 0)
+			end
 		else
-			for i in substrings do i.as(FlatString).items.copy_to(items, i.bytelen, 0, 0)
+			items = new NativeString(s.bytelen)
+			var mpos = 0
+			for i in substrings do
+				i.as(FlatString).items.copy_to(items, i.bytelen, i.first_byte, mpos)
+				mpos += i.bytelen
+			end
 		end
 		bytelen = s.bytelen
 		length = s.length
 		capacity = s.bytelen
-		written = true
 	end
 
 	# Create a new empty string with a given capacity.
