@@ -648,9 +648,9 @@ class FlatBuffer
 
 	redef fun append(s)
 	do
-		if s.is_empty then return
-		is_dirty = true
 		var sl = s.bytelen
+		if sl == 0 then return
+		is_dirty = true
 		enlarge(bytelen + sl)
 		if s isa FlatText then
 			s.items.copy_to(items, sl, s.first_byte, bytelen)
