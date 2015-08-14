@@ -518,14 +518,13 @@ abstract class BufferedReader
 	do
 		if last_error != null then return new Bytes.empty
 		var s = new Bytes.with_capacity(10)
+		var b = _buffer
 		while not eof do
 			var j = _buffer_pos
 			var k = _buffer_length
-			while j < k do
-				s.add(_buffer[j])
-				j += 1
-			end
-			_buffer_pos = j
+			var rd_sz = k - j
+			s.append_ns_from(b, rd_sz, j)
+			_buffer_pos = k
 			fill_buffer
 		end
 		return s
