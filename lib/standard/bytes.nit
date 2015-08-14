@@ -249,21 +249,23 @@ redef class Text
 	# ~~~
 	fun to_bytes: Bytes do
 		var b = new Bytes.with_capacity(bytelen)
+		append_to_bytes b
+		return b
+	end
+
+	# Appends `self.bytes` to `b`
+	fun append_to_bytes(b: Bytes) do
 		for s in substrings do
 			var from = if s isa FlatString then s.first_byte else 0
 			b.append_ns_from(s.items, s.bytelen, from)
 		end
-		return b
 	end
 end
 
 redef class FlatText
-	redef fun to_bytes do
-		var len = bytelen
-		var b = new Bytes.with_capacity(len)
+	redef fun append_to_bytes(b) do
 		var from = if self isa FlatString then first_byte else 0
-		b.append_ns_from(items, len, from)
-		return b
+		b.append_ns_from(items, bytelen, from)
 	end
 end
 
