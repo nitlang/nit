@@ -654,6 +654,7 @@ abstract class AbstractCompiler
 		self.header.add_decl("#include <sys/types.h>\n")
 		self.header.add_decl("#include <unistd.h>\n")
 		self.header.add_decl("#include <stdint.h>\n")
+		self.header.add_decl("#include <inttypes.h>\n")
 		self.header.add_decl("#include \"gc_chooser.h\"")
 		self.header.add_decl("#ifdef ANDROID")
 		self.header.add_decl("	#include <android/log.h>")
@@ -1506,6 +1507,46 @@ abstract class AbstractCompilerVisitor
 		return res
 	end
 
+	# Generate an int8 value
+	fun int8_instance(value: Int8): RuntimeVariable
+	do
+		var t = mmodule.int8_type
+		var res = new RuntimeVariable("((int8_t){value.to_s})", t, t)
+		return res
+	end
+
+	# Generate an int16 value
+	fun int16_instance(value: Int16): RuntimeVariable
+	do
+		var t = mmodule.int16_type
+		var res = new RuntimeVariable("((int16_t){value.to_s})", t, t)
+		return res
+	end
+
+	# Generate a uint16 value
+	fun uint16_instance(value: UInt16): RuntimeVariable
+	do
+		var t = mmodule.uint16_type
+		var res = new RuntimeVariable("((uint16_t){value.to_s})", t, t)
+		return res
+	end
+
+	# Generate an int32 value
+	fun int32_instance(value: Int32): RuntimeVariable
+	do
+		var t = mmodule.int32_type
+		var res = new RuntimeVariable("((int32_t){value.to_s})", t, t)
+		return res
+	end
+
+	# Generate a uint32 value
+	fun uint32_instance(value: UInt32): RuntimeVariable
+	do
+		var t = mmodule.uint32_type
+		var res = new RuntimeVariable("((uint32_t){value.to_s})", t, t)
+		return res
+	end
+
 	# Generate a char value
 	fun char_instance(value: Char): RuntimeVariable
 	do
@@ -1905,8 +1946,18 @@ redef class MClassType
 			return "uint32_t"
 		else if mclass.name == "Float" then
 			return "double"
+		else if mclass.name == "Int8" then
+			return "int8_t"
 		else if mclass.name == "Byte" then
 			return "unsigned char"
+		else if mclass.name == "Int16" then
+			return "int16_t"
+		else if mclass.name == "UInt16" then
+			return "uint16_t"
+		else if mclass.name == "Int32" then
+			return "int32_t"
+		else if mclass.name == "UInt32" then
+			return "uint32_t"
 		else if mclass.name == "NativeString" then
 			return "char*"
 		else if mclass.name == "NativeArray" then
@@ -1937,8 +1988,18 @@ redef class MClassType
 			return "c"
 		else if mclass.name == "Float" then
 			return "d"
+		else if mclass.name == "Int8" then
+			return "i8"
 		else if mclass.name == "Byte" then
 			return "b"
+		else if mclass.name == "Int16" then
+			return "i16"
+		else if mclass.name == "UInt16" then
+			return "u16"
+		else if mclass.name == "Int32" then
+			return "i32"
+		else if mclass.name == "UInt32" then
+			return "u32"
 		else if mclass.name == "NativeString" then
 			return "str"
 		else if mclass.name == "NativeArray" then
@@ -2160,6 +2221,21 @@ redef class AMethPropdef
 			else if pname == ">=" then
 				v.ret(v.new_expr("{arguments[0]} >= {arguments[1]}", ret.as(not null)))
 				return true
+			else if pname == "to_i8" then
+				v.ret(v.new_expr("(int8_t){arguments[0]}", ret.as(not null)))
+				return true
+			else if pname == "to_i16" then
+				v.ret(v.new_expr("(int16_t){arguments[0]}", ret.as(not null)))
+				return true
+			else if pname == "to_u16" then
+				v.ret(v.new_expr("(uint16_t){arguments[0]}", ret.as(not null)))
+				return true
+			else if pname == "to_i32" then
+				v.ret(v.new_expr("(int32_t){arguments[0]}", ret.as(not null)))
+				return true
+			else if pname == "to_u32" then
+				v.ret(v.new_expr("(uint32_t){arguments[0]}", ret.as(not null)))
+				return true
 			else if pname == "to_f" then
 				v.ret(v.new_expr("(double){arguments[0]}", ret.as(not null)))
 				return true
@@ -2259,6 +2335,21 @@ redef class AMethPropdef
 			else if pname == "to_f" then
 				v.ret(v.new_expr("(double){arguments[0]}", ret.as(not null)))
 				return true
+			else if pname == "to_i8" then
+				v.ret(v.new_expr("(int8_t){arguments[0]}", ret.as(not null)))
+				return true
+			else if pname == "to_i16" then
+				v.ret(v.new_expr("(int16_t){arguments[0]}", ret.as(not null)))
+				return true
+			else if pname == "to_u16" then
+				v.ret(v.new_expr("(uint16_t){arguments[0]}", ret.as(not null)))
+				return true
+			else if pname == "to_i32" then
+				v.ret(v.new_expr("(int32_t){arguments[0]}", ret.as(not null)))
+				return true
+			else if pname == "to_u32" then
+				v.ret(v.new_expr("(uint32_t){arguments[0]}", ret.as(not null)))
+				return true
 			else if pname == "ascii" then
 				v.ret(v.new_expr("{arguments[0]}", ret.as(not null)))
 				return true
@@ -2334,6 +2425,21 @@ redef class AMethPropdef
 			else if pname == "to_b" then
 				v.ret(v.new_expr("(unsigned char){arguments[0]}", ret.as(not null)))
 				return true
+			else if pname == "to_i8" then
+				v.ret(v.new_expr("(int8_t){arguments[0]}", ret.as(not null)))
+				return true
+			else if pname == "to_i16" then
+				v.ret(v.new_expr("(int16_t){arguments[0]}", ret.as(not null)))
+				return true
+			else if pname == "to_u16" then
+				v.ret(v.new_expr("(uint16_t){arguments[0]}", ret.as(not null)))
+				return true
+			else if pname == "to_i32" then
+				v.ret(v.new_expr("(int32_t){arguments[0]}", ret.as(not null)))
+				return true
+			else if pname == "to_u32" then
+				v.ret(v.new_expr("(uint32_t){arguments[0]}", ret.as(not null)))
+				return true
 			end
 		else if cname == "NativeString" then
 			if pname == "[]" then
@@ -2358,6 +2464,456 @@ redef class AMethPropdef
 		else if cname == "NativeArray" then
 			v.native_array_def(pname, ret, arguments)
 			return true
+		else if cname == "Int8" then
+			if pname == "output" then
+				v.add("printf(\"%\"PRIi8 \"\\n\", {arguments.first});")
+				return true
+			else if pname == "object_id" then
+				v.ret(v.new_expr("(long){arguments.first}", ret.as(not null)))
+				return true
+			else if pname == "+" then
+				v.ret(v.new_expr("{arguments[0]} + {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == "-" then
+				v.ret(v.new_expr("{arguments[0]} - {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == "unary -" then
+				v.ret(v.new_expr("-{arguments[0]}", ret.as(not null)))
+				return true
+			else if pname == "unary +" then
+				v.ret(arguments[0])
+				return true
+			else if pname == "*" then
+				v.ret(v.new_expr("{arguments[0]} * {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == "/" then
+				v.ret(v.new_expr("{arguments[0]} / {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == "%" then
+				v.ret(v.new_expr("{arguments[0]} % {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == "<<" then
+				v.ret(v.new_expr("{arguments[0]} << {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == ">>" then
+				v.ret(v.new_expr("{arguments[0]} >> {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == "==" then
+				v.ret(v.equal_test(arguments[0], arguments[1]))
+				return true
+			else if pname == "!=" then
+				var res = v.equal_test(arguments[0], arguments[1])
+				v.ret(v.new_expr("!{res}", ret.as(not null)))
+				return true
+			else if pname == "<" then
+				v.ret(v.new_expr("{arguments[0]} < {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == ">" then
+				v.ret(v.new_expr("{arguments[0]} > {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == "<=" then
+				v.ret(v.new_expr("{arguments[0]} <= {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == ">=" then
+				v.ret(v.new_expr("{arguments[0]} >= {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == "to_i" then
+				v.ret(v.new_expr("(long){arguments[0]}", ret.as(not null)))
+				return true
+			else if pname == "to_b" then
+				v.ret(v.new_expr("(unsigned char){arguments[0]}", ret.as(not null)))
+				return true
+			else if pname == "to_i16" then
+				v.ret(v.new_expr("(int16_t){arguments[0]}", ret.as(not null)))
+				return true
+			else if pname == "to_u16" then
+				v.ret(v.new_expr("(uint16_t){arguments[0]}", ret.as(not null)))
+				return true
+			else if pname == "to_i32" then
+				v.ret(v.new_expr("(int32_t){arguments[0]}", ret.as(not null)))
+				return true
+			else if pname == "to_u32" then
+				v.ret(v.new_expr("(uint32_t){arguments[0]}", ret.as(not null)))
+				return true
+			else if pname == "to_f" then
+				v.ret(v.new_expr("(double){arguments[0]}", ret.as(not null)))
+				return true
+			else if pname == "ascii" then
+				v.ret(v.new_expr("{arguments[0]}", ret.as(not null)))
+				return true
+			else if pname == "&" then
+				v.ret(v.new_expr("{arguments[0]} & {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == "|" then
+				v.ret(v.new_expr("{arguments[0]} | {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == "^" then
+				v.ret(v.new_expr("{arguments[0]} ^ {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == "unary ~" then
+				v.ret(v.new_expr("~{arguments[0]}", ret.as(not null)))
+				return true
+			end
+		else if cname == "Int16" then
+			if pname == "output" then
+				v.add("printf(\"%\"PRIi16 \"\\n\", {arguments.first});")
+				return true
+			else if pname == "object_id" then
+				v.ret(v.new_expr("(long){arguments.first}", ret.as(not null)))
+				return true
+			else if pname == "+" then
+				v.ret(v.new_expr("{arguments[0]} + {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == "-" then
+				v.ret(v.new_expr("{arguments[0]} - {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == "unary -" then
+				v.ret(v.new_expr("-{arguments[0]}", ret.as(not null)))
+				return true
+			else if pname == "unary +" then
+				v.ret(arguments[0])
+				return true
+			else if pname == "*" then
+				v.ret(v.new_expr("{arguments[0]} * {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == "/" then
+				v.ret(v.new_expr("{arguments[0]} / {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == "%" then
+				v.ret(v.new_expr("{arguments[0]} % {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == "<<" then
+				v.ret(v.new_expr("{arguments[0]} << {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == ">>" then
+				v.ret(v.new_expr("{arguments[0]} >> {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == "==" then
+				v.ret(v.equal_test(arguments[0], arguments[1]))
+				return true
+			else if pname == "!=" then
+				var res = v.equal_test(arguments[0], arguments[1])
+				v.ret(v.new_expr("!{res}", ret.as(not null)))
+				return true
+			else if pname == "<" then
+				v.ret(v.new_expr("{arguments[0]} < {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == ">" then
+				v.ret(v.new_expr("{arguments[0]} > {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == "<=" then
+				v.ret(v.new_expr("{arguments[0]} <= {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == ">=" then
+				v.ret(v.new_expr("{arguments[0]} >= {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == "to_i" then
+				v.ret(v.new_expr("(long){arguments[0]}", ret.as(not null)))
+				return true
+			else if pname == "to_b" then
+				v.ret(v.new_expr("(unsigned char){arguments[0]}", ret.as(not null)))
+				return true
+			else if pname == "to_i8" then
+				v.ret(v.new_expr("(int8_t){arguments[0]}", ret.as(not null)))
+				return true
+			else if pname == "to_u16" then
+				v.ret(v.new_expr("(uint16_t){arguments[0]}", ret.as(not null)))
+				return true
+			else if pname == "to_i32" then
+				v.ret(v.new_expr("(int32_t){arguments[0]}", ret.as(not null)))
+				return true
+			else if pname == "to_u32" then
+				v.ret(v.new_expr("(uint32_t){arguments[0]}", ret.as(not null)))
+				return true
+			else if pname == "to_f" then
+				v.ret(v.new_expr("(double){arguments[0]}", ret.as(not null)))
+				return true
+			else if pname == "&" then
+				v.ret(v.new_expr("{arguments[0]} & {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == "|" then
+				v.ret(v.new_expr("{arguments[0]} | {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == "^" then
+				v.ret(v.new_expr("{arguments[0]} ^ {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == "unary ~" then
+				v.ret(v.new_expr("~{arguments[0]}", ret.as(not null)))
+				return true
+			else if pname == "ascii" then
+				v.ret(v.new_expr("{arguments[0]}", ret.as(not null)))
+				return true
+			end
+		else if cname == "UInt16" then
+			if pname == "output" then
+				v.add("printf(\"%\"PRIu16 \"\\n\", {arguments.first});")
+				return true
+			else if pname == "object_id" then
+				v.ret(v.new_expr("(long){arguments.first}", ret.as(not null)))
+				return true
+			else if pname == "+" then
+				v.ret(v.new_expr("{arguments[0]} + {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == "-" then
+				v.ret(v.new_expr("{arguments[0]} - {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == "unary -" then
+				v.ret(v.new_expr("-{arguments[0]}", ret.as(not null)))
+				return true
+			else if pname == "unary +" then
+				v.ret(arguments[0])
+				return true
+			else if pname == "*" then
+				v.ret(v.new_expr("{arguments[0]} * {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == "/" then
+				v.ret(v.new_expr("{arguments[0]} / {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == "%" then
+				v.ret(v.new_expr("{arguments[0]} % {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == "<<" then
+				v.ret(v.new_expr("{arguments[0]} << {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == ">>" then
+				v.ret(v.new_expr("{arguments[0]} >> {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == "==" then
+				v.ret(v.equal_test(arguments[0], arguments[1]))
+				return true
+			else if pname == "!=" then
+				var res = v.equal_test(arguments[0], arguments[1])
+				v.ret(v.new_expr("!{res}", ret.as(not null)))
+				return true
+			else if pname == "<" then
+				v.ret(v.new_expr("{arguments[0]} < {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == ">" then
+				v.ret(v.new_expr("{arguments[0]} > {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == "<=" then
+				v.ret(v.new_expr("{arguments[0]} <= {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == ">=" then
+				v.ret(v.new_expr("{arguments[0]} >= {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == "to_i" then
+				v.ret(v.new_expr("(long){arguments[0]}", ret.as(not null)))
+				return true
+			else if pname == "to_b" then
+				v.ret(v.new_expr("(unsigned char){arguments[0]}", ret.as(not null)))
+				return true
+			else if pname == "to_i8" then
+				v.ret(v.new_expr("(int8_t){arguments[0]}", ret.as(not null)))
+				return true
+			else if pname == "to_i16" then
+				v.ret(v.new_expr("(int16_t){arguments[0]}", ret.as(not null)))
+				return true
+			else if pname == "to_i32" then
+				v.ret(v.new_expr("(int32_t){arguments[0]}", ret.as(not null)))
+				return true
+			else if pname == "to_u32" then
+				v.ret(v.new_expr("(uint32_t){arguments[0]}", ret.as(not null)))
+				return true
+			else if pname == "to_f" then
+				v.ret(v.new_expr("(double){arguments[0]}", ret.as(not null)))
+				return true
+			else if pname == "&" then
+				v.ret(v.new_expr("{arguments[0]} & {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == "|" then
+				v.ret(v.new_expr("{arguments[0]} | {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == "^" then
+				v.ret(v.new_expr("{arguments[0]} ^ {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == "unary ~" then
+				v.ret(v.new_expr("~{arguments[0]}", ret.as(not null)))
+				return true
+			else if pname == "ascii" then
+				v.ret(v.new_expr("{arguments[0]}", ret.as(not null)))
+				return true
+			end
+		else if cname == "Int32" then
+			if pname == "output" then
+				v.add("printf(\"%\"PRIi32 \"\\n\", {arguments.first});")
+				return true
+			else if pname == "object_id" then
+				v.ret(v.new_expr("(long){arguments.first}", ret.as(not null)))
+				return true
+			else if pname == "+" then
+				v.ret(v.new_expr("{arguments[0]} + {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == "-" then
+				v.ret(v.new_expr("{arguments[0]} - {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == "unary -" then
+				v.ret(v.new_expr("-{arguments[0]}", ret.as(not null)))
+				return true
+			else if pname == "unary +" then
+				v.ret(arguments[0])
+				return true
+			else if pname == "*" then
+				v.ret(v.new_expr("{arguments[0]} * {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == "/" then
+				v.ret(v.new_expr("{arguments[0]} / {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == "%" then
+				v.ret(v.new_expr("{arguments[0]} % {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == "<<" then
+				v.ret(v.new_expr("{arguments[0]} << {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == ">>" then
+				v.ret(v.new_expr("{arguments[0]} >> {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == "==" then
+				v.ret(v.equal_test(arguments[0], arguments[1]))
+				return true
+			else if pname == "!=" then
+				var res = v.equal_test(arguments[0], arguments[1])
+				v.ret(v.new_expr("!{res}", ret.as(not null)))
+				return true
+			else if pname == "<" then
+				v.ret(v.new_expr("{arguments[0]} < {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == ">" then
+				v.ret(v.new_expr("{arguments[0]} > {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == "<=" then
+				v.ret(v.new_expr("{arguments[0]} <= {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == ">=" then
+				v.ret(v.new_expr("{arguments[0]} >= {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == "to_i" then
+				v.ret(v.new_expr("(long){arguments[0]}", ret.as(not null)))
+				return true
+			else if pname == "to_b" then
+				v.ret(v.new_expr("(unsigned char){arguments[0]}", ret.as(not null)))
+				return true
+			else if pname == "to_i8" then
+				v.ret(v.new_expr("(int8_t){arguments[0]}", ret.as(not null)))
+				return true
+			else if pname == "to_i16" then
+				v.ret(v.new_expr("(int16_t){arguments[0]}", ret.as(not null)))
+				return true
+			else if pname == "to_u16" then
+				v.ret(v.new_expr("(uint16_t){arguments[0]}", ret.as(not null)))
+				return true
+			else if pname == "to_u32" then
+				v.ret(v.new_expr("(uint32_t){arguments[0]}", ret.as(not null)))
+				return true
+			else if pname == "to_f" then
+				v.ret(v.new_expr("(double){arguments[0]}", ret.as(not null)))
+				return true
+			else if pname == "&" then
+				v.ret(v.new_expr("{arguments[0]} & {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == "|" then
+				v.ret(v.new_expr("{arguments[0]} | {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == "^" then
+				v.ret(v.new_expr("{arguments[0]} ^ {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == "unary ~" then
+				v.ret(v.new_expr("~{arguments[0]}", ret.as(not null)))
+				return true
+			else if pname == "ascii" then
+				v.ret(v.new_expr("{arguments[0]}", ret.as(not null)))
+				return true
+			end
+		else if cname == "UInt32" then
+			if pname == "output" then
+				v.add("printf(\"%\"PRIu32 \"\\n\", {arguments.first});")
+				return true
+			else if pname == "object_id" then
+				v.ret(v.new_expr("(long){arguments.first}", ret.as(not null)))
+				return true
+			else if pname == "+" then
+				v.ret(v.new_expr("{arguments[0]} + {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == "-" then
+				v.ret(v.new_expr("{arguments[0]} - {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == "unary -" then
+				v.ret(v.new_expr("-{arguments[0]}", ret.as(not null)))
+				return true
+			else if pname == "unary +" then
+				v.ret(arguments[0])
+				return true
+			else if pname == "*" then
+				v.ret(v.new_expr("{arguments[0]} * {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == "/" then
+				v.ret(v.new_expr("{arguments[0]} / {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == "%" then
+				v.ret(v.new_expr("{arguments[0]} % {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == "<<" then
+				v.ret(v.new_expr("{arguments[0]} << {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == ">>" then
+				v.ret(v.new_expr("{arguments[0]} >> {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == "==" then
+				v.ret(v.equal_test(arguments[0], arguments[1]))
+				return true
+			else if pname == "!=" then
+				var res = v.equal_test(arguments[0], arguments[1])
+				v.ret(v.new_expr("!{res}", ret.as(not null)))
+				return true
+			else if pname == "<" then
+				v.ret(v.new_expr("{arguments[0]} < {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == ">" then
+				v.ret(v.new_expr("{arguments[0]} > {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == "<=" then
+				v.ret(v.new_expr("{arguments[0]} <= {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == ">=" then
+				v.ret(v.new_expr("{arguments[0]} >= {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == "to_i" then
+				v.ret(v.new_expr("(long){arguments[0]}", ret.as(not null)))
+				return true
+			else if pname == "to_b" then
+				v.ret(v.new_expr("(unsigned char){arguments[0]}", ret.as(not null)))
+				return true
+			else if pname == "to_i8" then
+				v.ret(v.new_expr("(int8_t){arguments[0]}", ret.as(not null)))
+				return true
+			else if pname == "to_i16" then
+				v.ret(v.new_expr("(int16_t){arguments[0]}", ret.as(not null)))
+				return true
+			else if pname == "to_u16" then
+				v.ret(v.new_expr("(uint16_t){arguments[0]}", ret.as(not null)))
+				return true
+			else if pname == "to_i32" then
+				v.ret(v.new_expr("(int32_t){arguments[0]}", ret.as(not null)))
+				return true
+			else if pname == "to_f" then
+				v.ret(v.new_expr("(double){arguments[0]}", ret.as(not null)))
+				return true
+			else if pname == "&" then
+				v.ret(v.new_expr("{arguments[0]} & {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == "|" then
+				v.ret(v.new_expr("{arguments[0]} | {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == "^" then
+				v.ret(v.new_expr("{arguments[0]} ^ {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == "unary ~" then
+				v.ret(v.new_expr("~{arguments[0]}", ret.as(not null)))
+				return true
+			else if pname == "ascii" then
+				v.ret(v.new_expr("{arguments[0]}", ret.as(not null)))
+				return true
+			end
 		end
 		if pname == "exit" then
 			v.add("exit({arguments[1]});")
@@ -2910,6 +3466,11 @@ redef class AIntegerExpr
 	redef fun expr(v) do
 		if value isa Int then return v.int_instance(value.as(Int))
 		if value isa Byte then return v.byte_instance(value.as(Byte))
+		if value isa Int8 then return v.int8_instance(value.as(Int8))
+		if value isa Int16 then return v.int16_instance(value.as(Int16))
+		if value isa UInt16 then return v.uint16_instance(value.as(UInt16))
+		if value isa Int32 then return v.int32_instance(value.as(Int32))
+		if value isa UInt32 then return v.uint32_instance(value.as(UInt32))
 		# Should never happen
 		abort
 	end

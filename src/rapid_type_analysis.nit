@@ -213,11 +213,16 @@ class RapidTypeAnalysis
 
 		# Force primitive types
 		force_alive("Bool")
-		force_alive("Int")
 		force_alive("Float")
 		force_alive("Char")
 		force_alive("Pointer")
 		force_alive("Byte")
+		force_alive("Int")
+		force_alive("Int8")
+		force_alive("Int16")
+		force_alive("UInt16")
+		force_alive("Int32")
+		force_alive("UInt32")
 
 		while not todo.is_empty do
 			var mmethoddef = todo.shift

@@ -32,6 +32,11 @@ in "C Header" `{
 		int value_Bool;
 		uint32_t value_Char;
 		uint8_t value_Byte;
+		int8_t value_Int8;
+		int16_t value_Int16;
+		uint16_t value_UInt16;
+		int32_t value_Int32;
+		uint32_t value_UInt32;
 		double value_Float;
 		void* value_Pointer;
 	} nit_call_arg;
@@ -77,6 +82,36 @@ private extern class CallArg `{ nit_call_arg* `}
 	# The `Byte` held by this cell
 	fun byte=(value: Byte) `{ self->value_Byte = value; `}
 
+	# The `Int` held by this cell
+	fun int8: Int8 `{ return self->value_Int8; `}
+
+	# The `Int` held by this cell
+	fun int8=(value: Int8) `{ self->value_Int8 = value; `}
+
+	# The `Int` held by this cell
+	fun int16: Int16 `{ return self->value_Int16; `}
+
+	# The `Int` held by this cell
+	fun int16=(value: Int16) `{ self->value_Int16 = value; `}
+
+	# The `Int` held by this cell
+	fun uint16: UInt16 `{ return self->value_UInt16; `}
+
+	# The `Int` held by this cell
+	fun uint16=(value: UInt16) `{ self->value_UInt16 = value; `}
+
+	# The `Int` held by this cell
+	fun int32: Int32 `{ return self->value_Int32; `}
+
+	# The `Int` held by this cell
+	fun int32=(value: Int32) `{ self->value_Int32 = value; `}
+
+	# The `Int` held by this cell
+	fun uint32: UInt32 `{ return self->value_UInt32; `}
+
+	# The `Int` held by this cell
+	fun uint32=(value: UInt32) `{ self->value_UInt32 = value; `}
+
 	# The `Float` held by this cell
 	fun float: Float `{ return self->value_Float; `}
 
@@ -115,6 +150,21 @@ private extern class CallArg `{ nit_call_arg* `}
 		else if static_type.name == "Byte" then
 			assert value isa PrimitiveInstance[Byte]
 			self.byte = value.val
+		else if static_type.name == "Int8" then
+			assert value isa PrimitiveInstance[Int8]
+			self.int8 = value.val
+		else if static_type.name == "Int16" then
+			assert value isa PrimitiveInstance[Int16]
+			self.int16 = value.val
+		else if static_type.name == "UInt16" then
+			assert value isa PrimitiveInstance[UInt16]
+			self.uint16 = value.val
+		else if static_type.name == "Int32" then
+			assert value isa PrimitiveInstance[Int32]
+			self.int32 = value.val
+		else if static_type.name == "UInt32" then
+			assert value isa PrimitiveInstance[UInt32]
+			self.uint32 = value.val
 		else if static_type.name == "Float" then
 			assert value isa PrimitiveInstance[Float]
 			self.float = value.val
@@ -145,6 +195,16 @@ private extern class CallArg `{ nit_call_arg* `}
 			return v.char_instance(self.char)
 		else if name == "Byte" then
 			return v.byte_instance(self.byte)
+		else if name == "Int8" then
+			return v.int8_instance(self.int8)
+		else if name == "Int16" then
+			return v.int16_instance(self.int16)
+		else if name == "UInt16" then
+			return v.uint16_instance(self.uint16)
+		else if name == "Int32" then
+			return v.int32_instance(self.int32)
+		else if name == "UInt32" then
+			return v.uint32_instance(self.uint32)
 		else if name == "Float" then
 			return v.float_instance(self.float)
 		else if name == "NativeString" then

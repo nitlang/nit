@@ -1389,6 +1389,16 @@ redef class AIntegerExpr
 			mclass = v.get_mclass(self, "Byte")
 		else if value isa Int then
 			mclass = v.get_mclass(self, "Int")
+		else if value isa Int8 then
+			mclass = v.get_mclass(self, "Int8")
+		else if value isa Int16 then
+			mclass = v.get_mclass(self, "Int16")
+		else if value isa UInt16 then
+			mclass = v.get_mclass(self, "UInt16")
+		else if value isa Int32 then
+			mclass = v.get_mclass(self, "Int32")
+		else if value isa UInt32 then
+			mclass = v.get_mclass(self, "UInt32")
 		end
 		if mclass == null then return # Forward error
 		self.mtype = mclass.mclass_type

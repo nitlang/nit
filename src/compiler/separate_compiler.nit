@@ -252,7 +252,8 @@ class SeparateCompiler
 	do
 		# Collect all bas box class
 		# FIXME: this is not completely fine with a separate compilation scheme
-		for classname in ["Int", "Bool", "Byte", "Char", "Float", "NativeString", "Pointer"] do
+		for classname in ["Int", "Bool", "Byte", "Char", "Float", "NativeString",
+		                 "Pointer", "Int8", "Int16", "UInt16", "Int32", "UInt32"] do
 			var classes = self.mainmodule.model.get_mclasses_by_name(classname)
 			if classes == null then continue
 			assert classes.length == 1 else print classes.join(", ")

@@ -41,6 +41,11 @@ This API is compose of 2 main elements:
       int value_Bool;
       uint32_t value_Char;
       uint8_t value_Byte;
+      int8_t value_Int8;
+      int16_t value_Int16;
+      uint16_t value_UInt16;
+      int32_t value_Int32;
+      uint32_t value_UInt32;
       double value_Float;
       void* value_Pointer;
   } nit_call_arg;

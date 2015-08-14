@@ -483,6 +483,11 @@ redef class MClassType
 		if mclass.name == "Int" then return "long"
 		if mclass.name == "Float" then return "double"
 		if mclass.name == "Byte" then return "byte"
+		if mclass.name == "Int8" then return "byte"
+		if mclass.name == "Int16" then return "short"
+		if mclass.name == "UInt16" then return "short"
+		if mclass.name == "Int32" then return "int"
+		if mclass.name == "UInt32" then return "int"
 		return super
 	end
 
@@ -495,6 +500,11 @@ redef class MClassType
 		if mclass.name == "Int" then return "jlong"
 		if mclass.name == "Float" then return "jdouble"
 		if mclass.name == "Byte" then return "jbyte"
+		if mclass.name == "Int8" then return "jbyte"
+		if mclass.name == "Int16" then return "jshort"
+		if mclass.name == "UInt16" then return "jshort"
+		if mclass.name == "Int32" then return "jint"
+		if mclass.name == "UInt32" then return "jint"
 		return super
 	end
 
@@ -555,6 +565,11 @@ redef class MClassType
 		if mclass.name == "Int" then return "J"
 		if mclass.name == "Float" then return "D"
 		if mclass.name == "Byte" then return "B"
+		if mclass.name == "Int8" then return "B"
+		if mclass.name == "Int16" then return "S"
+		if mclass.name == "UInt16" then return "S"
+		if mclass.name == "Int32" then return "I"
+		if mclass.name == "UInt32" then return "I"
 		return super
 	end
 
@@ -568,6 +583,11 @@ redef class MClassType
 		if mclass.name == "Int" then return "Long"
 		if mclass.name == "Float" then return "Double"
 		if mclass.name == "Byte" then return "Byte"
+		if mclass.name == "Int8" then return "Byte"
+		if mclass.name == "Int16" then return "Short"
+		if mclass.name == "UInt16" then return "Short"
+		if mclass.name == "Int32" then return "Int"
+		if mclass.name == "UInt32" then return "Int"
 		return super
 	end
 end

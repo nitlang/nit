@@ -1341,6 +1341,16 @@ redef class AAttrPropdef
 						cla = modelbuilder.try_get_mclass_by_name(nexpr, mmodule, "Int")
 					else if nexpr.value isa Byte then
 						cla = modelbuilder.try_get_mclass_by_name(nexpr, mmodule, "Byte")
+					else if nexpr.value isa Int8 then
+						cla = modelbuilder.try_get_mclass_by_name(nexpr, mmodule, "Int8")
+					else if nexpr.value isa Int16 then
+						cla = modelbuilder.try_get_mclass_by_name(nexpr, mmodule, "Int16")
+					else if nexpr.value isa UInt16 then
+						cla = modelbuilder.try_get_mclass_by_name(nexpr, mmodule, "UInt16")
+					else if nexpr.value isa Int32 then
+						cla = modelbuilder.try_get_mclass_by_name(nexpr, mmodule, "Int32")
+					else if nexpr.value isa UInt32 then
+						cla = modelbuilder.try_get_mclass_by_name(nexpr, mmodule, "UInt32")
 					else
 						# Should not happen, and should be updated as new types are added
 						abort
