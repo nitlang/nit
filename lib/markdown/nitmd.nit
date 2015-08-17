@@ -17,6 +17,7 @@ module nitmd
 
 import markdown
 import decorators
+import man
 
 import opts
 
@@ -49,6 +50,8 @@ if to == null or to == "html" then
 	# Noop
 else if to == "md" then
 	processor.emitter.decorator = new MdDecorator
+else if to == "man" then
+	processor.emitter.decorator = new ManDecorator
 else
 	print "Unknown output format: {to}"
 	exit 1
