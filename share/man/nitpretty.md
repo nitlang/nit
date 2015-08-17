@@ -1,5 +1,3 @@
-% NITPRETTY(1)
-
 # NAME
 
 nitpretty - pretty print Nit code from Nit source files.
@@ -10,36 +8,36 @@ nitpretty [*options*]... FILE
 
 # OPTIONS
 
-`--dir`
-:   Working directory (default is '.nitpretty')
+### `--dir`
+Working directory (default is '.nitpretty')
 
-`-o`, `--output`
-:   Output name (default is pretty.nit)
+### `-o`, `--output`
+Output name (default is pretty.nit)
 
-`--diff`
-:   Show diff between source and output
+### `--diff`
+Show diff between source and output
 
-`--meld`
-:   Show diff between source and output using meld
+### `--meld`
+Show diff between source and output using meld
 
-`--check`
-:   Check format of Nit source files
+### `--check`
+Check format of Nit source files
 
-    This option creates a temporary pretty printed file then checks if the output
-    of the diff command on the source file and the pretty printed one is empty.
+This option creates a temporary pretty printed file then checks if the output
+of the diff command on the source file and the pretty printed one is empty.
 
-`--break-strings`
-:   Break too long string literals
+### `--break-strings`
+Break too long string literals
 
-`--inline-do`
-:   Force do keyword on the same line as the method signature
+### `--inline-do`
+Force do keyword on the same line as the method signature
 
-`--skip-empty`
-:   Force formatting of empty lines
+### `--skip-empty`
+Force formatting of empty lines
 
-    By default empty lines are kept as they were typed in the file.
-    When enabling this option, `nitpretty` will decide where to break lines and
-    will put empty lines to separate properties and code blocks.
+By default empty lines are kept as they were typed in the file.
+When enabling this option, `nitpretty` will decide where to break lines and
+will put empty lines to separate properties and code blocks.
 
 # SPECIFICATION
 

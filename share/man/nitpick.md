@@ -1,5 +1,3 @@
-% NITPICK(1)
-
 # NAME
 
 nitpick - collect potential style and code issues.

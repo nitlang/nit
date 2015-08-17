@@ -1,5 +1,3 @@
-% NIT(1)
-
 # NAME
 
 nit - interprets and debugs Nit programs.
@@ -55,60 +53,60 @@ Whatever follows it is used as arguments of the interpreted program.
 
 ## COMMAND
 
-`-e`
-:   Specifies the program from command-line.
+### `-e`
+Specifies the program from command-line.
 
-    The `-e` option runs a program written on the command line.
-    Like with ruby, perl, bash and other script language.
+The `-e` option runs a program written on the command line.
+Like with ruby, perl, bash and other script language.
 
-        $ nit -e 'print 5+5'
-        10
+    $ nit -e 'print 5+5'
+    10
 
-`-n`
-:   Repeatedly run the program for each line in file-name arguments.
+### `-n`
+Repeatedly run the program for each line in file-name arguments.
 
-    If no arguments are given, then `nit` iterates over the lines of the standard input (stdin).
+If no arguments are given, then `nit` iterates over the lines of the standard input (stdin).
 
-        $ echo "hello world" | nit -n -e 'print sys.line.capitalized'
-        Hello World
+    $ echo "hello world" | nit -n -e 'print sys.line.capitalized'
+    Hello World
 
-    If some arguments are given, then `nit` considers that each argument is a filepath then it iterates on their lines.
+If some arguments are given, then `nit` considers that each argument is a filepath then it iterates on their lines.
 
 ## INTERPRETATION OPTIONS
 
-`--discover-call-trace`
-:   Trace calls of the first invocation of methods.
+### `--discover-call-trace`
+Trace calls of the first invocation of methods.
 
-    Each time a method is invoked for the first time, its information is printed on the standard output for error (`stderr`).
+Each time a method is invoked for the first time, its information is printed on the standard output for error (`stderr`).
 
-    This option helps the user to have a simplified but humanly readable overview of the behavior of a particular program execution.
+This option helps the user to have a simplified but humanly readable overview of the behavior of a particular program execution.
 
 ## DEBUGGER OPTIONS
 
-`-d`
-:   Launches the target program with the debugger attached to it
+### `-d`
+Launches the target program with the debugger attached to it
 
-`-c`
-:   Launches the target program with the interpreter, such as when the program fails, the debugging prompt is summoned
+### `-c`
+Launches the target program with the interpreter, such as when the program fails, the debugging prompt is summoned
 
-`--socket`
-:   Launches the target program with raw output on the network via sockets
+### `--socket`
+Launches the target program with raw output on the network via sockets
 
-`--websocket`
-:   Launches the target program with output on the network via websockets
+### `--websocket`
+Launches the target program with output on the network via websockets
 
-`--port`
-:   Sets the debug port (Defaults to 22125) - Must be contained between 0 and 65535
+### `--port`
+Sets the debug port (Defaults to 22125) - Must be contained between 0 and 65535
 
 ## OTHER OPTIONS
 
-`--vm`
-:   Run the virtual machine instead of the naive interpreter (experimental)
+### `--vm`
+Run the virtual machine instead of the naive interpreter (experimental)
 
 The virtual machine is currently under heavy development and, unless you are developing the vm, there is no reason to use this option yet.
 
-`-o`
-:   Does nothing. Used for compatibility.
+### `-o`
+Does nothing. Used for compatibility.
 
 
 # DEBUGGER
@@ -139,58 +137,58 @@ If you want to trace the modifications or uses of a variable of your choice, the
 
 ## DEBUGGER COMMANDS
 
-`n`
-:   Proceeds to the next instruction (step-over)
+### `n`
+Proceeds to the next instruction (step-over)
 
-`s`
-:   Steps in an instruction
+### `s`
+Steps in an instruction
 
-`finish`
-:   Steps out of an instruction
+### `finish`
+Steps out of an instruction
 
-`c`
-:   Continues the execution until a breakpoint is encountered or until an error/end of program
+### `c`
+Continues the execution until a breakpoint is encountered or until an error/end of program
 
-`b/break line_number`
-:   Adds a breakpoint on line *line_number* for the current file
+### `b/break line_number`
+Adds a breakpoint on line *line_number* for the current file
 
-`b/break file line_number`
-:   Adds a breakpoint on line *line_number* for the file *file* (Don't forget to add the .nit extension to the command)
+### `b/break file line_number`
+Adds a breakpoint on line *line_number* for the file *file* (Don't forget to add the .nit extension to the command)
 
-`d/delete line_number`
-:   Removes a breakpoint on line *line_number* for the current file
+### `d/delete line_number`
+Removes a breakpoint on line *line_number* for the current file
 
-`d/delete file line_number`
-:   Removes a breakpoint on line *line_number* for the file *file*
+### `d/delete file line_number`
+Removes a breakpoint on line *line_number* for the file *file*
 
-`kill`
-:   Kills the current program (produces a stack trace)
+### `kill`
+Kills the current program (produces a stack trace)
 
-`variable = value`
-:   Sets the value of *variable* to *value* (Only supports primitive types for now : Bool, Char, Int, Float)
+### `variable = value`
+Sets the value of *variable* to *value* (Only supports primitive types for now : Bool, Char, Int, Float)
 
-`p/print variable_name`
-:   Prints the value of the variable *variable_name*
+### `p/print variable_name`
+Prints the value of the variable *variable_name*
 
-`p/print stack`
-:   Prints a stack trace starting with the current frame
+### `p/print stack`
+Prints a stack trace starting with the current frame
 
-`p/print variable_name[index]`
-:   Prints the value of the variable contained at the index *index* of variable *variable_name* (*variable_name* must be a subtype of SequenceRead)
+### `p/print variable_name[index]`
+Prints the value of the variable contained at the index *index* of variable *variable_name* (*variable_name* must be a subtype of SequenceRead)
 
-`p/print variable_name[index_from..index_to]`
-:   Prints the values of all the variables contained from index *index_from* up to *index_to* in the variable *variable_name*
+### `p/print variable_name[index_from..index_to]`
+Prints the values of all the variables contained from index *index_from* up to *index_to* in the variable *variable_name*
 
 All the print commands also work on any dimension SequenceRead collection.
 
-`variable_name as alias`
-:   Sets an alias *alias* for the variable *variable_name*
+### `variable_name as alias`
+Sets an alias *alias* for the variable *variable_name*
 
-`trace variable_name [break/print]`
-:   Traces the uses of the variable you chose to trace by printing the statement it appears in or by breaking on each use. (The [break/print] part is not mandatory, by default, the print option will be used)
+### `trace variable_name [break/print]`
+Traces the uses of the variable you chose to trace by printing the statement it appears in or by breaking on each use. (The [break/print] part is not mandatory, by default, the print option will be used)
 
-`untrace variable_name`
-:   Removes the trace on the variable you chose to trace earlier in the program
+### `untrace variable_name`
+Removes the trace on the variable you chose to trace earlier in the program
 
 
 # SEE ALSO

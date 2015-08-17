@@ -1,5 +1,3 @@
-% NITDBG_CLIENT(1)
-
 # NAME
 
 nitdbg_client - network client for remote debugging.
@@ -16,13 +14,13 @@ See the interpreter command `nit(1)` for details about remote debugging.
 
 # OPTIONS
 
-`--host`
-:   Sets the host to debug from, use IPV4 only. (Defaults to 127.0.0.1).
+### `--host`
+Sets the host to debug from, use IPV4 only. (Defaults to 127.0.0.1).
 
-`--port`
-:   Sets the debug port (Defaults to 22125).
+### `--port`
+Sets the debug port (Defaults to 22125).
 
-    Must be contained between 0 and 65535
+Must be contained between 0 and 65535
 
 # SEE ALSO
 
