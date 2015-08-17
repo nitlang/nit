@@ -646,6 +646,11 @@ interface Decorator
 	# Kind of emitter used for decoration.
 	type EMITTER: MarkdownEmitter
 
+	# Render a single plain char.
+	#
+	# Redefine this method to add special escaping for plain text.
+	fun add_char(v: EMITTER, c: Char) do v.addc c
+
 	# Render a ruler block.
 	fun add_ruler(v: EMITTER, block: BlockRuler) is abstract
 
@@ -1918,7 +1923,7 @@ abstract class Token
 	var char: Char
 
 	# Output that token using `MarkdownEmitter::decorator`.
-	fun emit(v: MarkdownEmitter) do v.addc char
+	fun emit(v: MarkdownEmitter) do v.decorator.add_char(v, char)
 end
 
 # A token without a specific meaning.
