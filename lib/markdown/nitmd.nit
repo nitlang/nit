@@ -17,15 +17,23 @@ module nitmd
 
 import markdown
 
-if args.length != 1 then
-	print "usage: nitmd <file.md>"
-	exit 0
+import opts
+
+var options = new OptionContext
+var opt_help = new OptionBool("Show this help.", "-h", "-?", "--help")
+options.add_option(opt_help)
+
+options.parse(args)
+if options.rest.length != 1 then
+	print "usage: nitmd [-t format] <file.md>"
+	options.usage
+	exit 1
 end
 
-var file = args.first
+var file = options.rest.first
 if not file.file_exists then
 	print "'{file}' not found"
-	exit 0
+	exit 1
 end
 
 var ifs = new FileReader.open(file)
