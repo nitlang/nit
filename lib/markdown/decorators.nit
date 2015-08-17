@@ -70,7 +70,7 @@ class MdDecorator
 		in_orderedlist = true
 		current_li = 0
 		v.emit_in block
-		in_unorderedlist = false
+		in_orderedlist = false
 	end
 	private var in_orderedlist = false
 	private var current_li = 0
