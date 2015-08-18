@@ -374,6 +374,11 @@ redef class ModelBuilder
 			path = candidate
 		end
 
+		# Does the file exists?
+		if not path.file_exists then
+			return null
+		end
+
 		# Fast track, the path is already known
 		var pn = path.basename(".nit")
 		var rp = module_absolute_path(path)
