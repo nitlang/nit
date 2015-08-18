@@ -344,10 +344,18 @@ redef class ModelBuilder
 	# See `identify_file`.
 	var identified_files = new Array[ModulePath]
 
-	# Identify a source file
-	# Load the associated project and groups if required
+	# Identify a source file and load the associated project and groups if required.
 	#
-	# Silently return `null` if `path` is not a valid module path.
+	# This method does what the user expects when giving an argument to a Nit tool.
+	#
+	# * If `path` is an existing Nit source file (with the `.nit` extension),
+	#   then the associated ModulePath is returned
+	# * If `path` is a directory (with a `/`),
+	#   then the ModulePath of its default module is returned (if any)
+	# * If `path` is a simple identifier (eg. `digraph`),
+	#   then the main module of the project `digraph` is searched in `paths` and returned.
+	#
+	# Silently return `null` if `path` does not exists or cannot be identified.
 	fun identify_file(path: String): nullable ModulePath
 	do
 		# special case for not a nit file
