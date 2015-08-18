@@ -25,11 +25,11 @@ for p in $projects; do
 	dir=`dirname "$p"`
 	name=`basename "$dir"`
 	echo "*** make $dir ***"
-	if misc/jenkins/unitrun.sh "run-$name-make" make -C "$dir"; then
+	if misc/jenkins/unitrun.sh "cmd-$name-make" make -C "$dir"; then
 		# Make OK, is there a `check` rule?
 		make -C "$dir" check -n 2>/dev/null || continue
 		echo "*** makecheck $dir ***"
-		if misc/jenkins/unitrun.sh "run-$name-makecheck" make -C "$dir" check; then
+		if misc/jenkins/unitrun.sh "cmd-$name-makecheck" make -C "$dir" check; then
 			:
 		else
 			failed="$failed $name-check"
