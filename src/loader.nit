@@ -96,7 +96,7 @@ redef class ModelBuilder
 	fun parse_group(mgroup: MGroup): Array[MModule]
 	do
 		var res = new Array[MModule]
-		visit_group(mgroup)
+		scan_group(mgroup)
 		for mg in mgroup.in_nesting.smallers do
 			for mp in mg.module_paths do
 				var nmodule = self.load_module(mp.filepath)
@@ -505,13 +505,18 @@ redef class ModelBuilder
 		return mdoc
 	end
 
-	# Force the identification of all ModulePath of the group and sub-groups.
-	fun visit_group(mgroup: MGroup) do
+	# Force the identification of all ModulePath of the group and sub-groups in the file system.
+	#
+	# When a group is scanned, its sub-groups hierarchy is filled (see `MGroup::in_nesting`)
+	# and the potential modules (and nested modules) are identified (see `MGroup::module_paths`).
+	#
+	# Basically, this recursively call `get_mgroup` and `identify_file` on each directory entry.
+	fun scan_group(mgroup: MGroup) do
 		var p = mgroup.filepath
 		for f in p.files do
 			var fp = p/f
 			var g = get_mgroup(fp)
-			if g != null then visit_group(g)
+			if g != null then scan_group(g)
 			identify_file(fp)
 		end
 	end
