@@ -969,7 +969,11 @@ redef class MGroup
 	# * it has a documentation
 	fun is_interesting: Bool
 	do
-		return module_paths.length > 1 or mmodules.length > 1 or not in_nesting.direct_smallers.is_empty or mdoc != null
+		return module_paths.length > 1 or
+			mmodules.length > 1 or
+			not in_nesting.direct_smallers.is_empty or
+			mdoc != null or
+			(mmodules.length == 1 and default_mmodule == null)
 	end
 
 	# Are files and directories in self scanned?
