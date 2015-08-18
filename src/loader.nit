@@ -511,8 +511,14 @@ redef class ModelBuilder
 	# and the potential modules (and nested modules) are identified (see `MGroup::module_paths`).
 	#
 	# Basically, this recursively call `get_mgroup` and `identify_file` on each directory entry.
+	#
+	# No-op if the group was already scanned (see `MGroup::scanned`).
 	fun scan_group(mgroup: MGroup) do
+		if mgroup.scanned then return
+		mgroup.scanned = true
 		var p = mgroup.filepath
+		# a virtual group has nothing to scan
+		if p == null then return
 		for f in p.files do
 			var fp = p/f
 			var g = get_mgroup(fp)
@@ -966,6 +972,10 @@ redef class MGroup
 		return module_paths.length > 1 or mmodules.length > 1 or not in_nesting.direct_smallers.is_empty or mdoc != null
 	end
 
+	# Are files and directories in self scanned?
+	#
+	# See `ModelBuilder::scan_group`.
+	var scanned = false
 end
 
 redef class SourceFile
