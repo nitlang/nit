@@ -1,5 +1,3 @@
-% NITLS(1)
-
 # NAME
 
 nitls - lists the projects, groups and paths of Nit sources files.
@@ -45,20 +43,20 @@ Each combination of option
 
 Three presentation modes are available.
 
-`-P`, `--project`
-:   List projects in a flat list (default).
+### `-P`, `--project`
+List projects in a flat list (default).
 
-    Only project are displayed (and not the individual files).
+Only project are displayed (and not the individual files).
 
-`-t`, `--tree`
-:   List source files in their groups and projects.
+### `-t`, `--tree`
+List source files in their groups and projects.
 
-    Each `.nit` file is presented in a tree of projects and groups.
+Each `.nit` file is presented in a tree of projects and groups.
 
-`-s`, `--source`
-:   List source files in a flat list.
+### `-s`, `--source`
+List source files in a flat list.
 
-    Each `.nit` file is presented indivitually.
+Each `.nit` file is presented indivitually.
 
 The three modes are exclusives.
 
@@ -66,37 +64,37 @@ The default mode is `--project` unless one on the argument is a group, then it i
 
 ## COLLECT
 
-`-r`, `--recursive`
-:   Process directories recursively.
+### `-r`, `--recursive`
+Process directories recursively.
 
-    All `.nit` files found in the specified directory and subdirectories are considered.
+All `.nit` files found in the specified directory and subdirectories are considered.
 
-`-d`, `--depends`
-:   List dependencies of given modules
+### `-d`, `--depends`
+List dependencies of given modules
 
-    All imported modules are also considered.
+All imported modules are also considered.
 
-    In --tree and --source modes, the modules direclty imported are also displayed.
+In --tree and --source modes, the modules direclty imported are also displayed.
 
-`-k`, `--keep`
-:   Ignore errors and files that are not a Nit source file.
+### `-k`, `--keep`
+Ignore errors and files that are not a Nit source file.
 
-    When a file that is not a valid Nit module is encoutered, it is ignored and the rest of the files are
-    processed.
+When a file that is not a valid Nit module is encoutered, it is ignored and the rest of the files are
+processed.
 
-    Without this option, an error message is displayed and nitls terminates on such a case.
+Without this option, an error message is displayed and nitls terminates on such a case.
 
 ## PRESENTATION OPTIONS
 
-`-p`, `--path`
-:   List only path (instead of name + path).
+### `-p`, `--path`
+List only path (instead of name + path).
 
-    Paths are displayed uncolored.
+Paths are displayed uncolored.
 
-`-M`
-:   List dependencies suitable for a rule in a Makefile.
+### `-M`
+List dependencies suitable for a rule in a Makefile.
 
-    Alias for `-d`, `-p` and `-s`.
+Alias for `-d`, `-p` and `-s`.
 
 # SEE ALSO
 

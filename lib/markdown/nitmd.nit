@@ -16,16 +16,28 @@
 module nitmd
 
 import markdown
+import decorators
+import man
 
-if args.length != 1 then
-	print "usage: nitmd <file.md>"
-	exit 0
+import opts
+
+var options = new OptionContext
+var opt_help = new OptionBool("Show this help.", "-h", "-?", "--help")
+options.add_option(opt_help)
+var opt_to = new OptionString("Specify output format (html, md, man)", "-t", "--to")
+options.add_option(opt_to)
+
+options.parse(args)
+if options.rest.length != 1 then
+	print "usage: nitmd [-t format] <file.md>"
+	options.usage
+	exit 1
 end
 
-var file = args.first
+var file = options.rest.first
 if not file.file_exists then
 	print "'{file}' not found"
-	exit 0
+	exit 1
 end
 
 var ifs = new FileReader.open(file)
@@ -33,4 +45,15 @@ var md = ifs.read_all
 ifs.close
 
 var processor = new MarkdownProcessor
+var to = opt_to.value
+if to == null or to == "html" then
+	# Noop
+else if to == "md" then
+	processor.emitter.decorator = new MdDecorator
+else if to == "man" then
+	processor.emitter.decorator = new ManDecorator
+else
+	print "Unknown output format: {to}"
+	exit 1
+end
 print processor.process(md)

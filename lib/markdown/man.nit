@@ -12,102 +12,106 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Decorators for `markdown` parsing.
-module decorators
+# Simple *groff* decorator restricted for manpages.
+module man
 
 import markdown
 
 # `Decorator` that outputs markdown.
-class MdDecorator
+class ManDecorator
 	super Decorator
-
-	redef var headlines = new ArrayMap[String, HeadLine]
 
 	redef fun add_ruler(v, block) do v.add "***\n"
 
 	redef fun add_headline(v, block) do
-		# save headline
-		var txt = block.block.first_line.value
-		var id = strip_id(txt)
 		var lvl = block.depth
-		headlines[id] = new HeadLine(id, txt, lvl)
-		v.add "{"#" * lvl} "
+		if lvl == 1 then
+			v.add ".SH "
+		else if lvl == 2 then
+			v.add ".SS "
+		else if lvl >= 3 then
+			# We use dictionary (titled paragraph) to simulate a 3rd level (or more)
+			v.add ".TP\n"
+		end
 		v.emit_in block
 		v.addn
 	end
 
 	redef fun add_paragraph(v, block) do
-		v.emit_in block
-		v.addn
+		if not in_unorderedlist and not in_orderedlist then
+			v.addn
+			v.emit_in block
+			v.addn
+		else
+			v.emit_in block
+		end
 	end
 
 	redef fun add_code(v, block) do
-		if block isa BlockFence and block.meta != null then
-			v.add "~~~{block.meta.to_s}"
-		else
-			v.add "~~~"
-		end
-		v.addn
+		v.add ".RS\n.nf\n\\f[C]\n"
 		v.emit_in block
-		v.add "~~~"
 		v.addn
+		v.add "\\f[]\n.fi\n.RE\n"
 	end
 
 	redef fun add_blockquote(v, block) do
-		v.add "> "
+		v.add ".RS\n"
 		v.emit_in block
-		v.addn
+		v.add ".RE\n"
 	end
 
 	redef fun add_unorderedlist(v, block) do
+		v.add ".RS\n"
 		in_unorderedlist = true
 		v.emit_in block
 		in_unorderedlist = false
+		v.add ".RE\n"
 	end
 	private var in_unorderedlist = false
 
 	redef fun add_orderedlist(v, block) do
+		v.add ".RS\n"
 		in_orderedlist = true
 		current_li = 0
 		v.emit_in block
 		in_orderedlist = false
+		v.add ".RE\n"
 	end
 	private var in_orderedlist = false
 	private var current_li = 0
 
 	redef fun add_listitem(v, block) do
 		if in_unorderedlist then
-			v.add "* "
+			v.add ".IP \\[bu] 3\n"
 		else if in_orderedlist then
 			current_li += 1
-			v.add "{current_li} "
+			v.add ".IP \"{current_li}.\" 3\n"
 		end
 		v.emit_in block
 		v.addn
 	end
 
 	redef fun add_em(v, text) do
-		v.add "*"
+		v.add "\\f[I]"
 		v.add text
-		v.add "*"
+		v.add "\\f[]"
 	end
 
 	redef fun add_strong(v, text) do
-		v.add "**"
+		v.add "\\f[B]"
 		v.add text
-		v.add "**"
+		v.add "\\f[]"
 	end
 
 	redef fun add_strike(v, text) do
-		v.add "~~"
+		v.add "[STRIKEOUT:"
 		v.add text
-		v.add "~~"
+		v.add "]"
 	end
 
 	redef fun add_image(v, link, name, comment) do
-		v.add "!["
 		v.add name
-		v.add "]("
+		v.add " ("
 		append_value(v, link)
 		if comment != null and not comment.is_empty then
 			v.add " "
@@ -117,9 +121,8 @@ class MdDecorator
 	end
 
 	redef fun add_link(v, link, name, comment) do
-		v.add "["
 		v.add name
-		v.add "]("
+		v.add " ("
 		append_value(v, link)
 		if comment != null and not comment.is_empty then
 			v.add " "
@@ -129,75 +132,42 @@ class MdDecorator
 	end
 
 	redef fun add_abbr(v, name, comment) do
-		v.add "<abbr title=\""
-		append_value(v, comment)
 		v.add "\">"
 		v.emit_text(name)
-		v.add "</abbr>"
+		v.add " ("
+		append_value(v, comment)
+		v.add ")"
 	end
 
 	redef fun add_span_code(v, text, from, to) do
-		v.add "`"
+		v.add "\\f[C]"
 		append_code(v, text, from, to)
-		v.add "`"
+		v.add "\\f[]"
 	end
 
 	redef fun add_line_break(v) do
-		v.add "\n"
+		v.addn
 	end
 
 	redef fun append_value(v, text) do for c in text do escape_char(v, c)
 
-	redef fun escape_char(v, c) do v.addc(c)
+	redef fun add_char(v, c) do
+		# Escape - because manpages
+		if c == '-' then
+			v.addc '\\'
+		end
+		v.addc(c)
+	end
+
+	redef fun escape_char(v, c) do add_char(v, c)
 
 	redef fun append_code(v, buffer, from, to) do
 		for i in [from..to[ do
-			v.addc buffer[i]
-		end
-	end
-
-	redef fun strip_id(txt) do
-		# strip id
-		var b = new FlatBuffer
-		for c in txt do
-			if c == ' ' then
-				b.add '_'
-			else
-				if not c.is_letter and
-				   not c.is_digit and
-				   not allowed_id_chars.has(c) then continue
-				b.add c
+			var c = buffer[i]
+			if c == '-' or c == ' ' then
+				v.addc '\\'
 			end
+			v.addc c
 		end
-		var res = b.to_s
-		var key = res
-		# check for multiple id definitions
-		if headlines.has_key(key) then
-			var i = 1
-			key = "{res}_{i}"
-			while headlines.has_key(key) do
-				i += 1
-				key = "{res}_{i}"
-			end
-		end
-		return key
-	end
-
-	private var allowed_id_chars: Array[Char] = ['-', '_', ':', '.']
-end
-
-# Decorator for span elements.
-#
-# InlineDecorator does not decorate things like paragraphs or headers.
-class InlineDecorator
-	super HTMLDecorator
-
-	redef fun add_paragraph(v, block) do v.emit_in block
-	redef fun add_headline(v, block) do v.emit_in block
-
-	redef fun add_code(v, block) do
-		v.add "<code>"
-		v.emit_in block
-		v.add "</code>"
 	end
 end
