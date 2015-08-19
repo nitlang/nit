@@ -13,8 +13,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Check missing signed-off-by in commits
-# Usage: checksignedoffby from to
+# Check whitespace errors in commits
+# Usage: checkwhitespaces from to
+#
+# This script is in fact a more friendly version of `git log --check`
 
 set -e
 
@@ -25,36 +27,25 @@ err=0
 
 cd `git rev-parse --show-toplevel`
 
-echo "checksignedoffby $from (`git rev-parse "$from"`) .. $to (`git rev-parse "$to"`)"
+echo "checkwhitespaces $from (`git rev-parse "$from"`) .. $to (`git rev-parse "$to"`)"
 for ref in `git rev-list --no-merges "$from".."$to"`; do
-	# What is the expected?
-	sig=`git --no-pager show -s --format='Signed-off-by: %an <%ae>' $ref`
-	# Do we found some signed-off-by?
-	git --no-pager show -s --format="%b" $ref | grep "^Signed-off-by:" > check_signedoff_list.out || {
-		echo ""
-		echo "Missing $sig for commit"
-		git --no-pager show -s --oneline $ref
-		err=1
+	# Show nothing if no error
+	if git --no-pager show --check --oneline $ref > /dev/null; then
 		continue
-	}
-	# Do we found the expected thing?
-	cat check_signedoff_list.out | grep -q "^$sig\$" && continue
+	fi
+
+	# Run the command again to display things
 	echo ""
-	echo "Bad or missing Signed-off-by for commit"
-	git --no-pager show -s --oneline $ref
-	echo "Expected (from local git config):"
-	echo "$sig"
-	echo "Got:"
-	cat check_signedoff_list.out
+	echo "Found whitespace errors in commit"
+	git --no-pager show --check --oneline $ref || true
 	err=1
 done
 
-rm check_signedoff_list.out 2> /dev/null
-
 if test "$err" = 1; then
 	echo ""
-	echo "Please check that each commit contains a \`Signed-off-by:\` statement that matches the author's name and email."
+	echo "Please check that each file in each commit does not contain whitespace errors."
 	echo "Note that existing commits should be amended; pushing new commit is not sufficient."
+	echo "Hint: use \"git log --check\" to see whitespace errors."
 fi
 
 exit $err
