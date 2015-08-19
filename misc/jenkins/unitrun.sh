@@ -63,13 +63,21 @@ if test "$res" != "0"; then
 echo >> "${name}.xml" "<error message='Command returned $res'/>"
 echo "+ Command returned $res" >&2
 fi
+if test -s "${name}.out"; then
 cat >> "${name}.xml"<<END
 <system-out><![CDATA[
 `cat -v ${name}.out`
 ]]></system-out>
+END
+fi
+if test -s "${name}.2.out"; then
+cat >> "${name}.xml"<<END
 <system-err><![CDATA[
 `cat -v ${name}.2.out`
 ]]></system-err>
+END
+fi
+cat >> "${name}.xml"<<END
 </testcase>
 </testsuite></testsuites>
 END
