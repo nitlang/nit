@@ -109,7 +109,7 @@ redef class AModule
 
 		# Link everything in a shared library
 		# TODO customize the compiler
-		var cmd = "{v.c_compiler} -Wall -shared -Wl,-soname,{mmodule.name}.so -g -o {foreign_code_lib_path} {object_files.join(" ")} {ldflags}"
+		var cmd = "{v.c_compiler} -Wall -shared -o {foreign_code_lib_path} {object_files.join(" ")} {ldflags}"
 		if sys.system(cmd) != 0 then
 			v.fatal "FFI Error: Failed to link native code using `{cmd}`"
 			return false
