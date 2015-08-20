@@ -175,7 +175,7 @@ for a in files do
 	var g = mb.get_mgroup(a)
 	var mp = mb.identify_file(a)
 	if g != null and not opt_project.value then
-		mb.visit_group(g)
+		mb.scan_group(g)
 	end
 	if g == null and mp == null then
 		# not a group not a module, then look at files in the directory
@@ -183,7 +183,7 @@ for a in files do
 		for f in fs do
 			g = mb.get_mgroup(a/f)
 			if g != null and not opt_project.value then
-				mb.visit_group(g)
+				mb.scan_group(g)
 			end
 			mp = mb.identify_file(a/f)
 			#print "{a/f}: {mp or else "?"}"

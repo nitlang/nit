@@ -160,7 +160,7 @@ for mmodule in mmodules do
 	var importations = null
 	var mgroup = mmodule.mgroup
 	if toolcontext.opt_depth.value == 1 and mgroup != null then
-		modelbuilder.visit_group mgroup
+		modelbuilder.scan_group mgroup
 		target_modules = mgroup.mmodules
 	else if toolcontext.opt_depth.value == 2 then
 		# project

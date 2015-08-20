@@ -96,7 +96,7 @@ redef class ModelBuilder
 	fun parse_group(mgroup: MGroup): Array[MModule]
 	do
 		var res = new Array[MModule]
-		visit_group(mgroup)
+		scan_group(mgroup)
 		for mg in mgroup.in_nesting.smallers do
 			for mp in mg.module_paths do
 				var nmodule = self.load_module(mp.filepath)
@@ -344,16 +344,24 @@ redef class ModelBuilder
 	# See `identify_file`.
 	var identified_files = new Array[ModulePath]
 
-	# Identify a source file
-	# Load the associated project and groups if required
+	# Identify a source file and load the associated project and groups if required.
 	#
-	# Silently return `null` if `path` is not a valid module path.
+	# This method does what the user expects when giving an argument to a Nit tool.
+	#
+	# * If `path` is an existing Nit source file (with the `.nit` extension),
+	#   then the associated ModulePath is returned
+	# * If `path` is a directory (with a `/`),
+	#   then the ModulePath of its default module is returned (if any)
+	# * If `path` is a simple identifier (eg. `digraph`),
+	#   then the main module of the project `digraph` is searched in `paths` and returned.
+	#
+	# Silently return `null` if `path` does not exists or cannot be identified.
 	fun identify_file(path: String): nullable ModulePath
 	do
 		# special case for not a nit file
 		if path.file_extension != "nit" then
 			# search dirless files in known -I paths
-			if path.dirname == "." then
+			if not path.chars.has('/') then
 				var res = search_module_in_paths(null, path, self.paths)
 				if res != null then return res
 			end
@@ -372,6 +380,11 @@ redef class ModelBuilder
 				return null
 			end
 			path = candidate
+		end
+
+		# Does the file exists?
+		if not path.file_exists then
+			return null
 		end
 
 		# Fast track, the path is already known
@@ -505,13 +518,24 @@ redef class ModelBuilder
 		return mdoc
 	end
 
-	# Force the identification of all ModulePath of the group and sub-groups.
-	fun visit_group(mgroup: MGroup) do
+	# Force the identification of all ModulePath of the group and sub-groups in the file system.
+	#
+	# When a group is scanned, its sub-groups hierarchy is filled (see `MGroup::in_nesting`)
+	# and the potential modules (and nested modules) are identified (see `MGroup::module_paths`).
+	#
+	# Basically, this recursively call `get_mgroup` and `identify_file` on each directory entry.
+	#
+	# No-op if the group was already scanned (see `MGroup::scanned`).
+	fun scan_group(mgroup: MGroup) do
+		if mgroup.scanned then return
+		mgroup.scanned = true
 		var p = mgroup.filepath
+		# a virtual group has nothing to scan
+		if p == null then return
 		for f in p.files do
 			var fp = p/f
 			var g = get_mgroup(fp)
-			if g != null then visit_group(g)
+			if g != null then scan_group(g)
 			identify_file(fp)
 		end
 	end
@@ -958,9 +982,17 @@ redef class MGroup
 	# * it has a documentation
 	fun is_interesting: Bool
 	do
-		return module_paths.length > 1 or mmodules.length > 1 or not in_nesting.direct_smallers.is_empty or mdoc != null
+		return module_paths.length > 1 or
+			mmodules.length > 1 or
+			not in_nesting.direct_smallers.is_empty or
+			mdoc != null or
+			(mmodules.length == 1 and default_mmodule == null)
 	end
 
+	# Are files and directories in self scanned?
+	#
+	# See `ModelBuilder::scan_group`.
+	var scanned = false
 end
 
 redef class SourceFile
