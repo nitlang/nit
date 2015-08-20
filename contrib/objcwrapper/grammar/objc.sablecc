@@ -164,44 +164,38 @@ Parser
         {otype:} class;
 
     more_type =
-        {stype:} specific_type |
-        {ptype:} primitive_type;
-
-    specific_type =
-        {uui:} 'uuid_t' |
-        {i:} 'id' |
-        {b:} '_Bool' |
-        {pth:} 'pthread_mutex_t' |
-        {ds:} 'dispatch_semaphore_t' |
-        {dq:} 'dispatch_queue_t' |
-        {val:} 'va_list' |
-        {identityref:} 'SecIdentityRef' |
-        {trustref:} 'SecTrustRef' |
-        {class:} 'Class' |
-        {protocol:} 'Protocol' |
-        {v:} 'void';
-
-    primitive_type =
-        {ui8:} 'uint8_t' |
-        {ui16:} 'uint16_t' |
-        {ui32:} 'uint32_t' |
-        {ui64:} 'uint64_t' |
-        {i8:} 'int8_t' |
-        {i16:} 'int16_t' |
-        {i32:} 'int32_t' |
-        {i64:} 'int64_t' |
-        {uc:} 'unichar' |
-        {c:} 'char' |
-        {s:} 'short' |
-        {si:} 'short int' |
-        {i:} 'int' |
-        {l:} 'long' |
-        {li:} 'long int' |
-        {ll:} 'long long' |
-        {lli:} 'long long int' |
-        {f:} 'float' |
-        {d:} 'double' |
-        {ld:} 'long double';
+        'uuid_t' |
+        'id' |
+        '_Bool' |
+        'pthread_mutex_t' |
+        'dispatch_semaphore_t' |
+        'dispatch_queue_t' |
+        'va_list' |
+        'SecIdentityRef' |
+        'SecTrustRef' |
+        'Class' |
+        'Protocol' |
+        'void' |
+        'uint8_t' |
+        'uint16_t' |
+        'uint32_t' |
+        'uint64_t' |
+        'int8_t' |
+        'int16_t' |
+        'int32_t' |
+        'int64_t' |
+        'unichar' |
+        'char' |
+        'short' |
+        'short int' |
+        'int' |
+        'long' |
+        'long int' |
+        'long long' |
+        'long long int' |
+        'float' |
+        'double' |
+        'long double';
 
     classe =
         {class:} class |
@@ -227,7 +221,7 @@ Parser
 
     declaration =
         {pointer:} type protocols? attribute? pointer? term? '[]'? |
-        {typedef:} type primitive_type |
+        {typedef:} type more_type |
         {function_pointer:} function_pointer |
         {comma:} '...';
 
