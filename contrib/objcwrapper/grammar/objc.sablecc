@@ -85,7 +85,7 @@ Parser
         {property:} property_declaration;
 
     signature_block =
-        {signature:} optional_method? scope signature_return_type? signature+ attribute_list? ';';
+        {signature:} optional_method? scope signature_return_type? parameter+ attribute_list? ';';
 
     signature_return_type =
         {return:} lpar type pointer? function_pointer? protocols? rpar;
@@ -120,20 +120,20 @@ Parser
         {class:} '+' |
         {instance:} '-';
 
-    signature =
-        {named:} [left:]term ':' lpar signature_type rpar attribute? [right:]term |
+    parameter =
+        {named:} [left:]term ':' lpar parameter_type rpar attribute? [right:]term |
         {single:} term |
         {comma:} comma '...' |
         {macro:} macro_name;
 
-    signature_type =
+    parameter_type =
+        {normal:} type |
         {anonymous:} type anonymous |
         {table:} type protocols? '[]' |
         {pointer:} type pointer |
-        {unsigned:} unsigned pointer |
         {protocol:} type protocols |
-        {function_pointer:} function_pointer |
-        {normal:} type;
+        {unsigned:} unsigned pointer |
+        {function_pointer:} function_pointer;
 
     anonymous =
         {method:} lpar '^' term? rpar lpar declarations? rpar |
