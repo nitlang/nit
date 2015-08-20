@@ -201,28 +201,7 @@ redef class MClassType
 		alpha_comparator.sort props
 		for prop in props do
 			if mclass.name == "Object" or prop.intro.mclassdef.mclass.name != "Object" then
-
-				if prop.visibility == public_visibility then
-					stream.write "+ "
-				else stream.write "~ " # protected_visibility
-
-				if prop isa MMethod then
-					if prop.is_init and prop.name != "init" then stream.write "init "
-					if prop.is_new and prop.name != "new" then stream.write "new "
-				end
-
-				stream.write prop.name
-
-				if prop isa MMethod then
-					stream.write prop.intro.msignature.to_s
-				end
-
-				var mdoc = prop.intro.mdoc
-				if mdoc != null then
-					stream.write "  # "
-					stream.write mdoc.content.first
-				end
-				stream.write line_separator
+				prop.write_synopsis(mainmodule, stream)
 			end
 		end
 	end
@@ -305,5 +284,74 @@ private class AutocompletePhase
 				toolcontext.error(null, "Error: failed to write Vim autocomplete file: {error}.")
 			end
 		end
+	end
+end
+
+redef class MModule
+	redef fun write_extra_doc(mainmodule, stream)
+	do
+		# Introduced classes
+		var class_intros = collect_intro_mclasses(protected_visibility).to_a
+		if class_intros.not_empty then
+			alpha_comparator.sort class_intros
+			stream.write line_separator*2
+			stream.write "## Introduced classes"
+
+			for c in class_intros do
+				stream.write line_separator
+				stream.write "* {c.name}"
+				var doc = c.intro.mdoc
+				if doc != null then stream.write ": {doc.content.first}"
+			end
+		end
+
+		# Introduced properties
+		var prop_intros = new Array[MPropDef]
+		for c in mclassdefs do
+			prop_intros.add_all c.collect_intro_mpropdefs(protected_visibility)
+		end
+
+		if prop_intros.not_empty then
+			alpha_comparator.sort prop_intros
+			stream.write line_separator*2
+			stream.write "## Introduced properties"
+			stream.write line_separator
+
+			for p in prop_intros do
+				p.mproperty.write_synopsis(mainmodule, stream)
+			end
+		end
+	end
+end
+
+redef class MProperty
+	private fun write_synopsis(mainmodule: MModule, stream: Writer)
+	do
+		if visibility == public_visibility then
+			stream.write "+ "
+		else stream.write "~ " # protected_visibility
+
+		if self isa MMethod then
+			if is_new and name != "new" then
+				stream.write "new "
+			else if is_init and name != "init" then
+				stream.write "init "
+			end
+		end
+
+		stream.write name
+
+		if self isa MMethod then
+			var intro = intro
+			assert intro isa MMethodDef
+			stream.write intro.msignature.to_s
+		end
+
+		var mdoc = intro.mdoc
+		if mdoc != null then
+			stream.write "  # "
+			stream.write mdoc.content.first
+		end
+		stream.write line_separator
 	end
 end
