@@ -207,8 +207,11 @@ redef class MClassType
 				else stream.write "~ " # protected_visibility
 
 				if prop isa MMethod then
-					if prop.is_init and prop.name != "init" then stream.write "init "
-					if prop.is_new and prop.name != "new" then stream.write "new "
+					if prop.is_new and prop.name != "new" then
+						stream.write "new "
+					else if prop.is_init and prop.name != "init" then
+						stream.write "init "
+					end
 				end
 
 				stream.write prop.name
