@@ -1,4 +1,3 @@
-../lib/standard/stream.nit:451,6--17: Documentation warning: Undocumented property `buffer_reset`
 test_advice_repeated_types.nit:36,15--20: Warning: useless type repetition on redefined attribute `_a`
 test_advice_repeated_types.nit:37,18--20: Warning: useless type repetition on parameter `b1` for redefined method `b`
 test_advice_repeated_types.nit:38,18--20: Warning: useless type repetition on parameter `c1` for redefined method `c`
