@@ -18,8 +18,22 @@ module objc_generator
 import objc_model
 
 class CodeGenerator
+	# Merge the calls to `alloc` and `init...` in a single constructor?
+	#
+	# If `true`, also the default behavior, initializing an extern Objective-C object looks like:
+	# ~~~nitish
+	# var o = new NSArray.init_with_array(some_other_array)
+	# ~~~
+	#
+	# If `false`, the object must first be allocated and then initialized.
+	# This is closer to the Objective-C behavior:
+	# ~~~nitish
+	# var o = new NSArray
+	# o.init_with_array(some_other_array)
+	# ~~~
+	var init_with_alloc = true is writable
+
 	fun generator(classes: Array[nullable ObjcClass]) do
-		var init_with_alloc = true
 		for classe in classes do
 			var file = new FileWriter.open(classe.name + ".nit")
 			nit_class_generator(classe, file, init_with_alloc)
