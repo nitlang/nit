@@ -221,7 +221,7 @@ interface Object
 	# and a cause of bugs.
 	#
 	# Without redefinition, `hash` is based on the `object_id` of the instance.
-	fun hash: Int do return object_id / 8
+	fun hash: Int do return object_id
 end
 
 # The main class of the program.
