@@ -15,18 +15,35 @@
 # Generator of Nit modules to wrap Objective-C services
 module objcwrapper
 
+import nitcc_runtime
+import opts
+
 import objc_visitor
 import objc_model
 import objc_generator
-
-import nitcc_runtime
 import objc_lexer
 import objc_parser
+
+var opt_help = new OptionBool("Show this help message", "-h", "--help")
+
+var opts = new OptionContext
+opts.add_option(opt_help, opt_output)
+opts.parse(args)
+
+if opts.errors.not_empty or opts.rest.is_empty or opt_help.value then
+	print """
+Usage: objcwrapper [options] input_file [other_input_file [...]]
+Options:"""
+	opts.usage
+
+	if opt_help.value then exit 0
+	exit 1
+end
 
 var v = new Interpretor
 var g = new CodeGenerator
 
-for arg in args do
+for arg in opts.rest do
 	# Read input
 	var content = arg.to_path.read_all
 
