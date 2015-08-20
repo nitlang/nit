@@ -15,7 +15,14 @@
 # Code generation
 module objc_generator
 
+import opts
+
 import objc_model
+
+redef class Sys
+	# Path to the output file
+	var opt_output = new OptionString("Output file", "-o")
+end
 
 class CodeGenerator
 	# Merge the calls to `alloc` and `init...` in a single constructor?
@@ -34,11 +41,25 @@ class CodeGenerator
 	var init_with_alloc = true is writable
 
 	fun generator(classes: Array[nullable ObjcClass]) do
-		for classe in classes do
-			var file = new FileWriter.open(classe.name + ".nit")
-			nit_class_generator(classe, file, init_with_alloc)
-			file.close
+		# Open specified path or stdin
+		var file
+		var path = opt_output.value
+		if path != null then
+			if path.file_extension != "nit" then
+				print_error "Warning: output file path does not end with '.nit'"
+			end
+
+			file = new FileWriter.open(path)
+		else
+			file = stdout
 		end
+
+		# Generate code
+		for classe in classes do
+			nit_class_generator(classe, file, init_with_alloc)
+		end
+
+		if path != null then file.close
 	end
 
 	fun type_convertor(type_word: String): String do
