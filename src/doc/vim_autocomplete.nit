@@ -287,6 +287,43 @@ private class AutocompletePhase
 	end
 end
 
+redef class MModule
+	redef fun write_extra_doc(mainmodule, stream)
+	do
+		# Introduced classes
+		var class_intros = collect_intro_mclasses(protected_visibility).to_a
+		if class_intros.not_empty then
+			alpha_comparator.sort class_intros
+			stream.write line_separator*2
+			stream.write "## Introduced classes"
+
+			for c in class_intros do
+				stream.write line_separator
+				stream.write "* {c.name}"
+				var doc = c.intro.mdoc
+				if doc != null then stream.write ": {doc.content.first}"
+			end
+		end
+
+		# Introduced properties
+		var prop_intros = new Array[MPropDef]
+		for c in mclassdefs do
+			prop_intros.add_all c.collect_intro_mpropdefs(protected_visibility)
+		end
+
+		if prop_intros.not_empty then
+			alpha_comparator.sort prop_intros
+			stream.write line_separator*2
+			stream.write "## Introduced properties"
+			stream.write line_separator
+
+			for p in prop_intros do
+				p.mproperty.write_synopsis(mainmodule, stream)
+			end
+		end
+	end
+end
+
 redef class MProperty
 	private fun write_synopsis(mainmodule: MModule, stream: Writer)
 	do
