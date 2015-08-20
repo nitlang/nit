@@ -201,31 +201,7 @@ redef class MClassType
 		alpha_comparator.sort props
 		for prop in props do
 			if mclass.name == "Object" or prop.intro.mclassdef.mclass.name != "Object" then
-
-				if prop.visibility == public_visibility then
-					stream.write "+ "
-				else stream.write "~ " # protected_visibility
-
-				if prop isa MMethod then
-					if prop.is_new and prop.name != "new" then
-						stream.write "new "
-					else if prop.is_init and prop.name != "init" then
-						stream.write "init "
-					end
-				end
-
-				stream.write prop.name
-
-				if prop isa MMethod then
-					stream.write prop.intro.msignature.to_s
-				end
-
-				var mdoc = prop.intro.mdoc
-				if mdoc != null then
-					stream.write "  # "
-					stream.write mdoc.content.first
-				end
-				stream.write line_separator
+				prop.write_synopsis(mainmodule, stream)
 			end
 		end
 	end
@@ -308,5 +284,37 @@ private class AutocompletePhase
 				toolcontext.error(null, "Error: failed to write Vim autocomplete file: {error}.")
 			end
 		end
+	end
+end
+
+redef class MProperty
+	private fun write_synopsis(mainmodule: MModule, stream: Writer)
+	do
+		if visibility == public_visibility then
+			stream.write "+ "
+		else stream.write "~ " # protected_visibility
+
+		if self isa MMethod then
+			if is_new and name != "new" then
+				stream.write "new "
+			else if is_init and name != "init" then
+				stream.write "init "
+			end
+		end
+
+		stream.write name
+
+		if self isa MMethod then
+			var intro = intro
+			assert intro isa MMethodDef
+			stream.write intro.msignature.to_s
+		end
+
+		var mdoc = intro.mdoc
+		if mdoc != null then
+			stream.write "  # "
+			stream.write mdoc.content.first
+		end
+		stream.write line_separator
 	end
 end
