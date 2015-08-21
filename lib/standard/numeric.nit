@@ -30,9 +30,11 @@ redef class Text
 	# assert "0.0".to_n == 0.0
 	# assert ".12345".to_n == 0.12345
 	# assert "12345".to_n == 12345
+	# assert "".to_n == 0
 	# ~~~~
 	fun to_n: Numeric
 	do
+		if is_empty then return 0
 		if chars.has('.') then return to_f
 		return to_i
 	end
