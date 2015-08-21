@@ -67,7 +67,7 @@ class Game
 
 	# Returns the repo `full_name`.
 	#
-	# Example: `"privat/nit"`
+	# Example: `"nitlang/nit"`
 	redef fun key do return repo.full_name
 
 	# We need a `GithubAPI` client to load Github data.
