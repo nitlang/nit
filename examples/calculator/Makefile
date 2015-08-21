@@ -10,7 +10,7 @@ bin/calculator: $(shell ${NITLS} -M src/calculator.nit -m linux) ${NITC}
 bin/calculator.apk: $(shell ${NITLS} -M src/calculator.nit -m android) ${NITC} ../../contrib/inkscape_tools/bin/svg_to_icons
 	mkdir -p bin res
 	../../contrib/inkscape_tools/bin/svg_to_icons art/icon.svg --android --out res/
-	${NITC} -o $@ src/calculator.nit -m ../../lib/android/ui/
+	${NITC} -o $@ src/calculator.nit -m ../../lib/android/ui/ -D debug
 
 ../../contrib/inkscape_tools/bin/svg_to_icons:
 	make -C ../../contrib/inkscape_tools/
