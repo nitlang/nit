@@ -101,26 +101,27 @@ class CalculatorContext
 	protected fun apply_last_op_if_any
 	do
 		var op = last_op
-
 		var result = result
-
 		var current = current
-		if current == null then current = new FlatBuffer
+		self.current = null
+
+		if current == null then return
 
 		if op == null then
 			result = current.to_n
-		else if op == '+' then
-			result = result.add(current.to_n)
-		else if op == '-' then
-			result = result.sub(current.to_n)
-		else if op == '/' then
-			result = result.div(current.to_n)
-		else if op == '*' then
-			result = result.mul(current.to_n)
+		else if result != null then
+			if op == '+' then
+				result = result.add(current.to_n)
+			else if op == '-' then
+				result = result.sub(current.to_n)
+			else if op == '/' then
+				result = result.div(current.to_n)
+			else if op == '*' then
+				result = result.mul(current.to_n)
+			end
 		end
 
 		self.result = result
-		self.current = null
 	end
 end
 
