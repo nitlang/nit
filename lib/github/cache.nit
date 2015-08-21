@@ -26,7 +26,7 @@
 # var api = new GithubAPI(get_github_oauth)
 # api.enable_cache = true
 #
-# var name = "privat/nit"
+# var name = "nitlang/nit"
 # assert not api.has_cache(name)
 # var repo = api.load_repo(name) # load from GitHub
 # #assert api.has_cache(name) FIXME bring back this assert
