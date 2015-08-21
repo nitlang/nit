@@ -57,6 +57,7 @@ class CodeGenerator
 		end
 
 		# Generate code
+		file.write "import cocoa::foundation\n\n"
 		for classe in classes do
 			write_class(classe, file)
 		end
@@ -93,7 +94,6 @@ class CodeGenerator
 	private fun write_class(classe: ObjcClass, file: Writer)
 	do
 		var commented_methods = new Array[ObjcMethod]
-		file.write "import cocoa::foundation\n\n"
 		file.write "extern class " + classe.name + """ in "ObjC" `{ """ + classe.name  + """ * `}\n"""
 		for super_name in classe.super_names do
 			file.write """	super """ + super_name + "\n"
