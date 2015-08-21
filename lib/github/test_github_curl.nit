@@ -29,7 +29,7 @@ class TestGithubCurl
 	end
 
 	fun test_get_repo do
-		var uri = "https://api.github.com/repos/privat/nit"
+		var uri = "https://api.github.com/repos/nitlang/nit"
 		var res = testee.get_and_check(uri)
 
 		assert res isa JsonObject

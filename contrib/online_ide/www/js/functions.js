@@ -50,11 +50,11 @@ function load_nit_lib() {
 	if (!lib_files_loaded)
 	{
 		// We get the 'nit' folder content on github.
-		$.get("https://api.github.com/repos/privat/nit/contents/?access_token=" + github_acces_token, function(data) {
+		$.get("https://api.github.com/repos/nitlang/nit/contents/?access_token=" + github_acces_token, function(data) {
 			for (var i = 0; i < data.length; i++) {
 				if (data[i].name == "lib") {
 					// We get the list of all files in the 'lib' folder.
-					$.get("https://api.github.com/repos/privat/nit/git/trees/" + data[i].sha + "?recursive=1&access_token=" + github_acces_token, function(data) {
+					$.get("https://api.github.com/repos/nitlang/nit/git/trees/" + data[i].sha + "?recursive=1&access_token=" + github_acces_token, function(data) {
 						for (var i = 0; i < data.tree.length; i++) {
 							if (data.tree[i].type == "blob") {
 								lib_files_number++;

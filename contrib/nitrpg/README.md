@@ -81,4 +81,4 @@ Incomming features contain (but are not limited to):
 * Shop: exchange Nitcoins against glorifying items
 
 You can suggest new achievements or ideas in the
-[NitRPG RoadMap Issue](https://github.com/privat/nit/issues/1161).
+[NitRPG RoadMap Issue](https://github.com/nitlang/nit/issues/1161).
