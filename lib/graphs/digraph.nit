@@ -99,7 +99,7 @@
 # # Then call "dot -Tpng -o graph.png"
 # ~~~
 #
-# ![A graph drawing produced by Graphviz](https://github.com/privat/nit/blob/master/lib/graph.png)
+# ![A graph drawing produced by Graphviz](https://github.com/nitlang/nit/blob/master/lib/graph.png)
 #
 # Other methods
 # =============

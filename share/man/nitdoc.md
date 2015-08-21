@@ -48,7 +48,7 @@ Use `%f` for filename, `%l` for first line, and `%L` for last line.
 
 For instance, the [standard library] use the following value to link to files in GitHub:
 
-    "https://github.com/privat/nit/blob/$(git rev-parse HEAD)/%f#L%l-%L"
+    "https://github.com/nitlang/nit/blob/$(git rev-parse HEAD)/%f#L%l-%L"
 
 Here, the `git rev-parse HEAD` is used to link to the current snapshot revision of the file.
 

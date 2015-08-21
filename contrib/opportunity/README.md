@@ -1,6 +1,6 @@
 Opportunity is a web-application written in Nit to plan meetups with people in real-life (or on the internet, why not !).
 
-It runs on Nit's official web server: Nitcorn, available along with the compiler for the language on Github <https://github.com/privat/nit>.
+It runs on Nit's official web server: Nitcorn, available along with the compiler for the language on Github <https://github.com/nitlang/nit>.
 
 # Compile and execute
 
