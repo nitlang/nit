@@ -1,0 +1,79 @@
+Analyzing tests/privat/02-fibo.pep
+Analyzing tests/privat/04-abc.pep
+Analyzing tests/privat/04-leplusgrand.pep
+Analyzing tests/privat/05-0et100.pep
+Analyzing tests/privat/05-1a100.pep
+Analyzing tests/privat/05-aei.pep
+Analyzing tests/privat/05-otan.pep
+Analyzing tests/privat/05-simul_3n.pep
+Analyzing tests/privat/05-simul_n.pep
+Analyzing tests/privat/05-simul_x.pep
+Analyzing tests/privat/05-sommeVec.pep
+Analyzing tests/privat/06-calc-non-pur.pep
+Analyzing tests/privat/06-compte1.pep
+Analyzing tests/privat/06-majuscules.pep
+Analyzing tests/privat/06-menu.pep
+Analyzing tests/privat/06-print-non-pur.pep
+Analyzing tests/privat/06-processVec.pep
+Analyzing tests/privat/06-puissance2.pep
+Analyzing tests/privat/06-sommes1.pep
+Analyzing tests/privat/06-sommes2.pep
+Analyzing tests/privat/06-sommes3.pep
+Analyzing tests/privat/06-x100.pep
+Analyzing tests/privat/07-matrice.pep
+Analyzing tests/privat/07-stri.pep
+Analyzing tests/privat/07-stris.pep
+Analyzing tests/privat/07-tri.pep
+Analyzing tests/privat/07-tri2.pep
+Analyzing tests/privat/08-abus.pep
+Analyzing tests/privat/08-div-stack.pep
+Analyzing tests/privat/08-div-vars.pep
+Analyzing tests/privat/08-div.pep
+Analyzing tests/privat/08-fib.pep
+Analyzing tests/privat/08-incr.pep
+Analyzing tests/privat/08-liretab-stack.pep
+Analyzing tests/privat/08-liretab.pep
+Analyzing tests/privat/08-pile.pep
+Analyzing tests/privat/08-tab.pep
+Analyzing tests/privat/08-triforce.pep
+Analyzing tests/privat/08-varlocales.pep
+Analyzing tests/privat/09-liste.pep
+Analyzing tests/privat/09-produit.pep
+Analyzing tests/privat/fib.pep
+Analyzing tests/micro/directive-in-code.pep
+Analyzing tests/micro/range.pep
+Analyzing tests/micro/to-graph.pep
+Analyzing tests/micro/types.pep
+Analyzing tests/terrasa/addition_stro.pep
+Analyzing tests/terrasa/boucle.pep
+Analyzing tests/terrasa/chari_charo.pep
+Analyzing tests/terrasa/division.pep
+Analyzing tests/terrasa/hello.pep
+Analyzing tests/terrasa/if_else.pep
+Analyzing tests/terrasa/if_elseif_else.pep
+Analyzing tests/terrasa/lecture_chaine.pep
+Analyzing tests/terrasa/matrice.pep
+Analyzing tests/terrasa/max_tableau.pep
+Analyzing tests/terrasa/multiplication.pep
+Analyzing tests/terrasa/reverse_tableau.pep
+Analyzing tests/terrasa/somme_tableau.pep
+Analyzing tests/terrasa/soustraction.pep
+Analyzing tests/terrasa/tri_bulles.pep
+# Notes:
+Warning: tests/privat/05-1a100.pep:10; using data of unsupported type in memory address 1, expected word (got two byte of code)
+Error:   tests/privat/06-calc-non-pur.pep:32; this instruction is not followed by valid code as it should (misplaced data or missing BR?)
+Error:   tests/privat/06-calc-non-pur.pep:32; unreachable instructions (dead code?)
+Warning: tests/privat/06-calc-non-pur.pep:14; overwriting code at instr@m76 with byte of code (code rewriting?)
+Warning: tests/privat/06-menu.pep:13; jumps to a dynamic address, this may be OK but the CFG may be wrong
+Warning: tests/privat/07-stri.pep:7; printing uninitialized data, exepected ASCII
+Warning: tests/privat/07-stri.pep:9; printing uninitialized data, exepected ASCII
+Error:   tests/privat/07-stris.pep:39; unreachable instructions (dead code?)
+Warning: tests/privat/08-abus.pep:8--10; unreachable instructions (dead code?)
+Error:   tests/micro/directive-in-code.pep:4; unreachable instructions (dead code?)
+Error:   tests/micro/directive-in-code.pep:2; data in program flow (missing BR?)
+Warning: tests/micro/types.pep:1; using data of unsupported type in register A, expected word (got two uninitialized byte)
+Warning: tests/micro/types.pep:1; using data of unsupported type in memory address 123, expected word (got two uninitialized byte)
+Warning: tests/micro/types.pep:3; using a partial word in register A, expected a full word (got a 1st byte of word followed by byte of code)
+Warning: tests/micro/types.pep:3; using data of unsupported type in memory address 123, expected word (got two uninitialized byte)
+Warning: tests/micro/types.pep:6; using data of unsupported type in register A, expected word (got two byte of code)
+Warning: tests/micro/types.pep:6; using data of unsupported type in memory address 123, expected word (got two uninitialized byte)
