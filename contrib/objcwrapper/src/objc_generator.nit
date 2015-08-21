@@ -40,7 +40,9 @@ class CodeGenerator
 	# ~~~
 	var init_with_alloc = true is writable
 
-	fun generator(classes: Array[nullable ObjcClass]) do
+	# Generate Nit code to wrap `classes`
+	fun generate(classes: Array[ObjcClass])
+	do
 		# Open specified path or stdin
 		var file
 		var path = opt_output.value
@@ -56,13 +58,14 @@ class CodeGenerator
 
 		# Generate code
 		for classe in classes do
-			nit_class_generator(classe, file, init_with_alloc)
+			write_class(classe, file)
 		end
 
 		if path != null then file.close
 	end
 
-	fun type_convertor(type_word: String): String do
+	private fun type_convertor(type_word: String): String
+	do
 		var types = new HashMap[String, String]
 		types["char"] = "Byte"
 		types["short"] = "Int"
@@ -87,42 +90,44 @@ class CodeGenerator
 		end
 	end
 
-	fun nit_class_generator(classe: nullable ObjcClass, file: FileWriter, init_with_alloc: Bool) do
+	private fun write_class(classe: ObjcClass, file: Writer)
+	do
 		var commented_methods = new Array[ObjcMethod]
 		file.write "import cocoa::foundation\n\n"
-		file.write("extern class " + classe.name + """ in "ObjC" `{ """ + classe.name  + """ * `}\n""")
+		file.write "extern class " + classe.name + """ in "ObjC" `{ """ + classe.name  + """ * `}\n"""
 		for super_name in classe.super_names do
-			file.write("""	super """ + super_name + "\n")
+			file.write """	super """ + super_name + "\n"
 		end
-		if classe.super_names.is_empty then file.write("""	super NSObject\n""")
-		new_nit_generator(classe, file, init_with_alloc)
-		file.write("\n")
+		if classe.super_names.is_empty then file.write """	super NSObject\n"""
+		write_constructor(classe, file)
+		file.write "\n"
 		for attribute in classe.attributes do
-			nit_attribute_generator(attribute, file)
+			write_attribute(attribute, file)
 		end
 		for method in classe.methods do
 			if method.is_commented then
 				commented_methods.add(method)
 			else
 				if init_with_alloc and method.params.first.name.has("init") then continue
-				file.write("""	""")
-				nit_method_generator(method, file, init_with_alloc)
-				file.write(""" in "ObjC" `{\n		""")
-				objc_method_generator(method, file)
-				file.write("""	`}""")
-				if method != classe.methods.last then file.write("\n\n")
+				file.write """	"""
+				write_method(method, file)
+				file.write """ in "ObjC" `{\n		"""
+				write_objc_method_call(method, file)
+				file.write """	`}"""
+				if method != classe.methods.last then file.write "\n\n"
 			end
 		end
 		for commented_method in commented_methods do
-			if commented_method == commented_methods.first then file.write("\n")
-			file.write("""	#""")
-			nit_method_generator(commented_method, file, init_with_alloc)
-			if commented_method != commented_methods.last then file.write("\n")
+			if commented_method == commented_methods.first then file.write "\n"
+			file.write """	#"""
+			write_method(commented_method, file)
+			if commented_method != commented_methods.last then file.write "\n"
 		end
 		file.write "\nend\n"
 	end
 
-	fun new_nit_generator(classe: nullable ObjcClass, file: FileWriter, init_with_alloc: Bool) do
+	private fun write_constructor(classe: ObjcClass, file: Writer)
+	do
 		if init_with_alloc then
 			for method in classe.methods do
 				if method.params.first.name.has("init") and not method.is_commented then
@@ -130,40 +135,45 @@ class CodeGenerator
 					if method.params.first.name == "init" then
 						file.write "new"
 					else
-						nit_method_generator(method, file, init_with_alloc)
+						write_method(method, file)
 					end
 					file.write """ in "ObjC" `{\n"""
-					new_alloc_init_objc_generator(classe.name, method, file)
+					write_objc_init_call(classe.name, method, file)
 					file.write """	`}\n"""
 				end
 			end
 		else
 			file.write """\n	new in "ObjC"`{\n"""
-			new_objc_generator(classe, file)
+			file.write """		return [""" + classe.name + " alloc];\n"
 			file.write """	`}\n"""
 		end
 	end
 
-	fun nit_attribute_generator(attribute: ObjcAttribute, file: FileWriter) do
-		nit_attribute_setter_generator(attribute, file)
+	private fun write_attribute(attribute: ObjcAttribute, file: Writer)
+	do
+		write_attribute_getter(attribute, file)
+		# TODO write_attribute_setter if there is no `readonly` annotation
 		file.write "\n"
 	end
 
-	fun nit_attribute_setter_generator(attribute: ObjcAttribute, file: FileWriter) do
-		file.write("""	fun """ + attribute.name.to_snake_case + ": " + type_convertor(attribute.return_type))
+	private fun write_attribute_getter(attribute: ObjcAttribute, file: Writer)
+	do
+		file.write """	fun """ + attribute.name.to_snake_case + ": " + type_convertor(attribute.return_type)
 		file.write """ in "ObjC" `{\n"""
-		objc_attribute_setter_generator(attribute, file)
+		file.write """		return [self """ + attribute.name + "];\n"
 		file.write """	`}\n"""
 	end
 
-	fun nit_attribute_getter_generator(attribute: ObjcAttribute, file: FileWriter) do
-		file.write("""	fun """ + attribute.name.to_snake_case + "=(value: " + type_convertor(attribute.return_type) + ")")
+	private fun write_attribute_setter(attribute: ObjcAttribute, file: Writer)
+	do
+		file.write """	fun """ + attribute.name.to_snake_case + "=(value: " + type_convertor(attribute.return_type) + ")"
 		file.write " in \"ObjC\" `\{\n"
-		objc_attribute_getter_generator(attribute, file)
+		file.write """		self.""" + attribute.name + " = value;\n"
 		file.write """	`}\n"""
 	end
 
-	fun nit_method_generator(method: ObjcMethod, file: FileWriter, init_with_alloc: Bool) do
+	private fun write_method(method: ObjcMethod, file: Writer)
+	do
 		var name = ""
 		for param in method.params do
 			name += param.name[0].to_upper.to_s + param.name.substring_from(1)
@@ -175,27 +185,30 @@ class CodeGenerator
 			if not init_with_alloc and name == "init" then name = "init_0"
 			file.write "fun "
 		end
-		file.write(name)
+		file.write name
 		for param in method.params do
 			if param == method.params.first and not param.is_single then
-				file.write("(" + param.variable_name + ": " + type_convertor(param.return_type))
+				file.write "(" + param.variable_name + ": " + type_convertor(param.return_type)
 			end
 			if param != method.params.first and not param.is_single then
-				file.write(", " + param.variable_name + ": " + type_convertor(param.return_type))
+				file.write ", " + param.variable_name + ": " + type_convertor(param.return_type)
 			end
 			if param == method.params.last and not param.is_single then
 				file.write ")"
 			end
 		end
-		if method.return_type != "void" and not method.params.first.name.has("init") then file.write(": " + type_convertor(method.return_type))
+		if method.return_type != "void" and not method.params.first.name.has("init") then
+			file.write ": " + type_convertor(method.return_type)
+		end
 	end
 
-	fun new_alloc_init_objc_generator(classe_name: String, method: ObjcMethod, file: FileWriter) do
-		file.write("""		return [[""" + classe_name + " alloc] ")
+	private fun write_objc_init_call(classe_name: String, method: ObjcMethod, file: Writer)
+	do
+		file.write """		return [[""" + classe_name + " alloc] "
 		for param in method.params do
 			if not param.is_single then
-				file.write(param.name + ":" + param.variable_name)
-				if not param == method.params.last then file.write(" ")
+				file.write param.name + ":" + param.variable_name
+				if not param == method.params.last then file.write " "
 			else
 				file.write param.name
 			end
@@ -203,27 +216,16 @@ class CodeGenerator
 		file.write "];\n"
 	end
 
-	fun new_objc_generator(classe: nullable ObjcClass, file: FileWriter) do
-		file.write("""		return [""" + classe.name + " alloc];\n")
-	end
-
-	fun objc_attribute_setter_generator(attribute: ObjcAttribute, file: FileWriter) do
-		file.write("""		return [self """ + attribute.name + "];\n")
-	end
-
-	fun objc_attribute_getter_generator(attribute: ObjcAttribute, file: FileWriter) do
-		file.write("""		self.""" + attribute.name + " = value;\n")
-	end
-
-	fun objc_method_generator(method: ObjcMethod, file: FileWriter) do
-		if method.return_type != "void" then file.write("return ")
+	private fun write_objc_method_call(method: ObjcMethod, file: Writer)
+	do
+		if method.return_type != "void" then file.write "return "
 		file.write "[self "
 		for param in method.params do
 			if not param.is_single then
-				file.write(param.name + ":" + param.variable_name)
+				file.write param.name + ":" + param.variable_name
 				if not param == method.params.last then file.write " "
 			else
-				file.write(param.name)
+				file.write param.name
 			end
 		end
 		file.write "];\n"

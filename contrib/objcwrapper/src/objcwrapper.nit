@@ -64,4 +64,4 @@ for arg in opts.rest do
 	v.enter_visit root
 end
 
-g.generator v.model.classes
+g.generate v.model.classes
