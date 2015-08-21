@@ -40,7 +40,7 @@ Options:"""
 	exit 1
 end
 
-var v = new Interpretor
+var v = new ObjcVisitor
 var g = new CodeGenerator
 
 for arg in opts.rest do
