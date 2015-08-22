@@ -96,21 +96,21 @@ class DB
 
 		# New
 		var stmt = select("name, desc FROM beers WHERE " +
-		                  "ROWID IN (SELECT beer FROM daily WHERE date(day) = date('now')) AND " +
+		                  "ROWID IN (SELECT beer FROM daily WHERE day=(SELECT MAX(day) FROM daily)) AND " +
 		                  "NOT ROWID IN (SELECT beer FROM daily WHERE date(day) = date({prev_day}))")
 		if stmt == null then return null
 		for row in stmt do events.new_beers.add row.to_beer
 
 		# Gone
 		stmt = select("name, desc FROM beers WHERE " +
-		                  "NOT ROWID IN (SELECT beer FROM daily WHERE date(day) = date('now')) AND " +
+		                  "NOT ROWID IN (SELECT beer FROM daily WHERE day=(SELECT MAX(day) FROM daily)) AND " +
 		                  "ROWID IN (SELECT beer FROM daily WHERE date(day) = date({prev_day}))")
 		if stmt == null then return null
 		for row in stmt do events.gone_beers.add row.to_beer
 
 		# Fix
 		stmt = select("name, desc FROM beers WHERE " +
-		                  "ROWID IN (SELECT beer FROM daily WHERE date(day) = date('now')) AND " +
+		                  "ROWID IN (SELECT beer FROM daily WHERE day=(SELECT MAX(day) FROM daily)) AND " +
 		                  "ROWID IN (SELECT beer FROM daily WHERE date(day) = date({prev_day}))")
 		if stmt == null then return null
 		for row in stmt do events.fix_beers.add row.to_beer
