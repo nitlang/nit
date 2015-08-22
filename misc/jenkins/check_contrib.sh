@@ -17,8 +17,13 @@
 # The script must be run from the root Nit directory.
 #
 # various .xml junit file will be generated in the root directory for jenkins.
+#
+# Arguments will be additional `make` rules to execute. eg.
+#
+#     check_contrib.sh check android
 
 projects=`echo lib/*/Makefile examples/*/Makefile contrib/*/Makefile`
+rules=$*
 
 failed=
 for p in $projects; do
@@ -26,20 +31,19 @@ for p in $projects; do
 	name=`basename "$dir"`
 	echo "*** make $dir ***"
 	if misc/jenkins/unitrun.sh "cmd-$name-make" make -C "$dir"; then
-		# Make OK, is there a `check` rule?
-		make -C "$dir" check -n 2>/dev/null || continue
-		echo "*** makecheck $dir ***"
-		if misc/jenkins/unitrun.sh "cmd-$name-makecheck" make -C "$dir" check; then
-			:
-		else
-			failed="$failed $name-check"
-		fi
-
+		# Make OK. Check additional rules if they exists
+		for rule in $rules; do
+			make -C "$dir" $rule -n 2>/dev/null ||
+				continue
+			echo "*** make$rule $dir ***"
+			misc/jenkins/unitrun.sh "cmd-$name-make$rule" make -C "$dir" $rule ||
+				failed="$failed $name-$rule"
+		done
 	else
 		failed="$failed $name"
 	fi
 done
-grep '<error message' *-make.xml *-makecheck.xml
+grep '<error message' *-make*.xml
 if test -n "$failed"; then
 	echo "FAILED: $failed"
 	exit 1
