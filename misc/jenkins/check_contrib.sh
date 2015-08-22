@@ -13,12 +13,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Check the build and the execution of software in examples/ and contrib/
+# Check the build and the execution of software in lib/, examples/ and contrib/
 # The script must be run from the root Nit directory.
 #
 # various .xml junit file will be generated in the root directory for jenkins.
 
-projects=`echo examples/*/Makefile contrib/*/Makefile`
+projects=`echo lib/*/Makefile examples/*/Makefile contrib/*/Makefile`
 
 failed=
 for p in $projects; do
