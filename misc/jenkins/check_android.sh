@@ -13,31 +13,90 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-set -x
+# Script to test Android apps using `adb monkey`
 
-avd=android4.0
-sleep=20
+# Show the emulator window?
+show=false
 
-android list avd | grep $avd
+# Name of an already running device, as shown by `adb devices`
+dev=none
 
-if [ $? -eq 1 ]; then
-	echo no | android create avd -n $avd --snapshot -t android-15 --abi x86 || true
-	sleep=120
+# Parse command line options
+stop=false
+while [ $stop = false ]; do
+	case $1 in
+		--show)	show=true; shift;;
+		--dev)	dev=$2; shift; shift;;
+		*) stop=true
+	esac
+done
+
+if [ $# = 0 ]; then
+	echo "Test an apk"
+	echo "Usage: check_android.sh [--show] [--dev android-device-name] file.apk [other_file.apk [...]]"
+	exit 1
 fi
 
-#-no-window
-emulator -avd android4.0 -no-window -qemu -m 512 -enable-kvm &
+set -x
 
-sleep $sleep
+# Create an AVD if none is specified
+kill_emu=false
+if [ $dev = none ]; then
+	kill_emu=true
 
-dev=`adb devices | grep emulator | sed "s/\(.*\)\s*device/\1/"`
+	# Name of the AVD
+	# TODO have alternatives AVD with different specs
+	avd=check_android_avd
 
-adb -s $dev install -r bin/moles.apk
+	# Port for the emulator
+	port=5600
 
-# Unlock screen
-adb -s $dev shell input keyevent 82
+	dev=emulator-$port
 
-adb -s $dev shell monkey -p org.nitlanguage.moles_android_debug \
-	--monitor-native-crashes --throttle 5 --pct-touch 50 --pct-motion 50 1000
+	# Time to wait for the emulator to be ready
+	to_sleep=20
 
-adb -s $dev emu kill
+	# Does the AVD exists?
+	android list avd | grep $avd
+	if [ $? -eq 1 ]; then
+		# Create it
+		echo no | android create avd -n $avd --snapshot -t android-19 --abi x86 || true
+		to_sleep=120
+	fi
+
+	# Show the emulator window on request only
+	emu_opts=
+	if [ $show = false ]; then
+		emu_opts="-no-window"
+	fi
+
+	emulator -avd $avd -port $port -logcat app.nit $emu_opts &
+	# To use hardware optimization add: -qemu -m 512 -enable-kvm
+
+	sleep $to_sleep
+fi
+
+for apk in $@; do
+
+	# Target package name
+	pkg=`aapt dump badging $apk | grep package | sed -e "s/.*name='\([a-z._]*\)'.*/\1/"`
+
+	# Force reinstall
+	adb -s $dev uninstall $pkg
+	adb -s $dev install -r "$apk"
+
+	# Unlock screen
+	adb -s $dev shell input keyevent 82
+	adb -s $dev shell input keyevent 4
+
+	# Run monkey
+	tools_dir=`dirname $0`
+	$tools_dir/unitrun.sh "android-`basename $apk .apk`" \
+		adb -s $dev shell monkey -p $pkg \
+			--monitor-native-crashes --throttle 2 --pct-touch 50 --pct-motion 50 5000
+done
+
+if [ $kill_emu = true ]; then
+	# Kill emulator
+	adb -s $dev emu kill
+fi
