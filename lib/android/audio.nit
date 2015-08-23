@@ -48,7 +48,7 @@ module audio
 import java
 import java::io
 intrude import assets_and_resources
-import native_app_glue # FIXME update this module to use nit_activity
+import activities
 import app::audio
 
 in "Java" `{
@@ -638,7 +638,7 @@ redef class App
 
 	# Sets the stream of the app to STREAM_MUSIC.
 	# STREAM_MUSIC is the default stream used by android apps.
-	private fun manage_audio_stream import native_activity, native_app_glue in "Java" `{
+	private fun manage_audio_stream import native_activity in "Java" `{
 		App_native_activity(self).setVolumeControlStream(AudioManager.STREAM_MUSIC);
 	`}
 
@@ -682,19 +682,19 @@ redef class App
 		return sound
 	end
 
-	redef fun pause do
+	redef fun on_pause do
 		super
 		for s in sounds do s.pause
 		audio_manager.abandon_audio_focus
 	end
 
-	redef fun init_window do
+	redef fun on_create do
 		super
 		audio_manager.request_audio_focus
 		manage_audio_stream
 	end
 
-	redef fun resume do
+	redef fun on_resume do
 		super
 		audio_manager.request_audio_focus
 		for s in sounds do s.resume
