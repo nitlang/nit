@@ -395,12 +395,8 @@ redef class ModelBuilder
 			return null
 		end
 
-		# Hack, a group is determined by one of the following:
-		# * the presence of a honomymous nit file
-		# * the fact that the directory is named `src`
-		# * the fact that there is a sub-directory named `src`
+		# By default, the name of the project or group is the base_name of the directory
 		var pn = rdp.basename(".nit")
-		var mp = dirpath.join_path(pn + ".nit").simplify_path
 
 		# Check `project.ini` that indicate a project
 		var ini = null
@@ -410,27 +406,35 @@ redef class ModelBuilder
 			ini = new ConfigTree(inipath)
 		end
 
-		# dirpath2 is the root directory
-		# dirpath is the src subdirectory directory, if any, else it is the same that dirpath2
-		var dirpath2 = dirpath
-		if not mp.file_exists then
-			if pn == "src" then
-				# With a src directory, the group name is the name of the parent directory
-				dirpath2 = rdp.dirname
-				pn = dirpath2.basename
-			else
-				# Check a `src` subdirectory
-				dirpath = dirpath2 / "src"
-				if not dirpath.file_exists then
-					# All rules failed, so return null
+		if ini == null then
+			# No ini, multiple course of action
+
+			# The root of the directory hierarchy in the file system.
+			if rdp == "/" then
+				mgroups[rdp] = null
+				return null
+			end
+
+			# Special stopper `projects.ini`
+			if (dirpath/"projects.ini").file_exists then
+				# dirpath cannot be a project since it is a project directory
+				mgroups[rdp] = null
+				return null
+			end
+
+			# check the parent directory (if it does not contain the stopper file)
+			var parentpath = dirpath.join_path("..").simplify_path
+			var stopper = parentpath / "projects.ini"
+			if not stopper.file_exists then
+				# Recursively get the parent group
+				parent = get_mgroup(parentpath)
+				if parent == null then
+					# Parent is not a group, thus we are not a group either
+					mgroups[rdp] = null
 					return null
 				end
 			end
 		end
-
-		# check parent directory
-		var parentpath = dirpath2.join_path("..").simplify_path
-		var parent = get_mgroup(parentpath)
 
 		var mgroup
 		if parent == null then
@@ -450,8 +454,6 @@ redef class ModelBuilder
 		# in src first so the documentation of the project code can be distinct for the documentation of the project usage
 		var readme = dirpath.join_path("README.md")
 		if not readme.file_exists then readme = dirpath.join_path("README")
-		if not readme.file_exists then readme = dirpath2.join_path("README.md")
-		if not readme.file_exists then readme = dirpath2.join_path("README")
 		if readme.file_exists then
 			var mdoc = load_markdown(readme)
 			mgroup.mdoc = mdoc
@@ -459,8 +461,7 @@ redef class ModelBuilder
 		end
 
 		mgroup.filepath = dirpath
-		mgroups[module_absolute_path(dirpath)] = mgroup
-		mgroups[module_absolute_path(dirpath2)] = mgroup
+		mgroups[rdp] = mgroup
 		return mgroup
 	end
 
