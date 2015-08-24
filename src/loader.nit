@@ -388,6 +388,13 @@ redef class ModelBuilder
 			return mgroups[rdp]
 		end
 
+		# Filter out non-directories
+		var stat = dirpath.file_stat
+		if stat == null or not stat.is_dir then
+			mgroups[rdp] = null
+			return null
+		end
+
 		# Hack, a group is determined by one of the following:
 		# * the presence of a honomymous nit file
 		# * the fact that the directory is named `src`
