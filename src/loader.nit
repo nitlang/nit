@@ -351,7 +351,7 @@ redef class ModelBuilder
 			mgroup = new MGroup(pn, mproject, null) # same name for the root group
 			mgroup.filepath = path
 			mproject.root = mgroup
-			toolcontext.info("found project `{pn}` at {path}", 2)
+			toolcontext.info("found singleton project `{pn}` at {path}", 2)
 		end
 
 		var res = new ModulePath(pn, path, mgroup)
