@@ -996,6 +996,23 @@ redef class MGroup
 	#
 	# See `ModelBuilder::scan_group`.
 	var scanned = false
+
+	# Return the modules in self and subgroups named `name`.
+	#
+	# If `self` is not scanned (see `ModelBuilder::scan_group`) the
+	# results might be partial.
+	fun mmodule_paths_by_name(name: String): Array[ModulePath]
+	do
+		var res = new Array[ModulePath]
+		for g in in_nesting.smallers do
+			for mp in g.module_paths do
+				if mp.name == name then
+					res.add mp
+				end
+			end
+		end
+		return res
+	end
 end
 
 redef class SourceFile
