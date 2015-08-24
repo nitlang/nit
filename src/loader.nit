@@ -402,6 +402,14 @@ redef class ModelBuilder
 		var pn = rdp.basename(".nit")
 		var mp = dirpath.join_path(pn + ".nit").simplify_path
 
+		# Check `project.ini` that indicate a project
+		var ini = null
+		var parent = null
+		var inipath = dirpath / "project.ini"
+		if inipath.file_exists then
+			ini = new ConfigTree(inipath)
+		end
+
 		# dirpath2 is the root directory
 		# dirpath is the src subdirectory directory, if any, else it is the same that dirpath2
 		var dirpath2 = dirpath
@@ -427,10 +435,12 @@ redef class ModelBuilder
 		var mgroup
 		if parent == null then
 			# no parent, thus new project
+			if ini != null and ini.has_key("name") then pn = ini["name"]
 			var mproject = new MProject(pn, model)
 			mgroup = new MGroup(pn, mproject, null) # same name for the root group
 			mproject.root = mgroup
 			toolcontext.info("found project `{mproject}` at {dirpath}", 2)
+			mproject.ini = ini
 		else
 			mgroup = new MGroup(pn, parent.mproject, parent)
 			toolcontext.info("found sub group `{mgroup.full_name}` at {dirpath}", 2)
