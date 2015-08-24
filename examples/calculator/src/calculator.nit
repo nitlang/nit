@@ -29,9 +29,14 @@ import android::aware
 
 import calculator_logic
 
+# Show debug output?
+fun debug: Bool do return false
+
 redef class App
 	redef fun on_create
 	do
+		if debug then print "App::on_create"
+
 		# Create the main window
 		window = new CalculatorWindow
 		super
@@ -56,6 +61,8 @@ class CalculatorWindow
 
 	init
 	do
+		if debug then print "CalculatorWindow::init"
+
 		# All the button labels, row by row
 		var rows = [["7", "8", "9", "+"],
 		            ["4", "5", "6", "-"],
@@ -76,6 +83,8 @@ class CalculatorWindow
 
 	redef fun on_event(event)
 	do
+		if debug then print "CalculatorWindow::on_event {event}"
+
 		if event isa ButtonPressEvent then
 
 			var op = event.sender.text
@@ -96,12 +105,16 @@ class CalculatorWindow
 
 	redef fun on_save_state
 	do
+		if debug then print "CalculatorWindow::on_save_state"
+
 		app.data_store["context"] = context
 		super
 	end
 
 	redef fun on_restore_state
 	do
+		if debug then print "CalculatorWindow::on_restore_state"
+
 		super
 
 		var context = app.data_store["context"]
