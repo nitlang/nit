@@ -1,16 +1,22 @@
-all:	concat iter substr array
+all:	basic compiler concat iter substr index
 
 concat:
-	./bench_strings.sh cct 10 10000000 1
+	./bench_strings.sh concat 1000000 15 10 2 20
 
 substr:
-	./bench_strings.sh substr 10 10000000 10
+	./bench_strings.sh substring 2500000 50 25 200
 
 iter:
-	./bench_strings.sh iter 10 10000000 10
+	./bench_strings.sh iteration 1000000 10 10 100
 
-array:
-	./bench_strings.sh array 10 10000000 10
+index:
+	./bench_strings.sh index 10000000 50 25 200
+
+basic:
+	./bench_strings.sh basic
+
+compiler:
+	./bench_strings.sh compiler
 
 clean:
-	rm -rf arraytos/ string_concat/ string_iter/ string_substr/ 2>/dev/null
+	rm -rf out/ 2>/dev/null
