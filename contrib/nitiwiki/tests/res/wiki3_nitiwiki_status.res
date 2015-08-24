@@ -1,7 +1,6 @@
 nitiWiki
 name: wiki3
 config: wiki3/config.ini
-url: http://localhost/
 
 There is modified files:
  + pages
