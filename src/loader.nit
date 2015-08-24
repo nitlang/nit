@@ -535,7 +535,10 @@ redef class ModelBuilder
 		for f in p.files do
 			var fp = p/f
 			var g = get_mgroup(fp)
-			if g != null then scan_group(g)
+			# Recursively scan for groups of the same project
+			if g != null and g.mproject == mgroup.mproject then
+				scan_group(g)
+			end
 			identify_file(fp)
 		end
 	end
