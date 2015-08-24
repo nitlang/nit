@@ -14,7 +14,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Entrypoint of an app with all the mnit tests for Android
 module complete_simple_android is
+	app_name "mnit Complete"
 	app_namespace "org.nitlanguage.test_all"
 	android_api_target 19
 end

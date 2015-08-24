@@ -15,7 +15,8 @@
 # limitations under the License.
 
 module simple_android is
-	android_manifest("""<uses-permission android:name="android.permission.VIBRATE" />""")
+	app_namespace "org.nitlanguage.test_minimal"
+	android_manifest """<uses-permission android:name="android.permission.VIBRATE" />"""
 end
 
 import mnit_android
