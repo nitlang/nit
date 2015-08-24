@@ -543,13 +543,15 @@ class Bundle
 	# Returns `null` if none or if it's the wrong value type
 	fun string(key: String): nullable String
 	do
-		sys.jni_env.push_local_frame(1)
-		var return_value = native_bundle.get_string(key.to_java_string).to_s
+		sys.jni_env.push_local_frame(2)
+
+		var jstr = native_bundle.get_string(key.to_java_string)
+		var str = null
+		if not jstr.is_java_null then str = jstr.to_s
+
 		sys.jni_env.pop_local_frame
 
-		if return_value == "" then return null
-
-		return return_value
+		return str
 	end
 
 	# Retrieves the `Bool` value corresponding to the given key
