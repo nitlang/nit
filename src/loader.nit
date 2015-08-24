@@ -203,36 +203,12 @@ redef class ModelBuilder
 	do
 		# First, look in groups
 		var c = mgroup
-		while c != null do
-			var dirname = c.filepath
-			if dirname == null then break # virtual group
-			if dirname.has_suffix(".nit") then break # singleton project
-
-			# Second, try the directory to find a file
-			var try_file = dirname + "/" + name + ".nit"
-			if try_file.file_exists then
-				var res = self.identify_file(try_file.simplify_path)
-				assert res != null
-				return res
-			end
-
-			# Third, try if the requested module is itself a group
-			try_file = dirname + "/" + name + "/" + name + ".nit"
-			if try_file.file_exists then
-				var res = self.identify_file(try_file.simplify_path)
-				assert res != null
-				return res
-			end
-
-			# Fourth, try if the requested module is itself a group with a src
-			try_file = dirname + "/" + name + "/src/" + name + ".nit"
-			if try_file.file_exists then
-				var res = self.identify_file(try_file.simplify_path)
-				assert res != null
-				return res
-			end
-
-			c = c.parent
+		if c != null then
+			var r = c.mproject.root
+			assert r != null
+			scan_group(r)
+			var res = r.mmodule_paths_by_name(name)
+			if res.not_empty then return res.first
 		end
 
 		# Look at some known directories
@@ -291,50 +267,23 @@ redef class ModelBuilder
 	# If found, the path of the file is returned
 	private fun search_module_in_paths(location: nullable Location, name: String, lookpaths: Collection[String]): nullable ModulePath
 	do
-		var candidate: nullable String = null
+		var res = new ArraySet[ModulePath]
 		for dirname in lookpaths do
-			var try_file = (dirname + "/" + name + ".nit").simplify_path
-			if try_file.file_exists then
-				if candidate == null then
-					candidate = try_file
-				else if candidate != try_file then
-					# try to disambiguate conflicting modules
-					var abs_candidate = module_absolute_path(candidate)
-					var abs_try_file = module_absolute_path(try_file)
-					if abs_candidate != abs_try_file then
-						toolcontext.error(location, "Error: conflicting module file for `{name}`: `{candidate}` `{try_file}`")
-					end
-				end
-			end
-			try_file = (dirname + "/" + name + "/" + name + ".nit").simplify_path
-			if try_file.file_exists then
-				if candidate == null then
-					candidate = try_file
-				else if candidate != try_file then
-					# try to disambiguate conflicting modules
-					var abs_candidate = module_absolute_path(candidate)
-					var abs_try_file = module_absolute_path(try_file)
-					if abs_candidate != abs_try_file then
-						toolcontext.error(location, "Error: conflicting module file for `{name}`: `{candidate}` `{try_file}`")
-					end
-				end
-			end
-			try_file = (dirname + "/" + name + "/src/" + name + ".nit").simplify_path
-			if try_file.file_exists then
-				if candidate == null then
-					candidate = try_file
-				else if candidate != try_file then
-					# try to disambiguate conflicting modules
-					var abs_candidate = module_absolute_path(candidate)
-					var abs_try_file = module_absolute_path(try_file)
-					if abs_candidate != abs_try_file then
-						toolcontext.error(location, "Error: conflicting module file for `{name}`: `{candidate}` `{try_file}`")
-					end
-				end
+			# Try a single module file
+			var mp = identify_file((dirname/"{name}.nit").simplify_path)
+			if mp != null then res.add mp
+			# Try the default module of a group
+			var g = get_mgroup((dirname/name).simplify_path)
+			if g != null then
+				scan_group(g)
+				res.add_all g.mmodule_paths_by_name(name)
 			end
 		end
-		if candidate == null then return null
-		return identify_file(candidate)
+		if res.is_empty then return null
+		if res.length > 1 then
+			toolcontext.error(location, "Error: conflicting module files for `{name}`: `{res.join(",")}`")
+		end
+		return res.first
 	end
 
 	# Cache for `identify_file` by realpath
