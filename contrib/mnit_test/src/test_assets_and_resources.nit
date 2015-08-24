@@ -23,7 +23,7 @@ intrude import android::assets_and_resources
 redef class App
 	redef fun input( ie )
 	do
-		if ie isa PointerEvent and ie.depressed then 
+		if ie isa PointerEvent and ie.depressed then
 			test_assets
 			test_resources
 		end

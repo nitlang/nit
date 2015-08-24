@@ -27,7 +27,7 @@ import android::shared_preferences::shared_preferences_api11
 redef class App
 	redef fun input( ie )
 	do
-		if ie isa PointerEvent and ie.depressed then 
+		if ie isa PointerEvent and ie.depressed then
 			test_target_api
 		end
 		return super

@@ -32,7 +32,7 @@ in "Java" `{
 redef class App
 	redef fun input( ie )
 	do
-		if ie isa PointerEvent and ie.depressed then 
+		if ie isa PointerEvent and ie.depressed then
 			test_java_ffi
 		end
 		return super
