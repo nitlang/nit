@@ -18,6 +18,7 @@
 module loader
 
 import modelbuilder_base
+import ini
 
 redef class ToolContext
 	# Option --path
@@ -916,6 +917,15 @@ class ModulePath
 	var mmodule: nullable MModule = null
 
 	redef fun to_s do return filepath
+end
+
+redef class MProject
+	# The associated `.ini` file, if any
+	#
+	# The `ini` file is given as is and might contain invalid or missing information.
+	#
+	# Some projects, like stand-alone projects or virtual projects have no `ini` file associated.
+	var ini: nullable ConfigTree = null
 end
 
 redef class MGroup
