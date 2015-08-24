@@ -425,7 +425,7 @@ end
 
 # A class mapping `String` keys to various value types
 class Bundle
-	private var native_bundle: NativeBundle = new NativeBundle is lazy
+	private var native_bundle: NativeBundle = (new NativeBundle).new_global_ref is lazy
 
 	# Get a new `Bundle` wrapping `native_bundle`
 	init from(native_bundle: NativeBundle) do self.native_bundle = native_bundle
