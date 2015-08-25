@@ -38,5 +38,11 @@ check-apple: bin/objcwrapper
 	bin/objcwrapper tests/NSArray.pre.h -o tests/nsarray.nit
 	../../bin/nitpick tests/nsarray.nit
 
+	gcc -E /System/Library/Frameworks/AppKit.framework/Headers/NSAlert.h \
+	| ../header_keeper/bin/header_keeper NSAlert.h \
+	| bin/header_static > tests/NSAlert.pre.h
+	bin/objcwrapper tests/NSAlert.pre.h -o tests/nsalert.nit
+	../../bin/nitpick tests/nsalert.nit
+
 bin/header_static:
 	../../bin/nitc --dir bin src/header_static.nit
