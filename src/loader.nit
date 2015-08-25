@@ -353,6 +353,13 @@ redef class ModelBuilder
 			mgroup.filepath = path
 			mproject.root = mgroup
 			toolcontext.info("found singleton project `{pn}` at {path}", 2)
+
+			# Attach homonymous `ini` file to the project
+			var inipath = path.dirname / "{pn}.ini"
+			if inipath.file_exists then
+				var ini = new ConfigTree(inipath)
+				mproject.ini = ini
+			end
 		end
 
 		var res = new ModulePath(pn, path, mgroup)
