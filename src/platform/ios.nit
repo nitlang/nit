@@ -110,6 +110,7 @@ private class IOSToolchain
 			"xcodebuild -target '{project_name}' " +
 			"-destination 'platform=iOS Simulator,name=iPhone' " +
 			"-configuration {if release then "Release" else "Debug"} " +
+			 "ONLY_ACTIVE_ARCH=NO "+
 			"-sdk iphonesimulator build"]
 		toolcontext.exec_and_check(args, "iOS project error")
 
