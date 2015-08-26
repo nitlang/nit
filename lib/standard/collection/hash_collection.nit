@@ -505,4 +505,3 @@ private class HashSetIterator[E]
 		_node = _set._first_item
 	end
 end
-
