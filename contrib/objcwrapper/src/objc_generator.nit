@@ -67,6 +67,11 @@ redef class Sys
 	end
 end
 
+redef class ObjcModel
+	redef fun knows_type(objc_type) do return super or
+		nit_to_java_types.keys.has(objc_type)
+end
+
 # Wrapper generator
 class CodeGenerator
 
