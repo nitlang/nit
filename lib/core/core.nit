@@ -13,7 +13,7 @@
 
 # Standard classes and methods used by default by Nit programs and libraries.
 # This module is implicitly imported by every module.
-module standard
+module core
 
 import posix
 import environ
