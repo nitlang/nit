@@ -59,6 +59,10 @@ redef class Sys
 		types["NSUInteger"] = "Int"
 		types["BOOL"] = "Bool"
 		types["id"] = "NSObject"
+		types["constid"] = "NSObject"
+		types["SEL"] = "NSObject"
+		types["void"] = "Pointer"
+
 		return types
 	end
 end
