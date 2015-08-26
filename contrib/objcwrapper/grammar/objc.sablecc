@@ -197,7 +197,8 @@ Parser
         'long long int' |
         'float' |
         'double' |
-        'long double';
+        'long double' |
+        'size_t';
 
     classe =
         {class:} class |
