@@ -49,7 +49,10 @@ fun header_static(input: Reader, output: Writer) do
 
 	while not input.eof do
 		var line = input.read_line
-		if line.to_s.has("static") then static_target = true
+
+		if line.has("typedef struct") then continue
+
+		if line.has("static") then static_target = true
 
 		if static_target then
 			if line.to_s.has("__attribute__") then static_attribute_target = true
