@@ -312,20 +312,20 @@ redef class Text
 		end
 	end
 
-	# Search the first occurence of the pattern `p`.
+	# Search the first occurence of `pattern`.
 	# Return null if not found.
 	#
 	#     assert "I say hello to the world!".search("hello").from  == 6
 	#     assert "I say goodbye to the world!".search("hello")     == null
-	fun search(p: Pattern): nullable Match do return p.search_in(self, 0)
+	fun search(pattern: Pattern): nullable Match do return pattern.search_in(self, 0)
 
-	# Search the first occurence of the pattern `p` after `from`.
+	# Search the first occurence of `pattern` after `from`.
 	# The search starts at `from`.
 	# Return null if not found.
 	#
 	#     assert "I say hello to the world!".search_from("hello",4).from  == 6
 	#     assert "I say hello to the world!".search_from("hello",7)       == null
-	fun search_from(p: Pattern, from: Int): nullable Match do return p.search_in(self, from)
+	fun search_from(pattern: Pattern, from: Int): nullable Match do return pattern.search_in(self, from)
 
 	# Search the last occurence of the text `t`.
 	#
@@ -358,36 +358,36 @@ redef class Text
 		return null
 	end
 
-	# Search all occurrences of p into self.
+	# Search all occurrences of `pattern` into self.
 	#
 	#     var a = new Array[Int]
 	#     for i in "hello world".search_all('o') do
 	#         a.add(i.from)
 	#     end
 	#     assert a         ==  [4, 7]
-	fun search_all(p: Pattern): Array[Match] do return p.search_all_in(self)
+	fun search_all(pattern: Pattern): Array[Match] do return pattern.search_all_in(self)
 
-	# Split `self` using `p` as separator.
+	# Split `self` using `pattern` as separator.
 	#
 	#     assert "hello world".split('o')          ==  ["hell", " w", "rld"]
-	fun split(p: Pattern): Array[String]
+	fun split(pattern: Pattern): Array[String]
 	do
-		var matches = p.split_in(self)
+		var matches = pattern.split_in(self)
 		var res = new Array[String].with_capacity(matches.length)
 		for m in matches do res.add(m.to_s)
 		return res
 	end
 
 	# @deprecated alias for `split`
-	fun split_with(p: Pattern): Array[String] do return self.split(p)
+	fun split_with(pattern: Pattern): Array[String] do return self.split(pattern)
 
-	# Split `self` on the first `=`
+	# Split `self` on the first occurence of `pattern`
 	#
 	#     assert "hello".split_once_on('l') == ["he", "lo"]
 	#     assert "a, b, c, d, e".split_once_on(", ") == ["a", "b, c, d, e"]
-	fun split_once_on(p: Pattern): Array[SELFTYPE]
+	fun split_once_on(pattern: Pattern): Array[SELFTYPE]
 	do
-		var m = p.search_in(self, 0)
+		var m = pattern.search_in(self, 0)
 		var res = new Array[SELFTYPE]
 		if m == null then
 			res.add self
@@ -398,13 +398,13 @@ redef class Text
 		return res
 	end
 
-	# Replace all occurences of a pattern with a string
+	# Replace all occurences of `pattern` with `string`
 	#
 	#     assert "hlelo".replace("le", "el")	     ==  "hello"
 	#     assert "hello".replace('l', "")	     ==  "heo"
-	fun replace(p: Pattern, string: SELFTYPE): String
+	fun replace(pattern: Pattern, string: SELFTYPE): String
 	do
-		return self.split_with(p).join(string)
+		return self.split_with(pattern).join(string)
 	end
 
 	# Does `self` contains at least one instance of `pattern`?
