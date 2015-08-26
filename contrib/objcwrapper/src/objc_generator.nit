@@ -20,8 +20,29 @@ import opts
 import objc_model
 
 redef class Sys
+
 	# Path to the output file
 	var opt_output = new OptionString("Output file", "-o")
+
+	private var nit_to_java_types: Map[String, String] is lazy do
+		var types = new HashMap[String, String]
+		types["char"] = "Byte"
+		types["short"] = "Int"
+		types["short int"] = "Int"
+		types["int"] = "Int"
+		types["long"] = "Int"
+		types["long int"] = "Int"
+		types["long long"] = "Int"
+		types["long long int"] = "Int"
+		types["float"] = "Float"
+		types["double"] = "Float"
+		types["long double"] = "Float"
+
+		types["NSUInteger"] = "Int"
+		types["BOOL"] = "Bool"
+		types["id"] = "NSObject"
+		return types
+	end
 end
 
 class CodeGenerator
@@ -63,32 +84,6 @@ class CodeGenerator
 		end
 
 		if path != null then file.close
-	end
-
-	private fun type_convertor(type_word: String): String
-	do
-		var types = new HashMap[String, String]
-		types["char"] = "Byte"
-		types["short"] = "Int"
-		types["short int"] = "Int"
-		types["int"] = "Int"
-		types["long"] = "Int"
-		types["long int"] = "Int"
-		types["long long"] = "Int"
-		types["long long int"] = "Int"
-		types["float"] = "Float"
-		types["double"] = "Float"
-		types["long double"] = "Float"
-
-		types["NSUInteger"] = "Int"
-		types["BOOL"] = "Bool"
-		types["id"] = "NSObject"
-
-		if types.has_key(type_word) then
-			return types[type_word]
-		else
-			return type_word
-		end
 	end
 
 	private fun write_class(classe: ObjcClass, file: Writer)
@@ -158,7 +153,7 @@ class CodeGenerator
 
 	private fun write_attribute_getter(attribute: ObjcAttribute, file: Writer)
 	do
-		file.write """	fun """ + attribute.name.to_snake_case + ": " + type_convertor(attribute.return_type)
+		file.write """	fun """ + attribute.name.to_snake_case + ": " + attribute.return_type.to_nit_type
 		file.write """ in "ObjC" `{\n"""
 		file.write """		return [self """ + attribute.name + "];\n"
 		file.write """	`}\n"""
@@ -166,7 +161,7 @@ class CodeGenerator
 
 	private fun write_attribute_setter(attribute: ObjcAttribute, file: Writer)
 	do
-		file.write """	fun """ + attribute.name.to_snake_case + "=(value: " + type_convertor(attribute.return_type) + ")"
+		file.write """	fun """ + attribute.name.to_snake_case + "=(value: " + attribute.return_type.to_nit_type + ")"
 		file.write " in \"ObjC\" `\{\n"
 		file.write """		self.""" + attribute.name + " = value;\n"
 		file.write """	`}\n"""
@@ -188,17 +183,17 @@ class CodeGenerator
 		file.write name
 		for param in method.params do
 			if param == method.params.first and not param.is_single then
-				file.write "(" + param.variable_name + ": " + type_convertor(param.return_type)
+				file.write "(" + param.variable_name + ": " + param.return_type.to_nit_type
 			end
 			if param != method.params.first and not param.is_single then
-				file.write ", " + param.variable_name + ": " + type_convertor(param.return_type)
+				file.write ", " + param.variable_name + ": " + param.return_type.to_nit_type
 			end
 			if param == method.params.last and not param.is_single then
 				file.write ")"
 			end
 		end
 		if method.return_type != "void" and not method.params.first.name.has("init") then
-			file.write ": " + type_convertor(method.return_type)
+			file.write ": " + method.return_type.to_nit_type
 		end
 	end
 
@@ -229,5 +224,19 @@ class CodeGenerator
 			end
 		end
 		file.write "];\n"
+	end
+end
+
+redef class Text
+	# Nit equivalent to this type
+	private fun to_nit_type: String
+	do
+		var types = sys.nit_to_java_types
+
+		if types.has_key(self) then
+			return types[self]
+		else
+			return to_s
+		end
 	end
 end
