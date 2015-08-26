@@ -63,10 +63,17 @@ redef class Sys
 	end
 end
 
+# Wrapper generator
 class CodeGenerator
+
+	# `ObjcModel` to wrap
+	var model: ObjcModel
+
 	# Generate Nit code to wrap `classes`
-	fun generate(classes: Array[ObjcClass])
+	fun generate
 	do
+		var classes = model.classes
+
 		# Open specified path or stdin
 		var file
 		var path = opt_output.value

@@ -41,7 +41,6 @@ Options:"""
 end
 
 var v = new ObjcVisitor
-var g = new CodeGenerator
 
 for arg in opts.rest do
 	# Read input
@@ -64,4 +63,5 @@ for arg in opts.rest do
 	v.enter_visit root
 end
 
-g.generate v.model.classes
+var g = new CodeGenerator(v.model)
+g.generate
