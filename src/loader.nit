@@ -18,6 +18,7 @@
 module loader
 
 import modelbuilder_base
+import ini
 
 redef class ToolContext
 	# Option --path
@@ -203,36 +204,12 @@ redef class ModelBuilder
 	do
 		# First, look in groups
 		var c = mgroup
-		while c != null do
-			var dirname = c.filepath
-			if dirname == null then break # virtual group
-			if dirname.has_suffix(".nit") then break # singleton project
-
-			# Second, try the directory to find a file
-			var try_file = dirname + "/" + name + ".nit"
-			if try_file.file_exists then
-				var res = self.identify_file(try_file.simplify_path)
-				assert res != null
-				return res
-			end
-
-			# Third, try if the requested module is itself a group
-			try_file = dirname + "/" + name + "/" + name + ".nit"
-			if try_file.file_exists then
-				var res = self.identify_file(try_file.simplify_path)
-				assert res != null
-				return res
-			end
-
-			# Fourth, try if the requested module is itself a group with a src
-			try_file = dirname + "/" + name + "/src/" + name + ".nit"
-			if try_file.file_exists then
-				var res = self.identify_file(try_file.simplify_path)
-				assert res != null
-				return res
-			end
-
-			c = c.parent
+		if c != null then
+			var r = c.mproject.root
+			assert r != null
+			scan_group(r)
+			var res = r.mmodule_paths_by_name(name)
+			if res.not_empty then return res.first
 		end
 
 		# Look at some known directories
@@ -291,50 +268,23 @@ redef class ModelBuilder
 	# If found, the path of the file is returned
 	private fun search_module_in_paths(location: nullable Location, name: String, lookpaths: Collection[String]): nullable ModulePath
 	do
-		var candidate: nullable String = null
+		var res = new ArraySet[ModulePath]
 		for dirname in lookpaths do
-			var try_file = (dirname + "/" + name + ".nit").simplify_path
-			if try_file.file_exists then
-				if candidate == null then
-					candidate = try_file
-				else if candidate != try_file then
-					# try to disambiguate conflicting modules
-					var abs_candidate = module_absolute_path(candidate)
-					var abs_try_file = module_absolute_path(try_file)
-					if abs_candidate != abs_try_file then
-						toolcontext.error(location, "Error: conflicting module file for `{name}`: `{candidate}` `{try_file}`")
-					end
-				end
-			end
-			try_file = (dirname + "/" + name + "/" + name + ".nit").simplify_path
-			if try_file.file_exists then
-				if candidate == null then
-					candidate = try_file
-				else if candidate != try_file then
-					# try to disambiguate conflicting modules
-					var abs_candidate = module_absolute_path(candidate)
-					var abs_try_file = module_absolute_path(try_file)
-					if abs_candidate != abs_try_file then
-						toolcontext.error(location, "Error: conflicting module file for `{name}`: `{candidate}` `{try_file}`")
-					end
-				end
-			end
-			try_file = (dirname + "/" + name + "/src/" + name + ".nit").simplify_path
-			if try_file.file_exists then
-				if candidate == null then
-					candidate = try_file
-				else if candidate != try_file then
-					# try to disambiguate conflicting modules
-					var abs_candidate = module_absolute_path(candidate)
-					var abs_try_file = module_absolute_path(try_file)
-					if abs_candidate != abs_try_file then
-						toolcontext.error(location, "Error: conflicting module file for `{name}`: `{candidate}` `{try_file}`")
-					end
-				end
+			# Try a single module file
+			var mp = identify_file((dirname/"{name}.nit").simplify_path)
+			if mp != null then res.add mp
+			# Try the default module of a group
+			var g = get_mgroup((dirname/name).simplify_path)
+			if g != null then
+				scan_group(g)
+				res.add_all g.mmodule_paths_by_name(name)
 			end
 		end
-		if candidate == null then return null
-		return identify_file(candidate)
+		if res.is_empty then return null
+		if res.length > 1 then
+			toolcontext.error(location, "Error: conflicting module files for `{name}`: `{res.join(",")}`")
+		end
+		return res.first
 	end
 
 	# Cache for `identify_file` by realpath
@@ -402,7 +352,7 @@ redef class ModelBuilder
 			mgroup = new MGroup(pn, mproject, null) # same name for the root group
 			mgroup.filepath = path
 			mproject.root = mgroup
-			toolcontext.info("found project `{pn}` at {path}", 2)
+			toolcontext.info("found singleton project `{pn}` at {path}", 2)
 		end
 
 		var res = new ModulePath(pn, path, mgroup)
@@ -438,42 +388,63 @@ redef class ModelBuilder
 			return mgroups[rdp]
 		end
 
-		# Hack, a group is determined by one of the following:
-		# * the presence of a honomymous nit file
-		# * the fact that the directory is named `src`
-		# * the fact that there is a sub-directory named `src`
-		var pn = rdp.basename(".nit")
-		var mp = dirpath.join_path(pn + ".nit").simplify_path
+		# Filter out non-directories
+		var stat = dirpath.file_stat
+		if stat == null or not stat.is_dir then
+			mgroups[rdp] = null
+			return null
+		end
 
-		# dirpath2 is the root directory
-		# dirpath is the src subdirectory directory, if any, else it is the same that dirpath2
-		var dirpath2 = dirpath
-		if not mp.file_exists then
-			if pn == "src" then
-				# With a src directory, the group name is the name of the parent directory
-				dirpath2 = rdp.dirname
-				pn = dirpath2.basename
-			else
-				# Check a `src` subdirectory
-				dirpath = dirpath2 / "src"
-				if not dirpath.file_exists then
-					# All rules failed, so return null
+		# By default, the name of the project or group is the base_name of the directory
+		var pn = rdp.basename(".nit")
+
+		# Check `project.ini` that indicate a project
+		var ini = null
+		var parent = null
+		var inipath = dirpath / "project.ini"
+		if inipath.file_exists then
+			ini = new ConfigTree(inipath)
+		end
+
+		if ini == null then
+			# No ini, multiple course of action
+
+			# The root of the directory hierarchy in the file system.
+			if rdp == "/" then
+				mgroups[rdp] = null
+				return null
+			end
+
+			# Special stopper `projects.ini`
+			if (dirpath/"projects.ini").file_exists then
+				# dirpath cannot be a project since it is a project directory
+				mgroups[rdp] = null
+				return null
+			end
+
+			# check the parent directory (if it does not contain the stopper file)
+			var parentpath = dirpath.join_path("..").simplify_path
+			var stopper = parentpath / "projects.ini"
+			if not stopper.file_exists then
+				# Recursively get the parent group
+				parent = get_mgroup(parentpath)
+				if parent == null then
+					# Parent is not a group, thus we are not a group either
+					mgroups[rdp] = null
 					return null
 				end
 			end
 		end
 
-		# check parent directory
-		var parentpath = dirpath2.join_path("..").simplify_path
-		var parent = get_mgroup(parentpath)
-
 		var mgroup
 		if parent == null then
 			# no parent, thus new project
+			if ini != null and ini.has_key("name") then pn = ini["name"]
 			var mproject = new MProject(pn, model)
 			mgroup = new MGroup(pn, mproject, null) # same name for the root group
 			mproject.root = mgroup
 			toolcontext.info("found project `{mproject}` at {dirpath}", 2)
+			mproject.ini = ini
 		else
 			mgroup = new MGroup(pn, parent.mproject, parent)
 			toolcontext.info("found sub group `{mgroup.full_name}` at {dirpath}", 2)
@@ -483,8 +454,6 @@ redef class ModelBuilder
 		# in src first so the documentation of the project code can be distinct for the documentation of the project usage
 		var readme = dirpath.join_path("README.md")
 		if not readme.file_exists then readme = dirpath.join_path("README")
-		if not readme.file_exists then readme = dirpath2.join_path("README.md")
-		if not readme.file_exists then readme = dirpath2.join_path("README")
 		if readme.file_exists then
 			var mdoc = load_markdown(readme)
 			mgroup.mdoc = mdoc
@@ -492,8 +461,7 @@ redef class ModelBuilder
 		end
 
 		mgroup.filepath = dirpath
-		mgroups[module_absolute_path(dirpath)] = mgroup
-		mgroups[module_absolute_path(dirpath2)] = mgroup
+		mgroups[rdp] = mgroup
 		return mgroup
 	end
 
@@ -535,7 +503,10 @@ redef class ModelBuilder
 		for f in p.files do
 			var fp = p/f
 			var g = get_mgroup(fp)
-			if g != null then scan_group(g)
+			# Recursively scan for groups of the same project
+			if g != null and g.mproject == mgroup.mproject then
+				scan_group(g)
+			end
 			identify_file(fp)
 		end
 	end
@@ -966,6 +937,15 @@ class ModulePath
 	redef fun to_s do return filepath
 end
 
+redef class MProject
+	# The associated `.ini` file, if any
+	#
+	# The `ini` file is given as is and might contain invalid or missing information.
+	#
+	# Some projects, like stand-alone projects or virtual projects have no `ini` file associated.
+	var ini: nullable ConfigTree = null
+end
+
 redef class MGroup
 	# Modules paths associated with the group
 	var module_paths = new Array[ModulePath]
@@ -993,6 +973,23 @@ redef class MGroup
 	#
 	# See `ModelBuilder::scan_group`.
 	var scanned = false
+
+	# Return the modules in self and subgroups named `name`.
+	#
+	# If `self` is not scanned (see `ModelBuilder::scan_group`) the
+	# results might be partial.
+	fun mmodule_paths_by_name(name: String): Array[ModulePath]
+	do
+		var res = new Array[ModulePath]
+		for g in in_nesting.smallers do
+			for mp in g.module_paths do
+				if mp.name == name then
+					res.add mp
+				end
+			end
+		end
+		return res
+	end
 end
 
 redef class SourceFile

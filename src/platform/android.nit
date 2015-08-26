@@ -266,7 +266,7 @@ $(call import-module,android/native_app_glue)
 			if root != null then
 				var filepath = root.filepath
 				if filepath != null then
-					project_root = filepath / ".."
+					project_root = filepath
 				end
 			end
 		end

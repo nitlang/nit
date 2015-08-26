@@ -12,6 +12,4 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import module1
-
-redef fun foo do 2.output
+import module4
