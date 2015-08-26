@@ -269,7 +269,7 @@ redef class ArticleCommand
 
 	redef fun make_results(nitx, results) do
 		var len = results.length
-		# FIXME how to render the pager for one worded namespaces like "standard"?
+		# FIXME how to render the pager for one worded namespaces like "core"?
 		if len == 1 then
 			var page = results.first.as(PageMatch).page
 			var pager = new Pager

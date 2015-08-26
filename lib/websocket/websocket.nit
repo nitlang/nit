@@ -22,8 +22,8 @@ import socket
 import sha1
 import base64
 
-intrude import standard::stream
-intrude import standard::bytes
+intrude import core::stream
+intrude import core::bytes
 
 # Websocket compatible listener
 #

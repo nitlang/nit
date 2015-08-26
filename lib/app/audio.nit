@@ -24,7 +24,7 @@
 module audio
 
 import app_base
-import standard::error
+import core::error
 
 # Platform variations
 # TODO: move on the platform once qualified names are understand in the condition

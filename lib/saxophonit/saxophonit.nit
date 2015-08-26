@@ -12,7 +12,7 @@
 module saxophonit
 
 import sax
-intrude import standard::file
+intrude import core::file
 private import reader_model
 private import lexer
 

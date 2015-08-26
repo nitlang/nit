@@ -14,8 +14,8 @@
 # underlying implementation and that the services are semantically correct.
 module primitive_types
 
-intrude import standard::file
-intrude import standard::text::flat
+intrude import core::file
+intrude import core::text::flat
 
 # Wrapper for `NativeFile`
 class PrimitiveNativeFile

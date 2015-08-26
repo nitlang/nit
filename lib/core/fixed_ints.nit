@@ -818,7 +818,7 @@ redef class Text
 
 	# Removes the numeric head of `self` if present
 	#
-	#     intrude import standard::fixed_ints
+	#     intrude import core::fixed_ints
 	#     assert "0xFFEF".strip_numhead  == "FFEF"
 	#     assert "0o7364".strip_numhead  == "7364"
 	#     assert "0b01001".strip_numhead == "01001"
@@ -831,7 +831,7 @@ redef class Text
 	# Gets the numeric head of `self` if present
 	# Returns "" otherwise
 	#
-	#     intrude import standard::fixed_ints
+	#     intrude import core::fixed_ints
 	#     assert "0xFEFF".get_numhead  == "0x"
 	#     assert "0b01001".get_numhead == "0b"
 	#     assert "0o872".get_numhead   == "0o"
@@ -848,7 +848,7 @@ redef class Text
 
 	# Removes the numeric extension if present
 	#
-	#     intrude import standard::fixed_ints
+	#     intrude import core::fixed_ints
 	#     assert "0xFEFFu8".strip_numext  == "0xFEFF"
 	#     assert "0b01001u8".strip_numext == "0b01001"
 	#     assert "0o872u8".strip_numext   == "0o872"
@@ -862,7 +862,7 @@ redef class Text
 	# Gets the numeric extension (i/u 8/16/32) in `self` is present
 	# Returns "" otherwise
 	#
-	#     intrude import standard::fixed_ints
+	#     intrude import core::fixed_ints
 	#     assert "0xFEFFu8".get_numext  == "u8"
 	#     assert "0b01001u8".get_numext == "u8"
 	#     assert "0o872u8".get_numext   == "u8"

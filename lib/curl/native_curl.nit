@@ -17,8 +17,8 @@
 # Binding of C libCurl which allow us to interact with network.
 module native_curl is pkgconfig "libcurl"
 
-intrude import standard::file
-import standard
+intrude import core::file
+import core
 
 in "C header" `{
 	#include <curl/curl.h>

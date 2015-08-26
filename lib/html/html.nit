@@ -246,7 +246,7 @@ class HTMLTag
 	#     var p = new HTMLTag("p")
 	#     p.text("Hello World!")
 	#     assert p.write_to_string      ==  "<p>Hello World!</p>"
-	# Text is escaped see: `standard::String::html_escape`
+	# Text is escaped see: `core::String::html_escape`
 	fun text(txt: String): HTMLTag do
 
 		children.clear
@@ -261,7 +261,7 @@ class HTMLTag
 	#     p.add(new HTMLTag("br"))
 	#     p.append("World!")
 	#     assert p.write_to_string      ==  "<p>Hello<br/>World!</p>"
-	# Text is escaped see: standard::String::html_escape
+	# Text is escaped see: core::String::html_escape
 	fun append(txt: String): HTMLTag do
 		add(new HTMLRaw("", txt.html_escape))
 		return self

@@ -20,7 +20,7 @@
 module sqlite3
 
 private import native_sqlite3
-import standard
+import core
 
 # A connection to a Sqlite3 database
 class Sqlite3DB

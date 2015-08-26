@@ -16,7 +16,7 @@
 module engine_tools
 
 import serialization
-intrude import standard::collection::hash_collection
+intrude import core::collection::hash_collection
 
 # Maps instances to a value, uses `is_same_serialized` and `serialization_hash`.
 class StrictHashMap[K, V]

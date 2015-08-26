@@ -31,7 +31,7 @@ module mpi is
 end
 
 import c
-intrude import standard::text::flat
+intrude import core::text::flat
 import serialization
 private import json::serialization
 
