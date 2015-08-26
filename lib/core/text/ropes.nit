@@ -559,7 +559,7 @@ redef class FlatString
 			var ns = new NativeString(nlen + 1)
 			mits.copy_to(ns, mlen, mifrom, 0)
 			sits.copy_to(ns, slen, sifrom, mlen)
-			return ns.to_s_with_length(nlen)
+			return new FlatString.full(ns, nlen, 0, nlen - 1, length + s.length)
 		else if s isa Concat then
 			var sl = s.left
 			var sllen = sl.bytelen
