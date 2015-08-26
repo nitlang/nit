@@ -133,6 +133,7 @@ extern class {{{classe.name}}} in "ObjC" `{ {{{classe.name}}} * `}
 
 		# Methods
 		for method in classe.methods do
+			if not model.knows_all_types(method) then method.is_commented = true
 
 			if not opt_init_as_methods.value and method.is_init then continue
 
@@ -162,6 +163,8 @@ end
 		for method in classe.methods do
 			if not method.is_init then continue
 
+			if not model.knows_all_types(method) then method.is_commented = true
+
 			write_method_signature(method, file)
 
 				write_objc_init_call(classe.name, method, file)
@@ -170,6 +173,8 @@ end
 
 	private fun write_attribute(attribute: ObjcAttribute, file: Writer)
 	do
+		if not model.knows_type(attribute.return_type) then attribute.is_commented = true
+
 		write_attribute_getter(attribute, file)
 		# TODO write_attribute_setter if there is no `readonly` annotation
 	end
