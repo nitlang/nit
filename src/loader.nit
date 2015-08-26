@@ -756,7 +756,7 @@ redef class ModelBuilder
 			mmodule.set_visibility_for(sup, mvisibility)
 		end
 		if stdimport then
-			var mod_name = "standard"
+			var mod_name = "core"
 			var sup = self.get_mmodule_by_name(nmodule, null, mod_name)
 			if sup == null then
 				nmodule.mmodule = null # invalidate the module
@@ -815,9 +815,9 @@ redef class ModelBuilder
 
 		self.toolcontext.info("{mmodule} imports {mmodule.in_importation.direct_greaters.join(", ")}", 3)
 
-		# Force standard to be public if imported
+		# Force `core` to be public if imported
 		for sup in mmodule.in_importation.greaters do
-			if sup.name == "standard" then
+			if sup.name == "core" then
 				mmodule.set_visibility_for(sup, public_visibility)
 			end
 		end
