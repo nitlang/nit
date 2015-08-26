@@ -91,59 +91,64 @@ class CodeGenerator
 
 	private fun write_class(classe: ObjcClass, file: Writer)
 	do
-		var commented_methods = new Array[ObjcMethod]
-		file.write "extern class " + classe.name + """ in "ObjC" `{ """ + classe.name  + """ * `}\n"""
-		for super_name in classe.super_names do
-			file.write """	super """ + super_name + "\n"
-		end
-		if classe.super_names.is_empty then file.write """	super NSObject\n"""
-		write_constructor(classe, file)
+		# Class header
+		file.write """
+
+extern class {{{classe.name}}} in "ObjC" `{ {{{classe.name}}} * `}
+"""
+
+		# Supers
+		for super_name in classe.super_names do file.write """
+	super {{{super_name}}}
+"""
+		if classe.super_names.is_empty then file.write """
+	super NSObject
+"""
+
 		file.write "\n"
+
+		# Constructor or constructors
+		write_constructors(classe, file)
+
+		# Attributes
 		for attribute in classe.attributes do
 			write_attribute(attribute, file)
 		end
+
+		# Methods
 		for method in classe.methods do
-			if method.is_commented then
-				commented_methods.add(method)
-			else
-				if not opt_init_as_methods.value and method.params.first.name.has("init") then continue
-				file.write """	"""
-				write_method(method, file)
-				file.write """ in "ObjC" `{\n		"""
-				write_objc_method_call(method, file)
-				file.write """	`}"""
-				if method != classe.methods.last then file.write "\n\n"
-			end
+
+			if not opt_init_as_methods.value and method.is_init then continue
+
+			write_method_signature(method, file)
+			write_objc_method_call(method, file)
 		end
-		for commented_method in commented_methods do
-			if commented_method == commented_methods.first then file.write "\n"
-			file.write """	#"""
-			write_method(commented_method, file)
-			if commented_method != commented_methods.last then file.write "\n"
-		end
-		file.write "\nend\n"
+
+		file.write """
+end
+"""
 	end
 
-	private fun write_constructor(classe: ObjcClass, file: Writer)
+	private fun write_constructors(classe: ObjcClass, file: Writer)
 	do
-		if not opt_init_as_methods.value then
-			for method in classe.methods do
-				if method.params.first.name.has("init") and not method.is_commented then
-					file.write """\n	"""
-					if method.params.first.name == "init" then
-						file.write "new"
-					else
-						write_method(method, file)
-					end
-					file.write """ in "ObjC" `{\n"""
-					write_objc_init_call(classe.name, method, file)
-					file.write """	`}\n"""
-				end
-			end
-		else
-			file.write """\n	new in "ObjC"`{\n"""
-			file.write """		return [""" + classe.name + " alloc];\n"
-			file.write """	`}\n"""
+		if opt_init_as_methods.value then
+			# A single constructor for `alloc`
+			file.write """
+	new in "ObjC" `{
+		return [{{{classe.name}}} alloc];
+	`}
+
+"""
+			return
+		end
+
+		# A constructor per `init...` method
+		for method in classe.methods do
+			if not method.is_init then continue
+
+			write_method_signature(method, file)
+
+				write_objc_init_call(classe.name, method, file)
 		end
 	end
 
@@ -151,82 +156,119 @@ class CodeGenerator
 	do
 		write_attribute_getter(attribute, file)
 		# TODO write_attribute_setter if there is no `readonly` annotation
-		file.write "\n"
 	end
 
 	private fun write_attribute_getter(attribute: ObjcAttribute, file: Writer)
 	do
-		file.write """	fun """ + attribute.name.to_snake_case + ": " + attribute.return_type.to_nit_type
-		file.write """ in "ObjC" `{\n"""
-		file.write """		return [self """ + attribute.name + "];\n"
-		file.write """	`}\n"""
+		var nit_attr_name = attribute.name.to_snake_case
+		var nit_attr_type = attribute.return_type.to_nit_type
+
+		var c = attribute.comment_str
+
+		file.write """
+{{{c}}}	fun {{{nit_attr_name}}}: {{{nit_attr_type}}} in "ObjC" `{
+{{{c}}}		return [self {{{attribute.name}}}];
+{{{c}}}	`}
+
+"""
 	end
 
 	private fun write_attribute_setter(attribute: ObjcAttribute, file: Writer)
 	do
-		file.write """	fun """ + attribute.name.to_snake_case + "=(value: " + attribute.return_type.to_nit_type + ")"
-		file.write " in \"ObjC\" `\{\n"
-		file.write """		self.""" + attribute.name + " = value;\n"
-		file.write """	`}\n"""
+		var nit_attr_name = attribute.name.to_snake_case
+		var nit_attr_type = attribute.return_type.to_nit_type
+
+		var c = attribute.comment_str
+
+		file.write """
+{{{c}}}	fun {{{nit_attr_name}}}=(value: {{{nit_attr_type}}}) in "ObjC" `{
+{{{c}}}		return self.{{{attribute.name}}} = value;
+{{{c}}}	`}
+
+"""
 	end
 
-	private fun write_method(method: ObjcMethod, file: Writer)
+	private fun write_method_signature(method: ObjcMethod, file: Writer)
 	do
+		var c = method.comment_str
+
+		# Build Nit method name
 		var name = ""
 		for param in method.params do
 			name += param.name[0].to_upper.to_s + param.name.substring_from(1)
-			name = name.to_snake_case
 		end
-		if name.has("init") and not opt_init_as_methods.value then
-			file.write "new "
-		else
-			if opt_init_as_methods.value and name == "init" then name = "init_0"
-			file.write "fun "
+		name = name.to_snake_case
+
+		if name == "init" then name = ""
+
+		# Kind of method
+		var fun_keyword = "fun"
+		if not opt_init_as_methods.value and method.is_init then
+			fun_keyword = "new"
 		end
-		file.write name
+
+		# Params
+		var params = new Array[String]
 		for param in method.params do
-			if param == method.params.first and not param.is_single then
-				file.write "(" + param.variable_name + ": " + param.return_type.to_nit_type
-			end
-			if param != method.params.first and not param.is_single then
-				file.write ", " + param.variable_name + ": " + param.return_type.to_nit_type
-			end
-			if param == method.params.last and not param.is_single then
-				file.write ")"
-			end
+			if param.is_single then break
+			params.add "{param.variable_name}: {param.return_type.to_nit_type}"
 		end
-		if method.return_type != "void" and not method.params.first.name.has("init") then
-			file.write ": " + method.return_type.to_nit_type
+
+		var params_with_par = ""
+		if params.not_empty then params_with_par = "({params.join(", ")})"
+
+		# Return
+		var ret = ""
+		if method.return_type != "void" and fun_keyword != "new" then
+			ret = ": {method.return_type.to_nit_type}"
 		end
+
+		file.write """
+{{{c}}}	{{{fun_keyword}}} {{{name}}}{{{params_with_par}}}{{{ret}}} in "ObjC" `{
+"""
 	end
 
-	private fun write_objc_init_call(classe_name: String, method: ObjcMethod, file: Writer)
+	# Write a combined call to alloc and to a constructor/method
+	private fun write_objc_init_call(class_name: String, method: ObjcMethod, file: Writer)
 	do
-		file.write """		return [[""" + classe_name + " alloc] "
+		# Method name and other params
+		var params = new Array[String]
 		for param in method.params do
 			if not param.is_single then
-				file.write param.name + ":" + param.variable_name
-				if not param == method.params.last then file.write " "
-			else
-				file.write param.name
-			end
+				params.add "{param.name}: {param.variable_name}"
+			else params.add param.name
 		end
-		file.write "];\n"
+
+		var c = method.comment_str
+
+		file.write """
+{{{c}}}		return [[{{{class_name}}} alloc] {{{params.join(" ")}}}];
+{{{c}}}	`}
+
+"""
 	end
 
 	private fun write_objc_method_call(method: ObjcMethod, file: Writer)
 	do
-		if method.return_type != "void" then file.write "return "
-		file.write "[self "
+		# Is there a value to return?
+		var ret = ""
+		if method.return_type != "void" then ret = "return "
+
+		# Method name and other params
+		var params = new Array[String]
 		for param in method.params do
 			if not param.is_single then
-				file.write param.name + ":" + param.variable_name
-				if not param == method.params.last then file.write " "
-			else
-				file.write param.name
-			end
+				params.add "{param.name}: {param.variable_name}"
+			else params.add param.name
 		end
-		file.write "];\n"
+
+		var c = method.comment_str
+
+		file.write """
+{{{c}}}		{{{ret}}}[self {{{params.join(" ")}}}];
+{{{c}}}	`}
+
+"""
 	end
 end
 
@@ -242,4 +284,10 @@ redef class Text
 			return to_s
 		end
 	end
+end
+
+redef class Property
+	private fun comment_str: String do if is_commented then
+		return "#"
+	else return ""
 end
