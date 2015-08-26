@@ -283,7 +283,7 @@ in "C Header" `{
 	}
 
 	static PP_Bool Instance_HandleDocumentLoad(PP_Instance pp_instance, PP_Resource pp_url_loader) {
-	    	// TODO
+		// TODO
 		return PP_FALSE;
 	}
 
@@ -391,8 +391,8 @@ extern class PepperDictionary `{ struct PP_Var* `}
 		var native_value = native_get(native_key)
 		return native_value.to_nit
 	end
-	
-	# Set function using PepperVars. 
+
+	# Set function using PepperVars.
 	#
 	# Sets the value associated with the specified key.
 	# 'key' must be a String typed PepperVar.
@@ -424,11 +424,11 @@ extern class PepperDictionary `{ struct PP_Var* `}
 	fun native_delete(key: PepperVar) `{
 		g_varDictionaryInterface->Delete(*self, *key);
 	`}
-	
+
 	# Deletes the specified key and its associated value, if the key exists.
 	#
 	# Takes a String.
-	fun delete(key: String) 
+	fun delete(key: String)
 	do
 		var native_key = key.to_pepper
 		native_delete native_key

@@ -17,19 +17,19 @@
 // Checks that the text in the input is numeric and not null
 // and then if two currencies where chosen sends a dictionary to Nit.
 $( "#button" ).click(function() {
-  $("#pre-input").removeClass("has-error");
-  if (($('#input').val() == "")||($.isNumeric($('#input').val()) == false)) {
-  	$("#pre-input").addClass("has-error");
-  }
-  else
-  {
-  	if (($('#from').val() != null) && ($('#to').val() != null)) {
-  		var dictionary = {
-	  		value: parseFloat($('#input').val()).toFixed(2),
-	  		from: $('#from').val(),
-	  		to: $('#to').val(),
-		}
-		converterModule.postMessage(dictionary);
+	$("#pre-input").removeClass("has-error");
+	if (($('#input').val() == "")||($.isNumeric($('#input').val()) == false)) {
+		$("#pre-input").addClass("has-error");
 	}
-  }
+	else
+	{
+		if (($('#from').val() != null) && ($('#to').val() != null)) {
+			var dictionary = {
+				value: parseFloat($('#input').val()).toFixed(2),
+				from: $('#from').val(),
+				to: $('#to').val(),
+			}
+			converterModule.postMessage(dictionary);
+		}
+	}
 });
