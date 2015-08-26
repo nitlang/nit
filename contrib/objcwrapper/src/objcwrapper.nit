@@ -27,7 +27,7 @@ import objc_parser
 var opt_help = new OptionBool("Show this help message", "-h", "--help")
 
 var opts = new OptionContext
-opts.add_option(opt_help, opt_output)
+opts.add_option(opt_help, opt_output, opt_init_as_methods)
 opts.parse(args)
 
 if opts.errors.not_empty or opts.rest.is_empty or opt_help.value then

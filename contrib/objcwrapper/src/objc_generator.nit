@@ -24,6 +24,24 @@ redef class Sys
 	# Path to the output file
 	var opt_output = new OptionString("Output file", "-o")
 
+	# Shall `init` methods/constructors be wrapped as methods?
+	#
+	# By default, these methods/constructors are wrapped as extern constructors.
+	# So initializing an extern Objective-C object looks like:
+	# ~~~nitish
+	# var o = new NSArray.init_with_array(some_other_array)
+	# ~~~
+	#
+	# If this option is set, the object must first be allocated and then initialized.
+	# This is closer to the Objective-C behavior:
+	# ~~~nitish
+	# var o = new NSArray
+	# o.init_with_array(some_other_array)
+	# ~~~
+	var opt_init_as_methods = new OptionBool(
+		"Wrap `init...` constructors as Nit methods instead of Nit constructors",
+		"--init-as-methods")
+
 	private var nit_to_java_types: Map[String, String] is lazy do
 		var types = new HashMap[String, String]
 		types["char"] = "Byte"
@@ -46,21 +64,6 @@ redef class Sys
 end
 
 class CodeGenerator
-	# Merge the calls to `alloc` and `init...` in a single constructor?
-	#
-	# If `true`, also the default behavior, initializing an extern Objective-C object looks like:
-	# ~~~nitish
-	# var o = new NSArray.init_with_array(some_other_array)
-	# ~~~
-	#
-	# If `false`, the object must first be allocated and then initialized.
-	# This is closer to the Objective-C behavior:
-	# ~~~nitish
-	# var o = new NSArray
-	# o.init_with_array(some_other_array)
-	# ~~~
-	var init_with_alloc = true is writable
-
 	# Generate Nit code to wrap `classes`
 	fun generate(classes: Array[ObjcClass])
 	do
@@ -103,7 +106,7 @@ class CodeGenerator
 			if method.is_commented then
 				commented_methods.add(method)
 			else
-				if init_with_alloc and method.params.first.name.has("init") then continue
+				if not opt_init_as_methods.value and method.params.first.name.has("init") then continue
 				file.write """	"""
 				write_method(method, file)
 				file.write """ in "ObjC" `{\n		"""
@@ -123,7 +126,7 @@ class CodeGenerator
 
 	private fun write_constructor(classe: ObjcClass, file: Writer)
 	do
-		if init_with_alloc then
+		if not opt_init_as_methods.value then
 			for method in classe.methods do
 				if method.params.first.name.has("init") and not method.is_commented then
 					file.write """\n	"""
@@ -174,10 +177,10 @@ class CodeGenerator
 			name += param.name[0].to_upper.to_s + param.name.substring_from(1)
 			name = name.to_snake_case
 		end
-		if name.has("init") and init_with_alloc then
+		if name.has("init") and not opt_init_as_methods.value then
 			file.write "new "
 		else
-			if not init_with_alloc and name == "init" then name = "init_0"
+			if opt_init_as_methods.value and name == "init" then name = "init_0"
 			file.write "fun "
 		end
 		file.write name
