@@ -381,9 +381,9 @@ redef class ModelBuilder
 		# usualy, only the original module must be imported in the unit test.
 		var o = mmodule
 		var g = o.mgroup
-		if g != null and g.mproject.name == "standard" then
-			# except for a unit test in a module of standard
-			# in this case, the whole standard must be imported
+		if g != null and g.mproject.name == "core" then
+			# except for a unit test in a module of `core`
+			# in this case, the whole `core` must be imported
 			o = get_mmodule_by_name(nmodule, g, g.mproject.name).as(not null)
 		end
 
