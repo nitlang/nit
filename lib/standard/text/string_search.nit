@@ -413,4 +413,11 @@ redef class Text
 	#     assert "hello".has("ll")
 	#     assert not "hello".has("lll")
 	fun has(pattern: Pattern): Bool do return pattern.is_in(self)
+
+	# Returns a copy of `self` minus all occurences of `pattern`
+	#
+	#     assert "__init__".remove_all('_') == "init"
+	#     assert "abcd".remove_all("bc") == "ad"
+	#     assert "abcd".remove_all("[ad]".to_re) == "bc"
+	fun remove_all(pattern: Pattern): String do return split(pattern).join
 end

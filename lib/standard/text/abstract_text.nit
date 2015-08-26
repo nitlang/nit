@@ -231,15 +231,6 @@ abstract class Text
 	#     assert "abcd".has_suffix("bcd")	     ==  true
 	fun has_suffix(suffix: String): Bool do return has_substring(suffix, length - suffix.length)
 
-	# Returns a copy of `self` minus all occurences of `c`
-	#
-	#     assert "__init__".remove_all('_') == "init"
-	fun remove_all(c: Char): String do
-		var b = new Buffer
-		for i in chars do if i != c then b.add i
-		return b.to_s
-	end
-
 	# Returns `self` as the corresponding integer
 	#
 	#     assert "123".to_i        == 123
