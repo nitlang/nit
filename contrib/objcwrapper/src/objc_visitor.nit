@@ -167,7 +167,12 @@ redef class Nparameter_named
 		var param = new Param
 		param.variable_name = n_right.collect_text
 		param.name = n_left.collect_text
-		param.return_type = n_parameter_type.to_type
+
+		var n_type = n_parameter_type_in_par
+		param.return_type = if n_type != null then
+			n_type.n_parameter_type.to_type
+		else  "NSObject"
+
 		return param
 	end
 end
