@@ -139,20 +139,6 @@ redef class ToolContext
 
 end
 
-redef class MClass
-	# is the class imported from standard lib?
-	fun is_standard: Bool do
-		return self.intro_mmodule.mgroup.mproject.name == "standard"
-	end
-end
-
-redef class MModule
-	# is the module imported from standard lib?
-	fun is_standard: Bool do
-		return self.mgroup.mproject.name == "standard"
-	end
-end
-
 # A Metric is used to collect data about things
 #
 # The concept is reified here for a better organization and documentation
