@@ -885,6 +885,10 @@ redef class NativeString
 		return str
 	end
 
+	redef fun to_s_full(bytelen, unilen) do
+		return new FlatString.full(self, bytelen, 0, bytelen - 1, unilen)
+	end
+
 	# Returns `self` as a new String.
 	redef fun to_s_with_copy: FlatString
 	do

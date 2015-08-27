@@ -581,7 +581,7 @@ redef class AStringFormExpr
 	do
 		var native = v.analysis.mainmodule.native_string_type
 		v.add_type(native)
-		var prop = v.get_method(native, "to_s_with_length")
+		var prop = v.get_method(native, "to_s_full")
 		v.add_monomorphic_send(native, prop)
 	end
 end
