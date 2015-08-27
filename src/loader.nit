@@ -446,7 +446,8 @@ redef class ModelBuilder
 		var mgroup
 		if parent == null then
 			# no parent, thus new project
-			if ini != null and ini.has_key("name") then pn = ini["name"]
+			var namekey = "project.name"
+			if ini != null and ini.has_key(namekey) then pn = ini[namekey]
 			var mproject = new MProject(pn, model)
 			mgroup = new MGroup(pn, mproject, null) # same name for the root group
 			mproject.root = mgroup
