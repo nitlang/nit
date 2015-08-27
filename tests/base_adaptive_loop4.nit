@@ -1,7 +1,5 @@
 # This file is part of NIT ( http://www.nitlanguage.org ).
 #
-# Copyright 2008 Jean Privat <jean@pryen.org>
-#
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
@@ -14,19 +12,19 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import array
-import base_virtual_type2
+import standard::kernel
 
-class C
-	super A
-	var tab: nullable Array[E] = null is writable
+class N
+	var next: nullable N
 end
 
+var n0 = new N
+var n1 = new N(n0)
+var n2 = new N(n1)
+var n3 = new N(n2)
 
-var c = new C
-c.tab = new Array[T]
-c.tab.add(new U)
-c.tab.first.foo
-
-var i: Int = 2
-#alt1#i = c.tab.first
+var n = n3
+while n != null do
+	1.output
+	n = n.next
+end

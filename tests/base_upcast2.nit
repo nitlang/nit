@@ -17,11 +17,11 @@ class X
 	#1alt5#type T: C
 	fun toto
 	do
-		var ai = new A[Int]
-		var ab = new A[Bool]
-		var bi = new B[Int]
-		var bb = new B[Bool]
-		var c = new C
+		var ai: A[Int] = new A[Int]
+		var ab: A[Bool] = new A[Bool]
+		var bi: B[Int] = new B[Int]
+		var bb: B[Bool] = new B[Bool]
+		var c: C = new C
 
 		var t: T = c.as(T)
 		#alt1#if maybe then t = ai

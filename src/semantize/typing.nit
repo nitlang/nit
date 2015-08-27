@@ -877,23 +877,19 @@ redef class AVardeclExpr
 			mtype = v.resolve_mtype(ntype)
 			if mtype == null then return # Skip error
 		end
+		var decltype = mtype
 
 		var nexpr = self.n_expr
 		if nexpr != null then
 			if mtype != null then
-				var etype = v.visit_expr_subtype(nexpr, mtype)
-				if etype == mtype then
-					assert ntype != null
-					v.modelbuilder.advice(ntype, "useless-type", "Warning: useless type definition for variable `{variable.name}`")
-				end
+				v.visit_expr_subtype(nexpr, mtype)
 			else
 				mtype = v.visit_expr(nexpr)
 				if mtype == null then return # Skip error
 			end
 		end
 
-		var decltype = mtype
-		if mtype == null or mtype isa MNullType then
+		if decltype == null or decltype isa MNullType then
 			var objclass = v.get_mclass(self, "Object")
 			if objclass == null then return # skip error
 			decltype = objclass.mclass_type.as_nullable

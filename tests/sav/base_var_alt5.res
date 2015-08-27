@@ -1,1 +1,8 @@
-alt/base_var_alt5.nit:44,6--7: Type Error: expected `Int`, got `Float`.
+5
+5.500000
+5
+5.500000
+5.500000
+5.500000
+1
+1
