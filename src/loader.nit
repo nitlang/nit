@@ -287,6 +287,20 @@ redef class ModelBuilder
 		return res.first
 	end
 
+	# Search groups named `name` from paths `lookpaths`.
+	private fun search_group_in_paths(name: String, lookpaths: Collection[String]): ArraySet[MGroup]
+	do
+		var res = new ArraySet[MGroup]
+		for dirname in lookpaths do
+			# try a single group directory
+			var mg = get_mgroup(dirname/name)
+			if mg != null then
+				res.add mg
+			end
+		end
+		return res
+	end
+
 	# Cache for `identify_file` by realpath
 	private var identified_files_by_path = new HashMap[String, nullable ModulePath]
 
@@ -694,14 +708,77 @@ redef class ModelBuilder
 	# This method handles qualified names as used in `AModuleName`.
 	fun seach_module_by_amodule_name(n_name: AModuleName, mgroup: nullable MGroup): nullable ModulePath
 	do
-		if n_name.n_quad != null then mgroup = null # Start from top level
-		for grp in n_name.n_path do
-			var path = search_mmodule_by_name(grp, mgroup, grp.text)
-			if path == null then return null # Forward error
-			mgroup = path.mgroup
-		end
 		var mod_name = n_name.n_id.text
-		return search_mmodule_by_name(n_name, mgroup, mod_name)
+
+		# If a quad is given, we ignore the starting group (go from path)
+		if n_name.n_quad != null then mgroup = null
+
+		# If name not qualified, just search the name
+		if n_name.n_path.is_empty then
+			# Fast search if no n_path
+			return search_mmodule_by_name(n_name, mgroup, mod_name)
+		end
+
+		# If qualified and in a group
+		if mgroup != null then
+			# First search in the project
+			var r = mgroup.mproject.root
+			assert r != null
+			scan_group(r)
+			# Get all modules with the final name
+			var res = r.mmodule_paths_by_name(mod_name)
+			# Filter out the name that does not match the qualifiers
+			res = [for x in res do if match_amodulename(n_name, x) then x]
+			if res.not_empty then
+				if res.length > 1 then
+					error(n_name, "Error: conflicting module files for `{mod_name}`: `{res.join(",")}`")
+				end
+				return res.first
+			end
+		end
+
+		# If no module yet, then assume that the first element of the path
+		# Is to be searched in the path.
+		var root_name = n_name.n_path.first.text
+		var roots = search_group_in_paths(root_name, paths)
+		if roots.is_empty then
+			error(n_name, "Error: cannot find `{root_name}`. Tried: {paths.join(", ")}.")
+			return null
+		end
+
+		var res = new ArraySet[ModulePath]
+		for r in roots do
+			# Then, for each root, collect modules that matches the qualifiers
+			scan_group(r)
+			var root_res = r.mmodule_paths_by_name(mod_name)
+			for x in root_res do if match_amodulename(n_name, x) then res.add x
+		end
+		if res.not_empty then
+			if res.length > 1 then
+				error(n_name, "Error: conflicting module files for `{mod_name}`: `{res.join(",")}`")
+			end
+			return res.first
+		end
+		# If still nothing, just call a basic search that will fail and will produce an error message
+		error(n_name, "Error: cannot find module `{mod_name}` from `{root_name}`. Tried: {paths.join(", ")}.")
+		return null
+	end
+
+	# Is elements of `n_name` correspond to the group nesting of `m`?
+	#
+	# Basically it check that `bar::foo` matches `bar/foo.nit` and `bar/baz/foo.nit`
+	# but not `baz/foo.nit` nor `foo/bar.nit`
+	#
+	# Is used by `seach_module_by_amodule_name` to validate qualified names.
+	private fun match_amodulename(n_name: AModuleName, m: ModulePath): Bool
+	do
+		var g: nullable MGroup = m.mgroup
+		for grp in n_name.n_path.reverse_iterator do
+			while g != null and grp.text != g.name do
+				g = g.parent
+			end
+		end
+		return g != null
 	end
 
 	# Analyze the module importation and fill the module_importation_hierarchy
