@@ -16,8 +16,8 @@
 module astbuilder
 
 intrude import semantize::typing
-intrude import semantize::literal
-intrude import semantize::parser
+intrude import literal
+intrude import parser
 intrude import semantize::scope
 
 # General factory to build semantic nodes in the AST of expressions
