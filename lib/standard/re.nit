@@ -22,6 +22,7 @@
 module re
 
 import text
+intrude import text::flat
 import gc
 import error
 
@@ -354,7 +355,9 @@ class Regex
 
 		# Actually execute
 		text = text.to_s
-		var cstr = text.substring_from(from).to_cstring
+		var sub = text.substring_from(from)
+		var cstr = sub.to_cstring
+		var bstr = new FlatString.full(cstr, sub.bytelen, 0, sub.bytelen - 1, text.length - from)
 		var eflags = gather_eflags
 		var native_match = self.native_match
 
@@ -363,15 +366,19 @@ class Regex
 
 		# Found one?
 		if res == 0 then
+			var bso = bstr.byte_to_char_index(native_match.rm_so)
+			var ln = bstr.byte_to_char_index(native_match.rm_eo - native_match.rm_so - 1)
 			var match = new Match(text,
-				from + native_match.rm_so,
-				native_match.rm_eo - native_match.rm_so)
+				from + bso,
+				ln + 1)
 
 			# Add sub expressions
-			for i in [1..nsub] do
+			for i in [1 .. nsub] do
+				bso = bstr.byte_to_char_index(native_match[i].rm_so)
+				ln = bstr.byte_to_char_index(native_match[i].rm_eo - native_match[i].rm_so - 1)
 				match.subs.add new Match( text,
-					native_match[i].rm_so,
-					native_match[i].rm_eo - native_match[i].rm_so)
+					bso ,
+					ln + 1)
 			end
 
 			return match
