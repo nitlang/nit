@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import standard::kernel
+import core::kernel
 
 abstract class A
 	var x: Int

@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-intrude import standard::collection::array
+intrude import core::collection::array
 
 var a = new Array[Bool]
 var cpt = 0

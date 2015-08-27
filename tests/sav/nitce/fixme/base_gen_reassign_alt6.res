@@ -1,4 +1,4 @@
-Runtime error: Cast failed. Expected `OTHER`, got `Float` (../lib/standard/kernel.nit:720)
+Runtime error: Cast failed. Expected `OTHER`, got `Float` (../lib/core/kernel.nit:720)
 11
 21
 31

@@ -14,7 +14,7 @@
 
 module test_ropes_buffer_reverse
 
-import standard
+import core
 
 redef fun maxlen do return 3
 

@@ -578,7 +578,7 @@ for ii in "$@"; do
 
 	tmp=${ii/../AA}
 	if [ "x$tmp" = "x$ii" ]; then
-		includes="-I . -I ../lib/standard -I ../lib/standard/collection -I alt"
+		includes="-I . -I ../lib/core -I ../lib/core/collection -I alt"
 	else
 		includes="-I alt"
 	fi

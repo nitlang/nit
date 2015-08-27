@@ -15,7 +15,7 @@
 # Checks the immutability of the strings returned by `RopeBuffer.to_s`.
 module test_ropes_buffer_to_s
 
-import standard
+import core
 
 # Note: In this sort of test, never print the string more than once: the string
 # itself may cache an flatten representation of itself when `print` calls `to_s`

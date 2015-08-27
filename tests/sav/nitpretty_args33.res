@@ -17,8 +17,8 @@
 # Module comment
 module test_mod2 # second comment
 
-import standard::kernel
-#import standard::text
+import core::kernel
+#import core::text
 
 import template # no need for string
-# import standard
+# import core

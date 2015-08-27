@@ -13,7 +13,7 @@
 # limitations under the License.
 
 import base_arg_default
-import standard::collection::array
+import core::collection::array
 
 fun order(i: Int): Int do
 	'>'.output
