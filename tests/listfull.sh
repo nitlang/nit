@@ -8,10 +8,9 @@ printf "%s\n" "$@" \
 	../examples/*/src/*_android.nit \
 	../examples/*/src/*_linux.nit \
 	../examples/*/src/*_null.nit \
-	../examples/pnacl/converter/converter.nit \
 	../examples/nitcorn/src/*.nit \
-	../examples/mpi/src/*.nit \
 	../lib/*/examples/*.nit \
+	../lib/*/examples/*/*.nit \
 	../contrib/friendz/src/solver_cmd.nit \
 	../contrib/neo_doxygen/src/tests/neo_doxygen_*.nit \
 	../contrib/pep8analysis/src/pep8analysis.nit \
