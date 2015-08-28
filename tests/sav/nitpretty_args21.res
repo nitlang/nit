@@ -13,8 +13,8 @@
 # limitations under the License.
 
 import end
-intrude import standard::kernel
-private import standard::text
+intrude import core::kernel
+private import core::text
 
 `{`}
 

@@ -15,7 +15,7 @@
 # limitations under the License.
 
 # Entire game logic for the Dino game
-# Depends only on Nit standard library
+# Depends only on Nit `core` library
 module game_logic
 
 interface Turnable

@@ -12,8 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-intrude import standard::text::flat
-import standard
+intrude import core::text::flat
+import core
 
 var s = "𐏓􏿿".as(FlatString)
 print s.items.char_at(0).ascii.to_hex

@@ -4,7 +4,7 @@
 #
 # This file is free software, which comes along with NIT.  This software is
 # distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
-# without  even  the implied warranty of  MERCHANTABILITY or  FITNESS FOR A 
+# without  even  the implied warranty of  MERCHANTABILITY or  FITNESS FOR A
 # PARTICULAR PURPOSE.  You can modify it is you want,  provided this header
 # is kept unaltered, and a notification of the changes is added.
 # You  are  allowed  to  redistribute it and sell it, alone or is a part of
@@ -49,9 +49,9 @@ class List[E]
 		var t = _head
 		while t != null do
 			l += 1
-			t = t.next 
+			t = t.next
 		end
-		return l      
+		return l
 	end
 
 	# O(n)
@@ -198,7 +198,7 @@ class List[E]
 
 	# Build an empty list.
 	init do end
-	
+
 	# Build a list filled with the items of `coll`.
 	init from(coll: Collection[E]) do append(coll)
 
@@ -219,7 +219,7 @@ class List[E]
 			n = n.next
 			i -= 1
 		end
-		return n 
+		return n
 	end
 
 	# get the first node that contains `e` after 'after', null otherwise

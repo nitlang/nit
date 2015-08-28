@@ -22,8 +22,8 @@
 # 'nacl_sdk/pepper_your_pepper_version/getting_started/your_project_folder'.
 module pnacl is platform
 
-import standard
-intrude import standard::stream
+import core
+intrude import core::stream
 
 in "C Header" `{
 	#include "ppapi/c/pp_errors.h"

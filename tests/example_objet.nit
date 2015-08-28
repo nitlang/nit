@@ -53,7 +53,7 @@
 # Un fichier = un module. Les classes d'un module sont définies dans le fichier.
 # Au début des fichiers, les modules à importer doivent être déclarés (via le
 # mot clé "import"). Implicitement, tout module importe le module nommé
-# "standard" qui définit les classes usuelles.
+# "core" qui définit les classes usuelles.
 
 # On va étudier une représentation d'un entrepôt de produits variés.
 class Entrepot

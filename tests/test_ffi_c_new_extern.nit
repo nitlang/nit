@@ -14,7 +14,7 @@
 
 # Test callback to an extern constructor from extern code
 
-import standard::text
+import core::text
 
 extern class IntPtr `{ int* `}
 	new (v: Int) `{

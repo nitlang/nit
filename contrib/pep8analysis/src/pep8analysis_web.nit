@@ -31,7 +31,7 @@ import ast
 import model
 import cfg
 import flow_analysis
-intrude import standard::stream
+intrude import core::stream
 import cpp
 
 in "C++" `{

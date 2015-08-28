@@ -18,8 +18,8 @@
 # It displays the value of a local variable.
 # It exhibs ways to concatenate strings.
 
-#alt1 import standard
-#alt1 import standard::text::ropes
+#alt1 import core
+#alt1 import core::text::ropes
 
 var a = 10
 # First way: Multiple parameters.

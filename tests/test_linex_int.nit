@@ -15,7 +15,7 @@ redef enum Int
 	end
 end
 
-# call local::to_s and then standard::to_s
+# call local::to_s and then core::to_s
 print 123.to_s
 
 # call Int::foo and then Object::foo

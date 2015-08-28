@@ -20,7 +20,7 @@
 # Provides the `HttpRequest` class and services to create it
 module http_request
 
-import standard
+import core
 
 # A request received over HTTP, is build by `HttpRequestParser`
 class HttpRequest

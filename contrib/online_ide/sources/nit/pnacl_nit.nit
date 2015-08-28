@@ -22,7 +22,7 @@ import interpreter::debugger
 import pnacl
 intrude import toolcontext
 intrude import loader
-intrude import standard::file
+intrude import core::file
 
 # We redefine exit to start a new thread before killing the one that called exit.
 redef fun exit(exit_value: Int)

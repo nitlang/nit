@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import standard::kernel
+import core::kernel
 
 fun foo(i: Int): nullable Int do return i
 fun bar(i: Int) do i.output

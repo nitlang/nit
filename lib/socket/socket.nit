@@ -18,7 +18,7 @@
 module socket
 
 private import socket_c
-intrude import standard::stream
+intrude import core::stream
 
 # A general Socket, either TCP or UDP
 abstract class Socket

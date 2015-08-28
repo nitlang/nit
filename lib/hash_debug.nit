@@ -29,8 +29,8 @@
 # at callers of `HashCollection::gt_collide` and `HashCollection::st_collide`.
 module hash_debug
 
-intrude import standard::collection::hash_collection
-import standard
+intrude import core::collection::hash_collection
+import core
 
 redef class Sys
 	# Number of calls of `HashCollection::node_at_idx`

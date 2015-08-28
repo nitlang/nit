@@ -19,7 +19,7 @@ module int_stack
 
 # A stack of integer implemented by a simple linked list.
 # Note that this is only a toy class since a real linked list will gain to use
-# generics and extends interfaces, like Collection, from the standard library.
+# generics and extends interfaces, like `Collection`, from the `core` library.
 class IntStack
 	# The head node of the list.
 	# Null means that the stack is empty.

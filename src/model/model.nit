@@ -1280,7 +1280,7 @@ class MGenericType
 	redef var to_s: String is noinit
 
 	# The full-name of the class, then the full-name of each type arguments within brackets.
-	# Example: `"standard::Map[standard::String, standard::List[standard::Int]]"`
+	# Example: `"core::Map[core::String, core::List[core::Int]]"`
 	redef var full_name is lazy do
 		var args = new Array[String]
 		for t in arguments do

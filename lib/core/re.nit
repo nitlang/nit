@@ -35,7 +35,7 @@ in "C Header" `{
 # It is recommanded to use the higher level API offered by the class `Regex`,
 # but it can still be used for advanced purpose or in optimized code.
 #
-# To use this class and other `private` entities of this module, use `intrude import standard::re`
+# To use this class and other `private` entities of this module, use `intrude import core::re`
 private extern class NativeRegex `{ regex_t* `}
 	# Allocate a new `NativeRegex`, it must then be compiled using `regcomp` before calling `regexec`
 	new malloc `{ return malloc(sizeof(regex_t)); `}

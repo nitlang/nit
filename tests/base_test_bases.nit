@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import standard::kernel
+import core::kernel
 
 assert 0b1001 == 0x09
 assert 0o715 == 0x1CD

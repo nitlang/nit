@@ -14,8 +14,8 @@
 # Exposes methods for debugging ropes when needed.
 module ropes_debug
 
-import standard
-intrude import standard::text::ropes
+import core
+intrude import core::text::ropes
 
 redef class Text
 	# Writes self as a dot file on the hard drive

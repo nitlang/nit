@@ -14,8 +14,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-#alt1 import standard
-#alt1 import standard::text::ropes
+#alt1 import core
+#alt1 import core::text::ropes
 
 var s = "Bonjour !\n"
 var r: Buffer = new FlatBuffer.with_capacity(50)
