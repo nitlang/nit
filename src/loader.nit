@@ -353,6 +353,13 @@ redef class ModelBuilder
 			mgroup.filepath = path
 			mproject.root = mgroup
 			toolcontext.info("found singleton project `{pn}` at {path}", 2)
+
+			# Attach homonymous `ini` file to the project
+			var inipath = path.dirname / "{pn}.ini"
+			if inipath.file_exists then
+				var ini = new ConfigTree(inipath)
+				mproject.ini = ini
+			end
 		end
 
 		var res = new ModulePath(pn, path, mgroup)
@@ -439,7 +446,8 @@ redef class ModelBuilder
 		var mgroup
 		if parent == null then
 			# no parent, thus new project
-			if ini != null and ini.has_key("name") then pn = ini["name"]
+			var namekey = "project.name"
+			if ini != null and ini.has_key(namekey) then pn = ini[namekey]
 			var mproject = new MProject(pn, model)
 			mgroup = new MGroup(pn, mproject, null) # same name for the root group
 			mproject.root = mgroup
