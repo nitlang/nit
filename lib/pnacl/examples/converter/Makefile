@@ -1,4 +1,4 @@
-default: 
+default:
 	../../../bin/nitc --semi-global converter.nit
 
 HTTPD_PY := python $(NACL_SDK_ROOT)/tools/httpd.py
