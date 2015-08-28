@@ -1,6 +1,6 @@
-# This file is part of NIT (http://www.nitlanguage.org).
+# This file is part of NIT ( http://www.nitlanguage.org ).
 #
-# Copyright 2012-2014 Alexis Laferrière <alexis.laf@xymus.net>
+# Copyright 2011-2013 Alexis Laferrière <alexis.laf@xymus.net>
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,9 +14,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Android support for MNit
-module mnit_android
+# Linux support for MNit
+module linux
 
-import android_app
-import android_opengles1
-import android_assets
+import linux_app
+import linux_opengles1
+import linux_assets
