@@ -42,7 +42,7 @@ redef class Sys
 		"Wrap `init...` constructors as Nit methods instead of Nit constructors",
 		"--init-as-methods")
 
-	private var nit_to_java_types: Map[String, String] is lazy do
+	private var objc_to_nit_types: Map[String, String] is lazy do
 		var types = new HashMap[String, String]
 		types["char"] = "Byte"
 		types["short"] = "Int"
@@ -69,7 +69,7 @@ end
 
 redef class ObjcModel
 	redef fun knows_type(objc_type) do return super or
-		nit_to_java_types.keys.has(objc_type)
+		objc_to_nit_types.keys.has(objc_type)
 end
 
 # Wrapper generator
@@ -182,7 +182,7 @@ end
 	private fun write_attribute_getter(attribute: ObjcAttribute, file: Writer)
 	do
 		var nit_attr_name = attribute.name.to_snake_case
-		var nit_attr_type = attribute.return_type.to_nit_type
+		var nit_attr_type = attribute.return_type.objc_to_nit_type
 
 		var c = attribute.comment_str
 
@@ -197,7 +197,7 @@ end
 	private fun write_attribute_setter(attribute: ObjcAttribute, file: Writer)
 	do
 		var nit_attr_name = attribute.name.to_snake_case
-		var nit_attr_type = attribute.return_type.to_nit_type
+		var nit_attr_type = attribute.return_type.objc_to_nit_type
 
 		var c = attribute.comment_str
 
@@ -232,7 +232,7 @@ end
 		var params = new Array[String]
 		for param in method.params do
 			if param.is_single then break
-			params.add "{param.variable_name}: {param.return_type.to_nit_type}"
+			params.add "{param.variable_name}: {param.return_type.objc_to_nit_type}"
 		end
 
 		var params_with_par = ""
@@ -241,7 +241,7 @@ end
 		# Return
 		var ret = ""
 		if method.return_type != "void" and fun_keyword != "new" then
-			ret = ": {method.return_type.to_nit_type}"
+			ret = ": {method.return_type.objc_to_nit_type}"
 		end
 
 		file.write """
@@ -295,9 +295,9 @@ end
 
 redef class Text
 	# Nit equivalent to this type
-	private fun to_nit_type: String
+	private fun objc_to_nit_type: String
 	do
-		var types = sys.nit_to_java_types
+		var types = sys.objc_to_nit_types
 
 		if types.has_key(self) then
 			return types[self]
