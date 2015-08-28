@@ -57,14 +57,14 @@ read_model.load(neo_model)
 # Compare model
 var sorter = new MEntityNameSorter
 
-print "# mprojects:"
-var org_mprojects = org_model.mprojects.to_a
-sorter.sort org_mprojects
-print org_mprojects.join(" ")
+print "# mpackages:"
+var org_mpackages = org_model.mpackages.to_a
+sorter.sort org_mpackages
+print org_mpackages.join(" ")
 print "------------------------------------"
-var neo_mprojects = neo_model.mprojects.to_a
-sorter.sort neo_mprojects
-print neo_mprojects.join(" ")
+var neo_mpackages = neo_model.mpackages.to_a
+sorter.sort neo_mpackages
+print neo_mpackages.join(" ")
 
 print "\n# mmodules:"
 var org_mmodules = org_model.mmodules.to_a

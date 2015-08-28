@@ -449,7 +449,7 @@ redef class IntroArticle
 	redef fun render_body do
 		var tabs = new DocTabs("{html_id}.tabs", "")
 		var comment = mentity.html_documentation
-		if mentity isa MProject then
+		if mentity isa MPackage then
 			comment = mentity.html_synopsis
 		end
 		if comment != null then
@@ -506,7 +506,7 @@ redef class DefinitionArticle
 		var tabs = new DocTabs("{html_id}.tabs", "")
 		if not is_no_body then
 			var comment
-			if is_short_comment or mentity isa MProject then
+			if is_short_comment or mentity isa MPackage then
 				comment = mentity.html_synopsis
 			else
 				comment = mentity.html_documentation

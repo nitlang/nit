@@ -260,9 +260,9 @@ $(call import-module,android/native_app_glue)
 		# Copy assets, resources and libs where expected by the SDK
 
 		var project_root = "."
-		var mproject = compiler.mainmodule.first_real_mmodule.mproject
-		if mproject != null then
-			var root = mproject.root
+		var mpackage = compiler.mainmodule.first_real_mmodule.mpackage
+		if mpackage != null then
+			var root = mpackage.root
 			if root != null then
 				var filepath = root.filepath
 				if filepath != null then

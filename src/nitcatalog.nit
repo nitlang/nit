@@ -12,23 +12,23 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Basic catalog generator for Nit projects
+# Basic catalog generator for Nit packages
 #
 # See: <http://nitlanguage.org/catalog/>
 #
-# The tool scans projects and generates the HTML files of a catalog.
+# The tool scans packages and generates the HTML files of a catalog.
 #
 # ## Features
 #
-# * [X] scan projects and their `.ini`
-# * [X] generate lists of projects
-# * [X] generate a page per project with the readme and most metadata
+# * [X] scan packages and their `.ini`
+# * [X] generate lists of packages
+# * [X] generate a page per package with the readme and most metadata
 # * [ ] link/include/be included in the documentation
-# * [ ] propose `related projects`
+# * [ ] propose `related packages`
 # * [ ] show directory content (a la nitls)
 # * [X] gather git information from the working directory
 # * [ ] gather git information from the repository
-# * [ ] gather project information from github
+# * [ ] gather package information from github
 # * [ ] gather people information from github
 # * [ ] reify people
 # * [ ] separate information gathering from rendering
@@ -48,13 +48,13 @@
 # How to use the tool as the basis of a Nit code archive on the web usable with a package manager is not clear.
 module nitcatalog
 
-import loader # Scan&load projects, groups and modules
+import loader # Scan&load packages, groups and modules
 import doc::doc_down # Display mdoc
 import md5 # To get gravatar images
 import counter # For statistics
 import modelize # To process and count classes and methods
 
-redef class MProject
+redef class MPackage
 	# Return the associated metadata from the `ini`, if any
 	fun metadata(key: String): nullable String
 	do
@@ -139,7 +139,7 @@ class CatalogPage
 end
 
 redef class Int
-	# Returns `log(self+1)`. Used to compute score of projects
+	# Returns `log(self+1)`. Used to compute score of packages
 	fun score: Float do return (self+1).to_f.log
 end
 
@@ -150,46 +150,46 @@ class Catalog
 	# used to access the files and count source lines of code
 	var modelbuilder: ModelBuilder
 
-	# Projects by tag
-	var tag2proj = new MultiHashMap[String, MProject]
+	# Packages by tag
+	var tag2proj = new MultiHashMap[String, MPackage]
 
-	# Projects by category
-	var cat2proj = new MultiHashMap[String, MProject]
+	# Packages by category
+	var cat2proj = new MultiHashMap[String, MPackage]
 
-	# Projects by maintainer
-	var maint2proj = new MultiHashMap[String, MProject]
+	# Packages by maintainer
+	var maint2proj = new MultiHashMap[String, MPackage]
 
-	# Projects by contributors
-	var contrib2proj = new MultiHashMap[String, MProject]
+	# Packages by contributors
+	var contrib2proj = new MultiHashMap[String, MPackage]
 
-	# Dependency between projects
-	var deps = new POSet[MProject]
+	# Dependency between packages
+	var deps = new POSet[MPackage]
 
-	# Number of modules by project
-	var mmodules = new Counter[MProject]
+	# Number of modules by package
+	var mmodules = new Counter[MPackage]
 
-	# Number of classes by project
-	var mclasses = new Counter[MProject]
+	# Number of classes by package
+	var mclasses = new Counter[MPackage]
 
-	# Number of methods by project
-	var mmethods = new Counter[MProject]
+	# Number of methods by package
+	var mmethods = new Counter[MPackage]
 
-	# Number of line of code by project
-	var loc = new Counter[MProject]
+	# Number of line of code by package
+	var loc = new Counter[MPackage]
 
-	# Number of commits by project
-	var commits = new Counter[MProject]
+	# Number of commits by package
+	var commits = new Counter[MPackage]
 
-	# Score by project
+	# Score by package
 	#
 	# The score is loosely computed using other metrics
-	var score = new Counter[MProject]
+	var score = new Counter[MPackage]
 
-	# Scan, register and add a contributor to a project
-	fun add_contrib(person: String, mproject: MProject, res: Template)
+	# Scan, register and add a contributor to a package
+	fun add_contrib(person: String, mpackage: MPackage, res: Template)
 	do
 		var projs = contrib2proj[person]
-		if not projs.has(mproject) then projs.add mproject
+		if not projs.has(mpackage) then projs.add mpackage
 		var name = person
 		var email = null
 		var page = null
@@ -239,19 +239,19 @@ class Catalog
 	end
 
 
-	# Compute information and generate a full HTML page for a project
-	fun project_page(mproject: MProject): Writable
+	# Compute information and generate a full HTML page for a package
+	fun package_page(mpackage: MPackage): Writable
 	do
 		var res = new CatalogPage
-		var score = score[mproject].to_f
-		var name = mproject.name.html_escape
+		var score = score[mpackage].to_f
+		var name = mpackage.name.html_escape
 		res.more_head.add """<title>{{{name}}}</title>"""
 
 		res.add """
 <div class="content">
 <h1 class="package-name">{{{name}}}</h1>
 """
-		var mdoc = mproject.mdoc_or_fallback
+		var mdoc = mpackage.mdoc_or_fallback
 		if mdoc != null then
 			score += 100.0
 			res.add mdoc.html_documentation
@@ -262,21 +262,21 @@ class Catalog
 <div class="sidebar">
 <ul class="box">
 """
-		var homepage = mproject.metadata("upstream.homepage")
+		var homepage = mpackage.metadata("upstream.homepage")
 		if homepage != null then
 			score += 5.0
 			var e = homepage.html_escape
 			res.add "<li><a href=\"{e}\">{e}</a></li>\n"
 		end
-		var maintainer = mproject.metadata("project.maintainer")
+		var maintainer = mpackage.metadata("package.maintainer")
 		if maintainer != null then
 			score += 5.0
-			add_contrib(maintainer, mproject, res)
-			mproject.maintainers.add maintainer
+			add_contrib(maintainer, mpackage, res)
+			mpackage.maintainers.add maintainer
 			var projs = maint2proj[maintainer]
-			if not projs.has(mproject) then projs.add mproject
+			if not projs.has(mpackage) then projs.add mpackage
 		end
-		var license = mproject.metadata("project.license")
+		var license = mpackage.metadata("package.license")
 		if license != null then
 			score += 5.0
 			var e = license.html_escape
@@ -285,35 +285,35 @@ class Catalog
 		res.add "</ul>\n"
 
 		res.add "<h3>Source Code</h3>\n<ul class=\"box\">\n"
-		var browse = mproject.metadata("upstream.browse")
+		var browse = mpackage.metadata("upstream.browse")
 		if browse != null then
 			score += 5.0
 			var e = browse.html_escape
 			res.add "<li><a href=\"{e}\">{e}</a></li>\n"
 		end
-		var git = mproject.metadata("upstream.git")
+		var git = mpackage.metadata("upstream.git")
 		if git != null then
 			var e = git.html_escape
 			res.add "<li><tt>{e}</tt></li>\n"
 		end
-		var last_date = mproject.last_date
+		var last_date = mpackage.last_date
 		if last_date != null then
 			var e = last_date.html_escape
 			res.add "<li>most recent commit: {e}</li>\n"
 		end
-		var first_date = mproject.first_date
+		var first_date = mpackage.first_date
 		if first_date != null then
 			var e = first_date.html_escape
 			res.add "<li>oldest commit: {e}</li>\n"
 		end
-		var commits = commits[mproject]
+		var commits = commits[mpackage]
 		if commits != 0 then
 			res.add "<li>{commits} commits</li>\n"
 		end
 		res.add "</ul>\n"
 
 		res.add "<h3>Tags</h3>\n"
-		var tags = mproject.metadata("project.tags")
+		var tags = mpackage.metadata("package.tags")
 		var ts2 = new Array[String]
 		var cat = null
 		if tags != null then
@@ -322,7 +322,7 @@ class Catalog
 				t = t.trim
 				if t == "" then continue
 				if cat == null then cat = t
-				tag2proj[t].add mproject
+				tag2proj[t].add mpackage
 				t = t.html_escape
 				ts2.add "<a href=\"index.html#tag_{t}\">{t}</a>"
 			end
@@ -331,14 +331,14 @@ class Catalog
 		if ts2.is_empty then
 			var t = "none"
 			cat = t
-			tag2proj[t].add mproject
+			tag2proj[t].add mpackage
 			res.add "<a href=\"index.html#tag_{t}\">{t}</a>"
 		end
-		if cat != null then cat2proj[cat].add mproject
+		if cat != null then cat2proj[cat].add mpackage
 		score += ts2.length.score
 
-		var reqs = deps[mproject].greaters.to_a
-		reqs.remove(mproject)
+		var reqs = deps[mpackage].greaters.to_a
+		reqs.remove(mpackage)
 		alpha_comparator.sort(reqs)
 		res.add "<h3>Requirements</h3>\n"
 		if reqs.is_empty then
@@ -346,7 +346,7 @@ class Catalog
 		else
 			var list = new Array[String]
 			for r in reqs do
-				var direct = deps.has_direct_edge(mproject, r)
+				var direct = deps.has_direct_edge(mpackage, r)
 				var s = "<a href=\"{r}.html\">"
 				if direct then s += "<strong>"
 				s += r.to_s
@@ -357,8 +357,8 @@ class Catalog
 			res.add_list(list, ", ", " and ")
 		end
 
-		reqs = deps[mproject].smallers.to_a
-		reqs.remove(mproject)
+		reqs = deps[mpackage].smallers.to_a
+		reqs.remove(mpackage)
 		alpha_comparator.sort(reqs)
 		res.add "<h3>Clients</h3>\n"
 		if reqs.is_empty then
@@ -366,7 +366,7 @@ class Catalog
 		else
 			var list = new Array[String]
 			for r in reqs do
-				var direct = deps.has_direct_edge(r, mproject)
+				var direct = deps.has_direct_edge(r, mpackage)
 				var s = "<a href=\"{r}.html\">"
 				if direct then s += "<strong>"
 				s += r.to_s
@@ -377,16 +377,16 @@ class Catalog
 			res.add_list(list, ", ", " and ")
 		end
 
-		score += deps[mproject].greaters.length.score
-		score += deps[mproject].direct_greaters.length.score
-		score += deps[mproject].smallers.length.score
-		score += deps[mproject].direct_smallers.length.score
+		score += deps[mpackage].greaters.length.score
+		score += deps[mpackage].direct_greaters.length.score
+		score += deps[mpackage].smallers.length.score
+		score += deps[mpackage].direct_smallers.length.score
 
-		var contributors = mproject.contributors
+		var contributors = mpackage.contributors
 		if not contributors.is_empty then
 			res.add "<h3>Contributors</h3>\n<ul class=\"box\">"
 			for c in contributors do
-				add_contrib(c, mproject, res)
+				add_contrib(c, mpackage, res)
 			end
 			res.add "</ul>"
 		end
@@ -396,7 +396,7 @@ class Catalog
 		var mclasses = 0
 		var mmethods = 0
 		var loc = 0
-		for g in mproject.mgroups do
+		for g in mpackage.mgroups do
 			mmodules += g.module_paths.length
 			for m in g.mmodules do
 				var am = modelbuilder.mmodule2node(m)
@@ -415,10 +415,10 @@ class Catalog
 				end
 			end
 		end
-		self.mmodules[mproject] = mmodules
-		self.mclasses[mproject] = mclasses
-		self.mmethods[mproject] = mmethods
-		self.loc[mproject] = loc
+		self.mmodules[mpackage] = mmodules
+		self.mclasses[mpackage] = mclasses
+		self.mmethods[mpackage] = mmethods
+		self.loc[mpackage] = loc
 
 		#score += mmodules.score
 		score += mclasses.score
@@ -438,15 +438,15 @@ class Catalog
 		res.add """
 </div>
 """
-		self.score[mproject] = score.to_i
+		self.score[mpackage] = score.to_i
 
 		return res
 	end
 
-	# Return a short HTML sequence for a project
+	# Return a short HTML sequence for a package
 	#
 	# Intended to use in lists.
-	fun li_project(p: MProject): String
+	fun li_package(p: MPackage): String
 	do
 		var res = ""
 		var f = "{p.name}.html"
@@ -456,14 +456,14 @@ class Catalog
 		return res
 	end
 
-	# List projects by group.
+	# List packages by group.
 	#
 	# For each key of the `map` a `<h3>` is generated.
-	# Each project is then listed.
+	# Each package is then listed.
 	#
 	# The list of keys is generated first to allow fast access to the correct `<h3>`.
 	# `id_prefix` is used to give an id to the `<h3>` element.
-	fun list_by(map: MultiHashMap[String, MProject], id_prefix: String): Template
+	fun list_by(map: MultiHashMap[String, MPackage], id_prefix: String): Template
 	do
 		var res = new Template
 		var keys = map.keys.to_a
@@ -478,7 +478,7 @@ class Catalog
 			res.add "<h3 id=\"{id_prefix}{e}\">{e} ({projs.length})</h3>\n<ul>\n"
 			for p in projs do
 				res.add "<li>"
-				res.add li_project(p)
+				res.add li_package(p)
 				res.add "</li>"
 			end
 			res.add "</ul>"
@@ -486,8 +486,8 @@ class Catalog
 		return res
 	end
 
-	# List the 10 best projects from `cpt`
-	fun list_best(cpt: Counter[MProject]): Template
+	# List the 10 best packages from `cpt`
+	fun list_best(cpt: Counter[MPackage]): Template
 	do
 		var res = new Template
 		res.add "<ul>"
@@ -496,7 +496,7 @@ class Catalog
 			if i > best.length then break
 			var p = best[best.length-i]
 			res.add "<li>"
-			res.add li_project(p)
+			res.add li_package(p)
 			# res.add " ({cpt[p]})"
 			res.add "</li>"
 		end
@@ -504,10 +504,10 @@ class Catalog
 		return res
 	end
 
-	# Collect more information on a project using the `git` tool.
-	fun git_info(mproject: MProject)
+	# Collect more information on a package using the `git` tool.
+	fun git_info(mpackage: MPackage)
 	do
-		var ini = mproject.ini
+		var ini = mpackage.ini
 		if ini == null then return
 
 		# TODO use real git info
@@ -515,7 +515,7 @@ class Catalog
 		#var branch = ini.get_or_null("upstream.git.branch")
 		#var directory = ini.get_or_null("upstream.git.directory")
 
-		var dirpath = mproject.root.filepath
+		var dirpath = mpackage.root.filepath
 		if dirpath == null then return
 
 		# Collect commits info
@@ -523,30 +523,30 @@ class Catalog
 		var contributors = new Counter[String]
 		var commits = res.split("\n")
 		if commits.not_empty and commits.last == "" then commits.pop
-		self.commits[mproject] = commits.length
+		self.commits[mpackage] = commits.length
 		for l in commits do
 			var s = l.split_once_on(';')
 			if s.length != 2 or s.last == "" then continue
 
 			# Collect date of last and first commit
-			if mproject.last_date == null then mproject.last_date = s.first
-			mproject.first_date = s.first
+			if mpackage.last_date == null then mpackage.last_date = s.first
+			mpackage.first_date = s.first
 
 			# Count contributors
 			contributors.inc(s.last)
 		end
 		for c in contributors.sort.reverse_iterator do
-			mproject.contributors.add c
+			mpackage.contributors.add c
 		end
 
 	end
 
-	# Produce a HTML table containig information on the projects
+	# Produce a HTML table containig information on the packages
 	#
-	# `project_page` must have been called before so that information is computed.
-	fun table_projects(mprojects: Array[MProject]): Template
+	# `package_page` must have been called before so that information is computed.
+	fun table_packages(mpackages: Array[MPackage]): Template
 	do
-		alpha_comparator.sort(mprojects)
+		alpha_comparator.sort(mpackages)
 		var res = new Template
 		res.add "<table data-toggle=\"table\" data-sort-name=\"name\" data-sort-order=\"desc\" width=\"100%\">\n"
 		res.add "<thead><tr>\n"
@@ -563,7 +563,7 @@ class Catalog
 		res.add "<th data-field=\"loc\" data-sortable=\"true\">lines</th>\n"
 		res.add "<th data-field=\"score\" data-sortable=\"true\">score</th>\n"
 		res.add "</tr></thead>"
-		for p in mprojects do
+		for p in mpackages do
 			res.add "<tr>"
 			res.add "<td><a href=\"{p.name}.html\">{p.name}</a></td>"
 			var maint = "?"
@@ -612,8 +612,8 @@ for a in tc.option_context.rest do
 	modelbuilder.identify_file(a)
 end
 
-# Scan projects and compute information
-for p in model.mprojects do
+# Scan packages and compute information
+for p in model.mpackages do
 	var g = p.root
 	assert g != null
 	modelbuilder.scan_group(g)
@@ -624,7 +624,7 @@ for p in model.mprojects do
 	catalog.deps.add_node(p)
 	for gg in p.mgroups do for m in gg.mmodules do
 		for im in m.in_importation.direct_greaters do
-			var ip = im.mproject
+			var ip = im.mpackage
 			if ip == null or ip == p then continue
 			catalog.deps.add_edge(p, ip)
 		end
@@ -741,28 +741,28 @@ css.write_to_file(out/"style.css")
 
 # PAGES
 
-for p in model.mprojects do
+for p in model.mpackages do
 	# print p
 	var f = "{p.name}.html"
-	catalog.project_page(p).write_to_file(out/f)
+	catalog.package_page(p).write_to_file(out/f)
 end
 
 # INDEX
 
 var index = new CatalogPage
-index.more_head.add "<title>Projects in Nit</title>"
+index.more_head.add "<title>Packages in Nit</title>"
 
 index.add """
 <div class="content">
-<h1>Projects in Nit</h1>
+<h1>Packages in Nit</h1>
 """
 
-index.add "<h2>Highlighted Projects</h2>\n"
+index.add "<h2>Highlighted Packages</h2>\n"
 index.add catalog.list_best(catalog.score)
 
 index.add "<h2>Most Required</h2>\n"
-var reqs = new Counter[MProject]
-for p in model.mprojects do
+var reqs = new Counter[MPackage]
+for p in model.mpackages do
 	reqs[p] = catalog.deps[p].smallers.length - 1
 end
 index.add catalog.list_best(reqs)
@@ -778,7 +778,7 @@ index.add """
 <div class="sidebar">
 <h3>Stats</h3>
 <ul class="box">
-<li>{{{model.mprojects.length}}} projects</li>
+<li>{{{model.mpackages.length}}} packages</li>
 <li>{{{catalog.maint2proj.length}}} maintainers</li>
 <li>{{{catalog.contrib2proj.length}}} contributors</li>
 <li>{{{catalog.tag2proj.length}}} tags</li>
@@ -810,6 +810,6 @@ page = new CatalogPage
 page.more_head.add "<title>Projets of Nit</title>"
 page.add """<div class="content">\n<h1>People of Nit</h1>\n"""
 page.add "<h2>Table of Projets</h2>\n"
-page.add catalog.table_projects(model.mprojects)
+page.add catalog.table_packages(model.mpackages)
 page.add "</div>\n"
 page.write_to_file(out/"table.html")

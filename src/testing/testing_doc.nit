@@ -381,10 +381,10 @@ redef class ModelBuilder
 		# usualy, only the original module must be imported in the unit test.
 		var o = mmodule
 		var g = o.mgroup
-		if g != null and g.mproject.name == "core" then
+		if g != null and g.mpackage.name == "core" then
 			# except for a unit test in a module of `core`
 			# in this case, the whole `core` must be imported
-			o = get_mmodule_by_name(nmodule, g, g.mproject.name).as(not null)
+			o = get_mmodule_by_name(nmodule, g, g.mpackage.name).as(not null)
 		end
 
 		ts.attr("package", mmodule.full_name)

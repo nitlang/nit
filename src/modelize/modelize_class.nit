@@ -99,11 +99,11 @@ redef class ModelBuilder
 				return
 			end
 
-			# Check for conflicting class full-names in the project
+			# Check for conflicting class full-names in the package
 			if mmodule.mgroup != null and mvisibility >= protected_visibility then
 				var mclasses = model.get_mclasses_by_name(name)
 				if mclasses != null then for other in mclasses do
-					if other.intro_mmodule.mgroup != null and other.intro_mmodule.mgroup.mproject == mmodule.mgroup.mproject then
+					if other.intro_mmodule.mgroup != null and other.intro_mmodule.mgroup.mpackage == mmodule.mgroup.mpackage then
 						# Skip classes that are buggy
 						if other.try_intro == null then continue
 						warning(nclassdef, "full-name-conflict", "Error: a class named `{other.full_name}` is already defined in module `{other.intro_mmodule}` at {other.intro.location}.")

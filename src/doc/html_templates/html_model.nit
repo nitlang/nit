@@ -28,7 +28,7 @@ redef class MEntity
 
 	# Returns the mentity name without short signature.
 	#
-	# * MProject: `foo`
+	# * MPackage: `foo`
 	# * MGroup: `foo`
 	# * MModule: `foo`
 	# * MClass: `Foo[E]`
@@ -66,7 +66,7 @@ redef class MEntity
 
 	# Returns the complete MEntity declaration decorated with HTML.
 	#
-	# * MProject: `project foo`
+	# * MPackage: `package foo`
 	# * MGroup: `group foo`
 	# * MModule: `module foo`
 	# * MClass: `private abstract class Foo[E: Object]`
@@ -85,10 +85,10 @@ redef class MEntity
 
 	# Returns `self` namespace decorated with HTML links.
 	#
-	# * MProject: `mproject`
-	# * MGroup: `mproject(::group)`
+	# * MPackage: `mpackage`
+	# * MGroup: `mpackage(::group)`
 	# * MModule: `mgroup::mmodule`
-	# * MClass: `mproject::mclass`
+	# * MClass: `mpackage::mclass`
 	# * MClassDef: `mmodule::mclassdef`
 	# * MProperty: `mclass::mprop`
 	# * MPropdef: `mclassdef:mpropdef`
@@ -141,10 +141,10 @@ redef class MEntity
 	end
 end
 
-redef class MProject
+redef class MPackage
 	redef var nitdoc_id = name.to_cmangle is lazy
 	redef fun nitdoc_url do return root.nitdoc_url
-	redef var html_modifiers = ["project"]
+	redef var html_modifiers = ["package"]
 	redef fun html_namespace do return html_link
 	redef var css_classes = ["public"]
 end
@@ -162,12 +162,12 @@ redef class MGroup
 
 	# Depends if `self` is root or not.
 	#
-	# * If root `mproject`.
-	# * Else `mproject::self`.
+	# * If root `mpackage`.
+	# * Else `mpackage::self`.
 	redef fun html_namespace do
 		var tpl = new Template
-		tpl.add mproject.html_namespace
-		if mproject.root != self then
+		tpl.add mpackage.html_namespace
+		if mpackage.root != self then
 			tpl.add "::"
 			tpl.add html_link
 		end
@@ -233,10 +233,10 @@ redef class MClass
 	redef fun html_modifiers do return intro.html_modifiers
 	redef fun html_declaration do return intro.html_declaration
 
-	# Returns `mproject::self`.
+	# Returns `mpackage::self`.
 	redef fun html_namespace do
 		var tpl = new Template
-		tpl.add intro_mmodule.mgroup.mproject.html_namespace
+		tpl.add intro_mmodule.mgroup.mpackage.html_namespace
 		tpl.add "::<span>"
 		tpl.add html_link
 		tpl.add "</span>"

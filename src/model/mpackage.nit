@@ -12,26 +12,26 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Modelisation of a Nit project
-module mproject
+# Modelisation of a Nit package
+module mpackage
 
 import model_base
 private import more_collections
 import poset
 import mdoc
 
-# A Nit project, that encompass a product
-class MProject
+# A Nit package, that encompass a product
+class MPackage
 	super MConcern
 
-	# The name of the project
+	# The name of the package
 	redef var name: String
 
 	redef fun full_name do return name
 
 	redef var c_name = name.to_cmangle is lazy
 
-	# The model of the project
+	# The model of the package
 	redef var model: Model
 
 	# The root of the group tree
@@ -44,11 +44,11 @@ class MProject
 
 	init
 	do
-		model.mprojects.add(self)
-		model.mproject_by_name.add_one(name, self)
+		model.mpackages.add(self)
+		model.mpackage_by_name.add_one(name, self)
 	end
 
-	# MProject are always roots of the concerns hierarchy
+	# MPackage are always roots of the concerns hierarchy
 	redef fun parent_concern do return null
 
 	redef fun mdoc_or_fallback
@@ -58,16 +58,16 @@ class MProject
 	end
 end
 
-# A group of modules in a project
+# A group of modules in a package
 class MGroup
 	super MConcern
 
 	# The name of the group
-	# empty name for a default group in a single-module project
+	# empty name for a default group in a single-module package
 	redef var name: String
 
-	# The enclosing project
-	var mproject: MProject
+	# The enclosing package
+	var mpackage: MPackage
 
 	# The parent group if any
 	# see `in_nesting` for more
@@ -82,20 +82,20 @@ class MGroup
 		return "{p.full_name}/{name}"
 	end
 
-	# The group is the group tree on the project (`mproject.mgroups`)
+	# The group is the group tree on the package (`mpackage.mgroups`)
 	# nested groups (children) are smaller
 	# nesting group (see `parent`) is bigger
 	var in_nesting: POSetElement[MGroup] is noinit
 
-	# Is `self` the root of its project?
-	fun is_root: Bool do return mproject.root == self
+	# Is `self` the root of its package?
+	fun is_root: Bool do return mpackage.root == self
 
 	# The filepath (usually a directory) of the group, if any
 	var filepath: nullable String = null is writable
 
 	init
 	do
-		var tree = mproject.mgroups
+		var tree = mpackage.mgroups
 		self.in_nesting = tree.add_node(self)
 		var parent = self.parent
 		if parent != null then
@@ -103,29 +103,29 @@ class MGroup
 		end
 	end
 
-	redef fun model do return mproject.model
+	redef fun model do return mpackage.model
 
 	redef fun parent_concern do
 		if not is_root then return parent
-		return mproject
+		return mpackage
 	end
 
 	redef fun to_s do return name
 end
 
 redef class Model
-	# projects of the model
-	var mprojects = new Array[MProject]
+	# packages of the model
+	var mpackages = new Array[MPackage]
 
-	# Collections of project grouped by their names
-	private var mproject_by_name = new MultiHashMap[String, MProject]
+	# Collections of package grouped by their names
+	private var mpackage_by_name = new MultiHashMap[String, MPackage]
 
-	# Return all project named `name`
-	# If such a project is not yet loaded, null is returned (instead of an empty array)
-	fun get_mprojects_by_name(name: String): nullable Array[MProject]
+	# Return all package named `name`
+	# If such a package is not yet loaded, null is returned (instead of an empty array)
+	fun get_mpackages_by_name(name: String): nullable Array[MPackage]
 	do
-		if mproject_by_name.has_key(name) then
-			return mproject_by_name[name]
+		if mpackage_by_name.has_key(name) then
+			return mpackage_by_name[name]
 		else
 			return null
 		end

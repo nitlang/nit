@@ -69,7 +69,7 @@ redef class ToolContext
 	var opt_dir: OptionString = new OptionString("Output directory", "--dir")
 
 	# Depth of the visit and generation
-	var opt_depth = new OptionEnum(["module", "group", "project"],
+	var opt_depth = new OptionEnum(["module", "group", "package"],
 		"Depth of the visit and generation", 0, "-d", "--depth")
 
 	redef init
@@ -163,11 +163,11 @@ for mmodule in mmodules do
 		modelbuilder.scan_group mgroup
 		target_modules = mgroup.mmodules
 	else if toolcontext.opt_depth.value == 2 then
-		# project
+		# package
 		target_modules = new Array[MModule]
 		importations = new Array[MModule]
 		if mgroup != null then
-			for g in mgroup.mproject.mgroups do
+			for g in mgroup.mpackage.mgroups do
 				target_modules.add_all g.mmodules
 			end
 

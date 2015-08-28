@@ -2811,7 +2811,7 @@ class AModuleName
 	# The starting quad (`::`)
 	var n_quad: nullable TQuad = null is writable
 
-	# The list of quad-separated project/group identifiers
+	# The list of quad-separated package/group identifiers
 	var n_path = new ANodes[TId](self)
 
 	# The final module identifier
@@ -2847,7 +2847,7 @@ class AQualified
 	# The starting quad (`::`)
 	var n_quad: nullable TQuad = null is writable
 
-	# The list of quad-separated project/group/module identifiers
+	# The list of quad-separated package/group/module identifiers
 	var n_id = new ANodes[TId](self)
 
 	# A class identifier

@@ -614,7 +614,7 @@ class MClassDef
 			# public gives 'p#A'
 			# private gives 'p::m#A'
 			return "{mmodule.namespace_for(mclass.visibility)}#{mclass.name}"
-		else if mclass.intro_mmodule.mproject != mmodule.mproject then
+		else if mclass.intro_mmodule.mpackage != mmodule.mpackage then
 			# public gives 'q::n#p::A'
 			# private gives 'q::n#p::m::A'
 			return "{mmodule.full_name}#{mclass.full_name}"
@@ -630,7 +630,7 @@ class MClassDef
 	redef var c_name is lazy do
 		if is_intro then
 			return "{mmodule.c_namespace_for(mclass.visibility)}___{mclass.c_name}"
-		else if mclass.intro_mmodule.mproject == mmodule.mproject and mclass.visibility > private_visibility then
+		else if mclass.intro_mmodule.mpackage == mmodule.mpackage and mclass.visibility > private_visibility then
 			return "{mmodule.c_name}___{mclass.name.to_cmangle}"
 		else
 			return "{mmodule.c_name}___{mclass.c_name}"
@@ -1932,7 +1932,7 @@ abstract class MProperty
 	# The canonical name of the property.
 	#
 	# It is the short-`name` prefixed by the short-name of the class and the full-name of the module.
-	# Example: "my_project::my_module::MyClass::my_method"
+	# Example: "my_package::my_module::MyClass::my_method"
 	redef var full_name is lazy do
 		return "{intro_mclassdef.mmodule.namespace_for(visibility)}::{intro_mclassdef.mclass.name}::{name}"
 	end
@@ -2250,14 +2250,14 @@ abstract class MPropDef
 			res.append name
 		else
 			# Just try to simplify each part
-			if mclassdef.mmodule.mproject != mproperty.intro_mclassdef.mmodule.mproject then
+			if mclassdef.mmodule.mpackage != mproperty.intro_mclassdef.mmodule.mpackage then
 				# precise "p::m" only if "p" != "r"
 				res.append mproperty.intro_mclassdef.mmodule.full_name
 				res.append "::"
 			else if mproperty.visibility <= private_visibility then
-				# Same project ("p"=="q"), but private visibility,
+				# Same package ("p"=="q"), but private visibility,
 				# does the module part ("::m") need to be displayed
-				if mclassdef.mmodule.namespace_for(mclassdef.mclass.visibility) != mproperty.intro_mclassdef.mmodule.mproject then
+				if mclassdef.mmodule.namespace_for(mclassdef.mclass.visibility) != mproperty.intro_mclassdef.mmodule.mpackage then
 					res.append "::"
 					res.append mproperty.intro_mclassdef.mmodule.name
 					res.append "::"
