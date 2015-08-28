@@ -15,7 +15,8 @@
 # limitations under the License.
 
 module simple_android is
-	android_manifest("""<uses-permission android:name="android.permission.VIBRATE" />""")
+	app_namespace "org.nitlanguage.test_minimal"
+	android_manifest """<uses-permission android:name="android.permission.VIBRATE" />"""
 end
 
 import mnit_android
@@ -32,7 +33,7 @@ in "Java" `{
 redef class App
 	redef fun input( ie )
 	do
-		if ie isa PointerEvent and ie.depressed then 
+		if ie isa PointerEvent and ie.depressed then
 			test_java_ffi
 		end
 		return super

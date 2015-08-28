@@ -108,4 +108,3 @@ redef class App
 		assert bundle.is_empty
 	end
 end
-

@@ -23,17 +23,23 @@ import android::audio
 redef class App
 	# Sound
 	var soundsp: Sound
+
 	# Music
 	var soundmp: Music
+
 	# Sound
 	var easy_soundsp = new Sound("testsound")
+
 	# Music
 	var easy_soundmp = new Music("xylofon")
-	# testing from assets ?
+
+	# Read sounds from the assets folder?
 	var test_assets = false
-	# testinf from resources ?
+
+	# Read sounds from the resources folder?
 	var test_ressources = true
-	# testing the automatic way ?
+
+	# Test the automatic way with `PlayableAudio::load`?
 	var test_easy_sounds = false
 
 	redef fun on_create
