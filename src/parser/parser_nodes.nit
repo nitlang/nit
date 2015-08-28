@@ -203,6 +203,7 @@ class ANodes[E: ANode]
 	private var parent: ANode
 	private var items = new Array[E]
 	redef fun iterator do return items.iterator
+	redef fun reverse_iterator do return items.reverse_iterator
 	redef fun length do return items.length
 	redef fun is_empty do return items.is_empty
 	redef fun push(e)

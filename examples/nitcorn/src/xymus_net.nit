@@ -22,8 +22,8 @@ import privileges
 
 # Use actions defined by contribs
 import tnitter
-import benitlux_controller
-import opportunity_controller
+import benitlux::benitlux_controller
+import opportunity::opportunity_controller
 
 # Header for the whole site
 class MasterHeader

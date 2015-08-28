@@ -12,12 +12,4 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import project1 #alt1-6#
-#alt1#import project1::module1
-#alt2#import project1::module2
-#alt3#import project1::fail
-#alt4#import project1::module4
-#alt5#import project1::project2
-#alt6#import fail::module1
-
-foo
+import ::module_0
