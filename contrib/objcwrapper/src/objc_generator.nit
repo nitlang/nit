@@ -20,29 +20,69 @@ import opts
 import objc_model
 
 redef class Sys
+
 	# Path to the output file
 	var opt_output = new OptionString("Output file", "-o")
-end
 
-class CodeGenerator
-	# Merge the calls to `alloc` and `init...` in a single constructor?
+	# Shall `init` methods/constructors be wrapped as methods?
 	#
-	# If `true`, also the default behavior, initializing an extern Objective-C object looks like:
+	# By default, these methods/constructors are wrapped as extern constructors.
+	# So initializing an extern Objective-C object looks like:
 	# ~~~nitish
 	# var o = new NSArray.init_with_array(some_other_array)
 	# ~~~
 	#
-	# If `false`, the object must first be allocated and then initialized.
+	# If this option is set, the object must first be allocated and then initialized.
 	# This is closer to the Objective-C behavior:
 	# ~~~nitish
 	# var o = new NSArray
 	# o.init_with_array(some_other_array)
 	# ~~~
-	var init_with_alloc = true is writable
+	var opt_init_as_methods = new OptionBool(
+		"Wrap `init...` constructors as Nit methods instead of Nit constructors",
+		"--init-as-methods")
+
+	private var objc_to_nit_types: Map[String, String] is lazy do
+		var types = new HashMap[String, String]
+		types["char"] = "Byte"
+		types["short"] = "Int"
+		types["short int"] = "Int"
+		types["int"] = "Int"
+		types["long"] = "Int"
+		types["long int"] = "Int"
+		types["long long"] = "Int"
+		types["long long int"] = "Int"
+		types["float"] = "Float"
+		types["double"] = "Float"
+		types["long double"] = "Float"
+
+		types["NSUInteger"] = "Int"
+		types["BOOL"] = "Bool"
+		types["id"] = "NSObject"
+		types["constid"] = "NSObject"
+		types["SEL"] = "NSObject"
+		types["void"] = "Pointer"
+
+		return types
+	end
+end
+
+redef class ObjcModel
+	redef fun knows_type(objc_type) do return super or
+		objc_to_nit_types.keys.has(objc_type)
+end
+
+# Wrapper generator
+class CodeGenerator
+
+	# `ObjcModel` to wrap
+	var model: ObjcModel
 
 	# Generate Nit code to wrap `classes`
-	fun generate(classes: Array[ObjcClass])
+	fun generate
 	do
+		var classes = model.classes
+
 		# Open specified path or stdin
 		var file
 		var path = opt_output.value
@@ -65,169 +105,210 @@ class CodeGenerator
 		if path != null then file.close
 	end
 
-	private fun type_convertor(type_word: String): String
-	do
-		var types = new HashMap[String, String]
-		types["char"] = "Byte"
-		types["short"] = "Int"
-		types["short int"] = "Int"
-		types["int"] = "Int"
-		types["long"] = "Int"
-		types["long int"] = "Int"
-		types["long long"] = "Int"
-		types["long long int"] = "Int"
-		types["float"] = "Float"
-		types["double"] = "Float"
-		types["long double"] = "Float"
-
-		types["NSUInteger"] = "Int"
-		types["BOOL"] = "Bool"
-		types["id"] = "NSObject"
-
-		if types.has_key(type_word) then
-			return types[type_word]
-		else
-			return type_word
-		end
-	end
-
 	private fun write_class(classe: ObjcClass, file: Writer)
 	do
-		var commented_methods = new Array[ObjcMethod]
-		file.write "extern class " + classe.name + """ in "ObjC" `{ """ + classe.name  + """ * `}\n"""
-		for super_name in classe.super_names do
-			file.write """	super """ + super_name + "\n"
-		end
-		if classe.super_names.is_empty then file.write """	super NSObject\n"""
-		write_constructor(classe, file)
+		# Class header
+		file.write """
+
+extern class {{{classe.name}}} in "ObjC" `{ {{{classe.name}}} * `}
+"""
+
+		# Supers
+		for super_name in classe.super_names do file.write """
+	super {{{super_name}}}
+"""
+		if classe.super_names.is_empty then file.write """
+	super NSObject
+"""
+
 		file.write "\n"
+
+		# Constructor or constructors
+		write_constructors(classe, file)
+
+		# Attributes
 		for attribute in classe.attributes do
 			write_attribute(attribute, file)
 		end
+
+		# Methods
 		for method in classe.methods do
-			if method.is_commented then
-				commented_methods.add(method)
-			else
-				if init_with_alloc and method.params.first.name.has("init") then continue
-				file.write """	"""
-				write_method(method, file)
-				file.write """ in "ObjC" `{\n		"""
-				write_objc_method_call(method, file)
-				file.write """	`}"""
-				if method != classe.methods.last then file.write "\n\n"
-			end
+			if not model.knows_all_types(method) then method.is_commented = true
+
+			if not opt_init_as_methods.value and method.is_init then continue
+
+			write_method_signature(method, file)
+			write_objc_method_call(method, file)
 		end
-		for commented_method in commented_methods do
-			if commented_method == commented_methods.first then file.write "\n"
-			file.write """	#"""
-			write_method(commented_method, file)
-			if commented_method != commented_methods.last then file.write "\n"
-		end
-		file.write "\nend\n"
+
+		file.write """
+end
+"""
 	end
 
-	private fun write_constructor(classe: ObjcClass, file: Writer)
+	private fun write_constructors(classe: ObjcClass, file: Writer)
 	do
-		if init_with_alloc then
-			for method in classe.methods do
-				if method.params.first.name.has("init") and not method.is_commented then
-					file.write """\n	"""
-					if method.params.first.name == "init" then
-						file.write "new"
-					else
-						write_method(method, file)
-					end
-					file.write """ in "ObjC" `{\n"""
-					write_objc_init_call(classe.name, method, file)
-					file.write """	`}\n"""
-				end
-			end
-		else
-			file.write """\n	new in "ObjC"`{\n"""
-			file.write """		return [""" + classe.name + " alloc];\n"
-			file.write """	`}\n"""
+		if opt_init_as_methods.value then
+			# A single constructor for `alloc`
+			file.write """
+	new in "ObjC" `{
+		return [{{{classe.name}}} alloc];
+	`}
+
+"""
+			return
+		end
+
+		# A constructor per `init...` method
+		for method in classe.methods do
+			if not method.is_init then continue
+
+			if not model.knows_all_types(method) then method.is_commented = true
+
+			write_method_signature(method, file)
+
+				write_objc_init_call(classe.name, method, file)
 		end
 	end
 
 	private fun write_attribute(attribute: ObjcAttribute, file: Writer)
 	do
+		if not model.knows_type(attribute.return_type) then attribute.is_commented = true
+
 		write_attribute_getter(attribute, file)
 		# TODO write_attribute_setter if there is no `readonly` annotation
-		file.write "\n"
 	end
 
 	private fun write_attribute_getter(attribute: ObjcAttribute, file: Writer)
 	do
-		file.write """	fun """ + attribute.name.to_snake_case + ": " + type_convertor(attribute.return_type)
-		file.write """ in "ObjC" `{\n"""
-		file.write """		return [self """ + attribute.name + "];\n"
-		file.write """	`}\n"""
+		var nit_attr_name = attribute.name.to_snake_case
+		var nit_attr_type = attribute.return_type.objc_to_nit_type
+
+		var c = attribute.comment_str
+
+		file.write """
+{{{c}}}	fun {{{nit_attr_name}}}: {{{nit_attr_type}}} in "ObjC" `{
+{{{c}}}		return [self {{{attribute.name}}}];
+{{{c}}}	`}
+
+"""
 	end
 
 	private fun write_attribute_setter(attribute: ObjcAttribute, file: Writer)
 	do
-		file.write """	fun """ + attribute.name.to_snake_case + "=(value: " + type_convertor(attribute.return_type) + ")"
-		file.write " in \"ObjC\" `\{\n"
-		file.write """		self.""" + attribute.name + " = value;\n"
-		file.write """	`}\n"""
+		var nit_attr_name = attribute.name.to_snake_case
+		var nit_attr_type = attribute.return_type.objc_to_nit_type
+
+		var c = attribute.comment_str
+
+		file.write """
+{{{c}}}	fun {{{nit_attr_name}}}=(value: {{{nit_attr_type}}}) in "ObjC" `{
+{{{c}}}		return self.{{{attribute.name}}} = value;
+{{{c}}}	`}
+
+"""
 	end
 
-	private fun write_method(method: ObjcMethod, file: Writer)
+	private fun write_method_signature(method: ObjcMethod, file: Writer)
 	do
+		var c = method.comment_str
+
+		# Build Nit method name
 		var name = ""
 		for param in method.params do
 			name += param.name[0].to_upper.to_s + param.name.substring_from(1)
-			name = name.to_snake_case
 		end
-		if name.has("init") and init_with_alloc then
-			file.write "new "
-		else
-			if not init_with_alloc and name == "init" then name = "init_0"
-			file.write "fun "
+		name = name.to_snake_case
+
+		if name == "init" then name = ""
+
+		# Kind of method
+		var fun_keyword = "fun"
+		if not opt_init_as_methods.value and method.is_init then
+			fun_keyword = "new"
 		end
-		file.write name
+
+		# Params
+		var params = new Array[String]
 		for param in method.params do
-			if param == method.params.first and not param.is_single then
-				file.write "(" + param.variable_name + ": " + type_convertor(param.return_type)
-			end
-			if param != method.params.first and not param.is_single then
-				file.write ", " + param.variable_name + ": " + type_convertor(param.return_type)
-			end
-			if param == method.params.last and not param.is_single then
-				file.write ")"
-			end
+			if param.is_single then break
+			params.add "{param.variable_name}: {param.return_type.objc_to_nit_type}"
 		end
-		if method.return_type != "void" and not method.params.first.name.has("init") then
-			file.write ": " + type_convertor(method.return_type)
+
+		var params_with_par = ""
+		if params.not_empty then params_with_par = "({params.join(", ")})"
+
+		# Return
+		var ret = ""
+		if method.return_type != "void" and fun_keyword != "new" then
+			ret = ": {method.return_type.objc_to_nit_type}"
 		end
+
+		file.write """
+{{{c}}}	{{{fun_keyword}}} {{{name}}}{{{params_with_par}}}{{{ret}}} in "ObjC" `{
+"""
 	end
 
-	private fun write_objc_init_call(classe_name: String, method: ObjcMethod, file: Writer)
+	# Write a combined call to alloc and to a constructor/method
+	private fun write_objc_init_call(class_name: String, method: ObjcMethod, file: Writer)
 	do
-		file.write """		return [[""" + classe_name + " alloc] "
+		# Method name and other params
+		var params = new Array[String]
 		for param in method.params do
 			if not param.is_single then
-				file.write param.name + ":" + param.variable_name
-				if not param == method.params.last then file.write " "
-			else
-				file.write param.name
-			end
+				params.add "{param.name}: {param.variable_name}"
+			else params.add param.name
 		end
-		file.write "];\n"
+
+		var c = method.comment_str
+
+		file.write """
+{{{c}}}		return [[{{{class_name}}} alloc] {{{params.join(" ")}}}];
+{{{c}}}	`}
+
+"""
 	end
 
 	private fun write_objc_method_call(method: ObjcMethod, file: Writer)
 	do
-		if method.return_type != "void" then file.write "return "
-		file.write "[self "
+		# Is there a value to return?
+		var ret = ""
+		if method.return_type != "void" then ret = "return "
+
+		# Method name and other params
+		var params = new Array[String]
 		for param in method.params do
 			if not param.is_single then
-				file.write param.name + ":" + param.variable_name
-				if not param == method.params.last then file.write " "
-			else
-				file.write param.name
-			end
+				params.add "{param.name}: {param.variable_name}"
+			else params.add param.name
 		end
-		file.write "];\n"
+
+		var c = method.comment_str
+
+		file.write """
+{{{c}}}		{{{ret}}}[self {{{params.join(" ")}}}];
+{{{c}}}	`}
+
+"""
 	end
+end
+
+redef class Text
+	# Nit equivalent to this type
+	private fun objc_to_nit_type: String
+	do
+		var types = sys.objc_to_nit_types
+
+		if types.has_key(self) then
+			return types[self]
+		else
+			return to_s
+		end
+	end
+end
+
+redef class Property
+	private fun comment_str: String do if is_commented then
+		return "#"
+	else return ""
 end

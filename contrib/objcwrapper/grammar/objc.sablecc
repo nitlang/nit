@@ -121,10 +121,12 @@ Parser
         {instance:} '-';
 
     parameter =
-        {named:} [left:]term ':' lpar parameter_type rpar attribute? [right:]term |
+        {named:} [left:]term ':' parameter_type_in_par? attribute? [right:]term |
         {single:} term |
         {comma:} comma '...' |
         {macro:} macro_name;
+
+    parameter_type_in_par = lpar parameter_type rpar;
 
     parameter_type =
         {normal:} type |
@@ -195,7 +197,8 @@ Parser
         'long long int' |
         'float' |
         'double' |
-        'long double';
+        'long double' |
+        'size_t';
 
     classe =
         {class:} class |

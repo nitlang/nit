@@ -2,4 +2,6 @@ src/objc_lexer.nit
 src/objc_parser.nit
 src/objc_test_parser.nit
 tests/MyClass.nit
+tests/nsarray.nit
+tests/nsalert.nit
 objc.ast.dot

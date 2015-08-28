@@ -1,4 +1,4 @@
-all: bin/objcwrapper
+all: bin/objcwrapper bin/header_static
 
 ../nitcc/src/nitcc:
 	make -C ../nitcc
@@ -23,20 +23,26 @@ check: bin/objc_test_parser bin/objcwrapper
 	../../bin/nitpick tests/MyClass.nit
 
 # Test on classes of libgnustep-base-dev
-check-gnustep:
+check-gnustep: bin/objcwrapper bin/header_static
 	gcc -E /usr/include/GNUstep/Foundation/NSArray.h -I /usr/include/GNUstep/ -Wno-deprecated \
 	| ../header_keeper/bin/header_keeper /usr/include/GNUstep/Foundation/NSArray.h \
 	| bin/header_static > tests/NSArray.pre.h
-	bin/objcwrapper tests/NSArray.pre.h
-	../../bin/nitpick NSArray.nit
+	bin/objcwrapper tests/NSArray.pre.h -o tests/nsarray.nit
+	../../bin/nitpick tests/nsarray.nit
 
 # Test on classes of the Apple Foundation framework
-check-apple:
+check-apple: bin/objcwrapper bin/header_static
 	gcc -E /System/Library/Frameworks/Foundation.framework/Versions/C/Headers/NSArray.h \
 	| ../header_keeper/bin/header_keeper /System/Library/Frameworks/Foundation.framework/Versions/C/Headers/NSArray.h \
 	| bin/header_static > tests/NSArray.pre.h
-	bin/objcwrapper tests/NSArray.pre.h
-	../../bin/nitpick NSArray.nit
+	bin/objcwrapper tests/NSArray.pre.h -o tests/nsarray.nit
+	../../bin/nitpick tests/nsarray.nit
 
-bin/header_static:
+	gcc -E /System/Library/Frameworks/AppKit.framework/Headers/NSAlert.h \
+	| ../header_keeper/bin/header_keeper NSAlert.h \
+	| bin/header_static > tests/NSAlert.pre.h
+	bin/objcwrapper tests/NSAlert.pre.h -o tests/nsalert.nit
+	../../bin/nitpick tests/nsalert.nit
+
+bin/header_static: $(shell ../../bin/nitls -M src/header_static.nit)
 	../../bin/nitc --dir bin src/header_static.nit

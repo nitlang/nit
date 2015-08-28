@@ -19,6 +19,33 @@ module objc_model
 class ObjcModel
 	# All analyzed classes
 	var classes = new Array[ObjcClass]
+
+	# Is `objc_type` known by this model?
+	fun knows_type(objc_type: Text): Bool
+	do
+		for c in classes do
+			if c.name == objc_type then return true
+		end
+
+		return imported_types.has(objc_type)
+	end
+
+	# Are all types in the signature or `method` known by this model?
+	fun knows_all_types(method: ObjcMethod): Bool
+	do
+		for param in method.params do
+			if param.is_single then break
+			if not knows_type(param.return_type) then return false
+		end
+
+		var r = method.return_type
+		return r == "void" or r == "id" or knows_type(r)
+	end
+
+	# Objective-C types available in imported modules
+	#
+	# TODO seach in existing wrappers
+	private var imported_types: Array[String] = ["NSObject", "NSString"]
 end
 
 # Objective-C class
@@ -48,6 +75,9 @@ class ObjcMethod
 
 	# Return type as a `String`
 	var return_type: String is noinit, writable
+
+	# Does this method look like a constructor/method?
+	fun is_init: Bool do return params.first.name.has_prefix("init")
 end
 
 # Attribute of an `ObjcClass`
