@@ -19,3 +19,11 @@ var re = "a+".to_re #alt1#
 
 print "aa".has(re)
 print "bb".has(re)
+
+var str = "é12345"
+
+var re1 = "3".to_re
+print str.split(re1)
+
+var re2 = "5".to_re
+print str.split(re2)

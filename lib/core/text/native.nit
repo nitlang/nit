@@ -130,6 +130,29 @@ extern class NativeString `{ char* `}
 		return ns_i
 	end
 
+	# Gets the byte index of char at position `n` in UTF-8 String
+	#
+	# `char_from` and `byte_from` are cached values to seek from.
+	#
+	# NOTE: char_from and byte_from are not guaranteed to be valid cache values
+	# It it up to the client to ensure the validity of the information
+	fun byte_to_char_index_cached(n, char_from, byte_from: Int): Int do
+		var ns_i = byte_from
+		var my_i = char_from
+
+		while ns_i < n do
+			ns_i += length_of_char_at(ns_i)
+			my_i += 1
+		end
+
+		while ns_i > n do
+			ns_i = find_beginning_of_char_at(ns_i - 1)
+			my_i -= 1
+		end
+
+		return my_i
+	end
+
 	# Returns the beginning position of the char at position `pos`
 	#
 	# If the char is invalid UTF-8, `pos` is returned as-is

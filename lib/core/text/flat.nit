@@ -84,6 +84,43 @@ redef class FlatText
 		return ns_i
 	end
 
+	private fun byte_to_char_index(index: Int): Int do
+		var ln = bytelen
+		assert index >= 0
+		assert index < bytelen
+
+		# Find best insertion point
+		var delta_begin = index
+		var delta_end = (ln - 1) - index
+		var delta_cache = (bytepos - index).abs
+		var min = delta_begin
+		var its = items
+
+		if delta_cache < min then min = delta_cache
+		if delta_end < min then min = delta_end
+
+		var ns_i: Int
+		var my_i: Int
+
+		if min == delta_begin then
+			ns_i = first_byte
+			my_i = 0
+		else if min == delta_cache then
+			ns_i = bytepos
+			my_i = position
+		else
+			ns_i = its.find_beginning_of_char_at(last_byte)
+			my_i = length - 1
+		end
+
+		my_i = its.byte_to_char_index_cached(index, my_i, ns_i)
+
+		position = my_i
+		bytepos = index
+
+		return my_i
+	end
+
 	redef fun [](index) do return items.char_at(char_to_byte_index(index))
 end
 
