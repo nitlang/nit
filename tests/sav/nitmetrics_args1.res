@@ -2,7 +2,7 @@
 
 # MModules metrics
 
- ## project base_simple3
+ ## package base_simple3
   `- group base_simple3
 	mnoa: number of ancestor modules
 	  avg: 0.0
@@ -364,7 +364,7 @@ Distribution of direct smallers
 
 # MClasses metrics
 
- ## project base_simple3
+ ## package base_simple3
   `- group base_simple3
 	cnoa: number of ancestor classes
 	  avg: 0.0
@@ -488,12 +488,12 @@ Distribution of direct smallers
 	  min: Object (0)
 	  std: 0.926
 	  sum: 6
-generating project_hierarchy.dot
+generating package_hierarchy.dot
 generating module_hierarchy.dot
 
 # Inheritance metrics
 
- ## project base_simple3
+ ## package base_simple3
   `- group base_simple3
 	cnoac: number of class_kind ancestor
 	  avg: 0.0
@@ -751,7 +751,7 @@ Statistics of type usage:
 
 # Nullable metrics
 
- ## project base_simple3
+ ## package base_simple3
   `- group base_simple3
 	cnba: number of accessible attributes (inherited + local)
 	  avg: 0.0
@@ -910,5 +910,5 @@ mmodules/
 model.html
 module_hierarchy.dot
 nullables/
-project_hierarchy.dot
+package_hierarchy.dot
 rta/
