@@ -8,7 +8,7 @@
 # You  are  allowed  to  redistribute it and sell it, alone or is a part of
 # another product.
 
-# Cartesian products on heterogeneous collections.
+# Memory-efficient Cartesian products on heterogeneous collections.
 #
 # This module is a proof-of-concept to propose memory-efficient views on collections.
 #
@@ -19,6 +19,7 @@
 #
 # However, in Nit, there in no native *tuple* type.
 # So we need a first building block, a pair.
+module cartesian
 
 # A simple read-only pair of two elements `e` and `f`.
 class Pair[E, F]

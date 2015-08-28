@@ -12,8 +12,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# This module beef up the clock module by allowing a clock to be comparable.
-# It show the usage of class refinement
+# A beefed up example of the `clock` module that show class refinement.
+#
+# It refines clock to make them comparable.
 module clock_more
 
 import clock

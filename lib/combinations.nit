@@ -8,7 +8,7 @@
 # You  are  allowed  to  redistribute it and sell it, alone or is a part of
 # another product.
 
-# Cartesian products, combinations and permutation on collections.
+# Memory-efficient Cartesian products, combinations and permutation on collections.
 #
 # This module offers memory-efficient views on combinatoric collections.
 # Methods of the views create objects only when needed.

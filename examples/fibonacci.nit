@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# A simple exemple of refinement where a method is added to the integer class.
+# Simple example of refinement where a method is added to the integer class.
 module fibonacci
 
 redef class Int

@@ -10,8 +10,7 @@
 # You  are  allowed  to  redistribute it and sell it, alone or is a part of
 # another product.
 
-# Symbol classes
-# FIXME: Should be deprecated soon
+# Library for simple interning of strings
 module symbol
 
 redef class String

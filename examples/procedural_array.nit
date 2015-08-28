@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# A procedural program (without explicit class definition).
+# Example of a procedural program (without explicit class definition).
 # This program manipulates arrays of integers.
 module procedural_array
 
