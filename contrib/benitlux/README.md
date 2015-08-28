@@ -1,4 +1,4 @@
-Benitlux is an unofficial mailing list to keep faithful bargoers informed of the current beer offer at the excellent Brasserie Bénélux <http://brasseriebenelux.com/>.
+An unofficial mailing list and other tools to keep faithful bargoers informed of the beers available at the excellent Brasserie Bénélux.
 
 This project is composed of two softwares:
 

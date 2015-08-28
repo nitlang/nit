@@ -1,4 +1,4 @@
-_jwrapper_, an extern class generator from Java class files
+Generator of Nit extern classes to wrap Java APIs.
 
 # Description
 _jwrapper_ automates wrapping Java classes so they can be accessed from Nit code. It generates Nit extern classes by analyzing Java class files.

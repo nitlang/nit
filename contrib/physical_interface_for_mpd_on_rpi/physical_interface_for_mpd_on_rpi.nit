@@ -14,10 +14,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# This programs interprets the input of a physical interface thought the
-# GPIO pins of a Raspberry Pi to control an MPD server.
+# Backend to a hardware interface to control an MPD server from a Raspberry Pi
 #
-# It suppot two inputs: a play/pause button and a rotary encoder to adjust
+# It supports two inputs: a play/pause button and a rotary encoder to adjust
 # the volume.
 #
 # The each data output of the volume control are connected to the board

@@ -1,4 +1,4 @@
-This tool downloads files pointed by RSS feeds.
+A tool to download files listed in RSS feeds according to local folders.
 
 It fetches the content of the RSS feed, then filters it according to custom patterns and to existing folders on disk. Selected elements will be downloaded to the given folder.
 
