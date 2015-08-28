@@ -40,7 +40,7 @@ doc/stdlib/index.html: bin/nitdoc bin/nitls
 	@echo '***************************************************************'
 	@echo '* Generate doc for NIT standard library                       *'
 	@echo '***************************************************************'
-	bin/nitdoc $$(bin/nitls lib -rs --path) -d doc/stdlib \
+	bin/nitdoc lib -d doc/stdlib \
 		--custom-title "Nit Standard Library" \
 		--custom-brand "<a href=\"http://nitlanguage.org/\">Nitlanguage.org</a>" \
 		--custom-overview-text "<p>Documentation for the standard library of Nit<br/>Version $$(git describe)<br/>Date: $$(git show --format="%cd" | head -1)</p>" \
@@ -53,7 +53,7 @@ doc/stdlib/index.html: bin/nitdoc bin/nitls
 		--piwik-site-id "2" \
 
 doc/nitc/index.html: bin/nitdoc bin/nitls
-	bin/nitdoc $$(bin/nitls lib -rs --path) src/nit*.nit src/test_*.nit -d doc/nitc \
+	bin/nitdoc lib src/nit*.nit src/test_*.nit -d doc/nitc \
 		--private \
 		--custom-title "Nit Compilers and Tools" \
 		--custom-brand "<a href=\"http://nitlanguage.org/\">Nitlanguage.org</a>" \
