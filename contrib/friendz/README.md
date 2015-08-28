@@ -1,6 +1,4 @@
-Chainz of Friendz
-
-A puzzle game
+Chainz of Friendz, a multi-platform puzzle game
 
 # Objectives
 

@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Implementation of circular lists
+# Example of an implementation of circular lists
 # This example shows the usage of generics and somewhat a specialisation of collections.
 module circular_list
 

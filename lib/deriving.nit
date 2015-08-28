@@ -8,7 +8,7 @@
 # You  are  allowed  to  redistribute it and sell it, alone or is a part of
 # another product.
 
-# Automatic derivable implementation of standard basic methods.
+# Automatic derivable implementations of standard basic methods.
 #
 # This module introduce `Derivable` as the main interface to implement (or auto-implement) and
 # provides additional mixin-interfaces with specific default behavior of standard basic methods based

@@ -1,4 +1,4 @@
-Simple toolkit for artificial intelligence
+Simple library for basic artificial intelligence algorithms
 
 This library provides some frameworks for basic algorithms used for artificial intelligence.
 It offers simple generic classes to extends.

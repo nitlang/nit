@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# management and display of ordered trees
+# Manipulation and presentation of ordered trees.
 module ordered_tree
 
 # Generic structure to manage and display an ordered tree
