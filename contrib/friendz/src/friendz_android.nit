@@ -11,7 +11,7 @@
 module friendz_android
 
 import friendz
-import mnit_android
+import mnit::android
 import android::landscape
 
 redef class App

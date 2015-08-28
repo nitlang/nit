@@ -19,7 +19,7 @@ module simple_android is
 	android_manifest """<uses-permission android:name="android.permission.VIBRATE" />"""
 end
 
-import mnit_android
+import mnit::android
 import android::portrait
 import serialization
 

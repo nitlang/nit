@@ -15,7 +15,7 @@
 # Manage images that are tileset or glyphset (for bitmap fonts)
 module tileset
 
-import mnit_display
+import mnit::display
 
 # Efficiently retrieve tiles in a big image
 class TileSet

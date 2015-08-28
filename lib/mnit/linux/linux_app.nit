@@ -19,7 +19,7 @@ module linux_app
 import mnit
 import sdl
 import linux_opengles1
-import linux
+import ::linux
 
 in "C" `{
 	#include <EGL/egl.h>

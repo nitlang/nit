@@ -16,7 +16,7 @@
 
 module game_logic
 
-import mnit_android
+import mnit::android
 import android::sensors
 
 class Ball

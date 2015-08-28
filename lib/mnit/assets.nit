@@ -18,7 +18,7 @@
 module assets
 
 import mnit_app
-import mnit_display
+import mnit::display
 
 # General asset
 interface Asset

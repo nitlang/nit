@@ -17,7 +17,7 @@
 # Pointer and hardware key events
 module input_events
 
-import mnit_input
+import mnit::input
 import android
 
 in "C header" `{

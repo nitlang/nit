@@ -16,6 +16,6 @@
 module shoot_android
 
 import shoot
-import mnit_android
+import mnit::android
 
 super

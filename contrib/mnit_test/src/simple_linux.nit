@@ -17,7 +17,7 @@
 module simple_linux
 
 import simple
-import mnit_linux
+import mnit::linux
 
 import test_data_store
 

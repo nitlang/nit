@@ -15,7 +15,7 @@
 # GNU/Linux client with config saved to `config.json`
 module linux_client
 
-import mnit_linux
+import mnit::linux
 import linux::audio
 import json::serialization
 

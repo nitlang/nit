@@ -16,7 +16,7 @@
 
 module moles_android
 
-import mnit_android
+import mnit::android
 import android::portrait
 
 import moles

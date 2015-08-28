@@ -17,7 +17,7 @@
 # OpenGL ES1 general support (most of it)
 module opengles1 is pkgconfig("glesv1_cm", "egl")
 
-import mnit_display
+import mnit::display
 
 in "C header" `{
 	#include <EGL/egl.h>

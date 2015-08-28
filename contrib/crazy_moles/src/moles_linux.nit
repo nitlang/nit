@@ -16,7 +16,7 @@
 
 module moles_linux
 
-import mnit_linux
+import mnit::linux
 
 import moles
 import effects
