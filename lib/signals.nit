@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Module to manage standard C signals
+# ANSI C signal handling
 #
 # Common usage imply 5 steps:
 #

@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Add reading and writing binary services
+# Read and write binary data with any `Reader` and `Writer`
 #
 # ~~~
 # var w = new FileWriter.open("/tmp/data.bin")

@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Provides the noise generators `PerlinNoise` and `InterpolatedNoise`
+# Noise generators `PerlinNoise` and `InterpolatedNoise`
 module noise is serialize
 
 import serialization

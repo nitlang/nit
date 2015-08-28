@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Offers features to interface with C++ code and libraries
+# Services for compatibility with C++ code and libraries
 module cpp is
 	new_annotation cppflags
 end

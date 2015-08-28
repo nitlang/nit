@@ -14,8 +14,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Utilities and performant structure for the FFI with C
+# Structures and services for compatibility with the C language
 module c
+
 import core
 intrude import core::collection::array
 

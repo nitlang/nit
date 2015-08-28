@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Implements the md5 function in C
+# Native MD5 digest implementation as `Text::md5`
 module md5
 
 in "C Header" `{
@@ -489,7 +489,7 @@ in "C Header" `{
 	}
 `}
 
-redef class String
+redef class Text
 	# MD5 digest of `self`
 	#
 	# ~~~

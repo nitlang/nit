@@ -14,7 +14,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Curl services: `CurlHTTPRequest` and `CurlMail`
+# Data transfer with URL syntax
+#
+# Download or upload over HTTP with `CurlHTTPRequest` and send emails with `CurlMail`.
 module curl
 
 import native_curl

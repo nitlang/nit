@@ -14,8 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# EGL is an interface between the rendering APIs OpenGL, OpenGL ES, etc.
-# and the native windowing system.
+# Interface between rendering APIs (OpenGL, OpenGL ES, etc.) and the native windowing system.
 #
 # Most services of this module are a direct wrapper of the underlying
 # C library. If a method or class is not documented in Nit, refer to

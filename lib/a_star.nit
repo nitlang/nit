@@ -14,9 +14,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Services related to pathfinding of graphs using A*
-# A single graph may have different properties according to the `PathContext` used
+# A* pathfinding in graphs
 #
+# A single graph may have different properties according to the `PathContext` used
 #
 # Usage:
 #

@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# SDL display support (used in Linux for windows and inputes only)
+# Simple DirectMedia Layer
 module sdl is
 	cflags exec("sdl-config", "--cflags")
 	ldflags(exec("sdl-config", "--libs"), "-lSDL_image -lSDL_ttf")

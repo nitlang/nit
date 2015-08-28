@@ -14,12 +14,15 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Provides basic game logic utilities using buckets to coordinate and
-# optimize actions on game turn ends. Supports both action at each
-# end of turn as well as actions on some end of turns.
+# Game framework with an emphasis on efficient event coordination
 #
-# Allows for fast support of a large number of entities with rare actions,
-# such as a forest with many individual trees.
+# Provides basic game logic entities to manage a game where the logic is executed by turns:
+# `Game`, `GameTurn`, `GameEvent`, `Turnable`.
+# Also offers a bucket system to plan future events at a known number of turns in the future:
+# `Bucketable` and the services `act_next` and `act_in`.
+#
+# Efficiently support large number of entities with rare or sparse actions,
+# such as a forest with many individual trees growing slowly.
 module bucketed_game is serialize
 
 import serialization

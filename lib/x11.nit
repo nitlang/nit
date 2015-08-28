@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Serices from the X11 library
+# Services from the X11 library
 module x11 is pkgconfig
 
 `{
@@ -31,7 +31,7 @@ fun x_open_default_display: Pointer `{
 # Open a specific display
 #
 # `name` is in the format: "hostname:number.screen_number"
-# 
+#
 # See <http://www.x.org/releases/X11R7.7/doc/man/man3/XOpenDisplay.3.xhtml>
 fun x_open_display(name: String): Pointer import String.to_cstring `{
 	return (void*)XOpenDisplay(String_to_cstring(name));
