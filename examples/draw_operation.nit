@@ -14,7 +14,36 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Draws an arithmetic operation to the terminal
+# Sample program which draws an arithmetic operation to the terminal
+#
+# Output (and input) example:
+# ~~~nitish
+# Left operand: 23
+# Right operand: 15
+# Operator (+, -, *, /, %): +
+# Char to display: #
+# Size of text: 5
+# Space between digits: 1
+#       ##### #####
+#           #     #
+#       ##### #####
+#       #         #
+#       ##### #####
+#
+#         #   #####
+#   +    ##   #
+# +++++   #   #####
+#   +     #       #
+#       ##### #####
+#
+# __________________
+#
+#       ##### #####
+#           # #   #
+#       ##### #####
+#           # #   #
+#       ##### #####
+# ~~~
 module draw_operation
 
 `{
