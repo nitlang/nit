@@ -626,7 +626,7 @@ class FlatBuffer
 	do
 		written = true
 		if bytelen == 0 then items = new NativeString(1)
-		return new FlatString.with_infos(items, bytelen, 0, bytelen - 1)
+		return new FlatString.full(items, bytelen, 0, bytelen - 1, length)
 	end
 
 	redef fun to_cstring
@@ -737,7 +737,7 @@ class FlatBuffer
 
 	redef fun times(repeats)
 	do
-		var x = new FlatString.with_infos(items, bytelen, 0, bytelen - 1)
+		var x = new FlatString.full(items, bytelen, 0, bytelen - 1, length)
 		for i in [1 .. repeats[ do
 			append(x)
 		end
@@ -920,6 +920,10 @@ redef class NativeString
 		assert length >= 0
 		var str = new FlatString.with_infos(self, length, 0, length - 1)
 		return str
+	end
+
+	redef fun to_s_full(bytelen, unilen) do
+		return new FlatString.full(self, bytelen, 0, bytelen - 1, unilen)
 	end
 
 	# Returns `self` as a new String.

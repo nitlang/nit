@@ -1808,6 +1808,12 @@ redef class NativeString
 
 	# Returns `self` as a String of `length`.
 	fun to_s_with_length(length: Int): String is abstract
+
+	# Returns `self` as a String with `bytelen` and `length` set
+	#
+	# SEE: `abstract_text::Text` for more infos on the difference
+	# between `Text::bytelen` and `Text::length`
+	fun to_s_full(bytelen, unilen: Int): String is abstract
 end
 
 redef class NativeArray[E]
