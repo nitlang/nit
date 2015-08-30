@@ -171,7 +171,7 @@ class Benitlux
 	# Generate email and fill the attributes `email_content` and `email_title`
 	fun generate_email(beer_events: BeerEvents)
 	do
-		email_title = beer_events.to_email_title
+		email_title = "Benitlux {street.capitalized}{beer_events.to_email_title}"
 		email_content = beer_events.to_email_content
 	end
 
