@@ -616,8 +616,7 @@ class WikiConfig
 
 	# Returns the config value at `key` or return `default` if no key was found.
 	private fun value_or_default(key: String, default: String): String do
-		if not has_key(key) then return default
-		return self[key]
+		return self[key] or else default
 	end
 
 	# Site name displayed.
