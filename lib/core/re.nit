@@ -355,6 +355,7 @@ class Regex
 	#     assert "el+o".to_re.search_in("hello world", 0).from == 1
 	#     assert "l+".to_re.search_in("hello world", 3).from == 3
 	#     assert "z".to_re.search_in("hello world", 0) == null
+	#     assert "cd(e)".to_re.search_in("abcdef", 2)[1].to_s == "e"
 	redef fun search_in(text, from)
 	do
 		assert not optimize_has
@@ -378,19 +379,19 @@ class Regex
 
 		# Found one?
 		if res == 0 then
-			var bso = bstr.byte_to_char_index(native_match.rm_so)
-			var ln = bstr.byte_to_char_index(native_match.rm_eo - native_match.rm_so - 1)
+			var first_char = bstr.byte_to_char_index(native_match.rm_so)
+			var last_char = bstr.byte_to_char_index(native_match.rm_eo - native_match.rm_so - 1)
 			var match = new Match(text,
-				from + bso,
-				ln + 1)
+				from + first_char,
+				last_char + 1)
 
 			# Add sub expressions
 			for i in [1 .. nsub] do
-				bso = bstr.byte_to_char_index(native_match[i].rm_so)
-				ln = bstr.byte_to_char_index(native_match[i].rm_eo - native_match[i].rm_so - 1)
+				first_char = bstr.byte_to_char_index(native_match[i].rm_so)
+				last_char = bstr.byte_to_char_index(native_match[i].rm_eo - native_match[i].rm_so - 1)
 				match.subs.add new Match( text,
-					bso ,
-					ln + 1)
+					from + first_char,
+					last_char + 1)
 			end
 
 			return match
