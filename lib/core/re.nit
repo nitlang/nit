@@ -272,6 +272,9 @@ class Regex
 
 	private fun get_error(errcode: Int): String
 	do
+		var native = native
+		assert native != null
+
 		# Error, should be out of memory but we cover any possible error anyway
 		var error_cstr = native.regerror(errcode)
 
@@ -290,6 +293,9 @@ class Regex
 	do
 		var comp_res = compile
 		assert comp_res == null else "Regex compilation failed with: {comp_res.message}\n".output
+
+		var native = native
+		assert native != null
 
 		# Actually execute
 		var eflags = gather_eflags
@@ -319,6 +325,9 @@ class Regex
 
 		var comp_res = compile
 		assert comp_res == null else "Regex compilation failed with: {comp_res.message}\n".output
+
+		var native = native
+		assert native != null
 
 		# Actually execute
 		text = text.to_s
@@ -352,6 +361,9 @@ class Regex
 
 		var comp_res = compile
 		assert comp_res == null else "Regex compilation failed with: {comp_res.message}\n".output
+
+		var native = native
+		assert native != null
 
 		# Actually execute
 		text = text.to_s
@@ -403,6 +415,9 @@ class Regex
 
 		var comp_res = compile
 		assert comp_res == null else "Regex compilation failed with: {comp_res.message}\n".output
+
+		var native = native
+		assert native != null
 
 		# Actually execute
 		text = text.to_s
