@@ -71,16 +71,14 @@ class BeerEvents
 	# Get a pretty and short version of `self`
 	fun to_email_title: String
 	do
-		var title = "Benelux Beer Menu"
-
 		# New beers
 		var new_beers_name = new Array[String]
 		for beer in self.new_beers do new_beers_name.add beer.name
 
 		if not new_beers_name.is_empty then
-			title += " (+ {new_beers_name.join(", ")})"
+			return " (+ {new_beers_name.join(", ")})"
 		end
 
-		return title
+		return ""
 	end
 end

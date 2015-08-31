@@ -171,7 +171,7 @@ class Benitlux
 	# Generate email and fill the attributes `email_content` and `email_title`
 	fun generate_email(beer_events: BeerEvents)
 	do
-		email_title = beer_events.to_email_title
+		email_title = "Benitlux {street.capitalized}{beer_events.to_email_title}"
 		email_content = beer_events.to_email_content
 	end
 
@@ -189,6 +189,8 @@ To unsubscribe, go to <a href="{{{unsub_link}}}">{{{unsub_link}}}</a>
 			var mail = new Mail("Benitlux <benitlux@xymus.net>", email_title, content)
 			mail.to.add email
 			mail.header["Content-Type"] = "text/html; charset=\"UTF-8\""
+			mail.header["List-Unsubscribe"] = unsub_link
+			mail.header["Precedence"] = "bulk"
 			mail.encrypt_with_base64
 
 			mail.send
