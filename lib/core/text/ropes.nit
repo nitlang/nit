@@ -89,13 +89,13 @@ private class Concat
 	var flat_last_pos_start: Int = -1
 
 	redef var to_cstring is lazy do
-		var len = bytelen
+		var len = _bytelen
 		var ns = new NativeString(len + 1)
 		ns[len] = 0u8
 		var off = 0
 		for i in substrings do
-			var ilen = i.bytelen
-			i.as(FlatString).items.copy_to(ns, ilen, i.as(FlatString).first_byte, off)
+			var ilen = i._bytelen
+			i.as(FlatString)._items.copy_to(ns, ilen, i.as(FlatString)._first_byte, off)
 			off += ilen
 		end
 		return ns
@@ -107,13 +107,15 @@ private class Concat
 	var right: String
 
 	init do
-		length = left.length + right.length
-		bytelen = left.bytelen + right.bytelen
+		var l = _left
+		var r = _right
+		length = l.length + r.length
+		_bytelen = l.bytelen + r.bytelen
 	end
 
 	redef fun output do
-		left.output
-		right.output
+		_left.output
+		_right.output
 	end
 
 	redef fun iterator do return new RopeCharIterator(self)
@@ -134,13 +136,13 @@ private class Concat
 		loop
 			if s isa FlatString then break
 			s = s.as(Concat)
-			var lft = s.left
+			var lft = s._left
 			var llen = lft.length
 			if i >= llen then
-				s = s.right
+				s = s._right
 				i -= llen
 			else
-				s = s.left
+				s = lft
 			end
 		end
 		flat_last_pos_start = st - i
@@ -149,28 +151,30 @@ private class Concat
 	end
 
 	redef fun substring(from, len) do
-		var llen = left.length
+		var lft = _left
+		var llen = lft.length
 		if from < llen then
-			if from + len < llen then return left.substring(from,len)
+			if from + len < llen then return lft.substring(from,len)
 			var lsublen = llen - from
-			return left.substring_from(from) + right.substring(0, len - lsublen)
+			return lft.substring_from(from) + _right.substring(0, len - lsublen)
 		else
-			return right.substring(from - llen, len)
+			return _right.substring(from - llen, len)
 		end
 	end
 
-	redef fun reversed do return new Concat(right.reversed, left.reversed)
+	redef fun reversed do return new Concat(_right.reversed, _left.reversed)
 
 	redef fun insert_at(s, pos) do
-		if pos > left.length then
-			return left + right.insert_at(s, pos - left.length)
+		var lft = _left
+		if pos > lft.length then
+			return lft + _right.insert_at(s, pos - lft.length)
 		end
-		return left.insert_at(s, pos) + right
+		return lft.insert_at(s, pos) + _right
 	end
 
-	redef fun to_upper do return new Concat(left.to_upper, right.to_upper)
+	redef fun to_upper do return new Concat(_left.to_upper, _right.to_upper)
 
-	redef fun to_lower do return new Concat(left.to_lower, right.to_lower)
+	redef fun to_lower do return new Concat(_left.to_lower, _right.to_lower)
 
 	redef fun +(o) do
 		var s = o.to_s
@@ -178,10 +182,10 @@ private class Concat
 		if s isa Concat then
 			return new Concat(self, s)
 		else
-			var r = right
+			var r = _right
 			var rlen = r.bytelen
 			if rlen + slen > maxlen then return new Concat(self, s)
-			return new Concat(left, r + s)
+			return new Concat(_left, r + s)
 		end
 	end
 
@@ -193,11 +197,11 @@ private class Concat
 			var it = subs.item
 			if n > it.length then
 				var cplen = it.length - st
-				it.items.copy_to(dest, cplen, st, off)
+				it._items.copy_to(dest, cplen, st, off)
 				off += cplen
 				n -= cplen
 			else
-				it.items.copy_to(dest, n, st, off)
+				it._items.copy_to(dest, n, st, off)
 				n = 0
 			end
 			subs.next
@@ -220,10 +224,10 @@ private class Concat
 			end
 			if not iter.ldone then
 				iter.ldone = true
-				iter = new RopeCharIteratorPiece(rnod.left, false, false, iter)
+				iter = new RopeCharIteratorPiece(rnod._left, false, false, iter)
 			else if not iter.rdone then
 				iter.rdone = true
-				iter = new RopeCharIteratorPiece(rnod.right, false, false, iter)
+				iter = new RopeCharIteratorPiece(rnod._right, false, false, iter)
 			else
 				iter = iter.prev
 			end
@@ -325,7 +329,7 @@ class RopeBuffer
 		self.str = str
 		ns = new NativeString(maxlen)
 		buf_size = maxlen
-		bytelen = str.length
+		_bytelen = str.length
 		dumped = 0
 	end
 
@@ -356,7 +360,7 @@ class RopeBuffer
 		assert i >= 0 and i <= length
 		if i == length then add c
 		if i < str.length then
-			bytelen += c.u8char_len - str[i].u8char_len
+			_bytelen += c.u8char_len - str[i].u8char_len
 			var s = str
 			var l = s.substring(0, i)
 			var r = s.substring_from(i + 1)
@@ -379,7 +383,7 @@ class RopeBuffer
 				else
 					ns.copy_to(ns, rpos - st_nxt, st_nxt, st_nxt + delta)
 				end
-				bytelen += delta
+				_bytelen += delta
 				rpos += delta
 			end
 			ns.set_char_at(index, c)
@@ -390,7 +394,7 @@ class RopeBuffer
 
 	redef fun clear do
 		str = ""
-		bytelen = 0
+		_bytelen = 0
 		rpos = 0
 		dumped = 0
 		if written then
@@ -438,7 +442,7 @@ class RopeBuffer
 			return
 		end
 		if s isa FlatText then
-			var oits = s.items
+			var oits = s._items
 			var from = s.first_byte
 			var remsp = buf_size - rpos
 			if slen <= remsp then
@@ -466,7 +470,7 @@ class RopeBuffer
 		# TODO: Fix when supporting UTF-8
 		ns[rp] = c.ascii.to_b
 		rp += 1
-		bytelen += 1
+		_bytelen += 1
 		rpos = rp
 	end
 
@@ -546,25 +550,25 @@ redef class FlatString
 	redef fun +(o) do
 		var s = o.to_s
 		var slen = s.bytelen
-		var mlen = bytelen
+		var mlen = _bytelen
 		if slen == 0 then return self
 		if mlen == 0 then return s
 		var nlen = slen + mlen
 		if s isa FlatString then
 			if nlen > maxlen then return new Concat(self, s)
-			var mits = items
-			var sifrom = s.first_byte
-			var mifrom = first_byte
-			var sits = s.items
+			var mits = _items
+			var sifrom = s._first_byte
+			var mifrom = _first_byte
+			var sits = s._items
 			var ns = new NativeString(nlen + 1)
 			mits.copy_to(ns, mlen, mifrom, 0)
 			sits.copy_to(ns, slen, sifrom, mlen)
 			return new FlatString.full(ns, nlen, 0, nlen - 1, length + s.length)
 		else if s isa Concat then
-			var sl = s.left
+			var sl = s._left
 			var sllen = sl.bytelen
 			if sllen + mlen > maxlen then return new Concat(self, s)
-			return new Concat(self + sl, s.right)
+			return new Concat(self + sl, s._right)
 		else
 			abort
 		end
@@ -575,9 +579,9 @@ end
 private class RopeCharIteratorPiece
 	# The encapsulated node of the `Rope`
 	var node: String
-	# Was its left child (if any) visited ?
+	# Was its _left child (if any) visited ?
 	var ldone: Bool
-	# Was its right child (if any) visited ?
+	# Was its _right child (if any) visited ?
 	var rdone: Bool
 	# The previous node in the list.
 	var prev: nullable RopeCharIteratorPiece
@@ -598,18 +602,18 @@ private class RopeByteReverseIterator
 	var subs: IndexedIterator[FlatString]
 
 	init(root: Concat) is old_style_init do
-		pos = root.bytelen - 1
+		pos = root._bytelen - 1
 		subs = new ReverseRopeSubstrings(root)
 		var s = subs.item
-		ns = s.items
-		pns = s.last_byte
+		ns = s._items
+		pns = s._last_byte
 	end
 
 	init from(root: Concat, pos: Int) do
 		self.pos = pos
 		subs = new ReverseRopeSubstrings.from(root, pos)
 		var s = subs.item
-		ns = s.items
+		ns = s._items
 		pns = pos - subs.index
 	end
 
@@ -627,8 +631,8 @@ private class RopeByteReverseIterator
 		subs.next
 		if not subs.is_ok then return
 		var s = subs.item
-		ns = s.items
-		pns = s.last_byte
+		ns = s._items
+		pns = s._last_byte
 	end
 end
 
@@ -650,7 +654,7 @@ private class RopeByteIterator
 	init(root: Concat) is old_style_init do
 		subs = new RopeSubstrings(root)
 		pns = 0
-		ns = subs.item.items
+		ns = subs.item._items
 		max = root.length - 1
 		pos = 0
 	end
@@ -659,7 +663,7 @@ private class RopeByteIterator
 		subs = new RopeSubstrings.from(root, pos)
 		pns = pos - subs.index
 		self.pos = pos
-		ns = subs.item.items
+		ns = subs.item._items
 		max = root.length - 1
 	end
 
@@ -672,11 +676,11 @@ private class RopeByteIterator
 	redef fun next do
 		pns += 1
 		pos += 1
-		if pns < subs.item.bytelen then return
+		if pns < subs.item._bytelen then return
 		if not subs.is_ok then return
 		subs.next
 		if not subs.is_ok then return
-		ns = subs.item.items
+		ns = subs.item._items
 		pns = 0
 	end
 end
@@ -795,7 +799,7 @@ private class ReverseRopeSubstrings
 		var lnod: String = root
 		loop
 			if lnod isa Concat then
-				lnod = lnod.right
+				lnod = lnod._right
 				r = new RopeCharIteratorPiece(lnod, false, true, r)
 			else
 				str = lnod.as(FlatString)
@@ -811,13 +815,13 @@ private class ReverseRopeSubstrings
 		var off = pos
 		loop
 			if rnod isa Concat then
-				if off >= rnod.left.length then
-					off -= rnod.left.length
-					rnod = rnod.right
+				if off >= rnod._left.length then
+					off -= rnod._left.length
+					rnod = rnod._right
 					r = new RopeCharIteratorPiece(rnod, false, true, r)
 				else
 					r.ldone = true
-					rnod = rnod.left
+					rnod = rnod._left
 					r = new RopeCharIteratorPiece(rnod, false, true, r)
 				end
 			else
@@ -850,12 +854,12 @@ private class ReverseRopeSubstrings
 			end
 			if not curr.rdone then
 				curr.rdone = true
-				curr = new RopeCharIteratorPiece(currit.right, false, false, curr)
+				curr = new RopeCharIteratorPiece(currit._right, false, false, curr)
 				continue
 			end
 			if not curr.ldone then
 				curr.ldone = true
-				curr = new RopeCharIteratorPiece(currit.left, false, false, curr)
+				curr = new RopeCharIteratorPiece(currit._left, false, false, curr)
 				continue
 			end
 			curr = curr.prev
@@ -918,7 +922,7 @@ private class RopeSubstrings
 		var rnod: String = root
 		loop
 			if rnod isa Concat then
-				rnod = rnod.left
+				rnod = rnod._left
 				r = new RopeCharIteratorPiece(rnod, true, false, r)
 			else
 				str = rnod.as(FlatString)
@@ -936,13 +940,13 @@ private class RopeSubstrings
 		var off = pos
 		loop
 			if rnod isa Concat then
-				if off >= rnod.left.length then
+				if off >= rnod._left.length then
 					r.rdone = true
-					off -= rnod.left.length
-					rnod = rnod.right
+					off -= rnod._left.length
+					rnod = rnod._right
 					r = new RopeCharIteratorPiece(rnod, true, false, r)
 				else
-					rnod = rnod.left
+					rnod = rnod._left
 					r = new RopeCharIteratorPiece(rnod, true, false, r)
 				end
 			else
@@ -975,12 +979,12 @@ private class RopeSubstrings
 				break
 			end
 			if not it.ldone then
-				rnod = rnod.left
+				rnod = rnod._left
 				it.ldone = true
 				it = new RopeCharIteratorPiece(rnod, false, false, it)
 			else if not it.rdone then
 				it.rdone = true
-				rnod = rnod.right
+				rnod = rnod._right
 				it = new RopeCharIteratorPiece(rnod, false, false, it)
 			else
 				it = it.prev
@@ -1016,12 +1020,13 @@ private class RopeBytes
 	redef fun [](i) do
 		var nod: String = target
 		loop
-			if nod isa FlatString then return nod.items[i]
+			if nod isa FlatString then return nod._items[i]
 			if not nod isa Concat then abort
-			if nod.left.bytelen >= i then
-				nod = nod.right
+			var lft = nod._left
+			if lft.bytelen >= i then
+				nod = nod._right
 			else
-				nod = nod.left
+				nod = lft
 			end
 		end
 	end
@@ -1134,7 +1139,7 @@ class RopeBufferByteIterator
 	# Init the iterator from a RopeBuffer.
 	init(t: RopeBuffer) is old_style_init do
 		ns = t.ns
-		maxpos = t.bytelen
+		maxpos = t._bytelen
 		sit = t.str.bytes.iterator
 		pns = t.dumped
 		index = 0
@@ -1143,7 +1148,7 @@ class RopeBufferByteIterator
 	# Init the iterator from a RopeBuffer starting from `pos`.
 	init from(t: RopeBuffer, pos: Int) do
 		ns = t.ns
-		maxpos = t.bytelen
+		maxpos = t._bytelen
 		sit = t.str.bytes.iterator_from(pos)
 		pns = pos - t.str.length
 		index = pos
@@ -1185,7 +1190,7 @@ class RopeBufferByteReverseIterator
 	init(tgt: RopeBuffer) is old_style_init do
 		sit = tgt.str.bytes.reverse_iterator
 		pns = tgt.rpos - 1
-		index = tgt.bytelen - 1
+		index = tgt._bytelen - 1
 		ns = tgt.ns
 	end
 
