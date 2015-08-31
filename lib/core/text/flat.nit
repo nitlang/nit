@@ -41,10 +41,10 @@ redef class FlatText
 	private fun last_byte: Int do return _bytelen - 1
 
 	# Cache of the latest position (char) explored in the string
-	var position: Int = 0
+	private var position: Int = 0
 
 	# Cached position (bytes) in the NativeString underlying the String
-	var bytepos: Int = first_byte is lateinit
+	private var bytepos: Int = 0
 
 	# Index of the character `index` in `_items`
 	private fun char_to_byte_index(index: Int): Int do
@@ -241,6 +241,7 @@ class FlatString
 		self._bytelen = bytelen
 		_first_byte = from
 		_last_byte = to
+		_bytepos = from
 	end
 
 	# Low-level creation of a new string with all the data.
@@ -254,6 +255,7 @@ class FlatString
 		self._bytelen = bytelen
 		_first_byte = from
 		_last_byte = to
+		_bytepos = from
 	end
 
 	redef fun to_cstring do
