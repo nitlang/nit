@@ -16,7 +16,7 @@
 
 # Defines abstract classes for user and general inputs to the application.
 # Implemented independantly for each platforms and technologies.
-module mnit_input
+module input
 
 # Input to the App, propagated through `App::input`.
 interface InputEvent

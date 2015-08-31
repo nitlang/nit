@@ -16,6 +16,6 @@
 module shoot_linux
 
 import shoot
-import mnit_linux
+import mnit::linux
 
 super

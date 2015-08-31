@@ -20,7 +20,7 @@ end
 
 import dino
 
-import mnit_android
+import mnit::android
 import android::portrait
 import android::vibration
 

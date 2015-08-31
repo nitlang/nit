@@ -20,7 +20,7 @@ module android_client is
 	android_api_target 10
 end
 
-import mnit_android
+import mnit::android
 import android::audio
 import android::vibration
 import android::landscape

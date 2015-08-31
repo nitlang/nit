@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# General module for cross-compatibility between multiple platforms
+# Multiplatform game framework for Nit
 module mnit
 
 import mnit_app

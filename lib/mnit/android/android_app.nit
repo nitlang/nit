@@ -21,8 +21,8 @@ module android_app is android_manifest_activity """
 """
 
 import mnit
-import android
 import mnit::opengles1
+import ::android
 intrude import ::android::input_events
 
 in "C" `{

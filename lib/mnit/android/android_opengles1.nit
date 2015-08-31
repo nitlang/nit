@@ -19,7 +19,6 @@
 module android_opengles1 is ldflags "-lEGL -lGLESv1_CM"
 
 import android_app
-import android
 
 in "C" `{
 	#include <android_native_app_glue.h>
