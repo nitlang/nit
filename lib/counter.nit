@@ -266,6 +266,20 @@ class Counter[E]
 		end
 		return res
 	end
+
+	# Prints the content of the counter along with statistics
+	#
+	# Content is printed in order (if available) from lowest to highest on the keys.
+	# Else, it is printed as-is
+	fun print_content do
+		var a = keys.to_a
+		if a isa Array[Comparable] then default_comparator.sort(a)
+		var subtotal = 0
+		for i in a do
+			subtotal += self[i]
+			printn("* ", i or else "null", " = ", self[i], " => occurences ", self[i].to_f / sum.to_f * 100.0, "%, cumulative ", subtotal.to_f / sum.to_f * 100.0, "% \n")
+		end
+	end
 end
 
 redef class Collection[E]
