@@ -119,4 +119,10 @@ class ObjcParam
 
 	# Is this a parameter with only a `name`?
 	var is_single = false is writable
+
+	redef fun to_s
+	do
+		if is_single then return name
+		return "{name}:({return_type}){variable_name}"
+	end
 end

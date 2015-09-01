@@ -195,6 +195,7 @@ end
 
 		file.write """
 
+{{{attribute.doc}}}
 {{{c}}}	fun {{{nit_attr_name}}}: {{{nit_attr_type}}} in "ObjC" `{
 {{{c}}}		return [self {{{attribute.name}}}];
 {{{c}}}	`}
@@ -210,6 +211,7 @@ end
 
 		file.write """
 
+{{{attribute.doc}}}
 {{{c}}}	fun {{{nit_attr_name}}}=(value: {{{nit_attr_type}}}) in "ObjC" `{
 {{{c}}}		return self.{{{attribute.name}}} = value;
 {{{c}}}	`}
@@ -256,6 +258,7 @@ end
 
 		file.write """
 
+{{{method.doc}}}
 {{{c}}}{{{fun_keyword}}} {{{name}}}{{{params_with_par}}}{{{ret}}} in "ObjC" `{
 """
 	end
@@ -324,10 +327,23 @@ redef class ObjcProperty
 	private fun comment_str: String do if is_commented then
 		return "#"
 	else return ""
+
+	# Full documentation to be generated for the Nit code
+	private fun doc: String is abstract
 end
 
 redef class ObjcMethod
 	private fun indent: String do return if is_class_property then "" else "\t"
 
 	redef fun comment_str do return indent + super
+
+	redef fun doc
+	do
+		var recv = if is_class_property then objc_class.name else "self"
+		return "{indent}# Wraps: `[{recv} {params.join(" ")}]`"
+	end
+end
+
+redef class ObjcAttribute
+	redef fun doc do return "\t# Wraps: `{objc_class.name}.{name}`"
 end
