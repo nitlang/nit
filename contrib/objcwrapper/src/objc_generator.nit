@@ -176,7 +176,7 @@ end
 
 			write_method_signature(method, file)
 
-				write_objc_init_call(classe.name, method, file)
+			write_objc_init_call(classe.name, method, file)
 		end
 	end
 

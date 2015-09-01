@@ -45,7 +45,7 @@ redef class Nlines_interface
 		var interface_block = n_interface_block
 		if interface_block == null then return
 
-		# If reopening a class, continue with the exisitng one
+		# If reopening a class, continue with the existing one
 		var c = null
 		for objc_class in v.model.classes do
 			if objc_class.name == n_class.text then
