@@ -131,11 +131,12 @@ extern class {{{classe.name}}} in "ObjC" `{ {{{classe.name}}} * `}
 			write_attribute(attribute, file)
 		end
 
-		# Methods
+		# Instance methods '-'
 		for method in classe.methods do
 			if not model.knows_all_types(method) then method.is_commented = true
 
 			if not opt_init_as_methods.value and method.is_init then continue
+			if method.is_class_property then continue
 
 			write_method_signature(method, file)
 			write_objc_method_call(method, file)
@@ -144,6 +145,14 @@ extern class {{{classe.name}}} in "ObjC" `{ {{{classe.name}}} * `}
 		file.write """
 end
 """
+
+		# Class methods '+'
+		for method in classe.methods do
+			if not method.is_class_property then continue
+
+			write_method_signature(method, file)
+			write_objc_method_call(method, file)
+		end
 	end
 
 	private fun write_constructors(classe: ObjcClass, file: Writer)
@@ -222,6 +231,9 @@ end
 
 		if name == "init" then name = ""
 
+		# If class method, prefix with class name
+		if method.is_class_property then name = "{method.objc_class.name.to_snake_case}_{name}"
+
 		# Kind of method
 		var fun_keyword = "fun"
 		if not opt_init_as_methods.value and method.is_init then
@@ -283,10 +295,14 @@ end
 			else params.add param.name
 		end
 
+		# Receiver, instance or class
+		var recv = "self"
+		if method.is_class_property then recv = method.objc_class.name
+
 		var c = method.comment_str
 
 		file.write """
-{{{c}}}		{{{ret}}}[self {{{params.join(" ")}}}];
+{{{c}}}		{{{ret}}}[{{{recv}}} {{{params.join(" ")}}}];
 {{{c}}}	`}
 
 """
