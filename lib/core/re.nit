@@ -380,18 +380,18 @@ class Regex
 		# Found one?
 		if res == 0 then
 			var first_char = bstr.byte_to_char_index(native_match.rm_so)
-			var last_char = bstr.byte_to_char_index(native_match.rm_eo - native_match.rm_so - 1)
+			var length_char = bstr.byte_to_char_index(native_match.rm_eo - native_match.rm_so - 1) # FIXME For issue #1684
 			var match = new Match(text,
 				from + first_char,
-				last_char + 1)
+				length_char + 1)
 
 			# Add sub expressions
 			for i in [1 .. nsub] do
 				first_char = bstr.byte_to_char_index(native_match[i].rm_so)
-				last_char = bstr.byte_to_char_index(native_match[i].rm_eo - native_match[i].rm_so - 1)
+				length_char = bstr.byte_to_char_index(native_match[i].rm_eo - native_match[i].rm_so - 1) # FIXME For issue #1684
 				match.subs.add new Match( text,
 					from + first_char,
-					last_char + 1)
+					length_char + 1)
 			end
 
 			return match
