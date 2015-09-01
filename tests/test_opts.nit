@@ -36,6 +36,12 @@ for x in ctx.rest do
 	print x
 end
 
+var errors = ctx.errors
+if errors.not_empty then
+	print "Errors: {errors.length}"
+	print ctx.errors.join("\n")
+end
+
 print "OptionBool: {ob.value}"
 print "OptionCount: {oc.value}"
 if os.value == null then os.value = ""
