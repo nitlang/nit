@@ -97,7 +97,7 @@ class CodeGenerator
 		end
 
 		# Generate code
-		file.write "import cocoa::foundation\n\n"
+		file.write "import cocoa::foundation\n"
 		for classe in classes do
 			write_class(classe, file)
 		end
@@ -120,8 +120,6 @@ extern class {{{classe.name}}} in "ObjC" `{ {{{classe.name}}} * `}
 		if classe.super_names.is_empty then file.write """
 	super NSObject
 """
-
-		file.write "\n"
 
 		# Constructor or constructors
 		write_constructors(classe, file)
@@ -160,10 +158,10 @@ end
 		if opt_init_as_methods.value then
 			# A single constructor for `alloc`
 			file.write """
+
 	new in "ObjC" `{
 		return [{{{classe.name}}} alloc];
 	`}
-
 """
 			return
 		end
@@ -196,10 +194,10 @@ end
 		var c = attribute.comment_str
 
 		file.write """
+
 {{{c}}}	fun {{{nit_attr_name}}}: {{{nit_attr_type}}} in "ObjC" `{
 {{{c}}}		return [self {{{attribute.name}}}];
 {{{c}}}	`}
-
 """
 	end
 
@@ -211,10 +209,10 @@ end
 		var c = attribute.comment_str
 
 		file.write """
+
 {{{c}}}	fun {{{nit_attr_name}}}=(value: {{{nit_attr_type}}}) in "ObjC" `{
 {{{c}}}		return self.{{{attribute.name}}} = value;
 {{{c}}}	`}
-
 """
 	end
 
@@ -257,6 +255,7 @@ end
 		end
 
 		file.write """
+
 {{{c}}}{{{fun_keyword}}} {{{name}}}{{{params_with_par}}}{{{ret}}} in "ObjC" `{
 """
 	end
@@ -277,7 +276,6 @@ end
 		file.write """
 {{{c}}}	return [[{{{class_name}}} alloc] {{{params.join(" ")}}}];
 {{{c}}}`}
-
 """
 	end
 
@@ -304,7 +302,6 @@ end
 		file.write """
 {{{c}}}	{{{ret}}}[{{{recv}}} {{{params.join(" ")}}}];
 {{{c}}}`}
-
 """
 	end
 end
