@@ -257,7 +257,7 @@ end
 		end
 
 		file.write """
-{{{c}}}	{{{fun_keyword}}} {{{name}}}{{{params_with_par}}}{{{ret}}} in "ObjC" `{
+{{{c}}}{{{fun_keyword}}} {{{name}}}{{{params_with_par}}}{{{ret}}} in "ObjC" `{
 """
 	end
 
@@ -275,8 +275,8 @@ end
 		var c = method.comment_str
 
 		file.write """
-{{{c}}}		return [[{{{class_name}}} alloc] {{{params.join(" ")}}}];
-{{{c}}}	`}
+{{{c}}}	return [[{{{class_name}}} alloc] {{{params.join(" ")}}}];
+{{{c}}}`}
 
 """
 	end
@@ -302,8 +302,8 @@ end
 		var c = method.comment_str
 
 		file.write """
-{{{c}}}		{{{ret}}}[{{{recv}}} {{{params.join(" ")}}}];
-{{{c}}}	`}
+{{{c}}}	{{{ret}}}[{{{recv}}} {{{params.join(" ")}}}];
+{{{c}}}`}
 
 """
 	end
@@ -327,4 +327,10 @@ redef class ObjcProperty
 	private fun comment_str: String do if is_commented then
 		return "#"
 	else return ""
+end
+
+redef class ObjcMethod
+	private fun indent: String do return if is_class_property then "" else "\t"
+
+	redef fun comment_str do return indent + super
 end
