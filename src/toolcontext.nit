@@ -469,7 +469,7 @@ The Nit language documentation and the source code of its tools and libraries ma
 			exit 0
 		end
 
-		var errors = option_context.get_errors
+		var errors = option_context.errors
 		if not errors.is_empty then
 			for e in errors do print "Error: {e}"
 			print tooldescription
