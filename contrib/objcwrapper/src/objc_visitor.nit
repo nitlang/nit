@@ -75,7 +75,7 @@ redef class Nsignature_block_signature
 	do
 		var method = new ObjcMethod
 		method.return_type = n_signature_return_type.to_type
-		method.scope = if n_scope.is_class_property then '-' else '+'
+		method.is_class_property = n_scope.is_class_property
 
 		for n_param in n_parameter.children do
 			var param = n_param.to_param

@@ -67,8 +67,8 @@ end
 class ObjcMethod
 	super ObjcProperty
 
-	# Scope: '+' for a static class method, and '-' for an instance method
-	var scope: Char is noinit, writable
+	# Is this a static class method declared with '+'? Otherwise it's an instance method.
+	var is_class_property: Bool = false is writable
 
 	# Parameters of the method
 	var params = new Array[ObjcParam]
