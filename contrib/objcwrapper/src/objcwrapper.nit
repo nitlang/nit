@@ -23,12 +23,13 @@ import objc_model
 import objc_generator
 import objc_lexer
 import objc_parser
+import preprocessing
 
 var opt_help = new OptionBool("Show this help message", "-h", "--help")
 
 var opts = new OptionContext
-opts.add_option(opt_help, opt_output, opt_init_as_methods)
-opts.parse(args)
+opts.add_option(opt_help, opt_output, opt_init_as_methods, opt_gcc_options)
+opts.parse args
 
 if opts.errors.not_empty or opts.rest.is_empty or opt_help.value then
 	print """
@@ -42,9 +43,9 @@ end
 
 var v = new ObjcVisitor
 
-for arg in opts.rest do
+for src in opts.rest do
 	# Read input
-	var content = arg.to_path.read_all
+	var content = src.preprocess_content
 
 	# Parse
 	var lexer = new Lexer_objc(content)
