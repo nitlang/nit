@@ -32,7 +32,9 @@ opts.add_option(opt_help, opt_output, opt_init_as_methods, opt_gcc_options)
 opts.parse args
 
 if opts.errors.not_empty or opts.rest.is_empty or opt_help.value then
-	print """
+	if opts.errors.not_empty then print_error opts.errors.join("\n")
+
+	print_error """
 Usage: objcwrapper [options] input_file [other_input_file [...]]
 Options:"""
 	opts.usage
