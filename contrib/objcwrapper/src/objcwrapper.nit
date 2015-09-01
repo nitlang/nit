@@ -58,7 +58,18 @@ for src in opts.rest do
 
 	# Check for errors
 	if root isa NError then
-		print_error "Syntax Error: {root.message}: {root.position or else ""}"
+		var pos = root.position
+		print_error "Syntax Error: {root.message}, at {pos or else ""}"
+		print_error "in {src}"
+		if pos != null then
+			var lines = content.split("\n")
+			for line in [pos.line_start..pos.line_end] do
+				print_error lines[line-1]
+			end
+
+			var ptr = " "*(pos.col_start-1).max(0) + "^"*(pos.col_end-pos.col_start)
+			print_error ptr
+		end
 		continue
 	end
 
