@@ -18,6 +18,8 @@
 # Services to generate extern class `in "Java"`
 module code_generator
 
+import gen_nit
+
 intrude import model
 
 class CodeGenerator
@@ -417,18 +419,12 @@ redef class Sys
 	# List of Nit keywords
 	#
 	# These may also be keywords in Java, but there they would be used capitalized.
-	private var nit_keywords = new HashSet[String].from(["abort", "abstract", "and", "assert",
-		"break", "class", "continue", "do", "else", "end", "enum", "extern", "false", "implies",
-		"import", "init", "interface", "intrude", "if", "in", "is", "isa", "isset", "for", "label",
-		"loop", "module", "new", "not", "null",	"nullable", "or", "package", "private",
-		"protected", "public", "return", "self", "super", "then", "true", "type", "var", "while",
-
-	# Top-level methods
-		"class_name", "get_time", "hash", "inspect", "inspect_head", "is_same_type",
-		"is_same_instance", "object_id", "output", "output_class_name", "sys", "to_s",
-
-	# Pointer or JavaObject methods
-		"free"])
+	private var nit_keywords: Set[String] is lazy do
+		var set = new HashSet[String]
+		set.add_all keywords
+		set.add_all methods_in_pointer
+		return set
+	end
 
 	# Name of methods used at the top-level
 	#
