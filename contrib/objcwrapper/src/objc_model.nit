@@ -93,6 +93,9 @@ end
 
 # Property of an `ObjcClass`
 class ObjcProperty
+	# Introducing class
+	var objc_class: ObjcClass
+
 	# Is this property to be commented out?
 	var is_commented = false is writable
 end

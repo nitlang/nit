@@ -73,7 +73,10 @@ end
 redef class Nsignature_block_signature
 	redef fun accept_objc(v)
 	do
-		var method = new ObjcMethod
+		var c = v.objc_class
+		assert c != null
+
+		var method = new ObjcMethod(c)
 		method.return_type = n_signature_return_type.to_type
 		method.is_class_property = n_scope.is_class_property
 
@@ -94,7 +97,7 @@ redef class Nsignature_block_signature
 			method.params.add param
 		end
 
-		v.objc_class.methods.add method
+		c.methods.add method
 	end
 end
 
@@ -102,11 +105,14 @@ end
 redef class Nproperty_property
 	redef fun accept_objc(v)
 	do
-		var attr = new ObjcAttribute
+		var c = v.objc_class
+		assert c != null
+
+		var attr = new ObjcAttribute(c)
 		attr.return_type = n_type.to_type
 		attr.name = n_left.collect_text
 
-		v.objc_class.attributes.add attr
+		c.attributes.add attr
 	end
 end
 
