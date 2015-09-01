@@ -91,7 +91,7 @@ abstract class Option
 	end
 
 	# Consume parameters for this option
-	protected fun read_param(it: Iterator[String])
+	protected fun read_param(opts: OptionContext, it: Iterator[String])
 	do
 		read = true
 	end
@@ -117,7 +117,7 @@ class OptionBool
 	# Init a new OptionBool with a `help` message and `names`.
 	init(help: String, names: String...) is old_style_init do super(help, false, names)
 
-	redef fun read_param(it)
+	redef fun read_param(opts, it)
 	do
 		super
 		value = true
@@ -132,7 +132,7 @@ class OptionCount
 	# Init a new OptionCount with a `help` message and `names`.
 	init(help: String, names: String...) is old_style_init do super(help, 0, names)
 
-	redef fun read_param(it)
+	redef fun read_param(opts, it)
 	do
 		super
 		value += 1
@@ -147,18 +147,30 @@ abstract class OptionParameter
 	protected fun convert(str: String): VALUE is abstract
 
 	# Is the parameter mandatory?
-	var parameter_mandatory: Bool = true is writable
+	var parameter_mandatory = true is writable
 
-	redef fun read_param(it)
+	redef fun read_param(opts, it)
 	do
 		super
-		if it.is_ok and (it.item.is_empty or it.item.chars.first != '-') then
+
+		var ok = it.is_ok
+		if ok and not parameter_mandatory and not it.item.is_empty and it.item.chars.first == '-' then
+			# The next item may looks like a known command
+			# Only check if `not parameter_mandatory`
+			for opt in opts.options do
+				if opt.names.has(it.item) then
+					# The next item is a known command
+					ok = false
+					break
+				end
+			end
+		end
+
+		if ok then
 			value = convert(it.item)
 			it.next
 		else
-			if parameter_mandatory then
-				errors.add("Parameter expected for option {names.first}.")
-			end
+			errors.add("Parameter expected for option {names.first}.")
 		end
 	end
 end
@@ -337,7 +349,7 @@ class OptionContext
 								it.next
 								next_called = true
 							end
-							option.read_param(it)
+							option.read_param(self, it)
 						end
 					end
 					if not next_called then it.next
@@ -345,7 +357,7 @@ class OptionContext
 					if optmap.has_key(str) then
 						var opt = optmap[str]
 						it.next
-						opt.read_param(it)
+						opt.read_param(self, it)
 					else
 						rest.add(it.item)
 						it.next
