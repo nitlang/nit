@@ -85,7 +85,7 @@ redef class Nsignature_block_signature
 				method.is_commented = true
 
 				# Use a placeholder for easier debugging
-				param = new Param
+				param = new ObjcParam
 				param.name = "UNKNOWN"
 				param.return_type = "UNKNOWN"
 				param.variable_name = "UNKNOWN"
@@ -157,14 +157,14 @@ end
 
 redef class Nparameter
 	# Return null if type is not yet unsupported
-	private fun to_param: nullable Param do return null
+	private fun to_param: nullable ObjcParam do return null
 end
 
 # Parameters with both a public and an internal name
 redef class Nparameter_named
 	redef fun to_param
 	do
-		var param = new Param
+		var param = new ObjcParam
 		param.variable_name = n_right.collect_text
 		param.name = n_left.collect_text
 
@@ -181,7 +181,7 @@ end
 redef class Nparameter_single
 	redef fun to_param
 	do
-		var param = new Param
+		var param = new ObjcParam
 		param.name = n_term.collect_text
 		param.is_single = true
 		return param

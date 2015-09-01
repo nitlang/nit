@@ -307,7 +307,7 @@ redef class Text
 	end
 end
 
-redef class Property
+redef class ObjcProperty
 	private fun comment_str: String do if is_commented then
 		return "#"
 	else return ""
