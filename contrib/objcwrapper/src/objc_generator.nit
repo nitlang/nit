@@ -57,7 +57,10 @@ redef class Sys
 		types["long double"] = "Float"
 
 		types["NSUInteger"] = "Int"
+		types["NSInteger"] = "Int"
+		types["CGFloat"] = "Float"
 		types["BOOL"] = "Bool"
+
 		types["id"] = "NSObject"
 		types["constid"] = "NSObject"
 		types["SEL"] = "NSObject"
