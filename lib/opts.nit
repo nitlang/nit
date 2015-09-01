@@ -281,7 +281,7 @@ class OptionContext
 	var rest = new Array[String]
 
 	# Errors found in the context after parsing
-	var errors = new Array[String]
+	var context_errors = new Array[String]
 
 	private var optmap = new HashMap[String, Option]
 
@@ -372,7 +372,7 @@ class OptionContext
 
 		for opt in options do
 			if opt.mandatory and not opt.read then
-				errors.add("Mandatory option {opt.names.join(", ")} not found.")
+				context_errors.add("Mandatory option {opt.names.join(", ")} not found.")
 			end
 		end
 	end
@@ -387,10 +387,10 @@ class OptionContext
 	end
 
 	# Options parsing errors.
-	fun get_errors: Array[String]
+	fun errors: Array[String]
 	do
 		var errors = new Array[String]
-		errors.add_all(errors)
+		errors.add_all context_errors
 		for o in options do
 			for e in o.errors do
 				errors.add(e)
