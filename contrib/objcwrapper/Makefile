@@ -24,7 +24,7 @@ check: bin/objc_test_parser bin/objcwrapper
 
 # Test on classes of libgnustep-base-dev
 check-gnustep: bin/objcwrapper
-	bin/objcwrapper /usr/include/GNUstep/Foundation/NSArray.h -o tests/nsarray.nit -p "-I /usr/include/GNUstep/ -Wno-deprecated"
+	bin/objcwrapper /usr/include/GNUstep/Foundation/*.h -o tests/gnustep.nit -p "-I /usr/include/GNUstep/ -Wno-deprecated -Wno-cpp"
 	../../bin/nitpick tests/nsarray.nit
 
 # Test on classes of the Apple Foundation framework
