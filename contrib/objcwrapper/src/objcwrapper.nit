@@ -45,6 +45,7 @@ end
 
 var v = new ObjcVisitor
 
+var failed_parsing = new Array[String]
 for src in opts.rest do
 	# Read input
 	var content = src.preprocess_content
@@ -70,6 +71,7 @@ for src in opts.rest do
 			var ptr = " "*(pos.col_start-1).max(0) + "^"*(pos.col_end-pos.col_start)
 			print_error ptr
 		end
+		failed_parsing.add src
 		continue
 	end
 
@@ -79,3 +81,8 @@ end
 
 var g = new CodeGenerator(v.model)
 g.generate
+
+if failed_parsing.not_empty then
+	print_error "Failed to parse {failed_parsing.length}/{opts.rest.length} files:"
+	print_error failed_parsing.join(" ")
+end
