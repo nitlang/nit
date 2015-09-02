@@ -1,7 +1,834 @@
-From 2aa5a435721bb1d414aac9f20bf735c1575f62aa Mon Sep 17 00:00:00 2001
+From 26e974e9b28a11875a792003d07ab6bfd5a1a49c Mon Sep 17 00:00:00 2001
 From: Lucas Bajolet <r4pass@hotmail.com>
-Date: Fri, 21 Aug 2015 15:52:19 -0400
-Subject: [PATCH] lib: Added BufferedNativeString for faster concatenation
+Date: Wed, 2 Sep 2015 15:59:01 -0400
+Subject: [PATCH 1/3] lib: Added BufferedNativeString for faster concatenation
+
+Signed-off-by: Lucas Bajolet <r4pass@hotmail.com>
+---
+ lib/core/text/native.nit           | 73 ++++++++++++++++++++++++++++++++++++++
+ src/compiler/abstract_compiler.nit | 31 ++++++++++++++++
+ src/compiler/global_compiler.nit   |  1 +
+ src/compiler/separate_compiler.nit |  4 ++-
+ 4 files changed, 108 insertions(+), 1 deletion(-)
+
+diff --git a/lib/core/text/native.nit b/lib/core/text/native.nit
+index 11c8d34..cd39ca6 100644
+--- a/lib/core/text/native.nit
++++ b/lib/core/text/native.nit
+@@ -174,3 +174,76 @@ extern class NativeString `{ char* `}
+ 		return endpos
+ 	end
+ end
++
++# Special kind of NativeString with a buffer-like function
++extern class BufferedNativeString
++
++	# Creates a new instance with a length of `len`
++	new(len: Int) do
++		var s = new BufferedNativeString.empty
++		s.items = new NativeString(len)
++		s.pos = 0
++		s.length = len
++		return s
++	end
++
++	# Creates a new empty Buffer (null attributes)
++	private new empty is intern
++
++	# Creates a new Buffer with all informations set
++	new from(its: NativeString, pos: Int, len: Int) do
++		var s = new BufferedNativeString.empty
++		s.items = its
++		s.pos = pos
++		s.length = len
++		return s
++	end
++
++	# The NativeString inside of `self`
++	fun items: NativeString is intern
++
++	# The NativeString inside of `self`, should not be changed
++	private fun items=(n: NativeString) is intern
++
++	# Position of the next free space in `self`
++	fun pos: Int is intern
++
++	# Sets the position of the next free space in `self`
++	protected fun pos=(v: Int) is intern
++
++	# Length of the buffer
++	fun length: Int is intern
++
++	# Length of the buffer, should not be changed
++	private fun length=(l: Int) is intern
++
++	# Gets the byte at position `pos`
++	fun [](pos: Int): Byte is intern
++
++	# Appends a NativeString's content to `self`
++	fun append(ns: NativeString, from, length: Int) do
++		ns.copy_to(items, length, from, pos)
++		pos += length
++	end
++
++	# Add a byte after `self`
++	fun add(b: Byte) do
++		items[pos] = b
++		pos += 1
++	end
++
++	# Gets the remaining space in self
++	fun remaining_space: Int do return length - pos
++
++	# Alias of `NativeString`.`length_of_char_at`
++	fun length_of_char_at(p: Int): Int do return items.length_of_char_at(p)
++
++	# Gets the char at `pos` in the underlying string
++	fun char_at(p: Int): Char do return items.char_at(p)
++
++	fun find_beginning_of_char_at(p: Int): Int do return items.find_beginning_of_char_at(p)
++
++	fun char_to_byte_index_cached(ind, n, m: Int): Int do return items.char_to_byte_index_cached(ind, n, m)
++
++	fun fast_cstring(first_byte: Int): NativeString do return items.fast_cstring(first_byte)
++end
+diff --git a/src/compiler/abstract_compiler.nit b/src/compiler/abstract_compiler.nit
+index 2f83449..9c20568 100644
+--- a/src/compiler/abstract_compiler.nit
++++ b/src/compiler/abstract_compiler.nit
+@@ -1961,6 +1961,8 @@ redef class MClassType
+ 			return "uint32_t"
+ 		else if mclass.name == "NativeString" then
+ 			return "char*"
++		else if mclass.name == "BufferedNativeString" then
++			return "native_buffer*"
+ 		else if mclass.name == "NativeArray" then
+ 			return "val*"
+ 		else
+@@ -2003,6 +2005,8 @@ redef class MClassType
+ 			return "u32"
+ 		else if mclass.name == "NativeString" then
+ 			return "str"
++		else if mclass.name == "BufferedNativeString" then
++			return "bstr"
+ 		else if mclass.name == "NativeArray" then
+ 			#return "{self.arguments.first.ctype}*"
+ 			return "val"
+@@ -2462,6 +2466,33 @@ redef class AMethPropdef
+ 				v.ret(v.new_expr("(char*)nit_alloc({arguments[1]})", ret.as(not null)))
+ 				return true
+ 			end
++		else if cname == "BufferedNativeString" then
++			if pname == "[]" then
++				v.ret(v.new_expr("(unsigned char)((int){arguments[0]}->items[{arguments[1]}])", ret.as(not null)))
++				return true
++			else if pname == "items" then
++				v.ret(v.new_expr("{arguments[0]}->items", ret.as(not null)))
++				return true
++			else if pname == "items=" then
++				v.add("{arguments[0]}->items = {arguments[1]};")
++				return true
++			else if pname == "pos" then
++				v.ret(v.new_expr("{arguments[0]}->pos", ret.as(not null)))
++				return true
++			else if pname == "pos=" then
++				v.add("{arguments[0]}->pos = {arguments[1]};")
++				return true
++			else if pname == "length" then
++				v.ret(v.new_expr("{arguments[0]}->length", ret.as(not null)))
++				return true
++			else if pname == "length=" then
++				v.add("{arguments[0]}->length = {arguments[1]};")
++				return true
++			else if pname == "empty" then
++				v.ret(v.new_expr("(native_buffer*)nit_alloc(sizeof(native_buffer))", ret.as(not null)))
++				return true
++			end
++
+ 		else if cname == "NativeArray" then
+ 			v.native_array_def(pname, ret, arguments)
+ 			return true
+diff --git a/src/compiler/global_compiler.nit b/src/compiler/global_compiler.nit
+index 49671f9..181e9d1 100644
+--- a/src/compiler/global_compiler.nit
++++ b/src/compiler/global_compiler.nit
+@@ -164,6 +164,7 @@ class GlobalCompiler
+ 	# Usualy, all C variables that refers to a Nit object are typed on the abstract struct `val` that contains only the `classid` field.
+ 	redef fun compile_header_structs do
+ 		self.header.add_decl("typedef struct \{int classid;\} val; /* general C type representing a Nit instance. */")
++		self.header.add_decl("typedef struct \{char* items; long pos; long length;\} native_buffer; /* C-side buffered NativeString */")
+ 	end
+ 
+ 	# Subset of runtime_type_analysis.live_types that contains only primitive types
+diff --git a/src/compiler/separate_compiler.nit b/src/compiler/separate_compiler.nit
+index ff5f3ba..90c40a2 100644
+--- a/src/compiler/separate_compiler.nit
++++ b/src/compiler/separate_compiler.nit
+@@ -217,6 +217,8 @@ class SeparateCompiler
+ 		self.compile_header_attribute_structs
+ 		self.header.add_decl("struct class \{ int box_kind; nitmethod_t vft[]; \}; /* general C type representing a Nit class. */")
+ 
++		self.header.add_decl("typedef struct \{char* items; long pos; long length;\} native_buffer; /* C-side buffered NativeString */")
++
+ 		# With resolution_table_table, all live type resolution are stored in a big table: resolution_table
+ 		self.header.add_decl("struct type \{ int id; const char *name; int color; short int is_nullable; const struct types *resolution_table; int table_size; int type_table[]; \}; /* general C type representing a Nit type. */")
+ 		self.header.add_decl("struct instance \{ const struct type *type; const struct class *class; nitattribute_t attrs[]; \}; /* general C type representing a Nit instance. */")
+@@ -253,7 +255,7 @@ class SeparateCompiler
+ 		# Collect all bas box class
+ 		# FIXME: this is not completely fine with a separate compilation scheme
+ 		for classname in ["Int", "Bool", "Byte", "Char", "Float", "NativeString",
+-		                 "Pointer", "Int8", "Int16", "UInt16", "Int32", "UInt32"] do
++		                 "Pointer", "Int8", "Int16", "UInt16", "Int32", "UInt32", "BufferedNativeString"] do
+ 			var classes = self.mainmodule.model.get_mclasses_by_name(classname)
+ 			if classes == null then continue
+ 			assert classes.length == 1 else print classes.join(", ")
+-- 
+1.9.1
+
+
+From bd194b6183acba45656334828a56bef1de33aa74 Mon Sep 17 00:00:00 2001
+From: Lucas Bajolet <r4pass@hotmail.com>
+Date: Wed, 2 Sep 2015 16:01:06 -0400
+Subject: [PATCH 2/3] lib/: Update lib to use BufferedNative
+
+Signed-off-by: Lucas Bajolet <r4pass@hotmail.com>
+---
+ lib/core/bytes.nit              |  26 +++++++---
+ lib/core/file.nit               |   2 +-
+ lib/core/re.nit                 |   4 +-
+ lib/core/stream.nit             |   6 ++-
+ lib/core/text/abstract_text.nit |  19 -------
+ lib/core/text/flat.nit          | 106 +++++++++++++++++++++++++---------------
+ lib/core/text/ropes.nit         |  70 +++++++++++++++++---------
+ lib/websocket/websocket.nit     |   4 +-
+ 8 files changed, 144 insertions(+), 93 deletions(-)
+
+diff --git a/lib/core/bytes.nit b/lib/core/bytes.nit
+index 59c4c5f..1d422d7 100644
+--- a/lib/core/bytes.nit
++++ b/lib/core/bytes.nit
+@@ -150,7 +150,8 @@ class Bytes
+ 			b = clean_utf8
+ 			persisted = false
+ 		end
+-		return new FlatString.with_infos(b.items, b.length, 0, b.length -1)
++		var nns = new BufferedNativeString.from(b.items, b.length, b.capacity)
++		return new FlatString.with_infos(nns, length, 0, length -1)
+ 	end
+ 
+ 	redef fun iterator do return new BytesIterator.with_buffer(self)
+@@ -257,15 +258,28 @@ redef class Text
+ 	fun append_to_bytes(b: Bytes) do
+ 		for s in substrings do
+ 			var from = if s isa FlatString then s.first_byte else 0
+-			b.append_ns_from(s.items, s.bytelen, from)
++			var ns = if s isa FlatString then s.items.items else s.as(FlatBuffer).items
++			b.append_ns_from(ns, s.bytelen, from)
+ 		end
+ 	end
+ end
+ 
+-redef class FlatText
+-	redef fun append_to_bytes(b) do
+-		var from = if self isa FlatString then first_byte else 0
+-		b.append_ns_from(items, bytelen, from)
++redef class FlatString
++	redef fun to_bytes do
++		var len = bytelen
++		var b = new Bytes.with_capacity(len)
++		var from = first_byte
++		b.append_ns_from(items.items, len, from)
++		return b
++	end
++end
++
++redef class FlatBuffer
++	redef fun to_bytes do
++		var len = bytelen
++		var b = new Bytes.with_capacity(len)
++		b.append_ns_from(items, len, 0)
++		return b
+ 	end
+ end
+ 
+diff --git a/lib/core/file.nit b/lib/core/file.nit
+index aba34e8..dc1e84a 100644
+--- a/lib/core/file.nit
++++ b/lib/core/file.nit
+@@ -1263,7 +1263,7 @@ end
+ redef class FlatString
+ 	redef fun write_native_to(s)
+ 	do
+-		s.write_native(items, first_byte, bytelen)
++		s.write_native(items.items, first_byte, bytelen)
+ 	end
+ end
+ 
+diff --git a/lib/core/re.nit b/lib/core/re.nit
+index c37bf25..9afd7a5 100644
+--- a/lib/core/re.nit
++++ b/lib/core/re.nit
+@@ -370,7 +370,9 @@ class Regex
+ 		text = text.to_s
+ 		var sub = text.substring_from(from)
+ 		var cstr = sub.to_cstring
+-		var bstr = new FlatString.full(cstr, sub.bytelen, 0, sub.bytelen - 1, text.length - from)
++		var sbt = sub.bytelen
++		var nns = new BufferedNativeString.from(cstr, sbt, sbt)
++		var bstr = new FlatString.full(nns, sbt, 0, sbt - 1, text.length - from)
+ 		var eflags = gather_eflags
+ 		var native_match = self.native_match
+ 
+diff --git a/lib/core/stream.nit b/lib/core/stream.nit
+index 2db319a..ae6068b 100644
+--- a/lib/core/stream.nit
++++ b/lib/core/stream.nit
+@@ -186,12 +186,14 @@ abstract class Reader
+ 			# if this is the best size or not
+ 			var chunksz = 129
+ 			if chunksz > remsp then
+-				rets += new FlatString.with_infos(sits, remsp, pos, pos + remsp - 1)
++				var nns = new BufferedNativeString.from(sits, remsp, remsp)
++				rets += new FlatString.with_infos(nns, remsp, pos, pos + remsp - 1)
+ 				break
+ 			end
+ 			var st = sits.find_beginning_of_char_at(pos + chunksz - 1)
+ 			var bytelen = st - pos
+-			rets += new FlatString.with_infos(sits, bytelen, pos, st - 1)
++			var nns = new BufferedNativeString.from(sits, chunksz, chunksz)
++			rets += new FlatString.with_infos(nns, bytelen, pos, st - 1)
+ 			pos = st
+ 			remsp -= bytelen
+ 		end
+diff --git a/lib/core/text/abstract_text.nit b/lib/core/text/abstract_text.nit
+index 5cd317c..7b966f5 100644
+--- a/lib/core/text/abstract_text.nit
++++ b/lib/core/text/abstract_text.nit
+@@ -961,12 +961,6 @@ end
+ abstract class FlatText
+ 	super Text
+ 
+-	# Underlying C-String (`char*`)
+-	#
+-	# Warning : Might be void in some subclasses, be sure to check
+-	# if set before using it.
+-	private var items: NativeString is noinit
+-
+ 	# Real items, used as cache for to_cstring is called
+ 	private var real_items: nullable NativeString = null
+ 
+@@ -990,19 +984,6 @@ abstract class FlatText
+ 	redef var length = 0
+ 
+ 	redef var bytelen = 0
+-
+-	redef fun output
+-	do
+-		var i = 0
+-		while i < length do
+-			items[i].output
+-			i += 1
+-		end
+-	end
+-
+-	redef fun copy_to_native(dest, n, src_offset, dest_offset) do
+-		items.copy_to(dest, n, src_offset, dest_offset)
+-	end
+ end
+ 
+ # Abstract class for the SequenceRead compatible
+diff --git a/lib/core/text/flat.nit b/lib/core/text/flat.nit
+index 2343f9f..8234c04 100644
+--- a/lib/core/text/flat.nit
++++ b/lib/core/text/flat.nit
+@@ -57,7 +57,7 @@ redef class FlatText
+ 		var delta_end = (ln - 1) - index
+ 		var delta_cache = (position - index).abs
+ 		var min = delta_begin
+-		var its = items
++		var its = if self isa FlatString then items.items else self.as(FlatBuffer).items
+ 
+ 		if delta_cache < min then min = delta_cache
+ 		if delta_end < min then min = delta_end
+@@ -94,7 +94,7 @@ redef class FlatText
+ 		var delta_end = (ln - 1) - index
+ 		var delta_cache = (bytepos - index).abs
+ 		var min = delta_begin
+-		var its = items
++		var its = if self isa FlatString then items.items else self.as(FlatBuffer).items
+ 
+ 		if delta_cache < min then min = delta_cache
+ 		if delta_end < min then min = delta_end
+@@ -121,7 +121,10 @@ redef class FlatText
+ 		return my_i
+ 	end
+ 
+-	redef fun [](index) do return items.char_at(char_to_byte_index(index))
++	redef fun [](index) do
++		var i = if self isa FlatString then items.items else self.as(FlatBuffer).items
++		return i.char_at(char_to_byte_index(index))
++	end
+ end
+ 
+ # Immutable strings of characters.
+@@ -129,6 +132,9 @@ class FlatString
+ 	super FlatText
+ 	super String
+ 
++	# C-side data structure with the bytes of `self`
++	var items: BufferedNativeString
++
+ 	# Index at which `self` begins in `items`, inclusively
+ 	redef var first_byte is noinit
+ 
+@@ -232,7 +238,7 @@ class FlatString
+ 	#
+ 	# `items` will be used as is, without copy, to retrieve the characters of the string.
+ 	# Aliasing issues is the responsibility of the caller.
+-	private init with_infos(items: NativeString, bytelen, from, to: Int)
++	private init with_infos(items: BufferedNativeString, bytelen, from, to: Int)
+ 	do
+ 		self.items = items
+ 		self.bytelen = bytelen
+@@ -244,7 +250,7 @@ class FlatString
+ 	#
+ 	# `items` will be used as is, without copy, to retrieve the characters of the string.
+ 	# Aliasing issues is the responsibility of the caller.
+-	private init full(items: NativeString, bytelen, from, to, length: Int)
++	private init full(items: BufferedNativeString, bytelen, from, to, length: Int)
+ 	do
+ 		self.items = items
+ 		self.length = length
+@@ -256,7 +262,7 @@ class FlatString
+ 	redef fun to_cstring do
+ 		if real_items != null then return real_items.as(not null)
+ 		var new_items = new NativeString(bytelen + 1)
+-		self.items.copy_to(new_items, bytelen, first_byte, 0)
++		self.items.items.copy_to(new_items, bytelen, first_byte, 0)
+ 		new_items[bytelen] = 0u8
+ 		real_items = new_items
+ 		return new_items
+@@ -321,15 +327,14 @@ class FlatString
+ 		var slen = s.bytelen
+ 		var mlen = bytelen
+ 		var nlen = mlen + slen
+-		var mits = items
+-		var mifrom = first_byte
+-		if s isa FlatText then
+-			var sits = s.items
+-			var sifrom = s.first_byte
+-			var ns = new NativeString(nlen + 1)
+-			mits.copy_to(ns, mlen, mifrom, 0)
+-			sits.copy_to(ns, slen, sifrom, mlen)
+-			return new FlatString.full(ns, nlen, 0, nlen - 1, length + o.length)
++		if s isa FlatString then
++			var ns = items
++			if items.remaining_space < s.bytelen then
++				ns = new BufferedNativeString(nlen)
++				ns.append(items.items, first_byte, bytelen)
++			end
++			items.append(s.items.items, s.first_byte, s.bytelen)
++			return new FlatString.full(ns, nlen, 0, nlen - 1, length + s.length)
+ 		else
+ 			abort
+ 		end
+@@ -340,12 +345,9 @@ class FlatString
+ 		var new_bytelen = mybtlen * i
+ 		var mylen = length
+ 		var newlen = mylen * i
+-		var ns = new NativeString(new_bytelen + 1)
+-		ns[new_bytelen] = 0u8
+-		var offset = 0
++		var ns = new BufferedNativeString(new_bytelen)
+ 		while i > 0 do
+-			items.copy_to(ns, bytelen, first_byte, offset)
+-			offset += mybtlen
++			ns.append(items.items, first_byte, bytelen)
+ 			i -= 1
+ 		end
+ 		return new FlatString.full(ns, new_bytelen, 0, new_bytelen - 1, newlen)
+@@ -439,7 +441,7 @@ private class FlatStringByteReverseIterator
+ 
+ 	var target: FlatString
+ 
+-	var target_items: NativeString
++	var target_items: BufferedNativeString
+ 
+ 	var curr_pos: Int
+ 
+@@ -463,7 +465,7 @@ private class FlatStringByteIterator
+ 
+ 	var target: FlatString
+ 
+-	var target_items: NativeString
++	var target_items: BufferedNativeString
+ 
+ 	var curr_pos: Int
+ 
+@@ -514,6 +516,12 @@ class FlatBuffer
+ 	super FlatText
+ 	super Buffer
+ 
++	# Underlying C-String (`char*`)
++	#
++	# Warning : Might be void in some subclasses, be sure to check
++	# if set before using it.
++	private var items: NativeString is noinit
++
+ 	redef var chars: Sequence[Char] = new FlatBufferCharView(self) is lazy
+ 
+ 	redef var bytes = new FlatBufferByteView(self) is lazy
+@@ -532,6 +540,19 @@ class FlatBuffer
+ 
+ 	redef fun substrings do return new FlatSubstringsIter(self)
+ 
++	redef fun output
++	do
++		var i = 0
++		while i < length do
++			items[i].output
++			i += 1
++		end
++	end
++
++	redef fun copy_to_native(dest, n, src_offset, dest_offset) do
++		items.copy_to(dest, n, src_offset, dest_offset)
++	end
++
+ 	# Re-copies the `NativeString` into a new one and sets it as the new `Buffer`
+ 	#
+ 	# This happens when an operation modifies the current `Buffer` and
+@@ -626,7 +647,8 @@ class FlatBuffer
+ 	do
+ 		written = true
+ 		if bytelen == 0 then items = new NativeString(1)
+-		return new FlatString.full(items, bytelen, 0, bytelen - 1, length)
++		var nns = new BufferedNativeString.from(items, bytelen, capacity)
++		return new FlatString.full(nns, bytelen, 0, bytelen - 1, length)
+ 	end
+ 
+ 	redef fun to_cstring
+@@ -663,10 +685,12 @@ class FlatBuffer
+ 	init from(s: Text)
+ 	do
+ 		items = new NativeString(s.bytelen)
+-		if s isa FlatText then
++		if s isa FlatString then
++			items = s.items.items
++		else if s isa FlatBuffer then
+ 			items = s.items
+ 		else
+-			for i in substrings do i.as(FlatString).items.copy_to(items, i.bytelen, 0, 0)
++			for i in substrings do i.as(FlatString).items.items.copy_to(items, i.bytelen, 0, 0)
+ 		end
+ 		bytelen = s.bytelen
+ 		length = s.length
+@@ -689,8 +713,10 @@ class FlatBuffer
+ 		is_dirty = true
+ 		var sl = s.bytelen
+ 		enlarge(bytelen + sl)
+-		if s isa FlatText then
+-			s.items.copy_to(items, sl, s.first_byte, bytelen)
++		if s isa FlatString then
++			s.items.items.copy_to(items, sl, s.first_byte, bytelen)
++		else if s isa FlatBuffer then
++			s.items.copy_to(items, sl, 0, bytelen)
+ 		else
+ 			for i in s.substrings do append i
+ 			return
+@@ -737,7 +763,8 @@ class FlatBuffer
+ 
+ 	redef fun times(repeats)
+ 	do
+-		var x = new FlatString.full(items, bytelen, 0, bytelen - 1, length)
++		var nns = new BufferedNativeString.from(items, bytelen, capacity)
++		var x = new FlatString.full(nns, bytelen, 0, bytelen - 1, length)
+ 		for i in [1 .. repeats[ do
+ 			append(x)
+ 		end
+@@ -918,23 +945,23 @@ redef class NativeString
+ 	redef fun to_s_with_length(length): FlatString
+ 	do
+ 		assert length >= 0
+-		var str = new FlatString.with_infos(self, length, 0, length - 1)
++		var nns = new BufferedNativeString.from(self, length, length)
++		var str = new FlatString.with_infos(nns, length, 0, length - 1)
+ 		return str
+ 	end
+ 
+ 	redef fun to_s_full(bytelen, unilen) do
+-		return new FlatString.full(self, bytelen, 0, bytelen - 1, unilen)
++		var nns = new BufferedNativeString.from(self, bytelen, bytelen)
++		return new FlatString.full(nns, bytelen, 0, bytelen - 1, unilen)
+ 	end
+ 
+ 	# Returns `self` as a new String.
+ 	redef fun to_s_with_copy: FlatString
+ 	do
+ 		var length = cstring_length
+-		var new_self = new NativeString(length + 1)
+-		copy_to(new_self, length, 0, 0)
++		var new_self = new BufferedNativeString(length)
++		new_self.append(self, 0, length)
+ 		var str = new FlatString.with_infos(new_self, length, 0, length - 1)
+-		new_self[length] = 0u8
+-		str.real_items = new_self
+ 		return str
+ 	end
+ 
+@@ -993,7 +1020,8 @@ redef class Int
+ 		var ns = new NativeString(nslen + 1)
+ 		ns[nslen] = 0u8
+ 		native_int_to_s(ns, nslen + 1)
+-		return new FlatString.full(ns, nslen, 0, nslen - 1, nslen)
++		var nns = new BufferedNativeString.from(ns, nslen, nslen)
++		return new FlatString.full(nns, nslen, 0, nslen - 1, nslen)
+ 	end
+ end
+ 
+@@ -1030,13 +1058,13 @@ redef class Array[E]
+ 			var tmp = na[i]
+ 			if tmp isa FlatString then
+ 				var tpl = tmp.bytelen
+-				tmp.items.copy_to(ns, tpl, tmp.first_byte, off)
++				tmp.items.items.copy_to(ns, tpl, tmp.first_byte, off)
+ 				off += tpl
+ 			else
+ 				for j in tmp.substrings do
+ 					var s = j.as(FlatString)
+ 					var slen = s.bytelen
+-					s.items.copy_to(ns, slen, s.first_byte, off)
++					s.items.items.copy_to(ns, slen, s.first_byte, off)
+ 					off += slen
+ 				end
+ 			end
+@@ -1067,13 +1095,13 @@ redef class NativeArray[E]
+ 			var tmp = na[i]
+ 			if tmp isa FlatString then
+ 				var tpl = tmp.bytelen
+-				tmp.items.copy_to(ns, tpl, tmp.first_byte, off)
++				tmp.items.items.copy_to(ns, tpl, tmp.first_byte, off)
+ 				off += tpl
+ 			else
+ 				for j in tmp.substrings do
+ 					var s = j.as(FlatString)
+ 					var slen = s.bytelen
+-					s.items.copy_to(ns, slen, s.first_byte, off)
++					s.items.items.copy_to(ns, slen, s.first_byte, off)
+ 					off += slen
+ 				end
+ 			end
+diff --git a/lib/core/text/ropes.nit b/lib/core/text/ropes.nit
+index f582292..8759829 100644
+--- a/lib/core/text/ropes.nit
++++ b/lib/core/text/ropes.nit
+@@ -95,7 +95,7 @@ private class Concat
+ 		var off = 0
+ 		for i in substrings do
+ 			var ilen = i.bytelen
+-			i.as(FlatString).items.copy_to(ns, ilen, i.as(FlatString).first_byte, off)
++			i.as(FlatString).items.items.copy_to(ns, ilen, i.as(FlatString).first_byte, off)
+ 			off += ilen
+ 		end
+ 		return ns
+@@ -193,11 +193,11 @@ private class Concat
+ 			var it = subs.item
+ 			if n > it.length then
+ 				var cplen = it.length - st
+-				it.items.copy_to(dest, cplen, st, off)
++				it.items.items.copy_to(dest, cplen, st, off)
+ 				off += cplen
+ 				n -= cplen
+ 			else
+-				it.items.copy_to(dest, n, st, off)
++				it.items.items.copy_to(dest, n, st, off)
+ 				n = 0
+ 			end
+ 			subs.next
+@@ -438,8 +438,8 @@ class RopeBuffer
+ 			return
+ 		end
+ 		if s isa FlatText then
+-			var oits = s.items
+-			var from = s.first_byte
++			var oits = if s isa FlatString then s.items.items else s.as(FlatBuffer).items
++			var from = if s isa FlatString then s.first_byte else 0
+ 			var remsp = buf_size - rpos
+ 			if slen <= remsp then
+ 				oits.copy_to(ns, slen, from, rpos)
+@@ -474,7 +474,8 @@ class RopeBuffer
+ 	# the final String and re-allocates a new larger Buffer.
+ 	private fun dump_buffer do
+ 		written = false
+-		var nstr = new FlatString.with_infos(ns, rpos - dumped, dumped, rpos - 1)
++		var nns = new BufferedNativeString.from(ns, buf_size, buf_size)
++		var nstr = new FlatString.with_infos(nns, rpos - dumped, dumped, rpos - 1)
+ 		str += nstr
+ 		var bs = buf_size
+ 		bs = bs * 2
+@@ -487,14 +488,16 @@ class RopeBuffer
+ 	# Similar to dump_buffer, but does not reallocate a new NativeString
+ 	private fun persist_buffer do
+ 		if rpos == dumped then return
+-		var nstr = new FlatString.with_infos(ns, rpos - dumped, dumped, rpos - 1)
++		var nns = new BufferedNativeString.from(ns, buf_size, buf_size)
++		var nstr = new FlatString.with_infos(nns, rpos - dumped, dumped, rpos - 1)
+ 		str += nstr
+ 		dumped = rpos
+ 	end
+ 
+ 	redef fun output do
+ 		str.output
+-		new FlatString.with_infos(ns, rpos - dumped, dumped, rpos - 1).output
++		var nns = new BufferedNativeString.from(ns, buf_size, buf_size)
++		new FlatString.with_infos(nns, rpos - dumped, dumped, rpos - 1).output
+ 	end
+ 
+ 	# Enlarge is useless here since the `Buffer`
+@@ -516,7 +519,8 @@ class RopeBuffer
+ 	redef fun reverse do
+ 		# Flush the buffer in order to only have to reverse `str`.
+ 		if rpos > 0 and dumped != rpos then
+-			str += new FlatString.with_infos(ns, rpos - dumped, dumped, rpos - 1)
++			var nns = new BufferedNativeString.from(ns, buf_size, buf_size)
++			str += new FlatString.with_infos(nns, rpos - dumped, dumped, rpos - 1)
+ 			dumped = rpos
+ 		end
+ 		str = str.reversed
+@@ -552,14 +556,21 @@ redef class FlatString
+ 		var nlen = slen + mlen
+ 		if s isa FlatString then
+ 			if nlen > maxlen then return new Concat(self, s)
+-			var mits = items
+-			var sifrom = s.first_byte
++			var nits = items
+ 			var mifrom = first_byte
+-			var sits = s.items
+-			var ns = new NativeString(nlen + 1)
+-			mits.copy_to(ns, mlen, mifrom, 0)
+-			sits.copy_to(ns, slen, sifrom, mlen)
+-			return new FlatString.full(ns, nlen, 0, nlen - 1, length + s.length)
++			var nfrom = mifrom
++			if nits.remaining_space < slen then
++				nits = new BufferedNativeString(nlen)
++				nits.append(items.items, mifrom, bytelen)
++				nfrom = 0
++			end
++			if nits.pos != last_byte + 1 then
++				nits = new BufferedNativeString(nlen)
++				nits.append(items.items, mifrom, bytelen)
++				nfrom = 0
++			end
++			nits.append(s.items.items, s.first_byte, slen)
++			return new FlatString.full(nits, nlen, nfrom, nfrom + nlen - 1, length + s.length)
+ 		else if s isa Concat then
+ 			var sl = s.left
+ 			var sllen = sl.bytelen
+@@ -601,7 +612,7 @@ private class RopeByteReverseIterator
+ 		pos = root.bytelen - 1
+ 		subs = new ReverseRopeSubstrings(root)
+ 		var s = subs.item
+-		ns = s.items
++		ns = s.items.items
+ 		pns = s.last_byte
+ 	end
+ 
+@@ -609,7 +620,7 @@ private class RopeByteReverseIterator
+ 		self.pos = pos
+ 		subs = new ReverseRopeSubstrings.from(root, pos)
+ 		var s = subs.item
+-		ns = s.items
++		ns = s.items.items
+ 		pns = pos - subs.index
+ 	end
+ 
+@@ -627,7 +638,7 @@ private class RopeByteReverseIterator
+ 		subs.next
+ 		if not subs.is_ok then return
+ 		var s = subs.item
+-		ns = s.items
++		ns = s.items.items
+ 		pns = s.last_byte
+ 	end
+ end
+@@ -650,7 +661,7 @@ private class RopeByteIterator
+ 	init(root: Concat) is old_style_init do
+ 		subs = new RopeSubstrings(root)
+ 		pns = 0
+-		ns = subs.item.items
++		ns = subs.item.items.items
+ 		max = root.length - 1
+ 		pos = 0
+ 	end
+@@ -659,7 +670,7 @@ private class RopeByteIterator
+ 		subs = new RopeSubstrings.from(root, pos)
+ 		pns = pos - subs.index
+ 		self.pos = pos
+-		ns = subs.item.items
++		ns = subs.item.items.items
+ 		max = root.length - 1
+ 	end
+ 
+@@ -676,7 +687,7 @@ private class RopeByteIterator
+ 		if not subs.is_ok then return
+ 		subs.next
+ 		if not subs.is_ok then return
+-		ns = subs.item.items
++		ns = subs.item.items.items
+ 		pns = 0
+ 	end
+ end
+@@ -876,7 +887,8 @@ private class RopeBufSubstringIterator
+ 
+ 	init(str: RopeBuffer) is old_style_init do
+ 		iter = str.str.substrings
+-		nsstr = new FlatString.with_infos(str.ns, str.rpos - str.dumped, str.dumped, str.rpos - 1)
++		var nns = new BufferedNativeString.from(str.ns, str.buf_size, str.buf_size)
++		nsstr = new FlatString.with_infos(nns, str.rpos - str.dumped, str.dumped, str.rpos - 1)
+ 		if str.length == 0 then nsstr_done = true
+ 	end
+ 
+@@ -1232,3 +1244,15 @@ class RopeBufferBytes
+ 
+ 	redef fun reverse_iterator_from(i) do return new RopeBufferByteReverseIterator.from(target, i)
+ end
++
++redef class BufferedNativeString
++	# Creates a new instance with a length of `len`
++	redef new(len) do
++		if len < maxlen then len = maxlen
++		var s = new BufferedNativeString.empty
++		s.items = new NativeString(len)
++		s.pos = 0
++		s.length = len
++		return s
++	end
++end
+diff --git a/lib/websocket/websocket.nit b/lib/websocket/websocket.nit
+index c3fdaad..c53b2aa 100644
+--- a/lib/websocket/websocket.nit
++++ b/lib/websocket/websocket.nit
+@@ -137,10 +137,10 @@ class WebsocketConnection
+ 			ans_buffer.add(msg.length.to_b)
+ 		end
+ 		if msg isa FlatString then
+-			ans_buffer.append_ns_from(msg.items, msg.length, msg.first_byte)
++			ans_buffer.append_ns_from(msg.items.items, msg.length, msg.first_byte)
+ 		else
+ 			for i in msg.substrings do
+-				ans_buffer.append_ns_from(i.as(FlatString).items, i.length, i.as(FlatString).first_byte)
++				ans_buffer.append_ns_from(i.as(FlatString).items.items, i.length, i.as(FlatString).first_byte)
+ 			end
+ 		end
+ 		return ans_buffer
+-- 
+1.9.1
+
+
+From 3473b32bc6be7d2de603c86d64ace07eaa5a0cc8 Mon Sep 17 00:00:00 2001
+From: Lucas Bajolet <r4pass@hotmail.com>
+Date: Wed, 2 Sep 2015 16:01:54 -0400
+Subject: [PATCH 3/3] regen c_src
 
 Signed-off-by: Lucas Bajolet <r4pass@hotmail.com>
 ---
@@ -257,19 +1084,7 @@ Signed-off-by: Lucas Bajolet <r4pass@hotmail.com>
  c_src/template.sep.1.c                       | Bin 8779 -> 8775 bytes
  c_src/time_nit.c                             | Bin 739 -> 0 bytes
  c_src/time_nit.h                             | Bin 835 -> 0 bytes
- lib/standard/bytes.nit                       |  26 +++++--
- lib/standard/file.nit                        |   2 +-
- lib/standard/stream.nit                      |   6 +-
- lib/standard/text/abstract_text.nit          |  19 -----
- lib/standard/text/flat.nit                   | 101 +++++++++++++++++----------
- lib/standard/text/native.nit                 |  73 +++++++++++++++++++
- lib/standard/text/ropes.nit                  |  70 +++++++++++++------
- lib/websocket/websocket.nit                  |   4 +-
- src/Makefile                                 |   2 +-
- src/compiler/abstract_compiler.nit           |  31 ++++++++
- src/compiler/global_compiler.nit             |   1 +
- src/compiler/separate_compiler.nit           |   4 +-
- 264 files changed, 247 insertions(+), 92 deletions(-)
+ 252 files changed, 0 insertions(+), 0 deletions(-)
  delete mode 100644 c_src/environ_nit.h
  delete mode 100644 c_src/exec_nit.c
  delete mode 100644 c_src/exec_nit.h
@@ -45517,778 +46332,6 @@ zmSnx%yv>{!m<GW>>P)pc;n~TGCgsch`hAeqq|#7d`}a&P^^kNnWUXQZzZve1o6YE6
 z(zra;tkWo>x`&O~ST;s~NZAMvh?F7Ue$Io7k=)65l62VLs2<m^ZcOuFK$_<f{0B>y
 B6*K?<
 
-diff --git a/lib/standard/bytes.nit b/lib/standard/bytes.nit
-index 59c4c5f..1d422d7 100644
---- a/lib/standard/bytes.nit
-+++ b/lib/standard/bytes.nit
-@@ -150,7 +150,8 @@ class Bytes
- 			b = clean_utf8
- 			persisted = false
- 		end
--		return new FlatString.with_infos(b.items, b.length, 0, b.length -1)
-+		var nns = new BufferedNativeString.from(b.items, b.length, b.capacity)
-+		return new FlatString.with_infos(nns, length, 0, length -1)
- 	end
- 
- 	redef fun iterator do return new BytesIterator.with_buffer(self)
-@@ -257,15 +258,28 @@ redef class Text
- 	fun append_to_bytes(b: Bytes) do
- 		for s in substrings do
- 			var from = if s isa FlatString then s.first_byte else 0
--			b.append_ns_from(s.items, s.bytelen, from)
-+			var ns = if s isa FlatString then s.items.items else s.as(FlatBuffer).items
-+			b.append_ns_from(ns, s.bytelen, from)
- 		end
- 	end
- end
- 
--redef class FlatText
--	redef fun append_to_bytes(b) do
--		var from = if self isa FlatString then first_byte else 0
--		b.append_ns_from(items, bytelen, from)
-+redef class FlatString
-+	redef fun to_bytes do
-+		var len = bytelen
-+		var b = new Bytes.with_capacity(len)
-+		var from = first_byte
-+		b.append_ns_from(items.items, len, from)
-+		return b
-+	end
-+end
-+
-+redef class FlatBuffer
-+	redef fun to_bytes do
-+		var len = bytelen
-+		var b = new Bytes.with_capacity(len)
-+		b.append_ns_from(items, len, 0)
-+		return b
- 	end
- end
- 
-diff --git a/lib/standard/file.nit b/lib/standard/file.nit
-index aba34e8..dc1e84a 100644
---- a/lib/standard/file.nit
-+++ b/lib/standard/file.nit
-@@ -1263,7 +1263,7 @@ end
- redef class FlatString
- 	redef fun write_native_to(s)
- 	do
--		s.write_native(items, first_byte, bytelen)
-+		s.write_native(items.items, first_byte, bytelen)
- 	end
- end
- 
-diff --git a/lib/standard/stream.nit b/lib/standard/stream.nit
-index 2db319a..ae6068b 100644
---- a/lib/standard/stream.nit
-+++ b/lib/standard/stream.nit
-@@ -186,12 +186,14 @@ abstract class Reader
- 			# if this is the best size or not
- 			var chunksz = 129
- 			if chunksz > remsp then
--				rets += new FlatString.with_infos(sits, remsp, pos, pos + remsp - 1)
-+				var nns = new BufferedNativeString.from(sits, remsp, remsp)
-+				rets += new FlatString.with_infos(nns, remsp, pos, pos + remsp - 1)
- 				break
- 			end
- 			var st = sits.find_beginning_of_char_at(pos + chunksz - 1)
- 			var bytelen = st - pos
--			rets += new FlatString.with_infos(sits, bytelen, pos, st - 1)
-+			var nns = new BufferedNativeString.from(sits, chunksz, chunksz)
-+			rets += new FlatString.with_infos(nns, bytelen, pos, st - 1)
- 			pos = st
- 			remsp -= bytelen
- 		end
-diff --git a/lib/standard/text/abstract_text.nit b/lib/standard/text/abstract_text.nit
-index 1faaad3..96a2fb8 100644
---- a/lib/standard/text/abstract_text.nit
-+++ b/lib/standard/text/abstract_text.nit
-@@ -970,12 +970,6 @@ end
- abstract class FlatText
- 	super Text
- 
--	# Underlying C-String (`char*`)
--	#
--	# Warning : Might be void in some subclasses, be sure to check
--	# if set before using it.
--	private var items: NativeString is noinit
--
- 	# Real items, used as cache for to_cstring is called
- 	private var real_items: nullable NativeString = null
- 
-@@ -999,19 +993,6 @@ abstract class FlatText
- 	redef var length = 0
- 
- 	redef var bytelen = 0
--
--	redef fun output
--	do
--		var i = 0
--		while i < length do
--			items[i].output
--			i += 1
--		end
--	end
--
--	redef fun copy_to_native(dest, n, src_offset, dest_offset) do
--		items.copy_to(dest, n, src_offset, dest_offset)
--	end
- end
- 
- # Abstract class for the SequenceRead compatible
-diff --git a/lib/standard/text/flat.nit b/lib/standard/text/flat.nit
-index 917b0e5..78c4d1a 100644
---- a/lib/standard/text/flat.nit
-+++ b/lib/standard/text/flat.nit
-@@ -57,7 +57,7 @@ redef class FlatText
- 		var delta_end = (ln - 1) - index
- 		var delta_cache = (position - index).abs
- 		var min = delta_begin
--		var its = items
-+		var its = if self isa FlatString then items.items else self.as(FlatBuffer).items
- 
- 		if delta_cache < min then min = delta_cache
- 		if delta_end < min then min = delta_end
-@@ -84,7 +84,10 @@ redef class FlatText
- 		return ns_i
- 	end
- 
--	redef fun [](index) do return items.char_at(char_to_byte_index(index))
-+	redef fun [](index) do
-+		var i = if self isa FlatString then items.items else self.as(FlatBuffer).items
-+		return i.char_at(char_to_byte_index(index))
-+	end
- end
- 
- # Immutable strings of characters.
-@@ -92,6 +95,9 @@ class FlatString
- 	super FlatText
- 	super String
- 
-+	# C-side data structure with the bytes of `self`
-+	var items: BufferedNativeString
-+
- 	# Index at which `self` begins in `items`, inclusively
- 	redef var first_byte is noinit
- 
-@@ -195,7 +201,7 @@ class FlatString
- 	#
- 	# `items` will be used as is, without copy, to retrieve the characters of the string.
- 	# Aliasing issues is the responsibility of the caller.
--	private init with_infos(items: NativeString, bytelen, from, to: Int)
-+	private init with_infos(items: BufferedNativeString, bytelen, from, to: Int)
- 	do
- 		self.items = items
- 		self.bytelen = bytelen
-@@ -207,7 +213,7 @@ class FlatString
- 	#
- 	# `items` will be used as is, without copy, to retrieve the characters of the string.
- 	# Aliasing issues is the responsibility of the caller.
--	private init full(items: NativeString, bytelen, from, to, length: Int)
-+	private init full(items: BufferedNativeString, bytelen, from, to, length: Int)
- 	do
- 		self.items = items
- 		self.length = length
-@@ -219,7 +225,7 @@ class FlatString
- 	redef fun to_cstring do
- 		if real_items != null then return real_items.as(not null)
- 		var new_items = new NativeString(bytelen + 1)
--		self.items.copy_to(new_items, bytelen, first_byte, 0)
-+		self.items.items.copy_to(new_items, bytelen, first_byte, 0)
- 		new_items[bytelen] = 0u8
- 		real_items = new_items
- 		return new_items
-@@ -284,15 +290,14 @@ class FlatString
- 		var slen = s.bytelen
- 		var mlen = bytelen
- 		var nlen = mlen + slen
--		var mits = items
--		var mifrom = first_byte
--		if s isa FlatText then
--			var sits = s.items
--			var sifrom = s.first_byte
--			var ns = new NativeString(nlen + 1)
--			mits.copy_to(ns, mlen, mifrom, 0)
--			sits.copy_to(ns, slen, sifrom, mlen)
--			return new FlatString.full(ns, nlen, 0, nlen - 1, length + o.length)
-+		if s isa FlatString then
-+			var ns = items
-+			if items.remaining_space < s.bytelen then
-+				ns = new BufferedNativeString(nlen)
-+				ns.append(items.items, first_byte, bytelen)
-+			end
-+			items.append(s.items.items, s.first_byte, s.bytelen)
-+			return new FlatString.full(ns, nlen, 0, nlen - 1, length + s.length)
- 		else
- 			abort
- 		end
-@@ -303,12 +308,9 @@ class FlatString
- 		var new_bytelen = mybtlen * i
- 		var mylen = length
- 		var newlen = mylen * i
--		var ns = new NativeString(new_bytelen + 1)
--		ns[new_bytelen] = 0u8
--		var offset = 0
-+		var ns = new BufferedNativeString(new_bytelen)
- 		while i > 0 do
--			items.copy_to(ns, bytelen, first_byte, offset)
--			offset += mybtlen
-+			ns.append(items.items, first_byte, bytelen)
- 			i -= 1
- 		end
- 		return new FlatString.full(ns, new_bytelen, 0, new_bytelen - 1, newlen)
-@@ -402,7 +404,7 @@ private class FlatStringByteReverseIterator
- 
- 	var target: FlatString
- 
--	var target_items: NativeString
-+	var target_items: BufferedNativeString
- 
- 	var curr_pos: Int
- 
-@@ -426,7 +428,7 @@ private class FlatStringByteIterator
- 
- 	var target: FlatString
- 
--	var target_items: NativeString
-+	var target_items: BufferedNativeString
- 
- 	var curr_pos: Int
- 
-@@ -477,6 +479,12 @@ class FlatBuffer
- 	super FlatText
- 	super Buffer
- 
-+	# Underlying C-String (`char*`)
-+	#
-+	# Warning : Might be void in some subclasses, be sure to check
-+	# if set before using it.
-+	private var items: NativeString is noinit
-+
- 	redef var chars: Sequence[Char] = new FlatBufferCharView(self) is lazy
- 
- 	redef var bytes = new FlatBufferByteView(self) is lazy
-@@ -495,6 +503,19 @@ class FlatBuffer
- 
- 	redef fun substrings do return new FlatSubstringsIter(self)
- 
-+	redef fun output
-+	do
-+		var i = 0
-+		while i < length do
-+			items[i].output
-+			i += 1
-+		end
-+	end
-+
-+	redef fun copy_to_native(dest, n, src_offset, dest_offset) do
-+		items.copy_to(dest, n, src_offset, dest_offset)
-+	end
-+
- 	# Re-copies the `NativeString` into a new one and sets it as the new `Buffer`
- 	#
- 	# This happens when an operation modifies the current `Buffer` and
-@@ -589,7 +610,8 @@ class FlatBuffer
- 	do
- 		written = true
- 		if bytelen == 0 then items = new NativeString(1)
--		return new FlatString.with_infos(items, bytelen, 0, bytelen - 1)
-+		var nns = new BufferedNativeString.from(items, bytelen, capacity)
-+		return new FlatString.with_infos(nns, bytelen, 0, bytelen - 1)
- 	end
- 
- 	redef fun to_cstring
-@@ -626,10 +648,12 @@ class FlatBuffer
- 	init from(s: Text)
- 	do
- 		items = new NativeString(s.bytelen)
--		if s isa FlatText then
-+		if s isa FlatString then
-+			items = s.items.items
-+		else if s isa FlatBuffer then
- 			items = s.items
- 		else
--			for i in substrings do i.as(FlatString).items.copy_to(items, i.bytelen, 0, 0)
-+			for i in substrings do i.as(FlatString).items.items.copy_to(items, i.bytelen, 0, 0)
- 		end
- 		bytelen = s.bytelen
- 		length = s.length
-@@ -652,8 +676,10 @@ class FlatBuffer
- 		is_dirty = true
- 		var sl = s.bytelen
- 		enlarge(bytelen + sl)
--		if s isa FlatText then
--			s.items.copy_to(items, sl, s.first_byte, bytelen)
-+		if s isa FlatString then
-+			s.items.items.copy_to(items, sl, s.first_byte, bytelen)
-+		else if s isa FlatBuffer then
-+			s.items.copy_to(items, sl, 0, bytelen)
- 		else
- 			for i in s.substrings do append i
- 			return
-@@ -700,7 +726,8 @@ class FlatBuffer
- 
- 	redef fun times(repeats)
- 	do
--		var x = new FlatString.with_infos(items, bytelen, 0, bytelen - 1)
-+		var nns = new BufferedNativeString.from(items, bytelen, capacity)
-+		var x = new FlatString.with_infos(nns, bytelen, 0, bytelen - 1)
- 		for i in [1 .. repeats[ do
- 			append(x)
- 		end
-@@ -881,7 +908,8 @@ redef class NativeString
- 	redef fun to_s_with_length(length): FlatString
- 	do
- 		assert length >= 0
--		var str = new FlatString.with_infos(self, length, 0, length - 1)
-+		var nns = new BufferedNativeString.from(self, length, length)
-+		var str = new FlatString.with_infos(nns, length, 0, length - 1)
- 		return str
- 	end
- 
-@@ -889,11 +917,9 @@ redef class NativeString
- 	redef fun to_s_with_copy: FlatString
- 	do
- 		var length = cstring_length
--		var new_self = new NativeString(length + 1)
--		copy_to(new_self, length, 0, 0)
-+		var new_self = new BufferedNativeString(length)
-+		new_self.append(self, 0, length)
- 		var str = new FlatString.with_infos(new_self, length, 0, length - 1)
--		new_self[length] = 0u8
--		str.real_items = new_self
- 		return str
- 	end
- 
-@@ -952,7 +978,8 @@ redef class Int
- 		var ns = new NativeString(nslen + 1)
- 		ns[nslen] = 0u8
- 		native_int_to_s(ns, nslen + 1)
--		return new FlatString.full(ns, nslen, 0, nslen - 1, nslen)
-+		var nns = new BufferedNativeString.from(ns, nslen, nslen)
-+		return new FlatString.full(nns, nslen, 0, nslen - 1, nslen)
- 	end
- end
- 
-@@ -989,13 +1016,13 @@ redef class Array[E]
- 			var tmp = na[i]
- 			if tmp isa FlatString then
- 				var tpl = tmp.bytelen
--				tmp.items.copy_to(ns, tpl, tmp.first_byte, off)
-+				tmp.items.items.copy_to(ns, tpl, tmp.first_byte, off)
- 				off += tpl
- 			else
- 				for j in tmp.substrings do
- 					var s = j.as(FlatString)
- 					var slen = s.bytelen
--					s.items.copy_to(ns, slen, s.first_byte, off)
-+					s.items.items.copy_to(ns, slen, s.first_byte, off)
- 					off += slen
- 				end
- 			end
-@@ -1026,13 +1053,13 @@ redef class NativeArray[E]
- 			var tmp = na[i]
- 			if tmp isa FlatString then
- 				var tpl = tmp.bytelen
--				tmp.items.copy_to(ns, tpl, tmp.first_byte, off)
-+				tmp.items.items.copy_to(ns, tpl, tmp.first_byte, off)
- 				off += tpl
- 			else
- 				for j in tmp.substrings do
- 					var s = j.as(FlatString)
- 					var slen = s.bytelen
--					s.items.copy_to(ns, slen, s.first_byte, off)
-+					s.items.items.copy_to(ns, slen, s.first_byte, off)
- 					off += slen
- 				end
- 			end
-diff --git a/lib/standard/text/native.nit b/lib/standard/text/native.nit
-index 170b196..5ddfccd 100644
---- a/lib/standard/text/native.nit
-+++ b/lib/standard/text/native.nit
-@@ -151,3 +151,76 @@ extern class NativeString `{ char* `}
- 		return endpos
- 	end
- end
-+
-+# Special kind of NativeString with a buffer-like function
-+extern class BufferedNativeString
-+
-+	# Creates a new instance with a length of `len`
-+	new(len: Int) do
-+		var s = new BufferedNativeString.empty
-+		s.items = new NativeString(len)
-+		s.pos = 0
-+		s.length = len
-+		return s
-+	end
-+
-+	# Creates a new empty Buffer (null attributes)
-+	private new empty is intern
-+
-+	# Creates a new Buffer with all informations set
-+	new from(its: NativeString, pos: Int, len: Int) do
-+		var s = new BufferedNativeString.empty
-+		s.items = its
-+		s.pos = pos
-+		s.length = len
-+		return s
-+	end
-+
-+	# The NativeString inside of `self`
-+	fun items: NativeString is intern
-+
-+	# The NativeString inside of `self`, should not be changed
-+	private fun items=(n: NativeString) is intern
-+
-+	# Position of the next free space in `self`
-+	fun pos: Int is intern
-+
-+	# Sets the position of the next free space in `self`
-+	protected fun pos=(v: Int) is intern
-+
-+	# Length of the buffer
-+	fun length: Int is intern
-+
-+	# Length of the buffer, should not be changed
-+	private fun length=(l: Int) is intern
-+
-+	# Gets the byte at position `pos`
-+	fun [](pos: Int): Byte is intern
-+
-+	# Appends a NativeString's content to `self`
-+	fun append(ns: NativeString, from, length: Int) do
-+		ns.copy_to(items, length, from, pos)
-+		pos += length
-+	end
-+
-+	# Add a byte after `self`
-+	fun add(b: Byte) do
-+		items[pos] = b
-+		pos += 1
-+	end
-+
-+	# Gets the remaining space in self
-+	fun remaining_space: Int do return length - pos
-+
-+	# Alias of `NativeString`.`length_of_char_at`
-+	fun length_of_char_at(p: Int): Int do return items.length_of_char_at(p)
-+
-+	# Gets the char at `pos` in the underlying string
-+	fun char_at(p: Int): Char do return items.char_at(p)
-+
-+	fun find_beginning_of_char_at(p: Int): Int do return items.find_beginning_of_char_at(p)
-+
-+	fun char_to_byte_index_cached(ind, n, m: Int): Int do return items.char_to_byte_index_cached(ind, n, m)
-+
-+	fun fast_cstring(first_byte: Int): NativeString do return items.fast_cstring(first_byte)
-+end
-diff --git a/lib/standard/text/ropes.nit b/lib/standard/text/ropes.nit
-index 2b3ff28..0d786f0 100644
---- a/lib/standard/text/ropes.nit
-+++ b/lib/standard/text/ropes.nit
-@@ -95,7 +95,7 @@ private class Concat
- 		var off = 0
- 		for i in substrings do
- 			var ilen = i.bytelen
--			i.as(FlatString).items.copy_to(ns, ilen, i.as(FlatString).first_byte, off)
-+			i.as(FlatString).items.items.copy_to(ns, ilen, i.as(FlatString).first_byte, off)
- 			off += ilen
- 		end
- 		return ns
-@@ -193,11 +193,11 @@ private class Concat
- 			var it = subs.item
- 			if n > it.length then
- 				var cplen = it.length - st
--				it.items.copy_to(dest, cplen, st, off)
-+				it.items.items.copy_to(dest, cplen, st, off)
- 				off += cplen
- 				n -= cplen
- 			else
--				it.items.copy_to(dest, n, st, off)
-+				it.items.items.copy_to(dest, n, st, off)
- 				n = 0
- 			end
- 			subs.next
-@@ -438,8 +438,8 @@ class RopeBuffer
- 			return
- 		end
- 		if s isa FlatText then
--			var oits = s.items
--			var from = s.first_byte
-+			var oits = if s isa FlatString then s.items.items else s.as(FlatBuffer).items
-+			var from = if s isa FlatString then s.first_byte else 0
- 			var remsp = buf_size - rpos
- 			if slen <= remsp then
- 				oits.copy_to(ns, slen, from, rpos)
-@@ -474,7 +474,8 @@ class RopeBuffer
- 	# the final String and re-allocates a new larger Buffer.
- 	private fun dump_buffer do
- 		written = false
--		var nstr = new FlatString.with_infos(ns, rpos - dumped, dumped, rpos - 1)
-+		var nns = new BufferedNativeString.from(ns, buf_size, buf_size)
-+		var nstr = new FlatString.with_infos(nns, rpos - dumped, dumped, rpos - 1)
- 		str += nstr
- 		var bs = buf_size
- 		bs = bs * 2
-@@ -487,14 +488,16 @@ class RopeBuffer
- 	# Similar to dump_buffer, but does not reallocate a new NativeString
- 	private fun persist_buffer do
- 		if rpos == dumped then return
--		var nstr = new FlatString.with_infos(ns, rpos - dumped, dumped, rpos - 1)
-+		var nns = new BufferedNativeString.from(ns, buf_size, buf_size)
-+		var nstr = new FlatString.with_infos(nns, rpos - dumped, dumped, rpos - 1)
- 		str += nstr
- 		dumped = rpos
- 	end
- 
- 	redef fun output do
- 		str.output
--		new FlatString.with_infos(ns, rpos - dumped, dumped, rpos - 1).output
-+		var nns = new BufferedNativeString.from(ns, buf_size, buf_size)
-+		new FlatString.with_infos(nns, rpos - dumped, dumped, rpos - 1).output
- 	end
- 
- 	# Enlarge is useless here since the `Buffer`
-@@ -516,7 +519,8 @@ class RopeBuffer
- 	redef fun reverse do
- 		# Flush the buffer in order to only have to reverse `str`.
- 		if rpos > 0 and dumped != rpos then
--			str += new FlatString.with_infos(ns, rpos - dumped, dumped, rpos - 1)
-+			var nns = new BufferedNativeString.from(ns, buf_size, buf_size)
-+			str += new FlatString.with_infos(nns, rpos - dumped, dumped, rpos - 1)
- 			dumped = rpos
- 		end
- 		str = str.reversed
-@@ -552,14 +556,21 @@ redef class FlatString
- 		var nlen = slen + mlen
- 		if s isa FlatString then
- 			if nlen > maxlen then return new Concat(self, s)
--			var mits = items
--			var sifrom = s.first_byte
-+			var nits = items
- 			var mifrom = first_byte
--			var sits = s.items
--			var ns = new NativeString(nlen + 1)
--			mits.copy_to(ns, mlen, mifrom, 0)
--			sits.copy_to(ns, slen, sifrom, mlen)
--			return ns.to_s_with_length(nlen)
-+			var nfrom = mifrom
-+			if nits.remaining_space < slen then
-+				nits = new BufferedNativeString(nlen)
-+				nits.append(items.items, mifrom, bytelen)
-+				nfrom = 0
-+			end
-+			if nits.pos != last_byte + 1 then
-+				nits = new BufferedNativeString(nlen)
-+				nits.append(items.items, mifrom, bytelen)
-+				nfrom = 0
-+			end
-+			nits.append(s.items.items, s.first_byte, slen)
-+			return new FlatString.with_infos(nits, nlen, nfrom, nfrom + nlen - 1)
- 		else if s isa Concat then
- 			var sl = s.left
- 			var sllen = sl.bytelen
-@@ -601,7 +612,7 @@ private class RopeByteReverseIterator
- 		pos = root.bytelen - 1
- 		subs = new ReverseRopeSubstrings(root)
- 		var s = subs.item
--		ns = s.items
-+		ns = s.items.items
- 		pns = s.last_byte
- 	end
- 
-@@ -609,7 +620,7 @@ private class RopeByteReverseIterator
- 		self.pos = pos
- 		subs = new ReverseRopeSubstrings.from(root, pos)
- 		var s = subs.item
--		ns = s.items
-+		ns = s.items.items
- 		pns = pos - subs.index
- 	end
- 
-@@ -627,7 +638,7 @@ private class RopeByteReverseIterator
- 		subs.next
- 		if not subs.is_ok then return
- 		var s = subs.item
--		ns = s.items
-+		ns = s.items.items
- 		pns = s.last_byte
- 	end
- end
-@@ -650,7 +661,7 @@ private class RopeByteIterator
- 	init(root: Concat) is old_style_init do
- 		subs = new RopeSubstrings(root)
- 		pns = 0
--		ns = subs.item.items
-+		ns = subs.item.items.items
- 		max = root.length - 1
- 		pos = 0
- 	end
-@@ -659,7 +670,7 @@ private class RopeByteIterator
- 		subs = new RopeSubstrings.from(root, pos)
- 		pns = pos - subs.index
- 		self.pos = pos
--		ns = subs.item.items
-+		ns = subs.item.items.items
- 		max = root.length - 1
- 	end
- 
-@@ -676,7 +687,7 @@ private class RopeByteIterator
- 		if not subs.is_ok then return
- 		subs.next
- 		if not subs.is_ok then return
--		ns = subs.item.items
-+		ns = subs.item.items.items
- 		pns = 0
- 	end
- end
-@@ -876,7 +887,8 @@ private class RopeBufSubstringIterator
- 
- 	init(str: RopeBuffer) is old_style_init do
- 		iter = str.str.substrings
--		nsstr = new FlatString.with_infos(str.ns, str.rpos - str.dumped, str.dumped, str.rpos - 1)
-+		var nns = new BufferedNativeString.from(str.ns, str.buf_size, str.buf_size)
-+		nsstr = new FlatString.with_infos(nns, str.rpos - str.dumped, str.dumped, str.rpos - 1)
- 		if str.length == 0 then nsstr_done = true
- 	end
- 
-@@ -1232,3 +1244,15 @@ class RopeBufferBytes
- 
- 	redef fun reverse_iterator_from(i) do return new RopeBufferByteReverseIterator.from(target, i)
- end
-+
-+redef class BufferedNativeString
-+	# Creates a new instance with a length of `len`
-+	redef new(len) do
-+		if len < maxlen then len = maxlen
-+		var s = new BufferedNativeString.empty
-+		s.items = new NativeString(len)
-+		s.pos = 0
-+		s.length = len
-+		return s
-+	end
-+end
-diff --git a/lib/websocket/websocket.nit b/lib/websocket/websocket.nit
-index 441df14..d67fa21 100644
---- a/lib/websocket/websocket.nit
-+++ b/lib/websocket/websocket.nit
-@@ -137,10 +137,10 @@ class WebsocketConnection
- 			ans_buffer.add(msg.length.to_b)
- 		end
- 		if msg isa FlatString then
--			ans_buffer.append_ns_from(msg.items, msg.length, msg.first_byte)
-+			ans_buffer.append_ns_from(msg.items.items, msg.length, msg.first_byte)
- 		else
- 			for i in msg.substrings do
--				ans_buffer.append_ns_from(i.as(FlatString).items, i.length, i.as(FlatString).first_byte)
-+				ans_buffer.append_ns_from(i.as(FlatString).items.items, i.length, i.as(FlatString).first_byte)
- 			end
- 		end
- 		return ans_buffer
-diff --git a/src/Makefile b/src/Makefile
-index b46e488..4a4c9e3 100644
---- a/src/Makefile
-+++ b/src/Makefile
-@@ -15,7 +15,7 @@
- # limitations under the License.
- 
- NITCOPT=--semi-global
--OLDNITCOPT=--semi-global
-+OLDNITCOPT=
- OBJS=nitc nitpick nit nitdoc nitls nitunit nitpretty nitmetrics nitx nitlight nitdbg_client nitserial
- SRCS=$(patsubst %,%.nit,$(OBJS))
- BINS=$(patsubst %,../bin/%,$(OBJS))
-diff --git a/src/compiler/abstract_compiler.nit b/src/compiler/abstract_compiler.nit
-index b58d4a3..b6c0fcd 100644
---- a/src/compiler/abstract_compiler.nit
-+++ b/src/compiler/abstract_compiler.nit
-@@ -1960,6 +1960,8 @@ redef class MClassType
- 			return "uint32_t"
- 		else if mclass.name == "NativeString" then
- 			return "char*"
-+		else if mclass.name == "BufferedNativeString" then
-+			return "native_buffer*"
- 		else if mclass.name == "NativeArray" then
- 			return "val*"
- 		else
-@@ -2002,6 +2004,8 @@ redef class MClassType
- 			return "u32"
- 		else if mclass.name == "NativeString" then
- 			return "str"
-+		else if mclass.name == "BufferedNativeString" then
-+			return "bstr"
- 		else if mclass.name == "NativeArray" then
- 			#return "{self.arguments.first.ctype}*"
- 			return "val"
-@@ -2461,6 +2465,33 @@ redef class AMethPropdef
- 				v.ret(v.new_expr("(char*)nit_alloc({arguments[1]})", ret.as(not null)))
- 				return true
- 			end
-+		else if cname == "BufferedNativeString" then
-+			if pname == "[]" then
-+				v.ret(v.new_expr("(unsigned char)((int){arguments[0]}->items[{arguments[1]}])", ret.as(not null)))
-+				return true
-+			else if pname == "items" then
-+				v.ret(v.new_expr("{arguments[0]}->items", ret.as(not null)))
-+				return true
-+			else if pname == "items=" then
-+				v.add("{arguments[0]}->items = {arguments[1]};")
-+				return true
-+			else if pname == "pos" then
-+				v.ret(v.new_expr("{arguments[0]}->pos", ret.as(not null)))
-+				return true
-+			else if pname == "pos=" then
-+				v.add("{arguments[0]}->pos = {arguments[1]};")
-+				return true
-+			else if pname == "length" then
-+				v.ret(v.new_expr("{arguments[0]}->length", ret.as(not null)))
-+				return true
-+			else if pname == "length=" then
-+				v.add("{arguments[0]}->length = {arguments[1]};")
-+				return true
-+			else if pname == "empty" then
-+				v.ret(v.new_expr("(native_buffer*)nit_alloc(sizeof(native_buffer))", ret.as(not null)))
-+				return true
-+			end
-+
- 		else if cname == "NativeArray" then
- 			v.native_array_def(pname, ret, arguments)
- 			return true
-diff --git a/src/compiler/global_compiler.nit b/src/compiler/global_compiler.nit
-index 49671f9..181e9d1 100644
---- a/src/compiler/global_compiler.nit
-+++ b/src/compiler/global_compiler.nit
-@@ -164,6 +164,7 @@ class GlobalCompiler
- 	# Usualy, all C variables that refers to a Nit object are typed on the abstract struct `val` that contains only the `classid` field.
- 	redef fun compile_header_structs do
- 		self.header.add_decl("typedef struct \{int classid;\} val; /* general C type representing a Nit instance. */")
-+		self.header.add_decl("typedef struct \{char* items; long pos; long length;\} native_buffer; /* C-side buffered NativeString */")
- 	end
- 
- 	# Subset of runtime_type_analysis.live_types that contains only primitive types
-diff --git a/src/compiler/separate_compiler.nit b/src/compiler/separate_compiler.nit
-index ff5f3ba..90c40a2 100644
---- a/src/compiler/separate_compiler.nit
-+++ b/src/compiler/separate_compiler.nit
-@@ -217,6 +217,8 @@ class SeparateCompiler
- 		self.compile_header_attribute_structs
- 		self.header.add_decl("struct class \{ int box_kind; nitmethod_t vft[]; \}; /* general C type representing a Nit class. */")
- 
-+		self.header.add_decl("typedef struct \{char* items; long pos; long length;\} native_buffer; /* C-side buffered NativeString */")
-+
- 		# With resolution_table_table, all live type resolution are stored in a big table: resolution_table
- 		self.header.add_decl("struct type \{ int id; const char *name; int color; short int is_nullable; const struct types *resolution_table; int table_size; int type_table[]; \}; /* general C type representing a Nit type. */")
- 		self.header.add_decl("struct instance \{ const struct type *type; const struct class *class; nitattribute_t attrs[]; \}; /* general C type representing a Nit instance. */")
-@@ -253,7 +255,7 @@ class SeparateCompiler
- 		# Collect all bas box class
- 		# FIXME: this is not completely fine with a separate compilation scheme
- 		for classname in ["Int", "Bool", "Byte", "Char", "Float", "NativeString",
--		                 "Pointer", "Int8", "Int16", "UInt16", "Int32", "UInt32"] do
-+		                 "Pointer", "Int8", "Int16", "UInt16", "Int32", "UInt32", "BufferedNativeString"] do
- 			var classes = self.mainmodule.model.get_mclasses_by_name(classname)
- 			if classes == null then continue
- 			assert classes.length == 1 else print classes.join(", ")
 -- 
 1.9.1
 
