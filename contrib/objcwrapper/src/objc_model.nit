@@ -77,7 +77,7 @@ class ObjcMethod
 	var return_type: String is noinit, writable
 
 	# Does this method look like a constructor/method?
-	fun is_init: Bool do return params.first.name.has_prefix("init")
+	fun is_init: Bool do return params.first.name.has_prefix("init") and not is_class_property
 end
 
 # Attribute of an `ObjcClass`
