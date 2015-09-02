@@ -16,6 +16,7 @@
 module objc_generator
 
 import opts
+import gen_nit
 
 import objc_model
 
@@ -240,6 +241,8 @@ end
 
 		if name == "init" then name = ""
 
+		name = name.to_nit_name(property=true, pointer=true)
+
 		# If class method, prefix with class name
 		if method.is_class_property then name = "{method.objc_class.name.to_snake_case}_{name}"
 
@@ -253,7 +256,7 @@ end
 		var params = new Array[String]
 		for param in method.params do
 			if param.is_single then break
-			params.add "{param.variable_name}: {param.return_type.objc_to_nit_type}"
+			params.add "{param.nit_variable_name}: {param.return_type.objc_to_nit_type}"
 		end
 
 		var params_with_par = ""
@@ -279,7 +282,7 @@ end
 		var params = new Array[String]
 		for param in method.params do
 			if not param.is_single then
-				params.add "{param.name}: {param.variable_name}"
+				params.add "{param.name}: {param.nit_variable_name}"
 			else params.add param.name
 		end
 
@@ -301,7 +304,7 @@ end
 		var params = new Array[String]
 		for param in method.params do
 			if not param.is_single then
-				params.add "{param.name}: {param.variable_name}"
+				params.add "{param.name}: {param.nit_variable_name}"
 			else params.add param.name
 		end
 
@@ -330,6 +333,24 @@ redef class Text
 			return to_s
 		end
 	end
+
+	# Convert to a safe Nit name for a `property`, a property in a subclass of `pointer` or a variable
+	private fun to_nit_name(property, pointer: nullable Bool): String
+	do
+		var name = to_s
+		name = name.to_snake_case
+
+		while not name.is_empty and name.chars.first == '_' do name = name.substring_from(1)
+
+		if keywords.has(name) then name = name + "0"
+
+		if property == true then
+			if methods_in_object.has(name) then name = name + "0"
+			if pointer == true and methods_in_pointer.has(name) then name = name + "0"
+		end
+
+		return name.to_s
+	end
 end
 
 redef class ObjcProperty
@@ -355,4 +376,9 @@ end
 
 redef class ObjcAttribute
 	redef fun doc do return "\t# Wraps: `{objc_class.name}.{name}`"
+end
+
+redef class ObjcParam
+	# `variable_name` mangled for the Nit language
+	private fun nit_variable_name: String do return variable_name.to_nit_name
 end
