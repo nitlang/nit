@@ -153,11 +153,11 @@ class Regex
 	# Ignore case when matching letters
 	var ignore_case = false is writable
 
-	# Optimize `self` for `is_in` and `String::has`, but do not support searches
+	# Optimize `self` for `String::has` and `is_in`, but do not support searches
 	#
 	# If `true`, `self` cannont be used with `String::search_all`, `String::replace`
 	# or `String::split`.
-	var optimize_is_in = false is writable
+	var optimize_has = false is writable
 
 	# Treat a newline in string as dividing string into multiple lines
 	#
@@ -208,7 +208,7 @@ class Regex
 		var cflags = 0
 		if extended then cflags |= flag_extended
 		if ignore_case then cflags |= flag_icase
-		if optimize_is_in then cflags |= flag_nosub
+		if optimize_has then cflags |= flag_nosub
 		if newline then cflags |= flag_newline
 
 		var native = self.native
@@ -272,6 +272,9 @@ class Regex
 
 	private fun get_error(errcode: Int): String
 	do
+		var native = native
+		assert native != null
+
 		# Error, should be out of memory but we cover any possible error anyway
 		var error_cstr = native.regerror(errcode)
 
@@ -291,6 +294,9 @@ class Regex
 		var comp_res = compile
 		assert comp_res == null else "Regex compilation failed with: {comp_res.message}\n".output
 
+		var native = native
+		assert native != null
+
 		# Actually execute
 		var eflags = gather_eflags
 		var res = native.regexec_match_only(text.to_cstring, eflags)
@@ -307,7 +313,7 @@ class Regex
 		abort
 	end
 
-	# require: not optimize_is_in
+	# require: not optimize_has
 	#
 	#     assert "l".to_re.search_index_in("hello world", 0) == 2
 	#     assert "el+o".to_re.search_index_in("hello world", 0) == 1
@@ -315,10 +321,13 @@ class Regex
 	#     assert "z".to_re.search_index_in("hello world", 0) == -1
 	redef fun search_index_in(text, from)
 	do
-		assert not optimize_is_in
+		assert not optimize_has
 
 		var comp_res = compile
 		assert comp_res == null else "Regex compilation failed with: {comp_res.message}\n".output
+
+		var native = native
+		assert native != null
 
 		# Actually execute
 		text = text.to_s
@@ -340,18 +349,22 @@ class Regex
 		abort
 	end
 
-	# require: not optimize_is_in
+	# require: not optimize_has
 	#
 	#     assert "l".to_re.search_in("hello world", 0).from == 2
 	#     assert "el+o".to_re.search_in("hello world", 0).from == 1
 	#     assert "l+".to_re.search_in("hello world", 3).from == 3
 	#     assert "z".to_re.search_in("hello world", 0) == null
+	#     assert "cd(e)".to_re.search_in("abcdef", 2)[1].to_s == "e"
 	redef fun search_in(text, from)
 	do
-		assert not optimize_is_in
+		assert not optimize_has
 
 		var comp_res = compile
 		assert comp_res == null else "Regex compilation failed with: {comp_res.message}\n".output
+
+		var native = native
+		assert native != null
 
 		# Actually execute
 		text = text.to_s
@@ -366,19 +379,19 @@ class Regex
 
 		# Found one?
 		if res == 0 then
-			var bso = bstr.byte_to_char_index(native_match.rm_so)
-			var ln = bstr.byte_to_char_index(native_match.rm_eo - native_match.rm_so - 1)
+			var first_char = bstr.byte_to_char_index(native_match.rm_so)
+			var length_char = bstr.byte_to_char_index(native_match.rm_eo - native_match.rm_so - 1) # FIXME For issue #1684
 			var match = new Match(text,
-				from + bso,
-				ln + 1)
+				from + first_char,
+				length_char + 1)
 
 			# Add sub expressions
 			for i in [1 .. nsub] do
-				bso = bstr.byte_to_char_index(native_match[i].rm_so)
-				ln = bstr.byte_to_char_index(native_match[i].rm_eo - native_match[i].rm_so - 1)
+				first_char = bstr.byte_to_char_index(native_match[i].rm_so)
+				length_char = bstr.byte_to_char_index(native_match[i].rm_eo - native_match[i].rm_so - 1) # FIXME For issue #1684
 				match.subs.add new Match( text,
-					bso ,
-					ln + 1)
+					from + first_char,
+					length_char + 1)
 			end
 
 			return match
@@ -393,16 +406,19 @@ class Regex
 		abort
 	end
 
-	# require: not optimize_is_in
+	# require: not optimize_has
 	#
 	#     assert "ab".to_re.search_all_in("abbab").join(", ") == "ab, ab"
 	#     assert "b+".to_re.search_all_in("abbabaabbbbbcab").join(", ") == "bb, b, bbbbb, b"
 	redef fun search_all_in(text)
 	do
-		assert not optimize_is_in
+		assert not optimize_has
 
 		var comp_res = compile
 		assert comp_res == null else "Regex compilation failed with: {comp_res.message}\n".output
+
+		var native = native
+		assert native != null
 
 		# Actually execute
 		text = text.to_s
