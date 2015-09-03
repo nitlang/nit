@@ -25,7 +25,7 @@ abstract class TreeMap[K: Comparable, E]
 	super Map[K, E]
 
 	# Type of nodes used in this tree implementation
-	protected type N: TreeNode[K, E]
+	type N: TreeNode[K, E]
 
 	# The `root` node of the tree (null if tree is empty)
 	protected var root: nullable N = null is protected writable
