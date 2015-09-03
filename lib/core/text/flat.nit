@@ -84,6 +84,98 @@ redef class FlatText
 		return ns_i
 	end
 
+	# By escaping `self` to C, how many more bytes will be needed ?
+	#
+	# This enables a double-optimization in `escape_to_c` since if this
+	# method returns 0, then `self` does not need escaping and can be
+	# returned as-is
+	protected fun chars_to_escape_to_c: Int do
+		var its = _items
+		var max = last_byte
+		var pos = first_byte
+		var req_esc = 0
+		while pos <= max do
+			var c = its[pos]
+			if c == 0x0Au8 then
+				req_esc += 1
+			else if c == 0x09u8 then
+				req_esc += 1
+			else if c == 0x22u8 then
+				req_esc += 1
+			else if c == 0x27u8 then
+				req_esc += 1
+			else if c == 0x5Cu8 then
+				req_esc += 1
+			else if c < 32u8 then
+				req_esc += 3
+			end
+			pos += 1
+		end
+		return req_esc
+	end
+
+	redef fun escape_to_c do
+		var ln_extra = chars_to_escape_to_c
+		if ln_extra == 0 then return self.to_s
+		var its = _items
+		var max = last_byte
+		var nlen = _bytelen + ln_extra
+		var nns = new NativeString(nlen)
+		var pos = first_byte
+		var opos = 0
+		while pos <= max do
+			var c = its[pos]
+			# Special codes:
+			#
+			# Any byte with value < 32 is a control character
+			# All their uses will be replaced by their octal
+			# value in C.
+			#
+			# There are two exceptions however:
+			#
+			# * 0x09 => \t
+			# * 0x0A => \n
+			#
+			# Aside from the code points above, the following are:
+			#
+			# * 0x22 => \"
+			# * 0x27 => \'
+			# * 0x5C => \\
+			if c == 0x09u8 then
+				nns[opos] = 0x5Cu8
+				nns[opos + 1] = 0x74u8
+				opos += 2
+			else if c == 0x0Au8 then
+				nns[opos] = 0x5Cu8
+				nns[opos + 1] = 0x6Eu8
+				opos += 2
+			else if c == 0x22u8 then
+				nns[opos] = 0x5Cu8
+				nns[opos + 1] = 0x22u8
+				opos += 2
+			else if c == 0x27u8 then
+				nns[opos] = 0x5Cu8
+				nns[opos + 1] = 0x27u8
+				opos += 2
+			else if c == 0x5Cu8 then
+				nns[opos] = 0x5Cu8
+				nns[opos + 1] = 0x5Cu8
+				opos += 2
+			else if c < 32u8 then
+				nns[opos] = 0x5Cu8
+				nns[opos + 1] = 0x30u8
+				nns[opos + 2] = ((c & 0x38u8) >> 3) + 0x30u8
+				nns[opos + 3] = (c & 0x07u8) + 0x30u8
+				opos += 4
+			else
+				nns[opos] = c
+				opos += 1
+			end
+			pos += 1
+		end
+		return nns.to_s_with_length(nlen)
+	end
+
 	private fun byte_to_char_index(index: Int): Int do
 		var ln = bytelen
 		assert index >= 0
