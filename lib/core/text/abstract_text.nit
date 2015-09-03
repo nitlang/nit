@@ -453,6 +453,36 @@ abstract class Text
 		return true
 	end
 
+	# Count the number of whitespace characters prefixing `self`
+	#
+	#     assert "foo".space_before == 0
+	#     assert "  foo".space_before == 2
+	#     assert " \n\t foo".space_before == 4
+	#     assert " ".space_before == 1
+	fun space_before: Int do
+		var i = 0
+		for c in chars do
+			if not c.is_whitespace then break
+			i += 1
+		end
+		return i
+	end
+
+	# Count the number of whitespace characters suffixing `self`
+	#
+	#     assert "foo".space_after == 0
+	#     assert "foo  ".space_after == 2
+	#     assert "foo \t\n ".space_after == 4
+	#     assert " ".space_after == 1
+	fun space_after: Int do
+		var i = 0
+		for c in chars.to_a.reversed do
+			if not c.is_whitespace then break
+			i += 1
+		end
+		return i
+	end
+
 	# Returns `self` removed from its last line terminator (if any).
 	#
 	#     assert "Hello\n".chomp == "Hello"
