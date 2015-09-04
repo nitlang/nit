@@ -599,8 +599,6 @@ abstract class Text
 				b.append("\\n")
 			else if c == '\t' then
 				b.append("\\t")
-			else if c == '\0' then
-				b.append("\\000")
 			else if c == '"' then
 				b.append("\\\"")
 			else if c == '\'' then
