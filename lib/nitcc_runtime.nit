@@ -296,7 +296,42 @@ class Position
 	var line_end: Int
 	var col_start: Int
 	var col_end: Int
+
 	redef fun to_s do return "{line_start}:{col_start}-{line_end}:{col_end}"
+
+	# Get the lines covered by `self` and underline the target columns.
+	#
+	# This is useful for pretty printing errors or debug the output
+	#
+	# ~~~
+	# var src = "var Foo = new Array[Int]"
+	# var pos = new Position(0,0, 1, 1, 5, 8)
+	#
+	# assert pos.underline(src) == """
+	# var Foo = new Array[Int]
+	#     ^^^"""
+	# ~~~
+	fun underline(source: Text): String
+	do
+		var res = new FlatBuffer
+
+		# All the concerned lines
+		var lines = source.split("\n")
+		for line in [line_start..line_end] do
+			res.append lines[line-1]
+			res.append "\n"
+		end
+
+		# Cover all columns, no matter their lines
+		var col_start = col_start.min(col_end)
+		var col_end = self.col_start.max(col_end)
+
+		# "           ^^^^"
+		var ptr = " "*(col_start-1).max(0) + "^"*(col_end-col_start)
+		res.append ptr
+
+		return res.to_s
+	end
 end
 
 # A node of a syntactic tree
