@@ -1,6 +1,4 @@
-# Pep/8 Analysis
-
-This project provides tools to statically analyze Pep/8 programs in order to detect bugs or bad programming practices.
+# Pep/8 Analysis, static checker to detect bugs and bad programming practices in Pep/8 programs
 
 For more information about the Pep/8 assembly language visit http://code.google.com/p/pep8-1/.
 

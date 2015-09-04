@@ -10,7 +10,7 @@
 # You  are  allowed  to  redistribute it and sell it, alone or is a part of
 # another product.
 
-# Provides the Clock utility class to keep time of real time flow
+# Services to keep time of the wall clock time
 module realtime is ldflags "-lrt"
 
 in "C header" `{

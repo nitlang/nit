@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# SDL display support (used in Linux for windows and inputes only)
+# Simple DirectMedia Layer
 module sdl is
 	cflags exec("sdl-config", "--cflags")
 	ldflags(exec("sdl-config", "--libs"), "-lSDL_image -lSDL_ttf")
@@ -77,15 +77,15 @@ extern class SDLDisplay `{SDL_Surface *`}
 		SDL_FillRect(self, NULL, SDL_MapRGB(self->format,r,g,b));
 	`}
 
-	redef fun width: Int `{ return self->w; `}
-	redef fun height: Int `{ return self->h; `}
+	redef fun width `{ return self->w; `}
+	redef fun height `{ return self->h; `}
 
 	# Fill a rectangle with given color
 	fun fill_rect(rect: SDLRectangle, r, g, b: Int) `{
 		SDL_FillRect(self, rect,  SDL_MapRGB(self->format,r,g,b));
 	`}
 
-	redef fun clear(r, g, b: Float) `{
+	redef fun clear(r, g, b) `{
 		Uint8 ri, gi, bi;
 		ri = (Uint8)r*255;
 		gi = (Uint8)g*255;
@@ -247,8 +247,8 @@ extern class SDLImage
 	# Destroy the image and free the memory
 	redef fun destroy `{ SDL_FreeSurface(self); `}
 
-	redef fun width: Int `{ return self->w; `}
-	redef fun height: Int `{ return self->h; `}
+	redef fun width `{ return self->w; `}
+	redef fun height `{ return self->h; `}
 
 	fun is_ok: Bool do return not address_is_null
 
@@ -309,8 +309,8 @@ class SDLMouseButtonEvent
 
 	var button: Int
 
-	redef var pressed: Bool
-	redef fun depressed: Bool do return not pressed
+	redef var pressed
+	redef fun depressed do return not pressed
 
 	# Is this event raised by the left button?
 	fun is_left_button: Bool do return button == 1
@@ -355,8 +355,8 @@ class SDLMouseMotionEvent
 	var rel_x: Float
 	var rel_y: Float
 
-	redef var pressed: Bool
-	redef fun depressed: Bool do return not pressed
+	redef var pressed
+	redef fun depressed do return not pressed
 
 	init (x, y, rel_x, rel_y: Float, pressed: Bool)
 	do
@@ -384,7 +384,7 @@ class SDLKeyEvent
 		self.down = down
 	end
 
-	redef fun to_c: nullable Char
+	redef fun to_c
 	do
 		if name.length == 1 then return name.chars.first
 		return null

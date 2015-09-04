@@ -14,12 +14,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Services to control the bcm2835 chipset as used in the Raspberry Pi
-# model B revision 1 Uses the C library by Mike McCauley from
-# http://www.airspayce.com/mikem/bcm2835/
+# Services to control the bcm2835 chipset used in the Raspberry Pi
+#
+# Uses the C library by Mike McCauley available at http://www.airspayce.com/mikem/bcm2835/
+#
+# This module targets the model B revision 1, it could be tweaked for other versions.
 module bcm2835
-
-import gpio
 
 in "C Header" `{
 	#include <bcm2835.h>
@@ -29,6 +29,12 @@ redef class Object
 	protected fun bcm2835_init: Bool `{ return bcm2835_init(); `}
 	protected fun bcm2835_close `{ bcm2835_close(); `}
 	protected fun bcm2835_debug=(v: Bool) `{ bcm2835_set_debug(v); `}
+end
+
+# A physical binary pin
+interface Pin
+	# Set the output of this pin
+	fun write(high: Bool) is abstract
 end
 
 extern class RPiPin `{ RPiGPIOPin `}

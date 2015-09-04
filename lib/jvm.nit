@@ -15,7 +15,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Manipulates the Java Virtual Machine
+# Java Virtual Machine services
 #
 # See: http://docs.oracle.com/javase/1.5.0/docs/guide/jni/spec/jniTOC.html
 module jvm is

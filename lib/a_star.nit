@@ -14,9 +14,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Services related to pathfinding of graphs using A*
-# A single graph may have different properties according to the `PathContext` used
+# A* pathfinding in graphs
 #
+# A single graph may have different properties according to the `PathContext` used
 #
 # Usage:
 #
@@ -194,7 +194,7 @@ class Node
 	# With a large graph it can cause a stack overflow.
 	#
 	# Instead, we serialize the nodes first and then the links.
-	redef fun core_serialize_to(serializer: Serializer)
+	redef fun core_serialize_to(serializer)
 	do
 		serializer.serialize_attribute("graph", graph)
 	end
@@ -265,7 +265,7 @@ class Graph[N: Node, L: Link]
 	# Used to check if nodes have been searched in one pathfinding
 	private var pathfinding_current_evocation: Int = 0
 
-	redef fun core_serialize_to(serializer: Serializer)
+	redef fun core_serialize_to(serializer)
 	do
 		serializer.serialize_attribute("nodes", nodes)
 		serializer.serialize_attribute("links", links)
@@ -380,7 +380,7 @@ class WeightedPathContext
 		self.worst_cost = worst_cost
 	end
 
-	redef var worst_cost: Int is noinit
+	redef var worst_cost is noinit
 
 	redef fun cost(l) do
 		return l.weight

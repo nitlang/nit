@@ -1,4 +1,4 @@
-Tnitter is a Twitter-like micro-blogging platform
+Tnitter, a Twitter-like micro-blogging platform
 
 # Compile and execute
 
