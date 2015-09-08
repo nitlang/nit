@@ -65,24 +65,24 @@ end
 
 # Method of an `ObjcClass`
 class ObjcMethod
-	super Property
+	super ObjcProperty
 
-	# Scope: '+' for a static class method, and '-' for an instance method
-	var scope: Char is noinit, writable
+	# Is this a static class method declared with '+'? Otherwise it's an instance method.
+	var is_class_property: Bool = false is writable
 
 	# Parameters of the method
-	var params = new Array[Param]
+	var params = new Array[ObjcParam]
 
 	# Return type as a `String`
 	var return_type: String is noinit, writable
 
 	# Does this method look like a constructor/method?
-	fun is_init: Bool do return params.first.name.has_prefix("init")
+	fun is_init: Bool do return params.first.name.has_prefix("init") and not is_class_property
 end
 
 # Attribute of an `ObjcClass`
 class ObjcAttribute
-	super Property
+	super ObjcProperty
 
 	# Name of this attribute
 	var name: String is noinit, writable
@@ -92,13 +92,16 @@ class ObjcAttribute
 end
 
 # Property of an `ObjcClass`
-class Property
+class ObjcProperty
+	# Introducing class
+	var objc_class: ObjcClass
+
 	# Is this property to be commented out?
 	var is_commented = false is writable
 end
 
 # Parameter of an `ObjcMethod`
-class Param
+class ObjcParam
 	# Parameter name, used by the caller (e.g. `withObject` in `withObject: (NSObject*) obj`)
 	var name: String is noinit, writable
 
@@ -116,4 +119,10 @@ class Param
 
 	# Is this a parameter with only a `name`?
 	var is_single = false is writable
+
+	redef fun to_s
+	do
+		if is_single then return name
+		return "{name}:({return_type}){variable_name}"
+	end
 end

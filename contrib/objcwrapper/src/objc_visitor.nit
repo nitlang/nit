@@ -45,7 +45,7 @@ redef class Nlines_interface
 		var interface_block = n_interface_block
 		if interface_block == null then return
 
-		# If reopening a class, continue with the exisitng one
+		# If reopening a class, continue with the existing one
 		var c = null
 		for objc_class in v.model.classes do
 			if objc_class.name == n_class.text then
@@ -73,9 +73,12 @@ end
 redef class Nsignature_block_signature
 	redef fun accept_objc(v)
 	do
-		var method = new ObjcMethod
+		var c = v.objc_class
+		assert c != null
+
+		var method = new ObjcMethod(c)
 		method.return_type = n_signature_return_type.to_type
-		method.scope = if n_scope.is_class_property then '-' else '+'
+		method.is_class_property = n_scope.is_class_property
 
 		for n_param in n_parameter.children do
 			var param = n_param.to_param
@@ -85,7 +88,7 @@ redef class Nsignature_block_signature
 				method.is_commented = true
 
 				# Use a placeholder for easier debugging
-				param = new Param
+				param = new ObjcParam
 				param.name = "UNKNOWN"
 				param.return_type = "UNKNOWN"
 				param.variable_name = "UNKNOWN"
@@ -94,7 +97,7 @@ redef class Nsignature_block_signature
 			method.params.add param
 		end
 
-		v.objc_class.methods.add method
+		c.methods.add method
 	end
 end
 
@@ -102,11 +105,14 @@ end
 redef class Nproperty_property
 	redef fun accept_objc(v)
 	do
-		var attr = new ObjcAttribute
+		var c = v.objc_class
+		assert c != null
+
+		var attr = new ObjcAttribute(c)
 		attr.return_type = n_type.to_type
 		attr.name = n_left.collect_text
 
-		v.objc_class.attributes.add attr
+		c.attributes.add attr
 	end
 end
 
@@ -157,14 +163,14 @@ end
 
 redef class Nparameter
 	# Return null if type is not yet unsupported
-	private fun to_param: nullable Param do return null
+	private fun to_param: nullable ObjcParam do return null
 end
 
 # Parameters with both a public and an internal name
 redef class Nparameter_named
 	redef fun to_param
 	do
-		var param = new Param
+		var param = new ObjcParam
 		param.variable_name = n_right.collect_text
 		param.name = n_left.collect_text
 
@@ -181,7 +187,7 @@ end
 redef class Nparameter_single
 	redef fun to_param
 	do
-		var param = new Param
+		var param = new ObjcParam
 		param.name = n_term.collect_text
 		param.is_single = true
 		return param
