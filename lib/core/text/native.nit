@@ -130,7 +130,7 @@ extern class NativeString `{ char* `}
 		return ns_i
 	end
 
-	# Gets the byte index of char at position `n` in UTF-8 String
+	# Gets the char index of byte at position `n` in a UTF-8 String
 	#
 	# `char_from` and `byte_from` are cached values to seek from.
 	#
