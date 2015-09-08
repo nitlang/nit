@@ -199,7 +199,7 @@ class NeoDoxygenCommand
 		end
 		option_context.parse(args)
 
-		var errors = option_context.get_errors
+		var errors = option_context.errors
 		var rest = option_context.rest
 
 		if errors.is_empty and not opt_help.value and rest.length != 2 then

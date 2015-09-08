@@ -1,11 +1,10 @@
-Arguments: 1
--a
+Arguments: 2
+-s
+-z
 Rest: 0
-Errors: 1
-Parameter expected for option -a.
 OptionBool: false
 OptionCount: 0
-OptionString: 
+OptionString: -z
 OptionInt: 10
 OptionArray: []
 OptionEnum: 1

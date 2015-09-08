@@ -1,6 +1,8 @@
 Arguments: 1
 -s
 Rest: 0
+Errors: 1
+Parameter expected for option -s.
 OptionBool: false
 OptionCount: 0
 OptionString: 
