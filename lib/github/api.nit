@@ -599,7 +599,7 @@ end
 #
 # Should be accessed from `GithubAPI::load_commit`.
 #
-# See <https://developer.github.com/v3/commits/>.
+# See <https://developer.github.com/v3/repos/commits/>.
 class Commit
 	super RepoEntity
 
