@@ -173,4 +173,16 @@ extern class NativeString `{ char* `}
 		if length_of_char_at(stpos) >= (endpos - stpos + 1) then return pos
 		return endpos
 	end
+
+	# Number of UTF-8 characters in `self` between positions `from` and `to`
+	fun utf8_length(from, to: Int): Int do
+		var st = from
+		var lst = to
+		var ln = 0
+		while st <= lst do
+			st += length_of_char_at(st)
+			ln += 1
+		end
+		return ln
+	end
 end

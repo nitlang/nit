@@ -197,15 +197,7 @@ class FlatString
 
 	redef var length is lazy do
 		if _bytelen == 0 then return 0
-		var st = _first_byte
-		var its = _items
-		var ln = 0
-		var lst = _last_byte
-		while st <= lst do
-			st += its.length_of_char_at(st)
-			ln += 1
-		end
-		return ln
+		return _items.utf8_length(_first_byte, _last_byte)
 	end
 
 	redef fun reversed
