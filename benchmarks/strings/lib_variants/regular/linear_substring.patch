@@ -1,22 +1,23 @@
-From 15401bfd27836dd712e0af2ef8fc1aa33af29f89 Mon Sep 17 00:00:00 2001
+From 173f2dd34b0a3ad7bb8ebaf1863ab362cb8b2c1f Mon Sep 17 00:00:00 2001
 From: Lucas Bajolet <r4pass@hotmail.com>
-Date: Fri, 21 Aug 2015 14:39:34 -0400
-Subject: [PATCH] Patch: Removed constant-time substring in text
+Date: Wed, 2 Sep 2015 15:31:52 -0400
+Subject: [PATCH] lib: Removed constant-time substring in text
 
 Signed-off-by: Lucas Bajolet <r4pass@hotmail.com>
 ---
- lib/standard/bytes.nit      |   7 ++-
- lib/standard/file.nit       |   2 +-
- lib/standard/stream.nit     |   8 +++-
- lib/standard/text/flat.nit  | 102 +++++++++++++++++++-------------------------
- lib/standard/text/ropes.nit |  39 +++++++++++------
+ lib/core/bytes.nit          |   7 ++-
+ lib/core/file.nit           |   2 +-
+ lib/core/re.nit             |   2 +-
+ lib/core/stream.nit         |   8 +++-
+ lib/core/text/flat.nit      | 108 ++++++++++++++++++++------------------------
+ lib/core/text/ropes.nit     |  41 +++++++++++------
  lib/websocket/websocket.nit |   4 +-
- 6 files changed, 84 insertions(+), 78 deletions(-)
+ 7 files changed, 89 insertions(+), 83 deletions(-)
 
-diff --git a/lib/standard/bytes.nit b/lib/standard/bytes.nit
+diff --git a/lib/core/bytes.nit b/lib/core/bytes.nit
 index 59c4c5f..f22b325 100644
---- a/lib/standard/bytes.nit
-+++ b/lib/standard/bytes.nit
+--- a/lib/core/bytes.nit
++++ b/lib/core/bytes.nit
 @@ -150,7 +150,7 @@ class Bytes
  			b = clean_utf8
  			persisted = false
@@ -45,10 +46,10 @@ index 59c4c5f..f22b325 100644
  	end
  end
  
-diff --git a/lib/standard/file.nit b/lib/standard/file.nit
+diff --git a/lib/core/file.nit b/lib/core/file.nit
 index aba34e8..f7df0d4 100644
---- a/lib/standard/file.nit
-+++ b/lib/standard/file.nit
+--- a/lib/core/file.nit
++++ b/lib/core/file.nit
 @@ -1263,7 +1263,7 @@ end
  redef class FlatString
  	redef fun write_native_to(s)
@@ -58,10 +59,23 @@ index aba34e8..f7df0d4 100644
  	end
  end
  
-diff --git a/lib/standard/stream.nit b/lib/standard/stream.nit
+diff --git a/lib/core/re.nit b/lib/core/re.nit
+index c37bf25..8f578a5 100644
+--- a/lib/core/re.nit
++++ b/lib/core/re.nit
+@@ -370,7 +370,7 @@ class Regex
+ 		text = text.to_s
+ 		var sub = text.substring_from(from)
+ 		var cstr = sub.to_cstring
+-		var bstr = new FlatString.full(cstr, sub.bytelen, 0, sub.bytelen - 1, text.length - from)
++		var bstr = new FlatString.full(cstr, sub.bytelen, text.length - from)
+ 		var eflags = gather_eflags
+ 		var native_match = self.native_match
+ 
+diff --git a/lib/core/stream.nit b/lib/core/stream.nit
 index 2db319a..6e1b5d1 100644
---- a/lib/standard/stream.nit
-+++ b/lib/standard/stream.nit
+--- a/lib/core/stream.nit
++++ b/lib/core/stream.nit
 @@ -186,12 +186,16 @@ abstract class Reader
  			# if this is the best size or not
  			var chunksz = 129
@@ -81,10 +95,10 @@ index 2db319a..6e1b5d1 100644
  			pos = st
  			remsp -= bytelen
  		end
-diff --git a/lib/standard/text/flat.nit b/lib/standard/text/flat.nit
-index 917b0e5..c68f0c1 100644
---- a/lib/standard/text/flat.nit
-+++ b/lib/standard/text/flat.nit
+diff --git a/lib/core/text/flat.nit b/lib/core/text/flat.nit
+index 2343f9f..cec5ef1 100644
+--- a/lib/core/text/flat.nit
++++ b/lib/core/text/flat.nit
 @@ -36,15 +36,13 @@ end
  
  redef class FlatText
@@ -122,16 +136,32 @@ index 917b0e5..c68f0c1 100644
  			my_i = length - 1
  		end
  
-@@ -83,8 +81,6 @@ redef class FlatText
+@@ -103,13 +101,13 @@ redef class FlatText
+ 		var my_i: Int
  
- 		return ns_i
+ 		if min == delta_begin then
+-			ns_i = first_byte
++			ns_i = 0
+ 			my_i = 0
+ 		else if min == delta_cache then
+ 			ns_i = bytepos
+ 			my_i = position
+ 		else
+-			ns_i = its.find_beginning_of_char_at(last_byte)
++			ns_i = its.find_beginning_of_char_at(_bytelen - 1)
+ 			my_i = length - 1
+ 		end
+ 
+@@ -120,8 +118,6 @@ redef class FlatText
+ 
+ 		return my_i
  	end
 -
 -	redef fun [](index) do return items.char_at(char_to_byte_index(index))
  end
  
  # Immutable strings of characters.
-@@ -92,22 +88,16 @@ class FlatString
+@@ -129,22 +125,16 @@ class FlatString
  	super FlatText
  	super String
  
@@ -156,7 +186,7 @@ index 917b0e5..c68f0c1 100644
  		while st <= lst do
  			st += its.length_of_char_at(st)
  			ln += 1
-@@ -126,7 +116,7 @@ class FlatString
+@@ -163,7 +153,7 @@ class FlatString
  		return s
  	end
  
@@ -165,7 +195,7 @@ index 917b0e5..c68f0c1 100644
  
  	redef fun substring(from, count)
  	do
-@@ -146,8 +136,10 @@ class FlatString
+@@ -183,8 +173,10 @@ class FlatString
  		var byteto = char_to_byte_index(end_index)
  		byteto += items.length_of_char_at(byteto) - 1
  
@@ -178,7 +208,7 @@ index 917b0e5..c68f0c1 100644
  	end
  
  	redef fun empty do return "".as(FlatString)
-@@ -195,31 +187,27 @@ class FlatString
+@@ -232,31 +224,27 @@ class FlatString
  	#
  	# `items` will be used as is, without copy, to retrieve the characters of the string.
  	# Aliasing issues is the responsibility of the caller.
@@ -213,7 +243,7 @@ index 917b0e5..c68f0c1 100644
  		new_items[bytelen] = 0u8
  		real_items = new_items
  		return new_items
-@@ -235,8 +223,8 @@ class FlatString
+@@ -272,8 +260,8 @@ class FlatString
  
  		if other.bytelen != my_length then return false
  
@@ -224,7 +254,7 @@ index 917b0e5..c68f0c1 100644
  
  		var last_iteration = my_index + my_length
  
-@@ -285,14 +273,14 @@ class FlatString
+@@ -322,14 +310,14 @@ class FlatString
  		var mlen = bytelen
  		var nlen = mlen + slen
  		var mits = items
@@ -242,7 +272,7 @@ index 917b0e5..c68f0c1 100644
  		else
  			abort
  		end
-@@ -307,11 +295,11 @@ class FlatString
+@@ -344,11 +332,11 @@ class FlatString
  		ns[new_bytelen] = 0u8
  		var offset = 0
  		while i > 0 do
@@ -256,7 +286,7 @@ index 917b0e5..c68f0c1 100644
  	end
  
  
-@@ -320,11 +308,11 @@ class FlatString
+@@ -357,11 +345,11 @@ class FlatString
  		if hash_cache == null then
  			# djb2 hash algorithm
  			var h = 5381
@@ -270,7 +300,7 @@ index 917b0e5..c68f0c1 100644
  				h = (h << 5) + h + myitems[i].to_i
  				i += 1
  			end
-@@ -408,16 +396,16 @@ private class FlatStringByteReverseIterator
+@@ -445,16 +433,16 @@ private class FlatStringByteReverseIterator
  
  	init with_pos(tgt: FlatString, pos: Int)
  	do
@@ -290,7 +320,7 @@ index 917b0e5..c68f0c1 100644
  
  end
  
-@@ -432,16 +420,16 @@ private class FlatStringByteIterator
+@@ -469,16 +457,16 @@ private class FlatStringByteIterator
  
  	init with_pos(tgt: FlatString, pos: Int)
  	do
@@ -310,7 +340,7 @@ index 917b0e5..c68f0c1 100644
  
  end
  
-@@ -452,12 +440,12 @@ private class FlatStringByteView
+@@ -489,12 +477,12 @@ private class FlatStringByteView
  
  	redef fun [](index)
  	do
@@ -326,16 +356,16 @@ index 917b0e5..c68f0c1 100644
  	end
  
  	redef fun iterator_from(start) do return new FlatStringByteIterator.with_pos(target, start)
-@@ -589,7 +577,7 @@ class FlatBuffer
+@@ -626,7 +614,7 @@ class FlatBuffer
  	do
  		written = true
  		if bytelen == 0 then items = new NativeString(1)
--		return new FlatString.with_infos(items, bytelen, 0, bytelen - 1)
-+		return new FlatString.with_infos(items, bytelen)
+-		return new FlatString.full(items, bytelen, 0, bytelen - 1, length)
++		return new FlatString.full(items, bytelen, length)
  	end
  
  	redef fun to_cstring
-@@ -653,7 +641,7 @@ class FlatBuffer
+@@ -690,7 +678,7 @@ class FlatBuffer
  		var sl = s.bytelen
  		enlarge(bytelen + sl)
  		if s isa FlatText then
@@ -344,16 +374,16 @@ index 917b0e5..c68f0c1 100644
  		else
  			for i in s.substrings do append i
  			return
-@@ -700,7 +688,7 @@ class FlatBuffer
+@@ -737,7 +725,7 @@ class FlatBuffer
  
  	redef fun times(repeats)
  	do
--		var x = new FlatString.with_infos(items, bytelen, 0, bytelen - 1)
-+		var x = new FlatString.with_infos(items, bytelen)
+-		var x = new FlatString.full(items, bytelen, 0, bytelen - 1, length)
++		var x = new FlatString.full(items, bytelen, length)
  		for i in [1 .. repeats[ do
  			append(x)
  		end
-@@ -881,7 +869,7 @@ redef class NativeString
+@@ -918,12 +906,12 @@ redef class NativeString
  	redef fun to_s_with_length(length): FlatString
  	do
  		assert length >= 0
@@ -362,7 +392,13 @@ index 917b0e5..c68f0c1 100644
  		return str
  	end
  
-@@ -891,7 +879,7 @@ redef class NativeString
+ 	redef fun to_s_full(bytelen, unilen) do
+-		return new FlatString.full(self, bytelen, 0, bytelen - 1, unilen)
++		return new FlatString.full(self, bytelen, unilen)
+ 	end
+ 
+ 	# Returns `self` as a new String.
+@@ -932,7 +920,7 @@ redef class NativeString
  		var length = cstring_length
  		var new_self = new NativeString(length + 1)
  		copy_to(new_self, length, 0, 0)
@@ -371,7 +407,7 @@ index 917b0e5..c68f0c1 100644
  		new_self[length] = 0u8
  		str.real_items = new_self
  		return str
-@@ -952,7 +940,7 @@ redef class Int
+@@ -993,7 +981,7 @@ redef class Int
  		var ns = new NativeString(nslen + 1)
  		ns[nslen] = 0u8
  		native_int_to_s(ns, nslen + 1)
@@ -380,7 +416,7 @@ index 917b0e5..c68f0c1 100644
  	end
  end
  
-@@ -989,13 +977,13 @@ redef class Array[E]
+@@ -1030,13 +1018,13 @@ redef class Array[E]
  			var tmp = na[i]
  			if tmp isa FlatString then
  				var tpl = tmp.bytelen
@@ -396,7 +432,7 @@ index 917b0e5..c68f0c1 100644
  					off += slen
  				end
  			end
-@@ -1026,13 +1014,13 @@ redef class NativeArray[E]
+@@ -1067,13 +1055,13 @@ redef class NativeArray[E]
  			var tmp = na[i]
  			if tmp isa FlatString then
  				var tpl = tmp.bytelen
@@ -412,10 +448,10 @@ index 917b0e5..c68f0c1 100644
  					off += slen
  				end
  			end
-diff --git a/lib/standard/text/ropes.nit b/lib/standard/text/ropes.nit
-index 2b3ff28..5adf321 100644
---- a/lib/standard/text/ropes.nit
-+++ b/lib/standard/text/ropes.nit
+diff --git a/lib/core/text/ropes.nit b/lib/core/text/ropes.nit
+index f582292..7ce292c 100644
+--- a/lib/core/text/ropes.nit
++++ b/lib/core/text/ropes.nit
 @@ -95,7 +95,7 @@ private class Concat
  		var off = 0
  		for i in substrings do
@@ -492,7 +528,7 @@ index 2b3ff28..5adf321 100644
  			dumped = rpos
  		end
  		str = str.reversed
-@@ -553,8 +567,8 @@ redef class FlatString
+@@ -553,13 +567,13 @@ redef class FlatString
  		if s isa FlatString then
  			if nlen > maxlen then return new Concat(self, s)
  			var mits = items
@@ -503,6 +539,12 @@ index 2b3ff28..5adf321 100644
  			var sits = s.items
  			var ns = new NativeString(nlen + 1)
  			mits.copy_to(ns, mlen, mifrom, 0)
+ 			sits.copy_to(ns, slen, sifrom, mlen)
+-			return new FlatString.full(ns, nlen, 0, nlen - 1, length + s.length)
++			return new FlatString.full(ns, nlen, length + s.length)
+ 		else if s isa Concat then
+ 			var sl = s.left
+ 			var sllen = sl.bytelen
 @@ -602,7 +616,7 @@ private class RopeByteReverseIterator
  		subs = new ReverseRopeSubstrings(root)
  		var s = subs.item
@@ -532,7 +574,7 @@ index 2b3ff28..5adf321 100644
  	end
  
 diff --git a/lib/websocket/websocket.nit b/lib/websocket/websocket.nit
-index 441df14..52b51a0 100644
+index c3fdaad..5ad5f59 100644
 --- a/lib/websocket/websocket.nit
 +++ b/lib/websocket/websocket.nit
 @@ -137,10 +137,10 @@ class WebsocketConnection
