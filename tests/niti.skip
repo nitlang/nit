@@ -31,3 +31,4 @@ fibonacci_word
 shootout_nsieve
 test_ropebuffer
 ui_test
+test_text_stat
