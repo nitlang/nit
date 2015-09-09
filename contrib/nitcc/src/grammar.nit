@@ -995,6 +995,8 @@ class LRState
 				abort
 			end
 		end
+		# Token to remove as reduction guard to solve S/R conflicts
+		var removed_reduces = new Array[Token]
 		for t, a in guarded_reduce do
 			if a.length > 1 then
 				print "REDUCE/REDUCE Conflict on state {self.number} {self.name} for token {t}:"
@@ -1031,13 +1033,16 @@ class LRState
 					print "Automatic Dangling on state {self.number} {self.name} for token {t}:"
 					print "\treduce: {ri}"
 					for r in ress do print r
-					guarded_reduce.keys.remove(t)
+					removed_reduces.add t
 				else
 					print "SHIFT/REDUCE Conflict on state {self.number} {self.name} for token {t}:"
 					print "\treduce: {ri}"
 					for i in guarded_shift[t] do print "\tshift:  {i}"
 				end
 			end
+		end
+		for t in removed_reduces do
+			guarded_reduce.keys.remove(t)
 		end
 	end
 
