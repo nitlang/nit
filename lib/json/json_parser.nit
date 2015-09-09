@@ -5,37 +5,168 @@ class Parser_json
 	super Parser
 	redef fun start_state do return state_Start
 end
-redef class Object
-	private fun state_Start: LRStateStart do return once new LRStateStart
-	private fun state_value: LRStatevalue do return once new LRStatevalue
-	private fun state_number: LRStatenumber do return once new LRStatenumber
-	private fun state_string: LRStatestring do return once new LRStatestring
-	private fun state__39dtrue_39d: LRState_39dtrue_39d do return once new LRState_39dtrue_39d
-	private fun state__39dfalse_39d: LRState_39dfalse_39d do return once new LRState_39dfalse_39d
-	private fun state__39dnull_39d: LRState_39dnull_39d do return once new LRState_39dnull_39d
-	private fun state__39d_123d_39d: LRState_39d_123d_39d do return once new LRState_39d_123d_39d
-	private fun state__39d_91d_39d: LRState_39d_91d_39d do return once new LRState_39d_91d_39d
-	private fun state_value_32dEof: LRStatevalue_32dEof do return once new LRStatevalue_32dEof
-	private fun state__39d_123d_39d_32dmembers: LRState_39d_123d_39d_32dmembers do return once new LRState_39d_123d_39d_32dmembers
-	private fun state__39d_123d_39d_32d_39d_125d_39d: LRState_39d_123d_39d_32d_39d_125d_39d do return once new LRState_39d_123d_39d_32d_39d_125d_39d
-	private fun state__39d_123d_39d_32dpair: LRState_39d_123d_39d_32dpair do return once new LRState_39d_123d_39d_32dpair
-	private fun state__39d_123d_39d_32dstring: LRState_39d_123d_39d_32dstring do return once new LRState_39d_123d_39d_32dstring
-	private fun state__39d_91d_39d_32delements: LRState_39d_91d_39d_32delements do return once new LRState_39d_91d_39d_32delements
-	private fun state__39d_91d_39d_32d_39d_93d_39d: LRState_39d_91d_39d_32d_39d_93d_39d do return once new LRState_39d_91d_39d_32d_39d_93d_39d
-	private fun state__39d_91d_39d_32dvalue: LRState_39d_91d_39d_32dvalue do return once new LRState_39d_91d_39d_32dvalue
-	private fun state__39d_123d_39d_32dmembers_32d_39d_125d_39d: LRState_39d_123d_39d_32dmembers_32d_39d_125d_39d do return once new LRState_39d_123d_39d_32dmembers_32d_39d_125d_39d
-	private fun state__39d_123d_39d_32dmembers_32d_39d_44d_39d: LRState_39d_123d_39d_32dmembers_32d_39d_44d_39d do return once new LRState_39d_123d_39d_32dmembers_32d_39d_44d_39d
-	private fun state__39d_123d_39d_32dstring_32d_39d_58d_39d: LRState_39d_123d_39d_32dstring_32d_39d_58d_39d do return once new LRState_39d_123d_39d_32dstring_32d_39d_58d_39d
-	private fun state__39d_91d_39d_32delements_32d_39d_93d_39d: LRState_39d_91d_39d_32delements_32d_39d_93d_39d do return once new LRState_39d_91d_39d_32delements_32d_39d_93d_39d
-	private fun state__39d_91d_39d_32delements_32d_39d_44d_39d: LRState_39d_91d_39d_32delements_32d_39d_44d_39d do return once new LRState_39d_91d_39d_32delements_32d_39d_44d_39d
-	private fun state__39d_123d_39d_32dmembers_32d_39d_44d_39d_32dpair: LRState_39d_123d_39d_32dmembers_32d_39d_44d_39d_32dpair do return once new LRState_39d_123d_39d_32dmembers_32d_39d_44d_39d_32dpair
-	private fun state__39d_123d_39d_32dstring_32d_39d_58d_39d_32dvalue: LRState_39d_123d_39d_32dstring_32d_39d_58d_39d_32dvalue do return once new LRState_39d_123d_39d_32dstring_32d_39d_58d_39d_32dvalue
-	private fun state__39d_91d_39d_32delements_32d_39d_44d_39d_32dvalue: LRState_39d_91d_39d_32delements_32d_39d_44d_39d_32dvalue do return once new LRState_39d_91d_39d_32delements_32d_39d_44d_39d_32dvalue
-	private fun goto_Nvalue: Goto_Nvalue do return once new Goto_Nvalue
-	private fun goto_Nmembers: Goto_Nmembers do return once new Goto_Nmembers
-	private fun goto_Npair: Goto_Npair do return once new Goto_Npair
-	private fun goto_Nelements: Goto_Nelements do return once new Goto_Nelements
-	private fun goto_N_start: Goto_N_start do return once new Goto_N_start
+private fun state_Start: LRStateStart do return once new LRStateStart
+private fun state_value: LRStatevalue do return once new LRStatevalue
+private fun state_number: LRStatenumber do return once new LRStatenumber
+private fun state_string: LRStatestring do return once new LRStatestring
+private fun state__39dtrue_39d: LRState_39dtrue_39d do return once new LRState_39dtrue_39d
+private fun state__39dfalse_39d: LRState_39dfalse_39d do return once new LRState_39dfalse_39d
+private fun state__39dnull_39d: LRState_39dnull_39d do return once new LRState_39dnull_39d
+private fun state__39d_123d_39d: LRState_39d_123d_39d do return once new LRState_39d_123d_39d
+private fun state__39d_91d_39d: LRState_39d_91d_39d do return once new LRState_39d_91d_39d
+private fun state_value_32dEof: LRStatevalue_32dEof do return once new LRStatevalue_32dEof
+private fun state__39d_123d_39d_32dmembers: LRState_39d_123d_39d_32dmembers do return once new LRState_39d_123d_39d_32dmembers
+private fun state__39d_123d_39d_32d_39d_125d_39d: LRState_39d_123d_39d_32d_39d_125d_39d do return once new LRState_39d_123d_39d_32d_39d_125d_39d
+private fun state__39d_123d_39d_32dpair: LRState_39d_123d_39d_32dpair do return once new LRState_39d_123d_39d_32dpair
+private fun state__39d_123d_39d_32dstring: LRState_39d_123d_39d_32dstring do return once new LRState_39d_123d_39d_32dstring
+private fun state__39d_91d_39d_32delements: LRState_39d_91d_39d_32delements do return once new LRState_39d_91d_39d_32delements
+private fun state__39d_91d_39d_32d_39d_93d_39d: LRState_39d_91d_39d_32d_39d_93d_39d do return once new LRState_39d_91d_39d_32d_39d_93d_39d
+private fun state__39d_91d_39d_32dvalue: LRState_39d_91d_39d_32dvalue do return once new LRState_39d_91d_39d_32dvalue
+private fun state__39d_123d_39d_32dmembers_32d_39d_125d_39d: LRState_39d_123d_39d_32dmembers_32d_39d_125d_39d do return once new LRState_39d_123d_39d_32dmembers_32d_39d_125d_39d
+private fun state__39d_123d_39d_32dmembers_32d_39d_44d_39d: LRState_39d_123d_39d_32dmembers_32d_39d_44d_39d do return once new LRState_39d_123d_39d_32dmembers_32d_39d_44d_39d
+private fun state__39d_123d_39d_32dstring_32d_39d_58d_39d: LRState_39d_123d_39d_32dstring_32d_39d_58d_39d do return once new LRState_39d_123d_39d_32dstring_32d_39d_58d_39d
+private fun state__39d_91d_39d_32delements_32d_39d_93d_39d: LRState_39d_91d_39d_32delements_32d_39d_93d_39d do return once new LRState_39d_91d_39d_32delements_32d_39d_93d_39d
+private fun state__39d_91d_39d_32delements_32d_39d_44d_39d: LRState_39d_91d_39d_32delements_32d_39d_44d_39d do return once new LRState_39d_91d_39d_32delements_32d_39d_44d_39d
+private fun state__39d_123d_39d_32dmembers_32d_39d_44d_39d_32dpair: LRState_39d_123d_39d_32dmembers_32d_39d_44d_39d_32dpair do return once new LRState_39d_123d_39d_32dmembers_32d_39d_44d_39d_32dpair
+private fun state__39d_123d_39d_32dstring_32d_39d_58d_39d_32dvalue: LRState_39d_123d_39d_32dstring_32d_39d_58d_39d_32dvalue do return once new LRState_39d_123d_39d_32dstring_32d_39d_58d_39d_32dvalue
+private fun state__39d_91d_39d_32delements_32d_39d_44d_39d_32dvalue: LRState_39d_91d_39d_32delements_32d_39d_44d_39d_32dvalue do return once new LRState_39d_91d_39d_32delements_32d_39d_44d_39d_32dvalue
+private fun goto_Nvalue: Goto_Nvalue do return once new Goto_Nvalue
+private fun reduce_Nvalue_number(parser: Parser) do
+		# REDUCE value::value_number=number
+		var n0 = parser.pop.as(Nnumber)
+		var p1 = new Nvalue_number(n0)
+		var prod = p1
+		parser.node_stack.push prod
+		parser.goto(goto_Nvalue)
+end
+private fun reduce_Nvalue_string(parser: Parser) do
+		# REDUCE value::value_string=string
+		var n0 = parser.pop.as(Nstring)
+		var p1 = new Nvalue_string(n0)
+		var prod = p1
+		parser.node_stack.push prod
+		parser.goto(goto_Nvalue)
+end
+private fun reduce_Nvalue_true(parser: Parser) do
+		# REDUCE value::value_true='true'
+		var n0 = parser.pop.as(N_39dtrue_39d)
+		var p1 = new Nvalue_true(n0)
+		var prod = p1
+		parser.node_stack.push prod
+		parser.goto(goto_Nvalue)
+end
+private fun reduce_Nvalue_false(parser: Parser) do
+		# REDUCE value::value_false='false'
+		var n0 = parser.pop.as(N_39dfalse_39d)
+		var p1 = new Nvalue_false(n0)
+		var prod = p1
+		parser.node_stack.push prod
+		parser.goto(goto_Nvalue)
+end
+private fun reduce_Nvalue_null(parser: Parser) do
+		# REDUCE value::value_null='null'
+		var n0 = parser.pop.as(N_39dnull_39d)
+		var p1 = new Nvalue_null(n0)
+		var prod = p1
+		parser.node_stack.push prod
+		parser.goto(goto_Nvalue)
+end
+private fun reduce_Nvalue_object_95d0(parser: Parser) do
+		# REDUCE value::value_object_0='{' members '}'
+		var n2 = parser.pop.as(N_39d_125d_39d)
+		var n1 = parser.pop.as(Nmembers)
+		var n0 = parser.pop.as(N_39d_123d_39d)
+		var p1 = new Nvalue_object(n0, n1, n2)
+		var prod = p1
+		parser.node_stack.push prod
+		parser.goto(goto_Nvalue)
+end
+private fun reduce_Nvalue_object_95d1(parser: Parser) do
+		# REDUCE value::value_object_1='{' '}'
+		var n1 = parser.pop.as(N_39d_125d_39d)
+		var n0 = parser.pop.as(N_39d_123d_39d)
+		var p1 = new Nvalue_object(n0, null, n1)
+		var prod = p1
+		parser.node_stack.push prod
+		parser.goto(goto_Nvalue)
+end
+private fun reduce_Nvalue_array_95d0(parser: Parser) do
+		# REDUCE value::value_array_0='[' elements ']'
+		var n2 = parser.pop.as(N_39d_93d_39d)
+		var n1 = parser.pop.as(Nelements)
+		var n0 = parser.pop.as(N_39d_91d_39d)
+		var p1 = new Nvalue_array(n0, n1, n2)
+		var prod = p1
+		parser.node_stack.push prod
+		parser.goto(goto_Nvalue)
+end
+private fun reduce_Nvalue_array_95d1(parser: Parser) do
+		# REDUCE value::value_array_1='[' ']'
+		var n1 = parser.pop.as(N_39d_93d_39d)
+		var n0 = parser.pop.as(N_39d_91d_39d)
+		var p1 = new Nvalue_array(n0, null, n1)
+		var prod = p1
+		parser.node_stack.push prod
+		parser.goto(goto_Nvalue)
+end
+private fun goto_Nmembers: Goto_Nmembers do return once new Goto_Nmembers
+private fun reduce_Nmembers_tail(parser: Parser) do
+		# REDUCE members::members_tail=members ',' pair
+		var n2 = parser.pop.as(Npair)
+		var n1 = parser.pop.as(N_39d_44d_39d)
+		var n0 = parser.pop.as(Nmembers)
+		var p1 = new Nmembers_tail(n0, n1, n2)
+		var prod = p1
+		parser.node_stack.push prod
+		parser.goto(goto_Nmembers)
+end
+private fun reduce_Nmembers_head(parser: Parser) do
+		# REDUCE members::members_head=pair
+		var n0 = parser.pop.as(Npair)
+		var p1 = new Nmembers_head(n0)
+		var prod = p1
+		parser.node_stack.push prod
+		parser.goto(goto_Nmembers)
+end
+private fun goto_Npair: Goto_Npair do return once new Goto_Npair
+private fun reduce_Npair(parser: Parser) do
+		# REDUCE pair::pair=string ':' value
+		var n2 = parser.pop.as(Nvalue)
+		var n1 = parser.pop.as(N_39d_58d_39d)
+		var n0 = parser.pop.as(Nstring)
+		var p1 = new Npair(n0, n1, n2)
+		var prod = p1
+		parser.node_stack.push prod
+		parser.goto(goto_Npair)
+end
+private fun goto_Nelements: Goto_Nelements do return once new Goto_Nelements
+private fun reduce_Nelements_tail(parser: Parser) do
+		# REDUCE elements::elements_tail=elements ',' value
+		var n2 = parser.pop.as(Nvalue)
+		var n1 = parser.pop.as(N_39d_44d_39d)
+		var n0 = parser.pop.as(Nelements)
+		var p1 = new Nelements_tail(n0, n1, n2)
+		var prod = p1
+		parser.node_stack.push prod
+		parser.goto(goto_Nelements)
+end
+private fun reduce_Nelements_head(parser: Parser) do
+		# REDUCE elements::elements_head=value
+		var n0 = parser.pop.as(Nvalue)
+		var p1 = new Nelements_head(n0)
+		var prod = p1
+		parser.node_stack.push prod
+		parser.goto(goto_Nelements)
+end
+private fun goto_N_start: Goto_N_start do return once new Goto_N_start
+private fun reduce_NStart(parser: Parser) do
+		# REDUCE _start::Start=value Eof
+		var n1 = parser.pop.as(NEof)
+		var n0 = parser.pop.as(Nvalue)
+		var p1 = new NStart(n0, n1)
+		var prod = p1
+		parser.node_stack.push prod
+		parser.stop = true
 end
 redef class NToken
 	# guarded action for state Start
@@ -527,12 +658,7 @@ private class LRStatenumber
 	redef fun to_s do return "number"
 	redef fun error_msg do return ""
 	redef fun action(parser) do
-		# REDUCE value::value_number=number
-		var n0 = parser.pop.as(Nnumber)
-		var p1 = new Nvalue_number(n0)
-		var prod = p1
-		parser.node_stack.push prod
-		parser.goto(goto_Nvalue)
+		reduce_Nvalue_number(parser)
 	end
 end
 # State string
@@ -541,12 +667,7 @@ private class LRStatestring
 	redef fun to_s do return "string"
 	redef fun error_msg do return ""
 	redef fun action(parser) do
-		# REDUCE value::value_string=string
-		var n0 = parser.pop.as(Nstring)
-		var p1 = new Nvalue_string(n0)
-		var prod = p1
-		parser.node_stack.push prod
-		parser.goto(goto_Nvalue)
+		reduce_Nvalue_string(parser)
 	end
 end
 # State 'true'
@@ -555,12 +676,7 @@ private class LRState_39dtrue_39d
 	redef fun to_s do return "\'true\'"
 	redef fun error_msg do return ""
 	redef fun action(parser) do
-		# REDUCE value::value_true='true'
-		var n0 = parser.pop.as(N_39dtrue_39d)
-		var p1 = new Nvalue_true(n0)
-		var prod = p1
-		parser.node_stack.push prod
-		parser.goto(goto_Nvalue)
+		reduce_Nvalue_true(parser)
 	end
 end
 # State 'false'
@@ -569,12 +685,7 @@ private class LRState_39dfalse_39d
 	redef fun to_s do return "\'false\'"
 	redef fun error_msg do return ""
 	redef fun action(parser) do
-		# REDUCE value::value_false='false'
-		var n0 = parser.pop.as(N_39dfalse_39d)
-		var p1 = new Nvalue_false(n0)
-		var prod = p1
-		parser.node_stack.push prod
-		parser.goto(goto_Nvalue)
+		reduce_Nvalue_false(parser)
 	end
 end
 # State 'null'
@@ -583,12 +694,7 @@ private class LRState_39dnull_39d
 	redef fun to_s do return "\'null\'"
 	redef fun error_msg do return ""
 	redef fun action(parser) do
-		# REDUCE value::value_null='null'
-		var n0 = parser.pop.as(N_39dnull_39d)
-		var p1 = new Nvalue_null(n0)
-		var prod = p1
-		parser.node_stack.push prod
-		parser.goto(goto_Nvalue)
+		reduce_Nvalue_null(parser)
 	end
 end
 # State '{'
@@ -621,13 +727,7 @@ private class LRStatevalue_32dEof
 	redef fun to_s do return "value Eof"
 	redef fun error_msg do return ""
 	redef fun action(parser) do
-		# REDUCE _start::Start=value Eof
-		var n1 = parser.pop.as(NEof)
-		var n0 = parser.pop.as(Nvalue)
-		var p1 = new NStart(n0, n1)
-		var prod = p1
-		parser.node_stack.push prod
-		parser.stop = true
+		reduce_NStart(parser)
 	end
 end
 # State '{' members
@@ -645,13 +745,7 @@ private class LRState_39d_123d_39d_32d_39d_125d_39d
 	redef fun to_s do return "\'\{\' \'\}\'"
 	redef fun error_msg do return ""
 	redef fun action(parser) do
-		# REDUCE value::value_object_1='{' '}'
-		var n1 = parser.pop.as(N_39d_125d_39d)
-		var n0 = parser.pop.as(N_39d_123d_39d)
-		var p1 = new Nvalue_object(n0, null, n1)
-		var prod = p1
-		parser.node_stack.push prod
-		parser.goto(goto_Nvalue)
+		reduce_Nvalue_object_95d1(parser)
 	end
 end
 # State '{' pair
@@ -660,12 +754,7 @@ private class LRState_39d_123d_39d_32dpair
 	redef fun to_s do return "\'\{\' pair"
 	redef fun error_msg do return ""
 	redef fun action(parser) do
-		# REDUCE members::members_head=pair
-		var n0 = parser.pop.as(Npair)
-		var p1 = new Nmembers_head(n0)
-		var prod = p1
-		parser.node_stack.push prod
-		parser.goto(goto_Nmembers)
+		reduce_Nmembers_head(parser)
 	end
 end
 # State '{' string
@@ -692,13 +781,7 @@ private class LRState_39d_91d_39d_32d_39d_93d_39d
 	redef fun to_s do return "\'[\' \']\'"
 	redef fun error_msg do return ""
 	redef fun action(parser) do
-		# REDUCE value::value_array_1='[' ']'
-		var n1 = parser.pop.as(N_39d_93d_39d)
-		var n0 = parser.pop.as(N_39d_91d_39d)
-		var p1 = new Nvalue_array(n0, null, n1)
-		var prod = p1
-		parser.node_stack.push prod
-		parser.goto(goto_Nvalue)
+		reduce_Nvalue_array_95d1(parser)
 	end
 end
 # State '[' value
@@ -707,12 +790,7 @@ private class LRState_39d_91d_39d_32dvalue
 	redef fun to_s do return "\'[\' value"
 	redef fun error_msg do return ""
 	redef fun action(parser) do
-		# REDUCE elements::elements_head=value
-		var n0 = parser.pop.as(Nvalue)
-		var p1 = new Nelements_head(n0)
-		var prod = p1
-		parser.node_stack.push prod
-		parser.goto(goto_Nelements)
+		reduce_Nelements_head(parser)
 	end
 end
 # State '{' members '}'
@@ -721,14 +799,7 @@ private class LRState_39d_123d_39d_32dmembers_32d_39d_125d_39d
 	redef fun to_s do return "\'\{\' members \'\}\'"
 	redef fun error_msg do return ""
 	redef fun action(parser) do
-		# REDUCE value::value_object_0='{' members '}'
-		var n2 = parser.pop.as(N_39d_125d_39d)
-		var n1 = parser.pop.as(Nmembers)
-		var n0 = parser.pop.as(N_39d_123d_39d)
-		var p1 = new Nvalue_object(n0, n1, n2)
-		var prod = p1
-		parser.node_stack.push prod
-		parser.goto(goto_Nvalue)
+		reduce_Nvalue_object_95d0(parser)
 	end
 end
 # State '{' members ','
@@ -761,14 +832,7 @@ private class LRState_39d_91d_39d_32delements_32d_39d_93d_39d
 	redef fun to_s do return "\'[\' elements \']\'"
 	redef fun error_msg do return ""
 	redef fun action(parser) do
-		# REDUCE value::value_array_0='[' elements ']'
-		var n2 = parser.pop.as(N_39d_93d_39d)
-		var n1 = parser.pop.as(Nelements)
-		var n0 = parser.pop.as(N_39d_91d_39d)
-		var p1 = new Nvalue_array(n0, n1, n2)
-		var prod = p1
-		parser.node_stack.push prod
-		parser.goto(goto_Nvalue)
+		reduce_Nvalue_array_95d0(parser)
 	end
 end
 # State '[' elements ','
@@ -789,14 +853,7 @@ private class LRState_39d_123d_39d_32dmembers_32d_39d_44d_39d_32dpair
 	redef fun to_s do return "\'\{\' members \',\' pair"
 	redef fun error_msg do return ""
 	redef fun action(parser) do
-		# REDUCE members::members_tail=members ',' pair
-		var n2 = parser.pop.as(Npair)
-		var n1 = parser.pop.as(N_39d_44d_39d)
-		var n0 = parser.pop.as(Nmembers)
-		var p1 = new Nmembers_tail(n0, n1, n2)
-		var prod = p1
-		parser.node_stack.push prod
-		parser.goto(goto_Nmembers)
+		reduce_Nmembers_tail(parser)
 	end
 end
 # State '{' string ':' value
@@ -805,14 +862,7 @@ private class LRState_39d_123d_39d_32dstring_32d_39d_58d_39d_32dvalue
 	redef fun to_s do return "\'\{\' string \':\' value"
 	redef fun error_msg do return ""
 	redef fun action(parser) do
-		# REDUCE pair::pair=string ':' value
-		var n2 = parser.pop.as(Nvalue)
-		var n1 = parser.pop.as(N_39d_58d_39d)
-		var n0 = parser.pop.as(Nstring)
-		var p1 = new Npair(n0, n1, n2)
-		var prod = p1
-		parser.node_stack.push prod
-		parser.goto(goto_Npair)
+		reduce_Npair(parser)
 	end
 end
 # State '[' elements ',' value
@@ -821,13 +871,6 @@ private class LRState_39d_91d_39d_32delements_32d_39d_44d_39d_32dvalue
 	redef fun to_s do return "\'[\' elements \',\' value"
 	redef fun error_msg do return ""
 	redef fun action(parser) do
-		# REDUCE elements::elements_tail=elements ',' value
-		var n2 = parser.pop.as(Nvalue)
-		var n1 = parser.pop.as(N_39d_44d_39d)
-		var n0 = parser.pop.as(Nelements)
-		var p1 = new Nelements_tail(n0, n1, n2)
-		var prod = p1
-		parser.node_stack.push prod
-		parser.goto(goto_Nelements)
+		reduce_Nelements_tail(parser)
 	end
 end

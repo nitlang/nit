@@ -6,43 +6,41 @@ class Lexer_json
 	super Lexer
 	redef fun start_state do return dfastate_0
 end
-redef class Object
-	private fun dfastate_0: DFAState0 do return once new DFAState0
-	private fun dfastate_1: DFAState1 do return once new DFAState1
-	private fun dfastate_2: DFAState2 do return once new DFAState2
-	private fun dfastate_3: DFAState3 do return once new DFAState3
-	private fun dfastate_4: DFAState4 do return once new DFAState4
-	private fun dfastate_5: DFAState5 do return once new DFAState5
-	private fun dfastate_6: DFAState6 do return once new DFAState6
-	private fun dfastate_7: DFAState7 do return once new DFAState7
-	private fun dfastate_8: DFAState8 do return once new DFAState8
-	private fun dfastate_9: DFAState9 do return once new DFAState9
-	private fun dfastate_10: DFAState10 do return once new DFAState10
-	private fun dfastate_11: DFAState11 do return once new DFAState11
-	private fun dfastate_12: DFAState12 do return once new DFAState12
-	private fun dfastate_13: DFAState13 do return once new DFAState13
-	private fun dfastate_14: DFAState14 do return once new DFAState14
-	private fun dfastate_15: DFAState15 do return once new DFAState15
-	private fun dfastate_16: DFAState16 do return once new DFAState16
-	private fun dfastate_17: DFAState17 do return once new DFAState17
-	private fun dfastate_18: DFAState18 do return once new DFAState18
-	private fun dfastate_19: DFAState19 do return once new DFAState19
-	private fun dfastate_20: DFAState20 do return once new DFAState20
-	private fun dfastate_21: DFAState21 do return once new DFAState21
-	private fun dfastate_22: DFAState22 do return once new DFAState22
-	private fun dfastate_23: DFAState23 do return once new DFAState23
-	private fun dfastate_24: DFAState24 do return once new DFAState24
-	private fun dfastate_25: DFAState25 do return once new DFAState25
-	private fun dfastate_26: DFAState26 do return once new DFAState26
-	private fun dfastate_27: DFAState27 do return once new DFAState27
-	private fun dfastate_28: DFAState28 do return once new DFAState28
-	private fun dfastate_29: DFAState29 do return once new DFAState29
-	private fun dfastate_30: DFAState30 do return once new DFAState30
-	private fun dfastate_31: DFAState31 do return once new DFAState31
-	private fun dfastate_32: DFAState32 do return once new DFAState32
-	private fun dfastate_33: DFAState33 do return once new DFAState33
-	private fun dfastate_34: DFAState34 do return once new DFAState34
-end
+private fun dfastate_0: DFAState0 do return once new DFAState0
+private fun dfastate_1: DFAState1 do return once new DFAState1
+private fun dfastate_2: DFAState2 do return once new DFAState2
+private fun dfastate_3: DFAState3 do return once new DFAState3
+private fun dfastate_4: DFAState4 do return once new DFAState4
+private fun dfastate_5: DFAState5 do return once new DFAState5
+private fun dfastate_6: DFAState6 do return once new DFAState6
+private fun dfastate_7: DFAState7 do return once new DFAState7
+private fun dfastate_8: DFAState8 do return once new DFAState8
+private fun dfastate_9: DFAState9 do return once new DFAState9
+private fun dfastate_10: DFAState10 do return once new DFAState10
+private fun dfastate_11: DFAState11 do return once new DFAState11
+private fun dfastate_12: DFAState12 do return once new DFAState12
+private fun dfastate_13: DFAState13 do return once new DFAState13
+private fun dfastate_14: DFAState14 do return once new DFAState14
+private fun dfastate_15: DFAState15 do return once new DFAState15
+private fun dfastate_16: DFAState16 do return once new DFAState16
+private fun dfastate_17: DFAState17 do return once new DFAState17
+private fun dfastate_18: DFAState18 do return once new DFAState18
+private fun dfastate_19: DFAState19 do return once new DFAState19
+private fun dfastate_20: DFAState20 do return once new DFAState20
+private fun dfastate_21: DFAState21 do return once new DFAState21
+private fun dfastate_22: DFAState22 do return once new DFAState22
+private fun dfastate_23: DFAState23 do return once new DFAState23
+private fun dfastate_24: DFAState24 do return once new DFAState24
+private fun dfastate_25: DFAState25 do return once new DFAState25
+private fun dfastate_26: DFAState26 do return once new DFAState26
+private fun dfastate_27: DFAState27 do return once new DFAState27
+private fun dfastate_28: DFAState28 do return once new DFAState28
+private fun dfastate_29: DFAState29 do return once new DFAState29
+private fun dfastate_30: DFAState30 do return once new DFAState30
+private fun dfastate_31: DFAState31 do return once new DFAState31
+private fun dfastate_32: DFAState32 do return once new DFAState32
+private fun dfastate_33: DFAState33 do return once new DFAState33
+private fun dfastate_34: DFAState34 do return once new DFAState34
 class MyNToken
 	super NToken
 end
