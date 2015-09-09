@@ -1038,6 +1038,7 @@ class LRState
 					print "SHIFT/REDUCE Conflict on state {self.number} {self.name} for token {t}:"
 					print "\treduce: {ri}"
 					for i in guarded_shift[t] do print "\tshift:  {i}"
+					removed_reduces.add t
 				end
 			end
 		end
