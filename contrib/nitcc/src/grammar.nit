@@ -1045,6 +1045,7 @@ class LRState
 		end
 		for t in removed_reduces do
 			guarded_reduce.keys.remove(t)
+			t.reduces.remove(self)
 		end
 	end
 
