@@ -14,6 +14,7 @@ redef class Deserializer
 		if name == "Array[Serializable]" then return new Array[Serializable].from_deserializer(self)
 		if name == "Array[Object]" then return new Array[Object].from_deserializer(self)
 		if name == "Array[Match]" then return new Array[Match].from_deserializer(self)
+		if name == "Array[nullable Match]" then return new Array[nullable Match].from_deserializer(self)
 		return super
 	end
 end
