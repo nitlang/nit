@@ -1,6 +1,6 @@
 # NAME
 
-nitls - lists the projects, groups and paths of Nit sources files.
+nitls - lists the packages, groups and paths of Nit sources files.
 
 # SYNOPSIS
 
@@ -8,7 +8,7 @@ nitls [*options*] [*FILE*]...
 
 # DESCRIPTION
 
-`nitls` is used to list Nit files in directories and extract the module-group-project relation.
+`nitls` is used to list Nit files in directories and extract the module-group-package relation.
 
 It is basically a `ls` or a simple `find` specialized on `.nit` source files.
 
@@ -31,7 +31,7 @@ Show the tree of modules from the current directory.
 
     $ nitls -t
 
-Show the list of projects imported by the modules of the current directory.
+Show the list of packages imported by the modules of the current directory.
 
     $ nitls -d -P *.nit
 
@@ -43,24 +43,24 @@ Each combination of option
 
 Three presentation modes are available.
 
-### `-P`, `--project`
-List projects in a flat list (default).
+### `-P`, `--package`
+List packages in a flat list (default).
 
-Only project are displayed (and not the individual files).
+Only package are displayed (and not the individual files).
 
 ### `-t`, `--tree`
-List source files in their groups and projects.
+List source files in their groups and packages.
 
-Each `.nit` file is presented in a tree of projects and groups.
+Each `.nit` file is presented in a tree of packages and groups.
 
 ### `-s`, `--source`
 List source files in a flat list.
 
-Each `.nit` file is presented indivitually.
+Each `.nit` file is presented individually.
 
 The three modes are exclusives.
 
-The default mode is `--project` unless one on the argument is a group, then it is `--group`.
+The default mode is `--package` unless one on the argument is a group, then it is `--group`.
 
 ## COLLECT
 
@@ -74,12 +74,12 @@ List dependencies of given modules
 
 All imported modules are also considered.
 
-In --tree and --source modes, the modules direclty imported are also displayed.
+In --tree and --source modes, the modules directly imported are also displayed.
 
 ### `-k`, `--keep`
 Ignore errors and files that are not a Nit source file.
 
-When a file that is not a valid Nit module is encoutered, it is ignored and the rest of the files are
+When a file that is not a valid Nit module is encountered, it is ignored and the rest of the files are
 processed.
 
 Without this option, an error message is displayed and nitls terminates on such a case.
