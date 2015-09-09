@@ -1009,6 +1009,7 @@ class LRState
 			if a.length > 1 then
 				print "REDUCE/REDUCE Conflict on state {self.number} {self.name} for token {t}:"
 				for i in a do print "\treduce: {i}"
+				conflicting_items.add_all a
 			end
 			if guarded_shift.has_key(t) then
 				var ri = a.first
@@ -1048,6 +1049,8 @@ class LRState
 					print "\treduce: {ri}"
 					for i in guarded_shift[t] do print "\tshift:  {i}"
 					removed_reduces.add t
+					conflicting_items.add_all a
+					conflicting_items.add_all guarded_shift[t]
 				end
 			end
 		end
@@ -1056,6 +1059,11 @@ class LRState
 			t.reduces.remove(self)
 		end
 	end
+
+	# Items within a reduce/reduce or a shift/reduce conflict.
+	#
+	# Is computed by `analysis`
+	var conflicting_items = new ArraySet[Item]
 
 	# Return `i` and all other items of the state that expands, directly or indirectly, to `i`
 	fun back_expand(i: Item): Set[Item]

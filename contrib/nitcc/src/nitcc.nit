@@ -72,8 +72,8 @@ end
 var lr = gram.lr0
 
 var conflitcs = new ArraySet[Production]
-for s in lr.states do for t, a in s.guarded_reduce do if a.length > 1 or s.guarded_shift.has_key(t) then
-	for i in a do conflitcs.add(i.alt.prod)
+for s in lr.states do
+	for i in s.conflicting_items do conflitcs.add(i.alt.prod)
 end
 
 if not conflitcs.is_empty then
