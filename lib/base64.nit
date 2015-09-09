@@ -33,14 +33,14 @@ redef class String
 		return inv_base64_chars
 	end
 
-	# Encodes the receiver string to base64.
-	# By default, uses "=" for padding.
-	fun encode_base64 : String do return encode_base64_custom_padding('='.ascii.to_b)
-
-	# Encodes the receiver string to base64 using a custom padding character.
+	# Encodes the received string to base64.
 	#
-	# If using the default padding character `=`, see `encode_base64`.
-	fun encode_base64_custom_padding(padding : Byte) : String
+	# If no padding is given, will use `=` as the padding character
+	#
+	#     assert "".encode_base64 == ""
+	#     assert "Morriar rly loves docs".encode_base64 == "TW9ycmlhciBybHkgbG92ZXMgZG9jcw=="
+	#     assert "Morriar rly loves docs".encode_base64(45.to_b) == "TW9ycmlhciBybHkgbG92ZXMgZG9jcw--"
+	fun encode_base64(padding: nullable Byte): String
 	do
 		var base64_bytes = once base64_chars.bytes
 		var length = bytelen
@@ -54,6 +54,8 @@ redef class String
 		result[result_length] = 0u8
 
 		var mask_6bit = 0b0011_1111
+
+		if padding == null then padding = '='.ascii.to_b
 
 		for s in [0 .. steps[ do
 			var e = 0
@@ -84,14 +86,16 @@ redef class String
 		return result.to_s_with_length(result_length)
 	end
 
-	# Decodes the receiver string from base64.
-	# By default, uses "=" for padding.
-	fun decode_base64 : String do return decode_base64_custom_padding('='.ascii.to_b)
-
-	# Decodes the receiver string to base64 using a custom padding character.
+	# Decodes the receiver string to base64.
 	#
-	# If using the default padding character `=`, see `decode_base64`.
-	fun decode_base64_custom_padding(padding : Byte) : String
+	# If no padding is given, will use `=` as the padding character
+	#
+	#     assert "".decode_base64 == ""
+	#     assert "TW9ycmlhciBybHkgbG92ZXMgZG9jcw==".decode_base64 == "Morriar rly loves docs"
+	#     assert "TW9ycmlhciBybHkgbG92ZXMgZG9jcw--".decode_base64(45.to_b) == "Morriar rly loves docs"
+	#
+	# Require: `length % 4 == 0`
+	fun decode_base64(padding: nullable Byte): String
 	do
 		var inv = once inverted_base64_chars
 		var length = bytelen
@@ -101,6 +105,8 @@ redef class String
 		var bytes = self.bytes
 		var steps = length / 4
 		var result_length = steps * 3
+
+		if padding == null then padding = '='.ascii.to_b
 
 		var epos = length - 1
 		var padding_len = 0
