@@ -384,15 +384,19 @@ class Regex
 			var cpos = cstr.byte_to_char_index_cached(bfrom, charfrom, bytefrom)
 			var len = cstr.utf8_length(bfrom, bto)
 			var match = new Match(rets, cpos, len)
+			var subs = match.subs
 
 			# Add sub expressions
 			for i in [1 .. nsub] do
-				if native_match[i].rm_so < 0 then continue
+				if native_match[i].rm_so < 0 then
+					subs.add null
+					continue
+				end
 				var sub_bfrom = native_match[i].rm_so + bytefrom
 				var sub_bto = native_match[i].rm_eo - 1 + bytefrom
 				var sub_cpos = cstr.byte_to_char_index_cached(sub_bfrom, cpos, bfrom)
 				var sub_len = cstr.utf8_length(sub_bfrom, sub_bto)
-				match.subs.add(new Match(rets, sub_cpos, sub_len))
+				subs.add(new Match(rets, sub_cpos, sub_len))
 			end
 
 			return match
@@ -441,15 +445,19 @@ class Regex
 			var len = cstr.utf8_length(bfrom, bto)
 			var match = new Match(rets, cstart, len)
 			matches.add match
+			var subs = match.subs
 
 			# Add sub expressions
 			for i in [1 .. nsub] do
-				if native_match[i].rm_so < 0 then continue
+				if native_match[i].rm_so < 0 then
+					subs.add null
+					continue
+				end
 				var sub_bfrom = native_match[i].rm_so + bytesub
 				var sub_bto = native_match[i].rm_eo - 1 + bytesub
 				var sub_cstart = cstr.byte_to_char_index_cached(sub_bfrom, cstart, bfrom)
 				var sub_len = cstr.utf8_length(sub_bfrom, sub_bto)
-				match.subs.add(new Match(rets, sub_cstart, sub_len))
+				subs.add(new Match(rets, sub_cstart, sub_len))
 			end
 
 			bytesub = bto + 1
@@ -479,7 +487,7 @@ redef class Match
 	# assert match.subs.length == 1
 	# assert match.subs.first.to_s == "d eee"
 	# ~~~
-	var subs = new Array[Match] is lazy
+	var subs = new Array[nullable Match] is lazy
 
 	# Get the `n`th expression in this match
 	#
@@ -494,7 +502,7 @@ redef class Match
 	# assert match[0].to_s == "c d eee f"
 	# assert match[1].to_s == "d eee"
 	# ~~~
-	fun [](n: Int): Match do
+	fun [](n: Int): nullable Match do
 		if n == 0 then return self
 		assert n > 0 and n <= subs.length
 		return subs[n-1]
