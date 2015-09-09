@@ -648,14 +648,12 @@ private class Generator
 		add "\tredef fun start_state do return state_{states.first.cname}"
 		add "end"
 		
-		add "redef class Object"
 		for s in states do
-			add "\tprivate fun state_{s.cname}: LRState{s.cname} do return once new LRState{s.cname}"
+			add "private fun state_{s.cname}: LRState{s.cname} do return once new LRState{s.cname}"
 		end
 		for p in gram.prods do
-			add "\tprivate fun goto_{p.cname}: Goto_{p.cname} do return once new Goto_{p.cname}"
+			add "private fun goto_{p.cname}: Goto_{p.cname} do return once new Goto_{p.cname}"
 		end
-		add "end"
 
 		add "redef class NToken"
 		for s in states do

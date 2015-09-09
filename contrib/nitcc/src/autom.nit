@@ -667,12 +667,10 @@ private class DFAGenerator
 		add("\tredef fun start_state do return dfastate_{names[automaton.start]}\n")
 		add("end\n")
 
-		add("redef class Object\n")
 		for s in automaton.states do
 			var n = names[s]
-			add("\tprivate fun dfastate_{n}: DFAState{n} do return once new DFAState{n}\n")
+			add("private fun dfastate_{n}: DFAState{n} do return once new DFAState{n}\n")
 		end
-		add("end\n")
 
 		add("class MyNToken\n")
 		add("\tsuper NToken\n")
