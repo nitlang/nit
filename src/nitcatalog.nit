@@ -33,7 +33,7 @@
 # * [ ] reify people
 # * [ ] separate information gathering from rendering
 # * [ ] move up information gathering in (existing or new) service modules
-# * [ ] add command line options
+# * [X] add command line options
 # * [ ] harden HTML (escaping, path injection, etc)
 # * [ ] nitcorn server with RESTful API
 #
@@ -645,6 +645,13 @@ end
 var model = new Model
 var tc = new ToolContext
 
+var opt_dir = new OptionString("Directory where the HTML files are generated", "-d", "--dir")
+var opt_no_git = new OptionBool("Do not gather git information from the working directory", "--no-git")
+var opt_no_parse = new OptionBool("Do not parse nit files (no importation information)", "--no-parse")
+var opt_no_model = new OptionBool("Do not analyse nit files (no class/method information)", "--no-model")
+
+tc.option_context.add_option(opt_dir, opt_no_git, opt_no_parse, opt_no_model)
+
 tc.process_options(sys.args)
 tc.keep_going = true
 
@@ -664,6 +671,7 @@ for p in model.mpackages do
 	modelbuilder.scan_group(g)
 
 	# Load the module to process importation information
+	if opt_no_parse.value then continue
 	modelbuilder.parse_group(g)
 
 	catalog.deps.add_node(p)
@@ -674,14 +682,18 @@ for p in model.mpackages do
 			catalog.deps.add_edge(p, ip)
 		end
 	end
+end
 
+if not opt_no_git.value then for p in model.mprojects do
 	catalog.git_info(p)
 end
 
 # Run phases to modelize classes and properties (so we can count them)
-#modelbuilder.run_phases
+if not opt_no_model.value then
+	modelbuilder.run_phases
+end
 
-var out = "out"
+var out = opt_dir.value or else "catalog.out"
 out.mkdir
 
 # Generate the css (hard coded)
