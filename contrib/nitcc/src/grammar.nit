@@ -1001,7 +1001,8 @@ class LRState
 			if a.length > 1 then
 				print "REDUCE/REDUCE Conflict on state {self.number} {self.name} for token {t}:"
 				for i in a do print "\treduce: {i}"
-			else if guarded_shift.has_key(t) then
+			end
+			if guarded_shift.has_key(t) then
 				var ri = a.first
 				var confs = new Array[Item]
 				var ress = new Array[String]
