@@ -25,7 +25,7 @@
 # * [X] generate a page per package with the readme and most metadata
 # * [ ] link/include/be included in the documentation
 # * [ ] propose `related packages`
-# * [ ] show directory content (a la nitls)
+# * [X] show directory content (a la nitls)
 # * [X] gather git information from the working directory
 # * [ ] gather git information from the repository
 # * [ ] gather package information from github
@@ -238,6 +238,34 @@ class Catalog
 		res.add "</li>"
 	end
 
+	# Recursively generate a level in the file tree of the *content* section
+	private fun gen_content_level(ot: OrderedTree[Object], os: Array[Object], res: Template)
+	do
+		res.add "<ul>\n"
+		for o in os do
+			res.add "<li>"
+			if o isa MGroup then
+				var d = ""
+				var mdoc = o.mdoc
+				if mdoc != null then d = ": {mdoc.html_synopsis.write_to_string}"
+				res.add "<strong>{o.name}</strong>{d} ({o.filepath.to_s})"
+			else if o isa ModulePath then
+				var d = ""
+				var m = o.mmodule
+				if m != null then
+					var mdoc = m.mdoc
+					if mdoc != null then d = ": {mdoc.html_synopsis.write_to_string}"
+				end
+				res.add "<strong>{o.name}</strong>{d} ({o.filepath.to_s})"
+			else
+				abort
+			end
+			var subs = ot.sub.get_or_null(o)
+			if subs != null then gen_content_level(ot, subs, res)
+			res.add "</li>\n"
+		end
+		res.add "</ul>\n"
+	end
 
 	# Compute information and generate a full HTML page for a package
 	fun package_page(mpackage: MPackage): Writable
@@ -257,6 +285,23 @@ class Catalog
 			res.add mdoc.html_documentation
 			score += mdoc.content.length.score
 		end
+
+		res.add "<h2>Content</h2>"
+		var ot = new OrderedTree[Object]
+		for g in mpackage.mgroups do
+			var pa = g.parent
+			if g.is_interesting then
+				ot.add(pa, g)
+				pa = g
+			end
+			for mp in g.module_paths do
+				ot.add(pa, mp)
+			end
+		end
+		ot.sort_with(alpha_comparator)
+		gen_content_level(ot, ot.roots, res)
+
+
 		res.add """
 </div>
 <div class="sidebar">
