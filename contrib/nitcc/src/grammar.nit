@@ -653,6 +653,11 @@ private class Generator
 		end
 		for p in gram.prods do
 			add "private fun goto_{p.cname}: Goto_{p.cname} do return once new Goto_{p.cname}"
+			for a in p.alts do
+				add "private fun reduce_{a.cname}(parser: Parser) do"
+				gen_reduce_to_nit(a)
+				add "end"
+			end
 		end
 
 		add "redef class NToken"
@@ -664,7 +669,8 @@ private class Generator
 			if s.reduces.length != 1 then
 				add "\t\tparser.parse_error"
 			else
-				gen_reduce_to_nit(s.reduces.first)
+				add "\t\treduce_{s.reduces.first.cname}(parser)"
+				#gen_reduce_to_nit(s.reduces.first)
 			end
 			add "\tend"
 		end
@@ -687,7 +693,8 @@ private class Generator
 				if not s.need_guard then continue
 				if s.reduces.length <= 1 then continue
 				add "\tredef fun action_s{s.cname}(parser) do"
-				gen_reduce_to_nit(s.guarded_reduce[t].first.alt)
+				add "\t\treduce_{s.guarded_reduce[t].first.alt.cname}(parser)"
+				#gen_reduce_to_nit(s.guarded_reduce[t].first.alt)
 				add "\tend"
 			end
 			add "\tredef fun node_name do return \"{t.name.escape_to_nit}\""
@@ -783,7 +790,8 @@ private class Generator
 			if s.need_guard then
 				add "\t\tparser.peek_token.action_s{s.cname}(parser)"
 			else if s.reduces.length == 1 then
-				gen_reduce_to_nit(s.reduces.first)
+				add "\t\treduce_{s.reduces.first.cname}(parser)"
+				#gen_reduce_to_nit(s.reduces.first)
 			else
 				abort
 			end
