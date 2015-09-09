@@ -382,50 +382,52 @@ class Catalog
 		if cat != null then cat2proj[cat].add mpackage
 		score += ts2.length.score
 
-		var reqs = deps[mpackage].greaters.to_a
-		reqs.remove(mpackage)
-		alpha_comparator.sort(reqs)
-		res.add "<h3>Requirements</h3>\n"
-		if reqs.is_empty then
-			res.add "none"
-		else
-			var list = new Array[String]
-			for r in reqs do
-				var direct = deps.has_direct_edge(mpackage, r)
-				var s = "<a href=\"{r}.html\">"
-				if direct then s += "<strong>"
-				s += r.to_s
-				if direct then s += "</strong>"
-				s += "</a>"
-				list.add s
+		if deps.has(mpackage) then
+			var reqs = deps[mpackage].greaters.to_a
+			reqs.remove(mpackage)
+			alpha_comparator.sort(reqs)
+			res.add "<h3>Requirements</h3>\n"
+			if reqs.is_empty then
+				res.add "none"
+			else
+				var list = new Array[String]
+				for r in reqs do
+					var direct = deps.has_direct_edge(mpackage, r)
+					var s = "<a href=\"{r}.html\">"
+					if direct then s += "<strong>"
+					s += r.to_s
+					if direct then s += "</strong>"
+					s += "</a>"
+					list.add s
+				end
+				res.add_list(list, ", ", " and ")
 			end
-			res.add_list(list, ", ", " and ")
-		end
 
-		reqs = deps[mpackage].smallers.to_a
-		reqs.remove(mpackage)
-		alpha_comparator.sort(reqs)
-		res.add "<h3>Clients</h3>\n"
-		if reqs.is_empty then
-			res.add "none"
-		else
-			var list = new Array[String]
-			for r in reqs do
-				var direct = deps.has_direct_edge(r, mpackage)
-				var s = "<a href=\"{r}.html\">"
-				if direct then s += "<strong>"
-				s += r.to_s
-				if direct then s += "</strong>"
-				s += "</a>"
-				list.add s
+			reqs = deps[mpackage].smallers.to_a
+			reqs.remove(mpackage)
+			alpha_comparator.sort(reqs)
+			res.add "<h3>Clients</h3>\n"
+			if reqs.is_empty then
+				res.add "none"
+			else
+				var list = new Array[String]
+				for r in reqs do
+					var direct = deps.has_direct_edge(r, mpackage)
+					var s = "<a href=\"{r}.html\">"
+					if direct then s += "<strong>"
+					s += r.to_s
+					if direct then s += "</strong>"
+					s += "</a>"
+					list.add s
+				end
+				res.add_list(list, ", ", " and ")
 			end
-			res.add_list(list, ", ", " and ")
-		end
 
-		score += deps[mpackage].greaters.length.score
-		score += deps[mpackage].direct_greaters.length.score
-		score += deps[mpackage].smallers.length.score
-		score += deps[mpackage].direct_smallers.length.score
+			score += deps[mpackage].greaters.length.score
+			score += deps[mpackage].direct_greaters.length.score
+			score += deps[mpackage].smallers.length.score
+			score += deps[mpackage].direct_smallers.length.score
+		end
 
 		var contributors = mpackage.contributors
 		if not contributors.is_empty then
@@ -598,10 +600,12 @@ class Catalog
 		res.add "<th data-field=\"name\" data-sortable=\"true\">name</th>\n"
 		res.add "<th data-field=\"maint\" data-sortable=\"true\">maint</th>\n"
 		res.add "<th data-field=\"contrib\" data-sortable=\"true\">contrib</th>\n"
-		res.add "<th data-field=\"reqs\" data-sortable=\"true\">reqs</th>\n"
-		res.add "<th data-field=\"dreqs\" data-sortable=\"true\">direct<br>reqs</th>\n"
-		res.add "<th data-field=\"cli\" data-sortable=\"true\">clients</th>\n"
-		res.add "<th data-field=\"dcli\" data-sortable=\"true\">direct<br>clients</th>\n"
+		if deps.not_empty then
+			res.add "<th data-field=\"reqs\" data-sortable=\"true\">reqs</th>\n"
+			res.add "<th data-field=\"dreqs\" data-sortable=\"true\">direct<br>reqs</th>\n"
+			res.add "<th data-field=\"cli\" data-sortable=\"true\">clients</th>\n"
+			res.add "<th data-field=\"dcli\" data-sortable=\"true\">direct<br>clients</th>\n"
+		end
 		res.add "<th data-field=\"mod\" data-sortable=\"true\">modules</th>\n"
 		res.add "<th data-field=\"cla\" data-sortable=\"true\">classes</th>\n"
 		res.add "<th data-field=\"met\" data-sortable=\"true\">methods</th>\n"
@@ -615,10 +619,12 @@ class Catalog
 			if p.maintainers.not_empty then maint = p.maintainers.first
 			res.add "<td>{maint}</td>"
 			res.add "<td>{p.contributors.length}</td>"
-			res.add "<td>{deps[p].greaters.length-1}</td>"
-			res.add "<td>{deps[p].direct_greaters.length}</td>"
-			res.add "<td>{deps[p].smallers.length-1}</td>"
-			res.add "<td>{deps[p].direct_smallers.length}</td>"
+			if deps.not_empty then
+				res.add "<td>{deps[p].greaters.length-1}</td>"
+				res.add "<td>{deps[p].direct_greaters.length}</td>"
+				res.add "<td>{deps[p].smallers.length-1}</td>"
+				res.add "<td>{deps[p].direct_smallers.length}</td>"
+			end
 			res.add "<td>{mmodules[p]}</td>"
 			res.add "<td>{mclasses[p]}</td>"
 			res.add "<td>{mmethods[p]}</td>"
@@ -684,7 +690,7 @@ for p in model.mpackages do
 	end
 end
 
-if not opt_no_git.value then for p in model.mprojects do
+if not opt_no_git.value then for p in model.mpackages do
 	catalog.git_info(p)
 end
 
@@ -817,12 +823,14 @@ index.add """
 index.add "<h2>Highlighted Packages</h2>\n"
 index.add catalog.list_best(catalog.score)
 
-index.add "<h2>Most Required</h2>\n"
-var reqs = new Counter[MPackage]
-for p in model.mpackages do
-	reqs[p] = catalog.deps[p].smallers.length - 1
+if catalog.deps.not_empty then
+	index.add "<h2>Most Required</h2>\n"
+	var reqs = new Counter[MPackage]
+	for p in model.mpackages do
+		reqs[p] = catalog.deps[p].smallers.length - 1
+	end
+	index.add catalog.list_best(reqs)
 end
-index.add catalog.list_best(reqs)
 
 index.add "<h2>By First Tag</h2>\n"
 index.add catalog.list_by(catalog.cat2proj, "cat_")
