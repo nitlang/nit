@@ -615,7 +615,7 @@ class WikiConfig
 	super ConfigTree
 
 	# Returns the config value at `key` or return `default` if no key was found.
-	private fun value_or_default(key: String, default: String): String do
+	protected fun value_or_default(key: String, default: String): String do
 		return self[key] or else default
 	end
 
