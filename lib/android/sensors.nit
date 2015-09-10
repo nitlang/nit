@@ -20,19 +20,19 @@
 #
 # ~~~~nitish
 # #FIXME rewrite the example
-# var app = new MyApp
-# app.sensors_support_enabled = true
-# app.accelerometer.enabled = true
-# app.accelerometer.eventrate = 10000
-# app.magnetic_field.enabled = true
-# app.gyroscope.enabled = true
-# app.light.enabled = true
-# app.proximity.enabled = true
-# app.main_loop
+# redef class App
+# 	sensors_support_enabled = true
+# 	accelerometer.enabled = true
+# 	accelerometer.eventrate = 10000
+# 	magnetic_field.enabled = true
+# 	gyroscope.enabled = true
+# 	light.enabled = true
+# 	proximity.enabled = true
+# end
 # ~~~~
 #
-# In this example, we enable the sensor support, then enable all types of sensors supported, before running the app.
-# The result is you get all type of SensorEvent (ASensorAccelerometer, ASensorMagneticField ...) in the input method of your app
+# In this example, we enable the sensor support, then enable all types of sensors supported by the API, directly with `App` attributes
+# As a result, you get all type of SensorEvent (ASensorAccelerometer, ASensorMagneticField ...) in the `input` callback of `App`
 module sensors
 
 import android
@@ -270,8 +270,8 @@ redef class App
 	private fun enable_accelerometer
 	do
 		accelerometer.asensor = sensormanager.get_default_sensor(new ASensorType.accelerometer)
-		if accelerometer.asensor.address_is_null then 
-				print "Accelerometer sensor unavailable" 
+		if accelerometer.asensor.address_is_null then
+				print "Accelerometer sensor unavailable"
 		else
 				if eventqueue.enable_sensor(accelerometer.asensor) < 0 then print "Accelerometer enabling failed"
 			eventqueue.set_event_rate(accelerometer.asensor, accelerometer.event_rate)
@@ -314,7 +314,7 @@ redef class App
 	private fun enable_proximity
 	do
 		proximity.asensor = sensormanager.get_default_sensor(new ASensorType.proximity)
-		if proximity.asensor.address_is_null then 
+		if proximity.asensor.address_is_null then
 				print "Proximity sensor unavailable"
 		else
 			if eventqueue.enable_sensor(proximity.asensor) < 0 then print "Proximity enabling failed"
