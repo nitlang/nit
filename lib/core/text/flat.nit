@@ -177,44 +177,6 @@ redef class FlatText
 		return nns.to_s_with_length(nlen)
 	end
 
-	private fun byte_to_char_index(index: Int): Int do
-		var ln = _bytelen
-		assert index >= 0
-		assert index < ln
-
-		var pos = _bytepos
-		# Find best insertion point
-		var delta_begin = index
-		var delta_end = (ln - 1) - index
-		var delta_cache = (pos - index).abs
-		var min = delta_begin
-		var its = _items
-
-		if delta_cache < min then min = delta_cache
-		if delta_end < min then min = delta_end
-
-		var ns_i: Int
-		var my_i: Int
-
-		if min == delta_begin then
-			ns_i = first_byte
-			my_i = 0
-		else if min == delta_cache then
-			ns_i = pos
-			my_i = _position
-		else
-			ns_i = its.find_beginning_of_char_at(last_byte)
-			my_i = length - 1
-		end
-
-		my_i = its.byte_to_char_index_cached(index, my_i, ns_i)
-
-		_position = my_i
-		_bytepos = index
-
-		return my_i
-	end
-
 	redef fun [](index) do return _items.char_at(char_to_byte_index(index))
 end
 
@@ -235,15 +197,7 @@ class FlatString
 
 	redef var length is lazy do
 		if _bytelen == 0 then return 0
-		var st = _first_byte
-		var its = _items
-		var ln = 0
-		var lst = _last_byte
-		while st <= lst do
-			st += its.length_of_char_at(st)
-			ln += 1
-		end
-		return ln
+		return _items.utf8_length(_first_byte, _last_byte)
 	end
 
 	redef fun reversed

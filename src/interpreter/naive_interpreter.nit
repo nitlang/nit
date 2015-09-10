@@ -1154,8 +1154,8 @@ redef class AMethPropdef
 			else if pname == "atoi" then
 				return v.int_instance(recvval.atoi)
 			else if pname == "fast_cstring" then
-				var ns = recvval.to_s.substring_from(args[1].to_i)
-				return v.native_string_instance(ns)
+				var ns = recvval.fast_cstring(args[1].to_i)
+				return v.native_string_instance(ns.to_s)
 			end
 		else if pname == "calloc_string" then
 			return v.native_string_instance_len(args[1].to_i)

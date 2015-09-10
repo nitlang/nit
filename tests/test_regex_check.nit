@@ -27,3 +27,19 @@ print str.split(re1)
 
 var re2 = "5".to_re
 print str.split(re2)
+
+str = "résonnance réseau résultat"
+
+print str.search_all("rés".to_re).join(", ")
+
+str = "あついあのあほ"
+print str.split("あ(の)?".to_re).join("")
+
+for i in str.search_all("あ(の)?".to_re) do
+	print "Match found : {i}"
+	print "Submatches: "
+	var sbs = i.subs
+	for j in sbs.length.times do
+		print "[{j}] : {sbs[j] or else "null"} "
+	end
+end

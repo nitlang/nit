@@ -130,7 +130,7 @@ extern class NativeString `{ char* `}
 		return ns_i
 	end
 
-	# Gets the byte index of char at position `n` in UTF-8 String
+	# Gets the char index of byte at position `n` in a UTF-8 String
 	#
 	# `char_from` and `byte_from` are cached values to seek from.
 	#
@@ -172,5 +172,17 @@ extern class NativeString `{ char* `}
 		var stpos = pos
 		if length_of_char_at(stpos) >= (endpos - stpos + 1) then return pos
 		return endpos
+	end
+
+	# Number of UTF-8 characters in `self` between positions `from` and `to`
+	fun utf8_length(from, to: Int): Int do
+		var st = from
+		var lst = to
+		var ln = 0
+		while st <= lst do
+			st += length_of_char_at(st)
+			ln += 1
+		end
+		return ln
 	end
 end

@@ -22,7 +22,7 @@
 module re
 
 import text
-intrude import text::flat
+import text::flat
 import gc
 import error
 
@@ -356,7 +356,7 @@ class Regex
 	#     assert "l+".to_re.search_in("hello world", 3).from == 3
 	#     assert "z".to_re.search_in("hello world", 0) == null
 	#     assert "cd(e)".to_re.search_in("abcdef", 2)[1].to_s == "e"
-	redef fun search_in(text, from)
+	redef fun search_in(text, charfrom)
 	do
 		assert not optimize_has
 
@@ -367,31 +367,36 @@ class Regex
 		assert native != null
 
 		# Actually execute
-		text = text.to_s
-		var sub = text.substring_from(from)
-		var cstr = sub.to_cstring
-		var bstr = new FlatString.full(cstr, sub.bytelen, 0, sub.bytelen - 1, text.length - from)
+		var cstr = text.to_cstring
+		var rets = cstr.to_s_with_length(text.bytelen)
+		var bytefrom = cstr.char_to_byte_index_cached(charfrom, 0, 0)
+		var subcstr = cstr.fast_cstring(bytefrom)
 		var eflags = gather_eflags
 		var native_match = self.native_match
 
 		var nsub = native.re_nsub
-		var res = native.regexec(cstr, nsub+1, native_match, eflags)
+		var res = native.regexec(subcstr, nsub + 1, native_match, eflags)
 
 		# Found one?
 		if res == 0 then
-			var first_char = bstr.byte_to_char_index(native_match.rm_so)
-			var length_char = bstr.byte_to_char_index(native_match.rm_eo - native_match.rm_so - 1) # FIXME For issue #1684
-			var match = new Match(text,
-				from + first_char,
-				length_char + 1)
+			var bfrom = native_match.rm_so + bytefrom
+			var bto = native_match.rm_eo - 1 + bytefrom
+			var cpos = cstr.byte_to_char_index_cached(bfrom, charfrom, bytefrom)
+			var len = cstr.utf8_length(bfrom, bto)
+			var match = new Match(rets, cpos, len)
+			var subs = match.subs
 
 			# Add sub expressions
 			for i in [1 .. nsub] do
-				first_char = bstr.byte_to_char_index(native_match[i].rm_so)
-				length_char = bstr.byte_to_char_index(native_match[i].rm_eo - native_match[i].rm_so - 1) # FIXME For issue #1684
-				match.subs.add new Match( text,
-					from + first_char,
-					length_char + 1)
+				if native_match[i].rm_so < 0 then
+					subs.add null
+					continue
+				end
+				var sub_bfrom = native_match[i].rm_so + bytefrom
+				var sub_bto = native_match[i].rm_eo - 1 + bytefrom
+				var sub_cpos = cstr.byte_to_char_index_cached(sub_bfrom, cpos, bfrom)
+				var sub_len = cstr.utf8_length(sub_bfrom, sub_bto)
+				subs.add(new Match(rets, sub_cpos, sub_len))
 			end
 
 			return match
@@ -421,34 +426,44 @@ class Regex
 		assert native != null
 
 		# Actually execute
-		text = text.to_s
 		var cstr = text.to_cstring
+		var subcstr = cstr
+		var rets = cstr.to_s_with_length(text.bytelen)
 		var eflags = gather_eflags
 		var eflags_or_notbol = eflags | flag_notbol
 		var native_match = self.native_match
 		var matches = new Array[Match]
 
 		var nsub = native.re_nsub
-		var res = native.regexec(cstr, nsub+1, native_match, eflags)
-		var d = 0
+		var res = native.regexec(subcstr, nsub + 1, native_match, eflags)
+		var bytesub = 0
+		var charsub = 0
 		while res == 0 do
-			var match = new Match(text,
-				d + native_match.rm_so,
-				native_match.rm_eo - native_match.rm_so)
+			var bfrom = native_match.rm_so + bytesub
+			var bto = native_match.rm_eo - 1 + bytesub
+			var cstart = cstr.byte_to_char_index_cached(bfrom, charsub, bytesub)
+			var len = cstr.utf8_length(bfrom, bto)
+			var match = new Match(rets, cstart, len)
 			matches.add match
+			var subs = match.subs
 
 			# Add sub expressions
-			for i in [1..nsub] do
-				match.subs.add new Match( text,
-					d + native_match[i].rm_so,
-					native_match[i].rm_eo - native_match[i].rm_so)
+			for i in [1 .. nsub] do
+				if native_match[i].rm_so < 0 then
+					subs.add null
+					continue
+				end
+				var sub_bfrom = native_match[i].rm_so + bytesub
+				var sub_bto = native_match[i].rm_eo - 1 + bytesub
+				var sub_cstart = cstr.byte_to_char_index_cached(sub_bfrom, cstart, bfrom)
+				var sub_len = cstr.utf8_length(sub_bfrom, sub_bto)
+				subs.add(new Match(rets, sub_cstart, sub_len))
 			end
 
-			if d == native_match.rm_eo then
-				d += 1
-			else d = d + native_match.rm_eo
-			cstr = cstr.substring_from(native_match.rm_eo)
-			res = native.regexec(cstr, nsub+1, native_match, eflags_or_notbol)
+			bytesub = bto + 1
+			charsub = cstart + len
+			subcstr = cstr.fast_cstring(bytesub)
+			res = native.regexec(subcstr, nsub + 1, native_match, eflags_or_notbol)
 		end
 
 		# No more match?
@@ -472,7 +487,7 @@ redef class Match
 	# assert match.subs.length == 1
 	# assert match.subs.first.to_s == "d eee"
 	# ~~~
-	var subs = new Array[Match] is lazy
+	var subs = new Array[nullable Match] is lazy
 
 	# Get the `n`th expression in this match
 	#
@@ -487,7 +502,7 @@ redef class Match
 	# assert match[0].to_s == "c d eee f"
 	# assert match[1].to_s == "d eee"
 	# ~~~
-	fun [](n: Int): Match do
+	fun [](n: Int): nullable Match do
 		if n == 0 then return self
 		assert n > 0 and n <= subs.length
 		return subs[n-1]
