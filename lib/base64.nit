@@ -33,13 +33,13 @@ redef class String
 		return inv_base64_chars
 	end
 
-	# Encodes the received string to base64.
+	# Encodes self to base64.
 	#
 	# If no padding is given, will use `=` as the padding character
 	#
 	#     assert "".encode_base64 == ""
 	#     assert "Morriar rly loves docs".encode_base64 == "TW9ycmlhciBybHkgbG92ZXMgZG9jcw=="
-	#     assert "Morriar rly loves docs".encode_base64(45.to_b) == "TW9ycmlhciBybHkgbG92ZXMgZG9jcw--"
+	#     assert "Morriar rly loves docs".encode_base64('-'.ascii.to_b) == "TW9ycmlhciBybHkgbG92ZXMgZG9jcw--"
 	fun encode_base64(padding: nullable Byte): String
 	do
 		var base64_bytes = once base64_chars.bytes
@@ -86,13 +86,13 @@ redef class String
 		return result.to_s_with_length(result_length)
 	end
 
-	# Decodes the receiver string to base64.
+	# Decodes self to base64.
 	#
 	# If no padding is given, will use `=` as the padding character
 	#
 	#     assert "".decode_base64 == ""
 	#     assert "TW9ycmlhciBybHkgbG92ZXMgZG9jcw==".decode_base64 == "Morriar rly loves docs"
-	#     assert "TW9ycmlhciBybHkgbG92ZXMgZG9jcw--".decode_base64(45.to_b) == "Morriar rly loves docs"
+	#     assert "TW9ycmlhciBybHkgbG92ZXMgZG9jcw--".decode_base64('-'.ascii.to_b) == "Morriar rly loves docs"
 	#
 	# Require: `length % 4 == 0`
 	fun decode_base64(padding: nullable Byte): String
