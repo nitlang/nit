@@ -758,8 +758,11 @@ class HTMLDecorator
 	end
 
 	redef fun add_code(v, block) do
-		if block isa BlockFence and block.meta != null then
-			v.add "<pre class=\"{block.meta.to_s}\"><code>"
+		var meta = block.meta
+		if meta != null then
+			v.add "<pre class=\""
+			append_value(v, meta)
+			v.add "\"><code>"
 		else
 			v.add "<pre><code>"
 		end
