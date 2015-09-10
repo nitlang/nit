@@ -99,10 +99,8 @@ private class NitdocDecorator
 	var toolcontext = new ToolContext
 
 	redef fun add_code(v, block) do
-		var meta = "nit"
-		if block isa BlockFence and block.meta != null then
-			meta = block.meta.to_s
-		end
+		var meta = block.meta or else "nit"
+
 		# Do not try to highlight non-nit code.
 		if meta != "nit" and meta != "nitish" then
 			v.add "<pre class=\"{meta}\"><code>"

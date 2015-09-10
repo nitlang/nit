@@ -291,10 +291,7 @@ private class NitunitDecorator
 
 	redef fun add_code(v, block) do
 		var code = block.raw_content
-		var meta = "nit"
-		if block isa BlockFence and block.meta != null then
-			meta = block.meta.to_s
-		end
+		var meta = block.meta or else "nit"
 		# Do not try to test non-nit code.
 		if meta != "nit" then return
 		# Try to parse code blocks

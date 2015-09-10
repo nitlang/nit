@@ -1233,6 +1233,9 @@ end
 class BlockCode
 	super Block
 
+	# Any string found after fence token.
+	var meta: nullable Text
+
 	# Number of char to skip at the beginning of the line.
 	#
 	# Block code lines start at 4 spaces.
@@ -1258,9 +1261,6 @@ end
 # this class is only used for typing purposes.
 class BlockFence
 	super BlockCode
-
-	# Any string found after fence token.
-	var meta: nullable Text
 
 	# Fence code lines start at 0 spaces.
 	redef var line_start = 0
