@@ -235,7 +235,7 @@ redef class ArticleCommand
 	private fun filter_results(res: Array[MEntity]): Array[MEntity] do
 		var out = new Array[MEntity]
 		for e in res do
-			if e isa MProject then continue
+			if e isa MPackage then continue
 			if e isa MGroup then continue
 			out.add e
 		end

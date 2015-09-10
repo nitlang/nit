@@ -40,24 +40,24 @@ do
 	buf.append("<html>\n<body>\n")
 	buf.append("<h1>Model</h1>\n")
 
-	buf.append("<h2>Projects</h2>\n")
-	for mproject in model.mprojects do
-		buf.append("<h3 id='project-{mproject}'>Project {mproject}</h3>\n")
+	buf.append("<h2>Packages</h2>\n")
+	for mpackage in model.mpackages do
+		buf.append("<h3 id='package-{mpackage}'>Package {mpackage}</h3>\n")
 		buf.append("<dl>\n")
 		buf.append("<dt>groups</dt>\n")
-		for x in mproject.mgroups do
+		for x in mpackage.mgroups do
 			buf.append("<dd>{linkto(x)}</dd>\n")
 		end
 		buf.append("</dl>\n")
 	end
 
 	buf.append("<h2>Groups</h2>\n")
-	for mproject in model.mprojects do
-		for mgroup in mproject.mgroups do
+	for mpackage in model.mpackages do
+		for mgroup in mpackage.mgroups do
 			buf.append("<h3 id='group-{mgroup}'>Group {mgroup}</h3>\n")
 			buf.append("<dl>\n")
-			buf.append("<dt>project</dt>\n")
-			buf.append("<dd>{linkto(mproject)}</dd>\n")
+			buf.append("<dt>package</dt>\n")
+			buf.append("<dd>{linkto(mpackage)}</dd>\n")
 			buf.append("<dt>filepath</dt>\n")
 			buf.append("<dd>{mgroup.filepath.to_s}</dd>\n")
 			var p = mgroup.parent
@@ -193,8 +193,8 @@ end
 
 private fun linkto(o: Object): String
 do
-	if o isa MProject then
-		return "<a href='#project-{o}'>{o}</a>"
+	if o isa MPackage then
+		return "<a href='#package-{o}'>{o}</a>"
 	else if o isa MGroup then
 		return "<a href='#group-{o}'>{o}</a>"
 	else if o isa MModule then

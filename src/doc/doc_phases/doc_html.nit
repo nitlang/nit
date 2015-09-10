@@ -46,7 +46,7 @@ redef class ToolContext
 	# Display a custom brand or logo in the documentation top menu.
 	var opt_custom_brand = new OptionString("custom link to external site", "--custom-brand")
 
-	# Display a custom introduction text before the projects overview.
+	# Display a custom introduction text before the packages overview.
 	var opt_custom_intro = new OptionString("custom intro text for homepage", "--custom-overview-text")
 	# Display a custom footer on each documentation page.
 	#
@@ -68,7 +68,7 @@ redef class ToolContext
 	# FIXME redo the plugin
 	var opt_github_base_sha1 = new OptionString("Git sha1 of base commit used to create pull request", "--github-base-sha1")
 	# FIXME redo the plugin
-	var opt_github_gitdir = new OptionString("Git working directory used to resolve path name (ex: /home/me/myproject/)", "--github-gitdir")
+	var opt_github_gitdir = new OptionString("Git working directory used to resolve path name (ex: /home/me/mypackage/)", "--github-gitdir")
 
 	redef init do
 		super
@@ -257,11 +257,11 @@ redef class ReadmePage
 
 	redef fun init_topmenu(v, doc) do
 		super
-		var mproject = mentity.mproject
+		var mpackage = mentity.mpackage
 		if not mentity.is_root then
-			topmenu.add_li new ListItem(new Link(mproject.nitdoc_url, mproject.html_name))
+			topmenu.add_li new ListItem(new Link(mpackage.nitdoc_url, mpackage.html_name))
 		end
-		topmenu.add_li new ListItem(new Link(html_url, mproject.html_name))
+		topmenu.add_li new ListItem(new Link(html_url, mpackage.html_name))
 		topmenu.active_item = topmenu.items.last
 	end
 
@@ -275,11 +275,11 @@ end
 redef class MGroupPage
 	redef fun init_topmenu(v, doc) do
 		super
-		var mproject = mentity.mproject
+		var mpackage = mentity.mpackage
 		if not mentity.is_root then
-			topmenu.add_li new ListItem(new Link(mproject.nitdoc_url, mproject.html_name))
+			topmenu.add_li new ListItem(new Link(mpackage.nitdoc_url, mpackage.html_name))
 		end
-		topmenu.add_li new ListItem(new Link(html_url, mproject.html_name))
+		topmenu.add_li new ListItem(new Link(html_url, mpackage.html_name))
 		topmenu.active_item = topmenu.items.last
 	end
 
@@ -323,8 +323,8 @@ end
 redef class MModulePage
 	redef fun init_topmenu(v, doc) do
 		super
-		var mproject = mentity.mproject
-		topmenu.add_li new ListItem(new Link(mproject.nitdoc_url, mproject.html_name))
+		var mpackage = mentity.mpackage
+		topmenu.add_li new ListItem(new Link(mpackage.nitdoc_url, mpackage.html_name))
 		topmenu.add_li new ListItem(new Link(mentity.nitdoc_url, mentity.html_name))
 		topmenu.active_item = topmenu.items.last
 	end
@@ -367,8 +367,8 @@ redef class MClassPage
 
 	redef fun init_topmenu(v, doc) do
 		super
-		var mproject = mentity.intro_mmodule.mgroup.mproject
-		topmenu.add_li new ListItem(new Link(mproject.nitdoc_url, mproject.html_name))
+		var mpackage = mentity.intro_mmodule.mgroup.mpackage
+		topmenu.add_li new ListItem(new Link(mpackage.nitdoc_url, mpackage.html_name))
 		topmenu.add_li new ListItem(new Link(html_url, mentity.html_name))
 		topmenu.active_item = topmenu.items.last
 	end
@@ -471,9 +471,9 @@ redef class MPropertyPage
 	redef fun init_topmenu(v, doc) do
 		super
 		var mmodule = mentity.intro_mclassdef.mmodule
-		var mproject = mmodule.mgroup.mproject
+		var mpackage = mmodule.mgroup.mpackage
 		var mclass = mentity.intro_mclassdef.mclass
-		topmenu.add_li new ListItem(new Link(mproject.nitdoc_url, mproject.html_name))
+		topmenu.add_li new ListItem(new Link(mpackage.nitdoc_url, mpackage.html_name))
 		topmenu.add_li new ListItem(new Link(mclass.nitdoc_url, mclass.html_name))
 		topmenu.add_li new ListItem(new Link(html_url, mentity.html_name))
 		topmenu.active_item = topmenu.items.last
@@ -495,8 +495,8 @@ redef class MEntitySection
 		if not page isa MEntityPage then return
 		var mentity = self.mentity
 		if mentity isa MGroup and mentity.is_root then
-			html_title = mentity.mproject.html_name
-			html_subtitle = mentity.mproject.html_declaration
+			html_title = mentity.mpackage.html_name
+			html_subtitle = mentity.mpackage.html_declaration
 		else if mentity isa MProperty then
 			var title = new Template
 			title.add mentity.html_name
@@ -559,7 +559,7 @@ end
 redef class DefinitionArticle
 	redef fun init_html_render(v, doc, page) do
 		var mentity = self.mentity
-		if mentity isa MProject or mentity isa MModule then
+		if mentity isa MPackage or mentity isa MModule then
 			var title = new Template
 			title.add mentity.html_icon
 			title.add mentity.html_namespace

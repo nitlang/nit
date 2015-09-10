@@ -1,6 +1,6 @@
 OverviewPage Overview
 	# home.article
-		## projects.section
+		## packages.section
 			### test_prog.definition
 
 ReadmePage test_prog
@@ -1026,5 +1026,5 @@ Found 182 mentities
   MGroup: 4 (2.19%)
   MVirtualTypeDef: 1 (0.54%)
   MVirtualTypeProp: 1 (0.54%)
-  MProject: 1 (0.54%)
+  MPackage: 1 (0.54%)
 quicksearch-list.js

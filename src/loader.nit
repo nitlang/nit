@@ -116,14 +116,14 @@ redef class ModelBuilder
 	#
 	# Each name can be:
 	#
-	# * a path to a module, a group or a directory of projects.
+	# * a path to a module, a group or a directory of packages.
 	# * a short name of a module or a group that are looked in the `paths` (-I)
 	#
 	# Then, for each entry, if it is:
 	#
 	# * a module, then is it parser and returned.
 	# * a group then recursively all its modules are parsed.
-	# * a directory of projects then all the modules of all projects are parsed.
+	# * a directory of packages then all the modules of all packages are parsed.
 	# * else an error is displayed.
 	#
 	# See `parse` for details.
@@ -205,7 +205,7 @@ redef class ModelBuilder
 		# First, look in groups
 		var c = mgroup
 		if c != null then
-			var r = c.mproject.root
+			var r = c.mpackage.root
 			assert r != null
 			scan_group(r)
 			var res = r.mmodule_paths_by_name(name)
@@ -215,10 +215,10 @@ redef class ModelBuilder
 		# Look at some known directories
 		var lookpaths = self.paths
 
-		# Look in the directory of the group project also (even if not explicitly in the path)
+		# Look in the directory of the group package also (even if not explicitly in the path)
 		if mgroup != null then
 			# path of the root group
-			var dirname = mgroup.mproject.root.filepath
+			var dirname = mgroup.mpackage.root.filepath
 			if dirname != null then
 				dirname = dirname.join_path("..").simplify_path
 				if not lookpaths.has(dirname) and dirname.file_exists then
@@ -308,7 +308,7 @@ redef class ModelBuilder
 	# See `identify_file`.
 	var identified_files = new Array[ModulePath]
 
-	# Identify a source file and load the associated project and groups if required.
+	# Identify a source file and load the associated package and groups if required.
 	#
 	# This method does what the user expects when giving an argument to a Nit tool.
 	#
@@ -317,7 +317,7 @@ redef class ModelBuilder
 	# * If `path` is a directory (with a `/`),
 	#   then the ModulePath of its default module is returned (if any)
 	# * If `path` is a simple identifier (eg. `digraph`),
-	#   then the main module of the project `digraph` is searched in `paths` and returned.
+	#   then the main module of the package `digraph` is searched in `paths` and returned.
 	#
 	# Silently return `null` if `path` does not exists or cannot be identified.
 	fun identify_file(path: String): nullable ModulePath
@@ -361,18 +361,18 @@ redef class ModelBuilder
 		var mgroup = get_mgroup(mgrouppath)
 
 		if mgroup == null then
-			# singleton project
-			var mproject = new MProject(pn, model)
-			mgroup = new MGroup(pn, mproject, null) # same name for the root group
+			# singleton package
+			var mpackage = new MPackage(pn, model)
+			mgroup = new MGroup(pn, mpackage, null) # same name for the root group
 			mgroup.filepath = path
-			mproject.root = mgroup
-			toolcontext.info("found singleton project `{pn}` at {path}", 2)
+			mpackage.root = mgroup
+			toolcontext.info("found singleton package `{pn}` at {path}", 2)
 
-			# Attach homonymous `ini` file to the project
+			# Attach homonymous `ini` file to the package
 			var inipath = path.dirname / "{pn}.ini"
 			if inipath.file_exists then
 				var ini = new ConfigTree(inipath)
-				mproject.ini = ini
+				mpackage.ini = ini
 			end
 		end
 
@@ -416,13 +416,13 @@ redef class ModelBuilder
 			return null
 		end
 
-		# By default, the name of the project or group is the base_name of the directory
+		# By default, the name of the package or group is the base_name of the directory
 		var pn = rdp.basename(".nit")
 
-		# Check `project.ini` that indicate a project
+		# Check `package.ini` that indicate a package
 		var ini = null
 		var parent = null
-		var inipath = dirpath / "project.ini"
+		var inipath = dirpath / "package.ini"
 		if inipath.file_exists then
 			ini = new ConfigTree(inipath)
 		end
@@ -436,16 +436,16 @@ redef class ModelBuilder
 				return null
 			end
 
-			# Special stopper `projects.ini`
-			if (dirpath/"projects.ini").file_exists then
-				# dirpath cannot be a project since it is a project directory
+			# Special stopper `packages.ini`
+			if (dirpath/"packages.ini").file_exists then
+				# dirpath cannot be a package since it is a package directory
 				mgroups[rdp] = null
 				return null
 			end
 
 			# check the parent directory (if it does not contain the stopper file)
 			var parentpath = dirpath.join_path("..").simplify_path
-			var stopper = parentpath / "projects.ini"
+			var stopper = parentpath / "packages.ini"
 			if not stopper.file_exists then
 				# Recursively get the parent group
 				parent = get_mgroup(parentpath)
@@ -459,20 +459,20 @@ redef class ModelBuilder
 
 		var mgroup
 		if parent == null then
-			# no parent, thus new project
-			if ini != null then pn = ini["project.name"] or else pn
-			var mproject = new MProject(pn, model)
-			mgroup = new MGroup(pn, mproject, null) # same name for the root group
-			mproject.root = mgroup
-			toolcontext.info("found project `{mproject}` at {dirpath}", 2)
-			mproject.ini = ini
+			# no parent, thus new package
+			if ini != null then pn = ini["package.name"] or else pn
+			var mpackage = new MPackage(pn, model)
+			mgroup = new MGroup(pn, mpackage, null) # same name for the root group
+			mpackage.root = mgroup
+			toolcontext.info("found package `{mpackage}` at {dirpath}", 2)
+			mpackage.ini = ini
 		else
-			mgroup = new MGroup(pn, parent.mproject, parent)
+			mgroup = new MGroup(pn, parent.mpackage, parent)
 			toolcontext.info("found sub group `{mgroup.full_name}` at {dirpath}", 2)
 		end
 
 		# search documentation
-		# in src first so the documentation of the project code can be distinct for the documentation of the project usage
+		# in src first so the documentation of the package code can be distinct for the documentation of the package usage
 		var readme = dirpath.join_path("README.md")
 		if not readme.file_exists then readme = dirpath.join_path("README")
 		if readme.file_exists then
@@ -524,8 +524,8 @@ redef class ModelBuilder
 		for f in p.files do
 			var fp = p/f
 			var g = get_mgroup(fp)
-			# Recursively scan for groups of the same project
-			if g != null and g.mproject == mgroup.mproject then
+			# Recursively scan for groups of the same package
+			if g != null and g.mpackage == mgroup.mpackage then
 				scan_group(g)
 			end
 			identify_file(fp)
@@ -668,11 +668,11 @@ redef class ModelBuilder
 			end
 		end
 
-		# Check for conflicting module names in the project
+		# Check for conflicting module names in the package
 		if mgroup != null then
 			var others = model.get_mmodules_by_name(mod_name)
 			if others != null then for other in others do
-				if other.mgroup!= null and other.mgroup.mproject == mgroup.mproject then
+				if other.mgroup!= null and other.mgroup.mpackage == mgroup.mpackage then
 					var node: ANode
 					if decl == null then node = nmodule else node = decl.n_name
 					error(node, "Error: a module named `{other.full_name}` already exists at {other.location}.")
@@ -728,8 +728,8 @@ redef class ModelBuilder
 
 		# If qualified and in a group
 		if mgroup != null then
-			# First search in the project
-			var r = mgroup.mproject.root
+			# First search in the package
+			var r = mgroup.mpackage.root
 			assert r != null
 			scan_group(r)
 			# Get all modules with the final name
@@ -1012,7 +1012,7 @@ class ModulePath
 	# The human path of the module
 	var filepath: String
 
-	# The group (and the project) of the possible module
+	# The group (and the package) of the possible module
 	var mgroup: MGroup
 
 	# The loaded module (if any)
@@ -1021,12 +1021,12 @@ class ModulePath
 	redef fun to_s do return filepath
 end
 
-redef class MProject
+redef class MPackage
 	# The associated `.ini` file, if any
 	#
 	# The `ini` file is given as is and might contain invalid or missing information.
 	#
-	# Some projects, like stand-alone projects or virtual projects have no `ini` file associated.
+	# Some packages, like stand-alone packages or virtual packages have no `ini` file associated.
 	var ini: nullable ConfigTree = null
 end
 
@@ -1036,7 +1036,7 @@ redef class MGroup
 
 	# Is the group interesting for a final user?
 	#
-	# Groups are mandatory in the model but for simple projects they are not
+	# Groups are mandatory in the model but for simple packages they are not
 	# always interesting.
 	#
 	# A interesting group has, at least, one of the following true:

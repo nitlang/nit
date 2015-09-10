@@ -28,7 +28,7 @@ redef class ToolContext
 end
 
 redef class MModule
-	# Extra Java files to compile with the project
+	# Extra Java files to compile with the module
 	private var extra_java_files: nullable Array[JavaFile] = null
 end
 

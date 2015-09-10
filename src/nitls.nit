@@ -63,7 +63,7 @@ class ProjTree
 				if o.mmodule != null and not o.mmodule.in_importation.direct_greaters.is_empty then
 					var ms = new Array[String]
 					for m in o.mmodule.in_importation.direct_greaters do
-						if m.mgroup.mproject == o.mmodule.mgroup.mproject then
+						if m.mgroup.mpackage == o.mmodule.mgroup.mpackage then
 							ms.add m.name
 						else
 							ms.add m.full_name
@@ -109,15 +109,15 @@ var tc = new ToolContext
 
 var opt_keep = new OptionBool("Ignore errors and files that are not a Nit source file", "-k", "--keep")
 var opt_recursive = new OptionBool("Process directories recussively", "-r", "--recursive")
-var opt_tree = new OptionBool("List source files in their groups and projects", "-t", "--tree")
+var opt_tree = new OptionBool("List source files in their groups and packages", "-t", "--tree")
 var opt_source = new OptionBool("List source files", "-s", "--source")
-var opt_project = new OptionBool("List projects paths (default)", "-P", "--project")
+var opt_package = new OptionBool("List packages paths (default)", "-P", "--package")
 var opt_depends = new OptionBool("List dependencies of given modules", "-d", "--depends")
 var opt_make = new OptionBool("List dependencies suitable for a rule in a Makefile. Alias for -d, -p and -s", "-M")
 var opt_paths = new OptionBool("List only path (instead of name + path)", "-p", "--path")
 
-tc.option_context.add_option(opt_keep, opt_recursive, opt_tree, opt_source, opt_project, opt_depends, opt_paths, opt_make)
-tc.tooldescription = "Usage: nitls [OPTION]... <file.nit|directory>...\nLists the projects and/or paths of Nit sources files."
+tc.option_context.add_option(opt_keep, opt_recursive, opt_tree, opt_source, opt_package, opt_depends, opt_paths, opt_make)
+tc.tooldescription = "Usage: nitls [OPTION]... <file.nit|directory>...\nLists the packages and/or paths of Nit sources files."
 tc.accept_no_arguments = true
 tc.process_options(args)
 
@@ -127,13 +127,13 @@ if opt_make.value then
 	opt_source.value = true
 end
 
-var sum = opt_tree.value.to_i + opt_source.value.to_i + opt_project.value.to_i
+var sum = opt_tree.value.to_i + opt_source.value.to_i + opt_package.value.to_i
 if sum > 1 then
-	print "Error: options --tree, --source, and --project are exclusive."
+	print "Error: options --tree, --source, and --package are exclusive."
 	print tc.tooldescription
 	exit 1
 end
-if sum == 0 then opt_project.value = true
+if sum == 0 then opt_package.value = true
 tc.keep_going = opt_keep.value
 
 var model = new Model
@@ -159,12 +159,12 @@ else
 end
 
 if sum == 0 then
-	# If one of the file is a group, default is `opt_tree` instead of `opt_project`
+	# If one of the file is a group, default is `opt_tree` instead of `opt_package`
 	for a in files do
 		var g = mb.get_mgroup(a)
 		if g != null then
 			opt_tree.value = true
-			opt_project.value = false
+			opt_package.value = false
 			break
 		end
 	end
@@ -174,7 +174,7 @@ end
 for a in files do
 	var g = mb.get_mgroup(a)
 	var mp = mb.identify_file(a)
-	if g != null and not opt_project.value then
+	if g != null and not opt_package.value then
 		mb.scan_group(g)
 	end
 	if g == null and mp == null then
@@ -182,7 +182,7 @@ for a in files do
 		var fs = a.files
 		for f in fs do
 			g = mb.get_mgroup(a/f)
-			if g != null and not opt_project.value then
+			if g != null and not opt_package.value then
 				mb.scan_group(g)
 			end
 			mp = mb.identify_file(a/f)
@@ -207,7 +207,7 @@ var ot = new ProjTree(tc)
 var sorter = new AlphaEntityComparator
 if opt_tree.value then
 	ot.opt_paths = opt_paths.value
-	for p in model.mprojects do
+	for p in model.mpackages do
 		for g in p.mgroups do
 			var pa = g.parent
 			if g.is_interesting then
@@ -225,7 +225,7 @@ end
 
 if opt_source.value then
 	var list = new Array[ModulePath]
-	for p in model.mprojects do
+	for p in model.mpackages do
 		for g in p.mgroups do
 			for mp in g.module_paths do
 				list.add mp
@@ -242,9 +242,9 @@ if opt_source.value then
 	end
 end
 
-if opt_project.value then
+if opt_package.value then
 	var list = new Array[MGroup]
-	for p in model.mprojects do
+	for p in model.mpackages do
 		list.add p.root.as(not null)
 	end
 	sorter.sort(list)

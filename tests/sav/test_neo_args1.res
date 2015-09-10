@@ -1,4 +1,4 @@
-# mprojects:
+# mpackages:
 test_prog
 ------------------------------------
 test_prog

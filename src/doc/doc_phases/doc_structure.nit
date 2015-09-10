@@ -49,13 +49,13 @@ redef class OverviewPage
 	redef fun apply_structure(v, doc) do
 		var article = new HomeArticle("home.article", "Home")
 		root.add_child article
-		# Projects list
-		var mprojects = doc.model.mprojects.to_a
+		# Packages list
+		var mpackages = doc.model.mpackages.to_a
 		var sorter = new MConcernRankSorter
-		sorter.sort mprojects
-		var section = new DocSection("projects.section", "Projects")
-		for mproject in mprojects do
-			section.add_child new DefinitionArticle("{mproject.nitdoc_id}.definition", null, mproject)
+		sorter.sort mpackages
+		var section = new DocSection("packages.section", "Packages")
+		for mpackage in mpackages do
+			section.add_child new DefinitionArticle("{mpackage.nitdoc_id}.definition", null, mpackage)
 		end
 		article.add_child section
 	end
@@ -78,17 +78,17 @@ redef class MGroupPage
 		var section = new MEntitySection("{mentity.nitdoc_name}.section", null, mentity)
 		root.add_child section
 		if mentity.is_root then
-			section.add_child new IntroArticle("{mentity.mproject.nitdoc_id}.intro", null, mentity.mproject)
+			section.add_child new IntroArticle("{mentity.mpackage.nitdoc_id}.intro", null, mentity.mpackage)
 		else
 			section.add_child new IntroArticle("{mentity.nitdoc_id}.intro", null, mentity)
 		end
 		var concerns = self.concerns
 		if concerns == null or concerns.is_empty then return
 		# FIXME avoid diff
-		mentity.mproject.booster_rank = -1000
+		mentity.mpackage.booster_rank = -1000
 		mentity.booster_rank = -1000
 		concerns.sort_with(v.concerns_sorter)
-		mentity.mproject.booster_rank = 0
+		mentity.mpackage.booster_rank = 0
 		mentity.booster_rank = 0
 		section.add_child new ConcernsArticle("{mentity.nitdoc_id}.concerns", null, mentity, concerns)
 		for mentity in concerns do
@@ -109,11 +109,11 @@ redef class MModulePage
 		var concerns = self.concerns
 		if concerns == null or concerns.is_empty then return
 		# FIXME avoid diff
-		mentity.mgroup.mproject.booster_rank = -1000
+		mentity.mgroup.mpackage.booster_rank = -1000
 		mentity.mgroup.booster_rank = -1000
 		mentity.booster_rank = -1000
 		concerns.sort_with(v.concerns_sorter)
-		mentity.mgroup.mproject.booster_rank = 0
+		mentity.mgroup.mpackage.booster_rank = 0
 		mentity.mgroup.booster_rank = 0
 		mentity.booster_rank = 0
 		section.add_child new ConcernsArticle("{mentity.nitdoc_id}.concerns", null, mentity, concerns)
@@ -174,11 +174,11 @@ redef class MClassPage
 		var concerns = self.concerns
 		if concerns == null or concerns.is_empty then return
 		# FIXME diff hack
-		mentity.intro_mmodule.mgroup.mproject.booster_rank = -1000
+		mentity.intro_mmodule.mgroup.mpackage.booster_rank = -1000
 		mentity.intro_mmodule.mgroup.booster_rank = -1000
 		mentity.intro_mmodule.booster_rank = -1000
 		concerns.sort_with(v.concerns_sorter)
-		mentity.intro_mmodule.mgroup.mproject.booster_rank = 0
+		mentity.intro_mmodule.mgroup.mpackage.booster_rank = 0
 		mentity.intro_mmodule.mgroup.booster_rank = 0
 		mentity.intro_mmodule.booster_rank = 0
 		var constructors = new DocSection("{mentity.nitdoc_id}.constructors", "Constructors")
@@ -249,11 +249,11 @@ redef class MPropertyPage
 		var concerns = self.concerns
 		if concerns == null or concerns.is_empty then return
 		# FIXME diff hack
-		mentity.intro.mclassdef.mmodule.mgroup.mproject.booster_rank = -1000
+		mentity.intro.mclassdef.mmodule.mgroup.mpackage.booster_rank = -1000
 		mentity.intro.mclassdef.mmodule.mgroup.booster_rank = -1000
 		mentity.intro.mclassdef.mmodule.booster_rank = -1000
 		concerns.sort_with(v.concerns_sorter)
-		mentity.intro.mclassdef.mmodule.mgroup.mproject.booster_rank = 0
+		mentity.intro.mclassdef.mmodule.mgroup.mpackage.booster_rank = 0
 		mentity.intro.mclassdef.mmodule.mgroup.booster_rank = 0
 		mentity.intro.mclassdef.mmodule.booster_rank = 0
 		section.add_child new ConcernsArticle("{mentity.nitdoc_id}.concerns", null, mentity, concerns)
@@ -377,7 +377,7 @@ class DefinitionArticle
 	redef var is_hidden = false
 end
 
-# The main project article.
+# The main package article.
 class HomeArticle
 	super DocArticle
 end
@@ -439,7 +439,7 @@ redef class MConcern
 	fun concern_rank: Int is abstract
 end
 
-redef class MProject
+redef class MPackage
 	redef var concern_rank is lazy do
 		var max = 0
 		for mgroup in mgroups do

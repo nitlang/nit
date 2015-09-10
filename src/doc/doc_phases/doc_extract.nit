@@ -55,7 +55,7 @@ class ExtractionPhase
 		doc.populate(self)
 	end
 
-	# Should we exclude this `mproject` from the documentation?
+	# Should we exclude this `mpackage` from the documentation?
 	fun ignore_mentity(mentity: MEntity): Bool do
 		if mentity isa MModule then
 			return mentity.is_fictive or mentity.is_test_suite
@@ -79,8 +79,8 @@ end
 # TODO Should I rebuild a new Model from filtered data?
 redef class DocModel
 
-	# MProjects that will be documented.
-	var mprojects = new HashSet[MProject]
+	# MPackages that will be documented.
+	var mpackages = new HashSet[MPackage]
 
 	# MGroups that will be documented.
 	var mgroups = new HashSet[MGroup]
@@ -102,17 +102,17 @@ redef class DocModel
 
 	# Populate `self` from internal `model`.
 	fun populate(v: ExtractionPhase) do
-		populate_mprojects(v)
+		populate_mpackages(v)
 		populate_mclasses(v)
 		populate_mproperties(v)
 	end
 
-	# Populates the `mprojects` set.
-	private fun populate_mprojects(v: ExtractionPhase) do
-		for mproject in model.mprojects do
-			if v.ignore_mentity(mproject) then continue
-			self.mprojects.add mproject
-			for mgroup in mproject.mgroups do
+	# Populates the `mpackages` set.
+	private fun populate_mpackages(v: ExtractionPhase) do
+		for mpackage in model.mpackages do
+			if v.ignore_mentity(mpackage) then continue
+			self.mpackages.add mpackage
+			for mgroup in mpackage.mgroups do
 				if v.ignore_mentity(mgroup) then continue
 				self.mgroups.add mgroup
 				for mmodule in mgroup.mmodules do
@@ -152,7 +152,7 @@ redef class DocModel
 	# FIXME invalidate cache if `self` is modified.
 	var mentities: Collection[MEntity] is lazy do
 		var res = new HashSet[MEntity]
-		res.add_all mprojects
+		res.add_all mpackages
 		res.add_all mgroups
 		res.add_all mmodules
 		res.add_all mclasses
@@ -178,7 +178,7 @@ redef class DocModel
 	#
 	# Path can be the shortest possible to disambiguise like `Class::property`.
 	# In case of larger conflicts, a more complex namespace can be given like
-	# `project::module::Class::prop`.
+	# `package::module::Class::prop`.
 	fun mentities_by_namespace(namespace: String): Array[MEntity] do
 		var res = new Array[MEntity]
 		for mentity in mentities do
@@ -206,7 +206,7 @@ redef class MEntity
 	end
 end
 
-redef class MProject
+redef class MPackage
 	redef fun mentities_by_namespace(namespace, res) do lookup_in(mgroups, namespace, res)
 end
 

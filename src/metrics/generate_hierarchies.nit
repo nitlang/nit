@@ -44,20 +44,20 @@ end
 fun generate_module_hierarchy(toolcontext: ToolContext, given_mmodules: Collection[MModule])
 do
 	var model = given_mmodules.first.model
-	var dot = new MProjectDot(model)
+	var dot = new MPackageDot(model)
 
-	# Collect requested projects
+	# Collect requested packages
 	for m in given_mmodules do
 		var g = m.mgroup
 		if g == null then continue
-		dot.mprojects.add(g.mproject)
+		dot.mpackages.add(g.mpackage)
 	end
-	var projectpath = toolcontext.output_dir.join_path("project_hierarchy.dot")
-	print "generating project_hierarchy.dot"
-	dot.write_to_file(projectpath)
+	var packagepath = toolcontext.output_dir.join_path("package_hierarchy.dot")
+	print "generating package_hierarchy.dot"
+	dot.write_to_file(packagepath)
 
 	var modulepath = toolcontext.output_dir.join_path("module_hierarchy.dot")
-	dot.mprojects.add_all(model.mprojects)
+	dot.mpackages.add_all(model.mpackages)
 	print "generating module_hierarchy.dot"
 	dot.write_to_file(modulepath)
 end

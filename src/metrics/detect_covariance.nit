@@ -204,7 +204,7 @@ private class DetectCovariancePhase
 
 		## ONLY covariance remains here
 
-		cpt_modules.inc(mmodule.mgroup.mproject.name)
+		cpt_modules.inc(mmodule.mgroup.mpackage.name)
 		cpt_classes.inc(sub.mclass)
 
 		# Track if `cpt_explanations` is already decided (used to fallback on unknown)

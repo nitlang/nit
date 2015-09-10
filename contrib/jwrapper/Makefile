@@ -10,7 +10,7 @@ src/javap_test_parser.nit: ../nitcc/src/nitcc grammar/javap.sablecc
 	mv javap* gen/
 
 src/serial.nit: $(shell ../../bin/nitls -M src/jwrapper.nit)
-	../../bin/nitserial -o src/serial.nit -d project src/jwrapper.nit
+	../../bin/nitserial -o src/serial.nit -d package src/jwrapper.nit
 
 bin/jwrapper: src/javap_test_parser.nit src/serial.nit $(shell ../../bin/nitls -M src/jwrapper.nit) ../../bin/nitc
 	mkdir -p bin

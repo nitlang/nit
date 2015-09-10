@@ -73,7 +73,7 @@ redef class ConcernSection
 
 	redef fun rendering do
 		var mentity = self.mentity
-		if mentity isa MGroup and mentity.mproject.root == mentity then
+		if mentity isa MGroup and mentity.mpackage.root == mentity then
 			render_body
 		else
 			super

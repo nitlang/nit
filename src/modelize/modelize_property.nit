@@ -629,12 +629,12 @@ redef class APropdef
 				return false
 			end
 
-			# Check for full-name conflicts in the project.
-			# A public property should have a unique qualified name `project::class::prop`.
+			# Check for full-name conflicts in the package.
+			# A public property should have a unique qualified name `package::class::prop`.
 			if mprop.intro_mclassdef.mmodule.mgroup != null and mprop.visibility >= protected_visibility then
 				var others = modelbuilder.model.get_mproperties_by_name(mprop.name)
 				if others != null then for other in others do
-					if other != mprop and other.intro_mclassdef.mmodule.mgroup != null and other.intro_mclassdef.mmodule.mgroup.mproject == mprop.intro_mclassdef.mmodule.mgroup.mproject and other.intro_mclassdef.mclass.name == mprop.intro_mclassdef.mclass.name and other.visibility >= protected_visibility then
+					if other != mprop and other.intro_mclassdef.mmodule.mgroup != null and other.intro_mclassdef.mmodule.mgroup.mpackage == mprop.intro_mclassdef.mmodule.mgroup.mpackage and other.intro_mclassdef.mclass.name == mprop.intro_mclassdef.mclass.name and other.visibility >= protected_visibility then
 						modelbuilder.advice(self, "full-name-conflict", "Warning: A property named `{other.full_name}` is already defined in module `{other.intro_mclassdef.mmodule}` for the class `{other.intro_mclassdef.mclass.name}`.")
 						break
 					end

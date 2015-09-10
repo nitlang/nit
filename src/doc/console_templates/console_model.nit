@@ -39,7 +39,7 @@ redef class MEntity
 
 	# Returns the mentity name with short signature.
 	#
-	# * MProject: `foo`
+	# * MPackage: `foo`
 	# * MGroup: `foo`
 	# * MModule: `foo`
 	# * MClass: `Foo[E]`
@@ -53,7 +53,7 @@ redef class MEntity
 
 	# Returns the complete MEntity declaration (modifiers + name + signature).
 	#
-	# * MProject: `project foo`
+	# * MPackage: `package foo`
 	# * MGroup: `group foo`
 	# * MModule: `module foo`
 	# * MClass: `private abstract class Foo[E: Object]`
@@ -70,10 +70,10 @@ redef class MEntity
 
 	# Returns `self` namespace formatted for console.
 	#
-	# * MProject: `mproject`
-	# * MGroup: `mproject(::group)`
+	# * MPackage: `mpackage`
+	# * MGroup: `mpackage(::group)`
 	# * MModule: `mgroup::mmodule`
-	# * MClass: `mproject::mclass`
+	# * MClass: `mpackage::mclass`
 	# * MClassDef: `mmodule::mclassdef`
 	# * MProperty: `mclass::mprop`
 	# * MPropdef: `mclassdef:mpropdef`
@@ -158,8 +158,8 @@ redef class MEntity
 	end
 end
 
-redef class MProject
-	redef var cs_modifiers = ["project"]
+redef class MPackage
+	redef var cs_modifiers = ["package"]
 	redef fun cs_namespace do return cs_name
 	redef fun cs_icon do return "P"
 	redef fun cs_location do return root.mmodules.first.location.to_s
@@ -171,12 +171,12 @@ redef class MGroup
 
 	# Depends if `self` is root or not.
 	#
-	# * If root `mproject`.
-	# * Else `mproject::self`.
+	# * If root `mpackage`.
+	# * Else `mpackage::self`.
 	redef fun cs_namespace do
 		var tpl = new FlatBuffer
-		tpl.append mproject.cs_namespace
-		if mproject.root != self then
+		tpl.append mpackage.cs_namespace
+		if mpackage.root != self then
 			tpl.append "::"
 			tpl.append cs_name
 		end
@@ -230,10 +230,10 @@ redef class MClass
 	redef fun cs_modifiers do return intro.cs_modifiers
 	redef fun cs_declaration do return intro.cs_declaration
 
-	# Returns `mproject::self`.
+	# Returns `mpackage::self`.
 	redef fun cs_namespace do
 		var tpl = new FlatBuffer
-		tpl.append intro_mmodule.mgroup.mproject.cs_namespace
+		tpl.append intro_mmodule.mgroup.mpackage.cs_namespace
 		tpl.append "::"
 		tpl.append cs_name
 		return tpl.write_to_string

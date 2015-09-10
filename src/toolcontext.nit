@@ -518,7 +518,7 @@ The Nit language documentation and the source code of its tools and libraries ma
 		return sys.program_name.basename
 	end
 
-	# The identified root directory of the Nit project
+	# The identified root directory of the Nit package
 	var nit_dir: String is noinit
 
 	private fun compute_nit_dir: String
@@ -580,7 +580,7 @@ end
 #
 # $ nitls --[TAB][TAB]
 # --bash-toolname        --keep                 --path                 --tree
-# --depends              --log                  --project              --verbose
+# --depends              --log                  --package              --verbose
 # --disable-phase        --log-dir              --quiet                --version
 # --gen-bash-completion  --no-color             --recursive            --warn
 # --help                 --only-metamodel       --source
