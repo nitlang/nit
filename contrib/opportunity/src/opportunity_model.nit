@@ -161,7 +161,7 @@ class People
 		end
 	end
 
-	redef fun to_s do return "{surname.capitalized} {name.capitalized}"
+	redef fun to_s do return "{surname} {name}"
 
 	redef fun commit(db) do
 		if id == -1 then

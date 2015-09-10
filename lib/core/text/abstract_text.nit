@@ -731,6 +731,7 @@ abstract class Text
 	#     assert "aBc09-._~".to_percent_encoding == "aBc09-._~"
 	#     assert "%()< >".to_percent_encoding == "%25%28%29%3c%20%3e"
 	#     assert ".com/post?e=asdf&f=123".to_percent_encoding == ".com%2fpost%3fe%3dasdf%26f%3d123"
+	#     assert "éあいう".to_percent_encoding == "%c3%a9%e3%81%82%e3%81%84%e3%81%86"
 	fun to_percent_encoding: String
 	do
 		var buf = new Buffer
@@ -744,7 +745,10 @@ abstract class Text
 			   c == '_' or c == '~'
 			then
 				buf.add c
-			else buf.append "%{c.ascii.to_hex}"
+			else
+				var bytes = c.to_s.bytes
+				for b in bytes do buf.append "%{b.to_i.to_hex}"
+			end
 		end
 
 		return buf.to_s
@@ -760,36 +764,50 @@ abstract class Text
 	#     assert "%25%28%29%3C%20%3E".from_percent_encoding == "%()< >"
 	#     assert "incomplete %".from_percent_encoding == "incomplete ?"
 	#     assert "invalid % usage".from_percent_encoding == "invalid ? usage"
+	#     assert "%c3%a9%e3%81%82%e3%81%84%e3%81%86".from_percent_encoding == "éあいう"
 	fun from_percent_encoding: String
 	do
-		var buf = new Buffer
+		var len = bytelen
+		var has_percent = false
+		for c in chars do
+			if c == '%' then
+				len -= 2
+				has_percent = true
+			end
+		end
 
+		# If no transformation is needed, return self as a string
+		if not has_percent then return to_s
+
+		var buf = new NativeString(len)
 		var i = 0
+		var l = 0
 		while i < length do
 			var c = chars[i]
 			if c == '%' then
 				if i + 2 >= length then
 					# What follows % has been cut off
-					buf.add '?'
+					buf[l] = '?'.ascii.to_b
 				else
 					i += 1
 					var hex_s = substring(i, 2)
 					if hex_s.is_hex then
 						var hex_i = hex_s.to_hex
-						buf.add hex_i.ascii
+						buf[l] = hex_i.to_b
 						i += 1
 					else
 						# What follows a % is not Hex
-						buf.add '?'
+						buf[l] = '?'.ascii.to_b
 						i -= 1
 					end
 				end
-			else buf.add c
+			else buf[l] = c.ascii.to_b
 
 			i += 1
+			l += 1
 		end
 
-		return buf.to_s
+		return buf.to_s_with_length(l)
 	end
 
 	# Escape the characters `<`, `>`, `&`, `"`, `'` and `/` as HTML/XML entity references.
