@@ -99,10 +99,8 @@ private class NitdocDecorator
 	var toolcontext = new ToolContext
 
 	redef fun add_code(v, block) do
-		var meta = "nit"
-		if block isa BlockFence and block.meta != null then
-			meta = block.meta.to_s
-		end
+		var meta = block.meta or else "nit"
+
 		# Do not try to highlight non-nit code.
 		if meta != "nit" and meta != "nitish" then
 			v.add "<pre class=\"{meta}\"><code>"
@@ -111,7 +109,7 @@ private class NitdocDecorator
 			return
 		end
 		# Try to parse code
-		var code = code_from_block(block)
+		var code = block.raw_content
 		var ast = toolcontext.parse_something(code)
 		if ast isa AError then
 			v.add "<pre class=\"{meta}\"><code>"
@@ -149,25 +147,6 @@ private class NitdocDecorator
 		var out = new FlatBuffer
 		for i in [from..to[ do out.add buffer[i]
 		return out.write_to_string
-	end
-
-	fun code_from_block(block: BlockCode): String do
-		var infence = block isa BlockFence
-		var text = new FlatBuffer
-		var line = block.block.first_line
-		while line != null do
-			if not line.is_empty then
-				var str = line.value
-				if not infence and str.has_prefix("    ") then
-					text.append str.substring(4, str.length - line.trailing)
-				else
-					text.append str
-				end
-			end
-			text.append "\n"
-			line = line.next
-		end
-		return text.write_to_string
 	end
 end
 

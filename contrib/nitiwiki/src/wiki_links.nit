@@ -214,7 +214,8 @@ class NitiwikiMdProcessor
 	end
 end
 
-private class NitiwikiDecorator
+# The decorator associated to `MarkdownProcessor`.
+class NitiwikiDecorator
 	super HTMLDecorator
 
 	# Wiki used to resolve links.

@@ -758,8 +758,11 @@ class HTMLDecorator
 	end
 
 	redef fun add_code(v, block) do
-		if block isa BlockFence and block.meta != null then
-			v.add "<pre class=\"{block.meta.to_s}\"><code>"
+		var meta = block.meta
+		if meta != null then
+			v.add "<pre class=\""
+			append_value(v, meta)
+			v.add "\"><code>"
 		else
 			v.add "<pre><code>"
 		end
@@ -1173,6 +1176,26 @@ abstract class Block
 			block = block.next
 		end
 	end
+
+	# The raw content of the block as a multi-line string.
+	fun raw_content: String do
+		var infence = self isa BlockFence
+		var text = new FlatBuffer
+		var line = self.block.first_line
+		while line != null do
+			if not line.is_empty then
+				var str = line.value
+				if not infence and str.has_prefix("    ") then
+					text.append str.substring(4, str.length - line.trailing)
+				else
+					text.append str
+				end
+			end
+			text.append "\n"
+			line = line.next
+		end
+		return text.write_to_string
+	end
 end
 
 # A block without any markdown specificities.
@@ -1213,6 +1236,9 @@ end
 class BlockCode
 	super Block
 
+	# Any string found after fence token.
+	var meta: nullable Text
+
 	# Number of char to skip at the beginning of the line.
 	#
 	# Block code lines start at 4 spaces.
@@ -1238,9 +1264,6 @@ end
 # this class is only used for typing purposes.
 class BlockFence
 	super BlockCode
-
-	# Any string found after fence token.
-	var meta: nullable Text
 
 	# Fence code lines start at 0 spaces.
 	redef var line_start = 0

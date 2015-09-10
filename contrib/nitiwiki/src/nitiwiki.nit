@@ -16,6 +16,7 @@
 module nitiwiki
 
 import wiki_html
+import markdown_highlight
 
 # Locate nit directory
 private fun compute_nit_dir(opt_nit_dir: OptionString): String do
