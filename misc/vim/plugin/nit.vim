@@ -53,7 +53,7 @@ function NitComplete()
 		let g:acp_behaviorKeywordIgnores = ['new', 'var', 'in', 'do', 'els', 'end', 'ret', 'for', 'fun']
 
 		" Use nitls to compute all interesting files from the current directory and the standard library
-		for file in split(system('nitls -M standard .', '\n'))
+		for file in split(system('nitls -M core .', '\n'))
 			silent let &complete = &complete . ',s' . file
 			silent set complete?
 		endfor
