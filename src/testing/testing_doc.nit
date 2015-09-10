@@ -290,7 +290,7 @@ private class NitunitDecorator
 	var executor: NitUnitExecutor
 
 	redef fun add_code(v, block) do
-		var code = code_from_block(block)
+		var code = block.raw_content
 		var meta = "nit"
 		if block isa BlockFence and block.meta != null then
 			meta = block.meta.to_s
@@ -320,26 +320,6 @@ private class NitunitDecorator
 
 		# Add it to the file
 		executor.blocks.last.append code
-	end
-
-	# Extracts code as String from a `BlockCode`.
-	fun code_from_block(block: BlockCode): String do
-		var infence = block isa BlockFence
-		var text = new FlatBuffer
-		var line = block.block.first_line
-		while line != null do
-			if not line.is_empty then
-				var str = line.value
-				if not infence and str.has_prefix("    ") then
-					text.append str.substring(4, str.length - line.trailing)
-				else
-					text.append str
-				end
-			end
-			text.append "\n"
-			line = line.next
-		end
-		return text.write_to_string
 	end
 end
 

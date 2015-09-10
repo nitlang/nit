@@ -1173,6 +1173,26 @@ abstract class Block
 			block = block.next
 		end
 	end
+
+	# The raw content of the block as a multi-line string.
+	fun raw_content: String do
+		var infence = self isa BlockFence
+		var text = new FlatBuffer
+		var line = self.block.first_line
+		while line != null do
+			if not line.is_empty then
+				var str = line.value
+				if not infence and str.has_prefix("    ") then
+					text.append str.substring(4, str.length - line.trailing)
+				else
+					text.append str
+				end
+			end
+			text.append "\n"
+			line = line.next
+		end
+		return text.write_to_string
+	end
 end
 
 # A block without any markdown specificities.
