@@ -25,7 +25,7 @@
 # * [X] generate a page per package with the readme and most metadata
 # * [ ] link/include/be included in the documentation
 # * [ ] propose `related packages`
-# * [ ] show directory content (a la nitls)
+# * [X] show directory content (a la nitls)
 # * [X] gather git information from the working directory
 # * [ ] gather git information from the repository
 # * [ ] gather package information from github
@@ -33,7 +33,7 @@
 # * [ ] reify people
 # * [ ] separate information gathering from rendering
 # * [ ] move up information gathering in (existing or new) service modules
-# * [ ] add command line options
+# * [X] add command line options
 # * [ ] harden HTML (escaping, path injection, etc)
 # * [ ] nitcorn server with RESTful API
 #
@@ -238,6 +238,34 @@ class Catalog
 		res.add "</li>"
 	end
 
+	# Recursively generate a level in the file tree of the *content* section
+	private fun gen_content_level(ot: OrderedTree[Object], os: Array[Object], res: Template)
+	do
+		res.add "<ul>\n"
+		for o in os do
+			res.add "<li>"
+			if o isa MGroup then
+				var d = ""
+				var mdoc = o.mdoc
+				if mdoc != null then d = ": {mdoc.html_synopsis.write_to_string}"
+				res.add "<strong>{o.name}</strong>{d} ({o.filepath.to_s})"
+			else if o isa ModulePath then
+				var d = ""
+				var m = o.mmodule
+				if m != null then
+					var mdoc = m.mdoc
+					if mdoc != null then d = ": {mdoc.html_synopsis.write_to_string}"
+				end
+				res.add "<strong>{o.name}</strong>{d} ({o.filepath.to_s})"
+			else
+				abort
+			end
+			var subs = ot.sub.get_or_null(o)
+			if subs != null then gen_content_level(ot, subs, res)
+			res.add "</li>\n"
+		end
+		res.add "</ul>\n"
+	end
 
 	# Compute information and generate a full HTML page for a package
 	fun package_page(mpackage: MPackage): Writable
@@ -257,6 +285,23 @@ class Catalog
 			res.add mdoc.html_documentation
 			score += mdoc.content.length.score
 		end
+
+		res.add "<h2>Content</h2>"
+		var ot = new OrderedTree[Object]
+		for g in mpackage.mgroups do
+			var pa = g.parent
+			if g.is_interesting then
+				ot.add(pa, g)
+				pa = g
+			end
+			for mp in g.module_paths do
+				ot.add(pa, mp)
+			end
+		end
+		ot.sort_with(alpha_comparator)
+		gen_content_level(ot, ot.roots, res)
+
+
 		res.add """
 </div>
 <div class="sidebar">
@@ -337,50 +382,52 @@ class Catalog
 		if cat != null then cat2proj[cat].add mpackage
 		score += ts2.length.score
 
-		var reqs = deps[mpackage].greaters.to_a
-		reqs.remove(mpackage)
-		alpha_comparator.sort(reqs)
-		res.add "<h3>Requirements</h3>\n"
-		if reqs.is_empty then
-			res.add "none"
-		else
-			var list = new Array[String]
-			for r in reqs do
-				var direct = deps.has_direct_edge(mpackage, r)
-				var s = "<a href=\"{r}.html\">"
-				if direct then s += "<strong>"
-				s += r.to_s
-				if direct then s += "</strong>"
-				s += "</a>"
-				list.add s
+		if deps.has(mpackage) then
+			var reqs = deps[mpackage].greaters.to_a
+			reqs.remove(mpackage)
+			alpha_comparator.sort(reqs)
+			res.add "<h3>Requirements</h3>\n"
+			if reqs.is_empty then
+				res.add "none"
+			else
+				var list = new Array[String]
+				for r in reqs do
+					var direct = deps.has_direct_edge(mpackage, r)
+					var s = "<a href=\"{r}.html\">"
+					if direct then s += "<strong>"
+					s += r.to_s
+					if direct then s += "</strong>"
+					s += "</a>"
+					list.add s
+				end
+				res.add_list(list, ", ", " and ")
 			end
-			res.add_list(list, ", ", " and ")
-		end
 
-		reqs = deps[mpackage].smallers.to_a
-		reqs.remove(mpackage)
-		alpha_comparator.sort(reqs)
-		res.add "<h3>Clients</h3>\n"
-		if reqs.is_empty then
-			res.add "none"
-		else
-			var list = new Array[String]
-			for r in reqs do
-				var direct = deps.has_direct_edge(r, mpackage)
-				var s = "<a href=\"{r}.html\">"
-				if direct then s += "<strong>"
-				s += r.to_s
-				if direct then s += "</strong>"
-				s += "</a>"
-				list.add s
+			reqs = deps[mpackage].smallers.to_a
+			reqs.remove(mpackage)
+			alpha_comparator.sort(reqs)
+			res.add "<h3>Clients</h3>\n"
+			if reqs.is_empty then
+				res.add "none"
+			else
+				var list = new Array[String]
+				for r in reqs do
+					var direct = deps.has_direct_edge(r, mpackage)
+					var s = "<a href=\"{r}.html\">"
+					if direct then s += "<strong>"
+					s += r.to_s
+					if direct then s += "</strong>"
+					s += "</a>"
+					list.add s
+				end
+				res.add_list(list, ", ", " and ")
 			end
-			res.add_list(list, ", ", " and ")
-		end
 
-		score += deps[mpackage].greaters.length.score
-		score += deps[mpackage].direct_greaters.length.score
-		score += deps[mpackage].smallers.length.score
-		score += deps[mpackage].direct_smallers.length.score
+			score += deps[mpackage].greaters.length.score
+			score += deps[mpackage].direct_greaters.length.score
+			score += deps[mpackage].smallers.length.score
+			score += deps[mpackage].direct_smallers.length.score
+		end
 
 		var contributors = mpackage.contributors
 		if not contributors.is_empty then
@@ -553,10 +600,12 @@ class Catalog
 		res.add "<th data-field=\"name\" data-sortable=\"true\">name</th>\n"
 		res.add "<th data-field=\"maint\" data-sortable=\"true\">maint</th>\n"
 		res.add "<th data-field=\"contrib\" data-sortable=\"true\">contrib</th>\n"
-		res.add "<th data-field=\"reqs\" data-sortable=\"true\">reqs</th>\n"
-		res.add "<th data-field=\"dreqs\" data-sortable=\"true\">direct<br>reqs</th>\n"
-		res.add "<th data-field=\"cli\" data-sortable=\"true\">clients</th>\n"
-		res.add "<th data-field=\"dcli\" data-sortable=\"true\">direct<br>clients</th>\n"
+		if deps.not_empty then
+			res.add "<th data-field=\"reqs\" data-sortable=\"true\">reqs</th>\n"
+			res.add "<th data-field=\"dreqs\" data-sortable=\"true\">direct<br>reqs</th>\n"
+			res.add "<th data-field=\"cli\" data-sortable=\"true\">clients</th>\n"
+			res.add "<th data-field=\"dcli\" data-sortable=\"true\">direct<br>clients</th>\n"
+		end
 		res.add "<th data-field=\"mod\" data-sortable=\"true\">modules</th>\n"
 		res.add "<th data-field=\"cla\" data-sortable=\"true\">classes</th>\n"
 		res.add "<th data-field=\"met\" data-sortable=\"true\">methods</th>\n"
@@ -570,10 +619,12 @@ class Catalog
 			if p.maintainers.not_empty then maint = p.maintainers.first
 			res.add "<td>{maint}</td>"
 			res.add "<td>{p.contributors.length}</td>"
-			res.add "<td>{deps[p].greaters.length-1}</td>"
-			res.add "<td>{deps[p].direct_greaters.length}</td>"
-			res.add "<td>{deps[p].smallers.length-1}</td>"
-			res.add "<td>{deps[p].direct_smallers.length}</td>"
+			if deps.not_empty then
+				res.add "<td>{deps[p].greaters.length-1}</td>"
+				res.add "<td>{deps[p].direct_greaters.length}</td>"
+				res.add "<td>{deps[p].smallers.length-1}</td>"
+				res.add "<td>{deps[p].direct_smallers.length}</td>"
+			end
 			res.add "<td>{mmodules[p]}</td>"
 			res.add "<td>{mclasses[p]}</td>"
 			res.add "<td>{mmethods[p]}</td>"
@@ -600,6 +651,13 @@ end
 var model = new Model
 var tc = new ToolContext
 
+var opt_dir = new OptionString("Directory where the HTML files are generated", "-d", "--dir")
+var opt_no_git = new OptionBool("Do not gather git information from the working directory", "--no-git")
+var opt_no_parse = new OptionBool("Do not parse nit files (no importation information)", "--no-parse")
+var opt_no_model = new OptionBool("Do not analyse nit files (no class/method information)", "--no-model")
+
+tc.option_context.add_option(opt_dir, opt_no_git, opt_no_parse, opt_no_model)
+
 tc.process_options(sys.args)
 tc.keep_going = true
 
@@ -619,6 +677,7 @@ for p in model.mpackages do
 	modelbuilder.scan_group(g)
 
 	# Load the module to process importation information
+	if opt_no_parse.value then continue
 	modelbuilder.parse_group(g)
 
 	catalog.deps.add_node(p)
@@ -629,14 +688,18 @@ for p in model.mpackages do
 			catalog.deps.add_edge(p, ip)
 		end
 	end
+end
 
+if not opt_no_git.value then for p in model.mpackages do
 	catalog.git_info(p)
 end
 
 # Run phases to modelize classes and properties (so we can count them)
-#modelbuilder.run_phases
+if not opt_no_model.value then
+	modelbuilder.run_phases
+end
 
-var out = "out"
+var out = opt_dir.value or else "catalog.out"
 out.mkdir
 
 # Generate the css (hard coded)
@@ -760,12 +823,14 @@ index.add """
 index.add "<h2>Highlighted Packages</h2>\n"
 index.add catalog.list_best(catalog.score)
 
-index.add "<h2>Most Required</h2>\n"
-var reqs = new Counter[MPackage]
-for p in model.mpackages do
-	reqs[p] = catalog.deps[p].smallers.length - 1
+if catalog.deps.not_empty then
+	index.add "<h2>Most Required</h2>\n"
+	var reqs = new Counter[MPackage]
+	for p in model.mpackages do
+		reqs[p] = catalog.deps[p].smallers.length - 1
+	end
+	index.add catalog.list_best(reqs)
 end
-index.add catalog.list_best(reqs)
 
 index.add "<h2>By First Tag</h2>\n"
 index.add catalog.list_by(catalog.cat2proj, "cat_")
