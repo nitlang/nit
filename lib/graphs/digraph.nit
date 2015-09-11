@@ -117,7 +117,7 @@
 # g.add_arcs([[1,2],[2,1],[2,3],[3,4],[4,5],[5,3]])
 # for component in g.strongly_connected_components.to_partitions
 # do
-# 	print component
+#	print component
 # end
 # # Prints [1,2] and [3,4,5]
 # ~~~
@@ -291,7 +291,7 @@ interface Digraph[V: Object]
 	# g.add_arc(0, 2)
 	# g.add_arc(1, 2)
 	# for arc in g.arcs_iterator do
-	# 	assert g.has_arc(arc[0], arc[1])
+	#	assert g.has_arc(arc[0], arc[1])
 	# end
 	# ~~~
 	fun arcs_iterator: Iterator[Array[V]] do return new ArcsIterator[V](self)
@@ -317,7 +317,7 @@ interface Digraph[V: Object]
 	# g.add_arc(1, 3)
 	# g.add_arc(2, 3)
 	# for arc in g.incoming_arcs(3) do
-	# 	assert g.is_predecessor(arc[0], arc[1])
+	#	assert g.is_predecessor(arc[0], arc[1])
 	# end
 	# ~~~
 	fun incoming_arcs(u: V): Collection[Array[V]]
@@ -340,7 +340,7 @@ interface Digraph[V: Object]
 	# g.add_arc(2, 3)
 	# g.add_arc(1, 2)
 	# for arc in g.outgoing_arcs(1) do
-	# 	assert g.is_successor(arc[1], arc[0])
+	#	assert g.is_successor(arc[1], arc[0])
 	# end
 	# ~~~
 	fun outgoing_arcs(u: V): Collection[Array[V]]
