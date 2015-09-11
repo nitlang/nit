@@ -1185,7 +1185,7 @@ redef class Array[E]
 			end
 			i += 1
 		end
-		return ns.to_s_with_length(sl)
+		return new FlatString.with_infos(ns, sl, 0, sl - 1)
 	end
 end
 
@@ -1222,7 +1222,7 @@ redef class NativeArray[E]
 			end
 			i += 1
 		end
-		return ns.to_s_with_length(sl)
+		return new FlatString.with_infos(ns, sl, 0, sl - 1)
 	end
 end
 
