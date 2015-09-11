@@ -21,7 +21,7 @@ Calls to bytepos for each type:
 	FlatString = 18
 Calls to first_byte on FlatString 153
 Calls to last_byte on FlatString 103
-FlatStrings allocated with length 81 (85.417%)
+FlatStrings allocated with length 82 (86.458%)
 Length of travel for index distribution:
 * null = 20 => occurences 83.333%, cumulative 83.333% 
 * 1 = 8 => occurences 21.053%, cumulative 73.684% 
