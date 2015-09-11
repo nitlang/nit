@@ -985,8 +985,7 @@ redef class NativeString
 	redef fun to_s_with_length(length): FlatString
 	do
 		assert length >= 0
-		var str = new FlatString.with_infos(self, length, 0, length - 1)
-		return str
+		return clean_utf8(length)
 	end
 
 	redef fun to_s_full(bytelen, unilen) do
@@ -997,6 +996,8 @@ redef class NativeString
 	redef fun to_s_with_copy: FlatString
 	do
 		var length = cstring_length
+		var r = clean_utf8(length)
+		if r.items != self then return r
 		var new_self = new NativeString(length + 1)
 		copy_to(new_self, length, 0, 0)
 		var str = new FlatString.with_infos(new_self, length, 0, length - 1)

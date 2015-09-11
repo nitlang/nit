@@ -173,12 +173,13 @@ abstract class Reader
 	# ~~~
 	fun read_all: String do
 		var s = read_all_bytes
-		if not s.is_utf8 then s = s.clean_utf8
 		var slen = s.length
 		if slen == 0 then return ""
 		var rets = ""
 		var pos = 0
-		var sits = s.items
+		var str = s.items.clean_utf8(slen)
+		slen = str.bytelen
+		var sits = str.items
 		var remsp = slen
 		while pos < slen do
 			# The 129 size was decided more or less arbitrarily
