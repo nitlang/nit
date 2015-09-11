@@ -383,6 +383,15 @@ interface Digraph[V: Object]
 		return s
 	end
 
+	# Open Graphviz with `self.to_dot`.
+	#
+	# Mainly used for debugging.
+	fun show_dot do
+		var f = new ProcessWriter("dot", "-Txlib")
+		f.write to_dot
+		f.close
+	end
+
 	## ------------ ##
 	## Neighborhood ##
 	## ------------ ##
