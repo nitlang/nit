@@ -406,6 +406,12 @@ do
 	end
 end
 
+# Does `name` corresponds to a texture?
+fun glIsTexture(name: Int): Bool `{ return glIsTexture(name); `}
+
+# Bind the named `texture` to a `target`
+fun glBindTexture(target: GLTextureTarget, texture: Int) `{ glBindTexture(target, texture); `}
+
 # Texture minifying and magnifying function
 extern class GLTextureFilter
 	super GLEnum
