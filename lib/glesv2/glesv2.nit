@@ -444,11 +444,84 @@ do
 	end
 end
 
-# Does `name` corresponds to a texture?
-fun glIsTexture(name: Int): Bool `{ return glIsTexture(name); `}
+# Texture unit, the number of texture units is implementation dependent
+extern class GLTextureUnit
+	super GLEnum
+end
+
+fun gl_TEXTURE0: GLTextureUnit `{ return GL_TEXTURE0; `}
+fun gl_TEXTURE1: GLTextureUnit `{ return GL_TEXTURE1; `}
+fun gl_TEXTURE2: GLTextureUnit `{ return GL_TEXTURE2; `}
+fun gl_TEXTURE3: GLTextureUnit `{ return GL_TEXTURE3; `}
+fun gl_TEXTURE4: GLTextureUnit `{ return GL_TEXTURE4; `}
+fun gl_TEXTURE5: GLTextureUnit `{ return GL_TEXTURE5; `}
+fun gl_TEXTURE6: GLTextureUnit `{ return GL_TEXTURE6; `}
+fun gl_TEXTURE7: GLTextureUnit `{ return GL_TEXTURE7; `}
+fun gl_TEXTURE8: GLTextureUnit `{ return GL_TEXTURE8; `}
+fun gl_TEXTURE9: GLTextureUnit `{ return GL_TEXTURE9; `}
+fun gl_TEXTURE10: GLTextureUnit `{ return GL_TEXTURE10; `}
+fun gl_TEXTURE11: GLTextureUnit `{ return GL_TEXTURE11; `}
+fun gl_TEXTURE12: GLTextureUnit `{ return GL_TEXTURE12; `}
+fun gl_TEXTURE13: GLTextureUnit `{ return GL_TEXTURE13; `}
+fun gl_TEXTURE14: GLTextureUnit `{ return GL_TEXTURE14; `}
+fun gl_TEXTURE15: GLTextureUnit `{ return GL_TEXTURE15; `}
+fun gl_TEXTURE16: GLTextureUnit `{ return GL_TEXTURE16; `}
+fun gl_TEXTURE17: GLTextureUnit `{ return GL_TEXTURE17; `}
+fun gl_TEXTURE18: GLTextureUnit `{ return GL_TEXTURE18; `}
+fun gl_TEXTURE19: GLTextureUnit `{ return GL_TEXTURE19; `}
+fun gl_TEXTURE20: GLTextureUnit `{ return GL_TEXTURE20; `}
+fun gl_TEXTURE21: GLTextureUnit `{ return GL_TEXTURE21; `}
+fun gl_TEXTURE22: GLTextureUnit `{ return GL_TEXTURE22; `}
+fun gl_TEXTURE23: GLTextureUnit `{ return GL_TEXTURE23; `}
+fun gl_TEXTURE24: GLTextureUnit `{ return GL_TEXTURE24; `}
+fun gl_TEXTURE25: GLTextureUnit `{ return GL_TEXTURE25; `}
+fun gl_TEXTURE26: GLTextureUnit `{ return GL_TEXTURE26; `}
+fun gl_TEXTURE27: GLTextureUnit `{ return GL_TEXTURE27; `}
+fun gl_TEXTURE28: GLTextureUnit `{ return GL_TEXTURE28; `}
+fun gl_TEXTURE29: GLTextureUnit `{ return GL_TEXTURE29; `}
+fun gl_TEXTURE30: GLTextureUnit `{ return GL_TEXTURE30; `}
+fun gl_TEXTURE31: GLTextureUnit `{ return GL_TEXTURE31; `}
+
+# Texture unit at `offset` after `gl_TEXTURE0`
+fun gl_TEXTURE(offset: Int): GLTextureUnit `{ return GL_TEXTURE0 + offset; `}
+
+# Generate `n` texture names
+fun glGenTextures(n: Int): Array[Int]
+do
+	var array = new CIntArray(n)
+	native_glGenTextures(n, array.native_array)
+	var a = array.to_a
+	array.destroy
+	return a
+end
+
+private fun native_glGenTextures(n: Int, textures: NativeCIntArray) `{
+	glGenTextures(n, (GLuint*)textures);
+`}
+
+# Select server-side active texture unit
+fun glActiveTexture(texture: GLTextureUnit) `{ glActiveTexture(texture); `}
 
 # Bind the named `texture` to a `target`
-fun glBindTexture(target: GLTextureTarget, texture: Int) `{ glBindTexture(target, texture); `}
+fun glBindTexture(target: GLTextureTarget, texture: Int) `{
+	glBindTexture(target, texture);
+`}
+
+# Delete named textures
+fun glDeleteTextures(textures: SequenceRead[Int])
+do
+	var n = textures.length
+	var array = new CIntArray.from(textures)
+	native_glDeleteTextures(n, array.native_array)
+	array.destroy
+end
+
+private fun native_glDeleteTextures(n: Int, textures: NativeCIntArray) `{
+	glDeleteTextures(n, (const GLuint *)textures);
+`}
+
+# Does `name` corresponds to a texture?
+fun glIsTexture(name: Int): Bool `{ return glIsTexture(name); `}
 
 # Set pixel storage modes
 fun glPixelStorei(parameter: GLPack, val: Int) `{ glPixelStorei(parameter, val); `}
@@ -471,6 +544,24 @@ fun gl_UNPACK_ALIGNEMENT: GLPack `{ return GL_UNPACK_ALIGNMENT; `}
 fun glTexImage2D(target: GLTextureTarget, level, internalformat, width, height, border: Int,
                  format: GLPixelFormat, typ: GLPixelType, data: NativeCByteArray) `{
 	glTexImage2D(target, level, internalformat, width, height, border, format, typ, data);
+`}
+
+# Specify a two-dimensional texture subimage
+fun glTexSubImage2D(target: GLTextureTarget,
+                    level, xoffset, yoffset, width, height, border: Int,
+                    format: GLPixelFormat, typ: GLPixelType, data: Pointer) `{
+	glTexSubImage2D(target, level, xoffset, yoffset, width, height, format, typ, data);
+`}
+
+# Copy pixels into a 2D texture image
+fun glCopyTexImage2D(target: GLTextureTarget, level: Int, internalformat: GLPixelFormat,
+                     x, y, width, height, border: Int) `{
+	glCopyTexImage2D(target, level, internalformat, x, y, width, height, border);
+`}
+
+# Copy a two-dimensional texture subimage
+fun glCopyTexSubImage2D(target: GLTextureTarget, level, xoffset, yoffset, x, y, width, height: Int) `{
+	glCopyTexSubImage2D(target, level, xoffset, yoffset, x, y, width, height);
 `}
 
 # Texture minifying and magnifying function
