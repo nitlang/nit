@@ -471,6 +471,31 @@ fun glFramebufferRenderbuffer(target: GLFramebufferTarget, attachment: GLAttachm
 	glFramebufferRenderbuffer(target, attachment, renderbuffertarget, renderbuffer);
 `}
 
+# Establish data storage, `format` and dimensions of the `target` renderbuffer object's image
+fun glRenderbufferStorage(target: GLRenderbufferTarget, format: GLRenderbufferFormat, width, height: Int) `{
+	glRenderbufferStorage(GL_RENDERBUFFER, format, width, height);
+`}
+
+# Format for a renderbuffer
+extern class GLRenderbufferFormat
+	super GLEnum
+end
+
+# 4 red, 4 green, 4 blue, 4 alpha bits format
+fun gl_RGBA4: GLRenderbufferFormat `{ return GL_RGBA4; `}
+
+# 5 red, 6 green, 5 blue bits format
+fun gl_RGB565: GLRenderbufferFormat `{ return GL_RGB565; `}
+
+# 5 red, 5 green, 5 blue, 1 alpha bits format
+fun gl_RGB_A1: GLRenderbufferFormat `{ return GL_RGB5_A1; `}
+
+# 16 depth bits format
+fun gl_DEPTH_COMPNENT16: GLRenderbufferFormat `{ return GL_DEPTH_COMPONENT16; `}
+
+# 8 stencil bits format
+fun gl_STENCIL_INDEX8: GLRenderbufferFormat `{ return GL_STENCIL_INDEX8; `}
+
 # Renderbuffer attachment point to a framebuffer
 extern class GLAttachment
 	super GLEnum
