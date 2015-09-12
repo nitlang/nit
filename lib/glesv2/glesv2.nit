@@ -532,7 +532,7 @@ class GLES
 	#
 	# Foreign: glReadPixel
 	fun read_pixels(x, y, width, height: Int, format: GLPixelFormat, typ: GLPixelType, data: Pointer) `{
-		glReadPixels(x, y, width, height, GL_RGBA, GL_UNSIGNED_BYTE, data);
+		glReadPixels(x, y, width, height, format, typ, data);
 	`}
 
 	# Set the texture minifying function
