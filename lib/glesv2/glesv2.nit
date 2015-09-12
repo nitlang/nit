@@ -459,14 +459,18 @@ extern class GLTextureWrap
 end
 
 # Target texture
-#
-# Used by: `tex_parameter_*`
 extern class GLTextureTarget
 	super GLEnum
-
-	new flat `{ return GL_TEXTURE_2D; `}
-	new cube_map `{ return GL_TEXTURE_CUBE_MAP; `}
 end
+
+# Two-dimensional texture
+fun gl_TEXTURE_2D: GLTextureTarget `{ return GL_TEXTURE_2D; `}
+
+# Cube map texture
+fun gl_TEXTURE_CUBE_MAP: GLTextureTarget `{ return GL_TEXTURE_CUBE_MAP; `}
+
+# TODO GL_TEXTURE_CUBE_MAP_POSITIVE_X, GL_TEXTURE_CUBE_MAP_NEGATIVE_X, GL_TEXTURE_CUBE_MAP_POSITIVE_Y,
+# GL_TEXTURE_CUBE_MAP_NEGATIVE_Y, GL_TEXTURE_CUBE_MAP_POSITIVE_Z, GL_TEXTURE_CUBE_MAP_NEGATIVE_Z
 
 # A server-side capability
 class GLCap
