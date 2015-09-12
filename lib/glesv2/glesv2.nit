@@ -458,6 +458,27 @@ class GLCap
 	redef fun hash do return val
 	redef fun ==(o) do return o != null and is_same_type(o) and o.hash == self.hash
 end
+
+# Attach a renderbuffer object to a framebuffer object
+fun glFramebufferRenderbuffer(target: GLFramebufferTarget, attachment: GLAttachment,
+                              renderbuffertarget: GLRenderbufferTarget, renderbuffer: Int) `{
+	glFramebufferRenderbuffer(target, attachment, renderbuffertarget, renderbuffer);
+`}
+
+# Renderbuffer attachment point to a framebuffer
+extern class GLAttachment
+	super GLEnum
+end
+
+# First color attachment point
+fun gl_COLOR_ATTACHMENT0: GLAttachment `{ return GL_COLOR_ATTACHMENT0; `}
+
+# Depth attachment point
+fun gl_DEPTH_ATTACHMENT: GLAttachment `{ return GL_DEPTH_ATTACHMENT; `}
+
+# Stencil attachment
+fun gl_STENCIL_ATTACHMENT: GLAttachment `{ return GL_STENCIL_ATTACHMENT; `}
+
 redef class Sys
 	private var gles = new GLES is lazy
 end
