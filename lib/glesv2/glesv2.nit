@@ -314,14 +314,21 @@ class VertexArray
 		glVertexAttribPointer(index, count, GL_FLOAT, GL_FALSE, 0, array);
 	`}
 
-	fun enable do enable_intern(index)
-	private fun enable_intern(index: Int) `{ glEnableVertexAttribArray(index); `}
+	# Enable this vertex attribute array
+	fun enable do glEnableVertexAttribArray(index)
 
-	fun draw_arrays_triangles do draw_arrays_triangles_intern(index, count)
-	private fun draw_arrays_triangles_intern(index, count: Int) `{
-		glDrawArrays(GL_TRIANGLES, index, count);
-	`}
+	# Disable this vertex attribute array
+	fun disable do glDisableVertexAttribArray(index)
 end
+
+# Enable the generic vertex attribute array at `index`
+fun glEnableVertexAttribArray(index: Int) `{ glEnableVertexAttribArray(index); `}
+
+# Disable the generic vertex attribute array at `index`
+fun glDisableVertexAttribArray(index: Int) `{ glDisableVertexAttribArray(index); `}
+
+# Render primitives from array data
+fun glDrawArrays(mode: GLDrawMode, from, count: Int) `{ glDrawArrays(mode, from, count); `}
 
 # Low level array of `Float`
 class GLfloatArray

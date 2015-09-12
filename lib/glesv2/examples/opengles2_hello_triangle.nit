@@ -168,7 +168,7 @@ for i in [0..10000[ do
 	gl.clear((new GLBuffer).color)
 	program.use
 	vertex_array.enable
-	vertex_array.draw_arrays_triangles
+	glDrawArrays(new GLDrawMode.triangles, 0, 3)
 	egl_display.swap_buffers(surface)
 end
 
