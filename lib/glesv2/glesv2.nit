@@ -37,6 +37,7 @@ module glesv2 is
 end
 
 import android::aware
+intrude import c
 
 in "C Header" `{
 	#include <GLES2/gl2.h>
@@ -296,17 +297,20 @@ class VertexArray
 	# Number of data per vertex
 	var count: Int
 
-	protected var glfloat_array: GLfloatArray
+	protected var glfloat_array: NativeGLfloatArray
 
 	init(index, count: Int, array: Array[Float])
 	do
 		self.index = index
 		self.count = count
-		self.glfloat_array = new GLfloatArray(array)
+		self.glfloat_array = new NativeGLfloatArray(array.length)
+		for k in [0..array.length[ do
+			glfloat_array[k] = array[k]
+		end
 	end
 
 	fun attrib_pointer do attrib_pointer_intern(index, count, glfloat_array)
-	private fun attrib_pointer_intern(index, count: Int, array: GLfloatArray) `{
+	private fun attrib_pointer_intern(index, count: Int, array: NativeGLfloatArray) `{
 		glVertexAttribPointer(index, count, GL_FLOAT, GL_FALSE, 0, array);
 	`}
 
@@ -320,14 +324,41 @@ class VertexArray
 end
 
 # Low level array of `Float`
-extern class GLfloatArray `{GLfloat *`}
-	new (array: Array[Float]) import Array[Float].length, Array[Float].[] `{
-		int i;
-		int len = Array_of_Float_length(array);
-		GLfloat *vertex_array = malloc(sizeof(GLfloat)*len);
-		for (i = 0; i < len; i ++) vertex_array[i] = Array_of_Float__index(array, i);
-		return vertex_array;
-	`}
+class GLfloatArray
+	super CArray[Float]
+	redef type NATIVE: NativeGLfloatArray
+
+	init do native_array = new NativeGLfloatArray(length)
+
+	# Create with the content of `array`
+	new from(array: Array[Float])
+	do
+		var arr = new GLfloatArray(array.length)
+		arr.fill_from array
+		return arr
+	end
+
+	# Fill with the content of `array`
+	fun fill_from(array: Array[Float])
+	do
+		assert length >= array.length
+		for k in [0..array.length[ do
+			self[k] = array[k]
+		end
+	end
+end
+
+# An array of `GLfloat` in C (`GLfloat*`)
+extern class NativeGLfloatArray `{ GLfloat* `}
+	super NativeCArray
+	redef type E: Float
+
+	new(size: Int) `{ return calloc(size, sizeof(GLfloat)); `}
+
+	redef fun [](index) `{ return self[index]; `}
+	redef fun []=(index, val) `{ self[index] = val; `}
+
+	redef fun +(offset) `{ return self + offset; `}
 end
 
 # General type for OpenGL enumerations
