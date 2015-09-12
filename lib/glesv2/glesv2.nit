@@ -412,6 +412,23 @@ fun glIsTexture(name: Int): Bool `{ return glIsTexture(name); `}
 # Bind the named `texture` to a `target`
 fun glBindTexture(target: GLTextureTarget, texture: Int) `{ glBindTexture(target, texture); `}
 
+# Set pixel storage modes
+fun glPixelStorei(parameter: GLPack, val: Int) `{ glPixelStorei(parameter, val); `}
+
+# Symbolic name of the parameter to be set with `glPixelStorei`
+extern class GLPack
+	super GLEnum
+end
+
+# Parameter to specify the alignment requirements for the start of each pixel row in memory
+fun gl_PACK_ALIGNEMENT: GLPack `{ return GL_PACK_ALIGNMENT; `}
+
+# Parameter to specify the alignment requirements for the start of each pixel row in memory
+fun gl_UNPACK_ALIGNEMENT: GLPack `{ return GL_UNPACK_ALIGNMENT; `}
+
+# TODO GL_PACK_ROW_LENGTH, GL_PACK_IMAGE_HEIGHT, GL_PACK_SKIP_PIXELS, GL_PACK_SKIP_ROWS, GL_PACK_SKIP_IMAGES
+# GL_UNPACK_ROW_LENGTH, GL_UNPACK_IMAGE_HEIGHT, GL_UNPACK_SKIP_PIXELS, GL_UNPACK_SKIP_ROWS, GL_UNPACK_SKIP_IMAGES
+
 # Texture minifying and magnifying function
 extern class GLTextureFilter
 	super GLEnum
