@@ -330,6 +330,32 @@ fun glDisableVertexAttribArray(index: Int) `{ glDisableVertexAttribArray(index);
 # Render primitives from array data
 fun glDrawArrays(mode: GLDrawMode, from, count: Int) `{ glDrawArrays(mode, from, count); `}
 
+# Specify the value of a generic vertex attribute
+fun glVertexAttrib1f(index: Int, x: Float) `{ glVertexAttrib1f(index, x); `}
+
+# Specify the value of a generic vertex attribute
+fun glVertexAttrib2f(index: Int, x, y: Float) `{ glVertexAttrib2f(index, x, y); `}
+
+# Specify the value of a generic vertex attribute
+fun glVertexAttrib3f(index: Int, x, y, z: Float) `{ glVertexAttrib3f(index, x, y, z); `}
+
+# Specify the value of a generic vertex attribute
+fun glVertexAttrib4f(index: Int, x, y, z, w: Float) `{ glVertexAttrib4f(index, x, y, z, w); `}
+
+# Specify the value of a uniform variable for the current program object
+fun glUniform1i(index, x: Int) `{ glUniform1i(index, x); `}
+
+# Specify the value of a uniform variable for the current program object
+fun glUniform2i(index, x, y: Int) `{ glUniform2i(index, x, y); `}
+
+# Specify the value of a uniform variable for the current program object
+fun glUniform3i(index, x, y, z: Int) `{ glUniform3i(index, x, y, z); `}
+
+# Specify the value of a uniform variable for the current program object
+fun glUniform4i(index, x, y, z, w: Int) `{ glUniform4i(index, x, y, z, w); `}
+
+# TODO glUniform*f
+
 # Low level array of `Float`
 class GLfloatArray
 	super CArray[Float]
