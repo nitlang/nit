@@ -429,6 +429,12 @@ fun gl_UNPACK_ALIGNEMENT: GLPack `{ return GL_UNPACK_ALIGNMENT; `}
 # TODO GL_PACK_ROW_LENGTH, GL_PACK_IMAGE_HEIGHT, GL_PACK_SKIP_PIXELS, GL_PACK_SKIP_ROWS, GL_PACK_SKIP_IMAGES
 # GL_UNPACK_ROW_LENGTH, GL_UNPACK_IMAGE_HEIGHT, GL_UNPACK_SKIP_PIXELS, GL_UNPACK_SKIP_ROWS, GL_UNPACK_SKIP_IMAGES
 
+# Specify a two-dimensional texture image
+fun glTexImage2D(target: GLTextureTarget, level, internalformat, width, height, border: Int,
+                 format: GLPixelFormat, typ: GLPixelType, data: NativeCByteArray) `{
+	glTexImage2D(target, level, internalformat, width, height, border, format, typ, data);
+`}
+
 # Texture minifying and magnifying function
 extern class GLTextureFilter
 	super GLEnum
