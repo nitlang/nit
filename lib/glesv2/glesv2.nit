@@ -668,6 +668,20 @@ fun glHint(target: GLHintTarget, mode: GLHintMode) `{
 # Generate and fill set of mipmaps for the texture object `target`
 fun glGenerateMipmap(target: GLTextureTarget) `{ glGenerateMipmap(target); `}
 
+# Bind the named `buffer` object
+fun glBindBuffer(target: GLArrayBuffer, buffer: Int) `{ glBindBuffer(target, buffer); `}
+
+# Target to which bind the buffer with `glBindBuffer`
+extern class GLArrayBuffer
+	super GLEnum
+end
+
+# Array buffer target
+fun gl_ARRAY_BUFFER: GLArrayBuffer `{ return GL_ARRAY_BUFFER; `}
+
+# Element array buffer
+fun gl_ELEMENT_ARRAY_BUFFER: GLArrayBuffer `{ return GL_ELEMENT_ARRAY_BUFFER; `}
+
 # Completeness status of a framebuffer object
 fun glCheckFramebufferStatus(target: GLFramebufferTarget): GLFramebufferStatus `{
 	return glCheckFramebufferStatus(target);
