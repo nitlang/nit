@@ -665,6 +665,9 @@ fun glHint(target: GLHintTarget, mode: GLHintMode) `{
 	glHint(target, mode);
 `}
 
+# Generate and fill set of mipmaps for the texture object `target`
+fun glGenerateMipmap(target: GLTextureTarget) `{ glGenerateMipmap(target); `}
+
 # Completeness status of a framebuffer object
 fun glCheckFramebufferStatus(target: GLFramebufferTarget): GLFramebufferStatus `{
 	return glCheckFramebufferStatus(target);
