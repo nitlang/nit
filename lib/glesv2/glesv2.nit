@@ -791,6 +791,12 @@ fun gl_NICEST: GLHintMode `{ return GL_NICEST; `}
 # No preference
 fun gl_DONT_CARE: GLHintMode `{ return GL_DONT_CARE; `}
 
+# Attach a level of a texture object as a logical buffer to the currently bound framebuffer object
+fun glFramebufferTexture2D(target: GLFramebufferTarget, attachment: GLAttachment,
+                           texture_target: GLTextureTarget,  texture, level: Int) `{
+	glFramebufferTexture2D(target, attachment, texture_target, texture, level);
+`}
+
 # Entry point to OpenGL server-side capabilities
 class GLCapabilities
 
