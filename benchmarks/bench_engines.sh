@@ -197,12 +197,12 @@ function bench_nitc_options()
 
 	for opt in "$@"; do
 		ot=${opt// /}
-		prepare_res "$name$ot.dat" "$opt" "nitc-g with option $opt"
+		prepare_res "$name$ot.dat" "$opt" "nitc with option $opt"
 		run_compiler "nitc-$name" ./nitc $common $opt
 	done
 
 	if test -n "$2" -a -n "$withall"; then
-		prepare_res "$name-all.dat" "all" "nitc-g with all options $@"
+		prepare_res "$name-all.dat" "all" "nitc with all options $@"
 		run_compiler "nitc-$name" ./nitc $common $@
 	fi
 
