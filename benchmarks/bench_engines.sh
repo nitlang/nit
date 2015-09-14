@@ -93,7 +93,6 @@ function usage()
 	echo "  -n count: number of execution for each bar (default: $count)"
 	echo "  --dry: Do not run the commands, just reuse the data and generate the graph"
 	echo "  --fast: Run less and faster tests"
-	echo "  --html: Generate and HTML output"
 	echo "  -h: this help"
 }
 
@@ -105,10 +104,13 @@ while [ "$stop" = false ]; do
 		-n) count="$2"; shift; shift;;
 		--dry) dry_run=true; shift;;
 		--fast) fast=true$fast; shift;;
-		--html) html="index.html"; echo >"$html" "<html><head></head><body>"; shift;;
+		--html) shift;; # Deprecated
 		*) stop=true
 	esac
 done
+
+html="index.html"
+echo >"$html" "<html><head></head><body>"
 
 xml="bench_engines.xml"
 echo "<testsuites><testsuite>" > "$xml"
@@ -272,9 +274,7 @@ function bench_compilation_time
 }
 bench_compilation_time
 
-if test -n "$html"; then
-	echo >>"$html" "</body></html>"
-fi
+echo >>"$html" "</body></html>"
 
 echo >>"$xml" "</testsuite></testsuites>"
 
