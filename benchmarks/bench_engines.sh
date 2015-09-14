@@ -212,18 +212,18 @@ function bench_nitc_options()
 bench_nitc_options "slower" --global --hardening --no-shortcut-range
 bench_nitc_options "nocheck" --global --no-check-null --no-check-autocast --no-check-attr-isset --no-check-covariance --no-check-assert
 
-bench_nitc_options "slower" --separate --hardening --no-shortcut-equal --no-union-attribute --no-shortcut-range --no-inline-intern "--no-gcc-directive likely --no-gcc-directive noreturn" "--no-tag-primitives"
+bench_nitc_options "slower" --separate --hardening --no-shortcut-equal --no-union-attribute --no-shortcut-range --no-inline-intern "--no-gcc-directive likely --no-gcc-directive noreturn" "--no-tag-primitives" "--colo-dead-methods" --type-poset
 bench_nitc_options "nocheck" --separate --no-check-null --no-check-autocast --no-check-attr-isset --no-check-covariance --no-check-assert
 bench_nitc_options "faster" --separate --skip-dead-methods --inline-coloring-numbers --inline-some-methods --direct-call-monomorph "--inline-some-methods --direct-call-monomorph"
 
 bench_nitc_options "slower" --erasure --hardening --no-shortcut-equal --no-union-attribute --no-shortcut-range --no-inline-intern
-bench_nitc_options "nocheck" --erasure --no-check-null --no-check-autocast --no-check-attr-isset --no-check-covariance --no-check-assert --no-check-erasure-cast
+bench_nitc_options "nocheck" --erasure --no-check-null --no-check-autocast --no-check-attr-isset --no-check-covariance --no-check-assert --no-check-erasure-cast --no-check-all
 bench_nitc_options "faster" --erasure --skip-dead-methods --inline-coloring-numbers --inline-some-methods --direct-call-monomorph --rta
 
 bench_nitc_options "engine" "" NOALL "--separate" "--erasure" "--separate --semi-global" "--erasure --semi-global" "--erasure --semi-global --rta" "--global"
 bench_nitc_options "policy" "" NOALL "--separate" "--erasure" "--separate --no-check-covariance" "--erasure --no-check-covariance --no-check-erasure-cast"
 bench_nitc_options "nullables" "" "--no-check-attr-isset" "--no-union-attribute"
-bench_nitc_options "linkboost" "" NOALL --trampoline-call --colors-are-symbols "--colors-are-symbols --trampoline-call" "--separate --link-boost" "--separate --colors-are-symbols --guard-call" "--separate --colors-are-symbols --direct-call-monomorph0"
+bench_nitc_options "linkboost" "" NOALL --trampoline-call --colors-are-symbols "--colors-are-symbols --trampoline-call" "--separate --link-boost" "--separate --colors-are-symbols --guard-call" "--separate --colors-are-symbols --direct-call-monomorph0" "--substitute-monomorph"
 bench_nitc_options "monomorph" "" --direct-call-monomorph0 --direct-call-monomorph
 
 function bench_nitc-e_gc()
