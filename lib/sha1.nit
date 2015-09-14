@@ -1,7 +1,5 @@
 # This file is part of NIT (http://www.nitlanguage.org).
 #
-# Copyright 2014 Lucas Bajolet <r4pass@hotmail.com>
-#
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
@@ -219,22 +217,12 @@ in "C Header" `{
 	}
 `}
 
-redef class String
-
-	# Computes the SHA1 of the receiver
-	#
-	# Returns a digest of 20 bytes as a String,
-	# note that all the characters are not necessarily ASCII.
-	# If you want the hex string version of the digest, use
-	# sha1_to_s.
-	#
-	#     import base64
-	#     assert "The quick brown fox jumps over the lazy dog".sha1.encode_base64 == "L9ThxnotKPzthJ7hu3bnORuT6xI="
-	fun sha1: String import String.to_cstring, String.length, NativeString.to_s_with_length `{
+redef class NativeString
+	private fun sha1_intern(len: Int): NativeString `{
 		sha1nfo s;
 
 		sha1_init(&s);
-		sha1_write(&s, String_to_cstring(self), String_length(self));
+		sha1_write(&s, self, len);
 		uint8_t* digest = sha1_result(&s);
 
 		char* digested = malloc(21);
@@ -243,35 +231,30 @@ redef class String
 
 		digested[20] = '\0';
 
-		return NativeString_to_s_with_length(digested, 20);
+		return digested;
 	`}
+end
+
+redef class String
+
+	# Computes the SHA1 of the receiver
+	#
+	# Returns a digest of 20 bytes as a NativeString,
+	# note that all the characters are not necessarily ASCII.
+	# If you want the hex string version of the digest, use
+	# sha1_hexdigest.
+	#
+	#     import base64
+	#     assert "The quick brown fox jumps over the lazy dog".sha1 == [0x2Fu8, 0xD4u8, 0xE1u8, 0xC6u8, 0x7Au8, 0x2Du8, 0x28u8, 0xFCu8, 0xEDu8, 0x84u8, 0x9Eu8, 0xE1u8, 0xBBu8, 0x76u8, 0xE7u8, 0x39u8, 0x1Bu8, 0x93u8, 0xEBu8, 0x12u8]
+	fun sha1: Bytes do
+		return new Bytes(to_cstring.sha1_intern(bytelen), 20, 20)
+	end
 
 	# Computes the SHA1 of the receiver.
 	#
 	# Returns a 40 char String containing the Hexadecimal
 	# Digest in its Char form.
 	#
-	#     assert "The quick brown fox jumps over the lazy dog".sha1_to_s == "2FD4E1C67A2D28FCED849EE1BB76E7391B93EB12"
-	fun sha1_to_s: String import String.to_cstring, String.length, NativeString.to_s_with_length `{
-		sha1nfo s;
-
-		sha1_init(&s);
-		sha1_write(&s, String_to_cstring(self), String_length(self));
-		uint8_t* digest = sha1_result(&s);
-
-		char* ret_str = malloc(41);
-		char* hexmap = "0123456789ABCDEF";
-
-		int i;
-		for(i=0;i<20;i++){
-			uint8_t q = digest[i];
-			ret_str[i*2] = hexmap[q >> 4];
-			ret_str[(i*2)+1] = hexmap[q & 0x0F];
-		}
-		ret_str[40] = '\0';
-
-		return NativeString_to_s_with_length(ret_str, 40);
-	`}
-
+	#     assert "The quick brown fox jumps over the lazy dog".sha1_hexdigest == "2FD4E1C67A2D28FCED849EE1BB76E7391B93EB12"
+	fun sha1_hexdigest: String do return sha1.hexdigest
 end
-

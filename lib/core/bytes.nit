@@ -19,6 +19,16 @@ import kernel
 import collection::array
 intrude import text::flat
 
+redef class Byte
+	# Write self as a string into `ns` at position `pos`
+	private fun add_digest_at(ns: NativeString, pos: Int) do
+		var tmp = (0xF0u8 & self) >> 4
+		ns[pos] = if tmp >= 0x0Au8 then tmp + 0x37u8 else tmp + 0x30u8
+		tmp = 0x0Fu8 & self
+		ns[pos + 1] = if tmp >= 0x0Au8 then tmp + 0x37u8 else tmp + 0x30u8
+	end
+end
+
 # A buffer containing Byte-manipulation facilities
 #
 # Uses Copy-On-Write when persisted
@@ -26,7 +36,7 @@ class Bytes
 	super AbstractArray[Byte]
 
 	# A NativeString being a char*, it can be used as underlying representation here.
-	private var items: NativeString
+	var items: NativeString
 
 	# Number of bytes in the array
 	redef var length
@@ -61,6 +71,20 @@ class Bytes
 		assert i >= 0
 		assert i < length
 		return items[i]
+	end
+
+	# Returns self as a hexadecimal digest
+	fun hexdigest: String do
+		var elen = length * 2
+		var ns = new NativeString(elen)
+		var i = 0
+		var oi = 0
+		while i < length do
+			self[i].add_digest_at(ns, oi)
+			i += 1
+			oi += 2
+		end
+		return new FlatString.full(ns, elen, 0, elen - 1, elen)
 	end
 
 	#     var b = new Bytes.with_capacity(1)

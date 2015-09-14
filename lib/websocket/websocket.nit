@@ -114,7 +114,7 @@ class WebsocketConnection
 		resp_map["Connection:"] = "Upgrade"
 		var key = heads["Sec-WebSocket-Key"]
 		key += "258EAFA5-E914-47DA-95CA-C5AB0DC85B11"
-		key = key.sha1.encode_base64
+		key = key.sha1.encode_base64.to_s
 		resp_map["Sec-WebSocket-Accept:"] = key
 		var resp = resp_map.join("\r\n", " ")
 		resp += "\r\n\r\n"

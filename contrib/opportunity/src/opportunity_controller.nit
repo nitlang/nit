@@ -16,7 +16,6 @@
 module opportunity_controller
 
 import nitcorn
-import sha1
 import templates
 import opportunity_model
 
