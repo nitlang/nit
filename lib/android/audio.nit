@@ -138,7 +138,6 @@ private extern class NativeMediaPlayer in "Java" `{ android.media.MediaPlayer `}
 			self.setDataSource(fd, start_offset, length);
 			return 1;
 		}catch(Exception e) {
-			Log.e("Error loading the Media Player with a file descriptor", e.getMessage());
 			return 0;
 		}
 	`}
@@ -537,8 +536,8 @@ redef class Sound
 	end
 
 	redef fun play do
-		if self.error != null then return
 		if not is_loaded then load
+		if self.error != null then return
 		soundpool.play(soundpool_id)
 	end
 
@@ -599,8 +598,8 @@ redef class Music
 	end
 
 	redef fun play do
-		if self.error != null then return
 		if not is_loaded then load
+		if self.error != null then return
 		media_player.start
 	end
 
