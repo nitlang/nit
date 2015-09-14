@@ -337,11 +337,16 @@ $(call import-module,android/native_app_glue)
 			var tsa_server= "TSA_SERVER".environ
 
 			if key_alias.is_empty then
-				toolcontext.error(null,
-					"Error: the environment variable `KEY_ALIAS` must be set to use the `--release` option on Android projects.")
+				toolcontext.warning(null, "key-alias",
+					"Warning: the environment variable `KEY_ALIAS` is not set, the APK file will not be signed.")
+
+				# Just move the unsigned APK to outname
+				args = ["mv", apk_path, outname]
+				toolcontext.exec_and_check(args, "Android project error")
 				return
 			end
 
+			# We have a key_alias, try to sign the APK
 			args = ["jarsigner", "-sigalg", "MD5withRSA", "-digestalg", "SHA1", apk_path, key_alias]
 
 			## Use a custom keystore
