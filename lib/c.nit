@@ -93,8 +93,8 @@ class CIntArray
 		super size
 	end
 
-	# Build from an `Array[Int]`
-	new from(array: Array[Int])
+	# Create from an `SequenceRead[Int]`
+	new from(array: SequenceRead[Int])
 	do
 		var carray = new CIntArray(array.length)
 		for i in array.length.times do
@@ -129,7 +129,7 @@ class CByteArray
 		super size
 	end
 
-	# Build from a `SequenceRead[Byte]`
+	# Create from a `SequenceRead[Byte]`
 	new from(array: SequenceRead[Byte])
 	do
 		var carray = new CByteArray(array.length)
@@ -166,8 +166,8 @@ class CNativeStringArray
 		super size
 	end
 
-	# Build from an `Array[NativeString]`
-	new from(array: Array[NativeString])
+	# Create from an `SequenceRead[NativeString]`
+	new from(array: SequenceRead[NativeString])
 	do
 		var carray = new CNativeStringArray(array.length)
 		for i in array.length.times do
