@@ -226,6 +226,8 @@ bench_nitc_options "nullables" "" "--no-check-attr-isset" "--no-union-attribute"
 bench_nitc_options "linkboost" "" NOALL --trampoline-call --colors-are-symbols "--colors-are-symbols --trampoline-call" "--separate --link-boost" "--separate --colors-are-symbols --guard-call" "--separate --colors-are-symbols --direct-call-monomorph0" "--substitute-monomorph"
 bench_nitc_options "monomorph" "" --direct-call-monomorph0 --direct-call-monomorph
 
+bench_nitc_options "misc" "" --log --typing-test-metrics --invocation-metrics --isset-checks-metrics --tables-metrics --no-stacktrace --release --debug #FIXME add --sloppy
+
 function bench_nitc-e_gc()
 {
 	name="$FUNCNAME"
