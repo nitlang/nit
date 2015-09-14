@@ -24,6 +24,9 @@ source ../bench_plot.sh
 # Can be overrided with 'the option -n'
 count=2
 
+# Default number of times the input file is transformed during a single run
+s=200
+
 ### HELPER FUNCTIONS ##
 
 function die()
@@ -39,6 +42,7 @@ function usage()
 	echo "run_bench: [options]* benchname"
 	echo "  -v: verbose mode"
 	echo "  -n count: number of execution for each bar (default: $count)"
+	echo "  -s size: number of transformations for each run (default: $s)"
 	echo "  --dry: Do not run the commands, just reuse the data and generate the graph"
 	echo "  -h: this help"
 }
@@ -49,6 +53,7 @@ while [ "$stop" = false ]; do
 		-v) verbose=true; shift;;
 		-h) usage; exit;;
 		-n) count="$2"; shift; shift;;
+		-s) s="$2"; shift; shift;;
 		--dry) dry_run=true; shift;;
 		*) stop=true
 	esac
@@ -73,8 +78,6 @@ outdir="./out"
 engdir="./engines"
 bncdir="./benches/out"
 mkdir -p $outdir
-
-s=200
 
 function bench_nitmd()
 {
