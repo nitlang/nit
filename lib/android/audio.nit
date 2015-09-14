@@ -377,6 +377,16 @@ class MediaPlayer
 
 	# Load a sound for a given resource id
 	fun load_sound(id: Int, context: NativeActivity): Music do
+		# FIXME: maybe find a better way to handle this situation
+		# If two different music are loaded with the same `MediaPlayer`,
+		# a new `NativeMediaPlayer` will be created for the secondd music
+		# and the nit program will loose the handle to the previous one
+		# If the previous music is playing, we need to stop it
+		if playing then
+			stop
+			reset
+			destroy
+		end
 		self.nmedia_player = self.nmedia_player.create(context, id)
 		if self.nmedia_player.is_java_null then
 			self.error = new Error("Failed to load a sound")
