@@ -15,6 +15,9 @@
 all:
 	./bench_markdown.sh all
 
+check:
+	./bench_markdown.sh -s 1 nit
+
 clean:
 	$(MAKE) clean -C benches
 	$(MAKE) clean -C engines
