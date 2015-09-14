@@ -4,10 +4,17 @@ linux:
 	mkdir -p bin
 	../../bin/nitc -o bin/friendz src/friendz_linux.nit
 
-android:
-	mkdir -p bin res
-	../inkscape_tools/bin/svg_to_icons art/icon.svg --android --out res/
+android: res/drawable-hdpi/icon.png
+	mkdir -p bin
 	../../bin/nitc -o bin/friendz.apk src/friendz_android.nit
+
+android-release: res/drawable-hdpi/icon.png
+	mkdir -p bin
+	../../bin/nitc -o bin/friendz.apk src/friendz_android.nit --release
+
+res/drawable-hdpi/icon.png: art/icon.svg
+	mkdir -p res
+	../inkscape_tools/bin/svg_to_icons art/icon.svg --android --out res/
 
 doc:
 	mkdir -p doc
