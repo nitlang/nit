@@ -19,7 +19,6 @@ import realtime
 import solver
 import mnit::tileset
 import app::data_store
-import md5
 
 intrude import grid
 intrude import level
@@ -962,7 +961,7 @@ redef class Game
 	fun play(l: Level)
 	do
 		level = l
-		grid.load(level.str)
+		grid.load(level.saved_str or else level.str)
 		init_play_menu(false)
 		if level.status != "" then
 			statusbar.main_txt = level.status
@@ -1270,9 +1269,14 @@ redef class Game
 		super
 
 		for level in levels do
-			var score = app.data_store["s{level.str.md5}"]
+			var score = app.data_store["s{level.str}"]
 			if score isa Int then
 				level.score = score
+			end
+			var saved_str = app.data_store["g{level.str}"]
+			if saved_str isa String then
+				print "LOAD {level.name}: {saved_str}"
+				level.saved_str = saved_str
 			end
 		end
 	end
@@ -1649,6 +1653,13 @@ end
 redef class Level
 	redef fun save
 	do
-		app.data_store["s{str.md5}"] = if score > 0 then score else null
+		app.data_store["s{str}"] = if score > 0 then score else null
+		var saved = game.grid.save
+		saved_str = saved
+		app.data_store["g{str}"] = saved
+		print "SAVE: {name}: {saved}"
 	end
+
+	# The saved player grid (to continue games)
+	var saved_str: nullable String = null
 end
