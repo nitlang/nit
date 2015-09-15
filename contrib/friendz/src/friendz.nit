@@ -777,7 +777,7 @@ class StatusBar
 	do
 		print "***STATUS** {txt}"
 		self.tmp_txt = txt
-		self.tmp_txt_ttl = 20
+		self.tmp_txt_ttl = 60
 		self.tmp_txt_color = color
 	end
 
@@ -1210,13 +1210,16 @@ redef class Game
 	fun onKeyDown(ev: Event) do
 		var kc = ev.char_code
 		if kc == "e" then
+			set_tmp("RUN EDITOR")
 			grid_edit = grid.copy(true)
 			edit_grid(grid)
 		else if kc == "c" then
 			if cheated then
+				set_tmp("CHEAT: OFF")
 				snd_duh.play
 				cheated = false
 			else
+				set_tmp("CHEAT: ON")
 				snd_win.play
 				cheated = true
 			end
@@ -1227,26 +1230,39 @@ redef class Game
 			else
 				solver_pause = not solver_pause
 			end
+			if solver_pause then
+				set_tmp("SOLVER: PAUSED")
+			else
+				set_tmp("SOLVER: ON")
+			end
 			#solver.step
 		else if kc == "d" then
 			if solver == null then
 				solver = (new FriendzProblem(grid)).solve
 				solver_pause = true
+				set_tmp("SOLVER: ON")
 			else
+				solver_pause = true
 				solver.run_steps(1)
+				set_tmp("SOLVER: ONE STEP")
 			end
 		else if kc == "+" then
 			solver_steps += 100
-			print solver_steps
+			set_tmp("SOLVER: {solver_steps} STEPS")
 		else if kc == "-" then
 			solver_steps -= 100
-			print solver_steps
+			set_tmp("SOLVER: {solver_steps} STEPS")
 		else for g in entities do
 			if kc == g.shortcut then
 				g.click(ev)
 				g.dirty = true
 			end
 		end
+	end
+
+	fun set_tmp(s: String)
+	do
+		statusbar.set_tmp(s, "cyan")
 	end
 
 	redef fun load_levels
