@@ -382,6 +382,19 @@ fun NitGitGrep()
 	redraw!
 endfun
 
+" Call `nit` on the current file
+fun NitExecute()
+	let path = expand('%')
+
+	if &modified
+		let path = tempname() . '.nit'
+		execute '%write '. path
+	endif
+
+	execute '!nit "' . path . '"'
+endfun
+command NitExecute call NitExecute()
+
 if !exists("g:nit_disable_omnifunc") || !g:nit_disable_omnifunc
 	" Activate the omnifunc on Nit files
 	autocmd FileType nit set omnifunc=NitOmnifunc
