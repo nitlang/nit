@@ -61,6 +61,27 @@ class Matrix
 		end
 	end
 
+	# Get each row of this matrix in nested arrays
+	#
+	# ~~~
+	# var items = [[1.0, 2.0],
+	#              [3.0, 4.0]]
+	# var matrix = new Matrix.from(items)
+	# assert matrix.to_a == items
+	# ~~~
+	fun to_a: Array[Array[Float]]
+	do
+		var a = new Array[Array[Float]]
+		for j in height.times do
+			var row = new Array[Float]
+			for i in width.times do
+				row.add self[j, i]
+			end
+			a.add row
+		end
+		return a
+	end
+
 	# Create a matrix from an `Array[Float]` composed of rows after rows
 	#
 	# Require: `width > 0 and height > 0`
@@ -196,6 +217,25 @@ class Matrix
 				out[j, i] = sum
 			end
 		end
+		return out
+	end
+
+	# Get the transpose of this matrix
+	#
+	# ~~~
+	# var matrix = new Matrix.from([[1.0, 2.0, 3.0],
+	#                               [4.0, 5.0, 6.0]])
+	# assert matrix.transposed.to_a == [[1.0, 4.0],
+	#                                   [2.0, 5.0],
+	#                                   [3.0, 6.0]]
+	#
+	# var i = new Matrix.identity(3)
+	# assert i.transposed == i
+	# ~~~
+	fun transposed: Matrix
+	do
+		var out = new Matrix(height, width)
+		for k, v in self do out[k.x, k.y] = v
 		return out
 	end
 
