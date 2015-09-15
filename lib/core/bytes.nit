@@ -27,6 +27,51 @@ redef class Byte
 		tmp = 0x0Fu8 & self
 		ns[pos + 1] = if tmp >= 0x0Au8 then tmp + 0x37u8 else tmp + 0x30u8
 	end
+
+	# Is `self` a valid hexadecimal digit (in ASCII)
+	#
+	# ~~~nit
+	# intrude import core::bytes
+	# assert not '/'.ascii.to_b.is_valid_hexdigit
+	# assert '0'.ascii.to_b.is_valid_hexdigit
+	# assert '9'.ascii.to_b.is_valid_hexdigit
+	# assert not ':'.ascii.to_b.is_valid_hexdigit
+	# assert not '@'.ascii.to_b.is_valid_hexdigit
+	# assert 'A'.ascii.to_b.is_valid_hexdigit
+	# assert 'F'.ascii.to_b.is_valid_hexdigit
+	# assert not 'G'.ascii.to_b.is_valid_hexdigit
+	# assert not '`'.ascii.to_b.is_valid_hexdigit
+	# assert 'a'.ascii.to_b.is_valid_hexdigit
+	# assert 'f'.ascii.to_b.is_valid_hexdigit
+	# assert not 'g'.ascii.to_b.is_valid_hexdigit
+	# ~~~
+	private fun is_valid_hexdigit: Bool do
+		return (self >= 0x30u8 and self <= 0x39u8) or
+		       (self >= 0x41u8 and self <= 0x46u8) or
+		       (self >= 0x61u8 and self <= 0x66u8)
+	end
+
+	# `self` as a hexdigit to its byte value
+	#
+	# ~~~nit
+	# intrude import core::bytes
+	# assert 0x39u8.hexdigit_to_byteval == 0x09u8
+	# assert 0x43u8.hexdigit_to_byteval == 0x0Cu8
+	# ~~~
+	#
+	# REQUIRE: `self.is_valid_hexdigit`
+	private fun hexdigit_to_byteval: Byte do
+		if self >= 0x30u8 and self <= 0x39u8 then
+			return self - 0x30u8
+		else if self >= 0x41u8 and self <= 0x46u8 then
+			return self - 0x37u8
+		else if self >= 0x61u8 and self <= 0x66u8 then
+			return self - 0x57u8
+		end
+		# Happens only if the requirement is not met.
+		# i.e. this abort is here to please the compiler
+		abort
+	end
 end
 
 # A buffer containing Byte-manipulation facilities
@@ -188,7 +233,7 @@ private class BytesIterator
 
 	var max: Int
 
-	init with_buffer(b: Bytes) do init(b.items, 0, b.length - 1)
+	init with_buffer(b: Bytes) do init(b.items, 0, b.length)
 
 	redef fun is_ok do return index < max
 
@@ -210,12 +255,39 @@ redef class Text
 		return b
 	end
 
+	# Is `self` a valid hexdigest ?
+	#
+	#     assert "0B1d3F".is_valid_hexdigest
+	#     assert not "5G".is_valid_hexdigest
+	fun is_valid_hexdigest: Bool do
+		for i in bytes do if not i.is_valid_hexdigit then return false
+		return true
+	end
+
 	# Appends `self.bytes` to `b`
 	fun append_to_bytes(b: Bytes) do
 		for s in substrings do
 			var from = if s isa FlatString then s.first_byte else 0
 			b.append_ns_from(s.items, s.bytelen, from)
 		end
+	end
+
+	# Returns a new `Bytes` instance with the digest as content
+	#
+	#     assert "0B1F4D".hexdigest_to_bytes == [0x0Bu8, 0x1Fu8, 0x4Du8]
+	#
+	# REQUIRE: `self` is a valid hexdigest and hexdigest.length % 2 == 0
+	fun hexdigest_to_bytes: Bytes do
+		var b = bytes
+		var pos = 0
+		var max = bytelen
+		var ret = new Bytes.with_capacity(max / 2)
+		while pos < max do
+			ret.add((b[pos].hexdigit_to_byteval << 4) |
+			b[pos + 1].hexdigit_to_byteval)
+			pos += 2
+		end
+		return ret
 	end
 end
 
