@@ -26,14 +26,6 @@ source ./bench_plot.sh
 # Can be overrided with 'the option -n'
 count=2
 
-### HELPER FUNCTIONS ##
-
-function die()
-{
-	echo >&2 "error: $*"
-	died=1
-}
-
 # HELPER FOR NIT #
 
 # Run standards benchs on a compiler command

@@ -27,14 +27,6 @@ count=2
 # Default number of times the input file is transformed during a single run
 s=200
 
-### HELPER FUNCTIONS ##
-
-function die()
-{
-	echo >&2 "error: $*"
-	died=1
-}
-
 ## HANDLE OPTIONS ##
 
 function usage()
