@@ -8,6 +8,10 @@ android: android-icons
 	mkdir -p bin
 	../../bin/nitc -o bin/dino.apk src/dino_android.nit
 
+android-release: android-icons
+	mkdir -p bin
+	../../bin/nitc -o bin/dino.apk src/dino_android.nit --release
+
 ../../contrib/inkscape_tools/bin/svg_to_icons:
 	$(MAKE) -C ../../contrib/inkscape_tools
 

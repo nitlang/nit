@@ -4,11 +4,14 @@ bin/moles: $(shell ../../bin/nitls -M src/moles_linux.nit) assets/images/drawing
 	mkdir -p bin
 	../../bin/nitc -o bin/moles src/moles_linux.nit
 
+android: bin/moles.apk
 bin/moles.apk: android-icons $(shell ../../bin/nitls -M src/moles_android.nit) assets/images/drawing.png
 	mkdir -p bin
 	../../bin/nitc -o bin/moles.apk src/moles_android.nit
 
-android: bin/moles.apk
+android-release: android-icons $(shell ../../bin/nitls -M src/moles_android.nit) assets/images/drawing.png
+	mkdir -p bin
+	../../bin/nitc -o bin/moles.apk src/moles_android.nit --release
 
 ../inkscape_tools/bin/svg_to_icons:
 	$(MAKE) -C ../inkscape_tools

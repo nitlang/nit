@@ -24,9 +24,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.9899495"
-     inkscape:cx="58.64005"
-     inkscape:cy="380.00465"
+     inkscape:zoom="1.4"
+     inkscape:cx="160.56125"
+     inkscape:cy="282.40083"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -97,17 +97,14 @@
        width="211.42856"
        id="rect2995"
        style="fill:#cccccc;fill-opacity:1;stroke:#000000;stroke-opacity:1;stroke-width:5;stroke-miterlimit:4;stroke-dasharray:none" />
-    <text
-       xml:space="preserve"
+    <g
        style="font-size:269.1137085px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Droid Sans;-inkscape-font-specification:Droid Sans"
-       x="299.74573"
-       y="770.06946"
-       id="text2997"
-       sodipodi:linespacing="125%"><tspan
-         sodipodi:role="line"
-         id="tspan2999"
-         x="299.74573"
-         y="770.06946">+</tspan></text>
+       id="text2997">
+      <path
+         d="m 364.00188,685.0516 -50.85303,0 0,-19.71047 50.85303,0 0,-51.11584 19.71048,0 0,51.11584 50.85303,0 0,19.71047 -50.85303,0 0,50.59023 -19.71048,0 0,-50.59023"
+         style=""
+         id="path2996" />
+    </g>
     <path
        inkscape:connector-curvature="0"
        id="path3018"
@@ -124,16 +121,13 @@
        id="path2997"
        style="font-size:202.30386353px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Droid Sans;-inkscape-font-specification:Droid Sans"
        d="m 179.68975,735.88154 c -1e-5,-2.50244 0.32926,-4.60977 0.98782,-6.32199 0.65852,-1.77805 1.54755,-3.19391 2.66709,-4.2476 1.1195,-1.11949 2.43658,-1.90974 3.95125,-2.37074 1.51462,-0.52681 3.16097,-0.79023 4.93905,-0.79025 1.71218,2e-5 3.32561,0.26344 4.84028,0.79025 1.58047,0.461 2.93048,1.25125 4.05003,2.37074 1.11948,1.05369 2.00851,2.46955 2.66709,4.2476 0.65851,1.71222 0.98778,3.81955 0.98782,6.32199 -4e-5,2.43661 -0.32931,4.54394 -0.98782,6.322 -0.65858,1.71221 -1.54761,3.12807 -2.66709,4.24759 -1.11955,1.11952 -2.46956,1.94269 -4.05003,2.46953 -1.51467,0.52683 -3.1281,0.79024 -4.84028,0.79025 -1.77808,-10e-6 -3.42443,-0.26342 -4.93905,-0.79025 -1.51467,-0.52684 -2.83175,-1.35001 -3.95125,-2.46953 -1.11954,-1.11952 -2.00857,-2.53538 -2.66709,-4.24759 -0.65856,-1.77806 -0.98783,-3.88539 -0.98782,-6.322" />
-    <text
-       xml:space="preserve"
+    <g
        style="font-size:269.1137085px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Droid Sans;-inkscape-font-specification:Droid Sans"
-       x="64.031456"
-       y="1006.8839"
-       id="text3013"
-       sodipodi:linespacing="125%"><tspan
-         sodipodi:role="line"
-         id="tspan3015"
-         x="64.031456"
-         y="1006.8839">=</tspan></text>
+       id="text3013">
+      <path
+         d="m 77.43458,894.9284 0,-19.57907 121.41654,0 0,19.57907 -121.41654,0 m 0,53.87531 0,-19.71048 121.41654,0 0,19.71048 -121.41654,0"
+         style=""
+         id="path2999" />
+    </g>
   </g>
 </svg>

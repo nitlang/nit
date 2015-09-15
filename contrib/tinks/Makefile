@@ -32,9 +32,12 @@ src/server/server_serialize.nit: $(shell ../../bin/nitls -M src/server/dedicated
 	../../bin/nitserial -o src/server/server_serialize.nit src/server/dedicated.nit
 
 # Android
+android: bin/tinks.apk
 bin/tinks.apk: assets/images/drawing.png src/client/client_serialize.nit res/drawable-ldpi/icon.png $(shell ../../bin/nitls -M src/client/android_client.nit)
-	../../bin/nitc -o bin/tinks.apk src/client/android_client.nit -m src/client/client_serialize.nit --compile-dir nit_compile
-	adb install -r bin/tinks.apk
+	../../bin/nitc -o bin/tinks.apk src/client/android_client.nit -m src/client/client_serialize.nit
+
+android-release: assets/images/drawing.png src/client/client_serialize.nit res/drawable-ldpi/icon.png $(shell ../../bin/nitls -M src/client/android_client.nit)
+	../../bin/nitc -o bin/tinks.apk src/client/android_client.nit -m src/client/client_serialize.nit --release
 
 res/drawable-ldpi/icon.png: art/icon.svg
 	../inkscape_tools/bin/svg_to_icons art/icon.svg --android --out res/
