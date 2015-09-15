@@ -280,7 +280,7 @@ redef class MExplicitCast
 
 			var from_var = nitni_visitor.var_from_c("from", from)
 			from_var = nitni_visitor.box_extern(from_var, from)
-			var recv_var = nitni_visitor.type_test(from_var, to, "FFI isa")
+			var recv_var = nitni_visitor.type_test(from_var, to, "isa")
 			nitni_visitor.add("return {recv_var};")
 
 			nitni_visitor.add("\}")
@@ -316,7 +316,7 @@ redef class MExplicitCast
 			from_var = nitni_visitor.box_extern(from_var, from)
 
 			## test type
-			var check = nitni_visitor.type_test(from_var, to, "FFI cast")
+			var check = nitni_visitor.type_test(from_var, to, "as")
 			nitni_visitor.add("if (!{check}) \{")
 			nitni_visitor.add_abort("FFI cast failed")
 			nitni_visitor.add("\}")
