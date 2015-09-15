@@ -267,7 +267,7 @@ class Grid
 		if x>0 then y += 1
 		if x > mx then mx = x
 		if y > my then my = y
-		if mx<3 or my<3 or mx>=max_width or my>=max_height then
+		if mx<3 or my<3 or mx>max_width or my>max_height then
 			return false
 		end
 		self.resize(mx,my)
