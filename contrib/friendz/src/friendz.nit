@@ -960,6 +960,7 @@ redef class Game
 	# Play a level in player mode.
 	fun play(l: Level)
 	do
+		save # save the previous level grid
 		level = l
 		grid.load(level.saved_str or else level.str)
 		init_play_menu(false)
@@ -1055,6 +1056,7 @@ redef class Game
 	# Helper function to initialize the menu (and tile) screen
 	fun init_menu
 	do
+		save # save the previous level grid
 		init_game
 		level = null
 		var i = levels.first
@@ -1278,6 +1280,14 @@ redef class Game
 				print "LOAD {level.name}: {saved_str}"
 				level.saved_str = saved_str
 			end
+		end
+	end
+
+	fun save
+	do
+		var l = level
+		if l != null then
+			l.save
 		end
 	end
 end
@@ -1594,6 +1604,12 @@ redef class App
 		# img loading?
 	end
 
+	redef fun on_pause
+	do
+		super
+		game.save
+	end
+
 	# Maximum wanted frame per second
 	var max_fps = 30
 
@@ -1651,7 +1667,8 @@ redef class KeyEvent
 end
 
 redef class Level
-	redef fun save
+	# Save the score and grid of the level
+	fun save
 	do
 		app.data_store["s{str}"] = if score > 0 then score else null
 		var saved = game.grid.save

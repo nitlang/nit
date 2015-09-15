@@ -91,13 +91,9 @@ class Level
 		if not w then return false
 		if g.number > self.score then
 			self.score = g.number
-			self.save
 		end
 		return true
 	end
-
-	# Save the score of the level
-	fun save do end
 end
 
 # main game object
