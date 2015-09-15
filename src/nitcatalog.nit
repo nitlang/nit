@@ -86,6 +86,12 @@ class CatalogPage
 	# Placeholder to include additional things before the `</head>`.
 	var more_head = new Template
 
+	# Relative path to the root directory (with the index file).
+	#
+	# Use "" for pages in the root directory
+	# Use ".." for pages in a subdirectory
+	var rootpath: String
+
 	redef init
 	do
 		add """
@@ -94,7 +100,7 @@ class CatalogPage
 <head>
 	<meta charset="utf-8">
 	<link rel="stylesheet" media="all" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
-	<link rel="stylesheet" media="all" href="style.css">
+	<link rel="stylesheet" media="all" href="{{{rootpath / "style.css"}}}">
 """
 		add more_head
 
@@ -116,7 +122,7 @@ class CatalogPage
     </div>
     <div class='collapse navbar-collapse' id='topmenu-collapse'>
      <ul class='nav navbar-nav'>
-      <li><a href="index.html">Catalog</a></li>
+      <li><a href="{{{rootpath / "index.html"}}}">Catalog</a></li>
      </ul>
     </div>
    </div>
@@ -270,7 +276,7 @@ class Catalog
 	# Compute information and generate a full HTML page for a package
 	fun package_page(mpackage: MPackage): Writable
 	do
-		var res = new CatalogPage
+		var res = new CatalogPage("..")
 		var score = score[mpackage].to_f
 		var name = mpackage.name.html_escape
 		res.more_head.add """<title>{{{name}}}</title>"""
@@ -369,7 +375,7 @@ class Catalog
 				if cat == null then cat = t
 				tag2proj[t].add mpackage
 				t = t.html_escape
-				ts2.add "<a href=\"index.html#tag_{t}\">{t}</a>"
+				ts2.add "<a href=\"../index.html#tag_{t}\">{t}</a>"
 			end
 			res.add_list(ts2, ", ", ", ")
 		end
@@ -377,7 +383,7 @@ class Catalog
 			var t = "none"
 			cat = t
 			tag2proj[t].add mpackage
-			res.add "<a href=\"index.html#tag_{t}\">{t}</a>"
+			res.add "<a href=\"../index.html#tag_{t}\">{t}</a>"
 		end
 		if cat != null then cat2proj[cat].add mpackage
 		score += ts2.length.score
@@ -496,7 +502,7 @@ class Catalog
 	fun li_package(p: MPackage): String
 	do
 		var res = ""
-		var f = "{p.name}.html"
+		var f = "p/{p.name}.html"
 		res += "<a href=\"{f}\">{p}</a>"
 		var d = p.mdoc_or_fallback
 		if d != null then res += " - {d.html_synopsis.write_to_string}"
@@ -614,7 +620,7 @@ class Catalog
 		res.add "</tr></thead>"
 		for p in mpackages do
 			res.add "<tr>"
-			res.add "<td><a href=\"{p.name}.html\">{p.name}</a></td>"
+			res.add "<td><a href=\"p/{p.name}.html\">{p.name}</a></td>"
 			var maint = "?"
 			if p.maintainers.not_empty then maint = p.maintainers.first
 			res.add "<td>{maint}</td>"
@@ -700,7 +706,7 @@ if not opt_no_model.value then
 end
 
 var out = opt_dir.value or else "catalog.out"
-out.mkdir
+(out/"p").mkdir
 
 # Generate the css (hard coded)
 var css = """
@@ -806,13 +812,13 @@ css.write_to_file(out/"style.css")
 
 for p in model.mpackages do
 	# print p
-	var f = "{p.name}.html"
+	var f = "p/{p.name}.html"
 	catalog.package_page(p).write_to_file(out/f)
 end
 
 # INDEX
 
-var index = new CatalogPage
+var index = new CatalogPage("")
 index.more_head.add "<title>Packages in Nit</title>"
 
 index.add """
@@ -859,7 +865,7 @@ index.write_to_file(out/"index.html")
 
 # PEOPLE
 
-var page = new CatalogPage
+var page = new CatalogPage("")
 page.more_head.add "<title>People of Nit</title>"
 page.add """<div class="content">\n<h1>People of Nit</h1>\n"""
 page.add "<h2>By Maintainer</h2>\n"
@@ -871,7 +877,7 @@ page.write_to_file(out/"people.html")
 
 # TABLE
 
-page = new CatalogPage
+page = new CatalogPage("")
 page.more_head.add "<title>Projets of Nit</title>"
 page.add """<div class="content">\n<h1>People of Nit</h1>\n"""
 page.add "<h2>Table of Projets</h2>\n"
