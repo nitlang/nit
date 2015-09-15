@@ -205,14 +205,14 @@ function launch_bench()
 	echo "  Trying variant $variant for benchmark $bench"
 	echo "---------------------------------------------------------"
 	git diff-index --quiet HEAD || {
-		echo "Cannot run benches on a dirty working directory."
-		echo "Please commit or stash your modifications and relaunch the command."
-		exit 1
+		die "Cannot run benches on a dirty working directory."
+		die "Please commit or stash your modifications and relaunch the command."
+		return
 	}
 	git am $curr_rev || {
-		echo "Error when applying patch $curr_rev"
-		git am --abort;
-		exit 1;
+		die "Error when applying patch $curr_rev"
+		git am --abort
+		return
 	}
 	if [ "$need_bootstrap" = true ]; then
 		prepare_compiler
@@ -263,12 +263,6 @@ function main()
 	bench=$1
 	shift;
 
-	git diff-index --quiet HEAD || {
-		echo "Cannot run benches on a dirty working directory."
-		echo "Please commit or stash your modifications and relaunch the command."
-		exit 1
-	}
-
 	head=`git rev-parse HEAD`
 	variant="HEAD"
 	need_plot=true
@@ -314,3 +308,9 @@ function main()
 }
 
 main "$@";
+
+if test -n "$died"; then
+	echo "Some commands failed"
+	exit 1
+fi
+exit 0
