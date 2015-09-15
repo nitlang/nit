@@ -1,7 +1,5 @@
 # This file is part of NIT ( http://www.nitlanguage.org ).
 #
-# Copyright 2014 Alexis Laferrière <alexis.laf@xymus.net>
-#
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
@@ -14,29 +12,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Implementation of app.nit for the Linux platform
-module linux
+# Support services for Gamnit on Android
+module gamnit_android
 
-import app
+import android
+
+intrude import gamnit
 
 redef class App
-	redef fun setup
-	do
-		super
-
-		on_create
-		on_restore_state
-		on_start
-		on_resume
-	end
-
-	redef fun run
-	do
-		super
-
-		on_pause
-		on_save_state
-		on_stop
-		on_destroy
-	end
+	redef fun feed_events do app.poll_looper 0
 end

@@ -35,21 +35,6 @@ redef class App
 		display = new Opengles1Display
 
 		super
-
-		on_create
-		on_restore_state
-		on_start
-		on_resume
-	end
-
-	redef fun run
-	do
-		super
-
-		on_pause
-		on_save_state
-		on_stop
-		on_destroy
 	end
 
 	redef fun generate_input
