@@ -904,10 +904,10 @@ redef class Game
 	# SOUND
 
 	# Is the music muted?
-	var music_muted: Bool = false #read_cookie("music_muted")
+	var music_muted: Bool = app.data_store["music_muted"] == true
 
 	# Is the sound effects muted?
-	var sfx_muted: Bool = false #read_cookie("sfx_muted")
+	var sfx_muted: Bool = app.data_store["sfx_muted"] == true
 
 	# The background music resource. */
 	var music = new Music("music.ogg")
@@ -963,6 +963,8 @@ redef class Game
 		init_buttons
 		entities.clear
 		title
+
+		if not music_muted then music.play
 	end
 
 	# fill `buttons`
@@ -1359,12 +1361,13 @@ class MusicButton
 	init(game: Game)
 	do
 		super(game, "MUSIC", 470, 412, "purple", "Mute the music", "Unmute the music")
+		toggled = game.music_muted
 	end
 	redef fun click2(ev)
 	do
 		game.music_muted = self.toggled
 		if game.music_muted then game.music.pause else game.music.play
-		#game.save_cookie("music_muted",music_muted?"true":"")
+		app.data_store["music_muted"] = game.music_muted
 	end
 end
 
@@ -1373,13 +1376,14 @@ class SFXButton
 	init(game: Game)
 	do
 		super(game, "SOUND FX", 470, 382, "purple", "Mute the sound effects", "Unmute the sound effects")
+		toggled = game.sfx_muted
 	end
 
 	redef fun click2(ev)
 	do
 		game.sfx_muted = self.toggled
 		if not game.sfx_muted then game.snd_whip.play # Because the automatic one was muted
-		#save_cookie("sfx_muted",sfx_muted?"true":"")
+		app.data_store["sfx_muted"] = game.sfx_muted
 	end
 end
 
