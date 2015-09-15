@@ -12,6 +12,8 @@ iter:
 index:
 	./bench_strings.sh index 10000000 50 25 200
 
+check: basic
+
 basic:
 	./bench_strings.sh basic
 
