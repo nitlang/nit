@@ -19,6 +19,31 @@ import kernel
 import collection::array
 intrude import text::flat
 
+redef class Byte
+	# Is `self` a valid hexadecimal digit (in ASCII)
+	#
+	# ~~~nit
+	# intrude import core::bytes
+	# assert not '/'.ascii.to_b.is_valid_hexdigit
+	# assert '0'.ascii.to_b.is_valid_hexdigit
+	# assert '9'.ascii.to_b.is_valid_hexdigit
+	# assert not ':'.ascii.to_b.is_valid_hexdigit
+	# assert not '@'.ascii.to_b.is_valid_hexdigit
+	# assert 'A'.ascii.to_b.is_valid_hexdigit
+	# assert 'F'.ascii.to_b.is_valid_hexdigit
+	# assert not 'G'.ascii.to_b.is_valid_hexdigit
+	# assert not '`'.ascii.to_b.is_valid_hexdigit
+	# assert 'a'.ascii.to_b.is_valid_hexdigit
+	# assert 'f'.ascii.to_b.is_valid_hexdigit
+	# assert not 'g'.ascii.to_b.is_valid_hexdigit
+	# ~~~
+	private fun is_valid_hexdigit: Bool do
+		return (self >= 0x30u8 and self <= 0x39u8) or
+		       (self >= 0x41u8 and self <= 0x46u8) or
+		       (self >= 0x61u8 and self <= 0x66u8)
+	end
+end
+
 # A buffer containing Byte-manipulation facilities
 #
 # Uses Copy-On-Write when persisted
@@ -251,6 +276,15 @@ redef class Text
 		var b = new Bytes.with_capacity(bytelen)
 		append_to_bytes b
 		return b
+	end
+
+	# Is `self` a valid hexdigest ?
+	#
+	#     assert "0B1d3F".is_valid_hexdigest
+	#     assert not "5G".is_valid_hexdigest
+	fun is_valid_hexdigest: Bool do
+		for i in bytes do if not i.is_valid_hexdigit then return false
+		return true
 	end
 
 	# Appends `self.bytes` to `b`
