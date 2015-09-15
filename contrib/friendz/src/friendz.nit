@@ -217,9 +217,9 @@ class LevelButton
 
 		self.over = self.level.fullname
 		if self.level.get_state >= l.l_won then
-			if game.levels[9].get_state >= l.l_won then self.over += " --- {self.level.score}/{self.level.par}"
+			if game.levels[9].get_state >= l.l_won then self.over += " --- {self.level.score}/{self.level.gold}"
 		else if self.level.get_state >= l.l_open then
-			if game.levels[9].get_state >= l.l_open then self.over +=  " --- ?/{self.level.par}"
+			if game.levels[9].get_state >= l.l_open then self.over +=  " --- ?/{self.level.gold}"
 		end
 		#self.enabled = l.get_state >= l.l_open
 	end
@@ -242,7 +242,7 @@ class LevelButton
 		end
 		ctx.blit(game.img[ix,iy], self.x, self.y)
 
-		if s == l.l_par then
+		if s == l.l_gold then
 			ctx.blit(game.img2[7,0], self.x + bw*5/8, self.y-bh*1/8)
 		end
 		ctx.textx(self.level.name, self.x+5, self.y+5, 24, null, null)
@@ -730,9 +730,9 @@ class Score
 		end
 		if game.levels[9].get_state >= level.l_won then
 			if level.is_challenge then
-				ctx.textx("GOAL: {level.par}",self.x,self.y+44,21,"yellow",null)
+				ctx.textx("GOAL: {level.gold}",self.x,self.y+44,21,"yellow",null)
 			else
-				ctx.textx("PAR: {level.par}",self.x,self.y+44,21,"yellow",null)
+				ctx.textx("GOLD: {level.gold}",self.x,self.y+44,21,"yellow",null)
 			end
 		end
 	end
@@ -1094,7 +1094,7 @@ redef class Game
 		end
 		t = new Achievement(self, 0, "Training")
 		entities.push(t)
-		t = new Achievement(self, 1, "Par")
+		t = new Achievement(self, 1, "Gold")
 		entities.push(t)
 		t = new Achievement(self, 2, "Editor")
 		entities.push(t)
