@@ -70,6 +70,8 @@ outdir="./out"
 engdir="./engines"
 bncdir="./benches/out"
 mkdir -p $outdir
+html="index.html"
+echo >"$html" "<html><head></head><body>"
 
 function bench_nitmd()
 {
@@ -134,6 +136,8 @@ bench_pandoc
 if test "$#" -gt 0; then
     plot $outdir/bench_markdown.gnu
 fi
+
+echo >>"$html" "</body></html>"
 
 if test -n "$died"; then
 	echo "Some commands failed"
