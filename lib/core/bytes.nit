@@ -42,6 +42,28 @@ redef class Byte
 		       (self >= 0x41u8 and self <= 0x46u8) or
 		       (self >= 0x61u8 and self <= 0x66u8)
 	end
+
+	# `self` as a hexdigit to its byte value
+	#
+	# ~~~nit
+	# intrude import core::bytes
+	# assert 0x39u8.hexdigit_to_byteval == 0x09u8
+	# assert 0x43u8.hexdigit_to_byteval == 0x0Cu8
+	# ~~~
+	#
+	# REQUIRE: `self.is_valid_hexdigit`
+	private fun hexdigit_to_byteval: Byte do
+		if self >= 0x30u8 and self <= 0x39u8 then
+			return self - 0x30u8
+		else if self >= 0x41u8 and self <= 0x46u8 then
+			return self - 0x37u8
+		else if self >= 0x61u8 and self <= 0x66u8 then
+			return self - 0x57u8
+		end
+		# Happens only if the requirement is not met.
+		# i.e. this abort is here to please the compiler
+		abort
+	end
 end
 
 # A buffer containing Byte-manipulation facilities
@@ -293,6 +315,24 @@ redef class Text
 			var from = if s isa FlatString then s.first_byte else 0
 			b.append_ns_from(s.items, s.bytelen, from)
 		end
+	end
+
+	# Returns a new `Bytes` instance with the digest as content
+	#
+	#     assert "0B1F4D".hexdigest_to_bytes == [0x0Bu8, 0x1Fu8, 0x4Du8]
+	#
+	# REQUIRE: `self` is a valid hexdigest and hexdigest.length % 2 == 0
+	fun hexdigest_to_bytes: Bytes do
+		var b = bytes
+		var pos = 0
+		var max = bytelen
+		var ret = new Bytes.with_capacity(max / 2)
+		while pos < max do
+			ret.add((b[pos].hexdigit_to_byteval << 4) |
+			b[pos + 1].hexdigit_to_byteval)
+			pos += 2
+		end
+		return ret
 	end
 end
 
