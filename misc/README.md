@@ -102,7 +102,7 @@ The command `:Nitdoc` searches the documentation for the word under the cursor.
 The results are displayed in the preview window in order of relevance.
 You can search for any word by passing it as an argument, as in `:Nitdoc modulo`.
 The Nitdoc command uses the same metadata files as the omnifunc.
-You may want to map the function to a shortcut by adding the following code to `~/.vimrc`.
+You may want to map the command to a shortcut by adding the following code to `~/.vimrc`.
 
 ~~~
 " Map displaying Nitdoc to Ctrl-D
@@ -118,4 +118,19 @@ You may want to map the function to a shortcut by adding the following code to `
 ~~~
 " Map the NitGitGrep function to Ctrl-G
 map <C-g> :call NitGitGrep()<enter>
+~~~
+
+## Execute the current file
+
+The command `:NitExecute` calls `nit` to interpret the current file.
+
+If modified, the current buffer is saved to a temporary file before being executed.
+This may cause failures if the current buffer imports modules relative to the source package.
+In such cases, save the file before calling `:NitExecute`.
+
+You may want to map the command to a shortcut by adding the following code to `~/.vimrc`.
+
+~~~
+" Map the NitExecute function to Ctrl-F
+map <C-f> :NitExecute<enter>
 ~~~
