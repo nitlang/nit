@@ -941,7 +941,6 @@ redef class Game
 
 	init
 	do
-		load_levels
 		init_buttons
 		entities.clear
 		title
