@@ -492,6 +492,10 @@ class MediaPlayer
 end
 
 redef class PlayableAudio
+	# Flag to know if the user paused the sound
+	# Used when the app pause all sounds or resume all sounds
+	var paused: Bool = false
+
 	redef init do add_to_sounds(self)
 end
 
@@ -554,11 +558,13 @@ redef class Sound
 	redef fun pause do
 		if self.error != null or not self.is_loaded then return
 		soundpool.pause_stream(soundpool_id)
+		paused = true
 	end
 
 	redef fun resume do
 		if self.error != null or not self.is_loaded then return
 		soundpool.resume(soundpool_id)
+		paused = false
 	end
 
 end
@@ -616,11 +622,13 @@ redef class Music
 	redef fun pause do
 		if self.error != null or not self.is_loaded then return
 		media_player.pause
+		paused = true
 	end
 
 	redef fun resume do
 		if self.error != null or not self.is_loaded then return
 		play
+		paused = false
 	end
 end
 
@@ -684,7 +692,16 @@ redef class App
 
 	redef fun on_pause do
 		super
-		for s in sounds do s.pause
+		for s in sounds do
+			# Pausing sounds that are not already paused by user
+			# `s.paused` is set to false because `pause` set it to true
+			# and we want to know which sound has been paused by the user
+			# and which one has been paused by the app
+			if not s.paused then
+				s.pause
+				s.paused = false
+			end
+		end
 		audio_manager.abandon_audio_focus
 	end
 
@@ -697,7 +714,10 @@ redef class App
 	redef fun on_resume do
 		super
 		audio_manager.request_audio_focus
-		for s in sounds do s.resume
+		for s in sounds do
+			# Resumes only the sounds paused by the App
+			if not s.paused then s.resume
+		end
 	end
 end
 
