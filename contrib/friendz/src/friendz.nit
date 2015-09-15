@@ -873,26 +873,6 @@ redef class Game
 	# Font
 	var font = new TileSetFont(app.load_image("deltaforce_font.png"), 16, 17, "ABCDEFGHIJKLMNOPQRSTUVWXYZ 0123456789.:;!?\"'() -,/")
 
-	var xxx = """
-	fun save_cookie(name, val:String) do
-	var days = 365
-	var date = new Date()
-	date.setTime(date.getTime()+(days*24*60*60*1000))
-	document.cookie = name+"="+val+"; expires="+date.toGMTString()+"; path=/"
-	end
-
-	fun read_cookie(name:String):String do
-	var key = name + "="
-	var ca = document.cookie.split(';')
-	for(var i=0; i<ca.length; i++) do
-	var c = ca[i]
-	while (c[0]==' ') c = c.substring(1, c.length)
-	if (c.indexOf(key) == 0) return c.substring(key.length)
-	end
-	return null
-	end
-	"""
-
 	# DISPLAY *****************************************************************
 
 	# Is the game in editing mode
