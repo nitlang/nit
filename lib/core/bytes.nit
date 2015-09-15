@@ -19,6 +19,16 @@ import kernel
 import collection::array
 intrude import text::flat
 
+redef class Byte
+	# Write self as a string into `ns` at position `pos`
+	private fun add_digest_at(ns: NativeString, pos: Int) do
+		var tmp = (0xF0u8 & self) >> 4
+		ns[pos] = if tmp >= 0x0Au8 then tmp + 0x37u8 else tmp + 0x30u8
+		tmp = 0x0Fu8 & self
+		ns[pos + 1] = if tmp >= 0x0Au8 then tmp + 0x37u8 else tmp + 0x30u8
+	end
+end
+
 # A buffer containing Byte-manipulation facilities
 #
 # Uses Copy-On-Write when persisted
@@ -26,7 +36,7 @@ class Bytes
 	super AbstractArray[Byte]
 
 	# A NativeString being a char*, it can be used as underlying representation here.
-	private var items: NativeString
+	var items: NativeString
 
 	# Number of bytes in the array
 	redef var length
@@ -61,6 +71,20 @@ class Bytes
 		assert i >= 0
 		assert i < length
 		return items[i]
+	end
+
+	# Returns self as a hexadecimal digest
+	fun hexdigest: String do
+		var elen = length * 2
+		var ns = new NativeString(elen)
+		var i = 0
+		var oi = 0
+		while i < length do
+			self[i].add_digest_at(ns, oi)
+			i += 1
+			oi += 2
+		end
+		return new FlatString.full(ns, elen, 0, elen - 1, elen)
 	end
 
 	#     var b = new Bytes.with_capacity(1)
@@ -146,80 +170,13 @@ class Bytes
 	redef fun to_s do
 		persisted = true
 		var b = self
-		if not is_utf8 then
-			b = clean_utf8
-			persisted = false
-		end
-		return new FlatString.with_infos(b.items, b.length, 0, b.length -1)
+		var r = b.items.to_s_with_length(length)
+		if r != items then persisted = false
+		return r
 	end
 
 	redef fun iterator do return new BytesIterator.with_buffer(self)
 
-	# Is the byte collection valid UTF-8 ?
-	fun is_utf8: Bool do
-		var charst = once [0x80u8, 0u8, 0xE0u8, 0xC0u8, 0xF0u8, 0xE0u8, 0xF8u8, 0xF0u8]
-		var lobounds = once [0, 0x80, 0x800, 0x10000]
-		var hibounds = once [0x7F, 0x7FF, 0xFFFF, 0x10FFFF]
-		var pos = 0
-		var len = length
-		var mits = items
-		while pos < len do
-			var nxst = mits.length_of_char_at(pos)
-			var charst_index = (nxst - 1) * 2
-			if mits[pos] & charst[charst_index] == charst[charst_index + 1] then
-				var c = mits.char_at(pos)
-				var cp = c.ascii
-				if cp <= hibounds[nxst - 1] and cp >= lobounds[nxst - 1] then
-					if cp >= 0xD800 and cp <= 0xDFFF or
-					   cp == 0xFFFE or cp == 0xFFFF then return false
-				else
-					return false
-				end
-			else
-				return false
-			end
-			pos += nxst
-		end
-		return true
-	end
-
-	# Cleans the bytes of `self` to be UTF-8 compliant
-	private fun clean_utf8: Bytes do
-		var charst = once [0x80u8, 0u8, 0xE0u8, 0xC0u8, 0xF0u8, 0xE0u8, 0xF8u8, 0xF0u8]
-		var badchar = once [0xEFu8, 0xBFu8, 0xBDu8]
-		var lobounds = once [0, 0x80, 0x800, 0x10000]
-		var hibounds = once [0x7F, 0x7FF, 0xFFFF, 0x10FFFF]
-		var pos = 0
-		var len = length
-		var ret = new Bytes.with_capacity(len)
-		var mits = items
-		while pos < len do
-			var nxst = mits.length_of_char_at(pos)
-			var charst_index = (nxst - 1) * 2
-			if mits[pos] & charst[charst_index] == charst[charst_index + 1] then
-				var c = mits.char_at(pos)
-				var cp = c.ascii
-				if cp <= hibounds[nxst - 1] and cp >= lobounds[nxst - 1] then
-					if cp >= 0xD800 and cp <= 0xDFFF or
-					   cp == 0xFFFE or cp == 0xFFFF then
-						ret.append badchar
-						pos += 1
-					else
-						var pend = pos + nxst
-						for i in [pos .. pend[ do ret.add mits[i]
-						pos += nxst
-					end
-				else
-					ret.append badchar
-					pos += 1
-				end
-			else
-				ret.append badchar
-				pos += 1
-			end
-		end
-		return ret
-	end
 end
 
 private class BytesIterator

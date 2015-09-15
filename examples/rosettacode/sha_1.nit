@@ -9,4 +9,4 @@ module sha_1
 
 import sha1
 
-print "Rosetta Code".sha1_to_s
+print "Rosetta Code".sha1.hexdigest

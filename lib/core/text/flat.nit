@@ -985,8 +985,7 @@ redef class NativeString
 	redef fun to_s_with_length(length): FlatString
 	do
 		assert length >= 0
-		var str = new FlatString.with_infos(self, length, 0, length - 1)
-		return str
+		return clean_utf8(length)
 	end
 
 	redef fun to_s_full(bytelen, unilen) do
@@ -997,12 +996,89 @@ redef class NativeString
 	redef fun to_s_with_copy: FlatString
 	do
 		var length = cstring_length
+		var r = clean_utf8(length)
+		if r.items != self then return r
 		var new_self = new NativeString(length + 1)
 		copy_to(new_self, length, 0, 0)
 		var str = new FlatString.with_infos(new_self, length, 0, length - 1)
 		new_self[length] = 0u8
 		str.real_items = new_self
 		return str
+	end
+
+	# Cleans a NativeString if necessary
+	fun clean_utf8(len: Int): FlatString do
+		var replacements: nullable Array[Int] = null
+		var end_length = len
+		var pos = 0
+		var chr_ln = 0
+		while pos < len do
+			var b = self[pos]
+			var nxst = length_of_char_at(pos)
+			var ok_st: Bool
+			if nxst == 1 then
+				ok_st = b & 0x80u8 == 0u8
+			else if nxst == 2 then
+				ok_st = b & 0xE0u8 == 0xC0u8
+			else if nxst == 3 then
+				ok_st = b & 0xF0u8 == 0xE0u8
+			else
+				ok_st = b & 0xF8u8 == 0xF0u8
+			end
+			if not ok_st then
+				if replacements == null then replacements = new Array[Int]
+				replacements.add pos
+				end_length += 2
+				pos += 1
+				chr_ln += 1
+				continue
+			end
+			var ok_c: Bool
+			var c = char_at(pos)
+			var cp = c.ascii
+			if nxst == 1 then
+				ok_c = cp >= 0 and cp <= 0x7F
+			else if nxst == 2 then
+				ok_c = cp >= 0x80 and cp <= 0x7FF
+			else if nxst == 3 then
+				ok_c = cp >= 0x800 and cp <= 0xFFFF
+				ok_c = ok_c and not (cp >= 0xD800 and cp <= 0xDFFF) and cp != 0xFFFE and cp != 0xFFFF
+			else
+				ok_c = cp >= 0x10000 and cp <= 0x10FFFF
+			end
+			if not ok_c then
+				if replacements == null then replacements = new Array[Int]
+				replacements.add pos
+				end_length += 2
+				pos += 1
+				chr_ln += 1
+				continue
+			end
+			pos += c.u8char_len
+			chr_ln += 1
+		end
+		var ret = self
+		if end_length != len then
+			ret = new NativeString(end_length)
+			var old_repl = 0
+			var off = 0
+			var repls = replacements.as(not null)
+			var r = repls.items.as(not null)
+			var imax = repls.length
+			for i in [0 .. imax[ do
+				var repl_pos = r[i]
+				var chkln = repl_pos - old_repl
+				copy_to(ret, chkln, old_repl, off)
+				off += chkln
+				ret[off] = 0xEFu8
+				ret[off + 1] = 0xBFu8
+				ret[off + 2] = 0xBDu8
+				old_repl = repl_pos + 1
+				off += 3
+			end
+			copy_to(ret, len - old_repl, old_repl, off)
+		end
+		return new FlatString.full(ret, end_length, 0, end_length - 1, chr_ln)
 	end
 
 	# Sets the next bytes at position `pos` to the value of `c`, encoded in UTF-8
@@ -1109,7 +1185,7 @@ redef class Array[E]
 			end
 			i += 1
 		end
-		return ns.to_s_with_length(sl)
+		return new FlatString.with_infos(ns, sl, 0, sl - 1)
 	end
 end
 
@@ -1146,7 +1222,7 @@ redef class NativeArray[E]
 			end
 			i += 1
 		end
-		return ns.to_s_with_length(sl)
+		return new FlatString.with_infos(ns, sl, 0, sl - 1)
 	end
 end
 
