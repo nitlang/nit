@@ -278,7 +278,7 @@ private class BytesIterator
 
 	var max: Int
 
-	init with_buffer(b: Bytes) do init(b.items, 0, b.length - 1)
+	init with_buffer(b: Bytes) do init(b.items, 0, b.length)
 
 	redef fun is_ok do return index < max
 
