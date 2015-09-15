@@ -221,7 +221,7 @@ class LevelButton
 		else if self.level.get_state >= l.l_open then
 			if game.levels[9].get_state >= l.l_open then self.over +=  " --- ?/{self.level.gold}"
 		end
-		#self.enabled = l.get_state >= l.l_open
+		self.enabled = l.get_state >= l.l_open or game.cheated
 	end
 
 	redef fun draw(ctx)
@@ -937,6 +937,9 @@ redef class Game
 	# ResizeButton
 	var button_size = new ResizeButton(self)
 
+	# Cheat mode enabled?
+	var cheated = false
+
 	init
 	do
 		load_levels
@@ -1209,6 +1212,14 @@ redef class Game
 		if kc == "e" then
 			grid_edit = grid.copy(true)
 			edit_grid(grid)
+		else if kc == "c" then
+			if cheated then
+				snd_duh.play
+				cheated = false
+			else
+				snd_win.play
+				cheated = true
+			end
 		else if kc == "s" then
 			if solver == null then
 				solver = (new FriendzProblem(grid)).solve
