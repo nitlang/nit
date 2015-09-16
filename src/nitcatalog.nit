@@ -313,6 +313,15 @@ class Catalog
 <div class="sidebar">
 <ul class="box">
 """
+		var tryit = mpackage.metadata("upstream.tryit")
+		if tryit != null then
+			score += 1.0
+			var e = tryit.html_escape
+			res.add "<li><a href=\"{e}\">Try<span style=\"color:white\">n</span>it!</a></li>\n"
+		end
+
+		res.add """</ul>\n<ul class="box">\n"""
+
 		var homepage = mpackage.metadata("upstream.homepage")
 		if homepage != null then
 			score += 5.0
@@ -374,6 +383,7 @@ class Catalog
 			end
 		end
 		if ts.is_empty then ts.add "none"
+		if tryit != null then ts.add "tryit"
 		var ts2 = new Array[String]
 		for t in ts do
 			tag2proj[t].add mpackage
