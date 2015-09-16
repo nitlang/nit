@@ -797,11 +797,12 @@ universal Int
 		end
 	end
 
-	# The character whose ASCII value is `self`.
+	# The character which code point (unicode-wise) is `self`
 	#
-	#     assert 65.ascii   == 'A'
-	#     assert 10.ascii   == '\n'
-	fun ascii: Char is intern
+	#     assert 65.code_point == 'A'
+	#     assert 10.code_point == '\n'
+	#     assert 0x220B.code_point == '∋'
+	fun code_point: Char `{ return (uint32_t)self; `}
 
 	# Number of digits of an integer in base `b` (plus one if negative)
 	#
@@ -942,11 +943,26 @@ universal Char
 		end
 	end
 
-	# the ascii value of self
+	# The ascii value of `self`
 	#
-	#     assert 'a'.ascii    == 97
-	#     assert '\n'.ascii   == 10
-	fun ascii: Int is intern
+	#     assert 'a'.ascii    == 97u8
+	#     assert '\n'.ascii   == 10u8
+	#
+	# REQUIRE: `is_ascii`
+	fun ascii: Byte do return code_point.to_b
+
+	# The unicode code point value of `self`
+	#
+	#     assert 'A'.code_point == 65
+	#     assert '\n'.code_point == 10
+	#     assert '∋'.code_point == 0x220B
+	fun code_point: Int `{ return (long)self; `}
+
+	# Is `self` an ASCII character ?
+	#
+	#     assert 'x'.is_ascii
+	#     assert not 'ま'.is_ascii
+	fun is_ascii: Bool do return code_point <= 127
 
 	# Return the lower case version of self.
 	# If self is not a letter, then return self
