@@ -365,28 +365,25 @@ class Catalog
 
 		res.add "<h3>Tags</h3>\n"
 		var tags = mpackage.metadata("package.tags")
-		var ts2 = new Array[String]
-		var cat = null
+		var ts = new Array[String]
 		if tags != null then
-			var ts = tags.split(",")
-			for t in ts do
+			for t in tags.split(",") do
 				t = t.trim
 				if t == "" then continue
-				if cat == null then cat = t
-				tag2proj[t].add mpackage
-				t = t.html_escape
-				ts2.add "<a href=\"../index.html#tag_{t}\">{t}</a>"
+				ts.add t
 			end
-			res.add_list(ts2, ", ", ", ")
 		end
-		if ts2.is_empty then
-			var t = "none"
-			cat = t
+		if ts.is_empty then ts.add "none"
+		var ts2 = new Array[String]
+		for t in ts do
 			tag2proj[t].add mpackage
-			res.add "<a href=\"../index.html#tag_{t}\">{t}</a>"
+			t = t.html_escape
+			ts2.add "<a href=\"../index.html#tag_{t}\">{t}</a>"
 		end
-		if cat != null then cat2proj[cat].add mpackage
-		score += ts2.length.score
+		res.add_list(ts2, ", ", ", ")
+		var cat = ts.first
+		cat2proj[cat].add mpackage
+		score += ts.length.score
 
 		if deps.has(mpackage) then
 			var reqs = deps[mpackage].greaters.to_a
