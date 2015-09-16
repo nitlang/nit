@@ -24,14 +24,6 @@ source ./bench_plot.sh
 # Can be overrided with 'the option -n'
 count=3
 
-### HELPER FUNCTIONS ##
-
-function die()
-{
-	echo >&2 "error: $*"
-	died=1
-}
-
 ## HANDLE OPTIONS ##
 
 function usage()

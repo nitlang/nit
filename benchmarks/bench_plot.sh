@@ -103,7 +103,8 @@ if test -n "$html"; then
 	echo gnuplot -e "set term png; set output \"$bn.png\"" "$1"
 
 	echo >>"$html" "<img src=\"$bn.png\"/>"
-else
+fi
+if test -n "$DISPLAY"; then
 	echo "# gnuplot -p $1"
 	gnuplot -p "$1"
 fi

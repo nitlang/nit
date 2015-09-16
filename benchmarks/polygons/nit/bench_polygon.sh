@@ -166,3 +166,9 @@ case "$1" in
 	contain) shift; bench_contain $@;;
 	*) usage; exit;;
 esac
+
+if test -n "$died"; then
+	echo "Some commands failed"
+	exit 1
+fi
+exit 0
