@@ -1,3 +1,7 @@
+
+SVG2ICONS=../inkscape_tools/bin/svg_to_icons
+SVG2PNG=../inkscape_tools/bin/svg_to_png_and_nit
+
 default: bin/moles
 
 bin/moles: $(shell ../../bin/nitls -M src/moles_linux.nit) assets/images/drawing.png
@@ -13,19 +17,19 @@ android-release: android-icons $(shell ../../bin/nitls -M src/moles_android.nit)
 	mkdir -p bin
 	../../bin/nitc -o bin/moles.apk src/moles_android.nit --release
 
-../inkscape_tools/bin/svg_to_icons:
+$(SVG2ICONS):
 	$(MAKE) -C ../inkscape_tools
 
-android-icons: ../../contrib/inkscape_tools/bin/svg_to_icons art/icon.svg
+android-icons: $(SVG2ICONS) art/icon.svg
 	mkdir -p res
-	../inkscape_tools/bin/svg_to_icons art/icon.svg --android --out res/
+	$(SVG2ICONS) art/icon.svg --android --out res/
 
 android-install: bin/moles.apk
 	adb install -rf bin/moles.apk
 
-assets/images/drawing.png: art/drawing.svg ../../contrib/inkscape_tools/bin/svg_to_icons
+assets/images/drawing.png: art/drawing.svg $(SVG2ICONS)
 	mkdir -p assets/images
-	../inkscape_tools/bin/svg_to_png_and_nit --src src/ --scale 2.0 art/drawing.svg
+	$(SVG2PNG) --src src/ --scale 2.0 art/drawing.svg
 
 check-android: bin/moles.apk
 	../../misc/jenkins/check_android.sh bin/moles.apk
