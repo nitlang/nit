@@ -23,7 +23,7 @@ class Level
 		var ls = code.split(";")
 		self.number = i
 		self.str = ls[0]
-		self.par = ls[1].to_i
+		self.gold = ls[1].to_i
 		if ls.length >= 3 then
 			self.status = ls[2]
 		end
@@ -47,8 +47,8 @@ class Level
 	# initial grid position
 	var str: String
 
-	# top score
-	var par: Int
+	# top score to get gold
+	var gold: Int
 
 	# Help message if any
 	var status: String = ""
@@ -72,32 +72,28 @@ class Level
 	var l_disabled = 1
 	var l_open = 2
 	var l_won = 3
-	var l_par = 4
+	var l_gold = 4
 
 	fun get_state: Int
 	do
 		if self.score == 0 then
 			if self.number == 0 or game.levels[self.number-1].score > 0 then return l_open
 			if self.number == 25 and game.levels[19].score > 0 then return l_open else return l_disabled
-		else if self.score < self.par or not game.levels[9].score > 0 then
+		else if self.score < self.gold or not game.levels[9].score > 0 then
 			return l_won
-		else return l_par
+		else return l_gold
 	end
 
 	# Returns true if g is a wining condition for the level.
 	fun check_won(g: Grid): Bool
 	do
-		var w = g.won and (not self.is_challenge or g.number >= self.par)
+		var w = g.won and (not self.is_challenge or g.number >= self.gold)
 		if not w then return false
 		if g.number > self.score then
 			self.score = g.number
-			self.save
 		end
 		return true
 	end
-
-	# Save the score of the level
-	fun save do end
 end
 
 # main game object

@@ -19,7 +19,6 @@ import realtime
 import solver
 import mnit::tileset
 import app::data_store
-import md5
 
 intrude import grid
 intrude import level
@@ -217,11 +216,11 @@ class LevelButton
 
 		self.over = self.level.fullname
 		if self.level.get_state >= l.l_won then
-			if game.levels[9].get_state >= l.l_won then self.over += " --- {self.level.score}/{self.level.par}"
+			if game.levels[9].get_state >= l.l_won then self.over += " --- {self.level.score}/{self.level.gold}"
 		else if self.level.get_state >= l.l_open then
-			if game.levels[9].get_state >= l.l_open then self.over +=  " --- ?/{self.level.par}"
+			if game.levels[9].get_state >= l.l_open then self.over +=  " --- ?/{self.level.gold}"
 		end
-		#self.enabled = l.get_state >= l.l_open
+		self.enabled = l.get_state >= l.l_open or game.cheated
 	end
 
 	redef fun draw(ctx)
@@ -242,7 +241,7 @@ class LevelButton
 		end
 		ctx.blit(game.img[ix,iy], self.x, self.y)
 
-		if s == l.l_par then
+		if s == l.l_gold then
 			ctx.blit(game.img2[7,0], self.x + bw*5/8, self.y-bh*1/8)
 		end
 		ctx.textx(self.level.name, self.x+5, self.y+5, 24, null, null)
@@ -730,9 +729,9 @@ class Score
 		end
 		if game.levels[9].get_state >= level.l_won then
 			if level.is_challenge then
-				ctx.textx("GOAL: {level.par}",self.x,self.y+44,21,"yellow",null)
+				ctx.textx("GOAL: {level.gold}",self.x,self.y+44,21,"yellow",null)
 			else
-				ctx.textx("PAR: {level.par}",self.x,self.y+44,21,"yellow",null)
+				ctx.textx("GOLD: {level.gold}",self.x,self.y+44,21,"yellow",null)
 			end
 		end
 	end
@@ -777,7 +776,7 @@ class StatusBar
 	do
 		print "***STATUS** {txt}"
 		self.tmp_txt = txt
-		self.tmp_txt_ttl = 20
+		self.tmp_txt_ttl = 60
 		self.tmp_txt_color = color
 	end
 
@@ -873,26 +872,6 @@ redef class Game
 	# Font
 	var font = new TileSetFont(app.load_image("deltaforce_font.png"), 16, 17, "ABCDEFGHIJKLMNOPQRSTUVWXYZ 0123456789.:;!?\"'() -,/")
 
-	var xxx = """
-	fun save_cookie(name, val:String) do
-	var days = 365
-	var date = new Date()
-	date.setTime(date.getTime()+(days*24*60*60*1000))
-	document.cookie = name+"="+val+"; expires="+date.toGMTString()+"; path=/"
-	end
-
-	fun read_cookie(name:String):String do
-	var key = name + "="
-	var ca = document.cookie.split(';')
-	for(var i=0; i<ca.length; i++) do
-	var c = ca[i]
-	while (c[0]==' ') c = c.substring(1, c.length)
-	if (c.indexOf(key) == 0) return c.substring(key.length)
-	end
-	return null
-	end
-	"""
-
 	# DISPLAY *****************************************************************
 
 	# Is the game in editing mode
@@ -904,10 +883,10 @@ redef class Game
 	# SOUND
 
 	# Is the music muted?
-	var music_muted: Bool = false #read_cookie("music_muted")
+	var music_muted: Bool = app.data_store["music_muted"] == true
 
 	# Is the sound effects muted?
-	var sfx_muted: Bool = false #read_cookie("sfx_muted")
+	var sfx_muted: Bool = app.data_store["sfx_muted"] == true
 
 	# The background music resource. */
 	var music = new Music("music.ogg")
@@ -957,12 +936,16 @@ redef class Game
 	# ResizeButton
 	var button_size = new ResizeButton(self)
 
+	# Cheat mode enabled?
+	var cheated = false
+
 	init
 	do
-		load_levels
 		init_buttons
 		entities.clear
 		title
+
+		if not music_muted then music.play
 	end
 
 	# fill `buttons`
@@ -976,8 +959,9 @@ redef class Game
 	# Play a level in player mode.
 	fun play(l: Level)
 	do
+		save # save the previous level grid
 		level = l
-		grid.load(level.str)
+		grid.load(level.saved_str or else level.str)
 		init_play_menu(false)
 		if level.status != "" then
 			statusbar.main_txt = level.status
@@ -1071,6 +1055,7 @@ redef class Game
 	# Helper function to initialize the menu (and tile) screen
 	fun init_menu
 	do
+		save # save the previous level grid
 		init_game
 		level = null
 		var i = levels.first
@@ -1094,7 +1079,7 @@ redef class Game
 		end
 		t = new Achievement(self, 0, "Training")
 		entities.push(t)
-		t = new Achievement(self, 1, "Par")
+		t = new Achievement(self, 1, "Gold")
 		entities.push(t)
 		t = new Achievement(self, 2, "Editor")
 		entities.push(t)
@@ -1225,8 +1210,19 @@ redef class Game
 	fun onKeyDown(ev: Event) do
 		var kc = ev.char_code
 		if kc == "e" then
+			set_tmp("RUN EDITOR")
 			grid_edit = grid.copy(true)
 			edit_grid(grid)
+		else if kc == "c" then
+			if cheated then
+				set_tmp("CHEAT: OFF")
+				snd_duh.play
+				cheated = false
+			else
+				set_tmp("CHEAT: ON")
+				snd_win.play
+				cheated = true
+			end
 		else if kc == "s" then
 			if solver == null then
 				solver = (new FriendzProblem(grid)).solve
@@ -1234,20 +1230,28 @@ redef class Game
 			else
 				solver_pause = not solver_pause
 			end
+			if solver_pause then
+				set_tmp("SOLVER: PAUSED")
+			else
+				set_tmp("SOLVER: ON")
+			end
 			#solver.step
 		else if kc == "d" then
 			if solver == null then
 				solver = (new FriendzProblem(grid)).solve
 				solver_pause = true
+				set_tmp("SOLVER: ON")
 			else
+				solver_pause = true
 				solver.run_steps(1)
+				set_tmp("SOLVER: ONE STEP")
 			end
 		else if kc == "+" then
 			solver_steps += 100
-			print solver_steps
+			set_tmp("SOLVER: {solver_steps} STEPS")
 		else if kc == "-" then
 			solver_steps -= 100
-			print solver_steps
+			set_tmp("SOLVER: {solver_steps} STEPS")
 		else for g in entities do
 			if kc == g.shortcut then
 				g.click(ev)
@@ -1256,15 +1260,33 @@ redef class Game
 		end
 	end
 
+	fun set_tmp(s: String)
+	do
+		statusbar.set_tmp(s, "cyan")
+	end
+
 	redef fun load_levels
 	do
 		super
 
 		for level in levels do
-			var score = app.data_store["s{level.str.md5}"]
+			var score = app.data_store["s{level.str}"]
 			if score isa Int then
 				level.score = score
 			end
+			var saved_str = app.data_store["g{level.str}"]
+			if saved_str isa String then
+				print "LOAD {level.name}: {saved_str}"
+				level.saved_str = saved_str
+			end
+		end
+	end
+
+	fun save
+	do
+		var l = level
+		if l != null then
+			l.save
 		end
 	end
 end
@@ -1359,12 +1381,13 @@ class MusicButton
 	init(game: Game)
 	do
 		super(game, "MUSIC", 470, 412, "purple", "Mute the music", "Unmute the music")
+		toggled = game.music_muted
 	end
 	redef fun click2(ev)
 	do
 		game.music_muted = self.toggled
 		if game.music_muted then game.music.pause else game.music.play
-		#game.save_cookie("music_muted",music_muted?"true":"")
+		app.data_store["music_muted"] = game.music_muted
 	end
 end
 
@@ -1373,13 +1396,14 @@ class SFXButton
 	init(game: Game)
 	do
 		super(game, "SOUND FX", 470, 382, "purple", "Mute the sound effects", "Unmute the sound effects")
+		toggled = game.sfx_muted
 	end
 
 	redef fun click2(ev)
 	do
 		game.sfx_muted = self.toggled
 		if not game.sfx_muted then game.snd_whip.play # Because the automatic one was muted
-		#save_cookie("sfx_muted",sfx_muted?"true":"")
+		app.data_store["sfx_muted"] = game.sfx_muted
 	end
 end
 
@@ -1579,6 +1603,12 @@ redef class App
 		# img loading?
 	end
 
+	redef fun on_pause
+	do
+		super
+		game.save
+	end
+
 	# Maximum wanted frame per second
 	var max_fps = 30
 
@@ -1636,8 +1666,16 @@ redef class KeyEvent
 end
 
 redef class Level
-	redef fun save
+	# Save the score and grid of the level
+	fun save
 	do
-		app.data_store["s{str.md5}"] = if score > 0 then score else null
+		app.data_store["s{str}"] = if score > 0 then score else null
+		var saved = game.grid.save
+		saved_str = saved
+		app.data_store["g{str}"] = saved
+		print "SAVE: {name}: {saved}"
 	end
+
+	# The saved player grid (to continue games)
+	var saved_str: nullable String = null
 end
