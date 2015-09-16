@@ -29,19 +29,22 @@ failed=
 for p in $projects; do
 	dir=`dirname "$p"`
 	name=`basename "$dir"`
-	echo "*** make $dir ***"
-	if misc/jenkins/unitrun.sh "cmd-$name-make" make -C "$dir"; then
-		# Make OK. Check additional rules if they exists
-		for rule in $rules; do
-			make -C "$dir" $rule -n 2>/dev/null ||
-				continue
-			echo "*** make$rule $dir ***"
-			misc/jenkins/unitrun.sh "cmd-$name-make$rule" make -C "$dir" $rule ||
-				failed="$failed $name-$rule"
-		done
-	else
-		failed="$failed $name"
-	fi
+	echo "### in $dir ###"
+	# Check each rules, if they exists
+	for rule in $rules; do
+		make -C "$dir" $rule -n >/dev/null 2>/dev/null || {
+			# Special case for `all` that falls back as the default target
+			if [ "$rule" = "all" ]; then
+				echo "*** make -C $dir ***"
+				misc/jenkins/unitrun.sh "cmd-$name-make" make -C "$dir" ||
+					failed="$failed $name"
+			fi
+			continue
+		}
+		echo "*** make $rule -C $dir ***"
+		misc/jenkins/unitrun.sh "cmd-$name-make$rule" make -C "$dir" $rule ||
+			failed="$failed $name-$rule"
+	done
 done
 grep '<error message' *-make*.xml
 if test -n "$failed"; then
