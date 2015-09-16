@@ -319,6 +319,12 @@ class Catalog
 			var e = tryit.html_escape
 			res.add "<li><a href=\"{e}\">Try<span style=\"color:white\">n</span>it!</a></li>\n"
 		end
+		var apk = mpackage.metadata("upstream.apk")
+		if apk != null then
+			score += 1.0
+			var e = apk.html_escape
+			res.add "<li><a href=\"{e}\">Android apk</a></li>\n"
+		end
 
 		res.add """</ul>\n<ul class="box">\n"""
 
@@ -384,6 +390,7 @@ class Catalog
 		end
 		if ts.is_empty then ts.add "none"
 		if tryit != null then ts.add "tryit"
+		if apk != null then ts.add "apk"
 		var ts2 = new Array[String]
 		for t in ts do
 			tag2proj[t].add mpackage
