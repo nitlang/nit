@@ -120,14 +120,8 @@ end
 # Assets manager using a `NativeAssetManager` to manage android assets
 class AssetManager
 
-	# App instance used to initalize the NativeAssetManager
-	var app: App
-
 	# Native asset manager
-	private var native_assets_manager: NativeAssetManager is noinit
-
-	# Instanciate this AssetManager with the context of the app
-	init do self.native_assets_manager = app.assets.new_global_ref
+	private var native_assets_manager: NativeAssetManager = app.native_activity.assets.new_global_ref is lazy
 
 	# Close this asset manager
 	fun close do native_assets_manager.close
@@ -383,17 +377,30 @@ end
 
 redef class App
 	# Resource Manager used to manage resources placed in the `res` folder of the app
-	var resource_manager: ResourcesManager is lazy  do return new ResourcesManager.native(self.resources, self.package_name.to_s)
+	var resource_manager: ResourcesManager is lazy do
+		var res = native_activity.resources
+		var pkg = native_activity.package_name
+		return new ResourcesManager.native(res, pkg.to_s)
+	end
 
 	# Assets Manager used to manage resources placed in the `assets` folder of the app
-	var asset_manager: AssetManager is lazy do return new AssetManager(self)
+	var asset_manager: AssetManager is lazy do return new AssetManager
+end
+
+redef extern class NativeActivity
 
 	# Get the native AssetsManager of the application, used to initialize the nit's AssetManager
-	private fun assets: NativeAssetManager import native_activity in "Java" `{ return App_native_activity(self).getAssets(); `}
+	private fun assets: NativeAssetManager in "Java" `{
+		return self.getAssets();
+	`}
 
 	# Get the package name of the application
-	private fun package_name: JavaString import native_activity in "Java" `{ return App_native_activity(self).getPackageName(); `}
+	private fun package_name: JavaString in "Java" `{
+		return self.getPackageName();
+	`}
 
 	# Get the native ResourceManager of the application, used to initialize the nit's ResourceManager
-	private fun resources: NativeResources import native_activity in "Java" `{ return App_native_activity(self).getResources(); `}
+	private fun resources: NativeResources in "Java" `{
+		return self.getResources();
+	`}
 end
