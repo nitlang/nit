@@ -20,7 +20,7 @@
 module portable_triangle is
 	app_name "gamnit Triangle"
 	app_namespace "org.nitlanguage.triangle"
-	app_version(1, 0, git_revision)
+	app_version(1, 1, git_revision)
 end
 
 import gamnit
@@ -103,11 +103,13 @@ redef class App
 		vertex_array.attrib_pointer
 	end
 
+	private var t = 0.0
+
 	redef fun frame_core
 	do
 		var display = display
 		if display != null then
-			glClearColor(0.5, 0.5, 0.5, 1.0)
+			glClearColor(t, t, t, 1.0)
 
 			assert_no_gl_error
 			glViewport(0, 0, display.width, display.height)
@@ -118,6 +120,9 @@ redef class App
 			glDrawArrays(gl_TRIANGLES, 0, 3)
 
 			display.flip
+
+			t += 0.01
+			if t > 1.0 then t = 0.0
 		end
 	end
 
