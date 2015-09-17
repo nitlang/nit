@@ -621,6 +621,38 @@ class GLCap
 	redef fun ==(o) do return o != null and is_same_type(o) and o.hash == self.hash
 end
 
+# Generate `n` renderbuffer object names
+fun glGenRenderbuffers(n: Int): Array[Int]
+do
+	var array = new CIntArray(n)
+	native_glGenRenderbuffers(n, array.native_array)
+	var a = array.to_a
+	array.destroy
+	return a
+end
+
+private fun native_glGenRenderbuffers(n: Int, renderbuffers: NativeCIntArray) `{
+	glGenRenderbuffers(n, (GLuint *)renderbuffers);
+`}
+
+# Determine if `name` corresponds to a renderbuffer object
+fun glIsRenderbuffer(name: Int): Bool `{
+	return glIsRenderbuffer(name);
+`}
+
+# Delete named renderbuffer objects
+fun glDeleteRenderbuffers(renderbuffers: SequenceRead[Int])
+do
+	var n = renderbuffers.length
+	var array = new CIntArray.from(renderbuffers)
+	native_glDeleteRenderbuffers(n, array.native_array)
+	array.destroy
+end
+
+private fun native_glDeleteRenderbuffers(n: Int, renderbuffers: NativeCIntArray) `{
+	return glDeleteRenderbuffers(n, (const GLuint *)renderbuffers);
+`}
+
 # Attach a renderbuffer object to a framebuffer object
 fun glFramebufferRenderbuffer(target: GLFramebufferTarget, attachment: GLAttachment,
                               renderbuffertarget: GLRenderbufferTarget, renderbuffer: Int) `{
