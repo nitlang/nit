@@ -580,27 +580,19 @@ fun glCopyTexSubImage2D(target: GLTextureTarget, level, xoffset, yoffset, x, y, 
 `}
 
 # Texture minifying and magnifying function
-extern class GLTextureFilter
+extern class GLTexParameteri
 	super GLEnum
 end
 
-fun gl_NEAREST: GLTextureFilter `{ return GL_NEAREST; `}
-fun gl_LINEAR: GLTextureFilter `{ return GL_LINEAR; `}
-fun gl_NEAREST_MIPMAP_NEAREST: GLTextureFilter `{ return GL_NEAREST_MIPMAP_NEAREST; `}
-fun gl_LINEAR_MIPMAP_NEAREST: GLTextureFilter `{ return GL_LINEAR_MIPMAP_NEAREST; `}
-fun gl_NEAREST_MIPMAP_NINEAR: GLTextureFilter `{ return GL_NEAREST_MIPMAP_LINEAR; `}
-fun gl_LINEAR_MIPMAP_LINEAR: GLTextureFilter `{ return GL_LINEAR_MIPMAP_LINEAR; `}
-
-# Wrap parameter of a texture
-#
-# Used by: `tex_parameter_wrap_*`
-extern class GLTextureWrap
-	super GLEnum
-
-	new clamp_to_edge `{ return GL_CLAMP_TO_EDGE; `}
-	new mirrored_repeat `{ return GL_MIRRORED_REPEAT; `}
-	new repeat `{ return GL_REPEAT; `}
-end
+fun gl_NEAREST: GLTexParameteri `{ return GL_NEAREST; `}
+fun gl_LINEAR: GLTexParameteri `{ return GL_LINEAR; `}
+fun gl_NEAREST_MIPMAP_NEAREST: GLTexParameteri `{ return GL_NEAREST_MIPMAP_NEAREST; `}
+fun gl_LINEAR_MIPMAP_NEAREST: GLTexParameteri `{ return GL_LINEAR_MIPMAP_NEAREST; `}
+fun gl_NEAREST_MIPMAP_NINEAR: GLTexParameteri `{ return GL_NEAREST_MIPMAP_LINEAR; `}
+fun gl_LINEAR_MIPMAP_LINEAR: GLTexParameteri `{ return GL_LINEAR_MIPMAP_LINEAR; `}
+fun gl_CLAMP_TO_EDGE: GLTexParameteri `{ return GL_CLAMP_TO_EDGE; `}
+fun gl_MIRRORED_REPEAT: GLTexParameteri `{ return GL_MIRRORED_REPEAT; `}
+fun gl_REPEAT: GLTexParameteri `{ return GL_REPEAT; `}
 
 # Target texture
 extern class GLTextureTarget
@@ -821,34 +813,6 @@ class GLES
 		glReadPixels(x, y, width, height, format, typ, data);
 	`}
 
-	# Set the texture minifying function
-	#
-	# Foreign: glTexParameter with GL_TEXTURE_MIN_FILTER
-	fun tex_parameter_min_filter(target: GLTextureTarget, value: GLTextureFilter) `{
-		glTexParameteri(target, GL_TEXTURE_MIN_FILTER, value);
-	`}
-
-	# Set the texture magnification function
-	#
-	# Foreign: glTexParameter with GL_TEXTURE_MAG_FILTER
-	fun tex_parameter_mag_filter(target: GLTextureTarget, value: GLTextureFilter) `{
-		glTexParameteri(target, GL_TEXTURE_MAG_FILTER, value);
-	`}
-
-	# Set the texture wrap parameter for coordinates _s_
-	#
-	# Foreign: glTexParameter with GL_TEXTURE_WRAP_S
-	fun tex_parameter_wrap_s(target: GLTextureTarget, value: GLTextureWrap) `{
-		glTexParameteri(target, GL_TEXTURE_WRAP_S, value);
-	`}
-
-	# Set the texture wrap parameter for coordinates _t_
-	#
-	# Foreign: glTexParameter with GL_TEXTURE_WRAP_T
-	fun tex_parameter_wrap_t(target: GLTextureTarget, value: GLTextureWrap) `{
-		glTexParameteri(target, GL_TEXTURE_WRAP_T, value);
-	`}
-
 	# Render primitives from array data
 	#
 	# Foreign: glDrawArrays
@@ -857,6 +821,21 @@ class GLES
 	# OpenGL server-side capabilities
 	var capabilities = new GLCapabilities is lazy
 end
+
+# Set texture parameters
+fun glTexParameteri(target: GLTextureTarget, pname: GLTexParameteriName, param: GLTexParameteri) `{
+	glTexParameteri(target, pname, param);
+`}
+
+# Name of parameters of textures
+extern class GLTexParameteriName
+	super GLEnum
+end
+
+fun gl_TEXTURE_MIN_FILTER: GLTexParameteriName `{ return GL_TEXTURE_MIN_FILTER; `}
+fun gl_TEXTURE_MAG_FILTER: GLTexParameteriName `{ return GL_TEXTURE_MAG_FILTER; `}
+fun gl_TEXTURE_WRAP_S: GLTexParameteriName `{ return GL_TEXTURE_WRAP_S; `}
+fun gl_TEXTURE_WRAP_T: GLTexParameteriName `{ return GL_TEXTURE_WRAP_T; `}
 
 # Bind `framebuffer` to a framebuffer target
 #
@@ -1105,99 +1084,75 @@ extern class GLDataType
 	fun is_sampler_cube: Bool `{ return self == GL_SAMPLER_CUBE; `}
 end
 
-# Kind of primitives to render with `GLES::draw_arrays`
+# Kind of primitives to render
 extern class GLDrawMode
 	super GLEnum
-
-	new points `{ return GL_POINTS; `}
-	new line_strip `{ return GL_LINE_STRIP; `}
-	new line_loop `{ return GL_LINE_LOOP; `}
-	new lines `{ return GL_LINES; `}
-	new triangle_strip `{ return GL_TRIANGLE_STRIP; `}
-	new triangle_fan `{ return GL_TRIANGLE_FAN; `}
-	new triangles `{ return GL_TRIANGLES; `}
 end
+
+fun gl_POINTS: GLDrawMode `{ return GL_POINTS; `}
+fun gl_LINES: GLDrawMode `{ return GL_LINES; `}
+fun gl_LINE_LOOP: GLDrawMode `{ return GL_LINE_LOOP; `}
+fun gl_LINE_STRIP: GLDrawMode `{ return GL_LINE_STRIP; `}
+fun gl_TRIANGLES: GLDrawMode `{ return GL_TRIANGLES; `}
+fun gl_TRIANGLE_STRIP: GLDrawMode `{ return GL_TRIANGLE_STRIP; `}
+fun gl_TRIANGLE_FAN: GLDrawMode `{ return GL_TRIANGLE_FAN; `}
 
 # Pixel arithmetic for blending operations
-#
-# Used by `GLES::blend_func`
 extern class GLBlendFactor
 	super GLEnum
-
-	new zero `{ return GL_ZERO; `}
-	new one `{ return GL_ONE; `}
-	new src_color `{ return GL_SRC_COLOR; `}
-	new one_minus_src_color `{ return GL_ONE_MINUS_SRC_COLOR; `}
-	new dst_color `{ return GL_DST_COLOR; `}
-	new one_minus_dst_color `{ return GL_ONE_MINUS_DST_COLOR; `}
-	new src_alpha `{ return GL_SRC_ALPHA; `}
-	new one_minus_src_alpha `{ return GL_ONE_MINUS_SRC_ALPHA; `}
-	new dst_alpha `{ return GL_DST_ALPHA; `}
-	new one_minus_dst_alpha `{ return GL_ONE_MINUS_DST_ALPHA; `}
-	new constant_color `{ return GL_CONSTANT_COLOR; `}
-	new one_minus_constant_color `{ return GL_ONE_MINUS_CONSTANT_COLOR; `}
-	new constant_alpha `{ return GL_CONSTANT_ALPHA; `}
-	new one_minus_constant_alpha `{ return GL_ONE_MINUS_CONSTANT_ALPHA; `}
-
-	# Used for destination only
-	new src_alpha_saturate `{ return GL_SRC_ALPHA_SATURATE; `}
 end
+
+fun gl_ZERO: GLBlendFactor `{ return GL_ZERO; `}
+fun gl_ONE: GLBlendFactor `{ return GL_ONE; `}
+fun gl_SRC_COLOR: GLBlendFactor `{ return GL_SRC_COLOR; `}
+fun gl_ONE_MINUS_SRC_COLOR: GLBlendFactor `{ return GL_ONE_MINUS_SRC_COLOR; `}
+fun gl_SRC_ALPHA: GLBlendFactor `{ return GL_SRC_ALPHA; `}
+fun gl_ONE_MINUS_SRC_ALPHA: GLBlendFactor `{ return GL_ONE_MINUS_SRC_ALPHA; `}
+fun gl_DST_ALPHA: GLBlendFactor `{ return GL_DST_ALPHA; `}
+fun gl_ONE_MINUS_DST_ALPHA: GLBlendFactor `{ return GL_ONE_MINUS_DST_ALPHA; `}
+fun gl_DST_COLOR: GLBlendFactor `{ return GL_DST_COLOR; `}
+fun gl_ONE_MINUS_DST_COLOR: GLBlendFactor `{ return GL_ONE_MINUS_DST_COLOR; `}
+fun gl_SRC_ALPHA_SATURATE: GLBlendFactor `{ return GL_SRC_ALPHA_SATURATE; `}
 
 # Condition under which a pixel will be drawn
-#
-# Used by `GLES::depth_func`
 extern class GLDepthFunc
 	super GLEnum
-
-	 new never `{ return GL_NEVER; `}
-	 new less `{ return GL_LESS; `}
-	 new equal `{ return GL_EQUAL; `}
-	 new lequal `{ return GL_LEQUAL; `}
-	 new greater `{ return GL_GREATER; `}
-	 new not_equal `{ return GL_NOTEQUAL; `}
-	 new gequal `{ return GL_GEQUAL; `}
-	 new always `{ return GL_ALWAYS; `}
 end
+
+fun gl_NEVER: GLDepthFunc `{ return GL_NEVER; `}
+fun gl_LESS: GLDepthFunc `{ return GL_LESS; `}
+fun gl_EQUAL: GLDepthFunc `{ return GL_EQUAL; `}
+fun gl_LEQUAL: GLDepthFunc `{ return GL_LEQUAL; `}
+fun gl_GREATER: GLDepthFunc `{ return GL_GREATER; `}
+fun gl_NOTEQUAL: GLDepthFunc `{ return GL_NOTEQUAL; `}
+fun gl_GEQUAL: GLDepthFunc `{ return GL_GEQUAL; `}
+fun gl_ALWAYS: GLDepthFunc `{ return GL_ALWAYS; `}
 
 # Format of pixel data
-#
-# Used by `GLES::read_pixels`
 extern class GLPixelFormat
 	super GLEnum
-
-	new alpha `{ return GL_ALPHA; `}
-	new rgb `{ return GL_RGB; `}
-	new rgba `{ return GL_RGBA; `}
 end
+
+fun gl_ALPHA: GLPixelFormat `{ return GL_ALPHA; `}
+fun gl_RGB: GLPixelFormat `{ return GL_RGB; `}
+fun gl_RGBA: GLPixelFormat `{ return GL_RGBA; `}
 
 # Data type of pixel data
-#
-# Used by `GLES::read_pixels`
 extern class GLPixelType
 	super GLEnum
-
-	new unsigned_byte `{ return GL_UNSIGNED_BYTE; `}
-	new unsigned_short_5_6_5 `{ return GL_UNSIGNED_SHORT_5_6_5; `}
-	new unsigned_short_4_4_4_4 `{ return GL_UNSIGNED_SHORT_4_4_4_4; `}
-	new unsigned_short_5_5_5_1 `{ return GL_UNSIGNED_SHORT_5_5_5_1; `}
 end
 
-# Set of buffers as a bitwise OR mask, used by `GLES::clear`
-#
-# ~~~
-# var buffers = (new GLBuffer).color.depth
-# gl.clear buffers
-# ~~~
+fun gl_UNSIGNED_BYTE: GLPixelType `{ return GL_UNSIGNED_BYTE; `}
+fun gl_UNSIGNED_SHORT_5_6_5: GLPixelType `{ return GL_UNSIGNED_SHORT_5_6_5; `}
+fun gl_UNSIGNED_SHORT_4_4_4_4: GLPixelType `{ return GL_UNSIGNED_SHORT_4_4_4_4; `}
+fun gl_UNSIGNED_SHORT_5_5_5_1: GLPixelType `{ return GL_UNSIGNED_SHORT_5_5_5_1; `}
+
+# Set of buffers as a bitwise OR mask
 extern class GLBuffer `{ GLbitfield `}
-	# Get an empty set of buffers
-	new `{ return 0; `}
-
-	# Add the color buffer to the returned buffer set
-	fun color: GLBuffer `{ return self | GL_COLOR_BUFFER_BIT; `}
-
-	# Add the depth buffer to the returned buffer set
-	fun depth: GLBuffer `{ return self | GL_DEPTH_BUFFER_BIT; `}
-
-	# Add the stencil buffer to the returned buffer set
-	fun stencil: GLBuffer `{ return self | GL_STENCIL_BUFFER_BIT; `}
+	# Bitwise OR with `other`
+	fun |(other: GLBuffer): GLBuffer `{ return self | other; `}
 end
+
+fun gl_DEPTH_BUFFER_BIT: GLBuffer `{ return GL_DEPTH_BUFFER_BIT; `}
+fun gl_STENCIL_BUFFER_BIT: GLBuffer `{ return GL_STENCIL_BUFFER_BIT; `}
+fun gl_COLOR_BUFFER_BIT: GLBuffer `{ return GL_COLOR_BUFFER_BIT; `}
