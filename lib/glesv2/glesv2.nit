@@ -553,8 +553,9 @@ fun gl_UNPACK_ALIGNEMENT: GLPack `{ return GL_UNPACK_ALIGNMENT; `}
 # GL_UNPACK_ROW_LENGTH, GL_UNPACK_IMAGE_HEIGHT, GL_UNPACK_SKIP_PIXELS, GL_UNPACK_SKIP_ROWS, GL_UNPACK_SKIP_IMAGES
 
 # Specify a two-dimensional texture image
-fun glTexImage2D(target: GLTextureTarget, level, internalformat, width, height, border: Int,
-                 format: GLPixelFormat, typ: GLPixelType, data: NativeCByteArray) `{
+fun glTexImage2D(target: GLTextureTarget, level: Int, internalformat: GLPixelFormat,
+                 width, height, border: Int,
+                 format: GLPixelFormat, typ: GLPixelType, data: Pointer) `{
 	glTexImage2D(target, level, internalformat, width, height, border, format, typ, data);
 `}
 
