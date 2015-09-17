@@ -50,12 +50,6 @@ extern class GLProgram `{GLuint`}
 	# The newly created instance should be checked using `is_ok`.
 	new `{ return glCreateProgram(); `}
 
-	# Is this a valid program?
-	fun is_ok: Bool `{ return glIsProgram(self); `}
-
-	# Attach a `shader` to this program
-	fun attach_shader(shader: GLShader) `{ glAttachShader(self, shader); `}
-
 	# Set the location for the attribute by `name`
 	fun bind_attrib_location(index: Int, name: String) import String.to_cstring `{
 		GLchar *c_name = String_to_cstring(name);
@@ -85,27 +79,11 @@ extern class GLProgram `{GLuint`}
 		return val;
 	`}
 
-	# Try to link this program
-	#
-	# Check result using `in_linked` and `info_log`.
-	fun link `{ glLinkProgram(self); `}
-
 	# Is this program linked?
 	fun is_linked: Bool do return query(0x8B82) != 0
 
-	# Use this program for the following operations
-	fun use `{ glUseProgram(self); `}
-
-	# Delete this program
-	fun delete `{ glDeleteProgram(self); `}
-
 	# Has this program been deleted?
 	fun is_deleted: Bool do return query(0x8B80) != 0
-
-	# Validate whether this program can be executed in the current OpenGL state
-	#
-	# Check results using `is_validated` and `info_log`.
-	fun validate `{ glValidateProgram(self); `}
 
 	# Boolean result of `validate`, must be called after `validate`
 	fun is_validated: Bool do return query(0x8B83) != 0
@@ -209,6 +187,30 @@ extern class GLProgram `{GLuint`}
 		return type;
 	`}
 end
+
+# Create a program object
+fun glCreateProgram: GLProgram `{ return glCreateProgram(); `}
+
+# Install the `program` as part of current rendering state
+fun glUseProgram(program: GLProgram) `{ glUseProgram(program); `}
+
+# Link the `program` object
+fun glLinkProgram(program: GLProgram) `{ glLinkProgram(program); `}
+
+# Validate the `program` object
+fun glValidateProgram(program: GLProgram) `{ glValidateProgram(program); `}
+
+# Delete the `program` object
+fun glDeleteProgram(program: GLProgram) `{ glDeleteProgram(program); `}
+
+# Determine if `name` corresponds to a program object
+fun glIsProgram(name: GLProgram): Bool `{ return glIsProgram(name); `}
+
+# Attach a `shader` to `program`
+fun glAttachShader(program: GLProgram, shader: GLShader) `{ glAttachShader(program, shader); `}
+
+# Detach `shader` from `program`
+fun glDetachShader(program: GLProgram, shader: GLShader) `{ glDetachShader(program, shader); `}
 
 # Abstract OpenGL ES shader object, implemented by `GLFragmentShader` and `GLVertexShader`
 extern class GLShader `{GLuint`}
