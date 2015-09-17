@@ -962,6 +962,38 @@ fun gl_NICEST: GLHintMode `{ return GL_NICEST; `}
 # No preference
 fun gl_DONT_CARE: GLHintMode `{ return GL_DONT_CARE; `}
 
+# Generate `n` framebuffer object names
+fun glGenFramebuffers(n: Int): Array[Int]
+do
+	var array = new CIntArray(n)
+	native_glGenFramebuffers(n, array.native_array)
+	var a = array.to_a
+	array.destroy
+	return a
+end
+
+private fun native_glGenFramebuffers(n: Int, textures: NativeCIntArray) `{
+	glGenFramebuffers(n, (GLuint *)textures);
+`}
+
+# Determine if `name` corresponds to a framebuffer object
+fun glIsFramebuffer(name: Int): Bool `{
+	return glIsFramebuffer(name);
+`}
+
+# Delete named framebuffer objects
+fun glDeleteFramebuffers(framebuffers: SequenceRead[Int])
+do
+	var n = framebuffers.length
+	var array = new CIntArray.from(framebuffers)
+	native_glDeleteFramebuffers(n, array.native_array)
+	array.destroy
+end
+
+private fun native_glDeleteFramebuffers(n: Int, framebuffers: NativeCIntArray) `{
+	return glDeleteFramebuffers(n, (const GLuint *)framebuffers);
+`}
+
 # Attach a level of a texture object as a logical buffer to the currently bound framebuffer object
 fun glFramebufferTexture2D(target: GLFramebufferTarget, attachment: GLAttachment,
                            texture_target: GLTextureTarget,  texture, level: Int) `{
