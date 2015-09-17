@@ -72,21 +72,14 @@ extern class GLProgram `{GLuint`}
 		return glGetUniformLocation(self, c_name);
 	`}
 
-	# Query information on this program
-	fun query(pname: Int): Int `{
-		int val;
-		glGetProgramiv(self, pname, &val);
-		return val;
-	`}
-
 	# Is this program linked?
-	fun is_linked: Bool do return query(0x8B82) != 0
+	fun is_linked: Bool do return glGetProgramiv(self, gl_LINK_STATUS) != 0
 
 	# Has this program been deleted?
-	fun is_deleted: Bool do return query(0x8B80) != 0
+	fun is_deleted: Bool do return glGetProgramiv(self, gl_DELETE_STATUS) != 0
 
 	# Boolean result of `validate`, must be called after `validate`
-	fun is_validated: Bool do return query(0x8B83) != 0
+	fun is_validated: Bool do return glGetProgramiv(self, gl_VALIDATE_STATUS) != 0
 
 	# Retrieve the information log of this program
 	#
@@ -103,22 +96,22 @@ extern class GLProgram `{GLuint`}
 	#
 	# This should be the number of uniforms declared in all shader, except
 	# unused uniforms which may have been optimized out.
-	fun n_active_uniforms: Int do return query(0x8B86)
+	fun n_active_uniforms: Int do return glGetProgramiv(self, gl_ACTIVE_UNIFORMS)
 
-	# Length of the longest uniform name in this program, including `\n`
-	fun active_uniform_max_length: Int do return query(0x8B87)
+	# Length of the longest uniform name in this program, including the null byte
+	fun active_uniform_max_length: Int do return glGetProgramiv(self, gl_ACTIVE_UNIFORM_MAX_LENGTH)
 
 	# Number of active attributes in this program
 	#
 	# This should be the number of uniforms declared in all shader, except
 	# unused uniforms which may have been optimized out.
-	fun n_active_attributes: Int do return query(0x8B89)
+	fun n_active_attributes: Int do return glGetProgramiv(self, gl_ACTIVE_ATTRIBUTES)
 
-	# Length of the longest uniform name in this program, including `\n`
-	fun active_attribute_max_length: Int do return query(0x8B8A)
+	# Length of the longest attribute name in this program, including the null byte
+	fun active_attribute_max_length: Int do return glGetProgramiv(self, gl_ACTIVE_ATTRIBUTE_MAX_LENGTH)
 
 	# Number of shaders attached to this program
-	fun n_attached_shaders: Int do return query(0x8B85)
+	fun n_attached_shaders: Int do return glGetProgramiv(self, gl_ATTACHED_SHADERS)
 
 	# Name of the active attribute at `index`
 	fun active_attrib_name(index: Int): String
@@ -212,6 +205,20 @@ fun glAttachShader(program: GLProgram, shader: GLShader) `{ glAttachShader(progr
 # Detach `shader` from `program`
 fun glDetachShader(program: GLProgram, shader: GLShader) `{ glDetachShader(program, shader); `}
 
+# Parameter value from a `program` object
+fun glGetProgramiv(program: GLProgram, pname: GLGetParameterName): Int `{
+	int value;
+	glGetProgramiv(program, pname, &value);
+	return value;
+`}
+
+# Return the program information log in `buf`
+fun glGetProgramInfoLog(program: GLProgram, buf_size: Int, buf: NativeString): Int `{
+	int length;
+	glGetProgramInfoLog(program, buf_size, &length, buf);
+	return length;
+`}
+
 # Abstract OpenGL ES shader object, implemented by `GLFragmentShader` and `GLVertexShader`
 extern class GLShader `{GLuint`}
 
@@ -221,7 +228,7 @@ extern class GLShader `{GLuint`}
 	# was created from a binary file.
 	fun source: nullable String
 	do
-		var size = query(0x8B88)
+		var size = glGetShaderiv(self, gl_SHADER_SOURCE_LENGTH)
 		if size == 0 then return null
 		return source_native(size).to_s
 	end
@@ -232,18 +239,10 @@ extern class GLShader `{GLuint`}
 		return code;
 	`}
 
-	# Query information on this shader
-	protected fun query(pname: Int): Int `{
-		int val;
-		glGetShaderiv(self, pname, &val);
-		return val;
-	`}
-
 	# Has this shader been compiled?
-	fun is_compiled: Bool do return query(0x8B81) != 0
+	fun is_compiled: Bool do return glGetShaderiv(self, gl_COMPILE_STATUS) != 0
 
 	# Has this shader been deleted?
-	fun is_deleted: Bool do return query(0x8B80) != 0
 
 	# Retrieve the information log of this shader
 	#
@@ -255,7 +254,35 @@ extern class GLShader `{GLuint`}
 		glGetShaderInfoLog(self, size, NULL, msg);
 		return NativeString_to_s(msg);
 	`}
+	fun is_deleted: Bool do return glGetShaderiv(self, gl_DELETE_STATUS) != 0
 end
+
+# Get a parameter value from a `shader` object
+fun glGetShaderiv(shader: GLShader, pname: GLGetParameterName): Int `{
+	int val;
+	glGetShaderiv(shader, pname, &val);
+	return val;
+`}
+
+# Shader parameter
+extern class GLGetParameterName
+	super GLEnum
+end
+
+fun gl_INFO_LOG_LENGTH: GLGetParameterName `{ return GL_INFO_LOG_LENGTH; `}
+fun gl_DELETE_STATUS: GLGetParameterName `{ return GL_DELETE_STATUS; `}
+
+fun gl_SHADER_TYPE: GLGetParameterName `{ return GL_SHADER_TYPE; `}
+fun gl_COMPILE_STATUS: GLGetParameterName `{ return GL_COMPILE_STATUS; `}
+fun gl_SHADER_SOURCE_LENGTH: GLGetParameterName `{ return GL_SHADER_SOURCE_LENGTH; `}
+
+fun gl_ACTIVE_ATTRIBUTES: GLGetParameterName `{ return GL_ACTIVE_ATTRIBUTES; `}
+fun gl_ACTIVE_ATTRIBUTE_MAX_LENGTH: GLGetParameterName `{ return GL_ACTIVE_ATTRIBUTE_MAX_LENGTH; `}
+fun gl_ACTIVE_UNIFORMS: GLGetParameterName `{ return GL_ACTIVE_UNIFORMS; `}
+fun gl_ACTIVE_UNIFORM_MAX_LENGTH: GLGetParameterName `{ return GL_ACTIVE_UNIFORM_MAX_LENGTH; `}
+fun gl_ATTACHED_SHADERS: GLGetParameterName `{ return GL_ATTACHED_SHADERS; `}
+fun gl_LINK_STATUS: GLGetParameterName `{ return GL_LINK_STATUS; `}
+fun gl_VALIDATE_STATUS: GLGetParameterName `{ return GL_VALIDATE_STATUS; `}
 
 # Shader type
 extern class GLShaderType
