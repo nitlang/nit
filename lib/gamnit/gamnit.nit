@@ -18,6 +18,7 @@ module gamnit
 import app
 
 import display
+import textures
 
 import gamnit_android is conditional(android)
 

@@ -19,7 +19,8 @@ import sdl
 import x11
 
 import egl # local to gamnit
-import display
+intrude import display
+intrude import textures
 
 redef class GamnitDisplay
 
@@ -87,5 +88,26 @@ redef class GamnitDisplay
 		var x11_display = x_open_default_display
 		assert not x11_display.address_is_null else print "Opening X11 display failed"
 		return x11_display
+	end
+end
+
+redef class GamnitAssetTexture
+
+	redef fun load_from_platform
+	do
+		var path = "assets" / path # TODO use app.assets_dir
+		var sdl_tex = new SDLImage.from_file(path)
+
+		if sdl_tex.address_is_null then
+			error = new Error("Failed to load texture at '{path}'")
+			return
+		end
+
+		self.width = sdl_tex.width.to_f
+		self.height = sdl_tex.height.to_f
+		var format = if sdl_tex.amask > 0 then gl_RGBA else gl_RGB
+		var pixels = sdl_tex.pixels
+
+		load_from_pixels(pixels, sdl_tex.width, sdl_tex.height, format)
 	end
 end
