@@ -212,10 +212,6 @@ end
 
 # Abstract OpenGL ES shader object, implemented by `GLFragmentShader` and `GLVertexShader`
 extern class GLShader `{GLuint`}
-	# Set the source of the shader
-	fun source=(code: NativeString) `{
-		glShaderSource(self, 1, (GLchar const **)&code, NULL);
-	`}
 
 	# Source of the shader, if available
 	#
@@ -241,22 +237,11 @@ extern class GLShader `{GLuint`}
 		return val;
 	`}
 
-	# Try to compile `source` into a binary GPU program
-	#
-	# Check the result using `is_compiled` and `info_log`
-	fun compile `{ glCompileShader(self); `}
-
 	# Has this shader been compiled?
 	fun is_compiled: Bool do return query(0x8B81) != 0
 
-	# Delete this shader
-	fun delete `{ glDeleteShader(self); `}
-
 	# Has this shader been deleted?
 	fun is_deleted: Bool do return query(0x8B80) != 0
-
-	# Is this a valid shader?
-	fun is_ok: Bool `{ return glIsShader(self); `}
 
 	# Retrieve the information log of this shader
 	#
@@ -269,6 +254,33 @@ extern class GLShader `{GLuint`}
 		return NativeString_to_s(msg);
 	`}
 end
+
+# Shader type
+extern class GLShaderType
+	super GLEnum
+end
+
+fun gl_VERTEX_SHADER: GLShaderType `{ return GL_VERTEX_SHADER; `}
+fun gl_FRAGMENT_SHADER: GLShaderType `{ return GL_FRAGMENT_SHADER; `}
+
+# Create a shader object of the `shader_type`
+fun glCreateShader(shader_type: GLShaderType): GLShader `{
+	return glCreateShader(shader_type);
+`}
+
+# Replace the source code in the `shader` object with `code`
+fun glShaderSource(shader: GLShader, code: NativeString) `{
+	glShaderSource(shader, 1, (GLchar const **)&code, NULL);
+`}
+
+# Compile the `shader` object
+fun glCompileShader(shader: GLShader) `{ glCompileShader(shader); `}
+
+# Delete the `shader` object
+fun glDeleteShader(shader: GLShader) `{ glDeleteShader(shader); `}
+
+# Determine if `name` corresponds to a shader object
+fun glIsShader(name: GLShader): Bool `{ return glIsShader(name); `}
 
 # An OpenGL ES 2.0 fragment shader
 extern class GLFragmentShader
