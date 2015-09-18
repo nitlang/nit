@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Basic file server on port 80, usually requires `root` to execute
+# Basic file server on port 80 by default, may require `root` to execute
 #
 # To be safe, it is recommended to run this program with its own username:
 # `sudo file_server -u nitcorn:www`
@@ -26,10 +26,10 @@ import privileges
 # Prepare options
 var opts = new OptionContext
 var opt_drop = new OptionUserAndGroup.for_dropping_privileges
-opt_drop.mandatory = true
+var opt_port = new OptionInt("Server port", 80, "--port", "-p")
 var opt_help = new OptionBool("Print this message", "--help", "-h")
-opts.add_option(opt_drop, opt_help)
-opts.parse(args)
+opts.add_option(opt_drop, opt_port, opt_help)
+opts.parse args
 
 # Check options errors and help
 if not opts.errors.is_empty or opt_help.value then
@@ -40,7 +40,7 @@ if not opts.errors.is_empty or opt_help.value then
 end
 
 # Serve everything with a standard FilesHandler
-var vh = new VirtualHost("localhost:80")
+var vh = new VirtualHost("localhost:{opt_port.value}")
 vh.routes.add new Route(null, new FileServer("www/hello_world/"))
 var factory = new HttpFactory.and_libevent
 factory.config.virtual_hosts.add vh
