@@ -164,17 +164,30 @@ class Connection
 
 	# Write a file to the connection
 	#
-	# require: `path.file_exists`
+	# If `not path.file_exists`, the method returns.
 	fun write_file(path: String)
 	do
-		assert path.file_exists
-
 		var file = new FileReader.open(path)
-		var output = native_buffer_event.output_buffer
-		var fd = file.fd
-		var length = file.file_stat.size
+		if file.last_error != null then
+			var error = new IOError("Failed to open file at '{path}'")
+			error.cause = file.last_error
+			self.last_error = error
+			file.close
+			return
+		end
 
-		output.add_file(fd, 0, length)
+		var stat = file.file_stat
+		if stat == null then
+			last_error = new IOError("Failed to stat file at '{path}'")
+			file.close
+			return
+		end
+
+		var err = native_buffer_event.output_buffer.add_file(file.fd, 0, stat.size)
+		if err then
+			last_error = new IOError("Failed to add file at '{path}'")
+			file.close
+		end
 	end
 end
 
