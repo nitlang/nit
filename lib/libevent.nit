@@ -162,6 +162,8 @@ class Connection
 
 	redef fun write_byte(byte) do native_buffer_event.write_byte(byte)
 
+	redef fun write_bytes(bytes) do native_buffer_event.write(bytes.items, bytes.length)
+
 	# Write a file to the connection
 	#
 	# If `not path.file_exists`, the method returns.
