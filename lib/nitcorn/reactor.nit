@@ -85,6 +85,8 @@ class HttpServer
 
 		# Send back a response
 		write response.to_s
+		for path in response.files do write_file path
+
 		close
 	end
 end

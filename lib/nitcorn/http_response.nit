@@ -37,12 +37,36 @@ class HttpResponse
 	# Body of this response
 	var body = "" is writable
 
+	# Files appended after `body`
+	var files = new Array[String]
+
 	# Finalize this response before sending it over HTTP
 	fun finalize
 	do
 		# Set the content length if not already set
 		if not header.keys.has("Content-Length") then
-			header["Content-Length"] = body.bytelen.to_s
+			# Size of the body
+			var len = body.bytelen
+
+			# Size of included files
+			for path in files do
+				# TODO handle these error cases elsewhere, an error here will result in an invalid response
+				if not path.file_exists then
+					print_error "File does not exists at '{path}'"
+					continue
+				end
+
+				var stat = path.file_stat
+				if stat == null then
+					print_error "Failed to stat file at '{path}'"
+					continue
+				end
+
+				len += stat.size
+			end
+
+			# Set header
+			header["Content-Length"] = len.to_s
 		end
 
 		# Set server ID
