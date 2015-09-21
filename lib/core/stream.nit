@@ -275,7 +275,7 @@ abstract class Reader
 	# ~~~
 	# var w = new StringReader(" Hello, \n\t World!")
 	# assert w.read_word == "Hello,"
-	# assert w.read_char == '\n'.ascii
+	# assert w.read_char == '\n'
 	# assert w.read_word == "World!"
 	# assert w.read_word == ""
 	# ~~~
