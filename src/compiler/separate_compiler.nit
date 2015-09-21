@@ -998,10 +998,13 @@ class SeparateCompiler
 			# use some Huffman coding.
 			if t.name == "Int" then
 				class_info[1] = t
+				t.mclass_type.tag_value = 1
 			else if t.name == "Char" then
 				class_info[2] = t
+				t.mclass_type.tag_value = 2
 			else if t.name == "Bool" then
 				class_info[3] = t
+				t.mclass_type.tag_value = 3
 			else
 				continue
 			end
@@ -2327,6 +2330,12 @@ redef class MType
 	# Are values of `self` tagged?
 	# If false, it means that the type is not primitive, or is boxed.
 	var is_tagged = false
+
+	# The tag value of the type
+	#
+	# ENSURE `is_tagged == (tag_value > 0)`
+	# ENSURE `not is_tagged == (tag_value == 0)`
+	var tag_value = 0
 end
 
 redef class MEntity
