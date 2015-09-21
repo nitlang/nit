@@ -1861,7 +1861,7 @@ class SeparateCompilerVisitor
 			else
 				var mtype1 = value1.mtype.as(MClassType)
 				self.require_declaration("class_{mtype1.c_name}")
-				self.add("{res} = ({value2} != NULL) && ({value2}->class == &class_{mtype1.c_name}); /* is_same_type_test */")
+				self.add("{res} = ({value2} != NULL) && ({class_info(value2)} == &class_{mtype1.c_name}); /* is_same_type_test */")
 			end
 		else
 			self.add("{res} = ({value1} == {value2}) || ({value1} != NULL && {value2} != NULL && {class_info(value1)} == {class_info(value2)}); /* is_same_type_test */")
