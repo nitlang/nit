@@ -24,12 +24,12 @@ redef class ANumberValue
 end
 
 redef class ACharValue
-	redef fun to_i do return n_char.content.first.ascii
+	redef fun to_i do return n_char.content.first.code_point
 end
 
 redef class AStringValue
 	# legal but no not recommended
-	redef fun to_i do return n_string.content.first.ascii
+	redef fun to_i do return n_string.content.first.code_point
 end
 
 redef class AHexValue

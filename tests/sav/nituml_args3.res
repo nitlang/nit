@@ -51,19 +51,19 @@ Float [
 Numeric -> Float [dir=back arrowtail=open style=dashed];
 
 Byte [
- label = "{Byte||+ %(i: Byte): Byte\l+ \<\<(i: Int): Byte\l+ \>\>(i: Int): Byte\l}"
+ label = "{Byte||+ %(i: Byte): Byte\l+ \<\<(i: Int): Byte\l+ \>\>(i: Int): Byte\l+ ascii(): Char\l}"
 ]
 Discrete -> Byte [dir=back arrowtail=open style=dashed];
 Numeric -> Byte [dir=back arrowtail=open style=dashed];
 
 Int [
- label = "{Int||+ %(i: Int): Int\l+ \<\<(i: Int): Int\l+ \>\>(i: Int): Int\l+ ascii(): Char\l+ digit_count(b: Int): Int\l+ digit_count_base_10(): Int\l+ to_c(): Char\l+ abs(): Int\l}"
+ label = "{Int||+ %(i: Int): Int\l+ \<\<(i: Int): Int\l+ \>\>(i: Int): Int\l+ code_point(): Char\l+ digit_count(b: Int): Int\l+ digit_count_base_10(): Int\l+ to_c(): Char\l+ abs(): Int\l}"
 ]
 Discrete -> Int [dir=back arrowtail=open style=dashed];
 Numeric -> Int [dir=back arrowtail=open style=dashed];
 
 Char [
- label = "{Char||+ to_i(): Int\l+ ascii(): Int\l+ to_lower(): Char\l+ to_upper(): Char\l+ is_digit(): Bool\l+ is_lower(): Bool\l+ is_upper(): Bool\l+ is_letter(): Bool\l+ is_whitespace(): Bool\l}"
+ label = "{Char||+ to_i(): Int\l+ ascii(): Byte\l+ code_point(): Int\l+ is_ascii(): Bool\l+ to_lower(): Char\l+ to_upper(): Char\l+ is_digit(): Bool\l+ is_lower(): Bool\l+ is_upper(): Bool\l+ is_letter(): Bool\l+ is_whitespace(): Bool\l}"
 ]
 Discrete -> Char [dir=back arrowtail=open style=dashed];
 

@@ -1552,10 +1552,10 @@ abstract class AbstractCompilerVisitor
 	do
 		var t = mmodule.char_type
 
-		if value.ascii < 128 then
+		if value.code_point < 128 then
 			return new RuntimeVariable("'{value.to_s.escape_to_c}'", t, t)
 		else
-			return new RuntimeVariable("{value.ascii}", t, t)
+			return new RuntimeVariable("{value.code_point}", t, t)
 		end
 	end
 

@@ -249,13 +249,13 @@ class Grid
 				else if c >= 'A' and c <= 'I' then
 					var t = self.get(x,y)
 					assert t != null
-					t.update(c.ascii-'A'.ascii+1)
+					t.update(c.code_point-'A'.code_point+1)
 					t.fixed = true
 					x += 1
 				else if c >= 'a' and c <= 'i' then
 					var t = self.get(x,y)
 					assert t != null
-					t.update(c.ascii-'a'.ascii+1)
+					t.update(c.code_point-'a'.code_point+1)
 					x += 1
 				else if c >= '1' and c <= '9' then
 					rle = c.to_i
@@ -289,16 +289,16 @@ class Grid
 				if k == 0 then
 					if t.fixed then c = '#'
 				else
-					b.add(0x1b.ascii)
+					b.add(0x1b.code_point)
 					b.add('[')
 					b.append ansicols[k]
-					c = (k + 'a'.ascii - 1).ascii
+					c = (k + 'a'.code_point - 1).code_point
 					if t.fixed then c = c.to_upper
 					b.append("m")
 				end
 				b.add(c)
 				if k != 0 then
-					b.add(0x1b.ascii)
+					b.add(0x1b.code_point)
 					b.append("[0m")
 
 				end

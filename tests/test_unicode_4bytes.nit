@@ -16,5 +16,5 @@ intrude import core::text::flat
 import core
 
 var s = "𐏓􏿿".as(FlatString)
-print s.items.char_at(0).ascii.to_hex
-print s.items.char_at(4).ascii.to_hex
+print s.items.char_at(0).code_point.to_hex
+print s.items.char_at(4).code_point.to_hex

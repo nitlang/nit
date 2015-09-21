@@ -651,6 +651,11 @@ universal Byte
 	#     assert 5u8 >> 1    == 2u8
 	fun >>(i: Int): Byte `{ return self >> i; `}
 
+	# Returns the character equivalent of `self`
+	#
+	# REQUIRE: `self <= 127u8`
+	fun ascii: Char `{ return (uint32_t)self; `}
+
 	redef fun to_i is intern
 	redef fun to_f is intern
 	redef fun to_b do return self
@@ -862,9 +867,9 @@ universal Int
 	do
 		assert self >= 0 and self <= 36 # TODO plan for this
 		if self < 10 then
-			return (self + '0'.ascii).ascii
+			return (self + '0'.code_point).code_point
 		else
-			return (self + ('a'.ascii - 10)).ascii
+			return (self - 10 + 'a'.code_point).code_point
 		end
 	end
 
@@ -906,7 +911,7 @@ universal Char
 			printf("%c", self);
 		}
 	`}
-	redef fun hash do return ascii
+	redef fun hash do return code_point
 	redef fun ==(o) is intern
 	redef fun !=(o) is intern
 
@@ -920,7 +925,7 @@ universal Char
 
 	redef fun distance(c)
 	do
-		var d = self.ascii - c.ascii
+		var d = self.code_point - c.code_point
 		if d >= 0 then
 			return d
 		else
@@ -937,9 +942,9 @@ universal Char
 		if self == '-' then
 			return -1
 		else if is_digit then
-			return self.ascii - '0'.ascii
+			return self.code_point - '0'.code_point
 		else
-			return self.to_lower.ascii - 'a'.ascii + 10
+			return self.to_lower.code_point - 'a'.code_point + 10
 		end
 	end
 
@@ -973,7 +978,7 @@ universal Char
 	fun to_lower: Char
 	do
 		if is_upper then
-			return (ascii + ('a'.distance('A'))).ascii
+			return (code_point + ('a'.distance('A'))).code_point
 		else
 			return self
 		end
@@ -988,7 +993,7 @@ universal Char
 	fun to_upper: Char
 	do
 		if is_lower then
-			return (ascii - ('a'.distance('A'))).ascii
+			return (code_point - ('a'.distance('A'))).code_point
 		else
 			return self
 		end
@@ -1049,7 +1054,7 @@ universal Char
 	#     assert '\t'.is_whitespace == true
 	fun is_whitespace: Bool
 	do
-		var i = ascii
+		var i = code_point
 		return i <= 0x20 or i == 0x7F
 	end
 end

@@ -246,7 +246,7 @@ class Location
 	# * `"0;32"` for green
 	fun colored_line(color: String): String
 	do
-		var esc = 27.ascii
+		var esc = 27.code_point
 		var def = "{esc}[0m"
 		var col = "{esc}[{color}m"
 

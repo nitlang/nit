@@ -30,7 +30,7 @@ redef class Char
 		x = x % 26
 		if x < 0 then x += 26
 		var up = false
-		var val = ascii
+		var val = code_point
 		if is_upper then
 			up = true
 			val += 32
@@ -38,7 +38,7 @@ redef class Char
 		val += x
 		if val > 122 then val -= 26
 		if up then val -= 32
-		return val.ascii
+		return val.code_point
 	end
 end
 

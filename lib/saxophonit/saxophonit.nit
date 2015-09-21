@@ -656,14 +656,14 @@ class XophonReader
 		if lexer.accept('#') then
 			if lexer.accept('x') then
 				if lexer.expect_hex(ref) then
-					buffer.chars.add(ref.to_hex.ascii)
+					buffer.chars.add(ref.to_hex.code_point)
 					return lexer.expect(';', "")
 				else
 					return lexer.fire_unexpected_char(
 							". Expecting an hexadecimal digit")
 				end
 			else if lexer.accept_digits(ref) then
-				buffer.chars.add(ref.to_i.ascii)
+				buffer.chars.add(ref.to_i.code_point)
 				return lexer.expect(';', "")
 			else
 				return lexer.fire_unexpected_char(" in a character reference. " +

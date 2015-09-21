@@ -588,7 +588,7 @@ redef class Token
 		if text != null then
 			var nfa = new Automaton.epsilon
 			for c in text.chars do
-				nfa.concat(new Automaton.atom(c.ascii))
+				nfa.concat(new Automaton.atom(c.code_point))
 			end
 			return nfa
 		end

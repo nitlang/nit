@@ -275,7 +275,7 @@ abstract class Reader
 	# ~~~
 	# var w = new StringReader(" Hello, \n\t World!")
 	# assert w.read_word == "Hello,"
-	# assert w.read_char == '\n'.ascii
+	# assert w.read_char == '\n'
 	# assert w.read_word == "World!"
 	# assert w.read_word == ""
 	# ~~~
@@ -441,7 +441,7 @@ abstract class BufferedReader
 			return null
 		end
 		# TODO: Fix when supporting UTF-8
-		var c = _buffer[_buffer_pos].to_i.ascii
+		var c = _buffer[_buffer_pos].to_i.code_point
 		_buffer_pos += 1
 		return c
 	end

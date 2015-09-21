@@ -173,7 +173,7 @@ class Lexer
 				# This does not corrupt the lexer and works perfectly on any character.
 				#
 				# TL;DR: Java fucked up, need retarded solution to cope for retarded decision
-				var c = string[sp].ascii
+				var c = string[sp].code_point
 				if c >= 256 then c = 255
 				sp += 1
 

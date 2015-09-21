@@ -99,22 +99,22 @@ redef class Text
 				buffer.append "\\\""
 			else if char == '\/' then
 				buffer.append "\\/"
-			else if char < 16.ascii then
+			else if char < 16.code_point then
 				if char == '\n' then
 					buffer.append "\\n"
 				else if char == '\r' then
 					buffer.append "\\r"
 				else if char == '\t' then
 					buffer.append "\\t"
-				else if char == 0x0C.ascii then
+				else if char == 0x0C.code_point then
 					buffer.append "\\f"
-				else if char == 0x08.ascii then
+				else if char == 0x08.code_point then
 					buffer.append "\\b"
 				else
-					buffer.append "\\u000{char.ascii.to_hex}"
+					buffer.append "\\u000{char.code_point.to_hex}"
 				end
 			else if char < ' ' then
-				buffer.append "\\u00{char.ascii.to_hex}"
+				buffer.append "\\u00{char.code_point.to_hex}"
 			else
 				buffer.add char
 			end
@@ -435,9 +435,9 @@ redef class Nstring
 				i += 1
 				char = text[i]
 				if char == 'b' then
-					char = 0x08.ascii
+					char = 0x08.code_point
 				else if char == 'f' then
-					char = 0x0C.ascii
+					char = 0x0C.code_point
 				else if char == 'n' then
 					char = '\n'
 				else if char == 'r' then
@@ -450,7 +450,7 @@ redef class Nstring
 					if code >= 128 then
 						char = '?'
 					else
-						char = code.ascii
+						char = code.code_point
 					end
 					i += 4
 				end

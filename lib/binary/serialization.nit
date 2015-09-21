@@ -17,16 +17,16 @@
 # The serialized data format uses a dictionary structure similar to BSON:
 #
 # ~~~raw
-# object = 0x01                   # null
-#        | 0x02 id attributes     # New object
-#        | 0x03 id                # Ref to object
-#        | 0x04 int64             # Int
-#        | 0x05 int8              # Bool (int8 != 0)
-#        | 0x06 int8              # Char
-#        | 0x07 double(64 bits)   # Float
-#        | 0x08 block             # String
-#        | 0x09 block             # NativeString
-#        | 0x0A flat_array;       # Array[nullable Object]
+# object = 0x01                    # null
+#        | 0x02 id attributes      # New object
+#        | 0x03 id                 # Ref to object
+#        | 0x04 int64              # Int
+#        | 0x05 int8               # Bool (int8 != 0)
+#        | 0x06 utf8 byte sequence # Char
+#        | 0x07 double(64 bits)    # Float
+#        | 0x08 block              # String
+#        | 0x09 block              # NativeString
+#        | 0x0A flat_array;        # Array[nullable Object]
 #
 # block = int64 int8*;
 # cstring = int8* 0x00;
@@ -128,6 +128,9 @@ class BinaryDeserializer
 	# Tree of attributes, deserialized but not yet claimed
 	private var unclaimed_attributes = new UnrolledList[HashMap[String, nullable Object]]
 
+	# Buffer for one char
+	private var char_buf: NativeString is lazy do return new NativeString(4)
+
 	# Read and deserialize the next attribute name and value
 	#
 	# A `peeked_char` can suffix the next attribute name.
@@ -217,9 +220,17 @@ class BinaryDeserializer
 		if kind == kind_bool then return stream.read_bool
 		if kind == kind_float then return stream.read_double
 		if kind == kind_char then
+			var bf = char_buf
 			var b = stream.read_byte
-			if b == null then return 0
-			return b.to_i.ascii
+			if b == null then return '�'
+			var ln = b.u8len
+			bf[0] = b
+			for i in [1 .. ln[ do
+				b = stream.read_byte
+				if b == null then return '�'
+				bf[i] = b
+			end
+			return bf.to_s_with_length(ln)[0]
 		end
 		if kind == kind_string then return stream.read_block
 		if kind == kind_native_string then return stream.read_block.to_cstring
@@ -382,8 +393,7 @@ redef class Char
 	redef fun serialize_to_binary(v)
 	do
 		v.stream.write_byte kind_char
-		# Fix when UTF-8
-		v.stream.write_byte self.ascii.to_b
+		for i in bytes do v.stream.write_byte i
 	end
 end
 

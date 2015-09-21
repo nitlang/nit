@@ -18,29 +18,24 @@ module brainfuck
 # Interpreter for Brainfuck source code.
 class BFInterpreter
 	# Data cells
-	var dr = new Array[Char]
+	var dr = new Array[Byte]
 	# Data pointer
 	var dp = 0
 	# Instruction pointer
 	var ip = 0
 
 	# The program being interpreted
-	var program: String
-
-	# Contains the set of valid instructions, used in next
-	var valid_instr: Set[Char] is noinit
+	var program: Bytes
 
 	# Create an interpreter for `program`.
 	init do
-		valid_instr = new HashSet[Char]
-		valid_instr.add_all "><[].,+-".chars
-		dr.add 0.ascii
+		dr.add 0u8
 	end
 
 	# Create an interpreter for the file located at `path`.
 	init from_file(path: String) do
 		var ifs = new FileReader.open(path)
-		init(ifs.read_all)
+		init(ifs.read_all_bytes)
 	end
 
 	# Starts the interpretation of the loaded program
@@ -48,50 +43,43 @@ class BFInterpreter
 		loop
 			if ip >= program.length then break
 			eval
-			next
-		end
-	end
-
-	# Go to the next executable instruction
-	fun next do
-		ip += 1
-		while ip < program.length and not valid_instr.has(program[ip]) do
 			ip += 1
 		end
 	end
 
+
 	# Evaluates the current instruction
 	fun eval do
 		var instr = program[ip]
-		if instr == '.' then printn dr[dp]
-		if instr == '[' then
-			if dr[dp] == 0.ascii then
+		if instr == '.'.ascii then printn dr[dp].ascii
+		if instr == '['.ascii then
+			if dr[dp] == 0u8 then
 				ip = find_matching_rbra
 				return
 			end
 		end
-		if instr == ']' then
-			if dr[dp] != 0.ascii then
+		if instr == ']'.ascii then
+			if dr[dp] != 0u8 then
 				ip = find_matching_lbra
 				return
 			end
 		end
-		if instr == '>' then
+		if instr == '>'.ascii then
 			dp += 1
-			if dp >= dr.length then dr.add(0.ascii)
+			if dp >= dr.length then dr.add(0u8)
 		end
-		if instr == '<' then
+		if instr == '<'.ascii then
 			dp -= 1
 			if dp < 0 then abort
 		end
-		if instr == '+' then
-			dr[dp] = (dr[dp].ascii + 1).ascii
+		if instr == '+'.ascii then
+			dr[dp] = dr[dp] + 1u8
 		end
-		if instr == '-' then
-			dr[dp] = (dr[dp].ascii - 1).ascii
+		if instr == '-'.ascii then
+			dr[dp] = dr[dp] - 1u8
 		end
-		if instr == ',' then
-			dr[dp] = getc
+		if instr == ','.ascii then
+			dr[dp] = getc.ascii
 		end
 	end
 
@@ -101,14 +89,14 @@ class BFInterpreter
 		var lbracnt = 0
 		loop
 			if pos > program.length then abort
-			if program[pos] == ']' then
+			if program[pos] == ']'.ascii then
 				if lbracnt > 0 then
 					lbracnt -= 1
 				else
 					break
 				end
 			end
-			if program[pos] == '[' then lbracnt += 1
+			if program[pos] == '['.ascii then lbracnt += 1
 			pos += 1
 		end
 		return pos
@@ -120,14 +108,14 @@ class BFInterpreter
 		var rbracnt = 0
 		loop
 			if pos < 0 then abort
-			if program[pos] == '[' then
+			if program[pos] == '['.ascii then
 				if rbracnt > 0 then
 					rbracnt -= 1
 				else
 					break
 				end
 			end
-			if program[pos] == ']' then rbracnt += 1
+			if program[pos] == ']'.ascii then rbracnt += 1
 			pos -= 1
 		end
 		return pos

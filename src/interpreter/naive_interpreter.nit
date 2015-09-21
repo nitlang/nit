@@ -972,8 +972,6 @@ redef class AMethPropdef
 				return v.bool_instance(recvval >= args[1].to_i)
 			else if pname == "<=>" then
 				return v.int_instance(recvval <=> args[1].to_i)
-			else if pname == "ascii" then
-				return v.char_instance(recvval.ascii)
 			else if pname == "to_f" then
 				return v.float_instance(recvval.to_f)
 			else if pname == "to_b" then
@@ -1045,9 +1043,7 @@ redef class AMethPropdef
 			end
 		else if cname == "Char" then
 			var recv = args[0].val.as(Char)
-			if pname == "ascii" then
-				return v.int_instance(recv.ascii)
-			else if pname == "successor" then
+			if pname == "successor" then
 				return v.char_instance(recv.successor(args[1].to_i))
 			else if pname == "predecessor" then
 				return v.char_instance(recv.predecessor(args[1].to_i))

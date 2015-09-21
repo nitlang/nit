@@ -107,7 +107,7 @@ redef abstract class Writer
 	# Compared to `write_string`, this method supports null bytes in `text`.
 	fun write_block(text: Text)
 	do
-		write_int64 text.length
+		write_int64 text.bytelen
 		write text
 	end
 
@@ -197,7 +197,7 @@ redef abstract class Reader
 	do
 		var length = read_int64
 		if length == 0 then return ""
-		return read(length)
+		return read_bytes(length).to_s
 	end
 
 	# Read a floating point on 32 bits and return it as a `Float`

@@ -543,7 +543,7 @@ abstract class Text
 
 		if c >= '0' and c <= '9' then
 			res.add('_')
-			res.append(c.ascii.to_s)
+			res.append(c.code_point.to_s)
 			res.add('d')
 			start = 1
 		end
@@ -555,7 +555,7 @@ abstract class Text
 				continue
 			end
 			if underscore then
-				res.append('_'.ascii.to_s)
+				res.append('_'.code_point.to_s)
 				res.add('d')
 			end
 			if c >= '0' and c <= '9' then
@@ -566,13 +566,13 @@ abstract class Text
 				underscore = true
 			else
 				res.add('_')
-				res.append(c.ascii.to_s)
+				res.append(c.code_point.to_s)
 				res.add('d')
 				underscore = false
 			end
 		end
 		if underscore then
-			res.append('_'.ascii.to_s)
+			res.append('_'.code_point.to_s)
 			res.add('d')
 		end
 		return res.to_s
@@ -587,7 +587,7 @@ abstract class Text
 	# Three digits are always used to avoid following digits to be interpreted as an element
 	# of the octal sequence.
 	#
-	#     assert "{0.ascii}{1.ascii}{8.ascii}{31.ascii}{32.ascii}".escape_to_c == "\\000\\001\\010\\037 "
+	#     assert "{0.code_point}{1.code_point}{8.code_point}{31.code_point}{32.code_point}".escape_to_c == "\\000\\001\\010\\037 "
 	#
 	# The exceptions are the common `\t` and `\n`.
 	fun escape_to_c: String
@@ -605,9 +605,9 @@ abstract class Text
 				b.append("\\\'")
 			else if c == '\\' then
 				b.append("\\\\")
-			else if c.ascii < 32 then
+			else if c.code_point < 32 then
 				b.add('\\')
-				var oct = c.ascii.to_base(8, false)
+				var oct = c.code_point.to_base(8, false)
 				# Force 3 octal digits since it is the
 				# maximum allowed in the C specification
 				if oct.length == 1 then
@@ -680,8 +680,8 @@ abstract class Text
 			else if c == ':' or c == ' ' or c == '#' then
 				b.add('\\')
 				b.add(c)
-			else if c.ascii < 32 or c == ';' or c == '|' or c == '\\' or c == '=' then
-				b.append("?{c.ascii.to_base(16, false)}")
+			else if c.code_point < 32 or c == ';' or c == '|' or c == '\\' or c == '=' then
+				b.append("?{c.code_point.to_base(16, false)}")
 			else
 				b.add(c)
 			end
@@ -695,7 +695,7 @@ abstract class Text
 	#     assert s.length        ==  2
 	#     var u = s.unescape_nit
 	#     assert u.length        ==  1
-	#     assert u.chars[0].ascii      ==  10 # (the ASCII value of the "new line" character)
+	#     assert u.chars[0].code_point      ==  10 # (the ASCII value of the "new line" character)
 	fun unescape_nit: String
 	do
 		var res = new Buffer.with_cap(self.length)
@@ -787,7 +787,7 @@ abstract class Text
 			if c == '%' then
 				if i + 2 >= length then
 					# What follows % has been cut off
-					buf[l] = '?'.ascii.to_b
+					buf[l] = '?'.ascii
 				else
 					i += 1
 					var hex_s = substring(i, 2)
@@ -797,11 +797,11 @@ abstract class Text
 						i += 1
 					else
 						# What follows a % is not Hex
-						buf[l] = '?'.ascii.to_b
+						buf[l] = '?'.ascii
 						i -= 1
 					end
 				end
-			else buf[l] = c.ascii.to_b
+			else buf[l] = c.ascii
 
 			i += 1
 			l += 1
@@ -905,7 +905,7 @@ abstract class Text
 
 			for i in [0..length[ do
 				var char = chars[i]
-				h = (h << 5) + h + char.ascii
+				h = (h << 5) + h + char.code_point
 			end
 
 			hash_cache = h
@@ -1573,9 +1573,15 @@ end
 
 redef class Char
 
+	# Returns a sequence with the UTF-8 bytes of `self`
+	#
+	#     assert 'a'.bytes == [0x61u8]
+	#     assert 'ま'.bytes == [0xE3u8, 0x81u8, 0xBEu8]
+	fun bytes: SequenceRead[Byte] do return to_s.bytes
+
 	# Length of `self` in a UTF-8 String
 	private fun u8char_len: Int do
-		var c = self.ascii
+		var c = self.code_point
 		if c < 0x80 then return 1
 		if c <= 0x7FF then return 2
 		if c <= 0xFFFF then return 3
