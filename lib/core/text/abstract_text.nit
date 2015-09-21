@@ -1050,7 +1050,7 @@ private abstract class StringByteView
 
 	redef fun is_empty do return target.is_empty
 
-	redef fun length do return target.length
+	redef fun length do return target.bytelen
 
 	redef fun iterator do return self.iterator_from(0)
 
