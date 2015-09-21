@@ -19,18 +19,12 @@ module polygon
 
 import points_and_lines
 
-# Convex Polygon class
-class ConvexPolygon
-
+# Abstraction of a Polygon
+abstract class APolygon
 	# Vertices of this polygon
-	var points = new Array[Point[Float]]
+	var points: Array[Point[Float]]
 
-	# Init this polygon with a list of `points`
-	# REQUIRE `pts.length == 3`
-	init with_vertices(pts: Array[Point[Float]]) do
-		assert pts.length >= 3
-		points.add_all(pts)
-	end
+	init do assert points.length >= 3
 
 	# Get an array of the x coordinates of the vertices
 	private fun x_coordinates: Array[Float] do
@@ -75,7 +69,7 @@ class ConvexPolygon
 	# var p3 = new Point[Float](0.0, 5.0)
 	# var p4 = new Point[Float](5.0, 5.0)
 	# var arr = new Array[Point[Float]].with_items(p1, p2, p3, p4)
-	# var poly = new ConvexPolygon.with_vertices(arr)
+	# var poly = new ConvexPolygon(arr)
 	# poly.sort_ccw
 	# assert poly.points == [p4, p2, p1, p3]
 	# ~~~
@@ -92,7 +86,7 @@ class ConvexPolygon
 	# var p3 = new Point[Float](0.0, 5.0)
 	# var p4 = new Point[Float](5.0, 5.0)
 	# var arr = new Array[Point[Float]].with_items(p1, p2, p3, p4)
-	# var poly = new ConvexPolygon.with_vertices(arr)
+	# var poly = new ConvexPolygon(arr)
 	# poly.sort_cw
 	# assert poly.points == [p3, p1, p2, p4]
 	# ~~~
@@ -101,7 +95,7 @@ class ConvexPolygon
 		sorter.sort(points)
 	end
 
-	# Does this polygon intersects `other` ?
+	# Is `self` convex ?
 	#
 	# ~~~
 	# var p1 = new Point[Float](0.0, 0.0)
@@ -109,57 +103,7 @@ class ConvexPolygon
 	# var p3 = new Point[Float](0.0, 5.0)
 	# var p4 = new Point[Float](5.0, 5.0)
 	# var arr = new Array[Point[Float]].with_items(p1, p2, p3, p4)
-	# var poly = new ConvexPolygon.with_vertices(arr)
-	# poly.sort_ccw
-	# p1 = new Point[Float](2.5, 2.5)
-	# p2 = new Point[Float](7.5, 2.5)
-	# p3 = new Point[Float](2.5, 7.5)
-	# p4 = new Point[Float](7.5, 7.5)
-	# arr = new Array[Point[Float]].with_items(p1, p2, p3, p4)
-	# var poly2 = new ConvexPolygon.with_vertices(arr)
-	# poly2.sort_ccw
-	# assert poly.intersects(poly2)
-	# ~~~
-	fun intersects(other: ConvexPolygon): Bool do
-		assert is_convex
-
-		var axes1 = axes
-		var axes2 = other.axes
-		for axis in axes1 do
-			var project1 = project(axis)
-			var project2 = other.project(axis)
-			if not project1.overlap(project2) then return false
-		end
-		for axis in axes2 do
-			var project1 = project(axis)
-			var project2 = other.project(axis)
-			if not project1.overlap(project2) then return false
-		end
-		return true
-	end
-
-	# Generate a projection of an edge of the polygon on a given axis
-	private fun project(axis: Point[Float]): Projection do
-		var min = axis.x * points[0].x + axis.y * points[0].y
-		var max = min
-		for i in [0..points.length[ do
-			var p = axis.x * points[i].x + axis.y * points[i].y
-			if p < min then min = p
-			if p > max then max = p
-		end
-		var projection = new Projection(min, max)
-		return projection
-	end
-
-	# Is this polygon convex ?
-	#
-	# ~~~
-	# var p1 = new Point[Float](0.0, 0.0)
-	# var p2 = new Point[Float](5.0, 0.0)
-	# var p3 = new Point[Float](0.0, 5.0)
-	# var p4 = new Point[Float](5.0, 5.0)
-	# var arr = new Array[Point[Float]].with_items(p1, p2, p3, p4)
-	# var poly = new ConvexPolygon.with_vertices(arr)
+	# var poly = new ConvexPolygon(arr)
 	# poly.sort_ccw
 	# assert poly.is_convex
 	# ~~~
@@ -177,8 +121,85 @@ class ConvexPolygon
 		return true
 	end
 
-	# Check if `p` is in the polygon
+	# Generate a projection of an edge of the polygon on a given axis
+	private fun project(axis: Point[Float]): Projection do
+		var min = axis.x * points[0].x + axis.y * points[0].y
+		var max = min
+		for i in [0..points.length[ do
+			var p = axis.x * points[i].x + axis.y * points[i].y
+			if p < min then min = p
+			if p > max then max = p
+		end
+		var projection = new Projection(min, max)
+		return projection
+	end
+
+	# Remove  `p` from the vertices, keeping at least 3 vertices
+	fun delete_vertex(p: Point[Float]) do
+		assert points.length > 3
+		points.remove(p)
+	end
+
+	# Does `self` intersects with `other`
+	fun intersects(other: APolygon): Bool is abstract
+
+	# Is `p` contained in `self` ?
+	fun contain(p: Point[Float]): Bool is abstract
+
+	# Add a vertex to `self`
+	fun add_vertex(p: Point[Float]): Bool do
+		points.add(p)
+		return true
+	end
+end
+
+# A simple polygon
+class Polygon
+	super APolygon
+	# TODO: implement algorithms for concave polygons ?
+end
+
+# Convex Polygon class
+class ConvexPolygon
+	super APolygon
+
+	# Does this polygon intersects `other` ?
 	#
+	# ~~~
+	# var p1 = new Point[Float](0.0, 0.0)
+	# var p2 = new Point[Float](5.0, 0.0)
+	# var p3 = new Point[Float](0.0, 5.0)
+	# var p4 = new Point[Float](5.0, 5.0)
+	# var arr = new Array[Point[Float]].with_items(p1, p2, p3, p4)
+	# var poly = new ConvexPolygon(arr)
+	# poly.sort_ccw
+	# p1 = new Point[Float](2.5, 2.5)
+	# p2 = new Point[Float](7.5, 2.5)
+	# p3 = new Point[Float](2.5, 7.5)
+	# p4 = new Point[Float](7.5, 7.5)
+	# arr = new Array[Point[Float]].with_items(p1, p2, p3, p4)
+	# var poly2 = new ConvexPolygon(arr)
+	# poly2.sort_ccw
+	# assert poly.intersects(poly2)
+	# ~~~
+	redef fun intersects(other) do
+		assert is_convex
+
+		var axes1 = axes
+		var axes2 = other.axes
+		for axis in axes1 do
+			var project1 = project(axis)
+			var project2 = other.project(axis)
+			if not project1.overlap(project2) then return false
+		end
+		for axis in axes2 do
+			var project1 = project(axis)
+			var project2 = other.project(axis)
+			if not project1.overlap(project2) then return false
+		end
+		return true
+	end
+
 	# ~~~
 	# var p1 = new Point[Float](0.0, 0.0)
 	# var p2 = new Point[Float](5.0, 0.0)
@@ -186,11 +207,11 @@ class ConvexPolygon
 	# var p4 = new Point[Float](5.0, 5.0)
 	# var p5 = new Point[Float](2.5, 2.5)
 	# var arr = new Array[Point[Float]].with_items(p1, p2, p3, p4)
-	# var poly = new ConvexPolygon.with_vertices(arr)
+	# var poly = new ConvexPolygon(arr)
 	# poly.sort_ccw
 	# assert poly.contain(p5)
 	# ~~~
-	fun contain(p : Point[Float]): Bool do
+	redef fun contain(p) do
 		var prev = points[points.length - 1]
 		var curr = p
 		var next = points[0]
@@ -212,7 +233,7 @@ class ConvexPolygon
 	# var p3 = new Point[Float](0.0, 5.0)
 	# var p4 = new Point[Float](5.0, 5.0)
 	# var arr = new Array[Point[Float]].with_items(p1, p2, p3, p4)
-	# var poly = new ConvexPolygon.with_vertices(arr)
+	# var poly = new ConvexPolygon(arr)
 	# poly.sort_ccw
 	# assert poly.is_ccw
 	# ~~~
@@ -230,12 +251,7 @@ class ConvexPolygon
 		return not turn_left(prev, points[min_index], next)
 	end
 
-	# Remove  `p` from the vertices, keeping at least 3 vertices
-	fun delete_vertex(p: Point[Float]) do
-		if points.length > 3 then
-			points.remove(p)
-		end
-	end
+
 
 	# Add a vertex to the polygon
 	#
@@ -245,15 +261,15 @@ class ConvexPolygon
 	# var p3 = new Point[Float](0.0, 5.0)
 	# var p4 = new Point[Float](5.0, 5.0)
 	# var arr = new Array[Point[Float]].with_items(p1, p2, p3, p4)
-	# var poly = new ConvexPolygon.with_vertices(arr)
+	# var poly = new ConvexPolygon(arr)
 	# var p5 = new Point[Float](2.5, 7.5)
 	# assert poly.add_vertex(p5)
 	# ~~~
-	fun add_vertex(p: Point[Float]): Bool do
+	redef fun add_vertex(p) do
 		assert points.length >= 3
 		var temp_list = points.clone
 		temp_list.add(p)
-		var temp_polygon = new ConvexPolygon.with_vertices(temp_list)
+		var temp_polygon = new ConvexPolygon(temp_list)
 		temp_polygon.sort_ccw
 		if temp_polygon.is_convex then
 			points = temp_polygon.points
@@ -269,9 +285,7 @@ private class Projection
 	var min: Float is writable
 	var max: Float is writable
 
-	fun overlap(other: Projection): Bool do
-		return not (min > other.max or other.min > max)
-	end
+	fun overlap(other: Projection): Bool do return not (min > other.max or other.min > max)
 end
 
 private class PointXCompare
@@ -279,7 +293,7 @@ private class PointXCompare
 
 	redef type COMPARED: Point[Float]
 
-	redef fun compare(a,b : COMPARED): Int do
+	redef fun compare(a,b) do
 		if a.x == b.x then
 			if a.y == b.y then return 0
 			if a.y > b.y then return - 1
@@ -317,15 +331,17 @@ private abstract class PolygonSorter
 	end
 end
 
+#TODO: CounterClockWise and ClockWise sorts are broken in some cases of concave polygons
+
 # Sort the vertices of a polygon in counter clockwise order
 private class CounterClockWiseSort
 	super PolygonSorter
 
-	redef fun compare(a,b: COMPARED): Int do
+	redef fun compare(a,b) do
 		if a.x == b.x and a.y == b.y then return 0
 		if a.x - center.x >= 0.0 and b.x - center.x < 0.0 then return -1
 		if a.x - center.x < 0.0 and b.x - center.x >= 0.0 then return 1
-		if a.x - center.x == 0.0 and b.x - center.x == 0 then
+		if a.x - center.x == 0.0 and b.x - center.x == 0.0 then
 			if a.y - center.y >= 0.0 or b.y - center.y >= 0.0 then
 				if a.y > b.y then return -1
 				return 1
@@ -349,7 +365,7 @@ end
 private class ClockWiseSort
 	super PolygonSorter
 
-	redef fun compare(a,b: COMPARED): Int do
+	redef fun compare(a,b) do
 		if a.x == b.x and a.y == b.y then return 0
 		if a.x - center.x >= 0.0 and b.x - center.x < 0.0 then return 1
 		if a.x - center.x < 0.0 and b.x - center.x >= 0.0 then return -1
@@ -372,7 +388,6 @@ private class ClockWiseSort
 		return -1
 	end
 end
-
 
 # Get the convex hull of the set of `points`
 #
@@ -410,7 +425,7 @@ fun convex_hull(points: Array[Point[Float]]): ConvexPolygon do
 	pl1.remove_at(pl1.length - 1)
 	pl2.remove_at(pl2.length -1)
 	pl2.add_all(pl1)
-	return new ConvexPolygon.with_vertices(pl2)
+	return new ConvexPolygon(pl2)
 end
 
 # Is the angle between [p1,p2] and [p2,p3] going left (counter clockwise) or right (clockwise) ?
@@ -423,4 +438,50 @@ end
 # ~~~
 fun turn_left(p1, p2, p3: Point[Float]): Bool do
 	return ((p2.x - p1.x) * (p3.y - p2.y) - (p3.x - p2.x) * (p2.y - p1.y)) > 0.0
+end
+
+# Split a polygon into triangles
+# Useful for converting a concave polygon into multiple convex ones
+fun triangulate(pts: Array[Point[Float]], results: Array[ConvexPolygon]) do
+	var poly = new Polygon(pts)
+	poly.sort_ccw
+	pts = poly.points
+	recursive_triangulate(pts, results)
+end
+
+private fun recursive_triangulate(pts: Array[Point[Float]], results: Array[ConvexPolygon]) do
+	if pts.length == 3 then
+		results.add(new ConvexPolygon(pts))
+		return
+	end
+	var prev = pts[pts.length - 1]
+	var curr = pts[0]
+	var next = pts[1]
+	for i in [1..pts.length[ do
+		if turn_left(prev, curr, next) then
+			prev = pts[i-1]
+			curr = next
+			if i+1 == pts.length then next = pts[pts.length - 1] else next = pts[i+1]
+			continue
+		end
+		var contains = false
+		var triangle = new ConvexPolygon(new Array[Point[Float]].with_items(prev, curr, next))
+		for p in pts do
+			if p != prev and p != curr and p != next then
+				if triangle.contain(p) then
+					contains = true
+					break
+				end
+			end
+		end
+		if not contains then
+			results.add(triangle)
+			pts.remove(curr)
+			recursive_triangulate(pts, results)
+			break
+		end
+		prev = pts[i-1]
+		curr = next
+		if i+1 == pts.length then next = pts[pts.length - 1] else next = pts[i+1]
+	end
 end
