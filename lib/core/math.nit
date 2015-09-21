@@ -333,6 +333,45 @@ redef class Float
 	# assert -0.5.lerp(0.0, 128.0) == -64.0
 	# ~~~
 	fun lerp(a, b: Float): Float do return (1.0 - self) * a + self * b
+
+	# Quadratic Bézier interpolation between `a` and `b` with an `handle` using `self` as weight
+	#
+	# ~~~
+	# assert  0.00.qerp(0.0, 32.0, 128.0) == 0.0
+	# assert  0.25.qerp(0.0, 32.0, 128.0) == 20.0
+	# assert  0.50.qerp(0.0, 32.0, 128.0) == 48.0
+	# assert  0.75.qerp(0.0, 32.0, 128.0) == 84.0
+	# assert  1.00.qerp(0.0, 32.0, 128.0) == 128.0
+	# ~~~
+	fun qerp(a, handle, b: Float): Float do
+		var p = self
+		var i = 1.0 - p
+		var r =     i*i * a +
+			2.0*i*p * handle +
+			    p*p * b
+		return r
+	end
+
+	# Cubic Bézier interpolation between `a` and `b` with two handles using `self` as weight
+	#
+	# The Cubic Bézier interpolation is the most common one and use two control points.
+	#
+	# ~~~
+	# assert  0.00.cerp(0.0, 32.0, 128.0, 64.0) == 0.0
+	# assert  0.25.cerp(0.0, 32.0, 128.0, 64.0) == 32.5
+	# assert  0.50.cerp(0.0, 32.0, 128.0, 64.0) == 68.0
+	# assert  0.75.cerp(0.0, 32.0, 128.0, 64.0) == 85.5
+	# assert  1.00.cerp(0.0, 32.0, 128.0, 64.0) == 64.0
+	# ~~~
+	fun cerp(a, a_handle, b_handle, b: Float): Float do
+		var p = self
+		var i = 1.0 - p
+		var r =     i*i*i  * a +
+			3.0*i*i*p * a_handle +
+			3.0*i*p*p * b_handle +
+			    p*p*p * b
+		return r
+	end
 end
 
 # Positive float infinite (IEEE 754)
