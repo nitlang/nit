@@ -998,10 +998,13 @@ class SeparateCompiler
 			# use some Huffman coding.
 			if t.name == "Int" then
 				class_info[1] = t
+				t.mclass_type.tag_value = 1
 			else if t.name == "Char" then
 				class_info[2] = t
+				t.mclass_type.tag_value = 2
 			else if t.name == "Bool" then
 				class_info[3] = t
+				t.mclass_type.tag_value = 3
 			else
 				continue
 			end
@@ -1858,7 +1861,7 @@ class SeparateCompilerVisitor
 			else
 				var mtype1 = value1.mtype.as(MClassType)
 				self.require_declaration("class_{mtype1.c_name}")
-				self.add("{res} = ({value2} != NULL) && ({value2}->class == &class_{mtype1.c_name}); /* is_same_type_test */")
+				self.add("{res} = ({value2} != NULL) && ({class_info(value2)} == &class_{mtype1.c_name}); /* is_same_type_test */")
 			end
 		else
 			self.add("{res} = ({value1} == {value2}) || ({value1} != NULL && {value2} != NULL && {class_info(value1)} == {class_info(value2)}); /* is_same_type_test */")
@@ -1891,20 +1894,58 @@ class SeparateCompilerVisitor
 			value2 = tmp
 		end
 		if value1.mtype.is_c_primitive then
-			if value2.mtype == value1.mtype then
+			var t1 = value1.mtype
+			assert t1 == value1.mcasttype
+
+			# Fast case: same C type.
+			if value2.mtype == t1 then
+				# Same exact C primitive representation.
 				self.add("{res} = {value1} == {value2};")
-			else if value2.mtype.is_c_primitive then
-				self.add("{res} = 0; /* incompatible types {value1.mtype} vs. {value2.mtype}*/")
-			else if value1.mtype.is_tagged then
-				self.add("{res} = ({value2} != NULL) && ({self.autobox(value2, value1.mtype)} == {value1});")
-			else
-				var mtype1 = value1.mtype.as(MClassType)
-				self.require_declaration("class_{mtype1.c_name}")
-				self.add("{res} = ({value2} != NULL) && ({value2}->class == &class_{mtype1.c_name});")
-				self.add("if ({res}) \{")
-				self.add("{res} = ({self.autobox(value2, value1.mtype)} == {value1});")
-				self.add("\}")
+				return res
 			end
+
+			# Complex case: value2 has a different representation
+			# Thus, it should be checked if `value2` is type-compatible with `value1`
+			# This compatibility is done statically if possible and dynamically else
+
+			# Conjunction (ands) of dynamic tests according to the static knowledge
+			var tests = new Array[String]
+
+			var t2 = value2.mcasttype
+			if t2 isa MNullableType then
+				# The destination type cannot be null
+				tests.add("({value2} != NULL)")
+				t2 = t2.mtype
+			else if t2 isa MNullType then
+				# `value2` is known to be null, thus incompatible with a primitive
+				self.add("{res} = 0; /* incompatible types {t1} vs. {t2}*/")
+				return res
+			end
+
+			if t2 == t1 then
+				# Same type but different representation.
+			else if t2.is_c_primitive then
+				# Type of `value2` is a different primitive type, thus incompatible
+				self.add("{res} = 0; /* incompatible types {t1} vs. {t2}*/")
+				return res
+			else if t1.is_tagged then
+				# To be equal, `value2` should also be correctly tagged
+				tests.add("({extract_tag(value2)} == {t1.tag_value})")
+			else
+				# To be equal, `value2` should also be boxed with the same class
+				self.require_declaration("class_{t1.c_name}")
+				tests.add "({class_info(value2)} == &class_{t1.c_name})"
+			end
+
+			# Compare the unboxed `value2` with `value1`
+			if tests.not_empty then
+				self.add "if ({tests.join(" && ")}) \{"
+			end
+			self.add "{res} = {self.autobox(value2, t1)} == {value1};"
+			if tests.not_empty then
+				self.add "\} else {res} = 0;"
+			end
+
 			return res
 		end
 		var maybe_null = true
@@ -2327,6 +2368,12 @@ redef class MType
 	# Are values of `self` tagged?
 	# If false, it means that the type is not primitive, or is boxed.
 	var is_tagged = false
+
+	# The tag value of the type
+	#
+	# ENSURE `is_tagged == (tag_value > 0)`
+	# ENSURE `not is_tagged == (tag_value == 0)`
+	var tag_value = 0
 end
 
 redef class MEntity
