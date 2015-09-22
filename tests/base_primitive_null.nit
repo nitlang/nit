@@ -49,7 +49,7 @@ class A
 		o = _c
 		(o == null).output
 		(not o == '\0').output
-		#alt3#_c.ascii.output
+		#alt3#_c.code_point.output
 	end
 end
 

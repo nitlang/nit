@@ -47,7 +47,7 @@ end
 private class DFAState0
 	super DFAState
 	redef fun trans(char) do
-		var c = char.ascii
+		var c = char.code_point
 		if c <= 8 then return null
 		if c <= 10 then return dfastate_1
 		if c <= 31 then return null
@@ -84,7 +84,7 @@ private class DFAState1
 		return null
 	end
 	redef fun trans(char) do
-		var c = char.ascii
+		var c = char.code_point
 		if c <= 8 then return null
 		if c <= 10 then return dfastate_1
 		if c <= 31 then return null
@@ -95,7 +95,7 @@ end
 private class DFAState2
 	super DFAState
 	redef fun trans(char) do
-		var c = char.ascii
+		var c = char.code_point
 		if c <= 33 then return dfastate_2
 		if c <= 34 then return dfastate_29
 		if c <= 91 then return dfastate_2
@@ -116,7 +116,7 @@ end
 private class DFAState4
 	super DFAState
 	redef fun trans(char) do
-		var c = char.ascii
+		var c = char.code_point
 		if c <= 47 then return null
 		if c <= 57 then return dfastate_5
 		return null
@@ -132,7 +132,7 @@ private class DFAState5
 		return t
 	end
 	redef fun trans(char) do
-		var c = char.ascii
+		var c = char.code_point
 		if c <= 45 then return null
 		if c <= 46 then return dfastate_24
 		if c <= 47 then return null
@@ -177,7 +177,7 @@ end
 private class DFAState9
 	super DFAState
 	redef fun trans(char) do
-		var c = char.ascii
+		var c = char.code_point
 		if c <= 96 then return null
 		if c <= 97 then return dfastate_20
 		return null
@@ -186,7 +186,7 @@ end
 private class DFAState10
 	super DFAState
 	redef fun trans(char) do
-		var c = char.ascii
+		var c = char.code_point
 		if c <= 116 then return null
 		if c <= 117 then return dfastate_17
 		return null
@@ -195,7 +195,7 @@ end
 private class DFAState11
 	super DFAState
 	redef fun trans(char) do
-		var c = char.ascii
+		var c = char.code_point
 		if c <= 113 then return null
 		if c <= 114 then return dfastate_14
 		return null
@@ -224,7 +224,7 @@ end
 private class DFAState14
 	super DFAState
 	redef fun trans(char) do
-		var c = char.ascii
+		var c = char.code_point
 		if c <= 116 then return null
 		if c <= 117 then return dfastate_15
 		return null
@@ -233,7 +233,7 @@ end
 private class DFAState15
 	super DFAState
 	redef fun trans(char) do
-		var c = char.ascii
+		var c = char.code_point
 		if c <= 100 then return null
 		if c <= 101 then return dfastate_16
 		return null
@@ -252,7 +252,7 @@ end
 private class DFAState17
 	super DFAState
 	redef fun trans(char) do
-		var c = char.ascii
+		var c = char.code_point
 		if c <= 107 then return null
 		if c <= 108 then return dfastate_18
 		return null
@@ -261,7 +261,7 @@ end
 private class DFAState18
 	super DFAState
 	redef fun trans(char) do
-		var c = char.ascii
+		var c = char.code_point
 		if c <= 107 then return null
 		if c <= 108 then return dfastate_19
 		return null
@@ -280,7 +280,7 @@ end
 private class DFAState20
 	super DFAState
 	redef fun trans(char) do
-		var c = char.ascii
+		var c = char.code_point
 		if c <= 107 then return null
 		if c <= 108 then return dfastate_21
 		return null
@@ -289,7 +289,7 @@ end
 private class DFAState21
 	super DFAState
 	redef fun trans(char) do
-		var c = char.ascii
+		var c = char.code_point
 		if c <= 114 then return null
 		if c <= 115 then return dfastate_22
 		return null
@@ -298,7 +298,7 @@ end
 private class DFAState22
 	super DFAState
 	redef fun trans(char) do
-		var c = char.ascii
+		var c = char.code_point
 		if c <= 100 then return null
 		if c <= 101 then return dfastate_23
 		return null
@@ -317,7 +317,7 @@ end
 private class DFAState24
 	super DFAState
 	redef fun trans(char) do
-		var c = char.ascii
+		var c = char.code_point
 		if c <= 47 then return null
 		if c <= 57 then return dfastate_28
 		return null
@@ -326,7 +326,7 @@ end
 private class DFAState25
 	super DFAState
 	redef fun trans(char) do
-		var c = char.ascii
+		var c = char.code_point
 		if c <= 42 then return null
 		if c <= 43 then return dfastate_26
 		if c <= 44 then return null
@@ -339,7 +339,7 @@ end
 private class DFAState26
 	super DFAState
 	redef fun trans(char) do
-		var c = char.ascii
+		var c = char.code_point
 		if c <= 47 then return null
 		if c <= 57 then return dfastate_27
 		return null
@@ -355,7 +355,7 @@ private class DFAState27
 		return t
 	end
 	redef fun trans(char) do
-		var c = char.ascii
+		var c = char.code_point
 		if c <= 47 then return null
 		if c <= 57 then return dfastate_27
 		return null
@@ -371,7 +371,7 @@ private class DFAState28
 		return t
 	end
 	redef fun trans(char) do
-		var c = char.ascii
+		var c = char.code_point
 		if c <= 47 then return null
 		if c <= 57 then return dfastate_28
 		if c <= 68 then return null
@@ -394,7 +394,7 @@ end
 private class DFAState30
 	super DFAState
 	redef fun trans(char) do
-		var c = char.ascii
+		var c = char.code_point
 		if c <= 33 then return null
 		if c <= 34 then return dfastate_2
 		if c <= 46 then return null
@@ -418,7 +418,7 @@ end
 private class DFAState31
 	super DFAState
 	redef fun trans(char) do
-		var c = char.ascii
+		var c = char.code_point
 		if c <= 47 then return null
 		if c <= 57 then return dfastate_32
 		if c <= 64 then return null
@@ -431,7 +431,7 @@ end
 private class DFAState32
 	super DFAState
 	redef fun trans(char) do
-		var c = char.ascii
+		var c = char.code_point
 		if c <= 47 then return null
 		if c <= 57 then return dfastate_33
 		if c <= 64 then return null
@@ -444,7 +444,7 @@ end
 private class DFAState33
 	super DFAState
 	redef fun trans(char) do
-		var c = char.ascii
+		var c = char.code_point
 		if c <= 47 then return null
 		if c <= 57 then return dfastate_34
 		if c <= 64 then return null
@@ -457,7 +457,7 @@ end
 private class DFAState34
 	super DFAState
 	redef fun trans(char) do
-		var c = char.ascii
+		var c = char.code_point
 		if c <= 47 then return null
 		if c <= 57 then return dfastate_2
 		if c <= 64 then return null

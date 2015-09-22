@@ -468,7 +468,7 @@ class RopeBuffer
 			rp = 0
 		end
 		# TODO: Fix when supporting UTF-8
-		ns[rp] = c.ascii.to_b
+		ns[rp] = c.ascii
 		rp += 1
 		_bytelen += 1
 		rpos = rp

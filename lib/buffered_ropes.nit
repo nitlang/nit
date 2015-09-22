@@ -109,7 +109,7 @@ private class Leaf
 
 	redef fun substrings do return new LeafSubstrings(self)
 
-	redef fun [](i) do return buf[i].to_i.ascii
+	redef fun [](i) do return buf[i].to_i.code_point
 
 	init do
 		bns = buf.ns

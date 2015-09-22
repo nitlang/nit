@@ -19,7 +19,7 @@ fun encrypt(src, key: String): String do
 			continue
 		end
 
-		out.add(((c.ascii + key[j].ascii - 2 * 'A'.ascii) % 26 + 'A'.ascii).ascii)
+		out.add(((c.ascii + key[j].ascii - 2u8 * 'A'.ascii) % 26u8 + 'A'.ascii).ascii)
 		j = (j + 1) % key.length
 	end
 
@@ -39,7 +39,7 @@ fun decrypt(src, key: String): String do
 			continue
 		end
 
-		out.add(((c.ascii - key[j].ascii + 26) % 26 + 'A'.ascii).ascii)
+		out.add(((c.ascii - key[j].ascii + 26u8) % 26u8 + 'A'.ascii).ascii)
 		j = (j + 1) % key.length
 	end
 

@@ -442,10 +442,10 @@ class HD44780
 				#write(true, "C0".to_hex)
 				# instead we use the following which may not be portable
 
-				for s in [count..40[ do write(false, ' '.ascii)
+				for s in [count..40[ do write(false, ' '.code_point)
 				count = 0
 			else
-				write(false, c.ascii)
+				write(false, c.code_point)
 				count += 1
 			end
 		end

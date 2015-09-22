@@ -84,7 +84,7 @@ class Message
 	# A colored version of the message including the original source line
 	fun to_color_string: String
 	do
-		var esc = 27.ascii
+		var esc = 27.code_point
 		#var red = "{esc}[0;31m"
 		#var bred = "{esc}[1;31m"
 		#var green = "{esc}[0;32m"

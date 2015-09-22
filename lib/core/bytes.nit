@@ -32,18 +32,18 @@ redef class Byte
 	#
 	# ~~~nit
 	# intrude import core::bytes
-	# assert not '/'.ascii.to_b.is_valid_hexdigit
-	# assert '0'.ascii.to_b.is_valid_hexdigit
-	# assert '9'.ascii.to_b.is_valid_hexdigit
-	# assert not ':'.ascii.to_b.is_valid_hexdigit
-	# assert not '@'.ascii.to_b.is_valid_hexdigit
-	# assert 'A'.ascii.to_b.is_valid_hexdigit
-	# assert 'F'.ascii.to_b.is_valid_hexdigit
-	# assert not 'G'.ascii.to_b.is_valid_hexdigit
-	# assert not '`'.ascii.to_b.is_valid_hexdigit
-	# assert 'a'.ascii.to_b.is_valid_hexdigit
-	# assert 'f'.ascii.to_b.is_valid_hexdigit
-	# assert not 'g'.ascii.to_b.is_valid_hexdigit
+	# assert not '/'.ascii.is_valid_hexdigit
+	# assert '0'.ascii.is_valid_hexdigit
+	# assert '9'.ascii.is_valid_hexdigit
+	# assert not ':'.ascii.is_valid_hexdigit
+	# assert not '@'.ascii.is_valid_hexdigit
+	# assert 'A'.ascii.is_valid_hexdigit
+	# assert 'F'.ascii.is_valid_hexdigit
+	# assert not 'G'.ascii.is_valid_hexdigit
+	# assert not '`'.ascii.is_valid_hexdigit
+	# assert 'a'.ascii.is_valid_hexdigit
+	# assert 'f'.ascii.is_valid_hexdigit
+	# assert not 'g'.ascii.is_valid_hexdigit
 	# ~~~
 	private fun is_valid_hexdigit: Bool do
 		return (self >= 0x30u8 and self <= 0x39u8) or

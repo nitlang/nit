@@ -16,7 +16,7 @@ import math
 
 redef class Byte
 	# Gives the length of the UTF-8 char starting with `self`
-	private fun u8len: Int do
+	fun u8len: Int do
 		if self & 0b1000_0000u8 == 0u8 then
 			return 1
 		else if self & 0b1110_0000u8 == 0b1100_0000u8 then

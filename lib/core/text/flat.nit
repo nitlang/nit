@@ -1035,7 +1035,7 @@ redef class NativeString
 			end
 			var ok_c: Bool
 			var c = char_at(pos)
-			var cp = c.ascii
+			var cp = c.code_point
 			if nxst == 1 then
 				ok_c = cp >= 0 and cp <= 0x7F
 			else if nxst == 2 then

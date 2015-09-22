@@ -714,7 +714,7 @@ private class DFAGenerator
 			else
 				add("\tredef fun trans(char) do\n")
 
-				add("\t\tvar c = char.ascii\n")
+				add("\t\tvar c = char.code_point\n")
 				var haslast = false
 				var last = -1
 				for sym, next in trans do
@@ -791,14 +791,14 @@ class TSymbol
 		if f <= 32 then
 			res = "#{f}"
 		else
-			res = f.ascii.to_s
+			res = f.code_point.to_s
 		end
 		var l = last
 		if f == l then return res
 		res += " .. "
 		if l == null then return res
 		if l <= 32 or l >= 127 then return res + "#{l}"
-		return res + l.ascii.to_s
+		return res + l.code_point.to_s
 	end
 end
 

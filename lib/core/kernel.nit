@@ -651,6 +651,11 @@ universal Byte
 	#     assert 5u8 >> 1    == 2u8
 	fun >>(i: Int): Byte `{ return self >> i; `}
 
+	# Returns the character equivalent of `self`
+	#
+	# REQUIRE: `self <= 127u8`
+	fun ascii: Char `{ return (uint32_t)self; `}
+
 	redef fun to_i is intern
 	redef fun to_f is intern
 	redef fun to_b do return self
@@ -797,11 +802,12 @@ universal Int
 		end
 	end
 
-	# The character whose ASCII value is `self`.
+	# The character which code point (unicode-wise) is `self`
 	#
-	#     assert 65.ascii   == 'A'
-	#     assert 10.ascii   == '\n'
-	fun ascii: Char is intern
+	#     assert 65.code_point == 'A'
+	#     assert 10.code_point == '\n'
+	#     assert 0x220B.code_point == '∋'
+	fun code_point: Char `{ return (uint32_t)self; `}
 
 	# Number of digits of an integer in base `b` (plus one if negative)
 	#
@@ -861,9 +867,9 @@ universal Int
 	do
 		assert self >= 0 and self <= 36 # TODO plan for this
 		if self < 10 then
-			return (self + '0'.ascii).ascii
+			return (self + '0'.code_point).code_point
 		else
-			return (self + ('a'.ascii - 10)).ascii
+			return (self - 10 + 'a'.code_point).code_point
 		end
 	end
 
@@ -905,7 +911,7 @@ universal Char
 			printf("%c", self);
 		}
 	`}
-	redef fun hash do return ascii
+	redef fun hash do return code_point
 	redef fun ==(o) is intern
 	redef fun !=(o) is intern
 
@@ -919,7 +925,7 @@ universal Char
 
 	redef fun distance(c)
 	do
-		var d = self.ascii - c.ascii
+		var d = self.code_point - c.code_point
 		if d >= 0 then
 			return d
 		else
@@ -936,17 +942,32 @@ universal Char
 		if self == '-' then
 			return -1
 		else if is_digit then
-			return self.ascii - '0'.ascii
+			return self.code_point - '0'.code_point
 		else
-			return self.to_lower.ascii - 'a'.ascii + 10
+			return self.to_lower.code_point - 'a'.code_point + 10
 		end
 	end
 
-	# the ascii value of self
+	# The ascii value of `self`
 	#
-	#     assert 'a'.ascii    == 97
-	#     assert '\n'.ascii   == 10
-	fun ascii: Int is intern
+	#     assert 'a'.ascii    == 97u8
+	#     assert '\n'.ascii   == 10u8
+	#
+	# REQUIRE: `is_ascii`
+	fun ascii: Byte do return code_point.to_b
+
+	# The unicode code point value of `self`
+	#
+	#     assert 'A'.code_point == 65
+	#     assert '\n'.code_point == 10
+	#     assert '∋'.code_point == 0x220B
+	fun code_point: Int `{ return (long)self; `}
+
+	# Is `self` an ASCII character ?
+	#
+	#     assert 'x'.is_ascii
+	#     assert not 'ま'.is_ascii
+	fun is_ascii: Bool do return code_point <= 127
 
 	# Return the lower case version of self.
 	# If self is not a letter, then return self
@@ -957,7 +978,7 @@ universal Char
 	fun to_lower: Char
 	do
 		if is_upper then
-			return (ascii + ('a'.distance('A'))).ascii
+			return (code_point + ('a'.distance('A'))).code_point
 		else
 			return self
 		end
@@ -972,7 +993,7 @@ universal Char
 	fun to_upper: Char
 	do
 		if is_lower then
-			return (ascii - ('a'.distance('A'))).ascii
+			return (code_point - ('a'.distance('A'))).code_point
 		else
 			return self
 		end
@@ -1033,7 +1054,7 @@ universal Char
 	#     assert '\t'.is_whitespace == true
 	fun is_whitespace: Bool
 	do
-		var i = ascii
+		var i = code_point
 		return i <= 0x20 or i == 0x7F
 	end
 end

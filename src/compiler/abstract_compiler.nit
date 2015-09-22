@@ -1552,10 +1552,10 @@ abstract class AbstractCompilerVisitor
 	do
 		var t = mmodule.char_type
 
-		if value.ascii < 128 then
+		if value.code_point < 128 then
 			return new RuntimeVariable("'{value.to_s.escape_to_c}'", t, t)
 		else
-			return new RuntimeVariable("{value.ascii}", t, t)
+			return new RuntimeVariable("{value.code_point}", t, t)
 		end
 	end
 
@@ -2243,9 +2243,6 @@ redef class AMethPropdef
 			else if pname == "to_b" then
 				v.ret(v.new_expr("(unsigned char){arguments[0]}", ret.as(not null)))
 				return true
-			else if pname == "ascii" then
-				v.ret(v.new_expr("(uint32_t){arguments[0]}", ret.as(not null)))
-				return true
 			end
 		else if cname == "Char" then
 			if pname == "object_id" then
@@ -2278,9 +2275,6 @@ redef class AMethPropdef
 				return true
 			else if pname == "to_i" then
 				v.ret(v.new_expr("{arguments[0]}-'0'", ret.as(not null)))
-				return true
-			else if pname == "ascii" then
-				v.ret(v.new_expr("(long){arguments[0]}", ret.as(not null)))
 				return true
 			end
 		else if cname == "Byte" then
@@ -2350,9 +2344,6 @@ redef class AMethPropdef
 				return true
 			else if pname == "to_u32" then
 				v.ret(v.new_expr("(uint32_t){arguments[0]}", ret.as(not null)))
-				return true
-			else if pname == "ascii" then
-				v.ret(v.new_expr("{arguments[0]}", ret.as(not null)))
 				return true
 			end
 		else if cname == "Bool" then
@@ -2539,9 +2530,6 @@ redef class AMethPropdef
 			else if pname == "to_f" then
 				v.ret(v.new_expr("(double){arguments[0]}", ret.as(not null)))
 				return true
-			else if pname == "ascii" then
-				v.ret(v.new_expr("{arguments[0]}", ret.as(not null)))
-				return true
 			else if pname == "&" then
 				v.ret(v.new_expr("{arguments[0]} & {arguments[1]}", ret.as(not null)))
 				return true
@@ -2641,9 +2629,6 @@ redef class AMethPropdef
 			else if pname == "unary ~" then
 				v.ret(v.new_expr("~{arguments[0]}", ret.as(not null)))
 				return true
-			else if pname == "ascii" then
-				v.ret(v.new_expr("{arguments[0]}", ret.as(not null)))
-				return true
 			end
 		else if cname == "UInt16" then
 			if pname == "output" then
@@ -2730,9 +2715,6 @@ redef class AMethPropdef
 				return true
 			else if pname == "unary ~" then
 				v.ret(v.new_expr("~{arguments[0]}", ret.as(not null)))
-				return true
-			else if pname == "ascii" then
-				v.ret(v.new_expr("{arguments[0]}", ret.as(not null)))
 				return true
 			end
 		else if cname == "Int32" then
@@ -2821,9 +2803,6 @@ redef class AMethPropdef
 			else if pname == "unary ~" then
 				v.ret(v.new_expr("~{arguments[0]}", ret.as(not null)))
 				return true
-			else if pname == "ascii" then
-				v.ret(v.new_expr("{arguments[0]}", ret.as(not null)))
-				return true
 			end
 		else if cname == "UInt32" then
 			if pname == "output" then
@@ -2910,9 +2889,6 @@ redef class AMethPropdef
 				return true
 			else if pname == "unary ~" then
 				v.ret(v.new_expr("~{arguments[0]}", ret.as(not null)))
-				return true
-			else if pname == "ascii" then
-				v.ret(v.new_expr("{arguments[0]}", ret.as(not null)))
 				return true
 			end
 		end
