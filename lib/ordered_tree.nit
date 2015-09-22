@@ -83,6 +83,12 @@ class OrderedTree[E: Object]
 		end
 	end
 
+	# Append all nodes `es` as children of `p`.
+	fun add_all(p: nullable E, es: Collection[E])
+	do
+		for e in es do add(p, e)
+	end
+
 	# print the full tree on `o`
 	# Write a ASCII-style tree and use the `display` method to label elements
 	redef fun write_to(stream: Writer)
@@ -130,16 +136,11 @@ class OrderedTree[E: Object]
 	# Order is preserved
 	#
 	#     var tree = new OrderedTree[Int]
-	#     tree.add(null, 1)
-	#     tree.add(1, 11)
-	#     tree.add(11, 111)
-	#     tree.add(11, 112)
-	#     tree.add(1, 12)
-	#     tree.add(12, 121)
-	#     tree.add(12, 122)
-	#     tree.add(null, 2)
-	#     tree.add(2, 21)
-	#     tree.add(2, 22)
+	#     tree.add_all(null, [1, 2])
+	#     tree.add_all(1, [11, 12])
+	#     tree.add_all(11, [111, 112])
+	#     tree.add_all(12, [121, 122])
+	#     tree.add_all(2, [21, 22])
 	#     assert tree.to_a == [1, 11, 111, 112, 12, 121, 122, 2, 21, 22]
 	redef fun to_a: Array[E] do
 		var res = new Array[E]
@@ -165,20 +166,13 @@ class OrderedTree[E: Object]
 	redef fun first do return roots.first
 
 	#     var tree = new OrderedTree[Int]
-	#     tree.add(null, 1)
-	#     tree.add(1, 11)
-	#     tree.add(11, 111)
-	#     tree.add(11, 112)
-	#     tree.add(1, 12)
-	#     tree.add(12, 121)
-	#     tree.add(12, 122)
-	#     tree.add(null, 2)
-	#     tree.add(2, 21)
-	#     tree.add(2, 22)
+	#     tree.add_all(null, [1, 2])
+	#     tree.add_all(1, [11, 12])
+	#     tree.add_all(11, [111, 112])
+	#     tree.add_all(12, [121, 122])
+	#     tree.add_all(2, [21, 22])
 	#     var order = [1, 11, 111, 112, 12, 121, 122, 2, 21, 22]
-	#     var res = new Array[Int]
-	#     for i in tree do res.add(i)
-	#     assert res == order
+	#     assert tree.iterator.to_a == order
 	redef fun iterator do return new OrderedTreeIterator[E](self)
 end
 
