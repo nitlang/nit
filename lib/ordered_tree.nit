@@ -61,6 +61,7 @@ module ordered_tree
 class OrderedTree[E: Object]
 	super Writable
 	super Collection[E]
+	super Cloneable
 
 	# The roots of the tree (in sequence)
 	var roots = new Array[E]
@@ -174,6 +175,52 @@ class OrderedTree[E: Object]
 	#     var order = [1, 11, 111, 112, 12, 121, 122, 2, 21, 22]
 	#     assert tree.iterator.to_a == order
 	redef fun iterator do return new OrderedTreeIterator[E](self)
+
+	# Two trees are equal if they have the same nodes in the same order
+	#
+	# ~~~
+	# var t1 = new OrderedTree[Int]
+	# t1.add_all(null, [1, 2])
+	# t1.add_all(1, [11, 12])
+	#
+	# var t2 = new OrderedTree[Int]
+	# t2.add_all(null, [1, 2])
+	#
+	# assert t1 != t2
+	#
+	# t2.add_all(1, [11, 12])
+	#
+	# assert t1 == t2
+	# ~~~
+	redef fun ==(other)
+	do
+		if not other isa OrderedTree[Object] then return false
+		return roots == other.roots and sub == other.sub
+	end
+
+	redef fun hash
+	do
+		return roots.hash + sub.hash
+	end
+
+	# Shallow clone of the tree.
+	#
+	# ~~~
+	# var t = new OrderedTree[Int]
+	# t.add_all(null, [1, 2])
+	# t.add_all(1, [11, 12])
+	#
+	# assert t.clone == t
+	# ~~~
+	redef fun clone
+	do
+		var res = new OrderedTree[E]
+		res.add_all(null, roots)
+		for p, es in sub do
+			res.add_all(p, es)
+		end
+		return res
+	end
 end
 
 # An Iterator over an OrderedTree
