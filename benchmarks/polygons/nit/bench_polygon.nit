@@ -25,7 +25,7 @@ fun bench_add_vertices(n: Int) do
 	var randompoints = generate_points(n + 1)
 	var points = randompoints.clone
 	points.remove_at(points.length -1)
-	var poly = new ConvexPolygon.with_vertices(randompoints)
+	var poly = new ConvexPolygon(randompoints)
 	poly.sort_ccw
 	poly.add_vertex(randompoints.last)
 end
@@ -45,7 +45,7 @@ end
 # Bench the convexity verificatioon
 fun bench_convexity(n : Int) do
 	var randompoints = generate_points(n)
-	var poly = new ConvexPolygon.with_vertices(randompoints)
+	var poly = new ConvexPolygon(randompoints)
 	poly.sort_ccw
 	poly.is_convex
 end
@@ -54,7 +54,7 @@ end
 fun bench_contain(n : Int) do
 	srand_from(50)
 	var randompoints = generate_points(n)
-	var poly = new ConvexPolygon.with_vertices(randompoints)
+	var poly = new ConvexPolygon(randompoints)
 	poly.sort_ccw
 	var point = new Point[Float](0.0, 0.0)
 	poly.contain(point)
@@ -64,7 +64,7 @@ end
 fun bench_sorting(n : Int) do
 	var randompoints = generate_points(n)
 	randompoints.shuffle
-	var poly = new ConvexPolygon.with_vertices(randompoints)
+	var poly = new ConvexPolygon(randompoints)
 	poly.sort_ccw
 
 end
@@ -73,8 +73,8 @@ end
 fun bench_intersection(n : Int) do
 	var r1 = generate_points(n)
 	var r2 = generate_points(n)
-	var poly1 = new ConvexPolygon.with_vertices(r1)
-	var poly2 = new ConvexPolygon.with_vertices(r2)
+	var poly1 = new ConvexPolygon(r1)
+	var poly2 = new ConvexPolygon(r2)
 	poly1.sort_ccw
 	poly2.sort_ccw
 	poly1.intersects(poly2)
