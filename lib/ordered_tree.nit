@@ -70,17 +70,47 @@ class OrderedTree[E: Object]
 	# For each element, the ordered array of its direct sub-elements.
 	var sub = new HashMap[E, Array[E]]
 
+	# The parent of each element.
+	#
+	# Roots have `null` as parent.
+	private var parents = new HashMap[E, nullable E]
+
+	redef fun length do return parents.length
+
+	redef fun has(e) do return parents.has_key(e)
+
+	# The parent of the element `e`
+	#
+	# Roots have `null` as parent.
+	#
+	# ~~~
+	# var tree = new OrderedTree[Int]
+	# tree.add(1, 2)
+	# assert tree.parent(2) == 1
+	# assert tree.parent(1) == null
+	# ~~~
+	fun parent(e: E): nullable E do return parents[e]
+
 	# Add a new element `e` in the tree.
+	#
 	# `p` is the parent of `e`.
-	# if `p` is null, then `e` is a root element.
+	# If `p` is null, then `e` is a root element.
+	#
+	# If `e` is already in the tree, it is detached from its old
+	# parent and attached to the new parent `p`.
 	fun add(p: nullable E, e: E)
 	do
+		detach(e)
+		parents[e] = p
 		if p == null then
 			roots.add(e)
-		else if sub.has_key(p) then
-			sub[p].add(e)
 		else
-			sub[p] = [e]
+			if not has(p) then add(null, p)
+			if sub.has_key(p) then
+				sub[p].add(e)
+			else
+				sub[p] = [e]
+			end
 		end
 	end
 
@@ -88,6 +118,20 @@ class OrderedTree[E: Object]
 	fun add_all(p: nullable E, es: Collection[E])
 	do
 		for e in es do add(p, e)
+	end
+
+	# Temporary remove `e`.
+	#
+	# Children of `e` are left untouched in the tree.
+	# This make the tree inconstant until `e` is added back.
+	private fun detach(e: E)
+	do
+		var old_parent = parents.get_or_null(e)
+		if old_parent != null then
+			sub[old_parent].remove(e)
+		else if roots.has(e) then
+			roots.remove(e)
+		end
 	end
 
 	# print the full tree on `o`
