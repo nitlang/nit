@@ -323,7 +323,7 @@ redef class ModelBuilder
 	fun identify_file(path: String): nullable ModulePath
 	do
 		# special case for not a nit file
-		if path.file_extension != "nit" then
+		if not path.has_suffix(".nit") then
 			# search dirless files in known -I paths
 			if not path.chars.has('/') then
 				var res = search_module_in_paths(null, path, self.paths)
@@ -541,7 +541,7 @@ redef class ModelBuilder
 	# Display an error if there is a problem (IO / lexer / parser) and return null
 	fun load_module_ast(filename: String): nullable AModule
 	do
-		if filename.file_extension != "nit" then
+		if not filename.has_suffix(".nit") then
 			self.toolcontext.error(null, "Error: file `{filename}` is not a valid nit module.")
 			return null
 		end
