@@ -39,6 +39,26 @@ abstract class Stream
 
 	# close the stream
 	fun close is abstract
+
+	# Pre-work hook.
+	#
+	# Used to inform `self` that operations will start.
+	# Specific streams can use this to prepare some resources.
+	#
+	# Is automatically invoked at the beginning of `with` structures.
+	#
+	# Do nothing by default.
+	fun start do end
+
+	# Post-work hook.
+	#
+	# Used to inform `self` that the operations are over.
+	# Specific streams can use this to free some resources.
+	#
+	# Is automatically invoked at the end of `woth` structures.
+	#
+	# call `close` by default.
+	fun finish do close
 end
 
 # A `Stream` that can be read from
