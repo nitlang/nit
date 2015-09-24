@@ -534,7 +534,7 @@ redef class ModelBuilder
 
 	# Transform relative paths (starting with '../') into absolute paths
 	private fun module_absolute_path(path: String): String do
-		return getcwd.join_path(path).simplify_path
+		return path.realpath
 	end
 
 	# Try to load a module AST using a path.
