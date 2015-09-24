@@ -88,7 +88,7 @@ syn match  NITComment	"#.*" contains=NITTodo,@Spell
 " Keywords
 syn keyword NITKeyword	 abstract intern new
 syn keyword NITDefine	 private public protected intrude readable writable redef
-syn keyword NITControl   if while for assert and or in as isa once break continue return abort
+syn keyword NITControl   if while for with assert and or in as isa once break continue return abort
 syn keyword NITClass     nullable
 syn keyword NITInclude   special
 syn keyword NITTodo      FIXME NOTE TODO XXX contained
