@@ -532,10 +532,11 @@ redef class ModelBuilder
 			var fp = p/f
 			var g = get_mgroup(fp)
 			# Recursively scan for groups of the same package
-			if g != null and g.mpackage == mgroup.mpackage then
+			if g == null then
+				identify_file(fp)
+			else if g.mpackage == mgroup.mpackage then
 				scan_group(g)
 			end
-			identify_file(fp)
 		end
 	end
 
