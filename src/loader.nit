@@ -352,9 +352,11 @@ redef class ModelBuilder
 		end
 
 		# Fast track, the path is already known
-		var pn = path.basename(".nit")
+		if identified_files_by_path.has_key(path) then return identified_files_by_path[path]
 		var rp = module_absolute_path(path)
 		if identified_files_by_path.has_key(rp) then return identified_files_by_path[rp]
+
+		var pn = path.basename(".nit")
 
 		# Search for a group
 		var mgrouppath = path.join_path("..").simplify_path
@@ -380,6 +382,7 @@ redef class ModelBuilder
 		mgroup.module_paths.add(res)
 
 		identified_files_by_path[rp] = res
+		identified_files_by_path[path] = res
 		identified_files.add(res)
 		return res
 	end
