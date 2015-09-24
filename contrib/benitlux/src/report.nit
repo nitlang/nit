@@ -12,6 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import opts
+
 import benitlux_model
 import benitlux_db
 import correct
@@ -46,8 +48,16 @@ redef class Text
 	end
 end
 
+var opts = new OptionContext
+var opt_columns = new OptionInt("Number of columns for the graph", 70, "-c")
+opts.add_option(opt_columns)
+
+opts.parse(args)
+var rest = opts.rest
+
 # Use the local DB
 var db_path = "benitlux_sherbrooke.db"
+if rest.not_empty then db_path = rest.first
 var db = new DB.open(db_path)
 
 # All known beers
@@ -112,7 +122,7 @@ sorter.sort beers
 print "\nAvailability graph:"
 
 # Compute `column_width` days from all the known days
-var column_width = 70
+var column_width = opt_columns.value
 var days_sample = [for i in [1..column_width[ do all_days[i*all_days.length/column_width]]
 var weeks_sample = new Array[Array[String]]
 
