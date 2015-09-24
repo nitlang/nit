@@ -228,6 +228,16 @@ interface Iterator[E]
 	# Iterate over `self`
 	fun iterator: Iterator[E] do return self
 
+	# Pre-iteration hook.
+	#
+	# Used to inform `self` that the iteration is starting.
+	# Specific iterators can use this to prepare some resources.
+	#
+	# Is automatically invoked at the beginning of `for` structures.
+	#
+	# Do nothing by default.
+	fun start do end
+
 	# Post-iteration hook.
 	#
 	# Used to inform `self` that the iteration is over.
@@ -707,6 +717,16 @@ interface MapIterator[K, V]
 
 	# Set a new `item` at `key`.
 	#fun item=(item: E) is abstract
+
+	# Pre-iteration hook.
+	#
+	# Used to inform `self` that the iteration is starting.
+	# Specific iterators can use this to prepare some resources.
+	#
+	# Is automatically invoked at the beginning of `for` structures.
+	#
+	# Do nothing by default.
+	fun start do end
 
 	# Post-iteration hook.
 	#
