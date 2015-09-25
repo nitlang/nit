@@ -975,9 +975,6 @@ abstract class FlatText
 	# if set before using it.
 	private var items: NativeString is noinit
 
-	# Real items, used as cache for to_cstring is called
-	private var real_items: nullable NativeString = null
-
 	# Returns a char* starting at position `first_byte`
 	#
 	# WARNING: If you choose to use this service, be careful of the following.

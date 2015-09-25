@@ -200,6 +200,14 @@ class FlatString
 		return _items.utf8_length(_first_byte, _last_byte)
 	end
 
+	redef var to_cstring is lazy do
+		var blen = _bytelen
+		var new_items = new NativeString(blen + 1)
+		_items.copy_to(new_items, blen, _first_byte, 0)
+		new_items[blen] = 0u8
+		return new_items
+	end
+
 	redef fun reversed
 	do
 		var b = new FlatBuffer.with_capacity(_bytelen + 1)
@@ -302,16 +310,6 @@ class FlatString
 		_first_byte = from
 		_last_byte = to
 		_bytepos = from
-	end
-
-	redef fun to_cstring do
-		if real_items != null then return real_items.as(not null)
-		var blen = _bytelen
-		var new_items = new NativeString(blen + 1)
-		_items.copy_to(new_items, blen, _first_byte, 0)
-		new_items[blen] = 0u8
-		real_items = new_items
-		return new_items
 	end
 
 	redef fun ==(other)
@@ -582,6 +580,9 @@ class FlatBuffer
 
 	private var capacity = 0
 
+	# Real items, used as cache for when to_cstring is called
+	private var real_items: NativeString is noinit
+
 	redef fun fast_cstring do return _items.fast_cstring(0)
 
 	redef fun substrings do return new FlatSubstringsIter(self)
@@ -702,7 +703,7 @@ class FlatBuffer
 			real_items = new_native
 			is_dirty = false
 		end
-		return real_items.as(not null)
+		return real_items
 	end
 
 	# Create a new empty string.
@@ -1002,7 +1003,7 @@ redef class NativeString
 		copy_to(new_self, length, 0, 0)
 		var str = new FlatString.with_infos(new_self, length, 0, length - 1)
 		new_self[length] = 0u8
-		str.real_items = new_self
+		str.to_cstring = new_self
 		return str
 	end
 
