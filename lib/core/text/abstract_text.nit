@@ -146,15 +146,7 @@ abstract class Text
 	# Returns -1 if not found
 	#
 	# DEPRECATED : Use self.chars.last_index_of_from instead
-	fun last_index_of_from(item: Char, pos: Int): Int
-	do
-		var iter = self.chars.reverse_iterator_from(pos)
-		while iter.is_ok do
-			if iter.item == item then return iter.index
-			iter.next
-		end
-		return -1
-	end
+	fun last_index_of_from(item: Char, pos: Int): Int do return chars.last_index_of_from(item, pos)
 
 	# Gets an iterator on the chars of self
 	#

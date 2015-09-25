@@ -833,18 +833,13 @@ interface SequenceRead[E]
 	#     assert a.last_index_of_from(20, 2)   == 1
 	#     assert a.last_index_of_from(20, 1)   == 1
 	#     assert a.last_index_of_from(20, 0)   == -1
-	fun last_index_of_from(item: nullable Object, pos: Int): Int
-	do
-		var res = -1
-		var p = 0
-		var i = iterator
-		while i.is_ok do
-			if p>pos then break
-			if i.item == item then res = p
-			i.next
-			p += 1
+	fun last_index_of_from(item: nullable Object, pos: Int): Int do
+		var i = pos
+		while i >= 0 do
+			if self[i] == item then return i
+			i -= 1
 		end
-		return res
+		return -1
 	end
 
 	# Two sequences are equals if they have the same items in the same order.
