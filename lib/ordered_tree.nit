@@ -149,6 +149,7 @@ class OrderedTree[E: Object]
 	do
 		if not sub.has_key(e) then return
 		var subs = sub[e]
+		if subs.is_empty then return
 		var last = subs.last
 		for e2 in subs do
 			if e2 != last then
