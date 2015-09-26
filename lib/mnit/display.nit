@@ -28,17 +28,14 @@ end
 # General image class, will be specialized for each classes
 interface Image
 	super Sized
+
 	fun destroy is abstract
 
-	#var scale: Float is abstract
 	# Scale this image when blit
-	fun scale: Float is abstract
-	fun scale=( v: Float ) is abstract
+	var scale: Float is abstract, writable
 
-	#var blended: Bool is abstract
 	# Use blending on this image?
-	fun blended: Bool is abstract
-	fun blended=( v: Bool ) is abstract
+	var blended: Bool is abstract, writable
 
 	# Get another image from this one
 	fun subimage( x, y, w, h: Int ): Image is abstract
