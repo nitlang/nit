@@ -715,14 +715,6 @@ fun gl: GLES do return sys.gles
 # OpenGL ES 2.0 services
 class GLES
 
-	# Clear the color buffer to `red`, `green`, `blue` and `alpha`
-	fun clear_color(red, green, blue, alpha: Float) `{
-		glClearColor(red, green, blue, alpha);
-	`}
-
-	# Set the viewport
-	fun viewport(x, y, width, height: Int) `{ glViewport(x, y, width, height); `}
-
 	# Specify mapping of depth values from normalized device coordinates to window coordinates
 	#
 	# Default at `gl_depth_range(0.0, 1.0)`
@@ -748,9 +740,6 @@ class GLES
 	private fun cull_face_native(front, back: Bool) `{
 		glCullFace(front? back? GL_FRONT_AND_BACK: GL_BACK: GL_FRONT);
 	`}
-
-	# Clear the `buffer`
-	fun clear(buffer: GLBuffer) `{ glClear(buffer); `}
 
 	# Last error from OpenGL ES 2.0
 	fun error: GLError `{ return glGetError(); `}
@@ -821,6 +810,17 @@ class GLES
 	# OpenGL server-side capabilities
 	var capabilities = new GLCapabilities is lazy
 end
+
+# Specify the clear values for the color buffer, default values are at 0.0
+fun glClearColor(red, green, blue, alpha: Float) `{
+	glClearColor(red, green, blue, alpha);
+`}
+
+# Clear the `buffer`
+fun glClear(buffer: GLBuffer) `{ glClear(buffer); `}
+
+# Set the viewport
+fun glViewport(x, y, width, height: Int) `{ glViewport(x, y, width, height); `}
 
 # Set texture parameters
 fun glTexParameteri(target: GLTextureTarget, pname: GLTexParameteriName, param: GLTexParameteri) `{
