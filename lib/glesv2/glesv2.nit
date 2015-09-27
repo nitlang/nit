@@ -816,8 +816,17 @@ fun glClearColor(red, green, blue, alpha: Float) `{
 	glClearColor(red, green, blue, alpha);
 `}
 
+# Specify the clear `value` for the depth buffer, default at 1.0
+fun glClearDepthf(value: Float) `{ glClearDepthf(value); `}
+
+# Specify the clear `value` for the stencil buffer, default at 0
+fun glClearStencil(value: Int) `{ glClearStencil(value); `}
+
 # Clear the `buffer`
 fun glClear(buffer: GLBuffer) `{ glClear(buffer); `}
+
+# Enable and disable writing of frame buffer color components
+fun glColorMask(red, green, blue, alpha: Bool) `{ glColorMask(red, green, blue, alpha); `}
 
 # Set the viewport
 fun glViewport(x, y, width, height: Int) `{ glViewport(x, y, width, height); `}
