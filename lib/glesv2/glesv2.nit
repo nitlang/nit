@@ -577,6 +577,11 @@ fun glCopyTexSubImage2D(target: GLTextureTarget, level, xoffset, yoffset, x, y, 
 	glCopyTexSubImage2D(target, level, xoffset, yoffset, x, y, width, height);
 `}
 
+# Copy a block of pixels from the framebuffer of `fomat` and `typ` at `data`
+fun glReadPixels(x, y, width, height: Int, format: GLPixelFormat, typ: GLPixelType, data: Pointer) `{
+	glReadPixels(x, y, width, height, format, typ, data);
+`}
+
 # Texture minifying and magnifying function
 extern class GLTexParameteri
 	super GLEnum
@@ -713,32 +718,6 @@ fun gl: GLES do return sys.gles
 # OpenGL ES 2.0 services
 class GLES
 
-	# Specify mapping of depth values from normalized device coordinates to window coordinates
-	#
-	# Default at `gl_depth_range(0.0, 1.0)`
-	fun depth_range(near, far: Float) `{ glDepthRangef(near, far); `}
-
-	# Define front- and back-facing polygons
-	#
-	# Front-facing polygons are clockwise if `value`, counter-clockwise otherwise.
-	fun front_face=(value: Bool) `{ glFrontFace(value? GL_CW: GL_CCW); `}
-
-	# Specify whether front- or back-facing polygons can be culled, default is `back` only
-	#
-	# One or both of `front` or `back` must be `true`. If you want to deactivate culling
-	# use `(new GLCap.cull_face).disable`.
-	#
-	# Require: `front or back`
-	fun cull_face(front, back: Bool)
-	do
-		assert not (front or back)
-		cull_face_native(front, back)
-	end
-
-	private fun cull_face_native(front, back: Bool) `{
-		glCullFace(front? back? GL_FRONT_AND_BACK: GL_BACK: GL_FRONT);
-	`}
-
 	# Query the boolean value at `key`
 	private fun get_bool(key: Int): Bool `{
 		GLboolean val;
@@ -764,43 +743,6 @@ class GLES
 	#
 	# Should always return `true` in OpenGL ES 2.0 and 3.0.
 	fun shader_compiler: Bool do return get_bool(0x8DFA)
-
-	# Enable or disable writing into the depth buffer
-	fun depth_mask(value: Bool) `{ glDepthMask(value); `}
-
-	# Set the scale and units used to calculate depth values
-	fun polygon_offset(factor, units: Float) `{ glPolygonOffset(factor, units); `}
-
-	# Specify the width of rasterized lines
-	fun line_width(width: Float) `{ glLineWidth(width); `}
-
-	# Set the pixel arithmetic for the blending operations
-	#
-	# Defaultvalues before assignation:
-	# * `src_factor`: `GLBlendFactor::one`
-	# * `dst_factor`: `GLBlendFactor::zero`
-	fun blend_func(src_factor, dst_factor: GLBlendFactor) `{
-		glBlendFunc(src_factor, dst_factor);
-	`}
-
-	# Specify the value used for depth buffer comparisons
-	#
-	# Default value is `GLDepthFunc::less`
-	#
-	# Foreign: glDepthFunc
-	fun depth_func(func: GLDepthFunc) `{ glDepthFunc(func); `}
-
-	# Copy a block of pixels from the framebuffer of `fomat` and `typ` at `data`
-	#
-	# Foreign: glReadPixel
-	fun read_pixels(x, y, width, height: Int, format: GLPixelFormat, typ: GLPixelType, data: Pointer) `{
-		glReadPixels(x, y, width, height, format, typ, data);
-	`}
-
-	# Render primitives from array data
-	#
-	# Foreign: glDrawArrays
-	fun draw_arrays(mode: GLDrawMode, from, count: Int) `{ glDrawArrays(mode, from, count); `}
 
 	# OpenGL server-side capabilities
 	var capabilities = new GLCapabilities is lazy
@@ -1166,3 +1108,54 @@ end
 fun gl_DEPTH_BUFFER_BIT: GLBuffer `{ return GL_DEPTH_BUFFER_BIT; `}
 fun gl_STENCIL_BUFFER_BIT: GLBuffer `{ return GL_STENCIL_BUFFER_BIT; `}
 fun gl_COLOR_BUFFER_BIT: GLBuffer `{ return GL_COLOR_BUFFER_BIT; `}
+
+# Define front- and back-facing polygons, `gc_CCW` by default
+fun glFrontFace(mode: GLFrontFaceMode) `{ glFrontFace(mode); `}
+
+# Orientation of front-facing polygons
+extern class GLFrontFaceMode
+	super GLEnum
+end
+
+fun gl_CW: GLFrontFaceMode `{ return GL_CW; `}
+fun gl_CCW: GLFrontFaceMode `{ return GL_CCW; `}
+
+# Specify whether front- or back-facing polygons can be culled, default is `back` only
+fun glCullFace(mode: GLCullFaceMode) `{ glCullFace(mode); `}
+
+# Candidates for culling
+extern class GLCullFaceMode
+	super GLEnum
+end
+
+fun gl_FRONT: GLCullFaceMode `{ return GL_FRONT; `}
+fun gl_BACK: GLCullFaceMode `{ return GL_BACK; `}
+fun gl_FRONT_AND_BACK: GLCullFaceMode `{ return GL_FRONT_AND_BACK; `}
+
+# Specify mapping of depth values from normalized device coordinates to window coordinates
+#
+# Default at 0.0, 1.0.
+fun glDepthRangef(near, far: Float) `{ glDepthRangef(near, far); `}
+
+# Enable or disable writing into the depth buffer
+fun glDepthMask(value: Bool) `{ glDepthMask(value); `}
+
+# Specify the value used for depth buffer comparisons
+#
+# Default value is `gl_LESS`
+fun glDepthFunc(func: GLDepthFunc) `{ glDepthFunc(func); `}
+
+# Set the pixel arithmetic for the blending operations
+#
+# Default values:
+# * `src_factor`: `gl_ONE`
+# * `dst_factor`: `gl_ZERO`
+fun glBlendFunc(src_factor, dst_factor: GLBlendFactor) `{
+	glBlendFunc(src_factor, dst_factor);
+`}
+
+# Set the scale and units used to calculate depth values
+fun glPolygonOffset(factor, units: Float) `{ glPolygonOffset(factor, units); `}
+
+# Specify the width of rasterized lines
+fun glLineWidth(width: Float) `{ glLineWidth(width); `}
