@@ -831,6 +831,12 @@ fun glColorMask(red, green, blue, alpha: Bool) `{ glColorMask(red, green, blue, 
 # Set the viewport
 fun glViewport(x, y, width, height: Int) `{ glViewport(x, y, width, height); `}
 
+# Block until all GL execution is complete
+fun glFinish `{ glFinish(); `}
+
+# Force execution of GL commands in finite time
+fun glFlush `{ glFlush(); `}
+
 # Set texture parameters
 fun glTexParameteri(target: GLTextureTarget, pname: GLTexParameteriName, param: GLTexParameteri) `{
 	glTexParameteri(target, pname, param);
