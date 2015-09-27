@@ -421,38 +421,36 @@ extern class GLEnum `{ GLenum `}
 	redef fun ==(o) do return o != null and is_same_type(o) and o.hash == self.hash
 end
 
+# Error information
+fun glGetError: GLError `{ return glGetError(); `}
+
 # An OpenGL ES 2.0 error code
 extern class GLError
 	super GLEnum
 
-	# Is there no error?
-	fun is_ok: Bool do return is_no_error
-
-	# Is this not an error?
-	fun is_no_error: Bool `{ return self == GL_NO_ERROR; `}
-
-	fun is_invalid_enum: Bool `{ return self == GL_INVALID_ENUM; `}
-	fun is_invalid_value: Bool `{ return self == GL_INVALID_VALUE; `}
-	fun is_invalid_operation: Bool `{ return self == GL_INVALID_OPERATION; `}
-	fun is_invalid_framebuffer_operation: Bool `{ return self == GL_INVALID_FRAMEBUFFER_OPERATION; `}
-	fun is_out_of_memory: Bool `{ return self == GL_OUT_OF_MEMORY; `}
-
 	redef fun to_s
 	do
-		if is_no_error then return "No error"
-		if is_invalid_enum then return "Invalid enum"
-		if is_invalid_value then return "Invalid value"
-		if is_invalid_operation then return "Invalid operation"
-		if is_invalid_framebuffer_operation then return "invalid framebuffer operation"
-		if is_out_of_memory then return "Out of memory"
-		return "Truely unknown error"
+		if self == gl_NO_ERROR then return "No error"
+		if self == gl_INVALID_ENUM then return "Invalid enum"
+		if self == gl_INVALID_VALUE then return "Invalid value"
+		if self == gl_INVALID_OPERATION then return "Invalid operation"
+		if self == gl_INVALID_FRAMEBUFFER_OPERATION then return "invalid framebuffer operation"
+		if self == gl_OUT_OF_MEMORY then return "Out of memory"
+		return "Unknown error"
 	end
 end
 
+fun gl_NO_ERROR: GLError `{ return GL_NO_ERROR; `}
+fun gl_INVALID_ENUM: GLError `{ return GL_INVALID_ENUM; `}
+fun gl_INVALID_VALUE: GLError `{ return GL_INVALID_VALUE; `}
+fun gl_INVALID_OPERATION: GLError `{ return GL_INVALID_OPERATION; `}
+fun gl_INVALID_FRAMEBUFFER_OPERATION: GLError `{ return GL_INVALID_FRAMEBUFFER_OPERATION; `}
+fun gl_OUT_OF_MEMORY: GLError `{ return GL_OUT_OF_MEMORY; `}
+
 fun assert_no_gl_error
 do
-	var error = gl.error
-	if not error.is_ok then
+	var error = glGetError
+	if not error == gl_NO_ERROR then
 		print "GL error: {error}"
 		abort
 	end
@@ -740,9 +738,6 @@ class GLES
 	private fun cull_face_native(front, back: Bool) `{
 		glCullFace(front? back? GL_FRONT_AND_BACK: GL_BACK: GL_FRONT);
 	`}
-
-	# Last error from OpenGL ES 2.0
-	fun error: GLError `{ return glGetError(); `}
 
 	# Query the boolean value at `key`
 	private fun get_bool(key: Int): Bool `{
