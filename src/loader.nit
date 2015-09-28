@@ -323,7 +323,7 @@ redef class ModelBuilder
 	fun identify_file(path: String): nullable ModulePath
 	do
 		# special case for not a nit file
-		if path.file_extension != "nit" then
+		if not path.has_suffix(".nit") then
 			# search dirless files in known -I paths
 			if not path.chars.has('/') then
 				var res = search_module_in_paths(null, path, self.paths)
@@ -352,9 +352,11 @@ redef class ModelBuilder
 		end
 
 		# Fast track, the path is already known
-		var pn = path.basename(".nit")
+		if identified_files_by_path.has_key(path) then return identified_files_by_path[path]
 		var rp = module_absolute_path(path)
 		if identified_files_by_path.has_key(rp) then return identified_files_by_path[rp]
+
+		var pn = path.basename(".nit")
 
 		# Search for a group
 		var mgrouppath = path.join_path("..").simplify_path
@@ -380,6 +382,7 @@ redef class ModelBuilder
 		mgroup.module_paths.add(res)
 
 		identified_files_by_path[rp] = res
+		identified_files_by_path[path] = res
 		identified_files.add(res)
 		return res
 	end
@@ -393,10 +396,15 @@ redef class ModelBuilder
 	# Note: `paths` is also used to look for mgroups
 	fun get_mgroup(dirpath: String): nullable MGroup
 	do
-		if not dirpath.file_exists then do
+		var stat = dirpath.file_stat
+
+		if stat == null then do
+			# search dirless directories in known -I paths
+			if dirpath.chars.has('/') then return null
 			for p in paths do
 				var try = p / dirpath
-				if try.file_exists then
+				stat = try.file_stat
+				if stat != null then
 					dirpath = try
 					break label
 				end
@@ -404,20 +412,19 @@ redef class ModelBuilder
 			return null
 		end label
 
+		# Filter out non-directories
+		if not stat.is_dir then
+			return null
+		end
+
+		# Fast track, the path is already known
 		var rdp = module_absolute_path(dirpath)
 		if mgroups.has_key(rdp) then
 			return mgroups[rdp]
 		end
 
-		# Filter out non-directories
-		var stat = dirpath.file_stat
-		if stat == null or not stat.is_dir then
-			mgroups[rdp] = null
-			return null
-		end
-
 		# By default, the name of the package or group is the base_name of the directory
-		var pn = rdp.basename(".nit")
+		var pn = rdp.basename
 
 		# Check `package.ini` that indicate a package
 		var ini = null
@@ -525,23 +532,24 @@ redef class ModelBuilder
 			var fp = p/f
 			var g = get_mgroup(fp)
 			# Recursively scan for groups of the same package
-			if g != null and g.mpackage == mgroup.mpackage then
+			if g == null then
+				identify_file(fp)
+			else if g.mpackage == mgroup.mpackage then
 				scan_group(g)
 			end
-			identify_file(fp)
 		end
 	end
 
 	# Transform relative paths (starting with '../') into absolute paths
 	private fun module_absolute_path(path: String): String do
-		return getcwd.join_path(path).simplify_path
+		return path.realpath
 	end
 
 	# Try to load a module AST using a path.
 	# Display an error if there is a problem (IO / lexer / parser) and return null
 	fun load_module_ast(filename: String): nullable AModule
 	do
-		if filename.file_extension != "nit" then
+		if not filename.has_suffix(".nit") then
 			self.toolcontext.error(null, "Error: file `{filename}` is not a valid nit module.")
 			return null
 		end
