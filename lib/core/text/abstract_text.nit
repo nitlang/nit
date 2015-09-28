@@ -146,15 +146,7 @@ abstract class Text
 	# Returns -1 if not found
 	#
 	# DEPRECATED : Use self.chars.last_index_of_from instead
-	fun last_index_of_from(item: Char, pos: Int): Int
-	do
-		var iter = self.chars.reverse_iterator_from(pos)
-		while iter.is_ok do
-			if iter.item == item then return iter.index
-			iter.next
-		end
-		return -1
-	end
+	fun last_index_of_from(item: Char, pos: Int): Int do return chars.last_index_of_from(item, pos)
 
 	# Gets an iterator on the chars of self
 	#
@@ -982,9 +974,6 @@ abstract class FlatText
 	# Warning : Might be void in some subclasses, be sure to check
 	# if set before using it.
 	private var items: NativeString is noinit
-
-	# Real items, used as cache for to_cstring is called
-	private var real_items: nullable NativeString = null
 
 	# Returns a char* starting at position `first_byte`
 	#
