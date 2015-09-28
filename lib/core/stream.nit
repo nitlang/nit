@@ -425,6 +425,13 @@ interface Writable
 	end
 end
 
+redef class Bytes
+	super Writable
+	redef fun write_to(s) do s.write_bytes(self)
+
+	redef fun write_to_string do return to_s
+end
+
 redef class Text
 	super Writable
 	redef fun write_to(stream) do stream.write(self)
