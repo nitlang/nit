@@ -128,7 +128,15 @@ class OrderedTree[E: Object]
 	do
 		var old_parent = parents.get_or_null(e)
 		if old_parent != null then
-			sub[old_parent].remove(e)
+			var subs = sub[old_parent]
+			subs.remove(e)
+			if subs.is_empty then
+				# remove the sub when all children are detached
+				# so that `==` and `hash` are sane
+				# Otherwise an empty array will be considered
+				# differently than no array.
+				sub.keys.remove(old_parent)
+			end
 		else if roots.has(e) then
 			roots.remove(e)
 		end
@@ -149,6 +157,7 @@ class OrderedTree[E: Object]
 	do
 		if not sub.has_key(e) then return
 		var subs = sub[e]
+		if subs.is_empty then return
 		var last = subs.last
 		for e2 in subs do
 			if e2 != last then
