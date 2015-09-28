@@ -50,12 +50,6 @@ extern class GLProgram `{GLuint`}
 	# The newly created instance should be checked using `is_ok`.
 	new `{ return glCreateProgram(); `}
 
-	# Is this a valid program?
-	fun is_ok: Bool `{ return glIsProgram(self); `}
-
-	# Attach a `shader` to this program
-	fun attach_shader(shader: GLShader) `{ glAttachShader(self, shader); `}
-
 	# Set the location for the attribute by `name`
 	fun bind_attrib_location(index: Int, name: String) import String.to_cstring `{
 		GLchar *c_name = String_to_cstring(name);
@@ -85,27 +79,11 @@ extern class GLProgram `{GLuint`}
 		return val;
 	`}
 
-	# Try to link this program
-	#
-	# Check result using `in_linked` and `info_log`.
-	fun link `{ glLinkProgram(self); `}
-
 	# Is this program linked?
 	fun is_linked: Bool do return query(0x8B82) != 0
 
-	# Use this program for the following operations
-	fun use `{ glUseProgram(self); `}
-
-	# Delete this program
-	fun delete `{ glDeleteProgram(self); `}
-
 	# Has this program been deleted?
 	fun is_deleted: Bool do return query(0x8B80) != 0
-
-	# Validate whether this program can be executed in the current OpenGL state
-	#
-	# Check results using `is_validated` and `info_log`.
-	fun validate `{ glValidateProgram(self); `}
 
 	# Boolean result of `validate`, must be called after `validate`
 	fun is_validated: Bool do return query(0x8B83) != 0
@@ -210,12 +188,32 @@ extern class GLProgram `{GLuint`}
 	`}
 end
 
+# Create a program object
+fun glCreateProgram: GLProgram `{ return glCreateProgram(); `}
+
+# Install the `program` as part of current rendering state
+fun glUseProgram(program: GLProgram) `{ glUseProgram(program); `}
+
+# Link the `program` object
+fun glLinkProgram(program: GLProgram) `{ glLinkProgram(program); `}
+
+# Validate the `program` object
+fun glValidateProgram(program: GLProgram) `{ glValidateProgram(program); `}
+
+# Delete the `program` object
+fun glDeleteProgram(program: GLProgram) `{ glDeleteProgram(program); `}
+
+# Determine if `name` corresponds to a program object
+fun glIsProgram(name: GLProgram): Bool `{ return glIsProgram(name); `}
+
+# Attach a `shader` to `program`
+fun glAttachShader(program: GLProgram, shader: GLShader) `{ glAttachShader(program, shader); `}
+
+# Detach `shader` from `program`
+fun glDetachShader(program: GLProgram, shader: GLShader) `{ glDetachShader(program, shader); `}
+
 # Abstract OpenGL ES shader object, implemented by `GLFragmentShader` and `GLVertexShader`
 extern class GLShader `{GLuint`}
-	# Set the source of the shader
-	fun source=(code: NativeString) `{
-		glShaderSource(self, 1, (GLchar const **)&code, NULL);
-	`}
 
 	# Source of the shader, if available
 	#
@@ -241,22 +239,11 @@ extern class GLShader `{GLuint`}
 		return val;
 	`}
 
-	# Try to compile `source` into a binary GPU program
-	#
-	# Check the result using `is_compiled` and `info_log`
-	fun compile `{ glCompileShader(self); `}
-
 	# Has this shader been compiled?
 	fun is_compiled: Bool do return query(0x8B81) != 0
 
-	# Delete this shader
-	fun delete `{ glDeleteShader(self); `}
-
 	# Has this shader been deleted?
 	fun is_deleted: Bool do return query(0x8B80) != 0
-
-	# Is this a valid shader?
-	fun is_ok: Bool `{ return glIsShader(self); `}
 
 	# Retrieve the information log of this shader
 	#
@@ -269,6 +256,33 @@ extern class GLShader `{GLuint`}
 		return NativeString_to_s(msg);
 	`}
 end
+
+# Shader type
+extern class GLShaderType
+	super GLEnum
+end
+
+fun gl_VERTEX_SHADER: GLShaderType `{ return GL_VERTEX_SHADER; `}
+fun gl_FRAGMENT_SHADER: GLShaderType `{ return GL_FRAGMENT_SHADER; `}
+
+# Create a shader object of the `shader_type`
+fun glCreateShader(shader_type: GLShaderType): GLShader `{
+	return glCreateShader(shader_type);
+`}
+
+# Replace the source code in the `shader` object with `code`
+fun glShaderSource(shader: GLShader, code: NativeString) `{
+	glShaderSource(shader, 1, (GLchar const **)&code, NULL);
+`}
+
+# Compile the `shader` object
+fun glCompileShader(shader: GLShader) `{ glCompileShader(shader); `}
+
+# Delete the `shader` object
+fun glDeleteShader(shader: GLShader) `{ glDeleteShader(shader); `}
+
+# Determine if `name` corresponds to a shader object
+fun glIsShader(name: GLShader): Bool `{ return glIsShader(name); `}
 
 # An OpenGL ES 2.0 fragment shader
 extern class GLFragmentShader
@@ -407,48 +421,119 @@ extern class GLEnum `{ GLenum `}
 	redef fun ==(o) do return o != null and is_same_type(o) and o.hash == self.hash
 end
 
+# Error information
+fun glGetError: GLError `{ return glGetError(); `}
+
 # An OpenGL ES 2.0 error code
 extern class GLError
 	super GLEnum
 
-	# Is there no error?
-	fun is_ok: Bool do return is_no_error
-
-	# Is this not an error?
-	fun is_no_error: Bool `{ return self == GL_NO_ERROR; `}
-
-	fun is_invalid_enum: Bool `{ return self == GL_INVALID_ENUM; `}
-	fun is_invalid_value: Bool `{ return self == GL_INVALID_VALUE; `}
-	fun is_invalid_operation: Bool `{ return self == GL_INVALID_OPERATION; `}
-	fun is_invalid_framebuffer_operation: Bool `{ return self == GL_INVALID_FRAMEBUFFER_OPERATION; `}
-	fun is_out_of_memory: Bool `{ return self == GL_OUT_OF_MEMORY; `}
-
 	redef fun to_s
 	do
-		if is_no_error then return "No error"
-		if is_invalid_enum then return "Invalid enum"
-		if is_invalid_value then return "Invalid value"
-		if is_invalid_operation then return "Invalid operation"
-		if is_invalid_framebuffer_operation then return "invalid framebuffer operation"
-		if is_out_of_memory then return "Out of memory"
-		return "Truely unknown error"
+		if self == gl_NO_ERROR then return "No error"
+		if self == gl_INVALID_ENUM then return "Invalid enum"
+		if self == gl_INVALID_VALUE then return "Invalid value"
+		if self == gl_INVALID_OPERATION then return "Invalid operation"
+		if self == gl_INVALID_FRAMEBUFFER_OPERATION then return "invalid framebuffer operation"
+		if self == gl_OUT_OF_MEMORY then return "Out of memory"
+		return "Unknown error"
 	end
 end
 
+fun gl_NO_ERROR: GLError `{ return GL_NO_ERROR; `}
+fun gl_INVALID_ENUM: GLError `{ return GL_INVALID_ENUM; `}
+fun gl_INVALID_VALUE: GLError `{ return GL_INVALID_VALUE; `}
+fun gl_INVALID_OPERATION: GLError `{ return GL_INVALID_OPERATION; `}
+fun gl_INVALID_FRAMEBUFFER_OPERATION: GLError `{ return GL_INVALID_FRAMEBUFFER_OPERATION; `}
+fun gl_OUT_OF_MEMORY: GLError `{ return GL_OUT_OF_MEMORY; `}
+
 fun assert_no_gl_error
 do
-	var error = gl.error
-	if not error.is_ok then
+	var error = glGetError
+	if not error == gl_NO_ERROR then
 		print "GL error: {error}"
 		abort
 	end
 end
 
-# Does `name` corresponds to a texture?
-fun glIsTexture(name: Int): Bool `{ return glIsTexture(name); `}
+# Texture unit, the number of texture units is implementation dependent
+extern class GLTextureUnit
+	super GLEnum
+end
+
+fun gl_TEXTURE0: GLTextureUnit `{ return GL_TEXTURE0; `}
+fun gl_TEXTURE1: GLTextureUnit `{ return GL_TEXTURE1; `}
+fun gl_TEXTURE2: GLTextureUnit `{ return GL_TEXTURE2; `}
+fun gl_TEXTURE3: GLTextureUnit `{ return GL_TEXTURE3; `}
+fun gl_TEXTURE4: GLTextureUnit `{ return GL_TEXTURE4; `}
+fun gl_TEXTURE5: GLTextureUnit `{ return GL_TEXTURE5; `}
+fun gl_TEXTURE6: GLTextureUnit `{ return GL_TEXTURE6; `}
+fun gl_TEXTURE7: GLTextureUnit `{ return GL_TEXTURE7; `}
+fun gl_TEXTURE8: GLTextureUnit `{ return GL_TEXTURE8; `}
+fun gl_TEXTURE9: GLTextureUnit `{ return GL_TEXTURE9; `}
+fun gl_TEXTURE10: GLTextureUnit `{ return GL_TEXTURE10; `}
+fun gl_TEXTURE11: GLTextureUnit `{ return GL_TEXTURE11; `}
+fun gl_TEXTURE12: GLTextureUnit `{ return GL_TEXTURE12; `}
+fun gl_TEXTURE13: GLTextureUnit `{ return GL_TEXTURE13; `}
+fun gl_TEXTURE14: GLTextureUnit `{ return GL_TEXTURE14; `}
+fun gl_TEXTURE15: GLTextureUnit `{ return GL_TEXTURE15; `}
+fun gl_TEXTURE16: GLTextureUnit `{ return GL_TEXTURE16; `}
+fun gl_TEXTURE17: GLTextureUnit `{ return GL_TEXTURE17; `}
+fun gl_TEXTURE18: GLTextureUnit `{ return GL_TEXTURE18; `}
+fun gl_TEXTURE19: GLTextureUnit `{ return GL_TEXTURE19; `}
+fun gl_TEXTURE20: GLTextureUnit `{ return GL_TEXTURE20; `}
+fun gl_TEXTURE21: GLTextureUnit `{ return GL_TEXTURE21; `}
+fun gl_TEXTURE22: GLTextureUnit `{ return GL_TEXTURE22; `}
+fun gl_TEXTURE23: GLTextureUnit `{ return GL_TEXTURE23; `}
+fun gl_TEXTURE24: GLTextureUnit `{ return GL_TEXTURE24; `}
+fun gl_TEXTURE25: GLTextureUnit `{ return GL_TEXTURE25; `}
+fun gl_TEXTURE26: GLTextureUnit `{ return GL_TEXTURE26; `}
+fun gl_TEXTURE27: GLTextureUnit `{ return GL_TEXTURE27; `}
+fun gl_TEXTURE28: GLTextureUnit `{ return GL_TEXTURE28; `}
+fun gl_TEXTURE29: GLTextureUnit `{ return GL_TEXTURE29; `}
+fun gl_TEXTURE30: GLTextureUnit `{ return GL_TEXTURE30; `}
+fun gl_TEXTURE31: GLTextureUnit `{ return GL_TEXTURE31; `}
+
+# Texture unit at `offset` after `gl_TEXTURE0`
+fun gl_TEXTURE(offset: Int): GLTextureUnit `{ return GL_TEXTURE0 + offset; `}
+
+# Generate `n` texture names
+fun glGenTextures(n: Int): Array[Int]
+do
+	var array = new CIntArray(n)
+	native_glGenTextures(n, array.native_array)
+	var a = array.to_a
+	array.destroy
+	return a
+end
+
+private fun native_glGenTextures(n: Int, textures: NativeCIntArray) `{
+	glGenTextures(n, (GLuint*)textures);
+`}
+
+# Select server-side active texture unit
+fun glActiveTexture(texture: GLTextureUnit) `{ glActiveTexture(texture); `}
 
 # Bind the named `texture` to a `target`
-fun glBindTexture(target: GLTextureTarget, texture: Int) `{ glBindTexture(target, texture); `}
+fun glBindTexture(target: GLTextureTarget, texture: Int) `{
+	glBindTexture(target, texture);
+`}
+
+# Delete named textures
+fun glDeleteTextures(textures: SequenceRead[Int])
+do
+	var n = textures.length
+	var array = new CIntArray.from(textures)
+	native_glDeleteTextures(n, array.native_array)
+	array.destroy
+end
+
+private fun native_glDeleteTextures(n: Int, textures: NativeCIntArray) `{
+	glDeleteTextures(n, (const GLuint *)textures);
+`}
+
+# Does `name` corresponds to a texture?
+fun glIsTexture(name: Int): Bool `{ return glIsTexture(name); `}
 
 # Set pixel storage modes
 fun glPixelStorei(parameter: GLPack, val: Int) `{ glPixelStorei(parameter, val); `}
@@ -468,33 +553,49 @@ fun gl_UNPACK_ALIGNEMENT: GLPack `{ return GL_UNPACK_ALIGNMENT; `}
 # GL_UNPACK_ROW_LENGTH, GL_UNPACK_IMAGE_HEIGHT, GL_UNPACK_SKIP_PIXELS, GL_UNPACK_SKIP_ROWS, GL_UNPACK_SKIP_IMAGES
 
 # Specify a two-dimensional texture image
-fun glTexImage2D(target: GLTextureTarget, level, internalformat, width, height, border: Int,
-                 format: GLPixelFormat, typ: GLPixelType, data: NativeCByteArray) `{
+fun glTexImage2D(target: GLTextureTarget, level: Int, internalformat: GLPixelFormat,
+                 width, height, border: Int,
+                 format: GLPixelFormat, typ: GLPixelType, data: Pointer) `{
 	glTexImage2D(target, level, internalformat, width, height, border, format, typ, data);
 `}
 
+# Specify a two-dimensional texture subimage
+fun glTexSubImage2D(target: GLTextureTarget,
+                    level, xoffset, yoffset, width, height, border: Int,
+                    format: GLPixelFormat, typ: GLPixelType, data: Pointer) `{
+	glTexSubImage2D(target, level, xoffset, yoffset, width, height, format, typ, data);
+`}
+
+# Copy pixels into a 2D texture image
+fun glCopyTexImage2D(target: GLTextureTarget, level: Int, internalformat: GLPixelFormat,
+                     x, y, width, height, border: Int) `{
+	glCopyTexImage2D(target, level, internalformat, x, y, width, height, border);
+`}
+
+# Copy a two-dimensional texture subimage
+fun glCopyTexSubImage2D(target: GLTextureTarget, level, xoffset, yoffset, x, y, width, height: Int) `{
+	glCopyTexSubImage2D(target, level, xoffset, yoffset, x, y, width, height);
+`}
+
+# Copy a block of pixels from the framebuffer of `fomat` and `typ` at `data`
+fun glReadPixels(x, y, width, height: Int, format: GLPixelFormat, typ: GLPixelType, data: Pointer) `{
+	glReadPixels(x, y, width, height, format, typ, data);
+`}
+
 # Texture minifying and magnifying function
-extern class GLTextureFilter
+extern class GLTexParameteri
 	super GLEnum
 end
 
-fun gl_NEAREST: GLTextureFilter `{ return GL_NEAREST; `}
-fun gl_LINEAR: GLTextureFilter `{ return GL_LINEAR; `}
-fun gl_NEAREST_MIPMAP_NEAREST: GLTextureFilter `{ return GL_NEAREST_MIPMAP_NEAREST; `}
-fun gl_LINEAR_MIPMAP_NEAREST: GLTextureFilter `{ return GL_LINEAR_MIPMAP_NEAREST; `}
-fun gl_NEAREST_MIPMAP_NINEAR: GLTextureFilter `{ return GL_NEAREST_MIPMAP_LINEAR; `}
-fun gl_LINEAR_MIPMAP_LINEAR: GLTextureFilter `{ return GL_LINEAR_MIPMAP_LINEAR; `}
-
-# Wrap parameter of a texture
-#
-# Used by: `tex_parameter_wrap_*`
-extern class GLTextureWrap
-	super GLEnum
-
-	new clamp_to_edge `{ return GL_CLAMP_TO_EDGE; `}
-	new mirrored_repeat `{ return GL_MIRRORED_REPEAT; `}
-	new repeat `{ return GL_REPEAT; `}
-end
+fun gl_NEAREST: GLTexParameteri `{ return GL_NEAREST; `}
+fun gl_LINEAR: GLTexParameteri `{ return GL_LINEAR; `}
+fun gl_NEAREST_MIPMAP_NEAREST: GLTexParameteri `{ return GL_NEAREST_MIPMAP_NEAREST; `}
+fun gl_LINEAR_MIPMAP_NEAREST: GLTexParameteri `{ return GL_LINEAR_MIPMAP_NEAREST; `}
+fun gl_NEAREST_MIPMAP_NINEAR: GLTexParameteri `{ return GL_NEAREST_MIPMAP_LINEAR; `}
+fun gl_LINEAR_MIPMAP_LINEAR: GLTexParameteri `{ return GL_LINEAR_MIPMAP_LINEAR; `}
+fun gl_CLAMP_TO_EDGE: GLTexParameteri `{ return GL_CLAMP_TO_EDGE; `}
+fun gl_MIRRORED_REPEAT: GLTexParameteri `{ return GL_MIRRORED_REPEAT; `}
+fun gl_REPEAT: GLTexParameteri `{ return GL_REPEAT; `}
 
 # Target texture
 extern class GLTextureTarget
@@ -529,6 +630,38 @@ class GLCap
 	redef fun hash do return val
 	redef fun ==(o) do return o != null and is_same_type(o) and o.hash == self.hash
 end
+
+# Generate `n` renderbuffer object names
+fun glGenRenderbuffers(n: Int): Array[Int]
+do
+	var array = new CIntArray(n)
+	native_glGenRenderbuffers(n, array.native_array)
+	var a = array.to_a
+	array.destroy
+	return a
+end
+
+private fun native_glGenRenderbuffers(n: Int, renderbuffers: NativeCIntArray) `{
+	glGenRenderbuffers(n, (GLuint *)renderbuffers);
+`}
+
+# Determine if `name` corresponds to a renderbuffer object
+fun glIsRenderbuffer(name: Int): Bool `{
+	return glIsRenderbuffer(name);
+`}
+
+# Delete named renderbuffer objects
+fun glDeleteRenderbuffers(renderbuffers: SequenceRead[Int])
+do
+	var n = renderbuffers.length
+	var array = new CIntArray.from(renderbuffers)
+	native_glDeleteRenderbuffers(n, array.native_array)
+	array.destroy
+end
+
+private fun native_glDeleteRenderbuffers(n: Int, renderbuffers: NativeCIntArray) `{
+	return glDeleteRenderbuffers(n, (const GLuint *)renderbuffers);
+`}
 
 # Attach a renderbuffer object to a framebuffer object
 fun glFramebufferRenderbuffer(target: GLFramebufferTarget, attachment: GLAttachment,
@@ -585,46 +718,6 @@ fun gl: GLES do return sys.gles
 # OpenGL ES 2.0 services
 class GLES
 
-	# Clear the color buffer to `red`, `green`, `blue` and `alpha`
-	fun clear_color(red, green, blue, alpha: Float) `{
-		glClearColor(red, green, blue, alpha);
-	`}
-
-	# Set the viewport
-	fun viewport(x, y, width, height: Int) `{ glViewport(x, y, width, height); `}
-
-	# Specify mapping of depth values from normalized device coordinates to window coordinates
-	#
-	# Default at `gl_depth_range(0.0, 1.0)`
-	fun depth_range(near, far: Float) `{ glDepthRangef(near, far); `}
-
-	# Define front- and back-facing polygons
-	#
-	# Front-facing polygons are clockwise if `value`, counter-clockwise otherwise.
-	fun front_face=(value: Bool) `{ glFrontFace(value? GL_CW: GL_CCW); `}
-
-	# Specify whether front- or back-facing polygons can be culled, default is `back` only
-	#
-	# One or both of `front` or `back` must be `true`. If you want to deactivate culling
-	# use `(new GLCap.cull_face).disable`.
-	#
-	# Require: `front or back`
-	fun cull_face(front, back: Bool)
-	do
-		assert not (front or back)
-		cull_face_native(front, back)
-	end
-
-	private fun cull_face_native(front, back: Bool) `{
-		glCullFace(front? back? GL_FRONT_AND_BACK: GL_BACK: GL_FRONT);
-	`}
-
-	# Clear the `buffer`
-	fun clear(buffer: GLBuffer) `{ glClear(buffer); `}
-
-	# Last error from OpenGL ES 2.0
-	fun error: GLError `{ return glGetError(); `}
-
 	# Query the boolean value at `key`
 	private fun get_bool(key: Int): Bool `{
 		GLboolean val;
@@ -651,74 +744,50 @@ class GLES
 	# Should always return `true` in OpenGL ES 2.0 and 3.0.
 	fun shader_compiler: Bool do return get_bool(0x8DFA)
 
-	# Enable or disable writing into the depth buffer
-	fun depth_mask(value: Bool) `{ glDepthMask(value); `}
-
-	# Set the scale and units used to calculate depth values
-	fun polygon_offset(factor, units: Float) `{ glPolygonOffset(factor, units); `}
-
-	# Specify the width of rasterized lines
-	fun line_width(width: Float) `{ glLineWidth(width); `}
-
-	# Set the pixel arithmetic for the blending operations
-	#
-	# Defaultvalues before assignation:
-	# * `src_factor`: `GLBlendFactor::one`
-	# * `dst_factor`: `GLBlendFactor::zero`
-	fun blend_func(src_factor, dst_factor: GLBlendFactor) `{
-		glBlendFunc(src_factor, dst_factor);
-	`}
-
-	# Specify the value used for depth buffer comparisons
-	#
-	# Default value is `GLDepthFunc::less`
-	#
-	# Foreign: glDepthFunc
-	fun depth_func(func: GLDepthFunc) `{ glDepthFunc(func); `}
-
-	# Copy a block of pixels from the framebuffer of `fomat` and `typ` at `data`
-	#
-	# Foreign: glReadPixel
-	fun read_pixels(x, y, width, height: Int, format: GLPixelFormat, typ: GLPixelType, data: Pointer) `{
-		glReadPixels(x, y, width, height, format, typ, data);
-	`}
-
-	# Set the texture minifying function
-	#
-	# Foreign: glTexParameter with GL_TEXTURE_MIN_FILTER
-	fun tex_parameter_min_filter(target: GLTextureTarget, value: GLTextureFilter) `{
-		glTexParameteri(target, GL_TEXTURE_MIN_FILTER, value);
-	`}
-
-	# Set the texture magnification function
-	#
-	# Foreign: glTexParameter with GL_TEXTURE_MAG_FILTER
-	fun tex_parameter_mag_filter(target: GLTextureTarget, value: GLTextureFilter) `{
-		glTexParameteri(target, GL_TEXTURE_MAG_FILTER, value);
-	`}
-
-	# Set the texture wrap parameter for coordinates _s_
-	#
-	# Foreign: glTexParameter with GL_TEXTURE_WRAP_S
-	fun tex_parameter_wrap_s(target: GLTextureTarget, value: GLTextureWrap) `{
-		glTexParameteri(target, GL_TEXTURE_WRAP_S, value);
-	`}
-
-	# Set the texture wrap parameter for coordinates _t_
-	#
-	# Foreign: glTexParameter with GL_TEXTURE_WRAP_T
-	fun tex_parameter_wrap_t(target: GLTextureTarget, value: GLTextureWrap) `{
-		glTexParameteri(target, GL_TEXTURE_WRAP_T, value);
-	`}
-
-	# Render primitives from array data
-	#
-	# Foreign: glDrawArrays
-	fun draw_arrays(mode: GLDrawMode, from, count: Int) `{ glDrawArrays(mode, from, count); `}
-
 	# OpenGL server-side capabilities
 	var capabilities = new GLCapabilities is lazy
 end
+
+# Specify the clear values for the color buffer, default values are at 0.0
+fun glClearColor(red, green, blue, alpha: Float) `{
+	glClearColor(red, green, blue, alpha);
+`}
+
+# Specify the clear `value` for the depth buffer, default at 1.0
+fun glClearDepthf(value: Float) `{ glClearDepthf(value); `}
+
+# Specify the clear `value` for the stencil buffer, default at 0
+fun glClearStencil(value: Int) `{ glClearStencil(value); `}
+
+# Clear the `buffer`
+fun glClear(buffer: GLBuffer) `{ glClear(buffer); `}
+
+# Enable and disable writing of frame buffer color components
+fun glColorMask(red, green, blue, alpha: Bool) `{ glColorMask(red, green, blue, alpha); `}
+
+# Set the viewport
+fun glViewport(x, y, width, height: Int) `{ glViewport(x, y, width, height); `}
+
+# Block until all GL execution is complete
+fun glFinish `{ glFinish(); `}
+
+# Force execution of GL commands in finite time
+fun glFlush `{ glFlush(); `}
+
+# Set texture parameters
+fun glTexParameteri(target: GLTextureTarget, pname: GLTexParameteriName, param: GLTexParameteri) `{
+	glTexParameteri(target, pname, param);
+`}
+
+# Name of parameters of textures
+extern class GLTexParameteriName
+	super GLEnum
+end
+
+fun gl_TEXTURE_MIN_FILTER: GLTexParameteriName `{ return GL_TEXTURE_MIN_FILTER; `}
+fun gl_TEXTURE_MAG_FILTER: GLTexParameteriName `{ return GL_TEXTURE_MAG_FILTER; `}
+fun gl_TEXTURE_WRAP_S: GLTexParameteriName `{ return GL_TEXTURE_WRAP_S; `}
+fun gl_TEXTURE_WRAP_T: GLTexParameteriName `{ return GL_TEXTURE_WRAP_T; `}
 
 # Bind `framebuffer` to a framebuffer target
 #
@@ -839,6 +908,38 @@ fun gl_NICEST: GLHintMode `{ return GL_NICEST; `}
 # No preference
 fun gl_DONT_CARE: GLHintMode `{ return GL_DONT_CARE; `}
 
+# Generate `n` framebuffer object names
+fun glGenFramebuffers(n: Int): Array[Int]
+do
+	var array = new CIntArray(n)
+	native_glGenFramebuffers(n, array.native_array)
+	var a = array.to_a
+	array.destroy
+	return a
+end
+
+private fun native_glGenFramebuffers(n: Int, textures: NativeCIntArray) `{
+	glGenFramebuffers(n, (GLuint *)textures);
+`}
+
+# Determine if `name` corresponds to a framebuffer object
+fun glIsFramebuffer(name: Int): Bool `{
+	return glIsFramebuffer(name);
+`}
+
+# Delete named framebuffer objects
+fun glDeleteFramebuffers(framebuffers: SequenceRead[Int])
+do
+	var n = framebuffers.length
+	var array = new CIntArray.from(framebuffers)
+	native_glDeleteFramebuffers(n, array.native_array)
+	array.destroy
+end
+
+private fun native_glDeleteFramebuffers(n: Int, framebuffers: NativeCIntArray) `{
+	return glDeleteFramebuffers(n, (const GLuint *)framebuffers);
+`}
+
 # Attach a level of a texture object as a logical buffer to the currently bound framebuffer object
 fun glFramebufferTexture2D(target: GLFramebufferTarget, attachment: GLAttachment,
                            texture_target: GLTextureTarget,  texture, level: Int) `{
@@ -935,99 +1036,126 @@ extern class GLDataType
 	fun is_sampler_cube: Bool `{ return self == GL_SAMPLER_CUBE; `}
 end
 
-# Kind of primitives to render with `GLES::draw_arrays`
+# Kind of primitives to render
 extern class GLDrawMode
 	super GLEnum
-
-	new points `{ return GL_POINTS; `}
-	new line_strip `{ return GL_LINE_STRIP; `}
-	new line_loop `{ return GL_LINE_LOOP; `}
-	new lines `{ return GL_LINES; `}
-	new triangle_strip `{ return GL_TRIANGLE_STRIP; `}
-	new triangle_fan `{ return GL_TRIANGLE_FAN; `}
-	new triangles `{ return GL_TRIANGLES; `}
 end
+
+fun gl_POINTS: GLDrawMode `{ return GL_POINTS; `}
+fun gl_LINES: GLDrawMode `{ return GL_LINES; `}
+fun gl_LINE_LOOP: GLDrawMode `{ return GL_LINE_LOOP; `}
+fun gl_LINE_STRIP: GLDrawMode `{ return GL_LINE_STRIP; `}
+fun gl_TRIANGLES: GLDrawMode `{ return GL_TRIANGLES; `}
+fun gl_TRIANGLE_STRIP: GLDrawMode `{ return GL_TRIANGLE_STRIP; `}
+fun gl_TRIANGLE_FAN: GLDrawMode `{ return GL_TRIANGLE_FAN; `}
 
 # Pixel arithmetic for blending operations
-#
-# Used by `GLES::blend_func`
 extern class GLBlendFactor
 	super GLEnum
-
-	new zero `{ return GL_ZERO; `}
-	new one `{ return GL_ONE; `}
-	new src_color `{ return GL_SRC_COLOR; `}
-	new one_minus_src_color `{ return GL_ONE_MINUS_SRC_COLOR; `}
-	new dst_color `{ return GL_DST_COLOR; `}
-	new one_minus_dst_color `{ return GL_ONE_MINUS_DST_COLOR; `}
-	new src_alpha `{ return GL_SRC_ALPHA; `}
-	new one_minus_src_alpha `{ return GL_ONE_MINUS_SRC_ALPHA; `}
-	new dst_alpha `{ return GL_DST_ALPHA; `}
-	new one_minus_dst_alpha `{ return GL_ONE_MINUS_DST_ALPHA; `}
-	new constant_color `{ return GL_CONSTANT_COLOR; `}
-	new one_minus_constant_color `{ return GL_ONE_MINUS_CONSTANT_COLOR; `}
-	new constant_alpha `{ return GL_CONSTANT_ALPHA; `}
-	new one_minus_constant_alpha `{ return GL_ONE_MINUS_CONSTANT_ALPHA; `}
-
-	# Used for destination only
-	new src_alpha_saturate `{ return GL_SRC_ALPHA_SATURATE; `}
 end
+
+fun gl_ZERO: GLBlendFactor `{ return GL_ZERO; `}
+fun gl_ONE: GLBlendFactor `{ return GL_ONE; `}
+fun gl_SRC_COLOR: GLBlendFactor `{ return GL_SRC_COLOR; `}
+fun gl_ONE_MINUS_SRC_COLOR: GLBlendFactor `{ return GL_ONE_MINUS_SRC_COLOR; `}
+fun gl_SRC_ALPHA: GLBlendFactor `{ return GL_SRC_ALPHA; `}
+fun gl_ONE_MINUS_SRC_ALPHA: GLBlendFactor `{ return GL_ONE_MINUS_SRC_ALPHA; `}
+fun gl_DST_ALPHA: GLBlendFactor `{ return GL_DST_ALPHA; `}
+fun gl_ONE_MINUS_DST_ALPHA: GLBlendFactor `{ return GL_ONE_MINUS_DST_ALPHA; `}
+fun gl_DST_COLOR: GLBlendFactor `{ return GL_DST_COLOR; `}
+fun gl_ONE_MINUS_DST_COLOR: GLBlendFactor `{ return GL_ONE_MINUS_DST_COLOR; `}
+fun gl_SRC_ALPHA_SATURATE: GLBlendFactor `{ return GL_SRC_ALPHA_SATURATE; `}
 
 # Condition under which a pixel will be drawn
-#
-# Used by `GLES::depth_func`
 extern class GLDepthFunc
 	super GLEnum
-
-	 new never `{ return GL_NEVER; `}
-	 new less `{ return GL_LESS; `}
-	 new equal `{ return GL_EQUAL; `}
-	 new lequal `{ return GL_LEQUAL; `}
-	 new greater `{ return GL_GREATER; `}
-	 new not_equal `{ return GL_NOTEQUAL; `}
-	 new gequal `{ return GL_GEQUAL; `}
-	 new always `{ return GL_ALWAYS; `}
 end
+
+fun gl_NEVER: GLDepthFunc `{ return GL_NEVER; `}
+fun gl_LESS: GLDepthFunc `{ return GL_LESS; `}
+fun gl_EQUAL: GLDepthFunc `{ return GL_EQUAL; `}
+fun gl_LEQUAL: GLDepthFunc `{ return GL_LEQUAL; `}
+fun gl_GREATER: GLDepthFunc `{ return GL_GREATER; `}
+fun gl_NOTEQUAL: GLDepthFunc `{ return GL_NOTEQUAL; `}
+fun gl_GEQUAL: GLDepthFunc `{ return GL_GEQUAL; `}
+fun gl_ALWAYS: GLDepthFunc `{ return GL_ALWAYS; `}
 
 # Format of pixel data
-#
-# Used by `GLES::read_pixels`
 extern class GLPixelFormat
 	super GLEnum
-
-	new alpha `{ return GL_ALPHA; `}
-	new rgb `{ return GL_RGB; `}
-	new rgba `{ return GL_RGBA; `}
 end
+
+fun gl_ALPHA: GLPixelFormat `{ return GL_ALPHA; `}
+fun gl_RGB: GLPixelFormat `{ return GL_RGB; `}
+fun gl_RGBA: GLPixelFormat `{ return GL_RGBA; `}
 
 # Data type of pixel data
-#
-# Used by `GLES::read_pixels`
 extern class GLPixelType
 	super GLEnum
-
-	new unsigned_byte `{ return GL_UNSIGNED_BYTE; `}
-	new unsigned_short_5_6_5 `{ return GL_UNSIGNED_SHORT_5_6_5; `}
-	new unsigned_short_4_4_4_4 `{ return GL_UNSIGNED_SHORT_4_4_4_4; `}
-	new unsigned_short_5_5_5_1 `{ return GL_UNSIGNED_SHORT_5_5_5_1; `}
 end
 
-# Set of buffers as a bitwise OR mask, used by `GLES::clear`
-#
-# ~~~
-# var buffers = (new GLBuffer).color.depth
-# gl.clear buffers
-# ~~~
+fun gl_UNSIGNED_BYTE: GLPixelType `{ return GL_UNSIGNED_BYTE; `}
+fun gl_UNSIGNED_SHORT_5_6_5: GLPixelType `{ return GL_UNSIGNED_SHORT_5_6_5; `}
+fun gl_UNSIGNED_SHORT_4_4_4_4: GLPixelType `{ return GL_UNSIGNED_SHORT_4_4_4_4; `}
+fun gl_UNSIGNED_SHORT_5_5_5_1: GLPixelType `{ return GL_UNSIGNED_SHORT_5_5_5_1; `}
+
+# Set of buffers as a bitwise OR mask
 extern class GLBuffer `{ GLbitfield `}
-	# Get an empty set of buffers
-	new `{ return 0; `}
-
-	# Add the color buffer to the returned buffer set
-	fun color: GLBuffer `{ return self | GL_COLOR_BUFFER_BIT; `}
-
-	# Add the depth buffer to the returned buffer set
-	fun depth: GLBuffer `{ return self | GL_DEPTH_BUFFER_BIT; `}
-
-	# Add the stencil buffer to the returned buffer set
-	fun stencil: GLBuffer `{ return self | GL_STENCIL_BUFFER_BIT; `}
+	# Bitwise OR with `other`
+	fun |(other: GLBuffer): GLBuffer `{ return self | other; `}
 end
+
+fun gl_DEPTH_BUFFER_BIT: GLBuffer `{ return GL_DEPTH_BUFFER_BIT; `}
+fun gl_STENCIL_BUFFER_BIT: GLBuffer `{ return GL_STENCIL_BUFFER_BIT; `}
+fun gl_COLOR_BUFFER_BIT: GLBuffer `{ return GL_COLOR_BUFFER_BIT; `}
+
+# Define front- and back-facing polygons, `gc_CCW` by default
+fun glFrontFace(mode: GLFrontFaceMode) `{ glFrontFace(mode); `}
+
+# Orientation of front-facing polygons
+extern class GLFrontFaceMode
+	super GLEnum
+end
+
+fun gl_CW: GLFrontFaceMode `{ return GL_CW; `}
+fun gl_CCW: GLFrontFaceMode `{ return GL_CCW; `}
+
+# Specify whether front- or back-facing polygons can be culled, default is `back` only
+fun glCullFace(mode: GLCullFaceMode) `{ glCullFace(mode); `}
+
+# Candidates for culling
+extern class GLCullFaceMode
+	super GLEnum
+end
+
+fun gl_FRONT: GLCullFaceMode `{ return GL_FRONT; `}
+fun gl_BACK: GLCullFaceMode `{ return GL_BACK; `}
+fun gl_FRONT_AND_BACK: GLCullFaceMode `{ return GL_FRONT_AND_BACK; `}
+
+# Specify mapping of depth values from normalized device coordinates to window coordinates
+#
+# Default at 0.0, 1.0.
+fun glDepthRangef(near, far: Float) `{ glDepthRangef(near, far); `}
+
+# Enable or disable writing into the depth buffer
+fun glDepthMask(value: Bool) `{ glDepthMask(value); `}
+
+# Specify the value used for depth buffer comparisons
+#
+# Default value is `gl_LESS`
+fun glDepthFunc(func: GLDepthFunc) `{ glDepthFunc(func); `}
+
+# Set the pixel arithmetic for the blending operations
+#
+# Default values:
+# * `src_factor`: `gl_ONE`
+# * `dst_factor`: `gl_ZERO`
+fun glBlendFunc(src_factor, dst_factor: GLBlendFactor) `{
+	glBlendFunc(src_factor, dst_factor);
+`}
+
+# Set the scale and units used to calculate depth values
+fun glPolygonOffset(factor, units: Float) `{ glPolygonOffset(factor, units); `}
+
+# Specify the width of rasterized lines
+fun glLineWidth(width: Float) `{ glLineWidth(width); `}

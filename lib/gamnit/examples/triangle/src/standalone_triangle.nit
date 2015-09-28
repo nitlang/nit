@@ -40,10 +40,10 @@ assert_no_gl_error
 assert gl.shader_compiler else print "Cannot compile shaders"
 
 # GL program
-print gl.error.to_s
+print glGetError.to_s
 var program = new GLProgram
-if not program.is_ok then
-	print "Program is not ok: {gl.error.to_s}\nLog:"
+if not glIsProgram(program) then
+	print "Program is not ok: {glGetError.to_s}\nLog:"
 	print program.info_log
 	abort
 end
@@ -51,37 +51,37 @@ assert_no_gl_error
 
 # Vertex shader
 var vertex_shader = new GLVertexShader
-assert vertex_shader.is_ok else print "Vertex shader is not ok: {gl.error}"
-vertex_shader.source = """
+assert glIsShader(vertex_shader) else print "Vertex shader is not ok: {glGetError}"
+glShaderSource(vertex_shader, """
 attribute vec4 vPosition;
 void main()
 {
   gl_Position = vPosition;
 }
-"""@glsl_vertex_shader.to_cstring
-vertex_shader.compile
+"""@glsl_vertex_shader.to_cstring)
+glCompileShader vertex_shader
 assert vertex_shader.is_compiled else print "Vertex shader compilation failed with: {vertex_shader.info_log} {program.info_log}"
 assert_no_gl_error
 
 # Fragment shader
 var fragment_shader = new GLFragmentShader
-assert fragment_shader.is_ok else print "Fragment shader is not ok: {gl.error}"
-fragment_shader.source = """
+assert glIsShader(fragment_shader) else print "Fragment shader is not ok: {glGetError}"
+glShaderSource(fragment_shader, """
 precision mediump float;
 void main()
 {
 	gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);
 }
-"""@glsl_fragment_shader.to_cstring
-fragment_shader.compile
+"""@glsl_fragment_shader.to_cstring)
+glIsShader fragment_shader
 assert fragment_shader.is_compiled else print "Fragment shader compilation failed with: {fragment_shader.info_log}"
 assert_no_gl_error
 
 # Attach to program
-program.attach_shader vertex_shader
-program.attach_shader fragment_shader
+glAttachShader(program, vertex_shader)
+glAttachShader(program, fragment_shader)
 program.bind_attrib_location(0, "vPosition")
-program.link
+glLinkProgram program
 assert program.is_linked else print "Linking failed: {program.info_log}"
 assert_no_gl_error
 
@@ -89,24 +89,24 @@ assert_no_gl_error
 var vertices = [0.0, 0.5, 0.0, -0.5, -0.5, 0.0, 0.5, -0.5, 0.0]
 var vertex_array = new VertexArray(0, 3, vertices)
 vertex_array.attrib_pointer
-gl.clear_color(0.5, 0.0, 0.5, 1.0)
+glClearColor(0.5, 0.0, 0.5, 1.0)
 for i in [0..1000[ do
 	printn "."
 	assert_no_gl_error
-	gl.viewport(0, 0, width, height)
-	gl.clear((new GLBuffer).color)
-	program.use
+	glViewport(0, 0, width, height)
+	glClear gl_COLOR_BUFFER_BIT
+	glUseProgram program
 	vertex_array.enable
 
-	glDrawArrays(new GLDrawMode.triangles, 0, 3)
+	glDrawArrays(gl_TRIANGLES, 0, 3)
 
 	display.flip
 end
 
 # Clean up
-program.delete
-vertex_shader.delete
-fragment_shader.delete
+glDeleteProgram program
+glDeleteShader vertex_shader
+glDeleteShader fragment_shader
 
 # Close gamnit
 display.close
