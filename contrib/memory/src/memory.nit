@@ -27,6 +27,7 @@
 # * Crappy UI element placement
 module memory is
 	app_name("Memorize Shapes and Colors")
+	app_namespace "org.nitlanguage.memory"
 	app_version(0, 1, git_revision)
 end
 

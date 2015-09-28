@@ -33,4 +33,4 @@ bin/memory.apk: assets/images/drawing.png src/*.nit res/drawable-ldpi/icon.png
 
 android-release: assets/images/drawing.png src/*.nit res/drawable-ldpi/icon.png
 	mkdir -p bin
-	../../bin/nitc -o bin/memory.apk src/memory.nit -m ../../lib/mnit/android/android.nit -m ../../lib/android/  landscape.nit  --release
+	../../bin/nitc -o bin/memory.apk src/memory.nit -m ../../lib/mnit/android/android.nit -m ../../lib/android/landscape.nit  --release
