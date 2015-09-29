@@ -32,6 +32,9 @@ class GamnitDisplay
 	# Height of the display, in pixels
 	fun height: Int is abstract
 
+	# Aspect ratio of the screen, `width / height`
+	var aspect_ratio: Float is lazy do return width.to_f / height.to_f
+
 	# Prepare this display
 	#
 	# The implementation varies per platform.
