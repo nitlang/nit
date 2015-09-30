@@ -19,6 +19,7 @@ import app
 
 import display
 import textures
+import programs
 
 import gamnit_android is conditional(android)
 
