@@ -380,7 +380,10 @@ class GLfloatArray
 	super CArray[Float]
 	redef type NATIVE: NativeGLfloatArray
 
-	init do native_array = new NativeGLfloatArray(length)
+	redef init(length)
+	do
+		native_array = new NativeGLfloatArray(length)
+	end
 
 	# Create with the content of `array`
 	new from(array: Array[Float])
