@@ -255,8 +255,8 @@ extern class SDLImage
 	# Returns a reference to the pixels of the texture
 	fun pixels: NativeCByteArray `{ return self->pixels; `}
 
-	# Does this texture has an alpha mask?
-	fun amask: Bool `{ return self->format->Amask; `}
+	# Mask for the alpha value of each pixel
+	fun amask: Int `{ return self->format->Amask; `}
 end
 
 # A simple rectangle
