@@ -141,7 +141,7 @@ extern class GLProgram `{GLuint`}
 	# Type of the active attribute at `index`
 	#
 	# May only be float related data types (single float, vectors and matrix).
-	fun active_attrib_type(index: Int): GLFloatDataType `{
+	fun active_attrib_type(index: Int): GLDataType `{
 		int size;
 		GLenum type;
 		glGetActiveAttrib(self, index, 0, NULL, &size, &type, NULL);
@@ -585,14 +585,14 @@ fun gl_UNPACK_ALIGNEMENT: GLPack `{ return GL_UNPACK_ALIGNMENT; `}
 # Specify a two-dimensional texture image
 fun glTexImage2D(target: GLTextureTarget, level: Int, internalformat: GLPixelFormat,
                  width, height, border: Int,
-                 format: GLPixelFormat, typ: GLPixelType, data: Pointer) `{
+                 format: GLPixelFormat, typ: GLDataType, data: Pointer) `{
 	glTexImage2D(target, level, internalformat, width, height, border, format, typ, data);
 `}
 
 # Specify a two-dimensional texture subimage
 fun glTexSubImage2D(target: GLTextureTarget,
                     level, xoffset, yoffset, width, height, border: Int,
-                    format: GLPixelFormat, typ: GLPixelType, data: Pointer) `{
+                    format: GLPixelFormat, typ: GLDataType, data: Pointer) `{
 	glTexSubImage2D(target, level, xoffset, yoffset, width, height, format, typ, data);
 `}
 
@@ -608,7 +608,7 @@ fun glCopyTexSubImage2D(target: GLTextureTarget, level, xoffset, yoffset, x, y, 
 `}
 
 # Copy a block of pixels from the framebuffer of `fomat` and `typ` at `data`
-fun glReadPixels(x, y, width, height: Int, format: GLPixelFormat, typ: GLPixelType, data: Pointer) `{
+fun glReadPixels(x, y, width, height: Int, format: GLPixelFormat, typ: GLDataType, data: Pointer) `{
 	glReadPixels(x, y, width, height, format, typ, data);
 `}
 
@@ -1025,46 +1025,42 @@ class GLCapabilities
 	var stencil_test: GLCap is lazy do return new GLCap(0x0B90)
 end
 
-# Float related data types of OpenGL ES 2.0 shaders
-#
-# Only data types supported by shader attributes, as seen with
-# `GLProgram::active_attrib_type`.
-extern class GLFloatDataType
-	super GLEnum
-
-	fun is_float: Bool `{ return self == GL_FLOAT; `}
-	fun is_float_vec2: Bool `{ return self == GL_FLOAT_VEC2; `}
-	fun is_float_vec3: Bool `{ return self == GL_FLOAT_VEC3; `}
-	fun is_float_vec4: Bool `{ return self == GL_FLOAT_VEC4; `}
-	fun is_float_mat2: Bool `{ return self == GL_FLOAT_MAT2; `}
-	fun is_float_mat3: Bool `{ return self == GL_FLOAT_MAT3; `}
-	fun is_float_mat4: Bool `{ return self == GL_FLOAT_MAT4; `}
-
-	# Instances of `GLFloatDataType` can be equal to instances of `GLDataType`
-	redef fun ==(o)
-	do
-		return o != null and o isa GLFloatDataType and o.hash == self.hash
-	end
-end
-
 # All data types of OpenGL ES 2.0 shaders
 #
 # These types can be used by shader uniforms, as seen with
 # `GLProgram::active_uniform_type`.
 extern class GLDataType
-	super GLFloatDataType
-
-	fun is_int: Bool `{ return self == GL_INT; `}
-	fun is_int_vec2: Bool `{ return self == GL_INT_VEC2; `}
-	fun is_int_vec3: Bool `{ return self == GL_INT_VEC3; `}
-	fun is_int_vec4: Bool `{ return self == GL_INT_VEC4; `}
-	fun is_bool: Bool `{ return self == GL_BOOL; `}
-	fun is_bool_vec2: Bool `{ return self == GL_BOOL_VEC2; `}
-	fun is_bool_vec3: Bool `{ return self == GL_BOOL_VEC3; `}
-	fun is_bool_vec4: Bool `{ return self == GL_BOOL_VEC4; `}
-	fun is_sampler_2d: Bool `{ return self == GL_SAMPLER_2D; `}
-	fun is_sampler_cube: Bool `{ return self == GL_SAMPLER_CUBE; `}
+	super GLEnum
 end
+
+fun gl_FLOAT: GLDataType `{ return GL_FLOAT; `}
+fun gl_FLOAT_VEC2: GLDataType `{ return GL_FLOAT_VEC2; `}
+fun gl_FLOAT_VEC3: GLDataType `{ return GL_FLOAT_VEC3; `}
+fun gl_FLOAT_VEC4: GLDataType `{ return GL_FLOAT_VEC4; `}
+fun gl_FLOAT_MAT2: GLDataType `{ return GL_FLOAT_MAT2; `}
+fun gl_FLOAT_MAT3: GLDataType `{ return GL_FLOAT_MAT3; `}
+fun gl_FLOAT_MAT4: GLDataType `{ return GL_FLOAT_MAT4; `}
+
+fun gl_BYTE: GLDataType `{ return GL_BYTE; `}
+fun gl_UNSIGNED_BYTE: GLDataType `{ return GL_UNSIGNED_BYTE; `}
+fun gl_SHORT: GLDataType `{ return GL_SHORT; `}
+fun gl_UNSIGNED_SHORT: GLDataType `{ return GL_UNSIGNED_SHORT; `}
+fun gl_INT: GLDataType `{ return GL_INT; `}
+fun gl_UNSIGNED_INT: GLDataType `{ return GL_UNSIGNED_INT; `}
+fun gl_FIXED: GLDataType `{ return GL_FIXED; `}
+fun gl_INT_VEC2: GLDataType `{ return GL_INT_VEC2; `}
+fun gl_INT_VEC3: GLDataType `{ return GL_INT_VEC3; `}
+fun gl_INT_VEC4: GLDataType `{ return GL_INT_VEC4; `}
+fun gl_BOOL: GLDataType `{ return GL_BOOL; `}
+fun gl_BOOL_VEC2: GLDataType `{ return GL_BOOL_VEC2; `}
+fun gl_BOOL_VEC3: GLDataType `{ return GL_BOOL_VEC3; `}
+fun gl_BOOL_VEC4: GLDataType `{ return GL_BOOL_VEC4; `}
+fun gl_SAMPLER_2D: GLDataType `{ return GL_SAMPLER_2D; `}
+fun gl_SAMPLER_CUBE: GLDataType `{ return GL_SAMPLER_CUBE; `}
+
+fun gl_UNSIGNED_SHORT_5_6_5: GLDataType `{ return GL_UNSIGNED_SHORT_5_6_5; `}
+fun gl_UNSIGNED_SHORT_4_4_4_4: GLDataType `{ return GL_UNSIGNED_SHORT_4_4_4_4; `}
+fun gl_UNSIGNED_SHORT_5_5_5_1: GLDataType `{ return GL_UNSIGNED_SHORT_5_5_5_1; `}
 
 # Kind of primitives to render
 extern class GLDrawMode
@@ -1118,16 +1114,6 @@ end
 fun gl_ALPHA: GLPixelFormat `{ return GL_ALPHA; `}
 fun gl_RGB: GLPixelFormat `{ return GL_RGB; `}
 fun gl_RGBA: GLPixelFormat `{ return GL_RGBA; `}
-
-# Data type of pixel data
-extern class GLPixelType
-	super GLEnum
-end
-
-fun gl_UNSIGNED_BYTE: GLPixelType `{ return GL_UNSIGNED_BYTE; `}
-fun gl_UNSIGNED_SHORT_5_6_5: GLPixelType `{ return GL_UNSIGNED_SHORT_5_6_5; `}
-fun gl_UNSIGNED_SHORT_4_4_4_4: GLPixelType `{ return GL_UNSIGNED_SHORT_4_4_4_4; `}
-fun gl_UNSIGNED_SHORT_5_5_5_1: GLPixelType `{ return GL_UNSIGNED_SHORT_5_5_5_1; `}
 
 # Set of buffers as a bitwise OR mask
 extern class GLBuffer `{ GLbitfield `}
