@@ -621,6 +621,8 @@ end
 
 # A specific method call site with its associated informations.
 class CallSite
+	super MEntity
+
 	# The associated node for location
 	var node: ANode
 
@@ -659,6 +661,7 @@ class CallSite
 	do
 		var map = v.check_signature(self.node, args, self.mproperty, self.msignature)
 		signaturemap = map
+		if map == null then is_broken = true
 		return map == null
 	end
 end
