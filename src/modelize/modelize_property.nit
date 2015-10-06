@@ -1536,7 +1536,7 @@ redef class AAttrPropdef
 			ntype = n_intro.n_type.mtype
 		end
 		# check
-		if ntype ==null or ntype != n_type.mtype then return
+		if ntype == null or ntype != n_type.mtype or mpropdef == null then return
 		modelbuilder.advice(n_type, "useless-signature", "Warning: useless type repetition on redefined attribute `{mpropdef.name}`")
 	end
 end
