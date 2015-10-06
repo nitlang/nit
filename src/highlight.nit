@@ -584,7 +584,6 @@ redef class MSignature
 end
 
 redef class CallSite
-	super HInfoBoxable
 	redef fun infobox(v)
 	do
 		var res = new HInfoBox(v, "call {mpropdef}")
