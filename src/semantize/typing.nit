@@ -540,7 +540,7 @@ private class TypeVisitor
 
 	fun error(node: ANode, message: String)
 	do
-		self.modelbuilder.toolcontext.error(node.hot_location, message)
+		self.modelbuilder.error(node, message)
 	end
 
 	fun get_variable(node: AExpr, variable: Variable): nullable MType
@@ -781,6 +781,9 @@ private class PostTypingVisitor
 	redef fun visit(n) do
 		n.visit_all(self)
 		n.accept_post_typing(type_visitor)
+		if n isa AExpr and n.mtype == null and not n.is_typed then
+			n.is_broken = true
+		end
 	end
 end
 

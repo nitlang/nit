@@ -18,6 +18,7 @@
 module scope
 
 import phase
+import modelbuilder
 
 redef class ToolContext
 	# Run `APropdef::do_scope` on each propdef.
@@ -191,6 +192,7 @@ private class ScopeVisitor
 				var res = search_label("")
 				if res == null then
 					self.error(nlabel, "Syntax Error: invalid anonymous label.")
+					node.is_broken = true
 					return null
 				end
 				return res
@@ -199,6 +201,7 @@ private class ScopeVisitor
 			var res = search_label(name)
 			if res == null then
 				self.error(nlabel, "Syntax Error: invalid label `{name}`.")
+				node.is_broken = true
 				return null
 			end
 			return res
@@ -218,6 +221,7 @@ private class ScopeVisitor
 	fun error(node: ANode, message: String)
 	do
 		self.toolcontext.error(node.hot_location, message)
+		node.is_broken = true
 	end
 end
 

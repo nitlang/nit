@@ -1732,7 +1732,7 @@ abstract class AbstractCompilerVisitor
 	fun stmt(nexpr: nullable AExpr)
 	do
 		if nexpr == null then return
-		if nexpr.mtype == null and not nexpr.is_typed then
+		if nexpr.is_broken then
 			# Untyped expression.
 			# Might mean dead code or invalid code
 			# so aborts
