@@ -147,7 +147,7 @@ redef class MModulePage
 	private fun mclasses_for_mmodule(mmodule: MModule): Set[MClass] do
 		var mclasses = new HashSet[MClass]
 		for mclass in self.mclasses do
-			if mclass.intro.mmodule == mmodule then
+			if mclass.intro_mmodule == mmodule then
 				mclasses.add mclass
 			end
 		end

@@ -1330,7 +1330,7 @@ end
 redef class MClass
 
 	# Runtime name
-	private fun rt_name: String do return "RTClass_{intro.mmodule.jname}_{jname}"
+	private fun rt_name: String do return "RTClass_{intro_mmodule.jname}_{jname}"
 
 	# Generate a Java RTClass for a Nit MClass
 	fun compile_to_java(v: JavaCompilerVisitor) do

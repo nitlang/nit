@@ -374,7 +374,7 @@ redef class ModelBuilder
 		mtype = mtype.undecorate
 		if mtype isa MClassType then
 			vis_type = mtype.mclass.visibility
-			mmodule_type = mtype.mclass.intro.mmodule
+			mmodule_type = mtype.mclass.intro_mmodule
 		else if mtype isa MVirtualType then
 			vis_type = mtype.mproperty.visibility
 			mmodule_type = mtype.mproperty.intro_mclassdef.mmodule
