@@ -110,6 +110,7 @@ redef class ModelBuilder
 				if mpropdef.bound == null then continue
 				if not check_virtual_types_circularity(npropdef, mpropdef.mproperty, mclassdef.bound_mtype, mclassdef.mmodule) then
 					# Invalidate the bound
+					mpropdef.is_broken = true
 					mpropdef.bound = mclassdef.mmodule.model.null_type
 				end
 			end
@@ -720,6 +721,7 @@ redef class ASignature
 				res = false
 			end
 		end
+		if not res then is_broken = true
 		return res
 	end
 end
@@ -831,8 +833,14 @@ redef class AMethPropdef
 			mprop.is_new = n_kwnew != null
 			if mprop.is_new then mclassdef.mclass.has_new_factory = true
 			if name == "sys" then mprop.is_toplevel = true # special case for sys allowed in `new` factories
-			self.check_redef_keyword(modelbuilder, mclassdef, n_kwredef, false, mprop)
+			if not self.check_redef_keyword(modelbuilder, mclassdef, n_kwredef, false, mprop) then
+				mprop.is_broken = true
+				return
+			end
 		else
+			if mprop.is_broken then
+				return
+			end
 			if not self.check_redef_keyword(modelbuilder, mclassdef, n_kwredef, not self isa AMainMethPropdef, mprop) then return
 			check_redef_property_visibility(modelbuilder, self.n_visibility, mprop)
 		end
@@ -841,7 +849,10 @@ redef class AMethPropdef
 		if is_init then
 			for p, n in mclassdef.mprop2npropdef do
 				if p != mprop and p isa MMethod and p.name == name then
-					check_redef_keyword(modelbuilder, mclassdef, n_kwredef, false, p)
+					if not check_redef_keyword(modelbuilder, mclassdef, n_kwredef, false, p) then
+						mprop.is_broken = true
+						return
+					end
 					break
 				end
 			end
@@ -993,13 +1004,14 @@ redef class AMethPropdef
 		var mclassdef = mpropdef.mclassdef
 		var mmodule = mclassdef.mmodule
 		var nsig = self.n_signature
-		var mysignature = self.mpropdef.msignature
+		var mysignature = mpropdef.msignature
 		if mysignature == null then return # Error thus skiped
 
 		# Check
 		if nsig != null then
 			if not nsig.check_signature(modelbuilder, mclassdef) then
-				self.mpropdef.msignature = null # invalidate
+				mpropdef.msignature = null # invalidate
+				mpropdef.is_broken = true
 				return # Forward error
 			end
 		end
@@ -1014,7 +1026,8 @@ redef class AMethPropdef
 			var ret_type = mysignature.return_mtype
 			if ret_type != null and precursor_ret_type == null then
 				modelbuilder.error(nsig.n_type.as(not null), "Redef Error: `{mpropdef.mproperty}` is a procedure, not a function.")
-				self.mpropdef.msignature = null
+				mpropdef.msignature = null
+				mpropdef.is_broken = true
 				return
 			end
 
@@ -1026,7 +1039,8 @@ redef class AMethPropdef
 					var node = nsig.n_params[i]
 					if not modelbuilder.check_sametype(node, mmodule, mclassdef.bound_mtype, myt, prt) then
 						modelbuilder.error(node, "Redef Error: expected `{prt}` for parameter `{mysignature.mparameters[i].name}'; got `{myt}`.")
-						self.mpropdef.msignature = null
+						mpropdef.msignature = null
+						mpropdef.is_broken = true
 					end
 				end
 			end
@@ -1039,7 +1053,8 @@ redef class AMethPropdef
 					ret_type = precursor_ret_type
 				else if not modelbuilder.check_subtype(node, mmodule, mclassdef.bound_mtype, ret_type, precursor_ret_type) then
 					modelbuilder.error(node, "Redef Error: expected `{precursor_ret_type}` for return type; got `{ret_type}`.")
-					self.mpropdef.msignature = null
+					mpropdef.msignature = null
+					mpropdef.is_broken = true
 				end
 			end
 		end

@@ -811,11 +811,13 @@ redef class ModelBuilder
 			# Load the imported module
 			var suppath = seach_module_by_amodule_name(aimport.n_name, mmodule.mgroup)
 			if suppath == null then
+				mmodule.is_broken = true
 				nmodule.mmodule = null # invalidate the module
 				continue # Skip error
 			end
 			var sup = load_module_path(suppath)
 			if sup == null then
+				mmodule.is_broken = true
 				nmodule.mmodule = null # invalidate the module
 				continue # Skip error
 			end
@@ -824,16 +826,20 @@ redef class ModelBuilder
 			imported_modules.add(sup)
 			var mvisibility = aimport.n_visibility.mvisibility
 			if mvisibility == protected_visibility then
+				mmodule.is_broken = true
 				error(aimport.n_visibility, "Error: only properties can be protected.")
+				mmodule.is_broken = true
 				nmodule.mmodule = null # invalidate the module
 				return
 			end
 			if sup == mmodule then
 				error(aimport.n_name, "Error: dependency loop in module {mmodule}.")
+				mmodule.is_broken = true
 				nmodule.mmodule = null # invalidate the module
 			end
 			if sup.in_importation < mmodule then
 				error(aimport.n_name, "Error: dependency loop between modules {mmodule} and {sup}.")
+				mmodule.is_broken = true
 				nmodule.mmodule = null # invalidate the module
 				return
 			end
@@ -843,6 +849,7 @@ redef class ModelBuilder
 			var mod_name = "core"
 			var sup = self.get_mmodule_by_name(nmodule, null, mod_name)
 			if sup == null then
+				mmodule.is_broken = true
 				nmodule.mmodule = null # invalidate the module
 			else # Skip error
 				imported_modules.add(sup)

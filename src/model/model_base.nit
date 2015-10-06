@@ -64,6 +64,20 @@ abstract class MEntity
 
 	# A Model Entity has a direct link to its model
 	fun model: Model is abstract
+
+	# The indication that the entity did not pass some semantic verifications.
+	#
+	# This simple flag is set by a given analysis to say that the entity is broken and unusable in
+	# an execution.
+	# When an entity status is set to broken, it is usually associated with a error message.
+	#
+	# If it is safe to do so, clients of the model SHOULD just skip broken entities in their processing.
+	# Clients that do not care about the executability (e.g. metrics) MAY still process the entity or
+	# perform specific checks to determinate the validity of the entity.
+	#
+	# Note that the broken status is not propagated to enclosing and enclosed entities.
+	# e.g. a broken method does not make the whole module broken.
+	var is_broken = false is writable
 end
 
 # Something that represents a concern

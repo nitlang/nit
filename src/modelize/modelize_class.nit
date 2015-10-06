@@ -116,12 +116,15 @@ redef class ModelBuilder
 			#print "new class {mclass}"
 		else if nclassdef isa AStdClassdef and nmodule.mclass2nclassdef.has_key(mclass) then
 			error(nclassdef, "Error: a class `{name}` is already defined at line {nmodule.mclass2nclassdef[mclass].location.line_start}.")
+			mclass.is_broken = true
 			return
 		else if nclassdef isa AStdClassdef and nclassdef.n_kwredef == null then
 			error(nclassdef, "Redef Error: `{name}` is an imported class. Add the `redef` keyword to refine it.")
+			mclass.is_broken = true
 			return
 		else if arity != 0 and mclass.arity != arity then
 			error(nclassdef, "Redef Error: expected {mclass.arity} formal parameter(s) for {mclass.signature_to_s}; got {arity}.")
+			mclass.is_broken = true
 			return
 		else if nkind != null and mkind != concrete_kind and mclass.kind != mkind then
 			error(nkind, "Redef Error: refinement changed the kind from `{mclass.kind}` to `{mkind}`.")
