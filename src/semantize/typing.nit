@@ -1126,6 +1126,24 @@ redef class ALoopExpr
 end
 
 redef class AForExpr
+	redef fun accept_typing(v)
+	do
+		v.has_loop = true
+
+		for g in n_groups do
+			var mtype = v.visit_expr(g.n_expr)
+			if mtype == null then return
+			g.do_type_iterator(v, mtype)
+		end
+
+		v.visit_stmt(n_block)
+
+		self.mtype = n_block.mtype
+		self.is_typed = true
+	end
+end
+
+redef class AForGroup
 	var coltype: nullable MClassType
 
 	var method_iterator: nullable CallSite
@@ -1251,20 +1269,6 @@ redef class AForExpr
 
 			self.method_successor = v.get_method(self, vtype, "successor", false)
 		end
-	end
-
-	redef fun accept_typing(v)
-	do
-		v.has_loop = true
-		var mtype = v.visit_expr(n_expr)
-		if mtype == null then return
-
-		self.do_type_iterator(v, mtype)
-
-		v.visit_stmt(n_block)
-
-		self.mtype = n_block.mtype
-		self.is_typed = true
 	end
 end
 

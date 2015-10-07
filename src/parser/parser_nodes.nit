@@ -1907,6 +1907,23 @@ class AForExpr
 	# The `for` keyword
 	var n_kwfor: TKwfor is writable, noinit
 
+	# The list of groups to iterate
+	var n_groups = new ANodes[AForGroup](self)
+
+	# The `do` keyword
+	var n_kwdo: TKwdo is writable, noinit
+
+	# The body of the loop
+	var n_block: nullable AExpr = null is writable
+end
+
+# A collection iterated by a for, its automatic variables and its implicit iterator.
+#
+# Standard `for` iterate on a single collection.
+# Multiple `for` can iterate on more than one collection at once.
+class AForGroup
+	super Prod
+
 	# The list of name of the automatic variables
 	var n_ids = new ANodes[TId](self)
 
@@ -1915,12 +1932,6 @@ class AForExpr
 
 	# The expression used as the collection to iterate on
 	var n_expr: AExpr is writable, noinit
-
-	# The `do` keyword
-	var n_kwdo: TKwdo is writable, noinit
-
-	# The body of the loop
-	var n_block: nullable AExpr = null is writable
 end
 
 # A `with` statement

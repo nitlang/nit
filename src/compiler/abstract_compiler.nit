@@ -3307,51 +3307,66 @@ end
 redef class AForExpr
 	redef fun stmt(v)
 	do
-		var cl = v.expr(self.n_expr, null)
-		var it_meth = self.method_iterator
-		assert it_meth != null
-		var it = v.compile_callsite(it_meth, [cl])
-		assert it != null
+		for g in n_groups do
+			var cl = v.expr(g.n_expr, null)
+			var it_meth = g.method_iterator
+			assert it_meth != null
+			var it = v.compile_callsite(it_meth, [cl])
+			assert it != null
+			g.it = it
+		end
 		v.add("for(;;) \{")
-		var isok_meth = self.method_is_ok
-		assert isok_meth != null
-		var ok = v.compile_callsite(isok_meth, [it])
-		assert ok != null
-		v.add("if(!{ok}) break;")
-		if self.variables.length == 1 then
-			var item_meth = self.method_item
-			assert item_meth != null
-			var i = v.compile_callsite(item_meth, [it])
-			assert i != null
-			v.assign(v.variable(variables.first), i)
-		else if self.variables.length == 2 then
-			var key_meth = self.method_key
-			assert key_meth != null
-			var i = v.compile_callsite(key_meth, [it])
-			assert i != null
-			v.assign(v.variable(variables[0]), i)
-			var item_meth = self.method_item
-			assert item_meth != null
-			i = v.compile_callsite(item_meth, [it])
-			assert i != null
-			v.assign(v.variable(variables[1]), i)
-		else
-			abort
+		for g in n_groups do
+			var it = g.it
+			var isok_meth = g.method_is_ok
+			assert isok_meth != null
+			var ok = v.compile_callsite(isok_meth, [it])
+			assert ok != null
+			v.add("if(!{ok}) break;")
+			if g.variables.length == 1 then
+				var item_meth = g.method_item
+				assert item_meth != null
+				var i = v.compile_callsite(item_meth, [it])
+				assert i != null
+				v.assign(v.variable(g.variables.first), i)
+			else if g.variables.length == 2 then
+				var key_meth = g.method_key
+				assert key_meth != null
+				var i = v.compile_callsite(key_meth, [it])
+				assert i != null
+				v.assign(v.variable(g.variables[0]), i)
+				var item_meth = g.method_item
+				assert item_meth != null
+				i = v.compile_callsite(item_meth, [it])
+				assert i != null
+				v.assign(v.variable(g.variables[1]), i)
+			else
+				abort
+			end
 		end
 		v.stmt(self.n_block)
 		v.add_escape_label(continue_mark)
-		var next_meth = self.method_next
-		assert next_meth != null
-		v.compile_callsite(next_meth, [it])
+		for g in n_groups do
+			var next_meth = g.method_next
+			assert next_meth != null
+			v.compile_callsite(next_meth, [g.it])
+		end
 		v.add("\}")
 		v.add_escape_label(break_mark)
 
-		var method_finish = self.method_finish
-		if method_finish != null then
-			# TODO: Find a way to call this also in long escape (e.g. return)
-			v.compile_callsite(method_finish, [it])
+		for g in n_groups do
+			var method_finish = g.method_finish
+			if method_finish != null then
+				# TODO: Find a way to call this also in long escape (e.g. return)
+				v.compile_callsite(method_finish, [g.it])
+			end
 		end
 	end
+end
+
+redef class AForGroup
+	# C variable representing the iterator
+	private var it: RuntimeVariable is noinit
 end
 
 redef class AAssertExpr

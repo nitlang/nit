@@ -934,13 +934,14 @@ Start ../src/test_parser.nit:17,1--156,1
               ABlockExpr ../src/test_parser.nit:119,2--155,3
                 AForExpr ../src/test_parser.nit:119,2--154,4
                   TKwfor "for" ../src/test_parser.nit:119,2--4
-                  TId "a" ../src/test_parser.nit:119,6
-                  TKwin "in" ../src/test_parser.nit:119,8--9
-                  ACallExpr ../src/test_parser.nit:119,11--14
-                    AImplicitSelfExpr ../src/test_parser.nit:119,11
-                    AQid ../src/test_parser.nit:119,11--14
-                      TId "args" ../src/test_parser.nit:119,11--14
-                    AListExprs ../src/test_parser.nit:119,14
+                  AForGroup ../src/test_parser.nit:119,6--14
+                    TId "a" ../src/test_parser.nit:119,6
+                    TKwin "in" ../src/test_parser.nit:119,8--9
+                    ACallExpr ../src/test_parser.nit:119,11--14
+                      AImplicitSelfExpr ../src/test_parser.nit:119,11
+                      AQid ../src/test_parser.nit:119,11--14
+                        TId "args" ../src/test_parser.nit:119,11--14
+                      AListExprs ../src/test_parser.nit:119,14
                   TKwdo "do" ../src/test_parser.nit:119,16--17
                   ABlockExpr ../src/test_parser.nit:120,3--154,4
                     AVardeclExpr ../src/test_parser.nit:120,3--12

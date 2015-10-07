@@ -254,18 +254,21 @@ end
 redef class AForExpr
 	redef fun numbering(v, position)
 	do
-		# Give a position to each variable declared in the header of the for
-		if self.variables.length == 1 then
-			self.variables.first.position = position
-			self.variables[0].position = position
-			position += 1
-		else if self.variables.length == 2 then
-			self.variables[0].position = position
-			position += 1
-			self.variables[1].position = position
-			position += 1
+		for g in n_groups do
+			# Give a position to each variable declared in the header of the for
+			if g.variables.length == 1 then
+				g.variables.first.position = position
+				g.variables[0].position = position
+				position += 1
+			else if g.variables.length == 2 then
+				g.variables[0].position = position
+				position += 1
+				g.variables[1].position = position
+				position += 1
+			end
+			position = v.numbering(self.n_block, position)
 		end
-		return v.numbering(self.n_block, position)
+		return position
 	end
 end
 

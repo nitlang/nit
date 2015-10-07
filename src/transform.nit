@@ -213,89 +213,97 @@ redef class AForExpr
 		var escapemark = self.break_mark
 		assert escapemark != null
 
+		# Main block that will contain the whole for and will replace `self`
 		var nblock = v.builder.make_block
 
+		# Part before the loop
+		var before = v.builder.make_block
+		nblock.add before
+
+		# The loop
+		var nloop = v.builder.make_loop
+		nloop.break_mark = escapemark
+		nblock.add nloop
+
+		# Part before the body inside the loop
+		var begin = v.builder.make_block
+		nloop.add begin
+
+		# The `do` block with then user code
+		var ndo = v.builder.make_do
+		ndo.break_mark = escapemark.continue_mark
+		nloop.add ndo
+
+		ndo.add self.n_block.as(not null)
+
+		# Fill up each part
+		for g in n_groups do
+			g.transform_in(v, before, begin, nloop, nblock, escapemark)
+		end
+
+		replace_with(nblock)
+	end
+end
+
+redef class AForGroup
+	private fun transform_in(v: TransformVisitor, before, begin, next, finish: AExpr, escapemark: EscapeMark)
+	do
 		var nexpr = n_expr
 
 		# Shortcut on explicit range
 		# Avoid the instantiation of the range and the iterator
 		if self.variables.length == 1 and nexpr isa ARangeExpr and not v.phase.toolcontext.opt_no_shortcut_range.value then
+			# Before: evaluate bounds
 			var variable = variables.first
-			nblock.add v.builder.make_var_assign(variable, nexpr.n_expr)
+			before.add v.builder.make_var_assign(variable, nexpr.n_expr)
 			var to = nexpr.n_expr2
-			nblock.add to
+			before.add to
 
-			var nloop = v.builder.make_loop
-			nloop.break_mark = escapemark
-			nblock.add nloop
-
+			# Begin: check variable
 			var is_ok = v.builder.make_call(v.builder.make_var_read(variable, variable.declared_type.as(not null)), method_lt.as(not null), [to.make_var_read])
-
 			var nif = v.builder.make_if(is_ok, null)
-			nloop.add nif
+			begin.add nif
+			nif.n_else.add v.builder.make_break(escapemark)
 
-			var nthen = nif.n_then
-			var ndo = v.builder.make_do
-			ndo.break_mark = escapemark.continue_mark
-			nthen.add ndo
-
-			ndo.add self.n_block.as(not null)
-
+			# Next: increment one
 			var one = v.builder.make_int(1)
 			var succ = v.builder.make_call(v.builder.make_var_read(variable, variable.declared_type.as(not null)), method_successor.as(not null), [one])
-			nthen.add v.builder.make_var_assign(variable, succ)
-
-			var nbreak = v.builder.make_break(escapemark)
-			nif.n_else.add nbreak
-
-			replace_with(nblock)
+			next.add v.builder.make_var_assign(variable, succ)
 			return
 		end
 
-		nblock.add nexpr
-
+		# Before: evaluate expr, make the iterator
+		before.add nexpr
 		var iter = v.builder.make_call(nexpr.make_var_read, method_iterator.as(not null), null)
-		nblock.add iter
+		before.add iter
 
-		var nloop = v.builder.make_loop
-		nloop.break_mark = escapemark
-		nblock.add nloop
-
+		# Begin: check iterator `is_ok`
 		var is_ok = v.builder.make_call(iter.make_var_read, method_is_ok.as(not null), null)
-
 		var nif = v.builder.make_if(is_ok, null)
-		nloop.add nif
+		begin.add nif
+		nif.n_else.add v.builder.make_break(escapemark)
 
-		var nthen = nif.n_then
-		var ndo = v.builder.make_do
-		ndo.break_mark = escapemark.continue_mark
-		nthen.add ndo
-
-		if self.variables.length == 1 then
+		# Begin: assign automatic variables
+		if variables.length == 1 then
 			var item = v.builder.make_call(iter.make_var_read, method_item.as(not null), null)
-			ndo.add v.builder.make_var_assign(variables.first, item)
-		else if self.variables.length == 2 then
+			begin.add v.builder.make_var_assign(variables.first, item)
+		else if variables.length == 2 then
 			var key = v.builder.make_call(iter.make_var_read, method_key.as(not null), null)
-			ndo.add v.builder.make_var_assign(variables[0], key)
+			begin.add v.builder.make_var_assign(variables[0], key)
 			var item = v.builder.make_call(iter.make_var_read, method_item.as(not null), null)
-			ndo.add v.builder.make_var_assign(variables[1], item)
+			begin.add v.builder.make_var_assign(variables[1], item)
 		else
 			abort
 		end
 
-		ndo.add self.n_block.as(not null)
+		# Next: call next
+		next.add v.builder.make_call(iter.make_var_read, method_next.as(not null), null)
 
-		nthen.add v.builder.make_call(iter.make_var_read, method_next.as(not null), null)
-
-		var nbreak = v.builder.make_break(escapemark)
-		nif.n_else.add nbreak
-
-		var method_finish = self.method_finish
+		# Finish: call finish
+		var method_finish = method_finish
 		if method_finish != null then
-			nblock.add v.builder.make_call(iter.make_var_read, method_finish, null)
+			finish.add v.builder.make_call(iter.make_var_read, method_finish, null)
 		end
-
-		replace_with(nblock)
 	end
 end
 
@@ -388,7 +396,7 @@ redef class ACrangeExpr
 	# `[x..y]` is replaced with `new Range[X](x,y)`
 	redef fun accept_transform_visitor(v)
 	do
-		if parent isa AForExpr then return # to permit shortcut ranges
+		if parent isa AForGroup then return # to permit shortcut ranges
 		replace_with(v.builder.make_new(init_callsite.as(not null), [n_expr, n_expr2]))
 	end
 end
@@ -397,7 +405,7 @@ redef class AOrangeExpr
 	# `[x..y[` is replaced with `new Range[X].without_last(x,y)`
 	redef fun accept_transform_visitor(v)
 	do
-		if parent isa AForExpr then return # to permit shortcut ranges
+		if parent isa AForGroup then return # to permit shortcut ranges
 		replace_with(v.builder.make_new(init_callsite.as(not null), [n_expr, n_expr2]))
 	end
 end

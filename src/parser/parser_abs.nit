@@ -361,6 +361,7 @@ class ALabel super Prod end
 class AExpr super Prod end
 class AExprs super Prod end
 class AAssignOp super Prod end
+class AForGroup super Prod end
 class AModuleName super Prod end
 class AExternCalls super Prod end
 class AExternCall super Prod end
@@ -737,9 +738,7 @@ end
 class AForExpr
 	super AExpr
 	var n_kwfor: TKwfor is writable, noinit
-	var n_ids: List[TId] = new List[TId]
-	var n_kwin: TKwin is writable, noinit
-	var n_expr: AExpr is writable, noinit
+	var n_groups: List[AForGroup] = new List[AForGroup]
 	var n_kwdo: TKwdo is writable, noinit
 	var n_block: nullable AExpr = null is writable
 	var n_label: nullable ALabel = null is writable
@@ -1244,6 +1243,12 @@ end
 class AGgAssignOp
 	super AAssignOp
 	var n_op: TGgeq is writable, noinit
+end
+class AForGroup
+	super AForGroup
+	var n_ids: List[TId] = new List[TId]
+	var n_kwin: TKwin is writable, noinit
+	var n_expr: AExpr is writable, noinit
 end
 class AModuleName
 	super AModuleName

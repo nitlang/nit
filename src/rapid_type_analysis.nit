@@ -699,7 +699,7 @@ redef class ASuperExpr
 	end
 end
 
-redef class AForExpr
+redef class AForGroup
 	redef fun accept_rapid_type_visitor(v)
 	do
 		v.add_callsite(self.method_iterator)

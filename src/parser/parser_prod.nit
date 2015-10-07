@@ -3190,9 +3190,7 @@ end
 redef class AForExpr
 	init init_aforexpr (
 		n_kwfor: nullable TKwfor,
-		n_ids: Collection[Object], # Should be Collection[TId]
-		n_kwin: nullable TKwin,
-		n_expr: nullable AExpr,
+		n_groups: Collection[Object], # Should be Collection[AForGroup]
 		n_kwdo: nullable TKwdo,
 		n_block: nullable AExpr,
 		n_label: nullable ALabel
@@ -3200,11 +3198,7 @@ redef class AForExpr
 	do
 		_n_kwfor = n_kwfor.as(not null)
 		n_kwfor.parent = self
-		self.n_ids.unsafe_add_all(n_ids)
-		_n_kwin = n_kwin.as(not null)
-		n_kwin.parent = self
-		_n_expr = n_expr.as(not null)
-		n_expr.parent = self
+		self.n_groups.unsafe_add_all(n_groups)
 		_n_kwdo = n_kwdo.as(not null)
 		n_kwdo.parent = self
 		_n_block = n_block
@@ -3219,15 +3213,7 @@ redef class AForExpr
 			n_kwfor = new_child.as(TKwfor)
 			return
 		end
-		if n_ids.replace_child(old_child, new_child) then return
-		if _n_kwin == old_child then
-			n_kwin = new_child.as(TKwin)
-			return
-		end
-		if _n_expr == old_child then
-			n_expr = new_child.as(AExpr)
-			return
-		end
+		if n_groups.replace_child(old_child, new_child) then return
 		if _n_kwdo == old_child then
 			n_kwdo = new_child.as(TKwdo)
 			return
@@ -3245,16 +3231,6 @@ redef class AForExpr
 	redef fun n_kwfor=(node)
 	do
 		_n_kwfor = node
-		node.parent = self
-	end
-	redef fun n_kwin=(node)
-	do
-		_n_kwin = node
-		node.parent = self
-	end
-	redef fun n_expr=(node)
-	do
-		_n_expr = node
 		node.parent = self
 	end
 	redef fun n_kwdo=(node)
@@ -3277,9 +3253,7 @@ redef class AForExpr
 	redef fun visit_all(v: Visitor)
 	do
 		v.enter_visit(_n_kwfor)
-		n_ids.visit_all(v)
-		v.enter_visit(_n_kwin)
-		v.enter_visit(_n_expr)
+		n_groups.visit_all(v)
 		v.enter_visit(_n_kwdo)
 		v.enter_visit(_n_block)
 		v.enter_visit(_n_label)
@@ -7694,6 +7668,52 @@ redef class AGgAssignOp
 	redef fun visit_all(v: Visitor)
 	do
 		v.enter_visit(_n_op)
+	end
+end
+redef class AForGroup
+	init init_aforgroup (
+		n_ids: Collection[Object], # Should be Collection[TId]
+		n_kwin: nullable TKwin,
+		n_expr: nullable AExpr
+	)
+	do
+		self.n_ids.unsafe_add_all(n_ids)
+		_n_kwin = n_kwin.as(not null)
+		n_kwin.parent = self
+		_n_expr = n_expr.as(not null)
+		n_expr.parent = self
+	end
+
+	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
+	do
+		if n_ids.replace_child(old_child, new_child) then return
+		if _n_kwin == old_child then
+			n_kwin = new_child.as(TKwin)
+			return
+		end
+		if _n_expr == old_child then
+			n_expr = new_child.as(AExpr)
+			return
+		end
+	end
+
+	redef fun n_kwin=(node)
+	do
+		_n_kwin = node
+		node.parent = self
+	end
+	redef fun n_expr=(node)
+	do
+		_n_expr = node
+		node.parent = self
+	end
+
+
+	redef fun visit_all(v: Visitor)
+	do
+		n_ids.visit_all(v)
+		v.enter_visit(_n_kwin)
+		v.enter_visit(_n_expr)
 	end
 end
 redef class AModuleName
