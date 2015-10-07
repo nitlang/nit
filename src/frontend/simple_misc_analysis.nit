@@ -172,8 +172,14 @@ end
 redef class AForExpr
 	redef fun after_simple_misc(v)
 	do
-		n_expr.warn_parentheses(v)
 		v.check_do_expr(n_block)
+	end
+end
+
+redef class AForGroup
+	redef fun after_simple_misc(v)
+	do
+		n_expr.warn_parentheses(v)
 	end
 end
 

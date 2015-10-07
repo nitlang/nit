@@ -377,9 +377,6 @@ redef class ALoopExpr
 end
 
 redef class AForExpr
-	# The automatic variables in order
-	var variables: nullable Array[Variable]
-
 	# The break escape mark associated with the 'for'
 	var break_mark: nullable EscapeMark
 
@@ -388,18 +385,22 @@ redef class AForExpr
 
 	redef fun accept_scope_visitor(v)
 	do
-		v.enter_visit(n_expr)
+		for g in n_groups do
+			v.enter_visit(g.n_expr)
+		end
 
 		# Protect automatic variables
 		v.scopes.unshift(new Scope)
 
-		# Create the automatic variables
-		var variables = new Array[Variable]
-		self.variables = variables
-		for nid in n_ids do
-			var va = new Variable(nid.text)
-			v.register_variable(nid, va)
-			variables.add(va)
+		for g in n_groups do
+			# Create the automatic variables
+			var variables = new Array[Variable]
+			g.variables = variables
+			for nid in g.n_ids do
+				var va = new Variable(nid.text)
+				v.register_variable(nid, va)
+				variables.add(va)
+			end
 		end
 
 		var escapemark = v.make_escape_mark(n_label, true)
@@ -409,6 +410,11 @@ redef class AForExpr
 
 		v.shift_scope
 	end
+end
+
+redef class AForGroup
+	# The automatic variables in order
+	var variables: nullable Array[Variable]
 end
 
 redef class AWithExpr

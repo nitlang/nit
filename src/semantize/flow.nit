@@ -423,7 +423,9 @@ end
 redef class AForExpr
 	redef fun accept_flow_visitor(v)
 	do
-		v.enter_visit(self.n_expr)
+		for g in n_groups do
+			v.enter_visit(g.n_expr)
+		end
 
 		var before_loop = v.make_sub_flow
 
