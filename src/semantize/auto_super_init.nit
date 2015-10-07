@@ -127,7 +127,7 @@ redef class AMethPropdef
 			var msignature = candidatedef.new_msignature or else candidatedef.msignature
 			msignature = msignature.resolve_for(recvtype, anchor, mmodule, true)
 
-			var callsite = new CallSite(self, recvtype, mmodule, anchor, true, candidate, candidatedef, msignature, false)
+			var callsite = new CallSite(hot_location, recvtype, mmodule, anchor, true, candidate, candidatedef, msignature, false)
 			auto_super_inits.add(callsite)
 			modelbuilder.toolcontext.info("Old-style auto-super init for {mpropdef} to {candidate.full_name}", 4)
 		end
@@ -162,7 +162,7 @@ redef class AMethPropdef
 			var msignature = candidatedef.new_msignature or else candidatedef.msignature
 			msignature = msignature.resolve_for(recvtype, anchor, mmodule, true)
 
-			var callsite = new CallSite(self, recvtype, mmodule, anchor, true, the_root_init_mmethod, candidatedef, msignature, false)
+			var callsite = new CallSite(hot_location, recvtype, mmodule, anchor, true, the_root_init_mmethod, candidatedef, msignature, false)
 			auto_super_inits.add(callsite)
 			modelbuilder.toolcontext.info("Auto-super init for {mpropdef} to {the_root_init_mmethod.full_name}", 4)
 		end

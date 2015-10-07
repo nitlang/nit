@@ -389,7 +389,7 @@ private class TypeVisitor
 			end
 		end
 
-		var callsite = new CallSite(node, recvtype, mmodule, anchor, recv_is_self, mproperty, mpropdef, msignature, erasure_cast)
+		var callsite = new CallSite(node.hot_location, recvtype, mmodule, anchor, recv_is_self, mproperty, mpropdef, msignature, erasure_cast)
 		return callsite
 	end
 
@@ -623,8 +623,8 @@ end
 class CallSite
 	super MEntity
 
-	# The associated node for location
-	var node: ANode
+	# The associated location of the callsite
+	var location: Location
 
 	# The static type of the receiver (possibly unresolved)
 	var recv: MType
@@ -657,9 +657,9 @@ class CallSite
 	# If null then no specific association is required.
 	var signaturemap: nullable SignatureMap = null
 
-	private fun check_signature(v: TypeVisitor, args: Array[AExpr]): Bool
+	private fun check_signature(v: TypeVisitor, node: ANode, args: Array[AExpr]): Bool
 	do
-		var map = v.check_signature(self.node, args, self.mproperty, self.msignature)
+		var map = v.check_signature(node, args, self.mproperty, self.msignature)
 		signaturemap = map
 		if map == null then is_broken = true
 		return map == null
@@ -1726,7 +1726,7 @@ redef class ASendExpr
 
 		var args = compute_raw_arguments
 
-		callsite.check_signature(v, args)
+		callsite.check_signature(v, node, args)
 
 		if callsite.mproperty.is_init then
 			var vmpropdef = v.mpropdef
@@ -1845,7 +1845,7 @@ redef class ASendReassignFormExpr
 
 		var args = compute_raw_arguments
 
-		callsite.check_signature(v, args)
+		callsite.check_signature(v, node, args)
 
 		var readtype = callsite.msignature.return_mtype
 		if readtype == null then
@@ -1862,7 +1862,7 @@ redef class ASendReassignFormExpr
 
 		args = args.to_a # duplicate so raw_arguments keeps only the getter args
 		args.add(self.n_value)
-		wcallsite.check_signature(v, args)
+		wcallsite.check_signature(v, node, args)
 
 		self.is_typed = true
 	end
@@ -1983,12 +1983,12 @@ redef class ASuperExpr
 		var msignature = superprop.new_msignature or else superprop.msignature.as(not null)
 		msignature = v.resolve_for(msignature, recvtype, true).as(MSignature)
 
-		var callsite = new CallSite(self, recvtype, v.mmodule, v.anchor, true, superprop.mproperty, superprop, msignature, false)
+		var callsite = new CallSite(hot_location, recvtype, v.mmodule, v.anchor, true, superprop.mproperty, superprop, msignature, false)
 		self.callsite = callsite
 
 		var args = self.n_args.to_a
 		if args.length > 0 then
-			callsite.check_signature(v, args)
+			callsite.check_signature(v, self, args)
 		else
 			# Check there is at least enough parameters
 			if mpropdef.msignature.arity < msignature.arity then
@@ -2087,7 +2087,7 @@ redef class ANewExpr
 		end
 
 		var args = n_args.to_a
-		callsite.check_signature(v, args)
+		callsite.check_signature(v, node, args)
 	end
 end
 
