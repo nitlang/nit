@@ -15,13 +15,14 @@
   TString "\"hello world\"" 1,1--13
 --> AForExpr 1,1--15
   TKwfor "for" 1,1--3
-  TId "i" 1,5
-  TKwin "in" 1,7--8
-  ACallExpr 1,10
-    AImplicitSelfExpr 1,10
-    AQid 1,10
-      TId "x" 1,10
-    AListExprs 1,10
+  AForGroup 1,5--10
+    TId "i" 1,5
+    TKwin "in" 1,7--8
+    ACallExpr 1,10
+      AImplicitSelfExpr 1,10
+      AQid 1,10
+        TId "x" 1,10
+      AListExprs 1,10
   TKwdo "do" 1,12--13
   ACallExpr 1,15
     AImplicitSelfExpr 1,15
@@ -44,13 +45,14 @@
         AListExprs 1,12
 --> ... ... AForExpr 1,1--3,3
   TKwfor "for" 1,1--3
-  TId "i" 1,5
-  TKwin "in" 1,7--8
-  ACallExpr 1,10
-    AImplicitSelfExpr 1,10
-    AQid 1,10
-      TId "x" 1,10
-    AListExprs 1,10
+  AForGroup 1,5--10
+    TId "i" 1,5
+    TKwin "in" 1,7--8
+    ACallExpr 1,10
+      AImplicitSelfExpr 1,10
+      AQid 1,10
+        TId "x" 1,10
+      AListExprs 1,10
   TKwdo "do" 1,12--13
   ABlockExpr 2,1--3,3
     ACallExpr 2,1
@@ -71,13 +73,14 @@
       ABlockExpr 2,1--5,3
         AForExpr 2,1--4,3
           TKwfor "for" 2,1--3
-          TId "i" 2,5
-          TKwin "in" 2,7--8
-          ACallExpr 2,10
-            AImplicitSelfExpr 2,10
-            AQid 2,10
-              TId "x" 2,10
-            AListExprs 2,10
+          AForGroup 2,5--10
+            TId "i" 2,5
+            TKwin "in" 2,7--8
+            ACallExpr 2,10
+              AImplicitSelfExpr 2,10
+              AQid 2,10
+                TId "x" 2,10
+              AListExprs 2,10
           TKwdo "do" 2,12--13
           ABlockExpr 3,1--4,3
             ACallExpr 3,1
