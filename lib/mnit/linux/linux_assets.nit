@@ -20,15 +20,6 @@ import mnit
 import linux_app
 
 redef class App
-	var assets_dir: String
-
-	redef fun setup
-	do
-		assets_dir = sys.program_name.dirname + "/../assets/"
-
-		super
-	end
-
 	redef fun try_loading_asset( id )
 	do
 		var path = "{assets_dir}/{id}"

@@ -20,6 +20,12 @@ module linux
 import app
 
 redef class App
+	# Path to the expected location of the asset folder of this program
+	#
+	# The asset folder should be located relative to the executable at `../assets/`.
+	# This value can be redefined to change the expected location.
+	var assets_dir: String = sys.program_name.dirname / "../assets/" is lazy
+
 	redef fun setup
 	do
 		super
