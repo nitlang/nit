@@ -511,8 +511,16 @@ while~withelse {-> expr}
 	;
 
 for~withelse {-> expr}
-	= kwfor no [ids]:idlist [n2]:no kwin [n3]:no expr [n4]:no kwdo stmtso_withend label {-> New expr.for(kwfor, [ids.id], kwin, expr, kwdo, stmtso_withend.expr, label)}
-	| {nolabel} kwfor no [ids]:idlist [n2]:no kwin [n3]:no expr [n4]:no kwdo stmtso~withelse {-> New expr.for(kwfor, [ids.id], kwin, expr, kwdo, stmtso~withelse.expr, Null)}
+	= kwfor no for_groups [n4]:no kwdo stmtso_withend label {-> New expr.for(kwfor, [for_groups.for_group], kwdo, stmtso_withend.expr, label)}
+	| {nolabel} kwfor no for_groups [n4]:no kwdo stmtso~withelse {-> New expr.for(kwfor, [for_groups.for_group], kwdo, stmtso~withelse.expr, Null)}
+	;
+
+for_groups {-> for_group*}
+	= {one} for_group {-> [for_group]}
+	| {many} for_groups no comma [n2]:no for_group {-> [for_groups.for_group, for_group] }
+	;
+for_group
+	= [ids]:idlist [n2]:no kwin [n3]:no expr {-> New for_group([ids.id], kwin, expr)}
 	;
 
 with~withelse {-> expr}
@@ -673,7 +681,7 @@ array_items_tail {-> expr}
 	;
 array_item {-> expr}
 	= expr no {-> expr}
-	| {for} kwfor no [ids]:idlist [n2]:no kwin [n3]:no expr [n4]:no kwdo [block]:array_item {-> New expr.for(kwfor, [ids.id], kwin, expr, kwdo, block.expr, Null)}
+	| {for} kwfor no for_groups [n4]:no kwdo [block]:array_item {-> New expr.for(kwfor, [for_groups.for_group], kwdo, block.expr, Null)}
 	| {if} kwif [n1]:no expr [n2]:no kwthen [n3]:no [then]:array_item {-> New expr.if(kwif, expr, kwthen, then.expr, Null, Null)}
 	;
 
@@ -951,7 +959,7 @@ expr	= {block} expr* kwend?
 	| {ifexpr} kwif expr kwthen [then]:expr kwelse [else]:expr
 	| {while} kwwhile expr kwdo [block]:expr? label?
 	| {loop} kwloop [block]:expr? label?
-	| {for} kwfor [ids]:id* kwin expr kwdo [block]:expr? label?
+	| {for} kwfor [groups]:for_group* kwdo [block]:expr? label?
 	| {with} kwwith expr kwdo [block]:expr? label?
 	| {assert} kwassert id? expr kwelse? [else]:expr?
 	| {once} kwonce expr 
@@ -1045,6 +1053,9 @@ assign_op
 	| {amp} [op]:ampeq
 	| {ll} [op]:lleq
 	| {gg} [op]:ggeq
+	;
+for_group
+	= [ids]:id* kwin expr
 	;
 
 module_name = quad? [path]:id* id;
