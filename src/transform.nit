@@ -394,7 +394,7 @@ redef class ACrangeExpr
 	# `[x..y]` is replaced with `new Range[X](x,y)`
 	redef fun accept_transform_visitor(v)
 	do
-		if parent isa AForExpr then return # to permit shortcut ranges
+		if parent isa AForGroup then return # to permit shortcut ranges
 		replace_with(v.builder.make_new(init_callsite.as(not null), [n_expr, n_expr2]))
 	end
 end
@@ -403,7 +403,7 @@ redef class AOrangeExpr
 	# `[x..y[` is replaced with `new Range[X].without_last(x,y)`
 	redef fun accept_transform_visitor(v)
 	do
-		if parent isa AForExpr then return # to permit shortcut ranges
+		if parent isa AForGroup then return # to permit shortcut ranges
 		replace_with(v.builder.make_new(init_callsite.as(not null), [n_expr, n_expr2]))
 	end
 end
