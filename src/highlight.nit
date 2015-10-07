@@ -742,7 +742,7 @@ redef class AVardeclExpr
 	end
 end
 
-redef class AForExpr
+redef class AForGroup
 	redef fun decorate_tag(v, res, token)
 	do
 		if not token isa TId then return null
