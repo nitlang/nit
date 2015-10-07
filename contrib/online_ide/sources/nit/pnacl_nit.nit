@@ -17,11 +17,11 @@
 # A version of the naive Nit interpreter for PNaCl.
 module pnacl_nit
 
-import interpreter::naive_interpreter
-import interpreter::debugger
+import nitc::interpreter::naive_interpreter
+import nitc::interpreter::debugger
 import pnacl
-intrude import toolcontext
-intrude import loader
+intrude import nitc::toolcontext
+intrude import nitc::loader
 intrude import core::file
 
 # We redefine exit to start a new thread before killing the one that called exit.
