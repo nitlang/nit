@@ -389,7 +389,7 @@ private class TypeVisitor
 			end
 		end
 
-		var callsite = new CallSite(node, recvtype, mmodule, anchor, recv_is_self, mproperty, mpropdef, msignature, erasure_cast)
+		var callsite = new CallSite(node.hot_location, recvtype, mmodule, anchor, recv_is_self, mproperty, mpropdef, msignature, erasure_cast)
 		return callsite
 	end
 
@@ -621,8 +621,8 @@ end
 
 # A specific method call site with its associated informations.
 class CallSite
-	# The associated node for location
-	var node: ANode
+	# The associated location of the callsite
+	var location: Location
 
 	# The static type of the receiver (possibly unresolved)
 	var recv: MType
@@ -1977,7 +1977,7 @@ redef class ASuperExpr
 		var msignature = superprop.new_msignature or else superprop.msignature.as(not null)
 		msignature = v.resolve_for(msignature, recvtype, true).as(MSignature)
 
-		var callsite = new CallSite(self, recvtype, v.mmodule, v.anchor, true, superprop.mproperty, superprop, msignature, false)
+		var callsite = new CallSite(hot_location, recvtype, v.mmodule, v.anchor, true, superprop.mproperty, superprop, msignature, false)
 		self.callsite = callsite
 
 		var args = self.n_args.to_a
