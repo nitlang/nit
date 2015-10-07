@@ -2301,7 +2301,7 @@ abstract class MPropDef
 	redef var to_s: String is noinit
 
 	# Is self the definition that introduce the property?
-	fun is_intro: Bool do return mproperty.intro == self
+	fun is_intro: Bool do return isset mproperty._intro and mproperty.intro == self
 
 	# Return the next definition in linearization of `mtype`.
 	#

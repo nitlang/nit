@@ -540,7 +540,7 @@ private class TypeVisitor
 
 	fun error(node: ANode, message: String)
 	do
-		self.modelbuilder.toolcontext.error(node.hot_location, message)
+		self.modelbuilder.error(node, message)
 	end
 
 	fun get_variable(node: AExpr, variable: Variable): nullable MType
@@ -621,6 +621,8 @@ end
 
 # A specific method call site with its associated informations.
 class CallSite
+	super MEntity
+
 	# The associated node for location
 	var node: ANode
 
@@ -659,6 +661,7 @@ class CallSite
 	do
 		var map = v.check_signature(self.node, args, self.mproperty, self.msignature)
 		signaturemap = map
+		if map == null then is_broken = true
 		return map == null
 	end
 end
@@ -781,6 +784,9 @@ private class PostTypingVisitor
 	redef fun visit(n) do
 		n.visit_all(self)
 		n.accept_post_typing(type_visitor)
+		if n isa AExpr and n.mtype == null and not n.is_typed then
+			n.is_broken = true
+		end
 	end
 end
 

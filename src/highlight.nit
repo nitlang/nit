@@ -373,7 +373,7 @@ redef class MClassDef
 			res.new_field("class").text(mclass.name)
 		else
 			res.new_field("redef class").text(mclass.name)
-			res.new_field("intro").add mclass.intro.linkto_text("in {mclass.intro.mmodule.to_s}")
+			res.new_field("intro").add mclass.intro.linkto_text("in {mclass.intro_mmodule.to_s}")
 		end
 		var mdoc = self.mdoc
 		if mdoc == null then mdoc = mclass.intro.mdoc
@@ -584,7 +584,6 @@ redef class MSignature
 end
 
 redef class CallSite
-	super HInfoBoxable
 	redef fun infobox(v)
 	do
 		var res = new HInfoBox(v, "call {mpropdef}")

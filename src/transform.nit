@@ -107,7 +107,7 @@ redef class AExpr
 
 		visit_all(v)
 
-		if mtype == null and not is_typed then return # Skip broken
+		if is_broken then return # Skip broken
 
 		accept_transform_visitor(v)
 	end
@@ -361,6 +361,8 @@ redef class AArrayExpr
 	# ~~~
 	redef fun full_transform_visitor(v)
 	do
+		if is_broken then return # Skip broken
+
 		var nblock = v.builder.make_block
 
 		var nnew = v.builder.make_new(with_capacity_callsite.as(not null), [v.builder.make_int(n_exprs.length)])

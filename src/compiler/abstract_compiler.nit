@@ -1147,6 +1147,7 @@ abstract class AbstractCompilerVisitor
 
 	fun compile_callsite(callsite: CallSite, arguments: Array[RuntimeVariable]): nullable RuntimeVariable
 	do
+		if callsite.is_broken then return null
 		var initializers = callsite.mpropdef.initializers
 		if not initializers.is_empty then
 			var recv = arguments.first
@@ -1732,7 +1733,7 @@ abstract class AbstractCompilerVisitor
 	fun stmt(nexpr: nullable AExpr)
 	do
 		if nexpr == null then return
-		if nexpr.mtype == null and not nexpr.is_typed then
+		if nexpr.is_broken then
 			# Untyped expression.
 			# Might mean dead code or invalid code
 			# so aborts
@@ -3650,6 +3651,7 @@ redef class ASendExpr
 	do
 		var recv = v.expr(self.n_expr, null)
 		var callsite = self.callsite.as(not null)
+		if callsite.is_broken then return null
 		var args = v.varargize(callsite.mpropdef, callsite.signaturemap, recv, self.raw_arguments)
 		return v.compile_callsite(callsite, args)
 	end
@@ -3660,6 +3662,7 @@ redef class ASendReassignFormExpr
 	do
 		var recv = v.expr(self.n_expr, null)
 		var callsite = self.callsite.as(not null)
+		if callsite.is_broken then return
 		var args = v.varargize(callsite.mpropdef, callsite.signaturemap, recv, self.raw_arguments)
 
 		var value = v.expr(self.n_value, null)
@@ -3682,6 +3685,7 @@ redef class ASuperExpr
 
 		var callsite = self.callsite
 		if callsite != null then
+			if callsite.is_broken then return null
 			var args
 
 			if self.n_args.n_exprs.is_empty then
@@ -3731,6 +3735,7 @@ redef class ANewExpr
 
 		var callsite = self.callsite
 		if callsite == null then return recv
+		if callsite.is_broken then return null
 
 		var args = v.varargize(callsite.mpropdef, callsite.signaturemap, recv, self.n_args.n_exprs)
 		var res2 = v.compile_callsite(callsite, args)
@@ -3870,7 +3875,12 @@ end
 # Here we load an process all modules passed on the command line
 var mmodules = modelbuilder.parse(arguments)
 
-if mmodules.is_empty then return
+if mmodules.is_empty then
+	toolcontext.check_errors
+	toolcontext.errors_info
+	if toolcontext.error_count > 0 then exit(1) else exit(0)
+end
+
 modelbuilder.run_phases
 
 for mmodule in mmodules do

@@ -626,7 +626,7 @@ class SeparateCompiler
 		for cd in mmodule.mclassdefs do
 			for pd in cd.mpropdefs do
 				if not pd isa MMethodDef then continue
-				if pd.msignature == null then continue # Skip broken method
+				if pd.mproperty.is_broken or pd.is_broken or pd.msignature == null then continue # Skip broken method
 				var rta = runtime_type_analysis
 				if modelbuilder.toolcontext.opt_skip_dead_methods.value and rta != null and not rta.live_methoddefs.has(pd) then continue
 				#print "compile {pd} @ {cd} @ {mmodule}"
@@ -814,6 +814,8 @@ class SeparateCompiler
 	# In a true separate compiler (a with dynamic loading) you cannot do this unfortnally
 	fun compile_class_to_c(mclass: MClass)
 	do
+		if mclass.is_broken then return
+
 		var mtype = mclass.intro.bound_mtype
 		var c_name = mclass.c_name
 
@@ -842,6 +844,9 @@ class SeparateCompiler
 					assert mpropdef isa MMethodDef
 					if rta != null and not rta.live_methoddefs.has(mpropdef) then
 						v.add_decl("NULL, /* DEAD {mclass.intro_mmodule}:{mclass}:{mpropdef} */")
+						continue
+					else if mpropdef.is_broken or mpropdef.msignature == null or mpropdef.mproperty.is_broken then
+						v.add_decl("NULL, /* DEAD (BROKEN) {mclass.intro_mmodule}:{mclass}:{mpropdef} */")
 						continue
 					end
 					var rf = mpropdef.virtual_runtime_function
