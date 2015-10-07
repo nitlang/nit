@@ -1757,37 +1757,47 @@ end
 redef class AForExpr
 	redef fun stmt(v)
 	do
-		var col = v.expr(self.n_expr)
-		if col == null then return
-		if col.mtype isa MNullType then fatal(v, "Receiver is null")
+		var iters = new Array[Instance]
 
-		#self.debug("col {col}")
-		var iter = v.callsite(method_iterator, [col]).as(not null)
-		#self.debug("iter {iter}")
+		for g in n_groups do
+			var col = v.expr(g.n_expr)
+			if col == null then return
+			if col.mtype isa MNullType then fatal(v, "Receiver is null")
+
+			var iter = v.callsite(g.method_iterator, [col]).as(not null)
+			iters.add iter
+		end
+
 		loop
-			var isok = v.callsite(method_is_ok, [iter]).as(not null)
-			if not isok.is_true then break
-			if self.variables.length == 1 then
-				var item = v.callsite(method_item, [iter]).as(not null)
-				#self.debug("item {item}")
-				v.write_variable(self.variables.first, item)
-			else if self.variables.length == 2 then
-				var key = v.callsite(method_key, [iter]).as(not null)
-				v.write_variable(self.variables[0], key)
-				var item = v.callsite(method_item, [iter]).as(not null)
-				v.write_variable(self.variables[1], item)
-			else
-				abort
+			for g in n_groups, iter in iters do
+				var isok = v.callsite(g.method_is_ok, [iter]).as(not null)
+				if not isok.is_true then break label
+				if g.variables.length == 1 then
+					var item = v.callsite(g.method_item, [iter]).as(not null)
+					#self.debug("item {item}")
+					v.write_variable(g.variables.first, item)
+				else if g.variables.length == 2 then
+					var key = v.callsite(g.method_key, [iter]).as(not null)
+					v.write_variable(g.variables[0], key)
+					var item = v.callsite(g.method_item, [iter]).as(not null)
+					v.write_variable(g.variables[1], item)
+				else
+					abort
+				end
 			end
 			v.stmt(self.n_block)
 			if v.is_escape(self.break_mark) then break
 			v.is_escape(self.continue_mark) # Clear the break
 			if v.is_escaping then break
-			v.callsite(method_next, [iter])
-		end
-		var method_finish = self.method_finish
-		if method_finish != null then
-			v.callsite(method_finish, [iter])
+			for g in n_groups, iter in iters do
+				v.callsite(g.method_next, [iter])
+			end
+		end label
+		for g in n_groups, iter in iters do
+			var method_finish = g.method_finish
+			if method_finish != null then
+				v.callsite(method_finish, [iter])
+			end
 		end
 	end
 end

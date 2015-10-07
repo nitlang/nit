@@ -1117,15 +1117,17 @@ redef class AForExpr
 
 		# The beginning of the block is the first instruction
 		var block = new BasicBlock
-		block.first = self.n_expr
+		block.first = self.n_groups.first.n_expr
 		block.last = self.n_block.as(not null)
 
-		# Visit the test of the if
-		self.n_expr.generate_basic_blocks(ssa, block)
+		for g in n_groups do
+			# Visit the test of the if
+			g.n_expr.generate_basic_blocks(ssa, block)
 
-		# Collect the variables declared in the for
-		for v in variables do
-			ssa.propdef.variables.add(v)
+			# Collect the variables declared in the for
+			for v in g.variables do
+				ssa.propdef.variables.add(v)
+			end
 		end
 
 		old_block.link(block)
