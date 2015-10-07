@@ -1,5 +1,7 @@
 all: bin/jwrapper
 
+pre-build: src/javap_test_parser.nit src/serial.nit
+
 ../nitcc/src/nitcc:
 	make -C ../nitcc
 

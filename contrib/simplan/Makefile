@@ -3,6 +3,8 @@ NITCC=../nitcc/src/nitcc
 
 all: simplan
 
+pre-build: simplan_parser.nit
+
 simplan: simplan.nit simplan_parser.nit
 	${NITC} simplan.nit
 

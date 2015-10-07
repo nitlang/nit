@@ -1,5 +1,7 @@
 all: server
 
+pre-build: src/benitlux_serial.nit
+
 server:
 	mkdir -p bin/
 	../../bin/nitc --dir bin/ src/benitlux_daily.nit src/benitlux_web.nit

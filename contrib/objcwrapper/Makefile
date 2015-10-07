@@ -1,5 +1,7 @@
 all: bin/objcwrapper
 
+pre-build: src/objc_parser.nit
+
 ../nitcc/src/nitcc:
 	make -C ../nitcc
 

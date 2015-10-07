@@ -1,6 +1,6 @@
 NITCCDIR=../../contrib/nitcc/
 
-compile-parser: $(NITCCDIR)src/nitcc
+pre-build: $(NITCCDIR)src/nitcc
 	$(NITCCDIR)src/nitcc $(NITCCDIR)examples/json.sablecc
 
 $(NITCCDIR)src/nitcc:

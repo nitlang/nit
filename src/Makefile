@@ -22,6 +22,9 @@ BINS=$(patsubst %,../bin/%,$(OBJS))
 
 all: bin/nitc
 
+pre-build:
+	./git-gen-version.sh
+
 nitc_0: ../c_src/nitc parser/parser.nit
 	@echo '***************************************************************'
 	@echo '* Compile nitc_0 from NIT source files                        *'

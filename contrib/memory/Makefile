@@ -14,6 +14,8 @@
 
 all: bin/memory
 
+pre-build: assets/images/drawing.png
+
 bin/memory: assets/images/drawing.png src/*.nit
 	mkdir -p bin
 	../../bin/nitc -o bin/memory src/memory.nit -m ../../lib/mnit/linux/linux.nit
