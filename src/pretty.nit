@@ -1519,6 +1519,20 @@ redef class AForExpr
 		v.visit n_kwfor
 		v.adds
 
+		for n_group in n_groups do
+			v.visit n_group
+			if n_group != n_groups.last then v.add ", "
+
+		end
+
+		v.adds
+		v.visit n_kwdo
+		if can_inline then visit_loop_inline v else visit_loop_block v
+	end
+end
+
+redef class AForGroup
+	redef fun accept_pretty_printer(v) do
 		for n_id in n_ids do
 			v.visit n_id
 			if n_id != n_ids.last then v.add ", "
@@ -1528,9 +1542,6 @@ redef class AForExpr
 		v.consume "in"
 		v.adds
 		v.visit n_expr
-		v.adds
-		v.visit n_kwdo
-		if can_inline then visit_loop_inline v else visit_loop_block v
 	end
 end
 
