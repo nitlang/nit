@@ -15,6 +15,26 @@
 # limitations under the License.
 
 # Loading of Nit source files
+#
+# The loader takes care of looking for module and projects in the file system, and the associated case of errors.
+# The loading requires several steps:
+#
+# Identify: create an empty model entity associated to a name or a file path.
+# Identification is used for instance when names are given in the command line.
+# See `identify_module` and `identify_group`.
+#
+# Scan: visit directories and identify their contents.
+# Scanning is done to enable the searching of modules in projects.
+# See `scan_group` and `scan_full`.
+#
+# Parse: load the AST and associate it with the model entity.
+# See `MModule::parse`.
+#
+# Import: means recursively load modules imported by a module.
+# See `build_module_importation`.
+#
+# Load: means doing the full sequence: identify, parse and import.
+# See `ModelBuilder::parse`, `ModelBuilder::parse_full`, `MModule::load` `ModelBuilder::load_module.
 module loader
 
 import modelbuilder_base
@@ -505,12 +525,12 @@ redef class ModelBuilder
 		return mdoc
 	end
 
-	# Force the identification of all ModulePath of the group and sub-groups in the file system.
+	# Force the identification of all MModule of the group and sub-groups in the file system.
 	#
 	# When a group is scanned, its sub-groups hierarchy is filled (see `MGroup::in_nesting`)
-	# and the potential modules (and nested modules) are identified (see `MGroup::module_paths`).
+	# and the potential modules (and nested modules) are identified (see `MGroup::modules`).
 	#
-	# Basically, this recursively call `get_mgroup` and `identify_file` on each directory entry.
+	# Basically, this recursively call `identify_group` and `identify_module` on each directory entry.
 	#
 	# No-op if the group was already scanned (see `MGroup::scanned`).
 	fun scan_group(mgroup: MGroup) do
@@ -538,6 +558,10 @@ redef class ModelBuilder
 
 	# Try to load a module AST using a path.
 	# Display an error if there is a problem (IO / lexer / parser) and return null
+	#
+	# The AST is loaded as is total independence of the model and its entities.
+	#
+	# AST are not cached or reused thus a new AST is returned on success.
 	fun load_module_ast(filename: String): nullable AModule
 	do
 		if not filename.has_suffix(".nit") then
@@ -769,7 +793,10 @@ redef class ModelBuilder
 
 	# Analyze the module importation and fill the module_importation_hierarchy
 	#
-	# Unless you used `load_module`, the importation is already done and this method does a no-op.
+	# If the importation was already done (`nmodule.is_importation_done`), this method does a no-op.
+	#
+	# REQUIRE `nmodule.mmodule != null`
+	# ENSURE `nmodule.is_importation_done`
 	fun build_module_importation(nmodule: AModule)
 	do
 		if nmodule.is_importation_done then return
