@@ -22,7 +22,7 @@ import ordered_tree
 import console
 
 class ProjTree
-	super OrderedTree[Object]
+	super OrderedTree[MConcern]
 
 	var opt_paths = false
 	var tc: ToolContext
