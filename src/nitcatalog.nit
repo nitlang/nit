@@ -255,13 +255,10 @@ class Catalog
 				var mdoc = o.mdoc
 				if mdoc != null then d = ": {mdoc.html_synopsis.write_to_string}"
 				res.add "<strong>{o.name}</strong>{d} ({o.filepath.to_s})"
-			else if o isa ModulePath then
+			else if o isa MModule then
 				var d = ""
-				var m = o.mmodule
-				if m != null then
-					var mdoc = m.mdoc
-					if mdoc != null then d = ": {mdoc.html_synopsis.write_to_string}"
-				end
+				var mdoc = o.mdoc
+				if mdoc != null then d = ": {mdoc.html_synopsis.write_to_string}"
 				res.add "<strong>{o.name}</strong>{d} ({o.filepath.to_s})"
 			else
 				abort
@@ -300,7 +297,7 @@ class Catalog
 				ot.add(pa, g)
 				pa = g
 			end
-			for mp in g.module_paths do
+			for mp in g.mmodules do
 				ot.add(pa, mp)
 			end
 		end
@@ -464,7 +461,7 @@ class Catalog
 		var mmethods = 0
 		var loc = 0
 		for g in mpackage.mgroups do
-			mmodules += g.module_paths.length
+			mmodules += g.mmodules.length
 			for m in g.mmodules do
 				var am = modelbuilder.mmodule2node(m)
 				if am != null then
@@ -685,9 +682,11 @@ var modelbuilder = new ModelBuilder(model, tc)
 var catalog = new Catalog(modelbuilder)
 
 # Get files or groups
-for a in tc.option_context.rest do
-	modelbuilder.get_mgroup(a)
-	modelbuilder.identify_file(a)
+var args = tc.option_context.rest
+if opt_no_parse.value then
+	modelbuilder.scan_full(args)
+else
+	modelbuilder.parse_full(args)
 end
 
 # Scan packages and compute information
@@ -698,7 +697,6 @@ for p in model.mpackages do
 
 	# Load the module to process importation information
 	if opt_no_parse.value then continue
-	modelbuilder.parse_group(g)
 
 	catalog.deps.add_node(p)
 	for gg in p.mgroups do for m in gg.mmodules do
