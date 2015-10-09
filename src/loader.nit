@@ -853,7 +853,7 @@ redef class ModelBuilder
 				end
 
 				# The rule
-				var rule = new Array[Object]
+				var rule = new Array[MModule]
 
 				# First element is the goal, thus
 				rule.add suppath
@@ -911,14 +911,11 @@ redef class ModelBuilder
 	# It means that the first module is the module to automatically import.
 	# The remaining modules are the conditions of the rule.
 	#
-	# Each module is either represented by a MModule (if the module is already loaded)
-	# or by a ModulePath (if the module is not yet loaded).
-	#
 	# Rules are declared by `build_module_importation` and are applied by `apply_conditional_importations`
 	# (and `build_module_importation` that calls it).
 	#
 	# TODO (when the loader will be rewritten): use a better representation and move up rules in the model.
-	private var conditional_importations = new Array[SequenceRead[Object]]
+	private var conditional_importations = new Array[SequenceRead[MModule]]
 
 	# Extends the current importations according to imported rules about conditional importation
 	fun apply_conditional_importations(mmodule: MModule)
@@ -932,24 +929,16 @@ redef class ModelBuilder
 			for ci in conditional_importations do
 				# Check conditions
 				for i in [1..ci.length[ do
-					var rule_element = ci[i]
-					# An element of a rule is either a MModule or a ModulePath
-					# We need the mmodule to resonate on the importation
-					var m
-					if rule_element isa MModule then
-						m = rule_element
-					else
-						abort
-					end
+					var m = ci[i]
 					# Is imported?
 					if not mmodule.in_importation.greaters.has(m) then continue label
 				end
 				# Still here? It means that all conditions modules are loaded and imported
 
 				# Identify the module to automatically import
-				var suppath = ci.first.as(ModulePath)
-				var sup = load_module_path(suppath)
-				if sup == null then continue
+				var sup = ci.first
+				var ast = sup.load(self)
+				if ast == null then continue
 
 				# Do nothing if already imported
 				if mmodule.in_importation.greaters.has(sup) then continue label
