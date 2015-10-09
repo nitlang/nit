@@ -73,8 +73,6 @@ redef class ModelBuilder
 		for a in modules do
 			var nmodule = self.load_module(a)
 			if nmodule == null then continue # Skip error
-			# Load imported module
-			build_module_importation(nmodule)
 			var mmodule = nmodule.mmodule
 			if mmodule == null then continue # skip error
 			mmodules.add mmodule
@@ -1028,6 +1026,7 @@ redef class MModule
 		var nmodule = parse(modelbuilder)
 		if nmodule == null then return null
 
+		modelbuilder.build_module_importation(nmodule)
 		return nmodule
 	end
 end
