@@ -245,7 +245,7 @@ class Catalog
 	end
 
 	# Recursively generate a level in the file tree of the *content* section
-	private fun gen_content_level(ot: OrderedTree[Object], os: Array[Object], res: Template)
+	private fun gen_content_level(ot: OrderedTree[MConcern], os: Array[Object], res: Template)
 	do
 		res.add "<ul>\n"
 		for o in os do
@@ -290,7 +290,7 @@ class Catalog
 		end
 
 		res.add "<h2>Content</h2>"
-		var ot = new OrderedTree[Object]
+		var ot = new OrderedTree[MConcern]
 		for g in mpackage.mgroups do
 			var pa = g.parent
 			if g.is_interesting then
