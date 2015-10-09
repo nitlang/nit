@@ -47,23 +47,23 @@ class ProjTree
 					return "{o.name}{d} ({o.filepath.yellow})"
 				end
 			end
-		else if o isa ModulePath then
+		else if o isa MModule then
 			if opt_paths then
-				return o.filepath
+				return o.filepath.as(not null)
 			else
 				var d = ""
 				var dd = ""
-				if o.mmodule != null and o.mmodule.mdoc != null then
+				if o.mdoc != null then
 					if tc.opt_no_color.value then
-						d = ": {o.mmodule.mdoc.content.first}"
+						d = ": {o.mdoc.content.first}"
 					else
-						d = ": {o.mmodule.mdoc.content.first.green}"
+						d = ": {o.mdoc.content.first.green}"
 					end
 				end
-				if o.mmodule != null and not o.mmodule.in_importation.direct_greaters.is_empty then
+				if not o.in_importation.direct_greaters.is_empty then
 					var ms = new Array[String]
-					for m in o.mmodule.in_importation.direct_greaters do
-						if m.mgroup.mpackage == o.mmodule.mgroup.mpackage then
+					for m in o.in_importation.direct_greaters do
+						if m.mgroup.mpackage == o.mgroup.mpackage then
 							ms.add m.name
 						else
 							ms.add m.full_name
@@ -161,7 +161,7 @@ end
 if sum == 0 then
 	# If one of the file is a group, default is `opt_tree` instead of `opt_package`
 	for a in files do
-		var g = mb.get_mgroup(a)
+		var g = mb.identify_group(a)
 		if g != null then
 			opt_tree.value = true
 			opt_package.value = false
@@ -170,53 +170,39 @@ if sum == 0 then
 	end
 end
 
-# Identify all relevant files
-for a in files do
-	var g = mb.get_mgroup(a)
-	var mp = mb.identify_file(a)
-	if g != null and not opt_package.value then
-		mb.scan_group(g)
-	end
-	if g == null and mp == null then
-		# not a group not a module, then look at files in the directory
-		var fs = a.files
-		for f in fs do
-			g = mb.get_mgroup(a/f)
-			if g != null and not opt_package.value then
-				mb.scan_group(g)
-			end
-			mp = mb.identify_file(a/f)
-			#print "{a/f}: {mp or else "?"}"
-		end
-	end
-end
+var mmodules = mb.scan_full(files)
 
 # Load modules to get more informations
-for mp in mb.identified_files do
+for mmodule in mmodules do
 	if not opt_paths.value or opt_depends.value then
-		var mm = mb.load_module(mp.filepath)
-		if mm != null and opt_depends.value then
-			mb.build_module_importation(mm)
+		var ast = mmodule.parse(mb)
+		if ast != null and opt_depends.value then
+			mb.build_module_importation(ast)
 		end
 	end
 end
 #tc.check_errors
 
+if opt_depends.value then
+	# Extends the list of module with the loaded ones
+	mmodules = mb.parsed_modules.to_a
+end
 
 var ot = new ProjTree(tc)
 var sorter = new AlphaEntityComparator
 if opt_tree.value then
 	ot.opt_paths = opt_paths.value
-	for p in model.mpackages do
-		for g in p.mgroups do
-			var pa = g.parent
-			if g.is_interesting then
-				ot.add(pa, g)
-				pa = g
-			end
-			for mp in g.module_paths do
-				ot.add(pa, mp)
-			end
+	var mgroups = new HashSet[MGroup]
+	for mp in mmodules do
+		var pa = mp.mgroup
+		while pa != null and not pa.is_interesting do pa = pa.parent
+		ot.add(pa, mp)
+		if pa != null then mgroups.add pa
+	end
+	for g in mgroups do
+		var pa = g.parent
+		if g.is_interesting then
+			ot.add(pa, g)
 		end
 	end
 	ot.sort_with(sorter)
@@ -224,18 +210,10 @@ if opt_tree.value then
 end
 
 if opt_source.value then
-	var list = new Array[ModulePath]
-	for p in model.mpackages do
-		for g in p.mgroups do
-			for mp in g.module_paths do
-				list.add mp
-			end
-		end
-	end
-	sorter.sort(list)
-	for mp in list do
+	sorter.sort(mmodules)
+	for mp in mmodules do
 		if opt_paths.value then
-			print mp.filepath
+			print mp.filepath.as(not null)
 		else
 			print "{mp.mgroup.full_name}/{ot.display(mp)}"
 		end
@@ -243,12 +221,16 @@ if opt_source.value then
 end
 
 if opt_package.value then
-	var list = new Array[MGroup]
-	for p in model.mpackages do
-		list.add p.root.as(not null)
+	var mpackages = new Array[MPackage]
+	for m in mmodules do
+		var p = m.mgroup.mpackage
+		if mpackages.has(p) then continue
+		mpackages.add p
 	end
-	sorter.sort(list)
-	for g in list do
+
+	sorter.sort(mpackages)
+	for p in mpackages do
+		var g = p.root.as(not null)
 		var path = g.filepath.as(not null)
 		if opt_paths.value then
 			print path
