@@ -77,7 +77,7 @@ for a in args do
 end
 
 for a in module_files do
-	var g = modelbuilder.get_mgroup(a)
+	var g = modelbuilder.identify_group(a)
 	if g == null then continue
 	page.add modelbuilder.test_group(g)
 end

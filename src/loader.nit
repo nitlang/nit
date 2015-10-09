@@ -134,8 +134,8 @@ redef class ModelBuilder
 		self.toolcontext.info("*** PARSE ***", 1)
 		var mmodules = new ArraySet[MModule]
 		for a in names do
-			# Case of a group
-			var mgroup = self.get_mgroup(a)
+			# Case of a group (root or sub-directory)
+			var mgroup = self.identify_group(a)
 			if mgroup != null then
 				mmodules.add_all parse_group(mgroup)
 				continue
@@ -149,7 +149,7 @@ redef class ModelBuilder
 				# Try each entry as a group or a module
 				for f in fs do
 					var af = a/f
-					mgroup = get_mgroup(af)
+					mgroup = identify_group(af)
 					if mgroup != null then
 						mmodules.add_all parse_group(mgroup)
 						continue
@@ -274,7 +274,7 @@ redef class ModelBuilder
 			var mp = identify_file((dirname/"{name}.nit").simplify_path)
 			if mp != null then res.add mp
 			# Try the default module of a group
-			var g = get_mgroup((dirname/name).simplify_path)
+			var g = identify_group((dirname/name).simplify_path)
 			if g != null then
 				scan_group(g)
 				res.add_all g.mmodule_paths_by_name(name)
@@ -293,7 +293,7 @@ redef class ModelBuilder
 		var res = new ArraySet[MGroup]
 		for dirname in lookpaths do
 			# try a single group directory
-			var mg = get_mgroup(dirname/name)
+			var mg = identify_group(dirname/name)
 			if mg != null then
 				res.add mg
 			end
@@ -333,7 +333,7 @@ redef class ModelBuilder
 			# Found nothing? maybe it is a group...
 			var candidate = null
 			if path.file_exists then
-				var mgroup = get_mgroup(path)
+				var mgroup = identify_group(path)
 				if mgroup != null then
 					var owner_path = mgroup.filepath.join_path(mgroup.name + ".nit")
 					if owner_path.file_exists then candidate = owner_path
@@ -360,7 +360,7 @@ redef class ModelBuilder
 
 		# Search for a group
 		var mgrouppath = path.join_path("..").simplify_path
-		var mgroup = get_mgroup(mgrouppath)
+		var mgroup = identify_group(mgrouppath)
 
 		if mgroup == null then
 			# singleton package
@@ -394,7 +394,7 @@ redef class ModelBuilder
 	# If the directory is not a group null is returned.
 	#
 	# Note: `paths` is also used to look for mgroups
-	fun get_mgroup(dirpath: String): nullable MGroup
+	fun identify_group(dirpath: String): nullable MGroup
 	do
 		var stat = dirpath.file_stat
 
@@ -455,7 +455,7 @@ redef class ModelBuilder
 			var stopper = parentpath / "packages.ini"
 			if not stopper.file_exists then
 				# Recursively get the parent group
-				parent = get_mgroup(parentpath)
+				parent = identify_group(parentpath)
 				if parent == null then
 					# Parent is not a group, thus we are not a group either
 					mgroups[rdp] = null
@@ -530,7 +530,7 @@ redef class ModelBuilder
 		if p == null then return
 		for f in p.files do
 			var fp = p/f
-			var g = get_mgroup(fp)
+			var g = identify_group(fp)
 			# Recursively scan for groups of the same package
 			if g == null then
 				identify_file(fp)
