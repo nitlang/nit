@@ -87,24 +87,6 @@ class ProjTree
 	end
 end
 
-class AlphaEntityComparator
-	super Comparator
-	fun nameof(a: COMPARED): String
-	do
-		if a isa MGroup then
-			return a.name
-		else if a isa ModulePath then
-			return a.name
-		else
-			abort
-		end
-	end
-	redef fun compare(a,b)
-	do
-		return nameof(a) <=> nameof(b)
-	end
-end
-
 var tc = new ToolContext
 
 var opt_keep = new OptionBool("Ignore errors and files that are not a Nit source file", "-k", "--keep")
@@ -189,7 +171,6 @@ if opt_depends.value then
 end
 
 var ot = new ProjTree(tc)
-var sorter = new AlphaEntityComparator
 if opt_tree.value then
 	ot.opt_paths = opt_paths.value
 	var mgroups = new HashSet[MGroup]
@@ -205,12 +186,12 @@ if opt_tree.value then
 			ot.add(pa, g)
 		end
 	end
-	ot.sort_with(sorter)
+	ot.sort_with(alpha_comparator)
 	ot.write_to(stdout)
 end
 
 if opt_source.value then
-	sorter.sort(mmodules)
+	alpha_comparator.sort(mmodules)
 	for mp in mmodules do
 		if opt_paths.value then
 			print mp.filepath.as(not null)
@@ -228,7 +209,7 @@ if opt_package.value then
 		mpackages.add p
 	end
 
-	sorter.sort(mpackages)
+	alpha_comparator.sort(mpackages)
 	for p in mpackages do
 		var g = p.root.as(not null)
 		var path = g.filepath.as(not null)
