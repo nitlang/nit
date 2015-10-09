@@ -92,52 +92,18 @@ redef class ModelBuilder
 		return mmodules.to_a
 	end
 
-	# Load recursively all modules of the group `mgroup`.
-	# See `parse` for details.
-	fun parse_group(mgroup: MGroup): Array[MModule]
+	# Identify a bunch of modules and groups.
+	#
+	# This does the same as `parse_full` but does only the identification (cf. `identify_module`)
+	fun scan_full(names: Sequence[String]): Array[MModule]
 	do
-		var res = new Array[MModule]
-		scan_group(mgroup)
-		for mg in mgroup.in_nesting.smallers do
-			for mp in mg.module_paths do
-				var nmodule = self.load_module(mp.filepath)
-				if nmodule == null then continue # Skip error
-				# Load imported module
-				build_module_importation(nmodule)
-				var mmodule = nmodule.mmodule
-				if mmodule == null then continue # Skip error
-				res.add mmodule
-			end
-		end
-		return res
-	end
-
-	# Load a bunch of modules and groups.
-	#
-	# Each name can be:
-	#
-	# * a path to a module, a group or a directory of packages.
-	# * a short name of a module or a group that are looked in the `paths` (-I)
-	#
-	# Then, for each entry, if it is:
-	#
-	# * a module, then is it parser and returned.
-	# * a group then recursively all its modules are parsed.
-	# * a directory of packages then all the modules of all packages are parsed.
-	# * else an error is displayed.
-	#
-	# See `parse` for details.
-	fun parse_full(names: Sequence[String]): Array[MModule]
-	do
-		var time0 = get_time
-		# Parse and recursively load
-		self.toolcontext.info("*** PARSE ***", 1)
-		var mmodules = new ArraySet[MModule]
+		var mmodules = new Array[MModule]
 		for a in names do
 			# Case of a group (root or sub-directory)
 			var mgroup = self.identify_group(a)
 			if mgroup != null then
-				mmodules.add_all parse_group(mgroup)
+				scan_group(mgroup)
+				for mg in mgroup.in_nesting.smallers do mmodules.add_all mg.mmodules
 				continue
 			end
 
@@ -151,16 +117,12 @@ redef class ModelBuilder
 					var af = a/f
 					mgroup = identify_group(af)
 					if mgroup != null then
-						mmodules.add_all parse_group(mgroup)
+						scan_group(mgroup)
+						for mg in mgroup.in_nesting.smallers do mmodules.add_all mg.mmodules
 						continue
 					end
-					var mp = identify_file(af)
-					if mp != null then
-						var nmodule = self.load_module(af)
-						if nmodule == null then continue # Skip error
-						build_module_importation(nmodule)
-						var mmodule = nmodule.mmodule
-						if mmodule == null then continue # Skip error
+					var mmodule = identify_module(af)
+					if mmodule != null then
 						mmodules.add mmodule
 					else
 						self.toolcontext.info("ignore file {af}", 2)
@@ -169,12 +131,41 @@ redef class ModelBuilder
 				continue
 			end
 
-			var nmodule = self.load_module(a)
-			if nmodule == null then continue # Skip error
-			# Load imported module
-			build_module_importation(nmodule)
-			var mmodule = nmodule.mmodule
-			if mmodule == null then continue # Skip error
+			var mmodule = identify_module(a)
+			if mmodule == null then
+				continue
+			end
+
+			mmodules.add mmodule
+		end
+		return mmodules
+	end
+
+	# Load a bunch of modules and groups.
+	#
+	# Each name can be:
+	#
+	# * a path to a module, a group or a directory of packages.
+	# * a short name of a module or a group that are looked in the `paths` (-I)
+	#
+	# Then, for each entry, if it is:
+	#
+	# * a module, then is it parsed and returned.
+	# * a group then recursively all its modules are parsed.
+	# * a directory of packages then all the modules of all packages are parsed.
+	# * else an error is displayed.
+	#
+	# See `parse` for details.
+	fun parse_full(names: Sequence[String]): Array[MModule]
+	do
+		var time0 = get_time
+		# Parse and recursively load
+		self.toolcontext.info("*** PARSE ***", 1)
+		var mmodules = new ArraySet[MModule]
+		var scans = scan_full(names)
+		for mmodule in scans do
+			var ast = mmodule.load(self)
+			if ast == null then continue # Skip error
 			mmodules.add mmodule
 		end
 		var time1 = get_time
