@@ -19,9 +19,8 @@ import model
 import ordered_tree
 
 # A simple specialisation of OrderedTree to display packages, groups and modules
-# FIXME do not use Object, but a better common interface of MModule and MGroup
 class MPackageTree
-	super OrderedTree[Object]
+	super OrderedTree[MConcern]
 
 	# The model where to look for information
 	var model: Model
@@ -58,11 +57,10 @@ class MPackageTree
 end
 
 # Compare modules and groups using the
-# FIXME do not use Object, but a better common interface of MModule and MGroup
 private class LinexComparator
 	super Comparator
 
-	redef type COMPARED: Object
+	redef type COMPARED: MConcern
 
 	var mins = new HashMap [MGroup, nullable MModule]
 	var maxs = new HashMap [MGroup, nullable MModule]
@@ -111,7 +109,7 @@ private class LinexComparator
 		var order = ma.model.mmodule_importation_hierarchy
 		return order.compare(ma, mb)
 	end
-	var tree: OrderedTree[Object]
+	var tree: OrderedTree[MConcern]
 end
 
 redef class Model
