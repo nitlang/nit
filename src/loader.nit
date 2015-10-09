@@ -199,8 +199,8 @@ redef class ModelBuilder
 	# Path can be added (or removed) by the client
 	var paths = new Array[String]
 
-	# Like (and used by) `get_mmodule_by_name` but just return the ModulePath
-	fun search_mmodule_by_name(anode: nullable ANode, mgroup: nullable MGroup, name: String): nullable ModulePath
+	# Like (and used by) `get_mmodule_by_name` but does not force the parsing of the MModule (cf. `identify_module`)
+	fun search_mmodule_by_name(anode: nullable ANode, mgroup: nullable MGroup, name: String): nullable MModule
 	do
 		# First, look in groups
 		var c = mgroup
@@ -208,7 +208,7 @@ redef class ModelBuilder
 			var r = c.mpackage.root
 			assert r != null
 			scan_group(r)
-			var res = r.mmodule_paths_by_name(name)
+			var res = r.mmodules_by_name(name)
 			if res.not_empty then return res.first
 		end
 
@@ -247,42 +247,32 @@ redef class ModelBuilder
 	# If no module exists or there is a name conflict, then an error on `anode` is displayed and null is returned.
 	fun get_mmodule_by_name(anode: nullable ANode, mgroup: nullable MGroup, name: String): nullable MModule
 	do
-		var path = search_mmodule_by_name(anode, mgroup, name)
-		if path == null then return null # Forward error
-		return load_module_path(path)
-	end
-
-	# Load and process importation of a given ModulePath.
-	#
-	# Basically chains `load_module` and `build_module_importation`.
-	fun load_module_path(path: ModulePath): nullable MModule
-	do
-		var res = self.load_module(path.filepath)
-		if res == null then return null # Forward error
-		# Load imported module
-		build_module_importation(res)
-		return res.mmodule
+		var mmodule = search_mmodule_by_name(anode, mgroup, name)
+		if mmodule == null then return null # Forward error
+		var ast = mmodule.load(self)
+		if ast == null then return null # Forward error
+		return mmodule
 	end
 
 	# Search a module `name` from path `lookpaths`.
-	# If found, the path of the file is returned
-	private fun search_module_in_paths(location: nullable Location, name: String, lookpaths: Collection[String]): nullable ModulePath
+	# If found, the module is returned.
+	private fun search_module_in_paths(location: nullable Location, name: String, lookpaths: Collection[String]): nullable MModule
 	do
-		var res = new ArraySet[ModulePath]
+		var res = new ArraySet[MModule]
 		for dirname in lookpaths do
 			# Try a single module file
-			var mp = identify_file((dirname/"{name}.nit").simplify_path)
+			var mp = identify_module((dirname/"{name}.nit").simplify_path)
 			if mp != null then res.add mp
 			# Try the default module of a group
 			var g = identify_group((dirname/name).simplify_path)
 			if g != null then
 				scan_group(g)
-				res.add_all g.mmodule_paths_by_name(name)
+				res.add_all g.mmodules_by_name(name)
 			end
 		end
 		if res.is_empty then return null
 		if res.length > 1 then
-			toolcontext.error(location, "Error: conflicting module files for `{name}`: `{res.join(",")}`")
+			toolcontext.error(location, "Error: conflicting module files for `{name}`: `{[for x in res do x.filepath or else x.full_name].join("`, `")}`")
 		end
 		return res.first
 	end
@@ -301,26 +291,36 @@ redef class ModelBuilder
 		return res
 	end
 
-	# Cache for `identify_file` by realpath
-	private var identified_files_by_path = new HashMap[String, nullable ModulePath]
+	# Cache for `identify_module` by relative and real paths
+	private var identified_modules_by_path = new HashMap[String, nullable MModule]
 
 	# All the currently identified modules.
-	# See `identify_file`.
-	var identified_files = new Array[ModulePath]
+	# See `identify_module`.
+	#
+	# An identified module exists in the model but might be not yet parsed (no AST), or not yet analysed (no importation).
+	var identified_modules = new Array[MModule]
+
+	# All the currently parsed modules.
+	#
+	# A parsed module exists in the model but might be not yet analysed (no importation).
+	var parsed_modules = new Array[MModule]
 
 	# Identify a source file and load the associated package and groups if required.
 	#
 	# This method does what the user expects when giving an argument to a Nit tool.
 	#
 	# * If `path` is an existing Nit source file (with the `.nit` extension),
-	#   then the associated ModulePath is returned
+	#   then the associated MModule is returned
 	# * If `path` is a directory (with a `/`),
-	#   then the ModulePath of its default module is returned (if any)
+	#   then the MModule of its default module is returned (if any)
 	# * If `path` is a simple identifier (eg. `digraph`),
 	#   then the main module of the package `digraph` is searched in `paths` and returned.
 	#
 	# Silently return `null` if `path` does not exists or cannot be identified.
-	fun identify_file(path: String): nullable ModulePath
+	#
+	# On success, it returns a module that is possibly not yet parsed (no AST), or not yet analysed (no importation).
+	# If the module was already identified, or loaded, it is returned.
+	fun identify_module(path: String): nullable MModule
 	do
 		# special case for not a nit file
 		if not path.has_suffix(".nit") then
@@ -352,9 +352,9 @@ redef class ModelBuilder
 		end
 
 		# Fast track, the path is already known
-		if identified_files_by_path.has_key(path) then return identified_files_by_path[path]
+		if identified_modules_by_path.has_key(path) then return identified_modules_by_path[path]
 		var rp = module_absolute_path(path)
-		if identified_files_by_path.has_key(rp) then return identified_files_by_path[rp]
+		if identified_modules_by_path.has_key(rp) then return identified_modules_by_path[rp]
 
 		var pn = path.basename(".nit")
 
@@ -378,12 +378,14 @@ redef class ModelBuilder
 			end
 		end
 
-		var res = new ModulePath(pn, path, mgroup)
-		mgroup.module_paths.add(res)
+		var src = new SourceFile.from_string(path, "")
+		var loc = new Location(src, 0, 0, 0, 0)
+		var res = new MModule(model, mgroup, pn, loc)
+		res.filepath = path
 
-		identified_files_by_path[rp] = res
-		identified_files_by_path[path] = res
-		identified_files.add(res)
+		identified_modules_by_path[rp] = res
+		identified_modules_by_path[path] = res
+		identified_modules.add(res)
 		return res
 	end
 
@@ -533,7 +535,7 @@ redef class ModelBuilder
 			var g = identify_group(fp)
 			# Recursively scan for groups of the same package
 			if g == null then
-				identify_file(fp)
+				identify_module(fp)
 			else if g.mpackage == mgroup.mpackage then
 				scan_group(g)
 			end
@@ -587,7 +589,7 @@ redef class ModelBuilder
 		var keep = new Array[String]
 		var res = new Array[String]
 		for a in args do
-			var l = identify_file(a)
+			var l = identify_module(a)
 			if l == null then
 				keep.add a
 			else
@@ -603,13 +605,12 @@ redef class ModelBuilder
 	# Display an error if there is a problem (IO / lexer / parser) and return null.
 	# Note: usually, you do not need this method, use `get_mmodule_by_name` instead.
 	#
-	# The MModule is created however, the importation is not performed,
-	# therefore you should call `build_module_importation`.
+	# The MModule is located, created, parsed and the importation is performed.
 	fun load_module(filename: String): nullable AModule
 	do
 		# Look for the module
-		var file = identify_file(filename)
-		if file == null then
+		var mmodule = identify_module(filename)
+		if mmodule == null then
 			if filename.file_exists then
 				toolcontext.error(null, "Error: `{filename}` is not a Nit source file.")
 			else
@@ -618,25 +619,8 @@ redef class ModelBuilder
 			return null
 		end
 
-		# Already known and loaded? then return it
-		var mmodule = file.mmodule
-		if mmodule != null then
-			return mmodule2nmodule[mmodule]
-		end
-
-		# Load it manually
-		var nmodule = load_module_ast(file.filepath)
-		if nmodule == null then return null # forward error
-
-		# build the mmodule and load imported modules
-		mmodule = build_a_mmodule(file.mgroup, file.name, nmodule)
-
-		if mmodule == null then return null # forward error
-
-		# Update the file information
-		file.mmodule = mmodule
-
-		return nmodule
+		# Load it
+		return mmodule.load(self)
 	end
 
 	# Injection of a new module without source.
@@ -665,22 +649,25 @@ redef class ModelBuilder
 	end
 
 	# Visit the AST and create the `MModule` object
-	private fun build_a_mmodule(mgroup: nullable MGroup, mod_name: String, nmodule: AModule): nullable MModule
+	private fun build_a_mmodule(mgroup: nullable MGroup, nmodule: AModule)
 	do
+		var mmodule = nmodule.mmodule
+		assert mmodule != null
+
 		# Check the module name
 		var decl = nmodule.n_moduledecl
 		if decl != null then
 			var decl_name = decl.n_name.n_id.text
-			if decl_name != mod_name then
-				error(decl.n_name, "Error: module name mismatch; declared {decl_name} file named {mod_name}.")
+			if decl_name != mmodule.name then
+				error(decl.n_name, "Error: module name mismatch; declared {decl_name} file named {mmodule.name}.")
 			end
 		end
 
 		# Check for conflicting module names in the package
 		if mgroup != null then
-			var others = model.get_mmodules_by_name(mod_name)
+			var others = model.get_mmodules_by_name(mmodule.name)
 			if others != null then for other in others do
-				if other.mgroup!= null and other.mgroup.mpackage == mgroup.mpackage then
+				if other != mmodule and mmodule2nmodule.has_key(mmodule) and other.mgroup!= null and other.mgroup.mpackage == mgroup.mpackage then
 					var node: ANode
 					if decl == null then node = nmodule else node = decl.n_name
 					error(node, "Error: a module named `{other.full_name}` already exists at {other.location}.")
@@ -689,9 +676,6 @@ redef class ModelBuilder
 			end
 		end
 
-		# Create the module
-		var mmodule = new MModule(model, mgroup, mod_name, nmodule.location)
-		nmodule.mmodule = mmodule
 		nmodules.add(nmodule)
 		self.mmodule2nmodule[mmodule] = nmodule
 
@@ -714,14 +698,12 @@ redef class ModelBuilder
 			# Is the module a test suite?
 			mmodule.is_test_suite = not decl.get_annotations("test_suite").is_empty
 		end
-
-		return mmodule
 	end
 
 	# Resolve the module identification for a given `AModuleName`.
 	#
 	# This method handles qualified names as used in `AModuleName`.
-	fun seach_module_by_amodule_name(n_name: AModuleName, mgroup: nullable MGroup): nullable ModulePath
+	fun seach_module_by_amodule_name(n_name: AModuleName, mgroup: nullable MGroup): nullable MModule
 	do
 		var mod_name = n_name.n_id.text
 
@@ -741,12 +723,12 @@ redef class ModelBuilder
 			assert r != null
 			scan_group(r)
 			# Get all modules with the final name
-			var res = r.mmodule_paths_by_name(mod_name)
+			var res = r.mmodules_by_name(mod_name)
 			# Filter out the name that does not match the qualifiers
 			res = [for x in res do if match_amodulename(n_name, x) then x]
 			if res.not_empty then
 				if res.length > 1 then
-					error(n_name, "Error: conflicting module files for `{mod_name}`: `{res.join(",")}`")
+					error(n_name, "Error: conflicting module files for `{mod_name}`: `{[for x in res do x.filepath or else x.full_name].join("`, `")}`")
 				end
 				return res.first
 			end
@@ -761,16 +743,16 @@ redef class ModelBuilder
 			return null
 		end
 
-		var res = new ArraySet[ModulePath]
+		var res = new ArraySet[MModule]
 		for r in roots do
 			# Then, for each root, collect modules that matches the qualifiers
 			scan_group(r)
-			var root_res = r.mmodule_paths_by_name(mod_name)
+			var root_res = r.mmodules_by_name(mod_name)
 			for x in root_res do if match_amodulename(n_name, x) then res.add x
 		end
 		if res.not_empty then
 			if res.length > 1 then
-				error(n_name, "Error: conflicting module files for `{mod_name}`: `{res.join(",")}`")
+				error(n_name, "Error: conflicting module files for `{mod_name}`: `{[for x in res do x.filepath or else x.full_name].join("`, `")}`")
 			end
 			return res.first
 		end
@@ -785,7 +767,7 @@ redef class ModelBuilder
 	# but not `baz/foo.nit` nor `foo/bar.nit`
 	#
 	# Is used by `seach_module_by_amodule_name` to validate qualified names.
-	private fun match_amodulename(n_name: AModuleName, m: ModulePath): Bool
+	private fun match_amodulename(n_name: AModuleName, m: MModule): Bool
 	do
 		var g: nullable MGroup = m.mgroup
 		for grp in n_name.n_path.reverse_iterator do
@@ -817,14 +799,14 @@ redef class ModelBuilder
 			end
 
 			# Load the imported module
-			var suppath = seach_module_by_amodule_name(aimport.n_name, mmodule.mgroup)
-			if suppath == null then
+			var sup = seach_module_by_amodule_name(aimport.n_name, mmodule.mgroup)
+			if sup == null then
 				mmodule.is_broken = true
 				nmodule.mmodule = null # invalidate the module
 				continue # Skip error
 			end
-			var sup = load_module_path(suppath)
-			if sup == null then
+			var ast = sup.load(self)
+			if ast == null then
 				mmodule.is_broken = true
 				nmodule.mmodule = null # invalidate the module
 				continue # Skip error
@@ -967,10 +949,6 @@ redef class ModelBuilder
 					var m
 					if rule_element isa MModule then
 						m = rule_element
-					else if rule_element isa ModulePath then
-						m = rule_element.mmodule
-						# Is loaded?
-						if m == null then continue label
 					else
 						abort
 					end
@@ -1018,22 +996,49 @@ redef class ModelBuilder
 	end
 end
 
-# File-system location of a module (file) that is identified but not always loaded.
-class ModulePath
-	# The name of the module
-	# (it's the basename of the filepath)
-	var name: String
+redef class MModule
+	# The path of the module source
+	var filepath: nullable String = null
 
-	# The human path of the module
-	var filepath: String
+	# Force the parsing of the module using `modelbuilder`.
+	#
+	# If the module was already parsed, the existing ASI is returned.
+	# Else the source file is loaded, and parsed and some
+	#
+	# The importation is not done by this
+	#
+	# REQUIRE: `filepath != null`
+	# ENSURE: `modelbuilder.parsed_modules.has(self)`
+	fun parse(modelbuilder: ModelBuilder): nullable AModule
+	do
+		# Already known and loaded? then return it
+		var nmodule = modelbuilder.mmodule2nmodule.get_or_null(self)
+		if nmodule != null then return nmodule
 
-	# The group (and the package) of the possible module
-	var mgroup: MGroup
+		var filepath = self.filepath
+		assert filepath != null
+		# Load it manually
+		nmodule = modelbuilder.load_module_ast(filepath)
+		if nmodule == null then return null # forward error
 
-	# The loaded module (if any)
-	var mmodule: nullable MModule = null
+		# build the mmodule
+		nmodule.mmodule = self
+		modelbuilder.build_a_mmodule(mgroup, nmodule)
 
-	redef fun to_s do return filepath
+		modelbuilder.parsed_modules.add self
+		return nmodule
+	end
+
+	# Parse and process importation of a given MModule.
+	#
+	# Basically chains `parse` and `build_module_importation`.
+	fun load(modelbuilder: ModelBuilder): nullable AModule
+	do
+		var nmodule = parse(modelbuilder)
+		if nmodule == null then return null
+
+		return nmodule
+	end
 end
 
 redef class MPackage
@@ -1046,9 +1051,6 @@ redef class MPackage
 end
 
 redef class MGroup
-	# Modules paths associated with the group
-	var module_paths = new Array[ModulePath]
-
 	# Is the group interesting for a final user?
 	#
 	# Groups are mandatory in the model but for simple packages they are not
@@ -1061,8 +1063,7 @@ redef class MGroup
 	# * it has a documentation
 	fun is_interesting: Bool
 	do
-		return module_paths.length > 1 or
-			mmodules.length > 1 or
+		return mmodules.length > 1 or
 			not in_nesting.direct_smallers.is_empty or
 			mdoc != null or
 			(mmodules.length == 1 and default_mmodule == null)
@@ -1077,11 +1078,11 @@ redef class MGroup
 	#
 	# If `self` is not scanned (see `ModelBuilder::scan_group`) the
 	# results might be partial.
-	fun mmodule_paths_by_name(name: String): Array[ModulePath]
+	fun mmodules_by_name(name: String): Array[MModule]
 	do
-		var res = new Array[ModulePath]
+		var res = new Array[MModule]
 		for g in in_nesting.smallers do
-			for mp in g.module_paths do
+			for mp in g.mmodules do
 				if mp.name == name then
 					res.add mp
 				end
@@ -1103,7 +1104,8 @@ end
 
 redef class AModule
 	# The associated MModule once build by a `ModelBuilder`
-	var mmodule: nullable MModule
+	var mmodule: nullable MModule = null
+
 	# Flag that indicate if the importation is already completed
 	var is_importation_done: Bool = false
 end
