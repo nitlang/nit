@@ -26,9 +26,6 @@ in "C" `{
 `}
 
 redef class App
-	redef type D: Opengles1Display
-	redef type I: Opengles1Image
-
 	redef fun setup
 	do
 		if "NIT_TESTING".environ == "true" then exit 0
@@ -39,8 +36,11 @@ redef class App
 
 	redef fun generate_input
 	do
+		var display = display
+		assert display isa Opengles1Display
+
 		for event in display.sdl_display.events do
-			input( event )
+			input event
 		end
 	end
 end
