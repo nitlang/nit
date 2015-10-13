@@ -4,6 +4,8 @@ SVG2PNG=../inkscape_tools/bin/svg_to_png_and_nit
 
 default: bin/moles
 
+pre-build: assets/images/drawing.png
+
 bin/moles: $(shell ../../bin/nitls -M src/moles_linux.nit) assets/images/drawing.png
 	mkdir -p bin
 	../../bin/nitc -o bin/moles src/moles_linux.nit

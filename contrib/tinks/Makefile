@@ -14,11 +14,13 @@
 
 all: bin/server bin/tinks
 
+pre-build: assets/images/drawing.png src/client/client_serialize.nit src/server/server_serialize.nit
+
 # Client
 bin/tinks: assets/images/drawing.png src/client/client_serialize.nit $(shell ../../bin/nitls -M src/client/linux_client.nit)
 	../../bin/nitc -o bin/tinks src/client/linux_client.nit -m src/client/client_serialize.nit
 
-src/client/client_serialize.nit: $(shell ../../bin/nitls -M src/client/client.nit)
+src/client/client_serialize.nit: assets/images/drawing.png $(shell ../../bin/nitls -M src/client/client.nit)
 	../../bin/nitserial -o src/client/client_serialize.nit src/client/client.nit
 
 assets/images/drawing.png: art/drawing.svg
