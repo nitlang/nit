@@ -97,7 +97,7 @@ redef class ModelBuilder
 	redef fun module_absolute_path(path: String): String do return path
 
 	# We don't use paths as the interpreter, so we don't use location or lookpaths args (see the default implementation).
-	redef fun search_module_in_paths(location: nullable Location, name: String, lookpaths: Collection[String]): nullable ModulePath
+	redef fun search_module_in_paths(location: nullable Location, name: String, lookpaths: Collection[String]): nullable MModule
 	do
 		var candidate: nullable String = null
 		var try_file = "{name}.nit"
@@ -114,7 +114,7 @@ redef class ModelBuilder
 			end
 		end
 		if candidate == null then return null
-		return identify_file(candidate)
+		return identify_module(candidate)
 	end
 end
 
