@@ -166,7 +166,7 @@ interface Metric
 	fun values: RES is abstract
 
 	# Collect metric values on elements
-	fun collect(elements: Set[ELM]) is abstract
+	fun collect(elements: Collection[ELM]) is abstract
 
 	# The value calculated for the element
 	fun [](element: ELM): VAL do return values[element]
