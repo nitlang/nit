@@ -36,18 +36,18 @@ end
 
 redef class FlatText
 
-	private fun first_byte: Int do return 0
+	fun first_byte: Int do return 0
 
-	private fun last_byte: Int do return _bytelen - 1
+	fun last_byte: Int do return _bytelen - 1
 
 	# Cache of the latest position (char) explored in the string
-	private var position: Int = 0
+	var position: Int = 0
 
 	# Cached position (bytes) in the NativeString underlying the String
-	private var bytepos: Int = 0
+	var bytepos: Int = 0
 
 	# Index of the character `index` in `_items`
-	private fun char_to_byte_index(index: Int): Int do
+	fun char_to_byte_index(index: Int): Int do
 		var ln = length
 		assert index >= 0
 		assert index < ln
@@ -90,7 +90,7 @@ redef class FlatText
 	# This enables a double-optimization in `escape_to_c` since if this
 	# method returns 0, then `self` does not need escaping and can be
 	# returned as-is
-	protected fun chars_to_escape_to_c: Int do
+	fun chars_to_escape_to_c: Int do
 		var its = _items
 		var max = last_byte
 		var pos = first_byte

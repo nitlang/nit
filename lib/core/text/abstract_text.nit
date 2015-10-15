@@ -966,14 +966,14 @@ abstract class Text
 end
 
 # All kinds of array-based text representations.
-abstract class FlatText
+private abstract class FlatText
 	super Text
 
 	# Underlying C-String (`char*`)
 	#
 	# Warning : Might be void in some subclasses, be sure to check
 	# if set before using it.
-	private var items: NativeString is noinit
+	var items: NativeString is noinit
 
 	# Returns a char* starting at position `first_byte`
 	#
@@ -990,7 +990,7 @@ abstract class FlatText
 	#
 	# As always, do not modify the content of the String in C code, if this is what you want
 	# copy locally the char* as Nit Strings are immutable.
-	private fun fast_cstring: NativeString is abstract
+	fun fast_cstring: NativeString is abstract
 
 	redef var length = 0
 
