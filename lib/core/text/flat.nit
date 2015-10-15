@@ -1148,8 +1148,9 @@ redef class Array[E]
 	do
 		var l = length
 		if l == 0 then return ""
-		if l == 1 then if self[0] == null then return "" else return self[0].to_s
-		var its = _items
+		var its = _items.as(not null)
+		var first = its[0]
+		if l == 1 then if first == null then return "" else return first.to_s
 		var na = new NativeArray[String](l)
 		var i = 0
 		var sl = 0
