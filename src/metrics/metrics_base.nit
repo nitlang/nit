@@ -299,7 +299,10 @@ class FloatMetric
 
 	redef fun sum do
 		var sum = 0.0
-		for v in values.values do sum += v
+		for v in values.values do
+			if v.is_nan then continue
+			sum += v
+		end
 		return sum
 	end
 
@@ -337,6 +340,7 @@ class FloatMetric
 	redef fun std_dev do
 		var sum = 0.0
 		for value in values.values do
+			if value.is_nan then continue
 			sum += (value - avg).pow(2.to_f)
 		end
 		return (sum / values.length.to_f).sqrt
