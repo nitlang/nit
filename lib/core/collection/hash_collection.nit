@@ -376,7 +376,7 @@ private class HashMapNode[K, V]
 end
 
 # A `MapIterator` over a `HashMap`.
-class HashMapIterator[K, V]
+private class HashMapIterator[K, V]
 	super MapIterator[K, V]
 	redef fun is_ok do return _node != null
 
@@ -405,10 +405,10 @@ class HashMapIterator[K, V]
 	end
 
 	# The map to iterate on
-	private var map: HashMap[K, V]
+	var map: HashMap[K, V]
 
 	# The current node
-	private var node: nullable HashMapNode[K, V] = null
+	var node: nullable HashMapNode[K, V] = null
 
 	init
 	do
