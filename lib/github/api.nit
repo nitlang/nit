@@ -909,6 +909,9 @@ class Issue
 			json["closed_by"] = user.json
 		end
 	end
+
+	# Is this issue linked to a pull request?
+	fun is_pull_request: Bool do return json.has_key("pull_request")
 end
 
 # A Github pull request.
