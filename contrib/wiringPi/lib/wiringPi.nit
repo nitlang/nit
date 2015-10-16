@@ -29,20 +29,21 @@ in "C Header" `{
 `}
 
 
-redef class Object
-	# This initialises wiringPi and assumes that the calling program is
-	# going to be using the wiringPi pin numbering scheme.
-	fun wiringPi_setup `{ wiringPiSetup(); `}
-	# Same as wiringPi_setup, however it allows the calling programs to
-	# use the Broadcom GPIO pin numbers directly with no re-mapping.
-	fun wiringPi_setup_gpio `{ wiringPiSetupGpio(); `}
-	# Identical to wiringPi_setup, however it allows the calling
-	# programs to use the physical pin numbers on the P1 connector only.
-	fun wiringPi_setup_phys `{ wiringPiSetupPhys(); `}
-	# This initialises wiringPi but uses the /sys/class/gpio interface
-	# rather than accessing the hardware directly.
-	fun wiringPi_setup_sys `{ wiringPiSetupSys(); `}
-end
+# Initializes wiringPi.
+# Assumes that the calling program is going to be using the wiringPi pin numbering scheme.
+fun wiringPi_setup `{ wiringPiSetup(); `}
+
+# Same as wiringPi_setup, but with GPIO.
+# It allows the calling programs to use the Broadcom GPIO pin numbers directly with no re-mapping.
+fun wiringPi_setup_gpio `{ wiringPiSetupGpio(); `}
+
+# Same as to wiringPi_setup, but with physical pin numbers.
+# It allows the calling programs to use the physical pin numbers on the P1 connector only.
+fun wiringPi_setup_phys `{ wiringPiSetupPhys(); `}
+
+# This initializes wiringPi, but with the /sys/class/gpio interface.
+# Use `/sys/class/gpio` rather than accessing the hardware directly.
+fun wiringPi_setup_sys `{ wiringPiSetupSys(); `}
 
 # A Raspberry Pi GPIO Pin
 extern class RPiPin `{ CRPiPin *`}
