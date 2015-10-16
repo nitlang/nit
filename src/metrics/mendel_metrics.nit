@@ -45,6 +45,7 @@ module mendel_metrics
 
 import metrics_base
 import mclasses_metrics
+import mmodules_metrics
 import modelize
 
 redef class ToolContext
@@ -149,6 +150,24 @@ class CBMS
 	end
 end
 
+# Module Branch Mean Size
+# mbms(module) = |mclassdefs(module)| / (DIT(module) + 1)
+class MBMS
+	super MModuleMetric
+	super FloatMetric
+	redef fun name do return "mbms"
+	redef fun desc do return "branch mean size, mean number of class definition available among ancestors"
+
+	redef fun collect(mmodules) do
+		for mmodule in mmodules do
+			var totc = mmodule.collect_intro_mclassdefs(protected_visibility).length
+			totc += mmodule.collect_redef_mclassdefs(protected_visibility).length
+			var ditc = mmodule.in_importation.depth
+			values[mmodule] = totc.to_f / (ditc + 1).to_f
+		end
+	end
+end
+
 # Class Novelty Index
 # cnvi = |LocS(class)| / cbms(parents(class))
 class CNVI
@@ -178,6 +197,33 @@ class CNVI
 	end
 end
 
+# Module Novelty Index
+# mnvi = |LocS(module)| / mbms(parents(module))
+class MNVI
+	super MModuleMetric
+	super FloatMetric
+	redef fun name do return "mnvi"
+	redef fun desc do return "module novelty index, contribution of the module to its branch in term of introductions"
+
+	redef fun collect(mmodules) do
+		var mbms = new MBMS
+		for mmodule in mmodules do
+			# compute branch mean size
+			var parents = mmodule.in_importation.direct_greaters
+			if parents.length > 0 then
+				mbms.clear
+				mbms.collect(new HashSet[MModule].from(parents))
+				# compute module novelty index
+				var locc = mmodule.collect_intro_mclassdefs(protected_visibility).length
+				locc += mmodule.collect_redef_mclassdefs(protected_visibility).length
+				values[mmodule] = locc.to_f / mbms.avg
+			else
+				values[mmodule] = 0.0
+			end
+		end
+	end
+end
+
 # Class Novelty Score
 # cnvs = |LocS(class)| x nvi
 class CNVS
@@ -195,6 +241,25 @@ class CNVS
 		for mclass in mclasses do
 			var locc = mclass.collect_local_mproperties(protected_visibility).length
 			values[mclass] = cnvi.values[mclass] * locc.to_f
+		end
+	end
+end
+
+# Module Novelty Score
+# mnvs = |LocS(module)| x nvi
+class MNVS
+	super MModuleMetric
+	super FloatMetric
+	redef fun name do return "mnvs"
+	redef fun desc do return "module novelty score, importance of the contribution of the module to its branch"
+
+	redef fun collect(mmodules) do
+		var mnvi = new MNVI
+		mnvi.collect(mmodules)
+		for mmodule in mmodules do
+			var locc = mmodule.collect_intro_mclassdefs(protected_visibility).length
+			locc += mmodule.collect_redef_mclassdefs(protected_visibility).length
+			values[mmodule] = mnvi.values[mmodule] * locc.to_f
 		end
 	end
 end
@@ -303,4 +368,3 @@ redef class MClass
 		return false
 	end
 end
-
