@@ -203,30 +203,27 @@ interface SignalHandler
 	`}
 end
 
-redef interface Object
+# Check signals for safe operation
+# will callback receiver of raised signals
+# can callback any instance of SignalHandler, not just this one
+fun check_signals: Bool is extern import SignalHandler.receive_signal `{
+	int sig;
+	int raised_something = 0;
 
-	# Check signals for safe operation
-	# will callback receiver of raised signals
-	# can callback any instance of SignalHandler, not just this one
-	protected fun check_signals: Bool is extern import SignalHandler.receive_signal `{
-		int sig;
-		int raised_something = 0;
+	for (sig = 0; sig < 32; sig ++)
+		if (nit_signals_list[sig].raised) {
+			nit_signals_list[sig].raised = 0;
+			raised_something = 1;
+			SignalHandler handler = (SignalHandler)nit_signals_list[sig].handler;
+			SignalHandler_receive_signal(handler, sig);
+		}
 
-		for (sig = 0; sig < 32; sig ++)
-			if (nit_signals_list[sig].raised) {
-				nit_signals_list[sig].raised = 0;
-				raised_something = 1;
-				SignalHandler handler = (SignalHandler)nit_signals_list[sig].handler;
-				SignalHandler_receive_signal(handler, sig);
-			}
+	return raised_something;
+`}
 
-		return raised_something;
-	`}
-
-	# Set alarm signal
-	# can callback any instance of SignalHandler, not just this one
-	protected fun set_alarm(sec: Int) `{ alarm(sec); `}
-end
+# Set alarm signal
+# can callback any instance of SignalHandler, not just this one
+fun set_alarm(sec: Int) `{ alarm(sec); `}
 
 redef class Process
 	# Send a signal to the process
