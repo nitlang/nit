@@ -195,11 +195,9 @@ redef class NitniCallback
 	fun compile_callback_to_cpp(mmodule: MModule, mainmodule: MModule) do end
 end
 
-redef class Object
-	private fun cpp_call_context: CppCallContext do return once new CppCallContext
-	private fun to_cpp_call_context: ToCppCallContext do return once new ToCppCallContext
-	private fun from_cpp_call_context: FromCppCallContext do return once new FromCppCallContext
-end
+fun cpp_call_context: CppCallContext do return once new CppCallContext
+fun to_cpp_call_context: ToCppCallContext do return once new ToCppCallContext
+fun from_cpp_call_context: FromCppCallContext do return once new FromCppCallContext
 
 redef class MExplicitCall
 	redef fun compile_callback_to_cpp(mmodule, mainmodule)
