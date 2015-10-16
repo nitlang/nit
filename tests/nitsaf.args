@@ -1,0 +1,2 @@
+--analysis reaching-defs test_saf/simple1.nit
+--analysis reaching-defs test_saf/simple2.nit
