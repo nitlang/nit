@@ -600,8 +600,9 @@ class MongoCollection
 	# ~~~
 	fun find(query: JsonObject): nullable JsonObject do
 		assert is_alive
-		var c = native.find(query.to_bson.native)
-		assert is_alive # FIXME used to avoid segfault (so `self` isn't garbage collected to soon)
+		var q = new NativeBSON.from_json_string(query.to_json.to_cstring)
+		var c = native.find(q)
+		q.destroy
 		if c == null then return null
 		var cursor = new MongoCursor(c)
 		if cursor.is_ok then return cursor.item
