@@ -3,4 +3,5 @@ test_docdown
 test_neo
 test_phase
 test_parser
+test_highlight
 ^nit
