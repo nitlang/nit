@@ -83,6 +83,24 @@ redef class AVarReassignExpr
 	end
 end
 
+redef class AForExpr
+	redef fun accept_reaching_defs(v) do
+		# add variables from `for` declaration
+		for n_group in n_groups do
+			var variables = n_group.variables
+			if variables == null then continue
+			for variable in variables do v.gen(variable, n_group.location)
+		end
+		super
+		# remove variables from `for` declaration
+		for n_group in n_groups do
+			var variables = n_group.variables
+			if variables == null then continue
+			for variable in variables do v.kill(variable)
+		end
+	end
+end
+
 # A Variable definition.
 #
 # Associates a variable to the location of its definition.

@@ -156,3 +156,74 @@ redef class AIfExpr
 		v.current_outset = outset
 	end
 end
+
+# Represent all kind of `do .. end` blocks.
+#
+# Used to factorize implementations across do blocks, whiles, fors and loops.
+#
+# This factorization makes sense since all these contructs can be flow managed
+# through contine and breack statements.
+#
+# TODO move this up in the module hierarchy
+interface ADoBlockHelper
+	# Lookup fix point for this loop.
+	fun loop_fix_point(v: StaticAnalysis, node: ANode) do
+		var inset = v.current_inset.clone
+		var last: nullable FlowSet = null
+		while v.current_outset != last do
+			v.enter_visit(node)
+			v.current_inset = v.merge(inset, v.current_outset)
+			v.current_outset = v.current_inset.clone
+			last = v.current_outset.clone
+		end
+		v.current_inset = inset
+		v.current_outset = v.merge(inset, v.current_outset)
+	end
+
+	# Factorize loop forward analysis.
+	fun accept_loop_forward_analysis(v: StaticAnalysis) do
+		var n_block = loop_block
+		if not n_block == null then loop_fix_point(v, n_block)
+	end
+
+	# The block contained by this loop.
+	fun loop_block: nullable ANode is abstract
+end
+
+redef class ADoExpr
+	super ADoBlockHelper
+
+	redef fun loop_block do return self.n_block
+	redef fun accept_forward_analysis(v) do accept_loop_forward_analysis(v)
+end
+
+redef class ALoopExpr
+	super ADoBlockHelper
+
+	redef fun loop_block do return self.n_block
+	redef fun accept_forward_analysis(v) do accept_loop_forward_analysis(v)
+end
+
+redef class AWhileExpr
+	super ADoBlockHelper
+
+	redef fun loop_block do return self.n_block
+
+	redef fun accept_forward_analysis(v) do
+		v.enter_visit(n_expr)
+		accept_loop_forward_analysis(v)
+	end
+end
+
+redef class AForExpr
+	super ADoBlockHelper
+
+	redef fun loop_block do return self.n_block
+
+	redef fun accept_forward_analysis(v) do
+		for n_group in n_groups do
+			v.enter_visit(n_group.n_expr)
+		end
+		accept_loop_forward_analysis(v)
+	end
+end
