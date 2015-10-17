@@ -262,7 +262,7 @@ redef class MExplicitCast
 		#
 
 		# In nitni files, declare internal function as extern
-		var full_friendly_csignature = "int {v.compiler.mainmodule.name }___{from.mangled_cname}_is_a_{to.mangled_cname}({from.cname_blind})"
+		var full_friendly_csignature = "int {v.compiler.mainmodule.c_name }___{from.mangled_cname}_is_a_{to.mangled_cname}({from.cname_blind})"
 		ccu.header_decl.add("extern {full_friendly_csignature};\n")
 
 		# In nitni files, #define friendly as extern
@@ -273,7 +273,7 @@ redef class MExplicitCast
 			var nitni_visitor = v.compiler.new_visitor
 			nitni_visitor.frame = v.frame
 
-			var full_internal_csignature = "int {v.compiler.mainmodule.name }___{from.mangled_cname}_is_a_{to.mangled_cname}({internal_call_context.name_mtype(from)} from)"
+			var full_internal_csignature = "int {v.compiler.mainmodule.c_name }___{from.mangled_cname}_is_a_{to.mangled_cname}({internal_call_context.name_mtype(from)} from)"
 
 			nitni_visitor.add_decl("/* nitni check for {from} to {to} */")
 			nitni_visitor.add_decl("{full_internal_csignature} \{")
@@ -297,7 +297,7 @@ redef class MExplicitCast
 		#
 
 		# In nitni files, declare internal function as extern
-		full_friendly_csignature = "{to.cname_blind} {v.compiler.mainmodule.name }___{from.mangled_cname}_as_{to.mangled_cname}({from.cname_blind})"
+		full_friendly_csignature = "{to.cname_blind} {v.compiler.mainmodule.c_name }___{from.mangled_cname}_as_{to.mangled_cname}({from.cname_blind})"
 		ccu.header_decl.add("extern {full_friendly_csignature};\n")
 
 		# In nitni files, #define friendly as extern
@@ -308,7 +308,7 @@ redef class MExplicitCast
 			var nitni_visitor = v.compiler.new_visitor
 			nitni_visitor.frame = v.frame
 
-			var full_internal_csignature = "{to.cname_blind} {v.compiler.mainmodule.name }___{from.mangled_cname}_as_{to.mangled_cname}({internal_call_context.name_mtype(from)} from)"
+			var full_internal_csignature = "{to.cname_blind} {v.compiler.mainmodule.c_name }___{from.mangled_cname}_as_{to.mangled_cname}({internal_call_context.name_mtype(from)} from)"
 			nitni_visitor.add_decl("/* nitni cast for {from} to {to} */")
 			nitni_visitor.add_decl("{full_internal_csignature} \{")
 
