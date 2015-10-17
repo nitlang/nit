@@ -130,6 +130,7 @@ redef class ModelBuilder
 			if stat != null and stat.is_dir then
 				self.toolcontext.info("look in directory {a}", 2)
 				var fs = a.files
+				alpha_comparator.sort(fs)
 				# Try each entry as a group or a module
 				for f in fs do
 					var af = a/f
@@ -539,7 +540,9 @@ redef class ModelBuilder
 		var p = mgroup.filepath
 		# a virtual group has nothing to scan
 		if p == null then return
-		for f in p.files do
+		var files = p.files
+		alpha_comparator.sort(files)
+		for f in files do
 			var fp = p/f
 			var g = identify_group(fp)
 			# Recursively scan for groups of the same package
