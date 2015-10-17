@@ -59,6 +59,14 @@ class HighlightVisitor
 	# Default: false.
 	var include_loose_tokens = false is writable
 
+	# When highlighting a node, the first and the last lines are fully included.
+	#
+	# If the highlighted node starts (or ends) in the middle of a line,
+	# this flags forces the whole line to be highlighted.
+	#
+	# Default: false
+	var include_whole_lines = false is writable
+
 	# The entry-point of the highlighting.
 	# Will fill `html` with the generated HTML content.
 	fun enter_visit(n: ANode)
@@ -82,6 +90,11 @@ class HighlightVisitor
 		if include_loose_tokens then
 			if f.prev_looses.not_empty then f = f.prev_looses.first
 			if l.next_looses.not_empty then l = l.next_looses.last
+		end
+
+		if include_whole_lines then
+			f = f.first_real_token_in_line
+			l = l.last_real_token_in_line
 		end
 
 		htmlize(f, l)
