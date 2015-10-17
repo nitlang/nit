@@ -131,3 +131,28 @@ redef class ANode
 		v.outsets[self] = v.current_outset
 	end
 end
+
+redef class AIfExpr
+
+	# Merge flow on if .. else constructs.
+	redef fun accept_forward_analysis(v) do
+		v.enter_visit(n_expr)
+		var inset = v.current_inset
+		var outset = v.current_outset
+
+		if n_then != null then v.enter_visit(n_then)
+		var then_outset = v.current_outset
+
+		v.current_inset = inset
+		v.current_outset = outset
+
+		if n_else != null then
+			v.enter_visit(n_else)
+			outset = v.merge(then_outset, v.current_outset)
+		else
+			outset = v.merge(then_outset, v.current_inset)
+		end
+		v.current_inset = inset
+		v.current_outset = outset
+	end
+end
