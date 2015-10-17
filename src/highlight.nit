@@ -352,7 +352,7 @@ redef class MModule
 	# The module HTML page
 	fun href: String
 	do
-		return name + ".html"
+		return c_name + ".html"
 	end
 
 	redef fun linkto do return linkto_text(name)

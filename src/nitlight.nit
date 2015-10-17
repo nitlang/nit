@@ -52,7 +52,7 @@ else if mmodules.length > 1 then
 end
 
 for mm in mmodules do
-	if dir != null then toolcontext.info("write {dir}/{mm.name}.html", 1)
+	if dir != null then toolcontext.info("write {dir}/{mm.c_name}.html", 1)
 
 	var v = new HighlightVisitor
 	var prefix = opt_line_id_prefix.value
@@ -94,7 +94,7 @@ for mm in mmodules do
 	end
 
 	if dir != null then
-		page.write_to_file("{dir}/{mm.name}.html")
+		page.write_to_file("{dir}/{mm.c_name}.html")
 	else
 		page.write_to(stdout)
 	end
@@ -113,8 +113,8 @@ if dir != null then
 		var n2 = new HTMLTag("a")
 		page.add n
 		n.add n2
-		n2.attr("href", "{mm.name}.html")
-		n2.text(mm.name)
+		n2.attr("href", "{mm.c_name}.html")
+		n2.text(mm.full_name)
 	end
 	page.add_raw_html "</li></body>"
 	page.write_to_file("{dir}/index.html")
