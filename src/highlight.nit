@@ -53,8 +53,22 @@ class HighlightVisitor
 	fun enter_visit(n: ANode)
 	do
 		n.parentize_tokens
-		var s = n.location.file
-		htmlize(s.first_token.as(not null), s.last_token.as(not null))
+
+		var f
+		var l
+
+		if n isa Token then
+			f = n
+			l = n
+		else
+			assert n isa Prod
+			f = n.first_token
+			if f == null then return
+			l = n.last_token
+			if l == null then return
+		end
+
+		htmlize(f, l)
 	end
 
 	private fun full_tag(anode: ANode, hv: HighlightVisitor): nullable HTMLTag
