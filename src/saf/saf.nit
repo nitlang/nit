@@ -15,4 +15,4 @@
 # Nit Static Analysis Framework.
 module saf
 
-import saf_base
+import reaching_defs
