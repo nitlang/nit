@@ -64,4 +64,4 @@
 </span><span class="line" id="L64"><span class="nc_k">var</span> <span class="nc_v nc_i">c</span> <span>=</span> <span class="nc_k">new</span> <span class="nc_t">C</span><span>(</span><span class="nc_l">9</span><span>)</span>
 </span><span class="line" id="L65"><span class="nc_v nc_i">c</span><span>.</span><span class="nc_i">val1</span><span>.</span><span class="nc_i">output</span>
 </span><span class="line" id="L66"><span class="nc_v nc_i">c</span><span>.</span><span class="nc_i">val2</span><span>.</span><span class="nc_i">output</span>
-</span></span><span class="line" id="L67"><span></span></span></span>
+</span></span></span>
