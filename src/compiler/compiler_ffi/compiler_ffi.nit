@@ -266,7 +266,9 @@ redef class MExplicitCast
 		ccu.header_decl.add("extern {full_friendly_csignature};\n")
 
 		# In nitni files, #define friendly as extern
-		ccu.header_decl.add("#define {check_cname} {v.compiler.mainmodule.name}___{check_cname}\n")
+		ccu.header_decl.add "#ifndef {check_cname}\n"
+		ccu.header_decl.add "#define {check_cname} {v.compiler.mainmodule.c_name}___{check_cname}\n"
+		ccu.header_decl.add "#endif\n"
 
 		if compile_implementation_too then
 			# Internally, implement internal function
@@ -289,7 +291,9 @@ redef class MExplicitCast
 		# special checks
 		if from == to.as_nullable then
 			# format A_is_null
-			ccu.header_decl.add("#define {from.mangled_cname}_is_null !{from.mangled_cname}_is_a_{to.mangled_cname}\n")
+			ccu.header_decl.add "#ifndef {from.mangled_cname}_is_null\n"
+			ccu.header_decl.add "#define {from.mangled_cname}_is_null !{from.mangled_cname}_is_a_{to.mangled_cname}\n"
+			ccu.header_decl.add "#endif\n"
 		end
 
 		#
@@ -301,7 +305,9 @@ redef class MExplicitCast
 		ccu.header_decl.add("extern {full_friendly_csignature};\n")
 
 		# In nitni files, #define friendly as extern
-		ccu.header_decl.add("#define {cast_cname} {v.compiler.mainmodule.name}___{cast_cname}\n")
+		ccu.header_decl.add "#ifndef {cast_cname}\n"
+		ccu.header_decl.add "#define {cast_cname} {v.compiler.mainmodule.c_name}___{cast_cname}\n"
+		ccu.header_decl.add "#endif\n"
 
 		if compile_implementation_too then
 			# Internally, implement internal function
@@ -333,12 +339,16 @@ redef class MExplicitCast
 		# special casts
 		if from.as_nullable == to then
 			# format A_as_nullable
-			ccu.header_decl.add("#define {from.mangled_cname}_as_nullable {from.mangled_cname}_as_{to.mangled_cname}\n")
+			ccu.header_decl.add "#ifndef {from.mangled_cname}_as_nullable\n"
+			ccu.header_decl.add "#define {from.mangled_cname}_as_nullable {from.mangled_cname}_as_{to.mangled_cname}\n"
+			ccu.header_decl.add "#endif\n"
 		end
 
 		if from == to.as_nullable then
 			# format A_as_nullable
-			ccu.header_decl.add("#define {to.mangled_cname}_as_not_nullable {from.mangled_cname}_as_{to.mangled_cname}\n")
+			ccu.header_decl.add "#ifndef {to.mangled_cname}_as_not_nullable\n"
+			ccu.header_decl.add "#define {to.mangled_cname}_as_not_nullable {from.mangled_cname}_as_{to.mangled_cname}\n"
+			ccu.header_decl.add "#endif\n"
 		end
 	end
 end
