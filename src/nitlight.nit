@@ -59,6 +59,8 @@ for mm in mmodules do
 	if prefix != null then
 		v.line_id_prefix = prefix.trim
 	end
+	v.include_loose_tokens = true
+	v.include_whole_lines = true
 
 	if opt_first_line.value != 0 then v.first_line = opt_first_line.value
 	if opt_last_line.value != 0 then v.last_line = opt_last_line.value
