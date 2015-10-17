@@ -2046,6 +2046,8 @@ redef class MMethodDef
 		else if node isa AClassdef then
 			# Automatic free init is always inlined since it is empty or contains only attribtes assigments
 			return true
+		else if node == null then
+			return true
 		else
 			abort
 		end
