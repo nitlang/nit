@@ -48,6 +48,17 @@ class HighlightVisitor
 		html.add_class("nitcode")
 	end
 
+	# When highlighting a node, also consider the loose tokens around it.
+	#
+	# Loose tokens are tokens discarded from the AST but attached before
+	# or after some non-loose tokens. See `Token::is_loose`.
+	#
+	# When this flag is set to `true`, the loose tokens that are before the
+	# first token and after the last token are also highlighted.
+	#
+	# Default: false.
+	var include_loose_tokens = false is writable
+
 	# The entry-point of the highlighting.
 	# Will fill `html` with the generated HTML content.
 	fun enter_visit(n: ANode)
@@ -66,6 +77,11 @@ class HighlightVisitor
 			if f == null then return
 			l = n.last_token
 			if l == null then return
+		end
+
+		if include_loose_tokens then
+			if f.prev_looses.not_empty then f = f.prev_looses.first
+			if l.next_looses.not_empty then l = l.next_looses.last
 		end
 
 		htmlize(f, l)
