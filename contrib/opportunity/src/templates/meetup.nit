@@ -211,7 +211,11 @@ class OpportunityMeetupPage
 				.fail(function(data){
 					//TODO: Notify of failure
 				});
+
+			// Remember the participant's name client-side
+			set_cookie("opportunity_participant_name", pname);
 		}
+
 		function remove_people(ele){
 			var arr = ele.id.split("_")
 			var pid = arr[1]
@@ -226,6 +230,7 @@ class OpportunityMeetupPage
 				}
 			});
 		}
+
 		// ID of line currently open for modification
 		var in_modification_id = null;
 		function modify_people(ele, id){
@@ -247,6 +252,30 @@ class OpportunityMeetupPage
 			} else {
 				in_modification_id = null;
 			}
+		}
+
+		function get_cookie(cookie_name) {
+		    var name = cookie_name + "=";
+			var ca = document.cookie.split(';');
+			for(var i = 0; i < ca.length; i ++) {
+				var c = ca[i];
+				while (c.charAt(0) == ' ') c = c.substring(1);
+				if (c.indexOf(name) == 0) return c.substring(name.length, c.length);
+			}
+			return "";
+		}
+
+		function set_cookie(cookie_name, value) {
+		    var date = new Date();
+			date.setTime(date.getTime() + (365*24*60*60*1000));
+			var expires = "expires="+date.toUTCString();
+			document.cookie = cookie_name + "=" + value + "; " + expires;
+		}
+
+		// Retrieve the last client-side participant's name
+		window.onload = function () {
+			var name_field = document.getElementById("new_name");
+			name_field.value = get_cookie("opportunity_participant_name");
 		}
 		"""
 	end
