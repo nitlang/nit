@@ -25,11 +25,9 @@ in "C Header" `{
 	#include <bcm2835.h>
 `}
 
-redef class Object
-	protected fun bcm2835_init: Bool `{ return bcm2835_init(); `}
-	protected fun bcm2835_close `{ bcm2835_close(); `}
-	protected fun bcm2835_debug=(v: Bool) `{ bcm2835_set_debug(v); `}
-end
+fun bcm2835_init: Bool `{ return bcm2835_init(); `}
+fun bcm2835_close `{ bcm2835_close(); `}
+fun bcm2835_debug=(v: Bool) `{ bcm2835_set_debug(v); `}
 
 # A physical binary pin
 interface Pin

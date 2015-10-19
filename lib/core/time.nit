@@ -21,10 +21,8 @@ in "C Header" `{
 	#include <time.h>
 `}
 
-redef class Object
-	# Unix time: the number of seconds elapsed since January 1, 1970
-	protected fun get_time: Int `{ return time(NULL); `}
-end
+# Unix time: the number of seconds elapsed since January 1, 1970
+fun get_time: Int `{ return time(NULL); `}
 
 redef class Sys
 	# Wait a specific number of second and nanoseconds

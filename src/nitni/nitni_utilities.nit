@@ -140,12 +140,10 @@ class CallContext
 	fun cast_to(mtype: MType, name: String): String do return name
 end
 
-redef class Object
-	# Call context to use
-	protected fun internal_call_context: CallContext do return new CallContext
-	protected fun long_signature: SignatureLength do return once new SignatureLength(true)
-	protected fun short_signature: SignatureLength do return once new SignatureLength(false)
-end
+# Call context to use
+fun internal_call_context: CallContext do return new CallContext
+fun long_signature: SignatureLength do return once new SignatureLength(true)
+fun short_signature: SignatureLength do return once new SignatureLength(false)
 
 # Length of the signature of a C function (long version hase the module name as prefix)
 class SignatureLength

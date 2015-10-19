@@ -103,6 +103,12 @@ extern class EGLDisplay `{ EGLDisplay `}
 		}
 	`}
 
+	private fun report_egl_error(cmsg: NativeString)
+	do
+		var msg = cmsg.to_s
+		print "libEGL error: {msg}"
+	end
+
 	# Can be used directly, but it is preferable to use a `EGLConfigAttribs`
 	fun config_attrib(config: EGLConfig, attribute: Int): Int `{
 		EGLint val;
@@ -440,14 +446,6 @@ class EGLConfigChooser
 	do
 		assert closed else print "EGLConfigChooser not closed."
 		return display.choose_configs(array)
-	end
-end
-
-redef class Object
-	private fun report_egl_error(cmsg: NativeString)
-	do
-		var msg = cmsg.to_s
-		print "libEGL error: {msg}"
 	end
 end
 
