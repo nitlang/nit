@@ -89,7 +89,7 @@ redef class ModelBuilder
 	# Run phases on all loaded modules
 	fun run_phases
 	do
-		var mmodules = model.mmodules.to_a
+		var mmodules = parsed_modules.to_a
 		model.mmodule_importation_hierarchy.sort(mmodules)
 		var nmodules = new Array[AModule]
 		for mm in mmodules do

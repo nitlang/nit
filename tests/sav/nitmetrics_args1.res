@@ -1,4 +1,92 @@
 *** METRICS ***
+--- AST Metrics ---
+## All nodes of the AST
+ population: 51
+ minimum value: 1
+ maximum value: 40
+ total value: 289
+ average value: 5.66
+ distribution:
+  <=1: sub-population=16 (31.37%); cumulated value=16 (5.53%)
+  <=2: sub-population=5 (9.80%); cumulated value=10 (3.46%)
+  <=4: sub-population=9 (17.64%); cumulated value=28 (9.68%)
+  <=8: sub-population=12 (23.52%); cumulated value=76 (26.29%)
+  <=16: sub-population=4 (7.84%); cumulated value=44 (15.22%)
+  <=32: sub-population=4 (7.84%); cumulated value=75 (25.95%)
+  <=64: sub-population=1 (1.96%); cumulated value=40 (13.84%)
+ list:
+  TId: 40 (13.84%)
+  APublicVisibility: 19 (6.57%)
+  AQid: 19 (6.57%)
+  AListExprs: 19 (6.57%)
+  ACallExpr: 18 (6.22%)
+  TClassid: 15 (5.19%)
+  TInteger: 10 (3.46%)
+  AIntegerExpr: 10 (3.46%)
+  AType: 9 (3.11%)
+  TKwend: 8 (2.76%)
+  ...
+  ACallAssignExpr: 1 (0.34%)
+  AAnnotations: 1 (0.34%)
+  TKwreturn: 1 (0.34%)
+  AReturnExpr: 1 (0.34%)
+  AInterfaceClasskind: 1 (0.34%)
+  TKwinterface: 1 (0.34%)
+  ANoImport: 1 (0.34%)
+  AMainMethPropdef: 1 (0.34%)
+  AMainClassdef: 1 (0.34%)
+  TKwimport: 1 (0.34%)
+## All identifiers of the AST
+ population: 20
+ minimum value: 1
+ maximum value: 11
+ total value: 55
+ average value: 2.75
+ distribution:
+  <=1: sub-population=3 (15.00%); cumulated value=3 (5.45%)
+  <=2: sub-population=12 (60.00%); cumulated value=24 (43.63%)
+  <=4: sub-population=3 (15.00%); cumulated value=10 (18.18%)
+  <=8: sub-population=1 (5.00%); cumulated value=7 (12.72%)
+  <=16: sub-population=1 (5.00%); cumulated value=11 (20.00%)
+ list:
+  output: 11 (20.00%)
+  Int: 7 (12.72%)
+  run: 4 (7.27%)
+  c: 3 (5.45%)
+  val: 3 (5.45%)
+  i: 2 (3.63%)
+  bar: 2 (3.63%)
+  foo: 2 (3.63%)
+  val2: 2 (3.63%)
+  val1: 2 (3.63%)
+  C: 2 (3.63%)
+  v: 2 (3.63%)
+  baz: 2 (3.63%)
+  a: 2 (3.63%)
+  A: 2 (3.63%)
+  B: 2 (3.63%)
+  b: 2 (3.63%)
+  intern: 1 (1.81%)
+  Object: 1 (1.81%)
+  Bool: 1 (1.81%)
+--- Detection of variance constraints on formal parameter types ---
+-- Generic classes --
+ list:
+  non generic: 7 (100.00%)
+  total classes: 7
+  total formal parameters: 0
+-- Including `private` properties --
+  covariants: 0 (na%)
+  contravariants: 0 (na%)
+  bivariants: 0 (na%)
+  invariants: 0 (na%)
+  total: 0
+-- Excluding `private` properties --
+  covariants: 0 (na%)
+  contravariants: 0 (na%)
+  bivariants: 0 (na%)
+  invariants: 0 (na%)
+  total: 0
 
 # MModules metrics
 
@@ -126,36 +214,6 @@
 	  min: base_simple3 (1)
 	  std: 0.0
 	  sum: 1
---- Metrics of refinement usage ---
-Number of modules: 1
-
-Number of classes: 7
-  Number of interface kind: 1 (14.28%)
-  Number of enum kind: 2 (28.57%)
-  Number of class kind: 4 (57.14%)
-
-Number of class definitions: 7
-Number of refined classes: 0 (0.00%)
-Average number of class refinments by classes: 0.00
-Average number of class refinments by refined classes: na
-
-Number of properties: 18
-  Number of MAttribute: 3 (16.66%)
-  Number of MMethod: 15 (83.33%)
-
-Number of property definitions: 20
-Number of redefined properties: 1 (5.55%)
-Average number of property redefinitions by property: 0.11
-Average number of property redefinitions by redefined property: 2.00
---- Explicit vs. Implicit Self ---
-Total number of self: 5
-Total number of implicit self: 4 (80.00%)
---- Construction of tables ---
-Number of runtime classes: 6 (excluding interfaces and abstract classes)
-Average number of composing class definition by runtime class: 2.00
-Total size of tables (classes and instances): 23 (not including stuff like info for subtyping or call-next-method)
-Average size of table by runtime class: 3.83
-Values never redefined: 17 (73.91%)
 --- Poset metrics ---
 ## Module importation hierarchy
 Number of nodes: 1
@@ -273,94 +331,38 @@ Distribution of direct smallers
  distribution:
   <=0: sub-population=6 (85.71%); cumulated value=0 (0.00%)
   <=8: sub-population=1 (14.28%); cumulated value=6 (100.00%)
---- AST Metrics ---
-## All nodes of the AST
- population: 51
- minimum value: 1
- maximum value: 40
- total value: 289
- average value: 5.66
- distribution:
-  <=1: sub-population=16 (31.37%); cumulated value=16 (5.53%)
-  <=2: sub-population=5 (9.80%); cumulated value=10 (3.46%)
-  <=4: sub-population=9 (17.64%); cumulated value=28 (9.68%)
-  <=8: sub-population=12 (23.52%); cumulated value=76 (26.29%)
-  <=16: sub-population=4 (7.84%); cumulated value=44 (15.22%)
-  <=32: sub-population=4 (7.84%); cumulated value=75 (25.95%)
-  <=64: sub-population=1 (1.96%); cumulated value=40 (13.84%)
- list:
-  TId: 40 (13.84%)
-  APublicVisibility: 19 (6.57%)
-  AQid: 19 (6.57%)
-  AListExprs: 19 (6.57%)
-  ACallExpr: 18 (6.22%)
-  TClassid: 15 (5.19%)
-  TInteger: 10 (3.46%)
-  AIntegerExpr: 10 (3.46%)
-  AType: 9 (3.11%)
-  TKwend: 8 (2.76%)
-  ...
-  ACallAssignExpr: 1 (0.34%)
-  AAnnotations: 1 (0.34%)
-  TKwreturn: 1 (0.34%)
-  AReturnExpr: 1 (0.34%)
-  AInterfaceClasskind: 1 (0.34%)
-  TKwinterface: 1 (0.34%)
-  ANoImport: 1 (0.34%)
-  AMainMethPropdef: 1 (0.34%)
-  AMainClassdef: 1 (0.34%)
-  TKwimport: 1 (0.34%)
-## All identifiers of the AST
- population: 20
- minimum value: 1
- maximum value: 11
- total value: 55
- average value: 2.75
- distribution:
-  <=1: sub-population=3 (15.00%); cumulated value=3 (5.45%)
-  <=2: sub-population=12 (60.00%); cumulated value=24 (43.63%)
-  <=4: sub-population=3 (15.00%); cumulated value=10 (18.18%)
-  <=8: sub-population=1 (5.00%); cumulated value=7 (12.72%)
-  <=16: sub-population=1 (5.00%); cumulated value=11 (20.00%)
- list:
-  output: 11 (20.00%)
-  Int: 7 (12.72%)
-  run: 4 (7.27%)
-  c: 3 (5.45%)
-  val: 3 (5.45%)
-  i: 2 (3.63%)
-  bar: 2 (3.63%)
-  foo: 2 (3.63%)
-  val2: 2 (3.63%)
-  val1: 2 (3.63%)
-  C: 2 (3.63%)
-  v: 2 (3.63%)
-  baz: 2 (3.63%)
-  a: 2 (3.63%)
-  A: 2 (3.63%)
-  B: 2 (3.63%)
-  b: 2 (3.63%)
-  intern: 1 (1.81%)
-  Object: 1 (1.81%)
-  Bool: 1 (1.81%)
---- Detection of variance constraints on formal parameter types ---
--- Generic classes --
- list:
-  non generic: 7 (100.00%)
-  total classes: 7
-  total formal parameters: 0
--- Including `private` properties --
-  covariants: 0 (na%)
-  contravariants: 0 (na%)
-  bivariants: 0 (na%)
-  invariants: 0 (na%)
-  total: 0
--- Excluding `private` properties --
-  covariants: 0 (na%)
-  contravariants: 0 (na%)
-  bivariants: 0 (na%)
-  invariants: 0 (na%)
-  total: 0
+--- Metrics of refinement usage ---
+Number of modules: 1
+
+Number of classes: 7
+  Number of interface kind: 1 (14.28%)
+  Number of enum kind: 2 (28.57%)
+  Number of class kind: 4 (57.14%)
+
+Number of class definitions: 7
+Number of refined classes: 0 (0.00%)
+Average number of class refinments by classes: 0.00
+Average number of class refinments by refined classes: na
+
+Number of properties: 18
+  Number of MAttribute: 3 (16.66%)
+  Number of MMethod: 15 (83.33%)
+
+Number of property definitions: 20
+Number of redefined properties: 1 (5.55%)
+Average number of property redefinitions by property: 0.11
+Average number of property redefinitions by redefined property: 2.00
+--- Explicit vs. Implicit Self ---
+Total number of self: 5
+Total number of implicit self: 4 (80.00%)
+--- Construction of tables ---
+Number of runtime classes: 6 (excluding interfaces and abstract classes)
+Average number of composing class definition by runtime class: 2.00
+Total size of tables (classes and instances): 23 (not including stuff like info for subtyping or call-next-method)
+Average size of table by runtime class: 3.83
+Values never redefined: 17 (73.91%)
+generating package_hierarchy.dot
+generating module_hierarchy.dot
 
 # MClasses metrics
 
@@ -488,8 +490,6 @@ Distribution of direct smallers
 	  min: Object (0)
 	  std: 0.926
 	  sum: 6
-generating package_hierarchy.dot
-generating module_hierarchy.dot
 
 # Inheritance metrics
 

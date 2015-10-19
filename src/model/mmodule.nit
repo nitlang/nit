@@ -22,7 +22,11 @@ import mpackage
 private import more_collections
 
 # The container class of a Nit object-oriented model.
+#
 # A model knows modules, classes and properties and can retrieve them.
+#
+# However, a model is not a program or a library as it can contains modules
+# found by the system (including broken ones) but not used.
 redef class Model
 	# All known modules
 	var mmodules = new Array[MModule]
