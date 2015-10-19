@@ -25,14 +25,24 @@ import doc_base
 redef class ToolContext
 
 	# Do not generate documentation for attributes.
-	var opt_no_attributes = new OptionBool("Ignore the attributes", "--no-attributes")
+	var opt_no_attributes = new OptionBool(
+		"do not generate documentation for attributes", "--no-attributes")
 
-	# Do not generate documentation for private properties.
+	# Do not generate documentation for properties.
+	var opt_no_properties = new OptionBool(
+		"do not generate documentation for properties", "--no-properties")
+
+	# Do not generate documentation for classes and properties.
+	var opt_no_classes = new OptionBool(
+		"do not generate documentation for classes (and properties)", "--no-classes")
+
+	# Generate documentation for private properties.
 	var opt_private = new OptionBool("Also generate private API", "--private")
 
 	redef init do
 		super
-		option_context.add_option(opt_no_attributes, opt_private)
+		option_context.add_option(
+			opt_no_attributes, opt_no_properties, opt_no_classes, opt_private)
 	end
 
 	# Minimum visibility displayed.
@@ -103,7 +113,9 @@ redef class DocModel
 	# Populate `self` from internal `model`.
 	fun populate(v: ExtractionPhase) do
 		populate_mpackages(v)
+		if v.ctx.opt_no_classes.value then return
 		populate_mclasses(v)
+		if v.ctx.opt_no_properties.value then return
 		populate_mproperties(v)
 	end
 
