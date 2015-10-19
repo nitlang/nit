@@ -22,6 +22,7 @@ private import parser_util
 import modelize
 import astbuilder
 private import annotation
+private import astvalidation
 
 redef class ToolContext
 	# Transforms a function annotated with "threaded"
@@ -140,7 +141,10 @@ return thread
 		var newbody = toolcontext.parse_something(s_newbody)
 		nmethdef.n_block = newbody.as(ABlockExpr)
 
+		nmethdef.validate
+
 		# Add the new class to the module
 		amod.n_classdefs.add(classdef)
+		classdef.validate
 	end
 end

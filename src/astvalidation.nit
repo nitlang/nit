@@ -29,6 +29,18 @@ class ASTValidationVisitor
 end
 
 redef class ANode
+	# Recursively validate a AST node.
+	# This ensure that location and parenting are defined and coherent.
+	#
+	# After complex low-level AST manipulation and construction,
+	# it is recommended to call it.
+	#
+	# Note: this just instantiate and run an `ASTValidationVisitor`.
+	fun validate
+	do
+		(new ASTValidationVisitor).enter_visit(self)
+	end
+
 	private fun accept_ast_validation(v: ASTValidationVisitor)
 	do
 		var parent = self.parent
