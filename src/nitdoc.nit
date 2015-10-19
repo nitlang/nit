@@ -26,7 +26,7 @@ redef class ToolContext
 	var docphase: Phase = new Nitdoc(self, null)
 
 	# File pattern used to link documentation to source code.
-	var opt_test = new OptionBool("do not render anything, only print test data", "--test")
+	var opt_test = new OptionBool("print test data", "--test")
 
 	redef init do
 		super
@@ -52,11 +52,8 @@ private class Nitdoc
 			new IntroRedefListPhase(toolcontext, doc),
 			new LinListPhase(toolcontext, doc),
 			new GraphPhase(toolcontext, doc),
-			new ReadmePhase(toolcontext, doc): DocPhase]
-
-		if not toolcontext.opt_test.value then
-			phases.add new RenderHTMLPhase(toolcontext, doc)
-		end
+			new ReadmePhase(toolcontext, doc),
+			new RenderHTMLPhase(toolcontext, doc): DocPhase]
 
 		for phase in phases do
 			toolcontext.info("# {phase.class_name}", 1)
