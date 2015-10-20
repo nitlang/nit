@@ -152,6 +152,11 @@ redef class ModelBuilder
 
 			var mmodule = identify_module(a)
 			if mmodule == null then
+				if a.file_exists then
+					toolcontext.error(null, "Error: `{a}` is not a Nit source file.")
+				else
+					toolcontext.error(null, "Error: cannot find module `{a}`.")
+				end
 				continue
 			end
 
