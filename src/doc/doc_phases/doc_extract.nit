@@ -52,6 +52,30 @@ redef class ToolContext
 		if opt_private.value then return none_visibility
 		return protected_visibility
 	end
+
+	# Should we exclude this `mentity` from the documentation?
+	fun ignore_mentity(mentity: MEntity): Bool do
+		if mentity isa MModule then
+			return mentity.is_fictive or mentity.is_test_suite
+		else if mentity isa MClass then
+			if opt_no_classes.value then return true
+			return mentity.visibility < min_visibility
+		else if mentity isa MClassDef then
+			if opt_no_classes.value then return true
+			return ignore_mentity(mentity.mclass)
+		else if mentity isa MProperty then
+			if opt_no_classes.value or opt_no_properties.value then return true
+			return ignore_mentity(mentity.intro_mclassdef) or
+				mentity.visibility < min_visibility or
+				(opt_no_attributes.value and mentity isa MAttribute) or
+				mentity isa MInnerClass
+		else if mentity isa MPropDef then
+			if opt_no_classes.value or opt_no_properties.value then return true
+			return ignore_mentity(mentity.mclassdef) or
+				ignore_mentity(mentity.mproperty)
+		end
+		return false
+	end
 end
 
 # ExtractionPhase populates the DocModel.
@@ -61,29 +85,7 @@ class ExtractionPhase
 	private var new_model: Model is noinit
 
 	# Populates the given DocModel.
-	redef fun apply do
-		doc.populate(self)
-	end
-
-	# Should we exclude this `mpackage` from the documentation?
-	fun ignore_mentity(mentity: MEntity): Bool do
-		if mentity isa MModule then
-			return mentity.is_fictive or mentity.is_test_suite
-		else if mentity isa MClass then
-			return mentity.visibility < ctx.min_visibility
-		else if mentity isa MClassDef then
-			return ignore_mentity(mentity.mclass)
-		else if mentity isa MProperty then
-			return ignore_mentity(mentity.intro_mclassdef) or
-				mentity.visibility < ctx.min_visibility or
-				(ctx.opt_no_attributes.value and mentity isa MAttribute) or
-				mentity isa MInnerClass
-		else if mentity isa MPropDef then
-			return ignore_mentity(mentity.mclassdef) or
-				ignore_mentity(mentity.mproperty)
-		end
-		return false
-	end
+	redef fun apply do doc.populate(self)
 end
 
 # TODO Should I rebuild a new Model from filtered data?
@@ -121,14 +123,15 @@ redef class DocModel
 
 	# Populates the `mpackages` set.
 	private fun populate_mpackages(v: ExtractionPhase) do
+		var ctx = v.ctx
 		for mpackage in model.mpackages do
-			if v.ignore_mentity(mpackage) then continue
+			if ctx.ignore_mentity(mpackage) then continue
 			self.mpackages.add mpackage
 			for mgroup in mpackage.mgroups do
-				if v.ignore_mentity(mgroup) then continue
+				if ctx.ignore_mentity(mgroup) then continue
 				self.mgroups.add mgroup
 				for mmodule in mgroup.mmodules do
-					if v.ignore_mentity(mmodule) then continue
+					if ctx.ignore_mentity(mmodule) then continue
 					self.mmodules.add mmodule
 				end
 			end
@@ -137,11 +140,12 @@ redef class DocModel
 
 	# Populates the `mclasses` set.
 	private fun populate_mclasses(v: ExtractionPhase) do
+		var ctx = v.ctx
 		for mclass in model.mclasses do
-			if v.ignore_mentity(mclass) then continue
+			if ctx.ignore_mentity(mclass) then continue
 			self.mclasses.add mclass
 			for mclassdef in mclass.mclassdefs do
-				if v.ignore_mentity(mclassdef) then continue
+				if ctx.ignore_mentity(mclassdef) then continue
 				self.mclassdefs.add mclassdef
 			end
 		end
@@ -149,11 +153,12 @@ redef class DocModel
 
 	# Populates the `mproperties` set.
 	private fun populate_mproperties(v: ExtractionPhase) do
+		var ctx = v.ctx
 		for mproperty in model.mproperties do
-			if v.ignore_mentity(mproperty) then continue
+			if ctx.ignore_mentity(mproperty) then continue
 			self.mproperties.add mproperty
 			for mpropdef in mproperty.mpropdefs do
-				if v.ignore_mentity(mpropdef) then continue
+				if ctx.ignore_mentity(mpropdef) then continue
 				self.mpropdefs.add mpropdef
 			end
 		end
