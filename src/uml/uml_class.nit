@@ -44,7 +44,7 @@ end
 redef class Model
 
 	# Generates a UML Class diagram from the entities of a `Model`
-	fun tpl_class(ctx: ToolContext, main: MModule): Writable do
+	redef fun tpl_class(ctx, main) do
 		var t = new Template
 		for i in mclasses do
 			if not ctx.private_gen and i.visibility != public_visibility then continue
