@@ -20,6 +20,7 @@ module model_base
 # The container class of a Nit object-oriented model.
 # A model knows modules, classes and properties and can retrieve them.
 class Model
+	super MEntity
 end
 
 # A named and possibly documented entity in the model.
