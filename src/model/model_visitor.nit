@@ -66,6 +66,19 @@ abstract class ModelVisitor
 	#
 	# It should not be called directly but used by `enter_visit`
 	protected fun visit(e: MEntity) is abstract
+
+	# Filter classes and method on the visibility.
+	#
+	# If set, only the classes and method with at least the given
+	# visibility level will be visited.
+	var min_visibility: nullable MVisibility = null is writable
+
+	# Is `visibility` acceptable with regard to `min_visibility`?
+	private fun accept_visitibily(visibility: MVisibility): Bool
+	do
+		var min = min_visibility
+		return min == null or min <= visibility
+	end
 end
 
 redef class MEntity
@@ -105,6 +118,7 @@ redef class MModule
 	# On class importation, nothing is visited (the `MClass` and the `MClassDef` are visited in imported modules).
 	redef fun visit_all(v) do
 		for x in mclassdefs do
+			if not v.accept_visitibily(x.mclass.visibility) then return
 			if x.is_intro then v.enter_visit(x.mclass)
 			v.enter_visit(x)
 		end
@@ -119,6 +133,7 @@ redef class MClassDef
 	# On property inheritance, nothing is visited (the `MProperty` and the `MPropDef` are visited in inherited classes).
 	redef fun visit_all(v) do
 		for x in mpropdefs do
+			if not v.accept_visitibily(x.mproperty.visibility) then return
 			if x.is_intro then v.enter_visit(x.mproperty)
 			v.enter_visit(x)
 		end
