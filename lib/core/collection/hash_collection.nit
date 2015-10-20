@@ -165,7 +165,6 @@ private abstract class HashCollection[K]
 	# Force a capacity
 	fun enlarge(cap: Int)
 	do
-		var old_cap = _capacity
 		# get a new capacity
 		if cap < _the_length + 1 then cap = _the_length + 1
 		if cap <= _capacity then return
@@ -175,16 +174,6 @@ private abstract class HashCollection[K]
 		# get a new array
 		var new_array = new NativeArray[nullable N](cap)
 		_array = new_array
-
-		# clean the new array
-		var i = cap - 1
-		while i >=0 do
-			new_array[i] = null
-			i -= 1
-		end
-
-		if _the_length == 0 then return
-		if _capacity <= old_cap then return
 
 		# Reput items in the array
 		var node = _first_item
