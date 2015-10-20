@@ -257,6 +257,7 @@ class HashMap[K, V]
 
 	redef fun []=(key, v)
 	do
+		if _capacity == 0 then enlarge(17) # 17 because magic in `store`
 		var i = index_at(key)
 		var c = node_at_idx(i, key)
 		if c != null then
@@ -273,7 +274,6 @@ class HashMap[K, V]
 	do
 		_capacity = 0
 		_the_length = 0
-		enlarge(0)
 	end
 
 	redef var keys: RemovableCollection[K] = new HashMapKeys[K, V](self) is lazy
@@ -446,6 +446,7 @@ class HashSet[E]
 
 	redef fun add(item)
 	do
+		if _capacity == 0 then enlarge(17) # 17 because magic in `store`
 		var i = index_at(item)
 		var c = node_at_idx(i, item)
 		if c != null then
@@ -465,7 +466,6 @@ class HashSet[E]
 	do
 		_capacity = 0
 		_the_length = 0
-		enlarge(0)
 	end
 
 	# Build a list filled with the items of `coll`.
