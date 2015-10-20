@@ -652,6 +652,7 @@ redef class ModelBuilder
 		var mmodule = new MModule(model, mgroup, mod_name, nmodule.location)
 		nmodule.mmodule = mmodule
 		nmodules.add(nmodule)
+		parsed_modules.add mmodule
 		self.mmodule2nmodule[mmodule] = nmodule
 
 		if parent!= null then
