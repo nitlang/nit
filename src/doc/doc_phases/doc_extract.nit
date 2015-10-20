@@ -36,13 +36,17 @@ redef class ToolContext
 	var opt_no_classes = new OptionBool(
 		"do not generate documentation for classes (and properties)", "--no-classes")
 
+	# Do not generate documentation for mentities with no MDoc.
+	var opt_no_empty_doc = new OptionBool(
+		"do not generate documentation for entities with empty nitdoc comments", "--no-empty-doc")
+
 	# Generate documentation for private properties.
 	var opt_private = new OptionBool("Also generate private API", "--private")
 
 	redef init do
 		super
 		option_context.add_option(
-			opt_no_attributes, opt_no_properties, opt_no_classes, opt_private)
+			opt_no_attributes, opt_no_properties, opt_no_classes, opt_no_empty_doc, opt_private)
 	end
 
 	# Minimum visibility displayed.
@@ -74,6 +78,8 @@ redef class ToolContext
 			return ignore_mentity(mentity.mclassdef) or
 				ignore_mentity(mentity.mproperty)
 		end
+		var mdoc = mentity.mdoc
+		if opt_no_empty_doc.value and (mdoc == null or mdoc.content.is_empty) then return true
 		return false
 	end
 end
