@@ -107,7 +107,12 @@ class HTMLTag
 	# `"div"` for `<div></div>`.
 	var tag: String
 	init do
-		self.is_void = (once ["area", "base", "br", "col", "command", "embed", "hr", "img", "input", "keygen", "link", "meta", "param", "source", "track", "wbr"]).has(tag)
+		self.is_void = (once void_list).has(tag)
+	end
+
+	private fun void_list: Set[String]
+	do
+		return new HashSet[String].from(["area", "base", "br", "col", "command", "embed", "hr", "img", "input", "keygen", "link", "meta", "param", "source", "track", "wbr"])
 	end
 
 	# Is the HTML element a void element?
