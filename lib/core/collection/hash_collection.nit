@@ -24,7 +24,7 @@ end
 private abstract class HashCollection[K]
 	type N: HashNode[K]
 
-	var array: nullable NativeArray[nullable N] = null # Used to store items
+	var array: NativeArray[nullable N] is noautoinit # Used to store items
 	var capacity: Int = 0 # Size of _array
 	var the_length: Int = 0 # Number of items in the map
 
