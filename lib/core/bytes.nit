@@ -289,6 +289,20 @@ redef class Text
 		end
 		return ret
 	end
+
+	# Gets the hexdigest of the bytes of `self`
+	#
+	#     assert "&lt;STRING&#47;&rt;".hexdigest == "266C743B535452494E47262334373B2672743B"
+	fun hexdigest: String do
+		var ln = bytelen
+		var outns = new NativeString(ln * 2)
+		var oi = 0
+		for i in [0 .. ln[ do
+			bytes[i].add_digest_at(outns, oi)
+			oi += 2
+		end
+		return new FlatString.with_infos(outns, ln * 2, 0, ln * 2 - 1)
+	end
 end
 
 redef class FlatText
