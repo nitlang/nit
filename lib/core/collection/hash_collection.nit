@@ -24,7 +24,7 @@ end
 private abstract class HashCollection[K]
 	type N: HashNode[K]
 
-	var array: nullable NativeArray[nullable N] = null # Used to store items
+	var array: NativeArray[nullable N] is noautoinit # Used to store items
 	var capacity: Int = 0 # Size of _array
 	var the_length: Int = 0 # Number of items in the map
 
@@ -50,6 +50,7 @@ private abstract class HashCollection[K]
 	# Return the node associated with the key
 	fun node_at(k: nullable Object): nullable N
 	do
+		if _the_length == 0 then return null
 		# cache: `is` is used instead of `==` because it is a faster filter (even if not exact)
 		if k.is_same_instance(_last_accessed_key) then return _last_accessed_node
 
@@ -62,6 +63,7 @@ private abstract class HashCollection[K]
 	# Return the node associated with the key (but with the index already known)
 	fun node_at_idx(i: Int, k: nullable Object): nullable N
 	do
+		if _the_length == 0 then return null
 		var c = _array[i]
 		while c != null do
 			var ck = c._key
@@ -111,6 +113,7 @@ private abstract class HashCollection[K]
 	# Remove the node assosiated with the key
 	fun remove_node(k: nullable Object)
 	do
+		if _the_length == 0 then return
 		var i = index_at(k)
 		var node = node_at_idx(i, k)
 		if node == null then return
@@ -162,7 +165,6 @@ private abstract class HashCollection[K]
 	# Force a capacity
 	fun enlarge(cap: Int)
 	do
-		var old_cap = _capacity
 		# get a new capacity
 		if cap < _the_length + 1 then cap = _the_length + 1
 		if cap <= _capacity then return
@@ -172,15 +174,6 @@ private abstract class HashCollection[K]
 		# get a new array
 		var new_array = new NativeArray[nullable N](cap)
 		_array = new_array
-
-		# clean the new array
-		var i = cap - 1
-		while i >=0 do
-			new_array[i] = null
-			i -= 1
-		end
-
-		if _capacity <= old_cap then return
 
 		# Reput items in the array
 		var node = _first_item
@@ -253,6 +246,7 @@ class HashMap[K, V]
 
 	redef fun []=(key, v)
 	do
+		if _capacity == 0 then enlarge(17) # 17 because magic in `store`
 		var i = index_at(key)
 		var c = node_at_idx(i, key)
 		if c != null then
@@ -269,7 +263,6 @@ class HashMap[K, V]
 	do
 		_capacity = 0
 		_the_length = 0
-		enlarge(0)
 	end
 
 	redef var keys: RemovableCollection[K] = new HashMapKeys[K, V](self) is lazy
@@ -442,6 +435,7 @@ class HashSet[E]
 
 	redef fun add(item)
 	do
+		if _capacity == 0 then enlarge(17) # 17 because magic in `store`
 		var i = index_at(item)
 		var c = node_at_idx(i, item)
 		if c != null then
@@ -461,7 +455,6 @@ class HashSet[E]
 	do
 		_capacity = 0
 		_the_length = 0
-		enlarge(0)
 	end
 
 	# Build a list filled with the items of `coll`.
