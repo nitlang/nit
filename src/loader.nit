@@ -238,7 +238,9 @@ redef class ModelBuilder
 			end
 		end
 
-		var candidate = search_module_in_paths(anode.hot_location, name, lookpaths)
+		var loc = null
+		if anode != null then loc = anode.hot_location
+		var candidate = search_module_in_paths(loc, name, lookpaths)
 
 		if candidate == null then
 			if mgroup != null then
