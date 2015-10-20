@@ -21,10 +21,10 @@ redef class Parser
 	redef fun build_reduce_table
 	do
 		var reduce_table = new Array[ReduceAction].with_capacity(${count(rules/rule)})
-		self.reduce_table = reduce_table
 $ foreach {rules/rule}
 		reduce_table.add new ReduceAction@index(@leftside)
 $ end foreach
+		return reduce_table
 	end
 end
 

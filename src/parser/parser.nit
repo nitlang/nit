@@ -10,7 +10,6 @@ redef class Parser
 	redef fun build_reduce_table
 	do
 		var reduce_table = new Array[ReduceAction].with_capacity(1091)
-		self.reduce_table = reduce_table
 		reduce_table.add new ReduceAction0(0)
 		reduce_table.add new ReduceAction1(0)
 		reduce_table.add new ReduceAction2(0)
@@ -1102,6 +1101,7 @@ redef class Parser
 		reduce_table.add new ReduceAction1088(220)
 		reduce_table.add new ReduceAction473(221)
 		reduce_table.add new ReduceAction492(221)
+		return reduce_table
 	end
 end
 

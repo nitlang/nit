@@ -40,7 +40,7 @@ class Parser
 
 	init
 	do
-		build_reduce_table
+		self.reduce_table = once build_reduce_table
 	end
 
 	# Do a transition in the automata
@@ -155,7 +155,7 @@ class Parser
 	end
 
 	private var reduce_table: Array[ReduceAction] is noinit
-	private fun build_reduce_table is abstract
+	private fun build_reduce_table: Array[ReduceAction] is abstract
 end
 
 redef class Prod
