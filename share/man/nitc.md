@@ -285,6 +285,13 @@ Need `--rta`.
 Allow the separate compiler to direct call monomorphic sites (semi-global).
 Need `--rta`.
 
+### `--direct-call-monomorph0`
+Allow the separate compiler to direct call monomorphic sites (semi-global).
+Need `--rta`.
+
+The difference with the non-zero option is internal:
+with this option, the monomorphism is looked-at on the mmethod level and not at the callsite level.
+
 ### `--skip-dead-methods`
 Do not compile dead methods (semi-global).
 Need `--rta`.
@@ -319,6 +326,19 @@ Note that using trampolines as indirection slows down the executable.
 However, it is expected that the gain of monomorphic direct-calls overcompensates the additional indirections in polymorphic trampoline-calls.
 
 Note: automatically enable option `--trampoline-call`.
+
+## POTENTIAL OPTIMIZATIONS
+
+These optimisation are not enabled by default as they are counter-effective in most cases.
+
+### `--guard-call`
+Guard VFT calls with a direct call.
+
+### `--type-poset`
+Build a poset of types to create more condensed tables.
+
+The drawback is that more time and memory are used by the compilation process.
+
 
 ## DANGEROUS OPTIMIZATIONS
 
@@ -392,6 +412,9 @@ Use an indirection when calling.
 
 Just add the trampolines of `--substitute-monomorph` without doing any aditionnal optimizations.
 
+### `--no-tag-primitives`
+Use only boxes for primitive types.
+
 ## INTERNAL OPTIONS
 
 These options can be used to control the fine behavior of the tool.
@@ -462,6 +485,12 @@ Continue after errors, whatever the consequences.
 
 The tool does not stop after some errors but continue until it produces incorrect result, crashes, erases the hard drive, or just continue forever in an infinite loop.
 This option is used to test the robustness of the tools by allowing phases to progress on incorrect data.
+
+### `--sloppy`
+Force lazy semantic analysis of the source-code.
+
+Analysis of methods is thus done only when required.
+This option breaks the behavior of most of the tools since errors in methods are undetected until the method is required in some processing.
 
 # ENVIRONMENT VARIABLES
 
