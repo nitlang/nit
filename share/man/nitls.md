@@ -86,7 +86,7 @@ Without this option, an error message is displayed and nitls terminates on such 
 
 ## PRESENTATION OPTIONS
 
-### `-p`, `--path`
+### `-p`, `--path-only`
 List only path (instead of name + path).
 
 Paths are displayed uncolored.

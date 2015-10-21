@@ -96,7 +96,7 @@ var opt_source = new OptionBool("List source files", "-s", "--source")
 var opt_package = new OptionBool("List packages paths (default)", "-P", "--package")
 var opt_depends = new OptionBool("List dependencies of given modules", "-d", "--depends")
 var opt_make = new OptionBool("List dependencies suitable for a rule in a Makefile. Alias for -d, -p and -s", "-M")
-var opt_paths = new OptionBool("List only path (instead of name + path)", "-p", "--path")
+var opt_paths = new OptionBool("List only path (instead of name + path)", "-p", "--path-only")
 
 tc.option_context.add_option(opt_keep, opt_recursive, opt_tree, opt_source, opt_package, opt_depends, opt_paths, opt_make)
 tc.tooldescription = "Usage: nitls [OPTION]... <file.nit|directory>...\nLists the packages and/or paths of Nit sources files."
