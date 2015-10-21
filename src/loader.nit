@@ -243,7 +243,9 @@ redef class ModelBuilder
 			end
 		end
 
-		var candidate = search_module_in_paths(anode.hot_location, name, lookpaths)
+		var loc = null
+		if anode != null then loc = anode.hot_location
+		var candidate = search_module_in_paths(loc, name, lookpaths)
 
 		if candidate == null then
 			if mgroup != null then
@@ -655,6 +657,7 @@ redef class ModelBuilder
 		var mmodule = new MModule(model, mgroup, mod_name, nmodule.location)
 		nmodule.mmodule = mmodule
 		nmodules.add(nmodule)
+		parsed_modules.add mmodule
 		self.mmodule2nmodule[mmodule] = nmodule
 
 		if parent!= null then

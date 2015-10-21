@@ -2,3 +2,5 @@
 base_simple3.nit
 -m test_mixin.nit ../examples/hello_world.nit
 -D text=hello -D num=42 -D flag test_define.nit
+-e 'print "hello world"'
+-n -e 'print line' test_prog/README.md test_prog/test_prog.nit
