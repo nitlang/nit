@@ -244,7 +244,7 @@ class HTMLTag
 	end
 
 	# List of children HTML elements
-	var children: Set[HTMLTag] = new HashSet[HTMLTag]
+	var children: Set[HTMLTag] = new HashSet[HTMLTag] is lazy
 
 	# Clear all child and set the text of element
 	#
@@ -254,7 +254,7 @@ class HTMLTag
 	# Text is escaped see: `core::String::html_escape`
 	fun text(txt: String): HTMLTag do
 
-		children.clear
+		if isset _children then children.clear
 		append(txt)
 		return self
 	end
@@ -300,11 +300,11 @@ class HTMLTag
 		res.add "<"
 		res.add tag
 		render_attrs_in(res)
-		if is_void and children.is_empty then
+		if is_void and (not isset _children or children.is_empty) then
 			res.add "/>"
 		else
 			res.add ">"
-			for child in children do child.render_in(res)
+			if isset _children then for child in children do child.render_in(res)
 			res.add "</"
 			res.add tag
 			res.add ">"
