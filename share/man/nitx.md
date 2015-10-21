@@ -49,6 +49,12 @@ exit the tool.
 ### `-q`
 execute a query, display results in console then quit.
 
+### `--no-attributes`
+Ignore the attributes.
+
+### `--private`
+Also generate private API.
+
 # SEE ALSO
 
 The Nit language documentation and the source code of its tools and libraries may be downloaded from <http://nitlanguage.org>
