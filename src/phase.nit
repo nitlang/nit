@@ -28,10 +28,10 @@ redef class ToolContext
 	var phases = new POSet[Phase]
 
 	# --disable-phase
-	var opt_disable_phase = new OptionArray("DEBUG: Disable a specific phase; use `list` to get the list.", "--disable-phase")
+	var opt_disable_phase = new OptionArray("Disable a specific phase; use `list` to get the list (debug)", "--disable-phase")
 
-	# --disable-phase
-	var opt_sloppy = new OptionBool("DEBUG: force lazy semantic analysis of the source-code", "--sloppy")
+	# --sloppy
+	var opt_sloppy = new OptionBool("Force lazy semantic analysis of the source-code (debug)", "--sloppy")
 
 	redef init
 	do

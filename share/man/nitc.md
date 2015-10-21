@@ -45,7 +45,6 @@ See the documentation of these specific modules for details.
 ## MESSAGES
 
 ### `-W`, `--warn`
-
 Show additional warnings (advices).
 
 By default, only important warnings are displayed.
@@ -68,7 +67,6 @@ A warning is considered an advice when:
 in order to let people fix them before promoting the advice to an important warning.
 
 ### `-w`, `--warning`
-
 Show/hide a specific warning.
 
 Each type of warning can be individually displayed or hidden.
@@ -144,14 +142,14 @@ The path added with `-I` are searched before those added by the environment vari
 May be used more than once.
 
 ### `-o`, `--output`
-Output executable name.
+Filename of the generated executable.
 
 Indicates the path and name of the produced executable.
 
 Note: it is better to use `--dir` if only the directory is important.
 This way, the platform extension will be correctly set.
 
-### `-o` is not usable if multiple programs are compiled at once.
+`-o` is not usable if multiple programs are compiled at once.
 
 ### `--dir`
 Output directory.
@@ -188,7 +186,7 @@ The final binary will be generated in the same directory.
 
 Note that, to be useful, the compilation directory is not destroyed when `--no-cc` is used.
 
-### `-m`
+### `-m`, `--mixin`
 Additional module to mix-in.
 
 Additional modules are imported and refine the main module of the program.
@@ -316,7 +314,7 @@ This makes the compiled program faster since less indirections are required to g
 It also produces executables that are a little bit smaller since static memory does not have to store the colors.
 
 ### `--substitute-monomorph`
-Replace monomorphic trampolines with direct call.
+Replace monomorphic trampolines with direct calls.
 
 Late-binding is implemented with *trampolines*, that are small functions that just select and jump the to right implementations.
 If, at link-time, is it known that the target will always by the same implementation then all calls to the trampoline are replaced by
@@ -410,7 +408,7 @@ Disable advanced gcc directives for optimization.
 ### `--trampoline-call`
 Use an indirection when calling.
 
-Just add the trampolines of `--substitute-monomorph` without doing any aditionnal optimizations.
+Just add the trampolines of `--substitute-monomorph` without doing any additionnal optimizations.
 
 ### `--no-tag-primitives`
 Use only boxes for primitive types.
@@ -436,7 +434,9 @@ Do not check, and produce errors, on visibility issues.
 Do not generate main entry point.
 
 ### `--no-stacktrace`
-The compiled program will not display stack traces on runtime errors.
+Disable the generation of stack traces.
+
+With this option, the compiled program will not display stack traces on runtime errors.
 
 Because stack traces rely on libunwind, this option might be useful in order to generate more portable binaries
 since libunwind might be non available on the runtime system (or available with an ABI incompatible version).
