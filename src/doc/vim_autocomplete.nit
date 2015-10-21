@@ -45,6 +45,7 @@ redef class ToolContext
 	do
 		super
 		option_context.add_option opt_vim_autocomplete
+		opt_vim_autocomplete.hidden = true
 	end
 end
 
