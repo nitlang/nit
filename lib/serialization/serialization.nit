@@ -191,7 +191,7 @@ interface Serializable
 	# Create an instance of this class from the `deserializer`
 	#
 	# This constructor is refined by subclasses to correctly build their instances.
-	init from_deserializer(deserializer: Deserializer) do end
+	init from_deserializer(deserializer: Deserializer) is nosuper do end
 end
 
 redef interface Object
