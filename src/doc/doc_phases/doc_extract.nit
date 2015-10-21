@@ -25,10 +25,10 @@ import doc_base
 redef class ToolContext
 
 	# Do not generate documentation for attributes.
-	var opt_no_attributes = new OptionBool("ignore the attributes", "--no-attributes")
+	var opt_no_attributes = new OptionBool("Ignore the attributes", "--no-attributes")
 
 	# Do not generate documentation for private properties.
-	var opt_private = new OptionBool("also generate private API", "--private")
+	var opt_private = new OptionBool("Also generate private API", "--private")
 
 	redef init do
 		super

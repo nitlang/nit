@@ -26,8 +26,9 @@ import vm
 var toolcontext = new ToolContext
 toolcontext.option_context.options_before_rest = true
 toolcontext.tooldescription = "Usage: nit [OPTION]... <file.nit>...\nInterprets and debugs Nit programs."
-# Add an option "-o" to enable compatibilit with the tests.sh script
-var opt = new OptionString("compatibility (does noting)", "-o")
+# Add an option "-o" to enable compatibility with the tests.sh script
+var opt = new OptionString("Does nothing. Used for compatibility.", "-o")
+opt.hidden = true
 toolcontext.option_context.add_option(opt)
 var opt_eval = new OptionBool("Specifies the program from command-line", "-e")
 var opt_loop = new OptionBool("Repeatedly run the program for each line in file-name arguments", "-n")

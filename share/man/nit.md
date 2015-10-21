@@ -84,24 +84,24 @@ This option helps the user to have a simplified but humanly readable overview of
 ## DEBUGGER OPTIONS
 
 ### `-d`
-Launches the target program with the debugger attached to it
+Launches the target program with the debugger attached to it.
 
 ### `-c`
-Launches the target program with the interpreter, such as when the program fails, the debugging prompt is summoned
+Launches the target program with the interpreter, such as when the program fails, the debugging prompt is summoned.
 
 ### `--socket`
-Launches the target program with raw output on the network via sockets
+Launches the target program with raw output on the network via sockets.
 
 ### `--websocket`
-Launches the target program with output on the network via websockets
+Launches the target program with output on the network via websockets.
 
 ### `--port`
-Sets the debug port (Defaults to 22125) - Must be contained between 0 and 65535
+Sets the debug port (Defaults to 22125) - Must be contained between 0 and 65535.
 
 ## OTHER OPTIONS
 
 ### `--vm`
-Run the virtual machine instead of the naive interpreter (experimental)
+Run the virtual machine instead of the naive interpreter (experimental).
 
 The virtual machine is currently under heavy development and, unless you are developing the vm, there is no reason to use this option yet.
 

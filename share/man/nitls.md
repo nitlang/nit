@@ -70,7 +70,7 @@ Process directories recursively.
 All `.nit` files found in the specified directory and subdirectories are considered.
 
 ### `-d`, `--depends`
-List dependencies of given modules
+List dependencies of given modules.
 
 All imported modules are also considered.
 

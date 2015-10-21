@@ -25,7 +25,7 @@ import primitive_types
 
 redef class ToolContext
 	# --discover-call-trace
-	var opt_discover_call_trace = new OptionBool("Trace calls of the first invocation of a method", "--discover-call-trace")
+	var opt_discover_call_trace = new OptionBool("Trace calls of the first invocation of methods", "--discover-call-trace")
 
 	redef init
 	do

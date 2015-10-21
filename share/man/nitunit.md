@@ -226,12 +226,12 @@ By default, only the modules indicated on the command line are tested.
 With the `--full` option, all imported modules (even those in standard) are also precessed.
 
 ### `-o`, `--output`
-Output name (default is 'nitunit.xml')
+Output name (default is 'nitunit.xml').
 
 ### `nitunit` produces a XML file comatible with JUnit.
 
 ### `--dir`
-Working directory (default is '.nitunit')
+Working directory (default is '.nitunit').
 
 In order to execute the tests, nit files are generated then compiled and executed in the giver working directory.
 
@@ -239,7 +239,9 @@ In order to execute the tests, nit files are generated then compiled and execute
 Does not compile and run tests.
 
 ### `-p`, `--pattern`
-Only run test case with name that match pattern. Examples: `TestFoo`, `TestFoo*`, `TestFoo::test_foo`, `TestFoo::test_foo*`, `test_foo`, `test_foo*`
+Only run test case with name that match pattern.
+
+Examples: `TestFoo`, `TestFoo*`, `TestFoo::test_foo`, `TestFoo::test_foo*`, `test_foo`, `test_foo*`
 
 ### `-t`, `--target-file`
 Specify test suite location.
@@ -247,7 +249,7 @@ Specify test suite location.
 ## SUITE GENERATION
 
 ### `--gen-suite`
-Generate test suite skeleton for a module
+Generate test suite skeleton for a module.
 
 ### `-f`, `--force`
 Force test generation even if file exists.

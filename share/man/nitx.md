@@ -46,8 +46,10 @@ exit the tool.
 
 # OPTIONS
 
-### `-q`
-execute a query, display results in console then quit.
+### `-q`, `--query`
+Nitx query to perform.
+
+Execute a query, display results in the console, then quit.
 
 ### `--no-attributes`
 Ignore the attributes.

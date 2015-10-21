@@ -28,35 +28,35 @@ import html_templates
 redef class ToolContext
 
 	# File pattern used to link documentation to source code.
-	var opt_source = new OptionString("link for source (%f for filename, " +
+	var opt_source = new OptionString("Format to link source code (%f for filename, " +
 		"%l for first line, %L for last line)", "--source")
 
 	# Directory where the CSS and JS is stored.
-	var opt_sharedir = new OptionString("directory containing nitdoc assets", "--sharedir")
+	var opt_sharedir = new OptionString("Directory containing nitdoc assets", "--sharedir")
 
 	# Use a shareurl instead of copy shared files.
 	#
 	# This is usefull if you don't want to store the Nitdoc templates with your
 	# documentation.
-	var opt_shareurl = new OptionString("use shareurl instead of copy shared files", "--shareurl")
+	var opt_shareurl = new OptionString("Use shareurl instead of copy shared files", "--shareurl")
 
 	# Use a custom title for the homepage.
-	var opt_custom_title = new OptionString("custom title for homepage", "--custom-title")
+	var opt_custom_title = new OptionString("Custom title for homepage", "--custom-title")
 
 	# Display a custom brand or logo in the documentation top menu.
-	var opt_custom_brand = new OptionString("custom link to external site", "--custom-brand")
+	var opt_custom_brand = new OptionString("Custom link to external site", "--custom-brand")
 
 	# Display a custom introduction text before the packages overview.
-	var opt_custom_intro = new OptionString("custom intro text for homepage", "--custom-overview-text")
+	var opt_custom_intro = new OptionString("Custom intro text for homepage", "--custom-overview-text")
 	# Display a custom footer on each documentation page.
 	#
 	# Generally used to display the documentation or product version.
-	var opt_custom_footer = new OptionString("custom footer text", "--custom-footer-text")
+	var opt_custom_footer = new OptionString("Custom footer text", "--custom-footer-text")
 
 	# Piwik tracker URL.
 	#
 	# If you want to monitor your visitors.
-	var opt_piwik_tracker = new OptionString("Piwik tracker URL (ex: nitlanguage.org/piwik/)", "--piwik-tracker")
+	var opt_piwik_tracker = new OptionString("Piwik tracker URL (ex: `nitlanguage.org/piwik/`)", "--piwik-tracker")
 
 	# Piwik tracker site id.
 	var opt_piwik_site_id = new OptionString("Piwik site ID", "--piwik-site-id")

@@ -90,12 +90,12 @@ end
 var tc = new ToolContext
 
 var opt_keep = new OptionBool("Ignore errors and files that are not a Nit source file", "-k", "--keep")
-var opt_recursive = new OptionBool("Process directories recussively", "-r", "--recursive")
+var opt_recursive = new OptionBool("Process directories recursively", "-r", "--recursive")
 var opt_tree = new OptionBool("List source files in their groups and packages", "-t", "--tree")
-var opt_source = new OptionBool("List source files", "-s", "--source")
-var opt_package = new OptionBool("List packages paths (default)", "-P", "--package")
+var opt_source = new OptionBool("List source files in a flat list", "-s", "--source")
+var opt_package = new OptionBool("List packages in a flat list (default)", "-P", "--package")
 var opt_depends = new OptionBool("List dependencies of given modules", "-d", "--depends")
-var opt_make = new OptionBool("List dependencies suitable for a rule in a Makefile. Alias for -d, -p and -s", "-M")
+var opt_make = new OptionBool("List dependencies suitable for a rule in a Makefile (alias for -d, -p and -s)", "-M")
 var opt_paths = new OptionBool("List only path (instead of name + path)", "-p", "--path-only")
 
 tc.option_context.add_option(opt_keep, opt_recursive, opt_tree, opt_source, opt_package, opt_depends, opt_paths, opt_make)
