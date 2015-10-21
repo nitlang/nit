@@ -57,6 +57,9 @@ Detects the definition-site variance constraints on formal parameters.
 
 Infers the possible variance annotations of formal types in Nit programs by identifying the existing constraints on the usage of those formal type.
 
+### `--detect-covariance`
+Detect the static covariance usages.
+
 ## OUTPUT
 
 ### `--csv`
