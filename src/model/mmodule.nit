@@ -237,11 +237,6 @@ class MModule
 		end
 	end
 
-	# Is `self` created for internal purpose?
-	# Fictive modules are instantiated internally but they should not be
-	# exposed to the final user.
-	var is_fictive: Bool = false is writable
-
 	# Is `self` a unit test module used by `nitunit`?
 	var is_test_suite: Bool = false is writable
 
