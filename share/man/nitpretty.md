@@ -39,6 +39,12 @@ By default empty lines are kept as they were typed in the file.
 When enabling this option, `nitpretty` will decide where to break lines and
 will put empty lines to separate properties and code blocks.
 
+### `--line-width`
+Maximum length of lines (use 0 to disable automatic line breaks).
+
+### `--no-inline`
+Disable automatic one-liners.
+
 # SPECIFICATION
 
 The specification of the pretty printing is described here.
