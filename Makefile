@@ -30,6 +30,9 @@ docs: doc/stdlib/index.html doc/nitc/index.html
 tools:
 	cd src; make
 
+prepare:
+	misc/pkg_install.sh
+
 bin/nitdoc:
 	cd src; make ../bin/nitdoc
 
