@@ -109,7 +109,10 @@ Piwik site ID.
 ## TESTING
 
 ### `--test`
-Only print the pages structure. Nothing is generated.
+Print test data (metrics and structure).
+
+### `--no-render`
+Do not render HTML files.
 
 # SEE ALSO
 

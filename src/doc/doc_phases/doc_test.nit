@@ -23,7 +23,7 @@ import counter
 redef class ToolContext
 
 	# File pattern used to link documentation to source code.
-	var opt_test = new OptionBool("print test data", "--test")
+	var opt_test = new OptionBool("Print test data (metrics and structure)", "--test")
 
 	redef init do
 		super

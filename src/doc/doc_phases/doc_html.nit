@@ -71,7 +71,7 @@ redef class ToolContext
 	var opt_github_gitdir = new OptionString("Git working directory used to resolve path name (ex: /home/me/mypackage/)", "--github-gitdir")
 
 	# Do not produce HTML files
-	var opt_no_render = new OptionBool("do not render HTML files", "--no-render")
+	var opt_no_render = new OptionBool("Do not render HTML files", "--no-render")
 
 	redef init do
 		super
