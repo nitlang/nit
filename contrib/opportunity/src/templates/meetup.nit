@@ -276,6 +276,8 @@ class OpportunityMeetupPage
 		window.onload = function () {
 			var name_field = document.getElementById("new_name");
 			name_field.value = get_cookie("opportunity_participant_name");
+
+			update_scores();
 		}
 		"""
 	end
@@ -387,13 +389,9 @@ redef class Meetup
 <tr id="total">
 	<th>Total ({{{participants(db).length}}})</th>
 		"""
-		for i in answers(db) do
-			t.add """<th id="total{{{i.id}}}"><center>{{{i.count(db)}}}"""
-			if scores.has_key(i.id) and scores[i.id] >= maxsc then
-				t.add """<br/><span style="color:blue">★</span>"""
-			end
-			t.add "</center></th>"
-		end
+		for i in answers(db) do t.add """
+		<th id="total{{{i.id}}}"><center></center></th>
+"""
 		t.add "</th>"
 		t.add """
 		<th></th>
