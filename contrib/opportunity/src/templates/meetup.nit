@@ -274,8 +274,8 @@ class OpportunityMeetupPage
 
 		// Retrieve the last client-side participant's name
 		window.onload = function () {
-			var name_field = document.getElementById("new_name");
-			name_field.value = get_cookie("opportunity_participant_name");
+			$("#new_name").val(get_cookie("opportunity_participant_name"));
+			$("#new_name").focus();
 
 			update_scores();
 		}
