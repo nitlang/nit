@@ -70,6 +70,9 @@ redef class ToolContext
 	# FIXME redo the plugin
 	var opt_github_gitdir = new OptionString("Git working directory used to resolve path name (ex: /home/me/mypackage/)", "--github-gitdir")
 
+	# Do not produce HTML files
+	var opt_no_render = new OptionBool("do not render HTML files", "--no-render")
+
 	redef init do
 		super
 
@@ -77,7 +80,8 @@ redef class ToolContext
 			opt_source, opt_sharedir, opt_shareurl, opt_custom_title,
 			opt_custom_footer, opt_custom_intro, opt_custom_brand,
 			opt_github_upstream, opt_github_base_sha1, opt_github_gitdir,
-			opt_piwik_tracker, opt_piwik_site_id)
+			opt_piwik_tracker, opt_piwik_site_id,
+			opt_no_render)
 	end
 
 	redef fun process_options(args) do
@@ -103,6 +107,7 @@ class RenderHTMLPhase
 	var name_sorter = new MEntityNameSorter
 
 	redef fun apply do
+		if ctx.opt_no_render.value then return
 		init_output_dir
 		for page in doc.pages.values do
 			page.render(self, doc).write_to_file("{ctx.output_dir.to_s}/{page.html_url}")
