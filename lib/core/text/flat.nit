@@ -85,6 +85,104 @@ redef class FlatText
 		return ns_i
 	end
 
+	# By escaping `self` to HTML, how many more bytes will be needed ?
+	fun chars_to_html_escape: Int do
+		var its = _items
+		var max = last_byte
+		var pos = first_byte
+		var endlen = 0
+		while pos <= max do
+			var c = its[pos]
+			if c == 0x3Cu8 then
+				endlen += 3
+			else if c == 0x3Eu8 then
+				endlen += 3
+			else if c == 0x26u8 then
+				endlen += 4
+			else if c == 0x22u8 then
+				endlen += 4
+			else if c == 0x27u8 then
+				endlen += 4
+			else if c == 0x2Fu8 then
+				endlen += 4
+			end
+			pos += 1
+		end
+		return endlen
+	end
+
+	redef fun html_escape
+	do
+		var extra = chars_to_html_escape
+		if extra == 0 then return to_s
+		var its = _items
+		var max = last_byte
+		var pos = first_byte
+		var nlen = extra + _bytelen
+		var nits = new NativeString(nlen)
+		var outpos = 0
+		while pos <= max do
+			var c = its[pos]
+			# Special codes:
+			# Some HTML characters are used as meta-data, they need
+			# to be replaced by an HTML-Escaped equivalent
+			#
+			# * 0x3C (<) => &lt;
+			# * 0x3E (>) => &gt;
+			# * 0x26 (&) => &amp;
+			# * 0x22 (") => &#34;
+			# * 0x27 (') => &#39;
+			# * 0x2F (/) => &#47;
+			if c == 0x3Cu8 then
+				nits[outpos] = 0x26u8
+				nits[outpos + 1] = 0x6Cu8
+				nits[outpos + 2] = 0x74u8
+				nits[outpos + 3] = 0x3Bu8
+				outpos += 4
+			else if c == 0x3Eu8 then
+				nits[outpos] = 0x26u8
+				nits[outpos + 1] = 0x67u8
+				nits[outpos + 2] = 0x74u8
+				nits[outpos + 3] = 0x3Bu8
+				outpos += 4
+			else if c == 0x26u8 then
+				nits[outpos] = 0x26u8
+				nits[outpos + 1] = 0x61u8
+				nits[outpos + 2] = 0x6Du8
+				nits[outpos + 3] = 0x70u8
+				nits[outpos + 4] = 0x3Bu8
+				outpos += 5
+			else if c == 0x22u8 then
+				nits[outpos] = 0x26u8
+				nits[outpos + 1] = 0x23u8
+				nits[outpos + 2] = 0x33u8
+				nits[outpos + 3] = 0x34u8
+				nits[outpos + 4] = 0x3Bu8
+				outpos += 5
+			else if c == 0x27u8 then
+				nits[outpos] = 0x26u8
+				nits[outpos + 1] = 0x23u8
+				nits[outpos + 2] = 0x33u8
+				nits[outpos + 3] = 0x39u8
+				nits[outpos + 4] = 0x3Bu8
+				outpos += 5
+			else if c == 0x2Fu8 then
+				nits[outpos] = 0x26u8
+				nits[outpos + 1] = 0x23u8
+				nits[outpos + 2] = 0x34u8
+				nits[outpos + 3] = 0x37u8
+				nits[outpos + 4] = 0x3Bu8
+				outpos += 5
+			else
+				nits[outpos] = c
+				outpos += 1
+			end
+			pos += 1
+		end
+		var s = new FlatString.with_infos(nits, nlen, 0, nlen - 1)
+		return s
+	end
+
 	# By escaping `self` to C, how many more bytes will be needed ?
 	#
 	# This enables a double-optimization in `escape_to_c` since if this
