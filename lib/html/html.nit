@@ -128,7 +128,7 @@ class HTMLTag
 	end
 
 	# Tag attributes map
-	var attrs: Map[String, String] = new HashMap[String, String]
+	var attrs: Map[String, String] = new HashMap[String, String] is lazy
 
 	# Get the attributed value of 'prop' or null if 'prop' is undifened
 	#
@@ -161,7 +161,7 @@ class HTMLTag
 	end
 
 	# CSS classes
-	var classes: Set[String] = new HashSet[String]
+	var classes: Set[String] = new HashSet[String] is lazy
 
 	# Add multiple CSS classes
 	#
@@ -182,7 +182,7 @@ class HTMLTag
 		css_props[prop] = value
 		return self
 	end
-	private var css_props: Map[String, String] = new HashMap[String, String]
+	private var css_props: Map[String, String] = new HashMap[String, String] is lazy
 
 	# Get CSS value for 'prop'
 	#
@@ -244,7 +244,7 @@ class HTMLTag
 	end
 
 	# List of children HTML elements
-	var children: Set[HTMLTag] = new HashSet[HTMLTag]
+	var children: Set[HTMLTag] = new HashSet[HTMLTag] is lazy
 
 	# Clear all child and set the text of element
 	#
@@ -254,7 +254,7 @@ class HTMLTag
 	# Text is escaped see: `core::String::html_escape`
 	fun text(txt: String): HTMLTag do
 
-		children.clear
+		if isset _children then children.clear
 		append(txt)
 		return self
 	end
@@ -300,11 +300,11 @@ class HTMLTag
 		res.add "<"
 		res.add tag
 		render_attrs_in(res)
-		if is_void and children.is_empty then
+		if is_void and (not isset _children or children.is_empty) then
 			res.add "/>"
 		else
 			res.add ">"
-			for child in children do child.render_in(res)
+			if isset _children then for child in children do child.render_in(res)
 			res.add "</"
 			res.add tag
 			res.add ">"
@@ -312,6 +312,7 @@ class HTMLTag
 	end
 
 	private fun render_attrs_in(res: Sequence[String]) do
+		if not isset _attrs and not isset _classes and not isset _css_props then return
 		if attrs.has_key("class") or not classes.is_empty then
 			res.add " class=\""
 			for cls in classes do
