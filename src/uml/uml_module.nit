@@ -42,7 +42,7 @@ end
 
 redef class Model
 	# Returns a UML package diagram of `main`
-	fun tpl_module(ctx: ToolContext, main: MModule): Writable do
+	redef fun tpl_module(ctx, main) do
 		return main.tpl_module(ctx, main)
 	end
 end
