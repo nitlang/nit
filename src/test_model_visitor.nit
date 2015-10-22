@@ -45,8 +45,14 @@ redef fun do_work(mainmodule, given_mmodules, modelbuilder)
 do
 	var model = modelbuilder.model
 
-	print "All entities:"
+	print "All entities, including fictive ones:"
 	var v = new TestModelVisitor
+	v.include_fictive = true
+	v.enter_visit(model)
+	v.cpt.print_elements(10)
+
+	print "All entities:"
+	v = new TestModelVisitor
 	v.enter_visit(model)
 	v.cpt.print_elements(10)
 

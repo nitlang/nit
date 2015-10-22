@@ -1246,7 +1246,9 @@ redef class AAttrPropdef
 			end
 			is_lazy = true
 			var mlazyprop = new MAttribute(mclassdef, "lazy _" + name, none_visibility)
+			mlazyprop.is_fictive = true
 			var mlazypropdef = new MAttributeDef(mclassdef, mlazyprop, self.location)
+			mlazypropdef.is_fictive = true
 			self.mlazypropdef = mlazypropdef
 		end
 

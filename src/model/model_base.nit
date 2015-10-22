@@ -79,6 +79,12 @@ abstract class MEntity
 	# Note that the broken status is not propagated to enclosing and enclosed entities.
 	# e.g. a broken method does not make the whole module broken.
 	var is_broken = false is writable
+
+	# Is `self` created for internal purpose?
+	#
+	# Fictive entities are used internally but they should not be
+	# exposed to the final user.
+	var is_fictive: Bool = false is writable
 end
 
 # Something that represents a concern

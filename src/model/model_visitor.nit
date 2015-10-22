@@ -53,6 +53,7 @@ abstract class ModelVisitor
 	# If `e` is null, nothing is done.
 	fun enter_visit(e: nullable MEntity) do
 		if e == null then return
+		if e.is_fictive and not include_fictive then return
 		var old_entity = current_entity
 		current_entity = e
 		visit(e)
@@ -79,6 +80,11 @@ abstract class ModelVisitor
 		var min = min_visibility
 		return min == null or min <= visibility
 	end
+
+	# Include fictive entities?
+	#
+	# By default, fictive entities (see `MEntity::is_fictive`) are not visited.
+	var include_fictive = false is writable
 end
 
 redef class MEntity
