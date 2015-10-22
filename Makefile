@@ -19,7 +19,7 @@ NITCOPT=
 # Additional program directories (contrib and examples) that are buildable
 PROGS=$(dir $(wildcard examples/*/Makefile contrib/*/Makefile))
 
-all: tools
+all: tools man
 
 # Compile all programs in $PROGS
 full: all
