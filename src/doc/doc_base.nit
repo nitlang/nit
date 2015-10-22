@@ -221,7 +221,7 @@ end
 redef class ToolContext
 
 	# Directory where the Nitdoc is rendered.
-	var opt_dir = new OptionString("output directory", "-d", "--dir")
+	var opt_dir = new OptionString("Output directory", "-d", "--dir")
 
 	# Shortcut for `opt_dir.value` with default "doc".
 	var output_dir: String is lazy do return opt_dir.value or else "doc"

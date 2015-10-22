@@ -14,7 +14,10 @@ It is currently used with the vim syntactic plugin.
 
 # OPTIONS
 
-Only common options of the Nit tools are understood.
+### `--vim-autocomplete`
+Generate metadata files used by the Vim plugin for autocompletion.
+
+This option is not expected to be called directly by users.
 
 # SEE ALSO
 

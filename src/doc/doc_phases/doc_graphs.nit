@@ -22,7 +22,7 @@ import html_templates::html_model # FIXME maybe this phase should depend on `htm
 redef class ToolContext
 
 	# Do not generate `graphviz` diagrams.
-	var opt_nodot = new OptionBool("do not generate graphes with graphviz", "--no-dot")
+	var opt_nodot = new OptionBool("Do not generate graphs with graphviz", "--no-dot")
 
 	redef init do
 		super

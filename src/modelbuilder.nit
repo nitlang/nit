@@ -25,7 +25,7 @@ private import more_collections
 
 redef class ToolContext
 	# Option --ignore-visibility
-	var opt_ignore_visibility = new OptionBool("Do not check, and produce errors, on visibility issues.", "--ignore-visibility")
+	var opt_ignore_visibility = new OptionBool("Do not check, and produce errors, on visibility issues", "--ignore-visibility")
 
 	redef init
 	do

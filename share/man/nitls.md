@@ -70,7 +70,7 @@ Process directories recursively.
 All `.nit` files found in the specified directory and subdirectories are considered.
 
 ### `-d`, `--depends`
-List dependencies of given modules
+List dependencies of given modules.
 
 All imported modules are also considered.
 
@@ -86,7 +86,7 @@ Without this option, an error message is displayed and nitls terminates on such 
 
 ## PRESENTATION OPTIONS
 
-### `-p`, `--path`
+### `-p`, `--path-only`
 List only path (instead of name + path).
 
 Paths are displayed uncolored.

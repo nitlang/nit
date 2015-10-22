@@ -26,20 +26,20 @@ redef class ToolContext
 	# --no-inline-intern
 	var opt_no_inline_intern = new OptionBool("Do not inline call to intern methods", "--no-inline-intern")
 	# --no-union-attribute
-	var opt_no_union_attribute = new OptionBool("Put primitive attibutes in a box instead of an union", "--no-union-attribute")
+	var opt_no_union_attribute = new OptionBool("Put primitive attributes in a box instead of an union", "--no-union-attribute")
 	# --no-shortcut-equate
 	var opt_no_shortcut_equate = new OptionBool("Always call == in a polymorphic way", "--no-shortcut-equal")
 	# --no-tag-primitives
 	var opt_no_tag_primitives = new OptionBool("Use only boxes for primitive types", "--no-tag-primitives")
 
 	# --colors-are-symbols
-	var opt_colors_are_symbols = new OptionBool("Store colors as symbols (link-boost)", "--colors-are-symbols")
+	var opt_colors_are_symbols = new OptionBool("Store colors as symbols instead of static data (link-boost)", "--colors-are-symbols")
 	# --trampoline-call
 	var opt_trampoline_call = new OptionBool("Use an indirection when calling", "--trampoline-call")
 	# --guard-call
 	var opt_guard_call = new OptionBool("Guard VFT calls with a direct call", "--guard-call")
 	# --substitute-monomorph
-	var opt_substitute_monomorph = new OptionBool("Replace monomorph trampoline with direct call (link-boost)", "--substitute-monomorph")
+	var opt_substitute_monomorph = new OptionBool("Replace monomorphic trampolines with direct calls (link-boost)", "--substitute-monomorph")
 	# --link-boost
 	var opt_link_boost = new OptionBool("Enable all link-boost optimizations", "--link-boost")
 
@@ -48,9 +48,9 @@ redef class ToolContext
 	# --inline-some-methods
 	var opt_inline_some_methods = new OptionBool("Allow the separate compiler to inline some methods (semi-global)", "--inline-some-methods")
 	# --direct-call-monomorph
-	var opt_direct_call_monomorph = new OptionBool("Allow the separate compiler to direct call monomorph sites (semi-global)", "--direct-call-monomorph")
+	var opt_direct_call_monomorph = new OptionBool("Allow the separate compiler to direct call monomorphic sites (semi-global)", "--direct-call-monomorph")
 	# --direct-call-monomorph0
-	var opt_direct_call_monomorph0 = new OptionBool("Allow the separate compiler to direct call monomorph sites (semi-global)", "--direct-call-monomorph0")
+	var opt_direct_call_monomorph0 = new OptionBool("Allow the separate compiler to direct call monomorphic sites (semi-global)", "--direct-call-monomorph0")
 	# --skip-dead-methods
 	var opt_skip_dead_methods = new OptionBool("Do not compile dead methods (semi-global)", "--skip-dead-methods")
 	# --semi-global
@@ -60,7 +60,7 @@ redef class ToolContext
 	# --tables-metrics
 	var opt_tables_metrics = new OptionBool("Enable static size measuring of tables used for vft, typing and resolution", "--tables-metrics")
 	# --type-poset
-	var opt_type_poset = new OptionBool("Build a poset of types to create more condensed tables.", "--type-poset")
+	var opt_type_poset = new OptionBool("Build a poset of types to create more condensed tables", "--type-poset")
 
 	redef init
 	do

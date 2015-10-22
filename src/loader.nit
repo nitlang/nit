@@ -42,13 +42,13 @@ import ini
 
 redef class ToolContext
 	# Option --path
-	var opt_path = new OptionArray("Set include path for loaders (may be used more than once)", "-I", "--path")
+	var opt_path = new OptionArray("Add an additional include path (may be used more than once)", "-I", "--path")
 
 	# Option --only-metamodel
 	var opt_only_metamodel = new OptionBool("Stop after meta-model processing", "--only-metamodel")
 
 	# Option --only-parse
-	var opt_only_parse = new OptionBool("Only proceed to parse step of loaders", "--only-parse")
+	var opt_only_parse = new OptionBool("Only proceed to parse files", "--only-parse")
 
 	redef init
 	do

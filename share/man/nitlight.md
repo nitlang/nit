@@ -40,7 +40,7 @@ Start the source file at this line (default: 1).
 The generated HTML will only contains lines bellow the specified one.
 
 ### `--last-line`
-End the source file at this line (default: to the end)
+End the source file at this line (default: to the end).
 
 The generated HTML will only contains lines above the specified one.
 

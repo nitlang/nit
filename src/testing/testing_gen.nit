@@ -177,5 +177,5 @@ redef class ToolContext
 	var opt_gen_unit = new OptionBool("Generate test suite skeleton for a module", "--gen-suite")
 	var opt_gen_force = new OptionBool("Force test generation even if file exists", "-f", "--force")
 	var opt_gen_private = new OptionBool("Also generate test case for private methods", "--private")
-	var opt_gen_show = new OptionBool("Only display skeleton, do not write file", "--only-show")
+	var opt_gen_show = new OptionBool("Only display the skeleton, do not write any file", "--only-show")
 end

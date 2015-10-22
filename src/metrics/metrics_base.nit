@@ -51,7 +51,7 @@ redef class ToolContext
 	# --rta
 	var opt_rta = new OptionBool("Compute RTA metrics", "--rta")
 	# --generate-csv
-	var opt_csv = new OptionBool("Export metrics in CSV format", "--csv")
+	var opt_csv = new OptionBool("Also export metrics in CSV format", "--csv")
 	# --generate_hyperdoc
 	var opt_generate_hyperdoc = new OptionBool("Generate Hyperdoc", "--generate_hyperdoc")
 	# --poset

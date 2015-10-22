@@ -32,9 +32,9 @@ redef class ToolContext
 	var docx: Phase = new NitxPhase(self, null)
 
 	# Used to shortcut the prompt and display directly the result in console.
-	var opt_query = new OptionString("Nitx query to perform", "-q", "--query")
+	var opt_command = new OptionString("Nitx command to perform", "-c", "--command")
 
-	init do option_context.add_option opt_query
+	init do option_context.add_option opt_command
 end
 
 # Nitx phase explores the model and prepares the console rendering.
@@ -58,7 +58,7 @@ private class NitxPhase
 
 		# start nitx
 		var nitx = new Nitx(toolcontext, doc)
-		var q = toolcontext.opt_query.value
+		var q = toolcontext.opt_command.value
 		if q != null then # shortcut prompt
 			print ""
 			nitx.do_query(q)

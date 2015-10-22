@@ -333,7 +333,7 @@ class ToolContext
 	var option_context = new OptionContext
 
 	# Option --warn
-	var opt_warn = new OptionCount("Show more warnings", "-W", "--warn")
+	var opt_warn = new OptionCount("Show additional warnings (advices)", "-W", "--warn")
 
 	# Option --warning
 	var opt_warning = new OptionArray("Show/hide a specific warning", "-w", "--warning")
@@ -360,10 +360,10 @@ class ToolContext
 	var opt_set_dummy_tool = new OptionBool("Set toolname and version to DUMMY. Useful for testing", "--set-dummy-tool")
 
 	# Option --verbose
-	var opt_verbose = new OptionCount("Verbose", "-v", "--verbose")
+	var opt_verbose = new OptionCount("Additional messages from the tool", "-v", "--verbose")
 
 	# Option --stop-on-first-error
-	var opt_stop_on_first_error = new OptionBool("Stop on first error", "--stop-on-first-error")
+	var opt_stop_on_first_error = new OptionBool("Just display the first encountered error then stop", "--stop-on-first-error")
 
 	# Option --keep-going
 	var opt_keep_going = new OptionBool("Continue after errors, whatever the consequences", "--keep-going")
@@ -440,26 +440,23 @@ class ToolContext
 
 		if opt_stub_man.value then
 			print """
-% {{{toolname.to_upper}}}(1)
-
 # NAME
 
 {{{tooldescription.split("\n")[1]}}}
 
 # SYNOPSYS
 
-{{{toolname}}} [*options*]...
-
 # OPTIONS
 """
 			for o in option_context.options do
 				var first = true
+				printn "### "
 				for n in o.names do
 					if first then first = false else printn ", "
 					printn "`{n}`"
 				end
 				print ""
-				print ":   {o.helptext}"
+				print "{o.helptext}."
 				print ""
 			end
 			print """

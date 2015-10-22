@@ -23,7 +23,7 @@ var toolcontext = new ToolContext
 toolcontext.keep_going = true
 
 var opt_fragment = new OptionBool("Omit document header and footer", "-f", "--fragment")
-var opt_line_id_prefix = new OptionString("Prefix of the id of each line <span> element", "--line-id-prefix")
+var opt_line_id_prefix = new OptionString("Prefix of the id of each line `<span>` element", "--line-id-prefix")
 var opt_first_line = new OptionInt("Start the source file at this line (default: 1)", 0, "--first-line")
 var opt_last_line = new OptionInt("End the source file at this line (default: to the end)", 0, "--last-line")
 var opt_dir = new OptionString("Output html files in a specific directory (required if more than one module)", "-d", "--dir")

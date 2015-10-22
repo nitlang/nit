@@ -34,7 +34,7 @@ See `nitunit(1)` for details.
 # OPTIONS
 
 ### `-d`, `--dir`
-output directory.
+Output directory.
 
 Where the HTML files are generated.
 
@@ -52,64 +52,67 @@ For instance, the [standard library] use the following value to link to files in
 
 Here, the `git rev-parse HEAD` is used to link to the current snapshot revision of the file.
 
-### `--no-attribute`
+### `--no-attributes`
 Ignore the attributes.
 
 Note: In Nit, attributes are private. Therefore, this option is only useful
 when combined with `--private`.
 
 ### `--no-dot`
-do not generate graphs with graphviz.
+Do not generate graphs with graphviz.
 
 ### `--private`
-also generate private API.
+Also generate private API.
 
 ## CUSTOMIZATION
 
 ### `--sharedir`
-directory containing nitdoc assets.
+Directory containing nitdoc assets.
 
 By default `$NIT_DIR/share/nitdoc/` is used.
 
 ### `--shareurl`
-use shareurl instead of copy shared files.
+Use shareurl instead of copy shared files.
 
 By default, assets from the sharedir a copied into the output directory and referred with a relative path in the generated files.
 With this option, the assets are not copied and the given URL of path is used in the generated files to locate assets.
 
 ### `--custom-title`
-custom title for homepage.
+Custom title for homepage.
 
 ### `--custom-footer-text`
-custom footer text.
+Custom footer text.
 
 ### `--custom-overview-text`
-custom intro text for homepage
+Custom intro text for homepage.
 
 ### `--custom-brand`
-custom link to external site
+Custom link to external site.
 
 ## SERVICES
 
 ### `--github-upstream`
-Git branch where edited commits will be pulled into (ex: user:repo:branch)
+Git branch where edited commits will be pulled into (ex: user:repo:branch).
 
 ### `--github-base-sha1`
-Git sha1 of base commit used to create pull request
+Git sha1 of base commit used to create pull request.
 
 ### `--github-gitdir`
-Git working directory used to resolve path name (ex: /home/me/myproject/)
+Git working directory used to resolve path name (ex: /home/me/myproject/).
 
 ### `--piwik-tracker`
-Piwik tracker URL (ex: `"nitlanguage.org/piwik/"`)
+Piwik tracker URL (ex: `nitlanguage.org/piwik/`).
 
 ### `--piwik-site-id`
-Piwik site ID
+Piwik site ID.
 
 ## TESTING
 
 ### `--test`
-Only print the pages structure. Nothing is generated.
+Print test data (metrics and structure).
+
+### `--no-render`
+Do not render HTML files.
 
 # SEE ALSO
 

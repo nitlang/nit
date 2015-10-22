@@ -28,15 +28,15 @@ import counter
 # Add compiling options
 redef class ToolContext
 	# --output
-	var opt_output = new OptionString("Output file", "-o", "--output")
+	var opt_output = new OptionString("Filename of the generated executable", "-o", "--output")
 	# --dir
 	var opt_dir = new OptionString("Output directory", "--dir")
 	# --no-cc
-	var opt_no_cc = new OptionBool("Do not invoke C compiler", "--no-cc")
+	var opt_no_cc = new OptionBool("Do not invoke the C compiler", "--no-cc")
 	# --no-main
 	var opt_no_main = new OptionBool("Do not generate main entry point", "--no-main")
 	# --make-flags
-	var opt_make_flags = new OptionString("Additional options to make", "--make-flags")
+	var opt_make_flags = new OptionString("Additional options to the `make` command", "--make-flags")
 	# --max-c-lines
 	var opt_max_c_lines = new OptionInt("Maximum number of lines in generated C files. Use 0 for unlimited", 10000, "--max-c-lines")
 	# --group-c-files
@@ -50,7 +50,7 @@ redef class ToolContext
 	# --no-check-attr-isset
 	var opt_no_check_attr_isset = new OptionBool("Disable isset tests before each attribute access (dangerous)", "--no-check-attr-isset")
 	# --no-check-assert
-	var opt_no_check_assert = new OptionBool("Disable the evaluation of explicit 'assert' and 'as' (dangerous)", "--no-check-assert")
+	var opt_no_check_assert = new OptionBool("Disable the evaluation of explicit `assert` and `as` (dangerous)", "--no-check-assert")
 	# --no-check-autocast
 	var opt_no_check_autocast = new OptionBool("Disable implicit casts on unsafe expression usage (dangerous)", "--no-check-autocast")
 	# --no-check-null
@@ -66,11 +66,11 @@ redef class ToolContext
 	# --no-stacktrace
 	var opt_no_stacktrace = new OptionBool("Disable the generation of stack traces", "--no-stacktrace")
 	# --no-gcc-directives
-	var opt_no_gcc_directive = new OptionArray("Disable a advanced gcc directives for optimization", "--no-gcc-directive")
+	var opt_no_gcc_directive = new OptionArray("Disable advanced gcc directives for optimization", "--no-gcc-directive")
 	# --release
 	var opt_release = new OptionBool("Compile in release mode and finalize application", "--release")
 	# -g
-	var opt_debug = new OptionBool("Compile in debug mode (no C-side optimization)", "--debug", "-g")
+	var opt_debug = new OptionBool("Compile in debug mode (no C-side optimization)", "-g", "--debug")
 
 	redef init
 	do

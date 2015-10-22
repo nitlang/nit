@@ -46,8 +46,16 @@ exit the tool.
 
 # OPTIONS
 
-### `-q`
-execute a query, display results in console then quit.
+### `-c`, `--command`
+Nitx command to perform.
+
+Execute a command, display results in the console, then quit.
+
+### `--no-attributes`
+Ignore the attributes.
+
+### `--private`
+Also generate private API.
 
 # SEE ALSO
 
