@@ -157,7 +157,7 @@ class NaiveInterpreter
 			n.debug("inconsitance: no value and not escaping.")
 		end
 		var implicit_cast_to = n.implicit_cast_to
-		if implicit_cast_to != null then
+		if i != null and implicit_cast_to != null then
 			var mtype = self.unanchor_type(implicit_cast_to)
 			if not self.is_subtype(i.mtype, mtype) then n.fatal(self, "Cast failed. Expected `{implicit_cast_to}`, got `{i.mtype}`")
 		end
@@ -526,7 +526,7 @@ class NaiveInterpreter
 	# Execute type checks of covariant parameters
 	fun parameter_check(node: ANode, mpropdef: MMethodDef, args: Array[Instance])
 	do
-		var msignature = mpropdef.msignature
+		var msignature = mpropdef.msignature.as(not null)
 		for i in [0..msignature.arity[ do
 			# skip test for vararg since the array is instantiated with the correct polymorphic type
 			if msignature.vararg_rank == i then continue
@@ -566,6 +566,7 @@ class NaiveInterpreter
 	# Use this method, instead of `send` to execute and control the additional behavior of the call-sites
 	fun callsite(callsite: nullable CallSite, arguments: Array[Instance]): nullable Instance
 	do
+		if callsite == null then return null
 		var initializers = callsite.mpropdef.initializers
 		if not initializers.is_empty then
 			var recv = arguments.first

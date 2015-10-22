@@ -181,8 +181,9 @@ redef class ModelBuilder
 		for npropdef in nclassdef.n_propdefs do
 			if npropdef isa AMethPropdef then
 				if not npropdef.is_autoinit then continue # Skip non tagged autoinit
-				if npropdef.mpropdef == null then return # Skip broken method
-				var sig = npropdef.mpropdef.msignature
+				var mpropdef = npropdef.mpropdef
+				if mpropdef == null then return # Skip broken method
+				var sig = mpropdef.msignature
 				if sig == null then continue # Skip broken method
 
 				for param in sig.mparameters do
@@ -190,12 +191,14 @@ redef class ModelBuilder
 					var mparameter = new MParameter(param.name, ret_type, false)
 					mparameters.add(mparameter)
 				end
-				initializers.add(npropdef.mpropdef.mproperty)
-				npropdef.mpropdef.mproperty.is_autoinit = true
+				initializers.add(mpropdef.mproperty)
+				mpropdef.mproperty.is_autoinit = true
 			end
 			if npropdef isa AAttrPropdef then
 				var mreadpropdef = npropdef.mreadpropdef
-				if mreadpropdef == null or mreadpropdef.msignature == null then return # Skip broken attribute
+				if mreadpropdef == null then return # Skip broken attribute
+				var msignature = mreadpropdef.msignature
+				if msignature == null then return # Skip broken attribute
 				if npropdef.noinit then continue # Skip noinit attribute
 				var atlateinit = npropdef.get_single_annotation("lateinit", self)
 				if atlateinit != null then
@@ -207,7 +210,7 @@ redef class ModelBuilder
 				end
 				if npropdef.has_value then continue
 				var paramname = mreadpropdef.mproperty.name
-				var ret_type = mreadpropdef.msignature.return_mtype
+				var ret_type = msignature.return_mtype
 				if ret_type == null then return
 				var mparameter = new MParameter(paramname, ret_type, false)
 				mparameters.add(mparameter)
@@ -224,6 +227,7 @@ redef class ModelBuilder
 			end
 		end
 
+		var the_root_init_mmethod = self.the_root_init_mmethod
 		if the_root_init_mmethod == null then return
 
 		# Look for most-specific new-stype init definitions
@@ -349,7 +353,7 @@ redef class ModelBuilder
 		end
 
 		# Else create the local implicit basic init definition
-		var mprop = the_root_init_mmethod.as(not null)
+		var mprop = the_root_init_mmethod
 		var mpropdef = new MMethodDef(mclassdef, mprop, nclassdef.location)
 		mpropdef.has_supercall = true
 		mpropdef.initializers.add_all(initializers)
@@ -1025,7 +1029,7 @@ redef class AMethPropdef
 			var precursor_ret_type = msignature.return_mtype
 			var ret_type = mysignature.return_mtype
 			if ret_type != null and precursor_ret_type == null then
-				modelbuilder.error(nsig.n_type.as(not null), "Redef Error: `{mpropdef.mproperty}` is a procedure, not a function.")
+				modelbuilder.error(nsig.n_type, "Redef Error: `{mpropdef.mproperty}` is a procedure, not a function.")
 				mpropdef.msignature = null
 				mpropdef.is_broken = true
 				return
@@ -1074,6 +1078,8 @@ redef class AMethPropdef
 	# For parameters, type is always useless in a redef.
 	# For return type, type is useless if not covariant with introduction.
 	redef fun check_repeated_types(modelbuilder) do
+		var mpropdef = self.mpropdef
+		if mpropdef == null then return
 		if mpropdef.is_intro or n_signature == null then return
 		# check params
 		for param in n_signature.n_params do
@@ -1540,6 +1546,8 @@ redef class AAttrPropdef
 
 	# Type is useless if the attribute type is the same thant the intro.
 	redef fun check_repeated_types(modelbuilder) do
+		var mreadpropdef = self.mreadpropdef
+		if mreadpropdef == null then return
 		if mreadpropdef.is_intro or n_type == null then return
 		# get intro
 		var intro = mreadpropdef.mproperty.intro

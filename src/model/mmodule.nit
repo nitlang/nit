@@ -65,6 +65,7 @@ redef class MGroup
 	redef fun mdoc_or_fallback
 	do
 		if mdoc != null then return mdoc
+		var default_mmodule = self.default_mmodule
 		if default_mmodule == null then return null
 		return default_mmodule.mdoc_or_fallback
 	end
@@ -164,6 +165,7 @@ class MModule
 	do
 		model.mmodules_by_name.add_one(name, self)
 		model.mmodules.add(self)
+		var mgroup = self.mgroup
 		if mgroup != null then
 			mgroup.mmodules.add(self)
 			if mgroup.name == name then

@@ -246,7 +246,6 @@ class GlobalCompiler
 		var res = v.new_var(mtype)
 		res.is_exact = true
 		if is_native_array then
-			var mtype_elt = mtype.arguments.first
 			v.add("{res} = nit_alloc(sizeof(struct {mtype.c_name}) + length*sizeof(val*));")
 			v.add("((struct {mtype.c_name}*){res})->length = length;")
 		else

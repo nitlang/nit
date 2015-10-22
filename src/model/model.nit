@@ -283,6 +283,7 @@ redef class MModule
 			end
 			print("Fatal Error: no primitive class {name} in {self}")
 			exit(1)
+			abort
 		end
 		if cla.length != 1 then
 			var msg = "Fatal Error: more than one primitive class {name} in {self}:"
@@ -1566,6 +1567,7 @@ class MParameterType
 		end
 		if resolved_receiver isa MNullableType then resolved_receiver = resolved_receiver.mtype
 		if resolved_receiver isa MParameterType then
+			assert anchor != null
 			assert resolved_receiver.mclass == anchor.mclass
 			resolved_receiver = anchor.arguments[resolved_receiver.rank]
 			if resolved_receiver isa MNullableType then resolved_receiver = resolved_receiver.mtype
