@@ -27,7 +27,7 @@ class MPackageTree
 
 	redef fun display(a) do
 		if a isa MGroup then
-			if a.parent == null then return "{a.mpackage.name} ({a.filepath.to_s})"
+			if a.parent == null then return "{a.mpackage.name} ({a.filepath or else "?"})"
 			return a.name + " (group)"
 		else if a isa MModule then
 			return a.name
@@ -165,7 +165,7 @@ class MPackageDot
 		if mgroup.parent == null then
 			# is is a root group, so display the package
 			if package_group then
-				o.write("subgraph cluster_{mgroup.object_id} \{\nlabel=\"{mgroup.mpackage.name}\\n({mgroup.filepath.to_s})\"\ncolor=black\nstyle=dotted\n")
+				o.write("subgraph cluster_{mgroup.object_id} \{\nlabel=\"{mgroup.mpackage.name}\\n({mgroup.filepath or else "?"})\"\ncolor=black\nstyle=dotted\n")
 			end
 		else
 			if cluster_group then
