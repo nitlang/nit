@@ -20,6 +20,10 @@ NITCOPT=
 PROGS=$(dir $(wildcard examples/*/Makefile contrib/*/Makefile))
 
 all: tools man
+	@echo ""
+	@echo "Congratulations! Nit was succesfully compiled."
+	@echo "To configure your shell environment, execute the following command:"
+	@echo "    source misc/nit_env.sh install"
 
 # Compile all programs in $PROGS
 full: all
