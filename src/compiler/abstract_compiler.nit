@@ -2074,6 +2074,8 @@ redef class MMethodDef
 	do
 		if v.compiler.modelbuilder.toolcontext.opt_no_check_covariance.value then return
 
+		var msignature = self.msignature.as(not null)
+
 		for i in [0..msignature.arity[ do
 			# skip test for vararg since the array is instantiated with the correct polymorphic type
 			if msignature.vararg_rank == i then continue
@@ -2083,11 +2085,11 @@ redef class MMethodDef
 			if not origmtype.need_anchor then continue
 
 			# get the parameter type
-			var mtype = self.msignature.mparameters[i].mtype
+			var mtype = msignature.mparameters[i].mtype
 
 			# generate the cast
 			# note that v decides if and how to implements the cast
-			v.add("/* Covariant cast for argument {i} ({self.msignature.mparameters[i].name}) {arguments[i+1].inspect} isa {mtype} */")
+			v.add("/* Covariant cast for argument {i} ({msignature.mparameters[i].name}) {arguments[i+1].inspect} isa {mtype} */")
 			v.add_cast(arguments[i+1], mtype, "covariance")
 		end
 	end
@@ -3696,7 +3698,8 @@ end
 redef class ASuperExpr
 	redef fun expr(v)
 	do
-		var recv = v.frame.arguments.first
+		var frame = v.frame.as(not null)
+		var recv = frame.arguments.first
 
 		var callsite = self.callsite
 		if callsite != null then
@@ -3707,7 +3710,7 @@ redef class ASuperExpr
 				# Add automatic arguments for the super init call
 				args = [recv]
 				for i in [0..callsite.msignature.arity[ do
-					args.add(v.frame.arguments[i+1])
+					args.add(frame.arguments[i+1])
 				end
 			else
 				args = v.varargize(callsite.mpropdef, callsite.signaturemap, recv, self.n_args.n_exprs)
@@ -3722,7 +3725,7 @@ redef class ASuperExpr
 
 		var args
 		if self.n_args.n_exprs.is_empty then
-			args = v.frame.arguments
+			args = frame.arguments
 		else
 			args = v.varargize(mpropdef, signaturemap, recv, self.n_args.n_exprs)
 		end

@@ -526,7 +526,7 @@ class NaiveInterpreter
 	# Execute type checks of covariant parameters
 	fun parameter_check(node: ANode, mpropdef: MMethodDef, args: Array[Instance])
 	do
-		var msignature = mpropdef.msignature
+		var msignature = mpropdef.msignature.as(not null)
 		for i in [0..msignature.arity[ do
 			# skip test for vararg since the array is instantiated with the correct polymorphic type
 			if msignature.vararg_rank == i then continue
