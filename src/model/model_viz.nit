@@ -85,7 +85,7 @@ private class LinexComparator
 		var subs = tree.sub[o]
 		var minres = mini(subs.first)
 		var maxres = maxi(subs.first)
-		var order = minres.model.mmodule_importation_hierarchy
+		var order = o.model.mmodule_importation_hierarchy
 		for o2 in subs do
 			var c = mini(o2)
 			if c == null then continue
