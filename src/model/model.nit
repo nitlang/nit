@@ -283,6 +283,7 @@ redef class MModule
 			end
 			print("Fatal Error: no primitive class {name} in {self}")
 			exit(1)
+			abort
 		end
 		if cla.length != 1 then
 			var msg = "Fatal Error: more than one primitive class {name} in {self}:"
