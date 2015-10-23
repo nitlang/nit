@@ -177,6 +177,21 @@ interface Collection[E]
 		for e in self do if self.count(e) != other.count(e) then return false
 		return true
 	end
+
+	# Does the collection contain at least one element of `other`?
+	#
+	#     assert [1,3,4,2].has_any([1..10])    == true
+	#     assert [1,3,4,2].has_any([5..10])    == false
+	#
+	# Note that the default implementation is general and correct for any lawful Collections.
+	# It is memory-efficient but relies on `has` so may be CPU-inefficient for some kind of collections.
+	fun has_any(other: Collection[nullable Object]): Bool
+	do
+		for o in other do
+			if has(o) then return true
+		end
+		return false
+	end
 end
 
 # Iterators generate a series of elements, one at a time.
