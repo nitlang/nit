@@ -86,7 +86,7 @@ redef class MGroupPage
 		if concerns == null or concerns.is_empty then return
 		# FIXME avoid diff
 		mentity.mpackage.booster_rank = -1000
-		mentity.booster_rank = -1000
+		mentity.booster_rank = -900
 		concerns.sort_with(v.concerns_sorter)
 		mentity.mpackage.booster_rank = 0
 		mentity.booster_rank = 0
@@ -110,8 +110,8 @@ redef class MModulePage
 		if concerns == null or concerns.is_empty then return
 		# FIXME avoid diff
 		mentity.mgroup.mpackage.booster_rank = -1000
-		mentity.mgroup.booster_rank = -1000
-		mentity.booster_rank = -1000
+		mentity.mgroup.booster_rank = -900
+		mentity.booster_rank = -800
 		concerns.sort_with(v.concerns_sorter)
 		mentity.mgroup.mpackage.booster_rank = 0
 		mentity.mgroup.booster_rank = 0
@@ -175,8 +175,8 @@ redef class MClassPage
 		if concerns == null or concerns.is_empty then return
 		# FIXME diff hack
 		mentity.intro_mmodule.mgroup.mpackage.booster_rank = -1000
-		mentity.intro_mmodule.mgroup.booster_rank = -1000
-		mentity.intro_mmodule.booster_rank = -1000
+		mentity.intro_mmodule.mgroup.booster_rank = -900
+		mentity.intro_mmodule.booster_rank = -800
 		concerns.sort_with(v.concerns_sorter)
 		mentity.intro_mmodule.mgroup.mpackage.booster_rank = 0
 		mentity.intro_mmodule.mgroup.booster_rank = 0
@@ -250,8 +250,8 @@ redef class MPropertyPage
 		if concerns == null or concerns.is_empty then return
 		# FIXME diff hack
 		mentity.intro.mclassdef.mmodule.mgroup.mpackage.booster_rank = -1000
-		mentity.intro.mclassdef.mmodule.mgroup.booster_rank = -1000
-		mentity.intro.mclassdef.mmodule.booster_rank = -1000
+		mentity.intro.mclassdef.mmodule.mgroup.booster_rank = -900
+		mentity.intro.mclassdef.mmodule.booster_rank = -800
 		concerns.sort_with(v.concerns_sorter)
 		mentity.intro.mclassdef.mmodule.mgroup.mpackage.booster_rank = 0
 		mentity.intro.mclassdef.mmodule.mgroup.booster_rank = 0
