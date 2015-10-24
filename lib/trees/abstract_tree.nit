@@ -40,6 +40,7 @@ end
 # nodes are used to store values
 # * `E`: type of value
 class TreeNode[K: Comparable, E]
+	super Comparable
 
 	# TreeNode type
 	type N: TreeNode[K, E]
@@ -53,6 +54,17 @@ class TreeNode[K: Comparable, E]
 	# Direct parent of this node (null if the node is root)
 	var parent: nullable N = null is writable
 
+	# Depth in tree (length of the path from `self` to `root`)
+	fun depth: Int do
+		var node = parent
+		var i = 0
+		while node != null do
+			node = node.parent
+			i += 1
+		end
+		return i
+	end
+
 	redef fun to_s do return "\{{value or else ""}\}"
 
 	# Return dot representation of this node
@@ -63,4 +75,17 @@ class TreeNode[K: Comparable, E]
 		if parent != null then res.append "\"{parent.as(not null)}\" -> \"{self}\"[dir=back];\n"
 		return res.to_s
 	end
+
+	redef type OTHER: N
+
+	# Nodes equality is done on `value` equality
+	#
+	# Redefine this method to change the default behavior.
+	redef fun ==(o) do
+		if not o isa N then return false
+		return self.value == o.value
+	end
+
+	# Nodes ordering is based on the `key`
+	redef fun <(o) do return self.key < o.key
 end
