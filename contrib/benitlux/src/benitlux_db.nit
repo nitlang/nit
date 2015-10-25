@@ -95,23 +95,23 @@ class DB
 		var events = new BeerEvents
 
 		# New
-		var stmt = select("name, desc FROM beers WHERE " +
+		var stmt = select("ROWID, name, desc FROM beers WHERE " +
 		                  "ROWID IN (SELECT beer FROM daily WHERE day=(SELECT MAX(day) FROM daily)) AND " +
 		                  "NOT ROWID IN (SELECT beer FROM daily WHERE date(day) = date({prev_day}))")
 		if stmt == null then return null
 		for row in stmt do events.new_beers.add row.to_beer
 
 		# Gone
-		stmt = select("name, desc FROM beers WHERE " +
-		                  "NOT ROWID IN (SELECT beer FROM daily WHERE day=(SELECT MAX(day) FROM daily)) AND " +
-		                  "ROWID IN (SELECT beer FROM daily WHERE date(day) = date({prev_day}))")
+		stmt = select("ROWID, name, desc FROM beers WHERE " +
+		              "NOT ROWID IN (SELECT beer FROM daily WHERE day=(SELECT MAX(day) FROM daily)) AND " +
+		              "ROWID IN (SELECT beer FROM daily WHERE date(day) = date({prev_day}))")
 		if stmt == null then return null
 		for row in stmt do events.gone_beers.add row.to_beer
 
 		# Fix
-		stmt = select("name, desc FROM beers WHERE " +
-		                  "ROWID IN (SELECT beer FROM daily WHERE day=(SELECT MAX(day) FROM daily)) AND " +
-		                  "ROWID IN (SELECT beer FROM daily WHERE date(day) = date({prev_day}))")
+		stmt = select("ROWID, name, desc FROM beers WHERE " +
+		              "ROWID IN (SELECT beer FROM daily WHERE day=(SELECT MAX(day) FROM daily)) AND " +
+		              "ROWID IN (SELECT beer FROM daily WHERE date(day) = date({prev_day}))")
 		if stmt == null then return null
 		for row in stmt do events.fix_beers.add row.to_beer
 
@@ -123,9 +123,18 @@ class DB
 	# Return `null` on error.
 	fun beers: nullable Array[Beer]
 	do
-		var stmt = select("name, desc FROM beers")
+		var stmt = select("rowid, name, desc FROM beers")
 		if stmt == null then return null
 		return [for row in stmt do row.to_beer]
+	end
+
+	# Load beer information from its database id
+	fun beer_from_id(id: Int): nullable Beer
+	do
+		var stmt = select("ROWID, name, desc FROM beers WHERE ROWID = {id}")
+		if stmt == null then return null
+		for row in stmt do return row.to_beer
+		return null
 	end
 
 	# Days where `beer` was available, all known days if `beer == null`
@@ -172,5 +181,5 @@ end
 
 redef class StatementRow
 	# Convert this BD row to a `Beer`
-	fun to_beer: Beer do return new Beer(self[0].to_s, self[1].to_s)
+	fun to_beer: Beer do return new Beer(self[0].to_i, self[1].to_s, self[2].to_s)
 end
