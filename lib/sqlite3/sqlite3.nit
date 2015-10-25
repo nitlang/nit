@@ -35,7 +35,7 @@ class Sqlite3DB
 	# Open a connection to the database file at `path`
 	init open(path: Text)
 	do
-		init(new NativeSqlite3.open(path.to_s))
+		init(new NativeSqlite3.open(path.to_cstring))
 		if native_connection.is_valid then is_open = true
 	end
 

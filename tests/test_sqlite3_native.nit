@@ -26,7 +26,7 @@ var insert_req_1 = "INSERT INTO users VALUES('Bob', 'zzz', 1)"
 var insert_req_2 = "INSERT INTO users VALUES('Guillaume', 'xxx', 1)"
 var select_req = "SELECT * FROM users"
 
-var db = new NativeSqlite3.open(filename)
+var db = new NativeSqlite3.open(filename.to_cstring)
 assert sqlite_open: db.error.is_ok
 
 db.exec(create_req)
@@ -53,7 +53,7 @@ end
 
 db.close
 
-db = new NativeSqlite3.open(filename)
+db = new NativeSqlite3.open(filename.to_cstring)
 assert sqlite_reopen: db.error.is_ok
 
 stmt = db.prepare(select_req)
