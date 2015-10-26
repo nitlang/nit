@@ -46,6 +46,13 @@ class OpportunityMeetupPage
 			var scores = {};
 			var answers = [];
 			var maxscore = 0;
+
+			// Pizza ratios
+			var pizzas = {};
+			var pizzas_person = {};
+			var pizzas_total = 0.0;
+
+			// Iterate over each participant x possible answers
 			for(i=0; i < anss.length; i++){
 				var incscore = 0;
 				var inccount = 0;
@@ -75,7 +82,48 @@ class OpportunityMeetupPage
 				if(scores[ansid] > maxscore){
 					maxscore = scores[ansid];
 				}
+
+				if (ansid in pizzas_person) {
+
+					// Pizza ratio of previous participant
+					for (a in pizzas_person) {
+						var value = pizzas_person[a];
+						if (value != 0.0 && pizzas_total != 0)
+							value /= pizzas_total;
+
+						if (a in pizzas)
+							pizzas[a] += value;
+						else
+							pizzas[a] = value;
+					}
+
+					// Reset for a new person
+					pizzas_person = {};
+					pizzas_total = 0.0;
+				}
+
+				pizzas_total += incscore;
+				pizzas_person[ansid] = incscore;
 			}
+
+			// Pizza ratio of the last participant
+			for (a in pizzas_person) {
+				var value = pizzas_person[a];
+				if (value != 0.0 && pizzas_total != 0)
+					value /= pizzas_total;
+
+				if (a in pizzas)
+					pizzas[a] += value;
+				else
+					pizzas[a] = value;
+			}
+
+			var pizza_unit = document.getElementById("pizza_unit").value;
+			if (pizza_unit)
+				pizza_unit = parseFloat(pizza_unit);
+			else
+				pizza_unit = 1;
+
 			for(i=0; i < answers.length; i++){
 				var ansid = answers[i].toString();
 				var el = $('#total'+ansid)[0];
@@ -85,7 +133,19 @@ class OpportunityMeetupPage
 				}
 				ins += "</center>";
 				el.innerHTML = ins;
+
+				// Pizza ratio
+				var val = pizzas[ansid] * pizza_unit;
+
+				el = $('#pizzas'+ansid)[0];
+				ins = "<center>"+val.toFixed(1);
+				ins += "<br><span style=\\"color:orange\\">∇</span>";
+				ins += "</center>";
+				el.innerHTML = ins;
 			}
+
+			var pizza_unit = $("#pizza_unit").val();
+			set_cookie("opportunity_pizza_unit", pizza_unit);
 		}
 		function change_answer(ele, id){
 			// modify only the currently selected entry
@@ -274,8 +334,12 @@ class OpportunityMeetupPage
 
 		// Retrieve the last client-side participant's name
 		window.onload = function () {
-			var name_field = document.getElementById("new_name");
-			name_field.value = get_cookie("opportunity_participant_name");
+			$("#new_name").val(get_cookie("opportunity_participant_name"));
+			$("#new_name").focus();
+
+			$("#pizza_unit").val(get_cookie("opportunity_pizza_unit"));
+
+			update_scores();
 		}
 		"""
 	end
@@ -387,13 +451,19 @@ redef class Meetup
 <tr id="total">
 	<th>Total ({{{participants(db).length}}})</th>
 		"""
-		for i in answers(db) do
-			t.add """<th id="total{{{i.id}}}"><center>{{{i.count(db)}}}"""
-			if scores.has_key(i.id) and scores[i.id] >= maxsc then
-				t.add """<br/><span style="color:blue">★</span>"""
-			end
-			t.add "</center></th>"
-		end
+		for i in answers(db) do t.add """
+		<th id="total{{{i.id}}}"><center></center></th>
+"""
+		t.add """
+</tr>
+<tr id="pizzas">
+	<th>
+	{{{"%1 ratio × %2".format("<span style='color:orange'>∇</span>", "<input id='pizza_unit' type='number' placeholder='1' text='1' class='inputsm' style='width: 8ex !important;' onchange='update_scores()' onkeypress='update_scores()' onpaste='update_scores()' oninput='update_scores()'>")}}}
+	</th>
+"""
+		for i in answers(db) do t.add """
+		<th id="pizzas{{{i.id}}}"></center></th>
+"""
 		t.add "</th>"
 		t.add """
 		<th></th>
