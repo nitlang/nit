@@ -1,5 +1,4 @@
-Nit is a statically typed object-oriented programming language.
-The goal of Nit is to propose a statically typed programming language where structure is not a pain.
+Nit is an expressive language with a script-like syntax, a friendly type-system and aims at elegance, simplicity and intuitiveness.
 
 Nit has a simple straightforward style and can usually be picked up quickly, particularly by anyone who has programmed before.
 While object-oriented, it allows procedural styles.
@@ -14,40 +13,37 @@ Some Nit features:
  * Light and clear syntax.
 
 
-Requirement:
+Requirements:
 
-	* gcc		http://gcc.gnu.org/
-	* pkg-config	http://www.freedesktop.org/wiki/Software/pkg-config/
-	* ccache	http://ccache.samba.org/	to improve recompilation
-	* libgc-dev	http://www.hpl.hp.com/personal/Hans_Boehm/gc/
-	* graphviz	http://www.graphviz.org/	to enable graphes with the nitdoc tool
-	* libunwind	http://nongnu.org/libunwind
+ * gcc		http://gcc.gnu.org/ (or a compatible C compiler)
+ * pkg-config	http://www.freedesktop.org/wiki/Software/pkg-config/
+ * ccache	http://ccache.samba.org/	to improve recompilation
+ * libgc-dev	http://www.hpl.hp.com/personal/Hans_Boehm/gc/
+ * graphviz	http://www.graphviz.org/	to enable graphs with the nitdoc tool
+ * libunwind	http://nongnu.org/libunwind
 
-Those are available in most linux distributions
+Those are available in most Linux distributions
 
-    # sudo apt-get install build-essential ccache libgc-dev graphviz libunwind pkg-config
+    $ sudo apt-get install build-essential ccache libgc-dev graphviz libunwind-dev pkg-config
 
-Important files and directory:
+Important files and directories:
 
-	benchmarks/	Script to bench the compilers
-	bin/		The Nit tools
-	bin/nitc	The Nit compiler
-	bin/nit		The Nit interpreter
-	bin/nitdoc	The Nit autodoc
-	c_src/		C code of nitc (needed to bootstrap)
-	clib/		C code needed by nitc to compile programs
-	Changelog	List of change between versions
-	contrib/	Various Nit programs (may or may not be useful)
-	doc/		Documentation
-	examples/	Program examples written in Nit
-	LICENCE		License of the software
-	misc/		Some additional file for commons text editors and tools
-	tests/		Non-regression test-suite
-	lib/		Nit standard library
-	Makefile	Bootstrap the Nit tools
-	NOTICE		List of the authors
-	README		This file
-	src/		The Nit tool sources (written in Nit)
+ * benchmarks/	Script to bench the compilers
+ * bin/		The Nit tools
+ * c_src/	C code of nitc (needed to bootstrap)
+ * clib/	C code needed by nitc to compile programs
+ * contrib/	Various Nit programs (may or may not be useful)
+ * doc/		Documentation
+ * examples/	Program examples written in Nit
+ * lib/		Nit standard library
+ * LICENCE	License of the software
+ * Makefile	Bootstrap the Nit tools
+ * misc/	Some additional files for commons text editors and tools
+ * NOTICE.md	List of the authors
+ * README	This file
+ * share/	Common resources used by tools
+ * src/		The Nit tool sources (written in Nit)
+ * tests/	Non-regression test-suite
 
 
 How to start:
@@ -56,13 +52,11 @@ How to start:
     $ bin/nitc examples/hello_world.nit
     $ ./hello_world
 
-You can put the `bin/` directoty in your PATH
+You can put the `bin/` directory in your PATH
 
 Using bash completion with Nit tools:
 
     $ echo source /absolute/path/to/misc/bash_completion/nit >> ~/.bash_completion
     $ source ~/.bash_completion
 
-More information:
-
-	http://www.nitlanguage.org
+More information: <http://www.nitlanguage.org>
