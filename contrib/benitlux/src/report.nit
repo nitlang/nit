@@ -12,6 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import opts
+
 import benitlux_model
 import benitlux_db
 import correct
@@ -46,8 +48,16 @@ redef class Text
 	end
 end
 
+var opts = new OptionContext
+var opt_columns = new OptionInt("Number of columns for the graph", 70, "-c")
+opts.add_option(opt_columns)
+
+opts.parse(args)
+var rest = opts.rest
+
 # Use the local DB
 var db_path = "benitlux_sherbrooke.db"
+if rest.not_empty then db_path = rest.first
 var db = new DB.open(db_path)
 
 # All known beers
@@ -112,13 +122,17 @@ sorter.sort beers
 print "\nAvailability graph:"
 
 # Compute `column_width` days from all the known days
-var column_width = 70
-var days_sample = [for i in column_width.times do all_days[i*all_days.length/column_width]]
+var column_width = opt_columns.value
+var days_sample = [for i in [1..column_width[ do all_days[i*all_days.length/column_width]]
+var weeks_sample = new Array[Array[String]]
 
 # Gather columns headers for each month
 var headers = new Array[nullable String]
+var iter = all_days.iterator
+iter.start
 var pre = ""
 for day in days_sample do
+	# Prepare headers
 	var new_pre = day.substring(0, 7)
 
 	if not day.has_prefix(pre) then
@@ -126,6 +140,16 @@ for day in days_sample do
 	else headers.add null
 
 	pre = new_pre
+
+	# Fill weeks
+	var week = new Array[String]
+	weeks_sample.add week
+	while iter.is_ok do
+		var item = iter.item
+		if item == day then break
+		week.add item
+		iter.next
+	end
 end
 
 # Draw the headers from top to bottom so they look like:
@@ -154,9 +178,17 @@ for beer in beers do
 	# Skip never-available beers, usually name errors
 	if days.is_empty then continue
 
-	# Print a line looking like: "  ############ ######    -----########-: Beer"
-	for s in days_sample do printn if days.has(s) then "#" else s.date_to_back
-	print ": {beer.name}"
+	# Print a line looking like: "  ############ ######    -----########- Beer"
+	var last = null
+	#var iter = days.iterator
+	for week in weeks_sample do
+		printn if days.has_all(week) then
+		           "#"
+		       else if days.has_any(week) then
+		           ":"
+		       else week.first.date_to_back
+	end
+	print " {beer.name}"
 end
 
 db.close
