@@ -43,13 +43,13 @@ in "C Header" `{
 `}
 
 # Initialize the GTK system
-fun init_gtk `{ gtk_init(0, NULL); `}
+fun gtk_init `{ gtk_init(0, NULL); `}
 
 # Hand over control to the GTK event loop
-fun run_gtk `{ gtk_main(); `}
+fun gtk_main `{ gtk_main(); `}
 
 # Quit the GTK event loop and clean up the system
-fun quit_gtk `{ gtk_main_quit(); `}
+fun gtk_main_quit `{ gtk_main_quit(); `}
 
 interface GtkCallable
 	# return true to stop event processing, false to let it propagate
@@ -142,8 +142,9 @@ extern class GtkContainer `{GtkContainer *`}
 	fun add(widget: GtkWidget) `{
 		gtk_container_add(self, widget);
 	`}
+
 	# Remove the widget from the container
-	fun remove_widget(widget: GtkWidget) `{
+	fun remove(widget: GtkWidget) `{
 		gtk_container_remove(self, widget);
 	`}
 
@@ -156,7 +157,6 @@ extern class GtkContainer `{GtkContainer *`}
 	fun resize_mode=(resize_mode: GtkResizeMode) `{
 		gtk_container_set_resize_mode(self, resize_mode);
 	`}
-
 end
 
 # A container with just one child
