@@ -2022,6 +2022,7 @@ redef class MMethodDef
 	fun can_inline(v: VISITOR): Bool
 	do
 		if is_abstract then return true
+		if constant_value != null then return true
 		var modelbuilder = v.compiler.modelbuilder
 		var node = modelbuilder.mpropdef2node(self)
 		if node isa APropdef then
