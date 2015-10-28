@@ -114,6 +114,11 @@ redef class TextView
 	end
 end
 
+redef class Label
+	redef type NATIVE: NativeTextView
+	redef var native do return (new NativeTextView(app.native_activity)).new_global_ref
+end
+
 redef class TextInput
 	redef type NATIVE: NativeEditText
 	redef var native = (new NativeEditText(app.native_activity)).new_global_ref

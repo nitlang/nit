@@ -134,6 +134,14 @@ redef class Button
 	init do native.signal_connect("clicked", self, null)
 end
 
+redef class Label
+	redef type NATIVE: GtkLabel
+	redef var native = new GtkLabel("")
+
+	redef fun text do return native.text
+	redef fun text=(value) do native.text = (value or else "").to_s
+end
+
 redef class TextInput
 	redef type NATIVE: GtkEntry
 	redef var native = new GtkEntry

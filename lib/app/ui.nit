@@ -169,6 +169,11 @@ class Button
 	super TextView
 end
 
+# A text label
+class Label
+	super TextView
+end
+
 # A `Button` press event
 class ButtonPressEvent
 	super AppEvent
