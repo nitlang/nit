@@ -1582,22 +1582,23 @@ redef class ATypePropdef
 				modelbuilder.warning(n_id, "bad-type-name", "Warning: lowercase in the virtual type `{name}`.")
 				break
 			end
-			if not self.check_redef_keyword(modelbuilder, mclassdef, self.n_kwredef, false, mprop) then return
 		else
-			if not self.check_redef_keyword(modelbuilder, mclassdef, self.n_kwredef, true, mprop) then return
 			assert mprop isa MVirtualTypeProp
 			check_redef_property_visibility(modelbuilder, self.n_visibility, mprop)
 		end
-		mclassdef.mprop2npropdef[mprop] = self
 
 		var mpropdef = new MVirtualTypeDef(mclassdef, mprop, self.location)
 		self.mpropdef = mpropdef
-		modelbuilder.mpropdef2npropdef[mpropdef] = self
 		if mpropdef.is_intro then
 			modelbuilder.toolcontext.info("{mpropdef} introduces new type {mprop.full_name}", 4)
 		else
 			modelbuilder.toolcontext.info("{mpropdef} redefines type {mprop.full_name}", 4)
 		end
+		if not self.check_redef_keyword(modelbuilder, mclassdef, self.n_kwredef, not mpropdef.is_intro, mprop) then
+			mpropdef.is_broken =true
+		end
+		mclassdef.mprop2npropdef[mprop] = self
+		modelbuilder.mpropdef2npropdef[mpropdef] = self
 		set_doc(mpropdef, modelbuilder)
 
 		var atfixed = get_single_annotation("fixed", modelbuilder)
