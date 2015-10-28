@@ -447,8 +447,7 @@ redef class ModelBuilder
 				var vt = t.mproperty
 				# Because `vt` is possibly unchecked, we have to do the bound-lookup manually
 				var defs = vt.lookup_definitions(mmodule, recv)
-				# TODO something to manage correctly bound conflicts
-				assert not defs.is_empty
+				if defs.is_empty then return false
 				nexts = new Array[MType]
 				for d in defs do
 					var next = defs.first.bound
