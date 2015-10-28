@@ -52,11 +52,9 @@ How to start:
     $ bin/nitc examples/hello_world.nit
     $ ./hello_world
 
-You can put the `bin/` directory in your PATH
+You can source `misc/nit_env.sh` to setup your environment like PATH, MANPATH and bash completion.
+To have your environment automatically configured at login, just source it with `install` as argument.
 
-Using bash completion with Nit tools:
-
-    $ echo source /absolute/path/to/misc/bash_completion/nit >> ~/.bash_completion
-    $ source ~/.bash_completion
+    $ . misc/nit_env.sh install
 
 More information: <http://www.nitlanguage.org>
