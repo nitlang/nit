@@ -551,7 +551,7 @@ redef class SimpleCollection[E]
 		end
 	end
 
-	redef init from_deserializer(v: Deserializer)
+	redef init from_deserializer(v)
 	do
 		super
 		if v isa JsonDeserializer then
@@ -609,8 +609,7 @@ redef class Map[K, V]
 		end
 	end
 
-	# Instantiate a new `Array` from its serialized representation.
-	redef init from_deserializer(v: Deserializer)
+	redef init from_deserializer(v)
 	do
 		super
 
