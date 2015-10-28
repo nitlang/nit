@@ -111,7 +111,7 @@ redef class ModelBuilder
 				if not check_virtual_types_circularity(npropdef, mpropdef.mproperty, mclassdef.bound_mtype, mclassdef.mmodule) then
 					# Invalidate the bound
 					mpropdef.is_broken = true
-					mpropdef.bound = mclassdef.mmodule.model.null_type
+					mpropdef.bound = new MBottomType(mclassdef.mmodule.model)
 				end
 			end
 			for npropdef in nclassdef2.n_propdefs do
@@ -385,6 +385,8 @@ redef class ModelBuilder
 		else if mtype isa MParameterType then
 			# nothing, always visible
 		else if mtype isa MNullType then
+			# nothing to do.
+		else if mtype isa MBottomType then
 			# nothing to do.
 		else
 			node.debug "Unexpected type {mtype}"
@@ -1643,7 +1645,7 @@ redef class ATypePropdef
 		# Check redefinitions
 		for p in mpropdef.mproperty.lookup_super_definitions(mmodule, anchor) do
 			var supbound = p.bound
-			if supbound == null then break # broken super bound, skip error
+			if supbound == null or supbound isa MBottomType or p.is_broken then break # broken super bound, skip error
 			if p.is_fixed then
 				modelbuilder.error(self, "Redef Error: virtual type `{mpropdef.mproperty}` is fixed in super-class `{p.mclassdef.mclass}`.")
 				break
