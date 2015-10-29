@@ -94,20 +94,20 @@ set title "$1 ; avg. on $count-1 runs"
 set ylabel "time (s)"
 $plots
 END
-plots=
+	plots=
 
-if test -n "$html"; then
-	echo "# gnuplot $1"
-	bn=`basename "$1" .gnu`
-	gnuplot -e "set term png; set output \"$bn.png\"" "$1"
-	echo gnuplot -e "set term png; set output \"$bn.png\"" "$1"
+	if test -n "$html"; then
+		echo "# gnuplot $1"
+		bn=`basename "$1" .gnu`
+		gnuplot -e "set term png; set output \"$bn.png\"" "$1"
+		echo gnuplot -e "set term png; set output \"$bn.png\"" "$1"
 
-	echo >>"$html" "<img src=\"$bn.png\"/>"
-fi
-if test -n "$DISPLAY"; then
-	echo "# gnuplot -p $1"
-	gnuplot -p "$1"
-fi
+		echo >>"$html" "<img src=\"$bn.png\"/>"
+	fi
+	if test -n "$DISPLAY"; then
+		echo "# gnuplot -p $1"
+		gnuplot -p "$1"
+	fi
 }
 
 # Create a new $res to be used in the next plot
