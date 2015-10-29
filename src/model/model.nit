@@ -809,19 +809,19 @@ abstract class MType
 		end
 		#print "4.is {sub} a {sup}? <- no more resolution"
 
+		if sub isa MBottomType then
+			return true
+		end
+
 		assert sub isa MClassType else print "{sub} <? {sub}" # It is the only remaining type
 
-		# A unfixed formal type can only accept itself
-		if sup isa MFormalType then
+		# Handle sup-type when the sub-type is class-based (other cases must have be identified before).
+		if sup isa MFormalType or sup isa MNullType or sup isa MBottomType then
+			# These types are not super-types of Class-based types.
 			return false
 		end
 
-		if sup isa MNullType then
-			# `sup` accepts only null
-			return false
-		end
-
-		assert sup isa MClassType # It is the only remaining type
+		assert sup isa MClassType else print "got {sup} {sub.inspect}" # It is the only remaining type
 
 		# Now both are MClassType, we need to dig
 
@@ -1010,7 +1010,7 @@ abstract class MType
 	# The result is returned exactly as declared in the "type" property (verbatim).
 	# So it could be another formal type.
 	#
-	# In case of conflict, the method aborts.
+	# In case of conflicts or inconsistencies in the model, the method returns a `MBottomType`.
 	fun lookup_bound(mmodule: MModule, resolved_receiver: MType): MType do return self
 
 	# Resolve the formal type to its simplest equivalent form.
@@ -1024,6 +1024,8 @@ abstract class MType
 	#
 	# By default, return self.
 	# See the redefinitions for specific behavior in each kind of type.
+	#
+	# In case of conflicts or inconsistencies in the model, the method returns a `MBottomType`.
 	fun lookup_fixed(mmodule: MModule, resolved_receiver: MType): MType do return self
 
 	# Can the type be resolved?
@@ -1365,7 +1367,7 @@ class MVirtualType
 
 	redef fun lookup_bound(mmodule: MModule, resolved_receiver: MType): MType
 	do
-		return lookup_single_definition(mmodule, resolved_receiver).bound.as(not null)
+		return lookup_single_definition(mmodule, resolved_receiver).bound or else new MBottomType(model)
 	end
 
 	private fun lookup_single_definition(mmodule: MModule, resolved_receiver: MType): MVirtualTypeDef
@@ -1400,7 +1402,8 @@ class MVirtualType
 		assert resolved_receiver isa MClassType # It is the only remaining type
 
 		var prop = lookup_single_definition(mmodule, resolved_receiver)
-		var res = prop.bound.as(not null)
+		var res = prop.bound
+		if res == null then return new MBottomType(model)
 
 		# Recursively lookup the fixed result
 		res = res.lookup_fixed(mmodule, resolved_receiver)
