@@ -377,7 +377,7 @@ end
 
 # TreeNode used by BinTree
 class BinTreeNode[K: Comparable, E]
-	super TreeNode[K, E]
+	super AbstractTreeNode[K, E]
 
 	private var prev: nullable BinTreeNode[K, E] = null
 	private var next: nullable BinTreeNode[K, E] = null

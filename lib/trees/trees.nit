@@ -15,6 +15,6 @@
 # General module for tree data structures
 module trees
 
-import abstract_tree
 import bintree
 import rbtree
+import tree
