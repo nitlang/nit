@@ -94,20 +94,71 @@ set title "$1 ; avg. on $count-1 runs"
 set ylabel "time (s)"
 $plots
 END
-plots=
+	plots=
 
-if test -n "$html"; then
-	echo "# gnuplot $1"
-	bn=`basename "$1" .gnu`
-	gnuplot -e "set term png; set output \"$bn.png\"" "$1"
-	echo gnuplot -e "set term png; set output \"$bn.png\"" "$1"
+	if test -n "$html"; then
+		echo "# gnuplot $1"
+		bn=`basename "$1" .gnu`
+		gnuplot -e "set term png; set output \"$bn.png\"" "$1"
+		echo gnuplot -e "set term png; set output \"$bn.png\"" "$1"
 
-	echo >>"$html" "<img src=\"$bn.png\"/>"
-fi
-if test -n "$DISPLAY"; then
-	echo "# gnuplot -p $1"
-	gnuplot -p "$1"
-fi
+		echo >>"$html" "<img src=\"$bn.png\"/>"
+	fi
+	if test -n "$DISPLAY"; then
+		echo "# gnuplot -p $1"
+		gnuplot -p "$1"
+	fi
+}
+
+# Create a new $res to be used in the next plot
+#
+# $1 = resfile
+# $2 = title
+# $3 = description
+function prepare_res_lines()
+{
+	echo
+	echo "# [$2] $3 #"
+	if test -n "$html"; then
+		echo >>"$html" "<p>[$2] $3 <a href=\"$1\">data</a></p>"
+	fi
+	res=$1
+	if [ "$plots" = "" ]; then
+		plots="plot '$1' using 4 with lines ti '$2'"
+	else
+		plots="$plots, '$1' using 4 with lines ti '$2'"
+	fi
+	if [ "$dry_run" = "true" ]; then return; fi
+	echo "# [$2] $3 ; count=$count" > "$res"
+	echo "# first min max avg title" >> "$res"
+}
+
+# Plot the last $res as a line graph
+# $1: plot file (eg toto.gnu)
+function plot_lines()
+{
+	cat >"$1" <<END
+set auto x;
+set yrange [0:];
+set xtic nomirror rotate by -45 scale 0 font ',8';
+set title "$1 ; avg. on $count-1 runs"
+set ylabel "time (s)"
+$plots
+END
+	plots=
+
+	if test -n "$html"; then
+		echo "# gnuplot $1"
+		bn=`basename "$1" .gnu`
+		gnuplot -e "set term png; set output \"$bn.png\"" "$1"
+		echo gnuplot -e "set term png; set output \"$bn.png\"" "$1"
+
+		echo >>"$html" "<img src=\"$bn.png\"/>"
+	fi
+	if test -n "$DISPLAY"; then
+		echo "# gnuplot -p $1"
+		gnuplot -p "$1"
+	fi
 }
 
 ## GLOBAL VARIABLES ##
