@@ -463,14 +463,15 @@ class RopeBuffer
 
 	redef fun add(c) do
 		var rp = rpos
-		if rp >= buf_size then
+		var remsp = buf_size - rp
+		var cln = c.u8char_len
+		if cln > remsp then
 			dump_buffer
 			rp = 0
 		end
-		# TODO: Fix when supporting UTF-8
-		ns[rp] = c.ascii
-		rp += 1
-		_bytelen += 1
+		ns.set_char_at(rp, c)
+		rp += cln
+		_bytelen += cln
 		rpos = rp
 	end
 
