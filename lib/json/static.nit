@@ -49,7 +49,7 @@ interface Jsonable
 	protected fun to_json_by_append: String do
 		var buffer = new RopeBuffer
 		append_json(buffer)
-		return buffer.write_to_string
+		return buffer.to_s
 	end
 
 	# Append the JSON representation of `self` to the specified buffer.
@@ -80,7 +80,7 @@ interface Jsonable
 		var res = new FlatBuffer
 		pretty_json_visit(res, 0)
 		res.add '\n'
-		return res.write_to_string
+		return res.to_s
 	end
 
 	private fun pretty_json_visit(buffer: FlatBuffer, indent: Int) is abstract
@@ -467,7 +467,7 @@ redef class Nstring
 			res.add char
 			i += 1
 		end
-		return res.write_to_string
+		return res.to_s
 	end
 end
 
