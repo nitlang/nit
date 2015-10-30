@@ -37,7 +37,7 @@ redef class Control
 end
 
 redef class Window
-	redef var native = app.native_activity
+	redef var native = app.native_activity.new_global_ref
 
 	redef type NATIVE: NativeActivity
 
@@ -75,6 +75,7 @@ end
 redef class HorizontalLayout
 	redef var native do
 		var layout = new NativeLinearLayout(app.native_activity)
+		layout = layout.new_global_ref
 		layout.set_horizontal
 		return layout
 	end
@@ -83,6 +84,7 @@ end
 redef class VerticalLayout
 	redef var native do
 		var layout = new NativeLinearLayout(app.native_activity)
+		layout = layout.new_global_ref
 		layout.set_vertical
 		return layout
 	end
