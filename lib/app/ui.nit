@@ -146,7 +146,7 @@ abstract class View
 	# Is this control enabled so the user can interact with it?
 	#
 	# By default, or if set to `null`, the control is enabled.
-	var enabled: nullable Bool is writable #, abstract FIXME with #1311
+	var enabled: nullable Bool is writable, abstract, autoinit
 end
 
 # A control with some `text`
@@ -156,7 +156,7 @@ abstract class TextView
 	# Main `Text` of this control
 	#
 	# By default, or if set to `null`, no text is shown.
-	var text: nullable Text is writable #, abstract FIXME with #1311
+	var text: nullable Text is writable, abstract, autoinit
 end
 
 # A control for the user to enter custom `text`
