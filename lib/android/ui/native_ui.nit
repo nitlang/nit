@@ -104,6 +104,12 @@ extern class NativeLinearLayout in "Java" `{ android.widget.LinearLayout `}
 			LinearLayout.LayoutParams.WRAP_CONTENT);
 		self.addView(view, params);
 	`}
+
+	redef fun new_global_ref import sys, Sys.jni_env `{
+		Sys sys = NativeLinearLayout_sys(self);
+		JNIEnv *env = Sys_jni_env(sys);
+		return (*env)->NewGlobalRef(env, self);
+	`}
 end
 
 # A `NativeViewGroup` organized as a grid
@@ -117,6 +123,12 @@ extern class NativeGridLayout in "Java" `{ android.widget.GridLayout `}
 	fun column_count=(val: Int) in "Java" `{ self.setColumnCount((int)val); `}
 
 	redef fun add_view(view) in "Java" `{ self.addView(view); `}
+
+	redef fun new_global_ref import sys, Sys.jni_env `{
+		Sys sys = NativeGridLayout_sys(self);
+		JNIEnv *env = Sys_jni_env(sys);
+		return (*env)->NewGlobalRef(env, self);
+	`}
 end
 
 extern class NativePopupWindow in "Java" `{ android.widget.PopupWindow `}
@@ -131,6 +143,12 @@ extern class NativePopupWindow in "Java" `{ android.widget.PopupWindow `}
 	`}
 
 	fun content_view=(layout: NativeViewGroup) in "Java" `{ self.setContentView(layout); `}
+
+	redef fun new_global_ref import sys, Sys.jni_env `{
+		Sys sys = NativePopupWindow_sys(self);
+		JNIEnv *env = Sys_jni_env(sys);
+		return (*env)->NewGlobalRef(env, self);
+	`}
 end
 
 extern class NativeTextView in "Java" `{ android.widget.TextView `}
@@ -163,6 +181,12 @@ extern class NativeTextView in "Java" `{ android.widget.TextView `}
 	fun text_size=(dpi: Float) in "Java" `{
 		self.setTextSize(android.util.TypedValue.COMPLEX_UNIT_DIP, (float)dpi);
 	`}
+
+	redef fun new_global_ref import sys, Sys.jni_env `{
+		Sys sys = NativeTextView_sys(self);
+		JNIEnv *env = Sys_jni_env(sys);
+		return (*env)->NewGlobalRef(env, self);
+	`}
 end
 
 extern class NativeEditText in "Java" `{ android.widget.EditText `}
@@ -176,7 +200,7 @@ extern class NativeEditText in "Java" `{ android.widget.EditText `}
 
 	fun input_type_text in "Java" `{ self.setInputType(android.text.InputType.TYPE_CLASS_TEXT); `}
 
-	redef fun new_global_ref: SELF import sys, Sys.jni_env `{
+	redef fun new_global_ref import sys, Sys.jni_env `{
 		Sys sys = NativeEditText_sys(self);
 		JNIEnv *env = Sys_jni_env(sys);
 		return (*env)->NewGlobalRef(env, self);
@@ -188,7 +212,7 @@ extern class NativeButton in "Java" `{ android.widget.Button `}
 
 	redef type SELF: NativeButton
 
-	redef fun new_global_ref: SELF import sys, Sys.jni_env `{
+	redef fun new_global_ref import sys, Sys.jni_env `{
 		Sys sys = NativeButton_sys(self);
 		JNIEnv *env = Sys_jni_env(sys);
 		return (*env)->NewGlobalRef(env, self);
