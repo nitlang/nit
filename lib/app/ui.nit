@@ -112,10 +112,10 @@ class CompositeControl
 	protected fun add(item: Control) do items.add item
 
 	# Remove `item` from `self`
-	protected fun remove(item: Control) do if has(item) then items.remove item
+	fun remove(item: Control) do if has(item) then items.remove item
 
 	# Is `item` in `self`?
-	protected fun has(item: Control): Bool do return items.has(item)
+	fun has(item: Control): Bool do return items.has(item)
 
 	redef fun on_create do for i in items do i.on_create
 

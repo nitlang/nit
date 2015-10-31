@@ -83,12 +83,19 @@ redef class Window
 end
 
 redef class View
+	init do native.show
+
 	redef fun enabled do return native.sensitive
 	redef fun enabled=(enabled) do native.sensitive = enabled or else true
 end
 
 redef class Layout
 	redef type NATIVE: GtkBox
+	redef fun remove(view)
+	do
+		super
+		native.remove view.native
+	end
 end
 
 redef class HorizontalLayout

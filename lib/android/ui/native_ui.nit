@@ -62,6 +62,8 @@ extern class NativeViewGroup in "Java" `{ android.view.ViewGroup `}
 
 	fun add_view(view: NativeView) in "Java" `{ self.addView(view); `}
 
+	fun remove_view(view: NativeView) in "Java" `{ self.removeView(view); `}
+
 	fun add_view_with_weight(view: NativeView, weight: Float)
 	in "Java" `{
 		self.addView(view, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT, (float)weight));
