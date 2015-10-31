@@ -41,17 +41,7 @@ redef extern class NativeActivity
 
 	# Set the main layout of this activity
 	fun content_view=(layout: NativeViewGroup) in "Java" `{
-		final ViewGroup final_layout = layout;
-		final Activity final_self = self;
-
-		self.runOnUiThread(new Runnable() {
-			@Override
-			public void run()  {
-				final_self.setContentView(final_layout);
-
-				final_layout.requestFocus();
-			}
-		});
+		self.setContentView(layout);
 	`}
 end
 
@@ -63,17 +53,7 @@ extern class NativeView in "Java" `{ android.view.View `}
 	fun minimum_height=(val: Int) in "Java" `{ self.setMinimumHeight((int)val); `}
 
 	fun enabled: Bool in "Java" `{ return self.isEnabled(); `}
-	fun enabled=(value: Bool) in "Java" `{
-		final View final_self = self;
-		final boolean final_value = value;
-
-		((Activity)self.getContext()).runOnUiThread(new Runnable() {
-			@Override
-			public void run()  {
-				final_self.setEnabled(final_value);
-			}
-		});
-	`}
+	fun enabled=(value: Bool) in "Java" `{ self.setEnabled(value); `}
 end
 
 # A collection of `NativeView`
@@ -158,18 +138,7 @@ extern class NativeTextView in "Java" `{ android.widget.TextView `}
 
 	fun text: JavaString in "Java" `{ return self.getText().toString(); `}
 
-	fun text=(value: JavaString) in "Java" `{
-
-		final TextView final_self = self;
-		final String final_value = value;
-
-		((Activity)self.getContext()).runOnUiThread(new Runnable() {
-			@Override
-			public void run()  {
-				final_self.setText(final_value);
-			}
-		});
-	`}
+	fun text=(value: JavaString) in "Java" `{ self.setText(value); `}
 
 	fun gravity_center in "Java" `{
 		self.setGravity(Gravity.CENTER);
