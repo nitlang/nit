@@ -24,7 +24,8 @@ import benitlux_controller
 # Avoid executing when running tests
 if "NIT_TESTING".environ == "true" then exit 0
 
-var iface = "localhost:8080"
+# Listening interface
+fun iface: String do return "localhost:8080"
 
 var vh = new VirtualHost(iface)
 vh.routes.add new Route("/rest/", new BenitluxRESTAction)
