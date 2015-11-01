@@ -1053,7 +1053,7 @@ class SeparateCompiler
 		v.add_abort("type null")
 		v.add("\}")
 		v.add("if({t}->table_size < 0) \{")
-		v.add("PRINT_ERROR(\"Insantiation of a dead type: %s\\n\", {t}->name);")
+		v.add("PRINT_ERROR(\"Instantiation of a dead type: %s\\n\", {t}->name);")
 		v.add_abort("type dead")
 		v.add("\}")
 	end
