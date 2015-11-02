@@ -1212,7 +1212,7 @@ class RopeBufferByteReverseIterator
 
 	redef fun next do
 		index -= 1
-		if pns > 0 then
+		if pns >= 0 then
 			pns -= 1
 		else
 			sit.next
