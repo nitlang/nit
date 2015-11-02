@@ -853,12 +853,14 @@ extern void nitni_global_ref_decr( struct nitni_ref *ref );
 			v.add_decl("int main(int argc, char** argv) \{")
 		end
 
+		v.add "#ifndef ANDROID"
 		v.add("signal(SIGABRT, sig_handler);")
 		v.add("signal(SIGFPE, sig_handler);")
 		v.add("signal(SIGILL, sig_handler);")
 		v.add("signal(SIGINT, sig_handler);")
 		v.add("signal(SIGTERM, sig_handler);")
 		v.add("signal(SIGSEGV, sig_handler);")
+		v.add "#endif"
 		v.add("signal(SIGPIPE, SIG_IGN);")
 
 		v.add("glob_argc = argc; glob_argv = argv;")
