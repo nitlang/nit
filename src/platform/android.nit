@@ -36,7 +36,7 @@ class AndroidPlatform
 
 	redef fun name do return "android"
 
-	redef fun supports_libgc do return true
+	redef fun supports_libgc do return false
 
 	redef fun supports_libunwind do return false
 
