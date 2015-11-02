@@ -718,6 +718,38 @@ abstract class Text
 		return res.to_s
 	end
 
+	# Returns `self` with all characters escaped with their UTF-16 representation
+	#
+	#     assert "Aèあ𐏓".escape_to_utf16 == "\\u0041\\u00e8\\u3042\\ud800\\udfd3"
+	fun escape_to_utf16: String do
+		var buf = new Buffer
+		for i in chars do buf.append i.escape_to_utf16
+		return buf.to_s
+	end
+
+	# Returns the Unicode char escaped by `self`
+	#
+	#     assert "\\u0041".from_utf16_escape == 'A'
+	#     assert "\\ud800\\udfd3".from_utf16_escape == '𐏓'
+	#     assert "\\u00e8".from_utf16_escape == 'è'
+	#     assert "\\u3042".from_utf16_escape == 'あ'
+	fun from_utf16_escape: Char do
+		var ln = length
+		if ln != 6 and ln != 12 then return 0xFFFD.code_point
+		var cphi = substring(2, 4).to_hex
+		if cphi < 0xD800 then return cphi.code_point
+		if cphi > 0xDFFF then return cphi.code_point
+		if cphi > 0xDBFF then return 0xFFFD.code_point
+		var cp = 0
+		cp += (cphi - 0xD800) << 10
+		var cplo = substring(8, 4).to_hex
+		if cplo < 0xDC00 then return 0xFFFD.code_point
+		if cplo > 0xDFFF then return 0xFFFD.code_point
+		cp += cplo - 0xDC00
+		cp += 0x10000
+		return cp.code_point
+	end
+
 	# Encode `self` to percent (or URL) encoding
 	#
 	#     assert "aBc09-._~".to_percent_encoding == "aBc09-._~"
@@ -1585,6 +1617,46 @@ redef class Char
 		var ns = new NativeString(ln + 1)
 		u8char_tos(ns, ln)
 		return ns.to_s_with_length(ln)
+	end
+
+	# Returns `self` escaped to UTF-16
+	#
+	# i.e. Represents `self`.`code_point` using UTF-16 codets escaped
+	# with a `\u`
+	#
+	#     assert 'A'.escape_to_utf16 == "\\u0041"
+	#     assert 'è'.escape_to_utf16 == "\\u00e8"
+	#     assert 'あ'.escape_to_utf16 == "\\u3042"
+	#     assert '𐏓'.escape_to_utf16 == "\\ud800\\udfd3"
+	fun escape_to_utf16: String do
+		var cp = code_point
+		var buf: Buffer
+		if cp < 0xD800 or (cp >= 0xE000 and cp <= 0xFFFF) then
+			buf = new Buffer.with_cap(6)
+			buf.append("\\u0000")
+			var hx = cp.to_hex
+			var outid = 5
+			for i in hx.chars.reverse_iterator do
+				buf[outid] = i
+				outid -= 1
+			end
+		else
+			buf = new Buffer.with_cap(12)
+			buf.append("\\u0000\\u0000")
+			var lo = (((cp - 0x10000) & 0x3FF) + 0xDC00).to_hex
+			var hi = ((((cp - 0x10000) & 0xFFC00) >> 10) + 0xD800).to_hex
+			var out = 2
+			for i in hi do
+				buf[out] = i
+				out += 1
+			end
+			out = 8
+			for i in lo do
+				buf[out] = i
+				out += 1
+			end
+		end
+		return buf.to_s
 	end
 
 	private fun u8char_tos(r: NativeString, len: Int) `{
