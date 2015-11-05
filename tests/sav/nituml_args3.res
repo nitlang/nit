@@ -72,6 +72,11 @@ Pointer [
 ]
 Object -> Pointer [dir=back arrowtail=open style=dashed];
 
+Task [
+ label = "{interface\nTask||+ main()\l}"
+]
+Object -> Task [dir=back arrowtail=open style=dashed];
+
 A [
  label = "{A|- _vpubA: nullable A\l- _vproA: nullable A\l- _vpriA: nullable A\l- _vpubA2: A\l- _vproA2: A\l- _vpriA2: A\l- _vpriB: nullable B\l- _vpriB2: B\l|+ pubA(a: A)\l# proA(a: A)\l- priA(a: A)\l+ vpubA(): nullable A\l+ vpubA=(vpubA: nullable A)\l# vproA(): nullable A\l# vproA=(vproA: nullable A)\l- vpriA(): nullable A\l- vpriA=(vpriA: nullable A)\l+ vpubA2(): A\l+ vpubA2=(vpubA2: A)\l# vproA2(): A\l# vproA2=(vproA2: A)\l- vpriA2(): A\l- vpriA2=(vpriA2: A)\l- priB(a: B)\l- vpriB(): nullable B\l- vpriB=(vpriB: nullable B)\l- vpriB2(): B\l- vpriB2=(vpriB2: B)\l}"
 ]

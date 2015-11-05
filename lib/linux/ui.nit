@@ -21,7 +21,7 @@ import gtk
 import data_store
 
 redef class App
-	redef fun setup do init_gtk
+	redef fun setup do gtk_init
 
 	# On GNU/Linux, we go through all the callbacks once,
 	# there is no complex life-cycle.
@@ -34,7 +34,7 @@ redef class App
 
 		var window = window
 		window.native.show_all
-		run_gtk
+		gtk_main
 
 		app.on_pause
 		app.on_stop

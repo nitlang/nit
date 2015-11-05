@@ -20,3 +20,4 @@ module v3_4 is pkgconfig "gtk+-3.0"
 import gtk_widgets_ext
 import gtk_dialogs
 import gtk_assistant
+import gdk

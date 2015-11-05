@@ -40,4 +40,16 @@ extern class NativeActivity in "Java" `{ android.app.Activity `}
 
 	# Notify the OS that this activity is done and should be closed
 	fun finish in "Java" `{ self.finish(); `}
+
+	# Execute `task.main` on the UI thread when possible
+	fun run_on_ui_thread(task: Task) import Task.main in "Java" `{
+		final int final_task = task;
+		Runnable runnable = new Runnable() {
+			@Override
+			public void run() {
+				Task_main(final_task);
+			}
+		};
+		self.runOnUiThread(runnable);
+	`}
 end
