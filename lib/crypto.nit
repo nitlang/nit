@@ -162,7 +162,8 @@ redef class Text
 	#
 	#     assert "goodmorning".xor(" ".to_bytes) == "GOODMORNING"
 	fun xor(key: SequenceRead[Byte]): Text do
-		var xored = new Bytes.empty
+		var xored = new Bytes.with_capacity(bytelen.max(key.length))
+
 		var shortest: SequenceRead[Byte]
 		var longest: SequenceRead[Byte]
 
