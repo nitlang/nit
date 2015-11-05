@@ -170,7 +170,7 @@ abstract class Processor
 	end
 
 	# All tasks to be performed
-	var tasks = new Array[Task]
+	var tasks = new Array[TesterTask]
 
 	# Gather and register all tasks
 	fun create_tasks
@@ -193,7 +193,7 @@ abstract class Processor
 				continue label
 			end
 
-			tasks.add new Task(engine, prog)
+			tasks.add new TesterTask(engine, prog)
 		end label
 	end
 end
@@ -429,7 +429,7 @@ class Worker
 	# Single C `int` to hold the next task id received from the `Controller`
 	var task_buffer = new CIntArray(1)
 
-	# Manage communication with the `Controller` and execute dispatched `Task`s
+	# Manage communication with the `Controller` and execute dispatched `TesterTask`s
 	fun work_on_tasks
 	do
 		var status = new Status
@@ -566,7 +566,7 @@ end
 #
 # Note that a task may involve more than one program to test considering the
 # alts and args for the `test_program`.
-class Task
+class TesterTask
 	# Engine to test executing `test_program`
 	var engine: String
 
@@ -576,12 +576,12 @@ class Task
 	redef fun to_s do return "{engine} {test_program}"
 end
 
-# Result of a `Task`
+# Result of a `TesterTask`
 #
-# There may be more than one result per `Task`.
+# There may be more than one result per `TesterTask`.
 class Result
-	# `Task` associated to `self`
-	var task: Task
+	# `TesterTask` associated to `self`
+	var task: TesterTask
 
 	# Argument index of the execution resulting in `self`
 	var arg: Int
