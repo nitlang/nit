@@ -38,9 +38,9 @@ loop
 	loop
 		print "Choose your weapon|exit"
 		player_input = gets
-		if player_input == "exit" then exit 0
-		if tab.has(player_input) then break
-		if not tab.has(player_input) then print "(Invalid choice (rock/paper/scissors)"
+			if player_input == "exit" then exit 0
+			if tab.has(player_input) then break
+			if not tab.has(player_input) then print "(Invalid choice (rock/paper/scissors)"
 	end
 	var computer_input = computer_player
 	print computer_message(computer_input)

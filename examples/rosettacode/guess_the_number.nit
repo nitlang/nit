@@ -15,4 +15,5 @@ loop
 		print "Well guessed"
 		break
 	end
+if stdin.eof then break
 end
