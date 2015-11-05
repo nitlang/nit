@@ -141,7 +141,7 @@ class AndroidToolchain
 		## Generate Application.mk
 		dir = "{android_project_root}/jni/"
 		"""
-APP_ABI := armeabi armeabi-v7a x86 mips
+APP_ABI := armeabi armeabi-v7a x86
 APP_PLATFORM := android-{{{app_target_api}}}
 """.write_to_file "{dir}/Application.mk"
 
