@@ -218,6 +218,7 @@ redef class Deserializer
 			if mtype isa MGenericType and
 			   mtype.is_subtype(m, null, serializable_type) and
 			   mtype.is_visible_from(mmodule) and
+			   mtype.mclass.kind == concrete_kind and
 			   not compiled_types.has(mtype) then
 
 				compiled_types.add mtype
