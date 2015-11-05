@@ -33,13 +33,7 @@ redef class Deserializer
 		if name == "ArrayMap[String, String]" then return new ArrayMap[String, String].from_deserializer(self)
 		if name == "Array[Serializable]" then return new Array[Serializable].from_deserializer(self)
 		if name == "Array[String]" then return new Array[String].from_deserializer(self)
-		if name == "HashMap[Serializable, Int]" then return new HashMap[Serializable, Int].from_deserializer(self)
-		if name == "Array[JsonObject]" then return new Array[JsonObject].from_deserializer(self)
-		if name == "HashMap[Int, Object]" then return new HashMap[Int, Object].from_deserializer(self)
-		if name == "Array[Node]" then return new Array[Node].from_deserializer(self)
-		if name == "Array[LRState]" then return new Array[LRState].from_deserializer(self)
 		if name == "Array[Couple[String, String]]" then return new Array[Couple[String, String]].from_deserializer(self)
-		if name == "Array[nullable Jsonable]" then return new Array[nullable Jsonable].from_deserializer(self)
 		return super
 	end
 end

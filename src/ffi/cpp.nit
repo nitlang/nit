@@ -85,7 +85,7 @@ class CPPLanguage
 		# Will convert C arguments to C++ and call the C++ implementation function.
 		fc = new CFunction(indirection_sig)
 		if not mproperty.is_init then
-			var param_name = "recv"
+			var param_name = "self"
 			var type_name = to_cpp_call_context.name_mtype(mclass_type)
 			if mclass_type.mclass.ftype isa ForeignCppType then
 				fc.exprs.add("{type_name} {param_name}_for_cpp = static_cast<{type_name}>({param_name});\n")
@@ -180,8 +180,8 @@ class ExternCppFile
 
 	var mmodule: MModule
 
-	redef fun makefile_rule_name do return "{filename.basename("")}.o"
-	redef fun makefile_rule_content do return "$(CXX) $(CFLAGS) {mmodule.cppflags[""].join(" ")} -c {filename.basename("")} -o {filename.basename("")}.o"
+	redef fun makefile_rule_name do return "{filename.basename}.o"
+	redef fun makefile_rule_content do return "$(CXX) $(CFLAGS) {mmodule.cppflags[""].join(" ")} -c {filename.basename} -o {filename.basename}.o"
 	redef fun compiles_to_o_file do return true
 end
 
@@ -195,11 +195,9 @@ redef class NitniCallback
 	fun compile_callback_to_cpp(mmodule: MModule, mainmodule: MModule) do end
 end
 
-redef class Object
-	private fun cpp_call_context: CppCallContext do return once new CppCallContext
-	private fun to_cpp_call_context: ToCppCallContext do return once new ToCppCallContext
-	private fun from_cpp_call_context: FromCppCallContext do return once new FromCppCallContext
-end
+fun cpp_call_context: CppCallContext do return once new CppCallContext
+fun to_cpp_call_context: ToCppCallContext do return once new ToCppCallContext
+fun from_cpp_call_context: FromCppCallContext do return once new FromCppCallContext
 
 redef class MExplicitCall
 	redef fun compile_callback_to_cpp(mmodule, mainmodule)

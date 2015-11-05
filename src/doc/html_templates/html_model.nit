@@ -20,25 +20,15 @@ import doc_down
 import html_components
 import html::bootstrap
 import ordered_tree
+import model::model_collect
 
 redef class MEntity
-	# ID used as a HTML unique ID and in file names.
-	#
-	# **Must** match the following (POSIX ERE) regular expression:
-	#
-	# ~~~POSIX ERE
-	# ^[A-Za-z_][A-Za-z0-9._-]*$
-	# ~~~
-	#
-	# That way, the ID is always a valid URI component and a valid XML name.
-	fun nitdoc_id: String is abstract
-
 	# URL of this entity’s Nitdoc page.
 	fun nitdoc_url: String is abstract
 
 	# Returns the mentity name without short signature.
 	#
-	# * MProject: `foo`
+	# * MPackage: `foo`
 	# * MGroup: `foo`
 	# * MModule: `foo`
 	# * MClass: `Foo[E]`
@@ -54,7 +44,7 @@ redef class MEntity
 		var tpl = new Link(nitdoc_url, html_name)
 		var mdoc = mdoc_or_fallback
 		if mdoc != null then
-			tpl.title = mdoc.short_comment
+			tpl.title = mdoc.synopsis
 		end
 		return tpl
 	end
@@ -66,7 +56,7 @@ redef class MEntity
 		var tpl = new Link("#{nitdoc_id}", html_name)
 		var mdoc = mdoc_or_fallback
 		if mdoc != null then
-			tpl.title = mdoc.short_comment
+			tpl.title = mdoc.synopsis
 		end
 		return tpl
 	end
@@ -76,7 +66,7 @@ redef class MEntity
 
 	# Returns the complete MEntity declaration decorated with HTML.
 	#
-	# * MProject: `project foo`
+	# * MPackage: `package foo`
 	# * MGroup: `group foo`
 	# * MModule: `module foo`
 	# * MClass: `private abstract class Foo[E: Object]`
@@ -95,27 +85,34 @@ redef class MEntity
 
 	# Returns `self` namespace decorated with HTML links.
 	#
-	# * MProject: `mproject`
-	# * MGroup: `mproject(::group)`
+	# * MPackage: `mpackage`
+	# * MGroup: `mpackage(::group)`
 	# * MModule: `mgroup::mmodule`
-	# * MClass: `mproject::mclass`
+	# * MClass: `mpackage::mclass`
 	# * MClassDef: `mmodule::mclassdef`
 	# * MProperty: `mclass::mprop`
 	# * MPropdef: `mclassdef:mpropdef`
 	fun html_namespace: Template is abstract
 
-	# Returns the comment of this MEntity formatted as HTML.
+	# Returns the synopsis and the comment of this MEntity formatted as HTML.
+	var html_documentation: nullable Writable is lazy do
+		var mdoc = mdoc_or_fallback
+		if mdoc == null then return null
+		return mdoc.html_documentation
+	end
+
+	# Returns the synopsis of this MEntity formatted as HTML.
+	var html_synopsis: nullable Writable is lazy do
+		var mdoc = mdoc_or_fallback
+		if mdoc == null then return null
+		return mdoc.html_synopsis
+	end
+
+	# Returns the the comment without the synopsis formatted as HTML.
 	var html_comment: nullable Writable is lazy do
 		var mdoc = mdoc_or_fallback
 		if mdoc == null then return null
-		return mdoc.tpl_comment
-	end
-
-	# Returns the comment of this MEntity formatted as HTML.
-	var html_short_comment: nullable Writable is lazy do
-		var mdoc = mdoc_or_fallback
-		if mdoc == null then return null
-		return mdoc.tpl_short_comment
+		return mdoc.html_comment
 	end
 
 	# Icon that will be displayed before the title
@@ -135,7 +132,7 @@ redef class MEntity
 		var tpl = new Template
 		tpl.add new DocHTMLLabel.with_classes(css_classes)
 		tpl.add html_link
-		var comment = html_short_comment
+		var comment = html_synopsis
 		if comment != null then
 			tpl.add ": "
 			tpl.add comment
@@ -144,10 +141,10 @@ redef class MEntity
 	end
 end
 
-redef class MProject
+redef class MPackage
 	redef var nitdoc_id = name.to_cmangle is lazy
 	redef fun nitdoc_url do return root.nitdoc_url
-	redef var html_modifiers = ["project"]
+	redef var html_modifiers = ["package"]
 	redef fun html_namespace do return html_link
 	redef var css_classes = ["public"]
 end
@@ -165,12 +162,12 @@ redef class MGroup
 
 	# Depends if `self` is root or not.
 	#
-	# * If root `mproject`.
-	# * Else `mproject::self`.
+	# * If root `mpackage`.
+	# * Else `mpackage::self`.
 	redef fun html_namespace do
 		var tpl = new Template
-		tpl.add mproject.html_namespace
-		if mproject.root != self then
+		tpl.add mpackage.html_namespace
+		if mpackage.root != self then
 			tpl.add "::"
 			tpl.add html_link
 		end
@@ -236,10 +233,10 @@ redef class MClass
 	redef fun html_modifiers do return intro.html_modifiers
 	redef fun html_declaration do return intro.html_declaration
 
-	# Returns `mproject::self`.
+	# Returns `mpackage::self`.
 	redef fun html_namespace do
 		var tpl = new Template
-		tpl.add intro_mmodule.mgroup.mproject.html_namespace
+		tpl.add intro_mmodule.mgroup.mpackage.html_namespace
 		tpl.add "::<span>"
 		tpl.add html_link
 		tpl.add "</span>"
@@ -341,8 +338,8 @@ redef class MClassDef
 	redef fun css_classes do
 		var set = new HashSet[String]
 		if is_intro then set.add "intro"
-		for m in mclass.intro.modifiers do set.add m.to_cmangle
-		for m in modifiers do set.add m.to_cmangle
+		for m in mclass.intro.collect_modifiers do set.add m.to_cmangle
+		for m in collect_modifiers do set.add m.to_cmangle
 		return set.to_a
 	end
 end
@@ -432,8 +429,8 @@ redef class MPropDef
 	redef fun css_classes do
 		var set = new HashSet[String]
 		if is_intro then set.add "intro"
-		for m in mproperty.intro.modifiers do set.add m.to_cmangle
-		for m in modifiers do set.add m.to_cmangle
+		for m in mproperty.intro.collect_modifiers do set.add m.to_cmangle
+		for m in collect_modifiers do set.add m.to_cmangle
 		return set.to_a
 	end
 end
@@ -697,8 +694,8 @@ redef class MConcern
 	private fun html_concern_item: ListItem do
 		var lnk = html_link
 		var tpl = new Template
-		tpl.add new Link.with_title("#concern:{nitdoc_id}", lnk.text, lnk.title)
-		var comment = html_short_comment
+		tpl.add new Link.with_title("#{nitdoc_id}.concern", lnk.text, lnk.title)
+		var comment = html_synopsis
 		if comment != null then
 			tpl.add ": "
 			tpl.add comment

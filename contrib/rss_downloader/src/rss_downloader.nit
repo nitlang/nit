@@ -18,6 +18,7 @@
 module rss_downloader
 
 import curl
+import dom
 
 redef class Sys
 	# Lazy man's verbose option
@@ -47,6 +48,22 @@ class Config
 
 	# Exception where we ignore uniqueness and can be downloaded again (may be empty)
 	var unique_exceptions: Array[Pattern]
+
+	# XML tag used for pattern recognition
+	fun tag_title: String do return "title"
+
+	# XML tag of the link to act upon
+	fun tag_link: String do return "link"
+
+	# Are the feeds at `rss_source_urls` compressed?
+	var compressed: nullable Bool
+
+	# Action to apply on each selected RSS element
+	fun act_on(element: Element)
+	do
+		var local_path = download_destination_folder.to_s / element.title
+		element.download_to(local_path)
+	end
 end
 
 # An element from an RSS feed
@@ -62,16 +79,12 @@ class Element
 	# Download this element to `path`
 	fun download_to(path: Text)
 	do
-		var curl = new Curl
-
-		var request = new CurlHTTPRequest(link, curl)
+		var request = new CurlHTTPRequest(link)
 		var response = request.download_to_file(path.to_s)
 
-		if response isa CurlFileResponseSuccess then
-			curl.destroy
-		else if response isa CurlResponseFailed then
+		if response isa CurlResponseFailed then
 			sys.stderr.write "Failed downloading URL '{link}' with: {response.error_msg} ({response.error_code})\n"
-		else abort
+		end
 	end
 
 	# Get an unique identifier for this element, uses `Config::unique_pattern`
@@ -124,6 +137,7 @@ class Downloader
 		var elements = new HashSet[Element]
 		for rss_url in config.rss_source_urls do
 			var rss = rss_url.fetch_rss_content
+			if config.compressed == true then rss = rss.gunzip
 			elements.add_all rss.to_rss_elements
 		end
 
@@ -137,30 +151,26 @@ class Downloader
 
 		if sys.verbose then
 			print "\n# {matches.length} matching elements:"
-			print matches.join("\n")
+			print "* " + matches.join("\n* ")
 			print "\n# Downloading..."
 		end
 
 		for element in matches do
-			var local_path = config.download_destination_folder.to_s / element.title
 			var unique_id = element.unique_id(config)
 
-			if local_path.to_path.exists then
-				# Do not redownload a file (we assume that the file name is unique by itself)
-				if sys.verbose then print "File exists, skipping {element}"
-				continue
-			else if history.has(unique_id) then
+			if history.has(unique_id) then
 				# Do not download a file that is not unique according to `unique_id`
 				if not element.is_unique_exception(config) then
 					# We make some exceptions
-					if sys.verbose then print "File in log, skipping {element}"
+					if sys.verbose then print "- Skipping {element}"
 					continue
 				end
 			end
 
 			# Download element
-			if sys.verbose then print "Fetching {element} as {local_path}"
-			element.download_to(local_path)
+			if sys.verbose then print "+ Acting on {element}"
+
+			tool_config.act_on element
 
 			# Add `unique_id` to log
 			history.add unique_id
@@ -196,7 +206,7 @@ class Downloader
 			end
 
 			for dir in source_folder.files do if dir.stat.is_dir then
-				folder_names.add dir.to_s
+				folder_names.add dir.filename
 			end
 		end
 
@@ -232,16 +242,13 @@ redef class Text
 	# Get the content of the RSS feed at `self`
 	fun fetch_rss_content: Text
 	do
-		var curl = new Curl
-
 		if sys.verbose then print "\n# Downloading RSS file from '{self}'"
 
-		var request = new CurlHTTPRequest(to_s, curl)
+		var request = new CurlHTTPRequest(to_s)
 		var response = request.execute
 
 		if response isa CurlResponseSuccess then
 			var body = response.body_str
-			curl.destroy
 			if sys.verbose then print "Download successful"
 			return body
 		else if response isa CurlResponseFailed then
@@ -255,31 +262,36 @@ redef class Text
 	# Get this RSS feed content as an `Array[Element]`
 	fun to_rss_elements: Array[Element]
 	do
-		var title_re = "<title><![^/]*</title>".to_re
-		var link_re = "<link>[^<]*download[^<]*</link>".to_re
-
-		var title_prefix_len = "<title><![CDATA[".length
-		var title_suffix_len = "]]</title>".length+1
-
-		var titles = search_all(title_re)
-		var links = search_all(link_re)
-
-		if sys.verbose then print "\n# Found {titles.length} titles and {links.length} links"
-		assert titles.length == links.length
+		var xml = to_xml
+		if xml isa XMLError then
+			print_error "RSS Parse Error: {xml.message}:{xml.location or else "null"}"
+			return new Array[Element]
+		end
+		var items = xml["rss"].first["channel"].first["item"]
 
 		var elements = new Array[Element]
-		for i in titles.length.times do
-			var title = titles[i].to_s.substring(title_prefix_len, titles[i].length - title_prefix_len - title_suffix_len)
-			var link = links[i].to_s.substring(6, links[i].length - 6 - 7)
+		for item in items do
+			var title = item[tool_config.tag_title].first.as(XMLStartTag).data
+			var link = item[tool_config.tag_link].first.as(XMLStartTag).data
+
 			elements.add new Element(title, link)
 		end
 
 		if sys.verbose then
 			print "# Found elements:"
-			print elements.join("\n")
+			print "* " + elements.join("\n* ")
 		end
 
 		return elements
+	end
+
+	# Expand the Lempel-Ziv encoded `self`
+	fun gunzip: String
+	do
+		var proc = new ProcessDuplex("gunzip", new Array[String]...)
+		var res = proc.write_and_read(self)
+		assert proc.status == 0 else print_error "gunzip failed: {proc.last_error or else "Unknown"}"
+		return res
 	end
 end
 

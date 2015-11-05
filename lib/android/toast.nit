@@ -34,7 +34,7 @@ redef class App
 
 	private fun native_toast(message: JavaString, is_long: Bool)
 	import native_activity in "Java" `{
-		final android.app.Activity context = App_native_activity(recv);
+		final android.app.Activity context = App_native_activity(self);
 		final CharSequence final_message = message;
 		final int duration = is_long? Toast.LENGTH_LONG: Toast.LENGTH_SHORT;
 

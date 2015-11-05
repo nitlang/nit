@@ -32,7 +32,7 @@ end
 class D
 	super B
 	super C
-	#alt3#var b: Int
+	#alt3,5#var b: Int
 	#alt4#var b = 11
 	init do 'd'.output #alt2#
 end
@@ -48,6 +48,7 @@ class F
 	super D
 	super E
 	init do 'f'.output #alt1,2#
+	#alt5#autoinit c=, e=
 end
 
 class G
@@ -55,6 +56,7 @@ class G
 	super E
 	var g: Int
 	init do 'g'.output #alt2#
+	#alt5#autoinit c=, e=, g=
 end
 
 class H

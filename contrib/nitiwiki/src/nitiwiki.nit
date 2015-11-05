@@ -16,6 +16,7 @@
 module nitiwiki
 
 import wiki_html
+import markdown_highlight
 
 # Locate nit directory
 private fun compute_nit_dir(opt_nit_dir: OptionString): String do
@@ -71,7 +72,7 @@ var opt_help = new OptionBool("Display this help message", "-h", "--help")
 var opt_verbose = new OptionCount("Verbose level", "-v")
 var opt_config = new OptionString("Path to config.ini file", "-c", "--config")
 var opt_init = new OptionBool("Initialize a new wiki in the current directory", "--init")
-var opt_status = new OptionBool("Display wiki status", "-s", "--status")
+var opt_status = new OptionBool("Display wiki status", "--status")
 var opt_render = new OptionBool("Render the out directory from markdown sources", "-r", "--render")
 var opt_force = new OptionBool("Force render even if source files are unchanged", "-f", "--force")
 var opt_clean = new OptionBool("Clean the output directory", "--clean")
@@ -107,7 +108,7 @@ if opt_init.value then
 		print "You can initialize nitiwiki manually by copying the default skeletton here."
 		exit 1
 	end
-	sys.system "cp -R {tpl}/* ."
+	sys.system "cp -R -- {tpl.escape_to_sh}/* ."
 	print "Initialized new nitiwiki."
 	print "Set wiki settings by editing {config_filename}."
 	exit 0

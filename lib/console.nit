@@ -18,7 +18,7 @@ module console
 # A ANSI/VT100 escape sequence.
 abstract class TermEscape
 	# The US-ASCII ESC character.
-	protected fun esc: Char do return 27.ascii
+	protected fun esc: Char do return 27.code_point
 
 	# The Control Sequence Introducer (CSI).
 	protected fun csi: String do return "{esc}["

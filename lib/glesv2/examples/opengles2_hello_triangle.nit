@@ -22,7 +22,7 @@ module opengles2_hello_triangle
 
 import glesv2
 import egl
-import mnit_linux::sdl
+import sdl
 import x11
 
 if "NIT_TESTING".environ == "true" then exit(0)
@@ -84,7 +84,7 @@ end
 var config = configs.first
 
 # TODO android part
-# Opengles1Display_midway_init(recv, format);
+# Opengles1Display_midway_init(self, format);
 
 var surface = egl_display.create_window_surface(config, x11_window_handle, [0])
 assert surface.is_ok else print egl_display.error
@@ -112,10 +112,10 @@ assert_no_gl_error
 assert gl.shader_compiler else print "Cannot compile shaders"
 
 # gl program
-print gl.error.to_s
+print glGetError.to_s
 var program = new GLProgram
-if not program.is_ok then
-	print "Program is not ok: {gl.error.to_s}\nLog:"
+if not glIsProgram(program) then
+	print "Program is not ok: {glGetError.to_s}\nLog:"
 	print program.info_log
 	abort
 end
@@ -123,36 +123,36 @@ assert_no_gl_error
 
 # vertex shader
 var vertex_shader = new GLVertexShader
-assert vertex_shader.is_ok else print "Vertex shader is not ok: {gl.error}"
-vertex_shader.source = """
+assert glIsShader(vertex_shader) else print "Vertex shader is not ok: {glGetError}"
+glShaderSource(vertex_shader, """
 attribute vec4 vPosition;
 void main()
 {
   gl_Position = vPosition;
 }
-""".to_cstring
-vertex_shader.compile
+""".to_cstring)
+glCompileShader vertex_shader
 assert vertex_shader.is_compiled else print "Vertex shader compilation failed with: {vertex_shader.info_log} {program.info_log}"
 assert_no_gl_error
 
 # fragment shader
 var fragment_shader = new GLFragmentShader
-assert fragment_shader.is_ok else print "Fragment shader is not ok: {gl.error}"
-fragment_shader.source = """
+assert glIsShader(fragment_shader) else print "Fragment shader is not ok: {glGetError}"
+glShaderSource(fragment_shader, """
 precision mediump float;
 void main()
 {
 	gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);
 }
-""".to_cstring
-fragment_shader.compile
+""".to_cstring)
+glCompileShader(fragment_shader)
 assert fragment_shader.is_compiled else print "Fragment shader compilation failed with: {fragment_shader.info_log}"
 assert_no_gl_error
 
-program.attach_shader vertex_shader
-program.attach_shader fragment_shader
+glAttachShader(program, vertex_shader)
+glAttachShader(program, fragment_shader)
 program.bind_attrib_location(0, "vPosition")
-program.link
+glLinkProgram program
 assert program.is_linked else print "Linking failed: {program.info_log}"
 assert_no_gl_error
 
@@ -160,30 +160,30 @@ assert_no_gl_error
 var vertices = [0.0, 0.5, 0.0, -0.5, -0.5, 0.0, 0.5, -0.5, 0.0]
 var vertex_array = new VertexArray(0, 3, vertices)
 vertex_array.attrib_pointer
-gl.clear_color(0.5, 0.0, 0.5, 1.0)
+glClearColor(0.5, 0.0, 0.5, 1.0)
 for i in [0..10000[ do
 	printn "."
 	assert_no_gl_error
-	gl.viewport(0, 0, width, height)
-	gl.clear((new GLBuffer).color)
-	program.use
+	glViewport(0, 0, width, height)
+	glClear gl_COLOR_BUFFER_BIT
+	glUseProgram program
 	vertex_array.enable
-	vertex_array.draw_arrays_triangles
+	glDrawArrays(gl_TRIANGLES, 0, 3)
 	egl_display.swap_buffers(surface)
 end
 
 # delete
-program.delete
-vertex_shader.delete
-fragment_shader.delete
+glDeleteProgram program
+glDeleteShader vertex_shader
+glDeleteShader fragment_shader
 
 #
 ## EGL
 #
 # close
 egl_display.make_current(new EGLSurface.none, new EGLSurface.none, new EGLContext.none)
-egl_display.destroy_context(context)
-egl_display.destroy_surface(surface)
+egl_display.destroy_context context
+egl_display.destroy_surface surface
 
 #
 ## SDL

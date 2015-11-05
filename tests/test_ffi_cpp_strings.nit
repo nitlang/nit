@@ -35,24 +35,24 @@ extern class CppVector in "C++" `{vector<int>*`}
 
 	# Adds an element to the end of the vector
 	fun push(v: Int) in "C++" `{
-		recv->push_back(v);
+		self->push_back(v);
 	`}
 
 	# Pops an element from the end of the vector
 	fun pop: Int in "C++" `{
-		long val = recv->back();
-		recv->pop_back();
+		long val = self->back();
+		self->pop_back();
 		return val;
 	`}
 
 	# Uses a callback to report when receiver is empty
 	fun safe_pop_with_default(default_return: Int): Int import report_error in "C++" `{
-		if (recv->empty()) {
-			CppVector_report_error(recv);
+		if (self->empty()) {
+			CppVector_report_error(self);
 			return default_return;
 		} else {
-			long val = recv->back();
-			recv->pop_back();
+			long val = self->back();
+			self->pop_back();
 			return val;
 		}
 	`}
@@ -62,13 +62,13 @@ extern class CppVector in "C++" `{vector<int>*`}
 
 	# Prints the given string when receiver is empty
 	fun safe_pop_with_custom_error(default_return: Int, error_msg: String): Int import String.to_cpp_string in "C++" `{
-		if (recv->empty()) {
+		if (self->empty()) {
 			string *cpp_error_msg = String_to_cpp_string(error_msg);
 			cout << *cpp_error_msg << "\n";
 			return default_return;
 		} else {
-			long val = recv->back();
-			recv->pop_back();
+			long val = self->back();
+			self->pop_back();
 			return val;
 		}
 	`}

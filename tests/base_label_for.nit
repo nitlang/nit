@@ -18,7 +18,7 @@ import abstract_collection
 
 fun maybe: Bool do return true
 
-var a = new Container[Int](1)
+var a = new Ref[Int](1)
 1.output
 for i in a do
 	2.output

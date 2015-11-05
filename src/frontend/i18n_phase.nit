@@ -130,8 +130,9 @@ end
 redef class AStringExpr
 
 	redef fun accept_string_finder(v) do
-		var str = value.as(not null).escape_to_c
-		var parse = v.toolcontext.parse_expr("\"{str}\".get_translation(\"{v.domain}\", \"{v.languages_location}\").unescape_nit")
+		var str = value.as(not null).escape_to_gettext
+		var code = "\"{str}\".get_translation(\"{v.domain}\", \"{v.languages_location}\")"
+		var parse = v.toolcontext.parse_expr(code)
 		replace_with(parse)
 		v.add_string(str, location)
 	end
@@ -143,7 +144,8 @@ redef class ASuperstringExpr
 		var fmt = ""
 		var exprs = new Array[AExpr]
 		for i in n_exprs do
-			if i isa AStringFormExpr then
+			if i isa AStartStringExpr or i isa AEndStringExpr or i isa AMidStringExpr then
+				assert i isa AStringFormExpr
 				fmt += i.value.as(not null)
 			else
 				fmt += "%"
@@ -151,9 +153,10 @@ redef class ASuperstringExpr
 				fmt += exprs.length.to_s
 			end
 		end
-		fmt = fmt.escape_to_c
+		fmt = fmt.escape_to_gettext
 		v.add_string(fmt, location)
-		var parse = v.toolcontext.parse_expr("\"{fmt}\".get_translation(\"{v.domain}\", \"{v.languages_location}\").unescape_nit.format()")
+		var code = "\"{fmt}\".get_translation(\"{v.domain}\", \"{v.languages_location}\").format()"
+		var parse = v.toolcontext.parse_expr(code)
 		if not parse isa ACallExpr then
 			v.toolcontext.error(location, "Fatal error in i18n annotation, the parsed superstring could not be generated properly")
 			return
@@ -214,5 +217,12 @@ class POFile
 		var f = new FileWriter.open(path)
 		write_to(f)
 		f.close
+	end
+end
+
+redef class Text
+	private fun escape_to_gettext: String
+	do
+		return escape_to_c.replace("\{", "\\\{").replace("\}", "\\\}")
 	end
 end

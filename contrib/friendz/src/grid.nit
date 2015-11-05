@@ -191,14 +191,14 @@ class Grid
 	fun save: String
 	do
 		var res = ""
-		var str = ".#ABCDEFGHI"
+		var str = ".abcdefghi#ABCDEFGHI"
 		for y in [0..height[ do
 			var rle = 0
 			var last: nullable Int = null
 			for x in [0..width[ do
 				var t = self.grid[x][y]
-				var tk = 0
-				if t.fixed then tk = t.kind + 1
+				var tk = t.kind
+				if t.fixed then tk += 10
 				if tk == last and rle<9 then
 					rle += 1
 				else
@@ -243,13 +243,19 @@ class Grid
 					x += 1
 				else if c == '#' then
 					var t = self.get(x,y)
+					assert t != null
 					t.fixed = true
 					x += 1
 				else if c >= 'A' and c <= 'I' then
 					var t = self.get(x,y)
 					assert t != null
-					t.update(c.ascii-'A'.ascii+1)
+					t.update(c.code_point-'A'.code_point+1)
 					t.fixed = true
+					x += 1
+				else if c >= 'a' and c <= 'i' then
+					var t = self.get(x,y)
+					assert t != null
+					t.update(c.code_point-'a'.code_point+1)
 					x += 1
 				else if c >= '1' and c <= '9' then
 					rle = c.to_i
@@ -261,7 +267,7 @@ class Grid
 		if x>0 then y += 1
 		if x > mx then mx = x
 		if y > my then my = y
-		if mx<3 or my<3 or mx>=max_width or my>=max_height then
+		if mx<3 or my<3 or mx>max_width or my>max_height then
 			return false
 		end
 		self.resize(mx,my)
@@ -283,16 +289,16 @@ class Grid
 				if k == 0 then
 					if t.fixed then c = '#'
 				else
-					b.add(0x1b.ascii)
+					b.add(0x1b.code_point)
 					b.add('[')
 					b.append ansicols[k]
-					c = (k + 'a'.ascii - 1).ascii
+					c = (k + 'a'.code_point - 1).code_point
 					if t.fixed then c = c.to_upper
 					b.append("m")
 				end
 				b.add(c)
 				if k != 0 then
-					b.add(0x1b.ascii)
+					b.add(0x1b.code_point)
 					b.append("[0m")
 
 				end

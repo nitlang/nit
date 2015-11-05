@@ -90,3 +90,6 @@ for file in `ls *.args`; do
 done
 echo ""
 echo "==> success $ok/$all ($ko tests failed, $sk skipped)"
+
+# return result
+test "$ok" == "$all"

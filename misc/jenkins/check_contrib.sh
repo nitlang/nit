@@ -13,33 +13,40 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Check the build and the execution of software in examples/ and contrib/
+# Check the build and the execution of software in lib/, examples/ and contrib/
 # The script must be run from the root Nit directory.
 #
 # various .xml junit file will be generated in the root directory for jenkins.
+#
+# Arguments will be additional `make` rules to execute. eg.
+#
+#     check_contrib.sh check android
 
-projects=`echo examples/*/Makefile contrib/*/Makefile`
+projects=`echo lib/*/Makefile examples/*/Makefile contrib/*/Makefile`
+rules=$*
 
 failed=
 for p in $projects; do
 	dir=`dirname "$p"`
 	name=`basename "$dir"`
-	echo "*** make $dir ***"
-	if misc/jenkins/unitrun.sh "run-$name-make" make -C "$dir"; then
-		# Make OK, is there a `check` rule?
-		make -C "$dir" check -n 2>/dev/null || continue
-		echo "*** makecheck $dir ***"
-		if misc/jenkins/unitrun.sh "run-$name-makecheck" make -C "$dir" check; then
-			:
-		else
-			failed="$failed $name-check"
-		fi
-
-	else
-		failed="$failed $name"
-	fi
+	echo "### in $dir ###"
+	# Check each rules, if they exists
+	for rule in $rules; do
+		make -C "$dir" $rule -n >/dev/null 2>/dev/null || {
+			# Special case for `all` that falls back as the default target
+			if [ "$rule" = "all" ]; then
+				echo "*** make -C $dir ***"
+				misc/jenkins/unitrun.sh "cmd-$name-make" make -C "$dir" ||
+					failed="$failed $name"
+			fi
+			continue
+		}
+		echo "*** make $rule -C $dir ***"
+		misc/jenkins/unitrun.sh "cmd-$name-make$rule" make -C "$dir" $rule ||
+			failed="$failed $name-$rule"
+	done
 done
-grep '<error message' *-make.xml *-makecheck.xml
+grep '<error message' *-make*.xml
 if test -n "$failed"; then
 	echo "FAILED: $failed"
 	exit 1

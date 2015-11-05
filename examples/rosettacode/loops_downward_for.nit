@@ -8,6 +8,6 @@
 # SEE: http://rosettacode.org/wiki/Loops/Downward_for
 module loops_downward_for
 
-for i in [0..10].reverse_iterator do
+for i in [10..0].step(-1) do
 	print i
 end

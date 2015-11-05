@@ -12,7 +12,9 @@
  */
 
 #include <stdlib.h>
+#include <errno.h>
 
 #define address_is_null(x) ((x)==NULL)
+#define sys_errno(x) (errno)
 
 #endif

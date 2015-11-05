@@ -16,6 +16,7 @@
 module doc_poset
 
 import doc_pages
+import model::model_collect
 
 # This phase computes importation and inheritance POSet for pages.
 class POSetPhase
@@ -23,7 +24,7 @@ class POSetPhase
 
 	# Populates the given DocModel.
 	redef fun apply do
-		for page in doc.pages do
+		for page in doc.pages.values do
 			if page isa MEntityPage then page.build_poset(self, doc)
 		end
 	end
@@ -46,7 +47,7 @@ redef class MModulePage
 	# Imported modules that should appear in the documentation.
 	var imports = new HashSet[MModule]
 
-	# Clients modules that shjould appear in the documentation.
+	# Clients modules that should appear in the documentation.
 	var clients = new HashSet[MModule]
 
 	redef fun build_poset(v, doc) do
@@ -82,7 +83,10 @@ redef class MModulePage
 		end
 		# make poset
 		var mmodules = new HashSet[MModule]
-		mmodules.add_all mentity.nested_mmodules
+		var mgroup = mentity.mgroup
+		if mgroup != null and mgroup.default_mmodule == mentity then
+			mmodules.add_all mgroup.mmodules
+		end
 		mmodules.add_all imports
 		if clients.length < 10 then mmodules.add_all clients
 		mmodules.add mentity

@@ -104,7 +104,7 @@ var i = 0
 var n = 10
 if args.not_empty then n = args.first.to_i
 
-while i < 1.lshift(n) do
+while i < 1 << n do
 	a.hop(b, c, d)
 	i = i + 1
 end

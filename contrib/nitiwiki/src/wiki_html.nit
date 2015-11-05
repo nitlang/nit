@@ -16,6 +16,7 @@
 module wiki_html
 
 import wiki_links
+import markdown::decorators
 
 redef class Nitiwiki
 
@@ -35,7 +36,7 @@ redef class Nitiwiki
 		var src = expand_path(config.root_dir, config.assets_dir)
 		var out = expand_path(config.root_dir, config.out_dir)
 		if need_render(src, expand_path(out, config.assets_dir)) then
-			if src.file_exists then sys.system "cp -R {src} {out}"
+			if src.file_exists then sys.system "cp -R -- {src.escape_to_sh} {out.escape_to_sh}"
 		end
 	end
 
@@ -45,12 +46,24 @@ redef class Nitiwiki
 		sitemap.is_dirty = true
 		return sitemap
 	end
+
+	# Markdown processor used for inline element such as titles in TOC.
+	private var inline_processor: MarkdownProcessor is lazy do
+		var proc = new MarkdownProcessor
+		proc.emitter.decorator = new InlineDecorator
+		return proc
+	end
+
+	# Inline markdown (remove h1, p, ... elements).
+	private fun inline_md(md: Writable): Writable do
+		return inline_processor.process(md.write_to_string)
+	end
 end
 
 redef class WikiEntry
 	# Get a `<a>` template link to `self`
-	fun tpl_link: Writable do
-		return "<a href=\"{url}\">{title}</a>"
+	fun tpl_link(context: WikiEntry): Writable do
+		return "<a href=\"{href_from(context)}\">{title}</a>"
 	end
 end
 
@@ -70,15 +83,15 @@ redef class WikiSection
 		if is_new then
 			out_full_path.mkdir
 		else
-			sys.system "touch {out_full_path}"
+			sys.system "touch -- {out_full_path.escape_to_sh}"
 		end
 		if has_source then
-			wiki.message("Render section {out_path}", 1)
+			wiki.message("Render section {name} -> {out_path}", 1)
 			copy_files
 		end
 		var index = self.index
 		if index isa WikiSectionIndex then
-			wiki.message("Render auto-index for section {out_path}", 1)
+			wiki.message("Render auto-index for section {name} -> {out_path}", 1)
 			index.is_dirty = true
 			add_child index
 		end
@@ -96,11 +109,11 @@ redef class WikiSection
 			var src = wiki.expand_path(dir, name)
 			var out = wiki.expand_path(out_full_path, name)
 			if not wiki.need_render(src, out) then continue
-			sys.system "cp -R {src} {out_full_path}"
+			sys.system "cp -R -- {src.escape_to_sh} {out_full_path.escape_to_sh}"
 		end
 	end
 
-	redef fun tpl_link do return index.tpl_link
+	redef fun tpl_link(context) do return index.tpl_link(context)
 
 	# Render the section hierarchy as a html tree.
 	#
@@ -120,15 +133,15 @@ redef class WikiSection
 	# </ul>
 	# ~~~
 	fun tpl_tree(limit: Int): Template do
-		return tpl_tree_intern(limit, 1)
+		return tpl_tree_intern(limit, 1, self)
 	end
 
 	# Build the template tree for this section recursively.
-	protected fun tpl_tree_intern(limit, count: Int): Template do
+	protected fun tpl_tree_intern(limit, count: Int, context: WikiEntry): Template do
 		var out = new Template
 		var index = index
 		out.add "<li>"
-		out.add tpl_link
+		out.add tpl_link(context)
 		if (limit < 0 or count < limit) and
 		   (children.length > 1 or (children.length == 1)) then
 			out.add " <ul>"
@@ -136,10 +149,10 @@ redef class WikiSection
 				if child == index then continue
 				if child isa WikiArticle then
 					out.add "<li>"
-					out.add child.tpl_link
+					out.add child.tpl_link(context)
 					out.add "</li>"
 				else if child isa WikiSection and not child.is_hidden then
-					out.add child.tpl_tree_intern(limit, count + 1)
+					out.add child.tpl_tree_intern(limit, count + 1, context)
 				end
 			end
 			out.add " </ul>"
@@ -162,16 +175,28 @@ redef class WikiArticle
 	redef fun render do
 		super
 		if not is_dirty and not wiki.force_render then return
-		wiki.message("Render article {name}", 2)
 		var file = out_full_path
+		wiki.message("Render article {name} -> {file}", 1)
 		file.dirname.mkdir
 		tpl_page.write_to_file file
 	end
 
 
+	# Load a template and resolve page-related macros
+	fun load_template(template_file: String): TemplateString do
+		var tpl = wiki.load_template(template_file)
+		if tpl.has_macro("ROOT_URL") then
+			var root_dir = href.dirname.relpath("")
+			# Avoid issues if the macro is just followed by a `/` (as with url prefix)
+			if root_dir == "" then root_dir = "."
+			tpl.replace("ROOT_URL", root_dir)
+		end
+		return tpl
+	end
+
 	# Replace macros in the template by wiki data.
 	private fun tpl_page: TemplateString do
-		var tpl = wiki.load_template(template_file)
+		var tpl = load_template(template_file)
 		if tpl.has_macro("TOP_MENU") then
 			tpl.replace("TOP_MENU", tpl_menu)
 		end
@@ -191,21 +216,30 @@ redef class WikiArticle
 	fun tpl_header: Writable do
 		var file = header_file
 		if not wiki.has_template(file) then return ""
-		return wiki.load_template(file)
+		return load_template(file)
 	end
 
 	# Generate the HTML page for this article.
 	fun tpl_article: TplArticle do
 		var article = new TplArticle
 		article.body = content
-		article.breadcrumbs = new TplBreadcrumbs(self)
-		tpl_sidebar.blocks.add tpl_summary
+		if wiki.config.auto_breadcrumbs then
+			article.breadcrumbs = new TplBreadcrumbs(self)
+		end
 		article.sidebar = tpl_sidebar
+		article.sidebar_pos = wiki.config.sidebar
 		return article
 	end
 
 	# Sidebar for this page.
-	var tpl_sidebar = new TplSidebar
+	var tpl_sidebar: TplSidebar is lazy do
+		var res = new TplSidebar
+		if wiki.config.auto_summary then
+			res.blocks.add tpl_summary
+		end
+		res.blocks.add_all sidebar.blocks
+		return res
+	end
 
 	# Generate the HTML summary for this article.
 	#
@@ -218,8 +252,7 @@ redef class WikiArticle
 		while iter.is_ok do
 			var hl = iter.item
 			# parse title as markdown
-			var title = hl.title.md_to_html.to_s
-			title = title.substring(3, title.length - 8)
+			var title = wiki.inline_md(hl.title)
 			tpl.add "<li><a href=\"#{hl.id}\">{title}</a>"
 			iter.next
 			if iter.is_ok then
@@ -241,7 +274,7 @@ redef class WikiArticle
 	fun tpl_menu: Writable do
 		var file = menu_file
 		if not wiki.has_template(file) then return ""
-		var tpl = wiki.load_template(file)
+		var tpl = load_template(file)
 		if tpl.has_macro("MENUS") then
 			var items = new Template
 			for child in wiki.root_section.children.values do
@@ -252,7 +285,7 @@ redef class WikiArticle
 					items.add " class=\"active\""
 				end
 				items.add ">"
-				items.add child.tpl_link
+				items.add child.tpl_link(self)
 				items.add "</li>"
 			end
 			tpl.replace("MENUS", items)
@@ -264,13 +297,21 @@ redef class WikiArticle
 	fun tpl_footer: Writable do
 		var file = footer_file
 		if not wiki.has_template(file) then return ""
-		var tpl = wiki.load_template(file)
+		var tpl = load_template(file)
 		var time = new Tm.gmtime
 		if tpl.has_macro("YEAR") then
 			tpl.replace("YEAR", (time.year + 1900).to_s)
 		end
 		if tpl.has_macro("GEN_TIME") then
 			tpl.replace("GEN_TIME", time.to_s)
+		end
+		if tpl.has_macro("LAST_CHANGES") then
+			var url = "{wiki.config.last_changes}{src_path or else ""}"
+			tpl.replace("LAST_CHANGES", url)
+		end
+		if tpl.has_macro("EDIT") then
+			var url = "{wiki.config.edit}{src_path or else ""}"
+			tpl.replace("EDIT", url)
 		end
 		return tpl
 	end
@@ -315,6 +356,11 @@ class TplArticle
 	# Sidebar of this article (if any).
 	var sidebar: nullable TplSidebar = null
 
+	# Position of the sidebar.
+	#
+	# See `WikiConfig::sidebar`.
+	var sidebar_pos: String = "left"
+
 	# Breadcrumbs from wiki root to this article.
 	var breadcrumbs: nullable TplBreadcrumbs = null
 
@@ -324,13 +370,11 @@ class TplArticle
 	end
 
 	redef fun rendering do
-		if sidebar != null then
-			add "<div class=\"col-sm-3 sidebar\">"
-			add sidebar.as(not null)
-			add "</div>"
-			add "<div class=\"col-sm-9 content\">"
-		else
+		if sidebar_pos == "left" then render_sidebar
+		if sidebar == null then
 			add "<div class=\"col-sm-12 content\">"
+		else
+			add "<div class=\"col-sm-9 content\">"
 		end
 		if body != null then
 			add "<article>"
@@ -346,6 +390,14 @@ class TplArticle
 			add " </article>"
 		end
 		add "</div>"
+		if sidebar_pos == "right" then render_sidebar
+	end
+
+	private fun render_sidebar do
+		if sidebar == null then return
+		add "<div class=\"col-sm-3 sidebar\">"
+		add sidebar.as(not null)
+		add "</div>"
 	end
 end
 
@@ -358,9 +410,9 @@ class TplSidebar
 
 	redef fun rendering do
 		for block in blocks do
-			add "<div class=\"sideblock\">"
+			add "<nav class=\"sideblock\">"
 			add block
-			add "</div>"
+			add "</nav>"
 		end
 	end
 end
@@ -384,7 +436,7 @@ class TplBreadcrumbs
 			else
 				if article.parent == entry and article.is_index then continue
 				add "<li>"
-				add entry.tpl_link
+				add entry.tpl_link(article)
 				add "</li>"
 			end
 		end

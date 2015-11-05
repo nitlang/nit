@@ -23,6 +23,8 @@ import doc
 redef class ToolContext
 	# Nitdoc generation phase.
 	var docphase: Phase = new Nitdoc(self, null)
+
+	init do super # to fix ambiguous linearization
 end
 
 # Nitdoc phase explores the model and generate pages for each mentities found
@@ -43,7 +45,9 @@ private class Nitdoc
 			new IntroRedefListPhase(toolcontext, doc),
 			new LinListPhase(toolcontext, doc),
 			new GraphPhase(toolcontext, doc),
-			new RenderHTMLPhase(toolcontext, doc): DocPhase]
+			new ReadmePhase(toolcontext, doc),
+			new RenderHTMLPhase(toolcontext, doc),
+			new DocTestPhase(toolcontext, doc): DocPhase]
 
 		for phase in phases do
 			toolcontext.info("# {phase.class_name}", 1)

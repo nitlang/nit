@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Client for a MPD server
+# Music Player Daemon client library
 module mpd
 
 import socket

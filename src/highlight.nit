@@ -48,13 +48,56 @@ class HighlightVisitor
 		html.add_class("nitcode")
 	end
 
+	# When highlighting a node, also consider the loose tokens around it.
+	#
+	# Loose tokens are tokens discarded from the AST but attached before
+	# or after some non-loose tokens. See `Token::is_loose`.
+	#
+	# When this flag is set to `true`, the loose tokens that are before the
+	# first token and after the last token are also highlighted.
+	#
+	# Default: false.
+	var include_loose_tokens = false is writable
+
+	# When highlighting a node, the first and the last lines are fully included.
+	#
+	# If the highlighted node starts (or ends) in the middle of a line,
+	# this flags forces the whole line to be highlighted.
+	#
+	# Default: false
+	var include_whole_lines = false is writable
+
 	# The entry-point of the highlighting.
 	# Will fill `html` with the generated HTML content.
 	fun enter_visit(n: ANode)
 	do
 		n.parentize_tokens
-		var s = n.location.file
-		htmlize(s.first_token.as(not null), s.last_token.as(not null))
+
+		var f
+		var l
+
+		if n isa Token then
+			f = n
+			l = n
+		else
+			assert n isa Prod
+			f = n.first_token
+			if f == null then return
+			l = n.last_token
+			if l == null then return
+		end
+
+		if include_loose_tokens then
+			if f.prev_looses.not_empty then f = f.prev_looses.first
+			if l.next_looses.not_empty then l = l.next_looses.last
+		end
+
+		if include_whole_lines then
+			f = f.first_real_token_in_line
+			l = l.last_real_token_in_line
+		end
+
+		htmlize(f, l)
 	end
 
 	private fun full_tag(anode: ANode, hv: HighlightVisitor): nullable HTMLTag
@@ -352,7 +395,7 @@ redef class MModule
 	# The module HTML page
 	fun href: String
 	do
-		return name + ".html"
+		return c_name + ".html"
 	end
 
 	redef fun linkto do return linkto_text(name)
@@ -373,7 +416,7 @@ redef class MClassDef
 			res.new_field("class").text(mclass.name)
 		else
 			res.new_field("redef class").text(mclass.name)
-			res.new_field("intro").add mclass.intro.linkto_text("in {mclass.intro.mmodule.to_s}")
+			res.new_field("intro").add mclass.intro.linkto_text("in {mclass.intro_mmodule.to_s}")
 		end
 		var mdoc = self.mdoc
 		if mdoc == null then mdoc = mclass.intro.mdoc
@@ -584,7 +627,6 @@ redef class MSignature
 end
 
 redef class CallSite
-	super HInfoBoxable
 	redef fun infobox(v)
 	do
 		var res = new HInfoBox(v, "call {mpropdef}")
@@ -742,7 +784,7 @@ redef class AVardeclExpr
 	end
 end
 
-redef class AForExpr
+redef class AForGroup
 	redef fun decorate_tag(v, res, token)
 	do
 		if not token isa TId then return null

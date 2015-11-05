@@ -99,11 +99,11 @@ redef class ModelBuilder
 				return
 			end
 
-			# Check for conflicting class full-names in the project
+			# Check for conflicting class full-names in the package
 			if mmodule.mgroup != null and mvisibility >= protected_visibility then
 				var mclasses = model.get_mclasses_by_name(name)
 				if mclasses != null then for other in mclasses do
-					if other.intro_mmodule.mgroup != null and other.intro_mmodule.mgroup.mproject == mmodule.mgroup.mproject then
+					if other.intro_mmodule.mgroup != null and other.intro_mmodule.mgroup.mpackage == mmodule.mgroup.mpackage then
 						# Skip classes that are buggy
 						if other.try_intro == null then continue
 						warning(nclassdef, "full-name-conflict", "Error: a class named `{other.full_name}` is already defined in module `{other.intro_mmodule}` at {other.intro.location}.")
@@ -116,12 +116,15 @@ redef class ModelBuilder
 			#print "new class {mclass}"
 		else if nclassdef isa AStdClassdef and nmodule.mclass2nclassdef.has_key(mclass) then
 			error(nclassdef, "Error: a class `{name}` is already defined at line {nmodule.mclass2nclassdef[mclass].location.line_start}.")
+			mclass.is_broken = true
 			return
 		else if nclassdef isa AStdClassdef and nclassdef.n_kwredef == null then
 			error(nclassdef, "Redef Error: `{name}` is an imported class. Add the `redef` keyword to refine it.")
+			mclass.is_broken = true
 			return
 		else if arity != 0 and mclass.arity != arity then
 			error(nclassdef, "Redef Error: expected {mclass.arity} formal parameter(s) for {mclass.signature_to_s}; got {arity}.")
+			mclass.is_broken = true
 			return
 		else if nkind != null and mkind != concrete_kind and mclass.kind != mkind then
 			error(nkind, "Redef Error: refinement changed the kind from `{mclass.kind}` to `{mkind}`.")

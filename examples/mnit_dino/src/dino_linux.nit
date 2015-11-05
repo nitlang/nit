@@ -18,7 +18,7 @@ module dino_linux
 
 import dino
 
-import mnit_linux
+import mnit::linux
 
 redef class ImageSet
 	redef fun start_over_path do return "images/play_again.png"

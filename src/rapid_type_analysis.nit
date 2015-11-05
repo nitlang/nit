@@ -82,6 +82,10 @@ class RapidTypeAnalysis
 	# Live methods.
 	var live_methods = new HashSet[MMethod]
 
+	# Live mmodules.
+	# Those with a live method definitions (see `live_methoddefs`)
+	var live_mmodules = new HashSet[MModule]
+
 	# Live callsites.
 	var live_callsites = new HashSet[CallSite]
 
@@ -209,21 +213,30 @@ class RapidTypeAnalysis
 
 		# Force primitive types
 		force_alive("Bool")
-		force_alive("Int")
 		force_alive("Float")
 		force_alive("Char")
 		force_alive("Pointer")
+		force_alive("Byte")
+		force_alive("Int")
+		force_alive("Int8")
+		force_alive("Int16")
+		force_alive("UInt16")
+		force_alive("Int32")
+		force_alive("UInt32")
 
 		while not todo.is_empty do
 			var mmethoddef = todo.shift
 			var mmeth = mmethoddef.mproperty
+			var msignature = mmethoddef.msignature
+			if msignature == null then continue # Skip broken method
+
 			#print "# visit {mmethoddef}"
 			var v = new RapidTypeVisitor(self, mmethoddef.mclassdef.bound_mtype, mmethoddef)
 
-			var vararg_rank = mmethoddef.msignature.vararg_rank
+			var vararg_rank = msignature.vararg_rank
 			if vararg_rank > -1 then
 				var node = self.modelbuilder.mpropdef2node(mmethoddef)
-				var elttype = mmethoddef.msignature.mparameters[vararg_rank].mtype
+				var elttype = msignature.mparameters[vararg_rank].mtype
 				#elttype = elttype.anchor_to(self.mainmodule, v.receiver)
 				var vararg = self.mainmodule.array_type(elttype)
 				v.add_type(vararg)
@@ -233,7 +246,7 @@ class RapidTypeAnalysis
 			end
 
 			# TODO? new_msignature
-			var sig = mmethoddef.msignature.as(not null)
+			var sig = msignature
 			var osig = mmeth.intro.msignature.as(not null)
 			for i in [0..sig.arity[ do
 				var origtype = osig.mparameters[i].mtype
@@ -254,7 +267,7 @@ class RapidTypeAnalysis
 				continue
 			else if mmethoddef.constant_value != null then
 				# Make the return type live
-				v.add_type(mmethoddef.msignature.return_mtype.as(MClassType))
+				v.add_type(msignature.return_mtype.as(MClassType))
 				continue
 			else if npropdef == null then
 				abort
@@ -274,7 +287,7 @@ class RapidTypeAnalysis
 
 			if mmethoddef.is_intern or mmethoddef.is_extern then
 				# UGLY: We force the "instantation" of the concrete return type if any
-				var ret = mmethoddef.msignature.return_mtype
+				var ret = msignature.return_mtype
 				if ret != null and ret isa MClassType and ret.mclass.kind != abstract_kind and ret.mclass.kind != interface_kind then
 					v.add_type(ret)
 				end
@@ -296,10 +309,10 @@ class RapidTypeAnalysis
 				if not ot.can_resolve_for(t, t, mainmodule) then continue
 				var rt = ot.anchor_to(mainmodule, t)
 				if live_types.has(rt) then continue
+				if not check_depth(rt) then continue
 				#print "{ot}/{t} -> {rt}"
 				live_types.add(rt)
 				todo_types.add(rt)
-				check_depth(rt)
 			end
 		end
 		#print "MType {live_types.length}: {live_types.join(", ")}"
@@ -317,12 +330,14 @@ class RapidTypeAnalysis
 		#print "cast MType {live_cast_types.length}: {live_cast_types.join(", ")}"
 	end
 
-	private fun check_depth(mtype: MClassType)
+	private fun check_depth(mtype: MClassType): Bool
 	do
 		var d = mtype.length
 		if d > 255 then
 			self.modelbuilder.toolcontext.fatal_error(null, "Fatal Error: limitation in the rapidtype analysis engine: a type depth of {d} is too important, the problematic type is `{mtype}`.")
+			return false
 		end
+		return true
 	end
 
 	fun add_new(recv: MClassType, mtype: MClassType)
@@ -353,7 +368,7 @@ class RapidTypeAnalysis
 			for npropdef in modelbuilder.collect_attr_propdef(cd) do
 				if not npropdef.has_value then continue
 
-				var mpropdef = npropdef.mpropdef.as(not null)
+				var mpropdef = npropdef.mreadpropdef.as(not null)
 				var v = new RapidTypeVisitor(self, bound_mtype, mpropdef)
 				v.enter_visit(npropdef.n_expr)
 				v.enter_visit(npropdef.n_block)
@@ -383,6 +398,7 @@ class RapidTypeAnalysis
 	do
 		if live_methoddefs.has(mpropdef) then return
 		live_methoddefs.add(mpropdef)
+		live_mmodules.add(mpropdef.mclassdef.mmodule)
 		todo.add(mpropdef)
 
 		var mproperty = mpropdef.mproperty
@@ -449,10 +465,14 @@ class RapidTypeVisitor
 
 	redef fun visit(n)
 	do
-		n.accept_rapid_type_visitor(self)
 		if n isa AExpr then
-			var implicit_cast_to = n.implicit_cast_to
-			if implicit_cast_to != null then self.add_cast_type(implicit_cast_to)
+			if n.mtype != null or n.is_typed then
+				n.accept_rapid_type_visitor(self)
+				var implicit_cast_to = n.implicit_cast_to
+				if implicit_cast_to != null then self.add_cast_type(implicit_cast_to)
+			end
+		else
+			n.accept_rapid_type_visitor(self)
 		end
 
 		# RTA does not enter in AAnnotations
@@ -509,24 +529,35 @@ redef class ANode
 	end
 end
 
-redef class AIntExpr
+redef class AExpr
+	# Make the `mtype` of the expression live
+	# Used by literals and instantiations
+	fun allocate_mtype(v: RapidTypeVisitor)
+	do
+		var mtype = self.mtype
+		if not mtype isa MClassType then return
+		v.add_type(self.mtype.as(MClassType))
+	end
+end
+
+redef class AIntegerExpr
 	redef fun accept_rapid_type_visitor(v)
 	do
-		v.add_type(self.mtype.as(MClassType))
+		allocate_mtype(v)
 	end
 end
 
 redef class AFloatExpr
 	redef fun accept_rapid_type_visitor(v)
 	do
-		v.add_type(self.mtype.as(MClassType))
+		allocate_mtype(v)
 	end
 end
 
 redef class ACharExpr
 	redef fun accept_rapid_type_visitor(v)
 	do
-		v.add_type(self.mtype.as(MClassType))
+		allocate_mtype(v)
 	end
 end
 
@@ -550,7 +581,7 @@ redef class AStringFormExpr
 	do
 		var native = v.analysis.mainmodule.native_string_type
 		v.add_type(native)
-		var prop = v.get_method(native, "to_s_with_length")
+		var prop = v.get_method(native, "to_s_full")
 		v.add_monomorphic_send(native, prop)
 	end
 end
@@ -559,7 +590,7 @@ redef class ASuperstringExpr
 	redef fun accept_rapid_type_visitor(v)
 	do
 		var mmodule = v.analysis.mainmodule
-		var object_type = mmodule.object_type
+		var object_type = mmodule.string_type
 		var arraytype = mmodule.array_type(object_type)
 		v.add_type(arraytype)
 		var nattype = mmodule.native_array_type(object_type)
@@ -575,7 +606,8 @@ end
 redef class ACrangeExpr
 	redef fun accept_rapid_type_visitor(v)
 	do
-		var mtype = self.mtype.as(MClassType)
+		var mtype = self.mtype
+		if not mtype isa MClassType then return
 		v.add_type(mtype)
 		v.add_callsite(init_callsite)
 	end
@@ -584,7 +616,8 @@ end
 redef class AOrangeExpr
 	redef fun accept_rapid_type_visitor(v)
 	do
-		var mtype = self.mtype.as(MClassType)
+		var mtype = self.mtype
+		if not mtype isa MClassType then return
 		v.add_type(mtype)
 		v.add_callsite(init_callsite)
 	end
@@ -593,28 +626,32 @@ end
 redef class ATrueExpr
 	redef fun accept_rapid_type_visitor(v)
 	do
-		v.add_type(self.mtype.as(MClassType))
+		allocate_mtype(v)
 	end
 end
 
 redef class AFalseExpr
 	redef fun accept_rapid_type_visitor(v)
 	do
-		v.add_type(self.mtype.as(MClassType))
+		allocate_mtype(v)
 	end
 end
 
 redef class AIsaExpr
 	redef fun accept_rapid_type_visitor(v)
 	do
-		v.add_cast_type(self.cast_type.as(not null))
+		var cast_type = self.cast_type
+		if cast_type == null then return
+		v.add_cast_type(cast_type)
 	end
 end
 
 redef class AAsCastExpr
 	redef fun accept_rapid_type_visitor(v)
 	do
-		v.add_cast_type(self.mtype.as(not null))
+		var mtype = self.mtype
+		if mtype == null then return
+		v.add_cast_type(mtype)
 	end
 end
 
@@ -662,7 +699,7 @@ redef class ASuperExpr
 	end
 end
 
-redef class AForExpr
+redef class AForGroup
 	redef fun accept_rapid_type_visitor(v)
 	do
 		v.add_callsite(self.method_iterator)

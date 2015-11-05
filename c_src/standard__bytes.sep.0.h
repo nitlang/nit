@@ -1,0 +1,39 @@
+#include "nit.common.h"
+#define COLOR_standard__bytes__Bytes___items 2
+#define COLOR_standard__bytes__Bytes___length 3
+#define COLOR_standard__bytes__Bytes___capacity 4
+#define COLOR_standard__bytes__Bytes___persisted 5
+#define COLOR_standard__bytes__Bytes__items_61d 62
+#define COLOR_standard__array__AbstractArrayRead__length_61d 40
+#define COLOR_standard__bytes__Bytes__capacity_61d 61
+#define COLOR_standard__kernel__Object__init 0
+extern const struct type type_standard__Int;
+extern const char FILE_standard__kernel[];
+extern const char FILE_standard__bytes[];
+long standard___standard__Bytes___standard__abstract_collection__SequenceRead___91d_93d(val* self, long p0);
+void standard___standard__Bytes___regen(val* self);
+void standard___standard__Bytes___standard__abstract_collection__SimpleCollection__add(val* self, long p0);
+void standard___standard__Bytes___standard__abstract_collection__Sequence___91d_93d_61d(val* self, long p0, long p1);
+void standard___standard__Bytes___standard__array__AbstractArray__enlarge(val* self, long p0);
+extern const struct type type_standard__Bytes;
+void standard___standard__Bytes___append_ns(val* self, char* p0, long p1);
+#define COLOR_standard__abstract_collection__Collection__iterator 25
+#define COLOR_standard__abstract_collection__Iterator__is_ok 16
+#define COLOR_standard__abstract_collection__Iterator__item 17
+#define COLOR_standard__abstract_collection__Iterator__next 18
+#define COLOR_standard__abstract_collection__Iterator__finish 19
+val* NEW_standard__FlatString(const struct type* type);
+extern const struct type type_standard__FlatString;
+void standard___standard__FlatString___with_infos(val* self, char* p0, long p1, long p2, long p3);
+val* NEW_standard__bytes__BytesIterator(const struct type* type);
+extern const struct type type_standard__bytes__BytesIterator;
+void standard__bytes___standard__bytes__BytesIterator___with_buffer(val* self, val* p0);
+#define COLOR_standard___standard__Bytes___standard__kernel__Object__init 64
+#define COLOR_standard__bytes__BytesIterator___tgt 0
+#define COLOR_standard__bytes__BytesIterator___index 1
+#define COLOR_standard__bytes__BytesIterator___max 2
+#define COLOR_standard__bytes__BytesIterator__tgt_61d 27
+#define COLOR_standard__bytes__BytesIterator__index_61d 26
+#define COLOR_standard__bytes__BytesIterator__max_61d 28
+long standard__bytes___standard__bytes__BytesIterator___standard__abstract_collection__Iterator__item(val* self);
+#define COLOR_standard__bytes___standard__bytes__BytesIterator___standard__kernel__Object__init 29

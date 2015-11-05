@@ -23,7 +23,7 @@ redef class BasicBlock
 	do
 		var code_lines = new Array[String]
 		for line in lines do code_lines.add(line.text)
-		var code = code_lines.join("")
+		var code = code_lines.join
 
 		code = code.replace("\n","\\l").replace("\"","\\\"").replace("\\n","|n").replace("/","\\/").replace("\r","")
 		# the last one is a hack

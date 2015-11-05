@@ -16,8 +16,8 @@
 module astbuilder
 
 intrude import semantize::typing
-intrude import semantize::literal
-intrude import semantize::parser
+intrude import literal
+intrude import parser
 intrude import semantize::scope
 
 # General factory to build semantic nodes in the AST of expressions
@@ -30,9 +30,9 @@ class ASTBuilder
 	var anchor: nullable MClassType
 
 	# Make a new Int literal
-	fun make_int(value: Int): AIntExpr
+	fun make_int(value: Int): AIntegerExpr
 	do
-		return new ADecIntExpr.make(value, mmodule.int_type)
+		return new AIntegerExpr.make(value, mmodule.int_type)
 	end
 
 	# Make a new instatiation
@@ -260,11 +260,11 @@ redef class AType
 	end
 end
 
-redef class ADecIntExpr
+redef class AIntegerExpr
 	private init make(value: Int, t: MType)
 	do
 		self.value = value
-		self._n_number = new TNumber # dummy
+		self._n_integer = new TInteger # dummy
 		self.mtype = t
 	end
 end
@@ -294,7 +294,8 @@ redef class ACallExpr
 	do
 		self._n_expr = recv
 		_n_args = new AListExprs
-		_n_id = new TId
+		_n_qid = new AQid
+		_n_qid.n_id = new TId
 		if args != null then
 			self.n_args.n_exprs.add_all(args)
 		end

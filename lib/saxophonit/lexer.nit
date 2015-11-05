@@ -49,9 +49,9 @@ class XophonLexer
 	# read the next byte. Else, return `-1`.
 	fun expect_delimiter: Int do
 		if accept('"') then
-			return '"'.ascii
+			return '"'.code_point
 		else if accept('\'') then
-			return '\''.ascii
+			return '\''.code_point
 		else
 			fire_unexpected_char(". Expecting `\"` or `'`")
 			return -1
@@ -71,7 +71,7 @@ class XophonLexer
 	# If the last read byte is forbidden, fire a fatal error instead.
 	fun expect_xml_char(buffer: Buffer): Bool do
 		if is_xml_char then
-			buffer.chars.push(last_char.ascii)
+			buffer.chars.push(last_char.code_point)
 			read_char
 			return true
 		else if eof then
@@ -91,7 +91,7 @@ class XophonLexer
 			buffer.chars.push(' ')
 			read_char
 			return true
-		else if last_char == '<'.ascii then
+		else if last_char == '<'.code_point then
 			return fire_fatal_error("`<` is forbidden in attribute values.")
 		else
 			return expect_xml_char(buffer)
@@ -127,10 +127,10 @@ class XophonLexer
 	# Is the last read byte matches the `NameStartChar` production?
 	fun is_name_start_char: Bool do
 		# TODO: Handle code points above 0x7F.
-		return ['A'.ascii .. 'Z'.ascii].has(last_char) or
-				['a'.ascii .. 'z'.ascii].has(last_char) or
-				last_char == '_'.ascii or
-				last_char == ':'.ascii or
+		return ['A'.code_point .. 'Z'.code_point].has(last_char) or
+				['a'.code_point .. 'z'.code_point].has(last_char) or
+				last_char == '_'.code_point or
+				last_char == ':'.code_point or
 				last_char > 127
 	end
 
@@ -138,8 +138,8 @@ class XophonLexer
 	fun is_name_char: Bool do
 		# TODO: Handle code points above 0x7F.
 		return is_name_start_char or
-				last_char == '-'.ascii or
-				last_char == '.'.ascii or
+				last_char == '-'.code_point or
+				last_char == '.'.code_point or
 				is_digit
 	end
 
@@ -150,10 +150,10 @@ class XophonLexer
 		if not is_name_start_char then
 			return fire_unexpected_char(" at the beginning of a name")
 		end
-		buffer.chars.push(last_char.ascii)
+		buffer.chars.push(last_char.code_point)
 		read_char
 		while is_name_char do
-			buffer.chars.push(last_char.ascii)
+			buffer.chars.push(last_char.code_point)
 			read_char
 		end
 		return true
@@ -187,14 +187,14 @@ class XophonLexer
 
 	# Is the last read byte matches the `[0-9]` production?
 	fun is_digit: Bool do
-		return ['0'.ascii .. '9'.ascii].has(last_char)
+		return ['0'.code_point .. '9'.code_point].has(last_char)
 	end
 
 	# Accept a `[0-9]+` token.
 	fun accept_digits(buffer: Buffer): Bool do
 		if is_digit then
 			loop
-				buffer.chars.push(last_char.ascii)
+				buffer.chars.push(last_char.code_point)
 				read_char
 				if not is_digit then return true
 			end
@@ -210,16 +210,16 @@ class XophonLexer
 
 	# Is `last_char` matches the `[0-9a-fA-F]` production?
 	fun is_hex: Bool do
-		return ['0'.ascii .. '9'.ascii].has(last_char) or
-				['A'.ascii .. 'Z'.ascii].has(last_char) or
-				['a'.ascii .. 'Z'.ascii].has(last_char)
+		return ['0'.code_point .. '9'.code_point].has(last_char) or
+				['A'.code_point .. 'Z'.code_point].has(last_char) or
+				['a'.code_point .. 'Z'.code_point].has(last_char)
 	end
 
 	# Expect a `[0-9a-fA-F]+` token.
 	fun expect_hex(buffer: Buffer): Bool do
 		if is_hex then
 			loop
-				buffer.chars.push(last_char.ascii)
+				buffer.chars.push(last_char.code_point)
 				read_char
 				if not is_hex then return true
 			end
@@ -247,7 +247,7 @@ class XophonLexer
 		else if last_char < 0 then
 			fire_fatal_error("Internal error: Already at the end of the file.")
 			return
-		else if last_char == '\n'.ascii then
+		else if last_char == '\n'.code_point then
 			locator.line_number += 1
 			locator.column_number = 1
 		else
@@ -259,21 +259,24 @@ class XophonLexer
 			last_char = -1
 			return
 		end
-		last_char = s
+		last_char = s.to_i
 
 		# XML 1.0 end-of-line handling
 		# Note: Regardless the XML version, any EOL defined by the
 		# recommandation MUST be reported as a single LINE FEED.
-		if was_cr and last_char == '\n'.ascii then
+		if was_cr and last_char == '\n'.code_point then
 			# EOL already reported. => Skip this byte.
 			s = input.read_byte
-			if s == null then s = -1
-			last_char = s
+			if s == null then
+				last_char = -1
+			else
+				last_char = s.to_i
+			end
 		end
-		was_cr = last_char == '\r'.ascii
+		was_cr = last_char == '\r'.code_point
 		if was_cr then
 			# Regardless the following byte, '\r' always introduce an EOL.
-			last_char = '\n'.ascii
+			last_char = '\n'.code_point
 		end
 	end
 
@@ -300,7 +303,7 @@ class XophonLexer
 	fun is_int(c: Int): Bool do return last_char == c
 
 	# Does the last read byte equal `c`?
-	fun is_char(c: Char): Bool do return last_char == c.ascii
+	fun is_char(c: Char): Bool do return last_char == c.code_point
 
 	# Expect the specified byte.
 	fun accept_int(expected: Int): Bool do
@@ -314,7 +317,7 @@ class XophonLexer
 
 	# Accept the specified byte.
 	fun accept(expected: Char): Bool do
-		return accept_int(expected.ascii)
+		return accept_int(expected.code_point)
 	end
 
 	# Ensure the last read byte is equal to `expected`.
@@ -327,7 +330,7 @@ class XophonLexer
 	# Return `true` if and only if the last read byte as the expected value.
 	fun expect_int(expected: Int, context: String): Bool do
 		return accept_int(expected) or
-				fire_unexpected_char("{context}. Expecting `{expected.ascii}`.")
+				fire_unexpected_char("{context}. Expecting `{expected.code_point}`.")
 	end
 
 	# Ensure the last read byte is equal to `expected`.
@@ -360,7 +363,7 @@ class XophonLexer
 			if not accept(chars[i]) then
 				if is_xml_char then
 					return fire_fatal_error("Unexpected " +
-							"`{expected.substring(0, i)}{last_char.ascii.to_s}`" +
+							"`{expected.substring(0, i)}{last_char.code_point.to_s}`" +
 							"{context}. Expecting `{expected}`.")
 				else if eof then
 					return fire_fatal_error("Unexpected end of file{context}. " +
@@ -383,7 +386,7 @@ class XophonLexer
 	# Return `false`.
 	fun fire_unexpected_char(rest_of_message: String): Bool do
 		if is_xml_char then
-			return fire_fatal_error("Unexpected character `{last_char.ascii.to_s}`{rest_of_message}.")
+			return fire_fatal_error("Unexpected character `{last_char.code_point.to_s}`{rest_of_message}.")
 		else if eof then
 			return fire_fatal_error("Unexpected end of file{rest_of_message}.")
 		else

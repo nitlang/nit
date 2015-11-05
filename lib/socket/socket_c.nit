@@ -87,13 +87,13 @@ end
 private extern class NativeSocketPollFD `{ struct pollfd * `}
 
 	# File descriptor
-	fun fd: Int `{ return recv->fd; `}
+	fun fd: Int `{ return self->fd; `}
 
 	# List of events to be watched
-	fun events: Int `{ return recv->events; `}
+	fun events: Int `{ return self->events; `}
 
 	# List of events received by the last poll function
-	fun revents: Int `{  return recv->revents; `}
+	fun revents: Int `{  return self->revents; `}
 
 	new (pid: Int, events: NativeSocketPollValues) `{
 		struct pollfd *poll = malloc(sizeof(struct pollfd));
@@ -115,54 +115,46 @@ extern class NativeSocket `{ int* `}
 		return d;
 	`}
 
-	fun destroy `{ free(recv); `}
+	fun destroy `{ free(self); `}
 
-	fun close: Int `{ return close(*recv); `}
+	fun close: Int `{ return close(*self); `}
 
-	fun descriptor: Int `{ return *recv; `}
-
-	fun gethostbyname(n: String): NativeSocketHostent import String.to_cstring `{ return gethostbyname(String_to_cstring(n)); `}
+	fun descriptor: Int `{ return *self; `}
 
 	fun connect(addrIn: NativeSocketAddrIn): Int `{
-		return connect(*recv, (struct sockaddr*)addrIn, sizeof(*addrIn));
+		return connect(*self, (struct sockaddr*)addrIn, sizeof(*addrIn));
 	`}
 
-	fun write(buffer: String): Int
-	import String.to_cstring, String.length `{
-		return write(*recv, (char*)String_to_cstring(buffer), String_length(buffer));
+	# Write `length` bytes from `buffer`
+	fun write(buffer: NativeString, length: Int): Int `{
+		return write(*self, buffer, length);
 	`}
 
 	# Write `value` as a single byte
-	fun write_byte(value: Int): Int `{
-		return write(*recv, &value, 1);
+	fun write_byte(value: Byte): Int `{
+		unsigned char byt = (unsigned char)value;
+		return write(*self, &byt, 1);
 	`}
 
-	fun read: String import NativeString.to_s_with_length `{
-		static char c[1024];
-		int n = read(*recv, c, 1024);
-		if(n < 0) {
-			return NativeString_to_s_with_length("",0);
-		}
-		char* ret = malloc(n + 1);
-		memcpy(ret, c, n);
-		ret[n] = '\0';
-		return NativeString_to_s_with_length(ret, n);
+	# Read `length` bytes into `buffer`, returns the number of bytes read
+	fun read(buffer: NativeString, length: Int): Int `{
+		return read(*self, buffer, length);
 	`}
 
 	# Sets an option for the socket
 	#
 	# Returns `true` on success.
 	fun setsockopt(level: NativeSocketOptLevels, option_name: NativeSocketOptNames, option_value: Int): Bool `{
-		int err = setsockopt(*recv, level, option_name, &option_value, sizeof(int));
+		int err = setsockopt(*self, level, option_name, &option_value, sizeof(int));
 		if(err != 0){
 			return 0;
 		}
 		return 1;
 	`}
 
-	fun bind(addrIn: NativeSocketAddrIn): Int `{ return bind(*recv, (struct sockaddr*)addrIn, sizeof(*addrIn)); `}
+	fun bind(addrIn: NativeSocketAddrIn): Int `{ return bind(*self, (struct sockaddr*)addrIn, sizeof(*addrIn)); `}
 
-	fun listen(size: Int): Int `{ return listen(*recv, size); `}
+	fun listen(size: Int): Int `{ return listen(*self, size); `}
 
 	# Checks if the buffer is ready for any event specified when creating the pollfd structure
 	fun socket_poll(filedesc: PollFD, timeout: Int): Array[NativeSocketPollValues]
@@ -171,6 +163,15 @@ extern class NativeSocket `{ int* `}
 		assert result != -1
 		return filedesc.check_response(result)
 	end
+
+	# Poll this socket with `POLLHUP|POLLERR`
+	#
+	# A return value of 0 means there is no errors.
+	fun poll_hup_err: Int `{
+		struct pollfd fd = {*self, POLLHUP|POLLERR, 0};
+		int res = poll(&fd, 1, 0);
+		return res;
+	`}
 
 	# Call to the poll function of the C socket
 	#
@@ -194,7 +195,7 @@ extern class NativeSocket `{ int* `}
 
 	private fun native_accept(addr_in: NativeSocketAddrIn): NativeSocket `{
 		socklen_t s = sizeof(struct sockaddr);
-		int socket = accept(*recv, (struct sockaddr*)addr_in, &s);
+		int socket = accept(*self, (struct sockaddr*)addr_in, &s);
 		if (socket == -1) return NULL;
 
 		int *ptr = malloc(sizeof(int));
@@ -210,9 +211,9 @@ extern class NativeSocket `{ int* `}
 		return new SocketAcceptResult(s, addrIn)
 	end
 
-	# Set wether this socket is non blocking
+	# Set whether this socket is non blocking
 	fun non_blocking=(value: Bool) `{
-		int flags = fcntl(*recv, F_GETFL, 0);
+		int flags = fcntl(*self, F_GETFL, 0);
 		if (flags == -1) flags = 0;
 
 		if (value) {
@@ -222,7 +223,23 @@ extern class NativeSocket `{ int* `}
 		} else {
 			return;
 		}
-		fcntl(*recv, F_SETFL, flags);
+		fcntl(*self, F_SETFL, flags);
+	`}
+
+	# Send `len` bytes from `buf` to `dest_addr`
+	fun sendto(buf: NativeString, len: Int, flags: Int, dest_addr: NativeSocketAddrIn): Int `{
+		return sendto(*self, buf, len, flags, (struct sockaddr*)dest_addr, sizeof(struct sockaddr_in));
+	`}
+
+	# Receive a message into `buf` of maximum `len` bytes
+	fun recv(buf: NativeString, len: Int, flags: Int): Int `{
+		return recv(*self, buf, len, flags);
+	`}
+
+	# Receive a message into `buf` of maximum `len` bytes and store sender info into `src_addr`
+	fun recvfrom(buf: NativeString, len: Int, flags: Int, src_addr: NativeSocketAddrIn): Int `{
+		socklen_t srclen = sizeof(struct sockaddr_in);
+		return recvfrom(*self, buf, len, flags, (struct sockaddr*)src_addr, &srclen);
 	`}
 end
 
@@ -236,64 +253,76 @@ class SocketAcceptResult
 	var addr_in: NativeSocketAddrIn
 end
 
+# Socket address in the Internet namespace, pointer to a `struct sockaddr_in`
 extern class NativeSocketAddrIn `{ struct sockaddr_in* `}
+
+	# `NULL` pointer
+	new nul `{ return NULL; `}
+
+	# `malloc` a new instance
 	new `{
 		struct sockaddr_in *sai = NULL;
 		sai = malloc(sizeof(struct sockaddr_in));
 		return sai;
 	`}
 
-	new with_port(port: Int, family: NativeSocketAddressFamilies) `{
-		struct sockaddr_in *sai = NULL;
-		sai = malloc(sizeof(struct sockaddr_in));
-		sai->sin_family = family;
-		sai->sin_port = htons(port);
-		sai->sin_addr.s_addr = INADDR_ANY;
-		return sai;
+	# Set `address` and `family` from `hostent` (to use with `Sys::gethostbyname`)
+	fun fill_from_hostent(hostent: NativeSocketHostent) `{
+		self->sin_family = hostent->h_addrtype;
+		memcpy((char*)&self->sin_addr.s_addr,
+		       (char*)hostent->h_addr,
+			   hostent->h_length);
 	`}
 
-	new with_hostent(hostent: NativeSocketHostent, port: Int) `{
-		struct sockaddr_in *sai = NULL;
-		sai = malloc(sizeof(struct sockaddr_in));
-		sai->sin_family = hostent->h_addrtype;
-		sai->sin_port = htons(port);
-		memcpy((char*)&sai->sin_addr.s_addr, (char*)hostent->h_addr, hostent->h_length);
-		return sai;
-	`}
+	# Internet address as then IPV4 numbers-and-dots notation
+	fun address: NativeString `{ return (char*)inet_ntoa(self->sin_addr); `}
 
-	fun address: String import NativeString.to_s `{ return NativeString_to_s((char*)inet_ntoa(recv->sin_addr)); `}
+	# Set `address` to `INADDR_ANY`
+	fun address_any `{ self->sin_addr.s_addr = INADDR_ANY; `}
 
-	fun family: NativeSocketAddressFamilies `{ return recv->sin_family; `}
+	# Set `address` to `INADDR_BROADCAST`
+	fun address_broadcast `{ self->sin_addr.s_addr = INADDR_BROADCAST; `}
 
-	fun port: Int `{ return ntohs(recv->sin_port); `}
+	# Address family
+	fun family: NativeSocketAddressFamilies `{ return self->sin_family; `}
 
-	fun destroy `{ free(recv); `}
+	# Address family
+	fun family=(value: NativeSocketAddressFamilies) `{ self->sin_family = value; `}
+
+	# Port
+	fun port: Int `{ return ntohs(self->sin_port); `}
+
+	# Port
+	fun port=(value: Int) `{ self->sin_port = htons(value); `}
 end
 
+# Host entry information, a pointer to a `struct hostent`
 extern class NativeSocketHostent `{ struct hostent* `}
-	private fun native_h_aliases(i: Int): String import NativeString.to_s `{ return NativeString_to_s(recv->h_aliases[i]); `}
+	private fun native_h_aliases(i: Int): NativeString `{
+		return self->h_aliases[i];
+	`}
 
-	private fun native_h_aliases_reachable(i: Int): Bool `{ return (recv->h_aliases[i] != NULL); `}
-
+	# Alternative names for the host
 	fun h_aliases: Array[String]
 	do
-		var i=0
-		var d=new Array[String]
+		var res = new Array[String]
 		loop
-			d.add(native_h_aliases(i))
-			if native_h_aliases_reachable(i+1) == false then break
-			i += 1
+			var ha = native_h_aliases(res.length)
+			if ha.address_is_null then break
+			res.add ha.to_s
 		end
-		return d
+		return res
 	end
 
-	fun h_addr: String import NativeString.to_s `{ return NativeString_to_s((char*)inet_ntoa(*(struct in_addr*)recv->h_addr)); `}
+	fun h_addr: NativeString `{
+		return (char*)inet_ntoa(*(struct in_addr*)self->h_addr);
+	`}
 
-	fun h_addrtype: Int `{ return recv->h_addrtype; `}
+	fun h_addrtype: Int `{ return self->h_addrtype; `}
 
-	fun h_length: Int `{ return recv->h_length; `}
+	fun h_length: Int `{ return self->h_length; `}
 
-	fun h_name: String import NativeString.to_s `{ return NativeString_to_s(recv->h_name); `}
+	fun h_name: NativeString `{ return self->h_name; `}
 end
 
 extern class NativeTimeval `{ struct timeval* `}
@@ -305,11 +334,11 @@ extern class NativeTimeval `{ struct timeval* `}
 		return tv;
 	`}
 
-	fun seconds: Int `{ return recv->tv_sec; `}
+	fun seconds: Int `{ return self->tv_sec; `}
 
-	fun microseconds: Int `{ return recv->tv_usec; `}
+	fun microseconds: Int `{ return self->tv_usec; `}
 
-	fun destroy `{ free(recv); `}
+	fun destroy `{ free(self); `}
 end
 
 extern class NativeSocketSet `{ fd_set* `}
@@ -319,15 +348,15 @@ extern class NativeSocketSet `{ fd_set* `}
 		return f;
 	`}
 
-	fun set(s: NativeSocket) `{ FD_SET(*s, recv); `}
+	fun set(s: NativeSocket) `{ FD_SET(*s, self); `}
 
-	fun is_set(s: NativeSocket): Bool `{ return FD_ISSET(*s, recv); `}
+	fun is_set(s: NativeSocket): Bool `{ return FD_ISSET(*s, self); `}
 
-	fun zero `{ FD_ZERO(recv); `}
+	fun zero `{ FD_ZERO(self); `}
 
-	fun clear(s: NativeSocket) `{ FD_CLR(*s, recv); `}
+	fun clear(s: NativeSocket) `{ FD_CLR(*s, self); `}
 
-	fun destroy `{ free(recv); `}
+	fun destroy `{ free(self); `}
 end
 
 class NativeSocketObserver
@@ -335,7 +364,9 @@ class NativeSocketObserver
 	# are boxed objects, passing them to a C function is illegal.
 	fun select(max: NativeSocket, reads: nullable NativeSocketSet, write: nullable NativeSocketSet,
 			 except: nullable NativeSocketSet, timeout: NativeTimeval): Int `{
-		fd_set *rds, *wts, *exs = NULL;
+		fd_set *rds = NULL,
+		       *wts = NULL,
+		       *exs = NULL;
 		struct timeval *tm = NULL;
 		if (reads != NULL) rds = (fd_set*)reads;
 		if (write != NULL) wts = (fd_set*)write;
@@ -398,6 +429,7 @@ extern class NativeSocketProtocolFamilies `{ int `}
 	new pf_key `{ return PF_KEY; `}
 	new pf_inet6 `{ return PF_INET6; `}
 	new pf_max `{ return PF_MAX; `}
+	new ipproto_udp `{ return IPPROTO_UDP; `}
 end
 
 # Level on which to set options
@@ -480,6 +512,55 @@ extern class NativeSocketPollValues `{ int `}
 
 	# Combines two NativeSocketPollValues
 	private fun +(other: NativeSocketPollValues): NativeSocketPollValues `{
-		return recv | other;
+		return self | other;
 	`}
+end
+
+redef class Sys
+	# Get network host entry
+	fun gethostbyname(name: NativeString): NativeSocketHostent `{
+		return gethostbyname(name);
+	`}
+
+	# Last error raised by `gethostbyname`
+	fun h_errno: HErrno `{ return h_errno; `}
+end
+
+# Error code of `Sys::h_errno`
+extern class HErrno `{ int `}
+	# The specified host is unknown
+	fun host_not_found: Bool `{ return self == HOST_NOT_FOUND; `}
+
+	# The requested name is valid but does not have an IP address
+	#
+	# Same as `no_data`.
+	fun no_address: Bool `{ return self == NO_ADDRESS; `}
+
+	# The requested name is valid byt does not have an IP address
+	#
+	# Same as `no_address`.
+	fun no_data: Bool `{ return self == NO_DATA; `}
+
+	# A nonrecoverable name server error occurred
+	fun no_recovery: Bool `{ return self == NO_RECOVERY; `}
+
+	# A temporary error occurred on an authoritative name server, try again later
+	fun try_again: Bool `{ return self == TRY_AGAIN; `}
+
+	redef fun to_s
+	do
+		if host_not_found then
+			return "The specified host is unknown"
+		else if no_address then
+			return "The requested name is valid but does not have an IP address"
+		else if no_recovery then
+			return "A nonrecoverable name server error occurred"
+		else if try_again then
+			return "A temporary error occurred on an authoritative name server, try again later"
+		else
+			# This may happen if another call was made to `gethostbyname`
+			# before we fetch the error code.
+			return "Unknown error on `gethostbyname`"
+		end
+	end
 end

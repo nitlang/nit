@@ -31,7 +31,7 @@ redef fun do_work(mainmodule, given_mmodules, modelbuilder)
 do
 	print "It works"
 	var model = modelbuilder.model
-	print "I have {model.mprojects.length} projects"
+	print "I have {model.mpackages.length} packages"
 	print "I have {model.mmodules.length} modules"
 	var mclasses = mainmodule.flatten_mclass_hierarchy
 	print "I have {mclasses.length} classes"

@@ -77,7 +77,7 @@ abstract class Processor
 	var engines: Array[String] is noinit
 
 	# All known engines, used to detect errors in `engines`
-	var all_engines: Array[String] = ["nitg-s", "nitg-sg", "nitg-g", "nitg-e", "niti", "emscripten"]
+	var all_engines: Array[String] = ["nitcs", "nitcsg", "nitcg", "nitce", "niti", "emscripten"]
 
 	# Programs to test in this execution
 	var test_programs: Array[String] is noinit
@@ -149,7 +149,7 @@ abstract class Processor
 		var engines
 		if engines_str == null then
 			# default
-			engines = ["nitg-s"]
+			engines = ["nitcs"]
 		else
 			engines = engines_str.split(',')
 

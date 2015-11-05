@@ -33,3 +33,7 @@ print a4.join(",")
 # Multi-dimensional
 var a5 = [for i in c1 do [for j in c1 do i*10+j]]
 print([for i in a5 do i.join(",")].join(";"))
+
+# Multi-iteration (zip)
+var a6 = [for i in c1, j in c1.reverse_iterator do i * 10 + j]
+print a6.join(",")

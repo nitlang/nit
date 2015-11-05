@@ -33,7 +33,7 @@ fun in2(i: Float) do print "Back in Nit: in2"
 
 fun out(i: Int, f: Float): Int import in1, in2, A, A.alt, A.to_i `{
 	printf("From C, beginning out: %ld\n", i);
-	Sys_in1(recv, i);
+	Sys_in1(self, i);
 	A a = new_A();
 	A b = new_A_alt(10);
 	printf("From C, a=%ld\n", A_to_i(a));

@@ -6,5 +6,5 @@ OptionBool: false
 OptionCount: 0
 OptionString: 
 OptionInt: 0
-OptionArray: 
+OptionArray: []
 OptionEnum: 1

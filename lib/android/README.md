@@ -1,4 +1,4 @@
-The `android` module provides support for the Android platform
+Android platform support and APIs
 
 # Compilation for Android
 

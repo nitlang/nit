@@ -44,11 +44,11 @@ private class NullablesMetricsPhase
 
 		var model = toolcontext.modelbuilder.model
 		var mclasses = new HashSet[MClass]
-		for mproject in model.mprojects do
+		for mpackage in model.mpackages do
 
-			print toolcontext.format_h2("\n ## project {mproject}")
+			print toolcontext.format_h2("\n ## package {mpackage}")
 
-			for mgroup in mproject.mgroups do
+			for mgroup in mpackage.mgroups do
 				if mgroup.mmodules.is_empty then continue
 				metrics.clear
 
@@ -93,7 +93,7 @@ class CNBNA
 
 	redef fun collect(mclasses) do
 		for mclass in mclasses do
-			var all = mclass.all_mattributes(mainmodule, min_visibility)
+			var all = mclass.collect_accessible_mattributes(min_visibility)
 			for mattr in all do
 				if mattr.is_nullable then values.inc(mclass)
 			end
@@ -101,6 +101,15 @@ class CNBNA
 	end
 end
 
+redef class MAttribute
+	# Is this attribute nullable for sure?
+	#
+	# This mean that its introduction is declarred with a nullable static type
+	# since attributes are invariant this will work on most cases
+	# attributes with static type anchored with a virtual type are not "nullable for-sure"
+	# because this type can be redefined in subclasses
+	private fun is_nullable: Bool do return intro.static_mtype isa MNullableType
+end
 
 private class NullableSends
 	super Visitor
@@ -109,6 +118,7 @@ private class NullableSends
 
 	var total_sends: Int = 0
 	var nullable_sends: Int = 0
+	var nullable_eq_sends: Int = 0
 	var buggy_sends: Int = 0
 
 	# Get a new visitor on a classef to add type count in `typecount`.
@@ -130,7 +140,12 @@ private class NullableSends
 			end
 			t = t.anchor_to(self.nclassdef.mclassdef.mmodule, self.nclassdef.mclassdef.bound_mtype)
 			if t isa MNullableType then
-				self.nullable_sends += 1
+				var p = n.callsite.mproperty
+				if p.is_null_safe then
+					self.nullable_eq_sends += 1
+				else
+					self.nullable_sends += 1
+				end
 			else if t isa MClassType then
 				# Nothing
 			else
@@ -146,6 +161,7 @@ do
 	print "--- Sends on Nullable Receiver ---"
 	var total_sends = 0
 	var nullable_sends = 0
+	var nullable_eq_sends = 0
 	var buggy_sends = 0
 
 	# Visit all the source code to collect data
@@ -155,10 +171,12 @@ do
 			visitor.enter_visit(nclassdef)
 			total_sends += visitor.total_sends
 			nullable_sends += visitor.nullable_sends
+			nullable_eq_sends += visitor.nullable_eq_sends
 			buggy_sends += visitor.buggy_sends
 		end
 	end
 	print "Total number of sends: {total_sends}"
-	print "Number of sends on a nullable receiver: {nullable_sends} ({div(nullable_sends*100,total_sends)}%)"
+	print "Number of sends on a unsafe nullable receiver: {nullable_sends} ({div(nullable_sends*100,total_sends)}%)"
+	print "Number of sends on a safe nullable receiver: {nullable_eq_sends} ({div(nullable_eq_sends*100,total_sends)}%)"
 	print "Number of buggy sends (cannot determine the type of the receiver): {buggy_sends} ({div(buggy_sends*100,total_sends)}%)"
 end

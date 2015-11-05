@@ -1,4 +1,4 @@
-_app.nit_ is a framework to create cross-platform applications
+_app.nit_, a framework for portable applications
 
 The framework provides services to manage common needs of modern mobile applications:
 

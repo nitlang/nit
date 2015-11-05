@@ -6,8 +6,8 @@ val* var1 /* : Array[String] */;
 var1 = self->attrs[COLOR_nit__mdoc__MDoc___content].val; /* _content on <self:MDoc> */
 if (unlikely(var1 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _content");
-PRINT_ERROR(" (%s:%d)\n", FILE_nit__mdoc, 22);
-show_backtrace(1);
+PRINT_ERROR(" (%s:%d)\n", FILE_nit__mdoc, 23);
+fatal_exit(1);
 }
 var = var1;
 RET_LABEL:;
@@ -16,6 +16,18 @@ return var;
 /* method mdoc#MDoc#original_mentity= for (self: MDoc, nullable MEntity) */
 void nit___nit__MDoc___original_mentity_61d(val* self, val* p0) {
 self->attrs[COLOR_nit__mdoc__MDoc___original_mentity].val = p0; /* _original_mentity on <self:MDoc> */
+RET_LABEL:;
+}
+/* method mdoc#MDoc#location= for (self: MDoc, Location) */
+void nit___nit__MDoc___location_61d(val* self, val* p0) {
+self->attrs[COLOR_nit__mdoc__MDoc___location].val = p0; /* _location on <self:MDoc> */
+RET_LABEL:;
+}
+/* method mdoc#MDoc#init for (self: MDoc) */
+void nit___nit__MDoc___standard__kernel__Object__init(val* self) {
+{
+((void(*)(val* self))(self->class->vft[COLOR_nit___nit__MDoc___standard__kernel__Object__init]))(self); /* init on <self:MDoc>*/
+}
 RET_LABEL:;
 }
 /* method mdoc#MEntity#mdoc for (self: MEntity): nullable MDoc */

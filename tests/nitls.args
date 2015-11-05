@@ -3,3 +3,4 @@ base_simple3.nit project1
 -t -r base_simple3.nit project1
 -s base_simple3.nit project1
 -M base_simple3.nit base_simple_import.nit
+-td project1/module3.nit

@@ -84,7 +84,7 @@ class Message
 	# A colored version of the message including the original source line
 	fun to_color_string: String
 	do
-		var esc = 27.ascii
+		var esc = 27.code_point
 		#var red = "{esc}[0;31m"
 		#var bred = "{esc}[1;31m"
 		#var green = "{esc}[0;32m"
@@ -333,7 +333,7 @@ class ToolContext
 	var option_context = new OptionContext
 
 	# Option --warn
-	var opt_warn = new OptionCount("Show more warnings", "-W", "--warn")
+	var opt_warn = new OptionCount("Show additional warnings (advices)", "-W", "--warn")
 
 	# Option --warning
 	var opt_warning = new OptionArray("Show/hide a specific warning", "-w", "--warning")
@@ -360,10 +360,10 @@ class ToolContext
 	var opt_set_dummy_tool = new OptionBool("Set toolname and version to DUMMY. Useful for testing", "--set-dummy-tool")
 
 	# Option --verbose
-	var opt_verbose = new OptionCount("Verbose", "-v", "--verbose")
+	var opt_verbose = new OptionCount("Additional messages from the tool", "-v", "--verbose")
 
 	# Option --stop-on-first-error
-	var opt_stop_on_first_error = new OptionBool("Stop on first error", "--stop-on-first-error")
+	var opt_stop_on_first_error = new OptionBool("Just display the first encountered error then stop", "--stop-on-first-error")
 
 	# Option --keep-going
 	var opt_keep_going = new OptionBool("Continue after errors, whatever the consequences", "--keep-going")
@@ -440,26 +440,23 @@ class ToolContext
 
 		if opt_stub_man.value then
 			print """
-% {{{toolname.to_upper}}}(1)
-
 # NAME
 
 {{{tooldescription.split("\n")[1]}}}
 
 # SYNOPSYS
 
-{{{toolname}}} [*options*]...
-
 # OPTIONS
 """
 			for o in option_context.options do
 				var first = true
+				printn "### "
 				for n in o.names do
 					if first then first = false else printn ", "
 					printn "`{n}`"
 				end
 				print ""
-				print ":   {o.helptext}"
+				print "{o.helptext}."
 				print ""
 			end
 			print """
@@ -469,7 +466,7 @@ The Nit language documentation and the source code of its tools and libraries ma
 			exit 0
 		end
 
-		var errors = option_context.get_errors
+		var errors = option_context.errors
 		if not errors.is_empty then
 			for e in errors do print "Error: {e}"
 			print tooldescription
@@ -515,10 +512,10 @@ The Nit language documentation and the source code of its tools and libraries ma
 		if opt_set_dummy_tool.value then
 			return "DUMMY_TOOL"
 		end
-		return sys.program_name.basename("")
+		return sys.program_name.basename
 	end
 
-	# The identified root directory of the Nit project
+	# The identified root directory of the Nit package
 	var nit_dir: String is noinit
 
 	private fun compute_nit_dir: String
@@ -574,16 +571,18 @@ end
 #
 # On some Linux systems `bash_completion` allow the program to control command line behaviour.
 #
-#	$ nitls [TAB][TAB]
-#	file1.nit              file2.nit              file3.nit
+# ~~~sh
+# $ nitls [TAB][TAB]
+# file1.nit              file2.nit              file3.nit
 #
-#	$ nitls --[TAB][TAB]
-#	--bash-toolname        --keep                 --path                 --tree
-#	--depends              --log                  --project              --verbose
-#	--disable-phase        --log-dir              --quiet                --version
-#	--gen-bash-completion  --no-color             --recursive            --warn
-#	--help                 --only-metamodel       --source
-#	--ignore-visibility    --only-parse           --stop-on-first-error
+# $ nitls --[TAB][TAB]
+# --bash-toolname        --keep                 --path                 --tree
+# --depends              --log                  --package              --verbose
+# --disable-phase        --log-dir              --quiet                --version
+# --gen-bash-completion  --no-color             --recursive            --warn
+# --help                 --only-metamodel       --source
+# --ignore-visibility    --only-parse           --stop-on-first-error
+# ~~~
 #
 # Generated file can be placed in system bash_completion directory `/etc/bash_completion.d/`
 # or source it in `~/.bash_completion`.

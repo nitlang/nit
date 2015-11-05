@@ -14,17 +14,50 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Draws an arithmetic operation to the terminal
+# Sample program which draws an arithmetic operation to the terminal
+#
+# Output (and input) example:
+# ~~~nitish
+# Left operand: 23
+# Right operand: 15
+# Operator (+, -, *, /, %): +
+# Char to display: #
+# Size of text: 5
+# Space between digits: 1
+#       ##### #####
+#           #     #
+#       ##### #####
+#       #         #
+#       ##### #####
+#
+#         #   #####
+#   +    ##   #
+# +++++   #   #####
+#   +     #       #
+#       ##### #####
+#
+# __________________
+#
+#       ##### #####
+#           # #   #
+#       ##### #####
+#           # #   #
+#       ##### #####
+# ~~~
 module draw_operation
+
+`{
+	#include <math.h>
+`}
 
 redef enum Int
 	fun n_chars: Int `{
 		int c;
-		if ( abs(recv) >= 10 )
-			c = 1+(int)log10f( (float)abs(recv) );
+		if ( abs(self) >= 10 )
+			c = 1+(int)log10f( (float)abs(self) );
 		else
 			c = 1;
-		if ( recv < 0 ) c ++;
+		if ( self < 0 ) c ++;
 		return c;
 	`}
 end

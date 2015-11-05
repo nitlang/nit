@@ -8,6 +8,10 @@ android:
 	mkdir -p bin
 	../../bin/nitc -o bin/shoot.apk src/shoot_android.nit
 
+android-release:
+	mkdir -p bin
+	../../bin/nitc -o bin/shoot.apk src/shoot_android.nit --release
+
 null:
 	mkdir -p bin
 	../../bin/nitc -o bin/shoot_null src/shoot_null.nit

@@ -246,8 +246,7 @@ class GlobalCompiler
 		var res = v.new_var(mtype)
 		res.is_exact = true
 		if is_native_array then
-			var mtype_elt = mtype.arguments.first
-			v.add("{res} = nit_alloc(sizeof(struct {mtype.c_name}) + length*sizeof({mtype_elt.ctype}));")
+			v.add("{res} = nit_alloc(sizeof(struct {mtype.c_name}) + length*sizeof(val*));")
 			v.add("((struct {mtype.c_name}*){res})->length = length;")
 		else
 			v.add("{res} = nit_alloc(sizeof(struct {mtype.c_name}));")
@@ -404,6 +403,7 @@ class GlobalCompilerVisitor
 	do
 		var ret_type = mmodule.native_array_type(elttype)
 		ret_type = anchor(ret_type).as(MClassType)
+		length = autobox(length, compiler.mainmodule.int_type)
 		return self.new_expr("NEW_{ret_type.c_name}({length})", ret_type)
 	end
 

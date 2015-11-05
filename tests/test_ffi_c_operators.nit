@@ -20,100 +20,100 @@ class A
 	init(value: Int) do self.value = value
 
 	fun +(other: A): A import value, A `{
-		int s = A_value( recv );
+		int s = A_value( self );
 		int o = A_value( other );
 
 		return new_A( s + o );
 	`}
 
 	fun +: A import value, A `{
-		int s = A_value(recv);
+		int s = A_value(self);
 		return new_A(+s);
 	`}
 
 	fun -(other: A): A import value, A `{
-		int s = A_value( recv );
+		int s = A_value( self );
 		int o = A_value( other );
 
 		return new_A( s - o );
 	`}
 
 	fun -: A import value, A `{
-		int s = A_value(recv);
+		int s = A_value(self);
 		return new_A(-s);
 	`}
 
 	fun *(by: Int): A import value, A `{
-		int s = A_value( recv );
+		int s = A_value( self );
 
 		return new_A( s * by );
 	`}
 
 	fun /(by: Int): A import value, A `{
-		int s = A_value( recv );
+		int s = A_value( self );
 
 		return new_A( s / by );
 	`}
 
 	redef fun ==(other) import value, nullable Object.as(A) `{
 		if ( nullable_Object_is_a_A( other ) &&
-			 A_value( nullable_Object_as_A(other) ) == A_value( recv ) )
+			 A_value( nullable_Object_as_A(other) ) == A_value( self ) )
 			return 1;
 		else
 			return 0;
 	`}
 
 	fun %(other: A): A import value, A `{
-		return new_A( A_value( recv ) % A_value( other ) );
+		return new_A( A_value( self ) % A_value( other ) );
 	`}
 
 	fun <=>(other: A): A import value, A `{
-		return new_A( A_value( recv )* 1024 );
+		return new_A( A_value( self )* 1024 );
 	`}
 
 	fun >(other: A): Bool import value `{
-		return A_value( recv ) > A_value( other );
+		return A_value( self ) > A_value( other );
 	`}
 
 	fun <(other: A): Bool import value `{
-		return A_value( recv ) < A_value( other );
+		return A_value( self ) < A_value( other );
 	`}
 
 	fun >=(other: A): Bool import value `{
-		return A_value( recv ) >= A_value( other );
+		return A_value( self ) >= A_value( other );
 	`}
 
 	fun <=(other: A): Bool import value `{
-		return A_value( recv ) <= A_value( other );
+		return A_value( self ) <= A_value( other );
 	`}
 
 	fun >>(other: A): A import value, value=, A `{
-		int new_val = A_value( recv ) >> A_value( other );
+		int new_val = A_value( self ) >> A_value( other );
 		return new_A(new_val);
 	`}
 
 	fun <<(other: A): A import value, A `{
-		int new_val = A_value( recv ) << A_value( other );
+		int new_val = A_value( self ) << A_value( other );
 		return new_A(new_val);
 	`}
 
 	fun |(other: A): A import value, A `{
-		int new_val = A_value( recv ) | A_value( other );
+		int new_val = A_value( self ) | A_value( other );
 		return new_A(new_val);
 	`}
 
 	fun ^(other: A): A import value, A `{
-		int new_val = A_value( recv ) ^ A_value( other );
+		int new_val = A_value( self ) ^ A_value( other );
 		return new_A(new_val);
 	`}
 
 	fun ~: A import value, A `{
-		int new_val = ~A_value( recv );
+		int new_val = ~A_value( self );
 		return new_A(new_val);
 	`}
 
 	fun &(other: A): A import value, A `{
-		int new_val = A_value( recv ) & A_value( other );
+		int new_val = A_value( self ) & A_value( other );
 		return new_A(new_val);
 	`}
 

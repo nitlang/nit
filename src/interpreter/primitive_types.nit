@@ -14,8 +14,8 @@
 # underlying implementation and that the services are semantically correct.
 module primitive_types
 
-intrude import standard::file
-intrude import standard::string
+intrude import core::file
+intrude import core::text::flat
 
 # Wrapper for `NativeFile`
 class PrimitiveNativeFile
@@ -23,23 +23,23 @@ class PrimitiveNativeFile
 	var file: Stream
 
 	init native_stdin do
-		file = sys.stdin
+		init(sys.stdin)
 	end
 
 	init native_stdout do
-		file = sys.stdout
+		init(sys.stdout)
 	end
 
 	init native_stderr do
-		file = sys.stderr
+		init(sys.stderr)
 	end
 
 	init io_open_read(path: String) do
-		file = new FileReader.open(path.to_s)
+		init(new FileReader.open(path.to_s))
 	end
 
 	init io_open_write(path: String) do
-		file = new FileWriter.open(path.to_s)
+		init(new FileWriter.open(path.to_s))
 	end
 
 	fun address_is_null: Bool do
@@ -54,9 +54,9 @@ class PrimitiveNativeFile
 		return str.length
 	end
 
-	fun io_write(buf: NativeString, len: Int): Int do
-		if file isa FileStream then return file.as(FileStream)._file.io_write(buf, len)
-		file.as(Writer).write(buf.to_s_with_length(len))
+	fun io_write(buf: NativeString, from, len: Int): Int do
+		if file isa FileStream then return file.as(FileStream)._file.io_write(buf, from, len)
+		file.as(Writer).write(buf.to_s_with_length(len).substring_from(from))
 		return len
 	end
 

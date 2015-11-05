@@ -1,0 +1,4 @@
+Text: All your base are belong to us
+Key : CRYPTONIT
+Code: CCJNHIEJTUVYGXPRTHPXRDNG
+Back: ALLYOURBASEAREBELONGTOUS

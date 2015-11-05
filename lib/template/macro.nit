@@ -30,9 +30,9 @@ import template
 # A macro is represented as a string identifier like `%MACRO%` in the template
 # string. Using `TemplateString`, macros can be replaced by any `Writable` data:
 #
-#    var tpl = new TemplateString("Hello %NAME%!")
-#    tpl.replace("NAME", "Dave")
-#    assert tpl.write_to_string == "Hello Dave!"
+#     var tpl = new TemplateString("Hello %NAME%!")
+#     tpl.replace("NAME", "Dave")
+#     assert tpl.write_to_string == "Hello Dave!"
 #
 # A macro identifier is valid if:
 #
@@ -62,12 +62,12 @@ import template
 #
 # Loading the template file using `TemplateString`:
 #
-#    var file = "example.tpl"
-#    if file.file_exists then
-#        tpl = new TemplateString.from_file("example.tpl")
-#        tpl.replace("TITLE", "Home Page")
-#        tpl.replace("ARTICLE", "Welcome on my site!")
-#    end
+#     var file = "example.tpl"
+#     if file.file_exists then
+#         tpl = new TemplateString.from_file("example.tpl")
+#         tpl.replace("TITLE", "Home Page")
+#         tpl.replace("ARTICLE", "Welcome on my site!")
+#     end
 #
 # ## Outputting
 #
@@ -75,32 +75,32 @@ import template
 # output like any other `Template` using methods like `write_to`, `write_to_string`
 # or `write_to_file`.
 #
-#    tpl = new TemplateString("Hello %NAME%!")
-#    tpl.replace("NAME", "Dave")
-#    assert tpl.write_to_string == "Hello Dave!"
+#     tpl = new TemplateString("Hello %NAME%!")
+#     tpl.replace("NAME", "Dave")
+#     assert tpl.write_to_string == "Hello Dave!"
 #
 # ## Template correctness
 #
 # `TemplateString` can be outputed even if all macros were not replaced.
 # In this case, the name of the macro will be displayed wuthout any replacement.
 #
-#    tpl = new TemplateString("Hello %NAME%!")
-#    assert tpl.write_to_string == "Hello %NAME%!"
+#     tpl = new TemplateString("Hello %NAME%!")
+#     assert tpl.write_to_string == "Hello %NAME%!"
 #
 # The `check` method can be used to ensure that all macros were replaced before
 # performing the output. Warning messages will be stored in `warnings` and can
 # be used to locate unreplaced macros.
 #
-#    tpl = new TemplateString("Hello %NAME%!")
-#    if not tpl.check then
-#        assert not tpl.warnings.is_empty
-#        print "Cannot output unfinished template:"
-#        print tpl.warnings.join("\n")
-#        exit(0)
-#    else
-#        tpl.write_to sys.stdout
-#    end
-#    assert tpl.write_to_string == "Hello %NAME%!"
+#     tpl = new TemplateString("Hello %NAME%!")
+#     if not tpl.check then
+#         assert not tpl.warnings.is_empty
+#         print "Cannot output unfinished template:"
+#         print tpl.warnings.join("\n")
+#         exit(0)
+#     else
+#         tpl.write_to sys.stdout
+#     end
+#     assert tpl.write_to_string == "Hello %NAME%!"
 class TemplateString
 	super Template
 
@@ -114,19 +114,19 @@ class TemplateString
 	#
 	# To use a different delimiter you can subclasse `TemplateString` and defined the `marker`.
 	#
-	#    class DollarTemplate
-	#        super TemplateString
-	#        redef var marker = '$'
-	#    end
-	#    var tpl = new DollarTemplate("Hello $NAME$!")
-	#    tpl.replace("NAME", "Dave")
-	#    assert tpl.write_to_string == "Hello Dave!"
+	#     class DollarTemplate
+	#         super TemplateString
+	#         redef var marker = '$'
+	#     end
+	#     var tpl = new DollarTemplate("Hello $NAME$!")
+	#     tpl.replace("NAME", "Dave")
+	#     assert tpl.write_to_string == "Hello Dave!"
 	protected var marker = '%'
 
 	# Creates a new template from a `text`.
 	#
-	#    var tpl = new TemplateString("Hello %NAME%!")
-	#    assert tpl.write_to_string == "Hello %NAME%!"
+	#     var tpl = new TemplateString("Hello %NAME%!")
+	#     assert tpl.write_to_string == "Hello %NAME%!"
 	init(text: String) do
 		self.tpl_text = text
 		parse
@@ -199,23 +199,23 @@ class TemplateString
 
 	# Available macros in `self`.
 	#
-	#    var tpl = new TemplateString("Hello %NAME%!")
-	#    assert tpl.macro_names.first == "NAME"
+	#     var tpl = new TemplateString("Hello %NAME%!")
+	#     assert tpl.macro_names.first == "NAME"
 	fun macro_names: Collection[String] do return macros.keys
 
 	# Does `self` contain a macro with `name`.
 	#
-	#    var tpl = new TemplateString("Hello %NAME%")
-	#    assert tpl.has_macro("NAME")
+	#     var tpl = new TemplateString("Hello %NAME%")
+	#     assert tpl.has_macro("NAME")
 	fun has_macro(name: String): Bool do return macro_names.has(name)
 
 	# Replace a `macro` by a streamable `replacement`.
 	#
 	# REQUIRE `has_macro(name)`
 	#
-	#    var tpl = new TemplateString("Hello %NAME%!")
-	#    tpl.replace("NAME", "Dave")
-	#    assert tpl.write_to_string == "Hello Dave!"
+	#     var tpl = new TemplateString("Hello %NAME%!")
+	#     tpl.replace("NAME", "Dave")
+	#     assert tpl.write_to_string == "Hello Dave!"
 	fun replace(name: String, replacement: Writable) do
 		assert has_macro(name)
 		for macro in macros[name] do
@@ -227,11 +227,11 @@ class TemplateString
 	#
 	# Return false if a macro was not replaced and store message in `warnings`.
 	#
-	#    var tpl = new TemplateString("Hello %FIRSTNAME%, %LASTNAME%!")
-	#    assert not tpl.check
-	#    tpl.replace("FIRSTNAME", "Corben")
-	#    tpl.replace("LASTNAME", "Dallas")
-	#    assert tpl.check
+	#     var tpl = new TemplateString("Hello %FIRSTNAME%, %LASTNAME%!")
+	#     assert not tpl.check
+	#     tpl.replace("FIRSTNAME", "Corben")
+	#     tpl.replace("LASTNAME", "Dallas")
+	#     assert tpl.check
 	fun check: Bool do
 		warnings.clear
 		var all_ok = true
@@ -248,15 +248,15 @@ class TemplateString
 
 	# Last `check` warnings.
 	#
-	#    var tpl = new TemplateString("Hello %FIRSTNAME%, %LASTNAME%!")
-	#    tpl.check
-	#    assert tpl.warnings.length == 2
-	#    assert tpl.warnings[0] == "No replacement for macro %FIRSTNAME% at (6:16)"
-	#    assert tpl.warnings[1] == "No replacement for macro %LASTNAME% at (19:28)"
-	#    tpl.replace("FIRSTNAME", "Corben")
-	#    tpl.replace("LASTNAME", "Dallas")
-	#    tpl.check
-	#    assert tpl.warnings.is_empty
+	#     var tpl = new TemplateString("Hello %FIRSTNAME%, %LASTNAME%!")
+	#     tpl.check
+	#     assert tpl.warnings.length == 2
+	#     assert tpl.warnings[0] == "No replacement for macro %FIRSTNAME% at (6:16)"
+	#     assert tpl.warnings[1] == "No replacement for macro %LASTNAME% at (19:28)"
+	#     tpl.replace("FIRSTNAME", "Corben")
+	#     tpl.replace("LASTNAME", "Dallas")
+	#     tpl.check
+	#     assert tpl.warnings.is_empty
 	var warnings = new Array[String]
 
 	# Returns a view on `self` macros on the form `macro.name`/`macro.replacement`.
@@ -264,11 +264,11 @@ class TemplateString
 	# Given that all macros with the same name are all replaced with the same
 	# replacement, this view contains only one entry for each name.
 	#
-	#    var tpl = new TemplateString("Hello %FIRSTNAME%, %LASTNAME%!")
-	#    for name, rep in tpl do assert rep == null
-	#    tpl.replace("FIRSTNAME", "Corben")
-	#    tpl.replace("LASTNAME", "Dallas")
-	#    for name, rep in tpl do assert rep != null
+	#     var tpl = new TemplateString("Hello %FIRSTNAME%, %LASTNAME%!")
+	#     for name, rep in tpl do assert rep == null
+	#     tpl.replace("FIRSTNAME", "Corben")
+	#     tpl.replace("LASTNAME", "Dallas")
+	#     for name, rep in tpl do assert rep != null
 	fun iterator: MapIterator[String, nullable Writable] do
 		return new TemplateStringIterator(self)
 	end
@@ -341,15 +341,15 @@ redef class String
 	# * starts with an uppercase letter
 	# * contains only numers, uppercase letters or '_'
 	#
-	#    # valid
-	#    assert "NAME".is_valid_macro_name
-	#    assert "FIRST_NAME".is_valid_macro_name
-	#    assert "BLOCK1".is_valid_macro_name
-	#    # invalid
-	#    assert not "1BLOCK".is_valid_macro_name
-	#    assert not "_BLOCK".is_valid_macro_name
-	#    assert not "FIRST NAME".is_valid_macro_name
-	#    assert not "name".is_valid_macro_name
+	#     # valid
+	#     assert "NAME".is_valid_macro_name
+	#     assert "FIRST_NAME".is_valid_macro_name
+	#     assert "BLOCK1".is_valid_macro_name
+	#     # invalid
+	#     assert not "1BLOCK".is_valid_macro_name
+	#     assert not "_BLOCK".is_valid_macro_name
+	#     assert not "FIRST NAME".is_valid_macro_name
+	#     assert not "name".is_valid_macro_name
 	fun is_valid_macro_name: Bool do
 		if not first.is_upper then return false
 		for c in self do

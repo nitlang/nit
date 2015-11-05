@@ -72,7 +72,7 @@ var long_lived_tree = bottom_up_tree(0, max_depth)
 
 var depth = min_depth
 while depth <= max_depth do
-	var iterations = 1.lshift(max_depth - depth + min_depth)
+	var iterations = 1 << (max_depth - depth + min_depth)
 	var check_res = 0
 
 	for i in [1..(iterations+1)[ do

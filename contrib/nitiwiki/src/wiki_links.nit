@@ -16,7 +16,7 @@
 module wiki_links
 
 import wiki_base
-intrude import markdown
+import markdown::wikilinks
 
 redef class Nitiwiki
 	# Looks up a WikiEntry by its `name`.
@@ -29,7 +29,7 @@ redef class Nitiwiki
 	#
 	# Returns `null` if no article can be found.
 	fun lookup_entry_by_name(context: WikiEntry, name: String): nullable WikiEntry do
-		var section = context.parent
+		var section: nullable WikiEntry = context.parent or else context
 		var res = section.lookup_entry_by_name(name)
 		if res != null then return res
 		while section != null do
@@ -50,13 +50,13 @@ redef class Nitiwiki
 	#
 	# Returns `null` if no article can be found.
 	fun lookup_entry_by_title(context: WikiEntry, title: String): nullable WikiEntry do
-		var section = context.parent
+		var section: nullable WikiEntry = context.parent or else context
 		var res = section.lookup_entry_by_title(title)
 		if res != null then return res
 		while section != null do
-			if section.title == title then return section
+			if section.title.to_lower == title.to_lower then return section
 			for child in section.children.values do
-				if child.title == title then return child
+				if child.title.to_lower == title.to_lower then return child
 			end
 			section = section.parent
 		end
@@ -70,7 +70,7 @@ redef class Nitiwiki
 	#
 	# Returns `null` if no article can be found.
 	fun lookup_entry_by_path(context: WikiEntry, path: String): nullable WikiEntry do
-		var entry = context.parent
+		var entry = context.parent or else context
 		var parts = path.split_with("/")
 		if path.has_prefix("/") then
 			entry = root_section
@@ -80,6 +80,7 @@ redef class Nitiwiki
 		while not parts.is_empty do
 			var name = parts.shift
 			if name.is_empty then continue
+			if entry.name == name then continue
 			if not entry.children.has_key(name) then return null
 			entry = entry.children[name]
 		end
@@ -89,12 +90,22 @@ end
 
 redef class WikiEntry
 
-	# Url to `self` once generated.
-	fun url: String do return wiki.config.root_url.join_path(breadcrumbs.join("/"))
+	# Relative path to `self` from the target root_url
+	fun href: String do return breadcrumbs.join("/")
+
+	# A relative `href` to `self` from the page `context`.
+	#
+	# Should be used to navigate between documents.
+	fun href_from(context: WikiEntry): String
+	do
+		var res = context.href.dirname.relpath(href)
+		return res
+	end
 
 	redef fun render do
 		super
 		if not is_dirty and not wiki.force_render then return
+		render_sidebar_wikilinks
 	end
 
 	# Search in `self` then `self.children` if an entry has the name `name`.
@@ -110,13 +121,26 @@ redef class WikiEntry
 	# Search in `self` then `self.children` if an entry has the title `title`.
 	fun lookup_entry_by_title(title: String): nullable WikiEntry do
 		for child in children.values do
-			if child.title == title then return child
+			if child.title.to_lower == title.to_lower then return child
 		end
 		for child in children.values do
 			var res = child.lookup_entry_by_title(title)
 			if res != null then return res
 		end
 		return null
+	end
+
+	private var md_proc: NitiwikiMdProcessor is lazy do
+		return new NitiwikiMdProcessor(wiki, self)
+	end
+
+	# Process wikilinks from sidebar.
+	private fun render_sidebar_wikilinks do
+		var blocks = sidebar.blocks
+		for i in [0..blocks.length[ do
+			blocks[i] = md_proc.process(blocks[i].to_s).write_to_string
+			md_proc.emitter.decorator.headlines.clear
+		end
 	end
 end
 
@@ -144,18 +168,17 @@ redef class WikiArticle
 	# Checks if `self.name == "index"`.
 	fun is_index: Bool do return name == "index"
 
-	redef fun url do
+	redef fun href do
 		if parent == null then
-			return wiki.config.root_url.join_path("{name}.html")
+			return "{name}.html"
 		else
-			return parent.url.join_path("{name}.html")
+			return parent.href.join_path("{name}.html")
 		end
 	end
 
 	redef fun render do
 		super
 		if not is_dirty and not wiki.force_render or not has_source then return
-		var md_proc = new NitiwikiMdProcessor(wiki, self)
 		content = md_proc.process(md.as(not null))
 		headlines.recover_with(md_proc.emitter.decorator.headlines)
 	end
@@ -170,7 +193,7 @@ class WikiSectionIndex
 
 	redef fun title do return section.title
 
-	redef fun url do return section.url
+	redef fun href do return section.href
 end
 
 # A MarkdownProcessor able to parse wiki links.
@@ -183,62 +206,59 @@ class NitiwikiMdProcessor
 	# Article parsed by `self`.
 	#
 	# Used to contextualize links.
-	var context: WikiArticle
+	var context: WikiEntry
 
 	init do
 		emitter = new MarkdownEmitter(self)
 		emitter.decorator = new NitiwikiDecorator(wiki, context)
 	end
-
-	redef fun token_at(text, pos) do
-		var token = super
-		if not token isa TokenLink then return token
-		if pos + 1 < text.length then
-			var c = text[pos + 1]
-			if c == '[' then return new TokenWikiLink(pos, c)
-		end
-		return token
-	end
 end
 
-private class NitiwikiDecorator
+# The decorator associated to `MarkdownProcessor`.
+class NitiwikiDecorator
 	super HTMLDecorator
 
 	# Wiki used to resolve links.
 	var wiki: Nitiwiki
 
 	# Article used to contextualize links.
-	var context: WikiArticle
+	var context: WikiEntry
 
-	fun add_wikilink(v: MarkdownEmitter, link: Text, name, comment: nullable Text) do
+	redef fun add_wikilink(v, token) do
 		var wiki = v.processor.as(NitiwikiMdProcessor).wiki
 		var target: nullable WikiEntry = null
 		var anchor: nullable String = null
-		if link.has("#") then
-			var parts = link.split_with("#")
-			link = parts.first
-			anchor = parts.subarray(1, parts.length - 1).join("#")
-		end
-		if link.has("/") then
-			target = wiki.lookup_entry_by_path(context, link.to_s)
-		else
-			target = wiki.lookup_entry_by_name(context, link.to_s)
-			if target == null then
-				target = wiki.lookup_entry_by_title(context, link.to_s)
-			end
-		end
+		var link = token.link
+		if link == null then return
+		var name = token.name
 		v.add "<a "
-		if target != null then
-			if name == null then name = target.title
-			link = target.url
-		else
-			wiki.message("Warning: unknown wikilink `{link}` (in {context.src_path.as(not null)})", 0)
-			v.add "class=\"broken\" "
+		if not link.has_prefix("http://") and not link.has_prefix("https://") then
+			if link.has("#") then
+				var parts = link.split_with("#")
+				link = parts.first
+				anchor = parts.subarray(1, parts.length - 1).join("#")
+			end
+			if link.has("/") then
+				target = wiki.lookup_entry_by_path(context, link.to_s)
+			else
+				target = wiki.lookup_entry_by_name(context, link.to_s)
+				if target == null then
+					target = wiki.lookup_entry_by_title(context, link.to_s)
+				end
+			end
+			if target != null then
+				if name == null then name = target.title
+				link = target.href_from(context)
+			else
+				wiki.message("Warning: unknown wikilink `{link}` (in {context.src_path.as(not null)})", 0)
+				v.add "class=\"broken\" "
+			end
 		end
 		v.add "href=\""
 		append_value(v, link)
 		if anchor != null then append_value(v, "#{anchor}")
 		v.add "\""
+		var comment = token.comment
 		if comment != null and not comment.is_empty then
 			v.add " title=\""
 			append_value(v, comment)
@@ -248,48 +268,5 @@ private class NitiwikiDecorator
 		if name == null then name = link
 		v.emit_text(name)
 		v.add "</a>"
-	end
-end
-
-# A NitiWiki link token.
-#
-# Something of the form `[[foo]]`.
-#
-# Allowed formats:
-#
-# * `[[Wikilink]]`
-# * `[[Wikilink/Bar]]`
-# * `[[Wikilink#foo]]`
-# * `[[Wikilink/Bar#foo]]`
-# * `[[title|Wikilink]]`
-# * `[[title|Wikilink/Bar]]`
-# * `[[title|Wikilink/Bar#foo]]`
-class TokenWikiLink
-	super TokenLink
-
-	redef fun emit_hyper(v) do
-		v.decorator.as(NitiwikiDecorator).add_wikilink(v, link.as(not null), name, comment)
-	end
-
-	redef fun check_link(v, out, start, token) do
-		var md = v.current_text
-		var pos = start + 2
-		var tmp = new FlatBuffer
-		pos = md.read_md_link_id(tmp, pos)
-		if pos < start then return -1
-		var name = tmp.write_to_string
-		if name.has("|") then
-			var parts = name.split_once_on("|")
-			self.name = parts.first
-			self.link = parts[1]
-		else
-			self.name = null
-			self.link = name
-		end
-		pos += 1
-		pos = md.skip_spaces(pos)
-		if pos < start then return -1
-		pos += 1
-		return pos
 	end
 end

@@ -1,0 +1,9 @@
+public abstract class android.net.Uri implements android.os.Parcelable, java.lang.Comparable<android.net.Uri> {
+	public <T extends java/lang/Object> com.sun.jmx.mbeanserver.MXBeanSupport(T, java.lang.Class<T>) throws javax.management.NotCompliantMBeanException;
+
+	public static <T extends java/lang/Object & java/lang/Comparable<? super T>> T max(java.util.Collection<? extends T>);
+
+	public <T extends java/lang/Object> com.sun.jmx.mbeanserver.MXBeanSupport(T, java.lang.Class<T>) throws javax.management.NotCompliantMBeanException;
+
+	public strictfp double doubleValue();
+}

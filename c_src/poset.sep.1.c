@@ -5,36 +5,26 @@ val* var /* : Iterator[nullable Object] */;
 val* var1 /* : HashMap[nullable Object, POSetElement[nullable Object]] */;
 val* var3 /* : HashMap[nullable Object, POSetElement[nullable Object]] */;
 val* var4 /* : RemovableCollection[nullable Object] */;
-val* var6 /* : RemovableCollection[nullable Object] */;
-val* var7 /* : Iterator[nullable Object] */;
+val* var5 /* : Iterator[nullable Object] */;
 {
 { /* Inline poset#POSet#elements (self) on <self:POSet[nullable Object]> */
 var3 = self->attrs[COLOR_poset__POSet___elements].val; /* _elements on <self:POSet[nullable Object]> */
 if (unlikely(var3 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _elements");
 PRINT_ERROR(" (%s:%d)\n", FILE_poset, 82);
-show_backtrace(1);
+fatal_exit(1);
 }
 var1 = var3;
 RET_LABEL2:(void)0;
 }
 }
 {
-{ /* Inline hash_collection#HashMap#keys (var1) on <var1:HashMap[nullable Object, POSetElement[nullable Object]]> */
-var6 = var1->attrs[COLOR_standard__hash_collection__HashMap___keys].val; /* _keys on <var1:HashMap[nullable Object, POSetElement[nullable Object]]> */
-if (unlikely(var6 == NULL)) {
-PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _keys");
-PRINT_ERROR(" (%s:%d)\n", FILE_standard__hash_collection, 275);
-show_backtrace(1);
-}
-var4 = var6;
-RET_LABEL5:(void)0;
-}
+var4 = standard___standard__HashMap___standard__abstract_collection__MapRead__keys(var1);
 }
 {
-var7 = ((val* (*)(val* self))(var4->class->vft[COLOR_standard__abstract_collection__Collection__iterator]))(var4) /* iterator on <var4:RemovableCollection[nullable Object]>*/;
+var5 = ((val*(*)(val* self))((((long)var4&3)?class_info[((long)var4&3)]:var4->class)->vft[COLOR_standard__abstract_collection__Collection__iterator]))(var4); /* iterator on <var4:RemovableCollection[nullable Object]>*/
 }
-var = var7;
+var = var5;
 goto RET_LABEL;
 RET_LABEL:;
 return var;
@@ -47,7 +37,7 @@ var1 = self->attrs[COLOR_poset__POSet___elements].val; /* _elements on <self:POS
 if (unlikely(var1 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _elements");
 PRINT_ERROR(" (%s:%d)\n", FILE_poset, 82);
-show_backtrace(1);
+fatal_exit(1);
 }
 var = var1;
 RET_LABEL:;
@@ -56,68 +46,31 @@ return var;
 /* method poset#POSet#has for (self: POSet[nullable Object], nullable Object): Bool */
 short int poset___poset__POSet___standard__abstract_collection__Collection__has(val* self, val* p0) {
 short int var /* : Bool */;
-short int var1 /* : Bool */;
-int cltype;
-int idtype;
-const struct type* type_struct;
-short int is_nullable;
-const char* var_class_name;
 val* var_e /* var e: nullable Object */;
-val* var2 /* : HashMap[nullable Object, POSetElement[nullable Object]] */;
-val* var4 /* : HashMap[nullable Object, POSetElement[nullable Object]] */;
-val* var5 /* : RemovableCollection[nullable Object] */;
-val* var7 /* : RemovableCollection[nullable Object] */;
-short int var8 /* : Bool */;
-/* Covariant cast for argument 0 (e) <p0:nullable Object> isa E */
-/* <p0:nullable Object> isa E */
-type_struct = self->type->resolution_table->types[COLOR_poset__POSet___35dE];
-cltype = type_struct->color;
-idtype = type_struct->id;
-is_nullable = type_struct->is_nullable;
-if(p0 == NULL) {
-var1 = is_nullable;
-} else {
-if(cltype >= p0->type->table_size) {
-var1 = 0;
-} else {
-var1 = p0->type->type_table[cltype] == idtype;
-}
-}
-if (unlikely(!var1)) {
-var_class_name = p0 == NULL ? "null" : p0->type->name;
-PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "E", var_class_name);
-PRINT_ERROR(" (%s:%d)\n", FILE_poset, 85);
-show_backtrace(1);
-}
+val* var1 /* : HashMap[nullable Object, POSetElement[nullable Object]] */;
+val* var3 /* : HashMap[nullable Object, POSetElement[nullable Object]] */;
+val* var4 /* : RemovableCollection[nullable Object] */;
+short int var5 /* : Bool */;
 var_e = p0;
 {
 { /* Inline poset#POSet#elements (self) on <self:POSet[nullable Object]> */
-var4 = self->attrs[COLOR_poset__POSet___elements].val; /* _elements on <self:POSet[nullable Object]> */
-if (unlikely(var4 == NULL)) {
+var3 = self->attrs[COLOR_poset__POSet___elements].val; /* _elements on <self:POSet[nullable Object]> */
+if (unlikely(var3 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _elements");
 PRINT_ERROR(" (%s:%d)\n", FILE_poset, 82);
-show_backtrace(1);
+fatal_exit(1);
 }
-var2 = var4;
-RET_LABEL3:(void)0;
-}
-}
-{
-{ /* Inline hash_collection#HashMap#keys (var2) on <var2:HashMap[nullable Object, POSetElement[nullable Object]]> */
-var7 = var2->attrs[COLOR_standard__hash_collection__HashMap___keys].val; /* _keys on <var2:HashMap[nullable Object, POSetElement[nullable Object]]> */
-if (unlikely(var7 == NULL)) {
-PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _keys");
-PRINT_ERROR(" (%s:%d)\n", FILE_standard__hash_collection, 275);
-show_backtrace(1);
-}
-var5 = var7;
-RET_LABEL6:(void)0;
+var1 = var3;
+RET_LABEL2:(void)0;
 }
 }
 {
-var8 = ((short int (*)(val* self, val* p0))(var5->class->vft[COLOR_standard__abstract_collection__Collection__has]))(var5, var_e) /* has on <var5:RemovableCollection[nullable Object]>*/;
+var4 = standard___standard__HashMap___standard__abstract_collection__MapRead__keys(var1);
 }
-var = var8;
+{
+var5 = ((short int(*)(val* self, val* p0))((((long)var4&3)?class_info[((long)var4&3)]:var4->class)->vft[COLOR_standard__abstract_collection__Collection__has]))(var4, var_e); /* has on <var4:RemovableCollection[nullable Object]>*/
+}
+var = var5;
 goto RET_LABEL;
 RET_LABEL:;
 return var;
@@ -135,22 +88,21 @@ val* var_e /* var e: nullable Object */;
 val* var2 /* : HashMap[nullable Object, POSetElement[nullable Object]] */;
 val* var4 /* : HashMap[nullable Object, POSetElement[nullable Object]] */;
 val* var5 /* : RemovableCollection[nullable Object] */;
-val* var7 /* : RemovableCollection[nullable Object] */;
-short int var8 /* : Bool */;
+short int var6 /* : Bool */;
+val* var7 /* : HashMap[nullable Object, POSetElement[nullable Object]] */;
 val* var9 /* : HashMap[nullable Object, POSetElement[nullable Object]] */;
-val* var11 /* : HashMap[nullable Object, POSetElement[nullable Object]] */;
-val* var12 /* : nullable Object */;
-val* var13 /* : POSetElement[nullable Object] */;
+val* var10 /* : nullable Object */;
+val* var11 /* : POSetElement[nullable Object] */;
+val* var12 /* : HashMap[nullable Object, POSetElement[nullable Object]] */;
 val* var14 /* : HashMap[nullable Object, POSetElement[nullable Object]] */;
-val* var16 /* : HashMap[nullable Object, POSetElement[nullable Object]] */;
-long var17 /* : Int */;
+long var15 /* : Int */;
 val* var_poe /* var poe: POSetElement[nullable Object] */;
+val* var16 /* : HashSet[nullable Object] */;
 val* var18 /* : HashSet[nullable Object] */;
-val* var20 /* : HashSet[nullable Object] */;
+val* var19 /* : HashSet[nullable Object] */;
 val* var21 /* : HashSet[nullable Object] */;
-val* var23 /* : HashSet[nullable Object] */;
+val* var22 /* : HashMap[nullable Object, POSetElement[nullable Object]] */;
 val* var24 /* : HashMap[nullable Object, POSetElement[nullable Object]] */;
-val* var26 /* : HashMap[nullable Object, POSetElement[nullable Object]] */;
 /* Covariant cast for argument 0 (e) <p0:nullable Object> isa E */
 /* <p0:nullable Object> isa E */
 type_struct = self->type->resolution_table->types[COLOR_poset__POSet___35dE];
@@ -160,17 +112,17 @@ is_nullable = type_struct->is_nullable;
 if(p0 == NULL) {
 var1 = is_nullable;
 } else {
-if(cltype >= p0->type->table_size) {
+if(cltype >= (((long)p0&3)?type_info[((long)p0&3)]:p0->type)->table_size) {
 var1 = 0;
 } else {
-var1 = p0->type->type_table[cltype] == idtype;
+var1 = (((long)p0&3)?type_info[((long)p0&3)]:p0->type)->type_table[cltype] == idtype;
 }
 }
 if (unlikely(!var1)) {
-var_class_name = p0 == NULL ? "null" : p0->type->name;
+var_class_name = p0 == NULL ? "null" : (((long)p0&3)?type_info[((long)p0&3)]:p0->type)->name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "E", var_class_name);
 PRINT_ERROR(" (%s:%d)\n", FILE_poset, 87);
-show_backtrace(1);
+fatal_exit(1);
 }
 var_e = p0;
 {
@@ -179,120 +131,111 @@ var4 = self->attrs[COLOR_poset__POSet___elements].val; /* _elements on <self:POS
 if (unlikely(var4 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _elements");
 PRINT_ERROR(" (%s:%d)\n", FILE_poset, 82);
-show_backtrace(1);
+fatal_exit(1);
 }
 var2 = var4;
 RET_LABEL3:(void)0;
 }
 }
 {
-{ /* Inline hash_collection#HashMap#keys (var2) on <var2:HashMap[nullable Object, POSetElement[nullable Object]]> */
-var7 = var2->attrs[COLOR_standard__hash_collection__HashMap___keys].val; /* _keys on <var2:HashMap[nullable Object, POSetElement[nullable Object]]> */
-if (unlikely(var7 == NULL)) {
-PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _keys");
-PRINT_ERROR(" (%s:%d)\n", FILE_standard__hash_collection, 275);
-show_backtrace(1);
-}
-var5 = var7;
-RET_LABEL6:(void)0;
-}
+var5 = standard___standard__HashMap___standard__abstract_collection__MapRead__keys(var2);
 }
 {
-var8 = ((short int (*)(val* self, val* p0))(var5->class->vft[COLOR_standard__abstract_collection__Collection__has]))(var5, var_e) /* has on <var5:RemovableCollection[nullable Object]>*/;
+var6 = ((short int(*)(val* self, val* p0))((((long)var5&3)?class_info[((long)var5&3)]:var5->class)->vft[COLOR_standard__abstract_collection__Collection__has]))(var5, var_e); /* has on <var5:RemovableCollection[nullable Object]>*/
 }
-if (var8){
+if (var6){
 {
 { /* Inline poset#POSet#elements (self) on <self:POSet[nullable Object]> */
-var11 = self->attrs[COLOR_poset__POSet___elements].val; /* _elements on <self:POSet[nullable Object]> */
-if (unlikely(var11 == NULL)) {
+var9 = self->attrs[COLOR_poset__POSet___elements].val; /* _elements on <self:POSet[nullable Object]> */
+if (unlikely(var9 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _elements");
 PRINT_ERROR(" (%s:%d)\n", FILE_poset, 82);
-show_backtrace(1);
+fatal_exit(1);
 }
-var9 = var11;
-RET_LABEL10:(void)0;
+var7 = var9;
+RET_LABEL8:(void)0;
 }
 }
 {
-var12 = standard___standard__HashMap___standard__abstract_collection__MapRead___91d_93d(var9, var_e);
+var10 = standard___standard__HashMap___standard__abstract_collection__MapRead___91d_93d(var7, var_e);
 }
-var = var12;
+var = var10;
 goto RET_LABEL;
 } else {
 }
-var13 = NEW_poset__POSetElement(self->type->resolution_table->types[COLOR_poset__POSetElement__poset__POSet___35dE]);
+var11 = NEW_poset__POSetElement(self->type->resolution_table->types[COLOR_poset__POSetElement__poset__POSet___35dE]);
 {
 { /* Inline poset#POSet#elements (self) on <self:POSet[nullable Object]> */
-var16 = self->attrs[COLOR_poset__POSet___elements].val; /* _elements on <self:POSet[nullable Object]> */
-if (unlikely(var16 == NULL)) {
+var14 = self->attrs[COLOR_poset__POSet___elements].val; /* _elements on <self:POSet[nullable Object]> */
+if (unlikely(var14 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _elements");
 PRINT_ERROR(" (%s:%d)\n", FILE_poset, 82);
-show_backtrace(1);
+fatal_exit(1);
 }
-var14 = var16;
-RET_LABEL15:(void)0;
+var12 = var14;
+RET_LABEL13:(void)0;
 }
-}
-{
-var17 = standard___standard__HashMap___standard__abstract_collection__MapRead__length(var14);
 }
 {
-((void (*)(val* self, val* p0))(var13->class->vft[COLOR_poset__POSetElement__poset_61d]))(var13, self) /* poset= on <var13:POSetElement[nullable Object]>*/;
+var15 = standard___standard__HashMap___standard__abstract_collection__MapRead__length(var12);
 }
 {
-((void (*)(val* self, val* p0))(var13->class->vft[COLOR_poset__POSetElement__element_61d]))(var13, var_e) /* element= on <var13:POSetElement[nullable Object]>*/;
+((void(*)(val* self, val* p0))(var11->class->vft[COLOR_poset__POSetElement__poset_61d]))(var11, self); /* poset= on <var11:POSetElement[nullable Object]>*/
 }
 {
-((void (*)(val* self, long p0))(var13->class->vft[COLOR_poset__POSetElement__count_61d]))(var13, var17) /* count= on <var13:POSetElement[nullable Object]>*/;
+((void(*)(val* self, val* p0))(var11->class->vft[COLOR_poset__POSetElement__element_61d]))(var11, var_e); /* element= on <var11:POSetElement[nullable Object]>*/
 }
 {
-((void (*)(val* self))(var13->class->vft[COLOR_standard__kernel__Object__init]))(var13) /* init on <var13:POSetElement[nullable Object]>*/;
+((void(*)(val* self, long p0))(var11->class->vft[COLOR_poset__POSetElement__count_61d]))(var11, var15); /* count= on <var11:POSetElement[nullable Object]>*/
 }
-var_poe = var13;
+{
+((void(*)(val* self))(var11->class->vft[COLOR_standard__kernel__Object__init]))(var11); /* init on <var11:POSetElement[nullable Object]>*/
+}
+var_poe = var11;
 {
 { /* Inline poset#POSetElement#tos (var_poe) on <var_poe:POSetElement[nullable Object]> */
-var20 = var_poe->attrs[COLOR_poset__POSetElement___tos].val; /* _tos on <var_poe:POSetElement[nullable Object]> */
-if (unlikely(var20 == NULL)) {
+var18 = var_poe->attrs[COLOR_poset__POSetElement___tos].val; /* _tos on <var_poe:POSetElement[nullable Object]> */
+if (unlikely(var18 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _tos");
-PRINT_ERROR(" (%s:%d)\n", FILE_poset, 389);
-show_backtrace(1);
+PRINT_ERROR(" (%s:%d)\n", FILE_poset, 406);
+fatal_exit(1);
 }
-var18 = var20;
-RET_LABEL19:(void)0;
+var16 = var18;
+RET_LABEL17:(void)0;
 }
 }
 {
-standard___standard__HashSet___standard__abstract_collection__SimpleCollection__add(var18, var_e); /* Direct call hash_collection#HashSet#add on <var18:HashSet[nullable Object]>*/
+standard___standard__HashSet___standard__abstract_collection__SimpleCollection__add(var16, var_e); /* Direct call hash_collection#HashSet#add on <var16:HashSet[nullable Object]>*/
 }
 {
 { /* Inline poset#POSetElement#froms (var_poe) on <var_poe:POSetElement[nullable Object]> */
-var23 = var_poe->attrs[COLOR_poset__POSetElement___froms].val; /* _froms on <var_poe:POSetElement[nullable Object]> */
-if (unlikely(var23 == NULL)) {
+var21 = var_poe->attrs[COLOR_poset__POSetElement___froms].val; /* _froms on <var_poe:POSetElement[nullable Object]> */
+if (unlikely(var21 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _froms");
-PRINT_ERROR(" (%s:%d)\n", FILE_poset, 390);
-show_backtrace(1);
+PRINT_ERROR(" (%s:%d)\n", FILE_poset, 407);
+fatal_exit(1);
 }
-var21 = var23;
-RET_LABEL22:(void)0;
+var19 = var21;
+RET_LABEL20:(void)0;
 }
 }
 {
-standard___standard__HashSet___standard__abstract_collection__SimpleCollection__add(var21, var_e); /* Direct call hash_collection#HashSet#add on <var21:HashSet[nullable Object]>*/
+standard___standard__HashSet___standard__abstract_collection__SimpleCollection__add(var19, var_e); /* Direct call hash_collection#HashSet#add on <var19:HashSet[nullable Object]>*/
 }
 {
 { /* Inline poset#POSet#elements (self) on <self:POSet[nullable Object]> */
-var26 = self->attrs[COLOR_poset__POSet___elements].val; /* _elements on <self:POSet[nullable Object]> */
-if (unlikely(var26 == NULL)) {
+var24 = self->attrs[COLOR_poset__POSet___elements].val; /* _elements on <self:POSet[nullable Object]> */
+if (unlikely(var24 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _elements");
 PRINT_ERROR(" (%s:%d)\n", FILE_poset, 82);
-show_backtrace(1);
+fatal_exit(1);
 }
-var24 = var26;
-RET_LABEL25:(void)0;
+var22 = var24;
+RET_LABEL23:(void)0;
 }
 }
 {
-standard___standard__HashMap___standard__abstract_collection__Map___91d_93d_61d(var24, var_e, var_poe); /* Direct call hash_collection#HashMap#[]= on <var24:HashMap[nullable Object, POSetElement[nullable Object]]>*/
+standard___standard__HashMap___standard__abstract_collection__Map___91d_93d_61d(var22, var_e, var_poe); /* Direct call hash_collection#HashMap#[]= on <var22:HashMap[nullable Object, POSetElement[nullable Object]]>*/
 }
 var = var_poe;
 goto RET_LABEL;
@@ -312,11 +255,10 @@ val* var_e /* var e: nullable Object */;
 val* var2 /* : HashMap[nullable Object, POSetElement[nullable Object]] */;
 val* var4 /* : HashMap[nullable Object, POSetElement[nullable Object]] */;
 val* var5 /* : RemovableCollection[nullable Object] */;
-val* var7 /* : RemovableCollection[nullable Object] */;
-short int var8 /* : Bool */;
+short int var6 /* : Bool */;
+val* var7 /* : HashMap[nullable Object, POSetElement[nullable Object]] */;
 val* var9 /* : HashMap[nullable Object, POSetElement[nullable Object]] */;
-val* var11 /* : HashMap[nullable Object, POSetElement[nullable Object]] */;
-val* var12 /* : nullable Object */;
+val* var10 /* : nullable Object */;
 /* Covariant cast for argument 0 (e) <p0:nullable Object> isa E */
 /* <p0:nullable Object> isa E */
 type_struct = self->type->resolution_table->types[COLOR_poset__POSet___35dE];
@@ -326,17 +268,17 @@ is_nullable = type_struct->is_nullable;
 if(p0 == NULL) {
 var1 = is_nullable;
 } else {
-if(cltype >= p0->type->table_size) {
+if(cltype >= (((long)p0&3)?type_info[((long)p0&3)]:p0->type)->table_size) {
 var1 = 0;
 } else {
-var1 = p0->type->type_table[cltype] == idtype;
+var1 = (((long)p0&3)?type_info[((long)p0&3)]:p0->type)->type_table[cltype] == idtype;
 }
 }
 if (unlikely(!var1)) {
-var_class_name = p0 == NULL ? "null" : p0->type->name;
+var_class_name = p0 == NULL ? "null" : (((long)p0&3)?type_info[((long)p0&3)]:p0->type)->name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "E", var_class_name);
 PRINT_ERROR(" (%s:%d)\n", FILE_poset, 101);
-show_backtrace(1);
+fatal_exit(1);
 }
 var_e = p0;
 {
@@ -345,48 +287,39 @@ var4 = self->attrs[COLOR_poset__POSet___elements].val; /* _elements on <self:POS
 if (unlikely(var4 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _elements");
 PRINT_ERROR(" (%s:%d)\n", FILE_poset, 82);
-show_backtrace(1);
+fatal_exit(1);
 }
 var2 = var4;
 RET_LABEL3:(void)0;
 }
 }
 {
-{ /* Inline hash_collection#HashMap#keys (var2) on <var2:HashMap[nullable Object, POSetElement[nullable Object]]> */
-var7 = var2->attrs[COLOR_standard__hash_collection__HashMap___keys].val; /* _keys on <var2:HashMap[nullable Object, POSetElement[nullable Object]]> */
-if (unlikely(var7 == NULL)) {
-PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _keys");
-PRINT_ERROR(" (%s:%d)\n", FILE_standard__hash_collection, 275);
-show_backtrace(1);
-}
-var5 = var7;
-RET_LABEL6:(void)0;
-}
+var5 = standard___standard__HashMap___standard__abstract_collection__MapRead__keys(var2);
 }
 {
-var8 = ((short int (*)(val* self, val* p0))(var5->class->vft[COLOR_standard__abstract_collection__Collection__has]))(var5, var_e) /* has on <var5:RemovableCollection[nullable Object]>*/;
+var6 = ((short int(*)(val* self, val* p0))((((long)var5&3)?class_info[((long)var5&3)]:var5->class)->vft[COLOR_standard__abstract_collection__Collection__has]))(var5, var_e); /* has on <var5:RemovableCollection[nullable Object]>*/
 }
-if (unlikely(!var8)) {
+if (unlikely(!var6)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
 PRINT_ERROR(" (%s:%d)\n", FILE_poset, 115);
-show_backtrace(1);
+fatal_exit(1);
 }
 {
 { /* Inline poset#POSet#elements (self) on <self:POSet[nullable Object]> */
-var11 = self->attrs[COLOR_poset__POSet___elements].val; /* _elements on <self:POSet[nullable Object]> */
-if (unlikely(var11 == NULL)) {
+var9 = self->attrs[COLOR_poset__POSet___elements].val; /* _elements on <self:POSet[nullable Object]> */
+if (unlikely(var9 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _elements");
 PRINT_ERROR(" (%s:%d)\n", FILE_poset, 82);
-show_backtrace(1);
+fatal_exit(1);
 }
-var9 = var11;
-RET_LABEL10:(void)0;
+var7 = var9;
+RET_LABEL8:(void)0;
 }
 }
 {
-var12 = standard___standard__HashMap___standard__abstract_collection__MapRead___91d_93d(var9, var_e);
+var10 = standard___standard__HashMap___standard__abstract_collection__MapRead___91d_93d(var7, var_e);
 }
-var = var12;
+var = var10;
 goto RET_LABEL;
 RET_LABEL:;
 return var;
@@ -442,53 +375,79 @@ val* var36 /* : HashSet[nullable Object] */;
 val* var38 /* : HashSet[nullable Object] */;
 val* var39 /* : HashSet[nullable Object] */;
 val* var41 /* : HashSet[nullable Object] */;
+val* var43 /* : HashSet[nullable Object] */;
 val* var45 /* : HashSet[nullable Object] */;
+short int var46 /* : Bool */;
+val* var_to_remove /* var to_remove: nullable Array[nullable Object] */;
 val* var47 /* : HashSet[nullable Object] */;
-short int var48 /* : Bool */;
 val* var49 /* : HashSet[nullable Object] */;
-val* var51 /* : HashSet[nullable Object] */;
-val* var52 /* : Array[nullable Object] */;
-val* var_53 /* var : Array[nullable Object] */;
-val* var54 /* : ArrayIterator[nullable Object] */;
-val* var_55 /* var : ArrayIterator[nullable Object] */;
-short int var56 /* : Bool */;
-val* var57 /* : nullable Object */;
+val* var_50 /* var : HashSet[nullable Object] */;
+val* var51 /* : Iterator[nullable Object] */;
+val* var_52 /* var : Iterator[nullable Object] */;
+short int var53 /* : Bool */;
+val* var54 /* : nullable Object */;
 val* var_x /* var x: nullable Object */;
-val* var58 /* : HashMap[nullable Object, POSetElement[nullable Object]] */;
-val* var60 /* : HashMap[nullable Object, POSetElement[nullable Object]] */;
-val* var61 /* : nullable Object */;
+val* var55 /* : HashMap[nullable Object, POSetElement[nullable Object]] */;
+val* var57 /* : HashMap[nullable Object, POSetElement[nullable Object]] */;
+val* var58 /* : nullable Object */;
 val* var_xe /* var xe: POSetElement[nullable Object] */;
-val* var62 /* : HashSet[nullable Object] */;
-val* var64 /* : HashSet[nullable Object] */;
-short int var65 /* : Bool */;
+val* var59 /* : HashSet[nullable Object] */;
+val* var61 /* : HashSet[nullable Object] */;
+short int var62 /* : Bool */;
+short int var63 /* : Bool */;
+short int var64 /* : Bool */;
+val* var65 /* : Array[nullable Object] */;
 val* var66 /* : HashSet[nullable Object] */;
 val* var68 /* : HashSet[nullable Object] */;
-val* var69 /* : HashSet[nullable Object] */;
-val* var71 /* : HashSet[nullable Object] */;
-val* var74 /* : HashSet[nullable Object] */;
-val* var76 /* : HashSet[nullable Object] */;
-val* var77 /* : Array[nullable Object] */;
-val* var_78 /* var : Array[nullable Object] */;
-val* var79 /* : ArrayIterator[nullable Object] */;
-val* var_80 /* var : ArrayIterator[nullable Object] */;
-short int var81 /* : Bool */;
-val* var82 /* : nullable Object */;
-val* var_x83 /* var x: nullable Object */;
-val* var84 /* : HashMap[nullable Object, POSetElement[nullable Object]] */;
-val* var86 /* : HashMap[nullable Object, POSetElement[nullable Object]] */;
-val* var87 /* : nullable Object */;
-val* var_xe88 /* var xe: POSetElement[nullable Object] */;
-val* var89 /* : HashSet[nullable Object] */;
-val* var91 /* : HashSet[nullable Object] */;
-short int var92 /* : Bool */;
-val* var93 /* : HashSet[nullable Object] */;
-val* var95 /* : HashSet[nullable Object] */;
-val* var96 /* : HashSet[nullable Object] */;
-val* var98 /* : HashSet[nullable Object] */;
+short int var70 /* : Bool */;
+short int var71 /* : Bool */;
+val* var_other /* var other: nullable Object */;
+short int var73 /* : Bool */;
+short int var74 /* : Bool */;
+val* var_75 /* var : Array[nullable Object] */;
+val* var76 /* : ArrayIterator[nullable Object] */;
+val* var_77 /* var : ArrayIterator[nullable Object] */;
+short int var78 /* : Bool */;
+val* var79 /* : nullable Object */;
+val* var_x80 /* var x: nullable Object */;
+val* var81 /* : HashSet[nullable Object] */;
+val* var83 /* : HashSet[nullable Object] */;
+val* var85 /* : HashSet[nullable Object] */;
+val* var87 /* : HashSet[nullable Object] */;
+val* var_88 /* var : HashSet[nullable Object] */;
+val* var89 /* : Iterator[nullable Object] */;
+val* var_90 /* var : Iterator[nullable Object] */;
+short int var91 /* : Bool */;
+val* var92 /* : nullable Object */;
+val* var_x93 /* var x: nullable Object */;
+val* var94 /* : HashMap[nullable Object, POSetElement[nullable Object]] */;
+val* var96 /* : HashMap[nullable Object, POSetElement[nullable Object]] */;
+val* var97 /* : nullable Object */;
+val* var_xe98 /* var xe: POSetElement[nullable Object] */;
+val* var99 /* : HashSet[nullable Object] */;
 val* var101 /* : HashSet[nullable Object] */;
+short int var102 /* : Bool */;
 val* var103 /* : HashSet[nullable Object] */;
-val* var104 /* : HashSet[nullable Object] */;
-val* var106 /* : HashSet[nullable Object] */;
+val* var105 /* : HashSet[nullable Object] */;
+short int var106 /* : Bool */;
+short int var107 /* : Bool */;
+val* var108 /* : Array[nullable Object] */;
+short int var110 /* : Bool */;
+short int var111 /* : Bool */;
+short int var113 /* : Bool */;
+short int var114 /* : Bool */;
+val* var_115 /* var : Array[nullable Object] */;
+val* var116 /* : ArrayIterator[nullable Object] */;
+val* var_117 /* var : ArrayIterator[nullable Object] */;
+short int var118 /* : Bool */;
+val* var119 /* : nullable Object */;
+val* var_x120 /* var x: nullable Object */;
+val* var121 /* : HashSet[nullable Object] */;
+val* var123 /* : HashSet[nullable Object] */;
+val* var125 /* : HashSet[nullable Object] */;
+val* var127 /* : HashSet[nullable Object] */;
+val* var128 /* : HashSet[nullable Object] */;
+val* var130 /* : HashSet[nullable Object] */;
 /* Covariant cast for argument 0 (f) <p0:nullable Object> isa E */
 /* <p0:nullable Object> isa E */
 type_struct = self->type->resolution_table->types[COLOR_poset__POSet___35dE];
@@ -498,17 +457,17 @@ is_nullable = type_struct->is_nullable;
 if(p0 == NULL) {
 var = is_nullable;
 } else {
-if(cltype >= p0->type->table_size) {
+if(cltype >= (((long)p0&3)?type_info[((long)p0&3)]:p0->type)->table_size) {
 var = 0;
 } else {
-var = p0->type->type_table[cltype] == idtype;
+var = (((long)p0&3)?type_info[((long)p0&3)]:p0->type)->type_table[cltype] == idtype;
 }
 }
 if (unlikely(!var)) {
-var_class_name = p0 == NULL ? "null" : p0->type->name;
+var_class_name = p0 == NULL ? "null" : (((long)p0&3)?type_info[((long)p0&3)]:p0->type)->name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "E", var_class_name);
 PRINT_ERROR(" (%s:%d)\n", FILE_poset, 119);
-show_backtrace(1);
+fatal_exit(1);
 }
 /* Covariant cast for argument 1 (t) <p1:nullable Object> isa E */
 /* <p1:nullable Object> isa E */
@@ -519,17 +478,17 @@ is_nullable5 = type_struct4->is_nullable;
 if(p1 == NULL) {
 var1 = is_nullable5;
 } else {
-if(cltype2 >= p1->type->table_size) {
+if(cltype2 >= (((long)p1&3)?type_info[((long)p1&3)]:p1->type)->table_size) {
 var1 = 0;
 } else {
-var1 = p1->type->type_table[cltype2] == idtype3;
+var1 = (((long)p1&3)?type_info[((long)p1&3)]:p1->type)->type_table[cltype2] == idtype3;
 }
 }
 if (unlikely(!var1)) {
-var_class_name6 = p1 == NULL ? "null" : p1->type->name;
+var_class_name6 = p1 == NULL ? "null" : (((long)p1&3)?type_info[((long)p1&3)]:p1->type)->name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "E", var_class_name6);
 PRINT_ERROR(" (%s:%d)\n", FILE_poset, 119);
-show_backtrace(1);
+fatal_exit(1);
 }
 var_f = p0;
 var_t = p1;
@@ -546,8 +505,8 @@ var_te = var8;
 var11 = var_fe->attrs[COLOR_poset__POSetElement___tos].val; /* _tos on <var_fe:POSetElement[nullable Object]> */
 if (unlikely(var11 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _tos");
-PRINT_ERROR(" (%s:%d)\n", FILE_poset, 389);
-show_backtrace(1);
+PRINT_ERROR(" (%s:%d)\n", FILE_poset, 406);
+fatal_exit(1);
 }
 var9 = var11;
 RET_LABEL10:(void)0;
@@ -565,8 +524,8 @@ goto RET_LABEL;
 var15 = var_fe->attrs[COLOR_poset__POSetElement___froms].val; /* _froms on <var_fe:POSetElement[nullable Object]> */
 if (unlikely(var15 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _froms");
-PRINT_ERROR(" (%s:%d)\n", FILE_poset, 390);
-show_backtrace(1);
+PRINT_ERROR(" (%s:%d)\n", FILE_poset, 407);
+fatal_exit(1);
 }
 var13 = var15;
 RET_LABEL14:(void)0;
@@ -579,11 +538,11 @@ var16 = standard___standard__HashSet___standard__abstract_collection__Collection
 var_17 = var16;
 for(;;) {
 {
-var18 = ((short int (*)(val* self))(var_17->class->vft[COLOR_standard__abstract_collection__Iterator__is_ok]))(var_17) /* is_ok on <var_17:Iterator[nullable Object]>*/;
+var18 = ((short int(*)(val* self))((((long)var_17&3)?class_info[((long)var_17&3)]:var_17->class)->vft[COLOR_standard__abstract_collection__Iterator__is_ok]))(var_17); /* is_ok on <var_17:Iterator[nullable Object]>*/
 }
 if (var18){
 {
-var19 = ((val* (*)(val* self))(var_17->class->vft[COLOR_standard__abstract_collection__Iterator__item]))(var_17) /* item on <var_17:Iterator[nullable Object]>*/;
+var19 = ((val*(*)(val* self))((((long)var_17&3)?class_info[((long)var_17&3)]:var_17->class)->vft[COLOR_standard__abstract_collection__Iterator__item]))(var_17); /* item on <var_17:Iterator[nullable Object]>*/
 }
 var_ff = var19;
 {
@@ -592,7 +551,7 @@ var22 = self->attrs[COLOR_poset__POSet___elements].val; /* _elements on <self:PO
 if (unlikely(var22 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _elements");
 PRINT_ERROR(" (%s:%d)\n", FILE_poset, 82);
-show_backtrace(1);
+fatal_exit(1);
 }
 var20 = var22;
 RET_LABEL21:(void)0;
@@ -607,8 +566,8 @@ var_ffe = var23;
 var26 = var_te->attrs[COLOR_poset__POSetElement___tos].val; /* _tos on <var_te:POSetElement[nullable Object]> */
 if (unlikely(var26 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _tos");
-PRINT_ERROR(" (%s:%d)\n", FILE_poset, 389);
-show_backtrace(1);
+PRINT_ERROR(" (%s:%d)\n", FILE_poset, 406);
+fatal_exit(1);
 }
 var24 = var26;
 RET_LABEL25:(void)0;
@@ -621,11 +580,11 @@ var28 = standard___standard__HashSet___standard__abstract_collection__Collection
 var_29 = var28;
 for(;;) {
 {
-var30 = ((short int (*)(val* self))(var_29->class->vft[COLOR_standard__abstract_collection__Iterator__is_ok]))(var_29) /* is_ok on <var_29:Iterator[nullable Object]>*/;
+var30 = ((short int(*)(val* self))((((long)var_29&3)?class_info[((long)var_29&3)]:var_29->class)->vft[COLOR_standard__abstract_collection__Iterator__is_ok]))(var_29); /* is_ok on <var_29:Iterator[nullable Object]>*/
 }
 if (var30){
 {
-var31 = ((val* (*)(val* self))(var_29->class->vft[COLOR_standard__abstract_collection__Iterator__item]))(var_29) /* item on <var_29:Iterator[nullable Object]>*/;
+var31 = ((val*(*)(val* self))((((long)var_29&3)?class_info[((long)var_29&3)]:var_29->class)->vft[COLOR_standard__abstract_collection__Iterator__item]))(var_29); /* item on <var_29:Iterator[nullable Object]>*/
 }
 var_tt = var31;
 {
@@ -634,7 +593,7 @@ var34 = self->attrs[COLOR_poset__POSet___elements].val; /* _elements on <self:PO
 if (unlikely(var34 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _elements");
 PRINT_ERROR(" (%s:%d)\n", FILE_poset, 82);
-show_backtrace(1);
+fatal_exit(1);
 }
 var32 = var34;
 RET_LABEL33:(void)0;
@@ -649,8 +608,8 @@ var_tte = var35;
 var38 = var_tte->attrs[COLOR_poset__POSetElement___froms].val; /* _froms on <var_tte:POSetElement[nullable Object]> */
 if (unlikely(var38 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _froms");
-PRINT_ERROR(" (%s:%d)\n", FILE_poset, 390);
-show_backtrace(1);
+PRINT_ERROR(" (%s:%d)\n", FILE_poset, 407);
+fatal_exit(1);
 }
 var36 = var38;
 RET_LABEL37:(void)0;
@@ -664,8 +623,8 @@ standard___standard__HashSet___standard__abstract_collection__SimpleCollection__
 var41 = var_ffe->attrs[COLOR_poset__POSetElement___tos].val; /* _tos on <var_ffe:POSetElement[nullable Object]> */
 if (unlikely(var41 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _tos");
-PRINT_ERROR(" (%s:%d)\n", FILE_poset, 389);
-show_backtrace(1);
+PRINT_ERROR(" (%s:%d)\n", FILE_poset, 406);
+fatal_exit(1);
 }
 var39 = var41;
 RET_LABEL40:(void)0;
@@ -675,7 +634,7 @@ RET_LABEL40:(void)0;
 standard___standard__HashSet___standard__abstract_collection__SimpleCollection__add(var39, var_tt); /* Direct call hash_collection#HashSet#add on <var39:HashSet[nullable Object]>*/
 }
 {
-((void (*)(val* self))(var_29->class->vft[COLOR_standard__abstract_collection__Iterator__next]))(var_29) /* next on <var_29:Iterator[nullable Object]>*/;
+((void(*)(val* self))((((long)var_29&3)?class_info[((long)var_29&3)]:var_29->class)->vft[COLOR_standard__abstract_collection__Iterator__next]))(var_29); /* next on <var_29:Iterator[nullable Object]>*/
 }
 } else {
 goto BREAK_label;
@@ -683,285 +642,540 @@ goto BREAK_label;
 }
 BREAK_label: (void)0;
 {
-{ /* Inline abstract_collection#Iterator#finish (var_29) on <var_29:Iterator[nullable Object]> */
-RET_LABEL42:(void)0;
-}
+((void(*)(val* self))((((long)var_29&3)?class_info[((long)var_29&3)]:var_29->class)->vft[COLOR_standard__abstract_collection__Iterator__finish]))(var_29); /* finish on <var_29:Iterator[nullable Object]>*/
 }
 {
-((void (*)(val* self))(var_17->class->vft[COLOR_standard__abstract_collection__Iterator__next]))(var_17) /* next on <var_17:Iterator[nullable Object]>*/;
+((void(*)(val* self))((((long)var_17&3)?class_info[((long)var_17&3)]:var_17->class)->vft[COLOR_standard__abstract_collection__Iterator__next]))(var_17); /* next on <var_17:Iterator[nullable Object]>*/
 }
 } else {
-goto BREAK_label43;
+goto BREAK_label42;
 }
 }
-BREAK_label43: (void)0;
+BREAK_label42: (void)0;
 {
-{ /* Inline abstract_collection#Iterator#finish (var_17) on <var_17:Iterator[nullable Object]> */
+((void(*)(val* self))((((long)var_17&3)?class_info[((long)var_17&3)]:var_17->class)->vft[COLOR_standard__abstract_collection__Iterator__finish]))(var_17); /* finish on <var_17:Iterator[nullable Object]>*/
+}
+{
+{ /* Inline poset#POSetElement#tos (var_te) on <var_te:POSetElement[nullable Object]> */
+var45 = var_te->attrs[COLOR_poset__POSetElement___tos].val; /* _tos on <var_te:POSetElement[nullable Object]> */
+if (unlikely(var45 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _tos");
+PRINT_ERROR(" (%s:%d)\n", FILE_poset, 406);
+fatal_exit(1);
+}
+var43 = var45;
 RET_LABEL44:(void)0;
 }
 }
 {
-{ /* Inline poset#POSetElement#tos (var_te) on <var_te:POSetElement[nullable Object]> */
-var47 = var_te->attrs[COLOR_poset__POSetElement___tos].val; /* _tos on <var_te:POSetElement[nullable Object]> */
-if (unlikely(var47 == NULL)) {
-PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _tos");
-PRINT_ERROR(" (%s:%d)\n", FILE_poset, 389);
-show_backtrace(1);
+var46 = standard___standard__HashSet___standard__abstract_collection__Collection__has(var43, var_f);
 }
-var45 = var47;
-RET_LABEL46:(void)0;
-}
-}
-{
-var48 = standard___standard__HashSet___standard__abstract_collection__Collection__has(var45, var_f);
-}
-if (var48){
+if (var46){
 goto RET_LABEL;
 } else {
 }
+var_to_remove = ((val*)NULL);
 {
 { /* Inline poset#POSetElement#dfroms (var_te) on <var_te:POSetElement[nullable Object]> */
-var51 = var_te->attrs[COLOR_poset__POSetElement___dfroms].val; /* _dfroms on <var_te:POSetElement[nullable Object]> */
-if (unlikely(var51 == NULL)) {
+var49 = var_te->attrs[COLOR_poset__POSetElement___dfroms].val; /* _dfroms on <var_te:POSetElement[nullable Object]> */
+if (unlikely(var49 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _dfroms");
-PRINT_ERROR(" (%s:%d)\n", FILE_poset, 392);
-show_backtrace(1);
+PRINT_ERROR(" (%s:%d)\n", FILE_poset, 409);
+fatal_exit(1);
 }
-var49 = var51;
-RET_LABEL50:(void)0;
+var47 = var49;
+RET_LABEL48:(void)0;
 }
 }
+var_50 = var47;
 {
-var52 = standard__array___Collection___to_a(var49);
+var51 = standard___standard__HashSet___standard__abstract_collection__Collection__iterator(var_50);
 }
-var_53 = var52;
-{
-var54 = standard___standard__AbstractArrayRead___standard__abstract_collection__Collection__iterator(var_53);
-}
-var_55 = var54;
+var_52 = var51;
 for(;;) {
 {
-var56 = standard__array___standard__array__ArrayIterator___standard__abstract_collection__Iterator__is_ok(var_55);
+var53 = ((short int(*)(val* self))((((long)var_52&3)?class_info[((long)var_52&3)]:var_52->class)->vft[COLOR_standard__abstract_collection__Iterator__is_ok]))(var_52); /* is_ok on <var_52:Iterator[nullable Object]>*/
 }
-if (var56){
+if (var53){
 {
-var57 = standard__array___standard__array__ArrayIterator___standard__abstract_collection__Iterator__item(var_55);
+var54 = ((val*(*)(val* self))((((long)var_52&3)?class_info[((long)var_52&3)]:var_52->class)->vft[COLOR_standard__abstract_collection__Iterator__item]))(var_52); /* item on <var_52:Iterator[nullable Object]>*/
 }
-var_x = var57;
+var_x = var54;
 {
 { /* Inline poset#POSet#elements (self) on <self:POSet[nullable Object]> */
-var60 = self->attrs[COLOR_poset__POSet___elements].val; /* _elements on <self:POSet[nullable Object]> */
-if (unlikely(var60 == NULL)) {
+var57 = self->attrs[COLOR_poset__POSet___elements].val; /* _elements on <self:POSet[nullable Object]> */
+if (unlikely(var57 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _elements");
 PRINT_ERROR(" (%s:%d)\n", FILE_poset, 82);
-show_backtrace(1);
+fatal_exit(1);
 }
-var58 = var60;
-RET_LABEL59:(void)0;
+var55 = var57;
+RET_LABEL56:(void)0;
 }
 }
 {
-var61 = standard___standard__HashMap___standard__abstract_collection__MapRead___91d_93d(var58, var_x);
+var58 = standard___standard__HashMap___standard__abstract_collection__MapRead___91d_93d(var55, var_x);
 }
-var_xe = var61;
+var_xe = var58;
 {
 { /* Inline poset#POSetElement#tos (var_xe) on <var_xe:POSetElement[nullable Object]> */
-var64 = var_xe->attrs[COLOR_poset__POSetElement___tos].val; /* _tos on <var_xe:POSetElement[nullable Object]> */
-if (unlikely(var64 == NULL)) {
+var61 = var_xe->attrs[COLOR_poset__POSetElement___tos].val; /* _tos on <var_xe:POSetElement[nullable Object]> */
+if (unlikely(var61 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _tos");
-PRINT_ERROR(" (%s:%d)\n", FILE_poset, 389);
-show_backtrace(1);
+PRINT_ERROR(" (%s:%d)\n", FILE_poset, 406);
+fatal_exit(1);
 }
-var62 = var64;
-RET_LABEL63:(void)0;
+var59 = var61;
+RET_LABEL60:(void)0;
 }
 }
 {
-var65 = standard___standard__HashSet___standard__abstract_collection__Collection__has(var62, var_f);
+var62 = standard___standard__HashSet___standard__abstract_collection__Collection__has(var59, var_f);
 }
-if (var65){
+if (var62){
+if (var_to_remove == NULL) {
+var63 = 1; /* is null */
+} else {
+var63 = 0; /* arg is null but recv is not */
+}
+if (0) {
+var64 = standard___standard__Array___standard__kernel__Object___61d_61d(var_to_remove, ((val*)NULL));
+var63 = var64;
+}
+if (var63){
+var65 = NEW_standard__Array(self->type->resolution_table->types[COLOR_standard__Array__poset__POSet___35dE]);
 {
-{ /* Inline poset#POSetElement#dfroms (var_te) on <var_te:POSetElement[nullable Object]> */
-var68 = var_te->attrs[COLOR_poset__POSetElement___dfroms].val; /* _dfroms on <var_te:POSetElement[nullable Object]> */
+standard___standard__Array___standard__kernel__Object__init(var65); /* Direct call array#Array#init on <var65:Array[nullable Object]>*/
+}
+var_to_remove = var65;
+} else {
+}
+{
+standard___standard__Array___standard__abstract_collection__SimpleCollection__add(var_to_remove, var_x); /* Direct call array#Array#add on <var_to_remove:nullable Array[nullable Object](Array[nullable Object])>*/
+}
+{
+{ /* Inline poset#POSetElement#dtos (var_xe) on <var_xe:POSetElement[nullable Object]> */
+var68 = var_xe->attrs[COLOR_poset__POSetElement___dtos].val; /* _dtos on <var_xe:POSetElement[nullable Object]> */
 if (unlikely(var68 == NULL)) {
-PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _dfroms");
-PRINT_ERROR(" (%s:%d)\n", FILE_poset, 392);
-show_backtrace(1);
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _dtos");
+PRINT_ERROR(" (%s:%d)\n", FILE_poset, 408);
+fatal_exit(1);
 }
 var66 = var68;
 RET_LABEL67:(void)0;
 }
 }
 {
-standard___standard__HashSet___standard__abstract_collection__RemovableCollection__remove(var66, var_x); /* Direct call hash_collection#HashSet#remove on <var66:HashSet[nullable Object]>*/
-}
-{
-{ /* Inline poset#POSetElement#dtos (var_xe) on <var_xe:POSetElement[nullable Object]> */
-var71 = var_xe->attrs[COLOR_poset__POSetElement___dtos].val; /* _dtos on <var_xe:POSetElement[nullable Object]> */
-if (unlikely(var71 == NULL)) {
-PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _dtos");
-PRINT_ERROR(" (%s:%d)\n", FILE_poset, 391);
-show_backtrace(1);
-}
-var69 = var71;
-RET_LABEL70:(void)0;
-}
-}
-{
-standard___standard__HashSet___standard__abstract_collection__RemovableCollection__remove(var69, var_t); /* Direct call hash_collection#HashSet#remove on <var69:HashSet[nullable Object]>*/
+standard___standard__HashSet___standard__abstract_collection__RemovableCollection__remove(var66, var_t); /* Direct call hash_collection#HashSet#remove on <var66:HashSet[nullable Object]>*/
 }
 } else {
 }
 {
-standard__array___standard__array__ArrayIterator___standard__abstract_collection__Iterator__next(var_55); /* Direct call array#ArrayIterator#next on <var_55:ArrayIterator[nullable Object]>*/
+((void(*)(val* self))((((long)var_52&3)?class_info[((long)var_52&3)]:var_52->class)->vft[COLOR_standard__abstract_collection__Iterator__next]))(var_52); /* next on <var_52:Iterator[nullable Object]>*/
 }
 } else {
-goto BREAK_label72;
+goto BREAK_label69;
 }
 }
-BREAK_label72: (void)0;
+BREAK_label69: (void)0;
 {
-{ /* Inline abstract_collection#Iterator#finish (var_55) on <var_55:ArrayIterator[nullable Object]> */
-RET_LABEL73:(void)0;
+((void(*)(val* self))((((long)var_52&3)?class_info[((long)var_52&3)]:var_52->class)->vft[COLOR_standard__abstract_collection__Iterator__finish]))(var_52); /* finish on <var_52:Iterator[nullable Object]>*/
 }
+if (var_to_remove == NULL) {
+var70 = 0; /* is null */
+} else {
+var70 = 1; /* arg is null and recv is not */
 }
+if (0) {
+{ /* Inline kernel#Object#!= (var_to_remove,((val*)NULL)) on <var_to_remove:nullable Array[nullable Object]> */
+var_other = ((val*)NULL);
 {
-{ /* Inline poset#POSetElement#dtos (var_fe) on <var_fe:POSetElement[nullable Object]> */
-var76 = var_fe->attrs[COLOR_poset__POSetElement___dtos].val; /* _dtos on <var_fe:POSetElement[nullable Object]> */
-if (unlikely(var76 == NULL)) {
-PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _dtos");
-PRINT_ERROR(" (%s:%d)\n", FILE_poset, 391);
-show_backtrace(1);
+var73 = ((short int(*)(val* self, val* p0))(var_to_remove->class->vft[COLOR_standard__kernel__Object___61d_61d]))(var_to_remove, var_other); /* == on <var_to_remove:nullable Array[nullable Object](Array[nullable Object])>*/
 }
-var74 = var76;
-RET_LABEL75:(void)0;
+var74 = !var73;
+var71 = var74;
+goto RET_LABEL72;
+RET_LABEL72:(void)0;
 }
+var70 = var71;
 }
+if (var70){
+var_75 = var_to_remove;
 {
-var77 = standard__array___Collection___to_a(var74);
+var76 = standard___standard__AbstractArrayRead___standard__abstract_collection__Collection__iterator(var_75);
 }
-var_78 = var77;
-{
-var79 = standard___standard__AbstractArrayRead___standard__abstract_collection__Collection__iterator(var_78);
-}
-var_80 = var79;
+var_77 = var76;
 for(;;) {
 {
-var81 = standard__array___standard__array__ArrayIterator___standard__abstract_collection__Iterator__is_ok(var_80);
+var78 = standard__array___standard__array__ArrayIterator___standard__abstract_collection__Iterator__is_ok(var_77);
 }
-if (var81){
+if (var78){
 {
-var82 = standard__array___standard__array__ArrayIterator___standard__abstract_collection__Iterator__item(var_80);
+var79 = standard__array___standard__array__ArrayIterator___standard__abstract_collection__Iterator__item(var_77);
 }
-var_x83 = var82;
+var_x80 = var79;
 {
-{ /* Inline poset#POSet#elements (self) on <self:POSet[nullable Object]> */
-var86 = self->attrs[COLOR_poset__POSet___elements].val; /* _elements on <self:POSet[nullable Object]> */
-if (unlikely(var86 == NULL)) {
-PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _elements");
-PRINT_ERROR(" (%s:%d)\n", FILE_poset, 82);
-show_backtrace(1);
-}
-var84 = var86;
-RET_LABEL85:(void)0;
-}
-}
-{
-var87 = standard___standard__HashMap___standard__abstract_collection__MapRead___91d_93d(var84, var_x83);
-}
-var_xe88 = var87;
-{
-{ /* Inline poset#POSetElement#froms (var_xe88) on <var_xe88:POSetElement[nullable Object]> */
-var91 = var_xe88->attrs[COLOR_poset__POSetElement___froms].val; /* _froms on <var_xe88:POSetElement[nullable Object]> */
-if (unlikely(var91 == NULL)) {
-PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _froms");
-PRINT_ERROR(" (%s:%d)\n", FILE_poset, 390);
-show_backtrace(1);
-}
-var89 = var91;
-RET_LABEL90:(void)0;
-}
-}
-{
-var92 = standard___standard__HashSet___standard__abstract_collection__Collection__has(var89, var_t);
-}
-if (var92){
-{
-{ /* Inline poset#POSetElement#dfroms (var_xe88) on <var_xe88:POSetElement[nullable Object]> */
-var95 = var_xe88->attrs[COLOR_poset__POSetElement___dfroms].val; /* _dfroms on <var_xe88:POSetElement[nullable Object]> */
-if (unlikely(var95 == NULL)) {
+{ /* Inline poset#POSetElement#dfroms (var_te) on <var_te:POSetElement[nullable Object]> */
+var83 = var_te->attrs[COLOR_poset__POSetElement___dfroms].val; /* _dfroms on <var_te:POSetElement[nullable Object]> */
+if (unlikely(var83 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _dfroms");
-PRINT_ERROR(" (%s:%d)\n", FILE_poset, 392);
-show_backtrace(1);
+PRINT_ERROR(" (%s:%d)\n", FILE_poset, 409);
+fatal_exit(1);
 }
-var93 = var95;
-RET_LABEL94:(void)0;
+var81 = var83;
+RET_LABEL82:(void)0;
 }
 }
 {
-standard___standard__HashSet___standard__abstract_collection__RemovableCollection__remove(var93, var_f); /* Direct call hash_collection#HashSet#remove on <var93:HashSet[nullable Object]>*/
+standard___standard__HashSet___standard__abstract_collection__RemovableCollection__remove(var81, var_x80); /* Direct call hash_collection#HashSet#remove on <var81:HashSet[nullable Object]>*/
+}
+{
+standard__array___standard__array__ArrayIterator___standard__abstract_collection__Iterator__next(var_77); /* Direct call array#ArrayIterator#next on <var_77:ArrayIterator[nullable Object]>*/
+}
+} else {
+goto BREAK_label84;
+}
+}
+BREAK_label84: (void)0;
+{
+standard__array___standard__array__ArrayIterator___standard__abstract_collection__Iterator__finish(var_77); /* Direct call array#ArrayIterator#finish on <var_77:ArrayIterator[nullable Object]>*/
+}
+{
+standard___standard__AbstractArray___standard__abstract_collection__RemovableCollection__clear(var_to_remove); /* Direct call array#AbstractArray#clear on <var_to_remove:nullable Array[nullable Object](Array[nullable Object])>*/
+}
+} else {
 }
 {
 { /* Inline poset#POSetElement#dtos (var_fe) on <var_fe:POSetElement[nullable Object]> */
-var98 = var_fe->attrs[COLOR_poset__POSetElement___dtos].val; /* _dtos on <var_fe:POSetElement[nullable Object]> */
-if (unlikely(var98 == NULL)) {
+var87 = var_fe->attrs[COLOR_poset__POSetElement___dtos].val; /* _dtos on <var_fe:POSetElement[nullable Object]> */
+if (unlikely(var87 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _dtos");
-PRINT_ERROR(" (%s:%d)\n", FILE_poset, 391);
-show_backtrace(1);
+PRINT_ERROR(" (%s:%d)\n", FILE_poset, 408);
+fatal_exit(1);
 }
-var96 = var98;
-RET_LABEL97:(void)0;
+var85 = var87;
+RET_LABEL86:(void)0;
+}
+}
+var_88 = var85;
+{
+var89 = standard___standard__HashSet___standard__abstract_collection__Collection__iterator(var_88);
+}
+var_90 = var89;
+for(;;) {
+{
+var91 = ((short int(*)(val* self))((((long)var_90&3)?class_info[((long)var_90&3)]:var_90->class)->vft[COLOR_standard__abstract_collection__Iterator__is_ok]))(var_90); /* is_ok on <var_90:Iterator[nullable Object]>*/
+}
+if (var91){
+{
+var92 = ((val*(*)(val* self))((((long)var_90&3)?class_info[((long)var_90&3)]:var_90->class)->vft[COLOR_standard__abstract_collection__Iterator__item]))(var_90); /* item on <var_90:Iterator[nullable Object]>*/
+}
+var_x93 = var92;
+{
+{ /* Inline poset#POSet#elements (self) on <self:POSet[nullable Object]> */
+var96 = self->attrs[COLOR_poset__POSet___elements].val; /* _elements on <self:POSet[nullable Object]> */
+if (unlikely(var96 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _elements");
+PRINT_ERROR(" (%s:%d)\n", FILE_poset, 82);
+fatal_exit(1);
+}
+var94 = var96;
+RET_LABEL95:(void)0;
 }
 }
 {
-standard___standard__HashSet___standard__abstract_collection__RemovableCollection__remove(var96, var_x83); /* Direct call hash_collection#HashSet#remove on <var96:HashSet[nullable Object]>*/
+var97 = standard___standard__HashMap___standard__abstract_collection__MapRead___91d_93d(var94, var_x93);
 }
-} else {
-}
+var_xe98 = var97;
 {
-standard__array___standard__array__ArrayIterator___standard__abstract_collection__Iterator__next(var_80); /* Direct call array#ArrayIterator#next on <var_80:ArrayIterator[nullable Object]>*/
+{ /* Inline poset#POSetElement#froms (var_xe98) on <var_xe98:POSetElement[nullable Object]> */
+var101 = var_xe98->attrs[COLOR_poset__POSetElement___froms].val; /* _froms on <var_xe98:POSetElement[nullable Object]> */
+if (unlikely(var101 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _froms");
+PRINT_ERROR(" (%s:%d)\n", FILE_poset, 407);
+fatal_exit(1);
 }
-} else {
-goto BREAK_label99;
-}
-}
-BREAK_label99: (void)0;
-{
-{ /* Inline abstract_collection#Iterator#finish (var_80) on <var_80:ArrayIterator[nullable Object]> */
+var99 = var101;
 RET_LABEL100:(void)0;
 }
 }
 {
-{ /* Inline poset#POSetElement#dtos (var_fe) on <var_fe:POSetElement[nullable Object]> */
-var103 = var_fe->attrs[COLOR_poset__POSetElement___dtos].val; /* _dtos on <var_fe:POSetElement[nullable Object]> */
-if (unlikely(var103 == NULL)) {
-PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _dtos");
-PRINT_ERROR(" (%s:%d)\n", FILE_poset, 391);
-show_backtrace(1);
+var102 = standard___standard__HashSet___standard__abstract_collection__Collection__has(var99, var_t);
 }
-var101 = var103;
-RET_LABEL102:(void)0;
+if (var102){
+{
+{ /* Inline poset#POSetElement#dfroms (var_xe98) on <var_xe98:POSetElement[nullable Object]> */
+var105 = var_xe98->attrs[COLOR_poset__POSetElement___dfroms].val; /* _dfroms on <var_xe98:POSetElement[nullable Object]> */
+if (unlikely(var105 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _dfroms");
+PRINT_ERROR(" (%s:%d)\n", FILE_poset, 409);
+fatal_exit(1);
+}
+var103 = var105;
+RET_LABEL104:(void)0;
 }
 }
 {
-standard___standard__HashSet___standard__abstract_collection__SimpleCollection__add(var101, var_t); /* Direct call hash_collection#HashSet#add on <var101:HashSet[nullable Object]>*/
+standard___standard__HashSet___standard__abstract_collection__RemovableCollection__remove(var103, var_f); /* Direct call hash_collection#HashSet#remove on <var103:HashSet[nullable Object]>*/
+}
+if (var_to_remove == NULL) {
+var106 = 1; /* is null */
+} else {
+var106 = 0; /* arg is null but recv is not */
+}
+if (0) {
+var107 = standard___standard__Array___standard__kernel__Object___61d_61d(var_to_remove, ((val*)NULL));
+var106 = var107;
+}
+if (var106){
+var108 = NEW_standard__Array(self->type->resolution_table->types[COLOR_standard__Array__poset__POSet___35dE]);
+{
+standard___standard__Array___standard__kernel__Object__init(var108); /* Direct call array#Array#init on <var108:Array[nullable Object]>*/
+}
+var_to_remove = var108;
+} else {
+}
+{
+standard___standard__Array___standard__abstract_collection__SimpleCollection__add(var_to_remove, var_x93); /* Direct call array#Array#add on <var_to_remove:nullable Array[nullable Object](Array[nullable Object])>*/
+}
+} else {
+}
+{
+((void(*)(val* self))((((long)var_90&3)?class_info[((long)var_90&3)]:var_90->class)->vft[COLOR_standard__abstract_collection__Iterator__next]))(var_90); /* next on <var_90:Iterator[nullable Object]>*/
+}
+} else {
+goto BREAK_label109;
+}
+}
+BREAK_label109: (void)0;
+{
+((void(*)(val* self))((((long)var_90&3)?class_info[((long)var_90&3)]:var_90->class)->vft[COLOR_standard__abstract_collection__Iterator__finish]))(var_90); /* finish on <var_90:Iterator[nullable Object]>*/
+}
+if (var_to_remove == NULL) {
+var110 = 0; /* is null */
+} else {
+var110 = 1; /* arg is null and recv is not */
+}
+if (0) {
+{ /* Inline kernel#Object#!= (var_to_remove,((val*)NULL)) on <var_to_remove:nullable Array[nullable Object]> */
+var_other = ((val*)NULL);
+{
+var113 = ((short int(*)(val* self, val* p0))(var_to_remove->class->vft[COLOR_standard__kernel__Object___61d_61d]))(var_to_remove, var_other); /* == on <var_to_remove:nullable Array[nullable Object](Array[nullable Object])>*/
+}
+var114 = !var113;
+var111 = var114;
+goto RET_LABEL112;
+RET_LABEL112:(void)0;
+}
+var110 = var111;
+}
+if (var110){
+var_115 = var_to_remove;
+{
+var116 = standard___standard__AbstractArrayRead___standard__abstract_collection__Collection__iterator(var_115);
+}
+var_117 = var116;
+for(;;) {
+{
+var118 = standard__array___standard__array__ArrayIterator___standard__abstract_collection__Iterator__is_ok(var_117);
+}
+if (var118){
+{
+var119 = standard__array___standard__array__ArrayIterator___standard__abstract_collection__Iterator__item(var_117);
+}
+var_x120 = var119;
+{
+{ /* Inline poset#POSetElement#dtos (var_fe) on <var_fe:POSetElement[nullable Object]> */
+var123 = var_fe->attrs[COLOR_poset__POSetElement___dtos].val; /* _dtos on <var_fe:POSetElement[nullable Object]> */
+if (unlikely(var123 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _dtos");
+PRINT_ERROR(" (%s:%d)\n", FILE_poset, 408);
+fatal_exit(1);
+}
+var121 = var123;
+RET_LABEL122:(void)0;
+}
+}
+{
+standard___standard__HashSet___standard__abstract_collection__RemovableCollection__remove(var121, var_x120); /* Direct call hash_collection#HashSet#remove on <var121:HashSet[nullable Object]>*/
+}
+{
+standard__array___standard__array__ArrayIterator___standard__abstract_collection__Iterator__next(var_117); /* Direct call array#ArrayIterator#next on <var_117:ArrayIterator[nullable Object]>*/
+}
+} else {
+goto BREAK_label124;
+}
+}
+BREAK_label124: (void)0;
+{
+standard__array___standard__array__ArrayIterator___standard__abstract_collection__Iterator__finish(var_117); /* Direct call array#ArrayIterator#finish on <var_117:ArrayIterator[nullable Object]>*/
+}
+} else {
+}
+{
+{ /* Inline poset#POSetElement#dtos (var_fe) on <var_fe:POSetElement[nullable Object]> */
+var127 = var_fe->attrs[COLOR_poset__POSetElement___dtos].val; /* _dtos on <var_fe:POSetElement[nullable Object]> */
+if (unlikely(var127 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _dtos");
+PRINT_ERROR(" (%s:%d)\n", FILE_poset, 408);
+fatal_exit(1);
+}
+var125 = var127;
+RET_LABEL126:(void)0;
+}
+}
+{
+standard___standard__HashSet___standard__abstract_collection__SimpleCollection__add(var125, var_t); /* Direct call hash_collection#HashSet#add on <var125:HashSet[nullable Object]>*/
 }
 {
 { /* Inline poset#POSetElement#dfroms (var_te) on <var_te:POSetElement[nullable Object]> */
-var106 = var_te->attrs[COLOR_poset__POSetElement___dfroms].val; /* _dfroms on <var_te:POSetElement[nullable Object]> */
-if (unlikely(var106 == NULL)) {
+var130 = var_te->attrs[COLOR_poset__POSetElement___dfroms].val; /* _dfroms on <var_te:POSetElement[nullable Object]> */
+if (unlikely(var130 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _dfroms");
-PRINT_ERROR(" (%s:%d)\n", FILE_poset, 392);
-show_backtrace(1);
+PRINT_ERROR(" (%s:%d)\n", FILE_poset, 409);
+fatal_exit(1);
 }
-var104 = var106;
-RET_LABEL105:(void)0;
+var128 = var130;
+RET_LABEL129:(void)0;
 }
 }
 {
-standard___standard__HashSet___standard__abstract_collection__SimpleCollection__add(var104, var_f); /* Direct call hash_collection#HashSet#add on <var104:HashSet[nullable Object]>*/
+standard___standard__HashSet___standard__abstract_collection__SimpleCollection__add(var128, var_f); /* Direct call hash_collection#HashSet#add on <var128:HashSet[nullable Object]>*/
 }
 RET_LABEL:;
+}
+/* method poset#POSet#has_edge for (self: POSet[nullable Object], nullable Object, nullable Object): Bool */
+short int poset___poset__POSet___has_edge(val* self, val* p0, val* p1) {
+short int var /* : Bool */;
+short int var1 /* : Bool */;
+int cltype;
+int idtype;
+const struct type* type_struct;
+short int is_nullable;
+const char* var_class_name;
+short int var2 /* : Bool */;
+int cltype3;
+int idtype4;
+const struct type* type_struct5;
+short int is_nullable6;
+const char* var_class_name7;
+val* var_f /* var f: nullable Object */;
+val* var_t /* var t: nullable Object */;
+val* var8 /* : HashMap[nullable Object, POSetElement[nullable Object]] */;
+val* var10 /* : HashMap[nullable Object, POSetElement[nullable Object]] */;
+val* var11 /* : RemovableCollection[nullable Object] */;
+short int var12 /* : Bool */;
+short int var13 /* : Bool */;
+val* var14 /* : HashMap[nullable Object, POSetElement[nullable Object]] */;
+val* var16 /* : HashMap[nullable Object, POSetElement[nullable Object]] */;
+val* var17 /* : nullable Object */;
+val* var_fe /* var fe: POSetElement[nullable Object] */;
+val* var18 /* : HashSet[nullable Object] */;
+val* var20 /* : HashSet[nullable Object] */;
+short int var21 /* : Bool */;
+/* Covariant cast for argument 0 (f) <p0:nullable Object> isa E */
+/* <p0:nullable Object> isa E */
+type_struct = self->type->resolution_table->types[COLOR_poset__POSet___35dE];
+cltype = type_struct->color;
+idtype = type_struct->id;
+is_nullable = type_struct->is_nullable;
+if(p0 == NULL) {
+var1 = is_nullable;
+} else {
+if(cltype >= (((long)p0&3)?type_info[((long)p0&3)]:p0->type)->table_size) {
+var1 = 0;
+} else {
+var1 = (((long)p0&3)?type_info[((long)p0&3)]:p0->type)->type_table[cltype] == idtype;
+}
+}
+if (unlikely(!var1)) {
+var_class_name = p0 == NULL ? "null" : (((long)p0&3)?type_info[((long)p0&3)]:p0->type)->name;
+PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "E", var_class_name);
+PRINT_ERROR(" (%s:%d)\n", FILE_poset, 208);
+fatal_exit(1);
+}
+/* Covariant cast for argument 1 (t) <p1:nullable Object> isa E */
+/* <p1:nullable Object> isa E */
+type_struct5 = self->type->resolution_table->types[COLOR_poset__POSet___35dE];
+cltype3 = type_struct5->color;
+idtype4 = type_struct5->id;
+is_nullable6 = type_struct5->is_nullable;
+if(p1 == NULL) {
+var2 = is_nullable6;
+} else {
+if(cltype3 >= (((long)p1&3)?type_info[((long)p1&3)]:p1->type)->table_size) {
+var2 = 0;
+} else {
+var2 = (((long)p1&3)?type_info[((long)p1&3)]:p1->type)->type_table[cltype3] == idtype4;
+}
+}
+if (unlikely(!var2)) {
+var_class_name7 = p1 == NULL ? "null" : (((long)p1&3)?type_info[((long)p1&3)]:p1->type)->name;
+PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "E", var_class_name7);
+PRINT_ERROR(" (%s:%d)\n", FILE_poset, 208);
+fatal_exit(1);
+}
+var_f = p0;
+var_t = p1;
+{
+{ /* Inline poset#POSet#elements (self) on <self:POSet[nullable Object]> */
+var10 = self->attrs[COLOR_poset__POSet___elements].val; /* _elements on <self:POSet[nullable Object]> */
+if (unlikely(var10 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _elements");
+PRINT_ERROR(" (%s:%d)\n", FILE_poset, 82);
+fatal_exit(1);
+}
+var8 = var10;
+RET_LABEL9:(void)0;
+}
+}
+{
+var11 = standard___standard__HashMap___standard__abstract_collection__MapRead__keys(var8);
+}
+{
+var12 = ((short int(*)(val* self, val* p0))((((long)var11&3)?class_info[((long)var11&3)]:var11->class)->vft[COLOR_standard__abstract_collection__Collection__has]))(var11, var_f); /* has on <var11:RemovableCollection[nullable Object]>*/
+}
+var13 = !var12;
+if (var13){
+var = 0;
+goto RET_LABEL;
+} else {
+}
+{
+{ /* Inline poset#POSet#elements (self) on <self:POSet[nullable Object]> */
+var16 = self->attrs[COLOR_poset__POSet___elements].val; /* _elements on <self:POSet[nullable Object]> */
+if (unlikely(var16 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _elements");
+PRINT_ERROR(" (%s:%d)\n", FILE_poset, 82);
+fatal_exit(1);
+}
+var14 = var16;
+RET_LABEL15:(void)0;
+}
+}
+{
+var17 = standard___standard__HashMap___standard__abstract_collection__MapRead___91d_93d(var14, var_f);
+}
+var_fe = var17;
+{
+{ /* Inline poset#POSetElement#tos (var_fe) on <var_fe:POSetElement[nullable Object]> */
+var20 = var_fe->attrs[COLOR_poset__POSetElement___tos].val; /* _tos on <var_fe:POSetElement[nullable Object]> */
+if (unlikely(var20 == NULL)) {
+PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _tos");
+PRINT_ERROR(" (%s:%d)\n", FILE_poset, 406);
+fatal_exit(1);
+}
+var18 = var20;
+RET_LABEL19:(void)0;
+}
+}
+{
+var21 = standard___standard__HashSet___standard__abstract_collection__Collection__has(var18, var_t);
+}
+var = var21;
+goto RET_LABEL;
+RET_LABEL:;
+return var;
 }
 /* method poset#POSet#compare for (self: POSet[nullable Object], nullable Object, nullable Object): Int */
 long poset___poset__POSet___standard__sorter__Comparator__compare(val* self, val* p0, val* p1) {
@@ -996,21 +1210,20 @@ val* var22 /* : HashSet[nullable Object] */;
 long var23 /* : Int */;
 long var24 /* : Int */;
 long var_res /* var res: Int */;
-long var25 /* : Int */;
-short int var26 /* : Bool */;
+short int var25 /* : Bool */;
+short int var27 /* : Bool */;
 short int var28 /* : Bool */;
-short int var29 /* : Bool */;
-val* var30 /* : HashMap[nullable Object, POSetElement[nullable Object]] */;
-val* var32 /* : HashMap[nullable Object, POSetElement[nullable Object]] */;
-val* var33 /* : nullable Object */;
-long var34 /* : Int */;
-long var36 /* : Int */;
-val* var37 /* : HashMap[nullable Object, POSetElement[nullable Object]] */;
-val* var39 /* : HashMap[nullable Object, POSetElement[nullable Object]] */;
-val* var40 /* : nullable Object */;
-long var41 /* : Int */;
+val* var29 /* : HashMap[nullable Object, POSetElement[nullable Object]] */;
+val* var31 /* : HashMap[nullable Object, POSetElement[nullable Object]] */;
+val* var32 /* : nullable Object */;
+long var33 /* : Int */;
+long var35 /* : Int */;
+val* var36 /* : HashMap[nullable Object, POSetElement[nullable Object]] */;
+val* var38 /* : HashMap[nullable Object, POSetElement[nullable Object]] */;
+val* var39 /* : nullable Object */;
+long var40 /* : Int */;
+long var42 /* : Int */;
 long var43 /* : Int */;
-long var44 /* : Int */;
 /* Covariant cast for argument 0 (a) <p0:nullable Object> isa E */
 /* <p0:nullable Object> isa E */
 type_struct = self->type->resolution_table->types[COLOR_poset__POSet___35dE];
@@ -1020,17 +1233,17 @@ is_nullable = type_struct->is_nullable;
 if(p0 == NULL) {
 var1 = is_nullable;
 } else {
-if(cltype >= p0->type->table_size) {
+if(cltype >= (((long)p0&3)?type_info[((long)p0&3)]:p0->type)->table_size) {
 var1 = 0;
 } else {
-var1 = p0->type->type_table[cltype] == idtype;
+var1 = (((long)p0&3)?type_info[((long)p0&3)]:p0->type)->type_table[cltype] == idtype;
 }
 }
 if (unlikely(!var1)) {
-var_class_name = p0 == NULL ? "null" : p0->type->name;
+var_class_name = p0 == NULL ? "null" : (((long)p0&3)?type_info[((long)p0&3)]:p0->type)->name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "E", var_class_name);
-PRINT_ERROR(" (%s:%d)\n", FILE_poset, 267);
-show_backtrace(1);
+PRINT_ERROR(" (%s:%d)\n", FILE_poset, 284);
+fatal_exit(1);
 }
 /* Covariant cast for argument 1 (b) <p1:nullable Object> isa E */
 /* <p1:nullable Object> isa E */
@@ -1041,17 +1254,17 @@ is_nullable6 = type_struct5->is_nullable;
 if(p1 == NULL) {
 var2 = is_nullable6;
 } else {
-if(cltype3 >= p1->type->table_size) {
+if(cltype3 >= (((long)p1&3)?type_info[((long)p1&3)]:p1->type)->table_size) {
 var2 = 0;
 } else {
-var2 = p1->type->type_table[cltype3] == idtype4;
+var2 = (((long)p1&3)?type_info[((long)p1&3)]:p1->type)->type_table[cltype3] == idtype4;
 }
 }
 if (unlikely(!var2)) {
-var_class_name7 = p1 == NULL ? "null" : p1->type->name;
+var_class_name7 = p1 == NULL ? "null" : (((long)p1&3)?type_info[((long)p1&3)]:p1->type)->name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "E", var_class_name7);
-PRINT_ERROR(" (%s:%d)\n", FILE_poset, 267);
-show_backtrace(1);
+PRINT_ERROR(" (%s:%d)\n", FILE_poset, 284);
+fatal_exit(1);
 }
 var_a = p0;
 var_b = p1;
@@ -1061,7 +1274,7 @@ var10 = self->attrs[COLOR_poset__POSet___elements].val; /* _elements on <self:PO
 if (unlikely(var10 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _elements");
 PRINT_ERROR(" (%s:%d)\n", FILE_poset, 82);
-show_backtrace(1);
+fatal_exit(1);
 }
 var8 = var10;
 RET_LABEL9:(void)0;
@@ -1077,7 +1290,7 @@ var14 = self->attrs[COLOR_poset__POSet___elements].val; /* _elements on <self:PO
 if (unlikely(var14 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _elements");
 PRINT_ERROR(" (%s:%d)\n", FILE_poset, 82);
-show_backtrace(1);
+fatal_exit(1);
 }
 var12 = var14;
 RET_LABEL13:(void)0;
@@ -1092,8 +1305,8 @@ var_be = var15;
 var18 = var_ae->attrs[COLOR_poset__POSetElement___tos].val; /* _tos on <var_ae:POSetElement[nullable Object]> */
 if (unlikely(var18 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _tos");
-PRINT_ERROR(" (%s:%d)\n", FILE_poset, 389);
-show_backtrace(1);
+PRINT_ERROR(" (%s:%d)\n", FILE_poset, 406);
+fatal_exit(1);
 }
 var16 = var18;
 RET_LABEL17:(void)0;
@@ -1107,8 +1320,8 @@ var19 = standard___standard__HashSet___standard__abstract_collection__Collection
 var22 = var_be->attrs[COLOR_poset__POSetElement___tos].val; /* _tos on <var_be:POSetElement[nullable Object]> */
 if (unlikely(var22 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _tos");
-PRINT_ERROR(" (%s:%d)\n", FILE_poset, 389);
-show_backtrace(1);
+PRINT_ERROR(" (%s:%d)\n", FILE_poset, 406);
+fatal_exit(1);
 }
 var20 = var22;
 RET_LABEL21:(void)0;
@@ -1121,69 +1334,68 @@ var23 = standard___standard__HashSet___standard__abstract_collection__Collection
 var24 = standard___standard__Int___Comparable___60d_61d_62d(var19, var23);
 }
 var_res = var24;
-var25 = 0;
 {
-{ /* Inline kernel#Int#!= (var_res,var25) on <var_res:Int> */
-var28 = var_res == var25;
-var29 = !var28;
-var26 = var29;
-goto RET_LABEL27;
-RET_LABEL27:(void)0;
+{ /* Inline kernel#Int#!= (var_res,0l) on <var_res:Int> */
+var27 = var_res == 0l;
+var28 = !var27;
+var25 = var28;
+goto RET_LABEL26;
+RET_LABEL26:(void)0;
 }
 }
-if (var26){
+if (var25){
 var = var_res;
 goto RET_LABEL;
 } else {
 }
 {
 { /* Inline poset#POSet#elements (self) on <self:POSet[nullable Object]> */
-var32 = self->attrs[COLOR_poset__POSet___elements].val; /* _elements on <self:POSet[nullable Object]> */
-if (unlikely(var32 == NULL)) {
+var31 = self->attrs[COLOR_poset__POSet___elements].val; /* _elements on <self:POSet[nullable Object]> */
+if (unlikely(var31 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _elements");
 PRINT_ERROR(" (%s:%d)\n", FILE_poset, 82);
-show_backtrace(1);
+fatal_exit(1);
 }
-var30 = var32;
-RET_LABEL31:(void)0;
+var29 = var31;
+RET_LABEL30:(void)0;
 }
-}
-{
-var33 = standard___standard__HashMap___standard__abstract_collection__MapRead___91d_93d(var30, var_a);
 }
 {
-{ /* Inline poset#POSetElement#count (var33) on <var33:nullable Object(POSetElement[nullable Object])> */
-var36 = var33->attrs[COLOR_poset__POSetElement___count].l; /* _count on <var33:nullable Object(POSetElement[nullable Object])> */
-var34 = var36;
-RET_LABEL35:(void)0;
+var32 = standard___standard__HashMap___standard__abstract_collection__MapRead___91d_93d(var29, var_a);
+}
+{
+{ /* Inline poset#POSetElement#count (var32) on <var32:nullable Object(POSetElement[nullable Object])> */
+var35 = var32->attrs[COLOR_poset__POSetElement___count].l; /* _count on <var32:nullable Object(POSetElement[nullable Object])> */
+var33 = var35;
+RET_LABEL34:(void)0;
 }
 }
 {
 { /* Inline poset#POSet#elements (self) on <self:POSet[nullable Object]> */
-var39 = self->attrs[COLOR_poset__POSet___elements].val; /* _elements on <self:POSet[nullable Object]> */
-if (unlikely(var39 == NULL)) {
+var38 = self->attrs[COLOR_poset__POSet___elements].val; /* _elements on <self:POSet[nullable Object]> */
+if (unlikely(var38 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _elements");
 PRINT_ERROR(" (%s:%d)\n", FILE_poset, 82);
-show_backtrace(1);
+fatal_exit(1);
 }
-var37 = var39;
-RET_LABEL38:(void)0;
-}
-}
-{
-var40 = standard___standard__HashMap___standard__abstract_collection__MapRead___91d_93d(var37, var_b);
-}
-{
-{ /* Inline poset#POSetElement#count (var40) on <var40:nullable Object(POSetElement[nullable Object])> */
-var43 = var40->attrs[COLOR_poset__POSetElement___count].l; /* _count on <var40:nullable Object(POSetElement[nullable Object])> */
-var41 = var43;
-RET_LABEL42:(void)0;
+var36 = var38;
+RET_LABEL37:(void)0;
 }
 }
 {
-var44 = standard___standard__Int___Comparable___60d_61d_62d(var34, var41);
+var39 = standard___standard__HashMap___standard__abstract_collection__MapRead___91d_93d(var36, var_b);
 }
-var = var44;
+{
+{ /* Inline poset#POSetElement#count (var39) on <var39:nullable Object(POSetElement[nullable Object])> */
+var42 = var39->attrs[COLOR_poset__POSetElement___count].l; /* _count on <var39:nullable Object(POSetElement[nullable Object])> */
+var40 = var42;
+RET_LABEL41:(void)0;
+}
+}
+{
+var43 = standard___standard__Int___Comparable___60d_61d_62d(var33, var40);
+}
+var = var43;
 goto RET_LABEL;
 RET_LABEL:;
 return var;
@@ -1204,20 +1416,20 @@ val* var_lin /* var lin: Array[nullable Object] */;
 type_struct = self->type->resolution_table->types[COLOR_standard__Collection__poset__POSet___35dE];
 cltype = type_struct->color;
 idtype = type_struct->id;
-if(cltype >= p0->type->table_size) {
+if(cltype >= (((long)p0&3)?type_info[((long)p0&3)]:p0->type)->table_size) {
 var1 = 0;
 } else {
-var1 = p0->type->type_table[cltype] == idtype;
+var1 = (((long)p0&3)?type_info[((long)p0&3)]:p0->type)->type_table[cltype] == idtype;
 }
 if (unlikely(!var1)) {
-var_class_name = p0 == NULL ? "null" : p0->type->name;
+var_class_name = p0 == NULL ? "null" : (((long)p0&3)?type_info[((long)p0&3)]:p0->type)->name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "Collection[E]", var_class_name);
-PRINT_ERROR(" (%s:%d)\n", FILE_poset, 353);
-show_backtrace(1);
+PRINT_ERROR(" (%s:%d)\n", FILE_poset, 370);
+fatal_exit(1);
 }
 var_elements = p0;
 {
-var2 = standard__array___Collection___to_a(var_elements);
+var2 = ((val*(*)(val* self))((((long)var_elements&3)?class_info[((long)var_elements&3)]:var_elements->class)->vft[COLOR_standard__array__Collection__to_a]))(var_elements); /* to_a on <var_elements:Collection[nullable Object]>*/
 }
 var_lin = var2;
 {
@@ -1235,8 +1447,8 @@ val* var1 /* : POSet[nullable Object] */;
 var1 = self->attrs[COLOR_poset__POSetElement___poset].val; /* _poset on <self:POSetElement[nullable Object]> */
 if (unlikely(var1 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _poset");
-PRINT_ERROR(" (%s:%d)\n", FILE_poset, 383);
-show_backtrace(1);
+PRINT_ERROR(" (%s:%d)\n", FILE_poset, 400);
+fatal_exit(1);
 }
 var = var1;
 RET_LABEL:;
@@ -1262,8 +1474,8 @@ var = p0->type->type_table[cltype] == idtype;
 if (unlikely(!var)) {
 var_class_name = p0 == NULL ? "null" : p0->type->name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "POSet[E]", var_class_name);
-PRINT_ERROR(" (%s:%d)\n", FILE_poset, 383);
-show_backtrace(1);
+PRINT_ERROR(" (%s:%d)\n", FILE_poset, 400);
+fatal_exit(1);
 }
 self->attrs[COLOR_poset__POSetElement___poset].val = p0; /* _poset on <self:POSetElement[nullable Object]> */
 RET_LABEL:;
@@ -1294,17 +1506,17 @@ is_nullable = type_struct->is_nullable;
 if(p0 == NULL) {
 var = is_nullable;
 } else {
-if(cltype >= p0->type->table_size) {
+if(cltype >= (((long)p0&3)?type_info[((long)p0&3)]:p0->type)->table_size) {
 var = 0;
 } else {
-var = p0->type->type_table[cltype] == idtype;
+var = (((long)p0&3)?type_info[((long)p0&3)]:p0->type)->type_table[cltype] == idtype;
 }
 }
 if (unlikely(!var)) {
-var_class_name = p0 == NULL ? "null" : p0->type->name;
+var_class_name = p0 == NULL ? "null" : (((long)p0&3)?type_info[((long)p0&3)]:p0->type)->name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "E", var_class_name);
-PRINT_ERROR(" (%s:%d)\n", FILE_poset, 386);
-show_backtrace(1);
+PRINT_ERROR(" (%s:%d)\n", FILE_poset, 403);
+fatal_exit(1);
 }
 self->attrs[COLOR_poset__POSetElement___element].val = p0; /* _element on <self:POSetElement[nullable Object]> */
 RET_LABEL:;
@@ -1316,8 +1528,8 @@ val* var1 /* : HashSet[nullable Object] */;
 var1 = self->attrs[COLOR_poset__POSetElement___tos].val; /* _tos on <self:POSetElement[nullable Object]> */
 if (unlikely(var1 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _tos");
-PRINT_ERROR(" (%s:%d)\n", FILE_poset, 389);
-show_backtrace(1);
+PRINT_ERROR(" (%s:%d)\n", FILE_poset, 406);
+fatal_exit(1);
 }
 var = var1;
 RET_LABEL:;
@@ -1330,8 +1542,8 @@ val* var1 /* : HashSet[nullable Object] */;
 var1 = self->attrs[COLOR_poset__POSetElement___froms].val; /* _froms on <self:POSetElement[nullable Object]> */
 if (unlikely(var1 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _froms");
-PRINT_ERROR(" (%s:%d)\n", FILE_poset, 390);
-show_backtrace(1);
+PRINT_ERROR(" (%s:%d)\n", FILE_poset, 407);
+fatal_exit(1);
 }
 var = var1;
 RET_LABEL:;
@@ -1344,8 +1556,8 @@ val* var1 /* : HashSet[nullable Object] */;
 var1 = self->attrs[COLOR_poset__POSetElement___dtos].val; /* _dtos on <self:POSetElement[nullable Object]> */
 if (unlikely(var1 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _dtos");
-PRINT_ERROR(" (%s:%d)\n", FILE_poset, 391);
-show_backtrace(1);
+PRINT_ERROR(" (%s:%d)\n", FILE_poset, 408);
+fatal_exit(1);
 }
 var = var1;
 RET_LABEL:;
@@ -1358,8 +1570,8 @@ val* var1 /* : HashSet[nullable Object] */;
 var1 = self->attrs[COLOR_poset__POSetElement___dfroms].val; /* _dfroms on <self:POSetElement[nullable Object]> */
 if (unlikely(var1 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _dfroms");
-PRINT_ERROR(" (%s:%d)\n", FILE_poset, 392);
-show_backtrace(1);
+PRINT_ERROR(" (%s:%d)\n", FILE_poset, 409);
+fatal_exit(1);
 }
 var = var1;
 RET_LABEL:;
@@ -1389,8 +1601,8 @@ val* var3 /* : HashSet[nullable Object] */;
 var3 = self->attrs[COLOR_poset__POSetElement___tos].val; /* _tos on <self:POSetElement[nullable Object]> */
 if (unlikely(var3 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _tos");
-PRINT_ERROR(" (%s:%d)\n", FILE_poset, 389);
-show_backtrace(1);
+PRINT_ERROR(" (%s:%d)\n", FILE_poset, 406);
+fatal_exit(1);
 }
 var1 = var3;
 RET_LABEL2:(void)0;
@@ -1411,30 +1623,8 @@ val* var3 /* : HashSet[nullable Object] */;
 var3 = self->attrs[COLOR_poset__POSetElement___dtos].val; /* _dtos on <self:POSetElement[nullable Object]> */
 if (unlikely(var3 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _dtos");
-PRINT_ERROR(" (%s:%d)\n", FILE_poset, 391);
-show_backtrace(1);
-}
-var1 = var3;
-RET_LABEL2:(void)0;
-}
-}
-var = var1;
-goto RET_LABEL;
-RET_LABEL:;
-return var;
-}
-/* method poset#POSetElement#smallers for (self: POSetElement[nullable Object]): Collection[nullable Object] */
-val* poset___poset__POSetElement___smallers(val* self) {
-val* var /* : Collection[nullable Object] */;
-val* var1 /* : HashSet[nullable Object] */;
-val* var3 /* : HashSet[nullable Object] */;
-{
-{ /* Inline poset#POSetElement#froms (self) on <self:POSetElement[nullable Object]> */
-var3 = self->attrs[COLOR_poset__POSetElement___froms].val; /* _froms on <self:POSetElement[nullable Object]> */
-if (unlikely(var3 == NULL)) {
-PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _froms");
-PRINT_ERROR(" (%s:%d)\n", FILE_poset, 390);
-show_backtrace(1);
+PRINT_ERROR(" (%s:%d)\n", FILE_poset, 408);
+fatal_exit(1);
 }
 var1 = var3;
 RET_LABEL2:(void)0;
@@ -1455,8 +1645,8 @@ val* var3 /* : HashSet[nullable Object] */;
 var3 = self->attrs[COLOR_poset__POSetElement___dfroms].val; /* _dfroms on <self:POSetElement[nullable Object]> */
 if (unlikely(var3 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _dfroms");
-PRINT_ERROR(" (%s:%d)\n", FILE_poset, 392);
-show_backtrace(1);
+PRINT_ERROR(" (%s:%d)\n", FILE_poset, 409);
+fatal_exit(1);
 }
 var1 = var3;
 RET_LABEL2:(void)0;
@@ -1489,17 +1679,17 @@ is_nullable = type_struct->is_nullable;
 if(p0 == NULL) {
 var1 = is_nullable;
 } else {
-if(cltype >= p0->type->table_size) {
+if(cltype >= (((long)p0&3)?type_info[((long)p0&3)]:p0->type)->table_size) {
 var1 = 0;
 } else {
-var1 = p0->type->type_table[cltype] == idtype;
+var1 = (((long)p0&3)?type_info[((long)p0&3)]:p0->type)->type_table[cltype] == idtype;
 }
 }
 if (unlikely(!var1)) {
-var_class_name = p0 == NULL ? "null" : p0->type->name;
+var_class_name = p0 == NULL ? "null" : (((long)p0&3)?type_info[((long)p0&3)]:p0->type)->name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "E", var_class_name);
-PRINT_ERROR(" (%s:%d)\n", FILE_poset, 448);
-show_backtrace(1);
+PRINT_ERROR(" (%s:%d)\n", FILE_poset, 465);
+fatal_exit(1);
 }
 var_t = p0;
 {
@@ -1507,8 +1697,8 @@ var_t = p0;
 var4 = self->attrs[COLOR_poset__POSetElement___tos].val; /* _tos on <self:POSetElement[nullable Object]> */
 if (unlikely(var4 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _tos");
-PRINT_ERROR(" (%s:%d)\n", FILE_poset, 389);
-show_backtrace(1);
+PRINT_ERROR(" (%s:%d)\n", FILE_poset, 406);
+fatal_exit(1);
 }
 var2 = var4;
 RET_LABEL3:(void)0;
@@ -1550,17 +1740,17 @@ is_nullable = type_struct->is_nullable;
 if(p0 == NULL) {
 var1 = is_nullable;
 } else {
-if(cltype >= p0->type->table_size) {
+if(cltype >= (((long)p0&3)?type_info[((long)p0&3)]:p0->type)->table_size) {
 var1 = 0;
 } else {
-var1 = p0->type->type_table[cltype] == idtype;
+var1 = (((long)p0&3)?type_info[((long)p0&3)]:p0->type)->type_table[cltype] == idtype;
 }
 }
 if (unlikely(!var1)) {
-var_class_name = p0 == NULL ? "null" : p0->type->name;
+var_class_name = p0 == NULL ? "null" : (((long)p0&3)?type_info[((long)p0&3)]:p0->type)->name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "E", var_class_name);
-PRINT_ERROR(" (%s:%d)\n", FILE_poset, 463);
-show_backtrace(1);
+PRINT_ERROR(" (%s:%d)\n", FILE_poset, 480);
+fatal_exit(1);
 }
 var_t = p0;
 {
@@ -1573,7 +1763,7 @@ RET_LABEL4:(void)0;
 if (var_t == NULL) {
 var6 = (var3 != NULL);
 } else {
-var7 = ((short int (*)(val* self, val* p0))(var_t->class->vft[COLOR_standard__kernel__Object___33d_61d]))(var_t, var3) /* != on <var_t:nullable Object>*/;
+var7 = ((short int(*)(val* self, val* p0))((((long)var_t&3)?class_info[((long)var_t&3)]:var_t->class)->vft[COLOR_standard__kernel__Object___33d_61d]))(var_t, var3); /* != on <var_t:nullable Object>*/
 var6 = var7;
 }
 var_ = var6;
@@ -1583,8 +1773,8 @@ if (var6){
 var10 = self->attrs[COLOR_poset__POSetElement___tos].val; /* _tos on <self:POSetElement[nullable Object]> */
 if (unlikely(var10 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _tos");
-PRINT_ERROR(" (%s:%d)\n", FILE_poset, 389);
-show_backtrace(1);
+PRINT_ERROR(" (%s:%d)\n", FILE_poset, 406);
+fatal_exit(1);
 }
 var8 = var10;
 RET_LABEL9:(void)0;
@@ -1605,7 +1795,7 @@ return var;
 /* method poset#POSetElement#init for (self: POSetElement[nullable Object]) */
 void poset___poset__POSetElement___standard__kernel__Object__init(val* self) {
 {
-((void (*)(val* self))(self->class->vft[COLOR_poset___poset__POSetElement___standard__kernel__Object__init]))(self) /* init on <self:POSetElement[nullable Object]>*/;
+((void(*)(val* self))(self->class->vft[COLOR_poset___poset__POSetElement___standard__kernel__Object__init]))(self); /* init on <self:POSetElement[nullable Object]>*/
 }
 RET_LABEL:;
 }

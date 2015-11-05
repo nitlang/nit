@@ -17,128 +17,153 @@
 # Offers the base 64 encoding and decoding algorithms
 module base64
 
-redef class String
-
+redef class NativeString
 	# Alphabet used by the base64 algorithm
-	private fun base64_chars : String
+	private fun base64_chars : SequenceRead[Byte]
 	do
-		return "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"
+		return "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/".bytes
 	end
-	private fun inverted_base64_chars : HashMap[Char,Int]
+
+	# Reversed alphabet for base64
+	private fun inverted_base64_chars : HashMap[Byte, Byte]
 	do
-		var inv_base64_chars = new HashMap[Char,Int]
-		for k in [0..base64_chars.length[ do
-			inv_base64_chars[ base64_chars.chars[k] ] = k
+		var inv_base64_chars = new HashMap[Byte, Byte]
+		var l = base64_chars.length
+		for k in [0 .. l[ do
+			inv_base64_chars[base64_chars[k]] = k.to_b
 		end
 		return inv_base64_chars
 	end
 
-	# Encodes the receiver string to base64.
+	# Encodes `self` to base64.
+	#
 	# By default, uses "=" for padding.
-	fun encode_base64 : String do return encode_base64_custom_padding( '=' )
+	#
+	#     assert "string".encode_base64 == "c3RyaW5n"
+	private fun encode_base64(length: Int, padding: nullable Byte): Bytes do
+		var base64_bytes = once base64_chars
+		if padding == null then padding = '='.ascii
+		var steps = length / 3
+		var bytes_in_last_step = length % 3
+		var result_length = steps * 4
+		if bytes_in_last_step > 0 then result_length += 4
+		var result = new Bytes.with_capacity(result_length)
+
+		var in_off = 0
+		for s in [0 .. steps[ do
+			var ind = ((self[in_off] & 0b1111_1100u8) >> 2).to_i
+			result.add base64_bytes[ind]
+			ind = ((self[in_off] & 0b0000_0011u8) << 4).to_i | ((self[in_off + 1] & 0b1111_0000u8) >> 4).to_i
+			result.add base64_bytes[ind]
+			ind = ((self[in_off + 1] & 0b0000_1111u8) << 2).to_i | ((self[in_off + 2] & 0b1100_0000u8) >> 6).to_i
+			result.add base64_bytes[ind]
+			ind = (self[in_off + 2] & 0b0011_1111u8).to_i
+			result.add base64_bytes[ind]
+			in_off += 3
+		end
+		if bytes_in_last_step == 1 then
+			result.add base64_bytes[((self[in_off] & 0b1111_1100u8) >> 2).to_i]
+			result.add base64_bytes[((self[in_off] & 0b0000_0011u8) << 4).to_i]
+		else if bytes_in_last_step == 2 then
+			result.add base64_bytes[((self[in_off] & 0b1111_1100u8) >> 2).to_i]
+			result.add base64_bytes[(((self[in_off] & 0b0000_0011u8) << 4) | ((self[in_off + 1] & 0b1111_0000u8) >> 4)).to_i]
+			result.add base64_bytes[((self[in_off + 1] & 0b0000_1111u8) << 2).to_i]
+		end
+		var rempad = if bytes_in_last_step > 0 then 3 - bytes_in_last_step else 0
+		for i in [0 .. rempad[ do result.add padding
+
+		return result
+	end
+
+	# Decodes `self` from base64
+	#
+	#      assert "c3RyaW5n".decode_base64 == "string"
+	#
+	# REQUIRE: `length % 4 == 0`
+	private fun decode_base64(length: Int, padding: nullable Byte): Bytes do
+		if padding == null then padding = '='.ascii
+		var inv = once inverted_base64_chars
+		if length == 0 then return new Bytes.empty
+		assert length % 4 == 0 else print "base64::decode_base64 only supports strings of length multiple of 4"
+
+		var bytes = self
+		var steps = length / 4
+		var result_length = steps * 3
+
+		var epos = length - 1
+		var padding_len = 0
+		while epos >= 0 and bytes[epos] == padding do
+			epos -= 1
+			padding_len += 1
+		end
+
+		if padding_len != 0 then steps -= 1
+		if padding_len == 1 then result_length -= 1
+		if padding_len == 2 then result_length -= 2
+
+		var result = new Bytes.with_capacity(result_length + 1)
+
+		for s in [0 .. steps[ do
+			var c0 = inv[bytes[s * 4]]
+			var c1 = inv[bytes[s * 4 + 1]]
+			var c2 = inv[bytes[s * 4 + 2]]
+			var c3 = inv[bytes[s * 4 + 3]]
+			result.add (((c0 & 0b0011_1111u8) << 2) | ((c1 & 0b0011_0000u8) >> 4))
+			result.add (((c1 & 0b0000_1111u8) << 4) | ((c2 & 0b0011_1100u8) >> 2))
+			result.add (((c2 & 0b0000_0011u8) << 6) | (c3 & 0b0011_1111u8))
+		end
+
+		var last_start = steps * 4
+		if padding_len == 1 then
+			var c0 = inv[bytes[last_start]]
+			var c1 = inv[bytes[last_start + 1]]
+			var c2 = inv[bytes[last_start + 2]]
+			result.add (((c0 & 0b0011_1111u8) << 2) | ((c1 & 0b0011_0000u8) >> 4))
+			result.add (((c1 & 0b0000_1111u8) << 4) | ((c2 & 0b0011_1100u8) >> 2))
+		else if padding_len == 2 then
+			var c0 = inv[bytes[last_start]]
+			var c1 = inv[bytes[last_start + 1]]
+			result.add (((c0 & 0b0011_1111u8) << 2) | ((c1 & 0b0011_0000u8) >> 4))
+		end
+
+		return result
+	end
+end
+
+redef class Bytes
 
 	# Encodes the receiver string to base64 using a custom padding character.
 	#
 	# If using the default padding character `=`, see `encode_base64`.
-	fun encode_base64_custom_padding( padding : Char ) : String
+	fun encode_base64(padding: nullable Byte): Bytes
 	do
-		var base64_chars = once base64_chars
-		var length = length
-
-		var steps = length / 3
-		var chars_in_last_step = length % 3
-		var result_length = steps*4
-		if chars_in_last_step > 0 then result_length += 4
-		var result = (padding.to_s*result_length).to_cstring
-
-		var mask_6bit = 63
-
-		for s in [0..steps[ do
-			var e = 0
-			for ss in [0..3[ do
-				e += self.chars[s*3+ss].ascii.lshift((2-ss)*8)
-			end
-			for ss in [0..4[ do
-				result[s*4+3-ss] = base64_chars.chars[ e.rshift(ss*6).bin_and( mask_6bit ) ]
-			end
-		end
-
-		if chars_in_last_step == 1 then
-			var e = self.chars[length-1].ascii.lshift(16)
-			for ss in [0..2[ do
-				result[steps*4+1-ss] = base64_chars.chars[ e.rshift((ss+2)*6).bin_and( mask_6bit ) ]
-			end
-		else if chars_in_last_step == 2 then
-			var e = self.chars[length-2].ascii.lshift(16) +
-				self.chars[length-1].ascii.lshift(8)
-			for ss in [0..3[ do
-				result[steps*4+2-ss] = base64_chars.chars[ e.rshift((ss+1)*6).bin_and( mask_6bit ) ]
-			end
-		end
-
-		return result.to_s
+		return items.encode_base64(length, padding)
 	end
-
-	# Decodes the receiver string from base64.
-	# By default, uses "=" for padding.
-	fun decode_base64 : String do return decode_base64_custom_padding( '=' )
 
 	# Decodes the receiver string to base64 using a custom padding character.
 	#
-	# If using the default padding character `=`, see `decode_base64`.
-	fun decode_base64_custom_padding( padding : Char ) : String
+	# Default padding character `=`
+	fun decode_base64(padding : nullable Byte) : Bytes
 	do
-		var inverted_base64_chars = once inverted_base64_chars
-		var length = length
-		assert length % 4 == 0 else print "base64::decode_base64 only supports strings of length multiple of 4"
+		return items.decode_base64(length, padding)
+	end
+end
 
-		var steps = length / 4
-		var result_length = steps*3
+redef class String
 
-		var padding_begin = self.search(padding)
-		var padding_count : Int
-		if padding_begin == null then
-			padding_count = 0
-		else
-			padding_count = length - padding_begin.from
-			steps -= 1
-			result_length -= padding_count
-		end
+	# Encodes the receiver string to base64 using a custom padding character.
+	#
+	# If using the default padding character `=`, see `encode_base64`.
+	fun encode_base64(padding: nullable Byte): String
+	do
+		return to_cstring.encode_base64(bytelen, padding).to_s
+	end
 
-		var result = ("#"*result_length).to_cstring
-
-		var mask_8bit = 255
-
-		for s in [0..steps[ do
-			var e = 0
-			for ss in [0..4[ do
-				e += inverted_base64_chars[self.chars[s*4+ss]].lshift((3-ss)*6)
-			end
-
-			for ss in [0..3[ do
-				result[s*3+ss] = e.rshift((2-ss)*8).bin_and( mask_8bit ).ascii
-			end
-		end
-
-		var s = steps
-		if padding_count == 1 then
-			var e = 0
-			for ss in [0..3[ do
-				e += inverted_base64_chars[self.chars[s*4+ss]].lshift((3-ss)*6)
-			end
-
-			for ss in [0..2[ do
-				result[s*3+ss] = e.rshift((2-ss)*8).bin_and( mask_8bit ).ascii
-			end
-		else if padding_count == 2 then
-			var e = 0
-			for ss in [0..2[ do
-				e += inverted_base64_chars[self.chars[s*4+ss]].lshift((3-ss)*6)
-			end
-
-			result[s*3] = e.rshift(2*8).bin_and( mask_8bit ).ascii
-		end
-
-		return result.to_s
+	# Decodes the receiver string to base64 using a custom padding character.
+	#
+	# Default padding character `=`
+	fun decode_base64(padding : nullable Byte) : String
+	do
+		return to_cstring.decode_base64(bytelen, padding).to_s
 	end
 end

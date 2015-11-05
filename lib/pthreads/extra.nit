@@ -32,7 +32,7 @@ in "C" `{
 
 redef extern class NativePthread
 	fun cancel: Bool `{
-		return pthread_cancel(*recv);
+		return pthread_cancel(*self);
 	`}
 end
 
@@ -56,7 +56,7 @@ private extern class NativePthreadBarrier in "C" `{ pthread_barrier_t * `}
 		return barrier;
 	`}
 
-	fun destroy `{ pthread_barrier_destroy(recv); `}
+	fun destroy `{ pthread_barrier_destroy(self); `}
 
-	fun wait `{ pthread_barrier_wait(recv); `}
+	fun wait `{ pthread_barrier_wait(self); `}
 end

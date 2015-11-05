@@ -21,7 +21,7 @@ import grammar
 # A finite automaton
 class Automaton
 	# The start state
-	var start: State
+	var start: State is noinit
 
 	# State that are accept states
 	var accept = new Array[State]
@@ -667,12 +667,10 @@ private class DFAGenerator
 		add("\tredef fun start_state do return dfastate_{names[automaton.start]}\n")
 		add("end\n")
 
-		add("redef class Object\n")
 		for s in automaton.states do
 			var n = names[s]
-			add("\tprivate fun dfastate_{n}: DFAState{n} do return once new DFAState{n}\n")
+			add("private fun dfastate_{n}: DFAState{n} do return once new DFAState{n}\n")
 		end
-		add("end\n")
 
 		add("class MyNToken\n")
 		add("\tsuper NToken\n")
@@ -716,7 +714,7 @@ private class DFAGenerator
 			else
 				add("\tredef fun trans(char) do\n")
 
-				add("\t\tvar c = char.ascii\n")
+				add("\t\tvar c = char.code_point\n")
 				var haslast = false
 				var last = -1
 				for sym, next in trans do
@@ -793,14 +791,14 @@ class TSymbol
 		if f <= 32 then
 			res = "#{f}"
 		else
-			res = f.ascii.to_s
+			res = f.code_point.to_s
 		end
 		var l = last
 		if f == l then return res
 		res += " .. "
 		if l == null then return res
 		if l <= 32 or l >= 127 then return res + "#{l}"
-		return res + l.ascii.to_s
+		return res + l.code_point.to_s
 	end
 end
 

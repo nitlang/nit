@@ -1,0 +1,11 @@
+X
+X
+X
+Y
+Y
+Y
+Y
+A
+G
+B
+G

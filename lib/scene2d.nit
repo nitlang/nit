@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# 2D management of game elements
+# Framework for 2D management of game elements
 #
 # TODO: collision framework (with quad tree?)
 module scene2d

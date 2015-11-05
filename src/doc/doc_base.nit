@@ -16,7 +16,6 @@
 module doc_base
 
 import toolcontext
-import model_utils
 import model_ext
 
 # The model of a Nitdoc documentation.
@@ -27,16 +26,26 @@ import model_ext
 # It is a placeholder to share data between each phase.
 class DocModel
 
-	# `DocPage` composing the documentation.
+	# `DocPage` composing the documentation associated to their ids.
 	#
 	# This is where `DocPhase` store and access pages to produce documentation.
-	var pages = new Array[DocPage]
+	#
+	# See `add_page`.
+	var pages: Map[String, DocPage] = new HashMap[String, DocPage]
 
 	# Nit `Model` from which we extract the documentation.
 	var model: Model is writable
 
 	# The entry point of the `model`.
 	var mainmodule: MModule is writable
+
+	# Add a `page` to this documentation.
+	fun add_page(page: DocPage) do
+		if pages.has_key(page.id) then
+			print "Warning: multiple page with the same id `{page.id}`"
+		end
+		pages[page.id] = page
+	end
 end
 
 # A documentation page abstraction.
@@ -44,6 +53,17 @@ end
 # The page contains a link to the `root` of the `DocComposite` that compose the
 # the page.
 class DocPage
+
+	# Page uniq id.
+	#
+	# The `id` is used as name for the generated file corresponding to the page
+	# (if any).
+	# Because multiple pages can be generated in the same directory it should be
+	# uniq.
+	#
+	# The `id` can also be used to establish links between pages (HTML links,
+	# HTML anchors, vim links, etc.).
+	var id: String is writable
 
 	# Title of this page.
 	var title: String is writable
@@ -54,6 +74,16 @@ class DocPage
 	var root = new DocRoot
 
 	redef fun to_s do return title
+
+	# Pretty prints the content of this page.
+	fun pretty_print: Writable do
+		var res = new Template
+		res.addn "{class_name} {title}"
+		for child in root.children do
+			child.pretty_print_in(res)
+		end
+		return res
+	end
 end
 
 # `DocPage` elements that can be nested in another.
@@ -70,6 +100,19 @@ abstract class DocComposite
 	# Parent element.
 	var parent: nullable DocComposite = null is writable
 
+	# Element uniq id.
+	#
+	# The `id` is used as name for the generated element (if any).
+	# Because multiple elements can be generated in the same container
+	# it should be uniq.
+	#
+	# The `id` can also be used to establish links between elements
+	# (HTML links, HTML anchors, vim links, etc.).
+	var id: String is writable
+
+	# Item title if any.
+	var title: nullable String is writable
+
 	# Does `self` have a `parent`?
 	fun is_root: Bool do return parent == null
 
@@ -78,8 +121,18 @@ abstract class DocComposite
 	# Children are ordered, this order can be changed by the `DocPhase`.
 	var children = new Array[DocComposite]
 
-	# Does `self` have `children`?
-	fun is_empty: Bool do return children.is_empty
+	# Is `self` not displayed in the page.
+	#
+	# By default, empty elements are hidden.
+	fun is_hidden: Bool do return children.is_empty
+
+	# Title used in table of content if any.
+	var toc_title: nullable String is writable, lazy do return title
+
+	# Is `self` hidden in the table of content?
+	var is_toc_hidden: Bool is writable, lazy do
+		return toc_title == null or is_hidden
+	end
 
 	# Add a `child` to `self`.
 	#
@@ -88,6 +141,27 @@ abstract class DocComposite
 		child.parent = self
 		children.add child
 	end
+
+	# Depth of `self` in the composite tree.
+	fun depth: Int do
+		if parent == null then return 0
+		return parent.depth + 1
+	end
+
+	# Pretty prints this composite recursively.
+	fun pretty_print: Writable do
+		var res = new Template
+		pretty_print_in(res)
+		return res
+	end
+
+	# Appends the Pretty print of this composite in `res`.
+	private fun pretty_print_in(res: Template) do
+		res.add "\t" * depth
+		res.add "#" * depth
+		res.addn " {id}"
+		for child in children do child.pretty_print_in(res)
+	end
 end
 
 # The `DocComposite` element that contains all the other.
@@ -95,7 +169,11 @@ end
 # The root uses a specific subclass to provide different a different behavior
 # than other `DocComposite` elements.
 class DocRoot
+	noautoinit
 	super DocComposite
+
+	redef var id = "<root>"
+	redef var title = "<root>"
 
 	# No op for `RootSection`.
 	redef fun parent=(p) do end
@@ -143,7 +221,7 @@ end
 redef class ToolContext
 
 	# Directory where the Nitdoc is rendered.
-	var opt_dir = new OptionString("output directory", "-d", "--dir")
+	var opt_dir = new OptionString("Output directory", "-d", "--dir")
 
 	# Shortcut for `opt_dir.value` with default "doc".
 	var output_dir: String is lazy do return opt_dir.value or else "doc"
@@ -223,8 +301,28 @@ class PropertyGroup[E: MProperty]
 end
 
 redef class MEntity
+	# ID used as a unique ID and in file names.
+	#
+	# **Must** match the following (POSIX ERE) regular expression:
+	#
+	# ~~~POSIX ERE
+	# ^[A-Za-z_][A-Za-z0-9._-]*$
+	# ~~~
+	#
+	# That way, the ID is always a valid URI component and a valid XML name.
+	fun nitdoc_id: String do return full_name.to_cmangle
+
 	# Name displayed in console for debug and tests.
 	fun nitdoc_name: String do return name.html_escape
+end
+
+redef class MModule
+
+	# Avoid id conflict with group
+	redef fun nitdoc_id do
+		if mgroup == null then return super
+		return "{mgroup.full_name}::{full_name}".to_cmangle
+	end
 end
 
 redef class MClassDef

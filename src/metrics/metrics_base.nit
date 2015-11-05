@@ -18,7 +18,6 @@
 # Helpers for various statistics tools.
 module metrics_base
 
-import model_utils
 import modelbuilder
 import csv
 import counter
@@ -52,7 +51,7 @@ redef class ToolContext
 	# --rta
 	var opt_rta = new OptionBool("Compute RTA metrics", "--rta")
 	# --generate-csv
-	var opt_csv = new OptionBool("Export metrics in CSV format", "--csv")
+	var opt_csv = new OptionBool("Also export metrics in CSV format", "--csv")
 	# --generate_hyperdoc
 	var opt_generate_hyperdoc = new OptionBool("Generate Hyperdoc", "--generate_hyperdoc")
 	# --poset
@@ -140,20 +139,6 @@ redef class ToolContext
 
 end
 
-redef class MClass
-	# is the class imported from standard lib?
-	fun is_standard: Bool do
-		return self.intro_mmodule.mgroup.mproject.name == "standard"
-	end
-end
-
-redef class MModule
-	# is the module imported from standard lib?
-	fun is_standard: Bool do
-		return self.mgroup.mproject.name == "standard"
-	end
-end
-
 # A Metric is used to collect data about things
 #
 # The concept is reified here for a better organization and documentation
@@ -181,7 +166,7 @@ interface Metric
 	fun values: RES is abstract
 
 	# Collect metric values on elements
-	fun collect(elements: Set[ELM]) is abstract
+	fun collect(elements: Collection[ELM]) is abstract
 
 	# The value calculated for the element
 	fun [](element: ELM): VAL do return values[element]
@@ -314,7 +299,10 @@ class FloatMetric
 
 	redef fun sum do
 		var sum = 0.0
-		for v in values.values do sum += v
+		for v in values.values do
+			if v.is_nan then continue
+			sum += v
+		end
 		return sum
 	end
 
@@ -352,6 +340,7 @@ class FloatMetric
 	redef fun std_dev do
 		var sum = 0.0
 		for value in values.values do
+			if value.is_nan then continue
 			sum += (value - avg).pow(2.to_f)
 		end
 		return (sum / values.length.to_f).sqrt

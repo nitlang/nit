@@ -18,7 +18,7 @@
 module mnit_app
 
 import ::app
-import mnit_display
+import mnit::display
 
 # An App instance serves as base to every Mnit projects.
 #

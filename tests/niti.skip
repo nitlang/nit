@@ -2,6 +2,8 @@ shoot_logic
 nit_args1
 nit_args3
 nit_args4
+nit_args5
+nit_args6
 nitvm_args1
 nitvm_args3
 nitc_args1
@@ -9,6 +11,7 @@ nitc_args3
 nitc_args5
 nitc_args6
 nitc_args8
+nitpick_args1
 nitunit_args
 test_docdown_args
 pep8analysis
@@ -20,3 +23,14 @@ hamming_number
 hailstone
 nitls_args
 nituml_args
+count_the_coins
+semordnilap_args1
+mpi_simple
+blink
+input
+first_letter_last_letter
+fibonacci_word
+shootout_nsieve
+test_ropebuffer
+ui_test
+test_text_stat

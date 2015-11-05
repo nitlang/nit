@@ -21,12 +21,12 @@ class A
 
 	fun print_all import String.to_cstring, r, rw `{
 		printf( "%s %s\n",
-	        	String_to_cstring( A_r( recv ) ),
-	        	String_to_cstring( A_rw( recv ) ) );
+			String_to_cstring( A_r( self ) ),
+			String_to_cstring( A_rw( self ) ) );
 	`}
 	fun modify import NativeString.to_s, w=, rw= `{
-		A_w__assign( recv, NativeString_to_s( "w set from native" ) );
-		A_rw__assign( recv, NativeString_to_s( "rw set from native" ) );
+		A_w__assign( self, NativeString_to_s( "w set from native" ) );
+		A_rw__assign( self, NativeString_to_s( "rw set from native" ) );
 	`}
 end
 

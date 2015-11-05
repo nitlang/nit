@@ -11,7 +11,7 @@
 module friendz_linux
 
 import friendz
-import mnit_linux
+import mnit::linux
 
 redef class Display
 	redef fun wanted_width do return app.screen_width

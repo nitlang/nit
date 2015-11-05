@@ -41,7 +41,7 @@ redef class Display
 	do
 		var str = number.to_s
 		for c in str.chars do
-			var d = c.ascii-'0'.ascii
+			var d = c.code_point-'0'.code_point
 			assert d >= 0 and d <= 9
 			var img = imgs.imgs[d]
 			blit(img, x, y)

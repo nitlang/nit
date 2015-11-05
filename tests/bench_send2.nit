@@ -67,7 +67,7 @@ for i in [0..(nb/6)[ do
 	a[i*6+4] = new E
 	a[i*6+5] = new F
 end
-for i in [0..1.lshift(n)[ do
+for i in [0..1 << n[ do
 	for j in [0..nb[ do
 		a[j].foo
 	end

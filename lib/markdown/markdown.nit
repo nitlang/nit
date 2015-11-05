@@ -41,33 +41,39 @@ class MarkdownProcessor
 	#
 	#   In normal markdown the following:
 	#
-	#		This is a paragraph
-	#		* and this is not a list
+	# ~~~md
+	# This is a paragraph
+	# * and this is not a list
+	# ~~~
 	#
 	#   Will produce:
 	#
-	#		<p>This is a paragraph
-	#		* and this is not a list</p>
+	# ~~~html
+	# <p>This is a paragraph
+	# * and this is not a list</p>
+	# ~~~
 	#
-	#	When using extended mode this changes to:
+	#   When using extended mode this changes to:
 	#
-	#		<p>This is a paragraph</p>
-	#		<ul>
-	#		<li>and this is not a list</li>
-	#		</ul>
+	# ~~~html
+	# <p>This is a paragraph</p>
+	# <ul>
+	# <li>and this is not a list</li>
+	# </ul>
+	# ~~~
 	#
 	# * Fences code blocks
 	#
 	#   If you don't want to indent your all your code with 4 spaces,
 	#   you can wrap your code in ``` ``` ``` or `~~~`.
 	#
-	#	Here's an example:
+	#   Here's an example:
 	#
-	#		```
-	#		fun test do
-	#			print "Hello World!"
-	#		end
-	#		```
+	# ~~~md
+	# fun test do
+	#    print "Hello World!"
+	# end
+	# ~~~
 	#
 	# * Code blocks meta
 	#
@@ -76,43 +82,55 @@ class MarkdownProcessor
 	#   You can add an optional language identifier after the fence declaration to output
 	#   it in the HTML render.
 	#
-	#		```nit
-	#		import markdown
+	# ```nit
+	# import markdown
 	#
-	#		print "# Hello World!".md_to_html
-	#		```
+	# print "# Hello World!".md_to_html
+	# ```
 	#
 	#   Becomes
 	#
-	#		<pre class="nit"><code>import markdown
+	# ~~~html
+	# <pre class="nit"><code>import markdown
 	#
-	#		print "Hello World!".md_to_html
-	#		</code></pre>
+	# print "Hello World!".md_to_html
+	# </code></pre>
+	# ~~~
 	#
 	# * Underscores (Emphasis)
 	#
 	#   Underscores in the middle of a word like:
 	#
-	#		Con_cat_this
+	# ~~~md
+	# Con_cat_this
+	# ~~~
 	#
-	#	normally produces this:
+	#   normally produces this:
 	#
-	#		<p>Con<em>cat</em>this</p>
+	# ~~~html
+	# <p>Con<em>cat</em>this</p>
+	# ~~~
 	#
 	#   With extended mode they don't result in emphasis.
 	#
-	#		<p>Con_cat_this</p>
+	# ~~~html
+	# <p>Con_cat_this</p>
+	# ~~~
 	#
 	# * Strikethrough
 	#
 	#   Like in [GFM](https://help.github.com/articles/github-flavored-markdown),
 	#   strikethrought span is marked with `~~`.
 	#
-	#		~~Mistaken text.~~
+	# ~~~md
+	# ~~Mistaken text.~~
+	# ~~~
 	#
 	#   becomes
 	#
-	#		<del>Mistaken text.</del>
+	# ~~~html
+	# <del>Mistaken text.</del>
+	# ~~~
 	var ext_mode = true
 
 	init do self.emitter = new MarkdownEmitter(self)
@@ -134,36 +152,42 @@ class MarkdownProcessor
 
 	# Split `input` string into `MDLines` and create a parent `MDBlock` with it.
 	private fun read_lines(input: String): MDBlock do
-		var block = new MDBlock
+		var block = new MDBlock(new MDLocation(1, 1, 1, 1))
 		var value = new FlatBuffer
 		var i = 0
+
+		var line_pos = 0
+		var col_pos = 0
+
 		while i < input.length do
 			value.clear
 			var pos = 0
 			var eol = false
 			while not eol and i < input.length do
+				col_pos += 1
 				var c = input[i]
 				if c == '\n' then
-					i += 1
 					eol = true
 				else if c == '\t' then
-					var np = pos + (4 - (pos.bin_and(3)))
+					var np = pos + (4 - (pos & 3))
 					while pos < np do
 						value.add ' '
 						pos += 1
 					end
-					i += 1
 				else
 					pos += 1
 					value.add c
-					i += 1
 				end
+				i += 1
 			end
+			line_pos += 1
 
-			var line = new MDLine(value.write_to_string)
+			var loc = new MDLocation(line_pos, 1, line_pos, col_pos)
+			var line = new MDLine(loc, value.write_to_string)
 			var is_link_ref = check_link_ref(line)
 			# Skip link refs
 			if not is_link_ref then block.add_line line
+			col_pos = 0
 		end
 		return block
 	end
@@ -244,8 +268,10 @@ class MarkdownProcessor
 	#
 	# Markdown allows link refs to be defined over two lines:
 	#
-	#	[id]: http://example.com/longish/path/to/resource/here
-	#		"Optional Title Here"
+	# ~~~md
+	# [id]: http://example.com/longish/path/to/resource/here
+	#	"Optional Title Here"
+	# ~~~
 	#
 	private var last_link_ref: nullable LinkRef = null
 
@@ -370,70 +396,76 @@ class MarkdownProcessor
 			c2 = ' '
 		end
 
+		var loc = new MDLocation(
+			current_loc.line_start,
+			current_loc.column_start + pos,
+			current_loc.line_start,
+			current_loc.column_start + pos)
+
 		if c == '*' then
 			if c1 == '*' then
 				if c0 != ' ' or c2 != ' ' then
-					return new TokenStrongStar(pos, c)
+					return new TokenStrongStar(loc, pos, c)
 				else
-					return new TokenEmStar(pos, c)
+					return new TokenEmStar(loc, pos, c)
 				end
 			end
 			if c0 != ' ' or c1 != ' ' then
-				return new TokenEmStar(pos, c)
+				return new TokenEmStar(loc, pos, c)
 			else
-				return new TokenNone(pos, c)
+				return new TokenNone(loc, pos, c)
 			end
 		else if c == '_' then
 			if c1 == '_' then
 				if c0 != ' ' or c2 != ' 'then
-					return new TokenStrongUnderscore(pos, c)
+					return new TokenStrongUnderscore(loc, pos, c)
 				else
-					return new TokenEmUnderscore(pos, c)
+					return new TokenEmUnderscore(loc, pos, c)
 				end
 			end
 			if ext_mode then
 				if (c0.is_letter or c0.is_digit) and c0 != '_' and
 				   (c1.is_letter or c1.is_digit) then
-					return new TokenNone(pos, c)
+					return new TokenNone(loc, pos, c)
 				else
-					return new TokenEmUnderscore(pos, c)
+					return new TokenEmUnderscore(loc, pos, c)
 				end
 			end
 			if c0 != ' ' or c1 != ' ' then
-				return new TokenEmUnderscore(pos, c)
+				return new TokenEmUnderscore(loc, pos, c)
 			else
-				return new TokenNone(pos, c)
+				return new TokenNone(loc, pos, c)
 			end
 		else if c == '!' then
-			if c1 == '[' then return new TokenImage(pos, c)
-			return new TokenNone(pos, c)
+			if c1 == '[' then return new TokenImage(loc, pos, c)
+			return new TokenNone(loc, pos, c)
 		else if c == '[' then
-			return new TokenLink(pos, c)
+			return new TokenLink(loc, pos, c)
 		else if c == ']' then
-			return new TokenNone(pos, c)
+			return new TokenNone(loc, pos, c)
 		else if c == '`' then
 			if c1 == '`' then
-				return new TokenCodeDouble(pos, c)
+				return new TokenCodeDouble(loc, pos, c)
 			else
-				return new TokenCodeSingle(pos, c)
+				return new TokenCodeSingle(loc, pos, c)
 			end
 		else if c == '\\' then
 			if c1 == '\\' or c1 == '[' or c1 == ']' or c1 == '(' or c1 == ')' or c1 == '{' or c1 == '}' or c1 == '#' or c1 == '"' or c1 == '\'' or c1 == '.' or c1 == '<' or c1 == '>' or c1 == '*' or c1 == '+' or c1 == '-' or c1 == '_' or c1 == '!' or c1 == '`' or c1 == '~' or c1 == '^' then
-				return new TokenEscape(pos, c)
+				return new TokenEscape(loc, pos, c)
 			else
-				return new TokenNone(pos, c)
+				return new TokenNone(loc, pos, c)
 			end
 		else if c == '<' then
-			return new TokenHTML(pos, c)
+			return new TokenHTML(loc, pos, c)
 		else if c == '&' then
-			return new TokenEntity(pos, c)
+			return new TokenEntity(loc, pos, c)
 		else
 			if ext_mode then
 				if c == '~' and c1 == '~' then
-					return new TokenStrike(pos, c)
+					return new TokenStrike(loc, pos, c)
 				end
 			end
-			return new TokenNone(pos, c)
+			return new TokenNone(loc, pos, c)
 		end
 	end
 
@@ -448,6 +480,12 @@ class MarkdownProcessor
 		end
 		return -1
 	end
+
+	# Location used for next parsed token.
+	#
+	# This location can be changed by the emitter to adjust with `\n` found
+	# in the input.
+	private fun current_loc: MDLocation do return emitter.current_loc
 end
 
 # Emit output corresponding to blocks content.
@@ -456,15 +494,23 @@ end
 # The emitter use a `Decorator` to select the output format.
 class MarkdownEmitter
 
+	# Kind of processor used for parsing.
+	type PROCESSOR: MarkdownProcessor
+
 	# Processor containing link refs.
-	var processor: MarkdownProcessor
+	var processor: PROCESSOR
+
+	# Kind of decorator used for decoration.
+	type DECORATOR: Decorator
 
 	# Decorator used for output.
 	# Default is `HTMLDecorator`
-	var decorator: Decorator = new HTMLDecorator is writable
+	var decorator: DECORATOR is writable, lazy do
+		return new HTMLDecorator
+	end
 
 	# Create a new `MarkdownEmitter` using a custom `decorator`.
-	init with_decorator(processor: MarkdownProcessor, decorator: Decorator) do
+	init with_decorator(processor: PROCESSOR, decorator: DECORATOR) do
 		init processor
 		self.decorator = decorator
 	end
@@ -481,19 +527,21 @@ class MarkdownEmitter
 	fun emit_in(block: Block) do block.emit_in(self)
 
 	# Transform and emit mardown text
-	fun emit_text(text: Text) do
-		emit_text_until(text, 0, null)
-	end
+	fun emit_text(text: Text) do emit_text_until(text, 0, null)
 
-	# Transform and emit mardown text starting at `from` and
+	# Transform and emit mardown text starting at `start` and
 	# until a token with the same type as `token` is found.
-	# Go until the end of text if `token` is null.
+	# Go until the end of `text` if `token` is null.
 	fun emit_text_until(text: Text, start: Int, token: nullable Token): Int do
 		var old_text = current_text
 		var old_pos = current_pos
 		current_text = text
 		current_pos = start
 		while current_pos < text.length do
+			if text[current_pos] == '\n' then
+				current_loc.line_start += 1
+				current_loc.column_start = -current_pos
+			end
 			var mt = processor.token_at(text, current_pos)
 			if (token != null and not token isa TokenNone) and
 			(mt.is_same_type(token) or
@@ -536,6 +584,21 @@ class MarkdownEmitter
 		return buffer_stack.last
 	end
 
+	# Stacked locations.
+	private var loc_stack = new List[MDLocation]
+
+	# Push a new MDLocation on the stack.
+	private fun push_loc(location: MDLocation) do loc_stack.add location
+
+	# Pop the last buffer.
+	private fun pop_loc: MDLocation do return loc_stack.pop
+
+	# Current output buffer.
+	private fun current_loc: MDLocation do
+		assert not loc_stack.is_empty
+		return loc_stack.last
+	end
+
 	# Append `e` to current buffer.
 	fun add(e: Writable) do
 		if e isa Text then
@@ -546,10 +609,10 @@ class MarkdownEmitter
 	end
 
 	# Append `c` to current buffer.
-	fun addc(c: Char) do current_buffer.add c
+	fun addc(c: Char) do add c.to_s
 
 	# Append a "\n" line break.
-	fun addn do current_buffer.add '\n'
+	fun addn do add "\n"
 end
 
 # A Link Reference.
@@ -580,64 +643,72 @@ end
 # Default decorator used is `HTMLDecorator`.
 interface Decorator
 
+	# Kind of emitter used for decoration.
+	type EMITTER: MarkdownEmitter
+
+	# Render a single plain char.
+	#
+	# Redefine this method to add special escaping for plain text.
+	fun add_char(v: EMITTER, c: Char) do v.addc c
+
 	# Render a ruler block.
-	fun add_ruler(v: MarkdownEmitter, block: BlockRuler) is abstract
+	fun add_ruler(v: EMITTER, block: BlockRuler) is abstract
 
 	# Render a headline block with corresponding level.
-	fun add_headline(v: MarkdownEmitter, block: BlockHeadline) is abstract
+	fun add_headline(v: EMITTER, block: BlockHeadline) is abstract
 
 	# Render a paragraph block.
-	fun add_paragraph(v: MarkdownEmitter, block: BlockParagraph) is abstract
+	fun add_paragraph(v: EMITTER, block: BlockParagraph) is abstract
 
 	# Render a code or fence block.
-	fun add_code(v: MarkdownEmitter, block: BlockCode) is abstract
+	fun add_code(v: EMITTER, block: BlockCode) is abstract
 
 	# Render a blockquote.
-	fun add_blockquote(v: MarkdownEmitter, block: BlockQuote) is abstract
+	fun add_blockquote(v: EMITTER, block: BlockQuote) is abstract
 
 	# Render an unordered list.
-	fun add_unorderedlist(v: MarkdownEmitter, block: BlockUnorderedList) is abstract
+	fun add_unorderedlist(v: EMITTER, block: BlockUnorderedList) is abstract
 
 	# Render an ordered list.
-	fun add_orderedlist(v: MarkdownEmitter, block: BlockOrderedList) is abstract
+	fun add_orderedlist(v: EMITTER, block: BlockOrderedList) is abstract
 
 	# Render a list item.
-	fun add_listitem(v: MarkdownEmitter, block: BlockListItem) is abstract
+	fun add_listitem(v: EMITTER, block: BlockListItem) is abstract
 
 	# Render an emphasis text.
-	fun add_em(v: MarkdownEmitter, text: Text) is abstract
+	fun add_em(v: EMITTER, text: Text) is abstract
 
 	# Render a strong text.
-	fun add_strong(v: MarkdownEmitter, text: Text) is abstract
+	fun add_strong(v: EMITTER, text: Text) is abstract
 
 	# Render a strike text.
 	#
 	# Extended mode only (see `MarkdownProcessor::ext_mode`)
-	fun add_strike(v: MarkdownEmitter, text: Text) is abstract
+	fun add_strike(v: EMITTER, text: Text) is abstract
 
 	# Render a link.
-	fun add_link(v: MarkdownEmitter, link: Text, name: Text, comment: nullable Text) is abstract
+	fun add_link(v: EMITTER, link: Text, name: Text, comment: nullable Text) is abstract
 
 	# Render an image.
-	fun add_image(v: MarkdownEmitter, link: Text, name: Text, comment: nullable Text) is abstract
+	fun add_image(v: EMITTER, link: Text, name: Text, comment: nullable Text) is abstract
 
 	# Render an abbreviation.
-	fun add_abbr(v: MarkdownEmitter, name: Text, comment: Text) is abstract
+	fun add_abbr(v: EMITTER, name: Text, comment: Text) is abstract
 
 	# Render a code span reading from a buffer.
-	fun add_span_code(v: MarkdownEmitter, buffer: Text, from, to: Int) is abstract
+	fun add_span_code(v: EMITTER, buffer: Text, from, to: Int) is abstract
 
 	# Render a text and escape it.
-	fun append_value(v: MarkdownEmitter, value: Text) is abstract
+	fun append_value(v: EMITTER, value: Text) is abstract
 
 	# Render code text from buffer and escape it.
-	fun append_code(v: MarkdownEmitter, buffer: Text, from, to: Int) is abstract
+	fun append_code(v: EMITTER, buffer: Text, from, to: Int) is abstract
 
 	# Render a character escape.
-	fun escape_char(v: MarkdownEmitter, char: Char) is abstract
+	fun escape_char(v: EMITTER, char: Char) is abstract
 
 	# Render a line break
-	fun add_line_break(v: MarkdownEmitter) is abstract
+	fun add_line_break(v: EMITTER) is abstract
 
 	# Generate a new html valid id from a `String`.
 	fun strip_id(txt: String): String is abstract
@@ -687,8 +758,11 @@ class HTMLDecorator
 	end
 
 	redef fun add_code(v, block) do
-		if block isa BlockFence and block.meta != null then
-			v.add "<pre class=\"{block.meta.to_s}\"><code>"
+		var meta = block.meta
+		if meta != null then
+			v.add "<pre class=\""
+			append_value(v, meta)
+			v.add "\"><code>"
 		else
 			v.add "<pre><code>"
 		end
@@ -847,9 +921,36 @@ class HTMLDecorator
 	private var allowed_id_chars: Array[Char] = ['-', '_', ':', '.']
 end
 
+# Location in a Markdown input.
+class MDLocation
+
+	# Starting line number (starting from 1).
+	var line_start: Int
+
+	# Starting column number (starting from 1).
+	var column_start: Int
+
+	# Stopping line number (starting from 1).
+	var line_end: Int
+
+	# Stopping column number (starting from 1).
+	var column_end: Int
+
+	redef fun to_s do return "{line_start},{column_start}--{line_end},{column_end}"
+
+	# Return a copy of `self`.
+	fun copy: MDLocation do
+		return new MDLocation(line_start, column_start, line_end, column_end)
+	end
+end
+
 # A block of markdown lines.
 # A `MDBlock` can contains lines and/or sub-blocks.
 class MDBlock
+
+	# Position of `self` in the input.
+	var location: MDLocation
+
 	# Kind of block.
 	# See `Block`.
 	var kind: Block = new BlockNone(self) is writable
@@ -902,7 +1003,14 @@ class MDBlock
 
 	# Split `self` creating a new sub-block having `line` has `last_line`.
 	fun split(line: MDLine): MDBlock do
-		var block = new MDBlock
+		# location for new block
+		var new_loc = new MDLocation(
+			first_line.location.line_start,
+			first_line.location.column_start,
+			line.location.line_end,
+			line.location.column_end)
+		# create block
+		var block = new MDBlock(new_loc)
 		block.first_line = first_line
 		block.last_line = line
 		first_line = line.next
@@ -911,6 +1019,9 @@ class MDBlock
 			last_line = null
 		else
 			first_line.prev = null
+			# update current block loc
+			location.line_start = first_line.location.line_start
+			location.column_start = first_line.location.column_start
 		end
 		if first_block == null then
 			first_block = block
@@ -1059,9 +1170,31 @@ abstract class Block
 	fun emit_blocks(v: MarkdownEmitter) do
 		var block = self.block.first_block
 		while block != null do
+			v.push_loc(block.location)
 			block.kind.emit(v)
+			v.pop_loc
 			block = block.next
 		end
+	end
+
+	# The raw content of the block as a multi-line string.
+	fun raw_content: String do
+		var infence = self isa BlockFence
+		var text = new FlatBuffer
+		var line = self.block.first_line
+		while line != null do
+			if not line.is_empty then
+				var str = line.value
+				if not infence and str.has_prefix("    ") then
+					text.append str.substring(4, str.length - line.trailing)
+				else
+					text.append str
+				end
+			end
+			text.append "\n"
+			line = line.next
+		end
+		return text.write_to_string
 	end
 end
 
@@ -1103,6 +1236,9 @@ end
 class BlockCode
 	super Block
 
+	# Any string found after fence token.
+	var meta: nullable Text
+
 	# Number of char to skip at the beginning of the line.
 	#
 	# Block code lines start at 4 spaces.
@@ -1129,9 +1265,6 @@ end
 class BlockFence
 	super BlockCode
 
-	# Any string found after fence token.
-	var meta: nullable Text
-
 	# Fence code lines start at 0 spaces.
 	redef var line_start = 0
 end
@@ -1140,7 +1273,15 @@ end
 class BlockHeadline
 	super Block
 
-	redef fun emit(v) do v.decorator.add_headline(v, self)
+	redef fun emit(v) do
+		var loc = block.location.copy
+		loc.column_start += start
+		v.push_loc(loc)
+		v.decorator.add_headline(v, self)
+		v.pop_loc
+	end
+
+	private var start = 0
 
 	# Depth of the headline used to determine the headline level.
 	var depth = 0
@@ -1169,6 +1310,7 @@ class BlockHeadline
 			line.leading = 0
 			line.trailing = 0
 		end
+		self.start = start
 		depth = level.min(6)
 	end
 end
@@ -1282,6 +1424,9 @@ end
 
 # A markdown line.
 class MDLine
+
+	# Location of `self` in the original input.
+	var location: MDLocation
 
 	# Text contained in this line.
 	var value: String is writable
@@ -1651,6 +1796,7 @@ class LineFence
 		else
 			block = v.current_block.split(v.current_block.last_line.as(not null))
 		end
+		block.remove_surrounding_empty_lines
 		var meta = block.first_line.value.meta_from_fence
 		block.kind = new BlockFence(block, meta)
 		block.first_line.clear
@@ -1720,7 +1866,7 @@ end
 
 # A markdown list line.
 # Mainly used to factorize code between ordered and unordered lists.
-class LineList
+abstract class LineList
 	super Line
 
 	redef fun process(v) do
@@ -1790,14 +1936,17 @@ end
 # Some tokens have a specific markup behaviour that is handled here.
 abstract class Token
 
-	# Position of `self` in markdown input.
+	# Location of `self` in the original input.
+	var location: MDLocation
+
+	# Position of `self` in input independant from lines.
 	var pos: Int
 
 	# Character found at `pos` in the markdown input.
 	var char: Char
 
 	# Output that token using `MarkdownEmitter::decorator`.
-	fun emit(v: MarkdownEmitter) do v.addc char
+	fun emit(v: MarkdownEmitter) do v.decorator.add_char(v, char)
 end
 
 # A token without a specific meaning.
@@ -1981,6 +2130,7 @@ abstract class TokenLinkOrImage
 					if pos == -1 then return -1
 				end
 			end
+			if pos < start then return -1
 			if md[pos] != ')' then return -1
 		else if md[pos] == '[' then
 			pos += 1

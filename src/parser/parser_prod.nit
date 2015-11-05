@@ -2230,6 +2230,48 @@ redef class ABraassignMethid
 		v.enter_visit(_n_assign)
 	end
 end
+redef class AQid
+	init init_aqid (
+		n_qualified: nullable AQualified,
+		n_id: nullable TId
+	)
+	do
+		_n_qualified = n_qualified
+		if n_qualified != null then n_qualified.parent = self
+		_n_id = n_id.as(not null)
+		n_id.parent = self
+	end
+
+	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
+	do
+		if _n_qualified == old_child then
+			n_qualified = new_child.as(nullable AQualified)
+			return
+		end
+		if _n_id == old_child then
+			n_id = new_child.as(TId)
+			return
+		end
+	end
+
+	redef fun n_qualified=(node)
+	do
+		_n_qualified = node
+		if node != null then node.parent = self
+	end
+	redef fun n_id=(node)
+	do
+		_n_id = node
+		node.parent = self
+	end
+
+
+	redef fun visit_all(v: Visitor)
+	do
+		v.enter_visit(_n_qualified)
+		v.enter_visit(_n_id)
+	end
+end
 redef class ASignature
 	init init_asignature (
 		n_opar: nullable TOpar,
@@ -3148,9 +3190,7 @@ end
 redef class AForExpr
 	init init_aforexpr (
 		n_kwfor: nullable TKwfor,
-		n_ids: Collection[Object], # Should be Collection[TId]
-		n_kwin: nullable TKwin,
-		n_expr: nullable AExpr,
+		n_groups: Collection[Object], # Should be Collection[AForGroup]
 		n_kwdo: nullable TKwdo,
 		n_block: nullable AExpr,
 		n_label: nullable ALabel
@@ -3158,11 +3198,7 @@ redef class AForExpr
 	do
 		_n_kwfor = n_kwfor.as(not null)
 		n_kwfor.parent = self
-		self.n_ids.unsafe_add_all(n_ids)
-		_n_kwin = n_kwin.as(not null)
-		n_kwin.parent = self
-		_n_expr = n_expr.as(not null)
-		n_expr.parent = self
+		self.n_groups.unsafe_add_all(n_groups)
 		_n_kwdo = n_kwdo.as(not null)
 		n_kwdo.parent = self
 		_n_block = n_block
@@ -3177,15 +3213,7 @@ redef class AForExpr
 			n_kwfor = new_child.as(TKwfor)
 			return
 		end
-		if n_ids.replace_child(old_child, new_child) then return
-		if _n_kwin == old_child then
-			n_kwin = new_child.as(TKwin)
-			return
-		end
-		if _n_expr == old_child then
-			n_expr = new_child.as(AExpr)
-			return
-		end
+		if n_groups.replace_child(old_child, new_child) then return
 		if _n_kwdo == old_child then
 			n_kwdo = new_child.as(TKwdo)
 			return
@@ -3203,16 +3231,6 @@ redef class AForExpr
 	redef fun n_kwfor=(node)
 	do
 		_n_kwfor = node
-		node.parent = self
-	end
-	redef fun n_kwin=(node)
-	do
-		_n_kwin = node
-		node.parent = self
-	end
-	redef fun n_expr=(node)
-	do
-		_n_expr = node
 		node.parent = self
 	end
 	redef fun n_kwdo=(node)
@@ -3235,9 +3253,7 @@ redef class AForExpr
 	redef fun visit_all(v: Visitor)
 	do
 		v.enter_visit(_n_kwfor)
-		n_ids.visit_all(v)
-		v.enter_visit(_n_kwin)
-		v.enter_visit(_n_expr)
+		n_groups.visit_all(v)
 		v.enter_visit(_n_kwdo)
 		v.enter_visit(_n_block)
 		v.enter_visit(_n_label)
@@ -4968,7 +4984,7 @@ redef class ANewExpr
 	init init_anewexpr (
 		n_kwnew: nullable TKwnew,
 		n_type: nullable AType,
-		n_id: nullable TId,
+		n_qid: nullable AQid,
 		n_args: nullable AExprs
 	)
 	do
@@ -4976,8 +4992,8 @@ redef class ANewExpr
 		n_kwnew.parent = self
 		_n_type = n_type.as(not null)
 		n_type.parent = self
-		_n_id = n_id
-		if n_id != null then n_id.parent = self
+		_n_qid = n_qid
+		if n_qid != null then n_qid.parent = self
 		_n_args = n_args.as(not null)
 		n_args.parent = self
 	end
@@ -4992,8 +5008,8 @@ redef class ANewExpr
 			n_type = new_child.as(AType)
 			return
 		end
-		if _n_id == old_child then
-			n_id = new_child.as(nullable TId)
+		if _n_qid == old_child then
+			n_qid = new_child.as(nullable AQid)
 			return
 		end
 		if _n_args == old_child then
@@ -5012,9 +5028,9 @@ redef class ANewExpr
 		_n_type = node
 		node.parent = self
 	end
-	redef fun n_id=(node)
+	redef fun n_qid=(node)
 	do
-		_n_id = node
+		_n_qid = node
 		if node != null then node.parent = self
 	end
 	redef fun n_args=(node)
@@ -5028,7 +5044,7 @@ redef class ANewExpr
 	do
 		v.enter_visit(_n_kwnew)
 		v.enter_visit(_n_type)
-		v.enter_visit(_n_id)
+		v.enter_visit(_n_qid)
 		v.enter_visit(_n_args)
 	end
 end
@@ -5213,14 +5229,14 @@ end
 redef class ACallExpr
 	init init_acallexpr (
 		n_expr: nullable AExpr,
-		n_id: nullable TId,
+		n_qid: nullable AQid,
 		n_args: nullable AExprs
 	)
 	do
 		_n_expr = n_expr.as(not null)
 		n_expr.parent = self
-		_n_id = n_id.as(not null)
-		n_id.parent = self
+		_n_qid = n_qid.as(not null)
+		n_qid.parent = self
 		_n_args = n_args.as(not null)
 		n_args.parent = self
 	end
@@ -5231,8 +5247,8 @@ redef class ACallExpr
 			n_expr = new_child.as(AExpr)
 			return
 		end
-		if _n_id == old_child then
-			n_id = new_child.as(TId)
+		if _n_qid == old_child then
+			n_qid = new_child.as(AQid)
 			return
 		end
 		if _n_args == old_child then
@@ -5246,9 +5262,9 @@ redef class ACallExpr
 		_n_expr = node
 		node.parent = self
 	end
-	redef fun n_id=(node)
+	redef fun n_qid=(node)
 	do
-		_n_id = node
+		_n_qid = node
 		node.parent = self
 	end
 	redef fun n_args=(node)
@@ -5261,14 +5277,14 @@ redef class ACallExpr
 	redef fun visit_all(v: Visitor)
 	do
 		v.enter_visit(_n_expr)
-		v.enter_visit(_n_id)
+		v.enter_visit(_n_qid)
 		v.enter_visit(_n_args)
 	end
 end
 redef class ACallAssignExpr
 	init init_acallassignexpr (
 		n_expr: nullable AExpr,
-		n_id: nullable TId,
+		n_qid: nullable AQid,
 		n_args: nullable AExprs,
 		n_assign: nullable TAssign,
 		n_value: nullable AExpr
@@ -5276,8 +5292,8 @@ redef class ACallAssignExpr
 	do
 		_n_expr = n_expr.as(not null)
 		n_expr.parent = self
-		_n_id = n_id.as(not null)
-		n_id.parent = self
+		_n_qid = n_qid.as(not null)
+		n_qid.parent = self
 		_n_args = n_args.as(not null)
 		n_args.parent = self
 		_n_assign = n_assign.as(not null)
@@ -5292,8 +5308,8 @@ redef class ACallAssignExpr
 			n_expr = new_child.as(AExpr)
 			return
 		end
-		if _n_id == old_child then
-			n_id = new_child.as(TId)
+		if _n_qid == old_child then
+			n_qid = new_child.as(AQid)
 			return
 		end
 		if _n_args == old_child then
@@ -5315,9 +5331,9 @@ redef class ACallAssignExpr
 		_n_expr = node
 		node.parent = self
 	end
-	redef fun n_id=(node)
+	redef fun n_qid=(node)
 	do
-		_n_id = node
+		_n_qid = node
 		node.parent = self
 	end
 	redef fun n_args=(node)
@@ -5340,7 +5356,7 @@ redef class ACallAssignExpr
 	redef fun visit_all(v: Visitor)
 	do
 		v.enter_visit(_n_expr)
-		v.enter_visit(_n_id)
+		v.enter_visit(_n_qid)
 		v.enter_visit(_n_args)
 		v.enter_visit(_n_assign)
 		v.enter_visit(_n_value)
@@ -5349,7 +5365,7 @@ end
 redef class ACallReassignExpr
 	init init_acallreassignexpr (
 		n_expr: nullable AExpr,
-		n_id: nullable TId,
+		n_qid: nullable AQid,
 		n_args: nullable AExprs,
 		n_assign_op: nullable AAssignOp,
 		n_value: nullable AExpr
@@ -5357,8 +5373,8 @@ redef class ACallReassignExpr
 	do
 		_n_expr = n_expr.as(not null)
 		n_expr.parent = self
-		_n_id = n_id.as(not null)
-		n_id.parent = self
+		_n_qid = n_qid.as(not null)
+		n_qid.parent = self
 		_n_args = n_args.as(not null)
 		n_args.parent = self
 		_n_assign_op = n_assign_op.as(not null)
@@ -5373,8 +5389,8 @@ redef class ACallReassignExpr
 			n_expr = new_child.as(AExpr)
 			return
 		end
-		if _n_id == old_child then
-			n_id = new_child.as(TId)
+		if _n_qid == old_child then
+			n_qid = new_child.as(AQid)
 			return
 		end
 		if _n_args == old_child then
@@ -5396,9 +5412,9 @@ redef class ACallReassignExpr
 		_n_expr = node
 		node.parent = self
 	end
-	redef fun n_id=(node)
+	redef fun n_qid=(node)
 	do
-		_n_id = node
+		_n_qid = node
 		node.parent = self
 	end
 	redef fun n_args=(node)
@@ -5421,7 +5437,7 @@ redef class ACallReassignExpr
 	redef fun visit_all(v: Visitor)
 	do
 		v.enter_visit(_n_expr)
-		v.enter_visit(_n_id)
+		v.enter_visit(_n_qid)
 		v.enter_visit(_n_args)
 		v.enter_visit(_n_assign_op)
 		v.enter_visit(_n_value)
@@ -6352,22 +6368,22 @@ redef class ANullExpr
 		v.enter_visit(_n_annotations)
 	end
 end
-redef class ADecIntExpr
-	init init_adecintexpr (
-		n_number: nullable TNumber,
+redef class AIntegerExpr
+	init init_aintegerexpr (
+		n_integer: nullable TInteger,
 		n_annotations: nullable AAnnotations
 	)
 	do
-		_n_number = n_number.as(not null)
-		n_number.parent = self
+		_n_integer = n_integer.as(not null)
+		n_integer.parent = self
 		_n_annotations = n_annotations
 		if n_annotations != null then n_annotations.parent = self
 	end
 
 	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
 	do
-		if _n_number == old_child then
-			n_number = new_child.as(TNumber)
+		if _n_integer == old_child then
+			n_integer = new_child.as(TInteger)
 			return
 		end
 		if _n_annotations == old_child then
@@ -6376,9 +6392,9 @@ redef class ADecIntExpr
 		end
 	end
 
-	redef fun n_number=(node)
+	redef fun n_integer=(node)
 	do
-		_n_number = node
+		_n_integer = node
 		node.parent = self
 	end
 	redef fun n_annotations=(node)
@@ -6390,49 +6406,7 @@ redef class ADecIntExpr
 
 	redef fun visit_all(v: Visitor)
 	do
-		v.enter_visit(_n_number)
-		v.enter_visit(_n_annotations)
-	end
-end
-redef class AHexIntExpr
-	init init_ahexintexpr (
-		n_hex_number: nullable THexNumber,
-		n_annotations: nullable AAnnotations
-	)
-	do
-		_n_hex_number = n_hex_number.as(not null)
-		n_hex_number.parent = self
-		_n_annotations = n_annotations
-		if n_annotations != null then n_annotations.parent = self
-	end
-
-	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
-	do
-		if _n_hex_number == old_child then
-			n_hex_number = new_child.as(THexNumber)
-			return
-		end
-		if _n_annotations == old_child then
-			n_annotations = new_child.as(nullable AAnnotations)
-			return
-		end
-	end
-
-	redef fun n_hex_number=(node)
-	do
-		_n_hex_number = node
-		node.parent = self
-	end
-	redef fun n_annotations=(node)
-	do
-		_n_annotations = node
-		if node != null then node.parent = self
-	end
-
-
-	redef fun visit_all(v: Visitor)
-	do
-		v.enter_visit(_n_hex_number)
+		v.enter_visit(_n_integer)
 		v.enter_visit(_n_annotations)
 	end
 end
@@ -7694,6 +7668,52 @@ redef class AGgAssignOp
 	redef fun visit_all(v: Visitor)
 	do
 		v.enter_visit(_n_op)
+	end
+end
+redef class AForGroup
+	init init_aforgroup (
+		n_ids: Collection[Object], # Should be Collection[TId]
+		n_kwin: nullable TKwin,
+		n_expr: nullable AExpr
+	)
+	do
+		self.n_ids.unsafe_add_all(n_ids)
+		_n_kwin = n_kwin.as(not null)
+		n_kwin.parent = self
+		_n_expr = n_expr.as(not null)
+		n_expr.parent = self
+	end
+
+	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
+	do
+		if n_ids.replace_child(old_child, new_child) then return
+		if _n_kwin == old_child then
+			n_kwin = new_child.as(TKwin)
+			return
+		end
+		if _n_expr == old_child then
+			n_expr = new_child.as(AExpr)
+			return
+		end
+	end
+
+	redef fun n_kwin=(node)
+	do
+		_n_kwin = node
+		node.parent = self
+	end
+	redef fun n_expr=(node)
+	do
+		_n_expr = node
+		node.parent = self
+	end
+
+
+	redef fun visit_all(v: Visitor)
+	do
+		n_ids.visit_all(v)
+		v.enter_visit(_n_kwin)
+		v.enter_visit(_n_expr)
 	end
 end
 redef class AModuleName

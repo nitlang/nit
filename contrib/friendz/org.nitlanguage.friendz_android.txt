@@ -2,7 +2,7 @@ Categories:Nit,Games
 License:WTFPL
 Web Site:http://nitlanguage.org
 Source Code:http://nitlanguage.org/nit.git/tree/HEAD:/contrib/friendz
-Issue Tracker:https://github.com/privat/nit/issues
+Issue Tracker:https://github.com/nitlang/nit/issues
 
 Summary:Puzzle game
 Description:

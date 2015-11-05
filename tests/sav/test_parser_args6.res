@@ -13,18 +13,21 @@ Start 1,1--42
               TKwnew "new" 1,18--20
               AType 1,22--25
                 TClassid "Toto" 1,22--25
-              TId "toto" 1,27--30
+              AQid 1,27--30
+                TId "toto" 1,27--30
               AParExprs 1,31--41
                 TOpar "(" 1,31
                 APlusExpr 1,32--40
                   ACallExpr 1,32--35
                     AImplicitSelfExpr 1,32
-                    TId "toto" 1,32--35
+                    AQid 1,32--35
+                      TId "toto" 1,32--35
                     AListExprs 1,35
                   TPlus "+" 1,36
                   ACallExpr 1,37--40
                     AImplicitSelfExpr 1,37
-                    TId "toto" 1,37--40
+                    AQid 1,37--40
+                      TId "toto" 1,37--40
                     AListExprs 1,40
                 TCpar ")" 1,41
   EOF "" 1,42

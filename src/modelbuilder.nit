@@ -25,7 +25,7 @@ private import more_collections
 
 redef class ToolContext
 	# Option --ignore-visibility
-	var opt_ignore_visibility = new OptionBool("Do not check, and produce errors, on visibility issues.", "--ignore-visibility")
+	var opt_ignore_visibility = new OptionBool("Do not check, and produce errors, on visibility issues", "--ignore-visibility")
 
 	redef init
 	do
@@ -45,6 +45,8 @@ redef class ToolContext
 			mainmodule = new MModule(modelbuilder.model, null, mmodules.first.name + "-m", new Location(mmodules.first.location.file, 0, 0, 0, 0))
 			mainmodule.is_fictive = true
 			mainmodule.set_imported_mmodules(mmodules)
+			modelbuilder.apply_conditional_importations(mainmodule)
+			modelbuilder.run_phases
 		end
 		return mainmodule
 	end
@@ -87,7 +89,7 @@ redef class ModelBuilder
 	# Run phases on all loaded modules
 	fun run_phases
 	do
-		var mmodules = model.mmodules.to_a
+		var mmodules = parsed_modules.to_a
 		model.mmodule_importation_hierarchy.sort(mmodules)
 		var nmodules = new Array[AModule]
 		for mm in mmodules do

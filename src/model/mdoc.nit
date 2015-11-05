@@ -39,7 +39,7 @@ redef class MEntity
 
 	# The documentation associated to the entity or their main nested entity.
 	#
-	# MProject fall-back to their root MGroup
+	# MPackage fall-back to their root MGroup
 	# MGroup fall-back to their default_mmodule
 	# Other entities do not fall-back
 	#

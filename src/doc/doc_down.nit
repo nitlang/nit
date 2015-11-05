@@ -20,48 +20,76 @@ import highlight
 private import parser_util
 
 redef class MDoc
-	# Comment synopsys HTML escaped
-	var short_comment: String is lazy do return content.first.html_escape
 
-	# Full comment HTML escaped
-	var full_comment: String is lazy do return content.join("\n").html_escape
+	# Synopsis HTML escaped.
+	var synopsis: String is lazy do return content.first.html_escape
 
-	# Synopsys in a template
-	var tpl_short_comment: Writable is lazy do
+	# Comment without synopsis HTML escaped
+	var comment: String is lazy do
+		var lines = content.to_a
+		if not lines.is_empty then lines.shift
+		return content.join("\n").html_escape
+	end
+
+	# Full comment HTML escaped.
+	var documentation: String is lazy do return content.join("\n").html_escape
+
+	private var markdown_proc: MarkdownProcessor is lazy do
+		return original_mentity.model.nitdoc_md_processor
+	end
+
+	private var inline_proc: MarkdownProcessor is lazy do
+		return original_mentity.model.nitdoc_inline_processor
+	end
+
+	# Renders the synopsis as a HTML comment block.
+	var html_synopsis: Writable is lazy do
 		var res = new Template
-		var syn = nitdoc_inline_processor.process(content.first)
+		var syn = inline_proc.process(content.first)
 		res.add "<span class=\"synopsys nitdoc\">{syn}</span>"
 		return res
 
 	end
 
-	# Full comment in a template
-	var tpl_comment: Writable is lazy do
-		var res = new Template
+	# Renders the comment without the synopsis as a HTML comment block.
+	var html_comment: Writable is lazy do
 		var lines = content.to_a
+		if not lines.is_empty then lines.shift
+		return lines_to_html(lines)
+	end
+
+	# Renders the synopsis and the comment as a HTML comment block.
+	var html_documentation: Writable is lazy do return lines_to_html(content.to_a)
+
+	# Renders markdown line as a HTML comment block.
+	private fun lines_to_html(lines: Array[String]): Writable do
+		var res = new Template
 		res.add "<div class=\"nitdoc\">"
 		# do not use DocUnit as synopsys
-		if not content.first.has_prefix("    ") and
-		   not content.first.has_prefix("\t") then
-			# parse synopsys
-			var syn = nitdoc_inline_processor.process(lines.shift)
-			res.add "<p class=\"synopsys\">{syn}</p>"
+		if not lines.is_empty then
+			if not lines.first.has_prefix("    ") and
+			   not lines.first.has_prefix("\t") then
+				# parse synopsys
+				var syn = inline_proc.process(lines.shift)
+				res.add "<p class=\"synopsys\">{syn}</p>"
+			end
 		end
 		# check for annotations
 		for i in [0 .. lines.length[ do
 			var line = lines[i]
 			if line.to_upper.has_prefix("ENSURE") or line.to_upper.has_prefix("REQUIRE") then
-				var html = nitdoc_inline_processor.process(line)
+				var html = inline_proc.process(line)
 				lines[i] = "<p class=\"contract\">{html}</p>"
 			else if line.to_upper.has_prefix("TODO") or line.to_upper.has_prefix("FIXME") then
-				var html = nitdoc_inline_processor.process(line)
+				var html = inline_proc.process(line)
 				lines[i] = "<p class=\"todo\">{html}</p>"
 			end
 		end
 		# add other lines
-		res.add nitdoc_md_processor.process(lines.join("\n"))
+		res.add markdown_proc.process(lines.join("\n"))
 		res.add "</div>"
 		return res
+
 	end
 end
 
@@ -71,10 +99,8 @@ private class NitdocDecorator
 	var toolcontext = new ToolContext
 
 	redef fun add_code(v, block) do
-		var meta = "nit"
-		if block isa BlockFence and block.meta != null then
-			meta = block.meta.to_s
-		end
+		var meta = block.meta or else "nit"
+
 		# Do not try to highlight non-nit code.
 		if meta != "nit" and meta != "nitish" then
 			v.add "<pre class=\"{meta}\"><code>"
@@ -83,7 +109,7 @@ private class NitdocDecorator
 			return
 		end
 		# Try to parse code
-		var code = code_from_block(block)
+		var code = block.raw_content
 		var ast = toolcontext.parse_something(code)
 		if ast isa AError then
 			v.add "<pre class=\"{meta}\"><code>"
@@ -122,25 +148,6 @@ private class NitdocDecorator
 		for i in [from..to[ do out.add buffer[i]
 		return out.write_to_string
 	end
-
-	fun code_from_block(block: BlockCode): String do
-		var infence = block isa BlockFence
-		var text = new FlatBuffer
-		var line = block.block.first_line
-		while line != null do
-			if not line.is_empty then
-				var str = line.value
-				if not infence and str.has_prefix("    ") then
-					text.append str.substring(4, str.length - line.trailing)
-				else
-					text.append str
-				end
-			end
-			text.append "\n"
-			line = line.next
-		end
-		return text.write_to_string
-	end
 end
 
 # Decorator for span elements.
@@ -175,18 +182,20 @@ private class InlineDecorator
 	end
 end
 
-# Get a markdown processor for Nitdoc comments.
-private fun nitdoc_md_processor: MarkdownProcessor do
-	var proc = new MarkdownProcessor
-	proc.emitter.decorator = new NitdocDecorator
-	return once proc
-end
+redef class Model
+	# Get a markdown processor for Nitdoc comments.
+	var nitdoc_md_processor: MarkdownProcessor is lazy do
+		var proc = new MarkdownProcessor
+		proc.emitter.decorator = new NitdocDecorator
+		return proc
+	end
 
-# Get a markdown inline processor for Nitdoc comments.
-#
-# This processor is specificaly designed to inlinable doc elements like synopsys.
-private fun nitdoc_inline_processor: MarkdownProcessor do
-	var proc = new MarkdownProcessor
-	proc.emitter.decorator = new InlineDecorator
-	return once proc
+	# Get a markdown inline processor for Nitdoc comments.
+	#
+	# This processor is specificaly designed to inlinable doc elements like synopsys.
+	var nitdoc_inline_processor: MarkdownProcessor is lazy do
+		var proc = new MarkdownProcessor
+		proc.emitter.decorator = new InlineDecorator
+		return proc
+	end
 end

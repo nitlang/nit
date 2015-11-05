@@ -32,7 +32,7 @@ end
 var w = args.first.to_i
 var h = w
 
-var byte_acc = 0
+var byte_acc = 0u8
 var bit_num = 0
 
 print("P4\n{w} {h}")
@@ -54,21 +54,21 @@ for y in [0..h[ do
 	end
 
 	if zr*zr+zi*zi > limit*limit then
-	    byte_acc = (byte_acc.lshift(1))
+	    byte_acc = byte_acc << 1
 	else
-	    byte_acc = (byte_acc.lshift(1)) + 1
+	    byte_acc = (byte_acc << 1) + 1u8
 	end
 
 	bit_num = bit_num + 1
 
 	if bit_num == 8 then
-	    printn(byte_acc.ascii)
-	    byte_acc = 0
+	    stdout.write_byte(byte_acc)
+	    byte_acc = 0u8
 	    bit_num = 0	    
 	else if x == w - 1 then
-	    byte_acc = byte_acc.lshift(8-w%8)
-	    printn(byte_acc.ascii)
-	    byte_acc = 0
+	    byte_acc = byte_acc << (8-w%8)
+	    stdout.write_byte(byte_acc)
+	    byte_acc = 0u8
 	    bit_num = 0	    
 	end
     end

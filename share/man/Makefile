@@ -15,11 +15,20 @@
 IN=$(wildcard nit*.md)
 OUT=$(patsubst %.md,man1/%.1,$(IN))
 
+MARKDOWN=../../lib/markdown
+NITMD=$(MARKDOWN)/nitmd
+
 all: $(OUT)
 
-man1/%.1: %.md
+
+man1/%.1: %.md $(NITMD)
 	mkdir -p man1
-	pandoc $< -t man -s -o $@
+	echo ".TH $* 1" > $@
+	$(NITMD) $< -t man >> $@
+
+
+$(NITMD):
+	$(MAKE) -C $(MARKDOWN)
 
 # Rule to produce mdwn files for ikiwiki that will be used at http://nitlanguage.org/tools/
 web:
@@ -27,7 +36,7 @@ web:
 	mkdir -p www
 	cp nit*.md www
 	rename '$$_ = "$${_}wn"' www/*.md
-	sed -i -e '1d;/SEE ALSO/,$$d' www/*.mdwn
+	sed -i -e '/SEE ALSO/,$$d' www/*.mdwn
 
 publish: web
 	rsync www/* asimov:wiki/nitlanguage/doc/tools/

@@ -7,7 +7,7 @@ var1 = self->attrs[COLOR_nit__local_var_init__ToolContext___local_var_init_phase
 if (unlikely(var1 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _local_var_init_phase");
 PRINT_ERROR(" (%s:%d)\n", FILE_nit__local_var_init, 24);
-show_backtrace(1);
+fatal_exit(1);
 }
 var = var1;
 RET_LABEL:;
@@ -24,8 +24,8 @@ var_npropdef = p0;
 var2 = self->attrs[COLOR_nit__phase__Phase___toolcontext].val; /* _toolcontext on <self:LocalVarInitPhase> */
 if (unlikely(var2 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _toolcontext");
-PRINT_ERROR(" (%s:%d)\n", FILE_nit__phase, 201);
-show_backtrace(1);
+PRINT_ERROR(" (%s:%d)\n", FILE_nit__phase, 200);
+fatal_exit(1);
 }
 var = var2;
 RET_LABEL1:(void)0;
@@ -44,10 +44,10 @@ val* var_v /* var v: LocalVarInitVisitor */;
 var_toolcontext = p0;
 var = NEW_nit__local_var_init__LocalVarInitVisitor(&type_nit__local_var_init__LocalVarInitVisitor);
 {
-((void (*)(val* self, val* p0))(var->class->vft[COLOR_nit__local_var_init__LocalVarInitVisitor__toolcontext_61d]))(var, var_toolcontext) /* toolcontext= on <var:LocalVarInitVisitor>*/;
+((void(*)(val* self, val* p0))(var->class->vft[COLOR_nit__local_var_init__LocalVarInitVisitor__toolcontext_61d]))(var, var_toolcontext); /* toolcontext= on <var:LocalVarInitVisitor>*/
 }
 {
-((void (*)(val* self))(var->class->vft[COLOR_standard__kernel__Object__init]))(var) /* init on <var:LocalVarInitVisitor>*/;
+((void(*)(val* self))(var->class->vft[COLOR_standard__kernel__Object__init]))(var); /* init on <var:LocalVarInitVisitor>*/
 }
 var_v = var;
 {
@@ -63,7 +63,7 @@ var1 = self->attrs[COLOR_nit__local_var_init__LocalVarInitVisitor___toolcontext]
 if (unlikely(var1 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _toolcontext");
 PRINT_ERROR(" (%s:%d)\n", FILE_nit__local_var_init, 46);
-show_backtrace(1);
+fatal_exit(1);
 }
 var = var1;
 RET_LABEL:;
@@ -82,7 +82,7 @@ var1 = self->attrs[COLOR_nit__local_var_init__LocalVarInitVisitor___maybe_unset_
 if (unlikely(var1 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _maybe_unset_vars");
 PRINT_ERROR(" (%s:%d)\n", FILE_nit__local_var_init, 48);
-show_backtrace(1);
+fatal_exit(1);
 }
 var = var1;
 RET_LABEL:;
@@ -92,54 +92,52 @@ return var;
 void nit__local_var_init___nit__local_var_init__LocalVarInitVisitor___mark_is_unset(val* self, val* p0, val* p1) {
 val* var_node /* var node: AExpr */;
 val* var_variable /* var variable: nullable Variable */;
-val* var /* : null */;
+short int var /* : Bool */;
 short int var1 /* : Bool */;
-short int var2 /* : Bool */;
 val* var_other /* var other: nullable Object */;
+short int var3 /* : Bool */;
 short int var4 /* : Bool */;
-short int var5 /* : Bool */;
-val* var6 /* : Set[Variable] */;
-val* var8 /* : Set[Variable] */;
+val* var5 /* : Set[Variable] */;
+val* var7 /* : Set[Variable] */;
 var_node = p0;
 var_variable = p1;
-var = NULL;
 if (var_variable == NULL) {
-var1 = 0; /* is null */
+var = 0; /* is null */
 } else {
-var1 = 1; /* arg is null and recv is not */
+var = 1; /* arg is null and recv is not */
 }
 if (0) {
-{ /* Inline kernel#Object#!= (var_variable,var) on <var_variable:nullable Variable> */
-var_other = var;
+{ /* Inline kernel#Object#!= (var_variable,((val*)NULL)) on <var_variable:nullable Variable> */
+var_other = ((val*)NULL);
 {
-var4 = ((short int (*)(val* self, val* p0))(var_variable->class->vft[COLOR_standard__kernel__Object___61d_61d]))(var_variable, var_other) /* == on <var_variable:nullable Variable(Variable)>*/;
+var3 = ((short int(*)(val* self, val* p0))(var_variable->class->vft[COLOR_standard__kernel__Object___61d_61d]))(var_variable, var_other); /* == on <var_variable:nullable Variable(Variable)>*/
 }
-var5 = !var4;
-var2 = var5;
-goto RET_LABEL3;
-RET_LABEL3:(void)0;
+var4 = !var3;
+var1 = var4;
+goto RET_LABEL2;
+RET_LABEL2:(void)0;
 }
-var1 = var2;
+var = var1;
 }
-if (unlikely(!var1)) {
+if (unlikely(!var)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
 PRINT_ERROR(" (%s:%d)\n", FILE_nit__local_var_init, 53);
-show_backtrace(1);
+fatal_exit(1);
 }
 {
 { /* Inline local_var_init#LocalVarInitVisitor#maybe_unset_vars (self) on <self:LocalVarInitVisitor> */
-var8 = self->attrs[COLOR_nit__local_var_init__LocalVarInitVisitor___maybe_unset_vars].val; /* _maybe_unset_vars on <self:LocalVarInitVisitor> */
-if (unlikely(var8 == NULL)) {
+var7 = self->attrs[COLOR_nit__local_var_init__LocalVarInitVisitor___maybe_unset_vars].val; /* _maybe_unset_vars on <self:LocalVarInitVisitor> */
+if (unlikely(var7 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _maybe_unset_vars");
 PRINT_ERROR(" (%s:%d)\n", FILE_nit__local_var_init, 48);
-show_backtrace(1);
+fatal_exit(1);
 }
-var6 = var8;
-RET_LABEL7:(void)0;
+var5 = var7;
+RET_LABEL6:(void)0;
 }
 }
 {
-((void (*)(val* self, val* p0))(var6->class->vft[COLOR_standard__abstract_collection__SimpleCollection__add]))(var6, var_variable) /* add on <var6:Set[Variable]>*/;
+((void(*)(val* self, val* p0))((((long)var5&3)?class_info[((long)var5&3)]:var5->class)->vft[COLOR_standard__abstract_collection__SimpleCollection__add]))(var5, var_variable); /* add on <var5:Set[Variable]>*/
 }
 RET_LABEL:;
 }
@@ -147,94 +145,92 @@ RET_LABEL:;
 void nit__local_var_init___nit__local_var_init__LocalVarInitVisitor___mark_is_set(val* self, val* p0, val* p1) {
 val* var_node /* var node: AExpr */;
 val* var_variable /* var variable: nullable Variable */;
-val* var /* : null */;
+short int var /* : Bool */;
 short int var1 /* : Bool */;
-short int var2 /* : Bool */;
 val* var_other /* var other: nullable Object */;
+short int var3 /* : Bool */;
 short int var4 /* : Bool */;
-short int var5 /* : Bool */;
-val* var6 /* : Set[Variable] */;
-val* var8 /* : Set[Variable] */;
+val* var5 /* : Set[Variable] */;
+val* var7 /* : Set[Variable] */;
+short int var8 /* : Bool */;
 short int var9 /* : Bool */;
-short int var10 /* : Bool */;
-val* var11 /* : nullable FlowContext */;
-val* var13 /* : nullable FlowContext */;
+val* var10 /* : nullable FlowContext */;
+val* var12 /* : nullable FlowContext */;
 val* var_flow /* var flow: FlowContext */;
-val* var14 /* : Set[Variable] */;
-val* var16 /* : Set[Variable] */;
+val* var13 /* : Set[Variable] */;
+val* var15 /* : Set[Variable] */;
 var_node = p0;
 var_variable = p1;
-var = NULL;
 if (var_variable == NULL) {
-var1 = 0; /* is null */
+var = 0; /* is null */
 } else {
-var1 = 1; /* arg is null and recv is not */
+var = 1; /* arg is null and recv is not */
 }
 if (0) {
-{ /* Inline kernel#Object#!= (var_variable,var) on <var_variable:nullable Variable> */
-var_other = var;
+{ /* Inline kernel#Object#!= (var_variable,((val*)NULL)) on <var_variable:nullable Variable> */
+var_other = ((val*)NULL);
 {
-var4 = ((short int (*)(val* self, val* p0))(var_variable->class->vft[COLOR_standard__kernel__Object___61d_61d]))(var_variable, var_other) /* == on <var_variable:nullable Variable(Variable)>*/;
+var3 = ((short int(*)(val* self, val* p0))(var_variable->class->vft[COLOR_standard__kernel__Object___61d_61d]))(var_variable, var_other); /* == on <var_variable:nullable Variable(Variable)>*/
 }
-var5 = !var4;
-var2 = var5;
-goto RET_LABEL3;
-RET_LABEL3:(void)0;
+var4 = !var3;
+var1 = var4;
+goto RET_LABEL2;
+RET_LABEL2:(void)0;
 }
-var1 = var2;
+var = var1;
 }
-if (unlikely(!var1)) {
+if (unlikely(!var)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
 PRINT_ERROR(" (%s:%d)\n", FILE_nit__local_var_init, 59);
-show_backtrace(1);
+fatal_exit(1);
 }
 {
 { /* Inline local_var_init#LocalVarInitVisitor#maybe_unset_vars (self) on <self:LocalVarInitVisitor> */
-var8 = self->attrs[COLOR_nit__local_var_init__LocalVarInitVisitor___maybe_unset_vars].val; /* _maybe_unset_vars on <self:LocalVarInitVisitor> */
-if (unlikely(var8 == NULL)) {
+var7 = self->attrs[COLOR_nit__local_var_init__LocalVarInitVisitor___maybe_unset_vars].val; /* _maybe_unset_vars on <self:LocalVarInitVisitor> */
+if (unlikely(var7 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _maybe_unset_vars");
 PRINT_ERROR(" (%s:%d)\n", FILE_nit__local_var_init, 48);
-show_backtrace(1);
+fatal_exit(1);
 }
-var6 = var8;
-RET_LABEL7:(void)0;
+var5 = var7;
+RET_LABEL6:(void)0;
 }
 }
 {
-var9 = ((short int (*)(val* self, val* p0))(var6->class->vft[COLOR_standard__abstract_collection__Collection__has]))(var6, var_variable) /* has on <var6:Set[Variable]>*/;
+var8 = ((short int(*)(val* self, val* p0))((((long)var5&3)?class_info[((long)var5&3)]:var5->class)->vft[COLOR_standard__abstract_collection__Collection__has]))(var5, var_variable); /* has on <var5:Set[Variable]>*/
 }
-var10 = !var9;
-if (var10){
+var9 = !var8;
+if (var9){
 goto RET_LABEL;
 } else {
 }
 {
 { /* Inline flow#AExpr#after_flow_context (var_node) on <var_node:AExpr> */
-var13 = var_node->attrs[COLOR_nit__flow__AExpr___after_flow_context].val; /* _after_flow_context on <var_node:AExpr> */
-var11 = var13;
-RET_LABEL12:(void)0;
+var12 = var_node->attrs[COLOR_nit__flow__AExpr___after_flow_context].val; /* _after_flow_context on <var_node:AExpr> */
+var10 = var12;
+RET_LABEL11:(void)0;
 }
 }
-if (unlikely(var11 == NULL)) {
+if (unlikely(var10 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Cast failed");
 PRINT_ERROR(" (%s:%d)\n", FILE_nit__local_var_init, 62);
-show_backtrace(1);
+fatal_exit(1);
 }
-var_flow = var11;
+var_flow = var10;
 {
 { /* Inline local_var_init#FlowContext#set_vars (var_flow) on <var_flow:FlowContext> */
-var16 = var_flow->attrs[COLOR_nit__local_var_init__FlowContext___set_vars].val; /* _set_vars on <var_flow:FlowContext> */
-if (unlikely(var16 == NULL)) {
+var15 = var_flow->attrs[COLOR_nit__local_var_init__FlowContext___set_vars].val; /* _set_vars on <var_flow:FlowContext> */
+if (unlikely(var15 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _set_vars");
 PRINT_ERROR(" (%s:%d)\n", FILE_nit__local_var_init, 86);
-show_backtrace(1);
+fatal_exit(1);
 }
-var14 = var16;
-RET_LABEL15:(void)0;
+var13 = var15;
+RET_LABEL14:(void)0;
 }
 }
 {
-((void (*)(val* self, val* p0))(var14->class->vft[COLOR_standard__abstract_collection__SimpleCollection__add]))(var14, var_variable) /* add on <var14:Set[Variable]>*/;
+((void(*)(val* self, val* p0))((((long)var13&3)?class_info[((long)var13&3)]:var13->class)->vft[COLOR_standard__abstract_collection__SimpleCollection__add]))(var13, var_variable); /* add on <var13:Set[Variable]>*/
 }
 RET_LABEL:;
 }
@@ -242,168 +238,165 @@ RET_LABEL:;
 void nit__local_var_init___nit__local_var_init__LocalVarInitVisitor___check_is_set(val* self, val* p0, val* p1) {
 val* var_node /* var node: AExpr */;
 val* var_variable /* var variable: nullable Variable */;
-val* var /* : null */;
+short int var /* : Bool */;
 short int var1 /* : Bool */;
-short int var2 /* : Bool */;
 val* var_other /* var other: nullable Object */;
+short int var3 /* : Bool */;
 short int var4 /* : Bool */;
-short int var5 /* : Bool */;
-val* var6 /* : Set[Variable] */;
-val* var8 /* : Set[Variable] */;
+val* var5 /* : Set[Variable] */;
+val* var7 /* : Set[Variable] */;
+short int var8 /* : Bool */;
 short int var9 /* : Bool */;
-short int var10 /* : Bool */;
-val* var11 /* : nullable FlowContext */;
-val* var13 /* : nullable FlowContext */;
+val* var10 /* : nullable FlowContext */;
+val* var12 /* : nullable FlowContext */;
 val* var_flow /* var flow: FlowContext */;
+short int var13 /* : Bool */;
 short int var14 /* : Bool */;
-short int var15 /* : Bool */;
-val* var16 /* : ToolContext */;
-val* var18 /* : ToolContext */;
-val* var19 /* : Location */;
+val* var15 /* : ToolContext */;
+val* var17 /* : ToolContext */;
+val* var18 /* : Location */;
+val* var19 /* : NativeArray[String] */;
 static val* varonce;
-val* var20 /* : String */;
-char* var21 /* : NativeString */;
-long var22 /* : Int */;
+static val* varonce20;
+val* var21 /* : String */;
+char* var22 /* : NativeString */;
 val* var23 /* : FlatString */;
 static val* varonce24;
 val* var25 /* : String */;
 char* var26 /* : NativeString */;
-long var27 /* : Int */;
-val* var28 /* : FlatString */;
-val* var29 /* : Array[Object] */;
-long var30 /* : Int */;
-val* var31 /* : NativeArray[Object] */;
-val* var32 /* : String */;
+val* var27 /* : FlatString */;
+val* var28 /* : String */;
+val* var29 /* : String */;
+val* var30 /* : Message */;
+val* var31 /* : Set[Variable] */;
 val* var33 /* : Set[Variable] */;
-val* var35 /* : Set[Variable] */;
 var_node = p0;
 var_variable = p1;
-var = NULL;
 if (var_variable == NULL) {
-var1 = 0; /* is null */
+var = 0; /* is null */
 } else {
-var1 = 1; /* arg is null and recv is not */
+var = 1; /* arg is null and recv is not */
 }
 if (0) {
-{ /* Inline kernel#Object#!= (var_variable,var) on <var_variable:nullable Variable> */
-var_other = var;
+{ /* Inline kernel#Object#!= (var_variable,((val*)NULL)) on <var_variable:nullable Variable> */
+var_other = ((val*)NULL);
 {
-var4 = ((short int (*)(val* self, val* p0))(var_variable->class->vft[COLOR_standard__kernel__Object___61d_61d]))(var_variable, var_other) /* == on <var_variable:nullable Variable(Variable)>*/;
+var3 = ((short int(*)(val* self, val* p0))(var_variable->class->vft[COLOR_standard__kernel__Object___61d_61d]))(var_variable, var_other); /* == on <var_variable:nullable Variable(Variable)>*/
 }
-var5 = !var4;
-var2 = var5;
-goto RET_LABEL3;
-RET_LABEL3:(void)0;
+var4 = !var3;
+var1 = var4;
+goto RET_LABEL2;
+RET_LABEL2:(void)0;
 }
-var1 = var2;
+var = var1;
 }
-if (unlikely(!var1)) {
+if (unlikely(!var)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
 PRINT_ERROR(" (%s:%d)\n", FILE_nit__local_var_init, 68);
-show_backtrace(1);
+fatal_exit(1);
 }
 {
 { /* Inline local_var_init#LocalVarInitVisitor#maybe_unset_vars (self) on <self:LocalVarInitVisitor> */
-var8 = self->attrs[COLOR_nit__local_var_init__LocalVarInitVisitor___maybe_unset_vars].val; /* _maybe_unset_vars on <self:LocalVarInitVisitor> */
-if (unlikely(var8 == NULL)) {
+var7 = self->attrs[COLOR_nit__local_var_init__LocalVarInitVisitor___maybe_unset_vars].val; /* _maybe_unset_vars on <self:LocalVarInitVisitor> */
+if (unlikely(var7 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _maybe_unset_vars");
 PRINT_ERROR(" (%s:%d)\n", FILE_nit__local_var_init, 48);
-show_backtrace(1);
+fatal_exit(1);
 }
-var6 = var8;
-RET_LABEL7:(void)0;
+var5 = var7;
+RET_LABEL6:(void)0;
 }
 }
 {
-var9 = ((short int (*)(val* self, val* p0))(var6->class->vft[COLOR_standard__abstract_collection__Collection__has]))(var6, var_variable) /* has on <var6:Set[Variable]>*/;
+var8 = ((short int(*)(val* self, val* p0))((((long)var5&3)?class_info[((long)var5&3)]:var5->class)->vft[COLOR_standard__abstract_collection__Collection__has]))(var5, var_variable); /* has on <var5:Set[Variable]>*/
 }
-var10 = !var9;
-if (var10){
+var9 = !var8;
+if (var9){
 goto RET_LABEL;
 } else {
 }
 {
 { /* Inline flow#AExpr#after_flow_context (var_node) on <var_node:AExpr> */
-var13 = var_node->attrs[COLOR_nit__flow__AExpr___after_flow_context].val; /* _after_flow_context on <var_node:AExpr> */
-var11 = var13;
-RET_LABEL12:(void)0;
+var12 = var_node->attrs[COLOR_nit__flow__AExpr___after_flow_context].val; /* _after_flow_context on <var_node:AExpr> */
+var10 = var12;
+RET_LABEL11:(void)0;
 }
 }
-if (unlikely(var11 == NULL)) {
+if (unlikely(var10 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Cast failed");
 PRINT_ERROR(" (%s:%d)\n", FILE_nit__local_var_init, 71);
-show_backtrace(1);
+fatal_exit(1);
 }
-var_flow = var11;
+var_flow = var10;
 {
-var14 = nit__local_var_init___FlowContext___is_variable_set(var_flow, var_variable);
+var13 = nit__local_var_init___FlowContext___is_variable_set(var_flow, var_variable);
 }
-var15 = !var14;
-if (var15){
+var14 = !var13;
+if (var14){
 {
 { /* Inline local_var_init#LocalVarInitVisitor#toolcontext (self) on <self:LocalVarInitVisitor> */
-var18 = self->attrs[COLOR_nit__local_var_init__LocalVarInitVisitor___toolcontext].val; /* _toolcontext on <self:LocalVarInitVisitor> */
-if (unlikely(var18 == NULL)) {
+var17 = self->attrs[COLOR_nit__local_var_init__LocalVarInitVisitor___toolcontext].val; /* _toolcontext on <self:LocalVarInitVisitor> */
+if (unlikely(var17 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _toolcontext");
 PRINT_ERROR(" (%s:%d)\n", FILE_nit__local_var_init, 46);
-show_backtrace(1);
+fatal_exit(1);
 }
-var16 = var18;
-RET_LABEL17:(void)0;
+var15 = var17;
+RET_LABEL16:(void)0;
 }
 }
 {
-var19 = nit___nit__ANode___hot_location(var_node);
+var18 = nit___nit__ANode___hot_location(var_node);
 }
-if (varonce) {
-var20 = varonce;
+if (unlikely(varonce==NULL)) {
+var19 = NEW_standard__NativeArray(3l, &type_standard__NativeArray__standard__String);
+if (likely(varonce20!=NULL)) {
+var21 = varonce20;
 } else {
-var21 = "Error: variable \'";
-var22 = 17;
-var23 = standard___standard__NativeString___to_s_with_length(var21, var22);
-var20 = var23;
-varonce = var20;
+var22 = "Error: possibly unset variable `";
+var23 = standard___standard__NativeString___to_s_with_length(var22, 32l);
+var21 = var23;
+varonce20 = var21;
 }
-if (varonce24) {
+((struct instance_standard__NativeArray*)var19)->values[0]=var21;
+if (likely(varonce24!=NULL)) {
 var25 = varonce24;
 } else {
-var26 = "\' is possibly unset.";
-var27 = 20;
-var28 = standard___standard__NativeString___to_s_with_length(var26, var27);
-var25 = var28;
+var26 = "`.";
+var27 = standard___standard__NativeString___to_s_with_length(var26, 2l);
+var25 = var27;
 varonce24 = var25;
 }
-var29 = NEW_standard__Array(&type_standard__Array__standard__Object);
-{ /* var29 = array_instance Array[Object] */
-var30 = 3;
-var31 = NEW_standard__NativeArray(var30, &type_standard__NativeArray__standard__Object);
-((struct instance_standard__NativeArray*)var31)->values[0] = (val*) var20;
-((struct instance_standard__NativeArray*)var31)->values[1] = (val*) var_variable;
-((struct instance_standard__NativeArray*)var31)->values[2] = (val*) var25;
-{
-((void (*)(val* self, val* p0, long p1))(var29->class->vft[COLOR_standard__array__Array__with_native]))(var29, var31, var30) /* with_native on <var29:Array[Object]>*/;
-}
+((struct instance_standard__NativeArray*)var19)->values[2]=var25;
+} else {
+var19 = varonce;
+varonce = NULL;
 }
 {
-var32 = ((val* (*)(val* self))(var29->class->vft[COLOR_standard__string__Object__to_s]))(var29) /* to_s on <var29:Array[Object]>*/;
+var28 = ((val*(*)(val* self))(var_variable->class->vft[COLOR_standard__string__Object__to_s]))(var_variable); /* to_s on <var_variable:nullable Variable(Variable)>*/
 }
+((struct instance_standard__NativeArray*)var19)->values[1]=var28;
 {
-nit___nit__ToolContext___error(var16, var19, var32); /* Direct call toolcontext#ToolContext#error on <var16:ToolContext>*/
+var29 = ((val*(*)(val* self))(var19->class->vft[COLOR_standard__string__NativeArray__native_to_s]))(var19); /* native_to_s on <var19:NativeArray[String]>*/
+}
+varonce = var19;
+{
+var30 = nit___nit__ToolContext___error(var15, var18, var29);
 }
 {
 { /* Inline local_var_init#LocalVarInitVisitor#maybe_unset_vars (self) on <self:LocalVarInitVisitor> */
-var35 = self->attrs[COLOR_nit__local_var_init__LocalVarInitVisitor___maybe_unset_vars].val; /* _maybe_unset_vars on <self:LocalVarInitVisitor> */
-if (unlikely(var35 == NULL)) {
+var33 = self->attrs[COLOR_nit__local_var_init__LocalVarInitVisitor___maybe_unset_vars].val; /* _maybe_unset_vars on <self:LocalVarInitVisitor> */
+if (unlikely(var33 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _maybe_unset_vars");
 PRINT_ERROR(" (%s:%d)\n", FILE_nit__local_var_init, 48);
-show_backtrace(1);
+fatal_exit(1);
 }
-var33 = var35;
-RET_LABEL34:(void)0;
+var31 = var33;
+RET_LABEL32:(void)0;
 }
 }
 {
-((void (*)(val* self, val* p0))(var33->class->vft[COLOR_standard__abstract_collection__RemovableCollection__remove]))(var33, var_variable) /* remove on <var33:Set[Variable]>*/;
+((void(*)(val* self, val* p0))((((long)var31&3)?class_info[((long)var31&3)]:var31->class)->vft[COLOR_standard__abstract_collection__RemovableCollection__remove]))(var31, var_variable); /* remove on <var31:Set[Variable]>*/
 }
 } else {
 }
@@ -414,14 +407,14 @@ void nit__local_var_init___nit__local_var_init__LocalVarInitVisitor___nit__parse
 val* var_n /* var n: ANode */;
 var_n = p0;
 {
-((void (*)(val* self, val* p0))(var_n->class->vft[COLOR_nit__local_var_init__ANode__accept_local_var_visitor]))(var_n, self) /* accept_local_var_visitor on <var_n:ANode>*/;
+((void(*)(val* self, val* p0))(var_n->class->vft[COLOR_nit__local_var_init__ANode__accept_local_var_visitor]))(var_n, self); /* accept_local_var_visitor on <var_n:ANode>*/
 }
 RET_LABEL:;
 }
 /* method local_var_init#LocalVarInitVisitor#init for (self: LocalVarInitVisitor) */
 void nit__local_var_init___nit__local_var_init__LocalVarInitVisitor___standard__kernel__Object__init(val* self) {
 {
-((void (*)(val* self))(self->class->vft[COLOR_nit__local_var_init___nit__local_var_init__LocalVarInitVisitor___standard__kernel__Object__init]))(self) /* init on <self:LocalVarInitVisitor>*/;
+((void(*)(val* self))(self->class->vft[COLOR_nit__local_var_init___nit__local_var_init__LocalVarInitVisitor___standard__kernel__Object__init]))(self); /* init on <self:LocalVarInitVisitor>*/
 }
 RET_LABEL:;
 }
@@ -433,7 +426,7 @@ var1 = self->attrs[COLOR_nit__local_var_init__FlowContext___set_vars].val; /* _s
 if (unlikely(var1 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _set_vars");
 PRINT_ERROR(" (%s:%d)\n", FILE_nit__local_var_init, 86);
-show_backtrace(1);
+fatal_exit(1);
 }
 var = var1;
 RET_LABEL:;
@@ -446,37 +439,31 @@ val* var_variable /* var variable: Variable */;
 val* var1 /* : Set[Variable] */;
 val* var3 /* : Set[Variable] */;
 short int var4 /* : Bool */;
-short int var5 /* : Bool */;
-val* var6 /* : Array[FlowContext] */;
-val* var8 /* : Array[FlowContext] */;
+val* var5 /* : Array[FlowContext] */;
+val* var7 /* : Array[FlowContext] */;
 val* var_previous /* var previous: Array[FlowContext] */;
-long var9 /* : Int */;
-long var11 /* : Int */;
-long var12 /* : Int */;
+long var8 /* : Int */;
+long var10 /* : Int */;
+short int var11 /* : Bool */;
 short int var13 /* : Bool */;
-short int var15 /* : Bool */;
-short int var16 /* : Bool */;
-long var17 /* : Int */;
-long var19 /* : Int */;
-long var20 /* : Int */;
+long var14 /* : Int */;
+long var16 /* : Int */;
+short int var17 /* : Bool */;
+short int var19 /* : Bool */;
+val* var20 /* : nullable Object */;
 short int var21 /* : Bool */;
-short int var23 /* : Bool */;
-val* var24 /* : nullable Object */;
-short int var25 /* : Bool */;
-val* var26 /* : Array[FlowContext] */;
-val* var28 /* : Array[FlowContext] */;
+val* var22 /* : Array[FlowContext] */;
+val* var24 /* : Array[FlowContext] */;
 val* var_ /* var : Array[FlowContext] */;
-val* var29 /* : ArrayIterator[nullable Object] */;
-val* var_30 /* var : ArrayIterator[FlowContext] */;
-short int var31 /* : Bool */;
-val* var32 /* : nullable Object */;
+val* var25 /* : ArrayIterator[nullable Object] */;
+val* var_26 /* var : ArrayIterator[FlowContext] */;
+short int var27 /* : Bool */;
+val* var28 /* : nullable Object */;
 val* var_p /* var p: FlowContext */;
-short int var33 /* : Bool */;
-short int var34 /* : Bool */;
-short int var35 /* : Bool */;
-val* var37 /* : Set[Variable] */;
-val* var39 /* : Set[Variable] */;
-short int var40 /* : Bool */;
+short int var29 /* : Bool */;
+short int var30 /* : Bool */;
+val* var31 /* : Set[Variable] */;
+val* var33 /* : Set[Variable] */;
 var_variable = p0;
 {
 { /* Inline local_var_init#FlowContext#set_vars (self) on <self:FlowContext> */
@@ -484,121 +471,116 @@ var3 = self->attrs[COLOR_nit__local_var_init__FlowContext___set_vars].val; /* _s
 if (unlikely(var3 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _set_vars");
 PRINT_ERROR(" (%s:%d)\n", FILE_nit__local_var_init, 86);
-show_backtrace(1);
+fatal_exit(1);
 }
 var1 = var3;
 RET_LABEL2:(void)0;
 }
 }
 {
-var4 = ((short int (*)(val* self, val* p0))(var1->class->vft[COLOR_standard__abstract_collection__Collection__has]))(var1, var_variable) /* has on <var1:Set[Variable]>*/;
+var4 = ((short int(*)(val* self, val* p0))((((long)var1&3)?class_info[((long)var1&3)]:var1->class)->vft[COLOR_standard__abstract_collection__Collection__has]))(var1, var_variable); /* has on <var1:Set[Variable]>*/
 }
 if (var4){
-var5 = 1;
-var = var5;
+var = 1;
 goto RET_LABEL;
 } else {
 }
 {
 { /* Inline flow#FlowContext#previous (self) on <self:FlowContext> */
-var8 = self->attrs[COLOR_nit__flow__FlowContext___previous].val; /* _previous on <self:FlowContext> */
-if (unlikely(var8 == NULL)) {
+var7 = self->attrs[COLOR_nit__flow__FlowContext___previous].val; /* _previous on <self:FlowContext> */
+if (unlikely(var7 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _previous");
-PRINT_ERROR(" (%s:%d)\n", FILE_nit__flow, 188);
-show_backtrace(1);
+PRINT_ERROR(" (%s:%d)\n", FILE_nit__flow, 189);
+fatal_exit(1);
 }
-var6 = var8;
-RET_LABEL7:(void)0;
+var5 = var7;
+RET_LABEL6:(void)0;
 }
 }
-var_previous = var6;
+var_previous = var5;
 {
 { /* Inline array#AbstractArrayRead#length (var_previous) on <var_previous:Array[FlowContext]> */
-var11 = var_previous->attrs[COLOR_standard__array__AbstractArrayRead___length].l; /* _length on <var_previous:Array[FlowContext]> */
-var9 = var11;
-RET_LABEL10:(void)0;
+var10 = var_previous->attrs[COLOR_standard__array__AbstractArrayRead___length].l; /* _length on <var_previous:Array[FlowContext]> */
+var8 = var10;
+RET_LABEL9:(void)0;
 }
 }
-var12 = 0;
 {
-{ /* Inline kernel#Int#== (var9,var12) on <var9:Int> */
-var15 = var9 == var12;
-var13 = var15;
-goto RET_LABEL14;
-RET_LABEL14:(void)0;
+{ /* Inline kernel#Int#== (var8,0l) on <var8:Int> */
+var13 = var8 == 0l;
+var11 = var13;
+goto RET_LABEL12;
+RET_LABEL12:(void)0;
 }
 }
-if (var13){
-var16 = 0;
-var = var16;
+if (var11){
+var = 0;
 goto RET_LABEL;
 } else {
 }
 {
 { /* Inline array#AbstractArrayRead#length (var_previous) on <var_previous:Array[FlowContext]> */
-var19 = var_previous->attrs[COLOR_standard__array__AbstractArrayRead___length].l; /* _length on <var_previous:Array[FlowContext]> */
+var16 = var_previous->attrs[COLOR_standard__array__AbstractArrayRead___length].l; /* _length on <var_previous:Array[FlowContext]> */
+var14 = var16;
+RET_LABEL15:(void)0;
+}
+}
+{
+{ /* Inline kernel#Int#== (var14,1l) on <var14:Int> */
+var19 = var14 == 1l;
 var17 = var19;
+goto RET_LABEL18;
 RET_LABEL18:(void)0;
 }
 }
-var20 = 1;
+if (var17){
 {
-{ /* Inline kernel#Int#== (var17,var20) on <var17:Int> */
-var23 = var17 == var20;
-var21 = var23;
-goto RET_LABEL22;
-RET_LABEL22:(void)0;
-}
-}
-if (var21){
-{
-var24 = standard___standard__SequenceRead___Collection__first(var_previous);
+var20 = standard___standard__SequenceRead___Collection__first(var_previous);
 }
 {
-var25 = nit__local_var_init___FlowContext___is_variable_set(var24, var_variable);
+var21 = nit__local_var_init___FlowContext___is_variable_set(var20, var_variable);
 }
-var = var25;
+var = var21;
 goto RET_LABEL;
 } else {
 }
 {
 { /* Inline flow#FlowContext#previous (self) on <self:FlowContext> */
-var28 = self->attrs[COLOR_nit__flow__FlowContext___previous].val; /* _previous on <self:FlowContext> */
-if (unlikely(var28 == NULL)) {
+var24 = self->attrs[COLOR_nit__flow__FlowContext___previous].val; /* _previous on <self:FlowContext> */
+if (unlikely(var24 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _previous");
-PRINT_ERROR(" (%s:%d)\n", FILE_nit__flow, 188);
-show_backtrace(1);
+PRINT_ERROR(" (%s:%d)\n", FILE_nit__flow, 189);
+fatal_exit(1);
 }
-var26 = var28;
-RET_LABEL27:(void)0;
+var22 = var24;
+RET_LABEL23:(void)0;
 }
 }
-var_ = var26;
+var_ = var22;
 {
-var29 = standard___standard__AbstractArrayRead___standard__abstract_collection__Collection__iterator(var_);
+var25 = standard___standard__AbstractArrayRead___standard__abstract_collection__Collection__iterator(var_);
 }
-var_30 = var29;
+var_26 = var25;
 for(;;) {
 {
-var31 = standard__array___standard__array__ArrayIterator___standard__abstract_collection__Iterator__is_ok(var_30);
+var27 = standard__array___standard__array__ArrayIterator___standard__abstract_collection__Iterator__is_ok(var_26);
 }
-if (var31){
+if (var27){
 {
-var32 = standard__array___standard__array__ArrayIterator___standard__abstract_collection__Iterator__item(var_30);
+var28 = standard__array___standard__array__ArrayIterator___standard__abstract_collection__Iterator__item(var_26);
 }
-var_p = var32;
+var_p = var28;
 {
-var33 = nit__local_var_init___FlowContext___is_variable_set(var_p, var_variable);
+var29 = nit__local_var_init___FlowContext___is_variable_set(var_p, var_variable);
 }
-var34 = !var33;
-if (var34){
-var35 = 0;
-var = var35;
+var30 = !var29;
+if (var30){
+var = 0;
 goto RET_LABEL;
 } else {
 }
 {
-standard__array___standard__array__ArrayIterator___standard__abstract_collection__Iterator__next(var_30); /* Direct call array#ArrayIterator#next on <var_30:ArrayIterator[FlowContext]>*/
+standard__array___standard__array__ArrayIterator___standard__abstract_collection__Iterator__next(var_26); /* Direct call array#ArrayIterator#next on <var_26:ArrayIterator[FlowContext]>*/
 }
 } else {
 goto BREAK_label;
@@ -606,27 +588,24 @@ goto BREAK_label;
 }
 BREAK_label: (void)0;
 {
-{ /* Inline abstract_collection#Iterator#finish (var_30) on <var_30:ArrayIterator[FlowContext]> */
-RET_LABEL36:(void)0;
-}
+standard__array___standard__array__ArrayIterator___standard__abstract_collection__Iterator__finish(var_26); /* Direct call array#ArrayIterator#finish on <var_26:ArrayIterator[FlowContext]>*/
 }
 {
 { /* Inline local_var_init#FlowContext#set_vars (self) on <self:FlowContext> */
-var39 = self->attrs[COLOR_nit__local_var_init__FlowContext___set_vars].val; /* _set_vars on <self:FlowContext> */
-if (unlikely(var39 == NULL)) {
+var33 = self->attrs[COLOR_nit__local_var_init__FlowContext___set_vars].val; /* _set_vars on <self:FlowContext> */
+if (unlikely(var33 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _set_vars");
 PRINT_ERROR(" (%s:%d)\n", FILE_nit__local_var_init, 86);
-show_backtrace(1);
+fatal_exit(1);
 }
-var37 = var39;
-RET_LABEL38:(void)0;
+var31 = var33;
+RET_LABEL32:(void)0;
 }
 }
 {
-((void (*)(val* self, val* p0))(var37->class->vft[COLOR_standard__abstract_collection__SimpleCollection__add]))(var37, var_variable) /* add on <var37:Set[Variable]>*/;
+((void(*)(val* self, val* p0))((((long)var31&3)?class_info[((long)var31&3)]:var31->class)->vft[COLOR_standard__abstract_collection__SimpleCollection__add]))(var31, var_variable); /* add on <var31:Set[Variable]>*/
 }
-var40 = 1;
-var = var40;
+var = 1;
 goto RET_LABEL;
 RET_LABEL:;
 return var;
@@ -636,7 +615,7 @@ void nit__local_var_init___ANode___accept_local_var_visitor(val* self, val* p0) 
 val* var_v /* var v: LocalVarInitVisitor */;
 var_v = p0;
 {
-((void (*)(val* self, val* p0))(self->class->vft[COLOR_nit__parser_nodes__ANode__visit_all]))(self, var_v) /* visit_all on <self:ANode>*/;
+((void(*)(val* self, val* p0))(self->class->vft[COLOR_nit__parser_nodes__ANode__visit_all]))(self, var_v); /* visit_all on <self:ANode>*/
 }
 RET_LABEL:;
 }
@@ -645,17 +624,16 @@ void nit__local_var_init___AVardeclExpr___ANode__accept_local_var_visitor(val* s
 val* var_v /* var v: LocalVarInitVisitor */;
 val* var /* : nullable AExpr */;
 val* var2 /* : nullable AExpr */;
-val* var3 /* : null */;
+short int var3 /* : Bool */;
 short int var4 /* : Bool */;
-short int var5 /* : Bool */;
 val* var_other /* var other: nullable Object */;
-short int var7 /* : Bool */;
-short int var9 /* : Bool */;
-val* var10 /* : nullable Variable */;
-val* var12 /* : nullable Variable */;
+short int var6 /* : Bool */;
+short int var8 /* : Bool */;
+val* var9 /* : nullable Variable */;
+val* var11 /* : nullable Variable */;
 var_v = p0;
 {
-((void (*)(val* self, val* p0))(self->class->vft[COLOR_nit__local_var_init___AVardeclExpr___ANode__accept_local_var_visitor]))(self, p0) /* accept_local_var_visitor on <self:AVardeclExpr>*/;
+((void(*)(val* self, val* p0))(self->class->vft[COLOR_nit__local_var_init___AVardeclExpr___ANode__accept_local_var_visitor]))(self, p0); /* accept_local_var_visitor on <self:AVardeclExpr>*/
 }
 {
 { /* Inline parser_nodes#AVardeclExpr#n_expr (self) on <self:AVardeclExpr> */
@@ -664,39 +642,38 @@ var = var2;
 RET_LABEL1:(void)0;
 }
 }
-var3 = NULL;
 if (var == NULL) {
-var4 = 1; /* is null */
+var3 = 1; /* is null */
 } else {
-var4 = 0; /* arg is null but recv is not */
+var3 = 0; /* arg is null but recv is not */
 }
 if (0) {
-{ /* Inline kernel#Object#== (var,var3) on <var:nullable AExpr> */
-var_other = var3;
+{ /* Inline kernel#Object#== (var,((val*)NULL)) on <var:nullable AExpr> */
+var_other = ((val*)NULL);
 {
 { /* Inline kernel#Object#is_same_instance (var,var_other) on <var:nullable AExpr(AExpr)> */
-var9 = var == var_other;
-var7 = var9;
-goto RET_LABEL8;
-RET_LABEL8:(void)0;
+var8 = var == var_other;
+var6 = var8;
+goto RET_LABEL7;
+RET_LABEL7:(void)0;
 }
 }
-var5 = var7;
-goto RET_LABEL6;
-RET_LABEL6:(void)0;
+var4 = var6;
+goto RET_LABEL5;
+RET_LABEL5:(void)0;
 }
-var4 = var5;
+var3 = var4;
 }
-if (var4){
+if (var3){
 {
 { /* Inline scope#AVardeclExpr#variable (self) on <self:AVardeclExpr> */
-var12 = self->attrs[COLOR_nit__scope__AVardeclExpr___variable].val; /* _variable on <self:AVardeclExpr> */
-var10 = var12;
-RET_LABEL11:(void)0;
+var11 = self->attrs[COLOR_nit__scope__AVardeclExpr___variable].val; /* _variable on <self:AVardeclExpr> */
+var9 = var11;
+RET_LABEL10:(void)0;
 }
 }
 {
-nit__local_var_init___nit__local_var_init__LocalVarInitVisitor___mark_is_unset(var_v, self, var10); /* Direct call local_var_init#LocalVarInitVisitor#mark_is_unset on <var_v:LocalVarInitVisitor>*/
+nit__local_var_init___nit__local_var_init__LocalVarInitVisitor___mark_is_unset(var_v, self, var9); /* Direct call local_var_init#LocalVarInitVisitor#mark_is_unset on <var_v:LocalVarInitVisitor>*/
 }
 } else {
 }
@@ -709,7 +686,7 @@ val* var /* : nullable Variable */;
 val* var2 /* : nullable Variable */;
 var_v = p0;
 {
-((void (*)(val* self, val* p0))(self->class->vft[COLOR_nit__local_var_init___AVarExpr___ANode__accept_local_var_visitor]))(self, p0) /* accept_local_var_visitor on <self:AVarExpr>*/;
+((void(*)(val* self, val* p0))(self->class->vft[COLOR_nit__local_var_init___AVarExpr___ANode__accept_local_var_visitor]))(self, p0); /* accept_local_var_visitor on <self:AVarExpr>*/
 }
 {
 { /* Inline scope#AVarFormExpr#variable (self) on <self:AVarExpr> */
@@ -730,7 +707,7 @@ val* var /* : nullable Variable */;
 val* var2 /* : nullable Variable */;
 var_v = p0;
 {
-((void (*)(val* self, val* p0))(self->class->vft[COLOR_nit__local_var_init___AVarAssignExpr___ANode__accept_local_var_visitor]))(self, p0) /* accept_local_var_visitor on <self:AVarAssignExpr>*/;
+((void(*)(val* self, val* p0))(self->class->vft[COLOR_nit__local_var_init___AVarAssignExpr___ANode__accept_local_var_visitor]))(self, p0); /* accept_local_var_visitor on <self:AVarAssignExpr>*/
 }
 {
 { /* Inline scope#AVarFormExpr#variable (self) on <self:AVarAssignExpr> */
@@ -751,7 +728,7 @@ val* var /* : nullable Variable */;
 val* var2 /* : nullable Variable */;
 var_v = p0;
 {
-((void (*)(val* self, val* p0))(self->class->vft[COLOR_nit__local_var_init___AVarReassignExpr___ANode__accept_local_var_visitor]))(self, p0) /* accept_local_var_visitor on <self:AVarReassignExpr>*/;
+((void(*)(val* self, val* p0))(self->class->vft[COLOR_nit__local_var_init___AVarReassignExpr___ANode__accept_local_var_visitor]))(self, p0); /* accept_local_var_visitor on <self:AVarReassignExpr>*/
 }
 {
 { /* Inline scope#AVarFormExpr#variable (self) on <self:AVarReassignExpr> */

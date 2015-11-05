@@ -50,12 +50,17 @@ class Nitiwiki
 	# Synchronize local output with the distant `WikiConfig::rsync_dir`.
 	fun sync do
 		var root = expand_path(config.root_dir, config.out_dir)
-		sys.system "rsync -vr --delete {root}/ {config.rsync_dir}"
+		var rsync_dir = config.rsync_dir
+		if rsync_dir == "" then
+			message("Error: configure `wiki.rsync_dir` to use rsync.", 0)
+			return
+		end
+		sys.system "rsync -vr --delete -- {root.escape_to_sh}/ {rsync_dir.escape_to_sh}"
 	end
 
 	# Pull data from git repository.
 	fun fetch do
-		sys.system "git pull {config.git_origin} {config.git_branch}"
+		sys.system "git pull {config.git_origin.escape_to_sh} {config.git_branch.escape_to_sh}"
 	end
 
 	# Analyze wiki files from `dir` to build wiki entries.
@@ -79,7 +84,6 @@ class Nitiwiki
 		print "nitiWiki"
 		print "name: {config.wiki_name}"
 		print "config: {config.ini_file}"
-		print "url: {config.root_url}"
 		print ""
 		if root_section.is_dirty then
 			print "There is modified files:"
@@ -115,11 +119,11 @@ class Nitiwiki
 	# List markdown source files from a directory.
 	fun list_md_files(dir: String): Array[String] do
 		var files = new Array[String]
-		var pipe = new ProcessReader("find", dir, "-name", "*.md")
+		var pipe = new ProcessReader("find", dir, "-name", "*.{config.md_ext}")
 		while not pipe.eof do
 			var file = pipe.read_line
 			if file == "" then break # last line
-			var name = file.basename(".md")
+			var name = file.basename(".{config.md_ext}")
 			if name == "header" or name == "footer" or name == "menu" then continue
 			files.add file
 		end
@@ -147,7 +151,7 @@ class Nitiwiki
 		path = path.simplify_path
 		if entries.has_key(path) then return entries[path].as(WikiSection)
 		var root = expand_path(config.root_dir, config.source_dir)
-		var name = path.basename("")
+		var name = path.basename
 		var section = new WikiSection(self, name)
 		entries[path] = section
 		if path == root then return section
@@ -188,12 +192,12 @@ class Nitiwiki
 	#
 	# REQUIRE: `has_template`
 	fun load_template(name: String): TemplateString do
-		assert has_template(name)
+		if not has_template(name) then
+			message("Error: can't load template `{name}`", 0)
+			exit 1
+		end
 		var file = expand_path(config.root_dir, config.templates_dir, name)
 		var tpl = new TemplateString.from_file(file)
-		if tpl.has_macro("ROOT_URL") then
-			tpl.replace("ROOT_URL", config.root_url)
-		end
 		if tpl.has_macro("TITLE") then
 			tpl.replace("TITLE", config.wiki_name)
 		end
@@ -204,6 +208,26 @@ class Nitiwiki
 			tpl.replace("LOGO", config.wiki_logo)
 		end
 		return tpl
+	end
+
+	# Does a sideblock named `name` exists for this wiki?
+	fun has_sideblock(name: String): Bool do
+		name = "{name}.{config.md_ext}"
+		return expand_path(config.root_dir, config.sidebar_dir, name).file_exists
+	end
+
+	# Load a markdown block with `name` from `WikiConfig::sidebar_dir`.
+	private fun load_sideblock(name: String): nullable String do
+		if not has_sideblock(name) then
+			message("Error: can't load sideblock `{name}`", 0)
+			return null
+		end
+		name = "{name}.{config.md_ext}"
+		var path = expand_path(config.root_dir, config.sidebar_dir, name)
+		var file = new FileReader.open(path)
+		var res = file.read_all
+		file.close
+		return res
 	end
 
 	# Join `parts` as a path and simplify it
@@ -320,6 +344,9 @@ abstract class WikiEntry
 		end
 		return path.reversed
 	end
+
+	# Sidebar relative to this wiki entry.
+	var sidebar = new WikiSidebar(self)
 
 	# Relative path from `wiki.config.root_dir` to source if any.
 	fun src_path: nullable String is abstract
@@ -450,7 +477,7 @@ class WikiSection
 	private fun try_load_config do
 		var cfile = wiki.expand_path(wiki.config.root_dir, src_path, wiki.config_filename)
 		if not cfile.file_exists then return
-		wiki.message("Custom config for section {name}", 1)
+		wiki.message("Custom config for section {name}", 2)
 		config = new SectionConfig(cfile)
 	end
 
@@ -520,15 +547,17 @@ class WikiArticle
 	# Create a new article using a markdown source file.
 	init from_source(wiki: Nitiwiki, md_file: String) do
 		src_full_path = md_file
-		init(wiki, md_file.basename(".md"))
+		init(wiki, md_file.basename(".{wiki.config.md_ext}"))
 		content = md
 	end
 
 	redef var src_full_path: nullable String = null
 
 	redef fun src_path do
+		var src_full_path = self.src_full_path
 		if src_full_path == null then return null
-		return src_full_path.substring_from(wiki.config.root_dir.length)
+		var res = wiki.config.root_dir.relpath(src_full_path)
+		return res
 	end
 
 	# The page markdown source content.
@@ -557,6 +586,28 @@ class WikiArticle
 	redef fun to_s do return "{name} ({parent or else "null"})"
 end
 
+# The sidebar is displayed in front of the main panel of a `WikiEntry`.
+class WikiSidebar
+
+	# Wiki used to parse sidebar blocks.
+	var wiki: Nitiwiki is lazy do return entry.wiki
+
+	# WikiEntry this panel is related to.
+	var entry: WikiEntry
+
+	# Blocks are ieces of markdown that will be rendered in the sidebar.
+	var blocks: Array[Text] is lazy do
+		var res = new Array[Text]
+		# TODO get blocks from the entry for more customization
+		for name in entry.wiki.config.sidebar_blocks do
+			var block = wiki.load_sideblock(name)
+			if block == null then continue
+			res.add block
+		end
+		return res
+	end
+end
+
 # Wiki configuration class.
 #
 # This class provides services that ensure static typing when accessing the `config.ini` file.
@@ -564,9 +615,8 @@ class WikiConfig
 	super ConfigTree
 
 	# Returns the config value at `key` or return `default` if no key was found.
-	private fun value_or_default(key: String, default: String): String do
-		if not has_key(key) then return default
-		return self[key]
+	protected fun value_or_default(key: String, default: String): String do
+		return self[key] or else default
 	end
 
 	# Site name displayed.
@@ -593,12 +643,14 @@ class WikiConfig
 	# * default: ``
 	var wiki_logo: String is lazy do return value_or_default("wiki.logo", "")
 
-	# Root url of the wiki.
+	# Markdown extension recognized by this wiki.
 	#
-	# * key: `wiki.root_url`
-	# * default: `http://localhost/`
-	var root_url: String is lazy do return value_or_default("wiki.root_url", "http://localhost/")
-
+	# We allow only one kind of extension per wiki.
+	# Files with other markdown extensions will be treated as resources.
+	#
+	# * key: `wiki.md_ext`
+	# * default: `md`
+	var md_ext: String is lazy do return value_or_default("wiki.md_ext", "md")
 
 	# Root directory of the wiki.
 	#
@@ -691,6 +743,59 @@ class WikiConfig
 		return value_or_default("wiki.footer", "footer.html")
 	end
 
+	# Automatically add a summary.
+	#
+	# * key: `wiki.auto_summary`
+	# * default: `true`
+	var auto_summary: Bool is lazy do
+		return value_or_default("wiki.auto_summary", "true") == "true"
+	end
+
+	# Automatically add breadcrumbs.
+	#
+	# * key: `wiki.auto_breadcrumbs`
+	# * default: `true`
+	var auto_breadcrumbs: Bool is lazy do
+		return value_or_default("wiki.auto_breadcrumbs", "true") == "true"
+	end
+
+	# Sidebar position.
+	#
+	# Position of the sidebar between `left`, `right` and `none`. Any other value
+	# will be considered as `none`.
+	#
+	# * key: `wiki.sidebar`
+	# * default: `left`
+	var sidebar: String is lazy do
+		return value_or_default("wiki.sidebar", "left")
+	end
+
+	# Sidebar markdown block to include.
+	#
+	# Blocks are specified by their filename without the extension.
+	#
+	# * key: `wiki.sidebar.blocks`
+	# * default: `[]`
+	var sidebar_blocks: Array[String] is lazy do
+		var res = new Array[String]
+		if not has_key("wiki.sidebar.blocks") then return res
+		for val in at("wiki.sidebar.blocks").values do
+			res.add val
+		end
+		return res
+	end
+
+	# Sidebar files directory.
+	#
+	# Directory where sidebar blocks are stored.
+	# **This path MUST be relative to `root_dir`.**
+	#
+	# * key: `wiki.sidebar_dir`
+	# * default: `sidebar/`
+	var sidebar_dir: String is lazy do
+		return value_or_default("wiki.sidebar_dir", "sidebar/").simplify_path
+	end
+
 	# Directory used by rsync to upload wiki files.
 	#
 	# This information is used to update your distant wiki files (like the webserver).
@@ -710,6 +815,18 @@ class WikiConfig
 	# * key: `wiki.git_branch`
 	# * default: `master`
 	var git_branch: String is lazy do return value_or_default("wiki.git_branch", "master")
+
+	# URL to source versionning used to display last changes
+	#
+	# * key: `wiki.last_changes`
+	# * default: ``
+	var last_changes: String is lazy do return value_or_default("wiki.last_changes", "")
+
+	# URL to source edition.
+	#
+	# * key: `wiki.edit`
+	# * default: ``
+	var edit: String is lazy do return value_or_default("wiki.edit", "")
 end
 
 # WikiSection custom configuration.

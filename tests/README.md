@@ -154,11 +154,14 @@ It is a failure, and analogous to the standard `fail`.
 
 `[todo] out/zzz_test_todo.res -> not yet implemented`
 
-The produced result file contains the magic string "NOT YET IMPLEMENTED".
+The produced result file contains a magic string, like `NOT YET IMPLEMENTED`.
 Those are considered the same as expected errors (like a fixme)
 It is a success.
 
-Some engines, libraries or program just print this to simplify the management of tests.
+The magic strings are listed in `todo` files in the root and `sav` directories.
+They are used by engines, libraries or program just print this to simplify the management of tests.
+
+Magic strings are used with `grep -f`, so each line is a pattern that is searched within the res files.
 
 ### Skipped
 
@@ -208,18 +211,18 @@ Use the various skipping or controls to try to produce reproducible results.
 Engines are selected with the option `--engine`.
 
 ~~~
-./tests.sh --engine nitg-e base_class_name.nit
+./tests.sh --engine nitce base_class_name.nit
 ~~~
 
 Current engines are:
 
-* `nitg-s`, for `nitg --separate` (this is the default)
-* `nitg-e`, for `nitg --erasure`
-* `nitg-sg`, for `nitg --separate --semi-global`
-* `nitg-g`, for `nitg --global`
+* `nitcs`, for `nitc --separate` (this is the default)
+* `nitce`, for `nitc --erasure`
+* `nitcsg`, for `nitc --separate --semi-global`
+* `nitcg`, for `nitc --global`
 * `niti`, for `nit`, the interpreter
-* `nitvm`, for `nitvm` (not automatically executed by `testall.sh`)
-* `emscripten`, for `nitg --semi-global -m emscripten` (not automatically executed by `testall.sh`)
+* `nitvm`, for `nit --vm`, the virtual machine
+* `emscripten`, for `nitc --semi-global -m emscripten` (not automatically executed by `testall.sh`)
 
 Engines control:
 

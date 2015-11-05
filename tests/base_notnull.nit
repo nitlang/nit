@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import standard::kernel
+import core::kernel
 
 class A[E] #alt2# class A[E: Object]
 	type V: nullable Object #alt2# type V: Object

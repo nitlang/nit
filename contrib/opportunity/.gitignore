@@ -1,0 +1,2 @@
+src/templates/languages/*.pot
+src/templates/languages/fr/LC_MESSAGES/*.mo

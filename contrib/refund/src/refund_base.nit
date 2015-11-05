@@ -402,7 +402,7 @@ class Dollar
 
 	# Inits `self` from a float `value`.
 	init from_float(value: Float) do
-		self.value = (value * 100.0).to_i
+		init((value * 100.0).to_i)
 	end
 
 	redef fun to_s do return "{value / 100}.{value % 100}$"

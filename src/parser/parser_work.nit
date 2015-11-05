@@ -40,7 +40,7 @@ class Parser
 
 	init
 	do
-		build_reduce_table
+		self.reduce_table = once build_reduce_table
 	end
 
 	# Do a transition in the automata
@@ -141,7 +141,8 @@ class Parser
 				var node1 = pop
 				assert node1 isa AModule
 				var node = new Start(node1, node2)
-				(new ComputeProdLocationVisitor).enter_visit(node)
+				node2.parent = node
+				(new ComputeProdLocationVisitor(lexer.file.first_token)).enter_visit(node)
 				return node
 			else if action_type == 3 then # ERROR
 				# skip injected tokens
@@ -154,7 +155,7 @@ class Parser
 	end
 
 	private var reduce_table: Array[ReduceAction] is noinit
-	private fun build_reduce_table is abstract
+	private fun build_reduce_table: Array[ReduceAction] is abstract
 end
 
 redef class Prod
@@ -176,21 +177,55 @@ end
 # Uses existing token locations to infer location of productions.
 private class ComputeProdLocationVisitor
 	super Visitor
+
+	# The current (or starting) cursor on the token sequence used to collect loose tokens
+	var token: nullable Token
+
 	# Currently visited productions that need a first token
 	var need_first_prods = new Array[Prod]
 
 	# Already visited epsilon productions that waits something after them
 	var need_after_epsilons = new Array[Prod]
 
-	# Location of the last visited token in the current production
-	var last_location: nullable Location = null
+	# The last visited token in the current production
+	var last_token: nullable Token = null
 
 	redef fun visit(n: ANode)
 	do
 		if n isa Token then
+			# Skip injected tokens
 			if not isset n._location then return
+
+			# Collect loose tokens (not in the AST) and attach them to token in the AST
+			var cursor = token
+			if n != cursor then
+				var lt = last_token
+				# In order, we have the tokens:
+				# * `lt` the previous visited token in the AST (if any)
+				# * then `cursor` the loose tokens to attach
+				# * then `n` the current visited token in the AST
+
+				# In the following, we advance `cursor` to add them to `lt.next_looses` or to `n.prev_looses`.
+				if lt != null then
+					var ltl = lt.location.line_end
+					# floating tokens on the same line of a AST-token follows it
+					while cursor != null and cursor != n and ltl == cursor.location.line_start do
+						cursor.is_loose = true
+						lt.next_looses.add cursor
+						cursor = cursor.next_token
+					end
+				end
+				# other loose tokens precede the next AST-token
+				while cursor != null and cursor != n do
+					cursor.is_loose = true
+					n.prev_looses.add cursor
+					cursor = cursor.next_token
+				end
+			end
+			token = n.next_token
+
 			var loc = n._location
-			_last_location = loc
+			_last_token = n
 
 			# Add a first token to productions that need one
 			if not _need_first_prods.is_empty then
@@ -217,8 +252,7 @@ private class ComputeProdLocationVisitor
 			var startl = n._first_location
 			if startl != null then
 				# Non-epsilon production
-				var endl = _last_location
-				assert endl != null
+				var endl = _last_token.location
 
 				if startl == endl then
 					n.location = startl
@@ -263,4 +297,20 @@ private abstract class ReduceAction
 		return l1
 	end
 	var goto: Int
+end
+
+redef class AExpr
+
+	# Get `self` as a single identifier.
+	# Return null if not a single identifier.
+	fun as_id: nullable String
+	do
+		if self isa AMethidExpr then
+			return self.collect_text
+		end
+		if not self isa ACallExpr then return null
+		if not self.n_expr isa AImplicitSelfExpr then return null
+		if not self.n_args.n_exprs.is_empty then return null
+		return self.n_qid.n_id.text
+	end
 end

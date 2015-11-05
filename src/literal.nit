@@ -69,41 +69,20 @@ redef class AExpr
 	# Return null if not an integer.
 	fun as_int: nullable Int
 	do
-		if not self isa AIntExpr then return null
-		return self.value.as(not null)
-	end
-
-	# Get `self` as a single identifier.
-	# Return null if not a single identifier.
-	fun as_id: nullable String
-	do
-		if self isa AMethidExpr then
-			return self.collect_text
-		end
-		if not self isa ACallExpr then return null
-		if not self.n_expr isa AImplicitSelfExpr then return null
-		if not self.n_args.n_exprs.is_empty then return null
-		return self.n_id.text
+		if not self isa AIntegerExpr then return null
+		return self.value.as(not null).to_i
 	end
 end
 
-
-redef class AIntExpr
+redef class AIntegerExpr
 	# The value of the literal int once computed.
-	var value: nullable Int
-end
+	var value: nullable Numeric
 
-redef class ADecIntExpr
-	redef fun accept_literal(v)
-	do
-		self.value = self.n_number.text.to_i
-	end
-end
-
-redef class AHexIntExpr
-	redef fun accept_literal(v)
-	do
-		self.value = self.n_hex_number.text.substring_from(2).to_hex
+	redef fun accept_literal(v) do
+		value = n_integer.text.to_num
+		if value == null then
+			v.toolcontext.error(hot_location, "Error: invalid literal `{n_integer.text}`")
+		end
 	end
 end
 

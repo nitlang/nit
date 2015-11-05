@@ -259,7 +259,7 @@ class SAXEventLogger
 	############################################################################
 	# XMLReader
 
-	redef fun property(name: String): nullable Object do
+	redef fun property(name) do
 		assert sax_recognized: parent != null else
 			sys.stderr.write("Property: {name}\n")
 		end
@@ -278,7 +278,7 @@ class SAXEventLogger
 		end
 	end
 
-	redef fun property=(name: String, value: nullable Object) do
+	redef fun property=(name, value) do
 		assert sax_recognized: parent != null else
 			sys.stderr.write("Property: {name}\n")
 		end
@@ -297,7 +297,7 @@ class SAXEventLogger
 		end
 	end
 
-	redef fun parse(input: InputSource) do
+	redef fun parse(input) do
 		assert parent_is_not_null: parent != 0 else
 			sys.stderr.write("No parent for filter.")
 		end
@@ -314,9 +314,7 @@ class SAXEventLogger
 	############################################################################
 	# EntityResolver
 
-	redef fun resolve_entity(public_id: nullable String,
-			system_id: nullable String):
-			nullable InputSource do
+	redef fun resolve_entity(public_id, system_id) do
 		log.push(["resolve_entity",
 				public_id or else "^NULL",
 				system_id or else "^NULL"])
@@ -327,14 +325,12 @@ class SAXEventLogger
 	############################################################################
 	# DTDHandler
 
-	redef fun notation_decl(name: String, public_id: String,
-			system_id: String) do
+	redef fun notation_decl(name, public_id, system_id) do
 		log.push(["notation_decl", name, public_id, system_id])
 		super
 	end
 
-	redef fun unparsed_entity_decl(name: String, public_id: String,
-			system_id: String) do
+	redef fun unparsed_entity_decl(name, public_id, system_id) do
 		log.push(["unparsed_entity_decl", name, public_id, system_id])
 		super
 	end
@@ -343,7 +339,7 @@ class SAXEventLogger
 	############################################################################
 	# ContentHandler
 
-	redef fun document_locator=(locator: SAXLocator) do
+	redef fun document_locator=(locator) do
 		log.push(["document_locator=",
 				locator.public_id or else "^NULL",
 				locator.system_id or else "^NULL",
@@ -362,18 +358,17 @@ class SAXEventLogger
 		super
 	end
 
-	redef fun start_prefix_mapping(prefix: String, uri: String) do
+	redef fun start_prefix_mapping(prefix, uri) do
 		log.push(["start_prefix_mapping", prefix, uri])
 		super
 	end
 
-	redef fun end_prefix_mapping(prefix: String) do
+	redef fun end_prefix_mapping(prefix) do
 		log.push(["end_prefix_mapping", prefix])
 		super
 	end
 
-	redef fun start_element(uri: String, local_name: String, qname: String,
-			atts: Attributes) do
+	redef fun start_element(uri, local_name, qname, atts) do
 		var entry = new Array[String]
 		var i = 0
 		var length = atts.length
@@ -394,27 +389,27 @@ class SAXEventLogger
 		super
 	end
 
-	redef fun end_element(uri: String, local_name: String, qname: String) do
+	redef fun end_element(uri, local_name, qname) do
 		log.push(["end_element", uri, local_name, qname])
 		super
 	end
 
-	redef fun characters(str: String) do
+	redef fun characters(str) do
 		log.push(["characters", str])
 		super
 	end
 
-	redef fun ignorable_whitespace(str: String) do
+	redef fun ignorable_whitespace(str) do
 		log.push(["ignorable_witespace", str])
 		super
 	end
 
-	redef fun processing_instruction(target: String, data: nullable String) do
+	redef fun processing_instruction(target, data) do
 		log.push(["processing_instruction", target, data or else "^NULL"])
 		super
 	end
 
-	redef fun skipped_entity(name: String) do
+	redef fun skipped_entity(name) do
 		log.push(["skipped_entity", name])
 		super
 	end
@@ -423,17 +418,17 @@ class SAXEventLogger
 	############################################################################
 	# ErrorHandler
 
-	redef fun warning(exception: SAXParseException) do
+	redef fun warning(exception) do
 		log.push(["warning", exception.full_message])
 		super
 	end
 
-	redef fun error(exception: SAXParseException) do
+	redef fun error(exception) do
 		log.push(["error", exception.full_message])
 		super
 	end
 
-	redef fun fatal_error(exception: SAXParseException) do
+	redef fun fatal_error(exception) do
 		log.push(["fatal_error", exception.full_message])
 		if error_handler != null then
 			error_handler.fatal_error(exception)
@@ -444,18 +439,14 @@ class SAXEventLogger
 	############################################################################
 	# DeclHandler
 
-	redef fun element_decl(name: String, model: String) do
+	redef fun element_decl(name, model) do
 		log.push(["element_decl", name, model])
 		if decl_handler != null then
 			decl_handler.element_decl(name, model)
 		end
 	end
 
-	redef fun attribute_decl(element_name: String,
-			attribute_name: String,
-			attribute_type: String,
-			mode: nullable String,
-			value: nullable String) do
+	redef fun attribute_decl(element_name, attribute_name, attribute_type, mode, value) do
 		log.push(["attribute_decl",
 				element_name,
 				attribute_name,
@@ -468,14 +459,14 @@ class SAXEventLogger
 		end
 	end
 
-	redef fun internal_entity_decl(name: String, value: String) do
+	redef fun internal_entity_decl(name, value) do
 		log.push(["internal_entity_decl", name, value])
 		if decl_handler != null then
 			decl_handler.internal_entity_decl(name, value)
 		end
 	end
 
-	redef fun external_entity_decl(name: String, value: String) do
+	redef fun external_entity_decl(name, value) do
 		log.push(["external_entity_decl", name, value])
 		if decl_handler != null then
 			decl_handler.external_entity_decl(name, value)
@@ -486,8 +477,7 @@ class SAXEventLogger
 	############################################################################
 	# LexicalHandler
 
-	redef fun start_dtd(name: String, public_id: nullable String,
-			system_id: nullable String) do
+	redef fun start_dtd(name, public_id, system_id) do
 		log.push(["start_dtd", name,
 				public_id or else "^NULL",
 				system_id or else "^NULL"])
@@ -503,14 +493,14 @@ class SAXEventLogger
 		end
 	end
 
-	redef fun start_entity(name: String) do
+	redef fun start_entity(name) do
 		log.push(["start_entity", name])
 		if lexical_handler != null then
 			lexical_handler.start_entity(name)
 		end
 	end
 
-	redef fun end_entity(name: String) do
+	redef fun end_entity(name) do
 		log.push(["end_entity", name])
 		if lexical_handler != null then
 			lexical_handler.end_entity(name)
@@ -531,7 +521,7 @@ class SAXEventLogger
 		end
 	end
 
-	redef fun comment(str: String) do
+	redef fun comment(str) do
 		log.push(["comment", str])
 		if lexical_handler != null then
 			lexical_handler.comment(str)

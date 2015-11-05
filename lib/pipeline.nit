@@ -35,7 +35,7 @@ redef interface Iterator[E]
 	# Filter: sort with a given `comparator`.
 	# Important: require O(n) memory.
 	#
-	#    assert ["a", "c", "b"].iterator.sort_with(alpha_comparator).to_a  == ["a", "b", "c"]
+	#     assert ["a", "c", "b"].iterator.sort_with(alpha_comparator).to_a  == ["a", "b", "c"]
 	fun sort_with(comparator: Comparator): Iterator[E]
 	do
 		var a = self.to_a
@@ -80,7 +80,7 @@ redef interface Iterator[E]
 
 	# Alternate each item with `e`.
 	#
-	#    assert [1,2,3].iterator.alternate(0).to_a		     ==  [1,0,2,0,3]
+	#     assert [1,2,3].iterator.alternate(0).to_a		     ==  [1,0,2,0,3]
 	fun alternate(e: E): Iterator[E]
 	do
 		return new PipeAlternate[E](self, e)
@@ -88,7 +88,7 @@ redef interface Iterator[E]
 
 	# Filter: reject a given `item`.
 	#
-	#    assert [1,1,2,1,3].iterator.skip(1).to_a		     ==  [2,3]
+	#     assert [1,1,2,1,3].iterator.skip(1).to_a		     ==  [2,3]
 	fun skip(item: E): Iterator[E]
 	do
 		return new PipeSkip[E](self, item)

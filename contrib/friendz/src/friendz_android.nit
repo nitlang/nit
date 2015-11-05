@@ -11,7 +11,7 @@
 module friendz_android
 
 import friendz
-import mnit_android
+import mnit::android
 import android::landscape
 
 redef class App
@@ -21,16 +21,25 @@ redef class App
 	redef fun on_create
 	do
 		super
-
 		var h = screen_height
 		display.set_viewport(0,0,h*display.width/display.height,h)
 
 		zoom = display.height.to_f / h.to_f
+		default_mediaplayer.looping = true
+	end
+
+	redef fun input(input_event)
+	do
+		if input_event isa KeyEvent then
+			return false
+		else
+			return super
+		end
 	end
 end
 
 redef class AndroidPointerEvent
-	redef fun is_motion do return not just_went_down
+	redef fun is_motion do return is_move
 
 	redef fun x do return super / app.zoom
 	redef fun y do return super / app.zoom

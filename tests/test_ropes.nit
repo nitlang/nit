@@ -12,8 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import standard
-intrude import standard::ropes
+import core
+intrude import core::text::ropes
 
 # Force building a Rope
 redef fun maxlen: Int do return once 2

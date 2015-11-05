@@ -203,6 +203,7 @@ class ANodes[E: ANode]
 	private var parent: ANode
 	private var items = new Array[E]
 	redef fun iterator do return items.iterator
+	redef fun reverse_iterator do return items.reverse_iterator
 	redef fun length do return items.length
 	redef fun is_empty do return items.is_empty
 	redef fun push(e)
@@ -310,6 +311,35 @@ abstract class Token
 	# The next token in the Lexer.
 	# May have disappeared in the AST
 	var next_token: nullable Token = null
+
+	# Is `self` a token discarded from the AST?
+	#
+	# Loose tokens are not present in the AST.
+	# It means they were identified by the lexer but were discarded by the parser.
+	# It also means that they are not visited or manipulated by AST-related functions.
+	#
+	# Each loose token is attached to the non-loose token that precedes or follows it.
+	# The rules are the following:
+	#
+	# * tokens that follow a non-loose token on a same line are attached to it.
+	#   See `next_looses`.
+	# * other tokens, thus that precede a non-loose token on the same line or the next one,
+	# are attached to this one. See `prev_looses`.
+	#
+	# Loose tokens are mostly end of lines (`TEol`) and comments (`TComment`).
+	# Whitespace are ignored by the lexer, so they are not even considered as loose tokens.
+	# See `blank_before` to get the whitespace that separate tokens.
+	var is_loose = false
+
+	# Loose tokens that precede `self`.
+	#
+	# These tokens start the line or belong to a line with only loose tokens.
+	var prev_looses = new Array[Token] is lazy
+
+	# Loose tokens that follow `self`
+	#
+	# These tokens are on the same line than `self`.
+	var next_looses = new Array[Token] is lazy
 
 	# The verbatim blank text between `prev_token` and `self`
 	fun blank_before: String
@@ -936,13 +966,8 @@ abstract class TokenLiteral
 	end
 end
 
-# A literal decimal integer
-class TNumber
-	super TokenLiteral
-end
-
-# A literal hexadecimal integer
-class THexNumber
+# A literal integer
+class TInteger
 	super TokenLiteral
 end
 
@@ -1624,6 +1649,16 @@ class ABraassignMethid
 	var n_assign: TAssign is writable, noinit
 end
 
+# A potentially qualified simple identifier `foo::bar::baz`
+class AQid
+	super Prod
+	# The qualifier, if any
+	var n_qualified: nullable AQualified = null is writable
+
+	# The final identifier
+	var n_id: TId is writable, noinit
+end
+
 # A signature in a method definition. eg `(x,y:X,z:Z):T`
 class ASignature
 	super Prod
@@ -1872,6 +1907,23 @@ class AForExpr
 	# The `for` keyword
 	var n_kwfor: TKwfor is writable, noinit
 
+	# The list of groups to iterate
+	var n_groups = new ANodes[AForGroup](self)
+
+	# The `do` keyword
+	var n_kwdo: TKwdo is writable, noinit
+
+	# The body of the loop
+	var n_block: nullable AExpr = null is writable
+end
+
+# A collection iterated by a for, its automatic variables and its implicit iterator.
+#
+# Standard `for` iterate on a single collection.
+# Multiple `for` can iterate on more than one collection at once.
+class AForGroup
+	super Prod
+
 	# The list of name of the automatic variables
 	var n_ids = new ANodes[TId](self)
 
@@ -1880,12 +1932,6 @@ class AForExpr
 
 	# The expression used as the collection to iterate on
 	var n_expr: AExpr is writable, noinit
-
-	# The `do` keyword
-	var n_kwdo: TKwdo is writable, noinit
-
-	# The body of the loop
-	var n_block: nullable AExpr = null is writable
 end
 
 # A `with` statement
@@ -2035,15 +2081,22 @@ class ANotExpr
 	var n_expr: AExpr is writable, noinit
 end
 
+# A `==` or a `!=` expression
+#
+# Both have a similar effect on adaptive typing, so this class factorizes the common behavior.
+class AEqFormExpr
+	super ABinopExpr
+end
+
 # A `==` expression
 class AEqExpr
-	super ABinopExpr
+	super AEqFormExpr
 	redef fun operator do return "=="
 end
 
 # A `!=` expression
 class ANeExpr
-	super ABinopExpr
+	super AEqFormExpr
 	redef fun operator do return "!="
 end
 
@@ -2158,7 +2211,7 @@ class AAmpExpr
 end
 
 # A unary operation on a method
-class AUnaryopExpr
+abstract class AUnaryopExpr
 	super ASendExpr
 
 	# The operator
@@ -2197,7 +2250,7 @@ class ANewExpr
 	var n_type: AType is writable, noinit
 
 	# The name of the named-constructor, if any
-	var n_id: nullable TId = null is writable
+	var n_qid: nullable AQid = null is writable
 
 	# The arguments of the `new`
 	var n_args: AExprs is writable, noinit
@@ -2231,7 +2284,7 @@ abstract class ACallFormExpr
 	super ASendExpr
 
 	# The name of the method
-	var n_id: TId is writable, noinit
+	var n_qid: AQid is writable, noinit
 
 	# The arguments of the call
 	var n_args: AExprs is writable, noinit
@@ -2442,24 +2495,11 @@ class ANullExpr
 end
 
 # An integer literal
-class AIntExpr
+class AIntegerExpr
 	super AExpr
-end
 
-# An integer literal in decimal format
-class ADecIntExpr
-	super AIntExpr
-
-	# The decimal token
-	var n_number: TNumber is writable, noinit
-end
-
-# An integer literal in hexadecimal format
-class AHexIntExpr
-	super AIntExpr
-
-	# The hexadecimal token
-	var n_hex_number: THexNumber is writable, noinit
+	# The integer token
+	var n_integer: TInteger is writable, noinit
 end
 
 # A float literal
@@ -2782,7 +2822,7 @@ class AModuleName
 	# The starting quad (`::`)
 	var n_quad: nullable TQuad = null is writable
 
-	# The list of quad-separated project/group identifiers
+	# The list of quad-separated package/group identifiers
 	var n_path = new ANodes[TId](self)
 
 	# The final module identifier
@@ -2818,7 +2858,7 @@ class AQualified
 	# The starting quad (`::`)
 	var n_quad: nullable TQuad = null is writable
 
-	# The list of quad-separated project/group/module identifiers
+	# The list of quad-separated package/group/module identifiers
 	var n_id = new ANodes[TId](self)
 
 	# A class identifier

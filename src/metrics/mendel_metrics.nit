@@ -45,6 +45,7 @@ module mendel_metrics
 
 import metrics_base
 import mclasses_metrics
+import mmodules_metrics
 import modelize
 
 redef class ToolContext
@@ -142,9 +143,27 @@ class CBMS
 
 	redef fun collect(mclasses) do
 		for mclass in mclasses do
-			var totc = mclass.all_mproperties(mainmodule, protected_visibility).length
+			var totc = mclass.collect_accessible_mproperties(protected_visibility).length
 			var ditc = mclass.in_hierarchy(mainmodule).depth
 			values[mclass] = totc.to_f / (ditc + 1).to_f
+		end
+	end
+end
+
+# Module Branch Mean Size
+# mbms(module) = |mclassdefs(module)| / (DIT(module) + 1)
+class MBMS
+	super MModuleMetric
+	super FloatMetric
+	redef fun name do return "mbms"
+	redef fun desc do return "branch mean size, mean number of class definition available among ancestors"
+
+	redef fun collect(mmodules) do
+		for mmodule in mmodules do
+			var totc = mmodule.collect_intro_mclassdefs(protected_visibility).length
+			totc += mmodule.collect_redef_mclassdefs(protected_visibility).length
+			var ditc = mmodule.in_importation.depth
+			values[mmodule] = totc.to_f / (ditc + 1).to_f
 		end
 	end
 end
@@ -169,10 +188,37 @@ class CNVI
 				cbms.clear
 				cbms.collect(new HashSet[MClass].from(parents))
 				# compute class novelty index
-				var locc = mclass.local_mproperties(protected_visibility).length
+				var locc = mclass.collect_accessible_mproperties(protected_visibility).length
 				values[mclass] = locc.to_f / cbms.avg
 			else
 				values[mclass] = 0.0
+			end
+		end
+	end
+end
+
+# Module Novelty Index
+# mnvi = |LocS(module)| / mbms(parents(module))
+class MNVI
+	super MModuleMetric
+	super FloatMetric
+	redef fun name do return "mnvi"
+	redef fun desc do return "module novelty index, contribution of the module to its branch in term of introductions"
+
+	redef fun collect(mmodules) do
+		var mbms = new MBMS
+		for mmodule in mmodules do
+			# compute branch mean size
+			var parents = mmodule.in_importation.direct_greaters
+			if parents.length > 0 then
+				mbms.clear
+				mbms.collect(new HashSet[MModule].from(parents))
+				# compute module novelty index
+				var locc = mmodule.collect_intro_mclassdefs(protected_visibility).length
+				locc += mmodule.collect_redef_mclassdefs(protected_visibility).length
+				values[mmodule] = locc.to_f / mbms.avg
+			else
+				values[mmodule] = 0.0
 			end
 		end
 	end
@@ -193,8 +239,27 @@ class CNVS
 		var cnvi = new CNVI(mainmodule)
 		cnvi.collect(mclasses)
 		for mclass in mclasses do
-			var locc = mclass.local_mproperties(protected_visibility).length
+			var locc = mclass.collect_local_mproperties(protected_visibility).length
 			values[mclass] = cnvi.values[mclass] * locc.to_f
+		end
+	end
+end
+
+# Module Novelty Score
+# mnvs = |LocS(module)| x nvi
+class MNVS
+	super MModuleMetric
+	super FloatMetric
+	redef fun name do return "mnvs"
+	redef fun desc do return "module novelty score, importance of the contribution of the module to its branch"
+
+	redef fun collect(mmodules) do
+		var mnvi = new MNVI
+		mnvi.collect(mmodules)
+		for mmodule in mmodules do
+			var locc = mmodule.collect_intro_mclassdefs(protected_visibility).length
+			locc += mmodule.collect_redef_mclassdefs(protected_visibility).length
+			values[mmodule] = mnvi.values[mmodule] * locc.to_f
 		end
 	end
 end
@@ -228,34 +293,34 @@ redef class MClass
 
 	# pure overriders contain only redefinitions
 	private fun is_pure_overrider(min_visibility: MVisibility): Bool do
-		var news = intro_mproperties(min_visibility).length
-		var locs = local_mproperties(min_visibility).length
+		var news = collect_intro_mproperties(min_visibility).length
+		var locs = collect_local_mproperties(min_visibility).length
 		if news == 0 and locs > 0 then return true
 		return false
 	end
 
 	# overriders contain more definitions than introductions
 	private fun is_overrider(min_visibility: MVisibility): Bool do
-		var rdfs = redef_mproperties(min_visibility).length
-		var news = intro_mproperties(min_visibility).length
-		var locs = local_mproperties(min_visibility).length
+		var rdfs = collect_redef_mproperties(min_visibility).length
+		var news = collect_intro_mproperties(min_visibility).length
+		var locs = collect_local_mproperties(min_visibility).length
 		if rdfs >= news and locs > 0 then return true
 		return false
 	end
 
 	# pure extenders contain only introductions
 	private fun is_pure_extender(min_visibility: MVisibility): Bool do
-		var rdfs = redef_mproperties(min_visibility).length
-		var locs = local_mproperties(min_visibility).length
+		var rdfs = collect_redef_mproperties(min_visibility).length
+		var locs = collect_local_mproperties(min_visibility).length
 		if rdfs == 0 and locs > 0 then return true
 		return false
 	end
 
 	# extenders contain more introduction than redefinitions
 	private fun is_extender(min_visibility: MVisibility): Bool do
-		var rdfs = redef_mproperties(min_visibility).length
-		var news = intro_mproperties(min_visibility).length
-		var locs = local_mproperties(min_visibility).length
+		var rdfs = collect_redef_mproperties(min_visibility).length
+		var news = collect_intro_mproperties(min_visibility).length
+		var locs = collect_local_mproperties(min_visibility).length
 		if news > rdfs and locs > 0 then return true
 		return false
 	end
@@ -263,7 +328,7 @@ redef class MClass
 	# pure specializers always call to super in its redefinitions
 	private fun is_pure_specializer(min_visibility: MVisibility): Bool do
 		var ovrs = overriden_mproperties(min_visibility).length
-		var rdfs = redef_mproperties(min_visibility).length
+		var rdfs = collect_redef_mproperties(min_visibility).length
 		if ovrs == 0 and rdfs > 0 then return true
 		return false
 	end
@@ -272,7 +337,7 @@ redef class MClass
 	private fun is_specializer(min_visibility: MVisibility): Bool do
 		var spcs = extended_mproperties(min_visibility).length
 		var ovrs = overriden_mproperties(min_visibility).length
-		var rdfs = redef_mproperties(min_visibility).length
+		var rdfs = collect_redef_mproperties(min_visibility).length
 		if spcs > ovrs and rdfs > 0 then return true
 		return false
 	end
@@ -280,7 +345,7 @@ redef class MClass
 	# pure replacers never call to super in its redefinitions
 	private fun is_pure_replacer(min_visibility: MVisibility): Bool do
 		var spcs = extended_mproperties(min_visibility).length
-		var rdfs = redef_mproperties(min_visibility).length
+		var rdfs = collect_redef_mproperties(min_visibility).length
 		if spcs == 0 and rdfs > 0 then return true
 		return false
 	end
@@ -289,7 +354,7 @@ redef class MClass
 	private fun is_replacer(min_visibility: MVisibility): Bool do
 		var spcs = extended_mproperties(min_visibility).length
 		var ovrs = overriden_mproperties(min_visibility).length
-		var rdfs = redef_mproperties(min_visibility).length
+		var rdfs = collect_redef_mproperties(min_visibility).length
 		if ovrs > spcs and rdfs > 0 then return true
 		return false
 	end
@@ -298,9 +363,8 @@ redef class MClass
 	private fun is_equal(min_visibility: MVisibility): Bool do
 		var spcs = extended_mproperties(min_visibility).length
 		var ovrs = overriden_mproperties(min_visibility).length
-		var rdfs = redef_mproperties(min_visibility).length
+		var rdfs = collect_redef_mproperties(min_visibility).length
 		if spcs == ovrs and rdfs > 0 then return true
 		return false
 	end
 end
-

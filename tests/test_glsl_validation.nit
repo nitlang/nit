@@ -25,7 +25,7 @@ layout(binding = 0) out vec4 outColor;
 
 void main()
 {
-	gl_FragColor = v_color * texture(vTex, v_texCoord);
+	outColor = v_color * texture(vTex, v_texCoord);
 	b;
 }
 """ @ glsl_fragment_shader

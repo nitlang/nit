@@ -13,7 +13,7 @@
 # limitations under the License
 
 # Shows a meetup and allows to modify its participants
-module meetup
+module meetup is i18n
 
 import opportunity_model
 import boilerplate
@@ -46,6 +46,13 @@ class OpportunityMeetupPage
 			var scores = {};
 			var answers = [];
 			var maxscore = 0;
+
+			// Pizza ratios
+			var pizzas = {};
+			var pizzas_person = {};
+			var pizzas_total = 0.0;
+
+			// Iterate over each participant x possible answers
 			for(i=0; i < anss.length; i++){
 				var incscore = 0;
 				var inccount = 0;
@@ -75,7 +82,48 @@ class OpportunityMeetupPage
 				if(scores[ansid] > maxscore){
 					maxscore = scores[ansid];
 				}
+
+				if (ansid in pizzas_person) {
+
+					// Pizza ratio of previous participant
+					for (a in pizzas_person) {
+						var value = pizzas_person[a];
+						if (value != 0.0 && pizzas_total != 0)
+							value /= pizzas_total;
+
+						if (a in pizzas)
+							pizzas[a] += value;
+						else
+							pizzas[a] = value;
+					}
+
+					// Reset for a new person
+					pizzas_person = {};
+					pizzas_total = 0.0;
+				}
+
+				pizzas_total += incscore;
+				pizzas_person[ansid] = incscore;
 			}
+
+			// Pizza ratio of the last participant
+			for (a in pizzas_person) {
+				var value = pizzas_person[a];
+				if (value != 0.0 && pizzas_total != 0)
+					value /= pizzas_total;
+
+				if (a in pizzas)
+					pizzas[a] += value;
+				else
+					pizzas[a] = value;
+			}
+
+			var pizza_unit = document.getElementById("pizza_unit").value;
+			if (pizza_unit)
+				pizza_unit = parseFloat(pizza_unit);
+			else
+				pizza_unit = 1;
+
 			for(i=0; i < answers.length; i++){
 				var ansid = answers[i].toString();
 				var el = $('#total'+ansid)[0];
@@ -85,7 +133,19 @@ class OpportunityMeetupPage
 				}
 				ins += "</center>";
 				el.innerHTML = ins;
+
+				// Pizza ratio
+				var val = pizzas[ansid] * pizza_unit;
+
+				el = $('#pizzas'+ansid)[0];
+				ins = "<center>"+val.toFixed(1);
+				ins += "<br><span style=\\"color:orange\\">∇</span>";
+				ins += "</center>";
+				el.innerHTML = ins;
 			}
+
+			var pizza_unit = $("#pizza_unit").val();
+			set_cookie("opportunity_pizza_unit", pizza_unit);
 		}
 		function change_answer(ele, id){
 			// modify only the currently selected entry
@@ -211,7 +271,11 @@ class OpportunityMeetupPage
 				.fail(function(data){
 					//TODO: Notify of failure
 				});
+
+			// Remember the participant's name client-side
+			set_cookie("opportunity_participant_name", pname);
 		}
+
 		function remove_people(ele){
 			var arr = ele.id.split("_")
 			var pid = arr[1]
@@ -226,19 +290,20 @@ class OpportunityMeetupPage
 				}
 			});
 		}
+
 		// ID of line currently open for modification
 		var in_modification_id = null;
 		function modify_people(ele, id){
 			if (in_modification_id != null) {
 				// reset to normal values
-				$('#modify_'+in_modification_id).text("Modify or delete");
+				$('#modify_'+in_modification_id).text("{{{"Modify or delete"}}}");
 				$('#modify_'+in_modification_id).attr("class", "btn btn-xs btn-warning");
 				$('#line_'+in_modification_id).css("background-color", "");
 				$('#delete_'+in_modification_id).css("display", "none");
 			}
 			if (in_modification_id != id) {
 				// activate modifiable mode
-				$('#modify_'+id).text("Done");
+				$('#modify_'+id).text("{{{"Done"}}}");
 				$('#modify_'+id).attr("class", "btn btn-xs btn-success");
 				$('#line_'+id).css("background-color", "LightYellow");
 				$('#delete_'+id).show();
@@ -247,6 +312,34 @@ class OpportunityMeetupPage
 			} else {
 				in_modification_id = null;
 			}
+		}
+
+		function get_cookie(cookie_name) {
+		    var name = cookie_name + "=";
+			var ca = document.cookie.split(';');
+			for(var i = 0; i < ca.length; i ++) {
+				var c = ca[i];
+				while (c.charAt(0) == ' ') c = c.substring(1);
+				if (c.indexOf(name) == 0) return c.substring(name.length, c.length);
+			}
+			return "";
+		}
+
+		function set_cookie(cookie_name, value) {
+		    var date = new Date();
+			date.setTime(date.getTime() + (365*24*60*60*1000));
+			var expires = "expires="+date.toUTCString();
+			document.cookie = cookie_name + "=" + value + "; " + expires;
+		}
+
+		// Retrieve the last client-side participant's name
+		window.onload = function () {
+			$("#new_name").val(get_cookie("opportunity_participant_name"));
+			$("#new_name").focus();
+
+			$("#pizza_unit").val(get_cookie("opportunity_pizza_unit"));
+
+			update_scores();
 		}
 		"""
 	end
@@ -274,16 +367,16 @@ redef class Meetup
 	<center><h1>{{{name}}}</h1></center>
 """
 		if not date.is_empty then t.add """
-	<center><h4>When: {{{date}}}</h4></center>"""
+	<center><h4>{{{"When:"}}} {{{date}}}</h4></center>"""
 
 		if not place.is_empty then t.add """
-	<center><h4>Where: {{{place}}}</h4></center>"""
+	<center><h4>{{{"Where:"}}} {{{place}}}</h4></center>"""
 
 		t.add """
 </div>
 <table class="table">
 """
-		t.add "<th>Participant name</th>"
+		t.add "<th>{"Participant name"}</th>"
 		for i in answers(db) do
 			t.add "<th class=\"text-center\">"
 			t.add i.to_s
@@ -333,19 +426,19 @@ redef class Meetup
 				end
 				t.add "</center></td>"
 			end
-			t.add """<td class="opportunity-action"><center><button class="btn btn-xs btn-warning" type="button" onclick="modify_people(this, {{{i.id}}})" id="modify_{{{i.id}}}">Modify or delete</button>&nbsp;"""
-			t.add """<button class="btn btn-xs btn-danger" type="button" onclick="remove_people(this)" id="delete_{{{i.id}}}" style="display: none;">Delete</button></center></td>"""
+			t.add """<td class="opportunity-action"><center><button class="btn btn-xs btn-warning" type="button" onclick="modify_people(this, {{{i.id}}})" id="modify_{{{i.id}}}">{{{"Modify or delete"}}}</button>&nbsp;"""
+			t.add """<button class="btn btn-xs btn-danger" type="button" onclick="remove_people(this)" id="delete_{{{i.id}}}" style="display: none;">{{{"Delete"}}}</button></center></td>"""
 			t.add "</tr>"
 		end
 		t.add """
 <tr id="newrow" style="background-color: LightYellow">
-	<td><input id="new_name" type="text" placeholder="Your name" class="input-large"></td>
+	<td><input id="new_name" type="text" placeholder="{{{"Your name"}}}" class="input-large"></td>
 		"""
 		for i in answers(db) do
 			t.add "<td class=\"answer\" id=\"newans_{i.id}\" onclick=\"change_temp_answer(this)\" style=\"color:red;\"><center>✘</center></td>"
 		end
 		t.add """
-	<td><center><span id="add_{{{id}}}" onclick="add_part(this)" style="color:green;" class="action"><button class="btn btn-xs btn-success" type="button">Done</button></span></center></td>"""
+	<td><center><span id="add_{{{id}}}" onclick="add_part(this)" style="color:green;" class="action"><button class="btn btn-xs btn-success" type="button">{{{"Done"}}}</button></span></center></td>"""
 		t.add "</tr>"
 		# Compute score for each answer
 		var scores = new HashMap[Int, Int]
@@ -356,15 +449,21 @@ redef class Meetup
 		end
 		t.add """
 <tr id="total">
-	<th>Total</th>
+	<th>Total ({{{participants(db).length}}})</th>
 		"""
-		for i in answers(db) do
-			t.add """<th id="total{{{i.id}}}"><center>{{{i.count(db)}}}"""
-			if scores.has_key(i.id) and scores[i.id] >= maxsc then
-				t.add """<br/><span style="color:blue">★</span>"""
-			end
-			t.add "</center></th>"
-		end
+		for i in answers(db) do t.add """
+		<th id="total{{{i.id}}}"><center></center></th>
+"""
+		t.add """
+</tr>
+<tr id="pizzas">
+	<th>
+	{{{"%1 ratio × %2".format("<span style='color:orange'>∇</span>", "<input id='pizza_unit' type='number' placeholder='1' text='1' class='inputsm' style='width: 8ex !important;' onchange='update_scores()' onkeypress='update_scores()' onpaste='update_scores()' oninput='update_scores()'>")}}}
+	</th>
+"""
+		for i in answers(db) do t.add """
+		<th id="pizzas{{{i.id}}}"></center></th>
+"""
 		t.add "</th>"
 		t.add """
 		<th></th>

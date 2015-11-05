@@ -27,16 +27,16 @@ extern class JavaArrayList in "Java" `{ java.util.ArrayList `}
 		return new ArrayList();
 	`}
 
-	fun add(o: JavaString) in "Java" `{ recv.add(o); `}
+	fun add(o: JavaString) in "Java" `{ self.add(o); `}
 
 	redef fun output in "Java" `{
-		for (Object i: recv) {
+		for (Object i: self) {
 			System.out.println((String)i);
 		}
 	`}
 
 	fun sort in "Java" `{
-		Collections.sort(recv);		
+		Collections.sort(self);
 	`}
 end
 

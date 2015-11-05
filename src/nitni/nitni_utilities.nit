@@ -72,7 +72,7 @@ redef class MMethod
 
 		var cparams = new List[String]
 		if not self.is_init then
-			cparams.add( "{call_context.name_mtype(recv_mtype)} recv" )
+			cparams.add( "{call_context.name_mtype(recv_mtype)} self" )
 		end
 		for p in signature.mparameters do
 			var param_mtype = p.mtype.resolve_for(recv_mtype, recv_mtype, from_mmodule, true)
@@ -110,7 +110,7 @@ redef class MMethod
 
 		var cparams = new List[String]
 		if not self.is_init then
-			cparams.add(call_context.cast_to(recv_mtype, "recv{param_suffix}"))
+			cparams.add(call_context.cast_to(recv_mtype, "self{param_suffix}"))
 		end
 
 		for p in signature.mparameters do
@@ -140,12 +140,10 @@ class CallContext
 	fun cast_to(mtype: MType, name: String): String do return name
 end
 
-redef class Object
-	# Call context to use
-	protected fun internal_call_context: CallContext do return new CallContext
-	protected fun long_signature: SignatureLength do return once new SignatureLength(true)
-	protected fun short_signature: SignatureLength do return once new SignatureLength(false)
-end
+# Call context to use
+fun internal_call_context: CallContext do return new CallContext
+fun long_signature: SignatureLength do return once new SignatureLength(true)
+fun short_signature: SignatureLength do return once new SignatureLength(false)
 
 # Length of the signature of a C function (long version hase the module name as prefix)
 class SignatureLength

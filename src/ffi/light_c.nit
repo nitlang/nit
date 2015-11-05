@@ -48,7 +48,7 @@ class CLanguage
 		var fc = new ExternCFunction(m, mmodule)
 		fc.decls.add( block.location.as_line_pragma )
 		fc.exprs.add( block.code )
-		ecc.add_exported_function( fc )
+		ecc.body_impl.add fc.to_writer
 	end
 
 	redef fun compile_extern_class(block, m, ecc, mmodule) do end
@@ -91,13 +91,11 @@ class ForeignCType
 	redef var ctype: String
 end
 
-redef class Object
-	# Context when calling user C code from generated code
-	fun to_c_call_context: ToCCallContext do return once new ToCCallContext
+# Context when calling user C code from generated code
+fun to_c_call_context: ToCCallContext do return once new ToCCallContext
 
-	# Context when calling generated code from user C code
-	fun from_c_call_context: FromCCallContext do return once new FromCCallContext
-end
+# Context when calling generated code from user C code
+fun from_c_call_context: FromCCallContext do return once new FromCCallContext
 
 # Context when calling user C code from generated code
 class ToCCallContext

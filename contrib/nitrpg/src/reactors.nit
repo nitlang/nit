@@ -74,12 +74,18 @@ redef class PullRequestEvent
 	end
 
 	private fun react_pull_close(r: PlayerReactor, game: Game) do
-		if not pull.merged then return
 		var player = pull.user.player(game)
-		var reward = pull.commits * r.nc_commit_merged
+		var reward
+		var event
+		if pull.merged then
+			reward = pull.commits * r.nc_commit_merged
+			event = player_reward_event("pull_merged", player, reward)
+		else
+			reward = -r.nc_pull_open
+			event = player_reward_event("pull_closed", player, reward)
+		end
 		player.nitcoins += reward
 		player.save
-		var event = player_reward_event("pull_merged", player, reward)
 		player.add_event(event)
 	end
 end

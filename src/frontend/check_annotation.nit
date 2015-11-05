@@ -76,6 +76,8 @@ private class CheckAnnotationPhase
 	var primtives_annotations_list = """
 new_annotation
 
+conditional
+
 deprecated
 fixed
 lazy
@@ -84,6 +86,7 @@ readonly
 writable
 autoinit
 noautoinit
+lateinit
 nosuper
 old_style_init
 abstract

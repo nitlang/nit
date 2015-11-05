@@ -18,3 +18,6 @@
 #alt1# module error_annot_pkgconfig_alt1 is pkgconfig("missing-lib")
 #alt2# module error_annot_pkgconfig_alt2 is pkgconfig("too many args", 123)
 #alt3# module error_annot_pkgconfig_alt3 is pkgconfig(1234) # not a string
+
+fun foo `{ `}
+foo

@@ -39,7 +39,7 @@ extern class GtkDialog `{GtkDialog *`}
 	`}
 
 	fun run `{
-		gtk_dialog_run(recv);
+		gtk_dialog_run(self);
 	`}
 end
 
@@ -53,71 +53,71 @@ extern class GtkAboutDialog `{GtkAboutDialog *`}
 	`}
 
 	fun program_name: String import NativeString.to_s `{
-		return NativeString_to_s((char *)gtk_about_dialog_get_program_name(recv));
+		return NativeString_to_s((char *)gtk_about_dialog_get_program_name(self));
 	`}
 
 	fun program_name=(name: String) import String.to_cstring `{
-		gtk_about_dialog_set_program_name(recv, String_to_cstring(name));
+		gtk_about_dialog_set_program_name(self, String_to_cstring(name));
 	`}
 
 	fun version: String import NativeString.to_s `{
-		return NativeString_to_s((char *)gtk_about_dialog_get_version(recv));
+		return NativeString_to_s((char *)gtk_about_dialog_get_version(self));
 	`}
 
 	fun version=(v: String) import String.to_cstring `{
-		gtk_about_dialog_set_version(recv, String_to_cstring(v));
+		gtk_about_dialog_set_version(self, String_to_cstring(v));
 	`}
 
 	fun copyright: String import NativeString.to_s `{
-		return NativeString_to_s((char *)gtk_about_dialog_get_copyright(recv));
+		return NativeString_to_s((char *)gtk_about_dialog_get_copyright(self));
 	`}
 
 	fun copyright=(c: String) import String.to_cstring `{
-		gtk_about_dialog_set_copyright(recv, String_to_cstring(c));
+		gtk_about_dialog_set_copyright(self, String_to_cstring(c));
 	`}
 
 	fun comments: String import NativeString.to_s `{
-		return NativeString_to_s((char *)gtk_about_dialog_get_comments(recv));
+		return NativeString_to_s((char *)gtk_about_dialog_get_comments(self));
 	`}
 
 	fun comments=(com: String) import String.to_cstring `{
-		gtk_about_dialog_set_comments(recv, String_to_cstring(com));
+		gtk_about_dialog_set_comments(self, String_to_cstring(com));
 	`}
 
 	fun license: String import NativeString.to_s `{
-		return NativeString_to_s((char *)gtk_about_dialog_get_license(recv));
+		return NativeString_to_s((char *)gtk_about_dialog_get_license(self));
 	`}
 
 	fun license=(li: String) import String.to_cstring `{
-		gtk_about_dialog_set_license(recv, String_to_cstring(li));
+		gtk_about_dialog_set_license(self, String_to_cstring(li));
 	`}
 
 	# license_type
 
 	fun website: String import NativeString.to_s `{
-		return NativeString_to_s((char *)gtk_about_dialog_get_website(recv));
+		return NativeString_to_s((char *)gtk_about_dialog_get_website(self));
 	`}
 
 	fun website=(link: String) import String.to_cstring `{
-		gtk_about_dialog_set_website(recv, String_to_cstring(link));
+		gtk_about_dialog_set_website(self, String_to_cstring(link));
 	`}
 
 	fun website_label: String import NativeString.to_s `{
-		return NativeString_to_s((char *) gtk_about_dialog_get_website_label(recv));
+		return NativeString_to_s((char *) gtk_about_dialog_get_website_label(self));
 	`}
 
 	fun website_label=(link_label: String) import String.to_cstring `{
-		gtk_about_dialog_set_website_label(recv, String_to_cstring(link_label));
+		gtk_about_dialog_set_website_label(self, String_to_cstring(link_label));
 	`}
 
 	# TODO
 	# fun authors: String`{
-	#		return NativeString_to_s(gtk_about_dialog_get_authors(recv));
+	#		return NativeString_to_s(gtk_about_dialog_get_authors(self));
 	# `}
 
 	# TODO
 	# fun authors=(authors_list: String) import String.to_cstring`{
-	#	gtk_about_dialog_set_authors(recv, String_to_cstring(authors_list));
+	#	gtk_about_dialog_set_authors(self, String_to_cstring(authors_list));
 	# `}
 
 	fun show_about_dialog(parent: GtkWindow, params: String)
@@ -142,14 +142,14 @@ extern class GtkAppChooserDialog `{GtkAppChooserDialog *`}
 			parent, flags, String_to_cstring(content_type));
 	`}
 
-	fun widget: GtkWidget `{ return gtk_app_chooser_dialog_get_widget(recv); `}
+	fun widget: GtkWidget `{ return gtk_app_chooser_dialog_get_widget(self); `}
 
 	fun heading: String import NativeString.to_s `{
-		return NativeString_to_s((char *)gtk_app_chooser_dialog_get_heading(recv));
+		return NativeString_to_s((char *)gtk_app_chooser_dialog_get_heading(self));
 	`}
 
 	fun heading=(text: String) import String.to_cstring `{
-		gtk_app_chooser_dialog_set_heading(recv, String_to_cstring(text));
+		gtk_app_chooser_dialog_set_heading(self, String_to_cstring(text));
 	`}
 
 end

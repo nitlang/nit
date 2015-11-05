@@ -13,7 +13,7 @@
 # To be used as a Mixin at compile-time for benchmarking purposes.
 module array_to_s_flatstr
 
-intrude import standard::string
+intrude import standard::text::flat
 
 redef class FlatString
 	redef fun +(o) do

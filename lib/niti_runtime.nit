@@ -27,17 +27,10 @@ redef class Sys
 	# Read the next useful line from file-name arguments
 	private fun read_next_line
 	do
-		if stdin.eof then
+		while stdin.eof do
 			open_next_stream
 		end
-		var line = stdin.read_line
-		loop
-			if not stdin.eof then break
-			open_next_stream
-			if not line.is_empty then break
-			line = stdin.read_line
-		end
-		self.line = line
+		self.line = stdin.read_line
 	end
 
 	# Open the next file until there is no more arguments
@@ -49,5 +42,5 @@ redef class Sys
 	end
 
 	# The next line to process by the main program
-	var line: String
+	var line: String is noautoinit
 end

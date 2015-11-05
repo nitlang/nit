@@ -35,15 +35,15 @@
 #
 # Note : All nodes described here are MEntities.
 #
-# `MProject`
+# `MPackage`
 #
-# * labels: `MProject`, `model_name` and `MEntity`.
-# * `(:MProject)-[:ROOT]->(:MGroup)`: root of the group tree.
+# * labels: `MPackage`, `model_name` and `MEntity`.
+# * `(:MPackage)-[:ROOT]->(:MGroup)`: root of the group tree.
 #
 # `MGroup`
 #
 # * labels: `MGroup`, `model_name` and `MEntity`.
-# * `(:MGroup)-[:PROJECT]->(:MProject)`: associated project.
+# * `(:MGroup)-[:PROJECT]->(:MPackage)`: associated package.
 # * `(:MGroup)-[:PARENT]->(:MGroup)`: parent group. Does not exist for the root
 # group.
 # * `(:MGroup)-[:DECLARES]->(:MModule)`: modules that are direct children of
@@ -233,9 +233,9 @@ class NeoModel
 	fun load(model: Model): Model do
 		var nodes: Array[NeoNode]
 
-		toolcontext.info("Loading project node...", 1)
-		nodes = client.nodes_with_labels([model_name, "MProject"])
-		for node in nodes do to_mproject(model, node)
+		toolcontext.info("Loading package node...", 1)
+		nodes = client.nodes_with_labels([model_name, "MPackage"])
+		for node in nodes do to_mpackage(model, node)
 		toolcontext.info("Loading groups...", 1)
 		nodes = client.nodes_with_labels([model_name, "MGroup"])
 		for node in nodes do to_mgroup(model, node)
@@ -304,9 +304,9 @@ class NeoModel
 
 	# Collect all nodes from the current `model`.
 	private fun collect_model_nodes(model: Model): Collection[NeoNode] do
-		for mproject in model.mprojects do
-			to_node(mproject)
-			for mgroup in mproject.mgroups do to_node(mgroup)
+		for mpackage in model.mpackages do
+			to_node(mpackage)
+			for mgroup in mpackage.mgroups do to_node(mgroup)
 		end
 		return nodes.values
 	end
@@ -332,7 +332,7 @@ class NeoModel
 	# `mentities` are stored locally to avoid duplication.
 	fun to_node(mentity: MEntity): NeoNode do
 		if nodes.has_key(mentity) then return nodes[mentity]
-		if mentity isa MProject then return mproject_node(mentity)
+		if mentity isa MPackage then return mpackage_node(mentity)
 		if mentity isa MGroup then return mgroup_node(mentity)
 		if mentity isa MModule then return mmodule_node(mentity)
 		if mentity isa MClass then return mclass_node(mentity)
@@ -346,7 +346,7 @@ class NeoModel
 
 	# Get the `MEntity` associated with `node`.
 	fun to_mentity(model: Model, node: NeoNode): MEntity do
-		if node.labels.has("MProject") then return to_mproject(model, node)
+		if node.labels.has("MPackage") then return to_mpackage(model, node)
 		if node.labels.has("MGroup") then return to_mgroup(model, node)
 		if node.labels.has("MModule") then return to_mmodule(model, node)
 		if node.labels.has("MClass") then return to_mclass(model, node)
@@ -372,30 +372,30 @@ class NeoModel
 		return node
 	end
 
-	# Build a `NeoNode` representing `mproject`.
-	private fun mproject_node(mproject: MProject): NeoNode do
-		var node = make_node(mproject)
-		node.labels.add "MProject"
-		var root = mproject.root
+	# Build a `NeoNode` representing `mpackage`.
+	private fun mpackage_node(mpackage: MPackage): NeoNode do
+		var node = make_node(mpackage)
+		node.labels.add "MPackage"
+		var root = mpackage.root
 		if root != null then
 			node.out_edges.add(new NeoEdge(node, "ROOT", to_node(root)))
 		end
 		return node
 	end
 
-	# Build a new `MProject` from a `node`.
+	# Build a new `MPackage` from a `node`.
 	#
-	# REQUIRE `node.labels.has("MProject")`
-	private fun to_mproject(model: Model, node: NeoNode): MProject do
+	# REQUIRE `node.labels.has("MPackage")`
+	private fun to_mpackage(model: Model, node: NeoNode): MPackage do
 		var m = mentities.get_or_null(node.id.as(Int))
-		if m isa MProject then return m
+		if m isa MPackage then return m
 
-		assert node.labels.has("MProject")
-		var mproject = new MProject(node["name"].to_s, model)
-		mentities[node.id.as(Int)] = mproject
-		set_doc(node, mproject)
-		mproject.root = to_mgroup(model, node.out_nodes("ROOT").first)
-		return mproject
+		assert node.labels.has("MPackage")
+		var mpackage = new MPackage(node["name"].to_s, model)
+		mentities[node.id.as(Int)] = mpackage
+		set_doc(node, mpackage)
+		mpackage.root = to_mgroup(model, node.out_nodes("ROOT").first)
+		return mpackage
 	end
 
 	# Build a `NeoNode` representing `mgroup`.
@@ -403,7 +403,7 @@ class NeoModel
 		var node = make_node(mgroup)
 		node.labels.add "MGroup"
 		var parent = mgroup.parent
-		node.out_edges.add(new NeoEdge(node, "PROJECT", to_node(mgroup.mproject)))
+		node.out_edges.add(new NeoEdge(node, "PROJECT", to_node(mgroup.mpackage)))
 		if parent != null then
 			node.out_edges.add(new NeoEdge(node, "PARENT", to_node(parent)))
 		end
@@ -424,13 +424,13 @@ class NeoModel
 		if m isa MGroup then return m
 
 		assert node.labels.has("MGroup")
-		var mproject = to_mproject(model, node.out_nodes("PROJECT").first)
+		var mpackage = to_mpackage(model, node.out_nodes("PROJECT").first)
 		var parent: nullable MGroup = null
 		var out = node.out_nodes("PARENT")
 		if not out.is_empty then
 			parent = to_mgroup(model, out.first)
 		end
-		var mgroup = new MGroup(node["name"].to_s, mproject, parent)
+		var mgroup = new MGroup(node["name"].to_s, mpackage, parent)
 		mentities[node.id.as(Int)] = mgroup
 		set_doc(node, mgroup)
 		return mgroup
@@ -845,7 +845,6 @@ class NeoModel
 		node.labels.add "MParameter"
 		node["name"] = mparameter.name
 		node["is_vararg"] = mparameter.is_vararg
-		node["is_default"] = mparameter.is_default
 		node.out_edges.add(new NeoEdge(node, "TYPE", to_node(mparameter.mtype)))
 		return node
 	end
@@ -861,8 +860,7 @@ class NeoModel
 		var name = node["name"].to_s
 		var mtype = to_mtype(model, node.out_nodes("TYPE").first)
 		var is_vararg = node["is_vararg"].as(Bool)
-		var is_default = node["is_default"].as(Bool)
-		var mparameter = new MParameter(name, mtype, is_vararg, is_default)
+		var mparameter = new MParameter(name, mtype, is_vararg)
 		mentities[node.id.as(Int)] = mparameter
 		return mparameter
 	end

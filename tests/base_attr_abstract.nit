@@ -14,25 +14,27 @@
 
 import kernel
 
-interface Foo
+class Foo
 	var a: Object is abstract
-	#alt1#var b = 1 is abstract
-	#alt2#var b is abstract, noautoinit
+	var b: Object = 10 is abstract
+	#alt1#var b is abstract, noautoinit
+	#alt1#var c = 1 is abstract, lazy
+	#alt1#var d = 1 is abstract, autoinit
+	#alt1#var e = 1 is abstract, readonly
 end
 
 class Bar
 	super Foo
 	redef var a
+	redef var b is noinit
 end
 
 class Baz
 	super Foo
-	redef fun a do return 100
-	redef fun a=(x) do (101).output
-end
-
-class FooBar
-	super Foo
+	redef fun a do return 100 #alt2#
+	redef fun a=(x) do (101).output #alt3#
+	redef fun b do return 200 #alt4#
+	redef fun b=(x) do (201).output #alt5#
 end
 
 var f: Foo = new Bar(1)
@@ -40,11 +42,21 @@ f.a.output
 f.a = 2
 f.a.output
 
+'\n'.output
+
+f.b.output
+f.b = 20
+f.b.output
+
+'\n'.output
+
 f = new Baz
 f.a.output
 f.a = 3
 f.a.output
 
-f = new FooBar
-#alt3#f.a.output
-#alt4#f.a = 4
+'\n'.output
+
+f.b.output
+f.b = 30
+f.b.output

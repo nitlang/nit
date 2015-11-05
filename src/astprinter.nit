@@ -90,7 +90,7 @@ redef class ABlockExpr
 	end
 end
 
-redef class AIntExpr
+redef class AIntegerExpr
 	redef fun accept_printer(v)
 	do
 		v.write(value.to_s)

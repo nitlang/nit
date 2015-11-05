@@ -62,7 +62,7 @@ end
 # Base class for all widgets
 # See: https://developer.gnome.org/gtk3/stable/GtkWidget.html
 extern class GtkWidget `{GtkWidget *`}
-	fun show_all `{ gtk_widget_show_all(recv); `}
+	fun show_all `{ gtk_widget_show_all(self); `}
 
 	fun signal_connect(signal_name: String, to_call: GtkCallable, user_data: nullable Object) import String.to_cstring, GtkCallable.signal, Object.as not nullable `{
 		NitGtkSignal *data = malloc(sizeof(NitGtkSignal));
@@ -74,7 +74,7 @@ extern class GtkWidget `{GtkWidget *`}
 		data->user_data = user_data;
 
 		/*Use G_CALLBACK() to cast the callback function to a GCallback*/
-		g_signal_connect(recv,
+		g_signal_connect(self,
 		                 String_to_cstring(signal_name),
 		                 G_CALLBACK(nit_gtk_callback_func),
 		                 data);
@@ -83,54 +83,54 @@ extern class GtkWidget `{GtkWidget *`}
 	redef fun ==(o) do return o isa GtkWidget and equal_to_gtk_widget(o)
 
 	private fun equal_to_gtk_widget(o: GtkWidget): Bool `{
-		return recv == o;
+		return self == o;
 	`}
 
 	fun request_size(width, height: Int) `{
-		gtk_widget_set_size_request(recv, width, height);
+		gtk_widget_set_size_request(self, width, height);
 	`}
 
 	fun bg_color=(state: GtkStateType, color: GdkRGBA) `{
-		gtk_widget_override_background_color(recv, state, color);
+		gtk_widget_override_background_color(self, state, color);
 	`}
 
 	# with gtk it's possible to set fg_color to all widget: is it correct? is fg color inherited?
 	# GdkColor color;
 	fun fg_color=(state: GtkStateType, color: GdkRGBA) `{
-		gtk_widget_override_color(recv, state, color);
+		gtk_widget_override_color(self, state, color);
 	`}
 
 	# Sets the sensitivity of a widget. sensitive -> the user can interact with it.
 	# Insensitive -> widget "grayed out" and the user can"t interact with them
 	fun sensitive=(sensitive: Bool) `{
-		gtk_widget_set_sensitive(recv, sensitive);
+		gtk_widget_set_sensitive(self, sensitive);
 	`}
 
 	# return the sensitivity of the widget
 	fun sensitive: Bool `{
-		return gtk_widget_get_sensitive(recv);
+		return gtk_widget_get_sensitive(self);
 	`}
 
 	# Set the visibility of the widget
 	fun visible=(visible: Bool) `{
-		gtk_widget_set_visible(recv, visible);
+		gtk_widget_set_visible(self, visible);
 	`}
 
 	# Get the visibility of the widget only
 	fun visible_self: Bool `{
-		return gtk_widget_get_visible(recv);
+		return gtk_widget_get_visible(self);
 	`}
 
 	# Destroy the widget
-	fun destroy `{ gtk_widget_destroy(recv); `}
+	fun destroy `{ gtk_widget_destroy(self); `}
 
 	# Show the widget on screen
 	#
 	# See: `show_all` to recursively show this widget and contained widgets.
-	fun show `{ gtk_widget_show(recv); `}
+	fun show `{ gtk_widget_show(self); `}
 
 	# Hide the widget (reverse the effects of `show`)
-	fun hide `{ gtk_widget_hide(recv); `}
+	fun hide `{ gtk_widget_hide(self); `}
 end
 
 # Base class for widgets which contain other widgets
@@ -140,21 +140,21 @@ extern class GtkContainer `{GtkContainer *`}
 
 	# Add a widget to the container
 	fun add(widget: GtkWidget) `{
-		gtk_container_add(recv, widget);
+		gtk_container_add(self, widget);
 	`}
 	# Remove the widget from the container
 	fun remove_widget(widget: GtkWidget) `{
-		gtk_container_remove(recv, widget);
+		gtk_container_remove(self, widget);
 	`}
 
 	# Get the resize mode of the container
 	fun resize_mode: GtkResizeMode `{
-		return gtk_container_get_resize_mode(recv);
+		return gtk_container_get_resize_mode(self);
 	`}
 
 	# Set the resize mode of the container
 	fun resize_mode=(resize_mode: GtkResizeMode) `{
-		gtk_container_set_resize_mode(recv, resize_mode);
+		gtk_container_set_resize_mode(self, resize_mode);
 	`}
 
 end
@@ -165,7 +165,7 @@ extern class GtkBin `{GtkBin *`}
 	super GtkContainer
 
 	fun child: GtkWidget `{
-		return gtk_bin_get_child(recv);
+		return gtk_bin_get_child(self);
 	`}
 end
 
@@ -180,11 +180,11 @@ extern class GtkWindow `{GtkWindow *`}
 
 	# Connect the "destroy" signal to `quit_gtk`
 	fun connect_destroy_signal_to_quit `{
-		g_signal_connect(recv, "destroy", G_CALLBACK(gtk_main_quit), NULL);
+		g_signal_connect(self, "destroy", G_CALLBACK(gtk_main_quit), NULL);
 	`}
 
 	fun title=(title: String) import String.to_cstring `{
-		gtk_window_set_title(recv, String_to_cstring(title));
+		gtk_window_set_title(self, String_to_cstring(title));
 	`}
 
 	# The "destroy" signal is emitted when a widget is destroyed, either by explicitly calling gtk_widget_destroy() or when the widget is unparented. Top-level GtkWindows are also destroyed when the Close window control button is clicked.
@@ -194,22 +194,22 @@ extern class GtkWindow `{GtkWindow *`}
 	end
 
 	fun resizable: Bool `{
-		return gtk_window_get_resizable(recv);
+		return gtk_window_get_resizable(self);
 	`}
 
 	fun resizable=(is_resizable: Bool) `{
-		return gtk_window_set_resizable(recv, is_resizable);
+		return gtk_window_set_resizable(self, is_resizable);
 	`}
 
 	# Activates the current focused widget within the window.
 	# returns TRUE if a widget got activated.
 	fun activate_focus: Bool `{
-		return gtk_window_activate_focus(recv);
+		return gtk_window_activate_focus(self);
 	`}
 
 	# Sets a window modal or non-modal. Modal windows prevent interaction with other windows in the same application.
 	fun modal=(is_modal: Bool) `{
-		gtk_window_set_modal(recv, is_modal);
+		gtk_window_set_modal(self, is_modal);
 	`}
 
 	# Windows can't actually be 0x0 in size, they must be at least 1x1
@@ -217,78 +217,78 @@ extern class GtkWindow `{GtkWindow *`}
 	# params width in pixels, or -1 to unset the default width
 	# params height in pixels, or -1 to unset the default height
 	fun default_size(width: Int, height: Int) `{
-		gtk_window_set_default_size(recv, width, height);
+		gtk_window_set_default_size(self, width, height);
 	`}
 
 	# Activates the default widget for the window
 	# unless the current focused widget has been configured to receive the default action (see gtk_widget_set_receives_default()), in which case the focused widget is activated.
 	fun activate_default: Bool `{
-		return gtk_window_activate_default(recv);
+		return gtk_window_activate_default(self);
 	`}
 
 	fun gravity: GdkGravity `{
-		return gtk_window_get_gravity(recv);
+		return gtk_window_get_gravity(self);
 	`}
 
 	fun gravity=(window_grav: GdkGravity) `{
-		gtk_window_set_gravity(recv, window_grav);
+		gtk_window_set_gravity(self, window_grav);
 	`}
 
 #	fun position: GtkWindowPosition `{
-#		return gtk_window_get_position(recv);
+#		return gtk_window_get_position(self);
 #	`}
 #
 #	fun position=(window_pos: GtkWindowPosition) `{
-#		gtk_window_set_position(recv, window_pos);
+#		gtk_window_set_position(self, window_pos);
 #	`}
 
 	fun active: Bool `{
-		return gtk_window_is_active(recv);
+		return gtk_window_is_active(self);
 	`}
 
 	# Returns whether the input focus is within this GtkWindow. For real toplevel windows, this is identical to gtk_window_is_active(), but for embedded windows, like GtkPlug, the results will differ.
 	fun has_toplevel_focus: Bool `{
-		return gtk_window_has_toplevel_focus(recv);
+		return gtk_window_has_toplevel_focus(self);
 	`}
 
 	fun get_focus: GtkWidget `{
-		return gtk_window_get_focus(recv);
+		return gtk_window_get_focus(self);
 	`}
 
 	fun set_focus(widget: GtkWidget) `{
-		return gtk_window_set_focus(recv, widget);
+		return gtk_window_set_focus(self, widget);
 	`}
 
 	fun get_default_widget: GtkWidget `{
-		return gtk_window_get_default_widget(recv);
+		return gtk_window_get_default_widget(self);
 	`}
 
 	fun set_default_widget(widget: GtkWidget) `{
-		return gtk_window_set_default(recv, widget);
+		return gtk_window_set_default(self, widget);
 	`}
 
 	fun maximize `{
-		return gtk_window_maximize(recv);
+		return gtk_window_maximize(self);
 	`}
 
 	fun unmaximize `{
-		return gtk_window_unmaximize(recv);
+		return gtk_window_unmaximize(self);
 	`}
 
 	fun fullscreen `{
-		return gtk_window_fullscreen(recv);
+		return gtk_window_fullscreen(self);
 	`}
 
 	fun unfullscreen `{
-		return gtk_window_unfullscreen(recv);
+		return gtk_window_unfullscreen(self);
 	`}
 
 	fun keep_above=(setting: Bool) `{
-		gtk_window_set_keep_above(recv, setting);
+		gtk_window_set_keep_above(self, setting);
 	`}
 
 	fun keep_below=(setting: Bool) `{
-		gtk_window_set_keep_below(recv, setting);
+		gtk_window_set_keep_below(self, setting);
 	`}
 end
 
@@ -302,31 +302,31 @@ extern class GtkFrame `{GtkFrame *`}
 	`}
 
 	fun frame_label: String `{
-		return NativeString_to_s((char *)gtk_frame_get_label(recv));
+		return NativeString_to_s((char *)gtk_frame_get_label(self));
 	`}
 
 	fun frame_label=(lbl: String) import String.to_cstring `{
-		gtk_frame_set_label(recv, String_to_cstring(lbl));
+		gtk_frame_set_label(self, String_to_cstring(lbl));
 	`}
 
 	fun label_widget: GtkWidget `{
-		return gtk_frame_get_label_widget(recv);
+		return gtk_frame_get_label_widget(self);
 	`}
 
 	fun label_widget=(widget: GtkWidget) `{
-		gtk_frame_set_label_widget(recv, widget);
+		gtk_frame_set_label_widget(self, widget);
 	`}
 
 	fun shadow_type: GtkShadowType `{
-		return gtk_frame_get_shadow_type(recv);
+		return gtk_frame_get_shadow_type(self);
 	`}
 
 	fun shadow_type=(stype: GtkShadowType) `{
-		gtk_frame_set_shadow_type(recv, stype);
+		gtk_frame_set_shadow_type(self, stype);
 	`}
 
 	fun label_align=(xalign: Float, yalign: Float) `{
-		gtk_frame_set_label_align(recv, xalign, yalign);
+		gtk_frame_set_label_align(self, xalign, yalign);
 	`}
 end
 
@@ -342,22 +342,22 @@ extern class GtkGrid `{GtkGrid *`}
 
 	# Set a widget child inside the grid at a given position
 	fun attach(child: GtkWidget, left, top, width, height: Int) `{
-		gtk_grid_attach(recv, child, left, top, width, height);
+		gtk_grid_attach(self, child, left, top, width, height);
 	`}
 
 	# Get the child of the Grid at the given position
 	fun get_child_at(left: Int, top: Int): GtkWidget `{
-		return gtk_grid_get_child_at(recv, left, top);
+		return gtk_grid_get_child_at(self, left, top);
 	`}
 
 	# Insert a row at the specified position
 	fun insert_row(position:Int) `{
-		gtk_grid_insert_row(recv, position);
+		gtk_grid_insert_row(self, position);
 	`}
 
 	# Insert a column at the specified position
 	fun insert_column(position: Int) `{
-		gtk_grid_insert_column(recv, position);
+		gtk_grid_insert_column(self, position);
 	`}
 end
 
@@ -367,12 +367,12 @@ extern class GtkOrientable `{GtkOrientable *`}
 
 	# Get the orientation of this widget
 	fun orientation: GtkOrientation `{
-		return gtk_orientable_get_orientation(recv);
+		return gtk_orientable_get_orientation(self);
 	`}
 
 	# Set the orientation of this widget
 	fun orientation=(orientation: GtkOrientation) `{
-		gtk_orientable_set_orientation(recv, orientation);
+		gtk_orientable_set_orientation(self, orientation);
 	`}
 end
 
@@ -389,26 +389,26 @@ extern class GtkBox `{ GtkBox * `}
 	`}
 
 	# Give the children of `self` equal space in the box?
-	fun homogeneous: Bool `{ return gtk_box_get_homogeneous(recv); `}
+	fun homogeneous: Bool `{ return gtk_box_get_homogeneous(self); `}
 
 	# Give the children of `self` equal space in the box?
 	fun homogeneous=(homogeneous: Bool) `{
-		gtk_box_set_homogeneous(recv, homogeneous);
+		gtk_box_set_homogeneous(self, homogeneous);
 	`}
 
 	# Add `child` and pack it at the start of the box
 	fun pack_start(child: GtkWidget, expand, fill: Bool, padding: Int) `{
-		gtk_box_pack_start(recv, child, expand, fill, padding);
+		gtk_box_pack_start(self, child, expand, fill, padding);
 	`}
 
 	# Add `child` and pack it at the end of the box
 	fun pack_end(child: GtkWidget, expand, fill: Bool, padding: Int) `{
-		gtk_box_pack_end(recv, child, expand, fill, padding);
+		gtk_box_pack_end(self, child, expand, fill, padding);
 	`}
 
 	# Set the way `child` is packed in `self`
 	fun set_child_packing(child: GtkWidget, expand, fill: Bool, padding: Int, packing: GtkPackType) `{
-		gtk_box_set_child_packing(recv, child, expand, fill, padding, packing);
+		gtk_box_set_child_packing(self, child, expand, fill, padding, packing);
 	`}
 end
 
@@ -430,13 +430,13 @@ extern class GtkMisc `{GtkMisc *`}
 	fun alignment: GtkAlignment is abstract
 
 	fun alignment=(x: Float, y: Float) `{
-		gtk_misc_set_alignment(recv, x, y);
+		gtk_misc_set_alignment(self, x, y);
 	`}
 
 	fun padding: GtkAlignment is abstract
 
 	fun padding=(x: Float, y: Float) `{
-		gtk_misc_set_padding(recv, x, y);
+		gtk_misc_set_padding(self, x, y);
 	`}
 
 end
@@ -451,30 +451,30 @@ extern class GtkEntry `{GtkEntry *`}
 	`}
 
 	fun text: String import NativeString.to_s_with_copy `{
-		return NativeString_to_s_with_copy((char *)gtk_entry_get_text(recv));
+		return NativeString_to_s_with_copy((char *)gtk_entry_get_text(self));
 	`}
 
 	fun text=(value: String) import String.to_cstring `{
-		gtk_entry_set_text(recv, String_to_cstring(value));
+		gtk_entry_set_text(self, String_to_cstring(value));
 	`}
 
 	# Is the text visible or is it the invisible char (such as '*')?
 	fun visiblility: Bool `{
-		return gtk_entry_get_visibility(recv);
+		return gtk_entry_get_visibility(self);
 	`}
 
 	# Set the text visiblility
 	# If false, will use the invisible char (such as '*')
 	fun visibility=(is_visible: Bool) `{
-		gtk_entry_set_visibility(recv, is_visible);
+		gtk_entry_set_visibility(self, is_visible);
 	`}
 
 	fun max_length: Int `{
-		return gtk_entry_get_max_length(recv);
+		return gtk_entry_get_max_length(self);
 	`}
 
 	fun max_length=(max: Int) `{
-		gtk_entry_set_max_length(recv, max);
+		gtk_entry_set_max_length(self, max);
 	`}
 end
 
@@ -485,93 +485,93 @@ extern class GtkRange `{GtkRange *`}
 
 	# Gets the current position of the fill level indicator.
 	fun fill_level: Float `{
-		return gtk_range_get_fill_level(recv);
+		return gtk_range_get_fill_level(self);
 	`}
 
 	fun fill_level=(level: Float) `{
-		gtk_range_set_fill_level(recv, level);
+		gtk_range_set_fill_level(self, level);
 	`}
 
 	# Gets whether the range is restricted to the fill level.
 	fun restricted_to_fill_level: Bool `{
-		return gtk_range_get_restrict_to_fill_level(recv);
+		return gtk_range_get_restrict_to_fill_level(self);
 	`}
 
 	fun restricted_to_fill_level=(restricted: Bool) `{
-		gtk_range_set_restrict_to_fill_level(recv, restricted);
+		gtk_range_set_restrict_to_fill_level(self, restricted);
 	`}
 
 	# Gets whether the range displays the fill level graphically.
 	fun show_fill_level: Bool `{
-		return gtk_range_get_show_fill_level(recv);
+		return gtk_range_get_show_fill_level(self);
 	`}
 
 	fun show_fill_level=(is_displayed: Bool) `{
-		gtk_range_set_show_fill_level(recv, is_displayed);
+		gtk_range_set_show_fill_level(self, is_displayed);
 	`}
 
 	fun adjustment: GtkAdjustment `{
-		return gtk_range_get_adjustment(recv);
+		return gtk_range_get_adjustment(self);
 	`}
 
 	fun adjustment=(value: GtkAdjustment) `{
-		gtk_range_set_adjustment(recv, value);
+		gtk_range_set_adjustment(self, value);
 	`}
 
 	fun inverted: Bool `{
-		return gtk_range_get_inverted(recv);
+		return gtk_range_get_inverted(self);
 	`}
 
 	fun inverted=(setting: Bool) `{
-		gtk_range_set_inverted(recv, setting);
+		gtk_range_set_inverted(self, setting);
 	`}
 
 	fun value: Float `{
-		return gtk_range_get_value(recv);
+		return gtk_range_get_value(self);
 	`}
 
 	fun value=(val: Float) `{
-		gtk_range_set_value(recv, val);
+		gtk_range_set_value(self, val);
 	`}
 
 	fun set_increments(step: Float, page: Float) `{
-		gtk_range_set_increments(recv, step, page);
+		gtk_range_set_increments(self, step, page);
 	`}
 
 	fun set_range(min: Float, max: Float) `{
-		gtk_range_set_range(recv, min, max);
+		gtk_range_set_range(self, min, max);
 	`}
 
 	fun round_digits: Int `{
-		return gtk_range_get_round_digits(recv);
+		return gtk_range_get_round_digits(self);
 	`}
 
 	fun round_digits=(nb: Int) `{
-		gtk_range_set_round_digits(recv, nb);
+		gtk_range_set_round_digits(self, nb);
 	`}
 
 	fun size_fixed: Bool `{
-		return gtk_range_get_slider_size_fixed(recv);
+		return gtk_range_get_slider_size_fixed(self);
 	`}
 
 	fun size_fixed=(is_fixed: Bool) `{
-		return gtk_range_set_slider_size_fixed(recv, is_fixed);
+		return gtk_range_set_slider_size_fixed(self, is_fixed);
 	`}
 
 	fun flippable: Bool `{
-		return gtk_range_get_flippable(recv);
+		return gtk_range_get_flippable(self);
 	`}
 
 	fun min_size=(is_flippable: Bool) `{
-		return gtk_range_set_flippable(recv, is_flippable);
+		return gtk_range_set_flippable(self, is_flippable);
 	`}
 
 	fun min_slider_size: Int `{
-		return gtk_range_get_min_slider_size(recv);
+		return gtk_range_get_min_slider_size(self);
 	`}
 
 	fun min_slider_size=(size: Int) `{
-		return gtk_range_set_min_slider_size(recv, size);
+		return gtk_range_set_min_slider_size(self, size);
 	`}
 end
 
@@ -589,45 +589,45 @@ extern class GtkScale `{GtkScale *`}
 	`}
 
 	fun digits: Int `{
-		return gtk_scale_get_digits(recv);
+		return gtk_scale_get_digits(self);
 	`}
 
 	fun digits=(nb_digits: Int) `{
-		gtk_scale_set_digits(recv, nb_digits);
+		gtk_scale_set_digits(self, nb_digits);
 	`}
 
 	fun draw_value: Bool `{
-		return gtk_scale_get_draw_value(recv);
+		return gtk_scale_get_draw_value(self);
 	`}
 
 	fun draw_value=(is_displayed: Bool) `{
-		gtk_scale_set_draw_value(recv, is_displayed);
+		gtk_scale_set_draw_value(self, is_displayed);
 	`}
 
 	fun value_position: GtkPositionType `{
-		return gtk_scale_get_value_pos(recv);
+		return gtk_scale_get_value_pos(self);
 	`}
 
 	fun value_position=(pos: GtkPositionType) `{
-		gtk_scale_set_value_pos(recv, pos);
+		gtk_scale_set_value_pos(self, pos);
 	`}
 
 	fun has_origin: Bool `{
-		return gtk_scale_get_has_origin(recv);
+		return gtk_scale_get_has_origin(self);
 	`}
 
 	fun has_origin=(orig: Bool) `{
-		gtk_scale_set_has_origin(recv, orig);
+		gtk_scale_set_has_origin(self, orig);
 	`}
 
 	fun add_mark(value: Float, position: GtkPositionType, markup: String)
 	import String.to_cstring `{
-		gtk_scale_add_mark(recv, value, position, String_to_cstring(markup));
+		gtk_scale_add_mark(self, value, position, String_to_cstring(markup));
 	`}
 
 	# Removes any marks that have been added with gtk_scale_add_mark().
 	fun clear_marks `{
-		gtk_scale_clear_marks(recv);
+		gtk_scale_clear_marks(self);
 	`}
 end
 
@@ -653,23 +653,23 @@ extern class GtkLabel `{GtkLabel *`}
 
 	# Set the text of the label
 	fun text=(text: String) import String.to_cstring `{
-		gtk_label_set_text(recv, String_to_cstring(text));
+		gtk_label_set_text(self, String_to_cstring(text));
 	`}
 
 	# Returns the text of the label
 	fun text: String import NativeString.to_s `{
-		return NativeString_to_s((char*)gtk_label_get_text(recv));
+		return NativeString_to_s((char*)gtk_label_get_text(self));
 	`}
 
 	# Sets the angle of rotation for the label.
 	# An angle of 90 reads from from bottom to top, an angle of 270, from top to bottom.
 	fun angle=(degre: Float) `{
-		gtk_label_set_angle(recv, degre);
+		gtk_label_set_angle(self, degre);
 	`}
 
 	# Returns the angle of rotation for the label.
 	fun angle: Float `{
-		return gtk_label_get_angle(recv);
+		return gtk_label_get_angle(self);
 	`}
 
 end
@@ -690,15 +690,15 @@ extern class GtkImage `{GtkImage *`}
 	`}
 
 	fun pixel_size: Int `{
-		return gtk_image_get_pixel_size(recv);
+		return gtk_image_get_pixel_size(self);
 	`}
 
 	fun pixel_size=(size: Int) `{
-		gtk_image_set_pixel_size(recv, size);
+		gtk_image_set_pixel_size(self, size);
 	`}
 
 	fun clear `{
-		gtk_image_clear(recv);
+		gtk_image_clear(self);
 	`}
 end
 
@@ -738,7 +738,7 @@ extern class GtkArrow `{GtkArrow *`}
 	`}
 
 	fun set(arrow_type: GtkArrowType, shadow_type: GtkShadowType) `{
-		gtk_arrow_set(recv, arrow_type, shadow_type);
+		gtk_arrow_set(self, arrow_type, shadow_type);
 	`}
 end
 
@@ -761,11 +761,11 @@ extern class GtkButton `{GtkButton *`}
 	`}
 
 	fun text: String `{
-		return NativeString_to_s((char *)gtk_button_get_label(recv));
+		return NativeString_to_s((char *)gtk_button_get_label(self));
 	`}
 
 	fun text=(value: String) import String.to_cstring `{
-		gtk_button_set_label(recv, String_to_cstring(value));
+		gtk_button_set_label(self, String_to_cstring(value));
 	`}
 
 	fun on_click(to_call: GtkCallable, user_data: nullable Object) do
@@ -809,67 +809,67 @@ extern class GtkExpander `{GtkExpander *`}
 	`}
 
 	fun expanded: Bool `{
-		return gtk_expander_get_expanded(recv);
+		return gtk_expander_get_expanded(self);
 	`}
 
 	fun expanded=(is_expanded: Bool) `{
-		gtk_expander_set_expanded(recv, is_expanded);
+		gtk_expander_set_expanded(self, is_expanded);
 	`}
 
 	fun spacing: Int `{
-		return gtk_expander_get_spacing(recv);
+		return gtk_expander_get_spacing(self);
 	`}
 
 	fun spacing=(pixels: Int) `{
-		gtk_expander_set_spacing(recv, pixels);
+		gtk_expander_set_spacing(self, pixels);
 	`}
 
 	fun label_text: String `{
-		return NativeString_to_s((char *)gtk_expander_get_label(recv));
+		return NativeString_to_s((char *)gtk_expander_get_label(self));
 	`}
 
 	fun label_text=(lbl: String) import String.to_cstring `{
-		gtk_expander_set_label(recv, String_to_cstring(lbl));
+		gtk_expander_set_label(self, String_to_cstring(lbl));
 	`}
 
 	fun use_underline: Bool `{
-		return gtk_expander_get_use_underline(recv);
+		return gtk_expander_get_use_underline(self);
 	`}
 
 	fun use_underline=(used: Bool) `{
-		gtk_expander_set_use_underline(recv, used);
+		gtk_expander_set_use_underline(self, used);
 	`}
 
 	fun use_markup: Bool `{
-		return gtk_expander_get_use_markup(recv);
+		return gtk_expander_get_use_markup(self);
 	`}
 
 	fun use_markup=(used: Bool) `{
-		 gtk_expander_set_use_markup(recv, used);
+		 gtk_expander_set_use_markup(self, used);
 	`}
 
 	fun label_widget: GtkWidget `{
-		return gtk_expander_get_label_widget(recv);
+		return gtk_expander_get_label_widget(self);
 	`}
 
 	fun label_widget=(widget: GtkWidget) `{
-		gtk_expander_set_label_widget(recv, widget);
+		gtk_expander_set_label_widget(self, widget);
 	`}
 
 	fun label_fill: Bool `{
-		return gtk_expander_get_label_fill(recv);
+		return gtk_expander_get_label_fill(self);
 	`}
 
 	fun label_fill=(fill: Bool) `{
-		gtk_expander_set_label_fill(recv, fill);
+		gtk_expander_set_label_fill(self, fill);
 	`}
 
 	fun resize_toplevel: Bool `{
-		return gtk_expander_get_resize_toplevel(recv);
+		return gtk_expander_get_resize_toplevel(self);
 	`}
 
 	fun resize_toplevel=(resize: Bool) `{
-		gtk_expander_set_resize_toplevel(recv, resize);
+		gtk_expander_set_resize_toplevel(self, resize);
 	`}
 
 end
@@ -904,87 +904,87 @@ extern class GtkComboBox `{GtkComboBox *`}
 	`}
 
 	fun wrap_width: Int `{
-		return gtk_combo_box_get_wrap_width(recv);
+		return gtk_combo_box_get_wrap_width(self);
 	`}
 
 	fun wrap_width=(width: Int) `{
-		gtk_combo_box_set_wrap_width(recv, width);
+		gtk_combo_box_set_wrap_width(self, width);
 	`}
 
 	fun row_span_col: Int `{
-		return gtk_combo_box_get_row_span_column(recv);
+		return gtk_combo_box_get_row_span_column(self);
 	`}
 
 	fun row_span_col=(row_span: Int) `{
-		gtk_combo_box_set_row_span_column(recv, row_span);
+		gtk_combo_box_set_row_span_column(self, row_span);
 	`}
 
 	fun col_span_col: Int `{
-		return gtk_combo_box_get_column_span_column(recv);
+		return gtk_combo_box_get_column_span_column(self);
 	`}
 
 	fun col_span_col=(col_span: Int) `{
-		gtk_combo_box_set_column_span_column(recv, col_span);
+		gtk_combo_box_set_column_span_column(self, col_span);
 	`}
 
 	fun active_item: Int `{
-		return gtk_combo_box_get_active(recv);
+		return gtk_combo_box_get_active(self);
 	`}
 
 	fun active_item=(active: Int) `{
-		gtk_combo_box_set_active(recv, active);
+		gtk_combo_box_set_active(self, active);
 	`}
 
 	fun column_id: Int `{
-		return gtk_combo_box_get_id_column(recv);
+		return gtk_combo_box_get_id_column(self);
 	`}
 
 	fun column_id=(id_column: Int) `{
-		gtk_combo_box_set_id_column(recv, id_column);
+		gtk_combo_box_set_id_column(self, id_column);
 	`}
 
 	fun active_id: String `{
-		return NativeString_to_s((char *)gtk_combo_box_get_active_id(recv));
+		return NativeString_to_s((char *)gtk_combo_box_get_active_id(self));
 	`}
 
 	fun active_id=(id_active: String) import String.to_cstring `{
-		gtk_combo_box_set_active_id(recv, String_to_cstring(id_active));
+		gtk_combo_box_set_active_id(self, String_to_cstring(id_active));
 	`}
 
 	fun model: GtkTreeModel `{
-		return gtk_combo_box_get_model(recv);
+		return gtk_combo_box_get_model(self);
 	`}
 
 	fun model=(model: GtkTreeModel) `{
-		gtk_combo_box_set_model(recv, model);
+		gtk_combo_box_set_model(self, model);
 	`}
 
 	fun popup `{
-		gtk_combo_box_popup(recv);
+		gtk_combo_box_popup(self);
 	`}
 
 	fun popdown `{
-		gtk_combo_box_popdown(recv);
+		gtk_combo_box_popdown(self);
 	`}
 
 	fun title: String `{
-		return NativeString_to_s((char *)gtk_combo_box_get_title(recv));
+		return NativeString_to_s((char *)gtk_combo_box_get_title(self));
 	`}
 
 	fun title=(t: String) import String.to_cstring `{
-		gtk_combo_box_set_title(recv, String_to_cstring(t));
+		gtk_combo_box_set_title(self, String_to_cstring(t));
 	`}
 
 	fun has_entry: Bool `{
-		return gtk_combo_box_get_has_entry(recv);
+		return gtk_combo_box_get_has_entry(self);
 	`}
 
 	fun with_fixed: Bool `{
-		return gtk_combo_box_get_popup_fixed_width(recv);
+		return gtk_combo_box_get_popup_fixed_width(self);
 	`}
 
 	fun with_fixed=(fixed: Bool) `{
-		gtk_combo_box_set_popup_fixed_width(recv, fixed);
+		gtk_combo_box_set_popup_fixed_width(self, fixed);
 	`}
 end
 
@@ -998,11 +998,11 @@ extern class GtkSpinner `{GtkSpinner *`}
 	`}
 
 	fun start `{
-		return gtk_spinner_start(recv);
+		return gtk_spinner_start(self);
 	`}
 
 	fun stop `{
-		return gtk_spinner_stop(recv);
+		return gtk_spinner_stop(self);
 	`}
 end
 
@@ -1016,11 +1016,11 @@ extern class GtkSwitch `{GtkSwitch *`}
 	`}
 
 	fun active: Bool `{
-		return gtk_switch_get_active(recv);
+		return gtk_switch_get_active(self);
 	`}
 
 	fun active=(is_active: Bool) `{
-		return gtk_switch_set_active(recv, is_active);
+		return gtk_switch_set_active(self, is_active);
 	`}
 end
 
@@ -1034,7 +1034,7 @@ extern class GtkAlignment `{GtkAlignment *`}
 	`}
 
 	fun set (xalign: Float, yalign: Float, xscale: Float, yscale: Float) `{
-		gtk_alignment_set(recv, xalign, yalign, xscale, yscale);
+		gtk_alignment_set(self, xalign, yalign, xscale, yscale);
 	`}
 
 end

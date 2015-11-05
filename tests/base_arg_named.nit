@@ -15,9 +15,11 @@
 import base_arg_default
 
 var a = new A
+a.foo(a=1,b=2,c=3,d=4,e=5,f=6)
 a.foo(a=1,b=2,3,4,e=5,f=6)
 a.foo(f=6,3,e=5,b=2,4,a=1)
-a.foo(3,e=5,b=2,4)
+a.foo(f=6,d=4,e=5,b=2,c=3,a=1)
+#alt1#a.foo(3,e=5,b=2,4)
 
 a.bar
 
@@ -43,4 +45,3 @@ a.bar(b=2,a=1,c=3)
 #alt1#a.bar(2,a=1,3, 4)
 #alt1#a.bar(fail=1)
 #alt1#a.bar(a=1,a=1)
-#alt1#a.foo(c=1,d=1)

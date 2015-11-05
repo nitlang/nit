@@ -14,7 +14,7 @@
 module array_to_s_rope_buf
 
 intrude import standard::collection::array
-import standard::ropes
+import standard::text::ropes
 
 redef class Array[E]
 	redef fun to_s: String do

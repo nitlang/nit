@@ -19,18 +19,18 @@ module ini
 #
 # Write example:
 #
-#    var config = new ConfigTree("config.ini")
-#    config["goo"] = "goo"
-#    config["foo.bar"] = "foobar"
-#    config["foo.baz"] = "foobaz"
-#    config.save
-#    assert config.to_map.length == 3
+#     var config = new ConfigTree("config.ini")
+#     config["goo"] = "goo"
+#     config["foo.bar"] = "foobar"
+#     config["foo.baz"] = "foobaz"
+#     config.save
+#     assert config.to_map.length == 3
 #
 # Read example:
 #
-#    config = new ConfigTree("config.ini")
-#    assert config.has_key("foo.bar")
-#    assert config["foo.bar"] == "foobar"
+#     config = new ConfigTree("config.ini")
+#     assert config.has_key("foo.bar")
+#     assert config["foo.bar"] == "foobar"
 class ConfigTree
 	super Writable
 
@@ -41,41 +41,32 @@ class ConfigTree
 
 	# Get the config value for `key`
 	#
-	# REQUIRE: `has_key(key)`
-	#
-	#    var config = new ConfigTree("config.ini")
-	#    assert config["goo"] == "goo"
-	#    assert config["foo.bar"] == "foobar"
-	#    assert config["foo.baz"] == "foobaz"
-	fun [](key: String): String do
-		if not has_key(key) then
-			print "error: config key `{key}` not found"
-			abort
-		end
-		var node = get_node(key).as(not null)
-		if node.value == null then
-			print "error: config key `{key}` has no value"
-			abort
-		end
-		return node.value.as(not null)
+	#     var config = new ConfigTree("config.ini")
+	#     assert config["goo"] == "goo"
+	#     assert config["foo.bar"] == "foobar"
+	#     assert config["foo.baz"] == "foobaz"
+	#     assert config["fail.fail"] == null
+	fun [](key: String): nullable String do
+		var node = get_node(key)
+		if node == null then return null
+		return node.value
 	end
 
 	# Get the config values under `key`
 	#
-	# REQUIRE: `has_key(key)`
+	#     var config = new ConfigTree("config.ini")
+	#     var values = config.at("foo")
+	#     assert values.has_key("bar")
+	#     assert values.has_key("baz")
+	#     assert not values.has_key("goo")
 	#
-	#    var config = new ConfigTree("config.ini")
-	#    var values = config.at("foo")
-	#    assert values.has_key("bar")
-	#    assert values.has_key("baz")
-	#    assert not values.has_key("goo")
-	fun at(key: String): Map[String, String] do
-		if not has_key(key) then
-			print "error: config key `{key}` not found"
-			abort
-		end
+	# Return null if the key does not exists.
+	#
+	#     assert config.at("fail.fail") == null
+	fun at(key: String): nullable Map[String, String] do
+		var node = get_node(key)
+		if node == null then return null
 		var map = new HashMap[String, String]
-		var node = get_node(key).as(not null)
 		for k, child in node.children do
 			if child.value == null then continue
 			map[k] = child.value.to_s
@@ -85,20 +76,20 @@ class ConfigTree
 
 	# Set `value` at `key`
 	#
-	#    var config = new ConfigTree("config.ini")
-	#    assert config["foo.bar"] == "foobar"
-	#    config["foo.bar"] = "baz"
-	#    assert config["foo.bar"] == "baz"
+	#     var config = new ConfigTree("config.ini")
+	#     assert config["foo.bar"] == "foobar"
+	#     config["foo.bar"] = "baz"
+	#     assert config["foo.bar"] == "baz"
 	fun []=(key: String, value: nullable String) do
 		set_node(key, value)
 	end
 
 	# Is `key` in the config?
 	#
-	#    var config = new ConfigTree("config.ini")
-	#    assert config.has_key("goo")
-	#    assert config.has_key("foo.bar")
-	#    assert not config.has_key("zoo")
+	#     var config = new ConfigTree("config.ini")
+	#     assert config.has_key("goo")
+	#     assert config.has_key("foo.bar")
+	#     assert not config.has_key("zoo")
 	fun has_key(key: String): Bool do
 		var parts = key.split(".").reversed
 		var node = get_root(parts.pop)
@@ -112,12 +103,12 @@ class ConfigTree
 
 	# Get `self` as a Map of `key`, `value`
 	#
-	#    var config = new ConfigTree("config.ini")
-	#    var map = config.to_map
-	#    assert map.has_key("goo")
-	#    assert map.has_key("foo.bar")
-	#    assert map.has_key("foo.baz")
-	#    assert map.length == 3
+	#     var config = new ConfigTree("config.ini")
+	#     var map = config.to_map
+	#     assert map.has_key("goo")
+	#     assert map.has_key("foo.bar")
+	#     assert map.has_key("foo.baz")
+	#     assert map.length == 3
 	fun to_map: Map[String, String] do
 		var map = new HashMap[String, String]
 		for node in leaves do
@@ -184,12 +175,29 @@ class ConfigTree
 	#     assert config["foo.bar.baz"] == "foobarbaz"
 	#     assert config["goo.boo.bar"] == "gooboobar"
 	#     assert config["goo.boo.baz.bar"] == "gooboobazbar"
+	#
+	# Using the array notation
+	#
+	#     str = """
+	#     foo[]=a
+	#     foo[]=b
+	#     foo[]=c"""
+	#     str.write_to_file("config4.ini")
+	#     # load file
+	#     config = new ConfigTree("config4.ini")
+	#     print config.to_map.join(":", ",")
+	#     assert config["foo.0"] == "a"
+	#     assert config["foo.1"] == "b"
+	#     assert config["foo.2"] == "c"
+	#     assert config.at("foo").values.join(",") == "a,b,c"
 	fun load do
 		roots.clear
 		var stream = new FileReader.open(ini_file)
 		var path: nullable String = null
+		var line_number = 0
 		while not stream.eof do
 			var line = stream.read_line
+			line_number += 1
 			if line.is_empty then
 				continue
 			else if line.has_prefix(";") then
@@ -201,12 +209,16 @@ class ConfigTree
 				set_node(path, null)
 			else
 				var parts = line.split("=")
+				assert parts.length > 1 else
+					print "Error: malformed ini at line {line_number}"
+				end
 				var key = parts[0].trim
 				var val = parts[1].trim
-				if path == null then
-					set_node(key, val)
+				if path != null then key = "{path}.{key}"
+				if key.has_suffix("[]") then
+					set_array(key, val)
 				else
-					set_node("{path}.{key}", val)
+					set_node(key,val)
 				end
 			end
 		end
@@ -217,6 +229,16 @@ class ConfigTree
 	fun save do write_to_file(ini_file)
 
 	private var roots = new Array[ConfigNode]
+
+	# Append `value` to array at `key`
+	private fun set_array(key: String, value: nullable String) do
+		key = key.substring(0, key.length - 2)
+		var len = 0
+		if has_key(key) then
+			len = get_node(key).children.length
+		end
+		set_node("{key}.{len.to_s}", value)
+	end
 
 	private fun set_node(key: String, value: nullable String) do
 		var parts = key.split(".").reversed
@@ -247,7 +269,7 @@ class ConfigTree
 	private fun get_node(key: String): nullable ConfigNode do
 		var parts = key.split(".").reversed
 		var node = get_root(parts.pop)
-		while not parts.is_empty do
+		while node != null and not parts.is_empty do
 			node = node.get_child(parts.pop)
 		end
 		return node
@@ -297,4 +319,3 @@ private class ConfigNode
 		return null
 	end
 end
-

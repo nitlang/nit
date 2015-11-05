@@ -18,8 +18,8 @@
 # the buffer.
 module test_ropes_buffer_add_overflow
 
-import standard
-intrude import ropes
+import core
+intrude import core::text::ropes
 
 var buffer = new RopeBuffer
 

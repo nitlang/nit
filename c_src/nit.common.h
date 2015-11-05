@@ -1,6 +1,12 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+#include <sys/types.h>
+
+#include <unistd.h>
+
+#include <stdint.h>
+
 #include "gc_chooser.h"
 #ifdef ANDROID
 	#include <android/log.h>
@@ -13,7 +19,8 @@ typedef union {
 void* val;
 long l;
 short int s;
-char c;
+unsigned char b;
+uint32_t c;
 double d;
 void* str;
 } nitattribute_t; /* general C type representing a Nit attribute. */
@@ -22,6 +29,8 @@ struct type { int id; const char *name; int color; short int is_nullable; const 
 struct instance { const struct type *type; const struct class *class; nitattribute_t attrs[]; }; /* general C type representing a Nit instance. */
 struct types { int dummy; const struct type *types[]; }; /* a list types (used for vts, fts and unresolved lists). */
 typedef struct instance val; /* general C type representing a Nit instance. */
+extern const struct class *class_info[];
+extern const struct type *type_info[];
 struct nitni_instance {
 	struct nitni_instance *next,
 		*prev; /* adjacent global references in global list */
@@ -59,7 +68,7 @@ extern void nitni_global_ref_incr( struct nitni_ref *ref );
 /* Decrease count on an existing global reference */
 extern void nitni_global_ref_decr( struct nitni_ref *ref );
 
-void show_backtrace(int) __attribute__ ((noreturn));
+void fatal_exit(int) __attribute__ ((noreturn));
 #define likely(x)       __builtin_expect((x),1)
 #define unlikely(x)     __builtin_expect((x),0)
 extern int glob_argc;
@@ -70,25 +79,15 @@ const struct type *type;
 const struct class *class;
 void* value;
 };
-struct instance_standard__Bool {
-const struct type *type;
-const struct class *class;
-short int value;
-};
 struct instance_standard__Float {
 const struct type *type;
 const struct class *class;
 double value;
 };
-struct instance_standard__Int {
+struct instance_standard__Byte {
 const struct type *type;
 const struct class *class;
-long value;
-};
-struct instance_standard__Char {
-const struct type *type;
-const struct class *class;
-char value;
+unsigned char value;
 };
 struct instance_standard__Pointer {
 const struct type *type;

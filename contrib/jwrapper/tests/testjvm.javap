@@ -1,0 +1,9 @@
+Compiled from "TestJvm.java"
+public class test_jvm.TestJvm {
+  public test_jvm.TestJvm();
+  public test_jvm.Test2 getTest();
+  public boolean isBool();
+  public char getC();
+  public int getI();
+  public float getF();
+}

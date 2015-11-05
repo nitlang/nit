@@ -16,7 +16,7 @@
 module uml_base
 
 import toolcontext
-import model_utils
+import model
 
 redef class ToolContext
 	# -p

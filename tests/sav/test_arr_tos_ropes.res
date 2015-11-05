@@ -1,1 +1,1 @@
-FlatStringxxxyyyzzz
+[FlatString,xxxyyyzzz]

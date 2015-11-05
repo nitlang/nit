@@ -12,7 +12,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Github API related features.
+# Nit wrapper for Github API
+#
+# This module provides a Nit object oriented interface to access the
+# [Github api](https://developer.github.com/v3/).
 module github
 
 import cache

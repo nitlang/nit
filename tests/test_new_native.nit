@@ -13,10 +13,10 @@
 # limitations under the License.
 
 var s = new NativeString(4)
-s[0] = 'N'
-s[2] = 't'
-s[1] = 'i'
-s[3] = '\0'
+s[0] = 0x4Eu8
+s[2] = 0x74u8
+s[1] = 0x69u8
+s[3] = 0u8
 print s.class_name
 print s[0]
 print s.to_s
@@ -31,3 +31,10 @@ print a.length
 print a[0]
 print a.to_a.join(",")
 
+var i
+i = 3
+a = new NativeArray[Int](i)
+i = 1
+a[i] = i
+print a[i]
+print a[1]

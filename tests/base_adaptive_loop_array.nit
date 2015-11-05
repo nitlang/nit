@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import standard::collection::array
+import core::collection::array
 
 var a #1alt1#var a: Array[Object]
 a = [1]#1alt2#

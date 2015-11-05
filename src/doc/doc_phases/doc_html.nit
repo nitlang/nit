@@ -28,35 +28,35 @@ import html_templates
 redef class ToolContext
 
 	# File pattern used to link documentation to source code.
-	var opt_source = new OptionString("link for source (%f for filename, " +
+	var opt_source = new OptionString("Format to link source code (%f for filename, " +
 		"%l for first line, %L for last line)", "--source")
 
 	# Directory where the CSS and JS is stored.
-	var opt_sharedir = new OptionString("directory containing nitdoc assets", "--sharedir")
+	var opt_sharedir = new OptionString("Directory containing nitdoc assets", "--sharedir")
 
 	# Use a shareurl instead of copy shared files.
 	#
 	# This is usefull if you don't want to store the Nitdoc templates with your
 	# documentation.
-	var opt_shareurl = new OptionString("use shareurl instead of copy shared files", "--shareurl")
+	var opt_shareurl = new OptionString("Use shareurl instead of copy shared files", "--shareurl")
 
 	# Use a custom title for the homepage.
-	var opt_custom_title = new OptionString("custom title for homepage", "--custom-title")
+	var opt_custom_title = new OptionString("Custom title for homepage", "--custom-title")
 
 	# Display a custom brand or logo in the documentation top menu.
-	var opt_custom_brand = new OptionString("custom link to external site", "--custom-brand")
+	var opt_custom_brand = new OptionString("Custom link to external site", "--custom-brand")
 
-	# Display a custom introduction text before the projects overview.
-	var opt_custom_intro = new OptionString("custom intro text for homepage", "--custom-overview-text")
+	# Display a custom introduction text before the packages overview.
+	var opt_custom_intro = new OptionString("Custom intro text for homepage", "--custom-overview-text")
 	# Display a custom footer on each documentation page.
 	#
 	# Generally used to display the documentation or product version.
-	var opt_custom_footer = new OptionString("custom footer text", "--custom-footer-text")
+	var opt_custom_footer = new OptionString("Custom footer text", "--custom-footer-text")
 
 	# Piwik tracker URL.
 	#
 	# If you want to monitor your visitors.
-	var opt_piwik_tracker = new OptionString("Piwik tracker URL (ex: nitlanguage.org/piwik/)", "--piwik-tracker")
+	var opt_piwik_tracker = new OptionString("Piwik tracker URL (ex: `nitlanguage.org/piwik/`)", "--piwik-tracker")
 
 	# Piwik tracker site id.
 	var opt_piwik_site_id = new OptionString("Piwik site ID", "--piwik-site-id")
@@ -68,7 +68,10 @@ redef class ToolContext
 	# FIXME redo the plugin
 	var opt_github_base_sha1 = new OptionString("Git sha1 of base commit used to create pull request", "--github-base-sha1")
 	# FIXME redo the plugin
-	var opt_github_gitdir = new OptionString("Git working directory used to resolve path name (ex: /home/me/myproject/)", "--github-gitdir")
+	var opt_github_gitdir = new OptionString("Git working directory used to resolve path name (ex: /home/me/mypackage/)", "--github-gitdir")
+
+	# Do not produce HTML files
+	var opt_no_render = new OptionBool("Do not render HTML files", "--no-render")
 
 	redef init do
 		super
@@ -77,7 +80,8 @@ redef class ToolContext
 			opt_source, opt_sharedir, opt_shareurl, opt_custom_title,
 			opt_custom_footer, opt_custom_intro, opt_custom_brand,
 			opt_github_upstream, opt_github_base_sha1, opt_github_gitdir,
-			opt_piwik_tracker, opt_piwik_site_id)
+			opt_piwik_tracker, opt_piwik_site_id,
+			opt_no_render)
 	end
 
 	redef fun process_options(args) do
@@ -103,8 +107,9 @@ class RenderHTMLPhase
 	var name_sorter = new MEntityNameSorter
 
 	redef fun apply do
+		if ctx.opt_no_render.value then return
 		init_output_dir
-		for page in doc.pages do
+		for page in doc.pages.values do
 			page.render(self, doc).write_to_file("{ctx.output_dir.to_s}/{page.html_url}")
 		end
 	end
@@ -187,7 +192,7 @@ redef class DocPage
 	# all properties below are roughly copied from `doc_pages`
 
 	# Build page title string
-	fun init_title(v: RenderHTMLPhase, doc: DocModel) is abstract
+	fun init_title(v: RenderHTMLPhase, doc: DocModel) do end
 
 	# Build top menu template if any.
 	fun init_topmenu(v: RenderHTMLPhase, doc: DocModel) do
@@ -238,7 +243,13 @@ redef class SearchPage
 end
 
 redef class MEntityPage
-	redef var html_url is lazy do return mentity.nitdoc_url
+	redef var html_url is lazy do
+		if mentity isa MGroup and mentity.mdoc != null then
+			return "api_{mentity.nitdoc_url}"
+		end
+		return mentity.nitdoc_url
+	end
+
 	redef fun init_title(v, doc) do title = mentity.html_name
 end
 
@@ -246,19 +257,45 @@ end
 # doc phases. This is to preserve the compatibility with the current
 # `doc_templates` module.
 
-redef class MGroupPage
+redef class ReadmePage
+	redef var html_url is lazy do return mentity.nitdoc_url
+
 	redef fun init_topmenu(v, doc) do
 		super
-		var mproject = mentity.mproject
+		var mpackage = mentity.mpackage
 		if not mentity.is_root then
-			topmenu.add_li new ListItem(new Link(mproject.nitdoc_url, mproject.html_name))
+			topmenu.add_li new ListItem(new Link(mpackage.nitdoc_url, mpackage.html_name))
 		end
-		topmenu.add_li new ListItem(new Link(html_url, mproject.html_name))
+		topmenu.add_li new ListItem(new Link(html_url, mpackage.html_name))
 		topmenu.active_item = topmenu.items.last
 	end
 
 	redef fun init_sidebar(v, doc) do
 		super
+		var api_lnk = """<a href="api_{{{mentity.nitdoc_url}}}">Go to API</a>"""
+		sidebar.boxes.unshift new DocSideBox(api_lnk, "")
+	end
+end
+
+redef class MGroupPage
+	redef fun init_topmenu(v, doc) do
+		super
+		var mpackage = mentity.mpackage
+		if not mentity.is_root then
+			topmenu.add_li new ListItem(new Link(mpackage.nitdoc_url, mpackage.html_name))
+		end
+		topmenu.add_li new ListItem(new Link(html_url, mpackage.html_name))
+		topmenu.active_item = topmenu.items.last
+	end
+
+	redef fun init_sidebar(v, doc) do
+		super
+		# README link
+		if mentity.mdoc != null then
+			var doc_lnk = """<a href="{{{mentity.nitdoc_url}}}">Go to README</a>"""
+			sidebar.boxes.unshift new DocSideBox(doc_lnk, "")
+		end
+		# MClasses list
 		var mclasses = new HashSet[MClass]
 		mclasses.add_all intros
 		mclasses.add_all redefs
@@ -291,8 +328,8 @@ end
 redef class MModulePage
 	redef fun init_topmenu(v, doc) do
 		super
-		var mproject = mentity.mproject
-		topmenu.add_li new ListItem(new Link(mproject.nitdoc_url, mproject.html_name))
+		var mpackage = mentity.mpackage
+		topmenu.add_li new ListItem(new Link(mpackage.nitdoc_url, mpackage.html_name))
 		topmenu.add_li new ListItem(new Link(mentity.nitdoc_url, mentity.html_name))
 		topmenu.active_item = topmenu.items.last
 	end
@@ -302,8 +339,8 @@ redef class MModulePage
 		# TODO filter here?
 		super
 		var mclasses = new HashSet[MClass]
-		mclasses.add_all mentity.filter_intro_mclasses(v.ctx.min_visibility)
-		mclasses.add_all mentity.filter_redef_mclasses(v.ctx.min_visibility)
+		mclasses.add_all mentity.collect_intro_mclasses(v.ctx.min_visibility)
+		mclasses.add_all mentity.collect_redef_mclasses(v.ctx.min_visibility)
 		if mclasses.is_empty then return
 		var list = new UnorderedList
 		list.css_classes.add "list-unstyled list-labeled"
@@ -335,8 +372,8 @@ redef class MClassPage
 
 	redef fun init_topmenu(v, doc) do
 		super
-		var mproject = mentity.intro_mmodule.mgroup.mproject
-		topmenu.add_li new ListItem(new Link(mproject.nitdoc_url, mproject.html_name))
+		var mpackage = mentity.intro_mmodule.mgroup.mpackage
+		topmenu.add_li new ListItem(new Link(mpackage.nitdoc_url, mpackage.html_name))
 		topmenu.add_li new ListItem(new Link(html_url, mentity.html_name))
 		topmenu.active_item = topmenu.items.last
 	end
@@ -372,10 +409,10 @@ redef class MClassPage
 		if not mprop_is_local(mprop) then
 			classes.add "inherit"
 			var cls_url = mprop.intro.mclassdef.mclass.nitdoc_url
-			var def_url = "{cls_url}#article:{mprop.nitdoc_id}.definition"
+			var def_url = "{cls_url}#{mprop.nitdoc_id}.definition"
 			var lnk = new Link(def_url, mprop.html_name)
 			var mdoc = mprop.intro.mdoc_or_fallback
-			if mdoc != null then lnk.title = mdoc.short_comment
+			if mdoc != null then lnk.title = mdoc.synopsis
 			var item = new Template
 			item.add new DocHTMLLabel.with_classes(classes)
 			item.add lnk
@@ -388,7 +425,7 @@ redef class MClassPage
 		end
 		var def = select_mpropdef(mprop)
 		var anc = def.html_link_to_anchor
-		anc.href = "#article:{def.nitdoc_id}.definition"
+		anc.href = "#{def.nitdoc_id}.definition"
 		var lnk = new Template
 		lnk.add new DocHTMLLabel.with_classes(classes)
 		lnk.add anc
@@ -410,8 +447,8 @@ redef class MClassPage
 
 	private fun mclass_inherited_mprops(v: RenderHTMLPhase, doc: DocModel): Set[MProperty] do
 		var res = new HashSet[MProperty]
-		var local = mentity.local_mproperties(v.ctx.min_visibility)
-		for mprop in mentity.inherited_mproperties(doc.mainmodule, v.ctx.min_visibility) do
+		var local = mentity.collect_local_mproperties(v.ctx.min_visibility)
+		for mprop in mentity.collect_inherited_mproperties(v.ctx.min_visibility) do
 			if local.has(mprop) then continue
 			#if mprop isa MMethod and mprop.is_init then continue
 			if mprop.intro.mclassdef.mclass.name == "Object" and
@@ -439,9 +476,9 @@ redef class MPropertyPage
 	redef fun init_topmenu(v, doc) do
 		super
 		var mmodule = mentity.intro_mclassdef.mmodule
-		var mproject = mmodule.mgroup.mproject
+		var mpackage = mmodule.mgroup.mpackage
 		var mclass = mentity.intro_mclassdef.mclass
-		topmenu.add_li new ListItem(new Link(mproject.nitdoc_url, mproject.html_name))
+		topmenu.add_li new ListItem(new Link(mpackage.nitdoc_url, mpackage.html_name))
 		topmenu.add_li new ListItem(new Link(mclass.nitdoc_url, mclass.html_name))
 		topmenu.add_li new ListItem(new Link(html_url, mentity.html_name))
 		topmenu.active_item = topmenu.items.last
@@ -463,15 +500,15 @@ redef class MEntitySection
 		if not page isa MEntityPage then return
 		var mentity = self.mentity
 		if mentity isa MGroup and mentity.is_root then
-			html_title = mentity.mproject.html_name
-			html_subtitle = mentity.mproject.html_declaration
+			html_title = mentity.mpackage.html_name
+			html_subtitle = mentity.mpackage.html_declaration
 		else if mentity isa MProperty then
 			var title = new Template
 			title.add mentity.html_name
 			title.add mentity.html_signature
 			html_title = title
 			html_subtitle = mentity.html_namespace
-			toc_title = mentity.html_name
+			html_toc_title = mentity.html_name
 		end
 		super
 	end
@@ -484,16 +521,16 @@ redef class ConcernSection
 		var mentity = self.mentity
 		if page isa MGroupPage then
 			html_title = null
-			toc_title = mentity.html_name
+			html_toc_title = mentity.html_name
 			is_toc_hidden = false
 		else if page.mentity isa MModule and mentity isa MModule then
 			var title = new Template
 			if mentity == page.mentity then
 				title.add "in "
-				toc_title = "in {mentity.html_name}"
+				html_toc_title = "in {mentity.html_name}"
 			else
 				title.add "from "
-				toc_title = "from {mentity.html_name}"
+				html_toc_title = "from {mentity.html_name}"
 			end
 			title.add mentity.html_namespace
 			html_title = title
@@ -503,7 +540,7 @@ redef class ConcernSection
 			title.add "in "
 			title.add mentity.html_namespace
 			html_title = title
-			toc_title = "in {mentity.html_name}"
+			html_toc_title = "in {mentity.html_name}"
 		end
 		super
 	end
@@ -527,12 +564,12 @@ end
 redef class DefinitionArticle
 	redef fun init_html_render(v, doc, page) do
 		var mentity = self.mentity
-		if mentity isa MProject or mentity isa MModule then
+		if mentity isa MPackage or mentity isa MModule then
 			var title = new Template
 			title.add mentity.html_icon
 			title.add mentity.html_namespace
 			html_title = title
-			toc_title = mentity.html_name
+			html_toc_title = mentity.html_name
 			if mentity isa MModule then
 				html_source_link = v.html_source_link(mentity.location)
 			end
@@ -542,7 +579,7 @@ redef class DefinitionArticle
 			title.add mentity.mmodule.html_namespace
 			html_title = mentity.html_declaration
 			html_subtitle = title
-			toc_title = "in {mentity.html_name}"
+			html_toc_title = "in {mentity.html_name}"
 			html_source_link = v.html_source_link(mentity.location)
 			if page isa MEntityPage and mentity.is_intro and mentity.mmodule != page.mentity then
 				is_short_comment = true
@@ -555,13 +592,13 @@ redef class DefinitionArticle
 				title.add mentity.html_declaration
 				html_title = title
 				html_subtitle = mentity.html_namespace
-				toc_title = mentity.html_name
+				html_toc_title = mentity.html_name
 			else
 				var title = new Template
 				title.add "in "
 				title.add mentity.mclassdef.html_link
 				html_title = title
-				toc_title = "in {mentity.mclassdef.html_name}"
+				html_toc_title = "in {mentity.mclassdef.html_name}"
 			end
 			html_source_link = v.html_source_link(mentity.location)
 		end
@@ -576,7 +613,7 @@ redef class HomeArticle
 	redef fun init_html_render(v, doc, page) do
 		if v.ctx.opt_custom_title.value != null then
 			self.html_title = v.ctx.opt_custom_title.value.to_s
-			self.toc_title = v.ctx.opt_custom_title.value.to_s
+			self.html_toc_title = v.ctx.opt_custom_title.value.to_s
 		end
 		self.content = v.ctx.opt_custom_intro.value
 		super
@@ -585,15 +622,19 @@ end
 
 redef class GraphArticle
 	redef fun init_html_render(v, doc, page) do
-		var output_dir = v.ctx.output_dir
-		var path = output_dir / id
-		var path_sh = path.escape_to_sh
+		var path = v.ctx.output_dir / graph_id
 		var file = new FileWriter.open("{path}.dot")
 		file.write(dot)
 		file.close
-		sys.system("\{ test -f {path_sh}.png && test -f {path_sh}.s.dot && diff -- {path_sh}.dot {path_sh}.s.dot >/dev/null 2>&1 ; \} || \{ cp -- {path_sh}.dot {path_sh}.s.dot && dot -Tpng -o{path_sh}.png -Tcmapx -o{path_sh}.map {path_sh}.s.dot ; \}")
-		var fmap = new FileReader.open("{path}.map")
-		self.map = fmap.read_all
-		fmap.close
+		var proc = new ProcessReader("dot", "-Tsvg", "-Tcmapx", "{path}.dot")
+		var svg = new Buffer
+		var i = 0
+		while not proc.eof do
+			i += 1
+			if i < 6 then continue # skip dot default header
+			svg.append proc.read_line
+		end
+		proc.close
+		self.svg = svg.write_to_string
 	end
 end

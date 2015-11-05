@@ -36,4 +36,5 @@ alt/error_expr_not_ok_alt3.nit:123,5--9: Error: attribute `_fail` does not exist
 alt/error_expr_not_ok_alt3.nit:124,5--9: Error: attribute `_fail` does not exist in `String`.
 alt/error_expr_not_ok_alt3.nit:131,7--15: Type Error: expected `A`, got `Int`.
 alt/error_expr_not_ok_alt3.nit:149,7--24: Type Error: expected `A`, got `String`.
+alt/error_expr_not_ok_alt3.nit:150,7--18: Type Error: expected `A`, got `Int`.
 alt/error_expr_not_ok_alt3.nit:152,7--18: Type Error: expected `A`, got `Bool`.

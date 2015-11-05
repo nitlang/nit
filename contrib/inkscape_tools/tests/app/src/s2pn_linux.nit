@@ -15,4 +15,4 @@
 # limitations under the License.
 
 import s2pn
-import mnit_linux
+import mnit::linux

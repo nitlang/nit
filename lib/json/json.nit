@@ -15,7 +15,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Provides two APIs to manipulate JSON strings.
+# Libraries to manipulate JSON strings.
 #
 # Both `dynamic` and `static` modules provide at least a method to parse a
 # value written in JSON, but only `static` provide a method to translate a

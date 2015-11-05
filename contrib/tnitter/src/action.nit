@@ -53,7 +53,7 @@ class Tnitter
 
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li><a href="https://github.com/privat/nit/">Nit repository</a></li>
+        <li><a href="https://github.com/nitlang/nit/">Nit repository</a></li>
       </ul>
 
       <ul class="nav navbar-nav pull-right">

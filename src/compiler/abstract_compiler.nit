@@ -28,15 +28,15 @@ import counter
 # Add compiling options
 redef class ToolContext
 	# --output
-	var opt_output = new OptionString("Output file", "-o", "--output")
+	var opt_output = new OptionString("Filename of the generated executable", "-o", "--output")
 	# --dir
 	var opt_dir = new OptionString("Output directory", "--dir")
 	# --no-cc
-	var opt_no_cc = new OptionBool("Do not invoke C compiler", "--no-cc")
+	var opt_no_cc = new OptionBool("Do not invoke the C compiler", "--no-cc")
 	# --no-main
 	var opt_no_main = new OptionBool("Do not generate main entry point", "--no-main")
 	# --make-flags
-	var opt_make_flags = new OptionString("Additional options to make", "--make-flags")
+	var opt_make_flags = new OptionString("Additional options to the `make` command", "--make-flags")
 	# --max-c-lines
 	var opt_max_c_lines = new OptionInt("Maximum number of lines in generated C files. Use 0 for unlimited", 10000, "--max-c-lines")
 	# --group-c-files
@@ -50,7 +50,7 @@ redef class ToolContext
 	# --no-check-attr-isset
 	var opt_no_check_attr_isset = new OptionBool("Disable isset tests before each attribute access (dangerous)", "--no-check-attr-isset")
 	# --no-check-assert
-	var opt_no_check_assert = new OptionBool("Disable the evaluation of explicit 'assert' and 'as' (dangerous)", "--no-check-assert")
+	var opt_no_check_assert = new OptionBool("Disable the evaluation of explicit `assert` and `as` (dangerous)", "--no-check-assert")
 	# --no-check-autocast
 	var opt_no_check_autocast = new OptionBool("Disable implicit casts on unsafe expression usage (dangerous)", "--no-check-autocast")
 	# --no-check-null
@@ -63,12 +63,14 @@ redef class ToolContext
 	var opt_invocation_metrics = new OptionBool("Enable static and dynamic count of all method invocations", "--invocation-metrics")
 	# --isset-checks-metrics
 	var opt_isset_checks_metrics = new OptionBool("Enable static and dynamic count of isset checks before attributes access", "--isset-checks-metrics")
-	# --stacktrace
-	var opt_stacktrace = new OptionString("Control the generation of stack traces", "--stacktrace")
+	# --no-stacktrace
+	var opt_no_stacktrace = new OptionBool("Disable the generation of stack traces", "--no-stacktrace")
 	# --no-gcc-directives
-	var opt_no_gcc_directive = new OptionArray("Disable a advanced gcc directives for optimization", "--no-gcc-directive")
+	var opt_no_gcc_directive = new OptionArray("Disable advanced gcc directives for optimization", "--no-gcc-directive")
 	# --release
 	var opt_release = new OptionBool("Compile in release mode and finalize application", "--release")
+	# -g
+	var opt_debug = new OptionBool("Compile in debug mode (no C-side optimization)", "-g", "--debug")
 
 	redef init
 	do
@@ -76,10 +78,11 @@ redef class ToolContext
 		self.option_context.add_option(self.opt_output, self.opt_dir, self.opt_no_cc, self.opt_no_main, self.opt_make_flags, self.opt_compile_dir, self.opt_hardening)
 		self.option_context.add_option(self.opt_no_check_covariance, self.opt_no_check_attr_isset, self.opt_no_check_assert, self.opt_no_check_autocast, self.opt_no_check_null, self.opt_no_check_all)
 		self.option_context.add_option(self.opt_typing_test_metrics, self.opt_invocation_metrics, self.opt_isset_checks_metrics)
-		self.option_context.add_option(self.opt_stacktrace)
+		self.option_context.add_option(self.opt_no_stacktrace)
 		self.option_context.add_option(self.opt_no_gcc_directive)
 		self.option_context.add_option(self.opt_release)
 		self.option_context.add_option(self.opt_max_c_lines, self.opt_group_c_files)
+		self.option_context.add_option(self.opt_debug)
 
 		opt_no_main.hidden = true
 	end
@@ -87,17 +90,6 @@ redef class ToolContext
 	redef fun process_options(args)
 	do
 		super
-
-		var st = opt_stacktrace.value
-		if st == "none" or st == "libunwind" or st == "nitstack" then
-			# Fine, do nothing
-		else if st == "auto" or st == null then
-			# Default is nitstack
-			opt_stacktrace.value = "nitstack"
-		else
-			print "Option Error: unknown value `{st}` for --stacktrace. Use `none`, `libunwind`, `nitstack` or `auto`."
-			exit(1)
-		end
 
 		if opt_output.value != null and opt_dir.value != null then
 			print "Option Error: cannot use both --dir and --output"
@@ -115,15 +107,12 @@ redef class ToolContext
 end
 
 redef class ModelBuilder
-	# The compilation directory
-	var compile_dir: String
-
 	# Simple indirection to `Toolchain::write_and_make`
 	protected fun write_and_make(compiler: AbstractCompiler)
 	do
 		var platform = compiler.target_platform
 		var toolchain = platform.toolchain(toolcontext, compiler)
-		compile_dir = toolchain.compile_dir
+		compiler.toolchain = toolchain
 		toolchain.write_and_make
 	end
 end
@@ -145,13 +134,20 @@ class Toolchain
 	# Compiler of the target program
 	var compiler: AbstractCompiler
 
-	# Directory where to generate all C files
-	fun compile_dir: String
+	# Directory where to generate all files
+	#
+	# The option `--compile_dir` change this directory.
+	fun root_compile_dir: String
 	do
 		var compile_dir = toolcontext.opt_compile_dir.value
-		if compile_dir == null then compile_dir = ".nit_compile"
+		if compile_dir == null then compile_dir = "nit_compile"
 		return compile_dir
 	end
+
+	# Directory where to generate all C files
+	#
+	# By default it is `root_compile_dir` but some platform may require that it is a subdirectory.
+	fun compile_dir: String do return root_compile_dir
 
 	# Write all C files and compile them
 	fun write_and_make is abstract
@@ -163,7 +159,13 @@ class MakefileToolchain
 
 	redef fun write_and_make
 	do
+		var debug = toolcontext.opt_debug.value
 		var compile_dir = compile_dir
+
+		# Remove the compilation directory unless explicitly set
+		var auto_remove = toolcontext.opt_compile_dir.value == null
+		# If debug flag is set, do not remove sources
+		if debug then auto_remove = false
 
 		# Generate the .h and .c files
 		# A single C file regroups many compiled rumtime functions
@@ -171,6 +173,7 @@ class MakefileToolchain
 		var time0 = get_time
 		self.toolcontext.info("*** WRITING C ***", 1)
 
+		root_compile_dir.mkdir
 		compile_dir.mkdir
 
 		var cfiles = new Array[String]
@@ -192,6 +195,10 @@ class MakefileToolchain
 
 		compile_c_code(compile_dir)
 
+		if auto_remove then
+			sys.system("rm -r -- '{root_compile_dir.escape_to_sh}/'")
+		end
+
 		time1 = get_time
 		self.toolcontext.info("*** END COMPILING C: {time1-time0} ***", 2)
 	end
@@ -200,7 +207,7 @@ class MakefileToolchain
 	fun write_files(compile_dir: String, cfiles: Array[String])
 	do
 		var platform = compiler.target_platform
-		if self.toolcontext.opt_stacktrace.value == "nitstack" and platform.supports_libunwind then compiler.build_c_to_nit_bindings
+		if platform.supports_libunwind then compiler.build_c_to_nit_bindings
 		var cc_opt_with_libgc = "-DWITH_LIBGC"
 		if not platform.supports_libgc then cc_opt_with_libgc = ""
 
@@ -219,7 +226,7 @@ class MakefileToolchain
 
 		# Copy original .[ch] files to compile_dir
 		for src in compiler.files_to_copy do
-			var basename = src.basename("")
+			var basename = src.basename
 			var dst = "{compile_dir}/{basename}"
 			src.file_copy_to dst
 		end
@@ -327,7 +334,7 @@ class MakefileToolchain
 		var outpath = real_outpath.escape_to_mk
 		if outpath != real_outpath then
 			# If the name is crazy and need escaping, we will do an indirection
-			# 1. generate the binary in the .nit_compile dir under an escaped name
+			# 1. generate the binary in the nit_compile dir under an escaped name
 			# 2. copy the binary at the right place in the `all` goal.
 			outpath = mainmodule.c_name
 		end
@@ -340,28 +347,63 @@ class MakefileToolchain
 			var libs = m.collect_linker_libs
 			if libs != null then linker_options.add_all(libs)
 		end
+		var debug = toolcontext.opt_debug.value
 
-		makefile.write("CC = ccache cc\nCXX = ccache c++\nCFLAGS = -g -O2 -Wno-unused-value -Wno-switch -Wno-attributes\nCINCL =\nLDFLAGS ?= \nLDLIBS  ?= -lm {linker_options.join(" ")}\n\n")
+		makefile.write("CC = ccache cc\nCXX = ccache c++\nCFLAGS = -g{ if not debug then " -O2 " else " "}-Wno-unused-value -Wno-switch -Wno-attributes\nCINCL =\nLDFLAGS ?= \nLDLIBS  ?= -lm {linker_options.join(" ")}\n\n")
 
-		var ost = toolcontext.opt_stacktrace.value
-		if (ost == "libunwind" or ost == "nitstack") and platform.supports_libunwind then makefile.write("NEED_LIBUNWIND := YesPlease\n")
+		makefile.write "\n# SPECIAL CONFIGURATION FLAGS\n"
+		if platform.supports_libunwind then
+			if toolcontext.opt_no_stacktrace.value then
+				makefile.write "NO_STACKTRACE=True"
+			else
+				makefile.write "NO_STACKTRACE= # Set to `True` to enable"
+			end
+		end
 
 		# Dynamic adaptations
 		# While `platform` enable complex toolchains, they are statically applied
 		# For a dynamic adaptsation of the compilation, the generated Makefile should check and adapt things itself
+		makefile.write "\n\n"
 
 		# Check and adapt the targeted system
 		makefile.write("uname_S := $(shell sh -c 'uname -s 2>/dev/null || echo not')\n")
-		makefile.write("ifeq ($(uname_S),Darwin)\n")
-		# remove -lunwind since it is already included on macosx
-		makefile.write("\tNEED_LIBUNWIND :=\n")
-		makefile.write("endif\n\n")
 
 		# Check and adapt for the compiler used
 		# clang need an additionnal `-Qunused-arguments`
 		makefile.write("clang_check := $(shell sh -c '$(CC) -v 2>&1 | grep -q clang; echo $$?')\nifeq ($(clang_check), 0)\n\tCFLAGS += -Qunused-arguments\nendif\n")
 
-		makefile.write("ifdef NEED_LIBUNWIND\n\tLDLIBS += -lunwind\nendif\n")
+		if platform.supports_libunwind then
+			makefile.write """
+ifneq ($(NO_STACKTRACE), True)
+  # Check and include lib-unwind in a portable way
+  ifneq ($(uname_S),Darwin)
+    # already included on macosx, but need to get the correct flags in other supported platforms.
+    ifeq ($(shell pkg-config --exists 'libunwind'; echo $$?), 0)
+      LDLIBS += `pkg-config --libs libunwind`
+      CFLAGS += `pkg-config --cflags libunwind`
+    else
+      $(warning "[_] stack-traces disabled. Please install libunwind-dev.")
+      CFLAGS += -D NO_STACKTRACE
+    endif
+  endif
+else
+  # Stacktraces disabled
+  CFLAGS += -D NO_STACKTRACE
+endif
+
+"""
+		else
+			makefile.write("CFLAGS += -D NO_STACKTRACE\n\n")
+		end
+
+		makefile.write """
+# Special configuration for Darwin
+ifeq ($(uname_S),Darwin)
+	# Remove POSIX flag -lrt
+	LDLIBS := $(filter-out -lrt,$(LDLIBS))
+endif
+
+"""
 
 		makefile.write("all: {outpath}\n")
 		if outpath != real_outpath then
@@ -418,7 +460,7 @@ endif
 		# Compile each required extern body into a specific .o
 		for f in compiler.extern_bodies do
 			var o = f.makefile_rule_name
-			var ff = f.filename.basename("")
+			var ff = f.filename.basename
 			makefile.write("{o}: {ff}\n")
 			makefile.write("\t{f.makefile_rule_content}\n\n")
 			dep_rules.add(f.makefile_rule_name)
@@ -496,6 +538,11 @@ abstract class AbstractCompiler
 	# The modelbuilder used to know the model and the AST
 	var modelbuilder: ModelBuilder is protected writable
 
+	# The associated toolchain
+	#
+	# Set by `modelbuilder.write_and_make` and permit sub-routines to access the current toolchain if required.
+	var toolchain: Toolchain is noinit
+
 	# Is hardening asked? (see --hardening)
 	fun hardening: Bool do return self.modelbuilder.toolcontext.opt_hardening.value
 
@@ -559,7 +606,7 @@ abstract class AbstractCompiler
 	# Binds the generated C function names to Nit function names
 	fun build_c_to_nit_bindings
 	do
-		var compile_dir = modelbuilder.compile_dir
+		var compile_dir = toolchain.compile_dir
 
 		var stream = new FileWriter.open("{compile_dir}/c_functions_hash.c")
 		stream.write("#include <string.h>\n")
@@ -606,6 +653,8 @@ abstract class AbstractCompiler
 		self.header.add_decl("#include <string.h>")
 		self.header.add_decl("#include <sys/types.h>\n")
 		self.header.add_decl("#include <unistd.h>\n")
+		self.header.add_decl("#include <stdint.h>\n")
+		self.header.add_decl("#include <inttypes.h>\n")
 		self.header.add_decl("#include \"gc_chooser.h\"")
 		self.header.add_decl("#ifdef ANDROID")
 		self.header.add_decl("	#include <android/log.h>")
@@ -713,19 +762,16 @@ extern void nitni_global_ref_decr( struct nitni_ref *ref );
 	do
 		var v = self.new_visitor
 		v.add_decl("#include <signal.h>")
-		var ost = modelbuilder.toolcontext.opt_stacktrace.value
 		var platform = target_platform
-
-		if not platform.supports_libunwind then ost = "none"
 
 		var no_main = platform.no_main or modelbuilder.toolcontext.opt_no_main.value
 
-		if ost == "nitstack" or ost == "libunwind" then
+		if platform.supports_libunwind then
+			v.add_decl("#ifndef NO_STACKTRACE")
 			v.add_decl("#define UNW_LOCAL_ONLY")
 			v.add_decl("#include <libunwind.h>")
-			if ost == "nitstack" then
-				v.add_decl("#include \"c_functions_hash.h\"")
-			end
+			v.add_decl("#include \"c_functions_hash.h\"")
+			v.add_decl("#endif")
 		end
 		v.add_decl("int glob_argc;")
 		v.add_decl("char **glob_argv;")
@@ -759,7 +805,8 @@ extern void nitni_global_ref_decr( struct nitni_ref *ref );
 		end
 
 		v.add_decl("static void show_backtrace(void) \{")
-		if ost == "nitstack" or ost == "libunwind" then
+		if platform.supports_libunwind then
+			v.add_decl("#ifndef NO_STACKTRACE")
 			v.add_decl("char* opt = getenv(\"NIT_NO_STACK\");")
 			v.add_decl("unw_cursor_t cursor;")
 			v.add_decl("if(opt==NULL)\{")
@@ -773,20 +820,17 @@ extern void nitni_global_ref_decr( struct nitni_ref *ref );
 			v.add_decl("PRINT_ERROR(\"-------------------------------------------------\\n\");")
 			v.add_decl("while (unw_step(&cursor) > 0) \{")
 			v.add_decl("	unw_get_proc_name(&cursor, procname, 100, &ip);")
-			if ost == "nitstack" then
 			v.add_decl("	const char* recv = get_nit_name(procname, strlen(procname));")
 			v.add_decl("	if (recv != NULL)\{")
 			v.add_decl("		PRINT_ERROR(\"` %s\\n\", recv);")
 			v.add_decl("	\}else\{")
 			v.add_decl("		PRINT_ERROR(\"` %s\\n\", procname);")
 			v.add_decl("	\}")
-			else
-			v.add_decl("	PRINT_ERROR(\"` %s \\n\",procname);")
-			end
 			v.add_decl("\}")
 			v.add_decl("PRINT_ERROR(\"-------------------------------------------------\\n\");")
 			v.add_decl("free(procname);")
 			v.add_decl("\}")
+			v.add_decl("#endif /* NO_STACKTRACE */")
 		end
 		v.add_decl("\}")
 
@@ -815,7 +859,7 @@ extern void nitni_global_ref_decr( struct nitni_ref *ref );
 		v.add("signal(SIGINT, sig_handler);")
 		v.add("signal(SIGTERM, sig_handler);")
 		v.add("signal(SIGSEGV, sig_handler);")
-		v.add("signal(SIGPIPE, sig_handler);")
+		v.add("signal(SIGPIPE, SIG_IGN);")
 
 		v.add("glob_argc = argc; glob_argv = argv;")
 		v.add("initialize_gc_option();")
@@ -1103,6 +1147,7 @@ abstract class AbstractCompilerVisitor
 
 	fun compile_callsite(callsite: CallSite, arguments: Array[RuntimeVariable]): nullable RuntimeVariable
 	do
+		if callsite.is_broken then return null
 		var initializers = callsite.mpropdef.initializers
 		if not initializers.is_empty then
 			var recv = arguments.first
@@ -1455,12 +1500,64 @@ abstract class AbstractCompilerVisitor
 		return res
 	end
 
+	# Generate a byte value
+	fun byte_instance(value: Byte): RuntimeVariable
+	do
+		var t = mmodule.byte_type
+		var res = new RuntimeVariable("((unsigned char){value.to_s})", t, t)
+		return res
+	end
+
+	# Generate an int8 value
+	fun int8_instance(value: Int8): RuntimeVariable
+	do
+		var t = mmodule.int8_type
+		var res = new RuntimeVariable("((int8_t){value.to_s})", t, t)
+		return res
+	end
+
+	# Generate an int16 value
+	fun int16_instance(value: Int16): RuntimeVariable
+	do
+		var t = mmodule.int16_type
+		var res = new RuntimeVariable("((int16_t){value.to_s})", t, t)
+		return res
+	end
+
+	# Generate a uint16 value
+	fun uint16_instance(value: UInt16): RuntimeVariable
+	do
+		var t = mmodule.uint16_type
+		var res = new RuntimeVariable("((uint16_t){value.to_s})", t, t)
+		return res
+	end
+
+	# Generate an int32 value
+	fun int32_instance(value: Int32): RuntimeVariable
+	do
+		var t = mmodule.int32_type
+		var res = new RuntimeVariable("((int32_t){value.to_s})", t, t)
+		return res
+	end
+
+	# Generate a uint32 value
+	fun uint32_instance(value: UInt32): RuntimeVariable
+	do
+		var t = mmodule.uint32_type
+		var res = new RuntimeVariable("((uint32_t){value.to_s})", t, t)
+		return res
+	end
+
 	# Generate a char value
 	fun char_instance(value: Char): RuntimeVariable
 	do
 		var t = mmodule.char_type
-		var res = new RuntimeVariable("'{value.to_s.escape_to_c}'", t, t)
-		return res
+
+		if value.code_point < 128 then
+			return new RuntimeVariable("'{value.to_s.escape_to_c}'", t, t)
+		else
+			return new RuntimeVariable("{value.code_point}", t, t)
+		end
 	end
 
 	# Generate a float value
@@ -1502,8 +1599,9 @@ abstract class AbstractCompilerVisitor
 		var native_mtype = mmodule.native_string_type
 		var nat = self.new_var(native_mtype)
 		self.add("{nat} = \"{string.escape_to_c}\";")
-		var length = self.int_instance(string.length)
-		self.add("{res} = {self.send(self.get_property("to_s_with_length", native_mtype), [nat, length]).as(not null)};")
+		var bytelen = self.int_instance(string.bytelen)
+		var unilen = self.int_instance(string.length)
+		self.add("{res} = {self.send(self.get_property("to_s_full", native_mtype), [nat, bytelen, unilen]).as(not null)};")
 		self.add("{name} = {res};")
 		self.add("\}")
 		return res
@@ -1563,12 +1661,12 @@ abstract class AbstractCompilerVisitor
 		file = file.strip_extension(".nit")
 		var tryfile = file + ".nit.h"
 		if tryfile.file_exists then
-			self.declare_once("#include \"{tryfile.basename("")}\"")
+			self.declare_once("#include \"{tryfile.basename}\"")
 			self.compiler.files_to_copy.add(tryfile)
 		end
 		tryfile = file + "_nit.h"
 		if tryfile.file_exists then
-			self.declare_once("#include \"{tryfile.basename("")}\"")
+			self.declare_once("#include \"{tryfile.basename}\"")
 			self.compiler.files_to_copy.add(tryfile)
 		end
 
@@ -1579,7 +1677,7 @@ abstract class AbstractCompilerVisitor
 			tryfile = file + "_nit.c"
 			if not tryfile.file_exists then return
 		end
-		var f = new ExternCFile(tryfile.basename(""), "")
+		var f = new ExternCFile(tryfile.basename, "")
 		self.compiler.extern_bodies.add(f)
 		self.compiler.files_to_copy.add(tryfile)
 	end
@@ -1635,10 +1733,11 @@ abstract class AbstractCompilerVisitor
 	fun stmt(nexpr: nullable AExpr)
 	do
 		if nexpr == null then return
-		if nexpr.mtype == null and not nexpr.is_typed then
+		if nexpr.is_broken then
 			# Untyped expression.
-			# Might mean dead code
-			# So just return
+			# Might mean dead code or invalid code
+			# so aborts
+			add_abort("FATAL: bad statement executed.")
 			return
 		end
 
@@ -1660,16 +1759,27 @@ abstract class AbstractCompilerVisitor
 	# `mtype` is the expected return type, pass null if no specific type is expected.
 	fun expr(nexpr: AExpr, mtype: nullable MType): RuntimeVariable
 	do
-		if nexpr.mtype == null then
-			# Untyped expression.
-			# Might mean dead code
-			# so return a placebo result
-			if mtype == null then mtype = compiler.mainmodule.object_type
-			return new_var(mtype)
-		end
 		var old = self.current_node
 		self.current_node = nexpr
-		var res = nexpr.expr(self).as(not null)
+
+		var res = null
+		if nexpr.mtype != null then
+			res = nexpr.expr(self)
+		end
+
+		if res == null then
+			# Untyped expression.
+			# Might mean dead code or invalid code.
+			# so aborts
+			add_abort("FATAL: bad expression executed.")
+			# and return a placebo result to please the C compiler
+			if mtype == null then mtype = compiler.mainmodule.object_type
+			res = new_var(mtype)
+
+			self.current_node = old
+			return res
+		end
+
 		if mtype != null then
 			mtype = self.anchor(mtype)
 			res = self.autobox(res, mtype)
@@ -1835,9 +1945,21 @@ redef class MClassType
 		else if mclass.name == "Bool" then
 			return "short int"
 		else if mclass.name == "Char" then
-			return "char"
+			return "uint32_t"
 		else if mclass.name == "Float" then
 			return "double"
+		else if mclass.name == "Int8" then
+			return "int8_t"
+		else if mclass.name == "Byte" then
+			return "unsigned char"
+		else if mclass.name == "Int16" then
+			return "int16_t"
+		else if mclass.name == "UInt16" then
+			return "uint16_t"
+		else if mclass.name == "Int32" then
+			return "int32_t"
+		else if mclass.name == "UInt32" then
+			return "uint32_t"
 		else if mclass.name == "NativeString" then
 			return "char*"
 		else if mclass.name == "NativeArray" then
@@ -1868,6 +1990,18 @@ redef class MClassType
 			return "c"
 		else if mclass.name == "Float" then
 			return "d"
+		else if mclass.name == "Int8" then
+			return "i8"
+		else if mclass.name == "Byte" then
+			return "b"
+		else if mclass.name == "Int16" then
+			return "i16"
+		else if mclass.name == "UInt16" then
+			return "u16"
+		else if mclass.name == "Int32" then
+			return "i32"
+		else if mclass.name == "UInt32" then
+			return "u32"
 		else if mclass.name == "NativeString" then
 			return "str"
 		else if mclass.name == "NativeArray" then
@@ -1888,6 +2022,7 @@ redef class MMethodDef
 	fun can_inline(v: VISITOR): Bool
 	do
 		if is_abstract then return true
+		if constant_value != null then return true
 		var modelbuilder = v.compiler.modelbuilder
 		var node = modelbuilder.mpropdef2node(self)
 		if node isa APropdef then
@@ -1940,6 +2075,8 @@ redef class MMethodDef
 	do
 		if v.compiler.modelbuilder.toolcontext.opt_no_check_covariance.value then return
 
+		var msignature = self.msignature.as(not null)
+
 		for i in [0..msignature.arity[ do
 			# skip test for vararg since the array is instantiated with the correct polymorphic type
 			if msignature.vararg_rank == i then continue
@@ -1949,11 +2086,11 @@ redef class MMethodDef
 			if not origmtype.need_anchor then continue
 
 			# get the parameter type
-			var mtype = self.msignature.mparameters[i].mtype
+			var mtype = msignature.mparameters[i].mtype
 
 			# generate the cast
 			# note that v decides if and how to implements the cast
-			v.add("/* Covariant cast for argument {i} ({self.msignature.mparameters[i].name}) {arguments[i+1].inspect} isa {mtype} */")
+			v.add("/* Covariant cast for argument {i} ({msignature.mparameters[i].name}) {arguments[i+1].inspect} isa {mtype} */")
 			v.add_cast(arguments[i+1], mtype, "covariance")
 		end
 	end
@@ -2070,12 +2207,6 @@ redef class AMethPropdef
 			else if pname == "%" then
 				v.ret(v.new_expr("{arguments[0]} % {arguments[1]}", ret.as(not null)))
 				return true
-			else if pname == "lshift" then
-				v.ret(v.new_expr("{arguments[0]} << {arguments[1]}", ret.as(not null)))
-				return true
-			else if pname == "rshift" then
-				v.ret(v.new_expr("{arguments[0]} >> {arguments[1]}", ret.as(not null)))
-				return true
 			else if pname == "==" then
 				v.ret(v.equal_test(arguments[0], arguments[1]))
 				return true
@@ -2095,18 +2226,30 @@ redef class AMethPropdef
 			else if pname == ">=" then
 				v.ret(v.new_expr("{arguments[0]} >= {arguments[1]}", ret.as(not null)))
 				return true
+			else if pname == "to_i8" then
+				v.ret(v.new_expr("(int8_t){arguments[0]}", ret.as(not null)))
+				return true
+			else if pname == "to_i16" then
+				v.ret(v.new_expr("(int16_t){arguments[0]}", ret.as(not null)))
+				return true
+			else if pname == "to_u16" then
+				v.ret(v.new_expr("(uint16_t){arguments[0]}", ret.as(not null)))
+				return true
+			else if pname == "to_i32" then
+				v.ret(v.new_expr("(int32_t){arguments[0]}", ret.as(not null)))
+				return true
+			else if pname == "to_u32" then
+				v.ret(v.new_expr("(uint32_t){arguments[0]}", ret.as(not null)))
+				return true
 			else if pname == "to_f" then
 				v.ret(v.new_expr("(double){arguments[0]}", ret.as(not null)))
 				return true
-			else if pname == "ascii" then
-				v.ret(v.new_expr("{arguments[0]}", ret.as(not null)))
+			else if pname == "to_b" then
+				v.ret(v.new_expr("(unsigned char){arguments[0]}", ret.as(not null)))
 				return true
 			end
 		else if cname == "Char" then
-			if pname == "output" then
-				v.add("printf(\"%c\", {arguments.first});")
-				return true
-			else if pname == "object_id" then
+			if pname == "object_id" then
 				v.ret(v.new_expr("(long){arguments.first}", ret.as(not null)))
 				return true
 			else if pname == "successor" then
@@ -2137,8 +2280,74 @@ redef class AMethPropdef
 			else if pname == "to_i" then
 				v.ret(v.new_expr("{arguments[0]}-'0'", ret.as(not null)))
 				return true
-			else if pname == "ascii" then
-				v.ret(v.new_expr("(unsigned char){arguments[0]}", ret.as(not null)))
+			end
+		else if cname == "Byte" then
+			if pname == "output" then
+				v.add("printf(\"%x\\n\", {arguments.first});")
+				return true
+			else if pname == "object_id" then
+				v.ret(v.new_expr("(long){arguments.first}", ret.as(not null)))
+				return true
+			else if pname == "+" then
+				v.ret(v.new_expr("{arguments[0]} + {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == "-" then
+				v.ret(v.new_expr("{arguments[0]} - {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == "unary -" then
+				v.ret(v.new_expr("-{arguments[0]}", ret.as(not null)))
+				return true
+			else if pname == "unary +" then
+				v.ret(arguments[0])
+				return true
+			else if pname == "*" then
+				v.ret(v.new_expr("{arguments[0]} * {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == "/" then
+				v.ret(v.new_expr("{arguments[0]} / {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == "%" then
+				v.ret(v.new_expr("{arguments[0]} % {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == "==" then
+				v.ret(v.equal_test(arguments[0], arguments[1]))
+				return true
+			else if pname == "!=" then
+				var res = v.equal_test(arguments[0], arguments[1])
+				v.ret(v.new_expr("!{res}", ret.as(not null)))
+				return true
+			else if pname == "<" then
+				v.ret(v.new_expr("{arguments[0]} < {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == ">" then
+				v.ret(v.new_expr("{arguments[0]} > {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == "<=" then
+				v.ret(v.new_expr("{arguments[0]} <= {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == ">=" then
+				v.ret(v.new_expr("{arguments[0]} >= {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == "to_i" then
+				v.ret(v.new_expr("(long){arguments[0]}", ret.as(not null)))
+				return true
+			else if pname == "to_f" then
+				v.ret(v.new_expr("(double){arguments[0]}", ret.as(not null)))
+				return true
+			else if pname == "to_i8" then
+				v.ret(v.new_expr("(int8_t){arguments[0]}", ret.as(not null)))
+				return true
+			else if pname == "to_i16" then
+				v.ret(v.new_expr("(int16_t){arguments[0]}", ret.as(not null)))
+				return true
+			else if pname == "to_u16" then
+				v.ret(v.new_expr("(uint16_t){arguments[0]}", ret.as(not null)))
+				return true
+			else if pname == "to_i32" then
+				v.ret(v.new_expr("(int32_t){arguments[0]}", ret.as(not null)))
+				return true
+			else if pname == "to_u32" then
+				v.ret(v.new_expr("(uint32_t){arguments[0]}", ret.as(not null)))
 				return true
 			end
 		else if cname == "Bool" then
@@ -2209,13 +2418,31 @@ redef class AMethPropdef
 			else if pname == "to_i" then
 				v.ret(v.new_expr("(long){arguments[0]}", ret.as(not null)))
 				return true
+			else if pname == "to_b" then
+				v.ret(v.new_expr("(unsigned char){arguments[0]}", ret.as(not null)))
+				return true
+			else if pname == "to_i8" then
+				v.ret(v.new_expr("(int8_t){arguments[0]}", ret.as(not null)))
+				return true
+			else if pname == "to_i16" then
+				v.ret(v.new_expr("(int16_t){arguments[0]}", ret.as(not null)))
+				return true
+			else if pname == "to_u16" then
+				v.ret(v.new_expr("(uint16_t){arguments[0]}", ret.as(not null)))
+				return true
+			else if pname == "to_i32" then
+				v.ret(v.new_expr("(int32_t){arguments[0]}", ret.as(not null)))
+				return true
+			else if pname == "to_u32" then
+				v.ret(v.new_expr("(uint32_t){arguments[0]}", ret.as(not null)))
+				return true
 			end
 		else if cname == "NativeString" then
 			if pname == "[]" then
-				v.ret(v.new_expr("{arguments[0]}[{arguments[1]}]", ret.as(not null)))
+				v.ret(v.new_expr("(unsigned char)((int){arguments[0]}[{arguments[1]}])", ret.as(not null)))
 				return true
 			else if pname == "[]=" then
-				v.add("{arguments[0]}[{arguments[1]}]={arguments[2]};")
+				v.add("{arguments[0]}[{arguments[1]}]=(unsigned char){arguments[2]};")
 				return true
 			else if pname == "copy_to" then
 				v.add("memmove({arguments[1]}+{arguments[4]},{arguments[0]}+{arguments[3]},{arguments[2]});")
@@ -2233,6 +2460,441 @@ redef class AMethPropdef
 		else if cname == "NativeArray" then
 			v.native_array_def(pname, ret, arguments)
 			return true
+		else if cname == "Int8" then
+			if pname == "output" then
+				v.add("printf(\"%\"PRIi8 \"\\n\", {arguments.first});")
+				return true
+			else if pname == "object_id" then
+				v.ret(v.new_expr("(long){arguments.first}", ret.as(not null)))
+				return true
+			else if pname == "+" then
+				v.ret(v.new_expr("{arguments[0]} + {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == "-" then
+				v.ret(v.new_expr("{arguments[0]} - {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == "unary -" then
+				v.ret(v.new_expr("-{arguments[0]}", ret.as(not null)))
+				return true
+			else if pname == "unary +" then
+				v.ret(arguments[0])
+				return true
+			else if pname == "*" then
+				v.ret(v.new_expr("{arguments[0]} * {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == "/" then
+				v.ret(v.new_expr("{arguments[0]} / {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == "%" then
+				v.ret(v.new_expr("{arguments[0]} % {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == "<<" then
+				v.ret(v.new_expr("{arguments[0]} << {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == ">>" then
+				v.ret(v.new_expr("{arguments[0]} >> {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == "==" then
+				v.ret(v.equal_test(arguments[0], arguments[1]))
+				return true
+			else if pname == "!=" then
+				var res = v.equal_test(arguments[0], arguments[1])
+				v.ret(v.new_expr("!{res}", ret.as(not null)))
+				return true
+			else if pname == "<" then
+				v.ret(v.new_expr("{arguments[0]} < {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == ">" then
+				v.ret(v.new_expr("{arguments[0]} > {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == "<=" then
+				v.ret(v.new_expr("{arguments[0]} <= {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == ">=" then
+				v.ret(v.new_expr("{arguments[0]} >= {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == "to_i" then
+				v.ret(v.new_expr("(long){arguments[0]}", ret.as(not null)))
+				return true
+			else if pname == "to_b" then
+				v.ret(v.new_expr("(unsigned char){arguments[0]}", ret.as(not null)))
+				return true
+			else if pname == "to_i16" then
+				v.ret(v.new_expr("(int16_t){arguments[0]}", ret.as(not null)))
+				return true
+			else if pname == "to_u16" then
+				v.ret(v.new_expr("(uint16_t){arguments[0]}", ret.as(not null)))
+				return true
+			else if pname == "to_i32" then
+				v.ret(v.new_expr("(int32_t){arguments[0]}", ret.as(not null)))
+				return true
+			else if pname == "to_u32" then
+				v.ret(v.new_expr("(uint32_t){arguments[0]}", ret.as(not null)))
+				return true
+			else if pname == "to_f" then
+				v.ret(v.new_expr("(double){arguments[0]}", ret.as(not null)))
+				return true
+			else if pname == "&" then
+				v.ret(v.new_expr("{arguments[0]} & {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == "|" then
+				v.ret(v.new_expr("{arguments[0]} | {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == "^" then
+				v.ret(v.new_expr("{arguments[0]} ^ {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == "unary ~" then
+				v.ret(v.new_expr("~{arguments[0]}", ret.as(not null)))
+				return true
+			end
+		else if cname == "Int16" then
+			if pname == "output" then
+				v.add("printf(\"%\"PRIi16 \"\\n\", {arguments.first});")
+				return true
+			else if pname == "object_id" then
+				v.ret(v.new_expr("(long){arguments.first}", ret.as(not null)))
+				return true
+			else if pname == "+" then
+				v.ret(v.new_expr("{arguments[0]} + {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == "-" then
+				v.ret(v.new_expr("{arguments[0]} - {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == "unary -" then
+				v.ret(v.new_expr("-{arguments[0]}", ret.as(not null)))
+				return true
+			else if pname == "unary +" then
+				v.ret(arguments[0])
+				return true
+			else if pname == "*" then
+				v.ret(v.new_expr("{arguments[0]} * {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == "/" then
+				v.ret(v.new_expr("{arguments[0]} / {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == "%" then
+				v.ret(v.new_expr("{arguments[0]} % {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == "<<" then
+				v.ret(v.new_expr("{arguments[0]} << {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == ">>" then
+				v.ret(v.new_expr("{arguments[0]} >> {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == "==" then
+				v.ret(v.equal_test(arguments[0], arguments[1]))
+				return true
+			else if pname == "!=" then
+				var res = v.equal_test(arguments[0], arguments[1])
+				v.ret(v.new_expr("!{res}", ret.as(not null)))
+				return true
+			else if pname == "<" then
+				v.ret(v.new_expr("{arguments[0]} < {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == ">" then
+				v.ret(v.new_expr("{arguments[0]} > {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == "<=" then
+				v.ret(v.new_expr("{arguments[0]} <= {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == ">=" then
+				v.ret(v.new_expr("{arguments[0]} >= {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == "to_i" then
+				v.ret(v.new_expr("(long){arguments[0]}", ret.as(not null)))
+				return true
+			else if pname == "to_b" then
+				v.ret(v.new_expr("(unsigned char){arguments[0]}", ret.as(not null)))
+				return true
+			else if pname == "to_i8" then
+				v.ret(v.new_expr("(int8_t){arguments[0]}", ret.as(not null)))
+				return true
+			else if pname == "to_u16" then
+				v.ret(v.new_expr("(uint16_t){arguments[0]}", ret.as(not null)))
+				return true
+			else if pname == "to_i32" then
+				v.ret(v.new_expr("(int32_t){arguments[0]}", ret.as(not null)))
+				return true
+			else if pname == "to_u32" then
+				v.ret(v.new_expr("(uint32_t){arguments[0]}", ret.as(not null)))
+				return true
+			else if pname == "to_f" then
+				v.ret(v.new_expr("(double){arguments[0]}", ret.as(not null)))
+				return true
+			else if pname == "&" then
+				v.ret(v.new_expr("{arguments[0]} & {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == "|" then
+				v.ret(v.new_expr("{arguments[0]} | {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == "^" then
+				v.ret(v.new_expr("{arguments[0]} ^ {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == "unary ~" then
+				v.ret(v.new_expr("~{arguments[0]}", ret.as(not null)))
+				return true
+			end
+		else if cname == "UInt16" then
+			if pname == "output" then
+				v.add("printf(\"%\"PRIu16 \"\\n\", {arguments.first});")
+				return true
+			else if pname == "object_id" then
+				v.ret(v.new_expr("(long){arguments.first}", ret.as(not null)))
+				return true
+			else if pname == "+" then
+				v.ret(v.new_expr("{arguments[0]} + {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == "-" then
+				v.ret(v.new_expr("{arguments[0]} - {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == "unary -" then
+				v.ret(v.new_expr("-{arguments[0]}", ret.as(not null)))
+				return true
+			else if pname == "unary +" then
+				v.ret(arguments[0])
+				return true
+			else if pname == "*" then
+				v.ret(v.new_expr("{arguments[0]} * {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == "/" then
+				v.ret(v.new_expr("{arguments[0]} / {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == "%" then
+				v.ret(v.new_expr("{arguments[0]} % {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == "<<" then
+				v.ret(v.new_expr("{arguments[0]} << {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == ">>" then
+				v.ret(v.new_expr("{arguments[0]} >> {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == "==" then
+				v.ret(v.equal_test(arguments[0], arguments[1]))
+				return true
+			else if pname == "!=" then
+				var res = v.equal_test(arguments[0], arguments[1])
+				v.ret(v.new_expr("!{res}", ret.as(not null)))
+				return true
+			else if pname == "<" then
+				v.ret(v.new_expr("{arguments[0]} < {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == ">" then
+				v.ret(v.new_expr("{arguments[0]} > {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == "<=" then
+				v.ret(v.new_expr("{arguments[0]} <= {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == ">=" then
+				v.ret(v.new_expr("{arguments[0]} >= {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == "to_i" then
+				v.ret(v.new_expr("(long){arguments[0]}", ret.as(not null)))
+				return true
+			else if pname == "to_b" then
+				v.ret(v.new_expr("(unsigned char){arguments[0]}", ret.as(not null)))
+				return true
+			else if pname == "to_i8" then
+				v.ret(v.new_expr("(int8_t){arguments[0]}", ret.as(not null)))
+				return true
+			else if pname == "to_i16" then
+				v.ret(v.new_expr("(int16_t){arguments[0]}", ret.as(not null)))
+				return true
+			else if pname == "to_i32" then
+				v.ret(v.new_expr("(int32_t){arguments[0]}", ret.as(not null)))
+				return true
+			else if pname == "to_u32" then
+				v.ret(v.new_expr("(uint32_t){arguments[0]}", ret.as(not null)))
+				return true
+			else if pname == "to_f" then
+				v.ret(v.new_expr("(double){arguments[0]}", ret.as(not null)))
+				return true
+			else if pname == "&" then
+				v.ret(v.new_expr("{arguments[0]} & {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == "|" then
+				v.ret(v.new_expr("{arguments[0]} | {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == "^" then
+				v.ret(v.new_expr("{arguments[0]} ^ {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == "unary ~" then
+				v.ret(v.new_expr("~{arguments[0]}", ret.as(not null)))
+				return true
+			end
+		else if cname == "Int32" then
+			if pname == "output" then
+				v.add("printf(\"%\"PRIi32 \"\\n\", {arguments.first});")
+				return true
+			else if pname == "object_id" then
+				v.ret(v.new_expr("(long){arguments.first}", ret.as(not null)))
+				return true
+			else if pname == "+" then
+				v.ret(v.new_expr("{arguments[0]} + {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == "-" then
+				v.ret(v.new_expr("{arguments[0]} - {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == "unary -" then
+				v.ret(v.new_expr("-{arguments[0]}", ret.as(not null)))
+				return true
+			else if pname == "unary +" then
+				v.ret(arguments[0])
+				return true
+			else if pname == "*" then
+				v.ret(v.new_expr("{arguments[0]} * {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == "/" then
+				v.ret(v.new_expr("{arguments[0]} / {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == "%" then
+				v.ret(v.new_expr("{arguments[0]} % {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == "<<" then
+				v.ret(v.new_expr("{arguments[0]} << {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == ">>" then
+				v.ret(v.new_expr("{arguments[0]} >> {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == "==" then
+				v.ret(v.equal_test(arguments[0], arguments[1]))
+				return true
+			else if pname == "!=" then
+				var res = v.equal_test(arguments[0], arguments[1])
+				v.ret(v.new_expr("!{res}", ret.as(not null)))
+				return true
+			else if pname == "<" then
+				v.ret(v.new_expr("{arguments[0]} < {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == ">" then
+				v.ret(v.new_expr("{arguments[0]} > {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == "<=" then
+				v.ret(v.new_expr("{arguments[0]} <= {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == ">=" then
+				v.ret(v.new_expr("{arguments[0]} >= {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == "to_i" then
+				v.ret(v.new_expr("(long){arguments[0]}", ret.as(not null)))
+				return true
+			else if pname == "to_b" then
+				v.ret(v.new_expr("(unsigned char){arguments[0]}", ret.as(not null)))
+				return true
+			else if pname == "to_i8" then
+				v.ret(v.new_expr("(int8_t){arguments[0]}", ret.as(not null)))
+				return true
+			else if pname == "to_i16" then
+				v.ret(v.new_expr("(int16_t){arguments[0]}", ret.as(not null)))
+				return true
+			else if pname == "to_u16" then
+				v.ret(v.new_expr("(uint16_t){arguments[0]}", ret.as(not null)))
+				return true
+			else if pname == "to_u32" then
+				v.ret(v.new_expr("(uint32_t){arguments[0]}", ret.as(not null)))
+				return true
+			else if pname == "to_f" then
+				v.ret(v.new_expr("(double){arguments[0]}", ret.as(not null)))
+				return true
+			else if pname == "&" then
+				v.ret(v.new_expr("{arguments[0]} & {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == "|" then
+				v.ret(v.new_expr("{arguments[0]} | {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == "^" then
+				v.ret(v.new_expr("{arguments[0]} ^ {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == "unary ~" then
+				v.ret(v.new_expr("~{arguments[0]}", ret.as(not null)))
+				return true
+			end
+		else if cname == "UInt32" then
+			if pname == "output" then
+				v.add("printf(\"%\"PRIu32 \"\\n\", {arguments.first});")
+				return true
+			else if pname == "object_id" then
+				v.ret(v.new_expr("(long){arguments.first}", ret.as(not null)))
+				return true
+			else if pname == "+" then
+				v.ret(v.new_expr("{arguments[0]} + {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == "-" then
+				v.ret(v.new_expr("{arguments[0]} - {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == "unary -" then
+				v.ret(v.new_expr("-{arguments[0]}", ret.as(not null)))
+				return true
+			else if pname == "unary +" then
+				v.ret(arguments[0])
+				return true
+			else if pname == "*" then
+				v.ret(v.new_expr("{arguments[0]} * {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == "/" then
+				v.ret(v.new_expr("{arguments[0]} / {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == "%" then
+				v.ret(v.new_expr("{arguments[0]} % {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == "<<" then
+				v.ret(v.new_expr("{arguments[0]} << {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == ">>" then
+				v.ret(v.new_expr("{arguments[0]} >> {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == "==" then
+				v.ret(v.equal_test(arguments[0], arguments[1]))
+				return true
+			else if pname == "!=" then
+				var res = v.equal_test(arguments[0], arguments[1])
+				v.ret(v.new_expr("!{res}", ret.as(not null)))
+				return true
+			else if pname == "<" then
+				v.ret(v.new_expr("{arguments[0]} < {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == ">" then
+				v.ret(v.new_expr("{arguments[0]} > {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == "<=" then
+				v.ret(v.new_expr("{arguments[0]} <= {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == ">=" then
+				v.ret(v.new_expr("{arguments[0]} >= {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == "to_i" then
+				v.ret(v.new_expr("(long){arguments[0]}", ret.as(not null)))
+				return true
+			else if pname == "to_b" then
+				v.ret(v.new_expr("(unsigned char){arguments[0]}", ret.as(not null)))
+				return true
+			else if pname == "to_i8" then
+				v.ret(v.new_expr("(int8_t){arguments[0]}", ret.as(not null)))
+				return true
+			else if pname == "to_i16" then
+				v.ret(v.new_expr("(int16_t){arguments[0]}", ret.as(not null)))
+				return true
+			else if pname == "to_u16" then
+				v.ret(v.new_expr("(uint16_t){arguments[0]}", ret.as(not null)))
+				return true
+			else if pname == "to_i32" then
+				v.ret(v.new_expr("(int32_t){arguments[0]}", ret.as(not null)))
+				return true
+			else if pname == "to_f" then
+				v.ret(v.new_expr("(double){arguments[0]}", ret.as(not null)))
+				return true
+			else if pname == "&" then
+				v.ret(v.new_expr("{arguments[0]} & {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == "|" then
+				v.ret(v.new_expr("{arguments[0]} | {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == "^" then
+				v.ret(v.new_expr("{arguments[0]} ^ {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == "unary ~" then
+				v.ret(v.new_expr("~{arguments[0]}", ret.as(not null)))
+				return true
+			end
 		end
 		if pname == "exit" then
 			v.add("exit({arguments[1]});")
@@ -2346,7 +3008,7 @@ redef class AAttrPropdef
 			var res
 			if is_lazy then
 				var set
-				var ret = self.mpropdef.static_mtype
+				var ret = self.mtype
 				var useiset = not ret.is_c_primitive and not ret isa MNullableType
 				var guard = self.mlazypropdef.mproperty
 				if useiset then
@@ -2374,7 +3036,7 @@ redef class AAttrPropdef
 			assert arguments.length == 2
 			v.write_attribute(self.mpropdef.mproperty, arguments.first, arguments[1])
 			if is_lazy then
-				var ret = self.mpropdef.static_mtype
+				var ret = self.mtype
 				var useiset = not ret.is_c_primitive and not ret isa MNullableType
 				if not useiset then
 					v.write_attribute(self.mlazypropdef.mproperty, arguments.first, v.bool_instance(true))
@@ -2396,11 +3058,11 @@ redef class AAttrPropdef
 		var oldnode = v.current_node
 		v.current_node = self
 		var old_frame = v.frame
-		var frame = new StaticFrame(v, self.mpropdef.as(not null), recv.mcasttype.undecorate.as(MClassType), [recv])
+		var frame = new StaticFrame(v, self.mreadpropdef.as(not null), recv.mcasttype.undecorate.as(MClassType), [recv])
 		v.frame = frame
 
 		var value
-		var mtype = self.mpropdef.static_mtype
+		var mtype = self.mtype
 		assert mtype != null
 
 		var nexpr = self.n_expr
@@ -2648,51 +3310,66 @@ end
 redef class AForExpr
 	redef fun stmt(v)
 	do
-		var cl = v.expr(self.n_expr, null)
-		var it_meth = self.method_iterator
-		assert it_meth != null
-		var it = v.compile_callsite(it_meth, [cl])
-		assert it != null
+		for g in n_groups do
+			var cl = v.expr(g.n_expr, null)
+			var it_meth = g.method_iterator
+			assert it_meth != null
+			var it = v.compile_callsite(it_meth, [cl])
+			assert it != null
+			g.it = it
+		end
 		v.add("for(;;) \{")
-		var isok_meth = self.method_is_ok
-		assert isok_meth != null
-		var ok = v.compile_callsite(isok_meth, [it])
-		assert ok != null
-		v.add("if(!{ok}) break;")
-		if self.variables.length == 1 then
-			var item_meth = self.method_item
-			assert item_meth != null
-			var i = v.compile_callsite(item_meth, [it])
-			assert i != null
-			v.assign(v.variable(variables.first), i)
-		else if self.variables.length == 2 then
-			var key_meth = self.method_key
-			assert key_meth != null
-			var i = v.compile_callsite(key_meth, [it])
-			assert i != null
-			v.assign(v.variable(variables[0]), i)
-			var item_meth = self.method_item
-			assert item_meth != null
-			i = v.compile_callsite(item_meth, [it])
-			assert i != null
-			v.assign(v.variable(variables[1]), i)
-		else
-			abort
+		for g in n_groups do
+			var it = g.it
+			var isok_meth = g.method_is_ok
+			assert isok_meth != null
+			var ok = v.compile_callsite(isok_meth, [it])
+			assert ok != null
+			v.add("if(!{ok}) break;")
+			if g.variables.length == 1 then
+				var item_meth = g.method_item
+				assert item_meth != null
+				var i = v.compile_callsite(item_meth, [it])
+				assert i != null
+				v.assign(v.variable(g.variables.first), i)
+			else if g.variables.length == 2 then
+				var key_meth = g.method_key
+				assert key_meth != null
+				var i = v.compile_callsite(key_meth, [it])
+				assert i != null
+				v.assign(v.variable(g.variables[0]), i)
+				var item_meth = g.method_item
+				assert item_meth != null
+				i = v.compile_callsite(item_meth, [it])
+				assert i != null
+				v.assign(v.variable(g.variables[1]), i)
+			else
+				abort
+			end
 		end
 		v.stmt(self.n_block)
 		v.add_escape_label(continue_mark)
-		var next_meth = self.method_next
-		assert next_meth != null
-		v.compile_callsite(next_meth, [it])
+		for g in n_groups do
+			var next_meth = g.method_next
+			assert next_meth != null
+			v.compile_callsite(next_meth, [g.it])
+		end
 		v.add("\}")
 		v.add_escape_label(break_mark)
 
-		var method_finish = self.method_finish
-		if method_finish != null then
-			# TODO: Find a way to call this also in long escape (e.g. return)
-			v.compile_callsite(method_finish, [it])
+		for g in n_groups do
+			var method_finish = g.method_finish
+			if method_finish != null then
+				# TODO: Find a way to call this also in long escape (e.g. return)
+				v.compile_callsite(method_finish, [g.it])
+			end
 		end
 	end
+end
+
+redef class AForGroup
+	# C variable representing the iterator
+	private var it: RuntimeVariable is noinit
 end
 
 redef class AAssertExpr
@@ -2781,8 +3458,18 @@ redef class AOrElseExpr
 	end
 end
 
-redef class AIntExpr
-	redef fun expr(v) do return v.int_instance(self.value.as(not null))
+redef class AIntegerExpr
+	redef fun expr(v) do
+		if value isa Int then return v.int_instance(value.as(Int))
+		if value isa Byte then return v.byte_instance(value.as(Byte))
+		if value isa Int8 then return v.int8_instance(value.as(Int8))
+		if value isa Int16 then return v.int16_instance(value.as(Int16))
+		if value isa UInt16 then return v.uint16_instance(value.as(UInt16))
+		if value isa Int32 then return v.int32_instance(value.as(Int32))
+		if value isa UInt32 then return v.uint32_instance(value.as(UInt32))
+		# Should never happen
+		abort
+	end
 end
 
 redef class AFloatExpr
@@ -2920,7 +3607,9 @@ redef class AIsaExpr
 	redef fun expr(v)
 	do
 		var i = v.expr(self.n_expr, null)
-		return v.type_test(i, self.cast_type.as(not null), "isa")
+		var cast_type = self.cast_type
+		if cast_type == null then return null # no-no on broken node
+		return v.type_test(i, cast_type, "isa")
 	end
 end
 
@@ -2980,6 +3669,7 @@ redef class ASendExpr
 	do
 		var recv = v.expr(self.n_expr, null)
 		var callsite = self.callsite.as(not null)
+		if callsite.is_broken then return null
 		var args = v.varargize(callsite.mpropdef, callsite.signaturemap, recv, self.raw_arguments)
 		return v.compile_callsite(callsite, args)
 	end
@@ -2990,6 +3680,7 @@ redef class ASendReassignFormExpr
 	do
 		var recv = v.expr(self.n_expr, null)
 		var callsite = self.callsite.as(not null)
+		if callsite.is_broken then return
 		var args = v.varargize(callsite.mpropdef, callsite.signaturemap, recv, self.raw_arguments)
 
 		var value = v.expr(self.n_value, null)
@@ -3008,17 +3699,19 @@ end
 redef class ASuperExpr
 	redef fun expr(v)
 	do
-		var recv = v.frame.arguments.first
+		var frame = v.frame.as(not null)
+		var recv = frame.arguments.first
 
 		var callsite = self.callsite
 		if callsite != null then
+			if callsite.is_broken then return null
 			var args
 
 			if self.n_args.n_exprs.is_empty then
 				# Add automatic arguments for the super init call
 				args = [recv]
 				for i in [0..callsite.msignature.arity[ do
-					args.add(v.frame.arguments[i+1])
+					args.add(frame.arguments[i+1])
 				end
 			else
 				args = v.varargize(callsite.mpropdef, callsite.signaturemap, recv, self.n_args.n_exprs)
@@ -3033,7 +3726,7 @@ redef class ASuperExpr
 
 		var args
 		if self.n_args.n_exprs.is_empty then
-			args = v.frame.arguments
+			args = frame.arguments
 		else
 			args = v.varargize(mpropdef, signaturemap, recv, self.n_args.n_exprs)
 		end
@@ -3061,6 +3754,7 @@ redef class ANewExpr
 
 		var callsite = self.callsite
 		if callsite == null then return recv
+		if callsite.is_broken then return null
 
 		var args = v.varargize(callsite.mpropdef, callsite.signaturemap, recv, self.n_args.n_exprs)
 		var res2 = v.compile_callsite(callsite, args)
@@ -3200,7 +3894,12 @@ end
 # Here we load an process all modules passed on the command line
 var mmodules = modelbuilder.parse(arguments)
 
-if mmodules.is_empty then return
+if mmodules.is_empty then
+	toolcontext.check_errors
+	toolcontext.errors_info
+	if toolcontext.error_count > 0 then exit(1) else exit(0)
+end
+
 modelbuilder.run_phases
 
 for mmodule in mmodules do

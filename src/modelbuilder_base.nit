@@ -186,10 +186,15 @@ class ModelBuilder
 
 	# Helper function to display an error on a node.
 	# Alias for `self.toolcontext.error(n.hot_location, text)`
+	#
+	# This automatically sets `n.is_broken` to true.
 	fun error(n: nullable ANode, text: String)
 	do
 		var l = null
-		if n != null then l = n.hot_location
+		if n != null then
+			l = n.hot_location
+			n.is_broken = true
+		end
 		self.toolcontext.error(l, text)
 	end
 
@@ -352,6 +357,22 @@ class ModelBuilder
 	do
 		return sub.is_subtype(mmodule, anchor, sup) and sup.is_subtype(mmodule, anchor, sub)
 	end
+end
+
+redef class ANode
+	# The indication that the node did not pass some semantic verifications.
+	#
+	# This simple flag is set by a given analysis to say that the node is broken and unusable in
+	# an execution.
+	# When a node status is set to broken, it is usually associated with a error message.
+	#
+	# If it is safe to do so, clients of the AST SHOULD just skip broken nodes in their processing.
+	# Clients that do not care about the executability (e.g. metrics) MAY still process the node or
+	# perform specific checks to determinate the validity of the node.
+	#
+	# Note that the broken status is not propagated to parent or children nodes.
+	# e.g. a broken expression used as argument does not make the whole call broken.
+	var is_broken = false is writable
 end
 
 redef class AType

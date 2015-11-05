@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import standard::kernel
+import core::kernel
 
 class A
 	fun foo(a, b: nullable Int, c, d: Int, e,f: nullable Int)
@@ -80,8 +80,8 @@ var x
 
 #alt1#a.foo
 #alt1#a.foo(2)
-a.foo(1,2)
-a.foo(1,2,3)
+#alt1#a.foo(1,2)
+#alt1#a.foo(1,2,3)
 a.foo(1,2,3,4)
 a.foo(1,2,3,4,5)
 a.foo(1,2,3,4,5,6)

@@ -36,8 +36,9 @@ syn match NITExprSubst "{\([^}]\|\n\)*}" contained
 syn match NITExprSubstLong "\\." contained
 syn match NITExprSubstLong "{*\zs{{{\([^}]\|\n\)*}}}\ze}*" contained
 
-" Numbers and ASCII Codes
-syn match NITNumber "\<\(\d\+\.\d\+\|\d\+\)\>"
+" Numbers
+syn match NITNumber "\<\([0-9_]\+\|0[bB][01_]\+\|0[oO][0-7_]\+\|0[xX][0-9a-fA-F_]\+\)\([iu]\(8\|16\|32\)\)\?\>"
+syn match NITNumber "\<[0-9_]\+\.[0-9_]\+\>"
 
 " Identifiers
 syn match NITClass		"\<\u\w*"
@@ -87,7 +88,7 @@ syn match  NITComment	"#.*" contains=NITTodo,@Spell
 " Keywords
 syn keyword NITKeyword	 abstract intern new
 syn keyword NITDefine	 private public protected intrude readable writable redef
-syn keyword NITControl   if while for assert and or in as isa once break continue return abort
+syn keyword NITControl   if while for with assert and or in as isa once break continue return abort
 syn keyword NITClass     nullable
 syn keyword NITInclude   special
 syn keyword NITTodo      FIXME NOTE TODO XXX contained

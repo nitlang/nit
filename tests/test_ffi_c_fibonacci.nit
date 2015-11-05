@@ -21,18 +21,18 @@ class FibonacciEngine
 		if ( n == 1 )
 		    return 1;
 		else
-		    return FibonacciEngine_fibonacci( recv, n-1 ) + FibonacciEngine_fibonacci( recv,  n-2 );
+		    return FibonacciEngine_fibonacci( self, n-1 ) + FibonacciEngine_fibonacci( self,  n-2 );
 	`}
 end
 
 redef class Int
 	fun fibonacci : Int import fibonacci `{
-		if ( recv == 0 )
+		if ( self == 0 )
 		    return 0;
-		else if ( recv == 1 )
+		else if ( self == 1 )
 		    return 1;
 		else
-		    return Int_fibonacci( recv-1 ) + Int_fibonacci( recv-2 );
+		    return Int_fibonacci( self-1 ) + Int_fibonacci( self-2 );
 	`}
 end
 

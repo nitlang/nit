@@ -38,7 +38,7 @@ tests:
 	cd ../tests && ./run
 
 clean:
-	rm -r .nit_compile \
+	rm -r \
 		*.dot *.out \
 		nitcc_lexer.nit nitcc_parser.nit nitcc_test_parser.nit nitcc_parser_gen \
 		nitcc0 nitcc1 \

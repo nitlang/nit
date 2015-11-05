@@ -26,20 +26,20 @@ redef class ToolContext
 	# --no-inline-intern
 	var opt_no_inline_intern = new OptionBool("Do not inline call to intern methods", "--no-inline-intern")
 	# --no-union-attribute
-	var opt_no_union_attribute = new OptionBool("Put primitive attibutes in a box instead of an union", "--no-union-attribute")
+	var opt_no_union_attribute = new OptionBool("Put primitive attributes in a box instead of an union", "--no-union-attribute")
 	# --no-shortcut-equate
 	var opt_no_shortcut_equate = new OptionBool("Always call == in a polymorphic way", "--no-shortcut-equal")
 	# --no-tag-primitives
 	var opt_no_tag_primitives = new OptionBool("Use only boxes for primitive types", "--no-tag-primitives")
 
 	# --colors-are-symbols
-	var opt_colors_are_symbols = new OptionBool("Store colors as symbols (link-boost)", "--colors-are-symbols")
+	var opt_colors_are_symbols = new OptionBool("Store colors as symbols instead of static data (link-boost)", "--colors-are-symbols")
 	# --trampoline-call
 	var opt_trampoline_call = new OptionBool("Use an indirection when calling", "--trampoline-call")
 	# --guard-call
 	var opt_guard_call = new OptionBool("Guard VFT calls with a direct call", "--guard-call")
 	# --substitute-monomorph
-	var opt_substitute_monomorph = new OptionBool("Replace monomorph trampoline with direct call (link-boost)", "--substitute-monomorph")
+	var opt_substitute_monomorph = new OptionBool("Replace monomorphic trampolines with direct calls (link-boost)", "--substitute-monomorph")
 	# --link-boost
 	var opt_link_boost = new OptionBool("Enable all link-boost optimizations", "--link-boost")
 
@@ -48,9 +48,9 @@ redef class ToolContext
 	# --inline-some-methods
 	var opt_inline_some_methods = new OptionBool("Allow the separate compiler to inline some methods (semi-global)", "--inline-some-methods")
 	# --direct-call-monomorph
-	var opt_direct_call_monomorph = new OptionBool("Allow the separate compiler to direct call monomorph sites (semi-global)", "--direct-call-monomorph")
+	var opt_direct_call_monomorph = new OptionBool("Allow the separate compiler to direct call monomorphic sites (semi-global)", "--direct-call-monomorph")
 	# --direct-call-monomorph0
-	var opt_direct_call_monomorph0 = new OptionBool("Allow the separate compiler to direct call monomorph sites (semi-global)", "--direct-call-monomorph0")
+	var opt_direct_call_monomorph0 = new OptionBool("Allow the separate compiler to direct call monomorphic sites (semi-global)", "--direct-call-monomorph0")
 	# --skip-dead-methods
 	var opt_skip_dead_methods = new OptionBool("Do not compile dead methods (semi-global)", "--skip-dead-methods")
 	# --semi-global
@@ -60,7 +60,7 @@ redef class ToolContext
 	# --tables-metrics
 	var opt_tables_metrics = new OptionBool("Enable static size measuring of tables used for vft, typing and resolution", "--tables-metrics")
 	# --type-poset
-	var opt_type_poset = new OptionBool("Build a poset of types to create more condensed tables.", "--type-poset")
+	var opt_type_poset = new OptionBool("Build a poset of types to create more condensed tables", "--type-poset")
 
 	redef init
 	do
@@ -252,7 +252,8 @@ class SeparateCompiler
 	do
 		# Collect all bas box class
 		# FIXME: this is not completely fine with a separate compilation scheme
-		for classname in ["Int", "Bool", "Char", "Float", "NativeString", "Pointer"] do
+		for classname in ["Int", "Bool", "Byte", "Char", "Float", "NativeString",
+		                 "Pointer", "Int8", "Int16", "UInt16", "Int32", "UInt32"] do
 			var classes = self.mainmodule.model.get_mclasses_by_name(classname)
 			if classes == null then continue
 			assert classes.length == 1 else print classes.join(", ")
@@ -625,6 +626,7 @@ class SeparateCompiler
 		for cd in mmodule.mclassdefs do
 			for pd in cd.mpropdefs do
 				if not pd isa MMethodDef then continue
+				if pd.mproperty.is_broken or pd.is_broken or pd.msignature == null then continue # Skip broken method
 				var rta = runtime_type_analysis
 				if modelbuilder.toolcontext.opt_skip_dead_methods.value and rta != null and not rta.live_methoddefs.has(pd) then continue
 				#print "compile {pd} @ {cd} @ {mmodule}"
@@ -768,7 +770,8 @@ class SeparateCompiler
 			end
 			v.add_decl("\},")
 		else
-			v.add_decl("0, \{\}, /*DEAD TYPE*/")
+			# Use -1 to indicate dead type, the info is used by --hardening
+			v.add_decl("-1, \{\}, /*DEAD TYPE*/")
 		end
 		v.add_decl("\};")
 	end
@@ -811,18 +814,23 @@ class SeparateCompiler
 	# In a true separate compiler (a with dynamic loading) you cannot do this unfortnally
 	fun compile_class_to_c(mclass: MClass)
 	do
+		if mclass.is_broken then return
+
 		var mtype = mclass.intro.bound_mtype
 		var c_name = mclass.c_name
 
 		var v = new_visitor
 
 		var rta = runtime_type_analysis
-		var is_dead = rta != null and not rta.live_classes.has(mclass) and not mtype.is_c_primitive and mclass.name != "NativeArray" and mclass.name != "Pointer"
+		var is_dead = rta != null and not rta.live_classes.has(mclass)
+		# While the class may be dead, some part of separately compiled code may use symbols associated to the class, so
+		# in order to compile and link correctly the C code, these symbols should be declared and defined.
+		var need_corpse = is_dead and mtype.is_c_primitive or mclass.kind == extern_kind or mclass.kind == enum_kind
 
-		v.add_decl("/* runtime class {c_name} */")
+		v.add_decl("/* runtime class {c_name}: {mclass.full_name} (dead={is_dead}; need_corpse={need_corpse})*/")
 
 		# Build class vft
-		if not is_dead then
+		if not is_dead or need_corpse then
 			self.provide_declaration("class_{c_name}", "extern const struct class class_{c_name};")
 			v.add_decl("const struct class class_{c_name} = \{")
 			v.add_decl("{self.box_kind_of(mclass)}, /* box_kind */")
@@ -836,6 +844,9 @@ class SeparateCompiler
 					assert mpropdef isa MMethodDef
 					if rta != null and not rta.live_methoddefs.has(mpropdef) then
 						v.add_decl("NULL, /* DEAD {mclass.intro_mmodule}:{mclass}:{mpropdef} */")
+						continue
+					else if mpropdef.is_broken or mpropdef.msignature == null or mpropdef.mproperty.is_broken then
+						v.add_decl("NULL, /* DEAD (BROKEN) {mclass.intro_mmodule}:{mclass}:{mpropdef} */")
 						continue
 					end
 					var rf = mpropdef.virtual_runtime_function
@@ -859,7 +870,8 @@ class SeparateCompiler
 			self.header.add_decl("{mtype.ctype_extern} value;")
 			self.header.add_decl("\};")
 
-			if not rta.live_types.has(mtype) and mtype.mclass.name != "Pointer" then return
+			# Pointer is needed by extern types, live or not
+			if is_dead and mtype.mclass.name != "Pointer" then return
 
 			#Build BOX
 			self.provide_declaration("BOX_{c_name}", "val* BOX_{c_name}({mtype.ctype_extern});")
@@ -875,6 +887,7 @@ class SeparateCompiler
 			v.add("return (val*)res;")
 			v.add("\}")
 
+			# A Pointer class also need its constructor
 			if mtype.mclass.name != "Pointer" then return
 
 			v = new_visitor
@@ -929,7 +942,7 @@ class SeparateCompiler
 			var pointer_type = mainmodule.pointer_type
 
 			self.provide_declaration("NEW_{c_name}", "{mtype.ctype} NEW_{c_name}(const struct type* type);")
-			v.add_decl("/* allocate {mtype} */")
+			v.add_decl("/* allocate extern {mtype} */")
 			v.add_decl("{mtype.ctype} NEW_{c_name}(const struct type* type) \{")
 			if is_dead then
 				v.add_abort("{mclass} is DEAD")
@@ -990,10 +1003,13 @@ class SeparateCompiler
 			# use some Huffman coding.
 			if t.name == "Int" then
 				class_info[1] = t
+				t.mclass_type.tag_value = 1
 			else if t.name == "Char" then
 				class_info[2] = t
+				t.mclass_type.tag_value = 2
 			else if t.name == "Bool" then
 				class_info[3] = t
+				t.mclass_type.tag_value = 3
 			else
 				continue
 			end
@@ -1036,7 +1052,7 @@ class SeparateCompiler
 		v.add("if({t} == NULL) \{")
 		v.add_abort("type null")
 		v.add("\}")
-		v.add("if({t}->table_size == 0) \{")
+		v.add("if({t}->table_size < 0) \{")
 		v.add("PRINT_ERROR(\"Insantiation of a dead type: %s\\n\", {t}->name);")
 		v.add_abort("type dead")
 		v.add("\}")
@@ -1192,7 +1208,7 @@ class SeparateCompilerVisitor
 				if mtype.name == "Int" then
 					return self.new_expr("(long)({value})>>2", mtype)
 				else if mtype.name == "Char" then
-					return self.new_expr("(char)((long)({value})>>2)", mtype)
+					return self.new_expr("(uint32_t)((long)({value})>>2)", mtype)
 				else if mtype.name == "Bool" then
 					return self.new_expr("(short int)((long)({value})>>2)", mtype)
 				else
@@ -1201,27 +1217,29 @@ class SeparateCompilerVisitor
 			end
 			return self.new_expr("((struct instance_{mtype.c_name}*){value})->value; /* autounbox from {value.mtype} to {mtype} */", mtype)
 		else if not mtype.is_c_primitive then
+			assert value.mtype == value.mcasttype
 			if value.mtype.is_tagged then
+				var res
 				if value.mtype.name == "Int" then
-					return self.new_expr("(val*)({value}<<2|1)", mtype)
+					res = self.new_expr("(val*)({value}<<2|1)", mtype)
 				else if value.mtype.name == "Char" then
-					return self.new_expr("(val*)((long)({value})<<2|2)", mtype)
+					res = self.new_expr("(val*)((long)({value})<<2|2)", mtype)
 				else if value.mtype.name == "Bool" then
-					return self.new_expr("(val*)((long)({value})<<2|3)", mtype)
+					res = self.new_expr("(val*)((long)({value})<<2|3)", mtype)
 				else
 					abort
 				end
+				# Do not loose type info
+				res.mcasttype = value.mcasttype
+				return res
 			end
 			var valtype = value.mtype.as(MClassType)
 			if mtype isa MClassType and mtype.mclass.kind == extern_kind and mtype.mclass.name != "NativeString" then
 				valtype = compiler.mainmodule.pointer_type
 			end
 			var res = self.new_var(mtype)
-			if compiler.runtime_type_analysis != null and not compiler.runtime_type_analysis.live_types.has(valtype) then
-				self.add("/*no autobox from {value.mtype} to {mtype}: {value.mtype} is not live! */")
-				self.add("PRINT_ERROR(\"Dead code executed!\\n\"); fatal_exit(1);")
-				return res
-			end
+			# Do not loose type info
+			res.mcasttype = value.mcasttype
 			self.require_declaration("BOX_{valtype.c_name}")
 			self.add("{res} = BOX_{valtype.c_name}({value}); /* autobox from {value.mtype} to {mtype} */")
 			return res
@@ -1257,11 +1275,7 @@ class SeparateCompilerVisitor
 		   mtype.mclass.name != "NativeString" then
 			var valtype = compiler.mainmodule.pointer_type
 			var res = self.new_var(mtype)
-			if compiler.runtime_type_analysis != null and not compiler.runtime_type_analysis.live_types.has(value.mtype.as(MClassType)) then
-				self.add("/*no boxing of {value.mtype}: {value.mtype} is not live! */")
-				self.add("PRINT_ERROR(\"Dead code executed!\\n\"); fatal_exit(1);")
-				return res
-			end
+			compiler.undead_types.add(mtype)
 			self.require_declaration("BOX_{valtype.c_name}")
 			self.add("{res} = BOX_{valtype.c_name}({value}); /* boxing {value.mtype} */")
 			self.require_declaration("type_{mtype.c_name}")
@@ -1852,7 +1866,7 @@ class SeparateCompilerVisitor
 			else
 				var mtype1 = value1.mtype.as(MClassType)
 				self.require_declaration("class_{mtype1.c_name}")
-				self.add("{res} = ({value2} != NULL) && ({value2}->class == &class_{mtype1.c_name}); /* is_same_type_test */")
+				self.add("{res} = ({value2} != NULL) && ({class_info(value2)} == &class_{mtype1.c_name}); /* is_same_type_test */")
 			end
 		else
 			self.add("{res} = ({value1} == {value2}) || ({value1} != NULL && {value2} != NULL && {class_info(value1)} == {class_info(value2)}); /* is_same_type_test */")
@@ -1885,20 +1899,58 @@ class SeparateCompilerVisitor
 			value2 = tmp
 		end
 		if value1.mtype.is_c_primitive then
-			if value2.mtype == value1.mtype then
+			var t1 = value1.mtype
+			assert t1 == value1.mcasttype
+
+			# Fast case: same C type.
+			if value2.mtype == t1 then
+				# Same exact C primitive representation.
 				self.add("{res} = {value1} == {value2};")
-			else if value2.mtype.is_c_primitive then
-				self.add("{res} = 0; /* incompatible types {value1.mtype} vs. {value2.mtype}*/")
-			else if value1.mtype.is_tagged then
-				self.add("{res} = ({value2} != NULL) && ({self.autobox(value2, value1.mtype)} == {value1});")
-			else
-				var mtype1 = value1.mtype.as(MClassType)
-				self.require_declaration("class_{mtype1.c_name}")
-				self.add("{res} = ({value2} != NULL) && ({value2}->class == &class_{mtype1.c_name});")
-				self.add("if ({res}) \{")
-				self.add("{res} = ({self.autobox(value2, value1.mtype)} == {value1});")
-				self.add("\}")
+				return res
 			end
+
+			# Complex case: value2 has a different representation
+			# Thus, it should be checked if `value2` is type-compatible with `value1`
+			# This compatibility is done statically if possible and dynamically else
+
+			# Conjunction (ands) of dynamic tests according to the static knowledge
+			var tests = new Array[String]
+
+			var t2 = value2.mcasttype
+			if t2 isa MNullableType then
+				# The destination type cannot be null
+				tests.add("({value2} != NULL)")
+				t2 = t2.mtype
+			else if t2 isa MNullType then
+				# `value2` is known to be null, thus incompatible with a primitive
+				self.add("{res} = 0; /* incompatible types {t1} vs. {t2}*/")
+				return res
+			end
+
+			if t2 == t1 then
+				# Same type but different representation.
+			else if t2.is_c_primitive then
+				# Type of `value2` is a different primitive type, thus incompatible
+				self.add("{res} = 0; /* incompatible types {t1} vs. {t2}*/")
+				return res
+			else if t1.is_tagged then
+				# To be equal, `value2` should also be correctly tagged
+				tests.add("({extract_tag(value2)} == {t1.tag_value})")
+			else
+				# To be equal, `value2` should also be boxed with the same class
+				self.require_declaration("class_{t1.c_name}")
+				tests.add "({class_info(value2)} == &class_{t1.c_name})"
+			end
+
+			# Compare the unboxed `value2` with `value1`
+			if tests.not_empty then
+				self.add "if ({tests.join(" && ")}) \{"
+			end
+			self.add "{res} = {self.autobox(value2, t1)} == {value1};"
+			if tests.not_empty then
+				self.add "\} else {res} = 0;"
+			end
+
 			return res
 		end
 		var maybe_null = true
@@ -2032,6 +2084,7 @@ class SeparateCompilerVisitor
 		self.require_declaration("NEW_{mtype.mclass.c_name}")
 		assert mtype isa MGenericType
 		var compiler = self.compiler
+		length = autobox(length, compiler.mainmodule.int_type)
 		if mtype.need_anchor then
 			hardening_live_open_type(mtype)
 			link_unresolved_type(self.frame.mpropdef.mclassdef, mtype)
@@ -2206,12 +2259,14 @@ class SeparateRuntimeFunction
 	# The C type for the function pointer.
 	var c_funptrtype: String is lazy do return "{c_ret}(*){c_sig}"
 
-	# The arguments, as generated by `compile_to_c`
-	private var arguments: Array[RuntimeVariable] is noinit
-
 	redef fun compile_to_c(compiler)
 	do
 		var mmethoddef = self.mmethoddef
+
+		var sig = "{c_ret} {c_name}{c_sig}"
+		compiler.provide_declaration(self.c_name, "{sig};")
+
+		var rta = compiler.as(SeparateCompiler).runtime_type_analysis
 
 		var recv = self.mmethoddef.mclassdef.bound_mtype
 		var v = compiler.new_visitor
@@ -2223,12 +2278,7 @@ class SeparateRuntimeFunction
 		var msignature = called_signature
 		var ret = called_signature.return_mtype
 
-		var sig = new FlatBuffer
 		var comment = new FlatBuffer
-		sig.append(c_ret)
-		sig.append(" ")
-		sig.append(self.c_name)
-		sig.append(c_sig)
 		comment.append("({selfvar}: {selfvar.mtype}")
 		arguments.add(selfvar)
 		for i in [0..msignature.arity[ do
@@ -2244,8 +2294,6 @@ class SeparateRuntimeFunction
 		if ret != null then
 			comment.append(": {ret}")
 		end
-		compiler.provide_declaration(self.c_name, "{sig};")
-		self.arguments = arguments.to_a
 
 		v.add_decl("/* method {self} for {comment} */")
 		v.add_decl("{sig} \{")
@@ -2260,6 +2308,8 @@ class SeparateRuntimeFunction
 				assert subret != null
 				v.assign(frame.returnvar.as(not null), subret)
 			end
+		else if rta != null and not rta.live_mmodules.has(mmethoddef.mclassdef.mmodule) then
+			v.add_abort("FATAL: Dead method executed.")
 		else
 			mmethoddef.compile_inside_to_c(v, arguments)
 		end
@@ -2278,8 +2328,10 @@ class SeparateRuntimeFunction
 	fun compile_trampolines(compiler: SeparateCompiler)
 	do
 		var recv = self.mmethoddef.mclassdef.bound_mtype
-		var selfvar = arguments.first
+		var selfvar = new RuntimeVariable("self", called_recv, recv)
 		var ret = called_signature.return_mtype
+		var arguments = ["self"]
+		for i in [0..called_signature.arity[ do arguments.add "p{i}"
 
 		if mmethoddef.is_intro and not recv.is_c_primitive then
 			var m = mmethoddef.mproperty
@@ -2321,6 +2373,12 @@ redef class MType
 	# Are values of `self` tagged?
 	# If false, it means that the type is not primitive, or is boxed.
 	var is_tagged = false
+
+	# The tag value of the type
+	#
+	# ENSURE `is_tagged == (tag_value > 0)`
+	# ENSURE `not is_tagged == (tag_value == 0)`
+	var tag_value = 0
 end
 
 redef class MEntity

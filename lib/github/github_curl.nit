@@ -21,12 +21,14 @@ import json::static
 
 # Specific Curl that know hot to talk to the github API
 class GithubCurl
-	super Curl
 
 	# Headers to use on all requests
 	var header: HeaderMap is noinit
 
 	# OAuth token
+	#
+	# Use an empty string to disable authentication and connect
+	# anonymously (thus less capabilities and more rate limits)
 	var auth: String
 
 	# User agent (is used by github to contact devs in case of problems)
@@ -35,14 +37,14 @@ class GithubCurl
 
 	init do
 		header = new HeaderMap
-		header["Authorization"] = "token {auth}"
+		if auth != "" then header["Authorization"] = "token {auth}"
 	end
 
 	# Get the requested URI, and check the HTTP response. Then convert to JSON
 	# and check for Github errors.
 	fun get_and_check(uri: String): nullable Jsonable
 	do
-		var request = new CurlHTTPRequest(uri, self)
+		var request = new CurlHTTPRequest(uri)
 		request.user_agent = user_agent
 		request.headers = header
 		var response = request.execute
@@ -73,7 +75,7 @@ class GithubCurl
 	# are reported as `GithubError`.
 	fun get_and_parse(uri: String): nullable Jsonable
 	do
-		var request = new CurlHTTPRequest(uri, self)
+		var request = new CurlHTTPRequest(uri)
 		request.user_agent = user_agent
 		request.headers = header
 		var response = request.execute
@@ -132,8 +134,10 @@ class GithubError
 	redef fun to_s do return "[{name}] {super}"
 end
 
+# Gets the Github token from `git` configuration
+#
 # Return the value of `git config --get github.oauthtoken`
-# return "" if no such a key
+# or `""` if no key exists.
 fun get_github_oauth: String
 do
 	var p = new ProcessReader("git", "config", "--get", "github.oauthtoken")

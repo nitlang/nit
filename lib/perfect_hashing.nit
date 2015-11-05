@@ -52,11 +52,11 @@ class Perfecthashing
 		var orMask = 0
 		var andMask = 0
 		for i in ids do
-			orMask = orMask.bin_or(i)
-			andMask = andMask.bin_and(i)
+			orMask |= i
+			andMask &= i
 		end
 
-		mask = orMask.bin_xor(andMask)
+		mask = orMask ^ andMask
 
 		# Re-initialize the hashtable with null values
 		for i in [0..(mask+1)] do tempht[i] = null
@@ -66,7 +66,7 @@ class Perfecthashing
 		var i = mask.highest_bit
 		while i != 0 do
 			if mask.getbit(i) == 1 then
-				newmask = mask.bin_xor(1.lshift(i))
+				newmask = mask ^ (1 << i)
 
 				# If there is no collision, replace the old mask
 				if phandp(ids, newmask) then
@@ -85,7 +85,7 @@ class Perfecthashing
 	fun phandp(ids: Array[Int], mask: Int): Bool
 	do
 		for i in ids do
-			var hv = i.bin_and(mask)
+			var hv = i & mask
 			if tempht[hv] == mask then
 				return false
 			else
@@ -112,10 +112,10 @@ class Perfecthashing
 	do
 		var mask = phand(ids) -1
 		var i = 0
-		while n+ids.length > (1.lshift(mask.number_bits(1))) do
+		while n+ids.length > (1 << mask.number_bits(1)) do
 			# When there are not enough 1-bits
 			if mask.getbit(i) == 0 then
-				mask = mask.bin_xor(1.lshift(i))
+				mask = mask ^ (1 << i)
 			end
 			i += 1
 		end
@@ -156,7 +156,7 @@ class Perfecthashing
 			var i = inter.item.first.as(not null)
 			while i != inter.item.second and not found do
 				# Tests if this id is free for this mask
-				var hv = i.bin_and(mask)
+				var hv = i & mask
 
 				# If the hashtable if full, push an empty item
 				if hv >= tempht.length then

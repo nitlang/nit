@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Offers features to interface with C++ code and libraries
+# Services for compatibility with C++ code and libraries
 module cpp is
 	new_annotation cppflags
 end
@@ -31,6 +31,6 @@ end
 redef class NativeString
 	# Get `self` as a `CppString`
 	fun to_cpp_string(length: Int): CppString in "C++" `{
-		return new std::string(recv, length);
+		return new std::string(self, length);
 	`}
 end

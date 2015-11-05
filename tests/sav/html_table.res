@@ -1,0 +1,1 @@
+<table><thead><tr><th></th><th>X</th><th>Y</th><th>Z</th></thead><tbody><tr><td>10</td><td>20</td><td>20</td><td>10</td><tr><td>15</td><td>23</td><td>21</td><td>23</td><tr><td>12</td><td>10</td><td>11</td><td>9</td></tr></tbody></table>

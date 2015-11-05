@@ -30,7 +30,7 @@ err=0
 moretests="base_compile.nit base_attr.nit base_gen.nit base_gen_reassign.nit"
 
 # Get the modified files
-git diff --name-only $from..$to -- "../*.nit" "*.res" > git_search_tests.out
+git diff --name-only $from..$to -- "../*.nit" "*.res" | grep -v zzz_test > git_search_tests.out
 
 # filter it trough ./search_tests.sh
 ./search_tests.sh $moretests `cat git_search_tests.out` 2> /dev/null | sort -u

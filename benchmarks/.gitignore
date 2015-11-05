@@ -5,3 +5,7 @@
 *.xml
 index.html
 nitc
+nitdoc
+nitdoc.*
+logs
+nit_compile

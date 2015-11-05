@@ -17,7 +17,7 @@
 # Pointer and hardware key events
 module input_events
 
-import mnit_input
+import mnit::input
 import android
 
 in "C header" `{
@@ -54,31 +54,33 @@ in "C" `{
 private extern class NativeAndroidMotionEvent `{AInputEvent *`}
 
 	fun pointers_count: Int `{
-		return AMotionEvent_getPointerCount(recv);
-	`}
-
-	# Did this motion event just started?
-	fun just_went_down: Bool `{
-		return (AMotionEvent_getAction(recv) & AMOTION_EVENT_ACTION_MASK) == AMOTION_EVENT_ACTION_DOWN;
+		return AMotionEvent_getPointerCount(self);
 	`}
 
 	fun edge: Int `{
-		return AMotionEvent_getEdgeFlags(recv);
+		return AMotionEvent_getEdgeFlags(self);
 	`}
 
 	# Get the non-primary pointer id that just went down (returns -1 or > 0)
 	fun index_down_pointer: Int `{
-		int a = AMotionEvent_getAction(recv);
+		int a = AMotionEvent_getAction(self);
 		if ((a & AMOTION_EVENT_ACTION_MASK) == AMOTION_EVENT_ACTION_POINTER_DOWN)
 			return (a & AMOTION_EVENT_ACTION_POINTER_INDEX_MASK) >> AMOTION_EVENT_ACTION_POINTER_INDEX_SHIFT;
 		else return -1;
 	`}
 
-	fun action: AMotionEventAction `{ return AMotionEvent_getAction(recv); `}
+	fun action: AMotionEventAction `{ return AMotionEvent_getAction(self); `}
 end
 
 private extern class AMotionEventAction `{ int32_t `}
-	fun action: Int `{ return recv & AMOTION_EVENT_ACTION_MASK; `}
+	fun action: Int `{ return self & AMOTION_EVENT_ACTION_MASK; `}
+
+	# Pointer index concerned by this action
+	#
+	# Require: `is_pointer_down or is_pointer_up`
+	fun pointer_index: Int `{
+		return (self & AMOTION_EVENT_ACTION_POINTER_INDEX_MASK) >> AMOTION_EVENT_ACTION_POINTER_INDEX_SHIFT;
+	`}
 
 	fun is_down: Bool do return action == 0
 	fun is_up: Bool do return action == 1
@@ -101,26 +103,24 @@ class AndroidMotionEvent
 
 	private var native: NativeAndroidMotionEvent
 
-	private var pointers_cache: nullable Array[AndroidPointerEvent] = null
-
 	# Pointers (or fingers) composing this motion event
-	fun pointers: Array[AndroidPointerEvent]
-	do
-		if pointers_cache != null then
-			return pointers_cache.as(not null)
-		else
-			var pointers = new Array[AndroidPointerEvent]
-			var pointers_count = native.pointers_count
-			for i in [0 .. pointers_count [do
-				var pointer_event = new AndroidPointerEvent(self, i)
-				pointers.add(pointer_event)
-			end
-			pointers_cache = pointers
-			return pointers
-		end
+	var pointers: Array[AndroidPointerEvent] is lazy do
+		return [for i in native.pointers_count.times do new AndroidPointerEvent(self, i)]
 	end
 
-	redef fun just_went_down: Bool do return native.just_went_down
+	# The pointer (or finger) causing this event
+	var acting_pointer: AndroidPointerEvent is lazy do
+		var action = native.action
+		var index = 0
+
+		if action.is_pointer_down or action.is_pointer_up then
+			index = native.action.pointer_index
+		end
+
+		return new AndroidPointerEvent(self, index)
+	end
+
+	redef fun just_went_down do return native.action.is_down or native.action.is_pointer_down
 
 	# Was the top edge of the screen intersected by this event?
 	fun touch_to_edge: Bool do return native.edge == 1
@@ -158,40 +158,49 @@ class AndroidPointerEvent
 
 	private var motion_event: AndroidMotionEvent
 
-	private var pointer_id: Int
+	private var pointer_index: Int
 
-	redef fun x: Float do return native_x(motion_event.native, pointer_id)
+	redef fun x do return native_x(motion_event.native, pointer_index)
 
-	private fun native_x(motion_event: NativeAndroidMotionEvent, pointer_id: Int): Float `{
-		return AMotionEvent_getX(motion_event, pointer_id);
+	private fun native_x(motion_event: NativeAndroidMotionEvent, pointer_index: Int): Float `{
+		return AMotionEvent_getX(motion_event, pointer_index);
 	`}
 
-	redef fun y: Float do return native_y(motion_event.native, pointer_id)
+	redef fun y do return native_y(motion_event.native, pointer_index)
 
-	private fun native_y(motion_event: NativeAndroidMotionEvent, pointer_id: Int): Float `{
-		return AMotionEvent_getY(motion_event, pointer_id);
+	private fun native_y(motion_event: NativeAndroidMotionEvent, pointer_index: Int): Float `{
+		return AMotionEvent_getY(motion_event, pointer_index);
 	`}
 
 	# Pressure applied by this pointer
-	fun pressure: Float do return native_pressure(motion_event.native, pointer_id)
+	fun pressure: Float do return native_pressure(motion_event.native, pointer_index)
 
-	private fun native_pressure(motion_event: NativeAndroidMotionEvent, pointer_id: Int): Float `{
-		return AMotionEvent_getPressure(motion_event, pointer_id);
+	private fun native_pressure(motion_event: NativeAndroidMotionEvent, pointer_index: Int): Float `{
+		return AMotionEvent_getPressure(motion_event, pointer_index);
 	`}
 
 	redef fun pressed
 	do
 		var action = motion_event.native.action
-		return action.is_down or action.is_move
+		return action.is_down or action.is_move or action.is_pointer_down
 	end
+
+	# Is this a move event?
+	fun is_move: Bool do return motion_event.acting_pointer == self and
+		motion_event.native.action.is_move
 
 	redef fun depressed do return not pressed
 
 	# Does this pointer just began touching the screen?
-	fun just_went_down: Bool
-	do
-		return motion_event.down_pointer == self
-	end
+	fun just_went_down: Bool do return motion_event.acting_pointer == self and
+		motion_event.just_went_down
+
+	# Unique id of this pointer since the beginning of the gesture
+	fun pointer_id: Int do return native_pointer_id(motion_event.native, pointer_index)
+
+	private fun native_pointer_id(motion_event: NativeAndroidMotionEvent, pointer_index: Int): Int `{
+		return AMotionEvent_getPointerId(motion_event, pointer_index);
+	`}
 end
 
 # An hardware key event
@@ -199,16 +208,16 @@ extern class AndroidKeyEvent `{AInputEvent *`}
 	super KeyEvent
 	super AndroidInputEvent
 
-	private fun action: Int `{ return AKeyEvent_getAction(recv); `}
+	private fun action: Int `{ return AKeyEvent_getAction(self); `}
 
-	redef fun is_down: Bool do return action == 0
-	redef fun is_up: Bool do return action == 1
+	redef fun is_down do return action == 0
+	redef fun is_up do return action == 1
 
 	# Hardware code of the key raising this event
-	fun key_code: Int `{ return AKeyEvent_getKeyCode(recv); `}
+	fun key_code: Int `{ return AKeyEvent_getKeyCode(self); `}
 
 	redef fun to_c `{
-		int code = AKeyEvent_getKeyCode(recv);
+		int code = AKeyEvent_getKeyCode(self);
 		if (code >= AKEYCODE_0 && code <= AKEYCODE_9)
 			return '0'+code-AKEYCODE_0;
 		if (code >= AKEYCODE_A && code <= AKEYCODE_Z)

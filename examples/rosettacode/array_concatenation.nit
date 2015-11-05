@@ -14,4 +14,4 @@ var arr5 = [2, 1, 0]
 var arr4 = arr1 + arr2
 arr4.append arr3
 arr4.prepend arr5
-print arr4 # => 210123456789
+print arr4 # => [2,1,0,1,2,3,4,5,6,7,8,9]

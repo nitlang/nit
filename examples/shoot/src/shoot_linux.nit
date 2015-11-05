@@ -12,10 +12,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Linex version of the shoot program
+# Linux version of the shoot program
 module shoot_linux
 
 import shoot
-import mnit_linux
+import mnit::linux
 
 super

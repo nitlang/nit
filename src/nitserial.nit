@@ -27,7 +27,6 @@ module nitserial
 
 import frontend
 import rapid_type_analysis
-import model_utils
 import template
 
 # A Nit module
@@ -70,7 +69,7 @@ redef class ToolContext
 	var opt_dir: OptionString = new OptionString("Output directory", "--dir")
 
 	# Depth of the visit and generation
-	var opt_depth = new OptionEnum(["module", "group", "project"],
+	var opt_depth = new OptionEnum(["module", "group", "package"],
 		"Depth of the visit and generation", 0, "-d", "--depth")
 
 	redef init
@@ -94,7 +93,7 @@ end
 
 redef class MClassType
 	redef fun is_visible_from(mmodule) do
-		return mmodule.is_visible(mclass.intro_mmodule, public_visibility)
+		return mmodule.is_visible(mclass.intro_mmodule, mclass.visibility)
 	end
 end
 
@@ -153,7 +152,7 @@ for mmodule in mmodules do
 	else if module_path.has_suffix(".nit") then
 		module_name = module_path.basename(".nit")
 	else
-		module_name = module_path.basename("")
+		module_name = module_path.basename
 		module_path += ".nit"
 	end
 
@@ -161,14 +160,14 @@ for mmodule in mmodules do
 	var importations = null
 	var mgroup = mmodule.mgroup
 	if toolcontext.opt_depth.value == 1 and mgroup != null then
-		modelbuilder.visit_group mgroup
+		modelbuilder.scan_group mgroup
 		target_modules = mgroup.mmodules
 	else if toolcontext.opt_depth.value == 2 then
-		# project
+		# package
 		target_modules = new Array[MModule]
 		importations = new Array[MModule]
 		if mgroup != null then
-			for g in mgroup.mproject.mgroups do
+			for g in mgroup.mpackage.mgroups do
 				target_modules.add_all g.mmodules
 			end
 

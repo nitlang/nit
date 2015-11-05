@@ -18,6 +18,7 @@
 module scope
 
 import phase
+import modelbuilder
 
 redef class ToolContext
 	# Run `APropdef::do_scope` on each propdef.
@@ -33,13 +34,13 @@ end
 # A local variable (including parameters, automatic variables and self)
 class Variable
 	# The name of the variable (as used in the program)
-	var name: String
+	var name: String is writable
 
 	# Alias of `name`
 	redef fun to_s do return self.name
 
 	# The declaration of the variable, if any
-	var location: nullable Location = null
+	var location: nullable Location = null is writable
 
 	# Is the local variable not read and need a warning?
 	var warn_unread = false is writable
@@ -191,6 +192,7 @@ private class ScopeVisitor
 				var res = search_label("")
 				if res == null then
 					self.error(nlabel, "Syntax Error: invalid anonymous label.")
+					node.is_broken = true
 					return null
 				end
 				return res
@@ -199,6 +201,7 @@ private class ScopeVisitor
 			var res = search_label(name)
 			if res == null then
 				self.error(nlabel, "Syntax Error: invalid label `{name}`.")
+				node.is_broken = true
 				return null
 			end
 			return res
@@ -218,6 +221,7 @@ private class ScopeVisitor
 	fun error(node: ANode, message: String)
 	do
 		self.toolcontext.error(node.hot_location, message)
+		node.is_broken = true
 	end
 end
 
@@ -377,9 +381,6 @@ redef class ALoopExpr
 end
 
 redef class AForExpr
-	# The automatic variables in order
-	var variables: nullable Array[Variable]
-
 	# The break escape mark associated with the 'for'
 	var break_mark: nullable EscapeMark
 
@@ -388,18 +389,22 @@ redef class AForExpr
 
 	redef fun accept_scope_visitor(v)
 	do
-		v.enter_visit(n_expr)
+		for g in n_groups do
+			v.enter_visit(g.n_expr)
+		end
 
 		# Protect automatic variables
 		v.scopes.unshift(new Scope)
 
-		# Create the automatic variables
-		var variables = new Array[Variable]
-		self.variables = variables
-		for nid in n_ids do
-			var va = new Variable(nid.text)
-			v.register_variable(nid, va)
-			variables.add(va)
+		for g in n_groups do
+			# Create the automatic variables
+			var variables = new Array[Variable]
+			g.variables = variables
+			for nid in g.n_ids do
+				var va = new Variable(nid.text)
+				v.register_variable(nid, va)
+				variables.add(va)
+			end
 		end
 
 		var escapemark = v.make_escape_mark(n_label, true)
@@ -409,6 +414,11 @@ redef class AForExpr
 
 		v.shift_scope
 	end
+end
+
+redef class AForGroup
+	# The automatic variables in order
+	var variables: nullable Array[Variable]
 end
 
 redef class AWithExpr
@@ -429,16 +439,24 @@ redef class AWithExpr
 	end
 end
 
+redef class AAssertExpr
+	redef fun accept_scope_visitor(v)
+	do
+		v.enter_visit(n_expr)
+		v.enter_visit_block(n_else, null)
+	end
+end
+
 redef class AVarFormExpr
 	# The associated variable
-	var variable: nullable Variable
+	var variable: nullable Variable is writable
 end
 
 redef class ACallFormExpr
 	redef fun accept_scope_visitor(v)
 	do
 		if n_expr isa AImplicitSelfExpr then
-			var name = n_id.text
+			var name = n_qid.n_id.text
 			var variable = v.search_variable(name)
 			if variable != null then
 				var n: AExpr
@@ -465,14 +483,14 @@ redef class ACallExpr
 	redef fun variable_create(variable)
 	do
 		variable.warn_unread = false
-		return new AVarExpr.init_avarexpr(n_id)
+		return new AVarExpr.init_avarexpr(n_qid.n_id)
 	end
 end
 
 redef class ACallAssignExpr
 	redef fun variable_create(variable)
 	do
-		return new AVarAssignExpr.init_avarassignexpr(n_id, n_assign, n_value)
+		return new AVarAssignExpr.init_avarassignexpr(n_qid.n_id, n_assign, n_value)
 	end
 end
 
@@ -480,6 +498,6 @@ redef class ACallReassignExpr
 	redef fun variable_create(variable)
 	do
 		variable.warn_unread = false
-		return new AVarReassignExpr.init_avarreassignexpr(n_id, n_assign_op, n_value)
+		return new AVarReassignExpr.init_avarreassignexpr(n_qid.n_id, n_assign_op, n_value)
 	end
 end

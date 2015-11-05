@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# How to print arguments of the command line.
+# Example of how to print the arguments of the command line.
 module print_arguments
 
 for a in args do

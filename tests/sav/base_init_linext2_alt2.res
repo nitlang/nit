@@ -4,5 +4,5 @@ B1 A B2
 A B3 
 A B4y 
 C1 C2 
-A2z C3z 
+C1 C2 A2z C3z 
 C1 C2 D1 D2 D3 

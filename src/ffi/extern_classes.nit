@@ -110,7 +110,7 @@ redef class MClass
 			var ftype_b: nullable ForeignType = null # FIXME hack to circumvent bug where ftype is typed null
 
 			# look in super classes
-			for s in in_hierarchy(intro.mmodule).direct_greaters do
+			for s in in_hierarchy(intro_mmodule).direct_greaters do
 				var super_ftype = s.compute_ftype(v)
 				if super_ftype != null then
 					if ftype_b == null then

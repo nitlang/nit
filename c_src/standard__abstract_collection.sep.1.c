@@ -3,22 +3,34 @@
 short int standard___standard__Collection___is_empty(val* self) {
 short int var /* : Bool */;
 long var1 /* : Int */;
-long var2 /* : Int */;
-short int var3 /* : Bool */;
-short int var5 /* : Bool */;
+short int var2 /* : Bool */;
+short int var4 /* : Bool */;
 {
-var1 = ((long (*)(val* self))(self->class->vft[COLOR_standard__abstract_collection__Collection__length]))(self) /* length on <self:Collection[nullable Object]>*/;
+var1 = ((long(*)(val* self))((((long)self&3)?class_info[((long)self&3)]:self->class)->vft[COLOR_standard__abstract_collection__Collection__length]))(self); /* length on <self:Collection[nullable Object]>*/
 }
-var2 = 0;
 {
-{ /* Inline kernel#Int#== (var1,var2) on <var1:Int> */
-var5 = var1 == var2;
-var3 = var5;
-goto RET_LABEL4;
-RET_LABEL4:(void)0;
+{ /* Inline kernel#Int#== (var1,0l) on <var1:Int> */
+var4 = var1 == 0l;
+var2 = var4;
+goto RET_LABEL3;
+RET_LABEL3:(void)0;
 }
 }
-var = var3;
+var = var2;
+goto RET_LABEL;
+RET_LABEL:;
+return var;
+}
+/* method abstract_collection#Collection#not_empty for (self: Collection[nullable Object]): Bool */
+short int standard___standard__Collection___not_empty(val* self) {
+short int var /* : Bool */;
+short int var1 /* : Bool */;
+short int var2 /* : Bool */;
+{
+var1 = ((short int(*)(val* self))((((long)self&3)?class_info[((long)self&3)]:self->class)->vft[COLOR_standard__abstract_collection__Collection__is_empty]))(self); /* is_empty on <self:Collection[nullable Object]>*/
+}
+var2 = !var1;
+var = var2;
 goto RET_LABEL;
 RET_LABEL:;
 return var;
@@ -26,58 +38,54 @@ return var;
 /* method abstract_collection#Collection#length for (self: Collection[nullable Object]): Int */
 long standard___standard__Collection___length(val* self) {
 long var /* : Int */;
-long var1 /* : Int */;
 long var_nb /* var nb: Int */;
 val* var_ /* var : Collection[nullable Object] */;
-val* var2 /* : Iterator[nullable Object] */;
-val* var_3 /* var : Iterator[nullable Object] */;
-short int var4 /* : Bool */;
-val* var5 /* : nullable Object */;
+val* var1 /* : Iterator[nullable Object] */;
+val* var_2 /* var : Iterator[nullable Object] */;
+short int var3 /* : Bool */;
+val* var4 /* : nullable Object */;
 val* var_i /* var i: nullable Object */;
-long var6 /* : Int */;
-long var7 /* : Int */;
-short int var9 /* : Bool */;
+long var5 /* : Int */;
+short int var7 /* : Bool */;
 int cltype;
 int idtype;
 const char* var_class_name;
-long var10 /* : Int */;
-var1 = 0;
-var_nb = var1;
+long var8 /* : Int */;
+var_nb = 0l;
 var_ = self;
 {
-var2 = ((val* (*)(val* self))(var_->class->vft[COLOR_standard__abstract_collection__Collection__iterator]))(var_) /* iterator on <var_:Collection[nullable Object]>*/;
+var1 = ((val*(*)(val* self))((((long)var_&3)?class_info[((long)var_&3)]:var_->class)->vft[COLOR_standard__abstract_collection__Collection__iterator]))(var_); /* iterator on <var_:Collection[nullable Object]>*/
 }
-var_3 = var2;
+var_2 = var1;
 for(;;) {
 {
-var4 = ((short int (*)(val* self))(var_3->class->vft[COLOR_standard__abstract_collection__Iterator__is_ok]))(var_3) /* is_ok on <var_3:Iterator[nullable Object]>*/;
+var3 = ((short int(*)(val* self))((((long)var_2&3)?class_info[((long)var_2&3)]:var_2->class)->vft[COLOR_standard__abstract_collection__Iterator__is_ok]))(var_2); /* is_ok on <var_2:Iterator[nullable Object]>*/
 }
-if (var4){
+if (var3){
 {
-var5 = ((val* (*)(val* self))(var_3->class->vft[COLOR_standard__abstract_collection__Iterator__item]))(var_3) /* item on <var_3:Iterator[nullable Object]>*/;
+var4 = ((val*(*)(val* self))((((long)var_2&3)?class_info[((long)var_2&3)]:var_2->class)->vft[COLOR_standard__abstract_collection__Iterator__item]))(var_2); /* item on <var_2:Iterator[nullable Object]>*/
 }
-var_i = var5;
-var6 = 1;
+var_i = var4;
 {
-{ /* Inline kernel#Int#+ (var_nb,var6) on <var_nb:Int> */
-/* Covariant cast for argument 0 (i) <var6:Int> isa OTHER */
-/* <var6:Int> isa OTHER */
-var9 = 1; /* easy <var6:Int> isa OTHER*/
-if (unlikely(!var9)) {
+{ /* Inline kernel#Int#+ (var_nb,1l) on <var_nb:Int> */
+/* Covariant cast for argument 0 (i) <1l:Int> isa OTHER */
+/* <1l:Int> isa OTHER */
+var7 = 1; /* easy <1l:Int> isa OTHER*/
+if (unlikely(!var7)) {
 var_class_name = type_standard__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
-PRINT_ERROR(" (%s:%d)\n", FILE_standard__kernel, 413);
-show_backtrace(1);
+PRINT_ERROR(" (%s:%d)\n", FILE_standard__kernel, 537);
+fatal_exit(1);
 }
-var10 = var_nb + var6;
-var7 = var10;
-goto RET_LABEL8;
-RET_LABEL8:(void)0;
+var8 = var_nb + 1l;
+var5 = var8;
+goto RET_LABEL6;
+RET_LABEL6:(void)0;
 }
 }
-var_nb = var7;
+var_nb = var5;
 {
-((void (*)(val* self))(var_3->class->vft[COLOR_standard__abstract_collection__Iterator__next]))(var_3) /* next on <var_3:Iterator[nullable Object]>*/;
+((void(*)(val* self))((((long)var_2&3)?class_info[((long)var_2&3)]:var_2->class)->vft[COLOR_standard__abstract_collection__Iterator__next]))(var_2); /* next on <var_2:Iterator[nullable Object]>*/
 }
 } else {
 goto BREAK_label;
@@ -85,9 +93,7 @@ goto BREAK_label;
 }
 BREAK_label: (void)0;
 {
-{ /* Inline abstract_collection#Iterator#finish (var_3) on <var_3:Iterator[nullable Object]> */
-RET_LABEL11:(void)0;
-}
+((void(*)(val* self))((((long)var_2&3)?class_info[((long)var_2&3)]:var_2->class)->vft[COLOR_standard__abstract_collection__Iterator__finish]))(var_2); /* finish on <var_2:Iterator[nullable Object]>*/
 }
 var = var_nb;
 goto RET_LABEL;
@@ -97,73 +103,43 @@ return var;
 /* method abstract_collection#Collection#has for (self: Collection[nullable Object], nullable Object): Bool */
 short int standard___standard__Collection___has(val* self, val* p0) {
 short int var /* : Bool */;
-short int var1 /* : Bool */;
-int cltype;
-int idtype;
-const struct type* type_struct;
-short int is_nullable;
-const char* var_class_name;
 val* var_item /* var item: nullable Object */;
 val* var_ /* var : Collection[nullable Object] */;
-val* var2 /* : Iterator[nullable Object] */;
-val* var_3 /* var : Iterator[nullable Object] */;
-short int var4 /* : Bool */;
-val* var5 /* : nullable Object */;
+val* var1 /* : Iterator[nullable Object] */;
+val* var_2 /* var : Iterator[nullable Object] */;
+short int var3 /* : Bool */;
+val* var4 /* : nullable Object */;
 val* var_i /* var i: nullable Object */;
+short int var5 /* : Bool */;
 short int var6 /* : Bool */;
-short int var7 /* : Bool */;
-short int var8 /* : Bool */;
-short int var10 /* : Bool */;
-/* Covariant cast for argument 0 (item) <p0:nullable Object> isa E */
-/* <p0:nullable Object> isa E */
-type_struct = self->type->resolution_table->types[COLOR_standard__Collection___35dE];
-cltype = type_struct->color;
-idtype = type_struct->id;
-is_nullable = type_struct->is_nullable;
-if(p0 == NULL) {
-var1 = is_nullable;
-} else {
-if(cltype >= p0->type->table_size) {
-var1 = 0;
-} else {
-var1 = p0->type->type_table[cltype] == idtype;
-}
-}
-if (unlikely(!var1)) {
-var_class_name = p0 == NULL ? "null" : p0->type->name;
-PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "E", var_class_name);
-PRINT_ERROR(" (%s:%d)\n", FILE_standard__abstract_collection, 80);
-show_backtrace(1);
-}
 var_item = p0;
 var_ = self;
 {
-var2 = ((val* (*)(val* self))(var_->class->vft[COLOR_standard__abstract_collection__Collection__iterator]))(var_) /* iterator on <var_:Collection[nullable Object]>*/;
+var1 = ((val*(*)(val* self))((((long)var_&3)?class_info[((long)var_&3)]:var_->class)->vft[COLOR_standard__abstract_collection__Collection__iterator]))(var_); /* iterator on <var_:Collection[nullable Object]>*/
 }
-var_3 = var2;
+var_2 = var1;
 for(;;) {
 {
-var4 = ((short int (*)(val* self))(var_3->class->vft[COLOR_standard__abstract_collection__Iterator__is_ok]))(var_3) /* is_ok on <var_3:Iterator[nullable Object]>*/;
+var3 = ((short int(*)(val* self))((((long)var_2&3)?class_info[((long)var_2&3)]:var_2->class)->vft[COLOR_standard__abstract_collection__Iterator__is_ok]))(var_2); /* is_ok on <var_2:Iterator[nullable Object]>*/
 }
-if (var4){
+if (var3){
 {
-var5 = ((val* (*)(val* self))(var_3->class->vft[COLOR_standard__abstract_collection__Iterator__item]))(var_3) /* item on <var_3:Iterator[nullable Object]>*/;
+var4 = ((val*(*)(val* self))((((long)var_2&3)?class_info[((long)var_2&3)]:var_2->class)->vft[COLOR_standard__abstract_collection__Iterator__item]))(var_2); /* item on <var_2:Iterator[nullable Object]>*/
 }
-var_i = var5;
+var_i = var4;
 if (var_i == NULL) {
-var6 = (var_item == NULL);
+var5 = (var_item == NULL);
 } else {
-var7 = ((short int (*)(val* self, val* p0))(var_i->class->vft[COLOR_standard__kernel__Object___61d_61d]))(var_i, var_item) /* == on <var_i:nullable Object>*/;
-var6 = var7;
+var6 = ((short int(*)(val* self, val* p0))((((long)var_i&3)?class_info[((long)var_i&3)]:var_i->class)->vft[COLOR_standard__kernel__Object___61d_61d]))(var_i, var_item); /* == on <var_i:nullable Object>*/
+var5 = var6;
 }
-if (var6){
-var8 = 1;
-var = var8;
+if (var5){
+var = 1;
 goto RET_LABEL;
 } else {
 }
 {
-((void (*)(val* self))(var_3->class->vft[COLOR_standard__abstract_collection__Iterator__next]))(var_3) /* next on <var_3:Iterator[nullable Object]>*/;
+((void(*)(val* self))((((long)var_2&3)?class_info[((long)var_2&3)]:var_2->class)->vft[COLOR_standard__abstract_collection__Iterator__next]))(var_2); /* next on <var_2:Iterator[nullable Object]>*/
 }
 } else {
 goto BREAK_label;
@@ -171,12 +147,9 @@ goto BREAK_label;
 }
 BREAK_label: (void)0;
 {
-{ /* Inline abstract_collection#Iterator#finish (var_3) on <var_3:Iterator[nullable Object]> */
-RET_LABEL9:(void)0;
+((void(*)(val* self))((((long)var_2&3)?class_info[((long)var_2&3)]:var_2->class)->vft[COLOR_standard__abstract_collection__Iterator__finish]))(var_2); /* finish on <var_2:Iterator[nullable Object]>*/
 }
-}
-var10 = 0;
-var = var10;
+var = 0;
 goto RET_LABEL;
 RET_LABEL:;
 return var;
@@ -185,48 +158,46 @@ return var;
 val* standard___standard__Collection___first(val* self) {
 val* var /* : nullable Object */;
 long var1 /* : Int */;
-long var2 /* : Int */;
-short int var3 /* : Bool */;
-short int var5 /* : Bool */;
+short int var2 /* : Bool */;
+short int var4 /* : Bool */;
 int cltype;
 int idtype;
 const char* var_class_name;
-short int var6 /* : Bool */;
-val* var7 /* : Iterator[nullable Object] */;
-val* var8 /* : nullable Object */;
+short int var5 /* : Bool */;
+val* var6 /* : Iterator[nullable Object] */;
+val* var7 /* : nullable Object */;
 {
-var1 = ((long (*)(val* self))(self->class->vft[COLOR_standard__abstract_collection__Collection__length]))(self) /* length on <self:Collection[nullable Object]>*/;
+var1 = ((long(*)(val* self))((((long)self&3)?class_info[((long)self&3)]:self->class)->vft[COLOR_standard__abstract_collection__Collection__length]))(self); /* length on <self:Collection[nullable Object]>*/
 }
-var2 = 0;
 {
-{ /* Inline kernel#Int#> (var1,var2) on <var1:Int> */
-/* Covariant cast for argument 0 (i) <var2:Int> isa OTHER */
-/* <var2:Int> isa OTHER */
-var5 = 1; /* easy <var2:Int> isa OTHER*/
-if (unlikely(!var5)) {
+{ /* Inline kernel#Int#> (var1,0l) on <var1:Int> */
+/* Covariant cast for argument 0 (i) <0l:Int> isa OTHER */
+/* <0l:Int> isa OTHER */
+var4 = 1; /* easy <0l:Int> isa OTHER*/
+if (unlikely(!var4)) {
 var_class_name = type_standard__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
-PRINT_ERROR(" (%s:%d)\n", FILE_standard__kernel, 412);
-show_backtrace(1);
+PRINT_ERROR(" (%s:%d)\n", FILE_standard__kernel, 536);
+fatal_exit(1);
 }
-var6 = var1 > var2;
-var3 = var6;
-goto RET_LABEL4;
-RET_LABEL4:(void)0;
+var5 = var1 > 0l;
+var2 = var5;
+goto RET_LABEL3;
+RET_LABEL3:(void)0;
 }
 }
-if (unlikely(!var3)) {
+if (unlikely(!var2)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_standard__abstract_collection, 126);
-show_backtrace(1);
+PRINT_ERROR(" (%s:%d)\n", FILE_standard__abstract_collection, 134);
+fatal_exit(1);
 }
 {
-var7 = ((val* (*)(val* self))(self->class->vft[COLOR_standard__abstract_collection__Collection__iterator]))(self) /* iterator on <self:Collection[nullable Object]>*/;
+var6 = ((val*(*)(val* self))((((long)self&3)?class_info[((long)self&3)]:self->class)->vft[COLOR_standard__abstract_collection__Collection__iterator]))(self); /* iterator on <self:Collection[nullable Object]>*/
 }
 {
-var8 = ((val* (*)(val* self))(var7->class->vft[COLOR_standard__abstract_collection__Iterator__item]))(var7) /* item on <var7:Iterator[nullable Object]>*/;
+var7 = ((val*(*)(val* self))((((long)var6&3)?class_info[((long)var6&3)]:var6->class)->vft[COLOR_standard__abstract_collection__Iterator__item]))(var6); /* item on <var6:Iterator[nullable Object]>*/
 }
-var = var8;
+var = var7;
 goto RET_LABEL;
 RET_LABEL:;
 return var;
@@ -234,65 +205,41 @@ return var;
 /* method abstract_collection#Collection#has_all for (self: Collection[nullable Object], Collection[nullable Object]): Bool */
 short int standard___standard__Collection___has_all(val* self, val* p0) {
 short int var /* : Bool */;
-short int var1 /* : Bool */;
-int cltype;
-int idtype;
-const struct type* type_struct;
-const char* var_class_name;
 val* var_other /* var other: Collection[nullable Object] */;
 val* var_ /* var : Collection[nullable Object] */;
-val* var2 /* : Iterator[nullable Object] */;
-val* var_3 /* var : Iterator[nullable Object] */;
-short int var4 /* : Bool */;
-val* var5 /* : nullable Object */;
+val* var1 /* : Iterator[nullable Object] */;
+val* var_2 /* var : Iterator[nullable Object] */;
+short int var3 /* : Bool */;
+val* var4 /* : nullable Object */;
 val* var_x /* var x: nullable Object */;
+short int var5 /* : Bool */;
 short int var6 /* : Bool */;
-short int var7 /* : Bool */;
-short int var8 /* : Bool */;
-short int var10 /* : Bool */;
-/* Covariant cast for argument 0 (other) <p0:Collection[nullable Object]> isa Collection[E] */
-/* <p0:Collection[nullable Object]> isa Collection[E] */
-type_struct = self->type->resolution_table->types[COLOR_standard__Collection__standard__Collection___35dE];
-cltype = type_struct->color;
-idtype = type_struct->id;
-if(cltype >= p0->type->table_size) {
-var1 = 0;
-} else {
-var1 = p0->type->type_table[cltype] == idtype;
-}
-if (unlikely(!var1)) {
-var_class_name = p0 == NULL ? "null" : p0->type->name;
-PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "Collection[E]", var_class_name);
-PRINT_ERROR(" (%s:%d)\n", FILE_standard__abstract_collection, 130);
-show_backtrace(1);
-}
 var_other = p0;
 var_ = var_other;
 {
-var2 = ((val* (*)(val* self))(var_->class->vft[COLOR_standard__abstract_collection__Collection__iterator]))(var_) /* iterator on <var_:Collection[nullable Object]>*/;
+var1 = ((val*(*)(val* self))((((long)var_&3)?class_info[((long)var_&3)]:var_->class)->vft[COLOR_standard__abstract_collection__Collection__iterator]))(var_); /* iterator on <var_:Collection[nullable Object]>*/
 }
-var_3 = var2;
+var_2 = var1;
 for(;;) {
 {
-var4 = ((short int (*)(val* self))(var_3->class->vft[COLOR_standard__abstract_collection__Iterator__is_ok]))(var_3) /* is_ok on <var_3:Iterator[nullable Object]>*/;
+var3 = ((short int(*)(val* self))((((long)var_2&3)?class_info[((long)var_2&3)]:var_2->class)->vft[COLOR_standard__abstract_collection__Iterator__is_ok]))(var_2); /* is_ok on <var_2:Iterator[nullable Object]>*/
 }
-if (var4){
+if (var3){
 {
-var5 = ((val* (*)(val* self))(var_3->class->vft[COLOR_standard__abstract_collection__Iterator__item]))(var_3) /* item on <var_3:Iterator[nullable Object]>*/;
+var4 = ((val*(*)(val* self))((((long)var_2&3)?class_info[((long)var_2&3)]:var_2->class)->vft[COLOR_standard__abstract_collection__Iterator__item]))(var_2); /* item on <var_2:Iterator[nullable Object]>*/
 }
-var_x = var5;
+var_x = var4;
 {
-var6 = ((short int (*)(val* self, val* p0))(self->class->vft[COLOR_standard__abstract_collection__Collection__has]))(self, var_x) /* has on <self:Collection[nullable Object]>*/;
+var5 = ((short int(*)(val* self, val* p0))((((long)self&3)?class_info[((long)self&3)]:self->class)->vft[COLOR_standard__abstract_collection__Collection__has]))(self, var_x); /* has on <self:Collection[nullable Object]>*/
 }
-var7 = !var6;
-if (var7){
-var8 = 0;
-var = var8;
+var6 = !var5;
+if (var6){
+var = 0;
 goto RET_LABEL;
 } else {
 }
 {
-((void (*)(val* self))(var_3->class->vft[COLOR_standard__abstract_collection__Iterator__next]))(var_3) /* next on <var_3:Iterator[nullable Object]>*/;
+((void(*)(val* self))((((long)var_2&3)?class_info[((long)var_2&3)]:var_2->class)->vft[COLOR_standard__abstract_collection__Iterator__next]))(var_2); /* next on <var_2:Iterator[nullable Object]>*/
 }
 } else {
 goto BREAK_label;
@@ -300,12 +247,9 @@ goto BREAK_label;
 }
 BREAK_label: (void)0;
 {
-{ /* Inline abstract_collection#Iterator#finish (var_3) on <var_3:Iterator[nullable Object]> */
-RET_LABEL9:(void)0;
+((void(*)(val* self))((((long)var_2&3)?class_info[((long)var_2&3)]:var_2->class)->vft[COLOR_standard__abstract_collection__Iterator__finish]))(var_2); /* finish on <var_2:Iterator[nullable Object]>*/
 }
-}
-var10 = 1;
-var = var10;
+var = 1;
 goto RET_LABEL;
 RET_LABEL:;
 return var;
@@ -342,9 +286,7 @@ return var;
 /* method abstract_collection#Container#is_empty for (self: Container[nullable Object]): Bool */
 short int standard___standard__Container___Collection__is_empty(val* self) {
 short int var /* : Bool */;
-short int var1 /* : Bool */;
-var1 = 0;
-var = var1;
+var = 0;
 goto RET_LABEL;
 RET_LABEL:;
 return var;
@@ -352,9 +294,7 @@ return var;
 /* method abstract_collection#Container#length for (self: Container[nullable Object]): Int */
 long standard___standard__Container___Collection__length(val* self) {
 long var /* : Int */;
-long var1 /* : Int */;
-var1 = 1;
-var = var1;
+var = 1l;
 goto RET_LABEL;
 RET_LABEL:;
 return var;
@@ -362,53 +302,26 @@ return var;
 /* method abstract_collection#Container#has for (self: Container[nullable Object], nullable Object): Bool */
 short int standard___standard__Container___Collection__has(val* self, val* p0) {
 short int var /* : Bool */;
-short int var1 /* : Bool */;
-int cltype;
-int idtype;
-const struct type* type_struct;
-short int is_nullable;
-const char* var_class_name;
 val* var_an_item /* var an_item: nullable Object */;
-val* var2 /* : nullable Object */;
-val* var4 /* : nullable Object */;
+val* var1 /* : nullable Object */;
+val* var3 /* : nullable Object */;
+short int var4 /* : Bool */;
 short int var5 /* : Bool */;
-short int var6 /* : Bool */;
-/* Covariant cast for argument 0 (an_item) <p0:nullable Object> isa E */
-/* <p0:nullable Object> isa E */
-type_struct = self->type->resolution_table->types[COLOR_standard__Container___35dE];
-cltype = type_struct->color;
-idtype = type_struct->id;
-is_nullable = type_struct->is_nullable;
-if(p0 == NULL) {
-var1 = is_nullable;
-} else {
-if(cltype >= p0->type->table_size) {
-var1 = 0;
-} else {
-var1 = p0->type->type_table[cltype] == idtype;
-}
-}
-if (unlikely(!var1)) {
-var_class_name = p0 == NULL ? "null" : p0->type->name;
-PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "E", var_class_name);
-PRINT_ERROR(" (%s:%d)\n", FILE_standard__abstract_collection, 217);
-show_backtrace(1);
-}
 var_an_item = p0;
 {
 { /* Inline abstract_collection#Container#item (self) on <self:Container[nullable Object]> */
-var4 = self->attrs[COLOR_standard__abstract_collection__Container___item].val; /* _item on <self:Container[nullable Object]> */
-var2 = var4;
-RET_LABEL3:(void)0;
+var3 = self->attrs[COLOR_standard__abstract_collection__Container___item].val; /* _item on <self:Container[nullable Object]> */
+var1 = var3;
+RET_LABEL2:(void)0;
 }
 }
-if (var2 == NULL) {
-var5 = (var_an_item == NULL);
+if (var1 == NULL) {
+var4 = (var_an_item == NULL);
 } else {
-var6 = ((short int (*)(val* self, val* p0))(var2->class->vft[COLOR_standard__kernel__Object___61d_61d]))(var2, var_an_item) /* == on <var2:nullable Object>*/;
-var5 = var6;
+var5 = ((short int(*)(val* self, val* p0))((((long)var1&3)?class_info[((long)var1&3)]:var1->class)->vft[COLOR_standard__kernel__Object___61d_61d]))(var1, var_an_item); /* == on <var1:nullable Object>*/
+var4 = var5;
 }
-var = var5;
+var = var4;
 goto RET_LABEL;
 RET_LABEL:;
 return var;
@@ -419,10 +332,10 @@ val* var /* : Iterator[nullable Object] */;
 val* var1 /* : ContainerIterator[nullable Object] */;
 var1 = NEW_standard__abstract_collection__ContainerIterator(self->type->resolution_table->types[COLOR_standard__abstract_collection__ContainerIterator__standard__Container___35dE]);
 {
-((void (*)(val* self, val* p0))(var1->class->vft[COLOR_standard__abstract_collection__ContainerIterator__container_61d]))(var1, self) /* container= on <var1:ContainerIterator[nullable Object]>*/;
+((void(*)(val* self, val* p0))(var1->class->vft[COLOR_standard__abstract_collection__ContainerIterator__container_61d]))(var1, self); /* container= on <var1:ContainerIterator[nullable Object]>*/
 }
 {
-((void (*)(val* self))(var1->class->vft[COLOR_standard__kernel__Object__init]))(var1) /* init on <var1:ContainerIterator[nullable Object]>*/;
+((void(*)(val* self))(var1->class->vft[COLOR_standard__kernel__Object__init]))(var1); /* init on <var1:ContainerIterator[nullable Object]>*/
 }
 var = var1;
 goto RET_LABEL;
@@ -455,17 +368,17 @@ is_nullable = type_struct->is_nullable;
 if(p0 == NULL) {
 var = is_nullable;
 } else {
-if(cltype >= p0->type->table_size) {
+if(cltype >= (((long)p0&3)?type_info[((long)p0&3)]:p0->type)->table_size) {
 var = 0;
 } else {
-var = p0->type->type_table[cltype] == idtype;
+var = (((long)p0&3)?type_info[((long)p0&3)]:p0->type)->type_table[cltype] == idtype;
 }
 }
 if (unlikely(!var)) {
-var_class_name = p0 == NULL ? "null" : p0->type->name;
+var_class_name = p0 == NULL ? "null" : (((long)p0&3)?type_info[((long)p0&3)]:p0->type)->name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "E", var_class_name);
-PRINT_ERROR(" (%s:%d)\n", FILE_standard__abstract_collection, 232);
-show_backtrace(1);
+PRINT_ERROR(" (%s:%d)\n", FILE_standard__abstract_collection, 309);
+fatal_exit(1);
 }
 self->attrs[COLOR_standard__abstract_collection__Container___item].val = p0; /* _item on <self:Container[nullable Object]> */
 RET_LABEL:;
@@ -473,7 +386,7 @@ RET_LABEL:;
 /* method abstract_collection#Container#init for (self: Container[nullable Object]) */
 void standard___standard__Container___standard__kernel__Object__init(val* self) {
 {
-((void (*)(val* self))(self->class->vft[COLOR_standard___standard__Container___standard__kernel__Object__init]))(self) /* init on <self:Container[nullable Object]>*/;
+((void(*)(val* self))(self->class->vft[COLOR_standard___standard__Container___standard__kernel__Object__init]))(self); /* init on <self:Container[nullable Object]>*/
 }
 RET_LABEL:;
 }
@@ -486,8 +399,8 @@ val* var4 /* : nullable Object */;
 var1 = self->attrs[COLOR_standard__abstract_collection__ContainerIterator___container].val; /* _container on <self:ContainerIterator[nullable Object]> */
 if (unlikely(var1 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _container");
-PRINT_ERROR(" (%s:%d)\n", FILE_standard__abstract_collection, 239);
-show_backtrace(1);
+PRINT_ERROR(" (%s:%d)\n", FILE_standard__abstract_collection, 316);
+fatal_exit(1);
 }
 {
 { /* Inline abstract_collection#Container#item (var1) on <var1:Container[nullable Object]> */
@@ -503,11 +416,9 @@ return var;
 }
 /* method abstract_collection#ContainerIterator#next for (self: ContainerIterator[nullable Object]) */
 void standard__abstract_collection___standard__abstract_collection__ContainerIterator___Iterator__next(val* self) {
-short int var /* : Bool */;
-var = 0;
 {
-{ /* Inline abstract_collection#ContainerIterator#is_ok= (self,var) on <self:ContainerIterator[nullable Object]> */
-self->attrs[COLOR_standard__abstract_collection__ContainerIterator___is_ok].s = var; /* _is_ok on <self:ContainerIterator[nullable Object]> */
+{ /* Inline abstract_collection#ContainerIterator#is_ok= (self,0) on <self:ContainerIterator[nullable Object]> */
+self->attrs[COLOR_standard__abstract_collection__ContainerIterator___is_ok].s = 0; /* _is_ok on <self:ContainerIterator[nullable Object]> */
 RET_LABEL1:(void)0;
 }
 }
@@ -547,8 +458,8 @@ var = p0->type->type_table[cltype] == idtype;
 if (unlikely(!var)) {
 var_class_name = p0 == NULL ? "null" : p0->type->name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "Container[E]", var_class_name);
-PRINT_ERROR(" (%s:%d)\n", FILE_standard__abstract_collection, 245);
-show_backtrace(1);
+PRINT_ERROR(" (%s:%d)\n", FILE_standard__abstract_collection, 322);
+fatal_exit(1);
 }
 self->attrs[COLOR_standard__abstract_collection__ContainerIterator___container].val = p0; /* _container on <self:ContainerIterator[nullable Object]> */
 RET_LABEL:;
@@ -556,53 +467,26 @@ RET_LABEL:;
 /* method abstract_collection#ContainerIterator#init for (self: ContainerIterator[nullable Object]) */
 void standard__abstract_collection___standard__abstract_collection__ContainerIterator___standard__kernel__Object__init(val* self) {
 {
-((void (*)(val* self))(self->class->vft[COLOR_standard__abstract_collection___standard__abstract_collection__ContainerIterator___standard__kernel__Object__init]))(self) /* init on <self:ContainerIterator[nullable Object]>*/;
+((void(*)(val* self))(self->class->vft[COLOR_standard__abstract_collection___standard__abstract_collection__ContainerIterator___standard__kernel__Object__init]))(self); /* init on <self:ContainerIterator[nullable Object]>*/
 }
 RET_LABEL:;
 }
 /* method abstract_collection#RemovableCollection#clear for (self: RemovableCollection[nullable Object]) */
 void standard___standard__RemovableCollection___clear(val* self) {
 const char* var_class_name;
-var_class_name = self == NULL ? "null" : self->type->name;
+var_class_name = self == NULL ? "null" : (((long)self&3)?type_info[((long)self&3)]:self->type)->name;
 PRINT_ERROR("Runtime error: Abstract method `%s` called on `%s`", "clear", var_class_name);
-PRINT_ERROR(" (%s:%d)\n", FILE_standard__abstract_collection, 252);
-show_backtrace(1);
+PRINT_ERROR(" (%s:%d)\n", FILE_standard__abstract_collection, 329);
+fatal_exit(1);
 RET_LABEL:;
 }
 /* method abstract_collection#RemovableCollection#remove for (self: RemovableCollection[nullable Object], nullable Object) */
 void standard___standard__RemovableCollection___remove(val* self, val* p0) {
-short int var /* : Bool */;
-int cltype;
-int idtype;
-const struct type* type_struct;
-short int is_nullable;
 const char* var_class_name;
-const char* var_class_name1;
-/* Covariant cast for argument 0 (item) <p0:nullable Object> isa E */
-/* <p0:nullable Object> isa E */
-type_struct = self->type->resolution_table->types[COLOR_standard__RemovableCollection___35dE];
-cltype = type_struct->color;
-idtype = type_struct->id;
-is_nullable = type_struct->is_nullable;
-if(p0 == NULL) {
-var = is_nullable;
-} else {
-if(cltype >= p0->type->table_size) {
-var = 0;
-} else {
-var = p0->type->type_table[cltype] == idtype;
-}
-}
-if (unlikely(!var)) {
-var_class_name = p0 == NULL ? "null" : p0->type->name;
-PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "E", var_class_name);
-PRINT_ERROR(" (%s:%d)\n", FILE_standard__abstract_collection, 261);
-show_backtrace(1);
-}
-var_class_name1 = self == NULL ? "null" : self->type->name;
-PRINT_ERROR("Runtime error: Abstract method `%s` called on `%s`", "remove", var_class_name1);
-PRINT_ERROR(" (%s:%d)\n", FILE_standard__abstract_collection, 261);
-show_backtrace(1);
+var_class_name = self == NULL ? "null" : (((long)self&3)?type_info[((long)self&3)]:self->type)->name;
+PRINT_ERROR("Runtime error: Abstract method `%s` called on `%s`", "remove", var_class_name);
+PRINT_ERROR(" (%s:%d)\n", FILE_standard__abstract_collection, 338);
+fatal_exit(1);
 RET_LABEL:;
 }
 /* method abstract_collection#SimpleCollection#add_all for (self: SimpleCollection[nullable Object], Collection[nullable Object]) */
@@ -621,40 +505,40 @@ val* var4 /* : nullable Object */;
 val* var_i /* var i: nullable Object */;
 /* Covariant cast for argument 0 (coll) <p0:Collection[nullable Object]> isa Collection[E] */
 /* <p0:Collection[nullable Object]> isa Collection[E] */
-type_struct = self->type->resolution_table->types[COLOR_standard__Collection__standard__SimpleCollection___35dE];
+type_struct = (((long)self&3)?type_info[((long)self&3)]:self->type)->resolution_table->types[COLOR_standard__Collection__standard__SimpleCollection___35dE];
 cltype = type_struct->color;
 idtype = type_struct->id;
-if(cltype >= p0->type->table_size) {
+if(cltype >= (((long)p0&3)?type_info[((long)p0&3)]:p0->type)->table_size) {
 var = 0;
 } else {
-var = p0->type->type_table[cltype] == idtype;
+var = (((long)p0&3)?type_info[((long)p0&3)]:p0->type)->type_table[cltype] == idtype;
 }
 if (unlikely(!var)) {
-var_class_name = p0 == NULL ? "null" : p0->type->name;
+var_class_name = p0 == NULL ? "null" : (((long)p0&3)?type_info[((long)p0&3)]:p0->type)->name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "Collection[E]", var_class_name);
-PRINT_ERROR(" (%s:%d)\n", FILE_standard__abstract_collection, 290);
-show_backtrace(1);
+PRINT_ERROR(" (%s:%d)\n", FILE_standard__abstract_collection, 367);
+fatal_exit(1);
 }
 var_coll = p0;
 var_ = var_coll;
 {
-var1 = ((val* (*)(val* self))(var_->class->vft[COLOR_standard__abstract_collection__Collection__iterator]))(var_) /* iterator on <var_:Collection[nullable Object]>*/;
+var1 = ((val*(*)(val* self))((((long)var_&3)?class_info[((long)var_&3)]:var_->class)->vft[COLOR_standard__abstract_collection__Collection__iterator]))(var_); /* iterator on <var_:Collection[nullable Object]>*/
 }
 var_2 = var1;
 for(;;) {
 {
-var3 = ((short int (*)(val* self))(var_2->class->vft[COLOR_standard__abstract_collection__Iterator__is_ok]))(var_2) /* is_ok on <var_2:Iterator[nullable Object]>*/;
+var3 = ((short int(*)(val* self))((((long)var_2&3)?class_info[((long)var_2&3)]:var_2->class)->vft[COLOR_standard__abstract_collection__Iterator__is_ok]))(var_2); /* is_ok on <var_2:Iterator[nullable Object]>*/
 }
 if (var3){
 {
-var4 = ((val* (*)(val* self))(var_2->class->vft[COLOR_standard__abstract_collection__Iterator__item]))(var_2) /* item on <var_2:Iterator[nullable Object]>*/;
+var4 = ((val*(*)(val* self))((((long)var_2&3)?class_info[((long)var_2&3)]:var_2->class)->vft[COLOR_standard__abstract_collection__Iterator__item]))(var_2); /* item on <var_2:Iterator[nullable Object]>*/
 }
 var_i = var4;
 {
-((void (*)(val* self, val* p0))(self->class->vft[COLOR_standard__abstract_collection__SimpleCollection__add]))(self, var_i) /* add on <self:SimpleCollection[nullable Object]>*/;
+((void(*)(val* self, val* p0))((((long)self&3)?class_info[((long)self&3)]:self->class)->vft[COLOR_standard__abstract_collection__SimpleCollection__add]))(self, var_i); /* add on <self:SimpleCollection[nullable Object]>*/
 }
 {
-((void (*)(val* self))(var_2->class->vft[COLOR_standard__abstract_collection__Iterator__next]))(var_2) /* next on <var_2:Iterator[nullable Object]>*/;
+((void(*)(val* self))((((long)var_2&3)?class_info[((long)var_2&3)]:var_2->class)->vft[COLOR_standard__abstract_collection__Iterator__next]))(var_2); /* next on <var_2:Iterator[nullable Object]>*/
 }
 } else {
 goto BREAK_label;
@@ -662,9 +546,7 @@ goto BREAK_label;
 }
 BREAK_label: (void)0;
 {
-{ /* Inline abstract_collection#Iterator#finish (var_2) on <var_2:Iterator[nullable Object]> */
-RET_LABEL5:(void)0;
-}
+((void(*)(val* self))((((long)var_2&3)?class_info[((long)var_2&3)]:var_2->class)->vft[COLOR_standard__abstract_collection__Iterator__finish]))(var_2); /* finish on <var_2:Iterator[nullable Object]>*/
 }
 RET_LABEL:;
 }
@@ -676,79 +558,55 @@ short int var1 /* : Bool */;
 int cltype;
 int idtype;
 short int var2 /* : Bool */;
-short int var3 /* : Bool */;
+long var3 /* : Int */;
 long var4 /* : Int */;
-long var5 /* : Int */;
-short int var6 /* : Bool */;
+short int var5 /* : Bool */;
+short int var7 /* : Bool */;
 short int var8 /* : Bool */;
 short int var9 /* : Bool */;
-short int var10 /* : Bool */;
-short int var11 /* : Bool */;
-int cltype12;
-int idtype13;
-const struct type* type_struct;
-const char* var_class_name;
-short int var14 /* : Bool */;
 var_other = p0;
-/* <var_other:nullable Object> isa Set[Object] */
-cltype = type_standard__Set__standard__Object.color;
-idtype = type_standard__Set__standard__Object.id;
+/* <var_other:nullable Object> isa Set[nullable Object] */
+cltype = type_standard__Set__nullable__standard__Object.color;
+idtype = type_standard__Set__nullable__standard__Object.id;
 if(var_other == NULL) {
 var1 = 0;
 } else {
-if(cltype >= var_other->type->table_size) {
+if(cltype >= (((long)var_other&3)?type_info[((long)var_other&3)]:var_other->type)->table_size) {
 var1 = 0;
 } else {
-var1 = var_other->type->type_table[cltype] == idtype;
+var1 = (((long)var_other&3)?type_info[((long)var_other&3)]:var_other->type)->type_table[cltype] == idtype;
 }
 }
 var2 = !var1;
 if (var2){
-var3 = 0;
-var = var3;
+var = 0;
 goto RET_LABEL;
 } else {
 }
 {
-var4 = ((long (*)(val* self))(var_other->class->vft[COLOR_standard__abstract_collection__Collection__length]))(var_other) /* length on <var_other:nullable Object(Set[Object])>*/;
+var3 = ((long(*)(val* self))((((long)var_other&3)?class_info[((long)var_other&3)]:var_other->class)->vft[COLOR_standard__abstract_collection__Collection__length]))(var_other); /* length on <var_other:nullable Object(Set[nullable Object])>*/
 }
 {
-var5 = ((long (*)(val* self))(self->class->vft[COLOR_standard__abstract_collection__Collection__length]))(self) /* length on <self:Set[nullable Object]>*/;
+var4 = ((long(*)(val* self))((((long)self&3)?class_info[((long)self&3)]:self->class)->vft[COLOR_standard__abstract_collection__Collection__length]))(self); /* length on <self:Set[nullable Object]>*/
 }
 {
-{ /* Inline kernel#Int#!= (var4,var5) on <var4:Int> */
-var8 = var4 == var5;
-var9 = !var8;
-var6 = var9;
-goto RET_LABEL7;
-RET_LABEL7:(void)0;
+{ /* Inline kernel#Int#!= (var3,var4) on <var3:Int> */
+var7 = var3 == var4;
+var8 = !var7;
+var5 = var8;
+goto RET_LABEL6;
+RET_LABEL6:(void)0;
 }
 }
-if (var6){
-var10 = 0;
-var = var10;
+if (var5){
+var = 0;
 goto RET_LABEL;
 } else {
 }
-/* <var_other:nullable Object(Set[Object])> isa Collection[E] */
-type_struct = self->type->resolution_table->types[COLOR_standard__Collection__standard__Set___35dE];
-cltype12 = type_struct->color;
-idtype13 = type_struct->id;
-if(cltype12 >= var_other->type->table_size) {
-var11 = 0;
-} else {
-var11 = var_other->type->type_table[cltype12] == idtype13;
-}
-if (unlikely(!var11)) {
-var_class_name = var_other == NULL ? "null" : var_other->type->name;
-PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "Collection[E]", var_class_name);
-PRINT_ERROR(" (%s:%d)\n", FILE_standard__abstract_collection, 341);
-show_backtrace(1);
-}
 {
-var14 = standard___standard__Collection___has_all(self, var_other);
+var9 = standard___standard__Collection___has_all(self, var_other);
 }
-var = var14;
+var = var9;
 goto RET_LABEL;
 RET_LABEL:;
 return var;
@@ -758,89 +616,87 @@ long standard___standard__Set___standard__kernel__Object__hash(val* self) {
 long var /* : Int */;
 long var1 /* : Int */;
 long var2 /* : Int */;
-long var3 /* : Int */;
-short int var5 /* : Bool */;
+short int var4 /* : Bool */;
 int cltype;
 int idtype;
 const char* var_class_name;
-long var6 /* : Int */;
+long var5 /* : Int */;
 long var_res /* var res: Int */;
 val* var_ /* var : Set[nullable Object] */;
-val* var7 /* : Iterator[nullable Object] */;
-val* var_8 /* var : Iterator[nullable Object] */;
-short int var9 /* : Bool */;
-val* var10 /* : nullable Object */;
+val* var6 /* : Iterator[nullable Object] */;
+val* var_7 /* var : Iterator[nullable Object] */;
+short int var8 /* : Bool */;
+val* var9 /* : nullable Object */;
 val* var_e /* var e: nullable Object */;
+long var10 /* : Int */;
 long var11 /* : Int */;
-long var12 /* : Int */;
-short int var14 /* : Bool */;
-int cltype15;
-int idtype16;
-const char* var_class_name17;
-long var18 /* : Int */;
-var1 = 23;
+short int var13 /* : Bool */;
+int cltype14;
+int idtype15;
+const char* var_class_name16;
+long var17 /* : Int */;
 {
-var2 = ((long (*)(val* self))(self->class->vft[COLOR_standard__abstract_collection__Collection__length]))(self) /* length on <self:Set[nullable Object]>*/;
+var1 = ((long(*)(val* self))((((long)self&3)?class_info[((long)self&3)]:self->class)->vft[COLOR_standard__abstract_collection__Collection__length]))(self); /* length on <self:Set[nullable Object]>*/
 }
 {
-{ /* Inline kernel#Int#+ (var1,var2) on <var1:Int> */
-/* Covariant cast for argument 0 (i) <var2:Int> isa OTHER */
-/* <var2:Int> isa OTHER */
-var5 = 1; /* easy <var2:Int> isa OTHER*/
-if (unlikely(!var5)) {
+{ /* Inline kernel#Int#+ (23l,var1) on <23l:Int> */
+/* Covariant cast for argument 0 (i) <var1:Int> isa OTHER */
+/* <var1:Int> isa OTHER */
+var4 = 1; /* easy <var1:Int> isa OTHER*/
+if (unlikely(!var4)) {
 var_class_name = type_standard__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
-PRINT_ERROR(" (%s:%d)\n", FILE_standard__kernel, 413);
-show_backtrace(1);
+PRINT_ERROR(" (%s:%d)\n", FILE_standard__kernel, 537);
+fatal_exit(1);
 }
-var6 = var1 + var2;
-var3 = var6;
-goto RET_LABEL4;
-RET_LABEL4:(void)0;
+var5 = 23l + var1;
+var2 = var5;
+goto RET_LABEL3;
+RET_LABEL3:(void)0;
 }
 }
-var_res = var3;
+var_res = var2;
 var_ = self;
 {
-var7 = ((val* (*)(val* self))(var_->class->vft[COLOR_standard__abstract_collection__Collection__iterator]))(var_) /* iterator on <var_:Set[nullable Object]>*/;
+var6 = ((val*(*)(val* self))((((long)var_&3)?class_info[((long)var_&3)]:var_->class)->vft[COLOR_standard__abstract_collection__Collection__iterator]))(var_); /* iterator on <var_:Set[nullable Object]>*/
 }
-var_8 = var7;
+var_7 = var6;
 for(;;) {
 {
-var9 = ((short int (*)(val* self))(var_8->class->vft[COLOR_standard__abstract_collection__Iterator__is_ok]))(var_8) /* is_ok on <var_8:Iterator[nullable Object]>*/;
+var8 = ((short int(*)(val* self))((((long)var_7&3)?class_info[((long)var_7&3)]:var_7->class)->vft[COLOR_standard__abstract_collection__Iterator__is_ok]))(var_7); /* is_ok on <var_7:Iterator[nullable Object]>*/
 }
-if (var9){
+if (var8){
 {
-var10 = ((val* (*)(val* self))(var_8->class->vft[COLOR_standard__abstract_collection__Iterator__item]))(var_8) /* item on <var_8:Iterator[nullable Object]>*/;
+var9 = ((val*(*)(val* self))((((long)var_7&3)?class_info[((long)var_7&3)]:var_7->class)->vft[COLOR_standard__abstract_collection__Iterator__item]))(var_7); /* item on <var_7:Iterator[nullable Object]>*/
 }
-var_e = var10;
+var_e = var9;
 if (var_e == NULL) {
 PRINT_ERROR("Runtime error: %s", "Receiver is null");
-PRINT_ERROR(" (%s:%d)\n", FILE_standard__abstract_collection, 351);
-show_backtrace(1);
+PRINT_ERROR(" (%s:%d)\n", FILE_standard__abstract_collection, 428);
+fatal_exit(1);
 } else {
-var11 = ((long (*)(val* self))(var_e->class->vft[COLOR_standard__kernel__Object__hash]))(var_e) /* hash on <var_e:nullable Object>*/;
+var10 = ((long(*)(val* self))((((long)var_e&3)?class_info[((long)var_e&3)]:var_e->class)->vft[COLOR_standard__kernel__Object__hash]))(var_e); /* hash on <var_e:nullable Object>*/
 }
 {
-{ /* Inline kernel#Int#+ (var_res,var11) on <var_res:Int> */
-/* Covariant cast for argument 0 (i) <var11:Int> isa OTHER */
-/* <var11:Int> isa OTHER */
-var14 = 1; /* easy <var11:Int> isa OTHER*/
-if (unlikely(!var14)) {
-var_class_name17 = type_standard__Int.name;
-PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name17);
-PRINT_ERROR(" (%s:%d)\n", FILE_standard__kernel, 413);
-show_backtrace(1);
+{ /* Inline kernel#Int#+ (var_res,var10) on <var_res:Int> */
+/* Covariant cast for argument 0 (i) <var10:Int> isa OTHER */
+/* <var10:Int> isa OTHER */
+var13 = 1; /* easy <var10:Int> isa OTHER*/
+if (unlikely(!var13)) {
+var_class_name16 = type_standard__Int.name;
+PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name16);
+PRINT_ERROR(" (%s:%d)\n", FILE_standard__kernel, 537);
+fatal_exit(1);
 }
-var18 = var_res + var11;
-var12 = var18;
-goto RET_LABEL13;
-RET_LABEL13:(void)0;
+var17 = var_res + var10;
+var11 = var17;
+goto RET_LABEL12;
+RET_LABEL12:(void)0;
 }
 }
-var_res = var12;
+var_res = var11;
 {
-((void (*)(val* self))(var_8->class->vft[COLOR_standard__abstract_collection__Iterator__next]))(var_8) /* next on <var_8:Iterator[nullable Object]>*/;
+((void(*)(val* self))((((long)var_7&3)?class_info[((long)var_7&3)]:var_7->class)->vft[COLOR_standard__abstract_collection__Iterator__next]))(var_7); /* next on <var_7:Iterator[nullable Object]>*/
 }
 } else {
 goto BREAK_label;
@@ -848,9 +704,7 @@ goto BREAK_label;
 }
 BREAK_label: (void)0;
 {
-{ /* Inline abstract_collection#Iterator#finish (var_8) on <var_8:Iterator[nullable Object]> */
-RET_LABEL19:(void)0;
-}
+((void(*)(val* self))((((long)var_7&3)?class_info[((long)var_7&3)]:var_7->class)->vft[COLOR_standard__abstract_collection__Iterator__finish]))(var_7); /* finish on <var_7:Iterator[nullable Object]>*/
 }
 var = var_res;
 goto RET_LABEL;
@@ -860,96 +714,22 @@ return var;
 /* method abstract_collection#MapRead#get_or_null for (self: MapRead[nullable Object, nullable Object], nullable Object): nullable Object */
 val* standard___standard__MapRead___get_or_null(val* self, val* p0) {
 val* var /* : nullable Object */;
-short int var1 /* : Bool */;
-int cltype;
-int idtype;
-const struct type* type_struct;
-short int is_nullable;
-const char* var_class_name;
 val* var_key /* var key: nullable Object */;
-short int var2 /* : Bool */;
-val* var3 /* : nullable Object */;
-val* var4 /* : null */;
-/* Covariant cast for argument 0 (key) <p0:nullable Object> isa K */
-/* <p0:nullable Object> isa K */
-type_struct = self->type->resolution_table->types[COLOR_standard__MapRead___35dK];
-cltype = type_struct->color;
-idtype = type_struct->id;
-is_nullable = type_struct->is_nullable;
-if(p0 == NULL) {
-var1 = is_nullable;
-} else {
-if(cltype >= p0->type->table_size) {
-var1 = 0;
-} else {
-var1 = p0->type->type_table[cltype] == idtype;
-}
-}
-if (unlikely(!var1)) {
-var_class_name = p0 == NULL ? "null" : p0->type->name;
-PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "K", var_class_name);
-PRINT_ERROR(" (%s:%d)\n", FILE_standard__abstract_collection, 392);
-show_backtrace(1);
-}
+short int var1 /* : Bool */;
+val* var2 /* : nullable Object */;
 var_key = p0;
 {
-var2 = standard___standard__MapRead___has_key(self, var_key);
+var1 = ((short int(*)(val* self, val* p0))((((long)self&3)?class_info[((long)self&3)]:self->class)->vft[COLOR_standard__abstract_collection__MapRead__has_key]))(self, var_key); /* has_key on <self:MapRead[nullable Object, nullable Object]>*/
 }
-if (var2){
+if (var1){
 {
-var3 = ((val* (*)(val* self, val* p0))(self->class->vft[COLOR_standard__abstract_collection__MapRead___91d_93d]))(self, var_key) /* [] on <self:MapRead[nullable Object, nullable Object]>*/;
+var2 = ((val*(*)(val* self, val* p0))((((long)self&3)?class_info[((long)self&3)]:self->class)->vft[COLOR_standard__abstract_collection__MapRead___91d_93d]))(self, var_key); /* [] on <self:MapRead[nullable Object, nullable Object]>*/
 }
-var = var3;
+var = var2;
 goto RET_LABEL;
 } else {
 }
-var4 = NULL;
-var = var4;
-goto RET_LABEL;
-RET_LABEL:;
-return var;
-}
-/* method abstract_collection#MapRead#has_key for (self: MapRead[nullable Object, nullable Object], nullable Object): Bool */
-short int standard___standard__MapRead___has_key(val* self, val* p0) {
-short int var /* : Bool */;
-short int var1 /* : Bool */;
-int cltype;
-int idtype;
-const struct type* type_struct;
-short int is_nullable;
-const char* var_class_name;
-val* var_key /* var key: nullable Object */;
-val* var2 /* : Collection[nullable Object] */;
-short int var3 /* : Bool */;
-/* Covariant cast for argument 0 (key) <p0:nullable Object> isa K */
-/* <p0:nullable Object> isa K */
-type_struct = self->type->resolution_table->types[COLOR_standard__MapRead___35dK];
-cltype = type_struct->color;
-idtype = type_struct->id;
-is_nullable = type_struct->is_nullable;
-if(p0 == NULL) {
-var1 = is_nullable;
-} else {
-if(cltype >= p0->type->table_size) {
-var1 = 0;
-} else {
-var1 = p0->type->type_table[cltype] == idtype;
-}
-}
-if (unlikely(!var1)) {
-var_class_name = p0 == NULL ? "null" : p0->type->name;
-PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "K", var_class_name);
-PRINT_ERROR(" (%s:%d)\n", FILE_standard__abstract_collection, 419);
-show_backtrace(1);
-}
-var_key = p0;
-{
-var2 = ((val* (*)(val* self))(self->class->vft[COLOR_standard__abstract_collection__MapRead__keys]))(self) /* keys on <self:MapRead[nullable Object, nullable Object]>*/;
-}
-{
-var3 = ((short int (*)(val* self, val* p0))(var2->class->vft[COLOR_standard__abstract_collection__Collection__has]))(var2, var_key) /* has on <var2:Collection[nullable Object]>*/;
-}
-var = var3;
+var = ((val*)NULL);
 goto RET_LABEL;
 RET_LABEL:;
 return var;
@@ -957,38 +737,318 @@ return var;
 /* method abstract_collection#MapRead#provide_default_value for (self: MapRead[nullable Object, nullable Object], nullable Object): nullable Object */
 val* standard___standard__MapRead___provide_default_value(val* self, val* p0) {
 val* var /* : nullable Object */;
+val* var_key /* var key: nullable Object */;
+var_key = p0;
+PRINT_ERROR("Runtime error: %s", "Aborted");
+PRINT_ERROR(" (%s:%d)\n", FILE_standard__abstract_collection, 552);
+fatal_exit(1);
+RET_LABEL:;
+return var;
+}
+/* method abstract_collection#MapRead#== for (self: MapRead[nullable Object, nullable Object], nullable Object): Bool */
+short int standard___standard__MapRead___standard__kernel__Object___61d_61d(val* self, val* p0) {
+short int var /* : Bool */;
+val* var_other /* var other: nullable Object */;
 short int var1 /* : Bool */;
 int cltype;
 int idtype;
-const struct type* type_struct;
-short int is_nullable;
-const char* var_class_name;
-val* var_key /* var key: nullable Object */;
-/* Covariant cast for argument 0 (key) <p0:nullable Object> isa K */
-/* <p0:nullable Object> isa K */
-type_struct = self->type->resolution_table->types[COLOR_standard__MapRead___35dK];
-cltype = type_struct->color;
-idtype = type_struct->id;
-is_nullable = type_struct->is_nullable;
-if(p0 == NULL) {
-var1 = is_nullable;
-} else {
-if(cltype >= p0->type->table_size) {
+short int var2 /* : Bool */;
+long var3 /* : Int */;
+long var4 /* : Int */;
+short int var5 /* : Bool */;
+short int var7 /* : Bool */;
+short int var8 /* : Bool */;
+val* var_ /* var : MapRead[nullable Object, nullable Object] */;
+val* var9 /* : MapIterator[nullable Object, nullable Object] */;
+val* var_10 /* var : MapIterator[nullable Object, nullable Object] */;
+short int var11 /* : Bool */;
+val* var12 /* : nullable Object */;
+val* var_k /* var k: nullable Object */;
+val* var13 /* : nullable Object */;
+val* var_v /* var v: nullable Object */;
+short int var14 /* : Bool */;
+short int var15 /* : Bool */;
+val* var16 /* : nullable Object */;
+short int var17 /* : Bool */;
+short int var18 /* : Bool */;
+var_other = p0;
+/* <var_other:nullable Object> isa MapRead[nullable Object, nullable Object] */
+cltype = type_standard__MapRead__nullable__standard__Object__nullable__standard__Object.color;
+idtype = type_standard__MapRead__nullable__standard__Object__nullable__standard__Object.id;
+if(var_other == NULL) {
 var1 = 0;
 } else {
-var1 = p0->type->type_table[cltype] == idtype;
+if(cltype >= (((long)var_other&3)?type_info[((long)var_other&3)]:var_other->type)->table_size) {
+var1 = 0;
+} else {
+var1 = (((long)var_other&3)?type_info[((long)var_other&3)]:var_other->type)->type_table[cltype] == idtype;
 }
 }
-if (unlikely(!var1)) {
-var_class_name = p0 == NULL ? "null" : p0->type->name;
-PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "K", var_class_name);
-PRINT_ERROR(" (%s:%d)\n", FILE_standard__abstract_collection, 463);
-show_backtrace(1);
+var2 = !var1;
+if (var2){
+var = 0;
+goto RET_LABEL;
+} else {
 }
-var_key = p0;
-PRINT_ERROR("Runtime error: %s", "Aborted");
-PRINT_ERROR(" (%s:%d)\n", FILE_standard__abstract_collection, 468);
-show_backtrace(1);
+{
+var3 = ((long(*)(val* self))((((long)var_other&3)?class_info[((long)var_other&3)]:var_other->class)->vft[COLOR_standard__abstract_collection__MapRead__length]))(var_other); /* length on <var_other:nullable Object(MapRead[nullable Object, nullable Object])>*/
+}
+{
+var4 = ((long(*)(val* self))((((long)self&3)?class_info[((long)self&3)]:self->class)->vft[COLOR_standard__abstract_collection__MapRead__length]))(self); /* length on <self:MapRead[nullable Object, nullable Object]>*/
+}
+{
+{ /* Inline kernel#Int#!= (var3,var4) on <var3:Int> */
+var7 = var3 == var4;
+var8 = !var7;
+var5 = var8;
+goto RET_LABEL6;
+RET_LABEL6:(void)0;
+}
+}
+if (var5){
+var = 0;
+goto RET_LABEL;
+} else {
+}
+var_ = self;
+{
+var9 = ((val*(*)(val* self))((((long)var_&3)?class_info[((long)var_&3)]:var_->class)->vft[COLOR_standard__abstract_collection__MapRead__iterator]))(var_); /* iterator on <var_:MapRead[nullable Object, nullable Object]>*/
+}
+var_10 = var9;
+for(;;) {
+{
+var11 = ((short int(*)(val* self))((((long)var_10&3)?class_info[((long)var_10&3)]:var_10->class)->vft[COLOR_standard__abstract_collection__MapIterator__is_ok]))(var_10); /* is_ok on <var_10:MapIterator[nullable Object, nullable Object]>*/
+}
+if (var11){
+{
+var12 = ((val*(*)(val* self))((((long)var_10&3)?class_info[((long)var_10&3)]:var_10->class)->vft[COLOR_standard__abstract_collection__MapIterator__key]))(var_10); /* key on <var_10:MapIterator[nullable Object, nullable Object]>*/
+}
+var_k = var12;
+{
+var13 = ((val*(*)(val* self))((((long)var_10&3)?class_info[((long)var_10&3)]:var_10->class)->vft[COLOR_standard__abstract_collection__MapIterator__item]))(var_10); /* item on <var_10:MapIterator[nullable Object, nullable Object]>*/
+}
+var_v = var13;
+{
+var14 = ((short int(*)(val* self, val* p0))((((long)var_other&3)?class_info[((long)var_other&3)]:var_other->class)->vft[COLOR_standard__abstract_collection__MapRead__has_key]))(var_other, var_k); /* has_key on <var_other:nullable Object(MapRead[nullable Object, nullable Object])>*/
+}
+var15 = !var14;
+if (var15){
+var = 0;
+goto RET_LABEL;
+} else {
+}
+{
+var16 = ((val*(*)(val* self, val* p0))((((long)var_other&3)?class_info[((long)var_other&3)]:var_other->class)->vft[COLOR_standard__abstract_collection__MapRead___91d_93d]))(var_other, var_k); /* [] on <var_other:nullable Object(MapRead[nullable Object, nullable Object])>*/
+}
+if (var16 == NULL) {
+var17 = (var_v != NULL);
+} else {
+var18 = ((short int(*)(val* self, val* p0))((((long)var16&3)?class_info[((long)var16&3)]:var16->class)->vft[COLOR_standard__kernel__Object___33d_61d]))(var16, var_v); /* != on <var16:nullable Object>*/
+var17 = var18;
+}
+if (var17){
+var = 0;
+goto RET_LABEL;
+} else {
+}
+{
+((void(*)(val* self))((((long)var_10&3)?class_info[((long)var_10&3)]:var_10->class)->vft[COLOR_standard__abstract_collection__MapIterator__next]))(var_10); /* next on <var_10:MapIterator[nullable Object, nullable Object]>*/
+}
+} else {
+goto BREAK_label;
+}
+}
+BREAK_label: (void)0;
+{
+{ /* Inline abstract_collection#MapIterator#finish (var_10) on <var_10:MapIterator[nullable Object, nullable Object]> */
+RET_LABEL19:(void)0;
+}
+}
+var = 1;
+goto RET_LABEL;
+RET_LABEL:;
+return var;
+}
+/* method abstract_collection#MapRead#hash for (self: MapRead[nullable Object, nullable Object]): Int */
+long standard___standard__MapRead___standard__kernel__Object__hash(val* self) {
+long var /* : Int */;
+long var1 /* : Int */;
+long var_res /* var res: Int */;
+val* var_ /* var : MapRead[nullable Object, nullable Object] */;
+val* var2 /* : MapIterator[nullable Object, nullable Object] */;
+val* var_3 /* var : MapIterator[nullable Object, nullable Object] */;
+short int var4 /* : Bool */;
+val* var5 /* : nullable Object */;
+val* var_k /* var k: nullable Object */;
+val* var6 /* : nullable Object */;
+val* var_v /* var v: nullable Object */;
+short int var7 /* : Bool */;
+short int var8 /* : Bool */;
+long var9 /* : Int */;
+long var10 /* : Int */;
+short int var12 /* : Bool */;
+int cltype;
+int idtype;
+const char* var_class_name;
+long var13 /* : Int */;
+long var14 /* : Int */;
+short int var16 /* : Bool */;
+int cltype17;
+int idtype18;
+const char* var_class_name19;
+long var20 /* : Int */;
+short int var21 /* : Bool */;
+short int var22 /* : Bool */;
+long var23 /* : Int */;
+long var24 /* : Int */;
+short int var26 /* : Bool */;
+int cltype27;
+int idtype28;
+const char* var_class_name29;
+long var30 /* : Int */;
+long var31 /* : Int */;
+short int var33 /* : Bool */;
+int cltype34;
+int idtype35;
+const char* var_class_name36;
+long var37 /* : Int */;
+{
+var1 = ((long(*)(val* self))((((long)self&3)?class_info[((long)self&3)]:self->class)->vft[COLOR_standard__abstract_collection__MapRead__length]))(self); /* length on <self:MapRead[nullable Object, nullable Object]>*/
+}
+var_res = var1;
+var_ = self;
+{
+var2 = ((val*(*)(val* self))((((long)var_&3)?class_info[((long)var_&3)]:var_->class)->vft[COLOR_standard__abstract_collection__MapRead__iterator]))(var_); /* iterator on <var_:MapRead[nullable Object, nullable Object]>*/
+}
+var_3 = var2;
+for(;;) {
+{
+var4 = ((short int(*)(val* self))((((long)var_3&3)?class_info[((long)var_3&3)]:var_3->class)->vft[COLOR_standard__abstract_collection__MapIterator__is_ok]))(var_3); /* is_ok on <var_3:MapIterator[nullable Object, nullable Object]>*/
+}
+if (var4){
+{
+var5 = ((val*(*)(val* self))((((long)var_3&3)?class_info[((long)var_3&3)]:var_3->class)->vft[COLOR_standard__abstract_collection__MapIterator__key]))(var_3); /* key on <var_3:MapIterator[nullable Object, nullable Object]>*/
+}
+var_k = var5;
+{
+var6 = ((val*(*)(val* self))((((long)var_3&3)?class_info[((long)var_3&3)]:var_3->class)->vft[COLOR_standard__abstract_collection__MapIterator__item]))(var_3); /* item on <var_3:MapIterator[nullable Object, nullable Object]>*/
+}
+var_v = var6;
+if (var_k == NULL) {
+var7 = 0; /* is null */
+} else {
+var7 = 1; /* arg is null and recv is not */
+}
+if (0) {
+var8 = ((short int(*)(val* self, val* p0))((((long)var_k&3)?class_info[((long)var_k&3)]:var_k->class)->vft[COLOR_standard__kernel__Object___33d_61d]))(var_k, ((val*)NULL)); /* != on <var_k:nullable Object>*/
+var7 = var8;
+}
+if (var7){
+{
+var9 = ((long(*)(val* self))((((long)var_k&3)?class_info[((long)var_k&3)]:var_k->class)->vft[COLOR_standard__kernel__Object__hash]))(var_k); /* hash on <var_k:nullable Object(Object)>*/
+}
+{
+{ /* Inline kernel#Int#* (var9,7l) on <var9:Int> */
+/* Covariant cast for argument 0 (i) <7l:Int> isa OTHER */
+/* <7l:Int> isa OTHER */
+var12 = 1; /* easy <7l:Int> isa OTHER*/
+if (unlikely(!var12)) {
+var_class_name = type_standard__Int.name;
+PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
+PRINT_ERROR(" (%s:%d)\n", FILE_standard__kernel, 541);
+fatal_exit(1);
+}
+var13 = var9 * 7l;
+var10 = var13;
+goto RET_LABEL11;
+RET_LABEL11:(void)0;
+}
+}
+{
+{ /* Inline kernel#Int#+ (var_res,var10) on <var_res:Int> */
+/* Covariant cast for argument 0 (i) <var10:Int> isa OTHER */
+/* <var10:Int> isa OTHER */
+var16 = 1; /* easy <var10:Int> isa OTHER*/
+if (unlikely(!var16)) {
+var_class_name19 = type_standard__Int.name;
+PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name19);
+PRINT_ERROR(" (%s:%d)\n", FILE_standard__kernel, 537);
+fatal_exit(1);
+}
+var20 = var_res + var10;
+var14 = var20;
+goto RET_LABEL15;
+RET_LABEL15:(void)0;
+}
+}
+var_res = var14;
+} else {
+}
+if (var_v == NULL) {
+var21 = 0; /* is null */
+} else {
+var21 = 1; /* arg is null and recv is not */
+}
+if (0) {
+var22 = ((short int(*)(val* self, val* p0))((((long)var_v&3)?class_info[((long)var_v&3)]:var_v->class)->vft[COLOR_standard__kernel__Object___33d_61d]))(var_v, ((val*)NULL)); /* != on <var_v:nullable Object>*/
+var21 = var22;
+}
+if (var21){
+{
+var23 = ((long(*)(val* self))((((long)var_v&3)?class_info[((long)var_v&3)]:var_v->class)->vft[COLOR_standard__kernel__Object__hash]))(var_v); /* hash on <var_v:nullable Object(Object)>*/
+}
+{
+{ /* Inline kernel#Int#* (var23,11l) on <var23:Int> */
+/* Covariant cast for argument 0 (i) <11l:Int> isa OTHER */
+/* <11l:Int> isa OTHER */
+var26 = 1; /* easy <11l:Int> isa OTHER*/
+if (unlikely(!var26)) {
+var_class_name29 = type_standard__Int.name;
+PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name29);
+PRINT_ERROR(" (%s:%d)\n", FILE_standard__kernel, 541);
+fatal_exit(1);
+}
+var30 = var23 * 11l;
+var24 = var30;
+goto RET_LABEL25;
+RET_LABEL25:(void)0;
+}
+}
+{
+{ /* Inline kernel#Int#+ (var_res,var24) on <var_res:Int> */
+/* Covariant cast for argument 0 (i) <var24:Int> isa OTHER */
+/* <var24:Int> isa OTHER */
+var33 = 1; /* easy <var24:Int> isa OTHER*/
+if (unlikely(!var33)) {
+var_class_name36 = type_standard__Int.name;
+PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name36);
+PRINT_ERROR(" (%s:%d)\n", FILE_standard__kernel, 537);
+fatal_exit(1);
+}
+var37 = var_res + var24;
+var31 = var37;
+goto RET_LABEL32;
+RET_LABEL32:(void)0;
+}
+}
+var_res = var31;
+} else {
+}
+{
+((void(*)(val* self))((((long)var_3&3)?class_info[((long)var_3&3)]:var_3->class)->vft[COLOR_standard__abstract_collection__MapIterator__next]))(var_3); /* next on <var_3:MapIterator[nullable Object, nullable Object]>*/
+}
+} else {
+goto BREAK_label;
+}
+}
+BREAK_label: (void)0;
+{
+{ /* Inline abstract_collection#MapIterator#finish (var_3) on <var_3:MapIterator[nullable Object, nullable Object]> */
+RET_LABEL38:(void)0;
+}
+}
+var = var_res;
+goto RET_LABEL;
 RET_LABEL:;
 return var;
 }
@@ -1003,8 +1063,8 @@ val* var1 /* : MapIterator[nullable Object, nullable Object] */;
 var1 = self->attrs[COLOR_standard__abstract_collection__MapKeysIterator___original_iterator].val; /* _original_iterator on <self:MapKeysIterator[nullable Object, nullable Object]> */
 if (unlikely(var1 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _original_iterator");
-PRINT_ERROR(" (%s:%d)\n", FILE_standard__abstract_collection, 588);
-show_backtrace(1);
+PRINT_ERROR(" (%s:%d)\n", FILE_standard__abstract_collection, 715);
+fatal_exit(1);
 }
 var = var1;
 RET_LABEL:;
@@ -1022,16 +1082,16 @@ const char* var_class_name;
 type_struct = self->type->resolution_table->types[COLOR_standard__MapIterator__standard__MapKeysIterator___35dK__standard__MapKeysIterator___35dV];
 cltype = type_struct->color;
 idtype = type_struct->id;
-if(cltype >= p0->type->table_size) {
+if(cltype >= (((long)p0&3)?type_info[((long)p0&3)]:p0->type)->table_size) {
 var = 0;
 } else {
-var = p0->type->type_table[cltype] == idtype;
+var = (((long)p0&3)?type_info[((long)p0&3)]:p0->type)->type_table[cltype] == idtype;
 }
 if (unlikely(!var)) {
-var_class_name = p0 == NULL ? "null" : p0->type->name;
+var_class_name = p0 == NULL ? "null" : (((long)p0&3)?type_info[((long)p0&3)]:p0->type)->name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "MapIterator[K, V]", var_class_name);
-PRINT_ERROR(" (%s:%d)\n", FILE_standard__abstract_collection, 588);
-show_backtrace(1);
+PRINT_ERROR(" (%s:%d)\n", FILE_standard__abstract_collection, 715);
+fatal_exit(1);
 }
 self->attrs[COLOR_standard__abstract_collection__MapKeysIterator___original_iterator].val = p0; /* _original_iterator on <self:MapKeysIterator[nullable Object, nullable Object]> */
 RET_LABEL:;
@@ -1047,15 +1107,15 @@ short int var4 /* : Bool */;
 var3 = self->attrs[COLOR_standard__abstract_collection__MapKeysIterator___original_iterator].val; /* _original_iterator on <self:MapKeysIterator[nullable Object, nullable Object]> */
 if (unlikely(var3 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _original_iterator");
-PRINT_ERROR(" (%s:%d)\n", FILE_standard__abstract_collection, 588);
-show_backtrace(1);
+PRINT_ERROR(" (%s:%d)\n", FILE_standard__abstract_collection, 715);
+fatal_exit(1);
 }
 var1 = var3;
 RET_LABEL2:(void)0;
 }
 }
 {
-var4 = ((short int (*)(val* self))(var1->class->vft[COLOR_standard__abstract_collection__MapIterator__is_ok]))(var1) /* is_ok on <var1:MapIterator[nullable Object, nullable Object]>*/;
+var4 = ((short int(*)(val* self))((((long)var1&3)?class_info[((long)var1&3)]:var1->class)->vft[COLOR_standard__abstract_collection__MapIterator__is_ok]))(var1); /* is_ok on <var1:MapIterator[nullable Object, nullable Object]>*/
 }
 var = var4;
 goto RET_LABEL;
@@ -1071,15 +1131,15 @@ val* var2 /* : MapIterator[nullable Object, nullable Object] */;
 var2 = self->attrs[COLOR_standard__abstract_collection__MapKeysIterator___original_iterator].val; /* _original_iterator on <self:MapKeysIterator[nullable Object, nullable Object]> */
 if (unlikely(var2 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _original_iterator");
-PRINT_ERROR(" (%s:%d)\n", FILE_standard__abstract_collection, 588);
-show_backtrace(1);
+PRINT_ERROR(" (%s:%d)\n", FILE_standard__abstract_collection, 715);
+fatal_exit(1);
 }
 var = var2;
 RET_LABEL1:(void)0;
 }
 }
 {
-((void (*)(val* self))(var->class->vft[COLOR_standard__abstract_collection__MapIterator__next]))(var) /* next on <var:MapIterator[nullable Object, nullable Object]>*/;
+((void(*)(val* self))((((long)var&3)?class_info[((long)var&3)]:var->class)->vft[COLOR_standard__abstract_collection__MapIterator__next]))(var); /* next on <var:MapIterator[nullable Object, nullable Object]>*/
 }
 RET_LABEL:;
 }
@@ -1094,15 +1154,15 @@ val* var4 /* : nullable Object */;
 var3 = self->attrs[COLOR_standard__abstract_collection__MapKeysIterator___original_iterator].val; /* _original_iterator on <self:MapKeysIterator[nullable Object, nullable Object]> */
 if (unlikely(var3 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _original_iterator");
-PRINT_ERROR(" (%s:%d)\n", FILE_standard__abstract_collection, 588);
-show_backtrace(1);
+PRINT_ERROR(" (%s:%d)\n", FILE_standard__abstract_collection, 715);
+fatal_exit(1);
 }
 var1 = var3;
 RET_LABEL2:(void)0;
 }
 }
 {
-var4 = ((val* (*)(val* self))(var1->class->vft[COLOR_standard__abstract_collection__MapIterator__key]))(var1) /* key on <var1:MapIterator[nullable Object, nullable Object]>*/;
+var4 = ((val*(*)(val* self))((((long)var1&3)?class_info[((long)var1&3)]:var1->class)->vft[COLOR_standard__abstract_collection__MapIterator__key]))(var1); /* key on <var1:MapIterator[nullable Object, nullable Object]>*/
 }
 var = var4;
 goto RET_LABEL;
@@ -1112,7 +1172,7 @@ return var;
 /* method abstract_collection#MapKeysIterator#init for (self: MapKeysIterator[nullable Object, nullable Object]) */
 void standard___standard__MapKeysIterator___standard__kernel__Object__init(val* self) {
 {
-((void (*)(val* self))(self->class->vft[COLOR_standard___standard__MapKeysIterator___standard__kernel__Object__init]))(self) /* init on <self:MapKeysIterator[nullable Object, nullable Object]>*/;
+((void(*)(val* self))(self->class->vft[COLOR_standard___standard__MapKeysIterator___standard__kernel__Object__init]))(self); /* init on <self:MapKeysIterator[nullable Object, nullable Object]>*/
 }
 RET_LABEL:;
 }
@@ -1123,8 +1183,8 @@ val* var1 /* : MapIterator[nullable Object, nullable Object] */;
 var1 = self->attrs[COLOR_standard__abstract_collection__MapValuesIterator___original_iterator].val; /* _original_iterator on <self:MapValuesIterator[nullable Object, nullable Object]> */
 if (unlikely(var1 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _original_iterator");
-PRINT_ERROR(" (%s:%d)\n", FILE_standard__abstract_collection, 599);
-show_backtrace(1);
+PRINT_ERROR(" (%s:%d)\n", FILE_standard__abstract_collection, 726);
+fatal_exit(1);
 }
 var = var1;
 RET_LABEL:;
@@ -1142,16 +1202,16 @@ const char* var_class_name;
 type_struct = self->type->resolution_table->types[COLOR_standard__MapIterator__standard__MapValuesIterator___35dK__standard__MapValuesIterator___35dV];
 cltype = type_struct->color;
 idtype = type_struct->id;
-if(cltype >= p0->type->table_size) {
+if(cltype >= (((long)p0&3)?type_info[((long)p0&3)]:p0->type)->table_size) {
 var = 0;
 } else {
-var = p0->type->type_table[cltype] == idtype;
+var = (((long)p0&3)?type_info[((long)p0&3)]:p0->type)->type_table[cltype] == idtype;
 }
 if (unlikely(!var)) {
-var_class_name = p0 == NULL ? "null" : p0->type->name;
+var_class_name = p0 == NULL ? "null" : (((long)p0&3)?type_info[((long)p0&3)]:p0->type)->name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "MapIterator[K, V]", var_class_name);
-PRINT_ERROR(" (%s:%d)\n", FILE_standard__abstract_collection, 599);
-show_backtrace(1);
+PRINT_ERROR(" (%s:%d)\n", FILE_standard__abstract_collection, 726);
+fatal_exit(1);
 }
 self->attrs[COLOR_standard__abstract_collection__MapValuesIterator___original_iterator].val = p0; /* _original_iterator on <self:MapValuesIterator[nullable Object, nullable Object]> */
 RET_LABEL:;
@@ -1167,15 +1227,15 @@ short int var4 /* : Bool */;
 var3 = self->attrs[COLOR_standard__abstract_collection__MapValuesIterator___original_iterator].val; /* _original_iterator on <self:MapValuesIterator[nullable Object, nullable Object]> */
 if (unlikely(var3 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _original_iterator");
-PRINT_ERROR(" (%s:%d)\n", FILE_standard__abstract_collection, 599);
-show_backtrace(1);
+PRINT_ERROR(" (%s:%d)\n", FILE_standard__abstract_collection, 726);
+fatal_exit(1);
 }
 var1 = var3;
 RET_LABEL2:(void)0;
 }
 }
 {
-var4 = ((short int (*)(val* self))(var1->class->vft[COLOR_standard__abstract_collection__MapIterator__is_ok]))(var1) /* is_ok on <var1:MapIterator[nullable Object, nullable Object]>*/;
+var4 = ((short int(*)(val* self))((((long)var1&3)?class_info[((long)var1&3)]:var1->class)->vft[COLOR_standard__abstract_collection__MapIterator__is_ok]))(var1); /* is_ok on <var1:MapIterator[nullable Object, nullable Object]>*/
 }
 var = var4;
 goto RET_LABEL;
@@ -1191,15 +1251,15 @@ val* var2 /* : MapIterator[nullable Object, nullable Object] */;
 var2 = self->attrs[COLOR_standard__abstract_collection__MapValuesIterator___original_iterator].val; /* _original_iterator on <self:MapValuesIterator[nullable Object, nullable Object]> */
 if (unlikely(var2 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _original_iterator");
-PRINT_ERROR(" (%s:%d)\n", FILE_standard__abstract_collection, 599);
-show_backtrace(1);
+PRINT_ERROR(" (%s:%d)\n", FILE_standard__abstract_collection, 726);
+fatal_exit(1);
 }
 var = var2;
 RET_LABEL1:(void)0;
 }
 }
 {
-((void (*)(val* self))(var->class->vft[COLOR_standard__abstract_collection__MapIterator__next]))(var) /* next on <var:MapIterator[nullable Object, nullable Object]>*/;
+((void(*)(val* self))((((long)var&3)?class_info[((long)var&3)]:var->class)->vft[COLOR_standard__abstract_collection__MapIterator__next]))(var); /* next on <var:MapIterator[nullable Object, nullable Object]>*/
 }
 RET_LABEL:;
 }
@@ -1214,15 +1274,15 @@ val* var4 /* : nullable Object */;
 var3 = self->attrs[COLOR_standard__abstract_collection__MapValuesIterator___original_iterator].val; /* _original_iterator on <self:MapValuesIterator[nullable Object, nullable Object]> */
 if (unlikely(var3 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _original_iterator");
-PRINT_ERROR(" (%s:%d)\n", FILE_standard__abstract_collection, 599);
-show_backtrace(1);
+PRINT_ERROR(" (%s:%d)\n", FILE_standard__abstract_collection, 726);
+fatal_exit(1);
 }
 var1 = var3;
 RET_LABEL2:(void)0;
 }
 }
 {
-var4 = ((val* (*)(val* self))(var1->class->vft[COLOR_standard__abstract_collection__MapIterator__item]))(var1) /* item on <var1:MapIterator[nullable Object, nullable Object]>*/;
+var4 = ((val*(*)(val* self))((((long)var1&3)?class_info[((long)var1&3)]:var1->class)->vft[COLOR_standard__abstract_collection__MapIterator__item]))(var1); /* item on <var1:MapIterator[nullable Object, nullable Object]>*/
 }
 var = var4;
 goto RET_LABEL;
@@ -1232,7 +1292,7 @@ return var;
 /* method abstract_collection#MapValuesIterator#init for (self: MapValuesIterator[nullable Object, nullable Object]) */
 void standard___standard__MapValuesIterator___standard__kernel__Object__init(val* self) {
 {
-((void (*)(val* self))(self->class->vft[COLOR_standard___standard__MapValuesIterator___standard__kernel__Object__init]))(self) /* init on <self:MapValuesIterator[nullable Object, nullable Object]>*/;
+((void(*)(val* self))(self->class->vft[COLOR_standard___standard__MapValuesIterator___standard__kernel__Object__init]))(self); /* init on <self:MapValuesIterator[nullable Object, nullable Object]>*/
 }
 RET_LABEL:;
 }
@@ -1241,22 +1301,20 @@ val* standard___standard__SequenceRead___Collection__first(val* self) {
 val* var /* : nullable Object */;
 short int var1 /* : Bool */;
 short int var2 /* : Bool */;
-long var3 /* : Int */;
-val* var4 /* : nullable Object */;
+val* var3 /* : nullable Object */;
 {
-var1 = ((short int (*)(val* self))(self->class->vft[COLOR_standard__abstract_collection__Collection__is_empty]))(self) /* is_empty on <self:SequenceRead[nullable Object]>*/;
+var1 = ((short int(*)(val* self))((((long)self&3)?class_info[((long)self&3)]:self->class)->vft[COLOR_standard__abstract_collection__Collection__is_empty]))(self); /* is_empty on <self:SequenceRead[nullable Object]>*/
 }
 var2 = !var1;
 if (unlikely(!var2)) {
 PRINT_ERROR("Runtime error: %s", "Assert \'not_empty\' failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_standard__abstract_collection, 624);
-show_backtrace(1);
+PRINT_ERROR(" (%s:%d)\n", FILE_standard__abstract_collection, 751);
+fatal_exit(1);
 }
-var3 = 0;
 {
-var4 = ((val* (*)(val* self, long p0))(self->class->vft[COLOR_standard__abstract_collection__SequenceRead___91d_93d]))(self, var3) /* [] on <self:SequenceRead[nullable Object]>*/;
+var3 = ((val*(*)(val* self, long p0))((((long)self&3)?class_info[((long)self&3)]:self->class)->vft[COLOR_standard__abstract_collection__SequenceRead___91d_93d]))(self, 0l); /* [] on <self:SequenceRead[nullable Object]>*/
 }
-var = var4;
+var = var3;
 goto RET_LABEL;
 RET_LABEL:;
 return var;
@@ -1268,47 +1326,45 @@ short int var1 /* : Bool */;
 short int var2 /* : Bool */;
 long var3 /* : Int */;
 long var4 /* : Int */;
-long var5 /* : Int */;
-short int var7 /* : Bool */;
+short int var6 /* : Bool */;
 int cltype;
 int idtype;
 const char* var_class_name;
-long var8 /* : Int */;
-val* var9 /* : nullable Object */;
+long var7 /* : Int */;
+val* var8 /* : nullable Object */;
 {
-var1 = ((short int (*)(val* self))(self->class->vft[COLOR_standard__abstract_collection__Collection__is_empty]))(self) /* is_empty on <self:SequenceRead[nullable Object]>*/;
+var1 = ((short int(*)(val* self))((((long)self&3)?class_info[((long)self&3)]:self->class)->vft[COLOR_standard__abstract_collection__Collection__is_empty]))(self); /* is_empty on <self:SequenceRead[nullable Object]>*/
 }
 var2 = !var1;
 if (unlikely(!var2)) {
 PRINT_ERROR("Runtime error: %s", "Assert \'not_empty\' failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_standard__abstract_collection, 649);
-show_backtrace(1);
+PRINT_ERROR(" (%s:%d)\n", FILE_standard__abstract_collection, 776);
+fatal_exit(1);
 }
 {
-var3 = ((long (*)(val* self))(self->class->vft[COLOR_standard__abstract_collection__Collection__length]))(self) /* length on <self:SequenceRead[nullable Object]>*/;
+var3 = ((long(*)(val* self))((((long)self&3)?class_info[((long)self&3)]:self->class)->vft[COLOR_standard__abstract_collection__Collection__length]))(self); /* length on <self:SequenceRead[nullable Object]>*/
 }
-var4 = 1;
 {
-{ /* Inline kernel#Int#- (var3,var4) on <var3:Int> */
-/* Covariant cast for argument 0 (i) <var4:Int> isa OTHER */
-/* <var4:Int> isa OTHER */
-var7 = 1; /* easy <var4:Int> isa OTHER*/
-if (unlikely(!var7)) {
+{ /* Inline kernel#Int#- (var3,1l) on <var3:Int> */
+/* Covariant cast for argument 0 (i) <1l:Int> isa OTHER */
+/* <1l:Int> isa OTHER */
+var6 = 1; /* easy <1l:Int> isa OTHER*/
+if (unlikely(!var6)) {
 var_class_name = type_standard__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
-PRINT_ERROR(" (%s:%d)\n", FILE_standard__kernel, 416);
-show_backtrace(1);
+PRINT_ERROR(" (%s:%d)\n", FILE_standard__kernel, 540);
+fatal_exit(1);
 }
-var8 = var3 - var4;
-var5 = var8;
-goto RET_LABEL6;
-RET_LABEL6:(void)0;
+var7 = var3 - 1l;
+var4 = var7;
+goto RET_LABEL5;
+RET_LABEL5:(void)0;
 }
 }
 {
-var9 = ((val* (*)(val* self, long p0))(self->class->vft[COLOR_standard__abstract_collection__SequenceRead___91d_93d]))(self, var5) /* [] on <self:SequenceRead[nullable Object]>*/;
+var8 = ((val*(*)(val* self, long p0))((((long)self&3)?class_info[((long)self&3)]:self->class)->vft[COLOR_standard__abstract_collection__SequenceRead___91d_93d]))(self, var4); /* [] on <self:SequenceRead[nullable Object]>*/
 }
-var = var9;
+var = var8;
 goto RET_LABEL;
 RET_LABEL:;
 return var;
@@ -1316,42 +1372,13 @@ return var;
 /* method abstract_collection#SequenceRead#index_of for (self: SequenceRead[nullable Object], nullable Object): Int */
 long standard___standard__SequenceRead___index_of(val* self, val* p0) {
 long var /* : Int */;
-short int var1 /* : Bool */;
-int cltype;
-int idtype;
-const struct type* type_struct;
-short int is_nullable;
-const char* var_class_name;
 val* var_item /* var item: nullable Object */;
-long var2 /* : Int */;
-long var3 /* : Int */;
-/* Covariant cast for argument 0 (item) <p0:nullable Object> isa E */
-/* <p0:nullable Object> isa E */
-type_struct = self->type->resolution_table->types[COLOR_standard__SequenceRead___35dE];
-cltype = type_struct->color;
-idtype = type_struct->id;
-is_nullable = type_struct->is_nullable;
-if(p0 == NULL) {
-var1 = is_nullable;
-} else {
-if(cltype >= p0->type->table_size) {
-var1 = 0;
-} else {
-var1 = p0->type->type_table[cltype] == idtype;
-}
-}
-if (unlikely(!var1)) {
-var_class_name = p0 == NULL ? "null" : p0->type->name;
-PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "E", var_class_name);
-PRINT_ERROR(" (%s:%d)\n", FILE_standard__abstract_collection, 653);
-show_backtrace(1);
-}
+long var1 /* : Int */;
 var_item = p0;
-var2 = 0;
 {
-var3 = ((long (*)(val* self, val* p0, long p1))(self->class->vft[COLOR_standard__abstract_collection__SequenceRead__index_of_from]))(self, var_item, var2) /* index_of_from on <self:SequenceRead[nullable Object]>*/;
+var1 = ((long(*)(val* self, val* p0, long p1))((((long)self&3)?class_info[((long)self&3)]:self->class)->vft[COLOR_standard__abstract_collection__SequenceRead__index_of_from]))(self, var_item, 0l); /* index_of_from on <self:SequenceRead[nullable Object]>*/
 }
-var = var3;
+var = var1;
 goto RET_LABEL;
 RET_LABEL:;
 return var;
@@ -1359,69 +1386,40 @@ return var;
 /* method abstract_collection#SequenceRead#last_index_of for (self: SequenceRead[nullable Object], nullable Object): Int */
 long standard___standard__SequenceRead___last_index_of(val* self, val* p0) {
 long var /* : Int */;
-short int var1 /* : Bool */;
+val* var_item /* var item: nullable Object */;
+long var1 /* : Int */;
+long var2 /* : Int */;
+short int var4 /* : Bool */;
 int cltype;
 int idtype;
-const struct type* type_struct;
-short int is_nullable;
 const char* var_class_name;
-val* var_item /* var item: nullable Object */;
-long var2 /* : Int */;
-long var3 /* : Int */;
-long var4 /* : Int */;
-short int var6 /* : Bool */;
-int cltype7;
-int idtype8;
-const char* var_class_name9;
-long var10 /* : Int */;
-long var11 /* : Int */;
-/* Covariant cast for argument 0 (item) <p0:nullable Object> isa E */
-/* <p0:nullable Object> isa E */
-type_struct = self->type->resolution_table->types[COLOR_standard__SequenceRead___35dE];
-cltype = type_struct->color;
-idtype = type_struct->id;
-is_nullable = type_struct->is_nullable;
-if(p0 == NULL) {
-var1 = is_nullable;
-} else {
-if(cltype >= p0->type->table_size) {
-var1 = 0;
-} else {
-var1 = p0->type->type_table[cltype] == idtype;
-}
-}
-if (unlikely(!var1)) {
-var_class_name = p0 == NULL ? "null" : p0->type->name;
-PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "E", var_class_name);
-PRINT_ERROR(" (%s:%d)\n", FILE_standard__abstract_collection, 662);
-show_backtrace(1);
-}
+long var5 /* : Int */;
+long var6 /* : Int */;
 var_item = p0;
 {
-var2 = ((long (*)(val* self))(self->class->vft[COLOR_standard__abstract_collection__Collection__length]))(self) /* length on <self:SequenceRead[nullable Object]>*/;
-}
-var3 = 1;
-{
-{ /* Inline kernel#Int#- (var2,var3) on <var2:Int> */
-/* Covariant cast for argument 0 (i) <var3:Int> isa OTHER */
-/* <var3:Int> isa OTHER */
-var6 = 1; /* easy <var3:Int> isa OTHER*/
-if (unlikely(!var6)) {
-var_class_name9 = type_standard__Int.name;
-PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name9);
-PRINT_ERROR(" (%s:%d)\n", FILE_standard__kernel, 416);
-show_backtrace(1);
-}
-var10 = var2 - var3;
-var4 = var10;
-goto RET_LABEL5;
-RET_LABEL5:(void)0;
-}
+var1 = ((long(*)(val* self))((((long)self&3)?class_info[((long)self&3)]:self->class)->vft[COLOR_standard__abstract_collection__Collection__length]))(self); /* length on <self:SequenceRead[nullable Object]>*/
 }
 {
-var11 = ((long (*)(val* self, val* p0, long p1))(self->class->vft[COLOR_standard__abstract_collection__SequenceRead__last_index_of_from]))(self, var_item, var4) /* last_index_of_from on <self:SequenceRead[nullable Object]>*/;
+{ /* Inline kernel#Int#- (var1,1l) on <var1:Int> */
+/* Covariant cast for argument 0 (i) <1l:Int> isa OTHER */
+/* <1l:Int> isa OTHER */
+var4 = 1; /* easy <1l:Int> isa OTHER*/
+if (unlikely(!var4)) {
+var_class_name = type_standard__Int.name;
+PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
+PRINT_ERROR(" (%s:%d)\n", FILE_standard__kernel, 540);
+fatal_exit(1);
 }
-var = var11;
+var5 = var1 - 1l;
+var2 = var5;
+goto RET_LABEL3;
+RET_LABEL3:(void)0;
+}
+}
+{
+var6 = ((long(*)(val* self, val* p0, long p1))((((long)self&3)?class_info[((long)self&3)]:self->class)->vft[COLOR_standard__abstract_collection__SequenceRead__last_index_of_from]))(self, var_item, var2); /* last_index_of_from on <self:SequenceRead[nullable Object]>*/
+}
+var = var6;
 goto RET_LABEL;
 RET_LABEL:;
 return var;
@@ -1429,152 +1427,119 @@ return var;
 /* method abstract_collection#SequenceRead#index_of_from for (self: SequenceRead[nullable Object], nullable Object, Int): Int */
 long standard___standard__SequenceRead___index_of_from(val* self, val* p0, long p1) {
 long var /* : Int */;
-short int var1 /* : Bool */;
-int cltype;
-int idtype;
-const struct type* type_struct;
-short int is_nullable;
-const char* var_class_name;
 val* var_item /* var item: nullable Object */;
 long var_pos /* var pos: Int */;
-long var2 /* : Int */;
 long var_p /* var p: Int */;
-val* var3 /* : Iterator[nullable Object] */;
+val* var1 /* : Iterator[nullable Object] */;
 val* var_i /* var i: IndexedIterator[nullable Object] */;
+short int var2 /* : Bool */;
+short int var3 /* : Bool */;
 short int var4 /* : Bool */;
-short int var5 /* : Bool */;
 short int var6 /* : Bool */;
-short int var8 /* : Bool */;
-int cltype9;
-int idtype10;
-const char* var_class_name11;
-short int var12 /* : Bool */;
+int cltype;
+int idtype;
+const char* var_class_name;
+short int var7 /* : Bool */;
 short int var_ /* var : Bool */;
-val* var13 /* : nullable Object */;
+val* var8 /* : nullable Object */;
+short int var9 /* : Bool */;
+short int var10 /* : Bool */;
+long var11 /* : Int */;
+long var12 /* : Int */;
 short int var14 /* : Bool */;
-short int var15 /* : Bool */;
-long var16 /* : Int */;
-long var17 /* : Int */;
+int cltype15;
+int idtype16;
+const char* var_class_name17;
 long var18 /* : Int */;
-short int var20 /* : Bool */;
-int cltype21;
-int idtype22;
-const char* var_class_name23;
-long var24 /* : Int */;
-long var25 /* : Int */;
-long var26 /* : Int */;
-long var28 /* : Int */;
-/* Covariant cast for argument 0 (item) <p0:nullable Object> isa E */
-/* <p0:nullable Object> isa E */
-type_struct = self->type->resolution_table->types[COLOR_standard__SequenceRead___35dE];
-cltype = type_struct->color;
-idtype = type_struct->id;
-is_nullable = type_struct->is_nullable;
-if(p0 == NULL) {
-var1 = is_nullable;
-} else {
-if(cltype >= p0->type->table_size) {
-var1 = 0;
-} else {
-var1 = p0->type->type_table[cltype] == idtype;
-}
-}
-if (unlikely(!var1)) {
-var_class_name = p0 == NULL ? "null" : p0->type->name;
-PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "E", var_class_name);
-PRINT_ERROR(" (%s:%d)\n", FILE_standard__abstract_collection, 671);
-show_backtrace(1);
-}
+long var19 /* : Int */;
+long var21 /* : Int */;
 var_item = p0;
 var_pos = p1;
-var2 = 0;
-var_p = var2;
+var_p = 0l;
 {
-var3 = ((val* (*)(val* self))(self->class->vft[COLOR_standard__abstract_collection__Collection__iterator]))(self) /* iterator on <self:SequenceRead[nullable Object]>*/;
+var1 = ((val*(*)(val* self))((((long)self&3)?class_info[((long)self&3)]:self->class)->vft[COLOR_standard__abstract_collection__Collection__iterator]))(self); /* iterator on <self:SequenceRead[nullable Object]>*/
 }
-var_i = var3;
+var_i = var1;
 for(;;) {
 {
-var4 = ((short int (*)(val* self))(var_i->class->vft[COLOR_standard__abstract_collection__Iterator__is_ok]))(var_i) /* is_ok on <var_i:IndexedIterator[nullable Object]>*/;
+var2 = ((short int(*)(val* self))((((long)var_i&3)?class_info[((long)var_i&3)]:var_i->class)->vft[COLOR_standard__abstract_collection__Iterator__is_ok]))(var_i); /* is_ok on <var_i:IndexedIterator[nullable Object]>*/
 }
-if (var4){
+if (var2){
 {
 { /* Inline kernel#Int#>= (var_p,var_pos) on <var_p:Int> */
 /* Covariant cast for argument 0 (i) <var_pos:Int> isa OTHER */
 /* <var_pos:Int> isa OTHER */
-var8 = 1; /* easy <var_pos:Int> isa OTHER*/
-if (unlikely(!var8)) {
-var_class_name11 = type_standard__Int.name;
-PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name11);
-PRINT_ERROR(" (%s:%d)\n", FILE_standard__kernel, 411);
-show_backtrace(1);
+var6 = 1; /* easy <var_pos:Int> isa OTHER*/
+if (unlikely(!var6)) {
+var_class_name = type_standard__Int.name;
+PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
+PRINT_ERROR(" (%s:%d)\n", FILE_standard__kernel, 535);
+fatal_exit(1);
 }
-var12 = var_p >= var_pos;
-var6 = var12;
-goto RET_LABEL7;
-RET_LABEL7:(void)0;
+var7 = var_p >= var_pos;
+var4 = var7;
+goto RET_LABEL5;
+RET_LABEL5:(void)0;
 }
 }
-var_ = var6;
-if (var6){
+var_ = var4;
+if (var4){
 {
-var13 = ((val* (*)(val* self))(var_i->class->vft[COLOR_standard__abstract_collection__Iterator__item]))(var_i) /* item on <var_i:IndexedIterator[nullable Object]>*/;
+var8 = ((val*(*)(val* self))((((long)var_i&3)?class_info[((long)var_i&3)]:var_i->class)->vft[COLOR_standard__abstract_collection__Iterator__item]))(var_i); /* item on <var_i:IndexedIterator[nullable Object]>*/
 }
-if (var13 == NULL) {
-var14 = (var_item == NULL);
+if (var8 == NULL) {
+var9 = (var_item == NULL);
 } else {
-var15 = ((short int (*)(val* self, val* p0))(var13->class->vft[COLOR_standard__kernel__Object___61d_61d]))(var13, var_item) /* == on <var13:nullable Object>*/;
-var14 = var15;
+var10 = ((short int(*)(val* self, val* p0))((((long)var8&3)?class_info[((long)var8&3)]:var8->class)->vft[COLOR_standard__kernel__Object___61d_61d]))(var8, var_item); /* == on <var8:nullable Object>*/
+var9 = var10;
 }
-var5 = var14;
+var3 = var9;
 } else {
-var5 = var_;
+var3 = var_;
 }
-if (var5){
+if (var3){
 {
-var16 = ((long (*)(val* self))(var_i->class->vft[COLOR_standard__abstract_collection__IndexedIterator__index]))(var_i) /* index on <var_i:IndexedIterator[nullable Object]>*/;
+var11 = ((long(*)(val* self))((((long)var_i&3)?class_info[((long)var_i&3)]:var_i->class)->vft[COLOR_standard__abstract_collection__IndexedIterator__index]))(var_i); /* index on <var_i:IndexedIterator[nullable Object]>*/
 }
-var = var16;
+var = var11;
 goto RET_LABEL;
 } else {
 }
 {
-((void (*)(val* self))(var_i->class->vft[COLOR_standard__abstract_collection__Iterator__next]))(var_i) /* next on <var_i:IndexedIterator[nullable Object]>*/;
+((void(*)(val* self))((((long)var_i&3)?class_info[((long)var_i&3)]:var_i->class)->vft[COLOR_standard__abstract_collection__Iterator__next]))(var_i); /* next on <var_i:IndexedIterator[nullable Object]>*/
 }
-var17 = 1;
 {
-{ /* Inline kernel#Int#+ (var_p,var17) on <var_p:Int> */
-/* Covariant cast for argument 0 (i) <var17:Int> isa OTHER */
-/* <var17:Int> isa OTHER */
-var20 = 1; /* easy <var17:Int> isa OTHER*/
-if (unlikely(!var20)) {
-var_class_name23 = type_standard__Int.name;
-PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name23);
-PRINT_ERROR(" (%s:%d)\n", FILE_standard__kernel, 413);
-show_backtrace(1);
+{ /* Inline kernel#Int#+ (var_p,1l) on <var_p:Int> */
+/* Covariant cast for argument 0 (i) <1l:Int> isa OTHER */
+/* <1l:Int> isa OTHER */
+var14 = 1; /* easy <1l:Int> isa OTHER*/
+if (unlikely(!var14)) {
+var_class_name17 = type_standard__Int.name;
+PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name17);
+PRINT_ERROR(" (%s:%d)\n", FILE_standard__kernel, 537);
+fatal_exit(1);
 }
-var24 = var_p + var17;
-var18 = var24;
-goto RET_LABEL19;
-RET_LABEL19:(void)0;
+var18 = var_p + 1l;
+var12 = var18;
+goto RET_LABEL13;
+RET_LABEL13:(void)0;
 }
 }
-var_p = var18;
+var_p = var12;
 } else {
 goto BREAK_label;
 }
 }
 BREAK_label: (void)0;
-var25 = 1;
 {
-{ /* Inline kernel#Int#unary - (var25) on <var25:Int> */
-var28 = -var25;
-var26 = var28;
-goto RET_LABEL27;
-RET_LABEL27:(void)0;
+{ /* Inline kernel#Int#unary - (1l) on <1l:Int> */
+var21 = -1l;
+var19 = var21;
+goto RET_LABEL20;
+RET_LABEL20:(void)0;
 }
 }
-var = var26;
+var = var19;
 goto RET_LABEL;
 RET_LABEL:;
 return var;
@@ -1582,139 +1547,106 @@ return var;
 /* method abstract_collection#SequenceRead#last_index_of_from for (self: SequenceRead[nullable Object], nullable Object, Int): Int */
 long standard___standard__SequenceRead___last_index_of_from(val* self, val* p0, long p1) {
 long var /* : Int */;
-short int var1 /* : Bool */;
-int cltype;
-int idtype;
-const struct type* type_struct;
-short int is_nullable;
-const char* var_class_name;
 val* var_item /* var item: nullable Object */;
 long var_pos /* var pos: Int */;
-long var2 /* : Int */;
+long var1 /* : Int */;
 long var3 /* : Int */;
-long var5 /* : Int */;
 long var_res /* var res: Int */;
-long var6 /* : Int */;
 long var_p /* var p: Int */;
-val* var7 /* : Iterator[nullable Object] */;
+val* var4 /* : Iterator[nullable Object] */;
 val* var_i /* var i: IndexedIterator[nullable Object] */;
+short int var5 /* : Bool */;
+short int var6 /* : Bool */;
 short int var8 /* : Bool */;
+int cltype;
+int idtype;
+const char* var_class_name;
 short int var9 /* : Bool */;
+val* var10 /* : nullable Object */;
 short int var11 /* : Bool */;
-int cltype12;
-int idtype13;
-const char* var_class_name14;
+short int var12 /* : Bool */;
+long var13 /* : Int */;
 short int var15 /* : Bool */;
-val* var16 /* : nullable Object */;
-short int var17 /* : Bool */;
-short int var18 /* : Bool */;
+int cltype16;
+int idtype17;
+const char* var_class_name18;
 long var19 /* : Int */;
-long var20 /* : Int */;
-short int var22 /* : Bool */;
-int cltype23;
-int idtype24;
-const char* var_class_name25;
-long var26 /* : Int */;
-/* Covariant cast for argument 0 (item) <p0:nullable Object> isa E */
-/* <p0:nullable Object> isa E */
-type_struct = self->type->resolution_table->types[COLOR_standard__SequenceRead___35dE];
-cltype = type_struct->color;
-idtype = type_struct->id;
-is_nullable = type_struct->is_nullable;
-if(p0 == NULL) {
-var1 = is_nullable;
-} else {
-if(cltype >= p0->type->table_size) {
-var1 = 0;
-} else {
-var1 = p0->type->type_table[cltype] == idtype;
-}
-}
-if (unlikely(!var1)) {
-var_class_name = p0 == NULL ? "null" : p0->type->name;
-PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "E", var_class_name);
-PRINT_ERROR(" (%s:%d)\n", FILE_standard__abstract_collection, 691);
-show_backtrace(1);
-}
 var_item = p0;
 var_pos = p1;
-var2 = 1;
 {
-{ /* Inline kernel#Int#unary - (var2) on <var2:Int> */
-var5 = -var2;
-var3 = var5;
-goto RET_LABEL4;
-RET_LABEL4:(void)0;
+{ /* Inline kernel#Int#unary - (1l) on <1l:Int> */
+var3 = -1l;
+var1 = var3;
+goto RET_LABEL2;
+RET_LABEL2:(void)0;
 }
 }
-var_res = var3;
-var6 = 0;
-var_p = var6;
+var_res = var1;
+var_p = 0l;
 {
-var7 = ((val* (*)(val* self))(self->class->vft[COLOR_standard__abstract_collection__Collection__iterator]))(self) /* iterator on <self:SequenceRead[nullable Object]>*/;
+var4 = ((val*(*)(val* self))((((long)self&3)?class_info[((long)self&3)]:self->class)->vft[COLOR_standard__abstract_collection__Collection__iterator]))(self); /* iterator on <self:SequenceRead[nullable Object]>*/
 }
-var_i = var7;
+var_i = var4;
 for(;;) {
 {
-var8 = ((short int (*)(val* self))(var_i->class->vft[COLOR_standard__abstract_collection__Iterator__is_ok]))(var_i) /* is_ok on <var_i:IndexedIterator[nullable Object]>*/;
+var5 = ((short int(*)(val* self))((((long)var_i&3)?class_info[((long)var_i&3)]:var_i->class)->vft[COLOR_standard__abstract_collection__Iterator__is_ok]))(var_i); /* is_ok on <var_i:IndexedIterator[nullable Object]>*/
 }
-if (var8){
+if (var5){
 {
 { /* Inline kernel#Int#> (var_p,var_pos) on <var_p:Int> */
 /* Covariant cast for argument 0 (i) <var_pos:Int> isa OTHER */
 /* <var_pos:Int> isa OTHER */
-var11 = 1; /* easy <var_pos:Int> isa OTHER*/
-if (unlikely(!var11)) {
-var_class_name14 = type_standard__Int.name;
-PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name14);
-PRINT_ERROR(" (%s:%d)\n", FILE_standard__kernel, 412);
-show_backtrace(1);
+var8 = 1; /* easy <var_pos:Int> isa OTHER*/
+if (unlikely(!var8)) {
+var_class_name = type_standard__Int.name;
+PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
+PRINT_ERROR(" (%s:%d)\n", FILE_standard__kernel, 536);
+fatal_exit(1);
 }
-var15 = var_p > var_pos;
-var9 = var15;
-goto RET_LABEL10;
-RET_LABEL10:(void)0;
+var9 = var_p > var_pos;
+var6 = var9;
+goto RET_LABEL7;
+RET_LABEL7:(void)0;
 }
 }
-if (var9){
+if (var6){
 goto BREAK_label;
 } else {
 }
 {
-var16 = ((val* (*)(val* self))(var_i->class->vft[COLOR_standard__abstract_collection__Iterator__item]))(var_i) /* item on <var_i:IndexedIterator[nullable Object]>*/;
+var10 = ((val*(*)(val* self))((((long)var_i&3)?class_info[((long)var_i&3)]:var_i->class)->vft[COLOR_standard__abstract_collection__Iterator__item]))(var_i); /* item on <var_i:IndexedIterator[nullable Object]>*/
 }
-if (var16 == NULL) {
-var17 = (var_item == NULL);
+if (var10 == NULL) {
+var11 = (var_item == NULL);
 } else {
-var18 = ((short int (*)(val* self, val* p0))(var16->class->vft[COLOR_standard__kernel__Object___61d_61d]))(var16, var_item) /* == on <var16:nullable Object>*/;
-var17 = var18;
+var12 = ((short int(*)(val* self, val* p0))((((long)var10&3)?class_info[((long)var10&3)]:var10->class)->vft[COLOR_standard__kernel__Object___61d_61d]))(var10, var_item); /* == on <var10:nullable Object>*/
+var11 = var12;
 }
-if (var17){
+if (var11){
 var_res = var_p;
 } else {
 }
 {
-((void (*)(val* self))(var_i->class->vft[COLOR_standard__abstract_collection__Iterator__next]))(var_i) /* next on <var_i:IndexedIterator[nullable Object]>*/;
+((void(*)(val* self))((((long)var_i&3)?class_info[((long)var_i&3)]:var_i->class)->vft[COLOR_standard__abstract_collection__Iterator__next]))(var_i); /* next on <var_i:IndexedIterator[nullable Object]>*/
 }
-var19 = 1;
 {
-{ /* Inline kernel#Int#+ (var_p,var19) on <var_p:Int> */
-/* Covariant cast for argument 0 (i) <var19:Int> isa OTHER */
-/* <var19:Int> isa OTHER */
-var22 = 1; /* easy <var19:Int> isa OTHER*/
-if (unlikely(!var22)) {
-var_class_name25 = type_standard__Int.name;
-PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name25);
-PRINT_ERROR(" (%s:%d)\n", FILE_standard__kernel, 413);
-show_backtrace(1);
+{ /* Inline kernel#Int#+ (var_p,1l) on <var_p:Int> */
+/* Covariant cast for argument 0 (i) <1l:Int> isa OTHER */
+/* <1l:Int> isa OTHER */
+var15 = 1; /* easy <1l:Int> isa OTHER*/
+if (unlikely(!var15)) {
+var_class_name18 = type_standard__Int.name;
+PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name18);
+PRINT_ERROR(" (%s:%d)\n", FILE_standard__kernel, 537);
+fatal_exit(1);
 }
-var26 = var_p + var19;
-var20 = var26;
-goto RET_LABEL21;
-RET_LABEL21:(void)0;
+var19 = var_p + 1l;
+var13 = var19;
+goto RET_LABEL14;
+RET_LABEL14:(void)0;
 }
 }
-var_p = var20;
+var_p = var13;
 } else {
 goto BREAK_label;
 }
@@ -1733,35 +1665,29 @@ short int var1 /* : Bool */;
 int cltype;
 int idtype;
 short int var2 /* : Bool */;
-short int var3 /* : Bool */;
-long var4 /* : Int */;
+long var3 /* : Int */;
 long var_l /* var l: Int */;
-long var5 /* : Int */;
-short int var6 /* : Bool */;
+long var4 /* : Int */;
+short int var5 /* : Bool */;
+short int var7 /* : Bool */;
 short int var8 /* : Bool */;
-short int var9 /* : Bool */;
-short int var10 /* : Bool */;
-long var11 /* : Int */;
 long var_i /* var i: Int */;
-short int var12 /* : Bool */;
-short int var14 /* : Bool */;
-int cltype15;
-int idtype16;
+short int var9 /* : Bool */;
+short int var11 /* : Bool */;
+int cltype12;
+int idtype13;
 const char* var_class_name;
+short int var14 /* : Bool */;
+val* var15 /* : nullable Object */;
+val* var16 /* : nullable Object */;
 short int var17 /* : Bool */;
-val* var18 /* : nullable Object */;
-val* var19 /* : nullable Object */;
-short int var20 /* : Bool */;
+short int var18 /* : Bool */;
+long var19 /* : Int */;
 short int var21 /* : Bool */;
-short int var22 /* : Bool */;
-long var23 /* : Int */;
-long var24 /* : Int */;
-short int var26 /* : Bool */;
-int cltype27;
-int idtype28;
-const char* var_class_name29;
-long var30 /* : Int */;
-short int var31 /* : Bool */;
+int cltype22;
+int idtype23;
+const char* var_class_name24;
+long var25 /* : Int */;
 var_o = p0;
 /* <var_o:nullable Object> isa SequenceRead[nullable Object] */
 cltype = type_standard__SequenceRead__nullable__standard__Object.color;
@@ -1769,106 +1695,100 @@ idtype = type_standard__SequenceRead__nullable__standard__Object.id;
 if(var_o == NULL) {
 var1 = 0;
 } else {
-if(cltype >= var_o->type->table_size) {
+if(cltype >= (((long)var_o&3)?type_info[((long)var_o&3)]:var_o->type)->table_size) {
 var1 = 0;
 } else {
-var1 = var_o->type->type_table[cltype] == idtype;
+var1 = (((long)var_o&3)?type_info[((long)var_o&3)]:var_o->type)->type_table[cltype] == idtype;
 }
 }
 var2 = !var1;
 if (var2){
-var3 = 0;
-var = var3;
+var = 0;
 goto RET_LABEL;
 } else {
 }
 {
-var4 = ((long (*)(val* self))(self->class->vft[COLOR_standard__abstract_collection__Collection__length]))(self) /* length on <self:SequenceRead[nullable Object]>*/;
+var3 = ((long(*)(val* self))((((long)self&3)?class_info[((long)self&3)]:self->class)->vft[COLOR_standard__abstract_collection__Collection__length]))(self); /* length on <self:SequenceRead[nullable Object]>*/
 }
-var_l = var4;
+var_l = var3;
 {
-var5 = ((long (*)(val* self))(var_o->class->vft[COLOR_standard__abstract_collection__Collection__length]))(var_o) /* length on <var_o:nullable Object(SequenceRead[nullable Object])>*/;
+var4 = ((long(*)(val* self))((((long)var_o&3)?class_info[((long)var_o&3)]:var_o->class)->vft[COLOR_standard__abstract_collection__Collection__length]))(var_o); /* length on <var_o:nullable Object(SequenceRead[nullable Object])>*/
 }
 {
-{ /* Inline kernel#Int#!= (var5,var_l) on <var5:Int> */
-var8 = var5 == var_l;
-var9 = !var8;
-var6 = var9;
-goto RET_LABEL7;
-RET_LABEL7:(void)0;
+{ /* Inline kernel#Int#!= (var4,var_l) on <var4:Int> */
+var7 = var4 == var_l;
+var8 = !var7;
+var5 = var8;
+goto RET_LABEL6;
+RET_LABEL6:(void)0;
 }
 }
-if (var6){
-var10 = 0;
-var = var10;
+if (var5){
+var = 0;
 goto RET_LABEL;
 } else {
 }
-var11 = 0;
-var_i = var11;
+var_i = 0l;
 for(;;) {
 {
 { /* Inline kernel#Int#< (var_i,var_l) on <var_i:Int> */
 /* Covariant cast for argument 0 (i) <var_l:Int> isa OTHER */
 /* <var_l:Int> isa OTHER */
-var14 = 1; /* easy <var_l:Int> isa OTHER*/
-if (unlikely(!var14)) {
+var11 = 1; /* easy <var_l:Int> isa OTHER*/
+if (unlikely(!var11)) {
 var_class_name = type_standard__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
-PRINT_ERROR(" (%s:%d)\n", FILE_standard__kernel, 410);
-show_backtrace(1);
+PRINT_ERROR(" (%s:%d)\n", FILE_standard__kernel, 534);
+fatal_exit(1);
 }
-var17 = var_i < var_l;
-var12 = var17;
-goto RET_LABEL13;
-RET_LABEL13:(void)0;
+var14 = var_i < var_l;
+var9 = var14;
+goto RET_LABEL10;
+RET_LABEL10:(void)0;
 }
 }
-if (var12){
+if (var9){
 {
-var18 = ((val* (*)(val* self, long p0))(self->class->vft[COLOR_standard__abstract_collection__SequenceRead___91d_93d]))(self, var_i) /* [] on <self:SequenceRead[nullable Object]>*/;
+var15 = ((val*(*)(val* self, long p0))((((long)self&3)?class_info[((long)self&3)]:self->class)->vft[COLOR_standard__abstract_collection__SequenceRead___91d_93d]))(self, var_i); /* [] on <self:SequenceRead[nullable Object]>*/
 }
 {
-var19 = ((val* (*)(val* self, long p0))(var_o->class->vft[COLOR_standard__abstract_collection__SequenceRead___91d_93d]))(var_o, var_i) /* [] on <var_o:nullable Object(SequenceRead[nullable Object])>*/;
+var16 = ((val*(*)(val* self, long p0))((((long)var_o&3)?class_info[((long)var_o&3)]:var_o->class)->vft[COLOR_standard__abstract_collection__SequenceRead___91d_93d]))(var_o, var_i); /* [] on <var_o:nullable Object(SequenceRead[nullable Object])>*/
 }
-if (var18 == NULL) {
-var20 = (var19 != NULL);
+if (var15 == NULL) {
+var17 = (var16 != NULL);
 } else {
-var21 = ((short int (*)(val* self, val* p0))(var18->class->vft[COLOR_standard__kernel__Object___33d_61d]))(var18, var19) /* != on <var18:nullable Object>*/;
-var20 = var21;
+var18 = ((short int(*)(val* self, val* p0))((((long)var15&3)?class_info[((long)var15&3)]:var15->class)->vft[COLOR_standard__kernel__Object___33d_61d]))(var15, var16); /* != on <var15:nullable Object>*/
+var17 = var18;
 }
-if (var20){
-var22 = 0;
-var = var22;
+if (var17){
+var = 0;
 goto RET_LABEL;
 } else {
 }
-var23 = 1;
 {
-{ /* Inline kernel#Int#+ (var_i,var23) on <var_i:Int> */
-/* Covariant cast for argument 0 (i) <var23:Int> isa OTHER */
-/* <var23:Int> isa OTHER */
-var26 = 1; /* easy <var23:Int> isa OTHER*/
-if (unlikely(!var26)) {
-var_class_name29 = type_standard__Int.name;
-PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name29);
-PRINT_ERROR(" (%s:%d)\n", FILE_standard__kernel, 413);
-show_backtrace(1);
+{ /* Inline kernel#Int#+ (var_i,1l) on <var_i:Int> */
+/* Covariant cast for argument 0 (i) <1l:Int> isa OTHER */
+/* <1l:Int> isa OTHER */
+var21 = 1; /* easy <1l:Int> isa OTHER*/
+if (unlikely(!var21)) {
+var_class_name24 = type_standard__Int.name;
+PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name24);
+PRINT_ERROR(" (%s:%d)\n", FILE_standard__kernel, 537);
+fatal_exit(1);
 }
-var30 = var_i + var23;
-var24 = var30;
-goto RET_LABEL25;
-RET_LABEL25:(void)0;
+var25 = var_i + 1l;
+var19 = var25;
+goto RET_LABEL20;
+RET_LABEL20:(void)0;
 }
 }
-var_i = var24;
+var_i = var19;
 } else {
 goto BREAK_label;
 }
 }
 BREAK_label: (void)0;
-var31 = 1;
-var = var31;
+var = 1;
 goto RET_LABEL;
 RET_LABEL:;
 return var;
@@ -1878,156 +1798,144 @@ long standard___standard__SequenceRead___standard__kernel__Object__hash(val* sel
 long var /* : Int */;
 long var1 /* : Int */;
 long var2 /* : Int */;
-long var3 /* : Int */;
-short int var5 /* : Bool */;
+short int var4 /* : Bool */;
 int cltype;
 int idtype;
 const char* var_class_name;
-long var6 /* : Int */;
+long var5 /* : Int */;
 long var_res /* var res: Int */;
 val* var_ /* var : SequenceRead[nullable Object] */;
-val* var7 /* : Iterator[nullable Object] */;
-val* var_8 /* var : IndexedIterator[nullable Object] */;
-short int var9 /* : Bool */;
-val* var10 /* : nullable Object */;
+val* var6 /* : Iterator[nullable Object] */;
+val* var_7 /* var : IndexedIterator[nullable Object] */;
+short int var8 /* : Bool */;
+val* var9 /* : nullable Object */;
 val* var_e /* var e: nullable Object */;
-long var11 /* : Int */;
-long var12 /* : Int */;
-short int var14 /* : Bool */;
-int cltype15;
-int idtype16;
-const char* var_class_name17;
-long var18 /* : Int */;
-long var19 /* : Int */;
-long var20 /* : Int */;
-short int var22 /* : Bool */;
-int cltype23;
-int idtype24;
-const char* var_class_name25;
+long var10 /* : Int */;
+short int var12 /* : Bool */;
+int cltype13;
+int idtype14;
+const char* var_class_name15;
+long var16 /* : Int */;
+long var17 /* : Int */;
+short int var19 /* : Bool */;
+int cltype20;
+int idtype21;
+const char* var_class_name22;
+long var23 /* : Int */;
+short int var24 /* : Bool */;
+short int var25 /* : Bool */;
 long var26 /* : Int */;
-val* var27 /* : null */;
-short int var28 /* : Bool */;
+long var27 /* : Int */;
 short int var29 /* : Bool */;
-long var30 /* : Int */;
-long var31 /* : Int */;
-short int var33 /* : Bool */;
-int cltype34;
-int idtype35;
-const char* var_class_name36;
-long var37 /* : Int */;
-var1 = 17;
+int cltype30;
+int idtype31;
+const char* var_class_name32;
+long var33 /* : Int */;
 {
-var2 = ((long (*)(val* self))(self->class->vft[COLOR_standard__abstract_collection__Collection__length]))(self) /* length on <self:SequenceRead[nullable Object]>*/;
+var1 = ((long(*)(val* self))((((long)self&3)?class_info[((long)self&3)]:self->class)->vft[COLOR_standard__abstract_collection__Collection__length]))(self); /* length on <self:SequenceRead[nullable Object]>*/
 }
 {
-{ /* Inline kernel#Int#+ (var1,var2) on <var1:Int> */
-/* Covariant cast for argument 0 (i) <var2:Int> isa OTHER */
-/* <var2:Int> isa OTHER */
-var5 = 1; /* easy <var2:Int> isa OTHER*/
-if (unlikely(!var5)) {
+{ /* Inline kernel#Int#+ (17l,var1) on <17l:Int> */
+/* Covariant cast for argument 0 (i) <var1:Int> isa OTHER */
+/* <var1:Int> isa OTHER */
+var4 = 1; /* easy <var1:Int> isa OTHER*/
+if (unlikely(!var4)) {
 var_class_name = type_standard__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
-PRINT_ERROR(" (%s:%d)\n", FILE_standard__kernel, 413);
-show_backtrace(1);
+PRINT_ERROR(" (%s:%d)\n", FILE_standard__kernel, 537);
+fatal_exit(1);
 }
-var6 = var1 + var2;
-var3 = var6;
-goto RET_LABEL4;
-RET_LABEL4:(void)0;
+var5 = 17l + var1;
+var2 = var5;
+goto RET_LABEL3;
+RET_LABEL3:(void)0;
 }
 }
-var_res = var3;
+var_res = var2;
 var_ = self;
 {
-var7 = ((val* (*)(val* self))(var_->class->vft[COLOR_standard__abstract_collection__Collection__iterator]))(var_) /* iterator on <var_:SequenceRead[nullable Object]>*/;
+var6 = ((val*(*)(val* self))((((long)var_&3)?class_info[((long)var_&3)]:var_->class)->vft[COLOR_standard__abstract_collection__Collection__iterator]))(var_); /* iterator on <var_:SequenceRead[nullable Object]>*/
 }
-var_8 = var7;
+var_7 = var6;
 for(;;) {
 {
-var9 = ((short int (*)(val* self))(var_8->class->vft[COLOR_standard__abstract_collection__Iterator__is_ok]))(var_8) /* is_ok on <var_8:IndexedIterator[nullable Object]>*/;
+var8 = ((short int(*)(val* self))((((long)var_7&3)?class_info[((long)var_7&3)]:var_7->class)->vft[COLOR_standard__abstract_collection__Iterator__is_ok]))(var_7); /* is_ok on <var_7:IndexedIterator[nullable Object]>*/
 }
-if (var9){
+if (var8){
 {
-var10 = ((val* (*)(val* self))(var_8->class->vft[COLOR_standard__abstract_collection__Iterator__item]))(var_8) /* item on <var_8:IndexedIterator[nullable Object]>*/;
+var9 = ((val*(*)(val* self))((((long)var_7&3)?class_info[((long)var_7&3)]:var_7->class)->vft[COLOR_standard__abstract_collection__Iterator__item]))(var_7); /* item on <var_7:IndexedIterator[nullable Object]>*/
 }
-var_e = var10;
-var11 = 3;
+var_e = var9;
 {
-{ /* Inline kernel#Int#* (var_res,var11) on <var_res:Int> */
-/* Covariant cast for argument 0 (i) <var11:Int> isa OTHER */
-/* <var11:Int> isa OTHER */
-var14 = 1; /* easy <var11:Int> isa OTHER*/
-if (unlikely(!var14)) {
-var_class_name17 = type_standard__Int.name;
-PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name17);
-PRINT_ERROR(" (%s:%d)\n", FILE_standard__kernel, 417);
-show_backtrace(1);
+{ /* Inline kernel#Int#* (var_res,3l) on <var_res:Int> */
+/* Covariant cast for argument 0 (i) <3l:Int> isa OTHER */
+/* <3l:Int> isa OTHER */
+var12 = 1; /* easy <3l:Int> isa OTHER*/
+if (unlikely(!var12)) {
+var_class_name15 = type_standard__Int.name;
+PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name15);
+PRINT_ERROR(" (%s:%d)\n", FILE_standard__kernel, 541);
+fatal_exit(1);
 }
-var18 = var_res * var11;
-var12 = var18;
-goto RET_LABEL13;
-RET_LABEL13:(void)0;
+var16 = var_res * 3l;
+var10 = var16;
+goto RET_LABEL11;
+RET_LABEL11:(void)0;
 }
 }
-var19 = 2;
 {
-{ /* Inline kernel#Int#/ (var12,var19) on <var12:Int> */
-/* Covariant cast for argument 0 (i) <var19:Int> isa OTHER */
-/* <var19:Int> isa OTHER */
-var22 = 1; /* easy <var19:Int> isa OTHER*/
-if (unlikely(!var22)) {
-var_class_name25 = type_standard__Int.name;
-PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name25);
-PRINT_ERROR(" (%s:%d)\n", FILE_standard__kernel, 418);
-show_backtrace(1);
+{ /* Inline kernel#Int#/ (var10,2l) on <var10:Int> */
+/* Covariant cast for argument 0 (i) <2l:Int> isa OTHER */
+/* <2l:Int> isa OTHER */
+var19 = 1; /* easy <2l:Int> isa OTHER*/
+if (unlikely(!var19)) {
+var_class_name22 = type_standard__Int.name;
+PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name22);
+PRINT_ERROR(" (%s:%d)\n", FILE_standard__kernel, 542);
+fatal_exit(1);
 }
-var26 = var12 / var19;
-var20 = var26;
-goto RET_LABEL21;
-RET_LABEL21:(void)0;
+var23 = var10 / 2l;
+var17 = var23;
+goto RET_LABEL18;
+RET_LABEL18:(void)0;
 }
 }
-var_res = var20;
-var27 = NULL;
+var_res = var17;
 if (var_e == NULL) {
-var28 = 0; /* is null */
+var24 = 0; /* is null */
 } else {
-var28 = 1; /* arg is null and recv is not */
+var24 = 1; /* arg is null and recv is not */
 }
 if (0) {
-var29 = ((short int (*)(val* self, val* p0))(var_e->class->vft[COLOR_standard__kernel__Object___33d_61d]))(var_e, var27) /* != on <var_e:nullable Object>*/;
-var28 = var29;
+var25 = ((short int(*)(val* self, val* p0))((((long)var_e&3)?class_info[((long)var_e&3)]:var_e->class)->vft[COLOR_standard__kernel__Object___33d_61d]))(var_e, ((val*)NULL)); /* != on <var_e:nullable Object>*/
+var24 = var25;
 }
-if (var28){
-if (var_e == NULL) {
-PRINT_ERROR("Runtime error: %s", "Receiver is null");
-PRINT_ERROR(" (%s:%d)\n", FILE_standard__abstract_collection, 743);
-show_backtrace(1);
-} else {
-var30 = ((long (*)(val* self))(var_e->class->vft[COLOR_standard__kernel__Object__hash]))(var_e) /* hash on <var_e:nullable Object>*/;
+if (var24){
+{
+var26 = ((long(*)(val* self))((((long)var_e&3)?class_info[((long)var_e&3)]:var_e->class)->vft[COLOR_standard__kernel__Object__hash]))(var_e); /* hash on <var_e:nullable Object(Object)>*/
 }
 {
-{ /* Inline kernel#Int#+ (var_res,var30) on <var_res:Int> */
-/* Covariant cast for argument 0 (i) <var30:Int> isa OTHER */
-/* <var30:Int> isa OTHER */
-var33 = 1; /* easy <var30:Int> isa OTHER*/
-if (unlikely(!var33)) {
-var_class_name36 = type_standard__Int.name;
-PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name36);
-PRINT_ERROR(" (%s:%d)\n", FILE_standard__kernel, 413);
-show_backtrace(1);
+{ /* Inline kernel#Int#+ (var_res,var26) on <var_res:Int> */
+/* Covariant cast for argument 0 (i) <var26:Int> isa OTHER */
+/* <var26:Int> isa OTHER */
+var29 = 1; /* easy <var26:Int> isa OTHER*/
+if (unlikely(!var29)) {
+var_class_name32 = type_standard__Int.name;
+PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name32);
+PRINT_ERROR(" (%s:%d)\n", FILE_standard__kernel, 537);
+fatal_exit(1);
 }
-var37 = var_res + var30;
-var31 = var37;
-goto RET_LABEL32;
-RET_LABEL32:(void)0;
+var33 = var_res + var26;
+var27 = var33;
+goto RET_LABEL28;
+RET_LABEL28:(void)0;
 }
 }
-var_res = var31;
+var_res = var27;
 } else {
 }
 {
-((void (*)(val* self))(var_8->class->vft[COLOR_standard__abstract_collection__Iterator__next]))(var_8) /* next on <var_8:IndexedIterator[nullable Object]>*/;
+((void(*)(val* self))((((long)var_7&3)?class_info[((long)var_7&3)]:var_7->class)->vft[COLOR_standard__abstract_collection__Iterator__next]))(var_7); /* next on <var_7:IndexedIterator[nullable Object]>*/
 }
 } else {
 goto BREAK_label;
@@ -2035,9 +1943,7 @@ goto BREAK_label;
 }
 BREAK_label: (void)0;
 {
-{ /* Inline abstract_collection#Iterator#finish (var_8) on <var_8:IndexedIterator[nullable Object]> */
-RET_LABEL38:(void)0;
-}
+((void(*)(val* self))((((long)var_7&3)?class_info[((long)var_7&3)]:var_7->class)->vft[COLOR_standard__abstract_collection__Iterator__finish]))(var_7); /* finish on <var_7:IndexedIterator[nullable Object]>*/
 }
 var = var_res;
 goto RET_LABEL;
@@ -2051,78 +1957,74 @@ long var_pos /* var pos: Int */;
 val* var1 /* : Iterator[nullable Object] */;
 val* var_res /* var res: IndexedIterator[nullable Object] */;
 short int var2 /* : Bool */;
-long var3 /* : Int */;
-short int var4 /* : Bool */;
-short int var6 /* : Bool */;
+short int var3 /* : Bool */;
+short int var5 /* : Bool */;
 int cltype;
 int idtype;
 const char* var_class_name;
-short int var7 /* : Bool */;
+short int var6 /* : Bool */;
 short int var_ /* var : Bool */;
-short int var8 /* : Bool */;
-long var9 /* : Int */;
-long var10 /* : Int */;
-short int var12 /* : Bool */;
-int cltype13;
-int idtype14;
-const char* var_class_name15;
-long var16 /* : Int */;
+short int var7 /* : Bool */;
+long var8 /* : Int */;
+short int var10 /* : Bool */;
+int cltype11;
+int idtype12;
+const char* var_class_name13;
+long var14 /* : Int */;
 var_pos = p0;
 {
-var1 = ((val* (*)(val* self))(self->class->vft[COLOR_standard__abstract_collection__Collection__iterator]))(self) /* iterator on <self:SequenceRead[nullable Object]>*/;
+var1 = ((val*(*)(val* self))((((long)self&3)?class_info[((long)self&3)]:self->class)->vft[COLOR_standard__abstract_collection__Collection__iterator]))(self); /* iterator on <self:SequenceRead[nullable Object]>*/
 }
 var_res = var1;
 for(;;) {
-var3 = 0;
 {
-{ /* Inline kernel#Int#> (var_pos,var3) on <var_pos:Int> */
-/* Covariant cast for argument 0 (i) <var3:Int> isa OTHER */
-/* <var3:Int> isa OTHER */
-var6 = 1; /* easy <var3:Int> isa OTHER*/
-if (unlikely(!var6)) {
+{ /* Inline kernel#Int#> (var_pos,0l) on <var_pos:Int> */
+/* Covariant cast for argument 0 (i) <0l:Int> isa OTHER */
+/* <0l:Int> isa OTHER */
+var5 = 1; /* easy <0l:Int> isa OTHER*/
+if (unlikely(!var5)) {
 var_class_name = type_standard__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
-PRINT_ERROR(" (%s:%d)\n", FILE_standard__kernel, 412);
-show_backtrace(1);
+PRINT_ERROR(" (%s:%d)\n", FILE_standard__kernel, 536);
+fatal_exit(1);
 }
-var7 = var_pos > var3;
-var4 = var7;
-goto RET_LABEL5;
-RET_LABEL5:(void)0;
+var6 = var_pos > 0l;
+var3 = var6;
+goto RET_LABEL4;
+RET_LABEL4:(void)0;
 }
 }
-var_ = var4;
-if (var4){
+var_ = var3;
+if (var3){
 {
-var8 = ((short int (*)(val* self))(var_res->class->vft[COLOR_standard__abstract_collection__Iterator__is_ok]))(var_res) /* is_ok on <var_res:IndexedIterator[nullable Object]>*/;
+var7 = ((short int(*)(val* self))((((long)var_res&3)?class_info[((long)var_res&3)]:var_res->class)->vft[COLOR_standard__abstract_collection__Iterator__is_ok]))(var_res); /* is_ok on <var_res:IndexedIterator[nullable Object]>*/
 }
-var2 = var8;
+var2 = var7;
 } else {
 var2 = var_;
 }
 if (var2){
 {
-((void (*)(val* self))(var_res->class->vft[COLOR_standard__abstract_collection__Iterator__next]))(var_res) /* next on <var_res:IndexedIterator[nullable Object]>*/;
+((void(*)(val* self))((((long)var_res&3)?class_info[((long)var_res&3)]:var_res->class)->vft[COLOR_standard__abstract_collection__Iterator__next]))(var_res); /* next on <var_res:IndexedIterator[nullable Object]>*/
 }
-var9 = 1;
 {
-{ /* Inline kernel#Int#- (var_pos,var9) on <var_pos:Int> */
-/* Covariant cast for argument 0 (i) <var9:Int> isa OTHER */
-/* <var9:Int> isa OTHER */
-var12 = 1; /* easy <var9:Int> isa OTHER*/
-if (unlikely(!var12)) {
-var_class_name15 = type_standard__Int.name;
-PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name15);
-PRINT_ERROR(" (%s:%d)\n", FILE_standard__kernel, 416);
-show_backtrace(1);
+{ /* Inline kernel#Int#- (var_pos,1l) on <var_pos:Int> */
+/* Covariant cast for argument 0 (i) <1l:Int> isa OTHER */
+/* <1l:Int> isa OTHER */
+var10 = 1; /* easy <1l:Int> isa OTHER*/
+if (unlikely(!var10)) {
+var_class_name13 = type_standard__Int.name;
+PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name13);
+PRINT_ERROR(" (%s:%d)\n", FILE_standard__kernel, 540);
+fatal_exit(1);
 }
-var16 = var_pos - var9;
-var10 = var16;
-goto RET_LABEL11;
-RET_LABEL11:(void)0;
+var14 = var_pos - 1l;
+var8 = var14;
+goto RET_LABEL9;
+RET_LABEL9:(void)0;
 }
 }
-var_pos = var10;
+var_pos = var8;
 } else {
 goto BREAK_label;
 }
@@ -2142,32 +2044,30 @@ const struct type* type_struct;
 short int is_nullable;
 const char* var_class_name;
 val* var_item /* var item: nullable Object */;
-long var1 /* : Int */;
 /* Covariant cast for argument 0 (item) <p0:nullable Object> isa E */
 /* <p0:nullable Object> isa E */
-type_struct = self->type->resolution_table->types[COLOR_standard__Sequence___35dE];
+type_struct = (((long)self&3)?type_info[((long)self&3)]:self->type)->resolution_table->types[COLOR_standard__Sequence___35dE];
 cltype = type_struct->color;
 idtype = type_struct->id;
 is_nullable = type_struct->is_nullable;
 if(p0 == NULL) {
 var = is_nullable;
 } else {
-if(cltype >= p0->type->table_size) {
+if(cltype >= (((long)p0&3)?type_info[((long)p0&3)]:p0->type)->table_size) {
 var = 0;
 } else {
-var = p0->type->type_table[cltype] == idtype;
+var = (((long)p0&3)?type_info[((long)p0&3)]:p0->type)->type_table[cltype] == idtype;
 }
 }
 if (unlikely(!var)) {
-var_class_name = p0 == NULL ? "null" : p0->type->name;
+var_class_name = p0 == NULL ? "null" : (((long)p0&3)?type_info[((long)p0&3)]:p0->type)->name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "E", var_class_name);
-PRINT_ERROR(" (%s:%d)\n", FILE_standard__abstract_collection, 791);
-show_backtrace(1);
+PRINT_ERROR(" (%s:%d)\n", FILE_standard__abstract_collection, 918);
+fatal_exit(1);
 }
 var_item = p0;
-var1 = 0;
 {
-((void (*)(val* self, long p0, val* p1))(self->class->vft[COLOR_standard__abstract_collection__Sequence___91d_93d_61d]))(self, var1, var_item) /* []= on <self:Sequence[nullable Object]>*/;
+((void(*)(val* self, long p0, val* p1))((((long)self&3)?class_info[((long)self&3)]:self->class)->vft[COLOR_standard__abstract_collection__Sequence___91d_93d_61d]))(self, 0l, var_item); /* []= on <self:Sequence[nullable Object]>*/
 }
 RET_LABEL:;
 }
@@ -2182,28 +2082,28 @@ const char* var_class_name;
 val* var_e /* var e: nullable Object */;
 /* Covariant cast for argument 0 (e) <p0:nullable Object> isa E */
 /* <p0:nullable Object> isa E */
-type_struct = self->type->resolution_table->types[COLOR_standard__Sequence___35dE];
+type_struct = (((long)self&3)?type_info[((long)self&3)]:self->type)->resolution_table->types[COLOR_standard__Sequence___35dE];
 cltype = type_struct->color;
 idtype = type_struct->id;
 is_nullable = type_struct->is_nullable;
 if(p0 == NULL) {
 var = is_nullable;
 } else {
-if(cltype >= p0->type->table_size) {
+if(cltype >= (((long)p0&3)?type_info[((long)p0&3)]:p0->type)->table_size) {
 var = 0;
 } else {
-var = p0->type->type_table[cltype] == idtype;
+var = (((long)p0&3)?type_info[((long)p0&3)]:p0->type)->type_table[cltype] == idtype;
 }
 }
 if (unlikely(!var)) {
-var_class_name = p0 == NULL ? "null" : p0->type->name;
+var_class_name = p0 == NULL ? "null" : (((long)p0&3)?type_info[((long)p0&3)]:p0->type)->name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "E", var_class_name);
-PRINT_ERROR(" (%s:%d)\n", FILE_standard__abstract_collection, 822);
-show_backtrace(1);
+PRINT_ERROR(" (%s:%d)\n", FILE_standard__abstract_collection, 949);
+fatal_exit(1);
 }
 var_e = p0;
 {
-((void (*)(val* self, val* p0))(self->class->vft[COLOR_standard__abstract_collection__Sequence__push]))(self, var_e) /* push on <self:Sequence[nullable Object]>*/;
+((void(*)(val* self, val* p0))((((long)self&3)?class_info[((long)self&3)]:self->class)->vft[COLOR_standard__abstract_collection__Sequence__push]))(self, var_e); /* push on <self:Sequence[nullable Object]>*/
 }
 RET_LABEL:;
 }
@@ -2217,23 +2117,23 @@ const char* var_class_name;
 val* var_coll /* var coll: Collection[nullable Object] */;
 /* Covariant cast for argument 0 (coll) <p0:Collection[nullable Object]> isa Collection[E] */
 /* <p0:Collection[nullable Object]> isa Collection[E] */
-type_struct = self->type->resolution_table->types[COLOR_standard__Collection__standard__Sequence___35dE];
+type_struct = (((long)self&3)?type_info[((long)self&3)]:self->type)->resolution_table->types[COLOR_standard__Collection__standard__Sequence___35dE];
 cltype = type_struct->color;
 idtype = type_struct->id;
-if(cltype >= p0->type->table_size) {
+if(cltype >= (((long)p0&3)?type_info[((long)p0&3)]:p0->type)->table_size) {
 var = 0;
 } else {
-var = p0->type->type_table[cltype] == idtype;
+var = (((long)p0&3)?type_info[((long)p0&3)]:p0->type)->type_table[cltype] == idtype;
 }
 if (unlikely(!var)) {
-var_class_name = p0 == NULL ? "null" : p0->type->name;
+var_class_name = p0 == NULL ? "null" : (((long)p0&3)?type_info[((long)p0&3)]:p0->type)->name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "Collection[E]", var_class_name);
-PRINT_ERROR(" (%s:%d)\n", FILE_standard__abstract_collection, 833);
-show_backtrace(1);
+PRINT_ERROR(" (%s:%d)\n", FILE_standard__abstract_collection, 960);
+fatal_exit(1);
 }
 var_coll = p0;
 {
-((void (*)(val* self, val* p0))(self->class->vft[COLOR_standard__abstract_collection__SimpleCollection__add_all]))(self, var_coll) /* add_all on <self:Sequence[nullable Object]>*/;
+((void(*)(val* self, val* p0))((((long)self&3)?class_info[((long)self&3)]:self->class)->vft[COLOR_standard__abstract_collection__SimpleCollection__add_all]))(self, var_coll); /* add_all on <self:Sequence[nullable Object]>*/
 }
 RET_LABEL:;
 }
@@ -2241,47 +2141,20 @@ RET_LABEL:;
 val* standard___standard__Sequence___pop(val* self) {
 val* var /* : nullable Object */;
 const char* var_class_name;
-var_class_name = self == NULL ? "null" : self->type->name;
+var_class_name = self == NULL ? "null" : (((long)self&3)?type_info[((long)self&3)]:self->type)->name;
 PRINT_ERROR("Runtime error: Abstract method `%s` called on `%s`", "pop", var_class_name);
-PRINT_ERROR(" (%s:%d)\n", FILE_standard__abstract_collection, 842);
-show_backtrace(1);
+PRINT_ERROR(" (%s:%d)\n", FILE_standard__abstract_collection, 969);
+fatal_exit(1);
 RET_LABEL:;
 return var;
 }
 /* method abstract_collection#Sequence#unshift for (self: Sequence[nullable Object], nullable Object) */
 void standard___standard__Sequence___unshift(val* self, val* p0) {
-short int var /* : Bool */;
-int cltype;
-int idtype;
-const struct type* type_struct;
-short int is_nullable;
 const char* var_class_name;
-const char* var_class_name1;
-/* Covariant cast for argument 0 (e) <p0:nullable Object> isa E */
-/* <p0:nullable Object> isa E */
-type_struct = self->type->resolution_table->types[COLOR_standard__Sequence___35dE];
-cltype = type_struct->color;
-idtype = type_struct->id;
-is_nullable = type_struct->is_nullable;
-if(p0 == NULL) {
-var = is_nullable;
-} else {
-if(cltype >= p0->type->table_size) {
-var = 0;
-} else {
-var = p0->type->type_table[cltype] == idtype;
-}
-}
-if (unlikely(!var)) {
-var_class_name = p0 == NULL ? "null" : p0->type->name;
-PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "E", var_class_name);
-PRINT_ERROR(" (%s:%d)\n", FILE_standard__abstract_collection, 852);
-show_backtrace(1);
-}
-var_class_name1 = self == NULL ? "null" : self->type->name;
-PRINT_ERROR("Runtime error: Abstract method `%s` called on `%s`", "unshift", var_class_name1);
-PRINT_ERROR(" (%s:%d)\n", FILE_standard__abstract_collection, 852);
-show_backtrace(1);
+var_class_name = self == NULL ? "null" : (((long)self&3)?type_info[((long)self&3)]:self->type)->name;
+PRINT_ERROR("Runtime error: Abstract method `%s` called on `%s`", "unshift", var_class_name);
+PRINT_ERROR(" (%s:%d)\n", FILE_standard__abstract_collection, 979);
+fatal_exit(1);
 RET_LABEL:;
 }
 /* method abstract_collection#Sequence#prepend for (self: Sequence[nullable Object], Collection[nullable Object]) */
@@ -2292,27 +2165,25 @@ int idtype;
 const struct type* type_struct;
 const char* var_class_name;
 val* var_coll /* var coll: Collection[nullable Object] */;
-long var1 /* : Int */;
 /* Covariant cast for argument 0 (coll) <p0:Collection[nullable Object]> isa Collection[E] */
 /* <p0:Collection[nullable Object]> isa Collection[E] */
-type_struct = self->type->resolution_table->types[COLOR_standard__Collection__standard__Sequence___35dE];
+type_struct = (((long)self&3)?type_info[((long)self&3)]:self->type)->resolution_table->types[COLOR_standard__Collection__standard__Sequence___35dE];
 cltype = type_struct->color;
 idtype = type_struct->id;
-if(cltype >= p0->type->table_size) {
+if(cltype >= (((long)p0&3)?type_info[((long)p0&3)]:p0->type)->table_size) {
 var = 0;
 } else {
-var = p0->type->type_table[cltype] == idtype;
+var = (((long)p0&3)?type_info[((long)p0&3)]:p0->type)->type_table[cltype] == idtype;
 }
 if (unlikely(!var)) {
-var_class_name = p0 == NULL ? "null" : p0->type->name;
+var_class_name = p0 == NULL ? "null" : (((long)p0&3)?type_info[((long)p0&3)]:p0->type)->name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "Collection[E]", var_class_name);
-PRINT_ERROR(" (%s:%d)\n", FILE_standard__abstract_collection, 860);
-show_backtrace(1);
+PRINT_ERROR(" (%s:%d)\n", FILE_standard__abstract_collection, 987);
+fatal_exit(1);
 }
 var_coll = p0;
-var1 = 0;
 {
-((void (*)(val* self, val* p0, long p1))(self->class->vft[COLOR_standard__abstract_collection__Sequence__insert_all]))(self, var_coll, var1) /* insert_all on <self:Sequence[nullable Object]>*/;
+((void(*)(val* self, val* p0, long p1))((((long)self&3)?class_info[((long)self&3)]:self->class)->vft[COLOR_standard__abstract_collection__Sequence__insert_all]))(self, var_coll, 0l); /* insert_all on <self:Sequence[nullable Object]>*/
 }
 RET_LABEL:;
 }
@@ -2320,47 +2191,20 @@ RET_LABEL:;
 val* standard___standard__Sequence___shift(val* self) {
 val* var /* : nullable Object */;
 const char* var_class_name;
-var_class_name = self == NULL ? "null" : self->type->name;
+var_class_name = self == NULL ? "null" : (((long)self&3)?type_info[((long)self&3)]:self->type)->name;
 PRINT_ERROR("Runtime error: Abstract method `%s` called on `%s`", "shift", var_class_name);
-PRINT_ERROR(" (%s:%d)\n", FILE_standard__abstract_collection, 869);
-show_backtrace(1);
+PRINT_ERROR(" (%s:%d)\n", FILE_standard__abstract_collection, 996);
+fatal_exit(1);
 RET_LABEL:;
 return var;
 }
 /* method abstract_collection#Sequence#insert for (self: Sequence[nullable Object], nullable Object, Int) */
 void standard___standard__Sequence___insert(val* self, val* p0, long p1) {
-short int var /* : Bool */;
-int cltype;
-int idtype;
-const struct type* type_struct;
-short int is_nullable;
 const char* var_class_name;
-const char* var_class_name1;
-/* Covariant cast for argument 0 (item) <p0:nullable Object> isa E */
-/* <p0:nullable Object> isa E */
-type_struct = self->type->resolution_table->types[COLOR_standard__Sequence___35dE];
-cltype = type_struct->color;
-idtype = type_struct->id;
-is_nullable = type_struct->is_nullable;
-if(p0 == NULL) {
-var = is_nullable;
-} else {
-if(cltype >= p0->type->table_size) {
-var = 0;
-} else {
-var = p0->type->type_table[cltype] == idtype;
-}
-}
-if (unlikely(!var)) {
-var_class_name = p0 == NULL ? "null" : p0->type->name;
-PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "E", var_class_name);
-PRINT_ERROR(" (%s:%d)\n", FILE_standard__abstract_collection, 895);
-show_backtrace(1);
-}
-var_class_name1 = self == NULL ? "null" : self->type->name;
-PRINT_ERROR("Runtime error: Abstract method `%s` called on `%s`", "insert", var_class_name1);
-PRINT_ERROR(" (%s:%d)\n", FILE_standard__abstract_collection, 895);
-show_backtrace(1);
+var_class_name = self == NULL ? "null" : (((long)self&3)?type_info[((long)self&3)]:self->type)->name;
+PRINT_ERROR("Runtime error: Abstract method `%s` called on `%s`", "insert", var_class_name);
+PRINT_ERROR(" (%s:%d)\n", FILE_standard__abstract_collection, 1022);
+fatal_exit(1);
 RET_LABEL:;
 }
 /* method abstract_collection#Sequence#insert_all for (self: Sequence[nullable Object], Collection[nullable Object], Int) */
@@ -2373,159 +2217,155 @@ const char* var_class_name;
 val* var_coll /* var coll: Collection[nullable Object] */;
 long var_index /* var index: Int */;
 short int var1 /* : Bool */;
-long var2 /* : Int */;
-short int var3 /* : Bool */;
-short int var5 /* : Bool */;
-int cltype6;
-int idtype7;
-const char* var_class_name8;
-short int var9 /* : Bool */;
+short int var2 /* : Bool */;
+short int var4 /* : Bool */;
+int cltype5;
+int idtype6;
+const char* var_class_name7;
+short int var8 /* : Bool */;
 short int var_ /* var : Bool */;
-long var10 /* : Int */;
-short int var11 /* : Bool */;
-short int var13 /* : Bool */;
-int cltype14;
-int idtype15;
-const char* var_class_name16;
-short int var17 /* : Bool */;
-long var18 /* : Int */;
-short int var19 /* : Bool */;
-short int var21 /* : Bool */;
-val* var_22 /* var : Collection[nullable Object] */;
-val* var23 /* : Iterator[nullable Object] */;
-val* var_24 /* var : Iterator[nullable Object] */;
-short int var25 /* : Bool */;
-val* var26 /* : nullable Object */;
+long var9 /* : Int */;
+short int var10 /* : Bool */;
+short int var12 /* : Bool */;
+int cltype13;
+int idtype14;
+const char* var_class_name15;
+short int var16 /* : Bool */;
+long var17 /* : Int */;
+short int var18 /* : Bool */;
+short int var20 /* : Bool */;
+val* var_21 /* var : Collection[nullable Object] */;
+val* var22 /* : Iterator[nullable Object] */;
+val* var_23 /* var : Iterator[nullable Object] */;
+short int var24 /* : Bool */;
+val* var25 /* : nullable Object */;
 val* var_c /* var c: nullable Object */;
-long var27 /* : Int */;
-long var28 /* : Int */;
-short int var30 /* : Bool */;
-int cltype31;
-int idtype32;
-const char* var_class_name33;
-long var34 /* : Int */;
+long var26 /* : Int */;
+short int var28 /* : Bool */;
+int cltype29;
+int idtype30;
+const char* var_class_name31;
+long var32 /* : Int */;
 /* Covariant cast for argument 0 (coll) <p0:Collection[nullable Object]> isa Collection[E] */
 /* <p0:Collection[nullable Object]> isa Collection[E] */
-type_struct = self->type->resolution_table->types[COLOR_standard__Collection__standard__Sequence___35dE];
+type_struct = (((long)self&3)?type_info[((long)self&3)]:self->type)->resolution_table->types[COLOR_standard__Collection__standard__Sequence___35dE];
 cltype = type_struct->color;
 idtype = type_struct->id;
-if(cltype >= p0->type->table_size) {
+if(cltype >= (((long)p0&3)?type_info[((long)p0&3)]:p0->type)->table_size) {
 var = 0;
 } else {
-var = p0->type->type_table[cltype] == idtype;
+var = (((long)p0&3)?type_info[((long)p0&3)]:p0->type)->type_table[cltype] == idtype;
 }
 if (unlikely(!var)) {
-var_class_name = p0 == NULL ? "null" : p0->type->name;
+var_class_name = p0 == NULL ? "null" : (((long)p0&3)?type_info[((long)p0&3)]:p0->type)->name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "Collection[E]", var_class_name);
-PRINT_ERROR(" (%s:%d)\n", FILE_standard__abstract_collection, 905);
-show_backtrace(1);
+PRINT_ERROR(" (%s:%d)\n", FILE_standard__abstract_collection, 1032);
+fatal_exit(1);
 }
 var_coll = p0;
 var_index = p1;
-var2 = 0;
 {
-{ /* Inline kernel#Int#>= (var_index,var2) on <var_index:Int> */
-/* Covariant cast for argument 0 (i) <var2:Int> isa OTHER */
-/* <var2:Int> isa OTHER */
-var5 = 1; /* easy <var2:Int> isa OTHER*/
-if (unlikely(!var5)) {
-var_class_name8 = type_standard__Int.name;
-PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name8);
-PRINT_ERROR(" (%s:%d)\n", FILE_standard__kernel, 411);
-show_backtrace(1);
+{ /* Inline kernel#Int#>= (var_index,0l) on <var_index:Int> */
+/* Covariant cast for argument 0 (i) <0l:Int> isa OTHER */
+/* <0l:Int> isa OTHER */
+var4 = 1; /* easy <0l:Int> isa OTHER*/
+if (unlikely(!var4)) {
+var_class_name7 = type_standard__Int.name;
+PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name7);
+PRINT_ERROR(" (%s:%d)\n", FILE_standard__kernel, 535);
+fatal_exit(1);
 }
-var9 = var_index >= var2;
-var3 = var9;
-goto RET_LABEL4;
-RET_LABEL4:(void)0;
+var8 = var_index >= 0l;
+var2 = var8;
+goto RET_LABEL3;
+RET_LABEL3:(void)0;
 }
 }
-var_ = var3;
-if (var3){
+var_ = var2;
+if (var2){
 {
-var10 = ((long (*)(val* self))(self->class->vft[COLOR_standard__abstract_collection__Collection__length]))(self) /* length on <self:Sequence[nullable Object]>*/;
+var9 = ((long(*)(val* self))((((long)self&3)?class_info[((long)self&3)]:self->class)->vft[COLOR_standard__abstract_collection__Collection__length]))(self); /* length on <self:Sequence[nullable Object]>*/
 }
 {
-{ /* Inline kernel#Int#< (var_index,var10) on <var_index:Int> */
-/* Covariant cast for argument 0 (i) <var10:Int> isa OTHER */
-/* <var10:Int> isa OTHER */
-var13 = 1; /* easy <var10:Int> isa OTHER*/
-if (unlikely(!var13)) {
-var_class_name16 = type_standard__Int.name;
-PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name16);
-PRINT_ERROR(" (%s:%d)\n", FILE_standard__kernel, 410);
-show_backtrace(1);
+{ /* Inline kernel#Int#< (var_index,var9) on <var_index:Int> */
+/* Covariant cast for argument 0 (i) <var9:Int> isa OTHER */
+/* <var9:Int> isa OTHER */
+var12 = 1; /* easy <var9:Int> isa OTHER*/
+if (unlikely(!var12)) {
+var_class_name15 = type_standard__Int.name;
+PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name15);
+PRINT_ERROR(" (%s:%d)\n", FILE_standard__kernel, 534);
+fatal_exit(1);
 }
-var17 = var_index < var10;
-var11 = var17;
-goto RET_LABEL12;
-RET_LABEL12:(void)0;
+var16 = var_index < var9;
+var10 = var16;
+goto RET_LABEL11;
+RET_LABEL11:(void)0;
 }
 }
-var1 = var11;
+var1 = var10;
 } else {
 var1 = var_;
 }
 if (unlikely(!var1)) {
 PRINT_ERROR("Runtime error: %s", "Assert failed");
-PRINT_ERROR(" (%s:%d)\n", FILE_standard__abstract_collection, 915);
-show_backtrace(1);
+PRINT_ERROR(" (%s:%d)\n", FILE_standard__abstract_collection, 1042);
+fatal_exit(1);
 }
 {
-var18 = ((long (*)(val* self))(self->class->vft[COLOR_standard__abstract_collection__Collection__length]))(self) /* length on <self:Sequence[nullable Object]>*/;
+var17 = ((long(*)(val* self))((((long)self&3)?class_info[((long)self&3)]:self->class)->vft[COLOR_standard__abstract_collection__Collection__length]))(self); /* length on <self:Sequence[nullable Object]>*/
 }
 {
-{ /* Inline kernel#Int#== (var_index,var18) on <var_index:Int> */
-var21 = var_index == var18;
-var19 = var21;
-goto RET_LABEL20;
-RET_LABEL20:(void)0;
+{ /* Inline kernel#Int#== (var_index,var17) on <var_index:Int> */
+var20 = var_index == var17;
+var18 = var20;
+goto RET_LABEL19;
+RET_LABEL19:(void)0;
 }
 }
-if (var19){
+if (var18){
 {
-((void (*)(val* self, val* p0))(self->class->vft[COLOR_standard__abstract_collection__SimpleCollection__add_all]))(self, var_coll) /* add_all on <self:Sequence[nullable Object]>*/;
+((void(*)(val* self, val* p0))((((long)self&3)?class_info[((long)self&3)]:self->class)->vft[COLOR_standard__abstract_collection__SimpleCollection__add_all]))(self, var_coll); /* add_all on <self:Sequence[nullable Object]>*/
 }
 } else {
 }
-var_22 = var_coll;
+var_21 = var_coll;
 {
-var23 = ((val* (*)(val* self))(var_22->class->vft[COLOR_standard__abstract_collection__Collection__iterator]))(var_22) /* iterator on <var_22:Collection[nullable Object]>*/;
+var22 = ((val*(*)(val* self))((((long)var_21&3)?class_info[((long)var_21&3)]:var_21->class)->vft[COLOR_standard__abstract_collection__Collection__iterator]))(var_21); /* iterator on <var_21:Collection[nullable Object]>*/
 }
-var_24 = var23;
+var_23 = var22;
 for(;;) {
 {
-var25 = ((short int (*)(val* self))(var_24->class->vft[COLOR_standard__abstract_collection__Iterator__is_ok]))(var_24) /* is_ok on <var_24:Iterator[nullable Object]>*/;
+var24 = ((short int(*)(val* self))((((long)var_23&3)?class_info[((long)var_23&3)]:var_23->class)->vft[COLOR_standard__abstract_collection__Iterator__is_ok]))(var_23); /* is_ok on <var_23:Iterator[nullable Object]>*/
 }
-if (var25){
+if (var24){
 {
-var26 = ((val* (*)(val* self))(var_24->class->vft[COLOR_standard__abstract_collection__Iterator__item]))(var_24) /* item on <var_24:Iterator[nullable Object]>*/;
+var25 = ((val*(*)(val* self))((((long)var_23&3)?class_info[((long)var_23&3)]:var_23->class)->vft[COLOR_standard__abstract_collection__Iterator__item]))(var_23); /* item on <var_23:Iterator[nullable Object]>*/
 }
-var_c = var26;
+var_c = var25;
 {
-((void (*)(val* self, val* p0, long p1))(self->class->vft[COLOR_standard__abstract_collection__Sequence__insert]))(self, var_c, var_index) /* insert on <self:Sequence[nullable Object]>*/;
+((void(*)(val* self, val* p0, long p1))((((long)self&3)?class_info[((long)self&3)]:self->class)->vft[COLOR_standard__abstract_collection__Sequence__insert]))(self, var_c, var_index); /* insert on <self:Sequence[nullable Object]>*/
 }
-var27 = 1;
 {
-{ /* Inline kernel#Int#+ (var_index,var27) on <var_index:Int> */
-/* Covariant cast for argument 0 (i) <var27:Int> isa OTHER */
-/* <var27:Int> isa OTHER */
-var30 = 1; /* easy <var27:Int> isa OTHER*/
-if (unlikely(!var30)) {
-var_class_name33 = type_standard__Int.name;
-PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name33);
-PRINT_ERROR(" (%s:%d)\n", FILE_standard__kernel, 413);
-show_backtrace(1);
+{ /* Inline kernel#Int#+ (var_index,1l) on <var_index:Int> */
+/* Covariant cast for argument 0 (i) <1l:Int> isa OTHER */
+/* <1l:Int> isa OTHER */
+var28 = 1; /* easy <1l:Int> isa OTHER*/
+if (unlikely(!var28)) {
+var_class_name31 = type_standard__Int.name;
+PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name31);
+PRINT_ERROR(" (%s:%d)\n", FILE_standard__kernel, 537);
+fatal_exit(1);
 }
-var34 = var_index + var27;
-var28 = var34;
-goto RET_LABEL29;
-RET_LABEL29:(void)0;
+var32 = var_index + 1l;
+var26 = var32;
+goto RET_LABEL27;
+RET_LABEL27:(void)0;
 }
 }
-var_index = var28;
+var_index = var26;
 {
-((void (*)(val* self))(var_24->class->vft[COLOR_standard__abstract_collection__Iterator__next]))(var_24) /* next on <var_24:Iterator[nullable Object]>*/;
+((void(*)(val* self))((((long)var_23&3)?class_info[((long)var_23&3)]:var_23->class)->vft[COLOR_standard__abstract_collection__Iterator__next]))(var_23); /* next on <var_23:Iterator[nullable Object]>*/
 }
 } else {
 goto BREAK_label;
@@ -2533,19 +2373,17 @@ goto BREAK_label;
 }
 BREAK_label: (void)0;
 {
-{ /* Inline abstract_collection#Iterator#finish (var_24) on <var_24:Iterator[nullable Object]> */
-RET_LABEL35:(void)0;
-}
+((void(*)(val* self))((((long)var_23&3)?class_info[((long)var_23&3)]:var_23->class)->vft[COLOR_standard__abstract_collection__Iterator__finish]))(var_23); /* finish on <var_23:Iterator[nullable Object]>*/
 }
 RET_LABEL:;
 }
 /* method abstract_collection#Sequence#remove_at for (self: Sequence[nullable Object], Int) */
 void standard___standard__Sequence___remove_at(val* self, long p0) {
 const char* var_class_name;
-var_class_name = self == NULL ? "null" : self->type->name;
+var_class_name = self == NULL ? "null" : (((long)self&3)?type_info[((long)self&3)]:self->type)->name;
 PRINT_ERROR("Runtime error: Abstract method `%s` called on `%s`", "remove_at", var_class_name);
-PRINT_ERROR(" (%s:%d)\n", FILE_standard__abstract_collection, 925);
-show_backtrace(1);
+PRINT_ERROR(" (%s:%d)\n", FILE_standard__abstract_collection, 1052);
+fatal_exit(1);
 RET_LABEL:;
 }
 /* method abstract_collection#CoupleMap#iterator for (self: CoupleMap[nullable Object, nullable Object]): MapIterator[nullable Object, nullable Object] */
@@ -2553,17 +2391,54 @@ val* standard___standard__CoupleMap___MapRead__iterator(val* self) {
 val* var /* : MapIterator[nullable Object, nullable Object] */;
 val* var1 /* : CoupleMapIterator[nullable Object, nullable Object] */;
 val* var2 /* : Iterator[Couple[nullable Object, nullable Object]] */;
-var1 = NEW_standard__abstract_collection__CoupleMapIterator(self->type->resolution_table->types[COLOR_standard__abstract_collection__CoupleMapIterator__standard__CoupleMap___35dK__standard__CoupleMap___35dV]);
+var1 = NEW_standard__abstract_collection__CoupleMapIterator((((long)self&3)?type_info[((long)self&3)]:self->type)->resolution_table->types[COLOR_standard__abstract_collection__CoupleMapIterator__standard__CoupleMap___35dK__standard__CoupleMap___35dV]);
 {
 var2 = standard___standard__ArrayMap___standard__abstract_collection__CoupleMap__couple_iterator(self);
 }
 {
-((void (*)(val* self, val* p0))(var1->class->vft[COLOR_standard__abstract_collection__CoupleMapIterator__iter_61d]))(var1, var2) /* iter= on <var1:CoupleMapIterator[nullable Object, nullable Object]>*/;
+((void(*)(val* self, val* p0))(var1->class->vft[COLOR_standard__abstract_collection__CoupleMapIterator__iter_61d]))(var1, var2); /* iter= on <var1:CoupleMapIterator[nullable Object, nullable Object]>*/
 }
 {
-((void (*)(val* self))(var1->class->vft[COLOR_standard__kernel__Object__init]))(var1) /* init on <var1:CoupleMapIterator[nullable Object, nullable Object]>*/;
+((void(*)(val* self))(var1->class->vft[COLOR_standard__kernel__Object__init]))(var1); /* init on <var1:CoupleMapIterator[nullable Object, nullable Object]>*/
 }
 var = var1;
+goto RET_LABEL;
+RET_LABEL:;
+return var;
+}
+/* method abstract_collection#CoupleMap#has_key for (self: CoupleMap[nullable Object, nullable Object], nullable Object): Bool */
+short int standard___standard__CoupleMap___MapRead__has_key(val* self, val* p0) {
+short int var /* : Bool */;
+val* var_key /* var key: nullable Object */;
+val* var1 /* : nullable Couple[nullable Object, nullable Object] */;
+short int var2 /* : Bool */;
+short int var3 /* : Bool */;
+val* var_other /* var other: nullable Object */;
+short int var5 /* : Bool */;
+short int var6 /* : Bool */;
+var_key = p0;
+{
+var1 = standard___standard__ArrayMap___standard__abstract_collection__CoupleMap__couple_at(self, var_key);
+}
+if (var1 == NULL) {
+var2 = 0; /* is null */
+} else {
+var2 = 1; /* arg is null and recv is not */
+}
+if (0) {
+{ /* Inline kernel#Object#!= (var1,((val*)NULL)) on <var1:nullable Couple[nullable Object, nullable Object]> */
+var_other = ((val*)NULL);
+{
+var5 = ((short int(*)(val* self, val* p0))(var1->class->vft[COLOR_standard__kernel__Object___61d_61d]))(var1, var_other); /* == on <var1:nullable Couple[nullable Object, nullable Object](Couple[nullable Object, nullable Object])>*/
+}
+var6 = !var5;
+var3 = var6;
+goto RET_LABEL4;
+RET_LABEL4:(void)0;
+}
+var2 = var3;
+}
+var = var2;
 goto RET_LABEL;
 RET_LABEL:;
 return var;
@@ -2578,11 +2453,11 @@ val* var5 /* : nullable Object */;
 var1 = self->attrs[COLOR_standard__abstract_collection__CoupleMapIterator___iter].val; /* _iter on <self:CoupleMapIterator[nullable Object, nullable Object]> */
 if (unlikely(var1 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _iter");
-PRINT_ERROR(" (%s:%d)\n", FILE_standard__abstract_collection, 973);
-show_backtrace(1);
+PRINT_ERROR(" (%s:%d)\n", FILE_standard__abstract_collection, 1102);
+fatal_exit(1);
 }
 {
-var2 = ((val* (*)(val* self))(var1->class->vft[COLOR_standard__abstract_collection__Iterator__item]))(var1) /* item on <var1:Iterator[Couple[nullable Object, nullable Object]]>*/;
+var2 = ((val*(*)(val* self))((((long)var1&3)?class_info[((long)var1&3)]:var1->class)->vft[COLOR_standard__abstract_collection__Iterator__item]))(var1); /* item on <var1:Iterator[Couple[nullable Object, nullable Object]]>*/
 }
 {
 { /* Inline abstract_collection#Couple#second (var2) on <var2:nullable Object(Couple[nullable Object, nullable Object])> */
@@ -2606,11 +2481,11 @@ val* var5 /* : nullable Object */;
 var1 = self->attrs[COLOR_standard__abstract_collection__CoupleMapIterator___iter].val; /* _iter on <self:CoupleMapIterator[nullable Object, nullable Object]> */
 if (unlikely(var1 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _iter");
-PRINT_ERROR(" (%s:%d)\n", FILE_standard__abstract_collection, 977);
-show_backtrace(1);
+PRINT_ERROR(" (%s:%d)\n", FILE_standard__abstract_collection, 1106);
+fatal_exit(1);
 }
 {
-var2 = ((val* (*)(val* self))(var1->class->vft[COLOR_standard__abstract_collection__Iterator__item]))(var1) /* item on <var1:Iterator[Couple[nullable Object, nullable Object]]>*/;
+var2 = ((val*(*)(val* self))((((long)var1&3)?class_info[((long)var1&3)]:var1->class)->vft[COLOR_standard__abstract_collection__Iterator__item]))(var1); /* item on <var1:Iterator[Couple[nullable Object, nullable Object]]>*/
 }
 {
 { /* Inline abstract_collection#Couple#first (var2) on <var2:nullable Object(Couple[nullable Object, nullable Object])> */
@@ -2632,11 +2507,11 @@ short int var2 /* : Bool */;
 var1 = self->attrs[COLOR_standard__abstract_collection__CoupleMapIterator___iter].val; /* _iter on <self:CoupleMapIterator[nullable Object, nullable Object]> */
 if (unlikely(var1 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _iter");
-PRINT_ERROR(" (%s:%d)\n", FILE_standard__abstract_collection, 979);
-show_backtrace(1);
+PRINT_ERROR(" (%s:%d)\n", FILE_standard__abstract_collection, 1108);
+fatal_exit(1);
 }
 {
-var2 = ((short int (*)(val* self))(var1->class->vft[COLOR_standard__abstract_collection__Iterator__is_ok]))(var1) /* is_ok on <var1:Iterator[Couple[nullable Object, nullable Object]]>*/;
+var2 = ((short int(*)(val* self))((((long)var1&3)?class_info[((long)var1&3)]:var1->class)->vft[COLOR_standard__abstract_collection__Iterator__is_ok]))(var1); /* is_ok on <var1:Iterator[Couple[nullable Object, nullable Object]]>*/
 }
 var = var2;
 goto RET_LABEL;
@@ -2649,11 +2524,11 @@ val* var /* : Iterator[Couple[nullable Object, nullable Object]] */;
 var = self->attrs[COLOR_standard__abstract_collection__CoupleMapIterator___iter].val; /* _iter on <self:CoupleMapIterator[nullable Object, nullable Object]> */
 if (unlikely(var == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _iter");
-PRINT_ERROR(" (%s:%d)\n", FILE_standard__abstract_collection, 983);
-show_backtrace(1);
+PRINT_ERROR(" (%s:%d)\n", FILE_standard__abstract_collection, 1112);
+fatal_exit(1);
 }
 {
-((void (*)(val* self))(var->class->vft[COLOR_standard__abstract_collection__Iterator__next]))(var) /* next on <var:Iterator[Couple[nullable Object, nullable Object]]>*/;
+((void(*)(val* self))((((long)var&3)?class_info[((long)var&3)]:var->class)->vft[COLOR_standard__abstract_collection__Iterator__next]))(var); /* next on <var:Iterator[Couple[nullable Object, nullable Object]]>*/
 }
 RET_LABEL:;
 }
@@ -2669,16 +2544,16 @@ const char* var_class_name;
 type_struct = self->type->resolution_table->types[COLOR_standard__Iterator__standard__Couple__standard__abstract_collection__CoupleMapIterator___35dK__standard__abstract_collection__CoupleMapIterator___35dV];
 cltype = type_struct->color;
 idtype = type_struct->id;
-if(cltype >= p0->type->table_size) {
+if(cltype >= (((long)p0&3)?type_info[((long)p0&3)]:p0->type)->table_size) {
 var = 0;
 } else {
-var = p0->type->type_table[cltype] == idtype;
+var = (((long)p0&3)?type_info[((long)p0&3)]:p0->type)->type_table[cltype] == idtype;
 }
 if (unlikely(!var)) {
-var_class_name = p0 == NULL ? "null" : p0->type->name;
+var_class_name = p0 == NULL ? "null" : (((long)p0&3)?type_info[((long)p0&3)]:p0->type)->name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "Iterator[Couple[K, V]]", var_class_name);
-PRINT_ERROR(" (%s:%d)\n", FILE_standard__abstract_collection, 986);
-show_backtrace(1);
+PRINT_ERROR(" (%s:%d)\n", FILE_standard__abstract_collection, 1115);
+fatal_exit(1);
 }
 self->attrs[COLOR_standard__abstract_collection__CoupleMapIterator___iter].val = p0; /* _iter on <self:CoupleMapIterator[nullable Object, nullable Object]> */
 RET_LABEL:;
@@ -2686,7 +2561,7 @@ RET_LABEL:;
 /* method abstract_collection#CoupleMapIterator#init for (self: CoupleMapIterator[nullable Object, nullable Object]) */
 void standard__abstract_collection___standard__abstract_collection__CoupleMapIterator___standard__kernel__Object__init(val* self) {
 {
-((void (*)(val* self))(self->class->vft[COLOR_standard__abstract_collection___standard__abstract_collection__CoupleMapIterator___standard__kernel__Object__init]))(self) /* init on <self:CoupleMapIterator[nullable Object, nullable Object]>*/;
+((void(*)(val* self))(self->class->vft[COLOR_standard__abstract_collection___standard__abstract_collection__CoupleMapIterator___standard__kernel__Object__init]))(self); /* init on <self:CoupleMapIterator[nullable Object, nullable Object]>*/
 }
 RET_LABEL:;
 }
@@ -2716,17 +2591,17 @@ is_nullable = type_struct->is_nullable;
 if(p0 == NULL) {
 var = is_nullable;
 } else {
-if(cltype >= p0->type->table_size) {
+if(cltype >= (((long)p0&3)?type_info[((long)p0&3)]:p0->type)->table_size) {
 var = 0;
 } else {
-var = p0->type->type_table[cltype] == idtype;
+var = (((long)p0&3)?type_info[((long)p0&3)]:p0->type)->type_table[cltype] == idtype;
 }
 }
 if (unlikely(!var)) {
-var_class_name = p0 == NULL ? "null" : p0->type->name;
+var_class_name = p0 == NULL ? "null" : (((long)p0&3)?type_info[((long)p0&3)]:p0->type)->name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "F", var_class_name);
-PRINT_ERROR(" (%s:%d)\n", FILE_standard__abstract_collection, 994);
-show_backtrace(1);
+PRINT_ERROR(" (%s:%d)\n", FILE_standard__abstract_collection, 1123);
+fatal_exit(1);
 }
 self->attrs[COLOR_standard__abstract_collection__Couple___first].val = p0; /* _first on <self:Couple[nullable Object, nullable Object]> */
 RET_LABEL:;
@@ -2757,17 +2632,17 @@ is_nullable = type_struct->is_nullable;
 if(p0 == NULL) {
 var = is_nullable;
 } else {
-if(cltype >= p0->type->table_size) {
+if(cltype >= (((long)p0&3)?type_info[((long)p0&3)]:p0->type)->table_size) {
 var = 0;
 } else {
-var = p0->type->type_table[cltype] == idtype;
+var = (((long)p0&3)?type_info[((long)p0&3)]:p0->type)->type_table[cltype] == idtype;
 }
 }
 if (unlikely(!var)) {
-var_class_name = p0 == NULL ? "null" : p0->type->name;
+var_class_name = p0 == NULL ? "null" : (((long)p0&3)?type_info[((long)p0&3)]:p0->type)->name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "S", var_class_name);
-PRINT_ERROR(" (%s:%d)\n", FILE_standard__abstract_collection, 997);
-show_backtrace(1);
+PRINT_ERROR(" (%s:%d)\n", FILE_standard__abstract_collection, 1126);
+fatal_exit(1);
 }
 self->attrs[COLOR_standard__abstract_collection__Couple___second].val = p0; /* _second on <self:Couple[nullable Object, nullable Object]> */
 RET_LABEL:;
@@ -2775,7 +2650,7 @@ RET_LABEL:;
 /* method abstract_collection#Couple#init for (self: Couple[nullable Object, nullable Object]) */
 void standard___standard__Couple___standard__kernel__Object__init(val* self) {
 {
-((void (*)(val* self))(self->class->vft[COLOR_standard___standard__Couple___standard__kernel__Object__init]))(self) /* init on <self:Couple[nullable Object, nullable Object]>*/;
+((void(*)(val* self))(self->class->vft[COLOR_standard___standard__Couple___standard__kernel__Object__init]))(self); /* init on <self:Couple[nullable Object, nullable Object]>*/
 }
 RET_LABEL:;
 }

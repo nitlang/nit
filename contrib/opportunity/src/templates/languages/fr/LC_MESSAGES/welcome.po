@@ -1,0 +1,17 @@
+msgid "Welcome to Opportunity!"
+msgstr "Bienvenue sur Opportunité!"
+
+msgid ""
+"Opportunity is a free (as in free software), easy-to-use, meetup planner."
+msgstr ""
+"Opportunité aide à l'organisation d'événements simplement et librement."
+
+msgid ""
+"You can start using it right now by creating a new Meetup and sharing it "
+"with your friends!"
+msgstr ""
+"Vous pouvez utiliser Opportunité dès maintenant et impressionner vos "
+"amis!"
+
+msgid "Create a Meetup"
+msgstr "Créer un événement"

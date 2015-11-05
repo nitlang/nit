@@ -108,7 +108,6 @@ Settings:
 * `wiki.name`: Displayed name
 * `wiki.desc`: Long description
 * `wiki.logo`: Logo image url
-* `wiki.root_url`: Base url used to resolve links
 * `wiki.root_dir`: Absolute path of base directory
 * `wiki.source_dir`: Source directory (relative path from `wiki.root_dir`)
 * `wiki.out_dir`: Output directory (relative)
@@ -337,4 +336,4 @@ from git:
 
 Be sure to set `wiki.rsync_dir` in order to correctly push your changes.
 When using `--rsync`, keep in mind that the rendered output must be configured
-to work on the web server and set `wiki.root_url` accordingly.
+to work on the web server.

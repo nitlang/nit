@@ -648,14 +648,17 @@ private class Generator
 		add "\tredef fun start_state do return state_{states.first.cname}"
 		add "end"
 		
-		add "redef class Object"
 		for s in states do
-			add "\tprivate fun state_{s.cname}: LRState{s.cname} do return once new LRState{s.cname}"
+			add "private fun state_{s.cname}: LRState{s.cname} do return once new LRState{s.cname}"
 		end
 		for p in gram.prods do
-			add "\tprivate fun goto_{p.cname}: Goto_{p.cname} do return once new Goto_{p.cname}"
+			add "private fun goto_{p.cname}: Goto_{p.cname} do return once new Goto_{p.cname}"
+			for a in p.alts do
+				add "private fun reduce_{a.cname}(parser: Parser) do"
+				gen_reduce_to_nit(a)
+				add "end"
+			end
 		end
-		add "end"
 
 		add "redef class NToken"
 		for s in states do
@@ -666,7 +669,8 @@ private class Generator
 			if s.reduces.length != 1 then
 				add "\t\tparser.parse_error"
 			else
-				gen_reduce_to_nit(s.reduces.first)
+				add "\t\treduce_{s.reduces.first.cname}(parser)"
+				#gen_reduce_to_nit(s.reduces.first)
 			end
 			add "\tend"
 		end
@@ -689,7 +693,8 @@ private class Generator
 				if not s.need_guard then continue
 				if s.reduces.length <= 1 then continue
 				add "\tredef fun action_s{s.cname}(parser) do"
-				gen_reduce_to_nit(s.guarded_reduce[t].first.alt)
+				add "\t\treduce_{s.guarded_reduce[t].first.alt.cname}(parser)"
+				#gen_reduce_to_nit(s.guarded_reduce[t].first.alt)
 				add "\tend"
 			end
 			add "\tredef fun node_name do return \"{t.name.escape_to_nit}\""
@@ -785,7 +790,8 @@ private class Generator
 			if s.need_guard then
 				add "\t\tparser.peek_token.action_s{s.cname}(parser)"
 			else if s.reduces.length == 1 then
-				gen_reduce_to_nit(s.reduces.first)
+				add "\t\treduce_{s.reduces.first.cname}(parser)"
+				#gen_reduce_to_nit(s.reduces.first)
 			else
 				abort
 			end
@@ -997,11 +1003,15 @@ class LRState
 				abort
 			end
 		end
+		# Token to remove as reduction guard to solve S/R conflicts
+		var removed_reduces = new Array[Token]
 		for t, a in guarded_reduce do
 			if a.length > 1 then
 				print "REDUCE/REDUCE Conflict on state {self.number} {self.name} for token {t}:"
 				for i in a do print "\treduce: {i}"
-			else if guarded_shift.has_key(t) then
+				conflicting_items.add_all a
+			end
+			if guarded_shift.has_key(t) then
 				var ri = a.first
 				var confs = new Array[Item]
 				var ress = new Array[String]
@@ -1033,15 +1043,27 @@ class LRState
 					print "Automatic Dangling on state {self.number} {self.name} for token {t}:"
 					print "\treduce: {ri}"
 					for r in ress do print r
-					guarded_reduce.keys.remove(t)
+					removed_reduces.add t
 				else
 					print "SHIFT/REDUCE Conflict on state {self.number} {self.name} for token {t}:"
 					print "\treduce: {ri}"
 					for i in guarded_shift[t] do print "\tshift:  {i}"
+					removed_reduces.add t
+					conflicting_items.add_all a
+					conflicting_items.add_all guarded_shift[t]
 				end
 			end
 		end
+		for t in removed_reduces do
+			guarded_reduce.keys.remove(t)
+			t.reduces.remove(self)
+		end
 	end
+
+	# Items within a reduce/reduce or a shift/reduce conflict.
+	#
+	# Is computed by `analysis`
+	var conflicting_items = new ArraySet[Item]
 
 	# Return `i` and all other items of the state that expands, directly or indirectly, to `i`
 	fun back_expand(i: Item): Set[Item]

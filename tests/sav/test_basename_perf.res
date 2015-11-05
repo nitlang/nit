@@ -1,0 +1,1 @@
+Usage: ./test paths

@@ -337,7 +337,8 @@ class Lexer
 			if sp >= string_len then
 				dfa_state = -1
 			else
-				var c = string[sp].ascii
+				var c = string[sp].code_point
+				if c >= 255 then c = 255
 				sp += 1
 
 				var cr = _cr

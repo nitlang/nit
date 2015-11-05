@@ -66,6 +66,8 @@ redef class VirtualMachine
 				callsite.id, callsite.offset)
 		end
 
+		#TODO : we need recompilations here
+		callsite.status = 0
 		return self.call(propdef, args)
 	end
 end
@@ -92,9 +94,10 @@ redef class AAttrFormExpr
 	# * `recv` The receiver (The object) of the access
 	protected fun optimize(mproperty: MAttribute, recv: MutableInstance)
 	do
-		if mproperty.intro_mclassdef.mclass.positions_attributes[recv.mtype.as(MClassType).mclass] != -1 then
+		var position = recv.mtype.as(MClassType).mclass.get_position_attributes(mproperty.intro_mclassdef.mclass)
+		if position > 0 then
 			# if this attribute class has an unique position for this receiver, then use direct access
-			offset = mproperty.absolute_offset
+			offset = position + mproperty.offset
 			status = 1
 		else
 			# Otherwise, perfect hashing must be used
@@ -134,6 +137,9 @@ redef class AAttrExpr
 			abort
 		end
 
+		#TODO : we need recompilations here
+		status = 0
+
 		return i
 	end
 end
@@ -163,6 +169,9 @@ redef class AAttrAssignExpr
 			v.write_attribute_ph(recv.internal_attributes, recv.vtable.internal_vtable,
 					recv.vtable.mask, id, offset, i)
 		end
+
+		#TODO : we need recompilations here
+		status = 0
 	end
 end
 
@@ -189,8 +198,9 @@ redef class CallSite
 	# Otherwise we must use perfect hashing
 	fun optimize(recv: Instance)
 	do
-		if mproperty.intro_mclassdef.mclass.positions_methods[recv.mtype.as(MClassType).mclass] != -1 then
-			offset = mproperty.absolute_offset
+		var position = recv.mtype.as(MClassType).mclass.get_position_methods(mproperty.intro_mclassdef.mclass)
+		if position > 0 then
+			offset = position + mproperty.offset
 			status = 1
 		else
 			offset = mproperty.offset
@@ -222,7 +232,7 @@ redef class AIsaExpr
 		var recv = v.expr(self.n_expr)
 		if recv == null then return null
 
-		if status == 0 then optimize(v, recv.mtype, self.cast_type.as(not null))
+		optimize(v, recv.mtype, self.cast_type.as(not null))
 		var mtype = v.unanchor_type(self.cast_type.as(not null))
 
 		# If this test can be optimized, directly call appropriate subtyping methods
@@ -248,20 +258,18 @@ redef class AIsaExpr
 			return
 		end
 
-		if not target.mclass.loaded then return
+		if not target.mclass.abstract_loaded then return
 
-		# Try to get the position of the target type in source's structures
-		var value = source.mclass.positions_methods.get_or_null(target.mclass)
+		# If the value is positive, the target class has an invariant position in source's structures
+		var value = source.mclass.get_position_methods(target.mclass)
 
-		if value != null then
-			if value != -1 then
-				# Store informations for Cohen test
-				position = target.mclass.color
-				status = 1
-			else
-				# We use perfect hashing
-				status = 2
-			end
+		if value > 0 then
+			# `value - 2` is the position of the target identifier in source vtable
+			position = value - 2
+			status = 1
+		else
+			# We use perfect hashing
+			status = 2
 		end
 		id = target.mclass.vtable.id
 	end
@@ -289,7 +297,7 @@ redef class AAsCastExpr
 		var recv = v.expr(self.n_expr)
 		if recv == null then return null
 
-		if status == 0 then optimize(v, recv.mtype, self.mtype.as(not null))
+		optimize(v, recv.mtype, self.mtype.as(not null))
 
 		var mtype = self.mtype.as(not null)
 		var amtype = v.unanchor_type(mtype)
@@ -324,18 +332,16 @@ redef class AAsCastExpr
 
 		if not target.mclass.loaded then return
 
-		# Try to get the position of the target type in source's structures
-		var value = source.mclass.positions_methods.get_or_null(target.mclass)
+		# If the value is positive, the target class has an invariant position in source's structures
+		var value = source.mclass.get_position_methods(target.mclass)
 
-		if value != null then
-			if value != -1 then
-				# Store informations for Cohen test
-				position = target.mclass.color
-				status = 1
-			else
-				# We use perfect hashing
-				status = 2
-			end
+		if value > 0 then
+			# `value - 2` is the position of the target identifier in source vtable
+			position = value - 2
+			status = 1
+		else
+			# We use perfect hashing
+			status = 2
 		end
 		id = target.mclass.vtable.id
 	end

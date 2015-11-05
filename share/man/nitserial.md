@@ -1,5 +1,3 @@
-% NITSERIAL(1)
-
 # NAME
 
 nitserial - generates a serialization support module
@@ -10,11 +8,14 @@ nitserial [*options*]... FILE
 
 # OPTIONS
 
-`-o`, `--output`
-:   Output file (can also be 'stdout')
+### `-o`, `--output`
+Output file (can also be 'stdout').
 
-`--dir`
-:   Output directory
+### `--dir`
+Output directory.
+
+### `-d`, `--depth`
+Depth of the visit and generation <module, group, package>.
 
 # SEE ALSO
 

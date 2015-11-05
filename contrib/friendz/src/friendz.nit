@@ -13,12 +13,12 @@ module friendz is
 	app_version(0, 1, git_revision)
 end
 
+import app::audio
 import mnit
 import realtime
 import solver
 import mnit::tileset
 import app::data_store
-import md5
 
 intrude import grid
 intrude import level
@@ -168,7 +168,7 @@ class TextButton
 	do
 		if over1 == null then return
 		if not self.enabled then return
-		game.snd_click.replay
+		game.snd_click.play
 		self.ttl = 10
 		self.dirty = true
 		self.enter2
@@ -181,14 +181,14 @@ class TextButton
 	redef fun click(ev)
 	do
 		if not self.enabled then
-			game.snd_bing.replay
+			game.snd_bing.play
 		else
 			if self.toggleable then
 				self.toggled = not self.toggled
 				if self.toggled then self.over = self.over2 else self.over = self.over1
 				game.statusbar.over_txt = self.over
 			end
-			game.snd_whip.replay
+			game.snd_whip.play
 		end
 		self.click2(ev)
 	end
@@ -216,11 +216,11 @@ class LevelButton
 
 		self.over = self.level.fullname
 		if self.level.get_state >= l.l_won then
-			if game.levels[9].get_state >= l.l_won then self.over += " --- {self.level.score}/{self.level.par}"
+			if game.levels[9].get_state >= l.l_won then self.over += " --- {self.level.score}/{self.level.gold}"
 		else if self.level.get_state >= l.l_open then
-			if game.levels[9].get_state >= l.l_open then self.over +=  " --- ?/{self.level.par}"
+			if game.levels[9].get_state >= l.l_open then self.over +=  " --- ?/{self.level.gold}"
 		end
-		#self.enabled = l.get_state >= l.l_open
+		self.enabled = l.get_state >= l.l_open or game.cheated
 	end
 
 	redef fun draw(ctx)
@@ -241,7 +241,7 @@ class LevelButton
 		end
 		ctx.blit(game.img[ix,iy], self.x, self.y)
 
-		if s == l.l_par then
+		if s == l.l_gold then
 			ctx.blit(game.img2[7,0], self.x + bw*5/8, self.y-bh*1/8)
 		end
 		ctx.textx(self.level.name, self.x+5, self.y+5, 24, null, null)
@@ -250,10 +250,10 @@ class LevelButton
 	redef fun click(ev)
 	do
 		if self.enabled then
-			game.snd_whip.replay
+			game.snd_whip.play
 			game.play(self.level)
 		else
-			game.snd_bing.replay
+			game.snd_bing.play
 			game.statusbar.set_tmp("Locked level", "red")
 		end
 	end
@@ -293,10 +293,10 @@ class Achievement
 	redef fun click(ev)
 	do
 		if not self.enabled then
-			game.snd_bing.replay
+			game.snd_bing.play
 			game.statusbar.set_tmp("Locked achievement!", "red")
 		else
-			game.snd_whip.replay
+			game.snd_whip.play
 			self.click2(ev)
 		end
 	end
@@ -455,7 +455,7 @@ class Button
 		if game.selected_button == game.button_size then game.board.dirty=true
 		if sel != null then sel.dirty=true
 		game.selected_button = self
-		game.snd_click.replay
+		game.snd_click.play
 	end
 
 	# Current inputed chain
@@ -469,36 +469,36 @@ class Button
 		if ev.drag and self.kind>0 and not chain.is_empty then
 			if self.chain.length >= 2 and self.chain[1] == t then
 				var t2 = self.chain.shift
-				game.snd_click.replay
+				game.snd_click.play
 				if t2.fixed and not game.editing then return
 				t2.update(0)
 				return
 			end
 			if t.fixed and t.kind == self.kind then
 				self.chain.unshift(t)
-				game.snd_click.replay
+				game.snd_click.play
 				return
 			end
 			if (self.chain[0].x - t.x).abs + (self.chain[0].y - t.y).abs != 1 then return
 			if t.fixed and not game.editing then
-				game.snd_bing.replay
+				game.snd_bing.play
 				return
 			end
 			if t.kind != 0 and t.kind != self.kind then
 				t.shocked = 5
-				game.snd_duh.replay
+				game.snd_duh.play
 				return
 			end
 			self.chain.unshift(t)
 			if t.kind == self.kind then return
-			game.snd_click.replay
+			game.snd_click.play
 			t.update(self.kind)
 			return
 		end
 
 		if t.fixed and not game.editing then
 			if t.kind == 0 then
-				game.snd_bing.replay
+				game.snd_bing.play
 				return
 			end
 			if t.kind != self.kind and not ev.drag then
@@ -506,13 +506,13 @@ class Button
 				game.buttons[t.kind].chain = [t]
 			else
 				self.chain = [t]
-				game.snd_bing.replay
+				game.snd_bing.play
 			end
 			return
 		end
 		if t.fixed and game.editing and self == game.button_erase and t.kind == 0 then
 			t.fixed = false
-			game.snd_click.replay
+			game.snd_click.play
 			return
 		end
 
@@ -522,7 +522,7 @@ class Button
 			if t.kind == 0 then return
 			if self.kind != 0 and t.kind != self.kind then
 				t.shocked = 5
-				game.snd_duh.replay
+				game.snd_duh.play
 				return
 			end
 			nkind = 0
@@ -534,7 +534,7 @@ class Button
 			self.chain.clear
 		end
 		if nkind == t.kind then return
-		game.snd_click.replay
+		game.snd_click.play
 		t.update(nkind)
 	end
 end
@@ -641,7 +641,7 @@ class MetalButton
 		if not ev.drag then self.fixed = not t.fixed
 		if t.fixed == self.fixed then return
 		t.fixed = self.fixed
-		game.snd_click.replay
+		game.snd_click.play
 	end
 end
 
@@ -684,7 +684,7 @@ class ResizeButton
 		var w = t.x+1
 		var h = t.y+1
 		if w < 3 or h < 3 then
-			game.snd_bing.replay
+			game.snd_bing.play
 			game.statusbar.set_tmp("Too small!", "red")
 			return
 		end
@@ -701,11 +701,11 @@ class ResizeButton
 			end
 		end
 		if aborts then
-			game.snd_duh.replay
+			game.snd_duh.play
 			game.statusbar.set_tmp("Monsters on the way!", "red")
 			return
 		end
-		game.snd_click.replay
+		game.snd_click.play
 		grid.resize(w,h)
 	end
 end
@@ -729,9 +729,9 @@ class Score
 		end
 		if game.levels[9].get_state >= level.l_won then
 			if level.is_challenge then
-				ctx.textx("GOAL: {level.par}",self.x,self.y+44,21,"yellow",null)
+				ctx.textx("GOAL: {level.gold}",self.x,self.y+44,21,"yellow",null)
 			else
-				ctx.textx("PAR: {level.par}",self.x,self.y+44,21,"yellow",null)
+				ctx.textx("GOLD: {level.gold}",self.x,self.y+44,21,"yellow",null)
 			end
 		end
 	end
@@ -776,7 +776,7 @@ class StatusBar
 	do
 		print "***STATUS** {txt}"
 		self.tmp_txt = txt
-		self.tmp_txt_ttl = 20
+		self.tmp_txt_ttl = 60
 		self.tmp_txt_color = color
 	end
 
@@ -804,23 +804,6 @@ class StatusBar
 end
 
 # ************************************************************************/
-
-# Simple audio asset
-class Audio
-	var path: String
-
-	# placebo
-	fun play do end
-
-	# placebo
-	fun pause do end
-
-	# Play a sound.
-	fun replay
-	do
-		sys.system("aplay assets/{path} &")
-	end
-end
 
 redef class Display
 	# Display a text
@@ -889,26 +872,6 @@ redef class Game
 	# Font
 	var font = new TileSetFont(app.load_image("deltaforce_font.png"), 16, 17, "ABCDEFGHIJKLMNOPQRSTUVWXYZ 0123456789.:;!?\"'() -,/")
 
-	var xxx = """
-	fun save_cookie(name, val:String) do
-	var days = 365
-	var date = new Date()
-	date.setTime(date.getTime()+(days*24*60*60*1000))
-	document.cookie = name+"="+val+"; expires="+date.toGMTString()+"; path=/"
-	end
-
-	fun read_cookie(name:String):String do
-	var key = name + "="
-	var ca = document.cookie.split(';')
-	for(var i=0; i<ca.length; i++) do
-	var c = ca[i]
-	while (c[0]==' ') c = c.substring(1, c.length)
-	if (c.indexOf(key) == 0) return c.substring(key.length)
-	end
-	return null
-	end
-	"""
-
 	# DISPLAY *****************************************************************
 
 	# Is the game in editing mode
@@ -920,28 +883,29 @@ redef class Game
 	# SOUND
 
 	# Is the music muted?
-	var music_muted: Bool = true #read_cookie("music_muted")
+	var music_muted: Bool = app.data_store["music_muted"] == true
 
 	# Is the sound effects muted?
-	var sfx_muted: Bool = true #read_cookie("sfx_muted")
+	var sfx_muted: Bool = app.data_store["sfx_muted"] == true
 
 	# The background music resource. */
-	var music = new Audio("music.ogg")
+	var music = new Music("music.ogg")
 
 	# Click sound
-	var snd_click = new Audio("click.wav")
+	var snd_click = new Sound("click.wav")
 
 	# Wining soulf
-	var snd_win = new Audio("level.wav")
+	var snd_win = new Sound("level.wav")
 
 	# Shocked sound
-	var snd_duh = new Audio("duh.wav")
+	var snd_duh = new Sound("duh.wav")
 
 	# metal sound
-	var snd_bing = new Audio("bing.wav")
+	var snd_bing = new Sound("bing.wav")
 
 	# transition sound
-	var snd_whip = new Audio("whip.wav")
+	var snd_whip = new Sound("whip.wav")
+
 
 	# INPUT ******************************************************************
 
@@ -972,6 +936,18 @@ redef class Game
 	# ResizeButton
 	var button_size = new ResizeButton(self)
 
+	# Cheat mode enabled?
+	var cheated = false
+
+	init
+	do
+		init_buttons
+		entities.clear
+		title
+
+		if not music_muted then music.play
+	end
+
 	# fill `buttons`
 	fun init_buttons
 	do
@@ -983,8 +959,9 @@ redef class Game
 	# Play a level in player mode.
 	fun play(l: Level)
 	do
+		save # save the previous level grid
 		level = l
-		grid.load(level.str)
+		grid.load(level.saved_str or else level.str)
 		init_play_menu(false)
 		if level.status != "" then
 			statusbar.main_txt = level.status
@@ -1078,6 +1055,7 @@ redef class Game
 	# Helper function to initialize the menu (and tile) screen
 	fun init_menu
 	do
+		save # save the previous level grid
 		init_game
 		level = null
 		var i = levels.first
@@ -1101,7 +1079,7 @@ redef class Game
 		end
 		t = new Achievement(self, 0, "Training")
 		entities.push(t)
-		t = new Achievement(self, 1, "Par")
+		t = new Achievement(self, 1, "Gold")
 		entities.push(t)
 		t = new Achievement(self, 2, "Editor")
 		entities.push(t)
@@ -1117,14 +1095,6 @@ redef class Game
 	# Last function called when the lauch state is ready
 	fun run do
 		dirty_all = true
-	end
-
-	init
-	do
-		load_levels
-		init_buttons
-		entities.clear
-		title
 	end
 
 	# Should all entity redrawn?
@@ -1240,8 +1210,19 @@ redef class Game
 	fun onKeyDown(ev: Event) do
 		var kc = ev.char_code
 		if kc == "e" then
+			set_tmp("RUN EDITOR")
 			grid_edit = grid.copy(true)
 			edit_grid(grid)
+		else if kc == "c" then
+			if cheated then
+				set_tmp("CHEAT: OFF")
+				snd_duh.play
+				cheated = false
+			else
+				set_tmp("CHEAT: ON")
+				snd_win.play
+				cheated = true
+			end
 		else if kc == "s" then
 			if solver == null then
 				solver = (new FriendzProblem(grid)).solve
@@ -1249,20 +1230,28 @@ redef class Game
 			else
 				solver_pause = not solver_pause
 			end
+			if solver_pause then
+				set_tmp("SOLVER: PAUSED")
+			else
+				set_tmp("SOLVER: ON")
+			end
 			#solver.step
 		else if kc == "d" then
 			if solver == null then
 				solver = (new FriendzProblem(grid)).solve
 				solver_pause = true
+				set_tmp("SOLVER: ON")
 			else
+				solver_pause = true
 				solver.run_steps(1)
+				set_tmp("SOLVER: ONE STEP")
 			end
 		else if kc == "+" then
 			solver_steps += 100
-			print solver_steps
+			set_tmp("SOLVER: {solver_steps} STEPS")
 		else if kc == "-" then
 			solver_steps -= 100
-			print solver_steps
+			set_tmp("SOLVER: {solver_steps} STEPS")
 		else for g in entities do
 			if kc == g.shortcut then
 				g.click(ev)
@@ -1271,15 +1260,33 @@ redef class Game
 		end
 	end
 
+	fun set_tmp(s: String)
+	do
+		statusbar.set_tmp(s, "cyan")
+	end
+
 	redef fun load_levels
 	do
 		super
 
 		for level in levels do
-			var score = app.data_store["s{level.str.md5}"]
+			var score = app.data_store["s{level.str}"]
 			if score isa Int then
 				level.score = score
 			end
+			var saved_str = app.data_store["g{level.str}"]
+			if saved_str isa String then
+				print "LOAD {level.name}: {saved_str}"
+				level.saved_str = saved_str
+			end
+		end
+	end
+
+	fun save
+	do
+		var l = level
+		if l != null then
+			l.save
 		end
 	end
 end
@@ -1297,7 +1304,7 @@ class Splash
 	end
 	redef fun click(ev)
 	do
-		game.snd_whip.replay
+		game.snd_whip.play
 		game.menu
 	end
 end
@@ -1317,7 +1324,7 @@ class NextLevelButton
 			self.dirty = true
 			self.enabled = w
 			if w then
-				game.snd_win.replay
+				game.snd_win.play
 				game.statusbar.set_tmp("Level solved!", "cyan")
 			end
 		end
@@ -1326,7 +1333,7 @@ class NextLevelButton
 	redef fun click(ev)
 	do
 		if not self.enabled then
-			game.snd_duh.replay
+			game.snd_duh.play
 			var grid = game.grid
 			var monsters = grid.monsters
 			var angry = new Array[Tile]
@@ -1364,7 +1371,7 @@ class NextLevelButton
 			return
 		end
 
-		game.snd_whip.replay
+		game.snd_whip.play
 		game.play_next
 	end
 end
@@ -1374,12 +1381,13 @@ class MusicButton
 	init(game: Game)
 	do
 		super(game, "MUSIC", 470, 412, "purple", "Mute the music", "Unmute the music")
+		toggled = game.music_muted
 	end
 	redef fun click2(ev)
 	do
 		game.music_muted = self.toggled
 		if game.music_muted then game.music.pause else game.music.play
-		#game.save_cookie("music_muted",music_muted?"true":"")
+		app.data_store["music_muted"] = game.music_muted
 	end
 end
 
@@ -1388,13 +1396,14 @@ class SFXButton
 	init(game: Game)
 	do
 		super(game, "SOUND FX", 470, 382, "purple", "Mute the sound effects", "Unmute the sound effects")
+		toggled = game.sfx_muted
 	end
 
 	redef fun click2(ev)
 	do
 		game.sfx_muted = self.toggled
-		if not game.sfx_muted then game.snd_whip.replay # Because the automatic one was muted
-		#save_cookie("sfx_muted",sfx_muted?"true":"")
+		if not game.sfx_muted then game.snd_whip.play # Because the automatic one was muted
+		app.data_store["sfx_muted"] = game.sfx_muted
 	end
 end
 
@@ -1471,10 +1480,10 @@ class WonButton
 		if not self.enabled then
 			game.statusbar.set_tmp("Solve the level first!", "red")
 		else if ge != null then
-			game.snd_whip.replay
+			game.snd_whip.play
 			game.edit_grid(ge)
 		else
-			game.snd_whip.replay
+			game.snd_whip.play
 			game.menu
 		end
 	end
@@ -1486,7 +1495,7 @@ class WonButton
 			self.dirty = true
 			self.enabled = w
 			if w then
-				game.snd_win.replay
+				game.snd_win.play
 				game.statusbar.set_tmp("Level solved!", "cyan")
 			end
 		end
@@ -1594,6 +1603,12 @@ redef class App
 		# img loading?
 	end
 
+	redef fun on_pause
+	do
+		super
+		game.save
+	end
+
 	# Maximum wanted frame per second
 	var max_fps = 30
 
@@ -1651,8 +1666,16 @@ redef class KeyEvent
 end
 
 redef class Level
-	redef fun save
+	# Save the score and grid of the level
+	fun save
 	do
-		app.data_store["s{str.md5}"] = if score > 0 then score else null
+		app.data_store["s{str}"] = if score > 0 then score else null
+		var saved = game.grid.save
+		saved_str = saved
+		app.data_store["g{str}"] = saved
+		print "SAVE: {name}: {saved}"
 	end
+
+	# The saved player grid (to continue games)
+	var saved_str: nullable String = null
 end

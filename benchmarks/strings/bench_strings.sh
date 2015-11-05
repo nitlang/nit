@@ -20,375 +20,320 @@ source ../bench_plot.sh
 # Can be overrided with 'the option -n'
 count=5
 
+benches="iteration
+concat
+substring
+index
+compiler
+basic"
+
 function usage()
 {
 	echo "run_bench: [options]* bench_name args"
+	echo ""
+	echo "Options:"
 	echo "  -v: verbose mode"
 	echo "  -n count: number of execution for each bar (default: $count)"
 	echo "  -h: this help"
+	echo "  --head-only: do not try to pass benchmarks on variants"
+	echo "  --maxlen min_maxln inc_maxln max_maxln: start bench with different values of threshold between ropes and flats"
 	echo ""
 	echo "Benches : "
-	echo "  iter: bench iterations"
-	echo "    - usage : iter max_nb_cct loops strlen"
-	echo "  cct: concatenation benching"
-	echo "    - usage : cct max_nb_cct loops strlen"
-	echo "  substr: substring benching"
-	echo "    - usage : substr max_nb_cct loops strlen"
-	echo "  array: Benchmark for the to_s in array"
-	echo "    - usage : array nb_cct loops max_arrlen"
+	echo "  index: indexed access benchmark"
+	echo "    - usage : index loops strlen_min strlen_inc strlen_max"
+	echo "  concat: string concatenation benchmark"
+	echo "    - usage : concat loops strlen min_cct cct_inc max_cct"
+	echo "  iteration: iteration benchmark"
+	echo "    - usage : iteration loops strlen_min strlen_inc strlen_max"
+	echo "  substring: substring benchmark"
+	echo "    - usage : substring loops strlen_min strlen_inc strlen_max"
+	echo "  compiler: compiler benchmark"
+	echo "    - usage : compiler"
+	echo "  basic : basic functionnality test of the variants on Hello World"
+	echo "    - usage : basic"
 }
 
-function bench_array()
+function bench_index()
 {
-	if [ -d arraytos ]; then
-		rm arraytos/*
-	else
-		mkdir arraytos
+	if [ $# -lt 4 ]; then
+		echo "Wrong arguments for benchmark index."
+		usage
+		exit
 	fi
-	cd arraytos
+	echo "Generating executable index_bench for variant $variant";
 
-	if $verbose; then
-		echo "*** Benching Array.to_s performance ***"
-	fi
+	../../bin/nitc --global index_bench.nit -D maxlen=$curr_maxln
 
-	../../../bin/nitc --global ../array_tos.nit -m ../array_to_s_vars/array_to_s_rope.nit
+	bench_indexed_variant "string" $1 $2 $3 $4
+	bench_indexed_variant "buffer" $1 $2 $3 $4
 
-	prepare_res arr_tos_ropes.out arr_tos_ropes ropes
-	if $verbose; then
-		echo "Ropes :"
-	fi
-	for i in `seq 1 "$3"`; do
-		if $verbose; then
-			echo "String length = $i, Concats/loop = $1, Loops = $2"
-		fi
-		bench_command $i ropes$i ./array_tos --loops $2 --strlen $i --ccts $1
+	rm index_bench
+}
+
+# $1: string or buffer
+# $2: loops
+# $3: strlen min
+# $4: strlen inc
+# $5: strlen max
+function bench_indexed_variant()
+{
+	tmp="${variant}_${1}_${curr_maxln}.out"
+	prepare_res_lines index_$tmp $tmp $tmp
+	for i in `seq "$3" "$4" "$5"`; do
+		bench_command $i index_$tmp$i ./index_bench -m $1 --loops $2 --strlen $i
 	done
-
-	../../../bin/nitc --global ../array_tos.nit -m ../array_to_s_vars/array_to_s_flatstr.nit
-
-	prepare_res arr_tos_flat.out arr_tos_flat flatstring
-	if $verbose; then
-		echo "FlatStrings :"
-	fi
-	for i in `seq 1 "$3"`; do
-		if $verbose; then
-			echo "String length = $i, Concats/loop = $1, Loops = $2"
-		fi
-		bench_command $i flatstring$i ./array_tos --loops $2 --strlen $i --ccts $1
-	done
-
-	../../../bin/nitc --global ../array_tos.nit -m ../array_to_s_vars/array_to_s_buffer.nit
-
-	prepare_res arr_tos_buf.out arr_tos_buf flatbuffer
-	if $verbose; then
-		echo "FlatBuffers :"
-	fi
-	for i in `seq 1 "$3"`; do
-		if $verbose; then
-			echo "String length = $i, Concats/loop = $1, Loops = $2"
-		fi
-		bench_command $i flatbuffer$i ./array_tos --loops $2 --strlen $i --ccts $1
-	done
-
-	../../../bin/nitc --global ../array_tos.nit -m ../array_to_s_vars/array_to_s_manual.nit
-
-	prepare_res arr_tos_man.out arr_tos_man memmove
-	if $verbose; then
-		echo "Memmove :"
-	fi
-	for i in `seq 1 "$3"`; do
-		if $verbose; then
-			echo "String length = $i, Concats/loop = $1, Loops = $2"
-		fi
-		bench_command $i memmove$i ./array_tos --loops $2 --strlen $i --ccts $1
-	done
-
-	../../../bin/nitc --global ../array_tos.nit -m ../array_to_s_vars/array_to_s_man_buf.nit
-
-	prepare_res arr_tos_man_buf.out arr_tos_man_buf flatbuf_with_capacity
-	if $verbose; then
-		echo "FlatBuffer.with_capacity :"
-	fi
-	for i in `seq 1 "$3"`; do
-		if $verbose; then
-			echo "String length = $i, Concats/loop = $1, Loops = $2"
-		fi
-		bench_command $i flatbuf_with_capacity$i ./array_tos --loops $2 --strlen $i --ccts $1
-	done
-
-	../../../bin/nitc --global ../array_tos.nit -m ../array_to_s_vars/array_to_s_rope_buf.nit
-
-	prepare_res arr_tos_rope_buf.out arr_tos_rope_buf ropebuf
-	if $verbose; then
-		echo "RopeBuffer :"
-	fi
-	for i in `seq 1 "$3"`; do
-		if $verbose; then
-			echo "String length = $i, Concats/loop = $1, Loops = $2"
-		fi
-		bench_command $i ropebuf$i ./array_tos --loops $2 --strlen $i --ccts $1
-	done
-
-	plot array_tos.gnu
-
-	cd ..
 }
 
 function bench_concat()
 {
-	if [ -d string_concat ]; then
-		rm string_concat/*
-	else
-		mkdir string_concat
-	fi
-	cd string_concat
-
-	../../../bin/nitc --global ../chain_concat.nit
-
-	if $verbose; then
-		echo "*** Benching concat performance ***"
+	if [ $# -lt 5 ]; then
+		echo "Wrong arguments for benchmark concat."
+		usage
+		exit
 	fi
 
-	prepare_res concat_flat.out concat_flat flatstring
-	if $verbose; then
-		echo "FlatStrings :"
-	fi
-	for i in `seq 1 "$1"`; do
-		if $verbose; then
-			echo "String length = $i, Concats/loop = $2, Loops = $3"
-		fi
-		bench_command $i flatstring$i ./chain_concat -m flatstr --loops $2 --strlen $3 --ccts $i
+	echo "Generating executable chain_concat for variant $variant"
+	../../bin/nitc chain_concat.nit -D maxlen=$curr_maxlen
+
+	bench_concat_variant "string" $1 $2 $3 $4 $5
+	bench_concat_variant "buffer" $1 $2 $3 $4 $5
+
+	rm chain_concat
+}
+
+# $1: string or buffer
+# $2: loops
+# $3: strlen
+# $4: concatenations min
+# $5: concatenations inc
+# $6: concatenations max
+function bench_concat_variant()
+{
+	tmp="${variant}_$1"
+	prepare_res_lines out/concat/concat_$tmp.out $tmp $tmp
+	for i in `seq "$4" "$5" "$6"`; do
+		bench_command $i $tmp$i ./chain_concat -m $1 --loops $2 --strlen $3 --ccts $i
 	done
-
-	prepare_res concat_buf.out concat_buf flatbuffer
-	if $verbose; then
-		echo "FlatBuffers :"
-	fi
-	for i in `seq 1 "$1"`; do
-		if $verbose; then
-			echo "String length = $i, Concats/loop = $2, Loops = $3"
-		fi
-		bench_command $i flatbuffer$i ./chain_concat -m flatbuf --loops $2 --strlen $3 --ccts $i
-	done
-
-	prepare_res concat_ropes.out concat_ropes ropes
-	if $verbose; then
-		echo "Ropes :"
-	fi
-	for i in `seq 1 "$1"`; do
-		if $verbose; then
-			echo "String length = $i, Concats/loop = $2, Loops = $3"
-		fi
-		bench_command $i ropes$i ./chain_concat -m ropestr --loops $2 --strlen $3 --ccts $i
-	done
-
-	prepare_res concat_buf_ropes.out concat_buf_ropes buffered_ropes
-	if $verbose; then
-		echo "Rope Buffer:"
-	fi
-	for i in `seq 1 "$1"`; do
-		if $verbose; then
-			echo "string length = $i, concats/loop = $2, loops = $3"
-		fi
-		bench_command $i buf_ropes$i ./chain_concat -m ropebuf --loops $2 --strlen $3 --ccts $i
-	done
-
-	plot concat.gnu
-
-	cd ..
 }
 
 function bench_iteration()
 {
-	if [ -d string_iter ]; then
-		rm string_iter/*
-	else
-		mkdir string_iter
+	if [ $# -lt 4 ]; then
+		echo "Wrong arguments for benchmark iteration."
+		usage
+		exit
 	fi
-	cd string_iter
+	echo "Generating executable iteration_bench for variant $variant"
+	../../bin/nitc --global iteration_bench.nit -D maxlen=$curr_maxlen
 
-	if $verbose; then
-		echo "*** Benching iteration performance ***"
-	fi
+	bench_iterate_variant "iterator" "string" $1 $2 $3 $4
+	bench_iterate_variant "index" "string" $1 $2 $3 $4
+	bench_iterate_variant "iterator" "buffer" $1 $2 $3 $4
+	bench_iterate_variant "index" "buffer" $1 $2 $3 $4
 
-	../../../bin/nitc --global ../iteration_bench.nit
-
-	prepare_res iter_flat_iter.out iter_flat_iter flatstring_iter
-	if $verbose; then
-		echo "FlatStrings by iterator :"
-	fi
-	for i in `seq 1 "$1"`; do
-		if $verbose; then
-			echo "String base length = $1, Concats = $i, Loops = $3"
-		fi
-		bench_command $i flatstr_iter$i ./iteration_bench -m flatstr --iter-mode iterator --loops $2 --strlen $3 --ccts $i
-	done
-
-	prepare_res iter_flat_index.out iter_flat_index flatstring_index
-	if $verbose; then
-		echo "FlatStrings by index :"
-	fi
-	for i in `seq 1 "$1"`; do
-		if $verbose; then
-			echo "String base length = $1, Concats = $i, Loops = $3"
-		fi
-		bench_command $i flatstr_index$i ./iteration_bench -m flatstr --iter-mode index --loops $2 --strlen $3 --ccts $i
-	done
-
-	prepare_res iter_buf_iter.out iter_buf_iter flatbuffer_iter
-	if $verbose; then
-		echo "FlatBuffers by iterator :"
-	fi
-	for i in `seq 1 "$1"`; do
-		if $verbose; then
-			echo "String base length = $1, Concats = $i, Loops = $3"
-		fi
-		bench_command $i flatbuf_iter$i ./iteration_bench -m flatbuf --iter-mode iterator --loops $2 --strlen $3 --ccts $i
-	done
-
-	prepare_res iter_buf_index.out iter_buf_index flatbuffer_index
-	if $verbose; then
-		echo "FlatBuffers by index:"
-	fi
-	for i in `seq 1 "$1"`; do
-		if $verbose; then
-			echo "String base length = $1, Concats = $i, Loops = $3"
-		fi
-		bench_command $i flatbuf_index$i ./iteration_bench -m flatbuf --iter-mode index --loops $2 --strlen $3 --ccts $i
-	done
-
-	prepare_res iter_ropes_iter.out iter_ropes_iter ropes_iter
-	if $verbose; then
-		echo "Ropes by iterator :"
-	fi
-	for i in `seq 1 "$1"`; do
-		if $verbose; then
-			echo "String base length = $1, Concats (depth of the rope) = $i, Loops = $3"
-		fi
-		bench_command $i ropes_iter$i ./iteration_bench -m ropestr --iter-mode iterator --loops $2 --strlen $3 --ccts $i
-	done
-
-	prepare_res iter_ropes_index.out iter_ropes_index ropes_index
-	if $verbose; then
-		echo "Ropes by index :"
-	fi
-	for i in `seq 1 "$1"`; do
-		if $verbose; then
-			echo "String base length = $1, Concats (depth of the rope) = $i, Loops = $3"
-		fi
-		bench_command $i ropes_index$i ./iteration_bench -m ropestr --iter-mode index --loops $2 --strlen $3 --ccts $i
-	done
-
-	prepare_res iter_buf_ropes_iter.out iter_buf_ropes_iter buf_ropes_iter
-	if $verbose; then
-		echo "RopeBuffer by iterator :"
-	fi
-	for i in `seq 1 "$1"`; do
-		if $verbose; then
-			echo "String base length = $1, Concats (depth of the rope) = $i, Loops = $3"
-		fi
-		bench_command $i buf_ropes_iter$i ./iteration_bench -m ropebuf --iter-mode iterator --loops $2 --strlen $3 --ccts $i
-	done
-
-	prepare_res iter_buf_ropes_index.out iter_buf_ropes_index buf_ropes_index
-	if $verbose; then
-		echo "RopeBuffer by index :"
-	fi
-	for i in `seq 1 "$1"`; do
-		if $verbose; then
-			echo "String base length = $1, Concats (depth of the rope) = $i, Loops = $3"
-		fi
-		bench_command $i buf_ropes_index$i ./iteration_bench -m ropebuf --iter-mode index --loops $2 --strlen $3 --ccts $i
-	done
-
-	plot iter.gnu
-
-	cd ..
+	rm iteration_bench
 }
 
-function bench_substr()
+# $1: iterator or index
+# $2: string or buffer
+# $3: loops
+# $4: strlen min
+# $5: strlen increment
+# $6: strlen max
+function bench_iterate_variant()
 {
-	if [ -d string_substr ]; then
-		rm string_substr/*
-	else
-		mkdir string_substr
-	fi
-	cd string_substr
-
-	if $verbose; then
-		echo "*** Benching substring performance ***"
-	fi
-
-	../../../bin/nitc --global ../substr_bench.nit
-
-	prepare_res substr_flat.out substr_flat flatstring
-	if $verbose; then
-		echo "FlatStrings :"
-	fi
-	for i in `seq 1 "$1"`; do
-		if $verbose; then
-			echo "String length = $i, loops = $2, Loops = $3"
-		fi
-		bench_command $i flatstring$i ./substr_bench -m flatstr --loops $2 --strlen $3 --ccts $i
+	tmp="${variant}_$1_$2"
+	prepare_res_lines out/iteration/iteration_$tmp.out $tmp $tmp
+	for i in `seq "$4" "$5" "$6"`; do
+		bench_command $i $tmp$i ./iteration_bench -m $2 --iter-mode $1 --loops $3 --strlen $i
 	done
-
-	prepare_res substr_buf.out substr_buf flatbuffer
-	if $verbose; then
-		echo "FlatBuffers :"
-	fi
-	for i in `seq 1 "$1"`; do
-		if $verbose; then
-			echo "String length = $i, loops = $2, Loops = $3"
-		fi
-		bench_command $i flatbuffer$i ./substr_bench -m flatbuf --loops $2 --strlen $3 --ccts $i
-	done
-
-	prepare_res substr_ropes.out substr_ropes ropes
-	if $verbose; then
-		echo "Ropes :"
-	fi
-	for i in `seq 1 "$1"`; do
-		if $verbose; then
-			echo "String length = $i, loops = $2, Loops = $3"
-		fi
-		bench_command $i ropes$i ./substr_bench -m ropestr --loops $2 --strlen $3 --ccts $i
-	done
-
-	prepare_res substr_buf_ropes.out substr_buf_ropes buf_ropes
-	if $verbose; then
-		echo "RopeBuffers :"
-	fi
-	for i in `seq 1 "$1"`; do
-		if $verbose; then
-			echo "String length = $i, loops = $2, Loops = $3"
-		fi
-		bench_command $i buf_ropes$i ./substr_bench -m ropebuf --loops $2 --strlen $3 --ccts $i
-	done
-
-	plot substr.gnu
-
-	cd ..
 }
 
-stop=false
-while [ "$stop" = false ]; do
-	case "$1" in
-		-v) verbose=true; shift;;
-		-h) usage; exit;;
-		-n) count="$2"; shift; shift;;
-		*) stop=true
-	esac
-done
+function bench_substring()
+{
+	if [ $# -lt 4 ]; then
+		echo "Wrong arguments for benchmark substring."
+		usage
+		exit
+	fi
+	echo "Generating executable substr_bench for variant $variant"
+	../../bin/nitc --global substr_bench.nit -D maxlen=$curr_maxlen
 
-if test $# -ne 4; then
-	usage
-	exit
+	bench_substring_variant "string" $1 $2 $3 $4
+	bench_substring_variant "buffer" $1 $2 $3 $4
+
+	rm substr_bench
+}
+
+# $1: string or buffer
+# $2: loops
+# $3: strlen min
+# $4: strlen increment
+# $5: strlen max
+function bench_substring_variant()
+{
+	tmp="${variant}_$1"
+	prepare_res_lines out/substring/substring_$tmp.out $tmp $tmp
+	for i in `seq "$3" "$4" "$5"`; do
+		bench_command $i $tmp$i ./substr_bench -m $1 --loops $2 --strlen $i
+	done
+}
+
+function bench_compiler()
+{
+	prepare_res_lines out/compiler/compiler_$variant.out compiler_$variant compiler_$variant
+
+	echo "Pre-compiling nitc"
+	# Do it twice before bench to have stable times when generating C
+	../../bin/nitc ../../src/nitc.nit -o ../../bin/nitc
+	echo "nitc (1/2)"
+	../../bin/nitc ../../src/nitc.nit -o ../../bin/nitc
+	echo "nitc (2/2)"
+
+	bench_command nitc nitc_$variant ../../bin/nitc ../../src/nitc.nit -D maxlen=$curr_maxlen
+
+	rm nitc
+}
+
+function bench_basic()
+{
+	../../bin/nitc ../../examples/hello_world.nit -D maxlen=$curr_maxlen
+	./hello_world
+	rm hello_world
+}
+
+function launch_bench()
+{
+	echo "---------------------------------------------------------"
+	echo "  Trying variant $variant for benchmark $bench"
+	echo "---------------------------------------------------------"
+	git diff-index --quiet HEAD || {
+		die "Cannot run benches on a dirty working directory."
+		die "Please commit or stash your modifications and relaunch the command."
+		return
+	}
+	git am $curr_rev || {
+		die "Error when applying patch $curr_rev"
+		git am --abort
+		return
+	}
+	if [ "$need_bootstrap" = true ]; then
+		prepare_compiler
+	fi
+	bench_$bench "$@";
+	git reset --hard $head
+}
+
+function prepare_compiler()
+{
+	cd ../../c_src
+	rm nitc
+	make clean
+	cd ../src
+	./ncall.sh
+	mv nitc.good ../bin/nitc
+	cd ../benchmarks/strings
+}
+
+function main()
+{
+	html="index.html"
+	head_only=false
+	bench_maxln=false
+	curr_maxln=64
+	echo >"$html" "<html><head></head><body>"
+	stop=false
+	while [ "$stop" = false ]; do
+		case "$1" in
+			--maxlen) bench_maxln=true; min_maxln=$2; inc_maxln=$3; max_maxln=$4; shift; shift; shift; shift;;
+			-v) verbose=true; shift;;
+			-h) usage; exit;;
+			-n) count="$2"; shift; shift;;
+			--head-only) head_only=true; shift;;
+			*) stop=true
+		esac
+	done
+
+	if [ $# -lt 1 ]; then
+		usage;
+		exit;
+	fi
+
+	isok=false
+	for i in $benches; do
+		if [ $1 = $i ]; then
+			isok=true;
+		fi
+	done
+	if [ "$isok" = false ]; then
+		usage;
+		exit;
+	fi
+
+	bench=$1
+	shift;
+
+	if [ "${bench_maxln}" = true ]; then
+		for i in `seq $min_maxln $inc_maxln $max_maxln`; do curr_maxln=$i; launch_benches "$@"; done;
+	else
+		launch_benches "$@";
+	fi
+
+	if [ "${need_plot}" = true ]; then
+		plot_lines out/$bench/$bench.gnu
+	fi
+
+	echo >> "$html" "</body></html>"
+}
+
+function launch_benches()
+{
+	head=`git rev-parse HEAD`
+	variant="HEAD"
+	need_plot=true
+	need_bootstrap=false
+
+	if [ "$bench" = "basic" ]; then
+		need_plot=false
+	fi
+
+	if [ ! -d out ]; then
+		mkdir out
+	fi
+	cd out
+
+	if [ -d $bench ]; then
+		rm $bench/*
+	else
+		mkdir $bench
+	fi
+	cd ..
+
+	echo "---------------------------------------------------------"
+	echo "  Trying variant HEAD for benchmark $bench"
+	echo "---------------------------------------------------------"
+	bench_$bench "$@";
+
+	if [ ! $head_only ]; then
+		for i in lib_variants/regular/*; do
+			curr_rev=$i
+			variant=`basename "$i" | cut -f 1 -d '.'`
+			launch_bench "$@"
+		done
+
+		need_bootstrap=true
+		for i in lib_variants/need_bootstrap/*; do
+			curr_rev=$i
+			variant=`basename "$i" | cut -f 1 -d '.'`
+			launch_bench "$@"
+		done
+	fi
+}
+
+main "$@";
+
+if test -n "$died"; then
+	echo "Some commands failed"
+	exit 1
 fi
-
-case "$1" in
-	iter) shift; bench_iteration $@ ;;
-	cct) shift; bench_concat $@ ;;
-	substr) shift; bench_substr $@ ;;
-	array) shift; bench_array $@ ;;
-	*) usage; exit;;
-esac
+exit 0

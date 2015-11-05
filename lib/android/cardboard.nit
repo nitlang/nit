@@ -46,25 +46,25 @@ extern class NativeHeadTracker in "Java" `{ com.google.vrtoolkit.cardboard.senso
 	`}
 
 	# Start tracking head movement
-	fun start_tracking in "Java" `{ recv.startTracking(); `}
+	fun start_tracking in "Java" `{ self.startTracking(); `}
 
 	# Stop tracking head movement
-	fun stop_tracking in "Java" `{ recv.stopTracking(); `}
+	fun stop_tracking in "Java" `{ self.stopTracking(); `}
 
 	# Apply correction to the gyroscope values
 	fun gyro_bias=(matrix: JavaFloatArray) in "Java" `{
-		recv.setGyroBias(matrix);
+		self.setGyroBias(matrix);
 	`}
 
 	# Enable finer analysis using the neck as center of movement
 	fun neck_model_enabled=(value: Bool) in "Java" `{
-		recv.setNeckModelEnabled(value);
+		self.setNeckModelEnabled(value);
 	`}
 
 	# Fill `matrix` with the last rotation matrix calculated from head movements
 	#
 	# Require: matrix.length >= offset + 16
 	fun last_head_view(matrix: JavaFloatArray, offset: Int) in "Java" `{
-		recv.getLastHeadView(matrix, (int)offset);
+		self.getLastHeadView(matrix, (int)offset);
 	`}
 end

@@ -49,12 +49,12 @@ extern class Window `{WINDOW *`}
 
 	# Clear the entire window so it can be repainted from scratch with a refresh
 	fun wclear `{
-		wclear(recv);
+		wclear(self);
 	`}
 
 	# Delete the window
 	fun delwin `{
-		delwin(recv);
+		delwin(self);
 	`}
 
 	# Suspend the curses session and restore the previous terminal

@@ -1,7 +1,9 @@
 NativeString
-N
+0x4e
 Nit
 NativeArray[Int]
 3
 1
 1,10,100
+1
+1

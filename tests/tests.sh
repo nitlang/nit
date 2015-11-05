@@ -35,7 +35,26 @@ JNI_LIB_PATH=`dirname ${paths[0]}`
 shopt -u nullglob
 
 outdir="out"
-compdir=".nit_compile"
+compdir="nit_compile"
+
+# User CPU time limit (in seconds)
+# Is used to avoid to CPU intensive test (infinite loops). See ulimit -t
+usertimelimit=600 # 1 CPU minute
+
+# Real-time limit (in seconds)
+# Is used to avoid waiting or sleeping tests.
+# Require timeout or timelimit, or else is not used.
+realtimelimit=300 # 5 min
+
+# User limit for write files (in kilo-bytes)
+# Is used to avoid execution that loop and fill the hard drive. See ulimit -f
+# Note that a test might require a lot of temporary disk space (eg. nitc+gcc)
+filelimit=100000 # ~100MB
+
+# Limit (in bytes) for generated .res file.
+# Larger ones are truncated and will fail tests
+# Is used to avoid processing huge crappy res file (diff, xml, etc)
+reslimit=100000 # ~100KB
 
 usage()
 {
@@ -48,7 +67,7 @@ Usage: $e [options] modulenames
 --engine    Use a specific engine (default=nitc)
 --noskip    Do not skip a test even if the .skip file matches
 --outdir    Use a specific output folder (default=out/)
---compdir   Use a specific temporary compilation folder (default=.nit_compile)
+--compdir   Use a specific temporary compilation folder (default=$compdir)
 --node      Run as a node in parallel, will not output context information
 --autosav   Copy the .res files directly in the sav folder overriding existing .res files
 END
@@ -70,6 +89,9 @@ saferun()
 			*) stop=true
 		esac
 	done
+	(
+	ulimit -f "$filelimit"
+	ulimit -t "$usertimelimit"
 	if test -d "$1"; then
 		find $1 | sort
 	elif test -n "$TIME"; then
@@ -78,6 +100,7 @@ saferun()
 		if test -n "$a"; then echo 0 >> "$o"; else echo 0 > "$o"; fi
 		$TIMEOUT "$@"
 	fi
+	)
 }
 
 # Output a timestamp attribute for XML, or an empty line
@@ -95,9 +118,9 @@ timestamp()
 
 # Detect a working timeout
 if sh -c "timelimit echo" 1>/dev/null 2>&1; then
-	TIMEOUT="timelimit -t 600"
+	TIMEOUT="timelimit -t $realtimelimit"
 elif sh -c "timeout 1 echo" 1>/dev/null 2>&1; then
-	TIMEOUT="timeout 600s"
+	TIMEOUT="timeout ${realtimelimit}s"
 else
 	echo "No timelimit or timeout command detected. Tests may hang :("
 fi
@@ -158,24 +181,33 @@ EOF
 function process_result()
 {
 	# Result
-	pattern=$1
-	description=$2
-	pack=$3
-	SAV=""
-	NSAV=""
-	FIXME=""
-	NFIXME=""
-	SOSO=""
-	NSOSO=""
-	SOSOF=""
-	NSOSOF=""
-	OLD=""
-	LIST=""
-	FIRST=""
+	local pattern=$1
+	local description=$2
+	local pack=$3
+	local SAV=""
+	local NSAV=""
+	local FIXME=""
+	local NFIXME=""
+	local SOSO=""
+	local NSOSO=""
+	local SOSOF=""
+	local NSOSOF=""
+	local OLD=""
+	local LIST=""
+	local FIRST=""
+
+	# Truncate too big res file
+	local size=$(wc -c < "$outdir/$pattern.res")
+	if test -n "$reslimit" -a "$size" -gt "$reslimit"; then
+		# The most portable way to truncate a file is with Perl
+		perl -e "truncate \"$outdir/$pattern.res\", $reslimit;"
+		echo "***TRUNCATED***" >> "$outdir/$pattern.res"
+	fi
+
 	echo >>$xml "<testcase classname='`xmlesc "$pack"`' name='`xmlesc "$description"`' time='`cat -- "$outdir/$pattern.time.out"`' `timestamp`>"
 	#for sav in "sav/$engine/fixme/$pattern.res" "sav/$engine/$pattern.res" "sav/fixme/$pattern.res" "sav/$pattern.res" "sav/$pattern.sav"; do
 	for savdir in $savdirs; do
-		sav=$savdir/fixme/$pattern.res
+		local sav=$savdir/fixme/$pattern.res
 		compare_to_result "$pattern" "$sav"
 		case "$?" in
 			0)
@@ -228,7 +260,7 @@ function process_result()
 		esac
 	done
 	OLD=`echo "$OLD" | sed -e 's/   */ /g' -e 's/^ //' -e 's/ $//'`
-	grep 'NOT YET IMPLEMENTED' "$outdir/$pattern.res" >/dev/null
+	istodo  "$outdir/$pattern.res"
 	NYI="$?"
 	if [ -n "$SAV" ]; then
 		if [ -n "$OLD" ]; then
@@ -328,9 +360,17 @@ need_skip()
 	fi
 
 	# Skip by OS
-	os_skip_file=`uname`.skip
+	local os_skip_file=`uname`.skip
 	if test -e $os_skip_file && echo "$1" | grep -f "$os_skip_file" >/dev/null 2>&1; then
 		echo "=> $2: [skip os]"
+		echo >>$xml "<testcase classname='`xmlesc "$3"`' name='`xmlesc "$2"`' `timestamp`><skipped/></testcase>"
+		return 0
+	fi
+
+	# Skip by hostname
+	local host_skip_file=`hostname -s`.skip
+	if test -e $host_skip_file && echo "$1" | grep -f "$host_skip_file" >/dev/null 2>&1; then
+		echo "=> $2: [skip hostname]"
 		echo >>$xml "<testcase classname='`xmlesc "$3"`' name='`xmlesc "$2"`' `timestamp`><skipped/></testcase>"
 		return 0
 	fi
@@ -340,26 +380,48 @@ need_skip()
 skip_exec()
 {
 	test "$noskip" = true && return 1
-	if echo "$1" | grep -f "exec.skip" >/dev/null 2>&1; then
-		echo -n "_ "
-		return 0
-	fi
+	for savdir in $savdirs .; do
+		local f="$savdir/exec.skip"
+		test -f "$f" || continue
+		if echo "$1" | grep -f "$f" >/dev/null 2>&1; then
+			echo -n "_ no exec by $f; "
+			return 0
+		fi
+	done
 	return 1
 }
 
 skip_cc()
 {
 	test "$noskip" = true && return 1
-	if echo "$1" | grep -f "cc.skip" >/dev/null 2>&1; then
-		return 0
-	fi
+	for savdir in $savdirs .; do
+		local f="$savdir/cc.skip"
+		test -f "$f" || continue
+		if echo "$1" | grep -f "$f" >/dev/null 2>&1; then
+			return 0
+		fi
+	done
+	return 1
+}
+
+# Check that the resfile ($1) matches some magic strings in `todo` files.
+istodo()
+{
+	test "$no" = true && return 1
+	for savdir in $savdirs .; do
+		local f="$savdir/todo"
+		test -f "$f" || continue
+		if grep -f "$f" "$1" >/dev/null 2>&1; then
+			return 0
+		fi
+	done
 	return 1
 }
 
 find_nitc()
 {
-	name="$enginebinname"
-	recent=`ls -t ../src/$name ../src/$name_[0-9] ../bin/$name ../c_src/$name 2>/dev/null | head -1`
+	local name="$enginebinname"
+	local recent=`ls -t ../src/$name ../src/$name_[0-9] ../bin/$name ../c_src/$name 2>/dev/null | head -1`
 	if [[ "x$recent" == "x" ]]; then
 		echo "Could not find binary for engine $engine, aborting"
 		exit 1
@@ -395,30 +457,34 @@ enginebinname=$engine
 isinterpret=
 case $engine in
 	nitc|nitg)
-		engine=nitg-s;
+		engine=nitcs;
 		enginebinname=nitc;
 		OPT="--separate $OPT --compile-dir $compdir"
-		savdirs="sav/nitg-common/"
+		savdirs="sav/nitc-common/"
 		;;
 	nitcs|nitg-s)
+		engine=nitcs;
 		enginebinname=nitc;
 		OPT="--separate $OPT --compile-dir $compdir"
-		savdirs="sav/nitg-common/"
+		savdirs="sav/nitc-common/"
 		;;
 	nitce|nitg-e)
+		engine=nitce;
 		enginebinname=nitc;
 		OPT="--erasure $OPT --compile-dir $compdir"
-		savdirs="sav/nitg-common/"
+		savdirs="sav/nitc-common/"
 		;;
 	nitcsg|nitg-sg)
+		engine=nitcsg;
 		enginebinname=nitc;
 		OPT="--semi-global $OPT --compile-dir $compdir"
-		savdirs="sav/nitg-common/"
+		savdirs="sav/nitc-common/"
 		;;
 	nitcg|nitg-g)
+		engine=nitcg;
 		enginebinname=nitc;
 		OPT="--global $OPT --compile-dir $compdir"
-		savdirs="sav/nitg-common/"
+		savdirs="sav/nitc-common/"
 		;;
 	nit)
 		engine=niti
@@ -434,14 +500,16 @@ case $engine in
 		OPT="--vm $OPT"
 		savdirs="sav/niti/"
 		;;
+	nitj)
+		engine=nitj;
+		OPT="--compile-dir $compdir --ant"
+		enginebinname=nitj;
+		savdirs="sav/nitc-common/"
+		;;
 	emscripten)
 		enginebinname=nitc
 		OPT="-m emscripten_nodejs.nit --semi-global $OPT --compile-dir $compdir"
-		savdirs="sav/nitg-sg/"
-		;;
-	nitc)
-		echo "disabled engine $engine"
-		exit 0
+		savdirs="sav/nitcsg/"
 		;;
 	*)
 		echo "unknown engine $engine"
@@ -449,7 +517,7 @@ case $engine in
 		;;
 esac
 
-savdirs="sav/$engine $savdirs sav/"
+savdirs="sav/`hostname -s` sav/`uname` sav/$engine $savdirs sav/"
 
 # The default nitc compiler
 [ -z "$NITC" ] && find_nitc
@@ -510,7 +578,7 @@ for ii in "$@"; do
 
 	tmp=${ii/../AA}
 	if [ "x$tmp" = "x$ii" ]; then
-		includes="-I . -I ../lib/standard -I ../lib/standard/collection -I alt"
+		includes="-I . -I ../lib/core -I ../lib/core/collection -I alt"
 	else
 		includes="-I alt"
 	fi
@@ -564,6 +632,8 @@ END
 				cat -- "$ff.compile.log"
 				cat >&2 -- "$ff.cmp.err"
 			fi
+			# Clean
+			rm -r "$compdir" 2>/dev/null
 		fi
 		if [ "$engine" = "emscripten" ]; then
 			echo > "$ff.bin" "nodejs $ffout \"\$@\""

@@ -27,19 +27,19 @@ in "Java" `{
 
 redef class NativeActivity
 	fun notification_manager: NativeNotificationManager in "Java" `{
-		return (NotificationManager)recv.getSystemService(Context.NOTIFICATION_SERVICE);
+		return (NotificationManager)self.getSystemService(Context.NOTIFICATION_SERVICE);
 	`}
 end
 
 extern class NativeNotificationManager in "Java" `{ android.app.NotificationManager `}
 
 	fun notify(tag: JavaString, id: Int, notif: NativeNotification) in "Java" `{
-		recv.notify(tag, (int)id, notif);
+		self.notify(tag, (int)id, notif);
 	`}
 
-	fun cancel(tag: JavaString, id: Int) in "Java" `{ recv.cancel(tag, (int)id); `}
+	fun cancel(tag: JavaString, id: Int) in "Java" `{ self.cancel(tag, (int)id); `}
 
-	fun cancel_all in "Java" `{ recv.cancelAll(); `}
+	fun cancel_all in "Java" `{ self.cancelAll(); `}
 end
 
 extern class NativeNotification in "Java" `{ android.app.Notification `}
@@ -52,20 +52,20 @@ extern class NativeNotificationBuilder in "Java" `{ android.app.Notification$Bui
 	fun create: NativeNotification in "Java" `{
 		// Deprecated since API 16, which introduces `build`,
 		// refinement and global compilation should prevent warnings.
-		return recv.getNotification();
+		return self.getNotification();
 	`}
 
-	fun title=(value: JavaString) in "Java" `{ recv.setContentTitle(value); `}
+	fun title=(value: JavaString) in "Java" `{ self.setContentTitle(value); `}
 
-	fun text=(value: JavaString) in "Java" `{ recv.setContentText(value); `}
+	fun text=(value: JavaString) in "Java" `{ self.setContentText(value); `}
 
-	fun ticker=(value: JavaString) in "Java" `{ recv.setTicker(value); `}
+	fun ticker=(value: JavaString) in "Java" `{ self.setTicker(value); `}
 
-	fun small_icon=(value: Int) in "Java" `{ recv.setSmallIcon((int)value); `}
+	fun small_icon=(value: Int) in "Java" `{ self.setSmallIcon((int)value); `}
 
-	fun auto_cancel=(value: Bool) in "Java" `{ recv.setAutoCancel(value); `}
+	fun auto_cancel=(value: Bool) in "Java" `{ self.setAutoCancel(value); `}
 
-	fun number=(value: Int) in "Java" `{ recv.setNumber((int)value); `}
+	fun number=(value: Int) in "Java" `{ self.setNumber((int)value); `}
 
-	fun ongoing=(value: Bool) in "Java" `{ recv.setOngoing(value); `}
+	fun ongoing=(value: Bool) in "Java" `{ self.setOngoing(value); `}
 end

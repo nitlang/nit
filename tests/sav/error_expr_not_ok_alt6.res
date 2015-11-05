@@ -8,9 +8,9 @@ alt/error_expr_not_ok_alt6.nit:41,16--19: Type Error: expected `Int`, got `null`
 alt/error_expr_not_ok_alt6.nit:42,7--9: Type Error: expected `A`, got `Int`.
 alt/error_expr_not_ok_alt6.nit:43,5--8: Error: method `fail` does not exists in `Int`.
 alt/error_expr_not_ok_alt6.nit:45,7--10: Type Error: expected `A`, got `null`.
-alt/error_expr_not_ok_alt6.nit:46,6--9: Error: method `fail` called on `null`.
+alt/error_expr_not_ok_alt6.nit:46,6--9: Error: method `fail` does not exists in `null`.
 alt/error_expr_not_ok_alt6.nit:49,7--10: Type Error: expected `A`, got `null`.
-alt/error_expr_not_ok_alt6.nit:50,6--10: Error: method `trash` called on `null`.
+alt/error_expr_not_ok_alt6.nit:50,6--10: Error: method `trash` does not exists in `null`.
 alt/error_expr_not_ok_alt6.nit:60,4--7: Type Error: expected `Bool`, got `Int`.
 alt/error_expr_not_ok_alt6.nit:60,20: Type Error: expected `A`, got `Int`.
 alt/error_expr_not_ok_alt6.nit:62,10--13: Type Error: expected `Bool`, got `Int`.
@@ -20,9 +20,9 @@ alt/error_expr_not_ok_alt6.nit:64,7--33: Type Error: expected `A`, got `Int`.
 alt/error_expr_not_ok_alt6.nit:66,7--10: Type Error: expected `Bool`, got `Int`.
 alt/error_expr_not_ok_alt6.nit:66,21: Type Error: expected `A`, got `Int`.
 alt/error_expr_not_ok_alt6.nit:67,1--18: Warning: use `loop` instead of `while true do`.
+alt/error_expr_not_ok_alt6.nit:69,5--13: Type Error: `for` expects a type providing an `iterator` method, got `Int`.
+alt/error_expr_not_ok_alt6.nit:69,5--13: Error: method `iterator` does not exists in `Int`.
 alt/error_expr_not_ok_alt6.nit:69,24: Type Error: expected `A`, got `Int`.
-alt/error_expr_not_ok_alt6.nit:69,1--25: Type Error: `for` expects a type providing an `iterator` method, got `Int`.
-alt/error_expr_not_ok_alt6.nit:69,1--25: Error: method `iterator` does not exists in `Int`.
 alt/error_expr_not_ok_alt6.nit:71,8--11: Type Error: expected `Bool`, got `Int`.
 alt/error_expr_not_ok_alt6.nit:72,7--15: Type Error: expected `A`, got `Int`.
 alt/error_expr_not_ok_alt6.nit:73,7--10: Type Error: expected `Bool`, got `Int`.
@@ -103,9 +103,9 @@ alt/error_expr_not_ok_alt6.nit:145,7--15: Type Error: expected `A`, got `Array[I
 alt/error_expr_not_ok_alt6.nit:146,7--15: Type Error: expected `A`, got `Array[Int]`.
 alt/error_expr_not_ok_alt6.nit:147,7--18: Type Error: expected `A`, got `Array[Int]`.
 alt/error_expr_not_ok_alt6.nit:149,7--24: Type Error: expected `A`, got `String`.
-alt/error_expr_not_ok_alt6.nit:150,7--18: Warning: expression is already a `Int`.
 alt/error_expr_not_ok_alt6.nit:150,7--18: Type Error: expected `A`, got `Int`.
+alt/error_expr_not_ok_alt6.nit:150,7--18: Warning: expression is already a `Int`.
 alt/error_expr_not_ok_alt6.nit:151,7--10: Warning: expression is not null, since it is a `Int`.
 alt/error_expr_not_ok_alt6.nit:151,7--23: Type Error: expected `A`, got `Int`.
-alt/error_expr_not_ok_alt6.nit:152,7--18: Warning: expression is already a `Int`.
 alt/error_expr_not_ok_alt6.nit:152,7--18: Type Error: expected `A`, got `Bool`.
+alt/error_expr_not_ok_alt6.nit:152,7--18: Warning: expression is already a `Int`.

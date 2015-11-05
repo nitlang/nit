@@ -15,7 +15,7 @@
 # Checks if `RopeBuffer.clear` actually reset everything.
 module test_ropes_buffer_clear
 
-import standard
+import core
 
 var buffer = new RopeBuffer
 

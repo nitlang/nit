@@ -14,48 +14,66 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# This module illustrates some uses of the FFI, specifically
-# how to use extern methods. Which means to implement a Nit method in C.
+# Sample program using extern methods implemented in C and other FFI services
 module extern_methods
 
 redef enum Int
-	# Returns self'th fibonnaci number
-	# implemented here in C for optimization purposes
-	fun fib : Int import fib `{
-		if ( recv < 2 )
-			return recv;
+	# Get the `self`th Fibonacci number
+	#
+	# The FFI can be used to optimize performance critical methods.
+	# Although this implementation is recursive, so there is not much gain.
+	# Notice the `import fib` telling the compiler that there is a callback to `foo` from the C code.
+	# From C, `foo` is called through the function `Int_fib` with the receiver as argument.
+	fun fib: Int import fib `{
+		if (self < 2)
+			return self;
 		else
-			return Int_fib( recv-1 ) + Int_fib( recv-2 );
+			return Int_fib(self-1) + Int_fib(self-2);
 	`}
 
-	# System call to sleep for "self" seconds
+	# System call to sleep for `self` seconds
+	#
+	# You can use the FFI to access any system functions, sometimes it's extremely simple.
 	fun sleep `{
-		sleep( recv );
+		sleep(self);
 	`}
 
-	# Return atan2l( self, x ) from libmath
-	fun atan_with( x : Int ) : Float `{
-		return atan2( recv, x );
-	`}
-
-	# This method callback to Nit methods from C code
-	# It will use from C code:
-	# * the local fib method
-	# * the + operator, a method of Int
-	# * to_s, a method of all objects
-	# * String.to_cstring, a method of String to return an equivalent char*
+	# Print the result of adding `self` to `self.fib` with callbacks from C
+	#
+	# This method illustrates many forms of callbacks from C,
+	# but it would have been better implemented in Nit (as done by `bar`).
+	#
+	# It is recommended to avoid callbacks when possible, use each language according to their strengths.
+	# Nit is better than C to call methods and manipulate objects.
+	# C has easy access to system functions, native libraries and it does low-level stuff.
+	#
+	# The implementation calls:
+	# * the local `fib` method,
+	# * the `+` operator, a method of `Int`,
+	# * `to_s`, a method of all objects,
+	# * `String.to_cstring`, a method of `String` to get as a `char*`.
 	fun foo import fib, +, to_s, String.to_cstring `{
-		long recv_fib = Int_fib( recv );
-		long recv_plus_fib = Int__plus( recv, recv_fib );
+		long self_fib = Int_fib(self);
+		long self_plus_fib = Int__plus(self, self_fib);
 
-		String nit_string = Int_to_s( recv_plus_fib );
-		char *c_string = String_to_cstring( nit_string );
+		String nit_string = Int_to_s(self_plus_fib);
+		char *c_string = String_to_cstring(nit_string);
 
-		printf( "from C: self + fib(self) = %s\n", c_string );
+		printf("from C: self + fib(self) = %s\n", c_string);
 	`}
 
-	# Equivalent to foo but written in pure Nit
+	# Equivalent to `foo` but written in pure Nit
 	fun bar do print "from Nit: self + fib(self) = {self+self.fib}"
+end
+
+redef class Float
+	# Arctangent of `self` and `other` using `atan2` from `math.h`
+	#
+	# Universal types (Int, Float, Bool, etc.) are converted to their closest equivalent in C
+	# (long, double, int, etc.).
+	fun atan_with(other: Float): Float `{
+		return atan2(self, other);
+	`}
 end
 
 print 12.fib
@@ -63,7 +81,6 @@ print 12.fib
 print "sleeping 1 second..."
 1.sleep
 
-print 100.atan_with( 200 )
+print 100.0.atan_with(200.0)
 8.foo
 8.bar
-

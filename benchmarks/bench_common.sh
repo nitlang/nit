@@ -94,3 +94,9 @@ function skip_test()
 	return 1
 }
 
+# Helper function. Print the error message and set $died to 1
+function die()
+{
+	echo >&2 "error: $*"
+	died=1
+}

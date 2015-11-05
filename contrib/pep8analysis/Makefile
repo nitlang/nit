@@ -7,7 +7,8 @@ doc/index.html:
 
 check: tests
 tests: bin/pep8analysis
-	bin/pep8analysis --cfg-long tests/privat/*.pep tests/micro/*.pep tests/terrasa/*.pep
+	bin/pep8analysis --cfg-long tests/privat/*.pep tests/micro/*.pep tests/terrasa/*.pep | tee test.out
+	diff test.out test.sav
 
 www/pep8analysis.js:
 	../../bin/nitc -o www/pep8analysis.js --semi-global src/pep8analysis_web.nit

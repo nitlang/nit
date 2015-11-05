@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Implements the md5 function in C
+# Native MD5 digest implementation as `Text::md5`
 module md5
 
 in "C Header" `{
@@ -489,26 +489,32 @@ in "C Header" `{
 	}
 `}
 
-redef class String
-	# returns the md5 digest of the receiver string
-	# algorithm implemented by L. Peter Deutsch <ghost@aladdin.com>
-	fun md5: String import String.to_cstring, NativeString.to_s `{
+redef class Text
+	# MD5 digest of `self`
+	#
+	# ~~~
+	# assert "".md5 == "d41d8cd98f00b204e9800998ecf8427e"
+	# assert "a".md5 == "0cc175b9c0f1b6a831c399e269772661"
+	# assert "abc".md5 == "900150983cd24fb0d6963f7d28e17f72"
+	# ~~~
+	fun md5: String do return to_cstring.native_md5.to_s
+end
+
+redef class NativeString
+	private fun native_md5: NativeString `{
 		md5_state_t state;
 		md5_byte_t digest[16]; /* result */
 		char *hex_output = malloc(33*sizeof(char));
 		int di;
-		char *in_text;
-
-		in_text = String_to_cstring(recv);
 
 		md5_init(&state);
-		md5_append(&state, (const md5_byte_t *)in_text, strlen(in_text));
+		md5_append(&state, (const md5_byte_t *)self, strlen(self));
 		md5_finish(&state, digest);
 
 		for (di = 0; di < 16; ++di)
 			sprintf(hex_output + di * 2, "%02x", digest[di]);
 		hex_output[32] = '\0';
 
-		return NativeString_to_s(hex_output);
+		return hex_output;
 	`}
 end

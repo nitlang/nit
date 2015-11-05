@@ -18,11 +18,15 @@
 module mmodule
 
 import location
-import mproject
+import mpackage
 private import more_collections
 
 # The container class of a Nit object-oriented model.
+#
 # A model knows modules, classes and properties and can retrieve them.
+#
+# However, a model is not a program or a library as it can contains modules
+# found by the system (including broken ones) but not used.
 redef class Model
 	# All known modules
 	var mmodules = new Array[MModule]
@@ -61,6 +65,7 @@ redef class MGroup
 	redef fun mdoc_or_fallback
 	do
 		if mdoc != null then return mdoc
+		var default_mmodule = self.default_mmodule
 		if default_mmodule == null then return null
 		return default_mmodule.mdoc_or_fallback
 	end
@@ -73,15 +78,15 @@ class MModule
 	# The model considered
 	redef var model: Model
 
-	# The group of module in the project if any
+	# The group of module in the package if any
 	var mgroup: nullable MGroup
 
-	# The project of the module if any
-	# Safe alias for `mgroup.mproject`
-	fun mproject: nullable MProject
+	# The package of the module if any
+	# Safe alias for `mgroup.mpackage`
+	fun mpackage: nullable MPackage
 	do
 		var g = mgroup
-		if g == null then return null else return g.mproject
+		if g == null then return null else return g.mpackage
 	end
 
 	# The short name of the module
@@ -98,24 +103,24 @@ class MModule
 
 	# The canonical name of the module.
 	#
-	# It is usually the `name` prefixed by the project's name.
-	# Example: `"project::name"`
+	# It is usually the `name` prefixed by the package's name.
+	# Example: `"package::name"`
 	#
-	# If both names are the same (of if the module is project-less), then
+	# If both names are the same (of if the module is package-less), then
 	# the short-name is used alone.
 	redef var full_name is lazy do
 		var mgroup = self.mgroup
-		if mgroup == null or mgroup.mproject.name == self.name then
+		if mgroup == null or mgroup.mpackage.name == self.name then
 			return self.name
 		else
-			return "{mgroup.mproject.name}::{self.name}"
+			return "{mgroup.mpackage.name}::{self.name}"
 		end
 	end
 
 	# The namespace used for entities according to their visibility `v`.
 	#
-	# Public entities use only the project as a namespace.
-	# Private entities use the `full_name` (i.e. "project::module")
+	# Public entities use only the package as a namespace.
+	# Private entities use the `full_name` (i.e. "package::module")
 	#
 	# This method is used by entities to implement their `full_name`.
 	fun namespace_for(v: MVisibility): String do
@@ -124,7 +129,7 @@ class MModule
 		if mgroup == null then
 			return full_name
 		else
-			return mgroup.mproject.full_name
+			return mgroup.mpackage.full_name
 		end
 	end
 
@@ -133,8 +138,8 @@ class MModule
 	redef var c_name: String is lazy do
 		var g = mgroup
 		var res
-		if g != null and g.mproject.name != name then
-			res = g.mproject.name.to_cmangle + "__" + name.to_cmangle
+		if g != null and g.mpackage.name != name then
+			res = g.mpackage.name.to_cmangle + "__" + name.to_cmangle
 		else
 			res = name.to_cmangle
 		end
@@ -151,7 +156,7 @@ class MModule
 		if mgroup == null then
 			return c_name
 		else
-			return mgroup.mproject.c_name
+			return mgroup.mpackage.c_name
 		end
 	end
 
@@ -160,6 +165,7 @@ class MModule
 	do
 		model.mmodules_by_name.add_one(name, self)
 		model.mmodules.add(self)
+		var mgroup = self.mgroup
 		if mgroup != null then
 			mgroup.mmodules.add(self)
 			if mgroup.name == name then
@@ -171,11 +177,9 @@ class MModule
 	end
 
 	# Register the imported modules (ie "import some_module")
-	# This function can only invoked once by mmodule.
 	# The visibility must be set with `set_visibility_for`.
 	fun set_imported_mmodules(imported_mmodules: Array[MModule])
 	do
-		assert unique_invocation: self.in_importation.direct_greaters.is_empty
 		for m in imported_mmodules do
 			self.model.mmodule_importation_hierarchy.add_edge(self, m)
 		end
@@ -234,11 +238,6 @@ class MModule
 			abort
 		end
 	end
-
-	# Is `self` created for internal purpose?
-	# Fictive modules are instantiated internally but they should not be
-	# exposed to the final user.
-	var is_fictive: Bool = false is writable
 
 	# Is `self` a unit test module used by `nitunit`?
 	var is_test_suite: Bool = false is writable

@@ -105,7 +105,7 @@ abstract class NeoNodeCollection
 	#
 	# SEE: `create_node`
 	# SEE: `register`
-	redef fun add(node: NeoNode) is abstract
+	redef fun add(node) is abstract
 
 	# Add a new node to the graph and return it.
 	#

@@ -1519,6 +1519,20 @@ redef class AForExpr
 		v.visit n_kwfor
 		v.adds
 
+		for n_group in n_groups do
+			v.visit n_group
+			if n_group != n_groups.last then v.add ", "
+
+		end
+
+		v.adds
+		v.visit n_kwdo
+		if can_inline then visit_loop_inline v else visit_loop_block v
+	end
+end
+
+redef class AForGroup
+	redef fun accept_pretty_printer(v) do
 		for n_id in n_ids do
 			v.visit n_id
 			if n_id != n_ids.last then v.add ", "
@@ -1528,9 +1542,6 @@ redef class AForExpr
 		v.consume "in"
 		v.adds
 		v.visit n_expr
-		v.adds
-		v.visit n_kwdo
-		if can_inline then visit_loop_inline v else visit_loop_block v
 	end
 end
 
@@ -1586,7 +1597,7 @@ redef class ACallExpr
 			v.addt
 		end
 
-		v.visit n_id
+		v.visit n_qid
 
 		if not n_args.n_exprs.is_empty then
 			if is_stmt and n_args.n_exprs.length == 1 then
@@ -1607,7 +1618,7 @@ end
 redef class ACallAssignExpr
 	redef fun accept_pretty_printer(v) do
 		v.visit_recv n_expr
-		v.visit n_id
+		v.visit n_qid
 
 		if not n_args.n_exprs.is_empty then
 			v.consume "("
@@ -1625,7 +1636,7 @@ end
 redef class ACallReassignExpr
 	redef fun accept_pretty_printer(v) do
 		v.visit_recv n_expr
-		v.visit n_id
+		v.visit n_qid
 
 		if not n_args.n_exprs.is_empty then
 			v.consume "("
@@ -1727,7 +1738,7 @@ redef class ANewExpr
 		v.adds
 		v.visit n_type
 
-		if n_id != null then
+		if n_qid != null then
 			v.consume "."
 
 			if not can_inline then
@@ -1737,7 +1748,7 @@ redef class ANewExpr
 				v.indent -= 1
 			end
 
-			v.visit n_id
+			v.visit n_qid
 		end
 
 		v.visit_args n_args.n_exprs

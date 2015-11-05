@@ -97,11 +97,7 @@ class Achievement
 	#
 	# Used to load achievements from storage.
 	init from_json(game: Game, json: JsonObject) do
-		self.game = game
-		id = json["id"].to_s
-		name = json["name"].to_s
-		desc = json["desc"].to_s
-		reward = json["reward"].as(Int)
+		init(game, json["id"].to_s, json["name"].to_s, json["desc"].to_s, json["reward"].as(Int))
 	end
 
 	redef fun to_json do

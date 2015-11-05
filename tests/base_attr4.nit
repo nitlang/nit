@@ -31,9 +31,15 @@ end
 class C
 	super B
 	redef fun foo: Int do return 100
-	redef fun bar=(i: Int) do i.output
+	redef fun bar=(i: Int) do
+		super
+		i.output
+	end
 	redef fun baz: Int do return 400
-	redef fun baz=(i: Int) do i.output
+	redef fun baz=(i: Int) do
+		super
+		i.output
+	end
 end
 
 var a = new A

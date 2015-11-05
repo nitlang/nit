@@ -105,9 +105,11 @@ class VirtualMachine super NaiveInterpreter
 
 		assert sup isa MClassType
 
-		# `sub` and `sup` can be discovered inside a Generic type during the subtyping test
-		if not sup.mclass.loaded then create_class(sup.mclass)
-		if not sub.mclass.loaded then create_class(sub.mclass)
+		# and `sup` can be discovered inside a Generic type during the subtyping test
+		if not sub.mclass.loaded then load_class(sub.mclass)
+
+		# If the target of the test is not-loaded yet, the subtyping-test will be false
+		if not sup.mclass.abstract_loaded then return false
 
 		# For now, always use perfect hashing for subtyping test
 		var super_id = sup.mclass.vtable.id
@@ -159,7 +161,7 @@ class VirtualMachine super NaiveInterpreter
 	# Redef init_instance to simulate the loading of a class
 	redef fun init_instance(recv: Instance)
 	do
-		if not recv.mtype.as(MClassType).mclass.loaded then create_class(recv.mtype.as(MClassType).mclass)
+		if not recv.mtype.as(MClassType).mclass.loaded then load_class(recv.mtype.as(MClassType).mclass)
 
 		recv.vtable = recv.mtype.as(MClassType).mclass.vtable
 
@@ -172,7 +174,7 @@ class VirtualMachine super NaiveInterpreter
 	# Associate a `PrimitiveInstance` to its `VTable`
 	redef fun init_instance_primitive(recv: Instance)
 	do
-		if not recv.mtype.as(MClassType).mclass.loaded then create_class(recv.mtype.as(MClassType).mclass)
+		if not recv.mtype.as(MClassType).mclass.loaded then load_class(recv.mtype.as(MClassType).mclass)
 
 		recv.vtable = recv.mtype.as(MClassType).mclass.vtable
 	end
@@ -192,8 +194,33 @@ class VirtualMachine super NaiveInterpreter
 		return attributes;
 	`}
 
-	# Creates the runtime structures for this class
-	fun create_class(mclass: MClass) do	mclass.make_vt(self)
+	# Load the class and create its runtime structures, this loading is explicit
+	fun load_class(mclass: MClass)
+	do
+		if mclass.loaded then return
+
+		# Recursively load superclasses
+		for parent in mclass.in_hierarchy(mainmodule).direct_greaters do load_class_indirect(parent)
+
+		if mclass.abstract_loaded then
+			mclass.allocate_vtable(self)
+		else
+			mclass.make_vt(self, true)
+		end
+	end
+
+	# This method is called to handle an implicitly loaded class,
+	# i.e. a superclass of an explicitly loaded class
+	# A class loaded implicitly will not be fully allocated
+	fun load_class_indirect(mclass: MClass)
+	do
+		# It the class was already implicitly loaded
+		if mclass.abstract_loaded then return
+
+		for parent in mclass.in_hierarchy(mainmodule).direct_greaters do load_class_indirect(parent)
+
+		mclass.make_vt(self, false)
+	end
 
 	# Execute `mproperty` for a `args` (where `args[0]` is the receiver).
 	redef fun send(mproperty: MMethod, args: Array[Instance]): nullable Instance
@@ -212,8 +239,9 @@ class VirtualMachine super NaiveInterpreter
 	# returns the most specific local method in the class corresponding to `vtable`
 	private fun method_dispatch(mproperty: MMethod, vtable: VTable, recv: Instance): MMethodDef
 	do
-		if mproperty.intro_mclassdef.mclass.positions_methods[recv.mtype.as(MClassType).mclass] != -1 then
-			return method_dispatch_sst(vtable.internal_vtable, mproperty.absolute_offset)
+		var position = recv.mtype.as(MClassType).mclass.get_position_methods(mproperty.intro_mclassdef.mclass)
+		if position > 0 then
+			return method_dispatch_sst(vtable.internal_vtable, mproperty.offset + position)
 		else
 			return method_dispatch_ph(vtable.internal_vtable, vtable.mask,
 				mproperty.intro_mclassdef.mclass.vtable.id, mproperty.offset)
@@ -254,10 +282,10 @@ class VirtualMachine super NaiveInterpreter
 		assert recv isa MutableInstance
 
 		var i: Instance
-
-		if mproperty.intro_mclassdef.mclass.positions_attributes[recv.mtype.as(MClassType).mclass] != -1 then
+		var position = recv.mtype.as(MClassType).mclass.get_position_attributes(mproperty.intro_mclassdef.mclass)
+		if position > 0 then
 			# if this attribute class has an unique position for this receiver, then use direct access
-			i = read_attribute_sst(recv.internal_attributes, mproperty.absolute_offset)
+			i = read_attribute_sst(recv.internal_attributes, position + mproperty.offset)
 		else
 			# Otherwise, read the attribute value with perfect hashing
 			var id = mproperty.intro_mclassdef.mclass.vtable.id
@@ -312,9 +340,10 @@ class VirtualMachine super NaiveInterpreter
 		assert recv isa MutableInstance
 
 		# Replace the old value of mproperty in recv
-		if mproperty.intro_mclassdef.mclass.positions_attributes[recv.mtype.as(MClassType).mclass] != -1 then
+		var position = recv.mtype.as(MClassType).mclass.get_position_attributes(mproperty.intro_mclassdef.mclass)
+		if position > -1 then
 			# if this attribute class has an unique position for this receiver, then use direct access
-			write_attribute_sst(recv.internal_attributes, mproperty.absolute_offset, value)
+			write_attribute_sst(recv.internal_attributes, position + mproperty.offset, value)
 		else
 			# Otherwise, use perfect hashing to replace the old value
 			var id = mproperty.intro_mclassdef.mclass.vtable.id
@@ -376,17 +405,34 @@ redef class MClass
 	# True when the class is effectively loaded by the vm, false otherwise
 	var loaded: Bool = false
 
+	# Indicate this class was partially loaded (it only has its identifier allocated)
+	var abstract_loaded: Bool = false
+
 	# Color for Cohen subtyping test : the absolute position of the id
 	# of this class in virtual tables
 	var color: Int
 
-	# For each loaded subclass, keep the position of the group of attributes
-	# introduced by self class in the object
+	# For superclasses which have a non-invariant position, keep their position in attribute table
 	var positions_attributes: HashMap[MClass, Int] = new HashMap[MClass, Int]
 
-	# For each loaded subclass, keep the position of the group of methods
-	# introduced by self class in the vtable
+	# For superclasses which have a non-invariant position, keep their position in virtual table
 	var positions_methods: HashMap[MClass, Int] = new HashMap[MClass, Int]
+
+	# The position of the class' block in virtual table,
+	# the position is set to -1 when the invariant position is no longer satisfied
+	var position_attributes: Int
+
+	# The position of the class' block in attribute table
+	# the position is set to -1 when the invariant position is no longer satisfied
+	var position_methods: Int
+
+	# The chosen prefix for this class.
+	# The prefix is the direct superclass which has the most properties,
+	# this class will stay at its usual position in virtual table and attribute table
+	var prefix: nullable MClass
+
+	# The linear extension of all superclasses with the prefix rule
+	var ordering: Array[MClass]
 
 	# The `MAttribute` this class introduced
 	var intro_mattributes = new Array[MAttribute]
@@ -401,15 +447,14 @@ redef class MClass
 	var mmethods = new Array[MMethod]
 
 	# Allocates a VTable for this class and gives it an id
-	private fun make_vt(v: VirtualMachine)
+	# * `vm` The currently executed VirtualMachine
+	# * `explicit` Indicate if this class was directly instantiated (i.e. not indirectly loaded)
+	private fun make_vt(vm: VirtualMachine, explicit: Bool)
 	do
-		if loaded then return
+		# `ordering` contains the order of superclasses for virtual tables
+		ordering = superclasses_ordering(vm)
+		ordering.remove(self)
 
-		# `superclasses` contains the order of superclasses for virtual tables
-		var superclasses = superclasses_ordering(v)
-		superclasses.remove(self)
-
-		# Make_vt for super-classes
 		var ids = new Array[Int]
 		var nb_methods = new Array[Int]
 		var nb_attributes = new Array[Int]
@@ -422,11 +467,10 @@ redef class MClass
 		# and the second and third are respectively class id and delta
 		var offset_methods = 3
 
-		# The previous element in `superclasses`
-		var previous_parent: nullable MClass = null
-		if superclasses.length > 0 then	previous_parent = superclasses[0]
-		for parent in superclasses do
-			if not parent.loaded then parent.make_vt(v)
+		var parent
+		var prefix_index = ordering.index_of(prefix.as(not null))
+		for i in [0..ordering.length[ do
+			parent = ordering[i]
 
 			# Get the number of introduced methods and attributes for this class
 			var methods = parent.intro_mmethods.length
@@ -440,63 +484,80 @@ redef class MClass
 			nb_methods.push(methods)
 			nb_attributes.push(attributes)
 
-			# Update `positions_attributes` and `positions_methods` in `parent`.
-			# If the position is invariant for this parent, store this position
-			# else store a special value (-1)
-			var pos_attr = -1
-			var pos_meth = -1
-
-			if previous_parent.as(not null).positions_attributes[parent] == offset_attributes then pos_attr = offset_attributes
-			if previous_parent.as(not null).positions_methods[parent] == offset_methods then pos_meth = offset_methods
-
-			parent.update_positions(pos_attr, pos_meth, self)
+			# If the class is in the suffix part of the order
+			if i > prefix_index then
+				moved_class_attributes(vm, ordering[i], offset_attributes)
+				moved_class_methods(vm, ordering[i], offset_methods)
+			end
 
 			offset_attributes += attributes
 			offset_methods += methods
 			offset_methods += 2 # Because each block starts with an id and the delta
 		end
 
-		# When all super-classes have their identifiers and vtables, allocate current one
-		allocate_vtable(v, ids, nb_methods, nb_attributes, offset_attributes, offset_methods)
-		loaded = true
+		# Update the positions of the class
+		update_positions(offset_attributes, offset_methods)
 
-		# Set the absolute position of the identifier of this class in the virtual table
-		color = offset_methods - 2
+		ordering.add(self)
 
-		# The virtual table now needs to be filled with pointer to methods
-		superclasses.add(self)
-		for cl in superclasses do
-			fill_vtable(v, vtable.as(not null), cl)
+		# Compute the identifier with Perfect Hashing
+		compute_identifier(vm, ids, offset_methods)
+
+		# Update caches and offsets of methods and attributes for this class
+		# If the loading was explicit, the virtual table will be allocated and filled
+		set_offsets(vm, explicit)
+
+		if not explicit then
+			# Just init the C-pointer to NULL to avoid errors
+			vtable.internal_vtable = vm.memory_manager.null_ptr
 		end
 	end
 
-	# Allocate a single vtable
-	# * `ids : Array of superclasses identifiers
-	# * `nb_methods : Array which contain the number of introduced methods for each class in ids
-	# * `nb_attributes : Array which contain the number of introduced attributes for each class in ids
-	# * `offset_attributes : Offset from the beginning of the table of the group of attributes
+	# Allocate a unique identifier to the class with perfect hashing
+	# * `vm` The currently executed VirtualMachine
+	# * `ids` Array of superclasses identifiers
 	# * `offset_methods : Offset from the beginning of the table of the group of methods
-	private fun allocate_vtable(v: VirtualMachine, ids: Array[Int], nb_methods: Array[Int], nb_attributes: Array[Int],
-			offset_attributes: Int, offset_methods: Int)
+	private fun compute_identifier(vm: VirtualMachine, ids: Array[Int], offset_methods: Int)
 	do
 		vtable = new VTable
 		var idc = new Array[Int]
 
-		vtable.mask = v.ph.pnand(ids, 1, idc) - 1
+		# Give an identifier to the class and put it inside the virtual table
+		vtable.mask = vm.ph.pnand(ids, 1, idc) - 1
 		vtable.id = idc[0]
 		vtable.classname = name
 
-		# Add current id to Array of super-ids
-		var ids_total = new Array[Int]
-		ids_total.add_all(ids)
-		ids_total.push(vtable.id)
+		# Set the color for subtyping tests in SST of this class
+		color = offset_methods - 2
 
-		var nb_methods_total = new Array[Int]
-		var nb_attributes_total = new Array[Int]
+		# Indicate the class has its identifier computed
+		abstract_loaded = true
+	end
 
-		var self_methods = 0
-		var nb_introduced_attributes = 0
+	# Update the positions of this class
+	# * `offset_attributes` The offset of the block of attributes of this class
+	# * `offset_methods` The offset of the block of methods of this class
+	private fun update_positions(offset_attributes: Int, offset_methods: Int)
+	do
+		# Recopy the position tables of the prefix in `self`
+		for key, value in prefix.positions_methods do
+			positions_methods[key] = value
+		end
 
+		for key, value in prefix.positions_attributes do
+			positions_attributes[key] = value
+		end
+
+		# Save the offsets of self class
+		position_attributes = offset_attributes
+		position_methods = offset_methods
+	end
+
+	# Set the offsets for the properties introduced by `self` class
+	# * `vm` The currently executed VirtualMachine
+	# * `explicit` Indicate if this class was explicitly loaded
+	private fun set_offsets(vm: VirtualMachine, explicit: Bool)
+	do
 		# Fixing offsets for self attributes and methods
 		var relative_offset_attr = 0
 		var relative_offset_meth = 0
@@ -508,17 +569,13 @@ redef class MClass
 			for p in classdef.intro_mproperties do
 				# Collect properties and fixing offsets
 				if p isa MMethod then
-					self_methods += 1
 					p.offset = relative_offset_meth
-					p.absolute_offset = offset_methods + relative_offset_meth
 					relative_offset_meth += 1
 
 					intro_mmethods.add(p)
 				end
 				if p isa MAttribute then
-					nb_introduced_attributes += 1
 					p.offset = relative_offset_attr
-					p.absolute_offset = offset_attributes + relative_offset_attr
 					relative_offset_attr += 1
 
 					intro_mattributes.add(p)
@@ -530,34 +587,50 @@ redef class MClass
 		mattributes.add_all(intro_mattributes)
 		mmethods.add_all(intro_mmethods)
 
-		nb_methods_total.add_all(nb_methods)
-		nb_methods_total.push(self_methods)
-
-		nb_attributes_total.add_all(nb_attributes)
-		nb_attributes_total.push(nb_introduced_attributes)
-
-		# Save the offsets of self class
-		update_positions(offset_attributes, offset_methods, self)
-
-		# Since we have the number of attributes for each class, calculate the delta
-		var deltas = calculate_delta(nb_attributes_total)
-		vtable.internal_vtable = v.memory_manager.init_vtable(ids_total, nb_methods_total, deltas, vtable.mask)
+		if explicit then allocate_vtable(vm)
 	end
 
-	# Fill the vtable with methods of `self` class
-	# * `v` : Current instance of the VirtualMachine
-	# * `table` : the table of self class, will be filled with its methods
-	private fun fill_vtable(v:VirtualMachine, table: VTable, cl: MClass)
+	# Allocate a single vtable
+	# * `vm` The currently executed VirtualMachine
+	private fun allocate_vtable(vm: VirtualMachine)
+	do
+		var ids = new Array[Int]
+		var nb_methods_total = new Array[Int]
+		var nb_attributes_total = new Array[Int]
+
+		for cl in ordering do
+			ids.add(cl.vtable.id)
+			nb_methods_total.add(cl.intro_mmethods.length)
+			nb_attributes_total.add(cl.intro_mattributes.length)
+		end
+
+		# Calculate the delta to prepare object structure
+		var deltas = calculate_delta(nb_attributes_total)
+		vtable.internal_vtable = vm.memory_manager.init_vtable(ids, nb_methods_total, deltas, vtable.mask)
+
+		# The virtual table now needs to be filled with pointer to methods
+		for cl in ordering do
+			fill_vtable(vm, vtable.as(not null), cl)
+		end
+
+		loaded = true
+	end
+
+	# Fill the vtable with local methods for `self` class
+	# * `vm` Current instance of the VirtualMachine
+	# * `table` the table of self class, will be filled with its methods
+	# * `cl` The class which introduced the methods
+	private fun fill_vtable(vm: VirtualMachine, table: VTable, cl: MClass)
 	do
 		var methods = new Array[MMethodDef]
 		for m in cl.intro_mmethods do
 			# `propdef` is the most specific implementation for this MMethod
-			var propdef = m.lookup_first_definition(v.mainmodule, self.intro.bound_mtype)
+			var propdef = m.lookup_first_definition(vm.mainmodule, self.intro.bound_mtype)
 			methods.push(propdef)
 		end
 
 		# Call a method in C to put propdefs of self methods in the vtables
-		v.memory_manager.put_methods(vtable.internal_vtable, vtable.mask, cl.vtable.id, methods)
+		vm.memory_manager.put_methods(vtable.internal_vtable, vtable.mask, cl.vtable.id, methods)
 	end
 
 	# Computes delta for each class
@@ -594,6 +667,7 @@ redef class MClass
 			return ordering
 		else
 			# There is no super-class, self is Object
+			prefix = self
 			return superclasses
 		end
 	end
@@ -625,6 +699,8 @@ redef class MClass
 			end
 
 			if prefix != null then
+				if self.prefix == null then self.prefix = prefix
+
 				# Add the prefix class ordering at the beginning of our sequence
 				var prefix_res = new Array[MClass]
 				prefix_res = prefix.dfs(v, prefix_res)
@@ -646,6 +722,8 @@ redef class MClass
 			res.push(self)
 		else
 			if direct_parents.length > 0 then
+				if prefix == null then prefix = direct_parents.first
+
 				res = direct_parents.first.dfs(v, res)
 			end
 		end
@@ -655,31 +733,138 @@ redef class MClass
 		return res
 	end
 
-	# Update positions of the class `cl`
-	# * `attributes_offset`: absolute offset of introduced attributes
-	# * `methods_offset`: absolute offset of introduced methods
-	private fun update_positions(attributes_offsets: Int, methods_offset:Int, cl: MClass)
+	# This method is called when `current_class` class is moved in virtual table of `self`
+	# *`vm` Running instance of the virtual machine
+	# *`current_class` The class which was moved in `self` structures
+	# *`offset` The offset of block of methods of `current_class` in `self`
+	fun moved_class_methods(vm: VirtualMachine, current_class: MClass, offset: Int)
 	do
-		positions_attributes[cl] = attributes_offsets
-		positions_methods[cl] = methods_offset
+		# `current_class` was moved in `self` method table
+		if current_class.position_methods > 0 then
+			# The invariant position is no longer satisfied
+			current_class.positions_methods[current_class] = current_class.position_methods
+			current_class.position_methods = - current_class.position_methods
+		else
+			# The class has already several positions and an update is needed
+			current_class.positions_methods[current_class] = -current_class.positions_methods[current_class]
+
+			for sub in ordering do
+				if sub == current_class then continue
+
+				var super_id = current_class.vtable.id
+				var mask = sub.vtable.mask
+				vm.load_class(sub)
+
+				if vm.inter_is_subtype_ph(super_id, mask, sub.vtable.internal_vtable) then
+					if not sub.positions_methods.has_key(current_class) then
+						sub.positions_methods[current_class] = current_class.position_methods
+					else
+						var old_position = sub.positions_methods[current_class]
+						if old_position > 0 then
+							# Indicate this class can not used anymore single inheritance implementation
+							sub.positions_methods[current_class] = - old_position
+						end
+					end
+				end
+			end
+		end
+
+		# Save the position of `current_class` in `self`
+		positions_methods[current_class] = offset
 	end
+
+	# This method is called when `current_class` class is moved in attribute table of `self`
+	# *`vm` Running instance of the virtual machine
+	# *`current_class` The class which was moved in `self` structures
+	# *`offset` The offset of block of attributes of `current_class` in `self`
+	fun moved_class_attributes(vm: VirtualMachine, current_class: MClass, offset: Int)
+	do
+		# `current_class` was moved in `self` attribute table
+		if not current_class.positions_attributes.has_key(current_class) then
+			# The invariant position is no longer satisfied
+			current_class.positions_attributes[current_class] = current_class.position_attributes
+			current_class.position_attributes = - current_class.position_attributes
+		else
+			# The class has already several positions and an update is needed
+			current_class.positions_attributes[current_class] = - current_class.positions_attributes[current_class]
+
+			for sub in ordering do
+				if sub == current_class then continue
+
+				var super_id = current_class.vtable.id
+				var mask = sub.vtable.mask
+				vm.load_class(sub)
+
+				if vm.inter_is_subtype_ph(super_id, mask, sub.vtable.internal_vtable) then
+					if not sub.positions_methods.has_key(current_class) then
+						sub.positions_attributes[current_class] = current_class.position_attributes
+					else
+						var old_position = sub.positions_attributes[current_class]
+						if old_position > 0 then
+							# Indicate this class can not used anymore single inheritance implementation
+							sub.positions_attributes[current_class] = - old_position
+						end
+					end
+				end
+			end
+		end
+
+		# Save the position of `current_class` in `self`
+		positions_attributes[current_class] = offset
+	end
+
+	# Return the position of the method's block of class `cl` in `self` if `cl` has an invariant position in self,
+	# Otherwise return a negative position
+	fun get_position_methods(cl: MClass): Int
+	do
+		# The class has an invariant position in all subclasses
+		if cl.position_methods > 0 then return cl.position_methods
+
+		# The position has an invariant position for this class and its subclasses only
+		if positions_methods.has_key(cl) then
+			var pos = positions_methods[cl]
+			if pos > 0 then return pos
+			return -1
+		end
+
+		# No invariant position at all, the caller must use a multiple inheritance implementation
+		return -1
+	end
+
+	# Return the position of the attribute's block of class `cl` in `self` if `cl` has an invariant position in self,
+	# Otherwise return a negative position
+	fun get_position_attributes(cl: MClass): Int
+	do
+		# The class has an invariant position in all subclasses
+		if cl.position_attributes > 0 then return cl.position_attributes
+
+		# The position has an invariant position for this class and its subclasses only
+		if positions_attributes.has_key(cl) then
+			var pos = positions_attributes[cl]
+			if pos > 0 then return pos
+			return -1
+		end
+
+		# No invariant position at all, the caller must use a multiple inheritance implementation
+		return -1
+	end
+end
+
+redef class MProperty
+	# Relative offset of this in the runtime instance
+	# (beginning of the block of its introducing class for attributes or methods)
+	var offset: Int
 end
 
 redef class MAttribute
 	# Relative offset of this attribute in the runtime instance
 	# (beginning of the block of its introducing class)
-	var offset: Int
-
-	# Absolute offset of this attribute in the runtime instance (beginning of the attribute table)
-	var absolute_offset: Int
+	redef var offset: Int
 end
 
 redef class MMethod
 	# Relative offset of this method in the virtual table (from the beginning of the block)
-	var offset: Int
-
-	# Absolute offset of this method in the virtual table (from the beginning of the vtable)
-	var absolute_offset: Int
+	redef var offset: Int
 end
 
 # Redef MutableInstance to improve implementation of attributes in objects
@@ -817,5 +1002,10 @@ class MemoryManager
 			area[i] = (long unsigned int)method;
 			MMethodDef_incr_ref(method);
 		}
+	`}
+
+	# Return a NULL pointer, used to initialize virtual tables
+	private fun null_ptr: Pointer `{
+		return NULL;
 	`}
 end

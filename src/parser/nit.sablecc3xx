@@ -26,8 +26,17 @@ Helpers
 all = [0 .. 0xFF];
 lowercase = ['a' .. 'z'];
 uppercase = ['A' .. 'Z'];
+
 digit = ['0' .. '9'];
-hexdigit = ['0'..'9'] | ['a'..'f'] | ['A'..'F'];
+hexdigit = ['0'..'9'] | ['a'..'f'] | ['A'..'F'] | '_';
+bindigit = '0' | '1' | '_';
+octdigit = ['0' .. '7'] | '_';
+number = digit (digit | '_')*;
+hex_number = ('0x' | '0X') hexdigit+;
+bin_number = ('0b' | '0B') bindigit+;
+oct_number = ('0o' | '0O') octdigit+;
+prec = '8' | '16' | '32';
+
 letter = lowercase | uppercase | digit | '_';
 
 tab = 9;
@@ -197,9 +206,8 @@ classid = uppercase letter*;
 id = lowercase letter*;
 attrid = '_' lowercase letter*;
 
-number = digit+;
-hex_number = ('0x' | '0X') hexdigit+;
-float = digit* '.' digit+;
+integer = (number | hex_number | bin_number | oct_number) (('u' prec) | ('i' prec) |);
+float = digit* '.' digit+ | (digit+ | digit* '.' digit+) ('E'|'e') ('+'|'-'|) digit+;
 string = '"' str_body '"' | '"' '"' '"' long_str_body lsend1 | ''' ''' ''' long_sstr_body ''' ''' ''';
 start_string = '"' str_body '{' | '"' '"' '"' long_str_body lsend2;
 mid_string = '}' str_body '{' | '}' '}' '}' long_str_body lsend2;
@@ -440,7 +448,7 @@ stmt~withelse~noexpr~nopar {-> expr}
 	| {for} for~withelse {-> for~withelse.expr}
 	| {with} with~withelse {-> with~withelse.expr}
 	| {assert} assert~withelse {-> assert~withelse.expr}
-!noexpr	| {call} recv qid args_nopar {-> New expr.call(recv.expr, qid.id, args_nopar.exprs)}
+!noexpr	| {call} recv qid args_nopar {-> New expr.call(recv.expr, qid, args_nopar.exprs)}
 !noexpr	| {super} qualified_o kwsuper args_nopar {-> New expr.super(qualified_o.qualified, kwsuper, args_nopar.exprs)}
 !noexpr	| {init} recv qualified? kwinit args_nopar {-> New expr.init(recv.expr, kwinit, args_nopar.exprs)}
 	| {debug_type_is} kwdebug kwtype type column expr {-> New expr.debug_type(kwdebug, kwtype, expr.expr, type) }
@@ -455,10 +463,10 @@ vardecl{-> expr}
 
 assignment~nopar {-> expr}
 	= {attr} recv~nopar qualified_o attrid assign expr {-> New expr.attr_assign(recv~nopar.expr, attrid, assign, expr)}
-	| {call} recv~nopar qid args assign expr {-> New expr.call_assign(recv~nopar.expr, qid.id, args.exprs, assign,  expr)}
+	| {call} recv~nopar qid args assign expr {-> New expr.call_assign(recv~nopar.expr, qid, args.exprs, assign,  expr)}
 	| {bra} expr_atom~nopar braargs assign expr {-> New expr.bra_assign(expr_atom~nopar.expr, braargs.exprs, assign,  expr)}
 	| {attr_re} recv~nopar qualified_o attrid assign_op expr {-> New expr.attr_reassign(recv~nopar.expr, attrid, assign_op,  expr)}
-	| {call_re} recv~nopar qid args assign_op expr {-> New expr.call_reassign(recv~nopar.expr, qid.id, args.exprs, assign_op,  expr)}
+	| {call_re} recv~nopar qid args assign_op expr {-> New expr.call_reassign(recv~nopar.expr, qid, args.exprs, assign_op,  expr)}
 	| {bra_re} expr_atom~nopar braargs assign_op expr {-> New expr.bra_reassign(expr_atom~nopar.expr, braargs.exprs, assign_op,  expr)}
 	;
 assign_op
@@ -503,8 +511,16 @@ while~withelse {-> expr}
 	;
 
 for~withelse {-> expr}
-	= kwfor no [ids]:idlist [n2]:no kwin [n3]:no expr [n4]:no kwdo stmtso_withend label {-> New expr.for(kwfor, [ids.id], kwin, expr, kwdo, stmtso_withend.expr, label)}
-	| {nolabel} kwfor no [ids]:idlist [n2]:no kwin [n3]:no expr [n4]:no kwdo stmtso~withelse {-> New expr.for(kwfor, [ids.id], kwin, expr, kwdo, stmtso~withelse.expr, Null)}
+	= kwfor no for_groups [n4]:no kwdo stmtso_withend label {-> New expr.for(kwfor, [for_groups.for_group], kwdo, stmtso_withend.expr, label)}
+	| {nolabel} kwfor no for_groups [n4]:no kwdo stmtso~withelse {-> New expr.for(kwfor, [for_groups.for_group], kwdo, stmtso~withelse.expr, Null)}
+	;
+
+for_groups {-> for_group*}
+	= {one} for_group {-> [for_group]}
+	| {many} for_groups no comma [n2]:no for_group {-> [for_groups.for_group, for_group] }
+	;
+for_group
+	= [ids]:idlist [n2]:no kwin [n3]:no expr {-> New for_group([ids.id], kwin, expr)}
 	;
 
 with~withelse {-> expr}
@@ -611,11 +627,11 @@ expr_new~nopar~nobra {-> expr}
 expr_atom~nopar~nobra {-> expr}
 	= expr_single~nopar~nobra {-> expr_single~nopar~nobra.expr}
 	| {attr} recv~nopar~nobra qualified_o attrid {-> New expr.attr(recv~nopar~nobra.expr, attrid)}
-	| {call} recv~nopar~nobra qid args {-> New expr.call(recv~nopar~nobra.expr, qid.id, args.exprs)}
+	| {call} recv~nopar~nobra qid args {-> New expr.call(recv~nopar~nobra.expr, qid, args.exprs)}
 	| {super} qualified_o kwsuper args {-> New expr.super(qualified_o.qualified, kwsuper, args.exprs)}
 	| {init} recv~nopar~nobra kwinit args {-> New expr.init(recv~nopar~nobra.expr, kwinit, args.exprs)}
 !nobra	| {bra} expr_atom~nopar braargs {-> New expr.bra(expr_atom~nopar.expr, braargs.exprs)}
-	| {new} kwnew no type~nobra_nopar dot [n2]:no qid args {-> New expr.new(kwnew, type~nobra_nopar.type, qid.id, args.exprs)}
+	| {new} kwnew no type~nobra_nopar dot [n2]:no qid args {-> New expr.new(kwnew, type~nobra_nopar.type, qid, args.exprs)}
         | {as_cast} expr_atom~nopar~nobra dot no kwas [n2]:no opar [n3]:no type [n4]:no cpar {-> New expr.as_cast(expr_atom~nopar~nobra.expr, kwas, opar, type, cpar)}
         | {as_notnull} expr_atom~nopar~nobra dot no kwas [n2]:no opar [n3]:no kwnot [n4]:no kwnull [n5]:no cpar {-> New expr.as_notnull(expr_atom~nopar~nobra.expr, kwas, opar, kwnot, kwnull, cpar)}
         | {as_notnull2}expr_atom~nopar~nobra dot no kwas [n2]:no kwnot [n4]:no kwnull {-> New expr.as_notnull(expr_atom~nopar~nobra.expr, kwas, Null, kwnot, kwnull, Null)}
@@ -632,8 +648,7 @@ expr_single~nopar~nobra {-> expr}
 	| {true} kwtrue annotations_o {-> New expr.true(kwtrue, annotations_o.annotations)}
 	| {false} kwfalse annotations_o {-> New expr.false(kwfalse, annotations_o.annotations)}
 	| {null} kwnull annotations_o {-> New expr.null(kwnull, annotations_o.annotations)}
-	| {int} number annotations_o {-> New expr.dec_int(number, annotations_o.annotations)}
-	| {hex_int} hex_number annotations_o {-> New expr.hex_int(hex_number, annotations_o.annotations)}
+	| {integer} integer annotations_o {-> New expr.integer(integer, annotations_o.annotations)}
 	| {float} float annotations_o {-> New expr.float(float, annotations_o.annotations)}
 	| {char} char annotations_o {-> New expr.char(char, annotations_o.annotations)}
 	| {string} string annotations_o {-> New expr.string(string, annotations_o.annotations)}
@@ -666,7 +681,7 @@ array_items_tail {-> expr}
 	;
 array_item {-> expr}
 	= expr no {-> expr}
-	| {for} kwfor no [ids]:idlist [n2]:no kwin [n3]:no expr [n4]:no kwdo [block]:array_item {-> New expr.for(kwfor, [ids.id], kwin, expr, kwdo, block.expr, Null)}
+	| {for} kwfor no for_groups [n4]:no kwdo [block]:array_item {-> New expr.for(kwfor, [for_groups.for_group], kwdo, block.expr, Null)}
 	| {if} kwif [n1]:no expr [n2]:no kwthen [n3]:no [then]:array_item {-> New expr.if(kwif, expr, kwthen, then.expr, Null, Null)}
 	;
 
@@ -806,8 +821,8 @@ qualified_o {-> qualified?}
 	= qualified {-> qualified}
 	| {null} {-> Null}
 	;
-qid {-> id}
-	= qualified? id {-> id}
+qid
+	= qualified? id
 	;
 qclassid {-> classid}
 	= qualified? classid {-> classid}
@@ -920,6 +935,10 @@ methid
 	| {braassign} obra cbra assign
 	;
 
+qid
+	= qualified? id
+	;
+
 signature = opar? [params]:param* cpar? type?;
 
 param	= id type? dotdotdot? annotations?
@@ -940,7 +959,7 @@ expr	= {block} expr* kwend?
 	| {ifexpr} kwif expr kwthen [then]:expr kwelse [else]:expr
 	| {while} kwwhile expr kwdo [block]:expr? label?
 	| {loop} kwloop [block]:expr? label?
-	| {for} kwfor [ids]:id* kwin expr kwdo [block]:expr? label?
+	| {for} kwfor [groups]:for_group* kwdo [block]:expr? label?
 	| {with} kwwith expr kwdo [block]:expr? label?
 	| {assert} kwassert id? expr kwelse? [else]:expr?
 	| {once} kwonce expr 
@@ -973,13 +992,13 @@ expr	= {block} expr* kwend?
 	| {uminus} [op]:minus expr
 	| {uplus} [op]:plus expr
 	| {utilde} [op]:tilde expr
-	| {new} kwnew type id? [args]:exprs
+	| {new} kwnew type qid? [args]:exprs
 	| {attr} expr [id]:attrid 
 	| {attr_assign} expr [id]:attrid assign [value]:expr 
 	| {attr_reassign} expr [id]:attrid assign_op [value]:expr 
-	| {call} expr id [args]:exprs
-	| {call_assign} expr id [args]:exprs assign [value]:expr
-	| {call_reassign} expr id [args]:exprs assign_op [value]:expr 
+	| {call} expr qid [args]:exprs
+	| {call_assign} expr qid [args]:exprs assign [value]:expr
+	| {call_reassign} expr qid [args]:exprs assign_op [value]:expr
 	| {super} qualified? kwsuper [args]:exprs
 	| {init} expr kwinit [args]:exprs 
 	| {bra} expr [args]:exprs
@@ -997,8 +1016,7 @@ expr	= {block} expr* kwend?
 	| {true} kwtrue annotations?
 	| {false} kwfalse annotations?
 	| {null} kwnull annotations?
-	| {dec_int} number annotations?
-	| {hex_int} hex_number annotations?
+	| {integer} integer annotations?
 	| {float} float annotations?
 	| {char} char annotations?
 	| {string} string annotations?
@@ -1035,6 +1053,9 @@ assign_op
 	| {amp} [op]:ampeq
 	| {ll} [op]:lleq
 	| {gg} [op]:ggeq
+	;
+for_group
+	= [ids]:id* kwin expr
 	;
 
 module_name = quad? [path]:id* id;

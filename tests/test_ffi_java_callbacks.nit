@@ -24,8 +24,8 @@ class A
 	fun i: Int do return 777
 
 	fun foo import bar, i in "Java" `{
-		A_bar(recv);
-		long i = A_i(recv);
+		A_bar(self);
+		long i = A_i(self);
 		System.out.println(i);
 	`}
 

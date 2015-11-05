@@ -29,10 +29,10 @@ redef class GithubCurl
 	# Get a given pull request (PR)
 	fun getpr(number: Int): JsonObject
 	do
-		var pr = get_and_check("https://api.github.com/repos/privat/nit/pulls/{number}")
+		var pr = get_and_check("https://api.github.com/repos/nitlang/nit/pulls/{number}")
 		var prm = pr.json_as_map
 		var sha = prm["head"].json_as_map["sha"].to_s
-		var statuses = get_and_check("https://api.github.com/repos/privat/nit/statuses/{sha}")
+		var statuses = get_and_check("https://api.github.com/repos/nitlang/nit/statuses/{sha}")
 		prm["statuses"] = statuses
 		print "{prm["title"].to_s}: by {prm["user"].json_as_map["login"].to_s} (# {prm["number"].to_s})"
 		var mergeable = prm["mergeable"]
@@ -56,8 +56,8 @@ redef class GithubCurl
 		var number = pr["number"].as(Int)
 		var user = pr["user"].json_as_map["login"].as(String)
 		var comments = new Array[nullable Object]
-		comments.add_all(get_and_check("https://api.github.com/repos/privat/nit/issues/{number}/comments").json_as_a)
-		comments.add_all(get_and_check("https://api.github.com/repos/privat/nit/pulls/{number}/comments").json_as_a)
+		comments.add_all(get_and_check("https://api.github.com/repos/nitlang/nit/issues/{number}/comments").json_as_a)
+		comments.add_all(get_and_check("https://api.github.com/repos/nitlang/nit/pulls/{number}/comments").json_as_a)
 		var logins = new Array[String]
 		for c in comments do
 			var cm = c.json_as_map
@@ -68,8 +68,8 @@ redef class GithubCurl
 		var res = new Array[String]
 		for l in logins do
 			var u = get_and_check("https://api.github.com/users/{l}").json_as_map
-			if not u.has_key("name") then
-				print "No public name for user {l}"
+			if not u.has_key("name") or u["name"] == null or not u.has_key("email")or u["email"] == null then
+				print "No public name/email for user {l}"
 				continue
 			end
 			var r = "{u["name"].to_s} <{u["email"].to_s}>"
@@ -86,16 +86,15 @@ if "NIT_TESTING".environ == "true" then exit 0
 var auth = get_github_oauth
 
 if auth == "" then
-	print "Not github token, please configure one with"
+	print "Warning: no github oauth token, you can configure one with"
 	print "    git config --add github.oauthtoken MYOAUTHTOKEN"
-	return
 end
 
-var curl = new GithubCurl(auth, "Merge-o-matic (privat/nit)")
+var curl = new GithubCurl(auth, "Merge-o-matic (nitlang/nit)")
 
 if args.length != 1 then
 	# Without args, list `ok_will_merge`
-	var x = curl.get_and_check("https://api.github.com/repos/privat/nit/issues?labels=ok_will_merge")
+	var x = curl.get_and_check("https://api.github.com/repos/nitlang/nit/issues?labels=ok_will_merge")
 	for y in x.json_as_a do
 		var number = y.json_as_map["number"].as(Int)
 		curl.getpr(number)

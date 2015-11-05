@@ -18,17 +18,16 @@ module model_viz
 import model
 import ordered_tree
 
-# A simple specialisation of OrderedTree to display projects, groups and modules
-# FIXME do not use Object, but a better common interface of MModule and MGroup
-class MProjectTree
-	super OrderedTree[Object]
+# A simple specialisation of OrderedTree to display packages, groups and modules
+class MPackageTree
+	super OrderedTree[MConcern]
 
 	# The model where to look for information
 	var model: Model
 
 	redef fun display(a) do
 		if a isa MGroup then
-			if a.parent == null then return "{a.mproject.name} ({a.filepath.to_s})"
+			if a.parent == null then return "{a.mpackage.name} ({a.filepath or else "?"})"
 			return a.name + " (group)"
 		else if a isa MModule then
 			return a.name
@@ -58,11 +57,10 @@ class MProjectTree
 end
 
 # Compare modules and groups using the
-# FIXME do not use Object, but a better common interface of MModule and MGroup
 private class LinexComparator
 	super Comparator
 
-	redef type COMPARED: Object
+	redef type COMPARED: MConcern
 
 	var mins = new HashMap [MGroup, nullable MModule]
 	var maxs = new HashMap [MGroup, nullable MModule]
@@ -87,7 +85,7 @@ private class LinexComparator
 		var subs = tree.sub[o]
 		var minres = mini(subs.first)
 		var maxres = maxi(subs.first)
-		var order = minres.model.mmodule_importation_hierarchy
+		var order = o.model.mmodule_importation_hierarchy
 		for o2 in subs do
 			var c = mini(o2)
 			if c == null then continue
@@ -111,15 +109,15 @@ private class LinexComparator
 		var order = ma.model.mmodule_importation_hierarchy
 		return order.compare(ma, mb)
 	end
-	var tree: OrderedTree[Object]
+	var tree: OrderedTree[MConcern]
 end
 
 redef class Model
-	# Generate a MProjectTree based on the projects, groups and modules known in the model
-	fun to_mproject_tree: MProjectTree
+	# Generate a MPackageTree based on the packages, groups and modules known in the model
+	fun to_mpackage_tree: MPackageTree
 	do
-		var res = new MProjectTree(self)
-		for p in mprojects do
+		var res = new MPackageTree(self)
+		for p in mpackages do
 			for g in p.mgroups do
 				res.add(g.parent, g)
 				for m in g.mmodules do
@@ -131,19 +129,19 @@ redef class Model
 	end
 end
 
-# Generate graphiz files based on projects, groups and modules
+# Generate graphiz files based on packages, groups and modules
 #
 # Interesting elements must be selected. See `mmodules`, ``
-# Display configuration can be set. See `cluster_group`, `project_group`
-class MProjectDot
+# Display configuration can be set. See `cluster_group`, `package_group`
+class MPackageDot
 	super Writable
 
 	# The model where to look for information
 	var model: Model
 
-	# Set of projects to expand fully (ie all groups and modules are displayed)
-	# Initially empty, projects can be added
-	var mprojects = new HashSet[MProject]
+	# Set of packages to expand fully (ie all groups and modules are displayed)
+	# Initially empty, packages can be added
+	var mpackages = new HashSet[MPackage]
 
 	# Set of modules to display
 	# Initially empty, modules can be added
@@ -157,17 +155,17 @@ class MProjectDot
 	# Should groups be shown as clusters?
 	var cluster_group = true is writable
 
-	# Should projects be shown as clusters?
-	var project_group = true is writable
+	# Should packages be shown as clusters?
+	var package_group = true is writable
 
 	# Recursively generate node and clusters for a mgroup
 	private fun dot_cluster(o: Writer, mgroup: MGroup)
 	do
 		# Open the cluster, if required
 		if mgroup.parent == null then
-			# is is a root group, so display the project
-			if project_group then
-				o.write("subgraph cluster_{mgroup.object_id} \{\nlabel=\"{mgroup.mproject.name}\\n({mgroup.filepath.to_s})\"\ncolor=black\nstyle=dotted\n")
+			# is is a root group, so display the package
+			if package_group then
+				o.write("subgraph cluster_{mgroup.object_id} \{\nlabel=\"{mgroup.mpackage.name}\\n({mgroup.filepath or else "?"})\"\ncolor=black\nstyle=dotted\n")
 			end
 		else
 			if cluster_group then
@@ -188,13 +186,13 @@ class MProjectDot
 
 		# close the cluster if required
 		if mgroup.parent == null then
-			if project_group then o.write("\}\n")
+			if package_group then o.write("\}\n")
 		else
 			if cluster_group then o.write("\}\n")
 		end
 	end
 
-	# Extends the set of `mmodules` by recursively adding the most specific imported modules of foreign projects
+	# Extends the set of `mmodules` by recursively adding the most specific imported modules of foreign packages
 	fun collect_important_importation
 	do
 		var todo = new List[MModule]
@@ -203,9 +201,9 @@ class MProjectDot
 			var m = todo.pop
 
 			for psm in m.in_importation.greaters do
-				if m.mgroup.mproject != psm.mgroup.mproject then continue
+				if m.mgroup.mpackage != psm.mgroup.mpackage then continue
 				for ssm in psm.in_importation.direct_greaters do
-					if psm.mgroup.mproject == ssm.mgroup.mproject then continue
+					if psm.mgroup.mpackage == ssm.mgroup.mpackage then continue
 					mmodules.add(ssm)
 					todo.add(ssm)
 				end
@@ -218,9 +216,9 @@ class MProjectDot
 	do
 		# Collect interesting nodes
 		for m in model.mmodules do
-			# filter out modules outside wanted projects
+			# filter out modules outside wanted packages
 			if m.mgroup == null then continue
-			if not mprojects.has(m.mgroup.mproject) then continue
+			if not mpackages.has(m.mgroup.mpackage) then continue
 
 			mmodules.add(m)
 		end
@@ -241,7 +239,7 @@ class MProjectDot
 		stream.write("digraph g \{\n")
 		stream.write("rankdir=BT;node[shape=box];\n")
 		# Generate the nodes
-		for p in model.mprojects do
+		for p in model.mpackages do
 			dot_cluster(stream, p.root.as(not null))
 		end
 		# Generate the edges

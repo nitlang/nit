@@ -37,17 +37,17 @@ redef class AppDelegate
 		NSLog(@"Hello World!");
 
 		// Display "Hello world!" on the screen
-		recv.window = [[UIWindow alloc] initWithFrame:
+		self.window = [[UIWindow alloc] initWithFrame:
 		[[UIScreen mainScreen] bounds]];
-		recv.window.backgroundColor = [UIColor whiteColor];
+		self.window.backgroundColor = [UIColor whiteColor];
 
 		UILabel *label = [[UILabel alloc] init];
 		label.text = @"Hello World!";
 		label.center = CGPointMake(100, 100);
 		[label sizeToFit];
 
-		[recv.window addSubview: label];
-		[recv.window makeKeyAndVisible];
+		[self.window addSubview: label];
+		[self.window makeKeyAndVisible];
 
 		return YES;
 	`}

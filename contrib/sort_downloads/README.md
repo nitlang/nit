@@ -1,4 +1,4 @@
-# sort_downloads
+Script to sort content of a folder in many folders according to their names.
 
 This scripts sorts files from a given directory to subfolders in the destination directory. It uses directory names as patterns to sort the files and thus moves each file to a directory with a similar name. Multiple directories may be used to specify the patterns to look for, but the files will only be copied to subfolders in the target directory. This features ensures a clean support for a multi-disk system.
 

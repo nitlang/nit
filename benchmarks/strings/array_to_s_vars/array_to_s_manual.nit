@@ -13,7 +13,7 @@
 # To be used as a Mixin at compile-time for benchmarking purposes.
 module array_to_s_manual
 
-intrude import standard::string
+intrude import standard::text::flat
 intrude import standard::collection::array
 
 redef class NativeArray[E]

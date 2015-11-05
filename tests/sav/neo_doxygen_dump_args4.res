@@ -1457,7 +1457,7 @@ Edge
 8:MPropDef
 13:MAttributeDef
 =properties=JsonObject(5):
-{"location":"%SOURCE_DIRECTORY%\/org\/example\/foo\/C.java:25,1---1,1","visibility":"public","name":"THE_ANSWER","mdoc":["\u000e2\u00080\u0009cAnswer to the Ultimate Question of Life, the Universe, and Everything.","\u000e2\u00080\u0009c"],"is_intro":true}
+{"location":"%SOURCE_DIRECTORY%\/org\/example\/foo\/C.java:25,1---1,1","visibility":"public","name":"THE_ANSWER","mdoc":["“Answer to the Ultimate Question of Life, the Universe, and Everything.","“"],"is_intro":true}
 ----
 =to=Entity#0:
 =labels=Array(4):
@@ -1481,7 +1481,7 @@ Edge
 8:MPropDef
 13:MAttributeDef
 =properties=JsonObject(5):
-{"location":"%SOURCE_DIRECTORY%\/org\/example\/foo\/C.java:25,1---1,1","visibility":"public","name":"THE_ANSWER","mdoc":["\u000e2\u00080\u0009cAnswer to the Ultimate Question of Life, the Universe, and Everything.","\u000e2\u00080\u0009c"],"is_intro":true}
+{"location":"%SOURCE_DIRECTORY%\/org\/example\/foo\/C.java:25,1---1,1","visibility":"public","name":"THE_ANSWER","mdoc":["“Answer to the Ultimate Question of Life, the Universe, and Everything.","“"],"is_intro":true}
 ----
 =to=Entity#0:
 =labels=Array(4):
@@ -1722,7 +1722,7 @@ Edge
 8:MPropDef
 13:MAttributeDef
 =properties=JsonObject(5):
-{"location":"%SOURCE_DIRECTORY%\/org\/example\/foo\/C.java:25,1---1,1","visibility":"public","name":"THE_ANSWER","mdoc":["\u000e2\u00080\u0009cAnswer to the Ultimate Question of Life, the Universe, and Everything.","\u000e2\u00080\u0009c"],"is_intro":true}
+{"location":"%SOURCE_DIRECTORY%\/org\/example\/foo\/C.java:25,1---1,1","visibility":"public","name":"THE_ANSWER","mdoc":["“Answer to the Ultimate Question of Life, the Universe, and Everything.","“"],"is_intro":true}
 
 
 Edge

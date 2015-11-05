@@ -45,7 +45,7 @@ end
 private class IOSToolchain
 	super MakefileToolchain
 
-	# Root of the iOS project, usually `.nit_compile/ios/`
+	# Root of the iOS project, usually `nit_compile/ios/`
 	var ios_project_root: String is noinit
 
 	# `app.nit` project for the current compilation target
@@ -56,7 +56,7 @@ private class IOSToolchain
 	# Compile C files in `ios_project_root/app_project.name`
 	redef fun compile_dir
 	do
-		ios_project_root = super/"ios"
+		ios_project_root = root_compile_dir/"ios"
 		return ios_project_root/app_project.short_name
 	end
 
@@ -83,7 +83,7 @@ private class IOSToolchain
 		## Register all source files
 		for file in cfiles do pbx.add_file new PbxFile(file)
 		for file in compiler.extern_bodies do
-			pbx.add_file new PbxFile(file.filename.basename(""))
+			pbx.add_file new PbxFile(file.filename.basename)
 		end
 
 		## TODO Register asset files
@@ -110,6 +110,7 @@ private class IOSToolchain
 			"xcodebuild -target '{project_name}' " +
 			"-destination 'platform=iOS Simulator,name=iPhone' " +
 			"-configuration {if release then "Release" else "Debug"} " +
+			 "ONLY_ACTIVE_ARCH=NO "+
 			"-sdk iphonesimulator build"]
 		toolcontext.exec_and_check(args, "iOS project error")
 

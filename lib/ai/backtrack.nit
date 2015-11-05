@@ -40,7 +40,7 @@ module backtrack
 # # Basic search
 #
 # The method `solve` returns a new solver for a backtrack search.
-class BacktrackProblem[S: Object,A]
+abstract class BacktrackProblem[S: Object,A]
 	# The starting state of the problem.
 	# It is this object that will be modified by `apply_action` and `backtrack`.
 	fun initial_state: S is abstract

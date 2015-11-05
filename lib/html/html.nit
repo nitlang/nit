@@ -19,13 +19,18 @@ module html
 #
 # You can define subclass and override methods head and body
 #
+# ~~~nitish
 # class MyPage
 #	super HTMLPage
 #	redef body do add("p").text("Hello World!")
 # end
+# ~~~
 #
 # HTMLPage use fluent interface so you can chain calls as:
-#	add("div").attr("id", "mydiv").text("My Div")
+#
+# ~~~nitish
+# add("div").attr("id", "mydiv").text("My Div")
+# ~~~
 class HTMLPage
 	super Writable
 
@@ -51,7 +56,10 @@ class HTMLPage
 	end
 
 	# Add a html tag to the current element
+	#
+	# ~~~nitish
 	# add("div").attr("id", "mydiv").text("My Div")
+	# ~~~
 	fun add(tag: String): HTMLTag do
 		var node = new HTMLTag(tag)
 		current.add(node)
@@ -59,14 +67,20 @@ class HTMLPage
 	end
 
 	# Add a raw html string
+	#
+	# ~~~nitish
 	# add_html("<a href='#top'>top</a>")
+	# ~~~
 	fun add_html(html: String) do current.add(new HTMLRaw("", html))
 
 	# Open a html tag
+	#
+	# ~~~nitish
 	# open("ul")
 	# add("li").text("item1")
 	# add("li").text("item2")
 	# close("ul")
+	# ~~~
 	fun open(tag: String): HTMLTag do
 		stack.push(current)
 		current = add(tag)
@@ -93,7 +107,12 @@ class HTMLTag
 	# `"div"` for `<div></div>`.
 	var tag: String
 	init do
-		self.is_void = (once ["area", "base", "br", "col", "command", "embed", "hr", "img", "input", "keygen", "link", "meta", "param", "source", "track", "wbr"]).has(tag)
+		self.is_void = (once void_list).has(tag)
+	end
+
+	private fun void_list: Set[String]
+	do
+		return new HashSet[String].from(["area", "base", "br", "col", "command", "embed", "hr", "img", "input", "keygen", "link", "meta", "param", "source", "track", "wbr"])
 	end
 
 	# Is the HTML element a void element?
@@ -109,9 +128,10 @@ class HTMLTag
 	end
 
 	# Tag attributes map
-	var attrs: Map[String, String] = new HashMap[String, String]
+	var attrs: Map[String, String] = new HashMap[String, String] is lazy
 
 	# Get the attributed value of 'prop' or null if 'prop' is undifened
+	#
 	#     var img = new HTMLTag("img")
 	#     img.attr("src", "./image.png").attr("alt", "image")
 	#     assert img.get_attr("src")     == "./image.png"
@@ -121,6 +141,7 @@ class HTMLTag
 	end
 
 	# Set a 'value' for 'key'
+	#
 	#     var img = new HTMLTag("img")
 	#     img.attr("src", "./image.png").attr("alt", "image")
 	#     assert img.write_to_string      == """<img src=".&#47;image.png" alt="image"/>"""
@@ -130,6 +151,7 @@ class HTMLTag
 	end
 
 	# Add a CSS class to the HTML tag
+	#
 	#     var img = new HTMLTag("img")
 	#     img.add_class("logo").add_class("fullpage")
 	#     assert img.write_to_string      == """<img class="logo fullpage"/>"""
@@ -139,9 +161,10 @@ class HTMLTag
 	end
 
 	# CSS classes
-	var classes: Set[String] = new HashSet[String]
+	var classes: Set[String] = new HashSet[String] is lazy
 
 	# Add multiple CSS classes
+	#
 	#     var img = new HTMLTag("img")
 	#     img.add_classes(["logo", "fullpage"])
 	#     assert img.write_to_string      == """<img class="logo fullpage"/>"""
@@ -151,6 +174,7 @@ class HTMLTag
 	end
 
 	# Set a CSS 'value' for 'prop'
+	#
 	#     var img = new HTMLTag("img")
 	#     img.css("border", "2px solid black").css("position", "absolute")
 	#     assert img.write_to_string      == """<img style="border: 2px solid black; position: absolute"/>"""
@@ -158,9 +182,10 @@ class HTMLTag
 		css_props[prop] = value
 		return self
 	end
-	private var css_props: Map[String, String] = new HashMap[String, String]
+	private var css_props: Map[String, String] = new HashMap[String, String] is lazy
 
 	# Get CSS value for 'prop'
+	#
 	#     var img = new HTMLTag("img")
 	#     img.css("border", "2px solid black").css("position", "absolute")
 	#     assert img.get_css("border")    == "2px solid black"
@@ -194,6 +219,7 @@ class HTMLTag
         end
 
 	# Add a HTML 'child' to self
+	#
 	#     var ul = new HTMLTag("ul")
 	#     ul.add(new HTMLTag("li"))
 	#     assert ul.write_to_string    == "<ul><li></li></ul>"
@@ -218,27 +244,29 @@ class HTMLTag
 	end
 
 	# List of children HTML elements
-	var children: Set[HTMLTag] = new HashSet[HTMLTag]
+	var children: Set[HTMLTag] = new HashSet[HTMLTag] is lazy
 
 	# Clear all child and set the text of element
+	#
 	#     var p = new HTMLTag("p")
 	#     p.text("Hello World!")
 	#     assert p.write_to_string      ==  "<p>Hello World!</p>"
-	# Text is escaped see: `standard::String::html_escape`
+	# Text is escaped see: `core::String::html_escape`
 	fun text(txt: String): HTMLTag do
 
-		children.clear
+		if isset _children then children.clear
 		append(txt)
 		return self
 	end
 
 	# Append text to element
+	#
 	#     var p = new HTMLTag("p")
 	#     p.append("Hello")
 	#     p.add(new HTMLTag("br"))
 	#     p.append("World!")
 	#     assert p.write_to_string      ==  "<p>Hello<br/>World!</p>"
-	# Text is escaped see: standard::String::html_escape
+	# Text is escaped see: core::String::html_escape
 	fun append(txt: String): HTMLTag do
 		add(new HTMLRaw("", txt.html_escape))
 		return self
@@ -272,11 +300,11 @@ class HTMLTag
 		res.add "<"
 		res.add tag
 		render_attrs_in(res)
-		if is_void and children.is_empty then
+		if is_void and (not isset _children or children.is_empty) then
 			res.add "/>"
 		else
 			res.add ">"
-			for child in children do child.render_in(res)
+			if isset _children then for child in children do child.render_in(res)
 			res.add "</"
 			res.add tag
 			res.add ">"
@@ -284,6 +312,7 @@ class HTMLTag
 	end
 
 	private fun render_attrs_in(res: Sequence[String]) do
+		if not isset _attrs and not isset _classes and not isset _css_props then return
 		if attrs.has_key("class") or not classes.is_empty then
 			res.add " class=\""
 			for cls in classes do

@@ -20,9 +20,9 @@ alt/error_expr_not_ok_alt4.nit:64,7--33: Type Error: expected `A`, got `Int`.
 alt/error_expr_not_ok_alt4.nit:66,7--10: Type Error: expected `Bool`, got `Int`.
 alt/error_expr_not_ok_alt4.nit:66,21: Type Error: expected `A`, got `Int`.
 alt/error_expr_not_ok_alt4.nit:67,1--18: Warning: use `loop` instead of `while true do`.
+alt/error_expr_not_ok_alt4.nit:69,5--13: Type Error: `for` expects a type providing an `iterator` method, got `Int`.
+alt/error_expr_not_ok_alt4.nit:69,5--13: Error: method `iterator` does not exists in `Int`.
 alt/error_expr_not_ok_alt4.nit:69,24: Type Error: expected `A`, got `Int`.
-alt/error_expr_not_ok_alt4.nit:69,1--25: Type Error: `for` expects a type providing an `iterator` method, got `Int`.
-alt/error_expr_not_ok_alt4.nit:69,1--25: Error: method `iterator` does not exists in `Int`.
 alt/error_expr_not_ok_alt4.nit:71,8--11: Type Error: expected `Bool`, got `Int`.
 alt/error_expr_not_ok_alt4.nit:72,7--15: Type Error: expected `A`, got `Int`.
 alt/error_expr_not_ok_alt4.nit:73,7--10: Type Error: expected `Bool`, got `Int`.
@@ -103,9 +103,9 @@ alt/error_expr_not_ok_alt4.nit:145,7--15: Type Error: expected `A`, got `Array[I
 alt/error_expr_not_ok_alt4.nit:146,7--15: Type Error: expected `A`, got `Array[Int]`.
 alt/error_expr_not_ok_alt4.nit:147,7--18: Type Error: expected `A`, got `Array[Int]`.
 alt/error_expr_not_ok_alt4.nit:149,7--24: Type Error: expected `A`, got `String`.
-alt/error_expr_not_ok_alt4.nit:150,7--18: Warning: expression is already a `Int`.
 alt/error_expr_not_ok_alt4.nit:150,7--18: Type Error: expected `A`, got `Int`.
+alt/error_expr_not_ok_alt4.nit:150,7--18: Warning: expression is already a `Int`.
 alt/error_expr_not_ok_alt4.nit:151,7--10: Warning: expression is not null, since it is a `Int`.
 alt/error_expr_not_ok_alt4.nit:151,7--23: Type Error: expected `A`, got `Int`.
-alt/error_expr_not_ok_alt4.nit:152,7--18: Warning: expression is already a `Int`.
 alt/error_expr_not_ok_alt4.nit:152,7--18: Type Error: expected `A`, got `Bool`.
+alt/error_expr_not_ok_alt4.nit:152,7--18: Warning: expression is already a `Int`.

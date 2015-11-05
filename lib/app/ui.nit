@@ -17,6 +17,11 @@ module ui
 
 import app_base
 
+# Platform variations
+# TODO: move on the platform once qualified names are understand in the condition
+import linux::ui is conditional(linux)
+import android::ui is conditional(android) # FIXME it should be conditional to `android::platform`
+
 redef class App
 	super AppComponent
 

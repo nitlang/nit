@@ -25,10 +25,10 @@ import doc_base
 redef class ToolContext
 
 	# Do not generate documentation for attributes.
-	var opt_no_attributes = new OptionBool("ignore the attributes", "--no-attributes")
+	var opt_no_attributes = new OptionBool("Ignore the attributes", "--no-attributes")
 
 	# Do not generate documentation for private properties.
-	var opt_private = new OptionBool("also generate private API", "--private")
+	var opt_private = new OptionBool("Also generate private API", "--private")
 
 	redef init do
 		super
@@ -55,7 +55,7 @@ class ExtractionPhase
 		doc.populate(self)
 	end
 
-	# Should we exclude this `mproject` from the documentation?
+	# Should we exclude this `mpackage` from the documentation?
 	fun ignore_mentity(mentity: MEntity): Bool do
 		if mentity isa MModule then
 			return mentity.is_fictive or mentity.is_test_suite
@@ -79,8 +79,8 @@ end
 # TODO Should I rebuild a new Model from filtered data?
 redef class DocModel
 
-	# MProjects that will be documented.
-	var mprojects = new HashSet[MProject]
+	# MPackages that will be documented.
+	var mpackages = new HashSet[MPackage]
 
 	# MGroups that will be documented.
 	var mgroups = new HashSet[MGroup]
@@ -102,17 +102,17 @@ redef class DocModel
 
 	# Populate `self` from internal `model`.
 	fun populate(v: ExtractionPhase) do
-		populate_mprojects(v)
+		populate_mpackages(v)
 		populate_mclasses(v)
 		populate_mproperties(v)
 	end
 
-	# Populates the `mprojects` set.
-	private fun populate_mprojects(v: ExtractionPhase) do
-		for mproject in model.mprojects do
-			if v.ignore_mentity(mproject) then continue
-			self.mprojects.add mproject
-			for mgroup in mproject.mgroups do
+	# Populates the `mpackages` set.
+	private fun populate_mpackages(v: ExtractionPhase) do
+		for mpackage in model.mpackages do
+			if v.ignore_mentity(mpackage) then continue
+			self.mpackages.add mpackage
+			for mgroup in mpackage.mgroups do
 				if v.ignore_mentity(mgroup) then continue
 				self.mgroups.add mgroup
 				for mmodule in mgroup.mmodules do
@@ -146,4 +146,78 @@ redef class DocModel
 			end
 		end
 	end
+
+	# Lists all MEntities in the model.
+	#
+	# FIXME invalidate cache if `self` is modified.
+	var mentities: Collection[MEntity] is lazy do
+		var res = new HashSet[MEntity]
+		res.add_all mpackages
+		res.add_all mgroups
+		res.add_all mmodules
+		res.add_all mclasses
+		res.add_all mclassdefs
+		res.add_all mproperties
+		res.add_all mpropdefs
+		return res
+	end
+
+	# Searches MEntities that match `name`.
+	fun mentities_by_name(name: String): Array[MEntity] do
+		var res = new Array[MEntity]
+		for mentity in mentities do
+			if mentity.name != name then continue
+			res.add mentity
+		end
+		return res
+	end
+
+	# Looks up a MEntity by its `namespace`.
+	#
+	# Usefull when `mentities_by_name` by return conflicts.
+	#
+	# Path can be the shortest possible to disambiguise like `Class::property`.
+	# In case of larger conflicts, a more complex namespace can be given like
+	# `package::module::Class::prop`.
+	fun mentities_by_namespace(namespace: String): Array[MEntity] do
+		var res = new Array[MEntity]
+		for mentity in mentities do
+			mentity.mentities_by_namespace(namespace, res)
+		end
+		return res
+	end
+end
+
+redef class MEntity
+	# Looks up a MEntity by its `namespace` from `self`.
+	private fun mentities_by_namespace(namespace: String, res: Array[MEntity]) do end
+
+	private fun lookup_in(mentities: Collection[MEntity], namespace: String, res: Array[MEntity]) do
+		var parts = namespace.split_once_on("::")
+		var name = parts.shift
+		for mentity in mentities do
+			if mentity.name != name then continue
+			if parts.is_empty then
+				res.add mentity
+			else
+				mentity.mentities_by_namespace(parts.first, res)
+			end
+		end
+	end
+end
+
+redef class MPackage
+	redef fun mentities_by_namespace(namespace, res) do lookup_in(mgroups, namespace, res)
+end
+
+redef class MGroup
+	redef fun mentities_by_namespace(namespace, res) do lookup_in(mmodules, namespace, res)
+end
+
+redef class MModule
+	redef fun mentities_by_namespace(namespace, res) do lookup_in(mclassdefs, namespace, res)
+end
+
+redef class MClassDef
+	redef fun mentities_by_namespace(namespace, res) do lookup_in(mpropdefs, namespace, res)
 end

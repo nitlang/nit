@@ -19,7 +19,11 @@ NITCOPT=
 # Additional program directories (contrib and examples) that are buildable
 PROGS=$(dir $(wildcard examples/*/Makefile contrib/*/Makefile))
 
-all: tools
+all: tools man
+	@echo ""
+	@echo "Congratulations! Nit was succesfully compiled."
+	@echo "To configure your shell environment, execute the following command:"
+	@echo "    source misc/nit_env.sh install"
 
 # Compile all programs in $PROGS
 full: all
@@ -40,29 +44,29 @@ doc/stdlib/index.html: bin/nitdoc bin/nitls
 	@echo '***************************************************************'
 	@echo '* Generate doc for NIT standard library                       *'
 	@echo '***************************************************************'
-	bin/nitdoc $$(bin/nitls lib -rs --path) -d doc/stdlib \
+	bin/nitdoc lib -d doc/stdlib \
 		--custom-title "Nit Standard Library" \
 		--custom-brand "<a href=\"http://nitlanguage.org/\">Nitlanguage.org</a>" \
 		--custom-overview-text "<p>Documentation for the standard library of Nit<br/>Version $$(git describe)<br/>Date: $$(git show --format="%cd" | head -1)</p>" \
 		--custom-footer-text "Nit standard library. Version $$(git describe)." \
-		--github-upstream "privat:nit:master" \
+		--github-upstream "nitlang:nit:master" \
 		--github-base-sha1 "$$(git rev-parse HEAD)" \
 		--github-gitdir "." \
-		--source "https://github.com/privat/nit/blob/$$(git rev-parse HEAD)/%f#L%l-%L" \
+		--source "https://github.com/nitlang/nit/blob/$$(git rev-parse HEAD)/%f#L%l-%L" \
 		--piwik-tracker "pratchett.info.uqam.ca/piwik/" \
 		--piwik-site-id "2" \
 
 doc/nitc/index.html: bin/nitdoc bin/nitls
-	bin/nitdoc $$(bin/nitls lib -rs --path) src/nit*.nit src/test_*.nit -d doc/nitc \
+	bin/nitdoc lib src/nit*.nit src/test_*.nit -d doc/nitc \
 		--private \
 		--custom-title "Nit Compilers and Tools" \
 		--custom-brand "<a href=\"http://nitlanguage.org/\">Nitlanguage.org</a>" \
 		--custom-overview-text "<p>Documentation for the Nit tools<br/>Version $$(git describe)<br/>Date: $$(git show --format="%cd" | head -1)</p>" \
 		--custom-footer-text "Nit tools. Version $$(git describe)." \
-		--github-upstream "privat:nit:master" \
+		--github-upstream "nitlang:nit:master" \
 		--github-base-sha1 "$$(git rev-parse HEAD)" \
 		--github-gitdir "." \
-		--source "https://github.com/privat/nit/blob/$$(git rev-parse HEAD)/%f#L%l-%L" \
+		--source "https://github.com/nitlang/nit/blob/$$(git rev-parse HEAD)/%f#L%l-%L" \
 		--piwik-tracker "pratchett.info.uqam.ca/piwik/" \
 		--piwik-site-id "3"
 
@@ -70,7 +74,6 @@ man:
 	$(MAKE) -C share/man
 
 clean:
-	rm -rf -- .nit_compile 2> /dev/null || true
 	rm -rf -- doc/stdlib doc/nitc || true
 	cd c_src; make clean
 	cd src; make clean
@@ -78,5 +81,4 @@ clean:
 	cd share/man; make clean
 	for m in $(PROGS); do \
 		$(MAKE) clean -C "$$m"; \
-		test -d $$m/.nit_compile && rm -r $$m/.nit_compile; \
 		done || true

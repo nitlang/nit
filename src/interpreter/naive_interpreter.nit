@@ -25,7 +25,7 @@ import primitive_types
 
 redef class ToolContext
 	# --discover-call-trace
-	var opt_discover_call_trace = new OptionBool("Trace calls of the first invocation of a method", "--discover-call-trace")
+	var opt_discover_call_trace = new OptionBool("Trace calls of the first invocation of methods", "--discover-call-trace")
 
 	redef init
 	do
@@ -157,7 +157,7 @@ class NaiveInterpreter
 			n.debug("inconsitance: no value and not escaping.")
 		end
 		var implicit_cast_to = n.implicit_cast_to
-		if implicit_cast_to != null then
+		if i != null and implicit_cast_to != null then
 			var mtype = self.unanchor_type(implicit_cast_to)
 			if not self.is_subtype(i.mtype, mtype) then n.fatal(self, "Cast failed. Expected `{implicit_cast_to}`, got `{i.mtype}`")
 		end
@@ -203,6 +203,60 @@ class NaiveInterpreter
 	do
 		var t = mainmodule.int_type
 		var instance = new PrimitiveInstance[Int](t, val)
+		init_instance_primitive(instance)
+		return instance
+	end
+
+	# Return the byte instance associated with `val`.
+	fun byte_instance(val: Byte): Instance
+	do
+		var t = mainmodule.byte_type
+		var instance = new PrimitiveInstance[Byte](t, val)
+		init_instance_primitive(instance)
+		return instance
+	end
+
+	# Return the int8 instance associated with `val`.
+	fun int8_instance(val: Int8): Instance
+	do
+		var t = mainmodule.int8_type
+		var instance = new PrimitiveInstance[Int8](t, val)
+		init_instance_primitive(instance)
+		return instance
+	end
+
+	# Return the int16 instance associated with `val`.
+	fun int16_instance(val: Int16): Instance
+	do
+		var t = mainmodule.int16_type
+		var instance = new PrimitiveInstance[Int16](t, val)
+		init_instance_primitive(instance)
+		return instance
+	end
+
+	# Return the uint16 instance associated with `val`.
+	fun uint16_instance(val: UInt16): Instance
+	do
+		var t = mainmodule.uint16_type
+		var instance = new PrimitiveInstance[UInt16](t, val)
+		init_instance_primitive(instance)
+		return instance
+	end
+
+	# Return the int32 instance associated with `val`.
+	fun int32_instance(val: Int32): Instance
+	do
+		var t = mainmodule.int32_type
+		var instance = new PrimitiveInstance[Int32](t, val)
+		init_instance_primitive(instance)
+		return instance
+	end
+
+	# Return the uint32 instance associated with `val`.
+	fun uint32_instance(val: UInt32): Instance
+	do
+		var t = mainmodule.uint32_type
+		var instance = new PrimitiveInstance[UInt32](t, val)
 		init_instance_primitive(instance)
 		return instance
 	end
@@ -266,10 +320,21 @@ class NaiveInterpreter
 	# Return a new native string initialized with `txt`
 	fun native_string_instance(txt: String): Instance
 	do
-		var val = new FlatBuffer.from(txt)
-		val.add('\0')
+		var instance = native_string_instance_len(txt.bytelen+1)
+		var val = instance.val
+		val[txt.bytelen] = 0u8
+		txt.to_cstring.copy_to(val, txt.bytelen, 0, 0)
+
+		return instance
+	end
+
+	# Return a new native string initialized of `length`
+	fun native_string_instance_len(length: Int): PrimitiveInstance[NativeString]
+	do
+		var val = new NativeString(length)
+
 		var t = mainmodule.native_string_type
-		var instance = new PrimitiveInstance[Buffer](t, val)
+		var instance = new PrimitiveInstance[NativeString](t, val)
 		init_instance_primitive(instance)
 		return instance
 	end
@@ -278,7 +343,7 @@ class NaiveInterpreter
 	fun string_instance(txt: String): Instance
 	do
 		var nat = native_string_instance(txt)
-		var res = self.send(self.force_get_primitive_method("to_s_with_length", nat.mtype), [nat, self.int_instance(txt.length)])
+		var res = self.send(self.force_get_primitive_method("to_s_full", nat.mtype), [nat, self.int_instance(txt.bytelen), self.int_instance(txt.length)])
 		assert res != null
 		return res
 	end
@@ -461,7 +526,7 @@ class NaiveInterpreter
 	# Execute type checks of covariant parameters
 	fun parameter_check(node: ANode, mpropdef: MMethodDef, args: Array[Instance])
 	do
-		var msignature = mpropdef.msignature
+		var msignature = mpropdef.msignature.as(not null)
 		for i in [0..msignature.arity[ do
 			# skip test for vararg since the array is instantiated with the correct polymorphic type
 			if msignature.vararg_rank == i then continue
@@ -501,6 +566,7 @@ class NaiveInterpreter
 	# Use this method, instead of `send` to execute and control the additional behavior of the call-sites
 	fun callsite(callsite: nullable CallSite, arguments: Array[Instance]): nullable Instance
 	do
+		if callsite == null then return null
 		var initializers = callsite.mpropdef.initializers
 		if not initializers.is_empty then
 			var recv = arguments.first
@@ -632,6 +698,30 @@ abstract class Instance
 	# else aborts
 	fun to_f: Float do abort
 
+	# Return the integer value if the instance is a byte.
+	# else aborts
+	fun to_b: Byte do abort
+
+	# Return the integer value if the instance is a int8.
+	# else aborts
+	fun to_i8: Int8 do abort
+
+	# Return the integer value if the instance is a int16.
+	# else aborts
+	fun to_i16: Int16 do abort
+
+	# Return the integer value if the instance is a uint16.
+	# else aborts
+	fun to_u16: UInt16 do abort
+
+	# Return the integer value if the instance is a int32.
+	# else aborts
+	fun to_i32: Int32 do abort
+
+	# Return the integer value if the instance is a uint32.
+	# else aborts
+	fun to_u32: UInt32 do abort
+
 	# The real value encapsulated if the instance is primitive.
 	# Else aborts.
 	fun val: nullable Object do abort
@@ -677,6 +767,18 @@ class PrimitiveInstance[E]
 	redef fun to_i do return val.as(Int)
 
 	redef fun to_f do return val.as(Float)
+
+	redef fun to_b do return val.as(Byte)
+
+	redef fun to_i8 do return val.as(Int8)
+
+	redef fun to_i16 do return val.as(Int16)
+
+	redef fun to_u16 do return val.as(UInt16)
+
+	redef fun to_i32 do return val.as(Int32)
+
+	redef fun to_u32 do return val.as(UInt32)
 end
 
 # Information about local variables in a running method
@@ -785,11 +887,19 @@ redef class AMethPropdef
 		if mpropdef.is_intern then
 			fatal(v, "NOT YET IMPLEMENTED intern {mpropdef}")
 		else if mpropdef.is_extern then
-			fatal(v, "NOT YET IMPLEMENTED extern {mpropdef}")
+			var res = call_extern(v, mpropdef, arguments, f)
+			if res != v.error_instance then return res
 		else
 			fatal(v, "NOT YET IMPLEMENTED <wat?> {mpropdef}")
 		end
 		abort
+	end
+
+	# Call this extern method
+	protected fun call_extern(v: NaiveInterpreter, mpropdef: MMethodDef, arguments: Array[Instance], f: Frame): nullable Instance
+	do
+		fatal(v, "NOT YET IMPLEMENTED extern {mpropdef}")
+		return v.error_instance
 	end
 
 	# Interprets a intern or a shortcut extern method.
@@ -840,65 +950,101 @@ redef class AMethPropdef
 		else if cname == "Int" then
 			var recvval = args[0].to_i
 			if pname == "unary -" then
-				return v.int_instance(-args[0].to_i)
+				return v.int_instance(-recvval)
 			else if pname == "unary +" then
 				return args[0]
 			else if pname == "+" then
-				return v.int_instance(args[0].to_i + args[1].to_i)
+				return v.int_instance(recvval + args[1].to_i)
 			else if pname == "-" then
-				return v.int_instance(args[0].to_i - args[1].to_i)
+				return v.int_instance(recvval - args[1].to_i)
 			else if pname == "*" then
-				return v.int_instance(args[0].to_i * args[1].to_i)
+				return v.int_instance(recvval * args[1].to_i)
 			else if pname == "%" then
-				return v.int_instance(args[0].to_i % args[1].to_i)
+				return v.int_instance(recvval % args[1].to_i)
 			else if pname == "/" then
-				return v.int_instance(args[0].to_i / args[1].to_i)
+				return v.int_instance(recvval / args[1].to_i)
 			else if pname == "<" then
-				return v.bool_instance(args[0].to_i < args[1].to_i)
+				return v.bool_instance(recvval < args[1].to_i)
 			else if pname == ">" then
-				return v.bool_instance(args[0].to_i > args[1].to_i)
+				return v.bool_instance(recvval > args[1].to_i)
 			else if pname == "<=" then
-				return v.bool_instance(args[0].to_i <= args[1].to_i)
+				return v.bool_instance(recvval <= args[1].to_i)
 			else if pname == ">=" then
-				return v.bool_instance(args[0].to_i >= args[1].to_i)
+				return v.bool_instance(recvval >= args[1].to_i)
 			else if pname == "<=>" then
-				return v.int_instance(args[0].to_i <=> args[1].to_i)
-			else if pname == "ascii" then
-				return v.char_instance(args[0].to_i.ascii)
+				return v.int_instance(recvval <=> args[1].to_i)
 			else if pname == "to_f" then
-				return v.float_instance(args[0].to_i.to_f)
-			else if pname == "lshift" then
-				return v.int_instance(args[0].to_i.lshift(args[1].to_i))
-			else if pname == "rshift" then
-				return v.int_instance(args[0].to_i.rshift(args[1].to_i))
+				return v.float_instance(recvval.to_f)
+			else if pname == "to_b" then
+				return v.byte_instance(recvval.to_b)
+			else if pname == "<<" then
+				return v.int_instance(recvval << args[1].to_i)
+			else if pname == ">>" then
+				return v.int_instance(recvval >> args[1].to_i)
+			else if pname == "to_i8" then
+				return v.int8_instance(recvval.to_i8)
+			else if pname == "to_i16" then
+				return v.int16_instance(recvval.to_i16)
+			else if pname == "to_u16" then
+				return v.uint16_instance(recvval.to_u16)
+			else if pname == "to_i32" then
+				return v.int32_instance(recvval.to_i32)
+			else if pname == "to_u32" then
+				return v.uint32_instance(recvval.to_u32)
 			else if pname == "rand" then
 				var res = recvval.rand
 				return v.int_instance(res)
-			else if pname == "bin_and" then
-				return v.int_instance(args[0].to_i.bin_and(args[1].to_i))
-			else if pname == "bin_or" then
-				return v.int_instance(args[0].to_i.bin_or(args[1].to_i))
-			else if pname == "bin_xor" then
-				return v.int_instance(args[0].to_i.bin_xor(args[1].to_i))
-			else if pname == "bin_not" then
-				return v.int_instance(args[0].to_i.bin_not)
-			else if pname == "int_to_s_len" then
+			end
+		else if cname == "Byte" then
+			var recvval = args[0].to_b
+			if pname == "unary -" then
+				return v.byte_instance(-recvval)
+			else if pname == "unary +" then
+				return args[0]
+			else if pname == "+" then
+				return v.byte_instance(recvval + args[1].to_b)
+			else if pname == "-" then
+				return v.byte_instance(recvval - args[1].to_b)
+			else if pname == "*" then
+				return v.byte_instance(recvval * args[1].to_b)
+			else if pname == "%" then
+				return v.byte_instance(recvval % args[1].to_b)
+			else if pname == "/" then
+				return v.byte_instance(recvval / args[1].to_b)
+			else if pname == "<" then
+				return v.bool_instance(recvval < args[1].to_b)
+			else if pname == ">" then
+				return v.bool_instance(recvval > args[1].to_b)
+			else if pname == "<=" then
+				return v.bool_instance(recvval <= args[1].to_b)
+			else if pname == ">=" then
+				return v.bool_instance(recvval >= args[1].to_b)
+			else if pname == "<=>" then
+				return v.int_instance(recvval <=> args[1].to_b)
+			else if pname == "to_f" then
+				return v.float_instance(recvval.to_f)
+			else if pname == "to_i" then
+				return v.int_instance(recvval.to_i)
+			else if pname == "<<" then
+				return v.byte_instance(recvval << args[1].to_i)
+			else if pname == ">>" then
+				return v.byte_instance(recvval >> args[1].to_i)
+			else if pname == "to_i8" then
+				return v.int8_instance(recvval.to_i8)
+			else if pname == "to_i16" then
+				return v.int16_instance(recvval.to_i16)
+			else if pname == "to_u16" then
+				return v.uint16_instance(recvval.to_u16)
+			else if pname == "to_i32" then
+				return v.int32_instance(recvval.to_i32)
+			else if pname == "to_u32" then
+				return v.uint32_instance(recvval.to_u32)
+			else if pname == "byte_to_s_len" then
 				return v.int_instance(recvval.to_s.length)
-			else if pname == "native_int_to_s" then
-				var s = recvval.to_s
-				var srecv = args[1].val.as(Buffer)
-				srecv.clear
-				srecv.append(s)
-				srecv.add('\0')
-				return null
-			else if pname == "strerror_ext" then
-				return v.native_string_instance(recvval.strerror)
 			end
 		else if cname == "Char" then
 			var recv = args[0].val.as(Char)
-			if pname == "ascii" then
-				return v.int_instance(recv.ascii)
-			else if pname == "successor" then
+			if pname == "successor" then
 				return v.char_instance(recv.successor(args[1].to_i))
 			else if pname == "predecessor" then
 				return v.char_instance(recv.predecessor(args[1].to_i))
@@ -937,6 +1083,18 @@ redef class AMethPropdef
 				return v.bool_instance(recv >= args[1].to_f)
 			else if pname == "to_i" then
 				return v.int_instance(recv.to_i)
+			else if pname == "to_b" then
+				return v.byte_instance(recv.to_b)
+			else if pname == "to_i8" then
+				return v.int8_instance(recv.to_i8)
+			else if pname == "to_i16" then
+				return v.int16_instance(recv.to_i16)
+			else if pname == "to_u16" then
+				return v.uint16_instance(recv.to_u16)
+			else if pname == "to_i32" then
+				return v.int32_instance(recv.to_i32)
+			else if pname == "to_u32" then
+				return v.uint32_instance(recv.to_u32)
 			else if pname == "cos" then
 				return v.float_instance(args[0].to_f.cos)
 			else if pname == "sin" then
@@ -972,76 +1130,32 @@ redef class AMethPropdef
 			end
 		else if cname == "NativeString" then
 			if pname == "new" then
-				return v.native_string_instance("!" * args[1].to_i)
+				return v.native_string_instance_len(args[1].to_i)
 			end
-			var recvval = args.first.val.as(Buffer)
+			var recvval = args.first.val.as(NativeString)
 			if pname == "[]" then
 				var arg1 = args[1].to_i
-				if arg1 >= recvval.length or arg1 < 0 then
-					debug("Illegal access on {recvval} for element {arg1}/{recvval.length}")
-				end
-				return v.char_instance(recvval.chars[arg1])
+				return v.byte_instance(recvval[arg1])
 			else if pname == "[]=" then
 				var arg1 = args[1].to_i
-				if arg1 >= recvval.length or arg1 < 0 then
-					debug("Illegal access on {recvval} for element {arg1}/{recvval.length}")
-				end
-				recvval.chars[arg1] = args[2].val.as(Char)
+				recvval[arg1] = args[2].val.as(Byte)
 				return null
 			else if pname == "copy_to" then
 				# sig= copy_to(dest: NativeString, length: Int, from: Int, to: Int)
-				var destval = args[1].val.as(FlatBuffer)
+				var destval = args[1].val.as(NativeString)
 				var lenval = args[2].to_i
 				var fromval = args[3].to_i
 				var toval = args[4].to_i
-				if fromval < 0 then
-					debug("Illegal access on {recvval} for element {fromval}/{recvval.length}")
-				end
-				if fromval + lenval > recvval.length then
-					debug("Illegal access on {recvval} for element {fromval}+{lenval}/{recvval.length}")
-				end
-				if toval < 0 then
-					debug("Illegal access on {destval} for element {toval}/{destval.length}")
-				end
-				if toval + lenval > destval.length then
-					debug("Illegal access on {destval} for element {toval}+{lenval}/{destval.length}")
-				end
-				recvval.as(FlatBuffer).copy(fromval, lenval, destval, toval)
+				recvval.copy_to(destval, lenval, fromval, toval)
 				return null
 			else if pname == "atoi" then
-				return v.int_instance(recvval.to_i)
-			else if pname == "file_exists" then
-				return v.bool_instance(recvval.to_s.file_exists)
-			else if pname == "file_mkdir" then
-				var res = recvval.to_s.mkdir
-				return v.bool_instance(res == null)
-			else if pname == "file_chdir" then
-				var res = recvval.to_s.chdir
-				return v.bool_instance(res == null)
-			else if pname == "file_realpath" then
-				return v.native_string_instance(recvval.to_s.realpath)
-			else if pname == "get_environ" then
-				var txt = recvval.to_s.environ
-				return v.native_string_instance(txt)
-			else if pname == "system" then
-				var res = sys.system(recvval.to_s)
-				return v.int_instance(res)
-			else if pname == "atof" then
-				return v.float_instance(recvval.to_f)
+				return v.int_instance(recvval.atoi)
 			else if pname == "fast_cstring" then
-				var ns = recvval.to_cstring.to_s.substring_from(args[1].to_i)
-				return v.native_string_instance(ns)
-			end
-		else if cname == "String" then
-			var cs = v.send(v.force_get_primitive_method("to_cstring", args.first.mtype), [args.first])
-			var str = cs.val.to_s
-			if pname == "files" then
-				var res = new Array[Instance]
-				for f in str.files do res.add v.string_instance(f)
-				return v.array_instance(res, v.mainmodule.string_type)
+				var ns = recvval.fast_cstring(args[1].to_i)
+				return v.native_string_instance(ns.to_s)
 			end
 		else if pname == "calloc_string" then
-			return v.native_string_instance("!" * args[1].to_i)
+			return v.native_string_instance_len(args[1].to_i)
 		else if cname == "NativeArray" then
 			if pname == "new" then
 				var val = new Array[Instance].filled_with(v.null_instance, args[1].to_i)
@@ -1051,9 +1165,6 @@ redef class AMethPropdef
 			end
 			var recvval = args.first.val.as(Array[Instance])
 			if pname == "[]" then
-				if args[1].to_i >= recvval.length or args[1].to_i < 0 then
-					debug("Illegal access on {recvval} for element {args[1].to_i}/{recvval.length}")
-				end
 				return recvval[args[1].to_i]
 			else if pname == "[]=" then
 				recvval[args[1].to_i] = args[2]
@@ -1064,53 +1175,270 @@ redef class AMethPropdef
 				recvval.copy_to(0, args[2].to_i, args[1].val.as(Array[Instance]), 0)
 				return null
 			end
-		else if cname == "NativeFile" then
-			if pname == "native_stdout" then
-				var inst = new PrimitiveNativeFile.native_stdout
-				var instance = new PrimitiveInstance[PrimitiveNativeFile](mpropdef.mclassdef.mclass.mclass_type, inst)
-				v.init_instance_primitive(instance)
-				return instance
-			else if pname == "native_stdin" then
-				var inst = new PrimitiveNativeFile.native_stdin
-				var instance = new PrimitiveInstance[PrimitiveNativeFile](mpropdef.mclassdef.mclass.mclass_type, inst)
-				v.init_instance_primitive(instance)
-				return instance
-			else if pname == "native_stderr" then
-				var inst = new PrimitiveNativeFile.native_stderr
-				var instance = new PrimitiveInstance[PrimitiveNativeFile](mpropdef.mclassdef.mclass.mclass_type, inst)
-				v.init_instance_primitive(instance)
-				return instance
-			else if pname == "io_open_read" then
-				var a1 = args[1].val.as(Buffer)
-				var inst = new PrimitiveNativeFile.io_open_read(a1.to_s)
-				var instance = new PrimitiveInstance[PrimitiveNativeFile](mpropdef.mclassdef.mclass.mclass_type, inst)
-				v.init_instance_primitive(instance)
-				return instance
-			else if pname == "io_open_write" then
-				var a1 = args[1].val.as(Buffer)
-				var inst = new PrimitiveNativeFile.io_open_write(a1.to_s)
-				var instance = new PrimitiveInstance[PrimitiveNativeFile](mpropdef.mclassdef.mclass.mclass_type, inst)
-				v.init_instance_primitive(instance)
-				return instance
+		else if cname == "Int8" then
+			var recvval = args[0].to_i8
+			if pname == "unary -" then
+				return v.int8_instance(-recvval)
+			else if pname == "unary +" then
+				return args[0]
+			else if pname == "+" then
+				return v.int8_instance(recvval + args[1].to_i8)
+			else if pname == "-" then
+				return v.int8_instance(recvval - args[1].to_i8)
+			else if pname == "*" then
+				return v.int8_instance(recvval * args[1].to_i8)
+			else if pname == "%" then
+				return v.int8_instance(recvval % args[1].to_i8)
+			else if pname == "/" then
+				return v.int8_instance(recvval / args[1].to_i8)
+			else if pname == "<" then
+				return v.bool_instance(recvval < args[1].to_i8)
+			else if pname == ">" then
+				return v.bool_instance(recvval > args[1].to_i8)
+			else if pname == "<=" then
+				return v.bool_instance(recvval <= args[1].to_i8)
+			else if pname == ">=" then
+				return v.bool_instance(recvval >= args[1].to_i8)
+			else if pname == "<=>" then
+				return v.int_instance(recvval <=> args[1].to_i8)
+			else if pname == "to_f" then
+				return v.float_instance(recvval.to_f)
+			else if pname == "to_i" then
+				return v.int_instance(recvval.to_i)
+			else if pname == "to_b" then
+				return v.byte_instance(recvval.to_b)
+			else if pname == "to_i16" then
+				return v.int16_instance(recvval.to_i16)
+			else if pname == "to_u16" then
+				return v.uint16_instance(recvval.to_u16)
+			else if pname == "to_i32" then
+				return v.int32_instance(recvval.to_i32)
+			else if pname == "to_u32" then
+				return v.uint32_instance(recvval.to_u32)
+			else if pname == "<<" then
+				return v.int8_instance(recvval << (args[1].to_i))
+			else if pname == ">>" then
+				return v.int8_instance(recvval >> (args[1].to_i))
+			else if pname == "&" then
+				return v.int8_instance(recvval & args[1].to_i8)
+			else if pname == "|" then
+				return v.int8_instance(recvval | args[1].to_i8)
+			else if pname == "^" then
+				return v.int8_instance(recvval ^ args[1].to_i8)
+			else if pname == "unary ~" then
+				return v.int8_instance(~recvval)
 			end
-			var recvval = args.first.val
-			if pname == "io_write" then
-				var a1 = args[1].val.as(Buffer)
-				return v.int_instance(recvval.as(PrimitiveNativeFile).io_write(a1.to_cstring, args[2].to_i))
-			else if pname == "io_read" then
-				var a1 = args[1].val.as(Buffer)
-				var ns = new NativeString(a1.length)
-				var len = recvval.as(PrimitiveNativeFile).io_read(ns, args[2].to_i)
-				a1.clear
-				a1.append(ns.to_s_with_length(len))
-				return v.int_instance(len)
-			else if pname == "flush" then
-				recvval.as(PrimitiveNativeFile).flush
-				return null
-			else if pname == "io_close" then
-				return v.int_instance(recvval.as(PrimitiveNativeFile).io_close)
-			else if pname == "set_buffering_type" then
-				return v.int_instance(recvval.as(PrimitiveNativeFile).set_buffering_type(args[1].to_i, args[2].to_i))
+		else if cname == "Int16" then
+			var recvval = args[0].to_i16
+			if pname == "unary -" then
+				return v.int16_instance(-recvval)
+			else if pname == "unary +" then
+				return args[0]
+			else if pname == "+" then
+				return v.int16_instance(recvval + args[1].to_i16)
+			else if pname == "-" then
+				return v.int16_instance(recvval - args[1].to_i16)
+			else if pname == "*" then
+				return v.int16_instance(recvval * args[1].to_i16)
+			else if pname == "%" then
+				return v.int16_instance(recvval % args[1].to_i16)
+			else if pname == "/" then
+				return v.int16_instance(recvval / args[1].to_i16)
+			else if pname == "<" then
+				return v.bool_instance(recvval < args[1].to_i16)
+			else if pname == ">" then
+				return v.bool_instance(recvval > args[1].to_i16)
+			else if pname == "<=" then
+				return v.bool_instance(recvval <= args[1].to_i16)
+			else if pname == ">=" then
+				return v.bool_instance(recvval >= args[1].to_i16)
+			else if pname == "<=>" then
+				return v.int_instance(recvval <=> args[1].to_i16)
+			else if pname == "to_f" then
+				return v.float_instance(recvval.to_f)
+			else if pname == "to_i" then
+				return v.int_instance(recvval.to_i)
+			else if pname == "to_b" then
+				return v.byte_instance(recvval.to_b)
+			else if pname == "to_i8" then
+				return v.int8_instance(recvval.to_i8)
+			else if pname == "to_u16" then
+				return v.uint16_instance(recvval.to_u16)
+			else if pname == "to_i32" then
+				return v.int32_instance(recvval.to_i32)
+			else if pname == "to_u32" then
+				return v.uint32_instance(recvval.to_u32)
+			else if pname == "<<" then
+				return v.int16_instance(recvval << (args[1].to_i))
+			else if pname == ">>" then
+				return v.int16_instance(recvval >> (args[1].to_i))
+			else if pname == "&" then
+				return v.int16_instance(recvval & args[1].to_i16)
+			else if pname == "|" then
+				return v.int16_instance(recvval | args[1].to_i16)
+			else if pname == "^" then
+				return v.int16_instance(recvval ^ args[1].to_i16)
+			else if pname == "unary ~" then
+				return v.int16_instance(~recvval)
+			end
+		else if cname == "UInt16" then
+			var recvval = args[0].to_u16
+			if pname == "unary -" then
+				return v.uint16_instance(-recvval)
+			else if pname == "unary +" then
+				return args[0]
+			else if pname == "+" then
+				return v.uint16_instance(recvval + args[1].to_u16)
+			else if pname == "-" then
+				return v.uint16_instance(recvval - args[1].to_u16)
+			else if pname == "*" then
+				return v.uint16_instance(recvval * args[1].to_u16)
+			else if pname == "%" then
+				return v.uint16_instance(recvval % args[1].to_u16)
+			else if pname == "/" then
+				return v.uint16_instance(recvval / args[1].to_u16)
+			else if pname == "<" then
+				return v.bool_instance(recvval < args[1].to_u16)
+			else if pname == ">" then
+				return v.bool_instance(recvval > args[1].to_u16)
+			else if pname == "<=" then
+				return v.bool_instance(recvval <= args[1].to_u16)
+			else if pname == ">=" then
+				return v.bool_instance(recvval >= args[1].to_u16)
+			else if pname == "<=>" then
+				return v.int_instance(recvval <=> args[1].to_u16)
+			else if pname == "to_f" then
+				return v.float_instance(recvval.to_f)
+			else if pname == "to_i" then
+				return v.int_instance(recvval.to_i)
+			else if pname == "to_b" then
+				return v.byte_instance(recvval.to_b)
+			else if pname == "to_i8" then
+				return v.int8_instance(recvval.to_i8)
+			else if pname == "to_i16" then
+				return v.int16_instance(recvval.to_i16)
+			else if pname == "to_i32" then
+				return v.int32_instance(recvval.to_i32)
+			else if pname == "to_u32" then
+				return v.uint32_instance(recvval.to_u32)
+			else if pname == "<<" then
+				return v.uint16_instance(recvval << (args[1].to_i))
+			else if pname == ">>" then
+				return v.uint16_instance(recvval >> (args[1].to_i))
+			else if pname == "&" then
+				return v.uint16_instance(recvval & args[1].to_u16)
+			else if pname == "|" then
+				return v.uint16_instance(recvval | args[1].to_u16)
+			else if pname == "^" then
+				return v.uint16_instance(recvval ^ args[1].to_u16)
+			else if pname == "unary ~" then
+				return v.uint16_instance(~recvval)
+			end
+		else if cname == "Int32" then
+			var recvval = args[0].to_i32
+			if pname == "unary -" then
+				return v.int32_instance(-recvval)
+			else if pname == "unary +" then
+				return args[0]
+			else if pname == "+" then
+				return v.int32_instance(recvval + args[1].to_i32)
+			else if pname == "-" then
+				return v.int32_instance(recvval - args[1].to_i32)
+			else if pname == "*" then
+				return v.int32_instance(recvval * args[1].to_i32)
+			else if pname == "%" then
+				return v.int32_instance(recvval % args[1].to_i32)
+			else if pname == "/" then
+				return v.int32_instance(recvval / args[1].to_i32)
+			else if pname == "<" then
+				return v.bool_instance(recvval < args[1].to_i32)
+			else if pname == ">" then
+				return v.bool_instance(recvval > args[1].to_i32)
+			else if pname == "<=" then
+				return v.bool_instance(recvval <= args[1].to_i32)
+			else if pname == ">=" then
+				return v.bool_instance(recvval >= args[1].to_i32)
+			else if pname == "<=>" then
+				return v.int_instance(recvval <=> args[1].to_i32)
+			else if pname == "to_f" then
+				return v.float_instance(recvval.to_f)
+			else if pname == "to_i" then
+				return v.int_instance(recvval.to_i)
+			else if pname == "to_b" then
+				return v.byte_instance(recvval.to_b)
+			else if pname == "to_i8" then
+				return v.int8_instance(recvval.to_i8)
+			else if pname == "to_i16" then
+				return v.int16_instance(recvval.to_i16)
+			else if pname == "to_u16" then
+				return v.uint16_instance(recvval.to_u16)
+			else if pname == "to_u32" then
+				return v.uint32_instance(recvval.to_u32)
+			else if pname == "<<" then
+				return v.int32_instance(recvval << (args[1].to_i))
+			else if pname == ">>" then
+				return v.int32_instance(recvval >> (args[1].to_i))
+			else if pname == "&" then
+				return v.int32_instance(recvval & args[1].to_i32)
+			else if pname == "|" then
+				return v.int32_instance(recvval | args[1].to_i32)
+			else if pname == "^" then
+				return v.int32_instance(recvval ^ args[1].to_i32)
+			else if pname == "unary ~" then
+				return v.int32_instance(~recvval)
+			end
+		else if cname == "UInt32" then
+			var recvval = args[0].to_u32
+			if pname == "unary -" then
+				return v.uint32_instance(-recvval)
+			else if pname == "unary +" then
+				return args[0]
+			else if pname == "+" then
+				return v.uint32_instance(recvval + args[1].to_u32)
+			else if pname == "-" then
+				return v.uint32_instance(recvval - args[1].to_u32)
+			else if pname == "*" then
+				return v.uint32_instance(recvval * args[1].to_u32)
+			else if pname == "%" then
+				return v.uint32_instance(recvval % args[1].to_u32)
+			else if pname == "/" then
+				return v.uint32_instance(recvval / args[1].to_u32)
+			else if pname == "<" then
+				return v.bool_instance(recvval < args[1].to_u32)
+			else if pname == ">" then
+				return v.bool_instance(recvval > args[1].to_u32)
+			else if pname == "<=" then
+				return v.bool_instance(recvval <= args[1].to_u32)
+			else if pname == ">=" then
+				return v.bool_instance(recvval >= args[1].to_u32)
+			else if pname == "<=>" then
+				return v.int_instance(recvval <=> args[1].to_u32)
+			else if pname == "to_f" then
+				return v.float_instance(recvval.to_f)
+			else if pname == "to_i" then
+				return v.int_instance(recvval.to_i)
+			else if pname == "to_b" then
+				return v.byte_instance(recvval.to_b)
+			else if pname == "to_i8" then
+				return v.int8_instance(recvval.to_i8)
+			else if pname == "to_i16" then
+				return v.int16_instance(recvval.to_i16)
+			else if pname == "to_u16" then
+				return v.uint16_instance(recvval.to_u16)
+			else if pname == "to_i32" then
+				return v.int32_instance(recvval.to_i32)
+			else if pname == "<<" then
+				return v.uint32_instance(recvval << (args[1].to_i))
+			else if pname == ">>" then
+				return v.uint32_instance(recvval >> (args[1].to_i))
+			else if pname == "&" then
+				return v.uint32_instance(recvval & args[1].to_u32)
+			else if pname == "|" then
+				return v.uint32_instance(recvval | args[1].to_u32)
+			else if pname == "^" then
+				return v.uint32_instance(recvval ^ args[1].to_u32)
+			else if pname == "unary ~" then
+				return v.uint32_instance(~recvval)
 			end
 		else if pname == "native_argc" then
 			return v.int_instance(v.arguments.length)
@@ -1122,18 +1450,6 @@ redef class AMethPropdef
 		else if pname == "native_argv" then
 			var txt = v.arguments[args[1].to_i]
 			return v.native_string_instance(txt)
-		else if pname == "get_time" then
-			return v.int_instance(get_time)
-		else if pname == "srand" then
-			srand
-			return null
-		else if pname == "srand_from" then
-			srand_from(args[1].to_i)
-			return null
-		else if pname == "atan2" then
-			return v.float_instance(atan2(args[1].to_f, args[2].to_f))
-		else if pname == "pi" then
-			return v.float_instance(pi)
 		else if pname == "lexer_goto" then
 			return v.int_instance(lexer_goto(args[1].to_i, args[2].to_i))
 		else if pname == "lexer_accept" then
@@ -1142,16 +1458,6 @@ redef class AMethPropdef
 			return v.int_instance(parser_goto(args[1].to_i, args[2].to_i))
 		else if pname == "parser_action" then
 			return v.int_instance(parser_action(args[1].to_i, args[2].to_i))
-		else if pname == "file_getcwd" then
-			return v.native_string_instance(getcwd)
-		else if pname == "errno" then
-			return v.int_instance(sys.errno)
-		else if pname == "address_is_null" then
-			var recv = args[0]
-			if recv isa PrimitiveInstance[PrimitiveNativeFile] then
-				return v.bool_instance(recv.val.address_is_null)
-			end
-			return v.false_instance
 		end
 		return v.error_instance
 	end
@@ -1182,13 +1488,13 @@ redef class AAttrPropdef
 	do
 		if is_lazy then return
 		if has_value then
-			var f = v.new_frame(self, mpropdef.as(not null), [recv])
+			var f = v.new_frame(self, mreadpropdef.as(not null), [recv])
 			evaluate_expr(v, recv, f)
 			return
 		end
 		var mpropdef = self.mpropdef
 		if mpropdef == null then return
-		var mtype = mpropdef.static_mtype.as(not null)
+		var mtype = self.mtype.as(not null)
 		mtype = mtype.anchor_to(v.mainmodule, recv.mtype.as(MClassType))
 		if mtype isa MNullableType then
 			v.write_attribute(self.mpropdef.mproperty, recv, v.null_instance)
@@ -1452,37 +1758,47 @@ end
 redef class AForExpr
 	redef fun stmt(v)
 	do
-		var col = v.expr(self.n_expr)
-		if col == null then return
-		if col.mtype isa MNullType then fatal(v, "Receiver is null")
+		var iters = new Array[Instance]
 
-		#self.debug("col {col}")
-		var iter = v.callsite(method_iterator, [col]).as(not null)
-		#self.debug("iter {iter}")
+		for g in n_groups do
+			var col = v.expr(g.n_expr)
+			if col == null then return
+			if col.mtype isa MNullType then fatal(v, "Receiver is null")
+
+			var iter = v.callsite(g.method_iterator, [col]).as(not null)
+			iters.add iter
+		end
+
 		loop
-			var isok = v.callsite(method_is_ok, [iter]).as(not null)
-			if not isok.is_true then break
-			if self.variables.length == 1 then
-				var item = v.callsite(method_item, [iter]).as(not null)
-				#self.debug("item {item}")
-				v.write_variable(self.variables.first, item)
-			else if self.variables.length == 2 then
-				var key = v.callsite(method_key, [iter]).as(not null)
-				v.write_variable(self.variables[0], key)
-				var item = v.callsite(method_item, [iter]).as(not null)
-				v.write_variable(self.variables[1], item)
-			else
-				abort
+			for g in n_groups, iter in iters do
+				var isok = v.callsite(g.method_is_ok, [iter]).as(not null)
+				if not isok.is_true then break label
+				if g.variables.length == 1 then
+					var item = v.callsite(g.method_item, [iter]).as(not null)
+					#self.debug("item {item}")
+					v.write_variable(g.variables.first, item)
+				else if g.variables.length == 2 then
+					var key = v.callsite(g.method_key, [iter]).as(not null)
+					v.write_variable(g.variables[0], key)
+					var item = v.callsite(g.method_item, [iter]).as(not null)
+					v.write_variable(g.variables[1], item)
+				else
+					abort
+				end
 			end
 			v.stmt(self.n_block)
 			if v.is_escape(self.break_mark) then break
 			v.is_escape(self.continue_mark) # Clear the break
 			if v.is_escaping then break
-			v.callsite(method_next, [iter])
-		end
-		var method_finish = self.method_finish
-		if method_finish != null then
-			v.callsite(method_finish, [iter])
+			for g in n_groups, iter in iters do
+				v.callsite(g.method_next, [iter])
+			end
+		end label
+		for g in n_groups, iter in iters do
+			var method_finish = g.method_finish
+			if method_finish != null then
+				v.callsite(method_finish, [iter])
+			end
 		end
 	end
 end
@@ -1568,10 +1884,17 @@ redef class AOrElseExpr
 	end
 end
 
-redef class AIntExpr
+redef class AIntegerExpr
 	redef fun expr(v)
 	do
-		return v.int_instance(self.value.as(not null))
+		if value isa Int then return v.int_instance(value.as(Int))
+		if value isa Byte then return v.byte_instance(value.as(Byte))
+		if value isa Int8 then return v.int8_instance(value.as(Int8))
+		if value isa Int16 then return v.int16_instance(value.as(Int16))
+		if value isa UInt16 then return v.uint16_instance(value.as(UInt16))
+		if value isa Int32 then return v.int32_instance(value.as(Int32))
+		if value isa UInt32 then return v.uint32_instance(value.as(UInt32))
+		return null
 	end
 end
 
@@ -1629,7 +1952,7 @@ redef class ASuperstringExpr
 			array.add(i)
 		end
 		var i = v.array_instance(array, v.mainmodule.object_type)
-		var res = v.send(v.force_get_primitive_method("to_s", i.mtype), [i])
+		var res = v.send(v.force_get_primitive_method("plain_to_s", i.mtype), [i])
 		assert res != null
 		return res
 	end

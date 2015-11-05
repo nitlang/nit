@@ -19,7 +19,7 @@ in "C++ header" `{
 `}
 
 fun print_b(str: String) import String.to_cstring in "C++" `{
-	puts(String_to_cstring(str));
+	puts(reinterpret_cast<char*>(String_to_cstring(str)));
 `}
 
 print_a "Hello from `a`."

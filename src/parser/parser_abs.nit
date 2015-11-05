@@ -301,10 +301,7 @@ end
 class TAttrid
 	super Token
 end
-class TNumber
-	super Token
-end
-class THexNumber
+class TInteger
 	super Token
 end
 class TFloat
@@ -356,6 +353,7 @@ class AClasskind super Prod end
 class AFormaldef super Prod end
 class APropdef super Prod end
 class AMethid super Prod end
+class AQid super Prod end
 class ASignature super Prod end
 class AParam super Prod end
 class AType super Prod end
@@ -363,6 +361,7 @@ class ALabel super Prod end
 class AExpr super Prod end
 class AExprs super Prod end
 class AAssignOp super Prod end
+class AForGroup super Prod end
 class AModuleName super Prod end
 class AExternCalls super Prod end
 class AExternCall super Prod end
@@ -632,6 +631,11 @@ class ABraassignMethid
 	var n_cbra: TCbra is writable, noinit
 	var n_assign: TAssign is writable, noinit
 end
+class AQid
+	super AQid
+	var n_qualified: nullable AQualified = null is writable
+	var n_id: TId is writable, noinit
+end
 class ASignature
 	super ASignature
 	var n_opar: nullable TOpar = null is writable
@@ -734,9 +738,7 @@ end
 class AForExpr
 	super AExpr
 	var n_kwfor: TKwfor is writable, noinit
-	var n_ids: List[TId] = new List[TId]
-	var n_kwin: TKwin is writable, noinit
-	var n_expr: AExpr is writable, noinit
+	var n_groups: List[AForGroup] = new List[AForGroup]
 	var n_kwdo: TKwdo is writable, noinit
 	var n_block: nullable AExpr = null is writable
 	var n_label: nullable ALabel = null is writable
@@ -934,7 +936,7 @@ class ANewExpr
 	super AExpr
 	var n_kwnew: TKwnew is writable, noinit
 	var n_type: AType is writable, noinit
-	var n_id: nullable TId = null is writable
+	var n_qid: nullable AQid = null is writable
 	var n_args: AExprs is writable, noinit
 end
 class AAttrExpr
@@ -959,13 +961,13 @@ end
 class ACallExpr
 	super AExpr
 	var n_expr: AExpr is writable, noinit
-	var n_id: TId is writable, noinit
+	var n_qid: AQid is writable, noinit
 	var n_args: AExprs is writable, noinit
 end
 class ACallAssignExpr
 	super AExpr
 	var n_expr: AExpr is writable, noinit
-	var n_id: TId is writable, noinit
+	var n_qid: AQid is writable, noinit
 	var n_args: AExprs is writable, noinit
 	var n_assign: TAssign is writable, noinit
 	var n_value: AExpr is writable, noinit
@@ -973,7 +975,7 @@ end
 class ACallReassignExpr
 	super AExpr
 	var n_expr: AExpr is writable, noinit
-	var n_id: TId is writable, noinit
+	var n_qid: AQid is writable, noinit
 	var n_args: AExprs is writable, noinit
 	var n_assign_op: AAssignOp is writable, noinit
 	var n_value: AExpr is writable, noinit
@@ -1080,14 +1082,9 @@ class ANullExpr
 	var n_kwnull: TKwnull is writable, noinit
 	var n_annotations: nullable AAnnotations = null is writable
 end
-class ADecIntExpr
+class AIntegerExpr
 	super AExpr
-	var n_number: TNumber is writable, noinit
-	var n_annotations: nullable AAnnotations = null is writable
-end
-class AHexIntExpr
-	super AExpr
-	var n_hex_number: THexNumber is writable, noinit
+	var n_integer: TInteger is writable, noinit
 	var n_annotations: nullable AAnnotations = null is writable
 end
 class AFloatExpr
@@ -1246,6 +1243,12 @@ end
 class AGgAssignOp
 	super AAssignOp
 	var n_op: TGgeq is writable, noinit
+end
+class AForGroup
+	super AForGroup
+	var n_ids: List[TId] = new List[TId]
+	var n_kwin: TKwin is writable, noinit
+	var n_expr: AExpr is writable, noinit
 end
 class AModuleName
 	super AModuleName

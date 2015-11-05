@@ -20,12 +20,12 @@ extern class As `{ A* `}
 	`}
 
 	fun []=(i: Int, v: A) `{
-		recv[i] = v;
+		self[i] = v;
 		A_incr_ref(v);
 	`}
 
 	fun [](i: Int): A `{
-		return recv[i];
+		return self[i];
 	`}
 end
 

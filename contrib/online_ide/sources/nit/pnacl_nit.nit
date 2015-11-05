@@ -17,12 +17,12 @@
 # A version of the naive Nit interpreter for PNaCl.
 module pnacl_nit
 
-import interpreter::naive_interpreter
-import interpreter::debugger
+import nitc::interpreter::naive_interpreter
+import nitc::interpreter::debugger
 import pnacl
-intrude import toolcontext
-intrude import loader
-intrude import standard::file
+intrude import nitc::toolcontext
+intrude import nitc::loader
+intrude import core::file
 
 # We redefine exit to start a new thread before killing the one that called exit.
 redef fun exit(exit_value: Int)
@@ -72,7 +72,7 @@ redef class FileReader
 		self.path = path
 		var file = sys.files[path]
 		prepare_buffer(file.length)
-		_buffer.append(file)
+		path.copy_to_native(_buffer, file.length, 0, 0)
 	end
 
 	redef fun close
@@ -82,7 +82,7 @@ redef class FileReader
 
 	redef fun fill_buffer
 	do
-		_buffer.clear
+		buffer_reset
 		end_reached = true
 	end
 
@@ -97,7 +97,7 @@ redef class ModelBuilder
 	redef fun module_absolute_path(path: String): String do return path
 
 	# We don't use paths as the interpreter, so we don't use location or lookpaths args (see the default implementation).
-	redef fun search_module_in_paths(location: nullable Location, name: String, lookpaths: Collection[String]): nullable ModulePath
+	redef fun search_module_in_paths(location: nullable Location, name: String, lookpaths: Collection[String]): nullable MModule
 	do
 		var candidate: nullable String = null
 		var try_file = "{name}.nit"
@@ -114,7 +114,7 @@ redef class ModelBuilder
 			end
 		end
 		if candidate == null then return null
-		return identify_file(candidate)
+		return identify_module(candidate)
 	end
 end
 

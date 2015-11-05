@@ -20,6 +20,7 @@ module typing
 
 import modelize
 import local_var_init
+import literal
 
 redef class ToolContext
 	var typing_phase: Phase = new TypingPhase(self, [flow_phase, modelize_property_phase, local_var_init_phase])
@@ -184,12 +185,12 @@ private class TypeVisitor
 	end
 
 
-	fun visit_expr_cast(node: ANode, nexpr: AExpr, ntype: AType): nullable MType
+	fun check_expr_cast(node: ANode, nexpr: AExpr, ntype: AType): nullable MType
 	do
-		var sub = visit_expr(nexpr)
+		var sub = nexpr.mtype
 		if sub == null then return null # Forward error
 
-		var sup = self.resolve_mtype(ntype)
+		var sup = ntype.mtype
 		if sup == null then return null # Forward error
 
 		if sup == sub then
@@ -217,6 +218,10 @@ private class TypeVisitor
 	# Else return true.
 	fun check_can_be_null(anode: ANode, mtype: MType): Bool
 	do
+		if mtype isa MNullType then
+			modelbuilder.warning(anode, "useless-null-test", "Warning: expression is always `null`.")
+			return true
+		end
 		if can_be_null(mtype) then return true
 
 		if mtype isa MFormalType then
@@ -240,7 +245,7 @@ private class TypeVisitor
 		if not mtype2 isa MNullType then return
 
 		# Check of useless null
-		if not check_can_be_null(anode.n_expr, mtype) then return
+		if not can_be_null(mtype) then return
 
 		if mtype isa MNullType then
 			# Because of type adaptation, we cannot just stop here
@@ -301,15 +306,9 @@ private class TypeVisitor
 
 		#debug("recv: {recvtype} (aka {unsafe_type})")
 		if recvtype isa MNullType then
-			# `null` only accepts some methods of object.
-			if name == "==" or name == "!=" or name == "is_same_instance" then
-				var objclass = get_mclass(node, "Object")
-				if objclass == null then return null # Forward error
-				unsafe_type = objclass.mclass_type
-			else
-				self.error(node, "Error: method `{name}` called on `null`.")
-				return null
-			end
+			var objclass = get_mclass(node, "Object")
+			if objclass == null then return null # Forward error
+			unsafe_type = objclass.mclass_type
 		end
 
 		var mproperty = self.try_get_mproperty_by_name2(node, unsafe_type, name)
@@ -330,6 +329,14 @@ private class TypeVisitor
 		end
 
 		assert mproperty isa MMethod
+
+		# `null` only accepts some methods of object.
+		if recvtype isa MNullType and not mproperty.is_null_safe then
+			self.error(node, "Error: method `{name}` called on `null`.")
+			return null
+		else if unsafe_type isa MNullableType and not mproperty.is_null_safe then
+			modelbuilder.advice(node, "call-on-nullable", "Warning: method call on a nullable receiver `{recvtype}`.")
+		end
 
 		if is_toplevel_context and recv_is_self and not mproperty.is_toplevel then
 			error(node, "Error: `{name}` is not a top-level method, thus need a receiver.")
@@ -382,7 +389,7 @@ private class TypeVisitor
 			end
 		end
 
-		var callsite = new CallSite(node, recvtype, mmodule, anchor, recv_is_self, mproperty, mpropdef, msignature, erasure_cast)
+		var callsite = new CallSite(node.hot_location, recvtype, mmodule, anchor, recv_is_self, mproperty, mpropdef, msignature, erasure_cast)
 		return callsite
 	end
 
@@ -407,26 +414,30 @@ private class TypeVisitor
 				return null
 			end
 		else if args.length != msignature.arity then
-			if msignature.arity == msignature.min_arity then
+			# Too much argument
+			if args.length > msignature.arity then
 				modelbuilder.error(node, "Error: expected {msignature.arity} argument(s) for `{mproperty}{msignature}`; got {args.length}. See introduction at `{mproperty.full_name}`.")
 				return null
 			end
-			if args.length > msignature.arity then
-				modelbuilder.error(node, "Error: expected at most {msignature.arity} argument(s) for `{mproperty}{msignature}`; got {args.length}. See introduction at `{mproperty.full_name}`.")
-				return null
-			end
-			if args.length < msignature.min_arity then
-				modelbuilder.error(node, "Error: expected at least {msignature.min_arity} argument(s) for `{mproperty}{msignature}`; got {args.length}. See introduction at `{mproperty.full_name}`.")
-				return null
-			end
+			# Other cases are managed later
 		end
+
 
 		#debug("CALL {unsafe_type}.{msignature}")
 
 		# Associate each parameter to a position in the arguments
 		var map = new SignatureMap
 
-		var setted = args.length - msignature.min_arity
+		# Special case for the isolated last argument
+		# TODO: reify this method characteristics (where? the param, the signature, the method?)
+		var last_is_padded = mproperty.name.chars.last == '='
+		var nbargs = args.length
+		if last_is_padded then
+			nbargs -= 1
+			assert not args.last isa ANamedargExpr
+			map.map[msignature.arity - 1] = args.length - 1
+			self.visit_expr_subtype(args.last, msignature.mparameters.last.mtype)
+		end
 
 		# First, handle named arguments
 		for i in [0..args.length[ do
@@ -438,10 +449,6 @@ private class TypeVisitor
 				modelbuilder.error(e.n_id, "Error: no parameter `{name}` for `{mproperty}{msignature}`.")
 				return null
 			end
-			if not param.is_default then
-				modelbuilder.error(e, "Error: parameter `{name}` is not optional for `{mproperty}{msignature}`.")
-				return null
-			end
 			var idx = msignature.mparameters.index_of(param)
 			var prev = map.map.get_or_null(idx)
 			if prev != null then
@@ -449,9 +456,11 @@ private class TypeVisitor
 				return null
 			end
 			map.map[idx] = i
-			setted -= 1
 			e.mtype = self.visit_expr_subtype(e.n_expr, param.mtype)
 		end
+
+		# Number of minimum mandatory remaining parameters
+		var min_arity = 0
 
 		# Second, associate remaining parameters
 		var vararg_decl = args.length - msignature.arity
@@ -461,16 +470,16 @@ private class TypeVisitor
 			if map.map.has_key(i) then continue
 
 			var param = msignature.mparameters[i]
-			if param.is_default then
-				if setted > 0 then
-					setted -= 1
-				else
-					continue
-				end
-			end
 
 			# Search the next free argument: skip named arguments since they are already associated
-			while args[j] isa ANamedargExpr do j += 1
+			while j < nbargs and args[j] isa ANamedargExpr do j += 1
+			if j >= nbargs then
+				if not param.mtype isa MNullableType then
+					min_arity = j + 1
+				end
+				j += 1
+				continue
+			end
 			var arg = args[j]
 			map.map[i] = j
 			j += 1
@@ -482,6 +491,16 @@ private class TypeVisitor
 
 			var paramtype = param.mtype
 			self.visit_expr_subtype(arg, paramtype)
+		end
+
+		if min_arity > 0 then
+			if last_is_padded then min_arity += 1
+			if min_arity < msignature.arity then
+				modelbuilder.error(node, "Error: expected at least {min_arity} argument(s) for `{mproperty}{msignature}`; got {args.length}. See introduction at `{mproperty.full_name}`.")
+			else
+				modelbuilder.error(node, "Error: expected {min_arity} argument(s) for `{mproperty}{msignature}`; got {args.length}. See introduction at `{mproperty.full_name}`.")
+			end
+			return null
 		end
 
 		# Third, check varargs
@@ -521,7 +540,7 @@ private class TypeVisitor
 
 	fun error(node: ANode, message: String)
 	do
-		self.modelbuilder.toolcontext.error(node.hot_location, message)
+		self.modelbuilder.error(node, message)
 	end
 
 	fun get_variable(node: AExpr, variable: Variable): nullable MType
@@ -602,8 +621,10 @@ end
 
 # A specific method call site with its associated informations.
 class CallSite
-	# The associated node for location
-	var node: ANode
+	super MEntity
+
+	# The associated location of the callsite
+	var location: Location
 
 	# The static type of the receiver (possibly unresolved)
 	var recv: MType
@@ -636,17 +657,18 @@ class CallSite
 	# If null then no specific association is required.
 	var signaturemap: nullable SignatureMap = null
 
-	private fun check_signature(v: TypeVisitor, args: Array[AExpr]): Bool
+	private fun check_signature(v: TypeVisitor, node: ANode, args: Array[AExpr]): Bool
 	do
-		var map = v.check_signature(self.node, args, self.mproperty, self.msignature)
+		var map = v.check_signature(node, args, self.mproperty, self.msignature)
 		signaturemap = map
+		if map == null then is_broken = true
 		return map == null
 	end
 end
 
 redef class Variable
 	# The declared type of the variable
-	var declared_type: nullable MType
+	var declared_type: nullable MType is writable
 
 	# Was the variable type-adapted?
 	# This is used to speedup type retrieval while it remains `false`
@@ -716,9 +738,6 @@ end
 redef class AMethPropdef
 	redef fun do_typing(modelbuilder: ModelBuilder)
 	do
-		var nblock = self.n_block
-		if nblock == null then return
-
 		var mpropdef = self.mpropdef
 		if mpropdef == null then return # skip error
 
@@ -740,11 +759,17 @@ redef class AMethPropdef
 			variable.declared_type = mtype
 		end
 
+		var nblock = self.n_block
+		if nblock == null then return
+
 		loop
 			v.dirty = false
 			v.visit_stmt(nblock)
 			if not v.has_loop or not v.dirty then break
 		end
+
+		var post_visitor = new PostTypingVisitor(v)
+		post_visitor.enter_visit(self)
 
 		if not nblock.after_flow_context.is_unreachable and msignature.return_mtype != null then
 			# We reach the end of the function without having a return, it is bad
@@ -753,20 +778,36 @@ redef class AMethPropdef
 	end
 end
 
+private class PostTypingVisitor
+	super Visitor
+	var type_visitor: TypeVisitor
+	redef fun visit(n) do
+		n.visit_all(self)
+		n.accept_post_typing(type_visitor)
+		if n isa AExpr and n.mtype == null and not n.is_typed then
+			n.is_broken = true
+		end
+	end
+end
+
+redef class ANode
+	private fun accept_post_typing(v: TypeVisitor) do end
+end
+
 redef class AAttrPropdef
 	redef fun do_typing(modelbuilder: ModelBuilder)
 	do
 		if not has_value then return
 
-		var mpropdef = self.mpropdef
-		if mpropdef == null then return # skip error
+		var mpropdef = self.mreadpropdef
+		if mpropdef == null or mpropdef.msignature == null then return # skip error
 
 		var v = new TypeVisitor(modelbuilder, mpropdef.mclassdef.mmodule, mpropdef)
 		self.selfvariable = v.selfvariable
 
 		var nexpr = self.n_expr
 		if nexpr != null then
-			var mtype = self.mpropdef.static_mtype
+			var mtype = self.mtype
 			v.visit_expr_subtype(nexpr, mtype)
 		end
 		var nblock = self.n_block
@@ -958,7 +999,7 @@ redef class AVarReassignExpr
 
 		v.set_variable(self, variable, rettype)
 
-		self.is_typed = true
+		self.is_typed = rettype != null
 	end
 end
 
@@ -1004,9 +1045,11 @@ redef class AReturnExpr
 			else
 				v.visit_expr(nexpr)
 				v.error(nexpr, "Error: `return` with value in a procedure.")
+				return
 			end
 		else if ret_type != null then
 			v.error(self, "Error: `return` without value in a function.")
+			return
 		end
 		self.is_typed = true
 	end
@@ -1083,6 +1126,24 @@ redef class ALoopExpr
 end
 
 redef class AForExpr
+	redef fun accept_typing(v)
+	do
+		v.has_loop = true
+
+		for g in n_groups do
+			var mtype = v.visit_expr(g.n_expr)
+			if mtype == null then return
+			g.do_type_iterator(v, mtype)
+		end
+
+		v.visit_stmt(n_block)
+
+		self.mtype = n_block.mtype
+		self.is_typed = true
+	end
+end
+
+redef class AForGroup
 	var coltype: nullable MClassType
 
 	var method_iterator: nullable CallSite
@@ -1209,20 +1270,6 @@ redef class AForExpr
 			self.method_successor = v.get_method(self, vtype, "successor", false)
 		end
 	end
-
-	redef fun accept_typing(v)
-	do
-		v.has_loop = true
-		var mtype = v.visit_expr(n_expr)
-		if mtype == null then return
-
-		self.do_type_iterator(v, mtype)
-
-		v.visit_stmt(n_block)
-
-		self.mtype = n_block.mtype
-		self.is_typed = true
-	end
 end
 
 redef class AWithExpr
@@ -1300,8 +1347,9 @@ redef class AOrElseExpr
 		end
 
 		if t1 isa MNullType then
-			v.error(n_expr, "Type Error: `or else` on `null`.")
-		else if v.check_can_be_null(n_expr, t1) then
+			self.mtype = t2
+			return
+		else if v.can_be_null(t1) then
 			t1 = t1.as_notnull
 		end
 
@@ -1316,6 +1364,16 @@ redef class AOrElseExpr
 			#v.error(self, "Type Error: ambiguous type {t1} vs {t2}")
 		end
 		self.mtype = t
+	end
+
+	redef fun accept_post_typing(v)
+	do
+		var t1 = n_expr.mtype
+		if t1 == null then
+			return
+		else
+			v.check_can_be_null(n_expr, t1)
+		end
 	end
 end
 
@@ -1333,10 +1391,25 @@ redef class AFalseExpr
 	end
 end
 
-redef class AIntExpr
+redef class AIntegerExpr
 	redef fun accept_typing(v)
 	do
-		var mclass = v.get_mclass(self, "Int")
+		var mclass: nullable MClass = null
+		if value isa Byte then
+			mclass = v.get_mclass(self, "Byte")
+		else if value isa Int then
+			mclass = v.get_mclass(self, "Int")
+		else if value isa Int8 then
+			mclass = v.get_mclass(self, "Int8")
+		else if value isa Int16 then
+			mclass = v.get_mclass(self, "Int16")
+		else if value isa UInt16 then
+			mclass = v.get_mclass(self, "UInt16")
+		else if value isa Int32 then
+			mclass = v.get_mclass(self, "Int32")
+		else if value isa UInt32 then
+			mclass = v.get_mclass(self, "UInt32")
+		end
 		if mclass == null then return # Forward error
 		self.mtype = mclass.mclass_type
 	end
@@ -1511,7 +1584,10 @@ redef class AIsaExpr
 	var cast_type: nullable MType
 	redef fun accept_typing(v)
 	do
-		var mtype = v.visit_expr_cast(self, self.n_expr, self.n_type)
+		v.visit_expr(n_expr)
+
+		var mtype = v.resolve_mtype(n_type)
+
 		self.cast_type = mtype
 
 		var variable = self.n_expr.its_variable
@@ -1525,12 +1601,24 @@ redef class AIsaExpr
 
 		self.mtype = v.type_bool(self)
 	end
+
+	redef fun accept_post_typing(v)
+	do
+		v.check_expr_cast(self, self.n_expr, self.n_type)
+	end
 end
 
 redef class AAsCastExpr
 	redef fun accept_typing(v)
 	do
-		self.mtype = v.visit_expr_cast(self, self.n_expr, self.n_type)
+		v.visit_expr(n_expr)
+
+		self.mtype = v.resolve_mtype(n_type)
+	end
+
+	redef fun accept_post_typing(v)
+	do
+		v.check_expr_cast(self, self.n_expr, self.n_type)
 	end
 end
 
@@ -1545,11 +1633,18 @@ redef class AAsNotnullExpr
 			return
 		end
 
-		if v.check_can_be_null(n_expr, mtype) then
+		if v.can_be_null(mtype) then
 			mtype = mtype.as_notnull
 		end
 
 		self.mtype = mtype
+	end
+
+	redef fun accept_post_typing(v)
+	do
+		var mtype = n_expr.mtype
+		if mtype == null then return
+		v.check_can_be_null(n_expr, mtype)
 	end
 end
 
@@ -1635,7 +1730,7 @@ redef class ASendExpr
 
 		var args = compute_raw_arguments
 
-		callsite.check_signature(v, args)
+		callsite.check_signature(v, node, args)
 
 		if callsite.mproperty.is_init then
 			var vmpropdef = v.mpropdef
@@ -1675,18 +1770,24 @@ redef class ABinopExpr
 	redef fun property_name do return operator
 	redef fun property_node do return n_op
 end
-redef class AEqExpr
+
+redef class AEqFormExpr
 	redef fun accept_typing(v)
 	do
 		super
 		v.null_test(self)
 	end
-end
-redef class ANeExpr
-	redef fun accept_typing(v)
+
+	redef fun accept_post_typing(v)
 	do
-		super
-		v.null_test(self)
+		var mtype = n_expr.mtype
+		var mtype2 = n_expr2.mtype
+
+		if mtype == null or mtype2 == null then return
+
+		if not mtype2 isa MNullType then return
+
+		v.check_can_be_null(n_expr, mtype)
 	end
 end
 
@@ -1697,14 +1798,14 @@ end
 
 
 redef class ACallExpr
-	redef fun property_name do return n_id.text
-	redef fun property_node do return n_id
+	redef fun property_name do return n_qid.n_id.text
+	redef fun property_node do return n_qid
 	redef fun compute_raw_arguments do return n_args.to_a
 end
 
 redef class ACallAssignExpr
-	redef fun property_name do return n_id.text + "="
-	redef fun property_node do return n_id
+	redef fun property_name do return n_qid.n_id.text + "="
+	redef fun property_node do return n_qid
 	redef fun compute_raw_arguments
 	do
 		var res = n_args.to_a
@@ -1748,7 +1849,7 @@ redef class ASendReassignFormExpr
 
 		var args = compute_raw_arguments
 
-		callsite.check_signature(v, args)
+		callsite.check_signature(v, node, args)
 
 		var readtype = callsite.msignature.return_mtype
 		if readtype == null then
@@ -1765,15 +1866,15 @@ redef class ASendReassignFormExpr
 
 		args = args.to_a # duplicate so raw_arguments keeps only the getter args
 		args.add(self.n_value)
-		wcallsite.check_signature(v, args)
+		wcallsite.check_signature(v, node, args)
 
 		self.is_typed = true
 	end
 end
 
 redef class ACallReassignExpr
-	redef fun property_name do return n_id.text
-	redef fun property_node do return n_id
+	redef fun property_name do return n_qid.n_id.text
+	redef fun property_node do return n_qid.n_id
 	redef fun compute_raw_arguments do return n_args.to_a
 end
 
@@ -1886,12 +1987,12 @@ redef class ASuperExpr
 		var msignature = superprop.new_msignature or else superprop.msignature.as(not null)
 		msignature = v.resolve_for(msignature, recvtype, true).as(MSignature)
 
-		var callsite = new CallSite(self, recvtype, v.mmodule, v.anchor, true, superprop.mproperty, superprop, msignature, false)
+		var callsite = new CallSite(hot_location, recvtype, v.mmodule, v.anchor, true, superprop.mproperty, superprop, msignature, false)
 		self.callsite = callsite
 
 		var args = self.n_args.to_a
 		if args.length > 0 then
-			callsite.check_signature(v, args)
+			callsite.check_signature(v, self, args)
 		else
 			# Check there is at least enough parameters
 			if mpropdef.msignature.arity < msignature.arity then
@@ -1945,11 +2046,11 @@ redef class ANewExpr
 		var kind = recvtype.mclass.kind
 
 		var name: String
-		var nid = self.n_id
+		var nqid = self.n_qid
 		var node: ANode
-		if nid != null then
-			name = nid.text
-			node = nid
+		if nqid != null then
+			name = nqid.n_id.text
+			node = nqid
 		else
 			name = "new"
 			node = self.n_kwnew
@@ -1990,7 +2091,7 @@ redef class ANewExpr
 		end
 
 		var args = n_args.to_a
-		callsite.check_signature(v, args)
+		callsite.check_signature(v, node, args)
 	end
 end
 
@@ -2050,7 +2151,7 @@ redef class AAttrAssignExpr
 		var mtype = self.attr_type
 
 		v.visit_expr_subtype(self.n_value, mtype)
-		self.is_typed = true
+		self.is_typed = mtype != null
 	end
 end
 
@@ -2061,9 +2162,9 @@ redef class AAttrReassignExpr
 		var mtype = self.attr_type
 		if mtype == null then return # Skip error
 
-		self.resolve_reassignment(v, mtype, mtype)
+		var rettype = self.resolve_reassignment(v, mtype, mtype)
 
-		self.is_typed = true
+		self.is_typed = rettype != null
 	end
 end
 

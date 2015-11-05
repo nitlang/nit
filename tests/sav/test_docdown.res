@@ -1,3 +1,0 @@
-Usage: test_markdown [OPTION]... <file.nit>...
-Generates HTML of comments of documentation from Nit source files.
-Use --help for help

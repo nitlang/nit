@@ -35,5 +35,6 @@ end
 class Sys
 	fun main
 	do
+		print(0)
 	end
 end

@@ -14,21 +14,25 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Services to control the bcm2835 chipset as used in the Raspberry Pi
-# model B revision 1 Uses the C library by Mike McCauley from
-# http://www.airspayce.com/mikem/bcm2835/
+# Services to control the bcm2835 chipset used in the Raspberry Pi
+#
+# Uses the C library by Mike McCauley available at http://www.airspayce.com/mikem/bcm2835/
+#
+# This module targets the model B revision 1, it could be tweaked for other versions.
 module bcm2835
-
-import gpio
 
 in "C Header" `{
 	#include <bcm2835.h>
 `}
 
-redef class Object
-	protected fun bcm2835_init: Bool `{ return bcm2835_init(); `}
-	protected fun bcm2835_close `{ bcm2835_close(); `}
-	protected fun bcm2835_debug=(v: Bool) `{ bcm2835_set_debug(v); `}
+fun bcm2835_init: Bool `{ return bcm2835_init(); `}
+fun bcm2835_close `{ bcm2835_close(); `}
+fun bcm2835_debug=(v: Bool) `{ bcm2835_set_debug(v); `}
+
+# A physical binary pin
+interface Pin
+	# Set the output of this pin
+	fun write(high: Bool) is abstract
 end
 
 extern class RPiPin `{ RPiGPIOPin `}
@@ -57,39 +61,39 @@ extern class RPiPin `{ RPiGPIOPin `}
 	new p1_26 `{ return RPI_GPIO_P1_26; `}
 
 	# Select mode: input, output or alts
-	fun fsel=(mode: FunctionSelect) `{ bcm2835_gpio_fsel(recv, mode); `}
+	fun fsel=(mode: FunctionSelect) `{ bcm2835_gpio_fsel(self, mode); `}
 
 	# Set output
-	redef fun write(high) `{ bcm2835_gpio_write(recv, high? HIGH: LOW); `}
+	redef fun write(high) `{ bcm2835_gpio_write(self, high? HIGH: LOW); `}
 
 	# Set pull up mode
-	fun pud=(pud: PUDControl) `{ bcm2835_gpio_set_pud(recv, pud); `}
+	fun pud=(pud: PUDControl) `{ bcm2835_gpio_set_pud(self, pud); `}
 
 	# Falling edge detect
 	# Do not use on raspbian, it is bugged!
-	fun fen `{ bcm2835_gpio_fen(recv); `}
-	fun clr_fen `{ bcm2835_gpio_clr_fen(recv); `}
+	fun fen `{ bcm2835_gpio_fen(self); `}
+	fun clr_fen `{ bcm2835_gpio_clr_fen(self); `}
 
 	# Raising edge detect
 	# Do not use on raspbian, it is bugged!
-	fun ren `{ bcm2835_gpio_ren(recv); `}
-	fun clr_ren `{ bcm2835_gpio_clr_ren(recv); `}
+	fun ren `{ bcm2835_gpio_ren(self); `}
+	fun clr_ren `{ bcm2835_gpio_clr_ren(self); `}
 
 	# High edge detect
 	# Do not use on raspbian, it is bugged!
-	fun hen `{ bcm2835_gpio_hen(recv); `}
-	fun clr_hen `{ bcm2835_gpio_clr_hen(recv); `}
+	fun hen `{ bcm2835_gpio_hen(self); `}
+	fun clr_hen `{ bcm2835_gpio_clr_hen(self); `}
 
 	# Low edge detect
 	# Do not use on raspbian, it is bugged!
-	fun len `{ bcm2835_gpio_len(recv); `}
-	fun clr_len `{ bcm2835_gpio_clr_len(recv); `}
+	fun len `{ bcm2835_gpio_len(self); `}
+	fun clr_len `{ bcm2835_gpio_clr_len(self); `}
 
-	fun set_eds `{ bcm2835_gpio_set_eds(recv); `}
-	fun eds: Bool `{ return bcm2835_gpio_eds(recv); `}
+	fun set_eds `{ bcm2835_gpio_set_eds(self); `}
+	fun eds: Bool `{ return bcm2835_gpio_eds(self); `}
 
 	# Return input on pin, true for high and false for low
-	fun lev: Bool `{ return bcm2835_gpio_lev(recv); `}
+	fun lev: Bool `{ return bcm2835_gpio_lev(self); `}
 end
 
 extern class FunctionSelect `{ bcm2835FunctionSelect `}
@@ -115,8 +119,8 @@ extern class PUDControl `{ bcm2835PUDControl `}
 end
 
 redef universal Int
-	fun bcm2835_delay `{ bcm2835_delay(recv); `}
-	fun bcm2835_delay_micros `{ bcm2835_delayMicroseconds(recv); `}
+	fun bcm2835_delay `{ bcm2835_delay(self); `}
+	fun bcm2835_delay_micros `{ bcm2835_delayMicroseconds(self); `}
 end
 
 class RotaryEncoder
@@ -213,15 +217,15 @@ class HD44780
 	do
 		var fs = flag_function_set
 		if bits == 8 then
-			fs = fs.bin_or(16)
+			fs = fs | 16
 		else if bits != 4 then abort
 
 		if lines == 2 then
-			fs = fs.bin_or(8)
+			fs = fs | 8
 		else if lines != 1 then abort
 
 		if dots_wide == 10 then
-			fs = fs.bin_or(4)
+			fs = fs | 4
 		else if dots_wide != 8 then abort
 
 		write(true, fs)
@@ -231,17 +235,11 @@ class HD44780
 	do
 		var fs = flag_display_control
 
-		if on then
-			fs = fs.bin_or(flag_display_on)
-		else fs = fs.bin_or(flag_display_off)
+		fs |= if on then flag_display_on else flag_display_off
 
-		if cursor then
-			fs = fs.bin_or(flag_cursor_on)
-		else fs = fs.bin_or(flag_cursor_off)
+		fs |= if cursor then flag_cursor_on else flag_cursor_off
 
-		if blink then
-			fs = fs.bin_or(flag_blink_on)
-		else fs = fs.bin_or(flag_blink_off)
+		fs |= if blink then flag_blink_on else flag_blink_off
 
 		write(true, fs)
 	end
@@ -250,13 +248,9 @@ class HD44780
 	do
 		var fs = flag_entry_mode_set
 
-		if left then
-			fs = fs.bin_or(flag_entry_left)
-		else fs = fs.bin_or(flag_entry_right)
+		fs |= if left then flag_entry_left else flag_entry_right
 
-		if incr then
-			fs = fs.bin_or(flag_entry_shift_increment)
-		else fs = fs.bin_or(flag_entry_shift_decrement)
+		fs |= if incr then flag_entry_shift_increment else flag_entry_shift_decrement
 
 		write(true, fs)
 	end
@@ -349,7 +343,7 @@ class HD44780
 		var lb = once [1,2,4,8]
 		for i in [0..4[ do
 			var b = lb[i]
-			var r = b.bin_and(v) != 0
+			var r = b & v != 0
 			var d = ds[i]
 			d.write(r)
 		end
@@ -384,7 +378,7 @@ class HD44780
 		var hb = once [16,32,64,128]
 		for i in [0..4[ do
 			var b = hb[i]
-			var r = b.bin_and(cmd) != 0
+			var r = b & cmd != 0
 			var d = ds[i]
 			d.write(r)
 		end
@@ -403,7 +397,7 @@ class HD44780
 		var lb = once [1,2,4,8]
 		for i in [0..4[ do
 			var b = lb[i]
-			var r = b.bin_and(cmd) != 0
+			var r = b & cmd != 0
 			var d = ds[i]
 			d.write(r)
 		end
@@ -446,10 +440,10 @@ class HD44780
 				#write(true, "C0".to_hex)
 				# instead we use the following which may not be portable
 
-				for s in [count..40[ do write(false, ' '.ascii)
+				for s in [count..40[ do write(false, ' '.code_point)
 				count = 0
 			else
-				write(false, c.ascii)
+				write(false, c.code_point)
 				count += 1
 			end
 		end

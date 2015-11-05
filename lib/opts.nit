@@ -91,7 +91,7 @@ abstract class Option
 	end
 
 	# Consume parameters for this option
-	protected fun read_param(it: Iterator[String])
+	protected fun read_param(opts: OptionContext, it: Iterator[String])
 	do
 		read = true
 	end
@@ -117,7 +117,7 @@ class OptionBool
 	# Init a new OptionBool with a `help` message and `names`.
 	init(help: String, names: String...) is old_style_init do super(help, false, names)
 
-	redef fun read_param(it)
+	redef fun read_param(opts, it)
 	do
 		super
 		value = true
@@ -132,7 +132,7 @@ class OptionCount
 	# Init a new OptionCount with a `help` message and `names`.
 	init(help: String, names: String...) is old_style_init do super(help, 0, names)
 
-	redef fun read_param(it)
+	redef fun read_param(opts, it)
 	do
 		super
 		value += 1
@@ -147,23 +147,35 @@ abstract class OptionParameter
 	protected fun convert(str: String): VALUE is abstract
 
 	# Is the parameter mandatory?
-	var parameter_mandatory: Bool = true is writable
+	var parameter_mandatory = true is writable
 
-	redef fun read_param(it)
+	redef fun read_param(opts, it)
 	do
 		super
-		if it.is_ok and (it.item.is_empty or it.item.chars.first != '-') then
+
+		var ok = it.is_ok
+		if ok and not parameter_mandatory and not it.item.is_empty and it.item.chars.first == '-' then
+			# The next item may looks like a known command
+			# Only check if `not parameter_mandatory`
+			for opt in opts.options do
+				if opt.names.has(it.item) then
+					# The next item is a known command
+					ok = false
+					break
+				end
+			end
+		end
+
+		if ok then
 			value = convert(it.item)
 			it.next
 		else
-			if parameter_mandatory then
-				errors.add("Parameter expected for option {names.first}.")
-			end
+			errors.add("Parameter expected for option {names.first}.")
 		end
 	end
 end
 
-# An option with a String as parameter
+# An option with a `String` as parameter
 class OptionString
 	super OptionParameter
 	redef type VALUE: nullable String
@@ -174,9 +186,10 @@ class OptionString
 	redef fun convert(str) do return str
 end
 
-# An option with an enum as parameter
-# In the code, declaring an option enum (-e) with an enum like `["zero", "one", "two"]
-# In the command line, typing `myprog -e one` is giving 1 as value
+# An option to choose from an enumeration
+#
+# Declare an enumeration option with all its possible values as an array.
+# Once the arguments are processed, `value` is set as the index of the selected value, if any.
 class OptionEnum
 	super OptionParameter
 	redef type VALUE: Int
@@ -268,7 +281,7 @@ class OptionContext
 	var rest = new Array[String]
 
 	# Errors found in the context after parsing
-	var errors = new Array[String]
+	var context_errors = new Array[String]
 
 	private var optmap = new HashMap[String, Option]
 
@@ -336,7 +349,7 @@ class OptionContext
 								it.next
 								next_called = true
 							end
-							option.read_param(it)
+							option.read_param(self, it)
 						end
 					end
 					if not next_called then it.next
@@ -344,7 +357,7 @@ class OptionContext
 					if optmap.has_key(str) then
 						var opt = optmap[str]
 						it.next
-						opt.read_param(it)
+						opt.read_param(self, it)
 					else
 						rest.add(it.item)
 						it.next
@@ -359,7 +372,7 @@ class OptionContext
 
 		for opt in options do
 			if opt.mandatory and not opt.read then
-				errors.add("Mandatory option {opt.names.join(", ")} not found.")
+				context_errors.add("Mandatory option {opt.names.join(", ")} not found.")
 			end
 		end
 	end
@@ -374,10 +387,10 @@ class OptionContext
 	end
 
 	# Options parsing errors.
-	fun get_errors: Array[String]
+	fun errors: Array[String]
 	do
 		var errors = new Array[String]
-		errors.add_all(errors)
+		errors.add_all context_errors
 		for o in options do
 			for e in o.errors do
 				errors.add(e)

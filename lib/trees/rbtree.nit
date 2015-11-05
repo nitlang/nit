@@ -144,4 +144,3 @@ class RBTreeNode[K: Comparable, E]
 
 	end
 end
-

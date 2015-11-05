@@ -254,6 +254,50 @@ class Counter[E]
 		end
 		return (sum / map.length.to_f).sqrt
 	end
+
+	# The information entropy (Shannon entropy) of the elements in the counter (in bits).
+	fun entropy: Float
+	do
+		var res = 0.0
+		var sum = self.sum.to_f
+		for k, v in self do
+			var f = v.to_f / sum
+			res = res - f * f.log_base(2.0)
+		end
+		return res
+	end
+
+	# Prints the content of the counter along with statistics
+	#
+	# Content is printed in order (if available) from lowest to highest on the keys.
+	# Else, it is printed as-is
+	fun print_content do
+		var a = keys.to_a
+		if a isa Array[Comparable] then default_comparator.sort(a)
+		var subtotal = 0
+		for i in a do
+			subtotal += self[i]
+			printn("* ", i or else "null", " = ", self[i], " => occurences ", self[i].to_f / sum.to_f * 100.0, "%, cumulative ", subtotal.to_f / sum.to_f * 100.0, "% \n")
+		end
+	end
+end
+
+redef class Collection[E]
+	# Create and fill up a counter with the elements of `self.
+	#
+	# ~~~
+	# var cpt = "abaa".chars.to_counter
+	# assert cpt['a'] == 3
+	# assert cpt['b'] == 1
+	# assert cpt.length == 2
+	# assert cpt.sum == 4
+	# ~~~
+	fun to_counter: Counter[E]
+	do
+		var res = new Counter[E]
+		res.inc_all(self)
+		return res
+	end
 end
 
 private class CounterComparator[E]

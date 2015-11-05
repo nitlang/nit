@@ -22,7 +22,7 @@ import html_templates::html_model # FIXME maybe this phase should depend on `htm
 redef class ToolContext
 
 	# Do not generate `graphviz` diagrams.
-	var opt_nodot = new OptionBool("do not generate graphes with graphviz", "--no-dot")
+	var opt_nodot = new OptionBool("Do not generate graphs with graphviz", "--no-dot")
 
 	redef init do
 		super
@@ -36,7 +36,7 @@ class GraphPhase
 
 	redef fun apply do
 		if ctx.opt_nodot.value then return
-		for page in doc.pages do
+		for page in doc.pages.values do
 			var article = page.build_graph(self, doc)
 			if article == null then continue
 			# FIXME avoid diff
@@ -73,7 +73,7 @@ redef class MModulePage
 			end
 		end
 		op.append("\}\n")
-		return new GraphArticle(mentity, name, "Importation Graph", op)
+		return new GraphArticle("{mentity.nitdoc_id}.graph", "Importation Graph", name, op)
 	end
 end
 
@@ -107,7 +107,7 @@ redef class MClassPage
 			end
 		end
 		op.append("\}\n")
-		return new GraphArticle(mentity, name, "Inheritance Graph", op)
+		return new GraphArticle("{mentity.nitdoc_id}.graph", "Inheritance Graph", name, op)
 	end
 end
 
@@ -116,16 +116,14 @@ end
 # The graph is stored in dot format.
 # The final output is delayed untill rendering.
 class GraphArticle
-	super MEntityComposite
+	super DocArticle
 
 	# Graph ID (used for outputing file with names).
-	var id: String
-
-	# Graph title to display.
-	var graph_title: String
+	var graph_id: String
 
 	# Dot script of the graph.
 	var dot: Text
 
-	redef var is_empty = false
+	redef var is_hidden = false
+	redef var is_toc_hidden = true
 end

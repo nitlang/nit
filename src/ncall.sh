@@ -21,7 +21,7 @@ set -x
 set -e
 make -C ../c_src
 sh git-gen-version.sh
-time ../c_src/nitg nitc.nit -v -o nitc_0
+time ../c_src/nitc nitc.nit -v -o nitc_0
 time ./nitc_0 nitc.nit -v "$@" -o nitc_2
 cp nitc_2 nitc
 time ./nitc_2 nitc.nit -v "$@" -o nitc_3

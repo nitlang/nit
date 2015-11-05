@@ -14,28 +14,29 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Provides basic game logic utilities using buckets to coordinate and
-# optimize actions on game turn ends. Supports both action at each
-# end of turn as well as actions on some end of turns.
+# Game framework with an emphasis on efficient event coordination
 #
-# Allows for fast support of a large number of entities with rare actions,
-# such as a forest with many individual trees.
-module bucketed_game
+# Provides basic game logic entities to manage a game where the logic is executed by turns:
+# `Game`, `GameTurn`, `GameEvent`, `Turnable`.
+# Also offers a bucket system to plan future events at a known number of turns in the future:
+# `Bucketable` and the services `act_next` and `act_in`.
+#
+# Efficiently support large number of entities with rare or sparse actions,
+# such as a forest with many individual trees growing slowly.
+module bucketed_game is serialize
 
 import serialization
 
 # Something acting on the game
-class Turnable[G: Game]
-	auto_serializable
+abstract class Turnable[G: Game]
 
 	# Execute `turn` for this instance.
 	fun do_turn(turn: GameTurn[G]) is abstract
 end
 
 # Something acting on the game from time to time
-class Bucketable[G: Game]
+abstract class Bucketable[G: Game]
 	super Turnable[G]
-	auto_serializable
 
 	private var act_at: nullable Int = null
 
@@ -49,7 +50,6 @@ end
 # Optimized organization of `Bucketable` instances
 class Buckets[G: Game]
 	super Turnable[G]
-	auto_serializable
 
 	# Bucket type used in this implementation.
 	type BUCKET: HashSet[Bucketable[G]]
@@ -118,12 +118,10 @@ end
 # Event raised at the first turn
 class FirstTurnEvent
 	super GameEvent
-	auto_serializable
 end
 
 # Game logic on the client
 class ThinGame
-	auto_serializable
 
 	# Game tick when `self` should act.
 	#
@@ -133,7 +131,6 @@ end
 
 # Game turn on the client
 class ThinGameTurn[G: ThinGame]
-	auto_serializable
 
 	# Game tick when `self` should act.
 	var tick: Int is protected writable
@@ -145,7 +142,6 @@ end
 # Game turn on the full logic
 class GameTurn[G: Game]
 	super ThinGameTurn[G]
-	auto_serializable
 
 	# Game that `self` belongs to.
 	var game: G
@@ -173,7 +169,6 @@ end
 # Full game logic
 class Game
 	super ThinGame
-	auto_serializable
 
 	# Game type used in this implementation.
 	type G: Game

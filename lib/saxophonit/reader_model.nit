@@ -67,7 +67,7 @@ class XophonReaderModel
 
 
 	init do
-		qname_re.optimize_is_in = true
+		qname_re.optimize_has = true
 		features[feature_namespaces_uri] = true
 		features[feature_namespace_prefixes_uri] = false
 	end

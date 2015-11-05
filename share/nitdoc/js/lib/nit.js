@@ -16,9 +16,8 @@
    Generate API documentation in HTML format from nit source code.
 */
 
-define(['highlight'], function(hljs) {
-	hljs.registerLanguage('nit', function(hljs) {
-var METHOD_RE = '[a-z_]\\w*[!?=]?|[-+~]\\@|<<|>>|=~|===?|<=>|[<>]=?|\\*\\*|[-/+%^&*~`|]|\\[\\]=?';
+hljs.registerLanguage('nit', function(hljs) {
+	var METHOD_RE = '[a-z_]\\w*[!?=]?|[-+~]\\@|<<|>>|=~|===?|<=>|[<>]=?|\\*\\*|[-/+%^&*~`|]|\\[\\]=?';
 	var KEYWORDS = {
 		keyword: 'abort abstract and as assert break class continue do else end enum extern for fun ' +
 		'if import in init interface intern intrude is isa isset label loop module new nullable not ' +
@@ -142,5 +141,4 @@ var METHOD_RE = '[a-z_]\\w*[!?=]?|[-+~]\\@|<<|>>|=~|===?|<=>|[<>]=?|\\*\\*|[-/+%
 		keywords: KEYWORDS,
 		contains: CONTAINS
 	};
-	});
 });

@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# The Cocoa API is the development layer of OS X
+# Cocoa API, the development layer of OS X
 #
 # This module is only compatible with OS X.
 #

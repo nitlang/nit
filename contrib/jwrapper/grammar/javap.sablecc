@@ -1,60 +1,78 @@
 Grammar javap;
 
+// ---
 Lexer
 
-identifier = ('a'..'z'|'A'..'Z'|'_'|'$') ('a'..'z'|'A'..'Z'|'_'|'$'|'0'..'9')*;
+identifier = ('a'..'z'|'A'..'Z'|'_'|'$') ('a'..'z'|'A'..'Z'|'_'|'-'|'$'|'0'..'9')*;
 blank = (' '|'\n'|'\t'|'\r')+;
 separator = ('.'|'/');
+brackets = '[]';
+wildcard = '?';
+compiled_from = 'Compiled from "' (Any-'"')* '"';
+dots = '...';
 
+// ---
 Parser
 Ignored blank;
 
-multi_files = compiled_from? class_declaration;
+// ---
+// Class and properties
 
-compiled_from = 'Compiled from "' identifier+ '.java"';
+files = file+;
+file = compiled_from? class_declaration;
 
 class_declaration = modifier* class_or_interface full_class_name
 	extends_declaration? implements_declaration? throws_declaration?
 	'{' property_declaration* '}';
 
+modifier
+	= 'public'|'private'|'protected'|'static'|'final'|'native'
+	|'synchronized'|'abstract'|'threadsafe'|'transient'|'volatile'|'strictfp';
+
 class_or_interface = 'class'|'interface';
 
-modifier = 'public'|'private'|'protected'|'static'|'final'|'native'|'synchronized'|'abstract'|'threadsafe'|'transient'|'volatile';
-type = type_specifier '[]'*;
-type_specifier = 'boolean'|'byte'|'char'|'short'|'int'|'float'|'long'|'double' | type_ref;
+implements_declaration = 'implements' types;
+extends_declaration = 'extends' types;
+throws_declaration = 'throws' types?;
 
-type_ref = full_class_name | generic_identifier 'extends' full_class_name | '?';
-type_refs = {tail:} type_refs ',' type_ref | {head:} type_ref;
+property_declaration
+	= {method:} modifier* generic_parameters? type identifier '(' types? ')' throws_declaration? ';'
+	| {constructor:} modifier* generic_parameters? full_class_name '(' types? ')' throws_declaration? ';'
+	| {attribute:} modifier* type identifier brackets* throws_declaration? ';'
+	| {static:} modifier* '{' '}' ';'
+	| ';';
 
-generic_param = '<' generic_parameter_list '>';
-generic_parameter_list = {tail:} generic_parameter_list ',' parameter | {head:} parameter;
-generic_identifier = full_class_name | '?';
+// ---
+// Types
 
-full_class_name = full_class_name separator class_name | class_name;
-class_name = identifier generic_param?;
+type = base_type brackets* dots?;
 
-interface_name = full_class_name;
-interface_list = {tail:} interface_list ',' interface_name | {head:} interface_name;
+types
+	= {tail:} types ',' type
+	| {head:} type;
 
-parameter = type '...'?;
-parameter_list_comp = {tail:} parameter_list_comp ',' parameter | {head:} parameter;
-parameter_list = parameter_list_comp;
+base_type
+	= {primitive:} primitive_base_type
+	| {class:} full_class_name
+	| {extends:} generic_identifier 'extends' type_bound
+	| {super:} generic_identifier 'super' type_bound
+	| {wildcard:} wildcard
+	| {void:} 'void';
 
-exception = type;
-exception_list = exception_list ',' exception | exception;
+primitive_base_type = 'boolean'|'byte'|'char'|'short'|'int'|'float'|'long'|'double';
 
-statement = variable_declaration | statement_block | ';';
-statement_block = '{' statement* '}';
+type_bound
+	= {tail:} type_bound '&' full_class_name
+	| {head:} full_class_name;
 
-variable_id = identifier '[]'*;
-method_id = identifier;
+generic_identifier
+	= {class:} full_class_name
+	| {wildcard:} wildcard;
 
-property_declaration = method_declaration | constructor_declaration | variable_declaration | static_declaration | ';';
-variable_declaration = modifier* type variable_id throws_declaration? ';';
-method_declaration = modifier* generic_param? type method_id '(' parameter_list? ')' throws_declaration? ';';
-constructor_declaration = modifier* full_class_name '(' parameter_list? ')' throws_declaration? ';';
-implements_declaration = 'implements' interface_list*;
-extends_interface_declaration = 'extends' interface_list*;
-extends_declaration = 'extends' type;
-static_declaration = modifier* '{' '}' ';';
-throws_declaration = 'throws' exception_list?;
+class_name = identifier generic_parameters?;
+
+full_class_name
+	= {tail:} full_class_name separator class_name
+	| {head:} class_name;
+
+generic_parameters = '<' types '>';

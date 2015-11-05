@@ -29,8 +29,8 @@
 # at callers of `HashCollection::gt_collide` and `HashCollection::st_collide`.
 module hash_debug
 
-intrude import standard::collection::hash_collection
-import standard
+intrude import core::collection::hash_collection
+import core
 
 redef class Sys
 	# Number of calls of `HashCollection::node_at_idx`
@@ -54,6 +54,13 @@ redef class Sys
 	var st_tot_length = 0
 	# Total capacity of hash collections receiver `HashCollection::store`
 	var st_tot_cap = 0
+
+	# Number of calls of `HashCollection::enlarge`
+	var en_count = 0
+	# Total length of hash collections receiver of `HashCollection::enlarge`
+	var en_tot_length = 0
+	# Total capacity of hash collections receiver `HashCollection::enlarge`
+	var en_tot_cap = 0
 
 	private fun div(n,d: Int): String
 	do
@@ -90,6 +97,11 @@ number of collisions: {{{st_coll}}} ({{{div(st_coll*100,st_count)}}}%)
 average length of collisions: {{{div(st_tot_coll,st_coll)}}}
 average length of considered collections: {{{div(st_tot_length,sys.st_count)}}}
 average capacity or considered collections: {{{div(st_tot_cap,sys.st_count)}}} ({{{div(st_tot_cap*100,st_tot_length)}}}%)
+
+ENLARGE:
+number of enlarge: {{{en_count}}}
+average length of considered collections: {{{div(en_tot_length,sys.en_count)}}}
+average capacity or considered collections: {{{div(en_tot_cap,sys.en_count)}}} ({{{div(en_tot_cap*100,en_tot_length)}}}%)
 ~~~~~~"""
 	end
 
@@ -131,6 +143,14 @@ redef class HashCollection[K]
 		if c != null and c._next_in_bucklet != null then gt_collide(i,k)
 
 		return super
+	end
+
+	redef fun enlarge(c)
+	do
+		super
+		sys.en_count += 1
+		sys.en_tot_length += _the_length
+		sys.en_tot_cap += _capacity
 	end
 
 	# Count and update length of collisions for `node_at_idx`

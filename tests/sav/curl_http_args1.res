@@ -1,5 +1,5 @@
-Status code : 200
-Body : <!doctype html>
+Status code: 200
+Body: <!doctype html>
 <html>
 <head>
     <title>Example Domain</title>

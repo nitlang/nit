@@ -206,6 +206,24 @@ redef class MModule
 	# The primitive type `Int`
 	var int_type: MClassType = self.get_primitive_class("Int").mclass_type is lazy
 
+	# The primitive type `Byte`
+	var byte_type: MClassType = self.get_primitive_class("Byte").mclass_type is lazy
+
+	# The primitive type `Int8`
+	var int8_type: MClassType = self.get_primitive_class("Int8").mclass_type is lazy
+
+	# The primitive type `Int16`
+	var int16_type: MClassType = self.get_primitive_class("Int16").mclass_type is lazy
+
+	# The primitive type `UInt16`
+	var uint16_type: MClassType = self.get_primitive_class("UInt16").mclass_type is lazy
+
+	# The primitive type `Int32`
+	var int32_type: MClassType = self.get_primitive_class("Int32").mclass_type is lazy
+
+	# The primitive type `UInt32`
+	var uint32_type: MClassType = self.get_primitive_class("UInt32").mclass_type is lazy
+
 	# The primitive type `Char`
 	var char_type: MClassType = self.get_primitive_class("Char").mclass_type is lazy
 
@@ -265,6 +283,7 @@ redef class MModule
 			end
 			print("Fatal Error: no primitive class {name} in {self}")
 			exit(1)
+			abort
 		end
 		if cla.length != 1 then
 			var msg = "Fatal Error: more than one primitive class {name} in {self}:"
@@ -514,6 +533,18 @@ class MClass
 
 	# Is there a `new` factory to allow the pseudo instantiation?
 	var has_new_factory = false is writable
+
+	# Is `self` a standard or abstract class kind?
+	var is_class: Bool is lazy do return kind == concrete_kind or kind == abstract_kind
+
+	# Is `self` an interface kind?
+	var is_interface: Bool is lazy do return kind == interface_kind
+
+	# Is `self` an enum kind?
+	var is_enum: Bool is lazy do return kind == enum_kind
+
+	# Is `self` and abstract class?
+	var is_abstract: Bool is lazy do return kind == abstract_kind
 end
 
 
@@ -584,7 +615,7 @@ class MClassDef
 			# public gives 'p#A'
 			# private gives 'p::m#A'
 			return "{mmodule.namespace_for(mclass.visibility)}#{mclass.name}"
-		else if mclass.intro_mmodule.mproject != mmodule.mproject then
+		else if mclass.intro_mmodule.mpackage != mmodule.mpackage then
 			# public gives 'q::n#p::A'
 			# private gives 'q::n#p::m::A'
 			return "{mmodule.full_name}#{mclass.full_name}"
@@ -600,7 +631,7 @@ class MClassDef
 	redef var c_name is lazy do
 		if is_intro then
 			return "{mmodule.c_namespace_for(mclass.visibility)}___{mclass.c_name}"
-		else if mclass.intro_mmodule.mproject == mmodule.mproject and mclass.visibility > private_visibility then
+		else if mclass.intro_mmodule.mpackage == mmodule.mpackage and mclass.visibility > private_visibility then
 			return "{mmodule.c_name}___{mclass.name.to_cmangle}"
 		else
 			return "{mmodule.c_name}___{mclass.c_name}"
@@ -778,19 +809,19 @@ abstract class MType
 		end
 		#print "4.is {sub} a {sup}? <- no more resolution"
 
+		if sub isa MBottomType then
+			return true
+		end
+
 		assert sub isa MClassType else print "{sub} <? {sub}" # It is the only remaining type
 
-		# A unfixed formal type can only accept itself
-		if sup isa MFormalType then
+		# Handle sup-type when the sub-type is class-based (other cases must have be identified before).
+		if sup isa MFormalType or sup isa MNullType or sup isa MBottomType then
+			# These types are not super-types of Class-based types.
 			return false
 		end
 
-		if sup isa MNullType then
-			# `sup` accepts only null
-			return false
-		end
-
-		assert sup isa MClassType # It is the only remaining type
+		assert sup isa MClassType else print "got {sup} {sub.inspect}" # It is the only remaining type
 
 		# Now both are MClassType, we need to dig
 
@@ -979,7 +1010,7 @@ abstract class MType
 	# The result is returned exactly as declared in the "type" property (verbatim).
 	# So it could be another formal type.
 	#
-	# In case of conflict, the method aborts.
+	# In case of conflicts or inconsistencies in the model, the method returns a `MBottomType`.
 	fun lookup_bound(mmodule: MModule, resolved_receiver: MType): MType do return self
 
 	# Resolve the formal type to its simplest equivalent form.
@@ -993,6 +1024,8 @@ abstract class MType
 	#
 	# By default, return self.
 	# See the redefinitions for specific behavior in each kind of type.
+	#
+	# In case of conflicts or inconsistencies in the model, the method returns a `MBottomType`.
 	fun lookup_fixed(mmodule: MModule, resolved_receiver: MType): MType do return self
 
 	# Can the type be resolved?
@@ -1250,7 +1283,7 @@ class MGenericType
 	redef var to_s: String is noinit
 
 	# The full-name of the class, then the full-name of each type arguments within brackets.
-	# Example: `"standard::Map[standard::String, standard::List[standard::Int]]"`
+	# Example: `"core::Map[core::String, core::List[core::Int]]"`
 	redef var full_name is lazy do
 		var args = new Array[String]
 		for t in arguments do
@@ -1334,7 +1367,7 @@ class MVirtualType
 
 	redef fun lookup_bound(mmodule: MModule, resolved_receiver: MType): MType
 	do
-		return lookup_single_definition(mmodule, resolved_receiver).bound.as(not null)
+		return lookup_single_definition(mmodule, resolved_receiver).bound or else new MBottomType(model)
 	end
 
 	private fun lookup_single_definition(mmodule: MModule, resolved_receiver: MType): MVirtualTypeDef
@@ -1369,7 +1402,8 @@ class MVirtualType
 		assert resolved_receiver isa MClassType # It is the only remaining type
 
 		var prop = lookup_single_definition(mmodule, resolved_receiver)
-		var res = prop.bound.as(not null)
+		var res = prop.bound
+		if res == null then return new MBottomType(model)
 
 		# Recursively lookup the fixed result
 		res = res.lookup_fixed(mmodule, resolved_receiver)
@@ -1536,6 +1570,7 @@ class MParameterType
 		end
 		if resolved_receiver isa MNullableType then resolved_receiver = resolved_receiver.mtype
 		if resolved_receiver isa MParameterType then
+			assert anchor != null
 			assert resolved_receiver.mclass == anchor.mclass
 			resolved_receiver = anchor.arguments[resolved_receiver.rank]
 			if resolved_receiver isa MNullableType then resolved_receiver = resolved_receiver.mtype
@@ -1697,8 +1732,32 @@ class MNullType
 	redef fun c_name do return "null"
 	redef fun as_nullable do return self
 
-	# Aborts on `null`
-	redef fun as_notnull do abort # sorry...
+	redef var as_notnull = new MBottomType(model) is lazy
+	redef fun need_anchor do return false
+	redef fun resolve_for(mtype, anchor, mmodule, cleanup_virtual) do return self
+	redef fun can_resolve_for(mtype, anchor, mmodule) do return true
+
+	redef fun collect_mclassdefs(mmodule) do return new HashSet[MClassDef]
+
+	redef fun collect_mclasses(mmodule) do return new HashSet[MClass]
+
+	redef fun collect_mtypes(mmodule) do return new HashSet[MClassType]
+end
+
+# The special universal most specific type.
+#
+# This type is intended to be only used internally for type computation or analysis and should not be exposed to the user.
+# The bottom type can de used to denote things that are absurd, dead, or the absence of knowledge.
+#
+# Semantically it is the singleton `null.as_notnull`.
+class MBottomType
+	super MType
+	redef var model: Model
+	redef fun to_s do return "bottom"
+	redef fun full_name do return "bottom"
+	redef fun c_name do return "bottom"
+	redef fun as_nullable do return model.null_type
+	redef fun as_notnull do return self
 	redef fun need_anchor do return false
 	redef fun resolve_for(mtype, anchor, mmodule, cleanup_virtual) do return self
 	redef fun can_resolve_for(mtype, anchor, mmodule) do return true
@@ -1774,22 +1833,6 @@ class MSignature
 	# The number of parameters
 	fun arity: Int do return mparameters.length
 
-	# The number of non-default parameters
-	#
-	# The number of default parameters is then `arity-min_arity`.
-	#
-	# Note that there cannot be both varargs and default prameters, thus
-	# if `vararg_rank != -1` then `min_arity` == `arity`
-	fun min_arity: Int
-	do
-		if vararg_rank != -1 then return arity
-		var res = 0
-		for p in mparameters do
-			if not p.is_default then res += 1
-		end
-		return res
-	end
-
 	redef fun to_s
 	do
 		var b = new FlatBuffer
@@ -1843,9 +1886,6 @@ class MParameter
 	# Is the parameter a vararg?
 	var is_vararg: Bool
 
-	# Is the parameter a default one?
-	var is_default: Bool
-
 	redef fun to_s
 	do
 		if is_vararg then
@@ -1861,7 +1901,7 @@ class MParameter
 	do
 		if not self.mtype.need_anchor then return self
 		var newtype = self.mtype.resolve_for(mtype, anchor, mmodule, cleanup_virtual)
-		var res = new MParameter(self.name, newtype, self.is_vararg, self.is_default)
+		var res = new MParameter(self.name, newtype, self.is_vararg)
 		return res
 	end
 
@@ -1897,7 +1937,7 @@ abstract class MProperty
 	# The canonical name of the property.
 	#
 	# It is the short-`name` prefixed by the short-name of the class and the full-name of the module.
-	# Example: "my_project::my_module::MyClass::my_method"
+	# Example: "my_package::my_module::MyClass::my_method"
 	redef var full_name is lazy do
 		return "{intro_mclassdef.mmodule.namespace_for(visibility)}::{intro_mclassdef.mclass.name}::{name}"
 	end
@@ -2129,6 +2169,10 @@ class MMethod
 	do
 		return self.is_init
 	end
+
+	# A specific method that is safe to call on null.
+	# Currently, only `==`, `!=` and `is_same_instance` are safe
+	fun is_null_safe: Bool do return name == "==" or name == "!=" or name == "is_same_instance"
 end
 
 # A global attribute
@@ -2211,14 +2255,14 @@ abstract class MPropDef
 			res.append name
 		else
 			# Just try to simplify each part
-			if mclassdef.mmodule.mproject != mproperty.intro_mclassdef.mmodule.mproject then
+			if mclassdef.mmodule.mpackage != mproperty.intro_mclassdef.mmodule.mpackage then
 				# precise "p::m" only if "p" != "r"
 				res.append mproperty.intro_mclassdef.mmodule.full_name
 				res.append "::"
 			else if mproperty.visibility <= private_visibility then
-				# Same project ("p"=="q"), but private visibility,
+				# Same package ("p"=="q"), but private visibility,
 				# does the module part ("::m") need to be displayed
-				if mclassdef.mmodule.namespace_for(mclassdef.mclass.visibility) != mproperty.intro_mclassdef.mmodule.mproject then
+				if mclassdef.mmodule.namespace_for(mclassdef.mclass.visibility) != mproperty.intro_mclassdef.mmodule.mpackage then
 					res.append "::"
 					res.append mproperty.intro_mclassdef.mmodule.name
 					res.append "::"
@@ -2262,7 +2306,7 @@ abstract class MPropDef
 	redef var to_s: String is noinit
 
 	# Is self the definition that introduce the property?
-	fun is_intro: Bool do return mproperty.intro == self
+	fun is_intro: Bool do return isset mproperty._intro and mproperty.intro == self
 
 	# Return the next definition in linearization of `mtype`.
 	#

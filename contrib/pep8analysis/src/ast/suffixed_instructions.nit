@@ -32,7 +32,7 @@ end
 #
 redef class AUnaryNopInstruction
 	super ADigitSuffixed
-	redef fun digit_max do return 1.lshift(2)-1
+	redef fun digit_max do return (1 << 2)-1
 end
 
 redef class ANotInstruction
@@ -49,7 +49,7 @@ end
 
 redef class ARetInstruction
 	super ADigitSuffixed
-	redef fun digit_max do return 1.lshift(3)-1
+	redef fun digit_max do return (1 << 3)-1
 end
 
 redef abstract class AArithmeticInstruction

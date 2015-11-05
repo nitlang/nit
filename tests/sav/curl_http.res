@@ -1,1 +1,1 @@
-Usage: curl_http <method wished [POST, GET, GET_FILE]> <target url>
+Usage: curl_http [POST|GET|GET_FILE] url

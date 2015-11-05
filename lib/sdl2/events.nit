@@ -33,7 +33,7 @@ extern class SDLEventBuffer `{SDL_Event *`}
 	# Poll and event into `self`
 	#
 	# Returns `true` if an event was available.
-	fun poll_event: Bool `{ return SDL_PollEvent(recv); `}
+	fun poll_event: Bool `{ return SDL_PollEvent(self); `}
 
 	# Get a reference to the data at `self` as a precise `SDLEvent`
 	#
@@ -53,28 +53,28 @@ extern class SDLEventBuffer `{SDL_Event *`}
 	end
 
 	# Is this a quit event?
-	fun is_quit: Bool `{ return recv->type == SDL_QUIT; `}
+	fun is_quit: Bool `{ return self->type == SDL_QUIT; `}
 
 	# Get a reference to data at `self` as a `SDLQuitEvent`
-	fun to_quit: SDLQuitEvent `{ return recv; `}
+	fun to_quit: SDLQuitEvent `{ return self; `}
 
 	# Is this a mouse motion event?
-	fun is_mouse_motion: Bool `{ return recv->type == SDL_MOUSEMOTION; `}
+	fun is_mouse_motion: Bool `{ return self->type == SDL_MOUSEMOTION; `}
 
 	# Get a reference to data at `self` as a `SDLMouseMotionEvent`
-	fun to_mouse_motion: SDLMouseMotionEvent `{ return recv; `}
+	fun to_mouse_motion: SDLMouseMotionEvent `{ return self; `}
 
 	# Is this a mouse button down event?
-	fun is_mouse_button_down: Bool `{ return recv->type == SDL_MOUSEBUTTONDOWN; `}
+	fun is_mouse_button_down: Bool `{ return self->type == SDL_MOUSEBUTTONDOWN; `}
 
 	# Get a reference to data at `self` as a `SDLMouseButtonDownEvent`
-	fun to_mouse_button_down: SDLMouseButtonDownEvent `{ return recv; `}
+	fun to_mouse_button_down: SDLMouseButtonDownEvent `{ return self; `}
 
 	# Is this a mouse button up event?
-	fun is_mouse_button_up: Bool `{ return recv->type == SDL_MOUSEBUTTONUP; `}
+	fun is_mouse_button_up: Bool `{ return self->type == SDL_MOUSEBUTTONUP; `}
 
 	# Get a reference to data at `self` as a `SDLMouseButtonUpEvent`
-	fun to_mouse_button_up: SDLMouseButtonUpEvent `{ return recv; `}
+	fun to_mouse_button_up: SDLMouseButtonUpEvent `{ return self; `}
 
 	# TODO other SDL events:
 	#
@@ -120,7 +120,7 @@ extern class SDLMouseEvent
 	# four fields of each events are common to all of them.
 
 	# Which mouse, pointer or finger raised this event
-	fun which: Int `{ return recv->motion.which; `}
+	fun which: Int `{ return self->motion.which; `}
 end
 
 # A mouse motion event
@@ -128,16 +128,16 @@ extern class SDLMouseMotionEvent
 	super SDLMouseEvent
 
 	# X coordinate on screen of this event
-	fun x: Int `{ return recv->motion.x; `}
+	fun x: Int `{ return self->motion.x; `}
 
 	# Y coordinate on screen of this event
-	fun y: Int `{ return recv->motion.y; `}
+	fun y: Int `{ return self->motion.y; `}
 
 	# Difference on the X axis between this event and the previous one
-	fun xrel: Int `{ return recv->motion.xrel; `}
+	fun xrel: Int `{ return self->motion.xrel; `}
 
 	# Difference on the Y axis between this event and the previous one
-	fun yrel: Int `{ return recv->motion.yrel; `}
+	fun yrel: Int `{ return self->motion.yrel; `}
 end
 
 # A mouse button event
@@ -148,10 +148,10 @@ extern class SDLMouseButtonEvent
 	super SDLMouseEvent
 
 	# X coordinate on screen of this event
-	fun x: Int `{ return recv->button.x; `}
+	fun x: Int `{ return self->button.x; `}
 
 	# Y coordinate on screen of this event
-	fun y: Int `{ return recv->button.y; `}
+	fun y: Int `{ return self->button.y; `}
 end
 
 # A mouse button release event

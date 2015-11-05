@@ -15,36 +15,41 @@
 # limitations under the License.
 
 NITCOPT=--semi-global
-OLDNITCOPT=
+OLDNITCOPT=--semi-global
 OBJS=nitc nitpick nit nitdoc nitls nitunit nitpretty nitmetrics nitx nitlight nitdbg_client nitserial
 SRCS=$(patsubst %,%.nit,$(OBJS))
 BINS=$(patsubst %,../bin/%,$(OBJS))
 
-all: $(BINS)
+all: bin/nitc
 
-nitc_0: ../c_src/nitg parser/parser.nit
+pre-build:
+	./git-gen-version.sh
+
+nitc_0: ../c_src/nitc parser/parser.nit
 	@echo '***************************************************************'
 	@echo '* Compile nitc_0 from NIT source files                        *'
 	@echo '***************************************************************'
 	./git-gen-version.sh
-	../c_src/nitg ${OLDNITCOPT} -o nitc_0 -v nitc.nit
+	../c_src/nitc ${OLDNITCOPT} -o nitc_0 -v nitc.nit
 
-$(BINS): nitc_0 parser/parser.nit
+bin/nitc: nitc_0 parser/parser.nit
 	@echo '***************************************************************'
 	@echo '* Compile binaries from NIT source files                      *'
 	@echo '***************************************************************'
 	./git-gen-version.sh
+	test -d ../bin || mkdir ../bin
 	./nitc_0 ${NITCOPT} -v --dir ../bin $(SRCS)
 
 $(OBJS): nitc_0 parser/parser.nit
 	./git-gen-version.sh
 	./nitc_0 ${NITCOPT} -v $@.nit
 
-../c_src/nitg: ../c_src/*.c ../c_src/*.h ../c_src/Makefile
+../c_src/nitc: ../c_src/*.c ../c_src/*.h ../c_src/Makefile
 	@echo '***************************************************************'
 	@echo '* Compile nitc from C source files                            *'
 	@echo '***************************************************************'
 	cd ../c_src; make
+	rm ../c_src/*.o || true # to reduce disc used
 
 parser/parser.nit:
 	@echo '***************************************************************'
@@ -53,5 +58,5 @@ parser/parser.nit:
 	cd parser; make
 
 clean:
-	rm -rf -- .nit_compile* version.nit nitc_0 2> /dev/null || true
+	rm -rf -- version.nit nitc_0 2> /dev/null || true
 	cd parser; make clean

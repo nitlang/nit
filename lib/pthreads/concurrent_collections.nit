@@ -26,7 +26,7 @@
 # - [x] `ConcurrentList`
 # - [ ] `ConcurrentHashMap`
 # - [ ] `ConcurrentHashSet`
-# - [ ] `ConcurrentContainer`
+# - [ ] `ConcurrentRef`
 # - [ ] `ConcurrentQueue`
 #
 # Introduced collections specialize their critical methods according to the

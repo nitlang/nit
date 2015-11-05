@@ -1,4 +1,4 @@
-Our body from the callback : <!doctype html>
+Our body from the callback: <!doctype html>
 <html>
 <head>
     <title>Example Domain</title>
@@ -50,5 +50,5 @@ Our body from the callback : <!doctype html>
 </html>
 
 *** Answer ***
-Status code : 200
-Body should be empty, because we decided to manage callbacks : 0
+Status code: 200
+Body should be empty, because we decided to manage callbacks: 0

@@ -20,6 +20,7 @@ module model_base
 # The container class of a Nit object-oriented model.
 # A model knows modules, classes and properties and can retrieve them.
 class Model
+	super MEntity
 end
 
 # A named and possibly documented entity in the model.
@@ -64,6 +65,26 @@ abstract class MEntity
 
 	# A Model Entity has a direct link to its model
 	fun model: Model is abstract
+
+	# The indication that the entity did not pass some semantic verifications.
+	#
+	# This simple flag is set by a given analysis to say that the entity is broken and unusable in
+	# an execution.
+	# When an entity status is set to broken, it is usually associated with a error message.
+	#
+	# If it is safe to do so, clients of the model SHOULD just skip broken entities in their processing.
+	# Clients that do not care about the executability (e.g. metrics) MAY still process the entity or
+	# perform specific checks to determinate the validity of the entity.
+	#
+	# Note that the broken status is not propagated to enclosing and enclosed entities.
+	# e.g. a broken method does not make the whole module broken.
+	var is_broken = false is writable
+
+	# Is `self` created for internal purpose?
+	#
+	# Fictive entities are used internally but they should not be
+	# exposed to the final user.
+	var is_fictive: Bool = false is writable
 end
 
 # Something that represents a concern
@@ -100,6 +121,16 @@ class MVisibility
 	do
 		return self.level < other.level
 	end
+end
+
+# A `Comparator` to sort mentities by their names.
+class MEntityNameSorter
+	super Comparator
+
+	redef type COMPARED: MEntity
+
+	# Returns `a.name <=> b.name`.
+	redef fun compare(a, b) do return a.name <=> b.name
 end
 
 # The visibility level `intrude`

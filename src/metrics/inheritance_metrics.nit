@@ -59,11 +59,11 @@ private class InheritanceMetricsPhase
 		var model = toolcontext.modelbuilder.model
 		var mmodules = new HashSet[MModule]
 		var mclasses = new HashSet[MClass]
-		for mproject in model.mprojects do
+		for mpackage in model.mpackages do
 
-			print toolcontext.format_h2("\n ## project {mproject}")
+			print toolcontext.format_h2("\n ## package {mpackage}")
 
-			for mgroup in mproject.mgroups do
+			for mgroup in mpackage.mgroups do
 				if mgroup.mmodules.is_empty then continue
 
 				# Scalar metrics

@@ -18,7 +18,6 @@
 module debugger
 
 intrude import naive_interpreter
-import nitx
 intrude import semantize::local_var_init
 intrude import semantize::scope
 intrude import toolcontext
@@ -469,10 +468,6 @@ class Debugger
 		# Shows help
 		else if command == "help" then
 			help
-			return true
-		# Opens a new NitIndex prompt on current model
-		else if command == "nitx" then
-			new NitIndex.with_infos(modelbuilder, self.mainmodule).prompt
 			return true
 		else if command == "bt" or command == "backtrack" then
 			print stack_trace

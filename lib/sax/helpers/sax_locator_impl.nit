@@ -19,19 +19,21 @@ import sax::sax_locator
 # can use it to make a persistent snapshot of a locator at any
 # point during a document parse:
 #
-#     import sax::helpers::sax_locator_impl
-#     import sax::content_handler
+# ~~~nitish
+# import sax::helpers::sax_locator_impl
+# import sax::content_handler
 #
-#     class Example super ContentHandler
-#     	private var locator: SAXLocator
-#     	private var start_loc: nullable SAXLocator = null
+# class Example super ContentHandler
+#     private var locator: SAXLocator
+#     private var start_loc: nullable SAXLocator = null
 #
-#     	redef fun start_document do
-#     		# save the location of the start of the document
-#     		# for future use.
-#     		start_loc = new SAXLocatorImpl.from(locator)
-#     	end
+#     redef fun start_document do
+#         # save the location of the start of the document
+#         # for future use.
+#         start_loc = new SAXLocatorImpl.from(locator)
 #     end
+# end
+# ~~~
 #
 # Normally, parser writers will not use this class, since it
 # is more efficient to provide location information only when
@@ -40,10 +42,10 @@ import sax::sax_locator
 # Note: The original source code and documentation of this class comes, in part,
 # from [SAX 2.0](http://www.saxproject.org).
 class SAXLocatorImpl super SAXLocator
-	redef var public_id: nullable String = null is writable
-	redef var system_id: nullable String = null is writable
-	redef var line_number: Int = -1 is writable
-	redef var column_number: Int = -1 is writable
+	redef var public_id = null is writable
+	redef var system_id = null is writable
+	redef var line_number = -1 is writable
+	redef var column_number = -1 is writable
 
 	# Zero-argument constructor.
 	#

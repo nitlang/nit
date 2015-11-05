@@ -120,48 +120,31 @@ class Box[N: Numeric]
 
 		assert left != null and right != null and top != null and bottom != null
 
-		self.left = left
-		self.right = right
-		self.top = top
-		self.bottom = bottom
+		init(left, right, top, bottom)
 	end
 
 	# Create a `Box` using left, right, bottom and top
 	init lrbt(left, right, bottom, top: N)
 	do
-		self.left = left
-		self.right = right
-		self.top = top
-		self.bottom = bottom
+		init(left, right, top, bottom)
 	end
 
 	# Create a `Box` using left, right, top and bottom
 	init lrtb(left, right, top, bottom: N)
 	do
-		self.left = left
-		self.right = right
-		self.top = top
-		self.bottom = bottom
+		init(left, right, top, bottom)
 	end
 
 	# Create a `Box` using left, bottom, width and height
 	init lbwh(left, bottom, width, height: N)
 	do
-		self.left = left
-		self.bottom = bottom
-
-		self.right = left + width
-		self.top = bottom + height
+		init(left, left + width, bottom + height, bottom)
 	end
 
 	# Create a `Box` using left, top, width and height
 	init ltwh(left, top, width, height: N)
 	do
-		self.left = left
-		self.top = top
-
-		self.right = left + width
-		self.bottom = top - height
+		init(left, left+width, top, top - height)
 	end
 
 	redef fun to_s do return "<left: {left}, right: {right}, top: {top}, bottom: {bottom}>"
@@ -211,7 +194,7 @@ interface Boxed3d[N: Numeric]
 			(self.back <= other.front and other.back <= self.front))
 	end
 
-	redef fun padded(dist: N): Box3d[N] do return new Box3d[N].lrtbfb(left - dist, right + dist, top + dist, bottom - dist, front + dist, back - dist)
+	redef fun padded(dist): Box3d[N] do return new Box3d[N].lrtbfb(left - dist, right + dist, top + dist, bottom - dist, front + dist, back - dist)
 end
 
 # A 3d bounded object and an implementation of Boxed
@@ -318,8 +301,8 @@ redef class ILine[N]
 
 	redef fun left do return point_left.x
 	redef fun right do return point_right.x
-	redef fun top do return point_left.y.min(point_right.y)
-	redef fun bottom do return point_left.y.max(point_right.y)
+	redef fun top do return point_left.y.max(point_right.y)
+	redef fun bottom do return point_left.y.min(point_right.y)
 end
 
 redef class ILine3d[N]
@@ -344,8 +327,8 @@ class BoxedArray[E: Boxed[Numeric]]
 
 	private var data: Array[E] = new Array[E]
 
-	redef fun add(item: E) do data.add(item)
-	redef fun items_overlapping(item: Boxed[Numeric]): SimpleCollection[E]
+	redef fun add(item) do data.add(item)
+	redef fun items_overlapping(item): SimpleCollection[E]
 	do
 		var arr = new Array[E]
 		for i in data do

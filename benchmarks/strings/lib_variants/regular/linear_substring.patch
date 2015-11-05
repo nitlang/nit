@@ -1,0 +1,595 @@
+From 173f2dd34b0a3ad7bb8ebaf1863ab362cb8b2c1f Mon Sep 17 00:00:00 2001
+From: Lucas Bajolet <r4pass@hotmail.com>
+Date: Wed, 2 Sep 2015 15:31:52 -0400
+Subject: [PATCH] lib: Removed constant-time substring in text
+
+Signed-off-by: Lucas Bajolet <r4pass@hotmail.com>
+---
+ lib/core/bytes.nit          |   7 ++-
+ lib/core/file.nit           |   2 +-
+ lib/core/re.nit             |   2 +-
+ lib/core/stream.nit         |   8 +++-
+ lib/core/text/flat.nit      | 108 ++++++++++++++++++++------------------------
+ lib/core/text/ropes.nit     |  41 +++++++++++------
+ lib/websocket/websocket.nit |   4 +-
+ 7 files changed, 89 insertions(+), 83 deletions(-)
+
+diff --git a/lib/core/bytes.nit b/lib/core/bytes.nit
+index 59c4c5f..f22b325 100644
+--- a/lib/core/bytes.nit
++++ b/lib/core/bytes.nit
+@@ -150,7 +150,7 @@ class Bytes
+ 			b = clean_utf8
+ 			persisted = false
+ 		end
+-		return new FlatString.with_infos(b.items, b.length, 0, b.length -1)
++		return new FlatString.with_infos(b.items, b.length)
+ 	end
+ 
+ 	redef fun iterator do return new BytesIterator.with_buffer(self)
+@@ -256,7 +256,7 @@ redef class Text
+ 	# Appends `self.bytes` to `b`
+ 	fun append_to_bytes(b: Bytes) do
+ 		for s in substrings do
+-			var from = if s isa FlatString then s.first_byte else 0
++			var from = 0
+ 			b.append_ns_from(s.items, s.bytelen, from)
+ 		end
+ 	end
+@@ -264,8 +264,7 @@ end
+ 
+ redef class FlatText
+ 	redef fun append_to_bytes(b) do
+-		var from = if self isa FlatString then first_byte else 0
+-		b.append_ns_from(items, bytelen, from)
++		b.append_ns_from(items, bytelen, 0)
+ 	end
+ end
+ 
+diff --git a/lib/core/file.nit b/lib/core/file.nit
+index aba34e8..f7df0d4 100644
+--- a/lib/core/file.nit
++++ b/lib/core/file.nit
+@@ -1263,7 +1263,7 @@ end
+ redef class FlatString
+ 	redef fun write_native_to(s)
+ 	do
+-		s.write_native(items, first_byte, bytelen)
++		s.write_native(items, 0, bytelen)
+ 	end
+ end
+ 
+diff --git a/lib/core/re.nit b/lib/core/re.nit
+index c37bf25..8f578a5 100644
+--- a/lib/core/re.nit
++++ b/lib/core/re.nit
+@@ -370,7 +370,7 @@ class Regex
+ 		text = text.to_s
+ 		var sub = text.substring_from(from)
+ 		var cstr = sub.to_cstring
+-		var bstr = new FlatString.full(cstr, sub.bytelen, 0, sub.bytelen - 1, text.length - from)
++		var bstr = new FlatString.full(cstr, sub.bytelen, text.length - from)
+ 		var eflags = gather_eflags
+ 		var native_match = self.native_match
+ 
+diff --git a/lib/core/stream.nit b/lib/core/stream.nit
+index 2db319a..6e1b5d1 100644
+--- a/lib/core/stream.nit
++++ b/lib/core/stream.nit
+@@ -186,12 +186,16 @@ abstract class Reader
+ 			# if this is the best size or not
+ 			var chunksz = 129
+ 			if chunksz > remsp then
+-				rets += new FlatString.with_infos(sits, remsp, pos, pos + remsp - 1)
++				var nns = new NativeString(remsp)
++				sits.copy_to(nns, remsp, pos, 0)
++				rets += new FlatString.with_infos(nns, remsp)
+ 				break
+ 			end
+ 			var st = sits.find_beginning_of_char_at(pos + chunksz - 1)
+ 			var bytelen = st - pos
+-			rets += new FlatString.with_infos(sits, bytelen, pos, st - 1)
++			var nns = new NativeString(bytelen)
++			sits.copy_to(nns, bytelen, pos, 0)
++			rets += new FlatString.with_infos(nns, bytelen)
+ 			pos = st
+ 			remsp -= bytelen
+ 		end
+diff --git a/lib/core/text/flat.nit b/lib/core/text/flat.nit
+index 2343f9f..cec5ef1 100644
+--- a/lib/core/text/flat.nit
++++ b/lib/core/text/flat.nit
+@@ -36,15 +36,13 @@ end
+ 
+ redef class FlatText
+ 
+-	private fun first_byte: Int do return 0
+-
+-	private fun last_byte: Int do return bytelen - 1
++	redef fun [](index) do return items.char_at(char_to_byte_index(index))
+ 
+-	# Cache of the latest position (char) explored in the string
+-	var position: Int = 0
++	# Position in NativeString
++	var bytepos = 0
+ 
+-	# Cached position (bytes) in the NativeString underlying the String
+-	var bytepos: Int = first_byte is lateinit
++	# Position in chars
++	var position = 0
+ 
+ 	# Index of the character `index` in `items`
+ 	private fun char_to_byte_index(index: Int): Int do
+@@ -66,13 +64,13 @@ redef class FlatText
+ 		var my_i: Int
+ 
+ 		if min == delta_begin then
+-			ns_i = first_byte
++			ns_i = 0
+ 			my_i = 0
+ 		else if min == delta_cache then
+ 			ns_i = bytepos
+ 			my_i = position
+ 		else
+-			ns_i = its.find_beginning_of_char_at(last_byte)
++			ns_i = its.find_beginning_of_char_at(bytelen - 1)
+ 			my_i = length - 1
+ 		end
+ 
+@@ -103,13 +101,13 @@ redef class FlatText
+ 		var my_i: Int
+ 
+ 		if min == delta_begin then
+-			ns_i = first_byte
++			ns_i = 0
+ 			my_i = 0
+ 		else if min == delta_cache then
+ 			ns_i = bytepos
+ 			my_i = position
+ 		else
+-			ns_i = its.find_beginning_of_char_at(last_byte)
++			ns_i = its.find_beginning_of_char_at(_bytelen - 1)
+ 			my_i = length - 1
+ 		end
+ 
+@@ -120,8 +118,6 @@ redef class FlatText
+ 
+ 		return my_i
+ 	end
+-
+-	redef fun [](index) do return items.char_at(char_to_byte_index(index))
+ end
+ 
+ # Immutable strings of characters.
+@@ -129,22 +125,16 @@ class FlatString
+ 	super FlatText
+ 	super String
+ 
+-	# Index at which `self` begins in `items`, inclusively
+-	redef var first_byte is noinit
+-
+-	# Index at which `self` ends in `items`, inclusively
+-	redef var last_byte is noinit
+-
+ 	redef var chars = new FlatStringCharView(self) is lazy
+ 
+ 	redef var bytes = new FlatStringByteView(self) is lazy
+ 
+ 	redef var length is lazy do
+ 		if bytelen == 0 then return 0
+-		var st = first_byte
++		var st = 0
+ 		var its = items
+ 		var ln = 0
+-		var lst = last_byte
++		var lst = bytelen - 1
+ 		while st <= lst do
+ 			st += its.length_of_char_at(st)
+ 			ln += 1
+@@ -163,7 +153,7 @@ class FlatString
+ 		return s
+ 	end
+ 
+-	redef fun fast_cstring do return items.fast_cstring(first_byte)
++	redef fun fast_cstring do return items.fast_cstring(0)
+ 
+ 	redef fun substring(from, count)
+ 	do
+@@ -183,8 +173,10 @@ class FlatString
+ 		var byteto = char_to_byte_index(end_index)
+ 		byteto += items.length_of_char_at(byteto) - 1
+ 
+-		var s = new FlatString.full(items, byteto - bytefrom + 1, bytefrom, byteto, count)
+-		return s
++		var nslen = byteto - bytefrom + 1
++		var nns = new NativeString(nslen)
++		items.copy_to(nns, nslen, bytefrom, 0)
++		return new FlatString.full(nns, nslen, count)
+ 	end
+ 
+ 	redef fun empty do return "".as(FlatString)
+@@ -232,31 +224,27 @@ class FlatString
+ 	#
+ 	# `items` will be used as is, without copy, to retrieve the characters of the string.
+ 	# Aliasing issues is the responsibility of the caller.
+-	private init with_infos(items: NativeString, bytelen, from, to: Int)
++	private init with_infos(items: NativeString, bytelen: Int)
+ 	do
+ 		self.items = items
+ 		self.bytelen = bytelen
+-		first_byte = from
+-		last_byte = to
+ 	end
+ 
+ 	# Low-level creation of a new string with all the data.
+ 	#
+ 	# `items` will be used as is, without copy, to retrieve the characters of the string.
+ 	# Aliasing issues is the responsibility of the caller.
+-	private init full(items: NativeString, bytelen, from, to, length: Int)
++	private init full(items: NativeString, bytelen, length: Int)
+ 	do
+ 		self.items = items
+ 		self.length = length
+ 		self.bytelen = bytelen
+-		first_byte = from
+-		last_byte = to
+ 	end
+ 
+ 	redef fun to_cstring do
+ 		if real_items != null then return real_items.as(not null)
+ 		var new_items = new NativeString(bytelen + 1)
+-		self.items.copy_to(new_items, bytelen, first_byte, 0)
++		self.items.copy_to(new_items, bytelen, 0, 0)
+ 		new_items[bytelen] = 0u8
+ 		real_items = new_items
+ 		return new_items
+@@ -272,8 +260,8 @@ class FlatString
+ 
+ 		if other.bytelen != my_length then return false
+ 
+-		var my_index = first_byte
+-		var its_index = other.first_byte
++		var my_index = 0
++		var its_index = 0
+ 
+ 		var last_iteration = my_index + my_length
+ 
+@@ -322,14 +310,14 @@ class FlatString
+ 		var mlen = bytelen
+ 		var nlen = mlen + slen
+ 		var mits = items
+-		var mifrom = first_byte
++		var mifrom = 0
+ 		if s isa FlatText then
+ 			var sits = s.items
+-			var sifrom = s.first_byte
++			var sifrom = 0
+ 			var ns = new NativeString(nlen + 1)
+ 			mits.copy_to(ns, mlen, mifrom, 0)
+ 			sits.copy_to(ns, slen, sifrom, mlen)
+-			return new FlatString.full(ns, nlen, 0, nlen - 1, length + o.length)
++			return new FlatString.full(ns, nlen, length + o.length)
+ 		else
+ 			abort
+ 		end
+@@ -344,11 +332,11 @@ class FlatString
+ 		ns[new_bytelen] = 0u8
+ 		var offset = 0
+ 		while i > 0 do
+-			items.copy_to(ns, bytelen, first_byte, offset)
++			items.copy_to(ns, bytelen, 0, offset)
+ 			offset += mybtlen
+ 			i -= 1
+ 		end
+-		return new FlatString.full(ns, new_bytelen, 0, new_bytelen - 1, newlen)
++		return new FlatString.full(ns, new_bytelen, newlen)
+ 	end
+ 
+ 
+@@ -357,11 +345,11 @@ class FlatString
+ 		if hash_cache == null then
+ 			# djb2 hash algorithm
+ 			var h = 5381
+-			var i = first_byte
++			var i = 0
+ 
+ 			var myitems = items
+ 
+-			while i <= last_byte do
++			while i <= bytelen - 1 do
+ 				h = (h << 5) + h + myitems[i].to_i
+ 				i += 1
+ 			end
+@@ -445,16 +433,16 @@ private class FlatStringByteReverseIterator
+ 
+ 	init with_pos(tgt: FlatString, pos: Int)
+ 	do
+-		init(tgt, tgt.items, pos + tgt.first_byte)
++		init(tgt, tgt.items, pos)
+ 	end
+ 
+-	redef fun is_ok do return curr_pos >= target.first_byte
++	redef fun is_ok do return curr_pos >= 0
+ 
+ 	redef fun item do return target_items[curr_pos]
+ 
+ 	redef fun next do curr_pos -= 1
+ 
+-	redef fun index do return curr_pos - target.first_byte
++	redef fun index do return curr_pos
+ 
+ end
+ 
+@@ -469,16 +457,16 @@ private class FlatStringByteIterator
+ 
+ 	init with_pos(tgt: FlatString, pos: Int)
+ 	do
+-		init(tgt, tgt.items, pos + tgt.first_byte)
++		init(tgt, tgt.items, pos + 0)
+ 	end
+ 
+-	redef fun is_ok do return curr_pos <= target.last_byte
++	redef fun is_ok do return curr_pos <= target.bytelen - 1
+ 
+ 	redef fun item do return target_items[curr_pos]
+ 
+ 	redef fun next do curr_pos += 1
+ 
+-	redef fun index do return curr_pos - target.first_byte
++	redef fun index do return curr_pos
+ 
+ end
+ 
+@@ -489,12 +477,12 @@ private class FlatStringByteView
+ 
+ 	redef fun [](index)
+ 	do
+-		# Check that the index (+ first_byte) is not larger than last_byte
++		# Check that the index (+ 0) is not larger than bytelen - 1
+ 		# In other terms, if the index is valid
+ 		assert index >= 0
+ 		var target = self.target
+-		assert (index + target.first_byte) <= target.last_byte
+-		return target.items[index + target.first_byte]
++		assert index <= target.bytelen - 1
++		return target.items[index]
+ 	end
+ 
+ 	redef fun iterator_from(start) do return new FlatStringByteIterator.with_pos(target, start)
+@@ -626,7 +614,7 @@ class FlatBuffer
+ 	do
+ 		written = true
+ 		if bytelen == 0 then items = new NativeString(1)
+-		return new FlatString.full(items, bytelen, 0, bytelen - 1, length)
++		return new FlatString.full(items, bytelen, length)
+ 	end
+ 
+ 	redef fun to_cstring
+@@ -690,7 +678,7 @@ class FlatBuffer
+ 		var sl = s.bytelen
+ 		enlarge(bytelen + sl)
+ 		if s isa FlatText then
+-			s.items.copy_to(items, sl, s.first_byte, bytelen)
++			s.items.copy_to(items, sl, 0, bytelen)
+ 		else
+ 			for i in s.substrings do append i
+ 			return
+@@ -737,7 +725,7 @@ class FlatBuffer
+ 
+ 	redef fun times(repeats)
+ 	do
+-		var x = new FlatString.full(items, bytelen, 0, bytelen - 1, length)
++		var x = new FlatString.full(items, bytelen, length)
+ 		for i in [1 .. repeats[ do
+ 			append(x)
+ 		end
+@@ -918,12 +906,12 @@ redef class NativeString
+ 	redef fun to_s_with_length(length): FlatString
+ 	do
+ 		assert length >= 0
+-		var str = new FlatString.with_infos(self, length, 0, length - 1)
++		var str = new FlatString.with_infos(self, length)
+ 		return str
+ 	end
+ 
+ 	redef fun to_s_full(bytelen, unilen) do
+-		return new FlatString.full(self, bytelen, 0, bytelen - 1, unilen)
++		return new FlatString.full(self, bytelen, unilen)
+ 	end
+ 
+ 	# Returns `self` as a new String.
+@@ -932,7 +920,7 @@ redef class NativeString
+ 		var length = cstring_length
+ 		var new_self = new NativeString(length + 1)
+ 		copy_to(new_self, length, 0, 0)
+-		var str = new FlatString.with_infos(new_self, length, 0, length - 1)
++		var str = new FlatString.with_infos(new_self, length)
+ 		new_self[length] = 0u8
+ 		str.real_items = new_self
+ 		return str
+@@ -993,7 +981,7 @@ redef class Int
+ 		var ns = new NativeString(nslen + 1)
+ 		ns[nslen] = 0u8
+ 		native_int_to_s(ns, nslen + 1)
+-		return new FlatString.full(ns, nslen, 0, nslen - 1, nslen)
++		return new FlatString.full(ns, nslen, nslen)
+ 	end
+ end
+ 
+@@ -1030,13 +1018,13 @@ redef class Array[E]
+ 			var tmp = na[i]
+ 			if tmp isa FlatString then
+ 				var tpl = tmp.bytelen
+-				tmp.items.copy_to(ns, tpl, tmp.first_byte, off)
++				tmp.items.copy_to(ns, tpl, 0, off)
+ 				off += tpl
+ 			else
+ 				for j in tmp.substrings do
+ 					var s = j.as(FlatString)
+ 					var slen = s.bytelen
+-					s.items.copy_to(ns, slen, s.first_byte, off)
++					s.items.copy_to(ns, slen, 0, off)
+ 					off += slen
+ 				end
+ 			end
+@@ -1067,13 +1055,13 @@ redef class NativeArray[E]
+ 			var tmp = na[i]
+ 			if tmp isa FlatString then
+ 				var tpl = tmp.bytelen
+-				tmp.items.copy_to(ns, tpl, tmp.first_byte, off)
++				tmp.items.copy_to(ns, tpl, 0, off)
+ 				off += tpl
+ 			else
+ 				for j in tmp.substrings do
+ 					var s = j.as(FlatString)
+ 					var slen = s.bytelen
+-					s.items.copy_to(ns, slen, s.first_byte, off)
++					s.items.copy_to(ns, slen, 0, off)
+ 					off += slen
+ 				end
+ 			end
+diff --git a/lib/core/text/ropes.nit b/lib/core/text/ropes.nit
+index f582292..7ce292c 100644
+--- a/lib/core/text/ropes.nit
++++ b/lib/core/text/ropes.nit
+@@ -95,7 +95,7 @@ private class Concat
+ 		var off = 0
+ 		for i in substrings do
+ 			var ilen = i.bytelen
+-			i.as(FlatString).items.copy_to(ns, ilen, i.as(FlatString).first_byte, off)
++			i.as(FlatString).items.copy_to(ns, ilen, 0, off)
+ 			off += ilen
+ 		end
+ 		return ns
+@@ -151,7 +151,7 @@ private class Concat
+ 	redef fun substring(from, len) do
+ 		var llen = left.length
+ 		if from < llen then
+-			if from + len < llen then return left.substring(from,len)
++			if from + len < llen then return left.substring(from, len)
+ 			var lsublen = llen - from
+ 			return left.substring_from(from) + right.substring(0, len - lsublen)
+ 		else
+@@ -439,7 +439,7 @@ class RopeBuffer
+ 		end
+ 		if s isa FlatText then
+ 			var oits = s.items
+-			var from = s.first_byte
++			var from = 0
+ 			var remsp = buf_size - rpos
+ 			if slen <= remsp then
+ 				oits.copy_to(ns, slen, from, rpos)
+@@ -474,7 +474,10 @@ class RopeBuffer
+ 	# the final String and re-allocates a new larger Buffer.
+ 	private fun dump_buffer do
+ 		written = false
+-		var nstr = new FlatString.with_infos(ns, rpos - dumped, dumped, rpos - 1)
++		var nslen = rpos - dumped
++		var nns = new NativeString(nslen)
++		ns.copy_to(nns, nslen, dumped, 0)
++		var nstr = new FlatString.with_infos(nns, nslen)
+ 		str += nstr
+ 		var bs = buf_size
+ 		bs = bs * 2
+@@ -487,14 +490,21 @@ class RopeBuffer
+ 	# Similar to dump_buffer, but does not reallocate a new NativeString
+ 	private fun persist_buffer do
+ 		if rpos == dumped then return
+-		var nstr = new FlatString.with_infos(ns, rpos - dumped, dumped, rpos - 1)
++		var nslen = rpos - dumped
++		var nns = new NativeString(nslen)
++		ns.copy_to(nns, nslen, dumped, 0)
++		var nstr = new FlatString.with_infos(nns, nslen)
+ 		str += nstr
+ 		dumped = rpos
+ 	end
+ 
+ 	redef fun output do
+ 		str.output
+-		new FlatString.with_infos(ns, rpos - dumped, dumped, rpos - 1).output
++		var nslen = rpos - dumped
++		var nns = new NativeString(nslen)
++		ns.copy_to(nns, nslen, dumped, 0)
++		var nstr = new FlatString.with_infos(nns, nslen)
++		nstr.output
+ 	end
+ 
+ 	# Enlarge is useless here since the `Buffer`
+@@ -516,7 +526,11 @@ class RopeBuffer
+ 	redef fun reverse do
+ 		# Flush the buffer in order to only have to reverse `str`.
+ 		if rpos > 0 and dumped != rpos then
+-			str += new FlatString.with_infos(ns, rpos - dumped, dumped, rpos - 1)
++			var nslen = rpos - dumped
++			var nns = new NativeString(nslen)
++			ns.copy_to(nns, nslen, dumped, 0)
++			var nstr = new FlatString.with_infos(nns, nslen)
++			str += nstr
+ 			dumped = rpos
+ 		end
+ 		str = str.reversed
+@@ -553,13 +567,13 @@ redef class FlatString
+ 		if s isa FlatString then
+ 			if nlen > maxlen then return new Concat(self, s)
+ 			var mits = items
+-			var sifrom = s.first_byte
+-			var mifrom = first_byte
++			var sifrom = 0
++			var mifrom = 0
+ 			var sits = s.items
+ 			var ns = new NativeString(nlen + 1)
+ 			mits.copy_to(ns, mlen, mifrom, 0)
+ 			sits.copy_to(ns, slen, sifrom, mlen)
+-			return new FlatString.full(ns, nlen, 0, nlen - 1, length + s.length)
++			return new FlatString.full(ns, nlen, length + s.length)
+ 		else if s isa Concat then
+ 			var sl = s.left
+ 			var sllen = sl.bytelen
+@@ -602,7 +616,7 @@ private class RopeByteReverseIterator
+ 		subs = new ReverseRopeSubstrings(root)
+ 		var s = subs.item
+ 		ns = s.items
+-		pns = s.last_byte
++		pns = s.bytelen - 1
+ 	end
+ 
+ 	init from(root: Concat, pos: Int) do
+@@ -628,7 +642,7 @@ private class RopeByteReverseIterator
+ 		if not subs.is_ok then return
+ 		var s = subs.item
+ 		ns = s.items
+-		pns = s.last_byte
++		pns = s.bytelen - 1
+ 	end
+ end
+ 
+@@ -876,7 +890,8 @@ private class RopeBufSubstringIterator
+ 
+ 	init(str: RopeBuffer) is old_style_init do
+ 		iter = str.str.substrings
+-		nsstr = new FlatString.with_infos(str.ns, str.rpos - str.dumped, str.dumped, str.rpos - 1)
++		str.persist_buffer
++		nsstr = "".as(FlatString)
+ 		if str.length == 0 then nsstr_done = true
+ 	end
+ 
+diff --git a/lib/websocket/websocket.nit b/lib/websocket/websocket.nit
+index c3fdaad..5ad5f59 100644
+--- a/lib/websocket/websocket.nit
++++ b/lib/websocket/websocket.nit
+@@ -137,10 +137,10 @@ class WebsocketConnection
+ 			ans_buffer.add(msg.length.to_b)
+ 		end
+ 		if msg isa FlatString then
+-			ans_buffer.append_ns_from(msg.items, msg.length, msg.first_byte)
++			ans_buffer.append_ns_from(msg.items, msg.length, 0)
+ 		else
+ 			for i in msg.substrings do
+-				ans_buffer.append_ns_from(i.as(FlatString).items, i.length, i.as(FlatString).first_byte)
++				ans_buffer.append_ns_from(i.as(FlatString).items, i.length, 0)
+ 			end
+ 		end
+ 		return ans_buffer
+-- 
+1.9.1
+

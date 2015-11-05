@@ -15,7 +15,7 @@
 # limitations under the License.
 
 # Entire game logic for the Dino game
-# Depends only on Nit standard library
+# Depends only on Nit `core` library
 module game_logic
 
 interface Turnable
@@ -34,7 +34,7 @@ class Game
 
 	var over_since = 0
 
-	var score: Container[Int]
+	var score: Ref[Int]
 
 	var random_radius_min = 200
 	var random_radius_max = 400
@@ -43,7 +43,7 @@ class Game
 
 	var entities_sorter = new EntitiesSorter
 
-	init( cavemen_nbr : Int, score: Container[Int] )
+	init( cavemen_nbr : Int, score: Ref[Int] )
 	do
 		srand_from(cavemen_nbr)
 

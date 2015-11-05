@@ -42,12 +42,12 @@ redef extern class NativeActivity
 	# Set the main layout of this activity
 	fun content_view=(layout: NativeViewGroup) in "Java" `{
 		final ViewGroup final_layout = layout;
-		final Activity final_recv = recv;
+		final Activity final_self = self;
 
-		recv.runOnUiThread(new Runnable() {
+		self.runOnUiThread(new Runnable() {
 			@Override
 			public void run()  {
-				final_recv.setContentView(final_layout);
+				final_self.setContentView(final_layout);
 
 				final_layout.requestFocus();
 			}
@@ -59,18 +59,18 @@ end
 extern class NativeView in "Java" `{ android.view.View `}
 	super JavaObject
 
-	fun minimum_width=(val: Int) in "Java" `{ recv.setMinimumWidth((int)val); `}
-	fun minimum_height=(val: Int) in "Java" `{ recv.setMinimumHeight((int)val); `}
+	fun minimum_width=(val: Int) in "Java" `{ self.setMinimumWidth((int)val); `}
+	fun minimum_height=(val: Int) in "Java" `{ self.setMinimumHeight((int)val); `}
 
-	fun enabled: Bool in "Java" `{ return recv.isEnabled(); `}
+	fun enabled: Bool in "Java" `{ return self.isEnabled(); `}
 	fun enabled=(value: Bool) in "Java" `{
-		final View final_recv = recv;
+		final View final_self = self;
 		final boolean final_value = value;
 
-		((Activity)recv.getContext()).runOnUiThread(new Runnable() {
+		((Activity)self.getContext()).runOnUiThread(new Runnable() {
 			@Override
 			public void run()  {
-				final_recv.setEnabled(final_value);
+				final_self.setEnabled(final_value);
 			}
 		});
 	`}
@@ -80,11 +80,11 @@ end
 extern class NativeViewGroup in "Java" `{ android.view.ViewGroup `}
 	super NativeView
 
-	fun add_view(view: NativeView) in "Java" `{ recv.addView(view); `}
+	fun add_view(view: NativeView) in "Java" `{ self.addView(view); `}
 
 	fun add_view_with_weight(view: NativeView, weight: Float)
 	in "Java" `{
-		recv.addView(view, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT, (float)weight));
+		self.addView(view, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT, (float)weight));
 	`}
 end
 
@@ -94,15 +94,15 @@ extern class NativeLinearLayout in "Java" `{ android.widget.LinearLayout `}
 
 	new(context: NativeActivity) in "Java" `{ return new LinearLayout(context); `}
 
-	fun set_vertical in "Java" `{ recv.setOrientation(LinearLayout.VERTICAL); `}
-	fun set_horizontal in "Java" `{ recv.setOrientation(LinearLayout.HORIZONTAL); `}
+	fun set_vertical in "Java" `{ self.setOrientation(LinearLayout.VERTICAL); `}
+	fun set_horizontal in "Java" `{ self.setOrientation(LinearLayout.HORIZONTAL); `}
 
 	redef fun add_view(view) in "Java"
 	`{
 		MarginLayoutParams params = new MarginLayoutParams(
 			LinearLayout.LayoutParams.MATCH_PARENT,
 			LinearLayout.LayoutParams.WRAP_CONTENT);
-		recv.addView(view, params);
+		self.addView(view, params);
 	`}
 end
 
@@ -112,25 +112,25 @@ extern class NativeGridLayout in "Java" `{ android.widget.GridLayout `}
 
 	new(context: NativeActivity) in "Java" `{ return new android.widget.GridLayout(context); `}
 
-	fun row_count=(val: Int) in "Java" `{ recv.setRowCount((int)val); `}
+	fun row_count=(val: Int) in "Java" `{ self.setRowCount((int)val); `}
 
-	fun column_count=(val: Int) in "Java" `{ recv.setColumnCount((int)val); `}
+	fun column_count=(val: Int) in "Java" `{ self.setColumnCount((int)val); `}
 
-	redef fun add_view(view) in "Java" `{ recv.addView(view); `}
+	redef fun add_view(view) in "Java" `{ self.addView(view); `}
 end
 
 extern class NativePopupWindow in "Java" `{ android.widget.PopupWindow `}
 	super NativeView
 
 	new (context: NativeActivity) in "Java" `{
-		PopupWindow recv = new PopupWindow(context);
-		recv.setWindowLayoutMode(LinearLayout.LayoutParams.MATCH_PARENT,
+		PopupWindow self = new PopupWindow(context);
+		self.setWindowLayoutMode(LinearLayout.LayoutParams.MATCH_PARENT,
 			LinearLayout.LayoutParams.MATCH_PARENT);
-		recv.setClippingEnabled(false);
-		return recv;
+		self.setClippingEnabled(false);
+		return self;
 	`}
 
-	fun content_view=(layout: NativeViewGroup) in "Java" `{ recv.setContentView(layout); `}
+	fun content_view=(layout: NativeViewGroup) in "Java" `{ self.setContentView(layout); `}
 end
 
 extern class NativeTextView in "Java" `{ android.widget.TextView `}
@@ -138,30 +138,30 @@ extern class NativeTextView in "Java" `{ android.widget.TextView `}
 
 	new (context: NativeActivity) in "Java" `{ return new TextView(context); `}
 
-	fun text: JavaString in "Java" `{ return recv.getText().toString(); `}
+	fun text: JavaString in "Java" `{ return self.getText().toString(); `}
 
 	fun text=(value: JavaString) in "Java" `{
 
-		final TextView final_recv = recv;
+		final TextView final_self = self;
 		final String final_value = value;
 
-		((Activity)recv.getContext()).runOnUiThread(new Runnable() {
+		((Activity)self.getContext()).runOnUiThread(new Runnable() {
 			@Override
 			public void run()  {
-				final_recv.setText(final_value);
+				final_self.setText(final_value);
 			}
 		});
 	`}
 
 	fun gravity_center in "Java" `{
-		recv.setGravity(Gravity.CENTER);
+		self.setGravity(Gravity.CENTER);
 	`}
 
 	fun text_size: Float in "Java" `{
-		return recv.getTextSize();
+		return self.getTextSize();
 	`}
 	fun text_size=(dpi: Float) in "Java" `{
-		recv.setTextSize(android.util.TypedValue.COMPLEX_UNIT_DIP, (float)dpi);
+		self.setTextSize(android.util.TypedValue.COMPLEX_UNIT_DIP, (float)dpi);
 	`}
 end
 
@@ -172,14 +172,14 @@ extern class NativeEditText in "Java" `{ android.widget.EditText `}
 
 	new (context: NativeActivity) in "Java" `{ return new android.widget.EditText(context); `}
 
-	fun width=(val: Int) in "Java" `{ recv.setWidth((int)val); `}
+	fun width=(val: Int) in "Java" `{ self.setWidth((int)val); `}
 
-	fun input_type_text in "Java" `{ recv.setInputType(android.text.InputType.TYPE_CLASS_TEXT); `}
+	fun input_type_text in "Java" `{ self.setInputType(android.text.InputType.TYPE_CLASS_TEXT); `}
 
 	redef fun new_global_ref: SELF import sys, Sys.jni_env `{
-		Sys sys = NativeEditText_sys(recv);
+		Sys sys = NativeEditText_sys(self);
 		JNIEnv *env = Sys_jni_env(sys);
-		return (*env)->NewGlobalRef(env, recv);
+		return (*env)->NewGlobalRef(env, self);
 	`}
 end
 
@@ -189,8 +189,8 @@ extern class NativeButton in "Java" `{ android.widget.Button `}
 	redef type SELF: NativeButton
 
 	redef fun new_global_ref: SELF import sys, Sys.jni_env `{
-		Sys sys = NativeButton_sys(recv);
+		Sys sys = NativeButton_sys(self);
 		JNIEnv *env = Sys_jni_env(sys);
-		return (*env)->NewGlobalRef(env, recv);
+		return (*env)->NewGlobalRef(env, self);
 	`}
 end

@@ -68,7 +68,7 @@ private class CCompilerOptionsPhase
 			else if expr isa ACallExpr then
 				# We support calls to "exec" only
 				var exec_args = expr.n_args.to_a
-				if expr.n_id.text != "exec" or exec_args.is_empty then
+				if expr.n_qid.n_id.text != "exec" or exec_args.is_empty then
 					modelbuilder.error(nat, "Syntax Error: `{annotation_name}` accepts only calls to `exec` with the command as arguments.")
 					return
 				end

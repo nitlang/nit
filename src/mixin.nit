@@ -21,7 +21,7 @@ import modelbuilder
 
 redef class ToolContext
 	# --mixin
-	var opt_mixins = new OptionArray("Additionals module to min-in", "-m", "--mixin")
+	var opt_mixins = new OptionArray("Additional module to mix-in", "-m", "--mixin")
 	# --define
 	var opt_defines = new OptionArray("Define a specific property", "-D", "--define")
 

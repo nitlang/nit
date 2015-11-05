@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# management and display of ordered trees
+# Manipulation and presentation of ordered trees.
 module ordered_tree
 
 # Generic structure to manage and display an ordered tree
@@ -61,6 +61,7 @@ module ordered_tree
 class OrderedTree[E: Object]
 	super Writable
 	super Collection[E]
+	super Cloneable
 
 	# The roots of the tree (in sequence)
 	var roots = new Array[E]
@@ -69,17 +70,75 @@ class OrderedTree[E: Object]
 	# For each element, the ordered array of its direct sub-elements.
 	var sub = new HashMap[E, Array[E]]
 
+	# The parent of each element.
+	#
+	# Roots have `null` as parent.
+	private var parents = new HashMap[E, nullable E]
+
+	redef fun length do return parents.length
+
+	redef fun has(e) do return parents.has_key(e)
+
+	# The parent of the element `e`
+	#
+	# Roots have `null` as parent.
+	#
+	# ~~~
+	# var tree = new OrderedTree[Int]
+	# tree.add(1, 2)
+	# assert tree.parent(2) == 1
+	# assert tree.parent(1) == null
+	# ~~~
+	fun parent(e: E): nullable E do return parents[e]
+
 	# Add a new element `e` in the tree.
+	#
 	# `p` is the parent of `e`.
-	# if `p` is null, then `e` is a root element.
+	# If `p` is null, then `e` is a root element.
+	#
+	# If `e` is already in the tree, it is detached from its old
+	# parent and attached to the new parent `p`.
 	fun add(p: nullable E, e: E)
 	do
+		detach(e)
+		parents[e] = p
 		if p == null then
 			roots.add(e)
-		else if sub.has_key(p) then
-			sub[p].add(e)
 		else
-			sub[p] = [e]
+			if not has(p) then add(null, p)
+			if sub.has_key(p) then
+				sub[p].add(e)
+			else
+				sub[p] = [e]
+			end
+		end
+	end
+
+	# Append all nodes `es` as children of `p`.
+	fun add_all(p: nullable E, es: Collection[E])
+	do
+		for e in es do add(p, e)
+	end
+
+	# Temporary remove `e`.
+	#
+	# Children of `e` are left untouched in the tree.
+	# This make the tree inconstant until `e` is added back.
+	private fun detach(e: E)
+	do
+		var old_parent = parents.get_or_null(e)
+		if old_parent != null then
+			var subs = sub[old_parent]
+			subs.remove(e)
+			if subs.is_empty then
+				# remove the sub when all children are detached
+				# so that `==` and `hash` are sane
+				# Otherwise an empty array will be considered
+				# differently than no array.
+				sub.keys.remove(old_parent)
+			end
+		else if roots.has(e) then
+			roots.remove(e)
 		end
 	end
 
@@ -98,6 +157,7 @@ class OrderedTree[E: Object]
 	do
 		if not sub.has_key(e) then return
 		var subs = sub[e]
+		if subs.is_empty then return
 		var last = subs.last
 		for e2 in subs do
 			if e2 != last then
@@ -130,16 +190,11 @@ class OrderedTree[E: Object]
 	# Order is preserved
 	#
 	#     var tree = new OrderedTree[Int]
-	#     tree.add(null, 1)
-	#     tree.add(1, 11)
-	#     tree.add(11, 111)
-	#     tree.add(11, 112)
-	#     tree.add(1, 12)
-	#     tree.add(12, 121)
-	#     tree.add(12, 122)
-	#     tree.add(null, 2)
-	#     tree.add(2, 21)
-	#     tree.add(2, 22)
+	#     tree.add_all(null, [1, 2])
+	#     tree.add_all(1, [11, 12])
+	#     tree.add_all(11, [111, 112])
+	#     tree.add_all(12, [121, 122])
+	#     tree.add_all(2, [21, 22])
 	#     assert tree.to_a == [1, 11, 111, 112, 12, 121, 122, 2, 21, 22]
 	redef fun to_a: Array[E] do
 		var res = new Array[E]
@@ -165,21 +220,60 @@ class OrderedTree[E: Object]
 	redef fun first do return roots.first
 
 	#     var tree = new OrderedTree[Int]
-	#     tree.add(null, 1)
-	#     tree.add(1, 11)
-	#     tree.add(11, 111)
-	#     tree.add(11, 112)
-	#     tree.add(1, 12)
-	#     tree.add(12, 121)
-	#     tree.add(12, 122)
-	#     tree.add(null, 2)
-	#     tree.add(2, 21)
-	#     tree.add(2, 22)
+	#     tree.add_all(null, [1, 2])
+	#     tree.add_all(1, [11, 12])
+	#     tree.add_all(11, [111, 112])
+	#     tree.add_all(12, [121, 122])
+	#     tree.add_all(2, [21, 22])
 	#     var order = [1, 11, 111, 112, 12, 121, 122, 2, 21, 22]
-	#     var res = new Array[Int]
-	#     for i in tree do res.add(i)
-	#     assert res == order
+	#     assert tree.iterator.to_a == order
 	redef fun iterator do return new OrderedTreeIterator[E](self)
+
+	# Two trees are equal if they have the same nodes in the same order
+	#
+	# ~~~
+	# var t1 = new OrderedTree[Int]
+	# t1.add_all(null, [1, 2])
+	# t1.add_all(1, [11, 12])
+	#
+	# var t2 = new OrderedTree[Int]
+	# t2.add_all(null, [1, 2])
+	#
+	# assert t1 != t2
+	#
+	# t2.add_all(1, [11, 12])
+	#
+	# assert t1 == t2
+	# ~~~
+	redef fun ==(other)
+	do
+		if not other isa OrderedTree[Object] then return false
+		return roots == other.roots and sub == other.sub
+	end
+
+	redef fun hash
+	do
+		return roots.hash + sub.hash
+	end
+
+	# Shallow clone of the tree.
+	#
+	# ~~~
+	# var t = new OrderedTree[Int]
+	# t.add_all(null, [1, 2])
+	# t.add_all(1, [11, 12])
+	#
+	# assert t.clone == t
+	# ~~~
+	redef fun clone
+	do
+		var res = new OrderedTree[E]
+		res.add_all(null, roots)
+		for p, es in sub do
+			res.add_all(p, es)
+		end
+		return res
+	end
 end
 
 # An Iterator over an OrderedTree

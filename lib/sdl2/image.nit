@@ -65,14 +65,14 @@ extern class SDLImgInitFlags `{ int `}
 	new `{ return 0; `}
 
 	# Add the JPG support to this flag set
-	fun jpg: SDLImgInitFlags `{ return recv | IMG_INIT_JPG; `}
+	fun jpg: SDLImgInitFlags `{ return self | IMG_INIT_JPG; `}
 
 	# Add the PNG support to this flag set
-	fun png: SDLImgInitFlags `{ return recv | IMG_INIT_PNG; `}
+	fun png: SDLImgInitFlags `{ return self | IMG_INIT_PNG; `}
 
 	# Add the TIF support to this flag set
-	fun tif: SDLImgInitFlags `{ return recv | IMG_INIT_TIF; `}
+	fun tif: SDLImgInitFlags `{ return self | IMG_INIT_TIF; `}
 
 	# Add the WEBP support to this flag set
-	fun webp: SDLImgInitFlags `{ return recv | IMG_INIT_WEBP; `}
+	fun webp: SDLImgInitFlags `{ return self | IMG_INIT_WEBP; `}
 end

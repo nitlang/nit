@@ -18,8 +18,8 @@
 # It displays the value of a local variable.
 # It exhibs ways to concatenate strings.
 
-#alt1 import standard
-#alt1 import standard::ropes
+#alt1 import core
+#alt1 import core::text::ropes
 
 var a = 10
 # First way: Multiple parameters.
@@ -49,4 +49,4 @@ printn("The value of a is: " + a.to_s + ".\n")
 # Fiveth way: Join arrays.
 # Pro: Sometime efficient on complex concatenation.
 # Con: Crazy.
-printn(["The value of a is: ", a.to_s, ".\n"].join(""))
+printn(["The value of a is: ", a.to_s, ".\n"].join)

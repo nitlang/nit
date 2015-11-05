@@ -4,10 +4,7 @@ extern const char FILE_nit__astbuilder[];
 #define COLOR_nit__astbuilder__ASTBuilder___anchor 1
 val* NEW_nit__ADecIntExpr(const struct type* type);
 extern const struct type type_nit__ADecIntExpr;
-val* standard___standard__NativeString___to_s_with_length(char* self, long p0);
-val* nit__model___MModule___get_primitive_class(val* self, val* p0);
-#define COLOR_nit__model__MClass___mclass_type 16
-extern const char FILE_nit__model[];
+val* nit__model___MModule___int_type(val* self);
 void nit__astbuilder___ADecIntExpr___make(val* self, long p0, val* p1);
 val* NEW_nit__ANewExpr(const struct type* type);
 extern const struct type type_nit__ANewExpr;
@@ -27,10 +24,11 @@ void nit__astbuilder___AVarExpr___make(val* self, val* p0, val* p1);
 val* NEW_nit__AVarAssignExpr(const struct type* type);
 extern const struct type type_nit__AVarAssignExpr;
 void nit__astbuilder___AVarAssignExpr___make(val* self, val* p0, val* p1);
-#define COLOR_nit__model__MProperty___intro 12
+#define COLOR_nit__model__MProperty___intro 13
+extern const char FILE_nit__model[];
 #define COLOR_nit__model__MAttributeDef___static_mtype 13
-#define COLOR_nit__typing__AExpr__mtype 60
-#define COLOR_nit__model__MType__resolve_for 45
+#define COLOR_nit__typing__AExpr__mtype 42
+#define COLOR_nit__model__MType__resolve_for 26
 val* NEW_nit__AAttrExpr(const struct type* type);
 extern const struct type type_nit__AAttrExpr;
 void nit__astbuilder___AAttrExpr___make(val* self, val* p0, val* p1, val* p2);
@@ -46,28 +44,26 @@ void nit__astbuilder___ABreakExpr___make(val* self, val* p0);
 val* NEW_nit__AIfExpr(const struct type* type);
 extern const struct type type_nit__AIfExpr;
 void nit__astbuilder___AIfExpr___make(val* self, val* p0, val* p1);
-#define COLOR_nit___nit__ASTBuilder___standard__kernel__Object__init 48
-#define COLOR_nit__astbuilder__AExpr___variable_cache 9
+#define COLOR_nit___nit__ASTBuilder___standard__kernel__Object__init 32
+#define COLOR_nit__astbuilder__AExpr___variable_cache 4
 #define COLOR_nit__parser_nodes__ANode___parent 1
-#define COLOR_standard__kernel__Object___61d_61d 2
+#define COLOR_standard__kernel__Object___61d_61d 4
 val* nit__astbuilder___AExpr___detach_with_placeholder(val* self);
 val* NEW_nit__Variable(const struct type* type);
 extern const struct type type_nit__Variable;
-#define COLOR_nit__scope__Variable__name_61d 33
-#define COLOR_standard__kernel__Object__init 7
-#define COLOR_nit__typing__Variable___declared_type 3
-void nit___nit__Prod___ANode__replace_with(val* self, val* p0);
+val* standard___standard__NativeString___to_s_with_length(char* self, long p0);
+#define COLOR_nit__scope__Variable__name_61d 16
+#define COLOR_standard__kernel__Object__init 0
+#define COLOR_nit__typing__Variable___declared_type 0
+void nit__transform___AExpr___nit__parser_nodes__ANode__replace_with(val* self, val* p0);
 val* NEW_nit__APlaceholderExpr(const struct type* type);
 extern const struct type type_nit__APlaceholderExpr;
 void nit___nit__APlaceholderExpr___make(val* self);
-val* standard__string___Object___inspect(val* self);
-val* NEW_standard__Array(const struct type* type);
-extern const struct type type_standard__Array__standard__Object;
 val* NEW_standard__NativeArray(int length, const struct type* type);
-extern const struct type type_standard__NativeArray__standard__Object;
-#define COLOR_standard__array__Array__with_native 73
-#define COLOR_standard__string__Object__to_s 9
-void standard__file___Object___print(val* self, val* p0);
+extern const struct type type_standard__NativeArray__standard__String;
+val* standard__string___Object___inspect(val* self);
+#define COLOR_standard__string__NativeArray__native_to_s 16
+void standard__file___Sys___print(val* self, val* p0);
 #define COLOR_nit__typing__AExpr___is_typed 6
 #define COLOR_nit__parser_nodes__ABlockExpr___n_expr 10
 extern const char FILE_nit__parser_nodes[];
@@ -78,7 +74,7 @@ extern const struct type type_nit__TKwloop;
 void nit__parser_prod___ALoopExpr___n_block_61d(val* self, val* p0);
 #define COLOR_nit__parser_nodes__ALoopExpr___n_block 12
 extern const char FILE_nit__typing[];
-#define COLOR_nit__astbuilder__AExpr__add 74
+#define COLOR_nit__astbuilder__AExpr__add 50
 val* NEW_nit__TKwdo(const struct type* type);
 extern const struct type type_nit__TKwdo;
 #define COLOR_nit__parser_nodes__ADoExpr___n_kwdo 11
@@ -95,13 +91,18 @@ val* NEW_nit__TKwif(const struct type* type);
 extern const struct type type_nit__TKwif;
 #define COLOR_nit__parser_nodes__AIfExpr___n_kwif 10
 #define COLOR_nit__parser_nodes__AIfExpr___n_expr 11
-#define COLOR_nit__parser_nodes__AIfExpr___n_then 12
-#define COLOR_nit__parser_nodes__AIfExpr___n_else 13
+val* NEW_nit__TKwthen(const struct type* type);
+extern const struct type type_nit__TKwthen;
+#define COLOR_nit__parser_nodes__AIfExpr___n_kwthen 12
+#define COLOR_nit__parser_nodes__AIfExpr___n_then 13
+val* NEW_nit__TKwelse(const struct type* type);
+extern const struct type type_nit__TKwelse;
+#define COLOR_nit__parser_nodes__AIfExpr___n_kwelse 14
+#define COLOR_nit__parser_nodes__AIfExpr___n_else 15
 #define COLOR_nit__typing__AExpr___mtype 5
 val* NEW_nit__TClassid(const struct type* type);
 extern const struct type type_nit__TClassid;
-#define COLOR_nit__parser_nodes__AType___n_id 5
-val* BOX_standard__Int(long);
+#define COLOR_nit__parser_nodes__AType___n_id 7
 #define COLOR_nit__literal__AIntExpr___value 10
 val* NEW_nit__TNumber(const struct type* type);
 extern const struct type type_nit__TNumber;
@@ -123,9 +124,9 @@ void standard___standard__SimpleCollection___add_all(val* self, val* p0);
 extern const struct type type_nit__MClassType;
 #define COLOR_nit__typing__ANewExpr___recvtype 15
 #define COLOR_nit__typing__CallSite___mproperty 5
-#define COLOR_nit__model__MMethod___is_new 18
+#define COLOR_nit__model__MMethod___is_new 19
 #define COLOR_nit__typing__CallSite___msignature 7
-#define COLOR_nit__model__MSignature___return_mtype 6
+#define COLOR_nit__model__MSignature___return_mtype 7
 #define COLOR_nit__parser_nodes__ASendExpr___n_expr 10
 #define COLOR_nit__parser_nodes__ACallFormExpr___n_args 17
 val* NEW_nit__TId(const struct type* type);

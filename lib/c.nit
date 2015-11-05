@@ -14,10 +14,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Utilities and performant structure for the FFI with C
+# Structures and services for compatibility with the C language
 module c
-import standard
-intrude import standard::collection::array
+
+import core
+intrude import core::collection::array
 
 # A thin wrapper around a `NativeCArray` adding length information
 abstract class CArray[E]
@@ -92,8 +93,8 @@ class CIntArray
 		super size
 	end
 
-	# Build from an `Array[Int]`
-	new from(array: Array[Int])
+	# Create from an `SequenceRead[Int]`
+	new from(array: SequenceRead[Int])
 	do
 		var carray = new CIntArray(array.length)
 		for i in array.length.times do
@@ -111,15 +112,15 @@ extern class NativeCIntArray `{ int* `}
 	# Initialize a new NativeCIntArray of `size` elements.
 	new(size: Int) `{ return calloc(size, sizeof(int)); `}
 
-	redef fun [](index) `{ return recv[index]; `}
-	redef fun []=(index, val) `{ recv[index] = val; `}
+	redef fun [](index) `{ return self[index]; `}
+	redef fun []=(index, val) `{ self[index] = val; `}
 
-	redef fun +(offset) `{ return recv + offset; `}
+	redef fun +(offset) `{ return self + offset; `}
 end
 
 # Wrapper around an array of `unsigned char` in C (`unsigned char*`) with length and destroy state
 class CByteArray
-	super CArray[Int]
+	super CArray[Byte]
 	redef type NATIVE: NativeCByteArray
 
 	# Allocate a new array of `size`
@@ -128,8 +129,8 @@ class CByteArray
 		super size
 	end
 
-	# Build from an `Array[Int]`
-	new from(array: Array[Int])
+	# Create from a `SequenceRead[Byte]`
+	new from(array: SequenceRead[Byte])
 	do
 		var carray = new CByteArray(array.length)
 		for i in array.length.times do
@@ -142,15 +143,15 @@ end
 # An array of `unsigned char` in C (`unsigned char*`)
 extern class NativeCByteArray `{ unsigned char* `}
 	super NativeCArray
-	redef type E: Int
+	redef type E: Byte
 
 	# Allocate a new array of `size`
 	new(size: Int) `{ return calloc(size, sizeof(unsigned char)); `}
 
-	redef fun [](index) `{ return recv[index]; `}
-	redef fun []=(index, val) `{ recv[index] = val; `}
+	redef fun [](index) `{ return self[index]; `}
+	redef fun []=(index, val) `{ self[index] = val; `}
 
-	redef fun +(offset) `{ return recv + offset; `}
+	redef fun +(offset) `{ return self + offset; `}
 end
 
 # Wrapper around an array of `NativeString` in C (`char**`) with length and destroy state.
@@ -165,8 +166,8 @@ class CNativeStringArray
 		super size
 	end
 
-	# Build from an `Array[NativeString]`
-	new from(array: Array[NativeString])
+	# Create from an `SequenceRead[NativeString]`
+	new from(array: SequenceRead[NativeString])
 	do
 		var carray = new CNativeStringArray(array.length)
 		for i in array.length.times do
@@ -185,14 +186,14 @@ extern class NativeCStringArray `{ char** `}
 	# Initialize a new NativeCStringArray of `size` elements.
 	new(size: Int) `{ return calloc(size, sizeof(char*)); `}
 
-	redef fun [](index) `{ return recv[index]; `}
-	redef fun []=(index, val) `{ recv[index] = val; `}
-	redef fun +(offset) `{ return recv + offset; `}
+	redef fun [](index) `{ return self[index]; `}
+	redef fun []=(index, val) `{ self[index] = val; `}
+	redef fun +(offset) `{ return self + offset; `}
 end
 
 redef class NativeString
 	super NativeCArray
 	redef type E: Char
 
-	redef fun +(offset) `{ return recv + offset; `}
+	redef fun +(offset) `{ return self + offset; `}
 end

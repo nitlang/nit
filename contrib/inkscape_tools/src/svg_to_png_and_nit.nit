@@ -329,8 +329,10 @@ for drawing in drawings do
 	end
 	svg_file.close
 
-	assert page_width != -1
-	assert page_height != -1
+	if page_width == -1 or page_height == -1 then
+		stderr.write "Source drawing file '{drawing}' doesn't look like an SVG file\n"
+		exit 1
+	end
 
 	# Query Inkscape
 	var prog = "inkscape"

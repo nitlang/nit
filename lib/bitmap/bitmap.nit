@@ -17,15 +17,19 @@
 # The Bitmap class represents a 24-bit bitmap image. An instance can be constructed
 # by calling load or with_size:
 #
-#	new Bitmap.load(path_to_a_bmp_file)
-#	new Bitmap.with_size(400, 300)
+# ~~~nitish
+# var bm1 = new Bitmap.load(path_to_a_bmp_file)
+# var bm2 = new Bitmap.with_size(400, 300)
+# ~~~
 #
 # The width and height attributes contain the image's width and height,
 # respectively.
 #
 # Individual pixels can be manipulated by calling the set_pixel function:
 #
+# ~~~nitish
 #	set_pixel(x, y, color)
+# ~~~
 #
 # The no-argument grayscale function converts the bitmap to grayscale and is an
 # implementation of this Rossetacode task:
@@ -33,7 +37,9 @@
 #
 # Finally, the bitmap can be saved to a file by calling save:
 #
+# ~~~nitish
 #	save(path_to_a_file)
+# ~~~
 #
 # For information on the bitmap format, see
 # http://en.wikipedia.org/wiki/BMP_file_format
@@ -123,14 +129,20 @@ class Bitmap
 
 		# =============== Bitmap header ================
 		for x in [0..13] do
-			bitmap_header[x] = fileReader.read(1)[0].ascii
+			var b = fileReader.read_byte
+			if b == null then
+				return
+			end
+			bitmap_header[x] = b.to_i
 		end
 		self.file_size = get_value(bitmap_header.subarray(2, 4))
 		self.data_offset = get_value(bitmap_header.subarray(10, 4))
 
 		# =============== DIB header ================
 		for x in [0..39] do
-			dib_header[x] = fileReader.read(1)[0].ascii
+			var b = fileReader.read_byte
+			if b == null then return
+			dib_header[x] = b.to_i
 		end
 		var dib_size = get_value(dib_header.subarray(0, 4))
 		# only support BITMAPINFOHEADER
@@ -159,28 +171,18 @@ class Bitmap
 				var row = new Array[Int].with_capacity(self.width)
 				for y in [0..self.width[
 				do
-					var red = fileReader.read(1)[0].ascii * 256 * 256
-					var green = fileReader.read(1)[0].ascii * 256
-					var blue = fileReader.read(1)[0].ascii
-					row.add(red + green + blue)
+					var bts = fileReader.read_bytes(3)
+					if bts.length != 3 then return
+					var red = bts[0] << 16
+					var green = bts[1] << 8
+					var blue = bts[2]
+					row.add(red.to_i + green.to_i + blue.to_i)
 				end
 				self.data.add(row)
 			end
 		end
 		fileReader.close
 	end #end of load_from_file method
-
-	# Reads in a series of bytes from the FileReader when loading a Bitmap from a file
-	# FileReader.read(1) is used due to https://github.com/privat/nit/issues/1264
-	private fun read_chars(fr: FileReader, howMany: Int): String
-	do
-		var s = ""
-		for x in [1..howMany]
-		do
-			s += fr.read(1)
-		end
-		return s
-	end
 
 	# Converts the value contained in two or four bytes into an Int. Since Nit
 	# does not have a byte type, Int is used
@@ -197,10 +199,10 @@ class Bitmap
 	# type, Int is used.
 	private fun set_value(array: Array[Int], start_index: Int, value: Int)
 	do
-		array[start_index] = value.bin_and(0x000000FF)
-		array[start_index + 1] = value.rshift(8).bin_and(0x000000FF)
-		array[start_index + 2] = value.rshift(16).bin_and(0x000000FF)
-		array[start_index + 3] = value.rshift(24).bin_and(0x000000FF)
+		array[start_index] = value & 0x000000FF
+		array[start_index + 1] = (value >> 8) & 0x000000FF
+		array[start_index + 2] = (value >> 16) & 0x000000FF
+		array[start_index + 3] = (value >> 24) & 0x000000FF
 	end
 
 	# Saves the bitmap into a file
@@ -209,11 +211,11 @@ class Bitmap
 		var fw = new FileWriter.open(path)
 		# Write bitmap header
 		for x in [0..self.bitmap_header.length[ do
-			fw.write(self.bitmap_header[x].ascii.to_s)
+			fw.write(self.bitmap_header[x].code_point.to_s)
 		end
 		# Write dib header
 		for x in [0..self.dib_header.length[ do
-			fw.write(self.dib_header[x].ascii.to_s)
+			fw.write(self.dib_header[x].code_point.to_s)
 		end
 		# Write color table (if any)
 		# Write data (no padding for now)
@@ -221,12 +223,12 @@ class Bitmap
 			var row = self.data[x]
 			for y in [0..self.width[ do
 				var pixel = row[y]
-				var red = pixel.rshift(16)
-				var green = pixel.bin_and(0x00FF00).rshift(8)
-				var blue = pixel.bin_and(0x000000FF)
-				fw.write(red.ascii.to_s)
-				fw.write(green.ascii.to_s)
-				fw.write(blue.ascii.to_s)
+				var red = pixel >> 16
+				var green = (pixel & 0x00FF00) >> 8
+				var blue = pixel & 0x000000FF
+				fw.write(red.code_point.to_s)
+				fw.write(green.code_point.to_s)
+				fw.write(blue.code_point.to_s)
 			end
 		end
 		fw.close
@@ -239,9 +241,9 @@ class Bitmap
 			var row = self.data[x]
 			for y in [0..self.width[ do
 				var pixel = row[y]
-				var red = pixel.rshift(16)
-				var green = pixel.bin_and(0x00FF00).rshift(8)
-				var blue = pixel.bin_and(0x000000FF)
+				var red = pixel >> 16
+				var green = (pixel & 0x00FF00) >> 8
+				var blue = pixel & 0x000000FF
 				var lum = (0.2126 * red.to_f + 0.7152 * green.to_f + 0.0722 * blue.to_f).to_i
 				pixel = lum * 256 * 256 + lum * 256 + lum
 				self.data[x][y] = pixel

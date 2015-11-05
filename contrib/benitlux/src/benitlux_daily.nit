@@ -75,21 +75,13 @@ class Benitlux
 	var street: String
 
 	# The url of this precise Benelux
-	var url: String
+	var url = "www.brasseriebenelux.com/{street}" is lazy
 
 	# Path to the database
-	var db_path: String
+	var db_path = "benitlux_{street}.db" is lazy
 
 	# Where to save the sample email
-	var sample_email_path: String
-
-	init(street: String)
-	do
-		self.street = street
-		self.url = "www.brasseriebenelux.com/{street}"
-		self.db_path = "benitlux_{street}.db"
-		self.sample_email_path = "benitlux_{street}.email"
-	end
+	var sample_email_path = "benitlux_{street}.email" is lazy
 
 	# Execute the main program logic
 	fun run(send_emails: Bool)
@@ -129,14 +121,11 @@ class Benitlux
 	# Fetch the Web page at `url`
 	fun download_html_page: String
 	do
-		var curl = new Curl
-
-		var request = new CurlHTTPRequest(url, curl)
+		var request = new CurlHTTPRequest(url)
 		var response = request.execute
 
 		if response isa CurlResponseSuccess then
 			var body = response.body_str
-			curl.destroy
 			return body
 		else if response isa CurlResponseFailed then
 			print "Failed downloading URL '{url}' with: {response.error_msg} ({response.error_code})"
@@ -174,15 +163,15 @@ class Benitlux
 	end
 
 	# Content lines of the email
-	var email_content: Array[String]
+	var email_content: Array[String] is noautoinit
 
 	# Title of the email
-	var email_title: String
+	var email_title: String is noautoinit
 
 	# Generate email and fill the attributes `email_content` and `email_title`
 	fun generate_email(beer_events: BeerEvents)
 	do
-		email_title = beer_events.to_email_title
+		email_title = "Benitlux {street.capitalized}{beer_events.to_email_title}"
 		email_content = beer_events.to_email_content
 	end
 
@@ -200,6 +189,8 @@ To unsubscribe, go to <a href="{{{unsub_link}}}">{{{unsub_link}}}</a>
 			var mail = new Mail("Benitlux <benitlux@xymus.net>", email_title, content)
 			mail.to.add email
 			mail.header["Content-Type"] = "text/html; charset=\"UTF-8\""
+			mail.header["List-Unsubscribe"] = unsub_link
+			mail.header["Precedence"] = "bulk"
 			mail.encrypt_with_base64
 
 			mail.send
@@ -232,7 +223,7 @@ end
 var ben = new Benitlux("sherbrooke")
 ben.run(opts.send_emails.value)
 
-# The parsing logic for the wellington locaiton is active (to gather data)
+# The parsing logic for the wellington location is active (to gather data)
 # but the web interface do not allow to subscribe to its mailing list.
 #
 # TODO revamp mailing list Web interface

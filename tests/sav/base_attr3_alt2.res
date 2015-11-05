@@ -1,6 +1,6 @@
-alt/base_attr3_alt2.nit:49,5--6: Error: method `a1=` does not exists in `A`.
+alt/base_attr3_alt2.nit:49,5--6: Error: method `a1=` is protected and can only accessed by `self`.
 alt/base_attr3_alt2.nit:50,5--6: Error: method `a2` is protected and can only accessed by `self`.
-alt/base_attr3_alt2.nit:51,5--6: Error: method `a2=` does not exists in `A`.
+alt/base_attr3_alt2.nit:51,5--6: Error: method `a2=` is protected and can only accessed by `self`.
 alt/base_attr3_alt2.nit:52,5--6: Error: method `a3` does not exists in `A`.
 alt/base_attr3_alt2.nit:53,5--6: Error: method `a3=` does not exists in `A`.
 alt/base_attr3_alt2.nit:56,5--6: Error: method `a5` is protected and can only accessed by `self`.

@@ -105,7 +105,7 @@ class JavaLanguage
 			jni_signature_alt = mclass_type.jni_signature_alt
 			return_type = mclass_type
 		else
-			params.add "recv"
+			params.add "self"
 			if signature.return_mtype != null then
 				var ret_mtype = signature.return_mtype
 				ret_mtype = ret_mtype.resolve_for(mclass_type, mclass_type, mmodule, true)
@@ -243,7 +243,6 @@ redef class MModule
 	private fun insert_compiler_options
 	do
 		cflags.add_one("", "-I $(JAVA_HOME)/include/ -I $(JAVA_HOME)/include/linux/")
-		ldflags.add_one("", "-L $(JNI_LIB_PATH) -ljvm")
 	end
 
 	# Name of the generated Java class where to store all implementation methods of this module
@@ -363,7 +362,7 @@ class JavaFile
 	super ExternFile
 
 	redef fun makefile_rule_name do return "{filename.basename(".java")}.class"
-	redef fun makefile_rule_content do return "javac {filename.basename("")} -d ."
+	redef fun makefile_rule_content do return "javac {filename.basename} -d ."
 	redef fun add_to_jar do return true
 end
 
@@ -458,7 +457,7 @@ redef class MType
 	# JNI type name (in C)
 	#
 	# So this is a C type, usually defined in `jni.h`
-	private fun jni_type: String do return "jint"
+	private fun jni_type: String do return "long"
 
 	# JNI short type name (for signatures)
 	#
@@ -480,9 +479,15 @@ redef class MClassType
 		if ftype isa ForeignJavaType then return ftype.java_type.
 			replace('/', ".").replace('$', ".").replace(' ', "").replace('\n',"")
 		if mclass.name == "Bool" then return "boolean"
-		if mclass.name == "Char" then return "char"
+		if mclass.name == "Char" then return "int"
 		if mclass.name == "Int" then return "long"
 		if mclass.name == "Float" then return "double"
+		if mclass.name == "Byte" then return "byte"
+		if mclass.name == "Int8" then return "byte"
+		if mclass.name == "Int16" then return "short"
+		if mclass.name == "UInt16" then return "short"
+		if mclass.name == "Int32" then return "int"
+		if mclass.name == "UInt32" then return "int"
 		return super
 	end
 
@@ -491,9 +496,15 @@ redef class MClassType
 		var ftype = mclass.ftype
 		if ftype isa ForeignJavaType then return "jobject"
 		if mclass.name == "Bool" then return "jboolean"
-		if mclass.name == "Char" then return "jchar"
+		if mclass.name == "Char" then return "jint"
 		if mclass.name == "Int" then return "jlong"
 		if mclass.name == "Float" then return "jdouble"
+		if mclass.name == "Byte" then return "jbyte"
+		if mclass.name == "Int8" then return "jbyte"
+		if mclass.name == "Int16" then return "jshort"
+		if mclass.name == "UInt16" then return "jshort"
+		if mclass.name == "Int32" then return "jint"
+		if mclass.name == "UInt32" then return "jint"
 		return super
 	end
 
@@ -550,9 +561,15 @@ redef class MClassType
 			return "L{jni_type};"
 		end
 		if mclass.name == "Bool" then return "Z"
-		if mclass.name == "Char" then return "C"
+		if mclass.name == "Char" then return "I"
 		if mclass.name == "Int" then return "J"
 		if mclass.name == "Float" then return "D"
+		if mclass.name == "Byte" then return "B"
+		if mclass.name == "Int8" then return "B"
+		if mclass.name == "Int16" then return "S"
+		if mclass.name == "UInt16" then return "S"
+		if mclass.name == "Int32" then return "I"
+		if mclass.name == "UInt32" then return "I"
 		return super
 	end
 
@@ -562,9 +579,15 @@ redef class MClassType
 
 		if ftype isa ForeignJavaType then return "Object"
 		if mclass.name == "Bool" then return "Boolean"
-		if mclass.name == "Char" then return "Char"
+		if mclass.name == "Char" then return "Int"
 		if mclass.name == "Int" then return "Long"
 		if mclass.name == "Float" then return "Double"
+		if mclass.name == "Byte" then return "Byte"
+		if mclass.name == "Int8" then return "Byte"
+		if mclass.name == "Int16" then return "Short"
+		if mclass.name == "UInt16" then return "Short"
+		if mclass.name == "Int32" then return "Int"
+		if mclass.name == "UInt32" then return "Int"
 		return super
 	end
 end
@@ -603,7 +626,7 @@ redef class MMethod
 			else format.add "V"
 		end
 
-		return format.join("")
+		return format.join
 	end
 
 	# Similar to `build_c_signature` but adapted to create the signature expected by JNI for C functions
@@ -637,7 +660,7 @@ redef class MMethod
 		cparams.add "jclass clazz"
 
 		if not self.is_init then
-			cparams.add "{call_context.name_mtype(recv_mtype)} recv"
+			cparams.add "{call_context.name_mtype(recv_mtype)} self"
 		end
 		for p in signature.mparameters do
 			var param_mtype = p.mtype.resolve_for(recv_mtype, recv_mtype, from_mmodule, true)

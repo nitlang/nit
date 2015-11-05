@@ -12,8 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# This module provide a simple wall clock.
-# It is an example of getters and setters.
+# Example of a simple wall clock class with generalized getters and setters.
+#
 # A beefed-up module is available in clock_more
 module clock
 

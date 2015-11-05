@@ -35,7 +35,7 @@
 # http://developer.android.com/guide/topics/ui/notifiers/notifications.html
 module notification
 
-import standard
+import core
 private import native_notification
 
 # An Android notification, shown at the top of the screen

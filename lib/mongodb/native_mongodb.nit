@@ -51,9 +51,9 @@ extern class NativeBSON `{ bson_t * `}
 	new from_json_string(data: NativeString) import set_mongoc_error `{
 		bson_error_t error;
 		bson_t *bson;
-		bson = bson_new_from_json(data, -1, &error);
+		bson = bson_new_from_json((uint8_t *)data, -1, &error);
 		if(!bson) {
-			NativeBSON_set_mongoc_error(recv, &error);
+			NativeBSON_set_mongoc_error(bson, &error);
 			return NULL;
 		}
 		return bson;
@@ -64,7 +64,7 @@ extern class NativeBSON `{ bson_t * `}
 	# The `bson_as_json()` function shall encode bson as a JSON encoded UTF-8 string.
 	# The caller is responsible for freeing the resulting UTF-8 encoded string
 	# by calling `bson_free()` with the result.
-	fun to_native_string: NativeString `{ return bson_as_json(recv, NULL); `}
+	fun to_native_string: NativeString `{ return bson_as_json(self, NULL); `}
 
 	# Wrapper for `bson_destroy()`.
 	#
@@ -73,7 +73,7 @@ extern class NativeBSON `{ bson_t * `}
 	# unless otherwise specified.
 	#
 	# This instance should not be used beyond this point!
-	fun destroy `{ bson_destroy(recv); `}
+	fun destroy `{ bson_destroy(self); `}
 
 	# Utility method to set `Sys.last_mongoc_error`.
 	fun set_mongoc_error(err: BSONError) do sys.last_mongoc_error = err
@@ -90,17 +90,36 @@ extern class BSONError `{ bson_error_t * `}
 	#
 	# The `error.domain` field contains the logical domain within a library that
 	# created the error.
-	fun domain: Int `{ return recv->domain; `}
+	fun domain: Int `{ return self->domain; `}
 
 	# Wrapper for `error.code`.
 	#
 	# The `error.code` field contains the domain specific error code.
-	fun code: Int `{ return recv->code; `}
+	fun code: Int `{ return self->code; `}
 
 	# Wrapper for `error.message`.
 	#
 	# The `error.message` field contains a human printable error message.
-	fun message: NativeString `{ return recv->message; `}
+	fun message: NativeString `{ return self->message; `}
+end
+
+# Wrapper for `bson_oid_t`.
+#
+# The `bson_oid_t` structure contains the 12-byte ObjectId notation defined by the
+# [BSON ObjectID specificiation](http://docs.mongodb.org/manual/reference/object-id/).
+#
+# ObjectId is a 12-byte BSON type, constructed using:
+# * a 4-byte value representing the seconds since the Unix epoch (in Big Endian)
+# * a 3-byte machine identifier
+# * a 2-byte process id (Big Endian), and
+# * a 3-byte counter (Big Endian), starting with a random value.
+extern class BSONObjectId `{ bson_oid_t * `}
+	# Object id.
+	fun id: String import NativeString.to_s_with_copy `{
+		char str[25];
+		bson_oid_to_string(self, str);
+		return NativeString_to_s_with_copy(str);
+	`}
 end
 
 redef class Sys
@@ -108,6 +127,11 @@ redef class Sys
 	#
 	# See `MongoClient::last_error`.
 	var last_mongoc_error: nullable BSONError = null
+
+	# Last auto generated id if any.
+	#
+	# See `MongoCollection::insert`.
+	var last_mongoc_id: nullable BSONObjectId = null is writable
 end
 
 # Wrapper for `char**`.
@@ -117,7 +141,7 @@ redef class NativeCStringArray
 	# Frees `self`.
 	#
 	# This instance should not be used beyond this point!
-	fun destroy `{ free(recv); `}
+	fun destroy `{ free(self); `}
 end
 
 # Wrapper for `mongoc_client_t`.
@@ -144,8 +168,8 @@ extern class NativeMongoClient `{ mongoc_client_t * `}
 	fun server_status: nullable NativeBSON import set_mongoc_error, NativeBSON.as nullable `{
 		bson_error_t error;
 		bson_t *reply = bson_new();
-		if(!mongoc_client_get_server_status(recv, NULL, reply, &error)){
-			NativeMongoClient_set_mongoc_error(recv, &error);
+		if(!mongoc_client_get_server_status(self, NULL, reply, &error)){
+			NativeMongoClient_set_mongoc_error(self, &error);
 			return null_NativeBSON();
 		}
 		return NativeBSON_as_nullable(reply);
@@ -159,10 +183,10 @@ extern class NativeMongoClient `{ mongoc_client_t * `}
 		import set_mongoc_error, NativeCStringArray, NativeCStringArray.as nullable `{
 		bson_error_t error;
 		char **strv;
-		if(strv = mongoc_client_get_database_names(recv, &error)) {
+		if((strv = mongoc_client_get_database_names(self, &error))) {
 			return NativeCStringArray_as_nullable(strv);
 		}
-		NativeMongoClient_set_mongoc_error(recv, &error);
+		NativeMongoClient_set_mongoc_error(self, &error);
 		return null_NativeCStringArray();
 	`}
 
@@ -170,7 +194,7 @@ extern class NativeMongoClient `{ mongoc_client_t * `}
 	#
 	# This instance should not be used beyond this point!
 	fun destroy `{
-		mongoc_client_destroy(recv);
+		mongoc_client_destroy(self);
 		mongoc_cleanup();
 	`}
 
@@ -206,10 +230,10 @@ extern class NativeMongoDb `{ mongoc_database_t * `}
 		import set_mongoc_error, NativeCStringArray, NativeCStringArray.as nullable `{
 		bson_error_t error;
 		char **strv;
-		if(strv = mongoc_database_get_collection_names(recv, &error)) {
+		if((strv = mongoc_database_get_collection_names(self, &error))) {
 			return NativeCStringArray_as_nullable(strv);
 		}
-		NativeMongoDb_set_mongoc_error(recv, &error);
+		NativeMongoDb_set_mongoc_error(self, &error);
 		return null_NativeCStringArray();
 	`}
 
@@ -218,7 +242,7 @@ extern class NativeMongoDb `{ mongoc_database_t * `}
 	# Allocates a new `mongoc_collection_t` structure for the collection named
 	# `name` in database.
 	fun collection(name: NativeString): NativeMongoCollection `{
-		return mongoc_database_get_collection(recv, name);
+		return mongoc_database_get_collection(self, name);
 	`}
 
 	# Wrapper for `mongoc_database_has_collection()`.
@@ -227,8 +251,8 @@ extern class NativeMongoDb `{ mongoc_database_t * `}
 	# within database.
 	fun has_collection(name: NativeString): Bool import set_mongoc_error `{
 		bson_error_t error;
-		if(!mongoc_database_has_collection(recv, name, &error)) {
-			NativeMongoDb_set_mongoc_error(recv, &error);
+		if(!mongoc_database_has_collection(self, name, &error)) {
+			NativeMongoDb_set_mongoc_error(self, &error);
 			return false;
 		}
 		return true;
@@ -239,8 +263,8 @@ extern class NativeMongoDb `{ mongoc_database_t * `}
 	# This function attempts to drop a database on the MongoDB server.
 	fun drop: Bool import set_mongoc_error `{
 		bson_error_t error;
-		if(!mongoc_database_drop(recv, &error)) {
-			NativeMongoDb_set_mongoc_error(recv, &error);
+		if(!mongoc_database_drop(self, &error)) {
+			NativeMongoDb_set_mongoc_error(self, &error);
 			return false;
 		}
 		return true;
@@ -249,7 +273,7 @@ extern class NativeMongoDb `{ mongoc_database_t * `}
 	# Wrapper for `mongoc_database_destroy()`.
 	#
 	# This instance should not be used beyond this point!
-	fun destroy `{ mongoc_database_destroy(recv); `}
+	fun destroy `{ mongoc_database_destroy(self); `}
 
 	# Utility method to set `Sys.last_mongoc_error`.
 	fun set_mongoc_error(err: BSONError) do sys.last_mongoc_error = err
@@ -287,11 +311,17 @@ extern class NativeMongoCollection `{ mongoc_collection_t * `}
 	# If no `_id` element is found in document, then a `bson_oid_t` will be
 	# generated locally and added to the document.
 	#
-	# You can retrieve a generated `_id` from `mongoc_collection_get_last_error()`.
-	fun insert(doc: NativeBSON): Bool import set_mongoc_error `{
+	# You can retrieve a generated `_id` from `sys.last_mongoc_id`.
+	fun insert(document: NativeBSON): Bool import set_mongoc_error, set_mongoc_last_id `{
+		bson_oid_t oid;
+		if(!bson_has_field(document, "_id")) {
+			bson_oid_init (&oid, NULL);
+			BSON_APPEND_OID (document, "_id", &oid);
+			NativeMongoCollection_set_mongoc_last_id(self, &oid);
+		}
 		bson_error_t error;
-		if(!mongoc_collection_insert(recv, MONGOC_INSERT_NONE, doc, NULL, &error)) {
-			NativeMongoCollection_set_mongoc_error(recv, &error);
+		if(!mongoc_collection_insert(self, MONGOC_INSERT_NONE, document, NULL, &error)) {
+			NativeMongoCollection_set_mongoc_error(self, &error);
 			return false;
 		}
 		return true;
@@ -302,10 +332,18 @@ extern class NativeMongoCollection `{ mongoc_collection_t * `}
 	# This function shall save a document into the collection.
 	# If the document has an `_id` field it will be updated.
 	# Otherwise it will be inserted.
-	fun save(document: NativeBSON): Bool import set_mongoc_error `{
+	#
+	# You can retrieve a generated `_id` from `sys.last_mongoc_id`.
+	fun save(document: NativeBSON): Bool import set_mongoc_error, set_mongoc_last_id `{
+		bson_oid_t oid;
+		if(!bson_has_field(document, "_id")) {
+			bson_oid_init (&oid, NULL);
+			BSON_APPEND_OID (document, "_id", &oid);
+			NativeMongoCollection_set_mongoc_last_id(self, &oid);
+		}
 		bson_error_t error;
-		if(!mongoc_collection_save(recv, document, NULL, &error)) {
-			NativeMongoCollection_set_mongoc_error(recv, &error);
+		if(!mongoc_collection_save(self, document, NULL, &error)) {
+			NativeMongoCollection_set_mongoc_error(self, &error);
 			return false;
 		}
 		return true;
@@ -318,8 +356,8 @@ extern class NativeMongoCollection `{ mongoc_collection_t * `}
 	# The bson selector is not validated, simply passed along as appropriate to the server.
 	fun remove(selector: NativeBSON): Bool import set_mongoc_error `{
 		bson_error_t error;
-		if(!mongoc_collection_remove(recv, MONGOC_REMOVE_SINGLE_REMOVE, selector, NULL, &error)) {
-			NativeMongoCollection_set_mongoc_error(recv, &error);
+		if(!mongoc_collection_remove(self, MONGOC_REMOVE_SINGLE_REMOVE, selector, NULL, &error)) {
+			NativeMongoCollection_set_mongoc_error(self, &error);
 			return false;
 		}
 		return true;
@@ -330,8 +368,8 @@ extern class NativeMongoCollection `{ mongoc_collection_t * `}
 	# This function shall remove documents in the collection that match `selector`.
 	fun remove_all(selector: NativeBSON): Bool import set_mongoc_error `{
 		bson_error_t error;
-		if(!mongoc_collection_remove(recv, MONGOC_REMOVE_NONE, selector, NULL, &error)) {
-			NativeMongoCollection_set_mongoc_error(recv, &error);
+		if(!mongoc_collection_remove(self, MONGOC_REMOVE_NONE, selector, NULL, &error)) {
+			NativeMongoCollection_set_mongoc_error(self, &error);
 			return false;
 		}
 		return true;
@@ -343,8 +381,8 @@ extern class NativeMongoCollection `{ mongoc_collection_t * `}
 	# matches `selector`.
 	fun update(selector, update: NativeBSON): Bool import set_mongoc_error `{
 		bson_error_t error;
-		if(!mongoc_collection_update(recv, MONGOC_UPDATE_NONE, selector, update, NULL, &error)) {
-			NativeMongoCollection_set_mongoc_error(recv, &error);
+		if(!mongoc_collection_update(self, MONGOC_UPDATE_NONE, selector, update, NULL, &error)) {
+			NativeMongoCollection_set_mongoc_error(self, &error);
 			return false;
 		}
 		return true;
@@ -355,8 +393,8 @@ extern class NativeMongoCollection `{ mongoc_collection_t * `}
 	# This function shall update documents in the collection that match `selector`.
 	fun update_all(selector, update: NativeBSON): Bool import set_mongoc_error `{
 		bson_error_t error;
-		if(!mongoc_collection_update(recv, MONGOC_UPDATE_MULTI_UPDATE, selector, update, NULL, &error)) {
-			NativeMongoCollection_set_mongoc_error(recv, &error);
+		if(!mongoc_collection_update(self, MONGOC_UPDATE_MULTI_UPDATE, selector, update, NULL, &error)) {
+			NativeMongoCollection_set_mongoc_error(self, &error);
 			return false;
 		}
 		return true;
@@ -367,9 +405,9 @@ extern class NativeMongoCollection `{ mongoc_collection_t * `}
 	# This function shall execute a count `query` on the underlying collection.
 	fun count(query: NativeBSON): Int import set_mongoc_error `{
 		bson_error_t error;
-		int64_t count = mongoc_collection_count(recv, MONGOC_QUERY_NONE, query, 0, 0, NULL, &error);
+		int64_t count = mongoc_collection_count(self, MONGOC_QUERY_NONE, query, 0, 0, NULL, &error);
 		if(count < 0) {
-			NativeMongoCollection_set_mongoc_error(recv, &error);
+			NativeMongoCollection_set_mongoc_error(self, &error);
 			return -1;
 		}
 		return count;
@@ -387,13 +425,11 @@ extern class NativeMongoCollection `{ mongoc_collection_t * `}
 		NativeMongoCursor.as nullable, set_mongoc_error `{
 		bson_error_t error;
 		mongoc_cursor_t	*cursor;
-		cursor = mongoc_collection_find(recv, MONGOC_QUERY_NONE, 0, 0, 0, query, NULL, NULL);
-
+		cursor = mongoc_collection_find(self, MONGOC_QUERY_NONE, 0, 0, 0, query, NULL, NULL);
 		if (mongoc_cursor_error(cursor, &error)) {
-			NativeMongoCollection_set_mongoc_error(recv, &error);
+			NativeMongoCollection_set_mongoc_error(self, &error);
 			return null_NativeMongoCursor();
 		}
-
 		return NativeMongoCursor_as_nullable(cursor);
 	`}
 
@@ -403,8 +439,8 @@ extern class NativeMongoCollection `{ mongoc_collection_t * `}
 	fun stats: nullable NativeBSON import set_mongoc_error, NativeBSON.as nullable `{
 		bson_error_t error;
 		bson_t *reply = bson_new();
-		if(!mongoc_collection_stats(recv, NULL, reply, &error)){
-			NativeMongoCollection_set_mongoc_error(recv, &error);
+		if(!mongoc_collection_stats(self, NULL, reply, &error)){
+			NativeMongoCollection_set_mongoc_error(self, &error);
 			return null_NativeBSON();
 		}
 		return NativeBSON_as_nullable(reply);
@@ -416,8 +452,8 @@ extern class NativeMongoCollection `{ mongoc_collection_t * `}
 	# including all indexes associated with the collection.
 	fun drop: Bool import set_mongoc_error `{
 		bson_error_t error;
-		if(!mongoc_collection_drop(recv, &error)) {
-			NativeMongoCollection_set_mongoc_error(recv, &error);
+		if(!mongoc_collection_drop(self, &error)) {
+			NativeMongoCollection_set_mongoc_error(self, &error);
 			return false;
 		}
 		return true;
@@ -431,8 +467,8 @@ extern class NativeMongoCollection `{ mongoc_collection_t * `}
 	# Additional operations will occur on renamed collection.
 	fun rename(new_database, new_name: NativeString): Bool `{
 		bson_error_t error;
-		if(!mongoc_collection_rename(recv, new_database, new_name, false, &error)){
-			NativeMongoCollection_set_mongoc_error(recv, &error);
+		if(!mongoc_collection_rename(self, new_database, new_name, false, &error)){
+			NativeMongoCollection_set_mongoc_error(self, &error);
 			return false;
 		}
 		return true;
@@ -441,7 +477,10 @@ extern class NativeMongoCollection `{ mongoc_collection_t * `}
 	# Wrapper for `mongoc_collection_destroy()`.
 	#
 	# This instance should not be used beyond this point!
-	fun destroy `{ mongoc_collection_destroy(recv); `}
+	fun destroy `{ mongoc_collection_destroy(self); `}
+
+	# Utility method to set `Sys.last_mongoc_last_id`.
+	fun set_mongoc_last_id(id: BSONObjectId) do sys.last_mongoc_id = id
 
 	# Utility method to set `Sys.last_mongoc_error`.
 	fun set_mongoc_error(err: BSONError) do sys.last_mongoc_error = err
@@ -467,7 +506,7 @@ extern class NativeMongoCursor `{ mongoc_cursor_t* `}
 	# Wrapper for `mongoc_cursor_current()`.
 	#
 	# Fetches the cursors current document or NULL if there has been an error.
-	fun current: NativeBSON `{ return (bson_t*) mongoc_cursor_current(recv); `}
+	fun current: NativeBSON `{ return (bson_t*) mongoc_cursor_current(self); `}
 
 	# Wrapper for `mongoc_cursor_next()`.
 	#
@@ -477,16 +516,16 @@ extern class NativeMongoCursor `{ mongoc_cursor_t* `}
 	# This function is a blocking function.
 	fun next: Bool `{
 		const bson_t *doc;
-		return mongoc_cursor_next(recv, &doc);
+		return mongoc_cursor_next(self, &doc);
 	`}
 
 	# Wrapper for `mongoc_cursor_more()`.
 	#
 	# This function shall indicate if there is more data to be read from the cursor.
-	fun more: Bool `{ return mongoc_cursor_more(recv); `}
+	fun more: Bool `{ return mongoc_cursor_more(self); `}
 
 	# Wrapper for `mongoc_cursor_destroy()`.
 	#
 	# This instance should not be used beyond this point!
-	fun destroy `{ mongoc_cursor_destroy(recv); `}
+	fun destroy `{ mongoc_cursor_destroy(self); `}
 end

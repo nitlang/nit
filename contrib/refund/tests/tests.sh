@@ -83,3 +83,6 @@ rm stats.json
 
 echo ""
 echo "==> success $ok/$all ($ko tests failed, $sk skipped)"
+
+# return result
+test "$ok" == "$all"

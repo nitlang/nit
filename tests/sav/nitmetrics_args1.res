@@ -1,8 +1,96 @@
 *** METRICS ***
+--- AST Metrics ---
+## All nodes of the AST
+ population: 51
+ minimum value: 1
+ maximum value: 40
+ total value: 289
+ average value: 5.66
+ distribution:
+  <=1: sub-population=16 (31.37%); cumulated value=16 (5.53%)
+  <=2: sub-population=5 (9.80%); cumulated value=10 (3.46%)
+  <=4: sub-population=9 (17.64%); cumulated value=28 (9.68%)
+  <=8: sub-population=12 (23.52%); cumulated value=76 (26.29%)
+  <=16: sub-population=4 (7.84%); cumulated value=44 (15.22%)
+  <=32: sub-population=4 (7.84%); cumulated value=75 (25.95%)
+  <=64: sub-population=1 (1.96%); cumulated value=40 (13.84%)
+ list:
+  TId: 40 (13.84%)
+  APublicVisibility: 19 (6.57%)
+  AQid: 19 (6.57%)
+  AListExprs: 19 (6.57%)
+  ACallExpr: 18 (6.22%)
+  TClassid: 15 (5.19%)
+  TInteger: 10 (3.46%)
+  AIntegerExpr: 10 (3.46%)
+  AType: 9 (3.11%)
+  TKwend: 8 (2.76%)
+  ...
+  ACallAssignExpr: 1 (0.34%)
+  AAnnotations: 1 (0.34%)
+  TKwreturn: 1 (0.34%)
+  AReturnExpr: 1 (0.34%)
+  AInterfaceClasskind: 1 (0.34%)
+  TKwinterface: 1 (0.34%)
+  ANoImport: 1 (0.34%)
+  AMainMethPropdef: 1 (0.34%)
+  AMainClassdef: 1 (0.34%)
+  TKwimport: 1 (0.34%)
+## All identifiers of the AST
+ population: 20
+ minimum value: 1
+ maximum value: 11
+ total value: 55
+ average value: 2.75
+ distribution:
+  <=1: sub-population=3 (15.00%); cumulated value=3 (5.45%)
+  <=2: sub-population=12 (60.00%); cumulated value=24 (43.63%)
+  <=4: sub-population=3 (15.00%); cumulated value=10 (18.18%)
+  <=8: sub-population=1 (5.00%); cumulated value=7 (12.72%)
+  <=16: sub-population=1 (5.00%); cumulated value=11 (20.00%)
+ list:
+  output: 11 (20.00%)
+  Int: 7 (12.72%)
+  run: 4 (7.27%)
+  c: 3 (5.45%)
+  val: 3 (5.45%)
+  i: 2 (3.63%)
+  bar: 2 (3.63%)
+  foo: 2 (3.63%)
+  val2: 2 (3.63%)
+  val1: 2 (3.63%)
+  C: 2 (3.63%)
+  v: 2 (3.63%)
+  baz: 2 (3.63%)
+  a: 2 (3.63%)
+  A: 2 (3.63%)
+  B: 2 (3.63%)
+  b: 2 (3.63%)
+  intern: 1 (1.81%)
+  Object: 1 (1.81%)
+  Bool: 1 (1.81%)
+--- Detection of variance constraints on formal parameter types ---
+-- Generic classes --
+ list:
+  non generic: 7 (100.00%)
+  total classes: 7
+  total formal parameters: 0
+-- Including `private` properties --
+  covariants: 0 (na%)
+  contravariants: 0 (na%)
+  bivariants: 0 (na%)
+  invariants: 0 (na%)
+  total: 0
+-- Excluding `private` properties --
+  covariants: 0 (na%)
+  contravariants: 0 (na%)
+  bivariants: 0 (na%)
+  invariants: 0 (na%)
+  total: 0
 
 # MModules metrics
 
- ## project base_simple3
+ ## package base_simple3
   `- group base_simple3
 	mnoa: number of ancestor modules
 	  avg: 0.0
@@ -126,163 +214,6 @@
 	  min: base_simple3 (1)
 	  std: 0.0
 	  sum: 1
-
-# MClasses metrics
-
- ## project base_simple3
-  `- group base_simple3
-	cnoa: number of ancestor classes
-	  avg: 0.0
-	  max: Bool (1)
-	  min: Object (0)
-	  std: 0.926
-	  sum: 6
-	cnop: number of parent classes
-	  avg: 0.0
-	  max: Bool (1)
-	  min: Object (0)
-	  std: 0.926
-	  sum: 6
-	cnoc: number of child classes
-	  avg: 0.0
-	  max: Object (6)
-	  min: Bool (0)
-	  std: 2.268
-	  sum: 6
-	cnod: number of descendant classes
-	  avg: 0.0
-	  max: Object (6)
-	  min: Bool (0)
-	  std: 2.268
-	  sum: 6
-	cdit: depth in class tree
-	  avg: 0.0
-	  max: Bool (1)
-	  min: Object (0)
-	  std: 0.926
-	  sum: 6
-	cnbp: number of accessible properties (inherited + local)
-	  avg: 3.0
-	  max: C (7)
-	  min: Object (1)
-	  std: 2.36
-	  sum: 24
-	cnba: number of accessible attributes (inherited + local)
-	  avg: 0.0
-	  max: C (2)
-	  min: Object (0)
-	  std: 0.845
-	  sum: 3
-	cnbip: number of introduced properties
-	  avg: 2.0
-	  max: C (6)
-	  min: Bool (0)
-	  std: 2.268
-	  sum: 18
-	cnbrp: number of redefined properties
-	  avg: 0.0
-	  max: A (1)
-	  min: Object (0)
-	  std: 0.535
-	  sum: 2
-	cnbhp: number of inherited properties
-	  avg: 0.0
-	  max: Bool (1)
-	  min: Object (0)
-	  std: 0.926
-	  sum: 6
-
- ## global metrics
-	cnoa: number of ancestor classes
-	  avg: 0.0
-	  max: Bool (1)
-	  min: Object (0)
-	  std: 0.926
-	  sum: 6
-	cnop: number of parent classes
-	  avg: 0.0
-	  max: Bool (1)
-	  min: Object (0)
-	  std: 0.926
-	  sum: 6
-	cnoc: number of child classes
-	  avg: 0.0
-	  max: Object (6)
-	  min: Bool (0)
-	  std: 2.268
-	  sum: 6
-	cnod: number of descendant classes
-	  avg: 0.0
-	  max: Object (6)
-	  min: Bool (0)
-	  std: 2.268
-	  sum: 6
-	cdit: depth in class tree
-	  avg: 0.0
-	  max: Bool (1)
-	  min: Object (0)
-	  std: 0.926
-	  sum: 6
-	cnbp: number of accessible properties (inherited + local)
-	  avg: 3.0
-	  max: C (7)
-	  min: Object (1)
-	  std: 2.36
-	  sum: 24
-	cnba: number of accessible attributes (inherited + local)
-	  avg: 0.0
-	  max: C (2)
-	  min: Object (0)
-	  std: 0.845
-	  sum: 3
-	cnbip: number of introduced properties
-	  avg: 2.0
-	  max: C (6)
-	  min: Bool (0)
-	  std: 2.268
-	  sum: 18
-	cnbrp: number of redefined properties
-	  avg: 0.0
-	  max: A (1)
-	  min: Object (0)
-	  std: 0.535
-	  sum: 2
-	cnbhp: number of inherited properties
-	  avg: 0.0
-	  max: Bool (1)
-	  min: Object (0)
-	  std: 0.926
-	  sum: 6
---- Metrics of refinement usage ---
-Number of modules: 1
-
-Number of classes: 7
-  Number of interface kind: 1 (14.28%)
-  Number of enum kind: 2 (28.57%)
-  Number of class kind: 4 (57.14%)
-
-Number of class definitions: 7
-Number of refined classes: 0 (0.00%)
-Average number of class refinments by classes: 0.00
-Average number of class refinments by refined classes: na
-
-Number of properties: 18
-  Number of MAttribute: 3 (16.66%)
-  Number of MMethod: 15 (83.33%)
-
-Number of property definitions: 20
-Number of redefined properties: 1 (5.55%)
-Average number of property redefinitions by property: 0.11
-Average number of property redefinitions by redefined property: 2.00
---- Explicit vs. Implicit Self ---
-Total number of self: 5
-Total number of implicit self: 4 (80.00%)
---- Construction of tables ---
-Number of runtime classes: 6 (excluding interfaces and abstract classes)
-Average number of composing class definition by runtime class: 2.00
-Total size of tables (classes and instances): 23 (not including stuff like info for subtyping or call-next-method)
-Average size of table by runtime class: 3.83
-Values never redefined: 17 (73.91%)
 --- Poset metrics ---
 ## Module importation hierarchy
 Number of nodes: 1
@@ -400,100 +331,169 @@ Distribution of direct smallers
  distribution:
   <=0: sub-population=6 (85.71%); cumulated value=0 (0.00%)
   <=8: sub-population=1 (14.28%); cumulated value=6 (100.00%)
---- AST Metrics ---
-## All nodes of the AST
- population: 50
- minimum value: 1
- maximum value: 40
- total value: 270
- average value: 5.40
- distribution:
-  <=1: sub-population=16 (32.00%); cumulated value=16 (5.92%)
-  <=2: sub-population=5 (10.00%); cumulated value=10 (3.70%)
-  <=4: sub-population=9 (18.00%); cumulated value=28 (10.37%)
-  <=8: sub-population=12 (24.00%); cumulated value=76 (28.14%)
-  <=16: sub-population=4 (8.00%); cumulated value=44 (16.29%)
-  <=32: sub-population=3 (6.00%); cumulated value=56 (20.74%)
-  <=64: sub-population=1 (2.00%); cumulated value=40 (14.81%)
- list:
-  TId: 40 (14.81%)
-  APublicVisibility: 19 (7.03%)
-  AListExprs: 19 (7.03%)
-  ACallExpr: 18 (6.66%)
-  TClassid: 15 (5.55%)
-  TNumber: 10 (3.70%)
-  ADecIntExpr: 10 (3.70%)
-  AType: 9 (3.33%)
-  TKwend: 8 (2.96%)
-  ASignature: 8 (2.96%)
-  ...
-  ASelfExpr: 1 (0.37%)
-  AAnnotations: 1 (0.37%)
-  ACallAssignExpr: 1 (0.37%)
-  TKwreturn: 1 (0.37%)
-  AInterfaceClasskind: 1 (0.37%)
-  TKwinterface: 1 (0.37%)
-  ANoImport: 1 (0.37%)
-  AMainMethPropdef: 1 (0.37%)
-  AMainClassdef: 1 (0.37%)
-  TKwimport: 1 (0.37%)
-## All identifiers of the AST
- population: 20
- minimum value: 1
- maximum value: 11
- total value: 55
- average value: 2.75
- distribution:
-  <=1: sub-population=3 (15.00%); cumulated value=3 (5.45%)
-  <=2: sub-population=12 (60.00%); cumulated value=24 (43.63%)
-  <=4: sub-population=3 (15.00%); cumulated value=10 (18.18%)
-  <=8: sub-population=1 (5.00%); cumulated value=7 (12.72%)
-  <=16: sub-population=1 (5.00%); cumulated value=11 (20.00%)
- list:
-  output: 11 (20.00%)
-  Int: 7 (12.72%)
-  run: 4 (7.27%)
-  c: 3 (5.45%)
-  val: 3 (5.45%)
-  i: 2 (3.63%)
-  bar: 2 (3.63%)
-  foo: 2 (3.63%)
-  val2: 2 (3.63%)
-  val1: 2 (3.63%)
-  C: 2 (3.63%)
-  v: 2 (3.63%)
-  baz: 2 (3.63%)
-  a: 2 (3.63%)
-  A: 2 (3.63%)
-  B: 2 (3.63%)
-  b: 2 (3.63%)
-  intern: 1 (1.81%)
-  Object: 1 (1.81%)
-  Bool: 1 (1.81%)
---- Detection of variance constraints on formal parameter types ---
--- Generic classes --
- list:
-  non generic: 7 (100.00%)
-  total classes: 7
-  total formal parameters: 0
--- Including `private` properties --
-  covariants: 0 (na%)
-  contravariants: 0 (na%)
-  bivariants: 0 (na%)
-  invariants: 0 (na%)
-  total: 0
--- Excluding `private` properties --
-  covariants: 0 (na%)
-  contravariants: 0 (na%)
-  bivariants: 0 (na%)
-  invariants: 0 (na%)
-  total: 0
-generating project_hierarchy.dot
+--- Metrics of refinement usage ---
+Number of modules: 1
+
+Number of classes: 7
+  Number of interface kind: 1 (14.28%)
+  Number of enum kind: 2 (28.57%)
+  Number of class kind: 4 (57.14%)
+
+Number of class definitions: 7
+Number of refined classes: 0 (0.00%)
+Average number of class refinments by classes: 0.00
+Average number of class refinments by refined classes: na
+
+Number of properties: 18
+  Number of MAttribute: 3 (16.66%)
+  Number of MMethod: 15 (83.33%)
+
+Number of property definitions: 20
+Number of redefined properties: 1 (5.55%)
+Average number of property redefinitions by property: 0.11
+Average number of property redefinitions by redefined property: 2.00
+--- Explicit vs. Implicit Self ---
+Total number of self: 5
+Total number of implicit self: 4 (80.00%)
+--- Construction of tables ---
+Number of runtime classes: 6 (excluding interfaces and abstract classes)
+Average number of composing class definition by runtime class: 2.00
+Total size of tables (classes and instances): 23 (not including stuff like info for subtyping or call-next-method)
+Average size of table by runtime class: 3.83
+Values never redefined: 17 (73.91%)
+generating package_hierarchy.dot
 generating module_hierarchy.dot
+
+# MClasses metrics
+
+ ## package base_simple3
+  `- group base_simple3
+	cnoa: number of ancestor classes
+	  avg: 0.0
+	  max: Bool (1)
+	  min: Object (0)
+	  std: 0.926
+	  sum: 6
+	cnop: number of parent classes
+	  avg: 0.0
+	  max: Bool (1)
+	  min: Object (0)
+	  std: 0.926
+	  sum: 6
+	cnoc: number of child classes
+	  avg: 0.0
+	  max: Object (6)
+	  min: Bool (0)
+	  std: 2.268
+	  sum: 6
+	cnod: number of descendant classes
+	  avg: 0.0
+	  max: Object (6)
+	  min: Bool (0)
+	  std: 2.268
+	  sum: 6
+	cdit: depth in class tree
+	  avg: 0.0
+	  max: Bool (1)
+	  min: Object (0)
+	  std: 0.926
+	  sum: 6
+	cnbp: number of accessible properties (inherited + local)
+	  avg: 3.0
+	  max: C (7)
+	  min: Object (1)
+	  std: 2.36
+	  sum: 24
+	cnba: number of accessible attributes (inherited + local)
+	  avg: 0.0
+	  max: C (2)
+	  min: Object (0)
+	  std: 0.845
+	  sum: 3
+	cnbip: number of introduced properties
+	  avg: 2.0
+	  max: C (6)
+	  min: Bool (0)
+	  std: 2.268
+	  sum: 18
+	cnbrp: number of redefined properties
+	  avg: 0.0
+	  max: A (1)
+	  min: Object (0)
+	  std: 0.535
+	  sum: 2
+	cnbhp: number of inherited properties
+	  avg: 0.0
+	  max: Bool (1)
+	  min: Object (0)
+	  std: 0.926
+	  sum: 6
+
+ ## global metrics
+	cnoa: number of ancestor classes
+	  avg: 0.0
+	  max: Bool (1)
+	  min: Object (0)
+	  std: 0.926
+	  sum: 6
+	cnop: number of parent classes
+	  avg: 0.0
+	  max: Bool (1)
+	  min: Object (0)
+	  std: 0.926
+	  sum: 6
+	cnoc: number of child classes
+	  avg: 0.0
+	  max: Object (6)
+	  min: Bool (0)
+	  std: 2.268
+	  sum: 6
+	cnod: number of descendant classes
+	  avg: 0.0
+	  max: Object (6)
+	  min: Bool (0)
+	  std: 2.268
+	  sum: 6
+	cdit: depth in class tree
+	  avg: 0.0
+	  max: Bool (1)
+	  min: Object (0)
+	  std: 0.926
+	  sum: 6
+	cnbp: number of accessible properties (inherited + local)
+	  avg: 3.0
+	  max: C (7)
+	  min: Object (1)
+	  std: 2.36
+	  sum: 24
+	cnba: number of accessible attributes (inherited + local)
+	  avg: 0.0
+	  max: C (2)
+	  min: Object (0)
+	  std: 0.845
+	  sum: 3
+	cnbip: number of introduced properties
+	  avg: 2.0
+	  max: C (6)
+	  min: Bool (0)
+	  std: 2.268
+	  sum: 18
+	cnbrp: number of redefined properties
+	  avg: 0.0
+	  max: A (1)
+	  min: Object (0)
+	  std: 0.535
+	  sum: 2
+	cnbhp: number of inherited properties
+	  avg: 0.0
+	  max: Bool (1)
+	  min: Object (0)
+	  std: 0.926
+	  sum: 6
 
 # Inheritance metrics
 
- ## project base_simple3
+ ## package base_simple3
   `- group base_simple3
 	cnoac: number of class_kind ancestor
 	  avg: 0.0
@@ -695,12 +695,13 @@ Statistics of type usage:
   A: 1 (11.11%)
 
 # Mendel metrics
-	large mclasses (threshold: 3.354)
+	large mclasses (threshold: 3.915)
+	   C: 5
+	   B: 4
 	   Sys: 4
-	budding mclasses (threshold: 3.51)
-	   Sys: 4.0
-	blooming mclasses (threshold: 12.0)
-	   Sys: 16.0
+	budding mclasses (threshold: 5.033)
+	blooming mclasses (threshold: 21.874)
+	   C: 25.0
 --- Detection of the usage of covariance static type conformance ---
 -- Total --
 - Kinds of the subtype -
@@ -750,7 +751,7 @@ Statistics of type usage:
 
 # Nullable metrics
 
- ## project base_simple3
+ ## package base_simple3
   `- group base_simple3
 	cnba: number of accessible attributes (inherited + local)
 	  avg: 0.0
@@ -772,7 +773,8 @@ Statistics of type usage:
 	  sum: 0
 --- Sends on Nullable Receiver ---
 Total number of sends: 19
-Number of sends on a nullable receiver: 0 (0.00%)
+Number of sends on a unsafe nullable receiver: 0 (0.00%)
+Number of sends on a safe nullable receiver: 0 (0.00%)
 Number of buggy sends (cannot determine the type of the receiver): 0 (0.00%)
 
 # RTA metrics
@@ -856,49 +858,49 @@ Number of buggy sends (cannot determine the type of the receiver): 0 (0.00%)
 	  sum: 0
 
  ## Callsites
-* 22 live callsites
+* 23 live callsites
 MMethodDef locally designated (by number of CallSites)
- population: 13
+ population: 14
  minimum value: 1
  maximum value: 10
- total value: 22
- average value: 1.69
+ total value: 23
+ average value: 1.64
  distribution:
-  <=1: sub-population=12 (92.30%); cumulated value=12 (54.54%)
-  <=16: sub-population=1 (7.69%); cumulated value=10 (45.45%)
+  <=1: sub-population=13 (92.85%); cumulated value=13 (56.52%)
+  <=16: sub-population=1 (7.14%); cumulated value=10 (43.47%)
  list:
-  base_simple3#Int#output: 10 (45.45%)
-  base_simple3#B#val: 1 (4.54%)
-  base_simple3#B#val=: 1 (4.54%)
-  base_simple3#C#val2: 1 (4.54%)
-  base_simple3#C#val1: 1 (4.54%)
+  base_simple3#Int#output: 10 (43.47%)
+  base_simple3#B#val: 1 (4.34%)
+  base_simple3#B#val=: 1 (4.34%)
+  base_simple3#Object#init: 1 (4.34%)
+  base_simple3#C#val2: 1 (4.34%)
   ...
-  base_simple3#A#init: 1 (4.54%)
-  base_simple3#Sys#baz: 1 (4.54%)
-  base_simple3#Sys#bar: 1 (4.54%)
-  base_simple3#Sys#foo: 1 (4.54%)
-  base_simple3#C#init: 1 (4.54%)
+  base_simple3#A#init: 1 (4.34%)
+  base_simple3#Sys#baz: 1 (4.34%)
+  base_simple3#Sys#bar: 1 (4.34%)
+  base_simple3#Sys#foo: 1 (4.34%)
+  base_simple3#C#init: 1 (4.34%)
 MMethodDef possibly invoked at runtime (by number of CallSites)
- population: 13
+ population: 14
  minimum value: 1
  maximum value: 10
- total value: 22
- average value: 1.69
+ total value: 23
+ average value: 1.64
  distribution:
-  <=1: sub-population=12 (92.30%); cumulated value=12 (54.54%)
-  <=16: sub-population=1 (7.69%); cumulated value=10 (45.45%)
+  <=1: sub-population=13 (92.85%); cumulated value=13 (56.52%)
+  <=16: sub-population=1 (7.14%); cumulated value=10 (43.47%)
  list:
-  base_simple3#Int#output: 10 (45.45%)
-  base_simple3#B#val: 1 (4.54%)
-  base_simple3#B#val=: 1 (4.54%)
-  base_simple3#C#val2: 1 (4.54%)
-  base_simple3#C#val1: 1 (4.54%)
+  base_simple3#Int#output: 10 (43.47%)
+  base_simple3#B#val: 1 (4.34%)
+  base_simple3#B#val=: 1 (4.34%)
+  base_simple3#Object#init: 1 (4.34%)
+  base_simple3#C#val2: 1 (4.34%)
   ...
-  base_simple3#A#init: 1 (4.54%)
-  base_simple3#Sys#baz: 1 (4.54%)
-  base_simple3#Sys#bar: 1 (4.54%)
-  base_simple3#Sys#foo: 1 (4.54%)
-  base_simple3#C#init: 1 (4.54%)
+  base_simple3#A#init: 1 (4.34%)
+  base_simple3#Sys#baz: 1 (4.34%)
+  base_simple3#Sys#bar: 1 (4.34%)
+  base_simple3#Sys#foo: 1 (4.34%)
+  base_simple3#C#init: 1 (4.34%)
 class_hierarchy.dot
 classdef_hierarchy.dot
 inheritance/
@@ -908,5 +910,5 @@ mmodules/
 model.html
 module_hierarchy.dot
 nullables/
-project_hierarchy.dot
+package_hierarchy.dot
 rta/

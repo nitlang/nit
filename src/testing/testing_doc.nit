@@ -15,12 +15,17 @@
 # Testing from code comments.
 module testing_doc
 
+private import parser_util
 import testing_base
-intrude import docdown
+import markdown
+import html
 
 # Extractor, Executor and Reporter for the tests in a module
 class NitUnitExecutor
-	super Doc2Mdwn
+	super HTMLDecorator
+
+	# Toolcontext used to parse Nit code blocks.
+	var toolcontext: ToolContext
 
 	# The prefix of the generated Nit source-file
 	var prefix: String
@@ -32,44 +37,16 @@ class NitUnitExecutor
 	var testsuite: HTMLTag
 
 	# All blocks of code from a same `ADoc`
-	var blocks = new Array[Array[String]]
+	var blocks = new Array[Buffer]
 
 	# All failures from a same `ADoc`
 	var failures = new Array[String]
 
-	redef fun process_code(n: HTMLTag, text: String, tag: nullable String)
-	do
-		# Skip non-blocks
-		if n.tag != "pre" then return
+	# Markdown processor used to parse markdown comments and extract code.
+	var mdproc = new MarkdownProcessor
 
-		# Skip strict non-nit
-		if tag != null and tag != "nit" and tag != "" then
-			return
-		end
-
-		# Try to parse it
-		var ast = toolcontext.parse_something(text)
-
-		# Skip pure comments
-		if ast isa TComment then return
-
-		# We want executable code
-		if not (ast isa AModule or ast isa ABlockExpr or ast isa AExpr) then
-			var message = ""
-			if ast isa AError then message = " At {ast.location}: {ast.message}."
-			toolcontext.warning(mdoc.location, "invalid-block", "Error: there is a block of invalid Nit code, thus not considered a nitunit. To suppress this warning, enclose the block with a fence tagged `nitish` or `raw` (see `man nitdoc`).{message}")
-			failures.add("{mdoc.location}: Invalid block of code.{message}")
-			return
-		end
-
-		# Create a first block
-		# Or create a new block for modules that are more than a main part
-		if blocks.is_empty or ast isa AModule then
-			blocks.add(new Array[String])
-		end
-
-		# Add it to the file
-		blocks.last.add(text)
+	init do
+		mdproc.emitter.decorator = new NitunitDecorator(self)
 	end
 
 	# The associated documentation object
@@ -89,7 +66,8 @@ class NitUnitExecutor
 
 		self.mdoc = mdoc
 
-		work(mdoc)
+		# Populate `blocks` from the markdown decorator
+		mdproc.process(mdoc.content.join("\n"))
 
 		toolcontext.check_errors
 
@@ -98,15 +76,15 @@ class NitUnitExecutor
 				var ne = new HTMLTag("failure")
 				ne.attr("message", msg)
 				tc.add ne
+				toolcontext.modelbuilder.unit_entities += 1
 				toolcontext.modelbuilder.failed_entities += 1
 			end
 			if blocks.is_empty then testsuite.add(tc)
 		end
 
 		if blocks.is_empty then return
-
 		for block in blocks do
-			docunits.add new DocUnit(mdoc, tc, block.join(""))
+			docunits.add new DocUnit(mdoc, tc, block.write_to_string)
 		end
 	end
 
@@ -306,6 +284,42 @@ class NitUnitExecutor
 	end
 end
 
+private class NitunitDecorator
+	super HTMLDecorator
+
+	var executor: NitUnitExecutor
+
+	redef fun add_code(v, block) do
+		var code = block.raw_content
+		var meta = block.meta or else "nit"
+		# Do not try to test non-nit code.
+		if meta != "nit" then return
+		# Try to parse code blocks
+		var ast = executor.toolcontext.parse_something(code)
+
+		# Skip pure comments
+		if ast isa TComment then return
+
+		# We want executable code
+		if not (ast isa AModule or ast isa ABlockExpr or ast isa AExpr) then
+			var message = ""
+			if ast isa AError then message = " At {ast.location}: {ast.message}."
+			executor.toolcontext.warning(executor.mdoc.location, "invalid-block", "Error: there is a block of invalid Nit code, thus not considered a nitunit. To suppress this warning, enclose the block with a fence tagged `nitish` or `raw` (see `man nitdoc`).{message}")
+			executor.failures.add("{executor.mdoc.location}: Invalid block of code.{message}")
+			return
+		end
+
+		# Create a first block
+		# Or create a new block for modules that are more than a main part
+		if executor.blocks.is_empty or ast isa AModule then
+			executor.blocks.add(new Buffer)
+		end
+
+		# Add it to the file
+		executor.blocks.last.append code
+	end
+end
+
 # A unit-test to run
 class DocUnit
 	# The doc that contains self
@@ -344,10 +358,10 @@ redef class ModelBuilder
 		# usualy, only the original module must be imported in the unit test.
 		var o = mmodule
 		var g = o.mgroup
-		if g != null and g.mproject.name == "standard" then
-			# except for a unit test in a module of standard
-			# in this case, the whole standard must be imported
-			o = get_mmodule_by_name(nmodule, g, g.mproject.name).as(not null)
+		if g != null and g.mpackage.name == "core" then
+			# except for a unit test in a module of `core`
+			# in this case, the whole `core` must be imported
+			o = get_mmodule_by_name(nmodule, g, g.mpackage.name).as(not null)
 		end
 
 		ts.attr("package", mmodule.full_name)

@@ -1,5 +1,5 @@
-#alt1 import standard::ropes
-#alt1 import standard
+#alt1 import core::text::ropes
+#alt1 import core
 
 var trimtest = "   \t nono nono   \n \t"
 

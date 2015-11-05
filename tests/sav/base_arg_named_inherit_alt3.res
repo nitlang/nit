@@ -1,0 +1,2 @@
+alt/base_arg_named_inherit_alt3.nit:29,3--5: Error: expected at least 5 argument(s) for `foo(a: nullable Int, b: nullable Int, c: Int, d: Int, e: nullable Int, f: nullable Int)`; got 4. See introduction at `base_arg_default::A::foo`.
+alt/base_arg_named_inherit_alt3.nit:34,3--5: Error: expected at least 5 argument(s) for `foo(x: nullable Int, y: nullable Int, z: Int, t: Int, u: nullable Int, v: nullable Int)`; got 4. See introduction at `base_arg_default::A::foo`.

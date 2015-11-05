@@ -115,8 +115,8 @@ redef class App
 
 	# Register `self` globally in C so it can be retrieved from iOS callbacks
 	private fun register_globally in "ObjC" `{
-		App_incr_ref(recv);
-		app_nit_ios_app = recv;
+		App_incr_ref(self);
+		app_nit_ios_app = self;
 	`}
 
 	# Entry point to the iOS framework

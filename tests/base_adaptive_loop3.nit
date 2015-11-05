@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import standard::kernel
+import core::kernel
 
 redef class Int
 	fun next: nullable Int do if self < 20 then return self + 1 else return null
@@ -27,4 +27,5 @@ while t2 != null do
 		t2 = t2.next #alt2# t2 = null
 	end
 	#alt3#t2 = t2.next
+	#alt3#exit(0)
 end

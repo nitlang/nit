@@ -33,7 +33,7 @@ extern class Test
         int i;
         for(i = 0; i < 2000; ++i) {
             printf("%d\n", i);
-            Test_foo(recv, NativeString_to_s("asdf"));
+            Test_foo(self, NativeString_to_s("asdf"));
         }
     `}
 

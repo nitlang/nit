@@ -14,7 +14,7 @@
 # limitations under the License.
 
 # Run some tests on each engine
-for x in nitg-g nitg-s nitg-sg nitg-e niti nitvm; do
+for x in nitcg nitcs nitcsg nitce niti nitvm; do
 	echo "--engine $x"
 	./tests.sh --engine $x "$@"
 done

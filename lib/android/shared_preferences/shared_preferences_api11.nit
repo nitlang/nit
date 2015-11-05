@@ -19,19 +19,19 @@ module shared_preferences_api11 is android_api_min 11
 
 import shared_preferences
 
-in "Java" `{ 
+in "Java" `{
 	import java.util.HashSet;
- 	import java.util.Set;
-	import android.content.Context; 
+	import java.util.Set;
+	import android.content.Context;
 `}
 
 redef extern class NativeSharedPreferences
-	
+
 	# Default value to null instead of Set<String>
-	fun get_string_set(key: JavaString): HashSet[JavaString] import HashSet[JavaString], 
-		HashSet[JavaString].add in "Java" `{ 
+	fun get_string_set(key: JavaString): HashSet[JavaString] import HashSet[JavaString],
+		HashSet[JavaString].add in "Java" `{
 		Set<String> def_value = new HashSet<String>();
-		Set<String> java_set = recv.getStringSet(key, def_value);
+		Set<String> java_set = self.getStringSet(key, def_value);
 		int nit_hashset = new_HashSet_of_JavaString();
 
 		for (String element: java_set)
@@ -41,23 +41,23 @@ redef extern class NativeSharedPreferences
 	`}
 end
 
-redef extern class NativeSharedPreferencesEditor 
-	
-	fun put_string_set(key: JavaString, value: HashSet[JavaString]): NativeSharedPreferencesEditor 
-		import HashSet[JavaString], HashSet[JavaString].iterator, Iterator[JavaString].is_ok, 
-		Iterator[JavaString].item, Iterator[JavaString].next in "Java" `{ 
+redef extern class NativeSharedPreferencesEditor
+
+	fun put_string_set(key: JavaString, value: HashSet[JavaString]): NativeSharedPreferencesEditor
+		import HashSet[JavaString], HashSet[JavaString].iterator, Iterator[JavaString].is_ok,
+		Iterator[JavaString].item, Iterator[JavaString].next in "Java" `{
 		Set<String> java_set = new HashSet<String>();
 		int itr = HashSet_of_JavaString_iterator(value);
-		
+
 		while (Iterator_of_JavaString_is_ok(itr)) {
 			java_set.add(Iterator_of_JavaString_item(itr));
 			Iterator_of_JavaString_next(itr);
 		}
 
-		return recv.putStringSet(key, java_set); 
+		return self.putStringSet(key, java_set);
 	`}
 end
-	
+
 redef class SharedPreferences
 
 	# Allows multiple processes to write into the same `SharedPreferences` file
@@ -78,8 +78,8 @@ redef class SharedPreferences
 	# # ...
 	# for element in a_hash_set do element.delete_local_ref
 	# ~~~
-	fun string_set(key: String): HashSet[JavaString] 
-	do 
+	fun string_set(key: String): HashSet[JavaString]
+	do
 		sys.jni_env.push_local_frame(3)
 		var return_value = shared_preferences.get_string_set(key.to_java_string)
 		sys.jni_env.pop_local_frame
@@ -97,7 +97,7 @@ redef class SharedPreferences
 	# for element in foo do element.delete_local_ref
 	# ~~~
 	fun add_string_set(key: String, value: HashSet[JavaString]): SharedPreferences
-	do 
+	do
 		editor.put_string_set(key.to_java_string, value)
 		return self
 	end

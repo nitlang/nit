@@ -14,21 +14,44 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import c
+
+class Bitarray
+
+	var narr: CByteArray
+
+	init do
+		for x in [0 .. narr.length[ do narr[x] = 0xFFu8
+	end
+
+	fun [](pos: Int): Bool do
+		pos -= 2
+		return (narr[pos / 8] & (1u8 << (7 - pos % 8))) != 0u8
+	end
+
+	fun []=(pos: Int, val: Bool) do
+		pos -= 2
+		if val then
+			narr[pos / 8] |= 1u8 << (7 - pos % 8)
+		else
+			narr[pos / 8] &= 0xFFu8 - (1u8 << (7 - pos % 8))
+		end
+	end
+end
+
 fun nsieve(n: Int): Int
 do
 	var count = 0
-	var array: Buffer = new FlatBuffer.with_capacity(n)
-	for i in [0..n[ do
-		array.chars[i] = 'o'
-	end
-	for i in [2..n[ do
-		if array.chars[i] == 'o' then
-			var j = i * 2
-			while j < n do
-				array.chars[j] = 'x'
-				j = j + i
-			end
-			count = count + 1
+	var b_arrsz = ((n - 1).to_f / 8.0).ceil.to_i
+	var bitarr = new Bitarray(new CByteArray(b_arrsz))
+	for i in [2 .. n[ do
+		# If self is already false, then no need to check for multiples
+		if not bitarr[i] then continue
+		count += 1
+		var j = i * i
+		while j < n do
+			bitarr[j] = false
+			j += i
 		end
 	end
 	return count
@@ -36,7 +59,7 @@ end
 
 fun test(n: Int)
 do
-	var m = 10000.lshift(n)
+	var m = 10000 << n
 	print("Primes up to {m} {nsieve(m)}")
 end
 

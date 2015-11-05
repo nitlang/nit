@@ -22,7 +22,7 @@ import ordered_tree
 import console
 
 class ProjTree
-	super OrderedTree[Object]
+	super OrderedTree[MConcern]
 
 	var opt_paths = false
 	var tc: ToolContext
@@ -47,23 +47,23 @@ class ProjTree
 					return "{o.name}{d} ({o.filepath.yellow})"
 				end
 			end
-		else if o isa ModulePath then
+		else if o isa MModule then
 			if opt_paths then
-				return o.filepath
+				return o.filepath.as(not null)
 			else
 				var d = ""
 				var dd = ""
-				if o.mmodule != null and o.mmodule.mdoc != null then
+				if o.mdoc != null then
 					if tc.opt_no_color.value then
-						d = ": {o.mmodule.mdoc.content.first}"
+						d = ": {o.mdoc.content.first}"
 					else
-						d = ": {o.mmodule.mdoc.content.first.green}"
+						d = ": {o.mdoc.content.first.green}"
 					end
 				end
-				if o.mmodule != null and not o.mmodule.in_importation.direct_greaters.is_empty then
+				if not o.in_importation.direct_greaters.is_empty then
 					var ms = new Array[String]
-					for m in o.mmodule.in_importation.direct_greaters do
-						if m.mgroup.mproject == o.mmodule.mgroup.mproject then
+					for m in o.in_importation.direct_greaters do
+						if m.mgroup.mpackage == o.mgroup.mpackage then
 							ms.add m.name
 						else
 							ms.add m.full_name
@@ -87,37 +87,19 @@ class ProjTree
 	end
 end
 
-class AlphaEntityComparator
-	super Comparator
-	fun nameof(a: COMPARED): String
-	do
-		if a isa MGroup then
-			return a.name
-		else if a isa ModulePath then
-			return a.name
-		else
-			abort
-		end
-	end
-	redef fun compare(a,b)
-	do
-		return nameof(a) <=> nameof(b)
-	end
-end
-
 var tc = new ToolContext
 
 var opt_keep = new OptionBool("Ignore errors and files that are not a Nit source file", "-k", "--keep")
-var opt_recursive = new OptionBool("Process directories recussively", "-r", "--recursive")
-var opt_tree = new OptionBool("List source files in their groups and projects", "-t", "--tree")
-var opt_source = new OptionBool("List source files", "-s", "--source")
-var opt_project = new OptionBool("List projects paths (default)", "-P", "--project")
+var opt_recursive = new OptionBool("Process directories recursively", "-r", "--recursive")
+var opt_tree = new OptionBool("List source files in their groups and packages", "-t", "--tree")
+var opt_source = new OptionBool("List source files in a flat list", "-s", "--source")
+var opt_package = new OptionBool("List packages in a flat list (default)", "-P", "--package")
 var opt_depends = new OptionBool("List dependencies of given modules", "-d", "--depends")
-var opt_make = new OptionBool("List dependencies suitable for a rule in a Makefile. Alias for -d, -p and -s", "-M")
-var opt_paths = new OptionBool("List only path (instead of name + path)", "-p", "--path")
+var opt_make = new OptionBool("List dependencies suitable for a rule in a Makefile (alias for -d, -p and -s)", "-M")
+var opt_paths = new OptionBool("List only path (instead of name + path)", "-p", "--path-only")
 
-tc.option_context.add_option(opt_keep, opt_recursive, opt_tree, opt_source, opt_project, opt_depends, opt_paths, opt_make)
-tc.tooldescription = "Usage: nitls [OPTION]... <file.nit|directory>...\nLists the projects and/or paths of Nit sources files."
+tc.option_context.add_option(opt_keep, opt_recursive, opt_tree, opt_source, opt_package, opt_depends, opt_paths, opt_make)
+tc.tooldescription = "Usage: nitls [OPTION]... <file.nit|directory>...\nLists the packages and/or paths of Nit sources files."
 tc.accept_no_arguments = true
 tc.process_options(args)
 
@@ -127,13 +109,13 @@ if opt_make.value then
 	opt_source.value = true
 end
 
-var sum = opt_tree.value.to_i + opt_source.value.to_i + opt_project.value.to_i
+var sum = opt_tree.value.to_i + opt_source.value.to_i + opt_package.value.to_i
 if sum > 1 then
-	print "Error: options --tree, --source, and --project are exclusive."
+	print "Error: options --tree, --source, and --package are exclusive."
 	print tc.tooldescription
 	exit 1
 end
-if sum == 0 then opt_project.value = true
+if sum == 0 then opt_package.value = true
 tc.keep_going = opt_keep.value
 
 var model = new Model
@@ -159,96 +141,77 @@ else
 end
 
 if sum == 0 then
-	# If one of the file is a group, default is `opt_tree` instead of `opt_project`
+	# If one of the file is a group, default is `opt_tree` instead of `opt_package`
 	for a in files do
-		var g = mb.get_mgroup(a)
+		var g = mb.identify_group(a)
 		if g != null then
 			opt_tree.value = true
-			opt_project.value = false
+			opt_package.value = false
 			break
 		end
 	end
 end
 
-# Identify all relevant files
-for a in files do
-	var g = mb.get_mgroup(a)
-	var mp = mb.identify_file(a)
-	if g != null and not opt_project.value then
-		mb.visit_group(g)
-	end
-	if g == null and mp == null then
-		# not a group not a module, then look at files in the directory
-		var fs = a.files
-		for f in fs do
-			g = mb.get_mgroup(a/f)
-			if g != null and not opt_project.value then
-				mb.visit_group(g)
-			end
-			mp = mb.identify_file(a/f)
-			#print "{a/f}: {mp or else "?"}"
-		end
-	end
-end
+var mmodules = mb.scan_full(files)
 
 # Load modules to get more informations
-for mp in mb.identified_files do
+for mmodule in mmodules do
 	if not opt_paths.value or opt_depends.value then
-		var mm = mb.load_module(mp.filepath)
-		if mm != null and opt_depends.value then
-			mb.build_module_importation(mm)
+		var ast = mmodule.parse(mb)
+		if ast != null and opt_depends.value then
+			mb.build_module_importation(ast)
 		end
 	end
 end
 #tc.check_errors
 
+if opt_depends.value then
+	# Extends the list of module with the loaded ones
+	mmodules = mb.parsed_modules.to_a
+end
 
 var ot = new ProjTree(tc)
-var sorter = new AlphaEntityComparator
 if opt_tree.value then
 	ot.opt_paths = opt_paths.value
-	for p in model.mprojects do
-		for g in p.mgroups do
-			var pa = g.parent
-			if g.is_interesting then
-				ot.add(pa, g)
-				pa = g
-			end
-			for mp in g.module_paths do
-				ot.add(pa, mp)
-			end
+	var mgroups = new HashSet[MGroup]
+	for mp in mmodules do
+		var pa = mp.mgroup
+		while pa != null and not pa.is_interesting do pa = pa.parent
+		ot.add(pa, mp)
+		if pa != null then mgroups.add pa
+	end
+	for g in mgroups do
+		var pa = g.parent
+		if g.is_interesting then
+			ot.add(pa, g)
 		end
 	end
-	ot.sort_with(sorter)
+	ot.sort_with(alpha_comparator)
 	ot.write_to(stdout)
 end
 
 if opt_source.value then
-	var list = new Array[ModulePath]
-	for p in model.mprojects do
-		for g in p.mgroups do
-			for mp in g.module_paths do
-				list.add mp
-			end
-		end
-	end
-	sorter.sort(list)
-	for mp in list do
+	alpha_comparator.sort(mmodules)
+	for mp in mmodules do
 		if opt_paths.value then
-			print mp.filepath
+			print mp.filepath.as(not null)
 		else
 			print "{mp.mgroup.full_name}/{ot.display(mp)}"
 		end
 	end
 end
 
-if opt_project.value then
-	var list = new Array[MGroup]
-	for p in model.mprojects do
-		list.add p.root.as(not null)
+if opt_package.value then
+	var mpackages = new Array[MPackage]
+	for m in mmodules do
+		var p = m.mgroup.mpackage
+		if mpackages.has(p) then continue
+		mpackages.add p
 	end
-	sorter.sort(list)
-	for g in list do
+
+	alpha_comparator.sort(mpackages)
+	for p in mpackages do
+		var g = p.root.as(not null)
 		var path = g.filepath.as(not null)
 		if opt_paths.value then
 			print path

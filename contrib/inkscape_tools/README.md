@@ -1,4 +1,4 @@
-# SVG to PNG and Nit
+# Tools to extract images from SVG files using Inkscape, either to create icons or game sprites
 
 This tool uses Inkscape to prepare assets for Nit applications from a single SVG file.
 It selects objects to extract from the SVG file when their id begins with `0`.
@@ -25,7 +25,3 @@ It will produce two files:
 The minimal test in `tests/app/` shows the basic usage of this tool.
 
 The Dino example `../../../../examples/mnit_dino` also uses this tool and is a more complete and practical example.
-
-# Authors
-
-Alexis Laferrière <alexis.laf@xymus.net>

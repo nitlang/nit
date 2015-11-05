@@ -20,7 +20,7 @@
 module sqlite3
 
 private import native_sqlite3
-import standard
+import core
 
 # A connection to a Sqlite3 database
 class Sqlite3DB
@@ -35,7 +35,7 @@ class Sqlite3DB
 	# Open a connection to the database file at `path`
 	init open(path: Text)
 	do
-		native_connection = new NativeSqlite3.open(path.to_s)
+		init(new NativeSqlite3.open(path.to_s))
 		if native_connection.is_valid then is_open = true
 	end
 
@@ -257,7 +257,7 @@ class StatementIterator
 
 	redef var item: StatementRow is noinit
 
-	redef var is_ok: Bool is noinit
+	redef var is_ok is noinit
 
 	# require: `self.statement.is_open`
 	redef fun next

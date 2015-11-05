@@ -26,14 +26,6 @@ source ./bench_plot.sh
 # Can be overrided with 'the option -n'
 count=2
 
-### HELPER FUNCTIONS ##
-
-function die()
-{
-	echo >&2 "error: $*"
-	died=1
-}
-
 # HELPER FOR NIT #
 
 # Run standards benchs on a compiler command
@@ -81,7 +73,7 @@ function run_compiler()
 		bench_command "nitmd" "markdown" "./nitmd.$title.bin" markdown/benches/out/mixed.md 80
 	fi
 
-	rm -r *.bin .nit_compile out 2> /dev/null
+	rm -r *.bin out 2> /dev/null
 }
 
 ## HANDLE OPTIONS ##
@@ -93,7 +85,6 @@ function usage()
 	echo "  -n count: number of execution for each bar (default: $count)"
 	echo "  --dry: Do not run the commands, just reuse the data and generate the graph"
 	echo "  --fast: Run less and faster tests"
-	echo "  --html: Generate and HTML output"
 	echo "  -h: this help"
 }
 
@@ -105,10 +96,13 @@ while [ "$stop" = false ]; do
 		-n) count="$2"; shift; shift;;
 		--dry) dry_run=true; shift;;
 		--fast) fast=true$fast; shift;;
-		--html) html="index.html"; echo >"$html" "<html><head></head><body>"; shift;;
+		--html) shift;; # Deprecated
 		*) stop=true
 	esac
 done
+
+html="index.html"
+echo >"$html" "<html><head></head><body>"
 
 xml="bench_engines.xml"
 echo "<testsuites><testsuite>" > "$xml"
@@ -195,12 +189,12 @@ function bench_nitc_options()
 
 	for opt in "$@"; do
 		ot=${opt// /}
-		prepare_res "$name$ot.dat" "$opt" "nitc-g with option $opt"
+		prepare_res "$name$ot.dat" "$opt" "nitc with option $opt"
 		run_compiler "nitc-$name" ./nitc $common $opt
 	done
 
 	if test -n "$2" -a -n "$withall"; then
-		prepare_res "$name-all.dat" "all" "nitc-g with all options $@"
+		prepare_res "$name-all.dat" "all" "nitc with all options $@"
 		run_compiler "nitc-$name" ./nitc $common $@
 	fi
 
@@ -210,19 +204,21 @@ function bench_nitc_options()
 bench_nitc_options "slower" --global --hardening --no-shortcut-range
 bench_nitc_options "nocheck" --global --no-check-null --no-check-autocast --no-check-attr-isset --no-check-covariance --no-check-assert
 
-bench_nitc_options "slower" --separate --hardening --no-shortcut-equal --no-union-attribute --no-shortcut-range --no-inline-intern "--no-gcc-directive likely --no-gcc-directive noreturn" "--no-tag-primitives"
+bench_nitc_options "slower" --separate --hardening --no-shortcut-equal --no-union-attribute --no-shortcut-range --no-inline-intern "--no-gcc-directive likely --no-gcc-directive noreturn" "--no-tag-primitives" "--colo-dead-methods" --type-poset
 bench_nitc_options "nocheck" --separate --no-check-null --no-check-autocast --no-check-attr-isset --no-check-covariance --no-check-assert
 bench_nitc_options "faster" --separate --skip-dead-methods --inline-coloring-numbers --inline-some-methods --direct-call-monomorph "--inline-some-methods --direct-call-monomorph"
 
 bench_nitc_options "slower" --erasure --hardening --no-shortcut-equal --no-union-attribute --no-shortcut-range --no-inline-intern
-bench_nitc_options "nocheck" --erasure --no-check-null --no-check-autocast --no-check-attr-isset --no-check-covariance --no-check-assert --no-check-erasure-cast
+bench_nitc_options "nocheck" --erasure --no-check-null --no-check-autocast --no-check-attr-isset --no-check-covariance --no-check-assert --no-check-erasure-cast --no-check-all
 bench_nitc_options "faster" --erasure --skip-dead-methods --inline-coloring-numbers --inline-some-methods --direct-call-monomorph --rta
 
 bench_nitc_options "engine" "" NOALL "--separate" "--erasure" "--separate --semi-global" "--erasure --semi-global" "--erasure --semi-global --rta" "--global"
 bench_nitc_options "policy" "" NOALL "--separate" "--erasure" "--separate --no-check-covariance" "--erasure --no-check-covariance --no-check-erasure-cast"
 bench_nitc_options "nullables" "" "--no-check-attr-isset" "--no-union-attribute"
-bench_nitc_options "linkboost" "" NOALL --trampoline-call --colors-are-symbols "--colors-are-symbols --trampoline-call" "--separate --link-boost" "--separate --colors-are-symbols --guard-call" "--separate --colors-are-symbols --direct-call-monomorph0"
+bench_nitc_options "linkboost" "" NOALL --trampoline-call --colors-are-symbols "--colors-are-symbols --trampoline-call" "--separate --link-boost" "--separate --colors-are-symbols --guard-call" "--separate --colors-are-symbols --direct-call-monomorph0" "--substitute-monomorph"
 bench_nitc_options "monomorph" "" --direct-call-monomorph0 --direct-call-monomorph
+
+bench_nitc_options "misc" "" --log --typing-test-metrics --invocation-metrics --isset-checks-metrics --tables-metrics --no-stacktrace --release --debug #FIXME add --sloppy
 
 function bench_nitc-e_gc()
 {
@@ -272,9 +268,7 @@ function bench_compilation_time
 }
 bench_compilation_time
 
-if test -n "$html"; then
-	echo >>"$html" "</body></html>"
-fi
+echo >>"$html" "</body></html>"
 
 echo >>"$xml" "</testsuite></testsuites>"
 

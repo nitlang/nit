@@ -5,7 +5,7 @@ set -x
 make -C ../c_src
 
 # Compile nitc
-time ../c_src/nitg nitc.nit
+time ../c_src/nitc nitc.nit
 
 # delete old c_src
 rm -rf ../c_src

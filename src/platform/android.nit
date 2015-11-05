@@ -52,7 +52,7 @@ class AndroidToolchain
 
 	redef fun compile_dir
 	do
-		var android_project_root = "{super}/android/"
+		var android_project_root = "{root_compile_dir}/android/"
 		self.android_project_root = android_project_root
 		return "{android_project_root}/jni/nit_compile/"
 	end
@@ -109,7 +109,7 @@ class AndroidToolchain
 
 		# Gather extra C files generated elsewhere than in super
 		for f in compiler.extern_bodies do
-			if f isa ExternCFile then cfiles.add(f.filename.basename(""))
+			if f isa ExternCFile then cfiles.add(f.filename.basename)
 		end
 
 		# Is there an icon?
@@ -134,7 +134,7 @@ class AndroidToolchain
 			var extra_java_files = mmodule.extra_java_files
 			if extra_java_files != null then for file in extra_java_files do
 				var path = file.filename
-				path.file_copy_to(dir/path.basename(""))
+				path.file_copy_to(dir/path.basename)
 			end
 		end
 
@@ -255,18 +255,24 @@ $(call import-module,android/native_app_glue)
 		end
 
 		toolcontext.exec_and_check(["ln", "-s", "{share_dir}/libgc/arm/include/gc/",
-			"{android_project_root}/jni/nit_compile/gc"], "Android project error")
+			"{compile_dir}/gc"], "Android project error")
 
-		### Link to assets (for mnit and others)
-		# This will be accessed from `android_project_root`
-		var assets_dir
-		if compiler.mainmodule.location.file != null then
-			# it is a real file, use "{file}/../assets"
-			assets_dir = "{compiler.mainmodule.location.file.filename.dirname}/../assets"
-		else
-			# probably used -m, use "."
-			assets_dir = "assets"
+		# Copy assets, resources and libs where expected by the SDK
+
+		var project_root = "."
+		var mpackage = compiler.mainmodule.first_real_mmodule.mpackage
+		if mpackage != null then
+			var root = mpackage.root
+			if root != null then
+				var filepath = root.filepath
+				if filepath != null then
+					project_root = filepath
+				end
+			end
 		end
+
+		# Link to assets (for mnit and others)
+		var assets_dir = project_root / "assets"
 		if assets_dir.file_exists then
 			assets_dir = assets_dir.realpath
 			var target_assets_dir = "{android_project_root}/assets"
@@ -275,20 +281,10 @@ $(call import-module,android/native_app_glue)
 			end
 		end
 
-		### Copy resources and libs where expected by the SDK
-		var project_root
-		if compiler.mainmodule.location.file != null then
-			# it is a real file, use "{file}/../res"
-			project_root = "{compiler.mainmodule.location.file.filename.dirname}/.."
-		else
-			# probably used -m, use "."
-			project_root = "."
-		end
-
-		# Android resources folder
+		# Copy the res folder
 		var res_dir = project_root / "res"
 		if res_dir.file_exists then
-			# copy the res folder to .nit_compile
+			# copy the res folder to the compile dir
 			res_dir = res_dir.realpath
 			toolcontext.exec_and_check(["cp", "-R", res_dir, android_project_root], "Android project error")
 		end
@@ -301,7 +297,7 @@ $(call import-module,android/native_app_glue)
 </resources>""".write_to_file "{android_project_root}/res/values/strings.xml"
 		end
 
-		# Android libs folder
+		# Copy the libs folder
 		var libs_dir = project_root / "libs"
 		if libs_dir.file_exists then
 			toolcontext.exec_and_check(["cp", "-r", libs_dir, android_project_root], "Android project error")
@@ -341,11 +337,16 @@ $(call import-module,android/native_app_glue)
 			var tsa_server= "TSA_SERVER".environ
 
 			if key_alias.is_empty then
-				toolcontext.error(null,
-					"Error: the environment variable `KEY_ALIAS` must be set to use the `--release` option on Android projects.")
+				toolcontext.warning(null, "key-alias",
+					"Warning: the environment variable `KEY_ALIAS` is not set, the APK file will not be signed.")
+
+				# Just move the unsigned APK to outname
+				args = ["mv", apk_path, outname]
+				toolcontext.exec_and_check(args, "Android project error")
 				return
 			end
 
+			# We have a key_alias, try to sign the APK
 			args = ["jarsigner", "-sigalg", "MD5withRSA", "-digestalg", "SHA1", apk_path, key_alias]
 
 			## Use a custom keystore

@@ -31,7 +31,7 @@ redef class App
 	var cavemen_incr = 4
 
 	var game : nullable Game = null
-	var score = new Container[Int](0)
+	var score = new Ref[Int](0)
 	var imgs : nullable ImageSet = null
 	var splash : nullable SplashScreen = null
 
@@ -81,7 +81,7 @@ redef class App
 				if game.won then
 					next_nbr_caveman += cavemen_incr
 				else
-					score = new Container[Int](0)
+					score = new Ref[Int](0)
 					next_nbr_caveman = cavemen_at_first_level
 				end
 				game = new Game( next_nbr_caveman, score )
