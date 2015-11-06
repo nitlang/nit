@@ -42,7 +42,7 @@ redef class Char
 	end
 end
 
-redef class String
+redef class Text
 	# Performs a Rotation of `x` on each letter of self
 	#
 	# Works by replacing every character in `self` by its
@@ -65,7 +65,7 @@ redef class String
 	#
 	# NOTE : Works on letters only
 	# NOTE : This cipher is symmetrically decrypted with an `x` of 26-`x`
-	fun rot(x: Int): String do
+	fun rot(x: Int): Text do
 		var rot = x % 26
 		if rot < 0 then rot += 26
 		var d = new FlatBuffer.with_capacity(length)
@@ -93,7 +93,7 @@ redef class String
 	# Therefore, yielding the ciphertext : "fgounbmtcieehkh"
 	#
 	#     assert "fuckingbehemoth".railfence(4) == "fgounbmtcieehkh"
-	fun railfence(depth: Int): String do
+	fun railfence(depth: Int): Text do
 		var lines = new Array[FlatBuffer].with_capacity(depth)
 		var up = false
 		for i in [0..depth[ do
@@ -127,10 +127,10 @@ redef class String
 		return r.to_s
 	end
 
-	# Transforms a rail-fence-encrypted String to its original
+	# Transforms a rail-fence-encrypted Text to its original
 	#
 	#     assert "fgounbmtcieehkh".unrail(4) == "fuckingbehemoth"
-	fun unrail(depth: Int): String do
+	fun unrail(depth: Int): Text do
 		var dots = "." * length
 		var arr = new FlatBuffer.from(dots)
 		var start = 0
@@ -153,6 +153,33 @@ redef class String
 			end
 		end
 		return arr.to_s
+	end
+
+	# Returns `self` xored with `key`
+	#
+	# The shortest of the two is cycled through until the longest has been
+	# completely xored.
+	#
+	#     assert "goodmorning".xor(" ".to_bytes) == "GOODMORNING"
+	fun xor(key: SequenceRead[Byte]): Text do
+		var xored = new Bytes.with_capacity(bytelen.max(key.length))
+
+		var shortest: SequenceRead[Byte]
+		var longest: SequenceRead[Byte]
+
+		if key.length > self.length then
+			shortest = self.to_bytes
+			longest = key
+		else
+			shortest = key
+			longest = self.to_bytes
+		end
+
+		for i in longest.length.times do
+			xored.add(longest[i] ^ shortest[i % shortest.length])
+		end
+
+		return xored.to_s
 	end
 end
 
@@ -188,7 +215,7 @@ redef class Int
 	#
 	# In the end, our string is read using the generated array
 	#
-	# SEE: `String::unrail` for how the array is used
+	# SEE: `Text::unrail` for how the array is used
 	private fun unrail_paces: Array[Couple[Int, Int]] do
 		var ret = new Array[Couple[Int,Int]].with_capacity(self)
 		var extremes = new Couple[Int, Int]((self - 1) * 2, (self - 1) * 2)
