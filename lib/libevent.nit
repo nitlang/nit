@@ -224,6 +224,12 @@ extern class NativeBufferEvent `{ struct bufferevent * `}
 
 	# The input buffer associated to `self`
 	fun input_buffer: InputNativeEvBuffer `{ return bufferevent_get_input(self); `}
+
+	# Read data from this buffer
+	fun read_buffer(buf: NativeEvBuffer): Int `{ return bufferevent_read_buffer(self, buf); `}
+
+	# Write data to this buffer
+	fun write_buffer(buf: NativeEvBuffer): Int `{ return bufferevent_write_buffer(self, buf); `}
 end
 
 # A single buffer
