@@ -15,4 +15,5 @@
 # limitations under the License.
 
 if 5 then
+	1.output
 end

@@ -15,4 +15,5 @@
 # limitations under the License.
 
 for i in 5 do
+	i.output
 end

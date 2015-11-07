@@ -17,3 +17,5 @@
 fun toto: Int
 do
 end
+
+toto.output

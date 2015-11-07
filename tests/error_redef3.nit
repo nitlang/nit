@@ -15,3 +15,5 @@
 class A end
 class A end
 
+var a = new A
+a.output

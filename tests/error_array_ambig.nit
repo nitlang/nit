@@ -15,3 +15,4 @@
 # limitations under the License.
 
 var i = [4, '4']
+i.first.output

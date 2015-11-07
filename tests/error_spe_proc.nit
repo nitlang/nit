@@ -20,5 +20,8 @@ end
 
 class B
 	super A
-redef fun toto: Int do return 2end
+redef fun toto: Int do return 2 end
 end
+
+var b = new B
+b.toto.output

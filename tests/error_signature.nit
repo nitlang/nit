@@ -27,3 +27,12 @@ class C
 	super A
 	redef fun foo: Int do return 3
 end
+
+var a = new A
+a.foo.output
+
+var b = new B
+b.foo
+
+var c = new C
+c.foo

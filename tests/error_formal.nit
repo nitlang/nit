@@ -17,3 +17,6 @@
 class A[T]
 	var k: T[Int]
 end
+
+var a = new A[Object]
+a.output

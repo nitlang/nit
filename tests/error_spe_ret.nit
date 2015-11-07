@@ -22,3 +22,6 @@ class B
 	super A
 redef fun toto: Char do return 'a' end
 end
+
+var b = new B
+b.toto.output

@@ -117,6 +117,7 @@ private class TypeVisitor
 			#node.debug("Unsafe typing: expected {sup}, got {sub}")
 			return sup
 		end
+		if sup isa MBottomType then return null # Skip error
 		if sub.need_anchor then
 			var u = anchor_to(sub)
 			self.modelbuilder.error(node, "Type Error: expected `{sup}`, got `{sub}: {u}`.")
@@ -1134,6 +1135,7 @@ redef class AForExpr
 			var mtype = v.visit_expr(g.n_expr)
 			if mtype == null then return
 			g.do_type_iterator(v, mtype)
+			if g.is_broken then is_broken = true
 		end
 
 		v.visit_stmt(n_block)

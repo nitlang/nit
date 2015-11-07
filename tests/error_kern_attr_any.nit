@@ -17,3 +17,5 @@
 redef class Object
 	var toto: Bool
 end
+
+toto.output

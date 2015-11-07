@@ -21,3 +21,6 @@ class A
 		super
 	end
 end
+
+var a = new A
+a.foo

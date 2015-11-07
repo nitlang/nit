@@ -33,3 +33,13 @@ class G
 	fun md: Array[Fail] do return 0
 end
 
+var e = new E
+e.output
+var f = new F
+f.output
+var g = new G
+g.a.output
+g.ma(1)
+g.mb(1)
+g.mc(1).output
+g.md(1).output

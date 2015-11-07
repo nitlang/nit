@@ -18,3 +18,6 @@ class A
 	super Array[Int]
 	super Array[Char]
 end
+
+var a = new A
+a.output

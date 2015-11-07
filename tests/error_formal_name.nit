@@ -17,3 +17,5 @@ import kernel
 class G[Foo]
 	type Bar: Object
 end
+
+var g = new G[Object]

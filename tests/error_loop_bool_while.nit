@@ -15,4 +15,5 @@
 # limitations under the License.
 
 while 5 do
+	1.output
 end
