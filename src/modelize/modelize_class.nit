@@ -301,7 +301,6 @@ redef class ModelBuilder
 	# REQUIRE: classes of imported modules are already build. (let `phase` do the job)
 	private fun build_classes(nmodule: AModule)
 	do
-		var errcount = toolcontext.error_count
 		# Force building recursively
 		if nmodule.build_classes_is_done then return
 		nmodule.build_classes_is_done = true
@@ -311,8 +310,6 @@ redef class ModelBuilder
 			var nimp = mmodule2node(imp)
 			if nimp != null then build_classes(nimp)
 		end
-
-		if errcount != toolcontext.error_count then return
 
 		# Create all classes
 		# process AStdClassdef before so that non-AStdClassdef classes can be attached to existing ones, if any
@@ -325,8 +322,6 @@ redef class ModelBuilder
 			self.build_a_mclass(nmodule, nclassdef)
 		end
 
-		if errcount != toolcontext.error_count then return
-
 		# Create all classdefs
 		for nclassdef in nmodule.n_classdefs do
 			if not nclassdef isa AStdClassdef then continue
@@ -337,28 +332,20 @@ redef class ModelBuilder
 			self.build_a_mclassdef(nmodule, nclassdef)
 		end
 
-		if errcount != toolcontext.error_count then return
-
 		# Create inheritance on all classdefs
 		for nclassdef in nmodule.n_classdefs do
 			self.collect_a_mclassdef_inheritance(nmodule, nclassdef)
 		end
-
-		if errcount != toolcontext.error_count then return
 
 		# Create the mclassdef hierarchy
 		for mclassdef in mmodule.mclassdefs do
 			mclassdef.add_in_hierarchy
 		end
 
-		if errcount != toolcontext.error_count then return
-
 		# Check inheritance
 		for nclassdef in nmodule.n_classdefs do
 			self.check_supertypes(nmodule, nclassdef)
 		end
-
-		if errcount != toolcontext.error_count then return
 
 		# Check unchecked ntypes
 		for nclassdef in nmodule.n_classdefs do
@@ -383,8 +370,6 @@ redef class ModelBuilder
 			end
 		end
 
-		if errcount != toolcontext.error_count then return
-
 		# Check clash of ancestors
 		for nclassdef in nmodule.n_classdefs do
 			var mclassdef = nclassdef.mclassdef
@@ -405,13 +390,11 @@ redef class ModelBuilder
 			end
 		end
 
-		if errcount != toolcontext.error_count then return
-
 		# TODO: Check that the super-class is not intrusive
 
 		# Check that the superclasses are not already known (by transitivity)
 		for nclassdef in nmodule.n_classdefs do
-			if not nclassdef isa AStdClassdef then continue
+			if not nclassdef isa AStdClassdef or nclassdef.is_broken then continue
 			var mclassdef = nclassdef.mclassdef
 			if mclassdef == null then continue
 
