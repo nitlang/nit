@@ -117,6 +117,7 @@ private class TypeVisitor
 			#node.debug("Unsafe typing: expected {sup}, got {sub}")
 			return sup
 		end
+		if sup isa MBottomType then return null # Skip error
 		if sub.need_anchor then
 			var u = anchor_to(sub)
 			self.modelbuilder.error(node, "Type Error: expected `{sup}`, got `{sub}: {u}`.")
