@@ -447,6 +447,12 @@ class Catalog
 		end
 
 		var contributors = mpackage.contributors
+		var more_contributors = mpackage.metadata("package.more_contributors")
+		if more_contributors != null then
+			for c in more_contributors.split(",") do
+				contributors.add c.trim
+			end
+		end
 		if not contributors.is_empty then
 			res.add "<h3>Contributors</h3>\n<ul class=\"box\">"
 			for c in contributors do
