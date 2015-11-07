@@ -878,18 +878,15 @@ class FlatBuffer
 		assert count >= 0
 		if from < 0 then from = 0
 		if (from + count) > length then count = length - from
-		if count != 0 then
-			var its = _items
-			var bytefrom = its.char_to_byte_index(from)
-			var byteto = its.char_to_byte_index(count + from - 1)
-			byteto += its.char_at(byteto).u8char_len - 1
-			var byte_length = byteto - bytefrom + 1
-			var r_items = new NativeString(byte_length)
-			its.copy_to(r_items, byte_length, bytefrom, 0)
-			return new FlatBuffer.with_infos(r_items, byte_length, byte_length, count)
-		else
-			return new Buffer
-		end
+		if count <= 0 then return new Buffer
+		var its = _items
+		var bytefrom = its.char_to_byte_index(from)
+		var byteto = its.char_to_byte_index(count + from - 1)
+		byteto += its.char_at(byteto).u8char_len - 1
+		var byte_length = byteto - bytefrom + 1
+		var r_items = new NativeString(byte_length)
+		its.copy_to(r_items, byte_length, bytefrom, 0)
+		return new FlatBuffer.with_infos(r_items, byte_length, byte_length, count)
 	end
 
 	redef fun reverse
