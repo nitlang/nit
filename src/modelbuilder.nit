@@ -100,7 +100,7 @@ redef class ModelBuilder
 
 		if toolcontext.opt_only_metamodel.value then
 			self.toolcontext.info("*** ONLY METAMODEL", 1)
-			exit(0)
+			toolcontext.quit
 		end
 	end
 

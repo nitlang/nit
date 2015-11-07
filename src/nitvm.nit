@@ -45,7 +45,7 @@ var mmodules = modelbuilder.parse([progname])
 mmodules.add_all modelbuilder.parse(opt_mixins.value)
 modelbuilder.run_phases
 
-if toolcontext.opt_only_metamodel.value then exit(0)
+if toolcontext.opt_only_metamodel.value then toolcontext.quit
 
 var mainmodule: nullable MModule
 

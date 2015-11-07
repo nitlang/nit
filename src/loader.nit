@@ -104,7 +104,7 @@ redef class ModelBuilder
 
 		if toolcontext.opt_only_parse.value then
 			self.toolcontext.info("*** ONLY PARSE...", 1)
-			exit(0)
+			self.toolcontext.quit
 		end
 
 		return mmodules.to_a
@@ -199,7 +199,7 @@ redef class ModelBuilder
 
 		if toolcontext.opt_only_parse.value then
 			self.toolcontext.info("*** ONLY PARSE...", 1)
-			exit(0)
+			self.toolcontext.quit
 		end
 
 		return mmodules.to_a

@@ -3894,11 +3894,7 @@ end
 # Here we load an process all modules passed on the command line
 var mmodules = modelbuilder.parse(arguments)
 
-if mmodules.is_empty then
-	toolcontext.check_errors
-	toolcontext.errors_info
-	if toolcontext.error_count > 0 then exit(1) else exit(0)
-end
+if mmodules.is_empty then toolcontext.quit
 
 modelbuilder.run_phases
 
