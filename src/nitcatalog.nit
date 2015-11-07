@@ -83,6 +83,9 @@ end
 class CatalogPage
 	super Template
 
+	# The associated catalog, used to groups options and other global data
+	var catalog: Catalog
+
 	# Placeholder to include additional things before the `</head>`.
 	var more_head = new Template
 
@@ -191,6 +194,12 @@ class Catalog
 	# The score is loosely computed using other metrics
 	var score = new Counter[MPackage]
 
+	# Return a empty `CatalogPage`.
+	fun new_page(rootpath: String): CatalogPage
+	do
+		return new CatalogPage(self, rootpath)
+	end
+
 	# Scan, register and add a contributor to a package
 	fun add_contrib(person: String, mpackage: MPackage, res: Template)
 	do
@@ -273,7 +282,7 @@ class Catalog
 	# Compute information and generate a full HTML page for a package
 	fun package_page(mpackage: MPackage): Writable
 	do
-		var res = new CatalogPage("..")
+		var res = new_page("..")
 		var score = score[mpackage].to_f
 		var name = mpackage.name.html_escape
 		res.more_head.add """<title>{{{name}}}</title>"""
@@ -830,7 +839,7 @@ end
 
 # INDEX
 
-var index = new CatalogPage("")
+var index = catalog.new_page("")
 index.more_head.add "<title>Packages in Nit</title>"
 
 index.add """
@@ -877,7 +886,7 @@ index.write_to_file(out/"index.html")
 
 # PEOPLE
 
-var page = new CatalogPage("")
+var page = catalog.new_page("")
 page.more_head.add "<title>People of Nit</title>"
 page.add """<div class="content">\n<h1>People of Nit</h1>\n"""
 page.add "<h2>By Maintainer</h2>\n"
@@ -889,7 +898,7 @@ page.write_to_file(out/"people.html")
 
 # TABLE
 
-page = new CatalogPage("")
+page = catalog.new_page("")
 page.more_head.add "<title>Projets of Nit</title>"
 page.add """<div class="content">\n<h1>People of Nit</h1>\n"""
 page.add "<h2>Table of Projets</h2>\n"
