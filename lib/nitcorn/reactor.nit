@@ -79,7 +79,10 @@ class HttpServer
 				if root != null then
 					turi = ("/" + request.uri.substring_from(root.length)).simplify_path
 				else turi = request.uri
-				response = handler.answer(request, turi)
+
+				# Delegate the responsibility to respond to the `Action`
+				handler.prepare_respond_and_close(request, turi, self)
+				return
 			else response = new HttpResponse(405)
 		else response = new HttpResponse(405)
 
@@ -96,14 +99,27 @@ class HttpServer
 end
 
 redef abstract class Action
-	# Handle a request with the relative URI `truncated_uri`
+	# Prepare a `HttpResponse` destined to the client in response to the `request`
 	#
-	# `request` is fully formed request object and has a reference to the session
-	# if one preexists.
+	# `request` is fully formed request object with a reference to the session
+	# if one already exists.
 	#
 	# `truncated_uri` is the ending of the full request URI, truncated from the route
 	# leading to this `Action`.
 	fun answer(request: HttpRequest, truncated_uri: String): HttpResponse is abstract
+
+	# Full  to a `request` with sending the response and closing of the `http_server`
+	#
+	# Must users only need to implement `answer`, this method is for advanced use only.
+	# It can be used to delay an answer until an event is raised or work is done on a different thread.
+	#
+	# By default this method calls `answer`, relays the response to `http_server.respond` and closes `http_server`.
+	protected fun prepare_respond_and_close(request: HttpRequest, truncated_uri: String, http_server: HttpServer)
+	do
+		var response = answer(request, truncated_uri)
+		http_server.respond response
+		http_server.close
+	end
 end
 
 # Factory to create `HttpServer` instances, and hold the libevent base handler
@@ -115,7 +131,7 @@ class HttpFactory
 	# It should be populated after this object has instanciated
 	var config = new ServerConfig.with_factory(self)
 
-	# Instanciate a server and libvent
+	# Instantiate a server and libvent
 	#
 	# You can use this to create the first `HttpFactory`, which is the most common.
 	init and_libevent do init(new NativeEventBase)
