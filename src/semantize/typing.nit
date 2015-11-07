@@ -1134,6 +1134,7 @@ redef class AForExpr
 			var mtype = v.visit_expr(g.n_expr)
 			if mtype == null then return
 			g.do_type_iterator(v, mtype)
+			if g.is_broken then is_broken = true
 		end
 
 		v.visit_stmt(n_block)
