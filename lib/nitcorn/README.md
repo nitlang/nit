@@ -2,7 +2,7 @@ The nitcorn Web server framework creates server-side Web apps in Nit
 
 # Examples
 
-Want to see `nitcorn` in action? Examples are available at ../../examples/nitcorn/src/.
+Want to see `nitcorn` in action? Examples are available at `examples/nitcorn/src/`.
 
 # Features and TODO list
 
@@ -29,7 +29,3 @@ Jean-Philippe Caissy, Guillaume Auger, Frederic Sevillano, Justin Michaud-Ouelle
 Stephan Michaud and Maxime Bélanger.
 
 It has been adapted to a library, and is currently maintained, by Alexis Laferrière.
-
-Other contributors:
-
-* Alexandre Terrasa
