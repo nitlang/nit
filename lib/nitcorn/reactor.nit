@@ -83,11 +83,15 @@ class HttpServer
 			else response = new HttpResponse(405)
 		else response = new HttpResponse(405)
 
-		# Send back a response
+		respond response
+		close
+	end
+
+	# Send back `response` to the client
+	fun respond(response: HttpResponse)
+	do
 		write response.to_s
 		for path in response.files do write_file path
-
-		close
 	end
 end
 
