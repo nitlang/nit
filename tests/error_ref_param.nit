@@ -19,3 +19,6 @@ import module_simple
 redef class C
 	redef fun r(x: C) do end
 end
+
+var c = new C(new B)
+c.r

@@ -19,3 +19,6 @@ import module_simple
 redef class C
 	redef fun r(x: B): B do return self end
 end
+
+var c = new C(new B)
+c.r

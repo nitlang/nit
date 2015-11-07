@@ -27,3 +27,6 @@ end
 class C
 	super A
 end
+
+var a = new A
+a.output

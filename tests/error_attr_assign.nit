@@ -21,3 +21,6 @@ class A
 		_toto = 't'
 	end
 end
+
+var a = new A(1)
+a.m

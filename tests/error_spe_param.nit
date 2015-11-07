@@ -23,3 +23,6 @@ class B
 	super A
 redef fun toto(c: Object) do end
 end
+
+var b = new B
+b.toto(true)

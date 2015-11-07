@@ -15,3 +15,4 @@
 # limitations under the License.
 
 var i = new Canard
+i.output

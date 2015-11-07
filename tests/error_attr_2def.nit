@@ -18,3 +18,6 @@ class A
 	var toto: Int
 	var toto: Object
 end
+
+var a = new A
+a.toto.output

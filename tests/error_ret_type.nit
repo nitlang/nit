@@ -18,3 +18,5 @@ fun toto: Int
 do
 	return '4'
 end
+
+(toto+1).output
