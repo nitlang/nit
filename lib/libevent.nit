@@ -162,19 +162,34 @@ class Connection
 
 	redef fun write_byte(byte) do native_buffer_event.write_byte(byte)
 
+	redef fun write_bytes(bytes) do native_buffer_event.write(bytes.items, bytes.length)
+
 	# Write a file to the connection
 	#
-	# require: `path.file_exists`
+	# If `not path.file_exists`, the method returns.
 	fun write_file(path: String)
 	do
-		assert path.file_exists
-
 		var file = new FileReader.open(path)
-		var output = native_buffer_event.output_buffer
-		var fd = file.fd
-		var length = file.file_stat.size
+		if file.last_error != null then
+			var error = new IOError("Failed to open file at '{path}'")
+			error.cause = file.last_error
+			self.last_error = error
+			file.close
+			return
+		end
 
-		output.add_file(fd, 0, length)
+		var stat = file.file_stat
+		if stat == null then
+			last_error = new IOError("Failed to stat file at '{path}'")
+			file.close
+			return
+		end
+
+		var err = native_buffer_event.output_buffer.add_file(file.fd, 0, stat.size)
+		if err then
+			last_error = new IOError("Failed to add file at '{path}'")
+			file.close
+		end
 	end
 end
 
@@ -209,6 +224,12 @@ extern class NativeBufferEvent `{ struct bufferevent * `}
 
 	# The input buffer associated to `self`
 	fun input_buffer: InputNativeEvBuffer `{ return bufferevent_get_input(self); `}
+
+	# Read data from this buffer
+	fun read_buffer(buf: NativeEvBuffer): Int `{ return bufferevent_read_buffer(self, buf); `}
+
+	# Write data to this buffer
+	fun write_buffer(buf: NativeEvBuffer): Int `{ return bufferevent_write_buffer(self, buf); `}
 end
 
 # A single buffer
