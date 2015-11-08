@@ -193,3 +193,53 @@ redef extern class JavaObject
 		return to_java_string.to_s
 	end
 end
+
+# Java class: java.lang.Throwable
+extern class JavaThrowable in "Java" `{ java.lang.Throwable `}
+	super JavaObject
+
+	# Java implementation: java.lang.String java.lang.Throwable.getMessage()
+	fun message: JavaString in "Java" `{
+		return self.getMessage();
+	`}
+
+	# Java implementation: java.lang.String java.lang.Throwable.getLocalizedMessage()
+	fun localized_message: JavaString in "Java" `{
+		return self.getLocalizedMessage();
+	`}
+
+	# Java implementation:  java.lang.Throwable.printStackTrace()
+	fun print_stack_trace in "Java" `{
+		self.printStackTrace();
+	`}
+
+	# Java implementation: java.lang.Throwable java.lang.Throwable.getCause()
+	fun cause: JavaThrowable in "Java" `{
+		return self.getCause();
+	`}
+
+	redef fun new_global_ref import sys, Sys.jni_env `{
+		Sys sys = JavaThrowable_sys(self);
+		JNIEnv *env = Sys_jni_env(sys);
+		return (*env)->NewGlobalRef(env, self);
+	`}
+
+	redef fun pop_from_local_frame_with_env(jni_env) `{
+		return (*jni_env)->PopLocalFrame(jni_env, self);
+	`}
+end
+
+# Java class: java.lang.Exception
+extern class JavaException in "Java" `{ java.lang.Exception `}
+	super JavaThrowable
+
+	redef fun new_global_ref import sys, Sys.jni_env `{
+		Sys sys = JavaException_sys(self);
+		JNIEnv *env = Sys_jni_env(sys);
+		return (*env)->NewGlobalRef(env, self);
+	`}
+
+	redef fun pop_from_local_frame_with_env(jni_env) `{
+		return (*jni_env)->PopLocalFrame(jni_env, self);
+	`}
+end
