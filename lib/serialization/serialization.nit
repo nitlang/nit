@@ -257,3 +257,25 @@ redef class Ref[E]
 		v.serialize_attribute("item", first)
 	end
 end
+
+redef class Error
+	super Serializable
+
+	redef init from_deserializer(v)
+	do
+		v.notify_of_creation self
+
+		var message = v.deserialize_attribute("message")
+		if not message isa String then message = ""
+		init message
+
+		var cause = v.deserialize_attribute("cause")
+		if cause isa nullable Error then self.cause = cause
+	end
+
+	redef fun core_serialize_to(v)
+	do
+		v.serialize_attribute("message", message)
+		v.serialize_attribute("cause", cause)
+	end
+end
