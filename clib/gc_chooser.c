@@ -18,6 +18,9 @@
 #ifdef ANDROID
 	#include <android/log.h>
 	#define PRINT_ERROR(...) ((void)__android_log_print(ANDROID_LOG_WARN, "nit", __VA_ARGS__))
+
+	// FIXME bring back when the GC is fixed in Android
+	#undef WITH_LIBGC
 #else
 	#define PRINT_ERROR(...) ((void)fprintf(stderr, __VA_ARGS__))
 #endif

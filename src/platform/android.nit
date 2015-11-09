@@ -36,7 +36,7 @@ class AndroidPlatform
 
 	redef fun name do return "android"
 
-	redef fun supports_libgc do return true
+	redef fun supports_libgc do return false
 
 	redef fun supports_libunwind do return false
 
@@ -141,7 +141,7 @@ class AndroidToolchain
 		## Generate Application.mk
 		dir = "{android_project_root}/jni/"
 		"""
-APP_ABI := armeabi armeabi-v7a x86 mips
+APP_ABI := armeabi armeabi-v7a x86
 APP_PLATFORM := android-{{{app_target_api}}}
 """.write_to_file "{dir}/Application.mk"
 
