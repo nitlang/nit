@@ -79,7 +79,7 @@ class MaybeError[V, E: Error]
 	# REQUIRE: `not is_error`
 	fun value: V do return maybe_value.as(V)
 
-	# The require
+	# The error
 	# REQUIRE: `is_error`
 	fun error: E do return maybe_error.as(E)
 
