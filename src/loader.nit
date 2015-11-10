@@ -716,8 +716,6 @@ redef class ModelBuilder
 				var mdoc = ndoc.to_mdoc
 				mmodule.mdoc = mdoc
 				mdoc.original_mentity = mmodule
-			else
-				advice(decl, "missing-doc", "Documentation warning: Undocumented module `{mmodule}`")
 			end
 			# Is the module a test suite?
 			mmodule.is_test_suite = not decl.get_annotations("test_suite").is_empty
