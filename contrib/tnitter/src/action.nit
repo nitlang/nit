@@ -20,6 +20,7 @@ module action
 import nitcorn
 
 import model
+import database
 
 redef class Session
 	# User logged in
