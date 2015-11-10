@@ -21,6 +21,7 @@ import privileges
 
 import model
 import action
+import push
 
 redef class OptionContext
 	var drop = new OptionUserAndGroup.for_dropping_privileges
@@ -59,6 +60,7 @@ if user_group != null then user_group.drop_privileges
 
 # Complete server config
 vh.routes.add new Route("/rest/", new TnitterREST)
+vh.routes.add new Route("/push/", new TnitterPush)
 vh.routes.add new Route(null, new TnitterWeb)
 
 # Run
