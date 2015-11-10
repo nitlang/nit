@@ -18,9 +18,12 @@
 module model
 
 import md5
+import serialization
 
 # A single post (or Tnit)
 class Post
+	serialize
+
 	# The author
 	var user: String
 

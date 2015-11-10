@@ -58,7 +58,8 @@ var user_group = opts.drop.value
 if user_group != null then user_group.drop_privileges
 
 # Complete server config
-vh.routes.add new Route(null, new Tnitter)
+vh.routes.add new Route("/rest/", new TnitterREST)
+vh.routes.add new Route(null, new TnitterWeb)
 
 # Run
 print "Launching server on http://{interfac} ..."

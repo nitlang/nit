@@ -18,6 +18,7 @@
 module action
 
 import nitcorn
+import json::serialization
 
 import model
 import database
@@ -31,7 +32,7 @@ redef class Session
 end
 
 # Main Tnitter Action
-class Tnitter
+class TnitterWeb
 	super Action
 
 	# Header on pages served by this `Action`
@@ -238,6 +239,35 @@ class Tnitter
 		var response = new HttpResponse(200)
 		response.body = body
 		response.session = session
+		return response
+	end
+end
+
+# Tnitter RESTful interface
+class TnitterREST
+	super Action
+
+	redef fun answer(request, turi)
+	do
+		if turi == "/list" then
+			# list?from=1&count=2 -> Error | Array[Post]
+
+			var from = request.int_arg("from") or else 0
+			var count = request.int_arg("count") or else 8
+
+			var db = new DB.open(tnitter_db_path)
+			var posts = db.list_posts(from, count)
+			db.close
+
+			var response = new HttpResponse(200)
+			response.body = posts.to_json_string
+			return response
+		end
+
+		# Format not recognized
+		var error = new Error("Bad Request")
+		var response = new HttpResponse(400)
+		response.body = error.to_json_string
 		return response
 	end
 end
