@@ -1,8 +1,10 @@
+SERVER ?= localhost:8080
+
 all: bin/tnitter_server bin/tnitter
 
 bin/tnitter_server: $(shell ../../bin/nitls -M src/tnitter.nit)
 	mkdir -p bin/
-	../../bin/nitc -o bin/tnitter_server src/tnitter.nit
+	../../bin/nitc -o bin/tnitter_server src/tnitter.nit -D tnitter_interface=$(SERVER)
 
 bin/tnitter: $(shell ../../bin/nitls -M src/tnitter_app.nit)
 	mkdir -p bin/

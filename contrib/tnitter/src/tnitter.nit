@@ -30,6 +30,9 @@ redef class OptionContext
 	init do add_option(drop, help)
 end
 
+# Address and port of the listening socket
+fun tnitter_interface: String do return "localhost:8080"
+
 # Avoid executing when running tests
 if "NIT_TESTING".environ == "true" then exit 0
 
@@ -43,14 +46,8 @@ if not opts.errors.is_empty or opts.help.value then
 	exit 1
 end
 
-# If we can, we use port 80
-var interfac
-if sys.uid == 0 then # Are we root?
-	interfac = "localhost:80"
-else interfac = "localhost:8080"
-
 # Setup server
-var vh = new VirtualHost(interfac)
+var vh = new VirtualHost(tnitter_interface)
 var factory = new HttpFactory.and_libevent
 factory.config.virtual_hosts.add vh
 
@@ -64,5 +61,5 @@ vh.routes.add new Route("/push/", new TnitterPush)
 vh.routes.add new Route(null, new TnitterWeb)
 
 # Run
-print "Launching server on http://{interfac} ..."
+print "Launching server on http://{tnitter_interface} ..."
 factory.run
