@@ -490,8 +490,12 @@ private class TypeVisitor
 				continue # skip the vararg
 			end
 
-			var paramtype = param.mtype
-			self.visit_expr_subtype(arg, paramtype)
+			if not param.is_vararg then
+				var paramtype = param.mtype
+				self.visit_expr_subtype(arg, paramtype)
+			else
+				check_one_vararg(arg, param)
+			end
 		end
 
 		if min_arity > 0 then
