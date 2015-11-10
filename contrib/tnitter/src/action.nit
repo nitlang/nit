@@ -22,6 +22,9 @@ import nitcorn
 import model
 import database
 
+# Path to the Sqlite3 database
+fun tnitter_db_path: String do return "tnitter.db"
+
 redef class Session
 	# User logged in
 	var user: nullable String = null
@@ -30,9 +33,6 @@ end
 # Main Tnitter Action
 class Tnitter
 	super Action
-
-	var db_path = "tnitter.db"
-	var db = new DB.open(db_path)
 
 	# Header on pages served by this `Action`
 	#
@@ -100,6 +100,8 @@ class Tnitter
 		# Error to display on page as a dismissable panel
 		var error = null
 
+		var db = new DB.open(tnitter_db_path)
+
 		# Login/logout
 		if turi == "/login" and request.post_args.keys.has("user") and
 		   request.post_args.keys.has("pass") then
@@ -137,6 +139,7 @@ class Tnitter
 				# Post a Tnit!
 				var text = request.post_args["text"]
 				db.post(user, text)
+				db.close
 
 				# Redirect the user to avoid double posting
 				var response = new HttpResponse(303)
@@ -205,6 +208,7 @@ class Tnitter
 
 		# Load the last 16 Tnits
 		var posts = db.latest_posts(16)
+		db.close
 
 		var html_posts = new Array[String]
 		for post in posts do
