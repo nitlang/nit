@@ -186,11 +186,7 @@ redef class ModelBuilder
 				var sig = mpropdef.msignature
 				if sig == null then continue # Skip broken method
 
-				for param in sig.mparameters do
-					var ret_type = param.mtype
-					var mparameter = new MParameter(param.name, ret_type, false)
-					mparameters.add(mparameter)
-				end
+				mparameters.add_all sig.mparameters
 				initializers.add(mpropdef.mproperty)
 				mpropdef.mproperty.is_autoinit = true
 			end
