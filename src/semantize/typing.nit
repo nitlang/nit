@@ -509,25 +509,7 @@ private class TypeVisitor
 			var paramtype = msignature.mparameters[vararg_rank].mtype
 			var first = args[vararg_rank]
 			if vararg_decl == 0 then
-				var mclass = get_mclass(node, "Array")
-				if mclass == null then return null # Forward error
-				var array_mtype = mclass.get_mtype([paramtype])
-				if first isa AVarargExpr then
-					self.visit_expr_subtype(first.n_expr, array_mtype)
-					first.mtype  = first.n_expr.mtype
-				else
-					# only one vararg, maybe `...` was forgot, so be gentle!
-					var t = visit_expr(first)
-					if t == null then return null # Forward error
-					if not is_subtype(t, paramtype) and is_subtype(t, array_mtype) then
-						# Not acceptable but could be a `...`
-						error(first, "Type Error: expected `{paramtype}`, got `{t}`. Is an ellipsis `...` missing on the argument?")
-						return null
-					end
-					# Standard valid vararg, finish the job
-					map.vararg_decl = 1
-					self.visit_expr_subtype(first, paramtype)
-				end
+				if not check_one_vararg(first, msignature.mparameters[vararg_rank]) then return null
 			else
 				first.vararg_decl = vararg_decl + 1
 				for i in [vararg_rank..vararg_rank+vararg_decl] do
@@ -537,6 +519,33 @@ private class TypeVisitor
 		end
 
 		return map
+	end
+
+	# Check an expression as a single vararg.
+	# The main point of the method if to handle the case of reversed vararg (see `AVarargExpr`)
+	fun check_one_vararg(arg: AExpr, param: MParameter): Bool
+	do
+		var paramtype = param.mtype
+		var mclass = get_mclass(arg, "Array")
+		if mclass == null then return false # Forward error
+		var array_mtype = mclass.get_mtype([paramtype])
+		if arg isa AVarargExpr then
+			self.visit_expr_subtype(arg.n_expr, array_mtype)
+			arg.mtype  = arg.n_expr.mtype
+		else
+			# only one vararg, maybe `...` was forgot, so be gentle!
+			var t = visit_expr(arg)
+			if t == null then return false # Forward error
+			if not is_subtype(t, paramtype) and is_subtype(t, array_mtype) then
+				# Not acceptable but could be a `...`
+				error(arg, "Type Error: expected `{paramtype}`, got `{t}`. Is an ellipsis `...` missing on the argument?")
+				return false
+			end
+			# Standard valid vararg, finish the job
+			arg.vararg_decl = 1
+			self.visit_expr_subtype(arg, paramtype)
+		end
+		return true
 	end
 
 	fun error(node: ANode, message: String)
