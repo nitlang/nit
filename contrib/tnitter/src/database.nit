@@ -79,10 +79,10 @@ class DB
 		end
 	end
 
-	# Get the latest tnits
-	fun latest_posts(count: Int): Array[Post]
+	# List `count` of the latest Tnits skipping `offset`
+	fun list_posts(offset, count: Int): Array[Post]
 	do
-		var stmt = select("user, text FROM posts ORDER BY datetime(posted) DESC LIMIT {count}")
+		var stmt = select("user, text FROM posts ORDER BY datetime(posted) DESC LIMIT {count} OFFSET {offset}")
 		assert stmt != null else print error or else "?"
 
 		var posts = new Array[Post]

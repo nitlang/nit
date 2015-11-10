@@ -208,7 +208,7 @@ class Tnitter
 		else error_html = ""
 
 		# Load the last 16 Tnits
-		var posts = db.latest_posts(16)
+		var posts = db.list_posts(0, 16)
 		db.close
 
 		var html_posts = new Array[String]
