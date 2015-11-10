@@ -144,6 +144,7 @@ class Tnitter
 				# Redirect the user to avoid double posting
 				var response = new HttpResponse(303)
 				response.header["Location"] = request.uri
+				response.session = session
 				return response
 			end
 		end
