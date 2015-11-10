@@ -129,6 +129,7 @@ class Connection
 	# Close this connection if possible, otherwise mark it to be closed later
 	redef fun close
 	do
+		if closed then return
 		var success = native_buffer_event.destroy
 		close_requested = true
 		closed = success
