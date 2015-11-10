@@ -529,7 +529,7 @@ private class TypeVisitor
 					self.visit_expr_subtype(first, paramtype)
 				end
 			else
-				map.vararg_decl = vararg_decl + 1
+				first.vararg_decl = vararg_decl + 1
 				for i in [vararg_rank..vararg_rank+vararg_decl] do
 					self.visit_expr_subtype(args[i], paramtype)
 				end
@@ -614,10 +614,6 @@ end
 class SignatureMap
 	# Associate a parameter to an argument
 	var map = new ArrayMap[Int, Int]
-
-	# The length of the vararg sequence
-	# 0 if no vararg or if reverse vararg (cf `AVarargExpr`)
-	var vararg_decl: Int = 0
 end
 
 # A specific method call site with its associated informations.
@@ -853,6 +849,15 @@ redef class AExpr
 	# The result of the evaluation of `self` must be
 	# stored inside the designated array (there is an implicit `push`)
 	var comprehension: nullable AArrayExpr = null
+
+	# It indicates the number of arguments collected as a vararg.
+	#
+	# When 0, the argument is used as is, without transformation.
+	# When 1, the argument is transformed into an singleton array.
+	# Above 1, the arguments and the next ones are transformed into a common array.
+	#
+	# This attribute is meaning less on expressions not used as attributes.
+	var vararg_decl: Int = 0
 end
 
 redef class ABlockExpr
