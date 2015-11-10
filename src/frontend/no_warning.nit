@@ -34,15 +34,17 @@ private class NoWarningPhase
 
 		var source = nmodule.location.file
 
-		# If no decl block then quit
 		var nmoduledecl = nmodule.n_moduledecl
-		if nmoduledecl == null then
+		if nmoduledecl == null or nmoduledecl.n_doc == null then
 			# Disable `missing-doc` if there is no `module` clause
 			# Rationale: the presence of a `module` clause is a good heuristic to
 			# discriminate quick and dirty prototypes from nice and clean modules
 			if source != null then toolcontext.warning_blacklist[source].add("missing-doc")
-			return
+
 		end
+
+		# If no decl block then quit
+		if nmoduledecl == null then return
 
 		var modelbuilder = toolcontext.modelbuilder
 
