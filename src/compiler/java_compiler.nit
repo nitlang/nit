@@ -526,8 +526,8 @@ class JavaCompilerVisitor
 				res.add(null_instance)
 				continue
 			end
-			if param.is_vararg and map.vararg_decl > 0 then
-				var vararg = exprs.sub(j, map.vararg_decl)
+			if param.is_vararg and args[i].vararg_decl > 0 then
+				var vararg = exprs.sub(j, args[i].vararg_decl)
 				var elttype = param.mtype
 				var arg = self.vararg_instance(mpropdef, recv, vararg, elttype)
 				res.add(arg)
