@@ -83,6 +83,9 @@ end
 class CatalogPage
 	super Template
 
+	# The associated catalog, used to groups options and other global data
+	var catalog: Catalog
+
 	# Placeholder to include additional things before the `</head>`.
 	var more_head = new Template
 
@@ -131,6 +134,37 @@ class CatalogPage
 """
 	end
 
+	# Inject piwik HTML code if required
+	private fun add_piwik
+	do
+		var tracker_url = catalog.piwik_tracker
+		if tracker_url == null then return
+
+		var site_id = catalog.piwik_site_id
+
+		tracker_url = tracker_url.trim
+		if tracker_url.chars.last != '/' then tracker_url += "/"
+		add """
+<!-- Piwik -->
+<script type="text/javascript">
+var _paq = _paq || [];
+_paq.push(['trackPageView']);
+_paq.push(['enableLinkTracking']);
+(function() {
+var u=(("https:" == document.location.protocol) ? "https" : "http") + "://{{{tracker_url.escape_to_c}}}";
+_paq.push(['setTrackerUrl', u+'piwik.php']);
+_paq.push(['setSiteId', {{{site_id}}}]);
+var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0]; g.type='text/javascript';
+g.defer=true; g.async=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+})();
+
+</script>
+<noscript><p><img src="http://{{{tracker_url.html_escape}}}piwik.php?idsite={{{site_id}}}" style="border:0;" alt="" /></p></noscript>
+<!-- End Piwik Code -->
+"""
+
+	end
+
 	redef fun rendering
 	do
 		add """
@@ -138,6 +172,10 @@ class CatalogPage
 <script src='https://code.jquery.com/jquery-latest.min.js'></script>
 <script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js'></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.8.1/bootstrap-table-all.min.js'></script>
+"""
+		add_piwik
+		add """
+
 </body>
 </html>
 """
@@ -190,6 +228,12 @@ class Catalog
 	#
 	# The score is loosely computed using other metrics
 	var score = new Counter[MPackage]
+
+	# Return a empty `CatalogPage`.
+	fun new_page(rootpath: String): CatalogPage
+	do
+		return new CatalogPage(self, rootpath)
+	end
 
 	# Scan, register and add a contributor to a package
 	fun add_contrib(person: String, mpackage: MPackage, res: Template)
@@ -273,7 +317,7 @@ class Catalog
 	# Compute information and generate a full HTML page for a package
 	fun package_page(mpackage: MPackage): Writable
 	do
-		var res = new CatalogPage("..")
+		var res = new_page("..")
 		var score = score[mpackage].to_f
 		var name = mpackage.name.html_escape
 		res.more_head.add """<title>{{{name}}}</title>"""
@@ -658,6 +702,13 @@ class Catalog
 		res.add "</table>\n"
 		return res
 	end
+
+	# Piwik tracker URL, if any
+	var piwik_tracker: nullable String = null
+
+	# Piwik site ID
+	# Used when `piwik_tracker` is set
+	var piwik_site_id: Int = 1
 end
 
 # Execute a git command and return the result
@@ -679,13 +730,32 @@ var opt_no_git = new OptionBool("Do not gather git information from the working 
 var opt_no_parse = new OptionBool("Do not parse nit files (no importation information)", "--no-parse")
 var opt_no_model = new OptionBool("Do not analyse nit files (no class/method information)", "--no-model")
 
-tc.option_context.add_option(opt_dir, opt_no_git, opt_no_parse, opt_no_model)
+# Piwik tracker URL.
+# If you want to monitor your visitors.
+var opt_piwik_tracker = new OptionString("Piwik tracker URL (ex: `nitlanguage.org/piwik/`)", "--piwik-tracker")
+# Piwik tracker site id.
+var opt_piwik_site_id = new OptionString("Piwik site ID", "--piwik-site-id")
+
+tc.option_context.add_option(opt_dir, opt_no_git, opt_no_parse, opt_no_model, opt_piwik_tracker, opt_piwik_site_id)
 
 tc.process_options(sys.args)
 tc.keep_going = true
 
 var modelbuilder = new ModelBuilder(model, tc)
 var catalog = new Catalog(modelbuilder)
+
+catalog.piwik_tracker = opt_piwik_tracker.value
+var piwik_site_id = opt_piwik_site_id.value
+if piwik_site_id != null then
+	if catalog.piwik_tracker == null then
+		print_error "Warning: ignored `{opt_piwik_site_id}` because `{opt_piwik_tracker}` is not set."
+	else if piwik_site_id.is_int then
+		print_error "Warning: ignored `{opt_piwik_site_id}`, an integer is required."
+	else
+		catalog.piwik_site_id = piwik_site_id.to_i
+	end
+end
+
 
 # Get files or groups
 var args = tc.option_context.rest
@@ -836,7 +906,7 @@ end
 
 # INDEX
 
-var index = new CatalogPage("")
+var index = catalog.new_page("")
 index.more_head.add "<title>Packages in Nit</title>"
 
 index.add """
@@ -883,7 +953,7 @@ index.write_to_file(out/"index.html")
 
 # PEOPLE
 
-var page = new CatalogPage("")
+var page = catalog.new_page("")
 page.more_head.add "<title>People of Nit</title>"
 page.add """<div class="content">\n<h1>People of Nit</h1>\n"""
 page.add "<h2>By Maintainer</h2>\n"
@@ -895,7 +965,7 @@ page.write_to_file(out/"people.html")
 
 # TABLE
 
-page = new CatalogPage("")
+page = catalog.new_page("")
 page.more_head.add "<title>Projets of Nit</title>"
 page.add """<div class="content">\n<h1>People of Nit</h1>\n"""
 page.add "<h2>Table of Projets</h2>\n"
