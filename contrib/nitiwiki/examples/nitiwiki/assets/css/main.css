@@ -28,3 +28,17 @@ footer {
 .summary li li li { font-size: 12px; font-weight: normal }
 
 .breadcrumb { margin-top: 20px; }
+
+.trail {
+	list-style-type: none;
+	color: #838183;
+	text-align: center;
+}
+
+.trail li{
+	display: inline;
+}
+
+.trail li+li:before{
+	content: " | ";
+}
