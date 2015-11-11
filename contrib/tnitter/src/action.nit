@@ -135,9 +135,9 @@ class Tnitter
 			session = null
 		else if turi == "/post" and request.post_args.keys.has("text") and session != null then
 			var user = session.user
-			if user != null then
+			var text = request.post_args["text"].trim
+			if user != null and not text.is_empty then
 				# Post a Tnit!
-				var text = request.post_args["text"]
 				db.post(user, text)
 				db.close
 
