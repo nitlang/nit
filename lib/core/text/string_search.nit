@@ -399,6 +399,37 @@ redef class Text
 		return null
 	end
 
+	# Extract a given prefix, if any.
+	#
+	# ~~~
+	# var p = "hello world".prefix("hello")
+	# assert p != null
+	# assert p.text_after == " world"
+	# ~~~
+	fun prefix(t: Text): nullable Match do
+		var len = t.length
+		if substring(0, len) == t then
+			return new Match(self.to_s, 0, len)
+		end
+		return null
+	end
+
+	# Extract a given suffix, if any.
+	#
+	# ~~~
+	# var p = "hello world".suffix("world")
+	# assert p != null
+	# assert p.text_before == "hello "
+	# ~~~
+	fun suffix(t: Text): nullable Match do
+		var len = t.length
+		var from = length - len
+		if substring(from, len) == t then
+			return new Match(self.to_s, from, len)
+		end
+		return null
+	end
+
 	# Search all occurrences of `pattern` into self.
 	#
 	#     var a = new Array[Int]
