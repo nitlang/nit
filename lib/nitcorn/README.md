@@ -1,30 +1,87 @@
-The nitcorn Web server framework creates server-side Web apps in Nit
+Lightweight framework for Web applications development
+
+# Features
+
+Dynamic content is served by subclassing `Action` and implementing `answer`.
+This method receives an `HttpRequest` and must return an `HttpResponse`.
+_nitcorn_ provides `FileServer`, a simple `Action` to serve static files.
+
+`HttpRequest` contains the GET and POST arguments as well as session data it one exists.
+The produced `HttpResponse` should contain the HTTP status code, the body,
+session data to preserve or create a session, and optionally list files to append.
+
+Each `Action` may be associated to many instances of `Route`.
+These routes can simply identify the root of a service,
+but also define parameters within the URI.
+
+_nitcorn_ instances are configured dynamically in Nit code with the interfaces and routes created as needed.
+
+_nitcorn_ plays well with other Nit services and tools such as `serialization`, `mongodb`, `sqlite` and `nitiwiki`.
+It also benefits from the full power of the Nit language:
+class refinement can be used to customize default services and merge many applications in a single server,
+and the FFI enables calling services in different languages.
 
 # Examples
 
-Want to see `nitcorn` in action? Examples are available at `examples/nitcorn/src/`.
+A minimal example follows with a custom `Action` and using `FileServer`.
 
-# Features and TODO list
+More general examples are available at `lib/nitcorn/examples/`.
+It includes the configuration of `http://xymus.net/` which merges many other _nitcorn_ applications.
 
- - [x] Virtual hosts and routes
- - [x] Configuration change on the fly
- - [x] Sessions
- - [x] Reading cookies
- - [x] Parameterized routes
- - [ ] Full cookie support
- - [ ] Close interfaces on the fly
- - [ ] Better logging
- - [ ] Info/status page
- - [ ] `ProxyAction` to redirect a request to an external server
- - [ ] `ModuleAction` which forwards the request to an independant Nit program
+Larger projects using _nitcorn_ can be found in the `contrib/` folder:
+* _opportunity_ is a meetup planner heavily based on _nitcorn_.
+* _tnitter_ is a micro-blogging platform with a simple Web and RESTful interface.
+* _benitlux_ uses a custom `Action` to subscribe people to a mailing list and define a RESTful interface.
 
-## Bugs / Limitations
+## Simple hello world server
 
-* The size of requests is limited, so no big uploads
+~~~
+import nitcorn
+
+# Simple Action to display the Hello World page and the get arguments
+class HelloWorldAction
+	super Action
+
+	redef fun answer(http_request, turi)
+	do
+		var title = "Hello World!"
+		var args = http_request.get_args.join(",", ":")
+
+		var response = new HttpResponse(200)
+		response.body = """
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>{{{title}}}</title>
+</head>
+<body>
+	<h1>{{{title}}}</h1>
+	<p>GET args: {{{args}}}</p>
+</body>
+</html>"""
+		return response
+	end
+end
+
+# Listen on `localhost:8080`
+var vh = new VirtualHost("localhost:8080")
+
+# Serve `http://localhost:8080/hello.html` with our custom action
+vh.routes.add new Route("/hello.html", new HelloWorldAction)
+
+# Serve everything else under `http://localhost:8080/` using a `FileServer` with a root at "/var/www/"
+vh.routes.add new Route(null, new FileServer("/var/www/"))
+
+# Launch server
+var factory = new HttpFactory.and_libevent
+factory.config.virtual_hosts.add vh
+factory.run
+~~~
 
 # Credits
 
-This nitcorn library is a fork from an independant project originally created in 2013 by
+This nitcorn library is a fork from an independent project originally created in 2013 by
 Jean-Philippe Caissy, Guillaume Auger, Frederic Sevillano, Justin Michaud-Ouellette,
 Stephan Michaud and Maxime Bélanger.
 
