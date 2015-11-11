@@ -102,6 +102,17 @@ redef class WikiEntry
 		return res
 	end
 
+	# A relative hyperlink <a> to `self` from the page `context`.
+	#
+	# If `text` is not given, `title` will be used instead.
+	fun a_from(context: WikiEntry, text: nullable Text): Writable
+	do
+		var title = title.html_escape
+		if text == null then text = title else text = text.html_escape
+		var href = href_from(context)
+		return """<a href="{{{href}}}" title="{{{title}}}">{{{text}}}</a>"""
+	end
+
 	redef fun render do
 		super
 		if not is_dirty and not wiki.force_render then return
