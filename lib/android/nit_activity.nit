@@ -43,6 +43,7 @@ end
 import platform
 import log
 import activities
+import key_event
 import bundle
 import dalvik
 
@@ -133,6 +134,30 @@ in "C body" `{
 	{
 		Activity_on_restore_instance_state((Activity)nit_activity, saved_state);
 	}
+
+	JNIEXPORT jboolean JNICALL Java_nit_app_NitActivity_nitOnKeyDown
+	  (JNIEnv *env, jobject java_activity, jint nit_activity, jint keyCode, jobject event)
+	{
+		return (jboolean)Activity_on_key_down((Activity)nit_activity, keyCode, event);
+	}
+
+	JNIEXPORT jboolean JNICALL Java_nit_app_NitActivity_nitOnKeyLongPress
+	  (JNIEnv *env, jobject java_activity, jint nit_activity, jint keyCode, jobject event)
+	{
+		return (jboolean)Activity_on_key_long_press((Activity)nit_activity, keyCode, event);
+	}
+
+	JNIEXPORT jboolean JNICALL Java_nit_app_NitActivity_nitOnKeyMultiple
+	  (JNIEnv *env, jobject java_activity, jint nit_activity, jint keyCode, jint count, jobject event)
+	{
+		return (jboolean)Activity_on_key_multiple((Activity)nit_activity, keyCode, count, event);
+	}
+
+	JNIEXPORT jboolean JNICALL Java_nit_app_NitActivity_nitOnKeyUp
+	  (JNIEnv *env, jobject java_activity, jint nit_activity, jint keyCode, jobject event)
+	{
+		return (jboolean)Activity_on_key_up((Activity)nit_activity, keyCode, event);
+	}
 `}
 
 # Wrapper to our Java `NitActivity`
@@ -158,7 +183,9 @@ redef class App
 	Activity.on_create, Activity.on_destroy,
 	Activity.on_start, Activity.on_restart, Activity.on_stop,
 	Activity.on_pause, Activity.on_resume,
-	Activity.on_save_instance_state, Activity.on_restore_instance_state `{
+	Activity.on_save_instance_state, Activity.on_restore_instance_state,
+	Activity.on_key_down, Activity.on_key_long_press,
+	Activity.on_key_multiple, Activity.on_key_up `{
 		App_incr_ref(self);
 		global_app = self;
 	`}
@@ -251,6 +278,26 @@ class Activity
 
 	# Notification from Android, the current device configuration has changed
 	fun on_configuration_changed do end
+
+	# A key has been pressed
+	#
+	# Return `true` if the event has been handled.
+	fun on_key_down(key_code: Int, event: NativeKeyEvent): Bool do return false
+
+	# A key has been long pressed
+	#
+	# Return `true` if the event has been handled.
+	fun on_key_long_press(key_code: Int, event: NativeKeyEvent): Bool do return false
+
+	# Multiple down/up pairs of the same key have occurred in a row
+	#
+	# Return `true` if the event has been handled.
+	fun on_key_multiple(key_code, count: Int, event: NativeKeyEvent): Bool do return false
+
+	# A key has been released
+	#
+	# Return `true` if the event has been handled.
+	fun on_key_up(key_code: Int, event: NativeKeyEvent): Bool do return false
 end
 
 # Set up global data in C and leave it to Android to callback Java, which we relay to Nit

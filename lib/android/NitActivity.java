@@ -17,6 +17,7 @@ package nit.app;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.KeyEvent;
 
 /*
  * Entry point to Nit applications on Android, redirect most calls to Nit
@@ -47,6 +48,10 @@ public class NitActivity extends Activity {
 	protected native void nitOnDestroy(int activity);
 	protected native void nitOnSaveInstanceState(int activity, Bundle savedInstanceState);
 	protected native void nitOnRestoreInstanceState(int activity, Bundle savedInstanceState);
+	protected native boolean nitOnKeyDown(int activity, int keyCode, KeyEvent event);
+	protected native boolean nitOnKeyLongPress(int activity, int keyCode, KeyEvent event);
+	protected native boolean nitOnKeyMultiple(int activity, int keyCode, int count, KeyEvent event);
+	protected native boolean nitOnKeyUp(int activity, int keyCode, KeyEvent event);
 
 	/*
 	 * Implementation of OS callbacks
@@ -107,5 +112,29 @@ public class NitActivity extends Activity {
 	public void onRestoreInstanceState(Bundle savedInstanceState) {
 		super.onRestoreInstanceState(savedInstanceState);
 		nitOnRestoreInstanceState(nitActivity, savedInstanceState);
+	}
+
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		return nitOnKeyDown(nitActivity, keyCode, event)
+			|| super.onKeyDown(keyCode, event);
+	}
+
+	@Override
+	public boolean onKeyLongPress(int keyCode, KeyEvent event) {
+		return nitOnKeyLongPress(nitActivity, keyCode, event)
+			|| super.onKeyLongPress(keyCode, event);
+	}
+
+	@Override
+	public boolean onKeyMultiple(int keyCode, int count, KeyEvent event) {
+		return nitOnKeyMultiple(nitActivity, keyCode, count, event)
+			|| super.onKeyMultiple(keyCode, count, event);
+	}
+
+	@Override
+	public boolean onKeyUp(int keyCode, KeyEvent event) {
+		return nitOnKeyUp(nitActivity, keyCode, event)
+			|| super.onKeyUp(keyCode, event);
 	}
 }
