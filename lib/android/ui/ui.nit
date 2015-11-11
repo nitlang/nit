@@ -161,6 +161,8 @@ end
 redef class Label
 	redef type NATIVE: NativeTextView
 	redef var native do return (new NativeTextView(app.native_activity)).new_global_ref
+
+	init do native.set_text_appearance(app.native_activity, android_r_style_text_appearance_medium)
 end
 
 redef class TextInput

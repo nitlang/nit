@@ -149,8 +149,14 @@ extern class NativeTextView in "Java" `{ android.widget.TextView `}
 	fun text_size: Float in "Java" `{
 		return self.getTextSize();
 	`}
+
 	fun text_size=(dpi: Float) in "Java" `{
 		self.setTextSize(android.util.TypedValue.COMPLEX_UNIT_DIP, (float)dpi);
+	`}
+
+	# Java implementation:  android.widget.TextView.setTextAppearance(android.content.Context, int)
+	fun set_text_appearance(arg0: NativeContext, arg1: Int) in "Java" `{
+		self.setTextAppearance(arg0, (int)arg1);
 	`}
 
 	redef fun new_global_ref import sys, Sys.jni_env `{
@@ -970,4 +976,19 @@ fun android_r_layout_simple_list_item_single_choice: Int in "Java" `{
 # Java getter: android.R$layout.simple_selectable_list_item
 fun android_r_layout_simple_selectable_list_item: Int in "Java" `{
 	return android.R.layout.simple_selectable_list_item;
+`}
+
+# Java getter: android.R$style.TextAppearance_Large
+fun android_r_style_text_appearance_large: Int in "Java" `{
+	return android.R.style.TextAppearance_Large;
+`}
+
+# Java getter: android.R$style.TextAppearance_Medium
+fun android_r_style_text_appearance_medium: Int in "Java" `{
+	return android.R.style.TextAppearance_Medium;
+`}
+
+# Java getter: android.R$style.TextAppearance_Small
+fun android_r_style_text_appearance_small: Int in "Java" `{
+	return android.R.style.TextAppearance_Small;
 `}
