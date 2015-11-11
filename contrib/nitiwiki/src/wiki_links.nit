@@ -244,6 +244,14 @@ class NitiwikiDecorator
 		var name = token.name
 		v.add "<a "
 		if not link.has_prefix("http://") and not link.has_prefix("https://") then
+			# Extract commands from the link.
+			var command = null
+			var command_split = link.split_once_on(":")
+			if command_split.length > 1 then
+				command = command_split[0].trim
+				link = command_split[1].trim
+			end
+
 			if link.has("#") then
 				var parts = link.split_with("#")
 				link = parts.first
