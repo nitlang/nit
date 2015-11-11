@@ -277,6 +277,22 @@ class Match
 	# ~~~
 	redef fun to_s do return string.substring(from,length)
 
+	# The content of `string` before the match
+	#
+	# ~~~
+	# var m = "hello world".search("lo")
+	# assert m.text_before == "hel"
+	# ~~~
+	fun text_before: String do return string.substring(0, from)
+
+	# The content of `string` after the match
+	#
+	# ~~~
+	# var m = "hello world".search("lo")
+	# assert m.text_after == " world"
+	# ~~~
+	fun text_after: String do return string.substring_from(after)
+
 	init
 	do
 		assert positive_length: length >= 0
