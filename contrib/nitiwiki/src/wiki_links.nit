@@ -17,6 +17,7 @@ module wiki_links
 
 import wiki_base
 import markdown::wikilinks
+import ordered_tree
 
 redef class Nitiwiki
 	# Looks up a WikiEntry by its `name`.
@@ -86,6 +87,12 @@ redef class Nitiwiki
 		end
 		return entry
 	end
+
+	# Trails between pages
+	#
+	# Trails are represented as a forest of entries.
+	# This way it is possible to represent a flat-trail as a visit of a tree.
+	var trails = new OrderedTree[WikiEntry]
 end
 
 redef class WikiEntry
@@ -268,6 +275,11 @@ class NitiwikiDecorator
 			if target != null then
 				if name == null then name = target.title
 				link = target.href_from(context)
+
+				if command == "trail" then
+					if target isa WikiSection then target = target.index
+					wiki.trails.add(context, target)
+				end
 			else
 				wiki.message("Warning: unknown wikilink `{link}` (in {context.src_path.as(not null)})", 0)
 				v.add "class=\"broken\" "
