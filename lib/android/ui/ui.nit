@@ -37,7 +37,7 @@ redef class Control
 end
 
 redef class Window
-	redef var native = app.native_activity
+	redef var native = app.native_activity.new_global_ref
 
 	redef type NATIVE: NativeActivity
 
@@ -70,11 +70,18 @@ redef class Layout
 		# FIXME abstract the use either homogeneous or weight to balance views size in a layout
 		native.add_view_with_weight(item.native, 1.0)
 	end
+
+	redef fun remove(item)
+	do
+		super
+		if item isa View then native.remove_view item.native
+	end
 end
 
 redef class HorizontalLayout
 	redef var native do
 		var layout = new NativeLinearLayout(app.native_activity)
+		layout = layout.new_global_ref
 		layout.set_horizontal
 		return layout
 	end
@@ -83,6 +90,7 @@ end
 redef class VerticalLayout
 	redef var native do
 		var layout = new NativeLinearLayout(app.native_activity)
+		layout = layout.new_global_ref
 		layout.set_vertical
 		return layout
 	end
@@ -104,6 +112,11 @@ redef class TextView
 	fun text_size=(text_size: nullable Float) do
 		if text_size != null then native.text_size = text_size
 	end
+end
+
+redef class Label
+	redef type NATIVE: NativeTextView
+	redef var native do return (new NativeTextView(app.native_activity)).new_global_ref
 end
 
 redef class TextInput
