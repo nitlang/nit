@@ -237,19 +237,44 @@ end
 # Matches are a part of a `Text` found by a `Pattern`.
 class Match
 	# The base string matched
+	#
+	# ~~~
+	# var m = "hello world".search("lo")
+	# assert m.string == "hello world"
+	# ~~~
 	var string: String
 
 	# The starting position in the string
+	#
+	# ~~~
+	# var m = "hello world".search("lo")
+	# assert m.from == 3
+	# ~~~
 	var from: Int
 
 	# The length of the matching part
+	#
+	# ~~~
+	# var m = "hello world".search("lo")
+	# assert m.length == 2
+	# ~~~
 	var length: Int
 
 	# The position of the first character just after the matching part.
 	# May be out of the base string
+	#
+	# ~~~
+	# var m = "hello world".search("lo")
+	# assert m.after == 5
+	# ~~~
 	fun after: Int do return from + length
 
 	# The contents of the matching part
+	#
+	# ~~~
+	# var m = "hello world".search("lo")
+	# assert m.to_s == "lo"
+	# ~~~
 	redef fun to_s do return string.substring(from,length)
 
 	init
