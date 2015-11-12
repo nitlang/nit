@@ -22,3 +22,6 @@ android-release: $(shell ../../bin/nitls -M src/tnitter_app_android.nit) res/dra
 res/drawable-ldpi/icon.png: art/icon.svg
 	mkdir -p res
 	../inkscape_tools/bin/svg_to_icons art/icon.svg --android --out res/
+
+clean:
+	rm -r res bin
