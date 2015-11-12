@@ -17,6 +17,7 @@ module wiki_links
 
 import wiki_base
 import markdown::wikilinks
+import ordered_tree
 
 redef class Nitiwiki
 	# Looks up a WikiEntry by its `name`.
@@ -86,6 +87,12 @@ redef class Nitiwiki
 		end
 		return entry
 	end
+
+	# Trails between pages
+	#
+	# Trails are represented as a forest of entries.
+	# This way it is possible to represent a flat-trail as a visit of a tree.
+	var trails = new OrderedTree[WikiEntry]
 end
 
 redef class WikiEntry
@@ -100,6 +107,17 @@ redef class WikiEntry
 	do
 		var res = context.href.dirname.relpath(href)
 		return res
+	end
+
+	# A relative hyperlink <a> to `self` from the page `context`.
+	#
+	# If `text` is not given, `title` will be used instead.
+	fun a_from(context: WikiEntry, text: nullable Text): Writable
+	do
+		var title = title.html_escape
+		if text == null then text = title else text = text.html_escape
+		var href = href_from(context)
+		return """<a href="{{{href}}}" title="{{{title}}}">{{{text}}}</a>"""
 	end
 
 	redef fun render do
@@ -233,6 +251,14 @@ class NitiwikiDecorator
 		var name = token.name
 		v.add "<a "
 		if not link.has_prefix("http://") and not link.has_prefix("https://") then
+			# Extract commands from the link.
+			var command = null
+			var command_split = link.split_once_on(":")
+			if command_split.length > 1 then
+				command = command_split[0].trim
+				link = command_split[1].trim
+			end
+
 			if link.has("#") then
 				var parts = link.split_with("#")
 				link = parts.first
@@ -249,6 +275,11 @@ class NitiwikiDecorator
 			if target != null then
 				if name == null then name = target.title
 				link = target.href_from(context)
+
+				if command == "trail" then
+					if target isa WikiSection then target = target.index
+					wiki.trails.add(context, target)
+				end
 			else
 				wiki.message("Warning: unknown wikilink `{link}` (in {context.src_path.as(not null)})", 0)
 				v.add "class=\"broken\" "

@@ -174,6 +174,29 @@ will appear like this: `Contact me!`.
 
 You can link to an anchor inside a page, using something like `[[WikiLink#foo]]`.
 
+#### Trails of Pages
+
+Wikilinks, with the directive `trail`, will register the target page as an element of a trail.
+Each `trail` are chained together and will display navigational link `prev` for the previous page of the trail, `next` for the next page of the trail and `up` to go to the pages that has used the `trail` wikilink.
+
+For instance, if the page `doc.md` has the following content:
+
+~~~md
+To use nitiwiki, first [[trail: install|install it]],
+then [[trail: simple_wiki|create a first wiki]].
+
+You can also do advanced things like:
+
+* [[trail: github|editing pages with github]]
+* [[trail: templating| adapting the templates]]
+~~~
+
+A trail will be made and will consist of the sequence of pages `install`, `simple_wiki`, `github` and `templating`.
+On each one of these pages, there will be links for the previous page, the next page and the `doc.md` page.
+
+If a page includes trail wikilinks and is also the target for trail wikilinks, then the two trails are merged and pages will be visitable in a depth-first order.
+This nesting of trails can be used to have sections and sub-sections.
+
 #### Render the wiki in HTML
 
 Once you have done your changes, use:
@@ -243,7 +266,9 @@ The template file `template.html` represents the overall structure of your wiki 
 			%HEADER%
 			%TOP_MENU%
 			<div>
+				%TRAIL%
 				%BODY%
+				%TRAIL%
 				%FOOTER%
 			</div>
 		</body>
@@ -256,6 +281,7 @@ Additionnal macros:
 * `TOP_MENU`: Wiki top menu (see [Topmenu template](#Topmenu_template))
 * `HEADER`: Wiki header (see [Header template](#Header_template))
 * `BODY`: Wiki body content
+* `TRAIL`: content of the trail navigational links, if any (see [Trails of Pages](#Trails_of_Pages))
 
 ### Header template
 

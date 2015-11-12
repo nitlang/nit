@@ -1,5 +1,4 @@
 Render section pages -> out
-Render article contact -> wiki2/out/contact.html
 Warning: unknown wikilink `not found` (in pages/index.md)
 Warning: unknown wikilink `Not Found` (in pages/index.md)
 Warning: unknown wikilink `/not/found` (in pages/index.md)
@@ -8,6 +7,7 @@ Warning: unknown wikilink `not found` (in pages/index.md)
 Warning: unknown wikilink `not found` (in pages/index.md)
 Warning: unknown wikilink `not found` (in pages/index.md)
 Render article index -> wiki2/out/index.html
+Render article contact -> wiki2/out/contact.html
 Render article other_page -> wiki2/out/other_page.html
 Render section sec1 -> out/sec1
 Render article index -> wiki2/out/sec1/index.html
