@@ -1818,16 +1818,26 @@ class MSignature
 		for i in [0..mparameters.length[ do
 			var parameter = mparameters[i]
 			if parameter.is_vararg then
-				assert vararg_rank == -1
+				if vararg_rank >= 0 then
+					# If there is more than one vararg,
+					# consider that additional arguments cannot be mapped.
+					vararg_rank = -1
+					break
+				end
 				vararg_rank = i
 			end
 		end
 		self.vararg_rank = vararg_rank
 	end
 
-	# The rank of the ellipsis (`...`) for vararg (starting from 0).
+	# The rank of the main ellipsis (`...`) for vararg (starting from 0).
 	# value is -1 if there is no vararg.
 	# Example: for "(a: Int, b: Bool..., c: Char)" #-> vararg_rank=1
+	#
+	# From a model POV, a signature can contain more than one vararg parameter,
+	# the `vararg_rank` just indicates the one that will receive the additional arguments.
+	# However, currently, if there is more that one vararg parameter, no one will be the main one,
+	# and additional arguments will be refused.
 	var vararg_rank: Int is noinit
 
 	# The number of parameters
