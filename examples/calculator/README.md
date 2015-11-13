@@ -7,9 +7,25 @@ Portable calculator built using _app.nit_
 * `calculator` implements the portable graphical interface using the _app.nit_ framework
 * `calculator_test` test `CalculatorContext` as a black box.
 
-# Usage
+# Compilation
 
-1. Compile with a call to `make`.
-2. Run with either:
-	1. The desktop version, `bin/calculator`.
-	2. The Android version by install the APK at `bin/calculator.apk`.
+* Compile and run on the desktop (GNU/Linux and OS X) with:
+
+	~~~
+	make
+	bin/calculator
+	~~~
+
+* Compile for Android and install on a device or emulator with:
+
+	~~~
+	make bin/android.apk
+	adb install -r bin/calculator.apk
+	~~~
+
+* Compile for iOS and run on the simulator with:
+
+	~~~
+	make bin/android.app
+	ios-sim launch bin/calculator.app
+	~~~
