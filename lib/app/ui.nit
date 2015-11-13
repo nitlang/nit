@@ -106,7 +106,7 @@ end
 class CompositeControl
 	super Control
 
-	private var items = new HashSet[Control]
+	protected var items = new Array[Control]
 
 	# Add `item` as a child of `self`
 	protected fun add(item: Control) do items.add item
@@ -196,4 +196,10 @@ end
 # A vertical linear organization
 class VerticalLayout
 	super Layout
+end
+
+# Scrollable list of views in a simple list
+class ListLayout
+	super View
+	super CompositeControl
 end

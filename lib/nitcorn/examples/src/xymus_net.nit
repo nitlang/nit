@@ -112,7 +112,7 @@ class OpportunityMasterHeader
 	end
 end
 
-redef class Tnitter
+redef class TnitterWeb
 	redef var header: String = (new MasterHeader("tnitter", true)).to_s
 end
 
@@ -162,9 +162,13 @@ var user_group = new UserGroup("nitcorn", "nitcorn")
 if sys.uid == 0 then user_group.drop_privileges
 
 # Tnitter is available at `tnitter.xymus.net` and `xymus.net/tnitter/`
-var tnitter = new Tnitter
+var tnitter = new TnitterWeb
 default_vh.routes.add new Route("/tnitter/", tnitter)
+
+tnitter_vh.routes.add new Route("/rest/", new TnitterREST)
+tnitter_vh.routes.add new Route("/push/", new TnitterPush)
 tnitter_vh.routes.add new Route(null, tnitter)
+
 
 # Pep/8 Analysis is only a file server. It is available at `pep8.xymus.net`
 # and through the global/default file server at `xymus.net/pep8/`

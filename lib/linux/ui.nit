@@ -16,7 +16,7 @@
 module ui
 
 import app::ui
-import gtk
+import gtk::v3_10
 
 import data_store
 
@@ -120,6 +120,13 @@ redef class VerticalLayout
 		native.homogeneous = true
 		native.set_child_packing(item.native, true, true, 0, new GtkPackType.start)
 	end
+end
+
+redef class ListLayout
+	redef type NATIVE: GtkListBox
+	redef var native = new GtkListBox
+
+	init do native.selection_mode = new GtkSelectionMode.none
 end
 
 redef class Button

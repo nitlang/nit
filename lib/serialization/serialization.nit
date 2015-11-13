@@ -107,6 +107,7 @@ abstract class Deserializer
 	# All refinement should look for a precise `class_name` and call super
 	# on unsupported classes.
 	protected fun deserialize_class(class_name: String): nullable Object do
+		if class_name == "Error" then return new Error.from_deserializer(self)
 		return deserialize_class_intern(class_name)
 	end
 
