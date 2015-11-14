@@ -21,6 +21,7 @@ import json::serialization
 
 import linux::http_request is conditional(linux)
 import android::http_request is conditional(android)
+import ios::http_request is conditional(ios)
 
 redef class App
 	# Platform specific service to execute `task` on the main/UI thread
