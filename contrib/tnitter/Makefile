@@ -10,6 +10,9 @@ bin/tnitter: $(shell ../../bin/nitls -M src/tnitter_app.nit)
 	mkdir -p bin/
 	../../bin/nitc -o bin/tnitter src/tnitter_app.nit -m linux -D tnitter_server_uri=http://$(SERVER)
 
+# ---
+# Android
+
 android: bin/tnitter.apk
 bin/tnitter.apk: $(shell ../../bin/nitls -M src/tnitter_app_android.nit) res/drawable-ldpi/icon.png
 	mkdir -p bin/
@@ -22,6 +25,21 @@ android-release: $(shell ../../bin/nitls -M src/tnitter_app_android.nit) res/dra
 res/drawable-ldpi/icon.png: art/icon.svg
 	mkdir -p res
 	../inkscape_tools/bin/svg_to_icons art/icon.svg --android --out res/
+
+# ---
+# iOS
+
+ios: bin/tnitter.app
+bin/tnitter.app: $(shell ../../bin/nitls -M src/tnitter_app.nit ios)
+	mkdir -p bin/
+	../../bin/nitc -o bin/tnitter.app src/tnitter_app.nit -m ios -D tnitter_server_uri=http://$(SERVER)
+
+ios-release: $(shell ../../bin/nitls -M src/tnitter_app.nit ios)
+	mkdir -p bin/
+	../../bin/nitc -o bin/tnitter.app src/tnitter_app.nit -m ios -D tnitter_server_uri=http://tnitter.xymus.net
+
+# ---
+# Misc
 
 clean:
 	rm -r res bin
