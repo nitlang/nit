@@ -243,3 +243,45 @@ extern class JavaException in "Java" `{ java.lang.Exception `}
 		return (*jni_env)->PopLocalFrame(jni_env, self);
 	`}
 end
+
+redef class JniEnv
+	# Create new `Java.nio.ByteBuffer` referring to `address` with the given `capacity` in bytes
+	#
+	# JNI function: NewDirectByteBuffer
+	fun new_direct_byte_buffer(address: Pointer, capacity: Int): Java_nio_ByteBuffer `{
+		return (*self)->NewDirectByteBuffer(self, address, capacity);
+	`}
+end
+
+# Container for data of a specific primitive type
+#
+# Java class: java.nio.Buffer
+extern class Java_nio_Buffer in "Java" `{ java.nio.Buffer `}
+	super JavaObject
+
+	# Address pointed by this buffer
+	#
+	# JNI function: GetDirectBufferAddress
+	fun direct_buffer_address(jni_env: JniEnv): Pointer `{
+		return (*jni_env)->GetDirectBufferAddress(jni_env, self);
+	`}
+
+	# Capacity of this this buffer
+	#
+	# JNI function: GetDirectBufferCapacity
+	fun direct_buffer_capacity(jni_env: JniEnv): Int `{
+		return (*jni_env)->GetDirectBufferCapacity(jni_env, self);
+	`}
+end
+
+# A byte buffer
+#
+# Java class: java.nio.ByteBuffer
+extern class Java_nio_ByteBuffer in "Java" `{ java.nio.ByteBuffer `}
+	super Java_nio_Buffer
+
+	# Allocate a new `java.nio.ByteBuffer` with `allocateDirect`
+	new direct(size: Int) in "Java" `{
+		return java.nio.ByteBuffer.allocateDirect((int)size);
+	`}
+end
