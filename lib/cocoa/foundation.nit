@@ -30,6 +30,11 @@ end
 # Created using `Text::to_nsstring`.
 extern class NSString in "ObjC" `{ NSString * `}
 	super NSObject
+
+	# Get an UTF8 encoded `char*` copy of `self`
+	fun utf8_string: NativeString in "ObjC" `{ return (char *)[self UTF8String]; `}
+
+	redef fun to_s do return utf8_string.to_s
 end
 
 redef class NativeString
