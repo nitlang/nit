@@ -173,10 +173,9 @@ class AssetManager
 
 	# Return a bitmap from the assets
 	private fun bitmap(name: String): NativeBitmap do
-		sys.jni_env.push_local_frame(1)
-		var return_value = new NativeBitmap.from_stream(native_assets_manager.open(name.to_java_string)).new_global_ref
-		sys.jni_env.pop_local_frame
-		return return_value
+		sys.jni_env.push_local_frame 2
+		var return_value = new NativeBitmap.from_stream(native_assets_manager.open(name.to_java_string))
+		return return_value.pop_from_local_frame
 	end
 
 	# Deallocate the global reference allocated by AssetManager
