@@ -53,3 +53,99 @@ redef class Text
 	# Get a `NSString` from `self`
 	fun to_nsstring: NSString do return to_cstring.to_nsstring(length)
 end
+
+# Wrapper of byte buffers
+extern class NSData in "ObjC" `{ NSData * `}
+
+	# Pointer to contained data
+	fun bytes: NativeString in "ObjC" `{ return (char*)self.bytes; `}
+
+	# Number of bytes containted in `self`
+	fun length: Int in "ObjC" `{ return self.length; `}
+
+	redef fun to_s do return bytes.to_s_with_length(length)
+end
+
+# Error condition
+extern class NSError in "ObjC" `{ NSError * `}
+
+	# Wraps: `[self initWithDomain:(NSString)domain code:(NSInteger)code userInfo:(NSDictionary)dict]`
+	#new init_with_domain_code_user_info(domain: NSString, code: Int, dict: NSDictionary) in "ObjC" `{
+	#	return [[NSError alloc] initWithDomain: domain code: code userInfo: dict];
+	#`}
+
+	# Wraps: `NSError.domain`
+	fun domain: NSString in "ObjC" `{
+		return [self domain];
+	`}
+
+	# Wraps: `NSError.code`
+	fun code: Int in "ObjC" `{
+		return [self code];
+	`}
+
+	# Wraps: `NSError.userInfo`
+	#fun user_info: NSDictionary in "ObjC" `{
+	#	return [self userInfo];
+	#`}
+
+	# Wraps: `NSError.localizedDescription`
+	fun localized_description: NSString in "ObjC" `{
+		return [self localizedDescription];
+	`}
+
+	# Wraps: `NSError.localizedFailureReason`
+	fun localized_failure_reason: NSString in "ObjC" `{
+		return [self localizedFailureReason];
+	`}
+
+	# Wraps: `NSError.localizedRecoverySuggestion`
+	fun localized_recovery_suggestion: NSString in "ObjC" `{
+		return [self localizedRecoverySuggestion];
+	`}
+
+	# Wraps: `NSError.localizedRecoveryOptions`
+	#fun localized_recovery_options: NSArray in "ObjC" `{
+	#	return [self localizedRecoveryOptions];
+	#`}
+
+	# Wraps: `NSError.recoveryAttempter`
+	fun recovery_attempter: NSObject in "ObjC" `{
+		return [self recoveryAttempter];
+	`}
+
+	# Wraps: `NSError.helpAnchor`
+	fun help_anchor: NSString in "ObjC" `{
+		return [self helpAnchor];
+	`}
+end
+
+# Path to a specific node in a tree of nested array collections
+extern class NSIndexPath in "ObjC" `{ NSIndexPath * `}
+	super NSObject
+
+	# Wraps: `[self initWithIndex:(NSUInteger)index]`
+	new init_with_index(index: Int) in "ObjC" `{
+		return [[NSIndexPath alloc] initWithIndex: index];
+	`}
+
+	# Wraps: `NSIndexPath.length`
+	fun length: Int in "ObjC" `{
+		return [self length];
+	`}
+
+	# Wraps: `[self indexPathByAddingIndex:(NSUInteger)index]`
+	fun index_path_by_adding_index(index: Int): NSIndexPath in "ObjC" `{
+		return [self indexPathByAddingIndex: index];
+	`}
+
+	# Wraps: `[self indexPathByRemovingLastIndex]`
+	fun index_path_by_removing_last_index: NSIndexPath in "ObjC" `{
+		return [self indexPathByRemovingLastIndex];
+	`}
+
+	# Wraps: `[self indexAtPosition:(NSUInteger)position]`
+	fun index_at_position(position: Int): Int in "ObjC" `{
+		return [self indexAtPosition: position];
+	`}
+end
