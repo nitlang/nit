@@ -102,7 +102,7 @@ redef class App
 	# so we need to add it back. That's why Nit's `args` is smaller than in C.
 	private fun register_args(program_name: NativeString, argc: Int,
 	argv: Sequence[String]) import Sequence[String].[], String.to_cstring in "ObjC" `{
-		app_nit_ios_argc = argc+1;
+		app_nit_ios_argc = (int)(argc+1);
 
 		// TODO copy or pin the strings when needed
 		app_nit_ios_argv = malloc(argc * sizeof(char*));
