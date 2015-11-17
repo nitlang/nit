@@ -42,12 +42,7 @@ in "C" `{
 	// Callback forwarded to 'Connection.read_callback_native'
 	static void c_read_cb(struct bufferevent *bev, Connection ctx)
 	{
-		// TODO move to Nit code
-		struct evbuffer *input = bufferevent_get_input(bev);
-		size_t len = evbuffer_get_length(input);
-		char* cstr = malloc(len);
-		evbuffer_remove(input, cstr, len);
-		Connection_read_callback_native(ctx, cstr, len);
+		Connection_read_callback_native(ctx, bev);
 	}
 
 	// Callback forwarded to 'Connection.event_callback'
@@ -64,22 +59,11 @@ in "C" `{
 		}
 	}
 
-	// Callback fowarded to 'ConnectionFactory.spawn_connection'
-	static void accept_conn_cb(struct evconnlistener *listener, evutil_socket_t fd,
+	// Callback forwarded to 'ConnectionFactory.accept_connection'
+	static void accept_connection_cb(struct evconnlistener *listener, evutil_socket_t fd,
 		struct sockaddr *address, int socklen, ConnectionFactory ctx)
 	{
-		// TODO move to Nit code
-		struct event_base *base = evconnlistener_get_base(listener);
-		struct bufferevent *bev = bufferevent_socket_new(base, fd, BEV_OPT_CLOSE_ON_FREE);
-
-		Connection nit_con = ConnectionFactory_spawn_connection(ctx, bev);
-		Connection_incr_ref(nit_con);
-
-		bufferevent_setcb(bev,
-			(bufferevent_data_cb)c_read_cb,
-			(bufferevent_data_cb)c_write_cb,
-			(bufferevent_event_cb)c_event_cb, nit_con);
-		bufferevent_enable(bev, EV_READ|EV_WRITE);
+		ConnectionFactory_accept_connection(ctx, listener, fd, address, socklen);
 	}
 `}
 
@@ -141,9 +125,14 @@ class Connection
 		if close_requested then close
 	end
 
-	private fun read_callback_native(cstr: NativeString, len: Int)
+	private fun read_callback_native(bev: NativeBufferEvent)
 	do
-		read_callback(cstr.to_s_with_length(len))
+		var evbuffer = bev.input_buffer
+		var len = evbuffer.length
+		var buf = new NativeString(len)
+		evbuffer.remove(buf, len)
+		var str = buf.to_s_with_length(len)
+		read_callback str
 	end
 
 	# Callback method when data is available to read
@@ -359,7 +348,7 @@ extern class ConnectionListener `{ struct evconnlistener * `}
 		memcpy( &(sin.sin_addr.s_addr), (const void*)hostent->h_addr, hostent->h_length );
 
 		listener = evconnlistener_new_bind(base,
-			(evconnlistener_cb)accept_conn_cb, factory,
+			(evconnlistener_cb)accept_connection_cb, factory,
 			LEV_OPT_CLOSE_ON_FREE | LEV_OPT_REUSEABLE, -1,
 			(struct sockaddr*)&sin, sizeof(sin));
 
@@ -392,10 +381,22 @@ class ConnectionFactory
 	# The `NativeEventBase` for the dispatch loop of this factory
 	var event_base: NativeEventBase
 
-	# On new connection, create the handler `Connection` object
-	fun spawn_connection(nat_buf_ev: NativeBufferEvent): Connection
+	# Accept a connection on `listener`
+	#
+	# By default, it creates a new NativeBufferEvent and calls `spawn_connection`.
+	fun accept_connection(listener: ConnectionListener, fd: Int, address: Pointer, socklen: Int)
 	do
-		return new Connection(nat_buf_ev)
+		var base = listener.base
+		var bev = new NativeBufferEvent.socket(base, fd, bev_opt_close_on_free)
+		var conn = spawn_connection(bev)
+		bev.enable ev_read|ev_write
+		bev.setcb conn
+	end
+
+	# Create a new `Connection` object for `buffer_event`
+	fun spawn_connection(buffer_event: NativeBufferEvent): Connection
+	do
+		return new Connection(buffer_event)
 	end
 
 	# Listen on `address`:`port` for new connection, which will callback `spawn_connection`
