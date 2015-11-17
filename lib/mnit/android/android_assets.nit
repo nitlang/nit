@@ -68,7 +68,7 @@ redef class App
 
 			var bmp = asset_manager.bitmap(path)
 			var buf = bmp.copy_pixels
-			var png = new Opengles1Image.from_data(buf.native_array, bmp.width, bmp.height, bmp.width, bmp.height, bmp.has_alpha)
+			var png = new Opengles1Image.from_data(buf.native_array, bmp.width, bmp.height, bmp.width, bmp.height, true)
 
 			buf.destroy
 			jni_env.pop_local_frame
