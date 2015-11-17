@@ -13,7 +13,7 @@
 # limitations under the License.
 
 # Http request parsing for bufferized inputs.
-module http_request_parser
+module http_request_buffer
 
 intrude import libevent
 

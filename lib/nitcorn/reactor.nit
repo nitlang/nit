@@ -20,10 +20,10 @@
 module reactor
 
 import more_collections
-import http_request_parser
 
 import vararg_routes
 import http_request
+import http_request_buffer
 import http_response
 
 # A server handling a single connection
