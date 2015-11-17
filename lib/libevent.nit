@@ -158,18 +158,29 @@ class Connection
 	# Write a string to the connection
 	redef fun write(str)
 	do
+		if close_requested then return
 		native_buffer_event.write(str.to_cstring, str.bytelen)
 	end
 
-	redef fun write_byte(byte) do native_buffer_event.write_byte(byte)
+	redef fun write_byte(byte)
+	do
+		if close_requested then return
+		native_buffer_event.write_byte(byte)
+	end
 
-	redef fun write_bytes(bytes) do native_buffer_event.write(bytes.items, bytes.length)
+	redef fun write_bytes(bytes)
+	do
+		if close_requested then return
+		native_buffer_event.write(bytes.items, bytes.length)
+	end
 
 	# Write a file to the connection
 	#
 	# If `not path.file_exists`, the method returns.
 	fun write_file(path: String)
 	do
+		if close_requested then return
+
 		var file = new FileReader.open(path)
 		if file.last_error != null then
 			var error = new IOError("Failed to open file at '{path}'")
