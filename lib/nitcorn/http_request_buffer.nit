@@ -22,8 +22,8 @@ redef class Connection
 	private var in_request = false
 	private var in_header = false
 	private var in_body = false
-	private var current_header: FlatBuffer
-	private var current_body: FlatBuffer
+	private var current_header = new Array[Writable]
+	private var current_body = new Array[Writable]
 	private var content_length = 0
 	private var current_length = 0
 
@@ -53,8 +53,8 @@ redef class Connection
 	private fun parse_start do
 		in_request = true
 		# reset values
-		current_header = new FlatBuffer
-		current_body = new FlatBuffer
+		current_header.clear
+		current_body.clear
 		current_length = 0
 		content_length = 0
 		# next step is to find the header part
@@ -69,12 +69,12 @@ redef class Connection
 		# split in CRLF
 		var parts = str.split("\r\n\r\n")
 		# first part go in the header
-		current_header.append parts.shift
+		current_header.add parts.shift
 
 		# if there is more part we are done with headers
 		if not parts.is_empty then
 			# get content-length
-			parse_content_length(current_header.write_to_string)
+			parse_content_length current_header.join
 			# next step if to parse body
 			in_header = false
 			in_body = true
@@ -98,7 +98,7 @@ redef class Connection
 	# We are receiving body parts.
 	private fun parse_body(str: String) do
 		current_length += str.length
-		current_body.append str
+		current_body.add str
 		if current_length >= content_length then
 			parse_end
 		end
@@ -106,10 +106,10 @@ redef class Connection
 
 	# We have reached the end of the body
 	private fun parse_end do
-		var res = new FlatBuffer
-		res.append current_header
+		var res = new FlatBuffer.with_capacity(content_length)
+		for ch in current_header do res.append ch.write_to_string
 		res.append "\r\n\r\n"
-		res.append current_body
+		for cb in current_body do res.append cb.write_to_string
 		read_callback(res.write_to_string)
 		in_request = false
 	end
