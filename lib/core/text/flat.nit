@@ -412,7 +412,7 @@ class FlatString
 
 	redef fun ==(other)
 	do
-		if not other isa FlatString then return super
+		if not other isa FlatText then return super
 
 		if self.object_id == other.object_id then return true
 
@@ -421,7 +421,7 @@ class FlatString
 		if other._bytelen != my_length then return false
 
 		var my_index = _first_byte
-		var its_index = other._first_byte
+		var its_index = other.first_byte
 
 		var last_iteration = my_index + my_length
 
@@ -439,7 +439,7 @@ class FlatString
 
 	redef fun <(other)
 	do
-		if not other isa FlatString then return super
+		if not other isa FlatText then return super
 
 		if self.object_id == other.object_id then return false
 
