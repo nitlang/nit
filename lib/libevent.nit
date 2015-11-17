@@ -138,7 +138,7 @@ class Connection
 	# Callback method on a write event
 	fun write_callback
 	do
-		if close_requested and not closed then close
+		if close_requested then close
 	end
 
 	private fun read_callback_native(cstr: NativeString, len: Int)
@@ -149,7 +149,7 @@ class Connection
 	# Callback method when data is available to read
 	fun read_callback(content: String)
 	do
-		if close_requested and not closed then close
+		if close_requested then close
 	end
 
 	# Callback method on events
