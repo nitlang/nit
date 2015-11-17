@@ -48,15 +48,8 @@ in "C" `{
 	// Callback forwarded to 'Connection.event_callback'
 	static void c_event_cb(struct bufferevent *bev, short events, Connection ctx)
 	{
-		Connection_event_callback(ctx, events);
-
-		// TODO move to Nit code
-		if (events & BEV_EVENT_ERROR)
-			perror("Error from bufferevent");
-		if (events & (BEV_EVENT_EOF | BEV_EVENT_ERROR)) {
-			bufferevent_free(bev);
-			Connection_decr_ref(ctx);
-		}
+		int release = Connection_event_callback(ctx, events);
+		if (release) Connection_decr_ref(ctx);
 	}
 
 	// Callback forwarded to 'ConnectionFactory.accept_connection'
@@ -141,8 +134,19 @@ class Connection
 		if close_requested then close
 	end
 
-	# Callback method on events
-	fun event_callback(events: Int) do end
+	# Callback method on events: EOF, user-defined timeout and unrecoverable errors
+	#
+	# Returns `true` if the native handles to `self` can be released.
+	fun event_callback(events: Int): Bool
+	do
+		if events & bev_event_error != 0 or events & bev_event_eof != 0 then
+			if events & bev_event_error != 0 then print_error "Error from bufferevent"
+			close
+			return true
+		end
+
+		return false
+	end
 
 	# Write a string to the connection
 	redef fun write(str)
