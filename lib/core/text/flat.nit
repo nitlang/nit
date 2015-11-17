@@ -533,11 +533,6 @@ private class FlatStringCharReverseIterator
 
 	var curr_pos: Int
 
-	init with_pos(tgt: FlatString, pos: Int)
-	do
-		init(tgt, pos)
-	end
-
 	redef fun is_ok do return curr_pos >= 0
 
 	redef fun item do return target[curr_pos]
@@ -553,14 +548,11 @@ private class FlatStringCharIterator
 
 	var target: FlatString
 
-	var max: Int
+	var max: Int is noautoinit
 
 	var curr_pos: Int
 
-	init with_pos(tgt: FlatString, pos: Int)
-	do
-		init(tgt, tgt.length - 1, pos)
-	end
+	init do max = target.length - 1
 
 	redef fun is_ok do return curr_pos <= max
 
@@ -579,9 +571,9 @@ private class FlatStringCharView
 
 	redef fun [](index) do return target[index]
 
-	redef fun iterator_from(start) do return new FlatStringCharIterator.with_pos(target, start)
+	redef fun iterator_from(start) do return new FlatStringCharIterator(target, start)
 
-	redef fun reverse_iterator_from(start) do return new FlatStringCharReverseIterator.with_pos(target, start)
+	redef fun reverse_iterator_from(start) do return new FlatStringCharReverseIterator(target, start)
 
 end
 
@@ -590,13 +582,15 @@ private class FlatStringByteReverseIterator
 
 	var target: FlatString
 
-	var target_items: NativeString
+	var target_items: NativeString is noautoinit
 
 	var curr_pos: Int
 
-	init with_pos(tgt: FlatString, pos: Int)
+	init
 	do
-		init(tgt, tgt._items, pos + tgt._first_byte)
+		var tgt = target
+		target_items = tgt._items
+		curr_pos += tgt._first_byte
 	end
 
 	redef fun is_ok do return curr_pos >= target._first_byte
@@ -614,13 +608,15 @@ private class FlatStringByteIterator
 
 	var target: FlatString
 
-	var target_items: NativeString
+	var target_items: NativeString is noautoinit
 
 	var curr_pos: Int
 
-	init with_pos(tgt: FlatString, pos: Int)
+	init
 	do
-		init(tgt, tgt._items, pos + tgt._first_byte)
+		var tgt = target
+		target_items = tgt._items
+		curr_pos += tgt._first_byte
 	end
 
 	redef fun is_ok do return curr_pos <= target._last_byte
@@ -649,9 +645,9 @@ private class FlatStringByteView
 		return target._items[ind]
 	end
 
-	redef fun iterator_from(start) do return new FlatStringByteIterator.with_pos(target, start)
+	redef fun iterator_from(start) do return new FlatStringByteIterator(target, start)
 
-	redef fun reverse_iterator_from(start) do return new FlatStringByteReverseIterator.with_pos(target, start)
+	redef fun reverse_iterator_from(start) do return new FlatStringByteReverseIterator(target, start)
 
 end
 
@@ -924,14 +920,11 @@ private class FlatBufferByteReverseIterator
 
 	var target: FlatBuffer
 
-	var target_items: NativeString
+	var target_items: NativeString is noautoinit
 
 	var curr_pos: Int
 
-	init with_pos(tgt: FlatBuffer, pos: Int)
-	do
-		init(tgt, tgt._items, pos)
-	end
+	init do target_items = target._items
 
 	redef fun index do return curr_pos
 
@@ -950,9 +943,9 @@ private class FlatBufferByteView
 
 	redef fun [](index) do return target._items[index]
 
-	redef fun iterator_from(pos) do return new FlatBufferByteIterator.with_pos(target, pos)
+	redef fun iterator_from(pos) do return new FlatBufferByteIterator(target, pos)
 
-	redef fun reverse_iterator_from(pos) do return new FlatBufferByteReverseIterator.with_pos(target, pos)
+	redef fun reverse_iterator_from(pos) do return new FlatBufferByteReverseIterator(target, pos)
 
 end
 
@@ -961,14 +954,11 @@ private class FlatBufferByteIterator
 
 	var target: FlatBuffer
 
-	var target_items: NativeString
+	var target_items: NativeString is noautoinit
 
 	var curr_pos: Int
 
-	init with_pos(tgt: FlatBuffer, pos: Int)
-	do
-		init(tgt, tgt._items, pos)
-	end
+	init do target_items = target._items
 
 	redef fun index do return curr_pos
 
@@ -986,11 +976,6 @@ private class FlatBufferCharReverseIterator
 	var target: FlatBuffer
 
 	var curr_pos: Int
-
-	init with_pos(tgt: FlatBuffer, pos: Int)
-	do
-		init(tgt, pos)
-	end
 
 	redef fun index do return curr_pos
 
@@ -1041,9 +1026,9 @@ private class FlatBufferCharView
 		for i in s do target.add i
 	end
 
-	redef fun iterator_from(pos) do return new FlatBufferCharIterator.with_pos(target, pos)
+	redef fun iterator_from(pos) do return new FlatBufferCharIterator(target, pos)
 
-	redef fun reverse_iterator_from(pos) do return new FlatBufferCharReverseIterator.with_pos(target, pos)
+	redef fun reverse_iterator_from(pos) do return new FlatBufferCharReverseIterator(target, pos)
 
 end
 
@@ -1052,14 +1037,11 @@ private class FlatBufferCharIterator
 
 	var target: FlatBuffer
 
-	var max: Int
+	var max: Int is noautoinit
 
 	var curr_pos: Int
 
-	init with_pos(tgt: FlatBuffer, pos: Int)
-	do
-		init(tgt, tgt.length - 1, pos)
-	end
+	init do max = target.length - 1
 
 	redef fun index do return curr_pos
 
