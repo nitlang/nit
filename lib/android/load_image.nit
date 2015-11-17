@@ -49,6 +49,8 @@ redef extern class NativeBitmap
 		var java_buf = buf.to_java_nio_buffer
 		copy_pixels_to_buffer java_buf
 
+		if has_alpha then buf.native_array.unmultiply(width, height)
+
 		if pad_to_pow2 == true then
 			for r in [height-1..0[.step(-1) do
 				var src_offset = row_bytes*r
@@ -76,4 +78,22 @@ redef universal Int
 		while p < self do p = p*exp
 		return p
 	end
+end
+
+redef class NativeCByteArray
+	# Reverse Android multiplication of color values per the alpha channel
+	private fun unmultiply(w, h: Int) `{
+		int offset = 0;
+		int x, y;
+		for (x = 0; x < w; x ++)
+			for (y = 0; y < h; y ++) {
+				unsigned char a = self[offset+3];
+				if (a != 0 && a != 0xFF) {
+					self[offset] = self[offset] * 256 / a;
+					self[offset+1] = self[offset+1] * 256 / a;
+					self[offset+2] = self[offset+2] * 256 / a;
+				}
+				offset += 4;
+			}
+	`}
 end
