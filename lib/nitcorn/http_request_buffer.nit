@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Http request parsing for bufferized inputs.
+# Http request parsing for buffered inputs.
 module http_request_buffer
 
 intrude import libevent
@@ -31,14 +31,13 @@ class HTTPConnection
 	private var content_length = 0
 	private var current_length = 0
 
-	# FIXME will not work if the header/body delimiter fall between two watermarks windows.
 	redef fun read_callback_native(cstr, len)
+	# FIXME will not work if the header/body delimiter falls between two watermarks windows.
 	do
 		# is this the start of a request?
-		if not in_request then
-			parse_start
-		end
 		var str = cstr.to_s_with_length(len)
+		if not in_request then parse_start
+
 		var body: String
 		# parsing header
 		if in_header then
@@ -47,13 +46,11 @@ class HTTPConnection
 			body = str
 		end
 		# parsing body
-		if in_body then
-			parse_body(body)
-		end
+		if in_body then parse_body(body)
 	end
 
 
-	# We have a new request entering
+	# Prepare for a new request
 	private fun parse_start do
 		in_request = true
 		# reset values
@@ -68,7 +65,7 @@ class HTTPConnection
 
 	# We are receiving the header of a request
 	#
-	# Return parsed body foud in header window
+	# Return parsed body found in header window
 	private fun parse_header(str: String): String do
 		# split in CRLF
 		var parts = str.split("\r\n\r\n")
