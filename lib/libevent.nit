@@ -205,8 +205,76 @@ class Connection
 	end
 end
 
+# ---
+# Error code for event callbacks
+
+# error encountered while reading
+fun bev_event_reading: Int `{ return BEV_EVENT_READING; `}
+
+# error encountered while writing
+fun bev_event_writing: Int `{ return BEV_EVENT_WRITING; `}
+
+# eof file reached
+fun bev_event_eof: Int `{ return BEV_EVENT_EOF; `}
+
+# unrecoverable error encountered
+fun bev_event_error: Int `{ return BEV_EVENT_ERROR; `}
+
+# user-specified timeout reached
+fun bev_event_timeout: Int `{ return BEV_EVENT_TIMEOUT; `}
+
+# connect operation finished.
+fun bev_event_connected: Int `{ return BEV_EVENT_CONNECTED; `}
+
+# ---
+# Options that can be specified when creating a `NativeBufferEvent`
+
+# Close the underlying file descriptor/bufferevent/whatever when this bufferevent is freed.
+fun bev_opt_close_on_free: Int `{ return BEV_OPT_CLOSE_ON_FREE; `}
+
+# If threading is enabled, protect the operations on this bufferevent with a lock.
+fun bev_opt_threadsafe: Int `{ return BEV_OPT_THREADSAFE; `}
+
+# Run callbacks deferred in the event loop.
+fun bev_opt_defer_callbacks: Int `{ return BEV_OPT_DEFER_CALLBACKS; `}
+
+# If set, callbacks are executed without locks being held on the bufferevent.
+fun bev_opt_unlock_callbacks: Int `{ return BEV_OPT_UNLOCK_CALLBACKS; `}
+
+# ---
+# Options for `NativeBufferEvent::enable`
+
+# Read operation
+fun ev_read: Int `{ return EV_READ; `}
+
+# Write operation
+fun ev_write: Int `{ return EV_WRITE; `}
+
+# ---
+
 # A buffer event structure, strongly associated to a connection, an input buffer and an output_buffer
 extern class NativeBufferEvent `{ struct bufferevent * `}
+
+	# Socket-based `NativeBufferEvent` that reads and writes data onto a network
+	new socket(base: NativeEventBase, fd, options: Int) `{
+		return bufferevent_socket_new(base, fd, options);
+	`}
+
+	# Enable a bufferevent.
+	fun enable(operation: Int) `{
+		bufferevent_enable(self, operation);
+	`}
+
+	# Set callbacks to `read_callback_native`, `write_callback` and `event_callback` of `conn`
+	fun setcb(conn: Connection) import Connection.read_callback_native,
+	Connection.write_callback, Connection.event_callback, NativeString `{
+		Connection_incr_ref(conn);
+		bufferevent_setcb(self,
+			(bufferevent_data_cb)c_read_cb,
+			(bufferevent_data_cb)c_write_cb,
+			(bufferevent_event_cb)c_event_cb, conn);
+	`}
+
 	# Write `length` bytes of `line`
 	fun write(line: NativeString, length: Int): Int `{
 		return bufferevent_write(self, line, length);
@@ -248,6 +316,11 @@ end
 extern class NativeEvBuffer `{ struct evbuffer * `}
 	# Length of data in this buffer
 	fun length: Int `{ return evbuffer_get_length(self); `}
+
+	# Read data from an evbuffer and drain the bytes read
+	fun remove(buffer: NativeString, len: Int) `{
+		evbuffer_remove(self, buffer, len);
+	`}
 end
 
 # An input buffer
@@ -272,8 +345,7 @@ end
 extern class ConnectionListener `{ struct evconnlistener * `}
 
 	private new bind_to(base: NativeEventBase, address: NativeString, port: Int, factory: ConnectionFactory)
-	import ConnectionFactory.spawn_connection, error_callback, Connection.read_callback_native,
-	Connection.write_callback, Connection.event_callback `{
+	import ConnectionFactory.accept_connection, error_callback `{
 
 		struct sockaddr_in sin;
 		struct evconnlistener *listener;
