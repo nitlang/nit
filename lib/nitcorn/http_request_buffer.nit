@@ -31,11 +31,10 @@ class HTTPConnection
 	private var content_length = 0
 	private var current_length = 0
 
-	redef fun read_callback_native(cstr, len)
 	# FIXME will not work if the header/body delimiter falls between two watermarks windows.
+	redef fun read_callback(str)
 	do
 		# is this the start of a request?
-		var str = cstr.to_s_with_length(len)
 		if not in_request then parse_start
 
 		var body: String
@@ -45,10 +44,13 @@ class HTTPConnection
 		else
 			body = str
 		end
+
 		# parsing body
 		if in_body then parse_body(body)
 	end
 
+	# Callback when a full HTTP request is received
+	fun read_http_request(str: String) do end
 
 	# Prepare for a new request
 	private fun parse_start do
@@ -111,7 +113,7 @@ class HTTPConnection
 		for ch in current_header do res.append ch.write_to_string
 		res.append "\r\n\r\n"
 		for cb in current_body do res.append cb.write_to_string
-		read_callback(res.write_to_string)
+		read_http_request res.to_s
 		in_request = false
 	end
 end

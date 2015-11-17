@@ -35,7 +35,7 @@ class HttpServer
 
 	private var parser = new HttpRequestParser is lazy
 
-	redef fun read_callback(str)
+	redef fun read_http_request(str)
 	do
 		var request_object = parser.parse_http_request(str.to_s)
 		if request_object != null then delegate_answer request_object
