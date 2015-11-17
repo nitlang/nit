@@ -17,7 +17,11 @@ module http_request_buffer
 
 intrude import libevent
 
-redef class Connection
+# Connection rebuilding HTTP requests
+#
+# Subclass should refine `read_full_request` and avoid `read_callback`.
+class HTTPConnection
+	super Connection
 
 	private var in_request = false
 	private var in_header = false
