@@ -207,7 +207,7 @@ class CodeGenerator
 		end
 
 		file_out.write """
-# Java class: {{{java_type}}}
+# Java class: {{{java_type.extern_equivalent}}}
 extern class {{{nit_type}}} in "Java" `{ {{{java_type.extern_equivalent}}} `}
 	{{{supers.join("\n\t")}}}
 
@@ -280,7 +280,7 @@ extern class {{{nit_type}}} in "Java" `{ {{{java_type.extern_equivalent}}} `}
 
 		# Write
 		file_out.write """
-{{{t}}}# Java implementation: {{{java_return_type}}} {{{java_class}}}.{{{java_method_id}}}({{{java_params.join(", ")}}})
+{{{t}}}# Java implementation: {{{java_return_type}}} {{{java_class.class_type.extern_equivalent}}}.{{{java_method_id}}}({{{java_params.join(", ")}}})
 {{{ct}}}{{{nit_signature.join}}} in "Java" `{
 {{{ct}}}	{{{java_call}}};
 {{{ct}}}`}
@@ -314,12 +314,12 @@ extern class {{{nit_type}}} in "Java" `{ {{{java_type.extern_equivalent}}} `}
 		var ct = c+t
 
 		file_out.write """
-{{{t}}}# Java getter: {{{java_class}}}.{{{java_id}}}
+{{{t}}}# Java getter: {{{java_class.class_type.extern_equivalent}}}.{{{java_id}}}
 {{{ct}}}fun {{{nit_id}}}: {{{nit_type}}} in "Java" `{
 {{{ct}}}	return {{{recv}}}.{{{java_id}}};
 {{{ct}}}`}
 
-{{{t}}}# Java setter: {{{java_class}}}.{{{java_id}}}
+{{{t}}}# Java setter: {{{java_class.class_type.extern_equivalent}}}.{{{java_id}}}
 {{{ct}}}fun {{{nit_id}}}=(value: {{{nit_type}}}) in "Java" `{
 {{{ct}}}	{{{recv}}}.{{{java_id}}} = value;
 {{{ct}}}`}
@@ -355,7 +355,7 @@ extern class {{{nit_type}}} in "Java" `{ {{{java_type.extern_equivalent}}} `}
 		end
 
 		file_out.write """
-	# Java constructor: {{{java_class}}}
+	# Java constructor: {{{java_class.class_type.extern_equivalent}}}
 {{{c}}}	new {{{name}}}{{{nit_params_s}}} in "Java" `{
 {{{c}}}		return new {{{java_class.class_type.package_name}}}({{{java_params_s}}});
 {{{c}}}	`}
@@ -373,7 +373,7 @@ extern class {{{nit_type}}} in "Java" `{ {{{java_type.extern_equivalent}}} `}
 		var nit_type = model.java_to_nit_type(java_type)
 
 		file_out.write """
-# Java primitive array: {{{java_type}}}
+# Java primitive array: {{{java_type.extern_equivalent}}}
 extern class {{{nit_type}}} in "Java" `{ {{{java_type.extern_equivalent}}} `}
 	super AbstractJavaArray[{{{base_nit_type}}}]
 
