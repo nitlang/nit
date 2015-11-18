@@ -20,27 +20,22 @@
 module reactor
 
 import more_collections
-import http_request_parser
 
 import vararg_routes
 import http_request
+import http_request_buffer
 import http_response
 
 # A server handling a single connection
 class HttpServer
-	super Connection
+	super HTTPConnection
 
 	# The associated `HttpFactory`
 	var factory: HttpFactory
 
-	# Init the server using `HttpFactory`.
-	init(buf_ev: NativeBufferEvent, factory: HttpFactory) is old_style_init do
-		self.factory = factory
-	end
-
 	private var parser = new HttpRequestParser is lazy
 
-	redef fun read_callback(str)
+	redef fun read_http_request(str)
 	do
 		var request_object = parser.parse_http_request(str.to_s)
 		if request_object != null then delegate_answer request_object
