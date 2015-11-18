@@ -78,7 +78,7 @@ private class Concat
 
 	redef var bytelen is noinit
 
-	redef fun substrings do return new RopeSubstrings(self)
+	redef fun substrings do return new RopeSubstrings.from(self, 0)
 
 	redef fun empty do return ""
 
@@ -118,7 +118,7 @@ private class Concat
 		_right.output
 	end
 
-	redef fun iterator do return new RopeCharIterator(self)
+	redef fun iterator do return new RopeCharIterator.from(self, 0)
 
 	redef fun *(i) do
 		var x: String = self
@@ -315,7 +315,7 @@ class RopeBuffer
 	# mutable native string (`ns`)
 	private var buf_size: Int is noinit
 
-	redef fun substrings do return new RopeBufSubstringIterator(self)
+	redef fun substrings do return new RopeBufSubstringIterator.from(self)
 
 	# Builds an empty `RopeBuffer`
 	init do
@@ -593,22 +593,14 @@ private class RopeByteReverseIterator
 	super IndexedIterator[Byte]
 
 	# Current NativeString
-	var ns: NativeString
+	var ns: NativeString is noautoinit
 	# Current position in NativeString
-	var pns: Int
+	var pns: Int is noautoinit
 	# Position in the Rope (0-indexed)
-	var pos: Int
+	var pos: Int is noautoinit
 	# Iterator on the substrings, does the Postfix part of
 	# the Rope traversal.
-	var subs: IndexedIterator[FlatString]
-
-	init(root: Concat) is old_style_init do
-		pos = root._bytelen - 1
-		subs = new ReverseRopeSubstrings(root)
-		var s = subs.item
-		ns = s._items
-		pns = s._last_byte
-	end
+	var subs: IndexedIterator[FlatString] is noautoinit
 
 	init from(root: Concat, pos: Int) do
 		self.pos = pos
@@ -642,23 +634,15 @@ private class RopeByteIterator
 	super IndexedIterator[Byte]
 
 	# Position in current `String`
-	var pns: Int
+	var pns: Int is noautoinit
 	# Current `String` being iterated on
-	var ns: NativeString
+	var ns: NativeString is noautoinit
 	# Substrings of the Rope
-	var subs: IndexedIterator[FlatString]
+	var subs: IndexedIterator[FlatString] is noautoinit
 	# Maximum position to iterate on (e.g. Rope.length)
-	var max: Int
+	var max: Int is noautoinit
 	# Position (char) in the Rope (0-indexed)
-	var pos: Int
-
-	init(root: Concat) is old_style_init do
-		subs = new RopeSubstrings(root)
-		pns = 0
-		ns = subs.item._items
-		max = root.length - 1
-		pos = 0
-	end
+	var pos: Int is noautoinit
 
 	init from(root: Concat, pos: Int) do
 		subs = new RopeSubstrings.from(root, pos)
@@ -692,21 +676,14 @@ private class RopeCharReverseIterator
 	super IndexedIterator[Char]
 
 	# Current NativeString
-	var ns: String
+	var ns: String is noautoinit
 	# Current position in NativeString
-	var pns: Int
+	var pns: Int is noautoinit
 	# Position in the Rope (0-indexed)
-	var pos: Int
+	var pos: Int is noautoinit
 	# Iterator on the substrings, does the Postfix part of
 	# the Rope traversal.
-	var subs: IndexedIterator[String]
-
-	init(root: Concat) is old_style_init do
-		pos = root.length - 1
-		subs = new ReverseRopeSubstrings(root)
-		ns = subs.item
-		pns = ns.length - 1
-	end
+	var subs: IndexedIterator[String] is noautoinit
 
 	init from(root: Concat, pos: Int) do
 		self.pos = pos
@@ -738,23 +715,15 @@ private class RopeCharIterator
 	super IndexedIterator[Char]
 
 	# Position in current `String`
-	var pns: Int
+	var pns: Int is noautoinit
 	# Current `String` being iterated on
-	var str: String
+	var str: String is noautoinit
 	# Substrings of the Rope
-	var subs: IndexedIterator[String]
+	var subs: IndexedIterator[String] is noautoinit
 	# Maximum position to iterate on (e.g. Rope.length)
-	var max: Int
+	var max: Int is noautoinit
 	# Position (char) in the Rope (0-indexed)
-	var pos: Int
-
-	init(root: Concat) is old_style_init do
-		subs = new RopeSubstrings(root)
-		pns = 0
-		str = subs.item
-		max = root.length - 1
-		pos = 0
-	end
+	var pos: Int is noautoinit
 
 	init from(root: Concat, pos: Int) do
 		subs = new RopeSubstrings.from(root, pos)
@@ -793,22 +762,6 @@ private class ReverseRopeSubstrings
 
 	# Current leaf
 	var str: FlatString is noinit
-
-	init(root: Concat) is old_style_init do
-		var r = new RopeCharIteratorPiece(root, false, true, null)
-		pos = root.length - 1
-		var lnod: String = root
-		loop
-			if lnod isa Concat then
-				lnod = lnod._right
-				r = new RopeCharIteratorPiece(lnod, false, true, r)
-			else
-				str = lnod.as(FlatString)
-				iter = r
-				break
-			end
-		end
-	end
 
 	init from(root: Concat, pos: Int) do
 		var r = new RopeCharIteratorPiece(root, false, true, null)
@@ -873,13 +826,13 @@ private class RopeBufSubstringIterator
 	super Iterator[FlatText]
 
 	# Iterator on the substrings of the building string
-	var iter: Iterator[FlatText]
+	var iter: Iterator[FlatText] is noautoinit
 	# Makes a String out of the buffered part of the Ropebuffer
-	var nsstr: FlatString
+	var nsstr: FlatString is noautoinit
 	# Did we attain the buffered part ?
 	var nsstr_done = false
 
-	init(str: RopeBuffer) is old_style_init do
+	init from(str: RopeBuffer) do
 		iter = str.str.substrings
 		nsstr = new FlatString.with_infos(str.ns, str.rpos - str.dumped, str.dumped, str.rpos - 1)
 		if str.length == 0 then nsstr_done = true
@@ -915,24 +868,6 @@ private class RopeSubstrings
 
 	# Current leaf
 	var str: FlatString is noinit
-
-	init(root: Concat) is old_style_init do
-		var r = new RopeCharIteratorPiece(root, true, false, null)
-		pos = 0
-		max = root.length - 1
-		var rnod: String = root
-		loop
-			if rnod isa Concat then
-				rnod = rnod._left
-				r = new RopeCharIteratorPiece(rnod, true, false, r)
-			else
-				str = rnod.as(FlatString)
-				r.rdone = true
-				iter = r
-				break
-			end
-		end
-	end
 
 	init from(root: Concat, pos: Int) do
 		var r = new RopeCharIteratorPiece(root, true, false, null)
@@ -1043,15 +978,9 @@ class RopeBufferCharIterator
 	super IndexedIterator[Char]
 
 	# Subiterator.
-	var sit: IndexedIterator[Char]
+	var sit: IndexedIterator[Char] is noautoinit
 
 	redef fun index do return sit.index
-
-	# Init the iterator from a RopeBuffer.
-	init(t: RopeBuffer) is old_style_init do
-		t.persist_buffer
-		sit = t.str.chars.iterator
-	end
 
 	# Init the iterator from a RopeBuffer starting from `pos`.
 	init from(t: RopeBuffer, pos: Int) do
@@ -1074,15 +1003,9 @@ class RopeBufferCharReverseIterator
 	super IndexedIterator[Char]
 
 	# Subiterator.
-	var sit: IndexedIterator[Char]
+	var sit: IndexedIterator[Char] is noautoinit
 
 	redef fun index do return sit.index
-
-	# Init the iterator from a RopeBuffer.
-	init(tgt: RopeBuffer) is old_style_init do
-		tgt.persist_buffer
-		sit = tgt.str.chars.reverse_iterator
-	end
 
 	# Init the iterator from a RopeBuffer starting from `pos`.
 	init from(tgt: RopeBuffer, pos: Int) do
@@ -1124,27 +1047,18 @@ class RopeBufferByteIterator
 	super IndexedIterator[Byte]
 
 	# Subiterator.
-	var sit: IndexedIterator[Byte]
+	var sit: IndexedIterator[Byte] is noautoinit
 
 	# Native string iterated over.
-	var ns: NativeString
+	var ns: NativeString is noautoinit
 
 	# Current position in `ns`.
-	var pns: Int
+	var pns: Int is noautoinit
 
 	# Maximum position iterable.
-	var maxpos: Int
+	var maxpos: Int is noautoinit
 
-	redef var index
-
-	# Init the iterator from a RopeBuffer.
-	init(t: RopeBuffer) is old_style_init do
-		ns = t.ns
-		maxpos = t._bytelen
-		sit = t.str.bytes.iterator
-		pns = t.dumped
-		index = 0
-	end
+	redef var index is noautoinit
 
 	# Init the iterator from a RopeBuffer starting from `pos`.
 	init from(t: RopeBuffer, pos: Int) do
@@ -1177,23 +1091,15 @@ class RopeBufferByteReverseIterator
 	super IndexedIterator[Byte]
 
 	# Subiterator.
-	var sit: IndexedIterator[Byte]
+	var sit: IndexedIterator[Byte] is noautoinit
 
 	# Native string iterated over.
-	var ns: NativeString
+	var ns: NativeString is noautoinit
 
 	# Current position in `ns`.
-	var pns: Int
+	var pns: Int is noautoinit
 
-	redef var index
-
-	# Init the iterator from a RopeBuffer.
-	init(tgt: RopeBuffer) is old_style_init do
-		sit = tgt.str.bytes.reverse_iterator
-		pns = tgt.rpos - 1
-		index = tgt._bytelen - 1
-		ns = tgt.ns
-	end
+	redef var index is noautoinit
 
 	# Init the iterator from a RopeBuffer starting from `pos`.
 	init from(tgt: RopeBuffer, pos: Int) do
