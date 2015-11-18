@@ -142,13 +142,13 @@ class CByteArray
 	# Safely move `n` bytes from `dst_offset` to `src_offset`, inside this array
 	#
 	# Require: all arguments greater than 0 and ranges within `length`
-	fun memmove(dst_offset, src_offset, n: Int)
+	fun move(dst_offset, src_offset, n: Int)
 	do
 		assert dst_offset >= 0 and src_offset >= 0 and n >= 0
 		assert dst_offset + n <= length
 		assert src_offset + n <= length
 
-		native_array.memmove(dst_offset, src_offset, n)
+		native_array.move(dst_offset, src_offset, n)
 	end
 end
 
@@ -166,7 +166,7 @@ extern class NativeCByteArray `{ unsigned char* `}
 	redef fun +(offset) `{ return self + offset; `}
 
 	# Move `n` bytes from `dst_offset` to `src_offset`
-	fun memmove(dst_offset, src_offset, n: Int) `{
+	fun move(dst_offset, src_offset, n: Int) `{
 		memmove(self+dst_offset, self+src_offset, n);
 	`}
 end

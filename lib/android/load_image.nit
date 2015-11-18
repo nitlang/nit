@@ -55,7 +55,7 @@ redef extern class NativeBitmap
 			for r in [height-1..0[.step(-1) do
 				var src_offset = row_bytes*r
 				var dst_offset = row_bytes2*r
-				buf.memmove(dst_offset, src_offset, row_bytes)
+				buf.move(dst_offset, src_offset, row_bytes)
 			end
 		end
 
