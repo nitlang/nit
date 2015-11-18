@@ -21,34 +21,12 @@
 # * The Android ndk
 # * zlib (which is included in the Android ndk)
 # * libpng which must be provided by the Nit compilation framework
-module android_assets is ldflags "-lz"
+module android_assets
 
 import mnit
 import android_app
-
-in "C header" `{
-	#include <png.h>
-	#include <zlib.h>
-`}
-
-in "C" `{
-	void mnit_android_png_read_data(png_structp png_ptr,
-			png_bytep data, png_size_t length)
-	{
-			struct AAsset *self = png_get_io_ptr(png_ptr);
-			int read = AAsset_read(self, data, length);
-	}
-	void mnit_android_png_error_fn(png_structp png_ptr,
-		png_const_charp error_msg)
-	{
-			LOGW("libpng error: %s", error_msg);
-	}
-	void mnit_android_png_warning_fn(png_structp png_ptr,
-		png_const_charp warning_msg)
-	{
-			LOGW("libpng warning: %s", warning_msg);
-	}
-`}
+intrude import android::assets_and_resources
+intrude import android::load_image
 
 extern class AndroidAsset in "C" `{struct AAsset*`}
 
@@ -83,13 +61,25 @@ end
 redef class App
 	redef fun try_loading_asset(path)
 	do
+		# Load images with the Java API
+		var ext = path.file_extension
+		if ext == "png" or ext == "jpg" or ext == "jpeg" then
+			jni_env.push_local_frame 4
+
+			var bmp = asset_manager.bitmap(path)
+			var buf = bmp.copy_pixels(true)
+			var w2 = bmp.width.next_pow(2)
+			var h2 = bmp.height.next_pow(2)
+			var png = new Opengles1Image.from_data(buf.native_array, bmp.width, bmp.height, w2, h2, true)
+
+			buf.destroy
+			jni_env.pop_local_frame
+			return png
+		end
+
 		var a = load_asset_from_apk(path)
 		if a != null then
-			if path.file_extension == "png" then
-				var png = new Opengles1Image.from_android_asset(a)
-				a.close
-				return png
-			else if path.file_extension == "txt" then
+			if ext == "txt" then
 				var len = a.length
 				var txt = a.read(len)
 				return txt
@@ -117,122 +107,8 @@ redef class App
 end
 
 redef class Opengles1Image
-	# Read a png from a zipped stream
-	new from_android_asset(asset: AndroidAsset) import Int.next_pow `{
-		struct mnit_opengles_Texture *self = NULL;
-
-		png_structp png_ptr = NULL;
-		png_infop info_ptr = NULL;
-
-		png_uint_32 width, height;
-		int depth, color_type;
-		int has_alpha;
-
-		unsigned int row_bytes;
-		png_bytepp row_pointers = NULL;
-		unsigned char *pixels = NULL;
-		unsigned int i;
-
-		png_uint_32 width_pow2, height_pow2;
-		unsigned int row_bytes_pow2;
-
-		unsigned char sig[8];
-		int sig_read = AAsset_read(asset, sig, 8);
-		if (png_sig_cmp(sig, 0, sig_read)) {
-			LOGW("invalide png signature");
-			return NULL;
-		}
-
-		png_ptr = png_create_read_struct(PNG_LIBPNG_VER_STRING, NULL, NULL, NULL);
-		if (png_ptr == NULL) {
-			LOGW("png_create_read_struct failed");
-			goto close_stream;
-		}
-		png_set_error_fn(png_ptr, NULL, mnit_android_png_error_fn, mnit_android_png_warning_fn);
-
-		info_ptr = png_create_info_struct(png_ptr);
-		if (info_ptr == NULL) {
-			LOGW("png_create_info_struct failed");
-			goto close_png_ptr;
-		}
-
-		if (setjmp(png_jmpbuf(png_ptr))) {
-			LOGW("reading png file failed");
-			goto close_png_ptr;
-		}
-
-		png_set_read_fn(png_ptr, (void*)asset, mnit_android_png_read_data);
-
-		png_set_sig_bytes(png_ptr, sig_read);
-
-		png_read_info(png_ptr, info_ptr);
-
-		png_get_IHDR(	png_ptr, info_ptr, &width, &height,
-						&depth, &color_type, NULL, NULL, NULL);
-		has_alpha = color_type & PNG_COLOR_MASK_ALPHA;
-
-		// If we get gray and alpha only, standardize the format of the pixels.
-		// GA is not supported by OpenGL ES 1.
-		if (!(color_type & PNG_COLOR_MASK_COLOR)) {
-			png_set_gray_to_rgb(png_ptr);
-			png_set_palette_to_rgb(png_ptr);
-			png_read_update_info(png_ptr, info_ptr);
-		}
-
-		width_pow2 = Int_next_pow(width, 2);
-		height_pow2 = Int_next_pow(height, 2);
-
-		LOGW("Loading image of w: %i, h: %i, w2: %d, h2: %d",
-			width, height, width_pow2, height_pow2);
-
-		row_bytes = png_get_rowbytes(png_ptr, info_ptr);
-		row_bytes_pow2 = row_bytes * width_pow2 / width;
-		pixels = malloc(row_bytes_pow2 * height_pow2);
-		row_pointers = (png_bytep*)malloc(sizeof(png_bytep) * height_pow2);
-
-		for (i=0; i<height; i++)
-			row_pointers[i] = (png_byte*) malloc(row_bytes);
-
-		png_read_image(png_ptr, row_pointers);
-
-		for (i = 0; i < height; i++)
-			memcpy(pixels + (row_bytes_pow2*i), row_pointers[i], row_bytes);
-
-		self = mnit_opengles_load_image((const uint_least32_t *)pixels,
+	private new from_data(pixels: Pointer, width, height, width_pow2, height_pow2: Int, has_alpha: Bool) `{
+		return mnit_opengles_load_image((const uint_least32_t *)pixels,
 			width, height, width_pow2, height_pow2, has_alpha);
-
-		// Calculate the size of the client-side memory allocated and freed
-		float size = ((float)row_bytes_pow2) * height_pow2/1024.0/1024.0;
-		static float total_size = 0;
-		total_size += size;
-		LOGI("Loaded OK %fmb out of %fmb", size, total_size);
-
-	close_png_ptr:
-		if (info_ptr != NULL)
-			png_destroy_read_struct(&png_ptr, &info_ptr, NULL);
-		else
-			png_destroy_read_struct(&png_ptr, NULL, NULL);
-
-		if (pixels != NULL)
-			free(pixels);
-
-		if (row_pointers != NULL) {
-			for (i=0; i<height; i++)
-				free(row_pointers[i]);
-			free(row_pointers);
-		}
-
-	close_stream:
-		return self;
 	`}
-end
-
-redef universal Int
-	# The first power of `exp` greater or equal to `self`
-	private fun next_pow(exp: Int): Int
-	do
-		var p = 1
-		while p < self do p = p*exp
-		return p
-	end
 end
