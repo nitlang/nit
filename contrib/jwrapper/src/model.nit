@@ -110,10 +110,13 @@ class JavaType
 	fun id: String do return identifier.last.replace("$", "")
 
 	# Full name of this class as used in an importation (e.g. `java.lang.Set`)
-	fun package_name: String do return identifier.join(".")
+	fun package_name: String do return identifier.join(".").replace("$", ".")
+
+	# Full name of this class as used by jni (e.g. `android.graphics.BitmapFactory$Options`)
+	fun jni_full_name: String do return identifier.join(".")
 
 	# Name of this class for the extern declaration in Nit (e.g. `java.lang.Set[]`)
-	fun extern_equivalent: String do return package_name + "[]" * array_dimension
+	fun extern_equivalent: String do return jni_full_name + "[]" * array_dimension
 
 	# Full name of this class with arrays and generic values (e.g. `java.lang.Set<E>[]`)
 	redef fun to_s do
