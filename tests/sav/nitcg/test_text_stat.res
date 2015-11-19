@@ -19,7 +19,7 @@ Calls to position for each type:
 	FlatString = 35
 Calls to bytepos for each type:
 	FlatString = 18
-Calls to first_byte on FlatString 153
+Calls to first_byte on FlatString 227
 Calls to last_byte on FlatString 103
 FlatStrings allocated with length 82 (86.458%)
 Length of travel for index distribution:
