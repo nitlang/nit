@@ -138,6 +138,18 @@ class CByteArray
 		end
 		return carray
 	end
+
+	# Safely move `n` bytes from `dst_offset` to `src_offset`, inside this array
+	#
+	# Require: all arguments greater than 0 and ranges within `length`
+	fun move(dst_offset, src_offset, n: Int)
+	do
+		assert dst_offset >= 0 and src_offset >= 0 and n >= 0
+		assert dst_offset + n <= length
+		assert src_offset + n <= length
+
+		native_array.move(dst_offset, src_offset, n)
+	end
 end
 
 # An array of `unsigned char` in C (`unsigned char*`)
@@ -152,6 +164,11 @@ extern class NativeCByteArray `{ unsigned char* `}
 	redef fun []=(index, val) `{ self[index] = val; `}
 
 	redef fun +(offset) `{ return self + offset; `}
+
+	# Move `n` bytes from `dst_offset` to `src_offset`
+	fun move(dst_offset, src_offset, n: Int) `{
+		memmove(self+dst_offset, self+src_offset, n);
+	`}
 end
 
 # Wrapper around an array of `NativeString` in C (`char**`) with length and destroy state.

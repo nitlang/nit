@@ -183,6 +183,14 @@ extern class JavaVM `{JavaVM *`}
 		}
 		return env;
 	`}
+
+	# Detach the calling thread from this JVM
+	fun detach_current_thread import jni_error `{
+		int res = (*self)->DetachCurrentThread(self);
+		if (res != JNI_OK) {
+			JavaVM_jni_error(NULL, "Could not detach current thread to Java VM", res);
+		}
+	`}
 end
 
 # Represents a jni JNIEnv, which is a thread in a JavaVM

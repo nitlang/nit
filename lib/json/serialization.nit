@@ -448,6 +448,26 @@ class JsonDeserializer
 	end
 end
 
+redef class Text
+
+	# Deserialize a `nullable Object` from this JSON formatted string
+	#
+	# Warning: Deserialization errors are reported with `print_error` and
+	# may be returned as a partial object or as `null`.
+	#
+	# This method is not appropriate when errors need to be handled programmatically,
+	# manually use a `JsonDeserializer` in such cases.
+	fun from_json_string: nullable Object
+	do
+		var deserializer = new JsonDeserializer(self)
+		var res = deserializer.deserialize
+		if deserializer.errors.not_empty then
+			print_error "Deserialization Errors: {deserializer.errors.join(", ")}"
+		end
+		return res
+	end
+end
+
 redef class Serializable
 	private fun serialize_to_json(v: JsonSerializer)
 	do
@@ -462,6 +482,16 @@ redef class Serializable
 		end
 		core_serialize_to(v)
 		v.stream.write "\}"
+	end
+
+	# Serialize this object to a JSON string with metadata for deserialization
+	fun to_json_string: String
+	do
+		var stream = new StringWriter
+		var serializer = new JsonSerializer(stream)
+		serializer.serialize self
+		stream.close
+		return stream.to_s
 	end
 
 	# Serialize this object to plain JSON
@@ -551,7 +581,7 @@ redef class SimpleCollection[E]
 		end
 	end
 
-	redef init from_deserializer(v: Deserializer)
+	redef init from_deserializer(v)
 	do
 		super
 		if v isa JsonDeserializer then
@@ -609,8 +639,7 @@ redef class Map[K, V]
 		end
 	end
 
-	# Instantiate a new `Array` from its serialized representation.
-	redef init from_deserializer(v: Deserializer)
+	redef init from_deserializer(v)
 	do
 		super
 

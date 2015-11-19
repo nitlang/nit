@@ -24,3 +24,6 @@ class C
 	super A[Int]
 	super B[Char]
 end
+
+var c = new C
+c.output

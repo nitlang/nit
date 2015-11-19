@@ -15,3 +15,4 @@
 # limitations under the License.
 
 var i: Int = '4'
+i.output

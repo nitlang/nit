@@ -19,3 +19,6 @@ class A
 end
 class A[E: Object]
 end
+
+var a = new A
+a.output

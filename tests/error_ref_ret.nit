@@ -19,3 +19,6 @@ import module_simple
 redef class C
 	redef fun s: Int do return 1 end
 end
+
+var c = new C(new B)
+c.s.output

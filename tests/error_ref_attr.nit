@@ -19,3 +19,6 @@ import module_simple
 redef class C
 	redef var a: Int
 end
+
+var c = new C(new B)
+c.a.output

@@ -220,6 +220,9 @@ redef class MModule
 		for cb in callbacks do
 			jni_methods.add_all(cb.jni_methods_declaration(self))
 		end
+		for cb in callbacks_used_from_java.types do
+			jni_methods.add_all(cb.jni_methods_declaration(self))
+		end
 
 		var cf = new CFunction("void nit_ffi_with_java_register_natives(JNIEnv* env, jclass jclazz)")
 		cf.exprs.add """
@@ -470,6 +473,38 @@ redef class MType
 	# Used by `JavaLanguage::compile_extern_method` when calling JNI's `CallStatic*Method`.
 	# This strategy is used by JNI to type the return of callbacks to Java.
 	private fun jni_signature_alt: String do return "Int"
+
+	redef fun compile_callback_to_java(mmodule, mainmodule, ccu)
+	do
+		var java_file = mmodule.java_file
+		if java_file == null then return
+
+		for variation in ["incr", "decr"] do
+			var friendly_name = "{mangled_cname}_{variation}_ref"
+
+			# C
+			var csignature = "void {mmodule.impl_java_class_name}_{friendly_name}(JNIEnv *env, jclass clazz, jint object)"
+			var cf = new CFunction("JNIEXPORT {csignature}")
+			cf.exprs.add "\tnitni_global_ref_{variation}((void*)(long)object);"
+			ccu.add_non_static_local_function cf
+
+			# Java
+			java_file.class_content.add "private native static void {friendly_name}(int object);\n"
+		end
+	end
+
+	redef fun jni_methods_declaration(from_mmodule)
+	do
+		var arr = new Array[String]
+		for variation in ["incr", "decr"] do
+			var friendly_name = "{mangled_cname}_{variation}_ref"
+			var jni_format = "(I)V"
+			var cname = "{from_mmodule.impl_java_class_name}_{friendly_name}"
+			arr.add """{"{{{friendly_name}}}", "{{{jni_format}}}", {{{cname}}}}"""
+		end
+
+		return arr
+	end
 end
 
 redef class MClassType

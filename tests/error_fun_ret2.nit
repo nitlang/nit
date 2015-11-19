@@ -20,3 +20,5 @@ do
 		return 0
 	end
 end
+
+toto.output

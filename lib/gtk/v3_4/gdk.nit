@@ -18,26 +18,29 @@ module gdk is pkgconfig "gtk+-3.0"
 import gtk_core
 
 `{
-#ifdef GdkCallback_run
-	// Callback to GdkCallaback::run
-	gboolean nit_gdk_callback(gpointer user_data) {
-		GdkCallback_decr_ref(user_data);
-		return GdkCallback_run(user_data);
+#ifdef Task_gdk_main
+	// Callback to Task::gdk_main
+	gboolean nit_gdk_callback_task(gpointer user_data) {
+		Task_decr_ref(user_data);
+		return Task_gdk_main(user_data);
 	}
 #endif
 `}
 
-# Callback to pass to `gdk_threads_add_idle`
-class GdkCallback
+redef class Task
 
 	# Small unit of code executed by the GDK loop when idle
 	#
-	# Returns true if this object should be invoked again.
-	fun run: Bool do return false
+	# Returns `true` if this object should be invoked again.
+	fun gdk_main: Bool
+	do
+		main
+		return false
+	end
 end
 
 # Add a callback to execute whenever there are no higher priority events pending
-fun gdk_threads_add_idle(callback: GdkCallback): Int import GdkCallback.run `{
-	GdkCallback_incr_ref(callback);
-	return gdk_threads_add_idle(&nit_gdk_callback, callback);
+fun gdk_threads_add_idle(task: Task): Int import Task.gdk_main `{
+	Task_incr_ref(task);
+	return gdk_threads_add_idle(&nit_gdk_callback_task, task);
 `}

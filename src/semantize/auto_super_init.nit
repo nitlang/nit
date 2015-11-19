@@ -57,9 +57,9 @@ redef class AMethPropdef
 	fun do_auto_super_init(modelbuilder: ModelBuilder)
 	do
 		var mclassdef = self.parent.as(AClassdef).mclassdef
-		if mclassdef == null then return # skip error
+		if mclassdef == null or mclassdef.is_broken then return # skip error
 		var mpropdef = self.mpropdef
-		if mpropdef == null then return # skip error
+		if mpropdef == null or mpropdef.is_broken then return # skip error
 		var mmodule = mpropdef.mclassdef.mmodule
 		var anchor = mclassdef.bound_mtype
 		var recvtype = mclassdef.mclass.mclass_type
@@ -121,6 +121,11 @@ redef class AMethPropdef
 			if candidate.is_root_init then continue
 
 			var candidatedefs = candidate.lookup_definitions(mmodule, anchor)
+			if candidatedefs.is_empty then
+				# skip broken
+				is_broken = true
+				return
+			end
 			var candidatedef = candidatedefs.first
 			# TODO, we drop the others propdefs in the callsite, that is not great :(
 
@@ -136,6 +141,11 @@ redef class AMethPropdef
 		var the_root_init_mmethod = modelbuilder.the_root_init_mmethod
 		if the_root_init_mmethod != null and auto_super_inits.is_empty then
 			var candidatedefs = the_root_init_mmethod.lookup_definitions(mmodule, anchor)
+			if candidatedefs.is_empty then
+				# skip broken
+				is_broken = true
+				return
+			end
 
 			# Search the longest-one and checks for conflict
 			var candidatedef = candidatedefs.first

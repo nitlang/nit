@@ -24,3 +24,6 @@ class C
 	super A
 	super B
 end
+
+var c = new C
+c.output

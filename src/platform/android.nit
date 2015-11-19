@@ -36,7 +36,7 @@ class AndroidPlatform
 
 	redef fun name do return "android"
 
-	redef fun supports_libgc do return true
+	redef fun supports_libgc do return false
 
 	redef fun supports_libunwind do return false
 
@@ -141,7 +141,7 @@ class AndroidToolchain
 		## Generate Application.mk
 		dir = "{android_project_root}/jni/"
 		"""
-APP_ABI := armeabi armeabi-v7a x86 mips
+APP_ABI := armeabi armeabi-v7a x86
 APP_PLATFORM := android-{{{app_target_api}}}
 """.write_to_file "{dir}/Application.mk"
 
@@ -170,7 +170,7 @@ LOCAL_MODULE    := main
 LOCAL_SRC_FILES := \\
 {{{cfiles.join(" \\\n")}}}
 LOCAL_LDLIBS    := {{{ldflags.join(" ")}}} $(TARGET_ARCH)/libgc.a
-LOCAL_STATIC_LIBRARIES := android_native_app_glue png
+LOCAL_STATIC_LIBRARIES := android_native_app_glue
 
 include $(BUILD_SHARED_LIBRARY)
 
@@ -236,10 +236,6 @@ $(call import-module,android/native_app_glue)
 			exit 1
 		end
 		share_dir = share_dir.realpath
-		var target_png_dir = "{android_project_root}/jni/png"
-		if not target_png_dir.file_exists then
-			toolcontext.exec_and_check(["ln", "-s", "{share_dir}/png/", target_png_dir], "Android project error")
-		end
 
 		# Ensure that android-setup-libgc.sh has been executed
 		if not "{share_dir}/libgc/arm/lib".file_exists then

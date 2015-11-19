@@ -49,7 +49,7 @@ interface Jsonable
 	protected fun to_json_by_append: String do
 		var buffer = new RopeBuffer
 		append_json(buffer)
-		return buffer.write_to_string
+		return buffer.to_s
 	end
 
 	# Append the JSON representation of `self` to the specified buffer.
@@ -80,7 +80,7 @@ interface Jsonable
 		var res = new FlatBuffer
 		pretty_json_visit(res, 0)
 		res.add '\n'
-		return res.write_to_string
+		return res.to_s
 	end
 
 	private fun pretty_json_visit(buffer: FlatBuffer, indent: Int) is abstract
@@ -91,7 +91,7 @@ redef class Text
 
 	redef fun append_json(buffer) do
 		buffer.add '\"'
-		for i in [0..self.length[ do
+		for i in [0 .. self.length[ do
 			var char = self[i]
 			if char == '\\' then
 				buffer.append "\\\\"
@@ -99,7 +99,7 @@ redef class Text
 				buffer.append "\\\""
 			else if char == '\/' then
 				buffer.append "\\/"
-			else if char < 16.code_point then
+			else if char < ' ' then
 				if char == '\n' then
 					buffer.append "\\n"
 				else if char == '\r' then
@@ -111,10 +111,8 @@ redef class Text
 				else if char == 0x08.code_point then
 					buffer.append "\\b"
 				else
-					buffer.append "\\u000{char.code_point.to_hex}"
+					buffer.append char.escape_to_utf16
 				end
-			else if char < ' ' then
-				buffer.append "\\u00{char.code_point.to_hex}"
 			else
 				buffer.add char
 			end
@@ -427,7 +425,7 @@ end
 redef class Nstring
 	# The represented string.
 	private fun to_nit_string: String do
-		var res = new FlatBuffer
+		var res = new Buffer
 		var i = 1
 		while i < text.length - 1 do
 			var char = text[i]
@@ -445,21 +443,31 @@ redef class Nstring
 				else if char == 't' then
 					char = '\t'
 				else if char == 'u' then
-					var code = text.substring(i + 1, 4).to_hex
-					# TODO UTF-16 escaping is not supported yet.
-					if code >= 128 then
-						char = '?'
-					else
-						char = code.code_point
+					var escape = new Buffer
+					escape.append "\\u"
+					var code = text.substring(i + 1, 4)
+					escape.append code
+					var hx = code.to_hex
+					if hx >= 0xD800 and hx <= 0xDFFF then
+						var lostr = text.substring(i + 7, 4)
+						if lostr.length < 4 then
+							escape.clear
+							escape.append "\\uFFFD"
+						else
+							escape.append "\\u"
+							escape.append lostr
+						end
+						i += 6
 					end
 					i += 4
+					char = escape.from_utf16_escape
 				end
 				# `"`, `/` or `\` => Keep `char` as-is.
 			end
 			res.add char
 			i += 1
 		end
-		return res.write_to_string
+		return res.to_s
 	end
 end
 

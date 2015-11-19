@@ -15,3 +15,6 @@
 import kernel
 
 redef class Fail end
+
+var f = new Fail
+f.output

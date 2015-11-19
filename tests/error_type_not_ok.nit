@@ -21,3 +21,5 @@ class A
 	super Fail
 end
 
+var a = new A
+a.output

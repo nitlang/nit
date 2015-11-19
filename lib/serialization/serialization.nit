@@ -107,6 +107,7 @@ abstract class Deserializer
 	# All refinement should look for a precise `class_name` and call super
 	# on unsupported classes.
 	protected fun deserialize_class(class_name: String): nullable Object do
+		if class_name == "Error" then return new Error.from_deserializer(self)
 		return deserialize_class_intern(class_name)
 	end
 
@@ -255,5 +256,27 @@ redef class Ref[E]
 	redef fun core_serialize_to(v)
 	do
 		v.serialize_attribute("item", first)
+	end
+end
+
+redef class Error
+	super Serializable
+
+	redef init from_deserializer(v)
+	do
+		v.notify_of_creation self
+
+		var message = v.deserialize_attribute("message")
+		if not message isa String then message = ""
+		init message
+
+		var cause = v.deserialize_attribute("cause")
+		if cause isa nullable Error then self.cause = cause
+	end
+
+	redef fun core_serialize_to(v)
+	do
+		v.serialize_attribute("message", message)
+		v.serialize_attribute("cause", cause)
 	end
 end

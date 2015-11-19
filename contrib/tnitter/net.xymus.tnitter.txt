@@ -1,0 +1,11 @@
+Categories:Nit,Internet
+License:Apache2
+Web Site:http://tnitter.xymus.net/
+Source Code:http://nitlanguage.org/nit.git/tree/HEAD:/contrib/tnitter
+Issue Tracker:https://github.com/nitlang/nit/issues
+
+Summary:Minimal client for the Tnitter open source micro-blogging platform
+Description:
+Read the latest Tnits published on Tnitter and keep up to date with push notification support.
+This is a sample application to do asynchronous HTTP requests from portable Nit code.
+.

@@ -18,3 +18,6 @@ class C[E]
 end
 class C[E: Object, F: Object]
 end
+
+var c = new C
+c.output

@@ -14,6 +14,11 @@ android_api.nit: java_api.nit
 	# Insert an import between the 2 modules
 	sed -i -e "s/import java/import java\nimport java_api/" android_api.nit
 
+# Base wrappers to implement the lib/android/load_image.nit module
+bitmap.nit: ../../bin/jwrapper
+	../../bin/jwrapper -vv -u comment -o $@ -r "^(android.graphics.Bitmap|java.nio.Buffer|java.nio.ByteBuffer).class$$" \
+	-i ../../../../lib/android/assets_and_resources.nit $(ANDROID_JAR) -i ../../../../lib/java/collections.nit
+
 check: android_api.nit
 	../../../../bin/nitpick android_api.nit
 
