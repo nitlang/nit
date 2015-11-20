@@ -412,7 +412,7 @@ class FlatString
 
 	redef fun ==(other)
 	do
-		if not other isa FlatString then return super
+		if not other isa FlatText then return super
 
 		if self.object_id == other.object_id then return true
 
@@ -421,7 +421,7 @@ class FlatString
 		if other._bytelen != my_length then return false
 
 		var my_index = _first_byte
-		var its_index = other._first_byte
+		var its_index = other.first_byte
 
 		var last_iteration = my_index + my_length
 
@@ -439,29 +439,32 @@ class FlatString
 
 	redef fun <(other)
 	do
-		if not other isa FlatString then return super
+		if not other isa FlatText then return super
 
 		if self.object_id == other.object_id then return false
 
-		var my_length = self._bytelen
-		var its_length = other._bytelen
+		var myits = _items
+		var itsits = other._items
 
-		var max = if my_length < its_length then my_length else its_length
+		var mbt = _bytelen
+		var obt = other.bytelen
 
-		var myits = self.bytes
-		var itsits = other.bytes
+		var minln = if mbt < obt then mbt else obt
+		var mst = _first_byte
+		var ost = other.first_byte
 
-		for i in [0 .. max[ do
-			var my_curr_char = myits[i]
-			var its_curr_char = itsits[i]
+		for i in [0 .. minln[ do
+			var my_curr_char = myits[mst]
+			var its_curr_char = itsits[ost]
 
-			if my_curr_char != its_curr_char then
-				if my_curr_char < its_curr_char then return true
-				return false
-			end
+			if my_curr_char > its_curr_char then return false
+			if my_curr_char < its_curr_char then return true
+
+			mst += 1
+			ost += 1
 		end
 
-		return my_length < its_length
+		return mbt < obt
 	end
 
 	redef fun +(o) do
