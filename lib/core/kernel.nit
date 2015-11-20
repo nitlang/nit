@@ -1067,3 +1067,14 @@ extern class Pointer
 	# Free the memory pointed by this pointer
 	fun free `{ free(self); `}
 end
+
+# Task with a `main` method to be implemented by subclasses
+#
+# This class is provided for compatibility between different parallelization systems.
+# It can be used to run a fragment of code on a different thread and
+# to register a reaction to UI events.
+interface Task
+
+	# Main method of this task
+	fun main do end
+end

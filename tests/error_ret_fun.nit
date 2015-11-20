@@ -18,3 +18,5 @@ fun toto: Int
 do
 	return
 end
+
+toto.output

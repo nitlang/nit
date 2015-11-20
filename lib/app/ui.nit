@@ -106,16 +106,16 @@ end
 class CompositeControl
 	super Control
 
-	private var items = new HashSet[Control]
+	protected var items = new Array[Control]
 
 	# Add `item` as a child of `self`
 	protected fun add(item: Control) do items.add item
 
 	# Remove `item` from `self`
-	protected fun remove(item: Control) do if has(item) then items.remove item
+	fun remove(item: Control) do if has(item) then items.remove item
 
 	# Is `item` in `self`?
-	protected fun has(item: Control): Bool do return items.has(item)
+	fun has(item: Control): Bool do return items.has(item)
 
 	redef fun on_create do for i in items do i.on_create
 
@@ -146,7 +146,7 @@ abstract class View
 	# Is this control enabled so the user can interact with it?
 	#
 	# By default, or if set to `null`, the control is enabled.
-	var enabled: nullable Bool is writable #, abstract FIXME with #1311
+	var enabled: nullable Bool is writable, abstract, autoinit
 end
 
 # A control with some `text`
@@ -156,7 +156,7 @@ abstract class TextView
 	# Main `Text` of this control
 	#
 	# By default, or if set to `null`, no text is shown.
-	var text: nullable Text is writable #, abstract FIXME with #1311
+	var text: nullable Text is writable, abstract, autoinit
 end
 
 # A control for the user to enter custom `text`
@@ -166,6 +166,11 @@ end
 
 # A pushable button, raises `ButtonPressEvent`
 class Button
+	super TextView
+end
+
+# A text label
+class Label
 	super TextView
 end
 
@@ -191,4 +196,10 @@ end
 # A vertical linear organization
 class VerticalLayout
 	super Layout
+end
+
+# Scrollable list of views in a simple list
+class ListLayout
+	super View
+	super CompositeControl
 end

@@ -169,6 +169,16 @@ class ToolContext
 		return tags.has("all") or tags.has(tag)
 	end
 
+	# Output all current stacked messages, total and exit the program
+	#
+	# If there is no error, exit with 0, else exit with 1.
+	fun quit
+	do
+		check_errors
+		errors_info
+		if error_count > 0 then exit(1) else exit(0)
+	end
+
 	# Output all current stacked messages
 	#
 	# Return true if no errors occurred.

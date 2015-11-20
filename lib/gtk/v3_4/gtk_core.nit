@@ -43,13 +43,19 @@ in "C Header" `{
 `}
 
 # Initialize the GTK system
-fun init_gtk `{ gtk_init(0, NULL); `}
+fun gtk_init `{ gtk_init(0, NULL); `}
 
 # Hand over control to the GTK event loop
-fun run_gtk `{ gtk_main(); `}
+fun gtk_main `{ gtk_main(); `}
+
+# Run a single iteration of the main loop, block until an event is noticed
+fun gtk_main_iteration: Bool `{ return gtk_main_iteration(); `}
+
+# Run a single iteration of the main loop, only block until an event is noticed if `blocking`
+fun gtk_main_iteration_do(blocking: Bool): Bool `{ return gtk_main_iteration_do(blocking); `}
 
 # Quit the GTK event loop and clean up the system
-fun quit_gtk `{ gtk_main_quit(); `}
+fun gtk_main_quit `{ gtk_main_quit(); `}
 
 interface GtkCallable
 	# return true to stop event processing, false to let it propagate
@@ -142,8 +148,9 @@ extern class GtkContainer `{GtkContainer *`}
 	fun add(widget: GtkWidget) `{
 		gtk_container_add(self, widget);
 	`}
+
 	# Remove the widget from the container
-	fun remove_widget(widget: GtkWidget) `{
+	fun remove(widget: GtkWidget) `{
 		gtk_container_remove(self, widget);
 	`}
 
@@ -156,7 +163,6 @@ extern class GtkContainer `{GtkContainer *`}
 	fun resize_mode=(resize_mode: GtkResizeMode) `{
 		gtk_container_set_resize_mode(self, resize_mode);
 	`}
-
 end
 
 # A container with just one child
@@ -290,6 +296,9 @@ extern class GtkWindow `{GtkWindow *`}
 	fun keep_below=(setting: Bool) `{
 		gtk_window_set_keep_below(self, setting);
 	`}
+
+	# Try to convince the window manage to decorate or not this window
+	fun decorated=(setting: Bool) `{ gtk_window_set_decorated(self, setting); `}
 end
 
 # A bin with a decorative frame and optional label
@@ -772,6 +781,15 @@ extern class GtkButton `{GtkButton *`}
 			signal_connect("clicked", to_call, user_data)
 	end
 
+	# Set the image of button to the given widget
+	fun image=(image: GtkWidget) `{
+		gtk_button_set_image(self, image);
+	`}
+
+	# Get the widget that is currenty set as the image of button
+	fun image: GtkWidget `{
+		return gtk_button_get_image(self);
+	`}
 end
 
 # A button which pops up a scale
@@ -1054,4 +1072,3 @@ end
 
 extern class GdkRGBA `{GdkRGBA*`}
 end
-

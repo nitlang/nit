@@ -16,12 +16,12 @@
 module ui
 
 import app::ui
-import gtk
+import gtk::v3_10
 
 import data_store
 
 redef class App
-	redef fun setup do init_gtk
+	redef fun setup do gtk_init
 
 	# On GNU/Linux, we go through all the callbacks once,
 	# there is no complex life-cycle.
@@ -34,7 +34,7 @@ redef class App
 
 		var window = window
 		window.native.show_all
-		run_gtk
+		gtk_main
 
 		app.on_pause
 		app.on_stop
@@ -83,12 +83,19 @@ redef class Window
 end
 
 redef class View
+	init do native.show
+
 	redef fun enabled do return native.sensitive
 	redef fun enabled=(enabled) do native.sensitive = enabled or else true
 end
 
 redef class Layout
 	redef type NATIVE: GtkBox
+	redef fun remove(view)
+	do
+		super
+		native.remove view.native
+	end
 end
 
 redef class HorizontalLayout
@@ -115,6 +122,13 @@ redef class VerticalLayout
 	end
 end
 
+redef class ListLayout
+	redef type NATIVE: GtkListBox
+	redef var native = new GtkListBox
+
+	init do native.selection_mode = new GtkSelectionMode.none
+end
+
 redef class Button
 	redef type NATIVE: GtkButton
 	redef var native = new GtkButton
@@ -125,6 +139,14 @@ redef class Button
 	redef fun signal(sender, data) do notify_observers new ButtonPressEvent(self)
 
 	init do native.signal_connect("clicked", self, null)
+end
+
+redef class Label
+	redef type NATIVE: GtkLabel
+	redef var native = new GtkLabel("")
+
+	redef fun text do return native.text
+	redef fun text=(value) do native.text = (value or else "").to_s
 end
 
 redef class TextInput

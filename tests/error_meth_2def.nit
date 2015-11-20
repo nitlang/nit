@@ -18,3 +18,6 @@ class A
 	fun toto(a: Int) do end
 	fun toto(a: Char) do end
 end
+
+var a = new A
+a.toto(1)

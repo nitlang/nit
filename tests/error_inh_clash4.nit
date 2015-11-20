@@ -16,3 +16,6 @@ class A[E, F]
 	super Array[E]
 	super List[F]
 end
+
+var a = new A[Int, Int]
+a.output

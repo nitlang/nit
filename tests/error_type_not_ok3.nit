@@ -22,3 +22,8 @@ end
 
 class D[T: Array[Fail]]
 end
+
+var c = new C[Int]
+c.output
+var d = new D[Int]
+d.output

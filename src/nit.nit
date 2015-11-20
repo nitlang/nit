@@ -70,7 +70,7 @@ end
 
 modelbuilder.run_phases
 
-if toolcontext.opt_only_metamodel.value then exit(0)
+if toolcontext.opt_only_metamodel.value then toolcontext.quit
 
 var mainmodule = toolcontext.make_main_module(mmodules)
 

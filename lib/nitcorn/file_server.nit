@@ -145,8 +145,7 @@ class FileServer
 					response.header["Content-Type"] = media_types["html"].as(not null)
 				else
 					# It's a single file
-					var file = new FileReader.open(local_file)
-					response.body = file.read_all
+					response.files.add local_file
 
 					var ext = local_file.file_extension
 					if ext != null then
@@ -155,8 +154,6 @@ class FileServer
 							response.header["Content-Type"] = media_type
 						else response.header["Content-Type"] = "application/octet-stream"
 					end
-
-					file.close
 				end
 
 			else response = new HttpResponse(404)

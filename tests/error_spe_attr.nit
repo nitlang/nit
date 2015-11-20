@@ -21,3 +21,6 @@ class B
 	super A
 	redef var a: Object = 2
 end
+
+var b = new B
+b.a.output

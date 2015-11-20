@@ -18,8 +18,13 @@
 module action
 
 import nitcorn
+import json::serialization
 
 import model
+import database
+
+# Path to the Sqlite3 database
+fun tnitter_db_path: String do return "tnitter.db"
 
 redef class Session
 	# User logged in
@@ -27,11 +32,8 @@ redef class Session
 end
 
 # Main Tnitter Action
-class Tnitter
+class TnitterWeb
 	super Action
-
-	var db_path = "tnitter.db"
-	var db = new DB.open(db_path)
 
 	# Header on pages served by this `Action`
 	#
@@ -99,6 +101,8 @@ class Tnitter
 		# Error to display on page as a dismissable panel
 		var error = null
 
+		var db = new DB.open(tnitter_db_path)
+
 		# Login/logout
 		if turi == "/login" and request.post_args.keys.has("user") and
 		   request.post_args.keys.has("pass") then
@@ -132,14 +136,16 @@ class Tnitter
 			session = null
 		else if turi == "/post" and request.post_args.keys.has("text") and session != null then
 			var user = session.user
-			if user != null then
+			var text = request.post_args["text"].trim
+			if user != null and not text.is_empty then
 				# Post a Tnit!
-				var text = request.post_args["text"]
 				db.post(user, text)
+				db.close
 
 				# Redirect the user to avoid double posting
 				var response = new HttpResponse(303)
 				response.header["Location"] = request.uri
+				response.session = session
 				return response
 			end
 		end
@@ -203,7 +209,8 @@ class Tnitter
 		else error_html = ""
 
 		# Load the last 16 Tnits
-		var posts = db.latest_posts(16)
+		var posts = db.list_posts(0, 16)
+		db.close
 
 		var html_posts = new Array[String]
 		for post in posts do
@@ -232,6 +239,35 @@ class Tnitter
 		var response = new HttpResponse(200)
 		response.body = body
 		response.session = session
+		return response
+	end
+end
+
+# Tnitter RESTful interface
+class TnitterREST
+	super Action
+
+	redef fun answer(request, turi)
+	do
+		if turi == "/list" then
+			# list?from=1&count=2 -> Error | Array[Post]
+
+			var from = request.int_arg("from") or else 0
+			var count = request.int_arg("count") or else 8
+
+			var db = new DB.open(tnitter_db_path)
+			var posts = db.list_posts(from, count)
+			db.close
+
+			var response = new HttpResponse(200)
+			response.body = posts.to_json_string
+			return response
+		end
+
+		# Format not recognized
+		var error = new Error("Bad Request")
+		var response = new HttpResponse(400)
+		response.body = error.to_json_string
 		return response
 	end
 end

@@ -21,3 +21,5 @@ class B
 	super Array[Fail]
 end
 
+var b = new B
+b.output

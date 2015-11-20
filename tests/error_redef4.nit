@@ -17,3 +17,5 @@ import error_redef4_base
 redef class A end
 redef class A end
 
+var a = new A
+a.output

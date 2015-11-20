@@ -853,12 +853,14 @@ extern void nitni_global_ref_decr( struct nitni_ref *ref );
 			v.add_decl("int main(int argc, char** argv) \{")
 		end
 
+		v.add "#ifndef ANDROID"
 		v.add("signal(SIGABRT, sig_handler);")
 		v.add("signal(SIGFPE, sig_handler);")
 		v.add("signal(SIGILL, sig_handler);")
 		v.add("signal(SIGINT, sig_handler);")
 		v.add("signal(SIGTERM, sig_handler);")
 		v.add("signal(SIGSEGV, sig_handler);")
+		v.add "#endif"
 		v.add("signal(SIGPIPE, SIG_IGN);")
 
 		v.add("glob_argc = argc; glob_argv = argv;")
@@ -1222,8 +1224,8 @@ abstract class AbstractCompilerVisitor
 				res.add(null_instance)
 				continue
 			end
-			if param.is_vararg and map.vararg_decl > 0 then
-				var vararg = exprs.sub(j, map.vararg_decl)
+			if param.is_vararg and args[i].vararg_decl > 0 then
+				var vararg = exprs.sub(j, args[i].vararg_decl)
 				var elttype = param.mtype
 				var arg = self.vararg_instance(mpropdef, recv, vararg, elttype)
 				res.add(arg)
@@ -3894,11 +3896,7 @@ end
 # Here we load an process all modules passed on the command line
 var mmodules = modelbuilder.parse(arguments)
 
-if mmodules.is_empty then
-	toolcontext.check_errors
-	toolcontext.errors_info
-	if toolcontext.error_count > 0 then exit(1) else exit(0)
-end
+if mmodules.is_empty then toolcontext.quit
 
 modelbuilder.run_phases
 

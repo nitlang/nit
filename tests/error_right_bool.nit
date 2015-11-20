@@ -15,4 +15,5 @@
 # limitations under the License.
 
 if true or 6 then
+	1.output
 end

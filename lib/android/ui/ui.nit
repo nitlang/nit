@@ -37,7 +37,7 @@ redef class Control
 end
 
 redef class Window
-	redef var native = app.native_activity
+	redef var native = app.native_activity.new_global_ref
 
 	redef type NATIVE: NativeActivity
 
@@ -70,11 +70,18 @@ redef class Layout
 		# FIXME abstract the use either homogeneous or weight to balance views size in a layout
 		native.add_view_with_weight(item.native, 1.0)
 	end
+
+	redef fun remove(item)
+	do
+		super
+		if item isa View then native.remove_view item.native
+	end
 end
 
 redef class HorizontalLayout
 	redef var native do
 		var layout = new NativeLinearLayout(app.native_activity)
+		layout = layout.new_global_ref
 		layout.set_horizontal
 		return layout
 	end
@@ -83,9 +90,54 @@ end
 redef class VerticalLayout
 	redef var native do
 		var layout = new NativeLinearLayout(app.native_activity)
+		layout = layout.new_global_ref
 		layout.set_vertical
 		return layout
 	end
+end
+
+redef class ListLayout
+	redef type NATIVE: Android_widget_ListView
+
+	redef var native do
+		var layout = new Android_widget_ListView(app.native_activity)
+		layout = layout.new_global_ref
+		return layout
+	end
+
+	private var adapter: Android_widget_ArrayAdapter do
+		var adapter = new Android_widget_ArrayAdapter(app.native_activity,
+			android_r_layout_simple_list_item_1, self)
+		native.set_adapter adapter
+		return adapter
+	end
+
+	redef fun add(item)
+	do
+		super
+		if item isa View then adapter.add item.native
+	end
+
+	private fun create_view(position: Int): NativeView
+	do
+		var ctrl = items[position]
+		assert ctrl isa View
+		return ctrl.native
+	end
+end
+
+redef class Android_widget_ArrayAdapter
+	private new (context: NativeContext, res: Int, sender: ListLayout)
+	import ListLayout.create_view in "Java" `{
+		final int final_sender_object = sender;
+
+		return new android.widget.ArrayAdapter(context, (int)res) {
+				@Override
+				public android.view.View getView(int position, android.view.View convertView, android.view.ViewGroup parent) {
+					return ListLayout_create_view(final_sender_object, position);
+				}
+			};
+	`}
 end
 
 redef class TextView
@@ -104,6 +156,13 @@ redef class TextView
 	fun text_size=(text_size: nullable Float) do
 		if text_size != null then native.text_size = text_size
 	end
+end
+
+redef class Label
+	redef type NATIVE: NativeTextView
+	redef var native do return (new NativeTextView(app.native_activity)).new_global_ref
+
+	init do native.set_text_appearance(app.native_activity, android_r_style_text_appearance_medium)
 end
 
 redef class TextInput

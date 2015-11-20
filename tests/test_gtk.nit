@@ -33,19 +33,18 @@ class MyApp
 
 		if sender == but_ok then
 			print "ok!"
-			quit_gtk
+			gtk_main_quit
 		else if sender == but_cancel then
 			print "cancel!"
-			quit_gtk
+			gtk_main_quit
 		else
 			print sender
 		end
-		
 	end
 
 	init
 	do
-		init_gtk
+		gtk_init
 
 		win = new GtkWindow(new GtkWindowType.toplevel)
 		win.connect_destroy_signal_to_quit
@@ -70,5 +69,5 @@ end
 
 if "NIT_TESTING".environ != "true" then
 	var app = new MyApp
-	run_gtk
+	gtk_main
 end

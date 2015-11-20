@@ -237,20 +237,61 @@ end
 # Matches are a part of a `Text` found by a `Pattern`.
 class Match
 	# The base string matched
+	#
+	# ~~~
+	# var m = "hello world".search("lo")
+	# assert m.string == "hello world"
+	# ~~~
 	var string: String
 
 	# The starting position in the string
+	#
+	# ~~~
+	# var m = "hello world".search("lo")
+	# assert m.from == 3
+	# ~~~
 	var from: Int
 
 	# The length of the matching part
+	#
+	# ~~~
+	# var m = "hello world".search("lo")
+	# assert m.length == 2
+	# ~~~
 	var length: Int
 
 	# The position of the first character just after the matching part.
 	# May be out of the base string
+	#
+	# ~~~
+	# var m = "hello world".search("lo")
+	# assert m.after == 5
+	# ~~~
 	fun after: Int do return from + length
 
 	# The contents of the matching part
+	#
+	# ~~~
+	# var m = "hello world".search("lo")
+	# assert m.to_s == "lo"
+	# ~~~
 	redef fun to_s do return string.substring(from,length)
+
+	# The content of `string` before the match
+	#
+	# ~~~
+	# var m = "hello world".search("lo")
+	# assert m.text_before == "hel"
+	# ~~~
+	fun text_before: String do return string.substring(0, from)
+
+	# The content of `string` after the match
+	#
+	# ~~~
+	# var m = "hello world".search("lo")
+	# assert m.text_after == " world"
+	# ~~~
+	fun text_after: String do return string.substring_from(after)
 
 	init
 	do
@@ -354,6 +395,37 @@ redef class Text
 				return new Match(self.to_s, i, t.length)
 			end
 			i -= 1
+		end
+		return null
+	end
+
+	# Extract a given prefix, if any.
+	#
+	# ~~~
+	# var p = "hello world".prefix("hello")
+	# assert p != null
+	# assert p.text_after == " world"
+	# ~~~
+	fun prefix(t: Text): nullable Match do
+		var len = t.length
+		if substring(0, len) == t then
+			return new Match(self.to_s, 0, len)
+		end
+		return null
+	end
+
+	# Extract a given suffix, if any.
+	#
+	# ~~~
+	# var p = "hello world".suffix("world")
+	# assert p != null
+	# assert p.text_before == "hello "
+	# ~~~
+	fun suffix(t: Text): nullable Match do
+		var len = t.length
+		var from = length - len
+		if substring(from, len) == t then
+			return new Match(self.to_s, from, len)
 		end
 		return null
 	end

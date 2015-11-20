@@ -173,10 +173,9 @@ class AssetManager
 
 	# Return a bitmap from the assets
 	private fun bitmap(name: String): NativeBitmap do
-		sys.jni_env.push_local_frame(1)
-		var return_value = new NativeBitmap.from_stream(native_assets_manager.open(name.to_java_string)).new_global_ref
-		sys.jni_env.pop_local_frame
-		return return_value
+		sys.jni_env.push_local_frame 2
+		var return_value = new NativeBitmap.from_stream(native_assets_manager.open(name.to_java_string))
+		return return_value.pop_from_local_frame
 	end
 
 	# Deallocate the global reference allocated by AssetManager
@@ -305,8 +304,30 @@ private extern class NativeBitmap in "Java" `{ android.graphics.Bitmap `}
 	# Create a NativeBitmap using a resource ID and the NativeResources
 	# Called by the ResourceManager
 	new from_resources(res: NativeResources, id: Int) in "Java" `{ return BitmapFactory.decodeResource(res, (int)id); `}
+
+	# Width in pixels
+	#
+	# Wraps Java: `int android.graphics.Bitmap.getWidth()`
 	fun width: Int in "Java" `{ return self.getWidth(); `}
+
+	# Height in pixels
+	#
+	# Wraps Java: `int android.graphics.Bitmap.getHeight()`
 	fun height: Int in "Java" `{ return self.getHeight(); `}
+
+	# Number of bytes per row
+	#
+	# Wraps Java: `int android.graphics.Bitmap.getRowBytes()`
+	fun row_bytes: Int in "Java" `{
+		return self.getRowBytes();
+	`}
+
+	# Does this bitmap has an alpha channel?
+	#
+	# Wraps Java: `boolean android.graphics.Bitmap.hasAlpha()`
+	fun has_alpha: Bool in "Java" `{
+		return self.hasAlpha();
+	`}
 
 	# HACK for bug #845
 	redef fun new_global_ref import sys, Sys.jni_env `{
@@ -315,6 +336,9 @@ private extern class NativeBitmap in "Java" `{ android.graphics.Bitmap `}
 		return (*env)->NewGlobalRef(env, self);
 	`}
 
+	redef fun pop_from_local_frame_with_env(jni_env) `{
+		return (*jni_env)->PopLocalFrame(jni_env, self);
+	`}
 end
 
 # Android AssetFileDescriptor, can be retrieve by AssetManager and used to load a sound in a SoundPool

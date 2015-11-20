@@ -17,3 +17,5 @@
 redef class Int
 	var toto: Object
 end
+
+1.toto.output

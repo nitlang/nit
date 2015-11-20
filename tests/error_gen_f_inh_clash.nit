@@ -20,3 +20,6 @@ class G3
 	super G1
 	super G2
 end
+
+var g = new G3
+g.output

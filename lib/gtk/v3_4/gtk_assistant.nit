@@ -60,7 +60,7 @@ extern class GtkAssistant `{GtkAssistant *`}
 		return gtk_assistant_insert_page(self, page, position);
 	`}
 
-	fun remove(page_num: Int) `{
+	fun remove_page(page_num: Int) `{
 		gtk_assistant_remove_page(self, page_num);
 	`}
 

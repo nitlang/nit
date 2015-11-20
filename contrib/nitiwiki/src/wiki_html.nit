@@ -95,6 +95,9 @@ redef class WikiSection
 			index.is_dirty = true
 			add_child index
 		end
+		# Hack: Force the rendering of `index` first so that trails are collected
+		# TODO: Add first-pass analysis to collect global information before doing the rendering
+		index.render
 		super
 	end
 
@@ -209,6 +212,9 @@ redef class WikiArticle
 		if tpl.has_macro("FOOTER") then
 			tpl.replace("FOOTER", tpl_footer)
 		end
+		if tpl.has_macro("TRAIL") then
+			tpl.replace("TRAIL", tpl_trail)
+		end
 		return tpl
 	end
 
@@ -291,6 +297,37 @@ redef class WikiArticle
 			tpl.replace("MENUS", items)
 		end
 		return tpl
+	end
+
+	# Generate navigation links for the trail of this article, if any.
+	#
+	# A trail is generated if the article include or is included in a trail.
+	# See `wiki.trails` for details.
+	fun tpl_trail: Writable do
+		if not wiki.trails.has(self) then return ""
+
+		# Get the position of `self` in the trail
+		var flat = wiki.trails.to_a
+		var pos = flat.index_of(self)
+		assert pos >= 0
+
+		var res = new Template
+		res.add "<ul class=\"trail\">"
+		if pos > 0 then
+			var target = flat[pos-1]
+			res.add "<li>{target.a_from(self, "prev")}</li>"
+		end
+		var parent = wiki.trails.parent(self)
+		if parent != null then
+			res.add "<li>{parent.a_from(self, "up")}</li>"
+		end
+		if pos < flat.length - 1 then
+			var target = flat[pos+1]
+			res.add "<li>{target.a_from(self, "next")}</li>"
+		end
+		res.add "</ul>"
+
+		return res
 	end
 
 	# Generate the HTML footer for this article.
