@@ -200,7 +200,7 @@ class CodeGenerator
 		end
 
 		if effective_supers == 0 then
-			if java_class.class_type.package_name == "java.lang.Object" or
+			if java_class.class_type.java_full_name == "java.lang.Object" or
 			   not model.knows_the_object_class then
 				supers.add "super JavaObject"
 			else supers.add "super Java_lang_Object"
@@ -267,7 +267,7 @@ extern class {{{nit_type}}} in "Java" `{ {{{java_type.extern_equivalent}}} `}
 		# Build the call in Java
 		var java_call
 		if is_static == true then
-			java_call = java_class.class_type.package_name
+			java_call = java_class.class_type.java_full_name
 		else java_call = "self"
 		java_call += ".{java_method_id}({java_args.join(", ")})"
 
@@ -305,7 +305,7 @@ extern class {{{nit_type}}} in "Java" `{ {{{java_type.extern_equivalent}}} `}
 
 		var recv
 		if attribute.is_static then
-			recv = java_class.class_type.package_name
+			recv = java_class.class_type.java_full_name
 		else recv = "self"
 
 		# Tabulation
@@ -357,7 +357,7 @@ extern class {{{nit_type}}} in "Java" `{ {{{java_type.extern_equivalent}}} `}
 		file_out.write """
 	# Java constructor: {{{java_class.class_type.extern_equivalent}}}
 {{{c}}}	new {{{name}}}{{{nit_params_s}}} in "Java" `{
-{{{c}}}		return new {{{java_class.class_type.package_name}}}({{{java_params_s}}});
+{{{c}}}		return new {{{java_class.class_type.java_full_name}}}({{{java_params_s}}});
 {{{c}}}	`}
 
 """
