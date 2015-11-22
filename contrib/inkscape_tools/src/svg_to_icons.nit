@@ -20,8 +20,7 @@ module svg_to_icons
 import opts
 
 redef class Int
-	fun android_path: String do return "drawable-{resolution_name}/icon.png"
-
+	# Android name for this resolution
 	fun resolution_name: String
 	do
 		if self == 36 then return "ldpi"
@@ -37,11 +36,12 @@ end
 var opt_out = new OptionString("Where to output PNG files", "--out", "-o")
 var opt_id = new OptionString("Extract only object with given ID", "--id", "-i")
 var opt_android = new OptionBool("Generate in the file structure for Android", "--android", "-a")
+var opt_android_name = new OptionString("Name of the resource for Android", "--name", "-n")
 var opt_large = new OptionBool("Generate large icons (512 and 1024 px)", "--large", "-l")
 var opt_help = new OptionBool("Print this help message", "--help", "-h")
 
 var opt_context = new OptionContext
-opt_context.add_option(opt_out, opt_id, opt_android, opt_large, opt_help)
+opt_context.add_option(opt_out, opt_id, opt_android, opt_android_name, opt_large, opt_help)
 
 opt_context.parse(args)
 var rest = opt_context.rest
@@ -83,10 +83,12 @@ else if opt_large.value then
 	resolutions = [512, 1024]
 else abort
 
+var android_res_name = opt_android_name.value or else "icon"
+
 for wh in resolutions do
 	var png_path
 	if opt_android.value then
-		png_path = "{out_path}/{wh.android_path}"
+		png_path = out_path / "drawable-" + wh.resolution_name / android_res_name + ".png"
 		var dir = png_path.dirname
 		if not dir.file_exists then dir.mkdir
 	else
