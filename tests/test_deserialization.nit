@@ -20,22 +20,13 @@ import serialization
 class A
 	auto_serializable
 
-	var b = false
+	var b: Bool
 	var c: Char
 	var f: Float
-	var i = 123
-	var s = "asdf"
+	var i: Int
+	var s: String
 	var n: nullable Int
 	var password = "p4ssw0rd" is lazy, noserialize
-
-	init(b: Bool, c: Char, f: Float, i: Int, s: String, n: nullable Int)
-	do
-		self.b = b
-		self.c = c
-		self.f = f
-		self.i = i
-		self.s = s
-	end
 
 	redef fun to_s do return "<A: {b} {c} {f} {i} {s} {n != null} {password}>"
 end
@@ -48,14 +39,6 @@ class B
 	var ii: Int
 	var ss: String
 
-	init(b: Bool, c: Char, f: Float, i: Int, s: String, n: nullable Int, ii: Int, ss: String)
-	do
-		super(b, c, f, i, s, n)
-
-		self.ii = ii
-		self.ss = ss
-	end
-
 	redef fun to_s do return "<B: {super} {ii} {ss}>"
 end
 
@@ -64,15 +47,8 @@ class C
 	auto_serializable
 
 	var a: A
-	var b = new B(false, 'b', 123.123, 2345, "hjkl", 12, 1111, "qwer")
+	var b: B
 	var aa: A
-
-	init(a: A, b: B)
-	do
-		self.a = a
-		self.b = b
-		self.aa = a
-	end
 
 	redef fun to_s do return "<C: {a} {b}>"
 end
@@ -134,7 +110,7 @@ end
 class TestEntities
 	var a = new A(true, 'a', 0.1234, 1234, "asdf", null)
 	var b = new B(false, 'b', 123.123, 2345, "hjkl", 12, 1111, "qwer")
-	var c = new C(a, b)
+	var c = new C(a, b, a)
 	var d = new D(false, 'b', 123.123, 2345, "new line ->\n<-", null, 1111, "\t\f\"\r\\/")
 	init do d.d = d
 	var e = new E
