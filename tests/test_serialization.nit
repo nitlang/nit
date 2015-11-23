@@ -24,24 +24,15 @@ class A
 	serialize
 #alt5#	serialize
 
-	var b = false
+	var b: Bool
 	var c: Char#alt2#
 	#alt2#var c: Char is noserialize
 	var f: Float#alt4#
 	#alt4#var f: Float is serialize
-	var i = 123
-	var s = "asdf"
+	var i: Int
+	var s: String
 	var n: nullable Int
 	var array = new Array[nullable Object].with_items(88, "hello", null)
-
-	init(b: Bool, c: Char, f: Float, i: Int, s: String, n: nullable Int)
-	do
-		self.b = b
-		self.c = c
-		self.f = f
-		self.i = i
-		self.s = s
-	end
 
 	redef fun to_s do return "<A: {b} {c} {f} {i} {s} {n != null}>"
 end
@@ -56,14 +47,6 @@ class B
 	var ii: Int
 	var ss: String
 
-	init(b: Bool, c: Char, f: Float, i: Int, s: String, n: nullable Int, ii: Int, ss: String)
-	do
-		super(b, c, f, i, s, n)
-
-		self.ii = ii
-		self.ss = ss
-	end
-
 	redef fun to_s do return "<B: {super} {ii} {ss}>"
 end
 
@@ -72,15 +55,8 @@ class C
 	auto_serializable
 
 	var a: A
-	var b = new B(false, 'b', 123.123, 2345, "hjkl", 12, 1111, "qwer")
+	var b: B
 	var aa: A
-
-	init(a: A, b: B)
-	do
-		self.a = a
-		self.b = b
-		self.aa = a
-	end
 
 	redef fun to_s do return "<C: {a} {b}>"
 end
@@ -97,7 +73,7 @@ end
 
 var a = new A(true, 'a', 0.1234, 1234, "asdf", null)
 var b = new B(false, 'b', 123.123, 2345, "hjkl", 12, 1111, "qwer")
-var c = new C(a, b)
+var c = new C(a, b, a)
 var d = new D(false, 'b', 123.123, 2345, "new line ->\n<-", null, 1111, "\t\f\"\r\\/")
 d.d = d
 

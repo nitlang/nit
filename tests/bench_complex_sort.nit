@@ -23,23 +23,20 @@ end
 class A
 	super Elt
 	var a: Int
-	redef fun val1: Int do return _a
+	redef fun val1: Int do return a
 
-	init(i: Int) do _a = i
 	redef fun to_s do return "Aa{a}"
 end
 
 class Elt2
 	super Elt
 	var b: Int
-	redef fun val1: Int do return _b/2
-	redef fun val2: Int do return _b
-	init initelt2(i: Int) do _b = i
+	redef fun val1: Int do return b/2
+	redef fun val2: Int do return b
 end
 
 class B
 	super Elt2
-	init(i: Int) do initelt2(i)
 	redef fun to_s do return "Bb{b}"
 end
 
@@ -47,34 +44,27 @@ class C
 	super Elt
 	var c: Int
 	var d: Int
-	redef fun val1: Int do return _c end
-	redef fun val2: Int do return _d end
+	redef fun val1: Int do return c
+	redef fun val2: Int do return d
 
-	init init2(i: Int, j: Int) do
-		_c = i
-		_d = j
-	end
 	redef fun to_s do return "Cc{c}d{d}"
 end
 
 class D
 	super A
 	super Elt2
-	redef fun val1: Int do return _a end
-	redef fun val2: Int do return _b end
+	redef fun val1: Int do return a
+	redef fun val2: Int do return b
 
-	init init2(i: Int, j: Int) do
-		init(i)
-		initelt2(j)
-	end
+	autoinit a=, b=
+
 	redef fun to_s do return "Da{a}b{b}"
 end
 
 class E
 	super Elt2
-	redef fun val1: Int do return 5 end
+	redef fun val1: Int do return 5
 
-	init(i: Int) do initelt2(i)
 	redef fun to_s do return "Eb{b}"
 end
 
@@ -83,7 +73,7 @@ class EltComparator
 	redef type COMPARED: Elt
 	redef fun compare(a, b)
 	do
-		if _is_val1 then
+		if is_val1 then
 			return a.val1 <=> b.val1
 		else
 			return a.val2 <=> b.val2
@@ -92,7 +82,7 @@ class EltComparator
 	
 	fun toggle
 	do
-		_is_val1 = not _is_val1
+		is_val1 = not is_val1
 	end
 	
 	var is_val1: Bool = false
@@ -108,9 +98,9 @@ do
 	else if r == 1 then
 		return new B(10.rand)
 	else if r == 2 then
-		return new C.init2(10.rand, 10.rand)
+		return new C(10.rand, 10.rand)
 	else if r == 3 then
-		return new D.init2(10.rand, 10.rand)
+		return new D(10.rand, 10.rand)
 	else
 		return new E(10.rand)
 	end

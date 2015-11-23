@@ -5,16 +5,16 @@
 {"b": true, "c": "a", "f": 0.123, "i": 1234, "s": "asdf", "n": null}
 
 # Nit:
-<B: <A: false b 123.123 2345 hjkl false p4ssw0rd> 1111 qwer>
+<B: <A: false b 123.123 2345 hjkl true p4ssw0rd> 1111 qwer>
 
 # Json:
-{"b": false, "c": "b", "f": 123.123, "i": 2345, "s": "hjkl", "n": null, "ii": 1111, "ss": "qwer"}
+{"b": false, "c": "b", "f": 123.123, "i": 2345, "s": "hjkl", "n": 12, "ii": 1111, "ss": "qwer"}
 
 # Nit:
-<C: <A: true a 0.123 1234 asdf false p4ssw0rd> <B: <A: false b 123.123 2345 hjkl false p4ssw0rd> 1111 qwer>>
+<C: <A: true a 0.123 1234 asdf false p4ssw0rd> <B: <A: false b 123.123 2345 hjkl true p4ssw0rd> 1111 qwer>>
 
 # Json:
-{"a": {"b": true, "c": "a", "f": 0.123, "i": 1234, "s": "asdf", "n": null}, "b": {"b": false, "c": "b", "f": 123.123, "i": 2345, "s": "hjkl", "n": null, "ii": 1111, "ss": "qwer"}, "aa": {"b": true, "c": "a", "f": 0.123, "i": 1234, "s": "asdf", "n": null}}
+{"a": {"b": true, "c": "a", "f": 0.123, "i": 1234, "s": "asdf", "n": null}, "b": {"b": false, "c": "b", "f": 123.123, "i": 2345, "s": "hjkl", "n": 12, "ii": 1111, "ss": "qwer"}, "aa": {"b": true, "c": "a", "f": 0.123, "i": 1234, "s": "asdf", "n": null}}
 
 # Nit:
 <D: <B: <A: false b 123.123 2345 new line ->
