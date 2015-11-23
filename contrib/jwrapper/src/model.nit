@@ -109,15 +109,18 @@ class JavaType
 	# Short name of the class, mangled to remove `$` (e.g. `Set`)
 	fun id: String do return identifier.last.replace("$", "")
 
-	# Full name of this class as used in an importation (e.g. `java.lang.Set`)
-	fun package_name: String do return identifier.join(".")
+	# Full name of this class as used in java code (e.g. `java.lang.Set`)
+	fun java_full_name: String do return identifier.join(".").replace("$", ".")
+
+	# Full name of this class as used by jni (e.g. `android.graphics.BitmapFactory$Options`)
+	fun jni_full_name: String do return identifier.join(".")
 
 	# Name of this class for the extern declaration in Nit (e.g. `java.lang.Set[]`)
-	fun extern_equivalent: String do return package_name + "[]" * array_dimension
+	fun extern_equivalent: String do return jni_full_name + "[]" * array_dimension
 
 	# Full name of this class with arrays and generic values (e.g. `java.lang.Set<E>[]`)
 	redef fun to_s do
-		var id = self.package_name
+		var id = self.java_full_name
 
 		if self.is_primitive_array then
 			id += "[]" * array_dimension
@@ -143,10 +146,10 @@ class JavaType
 
 	# Comparison based on fully qualified named
 	redef fun ==(other) do return other isa JavaType and
-		self.package_name == other.package_name and
+		self.java_full_name == other.java_full_name and
 		self.array_dimension == other.array_dimension
 
-	redef fun hash do return self.package_name.hash
+	redef fun hash do return self.java_full_name.hash
 end
 
 class NitType
@@ -293,7 +296,7 @@ class JavaModel
 	# Add a class in `classes`
 	fun add_class(jclass: JavaClass)
 	do
-		var key = jclass.class_type.package_name
+		var key = jclass.class_type.java_full_name
 		classes[key] = jclass
 	end
 
@@ -325,7 +328,7 @@ class JavaModel
 		end
 
 		# Is being wrapped in this pass?
-		var key = jtype.package_name
+		var key = jtype.java_full_name
 		if classes.keys.has(key) then
 			if jtype.array_dimension <= opt_arrays.value then
 				var nit_type = new NitType(jtype.extern_name)
@@ -390,7 +393,7 @@ class JavaModel
 			# Remove unavailable super classes
 			for super_type in super_classes.reverse_iterator do
 				# Is the super class available?
-				if not all_classes.keys.has(super_type.package_name) then super_classes.remove(super_type)
+				if not all_classes.keys.has(super_type.java_full_name) then super_classes.remove(super_type)
 			end
 
 			# If the is no explicit supers, add `java.lang.Object` (if it is known)
@@ -401,9 +404,9 @@ class JavaModel
 
 			for super_type in super_classes do
 				# Is the super class available?
-				if not all_classes.keys.has(super_type.package_name) then continue
+				if not all_classes.keys.has(super_type.java_full_name) then continue
 
-				var super_class = all_classes[super_type.package_name]
+				var super_class = all_classes[super_type.java_full_name]
 				class_hierarchy.add_edge(java_class, super_class)
 			end
 		end
