@@ -110,7 +110,7 @@ redef class ListLayout
 		var adapter = new Android_widget_ArrayAdapter(app.native_activity,
 			android_r_layout_simple_list_item_1, self)
 		native.set_adapter adapter
-		return adapter
+		return adapter.new_global_ref
 	end
 
 	redef fun add(item)
