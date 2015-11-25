@@ -79,7 +79,7 @@ class CurlHTTPRequest
 	super NativeCurlCallbacks
 
 	var url: String
-	var datas: nullable HeaderMap is writable
+	var data: nullable HeaderMap is writable
 	var headers: nullable HeaderMap is writable
 	var delegate: nullable CurlCallbacks is writable
 
@@ -125,9 +125,9 @@ class CurlHTTPRequest
 		end
 
 		# Datas
-		var datas = self.datas
-		if datas != null then
-			var postdatas = datas.to_url_encoded(self.curl)
+		var data = self.data
+		if data != null then
+			var postdatas = data.to_url_encoded(self.curl)
 			err = self.curl.native.easy_setopt(new CURLOption.postfields, postdatas)
 			if not err.is_ok then return answer_failure(err.to_i, err.to_s)
 		end
