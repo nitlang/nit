@@ -2,32 +2,26 @@
 // @name        Github.com - Add RPG tab
 // @namespace   nitlanguage/github/rpg
 // @description Adds a "Github RPG" Tab at the end of the tabs.
-// @include     https://github.com/nitlang/nit*
-// @version     1
+// @include     https://github.com/*
+// @downloadURL https://github.com/nitlang/nit/raw/master/contrib/nitrpg/nitrpg.user.js
+// @version     2
 // @grant       none
 // ==/UserScript==
 
-/* This script is a userscript to use in browsers with the appropriate plug-in to add a "RPG" tab on the github site.
-*/
-
-/* TODO:
- * Link to the player page (if logged and is a player)
- * Link to other games (not just `nitlang/nit` but other)
-*/
-
 // The nav bar with tabs
-var nav = document.getElementsByClassName('repo-nav');
+var nav = document.getElementsByClassName('reponav');
+if (!nav || !nav[0]) return;
 
-// The new tab
-var html = '<li class="tooltipped tooltipped-w" aria-label="Github RPG">\
-    <a href="http://nitlanguage.org/rpg/games/nitlang/nit" aria-label="RPG" class="js-selected-navigation-item sunken-menu-item" data-selected-links="repo_settings /nitlang/nit/settings">\
-          <span class="octicon octicon-ruby"></span> <span class="full-word">Github RPG</span>\
-          <img alt="" class="mini-loader" height="16" src="https://assets-cdn.github.com/images/spinners/octocat-spinner-32.gif" width="16">\
-</a></li>';
+// The current repo to link
+var repo = $("meta[name='octolytics-dimension-repository_nwo']").attr("content");
+//repo = "nitlang/nit";
+if (!repo) return;
 
-// Create a new list to put the new tab
-var group = document.createElement('ul');
-group.setAttribute( 'class', 'sunken-menu-group' );
-group.innerHTML = html;
+// The content of the new tab
+var html = '<a href="http://nitlanguage.org/rpg/games/' + repo + '" class="js-selected-navigation-item reponav-item" data-selected-links="nitrpg"><span class="octicon octicon-ruby"></span> Github RPG</a>';
+//html = '<p><span>x</span></p>';
 
-nav[0].appendChild(group);
+// Inject the new tab
+var div = document.createElement('div');
+div.innerHTML = html;
+nav[0].append(div.firstChild);
