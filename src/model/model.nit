@@ -300,18 +300,15 @@ redef class MModule
 		var props = self.model.get_mproperties_by_name(name)
 		if props == null then return null
 		var res: nullable MMethod = null
+		var recvtype = recv.intro.bound_mtype
 		for mprop in props do
 			assert mprop isa MMethod
-			var intro = mprop.intro_mclassdef
-			for mclassdef in recv.mclassdefs do
-				if not self.in_importation.greaters.has(mclassdef.mmodule) then continue
-				if not mclassdef.in_hierarchy.greaters.has(intro) then continue
-				if res == null then
-					res = mprop
-				else if res != mprop then
-					print("Fatal Error: ambigous property name '{name}'; conflict between {mprop.full_name} and {res.full_name}")
-					abort
-				end
+			if not recvtype.has_mproperty(self, mprop) then continue
+			if res == null then
+				res = mprop
+			else if res != mprop then
+				print("Fatal Error: ambigous property name '{name}'; conflict between {mprop.full_name} and {res.full_name}")
+				abort
 			end
 		end
 		return res
