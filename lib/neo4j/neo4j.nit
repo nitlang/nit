@@ -328,7 +328,7 @@ class Neo4jClient
 	# POST `params` to `url`
 	fun post(url: String, params: Jsonable): Jsonable do
 		var request = new JsonPOST(url)
-		request.data = params
+		request.json_data = params
 		var response = request.execute
 		return parse_response(response)
 	end
@@ -336,7 +336,7 @@ class Neo4jClient
 	# PUT `params` at `url`
 	fun put(url: String, params: Jsonable): Jsonable do
 		var request = new JsonPUT(url)
-		request.data = params
+		request.json_data = params
 		var response = request.execute
 		return parse_response(response)
 	end
@@ -916,7 +916,7 @@ class NeoBatch
 		# request.headers["X-Stream"] = "true"
 		var json_jobs = new JsonArray
 		for job in jobs.values do json_jobs.add job.to_rest
-		request.data = json_jobs
+		request.json_data = json_jobs
 		var response = request.execute
 		var res = client.parse_response(response)
 		return finalize_batch(res)
