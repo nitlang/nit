@@ -163,6 +163,9 @@ end
 # A control for the user to enter custom `text`
 class TextInput
 	super TextView
+
+	# Hide password or any content entered in this view?
+	var is_password: nullable Bool is writable
 end
 
 # A pushable button, raises `ButtonPressEvent`

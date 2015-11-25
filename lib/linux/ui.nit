@@ -158,4 +158,10 @@ redef class TextInput
 		if value == null then value = ""
 		native.text = value.to_s
 	end
+
+	redef fun is_password=(value)
+	do
+		native.visibility = value != true
+		super
+	end
 end
