@@ -113,30 +113,22 @@ redef class AMethPropdef
 				return
 			end
 
-			# Search the longest-one and checks for conflict
 			var candidatedef = candidatedefs.first
 			if candidatedefs.length > 1 then
-				# Check for conflict in the order of initializers
-				# Each initializer list must me a prefix of the longest list
-				# part 1. find the longest list
-				for spd in candidatedefs do
-					if spd.initializers.length > candidatedef.initializers.length then candidatedef = spd
-				end
-				# compare
-				for spd in candidatedefs do
-					var i = 0
-					for p in spd.initializers do
-						if p != candidatedef.initializers[i] then
-							modelbuilder.error(self, "Error: cannot do an implicit constructor call to conflicting inherited inits `{spd}({spd.initializers.join(", ")}`) and `{candidatedef}({candidatedef.initializers.join(", ")}`). NOTE: Do not mix old-style and new-style init!")
-							return
-						end
-						i += 1
-					end
-				end
+				var cd2 = candidatedefs[1]
+				modelbuilder.error(self, "Error: cannot do an implicit constructor call to conflicting inherited inits `{cd2}({cd2.initializers.join(", ")}`) and `{candidatedef}({candidatedef.initializers.join(", ")}`). NOTE: Do not mix old-style and new-style init!")
+				is_broken = true
+				return
 			end
 
 			var msignature = candidatedef.new_msignature or else candidatedef.msignature
 			msignature = msignature.resolve_for(recvtype, anchor, mmodule, true)
+
+			if msignature.arity > 0 then
+				modelbuilder.error(self, "Error: cannot do an implicit constructor call to `{candidatedef}{msignature}`. Expected at least `{msignature.arity}` arguments.")
+				is_broken = true
+				return
+			end
 
 			var callsite = new CallSite(hot_location, recvtype, mmodule, anchor, true, the_root_init_mmethod, candidatedef, msignature, false)
 			auto_super_inits.add(callsite)
@@ -147,27 +139,6 @@ redef class AMethPropdef
 			return
 		end
 
-		# Can the super-constructors be called?
-		for auto_super_init in auto_super_inits do
-			var auto_super_init_def = auto_super_init.mpropdef
-			var msig = mpropdef.msignature.as(not null)
-			var supermsig = auto_super_init.msignature
-			if supermsig.arity > msig.arity then
-				modelbuilder.error(self, "Error: cannot do an implicit constructor call to `{auto_super_init_def}{supermsig}`. Expected at least `{supermsig.arity}` arguments, got `{msig.arity}`.")
-				continue
-			end
-			var i = 0
-			for sp in supermsig.mparameters do
-				var p = msig.mparameters[i]
-				var sub = p.mtype
-				var sup = sp.mtype
-				if not sub.is_subtype(mmodule, anchor, sup) then
-					modelbuilder.error(self, "Error: cannot do an implicit constructor call to `{auto_super_init_def}{supermsig}`. Expected argument #{i} of type `{sp.mtype}`, got implicit argument `{p.name}` of type `{p.mtype}`.")
-					break
-				end
-				i += 1
-			end
-		end
 		self.auto_super_inits = auto_super_inits
 	end
 
