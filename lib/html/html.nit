@@ -123,7 +123,7 @@ class HTMLTag
 
 	# Create a HTML elements with the specifed type and attributes.
 	init with_attrs(tag: String, attrs: Map[String, String]) do
-		self.tag = tag
+		init(tag)
 		self.attrs = attrs
 	end
 

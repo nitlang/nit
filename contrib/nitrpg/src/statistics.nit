@@ -166,6 +166,7 @@ class GameStats
 
 	# Load `self` from saved data.
 	init from_json(game: Game, period: String, owner: GameEntity, json: JsonObject) do
+		init(game, period, owner)
 		var values = json.get_or_null("values")
 		if not values isa JsonObject then return
 		for k, v in values do self[k] = v.as(Int)

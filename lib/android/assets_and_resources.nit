@@ -218,8 +218,7 @@ class ResourcesManager
 
 	private init native(res: NativeResources, app_package: String)
 	do
-		self.android_resources = res.new_global_ref
-		self.app_package = app_package
+		init(res.new_global_ref, app_package)
 	end
 
 	# Get a color from resources

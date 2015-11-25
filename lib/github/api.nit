@@ -557,8 +557,7 @@ abstract class RepoEntity
 
 	# Init `self` from a `json` object.
 	init from_json(api: GithubAPI, repo: Repo, json: JsonObject) do
-		self.api = api
-		self.repo = repo
+		init(api, repo)
 		self.json = json
 	end
 end
@@ -1572,8 +1571,7 @@ class ContributorStats
 
 	# Init `self` from a `json` object.
 	init from_json(api: GithubAPI, json: JsonObject) do
-		self.api = api
-		self.json = json
+		init(api, json)
 	end
 
 	# User these statistics are about.
