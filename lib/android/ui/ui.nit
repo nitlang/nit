@@ -186,6 +186,7 @@ redef class NativeButton
 	private new (context: NativeActivity, sender_object: Button)
 	import Button.on_click in "Java" `{
 		final int final_sender_object = sender_object;
+		Button_incr_ref(final_sender_object);
 
 		return new android.widget.Button(context){
 			@Override
