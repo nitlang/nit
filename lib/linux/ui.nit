@@ -23,6 +23,33 @@ import data_store
 redef class App
 	redef fun setup do gtk_init
 
+	# Single GTK window of this application
+	var native_window: GtkWindow is lazy do
+		var win = new GtkWindow(new GtkWindowType.toplevel)
+		win.connect_destroy_signal_to_quit
+		win.titlebar = native_header_bar
+		win.add native_stack
+		return win
+	end
+
+	# GTK 3 header bar
+	var native_header_bar: GtkHeaderBar is lazy do
+		var bar = new GtkHeaderBar
+		bar.title = "app.nit" # TODO offer a portable API to name windows
+		bar.show_close_button = true
+
+		# TODO add back button
+
+		return bar
+	end
+
+	# Root `GtkStack` used to simulate the many app.nit windows
+	var native_stack: GtkStack is lazy do
+		var stack = new GtkStack
+		stack.homogeneous = false
+		return stack
+	end
+
 	# On GNU/Linux, we go through all the callbacks once,
 	# there is no complex life-cycle.
 	redef fun run
@@ -32,8 +59,7 @@ redef class App
 		app.on_start
 		app.on_resume
 
-		var window = window
-		window.native.show_all
+		native_window.show_all
 		gtk_main
 
 		app.on_pause
@@ -44,6 +70,15 @@ redef class App
 
 	# Spacing between GTK controls, default at 2
 	var control_spacing = 2 is writable
+
+	redef fun window=(window)
+	do
+		var root_view = window.view
+		assert root_view != null
+		native_stack.add root_view.native
+		native_stack.visible_child = root_view.native
+		super
+	end
 end
 
 redef class Control
@@ -73,12 +108,20 @@ redef class CompositeControl
 	end
 end
 
+# On GNU/Linux, a window is implemented by placing the `view` in a `GtkStack` in the single GTK window
 redef class Window
-	redef type NATIVE: GtkWindow
-	redef var native do
-		var win = new GtkWindow(new GtkWindowType.toplevel)
-		win.connect_destroy_signal_to_quit
-		return win
+
+	# Root view of this window
+	var view: nullable View = null
+
+	redef fun add(view)
+	do
+		if view isa View then
+			self.view = view
+		end
+
+		# TODO skip local CompositeControl::add but call intro
+		#super
 	end
 end
 
