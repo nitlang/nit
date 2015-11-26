@@ -211,8 +211,15 @@ redef class DocModel
 	# `package::module::Class::prop`.
 	fun mentities_by_namespace(namespace: String): Array[MEntity] do
 		var res = new Array[MEntity]
-		for mentity in mentities do
-			mentity.mentities_by_namespace(namespace, res)
+		var parts = namespace.split_once_on("::")
+		var name = parts.shift
+		for mentity in mpackages do
+			if mentity.name != name then continue
+			if parts.is_empty then
+				res.add mentity
+			else
+				mentity.mentities_by_namespace(parts.first, res)
+			end
 		end
 		return res
 	end
@@ -237,11 +244,18 @@ redef class MEntity
 end
 
 redef class MPackage
-	redef fun mentities_by_namespace(namespace, res) do lookup_in(mgroups, namespace, res)
+	redef fun mentities_by_namespace(namespace, res) do
+		var root = self.root
+		if root == null then return
+		lookup_in([root], namespace, res)
+	end
 end
 
 redef class MGroup
-	redef fun mentities_by_namespace(namespace, res) do lookup_in(mmodules, namespace, res)
+	redef fun mentities_by_namespace(namespace, res) do
+		lookup_in(in_nesting.direct_smallers, namespace, res)
+		lookup_in(mmodules, namespace, res)
+	end
 end
 
 redef class MModule
