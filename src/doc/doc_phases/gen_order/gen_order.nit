@@ -7,17 +7,17 @@
 # http://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
+# distributed under the License isdistributed on an "AS IS" BASIS,
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Phases represent the *steps* of the NitDoc generation process.
-#
-# See `DocPhase`.
-module doc_phases
+# TOC order generation approaches.
+module gen_order
 
-import doc_html
-import doc_indexing
-import doc_gen_order
-import doc_test
+import gen_order_misc
+import gen_order_dependencies
+import gen_order_mendel
+import gen_order_size
+import gen_order_usage
+import gen_order_pagerank
