@@ -36,6 +36,10 @@ redef class ToolContext
 	var opt_no_classes = new OptionBool(
 		"do not generate documentation for classes (and properties)", "--no-classes")
 
+	# Do not generate documentation for redefinitions.
+	var opt_no_redefs = new OptionBool(
+		"do not generate documentation for redefinitions", "--no-redefs")
+
 	# Do not generate documentation for mentities with no MDoc.
 	var opt_no_empty_doc = new OptionBool(
 		"do not generate documentation for entities with empty nitdoc comments", "--no-empty-doc")
@@ -46,7 +50,8 @@ redef class ToolContext
 	redef init do
 		super
 		option_context.add_option(
-			opt_no_attributes, opt_no_properties, opt_no_classes, opt_no_empty_doc, opt_private)
+			opt_no_attributes, opt_no_properties, opt_no_classes,
+			opt_no_redefs, opt_no_empty_doc, opt_private)
 	end
 
 	# Minimum visibility displayed.
@@ -65,6 +70,7 @@ redef class ToolContext
 			if opt_no_classes.value then return true
 			return mentity.visibility < min_visibility
 		else if mentity isa MClassDef then
+			if opt_no_redefs.value and not mentity.is_intro then return true
 			if opt_no_classes.value then return true
 			return ignore_mentity(mentity.mclass)
 		else if mentity isa MProperty then
@@ -74,6 +80,7 @@ redef class ToolContext
 				(opt_no_attributes.value and mentity isa MAttribute) or
 				mentity isa MInnerClass
 		else if mentity isa MPropDef then
+			if opt_no_redefs.value and not mentity.is_intro then return true
 			if opt_no_classes.value or opt_no_properties.value then return true
 			return ignore_mentity(mentity.mclassdef) or
 				ignore_mentity(mentity.mproperty)
