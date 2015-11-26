@@ -208,17 +208,23 @@ class MNVI
 	redef fun collect(mmodules) do
 		var mbms = new MBMS
 		for mmodule in mmodules do
-			# compute branch mean size
+			var locc = mmodule.collect_intro_mclassdefs(protected_visibility).length
+			locc += mmodule.collect_redef_mclassdefs(protected_visibility).length
+
 			var parents = mmodule.in_importation.direct_greaters
 			if parents.length > 0 then
+				# compute branch mean size
 				mbms.clear
 				mbms.collect(new HashSet[MModule].from(parents))
 				# compute module novelty index
-				var locc = mmodule.collect_intro_mclassdefs(protected_visibility).length
-				locc += mmodule.collect_redef_mclassdefs(protected_visibility).length
-				values[mmodule] = locc.to_f / mbms.avg
+				var avg = mbms.avg
+				if avg == 0.0 then
+					values[mmodule] = locc.to_f
+				else
+					values[mmodule] = locc.to_f / avg
+				end
 			else
-				values[mmodule] = 0.0
+				values[mmodule] = locc.to_f
 			end
 		end
 	end
