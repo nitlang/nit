@@ -64,11 +64,11 @@ else if args[0] == "POST" then
 	var my_http_fetcher = new MyHttpFetcher
 	request.delegate = my_http_fetcher
 
-	var post_datas = new HeaderMap
-	post_datas["Bugs Bunny"] = "Daffy Duck"
-	post_datas["Batman"] = "Robin likes special characters @#ùà!è§'(\"é&://,;<>∞~*"
-	post_datas["Batman"] = "Yes you can set multiple identical keys, but APACHE will consider only one, the last one"
-	request.datas = post_datas
+	var post_data = new HeaderMap
+	post_data["Bugs Bunny"] = "Daffy Duck"
+	post_data["Batman"] = "Robin likes special characters @#ùà!è§'(\"é&://,;<>∞~*"
+	post_data["Batman"] = "Yes you can set multiple identical keys, but APACHE will consider only one, the last one"
+	request.data = post_data
 	var response = request.execute
 
 	print "Our body from the callback: {my_http_fetcher.fetched_body}"

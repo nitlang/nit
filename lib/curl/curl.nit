@@ -73,20 +73,46 @@ class CurlRequest
 	end
 end
 
-# CURL HTTP Request
+# HTTP request builder
+#
+# The request itself is sent by either `execute` or `download_to_file`.
+# The attributes of this class must be set before calling either of these two methods.
+#
+# ## Minimal usage example
+#
+# ~~~
+# var request = new CurlHTTPRequest("http://example.org/")
+# var response = request.execute
+# if response isa CurlResponseSuccess then
+#     print "Response status code: {response.status_code}"
+#     print response.body_str
+# else if response isa CurlResponseFailed then
+#     print_error response.error_msg
+# end
+# ~~~
 class CurlHTTPRequest
 	super CurlRequest
 	super NativeCurlCallbacks
 
+	# Address of the remote resource to request
 	var url: String
-	var datas: nullable HeaderMap is writable
+
+	# Data for the body of a POST request
+	var data: nullable HeaderMap is writable
+
+	# Header content of the request
 	var headers: nullable HeaderMap is writable
+
+	# Delegates to customize the behavior when running `execute`
 	var delegate: nullable CurlCallbacks is writable
 
 	# Set the user agent for all following HTTP requests
 	var user_agent: nullable String is writable
 
-	# Execute HTTP request with settings configured through attribute
+	# Execute HTTP request
+	#
+	# By default, the response body is returned in an instance of `CurlResponse`.
+	# This behavior can be customized by setting a custom `delegate`.
 	fun execute: CurlResponse
 	do
 		if not self.curl.is_ok then return answer_failure(0, "Curl instance is not correctly initialized")
@@ -125,9 +151,9 @@ class CurlHTTPRequest
 		end
 
 		# Datas
-		var datas = self.datas
-		if datas != null then
-			var postdatas = datas.to_url_encoded(self.curl)
+		var data = self.data
+		if data != null then
+			var postdatas = data.to_url_encoded(self.curl)
 			err = self.curl.native.easy_setopt(new CURLOption.postfields, postdatas)
 			if not err.is_ok then return answer_failure(err.to_i, err.to_s)
 		end

@@ -106,7 +106,7 @@ end
 class JsonPOST
 	super JsonCurlRequest
 
-	var data: nullable Jsonable = null is writable
+	var json_data: nullable Jsonable = null is writable
 
 	redef fun init_headers do
 		super
@@ -117,8 +117,8 @@ class JsonPOST
 		var err = self.curl.native.easy_setopt(new CURLOption.post, true)
 		if not err.is_ok then return answer_failure(err.to_i, err.to_s)
 
-		if self.data != null then
-			var postdatas = self.data.to_json
+		if self.json_data != null then
+			var postdatas = self.json_data.to_json
 			err = self.curl.native.easy_setopt(new CURLOption.postfields, postdatas)
 			if not err.is_ok then return answer_failure(err.to_i, err.to_s)
 		end
@@ -141,7 +141,7 @@ end
 class JsonPUT
 	super JsonCurlRequest
 
-	var data: nullable Jsonable = null is writable
+	var json_data: nullable Jsonable = null is writable
 
 	redef fun init_headers do
 		super
@@ -152,8 +152,8 @@ class JsonPUT
 		var err = self.curl.native.easy_setopt(new CURLOption.custom_request, "PUT")
 		if not err.is_ok then return answer_failure(err.to_i, err.to_s)
 
-		if self.data != null then
-			var postdatas = self.data.to_json
+		if self.json_data != null then
+			var postdatas = self.json_data.to_json
 			err = self.curl.native.easy_setopt(new CURLOption.postfields, postdatas)
 			if not err.is_ok then return answer_failure(err.to_i, err.to_s)
 		end
