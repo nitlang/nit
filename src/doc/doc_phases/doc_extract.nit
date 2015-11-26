@@ -21,6 +21,7 @@
 module doc_extract
 
 import doc_base
+import modelize
 
 redef class ToolContext
 
