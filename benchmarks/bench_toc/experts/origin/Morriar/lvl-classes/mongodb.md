@@ -1,0 +1,18 @@
+mongodb
+ mongodb
+  MongoClient
+  MongoDb
+  MongoCollection
+  MongoCursor
+  JsonObject
+  MongoError
+ native_mongodb
+  BSONError
+  BSONObjectId
+  NativeBSON
+  NativeMongoClient
+  NativeMongoDb
+  NativeMongoCollection
+  NativeMongoCursor
+  NativeCStringArray
+  Sys
