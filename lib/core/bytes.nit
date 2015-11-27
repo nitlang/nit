@@ -328,9 +328,21 @@ redef class FlatText
 end
 
 redef class NativeString
-	# Creates a new `Bytes` object from `self` with `strlen` as length
-	fun to_bytes: Bytes do
-		var len = cstring_length
+	# Creates a new `Bytes` object from `self` with `len` as length
+	#
+	# If `len` is null, strlen will determine the length of the Bytes
+	fun to_bytes(len: nullable Int): Bytes do
+		if len == null then len = cstring_length
 		return new Bytes(self, len, len)
+	end
+
+	# Creates a new `Bytes` object from a copy of `self` with `len` as length
+	#
+	# If `len` is null, strlen will determine the length of the Bytes
+	fun to_bytes_with_copy(len: nullable Int): Bytes do
+		if len == null then len = cstring_length
+		var nns = new NativeString(len)
+		copy_to(nns, len, 0, 0)
+		return new Bytes(nns, len, len)
 	end
 end
