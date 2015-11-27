@@ -318,6 +318,57 @@ redef class Text
 		end
 		return new FlatString.with_infos(outns, ln * 2, 0, ln * 2 - 1)
 	end
+
+	# Return a `Bytes` instance where Nit escape sequences are transformed.
+	#
+	#     assert "B\\n\\x41\\u0103D3".unescape_to_bytes.hexdigest == "420A41F0908F93"
+	fun unescape_to_bytes: Bytes do
+		var res = new Bytes.with_capacity(self.bytelen)
+		var was_slash = false
+		var i = 0
+		while i < length do
+			var c = chars[i]
+			if not was_slash then
+				if c == '\\' then
+					was_slash = true
+				else
+					res.add_char(c)
+				end
+				i += 1
+				continue
+			end
+			was_slash = false
+			if c == 'n' then
+				res.add_char('\n')
+			else if c == 'r' then
+				res.add_char('\r')
+			else if c == 't' then
+				res.add_char('\t')
+			else if c == '0' then
+				res.add_char('\0')
+			else if c == 'x' or c == 'X' then
+				var hx = substring(i + 1, 2)
+				if hx.is_hex then
+					res.add(hx.to_hex.to_b)
+				else
+					res.add_char(c)
+				end
+				i += 2
+			else if c == 'u' or c == 'U' then
+				var hx = substring(i + 1, 6)
+				if hx.is_hex then
+					res.add_char(hx.to_hex.code_point)
+				else
+					res.add_char(c)
+				end
+				i += 6
+			else
+				res.add_char(c)
+			end
+			i += 1
+		end
+		return res
+	end
 end
 
 redef class FlatText
