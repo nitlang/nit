@@ -89,8 +89,18 @@ class Benitlux
 		# Get the web page
 		var body = download_html_page
 
+		if opts.verbose.value > 1 then
+			print " # Body"
+			print body
+		end
+
 		# Parse the Web page and get the available beers
 		var beers = parse_beers_from_html(body)
+
+		if opts.verbose.value > 0 then
+			print " # Beers"
+			print beers
+		end
 
 		var db = new DB.open(db_path)
 
@@ -112,6 +122,10 @@ class Benitlux
 		# Set the email if desired
 		if send_emails then
 			var subs = db.subscribers
+			if opts.verbose.value > 0 then
+				print " # Subscribers"
+				print subs
+			end
 			send_emails_to subs
 		end
 
@@ -151,6 +165,11 @@ class Benitlux
 
 		var of_interest = body.substring(start, finish-start)
 		var lines = of_interest.strip_tags.to_clean_lines
+
+		if opts.verbose.value > 0 then
+			print " # Lines"
+			print lines
+		end
 
 		var beers = new HashSet[Beer]
 		for line in lines do
@@ -202,16 +221,23 @@ redef class OptionContext
 	# Shall we mail the mailing list?
 	var send_emails = new OptionBool("Send emails to subscribers", "-e", "--email")
 
+	# Display more debug messages
+	var verbose = new OptionCount("Display extra debug messages", "-v")
+
 	# Print the usage message
 	var help = new OptionBool("Print this help message", "-h", "--help")
 
-	redef init do add_option(send_emails, help)
+	redef init do add_option(send_emails, verbose, help)
+end
+
+redef class Sys
+	# Command line options
+	var opts = new OptionContext
 end
 
 # Avoid executing when running tests
 if "NIT_TESTING".environ == "true" then exit 0
 
-var opts = new OptionContext
 opts.parse args
 if not opts.errors.is_empty or opts.help.value == true then
 	print opts.errors.join("\n")
