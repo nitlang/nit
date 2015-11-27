@@ -91,6 +91,8 @@ extern_code_char
 	;
 extern_code_body = extern_code_char*;
 
+id = lowercase letter*;
+
 /*****************************************************************************/
 States
 /*****************************************************************************/
@@ -203,16 +205,16 @@ at='@';
 semi=';';
 
 classid = uppercase letter*;
-id = lowercase letter*;
+id = id;
 attrid = '_' lowercase letter*;
 
 integer = (number | hex_number | bin_number | oct_number) (('u' prec) | ('i' prec) |);
 float = digit* '.' digit+ | (digit+ | digit* '.' digit+) ('E'|'e') ('+'|'-'|) digit+;
-string = '"' str_body '"' | '"' '"' '"' long_str_body lsend1 | ''' ''' ''' long_sstr_body ''' ''' ''';
-start_string = '"' str_body '{' | '"' '"' '"' long_str_body lsend2;
+string = id? '"' str_body '"' id? | id? '"' '"' '"' long_str_body lsend1 | id? ''' ''' ''' long_sstr_body ''' ''' ''' id?;
+start_string = id? '"' str_body '{' | id? '"' '"' '"' long_str_body lsend2;
 mid_string = '}' str_body '{' | '}' '}' '}' long_str_body lsend2;
-end_string = '}' str_body '"' | '}' '}' '}' long_str_body lsend1;
-char = (''' [[any - '''] - '\'] ''') | (''' '\' any ''');
+end_string = '}' str_body '"' id? | '}' '}' '}' long_str_body lsend1 id? ;
+char = id? ((''' [[any - '''] - '\'] ''') | (''' '\' any ''')) id?;
 bad_string = ('"'|'}') str_body | '"' '"' '"' long_str_body | ''' ''' ''' long_sstr_body;
 bad_char = ''' '\'? any;
 

@@ -417,7 +417,7 @@ class MarkdownProcessor
 			end
 		else if c == '_' then
 			if c1 == '_' then
-				if c0 != ' ' or c2 != ' 'then
+				if c0 != ' ' or c2 != ' ' then
 					return new TokenStrongUnderscore(loc, pos, c)
 				else
 					return new TokenEmUnderscore(loc, pos, c)
