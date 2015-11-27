@@ -173,7 +173,7 @@ class Benitlux
 
 		var beers = new HashSet[Beer]
 		for line in lines do
-			var parts = line.split(" - ")
+			var parts = line.split("- ")
 			if parts.length >= 2 then
 				beers.add new Beer(parts[0].trim, parts[1].trim)
 			end
