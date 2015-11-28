@@ -499,4 +499,12 @@ class ConcurrentList[E]
 		real_collection.push(e)
 		mutex.unlock
 	end
+
+	redef fun shift
+	do
+		mutex.lock
+		var value = real_collection.shift
+		mutex.unlock
+		return value
+	end
 end

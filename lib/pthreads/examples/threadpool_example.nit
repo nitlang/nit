@@ -19,7 +19,7 @@ import threadpool
 
 # Task printing "hello world" on standard output
 class HWTask
-	super Task
+	super JoinTask
 
 	# Sleeping time
 	var sec: Int
