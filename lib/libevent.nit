@@ -346,6 +346,10 @@ extern class ConnectionListener `{ struct evconnlistener * `}
 
 		struct hostent *hostent = gethostbyname(address);
 
+		if (!hostent) {
+			return NULL;
+		}
+
 		memset(&sin, 0, sizeof(sin));
 		sin.sin_family = hostent->h_addrtype;
 		sin.sin_port = htons(port);
