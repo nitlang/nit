@@ -313,17 +313,21 @@ redef class WikiArticle
 
 		var res = new Template
 		res.add "<ul class=\"trail\">"
-		if pos > 0 then
-			var target = flat[pos-1]
-			res.add "<li>{target.a_from(self, "prev")}</li>"
-		end
 		var parent = wiki.trails.parent(self)
+		# Up and prev are disabled on a root
 		if parent != null then
+			if pos > 0 then
+				var target = flat[pos-1]
+				res.add "<li>{target.a_from(self, "prev")}</li>"
+			end
 			res.add "<li>{parent.a_from(self, "up")}</li>"
 		end
 		if pos < flat.length - 1 then
 			var target = flat[pos+1]
-			res.add "<li>{target.a_from(self, "next")}</li>"
+			# Only print the next if it is not a root
+			if target.parent != null then
+				res.add "<li>{target.a_from(self, "next")}</li>"
+			end
 		end
 		res.add "</ul>"
 
