@@ -74,9 +74,14 @@ end
 class Achievement
 	super GameEntity
 
-	redef var key is lazy do return "achievements" / id
 
 	redef var game
+
+	redef var key is lazy do
+		var owner = self.owner
+		if owner == null then return id
+		return "{owner.key}-{id}"
+	end
 
 	# Uniq ID for this achievement.
 	var id: String
@@ -93,6 +98,9 @@ class Achievement
 	# Is this achievement unlocked by somebody?
 	var is_unlocked: Bool is lazy do return not load_events.is_empty
 
+	# Game entity this achievement is about.
+	var owner: nullable GameEntity = null
+
 	# Init `self` from a `json` object.
 	#
 	# Used to load achievements from storage.
@@ -106,6 +114,8 @@ class Achievement
 		json["name"] = name
 		json["desc"] = desc
 		json["reward"] = reward
+		json["game"] = game.key
+		if owner != null then json["owner"] = owner.key
 		return json
 	end
 end
@@ -346,7 +356,7 @@ abstract class PlayerXCommits
 		if not event.action == "closed" then return
 		if not event.pull.merged then return
 		var player = event.pull.user.player(game)
-		if player.stats["commits"] == threshold then
+		if player.stats["commits"] >= threshold then
 			var a = new_achievement(game)
 			player.unlock_achievement(a, event)
 		end
@@ -447,7 +457,7 @@ end
 class Player1KComments
 	super PlayerXComments
 
-	redef var id = "player_1000__comments"
+	redef var id = "player_1000_comments"
 	redef var name = "You sir, talk a lot!"
 	redef var desc = "Comment 1000 times on issues."
 	redef var reward = 1000

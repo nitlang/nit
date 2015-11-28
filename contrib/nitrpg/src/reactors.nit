@@ -58,7 +58,7 @@ redef class PullRequestEvent
 
 	# Rewards player for opened pull requests.
 	redef fun react_player_event(r, game) do
-		if action == "opened" then
+		if action == "opened" or action == "reopened" then
 			react_pull_open(r, game)
 		else if action == "closed" then
 			react_pull_close(r, game)
@@ -95,14 +95,18 @@ redef class IssueCommentEvent
 	# Rewards player for review comments.
 	#
 	# TODO only give nitcoins if reviewers < 2
+	# TODO give more points to first reviewer
 	redef fun react_player_event(r, game) do
 		if comment.is_ack then
 			react_player_review(r, game)
 		end
 	end
 
+	# TODO same player should not be authorized to review multiple times? How to handle rerols?
 	private fun react_player_review(r: PlayerReactor, game: Game) do
+		if issue.state == "closed" then return
 		var player = comment.user.player(game)
+		if issue.user == player.user then return
 		player.nitcoins += r.nc_pull_review
 		player.save
 		var event = player_reward_event("pull_review", player, r.nc_pull_review)

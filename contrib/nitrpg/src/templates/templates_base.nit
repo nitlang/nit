@@ -34,9 +34,6 @@ redef class Game
 
 	redef fun url do return "{root_url}/games" / key
 
-	# Displayed name.
-	fun name: String do return repo.full_name
-
 	# Return a HTML link to this Game.
 	fun link: String do return "<a href=\"{url}\">{name}</a>"
 end

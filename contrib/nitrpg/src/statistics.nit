@@ -79,49 +79,32 @@ class GameStatsManager
 	# The GameEntity monitored by these statistics.
 	var owner: GameEntity
 
-	redef var key = "stats"
+	# Current date to extract stats
+	private var date = new Tm.gmtime
 
 	# Returns the `GameStats` instance for the overall statistics.
-	var overall: GameStats is lazy do
-		return load_stats_for("all")
-	end
+	var overall: GameStats = load_stats_for("all") is lazy
 
 	# Returns the `GameStats` instance for the current year statistics.
-	var yearly: GameStats is lazy do
-		var date = new Tm.gmtime
-		var key = date.strftime("%Y")
-		return load_stats_for(key)
-	end
+	var yearly: GameStats = load_stats_for(date.strftime("%Y")) is lazy
 
 	# Returns the `GameStats` instance for the current month statistics.
-	var monthly: GameStats is lazy do
-		var date = new Tm.gmtime
-		var key = date.strftime("%Y-%m")
-		return load_stats_for(key)
-	end
+	var monthly: GameStats = load_stats_for(date.strftime("%Y-%m")) is lazy
 
 	# Returns the `GameStats` instance for the current day statistics.
-	var daily: GameStats is lazy do
-		var date = new Tm.gmtime
-		var key = date.strftime("%Y-%m-%d")
-		return load_stats_for(key)
-	end
+	var daily: GameStats = load_stats_for(date.strftime("%Y-%m-%d")) is lazy
 
 	# Returns the `GameStats` instance for the current week statistics.
-	var weekly: GameStats is lazy do
-		var date = new Tm.gmtime
-		var key = date.strftime("%Y-W%U")
-		return load_stats_for(key)
-	end
+	var weekly: GameStats = load_stats_for(date.strftime("%Y-W%U")) is lazy
 
 	# Load statistics for a `period` key.
 	fun load_stats_for(period: String): GameStats do
 		var key = owner.key / self.key / period
 		if not game.store.has_key(key) then
-			return new GameStats(game, period)
+			return new GameStats(game, period, owner)
 		end
 		var json = game.store.load_object(key)
-		return new GameStats.from_json(game, period, json)
+		return new GameStats.from_json(game, period, owner, json)
 	end
 
 	redef fun [](key) do return overall[key]
@@ -168,19 +151,28 @@ class GameStats
 
 	redef var game
 
-	# The pedriod these stats are about.
+	# The period these stats are about.
 	var period: String
 
-	redef fun key do return period
+	# The game entity these stats are about.
+	var owner: GameEntity
+
+	redef var key = "{owner.key}-{period}" is lazy
 
 	# Load `self` from saved data.
-	init from_json(game: Game, period: String, json: JsonObject) do
-		for k, v in json do self[k] = v.as(Int)
+	init from_json(game: Game, period: String, owner: GameEntity, json: JsonObject) do
+		var values = json.get_or_null("values")
+		if not values isa JsonObject then return
+		for k, v in values do self[k] = v.as(Int)
 	end
 
 	redef fun to_json do
-		var obj = new JsonObject
-		for k, v in self do obj[k] = v
+		var obj = super
+		obj["period"] = period
+		obj["owner"] = owner.key
+		var values = new JsonObject
+		values.recover_with(self)
+		obj["values"] = values
 		return obj
 	end
 
