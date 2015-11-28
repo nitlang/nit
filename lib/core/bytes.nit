@@ -107,7 +107,7 @@ class Bytes
 		init(ns, 0, cap)
 	end
 
-	redef fun is_empty do return length != 0
+	redef fun is_empty do return length == 0
 
 	#     var b = new Bytes.empty
 	#     b.add 101u8
