@@ -814,10 +814,16 @@ class Issue
 			for obj in array do
 				if not obj isa JsonObject then continue
 				var id = obj["id"].as(Int)
-				res.add(api.load_issue_comment(repo, id).as(not null))
+				var comment = api.load_issue_comment(repo, id)
+				if comment == null then continue
+				res.add(comment)
 			end
 			page += 1
-			array = api.get("{key}/comments?page={page}").as(JsonArray)
+			var json = api.get("{key}/comments?page={page}")
+			if not json isa JsonArray then
+				return res
+			end
+			array = json
 		end
 		return res
 	end
