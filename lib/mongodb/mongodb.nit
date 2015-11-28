@@ -115,7 +115,13 @@ private class BSON
 	# ~~~
 	fun to_json: JsonObject do
 		assert is_alive
-		return to_s.parse_json.as(JsonObject)
+		var json = to_s.parse_json
+		if json isa JsonParseError then
+			print to_s
+			print json.message
+			sys.exit 1
+		end
+		return json.as(JsonObject)
 	end
 
 	redef fun finalize do
@@ -512,8 +518,12 @@ class MongoCollection
 	# ~~~
 	fun save(doc: JsonObject): Bool do
 		assert is_alive
-		var res = native.save(doc.to_bson.native)
+		var bson = doc.to_bson
+		var nat = bson.native
+		var res = native.save(nat)
 		if res then set_id(doc)
+		assert nat != self #FIXME used to avoid GC crashes
+		assert bson != self #FIXME used to avoid GC crashes
 		return res
 	end
 
@@ -605,8 +615,12 @@ class MongoCollection
 		q.destroy
 		if c == null then return null
 		var cursor = new MongoCursor(c)
-		if cursor.is_ok then return cursor.item
-		return null
+		if not cursor.is_ok then
+			return null
+		end
+		var item = cursor.item
+		assert cursor != self
+		return item
 	end
 
 	# Finds all the documents matching the `query`.
