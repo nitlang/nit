@@ -127,12 +127,15 @@ redef class GameEntity
 	# This list is reloaded from game data each time its called.
 	#
 	# To add events see `add_event`.
-	fun load_events: Array[GameEvent] do
+	fun load_events(skip, limit: nullable Int): Array[GameEvent] do
+		var s = skip or else 0
+		var l = limit or else 0
 		var req = new JsonObject
 		req["game"] = game.key
 		req["owner"] = key
+		req["kind"] = "\{\"$not\": \"github_event\"\}"
 		var res = new Array[GameEvent]
-		for obj in game.db.collection("events").find_all(req) do
+		for obj in game.db.collection("events").find_all(req, s, l) do
 			res.add new GameEvent.from_json(game, obj)
 		end
 		(new EventTimeComparator).sort(res)
