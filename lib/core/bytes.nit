@@ -612,3 +612,20 @@ redef class NativeString
 		return new Bytes(self, len, len)
 	end
 end
+
+# Joins an array of bytes `arr` separated by `sep`
+#
+#     assert join_bytes(["String".to_bytes, "is".to_bytes, "string".to_bytes], ' '.ascii).hexdigest == "537472696E6720697320737472696E67"
+fun join_bytes(arr: Array[Bytes], sep: nullable BytePattern): Bytes do
+	if arr.is_empty then return new Bytes.empty
+	sep = sep or else new Bytes.empty
+	var endln = sep.pattern_length * (arr.length - 1)
+	for i in arr do endln += i.length
+	var ret = new Bytes.with_capacity(endln)
+	ret.append(arr.first)
+	for i in  [1 .. arr.length[ do
+		sep.append_to(ret)
+		ret.append arr[i]
+	end
+	return ret
+end
