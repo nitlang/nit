@@ -154,11 +154,34 @@ redef class Player
 	#
 	# TODO: add abstraction so achievements do not depend on GithubEvent.
 	fun unlock_achievement(a: Achievement, event: GithubEvent) do
-		if has_achievement(a) then return
+		if has_achievement(a) then
+			update_achievement(a, event)
+			return
+		end
+		game.message(1, "Player {name} unlocked achievement {a}")
 		nitcoins += a.reward
 		add_achievement(a)
 		trigger_unlock_event(a, event)
 		save
+	end
+
+	# Update achievement in a new and oldest one is found.
+	#
+	# Comparison is based on github incremental id.
+	fun update_achievement(a: Achievement, new_event: GithubEvent) do
+		var req = new JsonObject
+		req["game"] = game.key
+		req["data.player"] = key
+		req["data.achievement"] = a.id
+		for e in game.db.collection("events").find_all(req) do
+			var event = new GameEvent.from_json(game, e)
+			var old_event = new GithubEvent.from_json(game.api, event.data["github_event"].as(JsonObject))
+			if new_event.date < old_event.date then
+				game.message(1, "Found older event for achievement {a.id} and player {name}")
+				event.data = new_event.json
+				event.save
+			end
+		end
 	end
 
 	# Create a new event that marks the achievement unlocking.
