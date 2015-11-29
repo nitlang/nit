@@ -130,7 +130,7 @@ abstract class AbstractArrayRead[E]
 		end
 	end
 
-	redef fun iterator: ArrayIterator[E] do
+	redef fun iterator: IndexedIterator[E] do
 		var res = _free_iterator
 		if res == null then return new ArrayIterator[E](self)
 		res._index = 0
@@ -653,7 +653,7 @@ private class ArraySetIterator[E]
 
 	redef fun item: E do return _iter.item
 
-	var iter: ArrayIterator[E]
+	var iter: Iterator[E]
 end
 
 

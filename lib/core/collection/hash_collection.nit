@@ -238,7 +238,7 @@ class HashMap[K, V]
 		end
 	end
 
-	redef fun iterator: HashMapIterator[K, V] do return new HashMapIterator[K,V](self)
+	redef fun iterator do return new HashMapIterator[K,V](self)
 
 	redef fun length do return _the_length
 
