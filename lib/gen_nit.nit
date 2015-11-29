@@ -15,6 +15,8 @@
 # Support to generate and otherwise manipulate Nit code
 module gen_nit
 
+import template
+
 redef class Sys
 	# Reserved keywords in the Nit language
 	var keywords: Set[String] is lazy do return new HashSet[String].from([
@@ -38,4 +40,38 @@ redef class Sys
 	# This is a non-exaustive list that targets conflict-prone names.
 	var methods_in_pointer: Array[String] is lazy do return methods_in_object + [
 		"free"]
+end
+
+# Template of a Nit module to generate Nit code
+class NitModule
+	super Template
+
+	# Header on top of the module, usually the documentation
+	var header: nullable Writable = null is writable
+
+	# The module's name
+	var name: Writable is writable
+
+	# Imports from this module
+	var imports = new Array[Writable]
+
+	# Main content of this module
+	var content = new Array[Writable]
+
+	redef fun rendering
+	do
+		var header = header
+		if header != null then add header
+
+		var name = name
+		add "module {name}\n\n"
+
+		for i in imports do add "import {i}\n"
+		add "\n"
+
+		for l in content do
+			add l
+			add "\n"
+		end
+	end
 end

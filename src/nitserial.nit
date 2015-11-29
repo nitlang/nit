@@ -25,41 +25,11 @@
 # generate and include its own serialization support module.
 module nitserial
 
+import template
+import gen_nit
+
 import frontend
 import rapid_type_analysis
-import template
-
-# A Nit module
-#
-# TODO add more features and move to lib
-class NitModule
-	super Template
-
-	var header: nullable Writable = null
-
-	# The module's name
-	var name: Writable
-
-	# Imports from this module
-	var imports = new Array[Writable]
-
-	# Main content of this module
-	var content = new Array[Writable]
-
-	redef fun rendering
-	do
-		var header = header
-		if header != null then add header
-
-		var name = name
-		add "module {name}\n\n"
-
-		for i in imports do add "import {i}\n"
-		add "\n"
-
-		for l in content do add "{l}\n"
-	end
-end
 
 redef class ToolContext
 	# Where do we put a single result?
