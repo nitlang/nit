@@ -1060,7 +1060,7 @@ redef class AMethPropdef
 			end
 		end
 
-		if mysignature.arity > 0 then
+		if nsig != null then
 			# Check parameters visibility
 			for i in [0..mysignature.arity[ do
 				var nt = nsig.n_params[i].n_type
