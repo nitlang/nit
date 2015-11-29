@@ -38,6 +38,12 @@ class GithubEvent
 		self.json = json
 	end
 
+	# Event ID from Github.
+	fun id: String do return json["id"].as(String)
+
+	# Set id.
+	fun id=(id: String) do json["id"] = id
+
 	# Action performed by the event.
 	fun action: String do return json["action"].as(String)
 
