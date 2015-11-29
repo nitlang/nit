@@ -524,11 +524,6 @@ extern class NativeMongoCursor `{ mongoc_cursor_t* `}
 		return mongoc_cursor_next(self, &doc);
 	`}
 
-	# Wrapper for `mongoc_cursor_more()`.
-	#
-	# This function shall indicate if there is more data to be read from the cursor.
-	fun more: Bool `{ return mongoc_cursor_more(self); `}
-
 	# Wrapper for `mongoc_cursor_destroy()`.
 	#
 	# This instance should not be used beyond this point!

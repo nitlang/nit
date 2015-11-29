@@ -561,7 +561,10 @@ class MongoCollection
 		var c = native.find(query.to_bson.native)
 		if c == null then return res
 		var cursor = new MongoCursor(c)
-		for item in cursor do res.add item
+		while cursor.is_ok do
+			res.add cursor.item
+			cursor.next
+		end
 		return res
 	end
 
@@ -618,9 +621,9 @@ class MongoCursor
 
 	init do next
 
-	redef fun is_ok do return native.more
+	redef var is_ok = true
 
-	redef fun next do native.next
+	redef fun next do is_ok = native.next
 
 	redef fun item do
 		return new JsonObject.from_bson(new BSON(native.current))
