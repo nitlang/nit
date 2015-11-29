@@ -22,6 +22,7 @@
 module nitcorn_hello_world
 
 import nitcorn
+import log
 
 # An action that responds by displaying a static html content.
 class StaticAction
@@ -46,6 +47,8 @@ class StaticAction
 	</div>
 </body>
 </html>"""
+		# exemple of use of the log_print function
+		log_print(response,http_request)
 		return response
 	end
 end
