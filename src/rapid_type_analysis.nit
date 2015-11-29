@@ -25,7 +25,7 @@ module rapid_type_analysis
 
 import semantize
 
-private import csv # for live_types_to_csv
+import csv # for live_types_to_csv
 private import ordered_tree # for live_methods_to_tree
 
 private import more_collections
