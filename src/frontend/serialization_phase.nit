@@ -56,7 +56,6 @@ redef class ADefinition
 	end
 end
 
-# TODO add annotations on attributes (volatile, sensitive or do_not_serialize?)
 private class SerializationPhasePreModel
 	super Phase
 
