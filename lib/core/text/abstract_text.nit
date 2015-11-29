@@ -68,7 +68,7 @@ abstract class Text
 	fun substring(from: Int, count: Int): SELFTYPE is abstract
 
 	# Iterates on the substrings of self if any
-	fun substrings: Iterator[FlatText] is abstract
+	private fun substrings: Iterator[FlatText] is abstract
 
 	# Is the current Text empty (== "")
 	#
