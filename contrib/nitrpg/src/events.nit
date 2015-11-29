@@ -22,6 +22,7 @@ module events
 
 import game
 import github::events
+import md5
 
 # A GameReactor reacts to event sent by a `Github::HookListener`.
 #
@@ -79,14 +80,35 @@ redef class Game
 	# Override this method to select custom reactors.
 	protected fun init_default_reactors do end
 
+	# Register a new game event for this entity.
+	fun add_github_event(event: KnownGithubEvent) do event.save
+
 	# Dispatch event to registered `reactors`.
 	fun apply_github_event(event: GithubEvent) do
-		message(1, "Apply event {event} for {name}")
+		message(2, "Apply event {event} for {name}")
+		if game.has_github_event(event) then
+			message(3, "Event {event} already applied for {name}")
+			return
+		end
 		for reactor in reactors do
 			message(3, "Apply reactor {reactor} on {event}")
 			reactor.react_event(game, event)
 		end
+		game.add_github_event new KnownGithubEvent(self, event)
 	end
+
+	# Was `event` already applied for `self`?
+	#
+	# We look in the DB for the exact same JSON object.
+	private fun has_github_event(event: GithubEvent): Bool do
+		var req = new JsonObject
+		req["event_hash"] = event.json.to_json.md5
+		var res = game.db.collection("github_events").find(req)
+		if res != null then
+			var other = new KnownGithubEvent.from_json(game, res)
+			return event.json == other.github_event.json
+		end
+		return false
 	end
 
 	init do init_default_reactors
@@ -130,6 +152,9 @@ redef class GameEntity
 		if res != null then return new GameEvent.from_json(game, res)
 		return null
 	end
+
+	# Does `self` has a registered GameEvent with `id`?
+	fun has_event(id: String): Bool do return load_event(id) != null
 end
 
 # An event that occurs in the `Game`.
@@ -183,6 +208,40 @@ class GameEvent
 		json["game"] = game.key
 		var owner = self.owner
 		if owner != null then json["owner"] = owner.key
+		return json
+	end
+end
+
+# A Github event already processed by this game.
+class KnownGithubEvent
+	super GameEntity
+
+	redef var collection_name = "github_events"
+
+	redef var game
+
+	# Github Event associated.
+	var github_event: GithubEvent
+
+	# Return a hash for this github_event.
+	#
+	# The hash is used to check if a github event already exists in the db.
+	fun event_hash: String do return github_event.json.to_json.md5
+
+	redef fun key do return event_hash
+
+	# Init `self` from a JsonObject.
+	init from_json(game: Game, json: JsonObject) do
+		var obj = json["github_event"].as(JsonObject)
+		var event = new GithubEvent.from_json(game.api, obj)
+		init(game, event)
+	end
+
+	redef fun to_json do
+		var json = super
+		json["game"] = game.key
+		json["github_event"] = github_event.json
+		json["event_hash"] = event_hash
 		return json
 	end
 end
