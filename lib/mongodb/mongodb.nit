@@ -110,7 +110,6 @@ private class BSON
 	fun to_json: JsonObject do
 		var json = to_s.parse_json
 		if json isa JsonParseError then
-			print to_s
 			print json.message
 			sys.exit 1
 		end
