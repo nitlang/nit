@@ -598,6 +598,10 @@ class MongoCollection
 
 	# Finds the first document that matches `query`.
 	#
+	# Params:
+	# * `skip` number of documents to skip
+	# * `limit` number of documents to return
+	#
 	# Returns `null` if an error occured. See `Sys::last_mongoc_error`.
 	#
 	# ~~~
@@ -608,10 +612,12 @@ class MongoCollection
 	# var doc = col.find(query)
 	# assert doc["foo"] == 10
 	# ~~~
-	fun find(query: JsonObject): nullable JsonObject do
+	fun find(query: JsonObject, skip, limit: nullable Int): nullable JsonObject do
 		assert is_alive
 		var q = new NativeBSON.from_json_string(query.to_json.to_cstring)
-		var c = native.find(q)
+		var s = skip or else 0
+		var l = limit or else 0
+		var c = native.find(q, s, l)
 		q.destroy
 		if c == null then return null
 		var cursor = new MongoCursor(c)
@@ -625,6 +631,10 @@ class MongoCollection
 
 	# Finds all the documents matching the `query`.
 	#
+	# Params:
+	# * `skip` number of documents to skip
+	# * `limit` number of documents to return
+	#
 	# ~~~
 	# var client = new MongoClient("mongodb://localhost:27017/")
 	# var col = client.database("test").collection("test")
@@ -632,10 +642,12 @@ class MongoCollection
 	# query["foo"] = 10
 	# assert col.find_all(query).length > 0
 	# ~~~
-	fun find_all(query: JsonObject): Array[JsonObject] do
+	fun find_all(query: JsonObject, skip, limit: nullable Int): Array[JsonObject] do
 		assert is_alive
+		var s = skip or else 0
+		var l = limit or else 0
 		var res = new Array[JsonObject]
-		var c = native.find(query.to_bson.native)
+		var c = native.find(query.to_bson.native, s, l)
 		if c == null then return res
 		var cursor = new MongoCursor(c)
 		for item in cursor do res.add item
