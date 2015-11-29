@@ -20,8 +20,7 @@
 # triggered `Github::Event`.
 module statistics
 
-import game
-import github::hooks
+import events
 import counter
 
 redef class GameEntity
@@ -45,6 +44,11 @@ redef class Game
 	redef fun save do
 		super
 		stats.save
+	end
+
+	redef fun init_default_reactors do
+		super
+		add_reactor(new StatisticsReactor)
 	end
 end
 

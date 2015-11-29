@@ -19,6 +19,13 @@ module reactors
 
 import events
 
+redef class Game
+	redef fun init_default_reactors do
+		super
+		add_reactor(new PlayerReactor)
+	end
+end
+
 # Reacts to event that can affect players (like giving nitcoins).
 class PlayerReactor
 	super GameReactor

@@ -25,23 +25,13 @@ import github::hooks
 class RpgHookListener
    super HookListener
 
-	# Registered reactors list.
-	var reactors = new Array[GameReactor]
-
 	# Dispatch event to registered `reactors`.
 	redef fun apply_event(event) do
 		var game = new Game(api, event.repo)
 		# TODO handle verbosity with opts
 		game.verbose_lvl = 1
-		game.message(1, "Received event {event} for {game.repo.full_name}")
-		for reactor in reactors do
-			game.message(2, "Apply reactor {reactor} on {event}")
-			reactor.react_event(game, event)
-		end
+		game.apply_github_event event
 	end
-
-	# Register a reactor for this listener.
-	fun add_reactor(reactors: GameReactor...) do self.reactors.add_all reactors
 end
 
 if args.length != 2 then
@@ -57,14 +47,6 @@ var port = args[1].to_i
 
 var api = new GithubAPI(get_github_oauth)
 
-var l = new RpgHookListener(api, host, port)
-l.add_reactor(new StatisticsReactor, new PlayerReactor)
-l.add_reactor(new Player1Issue, new Player100Issues, new Player1KIssues)
-l.add_reactor(new Player1Pull, new Player100Pulls, new Player1KPulls)
-l.add_reactor(new Player1Commit, new Player100Commits, new Player1KCommits)
-l.add_reactor(new IssueAboutNitdoc, new IssueAboutFFI)
-l.add_reactor(new Player1Comment, new Player100Comments, new Player1KComments)
-l.add_reactor(new PlayerPingGod, new PlayerFirstReview, new PlayerSaysNitcoin)
-
+var listener = new RpgHookListener(api, host, port)
 print "Listening events on {host}:{port}"
-l.listen
+listener.listen

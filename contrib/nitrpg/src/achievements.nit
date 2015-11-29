@@ -20,8 +20,19 @@
 # Achievements are rewarded by nitcoins.
 module achievements
 
-import events
 import statistics
+
+redef class Game
+	redef fun init_default_reactors do
+		super
+		add_reactor(new Player1Issue, new Player100Issues, new Player1KIssues)
+		add_reactor(new Player1Pull, new Player100Pulls, new Player1KPulls)
+		add_reactor(new Player1Commit, new Player100Commits, new Player1KCommits)
+		add_reactor(new IssueAboutNitdoc, new IssueAboutFFI)
+		add_reactor(new Player1Comment, new Player100Comments, new Player1KComments)
+		add_reactor(new PlayerPingGod, new PlayerFirstReview, new PlayerSaysNitcoin)
+	end
+end
 
 redef class GameEntity
 

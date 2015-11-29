@@ -26,7 +26,7 @@
 module game
 
 import mongodb
-import github::events
+import github::api
 
 # An entity within a `Game`.
 #
@@ -265,49 +265,6 @@ redef class User
 	end
 
 	private var player_cache = new HashMap[Game, Player]
-end
-
-# A GameReactor reacts to event sent by a `Github::HookListener`.
-#
-# Subclasses of `GameReactor` are implemented to handle all kind of
-# `GithubEvent`.
-# Depending on the received event, the reactor is used to update game data.
-#
-# Reactors are mostly used with a `Github::HookListener` that dispatchs received
-# events from the Github API.
-#
-# Example:
-#
-# ~~~
-# import github::hooks
-#
-# # Reactor that prints received events in console.
-# class PrintReactor
-#	super GameReactor
-#
-#	redef fun react_event(game, e) do print e
-# end
-#
-# # Hook listener that redirect events to reactors.
-# class RpgHookListener
-#    super HookListener
-#
-#	redef fun apply_event(event) do
-#		var game = new Game(api, event.repo)
-#		var reactor = new PrintReactor
-#		reactor.react_event(game, event)
-#	end
-# end
-# ~~~
-#
-# See module `reactors` and `listener` for more examples.
-interface GameReactor
-
-	# Reacts to this `event` and update `game` accordingly.
-	#
-	# Concrete `GameReactor` implement this method to update game data
-	# for each specific GithubEvent.
-	fun react_event(game: Game, event: GithubEvent) is abstract
 end
 
 # utils
