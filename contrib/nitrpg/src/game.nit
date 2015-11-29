@@ -232,7 +232,7 @@ class Player
 	#
 	# Used to load players from saved data.
 	init from_json(game: Game, json: JsonObject) do
-		init(game, json["name"].to_s)
+		init(game, json["name"].as(String))
 		nitcoins = json["nitcoins"].as(Int)
 	end
 

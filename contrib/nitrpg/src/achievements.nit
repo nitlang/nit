@@ -113,7 +113,11 @@ class Achievement
 	#
 	# Used to load achievements from storage.
 	init from_json(game: Game, json: JsonObject) do
-		init(game, json["id"].to_s, json["name"].to_s, json["desc"].to_s, json["reward"].as(Int))
+		init(game,
+			json["id"].as(String),
+			json["name"].as(String),
+			json["desc"].as(String),
+			json["reward"].as(Int))
 	end
 
 	redef fun to_json do
@@ -123,6 +127,7 @@ class Achievement
 		json["desc"] = desc
 		json["reward"] = reward
 		json["game"] = game.key
+		var owner = self.owner
 		if owner != null then json["owner"] = owner.key
 		return json
 	end

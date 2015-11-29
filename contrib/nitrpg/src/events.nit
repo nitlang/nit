@@ -24,6 +24,7 @@ import game
 
 redef class GameEntity
 
+	# Register a new game event for this entity.
 	fun add_event(event: GameEvent) do
 		event.owner = self
 		event.save
@@ -98,9 +99,9 @@ class GameEvent
 	#
 	# Used to load events from json storage.
 	init from_json(game: Game, json: JsonObject) do
-		init(game, json["kind"].to_s, json["data"].as(JsonObject))
-		internal_id = json["internal_id"].to_s
-		time = new ISODate.from_string(json["time"].to_s)
+		init(game, json["kind"].as(String), json["data"].as(JsonObject))
+		internal_id = json["internal_id"].as(String)
+		time = new ISODate.from_string(json["time"].as(String))
 	end
 
 	redef fun to_json do
@@ -110,6 +111,7 @@ class GameEvent
 		json["time"] = time.to_s
 		json["data"] = data
 		json["game"] = game.key
+		var owner = self.owner
 		if owner != null then json["owner"] = owner.key
 		return json
 	end
