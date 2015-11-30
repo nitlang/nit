@@ -923,6 +923,9 @@ class Issue
 
 	# Is this issue linked to a pull request?
 	fun is_pull_request: Bool do return json.has_key("pull_request")
+
+	# Load the associated pull request if any.
+	fun pull_request: nullable PullRequest do return repo.api.load_pull(repo, number)
 end
 
 # A Github pull request.
