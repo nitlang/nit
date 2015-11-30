@@ -153,7 +153,7 @@ redef class Player
 	# Do nothing is this player has already unlocked the achievement.
 	#
 	# TODO: add abstraction so achievements do not depend on GithubEvent.
-	fun unlock_achievement(a: Achievement, event: GithubEvent) do
+	fun unlock_achievement(a: Achievement, event: GithubEvent, time: nullable ISODate) do
 		if has_achievement(a) then
 			update_achievement(a, event)
 			return
@@ -161,7 +161,7 @@ redef class Player
 		game.message(1, "Player {name} unlocked achievement {a}")
 		nitcoins += a.reward
 		add_achievement(a)
-		trigger_unlock_event(a, event)
+		trigger_unlock_event(a, event, time)
 		save
 	end
 
@@ -185,13 +185,14 @@ redef class Player
 	end
 
 	# Create a new event that marks the achievement unlocking.
-	fun trigger_unlock_event(achievement: Achievement, event: GithubEvent) do
+	fun trigger_unlock_event(achievement: Achievement, event: GithubEvent, time: nullable ISODate) do
 		var obj = new JsonObject
 		obj["player"] = name
 		obj["reward"] = achievement.reward
 		obj["achievement"] = achievement.id
 		obj["github_event"] = event.json
 		var ge = new GameEvent(game, "achievement_unlocked", obj)
+		if time != null then ge.time = time
 		add_event(ge)
 		game.add_event(ge)
 		achievement.add_event(ge)
@@ -244,7 +245,7 @@ abstract class PlayerXIssues
 		var player = event.issue.user.player(game)
 		if player.stats["issues"] == threshold then
 			var a = new_achievement(game)
-			player.unlock_achievement(a, event)
+			player.unlock_achievement(a, event, event.issue.created_at)
 		end
 	end
 end
@@ -299,7 +300,7 @@ class IssueAboutNitdoc
 		re.ignore_case = true
 		if event.issue.title.has(re) then
 			var a = new_achievement(game)
-			player.unlock_achievement(a, event)
+			player.unlock_achievement(a, event, event.issue.created_at)
 		end
 	end
 end
@@ -321,7 +322,7 @@ class IssueAboutFFI
 		re.ignore_case = true
 		if event.issue.title.has(re) then
 			var a = new_achievement(game)
-			player.unlock_achievement(a, event)
+			player.unlock_achievement(a, event, event.issue.created_at)
 		end
 	end
 end
@@ -345,7 +346,7 @@ abstract class PlayerXPulls
 		var player = event.pull.user.player(game)
 		if player.stats["pulls"] == threshold then
 			var a = new_achievement(game)
-			player.unlock_achievement(a, event)
+			player.unlock_achievement(a, event, event.pull.created_at)
 		end
 	end
 end
@@ -403,7 +404,7 @@ abstract class PlayerXCommits
 		var player = event.pull.user.player(game)
 		if player.stats["commits"] >= threshold then
 			var a = new_achievement(game)
-			player.unlock_achievement(a, event)
+			player.unlock_achievement(a, event, event.pull.closed_at)
 		end
 	end
 end
@@ -471,7 +472,7 @@ abstract class PlayerXComments
 		var player = event.comment.user.player(game)
 		if player.stats["comments"] == threshold then
 			var a = new_achievement(game)
-			player.unlock_achievement(a, event)
+			player.unlock_achievement(a, event, event.comment.created_at)
 		end
 	end
 end
@@ -524,7 +525,7 @@ class PlayerPingGod
 		if event.comment.body.has("@{owner}".to_re) then
 			var player = event.comment.user.player(game)
 			var a = new_achievement(game)
-			player.unlock_achievement(a, event)
+			player.unlock_achievement(a, event, event.comment.created_at)
 		end
 	end
 end
@@ -544,7 +545,7 @@ class PlayerFirstReview
 		if event.comment.is_ack then
 			var player = event.comment.user.player(game)
 			var a = new_achievement(game)
-			player.unlock_achievement(a, event)
+			player.unlock_achievement(a, event, event.comment.created_at)
 		end
 	end
 end
@@ -563,7 +564,7 @@ class PlayerSaysNitcoin
 		if event.comment.body.has("(n|N)itcoin".to_re) then
 			var player = event.comment.user.player(game)
 			var a = new_achievement(game)
-			player.unlock_achievement(a, event)
+			player.unlock_achievement(a, event, event.comment.created_at)
 		end
 	end
 end

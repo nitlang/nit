@@ -50,12 +50,13 @@ redef class GithubEvent
 	private fun react_player_event(reactor: PlayerReactor, game: Game) do end
 
 	# Generates a GameEvent preinitialized for a reward event.
-	private fun player_reward_event(kind: String, player: Player, reward: Int): GameEvent do
+	private fun player_reward_event(kind: String, player: Player, reward: Int, time: nullable ISODate): GameEvent do
 		var obj = new JsonObject
 		obj["player"] = player.name
 		obj["reward"] = reward
 		obj["github_event"] = json
 		var event = new GameEvent(player.game, kind, obj)
+		if time != null then event.time = time
 		player.game.add_event(event)
 		return event
 	end
@@ -79,7 +80,7 @@ redef class IssuesEvent
 		var player = pull.user.player(game)
 		player.nitcoins += r.nc_pull_open
 		player.save
-		var event = player_reward_event("pull_open", player, r.nc_pull_open)
+		var event = player_reward_event("pull_open", player, r.nc_pull_open, pull.created_at)
 		player.add_event(event)
 	end
 
@@ -89,10 +90,10 @@ redef class IssuesEvent
 		var event
 		if pull.merged then
 			reward = pull.commits * r.nc_commit_merged
-			event = player_reward_event("pull_merged", player, reward)
+			event = player_reward_event("pull_merged", player, reward, pull.merged_at)
 		else
 			reward = -r.nc_pull_open
-			event = player_reward_event("pull_closed", player, reward)
+			event = player_reward_event("pull_closed", player, reward, pull.closed_at)
 		end
 		player.nitcoins += reward
 		player.save
@@ -119,7 +120,7 @@ redef class IssueCommentEvent
 		if issue.user == player.user then return
 		player.nitcoins += r.nc_pull_review
 		player.save
-		var event = player_reward_event("pull_review", player, r.nc_pull_review)
+		var event = player_reward_event("pull_review", player, r.nc_pull_review, comment.updated_at)
 		player.add_event(event)
 	end
 end
