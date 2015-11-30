@@ -646,7 +646,7 @@ redef class App
 	var default_soundpool: SoundPool is lazy do return new SoundPool
 
 	# Get the native audio manager
-	fun audio_manager: NativeAudioManager import native_activity in "Java" `{
+	private fun audio_manager: NativeAudioManager import native_activity in "Java" `{
 		return (AudioManager)App_native_activity(self).getSystemService(Context.AUDIO_SERVICE);
 	`}
 

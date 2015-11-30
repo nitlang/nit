@@ -18,6 +18,10 @@ class A
 	protected fun proA(a: A) do end
 	private fun priA(a: A) do end
 
+	fun pubA2: A do abort
+	protected fun proA2: A do abort
+	private fun priA2: A do abort
+
 	var vpubA: nullable A is writable, noinit
 	protected var vproA: nullable A is protected writable, noinit
 	private var vpriA: nullable A is noinit
@@ -29,6 +33,10 @@ class A
 	#alt1#fun pubB(a: B) do end
 	#alt2#protected fun proB(a: B) do end
 	private fun priB(a: B) do end
+
+	#alt1#fun pubB2: B do abort
+	#alt2#protected fun proB2: B do abort
+	private fun priB2: B do abort
 
 	#alt3#var vpubB: nullable B is writable, noinit
 	#alt4#protected var vproB: nullable B is protected writable, noinit
