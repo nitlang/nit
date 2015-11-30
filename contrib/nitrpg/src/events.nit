@@ -130,10 +130,14 @@ redef class GameEntity
 	fun load_events(skip, limit: nullable Int): Array[GameEvent] do
 		var s = skip or else 0
 		var l = limit or else 0
+		var subreq = new JsonObject
+		subreq["game"] = game.key
+		subreq["owner"] = key
+		var order_by = new JsonObject
+		order_by["time"] = -1
 		var req = new JsonObject
-		req["game"] = game.key
-		req["owner"] = key
-		req["kind"] = "\{\"$not\": \"github_event\"\}"
+		req["$query"] = subreq
+		req["$orderby"] = order_by
 		var res = new Array[GameEvent]
 		for obj in game.db.collection("events").find_all(req, s, l) do
 			res.add new GameEvent.from_json(game, obj)
