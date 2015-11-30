@@ -337,3 +337,75 @@ redef class String
 	# WARNING: SEE: `TermCharFormat`
 	fun underline: String do return apply_format(normal.underline)
 end
+
+# A dynamic progressbar displayable in console.
+#
+# Example:
+# ~~~nitish
+# var max = 10
+# var current = 0
+# var pb = new TermProgress(max, current)
+#
+# pb.display
+# for i in [current + 1 .. max] do
+#	nanosleep(1, 0)
+#	pb.update(i)
+# end
+#
+# print "\ndone"
+# ~~~
+#
+# Progressbar can accept metadata to display a small amount of data.
+#
+# Example with metadata:
+# ~~~nitish
+# var pb = new TermProgress(10, 0)
+# for i in [0..10] do
+#	pb.update(i, "Step {i}")
+# end
+# ~~~
+class TermProgress
+
+	# Max value of the progress bar (business value).
+	var max_value: Int
+
+	# Current value of the progress bar (business value).
+	var current_value: Int
+
+	# Number of columns used to display the progress bar.
+	var max_columns = 70 is writable
+
+	# Get the current percent value.
+	fun current_percentage: Int do
+		return current_value * 100 / max_value
+	end
+
+	# Display the progress bar.
+	#
+	# `metadata`  can be used to pass a small amount of data to display after
+	# the progressbar.
+	fun display(metadata: nullable String) do
+		var percent = current_percentage
+		var p = current_value * max_columns / max_value
+		printn "\r{percent}% ["
+		for i in [1..max_columns] do
+			if i < p then
+				printn "="
+			else if i == p then
+				printn ">"
+			else
+				printn " "
+			end
+		end
+		printn "]"
+		if metadata != null then printn " ({metadata})"
+	end
+
+	# Update and display the progresssbar.
+	#
+	# See `display`.
+	fun update(new_current: Int, metadata: nullable String) do
+		current_value = new_current
+		display(metadata)
+	end
+end
