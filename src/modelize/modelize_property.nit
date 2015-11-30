@@ -1390,7 +1390,14 @@ redef class AAttrPropdef
 					var cla = modelbuilder.try_get_mclass_by_name(nexpr, mmodule, "Float")
 					if cla != null then mtype = cla.mclass_type
 				else if nexpr isa ACharExpr then
-					var cla = modelbuilder.try_get_mclass_by_name(nexpr, mmodule, "Char")
+					var cla: nullable MClass
+					if nexpr.is_ascii then
+						cla = modelbuilder.try_get_mclass_by_name(nexpr, mmodule, "Byte")
+					else if nexpr.is_code_point then
+						cla = modelbuilder.try_get_mclass_by_name(nexpr, mmodule, "Int")
+					else
+						cla = modelbuilder.try_get_mclass_by_name(nexpr, mmodule, "Char")
+					end
 					if cla != null then mtype = cla.mclass_type
 				else if nexpr isa ABoolExpr then
 					var cla = modelbuilder.try_get_mclass_by_name(nexpr, mmodule, "Bool")
