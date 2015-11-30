@@ -506,7 +506,12 @@ extern class NativeMongoCursor `{ mongoc_cursor_t* `}
 	# Wrapper for `mongoc_cursor_current()`.
 	#
 	# Fetches the cursors current document or NULL if there has been an error.
-	fun current: NativeBSON `{ return (bson_t*) mongoc_cursor_current(self); `}
+	fun current: NativeBSON `{
+		// As said in documentation, BSON objects should not be freed manually.
+		bson_t* bson = (bson_t*) mongoc_cursor_current(self);
+		// Copy BSON so we can let the GC free it automatically.
+		return bson_copy(bson);
+	`}
 
 	# Wrapper for `mongoc_cursor_next()`.
 	#
@@ -518,11 +523,6 @@ extern class NativeMongoCursor `{ mongoc_cursor_t* `}
 		const bson_t *doc;
 		return mongoc_cursor_next(self, &doc);
 	`}
-
-	# Wrapper for `mongoc_cursor_more()`.
-	#
-	# This function shall indicate if there is more data to be read from the cursor.
-	fun more: Bool `{ return mongoc_cursor_more(self); `}
 
 	# Wrapper for `mongoc_cursor_destroy()`.
 	#

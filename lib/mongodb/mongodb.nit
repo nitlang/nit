@@ -55,15 +55,10 @@ in "C header" `{
 # * [Binary JSON spec](http://bsonspec.org/)
 # * [Libbson](http://api.mongodb.org/libbson/1.1.4/)#
 private class BSON
-	super Finalizable
+	super FinalizableOnce
 
 	# Native instance pointer.
 	var native: NativeBSON
-
-	# Is the native instance valid?
-	#
-	# This is set to false if the `native` is destroyed.
-	var is_alive = true
 
 	# Returns a new BSON object initialized from the content of `json`.
 	#
@@ -95,7 +90,6 @@ private class BSON
 	end
 
 	redef fun to_s do
-		assert is_alive
 		var ns = native.to_native_string
 		var res = ns.to_s_with_copy
 		ns.free # manual free of gc allocated NativeString
@@ -114,22 +108,15 @@ private class BSON
 	# assert json["ELS"].as(JsonArray).is_empty
 	# ~~~
 	fun to_json: JsonObject do
-		assert is_alive
 		var json = to_s.parse_json
 		if json isa JsonParseError then
-			print to_s
 			print json.message
 			sys.exit 1
 		end
 		return json.as(JsonObject)
 	end
 
-	redef fun finalize do
-		if is_alive then
-			native.destroy
-			is_alive = false
-		end
-	end
+	redef fun finalize_once do native.destroy
 end
 
 redef class JsonObject
@@ -150,26 +137,14 @@ class MongoError
 
 	private var native: BSONError
 
-	# Is the native instance valid?
-	#
-	# This is set to false if the `native` is destroyed.
-	private var is_alive = true
-
 	# Logical domain within a library that created the error.
-	fun domain: Int do
-		assert is_alive
-		return native.domain
-	end
+	fun domain: Int do return native.domain
 
 	# Domain specific error code.
-	fun code: Int do
-		assert is_alive
-		return native.code
-	end
+	fun code: Int do return native.code
 
 	# Human readable error message.
 	fun message: String do
-		assert is_alive
 		var ns = native.message
 		var res = ns.to_s_with_copy
 		ns.free
@@ -217,21 +192,14 @@ end
 # assert client.server_uri == uri
 # ~~~
 class MongoClient
-	super Finalizable
+	super FinalizableOnce
 
 	# Server URI.
 	var server_uri: String
 
 	private var native: NativeMongoClient is noinit
 
-	# Is the native instance valid?
-	#
-	# This is set to false if the `native` is destroyed.
-	private var is_alive = true
-
-	init do
-		native = new NativeMongoClient(server_uri.to_cstring)
-	end
+	init do native = new NativeMongoClient(server_uri.to_cstring)
 
 	# Gets server data.
 	#
@@ -242,7 +210,6 @@ class MongoClient
 	# assert client.server_status["process"] == "mongod"
 	# ~~~
 	fun server_status: nullable JsonObject do
-		assert is_alive
 		var nbson = native.server_status
 		if nbson == null then return null
 		var bson = new BSON(nbson)
@@ -259,7 +226,6 @@ class MongoClient
 	# assert client.database_names.has("test")
 	# ~~~
 	fun database_names: Array[String] do
-		assert is_alive
 		var res = new Array[String]
 		var nas = native.database_names
 		if nas == null then return res
@@ -284,25 +250,14 @@ class MongoClient
 	# var client = new MongoClient("mongodb://localhost:27017/")
 	# assert client.database("test").name == "test"
 	# ~~~
-	fun database(name: String): MongoDb do
-		assert is_alive
-		return new MongoDb(self, name)
-	end
+	fun database(name: String): MongoDb do return new MongoDb(self, name)
 
 	# Close the connexion and destroy the instance.
 	#
 	# The reference should not be used beyond this point!
-	fun close do
-		assert is_alive
-		finalize
-	end
+	fun close do finalize_once
 
-	redef fun finalize do
-		if is_alive then
-			native.destroy
-			is_alive = false
-		end
-	end
+	redef fun finalize_once do native.destroy
 
 	# Last error raised by mongoc.
 	fun last_error: nullable MongoError do
@@ -334,7 +289,7 @@ end
 # first document into a collection.
 # There is no need to create a database manually.
 class MongoDb
-	super Finalizable
+	super FinalizableOnce
 
 	# `MongoClient` used to load this database.
 	var client: MongoClient
@@ -344,14 +299,7 @@ class MongoDb
 
 	private var native: NativeMongoDb is noinit
 
-	# Is the native instance valid?
-	#
-	# This is set to false if the `native` is destroyed.
-	private var is_alive = true
-
-	init do
-		native = new NativeMongoDb(client.native, name.to_cstring)
-	end
+	init do native = new NativeMongoDb(client.native, name.to_cstring)
 
 	# Lists available collection names.
 	#
@@ -364,7 +312,6 @@ class MongoDb
 	# assert db.collection_names.has("test")
 	# ~~~
 	fun collection_names: Array[String] do
-		assert is_alive
 		var res = new Array[String]
 		var nas = native.collection_names
 		if nas == null then return res
@@ -388,7 +335,6 @@ class MongoDb
 	# assert col.name == "test"
 	# ~~~
 	fun collection(name: String): MongoCollection do
-		assert is_alive
 		return new MongoCollection(self, name)
 	end
 
@@ -400,23 +346,14 @@ class MongoDb
 	# assert not db.has_collection("qwerty")
 	# ~~~
 	fun has_collection(name: String): Bool do
-		assert is_alive
 		# TODO handle error
 		return native.has_collection(name.to_cstring)
 	end
 
 	# Drop `self`, returns false if an error occured.
-	fun drop: Bool do
-		assert is_alive
-		return native.drop
-	end
+	fun drop: Bool do return native.drop
 
-	redef fun finalize do
-		if is_alive then
-			native.destroy
-			is_alive = false
-		end
-	end
+	redef fun finalize_once do native.destroy
 end
 
 # A Mongo collection.
@@ -425,7 +362,7 @@ end
 # the first document.
 # There is no need to create a database manually.
 class MongoCollection
-	super Finalizable
+	super FinalizableOnce
 
 	# Database that collection belongs to.
 	var database: MongoDb
@@ -434,11 +371,6 @@ class MongoCollection
 	var name: String
 
 	private var native: NativeMongoCollection is noinit
-
-	# Is the native instance valid?
-	#
-	# This is set to false if the `native` is destroyed.
-	private var is_alive = true
 
 	# Loads a collection.
 	#
@@ -477,7 +409,6 @@ class MongoCollection
 	# assert doc.has_key("_id")
 	# ~~~
 	fun insert(doc: JsonObject): Bool do
-		assert is_alive
 		var res = native.insert(doc.to_bson.native)
 		if res then set_id(doc)
 		return res
@@ -487,7 +418,6 @@ class MongoCollection
 	#
 	# See `insert`.
 	fun insert_all(docs: Collection[JsonObject]): Bool do
-		assert is_alive
 		var res = true
 		for doc in docs do res = insert(doc) and res
 		return res
@@ -517,7 +447,6 @@ class MongoCollection
 	# assert doc["_id"] == id
 	# ~~~
 	fun save(doc: JsonObject): Bool do
-		assert is_alive
 		var bson = doc.to_bson
 		var nat = bson.native
 		var res = native.save(nat)
@@ -539,7 +468,6 @@ class MongoCollection
 	# assert col.remove(sel)
 	# ~~~
 	fun remove(selector: JsonObject): Bool do
-		assert is_alive
 		return native.remove(selector.to_bson.native)
 	end
 
@@ -547,7 +475,6 @@ class MongoCollection
 	#
 	# See `remove`.
 	fun remove_all(selector: JsonObject): Bool do
-		assert is_alive
 		return native.remove_all(selector.to_bson.native)
 	end
 
@@ -565,7 +492,6 @@ class MongoCollection
 	# assert col.update(sel, upd)
 	# ~~~
 	fun update(selector: JsonObject, update: JsonObject): Bool do
-		assert is_alive
 		return native.update(
 			selector.to_bson.native,
 			update.to_bson.native)
@@ -592,7 +518,6 @@ class MongoCollection
 	# assert col.count(query) > 0
 	# ~~~
 	fun count(query: JsonObject): Int do
-		assert is_alive
 		return native.count(query.to_bson.native)
 	end
 
@@ -609,7 +534,6 @@ class MongoCollection
 	# assert doc["foo"] == 10
 	# ~~~
 	fun find(query: JsonObject): nullable JsonObject do
-		assert is_alive
 		var q = new NativeBSON.from_json_string(query.to_json.to_cstring)
 		var c = native.find(q)
 		q.destroy
@@ -633,12 +557,14 @@ class MongoCollection
 	# assert col.find_all(query).length > 0
 	# ~~~
 	fun find_all(query: JsonObject): Array[JsonObject] do
-		assert is_alive
 		var res = new Array[JsonObject]
 		var c = native.find(query.to_bson.native)
 		if c == null then return res
 		var cursor = new MongoCursor(c)
-		for item in cursor do res.add item
+		while cursor.is_ok do
+			res.add cursor.item
+			cursor.next
+		end
 		return res
 	end
 
@@ -652,17 +578,13 @@ class MongoCollection
 	# assert col.stats["ns"] == "test.test"
 	# ~~~
 	fun stats: nullable JsonObject do
-		assert is_alive
 		var bson = native.stats
 		if bson == null then return null
 		return new JsonObject.from_bson(new BSON(bson))
 	end
 
 	# Drops `self`, returns false if an error occured.
-	fun drop: Bool do
-		assert is_alive
-		return native.drop
-	end
+	fun drop: Bool do return native.drop
 
 	# Moves `self` to another `database`.
 	#
@@ -670,7 +592,6 @@ class MongoCollection
 	# this collection after the move.
 	# Additional operations will occur on moved collection.
 	fun move(database: MongoDb): Bool do
-		assert is_alive
 		self.database = database
 		return native.rename(database.name.to_cstring, name.to_cstring)
 	end
@@ -681,17 +602,11 @@ class MongoCollection
 	# to continue using this collection after the rename.
 	# Additional operations will occur on renamed collection.
 	fun rename(name: String): Bool do
-		assert is_alive
 		self.name = name
 		return native.rename(database.name.to_cstring, name.to_cstring)
 	end
 
-	redef fun finalize do
-		if is_alive then
-			native.destroy
-			is_alive = false
-		end
-	end
+	redef fun finalize_once do native.destroy
 end
 
 # A MongoDB query cursor.
@@ -699,37 +614,20 @@ end
 # It wraps up the wire protocol negotation required to initiate a query and
 # retreive an unknown number of documents.
 class MongoCursor
-	super Finalizable
+	super FinalizableOnce
 	super Iterator[JsonObject]
 
 	private var native: NativeMongoCursor
 
-	# Is the native instance valid?
-	#
-	# This is set to false if the `native` is destroyed.
-	private var is_alive = true
-
 	init do next
 
-	redef fun is_ok do
-		assert is_alive
-		return native.more
-	end
+	redef var is_ok = true
 
-	redef fun next do
-		assert is_alive
-		native.next
-	end
+	redef fun next do is_ok = native.next
 
 	redef fun item do
-		assert is_alive
 		return new JsonObject.from_bson(new BSON(native.current))
 	end
 
-	redef fun finalize do
-		if is_alive then
-			native.destroy
-			is_alive = false
-		end
-	end
+	redef fun finalize_once do native.destroy
 end
