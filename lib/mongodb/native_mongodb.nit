@@ -421,11 +421,11 @@ extern class NativeMongoCollection `{ mongoc_collection_t * `}
 	#
 	# If you would like to specify options such as a sort order,
 	# the query must be placed inside of `{"$query": {}}`.
-	fun find(query: NativeBSON): nullable NativeMongoCursor import
+	fun find(query: NativeBSON, skip, limit: Int): nullable NativeMongoCursor import
 		NativeMongoCursor.as nullable, set_mongoc_error `{
 		bson_error_t error;
 		mongoc_cursor_t	*cursor;
-		cursor = mongoc_collection_find(self, MONGOC_QUERY_NONE, 0, 0, 0, query, NULL, NULL);
+		cursor = mongoc_collection_find(self, MONGOC_QUERY_NONE, skip, limit, 0, query, NULL, NULL);
 		if (mongoc_cursor_error(cursor, &error)) {
 			NativeMongoCollection_set_mongoc_error(self, &error);
 			return null_NativeMongoCursor();
