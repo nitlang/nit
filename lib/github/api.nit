@@ -732,6 +732,12 @@ class Issue
 		super
 	end
 
+	# Issue id.
+	fun id: Int do return json["id"].as(Int)
+
+	# Set issue id.
+	fun id=(id: Int) do json["id"] = id
+
 	# Issue title.
 	fun title: String do return json["title"].as(String)
 
