@@ -220,22 +220,18 @@ abstract class AbstractArray[E]
 	do
 		assert not_empty: not is_empty
 		var r = first
-		var i = 1
-		var l = length
-		while i < l do
-			self[i-1] = self[i]
-			i += 1
-		end
-		_length = l - 1
+		var l = length-1
+		copy_to(1, l, self, 0)
+		_length = l
 		return r
 	end
 
 	redef fun unshift(item)
 	do
-		var i = length - 1
-		while i >= 0 do
-			self[i+1] = self[i]
-			i -= 1
+		var l = length
+		if l > 0 then
+			enlarge(l + 1)
+			copy_to(0, l, self, 1)
 		end
 		self[0] = item
 	end
