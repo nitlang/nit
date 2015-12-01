@@ -111,7 +111,6 @@ abstract class AbstractArrayRead[E]
 	#     assert b      ==  [10, 20, 2, 3, 50]
 	fun copy_to(start: Int, len: Int, dest: AbstractArray[E], new_start: Int)
 	do
-		# TODO native one
 		if start < new_start then
 			var i = len
 			while i > 0 do
@@ -371,6 +370,32 @@ class Array[E]
 		end
 
 		_length = nl
+	end
+
+	redef fun copy_to(start, len, dest, new_start)
+	do
+		# Fast code when source and destination are two arrays
+
+		if not dest isa Array[E] then
+			super
+			return
+		end
+
+		# Enlarge dest if required
+		var dest_len = new_start + len
+		if dest_len > dest.length then
+			dest.enlarge(dest_len)
+			dest.length = dest_len
+		end
+
+		# Get underlying native arrays
+		var items = self.items
+		if items == null then return
+		var dest_items = dest.items
+		assert dest_items != null
+
+		# Native copy
+		items.memmove(start, len, dest_items, new_start)
 	end
 
 	redef fun enlarge(cap)
@@ -966,6 +991,25 @@ universal NativeArray[E]
 
 	# Copy `length` items to `dest`.
 	fun copy_to(dest: NativeArray[E], length: Int) is intern
+
+	# Copy `length` items to `dest` starting from `dest`.
+	fun memmove(start: Int, length: Int, dest: NativeArray[E], dest_start: Int) do
+		# TODO native one
+		if start < dest_start then
+			var i = length
+			while i > 0 do
+				i -= 1
+				dest[dest_start+i] = self[start+i]
+			end
+		else
+			var i = 0
+			while i < length do
+				dest[dest_start+i] = self[start+i]
+				i += 1
+			end
+		end
+	end
+
 	#fun =(o: NativeArray[E]): Bool is intern
 	#fun !=(o: NativeArray[E]): Bool is intern
 end
