@@ -112,10 +112,18 @@ abstract class AbstractArrayRead[E]
 	fun copy_to(start: Int, len: Int, dest: AbstractArray[E], new_start: Int)
 	do
 		# TODO native one
-		var i = len
-		while i > 0 do
-			i -= 1
-			dest[new_start+i] = self[start+i]
+		if start < new_start then
+			var i = len
+			while i > 0 do
+				i -= 1
+				dest[new_start+i] = self[start+i]
+			end
+		else
+			var i = 0
+			while i < len do
+				dest[new_start+i] = self[start+i]
+				i += 1
+			end
 		end
 	end
 
