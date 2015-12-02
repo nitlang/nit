@@ -42,17 +42,8 @@ class List[E]
 	# O(1)
 	redef fun is_empty do return _head == null
 
-	# O(n)
-	redef fun length
-	do
-		var l = 0
-		var t = _head
-		while t != null do
-			l += 1
-			t = t.next
-		end
-		return l
-	end
+	# O(1)
+	redef var length = 0
 
 	# O(n)
 	redef fun has(e) do return search_node_after(e, _head) != null
@@ -103,6 +94,7 @@ class List[E]
 			node.prev = _tail
 		end
 		_tail = node
+		length += 1
 	end
 
 	# O(1)
@@ -116,6 +108,7 @@ class List[E]
 			_head.prev = node
 		end
 		_head = node
+		length += 1
 	end
 
 	# O(n)
@@ -141,6 +134,7 @@ class List[E]
 			_tail.next.prev = _tail
 		end
 		_tail = l._tail
+		length += l.length
 		l.clear
 	end
 
@@ -157,6 +151,7 @@ class List[E]
 		else
 			_tail.next = null
 		end
+		length -= 1
 		return node.item
 	end
 
@@ -171,6 +166,7 @@ class List[E]
 		else
 			_head.prev = null
 		end
+		length -= 1
 		return node.item
 	end
 
@@ -233,6 +229,7 @@ class List[E]
 	# Remove the node (ie. atach prev and next)
 	private fun remove_node(node: ListNode[E])
 	do
+		length -= 1
 		if node.prev == null then
 			_head = node.next
 			if node.next == null then
@@ -251,6 +248,7 @@ class List[E]
 
 	private fun insert_before(element: E, node: ListNode[E])
 	do
+		length += 1
 		var nnode = new ListNode[E](element)
 		var prev = node.prev
 		if prev == null then
