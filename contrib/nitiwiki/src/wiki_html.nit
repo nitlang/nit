@@ -189,10 +189,7 @@ redef class WikiArticle
 	fun load_template(template_file: String): TemplateString do
 		var tpl = wiki.load_template(template_file)
 		if tpl.has_macro("ROOT_URL") then
-			var root_dir = href.dirname.relpath("")
-			# Avoid issues if the macro is just followed by a `/` (as with url prefix)
-			if root_dir == "" then root_dir = "."
-			tpl.replace("ROOT_URL", root_dir)
+			tpl.replace("ROOT_URL", root_href)
 		end
 		return tpl
 	end
