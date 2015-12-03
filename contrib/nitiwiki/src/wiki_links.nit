@@ -100,12 +100,15 @@ redef class WikiEntry
 	# Relative path to `self` from the target root_url
 	fun href: String do return breadcrumbs.join("/")
 
+	# Relative path to the directory `self` from the target root_url
+	fun dir_href: String do return href.dirname
+
 	# A relative `href` to `self` from the page `context`.
 	#
 	# Should be used to navigate between documents.
 	fun href_from(context: WikiEntry): String
 	do
-		var res = context.href.dirname.relpath(href)
+		var res = context.dir_href.relpath(href)
 		return res
 	end
 
@@ -174,6 +177,8 @@ redef class WikiSection
 		end
 		return new WikiSectionIndex(wiki, "index", self)
 	end
+
+	redef fun dir_href do return href
 end
 
 redef class WikiArticle
@@ -212,6 +217,8 @@ class WikiSectionIndex
 	redef fun title do return section.title
 
 	redef fun href do return section.href
+
+	redef fun dir_href do return section.dir_href
 end
 
 # A MarkdownProcessor able to parse wiki links.
