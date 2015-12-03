@@ -39,3 +39,4 @@ if args.not_empty then nb = args.first.to_i
 test_list(new Array[Int], nb)
 test_list(new List[Int], nb)
 test_list(new UnrolledList[Int], nb)
+test_list(new CircularArray[Int], nb)
