@@ -16,6 +16,7 @@ module collection
 import range
 import list
 import array
+import circular_array
 import sorter
 import hash_collection
 import union_find
