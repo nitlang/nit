@@ -103,6 +103,14 @@ redef class WikiEntry
 	# Relative path to the directory `self` from the target root_url
 	fun dir_href: String do return href.dirname
 
+	# Relative path to the root url from `self`
+	fun root_href: String do
+		var root_dir = dir_href.relpath("")
+		# Avoid issues if used as a macro just followed by a `/` (as with url prefix)
+		if root_dir == "" then root_dir = "."
+		return root_dir
+	end
+
 	# A relative `href` to `self` from the page `context`.
 	#
 	# Should be used to navigate between documents.
