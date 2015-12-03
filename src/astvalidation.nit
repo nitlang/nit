@@ -24,7 +24,7 @@ class ASTValidationVisitor
 	do
 		node.accept_ast_validation(self)
 	end
-	private var path = new List[ANode]
+	private var path = new CircularArray[ANode]
 	private var seen = new HashSet[ANode]
 end
 
