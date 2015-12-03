@@ -998,7 +998,7 @@ abstract class Text
 end
 
 # All kinds of array-based text representations.
-private abstract class FlatText
+abstract class FlatText
 	super Text
 
 	# Underlying C-String (`char*`)

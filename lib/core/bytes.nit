@@ -19,7 +19,39 @@ import kernel
 import collection::array
 intrude import text::flat
 
+# Any kind of entity which can be searched for in a Sequence of Byte
+interface BytePattern
+	# Return the first occurence of `self` in `b`, or -1 if not found
+	fun first_index_in(b: SequenceRead[Byte]): Int do return first_index_in_from(b, 0)
+
+	# Return the first occurence of `self` in `b` starting at `from`, or -1 if not found
+	fun first_index_in_from(b: SequenceRead[Byte], from: Int): Int is abstract
+
+	# Return the last occurence of `self` in `b`, or -1 if not found
+	fun last_index_in(b: SequenceRead[Byte]): Int do return last_index_in_from(b, b.length - 1)
+
+	# Return the last occurence of `self` in `b`, or -1 if not found
+	fun last_index_in_from(b: SequenceRead[Byte], from: Int): Int is abstract
+
+	# Returns the indexes of all the occurences of `self` in `b`
+	fun search_all_in(b: SequenceRead[Byte]): SequenceRead[Int] is abstract
+
+	# Length of the pattern
+	fun pattern_length: Int is abstract
+
+	# Appends `self` to `b`
+	fun append_to(b: Sequence[Byte]) is abstract
+
+	# Is `self` a prefix for `b` ?
+	fun is_prefix(b: SequenceRead[Byte]): Bool is abstract
+
+	# Is `self` a suffix for `b` ?
+	fun is_suffix(b: SequenceRead[Byte]): Bool is abstract
+end
+
 redef class Byte
+	super BytePattern
+
 	# Write self as a string into `ns` at position `pos`
 	private fun add_digest_at(ns: NativeString, pos: Int) do
 		var tmp = (0xF0u8 & self) >> 4
@@ -72,6 +104,39 @@ redef class Byte
 		# i.e. this abort is here to please the compiler
 		abort
 	end
+
+	redef fun first_index_in_from(b, from) do
+		for i in [from .. b.length[ do if b[i] == self then return i
+		return -1
+	end
+
+	redef fun last_index_in_from(b, from) do
+		for i in [0 .. from].step(-1) do if b[i] == self then return i
+		return -1
+	end
+
+	redef fun search_all_in(b) do
+		var ret = new Array[Int]
+		var pos = 0
+		loop
+			pos = first_index_in_from(b, pos)
+			if pos == -1 then return ret
+			ret.add pos
+			pos += 1
+		end
+	end
+
+	redef fun pattern_length do return 1
+
+	redef fun append_to(b) do b.push self
+
+	#     assert 'b'.ascii.is_suffix("baqsdb".to_bytes)
+	#     assert not 'b'.ascii.is_suffix("baqsd".to_bytes)
+	redef fun is_suffix(b) do return b.length != 0 and b.last == self
+
+	#     assert 'b'.ascii.is_prefix("baqsdb".to_bytes)
+	#     assert not 'b'.ascii.is_prefix("aqsdb".to_bytes)
+	redef fun is_prefix(b) do return b.length != 0 and b.first == self
 end
 
 # A buffer containing Byte-manipulation facilities
@@ -79,6 +144,7 @@ end
 # Uses Copy-On-Write when persisted
 class Bytes
 	super AbstractArray[Byte]
+	super BytePattern
 
 	# A NativeString being a char*, it can be used as underlying representation here.
 	var items: NativeString
@@ -107,7 +173,9 @@ class Bytes
 		init(ns, 0, cap)
 	end
 
-	redef fun is_empty do return length != 0
+	redef fun pattern_length do return length
+
+	redef fun is_empty do return length == 0
 
 	#     var b = new Bytes.empty
 	#     b.add 101u8
@@ -116,6 +184,71 @@ class Bytes
 		assert i >= 0
 		assert i < length
 		return items[i]
+	end
+
+	# Returns a copy of `self`
+	fun clone: Bytes do
+		var b = new Bytes.with_capacity(length)
+		b.append(self)
+		return b
+	end
+
+	# Trims off the whitespaces at the beginning and the end of `self`
+	#
+	#     var b = "102041426E6F1020" .hexdigest_to_bytes
+	#     assert b.trim.hexdigest == "41426E6F"
+	#
+	# NOTE: A whitespace is defined here as a byte whose value is <= 0x20
+	fun trim: Bytes do
+		var st = 0
+		while st < length do
+			if self[st] > 0x20u8 then break
+			st += 1
+		end
+		if st >= length then return new Bytes.empty
+		var ed = length - 1
+		while ed > 0 do
+			if self[ed] > 0x20u8 then break
+			ed -= 1
+		end
+		return slice(st, ed - st + 1)
+	end
+
+	# Returns a subset of the content of `self` starting at `from` and of length `count`
+	#
+	#     var b = "abcd".to_bytes
+	#     assert b.slice(1, 2).hexdigest == "6263"
+	#     assert b.slice(-1, 2).hexdigest == "61"
+	#     assert b.slice(1, 0).hexdigest == ""
+	#     assert b.slice(2, 5).hexdigest == "6364"
+	fun slice(from, count: Int): Bytes do
+		if count <= 0 then return new Bytes.empty
+
+		if from < 0 then
+			count += from
+			if count < 0 then count = 0
+			from = 0
+		end
+
+		if (count + from) > length then count = length - from
+		if count <= 0 then return new Bytes.empty
+
+		var ret = new Bytes.with_capacity(count)
+
+		ret.append_ns(items.fast_cstring(from), count)
+		return ret
+	end
+
+	# Returns a copy of `self` starting at `from`
+	#
+	#     var b = "abcd".to_bytes
+	#     assert b.slice_from(1).hexdigest  == "626364"
+	#     assert b.slice_from(-1).hexdigest == "61626364"
+	#     assert b.slice_from(2).hexdigest  == "6364"
+	fun slice_from(from: Int): Bytes do
+		if from >= length then return new Bytes.empty
+		if from < 0 then from = 0
+		return slice(from, length)
 	end
 
 	# Returns self as a hexadecimal digest
@@ -218,6 +351,15 @@ class Bytes
 		length += ln
 	end
 
+	# Appends the bytes of `s` to `selftextextt`
+	fun append_text(s: Text) do
+		for i in s.substrings do
+			append_ns(i.fast_cstring, i.bytelen)
+		end
+	end
+
+	redef fun append_to(b) do b.append self
+
 	redef fun enlarge(sz) do
 		if capacity >= sz then return
 		persisted = false
@@ -237,6 +379,157 @@ class Bytes
 
 	redef fun iterator do return new BytesIterator.with_buffer(self)
 
+	redef fun first_index_in_from(b, from) do
+		if is_empty then return -1
+		var fst = self[0]
+		var bpos = fst.first_index_in_from(self, from)
+		for i in [0 .. length[ do
+			if self[i] != b[bpos] then return first_index_in_from(b, bpos + 1)
+			bpos += 1
+		end
+		return bpos
+	end
+
+	redef fun last_index_in_from(b, from) do
+		if is_empty then return -1
+		var lst = self[length - 1]
+		var bpos = lst.last_index_in_from(b, from)
+		for i in [0 .. length[.step(-1) do
+			if self[i] != b[bpos] then return last_index_in_from(b, bpos - 1)
+			bpos -= 1
+		end
+		return bpos
+	end
+
+	redef fun search_all_in(b) do
+		var ret = new Array[Int]
+		var pos = first_index_in_from(b, 0)
+		if pos == -1 then return ret
+		pos = pos + 1
+		ret.add pos
+		loop
+			pos = first_index_in_from(b, pos)
+			if pos == -1 then return ret
+			ret.add pos
+			pos += length
+		end
+	end
+
+	# Splits the content on self when encountering `b`
+	#
+	#     var a = "String is string".to_bytes.split_with('s'.ascii)
+	#     assert a.length == 3
+	#     assert a[0].hexdigest == "537472696E672069"
+	#     assert a[1].hexdigest == "20"
+	#     assert a[2].hexdigest == "7472696E67"
+	fun split_with(b: BytePattern): Array[Bytes] do
+		var fst = b.search_all_in(self)
+		if fst.is_empty then return [clone]
+		var retarr = new Array[Bytes]
+		var prev = 0
+		for i in fst do
+			retarr.add(slice(prev, i - prev))
+			prev = i + b.pattern_length
+		end
+		retarr.add slice_from(prev)
+		return retarr
+	end
+
+	# Splits `self` in two parts at the first occurence of `b`
+	#
+	#     var a = "String is string".to_bytes.split_once_on('s'.ascii)
+	#     assert a[0].hexdigest == "537472696E672069"
+	#     assert a[1].hexdigest == "20737472696E67"
+	fun split_once_on(b: BytePattern): Array[Bytes] do
+		var spl = b.first_index_in(self)
+		if spl == -1 then return [clone]
+		var ret = new Array[Bytes].with_capacity(2)
+		ret.add(slice(0, spl))
+		ret.add(slice_from(spl + b.pattern_length))
+		return ret
+	end
+
+	# Replaces all the occurences of `this` in `self` by `by`
+	#
+	#     var b = "String is string".to_bytes.replace(0x20u8, 0x41u8)
+	#     assert b.hexdigest == "537472696E6741697341737472696E67"
+	fun replace(pattern: BytePattern, bytes: BytePattern): Bytes do
+		if is_empty then return new Bytes.empty
+		var pos = pattern.search_all_in(self)
+		if pos.is_empty then return clone
+		var ret = new Bytes.with_capacity(length)
+		var prev = 0
+		for i in pos do
+			ret.append_ns(items.fast_cstring(prev), i - prev)
+			bytes.append_to ret
+			prev = i + pattern.pattern_length
+		end
+		ret.append(slice_from(pos.last + pattern.pattern_length))
+		return ret
+	end
+
+	# Decode `self` from percent (or URL) encoding to a clear string
+	#
+	# Replace invalid use of '%' with '?'.
+	#
+	#     assert "aBc09-._~".to_bytes.from_percent_encoding == "aBc09-._~".to_bytes
+	#     assert "%25%28%29%3c%20%3e".to_bytes.from_percent_encoding == "%()< >".to_bytes
+	#     assert ".com%2fpost%3fe%3dasdf%26f%3d123".to_bytes.from_percent_encoding == ".com/post?e=asdf&f=123".to_bytes
+	#     assert "%25%28%29%3C%20%3E".to_bytes.from_percent_encoding == "%()< >".to_bytes
+	#     assert "incomplete %".to_bytes.from_percent_encoding == "incomplete ?".to_bytes
+	#     assert "invalid % usage".to_bytes.from_percent_encoding == "invalid ? usage".to_bytes
+	#     assert "%c3%a9%e3%81%82%e3%81%84%e3%81%86".to_bytes.from_percent_encoding == "éあいう".to_bytes
+	fun from_percent_encoding: Bytes do
+		var tmp = new Bytes.with_capacity(length)
+		var pos = 0
+		while pos < length do
+			var b = self[pos]
+			if b != '%'.ascii then
+				tmp.add b
+				pos += 1
+				continue
+			end
+			if length - pos < 2 then
+				tmp.add '?'.ascii
+				pos += 1
+				continue
+			end
+			var bn = self[pos + 1]
+			var bnn = self[pos + 2]
+			if not bn.is_valid_hexdigit or not bnn.is_valid_hexdigit then
+				tmp.add '?'.ascii
+				pos += 1
+				continue
+			end
+			tmp.add((bn.hexdigit_to_byteval << 4) + bnn.hexdigit_to_byteval)
+			pos += 3
+		end
+		return tmp
+	end
+
+	# Is `b` a prefix of `self` ?
+	fun has_prefix(b: BytePattern): Bool do return b.is_prefix(self)
+
+	# Is `b` a suffix of `self` ?
+	fun has_suffix(b: BytePattern): Bool do return b.is_suffix(self)
+
+	redef fun is_suffix(b) do
+		if length > b.length then return false
+		var j = b.length - 1
+		var i = length - 1
+		while i > 0 do
+			if self[i] != b[j] then return false
+			i -= 1
+			j -= 1
+		end
+		return true
+	end
+
+	redef fun is_prefix(b) do
+		if length > b.length then return false
+		for i in [0 .. length[ do if self[i] != b[i] then return false
+		return true
+	end
 end
 
 private class BytesIterator
@@ -396,4 +689,21 @@ redef class NativeString
 		copy_to(nns, len, 0, 0)
 		return new Bytes(nns, len, len)
 	end
+end
+
+# Joins an array of bytes `arr` separated by `sep`
+#
+#     assert join_bytes(["String".to_bytes, "is".to_bytes, "string".to_bytes], ' '.ascii).hexdigest == "537472696E6720697320737472696E67"
+fun join_bytes(arr: Array[Bytes], sep: nullable BytePattern): Bytes do
+	if arr.is_empty then return new Bytes.empty
+	sep = sep or else new Bytes.empty
+	var endln = sep.pattern_length * (arr.length - 1)
+	for i in arr do endln += i.length
+	var ret = new Bytes.with_capacity(endln)
+	ret.append(arr.first)
+	for i in  [1 .. arr.length[ do
+		sep.append_to(ret)
+		ret.append arr[i]
+	end
+	return ret
 end

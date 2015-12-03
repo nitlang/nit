@@ -36,9 +36,11 @@ end
 
 redef class FlatText
 
-	fun first_byte: Int do return 0
+	# First byte of the NativeString
+	protected fun first_byte: Int do return 0
 
-	fun last_byte: Int do return _bytelen - 1
+	# Last byte of the NativeString
+	protected fun last_byte: Int do return _bytelen - 1
 
 	# Cache of the latest position (char) explored in the string
 	var position: Int = 0
