@@ -745,6 +745,11 @@ private class DFAGenerator
 	end
 end
 
+redef class Token
+	# The associated text (if any, ie defined in the parser part)
+	var text: nullable String is noautoinit, writable
+end
+
 # A state in a finite automaton
 class State
 	# Outgoing transitions
