@@ -76,7 +76,7 @@ abstract class Parser
 		#print "  expected: {state.error_msg}"
 		#print "  node_stack={node_stack.join(", ")}"
 		#print "  state_stack={state_stack.join(", ")}"
-		node_stack.add(token)
+		node_stack.push(token)
 		var error: NError
 		if token isa NLexerError then
 			error = token
@@ -201,13 +201,13 @@ abstract class Lexer
 						var position = new Position(pos_start, pos, line_start, line, col_start, col)
 						token.position = position
 						token.text = text.substring(pos_start, pos-pos_start+1)
-						res.add token
+						res.push token
 						break
 					end
 					if not last_state.is_ignored then
 						var position = new Position(pos_start, pos_end, line_start, line_end, col_start, col_end)
 						var token = last_state.make_token(position, text)
-						if token != null then res.add(token)
+						if token != null then res.push(token)
 					end
 				end
 				if pos >= length then
@@ -215,7 +215,7 @@ abstract class Lexer
 					var position = new Position(pos, pos, line, line, col, col)
 					token.position = position
 					token.text = ""
-					res.add token
+					res.push token
 					break
 				end
 				state = start_state
@@ -422,7 +422,7 @@ private class DephIterator
 	var stack = new List[Iterator[nullable Node]]
 
 	init(i: Iterator[nullable Node]) is old_style_init do
-		stack.add i
+		stack.push i
 	end
 
 	redef fun is_ok do return not stack.is_empty
