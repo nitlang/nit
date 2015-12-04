@@ -157,7 +157,7 @@ class NitType
 	var identifier: String
 
 	# If this NitType was found in `lib/android`, contains the module name to import
-	var mod: nullable NitModule
+	var mod: nullable NitModuleRef
 
 	# Is this type known, wrapped and available in Nit?
 	var is_known: Bool = true
@@ -183,7 +183,7 @@ class JavaClass
 	var constructors = new Array[JavaConstructor]
 
 	# Importations from this class
-	var imports = new HashSet[NitModule]
+	var imports = new HashSet[NitModuleRef]
 
 	# Interfaces implemented by this class
 	var implements = new HashSet[JavaType]
@@ -482,7 +482,7 @@ class JavaConstructor
 end
 
 # A Nit module, use to import the referenced extern classes
-class NitModule
+class NitModuleRef
 	# Relative path to the module
 	var path: String
 
@@ -490,7 +490,7 @@ class NitModule
 	var name: String is lazy do return path.basename(".nit")
 
 	redef fun to_s do return self.name
-	redef fun ==(other) do return other isa NitModule and self.path == other.path
+	redef fun ==(other) do return other isa NitModuleRef and self.path == other.path
 	redef fun hash do return self.path.hash
 end
 
@@ -501,7 +501,7 @@ redef class Sys
 	# * The value is the corresponding `NitType`.
 	var find_extern_class: DefaultMap[String, nullable NitType] is lazy do
 		var map = new DefaultMap[String, nullable NitType](null)
-		var modules = new HashMap[String, NitModule]
+		var modules = new HashMap[String, NitModuleRef]
 
 		var lib_paths = opt_libs.value
 		if lib_paths == null then lib_paths = new Array[String]
@@ -543,7 +543,7 @@ redef class Sys
 
 				var mod = modules.get_or_null(path)
 				if mod == null then
-					mod = new NitModule(path)
+					mod = new NitModuleRef(path)
 					modules[path] = mod
 				end
 
