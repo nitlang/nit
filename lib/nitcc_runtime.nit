@@ -343,7 +343,7 @@ abstract class Node
 	fun children: SequenceRead[nullable Node] is abstract
 
 	# A point of view of a depth-first visit of all non-null children
-	var depth: Collection[Node] = new DephCollection(self)
+	var depth: Collection[Node] = new DephCollection(self) is lazy
 
 	# Visit all the children of the node with the visitor `v`
 	protected fun visit_children(v: Visitor)
