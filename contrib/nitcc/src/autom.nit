@@ -688,8 +688,13 @@ private class DFAGenerator
 					token = null
 				end
 				add("\tredef fun is_accept do return true\n")
-				add("\tredef fun make_token(position, text) do\n")
+				var is_ignored = false
 				if token != null and token.name == "Ignored" then
+					is_ignored = true
+					add("\tredef fun is_ignored do return true\n")
+				end
+				add("\tredef fun make_token(position, text) do\n")
+				if is_ignored then
 					add("\t\treturn null\n")
 				else
 					if token == null then
