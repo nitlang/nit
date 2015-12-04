@@ -419,7 +419,7 @@ end
 private class DephIterator
 	super Iterator[Node]
 
-	var stack = new List[Iterator[nullable Node]]
+	var stack = new Array[Iterator[nullable Node]]
 
 	init(i: Iterator[nullable Node]) is old_style_init do
 		stack.push i
