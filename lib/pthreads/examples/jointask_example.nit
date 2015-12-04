@@ -12,31 +12,41 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Simple example using threadpool
-module threadpool_example
+# Simple example of joinable task using threadpool
+module jointask_example
 
 import threadpool
 
-# Task printing "hello world" on standard output
-class HWTask
+# Task computing a string
+class StringTask
 	super JoinTask
 
 	# Sleeping time
 	var sec: Int
 
-	# id
+	# result of `self` execution
+	var value: String
+
+	# ID for printing
 	var id: Int
+
 	redef fun main do
-		print "Hello from {id}"
 		nanosleep(sec, 0)
-		print "World from {id}"
+		value += " id: {id}"
 	end
 end
 
 var tp = new ThreadPool
-for i in 100.times do
-	var t = new HWTask(2.rand, i)
-	tp.execute(t)
+var t0 = new StringTask(10, "First, long task", 0)
+var tasks = new Array[StringTask]
+for i in 5.times do
+	tasks.add(new StringTask(1, "Small task", i + 1))
 end
-
-nanosleep(20,10)
+tp.execute(t0)
+for t in tasks do tp.execute(t)
+for t in tasks do
+	t.join
+	print t.value
+end
+t0.join
+print t0.value
