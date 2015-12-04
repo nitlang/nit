@@ -19,7 +19,7 @@ module nitcc_runtime
 abstract class Parser
 	# The list of tokens
 	# FIXME: provide something better, like a lexer?
-	var tokens = new List[NToken]
+	var tokens = new CircularArray[NToken]
 
 	# Look at the next token
 	# Used by generated parsers
@@ -162,9 +162,9 @@ abstract class Lexer
 	protected fun start_state: DFAState is abstract
 
 	# Lexize a stream of characters and return a sequence of tokens
-	fun lex: List[NToken]
+	fun lex: CircularArray[NToken]
 	do
-		var res = new List[NToken]
+		var res = new CircularArray[NToken]
 		var state = start_state
 		var pos = 0
 		var pos_start = 0
