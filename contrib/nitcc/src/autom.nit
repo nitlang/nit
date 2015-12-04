@@ -726,22 +726,43 @@ private class DFAGenerator
 				add("\tredef fun trans(char) do\n")
 
 				add("\t\tvar c = char.code_point\n")
-				var haslast = false
+
+				# Collect the sequence of tests in the dispatch sequence
+				# The point here is that for each transition, there is a first and a last
+				# So holes hare to be identified
+				var dispatch = new HashMap[Int, nullable State]
+				var haslast: nullable State = null
+
 				var last = -1
 				for sym, next in trans do
-					assert not haslast
+					assert haslast == null
 					assert sym.first > last
-					if sym.first > last + 1 then add("\t\tif c <= {sym.first-1} then return null\n")
+					if sym.first > last + 1 then
+						dispatch[sym.first-1] = null
+					end
 					var l = sym.last
 					if l == null then
-						add("\t\treturn dfastate_{names[next]}\n")
-						haslast= true
+						haslast = next
 					else
-						add("\t\tif c <= {l} then return dfastate_{names[next]}\n")
+						dispatch[l] = next
 						last = l
 					end
 				end
-				if not haslast then add("\t\treturn null\n")
+
+				# Generate a sequence of `if` for the dispatch
+				for c, next in dispatch do
+					if next == null then
+						add("\t\tif c <= {c} then return null\n")
+					else
+						add("\t\tif c <= {c} then return dfastate_{names[next]}\n")
+					end
+				end
+				if haslast == null then
+					add("\t\treturn null\n")
+				else
+					add("\t\treturn dfastate_{names[haslast]}\n")
+				end
+
 				add("\tend\n")
 			end
 			add("end\n")
