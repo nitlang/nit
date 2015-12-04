@@ -750,6 +750,13 @@ private class DFAGenerator
 				end
 
 				# Generate a sequence of `if` for the dispatch
+				if haslast != null then
+					# Special case: handle up-bound first if not an error
+					add("\t\tif c > {last} then return dfastate_{names[haslast]}\n")
+					# previous become the new last case
+					haslast = dispatch[last]
+					dispatch.keys.remove(last)
+				end
 				for c, next in dispatch do
 					if next == null then
 						add("\t\tif c <= {c} then return null\n")

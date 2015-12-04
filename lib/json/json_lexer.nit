@@ -97,11 +97,11 @@ private class DFAState2
 	super DFAState
 	redef fun trans(char) do
 		var c = char.code_point
+		if c > 92 then return dfastate_2
 		if c <= 33 then return dfastate_2
 		if c <= 34 then return dfastate_29
 		if c <= 91 then return dfastate_2
-		if c <= 92 then return dfastate_30
-		return dfastate_2
+		return dfastate_30
 	end
 end
 private class DFAState3
