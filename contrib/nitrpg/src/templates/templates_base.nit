@@ -21,8 +21,11 @@ import achievements
 
 redef class GameEntity
 
+	# Path to this entity from root.
+	fun path: String do return collection_name / key
+
 	# URL to this game entity page.
-	fun url: String do return game.url / key
+	fun url: String do return game.url / path
 end
 
 redef class Game
@@ -32,7 +35,7 @@ redef class Game
 	# This must be set before any access to `url`.
 	var root_url: String is noinit, writable
 
-	redef fun url do return "{root_url}/games" / key
+	redef fun url do return "{root_url}/{path}"
 
 	# Return a HTML link to this Game.
 	fun link: String do return "<a href=\"{url}\">{name}</a>"

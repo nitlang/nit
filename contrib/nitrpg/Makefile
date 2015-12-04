@@ -15,6 +15,7 @@
 # limitations under the License.
 
 NITC=../../bin/nitc
+NITU=../../bin/nitunit
 
 all: listener web
 
@@ -23,6 +24,13 @@ listener:
 
 web:
 	$(NITC) src/web.nit
+
+check:
+	$(NITU) src/game.nit
+	$(NITU) src/events.nit
+	$(NITU) src/statistics.nit
+	$(NITU) src/achievements.nit
+	$(NITU) src/listener.nit
 
 clean:
 	rm listener web
