@@ -693,17 +693,23 @@ private class DFAGenerator
 					is_ignored = true
 					add("\tredef fun is_ignored do return true\n")
 				end
-				add("\tredef fun make_token(position, text) do\n")
+				add("\tredef fun make_token(position, source) do\n")
 				if is_ignored then
 					add("\t\treturn null\n")
 				else
 					if token == null then
 						add("\t\tvar t = new MyNToken\n")
+						add("\t\tt.text = position.extract(source)\n")
 					else
 						add("\t\tvar t = new {token.cname}\n")
+						var ttext = token.text
+						if ttext == null then
+							add("\t\tt.text = position.extract(source)\n")
+						else
+							add("\t\tt.text = \"{ttext.escape_to_nit}\"\n")
+						end
 					end
 					add("\t\tt.position = position\n")
-					add("\t\tt.text = text\n")
 					add("\t\treturn t\n")
 				end
 				add("\tend\n")

@@ -206,7 +206,7 @@ abstract class Lexer
 					end
 					if not last_state.is_ignored then
 						var position = new Position(pos_start, pos_end, line_start, line_end, col_start, col_end)
-						var token = last_state.make_token(position, text.substring(pos_start, pos_end-pos_start+1))
+						var token = last_state.make_token(position, text)
 						if token != null then res.add(token)
 					end
 				end
@@ -246,7 +246,7 @@ end
 interface DFAState
 	fun is_accept: Bool do return false
 	fun trans(c: Char): nullable DFAState do return null
-	fun make_token(position: Position, text: String): nullable NToken is abstract
+	fun make_token(position: Position, source: String): nullable NToken is abstract
 	fun is_ignored: Bool do return false
 end
 
@@ -301,6 +301,12 @@ class Position
 	var col_end: Int
 
 	redef fun to_s do return "{line_start}:{col_start}-{line_end}:{col_end}"
+
+	# Extract the content from the given source
+	fun extract(source: String): String
+	do
+		return source.substring(pos_start, pos_end-pos_start+1)
+	end
 
 	# Get the lines covered by `self` and underline the target columns.
 	#
