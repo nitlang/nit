@@ -24,6 +24,7 @@ import privileges
 import tnitter
 import benitlux::benitlux_controller
 import opportunity::opportunity_controller
+import nitiwiki::wiki_edit
 
 # Header for the whole site
 class MasterHeader
@@ -169,7 +170,6 @@ tnitter_vh.routes.add new Route("/rest/", new TnitterREST)
 tnitter_vh.routes.add new Route("/push/", new TnitterPush)
 tnitter_vh.routes.add new Route(null, tnitter)
 
-
 # Pep/8 Analysis is only a file server. It is available at `pep8.xymus.net`
 # and through the global/default file server at `xymus.net/pep8/`
 #
@@ -187,10 +187,16 @@ default_vh.routes.add new Route("/benitlux/", benitlux_sub)
 benitlux_vh.routes.add new Route("/rest/", benitlux_rest)
 benitlux_vh.routes.add new Route(null, benitlux_sub)
 
+# Opportunity service
 var opportunity = new OpportunityWelcome
 var opportunity_rest = new OpportunityRESTAction
 default_vh.routes.add new Route("/opportunity/rest/", opportunity_rest)
 default_vh.routes.add new Route("/opportunity/", opportunity)
+
+# Nitiwiki modification form
+var passwords = "nitiwiki_passwords".to_path.read_lines
+assert passwords.not_empty
+default_vh.routes.add new Route("/edit", new EditAction("http://xymus.net/", "/home/xymus/projects/wiki/config.ini", passwords))
 
 # We use a special file server for the path `xymus.net/ens` only to display
 # a different header.
