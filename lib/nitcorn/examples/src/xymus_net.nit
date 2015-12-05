@@ -58,11 +58,10 @@ class MasterHeader
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <li{{{actives.get_or_default("ens", "")}}}><a href="http://xymus.net/ens/">Enseignement</a></li>
-        <li><a href="http://pep8.xymus.net/">Pep/8 Analysis</a></li>
-        <li{{{actives.get_or_default("tnitter", "")}}}><a href="http://tnitter.xymus.net/">Tnitter</a></li>
-        <li{{{actives.get_or_default("benitlux", "")}}}><a href="http://benitlux.xymus.net/">Benitlux</a></li>
         <li{{{actives.get_or_default("opportunity", "")}}}><a href="http://xymus.net/opportunity/">Opportunité</a></li>
-        <li><a href="http://nitlanguage.org/">Nit</a></li>
+        <li{{{actives.get_or_default("tnitter", "")}}}><a href="http://tnitter.xymus.net/">Tnitter</a></li>
+        <li><a href="http://pep8.xymus.net/">Pep/8 Analysis</a></li>
+        <li{{{actives.get_or_default("benitlux", "")}}}><a href="http://benitlux.xymus.net/">Benitlux</a></li>
       </ul>
 
       <ul class="nav navbar-nav pull-right">
