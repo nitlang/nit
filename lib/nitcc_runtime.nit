@@ -19,7 +19,7 @@ module nitcc_runtime
 abstract class Parser
 	# The list of tokens
 	# FIXME: provide something better, like a lexer?
-	var tokens = new List[NToken]
+	var tokens = new CircularArray[NToken]
 
 	# Look at the next token
 	# Used by generated parsers
@@ -76,7 +76,7 @@ abstract class Parser
 		#print "  expected: {state.error_msg}"
 		#print "  node_stack={node_stack.join(", ")}"
 		#print "  state_stack={state_stack.join(", ")}"
-		node_stack.add(token)
+		node_stack.push(token)
 		var error: NError
 		if token isa NLexerError then
 			error = token
@@ -162,9 +162,9 @@ abstract class Lexer
 	protected fun start_state: DFAState is abstract
 
 	# Lexize a stream of characters and return a sequence of tokens
-	fun lex: List[NToken]
+	fun lex: CircularArray[NToken]
 	do
-		var res = new List[NToken]
+		var res = new CircularArray[NToken]
 		var state = start_state
 		var pos = 0
 		var pos_start = 0
@@ -201,19 +201,21 @@ abstract class Lexer
 						var position = new Position(pos_start, pos, line_start, line, col_start, col)
 						token.position = position
 						token.text = text.substring(pos_start, pos-pos_start+1)
-						res.add token
+						res.push token
 						break
 					end
-					var position = new Position(pos_start, pos_end, line_start, line_end, col_start, col_end)
-					var token = last_state.make_token(position, text.substring(pos_start, pos_end-pos_start+1))
-					if token != null then res.add(token)
+					if not last_state.is_ignored then
+						var position = new Position(pos_start, pos_end, line_start, line_end, col_start, col_end)
+						var token = last_state.make_token(position, text)
+						if token != null then res.push(token)
+					end
 				end
 				if pos >= length then
 					var token = new NEof
 					var position = new Position(pos, pos, line, line, col, col)
 					token.position = position
 					token.text = ""
-					res.add token
+					res.push token
 					break
 				end
 				state = start_state
@@ -244,7 +246,8 @@ end
 interface DFAState
 	fun is_accept: Bool do return false
 	fun trans(c: Char): nullable DFAState do return null
-	fun make_token(position: Position, text: String): nullable NToken is abstract
+	fun make_token(position: Position, source: String): nullable NToken is abstract
+	fun is_ignored: Bool do return false
 end
 
 ###
@@ -299,6 +302,12 @@ class Position
 
 	redef fun to_s do return "{line_start}:{col_start}-{line_end}:{col_end}"
 
+	# Extract the content from the given source
+	fun extract(source: String): String
+	do
+		return source.substring(pos_start, pos_end-pos_start+1)
+	end
+
 	# Get the lines covered by `self` and underline the target columns.
 	#
 	# This is useful for pretty printing errors or debug the output
@@ -343,7 +352,7 @@ abstract class Node
 	fun children: SequenceRead[nullable Node] is abstract
 
 	# A point of view of a depth-first visit of all non-null children
-	var depth: Collection[Node] = new DephCollection(self)
+	var depth: Collection[Node] = new DephCollection(self) is lazy
 
 	# Visit all the children of the node with the visitor `v`
 	protected fun visit_children(v: Visitor)
@@ -410,10 +419,10 @@ end
 private class DephIterator
 	super Iterator[Node]
 
-	var stack = new List[Iterator[nullable Node]]
+	var stack = new Array[Iterator[nullable Node]]
 
 	init(i: Iterator[nullable Node]) is old_style_init do
-		stack.add i
+		stack.push i
 	end
 
 	redef fun is_ok do return not stack.is_empty

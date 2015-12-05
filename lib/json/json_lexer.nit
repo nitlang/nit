@@ -80,7 +80,8 @@ end
 private class DFAState1
 	super DFAState
 	redef fun is_accept do return true
-	redef fun make_token(position, text) do
+	redef fun is_ignored do return true
+	redef fun make_token(position, source) do
 		return null
 	end
 	redef fun trans(char) do
@@ -96,20 +97,20 @@ private class DFAState2
 	super DFAState
 	redef fun trans(char) do
 		var c = char.code_point
+		if c > 92 then return dfastate_2
 		if c <= 33 then return dfastate_2
 		if c <= 34 then return dfastate_29
 		if c <= 91 then return dfastate_2
-		if c <= 92 then return dfastate_30
-		return dfastate_2
+		return dfastate_30
 	end
 end
 private class DFAState3
 	super DFAState
 	redef fun is_accept do return true
-	redef fun make_token(position, text) do
+	redef fun make_token(position, source) do
 		var t = new N_39d_44d_39d
+		t.text = ","
 		t.position = position
-		t.text = text
 		return t
 	end
 end
@@ -125,10 +126,10 @@ end
 private class DFAState5
 	super DFAState
 	redef fun is_accept do return true
-	redef fun make_token(position, text) do
+	redef fun make_token(position, source) do
 		var t = new Nnumber
+		t.text = position.extract(source)
 		t.position = position
-		t.text = text
 		return t
 	end
 	redef fun trans(char) do
@@ -147,30 +148,30 @@ end
 private class DFAState6
 	super DFAState
 	redef fun is_accept do return true
-	redef fun make_token(position, text) do
+	redef fun make_token(position, source) do
 		var t = new N_39d_58d_39d
+		t.text = ":"
 		t.position = position
-		t.text = text
 		return t
 	end
 end
 private class DFAState7
 	super DFAState
 	redef fun is_accept do return true
-	redef fun make_token(position, text) do
+	redef fun make_token(position, source) do
 		var t = new N_39d_91d_39d
+		t.text = "["
 		t.position = position
-		t.text = text
 		return t
 	end
 end
 private class DFAState8
 	super DFAState
 	redef fun is_accept do return true
-	redef fun make_token(position, text) do
+	redef fun make_token(position, source) do
 		var t = new N_39d_93d_39d
+		t.text = "]"
 		t.position = position
-		t.text = text
 		return t
 	end
 end
@@ -204,20 +205,20 @@ end
 private class DFAState12
 	super DFAState
 	redef fun is_accept do return true
-	redef fun make_token(position, text) do
+	redef fun make_token(position, source) do
 		var t = new N_39d_123d_39d
+		t.text = "\{"
 		t.position = position
-		t.text = text
 		return t
 	end
 end
 private class DFAState13
 	super DFAState
 	redef fun is_accept do return true
-	redef fun make_token(position, text) do
+	redef fun make_token(position, source) do
 		var t = new N_39d_125d_39d
+		t.text = "\}"
 		t.position = position
-		t.text = text
 		return t
 	end
 end
@@ -242,10 +243,10 @@ end
 private class DFAState16
 	super DFAState
 	redef fun is_accept do return true
-	redef fun make_token(position, text) do
+	redef fun make_token(position, source) do
 		var t = new N_39dtrue_39d
+		t.text = "true"
 		t.position = position
-		t.text = text
 		return t
 	end
 end
@@ -270,10 +271,10 @@ end
 private class DFAState19
 	super DFAState
 	redef fun is_accept do return true
-	redef fun make_token(position, text) do
+	redef fun make_token(position, source) do
 		var t = new N_39dnull_39d
+		t.text = "null"
 		t.position = position
-		t.text = text
 		return t
 	end
 end
@@ -307,10 +308,10 @@ end
 private class DFAState23
 	super DFAState
 	redef fun is_accept do return true
-	redef fun make_token(position, text) do
+	redef fun make_token(position, source) do
 		var t = new N_39dfalse_39d
+		t.text = "false"
 		t.position = position
-		t.text = text
 		return t
 	end
 end
@@ -348,10 +349,10 @@ end
 private class DFAState27
 	super DFAState
 	redef fun is_accept do return true
-	redef fun make_token(position, text) do
+	redef fun make_token(position, source) do
 		var t = new Nnumber
+		t.text = position.extract(source)
 		t.position = position
-		t.text = text
 		return t
 	end
 	redef fun trans(char) do
@@ -364,10 +365,10 @@ end
 private class DFAState28
 	super DFAState
 	redef fun is_accept do return true
-	redef fun make_token(position, text) do
+	redef fun make_token(position, source) do
 		var t = new Nnumber
+		t.text = position.extract(source)
 		t.position = position
-		t.text = text
 		return t
 	end
 	redef fun trans(char) do
@@ -384,10 +385,10 @@ end
 private class DFAState29
 	super DFAState
 	redef fun is_accept do return true
-	redef fun make_token(position, text) do
+	redef fun make_token(position, source) do
 		var t = new Nstring
+		t.text = position.extract(source)
 		t.position = position
-		t.text = text
 		return t
 	end
 end

@@ -688,17 +688,28 @@ private class DFAGenerator
 					token = null
 				end
 				add("\tredef fun is_accept do return true\n")
-				add("\tredef fun make_token(position, text) do\n")
+				var is_ignored = false
 				if token != null and token.name == "Ignored" then
+					is_ignored = true
+					add("\tredef fun is_ignored do return true\n")
+				end
+				add("\tredef fun make_token(position, source) do\n")
+				if is_ignored then
 					add("\t\treturn null\n")
 				else
 					if token == null then
 						add("\t\tvar t = new MyNToken\n")
+						add("\t\tt.text = position.extract(source)\n")
 					else
 						add("\t\tvar t = new {token.cname}\n")
+						var ttext = token.text
+						if ttext == null then
+							add("\t\tt.text = position.extract(source)\n")
+						else
+							add("\t\tt.text = \"{ttext.escape_to_nit}\"\n")
+						end
 					end
 					add("\t\tt.position = position\n")
-					add("\t\tt.text = text\n")
 					add("\t\treturn t\n")
 				end
 				add("\tend\n")
@@ -715,22 +726,50 @@ private class DFAGenerator
 				add("\tredef fun trans(char) do\n")
 
 				add("\t\tvar c = char.code_point\n")
-				var haslast = false
+
+				# Collect the sequence of tests in the dispatch sequence
+				# The point here is that for each transition, there is a first and a last
+				# So holes hare to be identified
+				var dispatch = new HashMap[Int, nullable State]
+				var haslast: nullable State = null
+
 				var last = -1
 				for sym, next in trans do
-					assert not haslast
+					assert haslast == null
 					assert sym.first > last
-					if sym.first > last + 1 then add("\t\tif c <= {sym.first-1} then return null\n")
+					if sym.first > last + 1 then
+						dispatch[sym.first-1] = null
+					end
 					var l = sym.last
 					if l == null then
-						add("\t\treturn dfastate_{names[next]}\n")
-						haslast= true
+						haslast = next
 					else
-						add("\t\tif c <= {l} then return dfastate_{names[next]}\n")
+						dispatch[l] = next
 						last = l
 					end
 				end
-				if not haslast then add("\t\treturn null\n")
+
+				# Generate a sequence of `if` for the dispatch
+				if haslast != null then
+					# Special case: handle up-bound first if not an error
+					add("\t\tif c > {last} then return dfastate_{names[haslast]}\n")
+					# previous become the new last case
+					haslast = dispatch[last]
+					dispatch.keys.remove(last)
+				end
+				for c, next in dispatch do
+					if next == null then
+						add("\t\tif c <= {c} then return null\n")
+					else
+						add("\t\tif c <= {c} then return dfastate_{names[next]}\n")
+					end
+				end
+				if haslast == null then
+					add("\t\treturn null\n")
+				else
+					add("\t\treturn dfastate_{names[haslast]}\n")
+				end
+
 				add("\tend\n")
 			end
 			add("end\n")
@@ -738,6 +777,11 @@ private class DFAGenerator
 
 		self.out.close
 	end
+end
+
+redef class Token
+	# The associated text (if any, ie defined in the parser part)
+	var text: nullable String is noautoinit, writable
 end
 
 # A state in a finite automaton

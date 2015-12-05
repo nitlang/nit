@@ -572,8 +572,6 @@ end
 redef class Token
 	# The associated expression (if any, ie defined in the lexer part)
 	var nexpr: nullable Nexpr
-	# The associated text (if any, ie defined in the parser part)
-	var text: nullable String
 
 	# Build a NFA according to nexpr or text
 	# Does not tag it!
