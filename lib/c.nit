@@ -93,7 +93,7 @@ class CIntArray
 		super size
 	end
 
-	# Create from an `SequenceRead[Int]`
+	# Create from a `SequenceRead[Int]`
 	new from(array: SequenceRead[Int])
 	do
 		var carray = new CIntArray(array.length)
@@ -111,6 +111,42 @@ extern class NativeCIntArray `{ int* `}
 
 	# Initialize a new NativeCIntArray of `size` elements.
 	new(size: Int) `{ return calloc(size, sizeof(int)); `}
+
+	redef fun [](index) `{ return self[index]; `}
+	redef fun []=(index, val) `{ self[index] = val; `}
+
+	redef fun +(offset) `{ return self + offset; `}
+end
+
+# Wrapper of a C array of type `uint16_t*` with length and destroy state
+class CUInt16Array
+	super CArray[Int]
+	redef type NATIVE: NativeCUInt16Array
+
+	# Initialize a new CIntArray of `size` elements.
+	init(size: Int) is old_style_init do
+		native_array = new NativeCUInt16Array(size)
+		super size
+	end
+
+	# Create from a `SequenceRead[Int]`
+	new from(array: SequenceRead[Int])
+	do
+		var carray = new CUInt16Array(array.length)
+		for i in array.length.times do
+			carray[i] = array[i]
+		end
+		return carray
+	end
+end
+
+# An array of `uint16_t` in C
+extern class NativeCUInt16Array `{ uint16_t* `}
+	super NativeCArray
+	redef type E: Int
+
+	# Initialize a new NativeCUInt16Array of `size` elements.
+	new(size: Int) `{ return calloc(size, sizeof(uint16_t)); `}
 
 	redef fun [](index) `{ return self[index]; `}
 	redef fun []=(index, val) `{ self[index] = val; `}
