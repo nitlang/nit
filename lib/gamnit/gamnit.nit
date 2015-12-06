@@ -56,6 +56,8 @@ redef class App
 
 	redef fun run
 	do
+		if "NIT_TESTING".environ == "true" then exit 0
+
 		# TODO manage exit condition
 		loop frame_full
 	end
