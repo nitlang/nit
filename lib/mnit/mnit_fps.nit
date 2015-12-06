@@ -53,7 +53,7 @@ redef class App
 	do
 		var t = clock.total.sec
 		if t >= frame_count_deadline then
-			var cfps = frame_count_deadline.to_f / 5.0
+			var cfps = frame_count.to_f / 5.0
 			self.current_fps = cfps
 			frame_count = 0
 			frame_count_deadline = t + 5
