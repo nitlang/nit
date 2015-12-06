@@ -402,7 +402,17 @@ fun glUniform3i(index, x, y, z: Int) `{ glUniform3i(index, x, y, z); `}
 # Specify the value of a uniform variable for the current program object
 fun glUniform4i(index, x, y, z, w: Int) `{ glUniform4i(index, x, y, z, w); `}
 
-# TODO glUniform*f
+# Specify the value of a uniform variable for the current program object
+fun glUniform1f(index: Int, x: Float) `{ glUniform1f(index, x); `}
+
+# Specify the value of a uniform variable for the current program object
+fun glUniform2f(index: Int, x, y: Float) `{ glUniform2f(index, x, y); `}
+
+# Specify the value of a uniform variable for the current program object
+fun glUniform3f(index: Int, x, y, z: Float) `{ glUniform3f(index, x, y, z); `}
+
+# Specify the value of a uniform variable for the current program object
+fun glUniform4f(index: Int, x, y, z, w: Float) `{ glUniform4f(index, x, y, z, w); `}
 
 # Low level array of `Float`
 class GLfloatArray
