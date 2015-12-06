@@ -81,17 +81,6 @@ extern class GLProgram `{GLuint`}
 	# Boolean result of `validate`, must be called after `validate`
 	fun is_validated: Bool do return glGetProgramiv(self, gl_VALIDATE_STATUS) != 0
 
-	# Retrieve the information log of this program
-	#
-	# Useful with `link` and `validate`
-	fun info_log: String import NativeString.to_s `{
-		int size;
-		glGetProgramiv(self, GL_INFO_LOG_LENGTH, &size);
-		GLchar *msg = malloc(size);
-		glGetProgramInfoLog(self, size, NULL, msg);
-		return NativeString_to_s(msg);
-	`}
-
 	# Number of active uniform in this program
 	#
 	# This should be the number of uniforms declared in all shader, except
@@ -212,8 +201,17 @@ fun glGetProgramiv(program: GLProgram, pname: GLGetParameterName): Int `{
 	return value;
 `}
 
+# The information log for the `program` object
+fun glGetProgramInfoLog(program: GLProgram): String
+do
+	var size = glGetProgramiv(program, gl_INFO_LOG_LENGTH)
+	var buf = new NativeString(size)
+	native_glGetProgramInfoLog(program, size, buf)
+	return buf.to_s_with_length(size)
+end
+
 # Return the program information log in `buf`
-fun glGetProgramInfoLog(program: GLProgram, buf_size: Int, buf: NativeString): Int `{
+private fun native_glGetProgramInfoLog(program: GLProgram, buf_size: Int, buf: NativeString): Int `{
 	int length;
 	glGetProgramInfoLog(program, buf_size, &length, buf);
 	return length;
@@ -243,17 +241,6 @@ extern class GLShader `{GLuint`}
 	fun is_compiled: Bool do return glGetShaderiv(self, gl_COMPILE_STATUS) != 0
 
 	# Has this shader been deleted?
-
-	# Retrieve the information log of this shader
-	#
-	# Useful with `link` and `validate`
-	fun info_log: String import NativeString.to_s `{
-		int size;
-		glGetShaderiv(self, GL_INFO_LOG_LENGTH, &size);
-		GLchar *msg = malloc(size);
-		glGetShaderInfoLog(self, size, NULL, msg);
-		return NativeString_to_s(msg);
-	`}
 	fun is_deleted: Bool do return glGetShaderiv(self, gl_DELETE_STATUS) != 0
 end
 
@@ -283,6 +270,21 @@ fun gl_ACTIVE_UNIFORM_MAX_LENGTH: GLGetParameterName `{ return GL_ACTIVE_UNIFORM
 fun gl_ATTACHED_SHADERS: GLGetParameterName `{ return GL_ATTACHED_SHADERS; `}
 fun gl_LINK_STATUS: GLGetParameterName `{ return GL_LINK_STATUS; `}
 fun gl_VALIDATE_STATUS: GLGetParameterName `{ return GL_VALIDATE_STATUS; `}
+
+# The information log for the `shader` object
+fun glGetShaderInfoLog(shader: GLShader): String
+do
+	var size = glGetShaderiv(shader, gl_INFO_LOG_LENGTH)
+	var buf = new NativeString(size)
+	native_glGetShaderInfoLog(shader, size, buf)
+	return buf.to_s_with_length(size)
+end
+
+private fun native_glGetShaderInfoLog(shader: GLShader, buf_size: Int, buffer: NativeString): Int `{
+	int length;
+	glGetShaderInfoLog(shader, buf_size, &length, buffer);
+	return length;
+`}
 
 # Shader type
 extern class GLShaderType
