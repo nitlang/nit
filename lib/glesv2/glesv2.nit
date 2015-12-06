@@ -375,6 +375,11 @@ fun glDisableVertexAttribArray(index: Int) `{ glDisableVertexAttribArray(index);
 # Render primitives from array data
 fun glDrawArrays(mode: GLDrawMode, from, count: Int) `{ glDrawArrays(mode, from, count); `}
 
+# Render primitives from array data by their index
+fun glDrawElements(mode: GLDrawMode, count: Int, typ: GLDataType, indices: Pointer) `{
+	glDrawElements(mode, count, typ, indices);
+`}
+
 # Define an array of generic vertex attribute data
 fun glVertexAttribPointer(index, size: Int, typ: GLDataType, normalized: Bool, stride: Int, array: NativeGLfloatArray) `{
 	glVertexAttribPointer(index, size, typ, normalized, stride, array);
