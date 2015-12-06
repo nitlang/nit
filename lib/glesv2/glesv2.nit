@@ -106,17 +106,18 @@ extern class GLProgram `{GLuint`}
 	fun active_attrib_name(index: Int): String
 	do
 		var max_size = active_attribute_max_length
-		return active_attrib_name_native(index, max_size).to_s
+		var cname = new NativeString(max_size)
+		active_attrib_name_native(index, max_size, cname)
+		return cname.to_s
 	end
-	private fun active_attrib_name_native(index, max_size: Int): NativeString `{
+
+	private fun active_attrib_name_native(index, max_size: Int, name: NativeString) `{
 		// We get more values than we need, for compatibility. At least the
 		// NVidia driver tries to fill them even if NULL.
 
-		char *name = malloc(max_size);
 		int size;
 		GLenum type;
 		glGetActiveAttrib(self, index, max_size, NULL, &size, &type, name);
-		return name;
 	`}
 
 	# Size of the active attribute at `index`
@@ -140,15 +141,16 @@ extern class GLProgram `{GLuint`}
 	# Name of the active uniform at `index`
 	fun active_uniform_name(index: Int): String
 	do
-		var max_size = active_attribute_max_length
-		return active_uniform_name_native(index, max_size).to_s
+		var max_size = active_uniform_max_length
+		var cname = new NativeString(max_size)
+		active_uniform_name_native(index, max_size, cname)
+		return cname.to_s
 	end
-	private fun active_uniform_name_native(index, max_size: Int): NativeString `{
-		char *name = malloc(max_size);
+
+	private fun active_uniform_name_native(index, max_size: Int, name: NativeString) `{
 		int size;
 		GLenum type;
 		glGetActiveUniform(self, index, max_size, NULL, &size, &type, name);
-		return name;
 	`}
 
 	# Size of the active uniform at `index`
