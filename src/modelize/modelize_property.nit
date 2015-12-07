@@ -1355,6 +1355,8 @@ redef class AAttrPropdef
 			if nexpr != null then
 				if nexpr isa ANewExpr then
 					mtype = modelbuilder.resolve_mtype_unchecked(mmodule, mclassdef, nexpr.n_type, true)
+				else if nexpr isa AAsCastExpr then
+					mtype = modelbuilder.resolve_mtype_unchecked(mmodule, mclassdef, nexpr.n_type, true)
 				else if nexpr isa AIntegerExpr then
 					var cla: nullable MClass = null
 					if nexpr.value isa Int then
