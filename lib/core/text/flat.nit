@@ -309,11 +309,6 @@ class FlatString
 
 	redef var bytes = new FlatStringByteView(self) is lazy
 
-	redef var length is lazy do
-		if _bytelen == 0 then return 0
-		return _items.utf8_length(_first_byte, _last_byte)
-	end
-
 	redef var to_cstring is lazy do
 		var blen = _bytelen
 		var new_items = new NativeString(blen + 1)
@@ -325,11 +320,11 @@ class FlatString
 	redef fun reversed
 	do
 		var b = new FlatBuffer.with_capacity(_bytelen + 1)
-		for i in [length - 1 .. 0].step(-1) do
+		for i in [0 .. _length[.step(-1) do
 			b.add self[i]
 		end
 		var s = b.to_s.as(FlatString)
-		s.length = self.length
+		s._length = self._length
 		return s
 	end
 
@@ -364,7 +359,7 @@ class FlatString
 	do
 		var outstr = new FlatBuffer.with_capacity(self._bytelen + 1)
 
-		var mylen = length
+		var mylen = _length
 		var pos = 0
 
 		while pos < mylen do
@@ -379,7 +374,7 @@ class FlatString
 	do
 		var outstr = new FlatBuffer.with_capacity(self._bytelen + 1)
 
-		var mylen = length
+		var mylen = _length
 		var pos = 0
 
 		while pos < mylen do
@@ -409,6 +404,7 @@ class FlatString
 		self._bytelen = bytelen
 		_first_byte = from
 		_bytepos = from
+		_length = _items.utf8_length(_first_byte, last_byte)
 	end
 
 	# Low-level creation of a new string with all the data.
@@ -418,7 +414,7 @@ class FlatString
 	private init full(items: NativeString, bytelen, from, length: Int)
 	do
 		self._items = items
-		self.length = length
+		self._length = length
 		self._bytelen = bytelen
 		_first_byte = from
 		_bytepos = from
@@ -503,7 +499,7 @@ class FlatString
 	redef fun *(i) do
 		var mybtlen = _bytelen
 		var new_bytelen = mybtlen * i
-		var mylen = length
+		var mylen = _length
 		var newlen = mylen * i
 		var its = _items
 		var fb = _first_byte
@@ -569,7 +565,7 @@ private class FlatStringCharIterator
 
 	var curr_pos: Int
 
-	init do max = target.length - 1
+	init do max = target._length - 1
 
 	redef fun is_ok do return curr_pos <= max
 
@@ -683,8 +679,6 @@ class FlatBuffer
 
 	redef var bytes = new FlatBufferByteView(self) is lazy
 
-	redef var length = 0
-
 	private var char_cache: Int = -1
 
 	private var byte_cache: Int = -1
@@ -734,10 +728,10 @@ class FlatBuffer
 
 	redef fun []=(index, item)
 	do
-		assert index >= 0 and index <= length
+		assert index >= 0 and index <= _length
 		if written then reset
 		is_dirty = true
-		if index == length then
+		if index == _length then
 			add item
 			return
 		end
@@ -766,14 +760,14 @@ class FlatBuffer
 		enlarge(bt + clen)
 		_items.set_char_at(bt, c)
 		_bytelen += clen
-		length += 1
+		_length += 1
 	end
 
 	redef fun clear do
 		is_dirty = true
 		if written then reset
 		_bytelen = 0
-		length = 0
+		_length = 0
 	end
 
 	redef fun empty do return new Buffer
@@ -810,7 +804,7 @@ class FlatBuffer
 			var bln = _bytelen
 			var new_native = new NativeString(bln + 1)
 			new_native[bln] = 0u8
-			if length > 0 then _items.copy_to(new_native, bln, 0, 0)
+			if _length > 0 then _items.copy_to(new_native, bln, 0, 0)
 			real_items = new_native
 			is_dirty = false
 		end
@@ -832,7 +826,7 @@ class FlatBuffer
 		self._items = items
 		self.capacity = capacity
 		self._bytelen = bytelen
-		self.length = length
+		self._length = length
 	end
 
 	# Create a new string copied from `s`.
@@ -845,7 +839,7 @@ class FlatBuffer
 			for i in substrings do i.as(FlatString)._items.copy_to(_items, i._bytelen, 0, 0)
 		end
 		_bytelen = s.bytelen
-		length = s.length
+		_length = s.length
 		_capacity = _bytelen
 		written = true
 	end
@@ -873,7 +867,7 @@ class FlatBuffer
 			return
 		end
 		_bytelen = nln
-		length += s.length
+		_length += s.length
 	end
 
 	# Copies the content of self in `dest`
@@ -890,7 +884,7 @@ class FlatBuffer
 	do
 		assert count >= 0
 		if from < 0 then from = 0
-		if (from + count) > length then count = length - from
+		if (from + count) > _length then count = _length - from
 		if count <= 0 then return new Buffer
 		var its = _items
 		var bytefrom = its.char_to_byte_index(from)
@@ -922,13 +916,13 @@ class FlatBuffer
 	redef fun upper
 	do
 		if written then reset
-		for i in [0 .. length[ do self[i] = self[i].to_upper
+		for i in [0 .. _length[ do self[i] = self[i].to_upper
 	end
 
 	redef fun lower
 	do
 		if written then reset
-		for i in [0 .. length[ do self[i] = self[i].to_lower
+		for i in [0 .. _length[ do self[i] = self[i].to_lower
 	end
 end
 
@@ -1039,7 +1033,7 @@ private class FlatBufferCharView
 	redef fun append(s)
 	do
 		var s_length = s.length
-		if target.capacity < s.length then enlarge(s_length + target.length)
+		if target.capacity < s.length then enlarge(s_length + target._length)
 		for i in s do target.add i
 	end
 
@@ -1058,7 +1052,7 @@ private class FlatBufferCharIterator
 
 	var curr_pos: Int
 
-	init do max = target.length - 1
+	init do max = target._length - 1
 
 	redef fun index do return curr_pos
 
@@ -1240,7 +1234,7 @@ redef class Array[E]
 	# Fast implementation
 	redef fun plain_to_s
 	do
-		var l = length
+		var l = _length
 		if l == 0 then return ""
 		var its = _items.as(not null)
 		var first = its[0]
