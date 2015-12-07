@@ -83,10 +83,12 @@ private class Concat
 	redef fun empty do return ""
 
 	# Cache for the latest accessed FlatString in `self`
-	var flat_cache: String = ""
+	var flat_cache: FlatString is noinit
 
 	# Position of the beginning of `flat_cache` in `self`
 	var flat_last_pos_start: Int = -1
+
+	var flat_last_pos_end: Int = -1
 
 	redef var to_cstring is lazy do
 		var len = _bytelen
@@ -127,30 +129,57 @@ private class Concat
 	end
 
 	redef fun [](i) do
-		if flat_last_pos_start != -1 then
-			var fsp = i - flat_last_pos_start
-			if fsp >= 0 and fsp < flat_cache.length then return flat_cache[fsp]
+		assert i >= 0 and i <= _length
+		var flps = _flat_last_pos_start
+		if flps != -1 and i >= flps and i <= _flat_last_pos_end then
+			return _flat_cache.fetch_char_at(i - flps)
+		end
+		var lf = get_leaf_at(i)
+		return lf.fetch_char_at(i - _flat_last_pos_start)
+	end
+
+	fun get_leaf_at(pos: Int): FlatString do
+		var flps = _flat_last_pos_start
+		if flps != -1 and pos >= flps and pos <= _flat_last_pos_end then
+			return _flat_cache
 		end
 		var s: String = self
-		var st = i
+		var st = pos
 		loop
 			if s isa FlatString then break
 			s = s.as(Concat)
 			var lft = s._left
 			var llen = lft.length
-			if i >= llen then
+			if pos >= llen then
 				s = s._right
-				i -= llen
+				pos -= llen
 			else
 				s = lft
 			end
 		end
-		flat_last_pos_start = st - i
-		flat_cache = s
-		return s[i]
+		_flat_last_pos_start = st - pos
+		_flat_last_pos_end = st - pos + s.length - 1
+		_flat_cache = s
+		return s
 	end
 
-	redef fun substring(from, len) do
+	redef fun substring(from, count) do
+		if from < 0 then
+			count += from
+			if count < 0 then return ""
+			from = 0
+		end
+
+		var ln = length
+		if (count + from) > ln then count = ln - from
+		if count <= 0 then return ""
+		var end_index = from + count - 1
+
+		var flps = _flat_last_pos_start
+		if flps != -1 and from >= flps and end_index <= _flat_last_pos_end then
+			return _flat_cache.substring_impl(from - flps, count, end_index - flps)
+		end
+
 		var lft = _left
 		var llen = lft.length
 		if from < llen then
