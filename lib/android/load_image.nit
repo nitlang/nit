@@ -31,8 +31,11 @@ redef extern class NativeBitmap
 	# Copy the pixel data into a new `CByteArray`
 	#
 	# If `pad_to_pow2` the new buffer contains artificial pixels used to make
-	# the width and the height powers of 2 for compatibility with OpenGL.
-	fun copy_pixels(pad_to_pow2: nullable Bool): CByteArray
+	# the width and the height powers of 2 for compatibility with older OpenGL.
+	#
+	# If `unmultiply`, extra work is done to revert the multiplication of color
+	# values per the alpha channel applied by the Android system.
+	fun copy_pixels(pad_to_pow2, unmultiply: nullable Bool): CByteArray
 	do
 		var height = height
 		var row_bytes = row_bytes
@@ -49,7 +52,7 @@ redef extern class NativeBitmap
 		var java_buf = buf.to_java_nio_buffer
 		copy_pixels_to_buffer java_buf
 
-		if has_alpha then buf.native_array.unmultiply(width, height)
+		if has_alpha and unmultiply == true then buf.native_array.unmultiply(width, height)
 
 		if pad_to_pow2 == true then
 			for r in [height-1..0[.step(-1) do
