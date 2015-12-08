@@ -13,7 +13,6 @@
 # limitations under the License.
 
 #alt2 import core
-#alt2 import buffered_ropes
 
 var str = "Woe to you, oh earth and sea for the Devil sends the beast with wrath because he knows the time is short. Let him who hath understanding reckon the number of the beast, for it is a human number, its number is Six Hundred and Sixty-Six."
 var spaces = "           "

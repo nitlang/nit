@@ -13,7 +13,6 @@
 # limitations under the License.
 
 #alt1 import core
-#alt1 import buffered_ropes
 
 var st = "quick brown fox over the lazy dog"
 
