@@ -852,7 +852,7 @@ abstract class Text
 			l += 1
 		end
 
-		return buf.to_s_with_length(l)
+		return buf.to_s_unsafe(l)
 	end
 
 	# Escape the characters `<`, `>`, `&`, `"`, `'` and `/` as HTML/XML entity references.
@@ -1062,7 +1062,7 @@ abstract class Text
 	#
 	#	var ns = new NativeString(8)
 	#	"Text is String".copy_to_native(ns, 8, 2, 0)
-	#	assert ns.to_s_with_length(8) == "xt is St"
+	#	assert ns.to_s_unsafe(8) == "xt is St"
 	#
 	fun copy_to_native(dest: NativeString, n, src_offset, dest_offset: Int) do
 		var mypos = src_offset
@@ -1541,7 +1541,7 @@ redef class Byte
 		var ns = new NativeString(nslen + 1)
 		ns[nslen] = 0u8
 		native_byte_to_s(ns, nslen + 1)
-		return ns.to_s_with_length(nslen)
+		return ns.to_s_unsafe(nslen)
 	end
 end
 
@@ -1702,7 +1702,7 @@ redef class Char
 		var ln = u8char_len
 		var ns = new NativeString(ln + 1)
 		u8char_tos(ns, ln)
-		return ns.to_s_with_length(ln)
+		return ns.to_s_unsafe(ln)
 	end
 
 	# Returns `self` escaped to UTF-16
@@ -2000,6 +2000,12 @@ redef class NativeString
 
 	# Returns `self` as a String of `length`.
 	fun to_s_with_length(length: Int): String is abstract
+
+	# Returns a new instance of `String` with self as `_items`
+	#
+	# /!\: Does not clean the items for compliance with UTF-8,
+	# Use only if you know what you are doing
+	fun to_s_unsafe(len: nullable Int): String is abstract
 
 	# Returns `self` as a String with `bytelen` and `length` set
 	#

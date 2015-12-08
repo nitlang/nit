@@ -274,7 +274,7 @@ redef class FlatText
 			end
 			pos += 1
 		end
-		return nns.to_s_with_length(nlen)
+		return nns.to_s_unsafe(nlen)
 	end
 
 	redef fun [](index) do return _items.char_at(char_to_byte_index(index))
@@ -1079,6 +1079,11 @@ redef class NativeString
 
 	redef fun to_s_full(bytelen, unilen) do
 		return new FlatString.full(self, bytelen, 0, unilen)
+	end
+
+	redef fun to_s_unsafe(len) do
+		if len == null then len = cstring_length
+		return new FlatString.with_infos(self, len, 0)
 	end
 
 	# Returns `self` as a new String.

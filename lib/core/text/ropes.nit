@@ -425,12 +425,12 @@ class RopeBuffer
 				var rem = count - subpos
 				var nns = new NativeString(rem)
 				ns.copy_to(nns, rem, dumped, 0)
-				return new RopeBuffer.from(l + nns.to_s_with_length(rem))
+				return new RopeBuffer.from(l + nns.to_s_unsafe(rem))
 			end
 		else
 			var nns = new NativeString(count)
 			ns.copy_to(nns, count, dumped, 0)
-			return new RopeBuffer.from(nns.to_s_with_length(count))
+			return new RopeBuffer.from(nns.to_s_unsafe(count))
 		end
 	end
 
