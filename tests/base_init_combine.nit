@@ -41,8 +41,7 @@ class E
 	super B
 
 	var i: Int
-	init(i: Int) do
-		self.i = i
+	init do
 		i.output
 	end
 end

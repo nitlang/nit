@@ -22,7 +22,7 @@ module test_ffi_c_more_callbacks
 `}
 
 class A
-	var a: Int
+	var a: Int is noautoinit
 	init do a = 1234
 	init alt(i: Int) do a = i
 	fun to_i: Int do return a

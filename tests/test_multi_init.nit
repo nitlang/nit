@@ -1,12 +1,12 @@
 
 class A
 	var s : String
-	init a( s : String ) do self.s = s
+	init a( s : String ) do init(s)
 end
 
 class B
 	var i : Int
-	init b( i : Int ) do self.i = i
+	init b( i : Int ) do init(i)
 end
 
 class C

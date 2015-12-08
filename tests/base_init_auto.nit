@@ -22,7 +22,7 @@ class A
 	var y: Int = -2 #alt2#
 	#alt2#var y: Int
 	#alt3#init (xx: Int) do x = xx
-	#alt4#init foo(xx: Int) do x = xx
+	#alt4#init foo(xx: Int) do init(xx)
 	fun work
 	do
 		x.output
