@@ -359,26 +359,51 @@ class FlatString
 
 	redef fun fast_cstring do return _items.fast_cstring(_first_byte)
 
+	redef fun substring_from(from) do
+		if from >= self._length then return empty
+		if from <= 0 then return self
+		var c = char_to_byte_index(from)
+		var st = c - _first_byte
+		var fln = bytelen - st
+		return new FlatString.full(items, fln, c, _length - from)
+	end
+
 	redef fun substring(from, count)
 	do
 		assert count >= 0
 
 		if from < 0 then
 			count += from
-			if count < 0 then count = 0
+			if count < 0 then return ""
 			from = 0
 		end
 
-		if (count + from) > length then count = length - from
+		var ln = _length
+		if (count + from) > ln then count = ln - from
 		if count <= 0 then return ""
 		var end_index = from + count - 1
+		return substring_impl(from, count, end_index)
+	end
 
-		var bytefrom = char_to_byte_index(from)
-		var byteto = char_to_byte_index(end_index)
+	private fun substring_impl(from, count, end_index: Int): String do
+		var cache = _position
+		var dfrom = (cache - from).abs
+		var dend = (end_index - from).abs
+
+		var bytefrom: Int
+		var byteto: Int
+		if dfrom < dend then
+			bytefrom = char_to_byte_index(from)
+			byteto = char_to_byte_index(end_index)
+		else
+			byteto = char_to_byte_index(end_index)
+			bytefrom = char_to_byte_index(from)
+		end
+
 		var its = _items
 		byteto += its.length_of_char_at(byteto) - 1
 
-		var s = new FlatString.full(its, byteto - bytefrom + 1, bytefrom, byteto, count)
+		var s = new FlatString.full(its, byteto - bytefrom + 1, bytefrom, count)
 		return s
 	end
 
