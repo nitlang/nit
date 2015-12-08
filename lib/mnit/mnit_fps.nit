@@ -24,7 +24,7 @@ redef class App
 	# Zero (or a negative value) means no limit.
 	#
 	# Applications can modify this value even during the main-loop.
-	var maximum_fps = 60 is writable
+	var maximum_fps = 60.0 is writable
 
 	# Current frame-rate
 	# Updated each 5 seconds.
@@ -61,15 +61,14 @@ redef class App
 		frame_count += 1
 
 		var mfps = maximum_fps
-		if mfps <= 0 then return
-		var dt = clock.lapse
-		var target_dt = 1000000000 / mfps
-		var sec = dt.sec
-		var nanosec = dt.nanosec
-		if sec == 0 and nanosec < target_dt then
-			var sleep_t = target_dt - nanosec
-			sys.nanosleep(0, sleep_t)
-			dt = clock.lapse
+		if mfps <= 0.0 then return
+		var lapse = clock.lapse
+		var dt = lapse.to_f
+		var target_dt = 1.0 / mfps
+		if dt < target_dt then
+			var sleep_t = target_dt - dt
+			sleep_t.sleep
+			clock.lapse
 		end
 	end
 end
