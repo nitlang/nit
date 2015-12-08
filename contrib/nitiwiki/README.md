@@ -250,7 +250,7 @@ Every template can access to:
 * `SUBTITLE`: Wiki description
 * `LOGO`: Wiki logo image path
 
-Additionnal macros can be used in specialized templates.
+Additional macros can be used in specialized templates.
 
 ### Main template
 
@@ -363,3 +363,17 @@ from git:
 Be sure to set `wiki.rsync_dir` in order to correctly push your changes.
 When using `--rsync`, keep in mind that the rendered output must be configured
 to work on the web server.
+
+### Serve and edit with nitiwiki_server
+
+nitiwiki_server is a lightweight web server to publish the generated files
+and accept modifications from a web form.
+
+The binary available in `bin/nitiwiki_server` is configured for simple usage or demo.
+The source of the server, at `src/wiki_edit`, can be tweaked for more advanced use.
+It is also possible to import the source and add an instance of `EditAction` to a custom nitcorn server.
+
+To launch the server, change directory to the root of the wiki and run `nitiwiki_server`.
+It uses `config.ini` from the local directory and listen on localhost:8080.
+The template should define the macro `%EDIT%` and `config.ini` should define `wiki.edit=/edit/`.
+To limit who can edit the wiki, list the md5 sum of accepted passwords (one per line) in the local file `passwords`.

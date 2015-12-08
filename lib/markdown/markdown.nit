@@ -168,6 +168,7 @@ class MarkdownProcessor
 				var c = input[i]
 				if c == '\n' then
 					eol = true
+				else if c == '\r' then
 				else if c == '\t' then
 					var np = pos + (4 - (pos & 3))
 					while pos < np do
