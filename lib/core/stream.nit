@@ -564,7 +564,7 @@ abstract class BufferedReader
 	redef fun read_all_bytes
 	do
 		if last_error != null then return new Bytes.empty
-		var s = new Bytes.with_capacity(10)
+		var s = new Bytes.with_capacity(4096)
 		var b = _buffer
 		while not eof do
 			var j = _buffer_pos
