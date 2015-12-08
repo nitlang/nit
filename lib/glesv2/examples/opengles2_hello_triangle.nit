@@ -116,7 +116,7 @@ print glGetError.to_s
 var program = new GLProgram
 if not glIsProgram(program) then
 	print "Program is not ok: {glGetError.to_s}\nLog:"
-	print program.info_log
+	print glGetProgramInfoLog(program)
 	abort
 end
 assert_no_gl_error
@@ -132,7 +132,7 @@ void main()
 }
 """.to_cstring)
 glCompileShader vertex_shader
-assert vertex_shader.is_compiled else print "Vertex shader compilation failed with: {vertex_shader.info_log} {program.info_log}"
+assert vertex_shader.is_compiled else print "Vertex shader compilation failed with: {glGetShaderInfoLog(vertex_shader)} {glGetProgramInfoLog(program)}"
 assert_no_gl_error
 
 # fragment shader
@@ -146,14 +146,14 @@ void main()
 }
 """.to_cstring)
 glCompileShader(fragment_shader)
-assert fragment_shader.is_compiled else print "Fragment shader compilation failed with: {fragment_shader.info_log}"
+assert fragment_shader.is_compiled else print "Fragment shader compilation failed with: {glGetShaderInfoLog(fragment_shader)}"
 assert_no_gl_error
 
 glAttachShader(program, vertex_shader)
 glAttachShader(program, fragment_shader)
 program.bind_attrib_location(0, "vPosition")
 glLinkProgram program
-assert program.is_linked else print "Linking failed: {program.info_log}"
+assert program.is_linked else print "Linking failed: {glGetProgramInfoLog(program)}"
 assert_no_gl_error
 
 # draw!

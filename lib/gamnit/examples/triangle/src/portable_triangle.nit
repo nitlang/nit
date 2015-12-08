@@ -49,17 +49,17 @@ redef class App
 		print "Width: {display.width}"
 		print "Height: {display.height}"
 
-		assert_no_gl_error
+		assert glGetError == gl_NO_ERROR
 		assert gl.shader_compiler else print "Cannot compile shaders"
 
 		# GL program
 		program = new GLProgram
 		if not glIsProgram(program) then
 			print "Program is not ok: {glGetError.to_s}\nLog:"
-			print program.info_log
+			print glGetProgramInfoLog(program)
 			abort
 		end
-		assert_no_gl_error
+		assert glGetError == gl_NO_ERROR
 
 		# Vertex shader
 		vertex_shader = new GLVertexShader
@@ -72,8 +72,8 @@ redef class App
 		}
 		"""@glsl_vertex_shader.to_cstring)
 		glCompileShader(vertex_shader)
-		assert vertex_shader.is_compiled else print "Vertex shader compilation failed with: {vertex_shader.info_log} {program.info_log}"
-		assert_no_gl_error
+		assert vertex_shader.is_compiled else print "Vertex shader compilation failed with: {glGetShaderInfoLog(vertex_shader)} {glGetProgramInfoLog(program)}"
+		assert glGetError == gl_NO_ERROR
 
 		# Fragment shader
 		fragment_shader = new GLFragmentShader
@@ -86,16 +86,16 @@ redef class App
 		}
 		"""@glsl_fragment_shader.to_cstring)
 		glCompileShader(fragment_shader)
-		assert fragment_shader.is_compiled else print "Fragment shader compilation failed with: {fragment_shader.info_log}"
-		assert_no_gl_error
+		assert fragment_shader.is_compiled else print "Fragment shader compilation failed with: {glIsShader(fragment_shader)}"
+		assert glGetError == gl_NO_ERROR
 
 		# Attach to program
 		glAttachShader(program, vertex_shader)
 		glAttachShader(program, fragment_shader)
 		program.bind_attrib_location(0, "vPosition")
 		glLinkProgram program
-		assert program.is_linked else print "Linking failed: {program.info_log}"
-		assert_no_gl_error
+		assert program.is_linked else print "Linking failed: {glGetProgramInfoLog(program)}"
+		assert glGetError == gl_NO_ERROR
 
 		# Draw!
 		var vertices = [0.0, 0.5, 0.0, -0.5, -0.5, 0.0, 0.5, -0.5, 0.0]
@@ -111,7 +111,7 @@ redef class App
 		if display != null then
 			glClearColor(t, t, t, 1.0)
 
-			assert_no_gl_error
+			assert glGetError == gl_NO_ERROR
 			glViewport(0, 0, display.width, display.height)
 			glClear gl_COLOR_BUFFER_BIT
 			glUseProgram program

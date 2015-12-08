@@ -72,69 +72,52 @@ extern class GLProgram `{GLuint`}
 		return glGetUniformLocation(self, c_name);
 	`}
 
-	# Query information on this program
-	fun query(pname: Int): Int `{
-		int val;
-		glGetProgramiv(self, pname, &val);
-		return val;
-	`}
-
 	# Is this program linked?
-	fun is_linked: Bool do return query(0x8B82) != 0
+	fun is_linked: Bool do return glGetProgramiv(self, gl_LINK_STATUS) != 0
 
 	# Has this program been deleted?
-	fun is_deleted: Bool do return query(0x8B80) != 0
+	fun is_deleted: Bool do return glGetProgramiv(self, gl_DELETE_STATUS) != 0
 
 	# Boolean result of `validate`, must be called after `validate`
-	fun is_validated: Bool do return query(0x8B83) != 0
-
-	# Retrieve the information log of this program
-	#
-	# Useful with `link` and `validate`
-	fun info_log: String import NativeString.to_s `{
-		int size;
-		glGetProgramiv(self, GL_INFO_LOG_LENGTH, &size);
-		GLchar *msg = malloc(size);
-		glGetProgramInfoLog(self, size, NULL, msg);
-		return NativeString_to_s(msg);
-	`}
+	fun is_validated: Bool do return glGetProgramiv(self, gl_VALIDATE_STATUS) != 0
 
 	# Number of active uniform in this program
 	#
 	# This should be the number of uniforms declared in all shader, except
 	# unused uniforms which may have been optimized out.
-	fun n_active_uniforms: Int do return query(0x8B86)
+	fun n_active_uniforms: Int do return glGetProgramiv(self, gl_ACTIVE_UNIFORMS)
 
-	# Length of the longest uniform name in this program, including `\n`
-	fun active_uniform_max_length: Int do return query(0x8B87)
+	# Length of the longest uniform name in this program, including the null byte
+	fun active_uniform_max_length: Int do return glGetProgramiv(self, gl_ACTIVE_UNIFORM_MAX_LENGTH)
 
 	# Number of active attributes in this program
 	#
 	# This should be the number of uniforms declared in all shader, except
 	# unused uniforms which may have been optimized out.
-	fun n_active_attributes: Int do return query(0x8B89)
+	fun n_active_attributes: Int do return glGetProgramiv(self, gl_ACTIVE_ATTRIBUTES)
 
-	# Length of the longest uniform name in this program, including `\n`
-	fun active_attribute_max_length: Int do return query(0x8B8A)
+	# Length of the longest attribute name in this program, including the null byte
+	fun active_attribute_max_length: Int do return glGetProgramiv(self, gl_ACTIVE_ATTRIBUTE_MAX_LENGTH)
 
 	# Number of shaders attached to this program
-	fun n_attached_shaders: Int do return query(0x8B85)
+	fun n_attached_shaders: Int do return glGetProgramiv(self, gl_ATTACHED_SHADERS)
 
 	# Name of the active attribute at `index`
 	fun active_attrib_name(index: Int): String
 	do
 		var max_size = active_attribute_max_length
-		return active_attrib_name_native(index, max_size).to_s
+		var cname = new NativeString(max_size)
+		active_attrib_name_native(index, max_size, cname)
+		return cname.to_s
 	end
-	private fun active_attrib_name_native(index, max_size: Int): NativeString `{
+
+	private fun active_attrib_name_native(index, max_size: Int, name: NativeString) `{
 		// We get more values than we need, for compatibility. At least the
 		// NVidia driver tries to fill them even if NULL.
 
-		char *name = malloc(max_size);
 		int size;
 		GLenum type;
 		glGetActiveAttrib(self, index, max_size, NULL, &size, &type, name);
-		return name;
 	`}
 
 	# Size of the active attribute at `index`
@@ -148,7 +131,7 @@ extern class GLProgram `{GLuint`}
 	# Type of the active attribute at `index`
 	#
 	# May only be float related data types (single float, vectors and matrix).
-	fun active_attrib_type(index: Int): GLFloatDataType `{
+	fun active_attrib_type(index: Int): GLDataType `{
 		int size;
 		GLenum type;
 		glGetActiveAttrib(self, index, 0, NULL, &size, &type, NULL);
@@ -158,15 +141,16 @@ extern class GLProgram `{GLuint`}
 	# Name of the active uniform at `index`
 	fun active_uniform_name(index: Int): String
 	do
-		var max_size = active_attribute_max_length
-		return active_uniform_name_native(index, max_size).to_s
+		var max_size = active_uniform_max_length
+		var cname = new NativeString(max_size)
+		active_uniform_name_native(index, max_size, cname)
+		return cname.to_s
 	end
-	private fun active_uniform_name_native(index, max_size: Int): NativeString `{
-		char *name = malloc(max_size);
+
+	private fun active_uniform_name_native(index, max_size: Int, name: NativeString) `{
 		int size;
 		GLenum type;
 		glGetActiveUniform(self, index, max_size, NULL, &size, &type, name);
-		return name;
 	`}
 
 	# Size of the active uniform at `index`
@@ -212,6 +196,29 @@ fun glAttachShader(program: GLProgram, shader: GLShader) `{ glAttachShader(progr
 # Detach `shader` from `program`
 fun glDetachShader(program: GLProgram, shader: GLShader) `{ glDetachShader(program, shader); `}
 
+# Parameter value from a `program` object
+fun glGetProgramiv(program: GLProgram, pname: GLGetParameterName): Int `{
+	int value;
+	glGetProgramiv(program, pname, &value);
+	return value;
+`}
+
+# The information log for the `program` object
+fun glGetProgramInfoLog(program: GLProgram): String
+do
+	var size = glGetProgramiv(program, gl_INFO_LOG_LENGTH)
+	var buf = new NativeString(size)
+	native_glGetProgramInfoLog(program, size, buf)
+	return buf.to_s_with_length(size)
+end
+
+# Return the program information log in `buf`
+private fun native_glGetProgramInfoLog(program: GLProgram, buf_size: Int, buf: NativeString): Int `{
+	int length;
+	glGetProgramInfoLog(program, buf_size, &length, buf);
+	return length;
+`}
+
 # Abstract OpenGL ES shader object, implemented by `GLFragmentShader` and `GLVertexShader`
 extern class GLShader `{GLuint`}
 
@@ -221,7 +228,7 @@ extern class GLShader `{GLuint`}
 	# was created from a binary file.
 	fun source: nullable String
 	do
-		var size = query(0x8B88)
+		var size = glGetShaderiv(self, gl_SHADER_SOURCE_LENGTH)
 		if size == 0 then return null
 		return source_native(size).to_s
 	end
@@ -232,30 +239,54 @@ extern class GLShader `{GLuint`}
 		return code;
 	`}
 
-	# Query information on this shader
-	protected fun query(pname: Int): Int `{
-		int val;
-		glGetShaderiv(self, pname, &val);
-		return val;
-	`}
-
 	# Has this shader been compiled?
-	fun is_compiled: Bool do return query(0x8B81) != 0
+	fun is_compiled: Bool do return glGetShaderiv(self, gl_COMPILE_STATUS) != 0
 
 	# Has this shader been deleted?
-	fun is_deleted: Bool do return query(0x8B80) != 0
-
-	# Retrieve the information log of this shader
-	#
-	# Useful with `link` and `validate`
-	fun info_log: String import NativeString.to_s `{
-		int size;
-		glGetShaderiv(self, GL_INFO_LOG_LENGTH, &size);
-		GLchar *msg = malloc(size);
-		glGetShaderInfoLog(self, size, NULL, msg);
-		return NativeString_to_s(msg);
-	`}
+	fun is_deleted: Bool do return glGetShaderiv(self, gl_DELETE_STATUS) != 0
 end
+
+# Get a parameter value from a `shader` object
+fun glGetShaderiv(shader: GLShader, pname: GLGetParameterName): Int `{
+	int val;
+	glGetShaderiv(shader, pname, &val);
+	return val;
+`}
+
+# Shader parameter
+extern class GLGetParameterName
+	super GLEnum
+end
+
+fun gl_INFO_LOG_LENGTH: GLGetParameterName `{ return GL_INFO_LOG_LENGTH; `}
+fun gl_DELETE_STATUS: GLGetParameterName `{ return GL_DELETE_STATUS; `}
+
+fun gl_SHADER_TYPE: GLGetParameterName `{ return GL_SHADER_TYPE; `}
+fun gl_COMPILE_STATUS: GLGetParameterName `{ return GL_COMPILE_STATUS; `}
+fun gl_SHADER_SOURCE_LENGTH: GLGetParameterName `{ return GL_SHADER_SOURCE_LENGTH; `}
+
+fun gl_ACTIVE_ATTRIBUTES: GLGetParameterName `{ return GL_ACTIVE_ATTRIBUTES; `}
+fun gl_ACTIVE_ATTRIBUTE_MAX_LENGTH: GLGetParameterName `{ return GL_ACTIVE_ATTRIBUTE_MAX_LENGTH; `}
+fun gl_ACTIVE_UNIFORMS: GLGetParameterName `{ return GL_ACTIVE_UNIFORMS; `}
+fun gl_ACTIVE_UNIFORM_MAX_LENGTH: GLGetParameterName `{ return GL_ACTIVE_UNIFORM_MAX_LENGTH; `}
+fun gl_ATTACHED_SHADERS: GLGetParameterName `{ return GL_ATTACHED_SHADERS; `}
+fun gl_LINK_STATUS: GLGetParameterName `{ return GL_LINK_STATUS; `}
+fun gl_VALIDATE_STATUS: GLGetParameterName `{ return GL_VALIDATE_STATUS; `}
+
+# The information log for the `shader` object
+fun glGetShaderInfoLog(shader: GLShader): String
+do
+	var size = glGetShaderiv(shader, gl_INFO_LOG_LENGTH)
+	var buf = new NativeString(size)
+	native_glGetShaderInfoLog(shader, size, buf)
+	return buf.to_s_with_length(size)
+end
+
+private fun native_glGetShaderInfoLog(shader: GLShader, buf_size: Int, buffer: NativeString): Int `{
+	int length;
+	glGetShaderInfoLog(shader, buf_size, &length, buffer);
+	return length;
+`}
 
 # Shader type
 extern class GLShaderType
@@ -344,6 +375,11 @@ fun glDisableVertexAttribArray(index: Int) `{ glDisableVertexAttribArray(index);
 # Render primitives from array data
 fun glDrawArrays(mode: GLDrawMode, from, count: Int) `{ glDrawArrays(mode, from, count); `}
 
+# Render primitives from array data by their index
+fun glDrawElements(mode: GLDrawMode, count: Int, typ: GLDataType, indices: Pointer) `{
+	glDrawElements(mode, count, typ, indices);
+`}
+
 # Define an array of generic vertex attribute data
 fun glVertexAttribPointer(index, size: Int, typ: GLDataType, normalized: Bool, stride: Int, array: NativeGLfloatArray) `{
 	glVertexAttribPointer(index, size, typ, normalized, stride, array);
@@ -373,7 +409,17 @@ fun glUniform3i(index, x, y, z: Int) `{ glUniform3i(index, x, y, z); `}
 # Specify the value of a uniform variable for the current program object
 fun glUniform4i(index, x, y, z, w: Int) `{ glUniform4i(index, x, y, z, w); `}
 
-# TODO glUniform*f
+# Specify the value of a uniform variable for the current program object
+fun glUniform1f(index: Int, x: Float) `{ glUniform1f(index, x); `}
+
+# Specify the value of a uniform variable for the current program object
+fun glUniform2f(index: Int, x, y: Float) `{ glUniform2f(index, x, y); `}
+
+# Specify the value of a uniform variable for the current program object
+fun glUniform3f(index: Int, x, y, z: Float) `{ glUniform3f(index, x, y, z); `}
+
+# Specify the value of a uniform variable for the current program object
+fun glUniform4f(index: Int, x, y, z, w: Float) `{ glUniform4f(index, x, y, z, w); `}
 
 # Low level array of `Float`
 class GLfloatArray
@@ -558,14 +604,14 @@ fun gl_UNPACK_ALIGNEMENT: GLPack `{ return GL_UNPACK_ALIGNMENT; `}
 # Specify a two-dimensional texture image
 fun glTexImage2D(target: GLTextureTarget, level: Int, internalformat: GLPixelFormat,
                  width, height, border: Int,
-                 format: GLPixelFormat, typ: GLPixelType, data: Pointer) `{
+                 format: GLPixelFormat, typ: GLDataType, data: Pointer) `{
 	glTexImage2D(target, level, internalformat, width, height, border, format, typ, data);
 `}
 
 # Specify a two-dimensional texture subimage
 fun glTexSubImage2D(target: GLTextureTarget,
                     level, xoffset, yoffset, width, height, border: Int,
-                    format: GLPixelFormat, typ: GLPixelType, data: Pointer) `{
+                    format: GLPixelFormat, typ: GLDataType, data: Pointer) `{
 	glTexSubImage2D(target, level, xoffset, yoffset, width, height, format, typ, data);
 `}
 
@@ -581,7 +627,7 @@ fun glCopyTexSubImage2D(target: GLTextureTarget, level, xoffset, yoffset, x, y, 
 `}
 
 # Copy a block of pixels from the framebuffer of `fomat` and `typ` at `data`
-fun glReadPixels(x, y, width, height: Int, format: GLPixelFormat, typ: GLPixelType, data: Pointer) `{
+fun glReadPixels(x, y, width, height: Int, format: GLPixelFormat, typ: GLDataType, data: Pointer) `{
 	glReadPixels(x, y, width, height, format, typ, data);
 `}
 
@@ -998,46 +1044,42 @@ class GLCapabilities
 	var stencil_test: GLCap is lazy do return new GLCap(0x0B90)
 end
 
-# Float related data types of OpenGL ES 2.0 shaders
-#
-# Only data types supported by shader attributes, as seen with
-# `GLProgram::active_attrib_type`.
-extern class GLFloatDataType
-	super GLEnum
-
-	fun is_float: Bool `{ return self == GL_FLOAT; `}
-	fun is_float_vec2: Bool `{ return self == GL_FLOAT_VEC2; `}
-	fun is_float_vec3: Bool `{ return self == GL_FLOAT_VEC3; `}
-	fun is_float_vec4: Bool `{ return self == GL_FLOAT_VEC4; `}
-	fun is_float_mat2: Bool `{ return self == GL_FLOAT_MAT2; `}
-	fun is_float_mat3: Bool `{ return self == GL_FLOAT_MAT3; `}
-	fun is_float_mat4: Bool `{ return self == GL_FLOAT_MAT4; `}
-
-	# Instances of `GLFloatDataType` can be equal to instances of `GLDataType`
-	redef fun ==(o)
-	do
-		return o != null and o isa GLFloatDataType and o.hash == self.hash
-	end
-end
-
 # All data types of OpenGL ES 2.0 shaders
 #
 # These types can be used by shader uniforms, as seen with
 # `GLProgram::active_uniform_type`.
 extern class GLDataType
-	super GLFloatDataType
-
-	fun is_int: Bool `{ return self == GL_INT; `}
-	fun is_int_vec2: Bool `{ return self == GL_INT_VEC2; `}
-	fun is_int_vec3: Bool `{ return self == GL_INT_VEC3; `}
-	fun is_int_vec4: Bool `{ return self == GL_INT_VEC4; `}
-	fun is_bool: Bool `{ return self == GL_BOOL; `}
-	fun is_bool_vec2: Bool `{ return self == GL_BOOL_VEC2; `}
-	fun is_bool_vec3: Bool `{ return self == GL_BOOL_VEC3; `}
-	fun is_bool_vec4: Bool `{ return self == GL_BOOL_VEC4; `}
-	fun is_sampler_2d: Bool `{ return self == GL_SAMPLER_2D; `}
-	fun is_sampler_cube: Bool `{ return self == GL_SAMPLER_CUBE; `}
+	super GLEnum
 end
+
+fun gl_FLOAT: GLDataType `{ return GL_FLOAT; `}
+fun gl_FLOAT_VEC2: GLDataType `{ return GL_FLOAT_VEC2; `}
+fun gl_FLOAT_VEC3: GLDataType `{ return GL_FLOAT_VEC3; `}
+fun gl_FLOAT_VEC4: GLDataType `{ return GL_FLOAT_VEC4; `}
+fun gl_FLOAT_MAT2: GLDataType `{ return GL_FLOAT_MAT2; `}
+fun gl_FLOAT_MAT3: GLDataType `{ return GL_FLOAT_MAT3; `}
+fun gl_FLOAT_MAT4: GLDataType `{ return GL_FLOAT_MAT4; `}
+
+fun gl_BYTE: GLDataType `{ return GL_BYTE; `}
+fun gl_UNSIGNED_BYTE: GLDataType `{ return GL_UNSIGNED_BYTE; `}
+fun gl_SHORT: GLDataType `{ return GL_SHORT; `}
+fun gl_UNSIGNED_SHORT: GLDataType `{ return GL_UNSIGNED_SHORT; `}
+fun gl_INT: GLDataType `{ return GL_INT; `}
+fun gl_UNSIGNED_INT: GLDataType `{ return GL_UNSIGNED_INT; `}
+fun gl_FIXED: GLDataType `{ return GL_FIXED; `}
+fun gl_INT_VEC2: GLDataType `{ return GL_INT_VEC2; `}
+fun gl_INT_VEC3: GLDataType `{ return GL_INT_VEC3; `}
+fun gl_INT_VEC4: GLDataType `{ return GL_INT_VEC4; `}
+fun gl_BOOL: GLDataType `{ return GL_BOOL; `}
+fun gl_BOOL_VEC2: GLDataType `{ return GL_BOOL_VEC2; `}
+fun gl_BOOL_VEC3: GLDataType `{ return GL_BOOL_VEC3; `}
+fun gl_BOOL_VEC4: GLDataType `{ return GL_BOOL_VEC4; `}
+fun gl_SAMPLER_2D: GLDataType `{ return GL_SAMPLER_2D; `}
+fun gl_SAMPLER_CUBE: GLDataType `{ return GL_SAMPLER_CUBE; `}
+
+fun gl_UNSIGNED_SHORT_5_6_5: GLDataType `{ return GL_UNSIGNED_SHORT_5_6_5; `}
+fun gl_UNSIGNED_SHORT_4_4_4_4: GLDataType `{ return GL_UNSIGNED_SHORT_4_4_4_4; `}
+fun gl_UNSIGNED_SHORT_5_5_5_1: GLDataType `{ return GL_UNSIGNED_SHORT_5_5_5_1; `}
 
 # Kind of primitives to render
 extern class GLDrawMode
@@ -1091,16 +1133,6 @@ end
 fun gl_ALPHA: GLPixelFormat `{ return GL_ALPHA; `}
 fun gl_RGB: GLPixelFormat `{ return GL_RGB; `}
 fun gl_RGBA: GLPixelFormat `{ return GL_RGBA; `}
-
-# Data type of pixel data
-extern class GLPixelType
-	super GLEnum
-end
-
-fun gl_UNSIGNED_BYTE: GLPixelType `{ return GL_UNSIGNED_BYTE; `}
-fun gl_UNSIGNED_SHORT_5_6_5: GLPixelType `{ return GL_UNSIGNED_SHORT_5_6_5; `}
-fun gl_UNSIGNED_SHORT_4_4_4_4: GLPixelType `{ return GL_UNSIGNED_SHORT_4_4_4_4; `}
-fun gl_UNSIGNED_SHORT_5_5_5_1: GLPixelType `{ return GL_UNSIGNED_SHORT_5_5_5_1; `}
 
 # Set of buffers as a bitwise OR mask
 extern class GLBuffer `{ GLbitfield `}
