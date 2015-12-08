@@ -115,6 +115,8 @@ private class Concat
 		_bytelen = l.bytelen + r.bytelen
 	end
 
+	redef fun is_empty do return _bytelen == 0
+
 	redef fun output do
 		_left.output
 		_right.output
