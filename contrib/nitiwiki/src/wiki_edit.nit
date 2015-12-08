@@ -94,7 +94,10 @@ class EditAction
 		var file_path = turi.strip_leading_slash
 		file_path = wiki_root / file_path
 
-		if not file_path.simplify_path.has_prefix(source_dir) then
+		var abs_file_path = file_path.to_absolute_path
+		var abs_source_dir = source_dir.to_absolute_path
+
+		if not abs_file_path.has_prefix(abs_source_dir) then
 			# Attempting to access a file outside the source directory
 			var entity = new WikiEditForm(wiki, turi.strip_leading_slash,
 				"Access denied: ", "", "<p>Target outside of the source directory</p>")
@@ -165,6 +168,11 @@ redef class String
 	do
 		if has_prefix("/") then return substring_from(1)
 		return self
+	end
+
+	private fun to_absolute_path: String
+	do
+		return (getcwd / self).simplify_path
 	end
 end
 
