@@ -238,6 +238,7 @@ extern class NativeString `{ char* `}
 	fun find_beginning_of_char_at(pos: Int): Int do
 		var endpos = pos
 		var c = self[pos]
+		if c & 0x80u8 == 0x00u8 then return pos
 		while c & 0xC0u8 == 0x80u8 do
 			pos -= 1
 			c = self[pos]
