@@ -80,7 +80,7 @@ redef class App
 	redef fun on_create
 	do
 		super
-		maximum_fps = 60
+		maximum_fps = 60.0
 		assets.assign_images_to_story context.game.story
 	end
 
@@ -127,7 +127,7 @@ redef class App
 			return new LocalServerContext
 		else
 			print "Connecting to:{address}:{port}"
-			maximum_fps = 0
+			maximum_fps = 0.0
 
 			# Args are: tinks server_address {port}
 			#var address = "riph" # args[0]

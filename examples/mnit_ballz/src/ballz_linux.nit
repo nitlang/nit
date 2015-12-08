@@ -29,7 +29,7 @@ redef class App
 
 	redef fun run
 	do
-		maximum_fps = 50
+		maximum_fps = 50.0
 		super
 	end
 
