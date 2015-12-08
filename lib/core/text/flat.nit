@@ -40,7 +40,7 @@ redef class FlatText
 	protected fun first_byte: Int do return 0
 
 	# Last byte of the NativeString
-	protected fun last_byte: Int do return _bytelen - 1
+	protected fun last_byte: Int do return first_byte + _bytelen - 1
 
 	# Cache of the latest position (char) explored in the string
 	var position: Int = 0
@@ -181,7 +181,7 @@ redef class FlatText
 			end
 			pos += 1
 		end
-		var s = new FlatString.with_infos(nits, nlen, 0, nlen - 1)
+		var s = new FlatString.with_infos(nits, nlen, 0)
 		return s
 	end
 
@@ -305,9 +305,6 @@ class FlatString
 	# Index at which `self` begins in `_items`, inclusively
 	redef var first_byte is noinit
 
-	# Index at which `self` ends in `_items`, inclusively
-	redef var last_byte is noinit
-
 	redef var chars = new FlatStringCharView(self) is lazy
 
 	redef var bytes = new FlatStringByteView(self) is lazy
@@ -406,12 +403,11 @@ class FlatString
 	#
 	# `_items` will be used as is, without copy, to retrieve the characters of the string.
 	# Aliasing issues is the responsibility of the caller.
-	private init with_infos(items: NativeString, bytelen, from, to: Int)
+	private init with_infos(items: NativeString, bytelen, from: Int)
 	do
 		self._items = items
 		self._bytelen = bytelen
 		_first_byte = from
-		_last_byte = to
 		_bytepos = from
 	end
 
@@ -419,13 +415,12 @@ class FlatString
 	#
 	# `_items` will be used as is, without copy, to retrieve the characters of the string.
 	# Aliasing issues is the responsibility of the caller.
-	private init full(items: NativeString, bytelen, from, to, length: Int)
+	private init full(items: NativeString, bytelen, from, length: Int)
 	do
 		self._items = items
 		self.length = length
 		self._bytelen = bytelen
 		_first_byte = from
-		_last_byte = to
 		_bytepos = from
 	end
 
@@ -499,7 +494,7 @@ class FlatString
 			var ns = new NativeString(nlen + 1)
 			mits.copy_to(ns, mlen, mifrom, 0)
 			sits.copy_to(ns, slen, sifrom, mlen)
-			return new FlatString.full(ns, nlen, 0, nlen - 1, length + o.length)
+			return new FlatString.full(ns, nlen, 0, _length + o.length)
 		else
 			abort
 		end
@@ -520,7 +515,7 @@ class FlatString
 			offset += mybtlen
 			i -= 1
 		end
-		return new FlatString.full(ns, new_bytelen, 0, new_bytelen - 1, newlen)
+		return new FlatString.full(ns, new_bytelen, 0, newlen)
 	end
 
 
@@ -532,7 +527,7 @@ class FlatString
 			var i = _first_byte
 
 			var my_items = _items
-			var max = _last_byte
+			var max = last_byte
 
 			while i <= max do
 				h = (h << 5) + h + my_items[i].to_i
@@ -641,7 +636,7 @@ private class FlatStringByteIterator
 		curr_pos += tgt._first_byte
 	end
 
-	redef fun is_ok do return curr_pos <= target._last_byte
+	redef fun is_ok do return curr_pos <= target.last_byte
 
 	redef fun item do return target_items[curr_pos]
 
@@ -658,12 +653,12 @@ private class FlatStringByteView
 
 	redef fun [](index)
 	do
-		# Check that the index (+ _first_byte) is not larger than _last_byte
+		# Check that the index (+ _first_byte) is not larger than last_byte
 		# In other terms, if the index is valid
 		assert index >= 0
 		var target = self.target
 		var ind = index + target._first_byte
-		assert ind <= target._last_byte
+		assert ind <= target.last_byte
 		return target._items[ind]
 	end
 
@@ -806,7 +801,7 @@ class FlatBuffer
 		written = true
 		var bln = _bytelen
 		if bln == 0 then _items = new NativeString(1)
-		return new FlatString.full(_items, bln, 0, bln - 1, length)
+		return new FlatString.full(_items, bln, 0, _length)
 	end
 
 	redef fun to_cstring
@@ -918,7 +913,7 @@ class FlatBuffer
 	redef fun times(repeats)
 	do
 		var bln = _bytelen
-		var x = new FlatString.full(_items, bln, 0, bln - 1, length)
+		var x = new FlatString.full(_items, bln, 0, _length)
 		for i in [1 .. repeats[ do
 			append(x)
 		end
@@ -1089,7 +1084,7 @@ redef class NativeString
 	end
 
 	redef fun to_s_full(bytelen, unilen) do
-		return new FlatString.full(self, bytelen, 0, bytelen - 1, unilen)
+		return new FlatString.full(self, bytelen, 0, unilen)
 	end
 
 	# Returns `self` as a new String.
@@ -1100,7 +1095,7 @@ redef class NativeString
 		if r.items != self then return r
 		var new_self = new NativeString(length + 1)
 		copy_to(new_self, length, 0, 0)
-		var str = new FlatString.with_infos(new_self, length, 0, length - 1)
+		var str = new FlatString.with_infos(new_self, length, 0)
 		new_self[length] = 0u8
 		str.to_cstring = new_self
 		return str
@@ -1178,7 +1173,7 @@ redef class NativeString
 			end
 			copy_to(ret, len - old_repl, old_repl, off)
 		end
-		return new FlatString.full(ret, end_length, 0, end_length - 1, chr_ln)
+		return new FlatString.full(ret, end_length, 0, chr_ln)
 	end
 
 	# Sets the next bytes at position `pos` to the value of `c`, encoded in UTF-8
@@ -1236,7 +1231,7 @@ redef class Int
 		var ns = new NativeString(nslen + 1)
 		ns[nslen] = 0u8
 		native_int_to_s(ns, nslen + 1)
-		return new FlatString.full(ns, nslen, 0, nslen - 1, nslen)
+		return new FlatString.full(ns, nslen, 0, nslen)
 	end
 end
 
@@ -1286,7 +1281,7 @@ redef class Array[E]
 			end
 			i += 1
 		end
-		return new FlatString.with_infos(ns, sl, 0, sl - 1)
+		return new FlatString.with_infos(ns, sl, 0)
 	end
 end
 
@@ -1323,7 +1318,7 @@ redef class NativeArray[E]
 			end
 			i += 1
 		end
-		return new FlatString.with_infos(ns, sl, 0, sl - 1)
+		return new FlatString.with_infos(ns, sl, 0)
 	end
 end
 

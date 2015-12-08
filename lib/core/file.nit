@@ -1271,7 +1271,7 @@ redef class FlatString
 
 	redef fun file_extension do
 		var its = _items
-		var p = _last_byte
+		var p = last_byte
 		var c = its[p]
 		var st = _first_byte
 		while p >= st and c != '.'.ascii do
@@ -1279,12 +1279,12 @@ redef class FlatString
 			c = its[p]
 		end
 		if p <= st then return null
-		var ls = _last_byte
-		return new FlatString.with_infos(its, ls - p, p + 1, ls)
+		var ls = last_byte
+		return new FlatString.with_infos(its, ls - p, p + 1)
 	end
 
 	redef fun basename(extension) do
-		var l = _last_byte
+		var l = last_byte
 		var its = _items
 		var min = _first_byte
 		var sl = '/'.ascii
@@ -1292,7 +1292,7 @@ redef class FlatString
 		if l == min then return "/"
 		var ns = l
 		while ns >= min and its[ns] != sl do ns -= 1
-		var bname = new FlatString.with_infos(its, l - ns, ns + 1, l)
+		var bname = new FlatString.with_infos(its, l - ns, ns + 1)
 
 		return if extension != null then bname.strip_extension(extension) else bname
 	end

@@ -262,7 +262,7 @@ class Bytes
 			i += 1
 			oi += 2
 		end
-		return new FlatString.full(ns, elen, 0, elen - 1, elen)
+		return new FlatString.full(ns, elen, 0, elen)
 	end
 
 	#     var b = new Bytes.with_capacity(1)
@@ -609,7 +609,7 @@ redef class Text
 			bytes[i].add_digest_at(outns, oi)
 			oi += 2
 		end
-		return new FlatString.with_infos(outns, ln * 2, 0, ln * 2 - 1)
+		return new FlatString.with_infos(outns, ln * 2, 0)
 	end
 
 	# Return a `Bytes` instance where Nit escape sequences are transformed.
