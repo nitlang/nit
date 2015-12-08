@@ -50,10 +50,24 @@ redef class FlatText
 
 	# Index of the character `index` in `_items`
 	fun char_to_byte_index(index: Int): Int do
-		var ln = length
-		assert index >= 0
-		assert index < ln
+		var dpos = index - _position
+		var b = _bytepos
 
+		if dpos == 0 then return b
+		if dpos == 1 then
+			b += _items.length_of_char_at(b)
+			_bytepos = b
+			_position = index
+			return b
+		end
+		if dpos == -1 then
+			b = _items.find_beginning_of_char_at(b - 1)
+			_bytepos = b
+			_position = index
+			return b
+		end
+
+		var ln = _length
 		var pos = _position
 		# Find best insertion point
 		var delta_begin = index
@@ -68,15 +82,15 @@ redef class FlatText
 		var ns_i: Int
 		var my_i: Int
 
-		if min == delta_begin then
-			ns_i = first_byte
-			my_i = 0
-		else if min == delta_cache then
+		if min == delta_cache then
 			ns_i = _bytepos
 			my_i = pos
+		else if min == delta_begin then
+			ns_i = first_byte
+			my_i = 0
 		else
 			ns_i = its.find_beginning_of_char_at(last_byte)
-			my_i = length - 1
+			my_i = _length - 1
 		end
 
 		ns_i = its.char_to_byte_index_cached(index, my_i, ns_i)
@@ -277,7 +291,21 @@ redef class FlatText
 		return nns.to_s_unsafe(nlen)
 	end
 
-	redef fun [](index) do return _items.char_at(char_to_byte_index(index))
+	redef fun [](index) do
+		assert index >= 0 and index < _length
+		return fetch_char_at(index)
+	end
+
+	# Gets a `Char` at `index` in `self`
+	#
+	# WARNING: Use at your own risks as no bound-checking is done
+	fun fetch_char_at(index: Int): Char do
+		var i = char_to_byte_index(index)
+		var items = _items
+		var b = items[i]
+		if b & 0x80u8 == 0x00u8 then return b.ascii
+		return items.char_at(i)
+	end
 
 	# If `self` contains only digits and alpha <= 'f', return the corresponding integer.
 	#
@@ -317,11 +345,12 @@ class FlatString
 		return new_items
 	end
 
-	redef fun reversed
-	do
+	redef fun reversed do
 		var b = new FlatBuffer.with_capacity(_bytelen + 1)
-		for i in [0 .. _length[.step(-1) do
-			b.add self[i]
+		var i = _length - 1
+		while i >= 0 do
+			b.add self.fetch_char_at(i)
+			i -= 1
 		end
 		var s = b.to_s.as(FlatString)
 		s._length = self._length
@@ -651,10 +680,9 @@ private class FlatStringByteView
 	do
 		# Check that the index (+ _first_byte) is not larger than last_byte
 		# In other terms, if the index is valid
-		assert index >= 0
-		var target = self.target
+		var target = _target
+		assert index >= 0 and index < target._bytelen
 		var ind = index + target._first_byte
-		assert ind <= target.last_byte
 		return target._items[ind]
 	end
 
@@ -747,7 +775,6 @@ class FlatBuffer
 			lshift_bytes(ip + clen, -size_diff)
 		end
 		_bytelen += size_diff
-		bytepos += size_diff
 		it.set_char_at(ip, item)
 	end
 
