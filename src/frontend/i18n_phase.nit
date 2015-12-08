@@ -58,7 +58,7 @@ private class I18NPhase
 
 		var pot_path = locale_dir / module_name
 		var arr = vi.strings.values.to_a
-		var po = new POFile.with_strings(arr)
+		var po = new POFile(arr)
 		po.write_template(pot_path)
 
 		if lang != null then
@@ -190,12 +190,6 @@ class POFile
 	#
 	# Read from a PO file
 	var strings: Array[PObject]
-
-	# Creates a PO file with strings built-in
-	init with_strings(sm: Array[PObject])do
-		strings = new Array[PObject].with_capacity(sm.length)
-		strings.add_all sm
-	end
 
 	redef fun write_to_file(path) do
 		if not path.has_suffix(".po") then path += ".po"

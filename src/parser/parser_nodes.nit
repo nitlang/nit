@@ -1126,7 +1126,7 @@ end
 class APublicVisibility
 	super AVisibility
 	# The `public` keyword, if any
-	var n_kwpublic: nullable TKwpublic is writable
+	var n_kwpublic: nullable TKwpublic = null is writable
 end
 # An explicit private visibility modifier
 class APrivateVisibility
