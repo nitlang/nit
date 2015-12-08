@@ -1709,6 +1709,16 @@ redef class Char
 		return (self >= 'a' and self <= 'z') or (self >= 'A' and self <= 'Z')
 	end
 
+	# Is `self` an hexadecimal digit ?
+	#
+	#     assert 'A'.is_hexdigit
+	#     assert not 'G'.is_hexdigit
+	#     assert 'a'.is_hexdigit
+	#     assert not 'g'.is_hexdigit
+	#     assert '5'.is_hexdigit
+	fun is_hexdigit: Bool do return (self >= '0' and self <= '9') or (self >= 'A' and self <= 'F') or
+					(self >= 'a' and self <= 'f')
+
 	# Returns true if the char is an alpha or a numeric digit
 	#
 	#     assert 'a'.is_alphanumeric
