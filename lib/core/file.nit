@@ -959,10 +959,13 @@ redef class String
 	end
 
 	# Return the canonicalized absolute pathname (see POSIX function `realpath`)
+	#
+	# Require: `file_exists`
 	fun realpath: String do
 		var cs = to_cstring.file_realpath
+		assert file_exists
 		var res = cs.to_s_with_copy
-		# cs.free_malloc # FIXME memory leak
+		cs.free
 		return res
 	end
 
