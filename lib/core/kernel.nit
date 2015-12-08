@@ -890,15 +890,7 @@ universal Int
 	#     assert (-10).abs   == 10
 	#     assert 10.abs    == 10
 	#     assert 0.abs     == 0
-	fun abs: Int
-	do
-	    if self >= 0
-	    then
-	        return self
-	    else
-	        return -1 * self
-	    end
-	end
+	fun abs: Int do return if self >= 0 then self else -self
 end
 
 # Native characters.
