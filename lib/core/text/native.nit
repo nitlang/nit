@@ -84,6 +84,10 @@ extern class NativeString `{ char* `}
 	# Copy `self` to `dest`.
 	fun copy_to(dest: NativeString, length: Int, from: Int, to: Int) is intern
 
+	redef fun ==(o) is intern do return is_same_instance(o)
+
+	redef fun !=(o) is intern do return not is_same_instance(o)
+
 	# Position of the first nul character.
 	fun cstring_length: Int
 	do
