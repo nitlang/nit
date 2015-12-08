@@ -458,7 +458,7 @@ class FlatString
 		self._bytelen = bytelen
 		_first_byte = from
 		_bytepos = from
-		_length = _items.utf8_length(_first_byte, last_byte)
+		_length = _items.utf8_length(_first_byte, bytelen)
 	end
 
 	# Low-level creation of a new string with all the data.
