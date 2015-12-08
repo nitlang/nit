@@ -2249,6 +2249,21 @@ redef class AMethPropdef
 			else if pname == "to_b" then
 				v.ret(v.new_expr("(unsigned char){arguments[0]}", ret.as(not null)))
 				return true
+			else if pname == "code_point" then
+				v.ret(v.new_expr("(uint32_t){arguments[0]}", ret.as(not null)))
+				return true
+			else if pname == "&" then
+				v.ret(v.new_expr("{arguments[0]} & {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == "|" then
+				v.ret(v.new_expr("{arguments[0]} | {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == ">>" then
+				v.ret(v.new_expr("{arguments[0]} >> {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == "<<" then
+				v.ret(v.new_expr("{arguments[0]} << {arguments[1]}", ret.as(not null)))
+				return true
 			end
 		else if cname == "Char" then
 			if pname == "object_id" then
@@ -2281,6 +2296,9 @@ redef class AMethPropdef
 				return true
 			else if pname == "to_i" then
 				v.ret(v.new_expr("{arguments[0]}-'0'", ret.as(not null)))
+				return true
+			else if pname == "code_point" then
+				v.ret(v.new_expr("(long){arguments[0]}", ret.as(not null)))
 				return true
 			end
 		else if cname == "Byte" then
@@ -2330,6 +2348,15 @@ redef class AMethPropdef
 			else if pname == ">=" then
 				v.ret(v.new_expr("{arguments[0]} >= {arguments[1]}", ret.as(not null)))
 				return true
+			else if pname == ">>" then
+				v.ret(v.new_expr("{arguments[0]} >> {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == "<<" then
+				v.ret(v.new_expr("{arguments[0]} << {arguments[1]}", ret.as(not null)))
+				return true
+			else if pname == "&" then
+				v.ret(v.new_expr("{arguments[0]} & {arguments[1]}", ret.as(not null)))
+				return true
 			else if pname == "to_i" then
 				v.ret(v.new_expr("(long){arguments[0]}", ret.as(not null)))
 				return true
@@ -2349,6 +2376,9 @@ redef class AMethPropdef
 				v.ret(v.new_expr("(int32_t){arguments[0]}", ret.as(not null)))
 				return true
 			else if pname == "to_u32" then
+				v.ret(v.new_expr("(uint32_t){arguments[0]}", ret.as(not null)))
+				return true
+			else if pname == "ascii" then
 				v.ret(v.new_expr("(uint32_t){arguments[0]}", ret.as(not null)))
 				return true
 			end

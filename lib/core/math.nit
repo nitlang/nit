@@ -67,12 +67,16 @@ redef class Int
 	# Returns the result of a binary AND operation on `self` and `i`
 	#
 	#     assert 0x10 & 0x01 == 0
-	fun &(i: Int): Int `{ return self & i; `}
+	fun &(i: Int): Int is intern do return band(i)
+
+	private fun band(i: Int): Int `{ return self & i; `}
 
 	# Returns the result of a binary OR operation on `self` and `i`
 	#
 	#     assert 0x10 | 0x01 == 0x11
-	fun |(i: Int): Int `{ return self | i; `}
+	fun |(i: Int): Int is intern do return bor(i)
+
+	private fun bor(i: Int): Int `{ return self | i; `}
 
 	# Returns the result of a binary XOR operation on `self` and `i`
 	#
@@ -175,7 +179,9 @@ redef class Byte
 	# Returns the result of a binary AND operation on `self` and `i`
 	#
 	#     assert 0x10u8 & 0x01u8 == 0u8
-	fun &(i: Byte): Byte `{ return self & i; `}
+	fun &(i: Byte): Byte is intern do return band(i)
+
+	private fun band(i: Byte): Byte `{ return self & i; `}
 
 	# Returns the result of a binary OR operation on `self` and `i`
 	#
