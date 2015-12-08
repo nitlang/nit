@@ -14,6 +14,24 @@ module native
 import kernel
 import math
 
+in "C" `{
+#ifdef __linux__
+	#include <endian.h>
+#endif
+#ifdef __APPLE__
+	#include <libkern/OSByteOrder.h>
+	#define be32toh(x) OSSwapBigToHostInt32(x)
+#endif
+
+#ifdef __pnacl__
+	#define be16toh(val) (((val) >> 8) | ((val) << 8))
+	#define be32toh(val) ((be16toh((val) << 16) | (be16toh((val) >> 16))))
+#endif
+#ifndef be32toh
+	#define be32toh(val) betoh32(val)
+#endif
+`}
+
 redef class Byte
 	# Gives the length of the UTF-8 char starting with `self`
 	fun u8len: Int do
@@ -200,4 +218,14 @@ extern class NativeString `{ char* `}
 		end
 		return ln
 	end
+
+	# Fetch 4 chars in `self` at `pos`
+	fun fetch_4_chars(pos: Int): Int is intern do return fetch_4_ffi(pos)
+
+	# Fetch 4 chars in `self` at `pos`
+	fun fetch_4_hchars(pos: Int): Int is intern do return fetch_4h_ffi(pos)
+
+	# FIXME: To remove when bootstrap supports PR #1898
+	private fun fetch_4_ffi(pos: Int): Int `{ return (long)*((uint32_t*)(self+pos)); `}
+	private fun fetch_4h_ffi(pos: Int): Int `{ return (long)be32toh(*((uint32_t*)(self+pos))); `}
 end

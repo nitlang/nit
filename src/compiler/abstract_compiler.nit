@@ -654,9 +654,21 @@ abstract class AbstractCompiler
 		self.header.add_decl("#include <sys/types.h>\n")
 		self.header.add_decl("#include <unistd.h>\n")
 		self.header.add_decl("#include <stdint.h>\n")
+		self.header.add_decl("#ifdef __linux__")
+		self.header.add_decl("	#include <endian.h>")
+		self.header.add_decl("#endif")
 		self.header.add_decl("#include <inttypes.h>\n")
 		self.header.add_decl("#include \"gc_chooser.h\"")
+		self.header.add_decl("#ifdef __APPLE__")
+		self.header.add_decl("	#include <libkern/OSByteOrder.h>")
+		self.header.add_decl("	#define be32toh(x) OSSwapBigToHostInt32(x)")
+		self.header.add_decl("#endif")
+		self.header.add_decl("#ifdef __pnacl__")
+		self.header.add_decl("	#define be16toh(val) (((val) >> 8) | ((val) << 8))")
+		self.header.add_decl("	#define be32toh(val) ((be16toh((val) << 16) | (be16toh((val) >> 16))))")
+		self.header.add_decl("#endif")
 		self.header.add_decl("#ifdef ANDROID")
+		self.header.add_decl("	#define be32toh(val) betoh32(val)")
 		self.header.add_decl("	#include <android/log.h>")
 		self.header.add_decl("	#define PRINT_ERROR(...) (void)__android_log_print(ANDROID_LOG_WARN, \"Nit\", __VA_ARGS__)")
 		self.header.add_decl("#else")
@@ -2487,8 +2499,21 @@ redef class AMethPropdef
 			else if pname == "fast_cstring" then
 				v.ret(v.new_expr("{arguments[0]} + {arguments[1]}", ret.as(not null)))
 				return true
+			else if pname == "==" then
+				v.ret(v.equal_test(arguments[0], arguments[1]))
+				return true
+			else if pname == "!=" then
+				var res = v.equal_test(arguments[0], arguments[1])
+				v.ret(v.new_expr("!{res}", ret.as(not null)))
+				return true
 			else if pname == "new" then
 				v.ret(v.new_expr("(char*)nit_alloc({arguments[1]})", ret.as(not null)))
+				return true
+			else if pname == "fetch_4_chars" then
+				v.ret(v.new_expr("(long)*((uint32_t*)({arguments[0]} + {arguments[1]}))", ret.as(not null)))
+				return true
+			else if pname == "fetch_4_hchars" then
+				v.ret(v.new_expr("(long)be32toh(*((uint32_t*)({arguments[0]} + {arguments[1]})))", ret.as(not null)))
 				return true
 			end
 		else if cname == "NativeArray" then
