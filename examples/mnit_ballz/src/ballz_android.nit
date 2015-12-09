@@ -38,7 +38,7 @@ redef class App
 		gyroscope.enabled = true
 		light.enabled = true
 		proximity.enabled = true
-		maximum_fps = 50
+		maximum_fps = 50.0
 		sensors_support_enabled = true
 		super
 	end

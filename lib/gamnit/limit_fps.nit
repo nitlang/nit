@@ -13,13 +13,14 @@
 # limitations under the License.
 
 # Frame-rate control for applications
-module mnit_fps
+module limit_fps
 
-import mnit_app
+import gamnit
 private import realtime
 
 redef class App
 	# Limit the frame-rate to a given frequency
+	#
 	# This basically limits how much `frame_core` is called per second.
 	# Zero (or a negative value) means no limit.
 	#
@@ -27,10 +28,11 @@ redef class App
 	var maximum_fps = 60.0 is writable
 
 	# Current frame-rate
+	#
 	# Updated each 5 seconds.
 	var current_fps = 0.0
 
-	redef fun full_frame
+	redef fun frame_full
 	do
 		super
 		limit_fps
@@ -40,14 +42,16 @@ redef class App
 	private var clock = new Clock
 
 	# Number of frames since the last deadline
-	# Used tocompute `current_fps`.
+	#
+	# Used to compute `current_fps`.
 	private var frame_count = 0
 
 	# Deadline used to compute `current_fps`
 	private var frame_count_deadline = 0
 
-	# Check and sleep to maitain a frame-rate bellow `maximum_fps`
-	# Also periodically uptate `current_fps`
+	# Check and sleep to maintain a frame-rate bellow `maximum_fps`
+	#
+	# Also periodically update `current_fps`
 	# Is automatically called at the end of `full_frame`.
 	fun limit_fps
 	do

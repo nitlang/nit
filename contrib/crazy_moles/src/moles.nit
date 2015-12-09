@@ -318,7 +318,7 @@ redef class App
 	do
 		super
 
-		maximum_fps = 50
+		maximum_fps = 50.0
 	end
 
 	redef fun frame_core(display)

@@ -32,6 +32,16 @@ redef class Sys
 	`}
 end
 
+redef class Float
+	# Sleep approximately `self` seconds
+	fun sleep `{
+		time_t s = self;
+		long ns = (self-s) * 1000000000.0;
+		const struct timespec req = {s, ns};
+		nanosleep(&req, NULL);
+	`}
+end
+
 # Time since epoch
 extern class TimeT `{time_t`}
 

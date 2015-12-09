@@ -39,7 +39,7 @@ redef class App
 	do
 		super
 
-		maximum_fps = 80
+		maximum_fps = 80.0
 
 		var display = display
 		assert display != null
