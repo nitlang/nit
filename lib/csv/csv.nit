@@ -169,7 +169,7 @@ class CsvWriter
 
 	# Create a new writer with the specified format.
 	init with_format(ostream:Writer, format: CsvFormat) do
-		self.ostream = ostream
+		init(ostream)
 		self.format = format
 	end
 
@@ -260,7 +260,7 @@ class CsvReader
 
 	# Create a new reader with the specified format.
 	init with_format(istream:Reader, format: CsvFormat) do
-		self.istream = istream
+		init(istream)
 		self.format = format
 	end
 

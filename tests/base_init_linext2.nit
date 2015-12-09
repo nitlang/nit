@@ -73,14 +73,14 @@ class C
 		'2'.output
 		' '.output
 	end
-	init init_par(c: Char)
+	redef init init_par(c: Char)
 	do
 		'C'.output
 		'3'.output
 		c.output
 		' '.output
 	end
-	init init_par3(c: Char)
+	redef init init_par3(c: Char)
 	do
 		'C'.output
 		'4'.output

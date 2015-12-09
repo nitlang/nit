@@ -89,6 +89,7 @@ end
 class C3
 	super A
 	init(j: Int) do
+		super(j)#alt6#
 		j.output
 	end
 end
@@ -96,6 +97,7 @@ end
 class D3
 	super A
 	init(j: Int) do
+		super(j)#alt6#
 		j.output
 	end
 end
@@ -119,6 +121,7 @@ end
 class F2
 	super A
 	init(j: Int, k: Bool) do
+		super(j)#alt6#
 		j.output
 	end
 end

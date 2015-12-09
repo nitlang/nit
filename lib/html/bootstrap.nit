@@ -70,8 +70,7 @@ class Link
 
 	# Creates a link with a `title` attribute.
 	init with_title(href: String, text: Writable, title: nullable String) do
-		self.href = href
-		self.text = text
+		init(href, text)
 		self.title = title
 	end
 
@@ -112,8 +111,7 @@ class Header
 
 	# Creates a link with a `title` attribute.
 	init with_subtext(level: Int, text: Writable, subtext: String) do
-		self.level = level
-		self.text = text
+		init(level, text)
 		self.subtext = subtext
 	end
 

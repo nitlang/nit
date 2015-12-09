@@ -352,7 +352,7 @@ class UniqCare
 	# * `max`: max amount refunded for this `Care` in a reclamation sheet.
 	# * `month_max`: max amount refunded by month.
 	init with_vals(id: Int, cover: Float, max, month_max: nullable Dollar) do
-		self.id = id
+		init(id)
 		self.cover = cover
 		self.max = max
 		self.month_max = month_max
@@ -382,7 +382,7 @@ class RangeCare
 	# * `max`: max amount refunded for this `Care` in a reclamation sheet.
 	# * `month_max`: max amount refunded by month.
 	init with_vals(id: Range[Int], cover: Float, max, month_max: nullable Dollar) do
-		self.id = id
+		init(id)
 		self.cover = cover
 		self.max = max
 		self.month_max = month_max

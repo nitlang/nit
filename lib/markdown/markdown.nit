@@ -635,7 +635,7 @@ class LinkRef
 
 	# Create a link with a title.
 	init with_title(link: String, title: nullable String) do
-		self.link = link
+		init(link)
 		self.title = title
 	end
 end

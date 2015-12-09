@@ -215,6 +215,8 @@ class Box3d[N: Numeric]
 	#     assert box.right == 4 and box.top == 4
 	init around(boxed: Boxed3d[N]...)
 	do
+		super
+
 		assert not boxed.is_empty
 
 		var left: nullable N = null

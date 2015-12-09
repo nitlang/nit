@@ -34,7 +34,7 @@ class GithubEvent
 
 	# Init `self` from a `json` object.
 	init from_json(api: GithubAPI, json: JsonObject) do
-		self.api = api
+		init(api)
 		self.json = json
 	end
 
