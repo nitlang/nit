@@ -1,0 +1,3 @@
+[submodule "ujson4c"]
+	path = benchmarks/json/thirdparty/ujson4c
+	url = https://github.com/esnme/ujson4c
