@@ -2080,19 +2080,20 @@ redef class MMethodDef
 		var msignature = self.msignature.as(not null)
 
 		for i in [0..msignature.arity[ do
+			var mp = msignature.mparameters[i]
 			# skip test for vararg since the array is instantiated with the correct polymorphic type
-			if msignature.vararg_rank == i then continue
+			if mp.is_vararg then continue
 
 			# skip if the cast is not required
 			var origmtype =  self.mproperty.intro.msignature.mparameters[i].mtype
 			if not origmtype.need_anchor then continue
 
 			# get the parameter type
-			var mtype = msignature.mparameters[i].mtype
+			var mtype = mp.mtype
 
 			# generate the cast
 			# note that v decides if and how to implements the cast
-			v.add("/* Covariant cast for argument {i} ({msignature.mparameters[i].name}) {arguments[i+1].inspect} isa {mtype} */")
+			v.add("/* Covariant cast for argument {i} ({mp.name}) {arguments[i+1].inspect} isa {mtype} */")
 			v.add_cast(arguments[i+1], mtype, "covariance")
 		end
 	end
