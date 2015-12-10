@@ -18,7 +18,20 @@ module gamnit_android
 import android
 
 intrude import gamnit
+intrude import android::input_events
 
 redef class App
 	redef fun feed_events do app.poll_looper 0
+
+	redef fun native_input_key(event) do return accept_event(event)
+
+	redef fun native_input_motion(event)
+	do
+		var ie = new AndroidMotionEvent(event)
+		var handled = accept_event(ie)
+
+		if not handled then accept_event ie.acting_pointer
+
+		return handled
+	end
 end

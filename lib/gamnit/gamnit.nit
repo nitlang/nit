@@ -22,6 +22,7 @@ import textures
 import programs
 
 import gamnit_android is conditional(android)
+import gamnit_linux is conditional(linux)
 
 redef class App
 
@@ -68,4 +69,13 @@ redef class App
 	#
 	# The implementation varies per platform.
 	private fun feed_events do end
+
+	# Main method to receive `InputEvent` produced by the system
+	#
+	# Returns whether or not the event is used or intercepted.
+	# If `true`, the event will not be processed further by the system.
+	# Returns `false` to intercepts events like the back key on mobile devices.
+	#
+	# This method should be refined by client modules to react to user inputs.
+	fun accept_event(event: InputEvent): Bool do return false
 end
