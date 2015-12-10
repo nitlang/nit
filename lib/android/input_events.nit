@@ -188,8 +188,6 @@ class AndroidPointerEvent
 	redef fun is_move do return motion_event.acting_pointer == self and
 		motion_event.native.action.is_move
 
-	redef fun depressed do return not pressed
-
 	# Does this pointer just began touching the screen?
 	fun just_went_down: Bool do return motion_event.acting_pointer == self and
 		motion_event.just_went_down

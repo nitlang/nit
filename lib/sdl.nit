@@ -306,7 +306,6 @@ class SDLMouseButtonEvent
 	var button: Int
 
 	redef var pressed
-	redef fun depressed do return not pressed
 
 	# Is this event raised by the left button?
 	fun is_left_button: Bool do return button == 1
@@ -352,7 +351,6 @@ class SDLMouseMotionEvent
 	var rel_y: Float
 
 	redef var pressed
-	redef fun depressed do return not pressed
 
 	redef fun is_move do return true
 
