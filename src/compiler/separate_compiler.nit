@@ -1174,8 +1174,9 @@ class SeparateCompilerVisitor
 			args.first = self.autobox(args.first, m.mclassdef.mclass.mclass_type)
 		end
 		for i in [0..msignature.arity[ do
-			var t = msignature.mparameters[i].mtype
-			if i == msignature.vararg_rank then
+			var mp = msignature.mparameters[i]
+			var t = mp.mtype
+			if mp.is_vararg then
 				t = args[i+1].mtype
 			end
 			args[i+1] = self.autobox(args[i+1], t)
@@ -1189,8 +1190,9 @@ class SeparateCompilerVisitor
 			args.first = self.unbox_extern(args.first, m.mclassdef.mclass.mclass_type)
 		end
 		for i in [0..msignature.arity[ do
-			var t = msignature.mparameters[i].mtype
-			if i == msignature.vararg_rank then
+			var mp = msignature.mparameters[i]
+			var t = mp.mtype
+			if mp.is_vararg then
 				t = args[i+1].mtype
 			end
 			if m.is_extern then args[i+1] = self.unbox_extern(args[i+1], t)
@@ -2246,8 +2248,9 @@ class SeparateRuntimeFunction
 		var sig = new FlatBuffer
 		sig.append("({called_recv.ctype} self")
 		for i in [0..called_signature.arity[ do
-			var mtype = called_signature.mparameters[i].mtype
-			if i == called_signature.vararg_rank then
+			var mp = called_signature.mparameters[i]
+			var mtype = mp.mtype
+			if mp.is_vararg then
 				mtype = mmethoddef.mclassdef.mmodule.array_type(mtype)
 			end
 			sig.append(", {mtype.ctype} p{i}")
@@ -2282,8 +2285,9 @@ class SeparateRuntimeFunction
 		comment.append("({selfvar}: {selfvar.mtype}")
 		arguments.add(selfvar)
 		for i in [0..msignature.arity[ do
-			var mtype = msignature.mparameters[i].mtype
-			if i == msignature.vararg_rank then
+			var mp = msignature.mparameters[i]
+			var mtype = mp.mtype
+			if mp.is_vararg then
 				mtype = v.mmodule.array_type(mtype)
 			end
 			comment.append(", {mtype}")

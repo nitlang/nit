@@ -605,8 +605,9 @@ class GlobalCompilerVisitor
 	do
 		var recv = args.first
 		for i in [0..m.msignature.arity[ do
-			var t = m.msignature.mparameters[i].mtype
-			if i == m.msignature.vararg_rank then
+			var mp = m.msignature.mparameters[i]
+			var t = mp.mtype
+			if mp.is_vararg then
 				t = args[i+1].mtype
 			end
 			t = self.resolve_for(t, recv)
@@ -618,8 +619,9 @@ class GlobalCompilerVisitor
 	do
 		var recv = args.first
 		for i in [0..m.msignature.arity[ do
-			var t = m.msignature.mparameters[i].mtype
-			if i == m.msignature.vararg_rank then
+			var mp = m.msignature.mparameters[i]
+			var t = mp.mtype
+			if mp.is_vararg then
 				t = args[i+1].mtype
 			end
 			t = self.resolve_for(t, recv)
@@ -997,8 +999,9 @@ private class CustomizedRuntimeFunction
 		comment.append("(self: {recv}")
 		arguments.add(selfvar)
 		for i in [0..mmethoddef.msignature.arity[ do
-			var mtype = mmethoddef.msignature.mparameters[i].mtype
-			if i == mmethoddef.msignature.vararg_rank then
+			var mp = mmethoddef.msignature.mparameters[i]
+			var mtype = mp.mtype
+			if mp.is_vararg then
 				mtype = v.mmodule.array_type(mtype)
 			end
 			mtype = v.resolve_for(mtype, selfvar)

@@ -528,8 +528,10 @@ class NaiveInterpreter
 	do
 		var msignature = mpropdef.msignature.as(not null)
 		for i in [0..msignature.arity[ do
+			var mp = msignature.mparameters[i]
+
 			# skip test for vararg since the array is instantiated with the correct polymorphic type
-			if msignature.vararg_rank == i then continue
+			if mp.is_vararg then continue
 
 			# skip if the cast is not required
 			var origmtype =  mpropdef.mproperty.intro.msignature.mparameters[i].mtype
@@ -538,7 +540,7 @@ class NaiveInterpreter
 			#print "{mpropdef}: {mpropdef.mproperty.intro.msignature.mparameters[i]}"
 
 			# get the parameter type
-			var mtype = msignature.mparameters[i].mtype
+			var mtype = mp.mtype
 			var anchor = args.first.mtype.as(MClassType)
 			var amtype = mtype.anchor_to(self.mainmodule, anchor)
 			if not args[i+1].mtype.is_subtype(self.mainmodule, anchor, amtype) then
