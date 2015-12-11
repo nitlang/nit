@@ -1194,3 +1194,34 @@ fun glPolygonOffset(factor, units: Float) `{ glPolygonOffset(factor, units); `}
 
 # Specify the width of rasterized lines
 fun glLineWidth(width: Float) `{ glLineWidth(width); `}
+
+# Get the value of the parameter `pname`
+fun glGetBooleanv(pname: GLGetParameterName): Bool `{
+	GLboolean v;
+	glGetBooleanv(pname, &v);
+	return v;
+`}
+
+# Get the value of the parameter `pname`
+fun glGetFloatv(pname: GLGetParameterName): Float `{
+	GLfloat v;
+	glGetFloatv(pname, &v);
+	return v;
+`}
+
+# Get the value of the parameter `pname`
+fun glGetIntegerv(pname: GLGetParameterName): Int `{
+	GLint v;
+	glGetIntegerv(pname, &v);
+	return v;
+`}
+
+fun gl_MAX_TEXTURE_SIZE: GLGetParameterName `{ return GL_MAX_TEXTURE_SIZE; `}
+fun gl_MAX_VIEWPORT_DIMS: GLGetParameterName `{ return GL_MAX_VIEWPORT_DIMS; `}
+fun gl_MAX_VERTEX_ATTRIBS: GLGetParameterName `{ return GL_MAX_VERTEX_ATTRIBS; `}
+fun gl_MAX_VERTEX_UNIFORM_VECTORS: GLGetParameterName `{ return GL_MAX_VERTEX_UNIFORM_VECTORS; `}
+fun gl_MAX_VARYING_VECTORS: GLGetParameterName `{ return GL_MAX_VARYING_VECTORS; `}
+fun gl_MAX_COMBINED_TEXTURE_IMAGE_UNITS: GLGetParameterName `{ return GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS; `}
+fun gl_MAX_VERTEX_TEXTURE_IMAGE_UNITS: GLGetParameterName `{ return GL_MAX_VERTEX_TEXTURE_IMAGE_UNITS; `}
+fun gl_MAX_TEXTURE_IMAGE_UNITS: GLGetParameterName `{ return GL_MAX_TEXTURE_IMAGE_UNITS; `}
+fun gl_MAX_FRAGMENT_UNIFORM_VECTORS: GLGetParameterName `{ return GL_MAX_FRAGMENT_UNIFORM_VECTORS; `}

@@ -22,8 +22,10 @@ module display_android is
 end
 
 import ::android
+intrude import android::load_image
 
 private import gamnit::egl
+intrude import textures
 
 redef class GamnitDisplay
 
@@ -44,4 +46,30 @@ redef class GamnitDisplay
 	end
 
 	redef fun close do close_egl
+end
+
+redef class GamnitAssetTexture
+
+	redef fun load_from_platform
+	do
+		jni_env.push_local_frame 4
+
+		var asset_manager = app.asset_manager
+		var bmp = asset_manager.bitmap(path)
+		if bmp.is_java_null then
+			error = new Error("Failed to load texture at '{path}'")
+			jni_env.pop_local_frame
+			return
+		end
+
+		var buf = bmp.copy_pixels
+		loaded = true
+		width = bmp.width.to_f
+		height = bmp.height.to_f
+		var pixels = buf.native_array
+
+		load_from_pixels(pixels, bmp.width, bmp.height, gl_RGBA)
+
+		jni_env.pop_local_frame
+	end
 end

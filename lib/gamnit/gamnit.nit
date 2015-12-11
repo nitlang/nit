@@ -18,6 +18,8 @@ module gamnit
 import app
 
 import display
+import textures
+import programs
 
 import gamnit_android is conditional(android)
 
@@ -56,6 +58,8 @@ redef class App
 
 	redef fun run
 	do
+		if "NIT_TESTING".environ == "true" then exit 0
+
 		# TODO manage exit condition
 		loop frame_full
 	end
