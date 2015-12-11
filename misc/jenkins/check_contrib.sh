@@ -22,7 +22,7 @@
 #
 #     check_contrib.sh check android
 
-projects=`echo lib/*/Makefile examples/*/Makefile contrib/*/Makefile`
+projects=`ls -1 lib/*/Makefile examples/*/Makefile contrib/*/Makefile | grep -v contrib/nitc/`
 rules=$*
 
 failed=
