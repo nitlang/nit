@@ -14,57 +14,71 @@ module parser_base
 # Basic facilities for common parser operations on String sources
 class StringProcessor
 	# Source document to parse
-	private var src: String
+	protected var src: String
+
+	# Length of the source document
+	protected var len: Int is noinit
 
 	# Current position in `src`
-	private var pos = 0
+	protected var pos = 0
 
 	# Position at which current line started
-	private var line_start = 0
+	protected var line_start = 0
 
 	# Current line in `src`
-	private var line = 1
+	protected var line = 1
 
 	# Offset in the current line
-	private fun line_offset: Int do return pos - line_start + 1
+	protected fun line_offset: Int do return pos - line_start + 1
+
+	init do
+		_len = src.length
+	end
 
 	# Gives the current location in the `src`
 	fun current_location: Location do return new Location(line, line_offset)
 
 	# Advances in `src` until a non-whitespace character is encountered
-	private fun ignore_whitespaces do
-		var srclen = src.length
-		if pos >= srclen then return
-		var c = src[pos]
+	protected fun ignore_whitespaces do
+		var srclen = _len
+		var p = _pos
+		if p >= srclen then return
+		var c = src[p]
 		while c.is_whitespace do
-			pos += 1
-			if pos >= srclen then break
+			p += 1
+			if p >= srclen then break
 			if c == '\n' then
-				line += 1
-				line_start = pos
+				_line += 1
+				_line_start = p
 			end
-			c = src[pos]
+			c = src[p]
 		end
+		_pos = p
+		return
 	end
 
 	# Reads characters until pattern `s` is found
-	private fun ignore_until(s: String): Int do
-		if s.length == 0 then return pos
-		var srclen = src.length
-		if pos >= srclen then return -1
+	protected fun ignore_until(s: String): Int do
+		if s.length == 0 then return _pos
+		var srclen = _len
+		var p = _pos
+		if p >= srclen then return -1
 		loop
 			var c = s[0]
-			var src_c = src[pos]
+			var src_c = src[p]
 			while src_c != c do
-				pos += 1
-				if pos >= srclen then return -1
+				p += 1
+				if p >= srclen then
+					_pos = p
+					return -1
+				end
 				if src_c == '\n' then
 					line += 1
 					line_start= pos
 				end
-				src_c = src[pos]
+				src_c = src[p]
 			end
-			var relpos = pos
+			var relpos = p
 			var fnd = true
 			for i in s do
 				if relpos >= srclen then
@@ -72,15 +86,27 @@ class StringProcessor
 					break
 				end
 				if src[relpos] != i then
-					pos += 1
+					p += 1
 					fnd = false
 					break
 				end
 				relpos += 1
 			end
-			if fnd then return pos
+			if fnd then
+				_pos = p
+				return p
+			end
 		end
 	end
+
+	# Ignores any printable character until a whitespace is encountered
+	protected fun ignore_until_whitespace: Int do
+		while not src[pos].is_whitespace do pos += 1
+		return pos
+	end
+
+	# Returns the current location as a `Location` object
+	protected fun hot_location: Location do return new Location(line, line_offset)
 end
 
 # Information about the location of an entity in a source document

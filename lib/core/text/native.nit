@@ -31,6 +31,21 @@ redef class Byte
 	end
 end
 
+redef class Int
+	# Returns the code_point from a utf16 surrogate pair
+	#
+	#     assert 0xD83DDE02.from_utf16_surr == 0x1F602
+	fun from_utf16_surr: Int do
+		var hi = (self & 0xFFFF0000) >> 16
+		var lo = self & 0xFFFF
+		var cp = 0
+		cp += (hi - 0xD800) << 10
+		cp += lo - 0xDC00
+		cp += 0x10000
+		return cp
+	end
+end
+
 # Native strings are simple C char *
 extern class NativeString `{ char* `}
 	# Creates a new NativeString with a capacity of `length`
