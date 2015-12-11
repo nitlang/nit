@@ -309,9 +309,10 @@ class OptionContext
 		end
 	end
 
-	# Parse and assign options everywhere in the argument list
-	fun parse(argv: Collection[String])
+	# Parse and assign options in `argv` or `args`
+	fun parse(argv: nullable Collection[String])
 	do
+		if argv == null then argv = args
 		var it = argv.iterator
 		parse_intern(it)
 	end
