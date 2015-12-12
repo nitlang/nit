@@ -592,7 +592,6 @@ end
 # A set implemented with an Array.
 class ArraySet[E]
 	super Set[E]
-	super Cloneable
 
 	# The stored elements.
 	private var array: Array[E] is noinit

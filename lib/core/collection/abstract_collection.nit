@@ -409,6 +409,7 @@ end
 #      assert s.has(b)      ==  true
 interface Set[E]
 	super SimpleCollection[E]
+	super Cloneable
 
 	redef fun has_only(item)
 	do
@@ -470,6 +471,8 @@ interface Set[E]
 		for v in self do if other.has(v) then nhs.add(v)
 		return nhs
 	end
+
+	redef fun clone do return union(self)
 
 	# Returns a new instance of `Set`.
 	#
