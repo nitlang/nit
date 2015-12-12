@@ -177,7 +177,8 @@ class GamnitSubtexture
 end
 
 redef class Sys
-	private var all_root_textures = new TextureSet
+	# All declared root textures
+	var all_root_textures = new TextureSet
 end
 
 # Group of `Texture`

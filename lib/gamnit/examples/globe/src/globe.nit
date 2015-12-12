@@ -342,7 +342,7 @@ redef class App
 		assert gl_error == gl_NO_ERROR else print gl_error
 
 		# Prepare to draw
-		for tex in [texture_seas, texture_earth, texture_night, texture_elevation, texture_clouds] do
+		for tex in all_root_textures do
 			tex.load
 			glTexParameteri(gl_TEXTURE_2D, gl_TEXTURE_MIN_FILTER, gl_LINEAR)
 			glTexParameteri(gl_TEXTURE_2D, gl_TEXTURE_MAG_FILTER, gl_LINEAR)
