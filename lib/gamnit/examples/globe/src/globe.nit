@@ -400,58 +400,55 @@ redef class App
 
 	private var clock = new Clock
 
-	redef fun frame_core
+	redef fun frame_core(display)
 	do
-		var display = display
-		if display != null then
-			var t = clock.total.to_f/3.0 + 0.75*pi
+		var t = clock.total.to_f/3.0 + 0.75*pi
 
-			var gl_error = glGetError
-			assert gl_error == gl_NO_ERROR else print gl_error
+		var gl_error = glGetError
+		assert gl_error == gl_NO_ERROR else print gl_error
 
-			glClear(gl_COLOR_BUFFER_BIT | gl_DEPTH_BUFFER_BIT)
-			program.use
+		glClear(gl_COLOR_BUFFER_BIT | gl_DEPTH_BUFFER_BIT)
+		program.use
 
-			# Rotate world
-			# FIXME do this cleanly by moving the camera
-			var mvp = new Matrix.rotation(t, 0.0, 1.0, 0.0) * camera.mvp_matrix
-			program.mvp.uniform mvp
-			program.camera.uniform(-t.sin, -0.8, -t.cos)
+		# Rotate world
+		# FIXME do this cleanly by moving the camera
+		var mvp = new Matrix.rotation(t, 0.0, 1.0, 0.0) * camera.mvp_matrix
+		program.mvp.uniform mvp
+		program.camera.uniform(-t.sin, -0.8, -t.cos)
 
-			# Planet
-			program.coord.array(planet.vertices, 3)
-			program.tex_coord.array(planet.texture_coords, 2)
-			program.normal.array(planet.normals, 3)
-			program.tex.uniform 0
-			program.use_texture.uniform true
-			program.color.uniform(1.0, 1.0, 1.0, 1.0)
-			program.is_surface.uniform true
-			glDrawElements(gl_TRIANGLES, planet.indices.length, gl_UNSIGNED_SHORT, planet.indices_c.native_array)
+		# Planet
+		program.coord.array(planet.vertices, 3)
+		program.tex_coord.array(planet.texture_coords, 2)
+		program.normal.array(planet.normals, 3)
+		program.tex.uniform 0
+		program.use_texture.uniform true
+		program.color.uniform(1.0, 1.0, 1.0, 1.0)
+		program.is_surface.uniform true
+		glDrawElements(gl_TRIANGLES, planet.indices.length, gl_UNSIGNED_SHORT, planet.indices_c.native_array)
 
-			# Clouds
-			program.coord.array(clouds.vertices, 3)
-			program.tex_coord.array(clouds.texture_coords, 2)
-			program.normal.array(clouds.normals, 3)
-			program.tex.uniform 4
-			program.color.uniform(1.0, 1.0, 1.0, 0.5) # Half transparency
-			program.is_surface.uniform false
-			glDrawElements(gl_TRIANGLES, clouds.indices.length, gl_UNSIGNED_SHORT, clouds.indices_c.native_array)
+		# Clouds
+		program.coord.array(clouds.vertices, 3)
+		program.tex_coord.array(clouds.texture_coords, 2)
+		program.normal.array(clouds.normals, 3)
+		program.tex.uniform 4
+		program.color.uniform(1.0, 1.0, 1.0, 0.5) # Half transparency
+		program.is_surface.uniform false
+		glDrawElements(gl_TRIANGLES, clouds.indices.length, gl_UNSIGNED_SHORT, clouds.indices_c.native_array)
 
-			# Atmo
-			program.coord.array(atmo.vertices, 3)
-			program.tex_coord.array(atmo.texture_coords, 2)
-			program.normal.array(atmo.normals, 3)
-			program.color.uniform(0.0, 0.8, 1.0, 0.02) # Blueish
-			program.is_surface.uniform false
-			program.use_texture.uniform false
-			glDrawElements(gl_TRIANGLES, atmo.indices.length, gl_UNSIGNED_SHORT, atmo.indices_c.native_array)
-			assert program.use_texture.is_active
+		# Atmo
+		program.coord.array(atmo.vertices, 3)
+		program.tex_coord.array(atmo.texture_coords, 2)
+		program.normal.array(atmo.normals, 3)
+		program.color.uniform(0.0, 0.8, 1.0, 0.02) # Blueish
+		program.is_surface.uniform false
+		program.use_texture.uniform false
+		glDrawElements(gl_TRIANGLES, atmo.indices.length, gl_UNSIGNED_SHORT, atmo.indices_c.native_array)
+		assert program.use_texture.is_active
 
-			display.flip
+		display.flip
 
-			gl_error = glGetError
-			assert gl_error == gl_NO_ERROR else print gl_error
-		end
+		gl_error = glGetError
+		assert gl_error == gl_NO_ERROR else print gl_error
 	end
 
 	redef fun on_stop

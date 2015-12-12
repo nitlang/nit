@@ -40,7 +40,7 @@ redef class App
 	# Core of the frame logic, executed only when the display is visible
 	#
 	# This method should be redefined by user modules to customize the behavior of the game.
-	protected fun frame_core do end
+	protected fun frame_core(display: GamnitDisplay) do end
 
 	# Full frame logic, executed even if the display is not visible
 	#
@@ -51,7 +51,7 @@ redef class App
 	protected fun frame_full
 	do
 		var display = display
-		if display != null then frame_core
+		if display != null then frame_core(display)
 
 		feed_events
 	end
