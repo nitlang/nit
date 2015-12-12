@@ -213,7 +213,14 @@ extern class AndroidKeyEvent `{AInputEvent *`}
 	# Hardware code of the key raising this event
 	fun key_code: Int `{ return AKeyEvent_getKeyCode(self); `}
 
-	redef fun to_c `{
+	redef fun to_c
+	do
+		var i = native_to_c
+		if i == 0 then return null
+		return i.code_point
+	end
+
+	private fun native_to_c: Int `{
 		int code = AKeyEvent_getKeyCode(self);
 		if (code >= AKEYCODE_0 && code <= AKEYCODE_9)
 			return '0'+code-AKEYCODE_0;
