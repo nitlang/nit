@@ -62,29 +62,15 @@ abstract class Texture
 	# Prepare a subtexture from this texture
 	fun subtexture(left, top, width, height: Numeric): GamnitSubtexture
 	do
-		# We want only floats
-		left = left.to_f
-		top = top.to_f
-		width = width.to_f
-		height = height.to_f
-
 		# Setup the subtexture
-		var subtex = new GamnitSubtexture(root)
-		subtex.width = width
-		subtex.height = height
-
-		subtex.offset_left = offset_left + left / root.width
-		subtex.offset_top = offset_top + top / root.height
-		subtex.offset_right = offset_left + width / root.width
-		subtex.offset_bottom = offset_top + height / root.height
-
+		var subtex = new GamnitSubtexture(root, self, left.to_f, top.to_f, width.to_f, height.to_f)
 		return subtex
 	end
 
-	private fun offset_left: Float do return 0.0
-	private fun offset_top: Float do return 0.0
-	private fun offset_right: Float do return 1.0
-	private fun offset_bottom: Float do return 1.0
+	fun offset_left: Float do return 0.0
+	fun offset_top: Float do return 0.0
+	fun offset_right: Float do return 1.0
+	fun offset_bottom: Float do return 1.0
 end
 
 # Texture with its own pixels
@@ -167,12 +153,27 @@ class GamnitSubtexture
 
 	redef var root
 
+	# Parent texture, from which this texture was created
+	var parent: Texture
+
+	# Left border of this texture compared to `parent`
+	var left: Float
+
+	# Top border of this texture compared to `parent`
+	var top: Float
+
+	private fun set_wh(width, height: Float)
+	is autoinit do
+		self.width = width
+		self.height = height
+	end
+
 	redef fun load(force) do root.load(force)
 
-	redef var offset_left = 0.0
-	redef var offset_top = 0.0
-	redef var offset_right = 1.0
-	redef var offset_bottom = 1.0
+	redef var offset_left = parent.offset_left + left / root.width is lazy
+	redef var offset_top = parent.offset_top + top / root.height is lazy
+	redef var offset_right = offset_left + width / root.width is lazy
+	redef var offset_bottom = offset_top + height / root.height is lazy
 end
 
 redef class Sys
