@@ -187,7 +187,7 @@ Edge
 7:MEntity
 7:MModule
 =properties=JsonObject(3):
-{"location":"a\/b\/Bar.java:1,1--1,1","name":"Bar","mdoc":["The first file."]}
+{"location":"a/b/Bar.java:1,1--1,1","name":"Bar","mdoc":["The first file."]}
 
 Edge
 =type=10:INTRODUCES
@@ -200,7 +200,7 @@ Edge
 7:MEntity
 7:MModule
 =properties=JsonObject(3):
-{"location":"a\/b\/Bar.java:1,1--1,1","name":"Bar","mdoc":["The first file."]}
+{"location":"a/b/Bar.java:1,1--1,1","name":"Bar","mdoc":["The first file."]}
 ----
 =to=Entity#12:classa_b_bar
 =labels=Array(3):
@@ -208,7 +208,7 @@ Edge
 7:MEntity
 6:MClass
 =properties=JsonObject(4):
-{"kind":"class","visibility":"public","name":"Bar","location":"a\/b\/Bar.class:5,1--100,10"}
+{"kind":"class","visibility":"public","name":"Bar","location":"a/b/Bar.class:5,1--100,10"}
 
 Edge
 =type=7:DEFINES
@@ -221,7 +221,7 @@ Edge
 7:MEntity
 7:MModule
 =properties=JsonObject(3):
-{"location":"a\/b\/Bar.java:1,1--1,1","name":"Bar","mdoc":["The first file."]}
+{"location":"a/b/Bar.java:1,1--1,1","name":"Bar","mdoc":["The first file."]}
 ----
 =to=Entity#0:
 =labels=Array(3):
@@ -229,7 +229,7 @@ Edge
 7:MEntity
 9:MClassDef
 =properties=JsonObject(3):
-{"location":"a\/b\/Bar.class:5,1--100,10","is_intro":true,"name":"Bar"}
+{"location":"a/b/Bar.class:5,1--100,10","is_intro":true,"name":"Bar"}
 
 Edge
 =type=8:DECLARES
@@ -284,7 +284,7 @@ Edge
 7:MEntity
 6:MClass
 =properties=JsonObject(4):
-{"kind":"class","visibility":"public","name":"Bar","location":"a\/b\/Bar.class:5,1--100,10"}
+{"kind":"class","visibility":"public","name":"Bar","location":"a/b/Bar.class:5,1--100,10"}
 ----
 =to=Entity#0:
 =labels=Array(4):
@@ -315,7 +315,7 @@ Edge
 7:MEntity
 6:MClass
 =properties=JsonObject(4):
-{"kind":"class","visibility":"public","name":"Bar","location":"a\/b\/Bar.class:5,1--100,10"}
+{"kind":"class","visibility":"public","name":"Bar","location":"a/b/Bar.class:5,1--100,10"}
 
 Edge
 =type=9:BOUNDTYPE
@@ -328,7 +328,7 @@ Edge
 7:MEntity
 9:MClassDef
 =properties=JsonObject(3):
-{"location":"a\/b\/Bar.class:5,1--100,10","is_intro":true,"name":"Bar"}
+{"location":"a/b/Bar.class:5,1--100,10","is_intro":true,"name":"Bar"}
 ----
 =to=Entity#0:
 =labels=Array(4):
@@ -350,7 +350,7 @@ Edge
 7:MEntity
 9:MClassDef
 =properties=JsonObject(3):
-{"location":"a\/b\/Bar.class:5,1--100,10","is_intro":true,"name":"Bar"}
+{"location":"a/b/Bar.class:5,1--100,10","is_intro":true,"name":"Bar"}
 ----
 =to=Entity#12:classa_b_bar
 =labels=Array(3):
@@ -358,7 +358,7 @@ Edge
 7:MEntity
 6:MClass
 =properties=JsonObject(4):
-{"kind":"class","visibility":"public","name":"Bar","location":"a\/b\/Bar.class:5,1--100,10"}
+{"kind":"class","visibility":"public","name":"Bar","location":"a/b/Bar.class:5,1--100,10"}
 
 Edge
 =type=9:CLASSTYPE
@@ -763,7 +763,7 @@ Edge
 7:MEntity
 7:MModule
 =properties=JsonObject(3):
-{"location":"a\/b\/Bar.java:1,1--1,1","name":"Bar","mdoc":["The first file."]}
+{"location":"a/b/Bar.java:1,1--1,1","name":"Bar","mdoc":["The first file."]}
 
 Edge
 =type=10:INTRODUCES
@@ -776,7 +776,7 @@ Edge
 7:MEntity
 7:MModule
 =properties=JsonObject(3):
-{"location":"a\/b\/Bar.java:1,1--1,1","name":"Bar","mdoc":["The first file."]}
+{"location":"a/b/Bar.java:1,1--1,1","name":"Bar","mdoc":["The first file."]}
 ----
 =to=Entity#12:classa_b_bar
 =labels=Array(3):
@@ -784,7 +784,7 @@ Edge
 7:MEntity
 6:MClass
 =properties=JsonObject(4):
-{"kind":"class","visibility":"public","name":"Bar","location":"a\/b\/Bar.class:5,1--100,10"}
+{"kind":"class","visibility":"public","name":"Bar","location":"a/b/Bar.class:5,1--100,10"}
 
 Edge
 =type=7:DEFINES
@@ -797,7 +797,7 @@ Edge
 7:MEntity
 7:MModule
 =properties=JsonObject(3):
-{"location":"a\/b\/Bar.java:1,1--1,1","name":"Bar","mdoc":["The first file."]}
+{"location":"a/b/Bar.java:1,1--1,1","name":"Bar","mdoc":["The first file."]}
 ----
 =to=Entity#0:
 =labels=Array(3):
@@ -805,7 +805,7 @@ Edge
 7:MEntity
 9:MClassDef
 =properties=JsonObject(3):
-{"location":"a\/b\/Bar.class:5,1--100,10","is_intro":true,"name":"Bar"}
+{"location":"a/b/Bar.class:5,1--100,10","is_intro":true,"name":"Bar"}
 
 Edge
 =type=8:DECLARES
@@ -860,7 +860,7 @@ Edge
 7:MEntity
 6:MClass
 =properties=JsonObject(4):
-{"kind":"class","visibility":"public","name":"Bar","location":"a\/b\/Bar.class:5,1--100,10"}
+{"kind":"class","visibility":"public","name":"Bar","location":"a/b/Bar.class:5,1--100,10"}
 ----
 =to=Entity#0:
 =labels=Array(4):
@@ -891,7 +891,7 @@ Edge
 7:MEntity
 6:MClass
 =properties=JsonObject(4):
-{"kind":"class","visibility":"public","name":"Bar","location":"a\/b\/Bar.class:5,1--100,10"}
+{"kind":"class","visibility":"public","name":"Bar","location":"a/b/Bar.class:5,1--100,10"}
 
 Edge
 =type=9:BOUNDTYPE
@@ -904,7 +904,7 @@ Edge
 7:MEntity
 9:MClassDef
 =properties=JsonObject(3):
-{"location":"a\/b\/Bar.class:5,1--100,10","is_intro":true,"name":"Bar"}
+{"location":"a/b/Bar.class:5,1--100,10","is_intro":true,"name":"Bar"}
 ----
 =to=Entity#0:
 =labels=Array(4):
@@ -926,7 +926,7 @@ Edge
 7:MEntity
 9:MClassDef
 =properties=JsonObject(3):
-{"location":"a\/b\/Bar.class:5,1--100,10","is_intro":true,"name":"Bar"}
+{"location":"a/b/Bar.class:5,1--100,10","is_intro":true,"name":"Bar"}
 ----
 =to=Entity#12:classa_b_bar
 =labels=Array(3):
@@ -934,7 +934,7 @@ Edge
 7:MEntity
 6:MClass
 =properties=JsonObject(4):
-{"kind":"class","visibility":"public","name":"Bar","location":"a\/b\/Bar.class:5,1--100,10"}
+{"kind":"class","visibility":"public","name":"Bar","location":"a/b/Bar.class:5,1--100,10"}
 
 Edge
 =type=9:CLASSTYPE
@@ -1168,7 +1168,7 @@ Edge
 7:MEntity
 7:MModule
 =properties=JsonObject(3):
-{"location":"a\/b\/Bar.java:1,1--1,1","name":"Bar","mdoc":["The first file."]}
+{"location":"a/b/Bar.java:1,1--1,1","name":"Bar","mdoc":["The first file."]}
 
 Edge
 =type=10:INTRODUCES
@@ -1181,7 +1181,7 @@ Edge
 7:MEntity
 7:MModule
 =properties=JsonObject(3):
-{"location":"a\/b\/Bar.java:1,1--1,1","name":"Bar","mdoc":["The first file."]}
+{"location":"a/b/Bar.java:1,1--1,1","name":"Bar","mdoc":["The first file."]}
 ----
 =to=Entity#8:classbaz
 =labels=Array(3):
@@ -1202,7 +1202,7 @@ Edge
 7:MEntity
 7:MModule
 =properties=JsonObject(3):
-{"location":"a\/b\/Bar.java:1,1--1,1","name":"Bar","mdoc":["The first file."]}
+{"location":"a/b/Bar.java:1,1--1,1","name":"Bar","mdoc":["The first file."]}
 ----
 =to=Entity#0:
 =labels=Array(3):

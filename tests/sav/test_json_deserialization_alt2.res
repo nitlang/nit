@@ -21,7 +21,7 @@
 <- false p4ssw0rd> 1111 	f"\/> true>
 
 # Json:
-{"b": false, "c": "b", "f": 123.123, "i": 2345, "s": "new line ->\n<-", "n": null, "ii": 1111, "ss": "\tf\"\r\\\/", "d": null}
+{"b": false, "c": "b", "f": 123.123, "i": 2345, "s": "new line ->\n<-", "n": null, "ii": 1111, "ss": "\tf\"\r\\/", "d": null}
 
 # Nit:
 <E: a: hello, 1234, 123.4; b: hella, 2345, 234.5>
