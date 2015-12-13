@@ -38,7 +38,7 @@ abstract class Camera
 	fun mvp_matrix: Matrix is abstract
 end
 
-# Simple camera with perspective oriented with Euler angles (`pitch`, `yaw`, `roll`)
+# Simple camera with perspective oriented with Euler angles (`pitch, yaw, roll`)
 class EulerCamera
 	super Camera
 
@@ -63,8 +63,8 @@ class EulerCamera
 
 	# Clipping wall the farthest of the camera, in world dimensions
 	#
-	# Default at `100.0` but this one should be adapted to each context.
-	var far = 100.0 is writable
+	# Default at `10000.0` but this one should be adapted to each context.
+	var far = 10000.0 is writable
 
 	# Look around sensitivity, used by `turn`
 	var sensitivity = 0.005 is writable
@@ -126,6 +126,30 @@ class EulerCamera
 			display.aspect_ratio, near, far)
 
 		return view * projection
+	end
+
+	# Reset the camera position so that `height` world units are visible on the y axis at z=0
+	#
+	# By default, `height` is set to `display.height`.
+	#
+	# After the reset, the camera sits on the Z axis and rotation values are reset to 0.
+	# The X axis is horizontal on the screen and the Y axis is vertical.
+	# Higher values on the Z axis are closer to the camera.
+	fun reset_height(height: nullable Float)
+	do
+		if height == null then height = display.height.to_f
+
+		var opp = height / 2.0
+		var angle = field_of_view_y / 2.0
+		var adj = opp / angle.tan
+
+		position.x = 0.0
+		position.y = 0.0
+		position.z = adj
+
+		pitch = 0.0
+		yaw = 0.0
+		roll = 0.0
 	end
 end
 
