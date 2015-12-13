@@ -293,14 +293,10 @@ class SDLMouseEvent
 	super PointerEvent
 	super SDLInputEvent
 
-	redef var x: Float
-	redef var y: Float
+	redef var x
+	redef var y
 
-	private init (x, y: Float)
-	do
-		self.x = x
-		self.y = y
-	end
+	redef fun is_move do return false
 end
 
 # MouseButtonEvent used to get information when a button is pressed/depressed
@@ -357,6 +353,8 @@ class SDLMouseMotionEvent
 
 	redef var pressed
 	redef fun depressed do return not pressed
+
+	redef fun is_move do return true
 
 	init (x, y, rel_x, rel_y: Float, pressed: Bool)
 	do

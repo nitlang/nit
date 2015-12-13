@@ -35,6 +35,9 @@ interface PointerEvent
 	# Is down? either going down or already down
 	fun pressed: Bool is abstract
 	fun depressed: Bool is abstract
+
+	# Is this a movement event?
+	fun is_move: Bool is abstract
 end
 
 # A motion event on screen composed of many `PointerEvent`
