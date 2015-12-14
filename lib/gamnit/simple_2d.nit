@@ -96,6 +96,7 @@ redef class App
 
 		# Aim for pixel resolution at level 0
 		camera.reset_height
+		camera.near = 100.0
 
 		return camera
 	end
