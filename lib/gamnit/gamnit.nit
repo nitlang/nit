@@ -59,8 +59,6 @@ redef class App
 
 	redef fun run
 	do
-		if "NIT_TESTING".environ == "true" then exit 0
-
 		# TODO manage exit condition
 		loop frame_full
 	end
@@ -78,4 +76,12 @@ redef class App
 	#
 	# This method should be refined by client modules to react to user inputs.
 	fun accept_event(event: InputEvent): Bool do return false
+end
+
+redef class Sys
+	redef fun run
+	do
+		if "NIT_TESTING".environ == "true" then exit 0
+		super
+	end
 end
