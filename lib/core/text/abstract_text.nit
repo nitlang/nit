@@ -1732,6 +1732,19 @@ redef class Char
 	do
 		return self.is_numeric or self.is_alpha
 	end
+
+	# Returns `self` to its int value
+	#
+	# REQUIRE: `is_hexdigit`
+	fun from_hex: Int do
+		if self >= '0' and self <= '9' then return code_point - 0x30
+		if self >= 'A' and self <= 'F' then return code_point - 0x37
+		if self >= 'a' and self <= 'f' then return code_point - 0x57
+		# Happens if self is not a hexdigit
+		assert self.is_hexdigit
+		# To make flow analysis happy
+		abort
+	end
 end
 
 redef class Collection[E]
