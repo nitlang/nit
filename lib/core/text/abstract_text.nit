@@ -1600,6 +1600,12 @@ redef class Char
 	#     assert 'ま'.bytes == [0xE3u8, 0x81u8, 0xBEu8]
 	fun bytes: SequenceRead[Byte] do return to_s.bytes
 
+	# Is `self` an UTF-16 surrogate pair ?
+	fun is_surrogate: Bool do
+		var cp = code_point
+		return cp >= 0xD800 and cp <= 0xDFFF
+	end
+
 	# Length of `self` in a UTF-8 String
 	private fun u8char_len: Int do
 		var c = self.code_point
