@@ -94,7 +94,7 @@ redef class App
 		# Standardize the UI size to look like a 1600 pixels high screen.
 		# Meaning that the controls have a size proportional to the height of each screen.
 		# In the code, we can use "pixel" precision as if the target screen was 1600 pixels high.
-		ui_camera.reset_height 1600.0
+		ui_camera.reset_height 800.0
 
 		# Add the joystick to the UI
 		ui_sprites.add new Sprite(spritesheet_controls.forward,
