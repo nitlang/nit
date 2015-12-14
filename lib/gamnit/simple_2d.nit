@@ -29,7 +29,7 @@
 #   It can be used to standardize the size of the UI across devices.
 #   It is used to position the sprites in `App::ui_sprites`.
 #
-# See the sample game at `examples/asteronits/`.
+# See the sample game at `contrib/asteronits/`.
 module simple_2d
 
 import glesv2
