@@ -248,7 +248,17 @@ abstract class Text
 	# If `self` contains only digits and alpha <= 'f', return the corresponding integer.
 	#
 	#     assert "ff".to_hex == 255
-	fun to_hex: Int do return a_to(16)
+	fun to_hex(pos, ln: nullable Int): Int do
+		var res = 0
+		if pos == null then pos = 0
+		if ln == null then ln = length - pos
+		var max = pos + ln
+		for i in [pos .. max[ do
+			res <<= 4
+			res += self[i].from_hex
+		end
+		return res
+	end
 
 	# If `self` contains only digits <= '7', return the corresponding integer.
 	#
