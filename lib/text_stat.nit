@@ -319,25 +319,20 @@ redef class FlatString
 		return super
 	end
 
-	redef fun last_byte=(v) do
-		sys.last_byte_call += 1
-		super
-	end
-
 	init do
 		sys.flatstr_allocations += 1
 	end
 
-	redef init with_infos(items, bytelen, from, to)
+	redef init with_infos(items, bytelen, from)
 	do
 		self.items = items
 		self.bytelen = bytelen
 		sys.str_bytelen.inc bytelen
 		first_byte = from
-		last_byte = to
+		length = items.utf8_length(from, bytelen)
 	end
 
-	redef init full(items, bytelen, from, to, length)
+	redef init full(items, bytelen, from, length)
 	do
 		self.items = items
 		self.length = length
@@ -345,7 +340,6 @@ redef class FlatString
 		sys.str_bytelen.inc bytelen
 		sys.str_full_created += 1
 		first_byte = from
-		last_byte = to
 	end
 
 	private var length_cache: nullable Int = null
