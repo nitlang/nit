@@ -2110,18 +2110,19 @@ class SeparateCompilerVisitor
 			var res = self.new_expr("{recv}[{arguments[1]}]", compiler.mainmodule.object_type)
 			res.mcasttype = ret_type.as(not null)
 			self.ret(res)
-			return
+			return true
 		else if pname == "[]=" then
 			self.add("{recv}[{arguments[1]}]={arguments[2]};")
-			return
+			return true
 		else if pname == "length" then
 			self.ret(self.new_expr("((struct instance_{nclass.c_name}*){arguments[0]})->length", ret_type.as(not null)))
-			return
+			return true
 		else if pname == "copy_to" then
 			var recv1 = "((struct instance_{nclass.c_name}*){arguments[1]})->values"
 			self.add("memmove({recv1}, {recv}, {arguments[2]}*sizeof({elttype.ctype}));")
-			return
+			return true
 		end
+		return false
 	end
 
 	redef fun native_array_get(nat, i)

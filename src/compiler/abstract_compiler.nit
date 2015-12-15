@@ -1180,7 +1180,7 @@ abstract class AbstractCompilerVisitor
 
 	fun calloc_array(ret_type: MType, arguments: Array[RuntimeVariable]) is abstract
 
-	fun native_array_def(pname: String, ret_type: nullable MType, arguments: Array[RuntimeVariable]) is abstract
+	fun native_array_def(pname: String, ret_type: nullable MType, arguments: Array[RuntimeVariable]): Bool do return false
 
 	# Return an element of a native array.
 	# The method is unsafe and is just a direct wrapper for the specific implementation of native arrays
@@ -2491,8 +2491,7 @@ redef class AMethPropdef
 				return true
 			end
 		else if cname == "NativeArray" then
-			v.native_array_def(pname, ret, arguments)
-			return true
+			return v.native_array_def(pname, ret, arguments)
 		else if cname == "Int8" then
 			if pname == "output" then
 				v.add("printf(\"%\"PRIi8 \"\\n\", {arguments.first});")
