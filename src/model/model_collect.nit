@@ -31,7 +31,68 @@ module model_collect
 
 import model
 
+redef class MEntity
+
+	# Collect mentities with a fully qualified `namespace`.
+	fun collect_by_namespace(namespace: String): Array[MEntity] is abstract
+
+	private fun lookup_in(mentities: Collection[MEntity], namespace: String, res: Array[MEntity]) do
+		var parts = namespace.split_once_on("::")
+		var name = parts.shift
+		for mentity in mentities do
+			if mentity.name != name then continue
+			if parts.is_empty then
+				res.add mentity
+			else
+				res.add_all mentity.collect_by_namespace(parts.first)
+			end
+		end
+	end
+end
+
+redef class Model
+	redef fun collect_by_namespace(namespace) do
+		var res = new Array[MEntity]
+		var parts = namespace.split_once_on("::")
+		var name = parts.shift
+		for mentity in mpackages do
+			if mentity.name != name then continue
+			if parts.is_empty then
+				res.add mentity
+			else
+				res.add_all mentity.collect_by_namespace(parts.first)
+			end
+		end
+		return res
+	end
+end
+
+redef class MPackage
+	redef fun collect_by_namespace(namespace) do
+		var res = new Array[MEntity]
+		var root = self.root
+		if root == null then return res
+		lookup_in([root], namespace, res)
+		return res
+	end
+end
+
+redef class MGroup
+	redef fun collect_by_namespace(namespace) do
+		var res = new Array[MEntity]
+		lookup_in(in_nesting.direct_smallers, namespace, res)
+		lookup_in(mmodules, namespace, res)
+		return res
+	end
+end
+
 redef class MModule
+
+	redef fun collect_by_namespace(namespace) do
+		var res = new Array[MEntity]
+		lookup_in(mclassdefs, namespace, res)
+		return res
+	end
 
 	# Collect mclassdefs introduced in `self` with `visibility >= to min_visibility`.
 	fun collect_intro_mclassdefs(min_visibility: MVisibility): Set[MClassDef] do
@@ -260,6 +321,13 @@ redef class MClass
 end
 
 redef class MClassDef
+
+	redef fun collect_by_namespace(namespace) do
+		var res = new Array[MEntity]
+		lookup_in(mpropdefs, namespace, res)
+		return res
+	end
+
 	# Collect mpropdefs in 'self' with `visibility >= min_visibility`.
 	fun collect_mpropdefs(min_visibility: MVisibility): Set[MPropDef] do
 		var res = new HashSet[MPropDef]

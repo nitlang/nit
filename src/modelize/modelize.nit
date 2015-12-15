@@ -16,3 +16,24 @@
 module modelize
 
 import modelize_property
+
+redef class ModelBuilder
+	# Retrieve the associated AST node of a mentity.
+	# This method is used to associate model entity with syntactic entities.
+	#
+	# If the mentity is not associated with a node, returns null.
+	# This is always the case for MPackage, Mgroup, MClass and MProperty.
+	# MModule, MClassDef and MPropDef can also have no node associated
+	# (like fictive modules of generated attributes/methods).
+	fun mentity2node(mentity: MEntity): nullable ANode
+	do
+		if mentity isa MModule then
+			return mmodule2node(mentity)
+		else if mentity isa MClassDef then
+			return mclassdef2node(mentity)
+		else if mentity isa MPropDef then
+			return mpropdef2node(mentity)
+		end
+		return null
+	end
+end
