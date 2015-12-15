@@ -168,6 +168,7 @@ class TestSuite
 	fun to_xml: HTMLTag do
 		var n = new HTMLTag("testsuite")
 		n.attr("package", mmodule.name)
+		var failure = self.failure
 		if failure != null then
 			var f = new HTMLTag("failure")
 			f.attr("message", failure.to_s)
@@ -194,7 +195,13 @@ class TestSuite
 		end
 		# compile test suite
 		var file = test_file
-		var include_dir = mmodule.location.file.filename.dirname
+		var module_file = mmodule.location.file
+		if module_file == null then
+			toolcontext.error(null, "Error: cannot find module file for {mmodule.name}.")
+			toolcontext.check_errors
+			return
+		end
+		var include_dir = module_file.filename.dirname
 		var cmd = "{nitc} --no-color '{file}.nit' -I {include_dir} -o '{file}.bin' > '{file}.out' 2>&1 </dev/null"
 		var res = sys.system(cmd)
 		var f = new FileReader.open("{file}.out")
@@ -289,6 +296,7 @@ class TestCase
 			var n = new HTMLTag("system-out")
 			n.append "out"
 			tc.add n
+			var error = self.error
 			if error != null then
 				n = new HTMLTag("error")
 				n.attr("message", error.to_s)
@@ -323,6 +331,8 @@ redef class MClassDef
 	# Is the class a TestClass?
 	# i.e. begins with "Test"
 	private fun is_test: Bool do
+		var in_hierarchy = self.in_hierarchy
+		if in_hierarchy == null then return false
 		for sup in in_hierarchy.greaters do
 			if sup.name == "TestSuite" then return true
 		end
@@ -389,7 +399,12 @@ redef class ModelBuilder
 		if f != null then
 			test_file = f
 		else if not test_file.file_exists then
-			var include_dir = mmodule.location.file.filename.dirname
+			var module_file = mmodule.location.file
+			if module_file == null then
+				toolcontext.info("Skip test for {mmodule}, no file found", 2)
+				return ts
+			end
+			var include_dir = module_file.filename.dirname
 			test_file = "{include_dir}/{test_file}"
 		end
 		if not test_file.file_exists then
