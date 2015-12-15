@@ -58,15 +58,11 @@ class NitUnitTester
 			if not mclassdef.is_test then continue
 			if not suite_match_pattern(mclassdef) then continue
 			toolcontext.modelbuilder.total_classes += 1
-			var before_test = mclassdef.before_test
-			var after_test = mclassdef.after_test
 			for mpropdef in mclassdef.mpropdefs do
 				if not mpropdef isa MMethodDef or not mpropdef.is_test then continue
 				if not case_match_pattern(mpropdef) then continue
 				toolcontext.modelbuilder.total_tests += 1
 				var test = new TestCase(suite, mpropdef, toolcontext)
-				test.before_test = before_test
-				test.after_test = after_test
 				suite.add_test test
 			end
 		end
@@ -233,12 +229,6 @@ class TestCase
 	# `ToolContext` to use to display messages and find `nitc` bin.
 	var toolcontext: ToolContext
 
-	# `MMethodDef` to call before the test case.
-	var before_test: nullable MMethodDef = null
-
-	# `MMethodDef` to call after the test case.
-	var after_test: nullable MMethodDef = null
-
 	# Generate the test unit for `self` in `file`.
 	fun write_to_nit(file: Template) do
 		var name = test_method.name
@@ -247,9 +237,9 @@ class TestCase
 			file.addn "\t{name}"
 		else
 			file.addn "\tvar subject = new {test_method.mclassdef.name}.nitunit"
-			if before_test != null then file.addn "\tsubject.{before_test.name}"
+			file.addn "\tsubject.before_test"
 			file.addn "\tsubject.{name}"
-			if after_test != null then file.addn "\tsubject.{after_test.name}"
+			file.addn "\tsubject.after_test"
 		end
 		file.addn "end"
 	end
@@ -314,12 +304,6 @@ redef class MMethodDef
 	# i.e. begins with "test_"
 	private fun is_test: Bool do return name.has_prefix("test_")
 
-	# Is the method a "before_test"?
-	private fun is_before: Bool do return name == "before_test"
-
-	# Is the method a "after_test"?
-	private fun is_after: Bool do return name == "after_test"
-
 	# Is the method a "before_module"?
 	private fun is_before_module: Bool do return mproperty.is_toplevel and name == "before_module"
 
@@ -337,22 +321,6 @@ redef class MClassDef
 			if sup.name == "TestSuite" then return true
 		end
 		return false
-	end
-
-	# "before_test" method for this classdef.
-	private fun before_test: nullable MMethodDef do
-		for mpropdef in mpropdefs do
-			if mpropdef isa MMethodDef and mpropdef.is_before then return mpropdef
-		end
-		return null
-	end
-
-	# "after_test" method for this classdef.
-	private fun after_test: nullable MMethodDef do
-		for mpropdef in mpropdefs do
-			if mpropdef isa MMethodDef and mpropdef.is_after then return mpropdef
-		end
-		return null
 	end
 end
 
