@@ -19,7 +19,7 @@ src/spritesheet_city.nit: bin/texture_atlas_parser
 pre-build: src/controls.nit src/spritesheet_city.nit
 
 check: bin/asteronits
-	bin/asteronits
+	NIT_TESTING=true bin/asteronits
 
 # ---
 # Android
