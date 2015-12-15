@@ -876,21 +876,27 @@ redef class AMethPropdef
 			v.call(superpd, arguments)
 		end
 
+		# First, try intern
 		if mpropdef.is_intern or mpropdef.is_extern then
 			var res = intern_call(v, mpropdef, arguments)
 			if res != v.error_instance then return res
 		end
-
+		# Then, try extern
+		if mpropdef.is_extern then
+			var res = call_extern(v, mpropdef, arguments, f)
+			if res != v.error_instance then return res
+		end
+		# Else try block
 		if n_block != null then
 			v.stmt(self.n_block)
 			return null
 		end
 
+		# Fail if nothing succeed
 		if mpropdef.is_intern then
 			fatal(v, "NOT YET IMPLEMENTED intern {mpropdef}")
 		else if mpropdef.is_extern then
-			var res = call_extern(v, mpropdef, arguments, f)
-			if res != v.error_instance then return res
+			fatal(v, "NOT YET IMPLEMENTED extern {mpropdef}")
 		else
 			fatal(v, "NOT YET IMPLEMENTED <wat?> {mpropdef}")
 		end
@@ -900,7 +906,6 @@ redef class AMethPropdef
 	# Call this extern method
 	protected fun call_extern(v: NaiveInterpreter, mpropdef: MMethodDef, arguments: Array[Instance], f: Frame): nullable Instance
 	do
-		fatal(v, "NOT YET IMPLEMENTED extern {mpropdef}")
 		return v.error_instance
 	end
 
