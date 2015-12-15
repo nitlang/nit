@@ -208,10 +208,11 @@ end
 # Used to play sound, best suited for sounds effects in apps or games
 class SoundPool
 
-	# Error gestion
+	# Latest error on this sound pool
 	var error: nullable Error = null
 
 	private var nsoundpool: NativeSoundPool is noinit
+
 	# The maximum number of simultaneous streams for this SoundPool
 	var max_streams = 10 is writable
 
