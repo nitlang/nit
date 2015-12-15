@@ -83,6 +83,7 @@ class World
 					if object == ship then
 						# The ship is invincible
 						# TODO health and losing
+						ship.hit
 					else
 						object.destroy
 					end
@@ -197,6 +198,9 @@ class Ship
 		world.objects.add bullet
 		world.bullets.add bullet
 	end
+
+	# Something hits the ship
+	fun hit do end
 end
 
 # Asteroid, the main obstacle in this game

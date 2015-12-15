@@ -26,6 +26,7 @@ import gamnit::simple_2d
 
 import game_logic
 import spritesheet
+import app::audio
 
 redef class Spritesheet
 	# Largest meteors, organized by color
@@ -58,6 +59,11 @@ redef class App
 
 	# Current world in play
 	var world = new World(12, 2, display.aspect_ratio) is lazy
+
+	# Sound effects
+	private var fx_fire = new Sound("sounds/fire.mp3")
+	private var fx_explosion_ship = new Sound("sounds/explosion_ship.wav")
+	private var fx_explosion_asteroids = new Sound("sounds/explosion_asteroids.wav")
 
 	redef fun on_create
 	do
@@ -147,6 +153,12 @@ redef class Asteroid
 		sprite = new Sprite(tex, center)
 		super
 	end
+
+	redef fun destroy
+	do
+		super
+		app.fx_explosion_asteroids.play
+	end
 end
 
 redef class Bullet
@@ -184,6 +196,7 @@ redef class Ship
 		# Show or hide the thrust sprite
 		if applied_thrust > 0.0 then
 			thrust_sprite.alpha = 1.0
+
 		else if thrust_sprite.alpha > 0.0 then
 			thrust_sprite.alpha -= dt*4.0
 			if thrust_sprite.alpha < 0.0 then thrust_sprite.alpha = 0.0
@@ -191,6 +204,18 @@ redef class Ship
 
 		# HACK, the "enemy" ship used for the player points downwards
 		sprite.rotation += pi
+	end
+
+	redef fun fire
+	do
+		super
+		app.fx_fire.play
+	end
+
+	redef fun hit
+	do
+		super
+		app.fx_explosion_ship.play
 	end
 end
 
