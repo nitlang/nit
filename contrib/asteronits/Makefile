@@ -32,4 +32,5 @@ android-release: $(shell ${NITLS} -M src/asteronits.nit android) ${NITC} res/dra
 	${NITC} src/touch_ui.nit -m android -o bin/asteronits.apk --release
 
 res/drawable-hdpi/icon.png: art/icon.svg
+	make -C ../inkscape_tools/
 	../inkscape_tools/bin/svg_to_icons --out res --android art/icon.svg
