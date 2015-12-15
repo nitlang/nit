@@ -138,7 +138,8 @@ redef class Text
 	protected fun json_to_nit_string: String do
 		var res = new FlatBuffer.with_capacity(bytelen)
 		var i = 0
-		while i < self.length do
+		var ln = self.length
+		while i < ln do
 			var char = self[i]
 			if char == '\\' then
 				i += 1
@@ -154,21 +155,19 @@ redef class Text
 				else if char == 't' then
 					char = '\t'
 				else if char == 'u' then
-					var code = substring(i + 1, 4)
-					var hx = code.to_hex
-					if hx >= 0xD800 and hx <= 0xDFFF then
-						var lostr = substring(i + 7, 4)
-						if lostr.length < 4 then
-							hx = 0xFFFD
+					var u16_esc = from_utf16_digit(i + 1)
+					char = u16_esc.code_point
+					if char.is_surrogate and i + 10 < ln then
+						if self[i + 5] == '\\' and self[i + 6] == 'u' then
+							u16_esc <<= 16
+							u16_esc += from_utf16_digit(i + 7)
+							char = u16_esc.from_utf16_surr.code_point
+							i += 6
 						else
-							hx <<= 16
-							hx += lostr.to_hex
-							hx = hx.from_utf16_surr
+							char = 0xFFFD.code_point
 						end
-						i += 6
 					end
 					i += 4
-					char = hx.code_point
 				end
 				# `"`, `/` or `\` => Keep `char` as-is.
 			end
