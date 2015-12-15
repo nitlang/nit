@@ -2135,7 +2135,8 @@ redef class AMethPropdef
 		# Try special compilation
 		if mpropdef.is_intern then
 			if compile_intern_to_c(v, mpropdef, arguments) then return
-		else if mpropdef.is_extern then
+		end
+		if mpropdef.is_extern then
 			if mpropdef.mproperty.is_init then
 				if compile_externinit_to_c(v, mpropdef, arguments) then return
 			else
