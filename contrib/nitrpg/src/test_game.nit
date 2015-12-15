@@ -23,7 +23,7 @@ class TestGame
 	super NitrpgTestHelper
 
 	fun test_add_player do
-		var db = load_db("test_add_player")
+		var db = gen_test_db
 		var game = load_game("privat/nit", db)
 		var users = ["Morriar", "xymus"]
 		for name in users do
@@ -34,11 +34,10 @@ class TestGame
 		for player in res do
 			assert users.has(player.name)
 		end
-		db.drop
 	end
 
 	fun test_load_player do
-		var db = load_db("test_load_player")
+		var db = gen_test_db
 		var game = load_game("privat/nit", db)
 		var ogame = load_game("Morriar/nit", db)
 
@@ -51,11 +50,10 @@ class TestGame
 		assert game.load_player("Morriar").name == "Morriar"
 		assert ogame.load_player("privat").name == "privat"
 		assert ogame.load_player("Morriar") == null
-		db.drop
 	end
 
 	fun test_load_players do
-		var db = load_db("test_load_players")
+		var db = gen_test_db
 		var game = load_game("privat/nit", db)
 		var ogame = load_game("Morriar/nit", db)
 
@@ -69,7 +67,6 @@ class TestGame
 		var players = game.load_players
 		var ok = ["Morriar", "xymus"]
 		for player in players.values do assert ok.has(player.name)
-		db.drop
 	end
 end
 
@@ -77,47 +74,43 @@ class TestPlayer
 	super NitrpgTestHelper
 
 	fun test_init do
-		var db = load_db("test_init")
+		var db = gen_test_db
 		var game = load_game("privat/nit", db)
 		var player = new Player(game, "Morriar")
 		assert player.name == "Morriar"
 		assert player.user.login == "Morriar"
 		assert player.nitcoins == 0
-		db.drop
 	end
 
 	fun test_init_from_json do
-		var db = load_db("test_init_from_json")
+		var db = gen_test_db
 		var game = load_game("privat/nit", db)
 		var json = """{"name": "Morriar", "nitcoins": 10}""".parse_json
 		var player = new Player.from_json(game, json.as(JsonObject))
 		assert player.name == "Morriar"
 		assert player.user.login == "Morriar"
 		assert player.nitcoins == 10
-		db.drop
 	end
 
 	fun test_save do
-		var db = load_db("test_save")
+		var db = gen_test_db
 		var game = load_game("privat/nit", db)
 		var json = """{"name": "Morriar", "nitcoins": 10}""".parse_json.as(JsonObject)
 		var player = new Player.from_json(game, json)
 		player.save
 		assert game.db.collection("players").find(json) != null
-		db.drop
 	end
 
 	fun test_game_add_player do
-		var db = load_db("test_game_add_player")
+		var db = gen_test_db
 		var game = load_game("privat/nit", db)
 		game.add_player(game.api.load_user("Morriar").as(not null))
 		var json = """{"name": "Morriar"}""".parse_json.as(JsonObject)
 		assert game.db.collection("players").find(json) != null
-		db.drop
 	end
 
 	fun test_game_load_player do
-		var db = load_db("test_game_load_player")
+		var db = gen_test_db
 		var game = load_game("privat/nit", db)
 		var json = """{"name": "Morriar", "nitcoins": 10}""".parse_json.as(JsonObject)
 		var player = new Player.from_json(game, json)
@@ -125,7 +118,6 @@ class TestPlayer
 		var oplayer = game.load_player("Morriar")
 		assert oplayer != null
 		assert player.nitcoins == oplayer.nitcoins
-		db.drop
 	end
 end
 
@@ -133,7 +125,7 @@ class TestUser
 	super NitrpgTestHelper
 
 	fun test_player do
-		var db = load_db("test_player")
+		var db = gen_test_db
 		var api = new GithubAPI(get_github_oauth)
 		var game = load_game("privat/nit", db)
 		var user = api.load_user("Morriar")
@@ -141,6 +133,5 @@ class TestUser
 		var player = user.player(game)
 		assert player.name == "Morriar"
 		game.clear
-		db.drop
 	end
 end

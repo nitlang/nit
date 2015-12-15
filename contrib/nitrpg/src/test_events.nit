@@ -24,29 +24,27 @@ class TestGame
 	super NitrpgTestHelper
 
 	fun test_add_event do
-		var db = load_db("test_add_event")
+		var db = gen_test_db
 		var game = load_game("Morriar/nit", db)
 		var event1 = new GameEvent(game, "test_kind", new JsonObject)
 		var event2 = new GameEvent(game, "test_kind", new JsonObject)
 		game.add_event(event1)
 		game.add_event(event2)
 		assert game.load_events.length == 2
-		db.drop
 	end
 
 	fun test_load_event do
-		var db = load_db("test_load_event")
+		var db = gen_test_db
 		var game = load_game("Morriar/nit", db)
 		var event1 = new GameEvent(game, "test_kind", new JsonObject)
 		var event2 = new GameEvent(game, "test_kind", new JsonObject)
 		game.add_event(event1)
 		assert game.load_event(event1.internal_id).kind == "test_kind"
 		assert game.load_event(event2.internal_id) == null
-		db.drop
 	end
 
 	fun test_load_events do
-		var db = load_db("test_load_events")
+		var db = gen_test_db
 		var game = load_game("Morriar/nit", db)
 		var event1 = new GameEvent(game, "test_kind", new JsonObject)
 		var event2 = new GameEvent(game, "test_kind", new JsonObject)
@@ -58,7 +56,6 @@ class TestGame
 		var res = game.load_events
 		assert res.length == 2
 		for event in res do assert ok.has(event.internal_id)
-		db.drop
 	end
 end
 
@@ -66,7 +63,7 @@ class TestPlayer
 	super NitrpgTestHelper
 
 	fun test_add_event do
-		var db = load_db("test_add_event")
+		var db = gen_test_db
 		var game = load_game("Morriar/nit", db)
 		var player1 = new Player(game, "Morriar")
 		var player2 = new Player(game, "xymus")
@@ -76,11 +73,10 @@ class TestPlayer
 		player1.add_event(event2)
 		assert player1.load_events.length == 2
 		assert player2.load_events.length == 0
-		db.drop
 	end
 
 	fun test_load_event do
-		var db = load_db("test_load_event")
+		var db = gen_test_db
 		var game = load_game("Morriar/nit", db)
 		var player1 = new Player(game, "Morriar")
 		var player2 = new Player(game, "xymus")
@@ -92,11 +88,10 @@ class TestPlayer
 		assert player1.load_event(event2.internal_id) == null
 		assert player2.load_event(event2.internal_id).kind == "test_kind"
 		assert player2.load_event(event1.internal_id) == null
-		db.drop
 	end
 
 	fun test_load_events do
-		var db = load_db("test_load_events")
+		var db = gen_test_db
 		var game = load_game("Morriar/nit", db)
 		var player1 = new Player(game, "Morriar")
 		var player2 = new Player(game, "xymus")
@@ -110,7 +105,6 @@ class TestPlayer
 		assert player2.load_events.length == 1
 		var ok = [event1.internal_id, event2.internal_id]
 		for event in player1.load_events do assert ok.has(event.internal_id)
-		db.drop
 	end
 end
 
@@ -118,15 +112,14 @@ class TestGameEvent
 	super NitrpgTestHelper
 
 	fun test_init do
-		var db = load_db("test_init")
+		var db = gen_test_db
 		var game = load_game("Morriar/nit", db)
 		var event = new GameEvent(game, "test_kind", new JsonObject)
 		assert event.to_json["kind"] == "test_kind"
-		db.drop
 	end
 
 	fun test_init_from_json do
-		var db = load_db("test_init_from_json")
+		var db = gen_test_db
 		var game = load_game("Morriar/nit", db)
 		var json = """{
 			"internal_id": "test_id",
@@ -139,6 +132,5 @@ class TestGameEvent
 		assert event.kind == "test_kind"
 		assert event.data.to_json == """{"test_field":"test_value"}"""
 		assert event.time.to_s == "2015-02-05T00:00:00Z"
-		db.drop
 	end
 end

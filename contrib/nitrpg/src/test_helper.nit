@@ -36,7 +36,7 @@ abstract class NitrpgTestHelper
 	var mongo = new MongoClient("mongodb://localhost:27017/")
 
 	# Load a new test database by with a name
-	fun load_db(name: String): MongoDb do return mongo.database(name)
+	private fun load_db(name: String): MongoDb do return mongo.database(name)
 
 	# Load a repo by its name.
 	fun load_repo(name: String): Repo do
@@ -51,4 +51,23 @@ abstract class NitrpgTestHelper
 		game.db_name = db.name
 		return game
 	end
+
+	# Stack of db used for testing.
+	var test_dbs = new Array[MongoDb]
+
+	# Gen a test db with a random name (to avoid race conditions).
+	fun gen_test_db: MongoDb do
+		var db_name = "test_nitrpg_{get_time}_{1000.rand}"
+		var db = load_db(db_name)
+		test_dbs.add db
+		return db
+	end
+
+	# Should be called after your test.
+	fun drop_test_db do
+		var db = test_dbs.pop
+		db.drop
+	end
+
+	redef fun after_test do drop_test_db
 end

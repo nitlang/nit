@@ -24,7 +24,7 @@ class TestGame
 	super NitrpgTestHelper
 
 	fun test_game_stats do
-		var db = load_db("test_game_stats")
+		var db = gen_test_db
 		var game = load_game("privat/nit", db)
 		var stats = game.stats
 		assert stats.overall["test"] == 0
@@ -35,7 +35,6 @@ class TestGame
 		var ostats = ogame.stats
 		ostats.overall.inc("test")
 		assert ostats.overall["test"] == 2
-		db.drop
 	end
 end
 
@@ -43,7 +42,7 @@ class TestPlayer
 	super NitrpgTestHelper
 
 	fun test_player_stats do
-		var db = load_db("test_player_stats")
+		var db = gen_test_db
 		var game = load_game("privat/nit", db)
 		var player = new Player(game, "Morriar")
 		var stats = player.stats
@@ -55,7 +54,6 @@ class TestPlayer
 		var ostats = oplayer.stats
 		ostats.overall.inc("test")
 		assert ostats.overall["test"] == 2
-		db.drop
 	end
 end
 
@@ -63,7 +61,7 @@ class TestGameStats
 	super NitrpgTestHelper
 
 	fun test_init_from_json do
-		var db = load_db("test_init_from_json")
+		var db = gen_test_db
 		var game = load_game("privat/nit", db)
 		var owner = new Player(game, "Morriar")
 		var json = """{
@@ -78,6 +76,5 @@ class TestGameStats
 		assert stats["test0"] == 0
 		assert stats["test1"] == 10
 		assert stats["test2"] == 20
-		db.drop
 	end
 end
