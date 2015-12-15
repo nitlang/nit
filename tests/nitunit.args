@@ -6,3 +6,4 @@ test_doc2.nit --no-color -o $WRITE
 test_nitunit3 --no-color -o $WRITE
 test_nitunit_md.md --no-color -o $WRITE
 test_doc3.nit --no-color -o $WRITE
+test_nitunit4 --no-color -o $WRITE
