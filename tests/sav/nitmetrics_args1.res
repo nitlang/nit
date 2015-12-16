@@ -1,41 +1,41 @@
 *** METRICS ***
 --- AST Metrics ---
 ## All nodes of the AST
- population: 51
+ population: 52
  minimum value: 1
  maximum value: 40
- total value: 289
- average value: 5.66
+ total value: 304
+ average value: 5.84
  distribution:
-  <=1: sub-population=16 (31.37%); cumulated value=16 (5.53%)
-  <=2: sub-population=5 (9.80%); cumulated value=10 (3.46%)
-  <=4: sub-population=9 (17.64%); cumulated value=28 (9.68%)
-  <=8: sub-population=12 (23.52%); cumulated value=76 (26.29%)
-  <=16: sub-population=4 (7.84%); cumulated value=44 (15.22%)
-  <=32: sub-population=4 (7.84%); cumulated value=75 (25.95%)
-  <=64: sub-population=1 (1.96%); cumulated value=40 (13.84%)
+  <=1: sub-population=16 (30.76%); cumulated value=16 (5.26%)
+  <=2: sub-population=5 (9.61%); cumulated value=10 (3.28%)
+  <=4: sub-population=9 (17.30%); cumulated value=28 (9.21%)
+  <=8: sub-population=12 (23.07%); cumulated value=76 (25.00%)
+  <=16: sub-population=5 (9.61%); cumulated value=59 (19.40%)
+  <=32: sub-population=4 (7.69%); cumulated value=75 (24.67%)
+  <=64: sub-population=1 (1.92%); cumulated value=40 (13.15%)
  list:
-  TId: 40 (13.84%)
-  APublicVisibility: 19 (6.57%)
-  AQid: 19 (6.57%)
-  AListExprs: 19 (6.57%)
-  ACallExpr: 18 (6.22%)
-  TClassid: 15 (5.19%)
-  TInteger: 10 (3.46%)
-  AIntegerExpr: 10 (3.46%)
-  AType: 9 (3.11%)
-  TKwend: 8 (2.76%)
+  TId: 40 (13.15%)
+  APublicVisibility: 19 (6.25%)
+  AListExprs: 19 (6.25%)
+  AQid: 19 (6.25%)
+  ACallExpr: 18 (5.92%)
+  TClassid: 15 (4.93%)
+  AQclassid: 15 (4.93%)
+  TInteger: 10 (3.28%)
+  AIntegerExpr: 10 (3.28%)
+  AType: 9 (2.96%)
   ...
-  ACallAssignExpr: 1 (0.34%)
-  AAnnotations: 1 (0.34%)
-  TKwreturn: 1 (0.34%)
-  AReturnExpr: 1 (0.34%)
-  AInterfaceClasskind: 1 (0.34%)
-  TKwinterface: 1 (0.34%)
-  ANoImport: 1 (0.34%)
-  AMainMethPropdef: 1 (0.34%)
-  AMainClassdef: 1 (0.34%)
-  TKwimport: 1 (0.34%)
+  AAnnotation: 1 (0.32%)
+  AAnnotations: 1 (0.32%)
+  AReturnExpr: 1 (0.32%)
+  TKwreturn: 1 (0.32%)
+  AInterfaceClasskind: 1 (0.32%)
+  TKwinterface: 1 (0.32%)
+  ANoImport: 1 (0.32%)
+  AMainMethPropdef: 1 (0.32%)
+  AMainClassdef: 1 (0.32%)
+  TKwimport: 1 (0.32%)
 ## All identifiers of the AST
  population: 20
  minimum value: 1
