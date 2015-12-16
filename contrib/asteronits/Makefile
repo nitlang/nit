@@ -25,10 +25,10 @@ check: bin/asteronits
 # Android
 
 android: bin/asteronits.apk
-bin/asteronits.apk: $(shell ${NITLS} -M src/asteronits.nit android) ${NITC} res/drawable-hdpi/icon.png
+bin/asteronits.apk: $(shell ${NITLS} -M src/asteronits.nit android) ${NITC} res/drawable-hdpi/icon.png pre-build
 	${NITC} src/touch_ui.nit -m android -o $@
 
-android-release: $(shell ${NITLS} -M src/asteronits.nit android) ${NITC} res/drawable-hdpi/icon.png
+android-release: $(shell ${NITLS} -M src/asteronits.nit android) ${NITC} res/drawable-hdpi/icon.png pre-build
 	${NITC} src/touch_ui.nit -m android -o bin/asteronits.apk --release
 
 res/drawable-hdpi/icon.png: art/icon.svg
