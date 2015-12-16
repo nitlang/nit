@@ -24,29 +24,27 @@ class TestGame
 	super NitrpgTestHelper
 
 	fun test_add_achievement do
-		var db = load_db("test_add_achievement")
+		var db = gen_test_db
 		var game = load_game("Morriar/nit", db)
 		var a1 = new Achievement(game, "test_id1", "test_name", "test_desc", 15)
 		var a2 = new Achievement(game, "test_id2", "test_name", "test_desc", 15)
 		game.add_achievement(a1)
 		game.add_achievement(a2)
 		assert game.load_achievements.length == 2
-		db.drop
 	end
 
 	fun test_load_achievement do
-		var db = load_db("test_load_achievement")
+		var db = gen_test_db
 		var game = load_game("Morriar/nit", db)
 		var a1 = new Achievement(game, "test_id1", "test_name", "test_desc", 15)
 		var a2 = new Achievement(game, "test_id2", "test_name", "test_desc", 15)
 		game.add_achievement(a1)
 		assert game.load_achievement(a1.id).id == "test_id1"
 		assert game.load_achievement(a2.id) == null
-		db.drop
 	end
 
 	fun test_load_achievements do
-		var db = load_db("test_load_achievements")
+		var db = gen_test_db
 		var game = load_game("Morriar/nit", db)
 		var a1 = new Achievement(game, "test_id1", "test_name", "test_desc", 15)
 		var a2 = new Achievement(game, "test_id2", "test_name", "test_desc", 15)
@@ -58,7 +56,6 @@ class TestGame
 		var res = game.load_achievements
 		assert res.length == 2
 		for a in res.values do assert ok.has(a.id)
-		db.drop
 	end
 end
 
@@ -66,7 +63,7 @@ class TestPlayer
 	super NitrpgTestHelper
 
 	fun test_add_achievement do
-		var db = load_db("test_add_achievement")
+		var db = gen_test_db
 		var game = load_game("Morriar/nit", db)
 		var player1 = new Player(game, "Morriar")
 		var a1 = new Achievement(game, "test_id1", "test_name", "test_desc", 15)
@@ -74,11 +71,10 @@ class TestPlayer
 		player1.add_achievement(a1)
 		player1.add_achievement(a2)
 		assert player1.load_achievements.length == 2
-		db.drop
 	end
 
 	fun test_load_achievement do
-		var db = load_db("test_load_achievement")
+		var db = gen_test_db
 		var game = load_game("Morriar/nit", db)
 		var player1 = new Player(game, "Morriar")
 		var player2 = new Player(game, "xymus")
@@ -90,11 +86,10 @@ class TestPlayer
 		assert player1.load_achievement(a2.id) == null
 		assert player2.load_achievement(a2.id).id == "test_id2"
 		assert player2.load_achievement(a1.id) == null
-		db.drop
 	end
 
 	fun test_load_achievements do
-		var db = load_db("test_load_achievements")
+		var db = gen_test_db
 		var game = load_game("Morriar/nit", db)
 		var player1 = new Player(game, "Morriar")
 		var player2 = new Player(game, "xymus")
@@ -108,7 +103,6 @@ class TestPlayer
 		var res = player1.load_achievements
 		assert res.length == 2
 		for a in res.values do assert ok.has(a.id)
-		db.drop
 	end
 end
 
@@ -116,18 +110,17 @@ class TestAchievement
 	super NitrpgTestHelper
 
 	fun test_init do
-		var db = load_db("test_init")
+		var db = gen_test_db
 		var game = load_game("Morriar/nit", db)
 		var a = new Achievement(game, "test_id", "test_name", "test_desc", 15)
 		assert a.id == "test_id"
 		assert a.name == "test_name"
 		assert a.desc == "test_desc"
 		assert a.reward == 15
-		db.drop
 	end
 
 	fun test_init_from_json do
-		var db = load_db("test_init_from_json")
+		var db = gen_test_db
 		var game = load_game("Morriar/nit", db)
 		var json = """{
 			"id": "test_id",
@@ -140,6 +133,5 @@ class TestAchievement
 		assert a.name == "test_name"
 		assert a.desc == "test_desc"
 		assert a.reward == 15
-		db.drop
 	end
 end

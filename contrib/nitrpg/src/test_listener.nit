@@ -45,7 +45,7 @@ class TestListener
 	var repo: Repo is lazy do return load_repo("Morriar/nit")
 
 	fun test_game_issue_stats do
-		var db = load_db("test_game_issue_stats")
+		var db = gen_test_db
 		var l = new DummyListener
 		l.add_reactor(new StatisticsReactor)
 
@@ -64,11 +64,10 @@ class TestListener
 		game = load_game("Morriar/nit", db)
 		assert game.stats.overall["issues"] == 1
 		assert game.stats.overall["issues_open"] == 1
-		db.drop
 	end
 
 	fun test_player_issue_stats do
-		var db = load_db("test_player_issue_stats")
+		var db = gen_test_db
 		var game = load_game("Morriar/nit", db)
 		var l = new DummyListener
 		l.add_reactor(new StatisticsReactor)
@@ -88,11 +87,10 @@ class TestListener
 		player = new Player(game, "Morriar")
 		assert player.stats.overall["issues"] == 1
 		assert player.stats.overall["issues_open"] == 1
-		db.drop
 	end
 
 	fun test_game_pr_stats do
-		var db = load_db("test_game_pr_stats")
+		var db = gen_test_db
 		var l = new DummyListener
 		l.add_reactor(new StatisticsReactor)
 
@@ -121,11 +119,10 @@ class TestListener
 		assert game.stats.overall["pulls"] == 1
 		assert game.stats.overall["pulls_open"] == 0
 		assert game.stats.overall["commits"] == 2
-		db.drop
 	end
 
 	fun test_game_issue_comment_stats do
-		var db = load_db("test_game_issue_comment_stats")
+		var db = gen_test_db
 		var l = new DummyListener
 		l.add_reactor(new StatisticsReactor)
 
@@ -144,11 +141,10 @@ class TestListener
 		game = load_game("Morriar/nit", db)
 		assert game.stats.overall["comments"] == 2
 		assert game.stats.overall["reviews"] == 1
-		db.drop
 	end
 
 	fun test_player_pull_reactor do
-		var db = load_db("test_player_pull_reactor")
+		var db = gen_test_db
 		var game = load_game("Morriar/nit", db)
 		var l = new DummyListener
 		l.add_reactor(new PlayerReactor)
@@ -170,11 +166,10 @@ class TestListener
 		l.apply_event(generator.pull_close(pull), db)
 		player = new Player(game, "itch76")
 		assert player.stats.overall["nitcoins"] == 12
-		db.drop
 	end
 
 	fun test_player_review_reactor do
-		var db = load_db("test_player_review_reactor")
+		var db = gen_test_db
 		var game = load_game("Morriar/nit", db)
 		var l = new DummyListener
 		l.add_reactor(new PlayerReactor)
@@ -214,11 +209,10 @@ class TestListener
 		l.apply_event(generator.issue_comment_event(pull, comment), db)
 		player = new Player(game, "Morriar")
 		assert player.stats.overall["nitcoins"] == 4
-		db.drop
 	end
 
 	fun test_X_issues_achievements do
-		var db = load_db("test_X_issues_achievements")
+		var db = gen_test_db
 		var game = load_game("Morriar/nit", db)
 		var l = new DummyListener
 		l.add_reactor(new StatisticsReactor)
@@ -238,11 +232,10 @@ class TestListener
 		end
 		var player = new Player(game, "Morriar")
 		assert player.stats.overall["nitcoins"] == 1110
-		db.drop
 	end
 
 	fun test_X_pulls_achievements do
-		var db = load_db("test_X_pulls_achievements")
+		var db = gen_test_db
 		var game = load_game("Morriar/nit", db)
 		var l = new DummyListener
 		l.add_reactor(new StatisticsReactor)
@@ -262,11 +255,10 @@ class TestListener
 		end
 		var player = new Player(game, "itch76")
 		assert player.stats.overall["nitcoins"] == 1110
-		db.drop
 	end
 
 	fun test_X_commits_achievements do
-		var db = load_db("test_X_commits_achievements")
+		var db = gen_test_db
 		var game = load_game("Morriar/nit", db)
 		var l = new DummyListener
 		l.add_reactor(new StatisticsReactor)
@@ -289,11 +281,10 @@ class TestListener
 		end
 		var player = new Player(game, "itch76")
 		assert player.stats.overall["nitcoins"] == 11110
-		db.drop
 	end
 
 	fun test_X_comments_achievements do
-		var db = load_db("test_X_comments_achievements")
+		var db = gen_test_db
 		var game = load_game("Morriar/nit", db)
 		var l = new DummyListener
 		l.add_reactor(new StatisticsReactor)
@@ -315,11 +306,10 @@ class TestListener
 		end
 		var player = new Player(game, "Morriar")
 		assert player.stats.overall["nitcoins"] == 1110
-		db.drop
 	end
 
     fun test_issues_achievements do
-		var db = load_db("test_issues_achievements")
+		var db = gen_test_db
 		var game = load_game("Morriar/nit", db)
 		var l = new DummyListener
 		l.add_reactor(new IssueAboutNitdoc, new IssueAboutFFI)
@@ -333,11 +323,10 @@ class TestListener
 		assert player.load_achievements.has_key("issue_about_nitdoc")
 		assert player.load_achievements.has_key("issue_about_ffi")
 		assert player.stats.overall["nitcoins"] == 20
-		db.drop
 	end
 
 	fun test_comments_reactor do
-		var db = load_db("test_comments_reactor")
+		var db = gen_test_db
 		var game = load_game("Morriar/nit", db)
 		var l = new DummyListener
 		l.add_reactor(new PlayerPingGod, new PlayerFirstReview, new PlayerSaysNitcoin)
@@ -364,6 +353,5 @@ class TestListener
 		player = new Player(game, "Morriar")
 		assert player.load_achievements.has_key("player_says_nitcoin")
 		assert player.stats.overall["nitcoins"] == 70
-		db.drop
 	end
 end
