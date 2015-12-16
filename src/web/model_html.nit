@@ -16,7 +16,6 @@
 module model_html
 
 import model
-import model::model_collect
 import doc::doc_down
 import html::bootstrap
 
@@ -374,9 +373,22 @@ redef class MClassDef
 	redef fun css_classes do
 		var set = new HashSet[String]
 		if is_intro then set.add "intro"
-		for m in mclass.intro.collect_modifiers do set.add m.to_cmangle
-		for m in collect_modifiers do set.add m.to_cmangle
+		for m in mclass.intro.modifiers do set.add m.to_cmangle
+		for m in modifiers do set.add m.to_cmangle
 		return set.to_a
+	end
+
+
+	# List of all modifiers like redef, private etc.
+	var modifiers: Array[String] is lazy do
+		var res = new Array[String]
+		if not is_intro then
+			res.add "redef"
+		else
+			res.add mclass.visibility.to_s
+		end
+		res.add mclass.kind.to_s
+		return res
 	end
 end
 
@@ -464,9 +476,35 @@ redef class MPropDef
 	redef fun css_classes do
 		var set = new HashSet[String]
 		if is_intro then set.add "intro"
-		for m in mproperty.intro.collect_modifiers do set.add m.to_cmangle
-		for m in collect_modifiers do set.add m.to_cmangle
+		for m in mproperty.intro.modifiers do set.add m.to_cmangle
+		for m in modifiers do set.add m.to_cmangle
 		return set.to_a
+	end
+
+	# List of all modifiers like redef, private, abstract, intern, fun etc.
+	var modifiers: Array[String] is lazy do
+		var res = new Array[String]
+		if not is_intro then
+			res.add "redef"
+		else
+			res.add mproperty.visibility.to_s
+		end
+		var mprop = self
+		if mprop isa MVirtualTypeDef then
+			res.add "type"
+		else if mprop isa MMethodDef then
+			if mprop.is_abstract then
+				res.add "abstract"
+			else if mprop.is_intern then
+				res.add "intern"
+			end
+			if mprop.mproperty.is_init then
+				res.add "init"
+			else
+				res.add "fun"
+			end
+		end
+		return res
 	end
 end
 
