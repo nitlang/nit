@@ -16,16 +16,16 @@
 module web_actions
 
 import web_views
-import model::model_collect
 
 # Display the tree of all loaded mentities.
 class TreeAction
 	super ModelAction
 
-	# View to render.
-	var view = new HtmlHomePage(model) is lazy
-
-	redef fun answer(request, url) do return render_view(view)
+	redef fun answer(request, url) do
+		var model = init_model_view(request)
+		var view = new HtmlHomePage(model.model)
+		return render_view(view)
+	end
 end
 
 # Display the list of mentities matching `namespace`.
@@ -38,7 +38,8 @@ class SearchAction
 		if namespace == null or namespace.is_empty then
 			return render_error(400, "Missing :namespace.")
 		end
-		var mentities = model.collect_by_namespace(namespace)
+		var model = init_model_view(request)
+		var mentities = model.mentities_by_namespace(namespace)
 		if request.is_json_asked then
 			var json = new JsonArray
 			for mentity in mentities do
@@ -64,7 +65,8 @@ class CodeAction
 		if namespace == null or namespace.is_empty then
 			return render_error(400, "Missing :namespace.")
 		end
-		var mentities = model.collect_by_namespace(namespace)
+		var model = init_model_view(request)
+		var mentities = model.mentities_by_namespace(namespace)
 		if mentities.is_empty then
 			return render_error(404, "No mentity matching this namespace.")
 		end
@@ -86,7 +88,8 @@ class DocAction
 		if namespace == null or namespace.is_empty then
 			return render_error(400, "Missing :namespace.")
 		end
-		var mentities = model.collect_by_namespace(namespace)
+		var model = init_model_view(request)
+		var mentities = model.mentities_by_namespace(namespace)
 		if mentities.is_empty then
 			return render_error(404, "No mentity matching this namespace.")
 		end
@@ -103,19 +106,14 @@ class RandomAction
 	redef fun answer(request, url) do
 		var n = request.int_arg("n") or else 10
 		var k = request.string_arg("k") or else "modules"
+		var model = init_model_view(request)
 		var mentities: Array[MEntity]
 		if k == "modules" then
 			mentities = model.mmodules.to_a
 		else if k == "classdefs" then
-			mentities = new Array[MClassDef]
-			for mclass in model.mclasses do
-				mentities.add_all(mclass.mclassdefs)
-			end
+			mentities = model.mclassdefs.to_a
 		else
-			mentities = new Array[MPropDef]
-			for mprop in model.mproperties do
-				mentities.add_all(mprop.mpropdefs)
-			end
+			mentities = model.mpropdefs.to_a
 		end
 		mentities.shuffle
 		mentities = mentities.sub(0, n)
