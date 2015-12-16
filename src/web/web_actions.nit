@@ -20,10 +20,7 @@ import model::model_collect
 
 # Display the tree of all loaded mentities.
 class TreeAction
-	super NitAction
-
-	# Model to explore and render.
-	var model: Model
+	super ModelAction
 
 	# View to render.
 	var view = new HtmlHomePage(model) is lazy
@@ -33,10 +30,7 @@ end
 
 # Display the list of mentities matching `namespace`.
 class SearchAction
-	super NitAction
-
-	# Model to explore and render.
-	var model: Model
+	super ModelAction
 
 	# TODO handle more than full namespaces.
 	redef fun answer(request, url) do
@@ -59,10 +53,7 @@ end
 
 # Display a MEntity source code.
 class CodeAction
-	super NitAction
-
-	# Model to explore and render.
-	var model: Model
+	super ModelAction
 
 	# Modelbuilder used to access sources.
 	var modelbuilder: ModelBuilder
@@ -84,10 +75,7 @@ end
 
 # Display the doc of a MEntity.
 class DocAction
-	super NitAction
-
-	# Model to explore and render.
-	var model: Model
+	super ModelAction
 
 	# Modelbuilder used to access sources.
 	var modelbuilder: ModelBuilder
@@ -109,10 +97,7 @@ end
 
 # Return a random list of MEntities.
 class RandomAction
-	super NitAction
-
-	# Model to explore and render.
-	var model: Model
+	super ModelAction
 
 	# TODO handle more than full namespaces.
 	redef fun answer(request, url) do
