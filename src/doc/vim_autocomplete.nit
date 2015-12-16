@@ -49,6 +49,16 @@ redef class ToolContext
 	end
 end
 
+redef class Model
+
+	# Get a custom view for vimautocomplete.
+	private fun vim_view: ModelView do
+		var view = new ModelView(self)
+		view.min_visibility = protected_visibility
+		return view
+	end
+end
+
 redef class MEntity
 	private fun field_separator: String do return "#====#"
 	private fun line_separator: String do return "#nnnn#"
@@ -198,7 +208,7 @@ redef class MClassType
 		stream.write line_separator*2
 		stream.write "## Properties"
 		stream.write line_separator
-		var props = mclass.collect_accessible_mproperties(protected_visibility).to_a
+		var props = mclass.collect_accessible_mproperties(model.protected_view).to_a
 		alpha_comparator.sort props
 		for prop in props do
 			if mclass.name == "Object" or prop.intro.mclassdef.mclass.name != "Object" then
@@ -243,7 +253,7 @@ private class AutocompletePhase
 			# Can it be instantiated?
 			if mclass.kind != interface_kind and mclass.kind != abstract_kind then
 
-				for prop in mclass.collect_accessible_mproperties(public_visibility) do
+				for prop in mclass.collect_accessible_mproperties(model.public_view) do
 					if prop isa MMethod and prop.is_init then
 						mclass_intro.target_constructor = prop.intro
 						mclass_intro.write_doc(mainmodule, constructors_stream)
@@ -292,7 +302,7 @@ redef class MModule
 	redef fun write_extra_doc(mainmodule, stream)
 	do
 		# Introduced classes
-		var class_intros = collect_intro_mclasses(protected_visibility).to_a
+		var class_intros = collect_intro_mclasses(model.protected_view).to_a
 		if class_intros.not_empty then
 			alpha_comparator.sort class_intros
 			stream.write line_separator*2
@@ -309,7 +319,7 @@ redef class MModule
 		# Introduced properties
 		var prop_intros = new Array[MPropDef]
 		for c in mclassdefs do
-			prop_intros.add_all c.collect_intro_mpropdefs(protected_visibility)
+			prop_intros.add_all c.collect_intro_mpropdefs(model.protected_view)
 		end
 
 		if prop_intros.not_empty then
@@ -345,7 +355,10 @@ redef class MProperty
 		if self isa MMethod then
 			var intro = intro
 			assert intro isa MMethodDef
-			stream.write intro.msignature.to_s
+			var msignature = intro.msignature
+			if msignature != null then
+				stream.write msignature.to_s
+			end
 		end
 
 		var mdoc = intro.mdoc
