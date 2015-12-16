@@ -23,7 +23,7 @@ class TreeAction
 
 	redef fun answer(request, url) do
 		var model = init_model_view(request)
-		var view = new HtmlHomePage(model.model)
+		var view = new HtmlHomePage(model.to_tree)
 		return render_view(view)
 	end
 end

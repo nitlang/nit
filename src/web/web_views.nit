@@ -25,15 +25,12 @@ class HtmlHomePage
 	super NitView
 
 	# Loaded model to display.
-	var model: Model
+	var tree: MEntityTree
 
 	redef fun render(srv) do
 		var tpl = new Template
 		tpl.add new Header(1, "Loaded model")
-		for mpackage in model.mpackages do
-			tpl.add new Header(3, "Packages")
-			tpl.add mpackage.html_tree
-		end
+		tpl.add tree.html_list
 		return tpl
 	end
 end
