@@ -474,7 +474,7 @@ redef class Parser
 		reduce_table.add new ReduceAction461(111)
 		reduce_table.add new ReduceAction462(111)
 		reduce_table.add new ReduceAction463(111)
-		reduce_table.add new ReduceAction462(111)
+		reduce_table.add new ReduceAction464(111)
 		reduce_table.add new ReduceAction465(112)
 		reduce_table.add new ReduceAction466(112)
 		reduce_table.add new ReduceAction467(112)
@@ -1813,8 +1813,8 @@ private class ReduceAction26
 					assert pvisibilitynode4 isa nullable AVisibility
 					var pclasskindnode5 = nodearraylist4
 					assert pclasskindnode5 isa nullable AClasskind
-					var tclassidnode6 = nodearraylist6
-					assert tclassidnode6 isa nullable TClassid
+					var pqclassidnode6 = nodearraylist6
+					assert pqclassidnode6 isa nullable AQclassid
 					var listnode11 = nodearraylist7
 					assert listnode11 isa Array[Object]
 					listnode12 = concat(listnode12, listnode11)
@@ -1825,7 +1825,7 @@ private class ReduceAction26
 						tkwredefnode3,
 						pvisibilitynode4,
 						pclasskindnode5,
-						tclassidnode6,
+						pqclassidnode6,
 						null,
 						listnode8,
 						null,
@@ -1861,8 +1861,8 @@ private class ReduceAction27
 					assert pvisibilitynode4 isa nullable AVisibility
 					var pclasskindnode5 = nodearraylist4
 					assert pclasskindnode5 isa nullable AClasskind
-					var tclassidnode6 = nodearraylist6
-					assert tclassidnode6 isa nullable TClassid
+					var pqclassidnode6 = nodearraylist6
+					assert pqclassidnode6 isa nullable AQclassid
 					var pexterncodeblocknode10 = nodearraylist7
 					assert pexterncodeblocknode10 isa nullable AExternCodeBlock
 					var listnode11 = nodearraylist8
@@ -1875,7 +1875,7 @@ private class ReduceAction27
 						tkwredefnode3,
 						pvisibilitynode4,
 						pclasskindnode5,
-						tclassidnode6,
+						pqclassidnode6,
 						null,
 						listnode8,
 						null,
@@ -1914,8 +1914,8 @@ private class ReduceAction28
 					assert pvisibilitynode4 isa nullable AVisibility
 					var pclasskindnode5 = nodearraylist4
 					assert pclasskindnode5 isa nullable AClasskind
-					var tclassidnode6 = nodearraylist6
-					assert tclassidnode6 isa nullable TClassid
+					var pqclassidnode6 = nodearraylist6
+					assert pqclassidnode6 isa nullable AQclassid
 					var tobranode7 = nodearraylist7
 					assert tobranode7 isa nullable TObra
 					var listnode8 = nodearraylist9
@@ -1933,7 +1933,7 @@ private class ReduceAction28
 						tkwredefnode3,
 						pvisibilitynode4,
 						pclasskindnode5,
-						tclassidnode6,
+						pqclassidnode6,
 						tobranode7,
 						listnode9,
 						tcbranode10,
@@ -1973,8 +1973,8 @@ private class ReduceAction29
 					assert pvisibilitynode4 isa nullable AVisibility
 					var pclasskindnode5 = nodearraylist4
 					assert pclasskindnode5 isa nullable AClasskind
-					var tclassidnode6 = nodearraylist6
-					assert tclassidnode6 isa nullable TClassid
+					var pqclassidnode6 = nodearraylist6
+					assert pqclassidnode6 isa nullable AQclassid
 					var tobranode7 = nodearraylist7
 					assert tobranode7 isa nullable TObra
 					var listnode8 = nodearraylist9
@@ -1994,7 +1994,7 @@ private class ReduceAction29
 						tkwredefnode3,
 						pvisibilitynode4,
 						pclasskindnode5,
-						tclassidnode6,
+						pqclassidnode6,
 						tobranode7,
 						listnode9,
 						tcbranode10,
@@ -3365,8 +3365,8 @@ private class ReduceAction69
 					assert pvisibilitynode4 isa nullable AVisibility
 					var tkwtypenode5 = nodearraylist4
 					assert tkwtypenode5 isa nullable TKwtype
-					var tclassidnode6 = nodearraylist5
-					assert tclassidnode6 isa nullable TClassid
+					var pqclassidnode6 = nodearraylist5
+					assert pqclassidnode6 isa nullable AQclassid
 					var ptypenode7 = nodearraylist6
 					assert ptypenode7 isa nullable AType
 					var pannotationsnode8 = nodearraylist7
@@ -3376,7 +3376,7 @@ private class ReduceAction69
 						tkwredefnode3,
 						pvisibilitynode4,
 						tkwtypenode5,
-						tclassidnode6,
+						pqclassidnode6,
 						ptypenode7,
 						pannotationsnode8
 					)
@@ -4790,13 +4790,13 @@ private class ReduceAction146
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var listnode5 = new Array[Object]
-					var tclassidnode3 = nodearraylist1
-					assert tclassidnode3 isa nullable TClassid
+					var pqclassidnode3 = nodearraylist1
+					assert pqclassidnode3 isa nullable AQclassid
 					var pannotationsnode7 = nodearraylist2
 					assert pannotationsnode7 isa nullable AAnnotations
 					var ptypenode1: nullable AType = new AType.init_atype(
 						null,
-						tclassidnode3,
+						pqclassidnode3,
 						null,
 						listnode5,
 						null,
@@ -4817,13 +4817,13 @@ private class ReduceAction147
 					var listnode5 = new Array[Object]
 					var tkwnullablenode2 = nodearraylist1
 					assert tkwnullablenode2 isa nullable TKwnullable
-					var tclassidnode3 = nodearraylist2
-					assert tclassidnode3 isa nullable TClassid
+					var pqclassidnode3 = nodearraylist2
+					assert pqclassidnode3 isa nullable AQclassid
 					var pannotationsnode7 = nodearraylist3
 					assert pannotationsnode7 isa nullable AAnnotations
 					var ptypenode1: nullable AType = new AType.init_atype(
 						tkwnullablenode2,
-						tclassidnode3,
+						pqclassidnode3,
 						null,
 						listnode5,
 						null,
@@ -4846,8 +4846,8 @@ private class ReduceAction148
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var listnode6 = new Array[Object]
-					var tclassidnode3 = nodearraylist1
-					assert tclassidnode3 isa nullable TClassid
+					var pqclassidnode3 = nodearraylist1
+					assert pqclassidnode3 isa nullable AQclassid
 					var tobranode4 = nodearraylist2
 					assert tobranode4 isa nullable TObra
 					var listnode5 = nodearraylist4
@@ -4859,7 +4859,7 @@ private class ReduceAction148
 					assert pannotationsnode8 isa nullable AAnnotations
 					var ptypenode1: nullable AType = new AType.init_atype(
 						null,
-						tclassidnode3,
+						pqclassidnode3,
 						tobranode4,
 						listnode6,
 						tcbranode7,
@@ -4885,8 +4885,8 @@ private class ReduceAction149
 					var listnode6 = new Array[Object]
 					var tkwnullablenode2 = nodearraylist1
 					assert tkwnullablenode2 isa nullable TKwnullable
-					var tclassidnode3 = nodearraylist2
-					assert tclassidnode3 isa nullable TClassid
+					var pqclassidnode3 = nodearraylist2
+					assert pqclassidnode3 isa nullable AQclassid
 					var tobranode4 = nodearraylist3
 					assert tobranode4 isa nullable TObra
 					var listnode5 = nodearraylist5
@@ -4898,7 +4898,7 @@ private class ReduceAction149
 					assert pannotationsnode8 isa nullable AAnnotations
 					var ptypenode1: nullable AType = new AType.init_atype(
 						tkwnullablenode2,
-						tclassidnode3,
+						pqclassidnode3,
 						tobranode4,
 						listnode6,
 						tcbranode7,
@@ -11697,8 +11697,13 @@ private class ReduceAction461
 	do
 					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
-					var tclassidnode1 = nodearraylist1
-					node_list = tclassidnode1
+					var tclassidnode3 = nodearraylist1
+					assert tclassidnode3 isa nullable TClassid
+					var pqclassidnode1: nullable AQclassid = new AQclassid.init_aqclassid(
+						null,
+						tclassidnode3
+					)
+					node_list = pqclassidnode1
 					p.push(p.go_to(_goto), node_list)
 	end
 end
@@ -11709,8 +11714,20 @@ private class ReduceAction462
 					var node_list: nullable Object = null
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
-					var tclassidnode1 = nodearraylist2
-					node_list = tclassidnode1
+					var listnode3 = new Array[Object]
+					var tclassidnode4 = nodearraylist1
+					assert tclassidnode4 isa nullable TClassid
+					var pqualifiednode2: nullable AQualified = new AQualified.init_aqualified(
+						listnode3,
+						tclassidnode4
+					)
+					var tclassidnode5 = nodearraylist2
+					assert tclassidnode5 isa nullable TClassid
+					var pqclassidnode1: nullable AQclassid = new AQclassid.init_aqclassid(
+						pqualifiednode2,
+						tclassidnode5
+					)
+					node_list = pqclassidnode1
 					p.push(p.go_to(_goto), node_list)
 	end
 end
@@ -11722,8 +11739,48 @@ private class ReduceAction463
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
-					var tclassidnode1 = nodearraylist3
-					node_list = tclassidnode1
+					var listnode4 = new Array[Object]
+					var listnode3 = nodearraylist1
+					assert listnode3 isa Array[Object]
+					listnode4 = concat(listnode4, listnode3)
+					var tclassidnode5 = nodearraylist2
+					assert tclassidnode5 isa nullable TClassid
+					var pqualifiednode2: nullable AQualified = new AQualified.init_aqualified(
+						listnode4,
+						tclassidnode5
+					)
+					var tclassidnode6 = nodearraylist3
+					assert tclassidnode6 isa nullable TClassid
+					var pqclassidnode1: nullable AQclassid = new AQclassid.init_aqclassid(
+						pqualifiednode2,
+						tclassidnode6
+					)
+					node_list = pqclassidnode1
+					p.push(p.go_to(_goto), node_list)
+	end
+end
+private class ReduceAction464
+	super ReduceAction
+	redef fun action(p: Parser)
+	do
+					var node_list: nullable Object = null
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode4 = new Array[Object]
+					var listnode3 = nodearraylist1
+					assert listnode3 isa Array[Object]
+					listnode4 = concat(listnode4, listnode3)
+					var pqualifiednode2: nullable AQualified = new AQualified.init_aqualified(
+						listnode4,
+						null
+					)
+					var tclassidnode6 = nodearraylist2
+					assert tclassidnode6 isa nullable TClassid
+					var pqclassidnode1: nullable AQclassid = new AQclassid.init_aqclassid(
+						pqualifiednode2,
+						tclassidnode6
+					)
+					node_list = pqclassidnode1
 					p.push(p.go_to(_goto), node_list)
 	end
 end

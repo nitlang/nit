@@ -386,7 +386,7 @@ redef class AStdClassdef
 		n_kwredef: nullable TKwredef,
 		n_visibility: nullable AVisibility,
 		n_classkind: nullable AClasskind,
-		n_id: nullable TClassid,
+		n_qid: nullable AQclassid,
 		n_obra: nullable TObra,
 		n_formaldefs: Collection[Object], # Should be Collection[AFormaldef]
 		n_cbra: nullable TCbra,
@@ -403,8 +403,8 @@ redef class AStdClassdef
 		n_visibility.parent = self
 		_n_classkind = n_classkind.as(not null)
 		n_classkind.parent = self
-		_n_id = n_id
-		if n_id != null then n_id.parent = self
+		_n_qid = n_qid
+		if n_qid != null then n_qid.parent = self
 		_n_obra = n_obra
 		if n_obra != null then n_obra.parent = self
 		self.n_formaldefs.unsafe_add_all(n_formaldefs)
@@ -435,8 +435,8 @@ redef class AStdClassdef
 			n_classkind = new_child.as(AClasskind)
 			return
 		end
-		if _n_id == old_child then
-			n_id = new_child.as(nullable TClassid)
+		if _n_qid == old_child then
+			n_qid = new_child.as(nullable AQclassid)
 			return
 		end
 		if _n_obra == old_child then
@@ -479,9 +479,9 @@ redef class AStdClassdef
 		_n_classkind = node
 		node.parent = self
 	end
-	redef fun n_id=(node)
+	redef fun n_qid=(node)
 	do
-		_n_id = node
+		_n_qid = node
 		if node != null then node.parent = self
 	end
 	redef fun n_obra=(node)
@@ -512,7 +512,7 @@ redef class AStdClassdef
 		v.enter_visit(_n_kwredef)
 		v.enter_visit(_n_visibility)
 		v.enter_visit(_n_classkind)
-		v.enter_visit(_n_id)
+		v.enter_visit(_n_qid)
 		v.enter_visit(_n_obra)
 		n_formaldefs.visit_all(v)
 		v.enter_visit(_n_cbra)
@@ -1007,7 +1007,7 @@ redef class ATypePropdef
 		n_kwredef: nullable TKwredef,
 		n_visibility: nullable AVisibility,
 		n_kwtype: nullable TKwtype,
-		n_id: nullable TClassid,
+		n_qid: nullable AQclassid,
 		n_type: nullable AType,
 		n_annotations: nullable AAnnotations
 	)
@@ -1020,8 +1020,8 @@ redef class ATypePropdef
 		n_visibility.parent = self
 		_n_kwtype = n_kwtype.as(not null)
 		n_kwtype.parent = self
-		_n_id = n_id.as(not null)
-		n_id.parent = self
+		_n_qid = n_qid.as(not null)
+		n_qid.parent = self
 		_n_type = n_type.as(not null)
 		n_type.parent = self
 		_n_annotations = n_annotations
@@ -1046,8 +1046,8 @@ redef class ATypePropdef
 			n_kwtype = new_child.as(TKwtype)
 			return
 		end
-		if _n_id == old_child then
-			n_id = new_child.as(TClassid)
+		if _n_qid == old_child then
+			n_qid = new_child.as(AQclassid)
 			return
 		end
 		if _n_type == old_child then
@@ -1080,9 +1080,9 @@ redef class ATypePropdef
 		_n_kwtype = node
 		node.parent = self
 	end
-	redef fun n_id=(node)
+	redef fun n_qid=(node)
 	do
-		_n_id = node
+		_n_qid = node
 		node.parent = self
 	end
 	redef fun n_type=(node)
@@ -1103,7 +1103,7 @@ redef class ATypePropdef
 		v.enter_visit(_n_kwredef)
 		v.enter_visit(_n_visibility)
 		v.enter_visit(_n_kwtype)
-		v.enter_visit(_n_id)
+		v.enter_visit(_n_qid)
 		v.enter_visit(_n_type)
 		v.enter_visit(_n_annotations)
 	end
@@ -2272,6 +2272,48 @@ redef class AQid
 		v.enter_visit(_n_id)
 	end
 end
+redef class AQclassid
+	init init_aqclassid (
+		n_qualified: nullable AQualified,
+		n_id: nullable TClassid
+	)
+	do
+		_n_qualified = n_qualified
+		if n_qualified != null then n_qualified.parent = self
+		_n_id = n_id.as(not null)
+		n_id.parent = self
+	end
+
+	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
+	do
+		if _n_qualified == old_child then
+			n_qualified = new_child.as(nullable AQualified)
+			return
+		end
+		if _n_id == old_child then
+			n_id = new_child.as(TClassid)
+			return
+		end
+	end
+
+	redef fun n_qualified=(node)
+	do
+		_n_qualified = node
+		if node != null then node.parent = self
+	end
+	redef fun n_id=(node)
+	do
+		_n_id = node
+		node.parent = self
+	end
+
+
+	redef fun visit_all(v: Visitor)
+	do
+		v.enter_visit(_n_qualified)
+		v.enter_visit(_n_id)
+	end
+end
 redef class ASignature
 	init init_asignature (
 		n_opar: nullable TOpar,
@@ -2402,7 +2444,7 @@ end
 redef class AType
 	init init_atype (
 		n_kwnullable: nullable TKwnullable,
-		n_id: nullable TClassid,
+		n_qid: nullable AQclassid,
 		n_obra: nullable TObra,
 		n_types: Collection[Object], # Should be Collection[AType]
 		n_cbra: nullable TCbra,
@@ -2411,8 +2453,8 @@ redef class AType
 	do
 		_n_kwnullable = n_kwnullable
 		if n_kwnullable != null then n_kwnullable.parent = self
-		_n_id = n_id.as(not null)
-		n_id.parent = self
+		_n_qid = n_qid.as(not null)
+		n_qid.parent = self
 		_n_obra = n_obra
 		if n_obra != null then n_obra.parent = self
 		self.n_types.unsafe_add_all(n_types)
@@ -2428,8 +2470,8 @@ redef class AType
 			n_kwnullable = new_child.as(nullable TKwnullable)
 			return
 		end
-		if _n_id == old_child then
-			n_id = new_child.as(TClassid)
+		if _n_qid == old_child then
+			n_qid = new_child.as(AQclassid)
 			return
 		end
 		if _n_obra == old_child then
@@ -2452,9 +2494,9 @@ redef class AType
 		_n_kwnullable = node
 		if node != null then node.parent = self
 	end
-	redef fun n_id=(node)
+	redef fun n_qid=(node)
 	do
-		_n_id = node
+		_n_qid = node
 		node.parent = self
 	end
 	redef fun n_obra=(node)
@@ -2477,7 +2519,7 @@ redef class AType
 	redef fun visit_all(v: Visitor)
 	do
 		v.enter_visit(_n_kwnullable)
-		v.enter_visit(_n_id)
+		v.enter_visit(_n_qid)
 		v.enter_visit(_n_obra)
 		n_types.visit_all(v)
 		v.enter_visit(_n_cbra)
