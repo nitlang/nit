@@ -1659,6 +1659,16 @@ class AQid
 	var n_id: TId is writable, noinit
 end
 
+# A potentially qualified class identifier `foo::bar::Baz`
+class AQclassid
+	super Prod
+	# The qualifier, if any
+	var n_qualified: nullable AQualified = null is writable
+
+	# The final identifier
+	var n_id: TClassid is writable, noinit
+end
+
 # A signature in a method definition. eg `(x,y:X,z:Z):T`
 class ASignature
 	super Prod

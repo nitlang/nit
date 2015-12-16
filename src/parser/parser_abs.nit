@@ -354,6 +354,7 @@ class AFormaldef super Prod end
 class APropdef super Prod end
 class AMethid super Prod end
 class AQid super Prod end
+class AQclassid super Prod end
 class ASignature super Prod end
 class AParam super Prod end
 class AType super Prod end
@@ -635,6 +636,11 @@ class AQid
 	super AQid
 	var n_qualified: nullable AQualified = null is writable
 	var n_id: TId is writable, noinit
+end
+class AQclassid
+	super AQclassid
+	var n_qualified: nullable AQualified = null is writable
+	var n_id: TClassid is writable, noinit
 end
 class ASignature
 	super ASignature

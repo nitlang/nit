@@ -826,8 +826,8 @@ qualified_o {-> qualified?}
 qid
 	= qualified? id
 	;
-qclassid {-> classid}
-	= qualified? classid {-> classid}
+qclassid
+	= qualified? classid
 	;
 qmethid~noid {-> methid}
 	= qualified? methid~noid {-> methid~noid.methid}
@@ -939,6 +939,10 @@ methid
 
 qid
 	= qualified? id
+	;
+
+qclassid
+	= qualified? [id]:classid
 	;
 
 signature = opar? [params]:param* cpar? type?;
