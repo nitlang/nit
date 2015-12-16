@@ -102,7 +102,7 @@ Edge
 7:MEntity
 7:MModule
 =properties=JsonObject(3):
-{"location":"\/dev\/null:1,1--1,1","name":"foo","mdoc":["A documented namespace."]}
+{"location":"/dev/null:1,1--1,1","name":"foo","mdoc":["A documented namespace."]}
 
 Edge
 =type=10:INTRODUCES
@@ -115,7 +115,7 @@ Edge
 7:MEntity
 7:MModule
 =properties=JsonObject(3):
-{"location":"\/dev\/null:1,1--1,1","name":"foo","mdoc":["A documented namespace."]}
+{"location":"/dev/null:1,1--1,1","name":"foo","mdoc":["A documented namespace."]}
 ----
 =to=Entity#0:
 =labels=Array(3):
@@ -123,7 +123,7 @@ Edge
 7:MEntity
 6:MClass
 =properties=JsonObject(5):
-{"kind":"class","visibility":"public","name":"(self)","mdoc":["A documented namespace."],"location":"\/dev\/null:1,1--1,1"}
+{"kind":"class","visibility":"public","name":"(self)","mdoc":["A documented namespace."],"location":"/dev/null:1,1--1,1"}
 
 Edge
 =type=7:DEFINES
@@ -136,7 +136,7 @@ Edge
 7:MEntity
 7:MModule
 =properties=JsonObject(3):
-{"location":"\/dev\/null:1,1--1,1","name":"foo","mdoc":["A documented namespace."]}
+{"location":"/dev/null:1,1--1,1","name":"foo","mdoc":["A documented namespace."]}
 ----
 =to=Entity#0:
 =labels=Array(3):
@@ -144,7 +144,7 @@ Edge
 7:MEntity
 9:MClassDef
 =properties=JsonObject(4):
-{"location":"\/dev\/null:1,1--1,1","is_intro":true,"name":"(self)","mdoc":["A documented namespace."]}
+{"location":"/dev/null:1,1--1,1","is_intro":true,"name":"(self)","mdoc":["A documented namespace."]}
 
 Edge
 =type=7:DEFINES
@@ -158,7 +158,7 @@ Edge
 8:MPropDef
 13:MAttributeDef
 =properties=JsonObject(3):
-{"location":"\/dev\/null:1,1--1,1","name":"bar","is_intro":true}
+{"location":"/dev/null:1,1--1,1","name":"bar","is_intro":true}
 ----
 =to=Entity#0:
 =labels=Array(4):
@@ -201,7 +201,7 @@ Edge
 7:MEntity
 6:MClass
 =properties=JsonObject(5):
-{"kind":"class","visibility":"public","name":"(self)","mdoc":["A documented namespace."],"location":"\/dev\/null:1,1--1,1"}
+{"kind":"class","visibility":"public","name":"(self)","mdoc":["A documented namespace."],"location":"/dev/null:1,1--1,1"}
 ----
 =to=Entity#0:
 =labels=Array(4):
@@ -232,7 +232,7 @@ Edge
 7:MEntity
 6:MClass
 =properties=JsonObject(5):
-{"kind":"class","visibility":"public","name":"(self)","mdoc":["A documented namespace."],"location":"\/dev\/null:1,1--1,1"}
+{"kind":"class","visibility":"public","name":"(self)","mdoc":["A documented namespace."],"location":"/dev/null:1,1--1,1"}
 
 Edge
 =type=9:BOUNDTYPE
@@ -245,7 +245,7 @@ Edge
 7:MEntity
 9:MClassDef
 =properties=JsonObject(4):
-{"location":"\/dev\/null:1,1--1,1","is_intro":true,"name":"(self)","mdoc":["A documented namespace."]}
+{"location":"/dev/null:1,1--1,1","is_intro":true,"name":"(self)","mdoc":["A documented namespace."]}
 ----
 =to=Entity#0:
 =labels=Array(4):
@@ -267,7 +267,7 @@ Edge
 7:MEntity
 9:MClassDef
 =properties=JsonObject(4):
-{"location":"\/dev\/null:1,1--1,1","is_intro":true,"name":"(self)","mdoc":["A documented namespace."]}
+{"location":"/dev/null:1,1--1,1","is_intro":true,"name":"(self)","mdoc":["A documented namespace."]}
 ----
 =to=Entity#0:
 =labels=Array(3):
@@ -275,7 +275,7 @@ Edge
 7:MEntity
 6:MClass
 =properties=JsonObject(5):
-{"kind":"class","visibility":"public","name":"(self)","mdoc":["A documented namespace."],"location":"\/dev\/null:1,1--1,1"}
+{"kind":"class","visibility":"public","name":"(self)","mdoc":["A documented namespace."],"location":"/dev/null:1,1--1,1"}
 
 Edge
 =type=10:INTRODUCES
@@ -288,7 +288,7 @@ Edge
 7:MEntity
 9:MClassDef
 =properties=JsonObject(4):
-{"location":"\/dev\/null:1,1--1,1","is_intro":true,"name":"(self)","mdoc":["A documented namespace."]}
+{"location":"/dev/null:1,1--1,1","is_intro":true,"name":"(self)","mdoc":["A documented namespace."]}
 ----
 =to=Entity#0:
 =labels=Array(4):
@@ -319,7 +319,7 @@ Edge
 7:MEntity
 9:MClassDef
 =properties=JsonObject(4):
-{"location":"\/dev\/null:1,1--1,1","is_intro":true,"name":"(self)","mdoc":["A documented namespace."]}
+{"location":"/dev/null:1,1--1,1","is_intro":true,"name":"(self)","mdoc":["A documented namespace."]}
 
 Edge
 =type=8:DECLARES
@@ -332,7 +332,7 @@ Edge
 7:MEntity
 9:MClassDef
 =properties=JsonObject(4):
-{"location":"\/dev\/null:1,1--1,1","is_intro":true,"name":"(self)","mdoc":["A documented namespace."]}
+{"location":"/dev/null:1,1--1,1","is_intro":true,"name":"(self)","mdoc":["A documented namespace."]}
 ----
 =to=Entity#0:
 =labels=Array(4):
@@ -341,6 +341,6 @@ Edge
 8:MPropDef
 13:MAttributeDef
 =properties=JsonObject(3):
-{"location":"\/dev\/null:1,1--1,1","name":"bar","is_intro":true}
+{"location":"/dev/null:1,1--1,1","name":"bar","is_intro":true}
 
 

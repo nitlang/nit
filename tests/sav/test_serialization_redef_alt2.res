@@ -21,5 +21,5 @@
 <- false> 1111 	f"\/> true>
 
 # Json:
-{"__kind": "obj", "__id": 0, "__class": "D", "b": false, "c": {"__kind": "char", "__val": "b"}, "f": 123.123, "i": 2345, "s": "new line ->\n<-", "n": null, "array": {"__kind": "obj", "__id": 1, "__class": "Array[nullable Object]", "__items": [88, "hello", null]}, "iii": 6789, "sss": "redef", "ii": 1111, "ss": "\tf\"\r\\\/", "ffff": 6.789, "bbbb": false, "d": {"__kind": "ref", "__id": 0}}
+{"__kind": "obj", "__id": 0, "__class": "D", "b": false, "c": {"__kind": "char", "__val": "b"}, "f": 123.123, "i": 2345, "s": "new line ->\n<-", "n": null, "array": {"__kind": "obj", "__id": 1, "__class": "Array[nullable Object]", "__items": [88, "hello", null]}, "iii": 6789, "sss": "redef", "ii": 1111, "ss": "\tf\"\r\\/", "ffff": 6.789, "bbbb": false, "d": {"__kind": "ref", "__id": 0}}
 

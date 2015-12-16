@@ -1,3 +1,3 @@
 {
-	"message": "Wrong format for `mois` (expected AAAA-MM got 2015\/01)"
+	"message": "Wrong format for `mois` (expected AAAA-MM got 2015/01)"
 }

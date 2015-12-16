@@ -47,7 +47,7 @@ interface Jsonable
 	# avoid cyclic references between `append_json` and `to_json` when none are
 	# implemented.
 	protected fun to_json_by_append: String do
-		var buffer = new RopeBuffer
+		var buffer = new FlatBuffer
 		append_json(buffer)
 		return buffer.to_s
 	end
@@ -89,6 +89,22 @@ end
 redef class Text
 	super Jsonable
 
+	# Removes JSON-escaping if necessary in a JSON string
+	#
+	#     assert "\\\"string\\uD83D\\uDE02\\\"".unescape_json == "\"string😂\""
+	fun unescape_json: Text do
+		if not json_need_escape then return self
+		return self.json_to_nit_string
+	end
+
+	# Does `self` need treatment from JSON to Nit ?
+	#
+	# i.e. is there at least one `\` character in it ?
+	#
+	#     assert not "string".json_need_escape
+	#     assert "\\\"string\\\"".json_need_escape
+	protected fun json_need_escape: Bool do return has('\\')
+
 	redef fun append_json(buffer) do
 		buffer.add '\"'
 		for i in [0 .. self.length[ do
@@ -97,8 +113,6 @@ redef class Text
 				buffer.append "\\\\"
 			else if char == '\"' then
 				buffer.append "\\\""
-			else if char == '\/' then
-				buffer.append "\\/"
 			else if char < ' ' then
 				if char == '\n' then
 					buffer.append "\\n"
@@ -106,10 +120,6 @@ redef class Text
 					buffer.append "\\r"
 				else if char == '\t' then
 					buffer.append "\\t"
-				else if char == 0x0C.code_point then
-					buffer.append "\\f"
-				else if char == 0x08.code_point then
-					buffer.append "\\b"
 				else
 					buffer.append char.escape_to_utf16
 				end
@@ -120,13 +130,66 @@ redef class Text
 		buffer.add '\"'
 	end
 
+	# Escapes `self` from a JSON string to a Nit string
+	#
+	#     assert "\\\"string\\\"".json_to_nit_string == "\"string\""
+	#     assert "\\nEscape\\t\\n".json_to_nit_string == "\nEscape\t\n"
+	#     assert "\\u0041zu\\uD800\\uDFD3".json_to_nit_string == "Azu𐏓"
+	protected fun json_to_nit_string: String do
+		var res = new FlatBuffer.with_capacity(bytelen)
+		var i = 0
+		while i < self.length do
+			var char = self[i]
+			if char == '\\' then
+				i += 1
+				char = self[i]
+				if char == 'b' then
+					char = 0x08.code_point
+				else if char == 'f' then
+					char = 0x0C.code_point
+				else if char == 'n' then
+					char = '\n'
+				else if char == 'r' then
+					char = '\r'
+				else if char == 't' then
+					char = '\t'
+				else if char == 'u' then
+					var code = substring(i + 1, 4)
+					var hx = code.to_hex
+					if hx >= 0xD800 and hx <= 0xDFFF then
+						var lostr = substring(i + 7, 4)
+						if lostr.length < 4 then
+							hx = 0xFFFD
+						else
+							hx <<= 16
+							hx += lostr.to_hex
+							hx = hx.from_utf16_surr
+						end
+						i += 6
+					end
+					i += 4
+					char = hx.code_point
+				end
+				# `"`, `/` or `\` => Keep `char` as-is.
+			end
+			res.add char
+			i += 1
+		end
+		return res.to_s
+	end
+
+
 	# Encode `self` in JSON.
 	#
 	# ~~~
 	# assert "\t\"http://example.com\"\r\n\0\\".to_json ==
-	#     "\"\\t\\\"http:\\/\\/example.com\\\"\\r\\n\\u0000\\\\\""
+	#     "\"\\t\\\"http://example.com\\\"\\r\\n\\u0000\\\\\""
 	# ~~~
-	redef fun to_json do return to_json_by_append
+	redef fun to_json do
+		var b = new FlatBuffer.with_capacity(bytelen)
+		append_json(b)
+		return b.to_s
+	end
 
 	# Parse `self` as JSON.
 	#
@@ -170,6 +233,16 @@ redef class Text
 		else if root_node isa NError then
 			return new JsonParseError(root_node.message, root_node.position)
 		else abort
+	end
+end
+
+redef class FlatText
+	redef fun json_need_escape do
+		var its = items
+		for i in [first_byte .. last_byte] do
+			if its[i] == 0x5Cu8 then return true
+		end
+		return false
 	end
 end
 
@@ -424,51 +497,7 @@ end
 
 redef class Nstring
 	# The represented string.
-	private fun to_nit_string: String do
-		var res = new Buffer
-		var i = 1
-		while i < text.length - 1 do
-			var char = text[i]
-			if char == '\\' then
-				i += 1
-				char = text[i]
-				if char == 'b' then
-					char = 0x08.code_point
-				else if char == 'f' then
-					char = 0x0C.code_point
-				else if char == 'n' then
-					char = '\n'
-				else if char == 'r' then
-					char = '\r'
-				else if char == 't' then
-					char = '\t'
-				else if char == 'u' then
-					var escape = new Buffer
-					escape.append "\\u"
-					var code = text.substring(i + 1, 4)
-					escape.append code
-					var hx = code.to_hex
-					if hx >= 0xD800 and hx <= 0xDFFF then
-						var lostr = text.substring(i + 7, 4)
-						if lostr.length < 4 then
-							escape.clear
-							escape.append "\\uFFFD"
-						else
-							escape.append "\\u"
-							escape.append lostr
-						end
-						i += 6
-					end
-					i += 4
-					char = escape.from_utf16_escape
-				end
-				# `"`, `/` or `\` => Keep `char` as-is.
-			end
-			res.add char
-			i += 1
-		end
-		return res.to_s
-	end
+	private fun to_nit_string: String do return text.substring(1, text.length - 2).unescape_json.to_s
 end
 
 redef class Nvalue_object

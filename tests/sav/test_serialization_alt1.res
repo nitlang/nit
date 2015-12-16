@@ -21,5 +21,5 @@
 <- false> 1111 	f"\/> true>
 
 # Json:
-{"b": false, "c": "b", "f": 123.123, "i": 2345, "s": "new line ->\n<-", "n": null, "array": [88, "hello", null], "ii": 1111, "ss": "\tf\"\r\\\/", "d": null}
+{"b": false, "c": "b", "f": 123.123, "i": 2345, "s": "new line ->\n<-", "n": null, "array": [88, "hello", null], "ii": 1111, "ss": "\tf\"\r\\/", "d": null}
 
