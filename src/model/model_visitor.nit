@@ -53,7 +53,7 @@ abstract class ModelVisitor
 	# If `e` is null, nothing is done.
 	fun enter_visit(e: nullable MEntity) do
 		if e == null then return
-		if e.is_fictive and not include_fictive then return
+		if not accept_mentity(e) then return
 		var old_entity = current_entity
 		current_entity = e
 		visit(e)
@@ -74,17 +74,68 @@ abstract class ModelVisitor
 	# visibility level will be visited.
 	var min_visibility: nullable MVisibility = null is writable
 
-	# Is `visibility` acceptable with regard to `min_visibility`?
-	private fun accept_visitibily(visibility: MVisibility): Bool
-	do
-		var min = min_visibility
-		return min == null or min <= visibility
+	# Can we accept this `mentity` in the view regarding its visibility?
+	fun accept_visibility(mentity: MEntity): Bool do
+		return mentity.accept_visibility(min_visibility)
 	end
 
 	# Include fictive entities?
 	#
 	# By default, fictive entities (see `MEntity::is_fictive`) are not visited.
 	var include_fictive = false is writable
+
+	# Can we accept this `mentity` in the view regarding its fictivity?
+	fun accept_fictive(mentity: MEntity): Bool do
+		if include_fictive then return true
+		return not mentity.is_fictive
+	end
+
+	# Should we accept mentities with empty documentation?
+	#
+	# Default is `true`.
+	var include_empty_doc = true is writable
+
+	# Can we accept this `mentity` regarding its documentation?
+	fun accept_empty_doc(mentity: MEntity): Bool do
+		if include_empty_doc then return true
+		return mentity.mdoc != null
+	end
+
+	# Should we accept nitunit test suites?
+	#
+	# Default is `false`.
+	var include_test_suite = false is writable
+
+	# Can we accept this `mentity` regarding its test suite status?
+	fun accept_test_suite(mentity: MEntity): Bool do
+		if include_test_suite then return true
+		if not mentity isa MModule then return true
+		return not mentity.is_test_suite
+	end
+
+	# Should we accept `MAttribute` instances?
+	#
+	# Default is `true`.
+	var include_attribute = true is writable
+
+	# Can we accept this `mentity` regarding its type?
+	fun accept_attribute(mentity: MEntity): Bool do
+		if include_attribute then return true
+		if mentity isa MAttribute then return false
+		if mentity isa MAttributeDef then return false
+		return true
+	end
+
+	# Should we accept this `mentity` from the view?
+	fun accept_mentity(mentity: MEntity): Bool do
+		if not accept_visibility(mentity) then return false
+		if not accept_fictive(mentity) then return false
+		if not accept_empty_doc(mentity) then return false
+		if not accept_test_suite(mentity) then return false
+		if not accept_attribute(mentity) then return false
+		return true
+	end
+
 end
 
 redef class MEntity
@@ -92,6 +143,8 @@ redef class MEntity
 	#
 	# See the specific implementation in the subclasses.
 	fun visit_all(v: ModelVisitor) do end
+
+	private fun accept_visibility(min_visibility: nullable MVisibility): Bool do return true
 end
 
 redef class Model
@@ -124,10 +177,16 @@ redef class MModule
 	# On class importation, nothing is visited (the `MClass` and the `MClassDef` are visited in imported modules).
 	redef fun visit_all(v) do
 		for x in mclassdefs do
-			if not v.accept_visitibily(x.mclass.visibility) then return
 			if x.is_intro then v.enter_visit(x.mclass)
 			v.enter_visit(x)
 		end
+	end
+end
+
+redef class MClass
+	redef fun accept_visibility(min_visibility) do
+		if min_visibility == null then return true
+		return visibility >= min_visibility
 	end
 end
 
@@ -139,9 +198,27 @@ redef class MClassDef
 	# On property inheritance, nothing is visited (the `MProperty` and the `MPropDef` are visited in inherited classes).
 	redef fun visit_all(v) do
 		for x in mpropdefs do
-			if not v.accept_visitibily(x.mproperty.visibility) then return
 			if x.is_intro then v.enter_visit(x.mproperty)
 			v.enter_visit(x)
 		end
+	end
+
+	redef fun accept_visibility(min_visibility) do
+		if min_visibility == null then return true
+		return mclass.visibility >= min_visibility
+	end
+end
+
+redef class MProperty
+	redef fun accept_visibility(min_visibility) do
+		if min_visibility == null then return true
+		return visibility >= min_visibility
+	end
+end
+
+redef class MPropDef
+	redef fun accept_visibility(min_visibility) do
+		if min_visibility == null then return true
+		return mproperty.visibility >= min_visibility
 	end
 end
