@@ -1165,7 +1165,7 @@ class AStdClassdef
 	var n_classkind: AClasskind is writable, noinit
 
 	# The name of the class
-	var n_id: nullable TClassid = null is writable
+	var n_qid: nullable AQclassid = null is writable
 
 	# The `[` symbol
 	var n_obra: nullable TObra = null is writable
@@ -1186,7 +1186,7 @@ class AStdClassdef
 		return [for d in n_propdefs do if d isa ASuperPropdef then d]
 	end
 
-	redef fun hot_location do return n_id.location
+	redef fun hot_location do return n_qid.location
 end
 
 # The implicit class definition of the implicit main method
@@ -1491,7 +1491,7 @@ class ATypePropdef
 	var n_kwtype: TKwtype is writable, noinit
 
 	# The name of the virtual type
-	var n_id: TClassid is writable, noinit
+	var n_qid: AQclassid is writable, noinit
 
 	# The bound of the virtual type
 	var n_type: AType is writable, noinit
@@ -1707,7 +1707,7 @@ class AType
 	var n_kwnullable: nullable TKwnullable = null is writable
 
 	# The name of the class or of the formal type
-	var n_id: TClassid is writable, noinit
+	var n_qid: AQclassid is writable, noinit
 
 	# The opening bracket
 	var n_obra: nullable TObra = null is writable

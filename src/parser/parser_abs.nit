@@ -425,7 +425,7 @@ class AStdClassdef
 	var n_kwredef: nullable TKwredef = null is writable
 	var n_visibility: AVisibility is writable, noinit
 	var n_classkind: AClasskind is writable, noinit
-	var n_id: nullable TClassid = null is writable
+	var n_qid: nullable AQclassid = null is writable
 	var n_obra: nullable TObra = null is writable
 	var n_formaldefs: List[AFormaldef] = new List[AFormaldef]
 	var n_cbra: nullable TCbra = null is writable
@@ -495,7 +495,7 @@ class ATypePropdef
 	var n_kwredef: nullable TKwredef = null is writable
 	var n_visibility: AVisibility is writable, noinit
 	var n_kwtype: TKwtype is writable, noinit
-	var n_id: TClassid is writable, noinit
+	var n_qid: AQclassid is writable, noinit
 	var n_type: AType is writable, noinit
 	var n_annotations: nullable AAnnotations = null is writable
 end
@@ -659,7 +659,7 @@ end
 class AType
 	super AType
 	var n_kwnullable: nullable TKwnullable = null is writable
-	var n_id: TClassid is writable, noinit
+	var n_qid: AQclassid is writable, noinit
 	var n_obra: nullable TObra = null is writable
 	var n_types: List[AType] = new List[AType]
 	var n_cbra: nullable TCbra = null is writable

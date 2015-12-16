@@ -258,8 +258,8 @@ implicit_main_meth {-> propdef}
 
 /* CLASSES *******************************************************************/
 classdef
-	= [doc]:nd redef visibility classkind no qclassid extern_code_block? propdefs kwend {-> New classdef.std(doc.doc, redef.kwredef, visibility, classkind, qclassid.classid, Null, [], Null, extern_code_block, [propdefs.propdef], kwend)}
-	| {for} [doc]:nd redef visibility classkind no qclassid obra [n2]:no formaldefs cbra extern_code_block? propdefs kwend {-> New classdef.std(doc.doc, redef.kwredef, visibility, classkind, qclassid.classid, obra, [formaldefs.formaldef], cbra, extern_code_block, [propdefs.propdef], kwend)}
+	= [doc]:nd redef visibility classkind no qclassid extern_code_block? propdefs kwend {-> New classdef.std(doc.doc, redef.kwredef, visibility, classkind, qclassid, Null, [], Null, extern_code_block, [propdefs.propdef], kwend)}
+	| {for} [doc]:nd redef visibility classkind no qclassid obra [n2]:no formaldefs cbra extern_code_block? propdefs kwend {-> New classdef.std(doc.doc, redef.kwredef, visibility, classkind, qclassid, obra, [formaldefs.formaldef], cbra, extern_code_block, [propdefs.propdef], kwend)}
 	;
 
 redef {-> kwredef?}
@@ -303,7 +303,7 @@ propdef~toplevel {-> propdef}
 !toplevel| {var4} [doc]:nd redef visibility kwvar id typing_o assign [n2]:no expr annotation_withend {-> New propdef.attr(doc.doc, redef.kwredef, visibility, kwvar, id, typing_o.type, assign, expr.expr, annotation_withend.annotations, Null, Null, Null)}
 !toplevel| {var5} [doc]:nd redef visibility kwvar id typing_o annotation_noend? kwdo stmtso kwend? {-> New propdef.attr(doc.doc, redef.kwredef, visibility, kwvar, id, typing_o.type, Null, Null, annotation_noend.annotations, kwdo, stmtso.expr, kwend)}
 !toplevel| {init} [doc]:nd redef visibility kwinit qmethid? signature annotation_noend? kwdo stmtso kwend_o {-> New propdef.meth(doc.doc, redef.kwredef, visibility, Null, kwinit, Null, qmethid.methid, signature, annotation_noend.annotations, Null, Null, kwdo, stmtso.expr, kwend_o.kwend)}
-!toplevel| {type} [doc]:nd redef visibility kwtype classid typing annotation_withend {-> New propdef.type(doc.doc, redef.kwredef, visibility, kwtype, classid, typing.type, annotation_withend.annotations)}
+!toplevel| {type} [doc]:nd redef visibility kwtype qclassid typing annotation_withend {-> New propdef.type(doc.doc, redef.kwredef, visibility, kwtype, qclassid, typing.type, annotation_withend.annotations)}
 !toplevel| {extern_init_implicit} [doc]:nd redef visibility kwnew qmethid? signature annotation_noend? extern_calls extern_code_block {-> New propdef.meth(doc.doc, redef.kwredef, visibility, Null, Null, kwnew, qmethid.methid, signature, annotation_noend.annotations, extern_calls, extern_code_block, Null, Null, Null)}
 !toplevel| {annot} line_annotation_forclass {-> line_annotation_forclass.propdef}
 !toplevel| {super} superclass {-> superclass.propdef}
@@ -407,8 +407,8 @@ extern_code_body {-> extern_code_block} = no extern_code_block {-> extern_code_b
 
 /* TYPES *********************************************************************/
 type~nobra~nopar {-> type}
-	= {simple} kwnullable? classid annotations_o~nopar {-> New type(kwnullable, classid, Null, [], Null, annotations_o~nopar.annotations)}
-!nobra	| {generic} kwnullable? classid obra no types [n2]:no cbra annotations_o~nopar {-> New type(kwnullable, classid, obra, [types.type], cbra, annotations_o~nopar.annotations)}
+	= {simple} kwnullable? qclassid annotations_o~nopar {-> New type(kwnullable, qclassid, Null, [], Null, annotations_o~nopar.annotations)}
+!nobra	| {generic} kwnullable? qclassid obra no types [n2]:no cbra annotations_o~nopar {-> New type(kwnullable, qclassid, obra, [types.type], cbra, annotations_o~nopar.annotations)}
 	;
 types {-> type*} 
 	= type types_tail* {-> [type, types_tail.type]};
@@ -889,7 +889,7 @@ visibility
 	| {intrude} kwintrude
 	;
 
-classdef= {std} doc? kwredef? visibility classkind [id]:classid? obra? [formaldefs]:formaldef* cbra? extern_code_block? [propdefs]:propdef* kwend
+classdef= {std} doc? kwredef? visibility classkind [qid]:qclassid? obra? [formaldefs]:formaldef* cbra? extern_code_block? [propdefs]:propdef* kwend
 	| {top} [propdefs]:propdef*
 	| {main} [propdefs]:propdef*
 	;
@@ -905,7 +905,7 @@ formaldef = [id]:classid type? annotations?;
 
 propdef = {attr} doc? kwredef? visibility kwvar [id2]:id type? assign? expr? annotations? kwdo? [block]:expr? kwend?
 	| {main_meth} kwredef? [block]:expr?
-	| {type} doc? kwredef? visibility kwtype [id]:classid type annotations?
+	| {type} doc? kwredef? visibility kwtype [qid]:qclassid type annotations?
 	| {meth} doc? kwredef? visibility kwmeth? kwinit? kwnew? methid? signature annotations? extern_calls? extern_code_block? kwdo? [block]:expr? kwend?
 	| {super} doc? kwredef? visibility kwsuper type annotations?
 	| {annot} doc? kwredef? visibility? atid opar? [args]:expr* cpar? annotations?
@@ -950,7 +950,7 @@ signature = opar? [params]:param* cpar? type?;
 param	= id type? dotdotdot? annotations?
 	;
 
-type	= kwnullable? [id]:classid obra? [types]:type* cbra? annotations?;
+type	= kwnullable? [qid]:qclassid obra? [types]:type* cbra? annotations?;
 
 label = kwlabel id?;
 
