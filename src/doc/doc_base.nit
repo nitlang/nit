@@ -144,6 +144,7 @@ abstract class DocComposite
 
 	# Depth of `self` in the composite tree.
 	fun depth: Int do
+		var parent = self.parent
 		if parent == null then return 0
 		return parent.depth + 1
 	end
@@ -320,6 +321,7 @@ redef class MModule
 
 	# Avoid id conflict with group
 	redef fun nitdoc_id do
+		var mgroup = self.mgroup
 		if mgroup == null then return super
 		return "{mgroup.full_name}::{full_name}".to_cmangle
 	end
