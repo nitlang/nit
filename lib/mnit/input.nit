@@ -1,7 +1,5 @@
 # This file is part of NIT ( http://www.nitlanguage.org ).
 #
-# Copyright 2011-2013 Alexis Laferrière <alexis.laf@xymus.net>
-#
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
@@ -17,6 +15,9 @@
 # Defines abstract classes for user and general inputs to the application.
 # Implemented independantly for each platforms and technologies.
 module input
+
+import sdl is conditional(linux)
+import android::input_events is conditional(android)
 
 # Input to the App, propagated through `App::input`.
 interface InputEvent
@@ -34,7 +35,12 @@ interface PointerEvent
 
 	# Is down? either going down or already down
 	fun pressed: Bool is abstract
-	fun depressed: Bool is abstract
+
+	# Is it not currently pressed down? The opposite of `pressed`.
+	fun depressed: Bool do return not pressed
+
+	# Is this a movement event?
+	fun is_move: Bool is abstract
 end
 
 # A motion event on screen composed of many `PointerEvent`

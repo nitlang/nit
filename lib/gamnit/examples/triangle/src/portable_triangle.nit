@@ -105,25 +105,22 @@ redef class App
 
 	private var t = 0.0
 
-	redef fun frame_core
+	redef fun frame_core(display)
 	do
-		var display = display
-		if display != null then
-			glClearColor(t, t, t, 1.0)
+		glClearColor(t, t, t, 1.0)
 
-			assert glGetError == gl_NO_ERROR
-			glViewport(0, 0, display.width, display.height)
-			glClear gl_COLOR_BUFFER_BIT
-			glUseProgram program
-			vertex_array.enable
+		assert glGetError == gl_NO_ERROR
+		glViewport(0, 0, display.width, display.height)
+		glClear gl_COLOR_BUFFER_BIT
+		glUseProgram program
+		vertex_array.enable
 
-			glDrawArrays(gl_TRIANGLES, 0, 3)
+		glDrawArrays(gl_TRIANGLES, 0, 3)
 
-			display.flip
+		display.flip
 
-			t += 0.01
-			if t > 1.0 then t = 0.0
-		end
+		t += 0.01
+		if t > 1.0 then t = 0.0
 	end
 
 	redef fun on_stop

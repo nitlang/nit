@@ -22,6 +22,7 @@ import textures
 import programs
 
 import gamnit_android is conditional(android)
+import gamnit_linux is conditional(linux)
 
 redef class App
 
@@ -40,7 +41,7 @@ redef class App
 	# Core of the frame logic, executed only when the display is visible
 	#
 	# This method should be redefined by user modules to customize the behavior of the game.
-	protected fun frame_core do end
+	protected fun frame_core(display: GamnitDisplay) do end
 
 	# Full frame logic, executed even if the display is not visible
 	#
@@ -51,15 +52,13 @@ redef class App
 	protected fun frame_full
 	do
 		var display = display
-		if display != null then frame_core
+		if display != null then frame_core(display)
 
 		feed_events
 	end
 
 	redef fun run
 	do
-		if "NIT_TESTING".environ == "true" then exit 0
-
 		# TODO manage exit condition
 		loop frame_full
 	end
@@ -68,4 +67,21 @@ redef class App
 	#
 	# The implementation varies per platform.
 	private fun feed_events do end
+
+	# Main method to receive `InputEvent` produced by the system
+	#
+	# Returns whether or not the event is used or intercepted.
+	# If `true`, the event will not be processed further by the system.
+	# Returns `false` to intercepts events like the back key on mobile devices.
+	#
+	# This method should be refined by client modules to react to user inputs.
+	fun accept_event(event: InputEvent): Bool do return false
+end
+
+redef class Sys
+	redef fun run
+	do
+		if "NIT_TESTING".environ == "true" then exit 0
+		super
+	end
 end

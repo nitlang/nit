@@ -38,7 +38,7 @@ abstract class Camera
 	fun mvp_matrix: Matrix is abstract
 end
 
-# Simple camera with perspective oriented with Euler angles (`pitch`, `yaw`, `roll`)
+# Simple camera with perspective oriented with Euler angles (`pitch, yaw, roll`)
 class EulerCamera
 	super Camera
 
@@ -63,8 +63,8 @@ class EulerCamera
 
 	# Clipping wall the farthest of the camera, in world dimensions
 	#
-	# Default at `100.0` but this one should be adapted to each context.
-	var far = 100.0 is writable
+	# Default at `10000.0` but this one should be adapted to each context.
+	var far = 10000.0 is writable
 
 	# Look around sensitivity, used by `turn`
 	var sensitivity = 0.005 is writable
@@ -124,6 +124,102 @@ class EulerCamera
 		# Use a projection matrix with a depth
 		var projection = new Matrix.perspective(pi*field_of_view_y/2.0,
 			display.aspect_ratio, near, far)
+
+		return view * projection
+	end
+
+	# Reset the camera position so that `height` world units are visible on the y axis at z=0
+	#
+	# By default, `height` is set to `display.height`.
+	#
+	# After the reset, the camera sits on the Z axis and rotation values are reset to 0.
+	# The X axis is horizontal on the screen and the Y axis is vertical.
+	# Higher values on the Z axis are closer to the camera.
+	fun reset_height(height: nullable Float)
+	do
+		if height == null then height = display.height.to_f
+
+		var opp = height / 2.0
+		var angle = field_of_view_y / 2.0
+		var adj = opp / angle.tan
+
+		position.x = 0.0
+		position.y = 0.0
+		position.z = adj
+
+		pitch = 0.0
+		yaw = 0.0
+		roll = 0.0
+	end
+end
+
+# Orthogonal camera to draw UI objects with services to work with screens of different sizes
+#
+# X axis: left to right of the screen, from `position.x` to `position.x + width`
+# Y axis: top to bottom of the screen, from `position.y` to `position.y + height`
+# Z axis: far to near the camera (usually when values are higher), from `far` to `near`
+class UICamera
+	super Camera
+
+	# Clipping wall near the camera, defaults to 100.0
+	var near = 100.0 is writable
+
+	# Clipping wall the farthest of the camera, defaults to -100.0
+	var far: Float = -100.0 is writable
+
+	# Width in world units, defaults to the width in pixels of the screen
+	var width: Float = display.width.to_f is lazy
+
+	# Height in world units, defaults to the height in pixels of the screen
+	var height: Float = display.height.to_f is lazy
+
+	# Reset the camera position so that `height` world units are visible on the Y axis
+	#
+	# By default, `height` is set to `display.height`.
+	#
+	# This can be used to set standardized UI units independently from the screen resolution.
+	fun reset_height(height: nullable Float)
+	do
+		if height == null then height = display.height.to_f
+
+		self.height = height
+		self.width = height * display.aspect_ratio
+	end
+
+	# Convert the position `x, y` on screen, to UI coordinates
+	fun camera_to_ui(x, y: Numeric): Point[Float]
+	do
+		# FIXME this kind of method should use something like a canvas
+		# instead of being hard coded on the display.
+
+		var wx = x.to_f * width / display.width.to_f - position.x
+		var wy = y.to_f * height / display.height.to_f - position.y
+		return new Point[Float](wx, wy)
+	end
+
+	# Anchor in the top left corner of the screen, at z = 0
+	fun top_left: Point3d[Float] do return new Point3d[Float](position.x, position.y, 0.0)
+
+	# Anchor in the top right corner of the screen, at z = 0
+	fun top_right: Point3d[Float] do return new Point3d[Float](position.x + width, position.y, 0.0)
+
+	# Anchor in the bottom left corner of the screen, at z = 0
+	fun bottom_left: Point3d[Float] do return new Point3d[Float](position.x, position.y + height, 0.0)
+
+	# Anchor in the bottom right corner of the screen, at z = 0
+	fun bottom_right: Point3d[Float] do return new Point3d[Float](position.x + width, position.y + height, 0.0)
+
+	# TODO cache the anchors and the matrix
+
+	redef fun mvp_matrix
+	do
+		var view = new Matrix.identity(4)
+
+		# Translate the world away from the camera
+		view.translate(-position.x/2.0, -position.y/2.0, -position.z/2.0)
+
+		# Use a projection matrix with a depth
+		var projection = new Matrix.orthogonal(0.0, width, -height, 0.0, near, far)
 
 		return view * projection
 	end

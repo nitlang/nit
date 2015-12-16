@@ -32,6 +32,10 @@ redef class GamnitDisplay
 	fun height=(value: Int) do requested_height = value
 	private var requested_height = 1080
 
+	redef fun show_cursor do return sdl_display.show_cursor
+
+	redef fun show_cursor=(val) do sdl_display.show_cursor = val
+
 	# Setup SDL, X11, EGL in order
 	redef fun setup
 	do

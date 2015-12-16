@@ -185,11 +185,8 @@ class AndroidPointerEvent
 		return action.is_down or action.is_move or action.is_pointer_down
 	end
 
-	# Is this a move event?
-	fun is_move: Bool do return motion_event.acting_pointer == self and
+	redef fun is_move do return motion_event.acting_pointer == self and
 		motion_event.native.action.is_move
-
-	redef fun depressed do return not pressed
 
 	# Does this pointer just began touching the screen?
 	fun just_went_down: Bool do return motion_event.acting_pointer == self and
@@ -216,7 +213,14 @@ extern class AndroidKeyEvent `{AInputEvent *`}
 	# Hardware code of the key raising this event
 	fun key_code: Int `{ return AKeyEvent_getKeyCode(self); `}
 
-	redef fun to_c `{
+	redef fun to_c
+	do
+		var i = native_to_c
+		if i == 0 then return null
+		return i.code_point
+	end
+
+	private fun native_to_c: Int `{
 		int code = AKeyEvent_getKeyCode(self);
 		if (code >= AKEYCODE_0 && code <= AKEYCODE_9)
 			return '0'+code-AKEYCODE_0;

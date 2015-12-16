@@ -16,6 +16,7 @@
 module display
 
 import ::glesv2
+import mnit::input
 
 import display_linux is conditional(linux)
 import display_android is conditional(android)
@@ -35,6 +36,14 @@ class GamnitDisplay
 	# Aspect ratio of the screen, `width / height`
 	var aspect_ratio: Float is lazy do return width.to_f / height.to_f
 
+	# Is the cursor locked et the center of the screen?
+	var lock_cursor = false is writable
+
+	# Is the cursor visible?
+	#
+	# Only affects the desktop implementations.
+	var show_cursor: Bool = true is writable
+
 	# Prepare this display
 	#
 	# The implementation varies per platform.
@@ -49,4 +58,9 @@ class GamnitDisplay
 	#
 	# The implementation varies per platform.
 	fun flip do end
+
+	# Loop on available events and feed them back to the app
+	#
+	# The implementation varies per platform.
+	fun feed_events do end
 end
