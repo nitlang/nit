@@ -52,7 +52,7 @@ private class ParallelizationPhase
 
 		# Try to get the name of the class
 		if nmethdef.parent isa AStdClassdef then
-			classname += nmethdef.parent.as(AStdClassdef).n_id.text
+			classname += nmethdef.parent.as(AStdClassdef).n_qid.n_id.text
 		end
 
 		# Try to get the name of the method
@@ -64,19 +64,21 @@ private class ParallelizationPhase
 		var has_rvalue = nmethdef.n_signature.n_type != null
 		var vtype = ""
 		if has_rvalue then
-			vtype = "redef type E: " + nmethdef.n_signature.n_type.n_id.text
+			vtype = "redef type E: " + nmethdef.n_signature.n_type.n_qid.n_id.text
 		end
 
 		# create a return type
 		var n_id = new TClassid
 		n_id.text = classname
+		var n_qid = new AQclassid
+		n_qid.n_id = n_id
 		var n_type = new AType
-		n_type.n_id = n_id
+		n_type.n_qid = n_qid
 		nmethdef.n_signature.n_type = n_type
 
 		var params = new Array[String]
 		for param in nmethdef.n_signature.n_params do
-			var typ = param.n_type.n_id.text
+			var typ = param.n_type.n_qid.n_id.text
 			if param.n_type.n_kwnullable != null then typ = "nullable {typ}"
 			params.add """
 var {{{param.n_id.text}}}: {{{typ}}}

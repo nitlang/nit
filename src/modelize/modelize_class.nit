@@ -47,7 +47,7 @@ redef class ModelBuilder
 		var arity = 0
 		var names = new Array[String]
 		if nclassdef isa AStdClassdef then
-			name = nclassdef.n_id.text
+			name = nclassdef.n_qid.n_id.text
 			nkind = nclassdef.n_classkind
 			mkind = nkind.mkind
 			nvisibility = nclassdef.n_visibility

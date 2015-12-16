@@ -256,7 +256,10 @@ end
 redef class AType
 	private init make
 	do
-		_n_id = new TClassid
+		var n_id = new TClassid
+		var n_qid = new AQclassid
+		n_qid.n_id = n_id
+		_n_qid = n_qid
 	end
 end
 

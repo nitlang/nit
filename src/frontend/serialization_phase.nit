@@ -250,7 +250,7 @@ do
 		end
 
 		for nclassdef in nclassdefs do
-			var name = nclassdef.n_id.text
+			var name = nclassdef.n_qid.n_id.text
 			if nclassdef.n_formaldefs.is_empty and
 			   nclassdef.n_classkind isa AConcreteClasskind then
 
@@ -321,7 +321,7 @@ end
 redef class AType
 	private fun type_name: String
 	do
-		var name = n_id.text
+		var name = n_qid.n_id.text
 
 		if n_kwnullable != null then name = "nullable {name}"
 
@@ -338,7 +338,7 @@ redef class AModule
 	private fun deserializer_nclassdef: nullable AStdClassdef
 	do
 		for nclassdef in n_classdefs do
-			if nclassdef isa AStdClassdef and nclassdef.n_id.text == "Deserializer" then
+			if nclassdef isa AStdClassdef and nclassdef.n_qid.n_id.text == "Deserializer" then
 				return nclassdef
 			end
 		end

@@ -1570,13 +1570,13 @@ redef class ATypePropdef
 
 	redef fun build_property(modelbuilder, mclassdef)
 	do
-		var name = self.n_id.text
-		var mprop = modelbuilder.try_get_mproperty_by_name(self.n_id, mclassdef, name)
+		var name = self.n_qid.n_id.text
+		var mprop = modelbuilder.try_get_mproperty_by_name(self.n_qid, mclassdef, name)
 		if mprop == null then
 			var mvisibility = new_property_visibility(modelbuilder, mclassdef, self.n_visibility)
 			mprop = new MVirtualTypeProp(mclassdef, name, mvisibility)
 			for c in name.chars do if c >= 'a' and c<= 'z' then
-				modelbuilder.warning(n_id, "bad-type-name", "Warning: lowercase in the virtual type `{name}`.")
+				modelbuilder.warning(n_qid, "bad-type-name", "Warning: lowercase in the virtual type `{name}`.")
 				break
 			end
 		else
