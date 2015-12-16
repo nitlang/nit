@@ -235,7 +235,7 @@ class ModelBuilder
 	# FIXME: the name "resolve_mtype" is awful
 	fun resolve_mtype_unchecked(mmodule: MModule, mclassdef: nullable MClassDef, ntype: AType, with_virtual: Bool): nullable MType
 	do
-		var name = ntype.n_id.text
+		var name = ntype.n_qid.n_id.text
 		var res: MType
 
 		# Check virtual type

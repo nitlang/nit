@@ -7,12 +7,14 @@ Start 1,1--42
             TKwvar "var" 1,1--3
             TId "toto" 1,5--8
             AType 1,11--14
-              TClassid "Toto" 1,11--14
+              AQclassid 1,11--14
+                TClassid "Toto" 1,11--14
             TAssign "=" 1,16
             ANewExpr 1,18--41
               TKwnew "new" 1,18--20
               AType 1,22--25
-                TClassid "Toto" 1,22--25
+                AQclassid 1,22--25
+                  TClassid "Toto" 1,22--25
               AQid 1,27--30
                 TId "toto" 1,27--30
               AParExprs 1,31--41

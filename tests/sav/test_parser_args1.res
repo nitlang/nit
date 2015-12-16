@@ -28,19 +28,22 @@ Start ../src/test_parser.nit:17,1--156,1
       APublicVisibility ../src/test_parser.nit:25,1
       AConcreteClasskind ../src/test_parser.nit:25,1--5
         TKwclass "class" ../src/test_parser.nit:25,1--5
-      TClassid "PrintTreeVisitor" ../src/test_parser.nit:25,7--22
+      AQclassid ../src/test_parser.nit:25,7--22
+        TClassid "PrintTreeVisitor" ../src/test_parser.nit:25,7--22
       ASuperPropdef ../src/test_parser.nit:26,2--14
         APublicVisibility ../src/test_parser.nit:26,2
         TKwsuper "super" ../src/test_parser.nit:26,2--6
         AType ../src/test_parser.nit:26,8--14
-          TClassid "Visitor" ../src/test_parser.nit:26,8--14
+          AQclassid ../src/test_parser.nit:26,8--14
+            TClassid "Visitor" ../src/test_parser.nit:26,8--14
       AAttrPropdef ../src/test_parser.nit:27,2--26
         APrivateVisibility ../src/test_parser.nit:27,2--8
           TKwprivate "private" ../src/test_parser.nit:27,2--8
         TKwvar "var" ../src/test_parser.nit:27,10--12
         TId "rank" ../src/test_parser.nit:27,14--17
         AType ../src/test_parser.nit:27,20--22
-          TClassid "Int" ../src/test_parser.nit:27,20--22
+          AQclassid ../src/test_parser.nit:27,20--22
+            TClassid "Int" ../src/test_parser.nit:27,20--22
         TAssign "=" ../src/test_parser.nit:27,24
         AIntegerExpr ../src/test_parser.nit:27,26
           TInteger "0" ../src/test_parser.nit:27,26
@@ -67,7 +70,8 @@ Start ../src/test_parser.nit:17,1--156,1
                 AListExprs ../src/test_parser.nit:30,6
               TKwisa "isa" ../src/test_parser.nit:30,8--10
               AType ../src/test_parser.nit:30,12--16
-                TClassid "Token" ../src/test_parser.nit:30,12--16
+                AQclassid ../src/test_parser.nit:30,12--16
+                  TClassid "Token" ../src/test_parser.nit:30,12--16
             TKwthen "then" ../src/test_parser.nit:30,18--21
             ABlockExpr ../src/test_parser.nit:31,4--88
               ACallExpr ../src/test_parser.nit:31,4--88
@@ -765,7 +769,8 @@ Start ../src/test_parser.nit:17,1--156,1
                   ANewExpr ../src/test_parser.nit:95,11--25
                     TKwnew "new" ../src/test_parser.nit:95,11--13
                     AType ../src/test_parser.nit:95,15--25
-                      TClassid "ToolContext" ../src/test_parser.nit:95,15--25
+                      AQclassid ../src/test_parser.nit:95,15--25
+                        TClassid "ToolContext" ../src/test_parser.nit:95,15--25
                     AListExprs ../src/test_parser.nit:95,25
                 ALoopExpr ../src/test_parser.nit:97,2--117,4
                   TKwloop "loop" ../src/test_parser.nit:97,2--5
@@ -797,7 +802,8 @@ Start ../src/test_parser.nit:17,1--156,1
                           AListExprs ../src/test_parser.nit:99,6
                         TKwisa "isa" ../src/test_parser.nit:99,8--10
                         AType ../src/test_parser.nit:99,12--18
-                          TClassid "TString" ../src/test_parser.nit:99,12--18
+                          AQclassid ../src/test_parser.nit:99,12--18
+                            TClassid "TString" ../src/test_parser.nit:99,12--18
                       TKwthen "then" ../src/test_parser.nit:99,20--23
                       ABlockExpr ../src/test_parser.nit:100,4--106,11
                         AVardeclExpr ../src/test_parser.nit:100,4--17
@@ -852,7 +858,8 @@ Start ../src/test_parser.nit:17,1--156,1
                           AListExprs ../src/test_parser.nit:109,6
                         TKwisa "isa" ../src/test_parser.nit:109,8--10
                         AType ../src/test_parser.nit:109,12--17
-                          TClassid "AError" ../src/test_parser.nit:109,12--17
+                          AQclassid ../src/test_parser.nit:109,12--17
+                            TClassid "AError" ../src/test_parser.nit:109,12--17
                       TKwthen "then" ../src/test_parser.nit:109,19--22
                       ABlockExpr ../src/test_parser.nit:110,4--111,11
                         ACallExpr ../src/test_parser.nit:110,4--57
@@ -914,7 +921,8 @@ Start ../src/test_parser.nit:17,1--156,1
                             ANewExpr ../src/test_parser.nit:115,5--24
                               TKwnew "new" ../src/test_parser.nit:115,5--7
                               AType ../src/test_parser.nit:115,9--24
-                                TClassid "PrintTreeVisitor" ../src/test_parser.nit:115,9--24
+                                AQclassid ../src/test_parser.nit:115,9--24
+                                  TClassid "PrintTreeVisitor" ../src/test_parser.nit:115,9--24
                               AListExprs ../src/test_parser.nit:115,24
                             TCpar ")" ../src/test_parser.nit:115,25
                           AQid ../src/test_parser.nit:115,27--37
@@ -965,7 +973,8 @@ Start ../src/test_parser.nit:17,1--156,1
                           ANewExpr ../src/test_parser.nit:122,13--45
                             TKwnew "new" ../src/test_parser.nit:122,13--15
                             AType ../src/test_parser.nit:122,17--26
-                              TClassid "SourceFile" ../src/test_parser.nit:122,17--26
+                              AQclassid ../src/test_parser.nit:122,17--26
+                                TClassid "SourceFile" ../src/test_parser.nit:122,17--26
                             AQid ../src/test_parser.nit:122,28--38
                               TId "from_string" ../src/test_parser.nit:122,28--38
                             AParExprs ../src/test_parser.nit:122,39--45
@@ -987,7 +996,8 @@ Start ../src/test_parser.nit:17,1--156,1
                           ANewExpr ../src/test_parser.nit:124,12--33
                             TKwnew "new" ../src/test_parser.nit:124,12--14
                             AType ../src/test_parser.nit:124,16--25
-                              TClassid "FileReader" ../src/test_parser.nit:124,16--25
+                              AQclassid ../src/test_parser.nit:124,16--25
+                                TClassid "FileReader" ../src/test_parser.nit:124,16--25
                             AQid ../src/test_parser.nit:124,27--30
                               TId "open" ../src/test_parser.nit:124,27--30
                             AParExprs ../src/test_parser.nit:124,31--33
@@ -1007,7 +1017,8 @@ Start ../src/test_parser.nit:17,1--156,1
                           ANewExpr ../src/test_parser.nit:125,13--32
                             TKwnew "new" ../src/test_parser.nit:125,13--15
                             AType ../src/test_parser.nit:125,17--26
-                              TClassid "SourceFile" ../src/test_parser.nit:125,17--26
+                              AQclassid ../src/test_parser.nit:125,17--26
+                                TClassid "SourceFile" ../src/test_parser.nit:125,17--26
                             AParExprs ../src/test_parser.nit:125,27--32
                               TOpar "(" ../src/test_parser.nit:125,27
                               ACallExpr ../src/test_parser.nit:125,28
@@ -1038,7 +1049,8 @@ Start ../src/test_parser.nit:17,1--156,1
                       ANewExpr ../src/test_parser.nit:128,15--31
                         TKwnew "new" ../src/test_parser.nit:128,15--17
                         AType ../src/test_parser.nit:128,19--23
-                          TClassid "Lexer" ../src/test_parser.nit:128,19--23
+                          AQclassid ../src/test_parser.nit:128,19--23
+                            TClassid "Lexer" ../src/test_parser.nit:128,19--23
                         AParExprs ../src/test_parser.nit:128,24--31
                           TOpar "(" ../src/test_parser.nit:128,24
                           ACallExpr ../src/test_parser.nit:128,25--30
@@ -1081,7 +1093,8 @@ Start ../src/test_parser.nit:17,1--156,1
                                 AListExprs ../src/test_parser.nit:131,18
                               TKwisa "isa" ../src/test_parser.nit:131,20--22
                               AType ../src/test_parser.nit:131,24--26
-                                TClassid "EOF" ../src/test_parser.nit:131,24--26
+                                AQclassid ../src/test_parser.nit:131,24--26
+                                  TClassid "EOF" ../src/test_parser.nit:131,24--26
                           TKwdo "do" ../src/test_parser.nit:131,28--29
                           ABlockExpr ../src/test_parser.nit:132,5--136,6
                             AIfExpr ../src/test_parser.nit:132,5--134,7
@@ -1154,7 +1167,8 @@ Start ../src/test_parser.nit:17,1--156,1
                           ANewExpr ../src/test_parser.nit:138,17--33
                             TKwnew "new" ../src/test_parser.nit:138,17--19
                             AType ../src/test_parser.nit:138,21--26
-                              TClassid "Parser" ../src/test_parser.nit:138,21--26
+                              AQclassid ../src/test_parser.nit:138,21--26
+                                TClassid "Parser" ../src/test_parser.nit:138,21--26
                             AParExprs ../src/test_parser.nit:138,27--33
                               TOpar "(" ../src/test_parser.nit:138,27
                               ACallExpr ../src/test_parser.nit:138,28--32
@@ -1199,7 +1213,8 @@ Start ../src/test_parser.nit:17,1--156,1
                               AListExprs ../src/test_parser.nit:142,11
                             TKwisa "isa" ../src/test_parser.nit:142,13--15
                             AType ../src/test_parser.nit:142,17--22
-                              TClassid "AError" ../src/test_parser.nit:142,17--22
+                              AQclassid ../src/test_parser.nit:142,17--22
+                                TClassid "AError" ../src/test_parser.nit:142,17--22
                           TKwthen "then" ../src/test_parser.nit:142,24--27
                           ABlockExpr ../src/test_parser.nit:143,5--144,10
                             ACallExpr ../src/test_parser.nit:143,5--58
@@ -1294,7 +1309,8 @@ Start ../src/test_parser.nit:17,1--156,1
                                   ANewExpr ../src/test_parser.nit:151,6--25
                                     TKwnew "new" ../src/test_parser.nit:151,6--8
                                     AType ../src/test_parser.nit:151,10--25
-                                      TClassid "PrintTreeVisitor" ../src/test_parser.nit:151,10--25
+                                      AQclassid ../src/test_parser.nit:151,10--25
+                                        TClassid "PrintTreeVisitor" ../src/test_parser.nit:151,10--25
                                     AListExprs ../src/test_parser.nit:151,25
                                   TCpar ")" ../src/test_parser.nit:151,26
                                 AQid ../src/test_parser.nit:151,28--38

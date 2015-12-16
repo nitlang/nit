@@ -697,7 +697,7 @@ redef class AStdClassdef
 
 		v.visit n_classkind
 		v.adds
-		v.visit n_id
+		v.visit n_qid
 
 		if not n_formaldefs.is_empty then
 			v.consume "["
@@ -786,7 +786,7 @@ redef class AType
 			v.adds
 		end
 
-		v.visit n_id
+		v.visit n_qid
 
 		if not n_types.is_empty then
 			v.consume "["
@@ -945,7 +945,7 @@ redef class ATypePropdef
 		super
 		v.visit n_kwtype
 		v.adds
-		v.visit n_id
+		v.visit n_qid
 		v.consume ":"
 		v.adds
 		v.visit n_type
