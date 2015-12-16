@@ -78,7 +78,7 @@ Task [
 Object -> Task [dir=back arrowtail=open style=dashed];
 
 A [
- label = "{A||+ pubA(a: A)\l+ pubA2(): A\l+ vpubA(): nullable A\l+ vpubA=(vpubA: nullable A)\l+ vpubA2(): A\l+ vpubA2=(vpubA2: A)\l}"
+ label = "{A||+ pubA(a: A)\l# proA(a: A)\l+ pubA2(): A\l# proA2(): A\l+ vpubA(): nullable A\l+ vpubA=(vpubA: nullable A)\l# vproA(): nullable A\l# vproA=(vproA: nullable A)\l+ vpubA2(): A\l+ vpubA2=(vpubA2: A)\l# vproA2(): A\l# vproA2=(vproA2: A)\l}"
 ]
 Object -> A [dir=back arrowtail=open style=dashed];
 
