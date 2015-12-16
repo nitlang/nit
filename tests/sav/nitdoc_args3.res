@@ -21,11 +21,8 @@ index.html
 js/
 less/
 module_base_attr_nullable-.html
-property_base_attr_nullable-__Bar___a3.html
 property_base_attr_nullable-__Bar__a3.html
 property_base_attr_nullable-__Bar__a3_61d.html
-property_base_attr_nullable-__Foo___a1.html
-property_base_attr_nullable-__Foo___a2.html
 property_base_attr_nullable-__Foo__a1.html
 property_base_attr_nullable-__Foo__a1_61d.html
 property_base_attr_nullable-__Foo__a2.html
@@ -35,7 +32,6 @@ property_base_attr_nullable-__Foo__run.html
 property_base_attr_nullable-__Foo__run_other.html
 property_base_attr_nullable-__Int___43d.html
 property_base_attr_nullable-__Int__output.html
-property_base_attr_nullable-__Integer___val.html
 property_base_attr_nullable-__Integer__init.html
 property_base_attr_nullable-__Integer__output.html
 property_base_attr_nullable-__Integer__val.html
