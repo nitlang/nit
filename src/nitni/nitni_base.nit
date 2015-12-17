@@ -67,7 +67,7 @@ redef class MType
 	# Representation of this type in pure C on the FFI extern side
 	#   Object -> Object
 	#   Pointer -> void*
-	fun cname: String is abstract
+	fun cname: String do return cname_normal_class
 
 	# Representation of this type in C for the internal of the system
 	# Hides extern types.
@@ -83,6 +83,9 @@ redef class MType
 	#   type Object is_primitive? false
 	#   type Pointer is_primitive? true
 	fun is_cprimitive: Bool do return false
+
+	# Name of this type in C for normal classes (not extern and not primitive)
+	protected fun cname_normal_class: String do return mangled_cname
 end
 
 redef class MClassType
@@ -125,9 +128,6 @@ redef class MClassType
 		return super
 	end
 
-	# Name of this type in C for normal classes (not extern and not primitive)
-	protected fun cname_normal_class: String do return mangled_cname
-
 	redef fun mangled_cname do return mclass.name
 
 	redef fun is_cprimitive do return mclass.kind == extern_kind or
@@ -136,7 +136,6 @@ redef class MClassType
 end
 
 redef class MNullableType
-	redef fun cname do return mangled_cname
 	redef fun mangled_cname do return "nullable_{mtype.mangled_cname}"
 end
 
@@ -145,7 +144,6 @@ redef class MFormalType
 end
 
 redef class MGenericType
-	redef fun cname do return mangled_cname
 	redef fun mangled_cname
 	do
 		var base = super

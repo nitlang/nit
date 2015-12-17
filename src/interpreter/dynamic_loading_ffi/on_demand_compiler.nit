@@ -262,7 +262,7 @@ redef class MMethodDef
 		for param in msignature.mparameters do params.add param.mtype.cname_blind
 
 		# Declare the implementation function as extern
-		var impl_cname = mproperty.build_cname(mclassdef.mclass.mclass_type,
+		var impl_cname = mproperty.build_cname(mclassdef.bound_mtype,
 			mclassdef.mmodule, "___impl", long_signature)
 		ecc.body_decl.add "extern {c_return_type} {impl_cname}({params.join(", ")});\n"
 
