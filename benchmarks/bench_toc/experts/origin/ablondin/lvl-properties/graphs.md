@@ -1,0 +1,91 @@
+graphs
+ digraph
+  Digraph
+   # Basic functions
+    to_s
+    to_dot
+    is_empty
+   # Vertices
+    vertices
+    num_vertices
+    has_vertex
+    vertices_iterator
+   # Arcs
+    arcs
+    num_arcs
+    has_arc
+    arcs_iterator
+   # Neighbors and degrees
+    is_predecessor
+    is_successor
+    predecessors
+    successors
+    incoming_arcs
+    outgoing_arcs
+    in_degree
+    out_degree
+   # Paths and circuits
+    has_path
+    has_circuit
+    a_shortest_path
+    distance
+   # Components
+    weakly_connected_components
+    strongly_connected_components
+  MutableDigraph
+   # Vertices
+    add_vertex
+    remove_vertex
+    add_vertices
+   # Arcs
+    add_arc
+    remove_arc
+    add_arcs
+  HashDigraph
+   -incoming_vertices_map
+   -outgoing_vertices_map
+   -number_of_arcs
+   ~~add_vertex~~
+   ~~has_vertex~~
+   ~~remove_vertex~~
+   ~~num_vertices~~
+   ~~vertices_iterator~~
+   ~~add_arc~~
+   ~~has_arc~~
+   ~~remove_arc~~
+   ~~num_arcs~~
+   ~~predecessors~~
+   ~~successors~~
+   ~~-incoming_vertices_map=~~
+   ~~-outgoing_vertices_map=~~
+   ~~-number_of_arcs=~~
+  TarjanAlgorithm
+   -graph
+   -index
+   -stack
+   -vertex_to_index
+   -ancestor
+   -in_stack
+   -sccs
+   -strongly_connected_components
+   init
+   -visit
+   ~~-graph=~~
+   ~~-sccs=~~
+   ~~-index=~~
+   ~~-stack=~~
+   ~~-vertex_to_index=~~
+   ~~-ancestor=~~
+   ~~-in_stack=~~
+  ArcsIterator
+   init
+   is_ok
+   item
+   next
+   graph
+   -sources_iterator
+   -targets_iterator
+   -update_iterators
+   ~~graph=~~
+   ~~-sources_iterator=~~
+   ~~-targets_iterator=~~

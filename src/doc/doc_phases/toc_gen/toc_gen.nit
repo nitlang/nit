@@ -12,12 +12,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Phases represent the *steps* of the NitDoc generation process.
-#
-# See `DocPhase`.
-module doc_phases
+# TOC generation approaches.
+module toc_gen
 
-import doc_html
-import doc_indexing
-import doc_gen_order
-import doc_test
+import toc_gen_misc
+import toc_gen_dependencies
+import toc_gen_mendel
+import toc_gen_size
+import toc_gen_usage
+import toc_gen_pagerank

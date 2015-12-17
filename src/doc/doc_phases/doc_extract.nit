@@ -21,18 +21,38 @@
 module doc_extract
 
 import doc_base
+import modelize
 
 redef class ToolContext
 
 	# Do not generate documentation for attributes.
-	var opt_no_attributes = new OptionBool("Ignore the attributes", "--no-attributes")
+	var opt_no_attributes = new OptionBool(
+		"do not generate documentation for attributes", "--no-attributes")
 
-	# Do not generate documentation for private properties.
+	# Do not generate documentation for properties.
+	var opt_no_properties = new OptionBool(
+		"do not generate documentation for properties", "--no-properties")
+
+	# Do not generate documentation for classes and properties.
+	var opt_no_classes = new OptionBool(
+		"do not generate documentation for classes (and properties)", "--no-classes")
+
+	# Do not generate documentation for redefinitions.
+	var opt_no_redefs = new OptionBool(
+		"do not generate documentation for redefinitions", "--no-redefs")
+
+	# Do not generate documentation for mentities with no MDoc.
+	var opt_no_empty_doc = new OptionBool(
+		"do not generate documentation for entities with empty nitdoc comments", "--no-empty-doc")
+
+	# Generate documentation for private properties.
 	var opt_private = new OptionBool("Also generate private API", "--private")
 
 	redef init do
 		super
-		option_context.add_option(opt_no_attributes, opt_private)
+		option_context.add_option(
+			opt_no_attributes, opt_no_properties, opt_no_classes,
+			opt_no_redefs, opt_no_empty_doc, opt_private)
 	end
 
 	# Minimum visibility displayed.
@@ -41,6 +61,34 @@ redef class ToolContext
 	var min_visibility: MVisibility is lazy do
 		if opt_private.value then return none_visibility
 		return protected_visibility
+	end
+
+	# Should we exclude this `mentity` from the documentation?
+	fun ignore_mentity(mentity: MEntity): Bool do
+		if mentity isa MModule then
+			return mentity.is_fictive or mentity.is_test_suite
+		else if mentity isa MClass then
+			if opt_no_classes.value then return true
+			return mentity.visibility < min_visibility
+		else if mentity isa MClassDef then
+			if opt_no_redefs.value and not mentity.is_intro then return true
+			if opt_no_classes.value then return true
+			return ignore_mentity(mentity.mclass)
+		else if mentity isa MProperty then
+			if opt_no_classes.value or opt_no_properties.value then return true
+			return ignore_mentity(mentity.intro_mclassdef) or
+				mentity.visibility < min_visibility or
+				(opt_no_attributes.value and mentity isa MAttribute) or
+				mentity isa MInnerClass
+		else if mentity isa MPropDef then
+			if opt_no_redefs.value and not mentity.is_intro then return true
+			if opt_no_classes.value or opt_no_properties.value then return true
+			return ignore_mentity(mentity.mclassdef) or
+				ignore_mentity(mentity.mproperty)
+		end
+		var mdoc = mentity.mdoc
+		if opt_no_empty_doc.value and (mdoc == null or mdoc.content.is_empty) then return true
+		return false
 	end
 end
 
@@ -51,29 +99,7 @@ class ExtractionPhase
 	private var new_model: Model is noinit
 
 	# Populates the given DocModel.
-	redef fun apply do
-		doc.populate(self)
-	end
-
-	# Should we exclude this `mpackage` from the documentation?
-	fun ignore_mentity(mentity: MEntity): Bool do
-		if mentity isa MModule then
-			return mentity.is_fictive or mentity.is_test_suite
-		else if mentity isa MClass then
-			return mentity.visibility < ctx.min_visibility
-		else if mentity isa MClassDef then
-			return ignore_mentity(mentity.mclass)
-		else if mentity isa MProperty then
-			return ignore_mentity(mentity.intro_mclassdef) or
-				mentity.visibility < ctx.min_visibility or
-				(ctx.opt_no_attributes.value and mentity isa MAttribute) or
-				mentity isa MInnerClass
-		else if mentity isa MPropDef then
-			return ignore_mentity(mentity.mclassdef) or
-				ignore_mentity(mentity.mproperty)
-		end
-		return false
-	end
+	redef fun apply do doc.populate(self)
 end
 
 # TODO Should I rebuild a new Model from filtered data?
@@ -103,20 +129,23 @@ redef class DocModel
 	# Populate `self` from internal `model`.
 	fun populate(v: ExtractionPhase) do
 		populate_mpackages(v)
+		if v.ctx.opt_no_classes.value then return
 		populate_mclasses(v)
+		if v.ctx.opt_no_properties.value then return
 		populate_mproperties(v)
 	end
 
 	# Populates the `mpackages` set.
 	private fun populate_mpackages(v: ExtractionPhase) do
+		var ctx = v.ctx
 		for mpackage in model.mpackages do
-			if v.ignore_mentity(mpackage) then continue
+			if ctx.ignore_mentity(mpackage) then continue
 			self.mpackages.add mpackage
 			for mgroup in mpackage.mgroups do
-				if v.ignore_mentity(mgroup) then continue
+				if ctx.ignore_mentity(mgroup) then continue
 				self.mgroups.add mgroup
 				for mmodule in mgroup.mmodules do
-					if v.ignore_mentity(mmodule) then continue
+					if ctx.ignore_mentity(mmodule) then continue
 					self.mmodules.add mmodule
 				end
 			end
@@ -125,11 +154,12 @@ redef class DocModel
 
 	# Populates the `mclasses` set.
 	private fun populate_mclasses(v: ExtractionPhase) do
+		var ctx = v.ctx
 		for mclass in model.mclasses do
-			if v.ignore_mentity(mclass) then continue
+			if ctx.ignore_mentity(mclass) then continue
 			self.mclasses.add mclass
 			for mclassdef in mclass.mclassdefs do
-				if v.ignore_mentity(mclassdef) then continue
+				if ctx.ignore_mentity(mclassdef) then continue
 				self.mclassdefs.add mclassdef
 			end
 		end
@@ -137,11 +167,12 @@ redef class DocModel
 
 	# Populates the `mproperties` set.
 	private fun populate_mproperties(v: ExtractionPhase) do
+		var ctx = v.ctx
 		for mproperty in model.mproperties do
-			if v.ignore_mentity(mproperty) then continue
+			if ctx.ignore_mentity(mproperty) then continue
 			self.mproperties.add mproperty
 			for mpropdef in mproperty.mpropdefs do
-				if v.ignore_mentity(mpropdef) then continue
+				if ctx.ignore_mentity(mpropdef) then continue
 				self.mpropdefs.add mpropdef
 			end
 		end
@@ -181,8 +212,15 @@ redef class DocModel
 	# `package::module::Class::prop`.
 	fun mentities_by_namespace(namespace: String): Array[MEntity] do
 		var res = new Array[MEntity]
-		for mentity in mentities do
-			mentity.mentities_by_namespace(namespace, res)
+		var parts = namespace.split_once_on("::")
+		var name = parts.shift
+		for mentity in mpackages do
+			if mentity.name != name then continue
+			if parts.is_empty then
+				res.add mentity
+			else
+				mentity.mentities_by_namespace(parts.first, res)
+			end
 		end
 		return res
 	end
@@ -207,11 +245,18 @@ redef class MEntity
 end
 
 redef class MPackage
-	redef fun mentities_by_namespace(namespace, res) do lookup_in(mgroups, namespace, res)
+	redef fun mentities_by_namespace(namespace, res) do
+		var root = self.root
+		if root == null then return
+		lookup_in([root], namespace, res)
+	end
 end
 
 redef class MGroup
-	redef fun mentities_by_namespace(namespace, res) do lookup_in(mmodules, namespace, res)
+	redef fun mentities_by_namespace(namespace, res) do
+		lookup_in(in_nesting.direct_smallers, namespace, res)
+		lookup_in(mmodules, namespace, res)
+	end
 end
 
 redef class MModule

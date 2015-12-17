@@ -1,0 +1,4 @@
+lib/core
+lib/crypto.nit
+lib/md5.nit
+lib/sha1.nit

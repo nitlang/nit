@@ -2,3 +2,7 @@ module_1.nit -d $WRITE
 base_attr_nullable.nit -d $WRITE
 --private base_attr_nullable.nit -d $WRITE
 --no-render --test test_prog -d $WRITE
+--no-render --test --no-classes test_prog -d $WRITE
+--no-render --test --no-properties test_prog -d $WRITE
+--no-render --test --no-empty-doc test_prog -d $WRITE
+--no-render --test --no-redefs test_prog -d $WRITE
