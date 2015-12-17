@@ -1,7 +1,5 @@
 # This file is part of NIT ( http://www.nitlanguage.org ).
 #
-# Copyright 2014 Alexis Laferrière <alexis.laf@xymus.net>
-#
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
@@ -14,35 +12,24 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Implementation of app.nit for the Linux platform
-module linux
+import ::android::platform
+import ::android::vibration
 
-import app
+import asteronits
+import touch_ui
 
-redef class App
-	# Path to the expected location of the asset folder of this program
-	#
-	# The asset folder should be located relative to the executable at `../assets/`.
-	# This value can be redefined to change the expected location.
-	var assets_dir: String = sys.program_name.dirname / "../assets/" is lazy
-
-	redef fun setup
+redef class Ship
+	redef fun hit
 	do
 		super
-
-		on_create
-		on_restore_state
-		on_start
-		on_resume
+		app.vibrator.vibrate 20
 	end
+end
 
-	redef fun run
+redef class Asteroid
+	redef fun destroy
 	do
 		super
-
-		on_pause
-		on_save_state
-		on_stop
-		on_destroy
+		app.vibrator.vibrate 10
 	end
 end

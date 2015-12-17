@@ -10,4 +10,6 @@ This projects is organized in 3 modules, one per concern:
 
 # Art
 
-Artwork created by Kenney.nl under CC0
+* Graphics and laser sound created by Kenney.nl under CC0.
+* Remote explosion sound created by NenadSimic under CC0.
+* Close explosion sound created by dklon under CC-BY 3.0.

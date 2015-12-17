@@ -18,7 +18,7 @@
 module audio
 
 import app::audio
-import mnit::linux::linux_assets
+import linux
 
 # Simple audio asset
 redef class Sound
