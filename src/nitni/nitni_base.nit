@@ -140,7 +140,7 @@ redef class MNullableType
 	redef fun mangled_cname do return "nullable_{mtype.mangled_cname}"
 end
 
-redef class MVirtualType
+redef class MFormalType
 	redef fun mangled_cname do return to_s
 end
 

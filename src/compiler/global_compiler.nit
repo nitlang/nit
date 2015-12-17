@@ -385,18 +385,19 @@ class GlobalCompilerVisitor
 		var recv = "((struct {arguments[0].mcasttype.c_name}*){arguments[0]})->values"
 		if pname == "[]" then
 			self.ret(self.new_expr("{recv}[{arguments[1]}]", ret_type.as(not null)))
-			return
+			return true
 		else if pname == "[]=" then
 			self.add("{recv}[{arguments[1]}]={arguments[2]};")
-			return
+			return true
 		else if pname == "length" then
 			self.ret(self.new_expr("((struct {arguments[0].mcasttype.c_name}*){arguments[0]})->length", ret_type.as(not null)))
-			return
+			return true
 		else if pname == "copy_to" then
 			var recv1 = "((struct {arguments[1].mcasttype.c_name}*){arguments[1]})->values"
 			self.add("memmove({recv1},{recv},{arguments[2]}*sizeof({elttype.ctype}));")
-			return
+			return true
 		end
+		return false
 	end
 
 	redef fun native_array_instance(elttype: MType, length: RuntimeVariable): RuntimeVariable
