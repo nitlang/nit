@@ -47,6 +47,7 @@ end
 
 redef class MModule
 	redef fun tpl_module(model) do
+		var name = self.name.escape_to_dot
 		var t = new Template
 		t.add "subgraph cluster{name} \{\n"
 		t.add "label = \"{name}\"\n"
@@ -72,8 +73,9 @@ redef class MClassDef
 	var redef_colour = "#B24758"
 
 	redef fun tpl_module(model) do
+		var name = self.name.escape_to_dot
 		var t = new Template
-		t.add "{mmodule}{name} [\n\tlabel = \"\{"
+		t.add "{mmodule.name.escape_to_dot}{name} [\n\tlabel = \"\{"
 		if mclass.kind == abstract_kind then
 			t.add "abstract\\n{name}"
 		else if mclass.kind == interface_kind then
