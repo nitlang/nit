@@ -25,14 +25,28 @@ All entities:
 
 All non-private entities:
  list:
-  MMethodDef: 8 (24.24%)
-  MMethod: 7 (21.21%)
-  MClassDef: 7 (21.21%)
-  MClass: 7 (21.21%)
-  MModule: 1 (3.03%)
-  MGroup: 1 (3.03%)
-  MPackage: 1 (3.03%)
-  Model: 1 (3.03%)
+  MMethodDef: 17 (34.00%)
+  MMethod: 15 (30.00%)
+  MClassDef: 7 (14.00%)
+  MClass: 7 (14.00%)
+  MModule: 1 (2.00%)
+  MGroup: 1 (2.00%)
+  MPackage: 1 (2.00%)
+  Model: 1 (2.00%)
 
 All documented non-private entities:
+ list:
+
+All public entities:
+ list:
+  MMethodDef: 14 (31.81%)
+  MMethod: 12 (27.27%)
+  MClassDef: 7 (15.90%)
+  MClass: 7 (15.90%)
+  MModule: 1 (2.27%)
+  MGroup: 1 (2.27%)
+  MPackage: 1 (2.27%)
+  Model: 1 (2.27%)
+
+All documented public entities:
  list:

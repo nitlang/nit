@@ -119,7 +119,17 @@ redef class Model
 	end
 end
 
-# An OrderedTree that can be easily refined for display purposes
+# An OrderedTree bound to MEntity.
+#
+# We introduce a new class so it can be easily refined by tools working
+# with a Model.
+class MEntityTree
+	super OrderedTree[MEntity]
+end
+
+# A MEntityTree borned to MConcern.
+#
+# TODO remove when nitdoc is fully merged with model_collect
 class ConcernsTree
 	super OrderedTree[MConcern]
 end
@@ -374,7 +384,7 @@ class MClass
 
 	# The short name of the class
 	# In Nit, the name of a class cannot evolve in refinements
-	redef var name: String
+	redef var name
 
 	# The canonical name of the class
 	#
@@ -583,7 +593,7 @@ class MClassDef
 
 	# Internal name combining the module and the class
 	# Example: "mymodule#MyClass"
-	redef var to_s: String is noinit
+	redef var to_s is noinit
 
 	init
 	do
@@ -1277,7 +1287,7 @@ class MGenericType
 
 	# The short-name of the class, then the full-name of each type arguments within brackets.
 	# Example: `"Map[String, List[Int]]"`
-	redef var to_s: String is noinit
+	redef var to_s is noinit
 
 	# The full-name of the class, then the full-name of each type arguments within brackets.
 	# Example: `"core::Map[core::String, core::List[core::Int]]"`
@@ -1299,7 +1309,7 @@ class MGenericType
 		return res.to_s
 	end
 
-	redef var need_anchor: Bool is noinit
+	redef var need_anchor is noinit
 
 	redef fun resolve_for(mtype, anchor, mmodule, cleanup_virtual)
 	do
@@ -1669,7 +1679,7 @@ class MNullableType
 		self.to_s = "nullable {mtype}"
 	end
 
-	redef var to_s: String is noinit
+	redef var to_s is noinit
 
 	redef var full_name is lazy do return "nullable {mtype.full_name}"
 
@@ -1723,7 +1733,7 @@ end
 # The is only one null type per model, see `MModel::null_type`.
 class MNullType
 	super MType
-	redef var model: Model
+	redef var model
 	redef fun to_s do return "null"
 	redef fun full_name do return "null"
 	redef fun c_name do return "null"
@@ -1749,7 +1759,7 @@ end
 # Semantically it is the singleton `null.as_notnull`.
 class MBottomType
 	super MType
-	redef var model: Model
+	redef var model
 	redef fun to_s do return "bottom"
 	redef fun full_name do return "bottom"
 	redef fun c_name do return "bottom"
@@ -1885,7 +1895,7 @@ class MParameter
 	super MEntity
 
 	# The name of the parameter
-	redef var name: String
+	redef var name
 
 	# The static type of the parameter
 	var mtype: MType
@@ -1939,7 +1949,7 @@ abstract class MProperty
 	var intro_mclassdef: MClassDef
 
 	# The (short) name of the property
-	redef var name: String
+	redef var name
 
 	# The canonical name of the property.
 	#
@@ -2310,7 +2320,7 @@ abstract class MPropDef
 
 	# Internal name combining the module, the class and the property
 	# Example: "mymodule#MyClass#mymethod"
-	redef var to_s: String is noinit
+	redef var to_s is noinit
 
 	# Is self the definition that introduce the property?
 	fun is_intro: Bool do return isset mproperty._intro and mproperty.intro == self
@@ -2413,7 +2423,7 @@ end
 # Note this class is basically an enum.
 # FIXME: use a real enum once user-defined enums are available
 class MClassKind
-	redef var to_s: String
+	redef var to_s
 
 	# Is a constructor required?
 	var need_init: Bool

@@ -25,17 +25,12 @@ class TestModelVisitor
 	super ModelVisitor
 
 	redef fun visit(e) do
-		if not doc_only or e.mdoc != null then
-			cpt.inc(e.class_name)
-		end
+		cpt.inc(e.class_name)
 		e.visit_all(self)
 	end
 
 	# Counter of visited entities (by classnames)
 	var cpt = new Counter[String]
-
-	# Do the visitor only count entities with a documentation?
-	var doc_only = false
 end
 
 # The body of the specific work.
@@ -47,12 +42,14 @@ do
 
 	print "All entities, including fictive ones:"
 	var v = new TestModelVisitor
+	v.min_visibility = private_visibility
 	v.include_fictive = true
 	v.enter_visit(model)
 	v.cpt.print_elements(10)
 
 	print "All entities:"
 	v = new TestModelVisitor
+	v.min_visibility = private_visibility
 	v.enter_visit(model)
 	v.cpt.print_elements(10)
 
@@ -65,7 +62,21 @@ do
 	print "\nAll documented non-private entities:"
 	v = new TestModelVisitor
 	v.min_visibility = protected_visibility
-	v.doc_only = true
+	v.include_empty_doc = false
 	v.enter_visit(model)
 	v.cpt.print_elements(10)
+
+	print "\nAll public entities:"
+	v = new TestModelVisitor
+	v.min_visibility = public_visibility
+	v.enter_visit(model)
+	v.cpt.print_elements(10)
+
+	print "\nAll documented public entities:"
+	v = new TestModelVisitor
+	v.min_visibility = public_visibility
+	v.include_empty_doc = false
+	v.enter_visit(model)
+	v.cpt.print_elements(10)
+
 end
