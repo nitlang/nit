@@ -278,6 +278,23 @@ redef class FlatText
 	end
 
 	redef fun [](index) do return _items.char_at(char_to_byte_index(index))
+
+	# If `self` contains only digits and alpha <= 'f', return the corresponding integer.
+	#
+	#     assert "ff".to_hex == 255
+	redef fun to_hex(pos, ln) do
+		var res = 0
+		if pos == null then pos = 0
+		if ln == null then ln = length - pos
+		pos = char_to_byte_index(pos)
+		var its = _items
+		var max = pos + ln
+		for i in [pos .. max[ do
+			res <<= 4
+			res += its[i].ascii.from_hex
+		end
+		return res
+	end
 end
 
 # Immutable strings of characters.
