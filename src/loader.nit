@@ -1011,9 +1011,6 @@ redef class ModelBuilder
 end
 
 redef class MModule
-	# The path of the module source
-	var filepath: nullable String = null
-
 	# Force the parsing of the module using `modelbuilder`.
 	#
 	# If the module was already parsed, the existing ASI is returned.
@@ -1037,6 +1034,7 @@ redef class MModule
 
 		# build the mmodule
 		nmodule.mmodule = self
+		self.location = nmodule.location
 		modelbuilder.build_a_mmodule(mgroup, nmodule)
 
 		modelbuilder.parsed_modules.add self
