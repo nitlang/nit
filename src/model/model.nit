@@ -119,7 +119,17 @@ redef class Model
 	end
 end
 
-# An OrderedTree that can be easily refined for display purposes
+# An OrderedTree bound to MEntity.
+#
+# We introduce a new class so it can be easily refined by tools working
+# with a Model.
+class MEntityTree
+	super OrderedTree[MEntity]
+end
+
+# A MEntityTree borned to MConcern.
+#
+# TODO remove when nitdoc is fully merged with model_collect
 class ConcernsTree
 	super OrderedTree[MConcern]
 end
