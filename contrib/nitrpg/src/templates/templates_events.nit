@@ -29,6 +29,8 @@ redef class GameEvent
 			return new TplPullMerged(self)
 		else if kind == "pull_review" then
 			return new TplPullReview(self)
+		else if kind == "pull_closed" then
+			return new TplPullClosed(self)
 		else if kind == "achievement_unlocked" then
 			return new TplAchievementUnlocked(self)
 		end
@@ -54,9 +56,9 @@ class TplEvent
 	var reward: Int is lazy do return event.data["reward"].as(Int)
 
 	# Load `github_event` data key as a PullRequestEvent.
-	var pull_event: PullRequestEvent is lazy do
+	var issue_event: IssuesEvent is lazy do
 		var obj = event.data["github_event"].as(JsonObject)
-		return new PullRequestEvent.from_json(event.game.api, obj)
+		return new IssuesEvent.from_json(event.game.api, obj)
 	end
 
 	# Load `github_event` data key as a IssueCommentEvent.
@@ -92,8 +94,8 @@ class TplPullOpened
 	super TplEvent
 
 	redef var title is lazy do
-		var pull = pull_event.pull
-		return "{player.link} pushed {pull.link}"
+		var issue = issue_event.issue
+		return "{player.link} pushed {issue.link}"
 	end
 end
 
@@ -102,8 +104,11 @@ class TplPullMerged
 	super TplEvent
 
 	redef var title is lazy do
-		var pull = pull_event.pull
-		return "{player.link} merged <strong>{pull.commits}</strong> commits with {pull.link}"
+		var issue = issue_event.issue
+		var pull = issue.pull_request
+		var count = 0
+		if pull != null then count = pull.commits
+		return "{player.link} merged <strong>{count}</strong> commits with {issue.link}"
 	end
 end
 
@@ -114,6 +119,16 @@ class TplPullReview
 	redef var title is lazy do
 		var issue = issue_comment_event.issue
 		return "{player.link} reviewed {issue.link}"
+	end
+end
+
+# Event: pull_closed
+class TplPullClosed
+	super TplEvent
+
+	redef var title is lazy do
+		var issue = issue_comment_event.issue
+		return "{player.link} closed {issue.link}"
 	end
 end
 

@@ -61,18 +61,21 @@ redef class GithubEvent
 	end
 end
 
-redef class PullRequestEvent
+redef class IssuesEvent
 
 	# Rewards player for opened pull requests.
 	redef fun react_player_event(r, game) do
+		if not issue.is_pull_request then return
+		var pull = game.api.load_pull(game.repo, issue.number)
+		if pull == null then return
 		if action == "opened" or action == "reopened" then
-			react_pull_open(r, game)
+			react_pull_open(r, game, pull)
 		else if action == "closed" then
-			react_pull_close(r, game)
+			react_pull_close(r, game, pull)
 		end
 	end
 
-	private fun react_pull_open(r: PlayerReactor, game: Game) do
+	private fun react_pull_open(r: PlayerReactor, game: Game, pull: PullRequest) do
 		var player = pull.user.player(game)
 		player.nitcoins += r.nc_pull_open
 		player.save
@@ -80,7 +83,7 @@ redef class PullRequestEvent
 		player.add_event(event)
 	end
 
-	private fun react_pull_close(r: PlayerReactor, game: Game) do
+	private fun react_pull_close(r: PlayerReactor, game: Game, pull: PullRequest) do
 		var player = pull.user.player(game)
 		var reward
 		var event
