@@ -93,7 +93,7 @@ class MModule
 	redef var name: String
 
 	# The origin of the definition
-	var location: Location
+	var location: Location is writable
 
 	# Alias for `name`
 	redef fun to_s do return self.name

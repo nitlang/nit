@@ -1037,6 +1037,7 @@ redef class MModule
 
 		# build the mmodule
 		nmodule.mmodule = self
+		self.location = nmodule.location
 		modelbuilder.build_a_mmodule(mgroup, nmodule)
 
 		modelbuilder.parsed_modules.add self
