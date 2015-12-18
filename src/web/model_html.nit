@@ -104,39 +104,10 @@ redef class MEntity
 	#
 	# Mainly used for icons.
 	var css_classes = new Array[String]
-
-	# HTML Tree containing all the nested element of `self`.
-	#
-	# The nested elements depend on the type of `self`:
-	# `MPackage`: root mgroup
-	# `MGroup`: directly nested mgroups, mmodules
-	# `MModule`: mclassdefs
-	# `MClassDef`: mpropdefs
-	fun html_tree: UnorderedList do
-		var list = new UnorderedList
-		list.add_li html_tree_li
-		return list
-	end
-
-	# HTML Tree list item used by `html_tree`.
-	private fun html_tree_li: ListItem do return new ListItem(html_link)
 end
-
 
 redef class MPackage
 	redef fun html_raw_namespace do return html_name
-
-	redef fun html_tree_li do
-		var tpl = new Template
-		tpl.add html_link
-		var list = new UnorderedList
-		var root = self.root
-		if root != null then
-			list.add_li root.html_tree_li
-		end
-		tpl.add list
-		return new ListItem(tpl)
-	end
 
 	redef var html_modifiers = ["package"]
 	redef fun html_namespace do return html_link
@@ -169,20 +140,6 @@ redef class MGroup
 	end
 
 	redef var css_classes = ["public"]
-
-	redef fun html_tree_li do
-		var tpl = new Template
-		tpl.add html_link
-		var list = new UnorderedList
-		for mgroup in in_nesting.direct_smallers do
-			list.add_li mgroup.html_tree_li
-		end
-		for mmodule in mmodules do
-			list.add_li mmodule.html_tree_li
-		end
-		tpl.add list
-		return new ListItem(tpl)
-	end
 end
 
 redef class MModule
@@ -216,17 +173,6 @@ redef class MModule
 	end
 
 	redef var css_classes = ["public"]
-
-	redef fun html_tree_li do
-		var tpl = new Template
-		tpl.add html_link
-		var list = new UnorderedList
-		for mclassdef in mclassdefs do
-			list.add_li mclassdef.html_tree_li
-		end
-		tpl.add list
-		return new ListItem(tpl)
-	end
 end
 
 redef class MClass
@@ -279,17 +225,6 @@ end
 
 redef class MClassDef
 	redef fun html_raw_namespace do return "{mmodule.html_raw_namespace}::{html_name}"
-
-	redef fun html_tree_li do
-		var tpl = new Template
-		tpl.add html_link
-		var list = new UnorderedList
-		for mpropdef in mpropdefs do
-			list.add_li mpropdef.html_tree_li
-		end
-		tpl.add list
-		return new ListItem(tpl)
-	end
 
 	redef fun mdoc_or_fallback do return mdoc or else mclass.mdoc_or_fallback
 
@@ -724,5 +659,55 @@ redef class MParameter
 		tpl.add mtype.html_signature
 		if is_vararg then tpl.add "..."
 		return tpl
+	end
+end
+
+redef class MEntityTree
+	# Render `self` as a hierarchical UnorderedList.
+	fun html_list: UnorderedList do
+		var lst = new_unordered_list
+		for r in roots do
+			var li = new_mentity_item(r)
+			lst.add_li li
+			build_html_list(r, li)
+		end
+		return lst
+	end
+
+	# Build the html list recursively.
+	private fun build_html_list(e: MEntity, li: ListItem) do
+		if not sub.has_key(e) then return
+		var subs = sub[e]
+		var lst = new_unordered_list
+		for e2 in subs do
+			if e2 isa MGroup and e2.is_root then
+				build_html_list(e2, li)
+			else
+				var sli = new_mentity_item(e2)
+				lst.add_li sli
+				build_html_list(e2, sli)
+			end
+		end
+		var text = new Template
+		text.add li.text
+		if not lst.is_empty then text.add lst
+		li.text = text
+	end
+
+	# HTML unordered List used to compose the tree.
+	#
+	# Redefine this method to add custom CSS classes or other html attributes.
+	protected fun new_unordered_list: UnorderedList do return new UnorderedList
+
+	# Return a li element for `mconcern` that can be displayed in a concern list
+	protected fun new_mentity_item(mentity: MEntity): ListItem do
+		var tpl = new Template
+		tpl.add mentity.html_link
+		var comment = mentity.html_synopsis
+		if comment != null then
+			tpl.add ": "
+			tpl.add comment
+		end
+		return new ListItem(tpl)
 	end
 end
