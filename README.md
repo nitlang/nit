@@ -57,4 +57,9 @@ To have your environment automatically configured at login, just source it with 
 
     $ . misc/nit_env.sh install
 
-More information: <http://www.nitlanguage.org>
+
+Information, contacts and help:
+
+* Website <http://www.nitlanguage.org>
+* Issues <https://github.com/nitlang/nit/issues>
+* Chatroom <https://gitter.im/nitlang/nit>
