@@ -58,3 +58,6 @@ To have your environment automatically configured at login, just source it with 
     $ . misc/nit_env.sh install
 
 More information: <http://www.nitlanguage.org>
+
+
+[![Join the chat at https://gitter.im/nitlang/nit](https://badges.gitter.im/nitlang/nit.svg)](https://gitter.im/nitlang/nit?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
