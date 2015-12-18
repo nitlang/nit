@@ -155,6 +155,16 @@ class ModelView
 		end
 		return v.tree
 	end
+
+	# Build the POSet of `mmodules` importation.
+	fun mmodules_poset(mmodules: Set[MModule]): POSet[MModule] do
+		return model.mmodule_importation_hierarchy.sub(mmodules)
+	end
+
+	# Build the POSet of `mmodules` hierarchy.
+	fun mclasses_poset(mainmodule: MModule, mclasses: Set[MClass]): POSet[MClass] do
+		return mainmodule.flatten_mclass_hierarchy.sub(mclasses)
+	end
 end
 
 class LookupNamespaceVisitor
