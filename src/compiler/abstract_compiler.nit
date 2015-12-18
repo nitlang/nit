@@ -1659,7 +1659,7 @@ abstract class AbstractCompilerVisitor
 	# This is used for the legacy FFI
 	fun add_extern(mmodule: MModule)
 	do
-		var file = mmodule.location.file.filename
+		var file = mmodule.filepath
 		file = file.strip_extension(".nit")
 		var tryfile = file + ".nit.h"
 		if tryfile.file_exists then

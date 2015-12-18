@@ -276,7 +276,7 @@ class NitUnitExecutor
 		end
 		var opts = new Array[String]
 		if mmodule != null then
-			opts.add "-I {mmodule.location.file.filename.dirname}"
+			opts.add "-I {mmodule.filepath.dirname}"
 		end
 		var cmd = "{nitc} --ignore-visibility --no-color '{file}' {opts.join(" ")} >'{file}.out1' 2>&1 </dev/null -o '{file}.bin'"
 		var res = sys.system(cmd)
