@@ -36,12 +36,21 @@ class RpgAction
 
 	# Return an Error reponse page.
 	fun bad_request(msg: String): HttpResponse do
-		var rsp = new HttpResponse(400)
+		var rsp = new_response(400)
 		var page = new NitRpgPage(root_url)
 		var error = new ErrorPanel(msg)
 		page.flow_panels.add error
 		rsp.body = page.write_to_string
 		return rsp
+	end
+
+	# Return a new HttpResponse with `status_code`.
+	#
+	# Iintializes the response with default headers.
+	fun new_response(status_code: Int): HttpResponse do
+		var res = new HttpResponse(status_code)
+		res.header["Content-type"] = "text/html"
+		return res
 	end
 
 	# Returns the game with `name` or null if no game exists with this name.
@@ -78,7 +87,7 @@ class RpgHome
 	redef fun answer(request, url) do
 		var readme = load_readme
 		var games = load_games
-		var response = new HttpResponse(200)
+		var response = new_response(200)
 		page = new NitRpgPage(root_url)
 		page.side_panels.add new GamesShortListPanel(root_url, games)
 		page.flow_panels.add new MDPanel(readme)
@@ -108,7 +117,7 @@ class ListGames
 
 	redef fun answer(request, url) do
 		var games = load_games
-		var response = new HttpResponse(200)
+		var response = new_response(200)
 		page = new NitRpgPage(root_url)
 		page.breadcrumbs = new Breadcrumbs
 		page.breadcrumbs.add_link(root_url / "games", "games")
@@ -144,7 +153,7 @@ class GameAction
 			return bad_request("Repo Error: {msg}")
 		end
 		self.game = game
-		var response = new HttpResponse(200)
+		var response = new_response(200)
 		page = new NitRpgPage(root_url)
 		page.side_panels.add new GameStatusPanel(game)
 		page.breadcrumbs = new Breadcrumbs
