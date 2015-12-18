@@ -220,6 +220,15 @@ redef class MClass
 		return res
 	end
 
+	# Build a class hierarchy poset for `self` based on its ancestors and descendants.
+	fun hierarchy_poset(mainmodule: MModule, view: ModelView): POSet[MClass] do
+		var mclasses = new HashSet[MClass]
+		mclasses.add self
+		mclasses.add_all collect_ancestors(view)
+		mclasses.add_all collect_descendants(view)
+		return view.mclasses_poset(mainmodule, mclasses)
+	end
+
 	# Collect all mproperties introduced in 'self' with `visibility >= min_visibility`.
 	fun collect_intro_mproperties(view: ModelView): Set[MProperty] do
 		var set = new HashSet[MProperty]
