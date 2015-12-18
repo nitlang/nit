@@ -81,6 +81,9 @@ class MModule
 	# The group of module in the package if any
 	var mgroup: nullable MGroup
 
+	# The path of the module source, if any
+	var filepath: nullable String = null is writable
+
 	# The package of the module if any
 	# Safe alias for `mgroup.mpackage`
 	fun mpackage: nullable MPackage
