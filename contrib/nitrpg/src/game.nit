@@ -61,6 +61,9 @@ end
 class Game
 	super GameEntity
 
+	# Database used to access game data.
+	var db: MongoDb
+
 	redef fun game do return self
 
 	# We need a `GithubAPI` client to load Github data.
@@ -74,23 +77,11 @@ class Game
 
 	redef var key = name is lazy
 
-	# Mongo server url where this game data are stored.
-	var mongo_url = "mongodb://localhost:27017" is writable
-
-	# Mongo db client.
-	var client = new MongoClient(mongo_url) is lazy
-
-	# Mongo db name where this game data are stored.
-	var db_name = "nitrpg" is writable
-
-	# Mongo db instance for this game.
-	var db: MongoDb is lazy do return client.database(db_name)
-
 	redef var collection_name = "games"
 
 	# Init the Game and try to load saved data.
-	init from_mongo(api: GithubAPI, repo: Repo) do
-		init(api, repo)
+	init from_mongo(db: MongoDb, api: GithubAPI, repo: Repo) do
+		init(db, api, repo)
 		var req = new JsonObject
 		req["name"] = repo.full_name
 		var res = db.collection("games").find(req)
