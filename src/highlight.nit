@@ -986,7 +986,7 @@ redef class TComment
 	redef fun make_tag(v)
 	do
 		var res = super
-		if not parent isa ADoc then
+		if is_loose then
 			res.add_class("nc_c")
 		end
 		return res
