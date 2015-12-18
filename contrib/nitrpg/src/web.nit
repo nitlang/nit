@@ -273,14 +273,27 @@ class AchievementHome
 	end
 end
 
+# Display the help message for this tool.
+fun show_help(opts: OptionContext) do
+	print "Usage:"
+	print "web <host> <port> <root_url>\n"
+	opts.usage
+	exit 1
+end
+
+var opt_help = new OptionBool("Show this help message", "-h", "--help")
 var opt_api_key = new OptionString("Github API key to use", "-k", "--key")
 var opt_db_name = new OptionString("MongoDB db name to use", "--db")
 var opt_db_url = new OptionString("MongoDB db URL to use", "--db-url")
 
 var opts = new OptionContext
-opts.add_option(opt_api_key, opt_db_name, opt_db_url)
+opts.add_option(opt_help, opt_api_key, opt_db_name, opt_db_url)
 opts.parse(args)
 var argv = opts.rest
+
+if opt_help.value then
+	show_help(opts)
+end
 
 # Github API Key
 var api_key = opt_api_key.value or else get_github_oauth
@@ -296,13 +309,9 @@ var mongo_url = opt_db_url.value or else "mongodb://localhost:27017"
 var client = new MongoClient(mongo_url)
 var db = client.database(db_name)
 
-
 if argv.length != 3 then
-	print "Error: missing argument"
-	print ""
-	print "Usage:"
-	print "web <host> <port> <root_url>"
-	exit 1
+	print "Error: missing argument\n"
+	show_help(opts)
 end
 
 var host = args[0]

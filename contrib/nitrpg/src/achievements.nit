@@ -158,7 +158,7 @@ redef class Player
 			update_achievement(a, event)
 			return
 		end
-		game.message(1, "Player {name} unlocked achievement {a}")
+		game.message(2, "Player {name} unlocked achievement {a}")
 		nitcoins += a.reward
 		add_achievement(a)
 		trigger_unlock_event(a, event, time)
