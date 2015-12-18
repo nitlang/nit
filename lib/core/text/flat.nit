@@ -1101,8 +1101,23 @@ redef class NativeString
 		var end_length = len
 		var pos = 0
 		var chr_ln = 0
-		while pos < len do
+		var rem = len
+		while rem > 0 do
+			while rem >= 4 do
+				var i = fetch_4_chars(pos)
+				if i & 0x80808080 != 0 then break
+				pos += 4
+				chr_ln += 4
+				rem -= 4
+			end
+			if rem == 0 then break
 			var b = self[pos]
+			if b & 0x80u8 == 0x00u8 then
+				pos += 1
+				chr_ln += 1
+				rem -= 1
+				continue
+			end
 			var nxst = length_of_char_at(pos)
 			var ok_st: Bool
 			if nxst == 1 then
@@ -1119,6 +1134,7 @@ redef class NativeString
 				replacements.add pos
 				end_length += 2
 				pos += 1
+				rem -= 1
 				chr_ln += 1
 				continue
 			end
@@ -1141,9 +1157,12 @@ redef class NativeString
 				end_length += 2
 				pos += 1
 				chr_ln += 1
+				rem -= 1
 				continue
 			end
-			pos += c.u8char_len
+			var clen = c.u8char_len
+			pos += clen
+			rem -= clen
 			chr_ln += 1
 		end
 		var ret = self
