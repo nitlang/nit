@@ -248,7 +248,17 @@ abstract class Text
 	# If `self` contains only digits and alpha <= 'f', return the corresponding integer.
 	#
 	#     assert "ff".to_hex == 255
-	fun to_hex: Int do return a_to(16)
+	fun to_hex(pos, ln: nullable Int): Int do
+		var res = 0
+		if pos == null then pos = 0
+		if ln == null then ln = length - pos
+		var max = pos + ln
+		for i in [pos .. max[ do
+			res <<= 4
+			res += self[i].from_hex
+		end
+		return res
+	end
 
 	# If `self` contains only digits <= '7', return the corresponding integer.
 	#
@@ -733,21 +743,32 @@ abstract class Text
 	#     assert "\\ud800\\udfd3".from_utf16_escape == '𐏓'
 	#     assert "\\u00e8".from_utf16_escape == 'è'
 	#     assert "\\u3042".from_utf16_escape == 'あ'
-	fun from_utf16_escape: Char do
-		var ln = length
-		if ln != 6 and ln != 12 then return 0xFFFD.code_point
-		var cphi = substring(2, 4).to_hex
-		if cphi < 0xD800 then return cphi.code_point
-		if cphi > 0xDFFF then return cphi.code_point
-		if cphi > 0xDBFF then return 0xFFFD.code_point
-		var cp = 0
-		cp += (cphi - 0xD800) << 10
-		var cplo = substring(8, 4).to_hex
+	fun from_utf16_escape(pos, ln: nullable Int): Char do
+		if pos == null then pos = 0
+		if ln == null then ln = length - pos
+		if ln < 6 then return 0xFFFD.code_point
+		var cp = from_utf16_digit(pos + 2)
+		if cp < 0xD800 then return cp.code_point
+		if cp > 0xDFFF then return cp.code_point
+		if cp > 0xDBFF then return 0xFFFD.code_point
+		if ln == 6 then return 0xFFFD.code_point
+		if ln < 12 then return 0xFFFD.code_point
+		cp <<= 16
+		cp += from_utf16_digit(pos + 8)
+		var cplo = cp & 0xFFFF
 		if cplo < 0xDC00 then return 0xFFFD.code_point
 		if cplo > 0xDFFF then return 0xFFFD.code_point
-		cp += cplo - 0xDC00
-		cp += 0x10000
-		return cp.code_point
+		return cp.from_utf16_surr.code_point
+	end
+
+	# Returns a UTF-16 escape value
+	#
+	#     var s = "\\ud800\\udfd3"
+	#     assert s.from_utf16_digit(2) == 0xD800
+	#     assert s.from_utf16_digit(8) == 0xDFD3
+	fun from_utf16_digit(pos: nullable Int): Int do
+		if pos == null then pos = 0
+		return to_hex(pos, 4)
 	end
 
 	# Encode `self` to percent (or URL) encoding
@@ -1659,6 +1680,12 @@ redef class Char
 	#     assert 'ま'.bytes == [0xE3u8, 0x81u8, 0xBEu8]
 	fun bytes: SequenceRead[Byte] do return to_s.bytes
 
+	# Is `self` an UTF-16 surrogate pair ?
+	fun is_surrogate: Bool do
+		var cp = code_point
+		return cp >= 0xD800 and cp <= 0xDFFF
+	end
+
 	# Length of `self` in a UTF-8 String
 	private fun u8char_len: Int do
 		var c = self.code_point
@@ -1790,6 +1817,19 @@ redef class Char
 	fun is_alphanumeric: Bool
 	do
 		return self.is_numeric or self.is_alpha
+	end
+
+	# Returns `self` to its int value
+	#
+	# REQUIRE: `is_hexdigit`
+	fun from_hex: Int do
+		if self >= '0' and self <= '9' then return code_point - 0x30
+		if self >= 'A' and self <= 'F' then return code_point - 0x37
+		if self >= 'a' and self <= 'f' then return code_point - 0x57
+		# Happens if self is not a hexdigit
+		assert self.is_hexdigit
+		# To make flow analysis happy
+		abort
 	end
 end
 

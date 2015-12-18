@@ -33,8 +33,7 @@ redef class AStringValue
 end
 
 redef class AHexValue
-	#TODO
-	redef fun to_i do return n_hex.text.to_hex
+	redef fun to_i do return n_hex.text.trim.to_hex(2)
 end
 
 redef class TString # TkBlock
