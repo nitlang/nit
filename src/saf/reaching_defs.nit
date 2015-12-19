@@ -26,6 +26,19 @@ class ReachingDefsAnalysis
 	# New initial flows are empty (conservative analysis).
 	redef fun new_initial_flow do return new FlowHashSet[VarDef]
 
+	# New initial flows for methods contains the parameters.
+	redef fun new_initial_method_flow(n) do
+		var flow = new_initial_flow
+		var n_signature = n.n_signature
+		if n_signature == null then return flow
+		for n_param in n_signature.n_params do
+			var variable = n_param.variable
+			if variable == null then continue
+			flow.add(new VarDef(variable, n_param.location))
+		end
+		return flow
+	end
+
 	# Perform set union (used for **some path** analysis).
 	redef fun merge(s1, s2) do return s1.flow_union(s2)
 

@@ -6,3 +6,5 @@
 --analysis reaching-defs test_saf/flow_loop1.nit
 --analysis reaching-defs test_saf/flow_loop2.nit
 --analysis reaching-defs test_saf/flow_loop3.nit
+--analysis reaching-defs test_saf/flow_fun1.nit
+--analysis reaching-defs test_saf/flow_fun2.nit
