@@ -44,6 +44,12 @@ class GithubEvent
 	# Set action.
 	fun action=(action: String) do json["action"] = action
 
+	# User that triggered the event.
+	fun sender: User do return new User.from_json(api, json["sender"].as(JsonObject))
+
+	# Set sender.
+	fun sender=(sender: User) do json["sender"] = sender.json
+
 	# Repo where this event occured.
 	fun repo: Repo do
 		return new Repo.from_json(api, json["repository"].as(JsonObject))
