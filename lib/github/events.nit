@@ -332,10 +332,10 @@ class PushEvent
 	super GithubEvent
 
 	# SHA of the HEAD commit on the repository.
-	fun head: String do return json["head"].as(String)
+	fun head_commit: String do return json["head_commit"].as(String)
 
 	# Set head.
-	fun head=(head: String) do json["head"] = head
+	fun head_commit=(head_commit: String) do json["head_commit"] = head_commit
 
 	# Full Git ref that was pushed.
 	#
