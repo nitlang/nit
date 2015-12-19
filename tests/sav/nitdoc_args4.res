@@ -56,6 +56,9 @@ MModulePage test_prog
 							####### test_prog-__Sys.intros
 							####### test_prog-__Sys.redefs
 
+CodePage test_prog
+	# test_prog-.code
+
 MClassPage Starter
 	# Starter.section
 		## test_prog-__Starter.intro
@@ -132,6 +135,9 @@ MModulePage game
 						###### list.group
 							####### test_prog__game-__Game.intros
 							####### test_prog__game-__Game.redefs
+
+CodePage game
+	# test_prog__game-.code
 
 MClassPage Game
 	# Game.section
@@ -239,6 +245,9 @@ MModulePage platform
 						###### list.group
 							####### test_prog__platform-__String.intros
 							####### test_prog__platform-__String.redefs
+
+CodePage platform
+	# test_prog__platform-.code
 
 MClassPage Bool
 	# Bool.section
@@ -498,6 +507,9 @@ MModulePage careers
 							####### test_prog__rpg__careers__Warrior.intros
 							####### test_prog__rpg__careers__Warrior.redefs
 
+CodePage careers
+	# test_prog__rpg__careers.code
+
 MClassPage Alcoholic
 	# Alcoholic.section
 		## test_prog__rpg__careers__Alcoholic.intro
@@ -623,6 +635,9 @@ MModulePage character
 						###### list.group
 							####### test_prog__rpg__character__Character.intros
 							####### test_prog__rpg__character__Character.redefs
+
+CodePage character
+	# test_prog__rpg__character.code
 
 MClassPage Character
 	# Character.section
@@ -773,6 +788,9 @@ MModulePage combat
 							####### test_prog__rpg__combat__Character.intros
 							####### test_prog__rpg__combat__Character.redefs
 
+CodePage combat
+	# test_prog__rpg__combat.code
+
 MClassPage Combatable
 	# Combatable.section
 		## test_prog__rpg__combat__Combatable.intro
@@ -888,6 +906,9 @@ MModulePage races
 						###### list.group
 							####### test_prog__rpg__races__Race.intros
 							####### test_prog__rpg__races__Race.redefs
+
+CodePage races
+	# test_prog__rpg__races.code
 
 MClassPage Dwarf
 	# Dwarf.section
@@ -1007,15 +1028,19 @@ MModulePage rpg
 				#### test_prog__rpg__rpg.imports
 				#### test_prog__rpg__rpg.clients
 
-Generated 96 pages
+CodePage rpg
+	# test_prog__rpg__rpg.code
+
+Generated 104 pages
  list:
-  MPropertyPage: 58 (60.41%)
-  MClassPage: 20 (20.83%)
-  MModulePage: 8 (8.33%)
-  MGroupPage: 4 (4.16%)
-  ReadmePage: 4 (4.16%)
-  SearchPage: 1 (1.04%)
-  OverviewPage: 1 (1.04%)
+  MPropertyPage: 58 (55.76%)
+  MClassPage: 20 (19.23%)
+  CodePage: 8 (7.69%)
+  MModulePage: 8 (7.69%)
+  MGroupPage: 4 (3.84%)
+  ReadmePage: 4 (3.84%)
+  SearchPage: 1 (0.96%)
+  OverviewPage: 1 (0.96%)
 Found 182 mentities
  list:
   MMethodDef: 68 (37.36%)
