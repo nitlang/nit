@@ -216,8 +216,11 @@ interface AchievementReactor
 
 	# Return a new instance of the achievement to unlock.
 	fun new_achievement(game: Game): Achievement do
-		var achievement = new Achievement(game, id, name, desc, reward)
-		game.add_achievement(achievement)
+		var achievement = game.load_achievement(id)
+		if achievement == null then
+			achievement = new Achievement(game, id, name, desc, reward)
+			game.add_achievement(achievement)
+		end
 		return achievement
 	end
 end
