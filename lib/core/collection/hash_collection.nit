@@ -265,6 +265,12 @@ class HashMap[K, V]
 		_the_length = 0
 	end
 
+	# Build a list filled with the items of `coll`.
+	init from(coll: Map[K, V]) do
+		init
+		recover_with(coll)
+	end
+
 	redef var keys: RemovableCollection[K] = new HashMapKeys[K, V](self) is lazy
 	redef var values: RemovableCollection[V] = new HashMapValues[K, V](self) is lazy
 	redef fun has_key(k) do return node_at(k) != null

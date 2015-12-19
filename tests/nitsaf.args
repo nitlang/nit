@@ -1,0 +1,10 @@
+--analysis reaching-defs test_saf/simple1.nit
+--analysis reaching-defs test_saf/simple2.nit
+--analysis reaching-defs test_saf/flow_if1.nit
+--analysis reaching-defs test_saf/flow_if2.nit
+--analysis reaching-defs test_saf/flow_if3.nit
+--analysis reaching-defs test_saf/flow_loop1.nit
+--analysis reaching-defs test_saf/flow_loop2.nit
+--analysis reaching-defs test_saf/flow_loop3.nit
+--analysis reaching-defs test_saf/flow_fun1.nit
+--analysis reaching-defs test_saf/flow_fun2.nit
