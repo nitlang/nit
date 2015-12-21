@@ -19,6 +19,7 @@
 module doc_console
 
 import semantize
+import doc_nlp
 import doc_commands
 import doc_extract
 import doc_poset
@@ -63,6 +64,7 @@ class Nitx
 		print "\nCommands:\n"
 		print "\tname\t\t\tlookup module, class and property with the corresponding 'name'"
 		print "\tdoc: <name::space>\tdisplay the documentation page of 'namespace'"
+		print "\tkeywords: <query>\t\tlookup with natural language `query`"
 		print "\nType lookup:"
 		print "\tparam: <Type>\t\tlookup methods using the corresponding 'Type' as parameter"
 		print "\treturn: <Type>\t\tlookup methods returning the corresponding 'Type'"
@@ -245,6 +247,30 @@ redef class CallCommand
 				if mprop.name != mprop_name then continue
 				res.add new MEntityMatch(self, mpropdef)
 			end
+		end
+		return res
+	end
+end
+
+# A query to search modules matching an natural language query.
+redef class NLPCommand
+	redef fun perform(nitx, doc) do
+		var res = new Array[NitxMatch]
+		var query = doc.nlp_processor.process(args.first).vector
+		var metric = new VectorSimilarityMetric(query)
+		var vectors = new HashMap[NLPVector, MEntity]
+		for mmodule in doc.mmodules do
+			var d = mmodule.nlp_document
+			if d == null then continue
+			var v = d.vector
+			vectors[v] = mmodule
+		end
+		metric.collect(vectors.keys)
+		var t = metric.threshold
+		for v in metric.sort do
+			var d = metric[v]
+			if d == 0.0 or d.is_nan or d < t then continue
+			res.add new MEntityMatch(self, vectors[v])
 		end
 		return res
 	end

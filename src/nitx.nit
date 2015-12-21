@@ -46,6 +46,7 @@ private class NitxPhase
 
 		var phases = [
 			new ExtractionPhase(toolcontext, doc),
+			new NLPPhase(toolcontext, doc),
 			new MakePagePhase(toolcontext, doc),
 			new ConcernsPhase(toolcontext, doc),
 			new StructurePhase(toolcontext, doc),
