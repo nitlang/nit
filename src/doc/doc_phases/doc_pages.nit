@@ -15,7 +15,7 @@
 # Create DocPage instances for each documentated Mentity.
 module doc_pages
 
-import doc_extract
+import doc_base
 
 # ExtractionPhase populates the DocModel with DocPage.
 class MakePagePhase

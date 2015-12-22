@@ -15,7 +15,7 @@
 # Base classes used by `nitweb`.
 module web_base
 
-import frontend
+import model::model_views
 import nitcorn
 import json
 
@@ -82,6 +82,29 @@ class NitAction
 		var response = new HttpResponse(200)
 		response.body = json.to_json
 		return response
+	end
+end
+
+# Specific nitcorn Action that uses a Model
+class ModelAction
+	super NitAction
+
+	# Model to use.
+	var model: Model
+
+	# Init the model view from the `req` uri parameters.
+	fun init_model_view(req: HttpRequest): ModelView do
+		var view = new ModelView(model)
+
+		var show_private = req.bool_arg("private") or else false
+		if not show_private then view.min_visibility = protected_visibility
+
+		view.include_fictive = req.bool_arg("fictive") or else false
+		view.include_empty_doc = req.bool_arg("empty-doc") or else true
+		view.include_test_suite = req.bool_arg("test-suite") or else false
+		view.include_attribute = req.bool_arg("attributes") or else true
+
+		return view
 	end
 end
 

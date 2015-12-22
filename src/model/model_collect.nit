@@ -29,109 +29,48 @@
 # entities could not be reachable depending on the modules really imported.
 module model_collect
 
-import model
-
-redef class MEntity
-
-	# Collect mentities with a fully qualified `namespace`.
-	fun collect_by_namespace(namespace: String): Array[MEntity] is abstract
-
-	private fun lookup_in(mentities: Collection[MEntity], namespace: String, res: Array[MEntity]) do
-		var parts = namespace.split_once_on("::")
-		var name = parts.shift
-		for mentity in mentities do
-			if mentity.name != name then continue
-			if parts.is_empty then
-				res.add mentity
-			else
-				res.add_all mentity.collect_by_namespace(parts.first)
-			end
-		end
-	end
-end
-
-redef class Model
-	redef fun collect_by_namespace(namespace) do
-		var res = new Array[MEntity]
-		var parts = namespace.split_once_on("::")
-		var name = parts.shift
-		for mentity in mpackages do
-			if mentity.name != name then continue
-			if parts.is_empty then
-				res.add mentity
-			else
-				res.add_all mentity.collect_by_namespace(parts.first)
-			end
-		end
-		return res
-	end
-end
-
-redef class MPackage
-	redef fun collect_by_namespace(namespace) do
-		var res = new Array[MEntity]
-		var root = self.root
-		if root == null then return res
-		lookup_in([root], namespace, res)
-		return res
-	end
-end
-
-redef class MGroup
-	redef fun collect_by_namespace(namespace) do
-		var res = new Array[MEntity]
-		lookup_in(in_nesting.direct_smallers, namespace, res)
-		lookup_in(mmodules, namespace, res)
-		return res
-	end
-end
+import model_views
 
 redef class MModule
 
-	redef fun collect_by_namespace(namespace) do
-		var res = new Array[MEntity]
-		lookup_in(mclassdefs, namespace, res)
-		return res
-	end
-
 	# Collect mclassdefs introduced in `self` with `visibility >= to min_visibility`.
-	fun collect_intro_mclassdefs(min_visibility: MVisibility): Set[MClassDef] do
+	fun collect_intro_mclassdefs(view: ModelView): Set[MClassDef] do
 		var res = new HashSet[MClassDef]
 		for mclassdef in mclassdefs do
 			if not mclassdef.is_intro then continue
-			if mclassdef.mclass.visibility < min_visibility then continue
+			if not view.accept_mentity(mclassdef) then continue
 			res.add mclassdef
 		end
 		return res
 	end
 
 	# Collect mclassdefs redefined in `self` with `visibility >= to min_visibility`.
-	fun collect_redef_mclassdefs(min_visibility: MVisibility): Set[MClassDef] do
+	fun collect_redef_mclassdefs(view: ModelView): Set[MClassDef] do
 		var res = new HashSet[MClassDef]
 		for mclassdef in mclassdefs do
 			if mclassdef.is_intro then continue
-			if mclassdef.mclass.visibility < min_visibility then continue
+			if not view.accept_mentity(mclassdef) then continue
 			res.add mclassdef
 		end
 		return res
 	end
 
 	# Collect mclasses introduced in `self` with `visibility >= to min_visibility`.
-	fun collect_intro_mclasses(min_visibility: MVisibility): Set[MClass] do
+	fun collect_intro_mclasses(view: ModelView): Set[MClass] do
 		var res = new HashSet[MClass]
 		for mclass in intro_mclasses do
-			if mclass.visibility < min_visibility then continue
+			if not view.accept_mentity(mclass) then continue
 			res.add mclass
 		end
 		return res
 	end
 
 	# Collect mclasses redefined in `self` with `visibility >= to min_visibility`.
-	fun collect_redef_mclasses(min_visibility: MVisibility): Set[MClass] do
+	fun collect_redef_mclasses(view: ModelView): Set[MClass] do
 		var mclasses = new HashSet[MClass]
-		for c in mclassdefs do
-			if c.mclass.visibility < min_visibility then continue
-			if not c.is_intro then mclasses.add(c.mclass)
+		for mclassdef in mclassdefs do
+			if not view.accept_mentity(mclassdef) then continue
+			if not mclassdef.is_intro then mclasses.add(mclassdef.mclass)
 		end
 		return mclasses
 	end
@@ -140,12 +79,12 @@ end
 redef class MClass
 
 	# Collect direct parents of `self` with `visibility >= to min_visibility`.
-	fun collect_parents(min_visibility: MVisibility): Set[MClass] do
+	fun collect_parents(view: ModelView): Set[MClass] do
 		var res = new HashSet[MClass]
 		for mclassdef in mclassdefs do
 			for mclasstype in mclassdef.supertypes do
 				var mclass = mclasstype.mclass
-				if mclass.visibility < min_visibility then continue
+				if not view.accept_mentity(mclass) then continue
 				res.add(mclass)
 			end
 		end
@@ -153,13 +92,13 @@ redef class MClass
 	end
 
 	# Collect all ancestors of `self` with `visibility >= to min_visibility`.
-	fun collect_ancestors(min_visibility: MVisibility): Set[MClass] do
+	fun collect_ancestors(view: ModelView): Set[MClass] do
 		var res = new HashSet[MClass]
 		for mclassdef in self.mclassdefs do
 			for super_mclassdef in mclassdef.in_hierarchy.greaters do
 				if super_mclassdef == mclassdef then continue  # skip self
 				var mclass = super_mclassdef.mclass
-				if mclass.visibility < min_visibility then continue
+				if not view.accept_mentity(mclass) then continue
 				res.add(mclass)
 			end
 		end
@@ -167,13 +106,13 @@ redef class MClass
 	end
 
 	# Collect direct children of `self` with `visibility >= to min_visibility`.
-	fun collect_children(min_visibility: MVisibility): Set[MClass] do
+	fun collect_children(view: ModelView): Set[MClass] do
 		var res = new HashSet[MClass]
 		for mclassdef in self.mclassdefs do
 			for sub_mclassdef in mclassdef.in_hierarchy.direct_smallers do
 				if sub_mclassdef == mclassdef then continue  # skip self
 				var mclass = sub_mclassdef.mclass
-				if mclass.visibility < min_visibility then continue
+				if not view.accept_mentity(mclass) then continue
 				res.add(mclass)
 			end
 		end
@@ -181,13 +120,13 @@ redef class MClass
 	end
 
 	# Collect all descendants of `self` with `visibility >= to min_visibility`.
-	fun descendants(min_visibility: MVisibility): Set[MClass] do
+	fun collect_descendants(view: ModelView): Set[MClass] do
 		var res = new HashSet[MClass]
 		for mclassdef in self.mclassdefs do
 			for sub_mclassdef in mclassdef.in_hierarchy.smallers do
 				if sub_mclassdef == mclassdef then continue  # skip self
 				var mclass = sub_mclassdef.mclass
-				if mclass.visibility < min_visibility then continue
+				if not view.accept_mentity(mclass) then continue
 				res.add(mclass)
 			end
 		end
@@ -195,11 +134,11 @@ redef class MClass
 	end
 
 	# Collect all mproperties introduced in 'self' with `visibility >= min_visibility`.
-	fun collect_intro_mproperties(min_visibility: MVisibility): Set[MProperty] do
+	fun collect_intro_mproperties(view: ModelView): Set[MProperty] do
 		var set = new HashSet[MProperty]
 		for mclassdef in mclassdefs do
 			for mprop in mclassdef.intro_mproperties do
-				if mprop.visibility < min_visibility then continue
+				if not view.accept_mentity(mprop) then continue
 				set.add(mprop)
 			end
 		end
@@ -207,31 +146,32 @@ redef class MClass
 	end
 
 	# Collect all mproperties redefined in 'self' with `visibility >= min_visibility`.
-	fun collect_redef_mproperties(min_visibility: MVisibility): Set[MProperty] do
+	fun collect_redef_mproperties(view: ModelView): Set[MProperty] do
 		var set = new HashSet[MProperty]
 		for mclassdef in mclassdefs do
 			for mpropdef in mclassdef.mpropdefs do
-				if mpropdef.mproperty.visibility < min_visibility then continue
-				if mpropdef.mproperty.intro_mclassdef.mclass != self then set.add(mpropdef.mproperty)
+				if mpropdef.mproperty.intro_mclassdef.mclass == self then continue
+				if not view.accept_mentity(mpropdef) then continue
+				set.add(mpropdef.mproperty)
 			end
 		end
 		return set
 	end
 
 	# Collect mproperties introduced and redefined in 'self' with `visibility >= min_visibility`.
-	fun collect_local_mproperties(min_visibility: MVisibility): Set[MProperty] do
+	fun collect_local_mproperties(view: ModelView): Set[MProperty] do
 		var set = new HashSet[MProperty]
-		set.add_all collect_intro_mproperties(min_visibility)
-		set.add_all collect_redef_mproperties(min_visibility)
+		set.add_all collect_intro_mproperties(view)
+		set.add_all collect_redef_mproperties(view)
 		return set
 	end
 
 	# Collect all mproperties inehrited by 'self' with `visibility >= min_visibility`.
-	fun collect_inherited_mproperties(min_visibility: MVisibility): Set[MProperty] do
+	fun collect_inherited_mproperties(view: ModelView): Set[MProperty] do
 		var set = new HashSet[MProperty]
-		for parent in collect_parents(min_visibility) do
-			set.add_all(parent.collect_intro_mproperties(min_visibility))
-			set.add_all(parent.collect_inherited_mproperties(min_visibility))
+		for parent in collect_parents(view) do
+			set.add_all(parent.collect_intro_mproperties(view))
+			set.add_all(parent.collect_inherited_mproperties(view))
 		end
 		return set
 	end
@@ -239,70 +179,70 @@ redef class MClass
 	# Collect all mproperties accessible by 'self' with `visibility >= min_visibility`.
 	#
 	# This include introduced, redefined, inherited mproperties.
-	fun collect_accessible_mproperties(min_visibility: MVisibility): Set[MProperty] do
+	fun collect_accessible_mproperties(view: ModelView): Set[MProperty] do
 		var set = new HashSet[MProperty]
-		set.add_all(collect_intro_mproperties(min_visibility))
-		set.add_all(collect_redef_mproperties(min_visibility))
-		set.add_all(collect_inherited_mproperties(min_visibility))
+		set.add_all(collect_intro_mproperties(view))
+		set.add_all(collect_redef_mproperties(view))
+		set.add_all(collect_inherited_mproperties(view))
 		return set
 	end
 
 	# Collect mmethods introduced in 'self' with `visibility >= min_visibility`.
-	fun collect_intro_mmethods(min_visibility: MVisibility): Set[MMethod] do
+	fun collect_intro_mmethods(view: ModelView): Set[MMethod] do
 		var res = new HashSet[MMethod]
-		for mproperty in collect_intro_mproperties(min_visibility) do
+		for mproperty in collect_intro_mproperties(view) do
 			if mproperty isa MMethod then res.add(mproperty)
 		end
 		return res
 	end
 
 	# Collect mmethods redefined in 'self' with `visibility >= min_visibility`.
-	fun collect_redef_mmethods(min_visibility: MVisibility): Set[MMethod] do
+	fun collect_redef_mmethods(view: ModelView): Set[MMethod] do
 		var res = new HashSet[MMethod]
-		for mproperty in collect_redef_mproperties(min_visibility) do
+		for mproperty in collect_redef_mproperties(view) do
 			if mproperty isa MMethod then res.add(mproperty)
 		end
 		return res
 	end
 
 	# Collect mmethods introduced and redefined in 'self' with `visibility >= min_visibility`.
-	fun collect_local_mmethods(min_visibility: MVisibility): Set[MMethod] do
+	fun collect_local_mmethods(view: ModelView): Set[MMethod] do
 		var set = new HashSet[MMethod]
-		set.add_all collect_intro_mmethods(min_visibility)
-		set.add_all collect_redef_mmethods(min_visibility)
+		set.add_all collect_intro_mmethods(view)
+		set.add_all collect_redef_mmethods(view)
 		return set
 	end
 
 	# Collect mattributes introduced in 'self' with `visibility >= min_visibility`.
-	fun collect_intro_mattributes(min_visibility: MVisibility): Set[MAttribute] do
+	fun collect_intro_mattributes(view: ModelView): Set[MAttribute] do
 		var res = new HashSet[MAttribute]
-		for mproperty in collect_intro_mproperties(min_visibility) do
+		for mproperty in collect_intro_mproperties(view) do
 			if mproperty isa MAttribute then res.add(mproperty)
 		end
 		return res
 	end
 
 	# Collect mattributes redefined in 'self' with `visibility >= min_visibility`.
-	fun collect_redef_mattributes(min_visibility: MVisibility): Set[MAttribute] do
+	fun collect_redef_mattributes(view: ModelView): Set[MAttribute] do
 		var res = new HashSet[MAttribute]
-		for mproperty in collect_redef_mproperties(min_visibility) do
+		for mproperty in collect_redef_mproperties(view) do
 			if mproperty isa MAttribute then res.add(mproperty)
 		end
 		return res
 	end
 
 	# Collect mattributes introduced and redefined in 'self' with `visibility >= min_visibility`.
-	fun collect_local_mattributes(min_visibility: MVisibility): Set[MAttribute] do
+	fun collect_local_mattributes(view: ModelView): Set[MAttribute] do
 		var set = new HashSet[MAttribute]
-		set.add_all collect_intro_mattributes(min_visibility)
-		set.add_all collect_redef_mattributes(min_visibility)
+		set.add_all collect_intro_mattributes(view)
+		set.add_all collect_redef_mattributes(view)
 		return set
 	end
 
 	# Collect mattributes inherited by 'self' with `visibility >= min_visibility`.
-	fun collect_inherited_mattributes(min_visibility: MVisibility): Set[MAttribute] do
+	fun collect_inherited_mattributes(view: ModelView): Set[MAttribute] do
 		var res = new HashSet[MAttribute]
-		for mproperty in collect_inherited_mproperties(min_visibility) do
+		for mproperty in collect_inherited_mproperties(view) do
 			if mproperty isa MAttribute then res.add(mproperty)
 		end
 		return res
@@ -311,50 +251,44 @@ redef class MClass
 	# Collect all mattributes accessible by 'self' with `visibility >= min_visibility`.
 	#
 	# This include introduced, redefined, inherited mattributes.
-	fun collect_accessible_mattributes(min_visibility: MVisibility): Set[MAttribute] do
+	fun collect_accessible_mattributes(view: ModelView): Set[MAttribute] do
 		var set = new HashSet[MAttribute]
-		set.add_all(collect_intro_mattributes(min_visibility))
-		set.add_all(collect_redef_mattributes(min_visibility))
-		set.add_all(collect_inherited_mattributes(min_visibility))
+		set.add_all(collect_intro_mattributes(view))
+		set.add_all(collect_redef_mattributes(view))
+		set.add_all(collect_inherited_mattributes(view))
 		return set
 	end
 end
 
 redef class MClassDef
 
-	redef fun collect_by_namespace(namespace) do
-		var res = new Array[MEntity]
-		lookup_in(mpropdefs, namespace, res)
-		return res
-	end
-
 	# Collect mpropdefs in 'self' with `visibility >= min_visibility`.
-	fun collect_mpropdefs(min_visibility: MVisibility): Set[MPropDef] do
+	fun collect_mpropdefs(view: ModelView): Set[MPropDef] do
 		var res = new HashSet[MPropDef]
 		for mpropdef in mpropdefs do
-			if mpropdef.mproperty.visibility < min_visibility then continue
+			if not view.accept_mentity(mpropdef) then continue
 			res.add mpropdef
 		end
 		return res
 	end
 
 	# Collect mpropdefs introduced in 'self' with `visibility >= min_visibility`.
-	fun collect_intro_mpropdefs(min_visibility: MVisibility): Set[MPropDef] do
+	fun collect_intro_mpropdefs(view: ModelView): Set[MPropDef] do
 		var res = new HashSet[MPropDef]
 		for mpropdef in mpropdefs do
 			if not mpropdef.is_intro then continue
-			if mpropdef.mproperty.visibility < min_visibility then continue
+			if not view.accept_mentity(mpropdef) then continue
 			res.add mpropdef
 		end
 		return res
 	end
 
 	# Collect mpropdefs redefined in 'self' with `visibility >= min_visibility`.
-	fun collect_redef_mpropdefs(min_visibility: MVisibility): Set[MPropDef] do
+	fun collect_redef_mpropdefs(view: ModelView): Set[MPropDef] do
 		var res = new HashSet[MPropDef]
 		for mpropdef in mpropdefs do
 			if mpropdef.is_intro then continue
-			if mpropdef.mproperty.visibility < min_visibility then continue
+			if not view.accept_mentity(mpropdef) then continue
 			res.add mpropdef
 		end
 		return res

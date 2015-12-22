@@ -16,23 +16,14 @@
 module uml_base
 
 import toolcontext
-import model
+import model::model_collect
 
-redef class ToolContext
-	# -p
-	var opt_privacy = new OptionBool("Generates private API", "-p", "--private")
-
-	# Shortcut for the value of `self.opt_privacy`
-	fun private_gen: Bool do return opt_privacy.value
-
-	redef init do
-		option_context.add_option opt_privacy
-		super
-	end
-end
-
+# UML model builder.
 class UMLModel
-	var model: Model
+
+	# Model view
+	var view: ModelView
+
+	# Main module used for linearization.
 	var mainmodule: MModule
-	var ctx: ToolContext
 end

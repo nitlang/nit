@@ -37,12 +37,13 @@ private class NullablesMetricsPhase
 
 		print toolcontext.format_h1("\n# Nullable metrics")
 
-		var metrics = new MetricSet
-		var min_vis = private_visibility
-		metrics.register(new CNBA(mainmodule, min_vis))
-		metrics.register(new CNBNA(mainmodule, min_vis))
-
 		var model = toolcontext.modelbuilder.model
+		var model_view = model.private_view
+
+		var metrics = new MetricSet
+		metrics.register(new CNBA(mainmodule, model_view))
+		metrics.register(new CNBNA(mainmodule, model_view))
+
 		var mclasses = new HashSet[MClass]
 		for mpackage in model.mpackages do
 
@@ -84,16 +85,16 @@ class CNBNA
 	redef fun desc do return "number of accessible nullable attributes (inherited + local)"
 
 	var mainmodule: MModule
-	var min_visibility: MVisibility
+	var model_view: ModelView
 
-	init(mainmodule: MModule, min_visibility: MVisibility) do
+	init(mainmodule: MModule, model_view: ModelView) do
 		self.mainmodule = mainmodule
-		self.min_visibility = min_visibility
+		self.model_view = model_view
 	end
 
 	redef fun collect(mclasses) do
 		for mclass in mclasses do
-			var all = mclass.collect_accessible_mattributes(min_visibility)
+			var all = mclass.collect_accessible_mattributes(model_view)
 			for mattr in all do
 				if mattr.is_nullable then values.inc(mclass)
 			end
