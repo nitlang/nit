@@ -58,10 +58,10 @@ redef class DefinitionArticle
 		var section = new TabbedGroup("{mentity.nitdoc_id}.intros_redefs")
 		section.toc_title = "Intros / Redefs"
 		var group = new PanelGroup("list.group", "List")
-		var intros = mmodule.collect_intro_mclassdefs(v.ctx.min_visibility).to_a
+		var intros = mmodule.collect_intro_mclassdefs(v.doc).to_a
 		doc.mainmodule.linearize_mclassdefs(intros)
 		group.add_child new MEntitiesListArticle("{mentity.nitdoc_id}.intros", "Introduces", intros)
-		var redefs = mmodule.collect_redef_mclassdefs(v.ctx.min_visibility).to_a
+		var redefs = mmodule.collect_redef_mclassdefs(v.doc).to_a
 		doc.mainmodule.linearize_mclassdefs(redefs)
 		group.add_child new MEntitiesListArticle("{mentity.nitdoc_id}.redefs", "Redefines", redefs)
 		section.add_child group
@@ -73,11 +73,11 @@ redef class DefinitionArticle
 		var section = new TabbedGroup("{mentity.nitdoc_id}.intros_redefs")
 		section.toc_title = "Intros / Redefs"
 		var group = new PanelGroup("list.group", "List")
-		var intros = mclassdef.collect_intro_mpropdefs(v.ctx.min_visibility).to_a
+		var intros = mclassdef.collect_intro_mpropdefs(v.doc).to_a
 		# FIXME avoid diff changes
 		# v.ctx.mainmodule.linearize_mpropdefs(intros)
 		group.add_child new MEntitiesListArticle("{mentity.nitdoc_id}.intros", "Introduces", intros)
-		var redefs = mclassdef.collect_redef_mpropdefs(v.ctx.min_visibility).to_a
+		var redefs = mclassdef.collect_redef_mpropdefs(v.doc).to_a
 		# FIXME avoid diff changes
 		# v.ctx.mainmodule.linearize_mpropdefs(redefs)
 		group.add_child new MEntitiesListArticle("{mentity.nitdoc_id}.redefs", "Redefines", redefs)

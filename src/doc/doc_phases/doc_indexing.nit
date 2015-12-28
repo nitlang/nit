@@ -15,7 +15,7 @@
 # Manage indexing of Nit model for Nitdoc QuickSearch.
 module doc_indexing
 
-import doc_extract
+import doc_base
 import html_templates::html_model # FIXME maybe this phase should depend on `html_render`
 private import json::static
 

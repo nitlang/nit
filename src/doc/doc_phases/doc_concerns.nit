@@ -63,7 +63,7 @@ redef class MGroupPage
 			for mclass in mmodule.intro_mclasses do
 				if doc.mclasses.has(mclass) then intros.add mclass
 			end
-			for mclass in mmodule.collect_redef_mclasses(v.ctx.min_visibility) do
+			for mclass in mmodule.collect_redef_mclasses(v.doc) do
 				if doc.mclasses.has(mclass) then redefs.add mclass
 			end
 		end

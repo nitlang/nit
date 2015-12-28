@@ -20,7 +20,6 @@ module doc_console
 
 import semantize
 import doc_commands
-import doc_extract
 import doc_poset
 import doc::console_templates
 

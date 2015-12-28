@@ -16,27 +16,21 @@
 module web_actions
 
 import web_views
-import model::model_collect
 
 # Display the tree of all loaded mentities.
 class TreeAction
-	super NitAction
+	super ModelAction
 
-	# Model to explore and render.
-	var model: Model
-
-	# View to render.
-	var view = new HtmlHomePage(model) is lazy
-
-	redef fun answer(request, url) do return render_view(view)
+	redef fun answer(request, url) do
+		var model = init_model_view(request)
+		var view = new HtmlHomePage(model.to_tree)
+		return render_view(view)
+	end
 end
 
 # Display the list of mentities matching `namespace`.
 class SearchAction
-	super NitAction
-
-	# Model to explore and render.
-	var model: Model
+	super ModelAction
 
 	# TODO handle more than full namespaces.
 	redef fun answer(request, url) do
@@ -44,7 +38,8 @@ class SearchAction
 		if namespace == null or namespace.is_empty then
 			return render_error(400, "Missing :namespace.")
 		end
-		var mentities = model.collect_by_namespace(namespace)
+		var model = init_model_view(request)
+		var mentities = model.mentities_by_namespace(namespace)
 		if request.is_json_asked then
 			var json = new JsonArray
 			for mentity in mentities do
@@ -59,10 +54,7 @@ end
 
 # Display a MEntity source code.
 class CodeAction
-	super NitAction
-
-	# Model to explore and render.
-	var model: Model
+	super ModelAction
 
 	# Modelbuilder used to access sources.
 	var modelbuilder: ModelBuilder
@@ -73,7 +65,8 @@ class CodeAction
 		if namespace == null or namespace.is_empty then
 			return render_error(400, "Missing :namespace.")
 		end
-		var mentities = model.collect_by_namespace(namespace)
+		var model = init_model_view(request)
+		var mentities = model.mentities_by_namespace(namespace)
 		if mentities.is_empty then
 			return render_error(404, "No mentity matching this namespace.")
 		end
@@ -84,10 +77,7 @@ end
 
 # Display the doc of a MEntity.
 class DocAction
-	super NitAction
-
-	# Model to explore and render.
-	var model: Model
+	super ModelAction
 
 	# Modelbuilder used to access sources.
 	var modelbuilder: ModelBuilder
@@ -98,7 +88,8 @@ class DocAction
 		if namespace == null or namespace.is_empty then
 			return render_error(400, "Missing :namespace.")
 		end
-		var mentities = model.collect_by_namespace(namespace)
+		var model = init_model_view(request)
+		var mentities = model.mentities_by_namespace(namespace)
 		if mentities.is_empty then
 			return render_error(404, "No mentity matching this namespace.")
 		end
@@ -109,28 +100,20 @@ end
 
 # Return a random list of MEntities.
 class RandomAction
-	super NitAction
-
-	# Model to explore and render.
-	var model: Model
+	super ModelAction
 
 	# TODO handle more than full namespaces.
 	redef fun answer(request, url) do
 		var n = request.int_arg("n") or else 10
 		var k = request.string_arg("k") or else "modules"
+		var model = init_model_view(request)
 		var mentities: Array[MEntity]
 		if k == "modules" then
 			mentities = model.mmodules.to_a
 		else if k == "classdefs" then
-			mentities = new Array[MClassDef]
-			for mclass in model.mclasses do
-				mentities.add_all(mclass.mclassdefs)
-			end
+			mentities = model.mclassdefs.to_a
 		else
-			mentities = new Array[MPropDef]
-			for mprop in model.mproperties do
-				mentities.add_all(mprop.mpropdefs)
-			end
+			mentities = model.mpropdefs.to_a
 		end
 		mentities.shuffle
 		mentities = mentities.sub(0, n)

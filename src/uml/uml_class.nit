@@ -35,35 +35,23 @@ redef class UMLModel
 					fontname = "Bitstream Vera Sans"
 					fontsize = 8
 				]\n"""
-		tpl.add model.tpl_class(ctx, mainmodule)
+		for mclass in view.mclasses do
+			tpl.add mclass.tpl_class(self)
+			tpl.add "\n"
+		end
 		tpl.add "\}"
 		return tpl
 	end
 end
 
-redef class Model
-
-	# Generates a UML Class diagram from the entities of a `Model`
-	redef fun tpl_class(ctx, main) do
-		var t = new Template
-		for i in mclasses do
-			if not ctx.private_gen and i.visibility != public_visibility then continue
-			t.add i.tpl_class(ctx, main)
-			t.add "\n"
-		end
-		return t
-	end
-
-end
-
 redef class MEntity
 	# Generates a dot-compatible `Writable` UML Class diagram from `self`
-	fun tpl_class(ctx: ToolContext, main: MModule): Writable is abstract
+	fun tpl_class(model: UMLModel): Writable is abstract
 end
 
 redef class MClass
 
-	redef fun tpl_class(ctx, main) do
+	redef fun tpl_class(model) do
 		var t = new Template
 		t.add "{name} [\n label = \"\{"
 		if kind == abstract_kind then
@@ -83,33 +71,22 @@ redef class MClass
 			t.add "]"
 		end
 		t.add "|"
-		var props: Collection[MProperty]
-		if ctx.private_gen then
-			props = collect_intro_mproperties(none_visibility)
-		else
-			props = collect_intro_mproperties(public_visibility)
-		end
+		var props = collect_intro_mproperties(model.view)
 		for i in props do
-			if i isa MAttribute then
-				t.add i.tpl_class(ctx, main)
-				t.add "\\l"
-			end
+			if not i isa MAttribute then continue
+			t.add i.tpl_class(model)
+			t.add "\\l"
 		end
 		t.add "|"
-		var meths
-		if ctx.private_gen then
-			meths = collect_intro_mmethods(none_visibility)
-		else
-			meths = collect_intro_mmethods(public_visibility)
-		end
-		for i in meths do
-			t.add i.tpl_class(ctx, main)
+		for i in props do
+			if not i isa MMethod then continue
+			t.add i.tpl_class(model)
 			t.add "\\l"
 		end
 		t.add "\}\"\n]\n"
-		var g = in_hierarchy(main).direct_greaters
+		var g = in_hierarchy(model.mainmodule).direct_greaters
 		for i in g do
-			if not ctx.private_gen and i.visibility != public_visibility then continue
+			if not model.view.accept_mentity(i) then continue
 			t.add "{i.name} -> {name} [dir=back"
 			if i.kind == interface_kind then
 				t.add " arrowtail=open style=dashed"
@@ -124,19 +101,19 @@ redef class MClass
 end
 
 redef class MMethod
-	redef fun tpl_class(ctx, main) do
+	redef fun tpl_class(model) do
 		var tpl = new Template
 		tpl.add visibility.tpl_class
 		tpl.add " "
 		tpl.add name.escape_to_dot
-		tpl.add intro.msignature.tpl_class(ctx, main)
+		tpl.add intro.msignature.tpl_class(model)
 		return tpl
 	end
 end
 
 redef class MSignature
 
-	redef fun tpl_class(ctx, main) do
+	redef fun tpl_class(model) do
 		var t = new Template
 		t.add "("
 		var params = new Array[MParameter]
@@ -146,31 +123,31 @@ redef class MSignature
 		if params.length > 0 then
 			t.add params.first.name
 			t.add ": "
-			t.add params.first.mtype.tpl_class(ctx, main)
+			t.add params.first.mtype.tpl_class(model)
 			for i in [1 .. params.length [ do
 				t.add ", "
 				t.add params[i].name
 				t.add ": "
-				t.add params[i].mtype.tpl_class(ctx, main)
+				t.add params[i].mtype.tpl_class(model)
 			end
 		end
 		t.add ")"
 		if return_mtype != null then
 			t.add ": "
-			t.add return_mtype.tpl_class(ctx, main)
+			t.add return_mtype.tpl_class(model)
 		end
 		return t
 	end
 end
 
 redef class MAttribute
-	redef fun tpl_class(ctx, main) do
+	redef fun tpl_class(model) do
 		var tpl = new Template
 		tpl.add visibility.tpl_class
 		tpl.add " "
 		tpl.add name
 		tpl.add ": "
-		tpl.add intro.static_mtype.tpl_class(ctx, main)
+		tpl.add intro.static_mtype.tpl_class(model)
 		return tpl
 	end
 end
@@ -194,20 +171,20 @@ redef class MVisibility
 end
 
 redef class MClassType
-	redef fun tpl_class(c, m) do
+	redef fun tpl_class(model) do
 		return name
 	end
 end
 
 redef class MGenericType
-	redef fun tpl_class(c, m) do
+	redef fun tpl_class(model) do
 		var t = new Template
 		t.add name.substring(0, name.index_of('['))
 		t.add "["
-		t.add arguments.first.tpl_class(c, m)
+		t.add arguments.first.tpl_class(model)
 		for i in [1 .. arguments.length[ do
 			t.add ", "
-			t.add arguments[i].tpl_class(c, m)
+			t.add arguments[i].tpl_class(model)
 		end
 		t.add "]"
 		return t
@@ -215,22 +192,22 @@ redef class MGenericType
 end
 
 redef class MParameterType
-	redef fun tpl_class(c, m) do
+	redef fun tpl_class(model) do
 		return name
 	end
 end
 
 redef class MVirtualType
-	redef fun tpl_class(c, m) do
+	redef fun tpl_class(model) do
 		return name
 	end
 end
 
 redef class MNullableType
-	redef fun tpl_class(c, m) do
+	redef fun tpl_class(model) do
 		var t = new Template
 		t.add "nullable "
-		t.add mtype.tpl_class(c, m)
+		t.add mtype.tpl_class(model)
 		return t
 	end
 end

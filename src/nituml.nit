@@ -20,12 +20,19 @@ import frontend
 import uml
 
 redef class ToolContext
+
+	# Phase that generates UML diagrams from model entities.
 	var umlphase: Phase = new UMLPhase(self, null)
 
+	# What to generate?
 	var opt_gen = new OptionEnum(["class", "package"], "Choose which type of uml diagram to generate", 0, "--diagram")
+
+	# Generate private?
+	var opt_privacy = new OptionBool("Generates private API", "-p", "--private")
 
 	redef init do
 		option_context.add_option opt_gen
+		option_context.add_option opt_privacy
 		super
 	end
 end
@@ -34,7 +41,12 @@ private class UMLPhase
 	super Phase
 	redef fun process_mainmodule(mainmodule, mmodules)
 	do
-		var d = new UMLModel(mainmodule.model, mainmodule, toolcontext)
+		var view = new ModelView(mainmodule.model)
+		if not toolcontext.opt_privacy.value then
+			view.min_visibility = protected_visibility
+		end
+
+		var d = new UMLModel(view, mainmodule)
 		if toolcontext.opt_gen.value == 0 then
 			print d.generate_class_uml.write_to_string
 		else if toolcontext.opt_gen.value == 1 then

@@ -34,26 +34,26 @@ private class MClassesMetricsPhase
 		var out = "{toolcontext.opt_dir.value or else "metrics"}/mclasses"
 		out.mkdir
 
+		var model = toolcontext.modelbuilder.model
+		var model_view = model.private_view
 
 		print toolcontext.format_h1("\n# MClasses metrics")
 
 		var metrics = new MetricSet
-		var min_vis = private_visibility
 		metrics.register(new CNOA(mainmodule))
 		metrics.register(new CNOP(mainmodule))
 		metrics.register(new CNOC(mainmodule))
 		metrics.register(new CNOD(mainmodule))
 		metrics.register(new CDIT(mainmodule))
-		metrics.register(new CNBP(mainmodule, min_vis))
-		metrics.register(new CNBA(mainmodule, min_vis))
-		metrics.register(new CNBIP(mainmodule, min_vis))
-		metrics.register(new CNBRP(mainmodule, min_vis))
-		metrics.register(new CNBHP(mainmodule, min_vis))
+		metrics.register(new CNBP(mainmodule, model_view))
+		metrics.register(new CNBA(mainmodule, model_view))
+		metrics.register(new CNBIP(mainmodule, model_view))
+		metrics.register(new CNBRP(mainmodule, model_view))
+		metrics.register(new CNBHP(mainmodule, model_view))
 		#TODO metrics.register(new CNBI) # nb init
 		#TODO metrics.register(new CNBM) # nb methods
 		#TODO metrics.register(new CNBV) # nb vtypes
 
-		var model = toolcontext.modelbuilder.model
 		var mclasses = new HashSet[MClass]
 		for mpackage in model.mpackages do
 
@@ -184,16 +184,16 @@ class CNBP
 	redef fun desc do return "number of accessible properties (inherited + local)"
 
 	var mainmodule: MModule
-	var min_visibility: MVisibility
+	var model_view: ModelView
 
-	init(mainmodule: MModule, min_visibility: MVisibility) do
+	init(mainmodule: MModule, model_view: ModelView) do
 		self.mainmodule = mainmodule
-		self.min_visibility = min_visibility
+		self.model_view = model_view
 	end
 
 	redef fun collect(mclasses) do
 		for mclass in mclasses do
-			values[mclass] = mclass.collect_accessible_mproperties(min_visibility).length
+			values[mclass] = mclass.collect_accessible_mproperties(model_view).length
 		end
 	end
 end
@@ -206,16 +206,16 @@ class CNBA
 	redef fun desc do return "number of accessible attributes (inherited + local)"
 
 	var mainmodule: MModule
-	var min_visibility: MVisibility
+	var model_view: ModelView
 
-	init(mainmodule: MModule, min_visibility: MVisibility) do
+	init(mainmodule: MModule, model_view: ModelView) do
 		self.mainmodule = mainmodule
-		self.min_visibility = min_visibility
+		self.model_view = model_view
 	end
 
 	redef fun collect(mclasses) do
 		for mclass in mclasses do
-			values[mclass] = mclass.collect_accessible_mattributes(min_visibility).length
+			values[mclass] = mclass.collect_accessible_mattributes(model_view).length
 		end
 	end
 end
@@ -228,16 +228,16 @@ class CNBIP
 	redef fun desc do return "number of introduced properties"
 
 	var mainmodule: MModule
-	var min_visibility: MVisibility
+	var model_view: ModelView
 
-	init(mainmodule: MModule, min_visibility: MVisibility) do
+	init(mainmodule: MModule, model_view: ModelView) do
 		self.mainmodule = mainmodule
-		self.min_visibility = min_visibility
+		self.model_view = model_view
 	end
 
 	redef fun collect(mclasses) do
 		for mclass in mclasses do
-			values[mclass] = mclass.collect_intro_mproperties(min_visibility).length
+			values[mclass] = mclass.collect_intro_mproperties(model_view).length
 		end
 	end
 end
@@ -250,16 +250,16 @@ class CNBRP
 	redef fun desc do return "number of redefined properties"
 
 	var mainmodule: MModule
-	var min_visibility: MVisibility
+	var model_view: ModelView
 
-	init(mainmodule: MModule, min_visibility: MVisibility) do
+	init(mainmodule: MModule, model_view: ModelView) do
 		self.mainmodule = mainmodule
-		self.min_visibility = min_visibility
+		self.model_view = model_view
 	end
 
 	redef fun collect(mclasses) do
 		for mclass in mclasses do
-			values[mclass] = mclass.collect_redef_mproperties(min_visibility).length
+			values[mclass] = mclass.collect_redef_mproperties(model_view).length
 		end
 	end
 end
@@ -272,16 +272,16 @@ class CNBHP
 	redef fun desc do return "number of inherited properties"
 
 	var mainmodule: MModule
-	var min_visibility: MVisibility
+	var model_view: ModelView
 
-	init(mainmodule: MModule, min_visibility: MVisibility) do
+	init(mainmodule: MModule, model_view: ModelView) do
 		self.mainmodule = mainmodule
-		self.min_visibility = min_visibility
+		self.model_view = model_view
 	end
 
 	redef fun collect(mclasses) do
 		for mclass in mclasses do
-			values[mclass] = mclass.collect_inherited_mproperties(min_visibility).length
+			values[mclass] = mclass.collect_inherited_mproperties(model_view).length
 		end
 	end
 end
@@ -294,16 +294,16 @@ class CNBLP
 	redef fun desc do return "number of local properties (intro + redef)"
 
 	var mainmodule: MModule
-	var min_visibility: MVisibility
+	var model_view: ModelView
 
-	init(mainmodule: MModule, min_visibility: MVisibility) do
+	init(mainmodule: MModule, model_view: ModelView) do
 		self.mainmodule = mainmodule
-		self.min_visibility = min_visibility
+		self.model_view = model_view
 	end
 
 	redef fun collect(mclasses) do
 		for mclass in mclasses do
-			values[mclass] = mclass.collect_local_mproperties(min_visibility).length
+			values[mclass] = mclass.collect_local_mproperties(model_view).length
 		end
 	end
 end

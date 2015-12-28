@@ -17,6 +17,7 @@ module doc_base
 
 import toolcontext
 import model_ext
+import model::model_views
 
 # The model of a Nitdoc documentation.
 #
@@ -25,6 +26,7 @@ import model_ext
 # The model is populated through `DocPhase` to be constructed.
 # It is a placeholder to share data between each phase.
 class DocModel
+	super ModelView
 
 	# `DocPage` composing the documentation associated to their ids.
 	#
@@ -32,9 +34,6 @@ class DocModel
 	#
 	# See `add_page`.
 	var pages: Map[String, DocPage] = new HashMap[String, DocPage]
-
-	# Nit `Model` from which we extract the documentation.
-	var model: Model is writable
 
 	# The entry point of the `model`.
 	var mainmodule: MModule is writable
@@ -144,6 +143,7 @@ abstract class DocComposite
 
 	# Depth of `self` in the composite tree.
 	fun depth: Int do
+		var parent = self.parent
 		if parent == null then return 0
 		return parent.depth + 1
 	end
@@ -320,6 +320,7 @@ redef class MModule
 
 	# Avoid id conflict with group
 	redef fun nitdoc_id do
+		var mgroup = self.mgroup
 		if mgroup == null then return super
 		return "{mgroup.full_name}::{full_name}".to_cmangle
 	end

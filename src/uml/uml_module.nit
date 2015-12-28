@@ -34,36 +34,29 @@ redef class UMLModel
 				fontname = "Bitstream Vera Sans"
 				fontsize = 8
 			]\n"""
-		tpl.add model.tpl_module(ctx, mainmodule)
+		tpl.add mainmodule.tpl_module(self)
 		tpl.add "\}"
 		return tpl
 	end
 end
 
-redef class Model
-	# Returns a UML package diagram of `main`
-	redef fun tpl_module(ctx, main) do
-		return main.tpl_module(ctx, main)
-	end
+redef class MEntity
+	# Builds a dot UML package diagram entity from `self`
+	fun tpl_module(model: UMLModel): Writable is abstract
 end
 
 redef class MModule
-	redef fun tpl_module(ctx, main) do
+	redef fun tpl_module(model) do
 		var t = new Template
 		t.add "subgraph cluster{name} \{\n"
 		t.add "label = \"{name}\"\n"
 		for i in mclassdefs do
-			if not ctx.private_gen and i.mclass.visibility != public_visibility then continue
-			t.add i.tpl_module(ctx, main)
+			if not model.view.accept_mentity(i) then continue
+			t.add i.tpl_module(model)
 		end
 		t.add "\}\n"
 		return t
 	end
-end
-
-redef class MEntity
-	# Builds a dot UML package diagram entity from `self`
-	fun tpl_module(ctx: ToolContext, main: MModule): Writable is abstract
 end
 
 redef class MClassDef
@@ -78,7 +71,7 @@ redef class MClassDef
 	# Defaults to a shade of red
 	var redef_colour = "#B24758"
 
-	redef fun tpl_module(ctx, main) do
+	redef fun tpl_module(model) do
 		var t = new Template
 		t.add "{mmodule}{name} [\n\tlabel = \"\{"
 		if mclass.kind == abstract_kind then
@@ -101,15 +94,15 @@ redef class MClassDef
 		t.add "|"
 		for i in mpropdefs do
 			if not i isa MAttributeDef then continue
-			if not ctx.private_gen and i.mproperty.visibility != public_visibility then continue
-			t.add i.tpl_module(ctx, main)
+			if not model.view.accept_mentity(i) then continue
+			t.add i.tpl_module(model)
 			t.add "\\l"
 		end
 		t.add "|"
 		for i in mpropdefs do
 			if not i isa MMethodDef then continue
-			if not ctx.private_gen and i.mproperty.visibility != public_visibility then continue
-			t.add i.tpl_module(ctx, main)
+			if not model.view.accept_mentity(i) then continue
+			t.add i.tpl_module(model)
 			t.add "\\l"
 		end
 		t.add "\}\""
@@ -135,24 +128,24 @@ redef class MClassDef
 end
 
 redef class MMethodDef
-	redef fun tpl_module(ctx, main) do
+	redef fun tpl_module(model) do
 		var t = new Template
 		t.add mproperty.visibility.tpl_class
 		t.add " "
 		t.add name.escape_to_dot
-		t.add msignature.tpl_class(ctx, main)
+		t.add msignature.tpl_class(model)
 		return t
 	end
 end
 
 redef class MAttributeDef
-	redef fun tpl_module(ctx, main) do
+	redef fun tpl_module(model) do
 		var t = new Template
 		t.add mproperty.visibility.tpl_class
 		t.add " "
 		t.add name
 		t.add ": "
-		t.add static_mtype.tpl_class(ctx, main)
+		t.add static_mtype.tpl_class(model)
 		return t
 	end
 end

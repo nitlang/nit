@@ -45,7 +45,6 @@ private class NitxPhase
 		var doc = new DocModel(mainmodule.model, mainmodule)
 
 		var phases = [
-			new ExtractionPhase(toolcontext, doc),
 			new MakePagePhase(toolcontext, doc),
 			new ConcernsPhase(toolcontext, doc),
 			new StructurePhase(toolcontext, doc),

@@ -21,6 +21,8 @@ module model_base
 # A model knows modules, classes and properties and can retrieve them.
 class Model
 	super MEntity
+
+	redef fun model do return self
 end
 
 # A named and possibly documented entity in the model.

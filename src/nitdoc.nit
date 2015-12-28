@@ -24,7 +24,16 @@ redef class ToolContext
 	# Nitdoc generation phase.
 	var docphase: Phase = new Nitdoc(self, null)
 
-	init do super # to fix ambiguous linearization
+	# Do not generate documentation for attributes.
+	var opt_no_attributes = new OptionBool("Ignore the attributes", "--no-attributes")
+
+	# Do not generate documentation for private properties.
+	var opt_private = new OptionBool("Also generate private API", "--private")
+
+	redef init do
+		super
+		option_context.add_option(opt_no_attributes, opt_private)
+	end
 end
 
 # Nitdoc phase explores the model and generate pages for each mentities found
@@ -33,9 +42,10 @@ private class Nitdoc
 	redef fun process_mainmodule(mainmodule, mmodules)
 	do
 		var doc = new DocModel(mainmodule.model, mainmodule)
+		if not toolcontext.opt_private.value then doc.min_visibility = protected_visibility
+		if not toolcontext.opt_no_attributes.value then doc.include_attribute = false
 
 		var phases = [
-			new ExtractionPhase(toolcontext, doc),
 			new IndexingPhase(toolcontext, doc),
 			new MakePagePhase(toolcontext, doc),
 			new POSetPhase(toolcontext, doc),
