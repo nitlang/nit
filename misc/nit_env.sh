@@ -119,7 +119,19 @@ __nit_env_main() {
 	if [ -n "$install" ]; then
 		local ne="$fulldir/misc/nit_env.sh"
 		local str="test -r \"$ne\" && NIT_DIR=\"$fulldir\" . \"$ne\""
-		grep -q "$str" "$HOME/.profile" || echo "$str" >> "$HOME/.profile"
+		if [ -f "$HOME/.profile" ]; then
+			echo "$str" >> "$HOME/.profile"
+			echo "successfuly registered nit in .profile"
+		elif [ -f "$HOME/.bashrc" ]; then
+			echo "$str" >> "$HOME/.bashrc"
+			echo "successfuly registered nit in .bashrc"
+		elif [ -f "$HOME/.bash_profile" ]; then
+			echo "$str" >> "$HOME/.bash_profile"
+			echo "succesfuly registerd nit .bash_profile"
+		else
+			echo "$str" >> "$HOME/.profile"
+			echo "couldn't find .bashrc, .bash_profile, .profile. Created .profile and registered nit in it"
+		fi
 	fi
 }
 
