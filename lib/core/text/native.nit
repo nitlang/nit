@@ -253,7 +253,7 @@ extern class NativeString `{ char* `}
 	end
 
 	# Number of UTF-8 characters in `self` starting at `from`, for a length of `bytelen`
-	fun utf8_length(from, bytelen: Int): Int do
+	fun utf8_length(from, bytelen: Int): Int is intern do
 		var st = from
 		var ln = 0
 		while bytelen > 0 do

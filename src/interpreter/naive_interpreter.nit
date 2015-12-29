@@ -980,6 +980,10 @@ redef class AMethPropdef
 				return v.bool_instance(recvval >= args[1].to_i)
 			else if pname == "<=>" then
 				return v.int_instance(recvval <=> args[1].to_i)
+			else if pname == "&" then
+				return v.int_instance(recvval & args[1].to_i)
+			else if pname == "|" then
+				return v.int_instance(recvval | args[1].to_i)
 			else if pname == "to_f" then
 				return v.float_instance(recvval.to_f)
 			else if pname == "to_b" then
@@ -1028,6 +1032,10 @@ redef class AMethPropdef
 				return v.bool_instance(recvval >= args[1].to_b)
 			else if pname == "<=>" then
 				return v.int_instance(recvval <=> args[1].to_b)
+			else if pname == "&" then
+				return v.byte_instance(recvval & args[1].to_b)
+			else if pname == "|" then
+				return v.byte_instance(recvval | args[1].to_b)
 			else if pname == "to_f" then
 				return v.float_instance(recvval.to_f)
 			else if pname == "to_i" then
@@ -1160,6 +1168,12 @@ redef class AMethPropdef
 			else if pname == "fast_cstring" then
 				var ns = recvval.fast_cstring(args[1].to_i)
 				return v.native_string_instance(ns.to_s)
+			else if pname == "fetch_4_chars" then
+				return v.int_instance(args[0].val.as(NativeString).fetch_4_chars(args[1].to_i))
+			else if pname == "fetch_4_hchars" then
+				return v.int_instance(args[0].val.as(NativeString).fetch_4_hchars(args[1].to_i))
+			else if pname == "utf8_length" then
+				return v.int_instance(args[0].val.as(NativeString).utf8_length(args[1].to_i, args[2].to_i))
 			end
 		else if pname == "calloc_string" then
 			return v.native_string_instance_len(args[1].to_i)
