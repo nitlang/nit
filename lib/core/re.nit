@@ -382,7 +382,7 @@ class Regex
 			var bfrom = native_match.rm_so + bytefrom
 			var bto = native_match.rm_eo - 1 + bytefrom
 			var cpos = cstr.byte_to_char_index_cached(bfrom, charfrom, bytefrom)
-			var len = cstr.utf8_length(bfrom, bto)
+			var len = cstr.utf8_length(bfrom, bto - bfrom + 1)
 			var match = new Match(rets, cpos, len)
 			var subs = match.subs
 
@@ -395,7 +395,7 @@ class Regex
 				var sub_bfrom = native_match[i].rm_so + bytefrom
 				var sub_bto = native_match[i].rm_eo - 1 + bytefrom
 				var sub_cpos = cstr.byte_to_char_index_cached(sub_bfrom, cpos, bfrom)
-				var sub_len = cstr.utf8_length(sub_bfrom, sub_bto)
+				var sub_len = cstr.utf8_length(sub_bfrom, sub_bto - sub_bfrom + 1)
 				subs.add(new Match(rets, sub_cpos, sub_len))
 			end
 
@@ -442,7 +442,7 @@ class Regex
 			var bfrom = native_match.rm_so + bytesub
 			var bto = native_match.rm_eo - 1 + bytesub
 			var cstart = cstr.byte_to_char_index_cached(bfrom, charsub, bytesub)
-			var len = cstr.utf8_length(bfrom, bto)
+			var len = cstr.utf8_length(bfrom, bto - bfrom + 1)
 			var match = new Match(rets, cstart, len)
 			matches.add match
 			var subs = match.subs
@@ -456,7 +456,7 @@ class Regex
 				var sub_bfrom = native_match[i].rm_so + bytesub
 				var sub_bto = native_match[i].rm_eo - 1 + bytesub
 				var sub_cstart = cstr.byte_to_char_index_cached(sub_bfrom, cstart, bfrom)
-				var sub_len = cstr.utf8_length(sub_bfrom, sub_bto)
+				var sub_len = cstr.utf8_length(sub_bfrom, sub_bto - sub_bfrom + 1)
 				subs.add(new Match(rets, sub_cstart, sub_len))
 			end
 

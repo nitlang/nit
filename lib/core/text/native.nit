@@ -14,6 +14,24 @@ module native
 import kernel
 import math
 
+in "C" `{
+#ifdef __linux__
+	#include <endian.h>
+#endif
+#ifdef __APPLE__
+	#include <libkern/OSByteOrder.h>
+	#define be32toh(x) OSSwapBigToHostInt32(x)
+#endif
+
+#ifdef __pnacl__
+	#define be16toh(val) (((val) >> 8) | ((val) << 8))
+	#define be32toh(val) ((be16toh((val) << 16) | (be16toh((val) >> 16))))
+#endif
+#ifndef be32toh
+	#define be32toh(val) betoh32(val)
+#endif
+`}
+
 redef class Byte
 	# Gives the length of the UTF-8 char starting with `self`
 	fun u8len: Int do
@@ -66,6 +84,10 @@ extern class NativeString `{ char* `}
 	# Copy `self` to `dest`.
 	fun copy_to(dest: NativeString, length: Int, from: Int, to: Int) is intern
 
+	redef fun ==(o) is intern do return is_same_instance(o)
+
+	redef fun !=(o) is intern do return not is_same_instance(o)
+
 	# Position of the first nul character.
 	fun cstring_length: Int
 	do
@@ -94,14 +116,34 @@ extern class NativeString `{ char* `}
 	# ~~~raw
 	#     assert "かきく".as(FlatString).items.char_at(1) == '�'
 	# ~~~
-	fun char_at(pos: Int): Char `{
-		char c = self[pos];
-		if((c & 0x80) == 0x00) return (uint32_t)c;
-		if(((c & 0xE0) == 0xC0) && ((self[pos + 1] & 0xC0) == 0x80)) return ((((uint32_t)c) & 0x1F) << 6) + ((((uint32_t)self[pos + 1] & 0x3F)));
-		if(((c & 0xF0) == 0xE0) && ((self[pos + 1] & 0xC0) == 0x80) && ((self[pos + 2] & 0xC0) == 0x80)) return ((((uint32_t)c) & 0xF) << 12) + ((((uint32_t)self[pos + 1]) & 0x3F) << 6) + ((((uint32_t)self[pos + 2] & 0x3F)));
-		if(((c & 0xF8) == 0xF0) && ((self[pos + 1] & 0xC0) == 0x80) && ((self[pos + 2] & 0xC0) == 0x80) && ((self[pos + 3] & 0xC0) == 0x80)) return ((((uint32_t)c) & 0x7) << 18) + ((((uint32_t)self[pos + 1]) & 0x3F) << 12) + ((((uint32_t)self[pos + 2]) & 0x3F) << 6) + ((((uint32_t)self[pos + 3] & 0x3F)));
-		return 0xFFFD;
-	`}
+	fun char_at(pos: Int): Char do
+		var c = self[pos]
+		if c & 0x80u8 == 0u8 then return c.ascii
+		var b = fetch_4_hchars(pos)
+		var ret = 0
+		if b & 0xC00000 != 0x800000 then return 0xFFFD.code_point
+		if b & 0xE0000000 == 0xC0000000 then
+			ret |= (b & 0x1F000000) >> 18
+			ret |= (b & 0x3F0000) >> 16
+			return ret.code_point
+		end
+		if not b & 0xC000 == 0x8000 then return 0xFFFD.code_point
+		if b & 0xF0000000 == 0xE0000000 then
+			ret |= (b & 0xF000000) >> 12
+			ret |= (b & 0x3F0000) >> 10
+			ret |= (b & 0x3F00) >> 8
+			return ret.code_point
+		end
+		if not b & 0xC0 == 0x80 then return 0xFFFD.code_point
+		if b & 0xF8000000 == 0xF0000000 then
+			ret |= (b.to_i & 0x7000000) >> 6
+			ret |= (b.to_i & 0x3F0000) >> 4
+			ret |= (b.to_i & 0x3F00) >> 2
+			ret |= b.to_i & 0x3F
+			return ret.code_point
+		end
+		return 0xFFFD.code_point
+	end
 
 	# Gets the byte index of char at position `n` in UTF-8 String
 	fun char_to_byte_index(n: Int): Int do return char_to_byte_index_cached(n, 0, 0)
@@ -132,14 +174,34 @@ extern class NativeString `{ char* `}
 		var ns_i = byte_from
 		var my_i = char_from
 
-		while my_i < n do
+		var dist = n - my_i
+
+		while dist > 0 do
+			while dist >= 4 do
+				var i = fetch_4_chars(ns_i)
+				if i & 0x80808080 != 0 then break
+				ns_i += 4
+				my_i += 4
+				dist -= 4
+			end
+			if dist == 0 then break
 			ns_i += length_of_char_at(ns_i)
 			my_i += 1
+			dist -= 1
 		end
 
-		while my_i > n do
+		while dist < 0 do
+			while dist <= -4 do
+				var i = fetch_4_chars(ns_i - 4)
+				if i & 0x80808080 != 0 then break
+				ns_i -= 4
+				my_i -= 4
+				dist += 4
+			end
+			if dist == 0 then break
 			ns_i = find_beginning_of_char_at(ns_i - 1)
 			my_i -= 1
+			dist += 1
 		end
 
 		return ns_i
@@ -180,6 +242,7 @@ extern class NativeString `{ char* `}
 	fun find_beginning_of_char_at(pos: Int): Int do
 		var endpos = pos
 		var c = self[pos]
+		if c & 0x80u8 == 0x00u8 then return pos
 		while c & 0xC0u8 == 0x80u8 do
 			pos -= 1
 			c = self[pos]
@@ -189,15 +252,34 @@ extern class NativeString `{ char* `}
 		return endpos
 	end
 
-	# Number of UTF-8 characters in `self` between positions `from` and `to`
-	fun utf8_length(from, to: Int): Int do
+	# Number of UTF-8 characters in `self` starting at `from`, for a length of `bytelen`
+	fun utf8_length(from, bytelen: Int): Int is intern do
 		var st = from
-		var lst = to
 		var ln = 0
-		while st <= lst do
-			st += length_of_char_at(st)
+		while bytelen > 0 do
+			while bytelen >= 4 do
+				var i = fetch_4_chars(st)
+				if i & 0x80808080 != 0 then break
+				bytelen -= 4
+				st += 4
+				ln += 4
+			end
+			if bytelen == 0 then break
+			var cln = length_of_char_at(st)
+			st += cln
 			ln += 1
+			bytelen -= cln
 		end
 		return ln
 	end
+
+	# Fetch 4 chars in `self` at `pos`
+	fun fetch_4_chars(pos: Int): Int is intern do return fetch_4_ffi(pos)
+
+	# Fetch 4 chars in `self` at `pos`
+	fun fetch_4_hchars(pos: Int): Int is intern do return fetch_4h_ffi(pos)
+
+	# FIXME: To remove when bootstrap supports PR #1898
+	private fun fetch_4_ffi(pos: Int): Int `{ return (long)*((uint32_t*)(self+pos)); `}
+	private fun fetch_4h_ffi(pos: Int): Int `{ return (long)be32toh(*((uint32_t*)(self+pos))); `}
 end

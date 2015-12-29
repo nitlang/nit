@@ -207,12 +207,12 @@ abstract class Reader
 			# if this is the best size or not
 			var chunksz = 129
 			if chunksz > remsp then
-				rets += new FlatString.with_infos(sits, remsp, pos, pos + remsp - 1)
+				rets += new FlatString.with_infos(sits, remsp, pos)
 				break
 			end
 			var st = sits.find_beginning_of_char_at(pos + chunksz - 1)
 			var bytelen = st - pos
-			rets += new FlatString.with_infos(sits, bytelen, pos, st - 1)
+			rets += new FlatString.with_infos(sits, bytelen, pos)
 			pos = st
 			remsp -= bytelen
 		end
