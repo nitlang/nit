@@ -305,7 +305,7 @@ abstract class Text
 		end
 	end
 
-	# Returns `true` if the string contains only Numeric values (and one "," or one "." character)
+	# Is this string in a valid numeric format compatible with `to_f`?
 	#
 	#     assert "123".is_numeric  == true
 	#     assert "1.2".is_numeric  == true
@@ -313,6 +313,7 @@ abstract class Text
 	#     assert "1,2".is_numeric  == true
 	#     assert "-1.23e-2".is_numeric == true
 	#     assert "1..2".is_numeric == false
+	#     assert "".is_numeric     == false
 	fun is_numeric: Bool
 	do
 		var has_point_or_comma = false
@@ -330,7 +331,7 @@ abstract class Text
 				end
 			end
 		end
-		return true
+		return not is_empty
 	end
 
 	# Returns `true` if the string contains only Hex chars
