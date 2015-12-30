@@ -27,6 +27,7 @@ import nit_activity
 
 import app::ui
 private import data_store
+import assets
 
 redef class Control
 	# The Android element used to implement `self`

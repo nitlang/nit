@@ -168,4 +168,15 @@ extern class NativeInputStream in "Java" `{ java.io.InputStream `}
 			e.printStackTrace();
 		}
 	`}
+
+	# HACK for bug #845
+	redef fun new_global_ref import sys, Sys.jni_env `{
+		Sys sys = NativeInputStream_sys(self);
+		JNIEnv *env = Sys_jni_env(sys);
+		return (*env)->NewGlobalRef(env, self);
+	`}
+
+	redef fun pop_from_local_frame_with_env(jni_env) `{
+		return (*jni_env)->PopLocalFrame(jni_env, self);
+	`}
 end
