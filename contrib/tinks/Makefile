@@ -12,16 +12,19 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-all: bin/server bin/tinks
+all: bin/server bin/tinks bin/tinks3d
 
 pre-build: assets/images/drawing.png src/client/client_serialize.nit src/server/server_serialize.nit
 
 # Client
-bin/tinks: assets/images/drawing.png src/client/client_serialize.nit $(shell ../../bin/nitls -M src/client/linux_client.nit)
+bin/tinks: assets/images/drawing.png src/client/client.nit $(shell ../../bin/nitls -M src/client/linux_client.nit)
+		../../bin/nitserial -o src/client/client_serialize.nit src/client/client.nit
 	../../bin/nitc -o bin/tinks src/client/linux_client.nit -m src/client/client_serialize.nit
 
-src/client/client_serialize.nit: assets/images/drawing.png $(shell ../../bin/nitls -M src/client/client.nit)
-	../../bin/nitserial -o src/client/client_serialize.nit src/client/client.nit
+bin/tinks3d: $(shell ../../bin/nitls -M src/client/client3d.nit -m linux)
+	../../bin/nitserial -o src/client/client_serialize.nit src/client/client3d.nit
+	../../bin/nitc -o bin/tinks3d src/client/client3d.nit \
+		-m src/client/client_serialize.nit -m linux
 
 assets/images/drawing.png: art/drawing.svg
 	../inkscape_tools/bin/svg_to_png_and_nit art/drawing.svg -a assets/ -s src/client/ -x 2.0
