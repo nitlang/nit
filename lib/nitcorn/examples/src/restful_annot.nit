@@ -39,9 +39,6 @@ var vh = new VirtualHost("localhost:8080")
 # Serve everything with our restful action
 vh.routes.add new Route(null, new MyAction)
 
-# Avoid executing when running tests
-if "NIT_TESTING".environ == "true" then exit 0
-
 var factory = new HttpFactory.and_libevent
 factory.config.virtual_hosts.add vh
 factory.run
