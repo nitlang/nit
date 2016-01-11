@@ -101,12 +101,15 @@ class StringProcessor
 
 	# Ignores any printable character until a whitespace is encountered
 	protected fun ignore_until_whitespace: Int do
-		while not src[pos].is_whitespace do pos += 1
+		while src.length > pos and not src[pos].is_whitespace do pos += 1
 		return pos
 	end
 
 	# Returns the current location as a `Location` object
 	protected fun hot_location: Location do return new Location(line, line_offset)
+
+	# Is `pos` at the end of the source?
+	protected fun eof: Bool do return pos >= src.length
 end
 
 # Information about the location of an entity in a source document
