@@ -98,6 +98,17 @@ class EulerCamera
 		position.y += dy
 	end
 
+	# Aim the camera at `x, y, z`
+	fun look_at(x, y, z: Float)
+	do
+		var dx = position.x
+		var dy = position.y
+		var dz = position.z
+
+		yaw = atan2(dx, dz)
+		pitch = atan2(-dy, dz)
+	end
+
 	# Rotation matrix produced by the current rotation of the camera
 	protected fun rotation_matrix: Matrix
 	do
