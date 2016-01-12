@@ -310,19 +310,18 @@ abstract class Text
 	#     assert "123".is_numeric  == true
 	#     assert "1.2".is_numeric  == true
 	#     assert "-1.2".is_numeric == true
-	#     assert "1,2".is_numeric  == true
 	#     assert "-1.23e-2".is_numeric == true
 	#     assert "1..2".is_numeric == false
 	#     assert "".is_numeric     == false
 	fun is_numeric: Bool
 	do
-		var has_point_or_comma = false
+		var has_point = false
 		var e_index = -1
 		for i in [0..length[ do
 			var c = chars[i]
 			if not c.is_numeric then
-				if (c == '.' or c == ',') and not has_point_or_comma then
-					has_point_or_comma = true
+				if c == '.' and not has_point then
+					has_point = true
 				else if c == 'e' and e_index == -1 and i > 0 and i < length - 1 and chars[i-1] != '-' then
 					e_index = i
 				else if c == '-' and i == e_index + 1 and i < length - 1 then
