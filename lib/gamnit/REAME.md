@@ -11,6 +11,9 @@ It is modular, different parts of the framework are available through different 
 * `flat` provides an easy to use API for 2D games based on sprites.
   Clients of this API must redefine `App::update` to update the game logic and fill `App::sprites` with objects to draw.
 
+* `depth` defines an API for 3D games.
+  It is based on a list of `actors`, with `Model` composed of `Mesh` and `Material`.
+
 * `cameras` provides cameras classes to produce MVP matrices which can be fed to shaders.
 
 * `limit_fps` redefines existing services of gamnit to limit the framerate to a client-defined value.
