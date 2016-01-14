@@ -133,10 +133,18 @@ class HttpFactory
 
 	redef fun spawn_connection(buf_ev) do return new HttpServer(buf_ev, self)
 
-	# Launch the main loop of this server
+	# Execute the main listening loop to accept connections
+	#
+	# After the loop ends, the underlying resources are freed.
+	#
+	# When the environment variable `NIT_TESTING` is set to `true`,
+	# the loop is not executed but the resources are still freed.
 	fun run
 	do
-		event_base.dispatch
+		if "NIT_TESTING".environ != "true" then
+			event_base.dispatch
+		end
+
 		event_base.destroy
 	end
 end

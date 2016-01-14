@@ -18,9 +18,6 @@
 
 import nitcorn
 
-# Avoid executing when running tests
-if "NIT_TESTING".environ == "true" then exit 0
-
 # Create the virtualhost for your nitcorn server
 var vh = new VirtualHost("localhost:8080")
 
