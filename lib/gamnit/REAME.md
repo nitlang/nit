@@ -8,7 +8,7 @@ It is modular, different parts of the framework are available through different 
   It defines the basic methods to implement in order to obtain a working game: `App::frame_core` to update the screen
   and `App::accept_event` to receive user inputs.
 
-* `simple_2d` provides an easy to use API for 2D games based on sprites.
+* `flat` provides an easy to use API for 2D games based on sprites.
   Clients of this API must redefine `App::update` to update the game logic and fill `App::sprites` with objects to draw.
 
 * `cameras` provides cameras classes to produce MVP matrices which can be fed to shaders.

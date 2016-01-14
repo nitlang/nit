@@ -30,7 +30,7 @@
 #   It is used to position the sprites in `App::ui_sprites`.
 #
 # See the sample game at `contrib/asteronits/`.
-module simple_2d
+module flat
 
 import glesv2
 
