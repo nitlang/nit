@@ -20,6 +20,11 @@ redef class Map[K, V]
 	new do return new HashMap[K, V]
 end
 
+redef class Set[E]
+	# Get an instance of `HashMap[K, V]`, the default implementation
+	new do return new HashSet[E]
+end
+
 # A HashCollection is an array of HashNode[K] indexed by the K hash value
 private abstract class HashCollection[K]
 	type N: HashNode[K]

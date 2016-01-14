@@ -46,3 +46,19 @@ redef class App
 		on_destroy
 	end
 end
+
+redef class TextAsset
+	redef fun load
+	do
+		var path = app.assets_dir / path
+		var reader = path.to_path.open_ro
+		var content = reader.read_all
+		reader.close
+
+		var error = reader.last_error
+		if error != null then self.error = error
+
+		self.to_s = content
+		return content
+	end
+end

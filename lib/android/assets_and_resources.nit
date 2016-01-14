@@ -138,7 +138,7 @@ class AssetManager
 
 	# Return a string array of all the assets at the given path
 	fun list(path: String): Array[String] do
-		sys.jni_env.push_local_frame(1)
+		sys.jni_env.push_local_frame(8)
 		var java_array = native_assets_manager.list(path.to_java_string)
 		var nit_array = new Array[String]
 		for s in java_array do
@@ -150,16 +150,15 @@ class AssetManager
 
 	# Open an asset using ACCESS_STREAMING mode, returning a NativeInputStream
 	private fun open(file_name: String): NativeInputStream do
-		sys.jni_env.push_local_frame(1)
+		sys.jni_env.push_local_frame(2)
 		var return_value =  native_assets_manager.open(file_name.to_java_string)
-		sys.jni_env.pop_local_frame
-		return return_value
+		return return_value.pop_from_local_frame
 	end
 
 	# Open an asset using it's name and returning a NativeAssetFileDescriptor
 	# `file_name` is
 	private fun open_fd(file_name: String): NativeAssetFileDescriptor do
-		sys.jni_env.push_local_frame(1)
+		sys.jni_env.push_local_frame(2)
 		var return_value = native_assets_manager.open_fd(file_name.to_java_string).new_global_ref
 		sys.jni_env.pop_local_frame
 		return return_value
@@ -373,7 +372,7 @@ extern class NativeAssetFileDescriptor in "Java" `{ android.content.res.AssetFil
 	fun declared_length: Int in "Java" `{ return (int)self.getDeclaredLength(); `}
 	# fun extras: Bundle in "Java" `{ return self.getExtras(); `}
 
-	fun  file_descriptor: NativeFileDescriptor in "Java" `{
+	fun file_descriptor: NativeFileDescriptor in "Java" `{
 		FileDescriptor fd =  self.getFileDescriptor();
 		if (fd == null) {
 			Log.e("AssetFileDesciptorError", "Can't retrieve the FileDescriptor of this AssetFileDescriptor");

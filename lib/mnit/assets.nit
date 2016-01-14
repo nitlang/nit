@@ -21,24 +21,24 @@ import mnit_app
 import mnit::display
 
 # General asset
-interface Asset
+interface MnitAsset
 end
 
 # An String is an asset, returned from a text file
 redef class String
-	super Asset
+	super MnitAsset
 end
 
 # An Image is an asset
 redef interface Image
-	super Asset
+	super MnitAsset
 end
 
 redef class App
 	# Load a genereal asset from file name
 	# Will find the file within the assets/ directory
 	# Crashes if file not found
-	fun load_asset( id: String ): Asset
+	fun load_asset( id: String ): MnitAsset
 	do
 		var asset = try_loading_asset( id )
 		if asset == null then # error
@@ -63,5 +63,5 @@ redef class App
 	end
 
 	# Load an assets without error if not found
-	fun try_loading_asset( id: String ): nullable Asset is abstract
+	fun try_loading_asset( id: String ): nullable MnitAsset is abstract
 end

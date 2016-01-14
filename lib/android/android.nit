@@ -24,6 +24,7 @@ import platform
 import native_app_glue
 import dalvik
 private import log
+private import assets
 
 redef class App
 	redef fun init_window
