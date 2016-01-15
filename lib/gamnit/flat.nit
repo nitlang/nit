@@ -179,24 +179,30 @@ redef class App
 		update dt
 
 		# Draw and flip screen
-		# TODO optimize this draw to store constant values on the GPU
-
-		## World sprites
-		simple_2d_program.use
-		simple_2d_program.mvp.uniform world_camera.mvp_matrix
-		for sprite in sprites do sprite.draw
-
-		## Reset only the depth buffer
-		glClear gl_DEPTH_BUFFER_BIT
-
-		## UI sprites
-		simple_2d_program.mvp.uniform ui_camera.mvp_matrix
-		for sprite in ui_sprites do sprite.draw
+		frame_core_draw display
 		display.flip
 
 		# Check errors
 		gl_error = glGetError
 		assert gl_error == gl_NO_ERROR else print gl_error
+	end
+
+	# Draw sprites in `sprites` and `ui_sprites`
+	protected fun frame_core_draw(display: GamnitDisplay)
+	do
+		# TODO optimize this draw to store constant values on the GPU
+
+		# World sprites
+		simple_2d_program.use
+		simple_2d_program.mvp.uniform world_camera.mvp_matrix
+		for sprite in sprites do sprite.draw
+
+		# Reset only the depth buffer
+		glClear gl_DEPTH_BUFFER_BIT
+
+		# UI sprites
+		simple_2d_program.mvp.uniform ui_camera.mvp_matrix
+		for sprite in ui_sprites do sprite.draw
 	end
 
 	# Main method to refine in clients to update game logic and `sprites`
