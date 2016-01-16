@@ -67,9 +67,16 @@ abstract class Texture
 		return subtex
 	end
 
+	# Offset of the left border on `root` from 0.0 to 1.0
 	fun offset_left: Float do return 0.0
+
+	# Offset of the top border on `root` from 0.0 to 1.0
 	fun offset_top: Float do return 0.0
+
+	# Offset of the right border on `root` from 0.0 to 1.0
 	fun offset_right: Float do return 1.0
+
+	# Offset of the bottom border on `root` from 0.0 to 1.0
 	fun offset_bottom: Float do return 1.0
 end
 
