@@ -24,6 +24,8 @@ end
 
 import gamnit::depth
 
+import globe
+
 redef class App
 
 	# All available models
@@ -33,7 +35,8 @@ redef class App
 		new LeafModel(new Mesh.uv_sphere(4.0, 32, 16), new NormalsMaterial),
 		new Model("models/Tree_01.obj"),
 		new Model("models/Oak_Fall_01.obj"),
-		new Model("models/Quandtum_BA-2_v1_1.obj")]
+		new Model("models/Quandtum_BA-2_v1_1.obj"),
+		new GlobeModel]
 
 	# Index of the current model in `models`
 	var model_index = 0
@@ -92,7 +95,7 @@ redef class App
 		actor.center.z -= model.mesh.center.z
 
 		var height = model.mesh.dimensions.y
-		world_camera.reset_height(height * 4.0)
+		world_camera.reset_height(height * 3.0)
 
 		actors.clear
 		actors.add actor
