@@ -155,14 +155,6 @@ redef class App
 			gamnit_error = tex.error
 			assert gamnit_error == null else print_error gamnit_error
 		end
-
-		# Constant program values
-		program.use
-		program.coord.array_enabled = true
-		program.tex_coord.array_enabled = true
-
-		gl_error = glGetError
-		assert gl_error == gl_NO_ERROR else print gl_error
 	end
 
 	redef fun frame_core(display)
@@ -190,10 +182,15 @@ redef class App
 	# Draw sprites in `sprites` and `ui_sprites`
 	protected fun frame_core_draw(display: GamnitDisplay)
 	do
-		# TODO optimize this draw to store constant values on the GPU
-
-		# World sprites
 		simple_2d_program.use
+
+		# Set constant configs
+		simple_2d_program.coord.array_enabled = true
+		simple_2d_program.tex_coord.array_enabled = true
+		simple_2d_program.color.array_enabled = false
+
+		# TODO optimize this draw to store constant values on the GPU
+		# World sprites
 		simple_2d_program.mvp.uniform world_camera.mvp_matrix
 		for sprite in sprites do sprite.draw
 
