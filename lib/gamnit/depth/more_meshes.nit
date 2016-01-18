@@ -101,5 +101,16 @@ class Cube
 		return normals
 	end
 
+	redef var texture_coords: Array[Float] is lazy do
+		var a = [0.0, 1.0]
+		var b = [1.0, 1.0]
+		var c = [0.0, 0.0]
+		var d = [1.0, 0.0]
+
+		var texture_coords = new Array[Float]
+		for v in [c, d, a, a, d, b] do for i in 6.times do texture_coords.add_all v
+		return texture_coords
+	end
+
 	redef var center = new Point3d[Float](0.0, 0.0, 0.0) is lazy
 end
