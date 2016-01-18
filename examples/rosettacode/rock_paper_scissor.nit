@@ -33,4 +33,4 @@ loop
 	var computer_input = ["rock", "scissors", "paper"].rand
 	print "The computer played {computer_input}"
 	print arr_message[game_logic(player_input,computer_input)]
-	end
+end

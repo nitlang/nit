@@ -13,5 +13,7 @@ loop
 	if guess == random then
 		print "Well guessed"
 		break
+	else
+		print "Try again!"
 	end
 end
