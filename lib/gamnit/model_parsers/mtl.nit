@@ -64,6 +64,8 @@ class MtlFileParser
 					material.dissolved = 1.0 - read_number
 				else if token == "illum" then
 					material.illumination_model = read_number.to_i
+				else if token == "map_Ka" then
+					material.map_ambient = read_until_eol_or_comment
 				else if token == "map_Kd" then
 					material.map_diffuse = read_until_eol_or_comment
 				else if token == "map_Bump" then
@@ -111,6 +113,9 @@ class MtlDef
 	# Illumination model
 	var illumination_model = 0
 
+	# Ambient map
+	var map_ambient: nullable String = null
+
 	# Diffuse map
 	var map_diffuse: nullable String = null
 
@@ -126,6 +131,6 @@ class MtlDef
 	# Collect non-null maps from `map_diffuse, map_bump, map_specular, map_exponent`
 	fun maps: Array[String]
 	do
-		return [for m in [map_diffuse, map_bump, map_specular, map_exponent] do if m != null then m]
+		return [for m in [map_ambient, map_diffuse, map_bump, map_specular, map_exponent] do if m != null then m]
 	end
 end

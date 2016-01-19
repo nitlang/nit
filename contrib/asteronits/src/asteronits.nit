@@ -22,7 +22,7 @@ module asteronits is
 	android_api_target 15
 end
 
-import gamnit::simple_2d
+import gamnit::flat
 
 import game_logic
 import spritesheet

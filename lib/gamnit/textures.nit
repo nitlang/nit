@@ -23,24 +23,6 @@ abstract class Texture
 	# Prepare a texture located at `path` within the `assets` folder
 	new (path: Text) do return new GamnitAssetTexture(path.to_s)
 
-	# Prepare and load a colorful small texture of 2x2 pixels
-	new checker
-	do
-		var pixels = [0xFFu8, 0x00u8, 0x00u8,
-		              0x00u8, 0xFFu8, 0x00u8,
-		              0x00u8, 0x00u8, 0xFFu8,
-		              0xFFu8, 0xFFu8, 0xFFu8]
-		var cpixels = new CByteArray.from(pixels)
-
-		var tex = new GamnitRootTexture
-		tex.width = 2.0
-		tex.height = 2.0
-		tex.load_from_pixels(cpixels.native_array, 2, 2, gl_RGB)
-
-		cpixels.destroy
-		return tex
-	end
-
 	# Root texture of which `self` is derived
 	fun root: GamnitRootTexture is abstract
 
@@ -67,10 +49,38 @@ abstract class Texture
 		return subtex
 	end
 
+	# Offset of the left border on `root` from 0.0 to 1.0
 	fun offset_left: Float do return 0.0
+
+	# Offset of the top border on `root` from 0.0 to 1.0
 	fun offset_top: Float do return 0.0
+
+	# Offset of the right border on `root` from 0.0 to 1.0
 	fun offset_right: Float do return 1.0
+
+	# Offset of the bottom border on `root` from 0.0 to 1.0
 	fun offset_bottom: Float do return 1.0
+end
+
+# Colorful small texture of 2x2 pixels
+class CheckerTexture
+	super GamnitRootTexture
+
+	redef fun load(force)
+	do
+		var pixels = [0xFFu8, 0x00u8, 0x00u8,
+		              0x00u8, 0xFFu8, 0x00u8,
+		              0x00u8, 0x00u8, 0xFFu8,
+		              0xFFu8, 0xFFu8, 0xFFu8]
+
+		var cpixels = new CByteArray.from(pixels)
+
+		width = 2.0
+		height = 2.0
+		load_from_pixels(cpixels.native_array, 2, 2, gl_RGB)
+
+		cpixels.destroy
+	end
 end
 
 # Texture with its own pixels
