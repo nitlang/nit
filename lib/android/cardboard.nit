@@ -51,11 +51,6 @@ extern class NativeHeadTracker in "Java" `{ com.google.vrtoolkit.cardboard.senso
 	# Stop tracking head movement
 	fun stop_tracking in "Java" `{ self.stopTracking(); `}
 
-	# Apply correction to the gyroscope values
-	fun gyro_bias=(matrix: JavaFloatArray) in "Java" `{
-		self.setGyroBias(matrix);
-	`}
-
 	# Enable finer analysis using the neck as center of movement
 	fun neck_model_enabled=(value: Bool) in "Java" `{
 		self.setNeckModelEnabled(value);
