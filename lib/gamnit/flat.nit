@@ -68,6 +68,10 @@ class Sprite
 		glActiveTexture gl_TEXTURE0
 		glBindTexture(gl_TEXTURE_2D, texture.root.gl_texture)
 
+		simple_2d_program.translation.array_enabled = false
+		simple_2d_program.color.array_enabled = false
+		simple_2d_program.scale.array_enabled = false
+
 		simple_2d_program.translation.uniform(center.x, -center.y, center.z, 0.0)
 		simple_2d_program.color.uniform(1.0, 1.0, 1.0, alpha)
 		simple_2d_program.scale.uniform scale
