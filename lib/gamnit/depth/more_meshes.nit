@@ -57,6 +57,9 @@ class Plane
 	end
 
 	redef var center = new Point3d[Float](0.0, 0.0, 0.0) is lazy
+
+	init do indices.add_all([0, 1, 2, 2, 1, 3])
+	# TODO use gl_TRIANGLE_FAN instead
 end
 
 # Cube, with 6 faces
