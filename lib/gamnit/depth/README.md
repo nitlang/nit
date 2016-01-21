@@ -1,6 +1,6 @@
 gamnit depth, a framework to create portable 3D games in Nit.
 
-This framework is based on a list of `Actor`, in `app::actors`, which are drawn to the screen at each frame. Each actor is composed of a model and other information specific to this instance: position in the world, rotation and scaling. Each `Model` is either a composite of models or it is composed of a `Mesh` defining its geometry and a `Material` defining how to draw the model. `Material` can be subclassed to use custom shaders.
+This framework is based on a list of `Actor`, in `app::actors`, which are drawn to the screen at each frame. Each actor is composed of a `Model` and other information specific to this instance: position in the world, rotation and scaling. Each `Model` is either a composite of models or it is composed of a `Mesh` defining its geometry and a `Material` defining how to draw the model. `Material` can be subclassed to use custom shaders.
 
 # Assets
 
