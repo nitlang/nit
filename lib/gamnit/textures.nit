@@ -111,14 +111,21 @@ class GamnitRootTexture
 		glBindTexture(gl_TEXTURE_2D, tex)
 		glTexImage2D(gl_TEXTURE_2D, 0, format, width, height, 0, format, gl_UNSIGNED_BYTE, pixels)
 
-		# TODO make these settings attributes of the class
-		glTexParameteri(gl_TEXTURE_2D, gl_TEXTURE_MIN_FILTER, gl_NEAREST)
-		glTexParameteri(gl_TEXTURE_2D, gl_TEXTURE_MAG_FILTER, gl_NEAREST)
-		glTexParameteri(gl_TEXTURE_2D, gl_TEXTURE_WRAP_S, gl_REPEAT)
-		glTexParameteri(gl_TEXTURE_2D, gl_TEXTURE_WRAP_T, gl_REPEAT)
-
 		glHint(gl_GENERATE_MIPMAP_HINT, gl_NICEST)
 		glGenerateMipmap(gl_TEXTURE_2D)
+	end
+
+	# Set whether this texture should be pixelated when drawn, otherwise it is interpolated
+	fun pixelated=(pixelated: Bool)
+	do
+		# TODO this service could be made available in `Texture` when using
+		# the kind of texture wrapper of gles v2 or maybe 3
+
+		glBindTexture(gl_TEXTURE_2D, gl_texture)
+
+		var param = if pixelated then gl_NEAREST else gl_LINEAR
+		glTexParameteri(gl_TEXTURE_2D, gl_TEXTURE_MIN_FILTER, param)
+		glTexParameteri(gl_TEXTURE_2D, gl_TEXTURE_MAG_FILTER, param)
 	end
 
 	# Has this resource been deleted?
