@@ -40,11 +40,11 @@ redef class App
 		assert gamnit_error == null else print_error gamnit_error
 	end
 
-	# Draw all element in `actors`
-	redef fun frame_core_draw(display)
-	do
-		super
+	redef fun frame_core_draw(display) do frame_core_depth display
 
+	# Draw all elements of `actors` and then call `frame_core_flat`
+	protected fun frame_core_depth(display: GamnitDisplay)
+	do
 		# Update cameras on both our programs
 		versatile_program.use
 		versatile_program.mvp.uniform world_camera.mvp_matrix
@@ -57,5 +57,7 @@ redef class App
 				leaf.material.draw(actor, leaf)
 			end
 		end
+
+		frame_core_flat display
 	end
 end

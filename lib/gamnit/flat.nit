@@ -179,8 +179,11 @@ redef class App
 		assert gl_error == gl_NO_ERROR else print gl_error
 	end
 
+	# Draw the whole screen, all `glDraw...` calls should be executed here
+	protected fun frame_core_draw(display: GamnitDisplay) do frame_core_flat display
+
 	# Draw sprites in `sprites` and `ui_sprites`
-	protected fun frame_core_draw(display: GamnitDisplay)
+	protected fun frame_core_flat(display: GamnitDisplay)
 	do
 		simple_2d_program.use
 
