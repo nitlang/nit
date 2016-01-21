@@ -29,13 +29,13 @@ class SmoothMaterial
 		[1.0, 1.0, 1.0, 1.0])
 
 	# Ambient color, always visible
-	var ambient_color: Array[Float]
+	var ambient_color: Array[Float] is writable
 
 	# Diffuse color when covered by a light source
-	var diffuse_color: Array[Float]
+	var diffuse_color: Array[Float] is writable
 
 	# Specular color affecting reflections
-	var specular_color: Array[Float]
+	var specular_color: Array[Float] is writable
 
 	redef fun draw(actor, model)
 	do
