@@ -212,10 +212,10 @@ class LambertProgram
 		attribute vec4 coord;
 
 		// Vertex translation
-		attribute vec4 translation;
+		uniform vec4 translation;
 
 		// Vertex scaling
-		attribute float scale;
+		uniform float scale;
 
 		// Vertex coordinates on textures
 		attribute vec2 tex_coord;
@@ -349,13 +349,13 @@ class LambertProgram
 	var camera = uniforms["camera"].as(UniformVec3) is lazy
 
 	# Translation applied to each vertex
-	var translation = attributes["translation"].as(AttributeVec4) is lazy
+	var translation = uniforms["translation"].as(UniformVec4) is lazy
 
 	# Rotation matrix
 	var rotation = uniforms["rotation"].as(UniformMat4) is lazy
 
 	# Scaling per vertex
-	var scale = attributes["scale"].as(AttributeFloat) is lazy
+	var scale = uniforms["scale"].as(UniformFloat) is lazy
 
 	# Model view projection matrix
 	var mvp = uniforms["mvp"].as(UniformMat4) is lazy
