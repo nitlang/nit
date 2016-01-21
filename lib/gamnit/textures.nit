@@ -39,7 +39,7 @@ abstract class Texture
 	var error: nullable Error = null
 
 	# OpenGL handle to this texture
-	var gl_texture: Int is noinit
+	fun gl_texture: Int do return root.gl_texture
 
 	# Prepare a subtexture from this texture
 	fun subtexture(left, top, width, height: Numeric): GamnitSubtexture
@@ -91,6 +91,8 @@ class GamnitRootTexture
 
 	# Has this texture been loaded yet?
 	var loaded = false
+
+	redef var gl_texture = -1
 
 	init do all_root_textures.add self
 
