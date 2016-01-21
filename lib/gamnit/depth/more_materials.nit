@@ -45,7 +45,7 @@ class SmoothMaterial
 		var mesh = model.mesh
 
 		# Actor specs
-		program.translation.uniform(actor.center.x, -actor.center.y, actor.center.z, 0.0)
+		program.translation.uniform(actor.center.x, actor.center.y, actor.center.z, 0.0)
 		program.scale.uniform actor.scale
 		program.rotation.uniform new Matrix.rotation(actor.rotation, 0.0, 1.0, 0.0)
 
@@ -137,7 +137,7 @@ class TexturedMaterial
 			program.use_map_specular.uniform false
 		end
 
-		program.translation.uniform(actor.center.x, -actor.center.y, actor.center.z, 0.0)
+		program.translation.uniform(actor.center.x, actor.center.y, actor.center.z, 0.0)
 		program.scale.uniform actor.scale
 
 		program.tex_coord.array_enabled = need_tex_coord
@@ -182,7 +182,7 @@ class NormalsMaterial
 
 		# TODO apply normal map
 
-		program.translation.uniform(actor.center.x, -actor.center.y, actor.center.z, 0.0)
+		program.translation.uniform(actor.center.x, actor.center.y, actor.center.z, 0.0)
 		program.scale.uniform actor.scale
 
 		program.tex_coord.array_enabled = true
