@@ -208,6 +208,9 @@ class UICamera
 		return new Point[Float](wx, wy)
 	end
 
+	# Center of the screen, from the point of view of the camera, at z = 0
+	fun center: Point3d[Float] do return new Point3d[Float](position.x + width / 2.0, position.y + height / 2.0, 0.0)
+
 	# Anchor in the top left corner of the screen, at z = 0
 	fun top_left: Point3d[Float] do return new Point3d[Float](position.x, position.y, 0.0)
 
