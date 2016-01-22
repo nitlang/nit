@@ -64,8 +64,8 @@ redef class App
 			models.unshift model
 		end
 
-		world_camera.near = 1.0
-		world_camera.far = 1000.0
+		world_camera.near = 0.1
+		world_camera.far = 100.0
 
 		for model in models do model.load
 		for texture in asset_textures_by_name.values do texture.load
@@ -95,11 +95,11 @@ redef class App
 
 		model = model.leaves.first
 		actor.center.x -= model.mesh.center.x
-		actor.center.y += model.mesh.center.y
+		actor.center.y -= model.mesh.center.y
 		actor.center.z -= model.mesh.center.z
 
 		var height = model.mesh.dimensions.y
-		world_camera.reset_height(height * 3.0)
+		world_camera.reset_height(height * 2.5)
 
 		actors.clear
 		actors.add actor
@@ -125,7 +125,7 @@ redef class App
 			else if event.is_arrow_left then
 				cycle_model -1
 			end
-		else if event isa PointerEvent and event.pressed then
+		else if event isa PointerEvent and event.depressed then
 			if event.x.to_i > display.width / 2 then
 				cycle_model 1
 			else cycle_model -1
