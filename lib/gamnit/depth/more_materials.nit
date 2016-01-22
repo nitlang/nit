@@ -317,7 +317,7 @@ class LambertProgram
 			float lambert = max(dot(light_dir, v_normal), 0.0);
 
 			if (use_map_ambient)
-				gl_FragColor = ambient_color + texture2D(map_ambient, v_tex_coord);
+				gl_FragColor = ambient_color * texture2D(map_ambient, v_tex_coord);
 			else
 				gl_FragColor = ambient_color;
 
