@@ -51,6 +51,10 @@ redef class App
 	do
 		super
 
+		# Show splash screen
+		var logo = new Texture("splash.png")
+		show_splash_screen logo
+
 		if args.length > 0 then
 			# Load a model passed as the first command line argument
 			var model_path = args.first
