@@ -812,6 +812,44 @@ interface SequenceRead[E]
 	# REQUIRE `index >= 0 and index < length`
 	fun [](index: Int): E is abstract
 
+	# Return the index-th element but wrap
+	#
+	# Whereas `self[]` requires the index to exists, the `modulo` accessor automatically
+	# wraps overbound and underbouds indexes.
+	#
+	# ~~~
+	# var a = [10,20,30]
+	# assert a.modulo(1) == 20
+	# assert a.modulo(3) == 10
+	# assert a.modulo(-1) == 30
+	# assert a.modulo(-10) == 30
+	# ~~~
+	#
+	# REQUIRE `not_empty`
+	# ENSURE `result == self[modulo_index(index)]`
+	fun modulo(index: Int): E do return self[modulo_index(index)]
+
+	# Returns the real index for a modulo index.
+	#
+	# ~~~
+	# var a = [10,20,30]
+	# assert a.modulo_index(1) == 1
+	# assert a.modulo_index(3) == 0
+	# assert a.modulo_index(-1) == 2
+	# assert a.modulo_index(-10) == 2
+	# ~~~
+	#
+	# REQUIRE `not_empty`
+	fun modulo_index(index: Int): Int
+	do
+		var length = self.length
+		if index >= 0 then
+			return index % length
+		else
+			return length - (-1 - index) % length - 1
+		end
+	end
+
 	# Get the last item.
 	# Is equivalent with `self[length-1]`.
 	#
@@ -1061,6 +1099,24 @@ interface Sequence[E]
 	#
 	# REQUIRE `index >= 0 and index <= length`
 	fun []=(index: Int, item: E) is abstract
+
+	# Set the index-th element but wrap
+	#
+	# Whereas `self[]=` requires the index to exists, the `modulo` accessor automatically
+	# wraps overbound and underbouds indexes.
+	#
+	# ~~~
+	# var a = [10,20,30]
+	# a.modulo(1) = 200
+	# a.modulo(3) = 100
+	# a.modulo(-1) = 300
+	# a.modulo(-10) = 301
+	# assert a == [100, 200, 301]
+	# ~~~
+	#
+	# REQUIRE `not_empty`
+	# ENSURE `self[modulo_index(index)] == value`
+	fun modulo=(index: Int, value: E) do self[modulo_index(index)] = value
 
 	# Insert an element at a given position, following elements are shifted.
 	#
