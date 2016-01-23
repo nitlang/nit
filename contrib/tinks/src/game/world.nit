@@ -211,6 +211,9 @@ class FeatureChangeEvent
 	# New `Feature`, if any
 	var feature: nullable Feature
 
+	# Previous feature, if any
+	var old_feature: nullable Feature
+
 	# `Pos` of this change
 	var pos: Pos
 
