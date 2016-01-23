@@ -127,7 +127,7 @@ class EulerCamera
 		var view = new Matrix.identity(4)
 
 		# Translate the world away from the camera
-		view.translate(-position.x/2.0, -position.y/2.0, -position.z/2.0)
+		view.translate(-position.x, -position.y, -position.z)
 
 		# Rotate the camera, first by looking left or right, then up or down
 		view = view * rotation_matrix
@@ -227,7 +227,7 @@ class UICamera
 		var view = new Matrix.identity(4)
 
 		# Translate the world away from the camera
-		view.translate(-position.x/2.0, -position.y/2.0, -position.z/2.0)
+		view.translate(-position.x, -position.y, -position.z)
 
 		# Use a projection matrix with a depth
 		var projection = new Matrix.orthogonal(0.0, width, -height, 0.0, near, far)
