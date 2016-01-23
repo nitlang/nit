@@ -448,6 +448,40 @@ redef class Collection[ E ]
 		res.shuffle
 		return res
 	end
+
+	# Return a new array made of (at most) `length` elements randomly chosen.
+	#
+	# ~~~
+	# var a = [1,2,1].sample(2)
+	# assert a == [1,1] or a == [1,2] or a == [2,1]
+	# ~~~
+	#
+	# If there is not enough elements, then the result only contains them in a random order.
+	# See `to_shuffle`.
+	#
+	# ENSURE `result.length == self.length.min(length)`
+	#
+	# Note: the default implementation uses the Reservoir Algorithm
+	fun sample(length: Int): Array[E]
+	do
+		if length >= self.length then return to_shuffle
+
+		var res = new Array[E].with_capacity(length)
+		var it = iterator
+		for i in [0..length[ do
+			res[i] = it.item
+			it.next
+		end
+		res.shuffle
+		for i in [length+1..self.length] do
+			var j = i.rand
+			if j < length then
+				res[j] = it.item
+			end
+			it.next
+		end
+		return res
+	end
 end
 
 redef class SequenceRead[E]
