@@ -17,6 +17,7 @@ module depth
 
 intrude import more_materials
 import more_models
+import particles
 
 redef class App
 
@@ -29,15 +30,12 @@ redef class App
 		world_camera.near = 0.1
 
 		# Prepare programs
-		var program = versatile_program
-		program.compile_and_link
-		var gamnit_error = program.error
-		assert gamnit_error == null else print_error gamnit_error
-
-		program = normals_program
-		normals_program.compile_and_link
-		gamnit_error = program.error
-		assert gamnit_error == null else print_error gamnit_error
+		var programs = [versatile_program, normals_program, explosion_program, smoke_program: GamnitProgram]
+		for program in programs do
+			program.compile_and_link
+			var gamnit_error = program.error
+			assert gamnit_error == null else print_error gamnit_error
+		end
 	end
 
 	redef fun frame_core_draw(display) do frame_core_depth display
@@ -57,6 +55,11 @@ redef class App
 				leaf.material.draw(actor, leaf)
 			end
 		end
+
+		# Toggle writing to the depth buffer for particles effects
+		glDepthMask false
+		for system in particle_systems do system.draw
+		glDepthMask true
 
 		frame_core_flat display
 	end
