@@ -325,6 +325,8 @@ class LambertProgram
 				gl_FragColor += lambert * diffuse_color * texture2D(map_diffuse, v_tex_coord);
 			else
 				gl_FragColor += lambert * diffuse_color;
+
+			if (gl_FragColor.a < 0.01) discard;
 		}
 		""" @ glsl_fragment_shader
 
