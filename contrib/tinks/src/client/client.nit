@@ -23,7 +23,7 @@ import game
 import common
 
 import assets
-import context
+import base
 
 # A position within the screen
 class ScreenPos
@@ -87,84 +87,19 @@ redef class App
 	# Camera managing transformation between world and screen positions
 	var camera = new Camera
 
-	# Context of the game, either local or remote
-	var context: GameContext is lazy do
-
-		# Server info
-		var address = null
-		var port = default_listening_port
-
-		if args.not_empty then
-			# Use first argument as the server address
-			address = args[0]
-			if args.length > 1 then port = args[1].to_i
-		else
-			print "Looking for a server..."
-
-			var s = new UDPSocket
-			s.enable_broadcast = true
-			s.blocking = false
-			s.broadcast(discovery_port, "Server? {handshake_app_name}")
-			nanosleep(0, 100_000_000)
-
-			var ptr = new Ref[nullable SocketAddress](null)
-			var resp = s.recv_from(1024, ptr)
-			var src = ptr.item
-
-			if not resp.is_empty then
-				var words = resp.split(" ")
-				if words.length == 3 and words[0] == "Server!" and words[1] == handshake_app_name and words[2].is_numeric then
-					address = src.address
-					port = words[2].to_i
-				end
-			end
-		end
-
-		if address == null then
-			print "Launching a local server"
-
-			# No command line
-			return new LocalServerContext
-		else
-			print "Connecting to:{address}:{port}"
-			maximum_fps = 0.0
-
-			# Args are: tinks server_address {port}
-			#var address = "riph" # args[0]
-			#var port = sys.default_listening_port
-			if args.length > 1 then port = args[1].to_i
-
-			# Setup connection config
-			var server_config = new RemoteServerConfig(address, port)
-			var server = new RemoteServer(server_config)
-
-			# Connect then complete handshake
-			assert server.connect else print_error "Connection to server failed with {server.socket.last_error or else "none"}"
-			assert server.handshake else print_error "Handshake with server failed"
-
-			# Download and setup remote game
-			var context = new RemoteGameContext(server)
-			context.setup
-
-			return context
-		end
-	end
-
-	# `Tank` of the local player, if any
-	fun local_tank: nullable Tank
-	do
-		# FIXME use a ? to one line this
-		var local_player = context.local_player
-		if local_player == null then return null
-		return local_player.tank
-	end
-
 	# Square of the minimum distance from the tank for an object to be "far"
 	#
 	# This value influences which sounds are heard,
 	# the strength of vibrations and
 	# whether an arrow points to a far unit
 	private var far_dist2 = 2000.0
+
+	redef fun context
+	do
+		var s = super
+		if s isa RemoteGameContext then maximum_fps = 0.0
+		return s
+	end
 
 	# Tank tracks tracks on the ground
 	#
