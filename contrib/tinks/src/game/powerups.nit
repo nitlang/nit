@@ -48,13 +48,13 @@ redef class Tank
 		# Put a random powerup at the center of the old tank
 		var pos = new Pos(pos.x.floor+0.5, pos.y.floor+0.5)
 		var powerup = new Powerup(turn.game.story.powerups.rand, pos)
-		turn.add new FeatureChangeEvent(powerup, pos)
+		turn.add new FeatureChangeEvent(powerup, null, pos)
 
 		# Add some debris around it
 		var forward = new Pos((pos.x+heading.cos*1.1).floor+0.5, (pos.y+heading.sin*1.1).floor+0.5)
 		var backward = new Pos((pos.x-heading.cos*1.1).floor+0.5, (pos.y-heading.sin*1.1).floor+0.5)
-		turn.add new FeatureChangeEvent(new Feature(turn.game.story.debris, forward), forward)
-		turn.add new FeatureChangeEvent(new Feature(turn.game.story.debris, backward), backward)
+		turn.add new FeatureChangeEvent(new Feature(turn.game.story.debris, forward), null, forward)
+		turn.add new FeatureChangeEvent(new Feature(turn.game.story.debris, backward), null, backward)
 	end
 
 	# Intercept collision detection of "absorb" powerups
@@ -78,7 +78,7 @@ redef class Tank
 		# Only powerups! absorb them
 		for powerup in collisions do
 			if powerup isa Powerup then
-				turn.add new FeatureChangeEvent(null, powerup.pos)
+				turn.add new FeatureChangeEvent(null, powerup, powerup.pos)
 
 				if powerup.rule.restore_health then
 					turn.add new TankHealthChange(self, rule.max_health)

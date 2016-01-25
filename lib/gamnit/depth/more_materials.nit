@@ -29,13 +29,13 @@ class SmoothMaterial
 		[1.0, 1.0, 1.0, 1.0])
 
 	# Ambient color, always visible
-	var ambient_color: Array[Float]
+	var ambient_color: Array[Float] is writable
 
 	# Diffuse color when covered by a light source
-	var diffuse_color: Array[Float]
+	var diffuse_color: Array[Float] is writable
 
 	# Specular color affecting reflections
-	var specular_color: Array[Float]
+	var specular_color: Array[Float] is writable
 
 	redef fun draw(actor, model)
 	do
@@ -45,7 +45,7 @@ class SmoothMaterial
 		var mesh = model.mesh
 
 		# Actor specs
-		program.translation.uniform(actor.center.x, -actor.center.y, actor.center.z, 0.0)
+		program.translation.uniform(actor.center.x, actor.center.y, actor.center.z, 0.0)
 		program.scale.uniform actor.scale
 		program.rotation.uniform new Matrix.rotation(actor.rotation, 0.0, 1.0, 0.0)
 
@@ -102,7 +102,8 @@ class TexturedMaterial
 		var program = app.versatile_program
 		program.use
 
-		var need_tex_coord = false
+		# One of the textures used, if any
+		var sample_used_texture = null
 
 		var texture = ambient_texture
 		if texture != null then
@@ -110,7 +111,7 @@ class TexturedMaterial
 			glBindTexture(gl_TEXTURE_2D, texture.gl_texture)
 			program.use_map_ambient.uniform true
 			program.map_ambient.uniform 0
-			need_tex_coord = true
+			sample_used_texture = texture
 		else
 			program.use_map_ambient.uniform false
 		end
@@ -121,7 +122,7 @@ class TexturedMaterial
 			glBindTexture(gl_TEXTURE_2D, texture.gl_texture)
 			program.use_map_diffuse.uniform true
 			program.map_diffuse.uniform 1
-			need_tex_coord = true
+			sample_used_texture = texture
 		else
 			program.use_map_diffuse.uniform false
 		end
@@ -132,16 +133,37 @@ class TexturedMaterial
 			glBindTexture(gl_TEXTURE_2D, texture.gl_texture)
 			program.use_map_specular.uniform true
 			program.map_specular.uniform 2
-			need_tex_coord = true
+			sample_used_texture = texture
 		else
 			program.use_map_specular.uniform false
 		end
 
-		program.translation.uniform(actor.center.x, -actor.center.y, actor.center.z, 0.0)
+		program.translation.uniform(actor.center.x, actor.center.y, actor.center.z, 0.0)
 		program.scale.uniform actor.scale
 
-		program.tex_coord.array_enabled = need_tex_coord
-		program.tex_coord.array(mesh.texture_coords, 2)
+		# If using a texture, set `texture_coords`
+		program.tex_coord.array_enabled = sample_used_texture != null
+		if sample_used_texture != null then
+			if sample_used_texture isa GamnitRootTexture then
+				# Coordinates are directly valid
+				program.tex_coord.array(mesh.texture_coords, 2)
+			else
+				# Correlate texture coordinates from the substexture and the mesh.
+				# This is slow, but should be cached on the GPU.
+				var xa = sample_used_texture.offset_left
+				var xd = sample_used_texture.offset_right - xa
+				var ya = sample_used_texture.offset_top
+				var yd = sample_used_texture.offset_bottom - ya
+
+				var tex_coords = new Array[Float].with_capacity(mesh.texture_coords.length)
+				for i in [0..mesh.texture_coords.length/2[ do
+					tex_coords[i*2]   = xa + xd * mesh.texture_coords[i*2]
+					tex_coords[i*2+1] = ya + yd * mesh.texture_coords[i*2+1]
+				end
+
+				program.tex_coord.array(tex_coords, 2)
+			end
+		end
 
 		program.coord.array_enabled = true
 		program.coord.array(mesh.vertices, 3)
@@ -182,7 +204,7 @@ class NormalsMaterial
 
 		# TODO apply normal map
 
-		program.translation.uniform(actor.center.x, -actor.center.y, actor.center.z, 0.0)
+		program.translation.uniform(actor.center.x, actor.center.y, actor.center.z, 0.0)
 		program.scale.uniform actor.scale
 
 		program.tex_coord.array_enabled = true
@@ -295,7 +317,7 @@ class LambertProgram
 			float lambert = max(dot(light_dir, v_normal), 0.0);
 
 			if (use_map_ambient)
-				gl_FragColor = ambient_color + texture2D(map_ambient, v_tex_coord);
+				gl_FragColor = ambient_color * texture2D(map_ambient, v_tex_coord);
 			else
 				gl_FragColor = ambient_color;
 
@@ -303,6 +325,8 @@ class LambertProgram
 				gl_FragColor += lambert * diffuse_color * texture2D(map_diffuse, v_tex_coord);
 			else
 				gl_FragColor += lambert * diffuse_color;
+
+			if (gl_FragColor.a < 0.01) discard;
 		}
 		""" @ glsl_fragment_shader
 

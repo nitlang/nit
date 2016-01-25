@@ -94,7 +94,9 @@ class Tank
 
 		turret.do_turn turn
 
-		turn.add new TankMoveEvent(self, pos, direction_heading, direction_forwards, heading, turret.relative_heading)
+		if health > 0 then
+			turn.add new TankMoveEvent(self, pos, direction_heading, direction_forwards, heading, turret.relative_heading)
+		end
 	end
 
 	# What would be the next position if not blocked by terrain features?

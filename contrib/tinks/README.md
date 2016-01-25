@@ -28,11 +28,30 @@ Only the destroyed features and new powerups are passed to the clients by the se
 This game was developed quickly while aiming to keep it simple.
 It should be easy to add features as refinements on both the client and the server.
 
+# Clients and server
+
+Tinks! has two distinct clients and one dedicated server.
+The whole project is modular, these software share mostly the same code.
+
+* The original 2D client at `bin/tinks` uses mnit and OpenGL ES 1.0 to display the world from above.
+
+  The Android variant at `bin/tinks.apk` uses the same view from above, with added on-screen controls.
+
+  ![Screenshot of the 2D client](doc/tinks.png)
+
+* The 3D client at `bin/tinks3d` uses gamnit and OpenGL ES 2.0 for an immersive world.
+
+  Despite the different graphics, both client are fully compatible for multiplayer.
+
+  ![Screenshot of the 3D client](doc/tinks3d.png)
+
+* The dedicated server at `bin/server` acts as a headless server for clients on the same local network.
+
 # Usage
 
 Compile with: `make`
 
-Launch with: `bin/tinks`
+Launch with: `bin/tinks` or `bin/tinks3d`
 
 Compile for Android with: `make bin/tinks.apk`
 
@@ -40,8 +59,16 @@ Launch a server with: `bin/server [server_port]`
 
 Connect to a precise server with: `bin/tinks server_address [server_port]`
 
-# Configuration on desktop
+# Configuration on desktop for the 2D client
 
 You can configure the client by modifying the file `./config.json` created when you first launch the game.
 The fields `res_x` and `res_y` specify the resolution of the window.
 The field `play_sounds` should be clear enough.
+
+# Artwork
+
+* Trees and rocks models created by Kenney.nl, shared under CC0
+* Ground texture created by Duion, shared under CC0
+* Health model created by Alexis Laferrière, shared under CC0
+* Tank original model created by Sapen, shared under CC-BY-SA 3.0
+	* Derivatives from this model were created by Alexis Laferrière, shared under CC-BY-SA 3.0

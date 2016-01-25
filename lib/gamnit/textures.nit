@@ -39,7 +39,7 @@ abstract class Texture
 	var error: nullable Error = null
 
 	# OpenGL handle to this texture
-	var gl_texture: Int is noinit
+	fun gl_texture: Int do return root.gl_texture
 
 	# Prepare a subtexture from this texture
 	fun subtexture(left, top, width, height: Numeric): GamnitSubtexture
@@ -92,6 +92,8 @@ class GamnitRootTexture
 	# Has this texture been loaded yet?
 	var loaded = false
 
+	redef var gl_texture = -1
+
 	init do all_root_textures.add self
 
 	private fun load_from_pixels(pixels: Pointer, width, height: Int, format: GLPixelFormat)
@@ -109,14 +111,21 @@ class GamnitRootTexture
 		glBindTexture(gl_TEXTURE_2D, tex)
 		glTexImage2D(gl_TEXTURE_2D, 0, format, width, height, 0, format, gl_UNSIGNED_BYTE, pixels)
 
-		# TODO make these settings attributes of the class
-		glTexParameteri(gl_TEXTURE_2D, gl_TEXTURE_MIN_FILTER, gl_NEAREST)
-		glTexParameteri(gl_TEXTURE_2D, gl_TEXTURE_MAG_FILTER, gl_NEAREST)
-		glTexParameteri(gl_TEXTURE_2D, gl_TEXTURE_WRAP_S, gl_REPEAT)
-		glTexParameteri(gl_TEXTURE_2D, gl_TEXTURE_WRAP_T, gl_REPEAT)
-
 		glHint(gl_GENERATE_MIPMAP_HINT, gl_NICEST)
 		glGenerateMipmap(gl_TEXTURE_2D)
+	end
+
+	# Set whether this texture should be pixelated when drawn, otherwise it is interpolated
+	fun pixelated=(pixelated: Bool)
+	do
+		# TODO this service could be made available in `Texture` when using
+		# the kind of texture wrapper of gles v2 or maybe 3
+
+		glBindTexture(gl_TEXTURE_2D, gl_texture)
+
+		var param = if pixelated then gl_NEAREST else gl_LINEAR
+		glTexParameteri(gl_TEXTURE_2D, gl_TEXTURE_MIN_FILTER, param)
+		glTexParameteri(gl_TEXTURE_2D, gl_TEXTURE_MAG_FILTER, param)
 	end
 
 	# Has this resource been deleted?

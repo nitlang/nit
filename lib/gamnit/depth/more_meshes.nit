@@ -24,6 +24,22 @@ class Plane
 
 	# TODO allow for complex rotation, either at creation or in Actor
 
+	# Modifier to `texture_coords` to repeat the texture on the X axis
+	#
+	# At 1.0, the texture is stretched to cover the whole plane.
+	# If greater than 1.0, the texture is repeated.
+	#
+	# This value must be set before using `texture_coords` or drawing this plane.
+	var repeat_x = 1.0 is writable
+
+	# Modifier to `texture_coords` to repeat the texture on the Y axis
+	#
+	# At 1.0, the texture is stretched to cover the whole plane.
+	# If greater than 1.0, the texture is repeated.
+	#
+	# This value must be set before using `texture_coords` or drawing this plane.
+	var repeat_y = 1.0 is writable
+
 	redef var vertices is lazy do
 		var a = [-0.5, 0.0, -0.5]
 		var b = [ 0.5, 0.0, -0.5]
@@ -44,8 +60,8 @@ class Plane
 	redef var texture_coords: Array[Float] is lazy do
 		var offset_left = 0.0
 		var offset_top = 0.0
-		var offset_right = 1.0
-		var offset_bottom = 1.0
+		var offset_right = 1.0*repeat_x
+		var offset_bottom = 1.0*repeat_y
 		var a = [offset_left,  offset_bottom]
 		var b = [offset_right, offset_bottom]
 		var c = [offset_left,  offset_top]

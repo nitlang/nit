@@ -91,7 +91,7 @@ class GlobeMaterial
 	init surface do init(0, true, [1.0, 1.0, 1.0, 1.0])
 
 	# Create and configure a material for the cloud layer
-	init clouds do init(4, false, [1.0, 1.0, 1.0, 0.25])
+	init clouds do init(4, false, [1.0, 1.0, 1.0, 0.5])
 
 	# Create and configure a material for the visible atmosphere
 	init atmo do init(null, false, [0.0, 0.8, 1.0, 0.05])

@@ -127,7 +127,7 @@ class EulerCamera
 		var view = new Matrix.identity(4)
 
 		# Translate the world away from the camera
-		view.translate(-position.x/2.0, -position.y/2.0, -position.z/2.0)
+		view.translate(-position.x, -position.y, -position.z)
 
 		# Rotate the camera, first by looking left or right, then up or down
 		view = view * rotation_matrix
@@ -208,6 +208,9 @@ class UICamera
 		return new Point[Float](wx, wy)
 	end
 
+	# Center of the screen, from the point of view of the camera, at z = 0
+	fun center: Point3d[Float] do return new Point3d[Float](position.x + width / 2.0, position.y + height / 2.0, 0.0)
+
 	# Anchor in the top left corner of the screen, at z = 0
 	fun top_left: Point3d[Float] do return new Point3d[Float](position.x, position.y, 0.0)
 
@@ -227,7 +230,7 @@ class UICamera
 		var view = new Matrix.identity(4)
 
 		# Translate the world away from the camera
-		view.translate(-position.x/2.0, -position.y/2.0, -position.z/2.0)
+		view.translate(-position.x, -position.y, -position.z)
 
 		# Use a projection matrix with a depth
 		var projection = new Matrix.orthogonal(0.0, width, -height, 0.0, near, far)

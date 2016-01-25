@@ -212,6 +212,27 @@ redef class App
 	# Main method to refine in clients to update game logic and `sprites`
 	fun update(dt: Float) do end
 
+	# Display `texture` as a splash screen
+	#
+	# Load `texture` if needed and resets `ui_camera` to 1080 units on the Y axis.
+	fun show_splash_screen(texture: Texture)
+	do
+		texture.load
+
+		ui_camera.reset_height 1080.0
+
+		var splash = new Sprite(texture, ui_camera.center)
+		ui_sprites.add splash
+
+		var display = display
+		assert display != null
+		glClear gl_COLOR_BUFFER_BIT
+		frame_core_flat display
+		display.flip
+
+		ui_sprites.remove splash
+	end
+
 	redef fun on_stop
 	do
 		# Clean up
