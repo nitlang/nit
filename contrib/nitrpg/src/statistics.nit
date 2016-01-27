@@ -20,8 +20,7 @@
 # triggered `Github::Event`.
 module statistics
 
-import game
-import github::hooks
+import events
 import counter
 
 redef class GameEntity
@@ -45,6 +44,11 @@ redef class Game
 	redef fun save do
 		super
 		stats.save
+	end
+
+	redef fun init_default_reactors do
+		super
+		add_reactor(new StatisticsReactor)
 	end
 end
 
@@ -229,13 +233,14 @@ redef class IssuesEvent
 			player.stats.dec("issues_open")
 			player.save
 		end
+		if issue.is_pull_request then
+			react_pull_request(game)
+		end
 	end
-end
 
-redef class PullRequestEvent
-
-	# Count opened and closed pull requests.
-	redef fun react_stats_event(game) do
+	private fun react_pull_request(game: Game) do
+		var pull = issue.pull_request
+		if pull == null then return
 		var player = pull.user.player(game)
 		if action == "opened" then
 			game.stats.inc("pulls")

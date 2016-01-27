@@ -546,6 +546,46 @@ class Repo
 
 	# Set the default branch
 	fun default_branch=(branch: Branch) do json["default_branch"] = branch.json
+
+	# Creation time in ISODate format.
+	fun created_at: ISODate do
+		return new ISODate.from_string(json["created_at"].as(String))
+	end
+
+	# Set created_at
+	fun created_at=(created_at: ISODate) do json["created_at"] = created_at.to_s
+
+	# Last update time in ISODate format (if any).
+	fun updated_at: nullable ISODate do
+		var res = json.get_or_null("updated_at")
+		if res isa String then return new ISODate.from_string(res)
+		return null
+	end
+
+	# Set updated_at.
+	fun updated_at=(updated_at: nullable ISODate) do
+		if updated_at == null then
+			json["updated_at"] = null
+		else
+			json["updated_at"] = updated_at.to_s
+		end
+	end
+
+	# Last push time in ISODate format (if any).
+	fun pushed_at: nullable ISODate do
+		var res = json.get_or_null("pushed_at")
+		if res isa String then return new ISODate.from_string(res)
+		return null
+	end
+
+	# Set updated_at.
+	fun pushed_at=(pushed_at: nullable ISODate) do
+		if pushed_at == null then
+			json["pushed_at"] = null
+		else
+			json["pushed_at"] = pushed_at.to_s
+		end
+	end
 end
 
 # A `RepoEntity` is something contained in a `Repo`.
@@ -923,6 +963,9 @@ class Issue
 
 	# Is this issue linked to a pull request?
 	fun is_pull_request: Bool do return json.has_key("pull_request")
+
+	# Load the associated pull request if any.
+	fun pull_request: nullable PullRequest do return repo.api.load_pull(repo, number)
 end
 
 # A Github pull request.

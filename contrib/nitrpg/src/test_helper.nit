@@ -47,9 +47,7 @@ abstract class NitrpgTestHelper
 
 	# Load a game by its name.
 	fun load_game(name: String, db: MongoDb): Game do
-		var game = new Game(api, load_repo(name))
-		game.db_name = db.name
-		return game
+		return new Game(db, api, load_repo(name))
 	end
 
 	# Stack of db used for testing.

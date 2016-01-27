@@ -21,6 +21,98 @@
 module events
 
 import game
+import github::events
+import md5
+
+# A GameReactor reacts to event sent by a `Github::HookListener`.
+#
+# Subclasses of `GameReactor` are implemented to handle all kind of
+# `GithubEvent`.
+# Depending on the received event, the reactor is used to update game data.
+#
+# Reactors are mostly used with a `Github::HookListener` that dispatchs received
+# events from the Github API.
+#
+# Example:
+#
+# ~~~nitish
+# import github::hooks
+#
+# # Reactor that prints received events in console.
+# class PrintReactor
+#	super GameReactor
+#
+#	redef fun react_event(game, e) do print e
+# end
+#
+# # Hook listener that redirect events to reactors.
+# class RpgHookListener
+#    super HookListener
+#
+#	redef fun apply_event(event) do
+#		var game = new Game(api, event.repo)
+#		var reactor = new PrintReactor
+#		reactor.react_event(game, event)
+#	end
+# end
+# ~~~
+#
+# See module `reactors` and `listener` for more examples.
+interface GameReactor
+
+	# Reacts to this `event` and update `game` accordingly.
+	#
+	# Concrete `GameReactor` implement this method to update game data
+	# for each specific GithubEvent.
+	fun react_event(game: Game, event: GithubEvent) is abstract
+end
+
+redef class Game
+
+	# Registered game reactors list.
+	var reactors = new Array[GameReactor]
+
+	# Register a reactor for this listener.
+	fun add_reactor(reactors: GameReactor...) do self.reactors.add_all reactors
+
+	# Register default game reactors.
+	#
+	# Override this method to select custom reactors.
+	protected fun init_default_reactors do end
+
+	# Register a new game event for this entity.
+	fun add_github_event(event: KnownGithubEvent) do event.save
+
+	# Dispatch event to registered `reactors`.
+	fun apply_github_event(event: GithubEvent) do
+		message(2, "Apply event {event} for {name}")
+		if game.has_github_event(event) then
+			message(3, "Event {event} already applied for {name}")
+			return
+		end
+		for reactor in reactors do
+			message(3, "Apply reactor {reactor} on {event}")
+			reactor.react_event(game, event)
+		end
+		game.add_github_event new KnownGithubEvent(self, event)
+	end
+
+	# Was `event` already applied for `self`?
+	#
+	# We look in the DB for the exact same JSON object.
+	private fun has_github_event(event: GithubEvent): Bool do
+		var req = new JsonObject
+		req["event_hash"] = event.json.to_json.md5
+		var res = game.db.collection("github_events").find(req)
+		if res != null then
+			var other = new KnownGithubEvent.from_json(game, res)
+			return event.json == other.github_event.json
+		end
+		return false
+	end
+
+	init do init_default_reactors
+end
 
 redef class GameEntity
 
@@ -35,12 +127,19 @@ redef class GameEntity
 	# This list is reloaded from game data each time its called.
 	#
 	# To add events see `add_event`.
-	fun load_events: Array[GameEvent] do
+	fun load_events(skip, limit: nullable Int): Array[GameEvent] do
+		var s = skip or else 0
+		var l = limit or else 0
+		var subreq = new JsonObject
+		subreq["game"] = game.key
+		subreq["owner"] = key
+		var order_by = new JsonObject
+		order_by["time"] = -1
 		var req = new JsonObject
-		req["game"] = game.key
-		req["owner"] = key
+		req["$query"] = subreq
+		req["$orderby"] = order_by
 		var res = new Array[GameEvent]
-		for obj in game.db.collection("events").find_all(req) do
+		for obj in game.db.collection("events").find_all(req, s, l) do
 			res.add new GameEvent.from_json(game, obj)
 		end
 		(new EventTimeComparator).sort(res)
@@ -60,6 +159,9 @@ redef class GameEntity
 		if res != null then return new GameEvent.from_json(game, res)
 		return null
 	end
+
+	# Does `self` has a registered GameEvent with `id`?
+	fun has_event(id: String): Bool do return load_event(id) != null
 end
 
 # An event that occurs in the `Game`.
@@ -113,6 +215,40 @@ class GameEvent
 		json["game"] = game.key
 		var owner = self.owner
 		if owner != null then json["owner"] = owner.key
+		return json
+	end
+end
+
+# A Github event already processed by this game.
+class KnownGithubEvent
+	super GameEntity
+
+	redef var collection_name = "github_events"
+
+	redef var game
+
+	# Github Event associated.
+	var github_event: GithubEvent
+
+	# Return a hash for this github_event.
+	#
+	# The hash is used to check if a github event already exists in the db.
+	fun event_hash: String do return github_event.json.to_json.md5
+
+	redef fun key do return event_hash
+
+	# Init `self` from a JsonObject.
+	init from_json(game: Game, json: JsonObject) do
+		var obj = json["github_event"].as(JsonObject)
+		var event = new GithubEvent.from_json(game.api, obj)
+		init(game, event)
+	end
+
+	redef fun to_json do
+		var json = super
+		json["game"] = game.key
+		json["github_event"] = github_event.json
+		json["event_hash"] = event_hash
 		return json
 	end
 end

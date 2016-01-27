@@ -20,51 +20,62 @@ module listener
 import reactors
 import achievements
 import github::hooks
+import opts
 
 # `HookListener` that redirects events to a `Game` instance.
 class RpgHookListener
    super HookListener
 
-	# Registered reactors list.
-	var reactors = new Array[GameReactor]
+   # MongoDB used to access data.
+   var db: MongoDb
 
 	# Dispatch event to registered `reactors`.
 	redef fun apply_event(event) do
-		var game = new Game(api, event.repo)
+		var game = new Game(db, api, event.repo)
 		# TODO handle verbosity with opts
 		game.verbose_lvl = 1
-		game.message(1, "Received event {event} for {game.repo.full_name}")
-		for reactor in reactors do
-			game.message(2, "Apply reactor {reactor} on {event}")
-			reactor.react_event(game, event)
-		end
+		game.apply_github_event event
 	end
-
-	# Register a reactor for this listener.
-	fun add_reactor(reactors: GameReactor...) do self.reactors.add_all reactors
 end
 
-if args.length != 2 then
-	print "Error: missing argument"
-	print ""
+# Display the help message for this tool.
+fun show_help(opts: OptionContext) do
 	print "Usage:"
-	print "listener <host> <port>"
+	print "listener <host> <port>\n"
+	opts.usage
 	exit 1
+end
+
+var opt_help = new OptionBool("Show this help message", "-h", "--help")
+var opt_api_key = new OptionString("Github API key to use", "-k", "--key")
+var opt_db_name = new OptionString("MongoDB db name to use", "--db")
+var opt_db_url = new OptionString("MongoDB db URL to use", "--db-url")
+
+var opts = new OptionContext
+opts.add_option(opt_help, opt_api_key, opt_db_name, opt_db_url)
+opts.parse(args)
+var argv = opts.rest
+
+if opt_help.value then show_help(opts)
+
+if argv.length != 2 then
+	print "Error: missing argument\n"
+	show_help(opts)
 end
 
 var host = args[0]
 var port = args[1].to_i
 
-var api = new GithubAPI(get_github_oauth)
+# Load DB
+var db_name = opt_db_name.value or else "nitrpg"
+var mongo_url = opt_db_url.value or else "mongodb://localhost:27017"
+var client = new MongoClient(mongo_url)
+var db = client.database(db_name)
 
-var l = new RpgHookListener(api, host, port)
-l.add_reactor(new StatisticsReactor, new PlayerReactor)
-l.add_reactor(new Player1Issue, new Player100Issues, new Player1KIssues)
-l.add_reactor(new Player1Pull, new Player100Pulls, new Player1KPulls)
-l.add_reactor(new Player1Commit, new Player100Commits, new Player1KCommits)
-l.add_reactor(new IssueAboutNitdoc, new IssueAboutFFI)
-l.add_reactor(new Player1Comment, new Player100Comments, new Player1KComments)
-l.add_reactor(new PlayerPingGod, new PlayerFirstReview, new PlayerSaysNitcoin)
+# Load API
+var api_key = opt_api_key.value or else get_github_oauth
+var api = new GithubAPI(api_key)
 
+var listener = new RpgHookListener(api, host, port, db)
 print "Listening events on {host}:{port}"
-l.listen
+listener.listen

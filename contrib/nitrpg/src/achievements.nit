@@ -20,8 +20,19 @@
 # Achievements are rewarded by nitcoins.
 module achievements
 
-import events
 import statistics
+
+redef class Game
+	redef fun init_default_reactors do
+		super
+		add_reactor(new Player1Issue, new Player100Issues, new Player1KIssues)
+		add_reactor(new Player1Pull, new Player100Pulls, new Player1KPulls)
+		add_reactor(new Player1Commit, new Player100Commits, new Player1KCommits)
+		add_reactor(new IssueAboutNitdoc, new IssueAboutFFI)
+		add_reactor(new Player1Comment, new Player100Comments, new Player1KComments)
+		add_reactor(new PlayerPingGod, new PlayerFirstReview, new PlayerSaysNitcoin)
+	end
+end
 
 redef class GameEntity
 
@@ -142,22 +153,46 @@ redef class Player
 	# Do nothing is this player has already unlocked the achievement.
 	#
 	# TODO: add abstraction so achievements do not depend on GithubEvent.
-	fun unlock_achievement(a: Achievement, event: GithubEvent) do
-		if has_achievement(a) then return
+	fun unlock_achievement(a: Achievement, event: GithubEvent, time: nullable ISODate) do
+		if has_achievement(a) then
+			update_achievement(a, event)
+			return
+		end
+		game.message(2, "Player {name} unlocked achievement {a}")
 		nitcoins += a.reward
 		add_achievement(a)
-		trigger_unlock_event(a, event)
+		trigger_unlock_event(a, event, time)
 		save
 	end
 
+	# Update achievement in a new and oldest one is found.
+	#
+	# Comparison is based on github incremental id.
+	fun update_achievement(a: Achievement, new_event: GithubEvent) do
+		var req = new JsonObject
+		req["game"] = game.key
+		req["data.player"] = key
+		req["data.achievement"] = a.id
+		for e in game.db.collection("events").find_all(req) do
+			var event = new GameEvent.from_json(game, e)
+			var old_event = new GithubEvent.from_json(game.api, event.data["github_event"].as(JsonObject))
+			if new_event.date < old_event.date then
+				game.message(1, "Found older event for achievement {a.id} and player {name}")
+				event.data = new_event.json
+				event.save
+			end
+		end
+	end
+
 	# Create a new event that marks the achievement unlocking.
-	fun trigger_unlock_event(achievement: Achievement, event: GithubEvent) do
+	fun trigger_unlock_event(achievement: Achievement, event: GithubEvent, time: nullable ISODate) do
 		var obj = new JsonObject
 		obj["player"] = name
 		obj["reward"] = achievement.reward
 		obj["achievement"] = achievement.id
 		obj["github_event"] = event.json
 		var ge = new GameEvent(game, "achievement_unlocked", obj)
+		if time != null then ge.time = time
 		add_event(ge)
 		game.add_event(ge)
 		achievement.add_event(ge)
@@ -182,8 +217,11 @@ interface AchievementReactor
 
 	# Return a new instance of the achievement to unlock.
 	fun new_achievement(game: Game): Achievement do
-		var achievement = new Achievement(game, id, name, desc, reward)
-		game.add_achievement(achievement)
+		var achievement = game.load_achievement(id)
+		if achievement == null then
+			achievement = new Achievement(game, id, name, desc, reward)
+			game.add_achievement(achievement)
+		end
 		return achievement
 	end
 end
@@ -207,7 +245,7 @@ abstract class PlayerXIssues
 		var player = event.issue.user.player(game)
 		if player.stats["issues"] == threshold then
 			var a = new_achievement(game)
-			player.unlock_achievement(a, event)
+			player.unlock_achievement(a, event, event.issue.created_at)
 		end
 	end
 end
@@ -262,7 +300,7 @@ class IssueAboutNitdoc
 		re.ignore_case = true
 		if event.issue.title.has(re) then
 			var a = new_achievement(game)
-			player.unlock_achievement(a, event)
+			player.unlock_achievement(a, event, event.issue.created_at)
 		end
 	end
 end
@@ -284,7 +322,7 @@ class IssueAboutFFI
 		re.ignore_case = true
 		if event.issue.title.has(re) then
 			var a = new_achievement(game)
-			player.unlock_achievement(a, event)
+			player.unlock_achievement(a, event, event.issue.created_at)
 		end
 	end
 end
@@ -308,7 +346,7 @@ abstract class PlayerXPulls
 		var player = event.pull.user.player(game)
 		if player.stats["pulls"] == threshold then
 			var a = new_achievement(game)
-			player.unlock_achievement(a, event)
+			player.unlock_achievement(a, event, event.pull.created_at)
 		end
 	end
 end
@@ -366,7 +404,7 @@ abstract class PlayerXCommits
 		var player = event.pull.user.player(game)
 		if player.stats["commits"] >= threshold then
 			var a = new_achievement(game)
-			player.unlock_achievement(a, event)
+			player.unlock_achievement(a, event, event.pull.closed_at)
 		end
 	end
 end
@@ -434,7 +472,7 @@ abstract class PlayerXComments
 		var player = event.comment.user.player(game)
 		if player.stats["comments"] == threshold then
 			var a = new_achievement(game)
-			player.unlock_achievement(a, event)
+			player.unlock_achievement(a, event, event.comment.created_at)
 		end
 	end
 end
@@ -487,7 +525,7 @@ class PlayerPingGod
 		if event.comment.body.has("@{owner}".to_re) then
 			var player = event.comment.user.player(game)
 			var a = new_achievement(game)
-			player.unlock_achievement(a, event)
+			player.unlock_achievement(a, event, event.comment.created_at)
 		end
 	end
 end
@@ -507,7 +545,7 @@ class PlayerFirstReview
 		if event.comment.is_ack then
 			var player = event.comment.user.player(game)
 			var a = new_achievement(game)
-			player.unlock_achievement(a, event)
+			player.unlock_achievement(a, event, event.comment.created_at)
 		end
 	end
 end
@@ -526,7 +564,7 @@ class PlayerSaysNitcoin
 		if event.comment.body.has("(n|N)itcoin".to_re) then
 			var player = event.comment.user.player(game)
 			var a = new_achievement(game)
-			player.unlock_achievement(a, event)
+			player.unlock_achievement(a, event, event.comment.created_at)
 		end
 	end
 end

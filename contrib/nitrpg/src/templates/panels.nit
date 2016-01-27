@@ -468,21 +468,20 @@ class EventListPanel
 	end
 
 	redef fun render_body do
-		var events = entity.load_events
+		# check input
+		if from < 0 then from = 0
+		if limit < 0 then limit = 10
+		# load events
+		var events = entity.load_events(from, limit)
 		if events.is_empty then
 			add "<em>No event yet...</em>"
 			return
 		end
-		# check input
-		if limit < 0 then limit = 10
-		if from < 0 then from = 0
 		# display events
-		for i in [from .. from + limit] do
-			if i >= events.length then break
-			add events[i].tpl_event.media_item
+		for event in events do
+			add event.tpl_event.media_item
 		end
 		# pagination
-		if limit > events.length then return
 		add "<hr>"
 		add """<div class="btn-group" role="group">"""
 		if from > 0 then
@@ -490,7 +489,8 @@ class EventListPanel
 					href="?pfrom={{{from - limit}}}&plimit={{{limit}}}">
 				     <span class=\"glyphicon glyphicon-chevron-left\"></span></a>"""
 		end
-		if from + limit < events.length then
+		var next_events = entity.load_events(from + limit, 1)
+		if not next_events.is_empty then
 			add """
 		          <a class="btn btn-default" role="button"
 				   href="?pfrom={{{from + limit}}}&plimit={{{limit}}}">

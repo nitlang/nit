@@ -38,17 +38,17 @@ class GithubEvent
 		self.json = json
 	end
 
-	# Event ID from Github.
-	fun id: String do return json["id"].as(String)
-
-	# Set id.
-	fun id=(id: String) do json["id"] = id
-
 	# Action performed by the event.
 	fun action: String do return json["action"].as(String)
 
 	# Set action.
 	fun action=(action: String) do json["action"] = action
+
+	# User that triggered the event.
+	fun sender: User do return new User.from_json(api, json["sender"].as(JsonObject))
+
+	# Set sender.
+	fun sender=(sender: User) do json["sender"] = sender.json
 
 	# Repo where this event occured.
 	fun repo: Repo do
@@ -57,6 +57,12 @@ class GithubEvent
 
 	# Set repo.
 	fun repo=(repo: Repo) do json["repository"] = repo.json
+
+	# The date of the event.
+	#
+	# Because every kind of event from the github API has its own way to define
+	# the event date, we introduce here a common service for all GitHub event to refine.
+	fun date: ISODate do return repo.updated_at or else repo.created_at
 end
 
 # Triggered when a commit comment is created.
@@ -70,6 +76,8 @@ class CommitCommentEvent
 
 	# Set comment.
 	fun comment=(comment: CommitComment) do json["comment"] = comment.json
+
+	redef fun date do return comment.updated_at or else comment.created_at
 end
 
 # Triggered when a repository, branch, or tag is created.
@@ -167,6 +175,32 @@ class DeploymentEvent
 
 	# Set description.
 	fun description=(description: nullable String) do json["description"] = description
+
+	# Creation time in ISODate format.
+	fun created_at: ISODate do
+		return new ISODate.from_string(json["created_at"].as(String))
+	end
+
+	# Set created_at
+	fun created_at=(created_at: ISODate) do json["created_at"] = created_at.to_s
+
+	# Last update time in ISODate format (if any).
+	fun updated_at: nullable ISODate do
+		var res = json.get_or_null("updated_at")
+		if res isa String then return new ISODate.from_string(res)
+		return null
+	end
+
+	# Set updated_at.
+	fun updated_at=(updated_at: nullable ISODate) do
+		if updated_at == null then
+			json["updated_at"] = null
+		else
+			json["updated_at"] = updated_at.to_s
+		end
+	end
+
+	redef fun date do return updated_at or else created_at
 end
 
 # Triggered when a deployement's status changes.
@@ -201,6 +235,32 @@ class DeploymentStatusEvent
 
 	# Set description.
 	fun description=(description: nullable String) do json["description"] = description
+
+	# Creation time in ISODate format.
+	fun created_at: ISODate do
+		return new ISODate.from_string(json["created_at"].as(String))
+	end
+
+	# Set created_at
+	fun created_at=(created_at: ISODate) do json["created_at"] = created_at.to_s
+
+	# Last update time in ISODate format (if any).
+	fun updated_at: nullable ISODate do
+		var res = json.get_or_null("updated_at")
+		if res isa String then return new ISODate.from_string(res)
+		return null
+	end
+
+	# Set updated_at.
+	fun updated_at=(updated_at: nullable ISODate) do
+		if updated_at == null then
+			json["updated_at"] = null
+		else
+			json["updated_at"] = updated_at.to_s
+		end
+	end
+
+	redef fun date do return updated_at or else created_at
 end
 
 # Triggered when a user forks a repository.
@@ -212,6 +272,8 @@ class ForkEvent
 
 	# Set forkee.
 	fun forkee=(forkee: Repo) do json["forkee"] = forkee.json
+
+	redef fun date do return forkee.created_at
 end
 
 # Triggered when an issue comment is created.
@@ -233,6 +295,8 @@ class IssueCommentEvent
 
 	# Set comment.
 	fun comment=(comment: IssueComment) do json["comment"] = comment.json
+
+	redef fun date do return comment.updated_at or else comment.created_at
 end
 
 # Triggered when an event occurs on an issue.
@@ -277,6 +341,8 @@ class IssuesEvent
 			json["assignee"] = assignee.json
 		end
 	end
+
+	redef fun date do return issue.updated_at or else issue.created_at
 end
 
 # Triggered when a user is added as a collaborator to a repository.
@@ -310,6 +376,8 @@ class PullRequestEvent
 
 	# Set pull.
 	fun pull=(pull: PullRequest) do json["pull_request"] = pull.json
+
+	redef fun date do return pull.updated_at or else pull.created_at
 end
 
 # Triggered when a comment is created on a pull request diff.
@@ -331,6 +399,8 @@ class PullRequestReviewCommentEvent
 
 	# Set pull.
 	fun pull=(pull: PullRequest) do json["pull_request"] = pull.json
+
+	redef fun date do return comment.updated_at or else comment.created_at
 end
 
 # Triggered when a repository branch is pushed to.
@@ -338,10 +408,10 @@ class PushEvent
 	super GithubEvent
 
 	# SHA of the HEAD commit on the repository.
-	fun head: String do return json["head"].as(String)
+	fun head_commit: String do return json["head_commit"].as(String)
 
 	# Set head.
-	fun head=(head: String) do json["head"] = head
+	fun head_commit=(head_commit: String) do json["head_commit"] = head_commit
 
 	# Full Git ref that was pushed.
 	#
@@ -374,6 +444,8 @@ class PushEvent
 		for commit in commits do arr.add commit.json
 		json["commits"] = arr
 	end
+
+	redef fun date do return repo.pushed_at or else repo.created_at
 end
 
 # Triggered when the status of a Git commit changes.
@@ -436,4 +508,30 @@ class StatusEvent
 		for branch in branches do arr.add branch.json
 		json["branches"] = arr
 	end
+
+	# Creation time in ISODate format.
+	fun created_at: ISODate do
+		return new ISODate.from_string(json["created_at"].as(String))
+	end
+
+	# Set created_at
+	fun created_at=(created_at: ISODate) do json["created_at"] = created_at.to_s
+
+	# Last update time in ISODate format (if any).
+	fun updated_at: nullable ISODate do
+		var res = json.get_or_null("updated_at")
+		if res isa String then return new ISODate.from_string(res)
+		return null
+	end
+
+	# Set updated_at.
+	fun updated_at=(updated_at: nullable ISODate) do
+		if updated_at == null then
+			json["updated_at"] = null
+		else
+			json["updated_at"] = updated_at.to_s
+		end
+	end
+
+	redef fun date do return updated_at or else created_at
 end
