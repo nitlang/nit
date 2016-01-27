@@ -6,6 +6,8 @@ class_module_95d0-__Object.html
 class_module_95d0-__Sys.html
 class_module_95d1-__A.html
 class_module_95d1-__B.html
+code_module_module_95d0-.html
+code_module_module_95d1-.html
 css/
 dep_class_module_95d0-__Int.dot
 dep_class_module_95d0-__Object.dot

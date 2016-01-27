@@ -27,10 +27,6 @@ import html_templates
 
 redef class ToolContext
 
-	# File pattern used to link documentation to source code.
-	var opt_source = new OptionString("Format to link source code (%f for filename, " +
-		"%l for first line, %L for last line)", "--source")
-
 	# Directory where the CSS and JS is stored.
 	var opt_sharedir = new OptionString("Directory containing nitdoc assets", "--sharedir")
 
@@ -77,7 +73,7 @@ redef class ToolContext
 		super
 
 		option_context.add_option(
-			opt_source, opt_sharedir, opt_shareurl, opt_custom_title,
+			opt_sharedir, opt_shareurl, opt_custom_title,
 			opt_custom_footer, opt_custom_intro, opt_custom_brand,
 			opt_github_upstream, opt_github_base_sha1, opt_github_gitdir,
 			opt_piwik_tracker, opt_piwik_site_id,
@@ -136,26 +132,6 @@ class RenderHTMLPhase
 			sys.system("cp -r -- {sharedir.to_s.escape_to_sh}/resources/ {output_dir.to_s.escape_to_sh}/resources/")
 		end
 
-	end
-
-	# Returns a HTML link for a given `location`.
-	fun html_source_link(location: nullable Location): nullable String
-	do
-		if location == null then return null
-		var source = ctx.opt_source.value
-		if source == null then
-			var url = location.file.filename.simplify_path
-			return "<a target='_blank' title='Show source' href=\"{url.html_escape}\">View Source</a>"
-		end
-		# THIS IS JUST UGLY ! (but there is no replace yet)
-		var x = source.split_with("%f")
-		source = x.join(location.file.filename.simplify_path)
-		x = source.split_with("%l")
-		source = x.join(location.line_start.to_s)
-		x = source.split_with("%L")
-		source = x.join(location.line_end.to_s)
-		source = source.simplify_path
-		return "<a target='_blank' title='Show source' href=\"{source.to_s.html_escape}\">View Source</a>"
 	end
 end
 
@@ -251,6 +227,21 @@ redef class MEntityPage
 	end
 
 	redef fun init_title(v, doc) do title = mentity.html_name
+end
+
+redef class CodePage
+	redef var html_url is lazy do return "code_{mentity.nitdoc_url}"
+	redef fun init_title(v, doc) do title = "{mentity.html_name} source code"
+	redef fun init_sidebar(v, doc) do end
+
+	redef fun init_topmenu(v, doc) do
+		super
+		var mpackage = mentity.mpackage
+		topmenu.add_li new ListItem(new Link(mpackage.nitdoc_url, mpackage.html_name))
+		topmenu.add_li new ListItem(new Link(mentity.nitdoc_url, mentity.html_name))
+		topmenu.add_li new ListItem(new Link(html_url, "source code"))
+		topmenu.active_item = topmenu.items.last
+	end
 end
 
 # FIXME all clases below are roughly copied from `doc_pages` and adapted to new
@@ -546,20 +537,6 @@ redef class ConcernSection
 	end
 end
 
-# TODO redo showlink
-redef class IntroArticle
-	redef fun init_html_render(v, doc, page) do
-		var mentity = self.mentity
-		if mentity isa MModule then
-			html_source_link = v.html_source_link(mentity.location)
-		else if mentity isa MClassDef then
-			html_source_link = v.html_source_link(mentity.location)
-		else if mentity isa MPropDef then
-			html_source_link = v.html_source_link(mentity.location)
-		end
-	end
-end
-
 # FIXME less hideous hacks...
 redef class DefinitionArticle
 	redef fun init_html_render(v, doc, page) do
@@ -570,9 +547,6 @@ redef class DefinitionArticle
 			title.add mentity.html_namespace
 			html_title = title
 			html_toc_title = mentity.html_name
-			if mentity isa MModule then
-				html_source_link = v.html_source_link(mentity.location)
-			end
 		else if mentity isa MClassDef then
 			var title = new Template
 			title.add "in "
@@ -580,7 +554,6 @@ redef class DefinitionArticle
 			html_title = mentity.html_declaration
 			html_subtitle = title
 			html_toc_title = "in {mentity.html_name}"
-			html_source_link = v.html_source_link(mentity.location)
 			if page isa MEntityPage and mentity.is_intro and mentity.mmodule != page.mentity then
 				is_short_comment = true
 			end
@@ -600,7 +573,6 @@ redef class DefinitionArticle
 				html_title = title
 				html_toc_title = "in {mentity.mclassdef.html_name}"
 			end
-			html_source_link = v.html_source_link(mentity.location)
 		end
 		if page isa MGroupPage and mentity isa MModule then
 			is_toc_hidden = true

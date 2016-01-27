@@ -1,0 +1,2350 @@
+Empty README for group `codecs`
+Empty README for group `collection`
+Empty README for group `text`
+../lib/core/README.md:11,1: conflicting article for `Object` (choices : Object, kernel#Object, abstract_text#Object)
+../lib/core/README.md:29,1: conflicting article for `Sys` (choices : Sys, kernel#Sys, gc#Sys, sorter#Sys, math#Sys, abstract_text#Sys, bytes#Sys, ropes#Sys, posix#Sys, utf8#Sys, re#Sys, time#Sys, file#Sys, environ#Sys, exec#Sys)
+MGroupPage core
+	# core.section
+		## core.intro
+		## core.concerns
+		## core.concern
+		## core.concern
+		## core__kernel.concern
+			### core__kernel.definition
+				#### core__kernel.intros_redefs
+					##### list.group
+						###### core__kernel.intros
+						###### core__kernel.redefs
+		## core__gc.concern
+			### core__gc.definition
+				#### core__gc.intros_redefs
+					##### list.group
+						###### core__gc.intros
+						###### core__gc.redefs
+		## core__math.concern
+			### core__math.definition
+				#### core__math.intros_redefs
+					##### list.group
+						###### core__math.intros
+						###### core__math.redefs
+		## core__bitset.concern
+			### core__bitset.definition
+				#### core__bitset.intros_redefs
+					##### list.group
+						###### core__bitset.intros
+						###### core__bitset.redefs
+		## core__queue.concern
+			### core__queue.definition
+				#### core__queue.intros_redefs
+					##### list.group
+						###### core__queue.intros
+						###### core__queue.redefs
+		## core__bytes.concern
+			### core__bytes.definition
+				#### core__bytes.intros_redefs
+					##### list.group
+						###### core__bytes.intros
+						###### core__bytes.redefs
+		## core__error.concern
+			### core__error.definition
+				#### core__error.intros_redefs
+					##### list.group
+						###### core__error.intros
+						###### core__error.redefs
+		## core__fixed_ints.concern
+			### core__fixed_ints.definition
+				#### core__fixed_ints.intros_redefs
+					##### list.group
+						###### core__fixed_ints.intros
+						###### core__fixed_ints.redefs
+		## core__numeric.concern
+			### core__numeric.definition
+				#### core__numeric.intros_redefs
+					##### list.group
+						###### core__numeric.intros
+						###### core__numeric.redefs
+		## core__posix.concern
+			### core__posix.definition
+				#### core__posix.intros_redefs
+					##### list.group
+						###### core__posix.intros
+						###### core__posix.redefs
+		## core__re.concern
+			### core__re.definition
+				#### core__re.intros_redefs
+					##### list.group
+						###### core__re.intros
+						###### core__re.redefs
+		## core__stream.concern
+			### core__stream.definition
+				#### core__stream.intros_redefs
+					##### list.group
+						###### core__stream.intros
+						###### core__stream.redefs
+		## core__time.concern
+			### core__time.definition
+				#### core__time.intros_redefs
+					##### list.group
+						###### core__time.intros
+						###### core__time.redefs
+		## core__file.concern
+			### core__file.definition
+				#### core__file.intros_redefs
+					##### list.group
+						###### core__file.intros
+						###### core__file.redefs
+		## core__environ.concern
+			### core__environ.definition
+				#### core__environ.intros_redefs
+					##### list.group
+						###### core__environ.intros
+						###### core__environ.redefs
+		## core__exec.concern
+			### core__exec.definition
+				#### core__exec.intros_redefs
+					##### list.group
+						###### core__exec.intros
+						###### core__exec.redefs
+		## core__core.concern
+			### core__core.definition
+				#### core__core.intros_redefs
+					##### list.group
+						###### core__core.intros
+						###### core__core.redefs
+
+MModulePage bitset
+	# bitset.section
+		## core__bitset.intro
+		## core__bitset.importation
+			### core__bitset.graph
+			### list.group
+				#### core__bitset.imports
+				#### core__bitset.clients
+		## core__bitset.concerns
+		## core.concern
+		## core.concern
+		## core__kernel.concern
+			### core__kernel__Int.definition-list
+				#### core__kernel__Int.definition
+				#### core__bitset__Int.definition
+					##### core__bitset__Int.intros_redefs
+						###### list.group
+							####### core__bitset__Int.intros
+							####### core__bitset__Int.redefs
+
+CodePage bitset
+	# core__bitset.code
+
+MModulePage bytes
+	# bytes.section
+		## core__bytes.intro
+		## core__bytes.importation
+			### core__bytes.graph
+			### list.group
+				#### core__bytes.imports
+				#### core__bytes.clients
+		## core__bytes.concerns
+		## core.concern
+		## core.concern
+		## core__bytes.concern
+			### core__bytes__BytePattern.definition-list
+				#### core__bytes__BytePattern.definition
+					##### core__bytes__BytePattern.intros_redefs
+						###### list.group
+							####### core__bytes__BytePattern.intros
+							####### core__bytes__BytePattern.redefs
+			### core__bytes__Bytes.definition-list
+				#### core__bytes__Bytes.definition
+					##### core__bytes__Bytes.intros_redefs
+						###### list.group
+							####### core__bytes__Bytes.intros
+							####### core__bytes__Bytes.redefs
+		## core__kernel.concern
+			### core__kernel__Byte.definition-list
+				#### core__kernel__Byte.definition
+				#### core__bytes__Byte.definition
+					##### core__bytes__Byte.intros_redefs
+						###### list.group
+							####### core__bytes__Byte.intros
+							####### core__bytes__Byte.redefs
+			### core__kernel__Sys.definition-list
+				#### core__kernel__Sys.definition
+				#### core__bytes__Sys.definition
+					##### core__bytes__Sys.intros_redefs
+						###### list.group
+							####### core__bytes__Sys.intros
+							####### core__bytes__Sys.redefs
+		## core__text.concern
+		## core__text__native.concern
+			### core__text__native__NativeString.definition-list
+				#### core__text__native__NativeString.definition
+				#### core__bytes__NativeString.definition
+					##### core__bytes__NativeString.intros_redefs
+						###### list.group
+							####### core__bytes__NativeString.intros
+							####### core__bytes__NativeString.redefs
+		## core__text__abstract_text.concern
+			### core__text__abstract_text__FlatText.definition-list
+				#### core__text__abstract_text__FlatText.definition
+				#### core__bytes__FlatText.definition
+					##### core__bytes__FlatText.intros_redefs
+						###### list.group
+							####### core__bytes__FlatText.intros
+							####### core__bytes__FlatText.redefs
+			### core__text__abstract_text__Text.definition-list
+				#### core__text__abstract_text__Text.definition
+				#### core__bytes__Text.definition
+					##### core__bytes__Text.intros_redefs
+						###### list.group
+							####### core__bytes__Text.intros
+							####### core__bytes__Text.redefs
+
+CodePage bytes
+	# core__bytes.code
+
+MClassPage BytePattern
+	# BytePattern.section
+		## core__bytes__BytePattern.intro
+		## core__bytes__BytePattern.inheritance
+			### core__bytes__BytePattern.graph
+			### list.group
+				#### core__bytes__BytePattern.parents
+				#### core__bytes__BytePattern.ancestors
+				#### core__bytes__BytePattern.children
+				#### core__bytes__BytePattern.descendants
+		## core__bytes__BytePattern.constructors
+			### core__kernel__Object__init.definition
+		## core__bytes__BytePattern.concerns
+		## core.concern
+		## core.concern
+		## core__bytes.concern
+			### core__bytes__BytePattern__SELF.definition
+				#### core__bytes__BytePattern__SELF.lin
+			### core__bytes__BytePattern__append_to.definition
+			### core__bytes__BytePattern__first_index_in.definition
+			### core__bytes__BytePattern__first_index_in_from.definition
+			### core__bytes__BytePattern__is_prefix.definition
+			### core__bytes__BytePattern__is_suffix.definition
+			### core__bytes__BytePattern__last_index_in.definition
+			### core__bytes__BytePattern__last_index_in_from.definition
+			### core__bytes__BytePattern__pattern_length.definition
+			### core__bytes__BytePattern__search_all_in.definition
+
+MPropertyPage append_to
+	# append_to.section
+		## core__bytes__BytePattern__append_to.intro
+		## core__bytes__BytePattern__append_to.concerns
+		## core.concern
+		## core.concern
+		## core__bytes.concern
+			### core__bytes__Byte__append_to.definition
+			### core__bytes__Bytes__append_to.definition
+
+MPropertyPage first_index_in
+	# first_index_in.section
+		## core__bytes__BytePattern__first_index_in.intro
+
+MPropertyPage first_index_in_from
+	# first_index_in_from.section
+		## core__bytes__BytePattern__first_index_in_from.intro
+		## core__bytes__BytePattern__first_index_in_from.concerns
+		## core.concern
+		## core.concern
+		## core__bytes.concern
+			### core__bytes__Byte__first_index_in_from.definition
+			### core__bytes__Bytes__first_index_in_from.definition
+
+MPropertyPage is_prefix
+	# is_prefix.section
+		## core__bytes__BytePattern__is_prefix.intro
+		## core__bytes__BytePattern__is_prefix.concerns
+		## core.concern
+		## core.concern
+		## core__bytes.concern
+			### core__bytes__Byte__is_prefix.definition
+			### core__bytes__Bytes__is_prefix.definition
+
+MPropertyPage is_suffix
+	# is_suffix.section
+		## core__bytes__BytePattern__is_suffix.intro
+		## core__bytes__BytePattern__is_suffix.concerns
+		## core.concern
+		## core.concern
+		## core__bytes.concern
+			### core__bytes__Byte__is_suffix.definition
+			### core__bytes__Bytes__is_suffix.definition
+
+MPropertyPage last_index_in
+	# last_index_in.section
+		## core__bytes__BytePattern__last_index_in.intro
+
+MPropertyPage last_index_in_from
+	# last_index_in_from.section
+		## core__bytes__BytePattern__last_index_in_from.intro
+		## core__bytes__BytePattern__last_index_in_from.concerns
+		## core.concern
+		## core.concern
+		## core__bytes.concern
+			### core__bytes__Byte__last_index_in_from.definition
+			### core__bytes__Bytes__last_index_in_from.definition
+
+MPropertyPage pattern_length
+	# pattern_length.section
+		## core__bytes__BytePattern__pattern_length.intro
+		## core__bytes__BytePattern__pattern_length.concerns
+		## core.concern
+		## core.concern
+		## core__bytes.concern
+			### core__bytes__Byte__pattern_length.definition
+			### core__bytes__Bytes__pattern_length.definition
+
+MPropertyPage search_all_in
+	# search_all_in.section
+		## core__bytes__BytePattern__search_all_in.intro
+		## core__bytes__BytePattern__search_all_in.concerns
+		## core.concern
+		## core.concern
+		## core__bytes.concern
+			### core__bytes__Byte__search_all_in.definition
+			### core__bytes__Bytes__search_all_in.definition
+
+MClassPage Bytes
+	# Bytes.section
+		## core__bytes__Bytes.intro
+		## core__bytes__Bytes.inheritance
+			### core__bytes__Bytes.graph
+			### list.group
+				#### core__bytes__Bytes.parents
+				#### core__bytes__Bytes.ancestors
+				#### core__bytes__Bytes.children
+				#### core__bytes__Bytes.descendants
+		## core__bytes__Bytes.constructors
+			### core__bytes__Bytes__init.definition
+				#### core__bytes__Bytes__init.lin
+			### core__bytes__Bytes__empty.definition
+			### core__bytes__Bytes__with_capacity.definition
+		## core__bytes__Bytes.concerns
+		## core.concern
+		## core.concern
+		## core__bytes.concern
+			### core__bytes__Bytes__SELF.definition
+				#### core__bytes__Bytes__SELF.lin
+			### core__bytes__Bytes___91d_93d.definition
+				#### core__bytes__Bytes___91d_93d.lin
+			### core__bytes__Bytes___91d_93d_61d.definition
+				#### core__bytes__Bytes___91d_93d_61d.lin
+			### core__bytes__Bytes__add.definition
+				#### core__bytes__Bytes__add.lin
+			### core__bytes__Bytes__add_char.definition
+			### core__bytes__Bytes__append.definition
+				#### core__bytes__Bytes__append.lin
+			### core__bytes__Bytes__append_ns.definition
+			### core__bytes__Bytes__append_ns_from.definition
+			### core__bytes__Bytes__append_text.definition
+			### core__bytes__Bytes__append_to.definition
+				#### core__bytes__Bytes__append_to.lin
+			### core__bytes__Bytes__clear.definition
+				#### core__bytes__Bytes__clear.lin
+			### core__bytes__Bytes__clone.definition
+			### core__bytes__Bytes__enlarge.definition
+				#### core__bytes__Bytes__enlarge.lin
+			### core__bytes__Bytes__first_index_in_from.definition
+				#### core__bytes__Bytes__first_index_in_from.lin
+			### core__bytes__Bytes__from_percent_encoding.definition
+			### core__bytes__Bytes__has_prefix.definition
+			### core__bytes__Bytes__has_suffix.definition
+			### core__bytes__Bytes__hexdigest.definition
+			### core__bytes__Bytes__is_empty.definition
+				#### core__bytes__Bytes__is_empty.lin
+			### core__bytes__Bytes__is_prefix.definition
+				#### core__bytes__Bytes__is_prefix.lin
+			### core__bytes__Bytes__is_suffix.definition
+				#### core__bytes__Bytes__is_suffix.lin
+			### core__bytes__Bytes__items.definition
+			### core__bytes__Bytes__items_61d.definition
+			### core__bytes__Bytes__iterator.definition
+				#### core__bytes__Bytes__iterator.lin
+			### core__bytes__Bytes__last_index_in_from.definition
+				#### core__bytes__Bytes__last_index_in_from.lin
+			### core__bytes__Bytes__length.definition
+				#### core__bytes__Bytes__length.lin
+			### core__bytes__Bytes__length_61d.definition
+				#### core__bytes__Bytes__length_61d.lin
+			### core__bytes__Bytes__pattern_length.definition
+				#### core__bytes__Bytes__pattern_length.lin
+			### core__bytes__Bytes__pop.definition
+				#### core__bytes__Bytes__pop.lin
+			### core__bytes__Bytes__replace.definition
+			### core__bytes__Bytes__search_all_in.definition
+				#### core__bytes__Bytes__search_all_in.lin
+			### core__bytes__Bytes__slice.definition
+			### core__bytes__Bytes__slice_from.definition
+			### core__bytes__Bytes__split_once_on.definition
+			### core__bytes__Bytes__split_with.definition
+			### core__bytes__Bytes__to_s.definition
+				#### core__bytes__Bytes__to_s.lin
+			### core__bytes__Bytes__trim.definition
+		## core__stream.concern
+			### core__stream__Bytes__write_to.definition
+				#### core__stream__Bytes__write_to.lin
+			### core__stream__Bytes__write_to_string.definition
+				#### core__stream__Bytes__write_to_string.lin
+
+MPropertyPage add_char
+	# add_char.section
+		## core__bytes__Bytes__add_char.intro
+
+MPropertyPage append_ns
+	# append_ns.section
+		## core__bytes__Bytes__append_ns.intro
+
+MPropertyPage append_ns_from
+	# append_ns_from.section
+		## core__bytes__Bytes__append_ns_from.intro
+
+MPropertyPage append_text
+	# append_text.section
+		## core__bytes__Bytes__append_text.intro
+
+MPropertyPage clone
+	# clone.section
+		## core__bytes__Bytes__clone.intro
+
+MPropertyPage empty
+	# empty.section
+		## core__bytes__Bytes__empty.intro
+
+MPropertyPage from_percent_encoding
+	# from_percent_encoding.section
+		## core__bytes__Bytes__from_percent_encoding.intro
+
+MPropertyPage has_prefix
+	# has_prefix.section
+		## core__bytes__Bytes__has_prefix.intro
+
+MPropertyPage has_suffix
+	# has_suffix.section
+		## core__bytes__Bytes__has_suffix.intro
+
+MPropertyPage hexdigest
+	# hexdigest.section
+		## core__bytes__Bytes__hexdigest.intro
+
+MPropertyPage items
+	# items.section
+		## core__bytes__Bytes__items.intro
+
+MPropertyPage items=
+	# items=.section
+		## core__bytes__Bytes__items_61d.intro
+
+MPropertyPage replace
+	# replace.section
+		## core__bytes__Bytes__replace.intro
+
+MPropertyPage slice
+	# slice.section
+		## core__bytes__Bytes__slice.intro
+
+MPropertyPage slice_from
+	# slice_from.section
+		## core__bytes__Bytes__slice_from.intro
+
+MPropertyPage split_once_on
+	# split_once_on.section
+		## core__bytes__Bytes__split_once_on.intro
+
+MPropertyPage split_with
+	# split_with.section
+		## core__bytes__Bytes__split_with.intro
+
+MPropertyPage trim
+	# trim.section
+		## core__bytes__Bytes__trim.intro
+
+MPropertyPage with_capacity
+	# with_capacity.section
+		## core__bytes__Bytes__with_capacity.intro
+
+MGroupPage codecs
+	# codecs.section
+		## core__codecs.intro
+		## core__codecs.concerns
+		## core.concern
+		## core.concern
+		## core__codecs.concern
+		## core__codecs__codec_base.concern
+			### core__codecs__codec_base.definition
+				#### core__codecs__codec_base.intros_redefs
+					##### list.group
+						###### core__codecs__codec_base.intros
+						###### core__codecs__codec_base.redefs
+		## core__codecs__utf8.concern
+			### core__codecs__utf8.definition
+				#### core__codecs__utf8.intros_redefs
+					##### list.group
+						###### core__codecs__utf8.intros
+						###### core__codecs__utf8.redefs
+		## core__codecs__codecs.concern
+			### core__codecs__codecs.definition
+				#### core__codecs__codecs.intros_redefs
+					##### list.group
+						###### core__codecs__codecs.intros
+						###### core__codecs__codecs.redefs
+
+MModulePage codec_base
+	# codec_base.section
+		## core__codecs__codec_base.intro
+		## core__codecs__codec_base.importation
+			### core__codecs__codec_base.graph
+			### list.group
+				#### core__codecs__codec_base.imports
+				#### core__codecs__codec_base.clients
+		## core__codecs__codec_base.concerns
+		## core.concern
+		## core.concern
+		## core__codecs.concern
+		## core__codecs__codec_base.concern
+			### core__codecs__codec_base__Coder.definition-list
+				#### core__codecs__codec_base__Coder.definition
+					##### core__codecs__codec_base__Coder.intros_redefs
+						###### list.group
+							####### core__codecs__codec_base__Coder.intros
+							####### core__codecs__codec_base__Coder.redefs
+			### core__codecs__codec_base__Decoder.definition-list
+				#### core__codecs__codec_base__Decoder.definition
+					##### core__codecs__codec_base__Decoder.intros_redefs
+						###### list.group
+							####### core__codecs__codec_base__Decoder.intros
+							####### core__codecs__codec_base__Decoder.redefs
+
+CodePage codec_base
+	# core__codecs__codec_base.code
+
+MClassPage Coder
+	# Coder.section
+		## core__codecs__codec_base__Coder.intro
+		## core__codecs__codec_base__Coder.inheritance
+			### core__codecs__codec_base__Coder.graph
+			### list.group
+				#### core__codecs__codec_base__Coder.parents
+				#### core__codecs__codec_base__Coder.ancestors
+				#### core__codecs__codec_base__Coder.children
+				#### core__codecs__codec_base__Coder.descendants
+		## core__codecs__codec_base__Coder.constructors
+			### core__kernel__Object__init.definition
+		## core__codecs__codec_base__Coder.concerns
+		## core.concern
+		## core.concern
+		## core__codecs.concern
+		## core__codecs__codec_base.concern
+			### core__codecs__codec_base__Coder__SELF.definition
+				#### core__codecs__codec_base__Coder__SELF.lin
+			### core__codecs__codec_base__Coder__add_char_to.definition
+			### core__codecs__codec_base__Coder__add_string_to.definition
+			### core__codecs__codec_base__Coder__code_char.definition
+			### core__codecs__codec_base__Coder__code_string.definition
+
+MPropertyPage add_char_to
+	# add_char_to.section
+		## core__codecs__codec_base__Coder__add_char_to.intro
+
+MPropertyPage add_string_to
+	# add_string_to.section
+		## core__codecs__codec_base__Coder__add_string_to.intro
+
+MPropertyPage code_char
+	# code_char.section
+		## core__codecs__codec_base__Coder__code_char.intro
+
+MPropertyPage code_string
+	# code_string.section
+		## core__codecs__codec_base__Coder__code_string.intro
+
+MClassPage Decoder
+	# Decoder.section
+		## core__codecs__codec_base__Decoder.intro
+		## core__codecs__codec_base__Decoder.inheritance
+			### core__codecs__codec_base__Decoder.graph
+			### list.group
+				#### core__codecs__codec_base__Decoder.parents
+				#### core__codecs__codec_base__Decoder.ancestors
+				#### core__codecs__codec_base__Decoder.children
+				#### core__codecs__codec_base__Decoder.descendants
+		## core__codecs__codec_base__Decoder.constructors
+			### core__kernel__Object__init.definition
+		## core__codecs__codec_base__Decoder.concerns
+		## core.concern
+		## core.concern
+		## core__codecs.concern
+		## core__codecs__codec_base.concern
+			### core__codecs__codec_base__Decoder__SELF.definition
+				#### core__codecs__codec_base__Decoder__SELF.lin
+			### core__codecs__codec_base__Decoder__decode_char.definition
+			### core__codecs__codec_base__Decoder__decode_string.definition
+
+MPropertyPage decode_char
+	# decode_char.section
+		## core__codecs__codec_base__Decoder__decode_char.intro
+
+MPropertyPage decode_string
+	# decode_string.section
+		## core__codecs__codec_base__Decoder__decode_string.intro
+
+MModulePage codecs
+	# codecs.section
+		## core__codecs__codecs.intro
+		## core__codecs__codecs.importation
+			### core__codecs__codecs.graph
+			### list.group
+				#### core__codecs__codecs.imports
+				#### core__codecs__codecs.clients
+
+CodePage codecs
+	# core__codecs__codecs.code
+
+MModulePage utf8
+	# utf8.section
+		## core__codecs__utf8.intro
+		## core__codecs__utf8.importation
+			### core__codecs__utf8.graph
+			### list.group
+				#### core__codecs__utf8.imports
+				#### core__codecs__utf8.clients
+		## core__codecs__utf8.concerns
+		## core.concern
+		## core.concern
+		## core__kernel.concern
+			### core__kernel__Sys.definition-list
+				#### core__kernel__Sys.definition
+				#### core__codecs__utf8__Sys.definition
+					##### core__codecs__utf8__Sys.intros_redefs
+						###### list.group
+							####### core__codecs__utf8__Sys.intros
+							####### core__codecs__utf8__Sys.redefs
+
+CodePage utf8
+	# core__codecs__utf8.code
+
+MGroupPage collection
+	# collection.section
+		## core__collection.intro
+		## core__collection.concerns
+		## core.concern
+		## core.concern
+		## core__collection.concern
+		## core__collection__abstract_collection.concern
+			### core__collection__abstract_collection.definition
+				#### core__collection__abstract_collection.intros_redefs
+					##### list.group
+						###### core__collection__abstract_collection.intros
+						###### core__collection__abstract_collection.redefs
+		## core__collection__array.concern
+			### core__collection__array.definition
+				#### core__collection__array.intros_redefs
+					##### list.group
+						###### core__collection__array.intros
+						###### core__collection__array.redefs
+		## core__collection__list.concern
+			### core__collection__list.definition
+				#### core__collection__list.intros_redefs
+					##### list.group
+						###### core__collection__list.intros
+						###### core__collection__list.redefs
+		## core__collection__range.concern
+			### core__collection__range.definition
+				#### core__collection__range.intros_redefs
+					##### list.group
+						###### core__collection__range.intros
+						###### core__collection__range.redefs
+		## core__collection__circular_array.concern
+			### core__collection__circular_array.definition
+				#### core__collection__circular_array.intros_redefs
+					##### list.group
+						###### core__collection__circular_array.intros
+						###### core__collection__circular_array.redefs
+		## core__collection__hash_collection.concern
+			### core__collection__hash_collection.definition
+				#### core__collection__hash_collection.intros_redefs
+					##### list.group
+						###### core__collection__hash_collection.intros
+						###### core__collection__hash_collection.redefs
+		## core__collection__sorter.concern
+			### core__collection__sorter.definition
+				#### core__collection__sorter.intros_redefs
+					##### list.group
+						###### core__collection__sorter.intros
+						###### core__collection__sorter.redefs
+		## core__collection__union_find.concern
+			### core__collection__union_find.definition
+				#### core__collection__union_find.intros_redefs
+					##### list.group
+						###### core__collection__union_find.intros
+						###### core__collection__union_find.redefs
+		## core__collection__collection.concern
+			### core__collection__collection.definition
+				#### core__collection__collection.intros_redefs
+					##### list.group
+						###### core__collection__collection.intros
+						###### core__collection__collection.redefs
+
+MModulePage abstract_collection
+	# abstract_collection.section
+		## core__collection__abstract_collection.intro
+		## core__collection__abstract_collection.importation
+			### core__collection__abstract_collection.graph
+			### list.group
+				#### core__collection__abstract_collection.imports
+				#### core__collection__abstract_collection.clients
+		## core__collection__abstract_collection.concerns
+		## core.concern
+		## core.concern
+		## core__collection.concern
+		## core__collection__abstract_collection.concern
+			### core__collection__abstract_collection__Collection.definition-list
+				#### core__collection__abstract_collection__Collection.definition
+					##### core__collection__abstract_collection__Collection.intros_redefs
+						###### list.group
+							####### core__collection__abstract_collection__Collection.intros
+							####### core__collection__abstract_collection__Collection.redefs
+			### core__collection__abstract_collection__Couple.definition-list
+				#### core__collection__abstract_collection__Couple.definition
+					##### core__collection__abstract_collection__Couple.intros_redefs
+						###### list.group
+							####### core__collection__abstract_collection__Couple.intros
+							####### core__collection__abstract_collection__Couple.redefs
+			### core__collection__abstract_collection__CoupleMap.definition-list
+				#### core__collection__abstract_collection__CoupleMap.definition
+					##### core__collection__abstract_collection__CoupleMap.intros_redefs
+						###### list.group
+							####### core__collection__abstract_collection__CoupleMap.intros
+							####### core__collection__abstract_collection__CoupleMap.redefs
+			### core__collection__abstract_collection__IndexedIterator.definition-list
+				#### core__collection__abstract_collection__IndexedIterator.definition
+					##### core__collection__abstract_collection__IndexedIterator.intros_redefs
+						###### list.group
+							####### core__collection__abstract_collection__IndexedIterator.intros
+							####### core__collection__abstract_collection__IndexedIterator.redefs
+			### core__collection__abstract_collection__Iterator.definition-list
+				#### core__collection__abstract_collection__Iterator.definition
+					##### core__collection__abstract_collection__Iterator.intros_redefs
+						###### list.group
+							####### core__collection__abstract_collection__Iterator.intros
+							####### core__collection__abstract_collection__Iterator.redefs
+			### core__collection__abstract_collection__IteratorDecorator.definition-list
+				#### core__collection__abstract_collection__IteratorDecorator.definition
+					##### core__collection__abstract_collection__IteratorDecorator.intros_redefs
+						###### list.group
+							####### core__collection__abstract_collection__IteratorDecorator.intros
+							####### core__collection__abstract_collection__IteratorDecorator.redefs
+			### core__collection__abstract_collection__Map.definition-list
+				#### core__collection__abstract_collection__Map.definition
+					##### core__collection__abstract_collection__Map.intros_redefs
+						###### list.group
+							####### core__collection__abstract_collection__Map.intros
+							####### core__collection__abstract_collection__Map.redefs
+			### core__collection__abstract_collection__MapIterator.definition-list
+				#### core__collection__abstract_collection__MapIterator.definition
+					##### core__collection__abstract_collection__MapIterator.intros_redefs
+						###### list.group
+							####### core__collection__abstract_collection__MapIterator.intros
+							####### core__collection__abstract_collection__MapIterator.redefs
+			### core__collection__abstract_collection__MapKeysIterator.definition-list
+				#### core__collection__abstract_collection__MapKeysIterator.definition
+					##### core__collection__abstract_collection__MapKeysIterator.intros_redefs
+						###### list.group
+							####### core__collection__abstract_collection__MapKeysIterator.intros
+							####### core__collection__abstract_collection__MapKeysIterator.redefs
+			### core__collection__abstract_collection__MapRead.definition-list
+				#### core__collection__abstract_collection__MapRead.definition
+					##### core__collection__abstract_collection__MapRead.intros_redefs
+						###### list.group
+							####### core__collection__abstract_collection__MapRead.intros
+							####### core__collection__abstract_collection__MapRead.redefs
+			### core__collection__abstract_collection__MapValuesIterator.definition-list
+				#### core__collection__abstract_collection__MapValuesIterator.definition
+					##### core__collection__abstract_collection__MapValuesIterator.intros_redefs
+						###### list.group
+							####### core__collection__abstract_collection__MapValuesIterator.intros
+							####### core__collection__abstract_collection__MapValuesIterator.redefs
+			### core__collection__abstract_collection__Ref.definition-list
+				#### core__collection__abstract_collection__Ref.definition
+					##### core__collection__abstract_collection__Ref.intros_redefs
+						###### list.group
+							####### core__collection__abstract_collection__Ref.intros
+							####### core__collection__abstract_collection__Ref.redefs
+			### core__collection__abstract_collection__RemovableCollection.definition-list
+				#### core__collection__abstract_collection__RemovableCollection.definition
+					##### core__collection__abstract_collection__RemovableCollection.intros_redefs
+						###### list.group
+							####### core__collection__abstract_collection__RemovableCollection.intros
+							####### core__collection__abstract_collection__RemovableCollection.redefs
+			### core__collection__abstract_collection__Sequence.definition-list
+				#### core__collection__abstract_collection__Sequence.definition
+					##### core__collection__abstract_collection__Sequence.intros_redefs
+						###### list.group
+							####### core__collection__abstract_collection__Sequence.intros
+							####### core__collection__abstract_collection__Sequence.redefs
+			### core__collection__abstract_collection__SequenceRead.definition-list
+				#### core__collection__abstract_collection__SequenceRead.definition
+					##### core__collection__abstract_collection__SequenceRead.intros_redefs
+						###### list.group
+							####### core__collection__abstract_collection__SequenceRead.intros
+							####### core__collection__abstract_collection__SequenceRead.redefs
+			### core__collection__abstract_collection__Set.definition-list
+				#### core__collection__abstract_collection__Set.definition
+					##### core__collection__abstract_collection__Set.intros_redefs
+						###### list.group
+							####### core__collection__abstract_collection__Set.intros
+							####### core__collection__abstract_collection__Set.redefs
+			### core__collection__abstract_collection__SimpleCollection.definition-list
+				#### core__collection__abstract_collection__SimpleCollection.definition
+					##### core__collection__abstract_collection__SimpleCollection.intros_redefs
+						###### list.group
+							####### core__collection__abstract_collection__SimpleCollection.intros
+							####### core__collection__abstract_collection__SimpleCollection.redefs
+
+CodePage abstract_collection
+	# core__collection__abstract_collection.code
+
+MClassPage Collection
+	# Collection.section
+		## core__collection__abstract_collection__Collection.intro
+		## core__collection__abstract_collection__Collection.inheritance
+			### core__collection__abstract_collection__Collection.graph
+			### list.group
+				#### core__collection__abstract_collection__Collection.parents
+				#### core__collection__abstract_collection__Collection.ancestors
+				#### core__collection__abstract_collection__Collection.children
+				#### core__collection__abstract_collection__Collection.descendants
+		## core__collection__abstract_collection__Collection.constructors
+			### core__kernel__Object__init.definition
+		## core__collection__abstract_collection__Collection.concerns
+		## core.concern
+		## core.concern
+		## core__collection.concern
+		## core__collection__abstract_collection.concern
+			### core__collection__abstract_collection__Collection__SELF.definition
+				#### core__collection__abstract_collection__Collection__SELF.lin
+			### core__collection__abstract_collection__Collection__count.definition
+			### core__collection__abstract_collection__Collection__first.definition
+			### core__collection__abstract_collection__Collection__has.definition
+			### core__collection__abstract_collection__Collection__has_all.definition
+			### core__collection__abstract_collection__Collection__has_any.definition
+			### core__collection__abstract_collection__Collection__has_exactly.definition
+			### core__collection__abstract_collection__Collection__has_only.definition
+			### core__collection__abstract_collection__Collection__is_empty.definition
+			### core__collection__abstract_collection__Collection__iterator.definition
+			### core__collection__abstract_collection__Collection__length.definition
+			### core__collection__abstract_collection__Collection__not_empty.definition
+		## core__collection__array.concern
+			### core__collection__array__Collection__to_a.definition
+		## core__math.concern
+			### core__math__Collection__rand.definition
+			### core__math__Collection__to_shuffle.definition
+		## core__text.concern
+		## core__text__abstract_text.concern
+			### core__text__abstract_text__Collection__join.definition
+			### core__text__abstract_text__Collection__plain_to_s.definition
+			### core__text__abstract_text__Collection__to_s.definition
+				#### core__text__abstract_text__Collection__to_s.lin
+
+MPropertyPage count
+	# count.section
+		## core__collection__abstract_collection__Collection__count.intro
+		## core__collection__abstract_collection__Collection__count.concerns
+		## core.concern
+		## core.concern
+		## core__collection.concern
+		## core__collection__abstract_collection.concern
+			### core__collection__abstract_collection__Ref__count.definition
+			### core__collection__abstract_collection__Set__count.definition
+		## core__collection__array.concern
+			### core__collection__array__AbstractArrayRead__count.definition
+		## core__collection__list.concern
+			### core__collection__list__List__count.definition
+		## core__collection__range.concern
+			### core__collection__range__Range__count.definition
+
+MPropertyPage first
+	# first.section
+		## core__collection__abstract_collection__Collection__first.intro
+		## core__collection__abstract_collection__Collection__first.concerns
+		## core.concern
+		## core.concern
+		## core__collection.concern
+		## core__collection__abstract_collection.concern
+			### core__collection__abstract_collection__Ref__first.definition
+			### core__collection__abstract_collection__SequenceRead__first.definition
+		## core__collection__array.concern
+			### core__collection__array__ArraySet__first.definition
+		## core__collection__list.concern
+			### core__collection__list__List__first.definition
+		## core__collection__range.concern
+			### core__collection__range__Range__first.definition
+		## core__collection__hash_collection.concern
+			### core__collection__hash_collection__HashSet__first.definition
+		## core__queue.concern
+			### core__queue__Queue__first.definition
+
+MPropertyPage has
+	# has.section
+		## core__collection__abstract_collection__Collection__has.intro
+		## core__collection__abstract_collection__Collection__has.concerns
+		## core.concern
+		## core.concern
+		## core__collection.concern
+		## core__collection__abstract_collection.concern
+			### core__collection__abstract_collection__Ref__has.definition
+		## core__collection__array.concern
+			### core__collection__array__AbstractArrayRead__has.definition
+			### core__collection__array__ArraySet__has.definition
+		## core__collection__list.concern
+			### core__collection__list__List__has.definition
+		## core__collection__range.concern
+			### core__collection__range__Range__has.definition
+		## core__collection__hash_collection.concern
+			### core__collection__hash_collection__HashSet__has.definition
+		## core__collection__union_find.concern
+			### core__collection__union_find__DisjointSet__has.definition
+
+MPropertyPage has_all
+	# has_all.section
+		## core__collection__abstract_collection__Collection__has_all.intro
+
+MPropertyPage has_any
+	# has_any.section
+		## core__collection__abstract_collection__Collection__has_any.intro
+
+MPropertyPage has_exactly
+	# has_exactly.section
+		## core__collection__abstract_collection__Collection__has_exactly.intro
+
+MPropertyPage has_only
+	# has_only.section
+		## core__collection__abstract_collection__Collection__has_only.intro
+		## core__collection__abstract_collection__Collection__has_only.concerns
+		## core.concern
+		## core.concern
+		## core__collection.concern
+		## core__collection__abstract_collection.concern
+			### core__collection__abstract_collection__Ref__has_only.definition
+			### core__collection__abstract_collection__Set__has_only.definition
+		## core__collection__array.concern
+			### core__collection__array__AbstractArrayRead__has_only.definition
+		## core__collection__list.concern
+			### core__collection__list__List__has_only.definition
+		## core__collection__range.concern
+			### core__collection__range__Range__has_only.definition
+
+MPropertyPage is_empty
+	# is_empty.section
+		## core__collection__abstract_collection__Collection__is_empty.intro
+		## core__collection__abstract_collection__Collection__is_empty.concerns
+		## core.concern
+		## core.concern
+		## core__collection.concern
+		## core__collection__abstract_collection.concern
+			### core__collection__abstract_collection__Ref__is_empty.definition
+		## core__collection__array.concern
+			### core__collection__array__AbstractArrayRead__is_empty.definition
+			### core__collection__array__ArraySet__is_empty.definition
+		## core__collection__list.concern
+			### core__collection__list__List__is_empty.definition
+		## core__collection__range.concern
+			### core__collection__range__Range__is_empty.definition
+		## core__collection__hash_collection.concern
+			### core__collection__hash_collection__HashSet__is_empty.definition
+		## core__queue.concern
+			### core__queue__MinHeap__is_empty.definition
+		## core__bytes.concern
+			### core__bytes__Bytes__is_empty.definition
+
+MPropertyPage iterator
+	# iterator.section
+		## core__collection__abstract_collection__Collection__iterator.intro
+		## core__collection__abstract_collection__Collection__iterator.concerns
+		## core.concern
+		## core.concern
+		## core__collection.concern
+		## core__collection__abstract_collection.concern
+			### core__collection__abstract_collection__Ref__iterator.definition
+			### core__collection__abstract_collection__SequenceRead__iterator.definition
+		## core__collection__array.concern
+			### core__collection__array__AbstractArrayRead__iterator.definition
+			### core__collection__array__ArraySet__iterator.definition
+		## core__collection__list.concern
+			### core__collection__list__List__iterator.definition
+		## core__collection__range.concern
+			### core__collection__range__Range__iterator.definition
+		## core__collection__circular_array.concern
+			### core__collection__circular_array__CircularArray__iterator.definition
+		## core__collection__hash_collection.concern
+			### core__collection__hash_collection__HashSet__iterator.definition
+		## core__collection__union_find.concern
+			### core__collection__union_find__DisjointSet__iterator.definition
+		## core__queue.concern
+			### core__queue__MinHeap__iterator.definition
+		## core__bytes.concern
+			### core__bytes__Bytes__iterator.definition
+
+MPropertyPage join
+	# join.section
+		## core__collection__abstract_collection__Collection__join.intro
+
+MPropertyPage length
+	# length.section
+		## core__collection__abstract_collection__Collection__length.intro
+		## core__collection__abstract_collection__Collection__length.concerns
+		## core.concern
+		## core.concern
+		## core__collection.concern
+		## core__collection__abstract_collection.concern
+			### core__collection__abstract_collection__Ref__length.definition
+		## core__collection__array.concern
+			### core__collection__array__AbstractArrayRead__length.definition
+			### core__collection__array__ArraySet__length.definition
+		## core__collection__list.concern
+			### core__collection__list__List__length.definition
+		## core__collection__range.concern
+			### core__collection__range__Range__length.definition
+		## core__collection__circular_array.concern
+			### core__collection__circular_array__CircularArray__length.definition
+		## core__collection__hash_collection.concern
+			### core__collection__hash_collection__HashSet__length.definition
+		## core__queue.concern
+			### core__queue__MinHeap__length.definition
+		## core__bytes.concern
+			### core__bytes__Bytes__length.definition
+
+MPropertyPage not_empty
+	# not_empty.section
+		## core__collection__abstract_collection__Collection__not_empty.intro
+
+MPropertyPage plain_to_s
+	# plain_to_s.section
+		## core__collection__abstract_collection__Collection__plain_to_s.intro
+		## core__collection__abstract_collection__Collection__plain_to_s.concerns
+		## core.concern
+		## core.concern
+		## core__text.concern
+		## core__text__flat.concern
+			### core__text__flat__Array__plain_to_s.definition
+
+MPropertyPage rand
+	# rand.section
+		## core__collection__abstract_collection__Collection__rand.intro
+		## core__collection__abstract_collection__Collection__rand.concerns
+		## core.concern
+		## core.concern
+		## core__math.concern
+			### core__math__SequenceRead__rand.definition
+
+MPropertyPage to_a
+	# to_a.section
+		## core__collection__abstract_collection__Collection__to_a.intro
+
+MPropertyPage to_shuffle
+	# to_shuffle.section
+		## core__collection__abstract_collection__Collection__to_shuffle.intro
+
+MClassPage Couple
+	# Couple.section
+		## core__collection__abstract_collection__Couple.intro
+		## core__collection__abstract_collection__Couple.inheritance
+			### core__collection__abstract_collection__Couple.graph
+			### list.group
+				#### core__collection__abstract_collection__Couple.parents
+				#### core__collection__abstract_collection__Couple.ancestors
+				#### core__collection__abstract_collection__Couple.children
+				#### core__collection__abstract_collection__Couple.descendants
+		## core__collection__abstract_collection__Couple.constructors
+			### core__collection__abstract_collection__Couple__init.definition
+				#### core__collection__abstract_collection__Couple__init.lin
+		## core__collection__abstract_collection__Couple.concerns
+		## core.concern
+		## core.concern
+		## core__collection.concern
+		## core__collection__abstract_collection.concern
+			### core__collection__abstract_collection__Couple__SELF.definition
+				#### core__collection__abstract_collection__Couple__SELF.lin
+			### core__collection__abstract_collection__Couple__first.definition
+			### core__collection__abstract_collection__Couple__first_61d.definition
+			### core__collection__abstract_collection__Couple__second.definition
+			### core__collection__abstract_collection__Couple__second_61d.definition
+
+MClassPage CoupleMap
+	# CoupleMap.section
+		## core__collection__abstract_collection__CoupleMap.intro
+		## core__collection__abstract_collection__CoupleMap.inheritance
+			### core__collection__abstract_collection__CoupleMap.graph
+			### list.group
+				#### core__collection__abstract_collection__CoupleMap.parents
+				#### core__collection__abstract_collection__CoupleMap.ancestors
+				#### core__collection__abstract_collection__CoupleMap.children
+				#### core__collection__abstract_collection__CoupleMap.descendants
+		## core__collection__abstract_collection__CoupleMap.constructors
+			### core__kernel__Object__init.definition
+		## core__collection__abstract_collection__CoupleMap.concerns
+		## core.concern
+		## core.concern
+		## core__collection.concern
+		## core__collection__abstract_collection.concern
+			### core__collection__abstract_collection__CoupleMap__SELF.definition
+				#### core__collection__abstract_collection__CoupleMap__SELF.lin
+			### core__collection__abstract_collection__CoupleMap___91d_93d.definition
+				#### core__collection__abstract_collection__CoupleMap___91d_93d.lin
+			### core__collection__abstract_collection__CoupleMap__couple_at.definition
+			### core__collection__abstract_collection__CoupleMap__couple_iterator.definition
+			### core__collection__abstract_collection__CoupleMap__has_key.definition
+				#### core__collection__abstract_collection__CoupleMap__has_key.lin
+			### core__collection__abstract_collection__CoupleMap__iterator.definition
+				#### core__collection__abstract_collection__CoupleMap__iterator.lin
+
+MPropertyPage couple_at
+	# couple_at.section
+		## core__collection__abstract_collection__CoupleMap__couple_at.intro
+		## core__collection__abstract_collection__CoupleMap__couple_at.concerns
+		## core.concern
+		## core.concern
+		## core__collection.concern
+		## core__collection__array.concern
+			### core__collection__array__ArrayMap__couple_at.definition
+
+MPropertyPage couple_iterator
+	# couple_iterator.section
+		## core__collection__abstract_collection__CoupleMap__couple_iterator.intro
+		## core__collection__abstract_collection__CoupleMap__couple_iterator.concerns
+		## core.concern
+		## core.concern
+		## core__collection.concern
+		## core__collection__array.concern
+			### core__collection__array__ArrayMap__couple_iterator.definition
+
+MPropertyPage first
+	# first.section
+		## core__collection__abstract_collection__Couple__first.intro
+
+MPropertyPage first=
+	# first=.section
+		## core__collection__abstract_collection__Couple__first_61d.intro
+
+MPropertyPage second
+	# second.section
+		## core__collection__abstract_collection__Couple__second.intro
+
+MPropertyPage second=
+	# second=.section
+		## core__collection__abstract_collection__Couple__second_61d.intro
+
+MClassPage IndexedIterator
+	# IndexedIterator.section
+		## core__collection__abstract_collection__IndexedIterator.intro
+		## core__collection__abstract_collection__IndexedIterator.inheritance
+			### core__collection__abstract_collection__IndexedIterator.graph
+			### list.group
+				#### core__collection__abstract_collection__IndexedIterator.parents
+				#### core__collection__abstract_collection__IndexedIterator.ancestors
+				#### core__collection__abstract_collection__IndexedIterator.children
+				#### core__collection__abstract_collection__IndexedIterator.descendants
+		## core__collection__abstract_collection__IndexedIterator.constructors
+			### core__kernel__Object__init.definition
+		## core__collection__abstract_collection__IndexedIterator.concerns
+		## core.concern
+		## core.concern
+		## core__collection.concern
+		## core__collection__abstract_collection.concern
+			### core__collection__abstract_collection__IndexedIterator__SELF.definition
+				#### core__collection__abstract_collection__IndexedIterator__SELF.lin
+			### core__collection__abstract_collection__IndexedIterator__index.definition
+
+MPropertyPage index
+	# index.section
+		## core__collection__abstract_collection__IndexedIterator__index.intro
+		## core__collection__abstract_collection__IndexedIterator__index.concerns
+		## core.concern
+		## core.concern
+		## core__collection.concern
+		## core__collection__list.concern
+			### core__collection__list__ListIterator__index.definition
+		## core__text.concern
+		## core__text__ropes.concern
+			### core__text__ropes__RopeBufferCharIterator__index.definition
+			### core__text__ropes__RopeBufferCharReverseIterator__index.definition
+			### core__text__ropes__RopeBufferByteIterator__index.definition
+			### core__text__ropes__RopeBufferByteReverseIterator__index.definition
+
+MClassPage Iterator
+	# Iterator.section
+		## core__collection__abstract_collection__Iterator.intro
+		## core__collection__abstract_collection__Iterator.inheritance
+			### core__collection__abstract_collection__Iterator.graph
+			### list.group
+				#### core__collection__abstract_collection__Iterator.parents
+				#### core__collection__abstract_collection__Iterator.ancestors
+				#### core__collection__abstract_collection__Iterator.children
+				#### core__collection__abstract_collection__Iterator.descendants
+		## core__collection__abstract_collection__Iterator.constructors
+			### core__kernel__Object__init.definition
+		## core__collection__abstract_collection__Iterator.concerns
+		## core.concern
+		## core.concern
+		## core__collection.concern
+		## core__collection__abstract_collection.concern
+			### core__collection__abstract_collection__Iterator__SELF.definition
+				#### core__collection__abstract_collection__Iterator__SELF.lin
+			### core__collection__abstract_collection__Iterator__finish.definition
+			### core__collection__abstract_collection__Iterator__is_ok.definition
+			### core__collection__abstract_collection__Iterator__item.definition
+			### core__collection__abstract_collection__Iterator__iterator.definition
+			### core__collection__abstract_collection__Iterator__next.definition
+			### core__collection__abstract_collection__Iterator__next_by.definition
+			### core__collection__abstract_collection__Iterator__start.definition
+			### core__collection__abstract_collection__Iterator__to_step.definition
+		## core__collection__array.concern
+			### core__collection__array__Iterator__to_a.definition
+
+MClassPage IteratorDecorator
+	# IteratorDecorator.section
+		## core__collection__abstract_collection__IteratorDecorator.intro
+		## core__collection__abstract_collection__IteratorDecorator.inheritance
+			### core__collection__abstract_collection__IteratorDecorator.graph
+			### list.group
+				#### core__collection__abstract_collection__IteratorDecorator.parents
+				#### core__collection__abstract_collection__IteratorDecorator.ancestors
+				#### core__collection__abstract_collection__IteratorDecorator.children
+				#### core__collection__abstract_collection__IteratorDecorator.descendants
+		## core__collection__abstract_collection__IteratorDecorator.constructors
+			### core__collection__abstract_collection__IteratorDecorator__init.definition
+				#### core__collection__abstract_collection__IteratorDecorator__init.lin
+		## core__collection__abstract_collection__IteratorDecorator.concerns
+		## core.concern
+		## core.concern
+		## core__collection.concern
+		## core__collection__abstract_collection.concern
+			### core__collection__abstract_collection__IteratorDecorator__SELF.definition
+				#### core__collection__abstract_collection__IteratorDecorator__SELF.lin
+			### core__collection__abstract_collection__IteratorDecorator__finish.definition
+				#### core__collection__abstract_collection__IteratorDecorator__finish.lin
+			### core__collection__abstract_collection__IteratorDecorator__is_ok.definition
+				#### core__collection__abstract_collection__IteratorDecorator__is_ok.lin
+			### core__collection__abstract_collection__IteratorDecorator__item.definition
+				#### core__collection__abstract_collection__IteratorDecorator__item.lin
+			### core__collection__abstract_collection__IteratorDecorator__next.definition
+				#### core__collection__abstract_collection__IteratorDecorator__next.lin
+			### core__collection__abstract_collection__IteratorDecorator__next_by.definition
+				#### core__collection__abstract_collection__IteratorDecorator__next_by.lin
+			### core__collection__abstract_collection__IteratorDecorator__real.definition
+			### core__collection__abstract_collection__IteratorDecorator__real_61d.definition
+
+MPropertyPage real
+	# real.section
+		## core__collection__abstract_collection__IteratorDecorator__real.intro
+
+MPropertyPage real=
+	# real=.section
+		## core__collection__abstract_collection__IteratorDecorator__real_61d.intro
+
+MPropertyPage finish
+	# finish.section
+		## core__collection__abstract_collection__Iterator__finish.intro
+		## core__collection__abstract_collection__Iterator__finish.concerns
+		## core.concern
+		## core.concern
+		## core__collection.concern
+		## core__collection__abstract_collection.concern
+			### core__collection__abstract_collection__IteratorDecorator__finish.definition
+		## core__stream.concern
+			### core__stream__LineIterator__finish.definition
+
+MPropertyPage is_ok
+	# is_ok.section
+		## core__collection__abstract_collection__Iterator__is_ok.intro
+		## core__collection__abstract_collection__Iterator__is_ok.concerns
+		## core.concern
+		## core.concern
+		## core__collection.concern
+		## core__collection__abstract_collection.concern
+			### core__collection__abstract_collection__IteratorDecorator__is_ok.definition
+			### core__collection__abstract_collection__MapKeysIterator__is_ok.definition
+			### core__collection__abstract_collection__MapValuesIterator__is_ok.definition
+		## core__collection__list.concern
+			### core__collection__list__ListIterator__is_ok.definition
+		## core__text.concern
+		## core__text__ropes.concern
+			### core__text__ropes__RopeBufferCharIterator__is_ok.definition
+			### core__text__ropes__RopeBufferCharReverseIterator__is_ok.definition
+			### core__text__ropes__RopeBufferByteIterator__is_ok.definition
+			### core__text__ropes__RopeBufferByteReverseIterator__is_ok.definition
+		## core__stream.concern
+			### core__stream__LineIterator__is_ok.definition
+
+MPropertyPage item
+	# item.section
+		## core__collection__abstract_collection__Iterator__item.intro
+		## core__collection__abstract_collection__Iterator__item.concerns
+		## core.concern
+		## core.concern
+		## core__collection.concern
+		## core__collection__abstract_collection.concern
+			### core__collection__abstract_collection__IteratorDecorator__item.definition
+			### core__collection__abstract_collection__MapKeysIterator__item.definition
+			### core__collection__abstract_collection__MapValuesIterator__item.definition
+		## core__collection__list.concern
+			### core__collection__list__ListIterator__item.definition
+		## core__text.concern
+		## core__text__ropes.concern
+			### core__text__ropes__RopeBufferCharIterator__item.definition
+			### core__text__ropes__RopeBufferCharReverseIterator__item.definition
+			### core__text__ropes__RopeBufferByteIterator__item.definition
+			### core__text__ropes__RopeBufferByteReverseIterator__item.definition
+		## core__stream.concern
+			### core__stream__LineIterator__item.definition
+
+MPropertyPage iterator
+	# iterator.section
+		## core__collection__abstract_collection__Iterator__iterator.intro
+
+MPropertyPage next
+	# next.section
+		## core__collection__abstract_collection__Iterator__next.intro
+		## core__collection__abstract_collection__Iterator__next.concerns
+		## core.concern
+		## core.concern
+		## core__collection.concern
+		## core__collection__abstract_collection.concern
+			### core__collection__abstract_collection__IteratorDecorator__next.definition
+			### core__collection__abstract_collection__MapKeysIterator__next.definition
+			### core__collection__abstract_collection__MapValuesIterator__next.definition
+		## core__collection__list.concern
+			### core__collection__list__ListIterator__next.definition
+		## core__text.concern
+		## core__text__ropes.concern
+			### core__text__ropes__RopeBufferCharIterator__next.definition
+			### core__text__ropes__RopeBufferCharReverseIterator__next.definition
+			### core__text__ropes__RopeBufferByteIterator__next.definition
+			### core__text__ropes__RopeBufferByteReverseIterator__next.definition
+		## core__stream.concern
+			### core__stream__LineIterator__next.definition
+
+MPropertyPage next_by
+	# next_by.section
+		## core__collection__abstract_collection__Iterator__next_by.intro
+		## core__collection__abstract_collection__Iterator__next_by.concerns
+		## core.concern
+		## core.concern
+		## core__collection.concern
+		## core__collection__abstract_collection.concern
+			### core__collection__abstract_collection__IteratorDecorator__next_by.definition
+
+MPropertyPage start
+	# start.section
+		## core__collection__abstract_collection__Iterator__start.intro
+
+MPropertyPage to_a
+	# to_a.section
+		## core__collection__abstract_collection__Iterator__to_a.intro
+
+MPropertyPage to_step
+	# to_step.section
+		## core__collection__abstract_collection__Iterator__to_step.intro
+
+MClassPage Map
+	# Map.section
+		## core__collection__abstract_collection__Map.intro
+		## core__collection__abstract_collection__Map.inheritance
+			### core__collection__abstract_collection__Map.graph
+			### list.group
+				#### core__collection__abstract_collection__Map.parents
+				#### core__collection__abstract_collection__Map.ancestors
+				#### core__collection__abstract_collection__Map.children
+				#### core__collection__abstract_collection__Map.descendants
+		## core__collection__abstract_collection__Map.constructors
+			### core__kernel__Object__init.definition
+			### core__collection__hash_collection__Map__new.definition
+		## core__collection__abstract_collection__Map.concerns
+		## core.concern
+		## core.concern
+		## core__collection.concern
+		## core__collection__abstract_collection.concern
+			### core__collection__abstract_collection__Map__SELF.definition
+				#### core__collection__abstract_collection__Map__SELF.lin
+			### core__collection__abstract_collection__Map___91d_93d_61d.definition
+			### core__collection__abstract_collection__Map__clear.definition
+			### core__collection__abstract_collection__Map__keys.definition
+				#### core__collection__abstract_collection__Map__keys.lin
+			### core__collection__abstract_collection__Map__recover_with.definition
+			### core__collection__abstract_collection__Map__values.definition
+				#### core__collection__abstract_collection__Map__values.lin
+		## core__collection__hash_collection.concern
+		## core__text.concern
+		## core__text__abstract_text.concern
+			### core__text__abstract_text__Map__join.definition
+				#### core__text__abstract_text__Map__join.lin
+		## core__text__flat.concern
+			### core__text__flat__Map__join.definition
+				#### core__text__flat__Map__join.lin
+
+MClassPage MapIterator
+	# MapIterator.section
+		## core__collection__abstract_collection__MapIterator.intro
+		## core__collection__abstract_collection__MapIterator.inheritance
+			### core__collection__abstract_collection__MapIterator.graph
+			### list.group
+				#### core__collection__abstract_collection__MapIterator.parents
+				#### core__collection__abstract_collection__MapIterator.ancestors
+				#### core__collection__abstract_collection__MapIterator.children
+				#### core__collection__abstract_collection__MapIterator.descendants
+		## core__collection__abstract_collection__MapIterator.constructors
+			### core__kernel__Object__init.definition
+		## core__collection__abstract_collection__MapIterator.concerns
+		## core.concern
+		## core.concern
+		## core__collection.concern
+		## core__collection__abstract_collection.concern
+			### core__collection__abstract_collection__MapIterator__SELF.definition
+				#### core__collection__abstract_collection__MapIterator__SELF.lin
+			### core__collection__abstract_collection__MapIterator__finish.definition
+			### core__collection__abstract_collection__MapIterator__is_ok.definition
+			### core__collection__abstract_collection__MapIterator__item.definition
+			### core__collection__abstract_collection__MapIterator__key.definition
+			### core__collection__abstract_collection__MapIterator__next.definition
+			### core__collection__abstract_collection__MapIterator__start.definition
+
+MPropertyPage finish
+	# finish.section
+		## core__collection__abstract_collection__MapIterator__finish.intro
+
+MPropertyPage is_ok
+	# is_ok.section
+		## core__collection__abstract_collection__MapIterator__is_ok.intro
+
+MPropertyPage item
+	# item.section
+		## core__collection__abstract_collection__MapIterator__item.intro
+
+MPropertyPage key
+	# key.section
+		## core__collection__abstract_collection__MapIterator__key.intro
+
+MPropertyPage next
+	# next.section
+		## core__collection__abstract_collection__MapIterator__next.intro
+
+MPropertyPage start
+	# start.section
+		## core__collection__abstract_collection__MapIterator__start.intro
+
+MClassPage MapKeysIterator
+	# MapKeysIterator.section
+		## core__collection__abstract_collection__MapKeysIterator.intro
+		## core__collection__abstract_collection__MapKeysIterator.inheritance
+			### core__collection__abstract_collection__MapKeysIterator.graph
+			### list.group
+				#### core__collection__abstract_collection__MapKeysIterator.parents
+				#### core__collection__abstract_collection__MapKeysIterator.ancestors
+				#### core__collection__abstract_collection__MapKeysIterator.children
+				#### core__collection__abstract_collection__MapKeysIterator.descendants
+		## core__collection__abstract_collection__MapKeysIterator.constructors
+			### core__collection__abstract_collection__MapKeysIterator__init.definition
+				#### core__collection__abstract_collection__MapKeysIterator__init.lin
+		## core__collection__abstract_collection__MapKeysIterator.concerns
+		## core.concern
+		## core.concern
+		## core__collection.concern
+		## core__collection__abstract_collection.concern
+			### core__collection__abstract_collection__MapKeysIterator__SELF.definition
+				#### core__collection__abstract_collection__MapKeysIterator__SELF.lin
+			### core__collection__abstract_collection__MapKeysIterator__is_ok.definition
+				#### core__collection__abstract_collection__MapKeysIterator__is_ok.lin
+			### core__collection__abstract_collection__MapKeysIterator__item.definition
+				#### core__collection__abstract_collection__MapKeysIterator__item.lin
+			### core__collection__abstract_collection__MapKeysIterator__next.definition
+				#### core__collection__abstract_collection__MapKeysIterator__next.lin
+			### core__collection__abstract_collection__MapKeysIterator__original_iterator.definition
+			### core__collection__abstract_collection__MapKeysIterator__original_iterator_61d.definition
+
+MPropertyPage original_iterator
+	# original_iterator.section
+		## core__collection__abstract_collection__MapKeysIterator__original_iterator.intro
+
+MPropertyPage original_iterator=
+	# original_iterator=.section
+		## core__collection__abstract_collection__MapKeysIterator__original_iterator_61d.intro
+
+MClassPage MapRead
+	# MapRead.section
+		## core__collection__abstract_collection__MapRead.intro
+		## core__collection__abstract_collection__MapRead.inheritance
+			### core__collection__abstract_collection__MapRead.graph
+			### list.group
+				#### core__collection__abstract_collection__MapRead.parents
+				#### core__collection__abstract_collection__MapRead.ancestors
+				#### core__collection__abstract_collection__MapRead.children
+				#### core__collection__abstract_collection__MapRead.descendants
+		## core__collection__abstract_collection__MapRead.constructors
+			### core__kernel__Object__init.definition
+		## core__collection__abstract_collection__MapRead.concerns
+		## core.concern
+		## core.concern
+		## core__collection.concern
+		## core__collection__abstract_collection.concern
+			### core__collection__abstract_collection__MapRead__SELF.definition
+				#### core__collection__abstract_collection__MapRead__SELF.lin
+			### core__collection__abstract_collection__MapRead___61d_61d.definition
+				#### core__collection__abstract_collection__MapRead___61d_61d.lin
+			### core__collection__abstract_collection__MapRead___91d_93d.definition
+			### core__collection__abstract_collection__MapRead__get_or_default.definition
+			### core__collection__abstract_collection__MapRead__get_or_null.definition
+			### core__collection__abstract_collection__MapRead__has_key.definition
+			### core__collection__abstract_collection__MapRead__hash.definition
+				#### core__collection__abstract_collection__MapRead__hash.lin
+			### core__collection__abstract_collection__MapRead__is_empty.definition
+			### core__collection__abstract_collection__MapRead__iterator.definition
+			### core__collection__abstract_collection__MapRead__keys.definition
+			### core__collection__abstract_collection__MapRead__length.definition
+			### core__collection__abstract_collection__MapRead__not_empty.definition
+			### core__collection__abstract_collection__MapRead__provide_default_value.definition
+			### core__collection__abstract_collection__MapRead__values.definition
+		## core__collection__sorter.concern
+			### core__collection__sorter__MapRead__keys_sorted_by_values.definition
+			### core__collection__sorter__MapRead__to_map_comparator.definition
+			### core__collection__sorter__MapRead__values_sorted_by_key.definition
+
+MPropertyPage []
+	# [].section
+		## core__collection__abstract_collection__MapRead___91d_93d.intro
+		## core__collection__abstract_collection__MapRead___91d_93d.concerns
+		## core.concern
+		## core.concern
+		## core__collection.concern
+		## core__collection__abstract_collection.concern
+			### core__collection__abstract_collection__CoupleMap___91d_93d.definition
+		## core__collection__array.concern
+			### core__collection__array__ArrayMap___91d_93d.definition
+		## core__collection__hash_collection.concern
+			### core__collection__hash_collection__HashMap___91d_93d.definition
+
+MPropertyPage get_or_default
+	# get_or_default.section
+		## core__collection__abstract_collection__MapRead__get_or_default.intro
+
+MPropertyPage get_or_null
+	# get_or_null.section
+		## core__collection__abstract_collection__MapRead__get_or_null.intro
+		## core__collection__abstract_collection__MapRead__get_or_null.concerns
+		## core.concern
+		## core.concern
+		## core__collection.concern
+		## core__collection__hash_collection.concern
+			### core__collection__hash_collection__HashMap__get_or_null.definition
+
+MPropertyPage has_key
+	# has_key.section
+		## core__collection__abstract_collection__MapRead__has_key.intro
+		## core__collection__abstract_collection__MapRead__has_key.concerns
+		## core.concern
+		## core.concern
+		## core__collection.concern
+		## core__collection__abstract_collection.concern
+			### core__collection__abstract_collection__CoupleMap__has_key.definition
+		## core__collection__hash_collection.concern
+			### core__collection__hash_collection__HashMap__has_key.definition
+
+MPropertyPage is_empty
+	# is_empty.section
+		## core__collection__abstract_collection__MapRead__is_empty.intro
+		## core__collection__abstract_collection__MapRead__is_empty.concerns
+		## core.concern
+		## core.concern
+		## core__collection.concern
+		## core__collection__array.concern
+			### core__collection__array__ArrayMap__is_empty.definition
+		## core__collection__hash_collection.concern
+			### core__collection__hash_collection__HashMap__is_empty.definition
+
+MPropertyPage iterator
+	# iterator.section
+		## core__collection__abstract_collection__MapRead__iterator.intro
+		## core__collection__abstract_collection__MapRead__iterator.concerns
+		## core.concern
+		## core.concern
+		## core__collection.concern
+		## core__collection__abstract_collection.concern
+			### core__collection__abstract_collection__CoupleMap__iterator.definition
+		## core__collection__hash_collection.concern
+			### core__collection__hash_collection__HashMap__iterator.definition
+
+MPropertyPage keys
+	# keys.section
+		## core__collection__abstract_collection__MapRead__keys.intro
+		## core__collection__abstract_collection__MapRead__keys.concerns
+		## core.concern
+		## core.concern
+		## core__collection.concern
+		## core__collection__abstract_collection.concern
+			### core__collection__abstract_collection__Map__keys.definition
+		## core__collection__array.concern
+			### core__collection__array__ArrayMap__keys.definition
+		## core__collection__hash_collection.concern
+			### core__collection__hash_collection__HashMap__keys.definition
+
+MPropertyPage keys_sorted_by_values
+	# keys_sorted_by_values.section
+		## core__collection__abstract_collection__MapRead__keys_sorted_by_values.intro
+
+MPropertyPage length
+	# length.section
+		## core__collection__abstract_collection__MapRead__length.intro
+		## core__collection__abstract_collection__MapRead__length.concerns
+		## core.concern
+		## core.concern
+		## core__collection.concern
+		## core__collection__array.concern
+			### core__collection__array__ArrayMap__length.definition
+		## core__collection__hash_collection.concern
+			### core__collection__hash_collection__HashMap__length.definition
+
+MPropertyPage not_empty
+	# not_empty.section
+		## core__collection__abstract_collection__MapRead__not_empty.intro
+
+MPropertyPage provide_default_value
+	# provide_default_value.section
+		## core__collection__abstract_collection__MapRead__provide_default_value.intro
+
+MPropertyPage to_map_comparator
+	# to_map_comparator.section
+		## core__collection__abstract_collection__MapRead__to_map_comparator.intro
+
+MPropertyPage values
+	# values.section
+		## core__collection__abstract_collection__MapRead__values.intro
+		## core__collection__abstract_collection__MapRead__values.concerns
+		## core.concern
+		## core.concern
+		## core__collection.concern
+		## core__collection__abstract_collection.concern
+			### core__collection__abstract_collection__Map__values.definition
+		## core__collection__array.concern
+			### core__collection__array__ArrayMap__values.definition
+		## core__collection__hash_collection.concern
+			### core__collection__hash_collection__HashMap__values.definition
+
+MPropertyPage values_sorted_by_key
+	# values_sorted_by_key.section
+		## core__collection__abstract_collection__MapRead__values_sorted_by_key.intro
+
+MClassPage MapValuesIterator
+	# MapValuesIterator.section
+		## core__collection__abstract_collection__MapValuesIterator.intro
+		## core__collection__abstract_collection__MapValuesIterator.inheritance
+			### core__collection__abstract_collection__MapValuesIterator.graph
+			### list.group
+				#### core__collection__abstract_collection__MapValuesIterator.parents
+				#### core__collection__abstract_collection__MapValuesIterator.ancestors
+				#### core__collection__abstract_collection__MapValuesIterator.children
+				#### core__collection__abstract_collection__MapValuesIterator.descendants
+		## core__collection__abstract_collection__MapValuesIterator.constructors
+			### core__collection__abstract_collection__MapValuesIterator__init.definition
+				#### core__collection__abstract_collection__MapValuesIterator__init.lin
+		## core__collection__abstract_collection__MapValuesIterator.concerns
+		## core.concern
+		## core.concern
+		## core__collection.concern
+		## core__collection__abstract_collection.concern
+			### core__collection__abstract_collection__MapValuesIterator__SELF.definition
+				#### core__collection__abstract_collection__MapValuesIterator__SELF.lin
+			### core__collection__abstract_collection__MapValuesIterator__is_ok.definition
+				#### core__collection__abstract_collection__MapValuesIterator__is_ok.lin
+			### core__collection__abstract_collection__MapValuesIterator__item.definition
+				#### core__collection__abstract_collection__MapValuesIterator__item.lin
+			### core__collection__abstract_collection__MapValuesIterator__next.definition
+				#### core__collection__abstract_collection__MapValuesIterator__next.lin
+			### core__collection__abstract_collection__MapValuesIterator__original_iterator.definition
+			### core__collection__abstract_collection__MapValuesIterator__original_iterator_61d.definition
+
+MPropertyPage original_iterator
+	# original_iterator.section
+		## core__collection__abstract_collection__MapValuesIterator__original_iterator.intro
+
+MPropertyPage original_iterator=
+	# original_iterator=.section
+		## core__collection__abstract_collection__MapValuesIterator__original_iterator_61d.intro
+
+MPropertyPage []=
+	# []=.section
+		## core__collection__abstract_collection__Map___91d_93d_61d.intro
+		## core__collection__abstract_collection__Map___91d_93d_61d.concerns
+		## core.concern
+		## core.concern
+		## core__collection.concern
+		## core__collection__array.concern
+			### core__collection__array__ArrayMap___91d_93d_61d.definition
+		## core__collection__hash_collection.concern
+			### core__collection__hash_collection__HashMap___91d_93d_61d.definition
+
+MPropertyPage clear
+	# clear.section
+		## core__collection__abstract_collection__Map__clear.intro
+		## core__collection__abstract_collection__Map__clear.concerns
+		## core.concern
+		## core.concern
+		## core__collection.concern
+		## core__collection__array.concern
+			### core__collection__array__ArrayMap__clear.definition
+		## core__collection__hash_collection.concern
+			### core__collection__hash_collection__HashMap__clear.definition
+
+MPropertyPage join
+	# join.section
+		## core__collection__abstract_collection__Map__join.intro
+		## core__collection__abstract_collection__Map__join.concerns
+		## core.concern
+		## core.concern
+		## core__text.concern
+		## core__text__flat.concern
+			### core__text__flat__Map__join.definition
+
+MPropertyPage new
+	# new.section
+		## core__collection__abstract_collection__Map__new.intro
+
+MPropertyPage recover_with
+	# recover_with.section
+		## core__collection__abstract_collection__Map__recover_with.intro
+
+MClassPage Ref
+	# Ref.section
+		## core__collection__abstract_collection__Ref.intro
+		## core__collection__abstract_collection__Ref.inheritance
+			### core__collection__abstract_collection__Ref.graph
+			### list.group
+				#### core__collection__abstract_collection__Ref.parents
+				#### core__collection__abstract_collection__Ref.ancestors
+				#### core__collection__abstract_collection__Ref.children
+				#### core__collection__abstract_collection__Ref.descendants
+		## core__collection__abstract_collection__Ref.constructors
+			### core__collection__abstract_collection__Ref__init.definition
+				#### core__collection__abstract_collection__Ref__init.lin
+		## core__collection__abstract_collection__Ref.concerns
+		## core.concern
+		## core.concern
+		## core__collection.concern
+		## core__collection__abstract_collection.concern
+			### core__collection__abstract_collection__Ref__SELF.definition
+				#### core__collection__abstract_collection__Ref__SELF.lin
+			### core__collection__abstract_collection__Ref__count.definition
+				#### core__collection__abstract_collection__Ref__count.lin
+			### core__collection__abstract_collection__Ref__first.definition
+				#### core__collection__abstract_collection__Ref__first.lin
+			### core__collection__abstract_collection__Ref__has.definition
+				#### core__collection__abstract_collection__Ref__has.lin
+			### core__collection__abstract_collection__Ref__has_only.definition
+				#### core__collection__abstract_collection__Ref__has_only.lin
+			### core__collection__abstract_collection__Ref__is_empty.definition
+				#### core__collection__abstract_collection__Ref__is_empty.lin
+			### core__collection__abstract_collection__Ref__item.definition
+			### core__collection__abstract_collection__Ref__item_61d.definition
+			### core__collection__abstract_collection__Ref__iterator.definition
+				#### core__collection__abstract_collection__Ref__iterator.lin
+			### core__collection__abstract_collection__Ref__length.definition
+				#### core__collection__abstract_collection__Ref__length.lin
+
+MPropertyPage item
+	# item.section
+		## core__collection__abstract_collection__Ref__item.intro
+
+MPropertyPage item=
+	# item=.section
+		## core__collection__abstract_collection__Ref__item_61d.intro
+
+MClassPage RemovableCollection
+	# RemovableCollection.section
+		## core__collection__abstract_collection__RemovableCollection.intro
+		## core__collection__abstract_collection__RemovableCollection.inheritance
+			### core__collection__abstract_collection__RemovableCollection.graph
+			### list.group
+				#### core__collection__abstract_collection__RemovableCollection.parents
+				#### core__collection__abstract_collection__RemovableCollection.ancestors
+				#### core__collection__abstract_collection__RemovableCollection.children
+				#### core__collection__abstract_collection__RemovableCollection.descendants
+		## core__collection__abstract_collection__RemovableCollection.constructors
+			### core__kernel__Object__init.definition
+		## core__collection__abstract_collection__RemovableCollection.concerns
+		## core.concern
+		## core.concern
+		## core__collection.concern
+		## core__collection__abstract_collection.concern
+			### core__collection__abstract_collection__RemovableCollection__SELF.definition
+				#### core__collection__abstract_collection__RemovableCollection__SELF.lin
+			### core__collection__abstract_collection__RemovableCollection__clear.definition
+			### core__collection__abstract_collection__RemovableCollection__remove.definition
+			### core__collection__abstract_collection__RemovableCollection__remove_all.definition
+
+MPropertyPage clear
+	# clear.section
+		## core__collection__abstract_collection__RemovableCollection__clear.intro
+		## core__collection__abstract_collection__RemovableCollection__clear.concerns
+		## core.concern
+		## core.concern
+		## core__collection.concern
+		## core__collection__array.concern
+			### core__collection__array__AbstractArray__clear.definition
+			### core__collection__array__ArraySet__clear.definition
+		## core__collection__list.concern
+			### core__collection__list__List__clear.definition
+		## core__collection__circular_array.concern
+			### core__collection__circular_array__CircularArray__clear.definition
+		## core__collection__hash_collection.concern
+			### core__collection__hash_collection__HashSet__clear.definition
+		## core__bytes.concern
+			### core__bytes__Bytes__clear.definition
+
+MPropertyPage remove
+	# remove.section
+		## core__collection__abstract_collection__RemovableCollection__remove.intro
+		## core__collection__abstract_collection__RemovableCollection__remove.concerns
+		## core.concern
+		## core.concern
+		## core__collection.concern
+		## core__collection__array.concern
+			### core__collection__array__AbstractArray__remove.definition
+			### core__collection__array__ArraySet__remove.definition
+		## core__collection__list.concern
+			### core__collection__list__List__remove.definition
+		## core__collection__hash_collection.concern
+			### core__collection__hash_collection__HashSet__remove.definition
+
+MPropertyPage remove_all
+	# remove_all.section
+		## core__collection__abstract_collection__RemovableCollection__remove_all.intro
+		## core__collection__abstract_collection__RemovableCollection__remove_all.concerns
+		## core.concern
+		## core.concern
+		## core__collection.concern
+		## core__collection__abstract_collection.concern
+			### core__collection__abstract_collection__Set__remove_all.definition
+		## core__collection__array.concern
+			### core__collection__array__AbstractArray__remove_all.definition
+			### core__collection__array__ArraySet__remove_all.definition
+
+MClassPage Sequence
+	# Sequence.section
+		## core__collection__abstract_collection__Sequence.intro
+		## core__collection__abstract_collection__Sequence.inheritance
+			### core__collection__abstract_collection__Sequence.graph
+			### list.group
+				#### core__collection__abstract_collection__Sequence.parents
+				#### core__collection__abstract_collection__Sequence.ancestors
+				#### core__collection__abstract_collection__Sequence.children
+				#### core__collection__abstract_collection__Sequence.descendants
+		## core__collection__abstract_collection__Sequence.constructors
+			### core__kernel__Object__init.definition
+		## core__collection__abstract_collection__Sequence.concerns
+		## core.concern
+		## core.concern
+		## core__collection.concern
+		## core__collection__abstract_collection.concern
+			### core__collection__abstract_collection__Sequence__SELF.definition
+				#### core__collection__abstract_collection__Sequence__SELF.lin
+			### core__collection__abstract_collection__Sequence___91d_93d_61d.definition
+			### core__collection__abstract_collection__Sequence__add.definition
+				#### core__collection__abstract_collection__Sequence__add.lin
+			### core__collection__abstract_collection__Sequence__append.definition
+			### core__collection__abstract_collection__Sequence__first_61d.definition
+			### core__collection__abstract_collection__Sequence__insert.definition
+			### core__collection__abstract_collection__Sequence__insert_all.definition
+			### core__collection__abstract_collection__Sequence__last_61d.definition
+			### core__collection__abstract_collection__Sequence__pop.definition
+			### core__collection__abstract_collection__Sequence__prepend.definition
+			### core__collection__abstract_collection__Sequence__push.definition
+			### core__collection__abstract_collection__Sequence__remove_at.definition
+			### core__collection__abstract_collection__Sequence__shift.definition
+			### core__collection__abstract_collection__Sequence__unshift.definition
+		## core__collection__collection.concern
+			### core__collection__collection__Sequence__subarray.definition
+		## core__queue.concern
+			### core__queue__Sequence__as_fifo.definition
+			### core__queue__Sequence__as_lifo.definition
+
+MClassPage SequenceRead
+	# SequenceRead.section
+		## core__collection__abstract_collection__SequenceRead.intro
+		## core__collection__abstract_collection__SequenceRead.inheritance
+			### core__collection__abstract_collection__SequenceRead.graph
+			### list.group
+				#### core__collection__abstract_collection__SequenceRead.parents
+				#### core__collection__abstract_collection__SequenceRead.ancestors
+				#### core__collection__abstract_collection__SequenceRead.children
+				#### core__collection__abstract_collection__SequenceRead.descendants
+		## core__collection__abstract_collection__SequenceRead.constructors
+			### core__kernel__Object__init.definition
+		## core__collection__abstract_collection__SequenceRead.concerns
+		## core.concern
+		## core.concern
+		## core__collection.concern
+		## core__collection__abstract_collection.concern
+			### core__collection__abstract_collection__SequenceRead__SELF.definition
+				#### core__collection__abstract_collection__SequenceRead__SELF.lin
+			### core__collection__abstract_collection__SequenceRead___61d_61d.definition
+				#### core__collection__abstract_collection__SequenceRead___61d_61d.lin
+			### core__collection__abstract_collection__SequenceRead___91d_93d.definition
+			### core__collection__abstract_collection__SequenceRead__first.definition
+				#### core__collection__abstract_collection__SequenceRead__first.lin
+			### core__collection__abstract_collection__SequenceRead__hash.definition
+				#### core__collection__abstract_collection__SequenceRead__hash.lin
+			### core__collection__abstract_collection__SequenceRead__index_of.definition
+			### core__collection__abstract_collection__SequenceRead__index_of_from.definition
+			### core__collection__abstract_collection__SequenceRead__iterator.definition
+				#### core__collection__abstract_collection__SequenceRead__iterator.lin
+			### core__collection__abstract_collection__SequenceRead__iterator_from.definition
+			### core__collection__abstract_collection__SequenceRead__last.definition
+			### core__collection__abstract_collection__SequenceRead__last_index_of.definition
+			### core__collection__abstract_collection__SequenceRead__last_index_of_from.definition
+			### core__collection__abstract_collection__SequenceRead__reverse_iterator.definition
+			### core__collection__abstract_collection__SequenceRead__reverse_iterator_from.definition
+		## core__math.concern
+			### core__math__SequenceRead__rand.definition
+				#### core__math__SequenceRead__rand.lin
+
+MPropertyPage []
+	# [].section
+		## core__collection__abstract_collection__SequenceRead___91d_93d.intro
+		## core__collection__abstract_collection__SequenceRead___91d_93d.concerns
+		## core.concern
+		## core.concern
+		## core__collection.concern
+		## core__collection__array.concern
+			### core__collection__array__Array___91d_93d.definition
+		## core__collection__list.concern
+			### core__collection__list__List___91d_93d.definition
+		## core__collection__circular_array.concern
+			### core__collection__circular_array__CircularArray___91d_93d.definition
+		## core__bytes.concern
+			### core__bytes__Bytes___91d_93d.definition
+		## core__text.concern
+		## core__text__ropes.concern
+			### core__text__ropes__RopeBufferChars___91d_93d.definition
+			### core__text__ropes__RopeBufferBytes___91d_93d.definition
+
+MPropertyPage index_of
+	# index_of.section
+		## core__collection__abstract_collection__SequenceRead__index_of.intro
+		## core__collection__abstract_collection__SequenceRead__index_of.concerns
+		## core.concern
+		## core.concern
+		## core__collection.concern
+		## core__collection__array.concern
+			### core__collection__array__AbstractArrayRead__index_of.definition
+
+MPropertyPage index_of_from
+	# index_of_from.section
+		## core__collection__abstract_collection__SequenceRead__index_of_from.intro
+		## core__collection__abstract_collection__SequenceRead__index_of_from.concerns
+		## core.concern
+		## core.concern
+		## core__collection.concern
+		## core__collection__array.concern
+			### core__collection__array__AbstractArrayRead__index_of_from.definition
+
+MPropertyPage iterator_from
+	# iterator_from.section
+		## core__collection__abstract_collection__SequenceRead__iterator_from.intro
+		## core__collection__abstract_collection__SequenceRead__iterator_from.concerns
+		## core.concern
+		## core.concern
+		## core__text.concern
+		## core__text__ropes.concern
+			### core__text__ropes__RopeBufferChars__iterator_from.definition
+			### core__text__ropes__RopeBufferBytes__iterator_from.definition
+
+MPropertyPage last
+	# last.section
+		## core__collection__abstract_collection__SequenceRead__last.intro
+		## core__collection__abstract_collection__SequenceRead__last.concerns
+		## core.concern
+		## core.concern
+		## core__collection.concern
+		## core__collection__list.concern
+			### core__collection__list__List__last.definition
+
+MPropertyPage last_index_of
+	# last_index_of.section
+		## core__collection__abstract_collection__SequenceRead__last_index_of.intro
+		## core__collection__abstract_collection__SequenceRead__last_index_of.concerns
+		## core.concern
+		## core.concern
+		## core__collection.concern
+		## core__collection__array.concern
+			### core__collection__array__AbstractArrayRead__last_index_of.definition
+
+MPropertyPage last_index_of_from
+	# last_index_of_from.section
+		## core__collection__abstract_collection__SequenceRead__last_index_of_from.intro
+		## core__collection__abstract_collection__SequenceRead__last_index_of_from.concerns
+		## core.concern
+		## core.concern
+		## core__collection.concern
+		## core__collection__array.concern
+			### core__collection__array__AbstractArrayRead__last_index_of_from.definition
+
+MPropertyPage reverse_iterator
+	# reverse_iterator.section
+		## core__collection__abstract_collection__SequenceRead__reverse_iterator.intro
+		## core__collection__abstract_collection__SequenceRead__reverse_iterator.concerns
+		## core.concern
+		## core.concern
+		## core__collection.concern
+		## core__collection__array.concern
+			### core__collection__array__AbstractArrayRead__reverse_iterator.definition
+		## core__collection__list.concern
+			### core__collection__list__List__reverse_iterator.definition
+
+MPropertyPage reverse_iterator_from
+	# reverse_iterator_from.section
+		## core__collection__abstract_collection__SequenceRead__reverse_iterator_from.intro
+		## core__collection__abstract_collection__SequenceRead__reverse_iterator_from.concerns
+		## core.concern
+		## core.concern
+		## core__text.concern
+		## core__text__ropes.concern
+			### core__text__ropes__RopeBufferChars__reverse_iterator_from.definition
+			### core__text__ropes__RopeBufferBytes__reverse_iterator_from.definition
+
+MPropertyPage []=
+	# []=.section
+		## core__collection__abstract_collection__Sequence___91d_93d_61d.intro
+		## core__collection__abstract_collection__Sequence___91d_93d_61d.concerns
+		## core.concern
+		## core.concern
+		## core__collection.concern
+		## core__collection__array.concern
+			### core__collection__array__Array___91d_93d_61d.definition
+		## core__collection__list.concern
+			### core__collection__list__List___91d_93d_61d.definition
+		## core__collection__circular_array.concern
+			### core__collection__circular_array__CircularArray___91d_93d_61d.definition
+		## core__bytes.concern
+			### core__bytes__Bytes___91d_93d_61d.definition
+		## core__text.concern
+		## core__text__ropes.concern
+			### core__text__ropes__RopeBufferChars___91d_93d_61d.definition
+
+MPropertyPage append
+	# append.section
+		## core__collection__abstract_collection__Sequence__append.intro
+		## core__collection__abstract_collection__Sequence__append.concerns
+		## core.concern
+		## core.concern
+		## core__bytes.concern
+			### core__bytes__Bytes__append.definition
+
+MPropertyPage as_fifo
+	# as_fifo.section
+		## core__collection__abstract_collection__Sequence__as_fifo.intro
+
+MPropertyPage as_lifo
+	# as_lifo.section
+		## core__collection__abstract_collection__Sequence__as_lifo.intro
+
+MPropertyPage first=
+	# first=.section
+		## core__collection__abstract_collection__Sequence__first_61d.intro
+		## core__collection__abstract_collection__Sequence__first_61d.concerns
+		## core.concern
+		## core.concern
+		## core__collection.concern
+		## core__collection__list.concern
+			### core__collection__list__List__first_61d.definition
+
+MPropertyPage insert
+	# insert.section
+		## core__collection__abstract_collection__Sequence__insert.intro
+		## core__collection__abstract_collection__Sequence__insert.concerns
+		## core.concern
+		## core.concern
+		## core__collection.concern
+		## core__collection__array.concern
+			### core__collection__array__AbstractArray__insert.definition
+		## core__collection__list.concern
+			### core__collection__list__List__insert.definition
+		## core__collection__circular_array.concern
+			### core__collection__circular_array__CircularArray__insert.definition
+
+MPropertyPage insert_all
+	# insert_all.section
+		## core__collection__abstract_collection__Sequence__insert_all.intro
+		## core__collection__abstract_collection__Sequence__insert_all.concerns
+		## core.concern
+		## core.concern
+		## core__collection.concern
+		## core__collection__array.concern
+			### core__collection__array__AbstractArray__insert_all.definition
+
+MPropertyPage last=
+	# last=.section
+		## core__collection__abstract_collection__Sequence__last_61d.intro
+		## core__collection__abstract_collection__Sequence__last_61d.concerns
+		## core.concern
+		## core.concern
+		## core__collection.concern
+		## core__collection__list.concern
+			### core__collection__list__List__last_61d.definition
+
+MPropertyPage pop
+	# pop.section
+		## core__collection__abstract_collection__Sequence__pop.intro
+		## core__collection__abstract_collection__Sequence__pop.concerns
+		## core.concern
+		## core.concern
+		## core__collection.concern
+		## core__collection__array.concern
+			### core__collection__array__AbstractArray__pop.definition
+		## core__collection__list.concern
+			### core__collection__list__List__pop.definition
+		## core__collection__circular_array.concern
+			### core__collection__circular_array__CircularArray__pop.definition
+		## core__bytes.concern
+			### core__bytes__Bytes__pop.definition
+
+MPropertyPage prepend
+	# prepend.section
+		## core__collection__abstract_collection__Sequence__prepend.intro
+
+MPropertyPage push
+	# push.section
+		## core__collection__abstract_collection__Sequence__push.intro
+		## core__collection__abstract_collection__Sequence__push.concerns
+		## core.concern
+		## core.concern
+		## core__collection.concern
+		## core__collection__array.concern
+			### core__collection__array__AbstractArray__push.definition
+		## core__collection__list.concern
+			### core__collection__list__List__push.definition
+		## core__collection__circular_array.concern
+			### core__collection__circular_array__CircularArray__push.definition
+		## core__text.concern
+		## core__text__ropes.concern
+			### core__text__ropes__RopeBufferChars__push.definition
+
+MPropertyPage remove_at
+	# remove_at.section
+		## core__collection__abstract_collection__Sequence__remove_at.intro
+		## core__collection__abstract_collection__Sequence__remove_at.concerns
+		## core.concern
+		## core.concern
+		## core__collection.concern
+		## core__collection__array.concern
+			### core__collection__array__AbstractArray__remove_at.definition
+		## core__collection__list.concern
+			### core__collection__list__List__remove_at.definition
+
+MPropertyPage shift
+	# shift.section
+		## core__collection__abstract_collection__Sequence__shift.intro
+		## core__collection__abstract_collection__Sequence__shift.concerns
+		## core.concern
+		## core.concern
+		## core__collection.concern
+		## core__collection__array.concern
+			### core__collection__array__AbstractArray__shift.definition
+		## core__collection__list.concern
+			### core__collection__list__List__shift.definition
+		## core__collection__circular_array.concern
+			### core__collection__circular_array__CircularArray__shift.definition
+
+MPropertyPage subarray
+	# subarray.section
+		## core__collection__abstract_collection__Sequence__subarray.intro
+
+MPropertyPage unshift
+	# unshift.section
+		## core__collection__abstract_collection__Sequence__unshift.intro
+		## core__collection__abstract_collection__Sequence__unshift.concerns
+		## core.concern
+		## core.concern
+		## core__collection.concern
+		## core__collection__array.concern
+			### core__collection__array__AbstractArray__unshift.definition
+		## core__collection__list.concern
+			### core__collection__list__List__unshift.definition
+		## core__collection__circular_array.concern
+			### core__collection__circular_array__CircularArray__unshift.definition
+
+MClassPage Set
+	# Set.section
+		## core__collection__abstract_collection__Set.intro
+		## core__collection__abstract_collection__Set.inheritance
+			### core__collection__abstract_collection__Set.graph
+			### list.group
+				#### core__collection__abstract_collection__Set.parents
+				#### core__collection__abstract_collection__Set.ancestors
+				#### core__collection__abstract_collection__Set.children
+				#### core__collection__abstract_collection__Set.descendants
+		## core__collection__abstract_collection__Set.constructors
+			### core__kernel__Object__init.definition
+		## core__collection__abstract_collection__Set.concerns
+		## core.concern
+		## core.concern
+		## core__collection.concern
+		## core__collection__abstract_collection.concern
+			### core__collection__abstract_collection__Set__SELF.definition
+				#### core__collection__abstract_collection__Set__SELF.lin
+			### core__collection__abstract_collection__Set___61d_61d.definition
+				#### core__collection__abstract_collection__Set___61d_61d.lin
+			### core__collection__abstract_collection__Set__clone.definition
+				#### core__collection__abstract_collection__Set__clone.lin
+			### core__collection__abstract_collection__Set__count.definition
+				#### core__collection__abstract_collection__Set__count.lin
+			### core__collection__abstract_collection__Set__has_only.definition
+				#### core__collection__abstract_collection__Set__has_only.lin
+			### core__collection__abstract_collection__Set__hash.definition
+				#### core__collection__abstract_collection__Set__hash.lin
+			### core__collection__abstract_collection__Set__intersection.definition
+			### core__collection__abstract_collection__Set__new_set.definition
+			### core__collection__abstract_collection__Set__remove_all.definition
+				#### core__collection__abstract_collection__Set__remove_all.lin
+			### core__collection__abstract_collection__Set__union.definition
+
+MPropertyPage intersection
+	# intersection.section
+		## core__collection__abstract_collection__Set__intersection.intro
+
+MPropertyPage new_set
+	# new_set.section
+		## core__collection__abstract_collection__Set__new_set.intro
+		## core__collection__abstract_collection__Set__new_set.concerns
+		## core.concern
+		## core.concern
+		## core__collection.concern
+		## core__collection__array.concern
+			### core__collection__array__ArraySet__new_set.definition
+		## core__collection__hash_collection.concern
+			### core__collection__hash_collection__HashSet__new_set.definition
+
+MPropertyPage union
+	# union.section
+		## core__collection__abstract_collection__Set__union.intro
+
+MClassPage SimpleCollection
+	# SimpleCollection.section
+		## core__collection__abstract_collection__SimpleCollection.intro
+		## core__collection__abstract_collection__SimpleCollection.inheritance
+			### core__collection__abstract_collection__SimpleCollection.graph
+			### list.group
+				#### core__collection__abstract_collection__SimpleCollection.parents
+				#### core__collection__abstract_collection__SimpleCollection.ancestors
+				#### core__collection__abstract_collection__SimpleCollection.children
+				#### core__collection__abstract_collection__SimpleCollection.descendants
+		## core__collection__abstract_collection__SimpleCollection.constructors
+			### core__kernel__Object__init.definition
+		## core__collection__abstract_collection__SimpleCollection.concerns
+		## core.concern
+		## core.concern
+		## core__collection.concern
+		## core__collection__abstract_collection.concern
+			### core__collection__abstract_collection__SimpleCollection__SELF.definition
+				#### core__collection__abstract_collection__SimpleCollection__SELF.lin
+			### core__collection__abstract_collection__SimpleCollection__add.definition
+			### core__collection__abstract_collection__SimpleCollection__add_all.definition
+		## core__queue.concern
+			### core__queue__SimpleCollection__as_random.definition
+
+MPropertyPage add
+	# add.section
+		## core__collection__abstract_collection__SimpleCollection__add.intro
+		## core__collection__abstract_collection__SimpleCollection__add.concerns
+		## core.concern
+		## core.concern
+		## core__collection.concern
+		## core__collection__abstract_collection.concern
+			### core__collection__abstract_collection__Sequence__add.definition
+		## core__collection__array.concern
+			### core__collection__array__AbstractArray__add.definition
+			### core__collection__array__Array__add.definition
+			### core__collection__array__ArraySet__add.definition
+		## core__collection__hash_collection.concern
+			### core__collection__hash_collection__HashSet__add.definition
+		## core__collection__union_find.concern
+			### core__collection__union_find__DisjointSet__add.definition
+		## core__queue.concern
+			### core__queue__MinHeap__add.definition
+		## core__bytes.concern
+			### core__bytes__Bytes__add.definition
+		## core__text.concern
+		## core__text__ropes.concern
+			### core__text__ropes__RopeBufferChars__add.definition
+
+MPropertyPage add_all
+	# add_all.section
+		## core__collection__abstract_collection__SimpleCollection__add_all.intro
+		## core__collection__abstract_collection__SimpleCollection__add_all.concerns
+		## core.concern
+		## core.concern
+		## core__collection.concern
+		## core__collection__array.concern
+			### core__collection__array__Array__add_all.definition
+		## core__collection__circular_array.concern
+			### core__collection__circular_array__CircularArray__add_all.definition
+
+MPropertyPage as_random
+	# as_random.section
+		## core__collection__abstract_collection__SimpleCollection__as_random.intro
+
+MModulePage array
+	# array.section
+		## core__collection__array.intro
+		## core__collection__array.importation
+			### core__collection__array.graph
+			### list.group
+				#### core__collection__array.imports
+				#### core__collection__array.clients
+		## core__collection__array.concerns
+		## core.concern
+		## core.concern
+		## core__collection.concern
+		## core__collection__array.concern
+			### core__collection__array__AbstractArray.definition-list
+				#### core__collection__array__AbstractArray.definition
+					##### core__collection__array__AbstractArray.intros_redefs
+						###### list.group
+							####### core__collection__array__AbstractArray.intros
+							####### core__collection__array__AbstractArray.redefs
+			### core__collection__array__AbstractArrayRead.definition-list
+				#### core__collection__array__AbstractArrayRead.definition
+					##### core__collection__array__AbstractArrayRead.intros_redefs
+						###### list.group
+							####### core__collection__array__AbstractArrayRead.intros
+							####### core__collection__array__AbstractArrayRead.redefs
+			### core__collection__array__Array.definition-list
+				#### core__collection__array__Array.definition
+					##### core__collection__array__Array.intros_redefs
+						###### list.group
+							####### core__collection__array__Array.intros
+							####### core__collection__array__Array.redefs
+			### core__collection__array__ArrayCmp.definition-list
+				#### core__collection__array__ArrayCmp.definition
+					##### core__collection__array__ArrayCmp.intros_redefs
+						###### list.group
+							####### core__collection__array__ArrayCmp.intros
+							####### core__collection__array__ArrayCmp.redefs
+			### core__collection__array__ArrayMap.definition-list
+				#### core__collection__array__ArrayMap.definition
+					##### core__collection__array__ArrayMap.intros_redefs
+						###### list.group
+							####### core__collection__array__ArrayMap.intros
+							####### core__collection__array__ArrayMap.redefs
+			### core__collection__array__ArraySet.definition-list
+				#### core__collection__array__ArraySet.definition
+					##### core__collection__array__ArraySet.intros_redefs
+						###### list.group
+							####### core__collection__array__ArraySet.intros
+							####### core__collection__array__ArraySet.redefs
+			### core__collection__array__NativeArray.definition-list
+				#### core__collection__array__NativeArray.definition
+					##### core__collection__array__NativeArray.intros_redefs
+						###### list.group
+							####### core__collection__array__NativeArray.intros
+							####### core__collecti***TRUNCATED***

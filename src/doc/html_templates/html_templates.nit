@@ -22,6 +22,7 @@ import doc_phases::doc_hierarchies
 import doc_phases::doc_graphs
 import doc_phases::doc_intros_redefs
 import doc_phases::doc_lin
+import doc_phases::doc_code
 import doc_phases::doc_readme
 intrude import doc_down
 
@@ -436,15 +437,29 @@ redef class MEntitySection
 	redef var html_subtitle is lazy do return mentity.html_declaration
 end
 
+redef class MEntityArticle
+	# Render link to source code if any.
+	fun render_source_link(tabs: DocTabs) do
+		var loc = source_location
+		if loc != null then
+			var lnk = """<a target="_blank" href="{{{loc.html_escape}}}">View Source</a>"""
+			tabs.drop_list.items.add new ListItem(lnk)
+		end
+		loc = github_location
+		if loc != null then
+			var lnk = """<a target="_blank" href="{{{loc.html_escape}}}">View on Github</a>"""
+			tabs.drop_list.items.add new ListItem(lnk)
+		end
+	end
+end
+
 redef class ConcernSection
 	redef var html_title is lazy do return "in {mentity.nitdoc_name}"
 end
 
 redef class IntroArticle
 	redef var html_title = null
-
-	# Link to source to display if any.
-	var html_source_link: nullable Writable is noinit, writable
+	redef var html_subtitle = null
 
 	redef fun render_body do
 		var tabs = new DocTabs("{html_id}.tabs", "")
@@ -460,10 +475,7 @@ redef class IntroArticle
 			var title = child.html_toc_title or else child.toc_title or else ""
 			tabs.add_panel new DocTabPanel(child.html_tab_id, title, child)
 		end
-		var lnk = html_source_link
-		if lnk != null then
-			tabs.drop_list.items.add new ListItem(lnk)
-		end
+		render_source_link(tabs)
 		addn tabs
 	end
 end
@@ -499,9 +511,6 @@ redef class DefinitionArticle
 	# FIXME diff hack
 	var is_short_comment: Bool = false is writable
 
-	# Link to source to display if any.
-	var html_source_link: nullable Writable is noinit, writable
-
 	redef fun render_body do
 		var tabs = new DocTabs("{html_id}.tabs", "")
 		if not is_no_body then
@@ -520,10 +529,7 @@ redef class DefinitionArticle
 			var title = child.html_toc_title or else child.toc_title or else ""
 			tabs.add_panel new DocTabPanel(child.html_tab_id, title, child)
 		end
-		var lnk = html_source_link
-		if lnk != null then
-			tabs.drop_list.items.add new ListItem(lnk)
-		end
+		render_source_link(tabs)
 		addn tabs
 	end
 end
@@ -619,5 +625,20 @@ redef class DocumentationArticle
 			tabs.add_panel new DocTabPanel(child.html_tab_id, title, child)
 		end
 		addn tabs
+	end
+end
+
+redef class CodeArticle
+
+	# HighlightVisitor used to hilight source code.
+	var hl = new HighlightVisitor
+
+	redef fun render_body do
+		var anode = self.anode
+		if anode == null then return
+		hl.enter_visit anode
+		addn "<pre class=\"nit_code\">"
+		addn hl.html
+		addn "</pre>"
 	end
 end

@@ -1,0 +1,141 @@
+# This file is part of NIT ( http://www.nitlanguage.org ).
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# Render source code pages.
+module doc_code
+
+import doc_structure
+import html_templates::html_model # FIXME maybe this phase should depend on `html_render`
+
+redef class ToolContext
+
+	# File pattern used to link documentation to source code.
+	var opt_source = new OptionString("link for source (%f for filename, " +
+		"%l for first line, %L for last line)", "--source")
+
+	# Do not generate code pages.
+	var opt_nocode = new OptionBool("do not generate source code pages", "--no-code")
+
+	redef init do
+		super
+		option_context.add_option(opt_source, opt_nocode)
+	end
+end
+
+# Code phase populates CodePage content with source code.
+class CodePhase
+	super DocPhase
+
+	redef fun apply do
+		for page in doc.pages.values do page.apply_source_link(self, doc)
+		if ctx.opt_nocode.value then return
+		for page in doc.pages.values do page.apply_code(self, doc)
+	end
+end
+
+redef class DocPage
+
+	# Populates `self` articles with source code links.
+	#
+	# See `CodePhase`.
+	fun apply_source_link(v: CodePhase, doc: DocModel) do
+		root.apply_source_link(v, doc, self)
+	end
+
+	# Populates `self` with source code.
+	#
+	# See `CodePhase`.
+	fun apply_code(v: CodePhase, doc: DocModel) do end
+end
+
+redef class DocComposite
+	private fun apply_source_link(v: CodePhase, doc: DocModel, page: DocPage) do
+		for child in children do child.apply_source_link(v, doc, page)
+	end
+end
+
+redef class MEntityArticle
+	# Location where source code links should point.
+	var location: nullable Location = null
+
+	# Nit source location once formated with `ToolContext::opt_source`.
+	var source_location: nullable String = null
+
+	# Github source location.
+	var github_location: nullable String = null
+
+	redef fun apply_source_link(v, doc, page) do
+		super
+		# MEntity location
+		var mmodule = null
+		var mentity = self.mentity
+		if mentity isa MModule then
+			location = mentity.location
+			mmodule = mentity
+		else if mentity isa MClass then
+			location = mentity.intro.location
+			mmodule = mentity.intro.mmodule
+		else if mentity isa MClassDef then
+			location = mentity.location
+			mmodule = mentity.mmodule
+		else if mentity isa MProperty then
+			location = mentity.intro.location
+			mmodule = mentity.intro.mclassdef.mmodule
+		else if mentity isa MPropDef then
+			location = mentity.location
+			mmodule = mentity.mclassdef.mmodule
+		end
+		if location == null then return
+
+		# Show source link according to `opt_nocode`
+		if v.ctx.opt_nocode.value then
+			source_location = location.file.filename.simplify_path
+		else
+			var code_link = "code_{mmodule.nitdoc_url}"
+			if not mentity isa MModule then
+				code_link += "#L{location.line_start}"
+			end
+			source_location = code_link
+		end
+
+		# Github source location according to `opt_source`
+		var format = v.ctx.opt_source.value
+		if format == null then return
+		format = format.replace("%f", location.file.filename.simplify_path)
+		format = format.replace("%l", location.line_start.to_s)
+		format = format.replace("%L", location.line_end.to_s)
+		github_location = format.simplify_path
+	end
+end
+
+redef class CodePage
+	redef fun apply_code(v, doc) do
+		var mbuilder = v.ctx.modelbuilder
+		var mentity = self.mentity
+		var nentity = mbuilder.mmodule2node(mentity)
+		root.add_child new CodeArticle("{mentity.nitdoc_id}.code", nentity)
+	end
+end
+
+# A DocArticle that display the code from a ANode.
+class CodeArticle
+	autoinit(id, anode)
+	super DocArticle
+
+	# ANode to display code from.
+	var anode: nullable ANode
+
+	redef var title is lazy do return anode.location.file.filename
+	redef fun is_hidden do return anode == null
+end

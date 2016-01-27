@@ -189,7 +189,7 @@ class HighlightVisitor
 			end
 
 			# Add the token
-			if c isa TEol then 
+			if c isa TEol then
 				html.append "\n"
 			else
 				var tag = full_tag(c, hv)
@@ -300,13 +300,14 @@ redef class HTMLTag
 		end
 		attrs["data-content"] = infobox.content.write_to_string
 		attrs["data-toggle"] = "popover"
+		attrs["data-html"] = "true"
 	end
 end
 
 
 # A generic information container that can be used to decorate AST entities
 class HInfoBox
-	# The visitor used for contextualisation, if needed 
+	# The visitor used for contextualisation, if needed
 	var visitor: HighlightVisitor
 
 	# A short title for the AST element
