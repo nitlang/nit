@@ -26,13 +26,15 @@ export NIT_SRAND=0
 unset NIT_DIR
 
 # Get the first Java lib available
-shopt -s nullglob
-JAVA_HOME=$(dirname $(dirname $(readlink -f $(which javac))))
+if which_java=$(which javac 2>/dev/null); then
+	JAVA_HOME=$(dirname $(dirname $(readlink -f "$which_java")))
 
-paths=`echo $JAVA_HOME/jre/lib/*/{client,server}/libjvm.so`
-paths=($paths)
-JNI_LIB_PATH=`dirname ${paths[0]}`
-shopt -u nullglob
+	shopt -s nullglob
+	paths=`echo $JAVA_HOME/jre/lib/*/{client,server}/libjvm.so`
+	paths=($paths)
+	JNI_LIB_PATH=`dirname ${paths[0]}`
+	shopt -u nullglob
+fi
 
 outdir="out"
 compdir="nit_compile"
