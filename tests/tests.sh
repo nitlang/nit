@@ -90,8 +90,8 @@ saferun()
 		esac
 	done
 	(
-	ulimit -f "$filelimit"
-	ulimit -t "$usertimelimit"
+	ulimit -f "$filelimit" 2> /dev/null
+	ulimit -t "$usertimelimit" 2> /dev/null
 	if test -d "$1"; then
 		find $1 | sort
 	elif test -n "$TIME"; then
