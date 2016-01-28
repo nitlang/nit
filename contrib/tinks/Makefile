@@ -14,11 +14,11 @@
 
 all: bin/server bin/tinks bin/tinks3d
 
-pre-build: assets/images/drawing.png src/client/client_serialize.nit src/server/server_serialize.nit
+pre-build: assets/images/drawing.png src/server/server_serialize.nit
 
 # Client
 bin/tinks: assets/images/drawing.png src/client/client.nit $(shell ../../bin/nitls -M src/client/linux_client.nit)
-		../../bin/nitserial -o src/client/client_serialize.nit src/client/client.nit
+	../../bin/nitserial -o src/client/client_serialize.nit src/client/client.nit
 	../../bin/nitc -o bin/tinks src/client/linux_client.nit -m src/client/client_serialize.nit
 
 bin/tinks3d: $(shell ../../bin/nitls -M src/client/client3d.nit -m linux)
@@ -38,19 +38,15 @@ src/server/server_serialize.nit: $(shell ../../bin/nitls -M src/server/dedicated
 
 # Android
 android: bin/tinks.apk
-bin/tinks.apk: assets/images/drawing.png src/client/client_serialize.nit res/drawable-ldpi/icon.png $(shell ../../bin/nitls -M src/client/android_client.nit)
+bin/tinks.apk: assets/images/drawing.png res/drawable-ldpi/icon.png $(shell ../../bin/nitls -M src/client/android_client.nit)
+	../../bin/nitserial -o src/client/client_serialize.nit src/client/client.nit
 	../../bin/nitc -o bin/tinks.apk src/client/android_client.nit -m src/client/client_serialize.nit
 
-android-release: assets/images/drawing.png src/client/client_serialize.nit res/drawable-ldpi/icon.png $(shell ../../bin/nitls -M src/client/android_client.nit)
+android-release: assets/images/drawing.png res/drawable-ldpi/icon.png $(shell ../../bin/nitls -M src/client/android_client.nit)
+	../../bin/nitserial -o src/client/client_serialize.nit src/client/client.nit
 	../../bin/nitc -o bin/tinks.apk src/client/android_client.nit -m src/client/client_serialize.nit --release
 
 res/drawable-ldpi/icon.png: art/icon.svg
 	../inkscape_tools/bin/svg_to_icons art/icon.svg --android --out res/
-
-# Archive
-pub: assets/images/drawing.png src/client/client_serialize.nit bin/tinks.apk
-	../../bin/nitc --no-stacktrace -o bin/tinks src/client/linux_client.nit -m src/client/client_serialize.nit
-	tar -czvf bin/tinks.tar.gz bin/tinks assets/
-	scp bin/tinks.tar.gz bin/tinks.apk xymus.net:/var/www/pub/
 
 .PHONY: pub
