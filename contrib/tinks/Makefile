@@ -49,10 +49,4 @@ android-release: assets/images/drawing.png res/drawable-ldpi/icon.png $(shell ..
 res/drawable-ldpi/icon.png: art/icon.svg
 	../inkscape_tools/bin/svg_to_icons art/icon.svg --android --out res/
 
-# Archive
-pub: assets/images/drawing.png src/client/client_serialize.nit bin/tinks.apk
-	../../bin/nitc --no-stacktrace -o bin/tinks src/client/linux_client.nit -m src/client/client_serialize.nit
-	tar -czvf bin/tinks.tar.gz bin/tinks assets/
-	scp bin/tinks.tar.gz bin/tinks.apk xymus.net:/var/www/pub/
-
 .PHONY: pub
