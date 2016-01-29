@@ -20,6 +20,9 @@ OBJS=nitc nitpick nit nitdoc nitls nitunit nitpretty nitmetrics nitx nitlight ni
 SRCS=$(patsubst %,%.nit,$(OBJS))
 BINS=$(patsubst %,../bin/%,$(OBJS))
 
+# Workaround: Cygwin requires peflags to boostrap
+peflags := ${shell which peflags 2>/dev/null}
+
 all: bin/nitc
 
 pre-build:
@@ -31,6 +34,9 @@ nitc_0: ../c_src/nitc parser/parser.nit
 	@echo '***************************************************************'
 	./git-gen-version.sh
 	../c_src/nitc ${OLDNITCOPT} -o nitc_0 -v nitc.nit
+ifdef peflags
+	${peflags} --cygwin-heap=2048 nitc_0
+endif
 
 bin/nitc: nitc_0 parser/parser.nit
 	@echo '***************************************************************'
@@ -50,6 +56,9 @@ $(OBJS): nitc_0 parser/parser.nit
 	@echo '***************************************************************'
 	cd ../c_src; make
 	rm ../c_src/*.o || true # to reduce disc used
+ifdef peflags
+	${peflags} --cygwin-heap=2048 ../c_src/nitc
+endif
 
 parser/parser.nit:
 	@echo '***************************************************************'
