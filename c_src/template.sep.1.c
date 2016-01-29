@@ -38,7 +38,7 @@ RET_LABEL5:(void)0;
 }
 }
 {
-standard___standard__Array___standard__abstract_collection__SimpleCollection__add(var4, var_element); /* Direct call array#Array#add on <var4:Array[Writable]>*/
+core___core__Array___core__abstract_collection__SimpleCollection__add(var4, var_element); /* Direct call array#Array#add on <var4:Array[Writable]>*/
 }
 RET_LABEL:;
 }
@@ -48,7 +48,7 @@ val* var_element /* var element: Writable */;
 static val* varonce;
 val* var /* : String */;
 char* var1 /* : NativeString */;
-val* var2 /* : FlatString */;
+val* var2 /* : String */;
 var_element = p0;
 {
 template___template__Template___add(self, var_element); /* Direct call template#Template#add on <self:Template>*/
@@ -57,7 +57,7 @@ if (likely(varonce!=NULL)) {
 var = varonce;
 } else {
 var1 = "\n";
-var2 = standard___standard__NativeString___to_s_with_length(var1, 1l);
+var2 = core__flat___NativeString___to_s_full(var1, 1l, 1l);
 var = var2;
 varonce = var;
 }
@@ -161,7 +161,7 @@ template___template__Template___freeze(self); /* Direct call template#Template#f
 RET_LABEL:;
 }
 /* method template#Template#write_to for (self: Template, Writer) */
-void template___template__Template___standard__stream__Writable__write_to(val* self, val* p0) {
+void template___template__Template___core__stream__Writable__write_to(val* self, val* p0) {
 val* var_stream /* var stream: Writer */;
 short int var /* : Bool */;
 short int var2 /* : Bool */;
@@ -169,8 +169,8 @@ short int var3 /* : Bool */;
 val* var5 /* : Array[Writable] */;
 val* var7 /* : Array[Writable] */;
 val* var_ /* var : Array[Writable] */;
-val* var8 /* : ArrayIterator[nullable Object] */;
-val* var_9 /* var : ArrayIterator[Writable] */;
+val* var8 /* : IndexedIterator[nullable Object] */;
+val* var_9 /* var : IndexedIterator[Writable] */;
 short int var10 /* : Bool */;
 val* var11 /* : nullable Object */;
 val* var_e /* var e: Writable */;
@@ -211,31 +211,31 @@ RET_LABEL6:(void)0;
 }
 var_ = var5;
 {
-var8 = standard___standard__AbstractArrayRead___standard__abstract_collection__Collection__iterator(var_);
+var8 = core___core__AbstractArrayRead___core__abstract_collection__Collection__iterator(var_);
 }
 var_9 = var8;
 for(;;) {
 {
-var10 = standard__array___standard__array__ArrayIterator___standard__abstract_collection__Iterator__is_ok(var_9);
+var10 = ((short int(*)(val* self))((((long)var_9&3)?class_info[((long)var_9&3)]:var_9->class)->vft[COLOR_core__abstract_collection__Iterator__is_ok]))(var_9); /* is_ok on <var_9:IndexedIterator[Writable]>*/
 }
 if (var10){
+} else {
+goto BREAK_label;
+}
 {
-var11 = standard__array___standard__array__ArrayIterator___standard__abstract_collection__Iterator__item(var_9);
+var11 = ((val*(*)(val* self))((((long)var_9&3)?class_info[((long)var_9&3)]:var_9->class)->vft[COLOR_core__abstract_collection__Iterator__item]))(var_9); /* item on <var_9:IndexedIterator[Writable]>*/
 }
 var_e = var11;
 {
-((void(*)(val* self, val* p0))((((long)var_e&3)?class_info[((long)var_e&3)]:var_e->class)->vft[COLOR_standard__stream__Writable__write_to]))(var_e, var_stream); /* write_to on <var_e:Writable>*/
+((void(*)(val* self, val* p0))((((long)var_e&3)?class_info[((long)var_e&3)]:var_e->class)->vft[COLOR_core__stream__Writable__write_to]))(var_e, var_stream); /* write_to on <var_e:Writable>*/
 }
 {
-standard__array___standard__array__ArrayIterator___standard__abstract_collection__Iterator__next(var_9); /* Direct call array#ArrayIterator#next on <var_9:ArrayIterator[Writable]>*/
-}
-} else {
-goto BREAK_label;
+((void(*)(val* self))((((long)var_9&3)?class_info[((long)var_9&3)]:var_9->class)->vft[COLOR_core__abstract_collection__Iterator__next]))(var_9); /* next on <var_9:IndexedIterator[Writable]>*/
 }
 }
 BREAK_label: (void)0;
 {
-standard__array___standard__array__ArrayIterator___standard__abstract_collection__Iterator__finish(var_9); /* Direct call array#ArrayIterator#finish on <var_9:ArrayIterator[Writable]>*/
+((void(*)(val* self))((((long)var_9&3)?class_info[((long)var_9&3)]:var_9->class)->vft[COLOR_core__abstract_collection__Iterator__finish]))(var_9); /* finish on <var_9:IndexedIterator[Writable]>*/
 }
 {
 { /* Inline template#Template#is_writing= (self,0) on <self:Template> */

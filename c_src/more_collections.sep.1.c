@@ -69,7 +69,7 @@ fatal_exit(1);
 var_k = p0;
 var_v = p1;
 {
-var7 = standard___standard__HashMap___standard__abstract_collection__MapRead__get_or_null(self, var_k);
+var7 = core___core__HashMap___core__abstract_collection__MapRead__get_or_null(self, var_k);
 }
 var_x = var7;
 if (var_x == NULL) {
@@ -81,7 +81,7 @@ if (0) {
 { /* Inline kernel#Object#!= (var_x,((val*)NULL)) on <var_x:nullable Array[nullable Object]> */
 var_other = ((val*)NULL);
 {
-var11 = ((short int(*)(val* self, val* p0))(var_x->class->vft[COLOR_standard__kernel__Object___61d_61d]))(var_x, var_other); /* == on <var_x:nullable Array[nullable Object](Array[nullable Object])>*/
+var11 = ((short int(*)(val* self, val* p0))(var_x->class->vft[COLOR_core__kernel__Object___61d_61d]))(var_x, var_other); /* == on <var_x:nullable Array[nullable Object](Array[nullable Object])>*/
 }
 var12 = !var11;
 var9 = var12;
@@ -92,25 +92,25 @@ var8 = var9;
 }
 if (var8){
 {
-standard___standard__Array___standard__abstract_collection__SimpleCollection__add(var_x, var_v); /* Direct call array#Array#add on <var_x:nullable Array[nullable Object](Array[nullable Object])>*/
+core___core__Array___core__abstract_collection__SimpleCollection__add(var_x, var_v); /* Direct call array#Array#add on <var_x:nullable Array[nullable Object](Array[nullable Object])>*/
 }
 } else {
-var13 = NEW_standard__Array(self->type->resolution_table->types[COLOR_standard__Array__more_collections__MultiHashMap___35dV]);
+var13 = NEW_core__Array(self->type->resolution_table->types[COLOR_core__Array__more_collections__MultiHashMap___35dV]);
 {
-standard___standard__Array___with_capacity(var13, 1l); /* Direct call array#Array#with_capacity on <var13:Array[nullable Object]>*/
+core___core__Array___with_capacity(var13, 1l); /* Direct call array#Array#with_capacity on <var13:Array[nullable Object]>*/
 }
 var_ = var13;
 {
-standard___standard__AbstractArray___standard__abstract_collection__Sequence__push(var_, var_v); /* Direct call array#AbstractArray#push on <var_:Array[nullable Object]>*/
+core___core__AbstractArray___core__abstract_collection__Sequence__push(var_, var_v); /* Direct call array#AbstractArray#push on <var_:Array[nullable Object]>*/
 }
 {
-standard___standard__HashMap___standard__abstract_collection__Map___91d_93d_61d(self, var_k, var_); /* Direct call hash_collection#HashMap#[]= on <self:MultiHashMap[nullable Object, nullable Object]>*/
+core___core__HashMap___core__abstract_collection__Map___91d_93d_61d(self, var_k, var_); /* Direct call hash_collection#HashMap#[]= on <self:MultiHashMap[nullable Object, nullable Object]>*/
 }
 }
 RET_LABEL:;
 }
 /* method more_collections#MultiHashMap#provide_default_value for (self: MultiHashMap[nullable Object, nullable Object], nullable Object): Array[nullable Object] */
-val* more_collections___more_collections__MultiHashMap___standard__abstract_collection__MapRead__provide_default_value(val* self, val* p0) {
+val* more_collections___more_collections__MultiHashMap___core__abstract_collection__MapRead__provide_default_value(val* self, val* p0) {
 val* var /* : Array[nullable Object] */;
 val* var_key /* var key: nullable Object */;
 val* var1 /* : Array[nullable Object] */;
@@ -122,9 +122,9 @@ const struct type* type_struct;
 short int is_nullable;
 const char* var_class_name;
 var_key = p0;
-var1 = NEW_standard__Array(self->type->resolution_table->types[COLOR_standard__Array__more_collections__MultiHashMap___35dV]);
+var1 = NEW_core__Array(self->type->resolution_table->types[COLOR_core__Array__more_collections__MultiHashMap___35dV]);
 {
-standard___standard__Array___standard__kernel__Object__init(var1); /* Direct call array#Array#init on <var1:Array[nullable Object]>*/
+core___core__Array___core__kernel__Object__init(var1); /* Direct call array#Array#init on <var1:Array[nullable Object]>*/
 }
 var_res = var1;
 /* <var_key:nullable Object> isa K */
@@ -148,7 +148,7 @@ PRINT_ERROR(" (%s:%d)\n", FILE_more_collections, 51);
 fatal_exit(1);
 }
 {
-standard___standard__HashMap___standard__abstract_collection__Map___91d_93d_61d(self, var_key, var_res); /* Direct call hash_collection#HashMap#[]= on <self:MultiHashMap[nullable Object, nullable Object]>*/
+core___core__HashMap___core__abstract_collection__Map___91d_93d_61d(self, var_key, var_res); /* Direct call hash_collection#HashMap#[]= on <self:MultiHashMap[nullable Object, nullable Object]>*/
 }
 var = var_res;
 goto RET_LABEL;
@@ -252,7 +252,7 @@ RET_LABEL9:(void)0;
 }
 var_level1 = var8;
 {
-var11 = standard___standard__HashMap___standard__abstract_collection__MapRead__get_or_null(var_level1, var_k1);
+var11 = core___core__HashMap___core__abstract_collection__MapRead__get_or_null(var_level1, var_k1);
 }
 var_level2 = var11;
 if (var_level2 == NULL) {
@@ -261,7 +261,7 @@ var12 = 1; /* is null */
 var12 = 0; /* arg is null but recv is not */
 }
 if (0) {
-var13 = standard___standard__MapRead___standard__kernel__Object___61d_61d(var_level2, ((val*)NULL));
+var13 = core___core__MapRead___core__kernel__Object___61d_61d(var_level2, ((val*)NULL));
 var12 = var13;
 }
 if (var12){
@@ -270,7 +270,7 @@ goto RET_LABEL;
 } else {
 }
 {
-var14 = standard___standard__HashMap___standard__abstract_collection__MapRead__get_or_null(var_level2, var_k2);
+var14 = core___core__HashMap___core__abstract_collection__MapRead__get_or_null(var_level2, var_k2);
 }
 var = var14;
 goto RET_LABEL;
@@ -388,7 +388,7 @@ RET_LABEL14:(void)0;
 }
 var_level1 = var13;
 {
-var16 = standard___standard__HashMap___standard__abstract_collection__MapRead__get_or_null(var_level1, var_k1);
+var16 = core___core__HashMap___core__abstract_collection__MapRead__get_or_null(var_level1, var_k1);
 }
 var_level2 = var16;
 if (var_level2 == NULL) {
@@ -397,22 +397,22 @@ var17 = 1; /* is null */
 var17 = 0; /* arg is null but recv is not */
 }
 if (0) {
-var18 = standard___standard__MapRead___standard__kernel__Object___61d_61d(var_level2, ((val*)NULL));
+var18 = core___core__MapRead___core__kernel__Object___61d_61d(var_level2, ((val*)NULL));
 var17 = var18;
 }
 if (var17){
-var19 = NEW_standard__HashMap(self->type->resolution_table->types[COLOR_standard__HashMap__more_collections__HashMap2___35dK2__more_collections__HashMap2___35dV]);
+var19 = NEW_core__HashMap(self->type->resolution_table->types[COLOR_core__HashMap__more_collections__HashMap2___35dK2__more_collections__HashMap2___35dV]);
 {
-standard___standard__HashMap___standard__kernel__Object__init(var19); /* Direct call hash_collection#HashMap#init on <var19:HashMap[nullable Object, nullable Object]>*/
+core___core__HashMap___core__kernel__Object__init(var19); /* Direct call hash_collection#HashMap#init on <var19:HashMap[nullable Object, nullable Object]>*/
 }
 var_level2 = var19;
 {
-standard___standard__HashMap___standard__abstract_collection__Map___91d_93d_61d(var_level1, var_k1, var_level2); /* Direct call hash_collection#HashMap#[]= on <var_level1:HashMap[nullable Object, HashMap[nullable Object, nullable Object]]>*/
+core___core__HashMap___core__abstract_collection__Map___91d_93d_61d(var_level1, var_k1, var_level2); /* Direct call hash_collection#HashMap#[]= on <var_level1:HashMap[nullable Object, HashMap[nullable Object, nullable Object]]>*/
 }
 } else {
 }
 {
-standard___standard__HashMap___standard__abstract_collection__Map___91d_93d_61d(var_level2, var_k2, var_v); /* Direct call hash_collection#HashMap#[]= on <var_level2:nullable HashMap[nullable Object, nullable Object](HashMap[nullable Object, nullable Object])>*/
+core___core__HashMap___core__abstract_collection__Map___91d_93d_61d(var_level2, var_k2, var_v); /* Direct call hash_collection#HashMap#[]= on <var_level2:nullable HashMap[nullable Object, nullable Object](HashMap[nullable Object, nullable Object])>*/
 }
 RET_LABEL:;
 }
@@ -423,7 +423,7 @@ val* var1 /* : HashMap[nullable Object, HashMap2[nullable Object, nullable Objec
 var1 = self->attrs[COLOR_more_collections__HashMap3___level1].val; /* _level1 on <self:HashMap3[nullable Object, nullable Object, nullable Object, nullable Object]> */
 if (unlikely(var1 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _level1");
-PRINT_ERROR(" (%s:%d)\n", FILE_more_collections, 115);
+PRINT_ERROR(" (%s:%d)\n", FILE_more_collections, 122);
 fatal_exit(1);
 }
 var = var1;
@@ -483,7 +483,7 @@ var1 = (((long)p0&3)?type_info[((long)p0&3)]:p0->type)->type_table[cltype] == id
 if (unlikely(!var1)) {
 var_class_name = p0 == NULL ? "null" : (((long)p0&3)?type_info[((long)p0&3)]:p0->type)->name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "K1", var_class_name);
-PRINT_ERROR(" (%s:%d)\n", FILE_more_collections, 117);
+PRINT_ERROR(" (%s:%d)\n", FILE_more_collections, 124);
 fatal_exit(1);
 }
 /* Covariant cast for argument 1 (k2) <p1:nullable Object> isa K2 */
@@ -504,7 +504,7 @@ var2 = (((long)p1&3)?type_info[((long)p1&3)]:p1->type)->type_table[cltype3] == i
 if (unlikely(!var2)) {
 var_class_name7 = p1 == NULL ? "null" : (((long)p1&3)?type_info[((long)p1&3)]:p1->type)->name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "K2", var_class_name7);
-PRINT_ERROR(" (%s:%d)\n", FILE_more_collections, 117);
+PRINT_ERROR(" (%s:%d)\n", FILE_more_collections, 124);
 fatal_exit(1);
 }
 /* Covariant cast for argument 2 (k3) <p2:nullable Object> isa K3 */
@@ -525,7 +525,7 @@ var8 = (((long)p2&3)?type_info[((long)p2&3)]:p2->type)->type_table[cltype9] == i
 if (unlikely(!var8)) {
 var_class_name13 = p2 == NULL ? "null" : (((long)p2&3)?type_info[((long)p2&3)]:p2->type)->name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "K3", var_class_name13);
-PRINT_ERROR(" (%s:%d)\n", FILE_more_collections, 117);
+PRINT_ERROR(" (%s:%d)\n", FILE_more_collections, 124);
 fatal_exit(1);
 }
 var_k1 = p0;
@@ -536,7 +536,7 @@ var_k3 = p2;
 var16 = self->attrs[COLOR_more_collections__HashMap3___level1].val; /* _level1 on <self:HashMap3[nullable Object, nullable Object, nullable Object, nullable Object]> */
 if (unlikely(var16 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _level1");
-PRINT_ERROR(" (%s:%d)\n", FILE_more_collections, 115);
+PRINT_ERROR(" (%s:%d)\n", FILE_more_collections, 122);
 fatal_exit(1);
 }
 var14 = var16;
@@ -545,7 +545,7 @@ RET_LABEL15:(void)0;
 }
 var_level1 = var14;
 {
-var17 = standard___standard__HashMap___standard__abstract_collection__MapRead__get_or_null(var_level1, var_k1);
+var17 = core___core__HashMap___core__abstract_collection__MapRead__get_or_null(var_level1, var_k1);
 }
 var_level2 = var17;
 if (var_level2 == NULL) {
@@ -642,7 +642,7 @@ var = (((long)p0&3)?type_info[((long)p0&3)]:p0->type)->type_table[cltype] == idt
 if (unlikely(!var)) {
 var_class_name = p0 == NULL ? "null" : (((long)p0&3)?type_info[((long)p0&3)]:p0->type)->name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "K1", var_class_name);
-PRINT_ERROR(" (%s:%d)\n", FILE_more_collections, 127);
+PRINT_ERROR(" (%s:%d)\n", FILE_more_collections, 134);
 fatal_exit(1);
 }
 /* Covariant cast for argument 1 (k2) <p1:nullable Object> isa K2 */
@@ -663,7 +663,7 @@ var1 = (((long)p1&3)?type_info[((long)p1&3)]:p1->type)->type_table[cltype2] == i
 if (unlikely(!var1)) {
 var_class_name6 = p1 == NULL ? "null" : (((long)p1&3)?type_info[((long)p1&3)]:p1->type)->name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "K2", var_class_name6);
-PRINT_ERROR(" (%s:%d)\n", FILE_more_collections, 127);
+PRINT_ERROR(" (%s:%d)\n", FILE_more_collections, 134);
 fatal_exit(1);
 }
 /* Covariant cast for argument 2 (k3) <p2:nullable Object> isa K3 */
@@ -684,7 +684,7 @@ var7 = (((long)p2&3)?type_info[((long)p2&3)]:p2->type)->type_table[cltype8] == i
 if (unlikely(!var7)) {
 var_class_name12 = p2 == NULL ? "null" : (((long)p2&3)?type_info[((long)p2&3)]:p2->type)->name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "K3", var_class_name12);
-PRINT_ERROR(" (%s:%d)\n", FILE_more_collections, 127);
+PRINT_ERROR(" (%s:%d)\n", FILE_more_collections, 134);
 fatal_exit(1);
 }
 /* Covariant cast for argument 3 (v) <p3:nullable Object> isa V */
@@ -705,7 +705,7 @@ var13 = (((long)p3&3)?type_info[((long)p3&3)]:p3->type)->type_table[cltype14] ==
 if (unlikely(!var13)) {
 var_class_name18 = p3 == NULL ? "null" : (((long)p3&3)?type_info[((long)p3&3)]:p3->type)->name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "V", var_class_name18);
-PRINT_ERROR(" (%s:%d)\n", FILE_more_collections, 127);
+PRINT_ERROR(" (%s:%d)\n", FILE_more_collections, 134);
 fatal_exit(1);
 }
 var_k1 = p0;
@@ -717,7 +717,7 @@ var_v = p3;
 var21 = self->attrs[COLOR_more_collections__HashMap3___level1].val; /* _level1 on <self:HashMap3[nullable Object, nullable Object, nullable Object, nullable Object]> */
 if (unlikely(var21 == NULL)) {
 PRINT_ERROR("Runtime error: %s", "Uninitialized attribute _level1");
-PRINT_ERROR(" (%s:%d)\n", FILE_more_collections, 115);
+PRINT_ERROR(" (%s:%d)\n", FILE_more_collections, 122);
 fatal_exit(1);
 }
 var19 = var21;
@@ -726,7 +726,7 @@ RET_LABEL20:(void)0;
 }
 var_level1 = var19;
 {
-var22 = standard___standard__HashMap___standard__abstract_collection__MapRead__get_or_null(var_level1, var_k1);
+var22 = core___core__HashMap___core__abstract_collection__MapRead__get_or_null(var_level1, var_k1);
 }
 var_level2 = var22;
 if (var_level2 == NULL) {
@@ -760,7 +760,7 @@ RET_LABEL30:(void)0;
 }
 var_level2 = var29;
 {
-standard___standard__HashMap___standard__abstract_collection__Map___91d_93d_61d(var_level1, var_k1, var_level2); /* Direct call hash_collection#HashMap#[]= on <var_level1:HashMap[nullable Object, HashMap2[nullable Object, nullable Object, nullable Object]]>*/
+core___core__HashMap___core__abstract_collection__Map___91d_93d_61d(var_level1, var_k1, var_level2); /* Direct call hash_collection#HashMap#[]= on <var_level1:HashMap[nullable Object, HashMap2[nullable Object, nullable Object, nullable Object]]>*/
 }
 } else {
 }

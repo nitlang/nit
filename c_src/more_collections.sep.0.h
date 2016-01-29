@@ -2,23 +2,23 @@
 #define COLOR_more_collections__MultiHashMap___35dK 0
 extern const char FILE_more_collections[];
 #define COLOR_more_collections__MultiHashMap___35dV 1
-val* standard___standard__HashMap___standard__abstract_collection__MapRead__get_or_null(val* self, val* p0);
-#define COLOR_standard__kernel__Object___61d_61d 4
-void standard___standard__Array___standard__abstract_collection__SimpleCollection__add(val* self, val* p0);
-val* NEW_standard__Array(const struct type* type);
-#define COLOR_standard__Array__more_collections__MultiHashMap___35dV 2
-void standard___standard__Array___with_capacity(val* self, long p0);
-void standard___standard__AbstractArray___standard__abstract_collection__Sequence__push(val* self, val* p0);
-void standard___standard__HashMap___standard__abstract_collection__Map___91d_93d_61d(val* self, val* p0, val* p1);
-void standard___standard__Array___standard__kernel__Object__init(val* self);
+val* core___core__HashMap___core__abstract_collection__MapRead__get_or_null(val* self, val* p0);
+#define COLOR_core__kernel__Object___61d_61d 4
+void core___core__Array___core__abstract_collection__SimpleCollection__add(val* self, val* p0);
+val* NEW_core__Array(const struct type* type);
+#define COLOR_core__Array__more_collections__MultiHashMap___35dV 2
+void core___core__Array___with_capacity(val* self, long p0);
+void core___core__AbstractArray___core__abstract_collection__Sequence__push(val* self, val* p0);
+void core___core__HashMap___core__abstract_collection__Map___91d_93d_61d(val* self, val* p0, val* p1);
+void core___core__Array___core__kernel__Object__init(val* self);
 #define COLOR_more_collections__HashMap2___level1 0
 #define COLOR_more_collections__HashMap2___35dK1 1
 #define COLOR_more_collections__HashMap2___35dK2 2
-short int standard___standard__MapRead___standard__kernel__Object___61d_61d(val* self, val* p0);
+short int core___core__MapRead___core__kernel__Object___61d_61d(val* self, val* p0);
 #define COLOR_more_collections__HashMap2___35dV 3
-val* NEW_standard__HashMap(const struct type* type);
-#define COLOR_standard__HashMap__more_collections__HashMap2___35dK2__more_collections__HashMap2___35dV 4
-void standard___standard__HashMap___standard__kernel__Object__init(val* self);
+val* NEW_core__HashMap(const struct type* type);
+#define COLOR_core__HashMap__more_collections__HashMap2___35dK2__more_collections__HashMap2___35dV 4
+void core___core__HashMap___core__kernel__Object__init(val* self);
 #define COLOR_more_collections__HashMap3___level1 0
 #define COLOR_more_collections__HashMap3___35dK1 1
 #define COLOR_more_collections__HashMap3___35dK2 2
