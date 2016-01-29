@@ -70,7 +70,7 @@ fatal_exit(1);
 }
 } else {
 if (unlikely(varonce==NULL)) {
-var3 = NEW_standard__NativeArray(2l, &type_standard__NativeArray__standard__String);
+var3 = NEW_core__NativeArray(2l, &type_core__NativeArray__core__String);
 } else {
 var3 = varonce;
 varonce = NULL;
@@ -82,8 +82,8 @@ var4 = var6;
 RET_LABEL5:(void)0;
 }
 }
-var7 = standard__string___Char___Object__to_s(var4);
-((struct instance_standard__NativeArray*)var3)->values[0]=var7;
+var7 = core__abstract_text___Char___Object__to_s(var4);
+((struct instance_core__NativeArray*)var3)->values[0]=var7;
 {
 { /* Inline csv#CsvFormat#delimiter (self) on <self:CsvFormat> */
 var10 = self->attrs[COLOR_csv__CsvFormat___delimiter].c; /* _delimiter on <self:CsvFormat> */
@@ -91,10 +91,10 @@ var8 = var10;
 RET_LABEL9:(void)0;
 }
 }
-var11 = standard__string___Char___Object__to_s(var8);
-((struct instance_standard__NativeArray*)var3)->values[1]=var11;
+var11 = core__abstract_text___Char___Object__to_s(var8);
+((struct instance_core__NativeArray*)var3)->values[1]=var11;
 {
-var12 = ((val*(*)(val* self))(var3->class->vft[COLOR_standard__string__NativeArray__native_to_s]))(var3); /* native_to_s on <var3:NativeArray[String]>*/
+var12 = ((val*(*)(val* self))(var3->class->vft[COLOR_core__abstract_text__NativeArray__native_to_s]))(var3); /* native_to_s on <var3:NativeArray[String]>*/
 }
 varonce = var3;
 self->attrs[COLOR_csv__CsvFormat___escaping].val = var12; /* _escaping on <self:CsvFormat> */
@@ -120,9 +120,9 @@ val* var10 /* : Pattern */;
 uint32_t var11 /* : Char */;
 uint32_t var13 /* : Char */;
 var_cell = p0;
-var1 = NEW_standard__RopeBuffer(&type_standard__RopeBuffer);
+var1 = NEW_core__RopeBuffer(&type_core__RopeBuffer);
 {
-standard___standard__RopeBuffer___standard__kernel__Object__init(var1); /* Direct call ropes#RopeBuffer#init on <var1:RopeBuffer>*/
+core___core__RopeBuffer___core__kernel__Object__init(var1); /* Direct call ropes#RopeBuffer#init on <var1:RopeBuffer>*/
 }
 var_result = var1;
 {
@@ -133,7 +133,7 @@ RET_LABEL3:(void)0;
 }
 }
 {
-standard___standard__RopeBuffer___standard__string__Buffer__add(var_result, var2); /* Direct call ropes#RopeBuffer#add on <var_result:RopeBuffer>*/
+core___core__RopeBuffer___core__abstract_text__Buffer__add(var_result, var2); /* Direct call ropes#RopeBuffer#add on <var_result:RopeBuffer>*/
 }
 {
 { /* Inline csv#CsvFormat#delimiter (self) on <self:CsvFormat> */
@@ -147,10 +147,10 @@ var8 = csv___csv__CsvFormat___escaping(self);
 }
 {
 var10 = (val*)((long)(var5)<<2|2);
-var9 = standard__string_search___Text___replace(var_cell, var10, var8);
+var9 = core__string_search___Text___replace(var_cell, var10, var8);
 }
 {
-standard___standard__RopeBuffer___standard__string__Buffer__append(var_result, var9); /* Direct call ropes#RopeBuffer#append on <var_result:RopeBuffer>*/
+core___core__RopeBuffer___core__abstract_text__Buffer__append(var_result, var9); /* Direct call ropes#RopeBuffer#append on <var_result:RopeBuffer>*/
 }
 {
 { /* Inline csv#CsvFormat#delimiter (self) on <self:CsvFormat> */
@@ -160,7 +160,7 @@ RET_LABEL12:(void)0;
 }
 }
 {
-standard___standard__RopeBuffer___standard__string__Buffer__add(var_result, var11); /* Direct call ropes#RopeBuffer#add on <var_result:RopeBuffer>*/
+core___core__RopeBuffer___core__abstract_text__Buffer__add(var_result, var11); /* Direct call ropes#RopeBuffer#add on <var_result:RopeBuffer>*/
 }
 var = var_result;
 goto RET_LABEL;
@@ -194,20 +194,23 @@ val* var23 /* : nullable Object */;
 short int var24 /* : Bool */;
 var_value = p0;
 {
-var1 = ((val*(*)(val* self))(var_value->class->vft[COLOR_standard__string__Text__chars]))(var_value); /* chars on <var_value:String>*/
+var1 = ((val*(*)(val* self))(var_value->class->vft[COLOR_core__abstract_text__Text__chars]))(var_value); /* chars on <var_value:String>*/
 }
 var_ = var1;
 {
-var2 = ((val*(*)(val* self))((((long)var_&3)?class_info[((long)var_&3)]:var_->class)->vft[COLOR_standard__abstract_collection__Collection__iterator]))(var_); /* iterator on <var_:SequenceRead[Char]>*/
+var2 = ((val*(*)(val* self))((((long)var_&3)?class_info[((long)var_&3)]:var_->class)->vft[COLOR_core__abstract_collection__Collection__iterator]))(var_); /* iterator on <var_:SequenceRead[Char]>*/
 }
 var_3 = var2;
 for(;;) {
 {
-var4 = ((short int(*)(val* self))((((long)var_3&3)?class_info[((long)var_3&3)]:var_3->class)->vft[COLOR_standard__abstract_collection__Iterator__is_ok]))(var_3); /* is_ok on <var_3:IndexedIterator[Char]>*/
+var4 = ((short int(*)(val* self))((((long)var_3&3)?class_info[((long)var_3&3)]:var_3->class)->vft[COLOR_core__abstract_collection__Iterator__is_ok]))(var_3); /* is_ok on <var_3:IndexedIterator[Char]>*/
 }
 if (var4){
+} else {
+goto BREAK_label;
+}
 {
-var5 = ((val*(*)(val* self))((((long)var_3&3)?class_info[((long)var_3&3)]:var_3->class)->vft[COLOR_standard__abstract_collection__Iterator__item]))(var_3); /* item on <var_3:IndexedIterator[Char]>*/
+var5 = ((val*(*)(val* self))((((long)var_3&3)?class_info[((long)var_3&3)]:var_3->class)->vft[COLOR_core__abstract_collection__Iterator__item]))(var_3); /* item on <var_3:IndexedIterator[Char]>*/
 }
 var6 = (uint32_t)((long)(var5)>>2);
 var_c = var6;
@@ -264,11 +267,11 @@ RET_LABEL20:(void)0;
 }
 }
 {
-var22 = ((val*(*)(val* self))(var19->class->vft[COLOR_standard__string__Text__chars]))(var19); /* chars on <var19:String>*/
+var22 = ((val*(*)(val* self))(var19->class->vft[COLOR_core__abstract_text__Text__chars]))(var19); /* chars on <var19:String>*/
 }
 {
 var23 = (val*)((long)(var_c)<<2|2);
-var24 = ((short int(*)(val* self, val* p0))((((long)var22&3)?class_info[((long)var22&3)]:var22->class)->vft[COLOR_standard__abstract_collection__Collection__has]))(var22, var23); /* has on <var22:SequenceRead[Char]>*/
+var24 = ((short int(*)(val* self, val* p0))((((long)var22&3)?class_info[((long)var22&3)]:var22->class)->vft[COLOR_core__abstract_collection__Collection__has]))(var22, var23); /* has on <var22:SequenceRead[Char]>*/
 }
 if (var24){
 var = 0;
@@ -276,15 +279,12 @@ goto RET_LABEL;
 } else {
 }
 {
-((void(*)(val* self))((((long)var_3&3)?class_info[((long)var_3&3)]:var_3->class)->vft[COLOR_standard__abstract_collection__Iterator__next]))(var_3); /* next on <var_3:IndexedIterator[Char]>*/
-}
-} else {
-goto BREAK_label;
+((void(*)(val* self))((((long)var_3&3)?class_info[((long)var_3&3)]:var_3->class)->vft[COLOR_core__abstract_collection__Iterator__next]))(var_3); /* next on <var_3:IndexedIterator[Char]>*/
 }
 }
 BREAK_label: (void)0;
 {
-((void(*)(val* self))((((long)var_3&3)?class_info[((long)var_3&3)]:var_3->class)->vft[COLOR_standard__abstract_collection__Iterator__finish]))(var_3); /* finish on <var_3:IndexedIterator[Char]>*/
+((void(*)(val* self))((((long)var_3&3)?class_info[((long)var_3&3)]:var_3->class)->vft[COLOR_core__abstract_collection__Iterator__finish]))(var_3); /* finish on <var_3:IndexedIterator[Char]>*/
 }
 var = 1;
 goto RET_LABEL;
@@ -292,9 +292,9 @@ RET_LABEL:;
 return var;
 }
 /* method csv#CsvFormat#init for (self: CsvFormat) */
-void csv___csv__CsvFormat___standard__kernel__Object__init(val* self) {
+void csv___csv__CsvFormat___core__kernel__Object__init(val* self) {
 {
-((void(*)(val* self))(self->class->vft[COLOR_csv___csv__CsvFormat___standard__kernel__Object__init]))(self); /* init on <self:CsvFormat>*/
+((void(*)(val* self))(self->class->vft[COLOR_csv___csv__CsvFormat___core__kernel__Object__init]))(self); /* init on <self:CsvFormat>*/
 }
 RET_LABEL:;
 }
@@ -369,15 +369,15 @@ static val* varonce;
 static val* varonce17;
 val* var18 /* : String */;
 char* var19 /* : NativeString */;
-val* var20 /* : FlatString */;
+val* var20 /* : String */;
 static val* varonce21;
 val* var22 /* : String */;
 char* var23 /* : NativeString */;
-val* var24 /* : FlatString */;
+val* var24 /* : String */;
 static val* varonce25;
 val* var26 /* : String */;
 char* var27 /* : NativeString */;
-val* var28 /* : FlatString */;
+val* var28 /* : String */;
 val* var29 /* : Array[String] */;
 val* var31 /* : Array[String] */;
 long var32 /* : Int */;
@@ -390,8 +390,8 @@ val* var40 /* : String */;
 val* var41 /* : Array[String] */;
 val* var_record /* var record: Array[String] */;
 val* var_ /* var : Array[Object] */;
-val* var42 /* : ArrayIterator[nullable Object] */;
-val* var_43 /* var : ArrayIterator[Object] */;
+val* var42 /* : IndexedIterator[nullable Object] */;
+val* var_43 /* var : IndexedIterator[Object] */;
 short int var44 /* : Bool */;
 val* var45 /* : nullable Object */;
 val* var_value /* var value: Object */;
@@ -401,7 +401,7 @@ val* var49 /* : Array[Array[String]] */;
 var_values = p0;
 {
 { /* Inline array#AbstractArrayRead#length (var_values) on <var_values:Array[Object]> */
-var2 = var_values->attrs[COLOR_standard__array__AbstractArrayRead___length].l; /* _length on <var_values:Array[Object]> */
+var2 = var_values->attrs[COLOR_core__array__AbstractArrayRead___length].l; /* _length on <var_values:Array[Object]> */
 var = var2;
 RET_LABEL1:(void)0;
 }
@@ -420,7 +420,7 @@ RET_LABEL4:(void)0;
 }
 {
 { /* Inline array#AbstractArrayRead#length (var3) on <var3:Array[String]> */
-var8 = var3->attrs[COLOR_standard__array__AbstractArrayRead___length].l; /* _length on <var3:Array[String]> */
+var8 = var3->attrs[COLOR_core__array__AbstractArrayRead___length].l; /* _length on <var3:Array[String]> */
 var6 = var8;
 RET_LABEL7:(void)0;
 }
@@ -443,37 +443,37 @@ RET_LABEL13:(void)0;
 }
 }
 {
-var15 = standard__file___Sys___stderr(var12);
+var15 = core__file___Sys___stderr(var12);
 }
 if (unlikely(varonce==NULL)) {
-var16 = NEW_standard__NativeArray(5l, &type_standard__NativeArray__standard__String);
+var16 = NEW_core__NativeArray(5l, &type_core__NativeArray__core__String);
 if (likely(varonce17!=NULL)) {
 var18 = varonce17;
 } else {
 var19 = "CSV error: Header declares ";
-var20 = standard___standard__NativeString___to_s_with_length(var19, 27l);
+var20 = core__flat___NativeString___to_s_full(var19, 27l, 27l);
 var18 = var20;
 varonce17 = var18;
 }
-((struct instance_standard__NativeArray*)var16)->values[0]=var18;
+((struct instance_core__NativeArray*)var16)->values[0]=var18;
 if (likely(varonce21!=NULL)) {
 var22 = varonce21;
 } else {
 var23 = " columns, record contains ";
-var24 = standard___standard__NativeString___to_s_with_length(var23, 26l);
+var24 = core__flat___NativeString___to_s_full(var23, 26l, 26l);
 var22 = var24;
 varonce21 = var22;
 }
-((struct instance_standard__NativeArray*)var16)->values[2]=var22;
+((struct instance_core__NativeArray*)var16)->values[2]=var22;
 if (likely(varonce25!=NULL)) {
 var26 = varonce25;
 } else {
 var27 = " values.\n";
-var28 = standard___standard__NativeString___to_s_with_length(var27, 9l);
+var28 = core__flat___NativeString___to_s_full(var27, 9l, 9l);
 var26 = var28;
 varonce25 = var26;
 }
-((struct instance_standard__NativeArray*)var16)->values[4]=var26;
+((struct instance_core__NativeArray*)var16)->values[4]=var26;
 } else {
 var16 = varonce;
 varonce = NULL;
@@ -492,68 +492,68 @@ RET_LABEL30:(void)0;
 }
 {
 { /* Inline array#AbstractArrayRead#length (var29) on <var29:Array[String]> */
-var34 = var29->attrs[COLOR_standard__array__AbstractArrayRead___length].l; /* _length on <var29:Array[String]> */
+var34 = var29->attrs[COLOR_core__array__AbstractArrayRead___length].l; /* _length on <var29:Array[String]> */
 var32 = var34;
 RET_LABEL33:(void)0;
 }
 }
-var35 = standard__string___Int___Object__to_s(var32);
-((struct instance_standard__NativeArray*)var16)->values[1]=var35;
+var35 = core__flat___Int___core__abstract_text__Object__to_s(var32);
+((struct instance_core__NativeArray*)var16)->values[1]=var35;
 {
 { /* Inline array#AbstractArrayRead#length (var_values) on <var_values:Array[Object]> */
-var38 = var_values->attrs[COLOR_standard__array__AbstractArrayRead___length].l; /* _length on <var_values:Array[Object]> */
+var38 = var_values->attrs[COLOR_core__array__AbstractArrayRead___length].l; /* _length on <var_values:Array[Object]> */
 var36 = var38;
 RET_LABEL37:(void)0;
 }
 }
-var39 = standard__string___Int___Object__to_s(var36);
-((struct instance_standard__NativeArray*)var16)->values[3]=var39;
+var39 = core__flat___Int___core__abstract_text__Object__to_s(var36);
+((struct instance_core__NativeArray*)var16)->values[3]=var39;
 {
-var40 = ((val*(*)(val* self))(var16->class->vft[COLOR_standard__string__NativeArray__native_to_s]))(var16); /* native_to_s on <var16:NativeArray[String]>*/
+var40 = ((val*(*)(val* self))(var16->class->vft[COLOR_core__abstract_text__NativeArray__native_to_s]))(var16); /* native_to_s on <var16:NativeArray[String]>*/
 }
 varonce = var16;
 {
-standard___standard__FileWriter___standard__stream__Writer__write(var15, var40); /* Direct call file#FileWriter#write on <var15:Writer>*/
+core___core__FileWriter___core__stream__Writer__write(var15, var40); /* Direct call file#FileWriter#write on <var15:Writer>*/
 }
 PRINT_ERROR("Runtime error: %s", "Assert failed");
 PRINT_ERROR(" (%s:%d)\n", FILE_csv, 81);
 fatal_exit(1);
 }
-var41 = NEW_standard__Array(&type_standard__Array__standard__String);
+var41 = NEW_core__Array(&type_core__Array__core__String);
 {
-standard___standard__Array___standard__kernel__Object__init(var41); /* Direct call array#Array#init on <var41:Array[String]>*/
+core___core__Array___core__kernel__Object__init(var41); /* Direct call array#Array#init on <var41:Array[String]>*/
 }
 var_record = var41;
 var_ = var_values;
 {
-var42 = standard___standard__AbstractArrayRead___standard__abstract_collection__Collection__iterator(var_);
+var42 = core___core__AbstractArrayRead___core__abstract_collection__Collection__iterator(var_);
 }
 var_43 = var42;
 for(;;) {
 {
-var44 = standard__array___standard__array__ArrayIterator___standard__abstract_collection__Iterator__is_ok(var_43);
+var44 = ((short int(*)(val* self))((((long)var_43&3)?class_info[((long)var_43&3)]:var_43->class)->vft[COLOR_core__abstract_collection__Iterator__is_ok]))(var_43); /* is_ok on <var_43:IndexedIterator[Object]>*/
 }
 if (var44){
+} else {
+goto BREAK_label;
+}
 {
-var45 = standard__array___standard__array__ArrayIterator___standard__abstract_collection__Iterator__item(var_43);
+var45 = ((val*(*)(val* self))((((long)var_43&3)?class_info[((long)var_43&3)]:var_43->class)->vft[COLOR_core__abstract_collection__Iterator__item]))(var_43); /* item on <var_43:IndexedIterator[Object]>*/
 }
 var_value = var45;
 {
-var46 = ((val*(*)(val* self))((((long)var_value&3)?class_info[((long)var_value&3)]:var_value->class)->vft[COLOR_standard__string__Object__to_s]))(var_value); /* to_s on <var_value:Object>*/
+var46 = ((val*(*)(val* self))((((long)var_value&3)?class_info[((long)var_value&3)]:var_value->class)->vft[COLOR_core__abstract_text__Object__to_s]))(var_value); /* to_s on <var_value:Object>*/
 }
 {
-standard___standard__Array___standard__abstract_collection__SimpleCollection__add(var_record, var46); /* Direct call array#Array#add on <var_record:Array[String]>*/
+core___core__Array___core__abstract_collection__SimpleCollection__add(var_record, var46); /* Direct call array#Array#add on <var_record:Array[String]>*/
 }
 {
-standard__array___standard__array__ArrayIterator___standard__abstract_collection__Iterator__next(var_43); /* Direct call array#ArrayIterator#next on <var_43:ArrayIterator[Object]>*/
-}
-} else {
-goto BREAK_label;
+((void(*)(val* self))((((long)var_43&3)?class_info[((long)var_43&3)]:var_43->class)->vft[COLOR_core__abstract_collection__Iterator__next]))(var_43); /* next on <var_43:IndexedIterator[Object]>*/
 }
 }
 BREAK_label: (void)0;
 {
-standard__array___standard__array__ArrayIterator___standard__abstract_collection__Iterator__finish(var_43); /* Direct call array#ArrayIterator#finish on <var_43:ArrayIterator[Object]>*/
+((void(*)(val* self))((((long)var_43&3)?class_info[((long)var_43&3)]:var_43->class)->vft[COLOR_core__abstract_collection__Iterator__finish]))(var_43); /* finish on <var_43:IndexedIterator[Object]>*/
 }
 {
 { /* Inline csv#CsvDocument#records (self) on <self:CsvDocument> */
@@ -568,12 +568,12 @@ RET_LABEL48:(void)0;
 }
 }
 {
-standard___standard__Array___standard__abstract_collection__SimpleCollection__add(var47, var_record); /* Direct call array#Array#add on <var47:Array[Array[String]]>*/
+core___core__Array___core__abstract_collection__SimpleCollection__add(var47, var_record); /* Direct call array#Array#add on <var47:Array[Array[String]]>*/
 }
 RET_LABEL:;
 }
 /* method csv#CsvDocument#write_to for (self: CsvDocument, Writer) */
-void csv___csv__CsvDocument___standard__stream__Writable__write_to(val* self, val* p0) {
+void csv___csv__CsvDocument___core__stream__Writable__write_to(val* self, val* p0) {
 val* var_stream /* var stream: Writer */;
 val* var /* : CsvWriter */;
 val* var1 /* : CsvFormat */;
@@ -584,8 +584,8 @@ val* var6 /* : Array[String] */;
 val* var7 /* : Array[Array[String]] */;
 val* var9 /* : Array[Array[String]] */;
 val* var_ /* var : Array[Array[String]] */;
-val* var10 /* : ArrayIterator[nullable Object] */;
-val* var_11 /* var : ArrayIterator[Array[String]] */;
+val* var10 /* : IndexedIterator[nullable Object] */;
+val* var_11 /* var : IndexedIterator[Array[String]] */;
 short int var12 /* : Bool */;
 val* var13 /* : nullable Object */;
 val* var_record /* var record: Array[String] */;
@@ -636,31 +636,31 @@ RET_LABEL8:(void)0;
 }
 var_ = var7;
 {
-var10 = standard___standard__AbstractArrayRead___standard__abstract_collection__Collection__iterator(var_);
+var10 = core___core__AbstractArrayRead___core__abstract_collection__Collection__iterator(var_);
 }
 var_11 = var10;
 for(;;) {
 {
-var12 = standard__array___standard__array__ArrayIterator___standard__abstract_collection__Iterator__is_ok(var_11);
+var12 = ((short int(*)(val* self))((((long)var_11&3)?class_info[((long)var_11&3)]:var_11->class)->vft[COLOR_core__abstract_collection__Iterator__is_ok]))(var_11); /* is_ok on <var_11:IndexedIterator[Array[String]]>*/
 }
 if (var12){
+} else {
+goto BREAK_label;
+}
 {
-var13 = standard__array___standard__array__ArrayIterator___standard__abstract_collection__Iterator__item(var_11);
+var13 = ((val*(*)(val* self))((((long)var_11&3)?class_info[((long)var_11&3)]:var_11->class)->vft[COLOR_core__abstract_collection__Iterator__item]))(var_11); /* item on <var_11:IndexedIterator[Array[String]]>*/
 }
 var_record = var13;
 {
 csv___csv__CsvWriter___write_sequence(var_writer, var_record); /* Direct call csv#CsvWriter#write_sequence on <var_writer:CsvWriter>*/
 }
 {
-standard__array___standard__array__ArrayIterator___standard__abstract_collection__Iterator__next(var_11); /* Direct call array#ArrayIterator#next on <var_11:ArrayIterator[Array[String]]>*/
-}
-} else {
-goto BREAK_label;
+((void(*)(val* self))((((long)var_11&3)?class_info[((long)var_11&3)]:var_11->class)->vft[COLOR_core__abstract_collection__Iterator__next]))(var_11); /* next on <var_11:IndexedIterator[Array[String]]>*/
 }
 }
 BREAK_label: (void)0;
 {
-standard__array___standard__array__ArrayIterator___standard__abstract_collection__Iterator__finish(var_11); /* Direct call array#ArrayIterator#finish on <var_11:ArrayIterator[Array[String]]>*/
+((void(*)(val* self))((((long)var_11&3)?class_info[((long)var_11&3)]:var_11->class)->vft[COLOR_core__abstract_collection__Iterator__finish]))(var_11); /* finish on <var_11:IndexedIterator[Array[String]]>*/
 }
 RET_LABEL:;
 }
@@ -718,15 +718,15 @@ val* var_format /* var format: CsvFormat */;
 var_ostream = p0;
 var_format = p1;
 {
-{ /* Inline csv#CsvWriter#ostream= (self,var_ostream) on <self:CsvWriter> */
-self->attrs[COLOR_csv__CsvWriter___ostream].val = var_ostream; /* _ostream on <self:CsvWriter> */
-RET_LABEL1:(void)0;
+((void(*)(val* self, val* p0))(self->class->vft[COLOR_csv__CsvWriter__ostream_61d]))(self, var_ostream); /* ostream= on <self:CsvWriter>*/
 }
+{
+((void(*)(val* self))(self->class->vft[COLOR_core__kernel__Object__init]))(self); /* init on <self:CsvWriter>*/
 }
 {
 { /* Inline csv#CsvWriter#format= (self,var_format) on <self:CsvWriter> */
 self->attrs[COLOR_csv__CsvWriter___format].val = var_format; /* _format on <self:CsvWriter> */
-RET_LABEL2:(void)0;
+RET_LABEL1:(void)0;
 }
 }
 RET_LABEL:;
@@ -763,12 +763,12 @@ val* var26 /* : String */;
 val* var28 /* : String */;
 var_row = p0;
 {
-var = ((short int(*)(val* self))((((long)var_row&3)?class_info[((long)var_row&3)]:var_row->class)->vft[COLOR_standard__abstract_collection__Collection__is_empty]))(var_row); /* is_empty on <var_row:SequenceRead[Object]>*/
+var = ((short int(*)(val* self))((((long)var_row&3)?class_info[((long)var_row&3)]:var_row->class)->vft[COLOR_core__abstract_collection__Collection__is_empty]))(var_row); /* is_empty on <var_row:SequenceRead[Object]>*/
 }
 var1 = !var;
 if (var1){
 {
-var2 = ((val*(*)(val* self))((((long)var_row&3)?class_info[((long)var_row&3)]:var_row->class)->vft[COLOR_standard__abstract_collection__Collection__iterator]))(var_row); /* iterator on <var_row:SequenceRead[Object]>*/
+var2 = ((val*(*)(val* self))((((long)var_row&3)?class_info[((long)var_row&3)]:var_row->class)->vft[COLOR_core__abstract_collection__Collection__iterator]))(var_row); /* iterator on <var_row:SequenceRead[Object]>*/
 }
 var_i = var2;
 {
@@ -791,33 +791,36 @@ RET_LABEL7:(void)0;
 }
 }
 {
-var9 = standard__string___Char___Object__to_s(var6);
+var9 = core__abstract_text___Char___Object__to_s(var6);
 }
 var_separator = var9;
 {
-var10 = ((val*(*)(val* self))((((long)var_i&3)?class_info[((long)var_i&3)]:var_i->class)->vft[COLOR_standard__abstract_collection__Iterator__item]))(var_i); /* item on <var_i:IndexedIterator[Object]>*/
+var10 = ((val*(*)(val* self))((((long)var_i&3)?class_info[((long)var_i&3)]:var_i->class)->vft[COLOR_core__abstract_collection__Iterator__item]))(var_i); /* item on <var_i:IndexedIterator[Object]>*/
 }
 {
-var11 = ((val*(*)(val* self))((((long)var10&3)?class_info[((long)var10&3)]:var10->class)->vft[COLOR_standard__string__Object__to_s]))(var10); /* to_s on <var10:nullable Object(Object)>*/
+var11 = ((val*(*)(val* self))((((long)var10&3)?class_info[((long)var10&3)]:var10->class)->vft[COLOR_core__abstract_text__Object__to_s]))(var10); /* to_s on <var10:nullable Object(Object)>*/
 }
 {
 csv___csv__CsvWriter___write_cell(self, var11); /* Direct call csv#CsvWriter#write_cell on <self:CsvWriter>*/
 }
 {
-((void(*)(val* self))((((long)var_i&3)?class_info[((long)var_i&3)]:var_i->class)->vft[COLOR_standard__abstract_collection__Iterator__next]))(var_i); /* next on <var_i:IndexedIterator[Object]>*/
+((void(*)(val* self))((((long)var_i&3)?class_info[((long)var_i&3)]:var_i->class)->vft[COLOR_core__abstract_collection__Iterator__next]))(var_i); /* next on <var_i:IndexedIterator[Object]>*/
 }
 var_ = var_i;
 {
-var12 = standard___standard__Iterator___iterator(var_);
+var12 = core___core__Iterator___iterator(var_);
 }
 var_13 = var12;
 for(;;) {
 {
-var14 = ((short int(*)(val* self))((((long)var_13&3)?class_info[((long)var_13&3)]:var_13->class)->vft[COLOR_standard__abstract_collection__Iterator__is_ok]))(var_13); /* is_ok on <var_13:Iterator[Object]>*/
+var14 = ((short int(*)(val* self))((((long)var_13&3)?class_info[((long)var_13&3)]:var_13->class)->vft[COLOR_core__abstract_collection__Iterator__is_ok]))(var_13); /* is_ok on <var_13:Iterator[Object]>*/
 }
 if (var14){
+} else {
+goto BREAK_label;
+}
 {
-var15 = ((val*(*)(val* self))((((long)var_13&3)?class_info[((long)var_13&3)]:var_13->class)->vft[COLOR_standard__abstract_collection__Iterator__item]))(var_13); /* item on <var_13:Iterator[Object]>*/
+var15 = ((val*(*)(val* self))((((long)var_13&3)?class_info[((long)var_13&3)]:var_13->class)->vft[COLOR_core__abstract_collection__Iterator__item]))(var_13); /* item on <var_13:Iterator[Object]>*/
 }
 var_cell = var15;
 {
@@ -833,24 +836,21 @@ RET_LABEL17:(void)0;
 }
 }
 {
-standard___standard__FileWriter___standard__stream__Writer__write(var16, var_separator); /* Direct call file#FileWriter#write on <var16:Writer>*/
+core___core__FileWriter___core__stream__Writer__write(var16, var_separator); /* Direct call file#FileWriter#write on <var16:Writer>*/
 }
 {
-var19 = ((val*(*)(val* self))((((long)var_cell&3)?class_info[((long)var_cell&3)]:var_cell->class)->vft[COLOR_standard__string__Object__to_s]))(var_cell); /* to_s on <var_cell:Object>*/
+var19 = ((val*(*)(val* self))((((long)var_cell&3)?class_info[((long)var_cell&3)]:var_cell->class)->vft[COLOR_core__abstract_text__Object__to_s]))(var_cell); /* to_s on <var_cell:Object>*/
 }
 {
 csv___csv__CsvWriter___write_cell(self, var19); /* Direct call csv#CsvWriter#write_cell on <self:CsvWriter>*/
 }
 {
-((void(*)(val* self))((((long)var_13&3)?class_info[((long)var_13&3)]:var_13->class)->vft[COLOR_standard__abstract_collection__Iterator__next]))(var_13); /* next on <var_13:Iterator[Object]>*/
-}
-} else {
-goto BREAK_label;
+((void(*)(val* self))((((long)var_13&3)?class_info[((long)var_13&3)]:var_13->class)->vft[COLOR_core__abstract_collection__Iterator__next]))(var_13); /* next on <var_13:Iterator[Object]>*/
 }
 }
 BREAK_label: (void)0;
 {
-((void(*)(val* self))((((long)var_13&3)?class_info[((long)var_13&3)]:var_13->class)->vft[COLOR_standard__abstract_collection__Iterator__finish]))(var_13); /* finish on <var_13:Iterator[Object]>*/
+((void(*)(val* self))((((long)var_13&3)?class_info[((long)var_13&3)]:var_13->class)->vft[COLOR_core__abstract_collection__Iterator__finish]))(var_13); /* finish on <var_13:Iterator[Object]>*/
 }
 } else {
 }
@@ -891,7 +891,7 @@ RET_LABEL27:(void)0;
 }
 }
 {
-standard___standard__FileWriter___standard__stream__Writer__write(var20, var26); /* Direct call file#FileWriter#write on <var20:Writer>*/
+core___core__FileWriter___core__stream__Writer__write(var20, var26); /* Direct call file#FileWriter#write on <var20:Writer>*/
 }
 RET_LABEL:;
 }
@@ -916,7 +916,7 @@ val* var18 /* : CsvFormat */;
 val* var19 /* : Text */;
 var_cell = p0;
 {
-var = standard___standard__Text___is_empty(var_cell);
+var = ((short int(*)(val* self))(var_cell->class->vft[COLOR_core__abstract_text__Text__is_empty]))(var_cell); /* is_empty on <var_cell:String>*/
 }
 if (var){
 goto RET_LABEL;
@@ -965,7 +965,7 @@ RET_LABEL11:(void)0;
 }
 }
 {
-standard___standard__FileWriter___standard__stream__Writer__write(var10, var_cell); /* Direct call file#FileWriter#write on <var10:Writer>*/
+core___core__FileWriter___core__stream__Writer__write(var10, var_cell); /* Direct call file#FileWriter#write on <var10:Writer>*/
 }
 } else {
 {
@@ -996,20 +996,20 @@ RET_LABEL17:(void)0;
 var19 = csv___csv__CsvFormat___escape_cell(var16, var_cell);
 }
 {
-standard___standard__FileWriter___standard__stream__Writer__write(var13, var19); /* Direct call file#FileWriter#write on <var13:Writer>*/
+core___core__FileWriter___core__stream__Writer__write(var13, var19); /* Direct call file#FileWriter#write on <var13:Writer>*/
 }
 }
 RET_LABEL:;
 }
 /* method csv#CsvWriter#init for (self: CsvWriter) */
-void csv___csv__CsvWriter___standard__kernel__Object__init(val* self) {
+void csv___csv__CsvWriter___core__kernel__Object__init(val* self) {
 {
-((void(*)(val* self))(self->class->vft[COLOR_csv___csv__CsvWriter___standard__kernel__Object__init]))(self); /* init on <self:CsvWriter>*/
+((void(*)(val* self))(self->class->vft[COLOR_csv___csv__CsvWriter___core__kernel__Object__init]))(self); /* init on <self:CsvWriter>*/
 }
 RET_LABEL:;
 }
 /* method csv#Sys#rfc4180 for (self: Sys): CsvFormat */
-val* csv___standard__Sys___rfc4180(val* self) {
+val* csv___core__Sys___rfc4180(val* self) {
 val* var /* : CsvFormat */;
 static val* varonce;
 static int varonce_guard;
@@ -1018,7 +1018,7 @@ val* var2 /* : CsvFormat */;
 static val* varonce3;
 val* var4 /* : String */;
 char* var5 /* : NativeString */;
-val* var6 /* : FlatString */;
+val* var6 /* : String */;
 if (likely(varonce_guard)) {
 var1 = varonce;
 } else {
@@ -1027,7 +1027,7 @@ if (likely(varonce3!=NULL)) {
 var4 = varonce3;
 } else {
 var5 = "\015\n";
-var6 = standard___standard__NativeString___to_s_with_length(var5, 2l);
+var6 = core__flat___NativeString___to_s_full(var5, 2l, 2l);
 var4 = var6;
 varonce3 = var4;
 }
@@ -1041,7 +1041,7 @@ varonce3 = var4;
 ((void(*)(val* self, val* p0))(var2->class->vft[COLOR_csv__CsvFormat__eol_61d]))(var2, var4); /* eol= on <var2:CsvFormat>*/
 }
 {
-((void(*)(val* self))(var2->class->vft[COLOR_standard__kernel__Object__init]))(var2); /* init on <var2:CsvFormat>*/
+((void(*)(val* self))(var2->class->vft[COLOR_core__kernel__Object__init]))(var2); /* init on <var2:CsvFormat>*/
 }
 var1 = var2;
 varonce = var1;
