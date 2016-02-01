@@ -83,7 +83,7 @@ class Sprite
 		simple_2d_program.color.array_enabled = false
 		simple_2d_program.scale.array_enabled = false
 
-		simple_2d_program.translation.uniform(center.x, -center.y, center.z, 0.0)
+		simple_2d_program.translation.uniform(center.x, center.y, center.z, 0.0)
 		simple_2d_program.color.uniform(tint[0], tint[1], tint[2], tint[3])
 		simple_2d_program.scale.uniform scale
 
