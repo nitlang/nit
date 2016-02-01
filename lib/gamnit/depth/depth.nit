@@ -56,11 +56,13 @@ redef class App
 			end
 		end
 
+		frame_core_world_sprites display
+
 		# Toggle writing to the depth buffer for particles effects
 		glDepthMask false
 		for system in particle_systems do system.draw
 		glDepthMask true
 
-		frame_core_flat display
+		frame_core_ui_sprites display
 	end
 end
