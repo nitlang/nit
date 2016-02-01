@@ -55,6 +55,9 @@ class Sprite
 	# Rotation on the Z axis
 	var rotation = 0.0 is writable
 
+	# Mirror `texture` horizontally, inverting each pixel on the X axis
+	var invert_x = false is writable
+
 	# Scale applied to this sprite
 	var scale = 1.0 is writable
 
@@ -86,7 +89,10 @@ class Sprite
 
 		simple_2d_program.use_texture.uniform true
 		simple_2d_program.texture.uniform 0
-		simple_2d_program.tex_coord.array(texture.texture_coords, 2)
+		simple_2d_program.tex_coord.array(
+			if invert_x then
+				texture.texture_coords_invert_x
+			else texture.texture_coords, 2)
 		simple_2d_program.coord.array(texture.vertices, 3)
 
 		simple_2d_program.rotation.uniform new Matrix.rotation(rotation, 0.0, 0.0, 1.0)
@@ -293,6 +299,18 @@ redef class Texture
 
 		var texture_coords = new Array[Float]
 		for v in [c, d, a, b] do texture_coords.add_all v
+		return texture_coords
+	end
+
+	# Coordinates of this texture on the `root` texture, with the X axis inverted
+	private var texture_coords_invert_x: Array[Float] is lazy do
+		var a = [offset_left,  offset_bottom]
+		var b = [offset_right, offset_bottom]
+		var c = [offset_left,  offset_top]
+		var d = [offset_right, offset_top]
+
+		var texture_coords = new Array[Float]
+		for v in [d, c, b, a] do texture_coords.add_all v
 		return texture_coords
 	end
 end
