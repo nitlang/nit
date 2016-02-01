@@ -52,7 +52,7 @@ class Sprite
 	# Position of this sprite in world coordinates
 	var center: Point3d[Float] is writable
 
-	# Rotation on the Z axis
+	# Rotation on the Z axis, where 0.0 points right and `0.5*pi` points up
 	var rotation = 0.0 is writable
 
 	# Mirror `texture` horizontally, inverting each pixel on the X axis
@@ -95,7 +95,7 @@ class Sprite
 			else texture.texture_coords, 2)
 		simple_2d_program.coord.array(texture.vertices, 3)
 
-		simple_2d_program.rotation.uniform new Matrix.rotation(rotation, 0.0, 0.0, 1.0)
+		simple_2d_program.rotation.uniform new Matrix.rotation(rotation, 0.0, 0.0, -1.0)
 
 		glDrawArrays(gl_TRIANGLE_STRIP, 0, 4)
 	end
