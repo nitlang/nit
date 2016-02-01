@@ -128,7 +128,7 @@ redef class App
 	# UI sprites to draw in reference to `ui_camera`, over world `sprites`
 	var ui_sprites: Sequence[Sprite] = new List[Sprite]
 
-	private var clock = new Clock
+	private var clock = new Clock is lazy
 
 	redef fun on_create
 	do
