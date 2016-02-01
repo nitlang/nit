@@ -30,7 +30,7 @@ redef class App
 		world_camera.near = 0.1
 
 		# Prepare programs
-		var programs = [versatile_program, normals_program, explosion_program, smoke_program: GamnitProgram]
+		var programs = [versatile_program, normals_program, explosion_program, smoke_program, static_program: GamnitProgram]
 		for program in programs do
 			program.compile_and_link
 			var gamnit_error = program.error

@@ -39,6 +39,9 @@ import depth_core
 
 redef class App
 
+	# Graphics program to display static non-moving particles
+	var static_program = new ParticleProgram
+
 	# Graphics program to display blowing up particles
 	var explosion_program = new ExplosionProgram
 
@@ -153,7 +156,7 @@ end
 #
 # This program should be subclassed to create custom particle effects.
 # Either `vertex_shader_source` and `vertex_shader_core` can be refined.
-abstract class ParticleProgram
+class ParticleProgram
 	super GamnitProgramFromSource
 
 	redef var vertex_shader_source = """
