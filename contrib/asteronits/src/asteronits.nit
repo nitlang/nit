@@ -129,7 +129,7 @@ redef class SpacialObject
 	redef fun do_turn(dt)
 	do
 		super
-		sprite.rotation = rotation + pi/2.0
+		sprite.rotation = rotation - pi/2.0
 	end
 
 	redef fun destroy
@@ -191,7 +191,7 @@ redef class Ship
 		thrust_sprite.center.x = center.x - dist_to_engine*rotation.cos
 		thrust_sprite.center.y = center.y - dist_to_engine*rotation.sin
 		thrust_sprite.center.z = center.z
-		thrust_sprite.rotation = rotation + pi/2.0
+		thrust_sprite.rotation = rotation - pi/2.0
 
 		# Show or hide the thrust sprite
 		if applied_thrust > 0.0 then
@@ -231,8 +231,8 @@ redef class KeyEvent
 	# How does this event affect the ship thrust?
 	fun rotation: Float
 	do
-		if is_arrow_right or name == "d" then return 1.0
-		if is_arrow_left or name == "a" then return -1.0
+		if is_arrow_right or name == "d" then return -1.0
+		if is_arrow_left or name == "a" then return 1.0
 		return 0.0
 	end
 end
