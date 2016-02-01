@@ -59,7 +59,15 @@ class Sprite
 	var scale = 1.0 is writable
 
 	# Transparency applied to the texture on draw
-	var alpha = 1.0 is writable
+	fun alpha: Float do return tint[3]
+
+	# Transparency applied to the texture on draw
+	fun alpha=(value: Float) do tint[3] = value
+
+	# Tint applied to the texture on draw
+	#
+	# Require: `tint.length == 4`
+	var tint: Array[Float] = [1.0, 1.0, 1.0, 1.0] is writable
 
 	private fun draw
 	do
@@ -73,7 +81,7 @@ class Sprite
 		simple_2d_program.scale.array_enabled = false
 
 		simple_2d_program.translation.uniform(center.x, -center.y, center.z, 0.0)
-		simple_2d_program.color.uniform(1.0, 1.0, 1.0, alpha)
+		simple_2d_program.color.uniform(tint[0], tint[1], tint[2], tint[3])
 		simple_2d_program.scale.uniform scale
 
 		simple_2d_program.use_texture.uniform true
