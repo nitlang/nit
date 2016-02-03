@@ -30,7 +30,7 @@ redef class App
 		world_camera.near = 0.1
 
 		# Prepare programs
-		var programs = [versatile_program, normals_program, explosion_program, smoke_program: GamnitProgram]
+		var programs = [versatile_program, normals_program, explosion_program, smoke_program, static_program: GamnitProgram]
 		for program in programs do
 			program.compile_and_link
 			var gamnit_error = program.error
@@ -56,11 +56,13 @@ redef class App
 			end
 		end
 
+		frame_core_world_sprites display
+
 		# Toggle writing to the depth buffer for particles effects
 		glDepthMask false
 		for system in particle_systems do system.draw
 		glDepthMask true
 
-		frame_core_flat display
+		frame_core_ui_sprites display
 	end
 end

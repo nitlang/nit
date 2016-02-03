@@ -55,11 +55,22 @@ class Sprite
 	# Rotation on the Z axis
 	var rotation = 0.0 is writable
 
+	# Mirror `texture` horizontally, inverting each pixel on the X axis
+	var invert_x = false is writable
+
 	# Scale applied to this sprite
 	var scale = 1.0 is writable
 
 	# Transparency applied to the texture on draw
-	var alpha = 1.0 is writable
+	fun alpha: Float do return tint[3]
+
+	# Transparency applied to the texture on draw
+	fun alpha=(value: Float) do tint[3] = value
+
+	# Tint applied to the texture on draw
+	#
+	# Require: `tint.length == 4`
+	var tint: Array[Float] = [1.0, 1.0, 1.0, 1.0] is writable
 
 	private fun draw
 	do
@@ -73,12 +84,15 @@ class Sprite
 		simple_2d_program.scale.array_enabled = false
 
 		simple_2d_program.translation.uniform(center.x, -center.y, center.z, 0.0)
-		simple_2d_program.color.uniform(1.0, 1.0, 1.0, alpha)
+		simple_2d_program.color.uniform(tint[0], tint[1], tint[2], tint[3])
 		simple_2d_program.scale.uniform scale
 
 		simple_2d_program.use_texture.uniform true
 		simple_2d_program.texture.uniform 0
-		simple_2d_program.tex_coord.array(texture.texture_coords, 2)
+		simple_2d_program.tex_coord.array(
+			if invert_x then
+				texture.texture_coords_invert_x
+			else texture.texture_coords, 2)
 		simple_2d_program.coord.array(texture.vertices, 3)
 
 		simple_2d_program.rotation.uniform new Matrix.rotation(rotation, 0.0, 0.0, 1.0)
@@ -114,7 +128,7 @@ redef class App
 	# UI sprites to draw in reference to `ui_camera`, over world `sprites`
 	var ui_sprites: Sequence[Sprite] = new List[Sprite]
 
-	private var clock = new Clock
+	private var clock = new Clock is lazy
 
 	redef fun on_create
 	do
@@ -184,10 +198,14 @@ redef class App
 	end
 
 	# Draw the whole screen, all `glDraw...` calls should be executed here
-	protected fun frame_core_draw(display: GamnitDisplay) do frame_core_flat display
+	protected fun frame_core_draw(display: GamnitDisplay)
+	do
+		frame_core_world_sprites display
+		frame_core_ui_sprites display
+	end
 
-	# Draw sprites in `sprites` and `ui_sprites`
-	protected fun frame_core_flat(display: GamnitDisplay)
+	# Draw world sprites from `sprites`
+	protected fun frame_core_world_sprites(display: GamnitDisplay)
 	do
 		simple_2d_program.use
 
@@ -200,6 +218,17 @@ redef class App
 		# World sprites
 		simple_2d_program.mvp.uniform world_camera.mvp_matrix
 		for sprite in sprites do sprite.draw
+	end
+
+	# Draw UI sprites from `ui_sprites`
+	protected fun frame_core_ui_sprites(display: GamnitDisplay)
+	do
+		simple_2d_program.use
+
+		# Set constant configs
+		simple_2d_program.coord.array_enabled = true
+		simple_2d_program.tex_coord.array_enabled = true
+		simple_2d_program.color.array_enabled = false
 
 		# Reset only the depth buffer
 		glClear gl_DEPTH_BUFFER_BIT
@@ -227,7 +256,7 @@ redef class App
 		var display = display
 		assert display != null
 		glClear gl_COLOR_BUFFER_BIT
-		frame_core_flat display
+		frame_core_ui_sprites display
 		display.flip
 
 		ui_sprites.remove splash
@@ -270,6 +299,18 @@ redef class Texture
 
 		var texture_coords = new Array[Float]
 		for v in [c, d, a, b] do texture_coords.add_all v
+		return texture_coords
+	end
+
+	# Coordinates of this texture on the `root` texture, with the X axis inverted
+	private var texture_coords_invert_x: Array[Float] is lazy do
+		var a = [offset_left,  offset_bottom]
+		var b = [offset_right, offset_bottom]
+		var c = [offset_left,  offset_top]
+		var d = [offset_right, offset_top]
+
+		var texture_coords = new Array[Float]
+		for v in [d, c, b, a] do texture_coords.add_all v
 		return texture_coords
 	end
 end

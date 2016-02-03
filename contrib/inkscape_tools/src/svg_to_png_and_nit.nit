@@ -207,7 +207,7 @@ class GamnitImageSetSrc
 			var lines = new Array[String]
 			for image in images do
 				var coordinates = document.coordinates(image)
-				lines.add "\t\tmain_image.subtexture({coordinates})"
+				lines.add "\t\troot_texture.subtexture({coordinates})"
 			end
 
 			attributes.add """
