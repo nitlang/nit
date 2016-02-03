@@ -158,6 +158,7 @@ kwisset = 'isset';
 kwlabel = 'label';
 kwwith = 'with';
 kwdebug = '__debug__';
+kwyield = 'yield';
 
 opar = '(';
 cpar = ')';
@@ -440,6 +441,7 @@ stmt~withelse~noexpr~nopar {-> expr}
 	= {vardecl} vardecl {-> vardecl.expr}
 	| {assign} assignment~nopar {-> assignment~nopar.expr}
 	| {return} kwreturn expr? {-> New expr.return(kwreturn, expr)}
+	| {yield} kwyield expr {-> New expr.yield(kwyield, expr)}
 	| {break} kwbreak label? {-> New expr.break(kwbreak, label)}
 	| {abort} kwabort {-> New expr.abort(kwabort)}
 	| {continue} kwcontinue label? {-> New expr.continue(kwcontinue, label)}
@@ -957,6 +959,7 @@ label = kwlabel id?;
 expr	= {block} expr* kwend? 
 	| {vardecl} kwvar? id type? assign? expr? annotations?
 	| {return} kwreturn? expr?
+	| {yield} kwyield expr
 	| {break} kwbreak label?
 	| {abort} kwabort
 	| {continue} kwcontinue? label?
