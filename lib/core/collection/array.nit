@@ -992,8 +992,7 @@ universal NativeArray[E]
 	fun copy_to(dest: NativeArray[E], length: Int) is intern
 
 	# Copy `length` items to `dest` starting from `dest`.
-	fun memmove(start: Int, length: Int, dest: NativeArray[E], dest_start: Int) do
-		# TODO native one
+	fun memmove(start: Int, length: Int, dest: NativeArray[E], dest_start: Int) is intern do
 		if start < dest_start then
 			var i = length
 			while i > 0 do
