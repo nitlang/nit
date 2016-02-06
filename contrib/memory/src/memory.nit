@@ -137,7 +137,7 @@ class Button
 			text_color.set(display, p)
 			display.blit_centered(text, x, y - h/8.0)
 			if text_max > 0 then
-				app.blit_number(text_max, app.scale, x, y + h/8.0)
+				app.blit_number(text_max, app.scale, x, y + h/8.0, true)
 			end
 		end
 		if display isa Opengles1Display then
@@ -869,10 +869,10 @@ redef class App
 	end
 
 	# Blit a number somewhere
-	fun blit_number(number: Int, scale: Float, x, y: Float)
+	fun blit_number(number: Int, scale: Float, x, y: Float, centered: nullable Bool)
 	do
 		for img in number_images.imgs do img.scale = scale
-		display.blit_number(number_images, number, x.to_i, y.to_i)
+		display.blit_number(number_images, number, x.to_i, y.to_i, centered)
 	end
 
 	# Images with the numbers
