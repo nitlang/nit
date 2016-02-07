@@ -154,11 +154,13 @@ class TexturedMaterial
 				var xd = sample_used_texture.offset_right - xa
 				var ya = sample_used_texture.offset_top
 				var yd = sample_used_texture.offset_bottom - ya
+				xd *= 0.999
+				yd *= 0.999
 
 				var tex_coords = new Array[Float].with_capacity(mesh.texture_coords.length)
 				for i in [0..mesh.texture_coords.length/2[ do
 					tex_coords[i*2]   = xa + xd * mesh.texture_coords[i*2]
-					tex_coords[i*2+1] = ya + yd * mesh.texture_coords[i*2+1]
+					tex_coords[i*2+1] = 1.0 - (ya + yd * mesh.texture_coords[i*2+1])
 				end
 
 				program.tex_coord.array(tex_coords, 2)
