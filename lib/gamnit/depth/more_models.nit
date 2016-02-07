@@ -168,7 +168,7 @@ private class ModelFromObj
 		# Load textures need for these materials
 		for name in texture_names do
 			if not asset_textures_by_name.keys.has(name) then
-				var tex = new GamnitAssetTexture(name)
+				var tex = new TextureAsset(name)
 				asset_textures_by_name[name] = tex
 			end
 		end
@@ -379,7 +379,7 @@ end
 
 redef class Sys
 	# Textures loaded from .mtl files for models
-	var asset_textures_by_name = new Map[String, GamnitAssetTexture]
+	var asset_textures_by_name = new Map[String, TextureAsset]
 
 	# All instantiated asset models
 	var models = new Set[ModelAsset]

@@ -44,7 +44,7 @@ var attributes = new Array[String]
 # Insert the first attribute, to load the root texture
 var png_file = "images" / xml_file.basename("xml") + "png"
 attributes.add """
-	var root_texture = new Texture("{{{png_file}}}")"""
+	var root_texture = new TextureAsset("{{{png_file}}}")"""
 
 # Read XML file
 var content = xml_file.to_path.read_all

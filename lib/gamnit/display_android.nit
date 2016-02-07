@@ -48,7 +48,7 @@ redef class GamnitDisplay
 	redef fun close do close_egl
 end
 
-redef class GamnitAssetTexture
+redef class TextureAsset
 
 	redef fun load_from_platform
 	do

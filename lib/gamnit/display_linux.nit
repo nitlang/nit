@@ -95,7 +95,7 @@ redef class GamnitDisplay
 	end
 end
 
-redef class GamnitAssetTexture
+redef class TextureAsset
 
 	redef fun load_from_platform
 	do
