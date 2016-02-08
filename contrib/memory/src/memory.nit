@@ -28,7 +28,7 @@
 module memory is
 	app_name("Memorize Shapes and Colors")
 	app_namespace "org.nitlanguage.memory"
-	app_version(0, 1, git_revision)
+	app_version(0, 2, git_revision)
 end
 
 import mnit
@@ -137,7 +137,7 @@ class Button
 			text_color.set(display, p)
 			display.blit_centered(text, x, y - h/8.0)
 			if text_max > 0 then
-				app.blit_number(text_max, app.scale, x, y + h/8.0)
+				app.blit_number(text_max, app.scale, x, y + h/8.0, true)
 			end
 		end
 		if display isa Opengles1Display then
@@ -161,6 +161,39 @@ class Button
 
 	# Return a new pos centered on the button
 	fun to_pos: Pos do return new Pos(x, y)
+end
+
+# A flying number to display rank of clicked button
+class Number
+	# The value to use
+	var value: Int
+
+	# The original position
+	var pos: Pos
+
+	# The color of the number
+	var color: Color
+
+	# Time to live (downto 0.0)
+	var ttl = 5.0
+
+	# Draw on the display
+	fun blit_on(display: Display)
+	do
+		ttl -= 0.1
+
+		if ttl < 0.0 then return
+
+		var p = 1.0 - (ttl / 5.0)
+
+		var y = pos.y - (p * 40.0) * app.scale
+
+		color.set(display, p)
+		app.blit_number(value, app.scale * 2.0 * (1.0 + p), pos.x, y, true)
+		if display isa Opengles1Display then
+			display.reset_color
+		end
+	end
 end
 
 # A rbg color
@@ -526,6 +559,7 @@ redef class App
 		cpt = -1
 		path = null
 		error = 0
+		numbers.clear
 
 		# Ask for a redraw
 		first_frame = true
@@ -637,6 +671,9 @@ redef class App
 
 	# The current cursor path
 	var path: nullable BPath = null
+
+	# The current flying numbers
+	var numbers = new Array[Number]
 
 	# The reload button
 	var reload: Button is noautoinit
@@ -814,6 +851,7 @@ redef class App
 					var b = level[cpt]
 					b.ttl = 1.0
 					b.sound.play
+					numbers.add new Number(cpt+1, b.to_pos, b.color)
 					cpt += 1
 					setpath
 				else if cpt == level.length then
@@ -856,6 +894,11 @@ redef class App
 			b.blit_on(display)
 		end
 
+		# Display flying numbers
+		for b in numbers do
+			b.blit_on(display)
+		end
+
 		# Display the cursor
 		if path != null then
 			drawing.cursor.scale = scale
@@ -869,10 +912,10 @@ redef class App
 	end
 
 	# Blit a number somewhere
-	fun blit_number(number: Int, scale: Float, x, y: Float)
+	fun blit_number(number: Int, scale: Float, x, y: Float, centered: nullable Bool)
 	do
 		for img in number_images.imgs do img.scale = scale
-		display.blit_number(number_images, number, x.to_i, y.to_i)
+		display.blit_number(number_images, number, x.to_i, y.to_i, centered)
 	end
 
 	# Images with the numbers
@@ -894,6 +937,7 @@ redef class App
 		if b == level[cpt] then
 			b.sound.play
 			b.ttl = 1.0
+			numbers.add new Number(cpt+1, b.to_pos, b.color)
 
 			cpt += 1
 			if cpt >= level.length then
