@@ -78,12 +78,12 @@ redef class App
 		ui_camera.reset_height 800.0
 
 		var prev_sprite = new Sprite(ui_prev,
-			ui_camera.bottom_left.offset(200, -40, 0))
+			ui_camera.bottom_left.offset(200, 40, 0))
 		prev_sprite.scale = 0.5
 		ui_sprites.add prev_sprite
 
 		var next_sprite = new Sprite(ui_next,
-			ui_camera.bottom_right.offset(-165, -40, 0))
+			ui_camera.bottom_right.offset(-165, 40, 0))
 		next_sprite.scale = 0.5
 		ui_sprites.add next_sprite
 	end
