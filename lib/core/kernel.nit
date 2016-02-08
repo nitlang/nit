@@ -644,23 +644,17 @@ universal Byte
 	# `i` bits shift fo the left
 	#
 	#     assert 5u8 << 1    == 10u8
-	fun <<(i: Int): Byte is intern do return lsh(i)
-
-	private fun lsh(i: Int): Byte `{ return self << i; `}
+	fun <<(i: Int): Byte is intern `{ return self << i; `}
 
 	# `i` bits shift fo the right
 	#
 	#     assert 5u8 >> 1    == 2u8
-	fun >>(i: Int): Byte is intern do return rsh(i)
-
-	private fun rsh(i: Int): Byte `{ return self >> i; `}
+	fun >>(i: Int): Byte is intern `{ return self >> i; `}
 
 	# Returns the character equivalent of `self`
 	#
 	# REQUIRE: `self <= 127u8`
-	fun ascii: Char is intern do return ffi_ascii
-
-	private fun ffi_ascii: Char `{ return (uint32_t)self; `}
+	fun ascii: Char is intern `{ return (uint32_t)self; `}
 
 	redef fun to_i is intern
 	redef fun to_f is intern
@@ -749,16 +743,12 @@ universal Int
 	# `i` bits shift fo the left
 	#
 	#     assert 5 << 1    == 10
-	fun <<(i: Int): Int is intern do return lsh(i)
-
-	private fun lsh(i: Int): Int `{ return self << i; `}
+	fun <<(i: Int): Int is intern `{ return self << i; `}
 
 	# `i` bits shift fo the right
 	#
 	#     assert 5 >> 1    == 2
-	fun >>(i: Int): Int is intern do return rsh(i)
-
-	private fun rsh(i: Int): Int `{ return self >> i; `}
+	fun >>(i: Int): Int is intern `{ return self >> i; `}
 
 	redef fun to_i do return self
 	redef fun to_f is intern
@@ -817,9 +807,7 @@ universal Int
 	#     assert 65.code_point == 'A'
 	#     assert 10.code_point == '\n'
 	#     assert 0x220B.code_point == '∋'
-	fun code_point: Char is intern do return cp
-
-	private fun cp: Char `{ return (uint32_t)self; `}
+	fun code_point: Char is intern `{ return (uint32_t)self; `}
 
 	# Number of digits of an integer in base `b` (plus one if negative)
 	#
@@ -965,9 +953,7 @@ universal Char
 	#     assert 'A'.code_point == 65
 	#     assert '\n'.code_point == 10
 	#     assert '∋'.code_point == 0x220B
-	fun code_point: Int is intern do return cp
-
-	private fun cp: Int `{ return (long)self; `}
+	fun code_point: Int is intern `{ return (long)self; `}
 
 	# Is `self` an ASCII character ?
 	#

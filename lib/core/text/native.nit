@@ -274,12 +274,8 @@ extern class NativeString `{ char* `}
 	end
 
 	# Fetch 4 chars in `self` at `pos`
-	fun fetch_4_chars(pos: Int): Int is intern do return fetch_4_ffi(pos)
+	fun fetch_4_chars(pos: Int): Int is intern `{ return (long)*((uint32_t*)(self+pos)); `}
 
 	# Fetch 4 chars in `self` at `pos`
-	fun fetch_4_hchars(pos: Int): Int is intern do return fetch_4h_ffi(pos)
-
-	# FIXME: To remove when bootstrap supports PR #1898
-	private fun fetch_4_ffi(pos: Int): Int `{ return (long)*((uint32_t*)(self+pos)); `}
-	private fun fetch_4h_ffi(pos: Int): Int `{ return (long)be32toh(*((uint32_t*)(self+pos))); `}
+	fun fetch_4_hchars(pos: Int): Int is intern `{ return (long)be32toh(*((uint32_t*)(self+pos))); `}
 end
