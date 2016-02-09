@@ -37,6 +37,42 @@ in "ObjC" `{
 		Button_on_click(self.nit_button);
 	}
 @end
+
+// Proxy for both delegates of UITableView relaying all callbacks to `nit_list_layout`
+@interface UITableViewAndDataSource: NSObject <UITableViewDelegate, UITableViewDataSource>
+
+	// Nit object receiving the callbacks
+	@property ListLayout nit_list_layout;
+
+	// List of native views added to this list view from the Nit side
+	@property NSMutableArray *views;
+@end
+
+@implementation UITableViewAndDataSource
+
+	- (id)init
+	{
+		self = [super init];
+		self.views = [[NSMutableArray alloc] initWithCapacity:8];
+		return self;
+	}
+
+	- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+		return ListLayout_number_of_sections_in_table_view(self.nit_list_layout, tableView);
+	}
+
+	- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+		return ListLayout_number_of_rows_in_section(self.nit_list_layout, tableView, section);
+	}
+
+	- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+		return ListLayout_title_for_header_in_section(self.nit_list_layout, tableView, section);
+	}
+
+	- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+		return ListLayout_cell_for_row_at_index_path(self.nit_list_layout, tableView, indexPath);
+	}
+@end
 `}
 
 redef class App
@@ -206,5 +242,124 @@ redef class UIButton
 
 		[self addTarget:ncr action:@selector(nitOnEvent:)
 			forControlEvents:UIControlEventTouchUpInside];
+	`}
+end
+
+redef class ListLayout
+
+	redef type NATIVE: UITableView
+	redef var native = new UITableView(new UITableViewStyle.plain)
+
+	init
+	do
+		native.autoresizing_mask
+		native.assign_delegate_and_data_source self
+	end
+
+	redef fun add(item)
+	do
+		# Adding a view to a UITableView is a bit tricky.
+		#
+		# Items are added to the Objective-C view only by callbacks.
+		# We must store the sub views in local lists while waiting
+		# for the callbacks.
+		#
+		# As usual, we keep the Nity object in `items`.
+		# But we also keep their native counterparts in a list of
+		# the `UITableViewAndDataSource` set as `native.delegate`.
+		# Otherwise the native views could be freed by the Objective-C GC.
+
+		# TODO use an adapter for the app.nit ListLayout closer to what exists
+		# on both iOS and Android, to support large data sets.
+
+		if item isa View then
+			add_view_to_native_list(native, item.native)
+		end
+
+		super
+
+		# Force redraw and trigger callbacks
+		native.reload_data
+	end
+
+	private fun add_view_to_native_list(native: UITableView, item: UIView) in "ObjC" `{
+		[((UITableViewAndDataSource*)native.delegate).views addObject:item];
+	`}
+
+	private fun get_view_from_native_list(native: UITableView, index: Int): UIView in "ObjC" `{
+		return [((UITableViewAndDataSource*)native.delegate).views objectAtIndex:index];
+	`}
+
+	# Number of sections in this view
+	#
+	# By default, we assume that all `items` are in a single section,
+	# so there is only one section.
+	#
+	# iOS callback: `numberOfSectionsInTableView`
+	protected fun number_of_sections_in_table_view(view: UITableView): Int
+	do return 1
+
+	# Number of entries in `section`
+	#
+	# By default, we assume that all `items` are in a single section,
+	# so no matter the section, this returns `items.length`.
+	#
+	# iOS callback: `numberOfRowsInSection`
+	protected fun number_of_rows_in_section(view: UITableView, section: Int): Int
+	do return items.length
+
+	# Title for `section`, return `new NSString.nil` for no title
+	#
+	# By default, this returns no title.
+	#
+	# iOS callback: `titleForHeaderInSection`
+	protected fun title_for_header_in_section(view: UITableView, section: Int): NSString
+	do return new NSString.nil
+
+	# Return a `UITableViewCell` for the item at `index_path`
+	#
+	# By default, we assume that all `items` are in a single section.
+	# So no matter the depth of the `index_path`, this returns a cell with
+	# the view at index part of `index_path`.
+	#
+	# iOS callback: `cellForRowAtIndexPath`
+	protected fun cell_for_row_at_index_path(table_view: UITableView, index_path: NSIndexPath): UITableViewCell
+	do
+		var reuse_id = "NitCell".to_nsstring
+		var cell = new UITableViewCell(reuse_id)
+
+		# TODO if there is performance issues, reuse cells with
+		# the following code, but clear the cell before use.
+
+		#var cell = table_view.dequeue_reusable_cell_with_identifier(reuse_id)
+		#if cell.address_is_null then cell = new UITableViewCell(reuse_id)
+
+		var index = index_path.index_at_position(1)
+		var view_native = get_view_from_native_list(table_view, index)
+		var cv = cell.content_view
+		cv.add_subview view_native
+
+		return cell
+	end
+end
+
+redef class UITableView
+
+	# Assign `list_view` as `delegate` and `dataSource`, and pin all references in both GCs
+	private fun assign_delegate_and_data_source(list_view: ListLayout)
+	import ListLayout.number_of_sections_in_table_view,
+	       ListLayout.number_of_rows_in_section,
+	       ListLayout.title_for_header_in_section,
+	       ListLayout.cell_for_row_at_index_path in "ObjC" `{
+
+		UITableViewAndDataSource *objc_delegate = [[UITableViewAndDataSource alloc] init];
+		objc_delegate = (__bridge UITableViewAndDataSource*)CFBridgingRetain(objc_delegate);
+
+		objc_delegate.nit_list_layout = list_view;
+		ListLayout_incr_ref(list_view);
+
+		// Set our
+		self.delegate = objc_delegate;
+		self.dataSource = objc_delegate;
 	`}
 end
