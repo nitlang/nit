@@ -75,9 +75,9 @@ class SmoothMaterial
 
 		# Execute draw
 		if mesh.indices.is_empty then
-			glDrawArrays(gl_TRIANGLES, 0, mesh.vertices.length/3)
+			glDrawArrays(mesh.draw_mode, 0, mesh.vertices.length/3)
 		else
-			glDrawElements(gl_TRIANGLES, mesh.indices.length, gl_UNSIGNED_SHORT, mesh.indices_c.native_array)
+			glDrawElements(mesh.draw_mode, mesh.indices.length, gl_UNSIGNED_SHORT, mesh.indices_c.native_array)
 		end
 	end
 end
@@ -182,9 +182,9 @@ class TexturedMaterial
 		program.camera.uniform(app.world_camera.position.x, app.world_camera.position.y, app.world_camera.position.z)
 
 		if mesh.indices.is_empty then
-			glDrawArrays(gl_TRIANGLES, 0, mesh.vertices.length/3)
+			glDrawArrays(mesh.draw_mode, 0, mesh.vertices.length/3)
 		else
-			glDrawElements(gl_TRIANGLES, mesh.indices.length, gl_UNSIGNED_SHORT, mesh.indices_c.native_array)
+			glDrawElements(mesh.draw_mode, mesh.indices.length, gl_UNSIGNED_SHORT, mesh.indices_c.native_array)
 		end
 	end
 end
@@ -220,9 +220,9 @@ class NormalsMaterial
 		program.normal.array(mesh.normals, 3)
 
 		if mesh.indices.is_empty then
-			glDrawArrays(gl_TRIANGLES, 0, mesh.vertices.length/3)
+			glDrawArrays(mesh.draw_mode, 0, mesh.vertices.length/3)
 		else
-			glDrawElements(gl_TRIANGLES, mesh.indices.length, gl_UNSIGNED_SHORT, mesh.indices_c.native_array)
+			glDrawElements(mesh.draw_mode, mesh.indices.length, gl_UNSIGNED_SHORT, mesh.indices_c.native_array)
 		end
 	end
 end

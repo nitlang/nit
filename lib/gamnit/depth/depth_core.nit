@@ -103,6 +103,9 @@ class Mesh
 	# Coordinates on the texture per vertex
 	var texture_coords = new Array[Float] is lazy, writable
 
+	# `GLDrawMode` used to display this mesh, defaults to `gl_TRIANGLES`
+	fun draw_mode: GLDrawMode do return gl_TRIANGLES
+
 	# Create an UV sphere of `radius` with `n_meridians` and `n_parallels`
 	init uv_sphere(radius: Float, n_meridians, n_parallels: Int)
 	do
