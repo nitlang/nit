@@ -31,6 +31,9 @@ end
 extern class NSString in "ObjC" `{ NSString * `}
 	super NSObject
 
+	# Null pointer
+	new nil in "ObjC" `{ return nil; `}
+
 	# Get an UTF8 encoded `char*` copy of `self`
 	fun utf8_string: NativeString in "ObjC" `{ return (char *)[self UTF8String]; `}
 
