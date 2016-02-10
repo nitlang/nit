@@ -187,7 +187,7 @@ class FileReader
 	end
 
 	private fun native_poll_in(fd: Int): Int `{
-		struct pollfd fds = {fd, POLLIN, 0};
+		struct pollfd fds = {(int)fd, POLLIN, 0};
 		return poll(&fds, 1, 0);
 	`}
 end
@@ -292,7 +292,7 @@ redef class Int
 	#
 	# NOTE: The `mode` specified must be compatible with the one used in the file descriptor.
 	private fun fd_to_stream(mode: NativeString): NativeFile `{
-		return fdopen(self, mode);
+		return fdopen((int)self, mode);
 	`}
 end
 
@@ -1414,8 +1414,8 @@ private extern class NativeFile `{ FILE* `}
 	fun flush: Int `{ return fflush(self); `}
 
 	# Used to specify how the buffering will be handled for the current stream.
-	fun set_buffering_type(buf_length: Int, mode: Int): Int `{
-		return setvbuf(self, NULL, mode, buf_length);
+	fun set_buffering_type(buf_length, mode: Int): Int `{
+		return setvbuf(self, NULL, (int)mode, buf_length);
 	`}
 
 	new io_open_read(path: NativeString) `{ return fopen(path, "r"); `}
@@ -1499,15 +1499,14 @@ redef class Sys
 		int first_polled_fd = -1;
 		int result;
 
-		in_len = Array_of_Int_length( in_fds );
-		out_len = Array_of_Int_length( out_fds );
+		in_len = (int)Array_of_Int_length( in_fds );
+		out_len = (int)Array_of_Int_length( out_fds );
 		total_len = in_len + out_len;
 		c_fds = malloc( sizeof(struct pollfd) * total_len );
 
 		/* input streams */
 		for ( i=0; i<in_len; i ++ ) {
-			int fd;
-			fd = Array_of_Int__index( in_fds, i );
+			int fd = (int)Array_of_Int__index( in_fds, i );
 
 			c_fds[i].fd = fd;
 			c_fds[i].events = POLLIN;
@@ -1515,8 +1514,7 @@ redef class Sys
 
 		/* output streams */
 		for ( i=0; i<out_len; i ++ ) {
-			int fd;
-			fd = Array_of_Int__index( out_fds, i );
+			int fd = (int)Array_of_Int__index( out_fds, i );
 
 			c_fds[i].fd = fd;
 			c_fds[i].events = POLLOUT;

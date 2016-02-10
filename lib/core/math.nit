@@ -545,9 +545,9 @@ fun pi: Float do return 3.14159265
 # assert 10.rand == a
 # assert 100.rand == b
 # ~~~~
-fun srand_from(x: Int) `{ nit_rand_seeded = 1; nit_rand_seed = x; `}
+fun srand_from(x: Int) `{ nit_rand_seeded = 1; nit_rand_seed = (unsigned int)x; `}
 
 # Reinitialize the pseudo-random generator used by the method `rand` and other.
 # This method is automatically invoked at the begin of the program, so usually, there is no need to manually invoke it.
 # The only exception is in conjunction with `srand_from` to reset the pseudo-random generator.
-fun srand `{ nit_rand_seeded = 0; srand(time(NULL)); `}
+fun srand `{ nit_rand_seeded = 0; srand((unsigned int)time(NULL)); `}

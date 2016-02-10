@@ -26,6 +26,14 @@ Those are available in most Linux distributions
 
     $ sudo apt-get install build-essential ccache libgc-dev graphviz libunwind-dev pkg-config
 
+and on OS X using brew
+
+    $ brew install ccache bdw-gc graphviz libunwind-headers pkgconfig
+
+or with MacPorts
+
+    $ sudo port install ccache boehmgc graphviz libunwind-headers pkgconfig
+
 Important files and directories:
 
  * benchmarks/	Script to bench the compilers

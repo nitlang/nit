@@ -37,14 +37,18 @@ redef class AppDelegate
 		NSLog(@"Hello World!");
 
 		// Display "Hello world!" on the screen
-		self.window = [[UIWindow alloc] initWithFrame:
-		[[UIScreen mainScreen] bounds]];
+		CGRect frame = [[UIScreen mainScreen] bounds];
+		self.window = [[UIWindow alloc] initWithFrame: frame];
 		self.window.backgroundColor = [UIColor whiteColor];
 
 		UILabel *label = [[UILabel alloc] init];
 		label.text = @"Hello World!";
 		label.center = CGPointMake(100, 100);
 		[label sizeToFit];
+
+		// As with `self.window` we must set a `rootViewController`
+		self.window.rootViewController = [[UIViewController alloc]initWithNibName:nil bundle:nil];
+		self.window.rootViewController.view = label;
 
 		[self.window addSubview: label];
 		[self.window makeKeyAndVisible];

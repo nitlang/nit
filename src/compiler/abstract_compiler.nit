@@ -865,7 +865,7 @@ extern void nitni_global_ref_decr( struct nitni_ref *ref );
 			v.add_decl("int main(int argc, char** argv) \{")
 		end
 
-		v.add "#ifndef ANDROID"
+		v.add "#if !defined(__ANDROID__) && !defined(TARGET_OS_IPHONE)"
 		v.add("signal(SIGABRT, sig_handler);")
 		v.add("signal(SIGFPE, sig_handler);")
 		v.add("signal(SIGILL, sig_handler);")
