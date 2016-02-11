@@ -8,8 +8,27 @@ file can be specified using the `-o` and `--dir` options.
 
 # Host system configuration
 
-To compile for Android, you must install the Android SDK and NDK.
-The tools `android`, `ndk-build` and `ant` must be in your PATH.
+Some configuration is required to compile for the Android platform from a GNU/Linux host.
+
+1. Download and install the latest Android SDK __and__ NDK.
+
+2. Update PATH so it includes the tools `android`, `ndk-build` and `ant`.
+	You should add something like the following snippet to your .bashrc or equivalent,
+	be careful to replace `ANDROID_SDK` and `ANDROID_NDK` with the full path where you installed each package.
+
+	~~~
+	export PATH=$PATH:ANDROID_SDK/tools/:ANDROID_SDK/platform-tools/:ANDROID_NDK/
+	~~~
+
+2. Using the `android` executable, download the latest `tools, build-tools` and within the Android 4.0.3 (API 15) folder, install `SDK platform`.
+	You may have to install additional SDK platforms for applications with different targets.
+
+3. Using your OS package manager, install `apt openjdk-7-jdk lib32stdc++6 lib32z1`.
+	On Debian and Ubuntu the command is:
+
+	~~~
+	sudo apt-get install apt openjdk-7-jdk lib32stdc++6 lib32z1
+	~~~
 
 # Configure your Android application
 
@@ -41,9 +60,9 @@ integer as argument. They are applied in the Android manifest as
     See http://developer.android.com/guide/topics/manifest/uses-sdk-element.html
 
 * The annotation `android_activity` defines a Java class used as an
-  entrypoint to your application. As of now, this annotation should
-  only be used by low level implementations of Nit on Android.
-  It's usefulness will be extended in the future to customize user applications.
+ entry point to your application. As of now, this annotation should
+  only be used by low-level implementations of Nit on Android.
+  Its usefulness will be extended in the future to customize user applications.
 
 ## Project entry points
 
@@ -86,7 +105,7 @@ with the desired values.
 optionally `TSA_SERVER`. These settings can be set in a startup script such as
 `~/.bashrc` or in a local Makefile.
 
-    You can use the following commands by replacing the right hand values
+    You can use the following commands by replacing the right-hand values
 to your own configuration.
 
     ~~~
