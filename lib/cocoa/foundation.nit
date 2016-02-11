@@ -149,3 +149,24 @@ extern class NSIndexPath in "ObjC" `{ NSIndexPath * `}
 		return [self indexAtPosition: position];
 	`}
 end
+
+# Interface to the defaults system for an app to customize its behavior to match a user's preferences
+extern class NSUserDefaults in "ObjC" `{ NSUserDefaults * `}
+	super NSObject
+
+	# Wraps: `[NSUserDefaults standardUserDefaults]`
+	new standard_user_defaults in "ObjC" `{
+		return [NSUserDefaults standardUserDefaults];
+	`}
+
+	# Wraps: `[NSIndexPath stringForKey:]`
+	fun string_for_key(key: NSString): NSString in "ObjC" `{
+		return [self stringForKey: key];
+	`}
+
+	# Wraps: `[NSIndexPath setObject: forKey:]`
+	fun set_object(value: NSObject, default_name: NSString)
+	in "ObjC" `{
+		[self setObject:value forKey:default_name];
+	`}
+end
