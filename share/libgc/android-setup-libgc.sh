@@ -94,7 +94,7 @@ mv $libatomic_ops_dir $libgc_dir/libatomic_ops || exit 1
 cd $libgc_dir || exit 1
 
 archs=(         arm                       x86                mips)
-tools_dirs=(    arm-linux-androideabi-4.6 x86-4.6            mipsel-linux-android-4.6)
+tools_dirs=(    arm-linux-androideabi-4.9 x86-4.9            mipsel-linux-android-4.9)
 tools_prefixes=(arm-linux-androideabi     i686-linux-android mipsel-linux-android)
 hosts=(         arm-linux-androideabi     x86-linux-android  mips-linux-android)
 
