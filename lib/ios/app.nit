@@ -139,7 +139,12 @@ redef class App
 	# The application just launched but is not yet displayed to the user
 	#
 	# Redef this method to customize the behavior.
-	fun did_finish_launching_with_options: Bool do return true
+	fun did_finish_launching_with_options: Bool
+	do
+		on_create
+		on_restore_state
+		return true
+	end
 
 	# The application is about to move from active to inactive state
 	#
@@ -151,7 +156,7 @@ redef class App
 	# Redef this method to pause ongoing tasks, disable timers, and
 	# throttle down OpenGL ES frame rates. Games should use this
 	# method to pause.
-	fun will_resign_active do end
+	fun will_resign_active do on_pause
 
 	# The application just left foreground it can be suspended at any time
 	#
@@ -161,27 +166,38 @@ redef class App
 	#
 	# If your application supports background execution, this method
 	# is called instead of `will_terminate` when the user quits.
-	fun did_enter_background do end
+	fun did_enter_background
+	do
+		on_save_state
+		on_stop
+	end
 
 	# The application will enter the foreground
 	#
 	# Called as part of the transition from the background to the
 	# inactive state.
 	#
-	# Redef to und changes made on entering the background.
-	fun will_enter_foreground do end
+	# Redef to undo changes made on entering the background.
+	fun will_enter_foreground do on_start
 
 	# The application just became active
 	#
 	# Redef to restart any tasks that were paused (or not yet started) while
 	# the application was inactive. If the application was previously
 	# in the background, optionally refresh the user interface.
-	fun did_become_active do end
+	fun did_become_active do on_resume
 
-	# The application is about to terminate (not suspended)
+	# The application is about to terminate (from a state other than suspended)
 	#
 	# Redef to save data if appropriate.
-	fun will_terminate do end
+	fun will_terminate
+	do
+		# Usually a forced termination by the system
+		on_save_state
+		on_pause
+		on_stop
+		on_destroy
+	end
 end
 
 app.register_args(program_name.to_cstring, args.length, args)
