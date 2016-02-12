@@ -527,3 +527,67 @@ extern class UIStackViewAlignment in "ObjC" `{ NSInteger `}
     new bottom in "ObjC" `{ return UIStackViewAlignmentBottom; `}
     new last_baseline in "ObjC" `{ return UIStackViewAlignmentLastBaseline; `}
 end
+
+# View to display and edit hierarchical lists of information
+extern class UITableView in "ObjC" `{ UITableView * `}
+	super UIView
+
+	# Wraps: `[self initWithFrame:(CGRect)frame style:(UITableViewStyle)style]`
+	new (style: UITableViewStyle) in "ObjC" `{
+		return [[UITableView alloc] initWithFrame: [[UIScreen mainScreen] bounds] style:style];
+	`}
+
+	# Wraps: `[self reloadData]`
+	fun reload_data in "ObjC" `{ [self reloadData]; `}
+
+	# Wraps: `self.autoresizingMask =`
+	fun autoresizing_mask in "ObjC" `{
+		self.autoresizingMask = UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleWidth;
+	`}
+
+	# Wraps: `self.delegate =`
+	fun delegate=(delegate: UITableViewDelegate) in "ObjC" `{ self.delegate = delegate; `}
+
+	# Wraps: `self.dataSource =`
+	fun data_source=(source: UITableViewDataSource) in "ObjC" `{ self.dataSource = source; `}
+
+	# Wraps: `[self dequeueReusableCellWithIdentifier]`
+	fun dequeue_reusable_cell_with_identifier(identifier: NSString): UITableViewCell in "ObjC" `{
+		return [self dequeueReusableCellWithIdentifier:identifier];
+	`}
+end
+
+# Delegate for a `UITableView` to configure selection, sections, cells and more
+extern class UITableViewDelegate in "ObjC" `{ id<UITableViewDelegate> `}
+	super NSObject
+end
+
+# Mediator the data model for a `UITableView`
+extern class UITableViewDataSource in "ObjC" `{ id<UITableViewDataSource> `}
+	super NSObject
+end
+
+# Cell of a `UITableViewCell`
+extern class UITableViewCell in "ObjC" `{ UITableViewCell * `}
+	super NSObject
+
+	new (identifier: NSString) in "ObjC" `{
+		return [[UITableViewCell alloc]
+			initWithStyle:UITableViewCellStyleDefault
+			reuseIdentifier:identifier];
+	`}
+
+	# Wraps: `[self textLabel]`
+	fun text_label: UILabel in "ObjC" `{ return [self textLabel]; `}
+
+	# Wraps: `[self contentView]`
+	fun content_view: UIView in "ObjC" `{ return [self contentView]; `}
+end
+
+# Style of a `UITableView`
+extern class UITableViewStyle in "ObjC" `{ UITableViewStyle* `}
+	super NSObject
+
+	new plain in "ObjC" `{ return UITableViewStylePlain; `}
+	new grouped in "ObjC" `{ return UITableViewStyleGrouped; `}
+end
