@@ -258,8 +258,13 @@ class RapidTypeAnalysis
 			var npropdef = modelbuilder.mpropdef2node(mmethoddef)
 
 			if npropdef isa AClassdef then
-				if mmethoddef.mproperty.is_root_init and not mmethoddef.is_intro then
-					self.add_super_send(v.receiver, mmethoddef)
+				if mmethoddef.mproperty.is_root_init then
+					if not mmethoddef.is_intro then
+						self.add_super_send(v.receiver, mmethoddef)
+					end
+				else
+					npropdef.debug "cannot RTA {mmethoddef}"
+					abort
 				end
 				continue
 			else if mmethoddef.constant_value != null then
