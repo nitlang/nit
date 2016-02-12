@@ -1482,8 +1482,7 @@ end
 
 redef class AClassdef
 	private fun compile_to_java(v: JavaCompilerVisitor, mpropdef: MMethodDef, arguments: Array[RuntimeVariable]) do
-		if mpropdef == self.mfree_init then
-			assert mpropdef.mproperty.is_root_init
+		if mpropdef.mproperty.is_root_init then
 			if not mpropdef.is_intro then
 				v.supercall(mpropdef, arguments.first.mtype.as(MClassType), arguments)
 			end

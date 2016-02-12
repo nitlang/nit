@@ -258,9 +258,6 @@ class RapidTypeAnalysis
 			var npropdef = modelbuilder.mpropdef2node(mmethoddef)
 
 			if npropdef isa AClassdef then
-				# It is an init for a class
-				assert mmethoddef == npropdef.mfree_init
-
 				if mmethoddef.mproperty.is_root_init and not mmethoddef.is_intro then
 					self.add_super_send(v.receiver, mmethoddef)
 				end

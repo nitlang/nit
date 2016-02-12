@@ -153,7 +153,6 @@ redef class ModelBuilder
 			mpropdef.msignature = msignature
 			mpropdef.new_msignature = msignature
 			mprop.is_init = true
-			nclassdef.mfree_init = mpropdef
 			self.toolcontext.info("{mclassdef} gets a free empty constructor {mpropdef}{msignature}", 3)
 			the_root_init_mmethod = mprop
 			return
@@ -356,7 +355,6 @@ redef class ModelBuilder
 		var msignature = new MSignature(mparameters, null)
 		mpropdef.new_msignature = msignature
 		mpropdef.msignature = new MSignature(new Array[MParameter], null) # always an empty real signature
-		nclassdef.mfree_init = mpropdef
 		self.toolcontext.info("{mclassdef} gets a free constructor for attributes {mpropdef}{msignature}", 3)
 		mclassdef.mclass.root_init = mpropdef
 	end
@@ -488,9 +486,6 @@ end
 redef class AClassdef
 	# Marker used in `ModelBuilder::build_properties`
 	private var build_properties_is_done = false
-
-	# The free init (implicitely constructed by the class if required)
-	var mfree_init: nullable MMethodDef = null
 end
 
 redef class MClass
