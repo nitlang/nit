@@ -133,16 +133,9 @@ class GamePos
 	var x : Int
 	var y : Int
 
-	init ( x, y : Int )
-	do
-		self.x = x
-		self.y = y
-	end
-
 	init copy( src : GamePos )
 	do
-		x = src.x
-		y = src.y
+		init(src.x, src.y)
 	end
 
 	fun squared_dist_with( other : GamePos ) : Int
