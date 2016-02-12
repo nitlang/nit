@@ -374,12 +374,6 @@ class SDLKeyEvent
 	redef var name
 	var down: Bool
 
-	init (key_name: String, down: Bool)
-	do
-		self.name = key_name
-		self.down = down
-	end
-
 	redef fun to_c
 	do
 		if name.length == 1 then return name.chars.first
