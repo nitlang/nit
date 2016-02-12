@@ -1553,14 +1553,14 @@ end
 
 redef class AClassdef
 	# Execute an implicit `mpropdef` associated with the current node.
-	private fun call(v: NaiveInterpreter, mpropdef: MMethodDef, args: Array[Instance]): nullable Instance
+	private fun call(v: NaiveInterpreter, mpropdef: MMethodDef, arguments: Array[Instance]): nullable Instance
 	do
 		if mpropdef.mproperty.is_root_init then
-			assert args.length == 1
+			assert arguments.length == 1
 			if not mpropdef.is_intro then
 				# standard call-next-method
-				var superpd = mpropdef.lookup_next_definition(v.mainmodule, args.first.mtype)
-				v.call(superpd, args)
+				var superpd = mpropdef.lookup_next_definition(v.mainmodule, arguments.first.mtype)
+				v.call(superpd, arguments)
 			end
 			return null
 		else
