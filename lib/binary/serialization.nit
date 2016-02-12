@@ -336,6 +336,12 @@ redef class Text
 
 		return true
 	end
+
+	redef fun serialize_to_binary(v)
+	do
+		v.stream.write_byte kind_string
+		v.stream.write_block to_s
+	end
 end
 
 # ---
@@ -394,14 +400,6 @@ redef class Char
 	do
 		v.stream.write_byte kind_char
 		for i in bytes do v.stream.write_byte i
-	end
-end
-
-redef class String
-	redef fun serialize_to_binary(v)
-	do
-		v.stream.write_byte kind_string
-		v.stream.write_block self
 	end
 end
 

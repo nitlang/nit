@@ -466,6 +466,8 @@ redef class Text
 		end
 		return res
 	end
+
+	redef fun serialize_to_json(v) do v.stream.write(to_json)
 end
 
 redef class Serializable
@@ -532,10 +534,6 @@ redef class Char
 			v.stream.write "\}"
 		end
 	end
-end
-
-redef class String
-	redef fun serialize_to_json(v) do v.stream.write(to_json)
 end
 
 redef class NativeString
