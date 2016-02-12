@@ -78,7 +78,7 @@ in "ObjC" `{
 redef class App
 	redef fun did_finish_launching_with_options
 	do
-		on_create
+		super
 		window.native.make_key_and_visible
 		return true
 	end
