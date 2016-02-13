@@ -176,16 +176,6 @@ class PbxprojectTemplate
 		add """
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		AF9F83EA1A5F0D21004B62C0 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = AF9F83C41A5F0D21004B62C0 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = AF9F83CB1A5F0D21004B62C0;
-			remoteInfo = {{{name}}};
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
 	/* Static generated files */
 		AF9F83CC1A5F0D21004B62C0 /* {{{name}}}.app */ = {
@@ -271,15 +261,6 @@ class PbxprojectTemplate
 			path = {{{name}}};
 			sourceTree = "<group>";
 		};
-		AF9F83CF1A5F0D21004B62C0 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				AF9F83D01A5F0D21004B62C0 /* Info.plist */,
-				AF9F83D11A5F0D21004B62C0 /* main.m */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -363,25 +344,6 @@ class PbxprojectTemplate
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXVariantGroup section */
-		AF9F83DD1A5F0D21004B62C0 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				AF9F83DE1A5F0D21004B62C0 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		AF9F83E21A5F0D21004B62C0 /* LaunchScreen.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				AF9F83E31A5F0D21004B62C0 /* Base */,
-			);
-			name = LaunchScreen.xib;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		AF9F83F11A5F0D21004B62C0 /* Debug */ = {
