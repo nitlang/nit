@@ -75,8 +75,9 @@ end
 
 var out_path = opt_out.value
 if out_path == null then out_path = "."
+if not out_path.file_exists then out_path.mkdir
 if not out_path.file_exists then
-	stderr.write "Output dir '{out_path}' does not exist (use --out)\n"
+	print_error "Failed to create output dir '{out_path}'"
 	exit 1
 end
 
