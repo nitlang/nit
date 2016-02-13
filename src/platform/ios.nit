@@ -73,6 +73,9 @@ private class IOSToolchain
 	do
 		var project_name = app_project.short_name
 
+		# ---
+		# project_folder.xcodeproj (projet meta data)
+
 		# Create an XCode project directory
 		var dir = ios_project_root/project_name+".xcodeproj"
 		if not dir.file_exists then dir.mkdir
@@ -86,9 +89,17 @@ private class IOSToolchain
 			pbx.add_file new PbxFile(file.filename.basename)
 		end
 
+		# Basic storyboard, mainly to have the right screen size
+		var launch_screen_storyboard = new LaunchScreenStoryboardTemplate
+		launch_screen_storyboard.title = app_project.name
+		launch_screen_storyboard.subtitle = "app.nit"
+		launch_screen_storyboard.write_to_file ios_project_root / "LaunchScreen.storyboard"
+		pbx.write_to_file dir / "project.pbxproj"
+
 		## TODO Register asset files
 
-		pbx.write_to_file dir/"project.pbxproj"
+		# ---
+		# project_folder (source code)
 
 		# Create the plist in the same directory as the generated C code
 		if not compile_dir.file_exists then compile_dir.mkdir
