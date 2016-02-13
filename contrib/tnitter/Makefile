@@ -30,13 +30,17 @@ res/drawable-ldpi/icon.png: art/icon.svg
 # iOS
 
 ios: bin/tnitter.app
-bin/tnitter.app: $(shell ../../bin/nitls -M src/tnitter_app.nit ios)
+bin/tnitter.app: $(shell ../../bin/nitls -M src/tnitter_app.nit ios) ios/AppIcon.appiconset/Contents.json
 	mkdir -p bin/
 	../../bin/nitc -o bin/tnitter.app src/tnitter_app.nit -m ios -D tnitter_server_uri=http://$(SERVER)
 
-ios-release: $(shell ../../bin/nitls -M src/tnitter_app.nit ios)
+ios-release: $(shell ../../bin/nitls -M src/tnitter_app.nit ios) ios/AppIcon.appiconset/Contents.json
 	mkdir -p bin/
 	../../bin/nitc -o bin/tnitter.app src/tnitter_app.nit -m ios -D tnitter_server_uri=http://tnitter.xymus.net
+
+ios/AppIcon.appiconset/Contents.json: art/icon-ios.svg
+	mkdir -p ios
+	../inkscape_tools/bin/svg_to_icons art/icon-ios.svg --ios --out ios/AppIcon.appiconset/
 
 # ---
 # Misc
