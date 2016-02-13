@@ -15,7 +15,19 @@ Compile with: `nitc hello_world.nit`
 
 Run in the simulator with: `ios-sim hello_world.app`
 
-# Portable calculator application
+# Sample portable applications
 
-See the calculator example at `examples/calculator` for a portable application working on GNU/Linux, OS X, iOS and Android.
-The iOS version is compiled with `make bin/calculator.app`.
+See the calculator example at `examples/calculator` and the Tnitter client at `contrib/tnitter/`
+for portable applications working on GNU/Linux, OS X, iOS and Android.
+
+# Application icon
+
+To associate icons to your application, create the directory `ios/AppIcon.appiconset` and fill it with standard icons and `Contents.json`.
+These files can be generated in a number of different ways:
+
+* Using the tool `svg_to_icons` packaged with the Nit repository at `contrib/inkscape_tools/bin/svg_to_icons`.
+
+* Using Xcode to assign images to each slot, create the folder and the file `Contents.json`.
+
+* Write or modify the file `Contents.json` manually.
+	It is in Json format and easily readable.
