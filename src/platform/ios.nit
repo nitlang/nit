@@ -74,6 +74,51 @@ private class IOSToolchain
 		var project_name = app_project.short_name
 
 		# ---
+		# project_folder (source code)
+
+		# Create the plist in the same directory as the generated C code
+		if not compile_dir.file_exists then compile_dir.mkdir
+		var plist = new PlistTemplate(app_project.name, app_project.namespace,
+			app_project.version, app_project.version_code.to_s)
+		plist.write_to_file compile_dir/"Info.plist"
+
+		# Copy the folder `ios/AppIcon.appiconset` from the root of the project
+		var project_root = "."
+		var mpackage = compiler.mainmodule.first_real_mmodule.mpackage
+		if mpackage != null then
+			var root = mpackage.root
+			if root != null then
+				var filepath = root.filepath
+				if filepath != null then
+					project_root = filepath
+				end
+			end
+		end
+
+		var icon_dir = project_root / "ios" / "AppIcon.appiconset"
+		var icons_found = icon_dir.file_exists
+		if icons_found then
+
+			# Prepare the `Assets.xcassets` folder
+			var target_assets_dir = compile_dir / "Assets.xcassets"
+			if not target_assets_dir.file_exists then target_assets_dir.mkdir
+
+			"""
+{
+  "info" : {
+	"version" : 1,
+	"author" : "nitc"
+  }
+}""".write_to_file target_assets_dir / "Contents.json"
+
+			# copy the res folder to the compile dir
+			icon_dir = icon_dir.realpath
+			toolcontext.exec_and_check(["cp", "-R", icon_dir, target_assets_dir], "iOS project error")
+		end
+
+		# TODO Register asset files
+
+		# ---
 		# project_folder.xcodeproj (projet meta data)
 
 		# Create an XCode project directory
@@ -94,18 +139,14 @@ private class IOSToolchain
 		launch_screen_storyboard.title = app_project.name
 		launch_screen_storyboard.subtitle = "app.nit"
 		launch_screen_storyboard.write_to_file ios_project_root / "LaunchScreen.storyboard"
+
+		# Register the Assets.xcassets folder in the project description
+		if icons_found then
+			var xcassets = new PbxFile("Assets.xcassets")
+			pbx.add_file xcassets
+		end
+
 		pbx.write_to_file dir / "project.pbxproj"
-
-		## TODO Register asset files
-
-		# ---
-		# project_folder (source code)
-
-		# Create the plist in the same directory as the generated C code
-		if not compile_dir.file_exists then compile_dir.mkdir
-		var plist = new PlistTemplate(app_project.name, app_project.namespace,
-			app_project.version, app_project.version_code.to_s)
-		plist.write_to_file compile_dir/"Info.plist"
 	end
 
 	redef fun compile_c_code(compile_dir)
