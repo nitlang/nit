@@ -65,6 +65,9 @@ class FileServer
 	# Header of each directory page
 	var header: nullable Writable = null is writable
 
+	# Custom JavaScript code added within a `<script>` block to each page
+	var javascript_header: nullable Writable = null is writable
+
 	redef fun answer(request, turi)
 	do
 		var response
@@ -129,6 +132,9 @@ class FileServer
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+	<script>
+		{{{javascript_header or else ""}}}
+	</script>
 	<title>{{{title}}}</title>
 </head>
 <body>
