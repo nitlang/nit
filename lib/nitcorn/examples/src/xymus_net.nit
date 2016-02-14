@@ -58,8 +58,14 @@ class MasterHeader
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <li{{{actives.get_or_default("ens", "")}}}><a href="http://xymus.net/ens/">Enseignement</a></li>
-        <li{{{actives.get_or_default("opportunity", "")}}}><a href="http://xymus.net/opportunity/">Opportunité</a></li>
-        <li{{{actives.get_or_default("tnitter", "")}}}><a href="http://tnitter.xymus.net/">Tnitter</a></li>
+        <li{{{actives.get_or_default("opportunity", "")}}}>
+          <a href="http://xymus.net/opportunity/">
+		  <img height="22px" src="/static/opportunity-small-fr.png"></a>
+        </li>
+        <li{{{actives.get_or_default("tnitter", "")}}}>
+		  <a href="http://tnitter.xymus.net/">
+          <img height="22px" src="/static/tnitter-small.png">
+		</a></li>
         <li><a href="http://pep8.xymus.net/">Pep/8 Analysis</a></li>
         <li{{{actives.get_or_default("benitlux", "")}}}><a href="http://benitlux.xymus.net/">Benitlux</a></li>
       </ul>
@@ -161,18 +167,23 @@ factory.config.virtual_hosts.add benitlux_vh
 var user_group = new UserGroup("nitcorn", "nitcorn")
 if sys.uid == 0 then user_group.drop_privileges
 
+# Files shared by all the virtual hosts (mostly for the common header)
+var shared_file_server = new FileServer("/var/www/static/")
+
 # Tnitter is available at `tnitter.xymus.net` and `xymus.net/tnitter/`
 var tnitter = new TnitterWeb
 default_vh.routes.add new Route("/tnitter/", tnitter)
 
 tnitter_vh.routes.add new Route("/rest/", new TnitterREST)
 tnitter_vh.routes.add new Route("/push/", new TnitterPush)
+tnitter_vh.routes.add new Route("/static/", shared_file_server)
 tnitter_vh.routes.add new Route(null, tnitter)
 
 # Pep/8 Analysis is only a file server. It is available at `pep8.xymus.net`
 # and through the global/default file server at `xymus.net/pep8/`
 #
 # TODO Implement pep8analysis server-side with a nitcorn action
+pep8_vh.routes.add new Route("/static/", shared_file_server)
 pep8_vh.routes.add new Route(null, new FileServer("/var/www/pep8/"))
 
 # Benitlux is available at `benitlux.xymus.net` and `xymus.net/benitlux/`
@@ -184,6 +195,7 @@ var benitlux_rest = new BenitluxRESTAction
 default_vh.routes.add new Route("/benitlux/rest/", benitlux_rest)
 default_vh.routes.add new Route("/benitlux/", benitlux_sub)
 benitlux_vh.routes.add new Route("/rest/", benitlux_rest)
+benitlux_vh.routes.add new Route("/static/", shared_file_server)
 benitlux_vh.routes.add new Route(null, benitlux_sub)
 
 # Opportunity service
