@@ -102,6 +102,7 @@ class OpportunityMasterHeader
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 	<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
 	<script>
+		{{{tracking_code}}}
 		{{{page_js}}}
 	</script>
 	<style>
@@ -134,6 +135,11 @@ redef class OpportunityPage
 	redef var header = new OpportunityMasterHeader(new MasterHeader("opportunity", false))
 end
 
+redef class FileServer
+
+	redef fun javascript_header do return tracking_code
+end
+
 redef class MeetupCreationPage
 	redef var templates do
 		var map = super
@@ -143,6 +149,16 @@ redef class MeetupCreationPage
 		return map
 	end
 end
+
+fun tracking_code: String do return """
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	ga('create', 'UA-574578-1', 'auto');
+	ga('send', 'pageview');
+"""
 
 # Avoid executing when running tests
 if "NIT_TESTING".environ == "true" then exit 0
