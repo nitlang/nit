@@ -964,36 +964,46 @@ abstract class Text
 		return hash_cache.as(not null)
 	end
 
-	# Gives the formatted string back as a Nit string with `args` in place
+	# Format `self` by replacing each `%n` with the `n`th item of `args`
 	#
-	#     assert "This %1 is a %2.".format("String", "formatted String") == "This String is a formatted String."
-	#     assert "\\%1 This string".format("String") == "\\%1 This string"
+	# The character `%` followed by something other than a number are left as is.
+	# To represent a `%` followed by a number, double the `%`, as in `%%7`.
+	#
+	#     assert "This %0 is a %1.".format("String", "formatted String") == "This String is a formatted String."
+	#     assert "Do not escape % nor %%1".format("unused") == "Do not escape % nor %1"
 	fun format(args: Object...): String do
 		var s = new Array[Text]
 		var curr_st = 0
 		var i = 0
 		while i < length do
-			# Skip escaped characters
-			if self[i] == '\\' then
-				i += 1
-			# In case of format
-			else if self[i] == '%' then
+			if self[i] == '%' then
 				var fmt_st = i
 				i += 1
 				var ciph_st = i
 				while i < length and self[i].is_numeric do
 					i += 1
 				end
-				i -= 1
-				var fmt_end = i
-				var ciph_len = fmt_end - ciph_st + 1
+
+				var ciph_len = i - ciph_st
+				if ciph_len == 0 then
+					# What follows '%' is not a number.
+					s.push substring(curr_st, i - curr_st)
+					if i < length and self[i] == '%' then
+						# Skip the next `%`
+						i += 1
+					end
+					curr_st = i
+					continue
+				end
 
 				var arg_index = substring(ciph_st, ciph_len).to_i
 				if arg_index >= args.length then continue
 
 				s.push substring(curr_st, fmt_st - curr_st)
 				s.push args[arg_index].to_s
-				curr_st = i + 1
+
+				curr_st = i
+				i -= 1
 			end
 			i += 1
 		end
