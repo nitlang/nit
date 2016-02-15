@@ -150,7 +150,7 @@ redef class ASuperstringExpr
 			else
 				fmt += "%"
 				exprs.push i
-				fmt += exprs.length.to_s
+				fmt += (exprs.length-1).to_s
 			end
 		end
 		fmt = fmt.escape_to_gettext

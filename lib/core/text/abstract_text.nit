@@ -988,7 +988,7 @@ abstract class Text
 				var fmt_end = i
 				var ciph_len = fmt_end - ciph_st + 1
 
-				var arg_index = substring(ciph_st, ciph_len).to_i - 1
+				var arg_index = substring(ciph_st, ciph_len).to_i
 				if arg_index >= args.length then continue
 
 				s.push substring(curr_st, fmt_st - curr_st)
