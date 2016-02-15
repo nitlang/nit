@@ -146,7 +146,9 @@ redef class ASuperstringExpr
 		for i in n_exprs do
 			if i isa AStartStringExpr or i isa AEndStringExpr or i isa AMidStringExpr then
 				assert i isa AStringFormExpr
-				fmt += i.value.as(not null)
+				var str = i.value
+				assert str != null
+				fmt += str.replace("%", "%%")
 			else
 				fmt += "%"
 				exprs.push i
