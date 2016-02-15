@@ -68,6 +68,9 @@ class FileServer
 	# Custom JavaScript code added within a `<script>` block to each page
 	var javascript_header: nullable Writable = null is writable
 
+	# Caching attributes of served files, used as the `cache-control` field in response headers
+	var cache_control = "public, max-age=360" is writable
+
 	redef fun answer(request, turi)
 	do
 		var response
@@ -160,6 +163,9 @@ class FileServer
 							response.header["Content-Type"] = media_type
 						else response.header["Content-Type"] = "application/octet-stream"
 					end
+
+					# Cache control
+					response.header["cache-control"] = cache_control
 				end
 
 			else response = new HttpResponse(404)
