@@ -63,11 +63,11 @@ class MasterHeader
 		  <img height="22px" src="/static/opportunity-small-fr.png"></a>
         </li>
         <li{{{actives.get_or_default("tnitter", "")}}}>
-		  <a href="http://tnitter.xymus.net/">
+		  <a href="http://xymus.net/tnitter/">
           <img height="22px" src="/static/tnitter-small.png">
 		</a></li>
-        <li><a href="http://pep8.xymus.net/">Pep/8 Analysis</a></li>
-        <li{{{actives.get_or_default("benitlux", "")}}}><a href="http://benitlux.xymus.net/">Benitlux</a></li>
+        <li><a href="http://xymus.net/pep8/">Pep/8 Analysis</a></li>
+        <li{{{actives.get_or_default("benitlux", "")}}}><a href="http://xymus.net/benitlux/">Benitlux</a></li>
       </ul>
 
       <ul class="nav navbar-nav pull-right">
@@ -188,7 +188,7 @@ var shared_file_server = new FileServer("/var/www/static/")
 
 # Tnitter is available at `tnitter.xymus.net` and `xymus.net/tnitter/`
 var tnitter = new TnitterWeb
-default_vh.routes.add new Route("/tnitter/", tnitter)
+default_vh.routes.add new Route("/tnitter", tnitter)
 
 tnitter_vh.routes.add new Route("/rest/", new TnitterREST)
 tnitter_vh.routes.add new Route("/push/", new TnitterPush)
@@ -209,7 +209,7 @@ pep8_vh.routes.add new Route(null, new FileServer("/var/www/pep8/"))
 var benitlux_sub = new BenitluxSubscriptionAction
 var benitlux_rest = new BenitluxRESTAction
 default_vh.routes.add new Route("/benitlux/rest/", benitlux_rest)
-default_vh.routes.add new Route("/benitlux/", benitlux_sub)
+default_vh.routes.add new Route("/benitlux", benitlux_sub)
 benitlux_vh.routes.add new Route("/rest/", benitlux_rest)
 benitlux_vh.routes.add new Route("/static/", shared_file_server)
 benitlux_vh.routes.add new Route(null, benitlux_sub)
@@ -218,7 +218,7 @@ benitlux_vh.routes.add new Route(null, benitlux_sub)
 var opportunity = new OpportunityWelcome
 var opportunity_rest = new OpportunityRESTAction
 default_vh.routes.add new Route("/opportunity/rest/", opportunity_rest)
-default_vh.routes.add new Route("/opportunity/", opportunity)
+default_vh.routes.add new Route("/opportunity", opportunity)
 
 # Nitiwiki modification form
 var passwords = "nitiwiki_passwords".to_path.read_lines
@@ -229,7 +229,7 @@ default_vh.routes.add new Route("/edit", new EditAction("http://xymus.net/", "/h
 # a different header.
 var file_server_ens = new FileServer("/var/www/ens/")
 file_server_ens.header = (new MasterHeader("ens", false))
-default_vh.routes.add new Route("/ens/", file_server_ens)
+default_vh.routes.add new Route("/ens", file_server_ens)
 
 # Default file server is used for the main page at `xymus.net` and it is
 # the default action for any path not caught by other actions.
