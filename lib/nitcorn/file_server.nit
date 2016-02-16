@@ -65,6 +65,12 @@ class FileServer
 	# Header of each directory page
 	var header: nullable Writable = null is writable
 
+	# Custom JavaScript code added within a `<script>` block to each page
+	var javascript_header: nullable Writable = null is writable
+
+	# Caching attributes of served files, used as the `cache-control` field in response headers
+	var cache_control = "public, max-age=360" is writable
+
 	redef fun answer(request, turi)
 	do
 		var response
@@ -129,6 +135,9 @@ class FileServer
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+	<script>
+		{{{javascript_header or else ""}}}
+	</script>
 	<title>{{{title}}}</title>
 </head>
 <body>
@@ -154,6 +163,9 @@ class FileServer
 							response.header["Content-Type"] = media_type
 						else response.header["Content-Type"] = "application/octet-stream"
 					end
+
+					# Cache control
+					response.header["cache-control"] = cache_control
 				end
 
 			else response = new HttpResponse(404)
