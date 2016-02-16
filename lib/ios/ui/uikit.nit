@@ -581,7 +581,7 @@ extern class UITableViewCell in "ObjC" `{ UITableViewCell * `}
 	fun text_label: UILabel in "ObjC" `{ return [self textLabel]; `}
 
 	# Wraps: `[self contentView]`
-	fun content_view: UIView in "ObjC" `{ return [self contentView]; `}
+	fun content_view: UIView in "ObjC" `{ return [self contentView]; `}
 end
 
 # Style of a `UITableView`

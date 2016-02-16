@@ -33,9 +33,13 @@ android-install: bin/calculator.apk
 # ---
 # iOS
 
-bin/calculator.app: $(shell ${NITLS} -M src/calculator.nit ios) ${NITC}
+bin/calculator.app: $(shell ${NITLS} -M src/calculator.nit ios) ${NITC} ios/AppIcon.appiconset/Contents.json
 	mkdir -p bin
 	${NITC} -o $@ src/calculator.nit -m ios -D debug
+
+ios/AppIcon.appiconset/Contents.json: art/icon-ios.svg
+	mkdir -p ios
+	../../contrib/inkscape_tools/bin/svg_to_icons art/icon-ios.svg --ios --out ios/AppIcon.appiconset/
 
 # ---
 # Tests
