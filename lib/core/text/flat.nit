@@ -370,7 +370,7 @@ class FlatString
 
 	redef fun substring(from, count)
 	do
-		assert count >= 0
+		if count <= 0 then return ""
 
 		if from < 0 then
 			count += from
