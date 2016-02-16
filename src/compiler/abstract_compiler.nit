@@ -349,7 +349,7 @@ class MakefileToolchain
 		end
 		var debug = toolcontext.opt_debug.value
 
-		makefile.write("CC = ccache cc\nCXX = ccache c++\nCFLAGS = -g{ if not debug then " -O2 " else " "}-Wno-unused-value -Wno-switch -Wno-attributes\nCINCL =\nLDFLAGS ?= \nLDLIBS  ?= -lm {linker_options.join(" ")}\n\n")
+		makefile.write("CC = ccache cc\nCXX = ccache c++\nCFLAGS = -g{ if not debug then " -O2 " else " "}-Wno-unused-value -Wno-switch -Wno-attributes -Wno-trigraphs\nCINCL =\nLDFLAGS ?= \nLDLIBS  ?= -lm {linker_options.join(" ")}\n\n")
 
 		makefile.write "\n# SPECIAL CONFIGURATION FLAGS\n"
 		if platform.supports_libunwind then
