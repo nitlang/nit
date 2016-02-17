@@ -16,8 +16,8 @@ linux:
 	../../bin/nitc -o bin/ballz src/ballz_linux.nit
 
 icon: ../../contrib/inkscape_tools/bin/svg_to_icons
-	mkdir -p res
-	../../contrib/inkscape_tools/bin/svg_to_icons art/ball.svg --android --out res/
+	mkdir -p android/res
+	../../contrib/inkscape_tools/bin/svg_to_icons art/ball.svg --android --out android/res/
 
 clean:
-	rm -rf bin res
+	rm -rf bin android

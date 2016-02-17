@@ -4,20 +4,20 @@ linux:
 	mkdir -p bin
 	../../bin/nitc -o bin/dino src/dino_linux.nit
 
-android: android-icons
+android: android/res/
 	mkdir -p bin
 	../../bin/nitc -o bin/dino.apk src/dino_android.nit
 
-android-release: android-icons
+android-release: android/res/
 	mkdir -p bin
 	../../bin/nitc -o bin/dino.apk src/dino_android.nit --release
 
 ../../contrib/inkscape_tools/bin/svg_to_icons:
 	$(MAKE) -C ../../contrib/inkscape_tools
 
-android-icons: ../../contrib/inkscape_tools/bin/svg_to_icons
-	mkdir -p res
-	../../contrib/inkscape_tools/bin/svg_to_icons art/icon.svg --android --out res/
+android/res/: ../../contrib/inkscape_tools/bin/svg_to_icons
+	mkdir -p android/res/
+	../../contrib/inkscape_tools/bin/svg_to_icons art/icon.svg --android --out android/res/
 
 doc:
 	mkdir -p doc

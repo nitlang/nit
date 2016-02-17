@@ -25,12 +25,12 @@ check: bin/asteronits
 # Android
 
 android: bin/asteronits.apk
-bin/asteronits.apk: $(shell ${NITLS} -M src/asteronits.nit android) ${NITC} res/drawable-hdpi/icon.png pre-build
+bin/asteronits.apk: $(shell ${NITLS} -M src/asteronits.nit android) ${NITC} android/res/ pre-build
 	${NITC} src/android.nit -m android -o $@
 
-android-release: $(shell ${NITLS} -M src/asteronits.nit android) ${NITC} res/drawable-hdpi/icon.png pre-build
+android-release: $(shell ${NITLS} -M src/asteronits.nit android) ${NITC} android/res/ pre-build
 	${NITC} src/android.nit -m android -o bin/asteronits.apk --release
 
-res/drawable-hdpi/icon.png: art/icon.svg
+android/res/: art/icon.svg
 	make -C ../inkscape_tools/
-	../inkscape_tools/bin/svg_to_icons --out res --android art/icon.svg
+	../inkscape_tools/bin/svg_to_icons --out android/res --android art/icon.svg
