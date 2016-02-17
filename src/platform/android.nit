@@ -315,7 +315,7 @@ $(call import-module,android/native_app_glue)
 		toolcontext.exec_and_check(["ndk-build", "-s", "-j", "-C", android_project_root], "Android project error")
 
 		# Generate the apk
-		var args = ["ant", "-q", "-f", android_project_root+"/build.xml"]
+		var args = ["ant", "-f", android_project_root+"/build.xml"]
 		if release then
 			args.add "release"
 		else args.add "debug"
