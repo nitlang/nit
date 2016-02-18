@@ -725,11 +725,9 @@ private class DFAGenerator
 			else
 				add("\tredef fun trans(char) do\n")
 
-				add("\t\tvar c = char.code_point\n")
-
 				# Collect the sequence of tests in the dispatch sequence
 				# The point here is that for each transition, there is a first and a last
-				# So holes hare to be identified
+				# So holes have to be identified
 				var dispatch = new HashMap[Int, nullable State]
 				var haslast: nullable State = null
 
@@ -749,8 +747,15 @@ private class DFAGenerator
 					end
 				end
 
+				if dispatch.is_empty and haslast != null then
+					# Only one transition that accepts everything (quite rare)
+				else
+					# We need to check
+					add("\t\tvar c = char.code_point\n")
+				end
+
 				# Generate a sequence of `if` for the dispatch
-				if haslast != null then
+				if haslast != null and last >= 0 then
 					# Special case: handle up-bound first if not an error
 					add("\t\tif c > {last} then return dfastate_{names[haslast]}\n")
 					# previous become the new last case
