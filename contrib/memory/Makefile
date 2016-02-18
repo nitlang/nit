@@ -24,15 +24,15 @@ assets/images/drawing.png: art/drawing.svg
 	mkdir -p assets/images/
 	../inkscape_tools/bin/svg_to_png_and_nit art/drawing.svg -a assets/ -s src/ -x 4
 
-res/drawable-ldpi/icon.png: art/icon.svg
-	mkdir -p res/
-	../inkscape_tools/bin/svg_to_icons art/icon.svg --android --out res/
+android/res/: art/icon.svg
+	mkdir -p android/res/
+	../inkscape_tools/bin/svg_to_icons art/icon.svg --android --out android/res/
 
 android: bin/memory.apk
-bin/memory.apk: assets/images/drawing.png src/*.nit res/drawable-ldpi/icon.png
+bin/memory.apk: assets/images/drawing.png src/*.nit android/res/
 	mkdir -p bin
 	../../bin/nitc -o bin/memory.apk src/memory.nit -m ../../lib/mnit/android/android.nit -m ../../lib/android/landscape.nit
 
-android-release: assets/images/drawing.png src/*.nit res/drawable-ldpi/icon.png
+android-release: assets/images/drawing.png src/*.nit android/res/
 	mkdir -p bin
 	../../bin/nitc -o bin/memory.apk src/memory.nit -m ../../lib/mnit/android/android.nit -m ../../lib/android/landscape.nit  --release

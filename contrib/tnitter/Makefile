@@ -14,17 +14,17 @@ bin/tnitter: $(shell ../../bin/nitls -M src/tnitter_app.nit)
 # Android
 
 android: bin/tnitter.apk
-bin/tnitter.apk: $(shell ../../bin/nitls -M src/tnitter_app_android.nit) res/drawable-ldpi/icon.png
+bin/tnitter.apk: $(shell ../../bin/nitls -M src/tnitter_app_android.nit) android/res/
 	mkdir -p bin/
 	../../bin/nitc -o bin/tnitter.apk src/tnitter_app_android.nit -D tnitter_server_uri=http://$(SERVER)
 
-android-release: $(shell ../../bin/nitls -M src/tnitter_app_android.nit) res/drawable-ldpi/icon.png
+android-release: $(shell ../../bin/nitls -M src/tnitter_app_android.nit) android/res/
 	mkdir -p bin/
 	../../bin/nitc -o bin/tnitter.apk src/tnitter_app_android.nit --release -D tnitter_server_uri=http://tnitter.xymus.net
 
-res/drawable-ldpi/icon.png: art/icon.svg
-	mkdir -p res
-	../inkscape_tools/bin/svg_to_icons art/icon.svg --android --out res/
+android/res/: art/icon.svg
+	mkdir -p android
+	../inkscape_tools/bin/svg_to_icons art/icon.svg --android --out android/res/
 
 # ---
 # iOS
