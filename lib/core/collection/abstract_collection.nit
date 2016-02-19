@@ -149,6 +149,12 @@ interface Collection[E]
 	# It is memory-efficient but relies on `has` so may be CPU-inefficient for some kind of collections.
 	fun has_all(other: Collection[nullable Object]): Bool
 	do
+		if is_same_instance(other) then return true
+		var ol = other.length
+		var  l = length
+		if ol == 0 then return true
+		if l == 0 then return false
+		if ol == 1 then return has(other.first)
 		for x in other do if not has(x) then return false
 		return true
 	end
