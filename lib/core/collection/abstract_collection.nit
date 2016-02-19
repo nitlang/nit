@@ -680,19 +680,17 @@ interface Map[K, V]
 	# Add each (key,value) of `map` into `self`.
 	# If a same key exists in `map` and `self`, then the value in self is discarded.
 	#
-	# It is the analogous of `SimpleCollection::add_all`
-	#
 	#     var x = new HashMap[String, Int]
 	#     x["four"] = 4
 	#     x["five"] = 5
 	#     var y = new HashMap[String, Int]
 	#     y["four"] = 40
 	#     y["nine"] = 90
-	#     x.recover_with y
+	#     x.add_all y
 	#     assert x["four"]  == 40
 	#     assert x["five"]  == 5
 	#     assert x["nine"]  == 90
-	fun recover_with(map: MapRead[K, V])
+	fun add_all(map: MapRead[K, V])
 	do
 		var i = map.iterator
 		while i.is_ok do
@@ -700,6 +698,9 @@ interface Map[K, V]
 			i.next
 		end
 	end
+
+	# Alias for `add_all`
+	fun recover_with(map: MapRead[K, V]) is deprecated do add_all(map)
 
 	# Remove all items
 	#
