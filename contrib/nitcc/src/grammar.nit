@@ -569,7 +569,7 @@ class LRAutomaton
 				res.add "\t\tREDUCE {r}\n"
 			end
 		end
-		return res.to_s
+		return res.join
 	end
 
 	# Generate a graphviz file of the automaton
