@@ -650,7 +650,7 @@ private class Context
 		if prefix_table != null then
 			var old_prefix_table = prefix_table.as(not null)
 			prefix_table = new HashMap[String, String]
-			prefix_table.recover_with(old_prefix_table)
+			prefix_table.add_all(old_prefix_table)
 		else
 			prefix_table = new HashMap[String, String]
 		end

@@ -186,7 +186,7 @@ redef class NeoGraph
 			var rel_type = json_edge["type"].as(String)
 			var json_properties = json_edge["properties"].as(JsonObject)
 			var edge = new NeoEdge(from, rel_type, to)
-			edge.properties.recover_with(json_properties)
+			edge.properties.add_all(json_properties)
 			edges.add edge
 		end
 	end
@@ -270,7 +270,7 @@ redef class NeoNode
 		var labels = o["labels"].as(JsonArray)
 		for lab in labels do self.labels.add(lab.as(String))
 		var json_properties = o["properties"].as(JsonObject)
-		properties.recover_with(json_properties)
+		properties.add_all(json_properties)
 	end
 
 	redef fun to_json do return to_json_by_append
