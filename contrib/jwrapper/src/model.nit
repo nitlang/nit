@@ -261,7 +261,7 @@ class JavaModel
 	# All classes, from this pass and from other passes
 	var all_classes: HashMap[String, JavaClass] is noserialize, lazy do
 		var classes = new HashMap[String, JavaClass]
-		classes.recover_with self.classes
+		classes.add_all self.classes
 
 		for model_path in sys.opt_load_models.value do
 			if not model_path.file_exists then
@@ -284,7 +284,7 @@ class JavaModel
 				continue
 			end
 
-			classes.recover_with model.classes
+			classes.add_all model.classes
 		end
 
 		return classes

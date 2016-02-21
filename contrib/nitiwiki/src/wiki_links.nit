@@ -211,7 +211,7 @@ redef class WikiArticle
 		super
 		if not is_dirty and not wiki.force_render or not has_source then return
 		content = md_proc.process(md.as(not null))
-		headlines.recover_with(md_proc.emitter.decorator.headlines)
+		headlines.add_all(md_proc.emitter.decorator.headlines)
 	end
 end
 
