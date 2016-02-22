@@ -33,7 +33,7 @@ str = "résonnance réseau résultat"
 print str.search_all("rés".to_re).join(", ")
 
 str = "あついあのあほ"
-print str.split("あ(の)?".to_re).join("")
+print str.split("あ(の)?".to_re).join
 
 for i in str.search_all("あ(の)?".to_re) do
 	print "Match found : {i}"
