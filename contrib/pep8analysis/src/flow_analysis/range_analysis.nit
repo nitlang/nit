@@ -153,7 +153,7 @@ class RangeMap
 	fun copy: RangeMap
 	do
 		var c = new RangeMap
-		c.recover_with(self)
+		c.add_all(self)
 		return c
 	end
 
@@ -171,7 +171,7 @@ redef class AInstruction
 	redef fun accept_range_analysis(v, ins, outs)
 	do
 		visit_all(v)
-		if ins != null then outs.recover_with(ins)
+		if ins != null then outs.add_all(ins)
 	end
 end
 
@@ -180,7 +180,7 @@ redef class ALoadInstruction
 	do
 		visit_all(v)
 
-		if ins != null then outs.recover_with(ins)
+		if ins != null then outs.add_all(ins)
 		var variable = def_var
 		#var add = new RangeMap[Var, ValRange](variable,
 
@@ -205,7 +205,7 @@ redef class AStoreInstruction
 	do
 		visit_all(v)
 
-		if ins != null then outs.recover_with(ins)
+		if ins != null then outs.add_all(ins)
 		var src = src_var # reg
 		var def = def_var # mem
 
@@ -225,7 +225,7 @@ redef class AInputInstruction
 	do
 		visit_all(v)
 
-		if ins != null then outs.recover_with(ins)
+		if ins != null then outs.add_all(ins)
 
 		var def = def_var # mem
 
@@ -244,7 +244,7 @@ redef class AArithmeticInstruction
 		v.current_range = null
 		visit_all(v)
 
-		if ins != null then outs.recover_with(ins)
+		if ins != null then outs.add_all(ins)
 
 		var reg = reg_var
 
@@ -284,7 +284,7 @@ redef class ANegInstruction
 		v.current_range = null
 		visit_all(v)
 
-		if ins != null then outs.recover_with(ins)
+		if ins != null then outs.add_all(ins)
 
 		var reg = reg_var
 		if ins.has_key(reg) then
@@ -324,7 +324,7 @@ redef class AMovInstruction
 		v.current_range = null
 		visit_all(v)
 
-		if ins != null then outs.recover_with(ins)
+		if ins != null then outs.add_all(ins)
 
 		var reg = new RegisterVar('A')
 		if outs.has_key(reg) then

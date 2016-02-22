@@ -48,14 +48,14 @@ end
 redef class AInstruction
 	redef fun accept_reaching_defs_analysis(v, ins, outs)
 	do
-		if ins != null then outs.recover_with(ins)
+		if ins != null then outs.add_all(ins)
 	end
 end
 
 redef class ALoadInstruction
 	redef fun accept_reaching_defs_analysis(v, ins, outs)
 	do
-		if ins != null then outs.recover_with(ins)
+		if ins != null then outs.add_all(ins)
 
 		var variable = def_var
 		if variable != null then
@@ -72,7 +72,7 @@ end
 redef class AStoreInstruction
 	redef fun accept_reaching_defs_analysis(v, ins, outs)
 	do
-		if ins != null then outs.recover_with(ins)
+		if ins != null then outs.add_all(ins)
 
 		var variable = def_var
 		if variable != null then

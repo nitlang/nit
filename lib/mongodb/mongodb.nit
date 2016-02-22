@@ -121,7 +121,7 @@ end
 
 redef class JsonObject
 	# Inits `self` from a BSON object.
-	private init from_bson(bson: BSON) do recover_with(bson.to_json)
+	private init from_bson(bson: BSON) do add_all(bson.to_json)
 
 	# Returns a new BSON object from `self`.
 	private fun to_bson: BSON do return new BSON.from_json(self)

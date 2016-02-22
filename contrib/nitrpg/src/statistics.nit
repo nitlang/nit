@@ -177,7 +177,7 @@ class GameStats
 		obj["period"] = period
 		obj["owner"] = owner.key
 		var values = new JsonObject
-		values.recover_with(self)
+		values.add_all(self)
 		obj["values"] = values
 		return obj
 	end

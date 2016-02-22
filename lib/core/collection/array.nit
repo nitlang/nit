@@ -793,7 +793,7 @@ class ArrayMap[K, E]
 	redef fun clone
 	do
 		var res = new ArrayMap[K,E]
-		res.recover_with self
+		res.add_all self
 		return res
 	end
 end

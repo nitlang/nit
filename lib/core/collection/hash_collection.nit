@@ -273,7 +273,7 @@ class HashMap[K, V]
 	# Build a list filled with the items of `coll`.
 	init from(coll: Map[K, V]) do
 		init
-		recover_with(coll)
+		add_all(coll)
 	end
 
 	redef var keys: RemovableCollection[K] = new HashMapKeys[K, V](self) is lazy
