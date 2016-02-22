@@ -569,7 +569,7 @@ class LRAutomaton
 				res.add "\t\tREDUCE {r}\n"
 			end
 		end
-		return res.to_s
+		return res.join
 	end
 
 	# Generate a graphviz file of the automaton
@@ -894,7 +894,7 @@ class LRState
 	var name: String
 
 	# Mangled name
-	fun cname: String do return name.to_cmangle
+	var cname: String is lazy do return name.to_cmangle
 
 	# Number
 	var number: Int = -1
