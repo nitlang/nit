@@ -458,7 +458,7 @@ redef class Meetup
 </tr>
 <tr id="pizzas">
 	<th>
-	{{{"%1 ratio × %2".format("<span style='color:orange'>∇</span>", "<input id='pizza_unit' type='number' placeholder='1' text='1' class='inputsm' style='width: 8ex !important;' onchange='update_scores()' onkeypress='update_scores()' onpaste='update_scores()' oninput='update_scores()'>")}}}
+	{{{"%0 ratio × %1".format("<span style='color:orange'>∇</span>", "<input id='pizza_unit' type='number' placeholder='1' text='1' class='inputsm' style='width: 8ex !important;' onchange='update_scores()' onkeypress='update_scores()' onpaste='update_scores()' oninput='update_scores()'>")}}}
 	</th>
 """
 		for i in answers(db) do t.add """
