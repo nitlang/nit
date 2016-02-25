@@ -58,10 +58,16 @@ class MasterHeader
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <li{{{actives.get_or_default("ens", "")}}}><a href="http://xymus.net/ens/">Enseignement</a></li>
-        <li{{{actives.get_or_default("opportunity", "")}}}><a href="http://xymus.net/opportunity/">Opportunité</a></li>
-        <li{{{actives.get_or_default("tnitter", "")}}}><a href="http://tnitter.xymus.net/">Tnitter</a></li>
-        <li><a href="http://pep8.xymus.net/">Pep/8 Analysis</a></li>
-        <li{{{actives.get_or_default("benitlux", "")}}}><a href="http://benitlux.xymus.net/">Benitlux</a></li>
+        <li{{{actives.get_or_default("opportunity", "")}}}>
+          <a href="http://xymus.net/opportunity/">
+		  <img height="22px" src="/static/opportunity-small-fr.png"></a>
+        </li>
+        <li{{{actives.get_or_default("tnitter", "")}}}>
+		  <a href="http://xymus.net/tnitter/">
+          <img height="22px" src="/static/tnitter-small.png">
+		</a></li>
+        <li><a href="http://xymus.net/pep8/">Pep/8 Analysis</a></li>
+        <li{{{actives.get_or_default("benitlux", "")}}}><a href="http://xymus.net/benitlux/">Benitlux</a></li>
       </ul>
 
       <ul class="nav navbar-nav pull-right">
@@ -96,6 +102,7 @@ class OpportunityMasterHeader
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 	<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
 	<script>
+		{{{tracking_code}}}
 		{{{page_js}}}
 	</script>
 	<style>
@@ -128,6 +135,11 @@ redef class OpportunityPage
 	redef var header = new OpportunityMasterHeader(new MasterHeader("opportunity", false))
 end
 
+redef class FileServer
+
+	redef fun javascript_header do return tracking_code
+end
+
 redef class MeetupCreationPage
 	redef var templates do
 		var map = super
@@ -137,6 +149,16 @@ redef class MeetupCreationPage
 		return map
 	end
 end
+
+fun tracking_code: String do return """
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	ga('create', 'UA-574578-1', 'auto');
+	ga('send', 'pageview');
+"""
 
 # Avoid executing when running tests
 if "NIT_TESTING".environ == "true" then exit 0
@@ -161,18 +183,23 @@ factory.config.virtual_hosts.add benitlux_vh
 var user_group = new UserGroup("nitcorn", "nitcorn")
 if sys.uid == 0 then user_group.drop_privileges
 
+# Files shared by all the virtual hosts (mostly for the common header)
+var shared_file_server = new FileServer("/var/www/static/")
+
 # Tnitter is available at `tnitter.xymus.net` and `xymus.net/tnitter/`
 var tnitter = new TnitterWeb
-default_vh.routes.add new Route("/tnitter/", tnitter)
+default_vh.routes.add new Route("/tnitter", tnitter)
 
 tnitter_vh.routes.add new Route("/rest/", new TnitterREST)
 tnitter_vh.routes.add new Route("/push/", new TnitterPush)
+tnitter_vh.routes.add new Route("/static/", shared_file_server)
 tnitter_vh.routes.add new Route(null, tnitter)
 
 # Pep/8 Analysis is only a file server. It is available at `pep8.xymus.net`
 # and through the global/default file server at `xymus.net/pep8/`
 #
 # TODO Implement pep8analysis server-side with a nitcorn action
+pep8_vh.routes.add new Route("/static/", shared_file_server)
 pep8_vh.routes.add new Route(null, new FileServer("/var/www/pep8/"))
 
 # Benitlux is available at `benitlux.xymus.net` and `xymus.net/benitlux/`
@@ -182,15 +209,16 @@ pep8_vh.routes.add new Route(null, new FileServer("/var/www/pep8/"))
 var benitlux_sub = new BenitluxSubscriptionAction
 var benitlux_rest = new BenitluxRESTAction
 default_vh.routes.add new Route("/benitlux/rest/", benitlux_rest)
-default_vh.routes.add new Route("/benitlux/", benitlux_sub)
+default_vh.routes.add new Route("/benitlux", benitlux_sub)
 benitlux_vh.routes.add new Route("/rest/", benitlux_rest)
+benitlux_vh.routes.add new Route("/static/", shared_file_server)
 benitlux_vh.routes.add new Route(null, benitlux_sub)
 
 # Opportunity service
 var opportunity = new OpportunityWelcome
 var opportunity_rest = new OpportunityRESTAction
 default_vh.routes.add new Route("/opportunity/rest/", opportunity_rest)
-default_vh.routes.add new Route("/opportunity/", opportunity)
+default_vh.routes.add new Route("/opportunity", opportunity)
 
 # Nitiwiki modification form
 var passwords = "nitiwiki_passwords".to_path.read_lines
@@ -201,7 +229,7 @@ default_vh.routes.add new Route("/edit", new EditAction("http://xymus.net/", "/h
 # a different header.
 var file_server_ens = new FileServer("/var/www/ens/")
 file_server_ens.header = (new MasterHeader("ens", false))
-default_vh.routes.add new Route("/ens/", file_server_ens)
+default_vh.routes.add new Route("/ens", file_server_ens)
 
 # Default file server is used for the main page at `xymus.net` and it is
 # the default action for any path not caught by other actions.

@@ -23,18 +23,19 @@ class OpportunityHomePage
 
 	init do
 		body = """
-		<div class="page-header">
-		<h1 class="text-center">{{{"Welcome to Opportunity!"}}}</h1>
-			</div>
-			<p class="text-center">
-				<p class="text-center">{{{"Opportunity is a free (as in free software), easy-to-use, meetup planner."}}}</p>
-				<p class="text-center">{{{"You can start using it right now by creating a new Meetup and sharing it with your friends!"}}}</p>
-				<p class="text-center">
-				<form action="new_meetup">
-				<button type="submit" class="btn btn-lg center-block btn-success">{{{"Create a Meetup"}}}</button>
-				</form>
-				</p>
-			</p>
+<div class="container">
+	<p class="text-center"><img src="/static/opportunity.svg"></p>
+
+	<div class="jumbotron text-center">
+		<p>
+			{{{"Opportunity is a free (as in free software), easy-to-use, meetup planner."}}}
+			{{{"You can start using it right now by creating a new Meetup and sharing it with your friends!"}}}
+		</p>
+		<form action="new_meetup">
+			<button type="submit" class="btn btn-lg center-block btn-success">{{{"Create a Meetup"}}}</button>
+		</form>
+	</div>
+</div>
 """
 	end
 end

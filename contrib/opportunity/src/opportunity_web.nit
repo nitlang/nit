@@ -26,6 +26,7 @@ var iface = "localhost:8080"
 
 var vh = new VirtualHost(iface)
 vh.routes.add new Route("/rest/", new OpportunityRESTAction)
+vh.routes.add new Route("/static/", new FileServer("art"))
 vh.routes.add new Route(null, new OpportunityWelcome)
 
 var fac = new HttpFactory.and_libevent

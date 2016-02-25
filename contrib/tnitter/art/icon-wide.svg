@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="61.34494"
+   height="21.098732"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.48.5 r10040"
+   sodipodi:docname="branding.svg"
+   inkscape:export-filename="tnitter-small.png"
+   inkscape:export-xdpi="273.0022"
+   inkscape:export-ydpi="273.0022">
+  <defs
+     id="defs4" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#424242"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="11.2"
+     inkscape:cx="63.415271"
+     inkscape:cy="11.805101"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="2558"
+     inkscape:window-height="1379"
+     inkscape:window-x="2560"
+     inkscape:window-y="27"
+     inkscape:window-maximized="1"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0" />
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-4.3047165,-999.85371)">
+    <g
+       id="g2987"
+       inkscape:export-filename="tnitter-small.png"
+       inkscape:export-xdpi="337.26083"
+       inkscape:export-ydpi="337.26083"
+       transform="matrix(0.96433067,0,0,0.96433067,1.25494,36.032445)">
+      <text
+         y="1017.1279"
+         x="16.147572"
+         xml:space="preserve"
+         style="font-size:17.83931541px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:-3.04325652px;word-spacing:0px;fill:#0056b8;fill-opacity:1;stroke:none;font-family:Sans"
+         id="text3876"
+         sodipodi:linespacing="125%"><tspan
+           dx="0.43475091"
+           id="tspan3878"
+           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;letter-spacing:-0.86950183px;fill:#0056b8;fill-opacity:1;font-family:URW Bookman L;-inkscape-font-specification:URW Bookman L Bold">nitter</tspan></text>
+      <path
+         d="m 17.538638,1000.9638 -11.8559936,0 -1.751575,5.3016 1.751575,0.7428 c 0.8174,-2.177 2.4522065,-3.6625 4.0169448,-3.6625 0.3503148,0 0.3970248,0.128 0.3970248,0.9219 l 0,9.8351 c 0,0.9989 -0.07007,1.3575 -0.2802525,1.6136 -0.2101897,0.2816 -0.794048,0.5122 -1.3078428,0.5378 l -0.7006297,0.051 0,2.1002 7.652214,0 0,-2.1002 -0.70063,-0.051 c -0.513794,-0.026 -1.097654,-0.2562 -1.307842,-0.5378 -0.210188,-0.2561 -0.280252,-0.6147 -0.280252,-1.6136 l 0,-9.9119 c 0,-0.8964 10e-7,-0.8964 0.467087,-0.8964 0.8174,0 1.704867,0.4866 2.568978,1.4087 0.537147,0.5634 0.723984,0.8452 1.51803,2.3051 l 1.704867,-0.7428 -1.891703,-5.3016"
+         style="font-size:163.82507324px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#0056b8;fill-opacity:1;stroke:none;font-family:URW Bookman L;-inkscape-font-specification:URW Bookman L Bold"
+         id="path3866-9"
+         inkscape:connector-curvature="0"
+         sodipodi:nodetypes="ccccsssccccccccssscccc" />
+    </g>
+  </g>
+</svg>
