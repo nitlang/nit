@@ -152,7 +152,11 @@ private class TypeVisitor
 			end
 			return null # forward error
 		end
-		self.error(nexpr, "Error: expected an expression.")
+		var more_message = null
+		var p = nexpr.parent
+		if p != null then more_message = p.bad_expr_message(nexpr)
+		if more_message == null then more_message = "" else more_message = " " + more_message
+		self.error(nexpr, "Error: expected an expression{more_message}.")
 		return null
 	end
 
@@ -802,6 +806,12 @@ end
 
 redef class ANode
 	private fun accept_post_typing(v: TypeVisitor) do end
+
+	# An additional information message to explain the role of a child expression.
+	#
+	# The point of the method is to allow some kind of double dispatch so the parent
+	# choose how to describe its children.
+	private fun bad_expr_message(child: AExpr): nullable String do return null
 end
 
 redef class AAttrPropdef
@@ -1709,6 +1719,14 @@ end
 redef class ASendExpr
 	# The property invoked by the send.
 	var callsite: nullable CallSite
+
+	redef fun bad_expr_message(child)
+	do
+		if child == self.n_expr then
+			return "to be the receiver of `{self.property_name}`"
+		end
+		return null
+	end
 
 	redef fun accept_typing(v)
 	do
