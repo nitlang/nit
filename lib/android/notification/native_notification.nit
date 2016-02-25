@@ -25,7 +25,7 @@ in "Java" `{
 	import android.app.Notification;
 `}
 
-redef class NativeActivity
+redef class NativeContext
 	fun notification_manager: NativeNotificationManager in "Java" `{
 		return (NotificationManager)self.getSystemService(Context.NOTIFICATION_SERVICE);
 	`}
@@ -47,7 +47,7 @@ end
 
 extern class NativeNotificationBuilder in "Java" `{ android.app.Notification$Builder `}
 
-	new (context: NativeActivity) in "Java" `{ return new Notification.Builder(context); `}
+	new (context: NativeContext) in "Java" `{ return new Notification.Builder(context); `}
 
 	fun create: NativeNotification in "Java" `{
 		// Deprecated since API 16, which introduces `build`,
