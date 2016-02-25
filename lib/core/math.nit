@@ -524,11 +524,11 @@ redef class Sys
 	end
 end
 
-# Computes the arc tangent given `x` and `y`.
+# Computes the arc tangent given `y` and `x`.
 #
 #     assert atan2(-0.0, 1.0) == -0.0
 #     assert atan2(0.0, 1.0) == 0.0
-fun atan2(x: Float, y: Float): Float `{ return atan2(x, y); `}
+fun atan2(y: Float, x: Float): Float `{ return atan2(y, x); `}
 
 # Approximate value of **pi**.
 fun pi: Float do return 3.14159265
