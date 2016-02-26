@@ -67,12 +67,16 @@ MClassPage Starter
 				#### test_prog-__Starter.children
 				#### test_prog-__Starter.descendants
 		## test_prog-__Starter.constructors
-			### test_prog__platform-__Object__init.definition
+			### test_prog-__Starter__autoinit.definition
 		## test_prog-__Starter.concerns
 		## test_prog.concern
 		## test_prog.concern
 		## test_prog-.concern
 			### test_prog-__Starter__start.definition
+
+MPropertyPage autoinit
+	# autoinit.section
+		## test_prog-__Starter__autoinit.intro
 
 MPropertyPage start
 	# start.section
@@ -144,7 +148,7 @@ MClassPage Game
 				#### test_prog__game-__Game.children
 				#### test_prog__game-__Game.descendants
 		## test_prog__game-__Game.constructors
-			### test_prog__platform-__Object__init.definition
+			### test_prog__game-__Game__autoinit.definition
 		## test_prog__game-__Game.concerns
 		## test_prog.concern
 		## test_prog.concern
@@ -155,6 +159,10 @@ MClassPage Game
 			### test_prog__game-__Game__player_characters.definition
 			### test_prog__game-__Game__start_game.definition
 			### test_prog__game-__Game__stop_game.definition
+
+MPropertyPage autoinit
+	# autoinit.section
+		## test_prog__game-__Game__autoinit.intro
 
 MPropertyPage computer_characters
 	# computer_characters.section
@@ -250,6 +258,17 @@ MClassPage Bool
 				#### test_prog__platform-__Bool.ancestors
 				#### test_prog__platform-__Bool.children
 				#### test_prog__platform-__Bool.descendants
+		## test_prog__platform-__Bool.constructors
+			### test_prog__platform-__Bool__autoinit.definition
+		## test_prog__platform-__Bool.concerns
+		## test_prog.concern
+		## test_prog.concern
+		## test_prog__platform.concern
+		## test_prog__platform-.concern
+
+MPropertyPage autoinit
+	# autoinit.section
+		## test_prog__platform-__Bool__autoinit.intro
 
 MClassPage Float
 	# Float.section
@@ -262,7 +281,7 @@ MClassPage Float
 				#### test_prog__platform-__Float.children
 				#### test_prog__platform-__Float.descendants
 		## test_prog__platform-__Float.constructors
-			### test_prog__platform-__Object__init.definition
+			### test_prog__platform-__Float__autoinit.definition
 		## test_prog__platform-__Float.concerns
 		## test_prog.concern
 		## test_prog.concern
@@ -294,6 +313,10 @@ MPropertyPage &gt;
 	# &gt;.section
 		## test_prog__platform-__Float___62d.intro
 
+MPropertyPage autoinit
+	# autoinit.section
+		## test_prog__platform-__Float__autoinit.intro
+
 MClassPage Int
 	# Int.section
 		## test_prog__platform-__Int.intro
@@ -305,7 +328,7 @@ MClassPage Int
 				#### test_prog__platform-__Int.children
 				#### test_prog__platform-__Int.descendants
 		## test_prog__platform-__Int.constructors
-			### test_prog__platform-__Object__init.definition
+			### test_prog__platform-__Int__autoinit.definition
 		## test_prog__platform-__Int.concerns
 		## test_prog.concern
 		## test_prog.concern
@@ -339,6 +362,10 @@ MPropertyPage &gt;
 	# &gt;.section
 		## test_prog__platform-__Int___62d.intro
 
+MPropertyPage autoinit
+	# autoinit.section
+		## test_prog__platform-__Int__autoinit.intro
+
 MPropertyPage to_f
 	# to_f.section
 		## test_prog__platform-__Int__to_f.intro
@@ -357,6 +384,17 @@ MClassPage List
 				#### test_prog__platform-__List.ancestors
 				#### test_prog__platform-__List.children
 				#### test_prog__platform-__List.descendants
+		## test_prog__platform-__List.constructors
+			### test_prog__platform-__List__autoinit.definition
+		## test_prog__platform-__List.concerns
+		## test_prog.concern
+		## test_prog.concern
+		## test_prog__platform.concern
+		## test_prog__platform-.concern
+
+MPropertyPage autoinit
+	# autoinit.section
+		## test_prog__platform-__List__autoinit.intro
 
 MClassPage Object
 	# Object.section
@@ -369,6 +407,7 @@ MClassPage Object
 				#### test_prog__platform-__Object.children
 				#### test_prog__platform-__Object.descendants
 		## test_prog__platform-__Object.constructors
+			### test_prog__platform-__Object__autoinit.definition
 			### test_prog__platform-__Object__init.definition
 		## test_prog__platform-__Object.concerns
 		## test_prog.concern
@@ -391,6 +430,10 @@ MPropertyPage ==
 	# ==.section
 		## test_prog__platform-__Object___61d_61d.intro
 
+MPropertyPage autoinit
+	# autoinit.section
+		## test_prog__platform-__Object__autoinit.intro
+
 MPropertyPage init
 	# init.section
 		## test_prog__platform-__Object__init.intro
@@ -408,8 +451,6 @@ MPropertyPage init
 			### test_prog__rpg__races__Human__init.definition
 			### test_prog__rpg__races__Dwarf__init.definition
 			### test_prog__rpg__races__Elf__init.definition
-		## test_prog__rpg__character.concern
-			### test_prog__rpg__character__Character__init.definition
 
 MClassPage String
 	# String.section
@@ -421,6 +462,17 @@ MClassPage String
 				#### test_prog__platform-__String.ancestors
 				#### test_prog__platform-__String.children
 				#### test_prog__platform-__String.descendants
+		## test_prog__platform-__String.constructors
+			### test_prog__platform-__String__autoinit.definition
+		## test_prog__platform-__String.concerns
+		## test_prog.concern
+		## test_prog.concern
+		## test_prog__platform.concern
+		## test_prog__platform-.concern
+
+MPropertyPage autoinit
+	# autoinit.section
+		## test_prog__platform-__String__autoinit.intro
 
 MGroupPage rpg
 	# rpg.section
@@ -509,6 +561,7 @@ MClassPage Alcoholic
 				#### test_prog__rpg__careers__Alcoholic.children
 				#### test_prog__rpg__careers__Alcoholic.descendants
 		## test_prog__rpg__careers__Alcoholic.constructors
+			### test_prog__rpg__careers__Alcoholic__autoinit.definition
 			### test_prog__rpg__careers__Alcoholic__init.definition
 				#### test_prog__rpg__careers__Alcoholic__init.lin
 		## test_prog__rpg__careers__Alcoholic.concerns
@@ -516,6 +569,10 @@ MClassPage Alcoholic
 		## test_prog.concern
 		## test_prog__rpg.concern
 		## test_prog__rpg__careers.concern
+
+MPropertyPage autoinit
+	# autoinit.section
+		## test_prog__rpg__careers__Alcoholic__autoinit.intro
 
 MClassPage Career
 	# Career.section
@@ -528,6 +585,7 @@ MClassPage Career
 				#### test_prog__rpg__careers__Career.children
 				#### test_prog__rpg__careers__Career.descendants
 		## test_prog__rpg__careers__Career.constructors
+			### test_prog__rpg__careers__Career__autoinit.definition
 			### test_prog__rpg__careers__Career__init.definition
 				#### test_prog__rpg__careers__Career__init.lin
 		## test_prog__rpg__careers__Career.concerns
@@ -541,6 +599,10 @@ MClassPage Career
 			### test_prog__rpg__careers__Career__intelligence_bonus_61d.definition
 			### test_prog__rpg__careers__Career__strength_bonus.definition
 			### test_prog__rpg__careers__Career__strength_bonus_61d.definition
+
+MPropertyPage autoinit
+	# autoinit.section
+		## test_prog__rpg__careers__Career__autoinit.intro
 
 MPropertyPage endurance_bonus
 	# endurance_bonus.section
@@ -577,6 +639,7 @@ MClassPage Magician
 				#### test_prog__rpg__careers__Magician.children
 				#### test_prog__rpg__careers__Magician.descendants
 		## test_prog__rpg__careers__Magician.constructors
+			### test_prog__rpg__careers__Magician__autoinit.definition
 			### test_prog__rpg__careers__Magician__init.definition
 				#### test_prog__rpg__careers__Magician__init.lin
 		## test_prog__rpg__careers__Magician.concerns
@@ -584,6 +647,10 @@ MClassPage Magician
 		## test_prog.concern
 		## test_prog__rpg.concern
 		## test_prog__rpg__careers.concern
+
+MPropertyPage autoinit
+	# autoinit.section
+		## test_prog__rpg__careers__Magician__autoinit.intro
 
 MClassPage Warrior
 	# Warrior.section
@@ -596,6 +663,7 @@ MClassPage Warrior
 				#### test_prog__rpg__careers__Warrior.children
 				#### test_prog__rpg__careers__Warrior.descendants
 		## test_prog__rpg__careers__Warrior.constructors
+			### test_prog__rpg__careers__Warrior__autoinit.definition
 			### test_prog__rpg__careers__Warrior__init.definition
 				#### test_prog__rpg__careers__Warrior__init.lin
 		## test_prog__rpg__careers__Warrior.concerns
@@ -603,6 +671,10 @@ MClassPage Warrior
 		## test_prog.concern
 		## test_prog__rpg.concern
 		## test_prog__rpg__careers.concern
+
+MPropertyPage autoinit
+	# autoinit.section
+		## test_prog__rpg__careers__Warrior__autoinit.intro
 
 MModulePage character
 	# character.section
@@ -635,8 +707,7 @@ MClassPage Character
 				#### test_prog__rpg__character__Character.children
 				#### test_prog__rpg__character__Character.descendants
 		## test_prog__rpg__character__Character.constructors
-			### test_prog__rpg__character__Character__init.definition
-				#### test_prog__rpg__character__Character__init.lin
+			### test_prog__rpg__character__Character__autoinit.definition
 		## test_prog__rpg__character__Character.concerns
 		## test_prog.concern
 		## test_prog.concern
@@ -670,6 +741,10 @@ MPropertyPage age
 MPropertyPage age=
 	# age=.section
 		## test_prog__rpg__character__Character__age_61d.intro
+
+MPropertyPage autoinit
+	# autoinit.section
+		## test_prog__rpg__character__Character__autoinit.intro
 
 MPropertyPage career
 	# career.section
@@ -784,7 +859,7 @@ MClassPage Combatable
 				#### test_prog__rpg__combat__Combatable.children
 				#### test_prog__rpg__combat__Combatable.descendants
 		## test_prog__rpg__combat__Combatable.constructors
-			### test_prog__platform-__Object__init.definition
+			### test_prog__rpg__combat__Combatable__autoinit.definition
 		## test_prog__rpg__combat__Combatable.concerns
 		## test_prog.concern
 		## test_prog.concern
@@ -799,6 +874,10 @@ MClassPage Combatable
 MPropertyPage attack
 	# attack.section
 		## test_prog__rpg__combat__Combatable__attack.intro
+
+MPropertyPage autoinit
+	# autoinit.section
+		## test_prog__rpg__combat__Combatable__autoinit.intro
 
 MPropertyPage defend
 	# defend.section
@@ -833,13 +912,17 @@ MClassPage Weapon
 				#### test_prog__rpg__combat__Weapon.children
 				#### test_prog__rpg__combat__Weapon.descendants
 		## test_prog__rpg__combat__Weapon.constructors
-			### test_prog__platform-__Object__init.definition
+			### test_prog__rpg__combat__Weapon__autoinit.definition
 		## test_prog__rpg__combat__Weapon.concerns
 		## test_prog.concern
 		## test_prog.concern
 		## test_prog__rpg.concern
 		## test_prog__rpg__combat.concern
 			### test_prog__rpg__combat__Weapon__dps.definition
+
+MPropertyPage autoinit
+	# autoinit.section
+		## test_prog__rpg__combat__Weapon__autoinit.intro
 
 MPropertyPage dps
 	# dps.section
@@ -900,6 +983,7 @@ MClassPage Dwarf
 				#### test_prog__rpg__races__Dwarf.children
 				#### test_prog__rpg__races__Dwarf.descendants
 		## test_prog__rpg__races__Dwarf.constructors
+			### test_prog__rpg__races__Dwarf__autoinit.definition
 			### test_prog__rpg__races__Dwarf__init.definition
 				#### test_prog__rpg__races__Dwarf__init.lin
 		## test_prog__rpg__races__Dwarf.concerns
@@ -910,6 +994,10 @@ MClassPage Dwarf
 		## test_prog__rpg__combat.concern
 			### test_prog__rpg__combat__Dwarf__dps.definition
 				#### test_prog__rpg__combat__Dwarf__dps.lin
+
+MPropertyPage autoinit
+	# autoinit.section
+		## test_prog__rpg__races__Dwarf__autoinit.intro
 
 MClassPage Elf
 	# Elf.section
@@ -922,6 +1010,7 @@ MClassPage Elf
 				#### test_prog__rpg__races__Elf.children
 				#### test_prog__rpg__races__Elf.descendants
 		## test_prog__rpg__races__Elf.constructors
+			### test_prog__rpg__races__Elf__autoinit.definition
 			### test_prog__rpg__races__Elf__init.definition
 				#### test_prog__rpg__races__Elf__init.lin
 		## test_prog__rpg__races__Elf.concerns
@@ -929,6 +1018,10 @@ MClassPage Elf
 		## test_prog.concern
 		## test_prog__rpg.concern
 		## test_prog__rpg__races.concern
+
+MPropertyPage autoinit
+	# autoinit.section
+		## test_prog__rpg__races__Elf__autoinit.intro
 
 MClassPage Human
 	# Human.section
@@ -941,6 +1034,7 @@ MClassPage Human
 				#### test_prog__rpg__races__Human.children
 				#### test_prog__rpg__races__Human.descendants
 		## test_prog__rpg__races__Human.constructors
+			### test_prog__rpg__races__Human__autoinit.definition
 			### test_prog__rpg__races__Human__init.definition
 				#### test_prog__rpg__races__Human__init.lin
 		## test_prog__rpg__races__Human.concerns
@@ -948,6 +1042,10 @@ MClassPage Human
 		## test_prog.concern
 		## test_prog__rpg.concern
 		## test_prog__rpg__races.concern
+
+MPropertyPage autoinit
+	# autoinit.section
+		## test_prog__rpg__races__Human__autoinit.intro
 
 MClassPage Race
 	# Race.section
@@ -960,6 +1058,7 @@ MClassPage Race
 				#### test_prog__rpg__races__Race.children
 				#### test_prog__rpg__races__Race.descendants
 		## test_prog__rpg__races__Race.constructors
+			### test_prog__rpg__races__Race__autoinit.definition
 			### test_prog__rpg__races__Race__init.definition
 				#### test_prog__rpg__races__Race__init.lin
 		## test_prog__rpg__races__Race.concerns
@@ -973,6 +1072,10 @@ MClassPage Race
 			### test_prog__rpg__races__Race__base_intelligence_61d.definition
 			### test_prog__rpg__races__Race__base_strength.definition
 			### test_prog__rpg__races__Race__base_strength_61d.definition
+
+MPropertyPage autoinit
+	# autoinit.section
+		## test_prog__rpg__races__Race__autoinit.intro
 
 MPropertyPage base_endurance
 	# base_endurance.section
@@ -1007,24 +1110,24 @@ MModulePage rpg
 				#### test_prog__rpg__rpg.imports
 				#### test_prog__rpg__rpg.clients
 
-Generated 96 pages
+Generated 115 pages
  list:
-  MPropertyPage: 58 (60.41%)
-  MClassPage: 20 (20.83%)
-  MModulePage: 8 (8.33%)
-  MGroupPage: 4 (4.16%)
-  ReadmePage: 4 (4.16%)
-  SearchPage: 1 (1.04%)
-  OverviewPage: 1 (1.04%)
-Found 182 mentities
+  MPropertyPage: 77 (66.95%)
+  MClassPage: 20 (17.39%)
+  MModulePage: 8 (6.95%)
+  MGroupPage: 4 (3.47%)
+  ReadmePage: 4 (3.47%)
+  SearchPage: 1 (0.86%)
+  OverviewPage: 1 (0.86%)
+Found 219 mentities
  list:
-  MMethodDef: 68 (37.36%)
-  MMethod: 57 (31.31%)
-  MClassDef: 22 (12.08%)
-  MClass: 20 (10.98%)
-  MModule: 8 (4.39%)
-  MGroup: 4 (2.19%)
-  MVirtualTypeDef: 1 (0.54%)
-  MVirtualTypeProp: 1 (0.54%)
-  MPackage: 1 (0.54%)
+  MMethodDef: 86 (39.26%)
+  MMethod: 76 (34.70%)
+  MClassDef: 22 (10.04%)
+  MClass: 20 (9.13%)
+  MModule: 8 (3.65%)
+  MGroup: 4 (1.82%)
+  MVirtualTypeDef: 1 (0.45%)
+  MVirtualTypeProp: 1 (0.45%)
+  MPackage: 1 (0.45%)
 quicksearch-list.js

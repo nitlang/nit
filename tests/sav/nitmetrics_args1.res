@@ -344,23 +344,23 @@ Number of refined classes: 0 (0.00%)
 Average number of class refinments by classes: 0.00
 Average number of class refinments by refined classes: na
 
-Number of properties: 18
-  Number of MAttribute: 3 (16.66%)
-  Number of MMethod: 15 (83.33%)
+Number of properties: 23
+  Number of MAttribute: 3 (13.04%)
+  Number of MMethod: 20 (86.95%)
 
-Number of property definitions: 20
-Number of redefined properties: 1 (5.55%)
-Average number of property redefinitions by property: 0.11
-Average number of property redefinitions by redefined property: 2.00
+Number of property definitions: 24
+Number of redefined properties: 1 (4.34%)
+Average number of property redefinitions by property: 0.04
+Average number of property redefinitions by redefined property: 1.00
 --- Explicit vs. Implicit Self ---
 Total number of self: 5
 Total number of implicit self: 4 (80.00%)
 --- Construction of tables ---
 Number of runtime classes: 6 (excluding interfaces and abstract classes)
 Average number of composing class definition by runtime class: 2.00
-Total size of tables (classes and instances): 23 (not including stuff like info for subtyping or call-next-method)
-Average size of table by runtime class: 3.83
-Values never redefined: 17 (73.91%)
+Total size of tables (classes and instances): 33 (not including stuff like info for subtyping or call-next-method)
+Average size of table by runtime class: 5.50
+Values never redefined: 27 (81.81%)
 generating package_hierarchy.dot
 generating module_hierarchy.dot
 
@@ -399,11 +399,11 @@ generating module_hierarchy.dot
 	  std: 0.926
 	  sum: 6
 	cnbp: number of accessible properties (inherited + local)
-	  avg: 3.0
-	  max: C (7)
-	  min: Object (1)
-	  std: 2.36
-	  sum: 24
+	  avg: 5.0
+	  max: C (9)
+	  min: Object (2)
+	  std: 2.268
+	  sum: 35
 	cnba: number of accessible attributes (inherited + local)
 	  avg: 0.0
 	  max: C (2)
@@ -411,23 +411,23 @@ generating module_hierarchy.dot
 	  std: 0.845
 	  sum: 3
 	cnbip: number of introduced properties
-	  avg: 2.0
-	  max: C (6)
-	  min: Bool (0)
-	  std: 2.268
-	  sum: 18
+	  avg: 3.0
+	  max: C (7)
+	  min: Bool (1)
+	  std: 2.0
+	  sum: 23
 	cnbrp: number of redefined properties
 	  avg: 0.0
 	  max: A (1)
 	  min: Object (0)
-	  std: 0.535
-	  sum: 2
+	  std: 0.378
+	  sum: 1
 	cnbhp: number of inherited properties
-	  avg: 0.0
-	  max: Bool (1)
+	  avg: 1.0
+	  max: Bool (2)
 	  min: Object (0)
-	  std: 0.926
-	  sum: 6
+	  std: 1.0
+	  sum: 12
 
  ## global metrics
 	cnoa: number of ancestor classes
@@ -461,11 +461,11 @@ generating module_hierarchy.dot
 	  std: 0.926
 	  sum: 6
 	cnbp: number of accessible properties (inherited + local)
-	  avg: 3.0
-	  max: C (7)
-	  min: Object (1)
-	  std: 2.36
-	  sum: 24
+	  avg: 5.0
+	  max: C (9)
+	  min: Object (2)
+	  std: 2.268
+	  sum: 35
 	cnba: number of accessible attributes (inherited + local)
 	  avg: 0.0
 	  max: C (2)
@@ -473,23 +473,23 @@ generating module_hierarchy.dot
 	  std: 0.845
 	  sum: 3
 	cnbip: number of introduced properties
-	  avg: 2.0
-	  max: C (6)
-	  min: Bool (0)
-	  std: 2.268
-	  sum: 18
+	  avg: 3.0
+	  max: C (7)
+	  min: Bool (1)
+	  std: 2.0
+	  sum: 23
 	cnbrp: number of redefined properties
 	  avg: 0.0
 	  max: A (1)
 	  min: Object (0)
-	  std: 0.535
-	  sum: 2
+	  std: 0.378
+	  sum: 1
 	cnbhp: number of inherited properties
-	  avg: 0.0
-	  max: Bool (1)
+	  avg: 1.0
+	  max: Bool (2)
 	  min: Object (0)
-	  std: 0.926
-	  sum: 6
+	  std: 1.0
+	  sum: 12
 
 # Inheritance metrics
 
@@ -695,13 +695,12 @@ Statistics of type usage:
   A: 1 (11.11%)
 
 # Mendel metrics
-	large mclasses (threshold: 3.915)
+	large mclasses (threshold: 4.354)
 	   C: 5
-	   B: 4
-	   Sys: 4
-	budding mclasses (threshold: 5.033)
-	blooming mclasses (threshold: 21.874)
-	   C: 25.0
+	budding mclasses (threshold: 3.207)
+	   C: 3.5
+	blooming mclasses (threshold: 14.316)
+	   C: 17.5
 --- Detection of the usage of covariance static type conformance ---
 -- Total --
 - Kinds of the subtype -
@@ -805,17 +804,17 @@ Number of buggy sends (cannot determine the type of the receiver): 0 (0.00%)
 	  std: 0.0
 	  sum: 17
 	mnlm: number of live methods in a mmodule
-	  avg: 14.0
-	  max: base_simple3 (14)
-	  min: base_simple3 (14)
-	  std: 0.0
-	  sum: 14
-	mnlmd: number of live method definitions in a mmodule
 	  avg: 16.0
 	  max: base_simple3 (16)
 	  min: base_simple3 (16)
 	  std: 0.0
 	  sum: 16
+	mnlmd: number of live method definitions in a mmodule
+	  avg: 17.0
+	  max: base_simple3 (17)
+	  min: base_simple3 (17)
+	  std: 0.0
+	  sum: 17
 	mnldd: number of dead method definitions in a mmodule
 	  avg: 0.0
 	  max: base_simple3 (0)
@@ -875,11 +874,11 @@ MMethodDef locally designated (by number of CallSites)
   base_simple3#Object#init: 1 (4.34%)
   base_simple3#C#val2: 1 (4.34%)
   ...
-  base_simple3#A#init: 1 (4.34%)
+  base_simple3#A#autoinit: 1 (4.34%)
   base_simple3#Sys#baz: 1 (4.34%)
   base_simple3#Sys#bar: 1 (4.34%)
   base_simple3#Sys#foo: 1 (4.34%)
-  base_simple3#C#init: 1 (4.34%)
+  base_simple3#C#autoinit: 1 (4.34%)
 MMethodDef possibly invoked at runtime (by number of CallSites)
  population: 14
  minimum value: 1
@@ -896,11 +895,11 @@ MMethodDef possibly invoked at runtime (by number of CallSites)
   base_simple3#Object#init: 1 (4.34%)
   base_simple3#C#val2: 1 (4.34%)
   ...
-  base_simple3#A#init: 1 (4.34%)
+  base_simple3#A#autoinit: 1 (4.34%)
   base_simple3#Sys#baz: 1 (4.34%)
   base_simple3#Sys#bar: 1 (4.34%)
   base_simple3#Sys#foo: 1 (4.34%)
-  base_simple3#C#init: 1 (4.34%)
+  base_simple3#C#autoinit: 1 (4.34%)
 class_hierarchy.dot
 classdef_hierarchy.dot
 inheritance/

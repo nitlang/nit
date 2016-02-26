@@ -1,4 +1,27 @@
-alt/base_init_super_call2_alt6.nit:91,2--5: Error: cannot do an implicit constructor call to `base_init_super_call2_alt6#A#init(i: Int)`. Expected at least `1` arguments.
-alt/base_init_super_call2_alt6.nit:99,2--5: Error: cannot do an implicit constructor call to `base_init_super_call2_alt6#A#init(i: Int)`. Expected at least `1` arguments.
-alt/base_init_super_call2_alt6.nit:107,2--5: Error: cannot do an implicit constructor call to `base_init_super_call2_alt6#A#init(i: Int)`. Expected at least `1` arguments.
-alt/base_init_super_call2_alt6.nit:123,2--5: Error: cannot do an implicit constructor call to `base_init_super_call2_alt6#A#init(i: Int)`. Expected at least `1` arguments.
+1
+2
+3
+4
+5
+6
+6
+7
+7
+true
+8
+9
+9
+10
+10
+true
+11
+12
+0
+13
+0
+true
+0
+15
+15
+16
+0

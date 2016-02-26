@@ -1,52 +1,52 @@
 All entities, including fictive ones:
  list:
-  MMethodDef: 17 (30.35%)
-  MMethod: 15 (26.78%)
-  MClassDef: 7 (12.50%)
-  MClass: 7 (12.50%)
-  MAttributeDef: 3 (5.35%)
-  MAttribute: 3 (5.35%)
-  Model: 1 (1.78%)
-  MGroup: 1 (1.78%)
-  MPackage: 1 (1.78%)
-  MModule: 1 (1.78%)
+  MMethodDef: 21 (32.30%)
+  MMethod: 20 (30.76%)
+  MClassDef: 7 (10.76%)
+  MClass: 7 (10.76%)
+  MAttributeDef: 3 (4.61%)
+  MAttribute: 3 (4.61%)
+  Model: 1 (1.53%)
+  MGroup: 1 (1.53%)
+  MPackage: 1 (1.53%)
+  MModule: 1 (1.53%)
 All entities:
  list:
-  MMethodDef: 17 (30.35%)
-  MMethod: 15 (26.78%)
-  MClassDef: 7 (12.50%)
-  MClass: 7 (12.50%)
-  MAttributeDef: 3 (5.35%)
-  MAttribute: 3 (5.35%)
-  Model: 1 (1.78%)
-  MGroup: 1 (1.78%)
-  MPackage: 1 (1.78%)
-  MModule: 1 (1.78%)
+  MMethodDef: 21 (32.30%)
+  MMethod: 20 (30.76%)
+  MClassDef: 7 (10.76%)
+  MClass: 7 (10.76%)
+  MAttributeDef: 3 (4.61%)
+  MAttribute: 3 (4.61%)
+  Model: 1 (1.53%)
+  MGroup: 1 (1.53%)
+  MPackage: 1 (1.53%)
+  MModule: 1 (1.53%)
 
 All non-private entities:
  list:
-  MMethodDef: 17 (34.00%)
-  MMethod: 15 (30.00%)
-  MClassDef: 7 (14.00%)
-  MClass: 7 (14.00%)
-  MModule: 1 (2.00%)
-  MGroup: 1 (2.00%)
-  MPackage: 1 (2.00%)
-  Model: 1 (2.00%)
+  MMethodDef: 21 (35.59%)
+  MMethod: 20 (33.89%)
+  MClassDef: 7 (11.86%)
+  MClass: 7 (11.86%)
+  MModule: 1 (1.69%)
+  MGroup: 1 (1.69%)
+  MPackage: 1 (1.69%)
+  Model: 1 (1.69%)
 
 All documented non-private entities:
  list:
 
 All public entities:
  list:
-  MMethodDef: 14 (31.81%)
-  MMethod: 12 (27.27%)
-  MClassDef: 7 (15.90%)
-  MClass: 7 (15.90%)
-  MModule: 1 (2.27%)
-  MGroup: 1 (2.27%)
-  MPackage: 1 (2.27%)
-  Model: 1 (2.27%)
+  MMethodDef: 18 (33.96%)
+  MMethod: 17 (32.07%)
+  MClassDef: 7 (13.20%)
+  MClass: 7 (13.20%)
+  MModule: 1 (1.88%)
+  MGroup: 1 (1.88%)
+  MPackage: 1 (1.88%)
+  Model: 1 (1.88%)
 
 All documented public entities:
  list:

@@ -52,8 +52,8 @@
 <pre><code><span class="nitcode"><span class="nc_pdef foldable" id="base_simple3#B#_val"><a id="base_simple3#B#val"></a><a id="base_simple3#B#val="></a><span class="line" id="L35">	<span class="nc_k">var</span> <span class="nc_def nc_i">val</span><span>:</span> <span class="nc_t">Int</span></span></span></span></code></pre>
 <h1>base_simple3#B#val=</h1>
 <pre><code><span class="nitcode"><span class="nc_pdef foldable" id="base_simple3#B#_val"><a id="base_simple3#B#val"></a><a id="base_simple3#B#val="></a><span class="line" id="L35">	<span class="nc_k">var</span> <span class="nc_def nc_i">val</span><span>:</span> <span class="nc_t">Int</span></span></span></span></code></pre>
-<h1>base_simple3#B#init</h1>
-<pre><code><span class="nitcode"><span class="nc_pdef foldable" id="base_simple3#B#init"><span class="line" id="L36">	<span class="nc_k">init</span><span>(</span><span class="nc_v nc_i">v</span><span>:</span> <span class="nc_t">Int</span><span>)</span>
+<h1>base_simple3#B#autoinit</h1>
+<pre><code><span class="nitcode"><span class="nc_pdef foldable" id="base_simple3#B#autoinit"><span class="line" id="L36">	<span class="nc_k">init</span><span>(</span><span class="nc_v nc_i">v</span><span>:</span> <span class="nc_t">Int</span><span>)</span>
 </span><span class="line" id="L37">	<span class="nc_k">do</span>
 </span><span class="line" id="L38">		<span class="nc_l">7</span><span>.</span><span class="nc_i">output</span>
 </span><span class="line" id="L39">		<span class="nc_k">self</span><span>.</span><span class="nc_i">val</span> <span>=</span> <span class="nc_v nc_i">v</span>
@@ -113,7 +113,7 @@
 </span></span><span class="line" id="L33">
 </span><span class="nc_cdef foldable" id="base_simple3#B"><span class="line" id="L34"><span class="nc_k">class</span> <span class="nc_t">B</span>
 </span><span class="nc_pdef foldable" id="base_simple3#B#_val"><a id="base_simple3#B#val"></a><a id="base_simple3#B#val="></a><span class="line" id="L35">	<span class="nc_k">var</span> <span class="nc_def nc_i">val</span><span>:</span> <span class="nc_t">Int</span>
-</span></span><span class="nc_pdef foldable" id="base_simple3#B#init"><span class="line" id="L36">	<span class="nc_k">init</span><span>(</span><span class="nc_v nc_i">v</span><span>:</span> <span class="nc_t">Int</span><span>)</span>
+</span></span><span class="nc_pdef foldable" id="base_simple3#B#autoinit"><span class="line" id="L36">	<span class="nc_k">init</span><span>(</span><span class="nc_v nc_i">v</span><span>:</span> <span class="nc_t">Int</span><span>)</span>
 </span><span class="line" id="L37">	<span class="nc_k">do</span>
 </span><span class="line" id="L38">		<span class="nc_l">7</span><span>.</span><span class="nc_i">output</span>
 </span><span class="line" id="L39">		<span class="nc_k">self</span><span>.</span><span class="nc_i">val</span> <span>=</span> <span class="nc_v nc_i">v</span>
