@@ -2357,18 +2357,16 @@ class MMethodDef
 	# The signature attached to the property definition
 	var msignature: nullable MSignature = null is writable
 
-	# The signature attached to the `new` call on a root-init
-	# This is a concatenation of the signatures of the initializers
-	#
-	# REQUIRE `mproperty.is_root_init == (new_msignature != null)`
-	var new_msignature: nullable MSignature = null is writable
-
 	# List of initialisers to call in root-inits
 	#
 	# They could be setters or attributes
-	#
-	# REQUIRE `mproperty.is_root_init == (new_msignature != null)`
 	var initializers = new Array[MProperty]
+
+	# Does the method take the responsibility to call `init`?
+	#
+	# If the method is used as an initializer, then
+	# using this information prevents to call `init` twice.
+	var is_calling_init = false is writable
 
 	# Is the method definition abstract?
 	var is_abstract: Bool = false is writable

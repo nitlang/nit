@@ -150,7 +150,6 @@ redef class ModelBuilder
 			var mparameters = new Array[MParameter]
 			var msignature = new MSignature(mparameters, null)
 			mpropdef.msignature = msignature
-			mpropdef.new_msignature = msignature
 			mprop.is_init = true
 			self.toolcontext.info("{mclassdef} gets a free empty constructor {mpropdef}{msignature}", 3)
 			the_root_init_mmethod = mprop
@@ -335,7 +334,7 @@ redef class ModelBuilder
 
 				# Combine the inherited list to what is collected
 				if longest.initializers.length > 0 then
-					mparameters.prepend longest.new_msignature.mparameters
+					mparameters.prepend longest.msignature.mparameters
 					initializers.prepend longest.initializers
 				end
 			end
@@ -885,7 +884,6 @@ redef class AMethPropdef
 			var root_init = mclassdef.mclass.root_init
 			if root_init != null then
 				# Inherit the initializers by refinement
-				mpropdef.new_msignature = root_init.new_msignature
 				assert mpropdef.initializers.is_empty
 				mpropdef.initializers.add_all root_init.initializers
 			end

@@ -378,7 +378,7 @@ private class TypeVisitor
 		end
 
 
-		var msignature = mpropdef.new_msignature or else mpropdef.msignature
+		var msignature = mpropdef.msignature
 		if msignature == null then return null # skip error
 		msignature = resolve_for(msignature, recvtype, recv_is_self).as(MSignature)
 
@@ -2008,7 +2008,7 @@ redef class ASuperExpr
 			return
 		end
 
-		var msignature = superprop.new_msignature or else superprop.msignature.as(not null)
+		var msignature = superprop.msignature.as(not null)
 		msignature = v.resolve_for(msignature, recvtype, true).as(MSignature)
 
 		var callsite = new CallSite(hot_location, recvtype, v.mmodule, v.anchor, true, superprop.mproperty, superprop, msignature, false)

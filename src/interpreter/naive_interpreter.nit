@@ -437,7 +437,7 @@ class NaiveInterpreter
 	# Return `null` if one of the evaluation of the arguments return null.
 	fun varargize(mpropdef: MMethodDef, map: nullable SignatureMap, recv: Instance, args: SequenceRead[AExpr]): nullable Array[Instance]
 	do
-		var msignature = mpropdef.new_msignature or else mpropdef.msignature.as(not null)
+		var msignature = mpropdef.msignature.as(not null)
 		var res = new Array[Instance]
 		res.add(recv)
 
@@ -569,28 +569,6 @@ class NaiveInterpreter
 	fun callsite(callsite: nullable CallSite, arguments: Array[Instance]): nullable Instance
 	do
 		if callsite == null then return null
-		var initializers = callsite.mpropdef.initializers
-		if not initializers.is_empty then
-			var recv = arguments.first
-			var i = 1
-			for p in initializers do
-				if p isa MMethod then
-					var args = [recv]
-					for x in p.intro.msignature.mparameters do
-						args.add arguments[i]
-						i += 1
-					end
-					self.send(p, args)
-				else if p isa MAttribute then
-					assert recv isa MutableInstance
-					write_attribute(p, recv, arguments[i])
-					i += 1
-				else abort
-			end
-			assert i == arguments.length
-
-			return send(callsite.mproperty, [recv])
-		end
 		return send(callsite.mproperty, arguments)
 	end
 

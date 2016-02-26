@@ -484,16 +484,10 @@ redef class MMethodDef
 	end
 
 	redef fun cs_short_signature do
-		if mproperty.is_root_init then
-			return new_msignature.cs_short_signature
-		end
 		return msignature.cs_short_signature
 	end
 
 	redef fun cs_signature do
-		if mproperty.is_root_init then
-			return new_msignature.cs_signature
-		end
 		return msignature.cs_signature
 	end
 

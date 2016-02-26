@@ -497,7 +497,7 @@ class JavaCompilerVisitor
 	# This method is used to manage varargs in signatures and returns the real array
 	# of runtime variables to use in the call.
 	fun varargize(mpropdef: MMethodDef, map: nullable SignatureMap, recv: RuntimeVariable, args: SequenceRead[AExpr]): Array[RuntimeVariable] do
-		var msignature = mpropdef.new_msignature or else mpropdef.msignature.as(not null)
+		var msignature = mpropdef.msignature.as(not null)
 		var res = new Array[RuntimeVariable]
 		res.add(recv)
 

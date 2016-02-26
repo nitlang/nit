@@ -121,7 +121,7 @@ redef class AMethPropdef
 				return
 			end
 
-			var msignature = candidatedef.new_msignature or else candidatedef.msignature
+			var msignature = candidatedef.msignature
 			msignature = msignature.resolve_for(recvtype, anchor, mmodule, true)
 
 			if msignature.arity > 0 then

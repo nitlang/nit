@@ -500,18 +500,10 @@ redef class MMethodDef
 	end
 
 	redef fun html_short_signature do
-		var new_msignature = self.new_msignature
-		if mproperty.is_root_init and new_msignature != null then
-			return new_msignature.html_short_signature
-		end
 		return msignature.as(not null).html_short_signature
 	end
 
 	redef fun html_signature do
-		var new_msignature = self.new_msignature
-		if mproperty.is_root_init and new_msignature != null then
-			return new_msignature.html_signature
-		end
 		return msignature.as(not null).html_signature
 	end
 end

@@ -245,7 +245,6 @@ class RapidTypeAnalysis
 				v.add_monomorphic_send(vararg, self.modelbuilder.force_get_primitive_method(node, "with_native", vararg.mclass, self.mainmodule))
 			end
 
-			# TODO? new_msignature
 			var sig = msignature
 			var osig = mmeth.intro.msignature.as(not null)
 			for i in [0..sig.arity[ do

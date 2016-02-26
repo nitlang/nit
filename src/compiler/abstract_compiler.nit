@@ -1162,29 +1162,6 @@ abstract class AbstractCompilerVisitor
 	fun compile_callsite(callsite: CallSite, arguments: Array[RuntimeVariable]): nullable RuntimeVariable
 	do
 		if callsite.is_broken then return null
-		var initializers = callsite.mpropdef.initializers
-		if not initializers.is_empty then
-			var recv = arguments.first
-
-			var i = 1
-			for p in initializers do
-				if p isa MMethod then
-					var args = [recv]
-					for x in p.intro.msignature.mparameters do
-						args.add arguments[i]
-						i += 1
-					end
-					self.send(p, args)
-				else if p isa MAttribute then
-					self.write_attribute(p, recv, arguments[i])
-					i += 1
-				else abort
-			end
-			assert i == arguments.length
-
-			return self.send(callsite.mproperty, [recv])
-		end
-
 		return self.send(callsite.mproperty, arguments)
 	end
 
@@ -1207,7 +1184,7 @@ abstract class AbstractCompilerVisitor
 	# of runtime variables to use in the call.
 	fun varargize(mpropdef: MMethodDef, map: nullable SignatureMap, recv: RuntimeVariable, args: SequenceRead[AExpr]): Array[RuntimeVariable]
 	do
-		var msignature = mpropdef.new_msignature or else mpropdef.msignature.as(not null)
+		var msignature = mpropdef.msignature.as(not null)
 		var res = new Array[RuntimeVariable]
 		res.add(recv)
 
