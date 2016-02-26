@@ -165,7 +165,7 @@ redef class ModelBuilder
 			if mpropdef.mproperty.is_root_init then
 				assert defined_init == null
 				defined_init = mpropdef
-			else if mpropdef.mproperty.name == "init" then
+			else if mpropdef.mproperty.name == "autoinit" then
 				# An explicit old-style init named "init", so return
 				return
 			end
@@ -777,6 +777,9 @@ redef class AMethPropdef
 			else if n_kwinit != null then
 				name = "init"
 				name_node = n_kwinit
+				if self.n_signature.n_params.not_empty or get_single_annotation("old_style_init", modelbuilder) != null then
+					name = "autoinit"
+				end
 			else if n_kwnew != null then
 				name = "new"
 				name_node = n_kwnew

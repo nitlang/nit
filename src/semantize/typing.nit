@@ -314,8 +314,12 @@ private class TypeVisitor
 
 		var mproperty = self.try_get_mproperty_by_name2(node, unsafe_type, name)
 		if name == "new" and mproperty == null then
-			name = "init"
+			name = "autoinit"
 			mproperty = self.try_get_mproperty_by_name2(node, unsafe_type, name)
+			if mproperty == null then
+				name = "init"
+				mproperty = self.try_get_mproperty_by_name2(node, unsafe_type, name)
+			end
 		end
 
 		if mproperty == null then
@@ -1581,7 +1585,7 @@ redef class ARangeExpr
 		# get the constructor
 		var callsite
 		if self isa ACrangeExpr then
-			callsite = v.get_method(self, mtype, "init", false)
+			callsite = v.get_method(self, mtype, "autoinit", false)
 		else if self isa AOrangeExpr then
 			callsite = v.get_method(self, mtype, "without_last", false)
 		else
@@ -1904,7 +1908,7 @@ redef class ABraReassignExpr
 end
 
 redef class AInitExpr
-	redef fun property_name do return "init"
+	redef fun property_name do if n_args.n_exprs.is_empty then return "init" else return "autoinit"
 	redef fun property_node do return n_kwinit
 	redef fun compute_raw_arguments do return n_args.to_a
 end
