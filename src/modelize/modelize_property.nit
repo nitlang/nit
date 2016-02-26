@@ -204,18 +204,19 @@ redef class ModelBuilder
 					continue
 				end
 				if npropdef.has_value then continue
-				var paramname = mreadpropdef.mproperty.name
-				var ret_type = msignature.return_mtype
-				if ret_type == null then return
-				var mparameter = new MParameter(paramname, ret_type, false)
-				mparameters.add(mparameter)
 				var msetter = npropdef.mwritepropdef
 				if msetter == null then
 					# No setter, it is a readonly attribute, so just add it
+					var paramname = mreadpropdef.mproperty.name
+					var ret_type = msignature.return_mtype
+					if ret_type == null then return
+					var mparameter = new MParameter(paramname, ret_type, false)
+					mparameters.add(mparameter)
 					initializers.add(npropdef.mpropdef.mproperty)
 					npropdef.mpropdef.mproperty.is_autoinit = true
 				else
 					# Add the setter to the list
+					mparameters.add_all msetter.msignature.mparameters
 					initializers.add(msetter.mproperty)
 					msetter.mproperty.is_autoinit = true
 				end
