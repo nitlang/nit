@@ -12,17 +12,17 @@ bin/calculator: $(shell ${NITLS} -M src/calculator.nit linux) ${NITC}
 
 android: bin/calculator.apk
 
-bin/calculator.apk: $(shell ${NITLS} -M src/calculator.nit android) ${NITC} res/drawable-ldpi/icon.png
+bin/calculator.apk: $(shell ${NITLS} -M src/calculator.nit android) ${NITC} android/res/
 	mkdir -p bin
 	${NITC} -o $@ src/calculator.nit -m ../../lib/android/ui/ -D debug
 
-android-release: $(shell ${NITLS} -M src/calculator.nit android) ${NITC} res/drawable-ldpi/icon.png
+android-release: $(shell ${NITLS} -M src/calculator.nit android) ${NITC} android/res/
 	mkdir -p bin
 	${NITC} -o bin/calculator.apk src/calculator.nit -m ../../lib/android/ui/ --release
 
-res/drawable-ldpi/icon.png: art/icon.svg ../../contrib/inkscape_tools/bin/svg_to_icons
-	mkdir -p res
-	../../contrib/inkscape_tools/bin/svg_to_icons art/icon.svg --android --out res/
+android/res/: art/icon.svg ../../contrib/inkscape_tools/bin/svg_to_icons
+	mkdir -p android/res
+	../../contrib/inkscape_tools/bin/svg_to_icons art/icon.svg --android --out android/res/
 
 ../../contrib/inkscape_tools/bin/svg_to_icons:
 	make -C ../../contrib/inkscape_tools/
