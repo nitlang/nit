@@ -55,10 +55,9 @@ redef class ModelBuilder
 			toolcontext.run_phases_on_npropdef(res)
 			return res
 		end
-		if mpropdef isa MMethodDef and mpropdef.mproperty.is_root_init then
-			res = mclassdef2nclassdef.get_or_null(mpropdef.mclassdef)
-			if res != null then return res
-		end
+		# Fall back to the class node if any.
+		res = mclassdef2nclassdef.get_or_null(mpropdef.mclassdef)
+		if res != null then return res
 		return null
 	end
 
