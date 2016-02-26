@@ -1497,7 +1497,12 @@ redef class AAttrPropdef
 			return evaluate_expr(v, recv, f)
 		else if mpropdef == mwritepropdef then
 			assert args.length == 2
-			v.write_attribute(attr, recv, args[1])
+			var arg = args[1]
+			if is_optional and arg.mtype isa MNullType then
+				var f = v.new_frame(self, mpropdef, args)
+				arg = evaluate_expr(v, recv, f)
+			end
+			v.write_attribute(attr, recv, arg)
 			return null
 		else
 			abort

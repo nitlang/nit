@@ -3092,7 +3092,18 @@ redef class AAttrPropdef
 			v.assign(v.frame.returnvar.as(not null), res)
 		else if mpropdef == mwritepropdef then
 			assert arguments.length == 2
-			v.write_attribute(self.mpropdef.mproperty, arguments.first, arguments[1])
+			var recv = arguments.first
+			var arg = arguments[1]
+			if is_optional then
+				var value = v.new_var(self.mpropdef.static_mtype.as(not null))
+				v.add("if ({arg} == NULL) \{")
+				v.assign(value, evaluate_expr(v, recv))
+				v.add("\} else \{")
+				v.assign(value, arg)
+				v.add("\}")
+				arg = value
+			end
+			v.write_attribute(self.mpropdef.mproperty, arguments.first, arg)
 			if is_lazy then
 				var ret = self.mtype
 				var useiset = not ret.is_c_primitive and not ret isa MNullableType
