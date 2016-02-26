@@ -24,7 +24,7 @@ import core
 
 # A request received over HTTP, is build by `HttpRequestParser`
 class HttpRequest
-	private init do end
+	private init is old_style_init do end
 
 	# HTTP protocol version
 	var http_version: String
