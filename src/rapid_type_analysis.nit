@@ -259,8 +259,14 @@ class RapidTypeAnalysis
 
 			if npropdef isa AClassdef then
 				if mmethoddef.mproperty.is_root_init then
+					# Final init call
 					if not mmethoddef.is_intro then
 						self.add_super_send(v.receiver, mmethoddef)
+					end
+				else if mmethoddef.mclassdef.auto_init == mmethoddef then
+					# autoinit call
+					for i in mmethoddef.initializers do
+						if i isa MMethod then self.add_send(v.receiver, i)
 					end
 				else
 					npropdef.debug "cannot RTA {mmethoddef}"

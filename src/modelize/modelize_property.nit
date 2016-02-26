@@ -154,7 +154,6 @@ redef class ModelBuilder
 			mprop.is_init = true
 			self.toolcontext.info("{mclassdef} gets a free empty constructor {mpropdef}{msignature}", 3)
 			the_root_init_mmethod = mprop
-			return
 		end
 
 		# Is there already a constructor defined?
@@ -169,6 +168,10 @@ redef class ModelBuilder
 				# An explicit old-style init named "init", so return
 				return
 			end
+		end
+
+		if mclassdef.auto_init != null then
+			return
 		end
 
 		if not nclassdef isa AStdClassdef then return
@@ -225,10 +228,12 @@ redef class ModelBuilder
 		if the_root_init_mmethod == null then return
 
 		# Look for most-specific new-stype init definitions
-		var spropdefs = the_root_init_mmethod.lookup_super_definitions(mclassdef.mmodule, mclassdef.bound_mtype)
-		if spropdefs.is_empty then
-			toolcontext.error(nclassdef.location, "Error: `{mclassdef}` does not specialize `{the_root_init_mmethod.intro_mclassdef}`. Possible duplication of the root class `Object`?")
-			return
+		var spropdefs = new ArraySet[MMethodDef]
+		for x in mclassdef.in_hierarchy.direct_greaters do
+			var y = x.mclass.intro.auto_init
+			if y == null then continue
+			if y.is_broken or y.msignature == null then return
+			spropdefs.add y
 		end
 
 		# Look at the autoinit class-annotation
@@ -336,26 +341,19 @@ redef class ModelBuilder
 			end
 		end
 
-		# If we already have a basic init definition, then setup its initializers
-		if defined_init != null then
-			defined_init.initializers.add_all(initializers)
+		# Create a specific new autoinit constructor
+		do
+			var mprop = new MMethod(mclassdef, "autoinit", public_visibility)
+			mprop.is_init = true
+			var mpropdef = new MMethodDef(mclassdef, mprop, nclassdef.location)
+			mpropdef.initializers.add_all(initializers)
 			var msignature = new MSignature(mparameters, null)
-			defined_init.new_msignature = msignature
-			self.toolcontext.info("{mclassdef} extends its basic constructor signature to {defined_init}{msignature}", 3)
-			mclassdef.mclass.root_init = defined_init
-			return
+			mpropdef.msignature = msignature
+			mclassdef.auto_init = mpropdef
+			self.toolcontext.info("{mclassdef} gets a free auto constructor `{mpropdef}{msignature}`. {spropdefs}", 3)
+			#mclassdef.mclass.root_init = mpropdef
+			mclassdef.mclass.the_root_init_mmethod = the_root_init_mmethod
 		end
-
-		# Else create the local implicit basic init definition
-		var mprop = the_root_init_mmethod
-		var mpropdef = new MMethodDef(mclassdef, mprop, nclassdef.location)
-		mpropdef.has_supercall = true
-		mpropdef.initializers.add_all(initializers)
-		var msignature = new MSignature(mparameters, null)
-		mpropdef.new_msignature = msignature
-		mpropdef.msignature = new MSignature(new Array[MParameter], null) # always an empty real signature
-		self.toolcontext.info("{mclassdef} gets a free constructor for attributes {mpropdef}{msignature}", 3)
-		mclassdef.mclass.root_init = mpropdef
 	end
 
 	# Check the visibility of `mtype` as an element of the signature of `mpropdef`.
@@ -489,11 +487,15 @@ end
 
 redef class MClass
 	# The base init of the class.
-	# Used to get the common new_msignature and initializers
 	#
 	# TODO: Where to put this information is not clear because unlike other
 	# informations, the initialisers are stable in a same class.
 	var root_init: nullable MMethodDef = null
+
+	# The base init of the class.
+	#
+	# TODO: merge with `root_init` and `ModelBuilder::the_root_init_mmethod` if possible
+	var the_root_init_mmethod: nullable MMethod = null
 end
 
 redef class MClassDef

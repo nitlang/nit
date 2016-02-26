@@ -1563,6 +1563,31 @@ redef class AClassdef
 				v.call(superpd, arguments)
 			end
 			return null
+		else if mclassdef.auto_init == mpropdef then
+			var recv = arguments.first
+			var initializers = mpropdef.initializers
+			var no_init = false
+			if not initializers.is_empty then
+				var i = 1
+				for p in initializers do
+					if p isa MMethod then
+						var args = [recv]
+						for x in p.intro.msignature.mparameters do
+							args.add arguments[i]
+							i += 1
+						end
+						v.send(p, args)
+						if p.intro.is_calling_init then no_init = true
+					else if p isa MAttribute then
+						assert recv isa MutableInstance
+						v.write_attribute(p, recv, arguments[i])
+						i += 1
+					else abort
+				end
+				assert i == arguments.length
+			end
+			if not no_init then v.send(mclass.the_root_init_mmethod.as(not null), [recv])
+			return null
 		else
 			abort
 		end

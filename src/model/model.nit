@@ -706,6 +706,9 @@ class MClassDef
 
 	# All property definitions in the class (introductions and redefinitions)
 	var mpropdefs = new Array[MPropDef]
+
+	# The special autoinit constructor
+	var auto_init: nullable MMethodDef = null is writable
 end
 
 # A global static type
