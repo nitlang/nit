@@ -286,13 +286,31 @@ redef class ModelBuilder
 					abort
 				end
 			end
-		else
+		else if spropdefs.not_empty then
+			# Search for inherited manual autoinit
+			var manual = null
+			for s in spropdefs do
+				if mpropdef2npropdef.has_key(s) then
+					self.toolcontext.info("{mclassdef} inherits a manual autoinit {s}", 3)
+					#mclassdef.autoinit = s
+					#return
+					manual = s
+				end
+			end
+
 			# Search the longest-one and checks for conflict
 			var longest = spropdefs.first
 			if spropdefs.length > 1 then
 				# part 1. find the longest list
 				for spd in spropdefs do
 					if spd.initializers.length > longest.initializers.length then longest = spd
+					if spd != manual and manual != null then
+						self.toolcontext.info("{mclassdef} conflict between manual autoinit {manual} and automatic autoinit {spd}.", 3)
+					end
+				end
+				# conflict with manual autoinit?
+				if longest != manual and manual != null then
+					self.error(nclassdef, "Error: conflict between manual autoinit {manual} and automatic autoinit {longest}.")
 				end
 				# part 2. compare
 				# Check for conflict in the order of initializers
@@ -325,13 +343,6 @@ redef class ModelBuilder
 				mparameters.clear
 				initializers.clear
 			else
-				# Can we just inherit?
-				if spropdefs.length == 1 and mparameters.is_empty and defined_init == null then
-					self.toolcontext.info("{mclassdef} inherits the basic constructor {longest}", 3)
-					mclassdef.mclass.root_init = longest
-					return
-				end
-
 				# Combine the inherited list to what is collected
 				if longest.initializers.length > 0 then
 					mparameters.prepend longest.msignature.mparameters
@@ -813,7 +824,7 @@ redef class AMethPropdef
 
 		var look_like_a_root_init = look_like_a_root_init(modelbuilder, mclassdef)
 		var mprop: nullable MMethod = null
-		if not is_init or n_kwredef != null then mprop = modelbuilder.try_get_mproperty_by_name(name_node, mclassdef, name).as(nullable MMethod)
+		if not is_init or n_kwredef != null or look_like_a_root_init then mprop = modelbuilder.try_get_mproperty_by_name(name_node, mclassdef, name).as(nullable MMethod)
 		if mprop == null and look_like_a_root_init then
 			mprop = modelbuilder.the_root_init_mmethod
 			var nb = n_block
@@ -860,6 +871,14 @@ redef class AMethPropdef
 		mclassdef.mprop2npropdef[mprop] = self
 
 		var mpropdef = new MMethodDef(mclassdef, mprop, self.location)
+		if mprop.name == "autoinit" and mclassdef.is_intro then
+			assert mclassdef.auto_init == null
+			mclassdef.auto_init = mpropdef
+			if mpropdef.is_intro then
+				mpropdef.initializers.add mprop
+				mpropdef.is_calling_init = true
+			end
+		end
 
 		set_doc(mpropdef, modelbuilder)
 
