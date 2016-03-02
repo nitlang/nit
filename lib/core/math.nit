@@ -128,7 +128,7 @@ redef class Int
 	#
 	# assert 3.is_prime
 	# assert not 1.is_prime
-	# assert not 12.is_prime
+	# assert not 15.is_prime
 	fun is_prime: Bool
 	do
 		if self == 2 then
@@ -136,7 +136,7 @@ redef class Int
 		else if self <= 1 or self.is_even then
 			return false
 		end
-		for i in [3..self.sqrt[ do
+		for i in [3..self.sqrt] do
 			if self % i == 0 then return false
 		end
 		return true
