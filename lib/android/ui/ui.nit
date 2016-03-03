@@ -169,6 +169,26 @@ end
 redef class TextInput
 	redef type NATIVE: NativeEditText
 	redef var native = (new NativeEditText(app.native_activity)).new_global_ref
+
+	redef fun is_password=(value)
+	do
+		native.is_password = value or else false
+		super
+	end
+end
+
+redef class NativeEditText
+
+	# Configure this view to hide passwords
+	fun is_password=(value: Bool) in "Java" `{
+		if (value) {
+			self.setInputType(android.text.InputType.TYPE_CLASS_TEXT | android.text.InputType.TYPE_TEXT_VARIATION_PASSWORD);
+			self.setTransformationMethod(android.text.method.PasswordTransformationMethod.getInstance());
+		} else {
+			self.setInputType(android.text.InputType.TYPE_CLASS_TEXT);
+			self.setTransformationMethod(null);
+		}
+	`}
 end
 
 redef class Button
