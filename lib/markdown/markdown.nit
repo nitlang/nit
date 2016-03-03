@@ -610,10 +610,12 @@ class MarkdownEmitter
 	end
 
 	# Append `c` to current buffer.
-	fun addc(c: Char) do add c.to_s
+	fun addc(c: Char) do
+		current_buffer.add c
+	end
 
 	# Append a "\n" line break.
-	fun addn do add "\n"
+	fun addn do addc '\n'
 end
 
 # A Link Reference.
