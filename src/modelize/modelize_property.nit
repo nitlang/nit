@@ -203,19 +203,21 @@ redef class ModelBuilder
 					mreadpropdef.mproperty.is_autoinit = true
 					continue
 				end
-				if npropdef.has_value then continue
-				var paramname = mreadpropdef.mproperty.name
-				var ret_type = msignature.return_mtype
-				if ret_type == null then return
-				var mparameter = new MParameter(paramname, ret_type, false)
-				mparameters.add(mparameter)
+				if npropdef.has_value and not npropdef.is_optional then continue
 				var msetter = npropdef.mwritepropdef
 				if msetter == null then
 					# No setter, it is a readonly attribute, so just add it
+					var paramname = mreadpropdef.mproperty.name
+					var ret_type = msignature.return_mtype
+					if ret_type == null then return
+					var mparameter = new MParameter(paramname, ret_type, false)
+					mparameters.add(mparameter)
+
 					initializers.add(npropdef.mpropdef.mproperty)
 					npropdef.mpropdef.mproperty.is_autoinit = true
 				else
 					# Add the setter to the list
+					mparameters.add_all msetter.msignature.mparameters
 					initializers.add(msetter.mproperty)
 					msetter.mproperty.is_autoinit = true
 				end
@@ -1154,6 +1156,9 @@ redef class AAttrPropdef
 	# Is the node tagged lazy?
 	var is_lazy = false
 
+	# Is the node tagged optional?
+	var is_optional = false
+
 	# Has the node a default value?
 	# Could be through `n_expr` or `n_block`
 	var has_value = false
@@ -1248,6 +1253,14 @@ redef class AAttrPropdef
 			var mlazypropdef = new MAttributeDef(mclassdef, mlazyprop, self.location)
 			mlazypropdef.is_fictive = true
 			self.mlazypropdef = mlazypropdef
+		end
+
+		var atoptional = self.get_single_annotation("optional", modelbuilder)
+		if atoptional != null then
+			if not has_value then
+				modelbuilder.error(atoptional, "Error: `optional` attributes need a default value.")
+			end
+			is_optional = true
 		end
 
 		var atreadonly = self.get_single_annotation("readonly", modelbuilder)
@@ -1421,9 +1434,13 @@ redef class AAttrPropdef
 
 		var mwritepropdef = self.mwritepropdef
 		if mwritepropdef != null then
+			var mwritetype = mtype
+			if is_optional then
+				mwritetype = mwritetype.as_nullable
+			end
 			var name: String
 			name = n_id2.text
-			var mparameter = new MParameter(name, mtype, false)
+			var mparameter = new MParameter(name, mwritetype, false)
 			var msignature = new MSignature([mparameter], null)
 			mwritepropdef.msignature = msignature
 		end
