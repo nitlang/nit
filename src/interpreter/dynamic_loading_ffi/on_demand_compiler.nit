@@ -54,6 +54,15 @@ redef class AMethPropdef
 end
 
 redef class NaiveInterpreter
+	redef fun start(mainmodule)
+	do
+		super
+
+		# Delete temporary files
+		var compile_dir = compile_dir
+		if compile_dir.file_exists then compile_dir.rmdir
+	end
+
 	# Where to store generated C and extracted code
 	private var compile_dir: String is lazy do
 		# Prioritize the user supplied directory
