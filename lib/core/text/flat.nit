@@ -1250,6 +1250,10 @@ redef class NativeString
 	#
 	# Very unsafe, make sure to have room for this char prior to calling this function.
 	private fun set_char_at(pos: Int, c: Char) do
+		if c.code_point < 128 then
+			self[pos] = c.code_point.to_b
+			return
+		end
 		var ln = c.u8char_len
 		native_set_char(pos, c, ln)
 	end
