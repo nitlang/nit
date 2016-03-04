@@ -54,7 +54,6 @@ redef class FlatText
 		var b = _bytepos
 		var its = _items
 
-		if dpos == 0 then return b
 		if dpos == 1 then
 			b += _items.length_of_char_at(b)
 			_bytepos = b
@@ -67,6 +66,7 @@ redef class FlatText
 			_position = index
 			return b
 		end
+		if dpos == 0 then return b
 
 		var ln = _length
 		var pos = _position
