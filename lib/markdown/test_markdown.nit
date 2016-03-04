@@ -2830,7 +2830,7 @@ class TestTokenProcessor
 	redef fun token_at(input, pos) do
 		var token = super
 		if token isa TokenNone then return token
-		var res = "{token.class_name} at {token.location}"
+		var res = "{token.class_name} at {token.location or else "?"}"
 		var exp = test_stack.shift
 		print ""
 		print "EXP {exp}"

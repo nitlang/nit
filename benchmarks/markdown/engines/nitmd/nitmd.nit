@@ -19,6 +19,7 @@ var n = args[1].to_i
 
 var str = file.to_path.read_all
 var parser = new MarkdownProcessor
+parser.no_location = true
 for i in [1..n] do
 	print parser.process(str)
 end
