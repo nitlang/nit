@@ -2332,18 +2332,11 @@ redef class Text
 			if c == '\\' and pos + 1 < length then
 				pos = escape(out, self[pos + 1], pos)
 			else
-				var end_reached = false
-				for n in nend do
-					if c == n then
-						end_reached = true
-						break
-					end
-				end
-				if end_reached then break
+				for n in nend do if c == n then break label
 				out.add c
 			end
 			pos += 1
-		end
+		end label
 		if pos == length then return -1
 		return pos
 	end
