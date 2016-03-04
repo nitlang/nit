@@ -55,7 +55,11 @@ redef class FlatText
 		var its = _items
 
 		if dpos == 1 then
-			b += _items.length_of_char_at(b)
+			if its[b] & 0x80u8 == 0x00u8 then
+				b += 1
+			else
+				b += its.length_of_char_at(b)
+			end
 			_bytepos = b
 			_position = index
 			return b
