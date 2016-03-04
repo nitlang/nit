@@ -52,6 +52,7 @@ redef class FlatText
 	fun char_to_byte_index(index: Int): Int do
 		var dpos = index - _position
 		var b = _bytepos
+		var its = _items
 
 		if dpos == 0 then return b
 		if dpos == 1 then
@@ -61,7 +62,7 @@ redef class FlatText
 			return b
 		end
 		if dpos == -1 then
-			b = _items.find_beginning_of_char_at(b - 1)
+			b = its.find_beginning_of_char_at(b - 1)
 			_bytepos = b
 			_position = index
 			return b
@@ -74,7 +75,6 @@ redef class FlatText
 		var delta_end = (ln - 1) - index
 		var delta_cache = (pos - index).abs
 		var min = delta_begin
-		var its = _items
 
 		if delta_cache < min then min = delta_cache
 		if delta_end < min then min = delta_end
