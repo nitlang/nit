@@ -20,6 +20,15 @@ import c_tools
 import nitni
 import ffi
 import naive_interpreter
+import debugger_socket # To linearize `ToolContext::init`
+
+redef class ToolContext
+
+	# --compile-dir
+	var opt_compile_dir = new OptionString("Directory used to generate temporary files", "--compile-dir")
+
+	init do option_context.add_option opt_compile_dir
+end
 
 redef class AMethPropdef
 	# Does this method definition use the FFI and is it supported by the interpreter?
@@ -46,9 +55,15 @@ end
 
 redef class NaiveInterpreter
 	# Where to store generated C and extracted code
-	#
-	# TODO make customizable and delete when execution completes
-	private var compile_dir = "nit_compile"
+	private var compile_dir: String is lazy do
+		# Prioritize the user supplied directory
+		var opt = modelbuilder.toolcontext.opt_compile_dir.value
+		if opt != null then return opt
+		return "/tmp/niti_ffi_{process_id}"
+	end
+
+	# Identifier for this process, unique between running interpreters
+	private fun process_id: Int `{ return getpid(); `}
 
 	# Path of the compiled foreign code library
 	#
