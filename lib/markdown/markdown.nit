@@ -133,6 +133,14 @@ class MarkdownProcessor
 	# ~~~
 	var ext_mode = true
 
+	# Disable attaching MDLocation to Tokens
+	#
+	# Locations are useful for some tools but they may
+	# cause an important time and space overhead.
+	#
+	# Default = `false`
+	var no_location = false is writable
+
 	init do self.emitter = new MarkdownEmitter(self)
 
 	# Process the mardown `input` string and return the processed output.
@@ -397,11 +405,16 @@ class MarkdownProcessor
 			c2 = ' '
 		end
 
-		var loc = new MDLocation(
-			current_loc.line_start,
-			current_loc.column_start + pos,
-			current_loc.line_start,
-			current_loc.column_start + pos)
+		var loc
+		if no_location then
+			loc = null
+		else
+			loc = new MDLocation(
+				current_loc.line_start,
+				current_loc.column_start + pos,
+				current_loc.line_start,
+				current_loc.column_start + pos)
+		end
 
 		if c == '*' then
 			if c1 == '*' then
@@ -1940,7 +1953,7 @@ end
 abstract class Token
 
 	# Location of `self` in the original input.
-	var location: MDLocation
+	var location: nullable MDLocation
 
 	# Position of `self` in input independant from lines.
 	var pos: Int
