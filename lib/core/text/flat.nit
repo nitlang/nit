@@ -52,20 +52,25 @@ redef class FlatText
 	fun char_to_byte_index(index: Int): Int do
 		var dpos = index - _position
 		var b = _bytepos
+		var its = _items
 
-		if dpos == 0 then return b
 		if dpos == 1 then
-			b += _items.length_of_char_at(b)
+			if its[b] & 0x80u8 == 0x00u8 then
+				b += 1
+			else
+				b += its.length_of_char_at(b)
+			end
 			_bytepos = b
 			_position = index
 			return b
 		end
 		if dpos == -1 then
-			b = _items.find_beginning_of_char_at(b - 1)
+			b = its.find_beginning_of_char_at(b - 1)
 			_bytepos = b
 			_position = index
 			return b
 		end
+		if dpos == 0 then return b
 
 		var ln = _length
 		var pos = _position
@@ -74,7 +79,6 @@ redef class FlatText
 		var delta_end = (ln - 1) - index
 		var delta_cache = (pos - index).abs
 		var min = delta_begin
-		var its = _items
 
 		if delta_cache < min then min = delta_cache
 		if delta_end < min then min = delta_end
@@ -292,7 +296,49 @@ redef class FlatText
 	end
 
 	redef fun [](index) do
-		assert index >= 0 and index < _length
+		var len = _length
+
+		# Statistically:
+		# * ~70% want the next char
+		# * ~23% want the previous
+		# * ~7% want the same char
+		#
+		# So it makes sense to shortcut early. And early is here.
+		var dpos = index - _position
+		var b = _bytepos
+		if dpos == 1 and index < len - 1 then
+			var its = _items
+			var c = its[b]
+			if c & 0x80u8 == 0x00u8 then
+				# We want the next, and current is easy.
+				# So next is easy to find!
+				b += 1
+				_position = index
+				_bytepos = b
+				# The rest will be done by `dpos==0` bellow.
+				dpos = 0
+			end
+		else if dpos == -1 and index > 1 then
+			var its = _items
+			var c = its[b-1]
+			if c & 0x80u8 == 0x00u8 then
+				# We want the previous, and it is easy.
+				b -= 1
+				dpos = 0
+				_position = index
+				_bytepos = b
+				return c.ascii
+			end
+		end
+		if dpos == 0 then
+			# We know what we want (+0 or +1) just get it now!
+			var its = _items
+			var c = its[b]
+			if c & 0x80u8 == 0x00u8 then return c.ascii
+			return items.char_at(b)
+		end
+
+		assert index >= 0 and index < len
 		return fetch_char_at(index)
 	end
 
@@ -1250,6 +1296,10 @@ redef class NativeString
 	#
 	# Very unsafe, make sure to have room for this char prior to calling this function.
 	private fun set_char_at(pos: Int, c: Char) do
+		if c.code_point < 128 then
+			self[pos] = c.code_point.to_b
+			return
+		end
 		var ln = c.u8char_len
 		native_set_char(pos, c, ln)
 	end
