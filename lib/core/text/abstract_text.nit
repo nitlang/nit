@@ -615,7 +615,7 @@ abstract class Text
 				b.append("\\\\")
 			else if c.code_point < 32 then
 				b.add('\\')
-				var oct = c.code_point.to_base(8, false)
+				var oct = c.code_point.to_base(8)
 				# Force 3 octal digits since it is the
 				# maximum allowed in the C specification
 				if oct.length == 1 then
@@ -689,7 +689,7 @@ abstract class Text
 				b.add('\\')
 				b.add(c)
 			else if c.code_point < 32 or c == ';' or c == '|' or c == '\\' or c == '=' then
-				b.append("?{c.code_point.to_base(16, false)}")
+				b.append("?{c.code_point.to_base(16)}")
 			else
 				b.add(c)
 			end
@@ -1569,9 +1569,9 @@ redef class Int
 	# Returns a string describing error number
 	fun strerror: String do return strerror_ext.to_s
 
-	# Fill `s` with the digits in base `base` of `self` (and with the '-' sign if 'signed' and negative).
+	# Fill `s` with the digits in base `base` of `self` (and with the '-' sign if negative).
 	# assume < to_c max const of char
-	private fun fill_buffer(s: Buffer, base: Int, signed: Bool)
+	private fun fill_buffer(s: Buffer, base: Int)
 	do
 		var n: Int
 		# Sign
@@ -1603,14 +1603,30 @@ redef class Int
 		snprintf(nstr, strlen, "%ld", self);
 	`}
 
-	# return displayable int in base base and signed
-	fun to_base(base: Int, signed: Bool): String is abstract
+	# String representation of `self` in the given `base`
+	#
+	# ~~~
+	# assert 15.to_base(10) == "15"
+	# assert 15.to_base(16) == "f"
+	# assert 15.to_base(2) == "1111"
+	# assert (-10).to_base(3) == "-101"
+	# ~~~
+	fun to_base(base: Int): String
+	do
+		var l = digit_count(base)
+		var s = new Buffer
+		s.enlarge(l)
+		for x in [0..l[ do s.add(' ')
+		fill_buffer(s, base)
+		return s.to_s
+	end
+
 
 	# return displayable int in hexadecimal
 	#
 	#     assert 1.to_hex  == "1"
 	#     assert (-255).to_hex  == "-ff"
-	fun to_hex: String do return to_base(16,false)
+	fun to_hex: String do return to_base(16)
 end
 
 redef class Float

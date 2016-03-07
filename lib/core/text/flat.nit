@@ -1330,14 +1330,6 @@ redef class NativeString
 end
 
 redef class Int
-	redef fun to_base(base, signed)
-	do
-		var l = digit_count(base)
-		var s = new FlatBuffer.from(" " * l)
-		fill_buffer(s, base, signed)
-		return s.to_s
-	end
-
 	# return displayable int in base 10 and signed
 	#
 	#     assert 1.to_s            == "1"
