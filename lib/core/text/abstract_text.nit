@@ -1887,7 +1887,11 @@ redef class Collection[E]
 	#     assert [1, 2, 3].join(":")    == "1:2:3"
 	#     assert [1..3].join(":")       == "1:2:3"
 	#     assert [1..3].join            == "123"
-	fun join(separator: nullable Text): String
+	#
+	# if `last_separator` is given, then it is used to separate the last element.
+	#
+	#     assert [1, 2, 3, 4].join(", ", " and ")    == "1, 2, 3 and 4"
+	fun join(separator: nullable Text, last_separator: nullable Text): String
 	do
 		if is_empty then return ""
 
@@ -1898,13 +1902,19 @@ redef class Collection[E]
 		var e = i.item
 		if e != null then s.append(e.to_s)
 
+		if last_separator == null then last_separator = separator
+
 		# Concat other items
 		i.next
 		while i.is_ok do
-			if separator != null then s.append(separator)
 			e = i.item
-			if e != null then s.append(e.to_s)
 			i.next
+			if i.is_ok then
+				if separator != null then s.append(separator)
+			else
+				if last_separator != null then s.append(last_separator)
+			end
+			if e != null then s.append(e.to_s)
 		end
 		return s.to_s
 	end

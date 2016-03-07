@@ -161,10 +161,10 @@ abstract class ConcurrentCollection[E]
 		return r
 	end
 
-	redef fun join(sep)
+	redef fun join(sep, last_sep)
 	do
 		mutex.lock
-		var r = real_collection.join(sep)
+		var r = real_collection.join(sep, last_sep)
 		mutex.unlock
 		return r
 	end
