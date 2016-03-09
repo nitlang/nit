@@ -67,6 +67,7 @@ re3 {-> re} =
 	{id:} id |
 	{par:} '(' re ')' |
 	{class:} text '.' '.' text |
+	{openclass:} text '.' '.' '.' |
 	{any:} 'Any' |
 	{end:} 'End' |
 	{text:} text ;
