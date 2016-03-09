@@ -20,6 +20,7 @@ import c_tools
 import nitni
 import ffi
 import naive_interpreter
+import pkgconfig
 
 redef class AMethPropdef
 	# Does this method definition use the FFI and is it supported by the interpreter?
@@ -93,13 +94,29 @@ redef class AModule
 		var srcs = [for file in ccu.files do new ExternCFile(file, ""): ExternFile]
 		srcs.add_all mmodule.ffi_files
 
-		if mmodule.pkgconfigs.not_empty then
-			fatal(v, "NOT YET IMPLEMENTED annotation `pkgconfig`")
-			return false
-		end
-
+		# Compiler options specific to this module
 		var ldflags = mmodule.ldflags[""].join(" ")
-		# TODO pkgconfig
+
+		# Protect pkg-config
+		var pkgconfigs = mmodule.pkgconfigs
+		var pkg_command = ""
+		if not pkgconfigs.is_empty then
+			var cmd = "which pkg-config >/dev/null"
+			if system(cmd) != 0 then
+				v.fatal "FFI Error: Command `pkg-config` not found. Please install it"
+				return false
+			end
+
+			for p in pkgconfigs do
+				cmd = "pkg-config --exists '{p}'"
+				if system(cmd) != 0 then
+					v.fatal "FFI Error: package {p} is not found by `pkg-config`. Please install it."
+					return false
+				end
+			end
+
+			pkg_command = "`pkg-config --cflags --libs {pkgconfigs.join(" ")}`"
+		end
 
 		# Compile each source file to an object file (or equivalent)
 		var object_files = new Array[String]
@@ -108,9 +125,8 @@ redef class AModule
 		end
 
 		# Link everything in a shared library
-		# TODO customize the compiler
-		var cmd = "{v.c_compiler} -Wall -shared -o {foreign_code_lib_path} {object_files.join(" ")} {ldflags}"
-		if sys.system(cmd) != 0 then
+		var cmd = "{v.c_compiler} -Wall -shared -o {foreign_code_lib_path} {object_files.join(" ")} {ldflags} {pkg_command}"
+		if system(cmd) != 0 then
 			v.fatal "FFI Error: Failed to link native code using `{cmd}`"
 			return false
 		end
