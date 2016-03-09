@@ -33,9 +33,6 @@ end
 # Address and port of the listening socket
 fun tnitter_interface: String do return "localhost:8080"
 
-# Avoid executing when running tests
-if "NIT_TESTING".environ == "true" then exit 0
-
 # Prepare options
 var opts = new OptionContext
 opts.parse(args)

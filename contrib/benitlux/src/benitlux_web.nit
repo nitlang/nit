@@ -21,9 +21,6 @@ import benitlux_model
 import benitlux_view
 import benitlux_controller
 
-# Avoid executing when running tests
-if "NIT_TESTING".environ == "true" then exit 0
-
 # Listening interface
 fun iface: String do return "localhost:8080"
 
