@@ -210,6 +210,12 @@ redef class TextInput
 
 	redef fun text=(text) do native.text = (text or else "").to_nsstring
 	redef fun text do return native.text.to_s
+
+	redef fun is_password=(value)
+	do
+		native.secure_text_entry = value or else false
+		super
+	end
 end
 
 redef class Button

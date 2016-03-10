@@ -430,6 +430,11 @@ extern class UITextField in "ObjC" `{ UITextField * `}
 	fun text=(text: NSString) in "ObjC" `{
 		self.text = text;
 	`}
+
+	# Wraps: `UITextField.secureTextEntry`
+	fun secure_text_entry=(value: Bool) in "ObjC" `{
+		self.secureTextEntry = value;
+	`}
 end
 
 # Lays out a collection of views in either a column or a row
