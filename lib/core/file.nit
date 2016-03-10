@@ -1145,11 +1145,16 @@ redef class String
 
 	# Create a directory (and all intermediate directories if needed)
 	#
+	# The optional `mode` parameter specifies the permissions of the directory,
+	# the default value is `0o777`.
+	#
 	# Return an error object in case of error.
 	#
 	#    assert "/etc/".mkdir != null
-	fun mkdir: nullable Error
+	fun mkdir(mode: nullable Int): nullable Error
 	do
+		mode = mode or else 0o777
+
 		var dirs = self.split_with("/")
 		var path = new FlatBuffer
 		if dirs.is_empty then return null
@@ -1162,7 +1167,7 @@ redef class String
 			if d.is_empty then continue
 			path.append(d)
 			path.add('/')
-			var res = path.to_s.to_cstring.file_mkdir
+			var res = path.to_s.to_cstring.file_mkdir(mode)
 			if not res and error == null then
 				error = new IOError("Cannot create directory `{path}`: {sys.errno.strerror}")
 			end
@@ -1326,7 +1331,7 @@ redef class NativeString
 		return stat_element;
 	`}
 
-	private fun file_mkdir: Bool `{ return !mkdir(self, 0777); `}
+	private fun file_mkdir(mode: Int): Bool `{ return !mkdir(self, mode); `}
 
 	private fun rmdir: Bool `{ return !rmdir(self); `}
 
