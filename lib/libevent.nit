@@ -26,6 +26,7 @@ in "C header" `{
 	#include <sys/types.h>
 	#include <fcntl.h>
 	#include <errno.h>
+	#include <string.h>
 	#include <sys/socket.h>
 
 	#include <event2/listener.h>
@@ -34,6 +35,10 @@ in "C header" `{
 `}
 
 in "C" `{
+
+// Protect callbacks for compatibility with light FFI
+#ifdef Connection_decr_ref
+
 	// Callback forwarded to 'Connection.write_callback'
 	static void c_write_cb(struct bufferevent *bev, Connection ctx) {
 		Connection_write_callback(ctx);
@@ -58,6 +63,8 @@ in "C" `{
 	{
 		ConnectionFactory_accept_connection(ctx, listener, fd, address, socklen);
 	}
+#endif
+
 `}
 
 # Structure to hold information and state for a Libevent dispatch loop.
