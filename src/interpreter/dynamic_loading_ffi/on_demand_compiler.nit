@@ -35,10 +35,14 @@ redef class AMethPropdef
 		        n_extern_code_block.is_c) then return false
 
 		for mparam in mpropdef.msignature.mparameters do
-			var mtype = mparam.mtype
-			if not mtype.is_cprimitive then
+			if not mparam.mtype.is_cprimitive then
 				return false
 			end
+		end
+
+		var return_mtype = mpropdef.msignature.return_mtype
+		if return_mtype != null and not return_mtype.is_cprimitive then
+			return false
 		end
 
 		return true
