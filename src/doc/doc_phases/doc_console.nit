@@ -551,7 +551,7 @@ private class Pager
 			else if c == '`' then
 				b.append("'")
 			else if c.code_point < 32 then
-				b.append("\\{c.code_point.to_base(8, false)}")
+				b.append("\\{c.code_point.to_base(8)}")
 			else
 				b.add(c)
 			end
