@@ -96,7 +96,7 @@ class BenitluxRESTAction
 		if not words.is_empty and words.first.is_empty then words.shift
 
 		if words.length >= 2 and words[0] == "since" then
-			var since = words[1]
+			var since = words[1].std_date
 
 			var db = new DB.open(db_path)
 			var events = db.beer_events_since(since.to_sql_string)
@@ -121,5 +121,23 @@ class BenitluxRESTAction
 		var response = new HttpResponse(400)
 		response.body = "Bad request"
 		return response
+	end
+end
+
+redef class Text
+	# Rewrite the date represented by `self` in the format expected by SQLite
+	private fun std_date: String
+	do
+		var parts = self.split("-")
+		if parts.length != 3 then return "1970-01-01"
+
+		var y = parts[0].to_s
+		var m = parts[1].to_s
+		var d = parts[2].to_s
+
+		m = "0"*(2 - m.length) + m
+		d = "0"*(2 - d.length) + d
+
+		return "{y}-{m}-{d}"
 	end
 end
