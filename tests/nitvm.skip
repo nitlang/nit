@@ -36,3 +36,4 @@ test_ropebuffer
 ui_test
 test_text_stat
 nitsaf.args
+test_ffi_c_lots_of_refs
