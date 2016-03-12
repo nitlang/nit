@@ -1,6 +1,6 @@
 SERVER ?= localhost:8080
 
-all: server
+all: server bin/report bin/benitlux
 
 server: bin/benitlux_daily bin/benitlux_web
 bin/benitlux_daily: $(shell ../../bin/nitls -M src/server/benitlux_daily.nit)
@@ -23,3 +23,10 @@ bin/report: $(shell ../../bin/nitls -M src/report.nit)
 
 report: bin/report
 	bin/report
+
+# ---
+# GTK+ client
+
+bin/benitlux: $(shell ../../bin/nitls -M src/client/client.nit)
+	mkdir -p bin/
+	../../bin/nitc -o bin/benitlux src/client/client.nit -m linux -D benitlux_rest_server_uri=http://$(SERVER)/
