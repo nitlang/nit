@@ -37,6 +37,21 @@ redef class Control
 	type NATIVE: JavaObject
 end
 
+redef class NativeActivity
+
+	private fun remove_title_bar in "Java" `{
+		self.requestWindowFeature(android.view.Window.FEATURE_NO_TITLE);
+	`}
+end
+
+redef class App
+	redef fun on_create
+	do
+		app.native_activity.remove_title_bar
+		super
+	end
+end
+
 redef class Window
 	redef var native = app.native_activity.new_global_ref
 
