@@ -19,6 +19,11 @@ bitmap.nit: ../../bin/jwrapper
 	../../bin/jwrapper -vv -u comment -o $@ -r "^(android.graphics.Bitmap|java.nio.Buffer|java.nio.ByteBuffer).class$$" \
 	-i ../../../../lib/android/assets_and_resources.nit $(ANDROID_JAR) -i ../../../../lib/java/collections.nit
 
+# Base wrappers to implement the lib/android/wifi.nit module
+wifi.nit: ../../bin/jwrapper
+	../../bin/jwrapper -vv -u comment -o $@ -r "^(android.net.wifi)" \
+	-i ../../../../lib/android/assets_and_resources.nit $(ANDROID_JAR) -i ../../../../lib/java/collections.nit
+
 check: android_api.nit
 	../../../../bin/nitpick android_api.nit
 
