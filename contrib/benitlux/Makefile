@@ -62,3 +62,25 @@ android-release: $(shell ../../bin/nitls -M src/client/android.nit) android-res
 	mkdir -p bin/ res/
 	../../bin/nitc -o bin/benitlux.apk src/client/android.nit \
 		-D benitlux_rest_server_uri=http://xymus.net/benitlux/ --release
+
+# ---
+# iOS
+
+ios: bin/benitlux.app
+bin/benitlux.app: $(shell ../../bin/nitls -M src/client/ios.nit) ios/AppIcon.appiconset/Contents.json
+	mkdir -p bin/
+	rm -rf bin/benitlux.app/
+	../../bin/nitc -o bin/benitlux.app src/client/ios.nit -D benitlux_rest_server_uri=http://$(SERVER)/
+
+bin/proto.app: $(shell ../../bin/nitls -M src/client/ios_proto.nit) ios/AppIcon.appiconset/Contents.json
+	mkdir -p bin/ res/
+	../../bin/nitc -o $@ src/client/ios_proto.nit \
+		-D benitlux_rest_server_uri=http://$(SERVER)/
+
+ios-release: $(shell ../../bin/nitls -M src/client/ios.nit) ios/AppIcon.appiconset/Contents.json
+	mkdir -p bin/
+	../../bin/nitc -o bin/benitlux.app src/client/ios.nit -D benitlux_rest_server_uri=http://$(SERVER)/
+
+ios/AppIcon.appiconset/Contents.json: art/icon.svg
+	mkdir -p ios
+	../inkscape_tools/bin/svg_to_icons art/icon.svg --ios --out ios/AppIcon.appiconset/
