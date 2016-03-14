@@ -78,14 +78,38 @@ in "ObjC" `{
 redef class App
 	redef fun did_finish_launching_with_options
 	do
+		app_delegate.window = new UIWindow
+		app_delegate.window.background_color = new UIColor.white_color
 		super
-		window.native.make_key_and_visible
+		app_delegate.window.make_key_and_visible
 		return true
 	end
 
+	private fun set_view_controller(window: UIWindow, native: UIViewController)
+	in "ObjC" `{
+		// Set the required root view controller
+		UINavigationController *navController = (UINavigationController*)window.rootViewController;
+
+		if (navController == NULL) {
+			navController = [[UINavigationController alloc]initWithRootViewController:native];
+			navController.edgesForExtendedLayout = UIRectEdgeNone;
+
+			// Must be non-translucent for the controls to be placed under
+			// (as in Y axis) of the navigation bar.
+			navController.navigationBar.translucent = NO;
+
+			window.rootViewController = navController;
+		}
+		else {
+			[navController pushViewController:native animated:YES];
+		}
+
+		native.edgesForExtendedLayout = UIRectEdgeNone;
+	`}
+
 	redef fun window=(window)
 	do
-		app_delegate.window = window.native
+		set_view_controller(app_delegate.window, window.native)
 		super
 	end
 end
@@ -128,10 +152,14 @@ end
 
 redef class Window
 
-	redef type NATIVE: UIWindow
-	redef var native = new UIWindow
+	redef type NATIVE: UIViewController
+	redef var native = new UIViewController
 
-	init do native.background_color = new UIColor.white_color
+	# Title of this window
+	fun title: String do return native.title.to_s
+
+	# Set the title of this window
+	fun title=(title: String) do native.title = title.to_nsstring
 
 	redef fun add(view)
 	do
@@ -139,26 +167,9 @@ redef class Window
 
 		var native_view = view.native
 		assert native_view isa UIView
-		native.add_subview native_view
 
-		fill_whole_window_with(native_view, native)
+		native.view = native_view
 	end
-
-	private fun fill_whole_window_with(native: UIView, window: UIWindow)
-	in "ObjC" `{
-		// Hard coded borders including the top bar
-		// FIXME this may cause problems with retina devices
-		[window addConstraints:[NSLayoutConstraint
-			constraintsWithVisualFormat: @"V:|-24-[view]-8-|"
-			options: 0 metrics: nil views: @{@"view": native}]];
-		[window addConstraints:[NSLayoutConstraint
-			constraintsWithVisualFormat: @"H:|-8-[view]-8-|"
-			options: 0 metrics: nil views: @{@"view": native}]];
-
-		// Set the required root view controller
-		window.rootViewController = [[UIViewController alloc]initWithNibName:nil bundle:nil];
-		window.rootViewController.view = native;
-	`}
 end
 
 redef class Layout
@@ -170,7 +181,6 @@ redef class Layout
 	do
 		native.alignment = new UIStackViewAlignment.fill
 		native.distribution = new UIStackViewDistribution.fill_equally
-		native.translates_autoresizing_mask_into_constraits = false
 
 		# TODO make customizable
 		native.spacing = 4.0

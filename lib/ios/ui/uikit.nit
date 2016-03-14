@@ -94,7 +94,28 @@ extern class UIWindow in "ObjC" `{ UIWindow * `}
 	`}
 end
 
-# Base class for contorl objects
+# Manages a set of views
+extern class UIViewController in "ObjC" `{ UIViewController * `}
+	super NSObject
+
+	new in "ObjC" `{
+		return [[UIViewController alloc]initWithNibName:nil bundle:nil];
+	`}
+
+	# Wraps: `self.view`
+	fun view: UIView in "ObjC" `{ return self.view; `}
+
+	# Wraps: `self.view`
+	fun view=(view: UIView) in "ObjC" `{ self.view = view; `}
+
+	# Wraps: `self.title`
+	fun title: NSString in "ObjC" `{ return self.title; `}
+
+	# Wraps: `self.title`
+	fun title=(title: NSString) in "ObjC" `{ self.title = title; `}
+end
+
+# Base class for control objects
 extern class UIControl in "ObjC" `{ UIControl * `}
 	super UIView
 
