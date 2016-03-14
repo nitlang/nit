@@ -121,7 +121,7 @@ end
 class AssetManager
 
 	# Native asset manager
-	private var native_assets_manager: NativeAssetManager = app.native_activity.assets.new_global_ref is lazy
+	private var native_assets_manager: NativeAssetManager = app.native_context.assets.new_global_ref is lazy
 
 	# Close this asset manager
 	fun close do native_assets_manager.close
@@ -400,8 +400,8 @@ end
 redef class App
 	# Resource Manager used to manage resources placed in the `res` folder of the app
 	var resource_manager: ResourcesManager is lazy do
-		var res = native_activity.resources
-		var pkg = native_activity.package_name
+		var res = native_context.resources
+		var pkg = native_context.package_name
 		return new ResourcesManager.native(res, pkg.to_s)
 	end
 
@@ -409,7 +409,7 @@ redef class App
 	var asset_manager: AssetManager is lazy do return new AssetManager
 end
 
-redef extern class NativeActivity
+redef extern class NativeContext
 
 	# Get the native AssetsManager of the application, used to initialize the nit's AssetManager
 	private fun assets: NativeAssetManager in "Java" `{

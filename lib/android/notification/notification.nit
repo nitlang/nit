@@ -109,7 +109,7 @@ class Notification
 		if id != null then
 			sys.jni_env.push_local_frame(8)
 
-			var manager = app.native_activity.notification_manager
+			var manager = app.native_context.notification_manager
 			manager.cancel(tag.to_java_string, id)
 
 			self.id = null

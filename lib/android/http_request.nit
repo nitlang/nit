@@ -30,7 +30,15 @@ in "Java" `{
 `}
 
 redef class App
-	redef fun run_on_ui_thread(task) do app.native_activity.run_on_ui_thread task
+	redef fun run_on_ui_thread(task)
+	do
+		if app.activities.not_empty then
+			app.native_activity.run_on_ui_thread task
+		else
+			# There is no UI, it must be a service, run on the caller thread
+			task.main
+		end
+	end
 end
 
 redef class Text

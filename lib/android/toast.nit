@@ -28,13 +28,12 @@ redef class App
 	fun toast(message: String, is_long: Bool)
 	do
 		var jstr = message.to_java_string
-		native_toast(jstr, is_long)
+		native_toast(jstr, is_long, native_activity)
 		jstr.delete_local_ref
 	end
 
-	private fun native_toast(message: JavaString, is_long: Bool)
-	import native_activity in "Java" `{
-		final android.app.Activity context = App_native_activity(self);
+	private fun native_toast(message: JavaString, is_long: Bool, native_activity: NativeActivity) in "Java" `{
+		final android.app.Activity context = native_activity;
 		final CharSequence final_message = message;
 		final int duration = is_long? Toast.LENGTH_LONG: Toast.LENGTH_SHORT;
 

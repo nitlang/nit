@@ -49,10 +49,10 @@ end
 redef class App
 	# Get the handle to this device vibrator as a global ref
 	var vibrator: Vibrator is lazy do
-		var v = vibrator_native(native_activity)
+		var v = vibrator_native(native_context)
 		return v.new_global_ref
 	end
-	private fun vibrator_native(context: NativeActivity): Vibrator in "Java" `{
+	private fun vibrator_native(context: NativeContext): Vibrator in "Java" `{
 		android.os.Vibrator v = (android.os.Vibrator)
 			context.getSystemService(android.content.Context.VIBRATOR_SERVICE);
 		return v;
