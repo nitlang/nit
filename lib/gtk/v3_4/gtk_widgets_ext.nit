@@ -246,3 +246,22 @@ extern class GtkColorButton `{GtkColorButton *`}
 	`}
 end
 
+# Button remaining "pressed-in" when clicked
+extern class GtkToggleButton `{ GtkToggleButton * `}
+	super GtkButton
+
+	# Current state, returns `true` if pressed/checked
+	fun active: Bool `{ return gtk_toggle_button_get_active(self); `}
+
+	# Set current state, `true` for pressed/checked
+	fun active=(value: Bool) `{ gtk_toggle_button_set_active(self, value); `}
+end
+
+# Check box next to a label
+extern class GtkCheckButton `{ GtkCheckButton * `}
+	super GtkToggleButton
+
+	new `{ return (GtkCheckButton *)gtk_check_button_new(); `}
+
+	new with_label(lbl: NativeString) `{ return (GtkCheckButton *)gtk_check_button_new_with_label((gchar *)lbl); `}
+end

@@ -149,6 +149,17 @@ redef class Label
 	redef fun text=(value) do native.text = (value or else "").to_s
 end
 
+redef class CheckBox
+	redef type NATIVE: GtkCheckButton
+	redef var native = new GtkCheckButton
+
+	redef fun text do return native.text
+	redef fun text=(value) do native.text = (value or else "").to_s
+
+	redef fun is_checked do return native.active
+	redef fun is_checked=(value) do native.active = value
+end
+
 redef class TextInput
 	redef type NATIVE: GtkEntry
 	redef var native = new GtkEntry
