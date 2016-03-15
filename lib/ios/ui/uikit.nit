@@ -495,14 +495,24 @@ extern class UIStackView in "ObjC" `{ UIStackView * `}
 	fun spacing=(value: Float) in "ObjC" `{ self.spacing = value; `}
 
 	# Wraps: `UIStackView.baselineRelativeArrangement`
-	#fun baseline_relative_arrangement: Bool in "ObjC" `{
-	#	return [self baselineRelativeArrangement];
-	#`}
+	fun baseline_relative_arrangement: Bool in "ObjC" `{
+		return self.baselineRelativeArrangement;
+	`}
+
+	# Wraps: `UIStackView.baselineRelativeArrangement`
+	fun baseline_relative_arrangement=(value: Bool) in "ObjC" `{
+		self.baselineRelativeArrangement = value;
+	`}
 
 	# Wraps: `UIStackView.layoutMarginsRelativeArrangement`
-	#fun layout_margins_relative_arrangement: Bool in "ObjC" `{
-	#	return [self layoutMarginsRelativeArrangement];
-	#`}
+	fun layout_margins_relative_arrangement: Bool in "ObjC" `{
+		return self.layoutMarginsRelativeArrangement;
+	`}
+
+	# Wraps: `UIStackView.layoutMarginsRelativeArrangement`
+	fun layout_margins_relative_arrangement=(value: Bool) in "ObjC" `{
+		self.layoutMarginsRelativeArrangement = value;
+	`}
 end
 
 # Defines the orientation of the arranged views in `UIStackView`
