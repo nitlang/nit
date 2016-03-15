@@ -203,6 +203,39 @@ redef class Label
 	redef fun text do return native.text.to_s
 end
 
+# On iOS, check boxes are a layout composed of a label and an `UISwitch`
+redef class CheckBox
+
+	redef type NATIVE: UIStackView
+	redef fun native do return layout.native
+
+	# Root layout implementing this check box
+	var layout = new HorizontalLayout(parent=self.parent)
+
+	# Label with the text
+	var lbl = new Label(parent=layout)
+
+	# `UISwitch` acting as the real check box
+	var ui_switch: UISwitch is noautoinit
+
+	init do
+		# Tweak the layout so it is centered
+		layout.native.distribution = new UIStackViewDistribution.fill_proportionally
+		layout.native.alignment = new UIStackViewAlignment.center
+		layout.native.layout_margins_relative_arrangement = true
+
+		var s = new UISwitch
+		native.add_arranged_subview s
+		ui_switch = s
+	end
+
+	redef fun text=(text) do lbl.text = text
+	redef fun text do return lbl.text
+
+	redef fun is_checked do return ui_switch.on
+	redef fun is_checked=(value) do ui_switch.set_on_animated(value, true)
+end
+
 redef class TextInput
 
 	redef type NATIVE: UITextField
