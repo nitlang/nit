@@ -992,3 +992,69 @@ fun android_r_style_text_appearance_medium: Int in "Java" `{
 fun android_r_style_text_appearance_small: Int in "Java" `{
 	return android.R.style.TextAppearance_Small;
 `}
+
+# Java class: android.widget.Checkable
+extern class Android_widget_Checkable in "Java" `{ android.widget.Checkable `}
+	super JavaObject
+
+	# Java implementation: android.widget.Checkable.setChecked(boolean)
+	fun set_checked(arg0: Bool) in "Java" `{
+		self.setChecked(arg0);
+	`}
+
+	# Java implementation: boolean android.widget.Checkable.isChecked()
+	fun is_checked: Bool in "Java" `{
+		return self.isChecked();
+	`}
+
+	# Java implementation: android.widget.Checkable.toggle()
+	fun toggle in "Java" `{
+		self.toggle();
+	`}
+
+	redef fun new_global_ref import sys, Sys.jni_env `{
+		Sys sys = Android_widget_Checkable_sys(self);
+		JNIEnv *env = Sys_jni_env(sys);
+		return (*env)->NewGlobalRef(env, self);
+	`}
+
+	redef fun pop_from_local_frame_with_env(jni_env) `{
+		return (*jni_env)->PopLocalFrame(jni_env, self);
+	`}
+end
+
+# Java abstract class: android.widget.CompoundButton
+extern class Android_widget_CompoundButton in "Java" `{ android.widget.CompoundButton `}
+	super NativeButton
+	super Android_widget_Checkable
+
+	redef fun new_global_ref import sys, Sys.jni_env `{
+		Sys sys = Android_widget_CompoundButton_sys(self);
+		JNIEnv *env = Sys_jni_env(sys);
+		return (*env)->NewGlobalRef(env, self);
+	`}
+
+	redef fun pop_from_local_frame_with_env(jni_env) `{
+		return (*jni_env)->PopLocalFrame(jni_env, self);
+	`}
+end
+
+# Java class: android.widget.CheckBox
+extern class Android_widget_CheckBox in "Java" `{ android.widget.CheckBox `}
+	super Android_widget_CompoundButton
+
+	# Java constructor: android.widget.CheckBox
+	new (a: NativeContext) in "Java" `{
+		return new android.widget.CheckBox(a);
+	`}
+
+	redef fun new_global_ref import sys, Sys.jni_env `{
+		Sys sys = Android_widget_CheckBox_sys(self);
+		JNIEnv *env = Sys_jni_env(sys);
+		return (*env)->NewGlobalRef(env, self);
+	`}
+
+	redef fun pop_from_local_frame_with_env(jni_env) `{
+		return (*jni_env)->PopLocalFrame(jni_env, self);
+	`}
+end
