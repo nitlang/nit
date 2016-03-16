@@ -24,8 +24,13 @@ import modelize
 private import annotation
 
 redef class ToolContext
+
+	# Apply the annotation `serialize_as`
+	var serialization_phase_rename: Phase = new SerializationPhaseRename(self, null)
+
 	# Generate serialization and deserialization methods on `auto_serializable` annotated classes.
-	var serialization_phase_pre_model: Phase = new SerializationPhasePreModel(self, null)
+	var serialization_phase_pre_model: Phase = new SerializationPhasePreModel(self,
+		[serialization_phase_rename])
 
 	# The second phase of the serialization
 	var serialization_phase_post_model: Phase = new SerializationPhasePostModel(self,
@@ -53,6 +58,34 @@ redef class ADefinition
 
 	redef fun is_noserialize do
 		return get_annotations("noserialize").not_empty
+	end
+end
+
+private class SerializationPhaseRename
+	super Phase
+
+	redef fun process_annotated_node(node, nat)
+	do
+		var text = nat.n_atid.n_id.text
+		if text != "serialize_as" then return
+
+		if not node isa AAttrPropdef then
+			toolcontext.error(node.location,
+				"Syntax Error: annotation `{text}` applies only to attributes.")
+			return
+		end
+
+		# Can't use `arg_as_string` because it needs the literal phase
+		var args = nat.n_args
+		if args.length != 1 or not args.first isa AStringFormExpr then
+			toolcontext.error(node.location,
+				"Syntax Error: annotation `{text}` expects a single string literal as argument.")
+			return
+		end
+
+		var t = args.first.collect_text
+		var val = t.substring(1, t.length-2)
+		node.serialize_name = val
 	end
 end
 
@@ -164,8 +197,7 @@ private class SerializationPhasePreModel
 			if (per_attribute and not attribute.is_serialize) or
 				attribute.is_noserialize then continue
 
-			var name = attribute.name
-			code.add "	v.serialize_attribute(\"{name}\", {name})"
+			code.add "	v.serialize_attribute(\"{attribute.serialize_name}\", {attribute.name})"
 		end
 
 		code.add "end"
@@ -214,11 +246,11 @@ do
 			var name = attribute.name
 
 			code.add """
-	var {{{name}}} = v.deserialize_attribute("{{{name}}}")
+	var {{{name}}} = v.deserialize_attribute("{{{attribute.serialize_name}}}")
 	if not {{{name}}} isa {{{type_name}}} then
 		# Check if it was a subjectent error
 		v.errors.add new AttributeTypeError("TODO remove this arg on c_src regen",
-			self, "{{{name}}}", {{{name}}}, "{{{type_name}}}")
+			self, "{{{attribute.serialize_name}}}", {{{name}}}, "{{{type_name}}}")
 
 		# Clear subjacent error
 		if v.keep_going == false then return
@@ -322,10 +354,10 @@ redef class AIsaExpr
 end
 
 redef class AAttrPropdef
-	private fun name: String
-	do
-		return n_id2.text
-	end
+	private fun name: String do return n_id2.text
+
+	# Name of this attribute in the serialized format
+	private var serialize_name: String = name is lazy
 end
 
 redef class AType
