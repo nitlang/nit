@@ -179,6 +179,16 @@ private class SerializationPhasePreModel
 	do
 		var npropdefs = nclassdef.n_propdefs
 
+		# Do not insert a `from_deserializer` if it already exists
+		for npropdef in npropdefs do
+			if npropdef isa AMethPropdef then
+				var methid = npropdef.n_methid
+				if methid != null and methid.collect_text == "from_deserializer" then
+					return
+				end
+			end
+		end
+
 		var code = new Array[String]
 		code.add """
 redef init from_deserializer(v: Deserializer)
