@@ -82,6 +82,9 @@ class TnitterWeb
 	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 	<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+	<script>
+		{{{javascript_header or else ""}}}
+	</script>
 </head>
 <body>
 
@@ -92,6 +95,9 @@ class TnitterWeb
 </div>
 </body>
 </html>"""
+
+	# Custom JavaScript code added within a `<script>` block to each page
+	var javascript_header: nullable Writable = null is writable
 
 	redef fun answer(request, turi)
 	do

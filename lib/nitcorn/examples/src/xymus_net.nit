@@ -120,7 +120,9 @@ class OpportunityMasterHeader
 end
 
 redef class TnitterWeb
-	redef var header: String = (new MasterHeader("tnitter", true)).to_s
+	redef var header = (new MasterHeader("tnitter", true)).to_s
+
+	redef fun javascript_header do return tracking_code
 end
 
 redef class BenitluxDocument
