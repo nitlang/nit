@@ -70,7 +70,7 @@ class HttpResponse
 		end
 
 		# Set server ID
-		if not header.keys.has("Server") then header["Server"] = "unitcorn"
+		if not header.keys.has("Server") then header["Server"] = "nitcorn"
 	end
 
 	# Get this reponse as a string according to HTTP protocol
