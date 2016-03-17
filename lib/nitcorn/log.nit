@@ -40,6 +40,20 @@ redef class Action
 	end
 end
 
+redef class HttpServer
+	redef fun read_http_request(str)
+	do
+		print "{remote_address}: received HTTP request"
+		super
+	end
+
+	redef fun respond(response)
+	do
+		super
+		if log_nitcorn_actions then print "{remote_address}: response header '{response.header.join(",", ":")}' to '{remote_address}'"
+	end
+end
+
 redef fun print(object) do
 	var timestamp = new Tm.gmtime
 	super "{timestamp.year}/{timestamp.mon}/{timestamp.mday} "+
