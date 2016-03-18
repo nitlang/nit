@@ -48,6 +48,7 @@ public class NitActivity extends Activity {
 	protected native void nitOnDestroy(int activity);
 	protected native void nitOnSaveInstanceState(int activity, Bundle savedInstanceState);
 	protected native void nitOnRestoreInstanceState(int activity, Bundle savedInstanceState);
+	protected native boolean nitOnBackPressed(int activity);
 	protected native boolean nitOnKeyDown(int activity, int keyCode, KeyEvent event);
 	protected native boolean nitOnKeyLongPress(int activity, int keyCode, KeyEvent event);
 	protected native boolean nitOnKeyMultiple(int activity, int keyCode, int count, KeyEvent event);
@@ -112,6 +113,12 @@ public class NitActivity extends Activity {
 	public void onRestoreInstanceState(Bundle savedInstanceState) {
 		super.onRestoreInstanceState(savedInstanceState);
 		nitOnRestoreInstanceState(nitActivity, savedInstanceState);
+	}
+
+	@Override
+	public void onBackPressed() {
+		if (!nitOnBackPressed(nitActivity))
+			super.onBackPressed();
 	}
 
 	@Override

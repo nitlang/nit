@@ -135,6 +135,12 @@ in "C body" `{
 		Activity_on_restore_instance_state((Activity)nit_activity, saved_state);
 	}
 
+	JNIEXPORT jboolean JNICALL Java_nit_app_NitActivity_nitOnBackPressed
+	  (JNIEnv *env, jobject java_activity, jint nit_activity)
+	{
+		return (jboolean)Activity_on_back_pressed((Activity)nit_activity);
+	}
+
 	JNIEXPORT jboolean JNICALL Java_nit_app_NitActivity_nitOnKeyDown
 	  (JNIEnv *env, jobject java_activity, jint nit_activity, jint keyCode, jobject event)
 	{
@@ -184,6 +190,7 @@ redef class App
 	Activity.on_start, Activity.on_restart, Activity.on_stop,
 	Activity.on_pause, Activity.on_resume,
 	Activity.on_save_instance_state, Activity.on_restore_instance_state,
+	Activity.on_back_pressed,
 	Activity.on_key_down, Activity.on_key_long_press,
 	Activity.on_key_multiple, Activity.on_key_up `{
 		App_incr_ref(self);
@@ -278,6 +285,11 @@ class Activity
 
 	# Notification from Android, the current device configuration has changed
 	fun on_configuration_changed do end
+
+	# The back key has been pressed
+	#
+	# Return `true` if the event has been handled.
+	fun on_back_pressed: Bool do return false
 
 	# A key has been pressed
 	#

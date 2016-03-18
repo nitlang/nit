@@ -78,6 +78,19 @@ redef class App
 	end
 end
 
+redef class Activity
+	redef fun on_back_pressed
+	do
+		var window = app.window
+		if window.enable_back_button then
+			window.on_back_button
+			return true
+		end
+
+		return false
+	end
+end
+
 # On Android, a window is implemented with the fragment `native`
 redef class Window
 	redef var native = (new Android_app_Fragment(self)).new_global_ref
