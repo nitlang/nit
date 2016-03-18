@@ -28,8 +28,32 @@ redef class App
 
 	# The current `Window` of this activity
 	#
-	# This attribute must be set by refinements of `App`.
-	var window: Window is writable
+	# This attribute is set by `push_window`.
+	var window: Window is noinit
+
+	# Make visible and push `window` on the top of `pop_window`
+	#
+	# This method must be called at least once within `App::on_create`.
+	# It can be called at any times while the app is active.
+	fun push_window(window: Window)
+	do
+		window_stack.add window
+		self.window = window
+	end
+
+	# Pop the current `window` from the stack and show the previous one
+	#
+	# Require: `window_stack.not_empty`
+	fun pop_window
+	do
+		assert window_stack.not_empty
+		window_stack.pop
+		window = window_stack.last
+		window.on_resume
+	end
+
+	# Stack of active windows
+	var window_stack = new Array[Window]
 
 	redef fun on_create do window.on_create
 
@@ -141,6 +165,12 @@ end
 # A window, root of the `Control` tree
 class Window
 	super CompositeControl
+
+	# Should the back button be shown and used to go back to a previous window?
+	fun enable_back_button: Bool do return app.window_stack.length > 1
+
+	# The back button has been pressed, usually to open the previous window
+	fun on_back_button do app.pop_window
 end
 
 # A viewable `Control`
