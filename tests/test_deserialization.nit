@@ -24,7 +24,7 @@ class A
 	var c: Char
 	var f: Float
 	var i: Int
-	var s: String
+	var s: String is serialize_as "serialization_specific_name"
 	var n: nullable Int
 	var password = "p4ssw0rd" is lazy, noserialize
 

@@ -46,6 +46,7 @@ module serialization is
 	new_annotation auto_serializable
 	new_annotation serialize
 	new_annotation noserialize
+	new_annotation serialize_as
 end
 
 # Abstract serialization service to be sub-classed by specialized services.
