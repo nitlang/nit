@@ -92,7 +92,8 @@ extern class GtkWidget `{GtkWidget *`}
 		return self == o;
 	`}
 
-	fun request_size(width, height: Int) `{
+	# Set the minimum dimension of this widget
+	fun set_size_request(width, height: Int) `{
 		gtk_widget_set_size_request(self, width, height);
 	`}
 
