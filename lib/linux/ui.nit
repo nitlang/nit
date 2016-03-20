@@ -99,13 +99,6 @@ redef class Control
 end
 
 redef class CompositeControl
-	redef type NATIVE: GtkContainer
-
-	redef fun add(item)
-	do
-		super
-		native.add item.native
-	end
 end
 
 # On GNU/Linux, a window is implemented by placing the `view` in a `GtkStack` in the single GTK window
@@ -120,8 +113,7 @@ redef class Window
 			self.view = view
 		end
 
-		# TODO skip local CompositeControl::add but call intro
-		#super
+		super
 	end
 end
 
@@ -134,10 +126,17 @@ end
 
 redef class Layout
 	redef type NATIVE: GtkBox
-	redef fun remove(view)
+
+	redef fun add(item)
 	do
 		super
-		native.remove view.native
+		if item isa View then native.add item.native
+	end
+
+	redef fun remove(item)
+	do
+		super
+		if item isa View then native.remove item.native
 	end
 end
 
