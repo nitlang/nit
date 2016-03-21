@@ -20,6 +20,11 @@ import gtk::v3_10
 
 import data_store
 
+# Request width of the GTK window for an app.nit application
+#
+# This is the minimum width of the window, it may grow bigger to fit content.
+fun gtk_window_width_request: Int do return 480
+
 redef class App
 	redef fun setup do gtk_init
 
@@ -77,6 +82,12 @@ redef class App
 		assert root_view != null
 		native_stack.add root_view.native
 		native_stack.visible_child = root_view.native
+
+		# FIXME These settings forces the GTK window to resize to its minimum
+		# size when changing app.nit windows. It is not pretty, but it could be
+		# improved with GTK 3.18 and interpolate_size.
+		native_window.resizable = false
+
 		super
 	end
 end
@@ -111,6 +122,8 @@ redef class Window
 	do
 		if view isa View then
 			self.view = view
+			view.native.valign = new GtkAlign.start
+			view.native.set_size_request(gtk_window_width_request, 0)
 		end
 
 		super
