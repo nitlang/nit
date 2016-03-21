@@ -22,23 +22,25 @@
 module libevent is pkgconfig("libevent")
 
 in "C header" `{
-	#include <sys/stat.h>
-	#include <sys/types.h>
-	#include <fcntl.h>
-	#include <errno.h>
-	#include <string.h>
-	#include <sys/socket.h>
-
 	#include <event2/listener.h>
 	#include <event2/bufferevent.h>
 	#include <event2/buffer.h>
 `}
 
 in "C" `{
+	#include <sys/stat.h>
+	#include <sys/types.h>
+	#include <fcntl.h>
+	#include <errno.h>
+	#include <string.h>
+
+	#include <sys/socket.h>
+	#include <arpa/inet.h>
+	#include <netinet/in.h>
+	#include <netinet/ip.h>
 
 // Protect callbacks for compatibility with light FFI
 #ifdef Connection_decr_ref
-
 	// Callback forwarded to 'Connection.write_callback'
 	static void c_write_cb(struct bufferevent *bev, Connection ctx) {
 		Connection_write_callback(ctx);
@@ -59,9 +61,9 @@ in "C" `{
 
 	// Callback forwarded to 'ConnectionFactory.accept_connection'
 	static void accept_connection_cb(struct evconnlistener *listener, evutil_socket_t fd,
-		struct sockaddr *address, int socklen, ConnectionFactory ctx)
+		struct sockaddr *addrin, int socklen, ConnectionFactory ctx)
 	{
-		ConnectionFactory_accept_connection(ctx, listener, fd, address, socklen);
+		ConnectionFactory_accept_connection(ctx, listener, fd, addrin, socklen);
 	}
 #endif
 
@@ -399,17 +401,26 @@ class ConnectionFactory
 	# Accept a connection on `listener`
 	#
 	# By default, it creates a new NativeBufferEvent and calls `spawn_connection`.
-	fun accept_connection(listener: ConnectionListener, fd: Int, address: Pointer, socklen: Int)
+	fun accept_connection(listener: ConnectionListener, fd: Int, addrin: Pointer, socklen: Int)
 	do
 		var base = listener.base
 		var bev = new NativeBufferEvent.socket(base, fd, bev_opt_close_on_free)
-		var conn = spawn_connection(bev)
+
+		# Human representation of remote client address
+		var addr_len = 46 # Longest possible IPv6 address + null byte
+		var addr_buf = new NativeString(addr_len)
+		addr_buf = addrin_to_address(addrin, addr_buf, addr_len)
+		var addr = if addr_buf.address_is_null then
+				"Unknown address"
+			else addr_buf.to_s
+
+		var conn = spawn_connection(bev, addr)
 		bev.enable ev_read|ev_write
 		bev.setcb conn
 	end
 
 	# Create a new `Connection` object for `buffer_event`
-	fun spawn_connection(buffer_event: NativeBufferEvent): Connection
+	fun spawn_connection(buffer_event: NativeBufferEvent, address: String): Connection
 	do
 		return new Connection(buffer_event)
 	end
@@ -423,4 +434,19 @@ class ConnectionFactory
 		end
 		return listener
 	end
+
+	# Put string representation of source `address` into `buf`
+	private fun addrin_to_address(address: Pointer, buf: NativeString, buf_len: Int): NativeString `{
+		struct sockaddr *addrin = (struct sockaddr*)address;
+
+		if (addrin->sa_family == AF_INET) {
+			struct in_addr *src = &((struct sockaddr_in*)addrin)->sin_addr;
+			return (char *)inet_ntop(addrin->sa_family, src, buf, buf_len);
+		}
+		else if (addrin->sa_family == AF_INET6) {
+			struct in6_addr *src = &((struct sockaddr_in6*)addrin)->sin6_addr;
+			return (char *)inet_ntop(addrin->sa_family, src, buf, buf_len);
+		}
+		return NULL;
+	`}
 end
