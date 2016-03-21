@@ -236,6 +236,18 @@ extern class GtkLockButton
 	super GtkButton
 end
 
+# Contains a single widget and scrollbars
+extern class GtkScrolledWindow `{ GtkScrolledWindow * `}
+	super GtkBin
+
+	new `{ return (GtkScrolledWindow *)gtk_scrolled_window_new(NULL, NULL); `}
+
+	# Set horizontal and vertical scrollbar policies
+	fun set_policy(hscrollbar_policy, vscrollbar_policy: GtkPolicyType) `{
+		gtk_scrolled_window_set_policy(self, hscrollbar_policy, vscrollbar_policy);
+	`}
+end
+
 # A button to launch a color selection dialog
 # See: https://developer.gnome.org/gtk3/stable/GtkColorButton.html
 extern class GtkColorButton `{GtkColorButton *`}
