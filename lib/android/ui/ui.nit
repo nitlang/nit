@@ -37,18 +37,69 @@ redef class Control
 	type NATIVE: JavaObject
 end
 
-redef class Window
-	redef var native = app.native_activity.new_global_ref
+redef class NativeActivity
 
-	redef type NATIVE: NativeActivity
+	private fun remove_title_bar in "Java" `{
+		self.requestWindowFeature(android.view.Window.FEATURE_NO_TITLE);
+	`}
+
+	# Insert a single layout as the root of the activity window
+	private fun insert_root_layout(root_layout_id: Int)
+	in "Java" `{
+		android.widget.FrameLayout layout = new android.widget.FrameLayout(self);
+		layout.setId((int)root_layout_id);
+		self.setContentView(layout);
+	`}
+
+	# Replace the currently visible fragment, if any, with `native_fragment`
+	private fun show_fragment(root_layout_id: Int, native_fragment: Android_app_Fragment)
+	in "Java" `{
+		android.app.FragmentTransaction transaction = self.getFragmentManager().beginTransaction();
+		transaction.replace((int)root_layout_id, native_fragment);
+		transaction.commit();
+	`}
+end
+
+redef class App
+	redef fun on_create
+	do
+		app.native_activity.remove_title_bar
+		native_activity.insert_root_layout(root_layout_id)
+		super
+	end
+
+	# Identifier of the container holding the fragments
+	private var root_layout_id = 0xFFFF
+
+	redef fun window=(window)
+	do
+		native_activity.show_fragment(root_layout_id, window.native)
+		super
+	end
+end
+
+# On Android, a window is implemented with the fragment `native`
+redef class Window
+	redef var native = (new Android_app_Fragment(self)).new_global_ref
+
+	redef type NATIVE: Android_app_Fragment
+
+	# Root high-level view of this window
+	var view: nullable View = null
 
 	redef fun add(item)
 	do
+		if item isa View then view = item
 		super
+	end
 
-		# FIXME abstract the Android restriction where `content_view` must be a layout
-		assert item isa Layout
-		native.content_view = item.native
+	private fun on_create_fragment: NativeView
+	do
+		on_create
+
+		var view = view
+		assert view != null else print_error "{class_name} needs a `view` after `Window::on_create` returns"
+		return view.native
 	end
 end
 
@@ -224,6 +275,22 @@ redef class NativeButton
 					return true;
 				}
 				return false;
+			}
+		};
+	`}
+end
+
+redef class Android_app_Fragment
+	private new (nit_window: Window)
+	import Window.on_create_fragment in "Java" `{
+		final int final_nit_window = nit_window;
+
+		return new android.app.Fragment(){
+			@Override
+			public android.view.View onCreateView(android.view.LayoutInflater inflater,
+				android.view.ViewGroup container, android.os.Bundle state) {
+
+				return Window_on_create_fragment(final_nit_window);
 			}
 		};
 	`}

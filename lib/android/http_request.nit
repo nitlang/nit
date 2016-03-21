@@ -110,3 +110,8 @@ private extern class JavaHttpResponse in "Java" `{ org.apache.http.HttpResponse 
 		}
 	`}
 end
+
+# Force linearization of print
+#
+# TODO prioritize `android::log`
+redef fun print(object) do super

@@ -137,7 +137,7 @@ end
 
 redef class NativeContext
 	private fun start_service in "Java" `{
-		android.content.Intent indent =
+		android.content.Intent intent =
 			new android.content.Intent(self, nit.app.NitService.class);
 		self.startService(intent);
 	`}
