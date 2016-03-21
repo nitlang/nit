@@ -178,6 +178,14 @@ class Label
 	super TextView
 end
 
+# Toggle control with two states and a label
+class CheckBox
+	super TextView
+
+	# Is this control in the checked/on state?
+	var is_checked = false is writable
+end
+
 # A `Button` press event
 class ButtonPressEvent
 	super AppEvent

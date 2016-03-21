@@ -166,6 +166,14 @@ redef class Label
 	init do native.set_text_appearance(app.native_activity, android_r_style_text_appearance_medium)
 end
 
+redef class CheckBox
+	redef type NATIVE: Android_widget_CompoundButton
+	redef var native do return (new Android_widget_CheckBox(app.native_activity)).new_global_ref
+
+	redef fun is_checked do return native.is_checked
+	redef fun is_checked=(value) do native.set_checked(value)
+end
+
 redef class TextInput
 	redef type NATIVE: NativeEditText
 	redef var native = (new NativeEditText(app.native_activity)).new_global_ref
