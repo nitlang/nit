@@ -159,6 +159,7 @@ redef class HorizontalLayout
 	redef fun add(item)
 	do
 		super
+		# FIXME abstract the use either homogeneous or weight to balance views size in a layout
 		native.homogeneous = true
 		native.set_child_packing(item.native, true, true, 0, new GtkPackType.start)
 	end
@@ -171,8 +172,6 @@ redef class VerticalLayout
 	do
 		super
 
-		# FIXME abstract the use either homogeneous or weight to balance views size in a layout
-		native.homogeneous = true
 		native.set_child_packing(item.native, true, true, 0, new GtkPackType.start)
 	end
 end
