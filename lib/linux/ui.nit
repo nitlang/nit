@@ -177,11 +177,37 @@ redef class VerticalLayout
 	end
 end
 
+# On GNU/Linux, this is implemented by a `GtkListBox` inside a `GtkScrolledWindow`
 redef class ListLayout
-	redef type NATIVE: GtkListBox
-	redef var native = new GtkListBox
 
-	init do native.selection_mode = new GtkSelectionMode.none
+	redef type NATIVE: GtkScrolledWindow
+
+	redef var native = new GtkScrolledWindow
+
+	# Container inside `native`
+	var native_list_box = new GtkListBox
+
+	init do
+		native_list_box.selection_mode = new GtkSelectionMode.none
+		native.add native_list_box
+
+		# Set the size of the GtkScrolledWindow:
+		# use content width and set static height
+		native.set_policy(new GtkPolicyType.never, new GtkPolicyType.automatic)
+		native.set_size_request(gtk_window_width_request, 640)
+	end
+
+	redef fun add(item)
+	do
+		super
+		if item isa View then native_list_box.add item.native
+	end
+
+	redef fun remove(item)
+	do
+		super
+		if item isa View then native_list_box.remove item.native
+	end
 end
 
 redef class Button
