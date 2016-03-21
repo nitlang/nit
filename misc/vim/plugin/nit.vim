@@ -46,7 +46,7 @@ function NitComplete()
 
 		" This gives us better results for Nit
 		set noignorecase
-		set completeopt=longest,menuone,preview
+		set completeopt=longest,menuone
 
 		" Do not predict small 3 letters keywords (or their prefix), they slow down
 		" prediction and some also require double-enter on end of line.
