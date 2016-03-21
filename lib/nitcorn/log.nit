@@ -27,16 +27,30 @@ redef class Action
 			super
 			return
 		end
-		print """{{{class_name}}} enter:
-uri="{{{truncated_uri}}}"
-query="{{{request.query_string}}}"
-body:{{{request.body.length}}} bytes"""
+
+		print "{http_server.remote_address}: {class_name} prepare for url:'{request.url}' body:'{request.body}' cookie:'{request.cookie.join(",", ":")}'"
+
 		var clock = new Clock
+
 		super
+
 		var perf = sys.perfs[class_name]
 		perf.add(clock.lapse)
 		if perf.count % perfs_print_period == 0 then print "{class_name} perfs: {perf}:"
-		print "{class_name} return: uri={truncated_uri}"
+	end
+end
+
+redef class HttpServer
+	redef fun read_http_request(str)
+	do
+		print "{remote_address}: received HTTP request"
+		super
+	end
+
+	redef fun respond(response)
+	do
+		super
+		if log_nitcorn_actions then print "{remote_address}: response header '{response.header.join(",", ":")}' to '{remote_address}'"
 	end
 end
 
@@ -52,7 +66,7 @@ redef fun print_error(object) do
 	"{timestamp.hour}:{timestamp.min}:{timestamp.sec}: {object}"
 end
 
-# Should the actions be logged ?
+# Should the actions be logged? This may log sensitive data.
 fun log_nitcorn_actions: Bool do return false
 
 # Number of actions executed before printing the perfs
