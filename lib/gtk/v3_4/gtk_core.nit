@@ -92,7 +92,8 @@ extern class GtkWidget `{GtkWidget *`}
 		return self == o;
 	`}
 
-	fun request_size(width, height: Int) `{
+	# Set the minimum dimension of this widget
+	fun set_size_request(width, height: Int) `{
 		gtk_widget_set_size_request(self, width, height);
 	`}
 
@@ -137,6 +138,21 @@ extern class GtkWidget `{GtkWidget *`}
 
 	# Hide the widget (reverse the effects of `show`)
 	fun hide `{ gtk_widget_hide(self); `}
+
+	# Vertical alignement of this widget
+	fun valign=(value: GtkAlign) `{ gtk_widget_set_valign(self, value); `}
+
+	# Horizontal alignement of this widget
+	fun halign=(value: GtkAlign) `{ gtk_widget_set_halign(self, value); `}
+end
+
+# How a widget deals with extra space
+extern class GtkAlign `{ GtkAlign `}
+	new fill `{ return GTK_ALIGN_FILL; `}
+	new start `{ return GTK_ALIGN_START; `}
+	new align_end `{ return GTK_ALIGN_END; `}
+	new center `{ return GTK_ALIGN_CENTER; `}
+	new baseline `{ return GTK_ALIGN_BASELINE; `}
 end
 
 # Base class for widgets which contain other widgets
@@ -198,6 +214,11 @@ extern class GtkWindow `{GtkWindow *`}
 	do
 		signal_connect("destroy", to_call, user_data)
 	end
+
+	# Resize the window as if the user had done so
+	fun resize(width, height: Int) `{
+		return gtk_window_resize(self, width, height);
+	`}
 
 	fun resizable: Bool `{
 		return gtk_window_get_resizable(self);
