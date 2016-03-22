@@ -62,7 +62,7 @@ redef class AExpr
 	fun as_string: nullable String
 	do
 		if not self isa AStringFormExpr then return null
-		return self.value.as(not null)
+		return self.value
 	end
 
 	# Get `self` as an `Int`.
@@ -114,7 +114,10 @@ class AAugmentedLiteral
 	protected var suffix: String is lazy do return text.substring_from(text.last_index_of(delimiter_end) + 1)
 
 	# Content of the entity, without prefix nor suffix
-	protected var content: String is lazy do return text.substring_from(text.index_of(delimiter_start)).substring(0, text.last_index_of(delimiter_end) + 1)
+	protected var content: String is lazy do
+		var npr = text.substring_from(prefix.length)
+		return npr.substring(0, npr.length - suffix.length)
+	end
 end
 
 redef class ACharExpr
@@ -158,19 +161,171 @@ redef class ACharExpr
 	end
 end
 
+# Any kind of string form with augmentations from prefixes or suffixes
+class AugmentedStringFormExpr
+	super AAugmentedLiteral
+
+	redef var delimiter_start = '"'
+	redef var delimiter_end = '"'
+
+	# Is `self` a regular String object ?
+	fun is_string: Bool do return prefix == "" or prefix == "raw"
+
+	# Is `self` a Regular Expression ?
+	fun is_re: Bool do return prefix == "re"
+
+	# Is `self` a Byte String ?
+	fun is_bytestring: Bool do return prefix == "b"
+
+	redef fun is_valid_augmentation do
+		if is_string and suffix == "" then return true
+		if is_bytestring and suffix == "" then return true
+		if is_re then
+			var suf = suffix
+			for i in suf.chars do
+				if i == 'i' then continue
+				if i == 'm' then continue
+				if i == 'b' then continue
+				return false
+			end
+			return true
+		end
+		if prefix != "" or suffix != "" then return false
+		return true
+	end
+end
+
 redef class AStringFormExpr
+	super AugmentedStringFormExpr
+
 	# The value of the literal string once computed.
-	var value: nullable String
-	redef fun accept_literal(v)
-	do
-		var txt = self.n_string.text
+	var value: String is noinit
+
+	# The underlying bytes of the String, non-cleaned for UTF-8
+	var bytes: Bytes is noinit
+
+	redef fun text do return n_string.text
+
+	# Returns the raw text read by the lexer
+	var raw_text: String is lazy do
+		var txt = content
 		var behead = 1
 		var betail = 1
 		if txt.chars[0] == txt.chars[1] and txt.length >= 6 then
 			behead = 3
 			betail = 3
-			if txt.chars[0] == '"' and txt.chars[3] == '\n' then behead = 4 # ignore first \n in """
+			if txt.chars[0] == delimiter_start and txt.chars[3] == '\n' then behead = 4 # ignore first \n in """
 		end
-		self.value = txt.substring(behead, txt.length - behead - betail).unescape_nit
+		return txt.substring(behead, txt.length - behead - betail)
+	end
+
+	redef fun accept_literal(v) do
+		value = raw_text
+		bytes = raw_text.to_bytes
+	end
+end
+
+redef class AEndStringExpr
+	redef var delimiter_end is lazy do return '"'
+	redef fun prefix do return ""
+end
+
+redef class AStartStringExpr
+	redef var delimiter_start is lazy do
+		var str = n_string.text
+		for i in [0 .. str.length[ do
+			var c = str[i]
+			if c == '"' or c == '\'' then
+				return c
+			end
+		end
+		# Cannot happen, unless the parser is bugged
+		abort
+	end
+
+	redef fun suffix do return ""
+end
+
+redef class AMidStringExpr
+	redef fun prefix do return ""
+	redef fun suffix do return ""
+end
+
+redef class AStringExpr
+	redef var delimiter_start is lazy do
+		var str = text
+		for i in [0 .. str.length[ do
+			var c = str[i]
+			if c == '"' or c == '\'' then
+				delimiter_end = c
+				return c
+			end
+		end
+		# Cannot happen, unless the parser is bugged
+		abort
+	end
+
+	redef var delimiter_end is lazy do return delimiter_start
+
+	redef fun accept_literal(v)
+	do
+		super
+		if not is_valid_augmentation then
+			v.toolcontext.error(hot_location, "Error: invalid prefix/suffix combination {prefix}/{suffix}")
+			return
+		end
+		if prefix != "raw" then
+			bytes = raw_text.unescape_to_bytes
+			value = bytes.to_s
+		end
+	end
+end
+
+redef class ASuperstringExpr
+	super AugmentedStringFormExpr
+
+	redef var prefix is lazy do
+		var fst = n_exprs.first
+		if fst isa AugmentedStringFormExpr then
+			var prf = fst.prefix
+			delimiter_start = fst.delimiter_start
+			delimiter_end = delimiter_start
+			return prf
+		end
+		return ""
+	end
+
+	redef var suffix is lazy do
+		var lst = n_exprs.last
+		# Forces the system to update the delimiter's value
+		prefix
+		if lst isa AugmentedStringFormExpr then
+			lst.delimiter_end = delimiter_start
+			return lst.suffix
+		end
+		return ""
+	end
+
+	redef fun accept_literal(v)
+	do
+		if is_bytestring then
+			v.toolcontext.error(hot_location, "Error: cannot produce a ByteString on a Superstring")
+			return
+		end
+		if not is_valid_augmentation then
+			v.toolcontext.error(hot_location, "Error: invalid prefix/suffix combination {prefix}/{suffix}")
+			return
+		end
+	end
+
+	redef fun visit_all(v) do
+		super
+		if prefix != "raw" then
+			for i in n_exprs do
+				if not i isa AStringFormExpr then continue
+				i.bytes = i.raw_text.unescape_to_bytes
+				i.value = i.bytes.to_s
+			end
+		end
 	end
 end
