@@ -136,7 +136,7 @@ extern class Tm `{struct tm *`}
 
 	# Convert `self` to a human readable String corresponding to `format`.
 	# TODO document allowed format.
-	fun strftime(format: String): String import String.to_cstring, NativeString.to_s `{
+	fun strftime(format: String): String import String.to_cstring, NativeString.to_s_with_copy `{
 		char* buf, *c_format;
 
 		buf = (char*)malloc(100);
