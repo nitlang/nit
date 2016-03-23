@@ -18,6 +18,9 @@
 # Number of times a command must be run with bench_command
 count=1
 
+# User time limit (in second) before a command is aborted
+usertimelimit=120
+
 # Common functions for all the bench scripts
 
 # Run a single command multiple time and store the execution times
@@ -46,7 +49,10 @@ function bench_command()
 
 	# Execute the commands $count times
 	for i in `seq 1 "$count"`; do
-		/usr/bin/time -f "%U" -o "$timeout" -a "$@" > $outputopts 2>&1 || { failed=true; die "$1: failed"; }
+		(
+			ulimit -t "$usertimelimit" 2> /dev/null
+			/usr/bin/time -f "%U" -o "$timeout" -a "$@" > $outputopts 2>&1
+		) || { err=$?; failed=true; die "$1: failed with $err"; }
 		echo -n "$i. "
 		tail -n 1 "$timeout"
 	done
