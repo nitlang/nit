@@ -88,7 +88,7 @@ function skip_test()
 		return 0
 	fi
 	if test -n "$html"; then
-		echo >>"$html" "<h2>$1</h2>"
+		echo >>"$html" "<h2 id="$1">$1</h2>"
 	fi
 	echo "*"
 	echo "* $1 *****"
