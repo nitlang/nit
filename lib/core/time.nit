@@ -132,9 +132,7 @@ extern class Tm `{struct tm *`}
 	fun is_dst: Bool `{ return self->tm_isdst; `}
 
 	# Convert `self` to a human readable String.
-	fun asctime: String import NativeString.to_s_with_copy `{
-		return NativeString_to_s_with_copy( asctime(self) );
-	`}
+	private fun asctime: NativeString `{ return asctime(self); `}
 
 	# Convert `self` to a human readable String corresponding to `format`.
 	# TODO document allowed format.
@@ -150,7 +148,7 @@ extern class Tm `{struct tm *`}
 		return s;
 	`}
 
-	redef fun to_s do return asctime.replace("\n", "")
+	redef fun to_s do return asctime.to_s_with_copy.replace("\n", "")
 end
 
 # Date using the international format defined by ISO 8601.
