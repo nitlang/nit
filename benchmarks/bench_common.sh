@@ -55,6 +55,7 @@ function bench_command()
 		) || { err=$?; failed=true; die "$1: failed with $err"; }
 		echo -n "$i. "
 		tail -n 1 "$timeout"
+		test -n "$failed" && break
 	done
 
 	line=`compute_stats "$timeout"`
