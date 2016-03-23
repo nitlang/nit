@@ -13,6 +13,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Global variables
+
+# Number of times a command must be run with bench_command
+count=1
+
 # Common functions for all the bench scripts
 
 # Run a single command multiple time and store the execution times
