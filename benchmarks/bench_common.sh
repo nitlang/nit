@@ -50,12 +50,14 @@ function bench_command()
 	echo "$line ($res)"
 	echo $line >> "$res"
 
-	test -z "$xml" && return
-	echo >>"$xml" "<testcase classname='bench.`basename $res .dat`' name='$title' time='`echo $line | cut -f 1 -d " "`' timestamp='`date -Iseconds`'>"
-	if test -n "$failed"; then
-		echo >>"$xml" "<error message='Command failed'/>"
+	if test -n "$xml"; then
+		echo >>"$xml" "<testcase classname='bench.`basename $res .dat`' name='$title' time='`echo $line | cut -f 1 -d " "`' timestamp='`date -Iseconds`'>"
+		if test -n "$failed"; then
+			echo >>"$xml" "<error message='Command failed'/>"
+		fi
+		echo >>"$xml" "</testcase>"
 	fi
-	echo >>"$xml" "</testcase>"
+	test -z "$failed"
 }
 
 # Run a simble command witout storing the execution time
@@ -99,4 +101,5 @@ function die()
 {
 	echo >&2 "error: $*"
 	died=1
+	return 1
 }
