@@ -1,4 +1,17 @@
 #!/usr/bin/env nit
+# This file is part of NIT ( http://www.nitlanguage.org ).
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 
 import bench_base
 import pipeline
@@ -9,7 +22,7 @@ class TypeTestDepthNotGenerator
 	redef fun initnit(res)
 	do
 		res.add "new {classes.last}[Root]"
-		for c in classes.skip_tail(1) do
+		for c in classes.iterator.skip_tail(1) do
 			res.add "new {c}[Root]"
 		end
 	end
@@ -25,7 +38,7 @@ class TypeTestDepthNotGenerator
 		var tagc = ""
 		if interfaces then tagc = "X"
 		res.add "new {tagc}{classes.last}<Root>()"
-		for c in classes.skip_tail(1) do
+		for c in classes.iterator.skip_tail(1) do
 			res.add "new {tagc}{c}<Root>()"
 		end
 	end
@@ -40,7 +53,7 @@ class TypeTestDepthNotGenerator
 		var tagc = ""
 		if interfaces then tagc = "X"
 		res.add "new {tagc}{classes.last}<Root>()"
-		for c in classes.skip_tail(1) do
+		for c in classes.iterator.skip_tail(1) do
 			res.add "new {tagc}{c}<Root>()"
 		end
 	end
@@ -55,7 +68,7 @@ class TypeTestDepthNotGenerator
 		var tagc = ""
 		if interfaces then tagc = "X"
 		res.add "new {tagc}{classes.last}[Root]()"
-		for c in classes.skip_tail(1) do
+		for c in classes.iterator.skip_tail(1) do
 			res.add "new {tagc}{c}[Root]()"
 		end
 	end
@@ -68,7 +81,7 @@ class TypeTestDepthNotGenerator
 	redef fun initcpp(res)
 	do
 		res.add "new {classes.last}<Root>()"
-		for c in classes.skip_tail(1) do
+		for c in classes.iterator.skip_tail(1) do
 			res.add "new {c}<Root>()"
 		end
 	end
@@ -81,9 +94,9 @@ class TypeTestDepthNotGenerator
 
 	redef fun inite(res, se)
 	do
-		res.add "create \{{classes.last}[ROOT]\} a"
-		for c in classes.skip_tail(1) do
-			res.add "create \{{c}[ROOT]\} a"
+		res.add "create \{{classes.last}[ROOT]\}"
+		for c in classes.iterator.skip_tail(1) do
+			res.add "create \{{c}[ROOT]\}"
 		end
 	end
 
@@ -95,7 +108,19 @@ class TypeTestDepthNotGenerator
 
 	redef fun locale(se)
 	do
-		write "\t\t\tto: {classes.last}[ROOT]"
+		write "\t\t\tto: detachable {classes.last}[ROOT]"
+	end
+
+	redef fun initpython(res)
+	do
+		res.add "{classes.last}()"
+		for c in classes.iterator.skip_tail(1) do
+			res.add "{c}()"
+		end
+	end
+	redef fun testpython
+	do
+		return "not isinstance(a, {classes.last})"
 	end
 end
 
