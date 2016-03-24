@@ -95,17 +95,66 @@ redef class AFloatExpr
 	end
 end
 
+# Any kind of literal which supports a prefix or a suffix
+class AAugmentedLiteral
+	# Returns the text of the token
+	private fun text: String is abstract
+
+	# Is the combination of prefixes and suffixes in `self` valid ?
+	fun is_valid_augmentation: Bool is abstract
+
+	private fun delimiter_start: Char is abstract
+
+	private fun delimiter_end: Char is abstract
+
+	# Prefix for the entity, "" if no prefix is found
+	protected var prefix: String is lazy do return text.substring(0, text.index_of(delimiter_start))
+
+	# Suffix for the entity, "" if no prefix is found
+	protected var suffix: String is lazy do return text.substring_from(text.last_index_of(delimiter_end) + 1)
+
+	# Content of the entity, without prefix nor suffix
+	protected var content: String is lazy do return text.substring_from(text.index_of(delimiter_start)).substring(0, text.last_index_of(delimiter_end) + 1)
+end
+
 redef class ACharExpr
+	super AAugmentedLiteral
 	# The value of the literal char once computed.
-	var value: nullable Char
+	var value: nullable Char = null
+
+	redef fun delimiter_start do return '\''
+
+	redef fun delimiter_end do return '\''
+
+	# Is the expression returning an ASCII byte value ?
+	fun is_ascii: Bool do return prefix == "b"
+
+	# Is the expression returning a Code Point ?
+	fun is_code_point: Bool do return prefix == "u"
+
+	redef fun text do return n_char.text
+
+	redef fun is_valid_augmentation do
+		if suffix != "" then return false
+		if is_ascii then return true
+		if is_code_point then return true
+		if prefix != "" then return false
+		return true
+	end
+
 	redef fun accept_literal(v)
 	do
-		var txt = self.n_char.text.unescape_nit
+		if not is_valid_augmentation then
+			v.toolcontext.error(hot_location, "Syntax Error: invalid prefix/suffix combination {prefix}/{suffix}")
+			return
+		end
+		var txt = content.unescape_nit
 		if txt.length != 3 then
 			v.toolcontext.error(self.hot_location, "Syntax Error: invalid character literal `{txt}`.")
 			return
 		end
 		self.value = txt.chars[1]
+		if is_ascii and txt.chars[1].code_point > 127 then v.toolcontext.error(self.hot_location, "Syntax Error: usage of byte prefix on multibyte character.")
 	end
 end
 
