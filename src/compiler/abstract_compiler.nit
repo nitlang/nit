@@ -1351,13 +1351,18 @@ abstract class AbstractCompilerVisitor
 
 	# Checks
 
+	# Can value be null? (according to current knowledge)
+	fun maybenull(value: RuntimeVariable): Bool
+	do
+		return value.mcasttype isa MNullableType or value.mcasttype isa MNullType
+	end
+
 	# Add a check and an abort for a null receiver if needed
 	fun check_recv_notnull(recv: RuntimeVariable)
 	do
 		if self.compiler.modelbuilder.toolcontext.opt_no_check_null.value then return
 
-		var maybenull = recv.mcasttype isa MNullableType or recv.mcasttype isa MNullType
-		if maybenull then
+		if maybenull(recv) then
 			self.add("if (unlikely({recv} == NULL)) \{")
 			self.add_abort("Receiver is null")
 			self.add("\}")
