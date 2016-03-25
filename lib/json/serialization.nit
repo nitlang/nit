@@ -609,9 +609,8 @@ redef class Map[K, V]
 					v.stream.write ", "
 				else first = false
 
-				if key == null then key = "null"
-
-				v.stream.write key.to_s.to_json
+				var k = key or else "null"
+				v.stream.write k.to_s.to_json
 				v.stream.write ": "
 				if not v.try_to_serialize(val) then
 					v.warn("element of type {val.class_name} is not serializable.")
