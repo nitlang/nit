@@ -1838,7 +1838,13 @@ redef class AWithExpr
 		v.callsite(method_start, [expr])
 		v.stmt(self.n_block)
 		v.is_escape(self.break_mark) # Clear the break
+
+		# Execute the finally without an escape
+		var old_mark = v.escapemark
+		v.escapemark = null
 		v.callsite(method_finish, [expr])
+		# Restore the escape unless another escape was provided
+		if v.escapemark == null then v.escapemark = old_mark
 	end
 end
 
