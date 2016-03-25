@@ -3103,7 +3103,7 @@ redef class AAttrPropdef
 			assert arguments.length == 2
 			var recv = arguments.first
 			var arg = arguments[1]
-			if is_optional then
+			if is_optional and v.maybenull(arg) then
 				var value = v.new_var(self.mpropdef.static_mtype.as(not null))
 				v.add("if ({arg} == NULL) \{")
 				v.assign(value, evaluate_expr(v, recv))
@@ -3525,6 +3525,9 @@ redef class AOrElseExpr
 	do
 		var res = v.new_var(self.mtype.as(not null))
 		var i1 = v.expr(self.n_expr, null)
+
+		if not v.maybenull(i1) then return i1
+
 		v.add("if ({i1}!=NULL) \{")
 		v.assign(res, i1)
 		v.add("\} else \{")
@@ -3707,7 +3710,7 @@ redef class AAsNotnullExpr
 		var i = v.expr(self.n_expr, null)
 		if v.compiler.modelbuilder.toolcontext.opt_no_check_assert.value then return i
 
-		if i.mtype.is_c_primitive then return i
+		if not v.maybenull(i) then return i
 
 		v.add("if (unlikely({i} == NULL)) \{")
 		v.add_abort("Cast failed")
