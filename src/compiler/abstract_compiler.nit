@@ -1273,17 +1273,21 @@ abstract class AbstractCompilerVisitor
 	do
 		mtype = self.anchor(mtype)
 		var valmtype = value.mcasttype
+
+		# Do nothing if useless autocast
 		if valmtype.is_subtype(self.compiler.mainmodule, null, mtype) then
 			return value
 		end
 
+		# Just as_not_null if the target is not nullable.
+		#
+		# eg `nullable PreciseType` adapted to `Object` gives precisetype.
 		if valmtype isa MNullableType and valmtype.mtype.is_subtype(self.compiler.mainmodule, null, mtype) then
-			var res = new RuntimeVariable(value.name, valmtype, valmtype.mtype)
-			return res
-		else
-			var res = new RuntimeVariable(value.name, valmtype, mtype)
-			return res
+			mtype = valmtype.mtype
 		end
+
+		var res = new RuntimeVariable(value.name, value.mtype, mtype)
+		return res
 	end
 
 	# Generate a super call from a method definition
@@ -1351,13 +1355,18 @@ abstract class AbstractCompilerVisitor
 
 	# Checks
 
+	# Can value be null? (according to current knowledge)
+	fun maybenull(value: RuntimeVariable): Bool
+	do
+		return value.mcasttype isa MNullableType or value.mcasttype isa MNullType
+	end
+
 	# Add a check and an abort for a null receiver if needed
 	fun check_recv_notnull(recv: RuntimeVariable)
 	do
 		if self.compiler.modelbuilder.toolcontext.opt_no_check_null.value then return
 
-		var maybenull = recv.mcasttype isa MNullableType or recv.mcasttype isa MNullType
-		if maybenull then
+		if maybenull(recv) then
 			self.add("if (unlikely({recv} == NULL)) \{")
 			self.add_abort("Receiver is null")
 			self.add("\}")
@@ -3098,7 +3107,7 @@ redef class AAttrPropdef
 			assert arguments.length == 2
 			var recv = arguments.first
 			var arg = arguments[1]
-			if is_optional then
+			if is_optional and v.maybenull(arg) then
 				var value = v.new_var(self.mpropdef.static_mtype.as(not null))
 				v.add("if ({arg} == NULL) \{")
 				v.assign(value, evaluate_expr(v, recv))
@@ -3520,6 +3529,9 @@ redef class AOrElseExpr
 	do
 		var res = v.new_var(self.mtype.as(not null))
 		var i1 = v.expr(self.n_expr, null)
+
+		if not v.maybenull(i1) then return i1
+
 		v.add("if ({i1}!=NULL) \{")
 		v.assign(res, i1)
 		v.add("\} else \{")
@@ -3706,7 +3718,7 @@ redef class AAsNotnullExpr
 		var i = v.expr(self.n_expr, null)
 		if v.compiler.modelbuilder.toolcontext.opt_no_check_assert.value then return i
 
-		if i.mtype.is_c_primitive then return i
+		if not v.maybenull(i) then return i
 
 		v.add("if (unlikely({i} == NULL)) \{")
 		v.add_abort("Cast failed")
