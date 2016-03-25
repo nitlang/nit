@@ -448,6 +448,10 @@ class GlobalCompilerVisitor
 		if args.first.mtype.is_c_primitive then
 			var mclasstype = args.first.mtype.as(MClassType)
 			if not self.compiler.runtime_type_analysis.live_types.has(mclasstype) then
+				self.add("/* skip, dead class {mclasstype} */")
+				return res
+			end
+			if not mclasstype.has_mproperty(self.compiler.mainmodule, m) then
 				self.add("/* skip, no method {m} */")
 				return res
 			end
