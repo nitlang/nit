@@ -1273,17 +1273,21 @@ abstract class AbstractCompilerVisitor
 	do
 		mtype = self.anchor(mtype)
 		var valmtype = value.mcasttype
+
+		# Do nothing if useless autocast
 		if valmtype.is_subtype(self.compiler.mainmodule, null, mtype) then
 			return value
 		end
 
+		# Just as_not_null if the target is not nullable.
+		#
+		# eg `nullable PreciseType` adapted to `Object` gives precisetype.
 		if valmtype isa MNullableType and valmtype.mtype.is_subtype(self.compiler.mainmodule, null, mtype) then
-			var res = new RuntimeVariable(value.name, valmtype, valmtype.mtype)
-			return res
-		else
-			var res = new RuntimeVariable(value.name, valmtype, mtype)
-			return res
+			mtype = valmtype.mtype
 		end
+
+		var res = new RuntimeVariable(value.name, value.mtype, mtype)
+		return res
 	end
 
 	# Generate a super call from a method definition
