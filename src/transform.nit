@@ -117,6 +117,7 @@ redef class AExpr
 		super
 		if other isa AExpr then
 			if other.implicit_cast_to == null then other.implicit_cast_to = implicit_cast_to
+			other.vararg_decl = vararg_decl
 		end
 	end
 end
