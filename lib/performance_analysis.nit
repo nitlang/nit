@@ -60,7 +60,45 @@ class PerfMap
 		return ts
 	end
 
-	redef fun to_s do return "* " + join("\n* ", ": ")
+	redef fun to_s
+	do
+		var prec = 3
+
+		var table = new Map[String, Array[String]]
+		for event, stats in self do
+			table[event] = [event,
+				stats.min.to_precision(prec),
+				stats.max.to_precision(prec),
+				stats.avg.to_precision(prec),
+				stats.sum.to_precision(prec),
+				stats.count.to_s]
+		end
+
+		var widths = [0] * 6
+		for event, row in table do
+			for i in row.length.times do
+				widths[i] = widths[i].max(row[i].length)
+			end
+		end
+
+		var s = "# {"Event".justify(widths[0], 0.0)} {"min".justify(widths[1], 0.5)} {"max".justify(widths[2], 0.5)} {"avg".justify(widths[3], 0.5)} {"sum".justify(widths[4], 0.5)} {"count".justify(widths[5], 0.5)}\n"
+
+		var sorted_events = table.keys.to_a
+		alpha_comparator.sort sorted_events
+		for event in sorted_events do
+			var row = table[event]
+			s += "*"
+			for c in row.length.times do
+				var cell = row[c]
+				s += " "
+				if c == 0 then
+					s += cell.justify(widths[c], 0.0, '.')
+				else s += cell.justify(widths[c], 1.0)
+			end
+			s += "\n"
+		end
+		return s
+	end
 end
 
 # Statistics on wall clock execution time of a category of events by `name`
