@@ -495,18 +495,21 @@ abstract class Text
 		end
 	end
 
-	# Justify a self in a space of `length`
+	# Justify `self` in a space of `length`
 	#
 	# `left` is the space ratio on the left side.
 	# * 0.0 for left-justified (no space at the left)
 	# * 1.0 for right-justified (all spaces at the left)
 	# * 0.5 for centered (half the spaces at the left)
 	#
+	# `char`, or `' '` by default, is repeated to pad the empty space.
+	#
 	# Examples
 	#
 	#     assert "hello".justify(10, 0.0)  == "hello     "
 	#     assert "hello".justify(10, 1.0)  == "     hello"
 	#     assert "hello".justify(10, 0.5)  == "  hello   "
+	#     assert "hello".justify(10, 0.5, '.') == "..hello..."
 	#
 	# If `length` is not enough, `self` is returned as is.
 	#
@@ -515,13 +518,14 @@ abstract class Text
 	# REQUIRE: `left >= 0.0 and left <= 1.0`
 	# ENSURE: `self.length <= length implies result.length == length`
 	# ENSURE: `self.length >= length implies result == self`
-	fun justify(length: Int, left: Float): String
+	fun justify(length: Int, left: Float, char: nullable Char): String
 	do
+		var pad = (char or else ' ').to_s
 		var diff = length - self.length
 		if diff <= 0 then return to_s
 		assert left >= 0.0 and left <= 1.0
 		var before = (diff.to_f * left).to_i
-		return " " * before + self + " " * (diff-before)
+		return pad * before + self + pad * (diff-before)
 	end
 
 	# Mangle a string to be a unique string only made of alphanumeric characters and underscores.
