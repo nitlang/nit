@@ -223,11 +223,25 @@ redef class Nre_class
 		var c1 = children[0].children[0].value
 		var c2 = children[3].children[0].value
 		if c1.length != 1 or c2.length != 1 then
-			print "Classes only works on single char"
+			print "Classes expect a single char"
 			exit(1)
 			abort
 		end
 		var a = new Automaton.cla(c1.chars.first.code_point, c2.chars.first.code_point)
+		return a
+	end
+end
+
+redef class Nre_openclass
+	redef fun make_rfa: Automaton
+	do
+		var c1 = children[0].children[0].value
+		if c1.length != 1 then
+			print "Classes expect a single char"
+			exit(1)
+			abort
+		end
+		var a = new Automaton.cla(c1.chars.first.code_point, null)
 		return a
 	end
 end

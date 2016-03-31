@@ -1305,7 +1305,7 @@ class Intent
 	redef fun to_s do return intent.to_native_s.to_s
 end
 
-redef extern class NativeActivity
+redef extern class NativeContext
 	private fun start_activity(intent: NativeIntent) in "Java" `{ self.startActivity(intent); `}
 	private fun start_service(intent: NativeIntent) in "Java" `{ self.startService(intent); `}
 	private fun stop_service(intent: NativeIntent) in "Java" `{ self.stopService(intent); `}
@@ -1331,11 +1331,11 @@ end
 redef class App
 
 	# Execute the intent and launch the appropriate application
-	fun start_activity(intent: Intent) do native_activity.start_activity(intent.intent)
+	fun start_activity(intent: Intent) do native_context.start_activity(intent.intent)
 
 	# Start a service that will be running until the `stop_service` call
-	fun start_service(intent: Intent) do native_activity.start_service(intent.intent)
+	fun start_service(intent: Intent) do native_context.start_service(intent.intent)
 
 	# Stop service
-	fun stop_service(intent: Intent) do native_activity.stop_service(intent.intent)
+	fun stop_service(intent: Intent) do native_context.stop_service(intent.intent)
 end

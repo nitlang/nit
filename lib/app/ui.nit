@@ -163,6 +163,9 @@ end
 # A control for the user to enter custom `text`
 class TextInput
 	super TextView
+
+	# Hide password or any content entered in this view?
+	var is_password: nullable Bool is writable
 end
 
 # A pushable button, raises `ButtonPressEvent`
@@ -173,6 +176,14 @@ end
 # A text label
 class Label
 	super TextView
+end
+
+# Toggle control with two states and a label
+class CheckBox
+	super TextView
+
+	# Is this control in the checked/on state?
+	var is_checked = false is writable
 end
 
 # A `Button` press event

@@ -144,7 +144,6 @@ end
 
 # Provides services to save and load data for the android platform
 class SharedPreferences
-	protected var context: NativeActivity
 	protected var shared_preferences: NativeSharedPreferences
 	protected var editor: NativeSharedPreferencesEditor
 
@@ -153,9 +152,8 @@ class SharedPreferences
 
 	protected init(app: App, file_name: String, mode: Int)
 	do
-		self.context = app.native_activity
 		sys.jni_env.push_local_frame(1)
-		setup(file_name.to_java_string, mode)
+		setup(file_name.to_java_string, mode, app.native_context)
 		sys.jni_env.pop_local_frame
 	end
 
@@ -174,13 +172,13 @@ class SharedPreferences
 		self.editor = editor.new_global_ref
 	end
 
-	private fun setup(file_name: JavaString, mode: Int) import context, set_vars in "Java" `{
-		Activity context = (Activity) SharedPreferences_context(self);
+	private fun setup(file_name: JavaString, mode: Int, context: NativeContext) import set_vars in "Java" `{
 		SharedPreferences sp;
 
 		// Uses default SharedPreferences if file_name is an empty String
 		if (file_name.equals("")) {
-			sp = context.getPreferences((int)mode);
+			Activity activity = (Activity)context;
+			sp = activity.getPreferences((int)mode);
 		} else {
 			sp = context.getSharedPreferences(file_name, (int)mode);
 		}
@@ -405,6 +403,6 @@ end
 
 redef class App
 	var shared_preferences: SharedPreferences is lazy do
-		return new SharedPreferences.privately(self, "")
+		return new SharedPreferences.privately(self, "app.nit")
 	end
 end

@@ -92,7 +92,7 @@ class OpportunityFooter
 			{{{"Opportunity, the meetup planner."}}}
 		</p>
 		<p class="text-muted text-center">
-			{{{"Proudly powered by %1!".format("<a href=\"http://nitlanguage.org/\">Nit</a>")}}}
+			{{{"Proudly powered by %0!".format("<a href=\"http://nitlanguage.org/\">Nit</a>")}}}
 		</p>
 	</div>
 </div>

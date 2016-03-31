@@ -430,6 +430,11 @@ extern class UITextField in "ObjC" `{ UITextField * `}
 	fun text=(text: NSString) in "ObjC" `{
 		self.text = text;
 	`}
+
+	# Wraps: `UITextField.secureTextEntry`
+	fun secure_text_entry=(value: Bool) in "ObjC" `{
+		self.secureTextEntry = value;
+	`}
 end
 
 # Lays out a collection of views in either a column or a row
@@ -490,14 +495,24 @@ extern class UIStackView in "ObjC" `{ UIStackView * `}
 	fun spacing=(value: Float) in "ObjC" `{ self.spacing = value; `}
 
 	# Wraps: `UIStackView.baselineRelativeArrangement`
-	#fun baseline_relative_arrangement: Bool in "ObjC" `{
-	#	return [self baselineRelativeArrangement];
-	#`}
+	fun baseline_relative_arrangement: Bool in "ObjC" `{
+		return self.baselineRelativeArrangement;
+	`}
+
+	# Wraps: `UIStackView.baselineRelativeArrangement`
+	fun baseline_relative_arrangement=(value: Bool) in "ObjC" `{
+		self.baselineRelativeArrangement = value;
+	`}
 
 	# Wraps: `UIStackView.layoutMarginsRelativeArrangement`
-	#fun layout_margins_relative_arrangement: Bool in "ObjC" `{
-	#	return [self layoutMarginsRelativeArrangement];
-	#`}
+	fun layout_margins_relative_arrangement: Bool in "ObjC" `{
+		return self.layoutMarginsRelativeArrangement;
+	`}
+
+	# Wraps: `UIStackView.layoutMarginsRelativeArrangement`
+	fun layout_margins_relative_arrangement=(value: Bool) in "ObjC" `{
+		self.layoutMarginsRelativeArrangement = value;
+	`}
 end
 
 # Defines the orientation of the arranged views in `UIStackView`
@@ -590,4 +605,47 @@ extern class UITableViewStyle in "ObjC" `{ UITableViewStyle* `}
 
 	new plain in "ObjC" `{ return UITableViewStylePlain; `}
 	new grouped in "ObjC" `{ return UITableViewStyleGrouped; `}
+end
+
+# On/Off button
+extern class UISwitch in "ObjC" `{ UISwitch * `}
+	super UIView
+
+	# Wraps: `[self initWithFrame:(CGRect)frame]`
+	new in "ObjC" `{ return [[UISwitch alloc] initWithFrame: [[UIScreen mainScreen] applicationFrame]]; `}
+
+	# Wraps: `UISwitch.onTintColor`
+#	fun on_tint_color: UIColor in "ObjC" `{
+#		return [self onTintColor];
+#	`}
+
+	# Wraps: `UISwitch.tintColor`
+#	fun tint_color: UIColor in "ObjC" `{
+#		return [self tintColor];
+#	`}
+
+	# Wraps: `UISwitch.thumbTintColor`
+#	fun thumb_tint_color: UIColor in "ObjC" `{
+#		return [self thumbTintColor];
+#	`}
+
+	# Wraps: `UISwitch.onImage`
+#	fun on_image: UIImage in "ObjC" `{
+#		return [self onImage];
+#	`}
+
+	# Wraps: `UISwitch.offImage`
+#	fun off_image: UIImage in "ObjC" `{
+#		return [self offImage];
+#	`}
+
+	# Wraps: `UISwitch.on`
+	fun on: Bool in "ObjC" `{
+		return self.on;
+	`}
+
+	# Wraps: `[self setOn:(BOOL)on animated:(BOOL)animated]`
+	fun set_on_animated(on: Bool, animated: Bool) in "ObjC" `{
+		[self setOn: on animated: animated];
+	`}
 end

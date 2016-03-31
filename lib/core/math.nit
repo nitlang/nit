@@ -128,7 +128,7 @@ redef class Int
 	#
 	# assert 3.is_prime
 	# assert not 1.is_prime
-	# assert not 12.is_prime
+	# assert not 15.is_prime
 	fun is_prime: Bool
 	do
 		if self == 2 then
@@ -136,7 +136,7 @@ redef class Int
 		else if self <= 1 or self.is_even then
 			return false
 		end
-		for i in [3..self.sqrt[ do
+		for i in [3..self.sqrt] do
 			if self % i == 0 then return false
 		end
 		return true
@@ -524,11 +524,11 @@ redef class Sys
 	end
 end
 
-# Computes the arc tangent given `x` and `y`.
+# Computes the arc tangent given `y` and `x`.
 #
 #     assert atan2(-0.0, 1.0) == -0.0
 #     assert atan2(0.0, 1.0) == 0.0
-fun atan2(x: Float, y: Float): Float `{ return atan2(x, y); `}
+fun atan2(y: Float, x: Float): Float `{ return atan2(y, x); `}
 
 # Approximate value of **pi**.
 fun pi: Float do return 3.14159265

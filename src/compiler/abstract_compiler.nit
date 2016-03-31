@@ -668,7 +668,9 @@ abstract class AbstractCompiler
 		self.header.add_decl("	#define be32toh(val) ((be16toh((val) << 16) | (be16toh((val) >> 16))))")
 		self.header.add_decl("#endif")
 		self.header.add_decl("#ifdef ANDROID")
-		self.header.add_decl("	#define be32toh(val) betoh32(val)")
+		self.header.add_decl("	#ifndef be32toh")
+		self.header.add_decl("		#define be32toh(val) betoh32(val)")
+		self.header.add_decl("	#endif")
 		self.header.add_decl("	#include <android/log.h>")
 		self.header.add_decl("	#define PRINT_ERROR(...) (void)__android_log_print(ANDROID_LOG_WARN, \"Nit\", __VA_ARGS__)")
 		self.header.add_decl("#else")
@@ -1248,17 +1250,21 @@ abstract class AbstractCompilerVisitor
 	do
 		mtype = self.anchor(mtype)
 		var valmtype = value.mcasttype
+
+		# Do nothing if useless autocast
 		if valmtype.is_subtype(self.compiler.mainmodule, null, mtype) then
 			return value
 		end
 
+		# Just as_not_null if the target is not nullable.
+		#
+		# eg `nullable PreciseType` adapted to `Object` gives precisetype.
 		if valmtype isa MNullableType and valmtype.mtype.is_subtype(self.compiler.mainmodule, null, mtype) then
-			var res = new RuntimeVariable(value.name, valmtype, valmtype.mtype)
-			return res
-		else
-			var res = new RuntimeVariable(value.name, valmtype, mtype)
-			return res
+			mtype = valmtype.mtype
 		end
+
+		var res = new RuntimeVariable(value.name, value.mtype, mtype)
+		return res
 	end
 
 	# Generate a super call from a method definition
@@ -1326,13 +1332,18 @@ abstract class AbstractCompilerVisitor
 
 	# Checks
 
+	# Can value be null? (according to current knowledge)
+	fun maybenull(value: RuntimeVariable): Bool
+	do
+		return value.mcasttype isa MNullableType or value.mcasttype isa MNullType
+	end
+
 	# Add a check and an abort for a null receiver if needed
 	fun check_recv_notnull(recv: RuntimeVariable)
 	do
 		if self.compiler.modelbuilder.toolcontext.opt_no_check_null.value then return
 
-		var maybenull = recv.mcasttype isa MNullableType or recv.mcasttype isa MNullType
-		if maybenull then
+		if maybenull(recv) then
 			self.add("if (unlikely({recv} == NULL)) \{")
 			self.add_abort("Receiver is null")
 			self.add("\}")
@@ -2020,6 +2031,8 @@ redef class MMethodDef
 			return node.can_inline
 		else if node isa AClassdef then
 			# Automatic free init is always inlined since it is empty or contains only attribtes assigments
+			return true
+		else if node == null then
 			return true
 		else
 			abort
@@ -3069,7 +3082,18 @@ redef class AAttrPropdef
 			v.assign(v.frame.returnvar.as(not null), res)
 		else if mpropdef == mwritepropdef then
 			assert arguments.length == 2
-			v.write_attribute(self.mpropdef.mproperty, arguments.first, arguments[1])
+			var recv = arguments.first
+			var arg = arguments[1]
+			if is_optional and v.maybenull(arg) then
+				var value = v.new_var(self.mpropdef.static_mtype.as(not null))
+				v.add("if ({arg} == NULL) \{")
+				v.assign(value, evaluate_expr(v, recv))
+				v.add("\} else \{")
+				v.assign(value, arg)
+				v.add("\}")
+				arg = value
+			end
+			v.write_attribute(self.mpropdef.mproperty, arguments.first, arg)
 			if is_lazy then
 				var ret = self.mtype
 				var useiset = not ret.is_c_primitive and not ret isa MNullableType
@@ -3508,6 +3532,9 @@ redef class AOrElseExpr
 	do
 		var res = v.new_var(self.mtype.as(not null))
 		var i1 = v.expr(self.n_expr, null)
+
+		if not v.maybenull(i1) then return i1
+
 		v.add("if ({i1}!=NULL) \{")
 		v.assign(res, i1)
 		v.add("\} else \{")
@@ -3537,7 +3564,11 @@ redef class AFloatExpr
 end
 
 redef class ACharExpr
-	redef fun expr(v) do return v.char_instance(self.value.as(not null))
+	redef fun expr(v) do
+		if is_ascii then return v.byte_instance(value.as(not null).ascii)
+		if is_code_point then return v.int_instance(value.as(not null).code_point)
+		return v.char_instance(self.value.as(not null))
+	end
 end
 
 redef class AArrayExpr
@@ -3690,7 +3721,7 @@ redef class AAsNotnullExpr
 		var i = v.expr(self.n_expr, null)
 		if v.compiler.modelbuilder.toolcontext.opt_no_check_assert.value then return i
 
-		if i.mtype.is_c_primitive then return i
+		if not v.maybenull(i) then return i
 
 		v.add("if (unlikely({i} == NULL)) \{")
 		v.add_abort("Cast failed")

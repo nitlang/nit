@@ -7,5 +7,5 @@ msgstr "Opportunité"
 msgid "Opportunity, the meetup planner."
 msgstr "Opportunité, l'organisateur d'événements."
 
-msgid "Proudly powered by %1!"
-msgstr "Fièrement codé en %1!"
+msgid "Proudly powered by %0!"
+msgstr "Fièrement codé en %0!"

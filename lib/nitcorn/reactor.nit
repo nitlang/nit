@@ -35,6 +35,9 @@ class HttpServer
 
 	private var parser = new HttpRequestParser is lazy
 
+	# Human readable address of the remote client
+	var remote_address: String
+
 	redef fun read_http_request(str)
 	do
 		var request_object = parser.parse_http_request(str.to_s)
@@ -131,7 +134,7 @@ class HttpFactory
 	# You can use this to create the first `HttpFactory`, which is the most common.
 	init and_libevent do init(new NativeEventBase)
 
-	redef fun spawn_connection(buf_ev) do return new HttpServer(buf_ev, self)
+	redef fun spawn_connection(buf_ev, address) do return new HttpServer(buf_ev, self, address)
 
 	# Execute the main listening loop to accept connections
 	#

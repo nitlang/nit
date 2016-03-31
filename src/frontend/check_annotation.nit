@@ -84,6 +84,7 @@ lazy
 noinit
 readonly
 writable
+optional
 autoinit
 noautoinit
 lateinit

@@ -103,6 +103,26 @@ The `noserialize` annotation mark an exception in a `serialize` module or class 
   end
   ~~~
 
+## The `serialize_as` annotation
+
+By default, an attribute is identified in the serialization format by its Nit name.
+The `serialize_as` attribute changes this behavior and sets the name of an attribute in the serialization format.
+
+This annotation can be useful to change the name of an attribute to what is expected by a remote service.
+Or to use identifiers in the serialization format that are reserved keywords in Nit (like `class` and `type`).
+
+~~~
+class UserCredentials
+	serialize
+
+	# Rename to "username" in JSON for compatibility with remote service
+	var name: String is serialize_as "username"
+
+	# Rename to a shorter "ap" for a smaller JSON file
+	var avatar_path: String = "/somepath/"+name is lazy, serialize_as "ap"
+end
+~~~
+
 ## Custom serializable classes
 
 The annotation `serialize` should be enough for most cases,

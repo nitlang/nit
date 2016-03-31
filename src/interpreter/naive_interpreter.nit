@@ -1475,7 +1475,12 @@ redef class AAttrPropdef
 			return evaluate_expr(v, recv, f)
 		else if mpropdef == mwritepropdef then
 			assert args.length == 2
-			v.write_attribute(attr, recv, args[1])
+			var arg = args[1]
+			if is_optional and arg.mtype isa MNullType then
+				var f = v.new_frame(self, mpropdef, args)
+				arg = evaluate_expr(v, recv, f)
+			end
+			v.write_attribute(attr, recv, arg)
 			return null
 		else
 			abort
@@ -1836,7 +1841,13 @@ redef class AWithExpr
 		v.callsite(method_start, [expr])
 		v.stmt(self.n_block)
 		v.is_escape(self.break_mark) # Clear the break
+
+		# Execute the finally without an escape
+		var old_mark = v.escapemark
+		v.escapemark = null
 		v.callsite(method_finish, [expr])
+		# Restore the escape unless another escape was provided
+		if v.escapemark == null then v.escapemark = old_mark
 	end
 end
 
@@ -1932,6 +1943,8 @@ end
 redef class ACharExpr
 	redef fun expr(v)
 	do
+		if is_ascii then return v.byte_instance(self.value.as(not null).ascii)
+		if is_code_point then return v.int_instance(self.value.as(not null).code_point)
 		return v.char_instance(self.value.as(not null))
 	end
 end

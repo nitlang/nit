@@ -23,6 +23,9 @@ import serialization
 class Beer
 	auto_serializable
 
+	# Database id
+	var id: Int
+
 	# Name of the beer
 	var name: String
 

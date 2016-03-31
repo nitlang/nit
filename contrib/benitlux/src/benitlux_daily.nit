@@ -175,7 +175,8 @@ class Benitlux
 		for line in lines do
 			var parts = line.split("- ")
 			if parts.length >= 2 then
-				beers.add new Beer(parts[0].trim, parts[1].trim)
+				# Let the DB set the id, use 0 temporary
+				beers.add new Beer(0, parts[0].trim, parts[1].trim)
 			end
 		end
 		return beers

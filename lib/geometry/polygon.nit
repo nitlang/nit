@@ -444,7 +444,6 @@ end
 # Useful for converting a concave polygon into multiple convex ones
 fun triangulate(pts: Array[Point[Float]], results: Array[ConvexPolygon]) do
 	var poly = new Polygon(pts)
-	poly.sort_ccw
 	pts = poly.points
 	recursive_triangulate(pts, results)
 end

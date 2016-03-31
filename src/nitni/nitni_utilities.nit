@@ -19,7 +19,7 @@ import nitni_base
 
 redef class MMethod
 	# Build a C function name for the FFI implementation (uses friendly naming).
-	# * On a specific static receiver mype `recv_mtype` 
+	# * On a specific static receiver type `recv_mtype`
 	# * In referene to the module `from_module` (used for type resolving and as a possible prefix)
 	# * Has a possible `suffix` to the method name (may be "__super", "__impl", null, etc.)
 	# * With a specified length indicating whether it uses the sort name or the long name with
@@ -39,13 +39,13 @@ redef class MMethod
 
 		if suffix != null then cname = "{cname}{suffix}"
 
-		if length.long then cname = "{from_mmodule.name}___{cname}"
+		if length.long then cname = "{from_mmodule.c_name}___{cname}"
 
 		return cname
 	end
 
 	# Build a C function signature for the FFI implementation (uses friendly naming).
-	# * On a specific static receiver mype `recv_mtype` 
+	# * On a specific static receiver type `recv_mtype`
 	# * In referene to the module `from_module` (used for type resolving and as a possible prefix)
 	# * Has a possible `suffix` to the method name (may be "__super", "__impl", null, etc.)
 	# * With a specified length indicating whether it uses the sort name or the long name with
@@ -83,7 +83,7 @@ redef class MMethod
 	end
 
 	# Build a C function call for the FFI implementation (uses friendly naming).
-	# * On a specific static receiver mype `recv_mtype` 
+	# * On a specific static receiver type `recv_mtype`
 	# * In referene to the module `from_module` (used for type resolving and as a possible prefix)
 	# * Has a possible `suffix` to the method name (may be "__super", "__impl", null, etc.)
 	# * With a specified length indicating whether it uses the sort name or the long name with

@@ -1,4 +1,17 @@
 #!/usr/bin/env nit
+# This file is part of NIT ( http://www.nitlanguage.org ).
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 
 import bench_base
 
@@ -8,15 +21,16 @@ class TypeTestFtsNestingGenerator
 	fun clanit(i: Int): String
 	do
 		var s = new FlatBuffer
-		s.append("{classes.first}[" * i)
+		s.append("{classes[i]}[")
+		s.append("{classes.first}[" * (dept-1))
 		s.append("Root")
-		s.append("]" * i)
+		s.append("]" * dept)
 		return s.to_s
 	end
 
 	redef fun initnit(res)
 	do
-		for i in [1..dept] do
+		for i in [0..dept[ do
 			res.add "new {clanit(i)}"
 		end
 
@@ -30,32 +44,18 @@ class TypeTestFtsNestingGenerator
 	fun clajava(i: Int): String
 	do
 		var s = new FlatBuffer
-		s.append("{classes.first}<" * i)
+		s.append("{classes[i]}<")
+		s.append("{classes.first}<" * (dept-1))
 		s.append("Root")
-		s.append(">" * i)
+		s.append(">" * dept)
 		return s.to_s
-	end
-
-	redef fun initjava(res, interfaces)
-	do
-
-		var tagc = ""
-		if interfaces then tagc = "X"
-		for i in [1..dept] do
-			res.add "new {tagc}{clajava(i)}()"
-		end
-	end
-
-	redef fun testjava(interfaces)
-	do
-		return "a instanceof {classes.first}<?>"
 	end
 
 	redef fun initcsharp(res, interfaces)
 	do
 		var tagc = ""
 		if interfaces then tagc = "X"
-		for i in [1..dept] do
+		for i in [0..dept[ do
 			res.add "new {tagc}{clajava(i)}()"
 		end
 	end
@@ -65,32 +65,19 @@ class TypeTestFtsNestingGenerator
 		return "a is {clajava(middle)}"
 	end
 
-	redef fun initscala(res, interfaces)
-	do
-		var tagc = ""
-		if interfaces then tagc = "X"
-		for i in [1..dept] do
-			res.add "new {tagc}{clanit(i)}()"
-		end
-	end
-
-	redef fun testscala(interfaces)
-	do
-		return "a.isInstanceOf[{clanit(middle)}]"
-	end
-
 	fun clacpp(i: Int): String
 	do
 		var s = new FlatBuffer
-		s.append("{classes.first}<" * i)
+		s.append("{classes[i]}<")
+		s.append("{classes.first}<" * (dept-1))
 		s.append("Root")
-		s.append("*>" * i)
+		s.append("*>" * dept)
 		return s.to_s
 	end
 
 	redef fun initcpp(res)
 	do
-		for i in [1..dept] do
+		for i in [0..dept[ do
 			res.add "new {clacpp(i)}()"
 		end
 	end
@@ -104,16 +91,17 @@ class TypeTestFtsNestingGenerator
 	fun clae(i: Int): String
 	do
 		var s = new FlatBuffer
-		s.append("{classes.first}[" * i)
+		s.append("{classes[i]}[")
+		s.append("{classes.first}[" * (dept-1))
 		s.append("ROOT")
-		s.append("]" * i)
+		s.append("]" * dept)
 		return s.to_s
 	end
 
 	redef fun inite(res, se)
 	do
-		for i in [1..dept] do
-			res.add "create \{{clae(i)}\} a"
+		for i in [0..dept[ do
+			res.add "create \{{clae(i)}\}"
 		end
 	end
 
@@ -125,7 +113,7 @@ class TypeTestFtsNestingGenerator
 
 	redef fun locale(se)
 	do
-		write "\t\t\tto: {clae(middle)}"
+		write "\t\t\tto: detachable {clae(middle)}"
 	end
 end
 

@@ -62,7 +62,7 @@ redef class Sys
 	private var next_session_id_cache: nullable Int = null
 
 	# Salt used to hash the session id
-	protected var session_salt = "Default unitcorn session salt"
+	protected var session_salt = "Default nitcorn session salt"
 end
 
 redef class Int

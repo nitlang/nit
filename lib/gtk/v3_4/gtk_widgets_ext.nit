@@ -236,6 +236,18 @@ extern class GtkLockButton
 	super GtkButton
 end
 
+# Contains a single widget and scrollbars
+extern class GtkScrolledWindow `{ GtkScrolledWindow * `}
+	super GtkBin
+
+	new `{ return (GtkScrolledWindow *)gtk_scrolled_window_new(NULL, NULL); `}
+
+	# Set horizontal and vertical scrollbar policies
+	fun set_policy(hscrollbar_policy, vscrollbar_policy: GtkPolicyType) `{
+		gtk_scrolled_window_set_policy(self, hscrollbar_policy, vscrollbar_policy);
+	`}
+end
+
 # A button to launch a color selection dialog
 # See: https://developer.gnome.org/gtk3/stable/GtkColorButton.html
 extern class GtkColorButton `{GtkColorButton *`}
@@ -246,3 +258,22 @@ extern class GtkColorButton `{GtkColorButton *`}
 	`}
 end
 
+# Button remaining "pressed-in" when clicked
+extern class GtkToggleButton `{ GtkToggleButton * `}
+	super GtkButton
+
+	# Current state, returns `true` if pressed/checked
+	fun active: Bool `{ return gtk_toggle_button_get_active(self); `}
+
+	# Set current state, `true` for pressed/checked
+	fun active=(value: Bool) `{ gtk_toggle_button_set_active(self, value); `}
+end
+
+# Check box next to a label
+extern class GtkCheckButton `{ GtkCheckButton * `}
+	super GtkToggleButton
+
+	new `{ return (GtkCheckButton *)gtk_check_button_new(); `}
+
+	new with_label(lbl: NativeString) `{ return (GtkCheckButton *)gtk_check_button_new_with_label((gchar *)lbl); `}
+end
