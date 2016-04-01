@@ -36,15 +36,16 @@ class DB
 	fun create_tables
 	do
 		assert create_table("IF NOT EXISTS beers (name TEXT PRIMARY KEY, desc TEXT)") else
-			print error or else "?"
+			print_error error or else "?"
 		end
 
+		# Beers availability on each day
 		assert create_table("IF NOT EXISTS daily (beer INTEGER, day DATE)") else
-			print error or else "?"
+			print_error error or else "?"
 		end
 
 		assert create_table("IF NOT EXISTS subscribers (email TEXT UNIQUE PRIMARY KEY, joined DATETIME DEFAULT CURRENT_TIMESTAMP)") else
-			print error or else "?"
+			print_error error or else "?"
 		end
 	end
 
