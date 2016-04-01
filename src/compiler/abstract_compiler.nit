@@ -71,6 +71,8 @@ redef class ToolContext
 	var opt_release = new OptionBool("Compile in release mode and finalize application", "--release")
 	# -g
 	var opt_debug = new OptionBool("Compile in debug mode (no C-side optimization)", "-g", "--debug")
+	# --yolo
+	var compile_once = new OptionBool("Compile in write-once mode", "--yolo")
 
 	redef init
 	do
@@ -83,6 +85,7 @@ redef class ToolContext
 		self.option_context.add_option(self.opt_release)
 		self.option_context.add_option(self.opt_max_c_lines, self.opt_group_c_files)
 		self.option_context.add_option(self.opt_debug)
+		self.option_context.add_option(self.compile_once)
 
 		opt_no_main.hidden = true
 	end
@@ -201,6 +204,8 @@ class MakefileToolchain
 
 		time1 = get_time
 		self.toolcontext.info("*** END COMPILING C: {time1-time0} ***", 2)
+		# Do not take into account the as(not null), this cannot fail
+		if self.toolcontext.compile_once.value then compiler.mainmodule.filepath.as(not null).to_path.delete
 	end
 
 	# Write all source files to the `compile_dir`
