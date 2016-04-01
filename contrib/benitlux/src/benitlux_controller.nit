@@ -292,6 +292,24 @@ class BenitluxRESTAction
 		var common_followers = db.followed_followers(id)
 		db.close
 
+		# Sent push notifications to connected reciprocal friends
+		if common_followers != null then
+			for friend in common_followers do
+				var conn = push_connections.get_or_null(friend.id)
+				if conn != null then
+					push_connections.keys.remove friend.id
+					if not conn.closed then
+						var report = db.checkedin_followed_followers(friend.id)
+						var response = if report == null then
+								new HttpResponse.server_error
+							else new HttpResponse.ok(report)
+						conn.respond response
+						conn.close
+					end
+				end
+			end
+		end
+
 		return new HttpResponse.ok(true)
 	end
 
@@ -331,6 +349,40 @@ class BenitluxRESTAction
 
 	# Fallback answer on errors
 	redef fun answer(request, turi) do return new HttpResponse.bad_request
+end
+
+# ---
+# Push notification
+
+# Benitlux push notification interface
+class BenitluxPushAction
+	super BenitluxAction
+
+	# Intercept the full answer to set aside the connection and complete it later
+	redef fun prepare_respond_and_close(request, turi, connection)
+	do
+		var token = request.string_arg("token")
+
+		var db = new DB.open(db_path)
+		var user = db.token_to_id(token)
+		db.close
+
+		if user == null then
+			# Report errors right away
+			var response =  new HttpResponse.invalid_token
+			connection.respond response
+			connection.close
+			return
+		end
+
+		# Set aside the connection
+		push_connections[user] = connection
+	end
+end
+
+redef class Sys
+	# Connections left open for a push notification, organized per user id
+	private var push_connections = new Map[Int, HttpServer]
 end
 
 # ---

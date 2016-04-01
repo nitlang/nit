@@ -27,6 +27,7 @@ fun iface: String do return "localhost:8080"
 
 var vh = new VirtualHost(iface)
 vh.routes.add new Route("/rest/", new BenitluxRESTAction)
+vh.routes.add new Route("/push/", new BenitluxPushAction)
 vh.routes.add new Route(null, new BenitluxSubscriptionAction)
 
 var factory = new HttpFactory.and_libevent
