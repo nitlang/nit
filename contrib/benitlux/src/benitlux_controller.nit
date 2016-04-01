@@ -329,38 +329,8 @@ class BenitluxRESTAction
 		return new HttpResponse.ok(list)
 	end
 
-	redef fun answer(request, turi)
-	do
-		var words = turi.split("/")
-		if not words.is_empty and words.first.is_empty then words.shift
-
-		if words.length >= 2 and words[0] == "since" then
-			var since = words[1].std_date
-
-			var db = new DB.open(db_path)
-			var events = db.beer_events_since(since.to_sql_string)
-			db.close
-
-			if events == null then
-				var response = new HttpResponse(400)
-				response.body = "Bad request"
-				return response
-			end
-
-			var stream = new StringWriter
-			var serializer = new JsonSerializer(stream)
-			serializer.serialize events
-			var serialized = stream.to_s
-
-			var response = new HttpResponse(200)
-			response.body = serialized
-			return response
-		end
-
-		var response = new HttpResponse(400)
-		response.body = "Bad request"
-		return response
-	end
+	# Fallback answer on errors
+	redef fun answer(request, turi) do return new HttpResponse.bad_request
 end
 
 # ---
