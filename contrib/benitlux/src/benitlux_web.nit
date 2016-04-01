@@ -20,6 +20,7 @@ module benitlux_web
 import benitlux_model
 import benitlux_view
 import benitlux_controller
+import benitlux_restful
 
 # Listening interface
 fun iface: String do return "localhost:8080"
