@@ -75,7 +75,7 @@ class DB
 	end
 
 	# Build and return a `BeerEvents` for today compared to the last weekday
-	fun beer_events_today: BeerEvents
+	fun beer_events_today: nullable BeerEvents
 	do
 		var tm = new Tm.localtime
 		var last_weekday
@@ -84,7 +84,7 @@ class DB
 			last_weekday = "date('now', 'weekday 6', '-7 day')"
 		else last_weekday = "date('now', '-1 day')"
 
-		return beer_events_since(last_weekday).as(not null) # This is used by daily
+		return beer_events_since(last_weekday)
 	end
 
 	# Build and return a `BeerEvents` for today compared to `prev_day`
