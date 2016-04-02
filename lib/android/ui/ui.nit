@@ -201,20 +201,40 @@ redef class TextView
 		native.text = value.to_java_string
 	end
 
-	# Size of the text
-	fun text_size: Float do return native.text_size
+	redef fun size=(size) do set_size_native(app.native_activity, native, size or else 1.0)
 
-	# Size of the text
-	fun text_size=(text_size: nullable Float) do
-		if text_size != null then native.text_size = text_size
-	end
+	private fun set_size_native(context: NativeContext, view: NativeTextView, size: Float)
+	in "Java" `{
+		int s;
+		if (size == 1.0d)
+			s = android.R.style.TextAppearance_Medium;
+		else if (size < 1.0d)
+			s = android.R.style.TextAppearance_Small;
+		else // if (size > 1.0d)
+			s = android.R.style.TextAppearance_Large;
+
+		view.setTextAppearance(context, s);
+	`}
+
+	redef fun align=(align) do set_align_native(native, align or else 0.0)
+
+	private fun set_align_native(view: NativeTextView, align: Float)
+	in "Java" `{
+		int g;
+		if (align == 0.5d)
+			g = android.view.Gravity.CENTER_HORIZONTAL;
+		else if (align < 0.5d)
+			g = android.view.Gravity.LEFT;
+		else // if (align > 0.5d)
+			g = android.view.Gravity.RIGHT;
+
+		view.setGravity(g);
+	`}
 end
 
 redef class Label
 	redef type NATIVE: NativeTextView
 	redef var native do return (new NativeTextView(app.native_activity)).new_global_ref
-
-	init do native.set_text_appearance(app.native_activity, android_r_style_text_appearance_medium)
 end
 
 redef class CheckBox
