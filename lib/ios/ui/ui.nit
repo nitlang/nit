@@ -201,6 +201,31 @@ redef class Label
 
 	redef fun text=(text) do native.text = (text or else "").to_nsstring
 	redef fun text do return native.text.to_s
+
+	redef fun size=(size)
+	do
+		size = size or else 1.0
+		var points = 8.0 + size * 8.0
+		set_size_native(native, points)
+	end
+
+	private fun set_size_native(native: UILabel, points: Float)
+	in "ObjC" `{
+		native.font = [UIFont systemFontOfSize: points];
+	`}
+
+	redef fun align=(align) do set_align_native(native, align or else 0.0)
+
+	private fun set_align_native(native: UILabel, align: Float)
+	in "ObjC" `{
+
+		if (align == 0.5)
+			native.textAlignment = NSTextAlignmentCenter;
+		else if (align < 0.5)
+			native.textAlignment = NSTextAlignmentLeft;
+		else//if (align > 0.5)
+			native.textAlignment = NSTextAlignmentRight;
+	`}
 end
 
 # On iOS, check boxes are a layout composed of a label and an `UISwitch`
