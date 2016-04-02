@@ -457,18 +457,13 @@ end
 extern class GtkMisc `{GtkMisc *`}
 	super GtkWidget
 
-	fun alignment: GtkAlignment is abstract
-
-	fun alignment=(x: Float, y: Float) `{
+	fun set_alignment(x, y: Float) `{
 		gtk_misc_set_alignment(self, x, y);
 	`}
 
-	fun padding: GtkAlignment is abstract
-
-	fun padding=(x: Float, y: Float) `{
+	fun set_padding(x, y: Float) `{
 		gtk_misc_set_padding(self, x, y);
 	`}
-
 end
 
 # A single line text entry field
