@@ -248,7 +248,46 @@ redef class Label
 	redef var native = new GtkLabel("")
 
 	redef fun text do return native.text
-	redef fun text=(value) do native.text = (value or else "").to_s
+
+	redef fun text=(value)
+	do
+		var cfmt = pango_markup_format.to_cstring
+		var cvalue = (value or else "").to_cstring
+		native.set_markup(cfmt, cvalue)
+	end
+
+	# Pango format string applied to the `text` attribute
+	var pango_markup_format = "\%s" is lazy
+
+	redef fun size=(size)
+	do
+		if size == null or size == 1.0 then
+			pango_markup_format = "\%s"
+		else if size < 1.0 then
+			pango_markup_format = "<span size=\"small\">\%s</span>"
+		else#if size > 1.0 then
+			pango_markup_format = "<span size=\"large\">\%s</span>"
+		end
+
+		# Force reloading `text`
+		text = text
+	end
+
+	redef fun align=(align)
+	do
+		align = align or else 0.0
+
+		# Set whole label alignement
+		native.set_alignment(align, 0.5)
+
+		# Set multiline justification
+		native.justify = if align == 0.5 then
+			new GtkJustification.center
+		else if align < 0.5 then
+			new GtkJustification.left
+		else#if align > 0.5 then
+			new GtkJustification.right
+	end
 end
 
 redef class CheckBox
