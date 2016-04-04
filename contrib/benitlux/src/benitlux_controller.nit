@@ -30,8 +30,8 @@ import benitlux_social
 abstract class BenitluxAction
 	super Action
 
-	# Path to the database
-	var db_path = "benitlux_sherbrooke.db"
+	# Database used for both the mailing list and the social network
+	var db: DB
 
 	# Path to the storage of the last email sent
 	var sample_email_path = "benitlux_sherbrooke.email"
@@ -59,16 +59,12 @@ class BenitluxSubscriptionAction
 				template.message_level = "success"
 				template.message_content = "Subscription successful!"
 
-				var db = new DB.open(db_path)
 				db.subscribe email
-				db.close
 			else if unsub then
 				template.message_level = "warning"
 				template.message_content = "You've been unsubscribed."
 
-				var db = new DB.open(db_path)
 				db.unsubscribe email
-				db.close
 			end
 		end
 
@@ -96,6 +92,7 @@ class BenitluxRESTAction
 	# signup?name=a&pass=b&email=c -> LoginResult | BenitluxError
 	fun signup(name, pass, email: String): HttpResponse
 	is restful do
+		# Validate input
 		if not name.name_is_ok then
 			var error = new BenitluxError("Invalid username")
 			return new HttpResponse.ok(error)
@@ -107,7 +104,6 @@ class BenitluxRESTAction
 		end
 
 		# Query DB
-		var db = new DB.open(db_path)
 		var error_message = db.signup(name, pass, email)
 
 		var object: nullable Serializable
@@ -116,7 +112,6 @@ class BenitluxRESTAction
 		else
 			object = new BenitluxError(error_message)
 		end
-		db.close
 
 		if object == null then
 			# There was an error in the call to login
@@ -132,10 +127,7 @@ class BenitluxRESTAction
 	# login?name=a&pass=b -> LoginResult | BenitluxError
 	fun login(name, pass: String): HttpResponse
 	is restful do
-		var db = new DB.open(db_path)
 		var log: nullable Serializable = db.login(name, pass)
-		db.close
-
 		if log == null then log = new BenitluxError("Login Failed", "Invalid username and password combination.")
 
 		return new HttpResponse.ok(log)
@@ -146,11 +138,8 @@ class BenitluxRESTAction
 	# search?token=b&query=a&offset=0 -> Array[UserAndFollowing] | BenitluxError
 	fun search(token: nullable String, query: String): HttpResponse
 	is restful do
-		var db = new DB.open(db_path)
 		var user_id = db.token_to_id(token)
 		var users = db.search_users(query, user_id)
-		db.close
-
 		if users == null then return new HttpResponse.server_error
 
 		return new HttpResponse.ok(users)
@@ -161,13 +150,8 @@ class BenitluxRESTAction
 	# list?token=a[&offset=0&count=1] -> Array[BeerAndRatings] | BenitluxError
 	fun list(token: nullable String): HttpResponse
 	is restful do
-
-		# Query DB
-		var db = new DB.open(db_path)
 		var user_id = db.token_to_id(token)
 		var list = db.list_beers_and_rating(user_id)
-		db.close
-
 		if list == null then return new HttpResponse.server_error
 
 		return new HttpResponse.ok(list)
@@ -178,17 +162,10 @@ class BenitluxRESTAction
 	# review?token=a&beer=b&rating=0 -> true | BenitluxError
 	fun review(token: String, rating, beer: Int): HttpResponse
 	is restful do
-		# Query DB
-		var db = new DB.open(db_path)
 		var user_id = db.token_to_id(token)
-
-		if user_id == null then
-			db.close
-			return new HttpResponse.invalid_token
-		end
+		if user_id == null then return new HttpResponse.invalid_token
 
 		db.post_review(user_id, beer, rating, "")
-		db.close
 
 		return new HttpResponse.ok(true)
 	end
@@ -198,21 +175,12 @@ class BenitluxRESTAction
 	# follow?token=a&user_to=0 -> true | BenitluxError
 	fun follow(token: String, user_to: Int, follow: nullable Bool): HttpResponse
 	is restful do
-
-		# Query DB
-		var db = new DB.open(db_path)
 		var user = db.token_to_id(token)
-
-		if user == null then
-			db.close
-			return new HttpResponse.invalid_token
-		end
+		if user == null then return new HttpResponse.invalid_token
 
 		if follow or else true then
 			db.add_followed(user, user_to)
 		else db.remove_followed(user, user_to)
-
-		db.close
 
 		return new HttpResponse.ok(true)
 	end
@@ -222,16 +190,10 @@ class BenitluxRESTAction
 	# followers?token=a -> Array[UserAndFollowing] | BenitluxError | BenitluxError
 	fun followers(token: String): HttpResponse
 	is restful do
-		# Query DB
-		var db = new DB.open(db_path)
 		var user = db.token_to_id(token)
-		if user == null then
-			db.close
-			return new HttpResponse.invalid_token
-		end
-		var users = db.followers(user)
-		db.close
+		if user == null then return new HttpResponse.invalid_token
 
+		var users = db.followers(user)
 		if users == null then return new HttpResponse.server_error
 
 		return new HttpResponse.ok(users)
@@ -242,16 +204,10 @@ class BenitluxRESTAction
 	# followed?token=a -> Array[UserAndFollowing] | BenitluxError
 	fun followed(token: String): HttpResponse
 	is restful do
-		# Query DB
-		var db = new DB.open(db_path)
 		var user = db.token_to_id(token)
-		if user == null then
-			db.close
-			return new HttpResponse.invalid_token
-		end
-		var users = db.followed(user)
-		db.close
+		if user == null then return new HttpResponse.invalid_token
 
+		var users = db.followed(user)
 		if users == null then return new HttpResponse.server_error
 
 		return new HttpResponse.ok(users)
@@ -262,12 +218,8 @@ class BenitluxRESTAction
 	# friends?token=a -> Array[UserAndFollowing] | BenitluxError
 	fun friends(token: String, n: nullable Int): HttpResponse
 	is restful do
-		# Query DB
-		var db = new DB.open(db_path)
 		var user = db.token_to_id(token)
 		var users = db.friends(user, n)
-		db.close
-
 		if users == null then return new HttpResponse.server_error
 
 		return new HttpResponse.ok(users)
@@ -278,19 +230,14 @@ class BenitluxRESTAction
 	# checkin?token=a -> true | BenitluxError
 	fun checkin(token: String, is_in: nullable Bool): HttpResponse
 	is restful do
-		var db = new DB.open(db_path)
 		var id = db.token_to_id(token)
-		if id == null then
-			db.close
-			return new HttpResponse.invalid_token
-		end
+		if id == null then return new HttpResponse.invalid_token
 
 		# Register in DB
 		db.checkin(id, is_in or else true)
 
 		# Update followed_followers
 		var common_followers = db.followed_followers(id)
-		db.close
 
 		# Sent push notifications to connected reciprocal friends
 		if common_followers != null then
@@ -318,15 +265,10 @@ class BenitluxRESTAction
 	# checkedin?token=a -> Array[UserAndFollowing]
 	fun checkedin(token: String): HttpResponse
 	is restful do
-		var db = new DB.open(db_path)
 		var user_id = db.token_to_id(token)
-		if user_id == null then
-			db.close
-			return new HttpResponse.invalid_token
-		end
-		var report = db.checkedin_followed_followers(user_id)
-		db.close
+		if user_id == null then return new HttpResponse.invalid_token
 
+		var report = db.checkedin_followed_followers(user_id)
 		if report == null then return new HttpResponse.server_error
 		return new HttpResponse.ok(report)
 	end
@@ -337,11 +279,8 @@ class BenitluxRESTAction
 	fun since(token, date: nullable String): HttpResponse
 	is restful do
 		# Query DB
-		var db = new DB.open(db_path)
 		var user_id = db.token_to_id(token)
 		var list = db.list_beers_and_rating(user_id, date)
-		db.close
-
 		if list == null then return new HttpResponse.server_error
 
 		return new HttpResponse.ok(list)
@@ -363,10 +302,7 @@ class BenitluxPushAction
 	do
 		var token = request.string_arg("token")
 
-		var db = new DB.open(db_path)
 		var user = db.token_to_id(token)
-		db.close
-
 		if user == null then
 			# Report errors right away
 			var response =  new HttpResponse.invalid_token
