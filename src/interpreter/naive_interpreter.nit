@@ -1002,9 +1002,6 @@ redef class AMethPropdef
 				return v.int32_instance(recvval.to_i32)
 			else if pname == "to_u32" then
 				return v.uint32_instance(recvval.to_u32)
-			else if pname == "rand" then
-				var res = recvval.rand
-				return v.int_instance(res)
 			end
 		else if cname == "Byte" then
 			var recvval = args[0].to_b
@@ -1130,8 +1127,6 @@ redef class AMethPropdef
 				return v.float_instance(args[0].to_f.log)
 			else if pname == "pow" then
 				return v.float_instance(args[0].to_f.pow(args[1].to_f))
-			else if pname == "rand" then
-				return v.float_instance(args[0].to_f.rand)
 			else if pname == "abs" then
 				return v.float_instance(args[0].to_f.abs)
 			else if pname == "hypot_with" then
