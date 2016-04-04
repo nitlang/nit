@@ -282,16 +282,18 @@ end
 interface Sqlite3Data end
 
 redef universal Int super Sqlite3Data end
+
 redef universal Float super Sqlite3Data end
+
 redef class String
 	super Sqlite3Data
 
-	# Return `self` between `'`s and escaping any extra `'`
+	# Return `self` between `'`s, escaping `\` and `'`
 	#
 	#     assert "'; DROP TABLE students".to_sql_string == "'''; DROP TABLE students'"
 	fun to_sql_string: String
 	do
-		return "'{self.replace('\'', "''")}'"
+		return "'{self.replace('\\', "\\\\").replace('\'', "''")}'"
 	end
 end
 
