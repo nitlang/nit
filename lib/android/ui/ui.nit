@@ -13,7 +13,10 @@
 # limitations under the License.
 
 # Views and services to use the Android native user interface
-module ui
+module ui is
+	# `adjustPan` allows to use EditText in a ListLayout
+	android_manifest_activity """android:windowSoftInputMode="adjustPan""""
+end
 
 # Implementation note:
 #
