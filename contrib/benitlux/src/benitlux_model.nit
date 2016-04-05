@@ -234,6 +234,14 @@ class CheckinReport
 	var users = new Array[User]
 end
 
+# Daily menu notifications
+class DailyNotification
+	serialize
+
+	# All beers on the menu today
+	var beers: Array[BeerAndRatings]
+end
+
 # Server or API usage error
 class BenitluxError
 	super Error

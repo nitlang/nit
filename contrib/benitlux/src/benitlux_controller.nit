@@ -322,6 +322,57 @@ redef class Sys
 end
 
 # ---
+# Administration
+
+# Path to the secret used to authenticate admin requests
+fun secret_path: String do return "benitlux.secret"
+
+# Services reserved to administrators
+class BenitluxAdminAction
+	super BenitluxAction
+	super RestfulAction
+
+	private fun server_secret: String do return secret_path.to_path.read_all
+
+	# Trigger sending daily menu to connected clients
+	#
+	# This should usually be called by an external cron program.
+	# send_daily_updates?secret=shared_secret -> true | BenitluxError
+	fun send_daily_updates(secret: nullable String): HttpResponse
+	is restful do
+		# Check secrets
+		var server_secret = server_secret
+		if server_secret.is_empty then
+			print_error "The admin interface needs a secret at '{secret_path}'"
+			return new HttpResponse.server_error
+		end
+
+		if server_secret != secret then
+			return new HttpResponse.invalid_token
+		end
+
+		# Load beer menu
+		var list = db.list_beers_and_rating
+		if list == null then return new HttpResponse.server_error
+
+		var msg = new DailyNotification(list)
+
+		# Broadcast updates
+		for conn in push_connections.values.to_a do
+			if not conn.closed then
+				conn.respond new HttpResponse.ok(msg)
+				conn.close
+			end
+		end
+		push_connections.clear
+
+		return new HttpResponse.ok(true)
+	end
+
+	redef fun answer(request, turi) do return new HttpResponse.bad_request
+end
+
+# ---
 # Misc services
 
 redef class Text

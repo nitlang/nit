@@ -25,6 +25,9 @@ import benitlux_restful
 # Listening interface
 fun iface: String do return "localhost:8080"
 
+# Listening interface for admin commands
+fun iface_admin: String do return "localhost:8081"
+
 # Sqlite3 database
 var db_path = "benitlux_sherbrooke.db"
 var db = new BenitluxDB.open(db_path)
@@ -40,10 +43,14 @@ vh.routes.add new Route("/rest/", new BenitluxRESTAction(db))
 vh.routes.add new Route("/push/", new BenitluxPushAction(db))
 vh.routes.add new Route(null, new BenitluxSubscriptionAction(db))
 
+var vh_admin = new VirtualHost(iface_admin)
+vh_admin.routes.add new Route(null, new BenitluxAdminAction(db))
+
 var factory = new HttpFactory.and_libevent
 factory.config.virtual_hosts.add vh
+factory.config.virtual_hosts.add vh_admin
 
-print "Launching server on http://{iface}/"
+print "Launching server on http://{iface}/ and http://{iface_admin}/"
 factory.run
 
 db.close
