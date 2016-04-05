@@ -251,7 +251,15 @@ class Bytes
 		return slice(from, length)
 	end
 
-	# Returns self as a hexadecimal digest
+	# Returns self as an hexadecimal digest.
+	#
+	# Also known as plain hexdump or postscript hexdump.
+	#
+	# ~~~
+	# var b = "abcd".to_bytes
+	# assert b.hexdigest == "61626364"
+	# assert b.hexdigest.hexdigest_to_bytes == b
+	# ~~~
 	fun hexdigest: String do
 		var elen = length * 2
 		var ns = new NativeString(elen)
@@ -583,6 +591,7 @@ redef class Text
 	# Returns a new `Bytes` instance with the digest as content
 	#
 	#     assert "0B1F4D".hexdigest_to_bytes == [0x0Bu8, 0x1Fu8, 0x4Du8]
+	#     assert "0B1F4D".hexdigest_to_bytes.hexdigest == "0B1F4D"
 	#
 	# REQUIRE: `self` is a valid hexdigest and hexdigest.length % 2 == 0
 	fun hexdigest_to_bytes: Bytes do
