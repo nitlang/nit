@@ -19,7 +19,7 @@ import nitcorn::token
 
 import benitlux_db
 
-redef class DB
+redef class BenitluxDB
 
 	redef fun create_tables
 	do

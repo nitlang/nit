@@ -22,7 +22,7 @@ import sqlite3
 import benitlux_model
 
 # The database of this project
-class DB
+class BenitluxDB
 	super Sqlite3DB
 
 	redef init open(path)

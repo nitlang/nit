@@ -102,7 +102,7 @@ class Benitlux
 			print beers
 		end
 
-		var db = new DB.open(db_path)
+		var db = new BenitluxDB.open(db_path)
 
 		# Update the database with the beers of the day
 		db.insert_beers_of_the_day beers

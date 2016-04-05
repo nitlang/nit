@@ -27,7 +27,7 @@ fun iface: String do return "localhost:8080"
 
 # Sqlite3 database
 var db_path = "benitlux_sherbrooke.db"
-var db = new DB.open(db_path)
+var db = new BenitluxDB.open(db_path)
 var db_error = db.error
 if db_error != null then
 	print_error db_error

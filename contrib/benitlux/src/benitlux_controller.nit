@@ -31,7 +31,7 @@ abstract class BenitluxAction
 	super Action
 
 	# Database used for both the mailing list and the social network
-	var db: DB
+	var db: BenitluxDB
 
 	# Path to the storage of the last email sent
 	var sample_email_path = "benitlux_sherbrooke.email"
