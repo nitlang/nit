@@ -312,9 +312,10 @@ GROUP BY beer0, beer1""") else
 	# List reciprocal friends of `user_id`
 	fun followed_followers(user_id: Int): nullable Array[User]
 	do
-		var stmt = select("ROWID, name FROM users WHERE " +
-			"ROWID in (SELECT user_from FROM follows WHERE user_to = {user_id}) AND " +
-			"ROWID in (SELECT user_to FROM follows WHERE user_from = {user_id})")
+		var stmt = select("""
+ROWID, name FROM users WHERE
+	users.ROWID in (SELECT user_from FROM follows WHERE user_to = {{{user_id}}}) AND
+	users.ROWID in (SELECT user_to FROM follows WHERE user_from = {{{user_id}}})""")
 		assert stmt != null else print_error "Select 'followed_followers' failed with: {error or else "?"}"
 
 		var users = new Array[User]
@@ -514,8 +515,8 @@ ORDER BY average LIMIT 1""")
 		var sql = """
 ROWID, name FROM users
 WHERE 1 in (SELECT is_in FROM checkins WHERE user = users.ROWID ORDER BY ROWID DESC LIMIT 1)
-	AND ROWID in (SELECT user_from FROM follows WHERE user_to = {user_id})
-	AND ROWID in (SELECT user_to FROM follows WHERE user_from = {user_id})"""
+	AND ROWID in (SELECT user_from FROM follows WHERE user_to = {{{user_id}}})
+	AND ROWID in (SELECT user_to FROM follows WHERE user_from = {{{user_id}}})"""
 
 		var stmt = select(sql)
 		if stmt == null then
