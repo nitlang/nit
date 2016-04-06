@@ -25,7 +25,7 @@ var tests = entities.without_generics#alt1##alt2##alt3##alt4#
 #alt4#var tests = entities.with_generics
 
 for o in tests do
-	var stream = new StringWriter
+	var stream = new MemoryWriter
 	var serializer = new JsonSerializer(stream)
 	#alt2#serializer.plain_json = true
 	#alt3#serializer.pretty_json = true

@@ -97,9 +97,15 @@ redef class ModelBuilder
 			sock.close
 			sys.set_io(ns,ns,ns)
 		else if self.toolcontext.opt_websocket_mode.value then
-			var websock = new WebSocketListener(toolcontext.opt_debug_port.value, 1)
-			var cli = websock.accept
+			var websock = new TCPServer(toolcontext.opt_debug_port.value)
+			websock.listen(1)
+			var scli = websock.accept
+			if scli == null then
+				print "Unable to connect to client"
+				abort
+			end
 			websock.close
+			var cli = new WebsocketConnection(scli)
 			sys.set_io(cli,cli,cli)
 		end
 	end
@@ -115,7 +121,7 @@ redef class ModelBuilder
 end
 
 redef class Sys
-	private fun set_io(istream: PollableReader, ostream: Writer, errstream: Writer)
+	private fun set_io(istream: Reader, ostream: Writer, errstream: Writer)
 	do
 		self.stdin = istream
 		self.stdout = ostream

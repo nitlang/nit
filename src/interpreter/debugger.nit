@@ -239,7 +239,7 @@ class Debugger
 		var old = frame.current_node
 		frame.current_node = n
 
-		if sys.stdin.poll_in then process_debug_command(gets)
+		if sys.stdin.ready then process_debug_command(gets)
 
 		if not self.autocontinue then
 			if not n isa ABlockExpr then

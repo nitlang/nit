@@ -78,7 +78,7 @@ var d = new D(false, 'b', 123.123, 2345, "new line ->\n<-", null, 1111, "\t\f\"\
 d.d = d
 
 for o in new Array[Serializable].with_items(a, b, c, d) do
-	var stream = new StringWriter
+	var stream = new MemoryWriter
 	var serializer = new JsonSerializer(stream)
 	#alt1#serializer.plain_json = true
 	serializer.serialize(o)

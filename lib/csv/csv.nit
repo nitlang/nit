@@ -259,7 +259,7 @@ class CsvReader
 	var skip_empty: Bool = false is writable
 
 	# Creates a new CSVReader from a `string` data
-	init from_string(s: String) do init(new StringReader(s))
+	init from_string(s: String) do init(new MemoryReader.from_str(s))
 
 	# Reads the content of the Stream and interprets it as a CSV Document
 	#
