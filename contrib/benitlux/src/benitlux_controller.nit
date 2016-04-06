@@ -133,6 +133,16 @@ class BenitluxRESTAction
 		return new HttpResponse.ok(log)
 	end
 
+	# Is `token` valid?
+	#
+	# check_token?token=a -> true | BenitluxError
+	fun check_token(token: String): HttpResponse
+	is restful do
+		var user_id = db.token_to_id(token)
+		if user_id == null then return new HttpResponse.invalid_token
+		return new HttpResponse.ok(true)
+	end
+
 	# Search a user
 	#
 	# search?token=b&query=a&offset=0 -> Array[UserAndFollowing] | BenitluxError
