@@ -1611,6 +1611,18 @@ abstract class AbstractCompilerVisitor
 		return res
 	end
 
+	# Generates a NativeString instance fully escaped in C-style \xHH fashion
+	fun native_string_instance(ns: NativeString, len: Int): RuntimeVariable do
+		var mtype = mmodule.native_string_type
+		var nat = new_var(mtype)
+		var byte_esc = new Buffer.with_cap(len * 4)
+		for i in [0 .. len[ do
+			byte_esc.append("\\x{ns[i].to_s.substring_from(2)}")
+		end
+		self.add("{nat} = \"{byte_esc}\";")
+		return nat
+	end
+
 	# Generate a string value
 	fun string_instance(string: String): RuntimeVariable
 	do
@@ -3586,14 +3598,75 @@ redef class AArrayExpr
 	end
 end
 
+redef class AugmentedStringFormExpr
+	# Factorize the making of a `Regex` object from a literal prefixed string
+	protected fun make_re(v: AbstractCompilerVisitor, rs: RuntimeVariable): nullable RuntimeVariable do
+		var re = to_re
+		assert re != null
+		var res = v.compile_callsite(re, [rs])
+		if res == null then
+			print "Cannot call property `to_re` on {self}"
+			abort
+		end
+		for i in suffix.chars do
+			if i == 'i' then
+				var ign = ignore_case
+				assert ign != null
+				v.compile_callsite(ign, [res, v.bool_instance(true)])
+				continue
+			end
+			if i == 'm' then
+				var nl = newline
+				assert nl != null
+				v.compile_callsite(nl, [res, v.bool_instance(true)])
+				continue
+			end
+			if i == 'b' then
+				var ext = extended
+				assert ext != null
+				v.compile_callsite(ext, [res, v.bool_instance(false)])
+				continue
+			end
+			# Should not happen, this needs to be updated
+			# along with the addition of new suffixes
+			abort
+		end
+		return res
+	end
+end
+
 redef class AStringFormExpr
-	redef fun expr(v) do return v.string_instance(self.value.as(not null))
+	redef fun expr(v) do return v.string_instance(value)
+end
+
+redef class AStringExpr
+	redef fun expr(v) do
+		var s = v.string_instance(value)
+		if is_string then return s
+		if is_bytestring then
+			var ns = v.native_string_instance(bytes.items, bytes.length)
+			var ln = v.int_instance(bytes.length)
+			var cs = to_bytes_with_copy
+			assert cs != null
+			var res = v.compile_callsite(cs, [ns, ln])
+			assert res != null
+			s = res
+		else if is_re then
+			var res = make_re(v, s)
+			assert res != null
+			s = res
+		else
+			print "Unimplemented prefix or suffix for {self}"
+			abort
+		end
+		return s
+	end
 end
 
 redef class ASuperstringExpr
 	redef fun expr(v)
 	do
-		var type_string = mtype.as(not null)
+		var type_string = v.mmodule.string_type
 
 		# Collect elements of the superstring
 		var array = new Array[AExpr]
@@ -3647,10 +3720,14 @@ redef class ASuperstringExpr
 
 		# Fast join the native string to get the result
 		var res = v.send(v.get_property("native_to_s", a.mtype), [a])
+		assert res != null
+
+		if is_re then res = make_re(v, res)
 
 		# We finish to work with the native array,
 		# so store it so that it can be reused
 		v.add("{varonce} = {a};")
+
 		return res
 	end
 end

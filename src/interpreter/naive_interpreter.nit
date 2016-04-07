@@ -328,6 +328,16 @@ class NaiveInterpreter
 		return instance
 	end
 
+	# Return a new native string initialized with `txt`
+	fun native_string_instance_from_ns(txt: NativeString, len: Int): Instance
+	do
+		var instance = native_string_instance_len(len)
+		var val = instance.val
+		txt.copy_to(val, len, 0, 0)
+
+		return instance
+	end
+
 	# Return a new native string initialized of `length`
 	fun native_string_instance_len(length: Int): PrimitiveInstance[NativeString]
 	do
@@ -1963,11 +1973,71 @@ redef class AArrayExpr
 	end
 end
 
+redef class AugmentedStringFormExpr
+	# Factorize the making of a `Regex` object from a literal prefixed string
+	fun make_re(v: NaiveInterpreter, rs: Instance): nullable Instance do
+		var tore = to_re
+		assert tore != null
+		var res = v.callsite(tore, [rs])
+		if res == null then
+			print "Cannot call property `to_re` on {self}"
+			abort
+		end
+		for j in suffix.chars do
+			if j == 'i' then
+				var prop = ignore_case
+				assert prop != null
+				v.callsite(prop, [res, v.bool_instance(true)])
+				continue
+			end
+			if j == 'm' then
+				var prop = newline
+				assert prop != null
+				v.callsite(prop, [res, v.bool_instance(true)])
+				continue
+			end
+			if j == 'b' then
+				var prop = extended
+				assert prop != null
+				v.callsite(prop, [res, v.bool_instance(false)])
+				continue
+			end
+			# Should not happen, this needs to be updated
+			# along with the addition of new suffixes
+			abort
+		end
+		return res
+	end
+end
+
 redef class AStringFormExpr
-	redef fun expr(v)
-	do
-		var txt = self.value.as(not null)
-		return v.string_instance(txt)
+	redef fun expr(v) do return v.string_instance(value)
+end
+
+redef class AStringExpr
+	redef fun expr(v) do
+		var s = v.string_instance(value)
+		if is_string then return s
+		if is_bytestring then
+			var ns = v.native_string_instance_from_ns(bytes.items, bytes.length)
+			var ln = v.int_instance(bytes.length)
+			var prop = to_bytes_with_copy
+			assert prop != null
+			var res = v.callsite(prop, [ns, ln])
+			if res == null then
+				print "Cannot call property `to_bytes` on {self}"
+				abort
+			end
+			s = res
+		else if is_re then
+			var res = make_re(v, s)
+			assert res != null
+			s = res
+		else
+			print "Unimplemented prefix or suffix for {self}"
+			abort
+		end
+		return s
 	end
 end
 
@@ -1983,6 +2053,7 @@ redef class ASuperstringExpr
 		var i = v.array_instance(array, v.mainmodule.object_type)
 		var res = v.send(v.force_get_primitive_method("plain_to_s", i.mtype), [i])
 		assert res != null
+		if is_re then res = make_re(v, res)
 		return res
 	end
 end
