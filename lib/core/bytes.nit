@@ -298,6 +298,36 @@ class Bytes
 		return new FlatString.full(ns, elen, 0, elen)
 	end
 
+
+	# Returns self as a stream of bits (0 and 1)
+	#
+	# ~~~
+	# var b = "abcd".to_bytes
+	# assert b.binarydigest == "01100001011000100110001101100100"
+	# assert b.binarydigest.binarydigest_to_bytes == b
+	# ~~~
+	fun binarydigest: String do
+		var elen = length * 8
+		var ns = new NativeString(elen)
+		var i = 0
+		var oi = 0
+		while i < length do
+			var c = self[i]
+			var b = 128u8
+			while b > 0u8 do
+				if c & b == 0u8 then
+					ns[oi] = 0x30u8 # b'0'
+				else
+					ns[oi] = 0x31u8 # b'1'
+				end
+				oi += 1
+				b = b >> 1
+			end
+			i += 1
+		end
+		return new FlatString.full(ns, elen, 0, elen)
+	end
+
 	#     var b = new Bytes.with_capacity(1)
 	#     b[0] = 101u8
 	#     assert b.to_s == "e"
@@ -701,6 +731,70 @@ redef class Text
 			i += 1
 		end
 		return res
+	end
+
+	# Return a `Bytes` by reading 0 and 1.
+	#
+	#     assert "1010101100001101".binarydigest_to_bytes.hexdigest == "AB0D"
+	#
+	# Note that characters that are neither 0 or 1 are just ignored.
+	#
+	#     assert "a1B01 010\n1100あ001101".binarydigest_to_bytes.hexdigest == "AB0D"
+	#     assert "hello".binarydigest_to_bytes.is_empty
+	#
+	# When the number of bits is not divisible by 8, then leading 0 are
+	# implicitly considered to fill the left byte (the most significant one).
+	#
+	#     assert "1".binarydigest_to_bytes.hexdigest == "01"
+	#     assert "1111111".binarydigest_to_bytes.hexdigest == "7F"
+	#     assert "1000110100".binarydigest_to_bytes.hexdigest == "0234"
+	#
+	# `Bytes::binarydigest` is a loosely reverse method since its
+	# results contain only 1 and 0 by blocks of 8.
+	#
+	#     assert "1010101100001101".binarydigest_to_bytes.binarydigest == "1010101100001101"
+	#     assert "1".binarydigest_to_bytes.binarydigest == "00000001"
+	fun binarydigest_to_bytes: Bytes
+	do
+		var b = bytes
+		var max = bytelen
+
+		# Count bits
+		var bitlen = 0
+		var pos = 0
+		while pos < max do
+			var c = b[pos]
+			pos += 1
+			if c == 0x30u8 or c == 0x31u8 then bitlen += 1 # b'0' or b'1'
+		end
+
+		# Allocate (and take care of the padding)
+		var ret = new Bytes.with_capacity((bitlen+7) / 8)
+
+		var i = (bitlen+7) % 8 # current bit (7th=128, 0th=1)
+		var byte = 0u8 # current accumulated byte value
+
+		pos = 0
+		while pos < max do
+			var c = b[pos]
+			pos += 1
+			if c == 0x30u8 then # b'0'
+				byte = byte << 1
+			else if c == 0x31u8 then # b'1'
+				byte = byte << 1 | 1u8
+			else
+				continue
+			end
+
+			i -= 1
+			if i < 0 then
+				# Last bit known: store and restart
+				ret.add byte
+				i = 7
+				byte = 0u8
+			end
+		end
+		return ret
 	end
 end
 
