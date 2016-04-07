@@ -73,8 +73,7 @@ class TnitterWindow
 	# Update the screen to show the new `posts`
 	fun apply_update(posts: Array[Post])
 	do
-		layout.remove list_posts
-		list_posts = new ListLayout(parent=layout)
+		list_posts.clear
 		for post in posts do
 			var line = new VerticalLayout(parent=list_posts)
 			var author = new LabelAuthor(parent=line, text="@"+post.user)
