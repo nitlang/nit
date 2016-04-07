@@ -118,6 +118,9 @@ class CompositeControl
 	# Is `item` in `self`?
 	fun has(item: Control): Bool do return items.has(item)
 
+	# Remove all items from `self`
+	fun clear do for item in items.to_a do remove item
+
 	redef fun on_create do for i in items do i.on_create
 
 	redef fun on_start do for i in items do i.on_start
