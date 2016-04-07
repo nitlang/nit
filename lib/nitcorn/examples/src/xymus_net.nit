@@ -208,11 +208,23 @@ pep8_vh.routes.add new Route(null, new FileServer("/var/www/pep8/"))
 #
 # It has 2 actions/Web interfaces. The Web user UI to subscribe and unsubscribe
 # to the mailing list. And the RESTful interface used by the Android app.
-var benitlux_sub = new BenitluxSubscriptionAction
-var benitlux_rest = new BenitluxRESTAction
+
+var db_path = "benitlux_sherbrooke.db"
+var benitlux_db = new BenitluxDB.open(db_path)
+var db_error = benitlux_db.error
+if db_error != null then
+	print_error db_error
+	exit 1
+end
+
+var benitlux_sub = new BenitluxSubscriptionAction(benitlux_db)
+var benitlux_rest = new BenitluxRESTAction(benitlux_db)
+var benitlux_push = new BenitluxPushAction(benitlux_db)
 default_vh.routes.add new Route("/benitlux/rest/", benitlux_rest)
+default_vh.routes.add new Route("/benitlux/push/", benitlux_push)
 default_vh.routes.add new Route("/benitlux", benitlux_sub)
 benitlux_vh.routes.add new Route("/rest/", benitlux_rest)
+benitlux_vh.routes.add new Route("/push/", benitlux_push)
 benitlux_vh.routes.add new Route("/static/", shared_file_server)
 benitlux_vh.routes.add new Route(null, benitlux_sub)
 
