@@ -273,6 +273,31 @@ class Bytes
 		return new FlatString.full(ns, elen, 0, elen)
 	end
 
+	# Return self as a C hexadecimal digest where bytes are prefixed by `\x`
+	#
+	# The output is compatible with literal stream of bytes for most languages
+	# including C and Nit.
+	#
+	# ~~~
+	# var b = "abcd".to_bytes
+	# assert b.chexdigest == "\\x61\\x62\\x63\\x64"
+	# assert b.chexdigest.unescape_to_bytes == b
+	# ~~~
+	fun chexdigest: String do
+		var elen = length * 4
+		var ns = new NativeString(elen)
+		var i = 0
+		var oi = 0
+		while i < length do
+			ns[oi] = 0x5Cu8 # b'\\'
+			ns[oi+1] = 0x78u8 # b'x'
+			self[i].add_digest_at(ns, oi+2)
+			i += 1
+			oi += 4
+		end
+		return new FlatString.full(ns, elen, 0, elen)
+	end
+
 	#     var b = new Bytes.with_capacity(1)
 	#     b[0] = 101u8
 	#     assert b.to_s == "e"
@@ -624,6 +649,12 @@ redef class Text
 	# Return a `Bytes` instance where Nit escape sequences are transformed.
 	#
 	#     assert "B\\n\\x41\\u0103D3".unescape_to_bytes.hexdigest == "420A41F0908F93"
+	#
+	# `Bytes::chexdigest` is a loosely reverse methods since its result is only made
+	# of `"\x??"` escape sequences.
+	#
+	#     assert "\\x41\\x42\\x43".unescape_to_bytes.chexdigest == "\\x41\\x42\\x43"
+	#     assert "B\\n\\x41\\u0103D3".unescape_to_bytes.chexdigest == "\\x42\\x0A\\x41\\xF0\\x90\\x8F\\x93"
 	fun unescape_to_bytes: Bytes do
 		var res = new Bytes.with_capacity(self.bytelen)
 		var was_slash = false
