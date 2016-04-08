@@ -276,6 +276,8 @@ class StatementIterator
 			is_ok = false
 		end
 	end
+
+	redef fun finish do statement.close
 end
 
 # A data type supported by Sqlite3
