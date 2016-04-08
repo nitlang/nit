@@ -113,17 +113,13 @@ class NaiveInterpreter
 		return self.modelbuilder.force_get_primitive_method(current_node, name, recv.mclass, self.mainmodule)
 	end
 
-	# Is a return executed?
-	# Set this mark to skip the evaluation until the end of the specified method frame
-	var returnmark: nullable FRAME = null
-
-	# Is a break or a continue executed?
+	# Is a return, a break or a continue executed?
 	# Set this mark to skip the evaluation until a labeled statement catch it with `is_escape`
 	var escapemark: nullable EscapeMark = null
 
 	# Is a return or a break or a continue executed?
 	# Use this function to know if you must skip the evaluation of statements
-	fun is_escaping: Bool do return returnmark != null or escapemark != null
+	fun is_escaping: Bool do return escapemark != null
 
 	# The value associated with the current return/break/continue, if any.
 	# Set the value when you set a escapemark.
@@ -848,10 +844,8 @@ redef class AMethPropdef
 		var f = v.new_frame(self, mpropdef, args)
 		var res = call_commons(v, mpropdef, args, f)
 		v.frames.shift
-		if v.returnmark == f then
-			v.returnmark = null
+		if v.is_escape(self.return_mark) then
 			res = v.escapevalue
-			v.escapevalue = null
 			return res
 		end
 		return res
@@ -1545,10 +1539,9 @@ redef class AAttrPropdef
 			val = v.expr(nexpr)
 		else if nblock != null then
 			v.stmt(nblock)
-			assert v.returnmark == f
+			assert v.escapemark == return_mark
 			val = v.escapevalue
-			v.returnmark = null
-			v.escapevalue = null
+			v.escapemark = null
 		else
 			abort
 		end
@@ -1690,19 +1683,6 @@ redef class AEscapeExpr
 			v.escapevalue = i
 		end
 		v.escapemark = self.escapemark
-	end
-end
-
-redef class AReturnExpr
-	redef fun stmt(v)
-	do
-		var ne = self.n_expr
-		if ne != null then
-			var i = v.expr(ne)
-			if i == null then return
-			v.escapevalue = i
-		end
-		v.returnmark = v.frame
 	end
 end
 
