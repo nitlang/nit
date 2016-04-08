@@ -29,18 +29,18 @@ var select_req = "SELECT * FROM users"
 var db = new NativeSqlite3.open(filename.to_cstring)
 assert sqlite_open: db.error.is_ok
 
-db.exec(create_req)
+db.exec(create_req.to_cstring)
 assert sqlite_create_table: db.error.is_ok
 
-db.exec(insert_req_1)
+db.exec(insert_req_1.to_cstring)
 assert sqlite_insert_1: db.error.is_ok
 
-db.exec(insert_req_2)
+db.exec(insert_req_2.to_cstring)
 assert sqlite_insert_2: db.error.is_ok
 
-var stmt = db.prepare(select_req)
+var stmt = db.prepare(select_req.to_cstring)
 assert sqlite_select: db.error.is_ok
-if stmt == null then
+if stmt.address_is_null then
 	print "Prepared failed got: {db.error.to_s}"
 	abort
 end
@@ -56,8 +56,8 @@ db.close
 db = new NativeSqlite3.open(filename.to_cstring)
 assert sqlite_reopen: db.error.is_ok
 
-stmt = db.prepare(select_req)
+stmt = db.prepare(select_req.to_cstring)
 assert sqlite_reselect: db.error.is_ok
-assert stmt != null
+assert not stmt.address_is_null
 stmt.step
 assert sqlite_column_0_0_reopened: stmt.column_text(0).to_s == "Bob"
