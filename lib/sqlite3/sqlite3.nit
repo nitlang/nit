@@ -42,6 +42,8 @@ class Sqlite3DB
 	# Close this connection to the DB and all open statements
 	fun close
 	do
+		if not is_open then return
+
 		is_open = false
 
 		# close open statements
@@ -120,6 +122,8 @@ class Statement
 	# Close and finalize this statement
 	fun close
 	do
+		if not is_open then return
+
 		is_open = false
 		native_statement.finalize
 	end
