@@ -134,8 +134,13 @@ class BenitluxDB
 	do
 		var stmt = select("ROWID, name, desc FROM beers WHERE ROWID = {id}")
 		if stmt == null then return null
-		for row in stmt do return row.to_beer
-		return null
+
+		var res = null
+		for row in stmt do
+			res = row.to_beer
+			break
+		end
+		return res
 	end
 
 	# Days where `beer` was available, all known days if `beer == null`
