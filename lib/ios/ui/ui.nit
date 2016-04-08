@@ -120,9 +120,9 @@ redef class CompositeControl
 	do
 		super
 
-		var native_view = view.native
-		assert native_view isa UIView
-		native_view.remove_from_superview
+		if view isa View then
+			view.native.remove_from_superview
+		end
 	end
 end
 
