@@ -263,10 +263,10 @@ redef class APropdef
 
 
 	# The starting flow
-	var before_flow_context: nullable FlowContext
+	var before_flow_context: nullable FlowContext is noautoinit
 
 	# The ending flow
-	var after_flow_context: nullable FlowContext
+	var after_flow_context: nullable FlowContext is noautoinit
 
 	redef fun accept_flow_visitor(v)
 	do
@@ -345,8 +345,22 @@ end
 redef class ADoExpr
 	redef fun accept_flow_visitor(v)
 	do
-		super
+		# FlowContext before the block
+		var before_block = v.make_sub_flow
+
+		# Visit the bloc, then merge the breaks
+		v.enter_visit(self.n_block)
 		v.merge_breaks(self.break_mark)
+		var after_block =  v.current_flow_context
+
+		# Visit the catch if there is one
+		if self.n_catch != null then
+			var before_catch = v.make_sub_flow
+			v.make_merge_flow(before_block, after_block)
+			v.enter_visit(self.n_catch)
+			var after_catch = v.current_flow_context
+			v.make_merge_flow(before_catch, after_catch)
+		end
 	end
 end
 
