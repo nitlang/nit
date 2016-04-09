@@ -1776,13 +1776,10 @@ end
 
 # A `return` statement. eg `return x`
 class AReturnExpr
-	super AExpr
+	super AEscapeExpr
 
 	# The `return` keyword
 	var n_kwreturn: nullable TKwreturn = null is writable
-
-	# The return value, if any
-	var n_expr: nullable AExpr = null is writable
 end
 
 # A `yield` statement. eg `yield x`
