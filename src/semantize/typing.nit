@@ -1131,6 +1131,7 @@ redef class ADoExpr
 	redef fun accept_typing(v)
 	do
 		v.visit_stmt(n_block)
+		v.visit_stmt(n_catch)
 		self.is_typed = true
 	end
 end
