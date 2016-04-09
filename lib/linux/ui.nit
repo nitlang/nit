@@ -186,6 +186,9 @@ redef class ListLayout
 	# Container inside `native`
 	var native_list_box = new GtkListBox
 
+	# `GtkListBoxRow` used to contains children `View`s
+	var native_rows = new Map[View, GtkListBoxRow]
+
 	init do
 		native_list_box.selection_mode = new GtkSelectionMode.none
 		native.add native_list_box
@@ -199,13 +202,32 @@ redef class ListLayout
 	redef fun add(item)
 	do
 		super
-		if item isa View then native_list_box.add item.native
+		if item isa View then
+			var native_row = new GtkListBoxRow
+			#native_row.activable = false # TODO with GTK 3.14
+			#native_row.selectable = false
+			native_row.add item.native
+
+			native_rows[item] = native_row
+			native_list_box.add native_row
+			native_row.show
+		end
 	end
 
 	redef fun remove(item)
 	do
 		super
-		if item isa View then native_list_box.remove item.native
+		if item isa View then
+			var native_row = native_rows.get_or_null(item)
+			if native_row == null then
+				print_error "Error: {self} does not contains {item}"
+				return
+			end
+
+			native_list_box.remove native_row
+			native_rows.keys.remove item
+			native_row.destroy
+		end
 	end
 end
 
