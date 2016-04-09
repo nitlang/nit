@@ -521,6 +521,11 @@ class TKwdo
 	super TokenKeyword
 end
 
+# The keyword `catch`
+class TKwcatch
+	super TokenKeyword
+end
+
 # The keyword `var`
 class TKwvar
 	super TokenKeyword
@@ -1847,6 +1852,12 @@ class ADoExpr
 
 	# The list of statements of the `do`.
 	var n_block: nullable AExpr = null is writable
+
+	# The `catch` keyword
+	var n_kwcatch: nullable TKwcatch = null is writable
+
+	# The do catch block
+	var n_catch: nullable AExpr = null is writable
 end
 
 # A `if` statement
