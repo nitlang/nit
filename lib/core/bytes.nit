@@ -648,16 +648,54 @@ redef class Text
 	#     assert "0B1F4D".hexdigest_to_bytes == [0x0Bu8, 0x1Fu8, 0x4Du8]
 	#     assert "0B1F4D".hexdigest_to_bytes.hexdigest == "0B1F4D"
 	#
-	# REQUIRE: `self` is a valid hexdigest and hexdigest.length % 2 == 0
+	# Characters that are not hexadecimal digits are ignored.
+	#
+	#     assert "z0B1 F4\nD".hexdigest_to_bytes.hexdigest == "0B1F4D"
+	#     assert "\\x0b1 \\xf4d".hexdigest_to_bytes.hexdigest == "0B1F4D"
+	#
+	# When the number of hexadecimal digit is not even, then a leading 0 is
+	# implicitly considered to fill the left byte (the most significant one).
+	#
+	#     assert "1".hexdigest_to_bytes.hexdigest == "01"
+	#     assert "FFF".hexdigest_to_bytes.hexdigest == "0FFF"
+	#
+	# `Bytes::hexdigest` is a loosely reverse method since its
+	# results contain only pairs of uppercase hexadecimal digits.
+	#
+	#     assert "ABCD".hexdigest_to_bytes.hexdigest == "ABCD"
+	#     assert "a b c".hexdigest_to_bytes.hexdigest == "0ABC"
 	fun hexdigest_to_bytes: Bytes do
 		var b = bytes
-		var pos = 0
 		var max = bytelen
-		var ret = new Bytes.with_capacity(max / 2)
+
+		var dlength = 0 # Number of hex digits
+		var pos = 0
 		while pos < max do
-			ret.add((b[pos].hexdigit_to_byteval << 4) |
-			b[pos + 1].hexdigit_to_byteval)
-			pos += 2
+			var c = b[pos]
+			if c.is_valid_hexdigit then dlength += 1
+			pos += 1
+		end
+
+		# Allocate the result buffer
+		var ret = new Bytes.with_capacity((dlength+1) / 2)
+
+		var i = (dlength+1) % 2 # current hex digit (1=high, 0=low)
+		var byte = 0u8 # current accumulated byte value
+
+		pos = 0
+		while pos < max do
+			var c = b[pos]
+			if c.is_valid_hexdigit then
+				byte = byte << 4 | c.hexdigit_to_byteval
+				i -= 1
+				if i < 0 then
+					# Last digit known: store and restart
+					ret.add byte
+					i = 1
+					byte = 0u8
+				end
+			end
+			pos += 1
 		end
 		return ret
 	end
