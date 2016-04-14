@@ -24,7 +24,7 @@ import ios
 extern class UIView in "ObjC" `{ UIView * `}
 	super NSObject
 
-	new in "ObjC" `{ return [[UIView alloc] initWithFrame: [[UIScreen mainScreen] applicationFrame]]; `}
+	new in "ObjC" `{ return [[UIView alloc] init]; `}
 
 	# Wraps: `UIView.addSubview`
 	fun add_subview(view: UIView) in "ObjC" `{
@@ -86,7 +86,7 @@ end
 extern class UIWindow in "ObjC" `{ UIWindow * `}
 	super UIView
 
-	new in "ObjC" `{ return [[UIWindow alloc] initWithFrame: [[UIScreen mainScreen] bounds]]; `}
+	new in "ObjC" `{ return [[UIWindow alloc] init]; `}
 
 	# Wraps: `[self makeKeyAndVisible]`
 	fun make_key_and_visible in "ObjC" `{
@@ -419,7 +419,7 @@ end
 extern class UITextField in "ObjC" `{ UITextField * `}
 	super UIControl
 
-	new in "ObjC" `{ return [[UITextField alloc] initWithFrame: [[UIScreen mainScreen] applicationFrame]]; `}
+	new in "ObjC" `{ return [[UITextField alloc] init]; `}
 
 	# Wraps: `UITextField.text`
 	fun text: NSString in "ObjC" `{
@@ -442,7 +442,7 @@ extern class UIStackView in "ObjC" `{ UIStackView * `}
 	super UIView
 
 	new in "ObjC" `{
-		return [[UIStackView alloc] initWithArrangedSubviews: [NSArray array]];
+		return [[UIStackView alloc] init];
 	`}
 
 	# Wraps: `[self addArrangedSubview:(UIView)view]`
@@ -611,8 +611,7 @@ end
 extern class UISwitch in "ObjC" `{ UISwitch * `}
 	super UIView
 
-	# Wraps: `[self initWithFrame:(CGRect)frame]`
-	new in "ObjC" `{ return [[UISwitch alloc] initWithFrame: [[UIScreen mainScreen] applicationFrame]]; `}
+	new in "ObjC" `{ return [[UISwitch alloc] init]; `}
 
 	# Wraps: `UISwitch.onTintColor`
 #	fun on_tint_color: UIColor in "ObjC" `{
