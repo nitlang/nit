@@ -356,6 +356,7 @@ redef class ADoExpr
 	do
 		self.break_mark = v.make_escape_mark(n_label, false)
 		v.enter_visit_block(n_block, self.break_mark)
+		v.enter_visit_block(n_catch)
 	end
 end
 

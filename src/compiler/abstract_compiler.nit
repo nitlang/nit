@@ -651,6 +651,8 @@ abstract class AbstractCompiler
 		self.header.add_decl("#include <stdlib.h>")
 		self.header.add_decl("#include <stdio.h>")
 		self.header.add_decl("#include <string.h>")
+		# longjmp !
+		self.header.add_decl("#include <setjmp.h>\n")
 		self.header.add_decl("#include <sys/types.h>\n")
 		self.header.add_decl("#include <unistd.h>\n")
 		self.header.add_decl("#include <stdint.h>\n")
@@ -679,6 +681,7 @@ abstract class AbstractCompiler
 
 		compile_header_structs
 		compile_nitni_structs
+		compile_catch_stack
 
 		var gccd_disable = modelbuilder.toolcontext.opt_no_gcc_directive.value
 		if gccd_disable.has("noreturn") or gccd_disable.has("all") then
@@ -705,6 +708,17 @@ abstract class AbstractCompiler
 		self.header.add_decl("extern int glob_argc;")
 		self.header.add_decl("extern char **glob_argv;")
 		self.header.add_decl("extern val *glob_sys;")
+	end
+
+	# Stack stocking environment for longjumps
+	protected fun compile_catch_stack do
+		self.header.add_decl """
+struct catch_stack_t {
+	int cursor;
+	jmp_buf envs[100];
+};
+extern struct catch_stack_t catchStack;
+"""
 	end
 
 	# Declaration of structures for live Nit types
@@ -790,6 +804,7 @@ extern void nitni_global_ref_decr( struct nitni_ref *ref );
 		v.add_decl("int glob_argc;")
 		v.add_decl("char **glob_argv;")
 		v.add_decl("val *glob_sys;")
+		v.add_decl("struct catch_stack_t catchStack;")
 
 		if self.modelbuilder.toolcontext.opt_typing_test_metrics.value then
 			for tag in count_type_test_tags do
@@ -878,6 +893,7 @@ extern void nitni_global_ref_decr( struct nitni_ref *ref );
 		v.add("signal(SIGPIPE, SIG_IGN);")
 
 		v.add("glob_argc = argc; glob_argv = argv;")
+		v.add("catchStack.cursor = -1;")
 		v.add("initialize_gc_option();")
 
 		v.add "initialize_nitni_global_refs();"
@@ -1731,6 +1747,9 @@ abstract class AbstractCompilerVisitor
 	# used by aborts, asserts, casts, etc.
 	fun add_abort(message: String)
 	do
+		self.add("if(catchStack.cursor >= 0)\{")
+		self.add("longjmp(catchStack.envs[catchStack.cursor], 1);")
+		self.add("\}")
 		self.add("PRINT_ERROR(\"Runtime error: %s\", \"{message.escape_to_c}\");")
 		add_raw_abort
 	end
@@ -3371,8 +3390,19 @@ end
 redef class ADoExpr
 	redef fun stmt(v)
 	do
-		v.stmt(self.n_block)
-		v.add_escape_label(break_mark)
+		if self.n_catch != null then
+			v.add("catchStack.cursor += 1;")
+			v.add("if(!setjmp(catchStack.envs[catchStack.cursor]))\{")
+			v.stmt(self.n_block)
+			v.add("catchStack.cursor -= 1;")
+			v.add("\}else \{")
+			v.add("catchStack.cursor -= 1;")
+			v.stmt(self.n_catch)
+			v.add("\}")
+		else
+			v.stmt(self.n_block)
+		end
+			v.add_escape_label(break_mark)
 	end
 end
 

@@ -160,6 +160,12 @@ end
 class TKwdebug
 	super Token
 end
+class TKwyield
+	super Token
+end
+class TKwcatch
+	super Token
+end
 class TOpar
 	super Token
 end
@@ -689,6 +695,11 @@ class AReturnExpr
 	var n_kwreturn: nullable TKwreturn = null is writable
 	var n_expr: nullable AExpr = null is writable
 end
+class AYieldExpr
+	super AExpr
+	var n_kwyield: TKwyield is writable, noinit
+	var n_expr: AExpr is writable, noinit
+end
 class ABreakExpr
 	super AExpr
 	var n_kwbreak: TKwbreak is writable, noinit
@@ -707,6 +718,8 @@ class ADoExpr
 	super AExpr
 	var n_kwdo: TKwdo is writable, noinit
 	var n_block: nullable AExpr = null is writable
+	var n_kwcatch: nullable TKwcatch = null is writable
+	var n_catch: nullable AExpr = null is writable
 	var n_label: nullable ALabel = null is writable
 end
 class AIfExpr

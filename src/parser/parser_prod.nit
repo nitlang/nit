@@ -2737,6 +2737,48 @@ redef class AReturnExpr
 		v.enter_visit(_n_expr)
 	end
 end
+redef class AYieldExpr
+	init init_ayieldexpr (
+		n_kwyield: nullable TKwyield,
+		n_expr: nullable AExpr
+	)
+	do
+		_n_kwyield = n_kwyield.as(not null)
+		n_kwyield.parent = self
+		_n_expr = n_expr.as(not null)
+		n_expr.parent = self
+	end
+
+	redef fun replace_child(old_child: ANode, new_child: nullable ANode)
+	do
+		if _n_kwyield == old_child then
+			n_kwyield = new_child.as(TKwyield)
+			return
+		end
+		if _n_expr == old_child then
+			n_expr = new_child.as(AExpr)
+			return
+		end
+	end
+
+	redef fun n_kwyield=(node)
+	do
+		_n_kwyield = node
+		node.parent = self
+	end
+	redef fun n_expr=(node)
+	do
+		_n_expr = node
+		node.parent = self
+	end
+
+
+	redef fun visit_all(v: Visitor)
+	do
+		v.enter_visit(_n_kwyield)
+		v.enter_visit(_n_expr)
+	end
+end
 redef class ABreakExpr
 	init init_abreakexpr (
 		n_kwbreak: nullable TKwbreak,
@@ -2854,6 +2896,8 @@ redef class ADoExpr
 	init init_adoexpr (
 		n_kwdo: nullable TKwdo,
 		n_block: nullable AExpr,
+		n_kwcatch: nullable TKwcatch,
+		n_catch: nullable AExpr,
 		n_label: nullable ALabel
 	)
 	do
@@ -2861,6 +2905,10 @@ redef class ADoExpr
 		n_kwdo.parent = self
 		_n_block = n_block
 		if n_block != null then n_block.parent = self
+		_n_kwcatch = n_kwcatch
+		if n_kwcatch != null then n_kwcatch.parent = self
+		_n_catch = n_catch
+		if n_catch != null then n_catch.parent = self
 		_n_label = n_label
 		if n_label != null then n_label.parent = self
 	end
@@ -2873,6 +2921,14 @@ redef class ADoExpr
 		end
 		if _n_block == old_child then
 			n_block = new_child.as(nullable AExpr)
+			return
+		end
+		if _n_kwcatch == old_child then
+			n_kwcatch = new_child.as(nullable TKwcatch)
+			return
+		end
+		if _n_catch == old_child then
+			n_catch = new_child.as(nullable AExpr)
 			return
 		end
 		if _n_label == old_child then
@@ -2891,6 +2947,16 @@ redef class ADoExpr
 		_n_block = node
 		if node != null then node.parent = self
 	end
+	redef fun n_kwcatch=(node)
+	do
+		_n_kwcatch = node
+		if node != null then node.parent = self
+	end
+	redef fun n_catch=(node)
+	do
+		_n_catch = node
+		if node != null then node.parent = self
+	end
 	redef fun n_label=(node)
 	do
 		_n_label = node
@@ -2902,6 +2968,8 @@ redef class ADoExpr
 	do
 		v.enter_visit(_n_kwdo)
 		v.enter_visit(_n_block)
+		v.enter_visit(_n_kwcatch)
+		v.enter_visit(_n_catch)
 		v.enter_visit(_n_label)
 	end
 end
