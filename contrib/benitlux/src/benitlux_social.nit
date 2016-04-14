@@ -110,6 +110,7 @@ GROUP BY beer0, beer1""") else
 			var user_id = row[0].to_i
 			var token = new_token(user_id)
 			var u = new User(user_id, row[1].to_s)
+			stmt.close
 			return new LoginResult(u, token)
 		end
 		return null
@@ -153,8 +154,12 @@ GROUP BY beer0, beer1""") else
 		# TODO update token timestamp and platform/client hint of last connection.
 		# These informations could help detect malicious access to the account.
 
-		for row in stmt do return row[0].to_i
-		return null
+		var res = null
+		for row in stmt do
+			res = row[0].to_i
+			break
+		end
+		return res
 	end
 
 	# Get `User` data from the integer `id`
@@ -163,8 +168,12 @@ GROUP BY beer0, beer1""") else
 		var stmt = select("name FROM users WHERE ROWID = {id}")
 		assert stmt != null
 
-		for row in stmt do return new User(id, row[0].to_s)
-		return null
+		var res = null
+		for row in stmt do
+			res = new User(id, row[0].to_s)
+			break
+		end
+		return res
 	end
 
 	# Try to sign up a new user, return `true` on success
@@ -211,8 +220,12 @@ GROUP BY beer0, beer1""") else
 		var b = beer_from_id(beer)
 		if b == null then return null
 
-		for row in stmt do return new BeerStats(b, row[0].to_f, row[1].to_i)
-		return null
+		var res = null
+		for row in stmt do
+			res = new BeerStats(b, row[0].to_f, row[1].to_i)
+			break
+		end
+		return res
 	end
 
 	# Fetch the most recent rating left by `user_id` about `beer`
@@ -220,8 +233,13 @@ GROUP BY beer0, beer1""") else
 	do
 		var stmt = select("rating FROM reviews WHERE author = {user_id} AND beer = {beer} ORDER BY ROWID DESC LIMIT 1")
 		assert stmt != null else print_error "Select 'rating' failed with: {error or else "?"}"
-		for row in stmt do return row[0].to_i
-		return null
+
+		var res = null
+		for row in stmt do
+			res = row[0].to_i
+			break
+		end
+		return res
 	end
 
 	# Register that `user_from` follows `user_to`
@@ -247,7 +265,8 @@ GROUP BY beer0, beer1""") else
 		assert stmt != null else
 			print_error "Select 'follows' failed with: {error or else "?"}"
 		end
-		for row in stmt do return true
+
+		for row in stmt.iterator.to_a do return true
 		return false
 	end
 
@@ -293,9 +312,10 @@ GROUP BY beer0, beer1""") else
 	# List reciprocal friends of `user_id`
 	fun followed_followers(user_id: Int): nullable Array[User]
 	do
-		var stmt = select("ROWID, name FROM users WHERE " +
-			"ROWID in (SELECT user_from FROM follows WHERE user_to = {user_id}) AND " +
-			"ROWID in (SELECT user_to FROM follows WHERE user_from = {user_id})")
+		var stmt = select("""
+ROWID, name FROM users WHERE
+	users.ROWID in (SELECT user_from FROM follows WHERE user_to = {{{user_id}}}) AND
+	users.ROWID in (SELECT user_to FROM follows WHERE user_from = {{{user_id}}})""")
 		assert stmt != null else print_error "Select 'followed_followers' failed with: {error or else "?"}"
 
 		var users = new Array[User]
@@ -495,8 +515,8 @@ ORDER BY average LIMIT 1""")
 		var sql = """
 ROWID, name FROM users
 WHERE 1 in (SELECT is_in FROM checkins WHERE user = users.ROWID ORDER BY ROWID DESC LIMIT 1)
-	AND ROWID in (SELECT user_from FROM follows WHERE user_to = {user_id})
-	AND ROWID in (SELECT user_to FROM follows WHERE user_from = {user_id})"""
+	AND ROWID in (SELECT user_from FROM follows WHERE user_to = {{{user_id}}})
+	AND ROWID in (SELECT user_to FROM follows WHERE user_from = {{{user_id}}})"""
 
 		var stmt = select(sql)
 		if stmt == null then

@@ -42,6 +42,8 @@ class Sqlite3DB
 	# Close this connection to the DB and all open statements
 	fun close
 	do
+		if not is_open then return
+
 		is_open = false
 
 		# close open statements
@@ -110,16 +112,32 @@ class Sqlite3DB
 	fun last_insert_rowid: Int do return native_connection.last_insert_rowid
 end
 
-# A prepared Sqlite3 statement, created from `Sqlite3DB::prepare` or `Sqlite3DB::select`
+# Prepared Sqlite3 statement
+#
+# Instances of this class are created from `Sqlite3DB::prepare` and
+# its shortcuts: `create_table`, `insert`, `replace` and `select`.
+# The results should be explored with an `iterator`,
+# and each call to `iterator` resets the request.
+# If `close_with_iterator` the iterator calls `close`
+# on this request upon finishing.
 class Statement
 	private var native_statement: NativeStatement
 
 	# Is this statement usable?
 	var is_open = true
 
+	# Should any `iterator` close this statement on `Iterator::finish`?
+	#
+	# If `true`, the default, any `StatementIterator` created by calls to
+	# `iterator` invokes `close` on this request when finished iterating.
+	# Otherwise, `close` must be called manually.
+	var close_with_iterator = true is writable
+
 	# Close and finalize this statement
 	fun close
 	do
+		if not is_open then return
+
 		is_open = false
 		native_statement.finalize
 	end
@@ -276,6 +294,8 @@ class StatementIterator
 			is_ok = false
 		end
 	end
+
+	redef fun finish do if statement.close_with_iterator then statement.close
 end
 
 # A data type supported by Sqlite3

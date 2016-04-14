@@ -955,6 +955,7 @@ redef class Iterator[E]
 			res.add(item)
 			next
 		end
+		finish
 		return res
 	end
 end
