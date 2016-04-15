@@ -697,6 +697,24 @@ extern class GtkLabel `{GtkLabel *`}
 		return gtk_label_get_angle(self);
 	`}
 
+	# Set simple formatted text content from a `format` string and the `content` which is escaped
+	#
+	# ~~~nitish
+	# GtkLabel lbl = new GtkLabel("Non-formatted text")
+	# lbl.set_markup("<span style=\"italic\">\%s</span>".to_cstring,
+	#                "Italic content")
+	# ~~~
+	fun set_markup(format, content: NativeString) `{
+		char *formatted = g_markup_printf_escaped(format, content);
+		gtk_label_set_markup(self, formatted);
+		g_free(formatted);
+	`}
+
+	# Set justification of the lines in the label relative to each other
+	fun justify=(value: GtkJustification) `{ gtk_label_set_justify(self, value); `}
+
+	# Get justification of the lines in the label relative to each other
+	fun justify: GtkJustification `{ return gtk_label_get_justify(self); `}
 end
 
 # A widget displaying an image
