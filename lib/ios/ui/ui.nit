@@ -42,7 +42,7 @@ in "ObjC" `{
 @interface UITableViewAndDataSource: NSObject <UITableViewDelegate, UITableViewDataSource>
 
 	// Nit object receiving the callbacks
-	@property ListLayout nit_list_layout;
+	@property TableView nit_list_layout;
 
 	// List of native views added to this list view from the Nit side
 	@property NSMutableArray *views;
@@ -58,19 +58,19 @@ in "ObjC" `{
 	}
 
 	- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-		return ListLayout_number_of_sections_in_table_view(self.nit_list_layout, tableView);
+		return TableView_number_of_sections_in_table_view(self.nit_list_layout, tableView);
 	}
 
 	- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-		return ListLayout_number_of_rows_in_section(self.nit_list_layout, tableView, section);
+		return TableView_number_of_rows_in_section(self.nit_list_layout, tableView, section);
 	}
 
 	- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-		return ListLayout_title_for_header_in_section(self.nit_list_layout, tableView, section);
+		return TableView_title_for_header_in_section(self.nit_list_layout, tableView, section);
 	}
 
 	- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-		return ListLayout_cell_for_row_at_index_path(self.nit_list_layout, tableView, indexPath);
+		return TableView_cell_for_row_at_index_path(self.nit_list_layout, tableView, indexPath);
 	}
 @end
 `}
@@ -284,7 +284,49 @@ redef class UIButton
 	`}
 end
 
+# On iOS, implemented by a `UIStackView` inside a ` UIScrollView`
 redef class ListLayout
+
+	redef type NATIVE: UIScrollView
+	redef var native = new UIScrollView
+
+	# Real container of the subviews, contained within `native`
+	var native_stack_view = new UIStackView
+
+	init
+	do
+		native_stack_view.translates_autoresizing_mask_into_constraits = false
+		native_stack_view.axis = new UILayoutConstraintAxis.vertical
+		native_stack_view.alignment = new UIStackViewAlignment.fill
+		native_stack_view.distribution = new UIStackViewDistribution.fill_equally
+		native_stack_view.spacing = 4.0
+
+		native.add_subview native_stack_view
+		native_add_constraints(native, native_stack_view)
+	end
+
+	private fun native_add_constraints(scroll_view: UIScrollView, stack_view: UIStackView) in "ObjC" `{
+		[scroll_view addConstraints:[NSLayoutConstraint
+			constraintsWithVisualFormat: @"V:|-8-[view]-8-|"
+			options: NSLayoutFormatAlignAllCenterX metrics: nil views: @{@"view": stack_view}]];
+		[scroll_view addConstraints:[NSLayoutConstraint
+			constraintsWithVisualFormat: @"H:|-8-[view]"
+			options: NSLayoutFormatAlignAllCenterX metrics: nil views: @{@"view": stack_view}]];
+	`}
+
+	redef fun add(view)
+	do
+		super
+
+		if view isa View then
+			native_stack_view.add_arranged_subview view.native
+		end
+	end
+end
+
+# iOS specific layout using a `UITableView`, works only with simple children views
+class TableView
+	super CompositeControl
 
 	redef type NATIVE: UITableView
 	redef var native = new UITableView(new UITableViewStyle.plain)
@@ -385,17 +427,17 @@ end
 redef class UITableView
 
 	# Assign `list_view` as `delegate` and `dataSource`, and pin all references in both GCs
-	private fun assign_delegate_and_data_source(list_view: ListLayout)
-	import ListLayout.number_of_sections_in_table_view,
-	       ListLayout.number_of_rows_in_section,
-	       ListLayout.title_for_header_in_section,
-	       ListLayout.cell_for_row_at_index_path in "ObjC" `{
+	private fun assign_delegate_and_data_source(list_view: TableView)
+	import TableView.number_of_sections_in_table_view,
+	       TableView.number_of_rows_in_section,
+	       TableView.title_for_header_in_section,
+	       TableView.cell_for_row_at_index_path in "ObjC" `{
 
 		UITableViewAndDataSource *objc_delegate = [[UITableViewAndDataSource alloc] init];
 		objc_delegate = (__bridge UITableViewAndDataSource*)CFBridgingRetain(objc_delegate);
 
 		objc_delegate.nit_list_layout = list_view;
-		ListLayout_incr_ref(list_view);
+		TableView_incr_ref(list_view);
 
 		// Set our
 		self.delegate = objc_delegate;

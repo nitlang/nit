@@ -648,3 +648,10 @@ extern class UISwitch in "ObjC" `{ UISwitch * `}
 		[self setOn: on animated: animated];
 	`}
 end
+
+# Support for displaying content larger than the window
+extern class UIScrollView in "ObjC" `{ UIScrollView* `}
+	super UIView
+
+	new in "ObjC" `{ return [[UIScrollView alloc] init]; `}
+end
