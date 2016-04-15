@@ -63,7 +63,7 @@ extern class NSData in "ObjC" `{ NSData * `}
 	# Number of bytes containted in `self`
 	fun length: Int in "ObjC" `{ return self.length; `}
 
-	redef fun to_s do return bytes.to_s_with_length(length)
+	redef fun to_s do return bytes.to_s_with_copy_and_length(length)
 end
 
 # Error condition
