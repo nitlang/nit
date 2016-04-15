@@ -280,8 +280,8 @@ redef class CheckBox
 	init
 	do
 		# Tweak the layout so it is centered
-		layout.native.distribution = new UIStackViewDistribution.fill_proportionally
-		layout.native.alignment = new UIStackViewAlignment.center
+		layout.native.distribution = new UIStackViewDistribution.equal_spacing
+		layout.native.alignment = new UIStackViewAlignment.fill
 		layout.native.layout_margins_relative_arrangement = true
 
 		var s = new UISwitch
@@ -377,7 +377,7 @@ redef class ListLayout
 		native_stack_view.translates_autoresizing_mask_into_constraits = false
 		native_stack_view.axis = new UILayoutConstraintAxis.vertical
 		native_stack_view.alignment = new UIStackViewAlignment.fill
-		native_stack_view.distribution = new UIStackViewDistribution.fill_equally
+		native_stack_view.distribution = new UIStackViewDistribution.equal_spacing
 		native_stack_view.spacing = 4.0
 
 		native.add_subview native_stack_view
