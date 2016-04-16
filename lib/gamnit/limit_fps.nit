@@ -29,8 +29,8 @@ redef class App
 
 	# Current frame-rate
 	#
-	# Updated each 5 seconds.
-	var current_fps = 0.0
+	# Updated each 5 seconds, initialized at the value of `maximum_fps`.
+	var current_fps: Float = maximum_fps is lazy
 
 	redef fun frame_full
 	do
@@ -47,7 +47,7 @@ redef class App
 	private var frame_count = 0
 
 	# Deadline used to compute `current_fps`
-	private var frame_count_deadline = 0
+	private var frame_count_deadline = 5
 
 	# Check and sleep to maintain a frame-rate bellow `maximum_fps`
 	#
