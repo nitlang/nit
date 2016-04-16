@@ -50,7 +50,7 @@ class ModelAsset
 
 		if leaves.is_empty then
 			# Nothing was loaded, use a cube with the default material
-			var leaf = new LeafModel(new Cube, new SmoothMaterial.default)
+			var leaf = placeholder_model
 			leaves.add leaf
 		end
 	end
@@ -383,4 +383,9 @@ redef class Sys
 
 	# All instantiated asset models
 	var models = new Set[ModelAsset]
+
+	# Blue cube of 1 unit on each side, acting as placeholder for models failing to load
+	#
+	# This model can be freely used by any `Actor` as placeholder or for debugging.
+	var placeholder_model = new LeafModel(new Cube, new SmoothMaterial.default) is lazy
 end
