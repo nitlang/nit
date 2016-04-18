@@ -42,7 +42,7 @@ in "ObjC" `{
 @interface UITableViewAndDataSource: NSObject <UITableViewDelegate, UITableViewDataSource>
 
 	// Nit object receiving the callbacks
-	@property ListLayout nit_list_layout;
+	@property TableView nit_list_layout;
 
 	// List of native views added to this list view from the Nit side
 	@property NSMutableArray *views;
@@ -58,19 +58,19 @@ in "ObjC" `{
 	}
 
 	- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-		return ListLayout_number_of_sections_in_table_view(self.nit_list_layout, tableView);
+		return TableView_number_of_sections_in_table_view(self.nit_list_layout, tableView);
 	}
 
 	- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-		return ListLayout_number_of_rows_in_section(self.nit_list_layout, tableView, section);
+		return TableView_number_of_rows_in_section(self.nit_list_layout, tableView, section);
 	}
 
 	- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-		return ListLayout_title_for_header_in_section(self.nit_list_layout, tableView, section);
+		return TableView_title_for_header_in_section(self.nit_list_layout, tableView, section);
 	}
 
 	- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-		return ListLayout_cell_for_row_at_index_path(self.nit_list_layout, tableView, indexPath);
+		return TableView_cell_for_row_at_index_path(self.nit_list_layout, tableView, indexPath);
 	}
 @end
 `}
@@ -78,14 +78,38 @@ in "ObjC" `{
 redef class App
 	redef fun did_finish_launching_with_options
 	do
+		app_delegate.window = new UIWindow
+		app_delegate.window.background_color = new UIColor.white_color
 		super
-		window.native.make_key_and_visible
+		app_delegate.window.make_key_and_visible
 		return true
 	end
 
+	private fun set_view_controller(window: UIWindow, native: UIViewController)
+	in "ObjC" `{
+		// Set the required root view controller
+		UINavigationController *navController = (UINavigationController*)window.rootViewController;
+
+		if (navController == NULL) {
+			navController = [[UINavigationController alloc]initWithRootViewController:native];
+			navController.edgesForExtendedLayout = UIRectEdgeNone;
+
+			// Must be non-translucent for the controls to be placed under
+			// (as in Y axis) of the navigation bar.
+			navController.navigationBar.translucent = NO;
+
+			window.rootViewController = navController;
+		}
+		else {
+			[navController pushViewController:native animated:YES];
+		}
+
+		native.edgesForExtendedLayout = UIRectEdgeNone;
+	`}
+
 	redef fun window=(window)
 	do
-		app_delegate.window = window.native
+		set_view_controller(app_delegate.window, window.native)
 		super
 	end
 end
@@ -120,18 +144,22 @@ redef class CompositeControl
 	do
 		super
 
-		var native_view = view.native
-		assert native_view isa UIView
-		native_view.remove_from_superview
+		if view isa View then
+			view.native.remove_from_superview
+		end
 	end
 end
 
 redef class Window
 
-	redef type NATIVE: UIWindow
-	redef var native = new UIWindow
+	redef type NATIVE: UIViewController
+	redef var native = new UIViewController
 
-	init do native.background_color = new UIColor.white_color
+	# Title of this window
+	fun title: String do return native.title.to_s
+
+	# Set the title of this window
+	fun title=(title: String) do native.title = title.to_nsstring
 
 	redef fun add(view)
 	do
@@ -139,26 +167,9 @@ redef class Window
 
 		var native_view = view.native
 		assert native_view isa UIView
-		native.add_subview native_view
 
-		fill_whole_window_with(native_view, native)
+		native.view = native_view
 	end
-
-	private fun fill_whole_window_with(native: UIView, window: UIWindow)
-	in "ObjC" `{
-		// Hard coded borders including the top bar
-		// FIXME this may cause problems with retina devices
-		[window addConstraints:[NSLayoutConstraint
-			constraintsWithVisualFormat: @"V:|-24-[view]-8-|"
-			options: 0 metrics: nil views: @{@"view": native}]];
-		[window addConstraints:[NSLayoutConstraint
-			constraintsWithVisualFormat: @"H:|-8-[view]-8-|"
-			options: 0 metrics: nil views: @{@"view": native}]];
-
-		// Set the required root view controller
-		window.rootViewController = [[UIViewController alloc]initWithNibName:nil bundle:nil];
-		window.rootViewController.view = native;
-	`}
 end
 
 redef class Layout
@@ -170,7 +181,6 @@ redef class Layout
 	do
 		native.alignment = new UIStackViewAlignment.fill
 		native.distribution = new UIStackViewDistribution.fill_equally
-		native.translates_autoresizing_mask_into_constraits = false
 
 		# TODO make customizable
 		native.spacing = 4.0
@@ -309,7 +319,49 @@ redef class UIButton
 	`}
 end
 
+# On iOS, implemented by a `UIStackView` inside a ` UIScrollView`
 redef class ListLayout
+
+	redef type NATIVE: UIScrollView
+	redef var native = new UIScrollView
+
+	# Real container of the subviews, contained within `native`
+	var native_stack_view = new UIStackView
+
+	init
+	do
+		native_stack_view.translates_autoresizing_mask_into_constraits = false
+		native_stack_view.axis = new UILayoutConstraintAxis.vertical
+		native_stack_view.alignment = new UIStackViewAlignment.fill
+		native_stack_view.distribution = new UIStackViewDistribution.fill_equally
+		native_stack_view.spacing = 4.0
+
+		native.add_subview native_stack_view
+		native_add_constraints(native, native_stack_view)
+	end
+
+	private fun native_add_constraints(scroll_view: UIScrollView, stack_view: UIStackView) in "ObjC" `{
+		[scroll_view addConstraints:[NSLayoutConstraint
+			constraintsWithVisualFormat: @"V:|-8-[view]-8-|"
+			options: NSLayoutFormatAlignAllCenterX metrics: nil views: @{@"view": stack_view}]];
+		[scroll_view addConstraints:[NSLayoutConstraint
+			constraintsWithVisualFormat: @"H:|-8-[view]"
+			options: NSLayoutFormatAlignAllCenterX metrics: nil views: @{@"view": stack_view}]];
+	`}
+
+	redef fun add(view)
+	do
+		super
+
+		if view isa View then
+			native_stack_view.add_arranged_subview view.native
+		end
+	end
+end
+
+# iOS specific layout using a `UITableView`, works only with simple children views
+class TableView
+	super CompositeControl
 
 	redef type NATIVE: UITableView
 	redef var native = new UITableView(new UITableViewStyle.plain)
@@ -410,17 +462,17 @@ end
 redef class UITableView
 
 	# Assign `list_view` as `delegate` and `dataSource`, and pin all references in both GCs
-	private fun assign_delegate_and_data_source(list_view: ListLayout)
-	import ListLayout.number_of_sections_in_table_view,
-	       ListLayout.number_of_rows_in_section,
-	       ListLayout.title_for_header_in_section,
-	       ListLayout.cell_for_row_at_index_path in "ObjC" `{
+	private fun assign_delegate_and_data_source(list_view: TableView)
+	import TableView.number_of_sections_in_table_view,
+	       TableView.number_of_rows_in_section,
+	       TableView.title_for_header_in_section,
+	       TableView.cell_for_row_at_index_path in "ObjC" `{
 
 		UITableViewAndDataSource *objc_delegate = [[UITableViewAndDataSource alloc] init];
 		objc_delegate = (__bridge UITableViewAndDataSource*)CFBridgingRetain(objc_delegate);
 
 		objc_delegate.nit_list_layout = list_view;
-		ListLayout_incr_ref(list_view);
+		TableView_incr_ref(list_view);
 
 		// Set our
 		self.delegate = objc_delegate;

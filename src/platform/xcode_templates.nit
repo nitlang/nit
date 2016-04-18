@@ -494,7 +494,7 @@ class PlistTemplate
 	<key>CFBundleShortVersionString</key>
 	<string>{{{short_version}}}</string>
 	<key>CFBundleSignature</key>
-	<string>\\?\\?\\?\\?</string>
+	<string>????</string>
 	<key>CFBundleVersion</key>
 	<string>{{{bundle_version}}}</string>
 	<key>LSRequiresIPhoneOS</key>
