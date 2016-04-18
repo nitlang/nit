@@ -2041,22 +2041,43 @@ do
 end
 
 redef class NativeString
-	# Returns `self` as a new String.
+	# Get a `String` from the data at `self` copied into Nit memory
+	#
+	# Require: `self` is a null-terminated string.
 	fun to_s_with_copy: String is abstract
 
-	# Returns `self` as a String of `length`.
+	# Get a `String` from `length` bytes at `self`
+	#
+	# The result may point to the data at `self` or
+	# it may make a copy in Nit controlled memory.
+	# This method should only be used when `self` was allocated by the Nit GC,
+	# or when manually controlling the deallocation of `self`.
 	fun to_s_with_length(length: Int): String is abstract
 
-	# Returns a new instance of `String` with self as `_items`
+	# Get a `String` from the raw `length` bytes at `self`
 	#
-	# /!\: Does not clean the items for compliance with UTF-8,
-	# Use only if you know what you are doing
-	fun to_s_unsafe(len: nullable Int): String is abstract
+	# The default value of `length` is the number of bytes before
+	# the first null character.
+	#
+	# The created `String` points to the data at `self`.
+	# This method should be used when `self` was allocated by the Nit GC,
+	# or when manually controlling the deallocation of `self`.
+	#
+	# /!\: This service does not clean the items for compliance with UTF-8,
+	# use only when the data has already been verified as valid UTF-8.
+	fun to_s_unsafe(length: nullable Int): String is abstract
 
-	# Returns `self` as a String with `bytelen` and `length` set
+	# Get a `String` from the raw `bytelen` bytes at `self` with `unilen` Unicode characters
 	#
-	# SEE: `abstract_text::Text` for more infos on the difference
-	# between `Text::bytelen` and `Text::length`
+	# The created `String` points to the data at `self`.
+	# This method should be used when `self` was allocated by the Nit GC,
+	# or when manually controlling the deallocation of `self`.
+	#
+	# /!\: This service does not clean the items for compliance with UTF-8,
+	# use only when the data has already been verified as valid UTF-8.
+	#
+	# SEE: `abstract_text::Text` for more info on the difference
+	# between `Text::bytelen` and `Text::length`.
 	fun to_s_full(bytelen, unilen: Int): String is abstract
 end
 
