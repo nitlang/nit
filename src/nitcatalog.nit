@@ -138,57 +138,6 @@ redef class Catalog
 		return new CatalogPage(self, rootpath)
 	end
 
-	# Add a contributor to a package
-	fun add_contrib(person: String, mpackage: MPackage, res: Template)
-	do
-		var name = person
-		var email = null
-		var page = null
-
-		# Regular expressions are broken, need to investigate.
-		# So split manually.
-		#
-		#var re = "([^<(]*?)(<([^>]*?)>)?(\\((.*)\\))?".to_re
-		#var m = (person+" ").search(re)
-		#print "{person}: `{m or else "?"}` `{m[1] or else "?"}` `{m[3] or else "?"}` `{m[5] or else "?"}`"
-		do
-			var sp1 = person.split_once_on("<")
-			if sp1.length < 2 then
-				break
-			end
-			var sp2 = sp1.last.split_once_on(">")
-			if sp2.length < 2 then
-				break
-			end
-			name = sp1.first.trim
-			email = sp2.first.trim
-			var sp3 = sp2.last.split_once_on("(")
-			if sp3.length < 2 then
-				break
-			end
-			var sp4 = sp3.last.split_once_on(")")
-			if sp4.length < 2 then
-				break
-			end
-			page = sp4.first.trim
-		end
-
-		var e = name.html_escape
-		res.add "<li>"
-		if page != null then
-			res.add "<a href=\"{page.html_escape}\">"
-		end
-		if email != null then
-			# TODO get more things from github by using the email as a key
-			# "https://api.github.com/search/users?q={email}+in:email"
-			var md5 = email.md5.to_lower
-			res.add "<img src=\"https://secure.gravatar.com/avatar/{md5}?size=20&amp;default=retro\">&nbsp;"
-		end
-		res.add "{e}"
-		if page != null then res.add "</a>"
-		res.add "</li>"
-	end
-
 	# Recursively generate a level in the file tree of the *content* section
 	private fun gen_content_level(ot: OrderedTree[MConcern], os: Array[Object], res: Template)
 	do
@@ -268,9 +217,8 @@ redef class Catalog
 			var e = homepage.html_escape
 			res.add "<li><a href=\"{e}\">{e}</a></li>\n"
 		end
-		var maintainer = mpackage.metadata("package.maintainer")
-		if maintainer != null then
-			add_contrib(maintainer, mpackage, res)
+		for maintainer in mpackage.maintainers do
+			res.add "<li>{maintainer.to_html}</li>"
 		end
 		var license = mpackage.metadata("package.license")
 		if license != null then
@@ -360,7 +308,7 @@ redef class Catalog
 		if not contributors.is_empty then
 			res.add "<h3>Contributors</h3>\n<ul class=\"box\">"
 			for c in contributors do
-				add_contrib(c, mpackage, res)
+				res.add "<li>{c.to_html}</li>"
 			end
 			res.add "</ul>"
 		end
@@ -401,18 +349,18 @@ redef class Catalog
 	#
 	# The list of keys is generated first to allow fast access to the correct `<h3>`.
 	# `id_prefix` is used to give an id to the `<h3>` element.
-	fun list_by(map: MultiHashMap[String, MPackage], id_prefix: String): Template
+	fun list_by(map: MultiHashMap[Object, MPackage], id_prefix: String): Template
 	do
 		var res = new Template
 		var keys = map.keys.to_a
 		alpha_comparator.sort(keys)
-		var list = [for x in keys do "<a href=\"#{id_prefix}{x.html_escape}\">{x.html_escape}</a>"]
+		var list = [for x in keys do "<a href=\"#{id_prefix}{x.to_s.html_escape}\">{x.to_s.html_escape}</a>"]
 		res.add_list(list, ", ", " and ")
 
 		for k in keys do
 			var projs = map[k].to_a
 			alpha_comparator.sort(projs)
-			var e = k.html_escape
+			var e = k.to_s.html_escape
 			res.add "<h3 id=\"{id_prefix}{e}\">{e} ({projs.length})</h3>\n<ul>\n"
 			for p in projs do
 				res.add "<li>"
@@ -470,7 +418,7 @@ redef class Catalog
 			res.add "<tr>"
 			res.add "<td><a href=\"p/{p.name}.html\">{p.name}</a></td>"
 			var maint = "?"
-			if p.maintainers.not_empty then maint = p.maintainers.first
+			if p.maintainers.not_empty then maint = p.maintainers.first.name.html_escape
 			res.add "<td>{maint}</td>"
 			res.add "<td>{p.contributors.length}</td>"
 			if deps.not_empty then

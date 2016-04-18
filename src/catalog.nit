@@ -30,7 +30,7 @@
 # * [ ] gather git information from the repository
 # * [ ] gather package information from github
 # * [ ] gather people information from github
-# * [ ] reify people
+# * [X] reify people
 # * [X] separate information gathering from rendering
 # * [ ] move up information gathering in (existing or new) service modules
 # * [X] add command line options
@@ -65,10 +65,10 @@ redef class MPackage
 	var tags = new Array[String]
 
 	# The list of maintainers
-	var maintainers = new Array[String]
+	var maintainers = new Array[Person]
 
 	# The list of contributors
-	var contributors = new Array[String]
+	var contributors = new Array[Person]
 
 	# The date of the most recent commit
 	var last_date: nullable String = null
@@ -81,6 +81,119 @@ redef class Int
 	# Returns `log(self+1)`. Used to compute score of packages
 	fun score: Float do return (self+1).to_f.log
 end
+
+# A contributor/author/etc.
+#
+# It comes from git or the metadata
+#
+# TODO get more things from github by using the email as a key
+# "https://api.github.com/search/users?q={email}+in:email"
+class Person
+	# The name. Eg "John Doe"
+	var name: String is writable
+
+	# The email, Eg "john.doe@example.com"
+	var email: nullable String is writable
+
+	# Some homepage. Eg "http://example.com/~jdoe"
+	var page: nullable String is writable
+
+	# Return a full-featured link to a person
+	fun to_html: String
+	do
+		var res = ""
+		var e = name.html_escape
+		var page = self.page
+		if page != null then
+			res += "<a href=\"{page.html_escape}\">"
+		end
+		var email = self.email
+		if email != null then
+			var md5 = email.md5.to_lower
+			res += "<img src=\"https://secure.gravatar.com/avatar/{md5}?size=20&amp;default=retro\">&nbsp;"
+		end
+		res += e
+		if page != null then res += "</a>"
+		return res
+	end
+
+	# The standard representation of a person.
+	#
+	# ~~~
+	# var jd = new Person("John Doe", "john.doe@example.com", "http://example.com/~jdoe")
+	# assert jd.to_s == "John Doe <john.doe@example.com> (http://example.com/~jdoe)"
+	# ~~~
+	#
+	# It can be used as the input of `parse`.
+	#
+	# ~~~
+	# var jd2 = new Person.parse(jd.to_s)
+	# assert jd2.to_s == jd.to_s
+	# ~~~
+	redef fun to_s
+	do
+		var res = name
+		var email = self.email
+		if email != null then res += " <{email}>"
+		var page = self.page
+		if page != null then res += " ({page})"
+		return res
+	end
+
+	# Crete a new person from its standard textual representation.
+	#
+	# ~~~
+	# var jd = new Person.parse("John Doe <john.doe@example.com> (http://example.com/~jdoe)")
+	# assert jd.name == "John Doe"
+	# assert jd.email == "john.doe@example.com"
+	# assert jd.page == "http://example.com/~jdoe"
+	# ~~~
+	#
+	# Emails and page are optional.
+	#
+	# ~~~
+	# var jd2 = new Person.parse("John Doe")
+	# assert jd2.name == "John Doe"
+	# assert jd2.email == null
+	# assert jd2.page == null
+	# ~~~
+	init parse(person: String)
+	do
+		var name = person
+		var email = null
+		var page = null
+		# Regular expressions are broken, need to investigate.
+		# So split manually.
+		#
+		#var re = "([^<(]*?)(<([^>]*?)>)?(\\((.*)\\))?".to_re
+		#var m = (person+" ").search(re)
+		#print "{person}: `{m or else "?"}` `{m[1] or else "?"}` `{m[3] or else "?"}` `{m[5] or else "?"}`"
+		do
+			var sp1 = person.split_once_on("<")
+			if sp1.length < 2 then
+				break
+			end
+			var sp2 = sp1.last.split_once_on(">")
+			if sp2.length < 2 then
+				break
+			end
+			name = sp1.first.trim
+			email = sp2.first.trim
+			var sp3 = sp2.last.split_once_on("(")
+			if sp3.length < 2 then
+				break
+			end
+			var sp4 = sp3.last.split_once_on(")")
+			if sp4.length < 2 then
+				break
+			end
+			page = sp4.first.trim
+		end
+
+		init(name, email, page)
+	end
+end
+
 
 # The main class of the calatog generator that has the knowledge
 class Catalog
@@ -96,10 +209,10 @@ class Catalog
 	var cat2proj = new MultiHashMap[String, MPackage]
 
 	# Packages by maintainer
-	var maint2proj = new MultiHashMap[String, MPackage]
+	var maint2proj = new MultiHashMap[Person, MPackage]
 
 	# Packages by contributors
-	var contrib2proj = new MultiHashMap[String, MPackage]
+	var contrib2proj = new MultiHashMap[Person, MPackage]
 
 	# Dependency between packages
 	var deps = new POSet[MPackage]
@@ -124,11 +237,23 @@ class Catalog
 	# The score is loosely computed using other metrics
 	var score = new Counter[MPackage]
 
+	# List of known people
+	var persons = new HashMap[String, Person]
+
 	# Scan, register and add a contributor to a package
-	fun register_contrib(person: String, mpackage: MPackage)
+	fun register_contrib(person: String, mpackage: MPackage): Person
 	do
-		var projs = contrib2proj[person]
-		if not projs.has(mpackage) then projs.add mpackage
+		var p = persons.get_or_null(person)
+		if p == null then
+			p = new Person.parse(person)
+			persons[person] = p
+		end
+		var projs = contrib2proj[p]
+		if not projs.has(mpackage) then
+			projs.add mpackage
+			mpackage.contributors.add p
+		end
+		return p
 	end
 
 	# Compute information for a package
@@ -159,9 +284,9 @@ class Catalog
 		var maintainer = mpackage.metadata("package.maintainer")
 		if maintainer != null then
 			score += 5.0
-			register_contrib(maintainer, mpackage)
-			mpackage.maintainers.add maintainer
-			var projs = maint2proj[maintainer]
+			var person = register_contrib(maintainer, mpackage)
+			mpackage.maintainers.add person
+			var projs = maint2proj[person]
 			if not projs.has(mpackage) then projs.add mpackage
 		end
 		var license = mpackage.metadata("package.license")
@@ -204,12 +329,7 @@ class Catalog
 		var more_contributors = mpackage.metadata("package.more_contributors")
 		if more_contributors != null then
 			for c in more_contributors.split(",") do
-				contributors.add c.trim
-			end
-		end
-		if not contributors.is_empty then
-			for c in contributors do
-				register_contrib(c, mpackage)
+				register_contrib(c.trim, mpackage)
 			end
 		end
 		score += contributors.length.to_f
@@ -282,7 +402,7 @@ class Catalog
 			contributors.inc(s.last)
 		end
 		for c in contributors.sort.reverse_iterator do
-			mpackage.contributors.add c
+			register_contrib(c, mpackage)
 		end
 
 	end
