@@ -322,6 +322,52 @@ redef class MClass
 		set.add_all(collect_inherited_mattributes(view))
 		return set
 	end
+
+	# Collect init mmethods introduced in 'self' if accepted by `view`.
+	fun collect_intro_inits(view: ModelView): Set[MMethod] do
+		var res = new HashSet[MMethod]
+		for mproperty in collect_intro_mmethods(view) do
+			if mproperty.is_init then res.add(mproperty)
+		end
+		return res
+	end
+
+	# Collect init mmethods redefined in 'self' if accepted by `view`.
+	fun collect_redef_inits(view: ModelView): Set[MMethod] do
+		var res = new HashSet[MMethod]
+		for mproperty in collect_redef_mmethods(view) do
+			if mproperty.is_init then res.add(mproperty)
+		end
+		return res
+	end
+
+	# Collect init mmethods introduced and redefined in 'self' if accepted by `view`.
+	fun collect_local_inits(view: ModelView): Set[MMethod] do
+		var set = new HashSet[MMethod]
+		set.add_all collect_intro_inits(view)
+		set.add_all collect_redef_inits(view)
+		return set
+	end
+
+	# Collect init mmethods inherited by 'self'  if accepted by `view`.
+	fun collect_inherited_inits(view: ModelView): Set[MMethod] do
+		var res = new HashSet[MMethod]
+		for mproperty in collect_inherited_mmethods(view) do
+			if mproperty.is_init then res.add(mproperty)
+		end
+		return res
+	end
+
+	# Collect all init mmethods accessible by 'self'  if accepted by `view`.
+	#
+	# This include introduced, redefined, inherited inits.
+	fun collect_accessible_inits(view: ModelView): Set[MMethod] do
+		var set = new HashSet[MMethod]
+		set.add_all(collect_intro_inits(view))
+		set.add_all(collect_redef_inits(view))
+		set.add_all(collect_inherited_inits(view))
+		return set
+	end
 end
 
 redef class MClassDef
