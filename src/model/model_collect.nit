@@ -268,6 +268,15 @@ redef class MClass
 		return set
 	end
 
+	# Collect mmethods inherited by 'self' if accepted by `view`.
+	fun collect_inherited_mmethods(view: ModelView): Set[MMethod] do
+		var res = new HashSet[MMethod]
+		for mproperty in collect_inherited_mproperties(view) do
+			if mproperty isa MMethod then res.add(mproperty)
+		end
+		return res
+	end
+
 	# Collect mattributes introduced in 'self' with `visibility >= min_visibility`.
 	fun collect_intro_mattributes(view: ModelView): Set[MAttribute] do
 		var res = new HashSet[MAttribute]
