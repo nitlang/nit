@@ -49,11 +49,11 @@ private class NitwebPhase
 
 		var app = new App
 		app.use("/random", new RandomAction(model))
-		app.use("/doc/:namespace", new DocAction(model, modelbuilder))
+		app.use("/doc/:namespace", new DocAction(model, mainmodule, modelbuilder))
 		app.use("/code/:namespace", new CodeAction(model, modelbuilder))
 		app.use("/search/:namespace", new SearchAction(model))
 		app.use("/uml/:namespace", new UMLDiagramAction(model, mainmodule))
-		app.use("/", new TreeAction(model))
+		app.use("/", new TreeAction(model, mainmodule))
 
 		app.listen(host, port.to_i)
 	end
