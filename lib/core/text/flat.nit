@@ -1168,8 +1168,7 @@ redef class NativeString
 		return to_s_with_length(cstring_length)
 	end
 
-	# Returns `self` as a String of `length`.
-	redef fun to_s_with_length(length): FlatString
+	redef fun to_s_with_length(length)
 	do
 		assert length >= 0
 		return clean_utf8(length)
@@ -1184,10 +1183,11 @@ redef class NativeString
 		return new FlatString.with_infos(self, len, 0)
 	end
 
-	# Returns `self` as a new String.
-	redef fun to_s_with_copy: FlatString
+	redef fun to_s_with_copy do return to_s_with_copy_and_length(cstring_length)
+
+	# Get a `String` from `length` bytes at `self` copied into Nit memory
+	fun to_s_with_copy_and_length(length: Int): String
 	do
-		var length = cstring_length
 		var r = clean_utf8(length)
 		if r.items != self then return r
 		var new_self = new NativeString(length + 1)
