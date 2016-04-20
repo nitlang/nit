@@ -34,11 +34,11 @@ redef class App
 	do
 		display.clear(0.2, 0.2, 0.2)
 
-		display.blit(img_set.square, 0, 0 )
-		display.blit(img_set.circle, 100, 100 )
-		display.blit(img_set.circles[0], 0, 100 )
-		display.blit(img_set.circles[1], 0, 200 )
-		display.blit(img_set.circles[2], 0, 300 )
+		display.blit(img_set.square, 0, 0)
+		display.blit(img_set.circle, 100, 100)
+		display.blit(img_set.circles[0], 0, 100)
+		display.blit(img_set.circles[1], 0, 200)
+		display.blit(img_set.circles[2], 0, 300)
 	end
 
 	redef fun input( ie )
