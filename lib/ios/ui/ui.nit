@@ -25,16 +25,16 @@ in "ObjC" `{
 @interface NitCallbackReference: NSObject
 
 	// Nit object target of the callbacks from UI events
-	@property (nonatomic) Button nit_button;
+	@property (nonatomic) View nit_view;
 
 	// Actual callback method
-	-(void) nitOnEvent: (UIButton*) sender;
+	-(void) nitOnEvent: (UIView*) sender;
 @end
 
 @implementation NitCallbackReference
 
-	-(void) nitOnEvent: (UIButton*) sender {
-		Button_on_click(self.nit_button);
+	-(void) nitOnEvent: (UIView*) sender {
+		View_on_ios_event(self.nit_view);
 	}
 @end
 
@@ -136,6 +136,8 @@ redef class View
 	redef type NATIVE: UIView
 
 	redef var enabled = null is lazy
+
+	private fun on_ios_event do end
 end
 
 redef class CompositeControl
@@ -253,7 +255,10 @@ redef class CheckBox
 	# `UISwitch` acting as the real check box
 	var ui_switch: UISwitch is noautoinit
 
-	init do
+	redef fun on_ios_event do notify_observers new ToggleEvent(self)
+
+	init
+	do
 		# Tweak the layout so it is centered
 		layout.native.distribution = new UIStackViewDistribution.fill_proportionally
 		layout.native.alignment = new UIStackViewAlignment.center
@@ -262,6 +267,8 @@ redef class CheckBox
 		var s = new UISwitch
 		native.add_arranged_subview s
 		ui_switch = s
+
+		ui_switch.set_callback self
 	end
 
 	redef fun text=(text) do lbl.text = text
@@ -269,6 +276,23 @@ redef class CheckBox
 
 	redef fun is_checked do return ui_switch.on
 	redef fun is_checked=(value) do ui_switch.set_on_animated(value, true)
+end
+
+redef class UISwitch
+	# Register callbacks on this switch to be relayed to `sender`
+	private fun set_callback(sender: View)
+	import View.on_ios_event in "ObjC" `{
+
+		NitCallbackReference *ncr = [[NitCallbackReference alloc] init];
+		ncr.nit_view = sender;
+
+		// Pin the objects in both Objective-C and Nit GC
+		View_incr_ref(sender);
+		ncr = (__bridge NitCallbackReference*)CFBridgingRetain(ncr);
+
+		[self addTarget:ncr action:@selector(nitOnEvent:)
+			forControlEvents:UIControlEventValueChanged];
+	`}
 end
 
 redef class TextInput
@@ -293,10 +317,10 @@ redef class Button
 
 	init do native.set_callback self
 
+	redef fun on_ios_event do notify_observers new ButtonPressEvent(self)
+
 	redef fun text=(text) do if text != null then native.title = text.to_nsstring
 	redef fun text do return native.current_title.to_s
-
-	private fun on_click do notify_observers new ButtonPressEvent(self)
 
 	redef fun enabled=(enabled) do native.enabled = enabled or else true
 	redef fun enabled do return native.enabled
@@ -304,14 +328,14 @@ end
 
 redef class UIButton
 	# Register callbacks on this button to be relayed to `sender`
-	private fun set_callback(sender: Button)
-	import Button.on_click in "ObjC" `{
+	private fun set_callback(sender: View)
+	import View.on_ios_event in "ObjC" `{
 
 		NitCallbackReference *ncr = [[NitCallbackReference alloc] init];
-		ncr.nit_button = sender;
+		ncr.nit_view = sender;
 
 		// Pin the objects in both Objective-C and Nit GC
-		Button_incr_ref(sender);
+		View_incr_ref(sender);
 		ncr = (__bridge NitCallbackReference*)CFBridgingRetain(ncr);
 
 		[self addTarget:ncr action:@selector(nitOnEvent:)
