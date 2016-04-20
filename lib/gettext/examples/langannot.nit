@@ -17,7 +17,9 @@ module langannot is i18n
 
 import gettext
 
+# Some class
 class X
+	# Some method
 	fun foo: String do
 		return "This String is a test"
 	end
