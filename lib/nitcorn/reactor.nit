@@ -72,7 +72,7 @@ class HttpServer
 				request.uri_params = route.parse_params(request.uri)
 
 				var handler = route.handler
-				var root = route.path
+				var root = route.resolve_path(request)
 				var turi
 				if root != null then
 					turi = ("/" + request.uri.substring_from(root.length)).simplify_path

@@ -108,6 +108,20 @@ redef class Route
 		parse_pattern(path)
 	end
 
+	# Replace `self.path` parameters with concrete values from the `request` URI.
+	fun resolve_path(request: HttpRequest): nullable String do
+		if pattern_parts.is_empty then return self.path
+		var path = "/"
+		for part in pattern_parts do
+			if part isa UriString then
+				path /= part.string
+			else if part isa UriParam then
+				path /= request.param(part.name) or else part.name
+			end
+		end
+		return path
+	end
+
 	# Cut `path` into `UriParts`.
 	private fun parse_pattern(path: nullable String) do
 		if path == null then return
