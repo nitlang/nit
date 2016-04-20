@@ -33,6 +33,50 @@ import model_views
 
 redef class MModule
 
+	# Collect all transitive imports.
+	fun collect_ancestors(view: ModelView): Set[MModule] do
+		var res = new HashSet[MModule]
+		for mentity in in_importation.greaters do
+			if mentity == self then continue
+			if not view.accept_mentity(mentity) then continue
+			res.add mentity
+		end
+		return res
+	end
+
+	# Collect direct imports.
+	fun collect_parents(view: ModelView): Set[MModule] do
+		var res = new HashSet[MModule]
+		for mentity in in_importation.direct_greaters do
+			if mentity == self then continue
+			if not view.accept_mentity(mentity) then continue
+			res.add mentity
+		end
+		return res
+	end
+
+	# Collect direct children (modules that directly import `self`).
+	fun collect_children(view: ModelView): Set[MModule] do
+		var res = new HashSet[MModule]
+		for mentity in in_importation.direct_smallers do
+			if mentity == self then continue
+			if not view.accept_mentity(mentity) then continue
+			res.add mentity
+		end
+		return res
+	end
+
+	# Collect all transitive children.
+	fun collect_descendants(view: ModelView): Set[MModule] do
+		var res = new HashSet[MModule]
+		for mentity in in_importation.smallers do
+			if mentity == self then continue
+			if not view.accept_mentity(mentity) then continue
+			res.add mentity
+		end
+		return res
+	end
+
 	# Collect mclassdefs introduced in `self` with `visibility >= to min_visibility`.
 	fun collect_intro_mclassdefs(view: ModelView): Set[MClassDef] do
 		var res = new HashSet[MClassDef]
