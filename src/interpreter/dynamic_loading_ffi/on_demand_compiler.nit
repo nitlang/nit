@@ -37,8 +37,13 @@ redef class AMethPropdef
 	# * Must use the nested foreign code block of the FFI.
 	# * Must not have callbacks.
 	# * Must be implemented in C.
+	# * Must not have a parameter or return typed with a Nit standard class.
 	fun supported_by_dynamic_ffi: Bool
 	do
+		# If the user specfied `is light_ffi`, it must be supported
+		var nats = get_annotations("light_ffi")
+		if nats.not_empty then return true
+
 		var n_extern_code_block = n_extern_code_block
 		if not (n_extern_calls == null and n_extern_code_block != null and
 		        n_extern_code_block.is_c) then return false

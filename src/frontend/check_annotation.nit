@@ -100,6 +100,7 @@ auto_inspect
 pkgconfig
 cflags
 ldflags
+light_ffi
 
 platform
 """
