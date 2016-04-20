@@ -24,7 +24,7 @@ intrude import model::model_base
 class MRawType
 	super MType
 
-	redef var model: Model
+	redef var model
 
 	# The parts that contitute the description of the type.
 	var parts: Sequence[MTypePart] = new Array[MTypePart]
@@ -71,7 +71,7 @@ end
 class MTypePart
 	super MEntity
 
-	redef var model: Model
+	redef var model
 
 	# The textual content.
 	var text: String
