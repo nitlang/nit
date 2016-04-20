@@ -899,6 +899,7 @@ redef class Text
 	#     assert not "0x_".is_int
 	#     assert not "0xGE".is_int
 	#     assert not "".is_int
+	#     assert not "Not an Int".is_int
 	fun is_int: Bool do
 		if bytelen == 0 then return false
 		var s = remove_all('_')
@@ -913,7 +914,7 @@ redef class Text
 		if hd == "0x" or hd == "0X" then return rets.is_hex
 		if hd == "0b" or hd == "0B" then return rets.is_bin
 		if hd == "0o" or hd == "0O" then return rets.is_oct
-		return hd.is_dec
+		return rets.is_dec
 	end
 
 	redef fun to_i
