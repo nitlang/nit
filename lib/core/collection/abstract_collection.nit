@@ -457,7 +457,9 @@ interface Set[E]
 		var res = 23 + length
 		# Note: the order of the elements must not change the hash value.
 		# So, unlike usual hash functions, the accumulator is not combined with itself.
-		for e in self do res += e.hash
+		for e in self do
+			if e != null then res += e.hash
+		end
 		return res
 	end
 
