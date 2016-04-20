@@ -36,6 +36,7 @@ redef class App
 	redef fun on_create
 	do
 		super
+		var display = self.display.as(not null)
 		game = new Game(display.width.to_f, display.height.to_f)
 	end
 
