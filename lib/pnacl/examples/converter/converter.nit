@@ -27,8 +27,7 @@ class Converter
 	super PnaclApp
 
 	# We have to redefine the method to do what we want when receiving a dictionary from JS
-	redef fun handle_dictionary(dictionary: PepperDictionary)
-	do
+	redef fun handle_dictionary(dictionary) do
 		# Getting values from the dictionary
 		var from = dictionary["from"]
 		var to = dictionary["to"]
