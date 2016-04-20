@@ -183,7 +183,7 @@ class Regex
 	# Cache of a single `regmatch_t` to prevent many calls to `malloc`
 	private var native_match: NativeMatchArray is lazy do
 		native_match_is_init = true
-		return new NativeMatchArray.malloc(native.re_nsub+1)
+		return new NativeMatchArray.malloc(native.as(not null).re_nsub+1)
 	end
 
 	private var native_match_is_init = false
