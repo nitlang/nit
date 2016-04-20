@@ -86,6 +86,6 @@ class MaybeError[V, E: Error]
 	redef fun to_s do
 		var e = maybe_error
 		if e != null then return e.to_s
-		return value.to_s
+		return value.as(not null).to_s
 	end
 end
