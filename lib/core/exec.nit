@@ -98,6 +98,7 @@ class Process
 		var args = new FlatBuffer
 		var l = 1 # Number of elements in args
 		args.append(command)
+		var arguments = self.arguments
 		if arguments != null then
 			for a in arguments do
 				args.add('\0')
