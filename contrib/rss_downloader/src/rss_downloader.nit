@@ -170,7 +170,7 @@ class Downloader
 			# Download element
 			if sys.verbose then print "+ Acting on {element}"
 
-			tool_config.act_on element
+			tool_config.as(not null).act_on element
 
 			# Add `unique_id` to log
 			history.add unique_id
@@ -205,7 +205,7 @@ class Downloader
 				continue
 			end
 
-			for dir in source_folder.files do if dir.stat.is_dir then
+			for dir in source_folder.files do if dir.stat.as(not null).is_dir then
 				folder_names.add dir.filename
 			end
 		end
@@ -271,8 +271,8 @@ redef class Text
 
 		var elements = new Array[Element]
 		for item in items do
-			var title = item[tool_config.tag_title].first.as(XMLStartTag).data
-			var link = item[tool_config.tag_link].first.as(XMLStartTag).data
+			var title = item[tool_config.as(not null).tag_title].first.as(XMLStartTag).data
+			var link = item[tool_config.as(not null).tag_link].first.as(XMLStartTag).data
 
 			elements.add new Element(title, link)
 		end
