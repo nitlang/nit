@@ -49,23 +49,24 @@ abstract class FileStream
 	# Return null in case of error
 	fun file_stat: nullable FileStat
 	do
-		var stat = _file.file_stat
+		var stat = _file.as(not null).file_stat
 		if stat.address_is_null then return null
 		return new FileStat(stat)
 	end
 
 	# File descriptor of this file
-	fun fd: Int do return _file.fileno
+	fun fd: Int do return _file.as(not null).fileno
 
 	redef fun close
 	do
-		if _file == null then return
-		if _file.address_is_null then
+		var file = _file
+		if file == null then return
+		if file.address_is_null then
 			if last_error != null then return
 			last_error = new IOError("Cannot close unopened file")
 			return
 		end
-		var i = _file.io_close
+		var i = file.io_close
 		if i != 0 then
 			last_error = new IOError("Close failed due to error {sys.errno.strerror}")
 		end
@@ -83,7 +84,7 @@ abstract class FileStream
 	# * `buffer_mode_none`
 	fun set_buffering_mode(buf_size, mode: Int) do
 		if buf_size <= 0 then buf_size = 512
-		if _file.set_buffering_type(buf_size, mode) != 0 then
+		if _file.as(not null).set_buffering_type(buf_size, mode) != 0 then
 			last_error = new IOError("Error while changing buffering type for FileStream, returned error {sys.errno.strerror}")
 		end
 	end
@@ -105,10 +106,10 @@ class FileReader
 	#     assert l == f.read_line
 	fun reopen
 	do
-		if not eof and not _file.address_is_null then close
+		if not eof and not _file.as(not null).address_is_null then close
 		last_error = null
-		_file = new NativeFile.io_open_read(path.to_cstring)
-		if _file.address_is_null then
+		_file = new NativeFile.io_open_read(path.as(not null).to_cstring)
+		if _file.as(not null).address_is_null then
 			last_error = new IOError("Cannot open `{path.as(not null)}`: {sys.errno.strerror}")
 			end_reached = true
 			return
@@ -126,8 +127,8 @@ class FileReader
 
 	redef fun fill_buffer
 	do
-		var nb = _file.io_read(_buffer, _buffer_capacity)
-		if last_error == null and _file.ferror then
+		var nb = _file.as(not null).io_read(_buffer, _buffer_capacity)
+		if last_error == null and _file.as(not null).ferror then
 			last_error = new IOError("Cannot read `{path.as(not null)}`: {sys.errno.strerror}")
 			end_reached = true
 		end
@@ -158,7 +159,7 @@ class FileReader
 		self.path = path
 		prepare_buffer(100)
 		_file = new NativeFile.io_open_read(path.to_cstring)
-		if _file.address_is_null then
+		if _file.as(not null).address_is_null then
 			last_error = new IOError("Cannot open `{path}`: {sys.errno.strerror}")
 			end_reached = true
 		end
@@ -171,7 +172,7 @@ class FileReader
 		self.path = ""
 		prepare_buffer(1)
 		_file = fd.fd_to_stream(read_only)
-		if _file.address_is_null then
+		if _file.as(not null).address_is_null then
 			last_error = new IOError("Error: Converting fd {fd} to stream failed with '{sys.errno.strerror}'")
 			end_reached = true
 		end
@@ -223,13 +224,13 @@ class FileWriter
 			last_error = new IOError("Cannot write to non-writable stream")
 			return
 		end
-		if _file.address_is_null then
+		if _file.as(not null).address_is_null then
 			last_error = new IOError("Writing on a null stream")
 			_is_writable = false
 			return
 		end
 
-		var err = _file.write_byte(value)
+		var err = _file.as(not null).write_byte(value)
 		if err != 1 then
 			# Big problem
 			last_error = new IOError("Problem writing a byte: {err}")
@@ -251,12 +252,12 @@ class FileWriter
 			last_error = new IOError("Cannot write to non-writable stream")
 			return
 		end
-		if _file.address_is_null then
+		if _file.as(not null).address_is_null then
 			last_error = new IOError("Writing on a null stream")
 			_is_writable = false
 			return
 		end
-		var err = _file.io_write(native, from, len)
+		var err = _file.as(not null).io_write(native, from, len)
 		if err != len then
 			# Big problem
 			last_error = new IOError("Problem in writing : {err} {len} \n")
@@ -269,7 +270,7 @@ class FileWriter
 		_file = new NativeFile.io_open_write(path.to_cstring)
 		self.path = path
 		_is_writable = true
-		if _file.address_is_null then
+		if _file.as(not null).address_is_null then
 			last_error = new IOError("Cannot open `{path}`: {sys.errno.strerror}")
 			is_writable = false
 		end
@@ -280,7 +281,7 @@ class FileWriter
 		self.path = ""
 		_file = fd.fd_to_stream(wipe_write)
 		_is_writable = true
-		 if _file.address_is_null then
+		 if _file.as(not null).address_is_null then
 			 last_error = new IOError("Error: Opening stream from file descriptor {fd} failed with '{sys.errno.strerror}'")
 			_is_writable = false
 		end
