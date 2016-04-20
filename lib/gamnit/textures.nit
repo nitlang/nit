@@ -41,7 +41,7 @@ abstract class Texture
 	# OpenGL handle to this texture
 	fun gl_texture: Int do return root.gl_texture
 
-	# Prepare a subtexture from this texture
+	# Prepare a subtexture from this texture, from the given pixel offsets
 	fun subtexture(left, top, width, height: Numeric): GamnitSubtexture
 	do
 		# Setup the subtexture
