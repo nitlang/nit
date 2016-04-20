@@ -236,7 +236,13 @@ class OptionInt
 		super(help, default, names)
 	end
 
-	redef fun convert(str) do return str.to_i
+	redef fun convert(str)
+	do
+		if str.is_int then return str.to_i
+
+		errors.add "Expected an integer for option {names.join(", ")}."
+		return 0
+	end
 end
 
 # An option with a Float as parameter
