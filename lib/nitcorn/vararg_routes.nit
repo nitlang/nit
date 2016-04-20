@@ -14,12 +14,38 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Routes with uri parameters.
+# Routes with parameters.
 #
-# Using `vararg_routes`, a `Route` can contain variable parts
-# that will be matched against a `HttpRequest` path.
+# Using `vararg_routes`, a `Route` path can contain variable parts
+# that will be matched against a `HttpRequest` URL.
 #
-# Variable parts of path can be specified using the `:` prefix.
+# Variable parameters of a route path can be specified using the `:` prefix:
+#
+# ~~~nitish
+# var iface = "http://localhost:3000"
+# var vh = new VirtualHost(iface)
+# vh.routes.add new Route("/blog/articles/:articleId", new BlogArticleAction)
+# ~~~
+#
+# Route arguments can be accessed from the `HttpRequest` within a nitcorn `Action`:
+#
+# ~~~nitish
+# class BlogArticleAction
+#	super Action
+#
+#	redef fun answer(request, url) do
+#		var param = request.param("articleId")
+#		if param == null then
+#			return new HttpResponse(400)
+#		end
+#
+#		print url # let's say "/blog/articles/12"
+#		print param # 12
+#
+#		return new HttpResponse(200)
+#	end
+# end
+# ~~~
 #
 # ## Route matching
 #
@@ -92,9 +118,6 @@
 # assert req.param("id") == "1234"
 # assert req.param("foo") == null
 # ~~~
-#
-# Note that normally, all this work is done by nitcorn.
-# Params can then be accessed in the `HttpRequest` given to `Action::answer`.
 module vararg_routes
 
 import server_config
