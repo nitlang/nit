@@ -18,7 +18,7 @@ import drawing
 
 redef class App
 
-	var img_set: DrawingImages
+	var img_set: DrawingImages is noinit
 
 	init do super
 
