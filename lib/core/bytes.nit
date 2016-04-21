@@ -328,6 +328,45 @@ class Bytes
 		return new FlatString.full(ns, elen, 0, elen)
 	end
 
+	# Interprets `self` as a big-endian positive integer.
+	#
+	# ~~~
+	# var b = "0102".hexdigest_to_bytes
+	# assert b.to_i == 258
+	# ~~~
+	#
+	# Nul bytes on the left are trimmed.
+	# 0 is returned for an empty Bytes object.
+	#
+	# ~~~
+	# assert "01".hexdigest_to_bytes.to_i == 1
+	# assert "0001".hexdigest_to_bytes.to_i == 1
+	#
+	# assert "0000".hexdigest_to_bytes.to_i == 0
+	# assert "00".hexdigest_to_bytes.to_i == 0
+	# assert "".hexdigest_to_bytes.to_i == 0
+	# ~~~
+	#
+	# `Int::to_bytes` is a loosely reverse method.
+	#
+	# ~~~
+	# assert b.to_i.to_bytes == b
+	# assert (b.to_i + 1).to_bytes.hexdigest == "0103"
+	# assert "0001".hexdigest_to_bytes.to_i.to_bytes.hexdigest == "01"
+	# ~~~
+	#
+	# Warning: `Int` might overflow for bytes with more than 60 bits.
+	fun to_i: Int do
+		var res = 0
+		var i = 0
+		while i < length do
+			res *= 256
+			res += self[i].to_i
+			i += 1
+		end
+		return res
+	end
+
 	#     var b = new Bytes.with_capacity(1)
 	#     b[0] = 101u8
 	#     assert b.to_s == "e"
@@ -611,6 +650,58 @@ private class BytesIterator
 	redef fun next do index += 1
 
 	redef fun item do return tgt[index]
+end
+
+redef class Int
+	# A big-endian representation of self.
+	#
+	# ~~~
+	# assert     1.to_bytes.hexdigest ==     "01"
+	# assert   255.to_bytes.hexdigest ==     "FF"
+	# assert   256.to_bytes.hexdigest ==   "0100"
+	# assert 65535.to_bytes.hexdigest ==   "FFFF"
+	# assert 65536.to_bytes.hexdigest == "010000"
+	# ~~~
+	#
+	# For 0, a Bytes object with single nul byte is returned (instead of an empty Bytes object).
+	#
+	# ~~~
+	# assert 0.to_bytes.hexdigest == "00"
+	# ~~~
+	#
+	# `Bytes::to_i` can be used to do the reverse operation.
+	#
+	# ~~~
+	# assert 1234.to_bytes.to_i == 1234
+	# ~~~
+	#
+	# Require self >= 0
+	fun to_bytes: Bytes do
+		if self == 0 then return "\0".to_bytes
+		assert self > 0
+
+		# Compute the len (log256)
+		var len = 1
+		var max = 256
+		while self >= max do
+			len += 1
+			max *= 256
+		end
+
+		# Allocate the buffer
+		var res = new Bytes.with_capacity(len)
+		for i in [0..len[ do res[i] = 0u8
+
+		# Fill it starting with the end
+		var i = len
+		var sum = self
+		while i > 0 do
+			i -= 1
+			res[i] = (sum % 256).to_b
+			sum /= 256
+		end
+		return res
+	end
 end
 
 redef class Text
