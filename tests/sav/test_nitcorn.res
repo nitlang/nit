@@ -64,9 +64,9 @@ Set-Cookie: nitcorn_session=; HttpOnly; expires=Thu, 01 Jan 1970 00:00:00 GMT
 	<div class="container">
 		<h1>/</h1>
 		<ul>
+			<li><a href="a.txt">a.txt</a></li>
 			<li><a href="b.txt">b.txt</a></li>
 			<li><a href="binary_file.png">binary_file.png</a></li>
-			<li><a href="a.txt">a.txt</a></li>
 		</ul>
 	</div>
 </body>

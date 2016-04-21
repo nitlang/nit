@@ -111,6 +111,8 @@ class FileServer
 					var title = turi
 					var files = local_file.files
 
+					alpha_comparator.sort files
+
 					var links = new Array[String]
 					if turi.length > 1 then
 						var path = (request.uri + "/..").simplify_path
