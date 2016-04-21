@@ -74,6 +74,7 @@ module poset
 class POSet[E]
 	super Collection[E]
 	super Comparator
+	super Cloneable
 
 	redef type COMPARED: E is fixed
 
@@ -380,6 +381,8 @@ class POSet[E]
 		sort(lin)
 		return lin
 	end
+
+	redef fun clone do return sub(self)
 
 	# Return an induced sub-poset
 	#
