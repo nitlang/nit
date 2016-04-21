@@ -380,6 +380,55 @@ class POSet[E]
 		sort(lin)
 		return lin
 	end
+
+	# Return an induced sub-poset
+	#
+	# The elements of the result are those given in argument.
+	#
+	# ~~~
+	# var pos = new POSet[String]
+	# pos.add_chain(["A", "B", "C", "D", "E"])
+	# pos.add_chain(["A", "X", "C", "Y", "E"])
+	#
+	# var pos2 = pos.sub(["A", "B", "D", "Y", "E"])
+	# assert pos2.has_exactly(["A", "B", "D", "Y", "E"])
+	# ~~~
+	#
+	# The full relationship is preserved between the provided elements.
+	#
+	# ~~~
+	# for e1 in pos2 do for e2 in pos2 do
+	#    assert pos2.has_edge(e1, e2) == pos.has_edge(e1, e2)
+	# end
+	# ~~~
+	#
+	# Not that by definition, the direct relationship is the transitive
+	# reduction of the full reduction. Thus, the direct relationship of the
+	# sub-poset may not be included in the direct relationship of self because an
+	# indirect edge becomes a direct one if all the intermediates elements
+	# are absent in the sub-poset.
+	#
+	# ~~~
+	# assert pos.has_direct_edge("B", "D")  == false
+	# assert pos2.has_direct_edge("B", "D") == true
+	#
+	# assert pos2["B"].direct_greaters.has_exactly(["D", "Y"])
+	# ~~~
+	fun sub(elements: Collection[E]): POSet[E]
+	do
+		var res = new POSet[E]
+		for e in self do
+			if not elements.has(e) then continue
+			res.add_node(e)
+		end
+		for e in res do
+			for f in self[e].greaters do
+				if not elements.has(f) then continue
+				res.add_edge(e, f)
+			end
+		end
+		return res
+	end
 end
 
 # View of an objet in a poset
