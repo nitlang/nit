@@ -42,7 +42,7 @@ Method: GET, URI: /params_answer/0123/asdf/trailing/path, trailing: /trailing/pa
 Params args: i:0123, s:asdf
 
 [Client] curl -s localhost:*****/params_answer/0123 --head
-HTTP/1.0 405 Method Not Allowed
+HTTP/1.0 404 Not Found
 Content-Length: 0
 Server: nitcorn
 Set-Cookie: nitcorn_session=; HttpOnly; expires=Thu, 01 Jan 1970 00:00:00 GMT
@@ -118,7 +118,7 @@ Set-Cookie: nitcorn_session=; HttpOnly; expires=Thu, 01 Jan 1970 00:00:00 GMT
 
 
 [Client] curl -s localhost:*****/invalid_route --head
-HTTP/1.0 405 Method Not Allowed
+HTTP/1.0 404 Not Found
 Content-Length: 0
 Server: nitcorn
 Set-Cookie: nitcorn_session=; HttpOnly; expires=Thu, 01 Jan 1970 00:00:00 GMT
