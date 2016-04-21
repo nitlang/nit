@@ -1,10 +1,10 @@
-# This file is part of NIT (http://www.nitlanguage.org).
+# This file is part of NIT ( http://www.nitlanguage.org ).
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#	 http://www.apache.org/licenses/LICENSE-2.0
+#     http://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -12,9 +12,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Group module for all codec-related manipulations
-module codecs
+var c = iso88591_codec
 
-import codec_base
-import utf8
-import iso8859_1
+var b = c.encode_string("éçaIS1623CEDjdEF")
+
+var str = c.decode_string(b.items, b.length)
+print str
+
+c = utf8_codec
+str = c.decode_string(b.items, b.length)
+
+print str

@@ -24,28 +24,44 @@ module codec_base
 import text
 import bytes
 
-# Codes UTF-8 entities to an external format
-abstract class Coder
+# Codes/Decodes entities from/to UTF-8
+abstract class Codec
+	# Maximum size of a `character` in supported encoding
+	fun char_max_size: Int is abstract
 
 	# Transforms `c` to its representation in the format of `self`
-	fun code_char(c: Char): Bytes is abstract
+	fun encode_char(c: Char): NativeString is abstract
 
 	# Adds a char `c` to bytes `s`
-	fun add_char_to(c: Char, s: Bytes) is abstract
+	#
+	# Returns the number of bytes written to `s`
+	fun add_char_to(c: Char, s: NativeString): Int is abstract
 
 	# Transforms `s` to the format of `self`
-	fun code_string(s: Text): Bytes is abstract
+	fun encode_string(s: Text): Bytes is abstract
 
-	# Adds a string `s` to bytes `b`
-	fun add_string_to(s: Text, b: Bytes) is abstract
-end
+	# Adds a string `s` coded as the supported encoding to `b`
+	#
+	# Returns the number of bytes written to `s`
+	fun add_string_to(s: Text, b: Bytes): Int is abstract
 
-# Decodes entities in an external format to UTF-8
-abstract class Decoder
+	# Size of a codet for the target encoding
+	fun codet_size: Int is abstract
+
+	# How many lookaheads might be required to decode a single char ?
+	fun max_lookahead: Int is abstract
+
+	# Is the sequence of bytes in `ns` at `position` a valid Char ?
+	#
+	# Returns either
+	# * 0 if valid
+	# * 1 if incomplete
+	# * 2 if invalid
+	fun is_valid_char(ns: NativeString, position: Int): Int is abstract
 
 	# Decodes a char from `b` to a Unicode code-point
-	fun decode_char(b: Bytes): Char is abstract
+	fun decode_char(b: NativeString): Char is abstract
 
 	# Decodes a string `b` to UTF-8
-	fun decode_string(b: Bytes): String is abstract
+	fun decode_string(b: NativeString, len: Int): String is abstract
 end

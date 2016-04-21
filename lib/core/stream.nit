@@ -66,7 +66,7 @@ abstract class Reader
 	super Stream
 
 	# Decoder used to transform input bytes to UTF-8
-	var decoder: Decoder = utf8_decoder is writable
+	var decoder: Codec = utf8_codec is writable
 
 	# Reads a character. Returns `null` on EOF or timeout
 	fun read_char: nullable Char is abstract
@@ -406,7 +406,7 @@ abstract class Writer
 	super Stream
 
 	# The coder from a nit UTF-8 String to the output file
-	var coder: Coder = utf8_coder is writable
+	var coder: Codec = utf8_codec is writable
 
 	# Writes bytes from `s`
 	fun write_bytes(s: Bytes) is abstract
