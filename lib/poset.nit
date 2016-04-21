@@ -417,6 +417,14 @@ class POSet[E]
 	#
 	# assert pos2["B"].direct_greaters.has_exactly(["D", "Y"])
 	# ~~~
+	#
+	# If the `elements` contains all then the result is a clone of self.
+	#
+	# ~~~
+	# var pos3 = pos.sub(pos)
+	# assert pos3 == pos
+	# assert pos3 == pos.clone
+	# ~~~
 	fun sub(elements: Collection[E]): POSet[E]
 	do
 		var res = new POSet[E]
@@ -429,6 +437,50 @@ class POSet[E]
 				if not elements.has(f) then continue
 				res.add_edge(e, f)
 			end
+		end
+		return res
+	end
+
+	# Two posets are equal if they contain the same elements and edges.
+	#
+	# ~~~
+	# var pos1 = new POSet[String]
+	# pos1.add_chain(["A", "B", "C", "D", "E"])
+	# pos1.add_chain(["A", "X", "C", "Y", "E"])
+	#
+	# var pos2 = new POSet[Object]
+	# pos2.add_edge("Y", "E")
+	# pos2.add_chain(["A", "X", "C", "D", "E"])
+	# pos2.add_chain(["A", "B", "C", "Y"])
+	#
+	# assert pos1 == pos2
+	#
+	# pos1.add_edge("D", "Y")
+	# assert pos1 != pos2
+	#
+	# pos2.add_edge("D", "Y")
+	# assert pos1 == pos2
+	#
+	# pos1.add_node("Z")
+	# assert pos1 != pos2
+	# ~~~
+	redef fun ==(other) do
+		if not other isa POSet[nullable Object] then return false
+		if not self.elements.keys.has_exactly(other.elements.keys) then return false
+		for e, ee in elements do
+			if ee.direct_greaters != other[e].direct_greaters then return false
+		end
+		assert hash == other.hash
+		return true
+	end
+
+	redef fun hash
+	do
+		var res = 0
+		for e, ee in elements do
+			if e == null then continue
+			res += e.hash
+			res += ee.direct_greaters.length
 		end
 		return res
 	end
