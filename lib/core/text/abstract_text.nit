@@ -1095,6 +1095,39 @@ abstract class Text
 		end
 	end
 
+	# Packs the content of a string in packs of `ln` chars.
+	# This variant ensures that only the last element might be smaller than `ln`
+	#
+	# ~~~nit
+	# var s = "abcdefghijklmnopqrstuvwxyz"
+	# assert s.pack_l(4) == ["abcd","efgh","ijkl","mnop","qrst","uvwx","yz"]
+	# ~~~
+	fun pack_l(ln: Int): Array[Text] do
+		var st = 0
+		var retarr = new Array[Text].with_capacity(length / ln + length % ln)
+		while st < length do
+			retarr.add(substring(st, ln))
+			st += ln
+		end
+		return retarr
+	end
+
+	# Packs the content of a string in packs of `ln` chars.
+	# This variant ensures that only the first element might be smaller than `ln`
+	#
+	# ~~~nit
+	# var s = "abcdefghijklmnopqrstuvwxyz"
+	# assert s.pack_r(4) == ["ab","cdef","ghij","klmn","opqr","stuv","wxyz"]
+	# ~~~
+	fun pack_r(ln: Int): Array[Text] do
+		var st = length
+		var retarr = new Array[Text].with_capacity(length / ln + length % ln)
+		while st >= 0 do
+			retarr.add(substring(st - ln, ln))
+			st -= ln
+		end
+		return retarr.reversed
+	end
 end
 
 # All kinds of array-based text representations.
