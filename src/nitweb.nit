@@ -52,6 +52,7 @@ private class NitwebPhase
 		srv.routes.add new Route("/doc/:namespace", new DocAction(srv, model, modelbuilder))
 		srv.routes.add new Route("/code/:namespace", new CodeAction(srv, model, modelbuilder))
 		srv.routes.add new Route("/search/:namespace", new SearchAction(srv, model))
+		srv.routes.add new Route("/uml/:namespace", new UMLDiagramAction(srv, model, mainmodule))
 		srv.routes.add new Route("/", new TreeAction(srv, model))
 
 		srv.listen
