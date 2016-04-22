@@ -117,10 +117,6 @@ class NaiveInterpreter
 	# Set this mark to skip the evaluation until a labeled statement catch it with `is_escape`
 	var escapemark: nullable EscapeMark = null
 
-	# Is an abort being executed ?
-	# Set this mark to return to the last `catch` bloc or effectively aborting if there isn't any
-	var catch_mark = new EscapeMark
-
 	# The count of `catch` blocs that have been encountered and can catch an abort
 	var catch_count = 0
 
@@ -1701,8 +1697,7 @@ redef class AAbortExpr
 			fatal(v, "Aborted")
 			exit(1)
 		else
-			# Abort mode, skipping everything until a `catch` bloc is reached
-			v.escapemark = v.catch_mark
+			abort
 		end
 	end
 end
@@ -1747,14 +1742,23 @@ end
 redef class ADoExpr
 	redef fun stmt(v)
 	do
-		# If this bloc has a catch, register it in the counter
-		if self.n_catch != null then v.catch_count += 1
-		v.stmt(self.n_block)
-		v.is_escape(self.break_mark) # Clear the break (if any)
+		# If this bloc has a catch, handle it with a do ... catch ... end
 		if self.n_catch != null then
-			v.catch_count -= 1
-			# Are we in abort mode? then this catch is executing
-			if v.is_escape(v.catch_mark) then v.stmt(self.n_catch)
+			var frame = v.frame
+			v.catch_count += 1
+			do
+				v.stmt(self.n_block)
+				v.is_escape(self.break_mark) # Clear the break (if any)
+				v.catch_count -= 1
+			catch
+				# Restore the current frame if needed
+				while v.frame != frame do v.frames.shift
+				v.catch_count -= 1
+				v.stmt(self.n_catch)
+			end
+		else
+			v.stmt(self.n_block)
+			v.is_escape(self.break_mark)
 		end
 	end
 end
