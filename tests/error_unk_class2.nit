@@ -12,9 +12,5 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-var i
-i = new Fail
-i = new Boolean
-i = new ListNode
-i = new POSet
-i.output
+import poset
+import error_unk_class
