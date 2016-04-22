@@ -3945,11 +3945,35 @@ redef class ANewExpr
 			return v.native_array_instance(elttype, l)
 		end
 
-		var recv = v.init_instance_or_extern(mtype)
-
 		var callsite = self.callsite
-		if callsite == null then return recv
+		if callsite == null then return v.init_instance_or_extern(mtype)
 		if callsite.is_broken then return null
+
+		var recv
+		# new factories are badly implemented.
+		# They assume a stub temporary receiver exists.
+		# This temporary receiver is required because it
+		# currently holds the method and the formal types.
+		#
+		# However, this object could be reused if the formal types are the same.
+		# Therefore, the following code will `once` it in these case
+		if callsite.mproperty.is_new and not mtype.need_anchor then
+			var name = v.get_name("varoncenew")
+			var guard = v.get_name(name + "_guard")
+			v.add_decl("static {mtype.ctype} {name};")
+			v.add_decl("static int {guard};")
+			recv = v.new_var(mtype)
+			v.add("if (likely({guard})) \{")
+			v.add("{recv} = {name};")
+			v.add("\} else \{")
+			var i = v.init_instance_or_extern(mtype)
+			v.add("{recv} = {i};")
+			v.add("{name} = {recv};")
+			v.add("{guard} = 1;")
+			v.add("\}")
+		else
+			recv = v.init_instance_or_extern(mtype)
+		end
 
 		var args = v.varargize(callsite.mpropdef, callsite.signaturemap, recv, self.n_args.n_exprs)
 		var res2 = v.compile_callsite(callsite, args)
