@@ -372,7 +372,7 @@ redef class FlatText
 end
 
 # Immutable strings of characters.
-class FlatString
+abstract class FlatString
 	super FlatText
 	super String
 
@@ -404,15 +404,6 @@ class FlatString
 	end
 
 	redef fun fast_cstring do return _items.fast_cstring(_first_byte)
-
-	redef fun substring_from(from) do
-		if from >= self._length then return empty
-		if from <= 0 then return self
-		var c = char_to_byte_index(from)
-		var st = c - _first_byte
-		var fln = bytelen - st
-		return new FlatString.full(items, fln, c, _length - from)
-	end
 
 	redef fun substring(from, count)
 	do
@@ -498,26 +489,21 @@ class FlatString
 	#
 	# `_items` will be used as is, without copy, to retrieve the characters of the string.
 	# Aliasing issues is the responsibility of the caller.
-	private init with_infos(items: NativeString, bytelen, from: Int)
+	private new with_infos(items: NativeString, bytelen, from: Int)
 	do
-		self._items = items
-		self._bytelen = bytelen
-		_first_byte = from
-		_bytepos = from
-		_length = _items.utf8_length(_first_byte, bytelen)
+		var len = items.utf8_length(from, bytelen)
+		if bytelen == len then return new ASCIIFlatString.full_data(items, bytelen, from, len)
+		return new UnicodeFlatString.full_data(items, bytelen, from, len)
 	end
 
 	# Low-level creation of a new string with all the data.
 	#
 	# `_items` will be used as is, without copy, to retrieve the characters of the string.
 	# Aliasing issues is the responsibility of the caller.
-	private init full(items: NativeString, bytelen, from, length: Int)
+	private new full(items: NativeString, bytelen, from, length: Int)
 	do
-		self._items = items
-		self._length = length
-		self._bytelen = bytelen
-		_first_byte = from
-		_bytepos = from
+		if bytelen == length then return new ASCIIFlatString.full_data(items, bytelen, from, length)
+		return new UnicodeFlatString.full_data(items, bytelen, from, length)
 	end
 
 	redef fun ==(other)
@@ -614,7 +600,6 @@ class FlatString
 		return new FlatString.full(ns, new_bytelen, 0, newlen)
 	end
 
-
 	redef fun hash
 	do
 		if hash_cache == null then
@@ -637,6 +622,80 @@ class FlatString
 	end
 
 	redef fun substrings do return new FlatSubstringsIter(self)
+end
+
+# Regular Nit UTF-8 strings
+private class UnicodeFlatString
+	super FlatString
+
+	init full_data(items: NativeString, bytelen, from, length: Int) do
+		self._items = items
+		self._length = length
+		self._bytelen = bytelen
+		_first_byte = from
+		_bytepos = from
+	end
+
+	redef fun substring_from(from) do
+		if from >= self._length then return empty
+		if from <= 0 then return self
+		var c = char_to_byte_index(from)
+		var st = c - _first_byte
+		var fln = bytelen - st
+		return new FlatString.full(items, fln, c, _length - from)
+	end
+end
+
+# Special cases of String where all the characters are ASCII-based
+#
+# Optimizes access operations to O(1) complexity.
+private class ASCIIFlatString
+	super FlatString
+
+	init full_data(items: NativeString, bytelen, from, length: Int) do
+		self._items = items
+		self._length = length
+		self._bytelen = bytelen
+		_first_byte = from
+		_bytepos = from
+	end
+
+	redef fun [](idx) do
+		assert idx < _bytelen and idx >= 0
+		return _items[idx + _first_byte].ascii
+	end
+
+	redef fun substring(from, count) do
+		if count <= 0 then return ""
+
+		if from < 0 then
+			count += from
+			if count < 0 then return ""
+			from = 0
+		end
+		var ln = _length
+		if (count + from) > ln then count = ln - from
+		return new ASCIIFlatString.full_data(_items, count, from + _first_byte, count)
+	end
+
+	redef fun reversed do
+		var b = new FlatBuffer.with_capacity(_bytelen + 1)
+		var i = _length - 1
+		while i >= 0 do
+			b.add self[i]
+			i -= 1
+		end
+		var s = b.to_s.as(FlatString)
+		return s
+	end
+
+	redef fun char_to_byte_index(index) do return index + _first_byte
+
+	redef fun substring_impl(from, count, end_index) do
+		return new ASCIIFlatString.full_data(_items, count, from + _first_byte, count)
+	end
+
+	redef fun fetch_char_at(i) do return _items[i + _first_byte].ascii
 end
 
 private class FlatStringCharReverseIterator
