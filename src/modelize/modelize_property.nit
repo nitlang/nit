@@ -1463,7 +1463,7 @@ redef class AAttrPropdef
 
 		var mlazypropdef = self.mlazypropdef
 		if mlazypropdef != null then
-			mlazypropdef.static_mtype = modelbuilder.model.get_mclasses_by_name("Bool").first.mclass_type
+			mlazypropdef.static_mtype = mmodule.bool_type
 		end
 		check_repeated_types(modelbuilder)
 	end
