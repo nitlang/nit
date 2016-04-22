@@ -16,22 +16,22 @@
 
 # Handles serialization and deserialization of objects to/from JSON
 #
-# ## Nity JSON
+# ## Writing JSON with metadata
 #
 # `JsonSerializer` write Nit objects that subclass `Serializable` to JSON,
-# and `JsonDeserializer` can read them. They both use meta-data added to the
+# and `JsonDeserializer` can read them. They both use metadata added to the
 # generated JSON to recreate the Nit instances with the exact original type.
 #
 # For more information on Nit serialization, see: ../serialization/README.md
 #
-# ## Plain JSON
+# ## Writing plain JSON
 #
 # The attribute `JsonSerializer::plain_json` triggers generating plain and
 # clean JSON. This format is easier to read for an human and a non-Nit program,
 # but it cannot be fully deserialized. It can still be read by services from
 # `json::static` and `json::dynamic`.
 #
-# A shortcut to this service is provided by `Serializable::to_plain_json`.
+# A shortcut to these writing services is provided by `Serializable::serialize_to_json`.
 #
 # ### Usage Example
 #
@@ -49,16 +49,28 @@
 # var bob = new Person("Bob", 1986)
 # var alice = new Person("Alice", 1978, bob)
 #
-# assert bob.to_plain_json == """
-# {"name": "Bob", "year_of_birth": 1986, "next_of_kin": null}"""
+# assert bob.serialize_to_json(pretty=true, plain=true) == """
+#{
+#	"name": "Bob",
+#	"year_of_birth": 1986,
+#	"next_of_kin": null
+#}"""
 #
-# assert alice.to_plain_json == """
-# {"name": "Alice", "year_of_birth": 1978, "next_of_kin": {"name": "Bob", "year_of_birth": 1986, "next_of_kin": null}}"""
+# assert alice.serialize_to_json(pretty=true, plain=true) == """
+#{
+#	"name": "Alice",
+#	"year_of_birth": 1978,
+#	"next_of_kin": {
+#		"name": "Bob",
+#		"year_of_birth": 1986,
+#		"next_of_kin": null
+#	}
+#}"""
 # ~~~
 #
 # ## JSON to Nit objects
 #
-# The `JsonDeserializer` support reading JSON code with minimal meta-data
+# The `JsonDeserializer` support reading JSON code with minimal metadata
 # to easily create Nit object from client-side code or configuration files.
 # Each JSON object must define the `__class` attribute with the corresponding
 # Nit class and the expected attributes with its name in Nit followed by its value.
@@ -103,14 +115,14 @@ class JsonSerializer
 	#
 	# If `false`, the default, serialize to support deserialization:
 	#
-	# * Write meta-data, including the types of the serialized objects so they can
+	# * Write metadata, including the types of the serialized objects so they can
 	#   be deserialized to their original form using `JsonDeserializer`.
 	# * Use references when an object has already been serialized so to not duplicate it.
 	# * Support cycles in references.
 	# * Preserve the Nit `Char` type as an object because it does not exist in JSON.
 	# * The generated JSON is standard and can be read by non-Nit programs.
 	#   However, some Nit types are not represented by the simplest possible JSON representation.
-	#   With the added meta-data, it can be complex to read.
+	#   With the added metadata, it can be complex to read.
 	#
 	# If `true`, serialize for other programs:
 	#
@@ -119,7 +131,7 @@ class JsonSerializer
 	# * Nit objects are serialized for every references, so they can be duplicated.
 	#   It is easier to read but it creates a larger output.
 	# * Does not support cycles, will replace the problematic references by `null`.
-	# * Does not serialize the meta-data needed to deserialize the objects
+	# * Does not serialize the metadata needed to deserialize the objects
 	#   back to regular Nit objects.
 	# * Keys of Nit `HashMap` are converted to their string representation using `to_s`.
 	var plain_json = false is writable
@@ -496,6 +508,31 @@ redef class Text
 end
 
 redef class Serializable
+
+	# Serialize `self` to JSON
+	#
+	# Set `plain = true` to generate standard JSON, without deserialization metadata.
+	# Use this option if the generated JSON will be read by other programs or humans.
+	# Use the default, `plain = false`, if the JSON is to be deserialized by a Nit program.
+	#
+	# Set `pretty = true` to generate pretty JSON for human eyes.
+	# Use the default, `pretty = false`, to generate minified JSON.
+	#
+	# This method should not be refined by subclasses,
+	# instead `accept_json_serializer` can customize the serialization of an object.
+	#
+	# See: `JsonSerializer`
+	fun serialize_to_json(plain, pretty: nullable Bool): String
+	do
+		var stream = new StringWriter
+		var serializer = new JsonSerializer(stream)
+		serializer.plain_json = plain or else false
+		serializer.pretty_json = pretty or else false
+		serializer.serialize self
+		stream.close
+		return stream.to_s
+	end
+
 	private fun accept_json_serializer(v: JsonSerializer)
 	do
 		var id = v.cache.new_id_for(self)
@@ -514,30 +551,6 @@ redef class Serializable
 		v.indent_level -= 1
 		v.new_line_and_indent
 		v.stream.write "\}"
-	end
-
-	# Serialize this object to a JSON string with metadata for deserialization
-	fun to_json_string: String
-	do
-		var stream = new StringWriter
-		var serializer = new JsonSerializer(stream)
-		serializer.serialize self
-		stream.close
-		return stream.to_s
-	end
-
-	# Serialize this object to plain JSON
-	#
-	# This is a shortcut using `JsonSerializer::plain_json`,
-	# see its documentation for more information.
-	fun to_plain_json: String
-	do
-		var stream = new StringWriter
-		var serializer = new JsonSerializer(stream)
-		serializer.plain_json = true
-		serializer.serialize self
-		stream.close
-		return stream.to_s
 	end
 end
 
