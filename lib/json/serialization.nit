@@ -553,6 +553,7 @@ redef class Collection[E]
 				else v.stream.write ", "
 
 				if not v.try_to_serialize(e) then
+					assert e != null # null would have been serialized
 					v.warn("element of type {e.class_name} is not serializable.")
 				end
 			end
@@ -614,6 +615,7 @@ redef class Map[K, V]
 				v.stream.write k.to_s.to_json
 				v.stream.write ": "
 				if not v.try_to_serialize(val) then
+					assert val != null # null would have been serialized
 					v.warn("element of type {val.class_name} is not serializable.")
 					v.stream.write "null"
 				end
