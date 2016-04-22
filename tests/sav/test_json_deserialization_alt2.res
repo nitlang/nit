@@ -16,6 +16,7 @@
 # Json:
 {"a": {"b": true, "c": "a", "f": 0.123, "i": 1234, "serialization_specific_name": "asdf", "n": null}, "b": {"b": false, "c": "b", "f": 123.123, "i": 2345, "serialization_specific_name": "hjkl", "n": 12, "ii": 1111, "ss": "qwer"}, "aa": {"b": true, "c": "a", "f": 0.123, "i": 1234, "serialization_specific_name": "asdf", "n": null}}
 
+Serialization warning: Cycle detected in serialized object, replacing reference with 'null'.
 # Nit:
 <D: <B: <A: false b 123.123 2345 new line ->
 <- false p4ssw0rd> 1111 	f"\/> true>

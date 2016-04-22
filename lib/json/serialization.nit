@@ -142,7 +142,8 @@ class JsonSerializer
 			if plain_json then
 				for o in open_objects do
 					if object.is_same_serialized(o) then
-						# Cycle detected
+						# Cycle, can't be managed in plain json
+						warn "Cycle detected in serialized object, replacing reference with 'null'."
 						stream.write "null"
 						return
 					end
