@@ -1953,10 +1953,21 @@ abstract class MProperty
 
 	# The canonical name of the property.
 	#
-	# It is the short-`name` prefixed by the short-name of the class and the full-name of the module.
+	# It is currently the short-`name` prefixed by the short-name of the class and the full-name of the module.
 	# Example: "my_package::my_module::MyClass::my_method"
+	#
+	# The full-name of the module is needed because two distinct modules of the same package can
+	# still refine the same class and introduce homonym properties.
+	#
+	# For public properties not introduced by refinement, the module name is not used.
+	#
+	# Example: `my_package::MyClass::My_method`
 	redef var full_name is lazy do
-		return "{intro_mclassdef.mmodule.namespace_for(visibility)}::{intro_mclassdef.mclass.name}::{name}"
+		if intro_mclassdef.is_intro then
+			return "{intro_mclassdef.mmodule.namespace_for(visibility)}::{intro_mclassdef.mclass.name}::{name}"
+		else
+			return "{intro_mclassdef.mmodule.full_name}::{intro_mclassdef.mclass.name}::{name}"
+		end
 	end
 
 	redef var c_name is lazy do
