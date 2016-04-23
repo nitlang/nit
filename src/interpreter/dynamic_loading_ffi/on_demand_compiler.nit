@@ -93,7 +93,7 @@ redef class NaiveInterpreter
 	end
 
 	# External compiler used to generate the foreign code library
-	private var c_compiler = "gcc"
+	private var c_compiler = "cc"
 end
 
 redef class AModule
