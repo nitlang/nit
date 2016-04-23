@@ -2285,7 +2285,7 @@ abstract class MPropDef
 			# Just try to simplify each part
 			if mclassdef.mmodule.mpackage != mproperty.intro_mclassdef.mmodule.mpackage then
 				# precise "p::m" only if "p" != "r"
-				res.append mproperty.intro_mclassdef.mmodule.full_name
+				res.append mproperty.intro_mclassdef.mmodule.namespace_for(mproperty.visibility)
 				res.append "::"
 			else if mproperty.visibility <= private_visibility then
 				# Same package ("p"=="q"), but private visibility,
