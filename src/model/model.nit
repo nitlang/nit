@@ -592,7 +592,7 @@ class MClassDef
 	var location: Location
 
 	# Internal name combining the module and the class
-	# Example: "mymodule#MyClass"
+	# Example: "mymodule$MyClass"
 	redef var to_s is noinit
 
 	init
@@ -604,34 +604,34 @@ class MClassDef
 			assert not isset mclass._intro
 			mclass.intro = self
 		end
-		self.to_s = "{mmodule}#{mclass}"
+		self.to_s = "{mmodule}${mclass}"
 	end
 
 	# Actually the name of the `mclass`
 	redef fun name do return mclass.name
 
-	# The module and class name separated by a '#'.
+	# The module and class name separated by a '$'.
 	#
 	# The short-name of the class is used for introduction.
-	# Example: "my_module#MyClass"
+	# Example: "my_module$MyClass"
 	#
 	# The full-name of the class is used for refinement.
-	# Example: "my_module#intro_module::MyClass"
+	# Example: "my_module$intro_module::MyClass"
 	redef var full_name is lazy do
 		if is_intro then
-			# public gives 'p#A'
-			# private gives 'p::m#A'
-			return "{mmodule.namespace_for(mclass.visibility)}#{mclass.name}"
+			# public gives 'p$A'
+			# private gives 'p::m$A'
+			return "{mmodule.namespace_for(mclass.visibility)}${mclass.name}"
 		else if mclass.intro_mmodule.mpackage != mmodule.mpackage then
-			# public gives 'q::n#p::A'
-			# private gives 'q::n#p::m::A'
-			return "{mmodule.full_name}#{mclass.full_name}"
+			# public gives 'q::n$p::A'
+			# private gives 'q::n$p::m::A'
+			return "{mmodule.full_name}${mclass.full_name}"
 		else if mclass.visibility > private_visibility then
-			# public gives 'p::n#A'
-			return "{mmodule.full_name}#{mclass.name}"
+			# public gives 'p::n$A'
+			return "{mmodule.full_name}${mclass.name}"
 		else
-			# private gives 'p::n#::m::A' (redundant p is omitted)
-			return "{mmodule.full_name}#::{mclass.intro_mmodule.name}::{mclass.name}"
+			# private gives 'p::n$::m::A' (redundant p is omitted)
+			return "{mmodule.full_name}$::{mclass.intro_mmodule.name}::{mclass.name}"
 		end
 	end
 
@@ -2241,7 +2241,7 @@ abstract class MPropDef
 			assert not isset mproperty._intro
 			mproperty.intro = self
 		end
-		self.to_s = "{mclassdef}#{mproperty}"
+		self.to_s = "{mclassdef}${mproperty}"
 	end
 
 	# Actually the name of the `mproperty`
@@ -2255,17 +2255,17 @@ abstract class MPropDef
 	#  * a property "p::m::A::x"
 	#  * redefined in a refinement of a class "q::n::B"
 	#  * in a module "r::o"
-	#  * so "r::o#q::n::B#p::m::A::x"
+	#  * so "r::o$q::n::B$p::m::A::x"
 	#
 	# Fortunately, the full-name is simplified when entities are repeated.
-	# For the previous case, the simplest form is "p#A#x".
+	# For the previous case, the simplest form is "p$A$x".
 	redef var full_name is lazy do
 		var res = new FlatBuffer
 
-		# The first part is the mclassdef. Worst case is "r::o#q::n::B"
+		# The first part is the mclassdef. Worst case is "r::o$q::n::B"
 		res.append mclassdef.full_name
 
-		res.append "#"
+		res.append "$"
 
 		if mclassdef.mclass == mproperty.intro_mclassdef.mclass then
 			# intro are unambiguous in a class
@@ -2319,7 +2319,7 @@ abstract class MPropDef
 	redef fun model do return mclassdef.model
 
 	# Internal name combining the module, the class and the property
-	# Example: "mymodule#MyClass#mymethod"
+	# Example: "mymodule$MyClass$mymethod"
 	redef var to_s is noinit
 
 	# Is self the definition that introduce the property?
