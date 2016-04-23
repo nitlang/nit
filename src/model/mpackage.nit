@@ -74,12 +74,15 @@ class MGroup
 	var parent: nullable MGroup
 
 	# Fully qualified name.
-	# It includes each parent group separated by `/`
+	# It includes each parent group separated by `>`.
+	# The full_name is terminated by `>` to avoid collision with other entities.
+	#
+	# E.g. `core>` and `core>collection>`
 	redef fun full_name
 	do
 		var p = parent
-		if p == null then return name
-		return "{p.full_name}/{name}"
+		if p == null then return "{name}>"
+		return "{p.full_name}{name}>"
 	end
 
 	# The group is the group tree on the package (`mpackage.mgroups`)
