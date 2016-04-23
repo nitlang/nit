@@ -113,17 +113,20 @@ class NaiveInterpreter
 		return self.modelbuilder.force_get_primitive_method(current_node, name, recv.mclass, self.mainmodule)
 	end
 
-	# Is a return executed?
-	# Set this mark to skip the evaluation until the end of the specified method frame
-	var returnmark: nullable FRAME = null
-
-	# Is a break or a continue executed?
+	# Is a return, a break or a continue executed?
 	# Set this mark to skip the evaluation until a labeled statement catch it with `is_escape`
 	var escapemark: nullable EscapeMark = null
 
+	# Is an abort being executed ?
+	# Set this mark to return to the last `catch` bloc or effectively aborting if there isn't any
+	var catch_mark = new EscapeMark
+
+	# The count of `catch` blocs that have been encountered and can catch an abort
+	var catch_count = 0
+
 	# Is a return or a break or a continue executed?
 	# Use this function to know if you must skip the evaluation of statements
-	fun is_escaping: Bool do return returnmark != null or escapemark != null
+	fun is_escaping: Bool do return escapemark != null
 
 	# The value associated with the current return/break/continue, if any.
 	# Set the value when you set a escapemark.
@@ -324,6 +327,16 @@ class NaiveInterpreter
 		var val = instance.val
 		val[txt.bytelen] = 0u8
 		txt.to_cstring.copy_to(val, txt.bytelen, 0, 0)
+
+		return instance
+	end
+
+	# Return a new native string initialized with `txt`
+	fun native_string_instance_from_ns(txt: NativeString, len: Int): Instance
+	do
+		var instance = native_string_instance_len(len)
+		var val = instance.val
+		txt.copy_to(val, len, 0, 0)
 
 		return instance
 	end
@@ -816,10 +829,8 @@ redef class AMethPropdef
 		var f = v.new_frame(self, mpropdef, args)
 		var res = call_commons(v, mpropdef, args, f)
 		v.frames.shift
-		if v.returnmark == f then
-			v.returnmark = null
+		if v.is_escape(self.return_mark) then
 			res = v.escapevalue
-			v.escapevalue = null
 			return res
 		end
 		return res
@@ -980,9 +991,6 @@ redef class AMethPropdef
 				return v.int32_instance(recvval.to_i32)
 			else if pname == "to_u32" then
 				return v.uint32_instance(recvval.to_u32)
-			else if pname == "rand" then
-				var res = recvval.rand
-				return v.int_instance(res)
 			end
 		else if cname == "Byte" then
 			var recvval = args[0].to_b
@@ -1108,8 +1116,6 @@ redef class AMethPropdef
 				return v.float_instance(args[0].to_f.log)
 			else if pname == "pow" then
 				return v.float_instance(args[0].to_f.pow(args[1].to_f))
-			else if pname == "rand" then
-				return v.float_instance(args[0].to_f.rand)
 			else if pname == "abs" then
 				return v.float_instance(args[0].to_f.abs)
 			else if pname == "hypot_with" then
@@ -1518,10 +1524,9 @@ redef class AAttrPropdef
 			val = v.expr(nexpr)
 		else if nblock != null then
 			v.stmt(nblock)
-			assert v.returnmark == f
+			assert v.escapemark == return_mark
 			val = v.escapevalue
-			v.returnmark = null
-			v.escapevalue = null
+			v.escapemark = null
 		else
 			abort
 		end
@@ -1691,24 +1696,17 @@ redef class AEscapeExpr
 	end
 end
 
-redef class AReturnExpr
-	redef fun stmt(v)
-	do
-		var ne = self.n_expr
-		if ne != null then
-			var i = v.expr(ne)
-			if i == null then return
-			v.escapevalue = i
-		end
-		v.returnmark = v.frame
-	end
-end
-
 redef class AAbortExpr
 	redef fun stmt(v)
 	do
-		fatal(v, "Aborted")
-		exit(1)
+		# Abort as asked if there is no `catch` bloc
+		if v.catch_count <= 0 then
+			fatal(v, "Aborted")
+			exit(1)
+		else
+			# Abort mode, skipping everything until a `catch` bloc is reached
+			v.escapemark = v.catch_mark
+		end
 	end
 end
 
@@ -1752,8 +1750,15 @@ end
 redef class ADoExpr
 	redef fun stmt(v)
 	do
+		# If this bloc has a catch, register it in the counter
+		if self.n_catch != null then v.catch_count += 1
 		v.stmt(self.n_block)
 		v.is_escape(self.break_mark) # Clear the break (if any)
+		if self.n_catch != null then
+			v.catch_count -= 1
+			# Are we in abort mode? then this catch is executing
+			if v.is_escape(v.catch_mark) then v.stmt(self.n_catch)
+		end
 	end
 end
 
@@ -1971,11 +1976,71 @@ redef class AArrayExpr
 	end
 end
 
+redef class AugmentedStringFormExpr
+	# Factorize the making of a `Regex` object from a literal prefixed string
+	fun make_re(v: NaiveInterpreter, rs: Instance): nullable Instance do
+		var tore = to_re
+		assert tore != null
+		var res = v.callsite(tore, [rs])
+		if res == null then
+			print "Cannot call property `to_re` on {self}"
+			abort
+		end
+		for j in suffix.chars do
+			if j == 'i' then
+				var prop = ignore_case
+				assert prop != null
+				v.callsite(prop, [res, v.bool_instance(true)])
+				continue
+			end
+			if j == 'm' then
+				var prop = newline
+				assert prop != null
+				v.callsite(prop, [res, v.bool_instance(true)])
+				continue
+			end
+			if j == 'b' then
+				var prop = extended
+				assert prop != null
+				v.callsite(prop, [res, v.bool_instance(false)])
+				continue
+			end
+			# Should not happen, this needs to be updated
+			# along with the addition of new suffixes
+			abort
+		end
+		return res
+	end
+end
+
 redef class AStringFormExpr
-	redef fun expr(v)
-	do
-		var txt = self.value.as(not null)
-		return v.string_instance(txt)
+	redef fun expr(v) do return v.string_instance(value)
+end
+
+redef class AStringExpr
+	redef fun expr(v) do
+		var s = v.string_instance(value)
+		if is_string then return s
+		if is_bytestring then
+			var ns = v.native_string_instance_from_ns(bytes.items, bytes.length)
+			var ln = v.int_instance(bytes.length)
+			var prop = to_bytes_with_copy
+			assert prop != null
+			var res = v.callsite(prop, [ns, ln])
+			if res == null then
+				print "Cannot call property `to_bytes` on {self}"
+				abort
+			end
+			s = res
+		else if is_re then
+			var res = make_re(v, s)
+			assert res != null
+			s = res
+		else
+			print "Unimplemented prefix or suffix for {self}"
+			abort
+		end
+		return s
 	end
 end
 
@@ -1991,6 +2056,7 @@ redef class ASuperstringExpr
 		var i = v.array_instance(array, v.mainmodule.object_type)
 		var res = v.send(v.force_get_primitive_method("plain_to_s", i.mtype), [i])
 		assert res != null
+		if is_re then res = make_re(v, res)
 		return res
 	end
 end

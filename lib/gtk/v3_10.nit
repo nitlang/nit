@@ -70,7 +70,7 @@ end
 
 # A single row of a `GtkListBox`
 extern class GtkListBoxRow `{ GtkListBoxRow* `}
-	super GtkWidget
+	super GtkBin
 
 	new `{ return (GtkListBoxRow*)gtk_list_box_row_new(); `}
 

@@ -59,7 +59,6 @@ redef class ACallExpr
 
 			# Retrieve regex source
 			var re_src = receiver.value
-			if re_src == null then return
 
 			# Check for errors by compiling it right now
 			var re = re_src.to_re

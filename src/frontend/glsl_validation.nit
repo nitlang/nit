@@ -77,7 +77,6 @@ private class GLSLValidationPhase
 
 		# Get the shader source
 		var shader = nstring.value
-		assert shader != null
 
 		# Copy the shader to a file
 		# TODO make it more portable

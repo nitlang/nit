@@ -33,6 +33,61 @@ import model_views
 
 redef class MModule
 
+	# Collect all transitive imports.
+	fun collect_ancestors(view: ModelView): Set[MModule] do
+		var res = new HashSet[MModule]
+		for mentity in in_importation.greaters do
+			if mentity == self then continue
+			if not view.accept_mentity(mentity) then continue
+			res.add mentity
+		end
+		return res
+	end
+
+	# Collect direct imports.
+	fun collect_parents(view: ModelView): Set[MModule] do
+		var res = new HashSet[MModule]
+		for mentity in in_importation.direct_greaters do
+			if mentity == self then continue
+			if not view.accept_mentity(mentity) then continue
+			res.add mentity
+		end
+		return res
+	end
+
+	# Collect direct children (modules that directly import `self`).
+	fun collect_children(view: ModelView): Set[MModule] do
+		var res = new HashSet[MModule]
+		for mentity in in_importation.direct_smallers do
+			if mentity == self then continue
+			if not view.accept_mentity(mentity) then continue
+			res.add mentity
+		end
+		return res
+	end
+
+	# Collect all transitive children.
+	fun collect_descendants(view: ModelView): Set[MModule] do
+		var res = new HashSet[MModule]
+		for mentity in in_importation.smallers do
+			if mentity == self then continue
+			if not view.accept_mentity(mentity) then continue
+			res.add mentity
+		end
+		return res
+	end
+
+	# Build the importation poset for `self`
+	fun importation_poset(view: ModelView): POSet[MModule] do
+		var mmodules = new HashSet[MModule]
+		mmodules.add self
+		mmodules.add_all collect_ancestors(view)
+		mmodules.add_all collect_parents(view)
+		mmodules.add_all collect_children(view)
+		mmodules.add_all collect_descendants(view)
+		return view.mmodules_poset(mmodules)
+	end
+
 	# Collect mclassdefs introduced in `self` with `visibility >= to min_visibility`.
 	fun collect_intro_mclassdefs(view: ModelView): Set[MClassDef] do
 		var res = new HashSet[MClassDef]
@@ -213,6 +268,15 @@ redef class MClass
 		return set
 	end
 
+	# Collect mmethods inherited by 'self' if accepted by `view`.
+	fun collect_inherited_mmethods(view: ModelView): Set[MMethod] do
+		var res = new HashSet[MMethod]
+		for mproperty in collect_inherited_mproperties(view) do
+			if mproperty isa MMethod then res.add(mproperty)
+		end
+		return res
+	end
+
 	# Collect mattributes introduced in 'self' with `visibility >= min_visibility`.
 	fun collect_intro_mattributes(view: ModelView): Set[MAttribute] do
 		var res = new HashSet[MAttribute]
@@ -256,6 +320,52 @@ redef class MClass
 		set.add_all(collect_intro_mattributes(view))
 		set.add_all(collect_redef_mattributes(view))
 		set.add_all(collect_inherited_mattributes(view))
+		return set
+	end
+
+	# Collect init mmethods introduced in 'self' if accepted by `view`.
+	fun collect_intro_inits(view: ModelView): Set[MMethod] do
+		var res = new HashSet[MMethod]
+		for mproperty in collect_intro_mmethods(view) do
+			if mproperty.is_init then res.add(mproperty)
+		end
+		return res
+	end
+
+	# Collect init mmethods redefined in 'self' if accepted by `view`.
+	fun collect_redef_inits(view: ModelView): Set[MMethod] do
+		var res = new HashSet[MMethod]
+		for mproperty in collect_redef_mmethods(view) do
+			if mproperty.is_init then res.add(mproperty)
+		end
+		return res
+	end
+
+	# Collect init mmethods introduced and redefined in 'self' if accepted by `view`.
+	fun collect_local_inits(view: ModelView): Set[MMethod] do
+		var set = new HashSet[MMethod]
+		set.add_all collect_intro_inits(view)
+		set.add_all collect_redef_inits(view)
+		return set
+	end
+
+	# Collect init mmethods inherited by 'self'  if accepted by `view`.
+	fun collect_inherited_inits(view: ModelView): Set[MMethod] do
+		var res = new HashSet[MMethod]
+		for mproperty in collect_inherited_mmethods(view) do
+			if mproperty.is_init then res.add(mproperty)
+		end
+		return res
+	end
+
+	# Collect all init mmethods accessible by 'self'  if accepted by `view`.
+	#
+	# This include introduced, redefined, inherited inits.
+	fun collect_accessible_inits(view: ModelView): Set[MMethod] do
+		var set = new HashSet[MMethod]
+		set.add_all(collect_intro_inits(view))
+		set.add_all(collect_redef_inits(view))
+		set.add_all(collect_inherited_inits(view))
 		return set
 	end
 end

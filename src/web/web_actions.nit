@@ -16,6 +16,7 @@
 module web_actions
 
 import web_views
+import uml
 
 # Display the tree of all loaded mentities.
 class TreeAction
@@ -94,6 +95,41 @@ class DocAction
 			return render_error(404, "No mentity matching this namespace.")
 		end
 		var view = new HtmlDocPage(modelbuilder, mentities.first)
+		return render_view(view)
+	end
+end
+
+# Return an UML diagram for `namespace`.
+class UMLDiagramAction
+	super ModelAction
+
+	# Mainmodule used for hierarchy flattening.
+	var mainmodule: MModule
+
+	redef fun answer(request, url) do
+		var namespace = request.param("namespace")
+		if namespace == null or namespace.is_empty then
+			return render_error(400, "Missing :namespace.")
+		end
+		var model = init_model_view(request)
+		var mentities = model.mentities_by_namespace(namespace)
+		if mentities.is_empty then
+			return render_error(404, "No mentity matching this namespace.")
+		end
+		var mentity = mentities.first
+		if mentity isa MClassDef then mentity = mentity.mclass
+
+		var dot
+		if mentity isa MClass then
+			var uml = new UMLModel(model, mainmodule)
+			dot = uml.generate_class_uml.write_to_string
+		else if mentity isa MModule then
+			var uml = new UMLModel(model, mentity)
+			dot = uml.generate_package_uml.write_to_string
+		else
+			return render_error(404, "No diagram matching this namespace.")
+		end
+		var view = new HtmlDotPage(dot, mentity.html_name)
 		return render_view(view)
 	end
 end

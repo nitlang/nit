@@ -309,7 +309,7 @@ redef class NeoEdge
 	# Use the IDs specfied by `graph.nodes`.
 	redef fun append_json_for(graph, buffer) do
 		buffer.append "\{\"type\":"
-		rel_type.append_json(buffer)
+		rel_type.as(not null).append_json(buffer)
 		buffer.append ",\"properties\":"
 		properties.append_json(buffer)
 		buffer.append ",\"from\":"

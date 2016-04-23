@@ -72,7 +72,7 @@ class HttpServer
 				request.uri_params = route.parse_params(request.uri)
 
 				var handler = route.handler
-				var root = route.path
+				var root = route.resolve_path(request)
 				var turi
 				if root != null then
 					turi = ("/" + request.uri.substring_from(root.length)).simplify_path
@@ -154,7 +154,7 @@ end
 
 redef class ServerConfig
 	# Handle to retreive the `HttpFactory` on config change
-	private var factory: HttpFactory
+	private var factory: HttpFactory is noinit
 
 	private init with_factory(factory: HttpFactory) do self.factory = factory
 end
@@ -182,7 +182,8 @@ redef class Sys
 				listeners_count[name, port] = 1
 			end
 		else
-			listeners_count[name, port] += 1
+			var value = listeners_count[name, port].as(not null)
+			listeners_count[name, port] = value + 1
 		end
 
 		interfac.registered = true
@@ -200,7 +201,8 @@ redef class Interfaces
 	redef fun add(e)
 	do
 		super
-		if vh.server_config != null then sys.listen_on(e, vh.server_config.factory)
+		var config = vh.server_config
+		if config != null then sys.listen_on(e, config.factory)
 	end
 
 	# TODO remove

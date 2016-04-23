@@ -45,13 +45,13 @@ redef class NativeString
 	fun to_nsstring(length: Int): NSString in "ObjC" `{
 		return [[NSString alloc] initWithBytes:self
 			length:length
-			encoding:NSASCIIStringEncoding];
+			encoding:NSUTF8StringEncoding];
 	`}
 end
 
 redef class Text
 	# Get a `NSString` from `self`
-	fun to_nsstring: NSString do return to_cstring.to_nsstring(length)
+	fun to_nsstring: NSString do return to_cstring.to_nsstring(bytelen)
 end
 
 # Wrapper of byte buffers
@@ -63,7 +63,7 @@ extern class NSData in "ObjC" `{ NSData * `}
 	# Number of bytes containted in `self`
 	fun length: Int in "ObjC" `{ return self.length; `}
 
-	redef fun to_s do return bytes.to_s_with_length(length)
+	redef fun to_s do return bytes.to_s_with_copy_and_length(length)
 end
 
 # Error condition

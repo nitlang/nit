@@ -651,6 +651,8 @@ abstract class AbstractCompiler
 		self.header.add_decl("#include <stdlib.h>")
 		self.header.add_decl("#include <stdio.h>")
 		self.header.add_decl("#include <string.h>")
+		# longjmp !
+		self.header.add_decl("#include <setjmp.h>\n")
 		self.header.add_decl("#include <sys/types.h>\n")
 		self.header.add_decl("#include <unistd.h>\n")
 		self.header.add_decl("#include <stdint.h>\n")
@@ -679,6 +681,7 @@ abstract class AbstractCompiler
 
 		compile_header_structs
 		compile_nitni_structs
+		compile_catch_stack
 
 		var gccd_disable = modelbuilder.toolcontext.opt_no_gcc_directive.value
 		if gccd_disable.has("noreturn") or gccd_disable.has("all") then
@@ -705,6 +708,17 @@ abstract class AbstractCompiler
 		self.header.add_decl("extern int glob_argc;")
 		self.header.add_decl("extern char **glob_argv;")
 		self.header.add_decl("extern val *glob_sys;")
+	end
+
+	# Stack stocking environment for longjumps
+	protected fun compile_catch_stack do
+		self.header.add_decl """
+struct catch_stack_t {
+	int cursor;
+	jmp_buf envs[100];
+};
+extern struct catch_stack_t catchStack;
+"""
 	end
 
 	# Declaration of structures for live Nit types
@@ -790,6 +804,7 @@ extern void nitni_global_ref_decr( struct nitni_ref *ref );
 		v.add_decl("int glob_argc;")
 		v.add_decl("char **glob_argv;")
 		v.add_decl("val *glob_sys;")
+		v.add_decl("struct catch_stack_t catchStack;")
 
 		if self.modelbuilder.toolcontext.opt_typing_test_metrics.value then
 			for tag in count_type_test_tags do
@@ -878,6 +893,7 @@ extern void nitni_global_ref_decr( struct nitni_ref *ref );
 		v.add("signal(SIGPIPE, SIG_IGN);")
 
 		v.add("glob_argc = argc; glob_argv = argv;")
+		v.add("catchStack.cursor = -1;")
 		v.add("initialize_gc_option();")
 
 		v.add "initialize_nitni_global_refs();"
@@ -1588,6 +1604,18 @@ abstract class AbstractCompilerVisitor
 		return res
 	end
 
+	# Generates a NativeString instance fully escaped in C-style \xHH fashion
+	fun native_string_instance(ns: NativeString, len: Int): RuntimeVariable do
+		var mtype = mmodule.native_string_type
+		var nat = new_var(mtype)
+		var byte_esc = new Buffer.with_cap(len * 4)
+		for i in [0 .. len[ do
+			byte_esc.append("\\x{ns[i].to_s.substring_from(2)}")
+		end
+		self.add("{nat} = \"{byte_esc}\";")
+		return nat
+	end
+
 	# Generate a string value
 	fun string_instance(string: String): RuntimeVariable
 	do
@@ -1696,6 +1724,9 @@ abstract class AbstractCompilerVisitor
 	# used by aborts, asserts, casts, etc.
 	fun add_abort(message: String)
 	do
+		self.add("if(catchStack.cursor >= 0)\{")
+		self.add("longjmp(catchStack.envs[catchStack.cursor], 1);")
+		self.add("\}")
 		self.add("PRINT_ERROR(\"Runtime error: %s\", \"{message.escape_to_c}\");")
 		add_raw_abort
 	end
@@ -3362,8 +3393,19 @@ end
 redef class ADoExpr
 	redef fun stmt(v)
 	do
-		v.stmt(self.n_block)
-		v.add_escape_label(break_mark)
+		if self.n_catch != null then
+			v.add("catchStack.cursor += 1;")
+			v.add("if(!setjmp(catchStack.envs[catchStack.cursor]))\{")
+			v.stmt(self.n_block)
+			v.add("catchStack.cursor -= 1;")
+			v.add("\}else \{")
+			v.add("catchStack.cursor -= 1;")
+			v.stmt(self.n_catch)
+			v.add("\}")
+		else
+			v.stmt(self.n_block)
+		end
+			v.add_escape_label(break_mark)
 	end
 end
 
@@ -3589,14 +3631,75 @@ redef class AArrayExpr
 	end
 end
 
+redef class AugmentedStringFormExpr
+	# Factorize the making of a `Regex` object from a literal prefixed string
+	protected fun make_re(v: AbstractCompilerVisitor, rs: RuntimeVariable): nullable RuntimeVariable do
+		var re = to_re
+		assert re != null
+		var res = v.compile_callsite(re, [rs])
+		if res == null then
+			print "Cannot call property `to_re` on {self}"
+			abort
+		end
+		for i in suffix.chars do
+			if i == 'i' then
+				var ign = ignore_case
+				assert ign != null
+				v.compile_callsite(ign, [res, v.bool_instance(true)])
+				continue
+			end
+			if i == 'm' then
+				var nl = newline
+				assert nl != null
+				v.compile_callsite(nl, [res, v.bool_instance(true)])
+				continue
+			end
+			if i == 'b' then
+				var ext = extended
+				assert ext != null
+				v.compile_callsite(ext, [res, v.bool_instance(false)])
+				continue
+			end
+			# Should not happen, this needs to be updated
+			# along with the addition of new suffixes
+			abort
+		end
+		return res
+	end
+end
+
 redef class AStringFormExpr
-	redef fun expr(v) do return v.string_instance(self.value.as(not null))
+	redef fun expr(v) do return v.string_instance(value)
+end
+
+redef class AStringExpr
+	redef fun expr(v) do
+		var s = v.string_instance(value)
+		if is_string then return s
+		if is_bytestring then
+			var ns = v.native_string_instance(bytes.items, bytes.length)
+			var ln = v.int_instance(bytes.length)
+			var cs = to_bytes_with_copy
+			assert cs != null
+			var res = v.compile_callsite(cs, [ns, ln])
+			assert res != null
+			s = res
+		else if is_re then
+			var res = make_re(v, s)
+			assert res != null
+			s = res
+		else
+			print "Unimplemented prefix or suffix for {self}"
+			abort
+		end
+		return s
+	end
 end
 
 redef class ASuperstringExpr
 	redef fun expr(v)
 	do
-		var type_string = mtype.as(not null)
+		var type_string = v.mmodule.string_type
 
 		# Collect elements of the superstring
 		var array = new Array[AExpr]
@@ -3650,10 +3753,14 @@ redef class ASuperstringExpr
 
 		# Fast join the native string to get the result
 		var res = v.send(v.get_property("native_to_s", a.mtype), [a])
+		assert res != null
+
+		if is_re then res = make_re(v, res)
 
 		# We finish to work with the native array,
 		# so store it so that it can be reused
 		v.add("{varonce} = {a};")
+
 		return res
 	end
 end

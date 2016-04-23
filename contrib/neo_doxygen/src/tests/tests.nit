@@ -72,7 +72,7 @@ redef class Entity
 	# Append the debugging output of this entity to the specified buffer.
 	#
 	# Append the `model_id`, the labels and the properties.
-	redef fun debug(buffer: Buffer) do
+	redef fun debug(buffer) do
 		buffer.append "Entity#{model_id.length}:{model_id}\n"
 		buffer.append "=labels=Array({labels.length}):\n"
 		for lab in labels do buffer.append "{lab.length}:{lab}\n"

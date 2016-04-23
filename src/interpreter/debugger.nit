@@ -1418,10 +1418,8 @@ redef class AMethPropdef
 				curr_instances[i] = currFra.map[i]
 			end
 		end
-		if v.returnmark == f then
-			v.returnmark = null
+		if v.is_escape(self.return_mark) then
 			var res = v.escapevalue
-			v.escapevalue = null
 			return res
 		end
 		return null

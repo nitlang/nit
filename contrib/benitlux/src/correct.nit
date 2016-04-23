@@ -24,7 +24,7 @@ module correct
 
 import benitlux_db
 
-redef class DB
+redef class BenitluxDB
 	# Path to file with the corrections
 	private var corrections_path = "benitlux_corrections.txt"
 

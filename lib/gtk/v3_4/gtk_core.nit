@@ -457,18 +457,13 @@ end
 extern class GtkMisc `{GtkMisc *`}
 	super GtkWidget
 
-	fun alignment: GtkAlignment is abstract
-
-	fun alignment=(x: Float, y: Float) `{
+	fun set_alignment(x, y: Float) `{
 		gtk_misc_set_alignment(self, x, y);
 	`}
 
-	fun padding: GtkAlignment is abstract
-
-	fun padding=(x: Float, y: Float) `{
+	fun set_padding(x, y: Float) `{
 		gtk_misc_set_padding(self, x, y);
 	`}
-
 end
 
 # A single line text entry field
@@ -702,6 +697,24 @@ extern class GtkLabel `{GtkLabel *`}
 		return gtk_label_get_angle(self);
 	`}
 
+	# Set simple formatted text content from a `format` string and the `content` which is escaped
+	#
+	# ~~~nitish
+	# GtkLabel lbl = new GtkLabel("Non-formatted text")
+	# lbl.set_markup("<span style=\"italic\">\%s</span>".to_cstring,
+	#                "Italic content")
+	# ~~~
+	fun set_markup(format, content: NativeString) `{
+		char *formatted = g_markup_printf_escaped(format, content);
+		gtk_label_set_markup(self, formatted);
+		g_free(formatted);
+	`}
+
+	# Set justification of the lines in the label relative to each other
+	fun justify=(value: GtkJustification) `{ gtk_label_set_justify(self, value); `}
+
+	# Get justification of the lines in the label relative to each other
+	fun justify: GtkJustification `{ return gtk_label_get_justify(self); `}
 end
 
 # A widget displaying an image

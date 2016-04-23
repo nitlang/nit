@@ -47,6 +47,22 @@ redef class Byte
 			return 1
 		end
 	end
+
+	# Is `self` a valid UTF-8 sequence start ?
+	#
+	# ~~~nit
+	# assert 0u8.is_valid_utf8_start
+	# assert 0xC0u8.is_valid_utf8_start
+	# assert 0xE0u8.is_valid_utf8_start
+	# assert 0xF0u8.is_valid_utf8_start
+	# ~~~
+	fun is_valid_utf8_start: Bool do
+		if self & 0x80u8 == 0u8 then return true
+		if self & 0b1110_0000u8 == 0b1100_0000u8 then return true
+		if self & 0b1111_0000u8 == 0b1110_0000u8 then return true
+		if self & 0b1111_1000u8 == 0b1111_0000u8 then return true
+		return false
+	end
 end
 
 redef class Int
@@ -278,4 +294,15 @@ extern class NativeString `{ char* `}
 
 	# Fetch 4 chars in `self` at `pos`
 	fun fetch_4_hchars(pos: Int): Int is intern `{ return (long)be32toh(*((uint32_t*)(self+pos))); `}
+
+
+	# Right shifts `len` bytes of `self` from `sh` bytes starting at position `pos`
+	fun rshift(sh, len, pos: Int) do
+		copy_to(self, len, pos, pos + sh)
+	end
+
+	# Left shifts `len` bytes of `self` from `sh` bytes starting at position `pos`
+	fun lshift(sh, len, pos: Int) do
+		copy_to(self, len, pos, pos - sh)
+	end
 end

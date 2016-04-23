@@ -18,17 +18,20 @@
 module benitlux_controller
 
 import nitcorn
+import nitcorn::restful
 private import json::serialization
 
 import benitlux_model
 import benitlux_db
 import benitlux_view
+import benitlux_social
 
+# Server action for REST or Web, for a given location
 abstract class BenitluxAction
 	super Action
 
-	# Path to the database
-	var db_path = "benitlux_sherbrooke.db"
+	# Database used for both the mailing list and the social network
+	var db: BenitluxDB
 
 	# Path to the storage of the last email sent
 	var sample_email_path = "benitlux_sherbrooke.email"
@@ -56,16 +59,12 @@ class BenitluxSubscriptionAction
 				template.message_level = "success"
 				template.message_content = "Subscription successful!"
 
-				var db = new DB.open(db_path)
 				db.subscribe email
-				db.close
 			else if unsub then
 				template.message_level = "warning"
 				template.message_content = "You've been unsubscribed."
 
-				var db = new DB.open(db_path)
 				db.unsubscribe email
-				db.close
 			end
 		end
 
@@ -83,46 +82,247 @@ class BenitluxSubscriptionAction
 	end
 end
 
-# RESTful interface to compare beer offer between given dates
-#
-# Expects request in the format of `since/2014-07-24`, will replay with a
-# `BeerEvents` serialized to Json with the necessary meta-data to be deserialized.
+# RESTful interface for the client app
 class BenitluxRESTAction
 	super BenitluxAction
+	super RestfulAction
 
-	redef fun answer(request, turi)
-	do
-		var words = turi.split("/")
-		if not words.is_empty and words.first.is_empty then words.shift
-
-		if words.length >= 2 and words[0] == "since" then
-			var since = words[1].std_date
-
-			var db = new DB.open(db_path)
-			var events = db.beer_events_since(since.to_sql_string)
-			db.close
-
-			if events == null then
-				var response = new HttpResponse(400)
-				response.body = "Bad request"
-				return response
-			end
-
-			var stream = new StringWriter
-			var serializer = new JsonSerializer(stream)
-			serializer.serialize events
-			var serialized = stream.to_s
-
-			var response = new HttpResponse(200)
-			response.body = serialized
-			return response
+	# Sign up a new user
+	#
+	# signup?name=a&pass=b&email=c -> LoginResult | BenitluxError
+	fun signup(name, pass, email: String): HttpResponse
+	is restful do
+		# Validate input
+		if not name.name_is_ok then
+			var error = new BenitluxError("Invalid username")
+			return new HttpResponse.ok(error)
 		end
 
-		var response = new HttpResponse(400)
-		response.body = "Bad request"
-		return response
+		if not pass.pass_is_ok then
+			var error = new BenitluxError("Invalid password")
+			return new HttpResponse.ok(error)
+		end
+
+		# Query DB
+		var error_message = db.signup(name, pass, email)
+
+		var object: nullable Serializable
+		if error_message == null then
+			object = db.login(name, pass)
+		else
+			object = new BenitluxError(error_message)
+		end
+
+		if object == null then
+			# There was an error in the call to login
+			return new HttpResponse.server_error
+		end
+
+		# It went ok, may or may not be signed up
+		return new HttpResponse.ok(object)
+	end
+
+	# Attempt to login
+	#
+	# login?name=a&pass=b -> LoginResult | BenitluxError
+	fun login(name, pass: String): HttpResponse
+	is restful do
+		var log: nullable Serializable = db.login(name, pass)
+		if log == null then log = new BenitluxError("Login Failed", "Invalid username and password combination.")
+
+		return new HttpResponse.ok(log)
+	end
+
+	# Search a user
+	#
+	# search?token=b&query=a&offset=0 -> Array[UserAndFollowing] | BenitluxError
+	fun search(token: nullable String, query: String): HttpResponse
+	is restful do
+		var user_id = db.token_to_id(token)
+		var users = db.search_users(query, user_id)
+		if users == null then return new HttpResponse.server_error
+
+		return new HttpResponse.ok(users)
+	end
+
+	# List available beers
+	#
+	# list?token=a[&offset=0&count=1] -> Array[BeerAndRatings] | BenitluxError
+	fun list(token: nullable String): HttpResponse
+	is restful do
+		var user_id = db.token_to_id(token)
+		var list = db.list_beers_and_rating(user_id)
+		if list == null then return new HttpResponse.server_error
+
+		return new HttpResponse.ok(list)
+	end
+
+	# Post a review of `beer`
+	#
+	# review?token=a&beer=b&rating=0 -> true | BenitluxError
+	fun review(token: String, rating, beer: Int): HttpResponse
+	is restful do
+		var user_id = db.token_to_id(token)
+		if user_id == null then return new HttpResponse.invalid_token
+
+		db.post_review(user_id, beer, rating, "")
+
+		return new HttpResponse.ok(true)
+	end
+
+	# Set whether user of `token` follows `user_to`, by default set as follow
+	#
+	# follow?token=a&user_to=0 -> true | BenitluxError
+	fun follow(token: String, user_to: Int, follow: nullable Bool): HttpResponse
+	is restful do
+		var user = db.token_to_id(token)
+		if user == null then return new HttpResponse.invalid_token
+
+		if follow or else true then
+			db.add_followed(user, user_to)
+		else db.remove_followed(user, user_to)
+
+		return new HttpResponse.ok(true)
+	end
+
+	# List followers of the user of `token`
+	#
+	# followers?token=a -> Array[UserAndFollowing] | BenitluxError | BenitluxError
+	fun followers(token: String): HttpResponse
+	is restful do
+		var user = db.token_to_id(token)
+		if user == null then return new HttpResponse.invalid_token
+
+		var users = db.followers(user)
+		if users == null then return new HttpResponse.server_error
+
+		return new HttpResponse.ok(users)
+	end
+
+	# List users followed by the user of `token`
+	#
+	# followed?token=a -> Array[UserAndFollowing] | BenitluxError
+	fun followed(token: String): HttpResponse
+	is restful do
+		var user = db.token_to_id(token)
+		if user == null then return new HttpResponse.invalid_token
+
+		var users = db.followed(user)
+		if users == null then return new HttpResponse.server_error
+
+		return new HttpResponse.ok(users)
+	end
+
+	# List friends of the user of `token`
+	#
+	# friends?token=a -> Array[UserAndFollowing] | BenitluxError
+	fun friends(token: String, n: nullable Int): HttpResponse
+	is restful do
+		var user = db.token_to_id(token)
+		var users = db.friends(user, n)
+		if users == null then return new HttpResponse.server_error
+
+		return new HttpResponse.ok(users)
+	end
+
+	# Check user in or out
+	#
+	# checkin?token=a -> true | BenitluxError
+	fun checkin(token: String, is_in: nullable Bool): HttpResponse
+	is restful do
+		var id = db.token_to_id(token)
+		if id == null then return new HttpResponse.invalid_token
+
+		# Register in DB
+		db.checkin(id, is_in or else true)
+
+		# Update followed_followers
+		var common_followers = db.followed_followers(id)
+
+		# Sent push notifications to connected reciprocal friends
+		if common_followers != null then
+			for friend in common_followers do
+				var conn = push_connections.get_or_null(friend.id)
+				if conn != null then
+					push_connections.keys.remove friend.id
+					if not conn.closed then
+						var report = db.checkedin_followed_followers(friend.id)
+						var response = if report == null then
+								new HttpResponse.server_error
+							else new HttpResponse.ok(report)
+						conn.respond response
+						conn.close
+					end
+				end
+			end
+		end
+
+		return new HttpResponse.ok(true)
+	end
+
+	# List users currently checked in among friends of the user of `token`
+	#
+	# checkedin?token=a -> Array[UserAndFollowing]
+	fun checkedin(token: String): HttpResponse
+	is restful do
+		var user_id = db.token_to_id(token)
+		if user_id == null then return new HttpResponse.invalid_token
+
+		var report = db.checkedin_followed_followers(user_id)
+		if report == null then return new HttpResponse.server_error
+		return new HttpResponse.ok(report)
+	end
+
+	# List beer changes since `date` with information in relation to the user of `token`
+	#
+	# since?token=a&date=date -> BeerEvents
+	fun since(token, date: nullable String): HttpResponse
+	is restful do
+		# Query DB
+		var user_id = db.token_to_id(token)
+		var list = db.list_beers_and_rating(user_id, date)
+		if list == null then return new HttpResponse.server_error
+
+		return new HttpResponse.ok(list)
+	end
+
+	# Fallback answer on errors
+	redef fun answer(request, turi) do return new HttpResponse.bad_request
+end
+
+# ---
+# Push notification
+
+# Benitlux push notification interface
+class BenitluxPushAction
+	super BenitluxAction
+
+	# Intercept the full answer to set aside the connection and complete it later
+	redef fun prepare_respond_and_close(request, turi, connection)
+	do
+		var token = request.string_arg("token")
+
+		var user = db.token_to_id(token)
+		if user == null then
+			# Report errors right away
+			var response =  new HttpResponse.invalid_token
+			connection.respond response
+			connection.close
+			return
+		end
+
+		# Set aside the connection
+		push_connections[user] = connection
 	end
 end
+
+redef class Sys
+	# Connections left open for a push notification, organized per user id
+	private var push_connections = new Map[Int, HttpServer]
+end
+
+# ---
+# Misc services
 
 redef class Text
 	# Rewrite the date represented by `self` in the format expected by SQLite
@@ -139,5 +339,39 @@ redef class Text
 		d = "0"*(2 - d.length) + d
 
 		return "{y}-{m}-{d}"
+	end
+end
+
+redef class HttpResponse
+
+	# Respond with `data` in Json and a code 200
+	init ok(data: Serializable)
+	do
+		init 200
+		body = data.to_json_string
+	end
+
+	# Respond with a `BenitluxError` in JSON and a code 403
+	init invalid_token
+	do
+		init 403
+		var error = new BenitluxTokenError("Forbidden", "Invalid or outdated token.")
+		body = error.to_json_string
+	end
+
+	# Respond with a `BenitluxError` in JSON and a code 400
+	init bad_request
+	do
+		init 400
+		var error = new BenitluxError("Bad Request", "Application error, or it needs to be updated.")
+		body = error.to_json_string
+	end
+
+	# Respond with a `BenitluxError` in JSON and a code 500
+	init server_error
+	do
+		init 500
+		var error = new BenitluxError("Internal Server Error", "Server error, try again later.")
+		body = error.to_json_string
 	end
 end

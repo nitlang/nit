@@ -76,6 +76,7 @@ class Link
 
 	redef fun rendering do
 		add "<a{render_css_classes} href=\"{href}\""
+		var title = self.title
 		if title != null then add " title=\"{title.write_to_string}\""
 		add ">{text}</a>"
 	end
@@ -117,6 +118,7 @@ class Header
 
 	redef fun rendering do
 		add "<h{level}{render_css_classes}>{text.write_to_string}"
+		var subtext = self.subtext
 		if subtext != null then add "<small>{subtext.write_to_string}</small>"
 		add "</h{level}>"
 	end
@@ -446,6 +448,7 @@ class BSPanel
 
 	redef fun rendering do
 		addn "<div{render_css_classes}>"
+		var heading = self.heading
 		if heading != null then
 			addn "<div class=\"panel-heading\">"
 			addn heading.write_to_string
@@ -454,6 +457,7 @@ class BSPanel
 		addn "<div class=\"panel-body\">"
 		addn body.write_to_string
 		addn "</div>"
+		var footer = self.footer
 		if footer != null then
 			addn "<div class=\"panel-footer\">"
 			addn footer.write_to_string

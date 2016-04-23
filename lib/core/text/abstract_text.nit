@@ -1095,6 +1095,39 @@ abstract class Text
 		end
 	end
 
+	# Packs the content of a string in packs of `ln` chars.
+	# This variant ensures that only the last element might be smaller than `ln`
+	#
+	# ~~~nit
+	# var s = "abcdefghijklmnopqrstuvwxyz"
+	# assert s.pack_l(4) == ["abcd","efgh","ijkl","mnop","qrst","uvwx","yz"]
+	# ~~~
+	fun pack_l(ln: Int): Array[Text] do
+		var st = 0
+		var retarr = new Array[Text].with_capacity(length / ln + length % ln)
+		while st < length do
+			retarr.add(substring(st, ln))
+			st += ln
+		end
+		return retarr
+	end
+
+	# Packs the content of a string in packs of `ln` chars.
+	# This variant ensures that only the first element might be smaller than `ln`
+	#
+	# ~~~nit
+	# var s = "abcdefghijklmnopqrstuvwxyz"
+	# assert s.pack_r(4) == ["ab","cdef","ghij","klmn","opqr","stuv","wxyz"]
+	# ~~~
+	fun pack_r(ln: Int): Array[Text] do
+		var st = length
+		var retarr = new Array[Text].with_capacity(length / ln + length % ln)
+		while st >= 0 do
+			retarr.add(substring(st - ln, ln))
+			st -= ln
+		end
+		return retarr.reversed
+	end
 end
 
 # All kinds of array-based text representations.
@@ -2041,22 +2074,43 @@ do
 end
 
 redef class NativeString
-	# Returns `self` as a new String.
+	# Get a `String` from the data at `self` copied into Nit memory
+	#
+	# Require: `self` is a null-terminated string.
 	fun to_s_with_copy: String is abstract
 
-	# Returns `self` as a String of `length`.
+	# Get a `String` from `length` bytes at `self`
+	#
+	# The result may point to the data at `self` or
+	# it may make a copy in Nit controlled memory.
+	# This method should only be used when `self` was allocated by the Nit GC,
+	# or when manually controlling the deallocation of `self`.
 	fun to_s_with_length(length: Int): String is abstract
 
-	# Returns a new instance of `String` with self as `_items`
+	# Get a `String` from the raw `length` bytes at `self`
 	#
-	# /!\: Does not clean the items for compliance with UTF-8,
-	# Use only if you know what you are doing
-	fun to_s_unsafe(len: nullable Int): String is abstract
+	# The default value of `length` is the number of bytes before
+	# the first null character.
+	#
+	# The created `String` points to the data at `self`.
+	# This method should be used when `self` was allocated by the Nit GC,
+	# or when manually controlling the deallocation of `self`.
+	#
+	# /!\: This service does not clean the items for compliance with UTF-8,
+	# use only when the data has already been verified as valid UTF-8.
+	fun to_s_unsafe(length: nullable Int): String is abstract
 
-	# Returns `self` as a String with `bytelen` and `length` set
+	# Get a `String` from the raw `bytelen` bytes at `self` with `unilen` Unicode characters
 	#
-	# SEE: `abstract_text::Text` for more infos on the difference
-	# between `Text::bytelen` and `Text::length`
+	# The created `String` points to the data at `self`.
+	# This method should be used when `self` was allocated by the Nit GC,
+	# or when manually controlling the deallocation of `self`.
+	#
+	# /!\: This service does not clean the items for compliance with UTF-8,
+	# use only when the data has already been verified as valid UTF-8.
+	#
+	# SEE: `abstract_text::Text` for more info on the difference
+	# between `Text::bytelen` and `Text::length`.
 	fun to_s_full(bytelen, unilen: Int): String is abstract
 end
 

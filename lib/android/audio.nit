@@ -115,9 +115,10 @@ private extern class NativeMediaPlayer in "Java" `{ android.media.MediaPlayer `}
 		}
 	`}
 
-	fun create(context: NativeActivity, id: Int): NativeMediaPlayer in "Java" `{
+	new create(context: NativeActivity, id: Int): NativeMediaPlayer
+	in "Java" `{
 		try {
-			return self.create(context, (int)id);
+			return MediaPlayer.create(context, (int)id);
 		}catch(Exception e) {
 			return null;
 		}
@@ -367,8 +368,7 @@ class MediaPlayer
 
 	# Init the mediaplayer with a sound resource id
 	init from_id(context: NativeActivity, id: Int) do
-		self.nmedia_player = new NativeMediaPlayer
-		self.nmedia_player = nmedia_player.create(context, id)
+		self.nmedia_player = new NativeMediaPlayer.create(context, id)
 		if self.nmedia_player.is_java_null then
 			self.error = new Error("Failed to create the MediaPlayer")
 			self.sound = new Music.priv_init(id, self, self.error)
@@ -388,7 +388,8 @@ class MediaPlayer
 			reset
 			destroy
 		end
-		self.nmedia_player = self.nmedia_player.create(context, id)
+
+		self.nmedia_player = new NativeMediaPlayer.create(context, id)
 		if self.nmedia_player.is_java_null then
 			self.error = new Error("Failed to load a sound")
 			self.sound = new Music.priv_init(id, self, new Error("Sound loading failed"))

@@ -590,6 +590,11 @@ redef class AStringFormExpr
 		v.add_type(native)
 		var prop = v.get_method(native, "to_s_full")
 		v.add_monomorphic_send(native, prop)
+		v.add_callsite(to_re)
+		v.add_callsite(ignore_case)
+		v.add_callsite(newline)
+		v.add_callsite(extended)
+		v.add_callsite(to_bytes_with_copy)
 	end
 end
 

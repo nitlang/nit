@@ -20,16 +20,30 @@ module benitlux_web
 import benitlux_model
 import benitlux_view
 import benitlux_controller
+import benitlux_restful
 
 # Listening interface
 fun iface: String do return "localhost:8080"
 
+# Sqlite3 database
+var db_path = "benitlux_sherbrooke.db"
+var db = new BenitluxDB.open(db_path)
+var db_error = db.error
+if db_error != null then
+	print_error db_error
+	exit 1
+end
+
+# Setup routes
 var vh = new VirtualHost(iface)
-vh.routes.add new Route("/rest/", new BenitluxRESTAction)
-vh.routes.add new Route(null, new BenitluxSubscriptionAction)
+vh.routes.add new Route("/rest/", new BenitluxRESTAction(db))
+vh.routes.add new Route("/push/", new BenitluxPushAction(db))
+vh.routes.add new Route(null, new BenitluxSubscriptionAction(db))
 
 var factory = new HttpFactory.and_libevent
 factory.config.virtual_hosts.add vh
 
 print "Launching server on http://{iface}/"
 factory.run
+
+db.close

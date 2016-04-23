@@ -35,11 +35,11 @@ redef class MDoc
 	var documentation: String is lazy do return content.join("\n").html_escape
 
 	private var markdown_proc: MarkdownProcessor is lazy do
-		return original_mentity.model.nitdoc_md_processor
+		return original_mentity.as(not null).model.nitdoc_md_processor
 	end
 
 	private var inline_proc: MarkdownProcessor is lazy do
-		return original_mentity.model.nitdoc_inline_processor
+		return original_mentity.as(not null).model.nitdoc_inline_processor
 	end
 
 	# Renders the synopsis as a HTML comment block.
