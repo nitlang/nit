@@ -301,7 +301,51 @@ class ModelBuilder
 			end
 		end
 
-		# If everything fail, then give up :(
+		# If everything fail, then give up with class by proposing things.
+		#
+		# TODO Give hints on formal types (param and virtual)
+		# TODO How to move this in a libified autonomous code?
+
+		var all_classes = model.get_mclasses_by_name(name)
+
+		# Look for imported but invisible classes.
+		if all_classes != null then for c in all_classes do
+			if not mmodule.in_importation <= c.intro_mmodule then continue
+			error(ntype, "Error: class `{c.full_name}` not visible in module `{mmodule}`.")
+			return null
+		end
+
+		# Look for not imported but known classes from importable modules
+		var hints = new Array[String]
+		if all_classes != null then for c in all_classes do
+			if c.intro_mmodule.in_importation <= mmodule then continue
+			if c.visibility <= private_visibility then continue
+			hints.add "`{c.intro_mmodule.full_name}`"
+		end
+		if hints.not_empty then
+			error(ntype, "Error: class `{name}` not found in module `{mmodule}`. Maybe import {hints.join(",", " or ")}?")
+			return null
+		end
+
+		# Look for classes with an approximative name.
+		var bestd = name.length / 2 # limit up to 50% name change
+		for c in model.mclasses do
+			if not mmodule.in_importation <= c.intro_mmodule then continue
+			if not mmodule.is_visible(c.intro_mmodule, c.visibility) then continue
+			var d = name.levenshtein_distance(c.name)
+			if d <= bestd then
+				if d < bestd then
+					hints.clear
+					bestd = d
+				end
+				hints.add "`{c.name}`"
+			end
+		end
+		if hints.not_empty then
+			error(ntype, "Error: class `{name}` not found in module `{mmodule}`. Did you mean {hints.join(",", " or ")}?")
+			return null
+		end
+
 		error(ntype, "Error: class `{name}` not found in module `{mmodule}`.")
 		return null
 	end
