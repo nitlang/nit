@@ -679,7 +679,31 @@ redef class Text
 		return res
 	end
 
-	redef fun accept_json_serializer(v) do v.stream.write(to_json)
+	redef fun accept_json_serializer(v)
+	do
+		v.stream.write "\""
+		for i in [0 .. self.length[ do
+			var char = self[i]
+			if char == '\\' then
+				v.stream.write "\\\\"
+			else if char == '\"' then
+				v.stream.write "\\\""
+			else if char < ' ' then
+				if char == '\n' then
+					v.stream.write "\\n"
+				else if char == '\r' then
+					v.stream.write "\\r"
+				else if char == '\t' then
+					v.stream.write "\\t"
+				else
+					v.stream.write char.escape_to_utf16
+				end
+			else
+				v.stream.write char.to_s
+			end
+		end
+		v.stream.write "\""
+	end
 end
 
 redef class Serializable
