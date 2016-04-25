@@ -21,8 +21,11 @@ import counter
 
 redef class Sys
 
-	# Counts the number of allocations of FlatString
-	var flatstr_allocations = 0
+	# Counts the number of allocations of UnicodeFlatString
+	var uniflatstr_allocations = 0
+
+	# Counts the number of allocations of ASCIIFlatString
+	var asciiflatstr_allocations = 0
 
 	# Counts the number of allocations of FlatBuffer
 	var flatbuf_allocations = 0
@@ -76,7 +79,8 @@ Usage of Strings:
 
 Allocations, by type:
 		"""
-		print "\t-FlatString = {flatstr_allocations}"
+		print "\t-UnicodeFlatString = {uniflatstr_allocations}"
+		print "\t-ASCIIFlatString = {asciiflatstr_allocations}"
 		print "\t-FlatBuffer = {flatbuf_allocations}"
 		print "\t-Concat = {concat_allocations}"
 		print "\t-RopeBuffer = {ropebuf_allocations}"
@@ -84,7 +88,7 @@ Allocations, by type:
 		print "Calls to length, by type:"
 		for k, v in length_calls do
 			printn "\t{k} = {v}"
-			if k == "FlatString" then printn " (cache misses {length_cache_miss[k]}, {div(length_cache_miss[k] * 100, v)}%)"
+			if k == "UnicodeFlatString" then printn " (cache misses {length_cache_miss[k]}, {div(length_cache_miss[k] * 100, v)}%)"
 			printn "\n"
 		end
 		print "Indexed accesses, by type:"
@@ -111,8 +115,6 @@ Allocations, by type:
 
 		print "Calls to first_byte on FlatString {first_byte_call}"
 		print "Calls to last_byte on FlatString {last_byte_call}"
-
-		print "FlatStrings allocated with length {str_full_created} ({str_full_created.to_f/flatstr_allocations.to_f * 100.0 }%)"
 
 		print "Length of travel for index distribution:"
 		index_len.print_content
@@ -319,29 +321,6 @@ redef class FlatString
 		return super
 	end
 
-	init do
-		sys.flatstr_allocations += 1
-	end
-
-	redef init with_infos(items, bytelen, from)
-	do
-		self.items = items
-		self.bytelen = bytelen
-		sys.str_bytelen.inc bytelen
-		first_byte = from
-		length = items.utf8_length(from, bytelen)
-	end
-
-	redef init full(items, bytelen, from, length)
-	do
-		self.items = items
-		self.length = length
-		self.bytelen = bytelen
-		sys.str_bytelen.inc bytelen
-		sys.str_full_created += 1
-		first_byte = from
-	end
-
 	private var length_cache: nullable Int = null
 
 	redef fun length do
@@ -365,5 +344,23 @@ redef class FlatString
 	redef fun char_to_byte_index(i) do
 		sys.index_call.inc "FlatString"
 		return super
+	end
+end
+
+redef class ASCIIFlatString
+	redef init full_data(items, bytelen, from, length)
+	do
+		super
+		sys.asciiflatstr_allocations += 1
+		sys.str_full_created += 1
+	end
+end
+
+redef class UnicodeFlatString
+	redef init full_data(items, bytelen, from, length)
+	do
+		super
+		sys.uniflatstr_allocations += 1
+		sys.str_full_created += 1
 	end
 end
