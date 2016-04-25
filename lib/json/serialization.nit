@@ -90,7 +90,7 @@ module serialization
 
 import ::serialization::caching
 private import ::serialization::engine_tools
-import static
+private import static
 
 # Serializer of Nit objects to Json string.
 class JsonSerializer
@@ -220,10 +220,10 @@ class JsonDeserializer
 	private var text: Text
 
 	# Root json object parsed from input text.
-	private var root: nullable Jsonable is noinit
+	private var root: nullable Object is noinit
 
 	# Depth-first path in the serialized object tree.
-	private var path = new Array[JsonObject]
+	private var path = new Array[Map[String, nullable Object]]
 
 	# Last encountered object reference id.
 	#
@@ -232,7 +232,7 @@ class JsonDeserializer
 
 	init do
 		var root = text.parse_json
-		if root isa JsonObject then path.add(root)
+		if root isa Map[String, nullable Object] then path.add(root)
 		self.root = root
 	end
 
@@ -268,7 +268,7 @@ class JsonDeserializer
 			return null
 		end
 
-		if object isa JsonObject then
+		if object isa Map[String, nullable Object] then
 			var kind = null
 			if object.keys.has("__kind") then
 				kind = object["__kind"]
@@ -467,7 +467,7 @@ class JsonDeserializer
 	# deserialized = deserializer.deserialize
 	# assert deserialized isa MyError
 	# ~~~
-	protected fun class_name_heuristic(json_object: JsonObject): nullable String
+	protected fun class_name_heuristic(json_object: Map[String, nullable Object]): nullable String
 	do
 		return null
 	end
