@@ -577,7 +577,7 @@ abstract class AbstractCompiler
 
 	# The list of all associated files
 	# Used to generate .c files
-	var files = new List[CodeFile]
+	var files = new Array[CodeFile]
 
 	# Initialize a visitor specific for a compiler engine
 	fun new_visitor: VISITOR is abstract
@@ -1127,8 +1127,8 @@ end
 # Where to store generated lines
 class CodeWriter
 	var file: CodeFile
-	var lines: List[String] = new List[String]
-	var decl_lines: List[String] = new List[String]
+	var lines = new Array[String]
+	var decl_lines = new Array[String]
 
 	# Add a line in the main part of the generated C
 	fun add(s: String) do self.lines.add(s)
