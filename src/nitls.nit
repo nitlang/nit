@@ -196,7 +196,7 @@ if opt_source.value then
 		if opt_paths.value then
 			print mp.filepath.as(not null)
 		else
-			print "{mp.mgroup.full_name}/{ot.display(mp)}"
+			print "{mp.mgroup.full_name}{ot.display(mp)}"
 		end
 	end
 end
