@@ -81,8 +81,8 @@ class HttpServer
 				# Delegate the responsibility to respond to the `Action`
 				handler.prepare_respond_and_close(request, turi, self)
 				return
-			else response = new HttpResponse(405)
-		else response = new HttpResponse(405)
+			else response = new HttpResponse(404)
+		else response = new HttpResponse(404)
 
 		respond response
 		close

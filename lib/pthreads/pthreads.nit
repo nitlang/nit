@@ -16,7 +16,7 @@
 
 # Main POSIX threads support and intro the classes `Thread`, `Mutex` and `Barrier`
 module pthreads is
-	cflags "-pthread"
+	cflags "-pthread -Wno-unknown-attributes"
 	ldflags "-pthread"
 	pkgconfig "bdw-gc"
 	new_annotation threaded
@@ -33,6 +33,8 @@ in "C Header" `{
 `}
 
 in "C" `{
+	#include <string.h>
+
 	// TODO protect with: #ifdef WITH_LIBGC
 	// We might have to add the next line to gc_chooser.c too, especially
 	// if we get an error like "thread not registered with GC".

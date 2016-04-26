@@ -61,6 +61,12 @@ class Route
 	# Path to this action present in the URI
 	var path: nullable String
 
+	init
+	do
+		var path = path
+		if path != null then self.path = "/" / path
+	end
+
 	# `Action` to activate when this route is traveled
 	var handler: Action
 end
