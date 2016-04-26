@@ -162,7 +162,7 @@ class JsonSerializer
 			end
 
 			first_attribute = true
-			object.serialize_to_json self
+			object.accept_json_serializer self
 			first_attribute = false
 
 			if plain_json then open_objects.pop
@@ -492,11 +492,11 @@ redef class Text
 		return res
 	end
 
-	redef fun serialize_to_json(v) do v.stream.write(to_json)
+	redef fun accept_json_serializer(v) do v.stream.write(to_json)
 end
 
 redef class Serializable
-	private fun serialize_to_json(v: JsonSerializer)
+	private fun accept_json_serializer(v: JsonSerializer)
 	do
 		var id = v.cache.new_id_for(self)
 		v.stream.write "\{"
@@ -542,32 +542,32 @@ redef class Serializable
 end
 
 redef class Int
-	redef fun serialize_to_json(v) do v.stream.write(to_s)
+	redef fun accept_json_serializer(v) do v.stream.write to_s
 end
 
 redef class Float
-	redef fun serialize_to_json(v) do v.stream.write(to_s)
+	redef fun accept_json_serializer(v) do v.stream.write to_s
 end
 
 redef class Bool
-	redef fun serialize_to_json(v) do v.stream.write(to_s)
+	redef fun accept_json_serializer(v) do v.stream.write to_s
 end
 
 redef class Char
-	redef fun serialize_to_json(v)
+	redef fun accept_json_serializer(v)
 	do
 		if v.plain_json then
-			v.stream.write to_s.to_json
+			to_s.accept_json_serializer v
 		else
 			v.stream.write "\{\"__kind\": \"char\", \"__val\": "
-			v.stream.write to_s.to_json
+			to_s.accept_json_serializer v
 			v.stream.write "\}"
 		end
 	end
 end
 
 redef class NativeString
-	redef fun serialize_to_json(v) do to_s.serialize_to_json(v)
+	redef fun accept_json_serializer(v) do to_s.accept_json_serializer(v)
 end
 
 redef class Collection[E]
@@ -595,7 +595,7 @@ redef class Collection[E]
 end
 
 redef class SimpleCollection[E]
-	redef fun serialize_to_json(v)
+	redef fun accept_json_serializer(v)
 	do
 		# Register as pseudo object
 		if not v.plain_json then
@@ -638,7 +638,7 @@ redef class SimpleCollection[E]
 end
 
 redef class Map[K, V]
-	redef fun serialize_to_json(v)
+	redef fun accept_json_serializer(v)
 	do
 		# Register as pseudo object
 		var id = v.cache.new_id_for(self)
@@ -654,7 +654,7 @@ redef class Map[K, V]
 				v.new_line_and_indent
 
 				var k = key or else "null"
-				v.stream.write k.to_s.to_json
+				k.to_s.accept_json_serializer v
 				v.stream.write ": "
 				if not v.try_to_serialize(val) then
 					assert val != null # null would have been serialized
