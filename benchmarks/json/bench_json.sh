@@ -84,6 +84,8 @@ done
 init_repo
 
 mkdir -p out
+html="index.html"
+echo >"$html" "<html><head></head><body>"
 
 echo "Compiling engines"
 
@@ -126,3 +128,11 @@ rm scripts/nit_adhoc_utf_noropes
 rm scripts/nit_adhoc_utf_ropes
 
 plot out/bench_json.gnu
+
+echo >>"$html" "</body></html>"
+
+if test -n "$died"; then
+	echo "Some commands failed"
+	exit 1
+fi
+exit 0
