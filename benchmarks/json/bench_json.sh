@@ -68,13 +68,16 @@ function usage()
 	echo "run_bench: ./bench_json.sh [options]"
 	echo "  -v: verbose mode"
 	echo "  -n count: number of execution for each bar (default: $count)"
+	echo "  -fast: check only Nit"
 	echo "  -h: this help"
 }
 
 stop=false
+fast=
 while [ "$stop" = false ]; do
 	case "$1" in
 		-v) verbose=true; shift;;
+		--fast) fast=true; shift;;
 		-h) usage; exit;;
 		-n) count="$2"; shift; shift;;
 		*) stop=true
@@ -89,13 +92,22 @@ echo >"$html" "<html><head></head><body>"
 
 echo "Compiling engines"
 
-echo "C JSON Parser"
+if [ -z "$fast" ]; then
+	declare -a script_names=('C' 'Python 3' 'Python 2' 'Go' 'Nit Ad-hoc UTF-8 No Ropes' 'Nit Ad-hoc UTF-8 + Ropes' 'Ruby ext')
+	declare -a script_cmds=('./scripts/c_parser' 'python3 scripts/python.py' 'python2 scripts/python.py' './scripts/json_parse' './scripts/nit_adhoc_utf_noropes' './scripts/nit_adhoc_utf_ropes' 'ruby scripts/json_ext.rb')
 
-gcc -O2 -I thirdparty/ujson4c/src -I thirdparty/ujson4c/3rdparty/ thirdparty/ujson4c/3rdparty/ultrajsondec.c scripts/c_parser.c -o scripts/c_parser -lm
+	echo "C JSON Parser"
 
-echo "Go JSON Parser"
+	gcc -O2 -I thirdparty/ujson4c/src -I thirdparty/ujson4c/3rdparty/ thirdparty/ujson4c/3rdparty/ultrajsondec.c scripts/c_parser.c -o scripts/c_parser -lm
 
-go build -o scripts/json_parse scripts/json_parse.go
+	echo "Go JSON Parser"
+
+	go build -o scripts/json_parse scripts/json_parse.go
+else
+	declare -a script_names=('Nit Ad-hoc UTF-8 No Ropes' 'Nit Ad-hoc UTF-8 + Ropes')
+	declare -a script_cmds=('./scripts/nit_adhoc_utf_noropes' './scripts/nit_adhoc_utf_ropes')
+
+fi
 
 echo "Nit/NitCC Parser"
 
@@ -109,8 +121,6 @@ echo "Nit/Ad-Hoc UTF-8 Parser, With Ropes"
 
 nitc --semi-global scripts/nit_adhoc_utf_ropes.nit -o scripts/nit_adhoc_utf_ropes
 
-declare -a script_names=('C' 'Python 3' 'Python 2' 'Go' 'Nit Ad-hoc UTF-8 No Ropes' 'Nit Ad-hoc UTF-8 + Ropes' 'Ruby ext')
-declare -a script_cmds=('./scripts/c_parser' 'python3 scripts/python.py' 'python2 scripts/python.py' './scripts/json_parse' './scripts/nit_adhoc_utf_noropes' './scripts/nit_adhoc_utf_ropes' 'ruby scripts/json_ext.rb')
 
 for script in `seq 1 ${#script_cmds[@]}`; do
 	echo "Preparing res for ${script_names[$script - 1]}"
