@@ -131,7 +131,8 @@ function bench_pandoc()
 		bench_command "$bench" "" "$engdir/pandoc/pandoc" "$file" "$s"
 	done
 }
-bench_pandoc
+# FIXME: Fix an reactivate the pandoc engine
+#bench_pandoc
 
 if test "$#" -gt 0; then
     plot $outdir/bench_markdown.gnu
