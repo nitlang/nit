@@ -282,7 +282,9 @@ var txt = ctx.rest.first.to_path.read_all
 var lst = [new ManualBreakDecorator, new BlockQuoteDecorator, new CodeBlockDecorator,
 		new UnorderedListDecorator, new MixedDecorator, new EmphasisDecorator,
 		new StrongDecorator, new InlineCodeDecorator, new FastLinkDecorator,
-		new SpecialXmlCharsDecorator, new InlineHtmlDecorator, new FullLinkDecorator,
+		# FIXME XML is to slow with Nit
+		# new SpecialXmlCharsDecorator,
+		new InlineHtmlDecorator, new FullLinkDecorator,
 		new FullImageDecorator, new RefLinkDecorator: MarkdownDecorator]
 
 for dec in lst do
