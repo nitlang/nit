@@ -175,8 +175,6 @@ end
 extern class NativeEditText in "Java" `{ android.widget.EditText `}
 	super NativeTextView
 
-	redef type SELF: NativeEditText
-
 	new (context: NativeActivity) in "Java" `{ return new android.widget.EditText(context); `}
 
 	fun width=(val: Int) in "Java" `{ self.setWidth((int)val); `}
@@ -192,8 +190,6 @@ end
 
 extern class NativeButton in "Java" `{ android.widget.Button `}
 	super NativeTextView
-
-	redef type SELF: NativeButton
 
 	redef fun new_global_ref import sys, Sys.jni_env `{
 		Sys sys = NativeButton_sys(self);
