@@ -1,5 +1,5 @@
-FlatString
-FlatString
+ASCIIFlatString
+ASCIIFlatString
 Class
 Class
 

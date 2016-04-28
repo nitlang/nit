@@ -380,7 +380,7 @@ class JsonDeserializer
 				var array_type = types.first
 
 				var typed_array
-				if array_type == "FlatString" then
+				if array_type == "ASCIIFlatString" or array_type == "UnicodeFlatString" then
 					if has_nullable then
 						typed_array = new Array[nullable FlatString]
 					else typed_array = new Array[FlatString]

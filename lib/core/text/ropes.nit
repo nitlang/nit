@@ -172,7 +172,7 @@ private class Concat
 			from = 0
 		end
 
-		var ln = length
+		var ln = _length
 		if (count + from) > ln then count = ln - from
 		if count <= 0 then return ""
 		var end_index = from + count - 1
