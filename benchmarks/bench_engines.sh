@@ -73,6 +73,8 @@ function run_compiler()
 		bench_command "puzzle" "puzzle 15-hard" "./puzzle.$title.bin" kleg.mondcafjhbi
 		run_command "$@" "markdown/engines/nitmd/nitmd.nit" -o "nitmd.$title.bin"
 		bench_command "nitmd" "markdown" "./nitmd.$title.bin" markdown/benches/out/mixed.md 80
+		run_command "$@" ../contrib/jwrapper/src/jwrapper.nit -o "jwrapper.$title.bin"
+		bench_command "jwrapper" "jwrapper ant.jar" "./jwrapper.$title.bin" /usr/share/java/ant.jar -o out/ant_jar.nit
 	fi
 
 	rm -r *.bin out 2> /dev/null
@@ -125,6 +127,7 @@ cp ../bin/nitc .
 if test -z "$fast"; then
 	make -C markdown/benches
 	make -C ../contrib/nitcc
+	make pre-build -C ../contrib/jwrapper
 fi
 
 ## EFFECTIVE BENCHS ##
