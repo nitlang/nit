@@ -1756,7 +1756,7 @@ redef class Char
 	end
 
 	# Length of `self` in a UTF-8 String
-	private fun u8char_len: Int do
+	fun u8char_len: Int do
 		var c = self.code_point
 		if c < 0x80 then return 1
 		if c <= 0x7FF then return 2
