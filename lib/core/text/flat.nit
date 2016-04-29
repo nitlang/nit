@@ -933,12 +933,13 @@ class FlatBuffer
 	do
 		var c = capacity
 		if cap <= c then return
-		while c <= cap do c = c * 2 + 2
+		if c <= 16 then c = 16
+		while c <= cap do c = c * 2
 		# The COW flag can be set at false here, since
 		# it does a copy of the current `Buffer`
 		written = false
 		var bln = _bytelen
-		var a = new NativeString(c+1)
+		var a = new NativeString(c)
 		if bln > 0 then
 			var it = _items
 			if bln > 0 then it.copy_to(a, bln, 0, 0)
