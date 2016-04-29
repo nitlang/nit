@@ -48,6 +48,8 @@ function run_compiler()
 		run_command "$@" ../tests/bench_bintree_gen.nit -o "bintrees.$title.bin"
 		bench_command "bintrees" "bench_bintree_gen 16" "./bintrees.$title.bin" 16
 	else
+		rm -r out 2> /dev/null
+		mkdir out 2> /dev/null
 		run_command "$@" ../src/nitc.nit -o "nitc.$title.bin"
 		bench_command "nitc-g" "nitc --global --no-cc ../src/nitls.nit" "./nitc.$title.bin" -v --global --no-cc ../src/nitls.nit
 		bench_command "nitc-s" "nitc --separate ../src/nitc.nit" "./nitc.$title.bin" -v --no-cc --separate ../src/nitc.nit
@@ -56,9 +58,9 @@ function run_compiler()
 		bench_command "nit-nitcc" "nit nitcc.nit calc.sablecc" "./nit.$title.bin" ../contrib/nitcc/src/nitcc.nit ../contrib/nitcc/examples/calc.sablecc
 		rm calc* 2> /dev/null # remove generated cruft
 		run_command "$@" ../src/nitdoc.nit -o "nitdoc.$title.bin"
-		rm -r out 2> /dev/null
-		mkdir out 2> /dev/null
 		bench_command "nitdoc" "nitdoc ../src/nitls.nit" "./nitdoc.$title.bin" -v ../src/nitls.nit -d out
+		run_command "$@" ../src/nitlight.nit -o "nitlight.$title.bin"
+		bench_command "nitlight" "nitlight ../lib/[a-f]*/" "./nitlight.$title.bin" ../lib/[a-f]*/ -d out
 		run_command "$@" ../examples/shoot/src/shoot_logic.nit -o "shoot.$title.bin"
 		bench_command "shoot" "shoot_logic 15" "./shoot.$title.bin" 15
 		run_command "$@" ../tests/bench_bintree_gen.nit -o "bintrees.$title.bin"
