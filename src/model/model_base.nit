@@ -16,6 +16,7 @@
 
 # The abstract concept of model and related common things
 module model_base
+import location
 
 # The container class of a Nit object-oriented model.
 # A model knows modules, classes and properties and can retrieve them.
@@ -23,6 +24,11 @@ class Model
 	super MEntity
 
 	redef fun model do return self
+
+	# Place-holder object that means no-location
+	#
+	# See `MEntity::location`
+	var no_location = new Location(null, 0, 0, 0, 0)
 end
 
 # A named and possibly documented entity in the model.
@@ -64,6 +70,16 @@ abstract class MEntity
 	# Is is not suitable to use it directly with the user (e.g. in message) and
 	# indirect use should be restricted (e.g. to name a web-page)
 	fun c_name: String is abstract
+
+	# The origin of the definition.
+	#
+	# Most model entities are defined in a specific place in the source base.
+	#
+	# Because most model entities have one,
+	# it is simpler for the client to have a non-nullable return value.
+	# For entities that lack a location, mock-up special locations are used instead.
+	# By default it is `model.no_location`.
+	fun location: Location do return model.no_location
 
 	# A Model Entity has a direct link to its model
 	fun model: Model is abstract

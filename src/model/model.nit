@@ -386,6 +386,8 @@ class MClass
 	# In Nit, the name of a class cannot evolve in refinements
 	redef var name
 
+	redef var location
+
 	# The canonical name of the class
 	#
 	# It is the name of the class prefixed by the full_name of the `intro_mmodule`
@@ -588,8 +590,7 @@ class MClassDef
 	# ENSURE: `bound_mtype.mclass == self.mclass`
 	var bound_mtype: MClassType
 
-	# The origin of the definition
-	var location: Location
+	redef var location: Location
 
 	# Internal name combining the module and the class
 	# Example: "mymodule$MyClass"
@@ -2241,8 +2242,7 @@ abstract class MPropDef
 	# The associated global property
 	var mproperty: MPROPERTY
 
-	# The origin of the definition
-	var location: Location
+	redef var location: Location
 
 	init
 	do

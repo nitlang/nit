@@ -17,7 +17,6 @@
 # modules and module hierarchies in the metamodel
 module mmodule
 
-import location
 import mpackage
 private import more_collections
 
@@ -95,8 +94,7 @@ class MModule
 	# The short name of the module
 	redef var name: String
 
-	# The origin of the definition
-	var location: Location is writable
+	redef var location: Location is writable
 
 	# Alias for `name`
 	redef fun to_s do return self.name
