@@ -117,6 +117,6 @@ do
 		var c = ""
 		var d = e.mdoc_or_fallback
 		if d != null and d.content.not_empty then c = d.content.first
-		print "{n}\t{e.class_name}\t{c}"
+		print "{n}\t{e.class_name}\t{e.location}\t{c}"
 	end
 end
