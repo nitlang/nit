@@ -244,7 +244,7 @@ redef class TextView
 		else // if (align > 0.5d)
 			g = android.view.Gravity.RIGHT;
 
-		view.setGravity(g);
+		view.setGravity(g | android.view.Gravity.CENTER_VERTICAL);
 	`}
 end
 
