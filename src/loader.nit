@@ -395,8 +395,7 @@ redef class ModelBuilder
 			end
 		end
 
-		var src = new SourceFile.from_string(path, "")
-		var loc = new Location(src, 0, 0, 0, 0)
+		var loc = new Location.opaque_file(path)
 		var res = new MModule(model, mgroup, pn, loc)
 		res.filepath = path
 
