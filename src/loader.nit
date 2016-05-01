@@ -381,9 +381,9 @@ redef class ModelBuilder
 
 		if mgroup == null then
 			# singleton package
-			var mpackage = new MPackage(pn, model)
-			mgroup = new MGroup(pn, mpackage, null) # same name for the root group
-			mgroup.filepath = path
+			var loc = new Location.opaque_file(path)
+			var mpackage = new MPackage(pn, model, loc)
+			mgroup = new MGroup(pn, loc, mpackage, null) # same name for the root group
 			mpackage.root = mgroup
 			toolcontext.info("found singleton package `{pn}` at {path}", 2)
 
@@ -482,17 +482,18 @@ redef class ModelBuilder
 			end
 		end
 
+		var loc = new Location.opaque_file(dirpath)
 		var mgroup
 		if parent == null then
 			# no parent, thus new package
 			if ini != null then pn = ini["package.name"] or else pn
-			var mpackage = new MPackage(pn, model)
-			mgroup = new MGroup(pn, mpackage, null) # same name for the root group
+			var mpackage = new MPackage(pn, model, loc)
+			mgroup = new MGroup(pn, loc, mpackage, null) # same name for the root group
 			mpackage.root = mgroup
 			toolcontext.info("found package `{mpackage}` at {dirpath}", 2)
 			mpackage.ini = ini
 		else
-			mgroup = new MGroup(pn, parent.mpackage, parent)
+			mgroup = new MGroup(pn, loc, parent.mpackage, parent)
 			toolcontext.info("found sub group `{mgroup.full_name}` at {dirpath}", 2)
 		end
 

@@ -34,6 +34,8 @@ class MPackage
 	# The model of the package
 	redef var model: Model
 
+	redef var location
+
 	# The root of the group tree
 	var root: nullable MGroup = null is writable
 
@@ -65,6 +67,8 @@ class MGroup
 	# The name of the group
 	# empty name for a default group in a single-module package
 	redef var name: String
+
+	redef var location
 
 	# The enclosing package
 	var mpackage: MPackage
