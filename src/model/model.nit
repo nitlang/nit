@@ -1167,6 +1167,8 @@ class MClassType
 
 	redef fun model do return self.mclass.intro_mmodule.model
 
+	redef fun location do return mclass.location
+
 	# TODO: private init because strongly bounded to its mclass. see `mclass.mclass_type`
 
 	# The formal arguments of the type
@@ -1372,6 +1374,8 @@ class MVirtualType
 	# Its the definitions of this property that determine the bound or the virtual type.
 	var mproperty: MVirtualTypeProp
 
+	redef fun location do return mproperty.location
+
 	redef fun model do return self.mproperty.intro_mclassdef.mmodule.model
 
 	redef fun lookup_bound(mmodule: MModule, resolved_receiver: MType): MType
@@ -1502,6 +1506,8 @@ class MParameterType
 
 	redef fun model do return self.mclass.intro_mmodule.model
 
+	redef fun location do return mclass.location
+
 	# The position of the parameter (0 for the first parameter)
 	# FIXME: is `position` a better name?
 	var rank: Int
@@ -1626,6 +1632,8 @@ abstract class MProxyType
 	super MType
 	# The base type
 	var mtype: MType
+
+	redef fun location do return mtype.location
 
 	redef fun model do return self.mtype.model
 	redef fun need_anchor do return mtype.need_anchor
