@@ -900,11 +900,13 @@ redef class Text
 	#     assert not "0xGE".is_int
 	#     assert not "".is_int
 	#     assert not "Not an Int".is_int
+	#     assert not "-".is_int
 	fun is_int: Bool do
 		if bytelen == 0 then return false
 		var s = remove_all('_')
 		var pos = 0
-		while s[pos] == '-' do
+		var len = s.length
+		while pos < len and s[pos] == '-' do
 			pos += 1
 		end
 		s = s.substring_from(pos)
