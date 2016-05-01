@@ -18,7 +18,7 @@
 module input_events
 
 import mnit::input
-import android
+import android::game
 
 in "C header" `{
 	#include <android/log.h>

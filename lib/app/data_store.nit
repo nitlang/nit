@@ -23,7 +23,6 @@ import app_base
 import serialization
 
 # Platform variations
-# TODO: move on the platform once qualified names are understand in the condition
 import linux::data_store is conditional(linux)
 import android::data_store is conditional(android)
 import ios::data_store is conditional(ios)

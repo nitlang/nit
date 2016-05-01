@@ -21,7 +21,7 @@ module display_android is
 	android_manifest """<uses-feature android:glEsVersion="0x00020000"/>"""
 end
 
-import ::android
+import ::android::game
 intrude import android::load_image
 
 private import gamnit::egl
