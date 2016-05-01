@@ -122,7 +122,7 @@ redef class ModelBuilder
 				end
 			end
 
-			mclass = new MClass(mmodule, name, names, mkind, mvisibility)
+			mclass = new MClass(mmodule, name, nclassdef.location, names, mkind, mvisibility)
 			#print "new class {mclass}"
 		else if nclassdef isa AStdClassdef and nmodule.mclass2nclassdef.has_key(mclass) then
 			error(nclassdef, "Error: a class `{name}` is already defined at line {nmodule.mclass2nclassdef[mclass].location.line_start}.")

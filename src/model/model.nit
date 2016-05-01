@@ -285,8 +285,9 @@ redef class MModule
 			if name == "Bool" and self.model.get_mclasses_by_name("Object") != null then
 				# Bool is injected because it is needed by engine to code the result
 				# of the implicit casts.
-				var c = new MClass(self, name, null, enum_kind, public_visibility)
-				var cladef = new MClassDef(self, c.mclass_type, new Location(null, 0,0,0,0))
+				var loc = model.no_location
+				var c = new MClass(self, name, loc, null, enum_kind, public_visibility)
+				var cladef = new MClassDef(self, c.mclass_type, loc)
 				cladef.set_supertypes([object_type])
 				cladef.add_in_hierarchy
 				return c
@@ -1951,6 +1952,8 @@ abstract class MProperty
 
 	# The (short) name of the property
 	redef var name
+
+	redef var location
 
 	# The canonical name of the property.
 	#
