@@ -23,11 +23,11 @@ import calculator_logic
 var context = new CalculatorContext
 context.push_digit( 1 )
 context.push_digit( 2 )
-context.push_op( '+' )
+context.push_op( "+" )
 context.push_digit( 3 )
-context.push_op( '*' )
+context.push_op( "*" )
 context.push_digit( 2 )
-context.push_op( '=' )
+context.push_op( "=" )
 var r = context.result
 assert r == 30 else print r or else "-"
 
@@ -36,16 +36,16 @@ context.push_digit( 1 )
 context.push_digit( 4 )
 context.switch_to_decimals
 context.push_digit( 1 )
-context.push_op( '*' )
+context.push_op( "*" )
 context.push_digit( 3 )
-context.push_op( '=' )
+context.push_op( "=" )
 r = context.result
 assert r == 42.3 else print r or else "-"
 
-context.push_op( '+' )
+context.push_op( "+" )
 context.push_digit( 1 )
 context.push_digit( 1 )
-context.push_op( '=' )
+context.push_op( "=" )
 r = context.result
 assert r == 53.3 else print r or else "-"
 
@@ -54,9 +54,9 @@ context.push_digit( 4 )
 context.push_digit( 2 )
 context.switch_to_decimals
 context.push_digit( 3 )
-context.push_op( '/' )
+context.push_op( "/" )
 context.push_digit( 3 )
-context.push_op( '=' )
+context.push_op( "=" )
 r = context.result
 assert r == 14.1 else print r or else "-"
 
@@ -68,20 +68,20 @@ context.switch_to_decimals
 context.push_digit( 1 )
 context.push_digit( 2 )
 context.push_digit( 3 )
-context.push_op( '+' )
+context.push_op( "+" )
 context.push_digit( 1 )
-context.push_op( '=' )
+context.push_op( "=" )
 r = context.result
 assert r == 51.123 else print r or else "-"
 
-#test 'C' button
+#test "C" button
 context = new CalculatorContext
 context.push_digit( 1 )
 context.push_digit( 0 )
-context.push_op( '+' )
+context.push_op( "+" )
 context.push_digit( 1 )
 context.push_digit( 0 )
-context.push_op( '=' )
-context.push_op( 'C' )
+context.push_op( "=" )
+context.push_op( "C" )
 r = context.result
 assert r == null else print r

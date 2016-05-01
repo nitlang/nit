@@ -25,7 +25,7 @@ class CalculatorContext
 	var result: nullable Numeric = null
 
 	# Last operation pushed with `push_op`, to be executed on the next push
-	var last_op: nullable Char = null
+	var last_op: nullable Text = null
 
 	# Value currently being entered
 	var current: nullable FlatBuffer = null
@@ -39,15 +39,15 @@ class CalculatorContext
 
 		var buf = new FlatBuffer
 
-		if result != null and (current == null or last_op != '=') then
-			if last_op == '=' then buf.append "= "
+		if result != null and (current == null or last_op != "=") then
+			if last_op == "=" then buf.append "= "
 
 			buf.append result.to_s
 			buf.add ' '
 		end
 
-		if last_op != null and last_op != '=' then
-			buf.add last_op
+		if last_op != null and last_op != "=" then
+			buf.append last_op
 			buf.add ' '
 		end
 
@@ -60,10 +60,10 @@ class CalculatorContext
 	end
 
 	# Push operation `op`, will usually execute the last operation
-	fun push_op(op: Char)
+	fun push_op(op: Text)
 	do
 		apply_last_op_if_any
-		if op == 'C' then
+		if op == "C" then
 			self.result = null
 			last_op = null
 		else
@@ -82,7 +82,7 @@ class CalculatorContext
 		current.add digit.to_s.chars.first
 		self.current = current
 
-		if last_op == '=' then
+		if last_op == "=" then
 			self.result = null
 			last_op = null
 		end
@@ -110,13 +110,13 @@ class CalculatorContext
 		if op == null then
 			result = current.to_n
 		else if result != null then
-			if op == '+' then
+			if op == "+" then
 				result = result.add(current.to_n)
-			else if op == '-' then
+			else if op == "-" then
 				result = result.sub(current.to_n)
-			else if op == '/' then
+			else if op == "/" or op == "÷" then
 				result = result.div(current.to_n)
-			else if op == '*' then
+			else if op == "*" or op == "×" then
 				result = result.mul(current.to_n)
 			end
 		end
