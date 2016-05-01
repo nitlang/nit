@@ -93,10 +93,15 @@ redef class MDoc
 	end
 end
 
-private class NitdocDecorator
+# The specific markdown decorator used internally to process MDoc object.
+#
+# You should use the various methods of `MDoc` like `MDoc::html_documentation`
+#
+# The class is public so specific behavior can be plugged on it.
+class NitdocDecorator
 	super HTMLDecorator
 
-	var toolcontext = new ToolContext
+	private var toolcontext = new ToolContext
 
 	redef fun add_code(v, block) do
 		var meta = block.meta or else "nit"
@@ -143,7 +148,7 @@ private class NitdocDecorator
 		v.add "</code>"
 	end
 
-	fun code_from_text(buffer: Text, from, to: Int): String do
+	private fun code_from_text(buffer: Text, from, to: Int): String do
 		var out = new FlatBuffer
 		for i in [from..to[ do out.add buffer[i]
 		return out.write_to_string
