@@ -86,6 +86,7 @@ class ModelBuilder
 	#
 	# If more than one class exists, then null is silently returned.
 	# It is up to the caller to post-analysis the result and display a correct error message.
+	# The method `class_not_found` can be used to display such a message.
 	fun try_get_mclass_by_qid(qid: AQclassid, mmodule: MModule): nullable MClass
 	do
 		var name = qid.n_id.text
@@ -334,7 +335,17 @@ class ModelBuilder
 		# If everything fail, then give up with class by proposing things.
 		#
 		# TODO Give hints on formal types (param and virtual)
-		# TODO How to move this in a libified autonomous code?
+		class_not_found(qid, mmodule)
+		ntype.is_broken = true
+		return null
+	end
+
+	# Print an error and suggest hints when the class identified by `qid` in `mmodule` is not found.
+	#
+	# This just print error messages.
+	fun class_not_found(qid: AQclassid, mmodule: MModule)
+	do
+		var name = qid.n_id.text
 
 		var all_classes = model.get_mclasses_by_name(name)
 
@@ -344,7 +355,7 @@ class ModelBuilder
 			if mmodule.is_visible(c.intro_mmodule, c.visibility) then continue
 			if not qid.accept(c) then continue
 			error(ntype, "Error: class `{c.full_name}` not visible in module `{mmodule}`.")
-			return null
+			return
 		end
 
 		# Look for not imported but known classes from importable modules
@@ -358,7 +369,7 @@ class ModelBuilder
 		end
 		if hints.not_empty then
 			error(ntype, "Error: class `{name}` not found in module `{mmodule}`. Maybe import {hints.join(",", " or ")}?")
-			return null
+			return
 		end
 
 		# Look for classes with an approximative name.
@@ -377,11 +388,10 @@ class ModelBuilder
 		end
 		if hints.not_empty then
 			error(ntype, "Error: class `{name}` not found in module `{mmodule}`. Did you mean {hints.join(",", " or ")}?")
-			return null
+			return
 		end
 
 		error(ntype, "Error: class `{name}` not found in module `{mmodule}`.")
-		return null
 	end
 
 	# Return the static type associated to the node `ntype`.
