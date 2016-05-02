@@ -37,3 +37,5 @@ ui_test
 test_text_stat
 nitsaf_args
 test_ffi_c_lots_of_refs
+test_rubix_cube
+test_rubix_visual

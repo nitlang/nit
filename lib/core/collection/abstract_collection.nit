@@ -1163,6 +1163,30 @@ interface Sequence[E]
 	#
 	# REQUIRE `index >= 0 and index < length`
 	fun remove_at(index: Int) is abstract
+
+	# Rotates the elements of self once to the left
+	#
+	# ~~~nit
+	# var a = [12, 23, 34, 45]
+	# a.rotate_left
+	# assert a == [23, 34, 45, 12]
+	# ~~~
+	fun rotate_left do
+		var fst = shift
+		push fst
+	end
+
+	# Rotates the elements of self once to the right
+	#
+	# ~~~nit
+	# var a = [12, 23, 34, 45]
+	# a.rotate_right
+	# assert a == [45, 12, 23, 34]
+	# ~~~
+	fun rotate_right do
+		var lst = pop
+		unshift lst
+	end
 end
 
 # Iterators on indexed collections.
