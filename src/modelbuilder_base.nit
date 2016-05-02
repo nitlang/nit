@@ -346,6 +346,7 @@ class ModelBuilder
 	fun class_not_found(qid: AQclassid, mmodule: MModule)
 	do
 		var name = qid.n_id.text
+		var qname = qid.full_name
 
 		var all_classes = model.get_mclasses_by_name(name)
 
@@ -354,7 +355,7 @@ class ModelBuilder
 			if not mmodule.in_importation <= c.intro_mmodule then continue
 			if mmodule.is_visible(c.intro_mmodule, c.visibility) then continue
 			if not qid.accept(c) then continue
-			error(ntype, "Error: class `{c.full_name}` not visible in module `{mmodule}`.")
+			error(qid, "Error: class `{c.full_name}` not visible in module `{mmodule}`.")
 			return
 		end
 
@@ -368,7 +369,7 @@ class ModelBuilder
 			hints.add "`{c.intro_mmodule.full_name}`"
 		end
 		if hints.not_empty then
-			error(ntype, "Error: class `{name}` not found in module `{mmodule}`. Maybe import {hints.join(",", " or ")}?")
+			error(qid, "Error: class `{qname}` not found in module `{mmodule}`. Maybe import {hints.join(",", " or ")}?")
 			return
 		end
 
@@ -387,11 +388,11 @@ class ModelBuilder
 			end
 		end
 		if hints.not_empty then
-			error(ntype, "Error: class `{name}` not found in module `{mmodule}`. Did you mean {hints.join(",", " or ")}?")
+			error(qid, "Error: class `{qname}` not found in module `{mmodule}`. Did you mean {hints.join(",", " or ")}?")
 			return
 		end
 
-		error(ntype, "Error: class `{name}` not found in module `{mmodule}`.")
+		error(qid, "Error: class `{name}` not found in module `{mmodule}`.")
 	end
 
 	# Return the static type associated to the node `ntype`.
@@ -549,5 +550,20 @@ redef class AQclassid
 			if mmodname != null and mclass.intro_mmodule.name != mmodname then return false
 		end
 		return true
+	end
+
+	# The pretty name represented by self.
+	fun full_name: String
+	do
+		var res = n_id.text
+		var nqualified = n_qualified
+		if nqualified == null then return res
+		var ncid = nqualified.n_classid
+		if ncid != null then res = ncid.text + "::" + res
+		var nids = nqualified.n_id
+		if nids.not_empty then for n in nids.reverse_iterator do
+			res = n.text + "::" + res
+		end
+		return res
 	end
 end
