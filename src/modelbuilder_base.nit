@@ -349,6 +349,19 @@ class ModelBuilder
 		var qname = qid.full_name
 
 		var all_classes = model.get_mclasses_by_name(name)
+		var hints = new Array[String]
+
+		# Look for conflicting classes.
+		if all_classes != null then for c in all_classes do
+			if not mmodule.is_visible(c.intro_mmodule, c.visibility) then continue
+			if not qid.accept(c) then continue
+			hints.add "`{c.full_name}`"
+		end
+		if hints.length > 1 then
+			error(qid, "Error: ambiguous class name `{qname}` in module `{mmodule}`. Conflicts are between {hints.join(",", " and ")}.")
+			return
+		end
+		hints.clear
 
 		# Look for imported but invisible classes.
 		if all_classes != null then for c in all_classes do
@@ -360,7 +373,6 @@ class ModelBuilder
 		end
 
 		# Look for not imported but known classes from importable modules
-		var hints = new Array[String]
 		if all_classes != null then for c in all_classes do
 			if mmodule.in_importation <= c.intro_mmodule then continue
 			if c.intro_mmodule.in_importation <= mmodule then continue
