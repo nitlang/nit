@@ -922,9 +922,9 @@ class FlatBuffer
 
 	redef fun clear do
 		is_dirty = true
-		if written then reset
 		_bytelen = 0
 		_length = 0
+		if written then reset
 	end
 
 	redef fun empty do return new Buffer
