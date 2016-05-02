@@ -6,6 +6,10 @@ This program creates a fake model that can be used to test tools like:
 * `nitmetrics`
 * `nitx`
 * or others `modelbuilder`.
+
+An image:
+
+![Tinks3D](../../contrib/tinks/doc/tinks3d.png)
 # This file is part of NIT ( http://www.nitlanguage.org ).
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
