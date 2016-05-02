@@ -498,8 +498,8 @@ class Path
 		var output = dest.open_wo
 
 		while not input.eof do
-			var buffer = input.read(1024)
-			output.write buffer
+			var buffer = input.read_bytes(1024)
+			output.write_bytes buffer
 		end
 
 		input.close

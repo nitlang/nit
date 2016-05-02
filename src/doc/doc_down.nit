@@ -64,6 +64,8 @@ redef class MDoc
 	# Renders markdown line as a HTML comment block.
 	private fun lines_to_html(lines: Array[String]): Writable do
 		var res = new Template
+		var decorator = markdown_proc.emitter.decorator.as(NitdocDecorator)
+		decorator.current_mdoc = self
 		res.add "<div class=\"nitdoc\">"
 		# do not use DocUnit as synopsys
 		if not lines.is_empty then
@@ -88,15 +90,26 @@ redef class MDoc
 		# add other lines
 		res.add markdown_proc.process(lines.join("\n"))
 		res.add "</div>"
+		decorator.current_mdoc = null
 		return res
 
 	end
 end
 
-private class NitdocDecorator
+# The specific markdown decorator used internally to process MDoc object.
+#
+# You should use the various methods of `MDoc` like `MDoc::html_documentation`
+#
+# The class is public so specific behavior can be plugged on it.
+class NitdocDecorator
 	super HTMLDecorator
 
-	var toolcontext = new ToolContext
+	private var toolcontext = new ToolContext
+
+	# The currently processed mdoc.
+	#
+	# Unfortunately, this seems to be the simpler way to get the currently processed `MDoc` object.
+	var current_mdoc: nullable MDoc = null
 
 	redef fun add_code(v, block) do
 		var meta = block.meta or else "nit"
@@ -143,7 +156,7 @@ private class NitdocDecorator
 		v.add "</code>"
 	end
 
-	fun code_from_text(buffer: Text, from, to: Int): String do
+	private fun code_from_text(buffer: Text, from, to: Int): String do
 		var out = new FlatBuffer
 		for i in [from..to[ do out.add buffer[i]
 		return out.write_to_string

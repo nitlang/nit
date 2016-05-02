@@ -3,6 +3,7 @@ test_prog/
 |--test_prog/game
 |  |--test_prog/game/README.md
 |  `--test_prog/game/game.nit
+|--test_prog/package.ini
 |--test_prog/platform
 |  |--test_prog/platform/README.md
 |  `--test_prog/platform/platform.nit
