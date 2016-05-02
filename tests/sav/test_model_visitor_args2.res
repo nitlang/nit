@@ -1,48 +1,48 @@
 All entities, including fictive ones:
  list:
-  MMethodDef: 33 (46.47%)
-  MClassDef: 15 (21.12%)
-  MMethod: 8 (11.26%)
-  MClass: 8 (11.26%)
-  MModule: 4 (5.63%)
-  MGroup: 1 (1.40%)
-  MPackage: 1 (1.40%)
-  Model: 1 (1.40%)
+  MMethodDef: 49 (49.49%)
+  MClassDef: 21 (21.21%)
+  MClass: 10 (10.10%)
+  MMethod: 9 (9.09%)
+  MModule: 5 (5.05%)
+  MGroup: 2 (2.02%)
+  MPackage: 2 (2.02%)
+  Model: 1 (1.01%)
 All entities:
  list:
-  MMethodDef: 33 (46.47%)
-  MClassDef: 15 (21.12%)
-  MMethod: 8 (11.26%)
-  MClass: 8 (11.26%)
-  MModule: 4 (5.63%)
-  MGroup: 1 (1.40%)
-  MPackage: 1 (1.40%)
-  Model: 1 (1.40%)
+  MMethodDef: 49 (49.49%)
+  MClassDef: 21 (21.21%)
+  MClass: 10 (10.10%)
+  MMethod: 9 (9.09%)
+  MModule: 5 (5.05%)
+  MGroup: 2 (2.02%)
+  MPackage: 2 (2.02%)
+  Model: 1 (1.01%)
 
 All non-private entities:
  list:
-  MMethodDef: 10 (29.41%)
-  MClassDef: 8 (23.52%)
-  MMethod: 5 (14.70%)
-  MClass: 4 (11.76%)
-  MModule: 4 (11.76%)
-  MGroup: 1 (2.94%)
-  MPackage: 1 (2.94%)
-  Model: 1 (2.94%)
+  MMethodDef: 14 (30.43%)
+  MClassDef: 11 (23.91%)
+  MMethod: 6 (13.04%)
+  MClass: 5 (10.86%)
+  MModule: 5 (10.86%)
+  MGroup: 2 (4.34%)
+  MPackage: 2 (4.34%)
+  Model: 1 (2.17%)
 
 All documented non-private entities:
  list:
 
 All public entities:
  list:
-  MMethodDef: 10 (29.41%)
-  MClassDef: 8 (23.52%)
-  MMethod: 5 (14.70%)
-  MClass: 4 (11.76%)
-  MModule: 4 (11.76%)
-  MGroup: 1 (2.94%)
-  MPackage: 1 (2.94%)
-  Model: 1 (2.94%)
+  MMethodDef: 14 (30.43%)
+  MClassDef: 11 (23.91%)
+  MMethod: 6 (13.04%)
+  MClass: 5 (10.86%)
+  MModule: 5 (10.86%)
+  MGroup: 2 (4.34%)
+  MPackage: 2 (4.34%)
+  Model: 1 (2.17%)
 
 All documented public entities:
  list:
@@ -51,58 +51,59 @@ Names:
 
 # Classes of entities
  population: 7
- minimum value: 1
- maximum value: 33
- total value: 70
- average value: 10.00
+ minimum value: 2
+ maximum value: 49
+ total value: 98
+ average value: 14.00
  distribution:
-  <=1: sub-population=2 (28.57%); cumulated value=2 (2.85%)
-  <=4: sub-population=1 (14.28%); cumulated value=4 (5.71%)
-  <=8: sub-population=2 (28.57%); cumulated value=16 (22.85%)
-  <=16: sub-population=1 (14.28%); cumulated value=15 (21.42%)
-  <=64: sub-population=1 (14.28%); cumulated value=33 (47.14%)
+  <=2: sub-population=2 (28.57%); cumulated value=4 (4.08%)
+  <=8: sub-population=1 (14.28%); cumulated value=5 (5.10%)
+  <=16: sub-population=2 (28.57%); cumulated value=19 (19.38%)
+  <=32: sub-population=1 (14.28%); cumulated value=21 (21.42%)
+  <=64: sub-population=1 (14.28%); cumulated value=49 (50.00%)
  list:
-  MMethodDef: 33 (47.14%)
-  MClassDef: 15 (21.42%)
-  MMethod: 8 (11.42%)
-  MClass: 8 (11.42%)
-  MModule: 4 (5.71%)
-  MGroup: 1 (1.42%)
-  MPackage: 1 (1.42%)
+  MMethodDef: 49 (50.00%)
+  MClassDef: 21 (21.42%)
+  MClass: 10 (10.20%)
+  MMethod: 9 (9.18%)
+  MModule: 5 (5.10%)
+  MGroup: 2 (2.04%)
+  MPackage: 2 (2.04%)
 
 # Name length of entities
- population: 70
+ population: 98
  minimum value: 5
- maximum value: 29
- total value: 1045
- average value: 14.92
+ maximum value: 44
+ total value: 1762
+ average value: 17.97
  distribution:
-  <=5: sub-population=1 (1.42%); cumulated value=5 (0.47%)
-  <=10: sub-population=13 (18.57%); cumulated value=109 (10.43%)
-  <=20: sub-population=44 (62.85%); cumulated value=637 (60.95%)
-  <=40: sub-population=12 (17.14%); cumulated value=294 (28.13%)
+  <=5: sub-population=1 (1.02%); cumulated value=5 (0.28%)
+  <=10: sub-population=17 (17.34%); cumulated value=141 (8.00%)
+  <=20: sub-population=48 (48.97%); cumulated value=706 (40.06%)
+  <=40: sub-population=30 (30.61%); cumulated value=822 (46.65%)
+  <=80: sub-population=2 (2.04%); cumulated value=88 (4.99%)
  list:
-  names::n3$::n1::P1$::n0::P::p: 29 (2.77%)
-  names::n1$::n0::P0$::n0::A::z: 29 (2.77%)
-  names::n1$::n0::P0$::n0::P::p: 29 (2.77%)
-  names::n3$::n1::P1$A::a: 23 (2.20%)
-  names::n1$A0$::n0::A::z: 23 (2.20%)
-  names::n1$A0$::n0::P::p: 23 (2.20%)
-  names::n0$P0$::n0::A::z: 23 (2.20%)
-  names::n0$P0$::n0::P::p: 23 (2.20%)
-  names::n3$A1$::n0::P::p: 23 (2.20%)
-  names::n1$::n0::P0$A::a: 23 (2.20%)
+  names1::names1$names::n0::P0$names::n0::P::p: 44 (2.49%)
+  names1::names1$names::n0::P0$names::n0::A::z: 44 (2.49%)
+  names1::names1$names::A0$names::n0::A::z: 40 (2.27%)
+  names1::names1$names::A0$names::n0::P::p: 40 (2.27%)
+  names1::names1$names::n0::P0$names::A::a: 40 (2.27%)
+  names1::names1$names::A0$names::A::a: 36 (2.04%)
+  names1::names1$P1$names::n0::P::p: 33 (1.87%)
+  names1::names1$P1$names::n0::A::z: 33 (1.87%)
+  names::n1$::n0::P0$::n0::A::z: 29 (1.64%)
+  names1::names1$P1$names::A::a: 29 (1.64%)
   ...
-  names::n0: 9 (0.86%)
-  names$A$z: 9 (0.86%)
-  names::A0: 9 (0.86%)
-  names::n3: 9 (0.86%)
-  names::A: 8 (0.76%)
-  names$A0: 8 (0.76%)
-  names$A1: 8 (0.76%)
-  names$A: 7 (0.66%)
-  names>: 6 (0.57%)
-  names: 5 (0.47%)
+  names::n3: 9 (0.51%)
+  names::n0: 9 (0.51%)
+  names::A: 8 (0.45%)
+  names$A0: 8 (0.45%)
+  names$A1: 8 (0.45%)
+  names$A: 7 (0.39%)
+  names1>: 7 (0.39%)
+  names1: 6 (0.34%)
+  names>: 6 (0.34%)
+  names: 5 (0.28%)
 
 # All entities
 names	MPackage	Group of modules used to test various full_name configurations and conflicts.
@@ -175,3 +176,31 @@ names::n2::P	MClass
 names::n2$P	MClassDef	Name conflict? A second private class
 names::n2::P::p	MMethod	
 names::n2$P$p	MMethodDef	Name conflict? A private method in an homonym class.
+names1	MPackage	An alternative second module in a distinct package
+names1>	MGroup	An alternative second module in a distinct package
+names1::names1	MModule	An alternative second module in a distinct package
+names1::names1$names::A	MClassDef	A refinement of a class
+names1::names1$names::A$a	MMethodDef	A refinement in the same class
+names1::names1$names::A$z	MMethodDef	A refinement in the same class
+names1::names1::A::b	MMethod	
+names1::names1$names::A$b	MMethodDef	A public method introduced in a refinement
+names1::names1$names::A0	MClassDef	A refinement of a subclass
+names1::names1$names::A0$names::A::a	MMethodDef	A refinement+redefinition
+names1::names1$names::A0$names::n0::A::z	MMethodDef	A refinement+redefinition
+names1::names1$names::A0$names::n0::P::p	MMethodDef	A refinement+redefinition
+names1::A1	MClass	
+names1$A1	MClassDef	A subclass introduced in a submodule
+names1$A1$names::A::a	MMethodDef	A redefinition in a subclass from a different module
+names1$A1$names::n0::A::z	MMethodDef	A redefinition in a subclass from a different module
+names1$A1$names::n0::P::p	MMethodDef	A redefinition in a subclass from a different module
+names1::names1$names::n0::P	MClassDef	A refinement of a class
+names1::names1$names::n0::P$p	MMethodDef	A refinement in the same class
+names1::names1$names::n0::P0	MClassDef	A refinement of a subclass
+names1::names1$names::n0::P0$names::A::a	MMethodDef	A refinement+redefinition
+names1::names1$names::n0::P0$names::n0::A::z	MMethodDef	A refinement+redefinition
+names1::names1$names::n0::P0$names::n0::P::p	MMethodDef	A refinement+redefinition
+names1::names1::P1	MClass	
+names1::names1$P1	MClassDef	A private subclass introduced in a different module
+names1::names1$P1$names::A::a	MMethodDef	A redefinition in a subclass from a different module
+names1::names1$P1$names::n0::A::z	MMethodDef	A redefinition in a subclass from a different module
+names1::names1$P1$names::n0::P::p	MMethodDef	A redefinition in a subclass from a different module
