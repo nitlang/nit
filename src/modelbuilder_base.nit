@@ -311,6 +311,7 @@ class ModelBuilder
 		# Look for imported but invisible classes.
 		if all_classes != null then for c in all_classes do
 			if not mmodule.in_importation <= c.intro_mmodule then continue
+			if mmodule.is_visible(c.intro_mmodule, c.visibility) then continue
 			error(ntype, "Error: class `{c.full_name}` not visible in module `{mmodule}`.")
 			return null
 		end
@@ -318,6 +319,7 @@ class ModelBuilder
 		# Look for not imported but known classes from importable modules
 		var hints = new Array[String]
 		if all_classes != null then for c in all_classes do
+			if mmodule.in_importation <= c.intro_mmodule then continue
 			if c.intro_mmodule.in_importation <= mmodule then continue
 			if c.visibility <= private_visibility then continue
 			hints.add "`{c.intro_mmodule.full_name}`"
@@ -338,7 +340,7 @@ class ModelBuilder
 					hints.clear
 					bestd = d
 				end
-				hints.add "`{c.name}`"
+				hints.add "`{c.full_name}`"
 			end
 		end
 		if hints.not_empty then
