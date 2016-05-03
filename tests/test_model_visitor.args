@@ -1,2 +1,2 @@
 base_simple3.nit
-names/n3.nit
+names/n3.nit names1.nit -I .

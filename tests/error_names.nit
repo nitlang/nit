@@ -1,7 +1,5 @@
 # This file is part of NIT ( http://www.nitlanguage.org ).
 #
-# Copyright 2004-2008 Jean Privat <jean@pryen.org>
-#
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
@@ -14,72 +12,26 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import module_0
+intrude import names::n0
+intrude import names::n1
+intrude import names::n2
+intrude import names::n3
+intrude import names1
 
-class A # class 1
-	fun a1
-	do
-		print(1)
-		print(1)
-	end
-	fun a12
-	do
-		print(12)
-		print(1)
-	end
-	fun a13
-	do
-		print(13)
-		print(1)
-	end
-	fun a123
-	do
-		print(123)
-		print(1)
-	end
-end
+var a
 
-class B # class 2
-	super A
-	redef fun a12
-	do
-		print(12)
-		print(2)
-	end
-	redef fun a123
-	do
-		print(123)
-		print(2)
-	end
-	fun all2
-	do
-		a1
-		a12
-		a13
-		a123
-	end
-	fun all25
-	do
-		print(250)
-		print(2)
-		a1
-		a12
-		a13
-		a123
-	end
-end
+a = new A1
+a = new names::A1
+a = new names::n0::A1
+a = new names::n1::A1
+a = new names::n2::A1
+a = new names1::A1
+a = new names1::names1::A1
 
-var a = new A
-a.a1
-a.a12
-a.a13
-a.a123
-
-var b = new B
-b.a1
-b.a12
-b.a13
-b.a123
-
-b.all2
-b.all25
+a = new P1
+a = new names::P1
+a = new names::n0::P1
+a = new names::n1::P1
+a = new names::n2::P1
+a = new names1::P1
+a = new names1::names1::P1

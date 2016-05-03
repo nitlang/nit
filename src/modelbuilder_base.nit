@@ -81,6 +81,36 @@ class ModelBuilder
 		return res
 	end
 
+	# Return a class identified by `qid` visible by the module `mmodule`.
+	# Visibility in modules and qualified names are correctly handled.
+	#
+	# If more than one class exists, then null is silently returned.
+	# It is up to the caller to post-analysis the result and display a correct error message.
+	# The method `class_not_found` can be used to display such a message.
+	fun try_get_mclass_by_qid(qid: AQclassid, mmodule: MModule): nullable MClass
+	do
+		var name = qid.n_id.text
+
+		var classes = model.get_mclasses_by_name(name)
+		if classes == null then
+			return null
+		end
+
+		var res: nullable MClass = null
+		for mclass in classes do
+			if not mmodule.in_importation <= mclass.intro_mmodule then continue
+			if not mmodule.is_visible(mclass.intro_mmodule, mclass.visibility) then continue
+			if not qid.accept(mclass) then continue
+			if res == null then
+				res = mclass
+			else
+				return null
+			end
+		end
+
+		return res
+	end
+
 	# Like `try_get_mclass_by_name` but display an error message when the class is not found
 	fun get_mclass_by_name(node: ANode, mmodule: MModule, name: String): nullable MClass
 	do
@@ -235,7 +265,8 @@ class ModelBuilder
 	# FIXME: the name "resolve_mtype" is awful
 	fun resolve_mtype_unchecked(mmodule: MModule, mclassdef: nullable MClassDef, ntype: AType, with_virtual: Bool): nullable MType
 	do
-		var name = ntype.n_qid.n_id.text
+		var qid = ntype.n_qid
+		var name = qid.n_id.text
 		var res: MType
 
 		# Check virtual type
@@ -269,7 +300,7 @@ class ModelBuilder
 		end
 
 		# Check class
-		var mclass = try_get_mclass_by_name(ntype, mmodule, name)
+		var mclass = try_get_mclass_by_qid(qid, mmodule)
 		if mclass != null then
 			var arity = ntype.n_types.length
 			if arity != mclass.arity then
@@ -304,27 +335,54 @@ class ModelBuilder
 		# If everything fail, then give up with class by proposing things.
 		#
 		# TODO Give hints on formal types (param and virtual)
-		# TODO How to move this in a libified autonomous code?
+		class_not_found(qid, mmodule)
+		ntype.is_broken = true
+		return null
+	end
+
+	# Print an error and suggest hints when the class identified by `qid` in `mmodule` is not found.
+	#
+	# This just print error messages.
+	fun class_not_found(qid: AQclassid, mmodule: MModule)
+	do
+		var name = qid.n_id.text
+		var qname = qid.full_name
 
 		var all_classes = model.get_mclasses_by_name(name)
+		var hints = new Array[String]
+
+		# Look for conflicting classes.
+		if all_classes != null then for c in all_classes do
+			if not mmodule.is_visible(c.intro_mmodule, c.visibility) then continue
+			if not qid.accept(c) then continue
+			hints.add "`{c.full_name}`"
+		end
+		if hints.length > 1 then
+			error(qid, "Error: ambiguous class name `{qname}` in module `{mmodule}`. Conflicts are between {hints.join(",", " and ")}.")
+			return
+		end
+		hints.clear
 
 		# Look for imported but invisible classes.
 		if all_classes != null then for c in all_classes do
 			if not mmodule.in_importation <= c.intro_mmodule then continue
-			error(ntype, "Error: class `{c.full_name}` not visible in module `{mmodule}`.")
-			return null
+			if mmodule.is_visible(c.intro_mmodule, c.visibility) then continue
+			if not qid.accept(c) then continue
+			error(qid, "Error: class `{c.full_name}` not visible in module `{mmodule}`.")
+			return
 		end
 
 		# Look for not imported but known classes from importable modules
-		var hints = new Array[String]
 		if all_classes != null then for c in all_classes do
+			if mmodule.in_importation <= c.intro_mmodule then continue
 			if c.intro_mmodule.in_importation <= mmodule then continue
 			if c.visibility <= private_visibility then continue
+			if not qid.accept(c) then continue
 			hints.add "`{c.intro_mmodule.full_name}`"
 		end
 		if hints.not_empty then
-			error(ntype, "Error: class `{name}` not found in module `{mmodule}`. Maybe import {hints.join(",", " or ")}?")
-			return null
+			error(qid, "Error: class `{qname}` not found in module `{mmodule}`. Maybe import {hints.join(",", " or ")}?")
+			return
 		end
 
 		# Look for classes with an approximative name.
@@ -338,16 +396,15 @@ class ModelBuilder
 					hints.clear
 					bestd = d
 				end
-				hints.add "`{c.name}`"
+				hints.add "`{c.full_name}`"
 			end
 		end
 		if hints.not_empty then
-			error(ntype, "Error: class `{name}` not found in module `{mmodule}`. Did you mean {hints.join(",", " or ")}?")
-			return null
+			error(qid, "Error: class `{qname}` not found in module `{mmodule}`. Did you mean {hints.join(",", " or ")}?")
+			return
 		end
 
-		error(ntype, "Error: class `{name}` not found in module `{mmodule}`.")
-		return null
+		error(qid, "Error: class `{name}` not found in module `{mmodule}`.")
 	end
 
 	# Return the static type associated to the node `ntype`.
@@ -469,6 +526,56 @@ redef class ADoc
 			res.content.add(text)
 		end
 		mdoc_cache = res
+		return res
+	end
+end
+
+redef class AQclassid
+	# The name of the package part, if any
+	fun mpackname: nullable String do
+		var nqualified = n_qualified
+		if nqualified == null then return null
+		var nids = nqualified.n_id
+		if nids.length <= 0 then return null
+		return nids[0].text
+	end
+
+	# The name of the module part, if any
+	fun mmodname: nullable String do
+		var nqualified = n_qualified
+		if nqualified == null then return null
+		var nids = nqualified.n_id
+		if nids.length <= 1 then return null
+		return nids[1].text
+	end
+
+	# Does `mclass` match the full qualified name?
+	fun accept(mclass: MClass): Bool
+	do
+		if mclass.name != n_id.text then return false
+		var mpackname = self.mpackname
+		if mpackname != null then
+			var mpackage = mclass.intro_mmodule.mpackage
+			if mpackage == null then return false
+			if mpackage.name != mpackname then return false
+			var mmodname = self.mmodname
+			if mmodname != null and mclass.intro_mmodule.name != mmodname then return false
+		end
+		return true
+	end
+
+	# The pretty name represented by self.
+	fun full_name: String
+	do
+		var res = n_id.text
+		var nqualified = n_qualified
+		if nqualified == null then return res
+		var ncid = nqualified.n_classid
+		if ncid != null then res = ncid.text + "::" + res
+		var nids = nqualified.n_id
+		if nids.not_empty then for n in nids.reverse_iterator do
+			res = n.text + "::" + res
+		end
 		return res
 	end
 end

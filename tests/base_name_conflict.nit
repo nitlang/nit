@@ -1,7 +1,5 @@
 # This file is part of NIT ( http://www.nitlanguage.org ).
 #
-# Copyright 2004-2008 Jean Privat <jean@pryen.org>
-#
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
@@ -14,72 +12,29 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import module_0
+import module_1
+import module_1b
 
-class A # class 1
-	fun a1
-	do
-		print(1)
-		print(1)
-	end
-	fun a12
-	do
-		print(12)
-		print(1)
-	end
-	fun a13
-	do
-		print(13)
-		print(1)
-	end
-	fun a123
-	do
-		print(123)
-		print(1)
-	end
+redef class module_1::A
+	fun foo do print(100)
 end
 
-class B # class 2
-	super A
-	redef fun a12
-	do
-		print(12)
-		print(2)
-	end
-	redef fun a123
-	do
-		print(123)
-		print(2)
-	end
-	fun all2
-	do
-		a1
-		a12
-		a13
-		a123
-	end
-	fun all25
-	do
-		print(250)
-		print(2)
-		a1
-		a12
-		a13
-		a123
-	end
+redef class module_1b::A
+	fun foob do print(110)
 end
 
-var a = new A
+#alt1#redef class A
+#alt1#end
+
+#alt2#redef class fail::A
+#alt2#end
+
+var a = new module_1::A
 a.a1
-a.a12
-a.a13
-a.a123
+a.foo
+#alt3#a.foob
 
-var b = new B
+var b = new module_1b::A
 b.a1
-b.a12
-b.a13
-b.a123
-
-b.all2
-b.all25
+b.foob
+#alt3#b.foo
