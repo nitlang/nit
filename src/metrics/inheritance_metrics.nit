@@ -77,11 +77,11 @@ private class InheritanceMetricsPhase
 				cmetrics.clear
 				cmetrics.collect(new HashSet[MClass].from(mod_mclasses))
 				cmetrics.to_console(1, not toolcontext.opt_nocolors.value)
-				if csv then cmetrics.to_csv.save("{out}/{mgroup}_classes.csv")
+				if csv then cmetrics.to_csv.write_to_file("{out}/{mgroup}_classes.csv")
 				hmetrics.clear
 				hmetrics.collect(new HashSet[MModule].from(mgroup.mmodules))
 				hmetrics.to_console(1, not toolcontext.opt_nocolors.value)
-				if csv then hmetrics.to_csv.save("{out}/{mgroup}_inheritance.csv")
+				if csv then hmetrics.to_csv.write_to_file("{out}/{mgroup}_inheritance.csv")
 			end
 		end
 		if not mclasses.is_empty then
@@ -90,11 +90,11 @@ private class InheritanceMetricsPhase
 			cmetrics.clear
 			cmetrics.collect(mclasses)
 			cmetrics.to_console(1, not toolcontext.opt_nocolors.value)
-			if csv then cmetrics.to_csv.save("{out}/summary_classes.csv")
+			if csv then cmetrics.to_csv.write_to_file("{out}/summary_classes.csv")
 			hmetrics.clear
 			hmetrics.collect(mmodules)
 			hmetrics.to_console(1, not toolcontext.opt_nocolors.value)
-			if csv then hmetrics.to_csv.save("{out}/summary_inheritance.csv")
+			if csv then hmetrics.to_csv.write_to_file("{out}/summary_inheritance.csv")
 		end
 	end
 end

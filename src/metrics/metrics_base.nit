@@ -395,8 +395,7 @@ class MetricSet
 	# Export the metric set in CSV format
 	fun to_csv: CsvDocument do
 		var csv = new CsvDocument
-
-		csv.format = new CsvFormat('"', ';', "\n")
+		csv.separator = ';'
 
 		# set csv headers
 		csv.header.add("entry")

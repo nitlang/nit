@@ -417,6 +417,9 @@ abstract class Writer
 	# Write a single byte
 	fun write_byte(value: Byte) is abstract
 
+	# Writes a single char
+	fun write_char(c: Char) do write(c.to_s)
+
 	# Can the stream be used to write
 	fun is_writable: Bool is abstract
 end
