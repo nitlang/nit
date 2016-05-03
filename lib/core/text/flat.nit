@@ -1006,7 +1006,7 @@ class FlatBuffer
 	init with_capacity(cap: Int)
 	do
 		assert cap >= 0
-		_items = new NativeString(cap + 1)
+		_items = new NativeString(cap)
 		capacity = cap
 		_bytelen = 0
 	end
