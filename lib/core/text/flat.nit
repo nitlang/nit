@@ -922,9 +922,9 @@ class FlatBuffer
 
 	redef fun clear do
 		is_dirty = true
-		if written then reset
 		_bytelen = 0
 		_length = 0
+		if written then reset
 	end
 
 	redef fun empty do return new Buffer
@@ -933,12 +933,13 @@ class FlatBuffer
 	do
 		var c = capacity
 		if cap <= c then return
-		while c <= cap do c = c * 2 + 2
+		if c <= 16 then c = 16
+		while c <= cap do c = c * 2
 		# The COW flag can be set at false here, since
 		# it does a copy of the current `Buffer`
 		written = false
 		var bln = _bytelen
-		var a = new NativeString(c+1)
+		var a = new NativeString(c)
 		if bln > 0 then
 			var it = _items
 			if bln > 0 then it.copy_to(a, bln, 0, 0)
@@ -1005,7 +1006,7 @@ class FlatBuffer
 	init with_capacity(cap: Int)
 	do
 		assert cap >= 0
-		_items = new NativeString(cap + 1)
+		_items = new NativeString(cap)
 		capacity = cap
 		_bytelen = 0
 	end
