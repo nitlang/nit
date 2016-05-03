@@ -540,3 +540,44 @@ private class UnrolledIterator[E]
 		end
 	end
 end
+
+# Keep track of the best elements according to a distance value.
+#
+# ~~~
+# var bests = new BestDistance[String](5)
+# bests.update(10, "Too big")
+# assert bests.best_items.is_empty
+# bests.update(5, "Just fine")
+# bests.update(5, "Another one")
+# assert bests.best_items.has_exactly(["Just fine", "Another one"])
+# bests.update(2, "A better one")
+# bests.update(4, "Not good enough")
+# assert bests.best_distance == 2
+# assert bests.best_items.has_exactly(["A better one"])
+# ~~~
+class BestDistance[E]
+	# Current smallest distance
+	var best_distance: Int is writable
+
+	# Known elements with the smallest distance
+	var best_items = new Set[E] is writable
+
+	# Register a `candidate` with a `distance`
+	#
+	# * To high, it is ignored.
+	# * Equal to the current best, it is added
+	# * Better that them, is is the new best element
+	#
+	# Return `true` if the candidate is kept (alone or with other)
+	# returns `false` if the candidate is ignored.
+	fun update(distance: Int, candidate: E): Bool
+	do
+		if distance > best_distance then return false
+		if distance < best_distance then
+			best_distance = distance
+			best_items.clear
+		end
+		best_items.add candidate
+		return true
+	end
+end
