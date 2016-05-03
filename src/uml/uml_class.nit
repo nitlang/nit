@@ -52,6 +52,7 @@ end
 redef class MClass
 
 	redef fun tpl_class(model) do
+		var name = name.escape_to_dot
 		var t = new Template
 		t.add "{name} [\n label = \"\{"
 		if kind == abstract_kind then
@@ -121,12 +122,12 @@ redef class MSignature
 			params.add i
 		end
 		if params.length > 0 then
-			t.add params.first.name
+			t.add params.first.name.escape_to_dot
 			t.add ": "
 			t.add params.first.mtype.tpl_class(model)
 			for i in [1 .. params.length [ do
 				t.add ", "
-				t.add params[i].name
+				t.add params[i].name.escape_to_dot
 				t.add ": "
 				t.add params[i].mtype.tpl_class(model)
 			end
@@ -145,7 +146,7 @@ redef class MAttribute
 		var tpl = new Template
 		tpl.add visibility.tpl_class
 		tpl.add " "
-		tpl.add name
+		tpl.add name.escape_to_dot
 		tpl.add ": "
 		tpl.add intro.static_mtype.tpl_class(model)
 		return tpl

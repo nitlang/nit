@@ -18,10 +18,14 @@
 module benitlux_model
 
 import serialization
+import md5
 
 # A beer, with a name and description
 class Beer
 	auto_serializable
+
+	# Database id
+	var id: Int
 
 	# Name of the beer
 	var name: String
@@ -82,3 +86,190 @@ class BeerEvents
 		return ""
 	end
 end
+
+# Basic user public information
+class User
+	serialize
+
+	# ID of this user in the DB
+	var id: Int
+
+	# Visible user name
+	var name: String
+
+	redef fun to_s do return "<{class_name} {id} '{name}'>"
+end
+
+# User public information in reference to a user (medium details level)
+class UserAndFollowing
+	serialize
+
+	# Basic user information
+	var user: User
+
+	# Favorite beers as a string
+	var favs: String
+
+	# Is the reference user following `user`?
+	var following: Bool
+
+	# Is the reference user followed by `user`?
+	var followed: Bool
+
+	# Time of the last check in, if `followed`
+	var last_check_in: nullable String = null
+end
+
+# Review by `author` on a `beer`
+class Review
+	serialize
+
+	# Basic author information
+	var author: User
+
+	# Basic beer information
+	var beer: Beer
+
+	# Rating out of 5
+	var rating: Int
+
+	# Text content of this review, may be empty
+	var text: String
+end
+
+# Statistics of the reviews on `beer`
+class BeerStats
+	serialize
+
+	# Basic beer information
+	var beer: Beer
+
+	# Average rating out of 5
+	var average: Float
+
+	# Number of reviews used for these statistics
+	var count: Int
+end
+
+# Beer information in reference to a user (medium detail level)
+class BeerAndRatings
+	serialize
+
+	# Basic beer information
+	var beer: Beer
+
+	# Global statistics on `beer`
+	var global: nullable BeerStats
+
+	# Statistics on `beer` among followed users only
+	var followed: nullable BeerStats
+
+	# Rating left by the referenced user, if any
+	var user_rating: nullable Int
+
+	# Do we predict this `beer` to go quickly?
+	var will_go_fast: Bool
+
+	# Data of appearance of this batch TODO
+	var batch: String
+
+	# Is this beer new since the last work day?
+	var is_new: Bool
+
+	# Has this beer been here since the last work day?
+	var is_fix: Bool
+
+	# Has this beer left the menu since the last work day?
+	var is_gone: Bool
+
+	# Noteworthy comments on this beer, often relative to a user
+	var badges: nullable Array[BeerBadge] = null is writable
+end
+
+# Noteworthy comment on a beer
+abstract class BeerBadge
+	serialize
+end
+
+# A beer is the favorite of `users`
+class FavoriteBeerBadge
+	super BeerBadge
+	serialize
+
+	# Name of the user fan of the beer
+	var users = new Array[String]
+end
+
+# A beer is similar to `beers`
+class SimilarBeerBadge
+	super BeerBadge
+	serialize
+
+	# Names of the similar beers
+	var beers = new Array[String]
+end
+
+# This beer is the best on the menu
+class BestBeerBadge
+	super BeerBadge
+	serialize
+end
+
+# Result of a login or signup request upon success
+class LoginResult
+	serialize
+
+	# Basic user information
+	var user: User
+
+	# Reference token
+	var token: String
+end
+
+# Report pushed to followed_followers when a user checks in or out
+class CheckinReport
+	serialize
+
+	# Users currently in
+	var users = new Array[User]
+end
+
+# Server or API usage error
+class BenitluxError
+	super Error
+	serialize
+
+	# Error message that can be shown to the user
+	var user_message: nullable String
+end
+
+# Client sent an invalid token
+class BenitluxTokenError
+	super BenitluxError
+	serialize
+end
+
+redef class Text
+	# Is `self` a valid user name?
+	fun name_is_ok: Bool
+	do
+		if length < 4 or length > 16 then return false
+
+		for c in chars do
+			if c.is_whitespace or c.code_point == 0xFFFD then return false
+		end
+
+		return true
+	end
+
+	# Is `self` a valid password?
+	fun pass_is_ok: Bool do return length >= 6
+
+	# Hashed Benitlux password
+	fun pass_hash: String do return (to_s+benitlux_salt).md5
+end
+
+# Salt used on passwords
+#
+# Should be refined by user modules.
+fun benitlux_salt: String do return "Vive le ben!"

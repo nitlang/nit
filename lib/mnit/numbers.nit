@@ -37,9 +37,22 @@ redef class App
 end
 
 redef class Display
-	fun blit_number(imgs: NumberImages, number: Int, x, y: Int)
+	fun blit_number(imgs: NumberImages, number: Int, x, y: Int, centered: nullable Bool)
 	do
 		var str = number.to_s
+
+		if centered == true then
+			var w = 0
+			for c in str.chars do
+				var d = c.code_point-'0'.code_point
+				var img = imgs.imgs[d]
+				w += (img.width.to_f * img.scale).to_i
+			end
+			x -= w / 2
+			var img = imgs.imgs.first
+			y -= (img.width.to_f * img.scale).to_i / 2
+		end
+
 		for c in str.chars do
 			var d = c.code_point-'0'.code_point
 			assert d >= 0 and d <= 9

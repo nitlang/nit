@@ -20,6 +20,16 @@ import c_tools
 import nitni
 import ffi
 import naive_interpreter
+import pkgconfig
+import debugger_socket # To linearize `ToolContext::init`
+
+redef class ToolContext
+
+	# --compile-dir
+	var opt_compile_dir = new OptionString("Directory used to generate temporary files", "--compile-dir")
+
+	init do option_context.add_option opt_compile_dir
+end
 
 redef class AMethPropdef
 	# Does this method definition use the FFI and is it supported by the interpreter?
@@ -27,17 +37,26 @@ redef class AMethPropdef
 	# * Must use the nested foreign code block of the FFI.
 	# * Must not have callbacks.
 	# * Must be implemented in C.
+	# * Must not have a parameter or return typed with a Nit standard class.
 	fun supported_by_dynamic_ffi: Bool
 	do
+		# If the user specfied `is light_ffi`, it must be supported
+		var nats = get_annotations("light_ffi")
+		if nats.not_empty then return true
+
 		var n_extern_code_block = n_extern_code_block
 		if not (n_extern_calls == null and n_extern_code_block != null and
 		        n_extern_code_block.is_c) then return false
 
 		for mparam in mpropdef.msignature.mparameters do
-			var mtype = mparam.mtype
-			if not mtype.is_cprimitive then
+			if not mparam.mtype.is_cprimitive then
 				return false
 			end
+		end
+
+		var return_mtype = mpropdef.msignature.return_mtype
+		if return_mtype != null and not return_mtype.is_cprimitive then
+			return false
 		end
 
 		return true
@@ -45,10 +64,25 @@ redef class AMethPropdef
 end
 
 redef class NaiveInterpreter
+	redef fun start(mainmodule)
+	do
+		super
+
+		# Delete temporary files
+		var compile_dir = compile_dir
+		if compile_dir.file_exists then compile_dir.rmdir
+	end
+
 	# Where to store generated C and extracted code
-	#
-	# TODO make customizable and delete when execution completes
-	private var compile_dir = "nit_compile"
+	private var compile_dir: String is lazy do
+		# Prioritize the user supplied directory
+		var opt = modelbuilder.toolcontext.opt_compile_dir.value
+		if opt != null then return opt
+		return "/tmp/niti_ffi_{process_id}"
+	end
+
+	# Identifier for this process, unique between running interpreters
+	private fun process_id: Int `{ return getpid(); `}
 
 	# Path of the compiled foreign code library
 	#
@@ -59,7 +93,7 @@ redef class NaiveInterpreter
 	end
 
 	# External compiler used to generate the foreign code library
-	private var c_compiler = "gcc"
+	private var c_compiler = "cc"
 end
 
 redef class AModule
@@ -75,7 +109,7 @@ redef class AModule
 		var compile_dir = v.compile_dir
 		var foreign_code_lib_path = v.foreign_code_lib_path(mmodule)
 
-		if not compile_dir.file_exists then compile_dir.mkdir
+		if not compile_dir.file_exists then compile_dir.mkdir(0o700)
 
 		# Compile the common FFI part
 		ensure_compile_ffi_wrapper
@@ -93,24 +127,40 @@ redef class AModule
 		var srcs = [for file in ccu.files do new ExternCFile(file, ""): ExternFile]
 		srcs.add_all mmodule.ffi_files
 
-		if mmodule.pkgconfigs.not_empty then
-			fatal(v, "NOT YET IMPLEMENTED annotation `pkgconfig`")
-			return false
-		end
-
+		# Compiler options specific to this module
 		var ldflags = mmodule.ldflags[""].join(" ")
-		# TODO pkgconfig
+
+		# Protect pkg-config
+		var pkgconfigs = mmodule.pkgconfigs
+		var pkg_cflags = ""
+		if not pkgconfigs.is_empty then
+			var cmd = "which pkg-config >/dev/null"
+			if system(cmd) != 0 then
+				v.fatal "FFI Error: Command `pkg-config` not found. Please install it"
+				return false
+			end
+
+			for p in pkgconfigs do
+				cmd = "pkg-config --exists '{p}'"
+				if system(cmd) != 0 then
+					v.fatal "FFI Error: package {p} is not found by `pkg-config`. Please install it."
+					return false
+				end
+			end
+
+			pkg_cflags = "`pkg-config --cflags {pkgconfigs.join(" ")}`"
+			ldflags += " `pkg-config --libs {pkgconfigs.join(" ")}`"
+		end
 
 		# Compile each source file to an object file (or equivalent)
 		var object_files = new Array[String]
 		for f in srcs do
-			f.compile(v, mmodule, object_files)
+			f.compile(v, mmodule, object_files, pkg_cflags)
 		end
 
 		# Link everything in a shared library
-		# TODO customize the compiler
 		var cmd = "{v.c_compiler} -Wall -shared -o {foreign_code_lib_path} {object_files.join(" ")} {ldflags}"
-		if sys.system(cmd) != 0 then
+		if system(cmd) != 0 then
 			v.fatal "FFI Error: Failed to link native code using `{cmd}`"
 			return false
 		end
@@ -349,14 +399,14 @@ end
 redef class ExternFile
 	# Compile this source file
 	private fun compile(v: NaiveInterpreter, mmodule: MModule,
-		object_files: Array[String]): Bool is abstract
+		object_files: Array[String], pkg_cflags: String): Bool is abstract
 end
 
 redef class ExternCFile
-	redef fun compile(v, mmodule, object_files)
+	redef fun compile(v, mmodule, object_files, pkg_cflags)
 	do
 		var compile_dir = v.compile_dir
-		var cflags = mmodule.cflags[""].join(" ")
+		var cflags = mmodule.cflags[""].join(" ") + " " + pkg_cflags
 		var obj = compile_dir / filename.basename(".c") + ".o"
 
 		var cmd = "{v.c_compiler} -Wall -c -fPIC -I {compile_dir} -g -o {obj} {filename} {cflags}"

@@ -21,6 +21,7 @@ import json::serialization
 
 import linux::http_request is conditional(linux)
 import android::http_request is conditional(android)
+import ios::http_request is conditional(ios)
 
 redef class App
 	# Platform specific service to execute `task` on the main/UI thread
@@ -47,6 +48,9 @@ class AsyncHttpRequest
 	# Should the response content be deserialized from JSON?
 	var deserialize_json = true is writable
 
+	# Delay in seconds before sending this request
+	var delay = 0.0 is writable
+
 	redef fun start
 	do
 		before
@@ -55,6 +59,9 @@ class AsyncHttpRequest
 
 	redef fun main
 	do
+		var delay = delay
+		if delay > 0.0 then delay.sleep
+
 		var uri = rest_server_uri / rest_action
 
 		# Execute REST request

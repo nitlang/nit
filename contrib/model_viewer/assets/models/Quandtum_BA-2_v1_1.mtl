@@ -1,0 +1,16 @@
+# Blender MTL File: 'Quandtum_BA-2_v1_1.blend'
+# Material Count: 1
+
+newmtl Bot
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 0.640000 0.640000 0.640000
+Ks 1.000000 1.000000 1.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Ka textures/Turret-Emission.jpg
+map_Kd textures/Turret-Diffuse.jpg
+map_Bump textures/Turret-Normal.jpg
+map_Ks textures/Turret-Specular.jpg
+map_Ns textures/Turret-Specular.jpg

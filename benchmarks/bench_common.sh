@@ -13,6 +13,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Global variables
+
+# Number of times a command must be run with bench_command
+count=1
+
+# User time limit (in second) before a command is aborted
+usertimelimit=120
+
 # Common functions for all the bench scripts
 
 # Run a single command multiple time and store the execution times
@@ -41,21 +49,27 @@ function bench_command()
 
 	# Execute the commands $count times
 	for i in `seq 1 "$count"`; do
-		/usr/bin/time -f "%U" -o "$timeout" -a "$@" > $outputopts 2>&1 || { failed=true; die "$1: failed"; }
+		(
+			ulimit -t "$usertimelimit" 2> /dev/null
+			/usr/bin/time -f "%U" -o "$timeout" -a "$@" > $outputopts 2>&1
+		) || { err=$?; failed=true; die "$1: failed with $err"; }
 		echo -n "$i. "
 		tail -n 1 "$timeout"
+		test -n "$failed" && break
 	done
 
 	line=`compute_stats "$timeout"`
 	echo "$line ($res)"
 	echo $line >> "$res"
 
-	test -z "$xml" && return
-	echo >>"$xml" "<testcase classname='bench.`basename $res .dat`' name='$title' time='`echo $line | cut -f 1 -d " "`' timestamp='`date -Iseconds`'>"
-	if test -n "$failed"; then
-		echo >>"$xml" "<error message='Command failed'/>"
+	if test -n "$xml"; then
+		echo >>"$xml" "<testcase classname='bench.`basename $res .dat`' name='$title' time='`echo $line | cut -f 1 -d " "`' timestamp='`date -Iseconds`'>"
+		if test -n "$failed"; then
+			echo >>"$xml" "<error message='Command failed'/>"
+		fi
+		echo >>"$xml" "</testcase>"
 	fi
-	echo >>"$xml" "</testcase>"
+	test -z "$failed"
 }
 
 # Run a simble command witout storing the execution time
@@ -86,7 +100,7 @@ function skip_test()
 		return 0
 	fi
 	if test -n "$html"; then
-		echo >>"$html" "<h2>$1</h2>"
+		echo >>"$html" "<h2 id="$1">$1</h2>"
 	fi
 	echo "*"
 	echo "* $1 *****"
@@ -99,4 +113,5 @@ function die()
 {
 	echo >&2 "error: $*"
 	died=1
+	return 1
 }

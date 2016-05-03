@@ -1,7 +1,7 @@
-FlatString
-FlatString
-Class[FlatString]
-Class[Class[FlatString]]
+ASCIIFlatString
+ASCIIFlatString
+Class[ASCIIFlatString]
+Class[Class[ASCIIFlatString]]
 
 XObject
 XObject

@@ -62,7 +62,7 @@ class NeoDoxygenJob
 		loop
 			for f in list_files(dir) do
 				var path = dir/f
-				if path.file_stat.is_dir then
+				if path.file_stat.as(not null).is_dir then
 					directories.push(path)
 				else if f.has_suffix(".xml") and f != "index.xml" then
 					reader.read(path)

@@ -258,11 +258,13 @@ class RapidTypeAnalysis
 			var npropdef = modelbuilder.mpropdef2node(mmethoddef)
 
 			if npropdef isa AClassdef then
-				# It is an init for a class
-				assert mmethoddef == npropdef.mfree_init
-
-				if mmethoddef.mproperty.is_root_init and not mmethoddef.is_intro then
-					self.add_super_send(v.receiver, mmethoddef)
+				if mmethoddef.mproperty.is_root_init then
+					if not mmethoddef.is_intro then
+						self.add_super_send(v.receiver, mmethoddef)
+					end
+				else
+					npropdef.debug "cannot RTA {mmethoddef}"
+					abort
 				end
 				continue
 			else if mmethoddef.constant_value != null then
@@ -583,6 +585,11 @@ redef class AStringFormExpr
 		v.add_type(native)
 		var prop = v.get_method(native, "to_s_full")
 		v.add_monomorphic_send(native, prop)
+		v.add_callsite(to_re)
+		v.add_callsite(ignore_case)
+		v.add_callsite(newline)
+		v.add_callsite(extended)
+		v.add_callsite(to_bytes_with_copy)
 	end
 end
 

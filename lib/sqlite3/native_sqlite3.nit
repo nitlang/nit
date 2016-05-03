@@ -66,14 +66,20 @@ extern class Sqlite3Code `{int`}
 	new done `{ return SQLITE_DONE; `} #       101  /* sqlite3_step() has finished executing */
 	fun is_done: Bool `{ return self == SQLITE_DONE; `}
 
-	redef fun to_s import NativeString.to_s `{
+	redef fun to_s
+	do
+		var err = native_to_s
+		if err.address_is_null then return "Unknown error"
+		return err.to_s
+	end
+
+	private fun native_to_s: NativeString `{
 #if SQLITE_VERSION_NUMBER >= 3007015
 		char *err = (char *)sqlite3_errstr(self);
 #else
 		char *err = "sqlite3_errstr supported only by version >= 3.7.15";
 #endif
-		if (err == NULL) err = "";
-		return NativeString_to_s(err);
+		return err;
 	`}
 end
 
@@ -133,9 +139,9 @@ end
 extern class NativeSqlite3 `{sqlite3 *`}
 
 	# Open a connection to a database in UTF-8
-	new open(filename: String) import String.to_cstring, set_sys_sqlite_open_error `{
+	new open(filename: NativeString) import set_sys_sqlite_open_error `{
 		sqlite3 *self = NULL;
-		int err = sqlite3_open(String_to_cstring(filename), &self);
+		int err = sqlite3_open(filename, &self);
 		NativeSqlite3_set_sys_sqlite_open_error(self, (void*)(long)err);
 		// The previous cast is a hack, using non pointers in extern classes is not
 		// yet in the spec of the FFI.

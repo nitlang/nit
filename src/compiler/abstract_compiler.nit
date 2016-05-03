@@ -349,7 +349,7 @@ class MakefileToolchain
 		end
 		var debug = toolcontext.opt_debug.value
 
-		makefile.write("CC = ccache cc\nCXX = ccache c++\nCFLAGS = -g{ if not debug then " -O2 " else " "}-Wno-unused-value -Wno-switch -Wno-attributes\nCINCL =\nLDFLAGS ?= \nLDLIBS  ?= -lm {linker_options.join(" ")}\n\n")
+		makefile.write("CC = ccache cc\nCXX = ccache c++\nCFLAGS = -g{ if not debug then " -O2 " else " "}-Wno-unused-value -Wno-switch -Wno-attributes -Wno-trigraphs\nCINCL =\nLDFLAGS ?= \nLDLIBS  ?= -lm {linker_options.join(" ")}\n\n")
 
 		makefile.write "\n# SPECIAL CONFIGURATION FLAGS\n"
 		if platform.supports_libunwind then
@@ -577,7 +577,7 @@ abstract class AbstractCompiler
 
 	# The list of all associated files
 	# Used to generate .c files
-	var files = new List[CodeFile]
+	var files = new Array[CodeFile]
 
 	# Initialize a visitor specific for a compiler engine
 	fun new_visitor: VISITOR is abstract
@@ -651,12 +651,28 @@ abstract class AbstractCompiler
 		self.header.add_decl("#include <stdlib.h>")
 		self.header.add_decl("#include <stdio.h>")
 		self.header.add_decl("#include <string.h>")
+		# longjmp !
+		self.header.add_decl("#include <setjmp.h>\n")
 		self.header.add_decl("#include <sys/types.h>\n")
 		self.header.add_decl("#include <unistd.h>\n")
 		self.header.add_decl("#include <stdint.h>\n")
+		self.header.add_decl("#ifdef __linux__")
+		self.header.add_decl("	#include <endian.h>")
+		self.header.add_decl("#endif")
 		self.header.add_decl("#include <inttypes.h>\n")
 		self.header.add_decl("#include \"gc_chooser.h\"")
+		self.header.add_decl("#ifdef __APPLE__")
+		self.header.add_decl("	#include <libkern/OSByteOrder.h>")
+		self.header.add_decl("	#define be32toh(x) OSSwapBigToHostInt32(x)")
+		self.header.add_decl("#endif")
+		self.header.add_decl("#ifdef __pnacl__")
+		self.header.add_decl("	#define be16toh(val) (((val) >> 8) | ((val) << 8))")
+		self.header.add_decl("	#define be32toh(val) ((be16toh((val) << 16) | (be16toh((val) >> 16))))")
+		self.header.add_decl("#endif")
 		self.header.add_decl("#ifdef ANDROID")
+		self.header.add_decl("	#ifndef be32toh")
+		self.header.add_decl("		#define be32toh(val) betoh32(val)")
+		self.header.add_decl("	#endif")
 		self.header.add_decl("	#include <android/log.h>")
 		self.header.add_decl("	#define PRINT_ERROR(...) (void)__android_log_print(ANDROID_LOG_WARN, \"Nit\", __VA_ARGS__)")
 		self.header.add_decl("#else")
@@ -665,6 +681,7 @@ abstract class AbstractCompiler
 
 		compile_header_structs
 		compile_nitni_structs
+		compile_catch_stack
 
 		var gccd_disable = modelbuilder.toolcontext.opt_no_gcc_directive.value
 		if gccd_disable.has("noreturn") or gccd_disable.has("all") then
@@ -691,6 +708,17 @@ abstract class AbstractCompiler
 		self.header.add_decl("extern int glob_argc;")
 		self.header.add_decl("extern char **glob_argv;")
 		self.header.add_decl("extern val *glob_sys;")
+	end
+
+	# Stack stocking environment for longjumps
+	protected fun compile_catch_stack do
+		self.header.add_decl """
+struct catch_stack_t {
+	int cursor;
+	jmp_buf envs[100];
+};
+extern struct catch_stack_t catchStack;
+"""
 	end
 
 	# Declaration of structures for live Nit types
@@ -776,6 +804,7 @@ extern void nitni_global_ref_decr( struct nitni_ref *ref );
 		v.add_decl("int glob_argc;")
 		v.add_decl("char **glob_argv;")
 		v.add_decl("val *glob_sys;")
+		v.add_decl("struct catch_stack_t catchStack;")
 
 		if self.modelbuilder.toolcontext.opt_typing_test_metrics.value then
 			for tag in count_type_test_tags do
@@ -853,7 +882,7 @@ extern void nitni_global_ref_decr( struct nitni_ref *ref );
 			v.add_decl("int main(int argc, char** argv) \{")
 		end
 
-		v.add "#ifndef ANDROID"
+		v.add "#if !defined(__ANDROID__) && !defined(TARGET_OS_IPHONE)"
 		v.add("signal(SIGABRT, sig_handler);")
 		v.add("signal(SIGFPE, sig_handler);")
 		v.add("signal(SIGILL, sig_handler);")
@@ -864,6 +893,7 @@ extern void nitni_global_ref_decr( struct nitni_ref *ref );
 		v.add("signal(SIGPIPE, SIG_IGN);")
 
 		v.add("glob_argc = argc; glob_argv = argv;")
+		v.add("catchStack.cursor = -1;")
 		v.add("initialize_gc_option();")
 
 		v.add "initialize_nitni_global_refs();"
@@ -1097,8 +1127,8 @@ end
 # Where to store generated lines
 class CodeWriter
 	var file: CodeFile
-	var lines: List[String] = new List[String]
-	var decl_lines: List[String] = new List[String]
+	var lines = new Array[String]
+	var decl_lines = new Array[String]
 
 	# Add a line in the main part of the generated C
 	fun add(s: String) do self.lines.add(s)
@@ -1259,17 +1289,21 @@ abstract class AbstractCompilerVisitor
 	do
 		mtype = self.anchor(mtype)
 		var valmtype = value.mcasttype
+
+		# Do nothing if useless autocast
 		if valmtype.is_subtype(self.compiler.mainmodule, null, mtype) then
 			return value
 		end
 
+		# Just as_not_null if the target is not nullable.
+		#
+		# eg `nullable PreciseType` adapted to `Object` gives precisetype.
 		if valmtype isa MNullableType and valmtype.mtype.is_subtype(self.compiler.mainmodule, null, mtype) then
-			var res = new RuntimeVariable(value.name, valmtype, valmtype.mtype)
-			return res
-		else
-			var res = new RuntimeVariable(value.name, valmtype, mtype)
-			return res
+			mtype = valmtype.mtype
 		end
+
+		var res = new RuntimeVariable(value.name, value.mtype, mtype)
+		return res
 	end
 
 	# Generate a super call from a method definition
@@ -1337,13 +1371,18 @@ abstract class AbstractCompilerVisitor
 
 	# Checks
 
+	# Can value be null? (according to current knowledge)
+	fun maybenull(value: RuntimeVariable): Bool
+	do
+		return value.mcasttype isa MNullableType or value.mcasttype isa MNullType
+	end
+
 	# Add a check and an abort for a null receiver if needed
 	fun check_recv_notnull(recv: RuntimeVariable)
 	do
 		if self.compiler.modelbuilder.toolcontext.opt_no_check_null.value then return
 
-		var maybenull = recv.mcasttype isa MNullableType or recv.mcasttype isa MNullType
-		if maybenull then
+		if maybenull(recv) then
 			self.add("if (unlikely({recv} == NULL)) \{")
 			self.add_abort("Receiver is null")
 			self.add("\}")
@@ -1588,6 +1627,18 @@ abstract class AbstractCompilerVisitor
 		return res
 	end
 
+	# Generates a NativeString instance fully escaped in C-style \xHH fashion
+	fun native_string_instance(ns: NativeString, len: Int): RuntimeVariable do
+		var mtype = mmodule.native_string_type
+		var nat = new_var(mtype)
+		var byte_esc = new Buffer.with_cap(len * 4)
+		for i in [0 .. len[ do
+			byte_esc.append("\\x{ns[i].to_s.substring_from(2)}")
+		end
+		self.add("{nat} = \"{byte_esc}\";")
+		return nat
+	end
+
 	# Generate a string value
 	fun string_instance(string: String): RuntimeVariable
 	do
@@ -1696,6 +1747,9 @@ abstract class AbstractCompilerVisitor
 	# used by aborts, asserts, casts, etc.
 	fun add_abort(message: String)
 	do
+		self.add("if(catchStack.cursor >= 0)\{")
+		self.add("longjmp(catchStack.envs[catchStack.cursor], 1);")
+		self.add("\}")
 		self.add("PRINT_ERROR(\"Runtime error: %s\", \"{message.escape_to_c}\");")
 		add_raw_abort
 	end
@@ -2031,6 +2085,8 @@ redef class MMethodDef
 			return node.can_inline
 		else if node isa AClassdef then
 			# Automatic free init is always inlined since it is empty or contains only attribtes assigments
+			return true
+		else if node == null then
 			return true
 		else
 			abort
@@ -2487,8 +2543,21 @@ redef class AMethPropdef
 			else if pname == "fast_cstring" then
 				v.ret(v.new_expr("{arguments[0]} + {arguments[1]}", ret.as(not null)))
 				return true
+			else if pname == "==" then
+				v.ret(v.equal_test(arguments[0], arguments[1]))
+				return true
+			else if pname == "!=" then
+				var res = v.equal_test(arguments[0], arguments[1])
+				v.ret(v.new_expr("!{res}", ret.as(not null)))
+				return true
 			else if pname == "new" then
 				v.ret(v.new_expr("(char*)nit_alloc({arguments[1]})", ret.as(not null)))
+				return true
+			else if pname == "fetch_4_chars" then
+				v.ret(v.new_expr("(long)*((uint32_t*)({arguments[0]} + {arguments[1]}))", ret.as(not null)))
+				return true
+			else if pname == "fetch_4_hchars" then
+				v.ret(v.new_expr("(long)be32toh(*((uint32_t*)({arguments[0]} + {arguments[1]})))", ret.as(not null)))
 				return true
 			end
 		else if cname == "NativeArray" then
@@ -3067,7 +3136,18 @@ redef class AAttrPropdef
 			v.assign(v.frame.returnvar.as(not null), res)
 		else if mpropdef == mwritepropdef then
 			assert arguments.length == 2
-			v.write_attribute(self.mpropdef.mproperty, arguments.first, arguments[1])
+			var recv = arguments.first
+			var arg = arguments[1]
+			if is_optional and v.maybenull(arg) then
+				var value = v.new_var(self.mpropdef.static_mtype.as(not null))
+				v.add("if ({arg} == NULL) \{")
+				v.assign(value, evaluate_expr(v, recv))
+				v.add("\} else \{")
+				v.assign(value, arg)
+				v.add("\}")
+				arg = value
+			end
+			v.write_attribute(self.mpropdef.mproperty, arguments.first, arg)
 			if is_lazy then
 				var ret = self.mtype
 				var useiset = not ret.is_c_primitive and not ret isa MNullableType
@@ -3142,8 +3222,7 @@ end
 redef class AClassdef
 	private fun compile_to_c(v: AbstractCompilerVisitor, mpropdef: MMethodDef, arguments: Array[RuntimeVariable])
 	do
-		if mpropdef == self.mfree_init then
-			assert mpropdef.mproperty.is_root_init
+		if mpropdef.mproperty.is_root_init then
 			assert arguments.length == 1
 			if not mpropdef.is_intro then
 				v.supercall(mpropdef, arguments.first.mtype.as(MClassType), arguments)
@@ -3311,8 +3390,19 @@ end
 redef class ADoExpr
 	redef fun stmt(v)
 	do
-		v.stmt(self.n_block)
-		v.add_escape_label(break_mark)
+		if self.n_catch != null then
+			v.add("catchStack.cursor += 1;")
+			v.add("if(!setjmp(catchStack.envs[catchStack.cursor]))\{")
+			v.stmt(self.n_block)
+			v.add("catchStack.cursor -= 1;")
+			v.add("\}else \{")
+			v.add("catchStack.cursor -= 1;")
+			v.stmt(self.n_catch)
+			v.add("\}")
+		else
+			v.stmt(self.n_block)
+		end
+			v.add_escape_label(break_mark)
 	end
 end
 
@@ -3481,6 +3571,9 @@ redef class AOrElseExpr
 	do
 		var res = v.new_var(self.mtype.as(not null))
 		var i1 = v.expr(self.n_expr, null)
+
+		if not v.maybenull(i1) then return i1
+
 		v.add("if ({i1}!=NULL) \{")
 		v.assign(res, i1)
 		v.add("\} else \{")
@@ -3510,7 +3603,11 @@ redef class AFloatExpr
 end
 
 redef class ACharExpr
-	redef fun expr(v) do return v.char_instance(self.value.as(not null))
+	redef fun expr(v) do
+		if is_ascii then return v.byte_instance(value.as(not null).ascii)
+		if is_code_point then return v.int_instance(value.as(not null).code_point)
+		return v.char_instance(self.value.as(not null))
+	end
 end
 
 redef class AArrayExpr
@@ -3531,14 +3628,75 @@ redef class AArrayExpr
 	end
 end
 
+redef class AugmentedStringFormExpr
+	# Factorize the making of a `Regex` object from a literal prefixed string
+	protected fun make_re(v: AbstractCompilerVisitor, rs: RuntimeVariable): nullable RuntimeVariable do
+		var re = to_re
+		assert re != null
+		var res = v.compile_callsite(re, [rs])
+		if res == null then
+			print "Cannot call property `to_re` on {self}"
+			abort
+		end
+		for i in suffix.chars do
+			if i == 'i' then
+				var ign = ignore_case
+				assert ign != null
+				v.compile_callsite(ign, [res, v.bool_instance(true)])
+				continue
+			end
+			if i == 'm' then
+				var nl = newline
+				assert nl != null
+				v.compile_callsite(nl, [res, v.bool_instance(true)])
+				continue
+			end
+			if i == 'b' then
+				var ext = extended
+				assert ext != null
+				v.compile_callsite(ext, [res, v.bool_instance(false)])
+				continue
+			end
+			# Should not happen, this needs to be updated
+			# along with the addition of new suffixes
+			abort
+		end
+		return res
+	end
+end
+
 redef class AStringFormExpr
-	redef fun expr(v) do return v.string_instance(self.value.as(not null))
+	redef fun expr(v) do return v.string_instance(value)
+end
+
+redef class AStringExpr
+	redef fun expr(v) do
+		var s = v.string_instance(value)
+		if is_string then return s
+		if is_bytestring then
+			var ns = v.native_string_instance(bytes.items, bytes.length)
+			var ln = v.int_instance(bytes.length)
+			var cs = to_bytes_with_copy
+			assert cs != null
+			var res = v.compile_callsite(cs, [ns, ln])
+			assert res != null
+			s = res
+		else if is_re then
+			var res = make_re(v, s)
+			assert res != null
+			s = res
+		else
+			print "Unimplemented prefix or suffix for {self}"
+			abort
+		end
+		return s
+	end
 end
 
 redef class ASuperstringExpr
 	redef fun expr(v)
 	do
-		var type_string = mtype.as(not null)
+		var type_string = v.mmodule.string_type
 
 		# Collect elements of the superstring
 		var array = new Array[AExpr]
@@ -3592,10 +3750,14 @@ redef class ASuperstringExpr
 
 		# Fast join the native string to get the result
 		var res = v.send(v.get_property("native_to_s", a.mtype), [a])
+		assert res != null
+
+		if is_re then res = make_re(v, res)
 
 		# We finish to work with the native array,
 		# so store it so that it can be reused
 		v.add("{varonce} = {a};")
+
 		return res
 	end
 end
@@ -3663,7 +3825,7 @@ redef class AAsNotnullExpr
 		var i = v.expr(self.n_expr, null)
 		if v.compiler.modelbuilder.toolcontext.opt_no_check_assert.value then return i
 
-		if i.mtype.is_c_primitive then return i
+		if not v.maybenull(i) then return i
 
 		v.add("if (unlikely({i} == NULL)) \{")
 		v.add_abort("Cast failed")
@@ -3783,11 +3945,35 @@ redef class ANewExpr
 			return v.native_array_instance(elttype, l)
 		end
 
-		var recv = v.init_instance_or_extern(mtype)
-
 		var callsite = self.callsite
-		if callsite == null then return recv
+		if callsite == null then return v.init_instance_or_extern(mtype)
 		if callsite.is_broken then return null
+
+		var recv
+		# new factories are badly implemented.
+		# They assume a stub temporary receiver exists.
+		# This temporary receiver is required because it
+		# currently holds the method and the formal types.
+		#
+		# However, this object could be reused if the formal types are the same.
+		# Therefore, the following code will `once` it in these case
+		if callsite.mproperty.is_new and not mtype.need_anchor then
+			var name = v.get_name("varoncenew")
+			var guard = v.get_name(name + "_guard")
+			v.add_decl("static {mtype.ctype} {name};")
+			v.add_decl("static int {guard};")
+			recv = v.new_var(mtype)
+			v.add("if (likely({guard})) \{")
+			v.add("{recv} = {name};")
+			v.add("\} else \{")
+			var i = v.init_instance_or_extern(mtype)
+			v.add("{recv} = {i};")
+			v.add("{name} = {recv};")
+			v.add("{guard} = 1;")
+			v.add("\}")
+		else
+			recv = v.init_instance_or_extern(mtype)
+		end
 
 		var args = v.varargize(callsite.mpropdef, callsite.signaturemap, recv, self.n_args.n_exprs)
 		var res2 = v.compile_callsite(callsite, args)

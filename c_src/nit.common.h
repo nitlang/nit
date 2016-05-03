@@ -7,8 +7,22 @@
 
 #include <stdint.h>
 
+#ifdef __linux__
+	#include <endian.h>
+#endif
+#include <inttypes.h>
+
 #include "gc_chooser.h"
+#ifdef __APPLE__
+	#include <libkern/OSByteOrder.h>
+	#define be32toh(x) OSSwapBigToHostInt32(x)
+#endif
+#ifdef __pnacl__
+	#define be16toh(val) (((val) >> 8) | ((val) << 8))
+	#define be32toh(val) ((be16toh((val) << 16) | (be16toh((val) >> 16))))
+#endif
 #ifdef ANDROID
+	#define be32toh(val) betoh32(val)
 	#include <android/log.h>
 	#define PRINT_ERROR(...) (void)__android_log_print(ANDROID_LOG_WARN, "Nit", __VA_ARGS__)
 #else
@@ -23,6 +37,11 @@ unsigned char b;
 uint32_t c;
 double d;
 void* str;
+int8_t i8;
+int16_t i16;
+uint16_t u16;
+int32_t i32;
+uint32_t u32;
 } nitattribute_t; /* general C type representing a Nit attribute. */
 struct class { int box_kind; nitmethod_t vft[]; }; /* general C type representing a Nit class. */
 struct type { int id; const char *name; int color; short int is_nullable; const struct types *resolution_table; int table_size; int type_table[]; }; /* general C type representing a Nit type. */
@@ -74,29 +93,54 @@ void fatal_exit(int) __attribute__ ((noreturn));
 extern int glob_argc;
 extern char **glob_argv;
 extern val *glob_sys;
-struct instance_standard__NativeString {
+struct instance_core__NativeString {
 const struct type *type;
 const struct class *class;
 void* value;
 };
-struct instance_standard__Float {
+struct instance_core__Float {
 const struct type *type;
 const struct class *class;
 double value;
 };
-struct instance_standard__Byte {
+struct instance_core__Byte {
 const struct type *type;
 const struct class *class;
 unsigned char value;
 };
-struct instance_standard__Pointer {
+struct instance_core__Pointer {
 const struct type *type;
 const struct class *class;
 void* value;
 };
-struct instance_standard__NativeArray {
+struct instance_core__NativeArray {
 const struct type *type;
 const struct class *class;
 int length;
 val* values[0];
+};
+struct instance_core__Int8 {
+const struct type *type;
+const struct class *class;
+int8_t value;
+};
+struct instance_core__Int16 {
+const struct type *type;
+const struct class *class;
+int16_t value;
+};
+struct instance_core__UInt16 {
+const struct type *type;
+const struct class *class;
+uint16_t value;
+};
+struct instance_core__Int32 {
+const struct type *type;
+const struct class *class;
+int32_t value;
+};
+struct instance_core__UInt32 {
+const struct type *type;
+const struct class *class;
+uint32_t value;
 };

@@ -25,7 +25,7 @@ print "45".is_numeric
 #True
 print "45.3".is_numeric
 
-#True
+#False
 print "45,3".is_numeric
 
 #False

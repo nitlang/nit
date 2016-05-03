@@ -1,6 +1,6 @@
 #include "counter.sep.0.h"
 /* method counter#Sys#div for (self: Sys, Int, Int): String */
-val* counter___standard__Sys___div(val* self, long p0, long p1) {
+val* counter___core__Sys___div(val* self, long p0, long p1) {
 val* var /* : String */;
 long var_n /* var n: Int */;
 long var_d /* var d: Int */;
@@ -9,7 +9,7 @@ short int var3 /* : Bool */;
 static val* varonce;
 val* var4 /* : String */;
 char* var5 /* : NativeString */;
-val* var6 /* : FlatString */;
+val* var6 /* : String */;
 long var7 /* : Int */;
 short int var9 /* : Bool */;
 int cltype;
@@ -46,7 +46,7 @@ if (likely(varonce!=NULL)) {
 var4 = varonce;
 } else {
 var5 = "na";
-var6 = standard___standard__NativeString___to_s_with_length(var5, 2l);
+var6 = core__flat___NativeString___to_s_full(var5, 2l, 2l);
 var4 = var6;
 varonce = var4;
 }
@@ -60,9 +60,9 @@ goto RET_LABEL;
 /* <var_n:Int> isa OTHER */
 var9 = 1; /* easy <var_n:Int> isa OTHER*/
 if (unlikely(!var9)) {
-var_class_name = type_standard__Int.name;
+var_class_name = type_core__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name);
-PRINT_ERROR(" (%s:%d)\n", FILE_standard__kernel, 541);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 735);
 fatal_exit(1);
 }
 var10 = 100l * var_n;
@@ -77,9 +77,9 @@ RET_LABEL8:(void)0;
 /* <var_d:Int> isa OTHER */
 var13 = 1; /* easy <var_d:Int> isa OTHER*/
 if (unlikely(!var13)) {
-var_class_name16 = type_standard__Int.name;
+var_class_name16 = type_core__Int.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name16);
-PRINT_ERROR(" (%s:%d)\n", FILE_standard__kernel, 542);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 736);
 fatal_exit(1);
 }
 var17 = var7 / var_d;
@@ -102,9 +102,9 @@ RET_LABEL19:(void)0;
 /* <100.0:Float> isa OTHER */
 var23 = 1; /* easy <100.0:Float> isa OTHER*/
 if (unlikely(!var23)) {
-var_class_name26 = type_standard__Float.name;
+var_class_name26 = type_core__Float.name;
 PRINT_ERROR("Runtime error: Cast failed. Expected `%s`, got `%s`", "OTHER", var_class_name26);
-PRINT_ERROR(" (%s:%d)\n", FILE_standard__kernel, 349);
+PRINT_ERROR(" (%s:%d)\n", FILE_core__kernel, 538);
 fatal_exit(1);
 }
 var27 = var18 / 100.0;
@@ -114,7 +114,7 @@ RET_LABEL22:(void)0;
 }
 }
 {
-var28 = standard__string___Float___to_precision(var21, 2l);
+var28 = core__abstract_text___Float___to_precision(var21, 2l);
 }
 var = var28;
 goto RET_LABEL;

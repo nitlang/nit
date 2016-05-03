@@ -1,4 +1,4 @@
-FlatString
+ASCIIFlatString
 Int
 Test
 Test

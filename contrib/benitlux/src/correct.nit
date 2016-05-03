@@ -24,7 +24,7 @@ module correct
 
 import benitlux_db
 
-redef class DB
+redef class BenitluxDB
 	# Path to file with the corrections
 	private var corrections_path = "benitlux_corrections.txt"
 
@@ -68,7 +68,7 @@ redef class DB
 		# Merge days of `corrections` to `beer`
 		for from, to in corrections do
 			if to == beer.name then
-				var missing_days = super(new Beer(from, ""))
+				var missing_days = super(new Beer(0, from, ""))
 				if missing_days != null then days.add_all missing_days
 			end
 		end

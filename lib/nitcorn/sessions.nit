@@ -26,6 +26,7 @@ import md5
 import server_config
 import http_request
 import http_response
+import token
 
 # A server side session
 class Session
@@ -35,39 +36,20 @@ class Session
 
 	init
 	do
-		self.id_hash = sys.next_session_hash
-		sys.sessions[self.id_hash] = self
+		loop
+			var token = generate_token
+			if sys.sessions.keys.has(token) then continue
+
+			sys.sessions[token] = self
+			self.id_hash = token
+			break
+		end
 	end
 end
 
 redef class Sys
 	# Active sessions
 	var sessions = new HashMap[String, Session]
-
-	# Get the next session hash available, and increment the session id cache
-	fun next_session_hash: String
-	do
-		var id = next_session_id_cache
-		# On firt evocation, seed the pseudo random number generator
-		if id == null then
-			srand
-			id = 1000000.rand
-		end
-
-		next_session_id_cache = id + 1
-
-		return id.to_id_hash
-	end
-
-	private var next_session_id_cache: nullable Int = null
-
-	# Salt used to hash the session id
-	protected var session_salt = "Default unitcorn session salt"
-end
-
-redef class Int
-	# Salt and hash and id to use as `Session.id_hash`
-	private fun to_id_hash: String do return (self.to_s+sys.session_salt).md5
 end
 
 redef class HttpResponse

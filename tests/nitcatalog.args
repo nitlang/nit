@@ -1,0 +1,1 @@
+test_prog --no-git -d "$WRITE" ; cat "$WRITE/p/test_prog.html"

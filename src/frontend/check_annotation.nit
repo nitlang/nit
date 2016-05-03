@@ -84,6 +84,7 @@ lazy
 noinit
 readonly
 writable
+optional
 autoinit
 noautoinit
 lateinit
@@ -99,6 +100,7 @@ auto_inspect
 pkgconfig
 cflags
 ldflags
+light_ffi
 
 platform
 """

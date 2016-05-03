@@ -113,10 +113,22 @@ class AndroidToolchain
 		end
 
 		# Is there an icon?
+		var project_root = "."
+		var mpackage = compiler.mainmodule.first_real_mmodule.mpackage
+		if mpackage != null then
+			var root = mpackage.root
+			if root != null then
+				var filepath = root.filepath
+				if filepath != null then
+					project_root = filepath
+				end
+			end
+		end
+
 		var resolutions = ["ldpi", "mdpi", "hdpi", "xhdpi", "xxhdpi", "xxxhdpi"]
 		var icon_available = false
 		for res in resolutions do
-			var path = "res/drawable-{res}/icon.png"
+			var path = project_root / "android/res/drawable-{res}/icon.png"
 			if path.file_exists then
 				icon_available = true
 				break
@@ -255,18 +267,6 @@ $(call import-module,android/native_app_glue)
 
 		# Copy assets, resources and libs where expected by the SDK
 
-		var project_root = "."
-		var mpackage = compiler.mainmodule.first_real_mmodule.mpackage
-		if mpackage != null then
-			var root = mpackage.root
-			if root != null then
-				var filepath = root.filepath
-				if filepath != null then
-					project_root = filepath
-				end
-			end
-		end
-
 		# Link to assets (for mnit and others)
 		var assets_dir = project_root / "assets"
 		if assets_dir.file_exists then
@@ -278,7 +278,7 @@ $(call import-module,android/native_app_glue)
 		end
 
 		# Copy the res folder
-		var res_dir = project_root / "res"
+		var res_dir = project_root / "android/res"
 		if res_dir.file_exists then
 			# copy the res folder to the compile dir
 			res_dir = res_dir.realpath
@@ -294,7 +294,7 @@ $(call import-module,android/native_app_glue)
 		end
 
 		# Copy the libs folder
-		var libs_dir = project_root / "libs"
+		var libs_dir = project_root / "android/libs"
 		if libs_dir.file_exists then
 			toolcontext.exec_and_check(["cp", "-r", libs_dir, android_project_root], "Android project error")
 		end
@@ -315,7 +315,7 @@ $(call import-module,android/native_app_glue)
 		toolcontext.exec_and_check(["ndk-build", "-s", "-j", "-C", android_project_root], "Android project error")
 
 		# Generate the apk
-		var args = ["ant", "-q", "-f", android_project_root+"/build.xml"]
+		var args = ["ant", "-f", android_project_root+"/build.xml"]
 		if release then
 			args.add "release"
 		else args.add "debug"

@@ -58,7 +58,7 @@ var rest = opts.rest
 # Use the local DB
 var db_path = "benitlux_sherbrooke.db"
 if rest.not_empty then db_path = rest.first
-var db = new DB.open(db_path)
+var db = new BenitluxDB.open(db_path)
 
 # All known beers
 var beers = db.beers

@@ -119,3 +119,29 @@ class HtmlDocPage
 		return tpl
 	end
 end
+
+# Display the source for each mentities
+class HtmlDotPage
+	super NitView
+
+	# Dot to process.
+	var dot: Text
+
+	# Page title.
+	var title: String
+
+	redef fun render(srv) do
+		var tpl = new Template
+		tpl.add new Header(1, title)
+		tpl.add render_dot
+		return tpl
+	end
+
+	private fun render_dot: String do
+		var proc = new ProcessDuplex("dot", "-Tsvg", "-Tcmapx")
+		var svg = proc.write_and_read(dot)
+		proc.close
+		proc.wait
+		return svg
+	end
+end

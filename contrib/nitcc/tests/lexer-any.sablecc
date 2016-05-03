@@ -1,0 +1,16 @@
+Grammar y;
+
+Lexer
+
+a = 'a' Any;
+b = 'b' (Any - 'b');
+c = 'c' (#0..'c');
+d = 'd' (Any-(#0..'c'));
+e = 'e' 'e'...;
+
+blank = #10 | #13 | #32;
+Parser
+Ignored blank;
+
+p = t+;
+t = a | b | c | d | e;

@@ -139,7 +139,7 @@ class HttpRequestParser
 
 			var parse_url = parse_url
 			http_request.get_args = parse_url
-			http_request.all_args.recover_with parse_url
+			http_request.all_args.add_all parse_url
 		else
 			http_request.uri = first_line[1]
 		end

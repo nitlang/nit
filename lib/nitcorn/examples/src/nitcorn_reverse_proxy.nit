@@ -14,12 +14,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# This is a simple example of how to use a ProxyAction with Nitcorn
+# Minimal example using a `ProxyAction`
 
-import nitcorn
-
-# Avoid executing when running tests
-if "NIT_TESTING".environ == "true" then exit 0
+import nitcorn::proxy
 
 # Create the virtualhost for your nitcorn server
 var vh = new VirtualHost("localhost:8080")

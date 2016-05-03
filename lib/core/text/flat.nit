@@ -40,7 +40,7 @@ redef class FlatText
 	protected fun first_byte: Int do return 0
 
 	# Last byte of the NativeString
-	protected fun last_byte: Int do return _bytelen - 1
+	protected fun last_byte: Int do return first_byte + _bytelen - 1
 
 	# Cache of the latest position (char) explored in the string
 	var position: Int = 0
@@ -50,17 +50,35 @@ redef class FlatText
 
 	# Index of the character `index` in `_items`
 	fun char_to_byte_index(index: Int): Int do
-		var ln = length
-		assert index >= 0
-		assert index < ln
+		var dpos = index - _position
+		var b = _bytepos
+		var its = _items
 
+		if dpos == 1 then
+			if its[b] & 0x80u8 == 0x00u8 then
+				b += 1
+			else
+				b += its.length_of_char_at(b)
+			end
+			_bytepos = b
+			_position = index
+			return b
+		end
+		if dpos == -1 then
+			b = its.find_beginning_of_char_at(b - 1)
+			_bytepos = b
+			_position = index
+			return b
+		end
+		if dpos == 0 then return b
+
+		var ln = _length
 		var pos = _position
 		# Find best insertion point
 		var delta_begin = index
 		var delta_end = (ln - 1) - index
 		var delta_cache = (pos - index).abs
 		var min = delta_begin
-		var its = _items
 
 		if delta_cache < min then min = delta_cache
 		if delta_end < min then min = delta_end
@@ -68,15 +86,15 @@ redef class FlatText
 		var ns_i: Int
 		var my_i: Int
 
-		if min == delta_begin then
-			ns_i = first_byte
-			my_i = 0
-		else if min == delta_cache then
+		if min == delta_cache then
 			ns_i = _bytepos
 			my_i = pos
+		else if min == delta_begin then
+			ns_i = first_byte
+			my_i = 0
 		else
 			ns_i = its.find_beginning_of_char_at(last_byte)
-			my_i = length - 1
+			my_i = _length - 1
 		end
 
 		ns_i = its.char_to_byte_index_cached(index, my_i, ns_i)
@@ -181,7 +199,7 @@ redef class FlatText
 			end
 			pos += 1
 		end
-		var s = new FlatString.with_infos(nits, nlen, 0, nlen - 1)
+		var s = new FlatString.with_infos(nits, nlen, 0)
 		return s
 	end
 
@@ -274,10 +292,66 @@ redef class FlatText
 			end
 			pos += 1
 		end
-		return nns.to_s_with_length(nlen)
+		return nns.to_s_unsafe(nlen)
 	end
 
-	redef fun [](index) do return _items.char_at(char_to_byte_index(index))
+	redef fun [](index) do
+		var len = _length
+
+		# Statistically:
+		# * ~70% want the next char
+		# * ~23% want the previous
+		# * ~7% want the same char
+		#
+		# So it makes sense to shortcut early. And early is here.
+		var dpos = index - _position
+		var b = _bytepos
+		if dpos == 1 and index < len - 1 then
+			var its = _items
+			var c = its[b]
+			if c & 0x80u8 == 0x00u8 then
+				# We want the next, and current is easy.
+				# So next is easy to find!
+				b += 1
+				_position = index
+				_bytepos = b
+				# The rest will be done by `dpos==0` bellow.
+				dpos = 0
+			end
+		else if dpos == -1 and index > 1 then
+			var its = _items
+			var c = its[b-1]
+			if c & 0x80u8 == 0x00u8 then
+				# We want the previous, and it is easy.
+				b -= 1
+				dpos = 0
+				_position = index
+				_bytepos = b
+				return c.ascii
+			end
+		end
+		if dpos == 0 then
+			# We know what we want (+0 or +1) just get it now!
+			var its = _items
+			var c = its[b]
+			if c & 0x80u8 == 0x00u8 then return c.ascii
+			return items.char_at(b)
+		end
+
+		assert index >= 0 and index < len
+		return fetch_char_at(index)
+	end
+
+	# Gets a `Char` at `index` in `self`
+	#
+	# WARNING: Use at your own risks as no bound-checking is done
+	fun fetch_char_at(index: Int): Char do
+		var i = char_to_byte_index(index)
+		var items = _items
+		var b = items[i]
+		if b & 0x80u8 == 0x00u8 then return b.ascii
+		return items.char_at(i)
+	end
 
 	# If `self` contains only digits and alpha <= 'f', return the corresponding integer.
 	#
@@ -298,24 +372,16 @@ redef class FlatText
 end
 
 # Immutable strings of characters.
-class FlatString
+abstract class FlatString
 	super FlatText
 	super String
 
 	# Index at which `self` begins in `_items`, inclusively
 	redef var first_byte is noinit
 
-	# Index at which `self` ends in `_items`, inclusively
-	redef var last_byte is noinit
-
 	redef var chars = new FlatStringCharView(self) is lazy
 
 	redef var bytes = new FlatStringByteView(self) is lazy
-
-	redef var length is lazy do
-		if _bytelen == 0 then return 0
-		return _items.utf8_length(_first_byte, _last_byte)
-	end
 
 	redef var to_cstring is lazy do
 		var blen = _bytelen
@@ -325,14 +391,15 @@ class FlatString
 		return new_items
 	end
 
-	redef fun reversed
-	do
+	redef fun reversed do
 		var b = new FlatBuffer.with_capacity(_bytelen + 1)
-		for i in [length - 1 .. 0].step(-1) do
-			b.add self[i]
+		var i = _length - 1
+		while i >= 0 do
+			b.add self.fetch_char_at(i)
+			i -= 1
 		end
 		var s = b.to_s.as(FlatString)
-		s.length = self.length
+		s._length = self._length
 		return s
 	end
 
@@ -340,24 +407,40 @@ class FlatString
 
 	redef fun substring(from, count)
 	do
-		assert count >= 0
+		if count <= 0 then return ""
 
 		if from < 0 then
 			count += from
-			if count < 0 then count = 0
+			if count < 0 then return ""
 			from = 0
 		end
 
-		if (count + from) > length then count = length - from
+		var ln = _length
+		if (count + from) > ln then count = ln - from
 		if count <= 0 then return ""
 		var end_index = from + count - 1
+		return substring_impl(from, count, end_index)
+	end
 
-		var bytefrom = char_to_byte_index(from)
-		var byteto = char_to_byte_index(end_index)
+	private fun substring_impl(from, count, end_index: Int): String do
+		var cache = _position
+		var dfrom = (cache - from).abs
+		var dend = (end_index - from).abs
+
+		var bytefrom: Int
+		var byteto: Int
+		if dfrom < dend then
+			bytefrom = char_to_byte_index(from)
+			byteto = char_to_byte_index(end_index)
+		else
+			byteto = char_to_byte_index(end_index)
+			bytefrom = char_to_byte_index(from)
+		end
+
 		var its = _items
 		byteto += its.length_of_char_at(byteto) - 1
 
-		var s = new FlatString.full(its, byteto - bytefrom + 1, bytefrom, byteto, count)
+		var s = new FlatString.full(its, byteto - bytefrom + 1, bytefrom, count)
 		return s
 	end
 
@@ -367,7 +450,7 @@ class FlatString
 	do
 		var outstr = new FlatBuffer.with_capacity(self._bytelen + 1)
 
-		var mylen = length
+		var mylen = _length
 		var pos = 0
 
 		while pos < mylen do
@@ -382,7 +465,7 @@ class FlatString
 	do
 		var outstr = new FlatBuffer.with_capacity(self._bytelen + 1)
 
-		var mylen = length
+		var mylen = _length
 		var pos = 0
 
 		while pos < mylen do
@@ -406,27 +489,21 @@ class FlatString
 	#
 	# `_items` will be used as is, without copy, to retrieve the characters of the string.
 	# Aliasing issues is the responsibility of the caller.
-	private init with_infos(items: NativeString, bytelen, from, to: Int)
+	private new with_infos(items: NativeString, bytelen, from: Int)
 	do
-		self._items = items
-		self._bytelen = bytelen
-		_first_byte = from
-		_last_byte = to
-		_bytepos = from
+		var len = items.utf8_length(from, bytelen)
+		if bytelen == len then return new ASCIIFlatString.full_data(items, bytelen, from, len)
+		return new UnicodeFlatString.full_data(items, bytelen, from, len)
 	end
 
 	# Low-level creation of a new string with all the data.
 	#
 	# `_items` will be used as is, without copy, to retrieve the characters of the string.
 	# Aliasing issues is the responsibility of the caller.
-	private init full(items: NativeString, bytelen, from, to, length: Int)
+	private new full(items: NativeString, bytelen, from, length: Int)
 	do
-		self._items = items
-		self.length = length
-		self._bytelen = bytelen
-		_first_byte = from
-		_last_byte = to
-		_bytepos = from
+		if bytelen == length then return new ASCIIFlatString.full_data(items, bytelen, from, length)
+		return new UnicodeFlatString.full_data(items, bytelen, from, length)
 	end
 
 	redef fun ==(other)
@@ -499,7 +576,7 @@ class FlatString
 			var ns = new NativeString(nlen + 1)
 			mits.copy_to(ns, mlen, mifrom, 0)
 			sits.copy_to(ns, slen, sifrom, mlen)
-			return new FlatString.full(ns, nlen, 0, nlen - 1, length + o.length)
+			return new FlatString.full(ns, nlen, 0, _length + o.length)
 		else
 			abort
 		end
@@ -508,7 +585,7 @@ class FlatString
 	redef fun *(i) do
 		var mybtlen = _bytelen
 		var new_bytelen = mybtlen * i
-		var mylen = length
+		var mylen = _length
 		var newlen = mylen * i
 		var its = _items
 		var fb = _first_byte
@@ -520,9 +597,8 @@ class FlatString
 			offset += mybtlen
 			i -= 1
 		end
-		return new FlatString.full(ns, new_bytelen, 0, new_bytelen - 1, newlen)
+		return new FlatString.full(ns, new_bytelen, 0, newlen)
 	end
-
 
 	redef fun hash
 	do
@@ -532,7 +608,7 @@ class FlatString
 			var i = _first_byte
 
 			var my_items = _items
-			var max = _last_byte
+			var max = last_byte
 
 			while i <= max do
 				h = (h << 5) + h + my_items[i].to_i
@@ -546,6 +622,80 @@ class FlatString
 	end
 
 	redef fun substrings do return new FlatSubstringsIter(self)
+end
+
+# Regular Nit UTF-8 strings
+private class UnicodeFlatString
+	super FlatString
+
+	init full_data(items: NativeString, bytelen, from, length: Int) do
+		self._items = items
+		self._length = length
+		self._bytelen = bytelen
+		_first_byte = from
+		_bytepos = from
+	end
+
+	redef fun substring_from(from) do
+		if from >= self._length then return empty
+		if from <= 0 then return self
+		var c = char_to_byte_index(from)
+		var st = c - _first_byte
+		var fln = bytelen - st
+		return new FlatString.full(items, fln, c, _length - from)
+	end
+end
+
+# Special cases of String where all the characters are ASCII-based
+#
+# Optimizes access operations to O(1) complexity.
+private class ASCIIFlatString
+	super FlatString
+
+	init full_data(items: NativeString, bytelen, from, length: Int) do
+		self._items = items
+		self._length = length
+		self._bytelen = bytelen
+		_first_byte = from
+		_bytepos = from
+	end
+
+	redef fun [](idx) do
+		assert idx < _bytelen and idx >= 0
+		return _items[idx + _first_byte].ascii
+	end
+
+	redef fun substring(from, count) do
+		if count <= 0 then return ""
+
+		if from < 0 then
+			count += from
+			if count < 0 then return ""
+			from = 0
+		end
+		var ln = _length
+		if (count + from) > ln then count = ln - from
+		return new ASCIIFlatString.full_data(_items, count, from + _first_byte, count)
+	end
+
+	redef fun reversed do
+		var b = new FlatBuffer.with_capacity(_bytelen + 1)
+		var i = _length - 1
+		while i >= 0 do
+			b.add self[i]
+			i -= 1
+		end
+		var s = b.to_s.as(FlatString)
+		return s
+	end
+
+	redef fun char_to_byte_index(index) do return index + _first_byte
+
+	redef fun substring_impl(from, count, end_index) do
+		return new ASCIIFlatString.full_data(_items, count, from + _first_byte, count)
+	end
+
+	redef fun fetch_char_at(i) do return _items[i + _first_byte].ascii
 end
 
 private class FlatStringCharReverseIterator
@@ -574,7 +724,7 @@ private class FlatStringCharIterator
 
 	var curr_pos: Int
 
-	init do max = target.length - 1
+	init do max = target._length - 1
 
 	redef fun is_ok do return curr_pos <= max
 
@@ -641,7 +791,7 @@ private class FlatStringByteIterator
 		curr_pos += tgt._first_byte
 	end
 
-	redef fun is_ok do return curr_pos <= target._last_byte
+	redef fun is_ok do return curr_pos <= target.last_byte
 
 	redef fun item do return target_items[curr_pos]
 
@@ -658,12 +808,11 @@ private class FlatStringByteView
 
 	redef fun [](index)
 	do
-		# Check that the index (+ _first_byte) is not larger than _last_byte
+		# Check that the index (+ _first_byte) is not larger than last_byte
 		# In other terms, if the index is valid
-		assert index >= 0
-		var target = self.target
+		var target = _target
+		assert index >= 0 and index < target._bytelen
 		var ind = index + target._first_byte
-		assert ind <= target._last_byte
 		return target._items[ind]
 	end
 
@@ -687,8 +836,6 @@ class FlatBuffer
 	redef var chars: Sequence[Char] = new FlatBufferCharView(self) is lazy
 
 	redef var bytes = new FlatBufferByteView(self) is lazy
-
-	redef var length = 0
 
 	private var char_cache: Int = -1
 
@@ -739,10 +886,10 @@ class FlatBuffer
 
 	redef fun []=(index, item)
 	do
-		assert index >= 0 and index <= length
+		assert index >= 0 and index <= _length
 		if written then reset
 		is_dirty = true
-		if index == length then
+		if index == _length then
 			add item
 			return
 		end
@@ -758,7 +905,6 @@ class FlatBuffer
 			lshift_bytes(ip + clen, -size_diff)
 		end
 		_bytelen += size_diff
-		bytepos += size_diff
 		it.set_char_at(ip, item)
 	end
 
@@ -771,14 +917,14 @@ class FlatBuffer
 		enlarge(bt + clen)
 		_items.set_char_at(bt, c)
 		_bytelen += clen
-		length += 1
+		_length += 1
 	end
 
 	redef fun clear do
 		is_dirty = true
 		if written then reset
 		_bytelen = 0
-		length = 0
+		_length = 0
 	end
 
 	redef fun empty do return new Buffer
@@ -806,7 +952,7 @@ class FlatBuffer
 		written = true
 		var bln = _bytelen
 		if bln == 0 then _items = new NativeString(1)
-		return new FlatString.full(_items, bln, 0, bln - 1, length)
+		return new FlatString.full(_items, bln, 0, _length)
 	end
 
 	redef fun to_cstring
@@ -815,7 +961,7 @@ class FlatBuffer
 			var bln = _bytelen
 			var new_native = new NativeString(bln + 1)
 			new_native[bln] = 0u8
-			if length > 0 then _items.copy_to(new_native, bln, 0, 0)
+			if _length > 0 then _items.copy_to(new_native, bln, 0, 0)
 			real_items = new_native
 			is_dirty = false
 		end
@@ -837,7 +983,7 @@ class FlatBuffer
 		self._items = items
 		self.capacity = capacity
 		self._bytelen = bytelen
-		self.length = length
+		self._length = length
 	end
 
 	# Create a new string copied from `s`.
@@ -850,7 +996,7 @@ class FlatBuffer
 			for i in substrings do i.as(FlatString)._items.copy_to(_items, i._bytelen, 0, 0)
 		end
 		_bytelen = s.bytelen
-		length = s.length
+		_length = s.length
 		_capacity = _bytelen
 		written = true
 	end
@@ -878,7 +1024,7 @@ class FlatBuffer
 			return
 		end
 		_bytelen = nln
-		length += s.length
+		_length += s.length
 	end
 
 	# Copies the content of self in `dest`
@@ -895,7 +1041,7 @@ class FlatBuffer
 	do
 		assert count >= 0
 		if from < 0 then from = 0
-		if (from + count) > length then count = length - from
+		if (from + count) > _length then count = _length - from
 		if count <= 0 then return new Buffer
 		var its = _items
 		var bytefrom = its.char_to_byte_index(from)
@@ -918,7 +1064,7 @@ class FlatBuffer
 	redef fun times(repeats)
 	do
 		var bln = _bytelen
-		var x = new FlatString.full(_items, bln, 0, bln - 1, length)
+		var x = new FlatString.full(_items, bln, 0, _length)
 		for i in [1 .. repeats[ do
 			append(x)
 		end
@@ -927,13 +1073,13 @@ class FlatBuffer
 	redef fun upper
 	do
 		if written then reset
-		for i in [0 .. length[ do self[i] = self[i].to_upper
+		for i in [0 .. _length[ do self[i] = self[i].to_upper
 	end
 
 	redef fun lower
 	do
 		if written then reset
-		for i in [0 .. length[ do self[i] = self[i].to_lower
+		for i in [0 .. _length[ do self[i] = self[i].to_lower
 	end
 end
 
@@ -1044,7 +1190,7 @@ private class FlatBufferCharView
 	redef fun append(s)
 	do
 		var s_length = s.length
-		if target.capacity < s.length then enlarge(s_length + target.length)
+		if target.capacity < s.length then enlarge(s_length + target._length)
 		for i in s do target.add i
 	end
 
@@ -1063,7 +1209,7 @@ private class FlatBufferCharIterator
 
 	var curr_pos: Int
 
-	init do max = target.length - 1
+	init do max = target._length - 1
 
 	redef fun index do return curr_pos
 
@@ -1081,26 +1227,31 @@ redef class NativeString
 		return to_s_with_length(cstring_length)
 	end
 
-	# Returns `self` as a String of `length`.
-	redef fun to_s_with_length(length): FlatString
+	redef fun to_s_with_length(length)
 	do
 		assert length >= 0
 		return clean_utf8(length)
 	end
 
 	redef fun to_s_full(bytelen, unilen) do
-		return new FlatString.full(self, bytelen, 0, bytelen - 1, unilen)
+		return new FlatString.full(self, bytelen, 0, unilen)
 	end
 
-	# Returns `self` as a new String.
-	redef fun to_s_with_copy: FlatString
+	redef fun to_s_unsafe(len) do
+		if len == null then len = cstring_length
+		return new FlatString.with_infos(self, len, 0)
+	end
+
+	redef fun to_s_with_copy do return to_s_with_copy_and_length(cstring_length)
+
+	# Get a `String` from `length` bytes at `self` copied into Nit memory
+	fun to_s_with_copy_and_length(length: Int): String
 	do
-		var length = cstring_length
 		var r = clean_utf8(length)
 		if r.items != self then return r
 		var new_self = new NativeString(length + 1)
 		copy_to(new_self, length, 0, 0)
-		var str = new FlatString.with_infos(new_self, length, 0, length - 1)
+		var str = new FlatString.with_infos(new_self, length, 0)
 		new_self[length] = 0u8
 		str.to_cstring = new_self
 		return str
@@ -1112,8 +1263,23 @@ redef class NativeString
 		var end_length = len
 		var pos = 0
 		var chr_ln = 0
-		while pos < len do
+		var rem = len
+		while rem > 0 do
+			while rem >= 4 do
+				var i = fetch_4_chars(pos)
+				if i & 0x80808080 != 0 then break
+				pos += 4
+				chr_ln += 4
+				rem -= 4
+			end
+			if rem == 0 then break
 			var b = self[pos]
+			if b & 0x80u8 == 0x00u8 then
+				pos += 1
+				chr_ln += 1
+				rem -= 1
+				continue
+			end
 			var nxst = length_of_char_at(pos)
 			var ok_st: Bool
 			if nxst == 1 then
@@ -1130,6 +1296,7 @@ redef class NativeString
 				replacements.add pos
 				end_length += 2
 				pos += 1
+				rem -= 1
 				chr_ln += 1
 				continue
 			end
@@ -1152,9 +1319,12 @@ redef class NativeString
 				end_length += 2
 				pos += 1
 				chr_ln += 1
+				rem -= 1
 				continue
 			end
-			pos += c.u8char_len
+			var clen = c.u8char_len
+			pos += clen
+			rem -= clen
 			chr_ln += 1
 		end
 		var ret = self
@@ -1178,13 +1348,17 @@ redef class NativeString
 			end
 			copy_to(ret, len - old_repl, old_repl, off)
 		end
-		return new FlatString.full(ret, end_length, 0, end_length - 1, chr_ln)
+		return new FlatString.full(ret, end_length, 0, chr_ln)
 	end
 
 	# Sets the next bytes at position `pos` to the value of `c`, encoded in UTF-8
 	#
 	# Very unsafe, make sure to have room for this char prior to calling this function.
 	private fun set_char_at(pos: Int, c: Char) do
+		if c.code_point < 128 then
+			self[pos] = c.code_point.to_b
+			return
+		end
 		var ln = c.u8char_len
 		native_set_char(pos, c, ln)
 	end
@@ -1215,14 +1389,6 @@ redef class NativeString
 end
 
 redef class Int
-	redef fun to_base(base, signed)
-	do
-		var l = digit_count(base)
-		var s = new FlatBuffer.from(" " * l)
-		fill_buffer(s, base, signed)
-		return s.to_s
-	end
-
 	# return displayable int in base 10 and signed
 	#
 	#     assert 1.to_s            == "1"
@@ -1236,7 +1402,7 @@ redef class Int
 		var ns = new NativeString(nslen + 1)
 		ns[nslen] = 0u8
 		native_int_to_s(ns, nslen + 1)
-		return new FlatString.full(ns, nslen, 0, nslen - 1, nslen)
+		return new FlatString.full(ns, nslen, 0, nslen)
 	end
 end
 
@@ -1245,7 +1411,7 @@ redef class Array[E]
 	# Fast implementation
 	redef fun plain_to_s
 	do
-		var l = length
+		var l = _length
 		if l == 0 then return ""
 		var its = _items.as(not null)
 		var first = its[0]
@@ -1286,7 +1452,7 @@ redef class Array[E]
 			end
 			i += 1
 		end
-		return new FlatString.with_infos(ns, sl, 0, sl - 1)
+		return new FlatString.with_infos(ns, sl, 0)
 	end
 end
 
@@ -1323,7 +1489,7 @@ redef class NativeArray[E]
 			end
 			i += 1
 		end
-		return new FlatString.with_infos(ns, sl, 0, sl - 1)
+		return new FlatString.with_infos(ns, sl, 0)
 	end
 end
 

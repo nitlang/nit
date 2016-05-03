@@ -21,3 +21,4 @@
 module app
 
 import app_base
+import assets

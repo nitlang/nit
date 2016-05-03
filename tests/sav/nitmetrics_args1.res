@@ -91,7 +91,7 @@
 # MModules metrics
 
  ## package base_simple3
-  `- group base_simple3
+  `- group base_simple3>
 	mnoa: number of ancestor modules
 	  avg: 0.0
 	  max: base_simple3 (0)
@@ -367,7 +367,7 @@ generating module_hierarchy.dot
 # MClasses metrics
 
  ## package base_simple3
-  `- group base_simple3
+  `- group base_simple3>
 	cnoa: number of ancestor classes
 	  avg: 0.0
 	  max: Bool (1)
@@ -494,7 +494,7 @@ generating module_hierarchy.dot
 # Inheritance metrics
 
  ## package base_simple3
-  `- group base_simple3
+  `- group base_simple3>
 	cnoac: number of class_kind ancestor
 	  avg: 0.0
 	  max: Object (0)
@@ -752,7 +752,7 @@ Statistics of type usage:
 # Nullable metrics
 
  ## package base_simple3
-  `- group base_simple3
+  `- group base_simple3>
 	cnba: number of accessible attributes (inherited + local)
 	  avg: 0.0
 	  max: C (2)
@@ -869,17 +869,17 @@ MMethodDef locally designated (by number of CallSites)
   <=1: sub-population=13 (92.85%); cumulated value=13 (56.52%)
   <=16: sub-population=1 (7.14%); cumulated value=10 (43.47%)
  list:
-  base_simple3#Int#output: 10 (43.47%)
-  base_simple3#B#val: 1 (4.34%)
-  base_simple3#B#val=: 1 (4.34%)
-  base_simple3#Object#init: 1 (4.34%)
-  base_simple3#C#val2: 1 (4.34%)
+  base_simple3$Int$output: 10 (43.47%)
+  base_simple3$B$val: 1 (4.34%)
+  base_simple3$B$val=: 1 (4.34%)
+  base_simple3$Object$init: 1 (4.34%)
+  base_simple3$C$val2: 1 (4.34%)
   ...
-  base_simple3#A#init: 1 (4.34%)
-  base_simple3#Sys#baz: 1 (4.34%)
-  base_simple3#Sys#bar: 1 (4.34%)
-  base_simple3#Sys#foo: 1 (4.34%)
-  base_simple3#C#init: 1 (4.34%)
+  base_simple3$A$init: 1 (4.34%)
+  base_simple3$Sys$baz: 1 (4.34%)
+  base_simple3$Sys$bar: 1 (4.34%)
+  base_simple3$Sys$foo: 1 (4.34%)
+  base_simple3$C$init: 1 (4.34%)
 MMethodDef possibly invoked at runtime (by number of CallSites)
  population: 14
  minimum value: 1
@@ -890,17 +890,17 @@ MMethodDef possibly invoked at runtime (by number of CallSites)
   <=1: sub-population=13 (92.85%); cumulated value=13 (56.52%)
   <=16: sub-population=1 (7.14%); cumulated value=10 (43.47%)
  list:
-  base_simple3#Int#output: 10 (43.47%)
-  base_simple3#B#val: 1 (4.34%)
-  base_simple3#B#val=: 1 (4.34%)
-  base_simple3#Object#init: 1 (4.34%)
-  base_simple3#C#val2: 1 (4.34%)
+  base_simple3$Int$output: 10 (43.47%)
+  base_simple3$B$val: 1 (4.34%)
+  base_simple3$B$val=: 1 (4.34%)
+  base_simple3$Object$init: 1 (4.34%)
+  base_simple3$C$val2: 1 (4.34%)
   ...
-  base_simple3#A#init: 1 (4.34%)
-  base_simple3#Sys#baz: 1 (4.34%)
-  base_simple3#Sys#bar: 1 (4.34%)
-  base_simple3#Sys#foo: 1 (4.34%)
-  base_simple3#C#init: 1 (4.34%)
+  base_simple3$A$init: 1 (4.34%)
+  base_simple3$Sys$baz: 1 (4.34%)
+  base_simple3$Sys$bar: 1 (4.34%)
+  base_simple3$Sys$foo: 1 (4.34%)
+  base_simple3$C$init: 1 (4.34%)
 class_hierarchy.dot
 classdef_hierarchy.dot
 inheritance/

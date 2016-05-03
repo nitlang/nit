@@ -17,3 +17,4 @@ module codecs
 
 import codec_base
 import utf8
+import iso8859_1

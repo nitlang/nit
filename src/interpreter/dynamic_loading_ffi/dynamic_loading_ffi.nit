@@ -125,10 +125,10 @@ private extern class CallArg `{ nit_call_arg* `}
 	fun pointer=(value: Pointer) `{ self->value_Pointer = value; `}
 
 	# The `Instance` held by this cell
-	fun instance: Instance `{ return (Instance)self->value_Pointer; `}
+	fun instance: Instance is light_ffi `{ return (Instance)self->value_Pointer; `}
 
 	# The `Instance` held by this cell
-	fun instance=(value: Instance) `{ self->value_Pointer = value; `}
+	fun instance=(value: Instance) is light_ffi `{ self->value_Pointer = value; `}
 
 	# The `NativeString` held by this cell
 	fun native_string: NativeString `{ return (char*)self->value_Pointer; `}

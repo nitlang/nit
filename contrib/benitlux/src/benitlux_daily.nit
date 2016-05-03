@@ -102,7 +102,7 @@ class Benitlux
 			print beers
 		end
 
-		var db = new DB.open(db_path)
+		var db = new BenitluxDB.open(db_path)
 
 		# Update the database with the beers of the day
 		db.insert_beers_of_the_day beers
@@ -110,8 +110,14 @@ class Benitlux
 		# Query the beer-related events of today
 		var beer_events = db.beer_events_today
 
+		if beer_events == null then
+			print_error "Failed to read beer events from the DB"
+			db.close
+			return
+		end
+
 		# Generate the email title and content, store them in attributes
-		generate_email(beer_events)
+		generate_email beer_events
 
 		# Save as sample email to file
 		var f = new FileWriter.open(sample_email_path)
@@ -175,7 +181,8 @@ class Benitlux
 		for line in lines do
 			var parts = line.split("- ")
 			if parts.length >= 2 then
-				beers.add new Beer(parts[0].trim, parts[1].trim)
+				# Let the DB set the id, use 0 temporary
+				beers.add new Beer(0, parts[0].trim, parts[1].trim)
 			end
 		end
 		return beers

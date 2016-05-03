@@ -23,24 +23,6 @@ abstract class Texture
 	# Prepare a texture located at `path` within the `assets` folder
 	new (path: Text) do return new GamnitAssetTexture(path.to_s)
 
-	# Prepare and load a colorful small texture of 2x2 pixels
-	new checker
-	do
-		var pixels = [0xFFu8, 0x00u8, 0x00u8,
-		              0x00u8, 0xFFu8, 0x00u8,
-		              0x00u8, 0x00u8, 0xFFu8,
-		              0xFFu8, 0xFFu8, 0xFFu8]
-		var cpixels = new CByteArray.from(pixels)
-
-		var tex = new GamnitRootTexture
-		tex.width = 2.0
-		tex.height = 2.0
-		tex.load_from_pixels(cpixels.native_array, 2, 2, gl_RGB)
-
-		cpixels.destroy
-		return tex
-	end
-
 	# Root texture of which `self` is derived
 	fun root: GamnitRootTexture is abstract
 
@@ -57,7 +39,7 @@ abstract class Texture
 	var error: nullable Error = null
 
 	# OpenGL handle to this texture
-	var gl_texture: Int is noinit
+	fun gl_texture: Int do return root.gl_texture
 
 	# Prepare a subtexture from this texture
 	fun subtexture(left, top, width, height: Numeric): GamnitSubtexture
@@ -67,10 +49,38 @@ abstract class Texture
 		return subtex
 	end
 
+	# Offset of the left border on `root` from 0.0 to 1.0
 	fun offset_left: Float do return 0.0
+
+	# Offset of the top border on `root` from 0.0 to 1.0
 	fun offset_top: Float do return 0.0
+
+	# Offset of the right border on `root` from 0.0 to 1.0
 	fun offset_right: Float do return 1.0
+
+	# Offset of the bottom border on `root` from 0.0 to 1.0
 	fun offset_bottom: Float do return 1.0
+end
+
+# Colorful small texture of 2x2 pixels
+class CheckerTexture
+	super GamnitRootTexture
+
+	redef fun load(force)
+	do
+		var pixels = [0xFFu8, 0x00u8, 0x00u8,
+		              0x00u8, 0xFFu8, 0x00u8,
+		              0x00u8, 0x00u8, 0xFFu8,
+		              0xFFu8, 0xFFu8, 0xFFu8]
+
+		var cpixels = new CByteArray.from(pixels)
+
+		width = 2.0
+		height = 2.0
+		load_from_pixels(cpixels.native_array, 2, 2, gl_RGB)
+
+		cpixels.destroy
+	end
 end
 
 # Texture with its own pixels
@@ -81,6 +91,8 @@ class GamnitRootTexture
 
 	# Has this texture been loaded yet?
 	var loaded = false
+
+	redef var gl_texture = -1
 
 	init do all_root_textures.add self
 
@@ -99,14 +111,21 @@ class GamnitRootTexture
 		glBindTexture(gl_TEXTURE_2D, tex)
 		glTexImage2D(gl_TEXTURE_2D, 0, format, width, height, 0, format, gl_UNSIGNED_BYTE, pixels)
 
-		# TODO make these settings attributes of the class
-		glTexParameteri(gl_TEXTURE_2D, gl_TEXTURE_MIN_FILTER, gl_NEAREST)
-		glTexParameteri(gl_TEXTURE_2D, gl_TEXTURE_MAG_FILTER, gl_NEAREST)
-		glTexParameteri(gl_TEXTURE_2D, gl_TEXTURE_WRAP_S, gl_REPEAT)
-		glTexParameteri(gl_TEXTURE_2D, gl_TEXTURE_WRAP_T, gl_REPEAT)
-
 		glHint(gl_GENERATE_MIPMAP_HINT, gl_NICEST)
 		glGenerateMipmap(gl_TEXTURE_2D)
+	end
+
+	# Set whether this texture should be pixelated when drawn, otherwise it is interpolated
+	fun pixelated=(pixelated: Bool)
+	do
+		# TODO this service could be made available in `Texture` when using
+		# the kind of texture wrapper of gles v2 or maybe 3
+
+		glBindTexture(gl_TEXTURE_2D, gl_texture)
+
+		var param = if pixelated then gl_NEAREST else gl_LINEAR
+		glTexParameteri(gl_TEXTURE_2D, gl_TEXTURE_MIN_FILTER, param)
+		glTexParameteri(gl_TEXTURE_2D, gl_TEXTURE_MAG_FILTER, param)
 	end
 
 	# Has this resource been deleted?

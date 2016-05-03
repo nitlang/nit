@@ -7,7 +7,7 @@ Lexer
 id = ('a'..'z')('a'..'z'|'0'..'9'|'_')*;
 
 // A printable character (inside strings)
-ch = ' ' .. '~';
+ch = ' ' ...;
 
 // Literal strings
 str = '\'' (ch-'\\'-'\''|'\\'ch)* '\'';
@@ -21,7 +21,7 @@ ch_hex = '#' ('x'|'X') ('0'..'9'|'a'..'z'|'A'..'Z')+ ;
 // A single-line comment
 comment = '//' ch* '\n'?;
 
-any = '\t'..'~';
+any = '\t' ...;
 not_star = any - '*';
 not_star_not_slash = not_star - '/';
 
@@ -67,6 +67,7 @@ re3 {-> re} =
 	{id:} id |
 	{par:} '(' re ')' |
 	{class:} text '.' '.' text |
+	{openclass:} text '.' '.' '.' |
 	{any:} 'Any' |
 	{end:} 'End' |
 	{text:} text ;

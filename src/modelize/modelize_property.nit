@@ -153,7 +153,6 @@ redef class ModelBuilder
 			mpropdef.msignature = msignature
 			mpropdef.new_msignature = msignature
 			mprop.is_init = true
-			nclassdef.mfree_init = mpropdef
 			self.toolcontext.info("{mclassdef} gets a free empty constructor {mpropdef}{msignature}", 3)
 			the_root_init_mmethod = mprop
 			return
@@ -204,19 +203,21 @@ redef class ModelBuilder
 					mreadpropdef.mproperty.is_autoinit = true
 					continue
 				end
-				if npropdef.has_value then continue
-				var paramname = mreadpropdef.mproperty.name
-				var ret_type = msignature.return_mtype
-				if ret_type == null then return
-				var mparameter = new MParameter(paramname, ret_type, false)
-				mparameters.add(mparameter)
+				if npropdef.has_value and not npropdef.is_optional then continue
 				var msetter = npropdef.mwritepropdef
 				if msetter == null then
 					# No setter, it is a readonly attribute, so just add it
+					var paramname = mreadpropdef.mproperty.name
+					var ret_type = msignature.return_mtype
+					if ret_type == null then return
+					var mparameter = new MParameter(paramname, ret_type, false)
+					mparameters.add(mparameter)
+
 					initializers.add(npropdef.mpropdef.mproperty)
 					npropdef.mpropdef.mproperty.is_autoinit = true
 				else
 					# Add the setter to the list
+					mparameters.add_all msetter.msignature.mparameters
 					initializers.add(msetter.mproperty)
 					msetter.mproperty.is_autoinit = true
 				end
@@ -356,7 +357,6 @@ redef class ModelBuilder
 		var msignature = new MSignature(mparameters, null)
 		mpropdef.new_msignature = msignature
 		mpropdef.msignature = new MSignature(new Array[MParameter], null) # always an empty real signature
-		nclassdef.mfree_init = mpropdef
 		self.toolcontext.info("{mclassdef} gets a free constructor for attributes {mpropdef}{msignature}", 3)
 		mclassdef.mclass.root_init = mpropdef
 	end
@@ -488,9 +488,6 @@ end
 redef class AClassdef
 	# Marker used in `ModelBuilder::build_properties`
 	private var build_properties_is_done = false
-
-	# The free init (implicitely constructed by the class if required)
-	var mfree_init: nullable MMethodDef = null
 end
 
 redef class MClass
@@ -592,7 +589,7 @@ redef class APropdef
 			var mdoc = ndoc.to_mdoc
 			mpropdef.mdoc = mdoc
 			mdoc.original_mentity = mpropdef
-		else if mpropdef.is_intro and mpropdef.mproperty.visibility >= protected_visibility then
+		else if mpropdef.is_intro and mpropdef.mproperty.visibility >= protected_visibility and mpropdef.name != "new" then
 			modelbuilder.advice(self, "missing-doc", "Documentation warning: Undocumented property `{mpropdef.mproperty}`")
 		end
 
@@ -1159,6 +1156,9 @@ redef class AAttrPropdef
 	# Is the node tagged lazy?
 	var is_lazy = false
 
+	# Is the node tagged optional?
+	var is_optional = false
+
 	# Has the node a default value?
 	# Could be through `n_expr` or `n_block`
 	var has_value = false
@@ -1253,6 +1253,14 @@ redef class AAttrPropdef
 			var mlazypropdef = new MAttributeDef(mclassdef, mlazyprop, self.location)
 			mlazypropdef.is_fictive = true
 			self.mlazypropdef = mlazypropdef
+		end
+
+		var atoptional = self.get_single_annotation("optional", modelbuilder)
+		if atoptional != null then
+			if not has_value then
+				modelbuilder.error(atoptional, "Error: `optional` attributes need a default value.")
+			end
+			is_optional = true
 		end
 
 		var atreadonly = self.get_single_annotation("readonly", modelbuilder)
@@ -1382,7 +1390,14 @@ redef class AAttrPropdef
 					var cla = modelbuilder.try_get_mclass_by_name(nexpr, mmodule, "Float")
 					if cla != null then mtype = cla.mclass_type
 				else if nexpr isa ACharExpr then
-					var cla = modelbuilder.try_get_mclass_by_name(nexpr, mmodule, "Char")
+					var cla: nullable MClass
+					if nexpr.is_ascii then
+						cla = modelbuilder.try_get_mclass_by_name(nexpr, mmodule, "Byte")
+					else if nexpr.is_code_point then
+						cla = modelbuilder.try_get_mclass_by_name(nexpr, mmodule, "Int")
+					else
+						cla = modelbuilder.try_get_mclass_by_name(nexpr, mmodule, "Char")
+					end
 					if cla != null then mtype = cla.mclass_type
 				else if nexpr isa ABoolExpr then
 					var cla = modelbuilder.try_get_mclass_by_name(nexpr, mmodule, "Bool")
@@ -1391,7 +1406,16 @@ redef class AAttrPropdef
 					var cla = modelbuilder.try_get_mclass_by_name(nexpr, mmodule, "String")
 					if cla != null then mtype = cla.mclass_type
 				else if nexpr isa AStringFormExpr then
-					var cla = modelbuilder.try_get_mclass_by_name(nexpr, mmodule, "String")
+					var cla: nullable MClass
+					if nexpr.is_bytestring then
+						cla = modelbuilder.try_get_mclass_by_name(nexpr, mmodule, "Bytes")
+					else if nexpr.is_re then
+						cla = modelbuilder.try_get_mclass_by_name(nexpr, mmodule, "Regex")
+					else if nexpr.is_string then
+						cla = modelbuilder.try_get_mclass_by_name(nexpr, mmodule, "String")
+					else
+						abort
+					end
 					if cla != null then mtype = cla.mclass_type
 				else
 					modelbuilder.error(self, "Error: untyped attribute `{mreadpropdef}`. Implicit typing allowed only for literals and new.")
@@ -1426,16 +1450,20 @@ redef class AAttrPropdef
 
 		var mwritepropdef = self.mwritepropdef
 		if mwritepropdef != null then
+			var mwritetype = mtype
+			if is_optional then
+				mwritetype = mwritetype.as_nullable
+			end
 			var name: String
 			name = n_id2.text
-			var mparameter = new MParameter(name, mtype, false)
+			var mparameter = new MParameter(name, mwritetype, false)
 			var msignature = new MSignature([mparameter], null)
 			mwritepropdef.msignature = msignature
 		end
 
 		var mlazypropdef = self.mlazypropdef
 		if mlazypropdef != null then
-			mlazypropdef.static_mtype = modelbuilder.model.get_mclasses_by_name("Bool").first.mclass_type
+			mlazypropdef.static_mtype = mmodule.bool_type
 		end
 		check_repeated_types(modelbuilder)
 	end

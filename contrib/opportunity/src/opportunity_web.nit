@@ -19,13 +19,11 @@ import opportunity_controller
 import opts
 import privileges
 
-# Avoids a crash when running automatic tests
-if "NIT_TESTING".environ == "true" then exit 0
-
 var iface = "localhost:8080"
 
 var vh = new VirtualHost(iface)
 vh.routes.add new Route("/rest/", new OpportunityRESTAction)
+vh.routes.add new Route("/static/", new FileServer("art"))
 vh.routes.add new Route(null, new OpportunityWelcome)
 
 var fac = new HttpFactory.and_libevent

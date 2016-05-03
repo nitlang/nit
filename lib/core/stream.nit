@@ -66,7 +66,7 @@ abstract class Reader
 	super Stream
 
 	# Decoder used to transform input bytes to UTF-8
-	var decoder: Decoder = utf8_decoder is writable
+	var decoder: Codec = utf8_codec is writable
 
 	# Reads a character. Returns `null` on EOF or timeout
 	fun read_char: nullable Char is abstract
@@ -207,12 +207,12 @@ abstract class Reader
 			# if this is the best size or not
 			var chunksz = 129
 			if chunksz > remsp then
-				rets += new FlatString.with_infos(sits, remsp, pos, pos + remsp - 1)
+				rets += new FlatString.with_infos(sits, remsp, pos)
 				break
 			end
 			var st = sits.find_beginning_of_char_at(pos + chunksz - 1)
 			var bytelen = st - pos
-			rets += new FlatString.with_infos(sits, bytelen, pos, st - 1)
+			rets += new FlatString.with_infos(sits, bytelen, pos)
 			pos = st
 			remsp -= bytelen
 		end
@@ -406,7 +406,7 @@ abstract class Writer
 	super Stream
 
 	# The coder from a nit UTF-8 String to the output file
-	var coder: Coder = utf8_coder is writable
+	var coder: Codec = utf8_codec is writable
 
 	# Writes bytes from `s`
 	fun write_bytes(s: Bytes) is abstract

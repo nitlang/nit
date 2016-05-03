@@ -133,6 +133,14 @@ class MarkdownProcessor
 	# ~~~
 	var ext_mode = true
 
+	# Disable attaching MDLocation to Tokens
+	#
+	# Locations are useful for some tools but they may
+	# cause an important time and space overhead.
+	#
+	# Default = `false`
+	var no_location = false is writable
+
 	init do self.emitter = new MarkdownEmitter(self)
 
 	# Process the mardown `input` string and return the processed output.
@@ -397,11 +405,16 @@ class MarkdownProcessor
 			c2 = ' '
 		end
 
-		var loc = new MDLocation(
-			current_loc.line_start,
-			current_loc.column_start + pos,
-			current_loc.line_start,
-			current_loc.column_start + pos)
+		var loc
+		if no_location then
+			loc = null
+		else
+			loc = new MDLocation(
+				current_loc.line_start,
+				current_loc.column_start + pos,
+				current_loc.line_start,
+				current_loc.column_start + pos)
+		end
 
 		if c == '*' then
 			if c1 == '*' then
@@ -610,10 +623,12 @@ class MarkdownEmitter
 	end
 
 	# Append `c` to current buffer.
-	fun addc(c: Char) do add c.to_s
+	fun addc(c: Char) do
+		current_buffer.add c
+	end
 
 	# Append a "\n" line break.
-	fun addn do add "\n"
+	fun addn do addc '\n'
 end
 
 # A Link Reference.
@@ -1938,7 +1953,7 @@ end
 abstract class Token
 
 	# Location of `self` in the original input.
-	var location: MDLocation
+	var location: nullable MDLocation
 
 	# Position of `self` in input independant from lines.
 	var pos: Int
@@ -2330,18 +2345,11 @@ redef class Text
 			if c == '\\' and pos + 1 < length then
 				pos = escape(out, self[pos + 1], pos)
 			else
-				var end_reached = false
-				for n in nend do
-					if c == n then
-						end_reached = true
-						break
-					end
-				end
-				if end_reached then break
+				for n in nend do if c == n then break label
 				out.add c
 			end
 			pos += 1
-		end
+		end label
 		if pos == length then return -1
 		return pos
 	end

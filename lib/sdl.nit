@@ -105,57 +105,52 @@ extern class SDLDisplay `{SDL_Surface *`}
 		return events
 	end
 
-	private fun poll_event: nullable SDLInputEvent import SDLKeyEvent, SDLMouseButtonEvent, SDLMouseMotionEvent, SDLQuitEvent, NativeString.to_s, SDLMouseButtonEvent.as(nullable SDLInputEvent), SDLMouseMotionEvent.as(nullable SDLInputEvent), SDLKeyEvent.as(nullable SDLInputEvent), SDLQuitEvent.as(nullable SDLInputEvent) `{
-		SDL_Event event;
-
+	private fun poll_event: nullable SDLInputEvent
+	import new_key_event, new_mouse_motion_event, new_mouse_button_event, new_quit_event `{
 		SDL_PumpEvents();
 
+		SDL_Event event;
 		if (SDL_PollEvent(&event))
 		{
 			switch (event.type) {
 				case SDL_KEYDOWN:
 				case SDL_KEYUP:
-	#ifdef DEBUG
-					printf("The \"%s\" key was pressed!\n",
-						   SDL_GetKeyName(event.key.keysym.sym));
-	#endif
-
-					return SDLKeyEvent_as_nullable_SDLInputEvent(
-							new_SDLKeyEvent(NativeString_to_s(
-								SDL_GetKeyName(event.key.keysym.sym)),
-								event.type==SDL_KEYDOWN));
+					return SDLDisplay_new_key_event(self,
+								SDL_GetKeyName(event.key.keysym.sym),
+								event.type==SDL_KEYDOWN);
 
 				case SDL_MOUSEMOTION:
-	#ifdef DEBUG
-					printf("Mouse moved by %d,%d to (%d,%d)\n",
-						   event.motion.xrel, event.motion.yrel,
-						   event.motion.x, event.motion.y);
-	#endif
-
-					return SDLMouseMotionEvent_as_nullable_SDLInputEvent(
-							new_SDLMouseMotionEvent(event.motion.x, event.motion.y,
-								event.motion.xrel, event.motion.yrel, SDL_GetMouseState(NULL, NULL)&SDL_BUTTON(1)));
+					return SDLDisplay_new_mouse_motion_event(self,
+						event.motion.x, event.motion.y,
+						event.motion.xrel, event.motion.yrel,
+						SDL_GetMouseState(NULL, NULL)&SDL_BUTTON(1));
 
 				case SDL_MOUSEBUTTONDOWN:
 				case SDL_MOUSEBUTTONUP:
-	#ifdef DEBUG
-					printf("Mouse button \"%d\" pressed at (%d,%d)\n",
-						   event.button.button, event.button.x, event.button.y);
-	#endif
-					return SDLMouseButtonEvent_as_nullable_SDLInputEvent(
-							new_SDLMouseButtonEvent(event.button.x, event.button.y,
-								event.button.button, event.type == SDL_MOUSEBUTTONDOWN));
+					return SDLDisplay_new_mouse_button_event(self,
+						event.button.x, event.button.y,
+						event.button.button,
+						event.type == SDL_MOUSEBUTTONDOWN);
 
 				case SDL_QUIT:
-	#ifdef DEBUG
-					printf("Quit event\n");
-	#endif
-					return SDLQuitEvent_as_nullable_SDLInputEvent(new_SDLQuitEvent());
+					return SDLDisplay_new_quit_event(self);
 			}
 		}
 
 		return null_SDLInputEvent();
 	`}
+
+	private fun new_key_event(name: NativeString, down: Bool): nullable SDLInputEvent
+	do return new SDLKeyEvent(name.to_s, down)
+
+	private fun new_mouse_motion_event(x, y, xr, yr: Float, down: Bool): nullable SDLInputEvent
+	do return new SDLMouseMotionEvent(x, y, xr, yr, down)
+
+	private fun new_mouse_button_event(x, y: Float, id: Int, down: Bool): nullable SDLInputEvent
+	do return new SDLMouseButtonEvent(x, y, id, down)
+
+	private fun new_quit_event: nullable SDLInputEvent
+	do return new SDLQuitEvent
 
 	# Set the position of the cursor to x,y
 	fun warp_mouse(x,y: Int) `{ SDL_WarpMouse(x, y); `}
@@ -372,13 +367,8 @@ class SDLKeyEvent
 	super SDLInputEvent
 
 	redef var name
-	var down: Bool
 
-	init (key_name: String, down: Bool)
-	do
-		self.name = key_name
-		self.down = down
-	end
+	var down: Bool
 
 	redef fun to_c
 	do
@@ -400,10 +390,13 @@ class SDLKeyEvent
 
 	# Return true if the key is the up arrow
 	redef fun is_arrow_up do return name == "up"
+
 	# Return true if the key is the left arrow
 	redef fun is_arrow_left do return name == "left"
+
 	# Return true if the key is the down arrow
 	redef fun is_arrow_down do return name == "down"
+
 	# Return true if the key is the right arrow
 	redef fun is_arrow_right do return name == "right"
 end

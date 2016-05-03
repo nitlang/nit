@@ -396,6 +396,11 @@ class GlobalCompilerVisitor
 			var recv1 = "((struct {arguments[1].mcasttype.c_name}*){arguments[1]})->values"
 			self.add("memmove({recv1},{recv},{arguments[2]}*sizeof({elttype.ctype}));")
 			return true
+		else if pname == "memmove" then
+			# fun memmove(start: Int, length: Int, dest: NativeArray[E], dest_start: Int) is intern do
+			var recv1 = "((struct {arguments[3].mcasttype.c_name}*){arguments[3]})->values"
+			self.add("memmove({recv1}+{arguments[4]}, {recv}+{arguments[1]}, {arguments[2]}*sizeof({elttype.ctype}));")
+			return true
 		end
 		return false
 	end
@@ -443,6 +448,10 @@ class GlobalCompilerVisitor
 		if args.first.mtype.is_c_primitive then
 			var mclasstype = args.first.mtype.as(MClassType)
 			if not self.compiler.runtime_type_analysis.live_types.has(mclasstype) then
+				self.add("/* skip, dead class {mclasstype} */")
+				return res
+			end
+			if not mclasstype.has_mproperty(self.compiler.mainmodule, m) then
 				self.add("/* skip, no method {m} */")
 				return res
 			end

@@ -11,20 +11,20 @@ bin/moles: $(shell ../../bin/nitls -M src/moles_linux.nit) assets/images/drawing
 	../../bin/nitc -o bin/moles src/moles_linux.nit
 
 android: bin/moles.apk
-bin/moles.apk: android-icons $(shell ../../bin/nitls -M src/moles_android.nit) assets/images/drawing.png
+bin/moles.apk: android/res/ $(shell ../../bin/nitls -M src/moles_android.nit) assets/images/drawing.png
 	mkdir -p bin
 	../../bin/nitc -o bin/moles.apk src/moles_android.nit
 
-android-release: android-icons $(shell ../../bin/nitls -M src/moles_android.nit) assets/images/drawing.png
+android-release: android/res/ $(shell ../../bin/nitls -M src/moles_android.nit) assets/images/drawing.png
 	mkdir -p bin
 	../../bin/nitc -o bin/moles.apk src/moles_android.nit --release
 
 $(SVG2ICONS):
 	$(MAKE) -C ../inkscape_tools
 
-android-icons: $(SVG2ICONS) art/icon.svg
-	mkdir -p res
-	$(SVG2ICONS) art/icon.svg --android --out res/
+android/res/: $(SVG2ICONS) art/icon.svg
+	mkdir -p android/res
+	$(SVG2ICONS) art/icon.svg --android --out android/res/
 
 android-install: bin/moles.apk
 	adb install -rf bin/moles.apk
@@ -37,4 +37,4 @@ check-android: bin/moles.apk
 	../../misc/jenkins/check_android.sh bin/moles.apk
 
 clean:
-	rm -rf bin res
+	rm -rf bin android

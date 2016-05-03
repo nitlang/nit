@@ -109,11 +109,13 @@ class MModule
 	# It is usually the `name` prefixed by the package's name.
 	# Example: `"package::name"`
 	#
-	# If both names are the same (of if the module is package-less), then
-	# the short-name is used alone.
+	# Default modules use a doubled name to distinguish them from the package name.
+	# E.g.: `"core::core"`
+	#
+	# If the module is package-less, then the short-name is used alone.
 	redef var full_name is lazy do
 		var mgroup = self.mgroup
-		if mgroup == null or mgroup.mpackage.name == self.name then
+		if mgroup == null then
 			return self.name
 		else
 			return "{mgroup.mpackage.name}::{self.name}"

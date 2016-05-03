@@ -67,16 +67,12 @@ redef class Int
 	# Returns the result of a binary AND operation on `self` and `i`
 	#
 	#     assert 0x10 & 0x01 == 0
-	fun &(i: Int): Int is intern do return band(i)
-
-	private fun band(i: Int): Int `{ return self & i; `}
+	fun &(i: Int): Int is intern `{ return self & i; `}
 
 	# Returns the result of a binary OR operation on `self` and `i`
 	#
 	#     assert 0x10 | 0x01 == 0x11
-	fun |(i: Int): Int is intern do return bor(i)
-
-	private fun bor(i: Int): Int `{ return self | i; `}
+	fun |(i: Int): Int is intern `{ return self | i; `}
 
 	# Returns the result of a binary XOR operation on `self` and `i`
 	#
@@ -132,7 +128,7 @@ redef class Int
 	#
 	# assert 3.is_prime
 	# assert not 1.is_prime
-	# assert not 12.is_prime
+	# assert not 15.is_prime
 	fun is_prime: Bool
 	do
 		if self == 2 then
@@ -140,7 +136,7 @@ redef class Int
 		else if self <= 1 or self.is_even then
 			return false
 		end
-		for i in [3..self.sqrt[ do
+		for i in [3..self.sqrt] do
 			if self % i == 0 then return false
 		end
 		return true
@@ -179,9 +175,7 @@ redef class Byte
 	# Returns the result of a binary AND operation on `self` and `i`
 	#
 	#     assert 0x10u8 & 0x01u8 == 0u8
-	fun &(i: Byte): Byte is intern do return band(i)
-
-	private fun band(i: Byte): Byte `{ return self & i; `}
+	fun &(i: Byte): Byte is intern `{ return self & i; `}
 
 	# Returns the result of a binary OR operation on `self` and `i`
 	#
@@ -448,6 +442,40 @@ redef class Collection[ E ]
 		res.shuffle
 		return res
 	end
+
+	# Return a new array made of (at most) `length` elements randomly chosen.
+	#
+	# ~~~
+	# var a = [1,2,1].sample(2)
+	# assert a == [1,1] or a == [1,2] or a == [2,1]
+	# ~~~
+	#
+	# If there is not enough elements, then the result only contains them in a random order.
+	# See `to_shuffle`.
+	#
+	# ENSURE `result.length == self.length.min(length)`
+	#
+	# Note: the default implementation uses the Reservoir Algorithm
+	fun sample(length: Int): Array[E]
+	do
+		if length >= self.length then return to_shuffle
+
+		var res = new Array[E].with_capacity(length)
+		var it = iterator
+		for i in [0..length[ do
+			res[i] = it.item
+			it.next
+		end
+		res.shuffle
+		for i in [length+1..self.length] do
+			var j = i.rand
+			if j < length then
+				res[j] = it.item
+			end
+			it.next
+		end
+		return res
+	end
 end
 
 redef class SequenceRead[E]
@@ -496,11 +524,11 @@ redef class Sys
 	end
 end
 
-# Computes the arc tangent given `x` and `y`.
+# Computes the arc tangent given `y` and `x`.
 #
 #     assert atan2(-0.0, 1.0) == -0.0
 #     assert atan2(0.0, 1.0) == 0.0
-fun atan2(x: Float, y: Float): Float `{ return atan2(x, y); `}
+fun atan2(y: Float, x: Float): Float `{ return atan2(y, x); `}
 
 # Approximate value of **pi**.
 fun pi: Float do return 3.14159265
@@ -517,9 +545,9 @@ fun pi: Float do return 3.14159265
 # assert 10.rand == a
 # assert 100.rand == b
 # ~~~~
-fun srand_from(x: Int) `{ nit_rand_seeded = 1; nit_rand_seed = x; `}
+fun srand_from(x: Int) `{ nit_rand_seeded = 1; nit_rand_seed = (unsigned int)x; `}
 
 # Reinitialize the pseudo-random generator used by the method `rand` and other.
 # This method is automatically invoked at the begin of the program, so usually, there is no need to manually invoke it.
 # The only exception is in conjunction with `srand_from` to reset the pseudo-random generator.
-fun srand `{ nit_rand_seeded = 0; srand(time(NULL)); `}
+fun srand `{ nit_rand_seeded = 0; srand((unsigned int)time(NULL)); `}

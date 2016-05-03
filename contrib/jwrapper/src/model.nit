@@ -107,16 +107,16 @@ class JavaType
 	end
 
 	# Short name of the class, mangled to remove `$` (e.g. `Set`)
-	fun id: String do return identifier.last.replace("$", "")
+	var id: String is lazy do return identifier.last.replace("$", "")
 
 	# Full name of this class as used in java code (e.g. `java.lang.Set`)
-	fun java_full_name: String do return identifier.join(".").replace("$", ".")
+	var java_full_name: String is lazy do return identifier.join(".").replace("$", ".")
 
 	# Full name of this class as used by jni (e.g. `android.graphics.BitmapFactory$Options`)
-	fun jni_full_name: String do return identifier.join(".")
+	var jni_full_name: String is lazy do return identifier.join(".")
 
 	# Name of this class for the extern declaration in Nit (e.g. `java.lang.Set[]`)
-	fun extern_equivalent: String do return jni_full_name + "[]" * array_dimension
+	var extern_equivalent: String is lazy do return jni_full_name + "[]" * array_dimension
 
 	# Full name of this class with arrays and generic values (e.g. `java.lang.Set<E>[]`)
 	redef fun to_s do
@@ -261,7 +261,7 @@ class JavaModel
 	# All classes, from this pass and from other passes
 	var all_classes: HashMap[String, JavaClass] is noserialize, lazy do
 		var classes = new HashMap[String, JavaClass]
-		classes.recover_with self.classes
+		classes.add_all self.classes
 
 		for model_path in sys.opt_load_models.value do
 			if not model_path.file_exists then
@@ -284,7 +284,7 @@ class JavaModel
 				continue
 			end
 
-			classes.recover_with model.classes
+			classes.add_all model.classes
 		end
 
 		return classes

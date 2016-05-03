@@ -35,6 +35,9 @@ class HttpServer
 
 	private var parser = new HttpRequestParser is lazy
 
+	# Human readable address of the remote client
+	var remote_address: String
+
 	redef fun read_http_request(str)
 	do
 		var request_object = parser.parse_http_request(str.to_s)
@@ -69,7 +72,7 @@ class HttpServer
 				request.uri_params = route.parse_params(request.uri)
 
 				var handler = route.handler
-				var root = route.path
+				var root = route.resolve_path(request)
 				var turi
 				if root != null then
 					turi = ("/" + request.uri.substring_from(root.length)).simplify_path
@@ -78,8 +81,8 @@ class HttpServer
 				# Delegate the responsibility to respond to the `Action`
 				handler.prepare_respond_and_close(request, turi, self)
 				return
-			else response = new HttpResponse(405)
-		else response = new HttpResponse(405)
+			else response = new HttpResponse(404)
+		else response = new HttpResponse(404)
 
 		respond response
 		close
@@ -131,19 +134,27 @@ class HttpFactory
 	# You can use this to create the first `HttpFactory`, which is the most common.
 	init and_libevent do init(new NativeEventBase)
 
-	redef fun spawn_connection(buf_ev) do return new HttpServer(buf_ev, self)
+	redef fun spawn_connection(buf_ev, address) do return new HttpServer(buf_ev, self, address)
 
-	# Launch the main loop of this server
+	# Execute the main listening loop to accept connections
+	#
+	# After the loop ends, the underlying resources are freed.
+	#
+	# When the environment variable `NIT_TESTING` is set to `true`,
+	# the loop is not executed but the resources are still freed.
 	fun run
 	do
-		event_base.dispatch
+		if "NIT_TESTING".environ != "true" then
+			event_base.dispatch
+		end
+
 		event_base.destroy
 	end
 end
 
 redef class ServerConfig
 	# Handle to retreive the `HttpFactory` on config change
-	private var factory: HttpFactory
+	private var factory: HttpFactory is noinit
 
 	private init with_factory(factory: HttpFactory) do self.factory = factory
 end
@@ -171,7 +182,8 @@ redef class Sys
 				listeners_count[name, port] = 1
 			end
 		else
-			listeners_count[name, port] += 1
+			var value = listeners_count[name, port].as(not null)
+			listeners_count[name, port] = value + 1
 		end
 
 		interfac.registered = true
@@ -189,7 +201,8 @@ redef class Interfaces
 	redef fun add(e)
 	do
 		super
-		if vh.server_config != null then sys.listen_on(e, vh.server_config.factory)
+		var config = vh.server_config
+		if config != null then sys.listen_on(e, config.factory)
 	end
 
 	# TODO remove

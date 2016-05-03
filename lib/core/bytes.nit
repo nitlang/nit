@@ -251,7 +251,15 @@ class Bytes
 		return slice(from, length)
 	end
 
-	# Returns self as a hexadecimal digest
+	# Returns self as an hexadecimal digest.
+	#
+	# Also known as plain hexdump or postscript hexdump.
+	#
+	# ~~~
+	# var b = "abcd".to_bytes
+	# assert b.hexdigest == "61626364"
+	# assert b.hexdigest.hexdigest_to_bytes == b
+	# ~~~
 	fun hexdigest: String do
 		var elen = length * 2
 		var ns = new NativeString(elen)
@@ -262,7 +270,101 @@ class Bytes
 			i += 1
 			oi += 2
 		end
-		return new FlatString.full(ns, elen, 0, elen - 1, elen)
+		return new FlatString.full(ns, elen, 0, elen)
+	end
+
+	# Return self as a C hexadecimal digest where bytes are prefixed by `\x`
+	#
+	# The output is compatible with literal stream of bytes for most languages
+	# including C and Nit.
+	#
+	# ~~~
+	# var b = "abcd".to_bytes
+	# assert b.chexdigest == "\\x61\\x62\\x63\\x64"
+	# assert b.chexdigest.unescape_to_bytes == b
+	# ~~~
+	fun chexdigest: String do
+		var elen = length * 4
+		var ns = new NativeString(elen)
+		var i = 0
+		var oi = 0
+		while i < length do
+			ns[oi] = 0x5Cu8 # b'\\'
+			ns[oi+1] = 0x78u8 # b'x'
+			self[i].add_digest_at(ns, oi+2)
+			i += 1
+			oi += 4
+		end
+		return new FlatString.full(ns, elen, 0, elen)
+	end
+
+
+	# Returns self as a stream of bits (0 and 1)
+	#
+	# ~~~
+	# var b = "abcd".to_bytes
+	# assert b.binarydigest == "01100001011000100110001101100100"
+	# assert b.binarydigest.binarydigest_to_bytes == b
+	# ~~~
+	fun binarydigest: String do
+		var elen = length * 8
+		var ns = new NativeString(elen)
+		var i = 0
+		var oi = 0
+		while i < length do
+			var c = self[i]
+			var b = 128u8
+			while b > 0u8 do
+				if c & b == 0u8 then
+					ns[oi] = 0x30u8 # b'0'
+				else
+					ns[oi] = 0x31u8 # b'1'
+				end
+				oi += 1
+				b = b >> 1
+			end
+			i += 1
+		end
+		return new FlatString.full(ns, elen, 0, elen)
+	end
+
+	# Interprets `self` as a big-endian positive integer.
+	#
+	# ~~~
+	# var b = "0102".hexdigest_to_bytes
+	# assert b.to_i == 258
+	# ~~~
+	#
+	# Nul bytes on the left are trimmed.
+	# 0 is returned for an empty Bytes object.
+	#
+	# ~~~
+	# assert "01".hexdigest_to_bytes.to_i == 1
+	# assert "0001".hexdigest_to_bytes.to_i == 1
+	#
+	# assert "0000".hexdigest_to_bytes.to_i == 0
+	# assert "00".hexdigest_to_bytes.to_i == 0
+	# assert "".hexdigest_to_bytes.to_i == 0
+	# ~~~
+	#
+	# `Int::to_bytes` is a loosely reverse method.
+	#
+	# ~~~
+	# assert b.to_i.to_bytes == b
+	# assert (b.to_i + 1).to_bytes.hexdigest == "0103"
+	# assert "0001".hexdigest_to_bytes.to_i.to_bytes.hexdigest == "01"
+	# ~~~
+	#
+	# Warning: `Int` might overflow for bytes with more than 60 bits.
+	fun to_i: Int do
+		var res = 0
+		var i = 0
+		while i < length do
+			res *= 256
+			res += self[i].to_i
+			i += 1
+		end
+		return res
 	end
 
 	#     var b = new Bytes.with_capacity(1)
@@ -550,6 +652,58 @@ private class BytesIterator
 	redef fun item do return tgt[index]
 end
 
+redef class Int
+	# A big-endian representation of self.
+	#
+	# ~~~
+	# assert     1.to_bytes.hexdigest ==     "01"
+	# assert   255.to_bytes.hexdigest ==     "FF"
+	# assert   256.to_bytes.hexdigest ==   "0100"
+	# assert 65535.to_bytes.hexdigest ==   "FFFF"
+	# assert 65536.to_bytes.hexdigest == "010000"
+	# ~~~
+	#
+	# For 0, a Bytes object with single nul byte is returned (instead of an empty Bytes object).
+	#
+	# ~~~
+	# assert 0.to_bytes.hexdigest == "00"
+	# ~~~
+	#
+	# `Bytes::to_i` can be used to do the reverse operation.
+	#
+	# ~~~
+	# assert 1234.to_bytes.to_i == 1234
+	# ~~~
+	#
+	# Require self >= 0
+	fun to_bytes: Bytes do
+		if self == 0 then return "\0".to_bytes
+		assert self > 0
+
+		# Compute the len (log256)
+		var len = 1
+		var max = 256
+		while self >= max do
+			len += 1
+			max *= 256
+		end
+
+		# Allocate the buffer
+		var res = new Bytes.with_capacity(len)
+		for i in [0..len[ do res[i] = 0u8
+
+		# Fill it starting with the end
+		var i = len
+		var sum = self
+		while i > 0 do
+			i -= 1
+			res[i] = (sum % 256).to_b
+			sum /= 256
+		end
+		return res
+	end
+end
+
 redef class Text
 	# Returns a mutable copy of `self`'s bytes
 	#
@@ -583,17 +737,56 @@ redef class Text
 	# Returns a new `Bytes` instance with the digest as content
 	#
 	#     assert "0B1F4D".hexdigest_to_bytes == [0x0Bu8, 0x1Fu8, 0x4Du8]
+	#     assert "0B1F4D".hexdigest_to_bytes.hexdigest == "0B1F4D"
 	#
-	# REQUIRE: `self` is a valid hexdigest and hexdigest.length % 2 == 0
+	# Characters that are not hexadecimal digits are ignored.
+	#
+	#     assert "z0B1 F4\nD".hexdigest_to_bytes.hexdigest == "0B1F4D"
+	#     assert "\\x0b1 \\xf4d".hexdigest_to_bytes.hexdigest == "0B1F4D"
+	#
+	# When the number of hexadecimal digit is not even, then a leading 0 is
+	# implicitly considered to fill the left byte (the most significant one).
+	#
+	#     assert "1".hexdigest_to_bytes.hexdigest == "01"
+	#     assert "FFF".hexdigest_to_bytes.hexdigest == "0FFF"
+	#
+	# `Bytes::hexdigest` is a loosely reverse method since its
+	# results contain only pairs of uppercase hexadecimal digits.
+	#
+	#     assert "ABCD".hexdigest_to_bytes.hexdigest == "ABCD"
+	#     assert "a b c".hexdigest_to_bytes.hexdigest == "0ABC"
 	fun hexdigest_to_bytes: Bytes do
 		var b = bytes
-		var pos = 0
 		var max = bytelen
-		var ret = new Bytes.with_capacity(max / 2)
+
+		var dlength = 0 # Number of hex digits
+		var pos = 0
 		while pos < max do
-			ret.add((b[pos].hexdigit_to_byteval << 4) |
-			b[pos + 1].hexdigit_to_byteval)
-			pos += 2
+			var c = b[pos]
+			if c.is_valid_hexdigit then dlength += 1
+			pos += 1
+		end
+
+		# Allocate the result buffer
+		var ret = new Bytes.with_capacity((dlength+1) / 2)
+
+		var i = (dlength+1) % 2 # current hex digit (1=high, 0=low)
+		var byte = 0u8 # current accumulated byte value
+
+		pos = 0
+		while pos < max do
+			var c = b[pos]
+			if c.is_valid_hexdigit then
+				byte = byte << 4 | c.hexdigit_to_byteval
+				i -= 1
+				if i < 0 then
+					# Last digit known: store and restart
+					ret.add byte
+					i = 1
+					byte = 0u8
+				end
+			end
+			pos += 1
 		end
 		return ret
 	end
@@ -609,12 +802,18 @@ redef class Text
 			bytes[i].add_digest_at(outns, oi)
 			oi += 2
 		end
-		return new FlatString.with_infos(outns, ln * 2, 0, ln * 2 - 1)
+		return new FlatString.with_infos(outns, ln * 2, 0)
 	end
 
 	# Return a `Bytes` instance where Nit escape sequences are transformed.
 	#
 	#     assert "B\\n\\x41\\u0103D3".unescape_to_bytes.hexdigest == "420A41F0908F93"
+	#
+	# `Bytes::chexdigest` is a loosely reverse methods since its result is only made
+	# of `"\x??"` escape sequences.
+	#
+	#     assert "\\x41\\x42\\x43".unescape_to_bytes.chexdigest == "\\x41\\x42\\x43"
+	#     assert "B\\n\\x41\\u0103D3".unescape_to_bytes.chexdigest == "\\x42\\x0A\\x41\\xF0\\x90\\x8F\\x93"
 	fun unescape_to_bytes: Bytes do
 		var res = new Bytes.with_capacity(self.bytelen)
 		var was_slash = false
@@ -661,6 +860,70 @@ redef class Text
 			i += 1
 		end
 		return res
+	end
+
+	# Return a `Bytes` by reading 0 and 1.
+	#
+	#     assert "1010101100001101".binarydigest_to_bytes.hexdigest == "AB0D"
+	#
+	# Note that characters that are neither 0 or 1 are just ignored.
+	#
+	#     assert "a1B01 010\n1100あ001101".binarydigest_to_bytes.hexdigest == "AB0D"
+	#     assert "hello".binarydigest_to_bytes.is_empty
+	#
+	# When the number of bits is not divisible by 8, then leading 0 are
+	# implicitly considered to fill the left byte (the most significant one).
+	#
+	#     assert "1".binarydigest_to_bytes.hexdigest == "01"
+	#     assert "1111111".binarydigest_to_bytes.hexdigest == "7F"
+	#     assert "1000110100".binarydigest_to_bytes.hexdigest == "0234"
+	#
+	# `Bytes::binarydigest` is a loosely reverse method since its
+	# results contain only 1 and 0 by blocks of 8.
+	#
+	#     assert "1010101100001101".binarydigest_to_bytes.binarydigest == "1010101100001101"
+	#     assert "1".binarydigest_to_bytes.binarydigest == "00000001"
+	fun binarydigest_to_bytes: Bytes
+	do
+		var b = bytes
+		var max = bytelen
+
+		# Count bits
+		var bitlen = 0
+		var pos = 0
+		while pos < max do
+			var c = b[pos]
+			pos += 1
+			if c == 0x30u8 or c == 0x31u8 then bitlen += 1 # b'0' or b'1'
+		end
+
+		# Allocate (and take care of the padding)
+		var ret = new Bytes.with_capacity((bitlen+7) / 8)
+
+		var i = (bitlen+7) % 8 # current bit (7th=128, 0th=1)
+		var byte = 0u8 # current accumulated byte value
+
+		pos = 0
+		while pos < max do
+			var c = b[pos]
+			pos += 1
+			if c == 0x30u8 then # b'0'
+				byte = byte << 1
+			else if c == 0x31u8 then # b'1'
+				byte = byte << 1 | 1u8
+			else
+				continue
+			end
+
+			i -= 1
+			if i < 0 then
+				# Last bit known: store and restart
+				ret.add byte
+				i = 7
+				byte = 0u8
+			end
+		end
+		return ret
 	end
 end
 

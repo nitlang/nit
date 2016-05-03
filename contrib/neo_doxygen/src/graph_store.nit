@@ -66,7 +66,7 @@ class Neo4jStore
 	# The Neo4j client to use.
 	var client: Neo4jClient
 
-	redef fun has_node_label(name: String): Bool do
+	redef fun has_node_label(name) do
 		var query = new CypherQuery.from_string(
 				"match n where \{name\} in labels(n) return count(n)")
 		query.params["name"] = name
@@ -75,7 +75,7 @@ class Neo4jStore
 		return result > 0
 	end
 
-	redef fun save_all(neo_entities: Collection[NeoEntity]) do
+	redef fun save_all(neo_entities) do
 		var batch = new NeoBatch(client)
 		var len = neo_entities.length
 		var sum = 0

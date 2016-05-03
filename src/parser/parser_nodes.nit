@@ -521,6 +521,11 @@ class TKwdo
 	super TokenKeyword
 end
 
+# The keyword `catch`
+class TKwcatch
+	super TokenKeyword
+end
+
 # The keyword `var`
 class TKwvar
 	super TokenKeyword
@@ -693,6 +698,11 @@ end
 
 # The keyword `with`
 class TKwwith
+	super TokenKeyword
+end
+
+# The keyword `yield`
+class TKwyield
 	super TokenKeyword
 end
 
@@ -1771,10 +1781,18 @@ end
 
 # A `return` statement. eg `return x`
 class AReturnExpr
-	super AExpr
+	super AEscapeExpr
 
 	# The `return` keyword
 	var n_kwreturn: nullable TKwreturn = null is writable
+end
+
+# A `yield` statement. eg `yield x`
+class AYieldExpr
+	super AExpr
+
+	# The `yield` keyword
+	var n_kwyield: nullable TKwyield = null is writable
 
 	# The return value, if any
 	var n_expr: nullable AExpr = null is writable
@@ -1831,6 +1849,12 @@ class ADoExpr
 
 	# The list of statements of the `do`.
 	var n_block: nullable AExpr = null is writable
+
+	# The `catch` keyword
+	var n_kwcatch: nullable TKwcatch = null is writable
+
+	# The do catch block
+	var n_catch: nullable AExpr = null is writable
 end
 
 # A `if` statement

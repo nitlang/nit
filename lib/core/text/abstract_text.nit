@@ -305,26 +305,32 @@ abstract class Text
 		end
 	end
 
-	# Returns `true` if the string contains only Numeric values (and one "," or one "." character)
+	# Is this string in a valid numeric format compatible with `to_f`?
 	#
 	#     assert "123".is_numeric  == true
 	#     assert "1.2".is_numeric  == true
-	#     assert "1,2".is_numeric  == true
+	#     assert "-1.2".is_numeric == true
+	#     assert "-1.23e-2".is_numeric == true
 	#     assert "1..2".is_numeric == false
+	#     assert "".is_numeric     == false
 	fun is_numeric: Bool
 	do
-		var has_point_or_comma = false
+		var has_point = false
+		var e_index = -1
 		for i in [0..length[ do
 			var c = chars[i]
 			if not c.is_numeric then
-				if (c == '.' or c == ',') and not has_point_or_comma then
-					has_point_or_comma = true
+				if c == '.' and not has_point then
+					has_point = true
+				else if c == 'e' and e_index == -1 and i > 0 and i < length - 1 and chars[i-1] != '-' then
+					e_index = i
+				else if c == '-' and i == e_index + 1 and i < length - 1 then
 				else
 					return false
 				end
 			end
 		end
-		return true
+		return not is_empty
 	end
 
 	# Returns `true` if the string contains only Hex chars
@@ -489,18 +495,21 @@ abstract class Text
 		end
 	end
 
-	# Justify a self in a space of `length`
+	# Justify `self` in a space of `length`
 	#
 	# `left` is the space ratio on the left side.
 	# * 0.0 for left-justified (no space at the left)
 	# * 1.0 for right-justified (all spaces at the left)
 	# * 0.5 for centered (half the spaces at the left)
 	#
+	# `char`, or `' '` by default, is repeated to pad the empty space.
+	#
 	# Examples
 	#
 	#     assert "hello".justify(10, 0.0)  == "hello     "
 	#     assert "hello".justify(10, 1.0)  == "     hello"
 	#     assert "hello".justify(10, 0.5)  == "  hello   "
+	#     assert "hello".justify(10, 0.5, '.') == "..hello..."
 	#
 	# If `length` is not enough, `self` is returned as is.
 	#
@@ -509,13 +518,14 @@ abstract class Text
 	# REQUIRE: `left >= 0.0 and left <= 1.0`
 	# ENSURE: `self.length <= length implies result.length == length`
 	# ENSURE: `self.length >= length implies result == self`
-	fun justify(length: Int, left: Float): String
+	fun justify(length: Int, left: Float, char: nullable Char): String
 	do
+		var pad = (char or else ' ').to_s
 		var diff = length - self.length
 		if diff <= 0 then return to_s
 		assert left >= 0.0 and left <= 1.0
 		var before = (diff.to_f * left).to_i
-		return " " * before + self + " " * (diff-before)
+		return pad * before + self + pad * (diff-before)
 	end
 
 	# Mangle a string to be a unique string only made of alphanumeric characters and underscores.
@@ -609,7 +619,7 @@ abstract class Text
 				b.append("\\\\")
 			else if c.code_point < 32 then
 				b.add('\\')
-				var oct = c.code_point.to_base(8, false)
+				var oct = c.code_point.to_base(8)
 				# Force 3 octal digits since it is the
 				# maximum allowed in the C specification
 				if oct.length == 1 then
@@ -683,7 +693,7 @@ abstract class Text
 				b.add('\\')
 				b.add(c)
 			else if c.code_point < 32 or c == ';' or c == '|' or c == '\\' or c == '=' then
-				b.append("?{c.code_point.to_base(16, false)}")
+				b.append("?{c.code_point.to_base(16)}")
 			else
 				b.add(c)
 			end
@@ -852,7 +862,7 @@ abstract class Text
 			l += 1
 		end
 
-		return buf.to_s_with_length(l)
+		return buf.to_s_unsafe(l)
 	end
 
 	# Escape the characters `<`, `>`, `&`, `"`, `'` and `/` as HTML/XML entity references.
@@ -958,36 +968,46 @@ abstract class Text
 		return hash_cache.as(not null)
 	end
 
-	# Gives the formatted string back as a Nit string with `args` in place
+	# Format `self` by replacing each `%n` with the `n`th item of `args`
 	#
-	#     assert "This %1 is a %2.".format("String", "formatted String") == "This String is a formatted String."
-	#     assert "\\%1 This string".format("String") == "\\%1 This string"
+	# The character `%` followed by something other than a number are left as is.
+	# To represent a `%` followed by a number, double the `%`, as in `%%7`.
+	#
+	#     assert "This %0 is a %1.".format("String", "formatted String") == "This String is a formatted String."
+	#     assert "Do not escape % nor %%1".format("unused") == "Do not escape % nor %1"
 	fun format(args: Object...): String do
 		var s = new Array[Text]
 		var curr_st = 0
 		var i = 0
 		while i < length do
-			# Skip escaped characters
-			if self[i] == '\\' then
-				i += 1
-			# In case of format
-			else if self[i] == '%' then
+			if self[i] == '%' then
 				var fmt_st = i
 				i += 1
 				var ciph_st = i
 				while i < length and self[i].is_numeric do
 					i += 1
 				end
-				i -= 1
-				var fmt_end = i
-				var ciph_len = fmt_end - ciph_st + 1
 
-				var arg_index = substring(ciph_st, ciph_len).to_i - 1
+				var ciph_len = i - ciph_st
+				if ciph_len == 0 then
+					# What follows '%' is not a number.
+					s.push substring(curr_st, i - curr_st)
+					if i < length and self[i] == '%' then
+						# Skip the next `%`
+						i += 1
+					end
+					curr_st = i
+					continue
+				end
+
+				var arg_index = substring(ciph_st, ciph_len).to_i
 				if arg_index >= args.length then continue
 
 				s.push substring(curr_st, fmt_st - curr_st)
 				s.push args[arg_index].to_s
-				curr_st = i + 1
+
+				curr_st = i
+				i -= 1
 			end
 			i += 1
 		end
@@ -1062,7 +1082,7 @@ abstract class Text
 	#
 	#	var ns = new NativeString(8)
 	#	"Text is String".copy_to_native(ns, 8, 2, 0)
-	#	assert ns.to_s_with_length(8) == "xt is St"
+	#	assert ns.to_s_unsafe(8) == "xt is St"
 	#
 	fun copy_to_native(dest: NativeString, n, src_offset, dest_offset: Int) do
 		var mypos = src_offset
@@ -1075,6 +1095,39 @@ abstract class Text
 		end
 	end
 
+	# Packs the content of a string in packs of `ln` chars.
+	# This variant ensures that only the last element might be smaller than `ln`
+	#
+	# ~~~nit
+	# var s = "abcdefghijklmnopqrstuvwxyz"
+	# assert s.pack_l(4) == ["abcd","efgh","ijkl","mnop","qrst","uvwx","yz"]
+	# ~~~
+	fun pack_l(ln: Int): Array[Text] do
+		var st = 0
+		var retarr = new Array[Text].with_capacity(length / ln + length % ln)
+		while st < length do
+			retarr.add(substring(st, ln))
+			st += ln
+		end
+		return retarr
+	end
+
+	# Packs the content of a string in packs of `ln` chars.
+	# This variant ensures that only the first element might be smaller than `ln`
+	#
+	# ~~~nit
+	# var s = "abcdefghijklmnopqrstuvwxyz"
+	# assert s.pack_r(4) == ["ab","cdef","ghij","klmn","opqr","stuv","wxyz"]
+	# ~~~
+	fun pack_r(ln: Int): Array[Text] do
+		var st = length
+		var retarr = new Array[Text].with_capacity(length / ln + length % ln)
+		while st >= 0 do
+			retarr.add(substring(st - ln, ln))
+			st -= ln
+		end
+		return retarr.reversed
+	end
 end
 
 # All kinds of array-based text representations.
@@ -1541,21 +1594,21 @@ redef class Byte
 		var ns = new NativeString(nslen + 1)
 		ns[nslen] = 0u8
 		native_byte_to_s(ns, nslen + 1)
-		return ns.to_s_with_length(nslen)
+		return ns.to_s_unsafe(nslen)
 	end
 end
 
 redef class Int
 
 	# Wrapper of strerror C function
-	private fun strerror_ext: NativeString `{ return strerror(self); `}
+	private fun strerror_ext: NativeString `{ return strerror((int)self); `}
 
 	# Returns a string describing error number
 	fun strerror: String do return strerror_ext.to_s
 
-	# Fill `s` with the digits in base `base` of `self` (and with the '-' sign if 'signed' and negative).
+	# Fill `s` with the digits in base `base` of `self` (and with the '-' sign if negative).
 	# assume < to_c max const of char
-	private fun fill_buffer(s: Buffer, base: Int, signed: Bool)
+	private fun fill_buffer(s: Buffer, base: Int)
 	do
 		var n: Int
 		# Sign
@@ -1587,14 +1640,30 @@ redef class Int
 		snprintf(nstr, strlen, "%ld", self);
 	`}
 
-	# return displayable int in base base and signed
-	fun to_base(base: Int, signed: Bool): String is abstract
+	# String representation of `self` in the given `base`
+	#
+	# ~~~
+	# assert 15.to_base(10) == "15"
+	# assert 15.to_base(16) == "f"
+	# assert 15.to_base(2) == "1111"
+	# assert (-10).to_base(3) == "-101"
+	# ~~~
+	fun to_base(base: Int): String
+	do
+		var l = digit_count(base)
+		var s = new Buffer
+		s.enlarge(l)
+		for x in [0..l[ do s.add(' ')
+		fill_buffer(s, base)
+		return s.to_s
+	end
+
 
 	# return displayable int in hexadecimal
 	#
 	#     assert 1.to_hex  == "1"
 	#     assert (-255).to_hex  == "-ff"
-	fun to_hex: String do return to_base(16,false)
+	fun to_hex: String do return to_base(16)
 end
 
 redef class Float
@@ -1702,7 +1771,7 @@ redef class Char
 		var ln = u8char_len
 		var ns = new NativeString(ln + 1)
 		u8char_tos(ns, ln)
-		return ns.to_s_with_length(ln)
+		return ns.to_s_unsafe(ln)
 	end
 
 	# Returns `self` escaped to UTF-16
@@ -1871,7 +1940,11 @@ redef class Collection[E]
 	#     assert [1, 2, 3].join(":")    == "1:2:3"
 	#     assert [1..3].join(":")       == "1:2:3"
 	#     assert [1..3].join            == "123"
-	fun join(separator: nullable Text): String
+	#
+	# if `last_separator` is given, then it is used to separate the last element.
+	#
+	#     assert [1, 2, 3, 4].join(", ", " and ")    == "1, 2, 3 and 4"
+	fun join(separator: nullable Text, last_separator: nullable Text): String
 	do
 		if is_empty then return ""
 
@@ -1882,13 +1955,19 @@ redef class Collection[E]
 		var e = i.item
 		if e != null then s.append(e.to_s)
 
+		if last_separator == null then last_separator = separator
+
 		# Concat other items
 		i.next
 		while i.is_ok do
-			if separator != null then s.append(separator)
 			e = i.item
-			if e != null then s.append(e.to_s)
 			i.next
+			if i.is_ok then
+				if separator != null then s.append(separator)
+			else
+				if last_separator != null then s.append(last_separator)
+			end
+			if e != null then s.append(e.to_s)
 		end
 		return s.to_s
 	end
@@ -1995,16 +2074,43 @@ do
 end
 
 redef class NativeString
-	# Returns `self` as a new String.
+	# Get a `String` from the data at `self` copied into Nit memory
+	#
+	# Require: `self` is a null-terminated string.
 	fun to_s_with_copy: String is abstract
 
-	# Returns `self` as a String of `length`.
+	# Get a `String` from `length` bytes at `self`
+	#
+	# The result may point to the data at `self` or
+	# it may make a copy in Nit controlled memory.
+	# This method should only be used when `self` was allocated by the Nit GC,
+	# or when manually controlling the deallocation of `self`.
 	fun to_s_with_length(length: Int): String is abstract
 
-	# Returns `self` as a String with `bytelen` and `length` set
+	# Get a `String` from the raw `length` bytes at `self`
 	#
-	# SEE: `abstract_text::Text` for more infos on the difference
-	# between `Text::bytelen` and `Text::length`
+	# The default value of `length` is the number of bytes before
+	# the first null character.
+	#
+	# The created `String` points to the data at `self`.
+	# This method should be used when `self` was allocated by the Nit GC,
+	# or when manually controlling the deallocation of `self`.
+	#
+	# /!\: This service does not clean the items for compliance with UTF-8,
+	# use only when the data has already been verified as valid UTF-8.
+	fun to_s_unsafe(length: nullable Int): String is abstract
+
+	# Get a `String` from the raw `bytelen` bytes at `self` with `unilen` Unicode characters
+	#
+	# The created `String` points to the data at `self`.
+	# This method should be used when `self` was allocated by the Nit GC,
+	# or when manually controlling the deallocation of `self`.
+	#
+	# /!\: This service does not clean the items for compliance with UTF-8,
+	# use only when the data has already been verified as valid UTF-8.
+	#
+	# SEE: `abstract_text::Text` for more info on the difference
+	# between `Text::bytelen` and `Text::length`.
 	fun to_s_full(bytelen, unilen: Int): String is abstract
 end
 

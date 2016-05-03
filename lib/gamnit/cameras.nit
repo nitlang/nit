@@ -98,6 +98,17 @@ class EulerCamera
 		position.y += dy
 	end
 
+	# Aim the camera at `x, y, z`
+	fun look_at(x, y, z: Float)
+	do
+		var dx = position.x
+		var dy = position.y
+		var dz = position.z
+
+		yaw = atan2(dx, dz)
+		pitch = atan2(-dy, dz)
+	end
+
 	# Rotation matrix produced by the current rotation of the camera
 	protected fun rotation_matrix: Matrix
 	do
@@ -116,7 +127,7 @@ class EulerCamera
 		var view = new Matrix.identity(4)
 
 		# Translate the world away from the camera
-		view.translate(-position.x/2.0, -position.y/2.0, -position.z/2.0)
+		view.translate(-position.x, -position.y, -position.z)
 
 		# Rotate the camera, first by looking left or right, then up or down
 		view = view * rotation_matrix
@@ -197,6 +208,9 @@ class UICamera
 		return new Point[Float](wx, wy)
 	end
 
+	# Center of the screen, from the point of view of the camera, at z = 0
+	fun center: Point3d[Float] do return new Point3d[Float](position.x + width / 2.0, position.y - height / 2.0, 0.0)
+
 	# Anchor in the top left corner of the screen, at z = 0
 	fun top_left: Point3d[Float] do return new Point3d[Float](position.x, position.y, 0.0)
 
@@ -204,10 +218,10 @@ class UICamera
 	fun top_right: Point3d[Float] do return new Point3d[Float](position.x + width, position.y, 0.0)
 
 	# Anchor in the bottom left corner of the screen, at z = 0
-	fun bottom_left: Point3d[Float] do return new Point3d[Float](position.x, position.y + height, 0.0)
+	fun bottom_left: Point3d[Float] do return new Point3d[Float](position.x, position.y - height, 0.0)
 
 	# Anchor in the bottom right corner of the screen, at z = 0
-	fun bottom_right: Point3d[Float] do return new Point3d[Float](position.x + width, position.y + height, 0.0)
+	fun bottom_right: Point3d[Float] do return new Point3d[Float](position.x + width, position.y - height, 0.0)
 
 	# TODO cache the anchors and the matrix
 
@@ -216,7 +230,7 @@ class UICamera
 		var view = new Matrix.identity(4)
 
 		# Translate the world away from the camera
-		view.translate(-position.x/2.0, -position.y/2.0, -position.z/2.0)
+		view.translate(-position.x, -position.y, -position.z)
 
 		# Use a projection matrix with a depth
 		var projection = new Matrix.orthogonal(0.0, width, -height, 0.0, near, far)

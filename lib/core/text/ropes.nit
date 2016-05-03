@@ -83,10 +83,12 @@ private class Concat
 	redef fun empty do return ""
 
 	# Cache for the latest accessed FlatString in `self`
-	var flat_cache: String = ""
+	var flat_cache: FlatString is noinit
 
 	# Position of the beginning of `flat_cache` in `self`
 	var flat_last_pos_start: Int = -1
+
+	var flat_last_pos_end: Int = -1
 
 	redef var to_cstring is lazy do
 		var len = _bytelen
@@ -113,6 +115,8 @@ private class Concat
 		_bytelen = l.bytelen + r.bytelen
 	end
 
+	redef fun is_empty do return _bytelen == 0
+
 	redef fun output do
 		_left.output
 		_right.output
@@ -127,38 +131,65 @@ private class Concat
 	end
 
 	redef fun [](i) do
-		if flat_last_pos_start != -1 then
-			var fsp = i - flat_last_pos_start
-			if fsp >= 0 and fsp < flat_cache.length then return flat_cache[fsp]
+		assert i >= 0 and i <= _length
+		var flps = _flat_last_pos_start
+		if flps != -1 and i >= flps and i <= _flat_last_pos_end then
+			return _flat_cache.fetch_char_at(i - flps)
+		end
+		var lf = get_leaf_at(i)
+		return lf.fetch_char_at(i - _flat_last_pos_start)
+	end
+
+	fun get_leaf_at(pos: Int): FlatString do
+		var flps = _flat_last_pos_start
+		if flps != -1 and pos >= flps and pos <= _flat_last_pos_end then
+			return _flat_cache
 		end
 		var s: String = self
-		var st = i
+		var st = pos
 		loop
 			if s isa FlatString then break
 			s = s.as(Concat)
 			var lft = s._left
 			var llen = lft.length
-			if i >= llen then
+			if pos >= llen then
 				s = s._right
-				i -= llen
+				pos -= llen
 			else
 				s = lft
 			end
 		end
-		flat_last_pos_start = st - i
-		flat_cache = s
-		return s[i]
+		_flat_last_pos_start = st - pos
+		_flat_last_pos_end = st - pos + s.length - 1
+		_flat_cache = s
+		return s
 	end
 
-	redef fun substring(from, len) do
+	redef fun substring(from, count) do
+		if from < 0 then
+			count += from
+			if count < 0 then return ""
+			from = 0
+		end
+
+		var ln = _length
+		if (count + from) > ln then count = ln - from
+		if count <= 0 then return ""
+		var end_index = from + count - 1
+
+		var flps = _flat_last_pos_start
+		if flps != -1 and from >= flps and end_index <= _flat_last_pos_end then
+			return _flat_cache.substring_impl(from - flps, count, end_index - flps)
+		end
+
 		var lft = _left
 		var llen = lft.length
 		if from < llen then
-			if from + len < llen then return lft.substring(from,len)
+			if from + count < llen then return lft.substring(from, count)
 			var lsublen = llen - from
-			return lft.substring_from(from) + _right.substring(0, len - lsublen)
+			return lft.substring_from(from) + _right.substring(0, count - lsublen)
 		else
-			return _right.substring(from - llen, len)
+			return _right.substring(from - llen, count)
 		end
 	end
 
@@ -425,12 +456,12 @@ class RopeBuffer
 				var rem = count - subpos
 				var nns = new NativeString(rem)
 				ns.copy_to(nns, rem, dumped, 0)
-				return new RopeBuffer.from(l + nns.to_s_with_length(rem))
+				return new RopeBuffer.from(l + nns.to_s_unsafe(rem))
 			end
 		else
 			var nns = new NativeString(count)
 			ns.copy_to(nns, count, dumped, 0)
-			return new RopeBuffer.from(nns.to_s_with_length(count))
+			return new RopeBuffer.from(nns.to_s_unsafe(count))
 		end
 	end
 
@@ -479,7 +510,7 @@ class RopeBuffer
 	# the final String and re-allocates a new larger Buffer.
 	private fun dump_buffer do
 		written = false
-		var nstr = new FlatString.with_infos(ns, rpos - dumped, dumped, rpos - 1)
+		var nstr = new FlatString.with_infos(ns, rpos - dumped, dumped)
 		str += nstr
 		var bs = buf_size
 		bs = bs * 2
@@ -492,14 +523,14 @@ class RopeBuffer
 	# Similar to dump_buffer, but does not reallocate a new NativeString
 	private fun persist_buffer do
 		if rpos == dumped then return
-		var nstr = new FlatString.with_infos(ns, rpos - dumped, dumped, rpos - 1)
+		var nstr = new FlatString.with_infos(ns, rpos - dumped, dumped)
 		str += nstr
 		dumped = rpos
 	end
 
 	redef fun output do
 		str.output
-		new FlatString.with_infos(ns, rpos - dumped, dumped, rpos - 1).output
+		new FlatString.with_infos(ns, rpos - dumped, dumped).output
 	end
 
 	# Enlarge is useless here since the `Buffer`
@@ -521,7 +552,7 @@ class RopeBuffer
 	redef fun reverse do
 		# Flush the buffer in order to only have to reverse `str`.
 		if rpos > 0 and dumped != rpos then
-			str += new FlatString.with_infos(ns, rpos - dumped, dumped, rpos - 1)
+			str += new FlatString.with_infos(ns, rpos - dumped, dumped)
 			dumped = rpos
 		end
 		str = str.reversed
@@ -564,7 +595,7 @@ redef class FlatString
 			var ns = new NativeString(nlen + 1)
 			mits.copy_to(ns, mlen, mifrom, 0)
 			sits.copy_to(ns, slen, sifrom, mlen)
-			return new FlatString.full(ns, nlen, 0, nlen - 1, length + s.length)
+			return new FlatString.full(ns, nlen, 0, length + s.length)
 		else if s isa Concat then
 			var sl = s._left
 			var sllen = sl.bytelen
@@ -625,7 +656,7 @@ private class RopeByteReverseIterator
 		if not subs.is_ok then return
 		var s = subs.item
 		ns = s._items
-		pns = s._last_byte
+		pns = s.last_byte
 	end
 end
 
@@ -834,7 +865,7 @@ private class RopeBufSubstringIterator
 
 	init from(str: RopeBuffer) do
 		iter = str.str.substrings
-		nsstr = new FlatString.with_infos(str.ns, str.rpos - str.dumped, str.dumped, str.rpos - 1)
+		nsstr = new FlatString.with_infos(str.ns, str.rpos - str.dumped, str.dumped)
 		if str.length == 0 then nsstr_done = true
 	end
 

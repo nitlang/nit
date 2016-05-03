@@ -77,9 +77,6 @@ vh.routes.add new Route("/hello/:name", new ParamAction)
 # Serve everything else with a standard `FileServer` with a root at "www/hello_world/"
 vh.routes.add new Route(null, new FileServer("www/hello_world/"))
 
-# Avoid executing when running tests
-if "NIT_TESTING".environ == "true" then exit 0
-
 var factory = new HttpFactory.and_libevent
 factory.config.virtual_hosts.add vh
 factory.run

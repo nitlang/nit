@@ -92,7 +92,8 @@ extern class GtkWidget `{GtkWidget *`}
 		return self == o;
 	`}
 
-	fun request_size(width, height: Int) `{
+	# Set the minimum dimension of this widget
+	fun set_size_request(width, height: Int) `{
 		gtk_widget_set_size_request(self, width, height);
 	`}
 
@@ -137,6 +138,21 @@ extern class GtkWidget `{GtkWidget *`}
 
 	# Hide the widget (reverse the effects of `show`)
 	fun hide `{ gtk_widget_hide(self); `}
+
+	# Vertical alignement of this widget
+	fun valign=(value: GtkAlign) `{ gtk_widget_set_valign(self, value); `}
+
+	# Horizontal alignement of this widget
+	fun halign=(value: GtkAlign) `{ gtk_widget_set_halign(self, value); `}
+end
+
+# How a widget deals with extra space
+extern class GtkAlign `{ GtkAlign `}
+	new fill `{ return GTK_ALIGN_FILL; `}
+	new start `{ return GTK_ALIGN_START; `}
+	new align_end `{ return GTK_ALIGN_END; `}
+	new center `{ return GTK_ALIGN_CENTER; `}
+	new baseline `{ return GTK_ALIGN_BASELINE; `}
 end
 
 # Base class for widgets which contain other widgets
@@ -198,6 +214,11 @@ extern class GtkWindow `{GtkWindow *`}
 	do
 		signal_connect("destroy", to_call, user_data)
 	end
+
+	# Resize the window as if the user had done so
+	fun resize(width, height: Int) `{
+		return gtk_window_resize(self, width, height);
+	`}
 
 	fun resizable: Bool `{
 		return gtk_window_get_resizable(self);
@@ -436,18 +457,13 @@ end
 extern class GtkMisc `{GtkMisc *`}
 	super GtkWidget
 
-	fun alignment: GtkAlignment is abstract
-
-	fun alignment=(x: Float, y: Float) `{
+	fun set_alignment(x, y: Float) `{
 		gtk_misc_set_alignment(self, x, y);
 	`}
 
-	fun padding: GtkAlignment is abstract
-
-	fun padding=(x: Float, y: Float) `{
+	fun set_padding(x, y: Float) `{
 		gtk_misc_set_padding(self, x, y);
 	`}
-
 end
 
 # A single line text entry field
@@ -681,6 +697,24 @@ extern class GtkLabel `{GtkLabel *`}
 		return gtk_label_get_angle(self);
 	`}
 
+	# Set simple formatted text content from a `format` string and the `content` which is escaped
+	#
+	# ~~~nitish
+	# GtkLabel lbl = new GtkLabel("Non-formatted text")
+	# lbl.set_markup("<span style=\"italic\">\%s</span>".to_cstring,
+	#                "Italic content")
+	# ~~~
+	fun set_markup(format, content: NativeString) `{
+		char *formatted = g_markup_printf_escaped(format, content);
+		gtk_label_set_markup(self, formatted);
+		g_free(formatted);
+	`}
+
+	# Set justification of the lines in the label relative to each other
+	fun justify=(value: GtkJustification) `{ gtk_label_set_justify(self, value); `}
+
+	# Get justification of the lines in the label relative to each other
+	fun justify: GtkJustification `{ return gtk_label_get_justify(self); `}
 end
 
 # A widget displaying an image

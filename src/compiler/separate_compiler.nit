@@ -1399,8 +1399,7 @@ class SeparateCompilerVisitor
 		var res: nullable RuntimeVariable = null
 		var recv = arguments.first
 		var consider_null = not self.compiler.modelbuilder.toolcontext.opt_no_check_null.value or mmethod.name == "==" or mmethod.name == "!="
-		var maybenull = (recv.mcasttype isa MNullableType or recv.mcasttype isa MNullType) and consider_null
-		if maybenull then
+		if maybenull(recv) and consider_null then
 			self.add("if ({recv} == NULL) \{")
 			if mmethod.name == "==" or mmethod.name == "is_same_instance" then
 				res = self.new_var(bool_type)
@@ -2120,6 +2119,11 @@ class SeparateCompilerVisitor
 		else if pname == "copy_to" then
 			var recv1 = "((struct instance_{nclass.c_name}*){arguments[1]})->values"
 			self.add("memmove({recv1}, {recv}, {arguments[2]}*sizeof({elttype.ctype}));")
+			return true
+		else if pname == "memmove" then
+			# fun memmove(start: Int, length: Int, dest: NativeArray[E], dest_start: Int) is intern do
+			var recv1 = "((struct instance_{nclass.c_name}*){arguments[3]})->values"
+			self.add("memmove({recv1}+{arguments[4]}, {recv}+{arguments[1]}, {arguments[2]}*sizeof({elttype.ctype}));")
 			return true
 		end
 		return false

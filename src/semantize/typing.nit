@@ -152,7 +152,11 @@ private class TypeVisitor
 			end
 			return null # forward error
 		end
-		self.error(nexpr, "Error: expected an expression.")
+		var more_message = null
+		var p = nexpr.parent
+		if p != null then more_message = p.bad_expr_message(nexpr)
+		if more_message == null then more_message = "" else more_message = " " + more_message
+		self.error(nexpr, "Error: expected an expression{more_message}.")
 		return null
 	end
 
@@ -802,6 +806,12 @@ end
 
 redef class ANode
 	private fun accept_post_typing(v: TypeVisitor) do end
+
+	# An additional information message to explain the role of a child expression.
+	#
+	# The point of the method is to allow some kind of double dispatch so the parent
+	# choose how to describe its children.
+	private fun bad_expr_message(child: AExpr): nullable String do return null
 end
 
 redef class AAttrPropdef
@@ -1121,6 +1131,7 @@ redef class ADoExpr
 	redef fun accept_typing(v)
 	do
 		v.visit_stmt(n_block)
+		v.visit_stmt(n_catch)
 		self.is_typed = true
 	end
 end
@@ -1445,29 +1456,73 @@ redef class AFloatExpr
 end
 
 redef class ACharExpr
-	redef fun accept_typing(v)
-	do
-		var mclass = v.get_mclass(self, "Char")
+	redef fun accept_typing(v) do
+		var mclass: nullable MClass = null
+		if is_ascii then
+			mclass = v.get_mclass(self, "Byte")
+		else if is_code_point then
+			mclass = v.get_mclass(self, "Int")
+		else
+			mclass = v.get_mclass(self, "Char")
+		end
 		if mclass == null then return # Forward error
 		self.mtype = mclass.mclass_type
 	end
 end
 
-redef class AStringFormExpr
-	redef fun accept_typing(v)
-	do
+redef class AugmentedStringFormExpr
+	super AExpr
+
+	# Text::to_re, used for prefix `re`
+	var to_re: nullable CallSite = null
+	# Regex::ignore_case, used for suffix `i` on `re`
+	var ignore_case: nullable CallSite = null
+	# Regex::newline, used for suffix `m` on `re`
+	var newline: nullable CallSite = null
+	# Regex::extended, used for suffix `b` on `re`
+	var extended: nullable CallSite = null
+	# NativeString::to_bytes_with_copy, used for prefix `b`
+	var to_bytes_with_copy: nullable CallSite = null
+
+	redef fun accept_typing(v) do
 		var mclass = v.get_mclass(self, "String")
 		if mclass == null then return # Forward error
-		self.mtype = mclass.mclass_type
+		if is_bytestring then
+			to_bytes_with_copy = v.get_method(self, v.mmodule.native_string_type, "to_bytes_with_copy", false)
+			mclass = v.get_mclass(self, "Bytes")
+		else if is_re then
+			to_re = v.get_method(self, mclass.mclass_type, "to_re", false)
+			for i in suffix.chars do
+				mclass = v.get_mclass(self, "Regex")
+				if mclass == null then
+					v.error(self, "Error: `Regex` class unknown")
+					return
+				end
+				var service = ""
+				if i == 'i' then
+					service = "ignore_case="
+					ignore_case = v.get_method(self, mclass.mclass_type, service, false)
+				else if i == 'm' then
+					service = "newline="
+					newline = v.get_method(self, mclass.mclass_type, service, false)
+				else if i == 'b' then
+					service = "extended="
+					extended = v.get_method(self, mclass.mclass_type, service, false)
+				else
+					v.error(self, "Type Error: Unrecognized suffix {i} in prefixed Regex")
+					abort
+				end
+			end
+		end
+		if mclass == null then return # Forward error
+		mtype = mclass.mclass_type
 	end
 end
 
 redef class ASuperstringExpr
 	redef fun accept_typing(v)
 	do
-		var mclass = v.get_mclass(self, "String")
-		if mclass == null then return # Forward error
-		self.mtype = mclass.mclass_type
+		super
 		var objclass = v.get_mclass(self, "Object")
 		if objclass == null then return # Forward error
 		var objtype = objclass.mclass_type
@@ -1709,6 +1764,14 @@ end
 redef class ASendExpr
 	# The property invoked by the send.
 	var callsite: nullable CallSite
+
+	redef fun bad_expr_message(child)
+	do
+		if child == self.n_expr then
+			return "to be the receiver of `{self.property_name}`"
+		end
+		return null
+	end
 
 	redef fun accept_typing(v)
 	do

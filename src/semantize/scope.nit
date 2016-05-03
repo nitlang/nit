@@ -71,6 +71,9 @@ private class ScopeVisitor
 	# The tool context used to display errors
 	var toolcontext: ToolContext
 
+	# The analysed property
+	var propdef: APropdef
+
 	var selfvariable = new Variable("self")
 
 	init
@@ -248,10 +251,13 @@ redef class ANode
 end
 
 redef class APropdef
+	# The break escape mark associated with the return
+	var return_mark: nullable EscapeMark
+
 	# Entry point of the scope analysis
 	fun do_scope(toolcontext: ToolContext)
 	do
-		var v = new ScopeVisitor(toolcontext)
+		var v = new ScopeVisitor(toolcontext, self)
 		v.enter_visit(self)
 		v.shift_scope
 	end
@@ -326,6 +332,21 @@ redef class ABreakExpr
 	end
 end
 
+redef class AReturnExpr
+	redef fun accept_scope_visitor(v)
+	do
+		super
+
+		var escapemark = v.propdef.return_mark
+		if escapemark == null then
+			escapemark = new EscapeMark
+			v.propdef.return_mark = escapemark
+		end
+
+		escapemark.escapes.add(self)
+		self.escapemark = escapemark
+	end
+end
 
 redef class ADoExpr
 	# The break escape mark associated with the 'do' block
@@ -335,6 +356,7 @@ redef class ADoExpr
 	do
 		self.break_mark = v.make_escape_mark(n_label, false)
 		v.enter_visit_block(n_block, self.break_mark)
+		v.enter_visit_block(n_catch)
 	end
 end
 

@@ -36,7 +36,7 @@ import json::serialization
 import model
 
 # Delay in seconds before the next request after an error
-fun request_delay_on_error: Int do return 60
+fun request_delay_on_error: Float do return 60.0
 
 redef class App
 	redef fun on_create
@@ -73,8 +73,7 @@ class TnitterWindow
 	# Update the screen to show the new `posts`
 	fun apply_update(posts: Array[Post])
 	do
-		layout.remove list_posts
-		list_posts = new ListLayout(parent=layout)
+		list_posts.clear
 		for post in posts do
 			var line = new VerticalLayout(parent=list_posts)
 			var author = new LabelAuthor(parent=line, text="@"+post.user)
@@ -106,13 +105,7 @@ abstract class AsyncTnitterRequest
 	redef var rest_action
 
 	# Should this request be delayed by `request_delay_on_error` seconds?
-	var delay: Bool
-
-	redef fun main
-	do
-		if delay then nanosleep(request_delay_on_error, 0)
-		return super
-	end
+	fun after_error(value: Bool) is autoinit do if value then delay = request_delay_on_error
 end
 
 # Async request to list latest posts, either immediately or by push notification

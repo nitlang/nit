@@ -186,6 +186,7 @@ class List[E]
 	do
 		_head = null
 		_tail = null
+		length = 0
 	end
 
 

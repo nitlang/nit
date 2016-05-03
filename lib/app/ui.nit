@@ -21,6 +21,7 @@ import app_base
 # TODO: move on the platform once qualified names are understand in the condition
 import linux::ui is conditional(linux)
 import android::ui is conditional(android) # FIXME it should be conditional to `android::platform`
+import ios::ui is conditional(ios)
 
 redef class App
 	super AppComponent
@@ -117,6 +118,9 @@ class CompositeControl
 	# Is `item` in `self`?
 	fun has(item: Control): Bool do return items.has(item)
 
+	# Remove all items from `self`
+	fun clear do for item in items.to_a do remove item
+
 	redef fun on_create do for i in items do i.on_create
 
 	redef fun on_start do for i in items do i.on_start
@@ -157,11 +161,36 @@ abstract class TextView
 	#
 	# By default, or if set to `null`, no text is shown.
 	var text: nullable Text is writable, abstract, autoinit
+
+	# Set the relative size of the text
+	#
+	# A value of 1.0, the default, use the platform default text size.
+	# Values under 1.0 set a smaller text size, and over 1.0 a larger size.
+	#
+	# Implementation varies per platform, and some controls may be unaffected
+	# depending on the customization options of each platform.
+	# For consistent results, it is recommended to use only on instances
+	# of `Label` and `size` should be either 0.5, 1.0 or 1.5.
+	fun size=(size: nullable Float) is autoinit do end
+
+	# Align the text horizontally
+	#
+	# Use 0.0 to align left (the default), 0.5 to align in the center and
+	# 1.0 to align on the right.
+	#
+	# Implementation varies per platform, and some controls may be unaffected
+	# depending on the customization options of each platform.
+	# For consistent results, it is recommended to use only on instances
+	# of `Label` and `size` should be either 0.0, 0.5 or 1.0.
+	fun align=(center: nullable Float) is autoinit do end
 end
 
 # A control for the user to enter custom `text`
 class TextInput
 	super TextView
+
+	# Hide password or any content entered in this view?
+	var is_password: nullable Bool is writable
 end
 
 # A pushable button, raises `ButtonPressEvent`
@@ -172,6 +201,14 @@ end
 # A text label
 class Label
 	super TextView
+end
+
+# Toggle control with two states and a label
+class CheckBox
+	super TextView
+
+	# Is this control in the checked/on state?
+	var is_checked = false is writable
 end
 
 # A `Button` press event

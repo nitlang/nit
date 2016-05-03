@@ -99,7 +99,7 @@ class JsonSerializer
 	# Target writing stream
 	var stream: Writer
 
-	# Write plain JSON? easier to read but does not support Nit deserialization
+	# Write plain JSON? Standard JSON without metadata for deserialization
 	#
 	# If `false`, the default, serialize to support deserialization:
 	#
@@ -121,8 +121,17 @@ class JsonSerializer
 	# * Does not support cycles, will replace the problematic references by `null`.
 	# * Does not serialize the meta-data needed to deserialize the objects
 	#   back to regular Nit objects.
-	# * Keys of Nit `HashMap` are converted to their string reprensentation using `to_s`.
+	# * Keys of Nit `HashMap` are converted to their string representation using `to_s`.
 	var plain_json = false is writable
+
+	# Write pretty JSON for human eyes?
+	#
+	# Toggles skipping lines between attributes of an object and
+	# properly indent the written JSON.
+	var pretty_json = false is writable
+
+	# Current indentation level used for writing `pretty_json`
+	private var indent_level = 0
 
 	# List of the current open objects, the first is the main target of the serialization
 	#
@@ -142,7 +151,8 @@ class JsonSerializer
 			if plain_json then
 				for o in open_objects do
 					if object.is_same_serialized(o) then
-						# Cycle detected
+						# Cycle, can't be managed in plain json
+						warn "Cycle detected in serialized object, replacing reference with 'null'."
 						stream.write "null"
 						return
 					end
@@ -162,10 +172,11 @@ class JsonSerializer
 	redef fun serialize_attribute(name, value)
 	do
 		if not plain_json or not first_attribute then
-			stream.write ", "
+			stream.write ","
 			first_attribute = false
 		end
 
+		new_line_and_indent
 		stream.write "\""
 		stream.write name
 		stream.write "\": "
@@ -177,12 +188,26 @@ class JsonSerializer
 		if not plain_json and cache.has_object(object) then
 			# if already serialized, add local reference
 			var id = cache.id_for(object)
-			stream.write "\{\"__kind\": \"ref\", \"__id\": "
+			stream.write "\{"
+			indent_level += 1
+			new_line_and_indent
+			stream.write "\"__kind\": \"ref\", \"__id\": "
 			stream.write id.to_s
+			indent_level -= 1
+			new_line_and_indent
 			stream.write "\}"
 		else
 			# serialize here
 			serialize object
+		end
+	end
+
+	# Write a new line and indent it, only if `pretty_json`
+	private fun new_line_and_indent
+	do
+		if pretty_json then
+			stream.write "\n"
+			for i in indent_level.times do stream.write "\t"
 		end
 	end
 end
@@ -355,7 +380,7 @@ class JsonDeserializer
 				var array_type = types.first
 
 				var typed_array
-				if array_type == "FlatString" then
+				if array_type == "ASCIIFlatString" or array_type == "UnicodeFlatString" then
 					if has_nullable then
 						typed_array = new Array[nullable FlatString]
 					else typed_array = new Array[FlatString]
@@ -466,6 +491,8 @@ redef class Text
 		end
 		return res
 	end
+
+	redef fun serialize_to_json(v) do v.stream.write(to_json)
 end
 
 redef class Serializable
@@ -473,7 +500,9 @@ redef class Serializable
 	do
 		var id = v.cache.new_id_for(self)
 		v.stream.write "\{"
+		v.indent_level += 1
 		if not v.plain_json then
+			v.new_line_and_indent
 			v.stream.write "\"__kind\": \"obj\", \"__id\": "
 			v.stream.write id.to_s
 			v.stream.write ", \"__class\": \""
@@ -481,6 +510,9 @@ redef class Serializable
 			v.stream.write "\""
 		end
 		core_serialize_to(v)
+
+		v.indent_level -= 1
+		v.new_line_and_indent
 		v.stream.write "\}"
 	end
 
@@ -534,10 +566,6 @@ redef class Char
 	end
 end
 
-redef class String
-	redef fun serialize_to_json(v) do v.stream.write(to_json)
-end
-
 redef class NativeString
 	redef fun serialize_to_json(v) do to_s.serialize_to_json(v)
 end
@@ -547,16 +575,21 @@ redef class Collection[E]
 	private fun serialize_to_pure_json(v: JsonSerializer)
 	do
 			v.stream.write "["
+			v.indent_level += 1
 			var is_first = true
 			for e in self do
 				if is_first then
 					is_first = false
-				else v.stream.write ", "
+				else v.stream.write ","
+				v.new_line_and_indent
 
 				if not v.try_to_serialize(e) then
+					assert e != null # null would have been serialized
 					v.warn("element of type {e.class_name} is not serializable.")
 				end
 			end
+			v.indent_level -= 1
+			v.new_line_and_indent
 			v.stream.write "]"
 	end
 end
@@ -567,16 +600,23 @@ redef class SimpleCollection[E]
 		# Register as pseudo object
 		if not v.plain_json then
 			var id = v.cache.new_id_for(self)
-			v.stream.write """{"__kind": "obj", "__id": """
+			v.stream.write """{"""
+			v.indent_level += 1
+			v.new_line_and_indent
+			v.stream.write """"__kind": "obj", "__id": """
 			v.stream.write id.to_s
 			v.stream.write """, "__class": """"
 			v.stream.write class_name
-			v.stream.write """", "__items": """
+			v.stream.write """","""
+			v.new_line_and_indent
+			v.stream.write """"__items": """
 		end
 
 		serialize_to_pure_json v
 
 		if not v.plain_json then
+			v.indent_level -= 1
+			v.new_line_and_indent
 			v.stream.write "\}"
 		end
 	end
@@ -605,36 +645,49 @@ redef class Map[K, V]
 
 		if v.plain_json then
 			v.stream.write "\{"
+			v.indent_level += 1
 			var first = true
 			for key, val in self do
 				if not first then
-					v.stream.write ", "
+					v.stream.write ","
 				else first = false
+				v.new_line_and_indent
 
-				if key == null then key = "null"
-
-				v.stream.write key.to_s.to_json
+				var k = key or else "null"
+				v.stream.write k.to_s.to_json
 				v.stream.write ": "
 				if not v.try_to_serialize(val) then
+					assert val != null # null would have been serialized
 					v.warn("element of type {val.class_name} is not serializable.")
 					v.stream.write "null"
 				end
 			end
+			v.indent_level -= 1
+			v.new_line_and_indent
 			v.stream.write "\}"
 		else
-			v.stream.write """{"__kind": "obj", "__id": """
+			v.stream.write "\{"
+			v.indent_level += 1
+			v.new_line_and_indent
+			v.stream.write """"__kind": "obj", "__id": """
 			v.stream.write id.to_s
 			v.stream.write """, "__class": """"
 			v.stream.write class_name
 			v.stream.write """", "__length": """
 			v.stream.write length.to_s
 
-			v.stream.write """, "__keys": """
+			v.stream.write ","
+			v.new_line_and_indent
+			v.stream.write """"__keys": """
 			keys.serialize_to_pure_json v
 
-			v.stream.write """, "__values": """
+			v.stream.write ","
+			v.new_line_and_indent
+			v.stream.write """"__values": """
 			values.serialize_to_pure_json v
 
+			v.indent_level -= 1
+			v.new_line_and_indent
 			v.stream.write "\}"
 		end
 	end

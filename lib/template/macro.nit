@@ -105,7 +105,7 @@ class TemplateString
 	super Template
 
 	# Template original text.
-	private var tpl_text: String
+	var tpl_text: String
 
 	# Macros contained in the template file.
 	private var macros = new HashMap[String, Array[TemplateMacro]]
@@ -127,8 +127,7 @@ class TemplateString
 	#
 	#     var tpl = new TemplateString("Hello %NAME%!")
 	#     assert tpl.write_to_string == "Hello %NAME%!"
-	init(text: String) do
-		self.tpl_text = text
+	init do
 		parse
 	end
 

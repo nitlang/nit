@@ -46,6 +46,7 @@ module serialization is
 	new_annotation auto_serializable
 	new_annotation serialize
 	new_annotation noserialize
+	new_annotation serialize_as
 end
 
 # Abstract serialization service to be sub-classed by specialized services.
@@ -221,7 +222,7 @@ redef class Char super DirectSerializable end
 redef class Int super DirectSerializable end
 redef class Float super DirectSerializable end
 redef class NativeString super DirectSerializable end
-redef class String super DirectSerializable end
+redef class Text super DirectSerializable end
 redef class SimpleCollection[E] super Serializable end
 redef class Map[K, V] super Serializable end
 

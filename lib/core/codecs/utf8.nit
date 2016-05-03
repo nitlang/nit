@@ -16,35 +16,68 @@
 module utf8
 
 import codec_base
+intrude import text::flat
+intrude import bytes
 
-# Returns UTF-8 entities as-is
-private class UTF8Coder
-	super Coder
+# Codec supporting UTF-8
+private class UTF8Codec
+	super Codec
 
-	redef fun code_char(c) do return c.to_s.to_bytes
+	redef fun char_max_size do return 4
 
-	redef fun add_char_to(c, stream) do c.to_s.append_to_bytes(stream)
+	redef fun codet_size do return 1
 
-	redef fun code_string(s) do return s.to_bytes
+	redef fun max_lookahead do return 4
 
-	redef fun add_string_to(s, b) do s.append_to_bytes(b)
-end
+	redef fun encode_char(c) do
+		var ns = new NativeString(c.u8char_len)
+		add_char_to(c, ns)
+		return ns
+	end
 
-# Decodes entities in an external format to UTF-8
-private class UTF8Decoder
-	super Decoder
+	redef fun add_char_to(c, stream) do
+		c.u8char_tos(stream, c.u8char_len)
+		return c.u8char_len
+	end
+
+	redef fun encode_string(s) do
+		var buf = new Bytes.with_capacity(s.bytelen)
+		add_string_to(s, buf)
+		return buf
+	end
+
+	redef fun add_string_to(s, b) do
+		s.append_to_bytes(b)
+		return s.bytelen
+	end
+
+	redef fun is_valid_char(ns, len) do
+		if len == 0 then return 2
+		if not ns[0].is_valid_utf8_start then return 2
+		for i in [1 .. len[ do if ns[i] & 0b1100_0000u8 != 0b1000_0000u8 then return 2
+		if len != ns[0].u8len then return 1
+		return 0
+	end
 
 	redef fun decode_char(b) do
-		var s = b.to_s
-		return s[0]
+		var c = b.char_at(0)
+		var cp = c.code_point
+		if cp >= 0xD800 and cp <= 0xDFFF then return 0xFFFD.code_point
+		if cp == 0xFFFE or cp == 0xFFFF then return 0xFFFD.code_point
+		return c
 	end
 
-	redef fun decode_string(b) do
-		return b.to_s
+	redef fun decode_string(ns, len) do
+		var ret = ns.to_s_with_length(len)
+		var rit = ret.as(FlatString).items
+		if rit == ns then
+			var nns = new NativeString(len)
+			rit.copy_to(nns, len, 0, 0)
+			return nns.to_s_full(ret.bytelen, ret.length)
+		end
+		return ret
 	end
 end
 
-# Returns the instance of a UTF-8 Coder
-fun utf8_coder: Coder do return once new UTF8Coder
-# Returns the instance of a UTF-8 Decoder
-fun utf8_decoder: Decoder do return once new UTF8Decoder
+# Returns the instance of a UTF-8 Codec
+fun utf8_codec: Codec do return once new UTF8Codec

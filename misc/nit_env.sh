@@ -128,8 +128,11 @@ __nit_env_main() {
 		elif [ -f "$HOME/.bash_profile" ]; then
 			echo "$str" >> "$HOME/.bash_profile"
 			echo "succesfuly registerd nit .bash_profile"
+		elif [ -f "$HOME/.zshrc" ]; then
+			echo "$str" >> "$HOME/.zshrc"
+			echo "successfuly registered nit in .zshrc"
 		else
-			echo "$str" >> "$HOME/.profile"
+			echo "$str" > "$HOME/.profile"
 			echo "couldn't find .bashrc, .bash_profile, .profile. Created .profile and registered nit in it"
 		fi
 	fi

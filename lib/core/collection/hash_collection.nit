@@ -20,6 +20,11 @@ redef class Map[K, V]
 	new do return new HashMap[K, V]
 end
 
+redef class Set[E]
+	# Get an instance of `HashMap[K, V]`, the default implementation
+	new do return new HashSet[E]
+end
+
 # A HashCollection is an array of HashNode[K] indexed by the K hash value
 private abstract class HashCollection[K]
 	type N: HashNode[K]
@@ -268,7 +273,7 @@ class HashMap[K, V]
 	# Build a list filled with the items of `coll`.
 	init from(coll: Map[K, V]) do
 		init
-		recover_with(coll)
+		add_all(coll)
 	end
 
 	redef var keys: RemovableCollection[K] = new HashMapKeys[K, V](self) is lazy

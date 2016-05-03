@@ -149,6 +149,12 @@ interface Collection[E]
 	# It is memory-efficient but relies on `has` so may be CPU-inefficient for some kind of collections.
 	fun has_all(other: Collection[nullable Object]): Bool
 	do
+		if is_same_instance(other) then return true
+		var ol = other.length
+		var  l = length
+		if ol == 0 then return true
+		if l == 0 then return false
+		if ol == 1 then return has(other.first)
 		for x in other do if not has(x) then return false
 		return true
 	end
@@ -680,19 +686,17 @@ interface Map[K, V]
 	# Add each (key,value) of `map` into `self`.
 	# If a same key exists in `map` and `self`, then the value in self is discarded.
 	#
-	# It is the analogous of `SimpleCollection::add_all`
-	#
 	#     var x = new HashMap[String, Int]
 	#     x["four"] = 4
 	#     x["five"] = 5
 	#     var y = new HashMap[String, Int]
 	#     y["four"] = 40
 	#     y["nine"] = 90
-	#     x.recover_with y
+	#     x.add_all y
 	#     assert x["four"]  == 40
 	#     assert x["five"]  == 5
 	#     assert x["nine"]  == 90
-	fun recover_with(map: MapRead[K, V])
+	fun add_all(map: MapRead[K, V])
 	do
 		var i = map.iterator
 		while i.is_ok do
@@ -700,6 +704,9 @@ interface Map[K, V]
 			i.next
 		end
 	end
+
+	# Alias for `add_all`
+	fun recover_with(map: MapRead[K, V]) is deprecated do add_all(map)
 
 	# Remove all items
 	#
@@ -811,6 +818,44 @@ interface SequenceRead[E]
 	#
 	# REQUIRE `index >= 0 and index < length`
 	fun [](index: Int): E is abstract
+
+	# Return the index-th element but wrap
+	#
+	# Whereas `self[]` requires the index to exists, the `modulo` accessor automatically
+	# wraps overbound and underbouds indexes.
+	#
+	# ~~~
+	# var a = [10,20,30]
+	# assert a.modulo(1) == 20
+	# assert a.modulo(3) == 10
+	# assert a.modulo(-1) == 30
+	# assert a.modulo(-10) == 30
+	# ~~~
+	#
+	# REQUIRE `not_empty`
+	# ENSURE `result == self[modulo_index(index)]`
+	fun modulo(index: Int): E do return self[modulo_index(index)]
+
+	# Returns the real index for a modulo index.
+	#
+	# ~~~
+	# var a = [10,20,30]
+	# assert a.modulo_index(1) == 1
+	# assert a.modulo_index(3) == 0
+	# assert a.modulo_index(-1) == 2
+	# assert a.modulo_index(-10) == 2
+	# ~~~
+	#
+	# REQUIRE `not_empty`
+	fun modulo_index(index: Int): Int
+	do
+		var length = self.length
+		if index >= 0 then
+			return index % length
+		else
+			return length - (-1 - index) % length - 1
+		end
+	end
 
 	# Get the last item.
 	# Is equivalent with `self[length-1]`.
@@ -1062,6 +1107,24 @@ interface Sequence[E]
 	# REQUIRE `index >= 0 and index <= length`
 	fun []=(index: Int, item: E) is abstract
 
+	# Set the index-th element but wrap
+	#
+	# Whereas `self[]=` requires the index to exists, the `modulo` accessor automatically
+	# wraps overbound and underbouds indexes.
+	#
+	# ~~~
+	# var a = [10,20,30]
+	# a.modulo(1) = 200
+	# a.modulo(3) = 100
+	# a.modulo(-1) = 300
+	# a.modulo(-10) = 301
+	# assert a == [100, 200, 301]
+	# ~~~
+	#
+	# REQUIRE `not_empty`
+	# ENSURE `self[modulo_index(index)] == value`
+	fun modulo=(index: Int, value: E) do self[modulo_index(index)] = value
+
 	# Insert an element at a given position, following elements are shifted.
 	#
 	#     var a = [10, 20, 30, 40]
@@ -1100,6 +1163,30 @@ interface Sequence[E]
 	#
 	# REQUIRE `index >= 0 and index < length`
 	fun remove_at(index: Int) is abstract
+
+	# Rotates the elements of self once to the left
+	#
+	# ~~~nit
+	# var a = [12, 23, 34, 45]
+	# a.rotate_left
+	# assert a == [23, 34, 45, 12]
+	# ~~~
+	fun rotate_left do
+		var fst = shift
+		push fst
+	end
+
+	# Rotates the elements of self once to the right
+	#
+	# ~~~nit
+	# var a = [12, 23, 34, 45]
+	# a.rotate_right
+	# assert a == [45, 12, 23, 34]
+	# ~~~
+	fun rotate_right do
+		var lst = pop
+		unshift lst
+	end
 end
 
 # Iterators on indexed collections.
