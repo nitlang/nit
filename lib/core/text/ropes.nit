@@ -670,7 +670,7 @@ private class RopeByteIterator
 	var ns: NativeString is noautoinit
 	# Substrings of the Rope
 	var subs: IndexedIterator[FlatString] is noautoinit
-	# Maximum position to iterate on (e.g. Rope.length)
+	# Maximum position to iterate on (e.g. Rope.bytelen)
 	var max: Int is noautoinit
 	# Position (char) in the Rope (0-indexed)
 	var pos: Int is noautoinit
@@ -680,7 +680,7 @@ private class RopeByteIterator
 		pns = pos - subs.index
 		self.pos = pos
 		ns = subs.item._items
-		max = root.length - 1
+		max = root.bytelen - 1
 	end
 
 	redef fun item do return ns[pns]
@@ -984,18 +984,45 @@ private class RopeBytes
 
 	redef type SELFTYPE: Concat
 
+	var cache: FlatString is noinit
+
+	var cache_start: Int = -1
+
+	var cache_end: Int = -1
+
 	redef fun [](i) do
-		var nod: String = target
+		assert i >= 0 and i < target._bytelen
+		var flps = _cache_start
+		if i >= flps and i <= _cache_end then
+			return _cache.bytes[i - flps]
+		end
+		var lf = get_leaf_at(i)
+		return lf.bytes[i - _cache_start]
+	end
+
+	fun get_leaf_at(pos: Int): FlatString do
+		var flps = _cache_start
+		if pos >= flps and pos <= _cache_end then
+			return _cache
+		end
+		var s: String = target
+		var st = pos
 		loop
-			if nod isa FlatString then return nod._items[i]
-			if not nod isa Concat then abort
-			var lft = nod._left
-			if lft.bytelen >= i then
-				nod = nod._right
+			if s isa FlatString then break
+			s = s.as(Concat)
+			var lft = s._left
+			var llen = lft.bytelen
+			if pos >= llen then
+				s = s._right
+				pos -= llen
 			else
-				nod = lft
+				s = lft
 			end
 		end
+		_cache_start = st - pos
+		_cache_end = st - pos + s.bytelen - 1
+		_cache = s
+		return s
 	end
 
 	redef fun iterator_from(i) do return new RopeByteIterator.from(target, i)
