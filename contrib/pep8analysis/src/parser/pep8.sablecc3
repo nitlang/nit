@@ -57,7 +57,7 @@ blank = (' ' | tab)+;
 
 eol = eol_helper;
 
-number = '-'? digit+;
+number = ('-'|'+')? digit+;
 float = digit* '.' digit+;
 char = (''' [[any - '''] - '\'] ''')
 	| (''' '\' any ''')
