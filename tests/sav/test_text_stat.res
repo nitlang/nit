@@ -10,7 +10,7 @@ Allocations, by type:
 	-RopeBuffer = 0
 
 Calls to length, by type:
-	FlatString = 18
+	FlatString = 19
 Indexed accesses, by type:
 Calls to bytelen for each type:
 	FlatString = 48
