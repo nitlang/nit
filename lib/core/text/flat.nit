@@ -991,15 +991,10 @@ class FlatBuffer
 	init from(s: Text)
 	do
 		_items = new NativeString(s.bytelen)
-		if s isa FlatText then
-			_items = s._items
-		else
-			for i in substrings do i.as(FlatString)._items.copy_to(_items, i._bytelen, 0, 0)
-		end
+		for i in s.substrings do i._items.copy_to(_items, i._bytelen, first_byte, 0)
 		_bytelen = s.bytelen
 		_length = s.length
 		_capacity = _bytelen
-		written = true
 	end
 
 	# Create a new empty string with a given capacity.
