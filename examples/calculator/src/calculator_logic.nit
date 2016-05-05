@@ -28,7 +28,7 @@ class CalculatorContext
 	var last_op: nullable Text = null
 
 	# Value currently being entered
-	var current: nullable FlatBuffer = null
+	var current: nullable String = null
 
 	# Text to display on screen
 	fun display_text: String
@@ -78,8 +78,8 @@ class CalculatorContext
 	fun push_digit(digit: Int)
 	do
 		var current = current
-		if current == null then current = new FlatBuffer
-		current.add digit.to_s.chars.first
+		if current == null then current = ""
+		current += digit.to_s
 		self.current = current
 
 		if last_op == "=" then
@@ -92,8 +92,8 @@ class CalculatorContext
 	fun switch_to_decimals
 	do
 		var current = current
-		if current == null then current = new FlatBuffer.from("0")
-		if not current.chars.has('.') then current.add '.'
+		if current == null then current = "0"
+		if not current.chars.has('.') then current += "."
 		self.current = current
 	end
 
