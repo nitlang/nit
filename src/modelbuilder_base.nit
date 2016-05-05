@@ -386,25 +386,22 @@ class ModelBuilder
 		end
 
 		# Look for classes with an approximative name.
-		var bestd = name.length / 2 # limit up to 50% name change
+		var bests = new BestDistance[MClass](qname.length - name.length / 2) # limit up to 50% name change
 		for c in model.mclasses do
 			if not mmodule.in_importation <= c.intro_mmodule then continue
 			if not mmodule.is_visible(c.intro_mmodule, c.visibility) then continue
-			var d = name.levenshtein_distance(c.name)
-			if d <= bestd then
-				if d < bestd then
-					hints.clear
-					bestd = d
-				end
-				hints.add "`{c.full_name}`"
-			end
+			var d = qname.levenshtein_distance(c.name)
+			bests.update(d, c)
+			d = qname.levenshtein_distance(c.full_name)
+			bests.update(d, c)
 		end
-		if hints.not_empty then
+		if bests.best_items.not_empty then
+			for c in bests.best_items do hints.add "`{c.full_name}`"
 			error(qid, "Error: class `{qname}` not found in module `{mmodule}`. Did you mean {hints.join(",", " or ")}?")
 			return
 		end
 
-		error(qid, "Error: class `{name}` not found in module `{mmodule}`.")
+		error(qid, "Error: class `{qname}` not found in module `{mmodule}`.")
 	end
 
 	# Return the static type associated to the node `ntype`.

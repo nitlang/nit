@@ -2,6 +2,7 @@
 printf "%s\n" "$@" \
 	../src/nit*.nit \
 	../src/test_*.nit \
+	../src/examples/*.nit \
 	../examples/*.nit \
 	../examples/*/*.nit \
 	../examples/shoot/src/shoot_logic.nit \
