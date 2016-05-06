@@ -1371,37 +1371,26 @@ redef class NativeString
 	#
 	# Very unsafe, make sure to have room for this char prior to calling this function.
 	private fun set_char_at(pos: Int, c: Char) do
-		if c.code_point < 128 then
-			self[pos] = c.code_point.to_b
+		var cp = c.code_point
+		if cp < 128 then
+			self[pos] = cp.to_b
 			return
 		end
 		var ln = c.u8char_len
-		native_set_char(pos, c, ln)
+		if ln == 2 then
+			self[pos] = (0xC0 | ((cp & 0x7C0) >> 6)).to_b
+			self[pos + 1] = (0x80 | (cp & 0x3F)).to_b
+		else if ln == 3 then
+			self[pos] = (0xE0 | ((cp & 0xF000) >> 12)).to_b
+			self[pos + 1] = (0x80 | ((cp & 0xFC0) >> 6)).to_b
+			self[pos + 2] = (0x80 | (cp & 0x3F)).to_b
+		else if ln == 4 then
+			self[pos] = (0xF0 | ((cp & 0x1C0000) >> 18)).to_b
+			self[pos + 1] = (0x80 | ((cp & 0x3F000) >> 12)).to_b
+			self[pos + 2] = (0x80 | ((cp & 0xFC0) >> 6)).to_b
+			self[pos + 3] = (0x80 | (cp & 0x3F)).to_b
+		end
 	end
-
-	private fun native_set_char(pos: Int, c: Char, ln: Int) `{
-		char* dst = self + pos;
-		switch(ln){
-			case 1:
-				dst[0] = c;
-				break;
-			case 2:
-				dst[0] = 0xC0 | ((c & 0x7C0) >> 6);
-				dst[1] = 0x80 | (c & 0x3F);
-				break;
-			case 3:
-				dst[0] = 0xE0 | ((c & 0xF000) >> 12);
-				dst[1] = 0x80 | ((c & 0xFC0) >> 6);
-				dst[2] = 0x80 | (c & 0x3F);
-				break;
-			case 4:
-				dst[0] = 0xF0 | ((c & 0x1C0000) >> 18);
-				dst[1] = 0x80 | ((c & 0x3F000) >> 12);
-				dst[2] = 0x80 | ((c & 0xFC0) >> 6);
-				dst[3] = 0x80 | (c & 0x3F);
-				break;
-		}
-	`}
 end
 
 redef class Int
