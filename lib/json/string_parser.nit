@@ -231,32 +231,103 @@ class JSONStringParser
 		return val
 	end
 
+	private var parse_str_buf = new FlatBuffer
+
 	# Parses and returns a Nit string from a JSON String
 	fun parse_json_string: Jsonable do
+		var src = src
 		var ln = src.length
 		var p = pos
 		p += 1
 		if p > ln then return make_parse_error("Malformed JSON String")
 		var c = src[p]
-		var st = p
+		var ret = parse_str_buf
+		var chunk_st = p
 		while c != '"' do
-			if c == '\\' then
-				if p + 1 >= ln then return make_parse_error("Malformed Escape sequence in JSON string")
+			if c != '\\' then
 				p += 1
+				if p >= ln then return make_parse_error("Malformed JSON string")
 				c = src[p]
-				if c == 'u' then
-					p += 1
-					if p + 3 >= ln then return make_parse_error("Bad Unicode escape sequence in string")
-					for i in [0 .. 4[ do if not src[p + i].is_hexdigit then return make_parse_error("Bad Unicode escape sequence in string")
-					p += 3
-				end
+				continue
 			end
+			ret.append_substring_impl(src, chunk_st, p - chunk_st)
 			p += 1
-			if p >= ln then return make_parse_error("Malformed JSON String")
+			if p >= ln then return make_parse_error("Malformed Escape sequence in JSON string")
+			c = src[p]
+			if c == 'r' then
+				ret.add '\r'
+				p += 1
+			else if c == 'n' then
+				ret.add '\n'
+				p += 1
+			else if c == 't' then
+				ret.add '\t'
+				p += 1
+			else if c == 'u' then
+				var cp = 0
+				p += 1
+				for i in [0 .. 4[ do
+					cp <<= 4
+					if p >= ln then make_parse_error("Malformed \uXXXX Escape sequence in JSON string")
+					c = src[p]
+					if c >= '0' and c <= '9' then
+						cp += c.code_point - '0'.code_point
+					else if c >= 'a' and c <= 'f' then
+						cp += c.code_point - 'a'.code_point + 10
+					else if c >= 'A' and c <= 'F' then
+						cp += c.code_point - 'A'.code_point + 10
+					else
+						make_parse_error("Malformed \uXXXX Escape sequence in JSON string")
+					end
+					p += 1
+				end
+				c = cp.code_point
+				if cp >= 0xD800 and cp <= 0xDBFF then
+					if p >= ln then make_parse_error("Malformed \uXXXX Escape sequence in JSON string")
+					c = src[p]
+					if c != '\\' then make_parse_error("Malformed \uXXXX Escape sequence in JSON string")
+					p += 1
+					c = src[p]
+					if c != 'u' then make_parse_error("Malformed \uXXXX Escape sequence in JSON string")
+					var locp = 0
+					p += 1
+					for i in [0 .. 4[ do
+						locp <<= 4
+						if p > ln then make_parse_error("Malformed \uXXXX Escape sequence in JSON string")
+						c = src[p]
+						if c >= '0' and c <= '9' then
+							locp += c.code_point - '0'.code_point
+						else if c >= 'a' and c <= 'f' then
+							locp += c.code_point - 'a'.code_point + 10
+						else if c >= 'A' and c <= 'F' then
+							locp += c.code_point - 'A'.code_point + 10
+						else
+							make_parse_error("Malformed \uXXXX Escape sequence in JSON string")
+						end
+						p += 1
+					end
+					c = (((locp & 0x3FF) | ((cp & 0x3FF) << 10)) + 0x10000).code_point
+				end
+				ret.add c
+			else if c == 'b' then
+				ret.add 8.code_point
+				p += 1
+			else if c == 'f' then
+				ret.add '\f'
+				p += 1
+			else
+				p += 1
+				ret.add c
+			end
+			chunk_st = p
 			c = src[p]
 		end
 		pos = p + 1
-		return src.substring(st, p - st).unescape_json
+		if ret.is_empty then return src.substring(chunk_st, p - chunk_st)
+		ret.append_substring_impl(src, chunk_st, p - chunk_st)
+		var rets = ret.to_s
+		ret.clear
+		return rets
 	end
 
 	# Ignores any character until a JSON separator is encountered
