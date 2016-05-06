@@ -1755,6 +1755,18 @@ redef class Char
 		return cp >= 0xD800 and cp <= 0xDFFF
 	end
 
+	# Is `self` a UTF-16 high surrogate ?
+	fun is_hi_surrogate: Bool do
+		var cp = code_point
+		return cp >= 0xD800 and cp <= 0xDBFF
+	end
+
+	# Is `self` a UTF-16 low surrogate ?
+	fun is_lo_surrogate: Bool do
+		var cp = code_point
+		return cp >= 0xDC00 and cp <= 0xDFFF
+	end
+
 	# Length of `self` in a UTF-8 String
 	fun u8char_len: Int do
 		var c = self.code_point
