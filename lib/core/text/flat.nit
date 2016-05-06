@@ -411,7 +411,7 @@ abstract class FlatString
 
 		if from < 0 then
 			count += from
-			if count < 0 then return ""
+			if count <= 0 then return ""
 			from = 0
 		end
 
@@ -1052,6 +1052,21 @@ class FlatBuffer
 		var r_items = new NativeString(byte_length)
 		its.copy_to(r_items, byte_length, bytefrom, 0)
 		return new FlatBuffer.with_infos(r_items, byte_length, byte_length, count)
+	end
+
+	redef fun append_substring_impl(s, from, length) do
+		if length <= 0 then return
+		if not s isa FlatText then
+			super
+			return
+		end
+		var bytest = s.char_to_byte_index(from)
+		var bytend = s.char_to_byte_index(from + length - 1)
+		var btln = bytend - bytest + 1
+		enlarge(btln + _bytelen)
+		s._items.copy_to(_items, btln, bytest, _bytelen)
+		_bytelen += btln
+		_length += length
 	end
 
 	redef fun reverse
