@@ -113,15 +113,15 @@ redef class FlatText
 		var endlen = 0
 		while pos <= max do
 			var c = its[pos]
-			if c == 0x3Cu8 then
+			if c == b'<' then
 				endlen += 3
-			else if c == 0x3Eu8 then
+			else if c == b'>' then
 				endlen += 3
-			else if c == 0x26u8 then
+			else if c == b'&' then
 				endlen += 4
-			else if c == 0x22u8 then
+			else if c == b'"' then
 				endlen += 4
-			else if c == 0x27u8 then
+			else if c == b'\'' then
 				endlen += 4
 			else if c == 0x2Fu8 then
 				endlen += 4
@@ -146,52 +146,45 @@ redef class FlatText
 			# Special codes:
 			# Some HTML characters are used as meta-data, they need
 			# to be replaced by an HTML-Escaped equivalent
-			#
-			# * 0x3C (<) => &lt;
-			# * 0x3E (>) => &gt;
-			# * 0x26 (&) => &amp;
-			# * 0x22 (") => &#34;
-			# * 0x27 (') => &#39;
-			# * 0x2F (/) => &#47;
-			if c == 0x3Cu8 then
-				nits[outpos] = 0x26u8
-				nits[outpos + 1] = 0x6Cu8
-				nits[outpos + 2] = 0x74u8
-				nits[outpos + 3] = 0x3Bu8
+			if c == b'<' then
+				nits[outpos] = b'&'
+				nits[outpos + 1] = b'l'
+				nits[outpos + 2] = b't'
+				nits[outpos + 3] = b';'
 				outpos += 4
-			else if c == 0x3Eu8 then
-				nits[outpos] = 0x26u8
-				nits[outpos + 1] = 0x67u8
-				nits[outpos + 2] = 0x74u8
-				nits[outpos + 3] = 0x3Bu8
+			else if c == b'>' then
+				nits[outpos] = b'&'
+				nits[outpos + 1] = b'g'
+				nits[outpos + 2] = b't'
+				nits[outpos + 3] = b';'
 				outpos += 4
-			else if c == 0x26u8 then
-				nits[outpos] = 0x26u8
-				nits[outpos + 1] = 0x61u8
-				nits[outpos + 2] = 0x6Du8
-				nits[outpos + 3] = 0x70u8
-				nits[outpos + 4] = 0x3Bu8
+			else if c == b'&' then
+				nits[outpos] = b'&'
+				nits[outpos + 1] = b'a'
+				nits[outpos + 2] = b'm'
+				nits[outpos + 3] = b'p'
+				nits[outpos + 4] = b';'
 				outpos += 5
-			else if c == 0x22u8 then
-				nits[outpos] = 0x26u8
-				nits[outpos + 1] = 0x23u8
-				nits[outpos + 2] = 0x33u8
-				nits[outpos + 3] = 0x34u8
-				nits[outpos + 4] = 0x3Bu8
+			else if c == b'"' then
+				nits[outpos] = b'&'
+				nits[outpos + 1] = b'#'
+				nits[outpos + 2] = b'3'
+				nits[outpos + 3] = b'4'
+				nits[outpos + 4] = b';'
 				outpos += 5
-			else if c == 0x27u8 then
-				nits[outpos] = 0x26u8
-				nits[outpos + 1] = 0x23u8
-				nits[outpos + 2] = 0x33u8
-				nits[outpos + 3] = 0x39u8
-				nits[outpos + 4] = 0x3Bu8
+			else if c == b'\'' then
+				nits[outpos] = b'&'
+				nits[outpos + 1] = b'#'
+				nits[outpos + 2] = b'3'
+				nits[outpos + 3] = b'9'
+				nits[outpos + 4] = b';'
 				outpos += 5
 			else if c == 0x2Fu8 then
-				nits[outpos] = 0x26u8
-				nits[outpos + 1] = 0x23u8
-				nits[outpos + 2] = 0x34u8
-				nits[outpos + 3] = 0x37u8
-				nits[outpos + 4] = 0x3Bu8
+				nits[outpos] = b'&'
+				nits[outpos + 1] = b'#'
+				nits[outpos + 2] = b'4'
+				nits[outpos + 3] = b'7'
+				nits[outpos + 4] = b';'
 				outpos += 5
 			else
 				nits[outpos] = c
@@ -215,15 +208,15 @@ redef class FlatText
 		var req_esc = 0
 		while pos <= max do
 			var c = its[pos]
-			if c == 0x0Au8 then
+			if c == b'\n' then
 				req_esc += 1
-			else if c == 0x09u8 then
+			else if c == b'\t' then
 				req_esc += 1
-			else if c == 0x22u8 then
+			else if c == b'"' then
 				req_esc += 1
-			else if c == 0x27u8 then
+			else if c == b'\'' then
 				req_esc += 1
-			else if c == 0x5Cu8 then
+			else if c == b'\\' then
 				req_esc += 1
 			else if c < 32u8 then
 				req_esc += 3
@@ -260,31 +253,31 @@ redef class FlatText
 			# * 0x22 => \"
 			# * 0x27 => \'
 			# * 0x5C => \\
-			if c == 0x09u8 then
-				nns[opos] = 0x5Cu8
-				nns[opos + 1] = 0x74u8
+			if c == b'\t' then
+				nns[opos] = b'\\'
+				nns[opos + 1] = b't'
 				opos += 2
-			else if c == 0x0Au8 then
-				nns[opos] = 0x5Cu8
-				nns[opos + 1] = 0x6Eu8
+			else if c == b'\n' then
+				nns[opos] = b'\\'
+				nns[opos + 1] = b'n'
 				opos += 2
-			else if c == 0x22u8 then
-				nns[opos] = 0x5Cu8
-				nns[opos + 1] = 0x22u8
+			else if c == b'"' then
+				nns[opos] = b'\\'
+				nns[opos + 1] = b'"'
 				opos += 2
-			else if c == 0x27u8 then
-				nns[opos] = 0x5Cu8
-				nns[opos + 1] = 0x27u8
+			else if c == b'\'' then
+				nns[opos] = b'\\'
+				nns[opos + 1] = b'\''
 				opos += 2
-			else if c == 0x5Cu8 then
-				nns[opos] = 0x5Cu8
-				nns[opos + 1] = 0x5Cu8
+			else if c == b'\\' then
+				nns[opos] = b'\\'
+				nns[opos + 1] = b'\\'
 				opos += 2
 			else if c < 32u8 then
-				nns[opos] = 0x5Cu8
-				nns[opos + 1] = 0x30u8
-				nns[opos + 2] = ((c & 0x38u8) >> 3) + 0x30u8
-				nns[opos + 3] = (c & 0x07u8) + 0x30u8
+				nns[opos] = b'\\'
+				nns[opos + 1] = b'0'
+				nns[opos + 2] = ((c & 0x38u8) >> 3) + b'0'
+				nns[opos + 3] = (c & 0x07u8) + b'0'
 				opos += 4
 			else
 				nns[opos] = c
