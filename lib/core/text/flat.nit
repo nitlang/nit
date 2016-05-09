@@ -924,7 +924,10 @@ class FlatBuffer
 		is_dirty = true
 		_bytelen = 0
 		_length = 0
-		if written then reset
+		if written then
+			_capacity = 16
+			reset
+		end
 	end
 
 	redef fun empty do return new Buffer
