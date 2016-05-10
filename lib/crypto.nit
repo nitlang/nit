@@ -183,6 +183,24 @@ redef class Text
 	end
 end
 
+redef class Bytes
+
+	# Returns `self` xored with `key`
+	#
+	# The key is cycled through until the `self` has been completely xored.
+	#
+	#     assert "goodmorning".to_bytes.xorcipher(" ".to_bytes) == "GOODMORNING".bytes
+	fun xorcipher(key: Bytes): Bytes do
+		var xored = new Bytes.with_capacity(self.length)
+
+		for i in self.length.times do
+			xored.add(self[i] ^ key[i % key.length])
+		end
+
+		return xored
+	end
+end
+
 redef class Int
 	# Generates the paces for each depth.
 	#
