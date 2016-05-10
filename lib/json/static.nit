@@ -439,6 +439,11 @@ redef class JsonParseError
 				"\"position\":{position.to_json}," +
 				"\"message\":{message.to_json}\}"
 	end
+
+	redef fun pretty_json_visit(buf, indents) do
+		buf.clear
+		buf.append(to_json)
+	end
 end
 
 redef class Position

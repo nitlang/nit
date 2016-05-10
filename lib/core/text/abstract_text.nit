@@ -1514,6 +1514,42 @@ abstract class Buffer
 	# In Buffers, the internal sequence of character is mutable
 	# Thus, `chars` can be used to modify the buffer.
 	redef fun chars: Sequence[Char] is abstract
+
+	# Appends `length` chars from `s` starting at index `from`
+	#
+	# ~~~nit
+	#	var b = new Buffer
+	#	b.append_substring("abcde", 1, 2)
+	#	assert b == "bc"
+	#	b.append_substring("vwxyz", 2, 3)
+	#	assert b == "bcxyz"
+	#	b.append_substring("ABCDE", 4, 300)
+	#	assert b == "bcxyzE"
+	#	b.append_substring("VWXYZ", 400, 1)
+	#	assert b == "bcxyzE"
+	# ~~~
+	fun append_substring(s: Text, from, length: Int) do
+		if from < 0 then
+			length += from
+			from = 0
+		end
+		var ln = s.length
+		if (length + from) > ln then length = ln - from
+		if length <= 0 then return
+		append_substring_impl(s, from, length)
+	end
+
+	# Unsafe version of `append_substring` for performance
+	#
+	# NOTE: Use only if sure about `from` and `length`, no checks
+	# or bound recalculation is done
+	fun append_substring_impl(s: Text, from, length: Int) do
+		var pos = from
+		for i in [0 .. length[ do
+			self.add s[pos]
+			pos += 1
+		end
+	end
 end
 
 # View for chars on Buffer objects, extends Sequence
@@ -1753,6 +1789,18 @@ redef class Char
 	fun is_surrogate: Bool do
 		var cp = code_point
 		return cp >= 0xD800 and cp <= 0xDFFF
+	end
+
+	# Is `self` a UTF-16 high surrogate ?
+	fun is_hi_surrogate: Bool do
+		var cp = code_point
+		return cp >= 0xD800 and cp <= 0xDBFF
+	end
+
+	# Is `self` a UTF-16 low surrogate ?
+	fun is_lo_surrogate: Bool do
+		var cp = code_point
+		return cp >= 0xDC00 and cp <= 0xDFFF
 	end
 
 	# Length of `self` in a UTF-8 String

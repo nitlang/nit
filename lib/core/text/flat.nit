@@ -411,7 +411,7 @@ abstract class FlatString
 
 		if from < 0 then
 			count += from
-			if count < 0 then return ""
+			if count <= 0 then return ""
 			from = 0
 		end
 
@@ -924,7 +924,10 @@ class FlatBuffer
 		is_dirty = true
 		_bytelen = 0
 		_length = 0
-		if written then reset
+		if written then
+			_capacity = 16
+			reset
+		end
 	end
 
 	redef fun empty do return new Buffer
@@ -1047,6 +1050,21 @@ class FlatBuffer
 		var r_items = new NativeString(byte_length)
 		its.copy_to(r_items, byte_length, bytefrom, 0)
 		return new FlatBuffer.with_infos(r_items, byte_length, byte_length, count)
+	end
+
+	redef fun append_substring_impl(s, from, length) do
+		if length <= 0 then return
+		if not s isa FlatText then
+			super
+			return
+		end
+		var bytest = s.char_to_byte_index(from)
+		var bytend = s.char_to_byte_index(from + length - 1)
+		var btln = bytend - bytest + 1
+		enlarge(btln + _bytelen)
+		s._items.copy_to(_items, btln, bytest, _bytelen)
+		_bytelen += btln
+		_length += length
 	end
 
 	redef fun reverse
@@ -1351,37 +1369,26 @@ redef class NativeString
 	#
 	# Very unsafe, make sure to have room for this char prior to calling this function.
 	private fun set_char_at(pos: Int, c: Char) do
-		if c.code_point < 128 then
-			self[pos] = c.code_point.to_b
+		var cp = c.code_point
+		if cp < 128 then
+			self[pos] = cp.to_b
 			return
 		end
 		var ln = c.u8char_len
-		native_set_char(pos, c, ln)
+		if ln == 2 then
+			self[pos] = (0xC0 | ((cp & 0x7C0) >> 6)).to_b
+			self[pos + 1] = (0x80 | (cp & 0x3F)).to_b
+		else if ln == 3 then
+			self[pos] = (0xE0 | ((cp & 0xF000) >> 12)).to_b
+			self[pos + 1] = (0x80 | ((cp & 0xFC0) >> 6)).to_b
+			self[pos + 2] = (0x80 | (cp & 0x3F)).to_b
+		else if ln == 4 then
+			self[pos] = (0xF0 | ((cp & 0x1C0000) >> 18)).to_b
+			self[pos + 1] = (0x80 | ((cp & 0x3F000) >> 12)).to_b
+			self[pos + 2] = (0x80 | ((cp & 0xFC0) >> 6)).to_b
+			self[pos + 3] = (0x80 | (cp & 0x3F)).to_b
+		end
 	end
-
-	private fun native_set_char(pos: Int, c: Char, ln: Int) `{
-		char* dst = self + pos;
-		switch(ln){
-			case 1:
-				dst[0] = c;
-				break;
-			case 2:
-				dst[0] = 0xC0 | ((c & 0x7C0) >> 6);
-				dst[1] = 0x80 | (c & 0x3F);
-				break;
-			case 3:
-				dst[0] = 0xE0 | ((c & 0xF000) >> 12);
-				dst[1] = 0x80 | ((c & 0xFC0) >> 6);
-				dst[2] = 0x80 | (c & 0x3F);
-				break;
-			case 4:
-				dst[0] = 0xF0 | ((c & 0x1C0000) >> 18);
-				dst[1] = 0x80 | ((c & 0x3F000) >> 12);
-				dst[2] = 0x80 | ((c & 0xFC0) >> 6);
-				dst[3] = 0x80 | (c & 0x3F);
-				break;
-		}
-	`}
 end
 
 redef class Int
