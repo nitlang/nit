@@ -1514,7 +1514,7 @@ redef class AAttrPropdef
 	# Evaluate and set the default value of the attribute in `recv`
 	private fun init_expr(v: NaiveInterpreter, recv: Instance)
 	do
-		if is_lazy then return
+		if is_lazy or is_optional then return
 		if has_value then
 			var f = v.new_frame(self, mreadpropdef.as(not null), [recv])
 			evaluate_expr(v, recv, f)
