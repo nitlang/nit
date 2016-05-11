@@ -79,6 +79,17 @@ class CalculatorContext
 		else if op == "C" then
 			clear
 			return
+
+		# Unary -
+		else if op == "-" then
+			if current == null then
+				if last_op_was_unary then clear
+				current = "-"
+				return
+			else if current == "-" then
+				current = null
+				return
+			end
 		end
 
 		# For all operators, apply pending operators
