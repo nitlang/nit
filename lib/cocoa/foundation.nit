@@ -37,7 +37,7 @@ extern class NSString in "ObjC" `{ NSString * `}
 	# Get an UTF8 encoded `char*` copy of `self`
 	fun utf8_string: NativeString in "ObjC" `{ return (char *)[self UTF8String]; `}
 
-	redef fun to_s do return utf8_string.to_s
+	redef fun to_s do return utf8_string.to_s_with_copy
 end
 
 redef class NativeString
