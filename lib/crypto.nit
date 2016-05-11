@@ -154,32 +154,23 @@ redef class Text
 		end
 		return arr.to_s
 	end
+end
+
+redef class Bytes
 
 	# Returns `self` xored with `key`
 	#
-	# The shortest of the two is cycled through until the longest has been
-	# completely xored.
+	# The key is cycled through until the `self` has been completely xored.
 	#
-	#     assert "goodmorning".xor(" ".to_bytes) == "GOODMORNING"
-	fun xor(key: SequenceRead[Byte]): Text do
-		var xored = new Bytes.with_capacity(bytelen.max(key.length))
+	#     assert "goodmorning".to_bytes.xorcipher(" ".to_bytes) == "GOODMORNING".bytes
+	fun xorcipher(key: Bytes): Bytes do
+		var xored = new Bytes.with_capacity(self.length)
 
-		var shortest: SequenceRead[Byte]
-		var longest: SequenceRead[Byte]
-
-		if key.length > self.length then
-			shortest = self.to_bytes
-			longest = key
-		else
-			shortest = key
-			longest = self.to_bytes
+		for i in self.length.times do
+			xored.add(self[i] ^ key[i % key.length])
 		end
 
-		for i in longest.length.times do
-			xored.add(longest[i] ^ shortest[i % shortest.length])
-		end
-
-		return xored.to_s
+		return xored
 	end
 end
 
