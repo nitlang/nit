@@ -51,13 +51,13 @@ class CalculatorWindow
 	private var context = new CalculatorContext
 
 	# Main window layout
-	private var layout = new VerticalLayout(parent=self)
+	var layout = new VerticalLayout(parent=self)
 
 	# Main display, at the top of the screen
 	private var display = new TextInput(parent=layout)
 
 	# Maps operators as `String` to their `Button`
-	private var buttons = new HashMap[String, Button]
+	var buttons = new HashMap[String, Button]
 
 	init
 	do
@@ -66,8 +66,8 @@ class CalculatorWindow
 		# All the button labels, row by row
 		var rows = [["7", "8", "9", "+"],
 		            ["4", "5", "6", "-"],
-		            ["1", "2", "3", "*"],
-		            ["0", ".", "C", "/"],
+		            ["1", "2", "3", "×"],
+		            ["0", ".", "C", "÷"],
 		            ["="]]
 
 		for row in rows do
@@ -94,9 +94,9 @@ class CalculatorWindow
 			else if op.is_numeric then
 				var n = op.to_i
 				context.push_digit n
-			else
+			else if op != null then
 				buttons["."].enabled = true
-				context.push_op op.chars.first
+				context.push_op op
 			end
 
 			display.text = context.display_text

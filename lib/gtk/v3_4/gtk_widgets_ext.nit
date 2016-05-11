@@ -131,8 +131,8 @@ extern class GtkProgressBar `{GtkProgressBar *`}
 		gtk_progress_bar_set_show_text(self, show);
 	`}
 
-	fun text: String import NativeString.to_s `{
-		return NativeString_to_s((char *)gtk_progress_bar_get_text(self));
+	fun text: String import NativeString.to_s_with_copy `{
+		return NativeString_to_s_with_copy((char *)gtk_progress_bar_get_text(self));
 	`}
 
 	fun text=(value: String) import String.to_cstring `{

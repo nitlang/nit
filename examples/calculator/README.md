@@ -5,6 +5,9 @@ Portable calculator built using _app.nit_
 * `calculator_logic` defines `CalculatorContext` with all the business logic of a calculator.
   It takes as input operations and numbers, and outputs the text to display.
 * `calculator` implements the portable graphical interface using the _app.nit_ framework
+* `scientific_calculator` refines `calculator` to add scientific operations.
+* `android_calculator` refines `calculator` to get a nicer aesthetic on Android.
+* `ios_calculator` refines `calculator` to get a nicer aesthetic on iOS.
 * `calculator_test` test `CalculatorContext` as a black box.
 
 # Compilation
@@ -29,3 +32,11 @@ Portable calculator built using _app.nit_
 	make bin/android.app
 	ios-sim launch bin/calculator.app
 	~~~
+
+# Screenshots
+
+![Scientific calculator on Linux with GTK+](doc/linux-scientific.png)
+
+![Scientific calculator on Android](doc/android-scientific.png)
+
+![Scientific calculator on iOS](doc/ios-scientific.png)
