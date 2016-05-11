@@ -305,8 +305,9 @@ redef universal Int super Sqlite3Data end
 
 redef universal Float super Sqlite3Data end
 
-redef class String
-	super Sqlite3Data
+redef class String super Sqlite3Data end
+
+redef class Text
 
 	# Return `self` between `'`s, escaping `\` and `'`
 	#
@@ -314,6 +315,24 @@ redef class String
 	fun to_sql_string: String
 	do
 		return "'{self.replace('\\', "\\\\").replace('\'', "''")}'"
+	end
+
+	# Format the date represented by `self` into an escaped string for SQLite
+	#
+	# `self` must be composed of 1 to 3 integers separated by '-'.
+	# An incompatible format will result in an invalid date string.
+	#
+	#     assert "2016-5-1".to_sql_date_string == "'2016-05-01'"
+	#     assert "2016".to_sql_date_string == "'2016-01-01'"
+	fun to_sql_date_string: String
+	do
+		var parts = self.split("-")
+		for i in [parts.length .. 3[ do parts[i] = "1"
+
+		var year = parts[0].justify(4, 1.0, '0')
+		var month = parts[1].justify(2, 1.0, '0')
+		var day = parts[2].justify(2, 1.0, '0')
+		return "{year}-{month}-{day}".to_sql_string
 	end
 end
 
