@@ -402,7 +402,8 @@ class Array[E]
 	do
 		var c = _capacity
 		if cap <= c then return
-		while c <= cap do c = c * 2 + 2
+		if c < 16 then c = 16
+		while c <= cap do c = c * 2
 		var a = new NativeArray[E](c)
 		if _capacity > 0 then _items.copy_to(a, _length)
 		_items = a
