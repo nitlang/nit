@@ -51,13 +51,13 @@ class CalculatorWindow
 	private var context = new CalculatorContext
 
 	# Main window layout
-	private var layout = new VerticalLayout(parent=self)
+	var layout = new VerticalLayout(parent=self)
 
 	# Main display, at the top of the screen
 	private var display = new TextInput(parent=layout)
 
 	# Maps operators as `String` to their `Button`
-	private var buttons = new HashMap[String, Button]
+	var buttons = new HashMap[String, Button]
 
 	init
 	do

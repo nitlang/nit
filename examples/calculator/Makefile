@@ -7,6 +7,10 @@ bin/calculator: $(shell ${NITLS} -M src/calculator.nit linux) ${NITC}
 	mkdir -p bin
 	${NITC} -o $@ src/calculator.nit -m linux
 
+bin/scientific_calculator: $(shell ${NITLS} -M src/scientific_calculator.nit linux) ${NITC}
+	mkdir -p bin
+	${NITC} -o $@ src/scientific_calculator.nit -m linux
+
 # ---
 # Android
 
