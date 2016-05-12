@@ -533,7 +533,15 @@ redef class Serializable
 		return stream.to_s
 	end
 
-	private fun accept_json_serializer(v: JsonSerializer)
+	# Refinable service to customize the serialization of this class to JSON
+	#
+	# This method can be refined to customize the serialization by either
+	# writing pure JSON directly on the stream `v.stream` or
+	# by using other services of `JsonSerializer`.
+	#
+	# Most of the time, it is preferable to refine the method `core_serialize_to`
+	# which is used by all the serialization engines, not just JSON.
+	protected fun accept_json_serializer(v: JsonSerializer)
 	do
 		var id = v.cache.new_id_for(self)
 		v.stream.write "\{"
