@@ -107,6 +107,7 @@ module serialization
 import ::serialization::caching
 private import ::serialization::engine_tools
 private import static
+private import string_parser
 
 # Serializer of Nit objects to Json string.
 class JsonSerializer
