@@ -93,6 +93,10 @@
 # var deserializer = new JsonDeserializer(json_code)
 #
 # var meet = deserializer.deserialize
+#
+# # Check for errors
+# assert deserializer.errors.is_empty
+#
 # assert meet isa MeetupConfig
 # assert meet.description == "My Awesome Meetup"
 # assert meet.max_participants == null
