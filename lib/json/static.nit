@@ -31,6 +31,9 @@ private import json_lexer
 interface Jsonable
 	# Encode `self` in JSON.
 	#
+	# This is a recursive method which can be refined by any subclasses.
+	# To write any `Serializable` object to JSON, see `serialize_to_json`.
+	#
 	# SEE: `append_json`
 	fun to_json: String is abstract
 
