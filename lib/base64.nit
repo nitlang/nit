@@ -78,15 +78,22 @@ redef class NativeString
 	# Decodes `self` from base64
 	#
 	#      assert "c3RyaW5n".decode_base64 == "string"
+	#      assert "c3Rya\nW5n".decode_base64 == "string"
 	#
 	# REQUIRE: `length % 4 == 0`
 	private fun decode_base64(length: Int, padding: nullable Byte): Bytes do
 		if padding == null then padding = '='.ascii
 		var inv = once inverted_base64_chars
 		if length == 0 then return new Bytes.empty
-		assert length % 4 == 0 else print "base64::decode_base64 only supports strings of length multiple of 4"
 
-		var bytes = self
+		# Remove non-base64 chars
+		var bytes = new Bytes.with_capacity(length)
+		for k in [0 .. length[ do
+			var byte = self[k]
+			if inv.has_key(byte) or byte == padding then bytes.add(byte)
+		end
+		length = bytes.length
+
 		var steps = length / 4
 		var result_length = steps * 3
 
