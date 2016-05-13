@@ -266,14 +266,14 @@ class TnitterREST
 			db.close
 
 			var response = new HttpResponse(200)
-			response.body = posts.to_json_string
+			response.body = posts.serialize_to_json
 			return response
 		end
 
 		# Format not recognized
 		var error = new Error("Bad Request")
 		var response = new HttpResponse(400)
-		response.body = error.to_json_string
+		response.body = error.serialize_to_json
 		return response
 	end
 end
