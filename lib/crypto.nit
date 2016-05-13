@@ -172,6 +172,24 @@ redef class Bytes
 
 		return xored
 	end
+
+	# Computes the edit/hamming distance of two sequences of bytes.
+	#
+	#     assert "this is a test".to_bytes.hamming_distance("wokka wokka!!!".bytes) == 37
+	#     assert "this is a test".to_bytes.hamming_distance("this is a test".bytes) == 0
+	#
+	fun hamming_distance(other: SequenceRead[Byte]): Int do
+		var diff = 0
+		for idx in self.length.times do
+			var res_byte = self[idx] ^ other[idx]
+			for bit in [0..8[ do
+				if res_byte & 1u8 == 1u8 then diff += 1
+				res_byte = res_byte >> 1
+			end
+		end
+		return diff
+	end
+
 end
 
 redef class Int
