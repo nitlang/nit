@@ -19,8 +19,7 @@ end
 
 import tnitter_app
 
-import android::ui
-import android::http_request
+import android
 import android::portrait
 
 redef class LabelAuthor
