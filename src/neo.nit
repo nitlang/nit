@@ -365,9 +365,14 @@ class NeoModel
 		node.labels.add "MEntity"
 		node.labels.add model_name
 		node["name"] = mentity.name
-		if mentity.mdoc != null then
-			node["mdoc"] = new JsonArray.from(mentity.mdoc.content)
-			node["mdoc_location"] = mentity.mdoc.location.to_s
+		if not mentity isa MSignature then
+			#FIXME: MSignature is a MEntity, but has no model :/
+			node["location"] = mentity.location.to_s
+		end
+		var mdoc = mentity.mdoc
+		if mdoc != null then
+			node["mdoc"] = new JsonArray.from(mdoc.content)
+			node["mdoc_location"] = mdoc.location.to_s
 		end
 		return node
 	end
@@ -391,7 +396,8 @@ class NeoModel
 		if m isa MPackage then return m
 
 		assert node.labels.has("MPackage")
-		var mpackage = new MPackage(node["name"].to_s, model)
+		var location = to_location(node["location"].to_s)
+		var mpackage = new MPackage(node["name"].to_s, model, location)
 		mentities[node.id.as(Int)] = mpackage
 		set_doc(node, mpackage)
 		mpackage.root = to_mgroup(model, node.out_nodes("ROOT").first)
@@ -424,13 +430,14 @@ class NeoModel
 		if m isa MGroup then return m
 
 		assert node.labels.has("MGroup")
+		var location = to_location(node["location"].to_s)
 		var mpackage = to_mpackage(model, node.out_nodes("PROJECT").first)
 		var parent: nullable MGroup = null
 		var out = node.out_nodes("PARENT")
 		if not out.is_empty then
 			parent = to_mgroup(model, out.first)
 		end
-		var mgroup = new MGroup(node["name"].to_s, mpackage, parent)
+		var mgroup = new MGroup(node["name"].to_s, location, mpackage, parent)
 		mentities[node.id.as(Int)] = mgroup
 		set_doc(node, mgroup)
 		return mgroup
@@ -440,7 +447,6 @@ class NeoModel
 	private fun mmodule_node(mmodule: MModule): NeoNode do
 		var node = make_node(mmodule)
 		node.labels.add "MModule"
-		node["location"] = mmodule.location.to_s
 		for parent in mmodule.in_importation.direct_greaters do
 			node.out_edges.add(new NeoEdge(node, "IMPORTS", to_node(parent)))
 		end
@@ -504,6 +510,7 @@ class NeoModel
 		assert node.labels.has("MClass")
 		var mmodule = to_mmodule(model, node.in_nodes("INTRODUCES").first)
 		var name = node["name"].to_s
+		var location = to_location(node["location"].to_s)
 		var kind = to_kind(node["kind"].to_s)
 		var visibility = to_visibility(node["visibility"].to_s)
 		var parameter_names = new Array[String]
@@ -512,7 +519,7 @@ class NeoModel
 				parameter_names.add e.to_s
 			end
 		end
-		var mclass = new MClass(mmodule, name, parameter_names, kind, visibility)
+		var mclass = new MClass(mmodule, name, location, parameter_names, kind, visibility)
 		mentities[node.id.as(Int)] = mclass
 		set_doc(node, mclass)
 		return mclass
@@ -522,7 +529,6 @@ class NeoModel
 	private fun mclassdef_node(mclassdef: MClassDef): NeoNode do
 		var node = make_node(mclassdef)
 		node.labels.add "MClassDef"
-		node["location"] = mclassdef.location.to_s
 		node.out_edges.add(new NeoEdge(node, "BOUNDTYPE", to_node(mclassdef.bound_mtype)))
 		node.out_edges.add(new NeoEdge(node, "MCLASS", to_node(mclassdef.mclass)))
 		for mproperty in mclassdef.intro_mproperties do
@@ -590,18 +596,19 @@ class NeoModel
 		assert node.labels.has("MProperty")
 		var intro_mclassdef = to_mclassdef(model, node.out_nodes("INTRO_CLASSDEF").first)
 		var name = node["name"].to_s
+		var location = to_location(node["location"].to_s)
 		var visibility = to_visibility(node["visibility"].to_s)
 		var mprop: nullable MProperty = null
 		if node.labels.has("MMethod") then
-			mprop = new MMethod(intro_mclassdef, name, visibility)
+			mprop = new MMethod(intro_mclassdef, name, location, visibility)
 			mprop.is_init = node["is_init"].as(Bool)
 		else if node.labels.has("MAttribute") then
-			mprop = new MAttribute(intro_mclassdef, name, visibility)
+			mprop = new MAttribute(intro_mclassdef, name, location, visibility)
 		else if node.labels.has("MVirtualTypeProp") then
-			mprop = new MVirtualTypeProp(intro_mclassdef, name, visibility)
+			mprop = new MVirtualTypeProp(intro_mclassdef, name, location, visibility)
 		else if node.labels.has("MInnerClass") then
 			var inner = to_mclass(model, node.out_nodes("NESTS").first)
-			mprop = new MInnerClass(intro_mclassdef, name, visibility, inner)
+			mprop = new MInnerClass(intro_mclassdef, name, location, visibility, inner)
 		end
 		if mprop == null then
 			print "not yet implemented to_mproperty for {node.labels.join(",")}"
@@ -616,7 +623,6 @@ class NeoModel
 	private fun mpropdef_node(mpropdef: MPropDef): NeoNode do
 		var node = make_node(mpropdef)
 		node.labels.add "MPropDef"
-		node["location"] = mpropdef.location.to_s
 		node.out_edges.add(new NeoEdge(node, "DEFINES", to_node(mpropdef.mproperty)))
 		if mpropdef isa MMethodDef then
 			node.labels.add "MMethodDef"
