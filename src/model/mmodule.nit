@@ -81,7 +81,13 @@ class MModule
 	var mgroup: nullable MGroup
 
 	# The path of the module source, if any
-	var filepath: nullable String = null is writable
+	#
+	# safe alias to `location.file.filepath`
+	fun filepath: nullable String do
+		var res = self.location.file
+		if res == null then return null
+		return res.filename
+	end
 
 	# The package of the module if any
 	# Safe alias for `mgroup.mpackage`

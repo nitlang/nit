@@ -397,7 +397,6 @@ redef class ModelBuilder
 
 		var loc = new Location.opaque_file(path)
 		var res = new MModule(model, mgroup, pn, loc)
-		res.filepath = path
 
 		identified_modules_by_path[rp] = res
 		identified_modules_by_path[path] = res
@@ -507,7 +506,6 @@ redef class ModelBuilder
 			mdoc.original_mentity = mgroup
 		end
 
-		mgroup.filepath = dirpath
 		mgroups[rdp] = mgroup
 		return mgroup
 	end
