@@ -130,7 +130,14 @@ redef class Location
 			messages = ms
 		end
 		ms.add m
+		var s = file
+		if s != null then s.messages.add m
 	end
+end
+
+redef class SourceFile
+	# Errors and warnings associated to the whole source.
+	var messages = new Array[Message]
 end
 
 # Global context for tools
