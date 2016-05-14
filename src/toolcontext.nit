@@ -58,6 +58,13 @@ class Message
 	# * enclose identifiers, keywords and pieces of code with back-quotes.
 	var text: String
 
+	# The severity level
+	#
+	# * 0 is advices (see `ToolContext::advice`)
+	# * 1 is warnings (see `ToolContext::warning`)
+	# * 2 is errors (see `ToolContext::error`)
+	var level: Int
+
 	# Comparisons are made on message locations.
 	redef fun <(other: OTHER): Bool do
 		if location == null then return true
@@ -225,7 +232,7 @@ class ToolContext
 	# Return the message (to add information)
 	fun error(l: nullable Location, s: String): Message
 	do
-		var m = new Message(l,null,s)
+		var m = new Message(l, null, s, 2)
 		if messages.has(m) then return m
 		if l != null then l.add_message m
 		messages.add m
@@ -260,7 +267,7 @@ class ToolContext
 		if opt_warning.value.has("no-{tag}") then return null
 		if not opt_warning.value.has(tag) and opt_warn.value == 0 then return null
 		if is_warning_blacklisted(l, tag) then return null
-		var m = new Message(l, tag, text)
+		var m = new Message(l, tag, text, 1)
 		if messages.has(m) then return null
 		if l != null then l.add_message m
 		messages.add m
@@ -289,7 +296,7 @@ class ToolContext
 		if opt_warning.value.has("no-{tag}") then return null
 		if not opt_warning.value.has(tag) and opt_warn.value <= 1 then return null
 		if is_warning_blacklisted(l, tag) then return null
-		var m = new Message(l, tag, text)
+		var m = new Message(l, tag, text, 0)
 		if messages.has(m) then return null
 		if l != null then l.add_message m
 		messages.add m
