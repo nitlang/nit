@@ -297,15 +297,45 @@ private class NitunitDecorator
 		# Try to parse code blocks
 		var ast = executor.toolcontext.parse_something(code)
 
+		var mdoc = executor.mdoc
+		assert mdoc != null
+
 		# Skip pure comments
 		if ast isa TComment then return
 
+		# The location is computed according to the starts of the mdoc and the block
+		# Note, the following assumes that all the comments of the mdoc are correctly aligned.
+		var loc = block.block.location
+		var line_offset = loc.line_start + mdoc.location.line_start - 2
+		var column_offset = loc.column_start + mdoc.location.column_start
+		# Hack to handle precise location in blocks
+		# TODO remove when markdown is more reliable
+		if block isa BlockFence then
+			# Skip the starting fence
+			line_offset += 1
+		else
+			# Account a standard 4 space indentation
+			column_offset += 4
+		end
+
 		# We want executable code
 		if not (ast isa AModule or ast isa ABlockExpr or ast isa AExpr) then
-			var message = ""
-			if ast isa AError then message = " At {ast.location}: {ast.message}."
-			executor.toolcontext.warning(executor.mdoc.location, "invalid-block", "Error: there is a block of invalid Nit code, thus not considered a nitunit. To suppress this warning, enclose the block with a fence tagged `nitish` or `raw` (see `man nitdoc`).{message}")
-			executor.failures.add("{executor.mdoc.location}: Invalid block of code.{message}")
+			var message
+			var l = ast.location
+			# Get real location of the node (or error)
+			var location = new Location(mdoc.location.file,
+				l.line_start + line_offset,
+				l.line_end + line_offset,
+				l.column_start + column_offset,
+				l.column_end + column_offset)
+			if ast isa AError then
+				message = ast.message
+			else
+				message = "Error: Invalid Nit code."
+			end
+
+			executor.toolcontext.warning(location, "invalid-block", "{message} To suppress this message, enclose the block with a fence tagged `nitish` or `raw` (see `man nitdoc`).")
+			executor.failures.add("{location}: {message}")
 			return
 		end
 

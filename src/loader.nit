@@ -610,6 +610,11 @@ redef class ModelBuilder
 		var keep = new Array[String]
 		var res = new Array[String]
 		for a in args do
+			var stat = a.to_path.stat
+			if stat != null and stat.is_dir then
+				res.add a
+				continue
+			end
 			var l = identify_module(a)
 			if l == null then
 				keep.add a
