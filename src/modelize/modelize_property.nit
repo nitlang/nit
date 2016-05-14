@@ -836,9 +836,7 @@ redef class AMethPropdef
 				return
 			end
 		else
-			if mprop.is_broken then
-				return
-			end
+			if mprop.is_broken then return
 			if not self.check_redef_keyword(modelbuilder, mclassdef, n_kwredef, not self isa AMainMethPropdef, mprop) then return
 			check_redef_property_visibility(modelbuilder, self.n_visibility, mprop)
 		end
@@ -1197,8 +1195,12 @@ redef class AAttrPropdef
 		if mreadprop == null then
 			var mvisibility = new_property_visibility(modelbuilder, mclassdef, self.n_visibility)
 			mreadprop = new MMethod(mclassdef, readname, self.location, mvisibility)
-			if not self.check_redef_keyword(modelbuilder, mclassdef, n_kwredef, false, mreadprop) then return
+			if not self.check_redef_keyword(modelbuilder, mclassdef, n_kwredef, false, mreadprop) then
+				mreadprop.is_broken = true
+				return
+			end
 		else
+			if mreadprop.is_broken then return
 			if not self.check_redef_keyword(modelbuilder, mclassdef, n_kwredef, true, mreadprop) then return
 			check_redef_property_visibility(modelbuilder, self.n_visibility, mreadprop)
 		end
@@ -1296,9 +1298,13 @@ redef class AAttrPropdef
 				if mvisibility > protected_visibility then mvisibility = protected_visibility
 			end
 			mwriteprop = new MMethod(mclassdef, writename, self.location, mvisibility)
-			if not self.check_redef_keyword(modelbuilder, mclassdef, nwkwredef, false, mwriteprop) then return
+			if not self.check_redef_keyword(modelbuilder, mclassdef, nwkwredef, false, mwriteprop) then
+				mwriteprop.is_broken = true
+				return
+			end
 			mwriteprop.deprecation = mreadprop.deprecation
 		else
+			if mwriteprop.is_broken then return
 			if not self.check_redef_keyword(modelbuilder, mclassdef, nwkwredef or else n_kwredef, true, mwriteprop) then return
 			if atwritable != null then
 				check_redef_property_visibility(modelbuilder, atwritable.n_visibility, mwriteprop)
@@ -1608,6 +1614,7 @@ redef class ATypePropdef
 				break
 			end
 		else
+			if mprop.is_broken then return
 			assert mprop isa MVirtualTypeProp
 			check_redef_property_visibility(modelbuilder, self.n_visibility, mprop)
 		end
