@@ -321,6 +321,7 @@ redef class Catalog
 			res.add "<li>{errors} errors</li>\n"
 		end
 		res.add "<li>{warnings[mpackage]} warnings</li>\n"
+		res.add "<li>{documentation_score[mpackage]}% documented</li>\n"
 		res.add "</ul>\n"
 
 		res.add "<h3>Tags</h3>\n"
@@ -484,6 +485,7 @@ redef class Catalog
 		res.add "<th data-field=\"score\" data-sortable=\"true\">score</th>\n"
 		res.add "<th data-field=\"errors\" data-sortable=\"true\">errors</th>\n"
 		res.add "<th data-field=\"warnings\" data-sortable=\"true\">warnings</th>\n"
+		res.add "<th data-field=\"doc\" data-sortable=\"true\">doc</th>\n"
 		res.add "</tr></thead>"
 		for p in mpackages do
 			res.add "<tr>"
@@ -505,6 +507,7 @@ redef class Catalog
 			res.add "<td>{score[p]}</td>"
 			res.add "<td>{errors[p]}</td>"
 			res.add "<td>{warnings[p]}</td>"
+			res.add "<td>{documentation_score[p]}</td>"
 			res.add "</tr>\n"
 		end
 		res.add "</table>\n"
