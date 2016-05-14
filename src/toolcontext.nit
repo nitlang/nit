@@ -264,12 +264,12 @@ class ToolContext
 	# Return the message (to add information) or null if the warning is disabled
 	fun warning(l: nullable Location, tag: String, text: String): nullable Message
 	do
-		if opt_warning.value.has("no-{tag}") then return null
-		if not opt_warning.value.has(tag) and opt_warn.value == 0 then return null
 		if is_warning_blacklisted(l, tag) then return null
 		var m = new Message(l, tag, text, 1)
 		if messages.has(m) then return null
 		if l != null then l.add_message m
+		if opt_warning.value.has("no-{tag}") then return null
+		if not opt_warning.value.has(tag) and opt_warn.value == 0 then return null
 		messages.add m
 		warning_count = warning_count + 1
 		if opt_stop_on_first_error.value then check_errors
@@ -293,12 +293,12 @@ class ToolContext
 	# Return the message (to add information) or null if the warning is disabled
 	fun advice(l: nullable Location, tag: String, text: String): nullable Message
 	do
-		if opt_warning.value.has("no-{tag}") then return null
-		if not opt_warning.value.has(tag) and opt_warn.value <= 1 then return null
 		if is_warning_blacklisted(l, tag) then return null
 		var m = new Message(l, tag, text, 0)
 		if messages.has(m) then return null
 		if l != null then l.add_message m
+		if opt_warning.value.has("no-{tag}") then return null
+		if not opt_warning.value.has(tag) and opt_warn.value <= 1 then return null
 		messages.add m
 		warning_count = warning_count + 1
 		if opt_stop_on_first_error.value then check_errors
