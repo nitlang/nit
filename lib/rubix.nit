@@ -8,6 +8,20 @@
 # You  are  allowed  to  redistribute it and sell it, alone or is a part of
 # another product.
 
+# Rubix-cube modelization library
+#
+# As for now the library supports basic representation of a Rubix-cube
+# The library is built for speed, most operations cost no allocations to perform.
+# This does however mean that the library is NOT thread-safe and should be handled
+# with the appropriate mutual-exclusion mechanisms to avoid memory corruption
+# or unintended side-effects on a single cube.
+#
+# The library supports the singmaster notation as a way to perform operations
+# on a Rubix cube.
+#
+# No solver is (yet) provided along with the library.
+module rubix
+
 import console
 
 private fun array1d_copy_to(fromarr: Array[Int], oarr: Array[Int]) do
