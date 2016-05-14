@@ -110,58 +110,58 @@ Names:
   base_simple3: 12 (1.06%)
 
 # All entities
-base_simple3	MPackage	
-base_simple3>	MGroup	
-base_simple3::base_simple3	MModule	
-base_simple3::Object	MClass	
-base_simple3$Object	MClassDef	
-base_simple3::Object::init	MMethod	
-base_simple3$Object$init	MMethodDef	
-base_simple3::Bool	MClass	
-base_simple3$Bool	MClassDef	
-base_simple3::Int	MClass	
-base_simple3$Int	MClassDef	
-base_simple3::Int::output	MMethod	
-base_simple3$Int$output	MMethodDef	
-base_simple3::A	MClass	
-base_simple3$A	MClassDef	
-base_simple3$A$Object::init	MMethodDef	
-base_simple3::A::run	MMethod	
-base_simple3$A$run	MMethodDef	
-base_simple3::B	MClass	
-base_simple3$B	MClassDef	
-base_simple3::base_simple3::B::_val	MAttribute	
-base_simple3$B$_val	MAttributeDef	
-base_simple3::B::val	MMethod	
-base_simple3$B$val	MMethodDef	
-base_simple3::B::val=	MMethod	
-base_simple3$B$val=	MMethodDef	
-base_simple3::B::init	MMethod	
-base_simple3$B$init	MMethodDef	
-base_simple3::B::run	MMethod	
-base_simple3$B$run	MMethodDef	
-base_simple3::C	MClass	
-base_simple3$C	MClassDef	
-base_simple3::base_simple3::C::_val1	MAttribute	
-base_simple3$C$_val1	MAttributeDef	
-base_simple3::C::val1	MMethod	
-base_simple3$C$val1	MMethodDef	
-base_simple3::C::val1=	MMethod	
-base_simple3$C$val1=	MMethodDef	
-base_simple3::base_simple3::C::_val2	MAttribute	
-base_simple3$C$_val2	MAttributeDef	
-base_simple3::C::val2	MMethod	
-base_simple3$C$val2	MMethodDef	
-base_simple3::C::val2=	MMethod	
-base_simple3$C$val2=	MMethodDef	
-base_simple3$C$Object::init	MMethodDef	
-base_simple3::Sys	MClass	
-base_simple3$Sys	MClassDef	
-base_simple3::Sys::foo	MMethod	
-base_simple3$Sys$foo	MMethodDef	
-base_simple3::Sys::bar	MMethod	
-base_simple3$Sys$bar	MMethodDef	
-base_simple3::Sys::baz	MMethod	
-base_simple3$Sys$baz	MMethodDef	
-base_simple3::Sys::main	MMethod	
-base_simple3$Sys$main	MMethodDef	
+base_simple3	MPackage	base_simple3.nit	
+base_simple3>	MGroup	base_simple3.nit	
+base_simple3::base_simple3	MModule	base_simple3.nit:17,1--66,13	
+base_simple3::Object	MClass	base_simple3.nit:19,1--20,3	
+base_simple3$Object	MClassDef	base_simple3.nit:19,1--20,3	
+base_simple3::Object::init	MMethod	base_simple3.nit:19,1--20,3	
+base_simple3$Object$init	MMethodDef	base_simple3.nit:19,1--20,3	
+base_simple3::Bool	MClass	base_simple3.nit:22,1--23,3	
+base_simple3$Bool	MClassDef	base_simple3.nit:22,1--23,3	
+base_simple3::Int	MClass	base_simple3.nit:25,1--27,3	
+base_simple3$Int	MClassDef	base_simple3.nit:25,1--27,3	
+base_simple3::Int::output	MMethod	base_simple3.nit:26,2--21	
+base_simple3$Int$output	MMethodDef	base_simple3.nit:26,2--21	
+base_simple3::A	MClass	base_simple3.nit:29,1--32,3	
+base_simple3$A	MClassDef	base_simple3.nit:29,1--32,3	
+base_simple3$A$Object::init	MMethodDef	base_simple3.nit:30,2--17	
+base_simple3::A::run	MMethod	base_simple3.nit:31,2--20	
+base_simple3$A$run	MMethodDef	base_simple3.nit:31,2--20	
+base_simple3::B	MClass	base_simple3.nit:34,1--42,3	
+base_simple3$B	MClassDef	base_simple3.nit:34,1--42,3	
+base_simple3::base_simple3::B::_val	MAttribute	base_simple3.nit:35,2--13	
+base_simple3$B$_val	MAttributeDef	base_simple3.nit:35,2--13	
+base_simple3::B::val	MMethod	base_simple3.nit:35,2--13	
+base_simple3$B$val	MMethodDef	base_simple3.nit:35,2--13	
+base_simple3::B::val=	MMethod	base_simple3.nit:35,2--13	
+base_simple3$B$val=	MMethodDef	base_simple3.nit:35,2--13	
+base_simple3::B::init	MMethod	base_simple3.nit:36,2--40,4	
+base_simple3$B$init	MMethodDef	base_simple3.nit:36,2--40,4	
+base_simple3::B::run	MMethod	base_simple3.nit:41,2--22	
+base_simple3$B$run	MMethodDef	base_simple3.nit:41,2--22	
+base_simple3::C	MClass	base_simple3.nit:44,1--47,3	
+base_simple3$C	MClassDef	base_simple3.nit:44,1--47,3	
+base_simple3::base_simple3::C::_val1	MAttribute	base_simple3.nit:45,2--14	
+base_simple3$C$_val1	MAttributeDef	base_simple3.nit:45,2--14	
+base_simple3::C::val1	MMethod	base_simple3.nit:45,2--14	
+base_simple3$C$val1	MMethodDef	base_simple3.nit:45,2--14	
+base_simple3::C::val1=	MMethod	base_simple3.nit:45,2--14	
+base_simple3$C$val1=	MMethodDef	base_simple3.nit:45,2--14	
+base_simple3::base_simple3::C::_val2	MAttribute	base_simple3.nit:46,2--19	
+base_simple3$C$_val2	MAttributeDef	base_simple3.nit:46,2--19	
+base_simple3::C::val2	MMethod	base_simple3.nit:46,2--19	
+base_simple3$C$val2	MMethodDef	base_simple3.nit:46,2--19	
+base_simple3::C::val2=	MMethod	base_simple3.nit:46,2--19	
+base_simple3$C$val2=	MMethodDef	base_simple3.nit:46,2--19	
+base_simple3$C$Object::init	MMethodDef	base_simple3.nit:44,1--47,3	
+base_simple3::Sys	MClass	base_simple3.nit:49,1--19	
+base_simple3$Sys	MClassDef	base_simple3.nit:49,1--19	
+base_simple3::Sys::foo	MMethod	base_simple3.nit:49,1--19	
+base_simple3$Sys$foo	MMethodDef	base_simple3.nit:49,1--19	
+base_simple3::Sys::bar	MMethod	base_simple3.nit:50,1--27	
+base_simple3$Sys$bar	MMethodDef	base_simple3.nit:50,1--27	
+base_simple3::Sys::baz	MMethod	base_simple3.nit:51,1--24	
+base_simple3$Sys$baz	MMethodDef	base_simple3.nit:51,1--24	
+base_simple3::Sys::main	MMethod	base_simple3.nit:53,1--66,13	
+base_simple3$Sys$main	MMethodDef	base_simple3.nit:53,1--66,13	

@@ -34,6 +34,8 @@ class MPackage
 	# The model of the package
 	redef var model: Model
 
+	redef var location
+
 	# The root of the group tree
 	var root: nullable MGroup = null is writable
 
@@ -66,6 +68,8 @@ class MGroup
 	# empty name for a default group in a single-module package
 	redef var name: String
 
+	redef var location
+
 	# The enclosing package
 	var mpackage: MPackage
 
@@ -94,7 +98,14 @@ class MGroup
 	fun is_root: Bool do return mpackage.root == self
 
 	# The filepath (usually a directory) of the group, if any
-	var filepath: nullable String = null is writable
+	#
+	# safe alias to `location.file.filename`
+	fun filepath: nullable String do
+		var res
+		res = self.location.file
+		if res == null then return null
+		return res.filename
+	end
 
 	init
 	do

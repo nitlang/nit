@@ -285,8 +285,9 @@ redef class MModule
 			if name == "Bool" and self.model.get_mclasses_by_name("Object") != null then
 				# Bool is injected because it is needed by engine to code the result
 				# of the implicit casts.
-				var c = new MClass(self, name, null, enum_kind, public_visibility)
-				var cladef = new MClassDef(self, c.mclass_type, new Location(null, 0,0,0,0))
+				var loc = model.no_location
+				var c = new MClass(self, name, loc, null, enum_kind, public_visibility)
+				var cladef = new MClassDef(self, c.mclass_type, loc)
 				cladef.set_supertypes([object_type])
 				cladef.add_in_hierarchy
 				return c
@@ -385,6 +386,8 @@ class MClass
 	# The short name of the class
 	# In Nit, the name of a class cannot evolve in refinements
 	redef var name
+
+	redef var location
 
 	# The canonical name of the class
 	#
@@ -588,8 +591,7 @@ class MClassDef
 	# ENSURE: `bound_mtype.mclass == self.mclass`
 	var bound_mtype: MClassType
 
-	# The origin of the definition
-	var location: Location
+	redef var location: Location
 
 	# Internal name combining the module and the class
 	# Example: "mymodule$MyClass"
@@ -1165,6 +1167,8 @@ class MClassType
 
 	redef fun model do return self.mclass.intro_mmodule.model
 
+	redef fun location do return mclass.location
+
 	# TODO: private init because strongly bounded to its mclass. see `mclass.mclass_type`
 
 	# The formal arguments of the type
@@ -1370,6 +1374,8 @@ class MVirtualType
 	# Its the definitions of this property that determine the bound or the virtual type.
 	var mproperty: MVirtualTypeProp
 
+	redef fun location do return mproperty.location
+
 	redef fun model do return self.mproperty.intro_mclassdef.mmodule.model
 
 	redef fun lookup_bound(mmodule: MModule, resolved_receiver: MType): MType
@@ -1500,6 +1506,8 @@ class MParameterType
 
 	redef fun model do return self.mclass.intro_mmodule.model
 
+	redef fun location do return mclass.location
+
 	# The position of the parameter (0 for the first parameter)
 	# FIXME: is `position` a better name?
 	var rank: Int
@@ -1624,6 +1632,8 @@ abstract class MProxyType
 	super MType
 	# The base type
 	var mtype: MType
+
+	redef fun location do return mtype.location
 
 	redef fun model do return self.mtype.model
 	redef fun need_anchor do return mtype.need_anchor
@@ -1951,6 +1961,8 @@ abstract class MProperty
 	# The (short) name of the property
 	redef var name
 
+	redef var location
+
 	# The canonical name of the property.
 	#
 	# It is currently the short-`name` prefixed by the short-name of the class and the full-name of the module.
@@ -2241,8 +2253,7 @@ abstract class MPropDef
 	# The associated global property
 	var mproperty: MPROPERTY
 
-	# The origin of the definition
-	var location: Location
+	redef var location: Location
 
 	init
 	do

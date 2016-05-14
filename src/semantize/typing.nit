@@ -637,8 +637,7 @@ end
 class CallSite
 	super MEntity
 
-	# The associated location of the callsite
-	var location: Location
+	redef var location: Location
 
 	# The static type of the receiver (possibly unresolved)
 	var recv: MType
