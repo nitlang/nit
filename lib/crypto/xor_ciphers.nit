@@ -31,3 +31,58 @@ redef class Bytes
 		return xored
 	end
 end
+
+# Base class to modelize cryptographic ciphers
+abstract class Cipher
+
+	# Encrypted data
+	var ciphertext = new Bytes.empty is writable
+
+	# Unencrypted data
+	var plaintext = new Bytes.empty is writable
+
+	# Encrypt plaintext and populate `self.ciphertext`
+	fun encrypt is abstract
+
+	# Decrypt ciphertext and populate `self.plaintext`
+	fun decrypt is abstract
+
+end
+
+# Simple XOR cipher where the whole plaintext is XORed with a single byte.
+class SingleByteXorCipher
+	super Cipher
+
+	# Cryptographic key used in encryption and decryption.
+	var key: Byte = 0.to_b
+
+	redef fun encrypt do
+		var key_bytes = new Bytes.with_capacity(1)
+		key_bytes.add(key)
+		ciphertext = plaintext.xorcipher(key_bytes)
+	end
+
+	redef fun decrypt do
+		var key_bytes = new Bytes.with_capacity(1)
+		key_bytes.add(key)
+		plaintext = ciphertext.xorcipher(key_bytes)
+	end
+end
+
+# XOR cipher where the key is repeated to match the length of the message.
+class RepeatingKeyXorCipher
+	super Cipher
+
+	# Cryptographic key used in encryption and decryption.
+	var key = new Bytes.empty
+
+	redef fun encrypt do
+		assert key.length > 0
+		ciphertext = plaintext.xorcipher(key)
+	end
+
+	redef fun decrypt do
+		assert key.length > 0
+		plaintext = ciphertext.xorcipher(key)
+	end
+end
