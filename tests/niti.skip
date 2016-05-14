@@ -40,3 +40,4 @@ test_ffi_c_lots_of_refs
 test_rubix_cube
 test_rubix_visual
 test_csv
+repeating_key_xor_solve
