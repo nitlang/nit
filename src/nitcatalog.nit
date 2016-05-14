@@ -315,6 +315,14 @@ redef class Catalog
 		end
 		res.add "</ul>\n"
 
+		res.add "<h3>Quality</h3>\n<ul class=\"box\">\n"
+		var errors = errors[mpackage]
+		if errors > 0 then
+			res.add "<li>{errors} errors</li>\n"
+		end
+		res.add "<li>{warnings[mpackage]} warnings</li>\n"
+		res.add "</ul>\n"
+
 		res.add "<h3>Tags</h3>\n"
 		var ts2 = new Array[String]
 		for t in mpackage.tags do
@@ -474,6 +482,8 @@ redef class Catalog
 		res.add "<th data-field=\"met\" data-sortable=\"true\">methods</th>\n"
 		res.add "<th data-field=\"loc\" data-sortable=\"true\">lines</th>\n"
 		res.add "<th data-field=\"score\" data-sortable=\"true\">score</th>\n"
+		res.add "<th data-field=\"errors\" data-sortable=\"true\">errors</th>\n"
+		res.add "<th data-field=\"warnings\" data-sortable=\"true\">warnings</th>\n"
 		res.add "</tr></thead>"
 		for p in mpackages do
 			res.add "<tr>"
@@ -493,6 +503,8 @@ redef class Catalog
 			res.add "<td>{mmethods[p]}</td>"
 			res.add "<td>{loc[p]}</td>"
 			res.add "<td>{score[p]}</td>"
+			res.add "<td>{errors[p]}</td>"
+			res.add "<td>{warnings[p]}</td>"
 			res.add "</tr>\n"
 		end
 		res.add "</table>\n"

@@ -229,6 +229,12 @@ class Catalog
 	# Number of line of code by package
 	var loc = new Counter[MPackage]
 
+	# Number of errors
+	var errors = new Counter[MPackage]
+
+	# Number of warnings and advices
+	var warnings = new Counter[MPackage]
+
 	# Number of commits by package
 	var commits = new Counter[MPackage]
 
@@ -338,9 +344,21 @@ class Catalog
 		var mclasses = 0
 		var mmethods = 0
 		var loc = 0
+		var errors = 0
+		var warnings = 0
 		for g in mpackage.mgroups do
 			mmodules += g.mmodules.length
 			for m in g.mmodules do
+				var source = m.location.file
+				if source != null then
+					for msg in source.messages do
+						if msg.level == 2 then
+							errors += 1
+						else
+							warnings += 1
+						end
+					end
+				end
 				var am = modelbuilder.mmodule2node(m)
 				if am != null then
 					var file = am.location.file
@@ -361,6 +379,8 @@ class Catalog
 		self.mclasses[mpackage] = mclasses
 		self.mmethods[mpackage] = mmethods
 		self.loc[mpackage] = loc
+		self.errors[mpackage] = errors
+		self.warnings[mpackage] = warnings
 
 		#score += mmodules.score
 		score += mclasses.score
