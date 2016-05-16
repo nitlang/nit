@@ -226,6 +226,8 @@ private class UriParam
 
 	# Parameters match everything.
 	redef fun match(part) do return true
+
+	redef fun to_s do return name
 end
 
 # A static uri string like `users`.
@@ -237,6 +239,8 @@ private class UriString
 
 	# Empty strings match everything otherwise matching is based on string equality.
 	redef fun match(part) do return string.is_empty or string == part
+
+	redef fun to_s do return string
 end
 
 redef class Routes
