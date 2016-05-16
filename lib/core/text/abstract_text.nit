@@ -1360,16 +1360,19 @@ abstract class String
 	# Letters that follow a letter are lowercased
 	# Letters that follow a non-letter are upcased.
 	#
+	# If `keep_upper = true`, already uppercase letters are not lowercased.
+	#
 	# SEE : `Char::is_letter` for the definition of letter.
 	#
 	#     assert "jAVASCRIPT".capitalized == "Javascript"
 	#     assert "i am root".capitalized == "I Am Root"
 	#     assert "ab_c -ab0c ab\nc".capitalized == "Ab_C -Ab0C Ab\nC"
-	fun capitalized: SELFTYPE do
+	#     assert "preserve my ACRONYMS".capitalized(keep_upper=true) == "Preserve My ACRONYMS"
+	fun capitalized(keep_upper: nullable Bool): SELFTYPE do
 		if length == 0 then return self
 
 		var buf = new Buffer.with_cap(length)
-		buf.capitalize(src=self)
+		buf.capitalize(keep_upper=keep_upper, src=self)
 		return buf.to_s
 	end
 end
@@ -1464,8 +1467,10 @@ abstract class Buffer
 	# Letters that follow a letter are lowercased
 	# Letters that follow a non-letter are upcased.
 	#
-	# When `src` is specified, this method reads from `src`
-	# instead of `self` but still writes the result to the beginning of `self`.
+	# If `keep_upper = true`, uppercase letters are not lowercased.
+	#
+	# When `src` is specified, this method reads from `src` instead of `self`
+	# but it still writes the result to the beginning of `self`.
 	# This requires `self` to have the capacity to receive all of the
 	# capitalized content of `src`.
 	#
@@ -1484,10 +1489,15 @@ abstract class Buffer
 	#     b = new FlatBuffer.from("12345")
 	#     b.capitalize(src="foo")
 	#     assert b == "Foo45"
-	fun capitalize(src: nullable Text) do
+	#
+	#     b = new FlatBuffer.from("preserve my ACRONYMS")
+	#     b.capitalize(keep_upper=true)
+	#     assert b == "Preserve My ACRONYMS"
+	fun capitalize(keep_upper: nullable Bool, src: nullable Text) do
 		src = src or else self
 		var length = src.length
 		if length == 0 then return
+		keep_upper = keep_upper or else false
 
 		var c = src[0].to_upper
 		self[0] = c
@@ -1496,7 +1506,11 @@ abstract class Buffer
 			prev = c
 			c = src[i]
 			if prev.is_letter then
-				self[i] = c.to_lower
+				if keep_upper then
+					self[i] = c
+				else
+					self[i] = c.to_lower
+				end
 			else
 				self[i] = c.to_upper
 			end
