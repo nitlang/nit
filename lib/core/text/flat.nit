@@ -666,15 +666,15 @@ private class ASCIIFlatString
 	end
 
 	redef fun substring(from, count) do
+		var ln = _length
 		if count <= 0 then return ""
-
+		if (count + from) > ln then count = ln - from
+		if count <= 0 then return ""
 		if from < 0 then
 			count += from
-			if count < 0 then return ""
+			if count <= 0 then return ""
 			from = 0
 		end
-		var ln = _length
-		if (count + from) > ln then count = ln - from
 		return new ASCIIFlatString.full_data(_items, count, from + _first_byte, count)
 	end
 
