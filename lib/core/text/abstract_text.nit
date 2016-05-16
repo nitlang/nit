@@ -1369,21 +1369,7 @@ abstract class String
 		if length == 0 then return self
 
 		var buf = new Buffer.with_cap(length)
-
-		var curr = chars[0].to_upper
-		var prev = curr
-		buf[0] = curr
-
-		for i in [1 .. length[ do
-			prev = curr
-			curr = self[i]
-			if prev.is_letter then
-				buf[i] = curr.to_lower
-			else
-				buf[i] = curr.to_upper
-			end
-		end
-
+		buf.capitalize(src=self)
 		return buf.to_s
 	end
 end
@@ -1478,6 +1464,11 @@ abstract class Buffer
 	# Letters that follow a letter are lowercased
 	# Letters that follow a non-letter are upcased.
 	#
+	# When `src` is specified, this method reads from `src`
+	# instead of `self` but still writes the result to the beginning of `self`.
+	# This requires `self` to have the capacity to receive all of the
+	# capitalized content of `src`.
+	#
 	# SEE: `Char::is_letter` for the definition of a letter.
 	#
 	#     var b = new FlatBuffer.from("jAVAsCriPt")
@@ -1489,14 +1480,21 @@ abstract class Buffer
 	#     b = new FlatBuffer.from("ab_c -ab0c ab\nc")
 	#     b.capitalize
 	#     assert b == "Ab_C -Ab0C Ab\nC"
-	fun capitalize do
+	#
+	#     b = new FlatBuffer.from("12345")
+	#     b.capitalize(src="foo")
+	#     assert b == "Foo45"
+	fun capitalize(src: nullable Text) do
+		src = src or else self
+		var length = src.length
 		if length == 0 then return
-		var c = self[0].to_upper
+
+		var c = src[0].to_upper
 		self[0] = c
 		var prev = c
 		for i in [1 .. length[ do
 			prev = c
-			c = self[i]
+			c = src[i]
 			if prev.is_letter then
 				self[i] = c.to_lower
 			else
