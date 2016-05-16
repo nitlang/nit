@@ -37,7 +37,7 @@ import template
 # A macro identifier is valid if:
 #
 # * starts with an uppercase letter
-# * contains only numers, uppercase letters or '_'
+# * contains only numbers, uppercase letters or '_'
 #
 # See `String::is_valid_macro_name` for more details.
 #
