@@ -22,9 +22,14 @@ in "C header" `{
 	#include <sqlite3.h>
 `}
 
+in "C" `{
+	// Return code of the last call to the constructor of `NativeSqlite3`
+	static int nit_sqlite_open_error = SQLITE_OK;
+`}
+
 redef class Sys
 	# Last error raised when calling `Sqlite3::open`
-	var sqlite_open_error: nullable Sqlite3Code = null
+	fun sqlite_open_error: Sqlite3Code `{ return nit_sqlite_open_error; `}
 end
 
 extern class Sqlite3Code `{int`}
@@ -133,24 +138,17 @@ end
 extern class NativeSqlite3 `{sqlite3 *`}
 
 	# Open a connection to a database in UTF-8
-	new open(filename: NativeString) import set_sys_sqlite_open_error `{
+	new open(filename: NativeString) `{
 		sqlite3 *self = NULL;
 		int err = sqlite3_open(filename, &self);
-		NativeSqlite3_set_sys_sqlite_open_error(self, (void*)(long)err);
-		// The previous cast is a hack, using non pointers in extern classes is not
-		// yet in the spec of the FFI.
+		nit_sqlite_open_error = err;
 		return self;
 	`}
-
-	# Utility method to set `Sys.sqlite_open_error`
-	private fun set_sys_sqlite_open_error(err: Sqlite3Code) do sys.sqlite_open_error = err
 
 	# Has this DB been correctly opened?
 	#
 	# To know if it has been closed or interrupted, you must check for errors with `error`.
 	fun is_valid: Bool do return not address_is_null
-
-	fun destroy do close
 
 	# Close this connection
 	fun close `{
