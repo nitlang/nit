@@ -15,7 +15,7 @@
 # limitations under the License.
 
 # Web server for Benitlux
-module benitlux_web
+module server
 
 import benitlux_model
 import benitlux_view
