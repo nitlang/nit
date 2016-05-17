@@ -38,7 +38,7 @@ redef class App
 		if debug then print "App::on_create"
 
 		# Create the main window
-		window = new CalculatorWindow
+		push_window new CalculatorWindow
 		super
 	end
 end

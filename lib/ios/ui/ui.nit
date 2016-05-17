@@ -182,7 +182,6 @@ redef class Layout
 	init
 	do
 		native.alignment = new UIStackViewAlignment.fill
-		native.distribution = new UIStackViewDistribution.fill_equally
 
 		# TODO make customizable
 		native.spacing = 4.0
@@ -199,11 +198,19 @@ redef class Layout
 end
 
 redef class HorizontalLayout
-	redef init do native.axis = new UILayoutConstraintAxis.horizontal
+	redef init
+	do
+		native.axis = new UILayoutConstraintAxis.horizontal
+		native.distribution = new UIStackViewDistribution.fill_equally
+	end
 end
 
 redef class VerticalLayout
-	redef init do native.axis = new UILayoutConstraintAxis.vertical
+	redef init
+	do
+		native.axis = new UILayoutConstraintAxis.vertical
+		native.distribution = new UIStackViewDistribution.equal_spacing
+	end
 end
 
 redef class Label
