@@ -1,4 +1,4 @@
-[![Stories in Ready](https://badge.waffle.io/nitlang/nit.png?label=todo&title=TODO)](https://waffle.io/nitlang/nit)
+[![Stories in Todo](https://badge.waffle.io/nitlang/nit.png?label=todo&title=TODO)](https://waffle.io/nitlang/nit)
 [![Gitter](https://badges.gitter.im/nitlang/nit.svg)](https://gitter.im/nitlang/nit?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
 **Nit is an expressive language with a script-like syntax, a friendly type-system and aims at elegance, simplicity and intuitiveness.**
