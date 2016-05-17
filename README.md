@@ -1,14 +1,13 @@
 [![Stories in Todo](https://badge.waffle.io/nitlang/nit.png?label=todo&title=TODO)](https://waffle.io/nitlang/nit)
-[![Gitter](https://badges.gitter.im/nitlang/nit.svg)](https://gitter.im/nitlang/nit?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
-**Nit is an expressive language with a script-like syntax, a friendly type-system and aims at elegance, simplicity and intuitiveness.**
+Nit is an expressive language with a script-like syntax, a friendly type-system and aims at elegance, simplicity and intuitiveness.
 
-**Nit has a simple straightforward style and can usually be picked up quickly, particularly by anyone who has programmed before.
-While object-oriented, it allows procedural styles.**
+Nit has a simple straightforward style and can usually be picked up quickly, particularly by anyone who has programmed before.
+While object-oriented, it allows procedural styles.
 
-_**The Nit Compiler (nitc) produces efficient machine language binaries.**_
+The Nit Compiler (nitc) produces efficient machine language binaries.
 
-**Some Nit features:**
+Some Nit features:
 
  * Pure Object-Oriented.
  * Multiple Inheritance.
@@ -16,7 +15,7 @@ _**The Nit Compiler (nitc) produces efficient machine language binaries.**_
  * Light and clear syntax.
 
 
-**Requirements:**
+Requirements:
 
  * gcc		http://gcc.gnu.org/ (or a compatible C compiler)
  * pkg-config	http://www.freedesktop.org/wiki/Software/pkg-config/
@@ -25,19 +24,19 @@ _**The Nit Compiler (nitc) produces efficient machine language binaries.**_
  * graphviz	http://www.graphviz.org/	to enable graphs with the nitdoc tool
  * libunwind	http://nongnu.org/libunwind
 
-_Those are available in most Linux distributions_
+Those are available in most Linux distributions
 
     $ sudo apt-get install build-essential ccache libgc-dev graphviz libunwind-dev pkg-config
 
-_and on OS X using brew_
+and on OS X using brew
 
     $ brew install ccache bdw-gc graphviz libunwind-headers pkgconfig
 
-_or with MacPorts_
+or with MacPorts
 
     $ sudo port install ccache boehmgc graphviz libunwind-headers pkgconfig
 
-_**Important files and directories:**_
+Important files and directories:
 
  * benchmarks/	Script to bench the compilers
  * bin/		The Nit tools
@@ -57,19 +56,19 @@ _**Important files and directories:**_
  * tests/	Non-regression test-suite
 
 
-_**How to start:**_
+How to start:
 
     $ make
     $ bin/nitc examples/hello_world.nit
     $ ./hello_world
 
-**You can source `misc/nit_env.sh` to setup your environment like PATH, MANPATH and bash completion.
-To have your environment automatically configured at login, just source it with `install` as argument.**
+You can source `misc/nit_env.sh` to setup your environment like PATH, MANPATH and bash completion.
+To have your environment automatically configured at login, just source it with `install` as argument.
 
     $ . misc/nit_env.sh install
 
 
-_**Information, contacts and help:**_
+Information, contacts and help:
 
 * Website <http://www.nitlanguage.org>
 * Issues <https://github.com/nitlang/nit/issues>
