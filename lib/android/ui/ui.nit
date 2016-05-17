@@ -240,9 +240,26 @@ end
 redef class CheckBox
 	redef type NATIVE: Android_widget_CompoundButton
 	redef var native do return (new Android_widget_CheckBox(app.native_activity)).new_global_ref
+	init do set_callback_on_toggle(native)
 
 	redef fun is_checked do return native.is_checked
 	redef fun is_checked=(value) do native.set_checked(value)
+
+	private fun on_toggle do notify_observers new ToggleEvent(self)
+
+	private fun set_callback_on_toggle(view: NATIVE)
+	import on_toggle in "Java" `{
+		final int final_sender_object = self;
+		CheckBox_incr_ref(final_sender_object);
+
+		view.setOnCheckedChangeListener(
+			new android.widget.CompoundButton.OnCheckedChangeListener() {
+				@Override
+				public void onCheckedChanged(android.widget.CompoundButton buttonView, boolean isChecked) {
+					CheckBox_on_toggle(final_sender_object);
+				}
+			});
+	`}
 end
 
 redef class TextInput

@@ -210,12 +210,29 @@ class CheckBox
 	var is_checked = false is writable
 end
 
-# A `Button` press event
-class ButtonPressEvent
+# Event sent from a `VIEW`
+class ViewEvent
 	super AppEvent
 
-	# The `Button` that raised this event
-	var sender: Button
+	# The `VIEW` that raised this event
+	var sender: VIEW
+
+	# Type of the `sender`
+	type VIEW: View
+end
+
+# A `Button` press event
+class ButtonPressEvent
+	super ViewEvent
+
+	redef type VIEW: Button
+end
+
+# The `CheckBox` `sender` has been toggled
+class ToggleEvent
+	super ViewEvent
+
+	redef type VIEW: CheckBox
 end
 
 # A layout to visually organize `Control`s
