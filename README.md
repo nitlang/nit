@@ -1,11 +1,14 @@
-Nit is an expressive language with a script-like syntax, a friendly type-system and aims at elegance, simplicity and intuitiveness.
+[![Stories in Ready](https://badge.waffle.io/nitlang/nit.png?label=todo&title=TODO)](https://waffle.io/nitlang/nit)
+[![Gitter](https://badges.gitter.im/nitlang/nit.svg)](https://gitter.im/nitlang/nit?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
-Nit has a simple straightforward style and can usually be picked up quickly, particularly by anyone who has programmed before.
-While object-oriented, it allows procedural styles.
+**Nit is an expressive language with a script-like syntax, a friendly type-system and aims at elegance, simplicity and intuitiveness.**
 
-The Nit Compiler (nitc) produces efficient machine language binaries.
+**Nit has a simple straightforward style and can usually be picked up quickly, particularly by anyone who has programmed before.
+While object-oriented, it allows procedural styles.**
 
-Some Nit features:
+_**The Nit Compiler (nitc) produces efficient machine language binaries.**_
+
+**Some Nit features:**
 
  * Pure Object-Oriented.
  * Multiple Inheritance.
@@ -13,7 +16,7 @@ Some Nit features:
  * Light and clear syntax.
 
 
-Requirements:
+**Requirements:**
 
  * gcc		http://gcc.gnu.org/ (or a compatible C compiler)
  * pkg-config	http://www.freedesktop.org/wiki/Software/pkg-config/
@@ -22,19 +25,19 @@ Requirements:
  * graphviz	http://www.graphviz.org/	to enable graphs with the nitdoc tool
  * libunwind	http://nongnu.org/libunwind
 
-Those are available in most Linux distributions
+_Those are available in most Linux distributions_
 
     $ sudo apt-get install build-essential ccache libgc-dev graphviz libunwind-dev pkg-config
 
-and on OS X using brew
+_and on OS X using brew_
 
     $ brew install ccache bdw-gc graphviz libunwind-headers pkgconfig
 
-or with MacPorts
+_or with MacPorts_
 
     $ sudo port install ccache boehmgc graphviz libunwind-headers pkgconfig
 
-Important files and directories:
+_**Important files and directories:**_
 
  * benchmarks/	Script to bench the compilers
  * bin/		The Nit tools
@@ -54,20 +57,22 @@ Important files and directories:
  * tests/	Non-regression test-suite
 
 
-How to start:
+_**How to start:**_
 
     $ make
     $ bin/nitc examples/hello_world.nit
     $ ./hello_world
 
-You can source `misc/nit_env.sh` to setup your environment like PATH, MANPATH and bash completion.
-To have your environment automatically configured at login, just source it with `install` as argument.
+**You can source `misc/nit_env.sh` to setup your environment like PATH, MANPATH and bash completion.
+To have your environment automatically configured at login, just source it with `install` as argument.**
 
     $ . misc/nit_env.sh install
 
 
-Information, contacts and help:
+_**Information, contacts and help:**_
 
 * Website <http://www.nitlanguage.org>
 * Issues <https://github.com/nitlang/nit/issues>
 * Chatroom <https://gitter.im/nitlang/nit>
+
+[![Throughput Graph](https://graphs.waffle.io/nitlang/nit/throughput.svg)](https://waffle.io/nitlang/nit/metrics/throughput)
