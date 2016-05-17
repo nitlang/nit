@@ -118,6 +118,15 @@ Finally, standard markdown documents can be checked with:
 
     $ nitunit foo.md
 
+When testing, the environment variable `NIT_TESTING` is set to `true`.
+This flag can be used by libraries and program to prevent (or limit) the execution of dangerous pieces of code.
+
+~~~~~
+# NIT_TESTING is automatically set.
+#
+#     assert "NIT_TESTING".environ == "true"
+~~~~
+
 ## Working with `TestSuites`
 
 TestSuites are Nit files that define a set of TestCases for a particular module.

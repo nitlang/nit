@@ -63,6 +63,8 @@ if toolcontext.opt_gen_unit.value then
 	exit(0)
 end
 
+"NIT_TESTING".setenv("true")
+
 var page = new HTMLTag("testsuites")
 
 if toolcontext.opt_full.value then mmodules = model.mmodules
