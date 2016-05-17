@@ -42,7 +42,7 @@ redef class App
 	redef fun on_create
 	do
 		# Create the main window
-		window = new TnitterWindow
+		push_window new TnitterWindow
 		super
 	end
 end
