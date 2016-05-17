@@ -14,6 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# A native wrapper ove the postgres c api
 module native_postgres is pkgconfig("libpq")
 
 in "C header" `{
@@ -30,7 +31,9 @@ extern class ExecStatusType `{int`}
   new nonfatal_error  `{ return PGRES_NONFATAL_ERROR; `}
   new fatal_error     `{ return PGRES_FATAL_ERROR; `}
 
-  fun is_ok: Bool `{return self == PGRES_TUPLES_OK || self == PGRES_COMMAND_OK; `}
+  fun is_ok: Bool `{
+    return !(self == PGRES_BAD_RESPONSE || self == PGRES_NONFATAL_ERROR || self == PGRES_FATAL_ERROR);
+  `}
 
   redef fun to_s import NativeString.to_s `{
     char * err = PQresStatus(self);
@@ -46,7 +49,7 @@ extern class ConnStatusType `{int`}
   fun is_ok: Bool `{return self == CONNECTION_OK; `}
 end
 
-extern class PGResult `{PGresult *`}
+extern class NativePGResult `{PGresult *`}
   # Frees the memory block associated with the result
   fun clear `{PQclear(self); `}
 
@@ -83,27 +86,27 @@ end
 extern class NativePostgres `{PGconn *`}
 
   # Connect to a new database using the conninfo string as a parameter
-  new connectdb(conninfo: String) import String.to_cstring `{
+  new connectdb(conninfo: Text) import Text.to_cstring `{
     PGconn * self = NULL;
-    self = PQconnectdb(String_to_cstring(conninfo));
+    self = PQconnectdb(Text_to_cstring(conninfo));
     return self;
   `}
 
   # Submits a query to the server and waits for the result returns the ExecStatustype of the query
-  fun exec(query: String): PGResult import String.to_cstring `{
-    PGresult *res = PQexec(self, String_to_cstring(query));
+  fun exec(query: Text): NativePGResult import Text.to_cstring `{
+    PGresult *res = PQexec(self, Text_to_cstring(query));
     return res;
   `}
 
   # Prepares a statement with the given parameters
-  fun prepare(stmt: String, query: String, nParams: Int):PGResult import String.to_cstring `{
+  fun prepare(stmt: String, query: String, nParams: Int): NativePGResult import String.to_cstring `{
     const char * stmtName = String_to_cstring(stmt);
     const char * queryStr = String_to_cstring(query);
     PGresult * res = PQprepare(self, stmtName, queryStr, nParams, NULL);
     return res;
   `}
 
-  fun exec_prepared(stmt: String, nParams: Int, values: Array[String], pLengths: Array[Int], pFormats: Array[Int], resultFormat: Int):PGResult import String.to_cstring, Array[String].[], Array[Int].[] `{
+  fun exec_prepared(stmt: String, nParams: Int, values: Array[String], pLengths: Array[Int], pFormats: Array[Int], resultFormat: Int): NativePGResult import String.to_cstring, Array[String].[], Array[Int].[] `{
     const char * stmtName = String_to_cstring(stmt);
     const char * paramValues[nParams];
     int paramLengths[nParams];
