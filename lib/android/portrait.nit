@@ -17,4 +17,4 @@ module portrait is android_manifest_activity """
 		android:screenOrientation="portrait"
 """
 
-import platform
+import android
