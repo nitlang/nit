@@ -1,5 +1,3 @@
-[![Stories in Todo](https://badge.waffle.io/nitlang/nit.png?label=todo&title=TODO)](https://waffle.io/nitlang/nit)
-
 Nit is an expressive language with a script-like syntax, a friendly type-system and aims at elegance, simplicity and intuitiveness.
 
 Nit has a simple straightforward style and can usually be picked up quickly, particularly by anyone who has programmed before.
@@ -75,3 +73,10 @@ Information, contacts and help:
 * Chatroom <https://gitter.im/nitlang/nit>
 
 [![Throughput Graph](https://graphs.waffle.io/nitlang/nit/throughput.svg)](https://waffle.io/nitlang/nit/metrics/throughput)
+
+[![Stories in Newcomer](https://badge.waffle.io/nitlang/nit.png?label=newcomer&title=newcomer)](https://waffle.io/nitlang/nit)
+[![Stories in Newcomer](https://badge.waffle.io/nitlang/nit.png?label=bug&title=Bug)](https://waffle.io/nitlang/nit)
+[![Stories in Newcomer](https://badge.waffle.io/nitlang/nit.png?label=todo&title=task)](https://waffle.io/nitlang/nit)
+[![Stories in Newcomer](https://badge.waffle.io/nitlang/nit.png?label=ok_will_merge&title=will merge)](https://waffle.io/nitlang/nit)
+[![Stories in Newcomer](https://badge.waffle.io/nitlang/nit.png?label=need_review&title= need review)](https://waffle.io/nitlang/nit)
+[![Stories in Newcomer](https://badge.waffle.io/nitlang/nit.png?label=SPEC&title=specification)](https://waffle.io/nitlang/nit)
