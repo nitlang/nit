@@ -31,7 +31,37 @@ module model_collect
 
 import model_views
 
+redef class MEntity
+
+	# Collect modifier keywords like `redef`, `private` etc.
+	fun collect_modifiers: Array[String] do
+		return new Array[String]
+	end
+end
+
+redef class MPackage
+	redef fun collect_modifiers do
+		var res = super
+		res.add "package"
+		return res
+	end
+end
+
+redef class MGroup
+	redef fun collect_modifiers do
+		var res = super
+		res.add "group"
+		return res
+	end
+end
+
 redef class MModule
+
+	redef fun collect_modifiers do
+		var res = super
+		res.add "module"
+		return res
+	end
 
 	# Collect all transitive imports.
 	fun collect_ancestors(view: ModelView): Set[MModule] do
@@ -132,6 +162,8 @@ redef class MModule
 end
 
 redef class MClass
+
+	redef fun collect_modifiers do return intro.collect_modifiers
 
 	# Collect direct parents of `self` with `visibility >= to min_visibility`.
 	fun collect_parents(view: ModelView): Set[MClass] do
@@ -404,9 +436,8 @@ redef class MClassDef
 		return res
 	end
 
-	# Collect modifiers like redef, private etc.
-	fun collect_modifiers: Array[String] do
-		var res = new Array[String]
+	redef fun collect_modifiers do
+		var res = super
 		if not is_intro then
 			res.add "redef"
 		else
@@ -417,10 +448,13 @@ redef class MClassDef
 	end
 end
 
+redef class MProperty
+	redef fun collect_modifiers do return intro.collect_modifiers
+end
+
 redef class MPropDef
-	# Collect modifiers like redef, private, abstract, intern, fun etc.
-	fun collect_modifiers: Array[String] do
-		var res = new Array[String]
+	redef fun collect_modifiers do
+		var res = super
 		if not is_intro then
 			res.add "redef"
 		else
@@ -440,6 +474,8 @@ redef class MPropDef
 			else
 				res.add "fun"
 			end
+		else if mprop isa MAttributeDef then
+			res.add "var"
 		end
 		return res
 	end
