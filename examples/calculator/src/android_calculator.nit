@@ -16,7 +16,7 @@
 module android_calculator
 
 import calculator
-import android::ui
+import android
 
 redef class Button
 	init do set_android_style(native, (text or else "?").is_int)

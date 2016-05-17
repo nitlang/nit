@@ -64,7 +64,16 @@ integer as argument. They are applied in the Android manifest as
   only be used by low-level implementations of Nit on Android.
   Its usefulness will be extended in the future to customize user applications.
 
-## Project entry points
+## Android implementation
+
+There is two core implementation for Nit apps on Android.
+`android::nit_activity` is used by apps with standard windows and native UI controls.
+`android::game` is used by, well, games and the game frameworks `mnit` and `gamnit`.
+
+Clients don't have to select the core implementation, it is imported by other relevant modules.
+For example, a module importing `app::ui` and `android` will trigger the importation of `android::nit_activity`.
+
+## Lock app orientation
 
 Importing `android::landscape` or `android::portrait` locks the generated
 application in the specified orientation. This can be useful for games and

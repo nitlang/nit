@@ -20,4 +20,4 @@ module landscape is
 	android_manifest_activity """android:screenOrientation="sensorLandscape" """
 end
 
-import platform
+import android
