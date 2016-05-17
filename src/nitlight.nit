@@ -41,7 +41,7 @@ var args = toolcontext.option_context.rest
 var mmodules = modelbuilder.parse_full(args)
 modelbuilder.run_phases
 
-if opt_full.value then mmodules = model.mmodules
+if opt_full.value then mmodules = modelbuilder.parsed_modules
 
 var dir = opt_dir.value
 if dir != null then
