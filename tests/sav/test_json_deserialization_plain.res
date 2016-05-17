@@ -27,6 +27,6 @@
 # Nit: <MyClass i:123 s:hello f:123.456 a:[one, two] o:<null>>
 
 # JSON: not valid json
-# Errors: 'Error Parsing JSON: [1:1-1:2] Unexpected character 'n'; is acceptable instead: value'
+# Errors: 'Parsing error at line 1, position 1: Error: bad JSON entity'
 # Nit: null
 

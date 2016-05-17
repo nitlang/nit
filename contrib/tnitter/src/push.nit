@@ -46,7 +46,7 @@ redef class DB
 		# Everyone gets the same response
 		var posts = list_posts(0, 16)
 		var response = new HttpResponse(400)
-		response.body = posts.to_json_string
+		response.body = posts.serialize_to_json
 
 		for conn in push_connections do
 			# Complete the answer to `conn`

@@ -54,8 +54,7 @@ redef class App
 
 		# Save the default config to pretty Json
 		var cc = new ClientConfig
-		var json = cc.to_plain_json
-		json = json.replace(",", ",\n")
+		var json = cc.serialize_to_json(plain=true, pretty=true)
 		json.write_to_file config_path
 
 		return cc

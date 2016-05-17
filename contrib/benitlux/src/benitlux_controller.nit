@@ -348,7 +348,7 @@ redef class HttpResponse
 	init ok(data: Serializable)
 	do
 		init 200
-		body = data.to_json_string
+		body = data.serialize_to_json
 	end
 
 	# Respond with a `BenitluxError` in JSON and a code 403
@@ -356,7 +356,7 @@ redef class HttpResponse
 	do
 		init 403
 		var error = new BenitluxTokenError("Forbidden", "Invalid or outdated token.")
-		body = error.to_json_string
+		body = error.serialize_to_json
 	end
 
 	# Respond with a `BenitluxError` in JSON and a code 400
@@ -364,7 +364,7 @@ redef class HttpResponse
 	do
 		init 400
 		var error = new BenitluxError("Bad Request", "Application error, or it needs to be updated.")
-		body = error.to_json_string
+		body = error.serialize_to_json
 	end
 
 	# Respond with a `BenitluxError` in JSON and a code 500
@@ -372,6 +372,6 @@ redef class HttpResponse
 	do
 		init 500
 		var error = new BenitluxError("Internal Server Error", "Server error, try again later.")
-		body = error.to_json_string
+		body = error.serialize_to_json
 	end
 end
