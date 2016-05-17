@@ -73,6 +73,11 @@
 <li><a href="https:&#47;&#47;github.com&#47;nitlang&#47;nit&#47;tree&#47;master&#47;tests&#47;test_prog">https:&#47;&#47;github.com&#47;nitlang&#47;nit&#47;tree&#47;master&#47;tests&#47;test_prog</a></li>
 <li><tt>https:&#47;&#47;github.com&#47;nitlang&#47;nit.git</tt></li>
 </ul>
+<h3>Quality</h3>
+<ul class="box">
+<li>28 warnings</li>
+<li>93% documented</li>
+</ul>
 <h3>Tags</h3>
 <a href="../index.html#tag_test">test</a>, <a href="../index.html#tag_game">game</a><h3>Requirements</h3>
 none<h3>Clients</h3>

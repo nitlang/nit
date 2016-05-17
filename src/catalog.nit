@@ -229,6 +229,15 @@ class Catalog
 	# Number of line of code by package
 	var loc = new Counter[MPackage]
 
+	# Number of errors
+	var errors = new Counter[MPackage]
+
+	# Number of warnings and advices
+	var warnings = new Counter[MPackage]
+
+	# Documentation score (between 0 and 100)
+	var documentation_score = new Counter[MPackage]
+
 	# Number of commits by package
 	var commits = new Counter[MPackage]
 
@@ -338,9 +347,26 @@ class Catalog
 		var mclasses = 0
 		var mmethods = 0
 		var loc = 0
+		var errors = 0
+		var warnings = 0
+		# The documentation value of each entity is ad hoc.
+		var entity_score = 0.0
+		var doc_score = 0.0
 		for g in mpackage.mgroups do
 			mmodules += g.mmodules.length
+			entity_score += 1.0
+			if g.mdoc != null then doc_score += 1.0
 			for m in g.mmodules do
+				var source = m.location.file
+				if source != null then
+					for msg in source.messages do
+						if msg.level == 2 then
+							errors += 1
+						else
+							warnings += 1
+						end
+					end
+				end
 				var am = modelbuilder.mmodule2node(m)
 				if am != null then
 					var file = am.location.file
@@ -348,9 +374,21 @@ class Catalog
 						loc += file.line_starts.length - 1
 					end
 				end
+				entity_score += 1.0
+				if m.mdoc != null then doc_score += 1.0
 				for cd in m.mclassdefs do
+					var s = 0.2
+					if not cd.is_intro then s /= 10.0
+					if not cd.mclass.visibility <= private_visibility then s /= 10.0
+					entity_score += s
+					if cd.mdoc != null then doc_score += s
 					mclasses += 1
 					for pd in cd.mpropdefs do
+						s = 0.1
+						if not pd.is_intro then s /= 10.0
+						if not pd.mproperty.visibility <= private_visibility then s /= 10.0
+						entity_score += s
+						if pd.mdoc != null then doc_score += s
 						if not pd isa MMethodDef then continue
 						mmethods += 1
 					end
@@ -361,11 +399,16 @@ class Catalog
 		self.mclasses[mpackage] = mclasses
 		self.mmethods[mpackage] = mmethods
 		self.loc[mpackage] = loc
+		self.errors[mpackage] = errors
+		self.warnings[mpackage] = warnings
+		var documentation_score =  (100.0 * doc_score / entity_score).to_i
+		self.documentation_score[mpackage] = documentation_score
 
 		#score += mmodules.score
 		score += mclasses.score
 		score += mmethods.score
 		score += loc.score
+		score += documentation_score.score
 
 		self.score[mpackage] = score.to_i
 	end
