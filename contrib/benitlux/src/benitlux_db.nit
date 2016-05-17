@@ -85,7 +85,7 @@ class BenitluxDB
 			last_weekday = "date('now', 'weekday 6', '-7 day')"
 		else last_weekday = "date('now', '-1 day')"
 
-		return beer_events_since(last_weekday)
+		return beer_events_since_sql(last_weekday)
 	end
 
 	# Build and return a `BeerEvents` for today compared to `prev_day`
@@ -93,26 +93,35 @@ class BenitluxDB
 	# Return `null` on error
 	fun beer_events_since(prev_day: String): nullable BeerEvents
 	do
+		prev_day = prev_day.to_sql_date_string
+		return beer_events_since_sql("date({prev_day})")
+	end
+
+	# `BeerEvents` since the SQLite formatted date command `sql_date`
+	#
+	# Return `null` on error
+	private fun beer_events_since_sql(sql_date: String): nullable BeerEvents
+	do
 		var events = new BeerEvents
 
 		# New
 		var stmt = select("ROWID, name, desc FROM beers WHERE " +
 		                  "ROWID IN (SELECT beer FROM daily WHERE day=(SELECT MAX(day) FROM daily)) AND " +
-		                  "NOT ROWID IN (SELECT beer FROM daily WHERE date(day) = date({prev_day}))")
+		                  "NOT ROWID IN (SELECT beer FROM daily WHERE date(day) = {sql_date})")
 		if stmt == null then return null
 		for row in stmt do events.new_beers.add row.to_beer
 
 		# Gone
 		stmt = select("ROWID, name, desc FROM beers WHERE " +
 		              "NOT ROWID IN (SELECT beer FROM daily WHERE day=(SELECT MAX(day) FROM daily)) AND " +
-		              "ROWID IN (SELECT beer FROM daily WHERE date(day) = date({prev_day}))")
+		              "ROWID IN (SELECT beer FROM daily WHERE date(day) = {sql_date})")
 		if stmt == null then return null
 		for row in stmt do events.gone_beers.add row.to_beer
 
 		# Fix
 		stmt = select("ROWID, name, desc FROM beers WHERE " +
 		              "ROWID IN (SELECT beer FROM daily WHERE day=(SELECT MAX(day) FROM daily)) AND " +
-		              "ROWID IN (SELECT beer FROM daily WHERE date(day) = date({prev_day}))")
+		              "ROWID IN (SELECT beer FROM daily WHERE date(day) = {sql_date})")
 		if stmt == null then return null
 		for row in stmt do events.fix_beers.add row.to_beer
 
