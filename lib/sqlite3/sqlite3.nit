@@ -57,8 +57,8 @@ class Sqlite3DB
 	# Prepare and return a `Statement`, return `null` on error
 	fun prepare(sql: Text): nullable Statement
 	do
-		var native_stmt = native_connection.prepare(sql.to_s)
-		if native_stmt == null then return null
+		var native_stmt = native_connection.prepare(sql.to_cstring)
+		if native_stmt.address_is_null then return null
 
 		var stmt = new Statement(native_stmt)
 		open_statements.add stmt
@@ -68,7 +68,7 @@ class Sqlite3DB
 	# Execute the `sql` statement and return `true` on success
 	fun execute(sql: Text): Bool
 	do
-		var err = native_connection.exec(sql.to_s)
+		var err = native_connection.exec(sql.to_cstring)
 		return err.is_ok
 	end
 
@@ -99,7 +99,7 @@ class Sqlite3DB
 	do
 		if not native_connection.is_valid then
 			var err = sys.sqlite_open_error
-			if err == null then return null
+			if err.is_ok then return null
 			return err.to_s
 		end
 
@@ -182,7 +182,9 @@ class StatementEntry
 	var name: String is lazy do
 		assert statement_closed: statement.is_open
 
-		return statement.native_statement.column_name(index)
+		var cname = statement.native_statement.column_name(index)
+		assert not cname.address_is_null
+		return cname.to_s
 	end
 
 	# Get the value of this entry according to its Sqlite type
