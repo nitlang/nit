@@ -294,6 +294,9 @@ redef class CheckBox
 	redef type NATIVE: GtkCheckButton
 	redef var native = new GtkCheckButton
 
+	redef fun signal(sender, data) do notify_observers new ToggleEvent(self)
+	init do native.signal_connect("toggled", self, null)
+
 	redef fun text do return native.text
 	redef fun text=(value) do native.text = (value or else "").to_s
 
