@@ -112,6 +112,19 @@ redef class App
 		set_view_controller(app_delegate.window, window.native)
 		super
 	end
+
+	# Use iOS ` popViewControllerAnimated`
+	redef fun pop_window
+	do
+		window_stack.pop
+		pop_view_controller app_delegate.window
+		window.on_resume
+	end
+
+	private fun pop_view_controller(window: UIWindow) in "ObjC" `{
+		UINavigationController *navController = (UINavigationController*)window.rootViewController;
+		[navController popViewControllerAnimated: YES];
+	`}
 end
 
 redef class AppDelegate
