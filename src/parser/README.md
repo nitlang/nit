@@ -1,6 +1,6 @@
 Parser and AST for the Nit language
 
-The parser ans the AST are mostly used by all tools.
+The parser and the AST are mostly used by all tools.
 
 The `parser` is the tool that transform source-files into abstract syntax trees (AST) (see `parser_nodes`)
 While the AST is a higher abstraction than blob of text, the AST is still limited and represents only *What the programmer says*.
