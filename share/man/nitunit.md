@@ -169,6 +169,34 @@ class TestFoo
 end
 ~~~~
 
+## Black Box Testing
+
+Sometimes, it is easier to validate a `TestCase` by comparing its output with a text file containing the expected result.
+
+For each TestCase `test_bar` of a TestSuite `test_mod.nit`, if the corresponding file `test_mod.sav/test_bar.res` exists, then the output of the test is compared with the file.
+
+The `diff(1)` command is used to perform the comparison.
+The test is failed if non-zero is returned by `diff`.
+
+~~~
+module test_mod is test_suite
+class TestFoo
+	fun test_bar do
+		print "Hello!"
+	end
+end
+~~~
+
+Where `test_mod.sav/test_bar.res` contains
+
+~~~raw
+Hello!
+~~~
+
+If no corresponding `.res` file exists, then the output of the TestCase is ignored.
+
+## Configuring TestSuites
+
 `TestSuites` also provide methods to configure the test run:
 
 `before_test` and `after_test`: methods called before/after each test case.
