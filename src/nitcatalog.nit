@@ -320,7 +320,7 @@ redef class Catalog
 		if errors > 0 then
 			res.add "<li>{errors} errors</li>\n"
 		end
-		res.add "<li>{warnings[mpackage]} warnings</li>\n"
+		res.add "<li>{warnings[mpackage]} warnings ({warnings_per_kloc[mpackage]}/kloc)</li>\n"
 		res.add "<li>{documentation_score[mpackage]}% documented</li>\n"
 		res.add "</ul>\n"
 
@@ -485,6 +485,7 @@ redef class Catalog
 		res.add "<th data-field=\"score\" data-sortable=\"true\">score</th>\n"
 		res.add "<th data-field=\"errors\" data-sortable=\"true\">errors</th>\n"
 		res.add "<th data-field=\"warnings\" data-sortable=\"true\">warnings</th>\n"
+		res.add "<th data-field=\"warnings_per_kloc\" data-sortable=\"true\">w/kloc</th>\n"
 		res.add "<th data-field=\"doc\" data-sortable=\"true\">doc</th>\n"
 		res.add "</tr></thead>"
 		for p in mpackages do
@@ -507,6 +508,7 @@ redef class Catalog
 			res.add "<td>{score[p]}</td>"
 			res.add "<td>{errors[p]}</td>"
 			res.add "<td>{warnings[p]}</td>"
+			res.add "<td>{warnings_per_kloc[p]}</td>"
 			res.add "<td>{documentation_score[p]}</td>"
 			res.add "</tr>\n"
 		end

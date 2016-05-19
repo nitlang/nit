@@ -235,6 +235,9 @@ class Catalog
 	# Number of warnings and advices
 	var warnings = new Counter[MPackage]
 
+	# Number of warnings per 1000 lines of code (w/kloc)
+	var warnings_per_kloc = new Counter[MPackage]
+
 	# Documentation score (between 0 and 100)
 	var documentation_score = new Counter[MPackage]
 
@@ -406,6 +409,9 @@ class Catalog
 		self.loc[mpackage] = loc
 		self.errors[mpackage] = errors
 		self.warnings[mpackage] = warnings
+		if loc > 0 then
+			self.warnings_per_kloc[mpackage] = warnings * 1000 / loc
+		end
 		var documentation_score =  (100.0 * doc_score / entity_score).to_i
 		self.documentation_score[mpackage] = documentation_score
 
