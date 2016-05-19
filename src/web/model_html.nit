@@ -32,12 +32,12 @@ redef class MEntity
 	# * MPropdef: `foo(e)`
 	var html_name: String is lazy do return name.html_escape
 
-	# MEntity namespace escaped for html.
-	fun html_raw_namespace: String is abstract
+	# Returns the MEntity full_name escaped for html.
+	var html_full_name: String is lazy do return full_name.html_escape
 
 	# Link to MEntity in the web server.
 	# TODO this should be parameterizable... but how?
-	fun html_link: Link do return new Link("/doc/{html_raw_namespace}", html_name)
+	fun html_link: Link do return new Link("/doc/{full_name}", html_name)
 
 	# Returns the list of keyword used in `self` declaration.
 	fun html_modifiers: Array[String] is abstract
@@ -107,22 +107,12 @@ redef class MEntity
 end
 
 redef class MPackage
-	redef fun html_raw_namespace do return html_name
-
 	redef var html_modifiers = ["package"]
 	redef fun html_namespace do return html_link
 	redef var css_classes = ["public"]
 end
 
 redef class MGroup
-	redef fun html_raw_namespace do
-		var parent = self.parent
-		if parent != null then
-			return "{parent.html_raw_namespace}::{html_name}"
-		end
-		return "{mpackage.html_raw_namespace}::{html_name}"
-	end
-
 	redef var html_modifiers = ["group"]
 
 	# Depends if `self` is root or not.
@@ -159,17 +149,6 @@ redef class MModule
 		end
 		tpl.add html_link
 		return tpl
-	end
-
-	redef fun html_raw_namespace do
-		var mpackage = self.mpackage
-		var mgroup = self.mgroup
-		if mgroup != null then
-			return "{mgroup.html_raw_namespace}::{html_name}"
-		else if mpackage != null then
-			return "{mpackage.html_raw_namespace}::{html_name}"
-		end
-		return html_name
 	end
 
 	redef var css_classes = ["public"]
@@ -211,8 +190,6 @@ redef class MClass
 		return tpl
 	end
 
-	redef fun html_raw_namespace do return intro.html_raw_namespace
-
 	# Returns `intro.html_short_signature`.
 	fun html_short_signature: Template do return intro.html_short_signature
 
@@ -224,8 +201,6 @@ redef class MClass
 end
 
 redef class MClassDef
-	redef fun html_raw_namespace do return "{mmodule.html_raw_namespace}::{html_name}"
-
 	redef fun mdoc_or_fallback do return mdoc or else mclass.mdoc_or_fallback
 
 	# Depends if `self` is an intro or not.
@@ -342,8 +317,6 @@ redef class MProperty
 		return tpl
 	end
 
-	redef fun html_raw_namespace do return intro.html_raw_namespace
-
 	# Returns `intro.html_short_signature`.
 	fun html_short_signature: Template do return intro.html_short_signature
 
@@ -354,7 +327,6 @@ redef class MProperty
 end
 
 redef class MPropDef
-	redef fun html_raw_namespace do return "{mclassdef.html_raw_namespace}::{html_name}"
 	redef fun mdoc_or_fallback do return mdoc or else mproperty.mdoc_or_fallback
 
 	# Depends if `self` is an intro or not.
@@ -601,12 +573,10 @@ end
 redef class MParameterType
 	redef fun html_short_signature do return html_link
 	redef fun html_signature do return html_link
-	redef fun html_raw_namespace do return html_name
 end
 
 redef class MVirtualType
 	redef fun html_signature do return html_link
-	redef fun html_raw_namespace do return html_name
 end
 
 redef class MSignature
