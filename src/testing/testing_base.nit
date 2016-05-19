@@ -68,4 +68,28 @@ redef class ToolContext
 		end
 		return nitc
 	end
+
+	# Execute a system command in a more safe context than `Sys::system`.
+	fun safe_exec(command: String): Int
+	do
+		info(command, 2)
+		var real_command = """
+bash -c "
+ulimit -f {{{ulimit_file}}} 2> /dev/null
+ulimit -t {{{ulimit_usertime}}} 2> /dev/null
+{{{command}}}
+"
+"""
+		return system(real_command)
+	end
+
+	# The maximum size (in KB) of files written by a command executed trough `safe_exec`
+	#
+	# Default: 64MB
+	var ulimit_file = 65536 is writable
+
+	# The maximum amount of cpu time (in seconds) for a command executed trough `safe_exec`
+	#
+	# Default: 10 CPU minute
+	var ulimit_usertime = 600 is writable
 end

@@ -157,7 +157,7 @@ class NitUnitExecutor
 			toolcontext.modelbuilder.unit_entities += 1
 			i += 1
 			toolcontext.info("Execute doc-unit {du.testcase.attrs["name"]} in {file} {i}", 1)
-			var res2 = sys.system("{file.to_program_name}.bin {i} >>'{file}.out1' 2>&1 </dev/null")
+			var res2 = toolcontext.safe_exec("{file.to_program_name}.bin {i} >'{file}.out1' 2>&1 </dev/null")
 
 			var msg
 			f = new FileReader.open("{file}.out1")
@@ -206,7 +206,7 @@ class NitUnitExecutor
 		var res = compile_unitfile(file)
 		var res2 = 0
 		if res == 0 then
-			res2 = sys.system("{file.to_program_name}.bin >>'{file}.out1' 2>&1 </dev/null")
+			res2 = toolcontext.safe_exec("{file.to_program_name}.bin >'{file}.out1' 2>&1 </dev/null")
 		end
 
 		var msg
@@ -274,7 +274,7 @@ class NitUnitExecutor
 			opts.add "-I {mmodule.filepath.dirname}"
 		end
 		var cmd = "{nitc} --ignore-visibility --no-color '{file}' {opts.join(" ")} >'{file}.out1' 2>&1 </dev/null -o '{file}.bin'"
-		var res = sys.system(cmd)
+		var res = toolcontext.safe_exec(cmd)
 		return res
 	end
 end

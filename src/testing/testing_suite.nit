@@ -194,7 +194,7 @@ class TestSuite
 		end
 		var include_dir = module_file.filename.dirname
 		var cmd = "{nitc} --no-color '{file}.nit' -I {include_dir} -o '{file}.bin' > '{file}.out' 2>&1 </dev/null"
-		var res = sys.system(cmd)
+		var res = toolcontext.safe_exec(cmd)
 		var f = new FileReader.open("{file}.out")
 		var msg = f.read_all
 		f.close
@@ -248,7 +248,7 @@ class TestCase
 		var method_name = test_method.name
 		var test_file = test_suite.test_file
 		var res_name = "{test_file}_{method_name.escape_to_c}"
-		var res = sys.system("{test_file}.bin {method_name} > '{res_name}.out1' 2>&1 </dev/null")
+		var res = toolcontext.safe_exec("{test_file}.bin {method_name} > '{res_name}.out1' 2>&1 </dev/null")
 		var f = new FileReader.open("{res_name}.out1")
 		var msg = f.read_all
 		f.close
