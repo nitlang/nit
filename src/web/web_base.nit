@@ -73,7 +73,7 @@ class NitAction
 	# Render a view as a HttpResponse 200.
 	fun render_view(view: NitView): HttpResponse do
 		var response = new HttpResponse(200)
-		response.body = view.render(srv).write_to_string
+		response.body = view.render.write_to_string
 		return response
 	end
 
@@ -116,7 +116,7 @@ end
 # A NitView is rendered by an action.
 interface NitView
 	# Renders this view and returns something that can be written to a HTTP response.
-	fun render(srv: NitServer): Writable is abstract
+	fun render: Writable is abstract
 end
 
 redef class HttpRequest
