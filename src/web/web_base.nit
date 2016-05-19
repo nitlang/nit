@@ -92,10 +92,15 @@ class ModelAction
 	# Model to use.
 	var model: Model
 
+	# Find the MEntity ` with `full_name`.
+	fun find_mentity(model: ModelView, full_name: nullable String): nullable MEntity do
+		if full_name == null then return null
+		return model.mentity_by_full_name(full_name.from_percent_encoding)
+	end
+
 	# Init the model view from the `req` uri parameters.
 	fun init_model_view(req: HttpRequest): ModelView do
 		var view = new ModelView(model)
-
 		var show_private = req.bool_arg("private") or else false
 		if not show_private then view.min_visibility = protected_visibility
 
