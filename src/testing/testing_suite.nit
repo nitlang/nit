@@ -277,14 +277,14 @@ class TestCase
 		tc.attr("classname", "nitunit." + mclassdef.mmodule.full_name + "." + mclassdef.mclass.full_name)
 		tc.attr("name", test_method.mproperty.full_name)
 		if was_exec then
-			tc.add  new HTMLTag("system-err")
-			var n = new HTMLTag("system-out")
-			n.append "out"
+			tc.add  new HTMLTag("system-out")
+			var n = new HTMLTag("system-err")
 			tc.add n
 			var error = self.error
 			if error != null then
+				n.append error.trunc(8192).filter_nonprintable
 				n = new HTMLTag("error")
-				n.attr("message", error.to_s)
+				n.attr("message", "Runtime Error")
 				tc.add n
 			end
 		end

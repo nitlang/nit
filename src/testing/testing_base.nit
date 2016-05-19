@@ -93,3 +93,39 @@ ulimit -t {{{ulimit_usertime}}} 2> /dev/null
 	# Default: 10 CPU minute
 	var ulimit_usertime = 600 is writable
 end
+
+redef class String
+	# If needed, truncate `self` at `max_length` characters and append an informative `message`.
+	#
+	# ~~~
+	# assert "hello".trunc(10) == "hello"
+	# assert "hello".trunc(2) == "he[truncated. Full size is 5]"
+	# assert "hello".trunc(2, "...") == "he..."
+	# ~~~
+	fun trunc(max_length: Int, message: nullable String): String
+	do
+		if length <= max_length then return self
+		if message == null then message = "[truncated. Full size is {length}]"
+		return substring(0, max_length) + message
+	end
+
+	# Use a special notation for whitespace characters that are not `'\n'` (LFD) or `' '` (space).
+	#
+	# ~~~
+	# assert "hello".filter_nonprintable == "hello"
+	# assert "\r\n\t".filter_nonprintable == "^13\n^9"
+	# ~~~
+	fun filter_nonprintable: String
+	do
+		var buf = new Buffer
+		for c in self do
+			var cp = c.code_point
+			if cp < 32 and c != '\n' then
+				buf.append "^{cp}"
+			else
+				buf.add c
+			end
+		end
+		return buf.to_s
+	end
+end

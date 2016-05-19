@@ -159,12 +159,13 @@ class NitUnitExecutor
 			toolcontext.info("Execute doc-unit {du.testcase.attrs["name"]} in {file} {i}", 1)
 			var res2 = toolcontext.safe_exec("{file.to_program_name}.bin {i} >'{file}.out1' 2>&1 </dev/null")
 
-			var msg
 			f = new FileReader.open("{file}.out1")
 			var n2
 			n2 = new HTMLTag("system-err")
 			tc.add n2
-			msg = f.read_all
+			var content = f.read_all
+			var msg = content.trunc(8192).filter_nonprintable
+			n2.append(msg)
 			f.close
 
 			n2 = new HTMLTag("system-out")
@@ -173,9 +174,9 @@ class NitUnitExecutor
 
 			if res2 != 0 then
 				var ne = new HTMLTag("error")
-				ne.attr("message", msg)
+				ne.attr("message", "Runtime error")
 				tc.add ne
-				toolcontext.warning(du.mdoc.location, "error", "ERROR: {tc.attrs["classname"]}.{tc.attrs["name"]} (in {file}): {msg}")
+				toolcontext.warning(du.mdoc.location, "error", "ERROR: {tc.attrs["classname"]}.{tc.attrs["name"]} (in {file}): Runtime error\n{msg}")
 				toolcontext.modelbuilder.failed_entities += 1
 			end
 			toolcontext.check_errors
@@ -209,12 +210,13 @@ class NitUnitExecutor
 			res2 = toolcontext.safe_exec("{file.to_program_name}.bin >'{file}.out1' 2>&1 </dev/null")
 		end
 
-		var msg
 		f = new FileReader.open("{file}.out1")
 		var n2
 		n2 = new HTMLTag("system-err")
 		tc.add n2
-		msg = f.read_all
+		var content = f.read_all
+		var msg = content.trunc(8192).filter_nonprintable
+		n2.append(msg)
 		f.close
 
 		n2 = new HTMLTag("system-out")
@@ -224,15 +226,15 @@ class NitUnitExecutor
 
 		if res != 0 then
 			var ne = new HTMLTag("failure")
-			ne.attr("message", msg)
+			ne.attr("message", "Compilation Error")
 			tc.add ne
-			toolcontext.warning(du.mdoc.location, "failure", "FAILURE: {tc.attrs["classname"]}.{tc.attrs["name"]} (in {file}): {msg}")
+			toolcontext.warning(du.mdoc.location, "failure", "FAILURE: {tc.attrs["classname"]}.{tc.attrs["name"]} (in {file}):\n{msg}")
 			toolcontext.modelbuilder.failed_entities += 1
 		else if res2 != 0 then
 			var ne = new HTMLTag("error")
-			ne.attr("message", msg)
+			ne.attr("message", "Runtime Error")
 			tc.add ne
-			toolcontext.warning(du.mdoc.location, "error", "ERROR: {tc.attrs["classname"]}.{tc.attrs["name"]} (in {file}): {msg}")
+			toolcontext.warning(du.mdoc.location, "error", "ERROR: {tc.attrs["classname"]}.{tc.attrs["name"]} (in {file}):\n{msg}")
 			toolcontext.modelbuilder.failed_entities += 1
 		end
 		toolcontext.check_errors
