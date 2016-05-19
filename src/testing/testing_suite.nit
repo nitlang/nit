@@ -183,12 +183,7 @@ class TestSuite
 	# Compile all `test_cases` cases in one file.
 	fun compile do
 		# find nitc
-		var nit_dir = toolcontext.nit_dir
-		var nitc = nit_dir/"bin/nitc"
-		if not nitc.file_exists then
-			toolcontext.error(null, "Error: cannot find nitc. Set envvar NIT_DIR.")
-			toolcontext.check_errors
-		end
+		var nitc = toolcontext.find_nitc
 		# compile test suite
 		var file = test_file
 		var module_file = mmodule.location.file
@@ -199,7 +194,7 @@ class TestSuite
 		end
 		var include_dir = module_file.filename.dirname
 		var cmd = "{nitc} --no-color '{file}.nit' -I {include_dir} -o '{file}.bin' > '{file}.out' 2>&1 </dev/null"
-		var res = sys.system(cmd)
+		var res = toolcontext.safe_exec(cmd)
 		var f = new FileReader.open("{file}.out")
 		var msg = f.read_all
 		f.close
@@ -253,7 +248,7 @@ class TestCase
 		var method_name = test_method.name
 		var test_file = test_suite.test_file
 		var res_name = "{test_file}_{method_name.escape_to_c}"
-		var res = sys.system("{test_file}.bin {method_name} > '{res_name}.out1' 2>&1 </dev/null")
+		var res = toolcontext.safe_exec("{test_file}.bin {method_name} > '{res_name}.out1' 2>&1 </dev/null")
 		var f = new FileReader.open("{res_name}.out1")
 		var msg = f.read_all
 		f.close
@@ -264,6 +259,25 @@ class TestCase
 			toolcontext.warning(loc, "failure",
 			   "ERROR: {method_name} (in file {test_file}.nit): {msg}")
 			toolcontext.modelbuilder.failed_tests += 1
+		else
+			var mmodule = test_method.mclassdef.mmodule
+			var file = mmodule.filepath
+			if file != null then
+				var sav = file.dirname / mmodule.name + ".sav" / test_method.name + ".res"
+				if sav.file_exists then
+					toolcontext.info("Diff output with {sav}", 1)
+					res = toolcontext.safe_exec("diff -u --label 'expected:{sav}' --label 'got:{res_name}.out1' '{sav}' '{res_name}.out1' > '{res_name}.diff' 2>&1 </dev/null")
+					if res != 0 then
+						msg = "Diff\n" + "{res_name}.diff".to_path.read_all
+						error = msg
+						toolcontext.warning(loc, "failure",
+						"ERROR: {method_name} (in file {test_file}.nit): {msg}")
+						toolcontext.modelbuilder.failed_tests += 1
+					end
+				else
+					toolcontext.info("No diff: {sav} not found", 2)
+				end
+			end
 		end
 		toolcontext.check_errors
 	end
@@ -282,14 +296,14 @@ class TestCase
 		tc.attr("classname", "nitunit." + mclassdef.mmodule.full_name + "." + mclassdef.mclass.full_name)
 		tc.attr("name", test_method.mproperty.full_name)
 		if was_exec then
-			tc.add  new HTMLTag("system-err")
-			var n = new HTMLTag("system-out")
-			n.append "out"
+			tc.add  new HTMLTag("system-out")
+			var n = new HTMLTag("system-err")
 			tc.add n
 			var error = self.error
 			if error != null then
+				n.append error.trunc(8192).filter_nonprintable
 				n = new HTMLTag("error")
-				n.attr("message", error.to_s)
+				n.attr("message", "Runtime Error")
 				tc.add n
 			end
 		end

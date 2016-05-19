@@ -28,6 +28,6 @@ class SuperTestSuite
 
 	redef fun after_test do
 		print "After Test"
-		assert false
+		assert before
 	end
 end

@@ -157,14 +157,15 @@ class NitUnitExecutor
 			toolcontext.modelbuilder.unit_entities += 1
 			i += 1
 			toolcontext.info("Execute doc-unit {du.testcase.attrs["name"]} in {file} {i}", 1)
-			var res2 = sys.system("{file.to_program_name}.bin {i} >>'{file}.out1' 2>&1 </dev/null")
+			var res2 = toolcontext.safe_exec("{file.to_program_name}.bin {i} >'{file}.out1' 2>&1 </dev/null")
 
-			var msg
 			f = new FileReader.open("{file}.out1")
 			var n2
 			n2 = new HTMLTag("system-err")
 			tc.add n2
-			msg = f.read_all
+			var content = f.read_all
+			var msg = content.trunc(8192).filter_nonprintable
+			n2.append(msg)
 			f.close
 
 			n2 = new HTMLTag("system-out")
@@ -173,9 +174,9 @@ class NitUnitExecutor
 
 			if res2 != 0 then
 				var ne = new HTMLTag("error")
-				ne.attr("message", msg)
+				ne.attr("message", "Runtime error")
 				tc.add ne
-				toolcontext.warning(du.mdoc.location, "error", "ERROR: {tc.attrs["classname"]}.{tc.attrs["name"]} (in {file}): {msg}")
+				toolcontext.warning(du.mdoc.location, "error", "ERROR: {tc.attrs["classname"]}.{tc.attrs["name"]} (in {file}): Runtime error\n{msg}")
 				toolcontext.modelbuilder.failed_entities += 1
 			end
 			toolcontext.check_errors
@@ -206,15 +207,16 @@ class NitUnitExecutor
 		var res = compile_unitfile(file)
 		var res2 = 0
 		if res == 0 then
-			res2 = sys.system("{file.to_program_name}.bin >>'{file}.out1' 2>&1 </dev/null")
+			res2 = toolcontext.safe_exec("{file.to_program_name}.bin >'{file}.out1' 2>&1 </dev/null")
 		end
 
-		var msg
 		f = new FileReader.open("{file}.out1")
 		var n2
 		n2 = new HTMLTag("system-err")
 		tc.add n2
-		msg = f.read_all
+		var content = f.read_all
+		var msg = content.trunc(8192).filter_nonprintable
+		n2.append(msg)
 		f.close
 
 		n2 = new HTMLTag("system-out")
@@ -224,15 +226,15 @@ class NitUnitExecutor
 
 		if res != 0 then
 			var ne = new HTMLTag("failure")
-			ne.attr("message", msg)
+			ne.attr("message", "Compilation Error")
 			tc.add ne
-			toolcontext.warning(du.mdoc.location, "failure", "FAILURE: {tc.attrs["classname"]}.{tc.attrs["name"]} (in {file}): {msg}")
+			toolcontext.warning(du.mdoc.location, "failure", "FAILURE: {tc.attrs["classname"]}.{tc.attrs["name"]} (in {file}):\n{msg}")
 			toolcontext.modelbuilder.failed_entities += 1
 		else if res2 != 0 then
 			var ne = new HTMLTag("error")
-			ne.attr("message", msg)
+			ne.attr("message", "Runtime Error")
 			tc.add ne
-			toolcontext.warning(du.mdoc.location, "error", "ERROR: {tc.attrs["classname"]}.{tc.attrs["name"]} (in {file}): {msg}")
+			toolcontext.warning(du.mdoc.location, "error", "ERROR: {tc.attrs["classname"]}.{tc.attrs["name"]} (in {file}):\n{msg}")
 			toolcontext.modelbuilder.failed_entities += 1
 		end
 		toolcontext.check_errors
@@ -268,18 +270,13 @@ class NitUnitExecutor
 	# Can terminate the program if the compiler is not found
 	private fun compile_unitfile(file: String): Int
 	do
-		var nit_dir = toolcontext.nit_dir
-		var nitc = nit_dir/"bin/nitc"
-		if not nitc.file_exists then
-			toolcontext.error(null, "Error: cannot find nitc. Set envvar NIT_DIR.")
-			toolcontext.check_errors
-		end
+		var nitc = toolcontext.find_nitc
 		var opts = new Array[String]
 		if mmodule != null then
 			opts.add "-I {mmodule.filepath.dirname}"
 		end
 		var cmd = "{nitc} --ignore-visibility --no-color '{file}' {opts.join(" ")} >'{file}.out1' 2>&1 </dev/null -o '{file}.bin'"
-		var res = sys.system(cmd)
+		var res = toolcontext.safe_exec(cmd)
 		return res
 	end
 end

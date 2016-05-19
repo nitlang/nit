@@ -20,7 +20,7 @@ import testing
 
 var toolcontext = new ToolContext
 
-toolcontext.option_context.add_option(toolcontext.opt_full, toolcontext.opt_output, toolcontext.opt_dir, toolcontext.opt_noact, toolcontext.opt_pattern, toolcontext.opt_file, toolcontext.opt_gen_unit, toolcontext.opt_gen_force, toolcontext.opt_gen_private, toolcontext.opt_gen_show)
+toolcontext.option_context.add_option(toolcontext.opt_full, toolcontext.opt_output, toolcontext.opt_dir, toolcontext.opt_noact, toolcontext.opt_pattern, toolcontext.opt_file, toolcontext.opt_gen_unit, toolcontext.opt_gen_force, toolcontext.opt_gen_private, toolcontext.opt_gen_show, toolcontext.opt_nitc)
 toolcontext.tooldescription = "Usage: nitunit [OPTION]... <file.nit>...\nExecutes the unit tests from Nit source files."
 
 toolcontext.process_options(args)
@@ -64,6 +64,10 @@ if toolcontext.opt_gen_unit.value then
 end
 
 "NIT_TESTING".setenv("true")
+
+var test_dir = toolcontext.test_dir
+test_dir.mkdir
+"# This file prevents the Nit modules of the directory to be part of the package".write_to_file(test_dir / "packages.ini")
 
 var page = new HTMLTag("testsuites")
 
