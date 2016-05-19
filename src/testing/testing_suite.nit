@@ -259,6 +259,25 @@ class TestCase
 			toolcontext.warning(loc, "failure",
 			   "ERROR: {method_name} (in file {test_file}.nit): {msg}")
 			toolcontext.modelbuilder.failed_tests += 1
+		else
+			var mmodule = test_method.mclassdef.mmodule
+			var file = mmodule.filepath
+			if file != null then
+				var sav = file.dirname / mmodule.name + ".sav" / test_method.name + ".res"
+				if sav.file_exists then
+					toolcontext.info("Diff output with {sav}", 1)
+					res = toolcontext.safe_exec("diff -u --label 'expected:{sav}' --label 'got:{res_name}.out1' '{sav}' '{res_name}.out1' > '{res_name}.diff' 2>&1 </dev/null")
+					if res != 0 then
+						msg = "Diff\n" + "{res_name}.diff".to_path.read_all
+						error = msg
+						toolcontext.warning(loc, "failure",
+						"ERROR: {method_name} (in file {test_file}.nit): {msg}")
+						toolcontext.modelbuilder.failed_tests += 1
+					end
+				else
+					toolcontext.info("No diff: {sav} not found", 2)
+				end
+			end
 		end
 		toolcontext.check_errors
 	end
