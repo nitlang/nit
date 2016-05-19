@@ -132,6 +132,14 @@ class ModelView
 		return res
 	end
 
+	# Searches the MEntity that matches `full_name`.
+	fun mentity_by_full_name(full_name: String): nullable MEntity do
+		for mentity in mentities do
+			if mentity.full_name == full_name then return mentity
+		end
+		return null
+	end
+
 	# Looks up a MEntity by its full `namespace`.
 	#
 	# Usefull when `mentities_by_name` returns conflicts.
