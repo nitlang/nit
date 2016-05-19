@@ -22,5 +22,14 @@ class TestTestSuite
 	fun test_foo do
 		print "Tested method"
 		assert before
+		before = false
+	end
+
+	fun test_bar do
+		print "Tested method"
+	end
+
+	fun test_baz do
+		print "Tested method"
 	end
 end
