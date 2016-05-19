@@ -237,12 +237,18 @@ With the `--full` option, all imported modules (even those in standard) are also
 ### `-o`, `--output`
 Output name (default is 'nitunit.xml').
 
-### `nitunit` produces a XML file comatible with JUnit.
+`nitunit` produces a XML file compatible with JUnit.
 
 ### `--dir`
 Working directory (default is '.nitunit').
 
 In order to execute the tests, nit files are generated then compiled and executed in the giver working directory.
+
+### `--nitc`
+nitc compiler to use.
+
+By default, nitunit tries to locate the `nitc` program with the environment variable `NITC` or heuristics.
+The option is used to indicate a specific nitc binary.
 
 ### `--no-act`
 Does not compile and run tests.
@@ -270,6 +276,13 @@ Also generate test case for private methods.
 
 ### `--only-show`
 Only display the skeleton, do not write any file.
+
+
+# ENVIRONMENT VARIABLES
+
+### `NITC`
+
+Indicate the specific Nit compiler executable to use. See `--nitc`.
 
 # SEE ALSO
 
