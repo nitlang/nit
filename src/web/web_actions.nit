@@ -36,19 +36,15 @@ class SearchAction
 	# TODO handle more than full namespaces.
 	redef fun answer(request, url) do
 		var namespace = request.param("namespace")
-		if namespace == null or namespace.is_empty then
-			return render_error(400, "Missing :namespace.")
-		end
 		var model = init_model_view(request)
-		var mentities = model.mentities_by_namespace(namespace)
-		if request.is_json_asked then
-			var json = new JsonArray
-			for mentity in mentities do
-				json.add mentity.to_json
-			end
-			return render_json(json)
+		var mentity = find_mentity(model, namespace)
+		if mentity == null then
+			return render_error(404, "No mentity found")
 		end
-		var view = new HtmlResultPage(namespace, mentities)
+		if request.is_json_asked then
+			return render_json(mentity.to_json)
+		end
+		var view = new HtmlResultPage(namespace or else "null", [mentity])
 		return render_view(view)
 	end
 end
@@ -60,18 +56,14 @@ class CodeAction
 	# Modelbuilder used to access sources.
 	var modelbuilder: ModelBuilder
 
-	# TODO handle more than full namespaces.
 	redef fun answer(request, url) do
 		var namespace = request.param("namespace")
-		if namespace == null or namespace.is_empty then
-			return render_error(400, "Missing :namespace.")
-		end
 		var model = init_model_view(request)
-		var mentities = model.mentities_by_namespace(namespace)
-		if mentities.is_empty then
-			return render_error(404, "No mentity matching this namespace.")
+		var mentity = find_mentity(model, namespace)
+		if mentity == null then
+			return render_error(404, "No mentity found")
 		end
-		var view = new HtmlSourcePage(modelbuilder, mentities.first)
+		var view = new HtmlSourcePage(modelbuilder, mentity)
 		return render_view(view)
 	end
 end
@@ -86,15 +78,12 @@ class DocAction
 	# TODO handle more than full namespaces.
 	redef fun answer(request, url) do
 		var namespace = request.param("namespace")
-		if namespace == null or namespace.is_empty then
-			return render_error(400, "Missing :namespace.")
-		end
 		var model = init_model_view(request)
-		var mentities = model.mentities_by_namespace(namespace)
-		if mentities.is_empty then
-			return render_error(404, "No mentity matching this namespace.")
+		var mentity = find_mentity(model, namespace)
+		if mentity == null then
+			return render_error(404, "No mentity found")
 		end
-		var view = new HtmlDocPage(modelbuilder, mentities.first)
+		var view = new HtmlDocPage(modelbuilder, mentity)
 		return render_view(view)
 	end
 end
@@ -108,18 +97,14 @@ class UMLDiagramAction
 
 	redef fun answer(request, url) do
 		var namespace = request.param("namespace")
-		if namespace == null or namespace.is_empty then
-			return render_error(400, "Missing :namespace.")
-		end
 		var model = init_model_view(request)
-		var mentities = model.mentities_by_namespace(namespace)
-		if mentities.is_empty then
-			return render_error(404, "No mentity matching this namespace.")
+		var mentity = find_mentity(model, namespace)
+		if mentity == null then
+			return render_error(404, "No mentity found")
 		end
-		var mentity = mentities.first
-		if mentity isa MClassDef then mentity = mentity.mclass
 
 		var dot
+		if mentity isa MClassDef then mentity = mentity.mclass
 		if mentity isa MClass then
 			var uml = new UMLModel(model, mainmodule)
 			dot = uml.generate_class_uml.write_to_string
@@ -129,7 +114,7 @@ class UMLDiagramAction
 		else
 			return render_error(404, "No diagram matching this namespace.")
 		end
-		var view = new HtmlDotPage(dot, mentity.html_name)
+		var view = new HtmlDotPage(dot, mentity.as(not null).html_name)
 		return render_view(view)
 	end
 end
@@ -171,7 +156,7 @@ redef class MEntity
 	fun to_json: JsonObject do
 		var obj = new JsonObject
 		obj["name"] = html_name
-		obj["namespace"] = html_raw_namespace
+		obj["namespace"] = html_full_name
 		var mdoc = self.mdoc
 		if mdoc != null then
 			obj["synopsis"] = mdoc.content.first.html_escape
