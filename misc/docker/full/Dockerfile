@@ -14,6 +14,7 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-ins
 		libgles2-mesa-dev \
 		libgtk-3-dev \
 		libncurses5-dev \
+		libpq-dev \
 		libsdl-image1.2-dev \
 		libsdl-ttf2.0-dev \
 		libsdl1.2-dev \
@@ -21,6 +22,7 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-ins
 		libsqlite3-dev \
 		libx11-dev \
 		libxdg-basedir-dev \
+		postgresql \
 		# Packages needed for platforms and FFI
 		default-jdk \
 		libopenmpi-dev \
