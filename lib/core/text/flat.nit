@@ -369,6 +369,10 @@ redef class FlatText
 		end
 		return res
 	end
+
+	redef fun copy_to_native(dst, n, src_off, dst_off) do
+		_items.copy_to(dst, n, first_byte + src_off, dst_off)
+	end
 end
 
 # Immutable strings of characters.

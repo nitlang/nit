@@ -221,23 +221,16 @@ private class Concat
 	end
 
 	redef fun copy_to_native(dest, n, src_offset, dest_offset) do
-		var subs = new RopeSubstrings.from(self, src_offset)
-		var st = src_offset - subs.pos
-		var off = dest_offset
-		while n > 0 do
-			var it = subs.item
-			if n > it.length then
-				var cplen = it.length - st
-				it._items.copy_to(dest, cplen, st, off)
-				off += cplen
-				n -= cplen
-			else
-				it._items.copy_to(dest, n, st, off)
-				n = 0
-			end
-			subs.next
-			st = 0
+		var l = _left
+		if src_offset < l.bytelen then
+			var lcopy = l.bytelen - src_offset
+			lcopy = if lcopy > n then n else lcopy
+			l.copy_to_native(dest, lcopy, src_offset, dest_offset)
+			dest_offset += lcopy
+			n -= lcopy
+			src_offset = 0
 		end
+		_right.copy_to_native(dest, n, src_offset, dest_offset)
 	end
 
 	# Returns a balanced version of `self`
