@@ -112,6 +112,19 @@ redef class App
 		set_view_controller(app_delegate.window, window.native)
 		super
 	end
+
+	# Use iOS ` popViewControllerAnimated`
+	redef fun pop_window
+	do
+		window_stack.pop
+		pop_view_controller app_delegate.window
+		window.on_resume
+	end
+
+	private fun pop_view_controller(window: UIWindow) in "ObjC" `{
+		UINavigationController *navController = (UINavigationController*)window.rootViewController;
+		[navController popViewControllerAnimated: YES];
+	`}
 end
 
 redef class AppDelegate
@@ -267,8 +280,8 @@ redef class CheckBox
 	init
 	do
 		# Tweak the layout so it is centered
-		layout.native.distribution = new UIStackViewDistribution.fill_proportionally
-		layout.native.alignment = new UIStackViewAlignment.center
+		layout.native.distribution = new UIStackViewDistribution.equal_spacing
+		layout.native.alignment = new UIStackViewAlignment.fill
 		layout.native.layout_margins_relative_arrangement = true
 
 		var s = new UISwitch
@@ -364,7 +377,7 @@ redef class ListLayout
 		native_stack_view.translates_autoresizing_mask_into_constraits = false
 		native_stack_view.axis = new UILayoutConstraintAxis.vertical
 		native_stack_view.alignment = new UIStackViewAlignment.fill
-		native_stack_view.distribution = new UIStackViewDistribution.fill_equally
+		native_stack_view.distribution = new UIStackViewDistribution.equal_spacing
 		native_stack_view.spacing = 4.0
 
 		native.add_subview native_stack_view
