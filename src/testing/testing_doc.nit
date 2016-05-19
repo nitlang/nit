@@ -268,12 +268,7 @@ class NitUnitExecutor
 	# Can terminate the program if the compiler is not found
 	private fun compile_unitfile(file: String): Int
 	do
-		var nit_dir = toolcontext.nit_dir
-		var nitc = nit_dir/"bin/nitc"
-		if not nitc.file_exists then
-			toolcontext.error(null, "Error: cannot find nitc. Set envvar NIT_DIR.")
-			toolcontext.check_errors
-		end
+		var nitc = toolcontext.find_nitc
 		var opts = new Array[String]
 		if mmodule != null then
 			opts.add "-I {mmodule.filepath.dirname}"

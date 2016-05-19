@@ -183,12 +183,7 @@ class TestSuite
 	# Compile all `test_cases` cases in one file.
 	fun compile do
 		# find nitc
-		var nit_dir = toolcontext.nit_dir
-		var nitc = nit_dir/"bin/nitc"
-		if not nitc.file_exists then
-			toolcontext.error(null, "Error: cannot find nitc. Set envvar NIT_DIR.")
-			toolcontext.check_errors
-		end
+		var nitc = toolcontext.find_nitc
 		# compile test suite
 		var file = test_file
 		var module_file = mmodule.location.file

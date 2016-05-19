@@ -34,4 +34,18 @@ redef class ToolContext
 		if dir == null then return ".nitunit"
 		return dir
 	end
+
+	# Search the `nitc` compiler to use
+	#
+	# If not `nitc` is suitable, then prints an error and quit.
+	fun find_nitc: String
+	do
+		var nit_dir = nit_dir
+		var nitc = nit_dir/"bin/nitc"
+		if not nitc.file_exists then
+			fatal_error(null, "Error: cannot find nitc. Set envvar NIT_DIR.")
+			abort
+		end
+		return nitc
+	end
 end
