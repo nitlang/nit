@@ -65,6 +65,10 @@ end
 
 "NIT_TESTING".setenv("true")
 
+var test_dir = toolcontext.test_dir
+test_dir.mkdir
+"# This file prevents the Nit modules of the directory to be part of the package".write_to_file(test_dir / "packages.ini")
+
 var page = new HTMLTag("testsuites")
 
 if toolcontext.opt_full.value then mmodules = model.mmodules
