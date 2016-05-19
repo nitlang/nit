@@ -32,10 +32,13 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-ins
 
 # Run tests
 RUN cd /root/nit/tests \
+	# Basic tests
 	&& ./testfull.sh || true \
 	&& rm -rf out/ alt/*.nit \
+	# Nitunits
+	&& ../bin/nitunit ../lib ../contrib || true \
+	&& rm -rf .nitunit \
 	&& ccache -C
-# TODO: nitunits
 
 WORKDIR /root/nit
 ENTRYPOINT [ "bash" ]
