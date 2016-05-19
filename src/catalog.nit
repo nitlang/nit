@@ -254,8 +254,13 @@ class Catalog
 	do
 		var p = persons.get_or_null(person)
 		if p == null then
-			p = new Person.parse(person)
-			persons[person] = p
+			var new_p = new Person.parse(person)
+			# Maybe, we already have this person in fact?
+			p = persons.get_or_null(new_p.to_s)
+			if p == null then
+				p = new_p
+				persons[p.to_s] = p
+			end
 		end
 		var projs = contrib2proj[p]
 		if not projs.has(mpackage) then
