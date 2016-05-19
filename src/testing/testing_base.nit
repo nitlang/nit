@@ -27,6 +27,8 @@ redef class ToolContext
 	var opt_dir = new OptionString("Working directory (default is '.nitunit')", "--dir")
 	# opt --no-act
 	var opt_noact = new OptionBool("Does not compile and run tests", "--no-act")
+	# opt --nitc
+	var opt_nitc = new OptionString("nitc compiler to use", "--nitc")
 
 	# Working directory for testing.
 	fun test_dir: String do
@@ -40,10 +42,28 @@ redef class ToolContext
 	# If not `nitc` is suitable, then prints an error and quit.
 	fun find_nitc: String
 	do
+		var nitc = opt_nitc.value
+		if nitc != null then
+			if not nitc.file_exists then
+				fatal_error(null, "error: cannot find `{nitc}` given by --nitc.")
+				abort
+			end
+			return nitc
+		end
+
+		nitc = "NITC".environ
+		if nitc != "" then
+			if not nitc.file_exists then
+				fatal_error(null, "error: cannot find `{nitc}` given by NITC.")
+				abort
+			end
+			return nitc
+		end
+
 		var nit_dir = nit_dir
-		var nitc = nit_dir/"bin/nitc"
+		nitc = nit_dir/"bin/nitc"
 		if not nitc.file_exists then
-			fatal_error(null, "Error: cannot find nitc. Set envvar NIT_DIR.")
+			fatal_error(null, "Error: cannot find nitc. Set envvar NIT_DIR or NITC or use the --nitc option.")
 			abort
 		end
 		return nitc
