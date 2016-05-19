@@ -149,19 +149,3 @@ class RandomAction
 		return render_view(view)
 	end
 end
-
-redef class MEntity
-
-	# Return `self` as a JsonObject.
-	fun to_json: JsonObject do
-		var obj = new JsonObject
-		obj["name"] = html_name
-		obj["namespace"] = html_full_name
-		var mdoc = self.mdoc
-		if mdoc != null then
-			obj["synopsis"] = mdoc.content.first.html_escape
-			obj["mdoc"] = mdoc.content.join("\n").html_escape
-		end
-		return obj
-	end
-end

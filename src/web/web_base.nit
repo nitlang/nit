@@ -16,8 +16,8 @@
 module web_base
 
 import model::model_views
+import model::model_json
 import nitcorn
-import json
 
 # Nitcorn server runned by `nitweb`.
 #
