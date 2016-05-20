@@ -36,9 +36,6 @@ class NitUnitExecutor
 	# The XML node associated to the module
 	var testsuite: HTMLTag
 
-	# All failures from a same `ADoc`
-	var failures = new Array[String]
-
 	# Markdown processor used to parse markdown comments and extract code.
 	var mdproc = new MarkdownProcessor
 
@@ -66,7 +63,6 @@ class NitUnitExecutor
 	fun extract(mdoc: MDoc, xml_classname, xml_name: String)
 	do
 		last_docunit = null
-		failures.clear
 		self.xml_classname = xml_classname
 		self.xml_name = xml_name
 
@@ -76,17 +72,6 @@ class NitUnitExecutor
 		mdproc.process(mdoc.content.join("\n"))
 
 		toolcontext.check_errors
-
-		if not failures.is_empty then
-			for msg in failures do
-				var ne = new HTMLTag("failure")
-				ne.attr("message", msg)
-				tc.add ne
-				toolcontext.modelbuilder.unit_entities += 1
-				toolcontext.modelbuilder.failed_entities += 1
-			end
-			if last_docunit == null then testsuite.add(tc)
-		end
 	end
 
 	# All extracted docunits
@@ -97,6 +82,9 @@ class NitUnitExecutor
 	do
 		var simple_du = new Array[DocUnit]
 		for du in docunits do
+			# Skip existing errors
+			if du.error != null then continue
+
 			var ast = toolcontext.parse_something(du.block)
 			if ast isa AExpr then
 				simple_du.add du
@@ -300,7 +288,11 @@ private class NitunitDecorator
 			end
 
 			executor.toolcontext.warning(location, "invalid-block", "{message} To suppress this message, enclose the block with a fence tagged `nitish` or `raw` (see `man nitdoc`).")
-			executor.failures.add("{location}: {message}")
+			executor.toolcontext.modelbuilder.failed_entities += 1
+
+			var du = new_docunit
+			du.block += code
+			du.error = "{location}: {message}"
 			return
 		end
 
