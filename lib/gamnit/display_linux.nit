@@ -48,7 +48,7 @@ redef class GamnitDisplay
 		setup_egl_display x11_display
 
 		if debug_gamnit then print "Setting up EGL context"
-		select_egl_config(8, 8, 8, 8, 8, 0, 0)
+		select_egl_config(red_bits, green_bits, blue_bits, 8, 8, 0, 0)
 		setup_egl_context window_handle
 	end
 
