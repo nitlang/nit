@@ -75,7 +75,7 @@
 </ul>
 <h3>Quality</h3>
 <ul class="box">
-<li>28 warnings</li>
+<li>28 warnings (63/kloc)</li>
 <li>93% documented</li>
 </ul>
 <h3>Tags</h3>
