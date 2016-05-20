@@ -51,6 +51,7 @@ class MediaTypes
 		types["jar"]        = "application/java-archive"
 		types["war"]        = "application/java-archive"
 		types["ear"]        = "application/java-archive"
+		types["json"]       = "application/json"
 		types["hqx"]        = "application/mac-binhex40"
 		types["pdf"]        = "application/pdf"
 		types["cco"]        = "application/x-cocoa"

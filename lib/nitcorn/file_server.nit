@@ -71,6 +71,9 @@ class FileServer
 	# Caching attributes of served files, used as the `cache-control` field in response headers
 	var cache_control = "public, max-age=360" is writable
 
+	# Show directory listing?
+	var show_directory_listing = true is writable
+
 	redef fun answer(request, turi)
 	do
 		var response
@@ -105,8 +108,8 @@ class FileServer
 					end
 				end
 
-				response = new HttpResponse(200)
-				if local_file.file_stat.is_dir then
+				var is_dir = local_file.file_stat.is_dir
+				if show_directory_listing and is_dir then
 					# Show the directory listing
 					var title = turi
 					var files = local_file.files
@@ -131,6 +134,7 @@ class FileServer
 						header_code = header.write_to_string
 					else header_code = ""
 
+					response = new HttpResponse(200)
 					response.body = """
 <!DOCTYPE html>
 <head>
@@ -154,8 +158,9 @@ class FileServer
 </html>"""
 
 					response.header["Content-Type"] = media_types["html"].as(not null)
-				else
+				else if not is_dir then
 					# It's a single file
+					response = new HttpResponse(200)
 					response.files.add local_file
 
 					var ext = local_file.file_extension
@@ -168,8 +173,8 @@ class FileServer
 
 					# Cache control
 					response.header["cache-control"] = cache_control
-				end
 
+				else response = new HttpResponse(404)
 			else response = new HttpResponse(404)
 		else response = new HttpResponse(403)
 
