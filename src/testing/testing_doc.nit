@@ -106,6 +106,10 @@ class NitUnitExecutor
 		end
 
 		test_simple_docunits(simple_du)
+
+		for du in docunits do
+			testsuite.add du.to_xml
+		end
 	end
 
 	# Executes multiples doc-units in a shared program.
@@ -160,29 +164,15 @@ class NitUnitExecutor
 			toolcontext.info("Execute doc-unit {du.testcase.attrs["name"]} in {file} {i}", 1)
 			var res2 = toolcontext.safe_exec("{file.to_program_name}.bin {i} >'{file}.out1' 2>&1 </dev/null")
 
-			f = new FileReader.open("{file}.out1")
-			var n2
-			n2 = new HTMLTag("system-err")
-			tc.add n2
-			var content = f.read_all
+			var content = "{file}.out1".to_path.read_all
 			var msg = content.trunc(8192).filter_nonprintable
-			n2.append(msg)
-			f.close
-
-			n2 = new HTMLTag("system-out")
-			tc.add n2
-			n2.append(du.block)
 
 			if res2 != 0 then
-				var ne = new HTMLTag("error")
-				ne.attr("message", "Runtime error")
-				tc.add ne
+				du.error = content
 				toolcontext.warning(du.location, "error", "ERROR: {tc.attrs["classname"]}.{tc.attrs["name"]} (in {file}): Runtime error\n{msg}")
 				toolcontext.modelbuilder.failed_entities += 1
 			end
 			toolcontext.check_errors
-
-			testsuite.add(tc)
 		end
 	end
 
@@ -211,36 +201,19 @@ class NitUnitExecutor
 			res2 = toolcontext.safe_exec("{file.to_program_name}.bin >'{file}.out1' 2>&1 </dev/null")
 		end
 
-		f = new FileReader.open("{file}.out1")
-		var n2
-		n2 = new HTMLTag("system-err")
-		tc.add n2
-		var content = f.read_all
+		var content = "{file}.out1".to_path.read_all
 		var msg = content.trunc(8192).filter_nonprintable
-		n2.append(msg)
-		f.close
-
-		n2 = new HTMLTag("system-out")
-		tc.add n2
-		n2.append(du.block)
 
 
 		if res != 0 then
-			var ne = new HTMLTag("failure")
-			ne.attr("message", "Compilation Error")
-			tc.add ne
+			du.error = content
 			toolcontext.warning(du.location, "failure", "FAILURE: {tc.attrs["classname"]}.{tc.attrs["name"]} (in {file}):\n{msg}")
 			toolcontext.modelbuilder.failed_entities += 1
 		else if res2 != 0 then
-			var ne = new HTMLTag("error")
-			ne.attr("message", "Runtime Error")
-			tc.add ne
 			toolcontext.warning(du.location, "error", "ERROR: {tc.attrs["classname"]}.{tc.attrs["name"]} (in {file}):\n{msg}")
 			toolcontext.modelbuilder.failed_entities += 1
 		end
 		toolcontext.check_errors
-
-		testsuite.add(tc)
 	end
 
 	# Create and fill the header of a unit file `file`.
@@ -364,6 +337,8 @@ end
 # A docunit is extracted from the code-blocks of mdocs.
 # Each mdoc can contains more than one docunit, and a single docunit can be made of more that a single code-block.
 class DocUnit
+	super UnitTest
+
 	# The doc that contains self
 	var mdoc: MDoc
 
@@ -407,6 +382,14 @@ class DocUnit
 			columns[ast_location.line_end-1] + ast_location.column_end)
 		return res
 	end
+
+	redef fun to_xml
+	do
+		var res = super
+		res.open("system-out").append(block)
+		return res
+	end
+
 end
 
 redef class ModelBuilder
