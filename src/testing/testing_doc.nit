@@ -36,8 +36,8 @@ class NitUnitExecutor
 	# The XML node associated to the module
 	var testsuite: HTMLTag
 
-	# All blocks of code from a same `ADoc`
-	var blocks = new Array[Buffer]
+	# The current test-case xml element
+	var tc: HTMLTag is noautoinit
 
 	# All failures from a same `ADoc`
 	var failures = new Array[String]
@@ -55,14 +55,20 @@ class NitUnitExecutor
 	# used to generate distinct names
 	var cpt = 0
 
+	# The last docunit extracted from a mdoc.
+	#
+	# Is used because a new code-block might just be added to it.
+	var last_docunit: nullable DocUnit = null
+
 	# The entry point for a new `ndoc` node
 	# Fill `docunits` with new discovered unit of tests.
 	#
 	# `tc` (testcase) is the pre-filled XML node
 	fun extract(mdoc: MDoc, tc: HTMLTag)
 	do
-		blocks.clear
+		last_docunit = null
 		failures.clear
+		self.tc = tc
 
 		self.mdoc = mdoc
 
@@ -79,12 +85,7 @@ class NitUnitExecutor
 				toolcontext.modelbuilder.unit_entities += 1
 				toolcontext.modelbuilder.failed_entities += 1
 			end
-			if blocks.is_empty then testsuite.add(tc)
-		end
-
-		if blocks.is_empty then return
-		for block in blocks do
-			docunits.add new DocUnit(mdoc, tc, block.write_to_string)
+			if last_docunit == null then testsuite.add(tc)
 		end
 	end
 
@@ -338,16 +339,21 @@ private class NitunitDecorator
 
 		# Create a first block
 		# Or create a new block for modules that are more than a main part
-		if executor.blocks.is_empty or ast isa AModule then
-			executor.blocks.add(new Buffer)
+		var last_docunit = executor.last_docunit
+		if last_docunit == null or ast isa AModule then
+			last_docunit = new DocUnit(executor.mdoc.as(not null), executor.tc, "")
+			executor.docunits.add last_docunit
 		end
 
 		# Add it to the file
-		executor.blocks.last.append code
+		last_docunit.block += code
 	end
 end
 
-# A unit-test to run
+# A unit-test extracted from some documentation.
+#
+# A docunit is extracted from the code-blocks of mdocs.
+# Each mdoc can contains more than one docunit, and a single docunit can be made of more that a single code-block.
 class DocUnit
 	# The doc that contains self
 	var mdoc: MDoc
@@ -355,7 +361,9 @@ class DocUnit
 	# The XML node that contains the information about the execution
 	var testcase: HTMLTag
 
-	# The text of the code to execute
+	# The text of the code to execute.
+	#
+	# This is the verbatim content on one, or more, code-blocks from `mdoc`
 	var block: String
 end
 
