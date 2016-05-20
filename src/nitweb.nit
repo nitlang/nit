@@ -47,15 +47,15 @@ private class NitwebPhase
 		var host = toolcontext.opt_host.value or else "localhost"
 		var port = toolcontext.opt_port.value
 
-		var srv = new NitServer(host, port.to_i)
-		srv.routes.add new Route("/random", new RandomAction(srv, model))
-		srv.routes.add new Route("/doc/:namespace", new DocAction(srv, model, modelbuilder))
-		srv.routes.add new Route("/code/:namespace", new CodeAction(srv, model, modelbuilder))
-		srv.routes.add new Route("/search/:namespace", new SearchAction(srv, model))
-		srv.routes.add new Route("/uml/:namespace", new UMLDiagramAction(srv, model, mainmodule))
-		srv.routes.add new Route("/", new TreeAction(srv, model))
+		var app = new App
+		app.use("/random", new RandomAction(model))
+		app.use("/doc/:namespace", new DocAction(model, modelbuilder))
+		app.use("/code/:namespace", new CodeAction(model, modelbuilder))
+		app.use("/search/:namespace", new SearchAction(model))
+		app.use("/uml/:namespace", new UMLDiagramAction(model, mainmodule))
+		app.use("/", new TreeAction(model))
 
-		srv.listen
+		app.listen(host, port.to_i)
 	end
 end
 
