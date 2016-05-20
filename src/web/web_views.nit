@@ -35,34 +35,6 @@ class HtmlHomePage
 	end
 end
 
-# Display a search results list.
-class HtmlResultPage
-	super NitView
-
-	# Initial query.
-	var query: String
-
-	# Result set
-	var results: Array[MEntity]
-
-	redef fun render do
-		var tpl = new Template
-		tpl.add new Header(1, "Results for {query}")
-		if results.is_empty then
-			tpl.add "<p>No result for {query}.<p>"
-			return tpl
-		end
-		var list = new UnorderedList
-		for mentity in results do
-			var link = mentity.html_link
-			link.text = mentity.html_full_name
-			list.add_li new ListItem(link)
-		end
-		tpl.add list
-		return tpl
-	end
-end
-
 # Display the source for each mentities
 class HtmlSourcePage
 	super NitView

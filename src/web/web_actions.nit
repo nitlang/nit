@@ -106,34 +106,3 @@ class UMLDiagramAction
 		res.send_view(view)
 	end
 end
-
-# Return a random list of MEntities.
-class RandomAction
-	super ModelHandler
-
-	redef fun get(req, res) do
-		var n = req.int_arg("n") or else 10
-		var k = req.string_arg("k") or else "modules"
-		var model = init_model_view(req)
-		var mentities: Array[MEntity]
-		if k == "modules" then
-			mentities = model.mmodules.to_a
-		else if k == "classdefs" then
-			mentities = model.mclassdefs.to_a
-		else
-			mentities = model.mpropdefs.to_a
-		end
-		mentities.shuffle
-		mentities = mentities.sub(0, n)
-		if req.is_json_asked then
-			var json = new JsonArray
-			for mentity in mentities do
-				json.add mentity.to_json
-			end
-			res.json(json)
-			return
-		end
-		var view = new HtmlResultPage("random", mentities)
-		res.send_view(view)
-	end
-end

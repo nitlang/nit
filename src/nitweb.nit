@@ -50,7 +50,6 @@ private class NitwebPhase
 		var app = new App
 
 		app.use("/api", new APIRouter(model, modelbuilder, mainmodule))
-		app.use("/random", new RandomAction(model))
 		app.use("/doc/:namespace", new DocAction(model, mainmodule, modelbuilder))
 		app.use("/code/:namespace", new CodeAction(model, modelbuilder))
 		app.use("/uml/:namespace", new UMLDiagramAction(model, mainmodule))

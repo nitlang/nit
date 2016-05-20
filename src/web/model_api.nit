@@ -69,6 +69,7 @@ class APIRouter
 	init do
 		use("/list", new APIList(model, mainmodule))
 		use("/search", new APISearch(model, mainmodule))
+		use("/random", new APIRandom(model, mainmodule))
 	end
 end
 
@@ -139,6 +140,29 @@ class APIList
 	redef fun get(req, res) do
 		var mentities = list_mentities(req)
 		mentities = limit_mentities(req, mentities)
+		var arr = new JsonArray
+		for mentity in mentities do arr.add mentity
+		res.json arr
+	end
+end
+
+# Return a random list of MEntities.
+#
+# Example: `GET /random?n=10&k=module`
+class APIRandom
+	super APIList
+
+	# Randomize mentities order.
+	fun randomize_mentities(req: HttpRequest, mentities: Array[MEntity]): Array[MEntity] do
+		var res = mentities.to_a
+		res.shuffle
+		return res
+	end
+
+	redef fun get(req, res) do
+		var mentities = list_mentities(req)
+		mentities = limit_mentities(req, mentities)
+		mentities = randomize_mentities(req, mentities)
 		var arr = new JsonArray
 		for mentity in mentities do arr.add mentity
 		res.json arr
