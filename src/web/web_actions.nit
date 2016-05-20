@@ -53,36 +53,3 @@ class DocAction
 		res.send_view(view)
 	end
 end
-
-# Return an UML diagram for `namespace`.
-class UMLDiagramAction
-	super ModelHandler
-
-	# Mainmodule used for hierarchy flattening.
-	var mainmodule: MModule
-
-	redef fun get(req, res) do
-		var namespace = req.param("namespace")
-		var model = init_model_view(req)
-		var mentity = find_mentity(model, namespace)
-		if mentity == null then
-			res.error(404)
-			return
-		end
-
-		var dot
-		if mentity isa MClassDef then mentity = mentity.mclass
-		if mentity isa MClass then
-			var uml = new UMLModel(model, mainmodule)
-			dot = uml.generate_class_uml.write_to_string
-		else if mentity isa MModule then
-			var uml = new UMLModel(model, mentity)
-			dot = uml.generate_package_uml.write_to_string
-		else
-			res.error(404)
-			return
-		end
-		var view = new HtmlDotPage(dot, mentity.as(not null).html_name)
-		res.send_view(view)
-	end
-end

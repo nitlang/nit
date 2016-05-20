@@ -51,7 +51,6 @@ private class NitwebPhase
 
 		app.use("/api", new APIRouter(model, modelbuilder, mainmodule))
 		app.use("/doc/:namespace", new DocAction(model, mainmodule, modelbuilder))
-		app.use("/uml/:namespace", new UMLDiagramAction(model, mainmodule))
 		app.use("/", new TreeAction(model, mainmodule))
 
 		app.listen(host, port.to_i)

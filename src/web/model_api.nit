@@ -16,6 +16,7 @@ module model_api
 
 import web_base
 import highlight
+import uml
 
 # Specific handler for nitweb API.
 abstract class APIHandler
@@ -71,6 +72,7 @@ class APIRouter
 		use("/search", new APISearch(model, mainmodule))
 		use("/random", new APIRandom(model, mainmodule))
 		use("/code/:id", new APIEntityCode(model, mainmodule, modelbuilder))
+		use("/uml/:id", new APIEntityUML(model, mainmodule))
 	end
 end
 
@@ -167,6 +169,40 @@ class APIRandom
 		var arr = new JsonArray
 		for mentity in mentities do arr.add mentity
 		res.json arr
+	end
+end
+
+
+# Return a UML representation of MEntity.
+#
+# Example: `GET /entity/core::Array/uml`
+class APIEntityUML
+	super APIHandler
+
+	redef fun get(req, res) do
+		var mentity = mentity_from_uri(req, res)
+		var dot
+		if mentity isa MClassDef then mentity = mentity.mclass
+		if mentity isa MClass then
+			var uml = new UMLModel(view, mainmodule)
+			dot = uml.generate_class_uml.write_to_string
+		else if mentity isa MModule then
+			var uml = new UMLModel(view, mentity)
+			dot = uml.generate_package_uml.write_to_string
+		else
+			res.error 404
+			return
+		end
+		res.send render_svg(dot)
+	end
+
+	# Render a `dot` string as a svg image.
+	fun render_svg(dot: String): String do
+		var proc = new ProcessDuplex("dot", "-Tsvg")
+		var svg = proc.write_and_read(dot)
+		proc.close
+		proc.wait
+		return svg
 	end
 end
 
