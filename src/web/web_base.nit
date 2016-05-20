@@ -62,13 +62,6 @@ redef class HttpResponse
 	fun send_view(view: NitView, status: nullable Int) do send(view.render, status)
 end
 
-redef class HttpRequest
-	# Does the client asked for a json formatted response?
-	#
-	# Checks the URL get parameter `?json=true`.
-	fun is_json_asked: Bool do return bool_arg("json") or else false
-end
-
 redef class MEntity
 
 	# URL to `self` within the web interface.

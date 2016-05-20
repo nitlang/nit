@@ -71,6 +71,7 @@ class APIRouter
 		use("/list", new APIList(model, mainmodule))
 		use("/search", new APISearch(model, mainmodule))
 		use("/random", new APIRandom(model, mainmodule))
+		use("/entity/:id", new APIEntity(model, mainmodule))
 		use("/code/:id", new APIEntityCode(model, mainmodule, modelbuilder))
 		use("/uml/:id", new APIEntityUML(model, mainmodule))
 	end
@@ -169,6 +170,19 @@ class APIRandom
 		var arr = new JsonArray
 		for mentity in mentities do arr.add mentity
 		res.json arr
+	end
+end
+
+# Return the JSON representation of a MEntity.
+#
+# Example: `GET /entity/core::Array`
+class APIEntity
+	super APIHandler
+
+	redef fun get(req, res) do
+		var mentity = mentity_from_uri(req, res)
+		if mentity == null then return
+		res.json mentity.api_json(self)
 	end
 end
 

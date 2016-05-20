@@ -44,11 +44,6 @@ class DocAction
 			res.error(404)
 			return
 		end
-		if req.is_json_asked then
-			res.json(mentity.to_json)
-			return
-		end
-
 		var view = new HtmlDocPage(modelbuilder, mentity)
 		res.send_view(view)
 	end
