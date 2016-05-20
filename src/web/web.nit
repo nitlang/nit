@@ -16,3 +16,4 @@
 module web
 
 import web_actions
+import model_api
