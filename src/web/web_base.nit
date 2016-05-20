@@ -21,7 +21,7 @@ import doc_down
 import popcorn
 
 # Specific nitcorn Action that uses a Model
-class ModelAction
+class ModelHandler
 	super Handler
 
 	# Model to use.

@@ -20,7 +20,7 @@ import uml
 
 # Display the tree of all loaded mentities.
 class TreeAction
-	super ModelAction
+	super ModelHandler
 
 	redef fun get(req, res) do
 		var model = init_model_view(req)
@@ -31,7 +31,7 @@ end
 
 # Display the list of mentities matching `namespace`.
 class SearchAction
-	super ModelAction
+	super ModelHandler
 
 	# TODO handle more than full namespaces.
 	redef fun get(req, res) do
@@ -53,7 +53,7 @@ end
 
 # Display a MEntity source code.
 class CodeAction
-	super ModelAction
+	super ModelHandler
 
 	# Modelbuilder used to access sources.
 	var modelbuilder: ModelBuilder
@@ -73,7 +73,7 @@ end
 
 # Display the doc of a MEntity.
 class DocAction
-	super ModelAction
+	super ModelHandler
 
 	# Modelbuilder used to access sources.
 	var modelbuilder: ModelBuilder
@@ -98,7 +98,7 @@ end
 
 # Return an UML diagram for `namespace`.
 class UMLDiagramAction
-	super ModelAction
+	super ModelHandler
 
 	# Mainmodule used for hierarchy flattening.
 	var mainmodule: MModule
@@ -131,7 +131,7 @@ end
 
 # Return a random list of MEntities.
 class RandomAction
-	super ModelAction
+	super ModelHandler
 
 	redef fun get(req, res) do
 		var n = req.int_arg("n") or else 10
