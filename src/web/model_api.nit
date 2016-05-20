@@ -70,6 +70,7 @@ class APIRouter
 		use("/list", new APIList(model, mainmodule))
 		use("/search", new APISearch(model, mainmodule))
 		use("/random", new APIRandom(model, mainmodule))
+		use("/code/:id", new APIEntityCode(model, mainmodule, modelbuilder))
 	end
 end
 
@@ -166,5 +167,35 @@ class APIRandom
 		var arr = new JsonArray
 		for mentity in mentities do arr.add mentity
 		res.json arr
+	end
+end
+
+# Return the source code of MEntity.
+#
+# Example: `GET /entity/core::Array/code`
+class APIEntityCode
+	super APIHandler
+
+	# Modelbuilder used to access sources.
+	var modelbuilder: ModelBuilder
+
+	redef fun get(req, res) do
+		var mentity = mentity_from_uri(req, res)
+		if mentity == null then return
+		var source = render_source(mentity)
+		if source == null then
+			res.error 404
+			return
+		end
+		res.send source
+	end
+
+	# Highlight `mentity` source code.
+	private fun render_source(mentity: MEntity): nullable HTMLTag do
+		var node = modelbuilder.mentity2node(mentity)
+		if node == null then return null
+		var hl = new HighlightVisitor
+		hl.enter_visit node
+		return hl.html
 	end
 end

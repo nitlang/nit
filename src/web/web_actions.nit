@@ -29,26 +29,6 @@ class TreeAction
 	end
 end
 
-# Display a MEntity source code.
-class CodeAction
-	super ModelHandler
-
-	# Modelbuilder used to access sources.
-	var modelbuilder: ModelBuilder
-
-	redef fun get(req, res) do
-		var namespace = req.param("namespace")
-		var model = init_model_view(req)
-		var mentity = find_mentity(model, namespace)
-		if mentity == null then
-			res.error(404)
-			return
-		end
-		var view = new HtmlSourcePage(modelbuilder, mentity)
-		res.send_view(view)
-	end
-end
-
 # Display the doc of a MEntity.
 class DocAction
 	super ModelHandler
