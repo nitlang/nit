@@ -17,6 +17,7 @@ module testing_base
 
 import modelize
 private import parser_util
+import html
 
 redef class ToolContext
 	# opt --full
@@ -92,6 +93,47 @@ ulimit -t {{{ulimit_usertime}}} 2> /dev/null
 	#
 	# Default: 10 CPU minute
 	var ulimit_usertime = 600 is writable
+end
+
+# A unit test is an elementary test discovered, run and reported bu nitunit.
+#
+# This class factorizes `DocUnit` and `TestCase`.
+abstract class UnitTest
+
+	# Error occurred during test-case execution.
+	var error: nullable String = null is writable
+
+	# Was the test case executed at least once?
+	var was_exec = false is writable
+
+	# Return the `TestCase` in XML format compatible with Jenkins.
+	#
+	# See to_xml
+	fun to_xml: HTMLTag do
+		var tc = new HTMLTag("testcase")
+		tc.attr("classname", xml_classname)
+		tc.attr("name", xml_name)
+		var error = self.error
+		if error != null then
+			if was_exec then
+				tc.open("error").append("Runtime Error")
+			else
+				tc.open("failure").append("Compilation Error")
+			end
+			tc.open("system-err").append(error.trunc(8192).filter_nonprintable)
+		end
+		return tc
+	end
+
+	# The `classname` attribute of the XML format.
+	#
+	# NOTE: jenkins expects a '.' in the classname attr
+	fun xml_classname: String is abstract
+
+	# The `name` attribute of the XML format.
+	#
+	# See to_xml
+	fun xml_name: String is abstract
 end
 
 redef class String
