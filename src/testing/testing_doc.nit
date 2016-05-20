@@ -177,7 +177,7 @@ class NitUnitExecutor
 				var ne = new HTMLTag("error")
 				ne.attr("message", "Runtime error")
 				tc.add ne
-				toolcontext.warning(du.mdoc.location, "error", "ERROR: {tc.attrs["classname"]}.{tc.attrs["name"]} (in {file}): Runtime error\n{msg}")
+				toolcontext.warning(du.location, "error", "ERROR: {tc.attrs["classname"]}.{tc.attrs["name"]} (in {file}): Runtime error\n{msg}")
 				toolcontext.modelbuilder.failed_entities += 1
 			end
 			toolcontext.check_errors
@@ -229,13 +229,13 @@ class NitUnitExecutor
 			var ne = new HTMLTag("failure")
 			ne.attr("message", "Compilation Error")
 			tc.add ne
-			toolcontext.warning(du.mdoc.location, "failure", "FAILURE: {tc.attrs["classname"]}.{tc.attrs["name"]} (in {file}):\n{msg}")
+			toolcontext.warning(du.location, "failure", "FAILURE: {tc.attrs["classname"]}.{tc.attrs["name"]} (in {file}):\n{msg}")
 			toolcontext.modelbuilder.failed_entities += 1
 		else if res2 != 0 then
 			var ne = new HTMLTag("error")
 			ne.attr("message", "Runtime Error")
 			tc.add ne
-			toolcontext.warning(du.mdoc.location, "error", "ERROR: {tc.attrs["classname"]}.{tc.attrs["name"]} (in {file}):\n{msg}")
+			toolcontext.warning(du.location, "error", "ERROR: {tc.attrs["classname"]}.{tc.attrs["name"]} (in {file}):\n{msg}")
 			toolcontext.modelbuilder.failed_entities += 1
 		end
 		toolcontext.check_errors
@@ -347,6 +347,15 @@ private class NitunitDecorator
 
 		# Add it to the file
 		last_docunit.block += code
+
+		# In order to retrieve precise positions,
+		# the real position of each line of the raw_content is stored.
+		# See `DocUnit::real_location`
+		line_offset -= loc.line_start - 1
+		for i in [loc.line_start..loc.line_end] do
+			last_docunit.lines.add i + line_offset
+			last_docunit.columns.add column_offset
+		end
 	end
 end
 
@@ -365,6 +374,39 @@ class DocUnit
 	#
 	# This is the verbatim content on one, or more, code-blocks from `mdoc`
 	var block: String
+
+	# For each line in `block`, the associated line in the mdoc
+	#
+	# Is used to give precise locations
+	var lines = new Array[Int]
+
+	# For each line in `block`, the associated column in the mdoc
+	#
+	# Is used to give precise locations
+	var columns = new Array[Int]
+
+	# The location of the whole docunit.
+	#
+	# If `self` is made of multiple code-blocks, then the location
+	# starts at the first code-books and finish at the last one, thus includes anything between.
+	var location: Location is lazy do
+		return new Location(mdoc.location.file, lines.first, lines.last+1, columns.first+1, 0)
+	end
+
+	# Compute the real location of a node on the `ast` based on `mdoc.location`
+	#
+	# The result is basically: ast_location + markdown location of the piece + mdoc.location
+	#
+	# The fun is that a single docunit can be made of various pieces of code blocks.
+	fun real_location(ast_location: Location): Location
+	do
+		var mdoc = self.mdoc
+		var res = new Location(mdoc.location.file, lines[ast_location.line_start-1],
+			lines[ast_location.line_end-1],
+			columns[ast_location.line_start-1] + ast_location.column_start,
+			columns[ast_location.line_end-1] + ast_location.column_end)
+		return res
+	end
 end
 
 redef class ModelBuilder
