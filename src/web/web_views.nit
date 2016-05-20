@@ -55,7 +55,7 @@ class HtmlResultPage
 		var list = new UnorderedList
 		for mentity in results do
 			var link = mentity.html_link
-			link.text = mentity.html_raw_namespace
+			link.text = mentity.html_full_name
 			list.add_li new ListItem(link)
 		end
 		tpl.add list
