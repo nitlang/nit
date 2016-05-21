@@ -88,8 +88,6 @@ redef class AAnnotation
 			return ""
 		else
 			for arg in args do
-				var format_error = "Syntax Eror: `{name}` expects its arguments to be of type Int or a call to `git_revision`."
-
 				var value
 				value = arg.as_int
 				if value != null then
@@ -107,7 +105,13 @@ redef class AAnnotation
 					# Get Git short revision
 					var proc = new ProcessReader("git", "rev-parse", "--short", "HEAD")
 					proc.wait
-					assert proc.status == 0
+					if proc.status != 0 then
+						# Fallback if this is not a git repository or git bins are missing
+						version_fields.add "0"
+						modelbuilder.warning(self, "git_revision", "Warning: `git_revision` used outside of a git repository or git binaries not available")
+						continue
+					end
+
 					var lines = proc.read_all
 					var revision = lines.split("\n").first
 
@@ -122,6 +126,7 @@ redef class AAnnotation
 					continue
 				end
 
+				var format_error = "Syntax Error: `{name}` expects its arguments to be of type Int or a call to `git_revision`."
 				modelbuilder.error(self, format_error)
 				return ""
 			end
