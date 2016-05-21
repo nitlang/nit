@@ -121,14 +121,17 @@ end
 
 # Keeps track of real time
 class Clock
-	# Time at instanciation
+
+	# TODO use less mallocs
+
+	# Time at creation
 	protected var time_at_beginning = new Timespec.monotonic_now
 
 	# Time at last time a lapse method was called
 	protected var time_at_last_lapse = new Timespec.monotonic_now
 
 	# Smallest time frame reported by clock
-	fun resolution : Timespec `{
+	fun resolution: Timespec `{
 		struct timespec* tv = malloc( sizeof(struct timespec) );
 #ifdef __MACH__
 		clock_serv_t cclock;
@@ -145,19 +148,27 @@ class Clock
 		return tv;
 	`}
 
-	# Return timelapse since instanciation of this instance
-	fun total : Timespec
+	# Seconds since the creation of this instance
+	fun total: Float
 	do
-		return new Timespec.monotonic_now - time_at_beginning
+		var now = new Timespec.monotonic_now
+		var diff = now - time_at_beginning
+		var r = diff.to_f
+		diff.free
+		now.free
+		return r
 	end
 
-	# Return timelapse since last call to lapse
-	fun lapse : Timespec
+	# Seconds since the last call to `lapse`
+	fun lapse: Float
 	do
 		var nt = new Timespec.monotonic_now
 		var dt = nt - time_at_last_lapse
+		var r = dt.to_f
+		dt.free
+		time_at_last_lapse.free
 		time_at_last_lapse = nt
-		return dt
+		return r
 	end
 
 	# Seconds since the last call to `lapse`, without resetting the lapse counter
