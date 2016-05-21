@@ -73,13 +73,16 @@ extern class Timespec `{struct timespec*`}
 		clock_gettime(CLOCK_MONOTONIC, self);
 	`}
 
-	# Substract a Timespec from `self`.
-	fun - ( o : Timespec ) : Timespec
+	# Subtract `other` from `self`
+	fun -(other: Timespec): Timespec
 	do
-		var s = sec - o.sec
-		var ns = nanosec - o.nanosec
-		if ns > nanosec then s += 1
-		return new Timespec( s, ns )
+		var s = sec - other.sec
+		var ns = nanosec - other.nanosec
+		if ns < 0 then
+			s -= 1
+			ns += 1000000000
+		end
+		return new Timespec(s, ns)
 	end
 
 	# Number of whole seconds of elapsed time.
