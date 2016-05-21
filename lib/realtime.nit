@@ -121,6 +121,7 @@ end
 
 # Keeps track of real time
 class Clock
+	super FinalizableOnce
 
 	# TODO use less mallocs
 
@@ -180,5 +181,11 @@ class Clock
 		nt.free
 		dt.free
 		return r
+	end
+
+	redef fun finalize_once
+	do
+		time_at_beginning.free
+		time_at_last_lapse.free
 	end
 end
