@@ -44,6 +44,15 @@ class GamnitDisplay
 	# Only affects the desktop implementations.
 	var show_cursor: Bool = true is writable
 
+	# Number of bits used for the red value in the color buffer
+	fun red_bits: Int do return 8
+
+	# Number of bits used for the green value in the color buffer
+	fun green_bits: Int do return 8
+
+	# Number of bits used for the blue value in the color buffer
+	fun blue_bits: Int do return 8
+
 	# Prepare this display
 	#
 	# The implementation varies per platform.

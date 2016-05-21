@@ -46,14 +46,14 @@ redef class GamnitDisplay
 	end
 
 	# Select an EGL config
-	protected fun select_egl_config(blue, green, red, alpha, depth, stencil, sample: Int)
+	protected fun select_egl_config(red, green, blue, alpha, depth, stencil, sample: Int)
 	do
 		var config_chooser = new EGLConfigChooser
 		config_chooser.renderable_type_egl
 		config_chooser.surface_type_egl
-		config_chooser.blue_size = blue
-		config_chooser.green_size = green
 		config_chooser.red_size = red
+		config_chooser.green_size = green
+		config_chooser.blue_size = blue
 		if alpha > 0 then config_chooser.alpha_size = alpha
 		if depth > 0 then config_chooser.depth_size = depth
 		if stencil > 0 then config_chooser.stencil_size = stencil

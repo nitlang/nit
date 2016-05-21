@@ -428,6 +428,23 @@ abstract class GamnitProgram
 		end
 	end
 
+	# Diagnose possible problems with the shaders of the program
+	#
+	# Lists to the console inactive uniforms and attributes.
+	# These may not be problematic but they can help to debug the program.
+	fun diagnose
+	do
+		if gl_program == null then compile_and_link
+
+		print "# Diagnose {class_name}"
+		for k,v in uniforms do
+			if not v.is_active then print "* Uniform {v.name} is inactive"
+		end
+		for k,v in attributes do
+			if not v.is_active then print "* Attribute {v.name} is inactive"
+		end
+	end
+
 	# Attributes of this program organized by name
 	#
 	# Active attributes are gathered at `compile_and_link`.

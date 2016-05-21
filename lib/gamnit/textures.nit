@@ -21,7 +21,7 @@ import display
 abstract class Texture
 
 	# Prepare a texture located at `path` within the `assets` folder
-	new (path: Text) do return new GamnitAssetTexture(path.to_s)
+	new (path: Text) do return new TextureAsset(path.to_s)
 
 	# Root texture of which `self` is derived
 	fun root: GamnitRootTexture is abstract
@@ -41,7 +41,7 @@ abstract class Texture
 	# OpenGL handle to this texture
 	fun gl_texture: Int do return root.gl_texture
 
-	# Prepare a subtexture from this texture
+	# Prepare a subtexture from this texture, from the given pixel offsets
 	fun subtexture(left, top, width, height: Numeric): GamnitSubtexture
 	do
 		# Setup the subtexture
@@ -143,7 +143,7 @@ class GamnitRootTexture
 end
 
 # Texture loaded from the assets folder
-class GamnitAssetTexture
+class TextureAsset
 	super GamnitRootTexture
 
 	# Path to this texture within the `assets` folder

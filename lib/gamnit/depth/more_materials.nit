@@ -75,9 +75,9 @@ class SmoothMaterial
 
 		# Execute draw
 		if mesh.indices.is_empty then
-			glDrawArrays(gl_TRIANGLES, 0, mesh.vertices.length/3)
+			glDrawArrays(mesh.draw_mode, 0, mesh.vertices.length/3)
 		else
-			glDrawElements(gl_TRIANGLES, mesh.indices.length, gl_UNSIGNED_SHORT, mesh.indices_c.native_array)
+			glDrawElements(mesh.draw_mode, mesh.indices.length, gl_UNSIGNED_SHORT, mesh.indices_c.native_array)
 		end
 	end
 end
@@ -154,11 +154,13 @@ class TexturedMaterial
 				var xd = sample_used_texture.offset_right - xa
 				var ya = sample_used_texture.offset_top
 				var yd = sample_used_texture.offset_bottom - ya
+				xd *= 0.999
+				yd *= 0.999
 
 				var tex_coords = new Array[Float].with_capacity(mesh.texture_coords.length)
 				for i in [0..mesh.texture_coords.length/2[ do
 					tex_coords[i*2]   = xa + xd * mesh.texture_coords[i*2]
-					tex_coords[i*2+1] = ya + yd * mesh.texture_coords[i*2+1]
+					tex_coords[i*2+1] = 1.0 - (ya + yd * mesh.texture_coords[i*2+1])
 				end
 
 				program.tex_coord.array(tex_coords, 2)
@@ -180,9 +182,9 @@ class TexturedMaterial
 		program.camera.uniform(app.world_camera.position.x, app.world_camera.position.y, app.world_camera.position.z)
 
 		if mesh.indices.is_empty then
-			glDrawArrays(gl_TRIANGLES, 0, mesh.vertices.length/3)
+			glDrawArrays(mesh.draw_mode, 0, mesh.vertices.length/3)
 		else
-			glDrawElements(gl_TRIANGLES, mesh.indices.length, gl_UNSIGNED_SHORT, mesh.indices_c.native_array)
+			glDrawElements(mesh.draw_mode, mesh.indices.length, gl_UNSIGNED_SHORT, mesh.indices_c.native_array)
 		end
 	end
 end
@@ -218,9 +220,9 @@ class NormalsMaterial
 		program.normal.array(mesh.normals, 3)
 
 		if mesh.indices.is_empty then
-			glDrawArrays(gl_TRIANGLES, 0, mesh.vertices.length/3)
+			glDrawArrays(mesh.draw_mode, 0, mesh.vertices.length/3)
 		else
-			glDrawElements(gl_TRIANGLES, mesh.indices.length, gl_UNSIGNED_SHORT, mesh.indices_c.native_array)
+			glDrawElements(mesh.draw_mode, mesh.indices.length, gl_UNSIGNED_SHORT, mesh.indices_c.native_array)
 		end
 	end
 end

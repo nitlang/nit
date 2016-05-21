@@ -37,7 +37,7 @@ redef class GamnitDisplay
 		setup_egl_display native_display
 
 		# We need 8 bits per color for selection by color
-		select_egl_config(8, 8, 8, 0, 8, 0, 0)
+		select_egl_config(red_bits, green_bits, blue_bits, 0, 8, 0, 0)
 
 		var format = egl_config.attribs(egl_display).native_visual_id
 		native_window.set_buffers_geometry(0, 0, format)
@@ -48,7 +48,7 @@ redef class GamnitDisplay
 	redef fun close do close_egl
 end
 
-redef class GamnitAssetTexture
+redef class TextureAsset
 
 	redef fun load_from_platform
 	do
