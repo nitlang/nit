@@ -29,3 +29,7 @@ RUN git clone https://github.com/nitlang/nit.git /root/nit \
 	&& strip c_src/nitc bin/nit* \
 	&& ccache -C \
 	&& rm -rf .git
+
+ENV NIT_DIR /root/nit
+ENV PATH $NIT_DIR/bin:$PATH
+WORKDIR $NIT_DIR
