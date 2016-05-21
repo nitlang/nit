@@ -22,10 +22,10 @@ import uml
 class TreeAction
 	super ModelAction
 
-	redef fun answer(request, url) do
-		var model = init_model_view(request)
+	redef fun get(req, res) do
+		var model = init_model_view(req)
 		var view = new HtmlHomePage(model.to_tree)
-		return render_view(view)
+		res.send_view(view)
 	end
 end
 
@@ -34,18 +34,20 @@ class SearchAction
 	super ModelAction
 
 	# TODO handle more than full namespaces.
-	redef fun answer(request, url) do
-		var namespace = request.param("namespace")
-		var model = init_model_view(request)
+	redef fun get(req, res) do
+		var namespace = req.param("namespace")
+		var model = init_model_view(req)
 		var mentity = find_mentity(model, namespace)
 		if mentity == null then
-			return render_error(404, "No mentity found")
+			res.error(404)
+			return
 		end
-		if request.is_json_asked then
-			return render_json(mentity.to_json)
+		if req.is_json_asked then
+			res.json(mentity.to_json)
+			return
 		end
 		var view = new HtmlResultPage(namespace or else "null", [mentity])
-		return render_view(view)
+		res.send_view(view)
 	end
 end
 
@@ -56,15 +58,16 @@ class CodeAction
 	# Modelbuilder used to access sources.
 	var modelbuilder: ModelBuilder
 
-	redef fun answer(request, url) do
-		var namespace = request.param("namespace")
-		var model = init_model_view(request)
+	redef fun get(req, res) do
+		var namespace = req.param("namespace")
+		var model = init_model_view(req)
 		var mentity = find_mentity(model, namespace)
 		if mentity == null then
-			return render_error(404, "No mentity found")
+			res.error(404)
+			return
 		end
 		var view = new HtmlSourcePage(modelbuilder, mentity)
-		return render_view(view)
+		res.send_view(view)
 	end
 end
 
@@ -75,16 +78,21 @@ class DocAction
 	# Modelbuilder used to access sources.
 	var modelbuilder: ModelBuilder
 
-	# TODO handle more than full namespaces.
-	redef fun answer(request, url) do
-		var namespace = request.param("namespace")
-		var model = init_model_view(request)
+	redef fun get(req, res) do
+		var namespace = req.param("namespace")
+		var model = init_model_view(req)
 		var mentity = find_mentity(model, namespace)
 		if mentity == null then
-			return render_error(404, "No mentity found")
+			res.error(404)
+			return
 		end
+		if req.is_json_asked then
+			res.json(mentity.to_json)
+			return
+		end
+
 		var view = new HtmlDocPage(modelbuilder, mentity)
-		return render_view(view)
+		res.send_view(view)
 	end
 end
 
@@ -95,12 +103,13 @@ class UMLDiagramAction
 	# Mainmodule used for hierarchy flattening.
 	var mainmodule: MModule
 
-	redef fun answer(request, url) do
-		var namespace = request.param("namespace")
-		var model = init_model_view(request)
+	redef fun get(req, res) do
+		var namespace = req.param("namespace")
+		var model = init_model_view(req)
 		var mentity = find_mentity(model, namespace)
 		if mentity == null then
-			return render_error(404, "No mentity found")
+			res.error(404)
+			return
 		end
 
 		var dot
@@ -112,10 +121,11 @@ class UMLDiagramAction
 			var uml = new UMLModel(model, mentity)
 			dot = uml.generate_package_uml.write_to_string
 		else
-			return render_error(404, "No diagram matching this namespace.")
+			res.error(404)
+			return
 		end
 		var view = new HtmlDotPage(dot, mentity.as(not null).html_name)
-		return render_view(view)
+		res.send_view(view)
 	end
 end
 
@@ -123,11 +133,10 @@ end
 class RandomAction
 	super ModelAction
 
-	# TODO handle more than full namespaces.
-	redef fun answer(request, url) do
-		var n = request.int_arg("n") or else 10
-		var k = request.string_arg("k") or else "modules"
-		var model = init_model_view(request)
+	redef fun get(req, res) do
+		var n = req.int_arg("n") or else 10
+		var k = req.string_arg("k") or else "modules"
+		var model = init_model_view(req)
 		var mentities: Array[MEntity]
 		if k == "modules" then
 			mentities = model.mmodules.to_a
@@ -138,14 +147,15 @@ class RandomAction
 		end
 		mentities.shuffle
 		mentities = mentities.sub(0, n)
-		if request.is_json_asked then
+		if req.is_json_asked then
 			var json = new JsonArray
 			for mentity in mentities do
 				json.add mentity.to_json
 			end
-			return render_json(json)
+			res.json(json)
+			return
 		end
 		var view = new HtmlResultPage("random", mentities)
-		return render_view(view)
+		res.send_view(view)
 	end
 end

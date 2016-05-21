@@ -27,7 +27,7 @@ class HtmlHomePage
 	# Loaded model to display.
 	var tree: MEntityTree
 
-	redef fun render(srv) do
+	redef fun render do
 		var tpl = new Template
 		tpl.add new Header(1, "Loaded model")
 		tpl.add tree.html_list
@@ -45,7 +45,7 @@ class HtmlResultPage
 	# Result set
 	var results: Array[MEntity]
 
-	redef fun render(srv) do
+	redef fun render do
 		var tpl = new Template
 		tpl.add new Header(1, "Results for {query}")
 		if results.is_empty then
@@ -76,7 +76,7 @@ class HtmlSourcePage
 	# HiglightVisitor used to hilight the source code
 	var hl = new HighlightVisitor
 
-	redef fun render(srv) do
+	redef fun render do
 		var tpl = new Template
 		tpl.add new Header(1, "Source Code")
 		tpl.add render_source
@@ -103,7 +103,7 @@ end
 class HtmlDocPage
 	super HtmlSourcePage
 
-	redef fun render(srv) do
+	redef fun render do
 		var tpl = new Template
 		tpl.add new Header(1, mentity.html_name)
 		tpl.add "<p>"
@@ -130,7 +130,7 @@ class HtmlDotPage
 	# Page title.
 	var title: String
 
-	redef fun render(srv) do
+	redef fun render do
 		var tpl = new Template
 		tpl.add new Header(1, title)
 		tpl.add render_dot

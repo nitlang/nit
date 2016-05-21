@@ -17,77 +17,11 @@ module web_base
 
 import model::model_views
 import model::model_json
-import nitcorn
-
-# Nitcorn server runned by `nitweb`.
-#
-# Usage:
-#
-# ~~~nitish
-# var srv = new NitServer("localhost", 3000)
-# srv.routes.add new Route("/", new MyAction)
-# src.listen
-# ~~~
-class NitServer
-
-	# Host to bind.
-	var host: String
-
-	# Port to use.
-	var port: Int
-
-	# Routes knwon by the server.
-	var routes = new Array[Route]
-
-	# Start listen on `host:port`.
-	fun listen do
-		var iface = "{host}:{port}"
-		print "Launching server on http://{iface}/"
-
-		var vh = new VirtualHost(iface)
-		for route in routes do vh.routes.add route
-
-		var fac = new HttpFactory.and_libevent
-		fac.config.virtual_hosts.add vh
-		fac.run
-	end
-end
-
-# Specific nitcorn Action for nitweb.
-class NitAction
-	super Action
-
-	# Link to the NitServer that runs this action.
-	var srv: NitServer
-
-	# Build a custom http response for errors.
-	fun render_error(code: Int, message: String): HttpResponse do
-		var response = new HttpResponse(code)
-		var tpl = new Template
-		tpl.add "<h1>Error {code}</h1>"
-		tpl.add "<pre><code>{message.html_escape}</code></pre>"
-		response.body = tpl.write_to_string
-		return response
-	end
-
-	# Render a view as a HttpResponse 200.
-	fun render_view(view: NitView): HttpResponse do
-		var response = new HttpResponse(200)
-		response.body = view.render(srv).write_to_string
-		return response
-	end
-
-	# Return a HttpResponse containing `json`.
-	fun render_json(json: Jsonable): HttpResponse do
-		var response = new HttpResponse(200)
-		response.body = json.to_json
-		return response
-	end
-end
+import popcorn
 
 # Specific nitcorn Action that uses a Model
 class ModelAction
-	super NitAction
+	super Handler
 
 	# Model to use.
 	var model: Model
@@ -116,7 +50,12 @@ end
 # A NitView is rendered by an action.
 interface NitView
 	# Renders this view and returns something that can be written to a HTTP response.
-	fun render(srv: NitServer): Writable is abstract
+	fun render: Writable is abstract
+end
+
+redef class HttpResponse
+	# Render a NitView as response.
+	fun send_view(view: NitView, status: nullable Int) do send(view.render, status)
 end
 
 redef class HttpRequest
