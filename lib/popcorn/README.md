@@ -505,7 +505,7 @@ class LogHandler
 	redef fun all(req, res) do
 		var timer = req.timer
 		if timer != null then
-			print "{req.method} {req.uri} {res.color_status} ({timer.total})"
+			print "{req.method} {req.uri} {res.color_status} ({timer.total}s)"
 		else
 			print "{req.method} {req.uri} {res.color_status}"
 		end
