@@ -9,7 +9,6 @@ ls -1 -- "%s\n" "$@" \
 	../examples/*/src/*_android.nit \
 	../examples/*/src/*_linux.nit \
 	../examples/*/src/*_null.nit \
-	../examples/nitcorn/src/*.nit \
 	../lib/*/examples/*.nit \
 	../lib/*/examples/*/*.nit \
 	../contrib/friendz/src/solver_cmd.nit \
