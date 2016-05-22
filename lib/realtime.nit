@@ -120,6 +120,20 @@ extern class Timespec `{struct timespec*`}
 end
 
 # Keeps track of real time
+#
+# ~~~
+# var clock = new Clock
+#
+# # sleeping at least 1s
+# 1.0.sleep
+# assert clock.total >= 1.0
+# assert clock.lapse >= 1.0
+#
+# # sleeping at least 5ms
+# 0.005.sleep
+# assert clock.total >= 1.005
+# assert clock.lapse >= 0.005
+# ~~~
 class Clock
 	super FinalizableOnce
 
