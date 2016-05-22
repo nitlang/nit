@@ -214,6 +214,7 @@ end
 
 # A test case is a unit test considering only a `MMethodDef`.
 class TestCase
+	super UnitTest
 
 	# Test suite wich `self` belongs to.
 	var test_suite: TestSuite
@@ -282,32 +283,13 @@ class TestCase
 		toolcontext.check_errors
 	end
 
-	# Error occured during test-case execution.
-	var error: nullable String = null
-
-	# Was the test case executed at least one?
-	var was_exec = false
-
-	# Return the `TestCase` in XML format compatible with Jenkins.
-	fun to_xml: HTMLTag do
+	redef fun xml_classname do
 		var mclassdef = test_method.mclassdef
-		var tc = new HTMLTag("testcase")
-		# NOTE: jenkins expects a '.' in the classname attr
-		tc.attr("classname", "nitunit." + mclassdef.mmodule.full_name + "." + mclassdef.mclass.full_name)
-		tc.attr("name", test_method.mproperty.full_name)
-		if was_exec then
-			tc.add  new HTMLTag("system-out")
-			var n = new HTMLTag("system-err")
-			tc.add n
-			var error = self.error
-			if error != null then
-				n.append error.trunc(8192).filter_nonprintable
-				n = new HTMLTag("error")
-				n.attr("message", "Runtime Error")
-				tc.add n
-			end
-		end
-		return tc
+		return "nitunit." + mclassdef.mmodule.full_name + "." + mclassdef.mclass.full_name
+	end
+
+	redef fun xml_name do
+		return test_method.mproperty.full_name
 	end
 end
 
