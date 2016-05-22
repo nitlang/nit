@@ -1,6 +1,6 @@
 # This file is part of NIT ( http://www.nitlanguage.org ).
 #
-# Copyright 2014-2015 Alexis Laferrière <alexis.laf@xymus.net>
+# Copyright 2014-2016 Alexis Laferrière <alexis.laf@xymus.net>
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
