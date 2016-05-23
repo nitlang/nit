@@ -90,11 +90,9 @@ class FileServer
 				if local_file.file_stat.is_dir then
 					# If we target a directory without an ending `/`,
 					# redirect to the directory ending with `/`.
-					if not request.uri.is_empty and
-					   request.uri.chars.last != '/' then
-						response = new HttpResponse(303)
-						response.header["Location"] = request.uri + "/"
-						return response
+					var uri = request.uri
+					if not uri.is_empty and uri.chars.last != '/' then
+						return answer_redirection(request.uri + "/")
 					end
 
 					# Show index file instead of the directory listing
@@ -123,6 +121,13 @@ class FileServer
 			response.body = tmpl.to_s
 		end
 
+		return response
+	end
+
+	# Answer a 303 redirection to `location`.
+	fun answer_redirection(location: String): HttpResponse do
+		var response = new HttpResponse(303)
+		response.header["Location"] = location
 		return response
 	end
 
