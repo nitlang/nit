@@ -32,6 +32,11 @@
 				controller: 'EntityCtrl',
 				controllerAs: 'entityCtrl'
 			})
+			.when('/module/:id', {
+				templateUrl: 'views/module.html',
+				controller: 'EntityCtrl',
+				controllerAs: 'entityCtrl'
+			})
 			.otherwise({
 				redirectTo: '/'
 			});
