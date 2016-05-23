@@ -117,14 +117,17 @@ class BenitluxHttpRequest
 			app.user = null
 			return true
 		else if res isa BenitluxError then
-			app.feedback((res.user_message or else res.message).t)
+			feedback((res.user_message or else res.message).t)
 			return true
 		else if res isa Error then
-			app.feedback res.message.t
+			feedback res.message.t
 			return true
 		end
 		return false
 	end
+
+	# Show feedback pertinent to the user, defaults to a platform specific popup
+	fun feedback(text: String) do app.feedback text
 end
 
 # Async request with services to act on the windows of the app

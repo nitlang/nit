@@ -190,4 +190,5 @@ class LoginOrSignupAction
 		app.on_log_in
 	end
 
+	redef fun feedback(text) do window.feedback text
 end
