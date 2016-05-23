@@ -1,0 +1,23 @@
+<div class='container-fluid'>
+
+	<div class='page-header'>
+		<h2><entity-signature mentity='mentity.intro'/></h2>
+		<entity-link mentity='mentity.mpackage' />
+		:: <entity-link mentity='mentity.intro_mclassdef' />
+		:: {{mentity.name}}
+	</div>
+
+	<ul class='nav nav-tabs'>
+		<li class='active'>
+			<a data-toggle='tab' data-target='#doc'>
+				<span class='glyphicon glyphicon-book'/> Doc
+			</a>
+		</li>
+	</ul>
+
+	<div class='tab-content'>
+		<div role='tabpanel' class='tab-pane fade in active' id='doc'>
+			<entity-doc mentity='mentity.intro'/>
+		</div>
+	</div>
+</div>
