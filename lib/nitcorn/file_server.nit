@@ -86,8 +86,9 @@ class FileServer
 		# This make sure that the requested file is within the root folder.
 		if (local_file + "/").has_prefix(root) then
 			# Does it exists?
-			if local_file.file_exists then
-				if local_file.file_stat.is_dir then
+			var file_stat = local_file.file_stat
+			if file_stat != null then
+				if file_stat.is_dir then
 					# If we target a directory without an ending `/`,
 					# redirect to the directory ending with `/`.
 					var uri = request.uri
@@ -106,10 +107,10 @@ class FileServer
 					end
 				end
 
-				var is_dir = local_file.file_stat.is_dir
-				if show_directory_listing and is_dir then
+				file_stat = local_file.file_stat
+				if show_directory_listing and file_stat != null and file_stat.is_dir then
 					response = answer_directory_listing(request, turi, local_file)
-				else if not is_dir then # It's a single file
+				else if file_stat != null and not file_stat.is_dir then # It's a single file
 					response = answer_file(local_file)
 				else response = new HttpResponse(404)
 			else response = new HttpResponse(404)
