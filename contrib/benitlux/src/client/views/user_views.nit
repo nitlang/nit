@@ -86,38 +86,50 @@ end
 class SignupWindow
 	super Window
 
-	# Main window layout
-	var layout = new ListLayout(parent=self)
+	private var list = new ListLayout(parent=self)
+	private var lbl_feedback = new Label(parent=list, text="Welcome")
 
-	private var lbl_welcome = new Label(parent=layout, text="Welcome")
+	private var layout_login = new VerticalLayout(parent=list)
+
+	# ---
+	# First the login options
 
 	# Name
-	private var name_line = new HorizontalLayout(parent=layout)
+	private var name_line = new HorizontalLayout(parent=layout_login)
 	private var lbl_name = new Label(parent=name_line, text="Username".t)
 	private var txt_name = new TextInput(parent=name_line, text=app.user)
 
-	# Pass
-	private var pass_line = new HorizontalLayout(parent=layout)
+	# Password
+	private var pass_line = new HorizontalLayout(parent=layout_login)
 	private var lbl_pass = new Label(parent=pass_line, text="Password".t)
 	private var txt_pass = new TextInput(parent=pass_line, is_password=true)
-	private var lbl_pass_desc = new Label(parent=layout,
+	private var lbl_pass_desc = new Label(parent=layout_login, size = 0.5,
 		text="Passwords must be composed of at least 6 characters.".t)
 
-	private var but_login = new Button(parent=layout, text="Login".t)
+	private var but_login = new Button(parent=layout_login, text="Login".t)
+
+	# ---
+	# Then, the signup options
+
+	private var layout_register = new VerticalLayout(parent=list)
+
+	private var lbl_signup_desc = new Label(parent=layout_register, size = 0.5,
+		text="Fill the following fields to sign up.".t)
+
+	# Repeat password
+	private var pass_line2 = new HorizontalLayout(parent=layout_register)
+	private var lbl_pass2 = new Label(parent=pass_line2, text="Repeat password".t)
+	private var txt_pass2 = new TextInput(parent=pass_line2, is_password=true)
 
 	# Email
-	private var email_line = new HorizontalLayout(parent=layout)
+	private var email_line = new HorizontalLayout(parent=layout_register)
 	private var lbl_email = new Label(parent=email_line, text="Email".t)
 	private var txt_email = new TextInput(parent=email_line)
 
-	private var but_signup = new Button(parent=layout, text="Signup".t)
-
-	private var lbl_feedback = new Label(parent=layout, text="")
+	private var but_signup = new Button(parent=layout_register, text="Signup".t)
 
 	init
 	do
-		lbl_pass_desc.size = 0.5
-
 		for c in [but_login, but_signup] do
 			c.observers.add self
 		end
@@ -133,25 +145,32 @@ class SignupWindow
 
 				var name = txt_name.text
 				if name == null or not name.name_is_ok then
-					feedback "Invalid name".t
+					feedback "Invalid username.".t
 					return
 				end
 
 				var pass = txt_pass.text
 				if pass == null or not pass.pass_is_ok then
-					feedback "Invalid password".t
+					feedback "Invalid password.".t
 					return
 				end
 
 				if sender == but_login then
+					feedback "Logging in...".t
 					(new LoginOrSignupAction(self, "rest/login?name={name}&pass={pass.pass_hash}")).start
 				else if sender == but_signup then
+					if pass != txt_pass2.text then
+						feedback "Passwords do not match.".t
+						return
+					end
+
 					var email = txt_email.text
 					if email == null or email.is_empty then
 						feedback "Invalid email".t
 						return
 					end
 
+					feedback "Signing up...".t
 					(new LoginOrSignupAction(self, "rest/signup?name={name}&pass={pass.pass_hash}&email={email}")).start
 				end
 			end

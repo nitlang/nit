@@ -63,13 +63,23 @@ do
 	map["Welcome %0!"] = "Bienvenue %0!"
 	map["Logged in as %0"] = "Connecté en tant que %0"
 	map["Username"] = "Nom d'utilisateur"
-	map["Invalid name"] = "Nom d'utilisateur invalide"
 	map["Password"] = "Mot de passe"
-	map["Passwords must be composed of at least 6 characters."] = "Le mot de passe doit avoir au moins 6 charactères."
+	map["Repeat password"] = "Répéter le mot de passe"
 	map["Email"] = "Courriel"
 	map["Login"] = "Se connecter"
+	map["Loging in..."] = "Authentification..."
 	map["Logout"] = "Se déconnecter"
 	map["Signup"] = "Créer un compte"
+	map["Signing up..."] = "Création du compte..."
+
+	map["Passwords must be composed of at least 6 characters."] = "Le mot de passe doit avoir au moins 6 charactères."
+	map["Fill the following fields to sign up."] = "Remplissez les champs suivants pour créer un compte."
+
+	map["Passwords do not match."] = "Les mots de passe ne correspondent pas."
+	map["Invalid username."] = "Nom d'utilisateur invalide."
+	map["Invalid password."] = "Mot de passe invalide."
+	map["Username already in use."] = "Le nom d'utilisateur est déjà réservé."
+	map["Invalid username and password combination."] = "La combinaison de nom et mot de passe n'est pas reconnue."
 
 	# Social views
 	map["Follow"] = "Suivre"
