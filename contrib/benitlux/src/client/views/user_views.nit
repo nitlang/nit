@@ -189,27 +189,5 @@ class LoginOrSignupAction
 
 		app.on_log_in
 	end
-end
 
-# Async request for signing up
-class SignupAction
-	super WindowHttpRequest
-
-	redef type W: SignupWindow
-
-	init do affected_views.add_all([window.but_signup])
-
-	redef fun on_load(res)
-	do
-		if intercept_error(res) then return
-
-		if not res isa LoginResult then
-			on_fail new Error("Server sent unexpected data {res or else "null"}")
-			return
-		end
-
-		app.token = res.token
-		app.user = res.user.name
-		app.on_log_in
-	end
 end
