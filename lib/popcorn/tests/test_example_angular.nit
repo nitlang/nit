@@ -24,13 +24,14 @@ class TestClient
 		system "curl -s {host}:{port}/counter"
 		system "curl -s {host}:{port}/counter -X POST"
 		system "curl -s {host}:{port}/counter"
+		system "curl -s {host}:{port}/not_found" # handled by angular controller
 		return null
 	end
 end
 
 var app = new App
 app.use("/counter", new CounterAPI)
-app.use("/*", new StaticHandler("www/"))
+app.use("/*", new StaticHandler("../examples/angular/www/", "index.html"))
 
 var host = test_host
 var port = test_port

@@ -40,5 +40,5 @@ end
 
 var app = new App
 app.use("/counter", new CounterAPI)
-app.use("/*", new StaticHandler("www/"))
+app.use("/*", new StaticHandler("www/", "index.html"))
 app.listen("localhost", 3000)
