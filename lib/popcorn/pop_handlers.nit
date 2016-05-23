@@ -311,14 +311,7 @@ class Router
 	#
 	# Route paths are matched in registration order.
 	fun use(path: String, handler: Handler) do
-		var route
-		if handler isa Router or handler isa StaticHandler then
-			route = new AppGlobRoute(path)
-		else if path.has_suffix("*") then
-			route = new AppGlobRoute(path)
-		else
-			route = new AppParamRoute(path)
-		end
+		var route = build_route(handler, path)
 		handlers[route] = handler
 	end
 
@@ -327,6 +320,16 @@ class Router
 		for hroute, handler in handlers do
 			handler.handle(hroute, route.uri_root(uri), req, res)
 			if res.sent then break
+		end
+	end
+
+	private fun build_route(handler: Handler, path: String): AppRoute do
+		if handler isa Router or handler isa StaticHandler then
+			return new AppGlobRoute(path)
+		else if path.has_suffix("*") then
+			return new AppGlobRoute(path)
+		else
+			return new AppParamRoute(path)
 		end
 	end
 end
