@@ -1,0 +1,18 @@
+<div class='container-fluid'>
+
+	<div class='page-header'>
+		<h2><entity-signature mentity='mentity'/></h2>
+		<entity-link mentity='mentity.mpackage' />
+		:: <entity-link mentity='mentity.mmodule' />
+		:: <entity-link mentity='mentity.mclassdef' />
+		:: {{mentity.name}}
+	</div>
+
+	<ul class='nav nav-tabs'>
+		<li class='warning'>
+			<a href='{{mentity.mproperty.web_url}}'>
+				<span class='glyphicon glyphicon-chevron-left'/> Go to property
+			</a>
+		</li>
+	</ul>
+</div>

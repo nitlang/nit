@@ -52,6 +52,11 @@
 				controller: 'EntityCtrl',
 				controllerAs: 'entityCtrl'
 			})
+			.when('/propdef/:id', {
+				templateUrl: 'views/propdef.html',
+				controller: 'EntityCtrl',
+				controllerAs: 'entityCtrl'
+			})
 			.otherwise({
 				redirectTo: '/'
 			});
