@@ -110,54 +110,7 @@ class FileServer
 
 				var is_dir = local_file.file_stat.is_dir
 				if show_directory_listing and is_dir then
-					# Show the directory listing
-					var title = turi
-					var files = local_file.files
-
-					alpha_comparator.sort files
-
-					var links = new Array[String]
-					if turi.length > 1 then
-						var path = (request.uri + "/..").simplify_path
-						links.add "<a href=\"{path}/\">..</a>"
-					end
-					for file in files do
-						var local_path = local_file.join_path(file).simplify_path
-						var web_path = file.simplify_path
-						if local_path.file_stat.is_dir then web_path = web_path + "/"
-						links.add "<a href=\"{web_path}\">{file}</a>"
-					end
-
-					var header = self.header
-					var header_code
-					if header != null then
-						header_code = header.write_to_string
-					else header_code = ""
-
-					response = new HttpResponse(200)
-					response.body = """
-<!DOCTYPE html>
-<head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-	<script>
-		{{{javascript_header or else ""}}}
-	</script>
-	<title>{{{title}}}</title>
-</head>
-<body>
-	{{{header_code}}}
-	<div class="container">
-		<h1>{{{title}}}</h1>
-		<ul>
-			<li>{{{links.join("</li>\n\t\t\t<li>")}}}</li>
-		</ul>
-	</div>
-</body>
-</html>"""
-
-					response.header["Content-Type"] = media_types["html"].as(not null)
+					response = answer_directory_listing(request, turi, local_file)
 				else if not is_dir then # It's a single file
 					response = answer_file(local_file)
 				else response = new HttpResponse(404)
@@ -193,6 +146,60 @@ class FileServer
 
 		# Cache control
 		response.header["cache-control"] = cache_control
+		return response
+	end
+
+	# Answer with a directory listing for files within `local_files`.
+	fun answer_directory_listing(request: HttpRequest, turi, local_file: String): HttpResponse do
+		# Show the directory listing
+		var title = turi
+		var files = local_file.files
+
+		alpha_comparator.sort files
+
+		var links = new Array[String]
+		if turi.length > 1 then
+			var path = (request.uri + "/..").simplify_path
+			links.add "<a href=\"{path}/\">..</a>"
+		end
+		for file in files do
+			var local_path = local_file.join_path(file).simplify_path
+			var web_path = file.simplify_path
+			var file_stat = local_path.file_stat
+			if file_stat != null and file_stat.is_dir then web_path = web_path + "/"
+			links.add "<a href=\"{web_path}\">{file}</a>"
+		end
+
+		var header = self.header
+		var header_code
+		if header != null then
+			header_code = header.write_to_string
+		else header_code = ""
+
+		var response = new HttpResponse(200)
+		response.body = """
+<!DOCTYPE html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+	<script>
+		{{{javascript_header or else ""}}}
+	</script>
+	<title>{{{title}}}</title>
+</head>
+<body>
+	{{{header_code}}}
+	<div class="container">
+		<h1>{{{title}}}</h1>
+		<ul>
+			<li>{{{links.join("</li>\n\t\t\t<li>")}}}</li>
+		</ul>
+	</div>
+</body>
+</html>"""
+
+		response.header["Content-Type"] = media_types["html"].as(not null)
 		return response
 	end
 end
