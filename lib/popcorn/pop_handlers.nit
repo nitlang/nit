@@ -310,6 +310,9 @@ class Router
 	# List of handlers to match before every other.
 	private var pre_handlers = new Map[AppRoute, Handler]
 
+	# List of handlers to match after every other.
+	private var post_handlers = new Map[AppRoute, Handler]
+
 	# Register a `handler` for a route `path`.
 	#
 	# Route paths are matched in registration order.
@@ -326,10 +329,20 @@ class Router
 		pre_handlers[route] = handler
 	end
 
+	# Register a post-handler for a route `path`.
+	#
+	# Posthandlers are matched after every other handlers in registrastion order.
+	fun use_after(path: String, handler: Handler) do
+		var route = build_route(handler, path)
+		post_handlers[route] = handler
+	end
+
 	redef fun handle(route, uri, req, res) do
 		if not route.match(uri) then return
 		handle_pre(route, uri, req, res)
 		handle_in(route, uri, req, res)
+		handle_post(route, uri, req, res)
+	end
 
 	private fun handle_pre(route: AppRoute, uri: String, req: HttpRequest, res: HttpResponse) do
 		for hroute, handler in pre_handlers do
@@ -341,6 +354,12 @@ class Router
 		for hroute, handler in handlers do
 			handler.handle(hroute, route.uri_root(uri), req, res)
 			if res.sent then break
+		end
+	end
+
+	private fun handle_post(route: AppRoute, uri: String, req: HttpRequest, res: HttpResponse) do
+		for hroute, handler in post_handlers do
+			handler.handle(hroute, route.uri_root(uri), req, res)
 		end
 	end
 
