@@ -158,22 +158,8 @@ class FileServer
 </html>"""
 
 					response.header["Content-Type"] = media_types["html"].as(not null)
-				else if not is_dir then
-					# It's a single file
-					response = new HttpResponse(200)
-					response.files.add local_file
-
-					var ext = local_file.file_extension
-					if ext != null then
-						var media_type = media_types[ext]
-						if media_type != null then
-							response.header["Content-Type"] = media_type
-						else response.header["Content-Type"] = "application/octet-stream"
-					end
-
-					# Cache control
-					response.header["cache-control"] = cache_control
-
+				else if not is_dir then # It's a single file
+					response = answer_file(local_file)
 				else response = new HttpResponse(404)
 			else response = new HttpResponse(404)
 		else response = new HttpResponse(403)
@@ -184,6 +170,29 @@ class FileServer
 			response.body = tmpl.to_s
 		end
 
+		return response
+	end
+
+	# Build a reponse containing a single `local_file`.
+	#
+	# Returns a 404 error if local_file does not exists.
+	fun answer_file(local_file: String): HttpResponse do
+		if not local_file.file_exists then return new HttpResponse(404)
+
+		var response = new HttpResponse(200)
+		response.files.add local_file
+
+		# Set Content-Type depending on the file extension
+		var ext = local_file.file_extension
+		if ext != null then
+			var media_type = media_types[ext]
+			if media_type != null then
+				response.header["Content-Type"] = media_type
+			else response.header["Content-Type"] = "application/octet-stream"
+		end
+
+		# Cache control
+		response.header["cache-control"] = cache_control
 		return response
 	end
 end
