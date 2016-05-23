@@ -317,6 +317,10 @@ class Router
 
 	redef fun handle(route, uri, req, res) do
 		if not route.match(uri) then return
+		handle_in(route, uri, req, res)
+	end
+
+	private fun handle_in(route: AppRoute, uri: String, req: HttpRequest, res: HttpResponse) do
 		for hroute, handler in handlers do
 			handler.handle(hroute, route.uri_root(uri), req, res)
 			if res.sent then break
