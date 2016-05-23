@@ -74,6 +74,12 @@ class FileServer
 	# Show directory listing?
 	var show_directory_listing = true is writable
 
+	# Default file returned when no static file matches the requested URI.
+	#
+	# If no `default_file` is provided, the FileServer responds 404 error to
+	# unmatched queries.
+	var default_file: nullable String = null is writable
+
 	redef fun answer(request, turi)
 	do
 		var response
@@ -112,8 +118,8 @@ class FileServer
 					response = answer_directory_listing(request, turi, local_file)
 				else if file_stat != null and not file_stat.is_dir then # It's a single file
 					response = answer_file(local_file)
-				else response = new HttpResponse(404)
-			else response = new HttpResponse(404)
+				else response = answer_default
+			else response = answer_default
 		else response = new HttpResponse(403)
 
 		if response.status_code != 200 then
@@ -123,6 +129,17 @@ class FileServer
 		end
 
 		return response
+	end
+
+	# Answer the `default_file` if any.
+	fun answer_default: HttpResponse do
+		var default_file = self.default_file
+		if default_file == null then
+			return new HttpResponse(404)
+		end
+
+		var local_file = (root / default_file).simplify_path
+		return answer_file(local_file)
 	end
 
 	# Answer a 303 redirection to `location`.
