@@ -1,6 +1,6 @@
 # This file is part of NIT ( http://www.nitlanguage.org ).
 #
-# Copyright 2014-2015 Alexis Laferrière <alexis.laf@xymus.net>
+# Copyright 2014-2016 Alexis Laferrière <alexis.laf@xymus.net>
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -23,6 +23,7 @@ import privileges
 # Use actions defined by contribs
 import tnitter
 import benitlux::benitlux_controller
+import benitlux::benitlux_restful
 import opportunity::opportunity_controller
 import nitiwiki::wiki_edit
 
@@ -173,6 +174,7 @@ var vps_vh = new VirtualHost("vps.xymus.net:80")
 var tnitter_vh = new VirtualHost("tnitter.xymus.net:80")
 var pep8_vh = new VirtualHost("pep8.xymus.net:80")
 var benitlux_vh = new VirtualHost("benitlux.xymus.net:80")
+var benitlux_admin_vh = new VirtualHost("localhost:8081")
 
 var factory = new HttpFactory.and_libevent
 factory.config.virtual_hosts.add default_vh
@@ -180,6 +182,7 @@ factory.config.virtual_hosts.add vps_vh
 factory.config.virtual_hosts.add tnitter_vh
 factory.config.virtual_hosts.add pep8_vh
 factory.config.virtual_hosts.add benitlux_vh
+factory.config.virtual_hosts.add benitlux_admin_vh
 
 # Ports are open, drop to a low-privileged user if we are root
 var user_group = new UserGroup("nitcorn", "nitcorn")
@@ -227,6 +230,8 @@ benitlux_vh.routes.add new Route("/rest/", benitlux_rest)
 benitlux_vh.routes.add new Route("/push/", benitlux_push)
 benitlux_vh.routes.add new Route("/static/", shared_file_server)
 benitlux_vh.routes.add new Route(null, benitlux_sub)
+
+benitlux_admin_vh.routes.add new Route(null, new BenitluxAdminAction(benitlux_db))
 
 # Opportunity service
 var opportunity = new OpportunityWelcome
