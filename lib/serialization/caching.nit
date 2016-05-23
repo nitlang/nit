@@ -55,7 +55,7 @@ end
 # then using a reference.
 class SerializerCache
 	# Map of already serialized objects to the reference id
-	private var sent: Map[Serializable, Int] = new StrictHashMap[Serializable, Int]
+	protected var sent: Map[Serializable, Int] = new StrictHashMap[Serializable, Int]
 
 	# Is `object` known?
 	fun has_object(object: Serializable): Bool do return sent.keys.has(object)
@@ -88,7 +88,7 @@ end
 # Used by `Deserializer` to find already deserialized objects by their reference.
 class DeserializerCache
 	# Map of references to already deserialized objects.
-	private var received: Map[Int, Object] = new StrictHashMap[Int, Object]
+	protected var received: Map[Int, Object] = new StrictHashMap[Int, Object]
 
 	# Is there an object associated to `id`?
 	fun has_id(id: Int): Bool do return received.keys.has(id)

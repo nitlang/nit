@@ -162,6 +162,35 @@ class EulerCamera
 		yaw = 0.0
 		roll = 0.0
 	end
+
+	# Convert the position `x, y` on screen, to world coordinates on the plane at `target_z`
+	#
+	# `target_z` defaults to `0.0` and specifies the Z coordinates of the plane
+	# on which to project the screen position `x, y`.
+	#
+	# This method assumes that the camera is looking along the Z axis towards higher values.
+	# Using it in a different orientation can be useful, but won't result in valid
+	# world coordinates.
+	fun camera_to_world(x, y: Numeric, target_z: nullable Float): Point[Float]
+	do
+		# TODO, this method could be tweaked to support projecting the 2D point,
+		# on the near plane (x,y) onto a given distance no matter to orientation
+		# of the camera.
+
+		target_z = target_z or else 0.0
+
+		# Convert from pixel units / window resolution to
+		# units on the near clipping wall to
+		# units on the target wall at Z = 0
+		var near_height = (field_of_view_y/2.0).tan * near
+		var cross_screen_to_near = near_height / (display.height.to_f/2.0)
+		var cross_near_to_target = (position.z - target_z) / near
+		var mod = cross_screen_to_near * cross_near_to_target * 1.72 # FIXME drop the magic number
+
+		var wx = position.x + (x.to_f-display.width.to_f/2.0) * mod
+		var wy = position.y - (y.to_f-display.height.to_f/2.0) * mod
+		return new Point[Float](wx, wy)
+	end
 end
 
 # Orthogonal camera to draw UI objects with services to work with screens of different sizes
