@@ -128,7 +128,12 @@ redef class AModule
 		srcs.add_all mmodule.ffi_files
 
 		# Compiler options specific to this module
-		var ldflags = mmodule.ldflags[""].join(" ")
+		var ldflags_array = mmodule.ldflags[""]
+		if ldflags_array.has("-lrt") and system("sh -c 'uname -s 2>/dev/null || echo not' | grep Darwin >/dev/null") == 0 then
+			# Remove -lrt on OS X
+			ldflags_array.remove "-lrt"
+		end
+		var ldflags = ldflags_array.join(" ")
 
 		# Protect pkg-config
 		var pkgconfigs = mmodule.pkgconfigs
