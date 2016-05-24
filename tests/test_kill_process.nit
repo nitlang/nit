@@ -21,12 +21,11 @@ var clock = new Clock
 var p = new Process("sleep", "10")
 
 # Send some signals
-p.signal(sigalarm)
+p.signal sigalarm
 p.kill
 
 # Wait for it to die
 p.wait
-var lapse = clock.lapse
 
 # Let's be generous here, as long as it does not take 5 secs out of 10 it's OK
-print lapse.sec < 5
+print clock.lapse < 5.0

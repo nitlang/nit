@@ -47,7 +47,7 @@ redef class App
 	private var frame_count = 0
 
 	# Deadline used to compute `current_fps`
-	private var frame_count_deadline = 5
+	private var frame_count_deadline = 5.0
 
 	# Check and sleep to maintain a frame-rate bellow `maximum_fps`
 	#
@@ -55,12 +55,12 @@ redef class App
 	# Is automatically called at the end of `full_frame`.
 	fun limit_fps
 	do
-		var t = clock.total.sec
+		var t = clock.total
 		if t >= frame_count_deadline then
 			var cfps = frame_count.to_f / 5.0
 			self.current_fps = cfps
 			frame_count = 0
-			frame_count_deadline = t + 5
+			frame_count_deadline = t + 5.0
 		end
 		frame_count += 1
 
