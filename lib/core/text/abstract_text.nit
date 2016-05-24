@@ -2160,6 +2160,11 @@ redef class NativeString
 	# SEE: `abstract_text::Text` for more info on the difference
 	# between `Text::bytelen` and `Text::length`.
 	fun to_s_full(bytelen, unilen: Int): String is abstract
+
+	# Copies the content of `src` to `self`
+	#
+	# NOTE: `self` must be large enough to withold `self.bytelen` bytes
+	fun fill_from(src: Text) do src.copy_to_native(self, src.bytelen, 0, 0)
 end
 
 redef class NativeArray[E]
