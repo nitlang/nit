@@ -12,8 +12,27 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Cryptographic attacks and utilities.
-module crapto
+import base64
+import crapto
 
-import english_utils
-import xor
+# Check usage
+if args.length != 1 then
+	print "Usage: repeating_key_xor_solve <cipher_file>"
+	exit 1
+end
+
+# Read the cipher from the file
+var cipher_bytes = args[0].to_path.read_all_bytes.decode_base64
+
+# Create a RepeatingKeyXorCipher object to manipulate your ciphertext
+var xorcipher = new RepeatingKeyXorCipher
+xorcipher.ciphertext = cipher_bytes
+
+# Try to find the best candidate key
+xorcipher.find_key
+
+# Decrypt the cipher according to the found key
+xorcipher.decrypt
+
+# Check the resulting plaintext out...
+print xorcipher.plaintext

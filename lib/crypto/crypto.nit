@@ -12,8 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Cryptographic attacks and utilities.
-module crapto
+# Mix of all things cryptography-related
+module crypto
 
-import english_utils
-import xor
+import basic_ciphers
+import xor_ciphers

@@ -12,8 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Mix of all things cryptography-related
-module crypto
+# Basic cryptographic ciphers and utilities.
+module basic_ciphers
 
 redef class Char
 	# Rotates self of `x`
@@ -157,20 +157,21 @@ redef class Text
 end
 
 redef class Bytes
-
-	# Returns `self` xored with `key`
+	# Computes the edit/hamming distance of two sequences of bytes.
 	#
-	# The key is cycled through until the `self` has been completely xored.
+	#     assert "this is a test".to_bytes.hamming_distance("wokka wokka!!!".bytes) == 37
+	#     assert "this is a test".to_bytes.hamming_distance("this is a test".bytes) == 0
 	#
-	#     assert "goodmorning".to_bytes.xorcipher(" ".to_bytes) == "GOODMORNING".bytes
-	fun xorcipher(key: Bytes): Bytes do
-		var xored = new Bytes.with_capacity(self.length)
-
-		for i in self.length.times do
-			xored.add(self[i] ^ key[i % key.length])
+	fun hamming_distance(other: SequenceRead[Byte]): Int do
+		var diff = 0
+		for idx in self.length.times do
+			var res_byte = self[idx] ^ other[idx]
+			for bit in [0..8[ do
+				if res_byte & 1u8 == 1u8 then diff += 1
+				res_byte = res_byte >> 1
+			end
 		end
-
-		return xored
+		return diff
 	end
 end
 
