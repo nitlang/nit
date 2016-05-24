@@ -149,6 +149,7 @@ class NitUnitExecutor
 			i += 1
 			toolcontext.info("Execute doc-unit {du.full_name} in {file} {i}", 1)
 			var res2 = toolcontext.safe_exec("{file.to_program_name}.bin {i} >'{file}.out1' 2>&1 </dev/null")
+			du.was_exec = true
 
 			var content = "{file}.out1".to_path.read_all
 			var msg = content.trunc(8192).filter_nonprintable
@@ -182,6 +183,7 @@ class NitUnitExecutor
 		var res2 = 0
 		if res == 0 then
 			res2 = toolcontext.safe_exec("{file.to_program_name}.bin >'{file}.out1' 2>&1 </dev/null")
+			du.was_exec = true
 		end
 
 		var content = "{file}.out1".to_path.read_all
@@ -192,6 +194,7 @@ class NitUnitExecutor
 			toolcontext.warning(du.location, "failure", "FAILURE: {du.full_name} (in {file}):\n{msg}")
 			toolcontext.modelbuilder.failed_entities += 1
 		else if res2 != 0 then
+			du.error = content
 			toolcontext.warning(du.location, "error", "ERROR: {du.full_name} (in {file}):\n{msg}")
 			toolcontext.modelbuilder.failed_entities += 1
 		end
