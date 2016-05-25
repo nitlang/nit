@@ -312,6 +312,29 @@ Only display the skeleton, do not write any file.
 
 Indicate the specific Nit compiler executable to use. See `--nitc`.
 
+### `NIT_TESTING`
+
+The environment variable `NIT_TESTING` is set to `true` during the execution of program tests.
+Some libraries of programs can use it to produce specific reproducible results; or just to exit their executions.
+
+Unit-tests may unset this environment variable to retrieve the original behavior of such piece of software.
+
+### `SRAND`
+
+In order to maximize reproducibility, `SRAND` is set to 0.
+This make the pseudo-random generator no random at all.
+See `Sys::srand` for details.
+
+To retrieve the randomness, unit-tests may unset this environment variable then call `srand`.
+
+### `NIT_TESTING_ID`
+
+Parallel executions can cause some race collisions on named resources (e.g. DB table names).
+To solve this issue, `NIT_TESTING_ID` is initialized with a distinct integer identifier that can be used to give unique names to resources.
+
+Note: `rand` is not a recommended way to get a distinct identifier because its randomness is disabled by default. See `SRAND`.
+
+
 # SEE ALSO
 
 The Nit language documentation and the source code of its tools and libraries may be downloaded from <http://nitlanguage.org>
