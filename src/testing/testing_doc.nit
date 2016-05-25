@@ -78,15 +78,26 @@ class NitUnitExecutor
 	# All extracted docunits
 	var docunits = new Array[DocUnit]
 
+	fun show_status(more_message: nullable String)
+	do
+		toolcontext.show_unit_status(name, docunits, more_message)
+	end
+
 	fun mark_done(du: DocUnit)
 	do
 		du.is_done = true
+		show_status(du.full_name + " " + du.status_tag)
 	end
 
 	# Execute all the docunits
 	fun run_tests
 	do
+		if docunits.is_empty then
+			return
+		end
+
 		var simple_du = new Array[DocUnit]
+		show_status
 		for du in docunits do
 			# Skip existing errors
 			if du.error != null then
@@ -103,6 +114,9 @@ class NitUnitExecutor
 		end
 
 		test_simple_docunits(simple_du)
+
+		show_status
+		print ""
 
 		for du in docunits do
 			print du.to_screen

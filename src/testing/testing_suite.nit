@@ -132,8 +132,14 @@ class TestSuite
 	# Test to be executed after the whole test suite.
 	var after_module: nullable TestCase = null
 
+	fun show_status(more_message: nullable String)
+	do
+		toolcontext.show_unit_status("Test-suite of module " + mmodule.full_name, test_cases, more_message)
+	end
+
 	# Execute the test suite
 	fun run do
+		show_status
 		if not toolcontext.test_dir.file_exists then
 			toolcontext.test_dir.mkdir
 		end
@@ -142,7 +148,14 @@ class TestSuite
 		toolcontext.info("Execute test-suite {mmodule.name}", 1)
 		var before_module = self.before_module
 		if not before_module == null then before_module.run
-		for case in test_cases do case.run
+		for case in test_cases do
+			case.run
+			show_status(case.full_name + " " + case.status_tag)
+		end
+
+		show_status
+		print ""
+
 		var after_module = self.after_module
 		if not after_module == null then after_module.run
 		for case in test_cases do

@@ -94,6 +94,35 @@ ulimit -t {{{ulimit_usertime}}} 2> /dev/null
 	#
 	# Default: 10 CPU minute
 	var ulimit_usertime = 600 is writable
+
+	# Show a single-line status to use as a progression.
+	#
+	# Note that the line starts with `'\r'` and is not ended by a `'\n'`.
+	# So it is expected that:
+	# * no other output is printed between two calls
+	# * the last `show_unit_status` is followed by a new-line
+	fun show_unit_status(name: String, tests: SequenceRead[UnitTest], more_message: nullable String)
+	do
+		var esc = 27.code_point.to_s
+		var line = "\r{esc}[K* {name} ["
+		var done = tests.length
+		for t in tests do
+			if not t.is_done then
+				line += " "
+				done -= 1
+			else if t.error == null then
+				line += ".".green.bold
+			else
+				line += "X".red.bold
+			end
+		end
+		line += "] {done}/{tests.length}"
+		if more_message != null then
+			line += " " + more_message
+		end
+		printn "{line}"
+	end
+
 end
 
 # A unit test is an elementary test discovered, run and reported by nitunit.
