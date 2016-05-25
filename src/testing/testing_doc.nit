@@ -36,6 +36,9 @@ class NitUnitExecutor
 	# The XML node associated to the module
 	var testsuite: HTMLTag
 
+	# The name of the suite
+	var name: String
+
 	# Markdown processor used to parse markdown comments and extract code.
 	var mdproc = new MarkdownProcessor
 
@@ -453,7 +456,7 @@ redef class ModelBuilder
 
 		var prefix = toolcontext.test_dir
 		prefix = prefix.join_path(mmodule.to_s)
-		var d2m = new NitUnitExecutor(toolcontext, prefix, o, ts)
+		var d2m = new NitUnitExecutor(toolcontext, prefix, o, ts, "Docunits of module {mmodule.full_name}")
 
 		do
 			total_entities += 1
@@ -507,7 +510,7 @@ redef class ModelBuilder
 
 		var prefix = toolcontext.test_dir
 		prefix = prefix.join_path(mgroup.to_s)
-		var d2m = new NitUnitExecutor(toolcontext, prefix, o, ts)
+		var d2m = new NitUnitExecutor(toolcontext, prefix, o, ts, "Docunits of group {mgroup.full_name}")
 
 		total_entities += 1
 		var mdoc = mgroup.mdoc
@@ -533,7 +536,7 @@ redef class ModelBuilder
 		ts.attr("package", file)
 
 		var prefix = toolcontext.test_dir / "file"
-		var d2m = new NitUnitExecutor(toolcontext, prefix, null, ts)
+		var d2m = new NitUnitExecutor(toolcontext, prefix, null, ts, "Docunits of file {file}")
 
 		total_entities += 1
 		doc_entities += 1
