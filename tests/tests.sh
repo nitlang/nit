@@ -21,6 +21,8 @@
 export LANG=C
 export LC_ALL=C
 export NIT_TESTING=true
+# Use the pid as a collision prevention
+export NIT_TESTING_ID=$$
 export NIT_SRAND=0
 
 unset NIT_DIR
