@@ -95,20 +95,36 @@ ulimit -t {{{ulimit_usertime}}} 2> /dev/null
 	var ulimit_usertime = 600 is writable
 end
 
-# A unit test is an elementary test discovered, run and reported bu nitunit.
+# A unit test is an elementary test discovered, run and reported by nitunit.
 #
 # This class factorizes `DocUnit` and `TestCase`.
 abstract class UnitTest
+	# The name of the unit to show in messages
+	fun full_name: String is abstract
 
-	# Error occurred during test-case execution.
+	# The location of the unit test to show in messages.
+	fun location: Location is abstract
+
+	# Flag that indicates if the unit test was compiled/run.
+	var is_done: Bool = false is writable
+
+	# Error message occurred during test-case execution (or compilation).
 	var error: nullable String = null is writable
 
 	# Was the test case executed at least once?
+	#
+	# This will indicate the status of the test (failture or error)
 	var was_exec = false is writable
 
-	# Return the `TestCase` in XML format compatible with Jenkins.
+	# The raw output of the execution (or compilation)
 	#
-	# See to_xml
+	# It merges the standard output and error output
+	var raw_output: nullable String = null is writable
+
+	# The location where the error occurred, if it makes sense.
+	var error_location: nullable Location = null is writable
+
+	# Return a `<testcase>` XML node in format compatible with Jenkins unit tests.
 	fun to_xml: HTMLTag do
 		var tc = new HTMLTag("testcase")
 		tc.attr("classname", xml_classname)
@@ -128,6 +144,8 @@ abstract class UnitTest
 	# The `classname` attribute of the XML format.
 	#
 	# NOTE: jenkins expects a '.' in the classname attr
+	#
+	# See to_xml
 	fun xml_classname: String is abstract
 
 	# The `name` attribute of the XML format.

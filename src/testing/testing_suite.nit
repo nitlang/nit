@@ -222,6 +222,10 @@ class TestCase
 	# Test method to be compiled and tested.
 	var test_method: MMethodDef
 
+	redef fun full_name do return test_method.full_name
+
+	redef fun location do return test_method.location
+
 	# `ToolContext` to use to display messages and find `nitc` bin.
 	var toolcontext: ToolContext
 
@@ -280,6 +284,7 @@ class TestCase
 				end
 			end
 		end
+		is_done = true
 		toolcontext.check_errors
 	end
 

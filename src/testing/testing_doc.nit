@@ -77,13 +77,21 @@ class NitUnitExecutor
 	# All extracted docunits
 	var docunits = new Array[DocUnit]
 
+	fun mark_done(du: DocUnit)
+	do
+		du.is_done = true
+	end
+
 	# Execute all the docunits
 	fun run_tests
 	do
 		var simple_du = new Array[DocUnit]
 		for du in docunits do
 			# Skip existing errors
-			if du.error != null then continue
+			if du.error != null then
+				mark_done(du)
+				continue
+			end
 
 			var ast = toolcontext.parse_something(du.block)
 			if ast isa AExpr then
@@ -159,6 +167,7 @@ class NitUnitExecutor
 				toolcontext.warning(du.location, "error", "ERROR: {du.full_name} (in {file}): Runtime error\n{msg}")
 				toolcontext.modelbuilder.failed_entities += 1
 			end
+			mark_done(du)
 			toolcontext.check_errors
 		end
 	end
@@ -198,6 +207,7 @@ class NitUnitExecutor
 			toolcontext.warning(du.location, "error", "ERROR: {du.full_name} (in {file}):\n{msg}")
 			toolcontext.modelbuilder.failed_entities += 1
 		end
+		mark_done(du)
 		toolcontext.check_errors
 	end
 
@@ -295,7 +305,9 @@ private class NitunitDecorator
 
 			var du = new_docunit
 			du.block += code
-			du.error = "{location}: {message}"
+			du.error_location = location
+			du.error = message
+			executor.toolcontext.modelbuilder.failed_entities += 1
 			return
 		end
 
@@ -353,11 +365,13 @@ class DocUnit
 	# The numbering of self in mdoc (starting with 0)
 	var number: Int
 
-	# The name of the unit to show in messages
-	fun full_name: String do
+	redef fun full_name do
 		var mentity = mdoc.original_mentity
-		if mentity != null then return mentity.full_name
-		return xml_classname + "." + xml_name
+		if mentity != null then
+			return mentity.full_name
+		else
+			return xml_classname + "." + xml_name
+		end
 	end
 
 	# The text of the code to execute.
@@ -379,7 +393,7 @@ class DocUnit
 	#
 	# If `self` is made of multiple code-blocks, then the location
 	# starts at the first code-books and finish at the last one, thus includes anything between.
-	var location: Location is lazy do
+	redef var location is lazy do
 		return new Location(mdoc.location.file, lines.first, lines.last+1, columns.first+1, 0)
 	end
 
