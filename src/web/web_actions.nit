@@ -29,28 +29,6 @@ class TreeAction
 	end
 end
 
-# Display the list of mentities matching `namespace`.
-class SearchAction
-	super ModelHandler
-
-	# TODO handle more than full namespaces.
-	redef fun get(req, res) do
-		var namespace = req.param("namespace")
-		var model = init_model_view(req)
-		var mentity = find_mentity(model, namespace)
-		if mentity == null then
-			res.error(404)
-			return
-		end
-		if req.is_json_asked then
-			res.json(mentity.to_json)
-			return
-		end
-		var view = new HtmlResultPage(namespace or else "null", [mentity])
-		res.send_view(view)
-	end
-end
-
 # Display a MEntity source code.
 class CodeAction
 	super ModelHandler

@@ -68,8 +68,30 @@ class APIRouter
 
 	init do
 		use("/list", new APIList(model, mainmodule))
+		use("/search", new APISearch(model, mainmodule))
 	end
 end
+
+# Search mentities from a query string.
+#
+# Example: `GET /search?q=Arr`
+class APISearch
+	super APIHandler
+
+	redef fun get(req, res) do
+		var q = req.string_arg("q")
+		if q == null then
+			res.error 400
+			return
+		end
+		var arr = new JsonArray
+		for mentity in view.mentities do
+			if mentity.name.has_prefix(q) then arr.add mentity
+		end
+		res.json arr
+	end
+end
+
 # List all mentities.
 #
 # MEntities can be filtered on their kind using the `k` parameter.
