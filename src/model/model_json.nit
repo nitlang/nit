@@ -60,6 +60,7 @@ redef class MEntity
 		obj["full_name"] = full_name
 		obj["mdoc"] = mdoc_or_fallback
 		obj["visibility"] = visibility
+		obj["location"] = location
 		var modifiers = new JsonArray
 		for modifier in collect_modifiers do
 			modifiers.add modifier
@@ -140,7 +141,6 @@ end
 redef class MModule
 	redef fun json do
 		var obj = super
-		obj["location"] = location
 		obj["mpackage"] = to_mentity_ref(mpackage)
 		obj["mgroup"] = to_mentity_ref(mgroup)
 		obj["intro_mclasses"] = to_mentity_refs(intro_mclasses)
@@ -166,7 +166,6 @@ end
 redef class MClassDef
 	redef fun json do
 		var obj = super
-		obj["location"] = location
 		obj["is_intro"] = is_intro
 		var arr = new JsonArray
 		for mparameter in mclass.mparameters do arr.add mparameter
@@ -218,7 +217,6 @@ end
 redef class MPropDef
 	redef fun json do
 		var obj = super
-		obj["location"] = location
 		obj["is_intro"] = is_intro
 		obj["mclassdef"] = to_mentity_ref(mclassdef)
 		obj["mproperty"] = to_mentity_ref(mproperty)
