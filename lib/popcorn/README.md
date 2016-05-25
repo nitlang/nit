@@ -428,6 +428,23 @@ receive a `404 Not found` error.
 * `res.send()` Send a response of various types.
 * `res.error()` Set the response status code and send its message as the response body.
 
+## Response cycle
+
+When the popcorn `App` receives a request, the response cycle is the following:
+
+1. `pre-middlewares` lookup matching middlewares registered with `use_before(pre_middleware)`:
+	1. execute matching middleware by registration order
+	2. if a middleware send a response then let the `pre-middlewares` loop continue
+	   with the next middleware
+2. `response-handlers` lookup matching handlers registered with `use(handler)`:
+	1. execute matching middleware by registration order
+	2. if a middleware send a response then stop the `response-handlers` loop
+	3. if no hander matches or sends a response, generate a 404 response
+3. `post-middlewares` lookup matching handlers registered with `use_after(post_handler)`:
+	1. execute matching middleware by registration order
+	2. if a middleware send a response then let the `post-middlewares` loop continue
+	   with the next middleware
+
 ## Middlewares
 
 ### Overview
@@ -465,7 +482,7 @@ end
 
 
 var app = new App
-app.use("/*", new MyLogger)
+app.use_before("/*", new MyLogger)
 app.use("/", new HelloHandler)
 app.listen("localhost", 3000)
 ~~~
@@ -474,8 +491,9 @@ By using the `MyLogger` handler to the route `/*` we ensure that every requests
 (even 404 ones) pass through the middleware handler.
 This handler just prints “Request Logged!” when a request is received.
 
-The order of middleware loading is important: middleware functions that are loaded first are also executed first.
-In the above example, `MyLogger` will be executed before `HelloHandler`.
+Be default, the order of middleware execution is that are loaded first are also executed first.
+To ensure our middleware `MyLogger` will be executed before all the other, we add it
+with the `use_before` method.
 
 ### Ultra cool, more advanced logger example
 
@@ -519,9 +537,9 @@ class HelloHandler
 end
 
 var app = new App
-app.use("/*", new RequestTimeHandler)
+app.use_before("/*", new RequestTimeHandler)
 app.use("/", new HelloHandler)
-app.use("/*", new LogHandler)
+app.use_after("/*", new LogHandler)
 app.listen("localhost", 3000)
 ~~~
 
@@ -530,9 +548,15 @@ Doing so we can access our data from all handlers that import our module, direct
 from the `req` parameter.
 
 We use the new middleware called `RequestTimeHandler` to initialize the request timer.
+Because of the `use_before` method, the `RequestTimeHandler` middleware will be executed
+before all the others.
+
+We then let the `HelloHandler` produce the response.
 
 Finally, our `LogHandler` will display a bunch of data and use the request `timer`
 to display the time it took to process the request.
+Because of the `use_after` method, the `LogHandler` middleware will be executed after
+all the others.
 
 The app now uses the `RequestTimeHandler` middleware for every requests received
 by the Popcorn app.

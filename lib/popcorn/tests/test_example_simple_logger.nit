@@ -28,7 +28,7 @@ class TestClient
 end
 
 var app = new App
-app.use("/*", new LogHandler)
+app.use_before("/*", new LogHandler)
 app.use("/", new HelloHandler)
 
 var host = test_host

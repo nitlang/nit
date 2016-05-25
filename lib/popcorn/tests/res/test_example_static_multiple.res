@@ -28,13 +28,6 @@ alert("Hello World!");
 </html>
 
 [Client] curl -s localhost:*****/
-Warning: Headers already sent!
-<!DOCTYPE html>
-<html>
-	<body>
-		<h1>Another Index</h1>
-	</body>
-</html>
 <!DOCTYPE html>
 <html>
 	<body>
