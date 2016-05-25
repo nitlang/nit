@@ -59,6 +59,7 @@ redef class MEntity
 		obj["class_name"] = class_name
 		obj["full_name"] = full_name
 		obj["mdoc"] = mdoc_or_fallback
+		obj["visibility"] = visibility
 		var modifiers = new JsonArray
 		for modifier in collect_modifiers do
 			modifiers.add modifier
@@ -114,7 +115,6 @@ redef class MPackage
 
 	redef fun json do
 		var obj = super
-		obj["visibility"] = public_visibility
 		if ini != null then
 			obj["ini"] = new JsonObject.from(ini.as(not null).to_map)
 		end
@@ -127,7 +127,6 @@ end
 redef class MGroup
 	redef fun json do
 		var obj = super
-		obj["visibility"] = public_visibility
 		obj["is_root"] = is_root
 		obj["mpackage"] = to_mentity_ref(mpackage)
 		obj["default_mmodule"] = to_mentity_ref(default_mmodule)
@@ -142,7 +141,6 @@ redef class MModule
 	redef fun json do
 		var obj = super
 		obj["location"] = location
-		obj["visibility"] = public_visibility
 		obj["mpackage"] = to_mentity_ref(mpackage)
 		obj["mgroup"] = to_mentity_ref(mgroup)
 		obj["intro_mclasses"] = to_mentity_refs(intro_mclasses)
@@ -154,7 +152,6 @@ end
 redef class MClass
 	redef fun json do
 		var obj = super
-		obj["visibility"] = visibility
 		var arr = new JsonArray
 		for mparameter in mparameters do arr.add mparameter
 		obj["mparameters"] = arr
@@ -169,7 +166,6 @@ end
 redef class MClassDef
 	redef fun json do
 		var obj = super
-		obj["visibility"] = mclass.visibility
 		obj["location"] = location
 		obj["is_intro"] = is_intro
 		var arr = new JsonArray
@@ -186,7 +182,6 @@ end
 redef class MProperty
 	redef fun json do
 		var obj = super
-		obj["visibility"] = visibility
 		obj["intro"] = to_mentity_ref(intro)
 		obj["intro_mclassdef"] = to_mentity_ref(intro_mclassdef)
 		obj["mpropdefs"] = to_mentity_refs(mpropdefs)
@@ -223,7 +218,6 @@ end
 redef class MPropDef
 	redef fun json do
 		var obj = super
-		obj["visibility"] = mproperty.visibility
 		obj["location"] = location
 		obj["is_intro"] = is_intro
 		obj["mclassdef"] = to_mentity_ref(mclassdef)
