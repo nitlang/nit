@@ -324,6 +324,9 @@ redef class Sys
 	do
 		return command.to_cstring.system
 	end
+
+	# The pid of the program
+	fun pid: Int `{ return getpid(); `}
 end
 
 redef class NativeString
