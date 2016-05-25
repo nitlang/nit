@@ -112,8 +112,6 @@ redef class MModule
 		var mmodules = new HashSet[MModule]
 		mmodules.add self
 		mmodules.add_all collect_ancestors(view)
-		mmodules.add_all collect_parents(view)
-		mmodules.add_all collect_children(view)
 		mmodules.add_all collect_descendants(view)
 		return view.mmodules_poset(mmodules)
 	end
