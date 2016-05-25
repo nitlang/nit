@@ -70,8 +70,6 @@ class NitUnitExecutor
 
 		# Populate `blocks` from the markdown decorator
 		mdproc.process(mdoc.content.join("\n"))
-
-		toolcontext.check_errors
 	end
 
 	# All extracted docunits
@@ -102,6 +100,10 @@ class NitUnitExecutor
 		end
 
 		test_simple_docunits(simple_du)
+
+		for du in docunits do
+			print du.to_screen
+		end
 
 		for du in docunits do
 			testsuite.add du.to_xml
@@ -160,15 +162,13 @@ class NitUnitExecutor
 			du.was_exec = true
 
 			var content = "{file}.out1".to_path.read_all
-			var msg = content.trunc(8192).filter_nonprintable
+			du.raw_output = content
 
 			if res2 != 0 then
-				du.error = content
-				toolcontext.warning(du.location, "error", "ERROR: {du.full_name} (in {file}): Runtime error\n{msg}")
+				du.error = "Runtime error in {file} with argument {i}"
 				toolcontext.modelbuilder.failed_entities += 1
 			end
 			mark_done(du)
-			toolcontext.check_errors
 		end
 	end
 
@@ -196,19 +196,16 @@ class NitUnitExecutor
 		end
 
 		var content = "{file}.out1".to_path.read_all
-		var msg = content.trunc(8192).filter_nonprintable
+		du.raw_output = content
 
 		if res != 0 then
-			du.error = content
-			toolcontext.warning(du.location, "failure", "FAILURE: {du.full_name} (in {file}):\n{msg}")
+			du.error = "Compilation error in {file}"
 			toolcontext.modelbuilder.failed_entities += 1
 		else if res2 != 0 then
-			du.error = content
-			toolcontext.warning(du.location, "error", "ERROR: {du.full_name} (in {file}):\n{msg}")
+			du.error = "Runtime error in {file}"
 			toolcontext.modelbuilder.failed_entities += 1
 		end
 		mark_done(du)
-		toolcontext.check_errors
 	end
 
 	# Create and fill the header of a unit file `file`.
@@ -299,9 +296,6 @@ private class NitunitDecorator
 			else
 				message = "Error: Invalid Nit code."
 			end
-
-			executor.toolcontext.warning(location, "invalid-block", "{message} To suppress this message, enclose the block with a fence tagged `nitish` or `raw` (see `man nitdoc`).")
-			executor.toolcontext.modelbuilder.failed_entities += 1
 
 			var du = new_docunit
 			du.block += code

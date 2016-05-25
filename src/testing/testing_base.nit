@@ -18,6 +18,7 @@ module testing_base
 import modelize
 private import parser_util
 import html
+import console
 
 redef class ToolContext
 	# opt --full
@@ -109,6 +110,8 @@ abstract class UnitTest
 	var is_done: Bool = false is writable
 
 	# Error message occurred during test-case execution (or compilation).
+	#
+	# e.g.: `Runtime Error`
 	var error: nullable String = null is writable
 
 	# Was the test case executed at least once?
@@ -124,6 +127,38 @@ abstract class UnitTest
 	# The location where the error occurred, if it makes sense.
 	var error_location: nullable Location = null is writable
 
+	# A colorful `[OK]` or `[KO]`.
+	fun status_tag: String do
+		if not is_done then
+			return "[  ]"
+		else if error != null then
+			return "[KO]".red.bold
+		else
+			return "[OK]".green.bold
+		end
+	end
+
+	# The full (color) description of the test-case.
+	#
+	# `more message`, if any, is added after the error message.
+	fun to_screen(more_message: nullable String): String do
+		var res
+		var error = self.error
+		if error != null then
+			if more_message != null then error += " " + more_message
+			var loc = error_location or else location
+			res = "{status_tag} {full_name}\n     {loc.to_s.yellow}: {error}\n{loc.colored_line("1;31")}"
+			var output = self.raw_output
+			if output != null then
+				res += "\n     Output\n\t{output.chomp.replace("\n", "\n\t")}\n"
+			end
+		else
+			res = "{status_tag} {full_name}"
+			if more_message != null then res += more_message
+		end
+		return res
+	end
+
 	# Return a `<testcase>` XML node in format compatible with Jenkins unit tests.
 	fun to_xml: HTMLTag do
 		var tc = new HTMLTag("testcase")
@@ -132,11 +167,14 @@ abstract class UnitTest
 		var error = self.error
 		if error != null then
 			if was_exec then
-				tc.open("error").append("Runtime Error")
+				tc.open("error").append(error)
 			else
-				tc.open("failure").append("Compilation Error")
+				tc.open("failure").append(error)
 			end
-			tc.open("system-err").append(error.trunc(8192).filter_nonprintable)
+		end
+		var output = self.raw_output
+		if output != null then
+			tc.open("system-err").append(output.trunc(8192).filter_nonprintable)
 		end
 		return tc
 	end
