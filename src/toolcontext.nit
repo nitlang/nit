@@ -374,6 +374,9 @@ class ToolContext
 	# Option --nit-dir
 	var opt_nit_dir = new OptionString("Base directory of the Nit installation", "--nit-dir")
 
+	# Option --share-dir
+	var opt_share_dir = new OptionString("Directory containing tools assets", "--share-dir")
+
 	# Option --help
 	var opt_help = new OptionBool("Show Help (This screen)", "-h", "-?", "--help")
 
@@ -541,6 +544,20 @@ The Nit language documentation and the source code of its tools and libraries ma
 
 	# The identified root directory of the Nit package
 	var nit_dir: String is noinit
+
+	# Shared files directory.
+	#
+	# Most often `nit/share/`.
+	var share_dir: String is lazy do
+		var sharedir = opt_share_dir.value
+		if sharedir == null then
+			sharedir = nit_dir / "share"
+			if not sharedir.file_exists then
+				fatal_error(null, "Fatal Error: cannot locate shared files directory in {sharedir}. Uses --share-dir to define it's location.")
+			end
+		end
+		return sharedir
+	end
 
 	private fun compute_nit_dir: String
 	do
