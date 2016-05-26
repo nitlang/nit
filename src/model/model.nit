@@ -30,6 +30,15 @@ import mdoc
 import ordered_tree
 private import more_collections
 
+redef class MEntity
+	# The visibility of the MEntity.
+	#
+	# MPackages, MGroups and MModules are always public.
+	# The visibility of `MClass` and `MProperty` is defined by the keyword used.
+	# `MClassDef` and `MPropDef` return the visibility of `MClass` and `MProperty`.
+	fun visibility: MVisibility do return public_visibility
+end
+
 redef class Model
 	# All known classes
 	var mclasses = new Array[MClass]
@@ -465,7 +474,7 @@ class MClass
 
 	# The visibility of the class
 	# In Nit, the visibility of a class cannot evolve in refinements
-	var visibility: MVisibility
+	redef var visibility
 
 	init
 	do
@@ -592,6 +601,8 @@ class MClassDef
 	var bound_mtype: MClassType
 
 	redef var location: Location
+
+	redef fun visibility do return mclass.visibility
 
 	# Internal name combining the module and the class
 	# Example: "mymodule$MyClass"
@@ -1988,7 +1999,7 @@ abstract class MProperty
 	end
 
 	# The visibility of the property
-	var visibility: MVisibility
+	redef var visibility
 
 	# Is the property usable as an initializer?
 	var is_autoinit = false is writable
@@ -2254,6 +2265,8 @@ abstract class MPropDef
 	var mproperty: MPROPERTY
 
 	redef var location: Location
+
+	redef fun visibility do return mproperty.visibility
 
 	init
 	do
