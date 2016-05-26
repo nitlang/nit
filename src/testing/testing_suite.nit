@@ -132,8 +132,14 @@ class TestSuite
 	# Test to be executed after the whole test suite.
 	var after_module: nullable TestCase = null
 
+	fun show_status(more_message: nullable String)
+	do
+		toolcontext.show_unit_status("Test-suite of module " + mmodule.full_name, test_cases, more_message)
+	end
+
 	# Execute the test suite
 	fun run do
+		show_status
 		if not toolcontext.test_dir.file_exists then
 			toolcontext.test_dir.mkdir
 		end
@@ -142,9 +148,19 @@ class TestSuite
 		toolcontext.info("Execute test-suite {mmodule.name}", 1)
 		var before_module = self.before_module
 		if not before_module == null then before_module.run
-		for case in test_cases do case.run
+		for case in test_cases do
+			case.run
+			show_status(case.full_name + " " + case.status_tag)
+		end
+
+		show_status
+		print ""
+
 		var after_module = self.after_module
 		if not after_module == null then after_module.run
+		for case in test_cases do
+			print case.to_screen
+		end
 	end
 
 	# Write the test unit for `self` in a nit compilable file.
@@ -222,6 +238,10 @@ class TestCase
 	# Test method to be compiled and tested.
 	var test_method: MMethodDef
 
+	redef fun full_name do return test_method.full_name
+
+	redef fun location do return test_method.location
+
 	# `ToolContext` to use to display messages and find `nitc` bin.
 	var toolcontext: ToolContext
 
@@ -250,17 +270,13 @@ class TestCase
 		var test_file = test_suite.test_file
 		var res_name = "{test_file}_{method_name.escape_to_c}"
 		var res = toolcontext.safe_exec("{test_file}.bin {method_name} > '{res_name}.out1' 2>&1 </dev/null")
-		var f = new FileReader.open("{res_name}.out1")
-		var msg = f.read_all
-		f.close
+		self.raw_output = "{res_name}.out1".to_path.read_all
 		# set test case result
-		var loc = test_method.location
 		if res != 0 then
-			error = msg
-			toolcontext.warning(loc, "failure",
-			   "ERROR: {method_name} (in file {test_file}.nit): {msg}")
+			error = "Runtime Error in file {test_file}.nit"
 			toolcontext.modelbuilder.failed_tests += 1
 		else
+			# no error, check with res file, if any.
 			var mmodule = test_method.mclassdef.mmodule
 			var file = mmodule.filepath
 			if file != null then
@@ -269,10 +285,8 @@ class TestCase
 					toolcontext.info("Diff output with {sav}", 1)
 					res = toolcontext.safe_exec("diff -u --label 'expected:{sav}' --label 'got:{res_name}.out1' '{sav}' '{res_name}.out1' > '{res_name}.diff' 2>&1 </dev/null")
 					if res != 0 then
-						msg = "Diff\n" + "{res_name}.diff".to_path.read_all
-						error = msg
-						toolcontext.warning(loc, "failure",
-						"ERROR: {method_name} (in file {test_file}.nit): {msg}")
+						self.raw_output = "Diff\n" + "{res_name}.diff".to_path.read_all
+						error = "Difference with expected output: diff -u {sav} {res_name}.out1"
 						toolcontext.modelbuilder.failed_tests += 1
 					end
 				else
@@ -280,7 +294,7 @@ class TestCase
 				end
 			end
 		end
-		toolcontext.check_errors
+		is_done = true
 	end
 
 	redef fun xml_classname do

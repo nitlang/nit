@@ -36,6 +36,9 @@ class NitUnitExecutor
 	# The XML node associated to the module
 	var testsuite: HTMLTag
 
+	# The name of the suite
+	var name: String
+
 	# Markdown processor used to parse markdown comments and extract code.
 	var mdproc = new MarkdownProcessor
 
@@ -70,20 +73,37 @@ class NitUnitExecutor
 
 		# Populate `blocks` from the markdown decorator
 		mdproc.process(mdoc.content.join("\n"))
-
-		toolcontext.check_errors
 	end
 
 	# All extracted docunits
 	var docunits = new Array[DocUnit]
 
+	fun show_status(more_message: nullable String)
+	do
+		toolcontext.show_unit_status(name, docunits, more_message)
+	end
+
+	fun mark_done(du: DocUnit)
+	do
+		du.is_done = true
+		show_status(du.full_name + " " + du.status_tag)
+	end
+
 	# Execute all the docunits
 	fun run_tests
 	do
+		if docunits.is_empty then
+			return
+		end
+
 		var simple_du = new Array[DocUnit]
+		show_status
 		for du in docunits do
 			# Skip existing errors
-			if du.error != null then continue
+			if du.error != null then
+				mark_done(du)
+				continue
+			end
 
 			var ast = toolcontext.parse_something(du.block)
 			if ast isa AExpr then
@@ -94,6 +114,13 @@ class NitUnitExecutor
 		end
 
 		test_simple_docunits(simple_du)
+
+		show_status
+		print ""
+
+		for du in docunits do
+			print du.to_screen
+		end
 
 		for du in docunits do
 			testsuite.add du.to_xml
@@ -149,16 +176,16 @@ class NitUnitExecutor
 			i += 1
 			toolcontext.info("Execute doc-unit {du.full_name} in {file} {i}", 1)
 			var res2 = toolcontext.safe_exec("{file.to_program_name}.bin {i} >'{file}.out1' 2>&1 </dev/null")
+			du.was_exec = true
 
 			var content = "{file}.out1".to_path.read_all
-			var msg = content.trunc(8192).filter_nonprintable
+			du.raw_output = content
 
 			if res2 != 0 then
-				du.error = content
-				toolcontext.warning(du.location, "error", "ERROR: {du.full_name} (in {file}): Runtime error\n{msg}")
+				du.error = "Runtime error in {file} with argument {i}"
 				toolcontext.modelbuilder.failed_entities += 1
 			end
-			toolcontext.check_errors
+			mark_done(du)
 		end
 	end
 
@@ -182,20 +209,20 @@ class NitUnitExecutor
 		var res2 = 0
 		if res == 0 then
 			res2 = toolcontext.safe_exec("{file.to_program_name}.bin >'{file}.out1' 2>&1 </dev/null")
+			du.was_exec = true
 		end
 
 		var content = "{file}.out1".to_path.read_all
-		var msg = content.trunc(8192).filter_nonprintable
+		du.raw_output = content
 
 		if res != 0 then
-			du.error = content
-			toolcontext.warning(du.location, "failure", "FAILURE: {du.full_name} (in {file}):\n{msg}")
+			du.error = "Compilation error in {file}"
 			toolcontext.modelbuilder.failed_entities += 1
 		else if res2 != 0 then
-			toolcontext.warning(du.location, "error", "ERROR: {du.full_name} (in {file}):\n{msg}")
+			du.error = "Runtime error in {file}"
 			toolcontext.modelbuilder.failed_entities += 1
 		end
-		toolcontext.check_errors
+		mark_done(du)
 	end
 
 	# Create and fill the header of a unit file `file`.
@@ -287,12 +314,11 @@ private class NitunitDecorator
 				message = "Error: Invalid Nit code."
 			end
 
-			executor.toolcontext.warning(location, "invalid-block", "{message} To suppress this message, enclose the block with a fence tagged `nitish` or `raw` (see `man nitdoc`).")
-			executor.toolcontext.modelbuilder.failed_entities += 1
-
 			var du = new_docunit
 			du.block += code
-			du.error = "{location}: {message}"
+			du.error_location = location
+			du.error = message
+			executor.toolcontext.modelbuilder.failed_entities += 1
 			return
 		end
 
@@ -350,11 +376,13 @@ class DocUnit
 	# The numbering of self in mdoc (starting with 0)
 	var number: Int
 
-	# The name of the unit to show in messages
-	fun full_name: String do
+	redef fun full_name do
 		var mentity = mdoc.original_mentity
-		if mentity != null then return mentity.full_name
-		return xml_classname + "." + xml_name
+		if mentity != null then
+			return mentity.full_name
+		else
+			return xml_classname + "." + xml_name
+		end
 	end
 
 	# The text of the code to execute.
@@ -376,7 +404,7 @@ class DocUnit
 	#
 	# If `self` is made of multiple code-blocks, then the location
 	# starts at the first code-books and finish at the last one, thus includes anything between.
-	var location: Location is lazy do
+	redef var location is lazy do
 		return new Location(mdoc.location.file, lines.first, lines.last+1, columns.first+1, 0)
 	end
 
@@ -442,7 +470,7 @@ redef class ModelBuilder
 
 		var prefix = toolcontext.test_dir
 		prefix = prefix.join_path(mmodule.to_s)
-		var d2m = new NitUnitExecutor(toolcontext, prefix, o, ts)
+		var d2m = new NitUnitExecutor(toolcontext, prefix, o, ts, "Docunits of module {mmodule.full_name}")
 
 		do
 			total_entities += 1
@@ -496,7 +524,7 @@ redef class ModelBuilder
 
 		var prefix = toolcontext.test_dir
 		prefix = prefix.join_path(mgroup.to_s)
-		var d2m = new NitUnitExecutor(toolcontext, prefix, o, ts)
+		var d2m = new NitUnitExecutor(toolcontext, prefix, o, ts, "Docunits of group {mgroup.full_name}")
 
 		total_entities += 1
 		var mdoc = mgroup.mdoc
@@ -522,7 +550,7 @@ redef class ModelBuilder
 		ts.attr("package", file)
 
 		var prefix = toolcontext.test_dir / "file"
-		var d2m = new NitUnitExecutor(toolcontext, prefix, null, ts)
+		var d2m = new NitUnitExecutor(toolcontext, prefix, null, ts, "Docunits of file {file}")
 
 		total_entities += 1
 		doc_entities += 1

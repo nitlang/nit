@@ -18,6 +18,7 @@ module testing_base
 import modelize
 private import parser_util
 import html
+import console
 
 redef class ToolContext
 	# opt --full
@@ -93,22 +94,101 @@ ulimit -t {{{ulimit_usertime}}} 2> /dev/null
 	#
 	# Default: 10 CPU minute
 	var ulimit_usertime = 600 is writable
+
+	# Show a single-line status to use as a progression.
+	#
+	# Note that the line starts with `'\r'` and is not ended by a `'\n'`.
+	# So it is expected that:
+	# * no other output is printed between two calls
+	# * the last `show_unit_status` is followed by a new-line
+	fun show_unit_status(name: String, tests: SequenceRead[UnitTest], more_message: nullable String)
+	do
+		var esc = 27.code_point.to_s
+		var line = "\r{esc}[K* {name} ["
+		var done = tests.length
+		for t in tests do
+			if not t.is_done then
+				line += " "
+				done -= 1
+			else if t.error == null then
+				line += ".".green.bold
+			else
+				line += "X".red.bold
+			end
+		end
+		line += "] {done}/{tests.length}"
+		if more_message != null then
+			line += " " + more_message
+		end
+		printn "{line}"
+	end
+
 end
 
-# A unit test is an elementary test discovered, run and reported bu nitunit.
+# A unit test is an elementary test discovered, run and reported by nitunit.
 #
 # This class factorizes `DocUnit` and `TestCase`.
 abstract class UnitTest
+	# The name of the unit to show in messages
+	fun full_name: String is abstract
 
-	# Error occurred during test-case execution.
+	# The location of the unit test to show in messages.
+	fun location: Location is abstract
+
+	# Flag that indicates if the unit test was compiled/run.
+	var is_done: Bool = false is writable
+
+	# Error message occurred during test-case execution (or compilation).
+	#
+	# e.g.: `Runtime Error`
 	var error: nullable String = null is writable
 
 	# Was the test case executed at least once?
+	#
+	# This will indicate the status of the test (failture or error)
 	var was_exec = false is writable
 
-	# Return the `TestCase` in XML format compatible with Jenkins.
+	# The raw output of the execution (or compilation)
 	#
-	# See to_xml
+	# It merges the standard output and error output
+	var raw_output: nullable String = null is writable
+
+	# The location where the error occurred, if it makes sense.
+	var error_location: nullable Location = null is writable
+
+	# A colorful `[OK]` or `[KO]`.
+	fun status_tag: String do
+		if not is_done then
+			return "[  ]"
+		else if error != null then
+			return "[KO]".red.bold
+		else
+			return "[OK]".green.bold
+		end
+	end
+
+	# The full (color) description of the test-case.
+	#
+	# `more message`, if any, is added after the error message.
+	fun to_screen(more_message: nullable String): String do
+		var res
+		var error = self.error
+		if error != null then
+			if more_message != null then error += " " + more_message
+			var loc = error_location or else location
+			res = "{status_tag} {full_name}\n     {loc.to_s.yellow}: {error}\n{loc.colored_line("1;31")}"
+			var output = self.raw_output
+			if output != null then
+				res += "\n     Output\n\t{output.chomp.replace("\n", "\n\t")}\n"
+			end
+		else
+			res = "{status_tag} {full_name}"
+			if more_message != null then res += more_message
+		end
+		return res
+	end
+
+	# Return a `<testcase>` XML node in format compatible with Jenkins unit tests.
 	fun to_xml: HTMLTag do
 		var tc = new HTMLTag("testcase")
 		tc.attr("classname", xml_classname)
@@ -116,11 +196,14 @@ abstract class UnitTest
 		var error = self.error
 		if error != null then
 			if was_exec then
-				tc.open("error").append("Runtime Error")
+				tc.open("error").append(error)
 			else
-				tc.open("failure").append("Compilation Error")
+				tc.open("failure").append(error)
 			end
-			tc.open("system-err").append(error.trunc(8192).filter_nonprintable)
+		end
+		var output = self.raw_output
+		if output != null then
+			tc.open("system-err").append(output.trunc(8192).filter_nonprintable)
 		end
 		return tc
 	end
@@ -128,6 +211,8 @@ abstract class UnitTest
 	# The `classname` attribute of the XML format.
 	#
 	# NOTE: jenkins expects a '.' in the classname attr
+	#
+	# See to_xml
 	fun xml_classname: String is abstract
 
 	# The `name` attribute of the XML format.

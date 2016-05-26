@@ -24,6 +24,8 @@ class X
 	#     assert undefined_identifier
 	fun foo do end
 
+	# a 'failure' unit test (does not parse)
+	#     assert !@#$%^&*()
 	fun foo1(a, b: Int) do end
 
 	private fun foo2: Bool do return true
