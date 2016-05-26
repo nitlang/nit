@@ -14,24 +14,28 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import example_angular
 import base_tests
+import example_static_default
 
 class TestClient
 	super ClientThread
 
 	redef fun main do
-		system "curl -s {host}:{port}/counter"
-		system "curl -s {host}:{port}/counter -X POST"
-		system "curl -s {host}:{port}/counter"
-		system "curl -s {host}:{port}/not_found" # handled by angular controller
+		system "curl -s {host}:{port}/css/style.css"
+		system "curl -s {host}:{port}/js/app.js"
+		system "curl -s {host}:{port}/hello.html"
+		system "curl -s {host}:{port}/"
+
+		system "curl -s {host}:{port}/css/not_found.nit"
+		system "curl -s {host}:{port}/static/css/not_found.nit"
+		system "curl -s {host}:{port}/not_found.nit"
+
 		return null
 	end
 end
 
 var app = new App
-app.use("/counter", new CounterAPI)
-app.use("/*", new StaticHandler("../examples/angular/www/", "index.html"))
+app.use("/", new StaticHandler("../examples/static_files/public/", "default.html"))
 
 var host = test_host
 var port = test_port

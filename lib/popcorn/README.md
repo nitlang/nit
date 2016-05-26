@@ -175,6 +175,17 @@ directory from where you launch your app.
 If you run the app from another directory, it’s safer to use the absolute path of
 the directory that you want to serve.
 
+In some cases, you can want to redirect request to static files to a default file
+instead of returning a 404 error.
+This can be achieved by specifying a default file in the StaticHandler:
+
+~~~
+app.use("/static/", new StaticHandler("public/", "default.html"))
+~~~
+
+This way all non-matched queries to the StaticHandler will be answered with the
+`default.html` file.
+
 ## Advanced Routing
 
 **Routing** refers to the definition of application end points (URIs) and how
@@ -832,8 +843,13 @@ to your angular controller:
 import popcorn
 
 var app = new App
-app.use("/*", new StaticHandler("my-ng-app/"))
+app.use("/*", new StaticHandler("my-ng-app/", "index.html"))
 app.listen("localhost", 3000)
 ~~~
+
+Because the StaticHandler will not find the angular routes as static files,
+you must specify the path to the default angular controller.
+In this example, the StaticHandler will redirect any unknown requests to the `index.html`
+angular controller.
 
 See the examples for a more detailed use case working with a JSON API.

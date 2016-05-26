@@ -235,10 +235,16 @@ class StaticHandler
 	# Static files directory to serve.
 	var static_dir: String
 
+	# Default file to serve if nothing matches the request.
+	#
+	# `null` for no default file.
+	var default_file: nullable String
+
 	# Internal file server used to lookup and render files.
 	var file_server: FileServer is lazy do
 		var srv = new FileServer(static_dir)
 		srv.show_directory_listing = false
+		srv.default_file = default_file
 		return srv
 	end
 
