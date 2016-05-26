@@ -663,6 +663,19 @@ class Path
 		return res
 	end
 
+	# Is `self` the path to an existing directory ?
+	#
+	# ~~~nit
+	# assert ".".to_path.is_dir
+	# assert not "/etc/issue".to_path.is_dir
+	# assert not "/should/not/exist".to_path.is_dir
+	# ~~~
+	fun is_dir: Bool do
+		var st = stat
+		if st == null then return false
+		return st.is_dir
+	end
+
 	# Delete a directory and all of its content
 	#
 	# Does not go through symbolic links and may get stuck in a cycle if there
