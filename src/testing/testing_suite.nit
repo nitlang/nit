@@ -159,7 +159,7 @@ class TestSuite
 		var after_module = self.after_module
 		if not after_module == null then after_module.run
 		for case in test_cases do
-			print case.to_screen
+			toolcontext.show_unit(case)
 		end
 	end
 

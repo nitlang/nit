@@ -116,6 +116,14 @@ ulimit -t {{{ulimit_usertime}}} 2> /dev/null
 				line += "X".red.bold
 			end
 		end
+
+		if opt_no_color.value then
+			if done == 0 then
+				print "* {name} ({tests.length} tests)"
+			end
+			return
+		end
+
 		line += "] {done}/{tests.length}"
 		if more_message != null then
 			line += " " + more_message
@@ -123,6 +131,14 @@ ulimit -t {{{ulimit_usertime}}} 2> /dev/null
 		printn "{line}"
 	end
 
+	# Shoe the full description of the test-case.
+	#
+	# The output honors `--no-color`.
+	#
+	# `more message`, if any, is added after the error message.
+	fun show_unit(test: UnitTest, more_message: nullable String) do
+		print test.to_screen(more_message, not opt_no_color.value)
+	end
 end
 
 # A unit test is an elementary test discovered, run and reported by nitunit.
@@ -157,32 +173,42 @@ abstract class UnitTest
 	var error_location: nullable Location = null is writable
 
 	# A colorful `[OK]` or `[KO]`.
-	fun status_tag: String do
+	fun status_tag(color: nullable Bool): String do
+		color = color or else true
 		if not is_done then
 			return "[  ]"
 		else if error != null then
-			return "[KO]".red.bold
+			var res = "[KO]"
+			if color then res = res.red.bold
+			return res
 		else
-			return "[OK]".green.bold
+			var res = "[OK]"
+			if color then res = res.green.bold
+			return res
 		end
 	end
 
 	# The full (color) description of the test-case.
 	#
 	# `more message`, if any, is added after the error message.
-	fun to_screen(more_message: nullable String): String do
+	fun to_screen(more_message: nullable String, color: nullable Bool): String do
+		color = color or else true
 		var res
 		var error = self.error
 		if error != null then
 			if more_message != null then error += " " + more_message
 			var loc = error_location or else location
-			res = "{status_tag} {full_name}\n     {loc.to_s.yellow}: {error}\n{loc.colored_line("1;31")}"
+			if color then
+				res = "{status_tag(color)} {full_name}\n     {loc.to_s.yellow}: {error}\n{loc.colored_line("1;31")}"
+			else
+				res = "{status_tag(color)} {full_name}\n     {loc}: {error}"
+			end
 			var output = self.raw_output
 			if output != null then
 				res += "\n     Output\n\t{output.chomp.replace("\n", "\n\t")}\n"
 			end
 		else
-			res = "{status_tag} {full_name}"
+			res = "{status_tag(color)} {full_name}"
 			if more_message != null then res += more_message
 		end
 		return res
