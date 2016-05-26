@@ -31,9 +31,6 @@ redef class ToolContext
 	var opt_source = new OptionString("Format to link source code (%f for filename, " +
 		"%l for first line, %L for last line)", "--source")
 
-	# Directory where the CSS and JS is stored.
-	var opt_sharedir = new OptionString("Directory containing nitdoc assets", "--sharedir")
-
 	# Use a shareurl instead of copy shared files.
 	#
 	# This is usefull if you don't want to store the Nitdoc templates with your
@@ -77,7 +74,7 @@ redef class ToolContext
 		super
 
 		option_context.add_option(
-			opt_source, opt_sharedir, opt_shareurl, opt_custom_title,
+			opt_source, opt_share_dir, opt_shareurl, opt_custom_title,
 			opt_custom_footer, opt_custom_intro, opt_custom_brand,
 			opt_github_upstream, opt_github_base_sha1, opt_github_gitdir,
 			opt_piwik_tracker, opt_piwik_site_id,
@@ -120,15 +117,7 @@ class RenderHTMLPhase
 		var output_dir = ctx.output_dir
 		if not output_dir.file_exists then output_dir.mkdir
 		# locate share dir
-		var sharedir = ctx.opt_sharedir.value
-		if sharedir == null then
-			var dir = ctx.nit_dir
-			sharedir = dir/"share/nitdoc"
-			if not sharedir.file_exists then
-				print "Error: cannot locate nitdoc share files. Uses --sharedir or envvar NIT_DIR"
-				abort
-			end
-		end
+		var sharedir = ctx.share_dir / "nitdoc"
 		# copy shared files
 		if ctx.opt_shareurl.value == null then
 			sys.system("cp -r -- {sharedir.to_s.escape_to_sh}/* {output_dir.to_s.escape_to_sh}/")
