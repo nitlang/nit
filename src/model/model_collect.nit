@@ -112,8 +112,6 @@ redef class MModule
 		var mmodules = new HashSet[MModule]
 		mmodules.add self
 		mmodules.add_all collect_ancestors(view)
-		mmodules.add_all collect_parents(view)
-		mmodules.add_all collect_children(view)
 		mmodules.add_all collect_descendants(view)
 		return view.mmodules_poset(mmodules)
 	end
@@ -218,6 +216,15 @@ redef class MClass
 			end
 		end
 		return res
+	end
+
+	# Build a class hierarchy poset for `self` based on its ancestors and descendants.
+	fun hierarchy_poset(mainmodule: MModule, view: ModelView): POSet[MClass] do
+		var mclasses = new HashSet[MClass]
+		mclasses.add self
+		mclasses.add_all collect_ancestors(view)
+		mclasses.add_all collect_descendants(view)
+		return view.mclasses_poset(mainmodule, mclasses)
 	end
 
 	# Collect all mproperties introduced in 'self' with `visibility >= min_visibility`.
