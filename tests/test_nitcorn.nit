@@ -17,8 +17,8 @@ import pthreads
 
 redef class Sys
 	var iface: String is lazy do
-		srand
-		return "localhost:{10000+20000.rand}"
+		var testid = "NIT_TESTING_ID".environ.to_i
+		return "localhost:{10000+testid}"
 	end
 
 	var fs_path: String = getcwd / "../lib/nitcorn/examples/www/hello_world/dir" is lazy
