@@ -48,11 +48,18 @@ redef class App
 	redef fun answer(req, uri) do
 		uri = uri.simplify_path
 		var res = new HttpResponse(404)
+		for route, handler in pre_handlers do
+			handler.handle(route, uri, req, res)
+		end
 		for route, handler in handlers do
 			handler.handle(route, uri, req, res)
+			if res.sent then break
 		end
 		if not res.sent then
 			res.send(error_tpl(res.status_code, res.status_message), 404)
+		end
+		for route, handler in post_handlers do
+			handler.handle(route, uri, req, res)
 		end
 		res.session = req.session
 		return res

@@ -28,9 +28,9 @@ class TestClient
 end
 
 var app = new App
-app.use("/*", new RequestTimeHandler)
+app.use_before("/*", new RequestTimeHandler)
 app.use("/", new HelloHandler)
-app.use("/*", new LogHandler)
+app.use_after("/*", new LogHandler)
 
 var host = test_host
 var port = test_port

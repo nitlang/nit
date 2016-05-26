@@ -307,26 +307,69 @@ class Router
 	# List of handlers to match with requests.
 	private var handlers = new Map[AppRoute, Handler]
 
+	# List of handlers to match before every other.
+	private var pre_handlers = new Map[AppRoute, Handler]
+
+	# List of handlers to match after every other.
+	private var post_handlers = new Map[AppRoute, Handler]
+
 	# Register a `handler` for a route `path`.
 	#
 	# Route paths are matched in registration order.
 	fun use(path: String, handler: Handler) do
-		var route
-		if handler isa Router or handler isa StaticHandler then
-			route = new AppGlobRoute(path)
-		else if path.has_suffix("*") then
-			route = new AppGlobRoute(path)
-		else
-			route = new AppParamRoute(path)
-		end
+		var route = build_route(handler, path)
 		handlers[route] = handler
+	end
+
+	# Register a pre-handler for a route `path`.
+	#
+	# Prehandlers are matched before every other handlers in registrastion order.
+	fun use_before(path: String, handler: Handler) do
+		var route = build_route(handler, path)
+		pre_handlers[route] = handler
+	end
+
+	# Register a post-handler for a route `path`.
+	#
+	# Posthandlers are matched after every other handlers in registrastion order.
+	fun use_after(path: String, handler: Handler) do
+		var route = build_route(handler, path)
+		post_handlers[route] = handler
 	end
 
 	redef fun handle(route, uri, req, res) do
 		if not route.match(uri) then return
+		handle_pre(route, uri, req, res)
+		handle_in(route, uri, req, res)
+		handle_post(route, uri, req, res)
+	end
+
+	private fun handle_pre(route: AppRoute, uri: String, req: HttpRequest, res: HttpResponse) do
+		for hroute, handler in pre_handlers do
+			handler.handle(hroute, route.uri_root(uri), req, res)
+		end
+	end
+
+	private fun handle_in(route: AppRoute, uri: String, req: HttpRequest, res: HttpResponse) do
 		for hroute, handler in handlers do
 			handler.handle(hroute, route.uri_root(uri), req, res)
 			if res.sent then break
+		end
+	end
+
+	private fun handle_post(route: AppRoute, uri: String, req: HttpRequest, res: HttpResponse) do
+		for hroute, handler in post_handlers do
+			handler.handle(hroute, route.uri_root(uri), req, res)
+		end
+	end
+
+	private fun build_route(handler: Handler, path: String): AppRoute do
+		if handler isa Router or handler isa StaticHandler then
+			return new AppGlobRoute(path)
+		else if path.has_suffix("*") then
+			return new AppGlobRoute(path)
+		else
+			return new AppParamRoute(path)
 		end
 	end
 end
