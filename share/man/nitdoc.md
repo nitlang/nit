@@ -66,8 +66,8 @@ Also generate private API.
 
 ## CUSTOMIZATION
 
-### `--sharedir`
-Directory containing nitdoc assets.
+### `--share-dir`
+Directory containing tools assets.
 
 By default `$NIT_DIR/share/nitdoc/` is used.
 
