@@ -152,5 +152,8 @@ else
 	end
 	print "{head} {fail}/{total} tests failed."
 
+	print "`{test_dir}` is not removed for investigation."
 	exit 1
 end
+
+test_dir.rmdir
