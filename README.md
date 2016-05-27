@@ -65,6 +65,11 @@ To have your environment automatically configured at login, just source it with 
 
     $ . misc/nit_env.sh install
 
+Contributing:
+
+To contribute to Nit, please see [CONTRIBUTING](CONTRIBUTING.md).
+
+The best way to ask the team for advice, submit bugs or request features, is through the use of Github issues, using the appropriate tag (`forum`, `feature-request`, `bug`).
 
 Information, contacts and help:
 
