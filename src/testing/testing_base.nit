@@ -35,7 +35,7 @@ redef class ToolContext
 	# Working directory for testing.
 	fun test_dir: String do
 		var dir = opt_dir.value
-		if dir == null then return ".nitunit"
+		if dir == null then return "nitunit.out"
 		return dir
 	end
 

@@ -268,7 +268,7 @@ Output name (default is 'nitunit.xml').
 `nitunit` produces a XML file compatible with JUnit.
 
 ### `--dir`
-Working directory (default is '.nitunit').
+Working directory (default is 'nitunit.out').
 
 In order to execute the tests, nit files are generated then compiled and executed in the giver working directory.
 
