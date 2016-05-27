@@ -119,7 +119,7 @@ class NitUnitExecutor
 		print ""
 
 		for du in docunits do
-			print du.to_screen
+			toolcontext.show_unit(du)
 		end
 
 		for du in docunits do
