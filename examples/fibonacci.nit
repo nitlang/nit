@@ -21,12 +21,9 @@ redef class Int
 	# Calculate the self-th element of the fibonacci sequence.
 	fun fibonacci: Int
 	do
-		if self < 2 then
-			return 1
-		else
-			return (self-2).fibonacci + (self-1).fibonacci
-		end
-	end 
+		if self < 2 then return self
+		return (self-2).fibonacci + (self-1).fibonacci
+	end
 end
 
 # Print usage and exit.
