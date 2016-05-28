@@ -182,11 +182,24 @@ class APIEntityDefs
 	end
 end
 
+abstract class SVGHandler
+	super APIHandler
+
+	# Render a `dot` string as a svg image.
+	fun render_dot(dot: Text): String do
+		var proc = new ProcessDuplex("dot", "-Tsvg")
+		var svg = proc.write_and_read(dot)
+		proc.close
+		proc.wait
+		return svg
+	end
+end
+
 # Return a UML representation of MEntity.
 #
 # Example: `GET /entity/core::Array/uml`
 class APIEntityUML
-	super APIHandler
+	super SVGHandler
 
 	redef fun get(req, res) do
 		var mentity = mentity_from_uri(req, res)
@@ -202,16 +215,7 @@ class APIEntityUML
 			res.error 404
 			return
 		end
-		res.send render_svg(dot)
-	end
-
-	# Render a `dot` string as a svg image.
-	fun render_svg(dot: String): String do
-		var proc = new ProcessDuplex("dot", "-Tsvg")
-		var svg = proc.write_and_read(dot)
-		proc.close
-		proc.wait
-		return svg
+		res.send render_dot(dot)
 	end
 end
 

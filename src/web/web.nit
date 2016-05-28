@@ -18,3 +18,4 @@ module web
 import web_actions
 import model_api
 import api_catalog
+import api_graph
