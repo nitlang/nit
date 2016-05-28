@@ -18,7 +18,7 @@ module html_model
 import doc_base
 import html_components
 import ordered_tree
-import web::model_html
+import model_html
 
 redef class MEntity
 	# URL of this entity’s Nitdoc page.
