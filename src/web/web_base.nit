@@ -87,17 +87,6 @@ abstract class APIHandler
 	end
 end
 
-# A NitView is rendered by an action.
-interface NitView
-	# Renders this view and returns something that can be written to a HTTP response.
-	fun render: Writable is abstract
-end
-
-redef class HttpResponse
-	# Render a NitView as response.
-	fun send_view(view: NitView, status: nullable Int) do send(view.render, status)
-end
-
 redef class MEntity
 
 	# URL to `self` within the web interface.
