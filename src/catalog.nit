@@ -362,8 +362,9 @@ class Catalog
 		var doc_score = 0.0
 		for g in mpackage.mgroups do
 			mmodules += g.mmodules.length
-			entity_score += 1.0
-			if g.mdoc != null then doc_score += 1.0
+			var gs = 1.0
+			entity_score += gs
+			if g.mdoc != null then doc_score += gs
 			for m in g.mmodules do
 				var source = m.location.file
 				if source != null then
@@ -382,21 +383,23 @@ class Catalog
 						loc += file.line_starts.length - 1
 					end
 				end
-				entity_score += 1.0
-				if m.mdoc != null then doc_score += 1.0
+				var ms = gs
+				if m.is_test_suite then ms /= 100.0
+				entity_score += ms
+				if m.mdoc != null then doc_score += ms else ms /= 10.0
 				for cd in m.mclassdefs do
-					var s = 0.2
-					if not cd.is_intro then s /= 10.0
-					if not cd.mclass.visibility <= private_visibility then s /= 10.0
-					entity_score += s
-					if cd.mdoc != null then doc_score += s
+					var cs = ms * 0.2
+					if not cd.is_intro then cs /= 100.0
+					if not cd.mclass.visibility <= private_visibility then cs /= 100.0
+					entity_score += cs
+					if cd.mdoc != null then doc_score += cs
 					mclasses += 1
 					for pd in cd.mpropdefs do
-						s = 0.1
-						if not pd.is_intro then s /= 10.0
-						if not pd.mproperty.visibility <= private_visibility then s /= 10.0
-						entity_score += s
-						if pd.mdoc != null then doc_score += s
+						var ps = ms * 0.1
+						if not pd.is_intro then ps /= 100.0
+						if not pd.mproperty.visibility <= private_visibility then ps /= 100.0
+						entity_score += ps
+						if pd.mdoc != null then doc_score += ps
 						if not pd isa MMethodDef then continue
 						mmethods += 1
 					end

@@ -76,7 +76,7 @@
 <h3>Quality</h3>
 <ul class="box">
 <li>28 warnings (63/kloc)</li>
-<li>93% documented</li>
+<li>95% documented</li>
 </ul>
 <h3>Tags</h3>
 <a href="../index.html#tag_test">test</a>, <a href="../index.html#tag_game">game</a><h3>Requirements</h3>
