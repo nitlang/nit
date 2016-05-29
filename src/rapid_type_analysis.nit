@@ -314,7 +314,9 @@ class RapidTypeAnalysis
 				if not check_depth(rt) then continue
 				#print "{ot}/{t} -> {rt}"
 				live_types.add(rt)
-				todo_types.add(rt)
+				# unshift means a deep-first visit.
+				# So that the `check_depth` limit is reached sooner.
+				todo_types.unshift(rt)
 			end
 		end
 		#print "MType {live_types.length}: {live_types.join(", ")}"
