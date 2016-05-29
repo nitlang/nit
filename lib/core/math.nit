@@ -169,6 +169,16 @@ redef class Int
 		end
 		return res
 	end
+
+	# Is `self` a power of two ?
+	#
+	# ~~~nit
+	# assert not 3.is_pow2
+	# assert 2.is_pow2
+	# assert 1.is_pow2
+	# assert not 0.is_pow2
+	# ~~~
+	fun is_pow2: Bool do return self != 0 and (self & self - 1) == 0
 end
 
 redef class Byte
