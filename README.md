@@ -18,7 +18,7 @@ Requirements:
  * gcc		http://gcc.gnu.org/ (or a compatible C compiler)
  * pkg-config	http://www.freedesktop.org/wiki/Software/pkg-config/
  * ccache	http://ccache.samba.org/	to improve recompilation
- * libgc-dev	http://www.hpl.hp.com/personal/Hans_Boehm/gc/
+ * libgc-dev	http://hboehm.info/gc/
  * graphviz	http://www.graphviz.org/	to enable graphs with the nitdoc tool
  * libunwind	http://nongnu.org/libunwind
 
