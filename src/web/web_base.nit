@@ -17,14 +17,18 @@ module web_base
 
 import model::model_views
 import model::model_json
+import doc_down
 import popcorn
 
 # Specific nitcorn Action that uses a Model
-class ModelAction
+class ModelHandler
 	super Handler
 
 	# Model to use.
 	var model: Model
+
+	# MModule used to flatten model.
+	var mainmodule: MModule
 
 	# Find the MEntity ` with `full_name`.
 	fun find_mentity(model: ModelView, full_name: nullable String): nullable MEntity do
@@ -58,9 +62,147 @@ redef class HttpResponse
 	fun send_view(view: NitView, status: nullable Int) do send(view.render, status)
 end
 
-redef class HttpRequest
-	# Does the client asked for a json formatted response?
-	#
-	# Checks the URL get parameter `?json=true`.
-	fun is_json_asked: Bool do return bool_arg("json") or else false
+redef class MEntity
+
+	# URL to `self` within the web interface.
+	fun web_url: String is abstract
+
+	# URL to `self` within the JSON api.
+	fun api_url: String do return "/api/entity/" / full_name
+
+	redef fun json do
+		var obj = super
+		obj["web_url"] = web_url
+		obj["api_url"] = api_url
+		return obj
+	end
+
+	# Get the full json repesentation of `self` with MEntityRefs resolved.
+	fun api_json(handler: ModelHandler): JsonObject do return json
+end
+
+redef class MEntityRef
+	redef fun json do
+		var obj = super
+		obj["web_url"] = mentity.web_url
+		obj["api_url"] = mentity.api_url
+		obj["name"] = mentity.name
+		obj["mdoc"] = mentity.mdoc_or_fallback
+		obj["visibility"] = mentity.visibility
+		obj["location"] = mentity.location
+		var modifiers = new JsonArray
+		for modifier in mentity.collect_modifiers do
+			modifiers.add modifier
+		end
+		obj["modifiers"] = modifiers
+		return obj
+	end
+end
+
+redef class MDoc
+
+	# Add doc down processing
+	redef fun json do
+		var obj = super
+		obj["synopsis"] = synopsis
+		obj["documentation"] = documentation
+		obj["comment"] = comment
+		obj["html_synopsis"] = html_synopsis.write_to_string
+		obj["html_documentation"] = html_documentation.write_to_string
+		obj["html_comment"] = html_comment.write_to_string
+		return obj
+	end
+end
+
+redef class MPackage
+	redef var web_url = "/package/{full_name}" is lazy
+end
+
+redef class MGroup
+	redef var web_url = "/group/{full_name}" is lazy
+end
+
+redef class MModule
+	redef var web_url = "/module/{full_name}" is lazy
+
+	redef fun api_json(handler) do
+		var obj = super
+		obj["intro_mclassdefs"] = to_mentity_refs(collect_intro_mclassdefs(private_view))
+		obj["redef_mclassdefs"] = to_mentity_refs(collect_redef_mclassdefs(private_view))
+		obj["imports"] = to_mentity_refs(in_importation.direct_greaters)
+		return obj
+	end
+end
+
+redef class MClass
+	redef var web_url = "/class/{full_name}" is lazy
+
+	redef fun api_json(handler) do
+		var obj = super
+		obj["all_mproperties"] = to_mentity_refs(collect_accessible_mproperties(private_view))
+		obj["intro_mproperties"] = to_mentity_refs(collect_intro_mproperties(private_view))
+		obj["redef_mproperties"] = to_mentity_refs(collect_redef_mproperties(private_view))
+		var poset = hierarchy_poset(handler.mainmodule, private_view)
+		obj["parents"] = to_mentity_refs(poset[self].direct_greaters)
+		return obj
+	end
+end
+
+redef class MClassDef
+	redef var web_url = "/classdef/{full_name}" is lazy
+
+	redef fun json do
+		var obj = super
+		obj["intro"] = to_mentity_ref(mclass.intro)
+		obj["mpackage"] = to_mentity_ref(mmodule.mpackage)
+		return obj
+	end
+
+	redef fun api_json(handler) do
+		var obj = super
+		obj["intro_mpropdefs"] = to_mentity_refs(collect_intro_mpropdefs(private_view))
+		obj["redef_mpropdefs"] = to_mentity_refs(collect_redef_mpropdefs(private_view))
+		return obj
+	end
+end
+
+redef class MProperty
+	redef var web_url = "/property/{full_name}" is lazy
+
+	redef fun json do
+		var obj = super
+		obj["intro_mclass"] = to_mentity_ref(intro_mclassdef.mclass)
+		obj["mpackage"] = to_mentity_ref(intro_mclassdef.mmodule.mpackage)
+		return obj
+	end
+end
+
+redef class MPropDef
+	redef var web_url = "/propdef/{full_name}" is lazy
+
+	redef fun json do
+		var obj = super
+		obj["intro"] = to_mentity_ref(mproperty.intro)
+		obj["intro_mclassdef"] = to_mentity_ref(mproperty.intro.mclassdef)
+		obj["mmodule"] = to_mentity_ref(mclassdef.mmodule)
+		obj["mgroup"] = to_mentity_ref(mclassdef.mmodule.mgroup)
+		obj["mpackage"] = to_mentity_ref(mclassdef.mmodule.mpackage)
+		return obj
+	end
+end
+
+redef class MClassType
+	redef var web_url = mclass.web_url is lazy
+end
+
+redef class MNullableType
+	redef var web_url = mtype.web_url is lazy
+end
+
+redef class MParameterType
+	redef var web_url = mclass.web_url is lazy
+end
+
+redef class MVirtualType
+	redef var web_url = mproperty.web_url is lazy
 end

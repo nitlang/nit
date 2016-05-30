@@ -20,7 +20,7 @@ import uml
 
 # Display the tree of all loaded mentities.
 class TreeAction
-	super ModelAction
+	super ModelHandler
 
 	redef fun get(req, res) do
 		var model = init_model_view(req)
@@ -29,51 +29,9 @@ class TreeAction
 	end
 end
 
-# Display the list of mentities matching `namespace`.
-class SearchAction
-	super ModelAction
-
-	# TODO handle more than full namespaces.
-	redef fun get(req, res) do
-		var namespace = req.param("namespace")
-		var model = init_model_view(req)
-		var mentity = find_mentity(model, namespace)
-		if mentity == null then
-			res.error(404)
-			return
-		end
-		if req.is_json_asked then
-			res.json(mentity.to_json)
-			return
-		end
-		var view = new HtmlResultPage(namespace or else "null", [mentity])
-		res.send_view(view)
-	end
-end
-
-# Display a MEntity source code.
-class CodeAction
-	super ModelAction
-
-	# Modelbuilder used to access sources.
-	var modelbuilder: ModelBuilder
-
-	redef fun get(req, res) do
-		var namespace = req.param("namespace")
-		var model = init_model_view(req)
-		var mentity = find_mentity(model, namespace)
-		if mentity == null then
-			res.error(404)
-			return
-		end
-		var view = new HtmlSourcePage(modelbuilder, mentity)
-		res.send_view(view)
-	end
-end
-
 # Display the doc of a MEntity.
 class DocAction
-	super ModelAction
+	super ModelHandler
 
 	# Modelbuilder used to access sources.
 	var modelbuilder: ModelBuilder
@@ -86,76 +44,7 @@ class DocAction
 			res.error(404)
 			return
 		end
-		if req.is_json_asked then
-			res.json(mentity.to_json)
-			return
-		end
-
 		var view = new HtmlDocPage(modelbuilder, mentity)
-		res.send_view(view)
-	end
-end
-
-# Return an UML diagram for `namespace`.
-class UMLDiagramAction
-	super ModelAction
-
-	# Mainmodule used for hierarchy flattening.
-	var mainmodule: MModule
-
-	redef fun get(req, res) do
-		var namespace = req.param("namespace")
-		var model = init_model_view(req)
-		var mentity = find_mentity(model, namespace)
-		if mentity == null then
-			res.error(404)
-			return
-		end
-
-		var dot
-		if mentity isa MClassDef then mentity = mentity.mclass
-		if mentity isa MClass then
-			var uml = new UMLModel(model, mainmodule)
-			dot = uml.generate_class_uml.write_to_string
-		else if mentity isa MModule then
-			var uml = new UMLModel(model, mentity)
-			dot = uml.generate_package_uml.write_to_string
-		else
-			res.error(404)
-			return
-		end
-		var view = new HtmlDotPage(dot, mentity.as(not null).html_name)
-		res.send_view(view)
-	end
-end
-
-# Return a random list of MEntities.
-class RandomAction
-	super ModelAction
-
-	redef fun get(req, res) do
-		var n = req.int_arg("n") or else 10
-		var k = req.string_arg("k") or else "modules"
-		var model = init_model_view(req)
-		var mentities: Array[MEntity]
-		if k == "modules" then
-			mentities = model.mmodules.to_a
-		else if k == "classdefs" then
-			mentities = model.mclassdefs.to_a
-		else
-			mentities = model.mpropdefs.to_a
-		end
-		mentities.shuffle
-		mentities = mentities.sub(0, n)
-		if req.is_json_asked then
-			var json = new JsonArray
-			for mentity in mentities do
-				json.add mentity.to_json
-			end
-			res.json(json)
-			return
-		end
-		var view = new HtmlResultPage("random", mentities)
 		res.send_view(view)
 	end
 end

@@ -35,34 +35,6 @@ class HtmlHomePage
 	end
 end
 
-# Display a search results list.
-class HtmlResultPage
-	super NitView
-
-	# Initial query.
-	var query: String
-
-	# Result set
-	var results: Array[MEntity]
-
-	redef fun render do
-		var tpl = new Template
-		tpl.add new Header(1, "Results for {query}")
-		if results.is_empty then
-			tpl.add "<p>No result for {query}.<p>"
-			return tpl
-		end
-		var list = new UnorderedList
-		for mentity in results do
-			var link = mentity.html_link
-			link.text = mentity.html_full_name
-			list.add_li new ListItem(link)
-		end
-		tpl.add list
-		return tpl
-	end
-end
-
 # Display the source for each mentities
 class HtmlSourcePage
 	super NitView
@@ -117,31 +89,5 @@ class HtmlDocPage
 		tpl.add "<br>"
 		tpl.add render_source
 		return tpl
-	end
-end
-
-# Display the source for each mentities
-class HtmlDotPage
-	super NitView
-
-	# Dot to process.
-	var dot: Text
-
-	# Page title.
-	var title: String
-
-	redef fun render do
-		var tpl = new Template
-		tpl.add new Header(1, title)
-		tpl.add render_dot
-		return tpl
-	end
-
-	private fun render_dot: String do
-		var proc = new ProcessDuplex("dot", "-Tsvg", "-Tcmapx")
-		var svg = proc.write_and_read(dot)
-		proc.close
-		proc.wait
-		return svg
 	end
 end
