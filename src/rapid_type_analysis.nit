@@ -255,6 +255,8 @@ class RapidTypeAnalysis
 				add_cast(paramtype)
 			end
 
+			if mmethoddef.is_abstract then continue
+
 			var npropdef = modelbuilder.mpropdef2node(mmethoddef)
 
 			if npropdef isa AClassdef then
