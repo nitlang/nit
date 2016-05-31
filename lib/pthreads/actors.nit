@@ -30,11 +30,8 @@ abstract class Actor
 	# Mailbox to receive messages
 	var mailbox = new Mailbox[Message]
 
-	# Mutex for concurrent access
-	var mutex = new Mutex
-
 	# Condition for waiting
-	var cond = new NativePthreadCond
+	var cond = new PthreadCond
 
 	# The instance used to make the call via the messages
 	# i.e. the real working class

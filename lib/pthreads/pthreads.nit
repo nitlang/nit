@@ -245,6 +245,27 @@ private extern class NativePthreadCond in "C" `{ pthread_cond_t * `}
 	fun wait(mutex: NativePthreadMutex) `{ pthread_cond_wait(self, mutex); `}
 end
 
+
+# LOLOLO
+class PthreadCond
+	super Finalizable
+
+	private var native = new NativePthreadCond
+
+	#
+	fun destroy do native.destroy
+
+	#
+	fun signal do native.signal
+
+	#
+	fun broadcast do native.broadcast
+
+	#
+	fun wait(mutex: Mutex) do native.wait(mutex.native.as(not null))
+
+end
+
 #
 ## Nity part
 #
