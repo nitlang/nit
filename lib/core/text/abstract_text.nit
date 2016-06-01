@@ -2102,7 +2102,12 @@ end
 # see `alpha_comparator`
 private class AlphaComparator
 	super Comparator
-	redef fun compare(a, b) do return a.to_s <=> b.to_s
+	redef fun compare(a, b) do
+		if a == b then return 0
+		if a == null then return -1
+		if b == null then return 1
+		return a.to_s <=> b.to_s
+	end
 end
 
 # Stateless comparator that naively use `to_s` to compare things.

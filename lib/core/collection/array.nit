@@ -321,7 +321,7 @@ class Array[E]
 	redef fun [](index)
 	do
 		assert index: index >= 0 and index < _length
-		return _items[index]
+		return _items.as(not null)[index]
 	end
 
 	redef fun []=(index, item)
@@ -333,7 +333,7 @@ class Array[E]
 		if _length <= index then
 			_length = index + 1
 		end
-		_items[index] = item
+		_items.as(not null)[index] = item
 	end
 
 	redef fun add(item)
@@ -343,7 +343,7 @@ class Array[E]
 			enlarge(l + 1)
 		end
 		_length = l + 1
-		_items[l] = item
+		_items.as(not null)[l] = item
 	end
 
 	# Slight optimization for arrays
@@ -358,13 +358,13 @@ class Array[E]
 		if items isa Array[E] then
 			var k = 0
 			while l < nl do
-				_items[l] = items._items[k]
+				_items.as(not null)[l] = items._items.as(not null)[k]
 				l += 1
 				k += 1
 			end
 		else
 			for item in items do
-				_items[l] = item
+				_items.as(not null)[l] = item
 				l += 1
 			end
 		end
@@ -404,7 +404,7 @@ class Array[E]
 		if cap <= c then return
 		while c <= cap do c = c * 2 + 2
 		var a = new NativeArray[E](c)
-		if _capacity > 0 then _items.copy_to(a, _length)
+		if _capacity > 0 then _items.as(not null).copy_to(a, _length)
 		_items = a
 		_capacity = c
 	end
@@ -474,9 +474,10 @@ class Array[E]
 		# Efficient implementation
 		var l = length
 		if l != o.length then return false
+		if l == 0 then return true
 		var i = 0
-		var it = _items
-		var oit = o._items
+		var it = _items.as(not null)
+		var oit = o._items.as(not null)
 		while i < l do
 			if it[i] != oit[i] then return false
 			i += 1
@@ -921,10 +922,11 @@ class ArrayCmp[E: nullable Comparable]
 
 	redef fun <=>(o)
 	do
-		var it = _items
-		var oit = o._items
 		var i = 0
 		var l = length
+		if l == 0 then return 0
+		var it = _items.as(not null)
+		var oit = o._items.as(not null)
 		var ol = o.length
 		var len
 		if l < ol then len = l else len = ol
