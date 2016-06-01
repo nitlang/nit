@@ -97,6 +97,7 @@ class HttpStatusCodes
 	# All know code and their message
 	var codes = new HashMap[Int, String]
 
+	# Init the status `codes` list.
 	protected init is old_style_init do insert_status_codes
 
 	# Get the message associated to the status `code`, return `null` in unknown
