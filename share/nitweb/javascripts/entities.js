@@ -16,7 +16,16 @@
 
 (function() {
 	angular
-		.module('entities', ['model', 'ui'])
+		.module('entities', ['model'])
+
+		.controller('EntityCtrl', ['Model', '$routeParams', '$scope', function(Model, $routeParams, $scope) {
+			Model.loadEntity($routeParams.id,
+				function(data) {
+					$scope.mentity = data;
+				}, function(err) {
+					$scope.error = err;
+				});
+		}])
 
 		.directive('entityLink', function() {
 			return {

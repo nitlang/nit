@@ -15,12 +15,17 @@
  */
 
 (function() {
-	angular.module('nitweb', ['ngRoute', 'ngSanitize'])
+	angular.module('nitweb', ['ngRoute', 'ngSanitize', 'entities'])
 
 	.config(function($routeProvider, $locationProvider) {
 		$routeProvider
 			.when('/', {
 				templateUrl: 'views/index.html'
+			})
+			.when('/package/:id', {
+				templateUrl: 'views/package.html',
+				controller: 'EntityCtrl',
+				controllerAs: 'entityCtrl'
 			})
 			.otherwise({
 				redirectTo: '/'

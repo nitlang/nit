@@ -18,6 +18,11 @@ a {
 	color: #333;
 }
 
+.page-header {
+    margin-top: 0;
+    border: none;
+}
+
 /* cards */
 
 .card.active {
