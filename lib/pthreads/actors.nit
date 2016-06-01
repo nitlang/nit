@@ -30,9 +30,6 @@ abstract class Actor
 	# Mailbox to receive messages
 	var mailbox = new Mailbox[Message]
 
-	# Condition for waiting
-	var cond = new PthreadCond
-
 	# The instance used to make the call via the messages
 	# i.e. the real working class
 	var instance: V
