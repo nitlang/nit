@@ -27,6 +27,11 @@
 				controller: 'EntityCtrl',
 				controllerAs: 'entityCtrl'
 			})
+			.when('/group/:id', {
+				templateUrl: 'views/group.html',
+				controller: 'EntityCtrl',
+				controllerAs: 'entityCtrl'
+			})
 			.otherwise({
 				redirectTo: '/'
 			});
