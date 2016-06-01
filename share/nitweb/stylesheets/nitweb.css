@@ -48,9 +48,18 @@ a {
     width: 10000px;
 }
 
-.card-body {
+.card-body, .card-right, .card-left {
     display: table-cell;
     vertical-align: top;
+}
+
+.card-left, .card>.pull-left {
+    padding: 15px;
+	padding-right: 0px;
+}
+.card-right, .card>.pull-right {
+    padding: 15px;
+	padding-left: 0px;
 }
 
 /* doc */

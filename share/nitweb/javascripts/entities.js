@@ -77,4 +77,15 @@
 				templateUrl: '/directives/entity/location.html'
 			};
 		})
+
+		.directive('entityCard', function() {
+			return {
+				restrict: 'E',
+				scope: {
+					mentity: '='
+				},
+				replace: true,
+				templateUrl: '/directives/entity/card.html'
+			};
+		})
 })();
