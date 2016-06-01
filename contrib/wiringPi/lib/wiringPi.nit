@@ -87,9 +87,17 @@ end
 # Note that only wiringPi pin 1 (BCM_GPIO 18) supports PWM output
 # and only wiringPi pin 7 (BCM_GPIO 4) supports CLOCK output modes.
 extern class RPiPinMode `{ int `}
+
+	# INPUT mode.
 	new input_mode `{ return INPUT; `}
+
+	# OUTPUT mode.
 	new output_mode `{ return OUTPUT; `}
+
+	# PWM_OUTPUT (Pulse-Width Modulation) mode.
 	new pwm_mode `{ return PWM_OUTPUT; `}
+
+	# CLOCK mode.
 	new clock_mode `{ return GPIO_CLOCK; `}
 end
 
@@ -101,8 +109,14 @@ end
 # The internal pull up/down resistors have a value of approximately
 # 50Kohms on the Raspberry Pi.
 extern class PUDControl `{ int `}
+
+	# No PUD (`PUD_OFF`).
 	new off `{ return PUD_OFF; `}
+
+	# Pull to ground.
 	new down `{ return PUD_DOWN; `}
+
+	# Pull up to 3.3v.
 	new up `{ return PUD_UP; `}
 end
 
