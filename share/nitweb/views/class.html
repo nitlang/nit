@@ -15,6 +15,22 @@
 	<div class='tab-content'>
 		<div class='tab-pane fade in active' id='doc'>
 			<entity-doc mentity='mentity.intro'/>
+
+			<entity-list list-title='Parents'
+				list-entities='mentity.parents'
+				list-object-filter='{}' />
+
+			<entity-list list-title='Constructors'
+				list-entities='mentity.all_mproperties'
+				list-object-filter='{is_init: true}' />
+
+			<entity-list list-title='Introduced properties'
+				list-entities='mentity.intro_mproperties'
+				list-object-filter='{is_init: "!true"}' />
+
+			<entity-list list-title='Redefined properties'
+				list-entities='mentity.redef_mproperties'
+				list-object-filter='{is_init: "!true"}' />
 		</div>
 	</div>
 </div>
