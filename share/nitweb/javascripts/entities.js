@@ -27,4 +27,14 @@
 				templateUrl: '/directives/entity/link.html'
 			};
 		})
+
+		.directive('entityDoc', function() {
+			return {
+				restrict: 'E',
+				scope: {
+					mentity: '='
+				},
+				templateUrl: '/directives/entity/doc.html'
+			};
+		})
 })();
