@@ -34,7 +34,6 @@ class HTCPCPAction
 	redef fun answer(http_request, turi) do
 		var message: String
 		var method = http_request.method
-		var headers = http_request.header
 		var response: HttpResponse
 
 		if is_teapot == true then
