@@ -179,7 +179,6 @@ for beer in beers do
 	if days.is_empty then continue
 
 	# Print a line looking like: "  ############ ######    -----########- Beer"
-	var last = null
 	#var iter = days.iterator
 	for week in weeks_sample do
 		printn if days.has_all(week) then
