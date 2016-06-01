@@ -1,0 +1,11 @@
+/* Body */
+
+body {
+	background: #f2f2f2;
+	margin-top: 70px;
+	margin-bottom: 70px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	color: #666;
+}

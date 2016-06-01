@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang='en' ng-app='nitweb'>
+	<head>
+		<base href='/'>
+		<meta charset='utf-8'>
+		<meta http-equiv='X-UA-Compatible' content='IE=edge'>
+		<meta name='viewport' content='width=device-width, initial-scale=1'>
+		<title>ng-doc</title>
+
+		<link href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css'
+			integrity='sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7'
+			crossorigin='anonymous' rel='stylesheet'>
+
+		<link href='/stylesheets/nitweb_bootstrap.css' rel='stylesheet'>
+		<link href='/stylesheets/nitweb.css' rel='stylesheet'>
+	</head>
+	<body>
+		<nav class='navbar navbar-default navbar-fixed-top'>
+			<div class='container-fluid'>
+				<div class='col-xs-3 navbar-header'>
+					<a class='navbar-brand' ng-href='/'>Nitdoc</a>
+				</div>
+			</div>
+		</nav>
+		<div ng-view></div>
+
+		<script src='https://code.jquery.com/jquery-1.12.4.min.js'
+			integrity='sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ='
+			crossorigin='anonymous''></script>
+		<script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js'
+			integrity='sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS'
+			crossorigin='anonymous'></script>
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.5/angular.min.js'>
+		</script>
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.5/angular-route.js'>
+		</script>
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.5/angular-sanitize.js'>
+		</script>
+
+		<script src='/javascripts/nitweb.js'></script>
+	</body>
+</html>
