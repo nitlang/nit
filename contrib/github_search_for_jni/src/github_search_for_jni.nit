@@ -81,7 +81,7 @@ loop
 
 		# The project is of interest if it has lots of Java and at least some C
 		var may_be_of_interest = langs.has_lots_of_java and langs.has_some_c
-		if may_be_of_interest then print "{item["name"].to_s}: {item["forks"].to_s}; {langs.keys.join(", ")}; {item["html_url"].to_s}"
+		if may_be_of_interest then print "{item["name"].as(not null)}: {item["forks"].as(not null)}; {langs.keys.join(", ")}; {item["html_url"].as(not null)}"
 	end
 
 	# If we got less pages than asked for, we are done!
