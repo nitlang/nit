@@ -11,6 +11,11 @@
 			</a>
 		</li>
 		<li role='presentation'>
+			<a data-toggle='tab' data-target='#all_props'>
+				<span class='glyphicon glyphicon-tags'/> All properties
+			</a>
+		</li>
+		<li role='presentation'>
 			<a data-toggle='tab' role='tab' data-target='#linearization' aria-controls='linearization' ng-click='entityCtrl.loadEntityLinearization()'>
 				<span class='glyphicon glyphicon-arrow-down'/> Linearization
 			</a>
@@ -36,6 +41,10 @@
 			<entity-list list-title='Redefined properties'
 				list-entities='mentity.redef_mproperties'
 				list-object-filter='{is_init: "!true"}' />
+		</div>
+		<div role='tabpanel' class='tab-pane fade' id='all_props'>
+			<entity-list list-title='All properties' list-entities='mentity.all_mproperties'
+				list-object-filter='{}' />
 		</div>
 		<div role='tabpanel' class='tab-pane fade' id='linearization'>
 			<entity-linearization
