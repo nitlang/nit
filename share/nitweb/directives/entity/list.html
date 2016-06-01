@@ -1,11 +1,19 @@
-<div ng-if='listEntities.length > 0'>
+<div class='entity-list'
+	ng-if='(listEntities | filter:listObjectFilter).length > 0'>
 	<h3 id={{listId}}>
 		<span>{{listTitle}}</span>
+		<button class='btn btn-link btn-xs pull-right btn-filter' ng-click='toggleFilters()'>
+			<span class='glyphicon glyphicon-filter text-muted' />
+		</button>
 	</h3>
+		<div ng-if='showFilters'>
+			<ui-filter-form
+				search-filter='listObjectFilter'
+				visibility-filter='visibilityFilter'>
+		</div>
 		<div class='card-list'>
-			<entity-card
-				mentity='mentity'
-				ng-repeat='mentity in listEntities' />
+			<entity-card mentity='mentity'
+				ng-repeat='mentity in listEntities | filter:listObjectFilter | visibility:visibilityFilter' />
 		</div>
 	</div>
 </div>
