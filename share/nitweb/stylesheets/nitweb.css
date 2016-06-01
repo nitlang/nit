@@ -1,0 +1,124 @@
+/* Body */
+
+body {
+	background: #f2f2f2;
+	margin-top: 70px;
+	margin-bottom: 70px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	color: #666;
+}
+
+a {
+	cursor: pointer;
+}
+
+.nitdoc h1, .nitdoc h2, .nitdoc h3, .nitdoc h4, .nitdoc h5, .nitdoc h6 {
+	color: #333;
+}
+
+.page-header {
+    margin-top: 0;
+    border: none;
+}
+
+/* cards */
+
+.card.active {
+	border: 1px solid #1E9431;
+}
+
+.card, .card-body { overflow: hidden; }
+
+.card-heading {
+    margin-top: 0;
+    margin-bottom: 5px;
+}
+
+.card {
+	background: #fff;
+	border: 1px solid #ccc;
+	margin-top: 10px;
+	box-shadow: 0 -1px 0 #e5e5e5,0 0 2px rgba(0,0,0,.12),0 2px 4px rgba(0,0,0,.24);
+}
+
+.card-body {
+    padding: 15px;
+    width: 10000px;
+}
+
+.card-body {
+    display: table-cell;
+    vertical-align: top;
+}
+
+/* doc */
+
+.nitdoc .synopsys {
+	font-size: 2em;
+}
+
+.signature {
+	color: #666;
+	font-family: monospace;
+}
+
+.signature .name {
+	font-weight: bold;
+}
+
+.page-header .signature .name, .signature .signature .name {
+	font-weight: normal;
+}
+
+.signature .signature a {
+	color: #666;
+	font-family: monospace;
+}
+
+/* tabs */
+
+.nav-tabs li { cursor: pointer; }
+
+.nav>li.warning>a {
+    color: #fff;
+    background-color: #f0ad4e;
+}
+
+.nav>li.warning>a:focus, .nav>li.warning>a:hover {
+    background-color: #ff9c0f;
+}
+
+/*
+ * Code Highlighting
+ */
+
+.nitcode a { color: inherit; text-decoration: inherit; } /* hide links */
+.nitcode a:hover { text-decoration: underline; } /* underline links */
+.nitcode span[title]:hover { text-decoration: underline; } /* underline titles */
+/* lexical raw tokens. independent of usage or semantic: */
+.nitcode .nc_c { color: gray; font-style: italic; } /* comment */
+.nitcode .nc_d { color: #3D8127; font-style: italic; } /* documentation comments */
+.nitcode .nc_k { font-weight: bold; } /* keyword */
+.nitcode .nc_o {} /* operator */
+.nitcode .nc_i {} /* standard identifier */
+.nitcode .nc_t { color: #445588; font-weight: bold; } /* type/class identifier */
+.nitcode .nc_a { color: #445588; font-style: italic; } /* old style attribute identifier */
+.nitcode .nc_l { color: #009999; } /* char and number literal */
+.nitcode .nc_s { color: #8F1546; } /* string literal */
+/* syntactic token usage. added because of their position in the AST */
+.nitcode .nc_ast { color: blue; } /* assert label */
+.nitcode .nc_la { color: blue; } /* break/continue label */
+.nitcode .nc_m { color: #445588; } /* module name */
+/* syntactic groups */
+.nitcode .nc_def { font-weight: bold; color: blue; } /* name used in a definition */
+.nitcode .nc_def.nc_a { color: blue; } /* name used in a attribute definition */
+.nitcode .nc_def.nc_t { color: blue; } /* name used in a class or vt definition */
+.nitcode .nc_ss { color: #9E6BEB; } /* superstrings */
+.nitcode .nc_cdef {} /* A whole class definition */
+.nitcode .nc_pdef {} /* A whole property definition */
+/* semantic token usage */
+.nitcode .nc_v { font-style: italic; } /* local variable or parameter */
+.nitcode .nc_vt { font-style: italic; } /* virtual type or formal type */
+.nitcode .nc_error { border: 1px red solid;} /* not used */

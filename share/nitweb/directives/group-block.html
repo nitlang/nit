@@ -1,0 +1,21 @@
+<div class='media'>
+	<div class='media-left text-center' ng-if='mentity.visibility' ng-class='{
+			"text-success": mentity.visibility == "public",
+			"text-warning": mentity.visibility == "protected",
+			"text-danger": mentity.visibility == "private",
+	}'>
+		<span class="glyphicon glyphicon-tag"></span>
+	</div>
+	<div class='media-body'>
+		<h5 class='media-heading'>
+			<entity-signature mentity='mentity'/>
+		</h5>
+		<span class='synopsis'>{{mentity.mdoc.synopsis}}</span>
+		<div ng-if='recursive && mentity.mgroups'>
+			<group-block mentity-id='mgroup' ng-repeat='mgroup in mentity.mgroups' />
+		</div>
+		<div ng-if='recursive && mentity.mmodules'>
+			<module-block mentity-id='mmodule' ng-repeat='mmodule in mentity.mmodules' />
+		</div>
+	</div>
+</div>
