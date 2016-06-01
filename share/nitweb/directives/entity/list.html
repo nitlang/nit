@@ -1,0 +1,11 @@
+<div ng-if='listEntities.length > 0'>
+	<h3 id={{listId}}>
+		<span>{{listTitle}}</span>
+	</h3>
+		<div class='card-list'>
+			<entity-card
+				mentity='mentity'
+				ng-repeat='mentity in listEntities' />
+		</div>
+	</div>
+</div>

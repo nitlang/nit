@@ -88,4 +88,15 @@
 				templateUrl: '/directives/entity/card.html'
 			};
 		})
+
+		.directive('entityList', function() {
+			return {
+				restrict: 'E',
+				scope: {
+					listEntities: '=',
+					listTitle: '@',
+				},
+				templateUrl: '/directives/entity/list.html',
+			};
+		})
 })();

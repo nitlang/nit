@@ -62,6 +62,19 @@ a {
 	padding-left: 0px;
 }
 
+.card-list {
+	margin-top: 10px;
+}
+
+.card-list > .card:first-child {
+	border-top: 1px solid #ccc;
+}
+
+.card-list > .card {
+	margin-top: 0;
+	border-top: none;
+}
+
 /* doc */
 
 .nitdoc .synopsys {
