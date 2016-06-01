@@ -21,10 +21,15 @@ module htcpcp_server
 
 import nitcorn
 
+# Nitcorn Action used to answer requests.
 class HTCPCPAction
 	super Action
+
+	# Brewing status.
 	var brewing = false
-  var is_teapot = false
+
+	# Teapot status.
+	var is_teapot = false
 
 	redef fun answer(http_request, turi) do
 		var message: String
@@ -77,10 +82,13 @@ class HTCPCPAction
 	end
 end
 
-
+# Nitcorn server.
 class HTCPCServer
+
+	# Port to listen to.
 	var port: Int
 
+	# Start listening.
 	fun run do
 		var vh = new VirtualHost("localhost:{port}")
 		vh.routes.add new Route("/", new HTCPCPAction)
