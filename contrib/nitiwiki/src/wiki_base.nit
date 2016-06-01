@@ -94,7 +94,7 @@ class Nitiwiki
 				var entry = entries[path]
 				if not entry.is_dirty then continue
 				var name = entry.name
-				if entry.has_source then name = entry.src_path.to_s
+				if entry.has_source then name = entry.src_path.as(not null)
 				if entry.is_new then
 					print " + {name}"
 				else
@@ -141,7 +141,7 @@ class Nitiwiki
 	fun need_render(src, target: String): Bool do
 		if force_render then return true
 		if not target.file_exists then return true
-		return src.file_stat.mtime >= target.file_stat.mtime
+		return src.file_stat.as(not null).mtime >= target.file_stat.as(not null).mtime
 	end
 
 	# Create a new `WikiSection`.
@@ -283,7 +283,7 @@ abstract class WikiEntry
 	# Returns `-1` if not `has_source`.
 	fun create_time: Int do
 		if not has_source then return -1
-		return src_full_path.file_stat.ctime
+		return src_full_path.as(not null).file_stat.as(not null).ctime
 	end
 
 	# Entry last modification time.
@@ -291,7 +291,7 @@ abstract class WikiEntry
 	# Returns `-1` if not `has_source`.
 	fun last_edit_time: Int do
 		if not has_source then return -1
-		return src_full_path.file_stat.mtime
+		return src_full_path.as(not null).file_stat.as(not null).mtime
 	end
 
 	# Entry list rendering time.
@@ -299,7 +299,7 @@ abstract class WikiEntry
 	# Returns `-1` if `is_new`.
 	fun last_render_time: Int do
 		if is_new then return -1
-		return out_full_path.file_stat.mtime
+		return out_full_path.file_stat.as(not null).mtime
 	end
 
 	# Entries hierarchy
@@ -400,7 +400,7 @@ abstract class WikiEntry
 	# then returns the main wiki template file.
 	fun template_file: String do
 		if is_root then return wiki.config.template_file
-		return parent.template_file
+		return parent.as(not null).template_file
 	end
 
 	# Header template file for `self`.
@@ -408,7 +408,7 @@ abstract class WikiEntry
 	# Behave like `template_file`.
 	fun header_file: String do
 		if is_root then return wiki.config.header_file
-		return parent.header_file
+		return parent.as(not null).header_file
 	end
 
 	# Footer template file for `self`.
@@ -416,7 +416,7 @@ abstract class WikiEntry
 	# Behave like `template_file`.
 	fun footer_file: String do
 		if is_root then return wiki.config.footer_file
-		return parent.footer_file
+		return parent.as(not null).footer_file
 	end
 
 	# Menu template file for `self`.
@@ -424,7 +424,7 @@ abstract class WikiEntry
 	# Behave like `template_file`.
 	fun menu_file: String do
 		if is_root then return wiki.config.menu_file
-		return parent.menu_file
+		return parent.as(not null).menu_file
 	end
 
 	# Display the entry `name`.
@@ -442,7 +442,7 @@ class WikiSection
 
 	redef fun title do
 		if has_config then
-			var title = config.title
+			var title = config.as(not null).title
 			if title != null then return title
 		end
 		return super
@@ -452,7 +452,7 @@ class WikiSection
 	#
 	# Hidden section are rendered but not linked in menus.
 	fun is_hidden: Bool do
-		if has_config then return config.is_hidden
+		if has_config then return config.as(not null).is_hidden
 		return false
 	end
 
@@ -461,7 +461,7 @@ class WikiSection
 		if parent == null then
 			return wiki.config.source_dir
 		else
-			return wiki.expand_path(parent.src_path, name)
+			return wiki.expand_path(parent.as(not null).src_path, name)
 		end
 	end
 
@@ -486,41 +486,41 @@ class WikiSection
 	# Also check custom config.
 	redef fun template_file do
 		if has_config then
-			var tpl = config.template_file
+			var tpl = config.as(not null).template_file
 			if tpl != null then return tpl
 		end
 		if is_root then return wiki.config.template_file
-		return parent.template_file
+		return parent.as(not null).template_file
 	end
 
 	# Also check custom config.
 	redef fun header_file do
 		if has_config then
-			var tpl = config.header_file
+			var tpl = config.as(not null).header_file
 			if tpl != null then return tpl
 		end
 		if is_root then return wiki.config.header_file
-		return parent.header_file
+		return parent.as(not null).header_file
 	end
 
 	# Also check custom config.
 	redef fun footer_file do
 		if has_config then
-			var tpl = config.footer_file
+			var tpl = config.as(not null).footer_file
 			if tpl != null then return tpl
 		end
 		if is_root then return wiki.config.footer_file
-		return parent.footer_file
+		return parent.as(not null).footer_file
 	end
 
 	# Also check custom config.
 	redef fun menu_file do
 		if has_config then
-			var tpl = config.menu_file
+			var tpl = config.as(not null).menu_file
 			if tpl != null then return tpl
 		end
 		if is_root then return wiki.config.menu_file
-		return parent.menu_file
+		return parent.as(not null).menu_file
 	end
 end
 
@@ -535,6 +535,7 @@ class WikiArticle
 	redef type PARENT: WikiSection
 
 	redef fun title do
+		var parent = self.parent
 		if name == "index" and parent != null then return parent.title
 		return super
 	end
@@ -567,7 +568,7 @@ class WikiArticle
 	# REQUIRE: `has_source`.
 	var md: nullable String is lazy do
 		if not has_source then return null
-		var file = new FileReader.open(src_full_path.to_s)
+		var file = new FileReader.open(src_full_path.as(not null))
 		var md = file.read_all
 		file.close
 		return md
@@ -578,7 +579,7 @@ class WikiArticle
 	redef fun is_dirty do
 		if super then return true
 		if has_source then
-			return wiki.need_render(src_full_path.to_s, out_full_path)
+			return wiki.need_render(src_full_path.as(not null), out_full_path)
 		end
 		return false
 	end
@@ -779,7 +780,7 @@ class WikiConfig
 	var sidebar_blocks: Array[String] is lazy do
 		var res = new Array[String]
 		if not has_key("wiki.sidebar.blocks") then return res
-		for val in at("wiki.sidebar.blocks").values do
+		for val in at("wiki.sidebar.blocks").as(not null).values do
 			res.add val
 		end
 		return res
