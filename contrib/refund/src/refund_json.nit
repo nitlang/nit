@@ -130,7 +130,7 @@ redef class RefundProcessor
 		return new RefundStats.from_json(content)
 	end
 
-	redef fun save_stats(stats: RefundStats) do
+	redef fun save_stats(stats) do
 		write_output(stats.to_json.to_pretty_json, stats_file)
 	end
 end
