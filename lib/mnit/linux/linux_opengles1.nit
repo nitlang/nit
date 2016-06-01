@@ -35,7 +35,7 @@ end
 redef class Opengles1Display
 
 	# display managing the window, events, fonts? and image loading?
-	var sdl_display: SDLDisplay
+	var sdl_display: SDLDisplay is noinit
 
 	redef fun extern_init do
 		sdl_display = new SDLDisplay( wanted_width, wanted_height )
