@@ -67,4 +67,14 @@
 				templateUrl: '/directives/entity/tag.html'
 			};
 		})
+
+		.directive('entityLocation', function() {
+			return {
+				restrict: 'E',
+				scope: {
+					mentity: '='
+				},
+				templateUrl: '/directives/entity/location.html'
+			};
+		})
 })();
