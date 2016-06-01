@@ -70,7 +70,7 @@ end
 redef class WikiSection
 
 	# Output directory (where to ouput the HTML pages for this section).
-	redef fun out_path: String do
+	redef fun out_path do
 		if parent == null then
 			return wiki.config.out_dir
 		else
@@ -167,7 +167,7 @@ end
 
 redef class WikiArticle
 
-	redef fun out_path: String do
+	redef fun out_path do
 		if parent == null then
 			return wiki.expand_path(wiki.config.out_dir, "{name}.html")
 		else

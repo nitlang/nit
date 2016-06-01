@@ -534,7 +534,7 @@ class WikiArticle
 	# Articles can only have `WikiSection` as parents.
 	redef type PARENT: WikiSection
 
-	redef fun title: String do
+	redef fun title do
 		if name == "index" and parent != null then return parent.title
 		return super
 	end
@@ -551,7 +551,7 @@ class WikiArticle
 		content = md
 	end
 
-	redef var src_full_path: nullable String = null
+	redef var src_full_path = null
 
 	redef fun src_path do
 		var src_full_path = self.src_full_path
