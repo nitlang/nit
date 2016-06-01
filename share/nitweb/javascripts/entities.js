@@ -37,4 +37,14 @@
 				templateUrl: '/directives/entity/doc.html'
 			};
 		})
+
+		.directive('entitySignature', function() {
+			return {
+				restrict: 'E',
+				scope: {
+					mentity: '='
+				},
+				templateUrl: '/directives/entity/signature.html'
+			};
+		})
 })();
