@@ -56,4 +56,15 @@
 				templateUrl: '/directives/entity/signature.html'
 			};
 		})
+
+		.directive('entityTag', function() {
+			return {
+				restrict: 'E',
+				scope: {
+					mentity: '='
+				},
+				replace: true,
+				templateUrl: '/directives/entity/tag.html'
+			};
+		})
 })();
