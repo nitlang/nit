@@ -76,6 +76,20 @@ a {
 	color: #666;
 	font-family: monospace;
 }
+
+/* tabs */
+
+.nav-tabs li { cursor: pointer; }
+
+.nav>li.warning>a {
+    color: #fff;
+    background-color: #f0ad4e;
+}
+
+.nav>li.warning>a:focus, .nav>li.warning>a:hover {
+    background-color: #ff9c0f;
+}
+
 /*
  * Code Highlighting
  */

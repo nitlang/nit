@@ -37,6 +37,11 @@
 				controller: 'EntityCtrl',
 				controllerAs: 'entityCtrl'
 			})
+			.when('/classdef/:id', {
+				templateUrl: 'views/classdef.html',
+				controller: 'EntityCtrl',
+				controllerAs: 'entityCtrl'
+			})
 			.otherwise({
 				redirectTo: '/'
 			});

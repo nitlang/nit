@@ -1,0 +1,16 @@
+<div class='container-fluid'>
+	<div class='page-header'>
+		<h2><entity-signature mentity='mentity'/></h2>
+		<entity-link mentity='mentity.mpackage' />
+		:: <entity-link mentity='mentity.mmodule' />
+		:: {{mentity.name}}
+	</div>
+
+	<ul class='nav nav-tabs' role='tablist'>
+		<li class='warning'>
+			<a ng-href='{{mentity.mclass.web_url}}'>
+				<span class='glyphicon glyphicon-chevron-left'/> Go to class
+			</a>
+		</li>
+	</ul>
+</div>
