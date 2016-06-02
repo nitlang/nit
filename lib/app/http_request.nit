@@ -28,14 +28,21 @@ redef class App
 	fun run_on_ui_thread(task: Task) is abstract
 end
 
-# Thread executing an HTTP request and deserializing JSON asynchronously
+# Thread executing an HTTP request asynchronously
 #
-# This class defines four methods acting on the main/UI thread,
-# they should be implemented as needed:
-# * before
-# * on_load
-# * on_fail
-# * after
+# The request is sent to `rest_server_uri / rest_action`.
+#
+# If `deserialize_json`, the default behavior, the response is deserialized from JSON
+#
+# If `delay > 0.0`, sending the reqest is delayed by the given `delay` in seconds.
+# It can be used to delay resending a request on error.
+#
+# Four callback methods act on the main/UI thread,
+# they should be implemented as needed in subclasses:
+# * `before`
+# * `on_load`
+# * `on_fail`
+# * `after`
 class AsyncHttpRequest
 	super Thread
 
