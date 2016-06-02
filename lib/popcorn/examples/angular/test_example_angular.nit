@@ -14,35 +14,25 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+module test_example_angular is test_suite
+
+import pop_tests
 import example_angular
-import base_tests
 
-class TestClient
-	super ClientThread
+class TestExampleAngular
+	super TestPopcorn
 
-	redef fun main do
+	redef fun client_test do
 		system "curl -s {host}:{port}/counter"
 		system "curl -s {host}:{port}/counter -X POST"
 		system "curl -s {host}:{port}/counter"
 		system "curl -s {host}:{port}/not_found" # handled by angular controller
-		return null
+	end
+
+	fun test_example_param_route do
+		var app = new App
+		app.use("/counter", new CounterAPI)
+		app.use("/*", new StaticHandler("../examples/angular/www/", "index.html"))
+		run_test(app)
 	end
 end
-
-var app = new App
-app.use("/counter", new CounterAPI)
-app.use("/*", new StaticHandler("../examples/angular/www/", "index.html"))
-
-var host = test_host
-var port = test_port
-
-var server = new AppThread(host, port, app)
-server.start
-0.1.sleep
-
-var client = new TestClient(host, port)
-client.start
-client.join
-0.1.sleep
-
-exit 0
