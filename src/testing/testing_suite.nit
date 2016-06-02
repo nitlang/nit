@@ -288,7 +288,7 @@ class TestCase
 						error = "Difference with expected output: diff -u {sav} {res_name}.out1"
 						toolcontext.modelbuilder.failed_tests += 1
 					end
-				else
+				else if not raw_output.is_empty then
 					toolcontext.info("No diff: {sav} not found", 2)
 				end
 			end
