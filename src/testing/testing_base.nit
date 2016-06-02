@@ -136,6 +136,12 @@ ulimit -t {{{ulimit_usertime}}} 2> /dev/null
 		return not opt_no_color.value and opt_verbose.value <= 0
 	end
 
+	# Clear the line if `has_status` (no-op else)
+	fun clear_status
+	do
+		if has_status then printn "\r\x1B[K"
+	end
+
 	# Shoe the full description of the test-case.
 	#
 	# The output honors `--no-color`.

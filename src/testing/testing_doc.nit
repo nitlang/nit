@@ -86,6 +86,8 @@ class NitUnitExecutor
 	fun mark_done(du: DocUnit)
 	do
 		du.is_done = true
+		toolcontext.clear_status
+		toolcontext.show_unit(du)
 		show_status
 	end
 
@@ -129,10 +131,6 @@ class NitUnitExecutor
 		# Final status
 		show_status
 		print ""
-
-		for du in docunits do
-			toolcontext.show_unit(du)
-		end
 
 		for du in docunits do
 			testsuite.add du.to_xml
