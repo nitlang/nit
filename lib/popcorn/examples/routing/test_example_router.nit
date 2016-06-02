@@ -14,45 +14,33 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+module test_example_router is test_suite
+
+import pop_tests
 import example_router
-import base_tests
 
-class HelloClient
-	super ClientThread
+class TestExampleRouter
+	super TestPopcorn
 
-	redef fun main do
+	redef fun client_test do
 		system "curl -s {host}:{port}"
 		system "curl -s {host}:{port}/"
 		system "curl -s {host}:{port}/user"
 		system "curl -s {host}:{port}/user/"
 		system "curl -s {host}:{port}/user/profile"
-
 		system "curl -s {host}:{port}/not_found"
 		system "curl -s {host}:{port}/user/not_found"
 		system "curl -s {host}:{port}/products/not_found"
-		return null
+	end
+
+	fun test_example_router do
+		var user_router = new Router
+		user_router.use("/*", new UserLogger)
+		user_router.use("/", new UserHome)
+		user_router.use("/profile", new UserProfile)
+		var app = new App
+		app.use("/", new AppHome)
+		app.use("/user", user_router)
+		run_test(app)
 	end
 end
-
-var user_router = new Router
-user_router.use("/*", new UserLogger)
-user_router.use("/", new UserHome)
-user_router.use("/profile", new UserProfile)
-
-var app = new App
-app.use("/", new AppHome)
-app.use("/user", user_router)
-
-var host = test_host
-var port = test_port
-
-var server = new AppThread(host, port, app)
-server.start
-0.1.sleep
-
-var client = new HelloClient(host, port)
-client.start
-client.join
-0.1.sleep
-
-exit 0
