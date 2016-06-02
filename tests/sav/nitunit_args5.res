@@ -1,8 +1,8 @@
-* Docunits of module test_doc2::test_doc2 (3 tests)
-
+==== Docunits of module test_doc2::test_doc2 | tests: 3
 [OK] test_doc2::test_doc2$core::Sys$foo1
 [OK] test_doc2::test_doc2$core::Sys$foo2
 [OK] test_doc2::test_doc2$core::Sys$foo3
+
 Docunits: Entities: 6; Documented ones: 5; With nitunits: 3; Failures: 0
 Test suites: Classes: 0; Test Cases: 0
 [SUCCESS] All 3 tests passed.

@@ -1,8 +1,8 @@
-* Docunits of module test_nitunit2::test_nitunit2 (3 tests)
-
+==== Docunits of module test_nitunit2::test_nitunit2 | tests: 3
 [OK] test_nitunit2::test_nitunit2$core::Sys$foo1
 [OK] test_nitunit2::test_nitunit2$core::Sys$bar2
 [OK] test_nitunit2::test_nitunit2$core::Sys$foo3
+
 Docunits: Entities: 4; Documented ones: 3; With nitunits: 3; Failures: 0
 Test suites: Classes: 0; Test Cases: 0
 [SUCCESS] All 3 tests passed.

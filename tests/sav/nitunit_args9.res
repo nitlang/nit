@@ -1,5 +1,4 @@
-* Test-suite of module test_nitunit4::test_nitunit4 (3 tests)
-
+==== Test-suite of module test_nitunit4::test_nitunit4 | tests: 3
 [KO] test_nitunit4$TestTestSuite$test_foo
      test_nitunit4/test_nitunit4.nit:22,2--26,4: Runtime Error in file nitunit.out/gen_test_nitunit4.nit
      Output
@@ -20,6 +19,7 @@
 	+Before Test
 	+Tested method
 	+After Test
+
 
 Docunits: Entities: 12; Documented ones: 0; With nitunits: 0
 Test suites: Classes: 1; Test Cases: 3; Failures: 2

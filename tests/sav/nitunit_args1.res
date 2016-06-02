@@ -1,5 +1,4 @@
-* Docunits of module test_nitunit::test_nitunit (4 tests)
-
+==== Docunits of module test_nitunit::test_nitunit | tests: 4
 [OK] test_nitunit::test_nitunit
 [KO] test_nitunit$X
      test_nitunit.nit:21,7--22,0: Runtime error in nitunit.out/test_nitunit-2.nit
@@ -13,8 +12,8 @@
 
 [KO] test_nitunit$X$foo1
      test_nitunit.nit:28,15: Syntax Error: unexpected operator '!'.
-* Test-suite of module test_test_nitunit::test_test_nitunit (3 tests)
 
+==== Test-suite of module test_test_nitunit::test_test_nitunit | tests: 3
 [OK] test_test_nitunit$TestX$test_foo
 [KO] test_test_nitunit$TestX$test_foo1
      test_test_nitunit.nit:36,2--40,4: Runtime Error in file nitunit.out/gen_test_test_nitunit.nit
@@ -22,6 +21,7 @@
 	Runtime error: Assert failed (test_test_nitunit.nit:39)
 
 [OK] test_test_nitunit$TestX$test_foo2
+
 Docunits: Entities: 27; Documented ones: 4; With nitunits: 4; Failures: 3
 Test suites: Classes: 1; Test Cases: 3; Failures: 1
 [FAILURE] 4/7 tests failed.
