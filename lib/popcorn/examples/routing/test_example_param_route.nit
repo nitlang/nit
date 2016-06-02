@@ -14,36 +14,25 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+module test_example_param_route is test_suite
+
+import pop_tests
 import example_param_route
-import base_tests
 
-class TestClient
-	super ClientThread
+class TestExampleParamRoute
+	super TestPopcorn
 
-	redef fun main do
+	redef fun client_test do
 		system "curl -s {host}:{port}/Morriar"
 		system "curl -s {host}:{port}//"
-
 		system "curl -s {host}:{port}/"
 		system "curl -s {host}:{port}/not_found"
 		system "curl -s {host}:{port}/not_found/not_found"
-		return null
+	end
+
+	fun test_example_param_route do
+		var app = new App
+		app.use("/:user", new UserHome)
+		run_test(app)
 	end
 end
-
-var app = new App
-app.use("/:user", new UserHome)
-
-var host = test_host
-var port = test_port
-
-var server = new AppThread(host, port, app)
-server.start
-0.1.sleep
-
-var client = new TestClient(host, port)
-client.start
-client.join
-0.1.sleep
-
-exit 0
