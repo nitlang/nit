@@ -279,8 +279,12 @@ class TestCase
 			var mmodule = test_method.mclassdef.mmodule
 			var file = mmodule.filepath
 			if file != null then
-				var sav = file.dirname / mmodule.name + ".sav" / test_method.name + ".res"
-				if sav.file_exists then
+				var tries = [ file.dirname / mmodule.name + ".sav" / test_method.name + ".res",
+					file.dirname / "sav" / test_method.name + ".res" ,
+					file.dirname / test_method.name + ".res" ]
+				var savs = [ for t in tries do if t.file_exists then t ]
+				if savs.length == 1 then
+					var sav = savs.first
 					toolcontext.info("Diff output with {sav}", 1)
 					res = toolcontext.safe_exec("diff -u --label 'expected:{sav}' --label 'got:{res_name}.out1' '{sav}' '{res_name}.out1' > '{res_name}.diff' 2>&1 </dev/null")
 					if res != 0 then
@@ -288,8 +292,12 @@ class TestCase
 						error = "Difference with expected output: diff -u {sav} {res_name}.out1"
 						toolcontext.modelbuilder.failed_tests += 1
 					end
+				else if savs.length > 1 then
+					toolcontext.info("Conflicting diffs: {savs.join(", ")}", 1)
+					error = "Conflicting expected output: {savs.join(", ", " and ")} all exist"
+					toolcontext.modelbuilder.failed_tests += 1
 				else if not raw_output.is_empty then
-					toolcontext.info("No diff: {sav} not found", 2)
+					toolcontext.info("No diff: {tries.join(", ", " or ")} not found", 1)
 				end
 			end
 		end
