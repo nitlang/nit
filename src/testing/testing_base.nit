@@ -117,7 +117,7 @@ ulimit -t {{{ulimit_usertime}}} 2> /dev/null
 			end
 		end
 
-		if opt_no_color.value then
+		if not has_status then
 			if done == 0 then
 				print "* {name} ({tests.length} tests)"
 			end
@@ -129,6 +129,14 @@ ulimit -t {{{ulimit_usertime}}} 2> /dev/null
 			line += " " + more_message
 		end
 		printn "{line}"
+	end
+
+	# Is a status bar printed?
+	#
+	# true if color and non-verbose mode
+	fun has_status: Bool
+	do
+		return not opt_no_color.value and opt_verbose.value <= 0
 	end
 
 	# Shoe the full description of the test-case.
