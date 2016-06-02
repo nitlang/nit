@@ -14,37 +14,26 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+module test_example_post_handler is test_suite
+
+import pop_tests
 import example_post_handler
-import base_tests
 
-class TestClient
-	super ClientThread
+class TestExampleQueryString
+	super TestPopcorn
 
-	redef fun main do
+	redef fun client_test do
 		system "curl -s {host}:{port}/ -X POST"
 		system "curl -s {host}:{port}/ --data 'user'"
 		system "curl -s {host}:{port}/ --data 'user=Morriar'"
 		system "curl -s {host}:{port}/ --data 'user=\&order=desc'"
 		system "curl -s {host}:{port}/ --data 'user=Morriar\&order=desc'"
-
 		system "curl -s {host}:{port}/"
-		return null
+	end
+
+	fun test_example_glob_route do
+		var app = new App
+		app.use("/", new PostHandler)
+		run_test(app)
 	end
 end
-
-var app = new App
-app.use("/", new PostHandler)
-
-var host = test_host
-var port = test_port
-
-var server = new AppThread(host, port, app)
-server.start
-0.1.sleep
-
-var client = new TestClient(host, port)
-client.start
-client.join
-0.1.sleep
-
-exit 0
