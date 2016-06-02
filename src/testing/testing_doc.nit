@@ -547,7 +547,7 @@ redef class ModelBuilder
 	fun test_mdoc(mdoc: MDoc): HTMLTag
 	do
 		var ts = new HTMLTag("testsuite")
-		var file = mdoc.location.to_s
+		var file = mdoc.location.file.filename
 
 		toolcontext.info("nitunit: doc-unit file {file}", 2)
 
