@@ -386,7 +386,7 @@ Put primitive attributes in a box instead of an union.
 ### `--no-shortcut-equal`
 Always call == in a polymorphic way.
 
-### `--no-tag-primitive`
+### `--no-tag-primitives`
 Use only boxes for primitive types.
 
 The separate compiler uses tagged values to encode common primitive types like Int, Bool and Char.
@@ -409,9 +409,6 @@ Disable advanced gcc directives for optimization.
 Use an indirection when calling.
 
 Just add the trampolines of `--substitute-monomorph` without doing any additionnal optimizations.
-
-### `--no-tag-primitives`
-Use only boxes for primitive types.
 
 ## INTERNAL OPTIONS
 
