@@ -14,37 +14,26 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+module test_example_session is test_suite
+
+import pop_tests
 import example_session
-import base_tests
 
-class HelloClient
-	super ClientThread
+class TestExampleSession
+	super TestPopcorn
 
-	redef fun main do
+	redef fun client_test do
 		system "curl -s {host}:{port}/"
 		system "curl -s {host}:{port}/ -X POST"
-
 		system "curl -s {host}:{port}/not_found"
 		system "curl -s {host}:{port}/user/not_found"
 		system "curl -s {host}:{port}/products/not_found"
-		return null
+	end
+
+	fun test_example_param_route do
+		var app = new App
+		app.use("/*", new SessionInit)
+		app.use("/", new AppLogin)
+		run_test(app)
 	end
 end
-
-var app = new App
-app.use("/*", new SessionInit)
-app.use("/", new AppLogin)
-
-var host = test_host
-var port = test_port
-
-var server = new AppThread(host, port, app)
-server.start
-0.1.sleep
-
-var client = new HelloClient(host, port)
-client.start
-client.join
-0.1.sleep
-
-exit 0
