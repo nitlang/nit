@@ -72,6 +72,9 @@ redef class RefundProcessor
 		if json isa JsonParseError then
 			die("Wrong input file ({json.message})")
 			abort
+		else if json == null then
+			die("Unable to parse input file as json (got null)")
+			abort
 		else if not json isa JsonObject then
 			die("Wrong input type (expected JsonObject got {json.class_name})")
 			abort
@@ -130,7 +133,7 @@ redef class RefundProcessor
 		return new RefundStats.from_json(content)
 	end
 
-	redef fun save_stats(stats: RefundStats) do
+	redef fun save_stats(stats) do
 		write_output(stats.to_json.to_pretty_json, stats_file)
 	end
 end
@@ -165,13 +168,19 @@ redef class ReclamationSheet
 		proc.check_key(json, "reclamations")
 		var res = new Array[Reclamation]
 		var recls = json["reclamations"]
-		if not recls isa JsonArray then
+		if recls == null then
+			proc.die("Wrong type for `number` (expected JsonArray got null)")
+			abort
+		else if not recls isa JsonArray then
 			proc.die("Wrong type for `number` (expected JsonArray got {recls.class_name})")
 			abort
 		end
 		var i = 0
 		for obj in recls do
-			if not obj isa JsonObject then
+			if obj == null then
+				proc.die("Wrong type for `reclamations#{i}` (expected JsonObject got null)")
+				abort
+			else if not obj isa JsonObject then
 				proc.die("Wrong type for `reclamations#{i}` " +
 					"(expected JsonObject got {obj.class_name})")
 				abort
@@ -197,7 +206,10 @@ redef class ReclFile
 	init from_json(proc: RefundProcessor, json: JsonObject) do
 		proc.check_key(json, "dossier")
 		var id = json["dossier"]
-		if not id isa String then
+		if id == null then
+			proc.die("Wrong type for `dossier` (expected String got null)")
+			abort
+		else if not id isa String then
 			proc.die("Wrong type for `dossier` (expected String got {id.class_name})")
 			abort
 		end
@@ -232,7 +244,10 @@ redef class ReclMonth
 	init from_json(proc: RefundProcessor, json: JsonObject) do
 		proc.check_key(json, "mois")
 		var month = json["mois"]
-		if not month isa String then
+		if month == null then
+			proc.die("Wrong type for `mois` (expected String got null)")
+			return
+		else if not month isa String then
 			proc.die("Wrong type for `mois` (expected String got {month.class_name})")
 			return
 		end
@@ -264,7 +279,10 @@ redef class ReclDate
 	init from_json(proc: RefundProcessor, json: JsonObject) do
 		proc.check_key(json, "date")
 		var date = json["date"]
-		if not date isa String then
+		if date == null then
+			proc.die("Wrong type for `date` (expected String got null)")
+			abort
+		else if not date isa String then
 			proc.die("Wrong type for `date` (expected String got {date.class_name})")
 			abort
 		end
@@ -302,7 +320,10 @@ redef class Reclamation
 	private fun parse_care_id(proc: RefundProcessor, json: JsonObject): Int do
 		proc.check_key(json, "soin")
 		var id = json["soin"]
-		if not id isa Int then
+		if id == null then
+			proc.die("Wrong type for `soin` (expected Int got null)")
+			abort
+		else if not id isa Int then
 			proc.die("Wrong type for `soin` (expected Int got {id.class_name})")
 			abort
 		end
@@ -313,7 +334,10 @@ redef class Reclamation
 	private fun parse_fees(proc: RefundProcessor, json: JsonObject): Dollar do
 		proc.check_key(json, "montant")
 		var fees = json["montant"]
-		if not fees isa String then
+		if fees == null then
+			proc.die("Wrong type for `fees` (expected String got null)")
+			abort
+		else if not fees isa String then
 			proc.die("Wrong type for `fees` (expected String got {fees.class_name})")
 			abort
 		end
