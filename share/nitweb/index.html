@@ -20,6 +20,21 @@
 				<div class='col-xs-3 navbar-header'>
 					<a class='navbar-brand' ng-href='/'>Nitdoc</a>
 				</div>
+				<div class='col-xs-7'>
+					<form ng-controller='SearchCtrl as searchCtrl' >
+						<div class='form-group has-icon'>
+							<input placeholder='Search...' type='text' class='form-control search-input'
+								ng-model-options='{ debounce: 150 }' ng-model='query'
+								ng-keydown='update($event)' ng-change='search()'>
+							<span class='glyphicon glyphicon-search form-control-icon text-muted'></span>
+						</div>
+						<div ng-if='results.length > 0' class='search-results'>
+							<div class='card-list'>
+								<entity-card ng-click='reset()' ng-class='{active: activeItem == $index}' mentity='mentity' ng-repeat='mentity in results' />
+							</div>
+						</div>
+					</form>
+				</div>
 			</div>
 		</nav>
 		<div ng-view></div>
