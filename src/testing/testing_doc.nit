@@ -78,15 +78,15 @@ class NitUnitExecutor
 	# All extracted docunits
 	var docunits = new Array[DocUnit]
 
-	fun show_status(more_message: nullable String)
+	fun show_status
 	do
-		toolcontext.show_unit_status(name, docunits, more_message)
+		toolcontext.show_unit_status(name, docunits)
 	end
 
 	fun mark_done(du: DocUnit)
 	do
 		du.is_done = true
-		show_status(du.full_name + " " + du.status_tag)
+		show_status
 	end
 
 	# Execute all the docunits

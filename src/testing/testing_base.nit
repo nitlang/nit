@@ -101,7 +101,7 @@ ulimit -t {{{ulimit_usertime}}} 2> /dev/null
 	# So it is expected that:
 	# * no other output is printed between two calls
 	# * the last `show_unit_status` is followed by a new-line
-	fun show_unit_status(name: String, tests: SequenceRead[UnitTest], more_message: nullable String)
+	fun show_unit_status(name: String, tests: SequenceRead[UnitTest])
 	do
 		var esc = 27.code_point.to_s
 		var line = "\r{esc}[K* {name} ["
@@ -125,9 +125,6 @@ ulimit -t {{{ulimit_usertime}}} 2> /dev/null
 		end
 
 		line += "] {done}/{tests.length}"
-		if more_message != null then
-			line += " " + more_message
-		end
 		printn "{line}"
 	end
 
