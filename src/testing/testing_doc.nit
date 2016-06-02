@@ -349,11 +349,11 @@ private class NitunitDecorator
 		var mdoc = executor.mdoc
 		assert mdoc != null
 
-		var next_number = 0
+		var next_number = 1
 		var name = executor.xml_name
 		if executor.docunits.not_empty and executor.docunits.last.mdoc == mdoc then
 			next_number = executor.docunits.last.number + 1
-			name += "+" + next_number.to_s
+			name += "#" + next_number.to_s
 		end
 
 		var res = new DocUnit(mdoc, next_number, "", executor.xml_classname, name)
@@ -379,7 +379,11 @@ class DocUnit
 	redef fun full_name do
 		var mentity = mdoc.original_mentity
 		if mentity != null then
-			return mentity.full_name
+			var res = mentity.full_name
+			if number > 1 then
+				res += "#{number}"
+			end
+			return res
 		else
 			return xml_classname + "." + xml_name
 		end
