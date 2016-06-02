@@ -14,39 +14,27 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import base_tests
+module test_example_static is test_suite
+
+import pop_tests
 import example_static
 
-class TestClient
-	super ClientThread
+class TestExampleStatic
+	super TestPopcorn
 
-	redef fun main do
+	redef fun client_test do
 		system "curl -s {host}:{port}/css/style.css"
 		system "curl -s {host}:{port}/js/app.js"
 		system "curl -s {host}:{port}/hello.html"
 		system "curl -s {host}:{port}/"
-
 		system "curl -s {host}:{port}/css/not_found.nit"
 		system "curl -s {host}:{port}/static/css/not_found.nit"
 		system "curl -s {host}:{port}/not_found.nit"
+	end
 
-		return null
+	fun test_example_param_route do
+		var app = new App
+		app.use("/", new StaticHandler("../examples/static_files/public/"))
+		run_test(app)
 	end
 end
-
-var app = new App
-app.use("/", new StaticHandler("../examples/static_files/public/"))
-
-var host = test_host
-var port = test_port
-
-var server = new AppThread(host, port, app)
-server.start
-0.1.sleep
-
-var client = new TestClient(host, port)
-client.start
-client.join
-0.1.sleep
-
-exit 0
