@@ -182,7 +182,7 @@ GROUP BY beer0, beer1""") else
 		# Check if already in user
 		var stmt = select("ROWID FROM users WHERE lower({user.to_sql_string}) = lower(name)")
 		assert stmt != null else print_error "Select 'sign_up' failed with: {error or else "?"}"
-		if not stmt.iterator.to_a.is_empty then return "Username already in use"
+		if not stmt.iterator.to_a.is_empty then return "Username already in use."
 
 		# Check email use
 		stmt = select("ROWID FROM users WHERE lower({email.to_sql_string}) = lower(email)")
