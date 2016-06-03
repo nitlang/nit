@@ -6,6 +6,8 @@ nit - interprets and debugs Nit programs.
 
 nit [*options*] FILE [ARG]...
 
+nit [*options*] - [ARG]...
+
 nit [*options*] -e COMMAND [ARG]...
 
 # DESCRIPTION
@@ -15,6 +17,9 @@ It takes the main module of a program as the first argument then the options and
 
     $ nit examples/hello_world.nit
     hello world
+
+If `-` is used instead of a module, then the program is read from the standard input.
+The whole program is read before its interpretation starts.
 
 The Nit interpreter is usable and valid as a *shebang* interpreted directive.
 It is however recommended to use with `/usr/bin/env` because the location of the executable is not standardized.
