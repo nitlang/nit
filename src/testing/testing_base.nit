@@ -142,7 +142,7 @@ ulimit -t {{{ulimit_usertime}}} 2> /dev/null
 		if has_status then printn "\r\x1B[K"
 	end
 
-	# Shoe the full description of the test-case.
+	# Show the full description of the test-case.
 	#
 	# The output honors `--no-color`.
 	#
