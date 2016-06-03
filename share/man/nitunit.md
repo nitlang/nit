@@ -173,7 +173,23 @@ end
 
 Sometimes, it is easier to validate a `TestCase` by comparing its output with a text file containing the expected result.
 
-For each TestCase `test_bar` of a TestSuite `test_mod.nit`, if the corresponding file `test_mod.sav/test_bar.res` exists, then the output of the test is compared with the file.
+For each TestCase `test_bar` of a TestSuite `test_mod.nit`, a corresponding file with the expected output is looked for:
+
+* "test_mod.sav/test_bar.res". I.e. test-cases grouped by test-suites.
+
+	This is the default and is useful if there is a lot of test-suites and test-cases in a directory
+
+* "sav/test_bar.res". I.e. all test-cases grouped in a common sub-directory.
+
+	Useful if there is a lot of test-suites OR test-cases in a directory.
+
+* "test_bar.res" raw in the directory.
+
+	Useful is there is a few test-suites and test-cases in a directory.
+
+All 3 are exclusive. If more than one exists, the test-case is failed.
+
+If a corresponding file then the output of the test-case is compared with the file.
 
 The `diff(1)` command is used to perform the comparison.
 The test is failed if non-zero is returned by `diff`.
@@ -194,6 +210,9 @@ Hello!
 ~~~
 
 If no corresponding `.res` file exists, then the output of the TestCase is ignored.
+
+To helps the management of the expected results, the option `--autosav` can be used to automatically create and update them.
+
 
 ## Configuring TestSuites
 
@@ -291,6 +310,16 @@ Examples: `TestFoo`, `TestFoo*`, `TestFoo::test_foo`, `TestFoo::test_foo*`, `tes
 
 ### `-t`, `--target-file`
 Specify test suite location.
+
+### `--autosav`
+Automatically create/update .res files for black box testing.
+
+If a black block test fails because a difference between the expected result and the current result then the expected result file is updated (and the test is passed).
+
+If a test-case of a test-suite passes but that some output is generated, then an expected result file is created.
+
+It is expected that the created/updated files are checked since the tests are considered passed.
+A VCS like `git` is often a good tool to check the creation and modification of those files.
 
 ## SUITE GENERATION
 
