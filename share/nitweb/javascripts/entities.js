@@ -16,7 +16,7 @@
 
 (function() {
 	angular
-		.module('entities', ['model'])
+		.module('entities', ['ui', 'model'])
 
 		.controller('EntityCtrl', ['Model', '$routeParams', '$scope', function(Model, $routeParams, $scope) {
 			Model.loadEntity($routeParams.id,
@@ -54,6 +54,66 @@
 					mentity: '='
 				},
 				templateUrl: '/directives/entity/signature.html'
+			};
+		})
+
+		.directive('entityTag', function() {
+			return {
+				restrict: 'E',
+				scope: {
+					mentity: '='
+				},
+				replace: true,
+				templateUrl: '/directives/entity/tag.html'
+			};
+		})
+
+		.directive('entityLocation', function() {
+			return {
+				restrict: 'E',
+				scope: {
+					mentity: '='
+				},
+				templateUrl: '/directives/entity/location.html'
+			};
+		})
+
+		.directive('entityCard', function() {
+			return {
+				restrict: 'E',
+				scope: {
+					mentity: '='
+				},
+				replace: true,
+				templateUrl: '/directives/entity/card.html'
+			};
+		})
+
+		.directive('entityList', function() {
+			return {
+				restrict: 'E',
+				scope: {
+					listEntities: '=',
+					listTitle: '@',
+					listObjectFilter: '=',
+				},
+				templateUrl: '/directives/entity/list.html',
+				link: function ($scope, element, attrs) {
+					$scope.showFilters = false;
+					if(!$scope.listObjectFilter) {
+						$scope.listObjectFilter = {};
+					}
+					if(!$scope.visibilityFilter) {
+						$scope.visibilityFilter = {
+							public: true,
+							protected: true,
+							private: false
+						};
+					}
+					$scope.toggleFilters = function() {
+						$scope.showFilters = !$scope.showFilters;
+					};
+				}
 			};
 		})
 })();

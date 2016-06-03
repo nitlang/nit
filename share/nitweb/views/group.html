@@ -15,6 +15,15 @@
 		<div class='tab-content'>
 			<div class='tab-pane fade in active' id='doc'>
 				<entity-doc mentity='mentity'/>
+
+				<entity-list list-title='Parent group' list-entities='[mentity.parent]'
+					list-object-filter='{}' ng-if='mentity.parent' />
+
+				<entity-list list-title='Subgroups' list-entities='mentity.mgroups'
+					list-object-filter='{}' />
+
+				<entity-list list-title='Modules' list-entities='mentity.mmodules'
+					list-object-filter='{}' />
 			</div>
 		</div>
 	</div>
