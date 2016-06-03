@@ -5,3 +5,4 @@ base_simple3.nit
 -e 'print "hello world"'
 -n -e 'print line' test_prog/README.md test_prog/test_prog.nit
 test_ffi_c_interpreter.nit
+-
