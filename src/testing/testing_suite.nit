@@ -132,9 +132,9 @@ class TestSuite
 	# Test to be executed after the whole test suite.
 	var after_module: nullable TestCase = null
 
-	fun show_status(more_message: nullable String)
+	fun show_status
 	do
-		toolcontext.show_unit_status("Test-suite of module " + mmodule.full_name, test_cases, more_message)
+		toolcontext.show_unit_status("Test-suite of module " + mmodule.full_name, test_cases)
 	end
 
 	# Execute the test suite
@@ -150,17 +150,16 @@ class TestSuite
 		if not before_module == null then before_module.run
 		for case in test_cases do
 			case.run
-			show_status(case.full_name + " " + case.status_tag)
+			toolcontext.clear_progress_bar
+			toolcontext.show_unit(case)
+			show_status
 		end
-
-		show_status
-		print ""
 
 		var after_module = self.after_module
 		if not after_module == null then after_module.run
-		for case in test_cases do
-			toolcontext.show_unit(case)
-		end
+
+		show_status
+		print ""
 	end
 
 	# Write the test unit for `self` in a nit compilable file.

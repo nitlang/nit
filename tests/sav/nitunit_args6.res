@@ -1,15 +1,15 @@
-* Docunits of group test_nitunit3> (2 tests)
-
+==== Docunits of group test_nitunit3> | tests: 2
 [KO] test_nitunit3>
      test_nitunit3/README.md:4,2--15,0: Runtime error in nitunit.out/test_nitunit3-0.nit with argument 1
      Output
 	Runtime error: Assert failed (nitunit.out/test_nitunit3-0.nit:7)
 
-[KO] test_nitunit3>
+[KO] test_nitunit3>#2
      test_nitunit3/README.md:7,3--5: Syntax Error: unexpected malformed character '\].
-* Docunits of module test_nitunit3::test_nitunit3 (1 tests)
 
+==== Docunits of module test_nitunit3::test_nitunit3 | tests: 1
 [OK] test_nitunit3::test_nitunit3
+
 Docunits: Entities: 2; Documented ones: 2; With nitunits: 3; Failures: 2
 Test suites: Classes: 0; Test Cases: 0
 [FAILURE] 2/3 tests failed.
@@ -17,6 +17,6 @@ Test suites: Classes: 0; Test Cases: 0
 <testsuites><testsuite package="test_nitunit3&gt;"><testcase classname="nitunit.test_nitunit3&gt;" name="&lt;group&gt;"><error>Runtime error in nitunit.out&#47;test_nitunit3-0.nit with argument 1</error><system-err>Runtime error: Assert failed (nitunit.out&#47;test_nitunit3-0.nit:7)
 </system-err><system-out>assert false
 assert true
-</system-out></testcase><testcase classname="nitunit.test_nitunit3&gt;" name="&lt;group&gt;+1"><failure>Syntax Error: unexpected malformed character &#39;\].</failure><system-out>;&#39;\][]
+</system-out></testcase><testcase classname="nitunit.test_nitunit3&gt;" name="&lt;group&gt;#2"><failure>Syntax Error: unexpected malformed character &#39;\].</failure><system-out>;&#39;\][]
 </system-out></testcase></testsuite><testsuite package="test_nitunit3::test_nitunit3"><testcase classname="nitunit.test_nitunit3::test_nitunit3.&lt;module&gt;" name="&lt;module&gt;"><system-err></system-err><system-out>assert true
 </system-out></testcase></testsuite><testsuite></testsuite></testsuites>

@@ -97,15 +97,19 @@ ulimit -t {{{ulimit_usertime}}} 2> /dev/null
 
 	# Show a single-line status to use as a progression.
 	#
-	# Note that the line starts with `'\r'` and is not ended by a `'\n'`.
+	# If `has_progress_bar` is true, then the output is a progress bar.
+	# The printed the line starts with `'\r'` and is not ended by a `'\n'`.
 	# So it is expected that:
 	# * no other output is printed between two calls
 	# * the last `show_unit_status` is followed by a new-line
-	fun show_unit_status(name: String, tests: SequenceRead[UnitTest], more_message: nullable String)
+	#
+	# If `has_progress_bar` is false, then only the first and last state is shown
+	fun show_unit_status(name: String, tests: SequenceRead[UnitTest])
 	do
 		var esc = 27.code_point.to_s
-		var line = "\r{esc}[K* {name} ["
+		var line = "\r\x1B[K==== {name} ["
 		var done = tests.length
+		var fails = 0
 		for t in tests do
 			if not t.is_done then
 				line += " "
@@ -114,24 +118,46 @@ ulimit -t {{{ulimit_usertime}}} 2> /dev/null
 				line += ".".green.bold
 			else
 				line += "X".red.bold
+				fails += 1
 			end
 		end
 
-		if opt_no_color.value then
+		if not has_progress_bar then
 			if done == 0 then
-				print "* {name} ({tests.length} tests)"
+				print "==== {name} | tests: {tests.length}"
 			end
 			return
 		end
 
-		line += "] {done}/{tests.length}"
-		if more_message != null then
-			line += " " + more_message
+		if done < tests.length then
+			line += "] {done}/{tests.length}"
+		else
+			line += "] tests: {tests.length} "
+			if fails == 0 then
+				line += "OK".green.bold
+			else
+				line += "KO: {fails}".red.bold
+			end
 		end
 		printn "{line}"
 	end
 
-	# Shoe the full description of the test-case.
+	# Is a progress bar printed?
+	#
+	# true if color (because and non-verbose mode
+	# (because verbose mode messes up with the progress bar).
+	fun has_progress_bar: Bool
+	do
+		return not opt_no_color.value and opt_verbose.value <= 0
+	end
+
+	# Clear the line if `has_progress_bar` (no-op else)
+	fun clear_progress_bar
+	do
+		if has_progress_bar then printn "\r\x1B[K"
+	end
+
+	# Show the full description of the test-case.
 	#
 	# The output honors `--no-color`.
 	#

@@ -78,15 +78,17 @@ class NitUnitExecutor
 	# All extracted docunits
 	var docunits = new Array[DocUnit]
 
-	fun show_status(more_message: nullable String)
+	fun show_status
 	do
-		toolcontext.show_unit_status(name, docunits, more_message)
+		toolcontext.show_unit_status(name, docunits)
 	end
 
 	fun mark_done(du: DocUnit)
 	do
 		du.is_done = true
-		show_status(du.full_name + " " + du.status_tag)
+		toolcontext.clear_progress_bar
+		toolcontext.show_unit(du)
+		show_status
 	end
 
 	# Execute all the docunits
@@ -96,31 +98,39 @@ class NitUnitExecutor
 			return
 		end
 
+		# Try to group each nitunit into a single source file to fasten the compilation
 		var simple_du = new Array[DocUnit]
 		show_status
 		for du in docunits do
 			# Skip existing errors
 			if du.error != null then
-				mark_done(du)
 				continue
 			end
 
 			var ast = toolcontext.parse_something(du.block)
 			if ast isa AExpr then
 				simple_du.add du
-			else
-				test_single_docunit(du)
 			end
 		end
-
 		test_simple_docunits(simple_du)
 
+		# Now test them in order
+		for du in docunits do
+			if du.error != null then
+				# Nothing to execute. Conclude
+			else if du.test_file != null then
+				# Already compiled. Execute it.
+				execute_simple_docunit(du)
+			else
+				# Need to try to compile it, then execute it
+				test_single_docunit(du)
+			end
+			mark_done(du)
+		end
+
+		# Final status
 		show_status
 		print ""
-
-		for du in docunits do
-			toolcontext.show_unit(du)
-		end
 
 		for du in docunits do
 			testsuite.add du.to_xml
@@ -164,28 +174,35 @@ class NitUnitExecutor
 
 		if res != 0 then
 			# Compilation error.
-			# Fall-back to individual modes:
-			for du in dus do
-				test_single_docunit(du)
-			end
+			# They will be executed independently
 			return
 		end
 
+		# Compilation was a success.
+		# Store what need to be executed for each one.
 		i = 0
 		for du in dus do
 			i += 1
-			toolcontext.info("Execute doc-unit {du.full_name} in {file} {i}", 1)
-			var res2 = toolcontext.safe_exec("{file.to_program_name}.bin {i} >'{file}.out1' 2>&1 </dev/null")
-			du.was_exec = true
+			du.test_file = file
+			du.test_arg = i
+		end
+	end
 
-			var content = "{file}.out1".to_path.read_all
-			du.raw_output = content
+	# Execute a docunit compiled by `test_single_docunit`
+	fun execute_simple_docunit(du: DocUnit)
+	do
+		var file = du.test_file.as(not null)
+		var i = du.test_arg.as(not null)
+		toolcontext.info("Execute doc-unit {du.full_name} in {file} {i}", 1)
+		var res2 = toolcontext.safe_exec("{file.to_program_name}.bin {i} >'{file}.out1' 2>&1 </dev/null")
+		du.was_exec = true
 
-			if res2 != 0 then
-				du.error = "Runtime error in {file} with argument {i}"
-				toolcontext.modelbuilder.failed_entities += 1
-			end
-			mark_done(du)
+		var content = "{file}.out1".to_path.read_all
+		du.raw_output = content
+
+		if res2 != 0 then
+			du.error = "Runtime error in {file} with argument {i}"
+			toolcontext.modelbuilder.failed_entities += 1
 		end
 	end
 
@@ -222,7 +239,6 @@ class NitUnitExecutor
 			du.error = "Runtime error in {file}"
 			toolcontext.modelbuilder.failed_entities += 1
 		end
-		mark_done(du)
 	end
 
 	# Create and fill the header of a unit file `file`.
@@ -349,11 +365,11 @@ private class NitunitDecorator
 		var mdoc = executor.mdoc
 		assert mdoc != null
 
-		var next_number = 0
+		var next_number = 1
 		var name = executor.xml_name
 		if executor.docunits.not_empty and executor.docunits.last.mdoc == mdoc then
 			next_number = executor.docunits.last.number + 1
-			name += "+" + next_number.to_s
+			name += "#" + next_number.to_s
 		end
 
 		var res = new DocUnit(mdoc, next_number, "", executor.xml_classname, name)
@@ -376,10 +392,23 @@ class DocUnit
 	# The numbering of self in mdoc (starting with 0)
 	var number: Int
 
+	# The generated Nit source file that contains the unit-test
+	#
+	# Note that a same generated file can be used for multiple tests.
+	# See `test_arg` that is used to distinguish them
+	var test_file: nullable String = null
+
+	# The command-line argument to use when executing the test, if any.
+	var test_arg: nullable Int = null
+
 	redef fun full_name do
 		var mentity = mdoc.original_mentity
 		if mentity != null then
-			return mentity.full_name
+			var res = mentity.full_name
+			if number > 1 then
+				res += "#{number}"
+			end
+			return res
 		else
 			return xml_classname + "." + xml_name
 		end
@@ -543,7 +572,7 @@ redef class ModelBuilder
 	fun test_mdoc(mdoc: MDoc): HTMLTag
 	do
 		var ts = new HTMLTag("testsuite")
-		var file = mdoc.location.to_s
+		var file = mdoc.location.file.filename
 
 		toolcontext.info("nitunit: doc-unit file {file}", 2)
 
