@@ -18,6 +18,65 @@
 	angular
 		.module('ui', [ 'model' ])
 
+		.controller('SearchCtrl', ['Model', '$routeParams', '$scope', '$window', function(Model, $routeParams, $scope, $window) {
+			$scope.query = '';
+
+			$scope.reset = function() {
+				$scope.activeItem = 0;
+				$scope.results = [];
+			}
+
+			$scope.update = function(e) {
+				if(e.keyCode == 38) {
+					$scope.selectUp();
+				} else if(e.keyCode == 40) {
+					$scope.selectDown();
+				} else if(e.keyCode == 27) {
+					$scope.selectEscape();
+				} else if(e.keyCode == 13) {
+					$scope.selectEnter();
+				}
+			}
+
+			$scope.selectUp = function() {
+				if($scope.activeItem > 0) {
+					$scope.activeItem -= 1;
+				}
+			}
+
+			$scope.selectDown = function() {
+				if($scope.activeItem < $scope.results.length - 1) {
+					$scope.activeItem += 1;
+				}
+			}
+
+			$scope.selectEnter = function() {
+				$window.location.href = $scope.results[$scope.activeItem].web_url;
+				$scope.reset();
+			}
+
+			$scope.selectEscape = function() {
+				$scope.reset();
+			}
+
+			$scope.search = function() {
+				if(!$scope.query) {
+					$scope.reset();
+					return;
+				}
+				Model.search($scope.query, 10,
+					function(data) {
+						$scope.reset();
+						$scope.results = data;
+					}, function(err) {
+						$scope.reset();
+						$scope.error = err;
+					});
+			}
+
+			$scope.reset();
+		}])
+
 		.directive('uiFilters', function() {
 			return {
 				restrict: 'E',

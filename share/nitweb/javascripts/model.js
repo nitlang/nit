@@ -26,8 +26,13 @@
 					$http.get(apiUrl + '/entity/' + id)
 						.success(cb)
 						.error(cbErr);
-				}
+				},
 
+				search: function(q, n, cb, cbErr) {
+					$http.get(apiUrl + '/search?q=' + q + '&n=' + n)
+						.success(cb)
+						.error(cbErr);
+				}
 			};
 		}])
 })();

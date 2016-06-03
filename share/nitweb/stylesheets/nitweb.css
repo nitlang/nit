@@ -145,6 +145,66 @@ entity-list:hover .btn-filter {
     pointer-events: none;
 }
 
+/* search */
+
+.search-input {
+	width: 100%;
+}
+
+.search-results {
+	position: absolute;
+	right: 0;
+}
+
+.search-results .card.active {
+	background: #eee;
+	border-color: #eee;
+}
+
+/* navs */
+
+.nav-tabs li { cursor: pointer; }
+
+.navbar-fixed-top {
+	background-color: #1E9431;
+	box-shadow: 0 0 4px rgba(0,0,0,.14),0 4px 8px rgba(0,0,0,.28);
+}
+
+.navbar-fixed-top .form-control:hover, .navbar-fixed-top .form-control:focus {
+	background: rgba(255, 255, 255, 0.2);
+}
+
+.navbar-fixed-top .form-control {
+	background: rgba(255, 255, 255, 0.1);
+    border: none;
+    color: #fff;
+    box-shadow: none;
+}
+
+.navbar-fixed-top .form-control-icon {
+	color: #fff;
+}
+
+.navbar-fixed-top *::-webkit-input-placeholder {
+    color: #fff;
+}
+.navbar-fixed-top *:-moz-placeholder {
+    /* FF 4-18 */
+    color: #fff;
+}
+.navbar-fixed-top *::-moz-placeholder {
+    /* FF 19+ */
+    color: #fff;
+}
+.navbar-fixed-top *:-ms-input-placeholder {
+    /* IE 10+ */
+    color: #fff;
+}
+
+.navbar-fixed-top .form-group {
+	margin-top: 8px;
+	margin-bottom: 0px;
+}
 /*
  * Code Highlighting
  */
