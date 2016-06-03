@@ -97,10 +97,13 @@ ulimit -t {{{ulimit_usertime}}} 2> /dev/null
 
 	# Show a single-line status to use as a progression.
 	#
-	# Note that the line starts with `'\r'` and is not ended by a `'\n'`.
+	# If `has_progress_bar` is true, then the output is a progress bar.
+	# The printed the line starts with `'\r'` and is not ended by a `'\n'`.
 	# So it is expected that:
 	# * no other output is printed between two calls
 	# * the last `show_unit_status` is followed by a new-line
+	#
+	# If `has_progress_bar` is false, then only the first and last state is shown
 	fun show_unit_status(name: String, tests: SequenceRead[UnitTest])
 	do
 		var esc = 27.code_point.to_s
@@ -117,7 +120,7 @@ ulimit -t {{{ulimit_usertime}}} 2> /dev/null
 			end
 		end
 
-		if not has_status then
+		if not has_progress_bar then
 			if done == 0 then
 				print "* {name} ({tests.length} tests)"
 			end
@@ -128,18 +131,19 @@ ulimit -t {{{ulimit_usertime}}} 2> /dev/null
 		printn "{line}"
 	end
 
-	# Is a status bar printed?
+	# Is a progress bar printed?
 	#
-	# true if color and non-verbose mode
-	fun has_status: Bool
+	# true if color (because and non-verbose mode
+	# (because verbose mode messes up with the progress bar).
+	fun has_progress_bar: Bool
 	do
 		return not opt_no_color.value and opt_verbose.value <= 0
 	end
 
-	# Clear the line if `has_status` (no-op else)
-	fun clear_status
+	# Clear the line if `has_progress_bar` (no-op else)
+	fun clear_progress_bar
 	do
-		if has_status then printn "\r\x1B[K"
+		if has_progress_bar then printn "\r\x1B[K"
 	end
 
 	# Show the full description of the test-case.

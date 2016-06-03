@@ -86,7 +86,7 @@ class NitUnitExecutor
 	fun mark_done(du: DocUnit)
 	do
 		du.is_done = true
-		toolcontext.clear_status
+		toolcontext.clear_progress_bar
 		toolcontext.show_unit(du)
 		show_status
 	end

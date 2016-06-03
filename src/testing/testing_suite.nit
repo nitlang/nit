@@ -150,7 +150,7 @@ class TestSuite
 		if not before_module == null then before_module.run
 		for case in test_cases do
 			case.run
-			toolcontext.clear_status
+			toolcontext.clear_progress_bar
 			toolcontext.show_unit(case)
 			show_status
 		end
