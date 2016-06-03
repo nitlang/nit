@@ -107,8 +107,9 @@ ulimit -t {{{ulimit_usertime}}} 2> /dev/null
 	fun show_unit_status(name: String, tests: SequenceRead[UnitTest])
 	do
 		var esc = 27.code_point.to_s
-		var line = "\r{esc}[K* {name} ["
+		var line = "\r\x1B[K==== {name} ["
 		var done = tests.length
+		var fails = 0
 		for t in tests do
 			if not t.is_done then
 				line += " "
@@ -117,17 +118,27 @@ ulimit -t {{{ulimit_usertime}}} 2> /dev/null
 				line += ".".green.bold
 			else
 				line += "X".red.bold
+				fails += 1
 			end
 		end
 
 		if not has_progress_bar then
 			if done == 0 then
-				print "* {name} ({tests.length} tests)"
+				print "==== {name} | tests: {tests.length}"
 			end
 			return
 		end
 
-		line += "] {done}/{tests.length}"
+		if done < tests.length then
+			line += "] {done}/{tests.length}"
+		else
+			line += "] tests: {tests.length} "
+			if fails == 0 then
+				line += "OK".green.bold
+			else
+				line += "KO: {fails}".red.bold
+			end
+		end
 		printn "{line}"
 	end
 
