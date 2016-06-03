@@ -198,6 +198,9 @@ abstract class UnitTest
 	# The location where the error occurred, if it makes sense.
 	var error_location: nullable Location = null is writable
 
+	# Additional noteworthy information when a test success.
+	var info: nullable String = null
+
 	# A colorful `[OK]` or `[KO]`.
 	fun status_tag(color: nullable Bool): String do
 		color = color or else true
@@ -236,6 +239,10 @@ abstract class UnitTest
 		else
 			res = "{status_tag(color)} {full_name}"
 			if more_message != null then res += more_message
+			var info = self.info
+			if info != null then
+				res += "\n     {info}"
+			end
 		end
 		return res
 	end
