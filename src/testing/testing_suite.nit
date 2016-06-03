@@ -24,6 +24,8 @@ redef class ToolContext
 	var opt_file = new OptionString("Specify test suite location", "-t", "--target-file")
 	# --pattern
 	var opt_pattern = new OptionString("Only run test case with name that match pattern", "-p", "--pattern")
+	# --autosav
+	var opt_autosav = new OptionBool("Automatically create/update .res files for black box testing", "--autosav")
 end
 
 # Used to test nitunit test files.
@@ -269,7 +271,8 @@ class TestCase
 		var test_file = test_suite.test_file
 		var res_name = "{test_file}_{method_name.escape_to_c}"
 		var res = toolcontext.safe_exec("{test_file}.bin {method_name} > '{res_name}.out1' 2>&1 </dev/null")
-		self.raw_output = "{res_name}.out1".to_path.read_all
+		var raw_output = "{res_name}.out1".to_path.read_all
+		self.raw_output = raw_output
 		# set test case result
 		if res != 0 then
 			error = "Runtime Error in file {test_file}.nit"
@@ -287,7 +290,12 @@ class TestCase
 					var sav = savs.first
 					toolcontext.info("Diff output with {sav}", 1)
 					res = toolcontext.safe_exec("diff -u --label 'expected:{sav}' --label 'got:{res_name}.out1' '{sav}' '{res_name}.out1' > '{res_name}.diff' 2>&1 </dev/null")
-					if res != 0 then
+					if res == 0 then
+						# OK
+					else if toolcontext.opt_autosav.value then
+						raw_output.write_to_file(sav)
+						info = "Expected output updated: {sav} (--autoupdate)"
+					else
 						self.raw_output = "Diff\n" + "{res_name}.diff".to_path.read_all
 						error = "Difference with expected output: diff -u {sav} {res_name}.out1"
 						toolcontext.modelbuilder.failed_tests += 1
@@ -298,6 +306,12 @@ class TestCase
 					toolcontext.modelbuilder.failed_tests += 1
 				else if not raw_output.is_empty then
 					toolcontext.info("No diff: {tries.join(", ", " or ")} not found", 1)
+					if toolcontext.opt_autosav.value then
+						var sav = tries.first
+						sav.dirname.mkdir
+						raw_output.write_to_file(sav)
+						info = "Expected output saved: {sav} (--autoupdate)"
+					end
 				end
 			end
 		end
