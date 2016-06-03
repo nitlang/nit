@@ -244,7 +244,7 @@ class Nitiwiki
 	# Used to translate ids in beautiful page names.
 	fun pretty_name(name: String): String do
 		name = name.replace("_", " ")
-		name = name.capitalized
+		name = name.capitalized(keep_upper=true)
 		return name
 	end
 end
