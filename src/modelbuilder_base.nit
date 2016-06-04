@@ -348,6 +348,12 @@ class ModelBuilder
 		var name = qid.n_id.text
 		var qname = qid.full_name
 
+		if bad_class_names[mmodule].has(qname) then
+			error(qid, "Error: class `{qname}` not found in module `{mmodule}`.")
+			return
+		end
+		bad_class_names[mmodule].add(qname)
+
 		var all_classes = model.get_mclasses_by_name(name)
 		var hints = new Array[String]
 
@@ -403,6 +409,10 @@ class ModelBuilder
 
 		error(qid, "Error: class `{qname}` not found in module `{mmodule}`.")
 	end
+
+	# List of already reported bad class names.
+	# Used to not perform and repeat hints again and again.
+	private var bad_class_names = new MultiHashMap[MModule, String]
 
 	# Return the static type associated to the node `ntype`.
 	# `mmodule` and `mclassdef` is the context where the call is made (used to understand formal types)
