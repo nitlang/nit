@@ -178,7 +178,10 @@ if opt_tree.value then
 		var pa = mp.mgroup
 		while pa != null and not pa.is_interesting do pa = pa.parent
 		ot.add(pa, mp)
-		if pa != null then mgroups.add pa
+		while pa != null do
+			mgroups.add pa
+			pa = pa.parent
+		end
 	end
 	for g in mgroups do
 		var pa = g.parent
