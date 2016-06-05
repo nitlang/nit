@@ -4,3 +4,5 @@ base_simple3.nit project1
 -s base_simple3.nit project1
 -M base_simple3.nit base_simple_import.nit
 -td project1/module3.nit
+test_prog --no-color
+test_prog/game/excluded.nit test_prog/game/excluded_dir/more.nit -t --no-color

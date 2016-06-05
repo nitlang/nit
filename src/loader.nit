@@ -379,6 +379,13 @@ redef class ModelBuilder
 		var mgrouppath = path.join_path("..").simplify_path
 		var mgroup = identify_group(mgrouppath)
 
+		if mgroup != null then
+			var mpackage = mgroup.mpackage
+			if not mpackage.accept(path) then
+				mgroup = null
+				toolcontext.info("module `{path}` excluded from package `{mpackage}`", 2)
+			end
+		end
 		if mgroup == null then
 			# singleton package
 			var loc = new Location.opaque_file(path)
@@ -473,6 +480,13 @@ redef class ModelBuilder
 			if not stopper.file_exists then
 				# Recursively get the parent group
 				parent = identify_group(parentpath)
+				if parent != null then do
+					var mpackage = parent.mpackage
+					if not mpackage.accept(dirpath) then
+						toolcontext.info("directory `{dirpath}` excluded from package `{mpackage}`", 2)
+						parent = null
+					end
+				end
 				if parent == null then
 					# Parent is not a group, thus we are not a group either
 					mgroups[rdp] = null
@@ -1064,6 +1078,27 @@ redef class MPackage
 	#
 	# Some packages, like stand-alone packages or virtual packages have no `ini` file associated.
 	var ini: nullable ConfigTree = null
+
+	# Array of relative source paths excluded according to the `source.exclude` key of the `ini`
+	var excludes: nullable Array[String] is lazy do
+		var ini = self.ini
+		if ini == null then return null
+		var exclude = ini["source.exclude"]
+		if exclude == null then return null
+		var excludes = exclude.split(":")
+		return excludes
+	end
+
+	# Does the source inclusion/inclusion rules of the package `ini` accept such path?
+	fun accept(filepath: String): Bool
+	do
+		var excludes = self.excludes
+		if excludes != null then
+			var relpath = root.filepath.relpath(filepath)
+			if excludes.has(relpath) then return false
+		end
+		return true
+	end
 end
 
 redef class MGroup
