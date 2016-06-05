@@ -32,4 +32,8 @@ class TestTestSuite
 	fun test_baz do
 		print "Tested method"
 	end
+
+	fun test_sav_conflict do
+		print "Tested method"
+	end
 end
