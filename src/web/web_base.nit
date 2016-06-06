@@ -51,6 +51,42 @@ class ModelHandler
 	end
 end
 
+# Specific handler for nitweb API.
+abstract class APIHandler
+	super ModelHandler
+
+	# The JSON API does not filter anything by default.
+	#
+	# So we can cache the model view.
+	var view: ModelView is lazy do
+		var view = new ModelView(model)
+		view.min_visibility = private_visibility
+		view.include_fictive = true
+		view.include_empty_doc = true
+		view.include_attribute = true
+		view.include_test_suite = true
+		return view
+	end
+
+	# Try to load the mentity from uri with `/:id`.
+	#
+	# Send 400 if `:id` is null.
+	# Send 404 if no entity is found.
+	# Return null in both cases.
+	fun mentity_from_uri(req: HttpRequest, res: HttpResponse): nullable MEntity do
+		var id = req.param("id")
+		if id == null then
+			res.error 400
+			return null
+		end
+		var mentity = find_mentity(view, id)
+		if mentity == null then
+			res.error 404
+		end
+		return mentity
+	end
+end
+
 # A NitView is rendered by an action.
 interface NitView
 	# Renders this view and returns something that can be written to a HTTP response.
