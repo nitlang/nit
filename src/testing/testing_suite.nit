@@ -344,7 +344,7 @@ end
 
 redef class MClassDef
 	# Is the class a TestClass?
-	# i.e. begins with "Test"
+	# i.e. is a subclass of `TestSuite`
 	private fun is_test: Bool do
 		var in_hierarchy = self.in_hierarchy
 		if in_hierarchy == null then return false
