@@ -94,6 +94,7 @@
 				restrict: 'E',
 				scope: {
 					listEntities: '=',
+					listId: '@',
 					listTitle: '@',
 					listObjectFilter: '=',
 				},

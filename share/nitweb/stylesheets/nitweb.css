@@ -206,6 +206,14 @@ entity-list:hover .btn-filter {
 	margin-bottom: 0px;
 }
 /*
+ * Users
+ */
+
+.avatar {
+	border-radius: 2px;
+}
+
+/*
  * Code Highlighting
  */
 

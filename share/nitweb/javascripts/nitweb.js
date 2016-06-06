@@ -15,12 +15,14 @@
  */
 
 (function() {
-	angular.module('nitweb', ['ngRoute', 'ngSanitize', 'entities'])
+	angular.module('nitweb', ['ngRoute', 'ngSanitize', 'entities', 'index'])
 
 	.config(function($routeProvider, $locationProvider) {
 		$routeProvider
 			.when('/', {
-				templateUrl: 'views/index.html'
+				templateUrl: 'views/index.html',
+				controller: 'IndexCtrl',
+				controllerAs: 'indexCtrl'
 			})
 			.when('/package/:id', {
 				templateUrl: 'views/package.html',
