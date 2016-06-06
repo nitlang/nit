@@ -129,12 +129,12 @@ This flag can be used by libraries and program to prevent (or limit) the executi
 
 ## Working with `TestSuites`
 
-TestSuites are Nit files that define a set of `TestSuite`s for a particular
-module.
+TestSuites are Nit modules that define a set of TestCases.
 
-The test suite’s module must be called `test_` followed by the name of the
-module to test. So for the module `foo.nit` the test suite will be called
-`test_foo.nit`.
+A test suite is a module that uses the annotation `is test_suite`.
+
+It is common that a test suite focuses on testing a single module.
+In this case, the name of the test_suite is often `test_foo.nit` where `foo.nit` is the tested module.
 
 The structure of a test suite is the following:
 
@@ -320,9 +320,6 @@ Does not compile and run tests.
 Only run test case with name that match pattern.
 
 Examples: `TestFoo`, `TestFoo*`, `TestFoo::test_foo`, `TestFoo::test_foo*`, `test_foo`, `test_foo*`
-
-### `-t`, `--target-file`
-Specify test suite location.
 
 ### `--autosav`
 Automatically create/update .res files for black box testing.
