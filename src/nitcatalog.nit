@@ -561,10 +561,16 @@ end
 
 # Get files or groups
 var args = tc.option_context.rest
+var mmodules
 if opt_no_parse.value then
-	modelbuilder.scan_full(args)
+	mmodules = modelbuilder.scan_full(args)
 else
-	modelbuilder.parse_full(args)
+	mmodules = modelbuilder.parse_full(args)
+end
+var mpackages = new Set[MPackage]
+for m in mmodules do
+	var p = m.mpackage
+	if p != null then mpackages.add p
 end
 
 # Scan packages and compute information
@@ -586,7 +592,7 @@ for p in model.mpackages do
 	end
 end
 
-if not opt_no_git.value then for p in model.mpackages do
+if not opt_no_git.value then for p in mpackages do
 	catalog.git_info(p)
 end
 
@@ -703,7 +709,7 @@ css.write_to_file(out/"style.css")
 
 # PAGES
 
-for p in model.mpackages do
+for p in mpackages do
 	# print p
 	var f = "p/{p.name}.html"
 	catalog.package_page(p)
@@ -726,7 +732,7 @@ index.add catalog.list_best(catalog.score)
 if catalog.deps.not_empty then
 	index.add "<h2>Most Required</h2>\n"
 	var reqs = new Counter[MPackage]
-	for p in model.mpackages do
+	for p in mpackages do
 		reqs[p] = catalog.deps[p].smallers.length - 1
 	end
 	index.add catalog.list_best(reqs)
@@ -743,7 +749,7 @@ index.add """
 <div class="sidebar">
 <h3>Stats</h3>
 <ul class="box">
-<li>{{{model.mpackages.length}}} packages</li>
+<li>{{{mpackages.length}}} packages</li>
 <li>{{{catalog.maint2proj.length}}} maintainers</li>
 <li>{{{catalog.contrib2proj.length}}} contributors</li>
 <li>{{{catalog.tag2proj.length}}} tags</li>
@@ -775,6 +781,6 @@ page = catalog.new_page("")
 page.more_head.add "<title>Projets of Nit</title>"
 page.add """<div class="content">\n<h1>People of Nit</h1>\n"""
 page.add "<h2>Table of Projets</h2>\n"
-page.add catalog.table_packages(model.mpackages)
+page.add catalog.table_packages(mpackages.to_a)
 page.add "</div>\n"
 page.write_to_file(out/"table.html")
