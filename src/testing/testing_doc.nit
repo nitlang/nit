@@ -274,7 +274,7 @@ class NitUnitExecutor
 		if mmodule != null then
 			opts.add "-I {mmodule.filepath.dirname}"
 		end
-		var cmd = "{nitc} --ignore-visibility --no-color '{file}' {opts.join(" ")} >'{file}.out1' 2>&1 </dev/null -o '{file}.bin'"
+		var cmd = "{nitc} --ignore-visibility --no-color -q '{file}' {opts.join(" ")} >'{file}.out1' 2>&1 </dev/null -o '{file}.bin'"
 		var res = toolcontext.safe_exec(cmd)
 		return res
 	end

@@ -210,7 +210,7 @@ class TestSuite
 			return
 		end
 		var include_dir = module_file.filename.dirname
-		var cmd = "{nitc} --no-color '{file}.nit' -I {include_dir} -o '{file}.bin' > '{file}.out' 2>&1 </dev/null"
+		var cmd = "{nitc} --no-color -q '{file}.nit' -I {include_dir} -o '{file}.bin' > '{file}.out' 2>&1 </dev/null"
 		var res = toolcontext.safe_exec(cmd)
 		var f = new FileReader.open("{file}.out")
 		var msg = f.read_all
