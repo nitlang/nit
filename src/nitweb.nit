@@ -43,13 +43,30 @@ private class NitwebPhase
 		var model = mainmodule.model
 		var modelbuilder = toolcontext.modelbuilder
 
+		# Build catalog
+		var catalog = new Catalog(modelbuilder)
+		for mpackage in model.mpackages do
+			catalog.deps.add_node(mpackage)
+			for mgroup in mpackage.mgroups do
+				for mmodule in mgroup.mmodules do
+					for imported in mmodule.in_importation.direct_greaters do
+						var ip = imported.mpackage
+						if ip == null or ip == mpackage then continue
+						catalog.deps.add_edge(mpackage, ip)
+					end
+				end
+			end
+			catalog.git_info(mpackage)
+			catalog.package_page(mpackage)
+		end
+
 		# Run the server
 		var host = toolcontext.opt_host.value or else "localhost"
 		var port = toolcontext.opt_port.value
 
 		var app = new App
 
-		app.use("/api", new APIRouter(model, modelbuilder, mainmodule))
+		app.use("/api", new APIRouter(model, modelbuilder, mainmodule, catalog))
 		app.use("/doc/:namespace", new DocAction(model, mainmodule, modelbuilder))
 		app.use("/*", new StaticHandler(toolcontext.share_dir / "nitweb", "index.html"))
 
@@ -74,6 +91,7 @@ class APIRouter
 	var catalog: Catalog
 
 	init do
+		use("/catalog", new APICatalogRouter(model, mainmodule, catalog))
 		use("/list", new APIList(model, mainmodule))
 		use("/search", new APISearch(model, mainmodule))
 		use("/random", new APIRandom(model, mainmodule))
