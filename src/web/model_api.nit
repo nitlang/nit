@@ -18,29 +18,6 @@ import web_base
 import highlight
 import uml
 
-# Group all api handlers in one router.
-class APIRouter
-	super Router
-
-	# Model to pass to handlers.
-	var model: Model
-
-	# ModelBuilder to pass to handlers.
-	var modelbuilder: ModelBuilder
-
-	# Mainmodule to pass to handlers.
-	var mainmodule: MModule
-
-	init do
-		use("/list", new APIList(model, mainmodule))
-		use("/search", new APISearch(model, mainmodule))
-		use("/random", new APIRandom(model, mainmodule))
-		use("/entity/:id", new APIEntity(model, mainmodule))
-		use("/code/:id", new APIEntityCode(model, mainmodule, modelbuilder))
-		use("/uml/:id", new APIEntityUML(model, mainmodule))
-	end
-end
-
 # List all mentities.
 #
 # MEntities can be filtered on their kind using the `k` parameter.

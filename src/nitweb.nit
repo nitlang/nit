@@ -57,6 +57,32 @@ private class NitwebPhase
 	end
 end
 
+# Group all api handlers in one router.
+class APIRouter
+	super Router
+
+	# Model to pass to handlers.
+	var model: Model
+
+	# ModelBuilder to pass to handlers.
+	var modelbuilder: ModelBuilder
+
+	# Mainmodule to pass to handlers.
+	var mainmodule: MModule
+
+	# Catalog to pass to handlers.
+	var catalog: Catalog
+
+	init do
+		use("/list", new APIList(model, mainmodule))
+		use("/search", new APISearch(model, mainmodule))
+		use("/random", new APIRandom(model, mainmodule))
+		use("/entity/:id", new APIEntity(model, mainmodule))
+		use("/code/:id", new APIEntityCode(model, mainmodule, modelbuilder))
+		use("/uml/:id", new APIEntityUML(model, mainmodule))
+	end
+end
+
 # build toolcontext
 var toolcontext = new ToolContext
 var tpl = new Template
