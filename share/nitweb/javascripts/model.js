@@ -22,6 +22,7 @@
 
 		.factory('Model', [ '$http', function($http) {
 			return {
+
 				loadEntity: function(id, cb, cbErr) {
 					$http.get(apiUrl + '/entity/' + id)
 						.success(cb)
@@ -34,5 +35,39 @@
 						.error(cbErr);
 				}
 			};
+		}])
+
+		.factory('Catalog', [ '$http', function($http) {
+			return {
+				loadHightlighted: function(cb, cbErr) {
+					$http.get(apiUrl + '/catalog/highlighted')
+						.success(cb)
+						.error(cbErr);
+				},
+
+				loadMostRequired: function(cb, cbErr) {
+					$http.get(apiUrl + '/catalog/required')
+						.success(cb)
+						.error(cbErr);
+				},
+
+				loadByTags: function(cb, cbErr) {
+					$http.get(apiUrl + '/catalog/bytags')
+						.success(cb)
+						.error(cbErr);
+				},
+
+				loadStats: function(cb, cbErr) {
+					$http.get(apiUrl + '/catalog/stats')
+						.success(cb)
+						.error(cbErr);
+				},
+
+				loadContributors: function(cb, cbErr) {
+					$http.get(apiUrl + '/catalog/contributors')
+						.success(cb)
+						.error(cbErr);
+				},
+			}
 		}])
 })();
