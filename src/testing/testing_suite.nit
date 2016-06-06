@@ -20,8 +20,6 @@ import html
 private import annotation
 
 redef class ToolContext
-	# -- target-file
-	var opt_file = new OptionString("Specify test suite location", "-t", "--target-file")
 	# --pattern
 	var opt_pattern = new OptionString("Only run test case with name that match pattern", "-p", "--pattern")
 	# --autosav
