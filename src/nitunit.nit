@@ -92,7 +92,8 @@ end
 
 for m in mmodules do
 	page.add modelbuilder.test_markdown(m)
-	page.add modelbuilder.test_unit(m)
+	var ts = modelbuilder.test_unit(m)
+	if ts != null then page.add ts
 end
 
 var file = toolcontext.opt_output.value

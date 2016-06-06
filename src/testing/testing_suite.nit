@@ -34,20 +34,9 @@ class NitUnitTester
 	# `ModelBuilder` used to parse test files.
 	var mbuilder: ModelBuilder
 
-	# Parse a file and return the contained `MModule`.
-	private fun parse_module_unit(file: String): nullable MModule do
-		var mmodule = mbuilder.parse([file]).first
-		if mbuilder.get_mmodule_annotation("test_suite", mmodule) == null then return null
-		mbuilder.run_phases
-		return mmodule
-	end
-
-	# Compile and execute the test suite for a NitUnit `file`.
-	fun test_module_unit(file: String): nullable TestSuite do
+	# Compile and execute `mmodule` as a test suite.
+	fun test_module_unit(mmodule: MModule): TestSuite do
 		var toolcontext = mbuilder.toolcontext
-		var mmodule = parse_module_unit(file)
-		# is the module a test_suite?
-		if mmodule == null then return null
 		var suite = new TestSuite(mmodule, toolcontext)
 		# method to execute before all tests in the module
 		var before_module = mmodule.before_test
@@ -389,33 +378,14 @@ redef class ModelBuilder
 	# Number of failed tests.
 	var failed_tests = 0
 
-	# Run NitUnit test file for mmodule (if exists).
-	fun test_unit(mmodule: MModule): HTMLTag do
-		var ts = new HTMLTag("testsuite")
-		toolcontext.info("nitunit: test-suite test_{mmodule}", 2)
-		var f = toolcontext.opt_file.value
-		var test_file = "test_{mmodule.name}.nit"
-		if f != null then
-			test_file = f
-		else if not test_file.file_exists then
-			var module_file = mmodule.location.file
-			if module_file == null then
-				toolcontext.info("Skip test for {mmodule}, no file found", 2)
-				return ts
-			end
-			var include_dir = module_file.filename.dirname
-			test_file = "{include_dir}/{test_file}"
-		end
-		if not test_file.file_exists then
-			toolcontext.info("Skip test for {mmodule}, no file {test_file} found", 2)
-			return ts
-		end
+	# Run NitUnit test suite for `mmodule` (if it is one).
+	fun test_unit(mmodule: MModule): nullable HTMLTag do
+		# is the module a test_suite?
+		if get_mmodule_annotation("test_suite", mmodule) == null then return null
+		toolcontext.info("nitunit: test-suite {mmodule}", 2)
+
 		var tester = new NitUnitTester(self)
-		var res = tester.test_module_unit(test_file)
-		if res == null then
-			toolcontext.info("Skip test for {mmodule}, no test suite found", 2)
-			return ts
-		end
+		var res = tester.test_module_unit(mmodule)
 		return res.to_xml
 	end
 end
