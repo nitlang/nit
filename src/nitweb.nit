@@ -66,9 +66,11 @@ private class NitwebPhase
 
 		var app = new App
 
+		app.use_before("/*", new RequestClock)
 		app.use("/api", new APIRouter(model, modelbuilder, mainmodule, catalog))
 		app.use("/doc/:namespace", new DocAction(model, mainmodule, modelbuilder))
 		app.use("/*", new StaticHandler(toolcontext.share_dir / "nitweb", "index.html"))
+		app.use_after("/*", new ConsoleLog)
 
 		app.listen(host, port.to_i)
 	end
