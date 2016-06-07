@@ -24,7 +24,7 @@ import core
 
 # A request received over HTTP, is build by `HttpRequestParser`
 class HttpRequest
-	private init do end
+	private init is old_style_init do end
 
 	# HTTP protocol version
 	var http_version: String
@@ -114,6 +114,7 @@ class HttpRequestParser
 	# Words of the first line
 	private var first_line = new Array[String]
 
+	# Parse the `first_line`, `header_fields` and `body` of `full_request`.
 	fun parse_http_request(full_request: String): nullable HttpRequest
 	do
 		clear_data

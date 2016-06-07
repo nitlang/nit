@@ -20,6 +20,8 @@ module media_types
 
 # Map of known MIME types
 class MediaTypes
+
+	# MIME types by extensions.
 	protected var types = new HashMap[String, String]
 
 	# Get the type/subtype associated to a file extension `ext`
@@ -106,4 +108,5 @@ class MediaTypes
 	end
 end
 
+# MIME types list.
 fun media_types: MediaTypes do return once new MediaTypes
