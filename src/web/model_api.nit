@@ -120,6 +120,26 @@ class APIEntity
 	end
 end
 
+# Linearize super definitions of a MClassDef or a MPropDef if any.
+#
+# Example: `GET /entity/core::Array/linearization`
+class APIEntityLinearization
+	super APIHandler
+
+	redef fun get(req, res) do
+		var mentity = mentity_from_uri(req, res)
+		if mentity == null then
+			res.error 404
+			return
+		end
+		var lin = mentity.collect_linearization(mainmodule)
+		if lin == null then
+			res.error 404
+			return
+		end
+		res.json new JsonArray.from(lin)
+	end
+end
 
 # Return a UML representation of MEntity.
 #

@@ -100,6 +100,7 @@ class APIRouter
 		use("/entity/:id", new APIEntity(model, mainmodule))
 		use("/code/:id", new APIEntityCode(model, mainmodule, modelbuilder))
 		use("/uml/:id", new APIEntityUML(model, mainmodule))
+		use("/linearization/:id", new APIEntityLinearization(model, mainmodule))
 	end
 end
 

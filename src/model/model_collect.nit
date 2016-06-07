@@ -37,6 +37,11 @@ redef class MEntity
 	fun collect_modifiers: Array[String] do
 		return new Array[String]
 	end
+
+	# Collect `self` linearization anchored on `mainmodule`.
+	fun collect_linearization(mainmodule: MModule): nullable Array[MEntity] do
+		return null
+	end
 end
 
 redef class MPackage
@@ -162,6 +167,12 @@ end
 redef class MClass
 
 	redef fun collect_modifiers do return intro.collect_modifiers
+
+	redef fun collect_linearization(mainmodule) do
+		var mclassdefs = self.mclassdefs.to_a
+		mainmodule.linearize_mclassdefs(mclassdefs)
+		return mclassdefs
+	end
 
 	# Collect direct parents of `self` with `visibility >= to min_visibility`.
 	fun collect_parents(view: ModelView): Set[MClass] do
@@ -411,6 +422,15 @@ end
 
 redef class MClassDef
 
+	redef fun collect_linearization(mainmodule) do
+		var mclassdefs = new Array[MClassDef]
+		for mclassdef in in_hierarchy.as(not null).greaters do
+			if mclassdef.mclass == self.mclass then mclassdefs.add mclassdef
+		end
+		mainmodule.linearize_mclassdefs(mclassdefs)
+		return mclassdefs
+	end
+
 	# Collect mpropdefs in 'self' with `visibility >= min_visibility`.
 	fun collect_mpropdefs(view: ModelView): Set[MPropDef] do
 		var res = new HashSet[MPropDef]
@@ -457,6 +477,12 @@ end
 
 redef class MProperty
 	redef fun collect_modifiers do return intro.collect_modifiers
+
+	redef fun collect_linearization(mainmodule) do
+		var mpropdefs = self.mpropdefs.to_a
+		mainmodule.linearize_mpropdefs(mpropdefs)
+		return mpropdefs
+	end
 end
 
 redef class MPropDef
@@ -485,5 +511,17 @@ redef class MPropDef
 			res.add "var"
 		end
 		return res
+	end
+
+	redef fun collect_linearization(mainmodule) do
+		var mpropdefs = new Array[MPropDef]
+		var mentity = self
+		while not mentity.is_intro do
+			mpropdefs.add mentity
+			mentity = mentity.lookup_next_definition(mainmodule, mentity.mclassdef.bound_mtype)
+		end
+		mpropdefs.add mentity
+		mainmodule.linearize_mpropdefs(mpropdefs)
+		return mpropdefs
 	end
 end

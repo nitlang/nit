@@ -1,5 +1,4 @@
-<div class='container-fluid'>
-
+<div class='container-fluid' ng-init='entityCtrl.loadEntityLinearization()'>
 	<div class='page-header'>
 		<h2><entity-signature mentity='mentity'/></h2>
 		<entity-link mentity='mentity.mpackage' />
@@ -9,10 +8,24 @@
 	</div>
 
 	<ul class='nav nav-tabs'>
-		<li class='warning'>
+		<li role='presentation' class='warning'>
 			<a href='{{mentity.mproperty.web_url}}'>
 				<span class='glyphicon glyphicon-chevron-left'/> Go to property
 			</a>
 		</li>
+		<li role='presentation' class='active'>
+			<a data-toggle='tab' role='tab' data-target='#linearization' aria-controls='linearization'>
+				<span class='glyphicon glyphicon-arrow-down'/> Linearization
+			</a>
+		</li>
 	</ul>
+
+	<div class='tab-content'>
+		<div role='tabpanel' class='tab-pane fade in active' id='linearization'>
+			<entity-linearization
+				list-title='Class definitions'
+				list-entities='linearization'
+				list-focus='mentity' />
+		</div>
+	</div>
 </div>

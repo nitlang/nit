@@ -5,15 +5,20 @@
 	</div>
 
 	<ul class='nav nav-tabs'>
-		<li class='active'>
+		<li role='presentation' class='active'>
 			<a data-toggle='tab' data-target='#doc'>
 				<span class='glyphicon glyphicon-book'/> Doc
+			</a>
+		</li>
+		<li role='presentation'>
+			<a data-toggle='tab' role='tab' data-target='#linearization' aria-controls='linearization' ng-click='entityCtrl.loadEntityLinearization()'>
+				<span class='glyphicon glyphicon-arrow-down'/> Linearization
 			</a>
 		</li>
 	</ul>
 
 	<div class='tab-content'>
-		<div class='tab-pane fade in active' id='doc'>
+		<div role='tabpanel' class='tab-pane fade in active' id='doc'>
 			<entity-doc mentity='mentity.intro'/>
 
 			<entity-list list-title='Parents'
@@ -31,6 +36,12 @@
 			<entity-list list-title='Redefined properties'
 				list-entities='mentity.redef_mproperties'
 				list-object-filter='{is_init: "!true"}' />
+		</div>
+		<div role='tabpanel' class='tab-pane fade' id='linearization'>
+			<entity-linearization
+				list-title='Class definitions'
+				list-entities='linearization'
+				list-focus='mentity.intro' />
 		</div>
 	</div>
 </div>
