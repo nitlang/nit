@@ -28,6 +28,15 @@
 					});
 			};
 
+			this.loadEntityDefs = function() {
+				Model.loadEntityDefs($routeParams.id,
+					function(data) {
+						$scope.defs = data;
+					}, function(err) {
+						$scope.error = err;
+					});
+			};
+
 			this.loadEntityCode = function() {
 				Model.loadEntityCode($routeParams.id,
 					function(data) {
