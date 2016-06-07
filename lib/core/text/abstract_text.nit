@@ -590,10 +590,13 @@ abstract class Text
 		return res.to_s
 	end
 
-	# Escape " \ ' and non printable characters using the rules of literal C strings and characters
+	# Escape `"` `\` `'`, trigraphs and non printable characters using the rules of literal C strings and characters
 	#
-	#     assert "abAB12<>&".escape_to_c         == "abAB12<>&"
+	#     assert "abAB12<>&".escape_to_c       == "abAB12<>&"
 	#     assert "\n\"'\\".escape_to_c         == "\\n\\\"\\'\\\\"
+	#     assert "allo???!".escape_to_c        == "allo??\\?!"
+	#     assert "??=??/??'??(??)".escape_to_c == "?\\?=?\\?/??\\'?\\?(?\\?)"
+	#     assert "??!??<??>??-".escape_to_c    == "?\\?!?\\?<?\\?>?\\?-"
 	#
 	# Most non-printable characters (bellow ASCII 32) are escaped to an octal form `\nnn`.
 	# Three digits are always used to avoid following digits to be interpreted as an element
@@ -617,6 +620,24 @@ abstract class Text
 				b.append("\\\'")
 			else if c == '\\' then
 				b.append("\\\\")
+			else if c == '?' then
+				# Escape if it is the last question mark of a ANSI C trigraph.
+				var j = i + 1
+				if j < length then
+					var next = chars[j]
+					# We ignore `??'` because it will be escaped as `??\'`.
+					if
+						next == '!' or
+						next == '(' or
+						next == ')' or
+						next == '-' or
+						next == '/' or
+						next == '<' or
+						next == '=' or
+						next == '>'
+					then b.add('\\')
+				end
+				b.add('?')
 			else if c.code_point < 32 then
 				b.add('\\')
 				var oct = c.code_point.to_base(8)
@@ -640,6 +661,7 @@ abstract class Text
 	# The result might no be legal in C but be used in other languages
 	#
 	#     assert "ab|\{\}".escape_more_to_c("|\{\}") == "ab\\|\\\{\\\}"
+	#     assert "allo???!".escape_more_to_c("")     == "allo??\\?!"
 	fun escape_more_to_c(chars: String): String
 	do
 		var b = new Buffer

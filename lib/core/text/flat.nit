@@ -225,6 +225,22 @@ redef class FlatText
 				req_esc += 1
 			else if c == 0x5Cu8 then
 				req_esc += 1
+			else if c == 0x3Fu8 then
+				var j = pos + 1
+				if j < length then
+					var next = its[j]
+					# We ignore `??'` because it will be escaped as `??\'`.
+					if
+						next == 0x21u8 or
+						next == 0x28u8 or
+						next == 0x29u8 or
+						next == 0x2Du8 or
+						next == 0x2Fu8 or
+						next == 0x3Cu8 or
+						next == 0x3Du8 or
+						next == 0x3Eu8
+					then req_esc += 1
+				end
 			else if c < 32u8 then
 				req_esc += 3
 			end
@@ -280,6 +296,27 @@ redef class FlatText
 				nns[opos] = 0x5Cu8
 				nns[opos + 1] = 0x5Cu8
 				opos += 2
+			else if c == 0x3Fu8 then
+				var j = pos + 1
+				if j < length then
+					var next = its[j]
+					# We ignore `??'` because it will be escaped as `??\'`.
+					if
+						next == 0x21u8 or
+						next == 0x28u8 or
+						next == 0x29u8 or
+						next == 0x2Du8 or
+						next == 0x2Fu8 or
+						next == 0x3Cu8 or
+						next == 0x3Du8 or
+						next == 0x3Eu8
+					then
+						nns[opos] = 0x5Cu8
+						opos += 1
+					end
+				end
+				nns[opos] = 0x3Fu8
+				opos += 1
 			else if c < 32u8 then
 				nns[opos] = 0x5Cu8
 				nns[opos + 1] = 0x30u8
