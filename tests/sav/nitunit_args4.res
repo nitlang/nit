@@ -19,4 +19,4 @@ end
 </system-out></testcase><testcase classname="nitunit.test_nitunit2::test_nitunit2.core::Sys" name="test_nitunit2::test_nitunit2::Sys::foo3"><system-err></system-err><system-out>var a = 1
 assert a == 1
 assert a == 1
-</system-out></testcase></testsuite><testsuite></testsuite></testsuites>
+</system-out></testcase></testsuite></testsuites>

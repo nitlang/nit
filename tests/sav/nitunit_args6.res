@@ -19,4 +19,4 @@ Test suites: Classes: 0; Test Cases: 0
 assert true
 </system-out></testcase><testcase classname="nitunit.test_nitunit3&gt;" name="&lt;group&gt;#2"><failure>Syntax Error: unexpected malformed character &#39;\].</failure><system-out>;&#39;\][]
 </system-out></testcase></testsuite><testsuite package="test_nitunit3::test_nitunit3"><testcase classname="nitunit.test_nitunit3::test_nitunit3.&lt;module&gt;" name="&lt;module&gt;"><system-err></system-err><system-out>assert true
-</system-out></testcase></testsuite><testsuite></testsuite></testsuites>
+</system-out></testcase></testsuite></testsuites>

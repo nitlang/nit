@@ -28,11 +28,14 @@
 	After Test
 
 
+==== Test-suite of module test_nitunit4::test_nitunit4_base | tests: 0
+==== Test-suite of module test_nitunit4::test_nitunit4_base | tests: 0
+
 Docunits: Entities: 13; Documented ones: 0; With nitunits: 0
-Test suites: Classes: 1; Test Cases: 4; Failures: 3
+Test suites: Classes: 2; Test Cases: 4; Failures: 3
 [FAILURE] 3/4 tests failed.
 `nitunit.out` is not removed for investigation.
-<testsuites><testsuite package="test_nitunit4&gt;"></testsuite><testsuite package="test_nitunit4::nitunit4"></testsuite><testsuite package="test_nitunit4"><testcase classname="nitunit.test_nitunit4::test_nitunit4.test_nitunit4::TestTestSuite" name="test_nitunit4::TestTestSuite::test_foo"><error>Runtime Error in file nitunit.out&#47;gen_test_nitunit4.nit</error><system-err>Before Test
+<testsuites><testsuite package="test_nitunit4&gt;"></testsuite><testsuite package="test_nitunit4::nitunit4"></testsuite><testsuite package="test_nitunit4::test_nitunit4"></testsuite><testsuite package="test_nitunit4"><testcase classname="nitunit.test_nitunit4::test_nitunit4.test_nitunit4::TestTestSuite" name="test_nitunit4::TestTestSuite::test_foo"><error>Runtime Error in file nitunit.out&#47;gen_test_nitunit4.nit</error><system-err>Before Test
 Tested method
 After Test
 Runtime error: Assert failed (test_nitunit4&#47;test_nitunit4_base.nit:31)
@@ -50,4 +53,4 @@ After Test
 </system-err></testcase><testcase classname="nitunit.test_nitunit4::test_nitunit4.test_nitunit4::TestTestSuite" name="test_nitunit4::TestTestSuite::test_sav_conflict"><error>Conflicting expected output: test_nitunit4&#47;test_nitunit4.sav&#47;test_sav_conflict.res, test_nitunit4&#47;sav&#47;test_sav_conflict.res and test_nitunit4&#47;test_sav_conflict.res all exist</error><system-err>Before Test
 Tested method
 After Test
-</system-err></testcase></testsuite><testsuite package="test_nitunit4::test_nitunit4"></testsuite><testsuite></testsuite><testsuite package="test_nitunit4::test_nitunit4_base"></testsuite><testsuite></testsuite></testsuites>
+</system-err></testcase></testsuite><testsuite package="test_nitunit4::test_nitunit4_base"></testsuite><testsuite package="test_nitunit4_base"></testsuite></testsuites>

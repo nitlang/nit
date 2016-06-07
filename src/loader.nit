@@ -700,7 +700,7 @@ redef class ModelBuilder
 		if decl != null then
 			var decl_name = decl.n_name.n_id.text
 			if decl_name != mmodule.name then
-				error(decl.n_name, "Error: module name mismatch; declared {decl_name} file named {mmodule.name}.")
+				warning(decl.n_name, "module-name-mismatch", "Error: module name mismatch; declared {decl_name} file named {mmodule.name}.")
 			end
 		end
 

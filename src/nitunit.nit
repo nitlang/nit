@@ -20,7 +20,7 @@ import testing
 
 var toolcontext = new ToolContext
 
-toolcontext.option_context.add_option(toolcontext.opt_full, toolcontext.opt_output, toolcontext.opt_dir, toolcontext.opt_noact, toolcontext.opt_pattern, toolcontext.opt_file, toolcontext.opt_autosav, toolcontext.opt_gen_unit, toolcontext.opt_gen_force, toolcontext.opt_gen_private, toolcontext.opt_gen_show, toolcontext.opt_nitc)
+toolcontext.option_context.add_option(toolcontext.opt_full, toolcontext.opt_output, toolcontext.opt_dir, toolcontext.opt_noact, toolcontext.opt_pattern, toolcontext.opt_autosav, toolcontext.opt_gen_unit, toolcontext.opt_gen_force, toolcontext.opt_gen_private, toolcontext.opt_gen_show, toolcontext.opt_nitc)
 toolcontext.tooldescription = "Usage: nitunit [OPTION]... <file.nit>...\nExecutes the unit tests from Nit source files."
 
 toolcontext.process_options(args)
@@ -29,10 +29,6 @@ var args = toolcontext.option_context.rest
 if toolcontext.opt_gen_unit.value then
 	if toolcontext.opt_pattern.value != null then
 		print "Option --pattern cannot be used with --gen-suite"
-		exit(0)
-	end
-	if toolcontext.opt_file.value != null then
-		print "Option --target-file cannot be used with --gen-suite"
 		exit(0)
 	end
 else
@@ -92,7 +88,8 @@ end
 
 for m in mmodules do
 	page.add modelbuilder.test_markdown(m)
-	page.add modelbuilder.test_unit(m)
+	var ts = modelbuilder.test_unit(m)
+	if ts != null then page.add ts
 end
 
 var file = toolcontext.opt_output.value
