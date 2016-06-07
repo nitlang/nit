@@ -10,6 +10,11 @@
 				<span class='glyphicon glyphicon-book'/> Doc
 			</a>
 		</li>
+		<li>
+			<a data-toggle='tab' data-target='#code' ng-click="entityCtrl.loadEntityCode()">
+				<span class='glyphicon glyphicon-console'/> Code
+			</a>
+		</li>
 	</ul>
 
 	<div class='tab-content'>
@@ -25,6 +30,14 @@
 			<entity-list list-title='Class redefinitions' list-entities='mentity.redef_mclassdefs'
 				list-object-filter='{}' />
 
+		</div>
+		<div class='tab-pane fade' id='code'>
+			<div class='card'>
+				<div class='card-body'>
+					<pre ng-bind-html='code' />
+					<entity-location mentity='mentity' />
+				</div>
+			</div>
 		</div>
 	</div>
 </div>
