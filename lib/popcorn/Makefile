@@ -17,8 +17,4 @@
 NITUNIT=../../bin/nitunit
 
 check:
-	$(NITUNIT) README.md
-	$(NITUNIT) pop_routes.nit
-	$(NITUNIT) pop_handlers.nit
-	$(NITUNIT) popcorn.nit
-	cd tests; make check
+	$(NITUNIT) .
