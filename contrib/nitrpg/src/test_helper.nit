@@ -15,7 +15,7 @@
 # limitations under the License.
 
 # Test tools for NitRPG.
-module test_helper is test_suite
+module test_helper
 
 import test_suite
 import game
