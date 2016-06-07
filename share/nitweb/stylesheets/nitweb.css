@@ -77,6 +77,9 @@ a {
 
 /* ui */
 
+.btn-bar { margin-top: -5px; float: right }
+.btn-bar .btn { padding: 5px 10px; }
+
 entity-list .btn-filter {
 	visibility: hidden;
 }

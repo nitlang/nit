@@ -20,7 +20,18 @@
 			<span ng-if='!definition.mclassdef'>
 				in <entity-link mentity='definition.mmodule' />
 			</span>
+			<div class='btn-bar'>
+				<button class='btn btn-link' aria-expanded='false'
+					data-target='#{{codeId}}' ng-click='loadCardCode()'
+					aria-controls='{{codeId}}'>
+					<span class='glyphicon glyphicon-console'
+					title='Show code' />
+				</button>
+			</div>
 		</h5>
+		<div id='{{codeId}}' class='collapse'>
+			<pre ng-bind-html='code' />
+		</div>
 		<entity-location mentity='definition' />
 	</div>
 </div>
