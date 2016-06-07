@@ -1,0 +1,26 @@
+<div class='card card-xl' ng-class='{active: focus.full_name == definition.full_name}'>
+	<div class='card-body'>
+		<h5 class='text-muted'>
+			<span ng-if='definition.is_intro'>
+				<span class='glyphicon glyphicon-plus' /> Introduction</span>
+			</span>
+			<span ng-if='!definition.is_intro'>
+				<span class='glyphicon glyphicon-asterisk' /> Redefinition</span>
+			</span>
+			<span ng-if='definition.mclass'>
+				of <entity-link mentity='definition.mclass' />
+			</span>
+			<span ng-if='definition.mproperty'>
+				of <entity-link mentity='definition.mproperty' />
+			</span>
+			<span ng-if='definition.mclassdef'>
+				in <entity-link mentity='definition.mmodule' />
+				:: <entity-link mentity='definition.mclassdef' />
+			</span>
+			<span ng-if='!definition.mclassdef'>
+				in <entity-link mentity='definition.mmodule' />
+			</span>
+		</h5>
+		<entity-location mentity='definition' />
+	</div>
+</div>

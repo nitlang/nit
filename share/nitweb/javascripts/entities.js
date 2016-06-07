@@ -126,4 +126,43 @@
 				}
 			};
 		})
+
+		.directive('entityLinearization', function() {
+			return {
+				restrict: 'E',
+				scope: {
+					listEntities: '=',
+					listTitle: '@',
+					listFocus: '='
+				},
+				templateUrl: '/directives/entity/linearization.html'
+			};
+		})
+
+		.directive('entityDef', ['Model', function(Model, Code) {
+			return {
+				restrict: 'E',
+				scope: {
+					definition: '=',
+					focus: '='
+				},
+				link: function ($scope, element, attrs) {
+					$scope.$watch("definition", function() {
+						/*.loadEntityDefs($scope.definition.full_name,
+							function(data) {
+								$scope.mentity = data;
+							}, function(err) {
+								$scope.error = err;
+							});
+						Model.loadEntityCode($scope.definition.full_name,
+							function(data) {
+								$scope.code = data;
+							}, function(err) {
+								$scope.error = err;
+							});*/
+					});
+				},
+				templateUrl: '/directives/entity/defcard.html'
+			};
+		}])
 })();

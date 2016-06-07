@@ -1,0 +1,11 @@
+<div class='entity-list' ng-if='listEntities.length'>
+	<h3>{{listTitle}}</h3>
+	<div class='card-list'>
+		<div ng-repeat='def in listEntities'>
+			<entity-def definition='def' focus='listFocus' />
+			<h4 ng-if='!$last' class='text-muted text-center'>
+				<span class='glyphicon glyphicon-chevron-up'></span>
+			</h4>
+		</div>
+	</div>
+</div>
