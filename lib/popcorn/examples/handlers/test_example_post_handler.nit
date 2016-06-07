@@ -14,7 +14,26 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-NITUNIT=../../bin/nitunit
+module test_example_post_handler is test_suite
 
-check:
-	$(NITUNIT) .
+import pop_tests
+import example_post_handler
+
+class TestExampleQueryString
+	super TestPopcorn
+
+	redef fun client_test do
+		system "curl -s {host}:{port}/ -X POST"
+		system "curl -s {host}:{port}/ --data 'user'"
+		system "curl -s {host}:{port}/ --data 'user=Morriar'"
+		system "curl -s {host}:{port}/ --data 'user=\&order=desc'"
+		system "curl -s {host}:{port}/ --data 'user=Morriar\&order=desc'"
+		system "curl -s {host}:{port}/"
+	end
+
+	fun test_example_glob_route do
+		var app = new App
+		app.use("/", new PostHandler)
+		run_test(app)
+	end
+end

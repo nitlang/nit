@@ -14,7 +14,25 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-NITUNIT=../../bin/nitunit
+module test_example_param_route is test_suite
 
-check:
-	$(NITUNIT) .
+import pop_tests
+import example_param_route
+
+class TestExampleParamRoute
+	super TestPopcorn
+
+	redef fun client_test do
+		system "curl -s {host}:{port}/Morriar"
+		system "curl -s {host}:{port}//"
+		system "curl -s {host}:{port}/"
+		system "curl -s {host}:{port}/not_found"
+		system "curl -s {host}:{port}/not_found/not_found"
+	end
+
+	fun test_example_param_route do
+		var app = new App
+		app.use("/:user", new UserHome)
+		run_test(app)
+	end
+end

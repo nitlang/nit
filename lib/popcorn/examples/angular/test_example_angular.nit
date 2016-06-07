@@ -14,7 +14,25 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-NITUNIT=../../bin/nitunit
+module test_example_angular is test_suite
 
-check:
-	$(NITUNIT) .
+import pop_tests
+import example_angular
+
+class TestExampleAngular
+	super TestPopcorn
+
+	redef fun client_test do
+		system "curl -s {host}:{port}/counter"
+		system "curl -s {host}:{port}/counter -X POST"
+		system "curl -s {host}:{port}/counter"
+		system "curl -s {host}:{port}/not_found" # handled by angular controller
+	end
+
+	fun test_example_param_route do
+		var app = new App
+		app.use("/counter", new CounterAPI)
+		app.use("/*", new StaticHandler("../examples/angular/www/", "index.html"))
+		run_test(app)
+	end
+end

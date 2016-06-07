@@ -14,7 +14,25 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-NITUNIT=../../bin/nitunit
+module test_example_hello is test_suite
 
-check:
-	$(NITUNIT) .
+import pop_tests
+import example_hello
+
+class TestExampleHello
+	super TestPopcorn
+
+	redef fun client_test do
+		system "curl -s {host}:{port}"
+		system "curl -s {host}:{port}/"
+		system "curl -s {host}:{port}///////////"
+		system "curl -s {host}:{port}/not_found"
+		system "curl -s {host}:{port}/not_found/not_found"
+	end
+
+	fun test_example_hello do
+		var app = new App
+		app.use("/", new HelloHandler)
+		run_test(app)
+	end
+end
