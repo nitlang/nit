@@ -129,18 +129,25 @@ This flag can be used by libraries and program to prevent (or limit) the executi
 
 ## Working with `TestSuites`
 
-TestSuites are Nit files that define a set of TestCases for a particular module.
+TestSuites are Nit files that define a set of `TestSuite`s for a particular
+module.
 
-The test suite must be called `test_` followed by the name of the module to test.
-So for the module `foo.nit` the test suite will be called `test_foo.nit`.
+The test suite’s module must be called `test_` followed by the name of the
+module to test. So for the module `foo.nit` the test suite will be called
+`test_foo.nit`.
 
 The structure of a test suite is the following:
 
 ~~~~
 # test suite for module `foo`
-module test_foo
+module test_foo is test_suite
+
+import test_suite
 import foo # can be intrude to test private things
+
 class TestFoo
+	super TestSuite
+
     # test case for `foo::Foo::baz`
     fun test_baz do
         var subject = new Foo
@@ -153,11 +160,13 @@ Test suite can be executed using the same `nitunit` command:
 
     $ nitunit foo.nit
 
-`nitunit` will execute a test for each method named `test_*` in a class named `Test*`
-so multiple tests can be executed for a single method:
+`nitunit` will execute a test for each method named `test_*` in a class
+subclassing `TestSuite` so multiple tests can be executed for a single method:
 
 ~~~~
 class TestFoo
+	super TestSuite
+
     fun test_baz_1 do
         var subject = new Foo
         assert subject.baz(1, 2) == 3
@@ -196,7 +205,10 @@ The test is failed if non-zero is returned by `diff`.
 
 ~~~
 module test_mod is test_suite
+
 class TestFoo
+	super TestSuite
+
 	fun test_bar do
 		print "Hello!"
 	end
@@ -216,13 +228,14 @@ To helps the management of the expected results, the option `--autosav` can be u
 
 ## Configuring TestSuites
 
-`TestSuites` also provide methods to configure the test run:
+`TestSuite`s also provide methods to configure the test run:
 
 `before_test` and `after_test`: methods called before/after each test case.
 They can be used to factorize repetitive tasks:
 
 ~~~~
 class TestFoo
+	super TestSuite
     var subject: Foo
     # Mandatory empty init
     init do end
