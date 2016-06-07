@@ -5,14 +5,19 @@
 	</div>
 
 	<ul class='nav nav-tabs'>
-		<li class='active'>
+		<li role='presentation' class='active'>
 			<a data-toggle='tab' data-target='#doc'>
 				<span class='glyphicon glyphicon-book'/> Doc
 			</a>
 		</li>
-		<li>
+		<li role='presentation'>
 			<a data-toggle='tab' data-target='#code' ng-click="entityCtrl.loadEntityCode()">
 				<span class='glyphicon glyphicon-console'/> Code
+			</a>
+		</li>
+		<li role='presentation'>
+			<a data-toggle='tab' data-target='#defs' ng-click="entityCtrl.loadEntityDefs()">
+				<span class='glyphicon glyphicon-asterisk'/> Class definitions
 			</a>
 		</li>
 	</ul>
@@ -38,6 +43,10 @@
 					<entity-location mentity='mentity' />
 				</div>
 			</div>
+		</div>
+		<div role='tabpanel' class='tab-pane fade' id='defs'>
+			<entity-list list-title='Class definitions' list-entities='defs'
+				list-object-filter='{}' />
 		</div>
 	</div>
 </div>
