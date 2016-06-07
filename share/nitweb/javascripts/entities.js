@@ -19,6 +19,15 @@
 		.module('entities', ['ui', 'model'])
 
 		.controller('EntityCtrl', ['Model', '$routeParams', '$scope', function(Model, $routeParams, $scope) {
+			this.loadEntityLinearization = function() {
+				Model.loadEntityLinearization($routeParams.id,
+					function(data) {
+						$scope.linearization = data;
+					}, function(err) {
+						$scope.error = err;
+					});
+			};
+
 			Model.loadEntity($routeParams.id,
 				function(data) {
 					$scope.mentity = data;
