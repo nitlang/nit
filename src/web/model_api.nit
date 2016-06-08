@@ -120,6 +120,22 @@ class APIEntity
 	end
 end
 
+# List ancestors, parents, child and descendants of MEntity
+#
+# Example: `GET /entity/core::Array/inheritance`
+class APIEntityInheritance
+	super APIHandler
+
+	redef fun get(req, res) do
+		var mentity = mentity_from_uri(req, res)
+		if mentity == null then
+			res.error 404
+			return
+		end
+		res.json mentity.hierarchy_poset(view)[mentity]
+	end
+end
+
 # Linearize super definitions of a MClassDef or a MPropDef if any.
 #
 # Example: `GET /entity/core::Array/linearization`

@@ -241,3 +241,20 @@ end
 redef class MVirtualType
 	redef var web_url = mproperty.web_url is lazy
 end
+
+redef class POSetElement[E]
+	super Jsonable
+
+	# Return JSON representation of `self`.
+	fun json: JsonObject do
+		assert self isa POSetElement[MEntity]
+		var obj = new JsonObject
+		obj["greaters"] = to_mentity_refs(greaters)
+		obj["direct_greaters"] = to_mentity_refs(direct_greaters)
+		obj["direct_smallers"] = to_mentity_refs(direct_smallers)
+		obj["smallers"] = to_mentity_refs(smallers)
+		return obj
+	end
+
+	redef fun to_json do return json.to_json
+end
