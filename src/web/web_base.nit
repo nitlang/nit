@@ -178,8 +178,7 @@ redef class MClass
 		obj["all_mproperties"] = to_mentity_refs(collect_accessible_mproperties(private_view))
 		obj["intro_mproperties"] = to_mentity_refs(collect_intro_mproperties(private_view))
 		obj["redef_mproperties"] = to_mentity_refs(collect_redef_mproperties(private_view))
-		var poset = hierarchy_poset(handler.mainmodule, private_view)
-		obj["parents"] = to_mentity_refs(poset[self].direct_greaters)
+		obj["parents"] = to_mentity_refs(collect_parents(private_view))
 		return obj
 	end
 end

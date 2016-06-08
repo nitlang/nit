@@ -33,6 +33,9 @@ import model_views
 
 redef class MEntity
 
+	# FIXME used to bypass RTA limitation on type resolution.
+	type MENTITY: SELF
+
 	# Collect modifier keywords like `redef`, `private` etc.
 	fun collect_modifiers: Array[String] do
 		return new Array[String]
@@ -42,6 +45,85 @@ redef class MEntity
 	fun collect_linearization(mainmodule: MModule): nullable Array[MEntity] do
 		return null
 	end
+
+	# Collect `self` ancestors (direct and indirect).
+	#
+	# The concept of ancestor is abstract at this stage.
+	fun collect_ancestors(view: ModelView): Set[MENTITY] do
+		var done = new HashSet[MENTITY]
+		var todo = new Array[MENTITY]
+
+		todo.add_all collect_parents(view)
+		while todo.not_empty do
+			var mentity = todo.pop
+			if mentity == self or done.has(mentity) then continue
+			print "{mentity} == {self}"
+			done.add mentity
+			todo.add_all mentity.collect_parents(view)
+		end
+		return done
+	end
+
+	# Collect `self` parents (direct ancestors).
+	#
+	# The concept of parent is abstract at this stage.
+	fun collect_parents(view: ModelView): Set[MENTITY] is abstract
+
+	# Collect `self` children (direct descendants).
+	#
+	# The concept of child is abstract at this stage.
+	fun collect_children(view: ModelView): Set[MENTITY] is abstract
+
+	# Collect `self` descendants (direct and direct).
+	#
+	# The concept of descendant is abstract at this stage.
+	fun collect_descendants(view: ModelView): Set[MENTITY] do
+		var done = new HashSet[MENTITY]
+		var todo = new Array[MENTITY]
+
+		todo.add_all collect_children(view)
+		while todo.not_empty do
+			var mentity = todo.pop
+			if mentity == self or done.has(mentity) then continue
+			done.add mentity
+			todo.add_all mentity.collect_children(view)
+		end
+		return done
+	end
+
+	# Build a poset representing `self` in it's own hierarchy.
+	#
+	# The notion of hierarchy depends on the type of MEntity.
+	#
+	# Here a recap:
+	# * MPackage: package dependencies
+	# * MGroup: group dependencies
+	# * MModule: modules imports
+	# * MClass: class inheritance (all classdefs flattened)
+	# * MClassDef: classdef inheritance
+	# * MProperty: property definitions graph (all propdefs flattened)
+	# * MPropDef: property definitions graph
+	fun hierarchy_poset(view: ModelView): POSet[MENTITY] do
+		var done = new HashSet[MENTITY]
+		var mentities = new Array[MENTITY]
+		mentities.add self
+		var poset = new POSet[MENTITY]
+		while mentities.not_empty do
+			var mentity = mentities.pop
+			if done.has(mentity) then continue
+			done.add mentity
+			poset.add_node mentity
+			for parent in mentity.collect_parents(view) do
+				poset.add_edge(mentity, parent)
+				mentities.add parent
+			end
+			for child in mentity.collect_children(view) do
+				poset.add_edge(child, mentity)
+				mentities.add child
+			end
+		end
+		return poset
+	end
 end
 
 redef class MPackage
@@ -50,12 +132,58 @@ redef class MPackage
 		res.add "package"
 		return res
 	end
+
+	# `MPackage` parents are its direct dependencies.
+	redef fun collect_parents(view) do
+		var res = new HashSet[MENTITY]
+		for mgroup in mgroups do
+			for parent in mgroup.collect_parents(view) do
+				var mpackage = parent.mpackage
+				if mpackage == self or not view.accept_mentity(mpackage) then continue
+				res.add(mpackage)
+			end
+		end
+		return res
+	end
+
+	# `MPackage` children are packages that directly depends on `self`.
+	redef fun collect_children(view) do
+		var res = new HashSet[MENTITY]
+		for mpackage in view.mpackages do
+			if mpackage.collect_parents(view).has(self) then res.add mpackage
+		end
+		return res
+	end
 end
 
 redef class MGroup
 	redef fun collect_modifiers do
 		var res = super
 		res.add "group"
+		return res
+	end
+
+	# `MGroup` parents are its direct dependencies.
+	redef fun collect_parents(view) do
+		var res = new HashSet[MENTITY]
+		for mmodule in mmodules do
+			for parent in mmodule.collect_parents(view) do
+				var mgroup = parent.mgroup
+				if mgroup == null or mgroup == self then continue
+				if not view.accept_mentity(mgroup) then continue
+				res.add(mgroup)
+			end
+		end
+		return res
+	end
+
+	# `MGroup` children are mgroups that directly depends on `self`.
+	redef fun collect_children(view) do
+		var res = new HashSet[MENTITY]
+		for mgroup in view.mgroups do
+			if mgroup == self or not view.accept_mentity(mgroup) then continue
+			if mgroup.collect_parents(view).has(self) then res.add mgroup
+		end
 		return res
 	end
 end
@@ -68,9 +196,9 @@ redef class MModule
 		return res
 	end
 
-	# Collect all transitive imports.
-	fun collect_ancestors(view: ModelView): Set[MModule] do
-		var res = new HashSet[MModule]
+	# `MModule` ancestors are all its transitive imports.
+	redef fun collect_ancestors(view) do
+		var res = new HashSet[MENTITY]
 		for mentity in in_importation.greaters do
 			if mentity == self then continue
 			if not view.accept_mentity(mentity) then continue
@@ -79,9 +207,9 @@ redef class MModule
 		return res
 	end
 
-	# Collect direct imports.
-	fun collect_parents(view: ModelView): Set[MModule] do
-		var res = new HashSet[MModule]
+	# `MModule` parents are all its direct imports.
+	redef fun collect_parents(view) do
+		var res = new HashSet[MENTITY]
 		for mentity in in_importation.direct_greaters do
 			if mentity == self then continue
 			if not view.accept_mentity(mentity) then continue
@@ -90,9 +218,9 @@ redef class MModule
 		return res
 	end
 
-	# Collect direct children (modules that directly import `self`).
-	fun collect_children(view: ModelView): Set[MModule] do
-		var res = new HashSet[MModule]
+	# `MModule` children are modules that directly import `self`.
+	redef fun collect_children(view) do
+		var res = new HashSet[MENTITY]
 		for mentity in in_importation.direct_smallers do
 			if mentity == self then continue
 			if not view.accept_mentity(mentity) then continue
@@ -101,24 +229,15 @@ redef class MModule
 		return res
 	end
 
-	# Collect all transitive children.
-	fun collect_descendants(view: ModelView): Set[MModule] do
-		var res = new HashSet[MModule]
+	# `MModule` children are modules that transitively import `self`.
+	redef fun collect_descendants(view) do
+		var res = new HashSet[MENTITY]
 		for mentity in in_importation.smallers do
 			if mentity == self then continue
 			if not view.accept_mentity(mentity) then continue
 			res.add mentity
 		end
 		return res
-	end
-
-	# Build the importation poset for `self`
-	fun importation_poset(view: ModelView): POSet[MModule] do
-		var mmodules = new HashSet[MModule]
-		mmodules.add self
-		mmodules.add_all collect_ancestors(view)
-		mmodules.add_all collect_descendants(view)
-		return view.mmodules_poset(mmodules)
 	end
 
 	# Collect mclassdefs introduced in `self` with `visibility >= to min_visibility`.
@@ -174,68 +293,46 @@ redef class MClass
 		return mclassdefs
 	end
 
-	# Collect direct parents of `self` with `visibility >= to min_visibility`.
-	fun collect_parents(view: ModelView): Set[MClass] do
-		var res = new HashSet[MClass]
+	# `MClass` parents are the direct parents of `self`.
+	#
+	# This method uses a flattened hierarchy containing all the mclassdefs.
+	redef fun collect_parents(view) do
+		var res = new HashSet[MENTITY]
 		for mclassdef in mclassdefs do
-			for mclasstype in mclassdef.supertypes do
-				var mclass = mclasstype.mclass
-				if not view.accept_mentity(mclass) then continue
-				res.add(mclass)
+			for parent in mclassdef.collect_parents(view) do
+				var mclass = parent.mclass
+				if mclass == self or not view.accept_mentity(parent) then continue
+				res.add mclass
 			end
 		end
 		return res
 	end
 
 	# Collect all ancestors of `self` with `visibility >= to min_visibility`.
-	fun collect_ancestors(view: ModelView): Set[MClass] do
-		var res = new HashSet[MClass]
-		for mclassdef in self.mclassdefs do
-			for super_mclassdef in mclassdef.in_hierarchy.greaters do
-				if super_mclassdef == mclassdef then continue  # skip self
-				var mclass = super_mclassdef.mclass
-				if not view.accept_mentity(mclass) then continue
-				res.add(mclass)
+	redef fun collect_ancestors(view) do
+		var res = new HashSet[MENTITY]
+		for mclassdef in mclassdefs do
+			for parent in mclassdef.collect_parents(view) do
+				if not view.accept_mentity(parent) then continue
+				res.add parent.mclass
 			end
 		end
 		return res
 	end
 
-	# Collect direct children of `self` with `visibility >= to min_visibility`.
-	fun collect_children(view: ModelView): Set[MClass] do
-		var res = new HashSet[MClass]
-		for mclassdef in self.mclassdefs do
-			for sub_mclassdef in mclassdef.in_hierarchy.direct_smallers do
-				if sub_mclassdef == mclassdef then continue  # skip self
-				var mclass = sub_mclassdef.mclass
-				if not view.accept_mentity(mclass) then continue
-				res.add(mclass)
+	# `MClass` parents are the direct parents of `self`.
+	#
+	# This method uses a flattened hierarchy containing all the mclassdefs.
+	redef fun collect_children(view) do
+		var res = new HashSet[MENTITY]
+		for mclassdef in mclassdefs do
+			for child in mclassdef.collect_children(view) do
+				var mclass = child.mclass
+				if mclass == self or not view.accept_mentity(child) then continue
+				res.add mclass
 			end
 		end
 		return res
-	end
-
-	# Collect all descendants of `self` with `visibility >= to min_visibility`.
-	fun collect_descendants(view: ModelView): Set[MClass] do
-		var res = new HashSet[MClass]
-		for mclassdef in self.mclassdefs do
-			for sub_mclassdef in mclassdef.in_hierarchy.smallers do
-				if sub_mclassdef == mclassdef then continue  # skip self
-				var mclass = sub_mclassdef.mclass
-				if not view.accept_mentity(mclass) then continue
-				res.add(mclass)
-			end
-		end
-		return res
-	end
-
-	# Build a class hierarchy poset for `self` based on its ancestors and descendants.
-	fun hierarchy_poset(mainmodule: MModule, view: ModelView): POSet[MClass] do
-		var mclasses = new HashSet[MClass]
-		mclasses.add self
-		mclasses.add_all collect_ancestors(view)
-		mclasses.add_all collect_descendants(view)
-		return view.mclasses_poset(mainmodule, mclasses)
 	end
 
 	# Collect all mproperties introduced in 'self' with `visibility >= min_visibility`.
@@ -431,6 +528,42 @@ redef class MClassDef
 		return mclassdefs
 	end
 
+	# `MClassDef` ancestors are its direct and transitive super classes.
+	redef fun collect_ancestors(view) do
+		var res = new HashSet[MENTITY]
+		var hierarchy = self.in_hierarchy
+		if hierarchy == null then return res
+		for parent in hierarchy.greaters do
+			if parent == self or not view.accept_mentity(parent) then continue
+			res.add parent
+		end
+		return res
+	end
+
+	# `MClassDef` parents are its direct super classes.
+	redef fun collect_parents(view) do
+		var res = new HashSet[MENTITY]
+		var hierarchy = self.in_hierarchy
+		if hierarchy == null then return res
+		for parent in hierarchy.direct_greaters do
+			if parent == self or not view.accept_mentity(parent) then continue
+			res.add parent
+		end
+		return res
+	end
+
+	# `MClassDef` children are its direct subclasses.
+	redef fun collect_children(view) do
+		var res = new HashSet[MENTITY]
+		var hierarchy = self.in_hierarchy
+		if hierarchy == null then return res
+		for child in hierarchy.direct_smallers do
+			if child == self or not view.accept_mentity(child) then continue
+			res.add child
+		end
+		return res
+	end
+
 	# Collect mpropdefs in 'self' with `visibility >= min_visibility`.
 	fun collect_mpropdefs(view: ModelView): Set[MPropDef] do
 		var res = new HashSet[MPropDef]
@@ -483,6 +616,44 @@ redef class MProperty
 		mainmodule.linearize_mpropdefs(mpropdefs)
 		return mpropdefs
 	end
+
+	# Collect mpropdefs in 'self' with `visibility >= min_visibility`.
+	fun collect_mpropdefs(view: ModelView): Set[MPropDef] do
+		var res = new HashSet[MPropDef]
+		for mpropdef in mpropdefs do
+			if not view.accept_mentity(mpropdef) then continue
+			res.add mpropdef
+		end
+		return res
+	end
+
+	# `MProperty` parents are all direct super definition of `self`.
+	#
+	# This method uses a flattened hierarchy containing all the mpropdefs.
+	redef fun collect_parents(view) do
+		var res = new HashSet[MENTITY]
+		for mpropdef in mpropdefs do
+			for parent in mpropdef.collect_parents(view) do
+				if not view.accept_mentity(parent) then continue
+				res.add parent.mproperty
+			end
+		end
+		return res
+	end
+
+	# `MProperty` parents are all direct sub definition of `self`.
+	#
+	# This method uses a flattened hierarchy containing all the mpropdefs.
+	redef fun collect_children(view) do
+		var res = new HashSet[MENTITY]
+		for mpropdef in mpropdefs do
+			for child in mpropdef.collect_parents(view) do
+				if not view.accept_mentity(child) then continue
+				res.add child.mproperty
+			end
+		end
+		return res
+	end
 end
 
 redef class MPropDef
@@ -523,5 +694,25 @@ redef class MPropDef
 		mpropdefs.add mentity
 		mainmodule.linearize_mpropdefs(mpropdefs)
 		return mpropdefs
+	end
+
+	# `MPropDef` parents include only the next definition of `self`.
+	redef fun collect_parents(view) do
+		var res = new HashSet[MENTITY]
+		var mpropdef = self
+		while not mpropdef.is_intro do
+			mpropdef = mpropdef.lookup_next_definition(mclassdef.mmodule, mclassdef.bound_mtype)
+			res.add mpropdef
+		end
+		return res
+	end
+
+	# `MPropdef` children are definitions that directly depends on `self`.
+	redef fun collect_children(view) do
+		var res = new HashSet[MENTITY]
+		for mpropdef in mproperty.collect_mpropdefs(view) do
+			if mpropdef.collect_parents(view).has(self) then res.add mpropdef
+		end
+		return res
 	end
 end
