@@ -247,7 +247,7 @@ redef class String
 	#     import base64
 	#     assert "The quick brown fox jumps over the lazy dog".sha1 == [0x2Fu8, 0xD4u8, 0xE1u8, 0xC6u8, 0x7Au8, 0x2Du8, 0x28u8, 0xFCu8, 0xEDu8, 0x84u8, 0x9Eu8, 0xE1u8, 0xBBu8, 0x76u8, 0xE7u8, 0x39u8, 0x1Bu8, 0x93u8, 0xEBu8, 0x12u8]
 	fun sha1: Bytes do
-		return new Bytes(to_cstring.sha1_intern(bytelen), 20, 20)
+		return new Bytes(to_cstring.sha1_intern(byte_length), 20, 20)
 	end
 
 	# Computes the SHA1 of the receiver.

@@ -46,7 +46,7 @@ class HttpResponse
 		# Set the content length if not already set
 		if not header.keys.has("Content-Length") then
 			# Size of the body
-			var len = body.bytelen
+			var len = body.byte_length
 
 			# Size of included files
 			for path in files do

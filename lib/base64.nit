@@ -163,7 +163,7 @@ redef class String
 	# If using the default padding character `=`, see `encode_base64`.
 	fun encode_base64(padding: nullable Byte): String
 	do
-		return to_cstring.encode_base64(bytelen, padding).to_s
+		return to_cstring.encode_base64(byte_length, padding).to_s
 	end
 
 	# Decodes the receiver string to base64 using a custom padding character.
@@ -171,6 +171,6 @@ redef class String
 	# Default padding character `=`
 	fun decode_base64(padding : nullable Byte) : String
 	do
-		return to_cstring.decode_base64(bytelen, padding).to_s
+		return to_cstring.decode_base64(byte_length, padding).to_s
 	end
 end

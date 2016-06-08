@@ -40,7 +40,7 @@ private class ISO88591Codec
 	end
 
 	redef fun encode_string(s) do
-		var ns = new Bytes.with_capacity(s.bytelen)
+		var ns = new Bytes.with_capacity(s.byte_length)
 		add_string_to(s, ns)
 		return ns
 	end

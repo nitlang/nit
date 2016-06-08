@@ -23,4 +23,4 @@ while i < n do
 	s = "Je dis «{s}» et redis «{s}» et trois fois de plus : «{s}{s}{s}».\n"
 	i = i + 1
 end
-print s.bytelen
+print s.byte_length

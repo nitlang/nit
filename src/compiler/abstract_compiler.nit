@@ -1652,9 +1652,9 @@ abstract class AbstractCompilerVisitor
 		var native_mtype = mmodule.native_string_type
 		var nat = self.new_var(native_mtype)
 		self.add("{nat} = \"{string.escape_to_c}\";")
-		var bytelen = self.int_instance(string.bytelen)
+		var byte_length = self.int_instance(string.byte_length)
 		var unilen = self.int_instance(string.length)
-		self.add("{res} = {self.send(self.get_property("to_s_full", native_mtype), [nat, bytelen, unilen]).as(not null)};")
+		self.add("{res} = {self.send(self.get_property("to_s_full", native_mtype), [nat, byte_length, unilen]).as(not null)};")
 		self.add("{name} = {res};")
 		self.add("\}")
 		return res

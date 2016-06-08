@@ -902,7 +902,7 @@ redef class Text
 	#     assert not "Not an Int".is_int
 	#     assert not "-".is_int
 	fun is_int: Bool do
-		if bytelen == 0 then return false
+		if byte_length == 0 then return false
 		var s = remove_all('_')
 		var pos = 0
 		var len = s.length

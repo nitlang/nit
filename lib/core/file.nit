@@ -858,7 +858,7 @@ redef class Text
 
 	private fun write_native_to(s: FileWriter)
 	do
-		for i in substrings do s.write_native(i.to_cstring, 0, i.bytelen)
+		for i in substrings do s.write_native(i.to_cstring, 0, i.byte_length)
 	end
 end
 
@@ -1285,7 +1285,7 @@ end
 redef class FlatString
 	redef fun write_native_to(s)
 	do
-		s.write_native(items, first_byte, bytelen)
+		s.write_native(items, first_byte, byte_length)
 	end
 
 	redef fun file_extension do

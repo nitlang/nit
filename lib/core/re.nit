@@ -368,7 +368,7 @@ class Regex
 
 		# Actually execute
 		var cstr = text.to_cstring
-		var rets = cstr.to_s_with_length(text.bytelen)
+		var rets = cstr.to_s_with_length(text.byte_length)
 		var bytefrom = cstr.char_to_byte_index_cached(charfrom, 0, 0)
 		var subcstr = cstr.fast_cstring(bytefrom)
 		var eflags = gather_eflags
@@ -428,7 +428,7 @@ class Regex
 		# Actually execute
 		var cstr = text.to_cstring
 		var subcstr = cstr
-		var rets = cstr.to_s_with_length(text.bytelen)
+		var rets = cstr.to_s_with_length(text.byte_length)
 		var eflags = gather_eflags
 		var eflags_or_notbol = eflags | flag_notbol
 		var native_match = self.native_match

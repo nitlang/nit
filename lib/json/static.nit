@@ -139,7 +139,7 @@ redef class Text
 	#     assert "\\nEscape\\t\\n".json_to_nit_string == "\nEscape\t\n"
 	#     assert "\\u0041zu\\uD800\\uDFD3".json_to_nit_string == "Azu𐏓"
 	protected fun json_to_nit_string: String do
-		var res = new FlatBuffer.with_capacity(bytelen)
+		var res = new FlatBuffer.with_capacity(byte_length)
 		var i = 0
 		var ln = self.length
 		while i < ln do
@@ -188,7 +188,7 @@ redef class Text
 	#     "\"\\t\\\"http://example.com\\\"\\r\\n\\u0000\\\\\""
 	# ~~~
 	redef fun to_json do
-		var b = new FlatBuffer.with_capacity(bytelen)
+		var b = new FlatBuffer.with_capacity(byte_length)
 		append_json(b)
 		return b.to_s
 	end

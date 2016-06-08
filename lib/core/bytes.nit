@@ -456,7 +456,7 @@ class Bytes
 	# Appends the bytes of `s` to `selftextextt`
 	fun append_text(s: Text) do
 		for i in s.substrings do
-			append_ns(i.fast_cstring, i.bytelen)
+			append_ns(i.fast_cstring, i.byte_length)
 		end
 	end
 
@@ -712,7 +712,7 @@ redef class Text
 	# assert "String".to_bytes == [83u8, 116u8, 114u8, 105u8, 110u8, 103u8]
 	# ~~~
 	fun to_bytes: Bytes do
-		var b = new Bytes.with_capacity(bytelen)
+		var b = new Bytes.with_capacity(byte_length)
 		append_to_bytes b
 		return b
 	end
@@ -730,7 +730,7 @@ redef class Text
 	fun append_to_bytes(b: Bytes) do
 		for s in substrings do
 			var from = if s isa FlatString then s.first_byte else 0
-			b.append_ns_from(s.items, s.bytelen, from)
+			b.append_ns_from(s.items, s.byte_length, from)
 		end
 	end
 
@@ -757,7 +757,7 @@ redef class Text
 	#     assert "a b c".hexdigest_to_bytes.hexdigest == "0ABC"
 	fun hexdigest_to_bytes: Bytes do
 		var b = bytes
-		var max = bytelen
+		var max = byte_length
 
 		var dlength = 0 # Number of hex digits
 		var pos = 0
@@ -795,7 +795,7 @@ redef class Text
 	#
 	#     assert "&lt;STRING&#47;&rt;".hexdigest == "266C743B535452494E47262334373B2672743B"
 	fun hexdigest: String do
-		var ln = bytelen
+		var ln = byte_length
 		var outns = new NativeString(ln * 2)
 		var oi = 0
 		for i in [0 .. ln[ do
@@ -815,7 +815,7 @@ redef class Text
 	#     assert "\\x41\\x42\\x43".unescape_to_bytes.chexdigest == "\\x41\\x42\\x43"
 	#     assert "B\\n\\x41\\u0103D3".unescape_to_bytes.chexdigest == "\\x42\\x0A\\x41\\xF0\\x90\\x8F\\x93"
 	fun unescape_to_bytes: Bytes do
-		var res = new Bytes.with_capacity(self.bytelen)
+		var res = new Bytes.with_capacity(self.byte_length)
 		var was_slash = false
 		var i = 0
 		while i < length do
@@ -886,7 +886,7 @@ redef class Text
 	fun binarydigest_to_bytes: Bytes
 	do
 		var b = bytes
-		var max = bytelen
+		var max = byte_length
 
 		# Count bits
 		var bitlen = 0
@@ -930,7 +930,7 @@ end
 redef class FlatText
 	redef fun append_to_bytes(b) do
 		var from = if self isa FlatString then first_byte else 0
-		b.append_ns_from(items, bytelen, from)
+		b.append_ns_from(items, byte_length, from)
 	end
 end
 
