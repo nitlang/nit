@@ -699,6 +699,9 @@ universal Byte
 			return self
 		end
 	end
+
+	# Is `self` an ASCII whitespace ?
+	fun is_whitespace: Bool do return self == 0x7Fu8 or self <= 0x20u8
 end
 
 # Native integer numbers.
