@@ -35,6 +35,12 @@
 						.error(cbErr);
 				},
 
+				loadEntityDefs: function(id, cb, cbErr) {
+					$http.get(apiUrl + '/defs/' + id)
+						.success(cb)
+						.error(cbErr);
+				},
+
 				loadEntityCode: function(id, cb, cbErr) {
 					$http.get(apiUrl + '/code/' + id)
 						.success(cb)

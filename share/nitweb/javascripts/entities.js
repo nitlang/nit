@@ -28,6 +28,15 @@
 					});
 			};
 
+			this.loadEntityDefs = function() {
+				Model.loadEntityDefs($routeParams.id,
+					function(data) {
+						$scope.defs = data;
+					}, function(err) {
+						$scope.error = err;
+					});
+			};
+
 			this.loadEntityCode = function() {
 				Model.loadEntityCode($routeParams.id,
 					function(data) {
@@ -155,23 +164,29 @@
 					definition: '=',
 					focus: '='
 				},
+				templateUrl: '/directives/entity/defcard.html',
 				link: function ($scope, element, attrs) {
-					$scope.$watch("definition", function() {
-						/*.loadEntityDefs($scope.definition.full_name,
-							function(data) {
-								$scope.mentity = data;
-							}, function(err) {
-								$scope.error = err;
-							});
-						Model.loadEntityCode($scope.definition.full_name,
-							function(data) {
-								$scope.code = data;
-							}, function(err) {
-								$scope.error = err;
-							});*/
-					});
-				},
-				templateUrl: '/directives/entity/defcard.html'
+					$scope.codeId = 'code_' + $scope.definition.full_name.replace(/[^a-zA-Z0-9]/g, '_');
+					$scope.loadCardCode = function() {
+						if(!$scope.code) {
+							Model.loadEntityCode($scope.definition.full_name,
+								function(data) {
+									$scope.code = data;
+									setTimeout(function() { // smooth collapse
+										$('#' + $scope.codeId).collapse('show')
+									}, 1);
+								}, function(err) {
+									$scope.code = err;
+								});
+						} else {
+							if($('#' + $scope.codeId).hasClass('in')) {
+								$('#' + $scope.codeId).collapse('hide');
+							} else {
+								$('#' + $scope.codeId).collapse('show');
+							}
+						}
+					};
+				}
 			};
 		}])
 })();

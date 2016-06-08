@@ -141,6 +141,31 @@ class APIEntityLinearization
 	end
 end
 
+# List definitions of a MEntity.
+#
+# Example: `GET /defs/core::Array`
+class APIEntityDefs
+	super APIHandler
+
+	redef fun get(req, res) do
+		var mentity = mentity_from_uri(req, res)
+		var arr = new JsonArray
+		if mentity isa MModule then
+			for mclassdef in mentity.mclassdefs do arr.add mclassdef
+		else if mentity isa MClass then
+			for mclassdef in mentity.mclassdefs do arr.add mclassdef
+		else if mentity isa MClassDef then
+			for mpropdef in mentity.mpropdefs do arr.add mpropdef
+		else if mentity isa MProperty then
+			for mpropdef in mentity.mpropdefs do arr.add mpropdef
+		else
+			res.error 404
+			return
+		end
+		res.json arr
+	end
+end
+
 # Return a UML representation of MEntity.
 #
 # Example: `GET /entity/core::Array/uml`
