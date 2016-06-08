@@ -257,25 +257,28 @@ private class Concat
 			end
 
 		end
-		return recurse_balance(children, children.length)
+		return recurse_balance_rope(children, children.length)
 	end
+end
 
-	fun recurse_balance(nodes: Array[String], len: Int): String do
-		var finpos = 0
-		var stpos = 0
-		while stpos < len do
-			if len - stpos > 1 then
-				nodes[finpos] = new Concat(nodes[stpos], nodes[stpos + 1])
-				stpos += 2
-			else
-				nodes[finpos] = nodes[stpos]
-				stpos += 1
-			end
-			finpos += 1
+# Returns a balanced `Concat` from the content of `nodes`
+#
+# /!\ To be used internally only
+protected fun recurse_balance_rope(nodes: Array[String], len: Int): String do
+	var finpos = 0
+	var stpos = 0
+	while stpos < len do
+		if len - stpos > 1 then
+			nodes[finpos] = new Concat(nodes[stpos], nodes[stpos + 1])
+			stpos += 2
+		else
+			nodes[finpos] = nodes[stpos]
+			stpos += 1
 		end
-		if finpos == 1 then return nodes[0]
-		return recurse_balance(nodes, finpos)
+		finpos += 1
 	end
+	if finpos == 1 then return nodes[0]
+	return recurse_balance_rope(nodes, finpos)
 end
 
 # Mutable `Rope`, optimized for concatenation operations

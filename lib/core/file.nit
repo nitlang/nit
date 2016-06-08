@@ -157,7 +157,7 @@ class FileReader
 	init open(path: String)
 	do
 		self.path = path
-		prepare_buffer(100)
+		prepare_buffer(4096)
 		_file = new NativeFile.io_open_read(path.to_cstring)
 		if _file.as(not null).address_is_null then
 			last_error = new IOError("Cannot open `{path}`: {sys.errno.strerror}")

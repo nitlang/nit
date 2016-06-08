@@ -193,31 +193,40 @@ abstract class Reader
 	# ~~~
 	fun read_all: String do
 		var s = read_all_bytes
+		var sits = s.items
+		var tmp_clean: String
 		var slen = s.length
 		if slen == 0 then return ""
-		var rets = ""
 		var pos = 0
-		var str = s.items.clean_utf8(slen)
-		slen = str.bytelen
-		var sits = str.items
 		var remsp = slen
+		var arr = new Array[String].with_capacity(slen / 4096 + 1)
 		while pos < slen do
-			# The 129 size was decided more or less arbitrarily
-			# It will require some more benchmarking to compute
-			# if this is the best size or not
-			var chunksz = 129
+			# The 4096 size was decided more or less arbitrarily
+			# to be aligned on a page's size
+			var chunksz = 4096
 			if chunksz > remsp then
-				rets += new FlatString.with_infos(sits, remsp, pos)
+				var tmpns = sits.fast_cstring(pos)
+				tmp_clean = tmpns.clean_utf8(remsp)
+				if tmp_clean.items != tmpns then
+					arr.add(tmp_clean)
+				else
+					arr.add(new FlatString.full(sits, remsp, pos, tmp_clean.length))
+				end
 				break
 			end
 			var st = sits.find_beginning_of_char_at(pos + chunksz - 1)
 			var bytelen = st - pos
-			rets += new FlatString.with_infos(sits, bytelen, pos)
+			var tmpns = sits.fast_cstring(pos)
+			tmp_clean = tmpns.clean_utf8(bytelen)
+			if tmp_clean.items != tmpns then
+				arr.add(tmp_clean)
+			else
+				arr.add(new FlatString.full(sits, bytelen, pos, tmp_clean.length))
+			end
 			pos = st
 			remsp -= bytelen
 		end
-		if rets isa Concat then return rets.balance
-		return rets
+		return recurse_balance_rope(arr, arr.length)
 	end
 
 	# Read all the stream until the eof.
@@ -558,7 +567,7 @@ abstract class BufferedReader
 	redef fun read_all_bytes
 	do
 		if last_error != null then return new Bytes.empty
-		var s = new Bytes.with_capacity(10)
+		var s = new Bytes.with_capacity(4096)
 		var b = _buffer
 		while not eof do
 			var j = _buffer_pos
