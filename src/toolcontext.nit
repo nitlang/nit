@@ -242,6 +242,7 @@ class ToolContext
 		var m = new Message(l, null, s, 2)
 		if messages.has(m) then return m
 		if l != null then l.add_message m
+		if opt_warn.value <= -1 then return m
 		messages.add m
 		error_count = error_count + 1
 		if opt_stop_on_first_error.value then check_errors
@@ -276,7 +277,7 @@ class ToolContext
 		if messages.has(m) then return null
 		if l != null then l.add_message m
 		if opt_warning.value.has("no-{tag}") then return null
-		if not opt_warning.value.has(tag) and opt_warn.value == 0 then return null
+		if not opt_warning.value.has(tag) and opt_warn.value <= 0 then return null
 		messages.add m
 		warning_count = warning_count + 1
 		if opt_stop_on_first_error.value then check_errors
