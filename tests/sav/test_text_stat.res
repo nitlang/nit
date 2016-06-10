@@ -12,7 +12,7 @@ Allocations, by type:
 Calls to length, by type:
 	FlatString = 19
 Indexed accesses, by type:
-Calls to bytelen for each type:
+Calls to byte_length for each type:
 	FlatString = 48
 Calls to position for each type:
 Calls to bytepos for each type:

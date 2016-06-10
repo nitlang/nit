@@ -51,7 +51,7 @@ end
 
 redef class Text
 	# Get a `NSString` from `self`
-	fun to_nsstring: NSString do return to_cstring.to_nsstring(bytelen)
+	fun to_nsstring: NSString do return to_cstring.to_nsstring(byte_length)
 end
 
 # Wrapper of byte buffers

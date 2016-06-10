@@ -161,7 +161,7 @@ class Connection
 	redef fun write(str)
 	do
 		if close_requested then return
-		native_buffer_event.write(str.to_cstring, str.bytelen)
+		native_buffer_event.write(str.to_cstring, str.byte_length)
 	end
 
 	redef fun write_byte(byte)

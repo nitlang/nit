@@ -46,7 +46,7 @@ for i in fb.chars.reverse_iterator do
 	l -= 1
 end
 
-l = fb.bytelen - 1
+l = fb.byte_length - 1
 
 for i in fb.bytes.reverse_iterator do
 	print "Byte {l} = {i}"

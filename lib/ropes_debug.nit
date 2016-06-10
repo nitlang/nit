@@ -53,14 +53,14 @@ end
 redef class FlatString
 	redef fun internal_to_dot: String
 	do
-		return "n{object_id} [label=\"FlatString\\nlength = {length}\\nbytelen = {bytelen}\\nfirst_byte = {first_byte}\\nlast_byte = {last_byte}\\nText = {self.escape_to_dot}\"];\n"
+		return "n{object_id} [label=\"FlatString\\nlength = {length}\\nbyte_length = {byte_length}\\nfirst_byte = {first_byte}\\nlast_byte = {last_byte}\\nText = {self.escape_to_dot}\"];\n"
 	end
 end
 
 redef class FlatBuffer
 	redef fun internal_to_dot: String
 	do
-		return "n{object_id} [label=\"FlatBuffer\\nbytelen = {bytelen}\\nlength = {length}\\ncapacity = {capacity}\\nText = {escape_to_dot}\"];\n"
+		return "n{object_id} [label=\"FlatBuffer\\nbyte_length = {byte_length}\\nlength = {length}\\ncapacity = {capacity}\\nText = {escape_to_dot}\"];\n"
 	end
 end
 

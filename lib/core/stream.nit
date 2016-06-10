@@ -198,7 +198,7 @@ abstract class Reader
 		var rets = ""
 		var pos = 0
 		var str = s.items.clean_utf8(slen)
-		slen = str.bytelen
+		slen = str.byte_length
 		var sits = str.items
 		var remsp = slen
 		while pos < slen do
@@ -211,10 +211,10 @@ abstract class Reader
 				break
 			end
 			var st = sits.find_beginning_of_char_at(pos + chunksz - 1)
-			var bytelen = st - pos
-			rets += new FlatString.with_infos(sits, bytelen, pos)
+			var byte_length = st - pos
+			rets += new FlatString.with_infos(sits, byte_length, pos)
 			pos = st
-			remsp -= bytelen
+			remsp -= byte_length
 		end
 		if rets isa Concat then return rets.balance
 		return rets
@@ -732,5 +732,5 @@ class StringReader
 		return new Bytes(nns, nslen, nslen)
 	end
 
-	redef fun eof do return cursor >= source.bytelen
+	redef fun eof do return cursor >= source.byte_length
 end

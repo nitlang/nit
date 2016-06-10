@@ -107,7 +107,7 @@ redef abstract class Writer
 	# Compared to `write_string`, this method supports null bytes in `text`.
 	fun write_block(text: Text)
 	do
-		write_int64 text.bytelen
+		write_int64 text.byte_length
 		write text
 	end
 

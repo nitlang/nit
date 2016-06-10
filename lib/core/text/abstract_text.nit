@@ -50,9 +50,9 @@ abstract class Text
 
 	# Number of bytes in `self`
 	#
-	#     assert "12345".bytelen == 5
-	#     assert "あいうえお".bytelen == 15
-	fun bytelen: Int is abstract
+	#     assert "12345".byte_length == 5
+	#     assert "あいうえお".byte_length == 15
+	fun byte_length: Int is abstract
 
 	# Create a substring.
 	#
@@ -844,7 +844,7 @@ abstract class Text
 	#     assert "%c3%a9%e3%81%82%e3%81%84%e3%81%86".from_percent_encoding == "éあいう"
 	fun from_percent_encoding: String
 	do
-		var len = bytelen
+		var len = byte_length
 		var has_percent = false
 		for c in chars do
 			if c == '%' then
@@ -1181,7 +1181,7 @@ abstract class FlatText
 
 	redef var length = 0
 
-	redef var bytelen = 0
+	redef var byte_length = 0
 
 	redef fun output
 	do
@@ -1226,11 +1226,11 @@ private abstract class StringByteView
 
 	redef fun is_empty do return target.is_empty
 
-	redef fun length do return target.bytelen
+	redef fun length do return target.byte_length
 
 	redef fun iterator do return self.iterator_from(0)
 
-	redef fun reverse_iterator do return self.reverse_iterator_from(target.bytelen - 1)
+	redef fun reverse_iterator do return self.reverse_iterator_from(target.byte_length - 1)
 end
 
 # Immutable sequence of characters.
@@ -2187,7 +2187,7 @@ redef class NativeString
 	# use only when the data has already been verified as valid UTF-8.
 	fun to_s_unsafe(length: nullable Int): String is abstract
 
-	# Get a `String` from the raw `bytelen` bytes at `self` with `unilen` Unicode characters
+	# Get a `String` from the raw `byte_length` bytes at `self` with `unilen` Unicode characters
 	#
 	# The created `String` points to the data at `self`.
 	# This method should be used when `self` was allocated by the Nit GC,
@@ -2197,13 +2197,13 @@ redef class NativeString
 	# use only when the data has already been verified as valid UTF-8.
 	#
 	# SEE: `abstract_text::Text` for more info on the difference
-	# between `Text::bytelen` and `Text::length`.
-	fun to_s_full(bytelen, unilen: Int): String is abstract
+	# between `Text::byte_length` and `Text::length`.
+	fun to_s_full(byte_length, unilen: Int): String is abstract
 
 	# Copies the content of `src` to `self`
 	#
-	# NOTE: `self` must be large enough to withold `self.bytelen` bytes
-	fun fill_from(src: Text) do src.copy_to_native(self, src.bytelen, 0, 0)
+	# NOTE: `self` must be large enough to withold `self.byte_length` bytes
+	fun fill_from(src: Text) do src.copy_to_native(self, src.byte_length, 0, 0)
 end
 
 redef class NativeArray[E]

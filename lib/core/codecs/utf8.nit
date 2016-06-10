@@ -41,14 +41,14 @@ private class UTF8Codec
 	end
 
 	redef fun encode_string(s) do
-		var buf = new Bytes.with_capacity(s.bytelen)
+		var buf = new Bytes.with_capacity(s.byte_length)
 		add_string_to(s, buf)
 		return buf
 	end
 
 	redef fun add_string_to(s, b) do
 		s.append_to_bytes(b)
-		return s.bytelen
+		return s.byte_length
 	end
 
 	redef fun is_valid_char(ns, len) do
@@ -73,7 +73,7 @@ private class UTF8Codec
 		if rit == ns then
 			var nns = new NativeString(len)
 			rit.copy_to(nns, len, 0, 0)
-			return nns.to_s_full(ret.bytelen, ret.length)
+			return nns.to_s_full(ret.byte_length, ret.length)
 		end
 		return ret
 	end

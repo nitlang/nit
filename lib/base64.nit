@@ -223,28 +223,28 @@ redef class Text
 	# Encodes the receiver string to base64 using a custom padding character.
 	#
 	# If using the default padding character `=`, see `encode_base64`.
-	fun encode_base64: String do return to_cstring.encode_base64(bytelen).to_s
+	fun encode_base64: String do return to_cstring.encode_base64(byte_length).to_s
 
 	# Decodes the receiver string to base64 using a custom padding character.
 	#
 	# Default padding character `=`
-	fun decode_base64: Bytes do return to_cstring.decode_base64(bytelen)
+	fun decode_base64: Bytes do return to_cstring.decode_base64(byte_length)
 
 	# Is `self` a well-formed Base64 entity ?
-	fun is_base64: Bool do return to_cstring.is_base64(bytelen)
+	fun is_base64: Bool do return to_cstring.is_base64(byte_length)
 
 	# Is `self` a well-formed Base64 entity ?
 	#
 	# Will return an Error otherwise with info on which part is erroneous.
-	fun check_base64: nullable Error do return to_cstring.check_base64(bytelen)
+	fun check_base64: nullable Error do return to_cstring.check_base64(byte_length)
 end
 
 redef class FlatText
-	redef fun encode_base64 do return fast_cstring.encode_base64(bytelen).to_s
+	redef fun encode_base64 do return fast_cstring.encode_base64(byte_length).to_s
 
-	redef fun decode_base64 do return fast_cstring.decode_base64(bytelen)
+	redef fun decode_base64 do return fast_cstring.decode_base64(byte_length)
 
-	redef fun is_base64 do return fast_cstring.is_base64(bytelen)
+	redef fun is_base64 do return fast_cstring.is_base64(byte_length)
 
-	redef fun check_base64 do return fast_cstring.check_base64(bytelen)
+	redef fun check_base64 do return fast_cstring.check_base64(byte_length)
 end

@@ -20,7 +20,7 @@ redef class Text
 	private fun escape_to_csv(sep_char, delim_char: Char, eol: String): String do
 		var add_sp = chars_to_escape_csv(sep_char, delim_char, eol)
 		if add_sp == 0 then return to_s
-		var bf = new Buffer.with_cap(add_sp + bytelen)
+		var bf = new Buffer.with_cap(add_sp + byte_length)
 		bf.add '"'
 		for i in [0 .. length[ do
 			var c = self[i]
@@ -67,7 +67,7 @@ redef class Text
 	private fun unescape_csv(delim_char: Char): String do
 		var to_un = chars_to_unescape_csv(delim_char)
 		if to_un == 0 then return to_s
-		var buf = new Buffer.with_cap(bytelen - to_un)
+		var buf = new Buffer.with_cap(byte_length - to_un)
 		var pos = 0
 		var ln = length
 		while pos < ln do

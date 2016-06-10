@@ -53,10 +53,10 @@ redef class Sys
 	var index_len = new Counter[Int]
 
 	# Length (bytes) of the FlatString created by lib
-	var str_bytelen = new Counter[Int]
+	var str_byte_length = new Counter[Int]
 
-	# Counter of the times `bytelen` is called on FlatString
-	var bytelen_call = new Counter[String]
+	# Counter of the times `byte_length` is called on FlatString
+	var byte_length_call = new Counter[String]
 
 	# Counter of the times `bytepos` is called on each type of receiver
 	var position_call = new Counter[String]
@@ -98,8 +98,8 @@ Allocations, by type:
 			printn "\n"
 		end
 
-		print "Calls to bytelen for each type:"
-		for k, v in bytelen_call do
+		print "Calls to byte_length for each type:"
+		for k, v in byte_length_call do
 			print "\t{k} = {v}"
 		end
 
@@ -120,7 +120,7 @@ Allocations, by type:
 		index_len.print_content
 
 		print "Byte length of the FlatStrings created:"
-		str_bytelen.print_content
+		str_byte_length.print_content
 	end
 
 	redef fun run do
@@ -139,8 +139,8 @@ redef class Concat
 		sys.concat_allocations += 1
 	end
 
-	redef fun bytelen do
-		sys.bytelen_call.inc "Concat"
+	redef fun byte_length do
+		sys.byte_length_call.inc "Concat"
 		return super
 	end
 
@@ -221,8 +221,8 @@ redef class RopeBuffer
 		sys.ropebuf_allocations += 1
 	end
 
-	redef fun bytelen do
-		sys.bytelen_call.inc "RopeBuffer"
+	redef fun byte_length do
+		sys.byte_length_call.inc "RopeBuffer"
 		return super
 	end
 
@@ -258,8 +258,8 @@ redef class FlatBuffer
 		super
 	end
 
-	redef fun bytelen do
-		sys.bytelen_call.inc "FlatBuffer"
+	redef fun byte_length do
+		sys.byte_length_call.inc "FlatBuffer"
 		return super
 	end
 
@@ -301,8 +301,8 @@ redef class FlatString
 		super
 	end
 
-	redef fun bytelen do
-		sys.bytelen_call.inc "FlatString"
+	redef fun byte_length do
+		sys.byte_length_call.inc "FlatString"
 		return super
 	end
 
@@ -328,7 +328,7 @@ redef class FlatString
 		var l = length_cache
 		if l != null then return l
 		sys.length_cache_miss.inc "FlatString"
-		if bytelen == 0 then return 0
+		if byte_length == 0 then return 0
 		var st = first_byte
 		var its = items
 		var ln = 0
@@ -348,7 +348,7 @@ redef class FlatString
 end
 
 redef class ASCIIFlatString
-	redef init full_data(items, bytelen, from, length)
+	redef init full_data(items, byte_length, from, length)
 	do
 		super
 		sys.asciiflatstr_allocations += 1
@@ -357,7 +357,7 @@ redef class ASCIIFlatString
 end
 
 redef class UnicodeFlatString
-	redef init full_data(items, bytelen, from, length)
+	redef init full_data(items, byte_length, from, length)
 	do
 		super
 		sys.uniflatstr_allocations += 1

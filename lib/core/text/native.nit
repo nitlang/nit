@@ -268,23 +268,23 @@ extern class NativeString `{ char* `}
 		return endpos
 	end
 
-	# Number of UTF-8 characters in `self` starting at `from`, for a length of `bytelen`
-	fun utf8_length(from, bytelen: Int): Int is intern do
+	# Number of UTF-8 characters in `self` starting at `from`, for a length of `byte_length`
+	fun utf8_length(from, byte_length: Int): Int is intern do
 		var st = from
 		var ln = 0
-		while bytelen > 0 do
-			while bytelen >= 4 do
+		while byte_length > 0 do
+			while byte_length >= 4 do
 				var i = fetch_4_chars(st)
 				if i & 0x80808080 != 0 then break
-				bytelen -= 4
+				byte_length -= 4
 				st += 4
 				ln += 4
 			end
-			if bytelen == 0 then break
+			if byte_length == 0 then break
 			var cln = length_of_char_at(st)
 			st += cln
 			ln += 1
-			bytelen -= cln
+			byte_length -= cln
 		end
 		return ln
 	end

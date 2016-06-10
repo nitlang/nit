@@ -23,6 +23,6 @@ var str: String = base_str
 #alt1 str = new Concat(base_str, base_str)
 #alt2 str = new Concat(base_str, base_str.substring_from(2))
 
-var copy_len = (str.bytelen - 4).min(9)
+var copy_len = (str.byte_length - 4).min(9)
 str.copy_to_native(ons, copy_len, 4, 0)
 print ons.to_s_with_length(copy_len)
