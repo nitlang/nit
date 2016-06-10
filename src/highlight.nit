@@ -702,6 +702,22 @@ redef class ANode
 	fun infobox(v: HighlightVisitor): nullable HInfoBox do return null
 end
 
+redef class AQclassid
+	redef fun decorate_tag(v, res, token)
+	do
+		if token != n_id then return null
+		return parent.decorate_tag(v, res, token)
+	end
+end
+
+redef class AQid
+	redef fun decorate_tag(v, res, token)
+	do
+		if token != n_id then return null
+		return parent.decorate_tag(v, res, token)
+	end
+end
+
 redef class AStdClassdef
 	redef fun make_tag(v)
 	do
