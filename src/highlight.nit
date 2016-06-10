@@ -108,10 +108,7 @@ class HighlightVisitor
 		if infobox == null and anode isa Token then
 			var pa = anode.parent
 			if pa != null then
-				var c = anode
-				if c isa TId or c isa TClassid or c isa TAttrid or c isa TokenLiteral or c isa TokenOperator or c isa TComment and pa isa ADoc then
-					infobox = pa.decorate_tag(hv, tag, anode)
-				end
+				infobox = pa.decorate_tag(hv, tag, anode)
 			end
 		end
 		var messages = anode.location.messages
@@ -757,8 +754,6 @@ redef class TokenOperator
 	redef fun make_tag(v)
 	do
 		var res = super
-		var p = parent
-		if p != null then p.decorate_tag(v, res, self)
 		res.add_class("nc_o")
 		return res
 	end
@@ -767,6 +762,7 @@ end
 redef class AVarFormExpr
 	redef fun decorate_tag(v, res, token)
 	do
+		if token != n_id then return null
 		var variable = self.variable
 		if variable == null then return null
 		res.add_class("nc_v")
@@ -777,6 +773,7 @@ end
 redef class AVardeclExpr
 	redef fun decorate_tag(v, res, token)
 	do
+		if token != n_id then return null
 		var variable = self.variable
 		if variable == null then return null
 		res.add_class("nc_v")
@@ -800,6 +797,7 @@ end
 redef class AParam
 	redef fun decorate_tag(v, res, token)
 	do
+		if token != n_id then return null
 		var mp = mparameter
 		if mp == null then return null
 		var variable = self.variable
@@ -812,6 +810,7 @@ end
 redef class AAssertExpr
 	redef fun decorate_tag(v, res, token)
 	do
+		if not token isa TId then return null
 		res.add_class("nc_ast")
 		return null
 	end
@@ -820,6 +819,7 @@ end
 redef class ALabel
 	redef fun decorate_tag(v, res, token)
 	do
+		if not token isa TId then return null
 		res.add_class("nc_la")
 		return null
 	end
@@ -863,6 +863,7 @@ end
 redef class AModuledecl
 	redef fun decorate_tag(v, res, token)
 	do
+		if not token isa TId then return null
 		res.add_class("nc_def")
 		res.add_class("nc_m")
 		var p = parent
@@ -876,6 +877,7 @@ end
 redef class AStdImport
 	redef fun decorate_tag(v, res, token)
 	do
+		if not token isa TId then return null
 		res.add_class("nc_m")
 		var mm = mmodule
 		if mm == null then return null
@@ -885,6 +887,7 @@ end
 redef class AAttrPropdef
 	redef fun decorate_tag(v, res, token)
 	do
+		if not token isa TId then return null
 		res.add_class("nc_def")
 		var mpd: nullable MPropDef
 		mpd = mreadpropdef
@@ -898,8 +901,6 @@ redef class TId
 	redef fun make_tag(v)
 	do
 		var res = super
-		var p = parent
-		if p != null then p.decorate_tag(v, res, self)
 		res.add_class("nc_i")
 		return res
 	end
@@ -929,8 +930,6 @@ redef class TAttrid
 	redef fun make_tag(v)
 	do
 		var res = super
-		var p = parent
-		if p != null then p.decorate_tag(v, res, self)
 		res.add_class("nc_a")
 		return res
 	end
@@ -938,6 +937,7 @@ end
 redef class AAttrFormExpr
 	redef fun decorate_tag(v, res, token)
 	do
+		if not token isa TAttrid then return null
 		var p = mproperty
 		if p == null then return null
 		return p.intro.infobox(v)
@@ -947,8 +947,6 @@ redef class TClassid
 	redef fun make_tag(v)
 	do
 		var res = super
-		var p = parent
-		if p != null then p.decorate_tag(v, res, self)
 		res.add_class("nc_t")
 		return res
 	end
@@ -956,6 +954,7 @@ end
 redef class AType
 	redef fun decorate_tag(v, res, token)
 	do
+		if not token isa TClassid then return null
 		var mt = mtype
 		if mt == null then return null
 		mt = mt.undecorate
@@ -968,6 +967,7 @@ end
 redef class AFormaldef
 	redef fun decorate_tag(v, res, token)
 	do
+		if not token isa TClassid then return null
 		res.add_class("nc_vt")
 		if mtype == null then return null
 		return mtype.infobox(v)
@@ -976,6 +976,7 @@ end
 redef class ATypePropdef
 	redef fun decorate_tag(v, res, token)
 	do
+		if not token isa TClassid then return null
 		res.add_class("nc_def")
 		var md = mpropdef
 		if md == null then return null
@@ -1005,8 +1006,6 @@ redef class TokenLiteral
 	do
 		var res = super
 		res.add_class("nc_l")
-		var p = parent
-		if p != null then p.decorate_tag(v, res, self)
 		return res
 	end
 end
@@ -1024,7 +1023,7 @@ redef class AStringFormExpr
 		# Workaround to tag strings
 		res.classes.remove("nc_l")
 		res.add_class("nc_s")
-		return null
+		return super
 	end
 end
 redef class AExpr
