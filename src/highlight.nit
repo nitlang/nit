@@ -43,6 +43,18 @@ class HighlightVisitor
 	# The last line to generate, null if finish at the last line
 	var last_line: nullable Int = null is writable
 
+	# When highlighting a node, show its messages (errors, warnings), if any.
+	#
+	# default: true
+	var show_messages = true is writable
+
+	# When highlighting a node, attach a full popupable infobox, if any.
+	#
+	# If `false`, only a simple `title` tooltip is used.
+	#
+	# default: true
+	var show_infobox = true is writable
+
 	init
 	do
 		html.add_class("nitcode")
@@ -111,8 +123,13 @@ class HighlightVisitor
 				infobox = pa.decorate_tag(hv, tag, anode)
 			end
 		end
+		if infobox != null and not show_infobox then
+			tag.attr("title", infobox.title)
+			tag.classes.add "titled"
+			infobox = null
+		end
 		var messages = anode.location.messages
-		if messages != null then
+		if messages != null and show_messages then
 			tag.css("border-bottom", "solid 2px red")
 			if infobox == null then
 				infobox = new HInfoBox(hv, "Messages")
@@ -233,6 +250,7 @@ class HighlightVisitor
 	do
 		return """
 .nitcode a { color: inherit; cursor:pointer; }
+.nitcode .titled:hover { text-decoration: underline; } /* underline titles */
 .nitcode .popupable:hover { text-decoration: underline; cursor:help; } /* underline titles */
 .nitcode .foldable { display: block } /* for block productions*/
 .nitcode .line{ display: block } /* for lines */
