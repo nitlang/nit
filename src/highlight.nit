@@ -131,8 +131,16 @@ class HighlightVisitor
 		return tag
 	end
 
+	# Highlight a full lexed source file.
+	#
+	# REQUIRE `source.first_token != null`
+	fun hightlight_source(source: SourceFile)
+	do
+		htmlize(source.first_token.as(not null), null)
+	end
+
 	# Produce HTML between two tokens
-	protected fun htmlize(first_token, last_token: Token)
+	protected fun htmlize(first_token: Token, last_token: nullable Token)
 	do
 		var stack2 = new Array[HTMLTag]
 		var stack = new Array[Prod]
