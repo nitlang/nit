@@ -17,22 +17,51 @@
 # Offers the base 64 encoding and decoding algorithms
 module base64
 
-redef class NativeString
-	# Alphabet used by the base64 algorithm
-	private fun base64_chars : SequenceRead[Byte]
-	do
-		return "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/".bytes
+redef class Char
+	# Is `self` a valid Base64 character ?
+	fun is_base64_char: Bool do
+		if code_point >= 127 then return false
+		return ascii.is_base64_char
+	end
+end
+
+redef class Byte
+	# Is `self` a valid Base64 character ?
+	fun is_base64_char: Bool do
+		if self == b'+' then return true
+		if self == b'/' then return true
+		if self > b'Z' then
+			if self < b'a' then return false
+			if self <= b'z' then return true
+			return false
+		end
+		if self >= b'A' then return true
+		if self <= b'9' and self >= b'0' then return true
+		return false
 	end
 
-	# Reversed alphabet for base64
-	private fun inverted_base64_chars : HashMap[Byte, Byte]
-	do
-		var inv_base64_chars = new HashMap[Byte, Byte]
-		var l = base64_chars.length
-		for k in [0 .. l[ do
-			inv_base64_chars[base64_chars[k]] = k.to_b
+	# Returns the `base64` equivalent of `self`
+	#
+	# REQUIRE `self`.`is_base64_char`
+	fun to_base64_char: Byte do
+		if self == b'+' then return 62u8
+		if self == b'/' then return 63u8
+		if self > b'Z' then
+			if self < b'a' then abort
+			if self <= b'z' then return self - 71u8
+			abort
 		end
-		return inv_base64_chars
+		if self >= b'A' then return self - 0x41u8
+		if self <= b'9' and self >= b'0' then return self + 4u8
+		abort
+	end
+end
+
+redef class NativeString
+	# Alphabet used by the base64 algorithm
+	private fun base64_chars : Bytes
+	do
+		return b"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"
 	end
 
 	# Encodes `self` to base64.
@@ -40,9 +69,8 @@ redef class NativeString
 	# By default, uses "=" for padding.
 	#
 	#     assert "string".encode_base64 == "c3RyaW5n"
-	private fun encode_base64(length: Int, padding: nullable Byte): Bytes do
+	private fun encode_base64(length: Int): Bytes do
 		var base64_bytes = once base64_chars
-		if padding == null then padding = '='.ascii
 		var steps = length / 3
 		var bytes_in_last_step = length % 3
 		var result_length = steps * 4
@@ -70,70 +98,102 @@ redef class NativeString
 			result.add base64_bytes[((self[in_off + 1] & 0b0000_1111u8) << 2).to_i]
 		end
 		var rempad = if bytes_in_last_step > 0 then 3 - bytes_in_last_step else 0
-		for i in [0 .. rempad[ do result.add padding
+		for i in [0 .. rempad[ do result.add b'='
 
 		return result
 	end
 
 	# Decodes `self` from base64
 	#
-	#      assert "c3RyaW5n".decode_base64 == "string"
-	#      assert "c3Rya\nW5n".decode_base64 == "string"
+	#      assert "c3RyaW5n".decode_base64.to_s == "string"
+	#      assert "c3Rya\nW5n".decode_base64.to_s == "string"
+	#      assert "c3RyaW5nCg==".decode_base64.to_s == "string\n"
+	#      assert "c3RyaW5nCg".decode_base64.to_s == "string\n"
+	#      assert "c3RyaW5neQo=".decode_base64.to_s == "stringy\n"
+	#      assert "c3RyaW5neQo".decode_base64.to_s == "stringy\n"
 	#
-	# REQUIRE: `length % 4 == 0`
-	private fun decode_base64(length: Int, padding: nullable Byte): Bytes do
-		if padding == null then padding = '='.ascii
-		var inv = once inverted_base64_chars
+	private fun decode_base64(length: Int): Bytes do
 		if length == 0 then return new Bytes.empty
 
-		# Remove non-base64 chars
-		var bytes = new Bytes.with_capacity(length)
-		for k in [0 .. length[ do
-			var byte = self[k]
-			if inv.has_key(byte) or byte == padding then bytes.add(byte)
+		# Avoids constant unboxing
+		var pad = b'='
+
+		var result = new Bytes.with_capacity((length / 4 + 1) * 3)
+
+		var curr = 0
+		var cnt = 0
+		var endpos = -1
+		for i in [0 .. length[ do
+			var b = self[i]
+			if b == pad then
+				endpos = i
+				break
+			end
+			# Ignore whitespaces
+			if b <= 0x20u8 then continue
+			if not b.is_base64_char then continue
+			curr <<= 6
+			curr += b.to_base64_char.to_i
+			cnt += 1
+			if cnt == 4 then
+				result.add(((curr & 0xFF0000) >> 16).to_b)
+				result.add(((curr & 0xFF00) >> 8).to_b)
+				result.add((curr & 0xFF).to_b)
+				curr = 0
+				cnt = 0
+			end
 		end
-		length = bytes.length
-
-		var steps = length / 4
-		var result_length = steps * 3
-
-		var epos = length - 1
-		var padding_len = 0
-		while epos >= 0 and bytes[epos] == padding do
-			epos -= 1
-			padding_len += 1
+		if endpos != -1 or cnt != 0 then
+			var pads = 0
+			for i in [endpos .. length[ do
+				var b = self[i]
+				if b <= 0x20u8 then continue
+				pads += 1
+			end
+			if cnt == 2 then
+				curr >>= 4
+				result.add(curr.to_b)
+			else if cnt == 3 then
+				curr >>= 2
+				result.add(((curr & 0xFF00) >> 8).to_b)
+				result.add((curr & 0xFF).to_b)
+			end
 		end
-
-		if padding_len != 0 then steps -= 1
-		if padding_len == 1 then result_length -= 1
-		if padding_len == 2 then result_length -= 2
-
-		var result = new Bytes.with_capacity(result_length + 1)
-
-		for s in [0 .. steps[ do
-			var c0 = inv[bytes[s * 4]]
-			var c1 = inv[bytes[s * 4 + 1]]
-			var c2 = inv[bytes[s * 4 + 2]]
-			var c3 = inv[bytes[s * 4 + 3]]
-			result.add (((c0 & 0b0011_1111u8) << 2) | ((c1 & 0b0011_0000u8) >> 4))
-			result.add (((c1 & 0b0000_1111u8) << 4) | ((c2 & 0b0011_1100u8) >> 2))
-			result.add (((c2 & 0b0000_0011u8) << 6) | (c3 & 0b0011_1111u8))
-		end
-
-		var last_start = steps * 4
-		if padding_len == 1 then
-			var c0 = inv[bytes[last_start]]
-			var c1 = inv[bytes[last_start + 1]]
-			var c2 = inv[bytes[last_start + 2]]
-			result.add (((c0 & 0b0011_1111u8) << 2) | ((c1 & 0b0011_0000u8) >> 4))
-			result.add (((c1 & 0b0000_1111u8) << 4) | ((c2 & 0b0011_1100u8) >> 2))
-		else if padding_len == 2 then
-			var c0 = inv[bytes[last_start]]
-			var c1 = inv[bytes[last_start + 1]]
-			result.add (((c0 & 0b0011_1111u8) << 2) | ((c1 & 0b0011_0000u8) >> 4))
-		end
-
 		return result
+	end
+
+	# Is `self` a well-formed Base64 entity ?
+	#
+	# ~~~nit
+	#	assert "Qn03".is_base64
+	#	assert not "#sd=".is_base64
+	# ~~~
+	fun is_base64(length: Int): Bool do return check_base64(length) == null
+
+	# Is `self` a well-formed Base64 entity ?
+	#
+	# Will return an Error otherwise with info on which part is erroneous.
+	fun check_base64(length: Int): nullable Error do
+		var rlen = 0
+		var opos = length
+		for i in [0 .. length[ do
+			if self[i] == b'=' then
+				opos = i
+				break
+			end
+			if self[i].is_whitespace then continue
+			if not self[i].is_base64_char then return new Error("Invalid Base64 character at position {i}: {self[i].ascii}")
+			rlen += 1
+			if rlen > 4 then rlen -= 4
+		end
+		var pad = 0
+		for i in [opos .. length[ do
+			if self[i].is_whitespace then continue
+			if self[i] != b'=' then return new Error("Invalid padding character {self[i].ascii} at position {i}")
+			pad += 1
+		end
+		if rlen + pad != 4 then return new Error("Invalid padding length")
+		return null
 	end
 end
 
@@ -142,35 +202,49 @@ redef class Bytes
 	# Encodes the receiver string to base64 using a custom padding character.
 	#
 	# If using the default padding character `=`, see `encode_base64`.
-	fun encode_base64(padding: nullable Byte): Bytes
-	do
-		return items.encode_base64(length, padding)
-	end
+	fun encode_base64: Bytes do return items.encode_base64(length)
 
 	# Decodes the receiver string to base64 using a custom padding character.
 	#
 	# Default padding character `=`
-	fun decode_base64(padding : nullable Byte) : Bytes
-	do
-		return items.decode_base64(length, padding)
-	end
+	fun decode_base64: Bytes do return items.decode_base64(length)
+
+	# Is `self` a well-formed Base64 entity ?
+	fun is_base64: Bool do return items.is_base64(length)
+
+	# Is `self` a well-formed Base64 entity ?
+	#
+	# Will return an Error otherwise with info on which part is erroneous.
+	fun check_base64: nullable Error do return items.check_base64(length)
 end
 
-redef class String
+redef class Text
 
 	# Encodes the receiver string to base64 using a custom padding character.
 	#
 	# If using the default padding character `=`, see `encode_base64`.
-	fun encode_base64(padding: nullable Byte): String
-	do
-		return to_cstring.encode_base64(bytelen, padding).to_s
-	end
+	fun encode_base64: String do return to_cstring.encode_base64(bytelen).to_s
 
 	# Decodes the receiver string to base64 using a custom padding character.
 	#
 	# Default padding character `=`
-	fun decode_base64(padding : nullable Byte) : String
-	do
-		return to_cstring.decode_base64(bytelen, padding).to_s
-	end
+	fun decode_base64: Bytes do return to_cstring.decode_base64(bytelen)
+
+	# Is `self` a well-formed Base64 entity ?
+	fun is_base64: Bool do return to_cstring.is_base64(bytelen)
+
+	# Is `self` a well-formed Base64 entity ?
+	#
+	# Will return an Error otherwise with info on which part is erroneous.
+	fun check_base64: nullable Error do return to_cstring.check_base64(bytelen)
+end
+
+redef class FlatText
+	redef fun encode_base64 do return fast_cstring.encode_base64(bytelen).to_s
+
+	redef fun decode_base64 do return fast_cstring.decode_base64(bytelen)
+
+	redef fun is_base64 do return fast_cstring.is_base64(bytelen)
+
+	redef fun check_base64 do return fast_cstring.check_base64(bytelen)
 end
