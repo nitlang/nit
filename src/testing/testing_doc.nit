@@ -197,7 +197,7 @@ class NitUnitExecutor
 		toolcontext.info("Execute doc-unit {du.full_name} in {file} {i}", 1)
 		var clock = new Clock
 		var res2 = toolcontext.safe_exec("{file.to_program_name}.bin {i} >'{file}.out1' 2>&1 </dev/null")
-		du.real_time = clock.total
+		if not toolcontext.opt_no_time.value then du.real_time = clock.total
 		du.was_exec = true
 
 		var content = "{file}.out1".to_path.read_all
@@ -230,7 +230,7 @@ class NitUnitExecutor
 		if res == 0 then
 			var clock = new Clock
 			res2 = toolcontext.safe_exec("{file.to_program_name}.bin >'{file}.out1' 2>&1 </dev/null")
-			du.real_time = clock.total
+			if not toolcontext.opt_no_time.value then du.real_time = clock.total
 			du.was_exec = true
 		end
 

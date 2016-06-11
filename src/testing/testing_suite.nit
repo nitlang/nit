@@ -261,7 +261,7 @@ class TestCase
 		var res_name = "{test_file}_{method_name.escape_to_c}"
 		var clock = new Clock
 		var res = toolcontext.safe_exec("{test_file}.bin {method_name} > '{res_name}.out1' 2>&1 </dev/null")
-		real_time = clock.total
+		if not toolcontext.opt_no_time.value then real_time = clock.total
 
 		var raw_output = "{res_name}.out1".to_path.read_all
 		self.raw_output = raw_output

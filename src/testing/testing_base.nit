@@ -31,6 +31,8 @@ redef class ToolContext
 	var opt_noact = new OptionBool("Does not compile and run tests", "--no-act")
 	# opt --nitc
 	var opt_nitc = new OptionString("nitc compiler to use", "--nitc")
+	# opt --no-time
+	var opt_no_time = new OptionBool("Disable time information in XML", "--no-time")
 
 	# Working directory for testing.
 	fun test_dir: String do
