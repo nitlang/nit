@@ -256,17 +256,22 @@ abstract class UnitTest
 		tc.attr("classname", xml_classname)
 		tc.attr("name", xml_name)
 		tc.attr("time", real_time.to_s)
+
+		var output = self.raw_output
+		if output != null then output = output.trunc(8192).filter_nonprintable
 		var error = self.error
 		if error != null then
+			var node
 			if was_exec then
-				tc.open("error").append(error)
+				node = tc.open("error").attr("message", error)
 			else
-				tc.open("failure").append(error)
+				node = tc.open("failure").attr("message", error)
 			end
-		end
-		var output = self.raw_output
-		if output != null then
-			tc.open("system-err").append(output.trunc(8192).filter_nonprintable)
+			if output != null then
+				node.append(output)
+			end
+		else if output != null then
+			tc.open("system-err").append(output)
 		end
 		return tc
 	end
