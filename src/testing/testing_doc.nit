@@ -19,6 +19,7 @@ private import parser_util
 import testing_base
 import markdown
 import html
+import realtime
 
 # Extractor, Executor and Reporter for the tests in a module
 class NitUnitExecutor
@@ -194,7 +195,9 @@ class NitUnitExecutor
 		var file = du.test_file.as(not null)
 		var i = du.test_arg.as(not null)
 		toolcontext.info("Execute doc-unit {du.full_name} in {file} {i}", 1)
+		var clock = new Clock
 		var res2 = toolcontext.safe_exec("{file.to_program_name}.bin {i} >'{file}.out1' 2>&1 </dev/null")
+		du.real_time = clock.total
 		du.was_exec = true
 
 		var content = "{file}.out1".to_path.read_all
@@ -225,7 +228,9 @@ class NitUnitExecutor
 		var res = compile_unitfile(file)
 		var res2 = 0
 		if res == 0 then
+			var clock = new Clock
 			res2 = toolcontext.safe_exec("{file.to_program_name}.bin >'{file}.out1' 2>&1 </dev/null")
+			du.real_time = clock.total
 			du.was_exec = true
 		end
 

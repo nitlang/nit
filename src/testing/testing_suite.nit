@@ -18,6 +18,7 @@ module testing_suite
 import testing_base
 import html
 private import annotation
+private import realtime
 
 redef class ToolContext
 	# --pattern
@@ -257,7 +258,10 @@ class TestCase
 		var method_name = test_method.name
 		var test_file = test_suite.test_file
 		var res_name = "{test_file}_{method_name.escape_to_c}"
+		var clock = new Clock
 		var res = toolcontext.safe_exec("{test_file}.bin {method_name} > '{res_name}.out1' 2>&1 </dev/null")
+		real_time = clock.total
+
 		var raw_output = "{res_name}.out1".to_path.read_all
 		self.raw_output = raw_output
 		# set test case result

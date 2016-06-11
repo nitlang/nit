@@ -201,6 +201,9 @@ abstract class UnitTest
 	# Additional noteworthy information when a test success.
 	var info: nullable String = null
 
+	# Time for the execution, in seconds
+	var real_time: Float = 0.0 is writable
+
 	# A colorful `[OK]` or `[KO]`.
 	fun status_tag(color: nullable Bool): String do
 		color = color or else true
@@ -252,6 +255,7 @@ abstract class UnitTest
 		var tc = new HTMLTag("testcase")
 		tc.attr("classname", xml_classname)
 		tc.attr("name", xml_name)
+		tc.attr("time", real_time.to_s)
 		var error = self.error
 		if error != null then
 			if was_exec then
