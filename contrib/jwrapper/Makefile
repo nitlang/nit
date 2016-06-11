@@ -11,12 +11,12 @@ src/javap_test_parser.nit: ../nitcc/src/nitcc grammar/javap.sablecc
 	mv javap_*.nit src/
 	mv javap* gen/
 
-src/serial.nit: $(shell ../../bin/nitls -M src/jwrapper.nit)
-	../../bin/nitserial -o src/serial.nit src/jwrapper.nit
+src/serial.nit: $(shell nitls -M src/jwrapper.nit)
+	nitserial -o src/serial.nit src/jwrapper.nit
 
-bin/jwrapper: src/javap_test_parser.nit src/serial.nit $(shell ../../bin/nitls -M src/jwrapper.nit) ../../bin/nitc
+bin/jwrapper: src/javap_test_parser.nit src/serial.nit $(shell nitls -M src/jwrapper.nit)
 	mkdir -p bin
-	../../bin/nitc src/jwrapper.nit -o bin/jwrapper -m src/serial.nit
+	nitc src/jwrapper.nit -o bin/jwrapper -m src/serial.nit
 
 clean:
 	rm -f bin/javap_test_parser bin/jwrapper
@@ -26,19 +26,19 @@ clean:
 check: bin/jwrapper tests/wildcards.javap
 	mkdir -p tmp
 	bin/jwrapper -v -u stub -o tests/statics.nit tests/statics.javap
-	../../bin/nitpick -q tests/statics.nit
+	nitpick -q tests/statics.nit
 	bin/jwrapper -v -u comment -o tests/generics.nit tests/generics.javap
-	../../bin/nitpick -q tests/generics.nit
+	nitpick -q tests/generics.nit
 	bin/jwrapper -v -u comment -o tests/long.nit tests/long.javap
-	../../bin/nitpick -q tests/long.nit
+	nitpick -q tests/long.nit
 	bin/jwrapper -v -u comment -o tests/inits.nit tests/inits.javap
-	../../bin/nitpick -q tests/inits.nit
+	nitpick -q tests/inits.nit
 	bin/jwrapper -v -u comment -o tests/testjvm.nit tests/testjvm.javap
-	../../bin/nitpick -q tests/testjvm.nit
+	nitpick -q tests/testjvm.nit
 	bin/jwrapper -v -u comment -o tests/many.nit tests/many.javap
-	../../bin/nitpick -q tests/many.nit
+	nitpick -q tests/many.nit
 	bin/jwrapper -v -u comment -o tests/wildcards.nit tests/wildcards.javap
-	../../bin/nitpick -q tests/wildcards.nit
+	nitpick -q tests/wildcards.nit
 	make -C examples/queue/ check
 	make -C examples/java_api/ check
 

@@ -1,9 +1,9 @@
-NITC=../../bin/nitc
-NITLS=../../bin/nitls
+NITC=nitc
+NITLS=nitls
 
 all: bin/action_nitro
 
-bin/action_nitro: $(shell ${NITLS} -M src/action_nitro.nit linux) ${NITC} pre-build
+bin/action_nitro: $(shell ${NITLS} -M src/action_nitro.nit linux) pre-build
 	${NITC} src/action_nitro.nit -m linux -o $@
 
 src/gen/texts.nit: art/texts.svg

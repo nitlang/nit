@@ -18,7 +18,7 @@ pre-build: assets/images/drawing.png
 
 bin/memory: assets/images/drawing.png src/*.nit
 	mkdir -p bin
-	../../bin/nitc -o bin/memory src/memory.nit -m ../../lib/mnit/linux/linux.nit
+	nitc -o bin/memory src/memory.nit -m ../../lib/mnit/linux/linux.nit
 
 assets/images/drawing.png: art/drawing.svg
 	mkdir -p assets/images/
@@ -31,8 +31,8 @@ android/res/: art/icon.svg
 android: bin/memory.apk
 bin/memory.apk: assets/images/drawing.png src/*.nit android/res/
 	mkdir -p bin
-	../../bin/nitc -o bin/memory.apk src/memory.nit -m ../../lib/mnit/android/android.nit -m ../../lib/android/landscape.nit
+	nitc -o bin/memory.apk src/memory.nit -m ../../lib/mnit/android/android.nit -m ../../lib/android/landscape.nit
 
 android-release: assets/images/drawing.png src/*.nit android/res/
 	mkdir -p bin
-	../../bin/nitc -o bin/memory.apk src/memory.nit -m ../../lib/mnit/android/android.nit -m ../../lib/android/landscape.nit  --release
+	nitc -o bin/memory.apk src/memory.nit -m ../../lib/mnit/android/android.nit -m ../../lib/android/landscape.nit  --release

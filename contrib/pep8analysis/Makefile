@@ -1,9 +1,9 @@
 bin/pep8analysis:
 	mkdir -p bin
-	../../bin/nitc -o bin/pep8analysis src/pep8analysis.nit
+	nitc -o bin/pep8analysis src/pep8analysis.nit
 
 doc/index.html:
-	../../bin/nitdoc src/pep8analysis.nit
+	nitdoc src/pep8analysis.nit
 
 check: tests
 tests: bin/pep8analysis
@@ -11,7 +11,7 @@ tests: bin/pep8analysis
 	diff test.out test.sav
 
 www/pep8analysis.js:
-	../../bin/nitc -o www/pep8analysis.js --semi-global src/pep8analysis_web.nit
+	nitc -o www/pep8analysis.js --semi-global src/pep8analysis_web.nit
 	mkdir -p www/samples
 	cp tests/micro/*.pep tests/privat/02-fibo.pep tests/privat/06-calc-non-pur.pep www/samples
 
