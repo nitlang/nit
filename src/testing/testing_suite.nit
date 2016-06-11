@@ -135,6 +135,19 @@ class TestSuite
 		end
 		write_to_nit
 		compile
+		if failure != null then
+			for case in test_cases do
+				case.is_done = true
+				case.error = "Compilation Error"
+				case.raw_output = failure
+				toolcontext.modelbuilder.failed_tests += 1
+				toolcontext.clear_progress_bar
+				toolcontext.show_unit(case)
+			end
+			show_status
+			print ""
+			return
+		end
 		toolcontext.info("Execute test-suite {mmodule.name}", 1)
 		var before_module = self.before_module
 		if not before_module == null then before_module.run
@@ -169,14 +182,7 @@ class TestSuite
 	fun to_xml: HTMLTag do
 		var n = new HTMLTag("testsuite")
 		n.attr("package", mmodule.name)
-		var failure = self.failure
-		if failure != null then
-			var f = new HTMLTag("failure")
-			f.attr("message", failure.to_s)
-			n.add f
-		else
-			for test in test_cases do n.add test.to_xml
-		end
+		for test in test_cases do n.add test.to_xml
 		return n
 	end
 
@@ -203,14 +209,9 @@ class TestSuite
 		var f = new FileReader.open("{file}.out")
 		var msg = f.read_all
 		f.close
-		# set test case result
-		var loc = mmodule.location
 		if res != 0 then
 			failure = msg
-			toolcontext.warning(loc, "failure", "FAILURE: {mmodule.name} (in file {file}.nit): {msg}")
-			toolcontext.modelbuilder.failed_tests += 1
 		end
-		toolcontext.check_errors
 	end
 
 	# Error occured during test-suite compilation.
