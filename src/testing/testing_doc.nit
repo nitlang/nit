@@ -524,7 +524,7 @@ redef class ModelBuilder
 				var ndoc = nclassdef.n_doc
 				if ndoc != null then
 					doc_entities += 1
-					d2m.extract(ndoc.to_mdoc, "nitunit." + mmodule.full_name + "." + mclassdef.mclass.full_name, "<class>")
+					d2m.extract(ndoc.to_mdoc, "nitunit." + mclassdef.full_name.replace("$", "."), "<class>")
 				end
 			end
 			for npropdef in nclassdef.n_propdefs do
@@ -534,7 +534,8 @@ redef class ModelBuilder
 				var ndoc = npropdef.n_doc
 				if ndoc != null then
 					doc_entities += 1
-					d2m.extract(ndoc.to_mdoc, "nitunit." + mmodule.full_name + "." + mclassdef.mclass.full_name, mpropdef.mproperty.full_name)
+					var a = mpropdef.full_name.split("$")
+					d2m.extract(ndoc.to_mdoc, "nitunit." + a[0] + "." + a[1], a[2])
 				end
 			end
 		end
@@ -566,7 +567,7 @@ redef class ModelBuilder
 
 		doc_entities += 1
 		# NOTE: jenkins expects a '.' in the classname attr
-		d2m.extract(mdoc, "nitunit." + mgroup.full_name, "<group>")
+		d2m.extract(mdoc, "nitunit." + mgroup.mpackage.name + "." + mgroup.name + ".<group>", "<group>")
 
 		d2m.run_tests
 
