@@ -10,7 +10,7 @@ Docunits: Entities: 6; Documented ones: 5; With nitunits: 3; Failures: 3
 Test suites: Classes: 0; Test Cases: 0
 [FAILURE] 3/3 tests failed.
 `nitunit.out` is not removed for investigation.
-<testsuites><testsuite package="test_doc3::test_doc3"><testcase classname="nitunit.test_doc3::test_doc3.core::Sys" name="test_doc3::test_doc3::Sys::foo1"><failure>Syntax Error: unexpected identifier &#39;garbage&#39;.</failure><system-out> *garbage*
-</system-out></testcase><testcase classname="nitunit.test_doc3::test_doc3.core::Sys" name="test_doc3::test_doc3::Sys::foo2"><failure>Syntax Error: unexpected identifier &#39;garbage&#39;.</failure><system-out>*garbage*
-</system-out></testcase><testcase classname="nitunit.test_doc3::test_doc3.core::Sys" name="test_doc3::test_doc3::Sys::foo3"><failure>Syntax Error: unexpected identifier &#39;garbage&#39;.</failure><system-out>*garbage*
+<testsuites><testsuite package="test_doc3::test_doc3"><testcase classname="nitunit.test_doc3::test_doc3.core::Sys" name="foo1" time="0.0"><failure message="Syntax Error: unexpected identifier &#39;garbage&#39;."></failure><system-out> *garbage*
+</system-out></testcase><testcase classname="nitunit.test_doc3::test_doc3.core::Sys" name="foo2" time="0.0"><failure message="Syntax Error: unexpected identifier &#39;garbage&#39;."></failure><system-out>*garbage*
+</system-out></testcase><testcase classname="nitunit.test_doc3::test_doc3.core::Sys" name="foo3" time="0.0"><failure message="Syntax Error: unexpected identifier &#39;garbage&#39;."></failure><system-out>*garbage*
 </system-out></testcase></testsuite></testsuites>
