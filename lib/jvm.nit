@@ -15,7 +15,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Java Virtual Machine services
+# Java Virtual Machine invocation API and others services from the JNI C API
+#
+# Users of this module and the Java FFI, on desktop computers, must define two environment variables:
+# * `JAVA_HOME` points to the installation folder of the target Java VM.
+#   This folder should contain the JNI header file `include/jni.h`.
+#   e.g. `/usr/lib/jvm/default-java` on Debian Jessie.
+# * `JNI_LIB_PATH` points to the folder with `libjvm.so`.
+#   e.g. `/usr/lib/jvm/default-java/jre/lib/amd64/server/` on Debian Jessie.
 #
 # See: http://docs.oracle.com/javase/1.5.0/docs/guide/jni/spec/jniTOC.html
 module jvm is
@@ -42,13 +49,13 @@ class JavaVMBuilder
 
 	# Version code of the JVM requested by `create_jvm`
 	#
-	# Default at 0x00010002
+	# Default at 0x00010002 for `JNI_VERSION_1_2`.
 	var version = 0x00010002 is writable
 
 	# Additional option strings
 	var options = new Array[String]
 
-	# Create the JVM and return it on success
+	# Create a JVM instance, or return `null` on error
 	fun create_jvm: nullable JavaVM
 	do
 		var args = new JavaVMInitArgs
@@ -155,20 +162,29 @@ extern class JavaVM `{JavaVM *`}
 		abort
 	end
 
+	# Unload the Java VM when the calling thread is the only remaining non-daemon attached user thread
 	fun destroy `{
 		(*self)->DestroyJavaVM(self);
 	`}
 
+	# `JniEnv` attached to the calling thread
+	#
+	# A null pointer is returned if the calling thread is not attached to the JVM.
 	fun env: JniEnv import jni_error `{
 		JNIEnv *env;
 		int res = (*self)->GetEnv(self, (void **)&env, JNI_VERSION_1_6);
-		if (res != JNI_OK) {
+		if (res == JNI_EDETACHED) {
+			JavaVM_jni_error(NULL, "Requesting JNIEnv from an unattached thread", res);
+			return NULL;
+		}
+		else if (res != JNI_OK) {
 			JavaVM_jni_error(NULL, "Could not get JNIEnv from Java VM", res);
 			return NULL;
 		}
 		return env;
 	`}
 
+	# Attach the calling thread to the JVM and return its `JniEnv`
 	fun attach_current_thread: JniEnv import jni_error `{
 		JNIEnv *env;
 	#ifdef ANDROID
