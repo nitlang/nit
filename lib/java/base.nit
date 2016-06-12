@@ -66,7 +66,9 @@ redef class Sys
 		assert jvm != null else print "JVM creation failed"
 
 		self.jvm = jvm
-		self.jni_env = builder.jni_env.as(not null)
+		assert not jvm.address_is_null
+		self.jni_env = jvm.env
+		assert not jni_env.address_is_null
 	end
 
 	# Get a Java class by its name from the current `jni_env`

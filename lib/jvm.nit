@@ -45,7 +45,6 @@ in "C Header" `{
 # var env = builder.jni_env
 # ~~~~
 class JavaVMBuilder
-	super JniEnvRef
 
 	# Version code of the JVM requested by `create_jvm`
 	#
@@ -72,7 +71,7 @@ class JavaVMBuilder
 
 		args.options = c_options
 
-		var jvm = new JavaVM(args, self)
+		var jvm = new JavaVM(args)
 
 		args.free
 		c_options.free
@@ -129,11 +128,12 @@ end
 
 # Represents a jni JavaVM
 extern class JavaVM `{JavaVM *`}
-	# Create the JVM, returns its handle and store the a pointer to JniEnv in `env_ref`
+	# Create the JVM
 	#
-	# Unavailable on Android, where you cannot instanciate a new JVM.
-	private new(args: JavaVMInitArgs, env_ref: JniEnvRef)
-	import jni_error, JniEnvRef.jni_env=, JniEnv.as nullable `{
+	# The corresponding `JniEnv` can be obtained by calling `env`.
+	#
+	# Unavailable on some platforms, including Android where you cannot instanciate a new JVM.
+	private new(args: JavaVMInitArgs) import jni_error `{
 
 	#ifdef ANDROID
 		JavaVM_jni_error(NULL, "JVM creation not supported on Android", 0);
@@ -146,14 +146,12 @@ extern class JavaVM `{JavaVM *`}
 
 		res = JNI_CreateJavaVM(&jvm, (void**)&env, args);
 
-		if (res != 0) {
+		if (res != JNI_OK) {
 			JavaVM_jni_error(NULL, "Could not create Java VM", res);
 			return NULL;
 		}
-		else {
-			JniEnvRef_jni_env__assign(env_ref, JniEnv_as_nullable_JniEnv(env));
-			return jvm;
-		}
+
+		return jvm;
 	`}
 
 	private fun jni_error(msg: NativeString, v: Int)
@@ -424,11 +422,6 @@ extern class JniEnv `{JNIEnv *`}
 	fun pop_local_frame `{
 		(*self)->PopLocalFrame(self, NULL);
 	`}
-end
-
-# used to initialize a JavaVM
-class JniEnvRef
-	var jni_env: nullable JniEnv = null
 end
 
 # Represents a jni jclass
