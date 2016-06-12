@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Supporting services for the FFI with Java
+# Supporting services for the FFI with Java and to access Java libraries
 #
 # This modules relies on `Sys::jvm`, `Sys::jni_env` and
 # `Sys::create_default_jvm` to get a handle on a JVM. You can adapt the
@@ -21,9 +21,8 @@
 # multiple java thread by switching the current environment in a redef
 # of `Sys::jni_env`, and multiple JVM using `Sys::jvm`.
 #
-# The module `jvm` gives more control over the JVM instances and wraps
-# most of JNI functions. You can use it to further customize the behavior
-# of your code.
+# See also, the module `jvm` to control the JVM instances and access JNI functions.
+# You can use it to further customize the behavior of your code.
 module java
 
 import ffi_support
