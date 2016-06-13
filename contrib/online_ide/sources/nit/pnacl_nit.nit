@@ -56,8 +56,8 @@ redef class Sys
 end
 
 redef class ToolContext
-	# We don't need 'the compute_nit_dir'.
-	redef fun compute_nit_dir
+	# We don't need 'the locate_nit_dir'.
+	redef fun locate_nit_dir
 	do
 		return "/pnacl"
 	end

@@ -242,6 +242,7 @@ class ToolContext
 		var m = new Message(l, null, s, 2)
 		if messages.has(m) then return m
 		if l != null then l.add_message m
+		if opt_warn.value <= -1 then return m
 		messages.add m
 		error_count = error_count + 1
 		if opt_stop_on_first_error.value then check_errors
@@ -276,7 +277,7 @@ class ToolContext
 		if messages.has(m) then return null
 		if l != null then l.add_message m
 		if opt_warning.value.has("no-{tag}") then return null
-		if not opt_warning.value.has(tag) and opt_warn.value == 0 then return null
+		if not opt_warning.value.has(tag) and opt_warn.value <= 0 then return null
 		messages.add m
 		warning_count = warning_count + 1
 		if opt_stop_on_first_error.value then check_errors
@@ -501,7 +502,7 @@ The Nit language documentation and the source code of its tools and libraries ma
 			exit 1
 		end
 
-		nit_dir = compute_nit_dir
+		nit_dir = locate_nit_dir
 
 		if option_context.rest.is_empty and not accept_no_arguments then
 			print tooldescription
@@ -543,7 +544,9 @@ The Nit language documentation and the source code of its tools and libraries ma
 	end
 
 	# The identified root directory of the Nit package
-	var nit_dir: String is noinit
+	#
+	# It is assignable but is automatically set by `process_options` with `locate_nit_dir`.
+	var nit_dir: nullable String = null is writable
 
 	# Shared files directory.
 	#
@@ -559,7 +562,22 @@ The Nit language documentation and the source code of its tools and libraries ma
 		return sharedir
 	end
 
-	private fun compute_nit_dir: String
+	# Guess a possible nit_dir.
+	#
+	# It uses, in order:
+	#
+	# * the option `opt_no_color`
+	# * the environment variable `NIT_DIR`
+	# * the runpath of the program from argv[0]
+	# * the runpath of the process from /proc
+	# * the search in PATH
+	#
+	# If there is errors (e.g. the indicated path is invalid) or if no
+	# path is found, then an error is displayed and the program exits.
+	#
+	# The result is returned without being assigned to `nit_dir`.
+	# This function is automatically called by `process_options`
+	fun locate_nit_dir: String
 	do
 		# the option has precedence
 		var res = opt_nit_dir.value
