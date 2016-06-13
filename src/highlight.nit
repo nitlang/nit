@@ -43,6 +43,18 @@ class HighlightVisitor
 	# The last line to generate, null if finish at the last line
 	var last_line: nullable Int = null is writable
 
+	# When highlighting a node, show its messages (errors, warnings), if any.
+	#
+	# default: true
+	var show_messages = true is writable
+
+	# When highlighting a node, attach a full popupable infobox, if any.
+	#
+	# If `false`, only a simple `title` tooltip is used.
+	#
+	# default: true
+	var show_infobox = true is writable
+
 	init
 	do
 		html.add_class("nitcode")
@@ -108,14 +120,16 @@ class HighlightVisitor
 		if infobox == null and anode isa Token then
 			var pa = anode.parent
 			if pa != null then
-				var c = anode
-				if c isa TId or c isa TClassid or c isa TAttrid or c isa TokenLiteral or c isa TokenOperator or c isa TComment and pa isa ADoc then
-					infobox = pa.decorate_tag(hv, tag, anode)
-				end
+				infobox = pa.decorate_tag(hv, tag, anode)
 			end
 		end
+		if infobox != null and not show_infobox then
+			tag.attr("title", infobox.title)
+			tag.classes.add "titled"
+			infobox = null
+		end
 		var messages = anode.location.messages
-		if messages != null then
+		if messages != null and show_messages then
 			tag.css("border-bottom", "solid 2px red")
 			if infobox == null then
 				infobox = new HInfoBox(hv, "Messages")
@@ -244,6 +258,7 @@ class HighlightVisitor
 	do
 		return """
 .nitcode a { color: inherit; cursor:pointer; }
+.nitcode .titled:hover { text-decoration: underline; } /* underline titles */
 .nitcode .popupable:hover { text-decoration: underline; cursor:help; } /* underline titles */
 .nitcode .foldable { display: block } /* for block productions*/
 .nitcode .line{ display: block } /* for lines */
@@ -695,6 +710,22 @@ redef class ANode
 	fun infobox(v: HighlightVisitor): nullable HInfoBox do return null
 end
 
+redef class AQclassid
+	redef fun decorate_tag(v, res, token)
+	do
+		if token != n_id then return null
+		return parent.decorate_tag(v, res, token)
+	end
+end
+
+redef class AQid
+	redef fun decorate_tag(v, res, token)
+	do
+		if token != n_id then return null
+		return parent.decorate_tag(v, res, token)
+	end
+end
+
 redef class AStdClassdef
 	redef fun make_tag(v)
 	do
@@ -765,8 +796,6 @@ redef class TokenOperator
 	redef fun make_tag(v)
 	do
 		var res = super
-		var p = parent
-		if p != null then p.decorate_tag(v, res, self)
 		res.add_class("nc_o")
 		return res
 	end
@@ -775,6 +804,7 @@ end
 redef class AVarFormExpr
 	redef fun decorate_tag(v, res, token)
 	do
+		if token != n_id then return null
 		var variable = self.variable
 		if variable == null then return null
 		res.add_class("nc_v")
@@ -785,6 +815,7 @@ end
 redef class AVardeclExpr
 	redef fun decorate_tag(v, res, token)
 	do
+		if token != n_id then return null
 		var variable = self.variable
 		if variable == null then return null
 		res.add_class("nc_v")
@@ -808,6 +839,7 @@ end
 redef class AParam
 	redef fun decorate_tag(v, res, token)
 	do
+		if token != n_id then return null
 		var mp = mparameter
 		if mp == null then return null
 		var variable = self.variable
@@ -820,6 +852,7 @@ end
 redef class AAssertExpr
 	redef fun decorate_tag(v, res, token)
 	do
+		if not token isa TId then return null
 		res.add_class("nc_ast")
 		return null
 	end
@@ -828,6 +861,7 @@ end
 redef class ALabel
 	redef fun decorate_tag(v, res, token)
 	do
+		if not token isa TId then return null
 		res.add_class("nc_la")
 		return null
 	end
@@ -871,6 +905,7 @@ end
 redef class AModuledecl
 	redef fun decorate_tag(v, res, token)
 	do
+		if not token isa TId then return null
 		res.add_class("nc_def")
 		res.add_class("nc_m")
 		var p = parent
@@ -884,6 +919,7 @@ end
 redef class AStdImport
 	redef fun decorate_tag(v, res, token)
 	do
+		if not token isa TId then return null
 		res.add_class("nc_m")
 		var mm = mmodule
 		if mm == null then return null
@@ -893,6 +929,7 @@ end
 redef class AAttrPropdef
 	redef fun decorate_tag(v, res, token)
 	do
+		if not token isa TId then return null
 		res.add_class("nc_def")
 		var mpd: nullable MPropDef
 		mpd = mreadpropdef
@@ -906,8 +943,6 @@ redef class TId
 	redef fun make_tag(v)
 	do
 		var res = super
-		var p = parent
-		if p != null then p.decorate_tag(v, res, self)
 		res.add_class("nc_i")
 		return res
 	end
@@ -937,8 +972,6 @@ redef class TAttrid
 	redef fun make_tag(v)
 	do
 		var res = super
-		var p = parent
-		if p != null then p.decorate_tag(v, res, self)
 		res.add_class("nc_a")
 		return res
 	end
@@ -946,6 +979,7 @@ end
 redef class AAttrFormExpr
 	redef fun decorate_tag(v, res, token)
 	do
+		if not token isa TAttrid then return null
 		var p = mproperty
 		if p == null then return null
 		return p.intro.infobox(v)
@@ -955,8 +989,6 @@ redef class TClassid
 	redef fun make_tag(v)
 	do
 		var res = super
-		var p = parent
-		if p != null then p.decorate_tag(v, res, self)
 		res.add_class("nc_t")
 		return res
 	end
@@ -964,6 +996,7 @@ end
 redef class AType
 	redef fun decorate_tag(v, res, token)
 	do
+		if not token isa TClassid then return null
 		var mt = mtype
 		if mt == null then return null
 		mt = mt.undecorate
@@ -976,6 +1009,7 @@ end
 redef class AFormaldef
 	redef fun decorate_tag(v, res, token)
 	do
+		if not token isa TClassid then return null
 		res.add_class("nc_vt")
 		if mtype == null then return null
 		return mtype.infobox(v)
@@ -984,6 +1018,7 @@ end
 redef class ATypePropdef
 	redef fun decorate_tag(v, res, token)
 	do
+		if not token isa TClassid then return null
 		res.add_class("nc_def")
 		var md = mpropdef
 		if md == null then return null
@@ -1013,8 +1048,6 @@ redef class TokenLiteral
 	do
 		var res = super
 		res.add_class("nc_l")
-		var p = parent
-		if p != null then p.decorate_tag(v, res, self)
 		return res
 	end
 end
@@ -1032,7 +1065,7 @@ redef class AStringFormExpr
 		# Workaround to tag strings
 		res.classes.remove("nc_l")
 		res.add_class("nc_s")
-		return null
+		return super
 	end
 end
 redef class AExpr
