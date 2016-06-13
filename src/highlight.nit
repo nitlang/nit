@@ -60,11 +60,9 @@ class HighlightVisitor
 	# It is used to refer to some specific entities when generating links.
 	# If `null` is returned, then no link are generated and `<a>` elements become `<span>`.
 	#
-	# Clients are encouraged to redefine the method in a subclass to control where entities should link to.
-	fun hrefto(entitiy: MEntity): nullable String
-	do
-		return entitiy.href
-	end
+	# By default, `null` is returned.
+	# Clients are therefore encouraged to redefine the method in a subclass to control where entities should link to.
+	fun hrefto(entitiy: MEntity): nullable String do return null
 
 	init
 	do
@@ -171,7 +169,7 @@ class HighlightVisitor
 		var stack = new Array[Prod]
 		var line = 0
 		var c: nullable Token = first_token
-		var hv = new HighlightVisitor
+		var hv = self
 		while c != null do
 			var starting
 
@@ -427,9 +425,6 @@ redef class MEntity
 		end
 		return (new HTMLTag("a")).attr("href", href).text(text)
 	end
-
-	# Default link
-	private fun href: nullable String do return null
 end
 
 redef class MModule
@@ -448,12 +443,6 @@ redef class MModule
 			end
 		end
 		return res
-	end
-
-	# The module HTML page
-	redef fun href: String
-	do
-		return c_name + ".html"
 	end
 
 	redef fun linkto(v) do return linkto_text(v, name)
@@ -501,12 +490,6 @@ redef class MClassDef
 		end
 		return res
 	end
-
-	# The class HTML page (an anchor in the module page)
-	redef fun href: String
-	do
-		return mmodule.href + "#" + to_s
-	end
 end
 
 redef class MPropDef
@@ -539,12 +522,6 @@ redef class MPropDef
 		end
 
 		return res
-	end
-
-	# The property HTML page (an anchor in the module page)
-	redef fun href: String
-	do
-		return self.mclassdef.mmodule.href + "#" + self.to_s
 	end
 end
 
