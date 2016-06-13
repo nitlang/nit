@@ -18,6 +18,7 @@ module testing_suite
 import testing_base
 import html
 private import annotation
+private import realtime
 
 redef class ToolContext
 	# --pattern
@@ -134,6 +135,19 @@ class TestSuite
 		end
 		write_to_nit
 		compile
+		if failure != null then
+			for case in test_cases do
+				case.is_done = true
+				case.error = "Compilation Error"
+				case.raw_output = failure
+				toolcontext.modelbuilder.failed_tests += 1
+				toolcontext.clear_progress_bar
+				toolcontext.show_unit(case)
+			end
+			show_status
+			print ""
+			return
+		end
 		toolcontext.info("Execute test-suite {mmodule.name}", 1)
 		var before_module = self.before_module
 		if not before_module == null then before_module.run
@@ -168,14 +182,7 @@ class TestSuite
 	fun to_xml: HTMLTag do
 		var n = new HTMLTag("testsuite")
 		n.attr("package", mmodule.name)
-		var failure = self.failure
-		if failure != null then
-			var f = new HTMLTag("failure")
-			f.attr("message", failure.to_s)
-			n.add f
-		else
-			for test in test_cases do n.add test.to_xml
-		end
+		for test in test_cases do n.add test.to_xml
 		return n
 	end
 
@@ -202,14 +209,9 @@ class TestSuite
 		var f = new FileReader.open("{file}.out")
 		var msg = f.read_all
 		f.close
-		# set test case result
-		var loc = mmodule.location
 		if res != 0 then
 			failure = msg
-			toolcontext.warning(loc, "failure", "FAILURE: {mmodule.name} (in file {file}.nit): {msg}")
-			toolcontext.modelbuilder.failed_tests += 1
 		end
-		toolcontext.check_errors
 	end
 
 	# Error occured during test-suite compilation.
@@ -257,7 +259,10 @@ class TestCase
 		var method_name = test_method.name
 		var test_file = test_suite.test_file
 		var res_name = "{test_file}_{method_name.escape_to_c}"
+		var clock = new Clock
 		var res = toolcontext.safe_exec("{test_file}.bin {method_name} > '{res_name}.out1' 2>&1 </dev/null")
+		if not toolcontext.opt_no_time.value then real_time = clock.total
+
 		var raw_output = "{res_name}.out1".to_path.read_all
 		self.raw_output = raw_output
 		# set test case result
@@ -306,12 +311,13 @@ class TestCase
 	end
 
 	redef fun xml_classname do
-		var mclassdef = test_method.mclassdef
-		return "nitunit." + mclassdef.mmodule.full_name + "." + mclassdef.mclass.full_name
+		var a = test_method.full_name.split("$")
+		return "nitunit.{a[0]}.{a[1]}"
 	end
 
 	redef fun xml_name do
-		return test_method.mproperty.full_name
+		var a = test_method.full_name.split("$")
+		return a[2]
 	end
 end
 

@@ -19,6 +19,7 @@ private import parser_util
 import testing_base
 import markdown
 import html
+import realtime
 
 # Extractor, Executor and Reporter for the tests in a module
 class NitUnitExecutor
@@ -194,7 +195,9 @@ class NitUnitExecutor
 		var file = du.test_file.as(not null)
 		var i = du.test_arg.as(not null)
 		toolcontext.info("Execute doc-unit {du.full_name} in {file} {i}", 1)
+		var clock = new Clock
 		var res2 = toolcontext.safe_exec("{file.to_program_name}.bin {i} >'{file}.out1' 2>&1 </dev/null")
+		if not toolcontext.opt_no_time.value then du.real_time = clock.total
 		du.was_exec = true
 
 		var content = "{file}.out1".to_path.read_all
@@ -225,7 +228,9 @@ class NitUnitExecutor
 		var res = compile_unitfile(file)
 		var res2 = 0
 		if res == 0 then
+			var clock = new Clock
 			res2 = toolcontext.safe_exec("{file.to_program_name}.bin >'{file}.out1' 2>&1 </dev/null")
+			if not toolcontext.opt_no_time.value then du.real_time = clock.total
 			du.was_exec = true
 		end
 
@@ -519,7 +524,7 @@ redef class ModelBuilder
 				var ndoc = nclassdef.n_doc
 				if ndoc != null then
 					doc_entities += 1
-					d2m.extract(ndoc.to_mdoc, "nitunit." + mmodule.full_name + "." + mclassdef.mclass.full_name, "<class>")
+					d2m.extract(ndoc.to_mdoc, "nitunit." + mclassdef.full_name.replace("$", "."), "<class>")
 				end
 			end
 			for npropdef in nclassdef.n_propdefs do
@@ -529,7 +534,8 @@ redef class ModelBuilder
 				var ndoc = npropdef.n_doc
 				if ndoc != null then
 					doc_entities += 1
-					d2m.extract(ndoc.to_mdoc, "nitunit." + mmodule.full_name + "." + mclassdef.mclass.full_name, mpropdef.mproperty.full_name)
+					var a = mpropdef.full_name.split("$")
+					d2m.extract(ndoc.to_mdoc, "nitunit." + a[0] + "." + a[1], a[2])
 				end
 			end
 		end
@@ -561,7 +567,7 @@ redef class ModelBuilder
 
 		doc_entities += 1
 		# NOTE: jenkins expects a '.' in the classname attr
-		d2m.extract(mdoc, "nitunit." + mgroup.full_name, "<group>")
+		d2m.extract(mdoc, "nitunit." + mgroup.mpackage.name + "." + mgroup.name + ".<group>", "<group>")
 
 		d2m.run_tests
 

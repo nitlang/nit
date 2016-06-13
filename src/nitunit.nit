@@ -59,6 +59,11 @@ if toolcontext.opt_gen_unit.value then
 	exit(0)
 end
 
+# When testing `nitunit`, disable time.
+if "NIT_TESTING".environ != "" then
+	toolcontext.opt_no_time.value = true
+end
+
 "NIT_TESTING".setenv("true")
 "NIT_TESTING_ID".setenv(pid.to_s)
 "SRAND".setenv("0")

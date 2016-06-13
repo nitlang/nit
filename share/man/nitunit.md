@@ -331,6 +331,13 @@ If a test-case of a test-suite passes but that some output is generated, then an
 It is expected that the created/updated files are checked since the tests are considered passed.
 A VCS like `git` is often a good tool to check the creation and modification of those files.
 
+### `--no-time`
+Disable time information in XML.
+
+This is used to have reproducible XML results.
+
+This option is automatically activated if `NIT_TESTING` is set.
+
 ## SUITE GENERATION
 
 ### `--gen-suite`

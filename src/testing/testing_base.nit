@@ -31,6 +31,8 @@ redef class ToolContext
 	var opt_noact = new OptionBool("Does not compile and run tests", "--no-act")
 	# opt --nitc
 	var opt_nitc = new OptionString("nitc compiler to use", "--nitc")
+	# opt --no-time
+	var opt_no_time = new OptionBool("Disable time information in XML", "--no-time")
 
 	# Working directory for testing.
 	fun test_dir: String do
@@ -201,6 +203,9 @@ abstract class UnitTest
 	# Additional noteworthy information when a test success.
 	var info: nullable String = null
 
+	# Time for the execution, in seconds
+	var real_time: Float = 0.0 is writable
+
 	# A colorful `[OK]` or `[KO]`.
 	fun status_tag(color: nullable Bool): String do
 		color = color or else true
@@ -252,17 +257,23 @@ abstract class UnitTest
 		var tc = new HTMLTag("testcase")
 		tc.attr("classname", xml_classname)
 		tc.attr("name", xml_name)
+		tc.attr("time", real_time.to_s)
+
+		var output = self.raw_output
+		if output != null then output = output.trunc(8192).filter_nonprintable
 		var error = self.error
 		if error != null then
+			var node
 			if was_exec then
-				tc.open("error").append(error)
+				node = tc.open("error").attr("message", error)
 			else
-				tc.open("failure").append(error)
+				node = tc.open("failure").attr("message", error)
 			end
-		end
-		var output = self.raw_output
-		if output != null then
-			tc.open("system-err").append(output.trunc(8192).filter_nonprintable)
+			if output != null then
+				node.append(output)
+			end
+		else if output != null then
+			tc.open("system-err").append(output)
 		end
 		return tc
 	end
