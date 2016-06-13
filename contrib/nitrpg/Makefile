@@ -14,8 +14,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-NITC=../../bin/nitc
-NITU=../../bin/nitunit
+NITC=nitc
+NITU=nitunit
 
 all: listener web
 

@@ -1,4 +1,4 @@
-NITC=../../bin/nitc
+NITC=nitc
 
 all: nitmd
 

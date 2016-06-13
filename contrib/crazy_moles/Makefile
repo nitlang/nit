@@ -6,18 +6,18 @@ default: bin/moles
 
 pre-build: assets/images/drawing.png
 
-bin/moles: $(shell ../../bin/nitls -M src/moles_linux.nit) assets/images/drawing.png
+bin/moles: $(shell nitls -M src/moles_linux.nit) assets/images/drawing.png
 	mkdir -p bin
-	../../bin/nitc -o bin/moles src/moles_linux.nit
+	nitc -o bin/moles src/moles_linux.nit
 
 android: bin/moles.apk
-bin/moles.apk: android/res/ $(shell ../../bin/nitls -M src/moles_android.nit) assets/images/drawing.png
+bin/moles.apk: android/res/ $(shell nitls -M src/moles_android.nit) assets/images/drawing.png
 	mkdir -p bin
-	../../bin/nitc -o bin/moles.apk src/moles_android.nit
+	nitc -o bin/moles.apk src/moles_android.nit
 
-android-release: android/res/ $(shell ../../bin/nitls -M src/moles_android.nit) assets/images/drawing.png
+android-release: android/res/ $(shell nitls -M src/moles_android.nit) assets/images/drawing.png
 	mkdir -p bin
-	../../bin/nitc -o bin/moles.apk src/moles_android.nit --release
+	nitc -o bin/moles.apk src/moles_android.nit --release
 
 $(SVG2ICONS):
 	$(MAKE) -C ../inkscape_tools

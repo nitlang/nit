@@ -1,9 +1,9 @@
-NITC=../../bin/nitc
-NITLS=../../bin/nitls
+NITC=nitc
+NITLS=nitls
 
 all: bin/asteronits
 
-bin/asteronits: $(shell ${NITLS} -M src/asteronits.nit linux) ${NITC} pre-build
+bin/asteronits: $(shell ${NITLS} -M src/asteronits.nit linux) pre-build
 	${NITC} src/asteronits.nit -m linux -o $@
 
 bin/texture_atlas_parser: ../../lib/gamnit/texture_atlas_parser.nit
@@ -25,10 +25,10 @@ check: bin/asteronits
 # Android
 
 android: bin/asteronits.apk
-bin/asteronits.apk: $(shell ${NITLS} -M src/asteronits.nit android) ${NITC} android/res/ pre-build
+bin/asteronits.apk: $(shell ${NITLS} -M src/asteronits.nit android) android/res/ pre-build
 	${NITC} src/android.nit -m android -o $@
 
-android-release: $(shell ${NITLS} -M src/asteronits.nit android) ${NITC} android/res/ pre-build
+android-release: $(shell ${NITLS} -M src/asteronits.nit android) android/res/ pre-build
 	${NITC} src/android.nit -m android -o bin/asteronits.apk --release
 
 android/res/: art/icon.svg

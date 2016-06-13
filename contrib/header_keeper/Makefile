@@ -1,6 +1,6 @@
 bin/header_keeper:
 	mkdir -p bin
-	../../bin/nitc --dir bin src/header_keeper.nit
+	nitc --dir bin src/header_keeper.nit
 
 check: tests
 tests: bin/header_keeper
