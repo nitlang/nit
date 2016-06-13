@@ -1411,9 +1411,6 @@ abstract class Buffer
 
 	redef type SELFTYPE: Buffer is fixed
 
-	# Specific implementations MUST set this to `true` in order to invalidate caches
-	protected var is_dirty = true
-
 	# Copy-On-Write flag
 	#
 	# If the `Buffer` was to_s'd, the next in-place altering
@@ -1537,12 +1534,6 @@ abstract class Buffer
 				self[i] = c.to_upper
 			end
 		end
-	end
-
-	redef fun hash
-	do
-		if is_dirty then hash_cache = null
-		return super
 	end
 
 	# In Buffers, the internal sequence of character is mutable
