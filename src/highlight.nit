@@ -55,6 +55,17 @@ class HighlightVisitor
 	# default: true
 	var show_infobox = true is writable
 
+	# A reference to an entity used in generated `<a>` elements.
+	#
+	# It is used to refer to some specific entities when generating links.
+	# If `null` is returned, then no link are generated and `<a>` elements become `<span>`.
+	#
+	# Clients are encouraged to redefine the method in a subclass to control where entities should link to.
+	fun hrefto(entitiy: MEntity): nullable String
+	do
+		return entitiy.href
+	end
+
 	init
 	do
 		html.add_class("nitcode")
@@ -372,9 +383,6 @@ end
 interface HInfoBoxable
 	# An new infobox documenting the entity
 	fun infobox(v: HighlightVisitor): HInfoBox is abstract
-
-	# A human-readable hyper-text for the entity
-	fun linkto: HTMLTag is abstract
 end
 
 redef class MDoc
@@ -395,51 +403,72 @@ end
 
 redef class MEntity
 	super HInfoBoxable
+
+	# A HTML version of `to_s` with hyper-links.
+	#
+	# By default, `linkto_text(v, to_s)` is used, c.f. see `linkto_text`.
+	#
+	# For some complex entities, like generic types, multiple `<a>` and `<span>` elements can be generated.
+	# E.g. `Array[Int]` might become `<a>Array</a>[<a>Int</a>]` with the correct `href` attributes
+	# provided  by `v.hrefto`.
+	fun linkto(v: HighlightVisitor): HTMLTag do return linkto_text(v, to_s)
+
+	# Link to the `self` with a specific text.
+	#
+	# The whole text is linked with a single `<a>` element.
+	#
+	# The `href` used is provided by `v.hrefto`.
+	# If `href` is null then a `<span>` element is used instead of `<a>`.
+	fun linkto_text(v: HighlightVisitor, text: String): HTMLTag
+	do
+		var href = v.hrefto(self)
+		if href == null then
+			return (new HTMLTag("span")).text(text)
+		end
+		return (new HTMLTag("a")).attr("href", href).text(text)
+	end
+
+	# Default link
+	private fun href: nullable String do return null
 end
 
 redef class MModule
 	redef fun infobox(v)
 	do
 		var res = new HInfoBox(v, "module {name}")
-		res.href = href
-		res.new_field("module").add(linkto)
+		res.href = v.hrefto(self)
+		res.new_field("module").add(linkto(v))
 		var mdoc = self.mdoc
 		if mdoc != null then mdoc.fill_infobox(res)
 		if in_importation.greaters.length > 1 then
 			var c = res.new_dropdown("imports", "{in_importation.greaters.length-1} modules")
 			for x in in_importation.greaters do
 				if x == self then continue
-				c.open("li").add x.linkto
+				c.open("li").add x.linkto(v)
 			end
 		end
 		return res
 	end
 
 	# The module HTML page
-	fun href: String
+	redef fun href: String
 	do
 		return c_name + ".html"
 	end
 
-	redef fun linkto do return linkto_text(name)
-
-	# Link to the entitiy with a specific text
-	fun linkto_text(text: String): HTMLTag
-	do
-		return (new HTMLTag("a")).attr("href", href).text(text)
-	end
+	redef fun linkto(v) do return linkto_text(v, name)
 end
 
 redef class MClassDef
 	redef fun infobox(v)
 	do
 		var res = new HInfoBox(v, "class {mclass.name}")
-		res.href = href
+		res.href = v.hrefto(self)
 		if is_intro then
 			res.new_field("class").text(mclass.name)
 		else
 			res.new_field("redef class").text(mclass.name)
-			res.new_field("intro").add mclass.intro.linkto_text("in {mclass.intro_mmodule.to_s}")
+			res.new_field("intro").add mclass.intro.linkto_text(v, "in {mclass.intro_mmodule.to_s}")
 		end
 		var mdoc = self.mdoc
 		if mdoc == null then mdoc = mclass.intro.mdoc
@@ -452,7 +481,7 @@ redef class MClassDef
 			for x in in_hierarchy.greaters do
 				if x == self then continue
 				if not x.is_intro then continue
-				c.open("li").add x.linkto
+				c.open("li").add x.linkto(v)
 			end
 		end
 		if in_hierarchy.smallers.length > 1 then
@@ -460,31 +489,23 @@ redef class MClassDef
 			for x in in_hierarchy.smallers do
 				if x == self then continue
 				if not x.is_intro then continue
-				c.open("li").add x.linkto
+				c.open("li").add x.linkto(v)
 			end
 		end
 		if mclass.mclassdefs.length > 1 then
 			var c = res.new_dropdown("redefs", "refinements")
 			for x in mclass.mclassdefs do
 				if x == self then continue
-				c.open("li").add x.linkto_text("in {x.mmodule}")
+				c.open("li").add x.linkto_text(v, "in {x.mmodule}")
 			end
 		end
 		return res
 	end
 
 	# The class HTML page (an anchor in the module page)
-	fun href: String
+	redef fun href: String
 	do
 		return mmodule.href + "#" + to_s
-	end
-
-	redef fun linkto do return linkto_text(mclass.name)
-
-	# Link to the entitiy with a specific text
-	fun linkto_text(text: String): HTMLTag
-	do
-		return (new HTMLTag("a")).attr("href", href).text(text)
 	end
 end
 
@@ -492,20 +513,20 @@ redef class MPropDef
 	redef fun infobox(v)
 	do
 		var res = new HInfoBox(v, to_s)
-		res.href = href
+		res.href = v.hrefto(self)
 		if self isa MMethodDef then
-			if msignature != null then res.new_field("fun").append(mproperty.name).add msignature.linkto
+			if msignature != null then res.new_field("fun").append(mproperty.name).add msignature.linkto(v)
 		else if self isa MAttributeDef then
-			if static_mtype != null then res.new_field("fun").append(mproperty.name).add static_mtype.linkto
+			if static_mtype != null then res.new_field("fun").append(mproperty.name).add static_mtype.linkto(v)
 		else if self isa MVirtualTypeDef then
-			if bound != null then res.new_field("add").append(mproperty.name).add bound.linkto
+			if bound != null then res.new_field("add").append(mproperty.name).add bound.linkto(v)
 		else
 			res.new_field("wat?").append(mproperty.name)
 		end
 
 		if is_intro then
 		else
-			res.new_field("intro").add mproperty.intro.linkto_text("in {mproperty.intro.mclassdef}")
+			res.new_field("intro").add mproperty.intro.linkto_text(v, "in {mproperty.intro.mclassdef}")
 		end
 		var mdoc = self.mdoc
 		if mdoc == null then mdoc = mproperty.intro.mdoc
@@ -513,7 +534,7 @@ redef class MPropDef
 		if mproperty.mpropdefs.length > 1 then
 			var c = res.new_dropdown("redef", "redefinitions")
 			for x in mproperty.mpropdefs do
-				c.open("li").add x.linkto_text("in {x.mclassdef}")
+				c.open("li").add x.linkto_text(v, "in {x.mclassdef}")
 			end
 		end
 
@@ -521,17 +542,9 @@ redef class MPropDef
 	end
 
 	# The property HTML page (an anchor in the module page)
-	fun href: String
+	redef fun href: String
 	do
 		return self.mclassdef.mmodule.href + "#" + self.to_s
-	end
-
-	redef fun linkto do return linkto_text(mproperty.name)
-
-	# Link to the entitiy with a specific text
-	fun linkto_text(text: String): HTMLTag
-	do
-		return (new HTMLTag("a")).attr("href", href).text(text)
 	end
 end
 
@@ -539,45 +552,41 @@ redef class MClassType
 	redef fun infobox(v)
 	do
 		var res = new HInfoBox(v, to_s)
-		res.href = mclass.intro.href
-		res.new_field("class").add mclass.intro.linkto
+		res.href = v.hrefto(self)
+		res.new_field("class").add mclass.intro.linkto(v)
 		var mdoc = mclass.mdoc
 		if mdoc == null then mdoc = mclass.intro.mdoc
 		if mdoc != null then mdoc.fill_infobox(res)
 		return res
 	end
-	redef fun linkto
+	redef fun linkto(v)
 	do
-		return mclass.intro.linkto
+		return mclass.intro.linkto(v)
 	end
 end
 redef class MVirtualType
 	redef fun infobox(v)
 	do
 		var res = new HInfoBox(v, to_s)
-		res.href = mproperty.intro.href
+		res.href = v.hrefto(mproperty)
 		var p = mproperty
 		var pd = p.intro
-		res.new_field("virtual type").add pd.linkto
+		res.new_field("virtual type").add pd.linkto(v)
 		var mdoc = pd.mdoc
 		if mdoc != null then mdoc.fill_infobox(res)
 		return res
 	end
-	redef fun linkto
+	redef fun linkto(v)
 	do
-		return mproperty.intro.linkto
+		return mproperty.intro.linkto(v)
 	end
 end
 redef class MParameterType
 	redef fun infobox(v)
 	do
 		var res = new HInfoBox(v, to_s)
-		res.new_field("parameter type").append("{name} from class ").add mclass.intro.linkto
+		res.new_field("parameter type").append("{name} from class ").add mclass.intro.linkto(v)
 		return res
-	end
-	redef fun linkto
-	do
-		return (new HTMLTag("span")).text(name)
 	end
 end
 
@@ -586,10 +595,10 @@ redef class MNullableType
 	do
 		return mtype.infobox(v)
 	end
-	redef fun linkto
+	redef fun linkto(v)
 	do
 		var res = new HTMLTag("span")
-		res.append("nullable ").add(mtype.linkto)
+		res.append("nullable ").add(mtype.linkto(v))
 		return res
 	end
 end
@@ -599,10 +608,10 @@ redef class MNotNullType
 	do
 		return mtype.infobox(v)
 	end
-	redef fun linkto
+	redef fun linkto(v)
 	do
 		var res = new HTMLTag("span")
-		res.append("not null ").add(mtype.linkto)
+		res.append("not null ").add(mtype.linkto(v))
 		return res
 	end
 end
@@ -613,7 +622,7 @@ redef class MNullType
 		var res = new HInfoBox(v, to_s)
 		return res
 	end
-	redef fun linkto
+	redef fun linkto(v)
 	do
 		var res = new HTMLTag("span")
 		res.append("null")
@@ -622,7 +631,7 @@ redef class MNullType
 end
 
 redef class MSignature
-	redef fun linkto
+	redef fun linkto(v)
 	do
 		var res = new HTMLTag("span")
 		var first = true
@@ -636,14 +645,14 @@ redef class MSignature
 				end
 				res.append p.name
 				res.append ": "
-				res.add p.mtype.linkto
+				res.add p.mtype.linkto(v)
 			end
 			res.append ")"
 		end
 		var ret = return_mtype
 		if ret != null then
 			res.append ": "
-			res.add ret.linkto
+			res.add ret.linkto(v)
 		end
 		return res
 	end
@@ -653,11 +662,11 @@ redef class CallSite
 	redef fun infobox(v)
 	do
 		var res = new HInfoBox(v, "call {mpropdef}")
-		res.href = mpropdef.href
-		res.new_field("call").add(mpropdef.linkto).add(msignature.linkto)
+		res.href = v.hrefto(mpropdef)
+		res.new_field("call").add(mpropdef.linkto(v)).add(msignature.linkto(v))
 		if mpropdef.is_intro then
 		else
-			res.new_field("intro").add mproperty.intro.linkto_text("in {mproperty.intro.mclassdef}")
+			res.new_field("intro").add mproperty.intro.linkto_text(v, "in {mproperty.intro.mclassdef}")
 		end
 		var mdoc = mpropdef.mdoc
 		if mdoc == null then mdoc = mproperty.intro.mdoc
@@ -665,9 +674,9 @@ redef class CallSite
 
 		return res
 	end
-	redef fun linkto
+	redef fun linkto(v)
 	do
-		return mpropdef.linkto
+		return mpropdef.linkto(v)
 	end
 end
 
@@ -682,12 +691,8 @@ redef class Variable
 			return res
 		end
 		var res = new HInfoBox(v, "{name}: {declared_type}")
-		res.new_field("local var").append("{name}:").add(declared_type.linkto)
+		res.new_field("local var").append("{name}:").add(declared_type.linkto(v))
 		return res
-	end
-	redef fun linkto
-	do
-		return (new HTMLTag("span")).text(name)
 	end
 end
 
