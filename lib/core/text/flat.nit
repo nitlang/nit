@@ -424,7 +424,7 @@ abstract class FlatString
 
 	redef var bytes = new FlatStringByteView(self) is lazy
 
-	redef var to_cstring is lazy do
+	redef fun to_cstring do
 		var blen = _byte_length
 		var new_items = new NativeString(blen + 1)
 		_items.copy_to(new_items, blen, _first_byte, 0)
@@ -884,9 +884,6 @@ class FlatBuffer
 
 	private var capacity = 0
 
-	# Real items, used as cache for when to_cstring is called
-	private var real_items: NativeString is noinit
-
 	redef fun fast_cstring do return _items.fast_cstring(0)
 
 	redef fun substrings do return new FlatSubstringsIter(self)
@@ -1002,15 +999,11 @@ class FlatBuffer
 
 	redef fun to_cstring
 	do
-		if is_dirty then
-			var bln = _byte_length
-			var new_native = new NativeString(bln + 1)
-			new_native[bln] = 0u8
-			if _length > 0 then _items.copy_to(new_native, bln, 0, 0)
-			real_items = new_native
-			is_dirty = false
-		end
-		return real_items
+		var bln = _byte_length
+		var new_native = new NativeString(bln + 1)
+		new_native[bln] = 0u8
+		if _length > 0 then _items.copy_to(new_native, bln, 0, 0)
+		return new_native
 	end
 
 	# Create a new empty string.
@@ -1308,7 +1301,6 @@ redef class NativeString
 		copy_to(new_self, length, 0, 0)
 		var str = new FlatString.with_infos(new_self, length, 0)
 		new_self[length] = 0u8
-		str.to_cstring = new_self
 		return str
 	end
 
