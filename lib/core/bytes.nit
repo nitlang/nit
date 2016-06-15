@@ -819,7 +819,7 @@ redef class Text
 		var was_slash = false
 		var i = 0
 		while i < length do
-			var c = chars[i]
+			var c = self[i]
 			if not was_slash then
 				if c == '\\' then
 					was_slash = true

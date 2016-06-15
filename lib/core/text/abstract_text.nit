@@ -551,7 +551,7 @@ abstract class Text
 		var res = new Buffer
 		var underscore = false
 		var start = 0
-		var c = chars[0]
+		var c = self[0]
 
 		if c >= '0' and c <= '9' then
 			res.add('_')
@@ -560,7 +560,7 @@ abstract class Text
 			start = 1
 		end
 		for i in [start..length[ do
-			c = chars[i]
+			c = self[i]
 			if (c >= 'a' and c <= 'z') or (c >='A' and c <= 'Z') then
 				res.add(c)
 				underscore = false
