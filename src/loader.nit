@@ -406,6 +406,20 @@ redef class ModelBuilder
 						end
 					end
 
+					var bests = new BestDistance[String](path.length / 2)
+					# We found nothing. But propose something in the package?
+					for sg in g.mpackage.mgroups do
+						for m in sg.mmodules do
+							var d = path.levenshtein_distance(m.full_name)
+							bests.update(d, m.full_name)
+						end
+					end
+					var last_loader_error = "Error: cannot find module `{path}`."
+					if bests.best_items.not_empty then
+						last_loader_error += " Did you mean " + bests.best_items.join(", ", " or ") + "?"
+					end
+					self.last_loader_error = last_loader_error
+					return null
 				end
 			end
 
