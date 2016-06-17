@@ -89,18 +89,22 @@ class OpportunityWelcome
 				rsp.body = meetpage.write_to_string
 				return rsp
 			end
-			if not meet.commit(db) then
+
+			var success = meet.commit(db)
+			if not success then
 				db.close
-				var rsp = new HttpResponse(200)
+				var rsp = new HttpResponse(500)
 				var meetpage = new MeetupCreationPage
 				meetpage.meet = meet
 				meetpage.ans = ansset
-				meetpage.error = """<p>Could not create Meetup.</p>
-				<p>Hmm, that's embarassing, the database indicates that your meetup already exists.</p>
-				<p>If this is not a duplicated submission, please contact the mainainers of the website, you might have found a bug !</p>"""
+				meetpage.error = """
+<p>Failed to create event</p>
+<p>This is a server side error, it has been logged.
+   You may still want to contact the maintainers of this website.</p>"""
 				rsp.body = meetpage.write_to_string
 				return rsp
 			end
+
 			for v in ansset do
 				var ans = new Answer(v)
 				ans.meetup = meet
