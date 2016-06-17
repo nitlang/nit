@@ -154,7 +154,10 @@ redef class ModelBuilder
 
 			var mmodule = identify_module(a)
 			if mmodule == null then
-				if a.file_exists then
+				var le = last_loader_error
+				if le != null then
+					toolcontext.error(null, le)
+				else if a.file_exists then
 					toolcontext.error(null, "Error: `{a}` is not a Nit source file.")
 				else
 					toolcontext.error(null, "Error: cannot find module `{a}`.")
@@ -324,6 +327,14 @@ redef class ModelBuilder
 	# A parsed module exists in the model but might be not yet analysed (no importation).
 	var parsed_modules = new Array[MModule]
 
+	# Some `loader` services are silent and return `null` on error.
+	#
+	# Those services can set `last_loader_error` to precise an specific error message.
+	# if `last_loader_error == null` then a generic error message can be used.
+	#
+	# See `identified_modules` and `identify_group` for details.
+	var last_loader_error: nullable String = null
+
 	# Identify a source file and load the associated package and groups if required.
 	#
 	# This method does what the user expects when giving an argument to a Nit tool.
@@ -336,11 +347,14 @@ redef class ModelBuilder
 	#   then the main module of the package `digraph` is searched in `paths` and returned.
 	#
 	# Silently return `null` if `path` does not exists or cannot be identified.
+	# If `null` is returned, `last_loader_error` can be set to a specific error message.
 	#
 	# On success, it returns a module that is possibly not yet parsed (no AST), or not yet analysed (no importation).
 	# If the module was already identified, or loaded, it is returned.
 	fun identify_module(path: String): nullable MModule
 	do
+		last_loader_error = null
+
 		# special case for not a nit file
 		if not path.has_suffix(".nit") then
 			# search dirless files in known -I paths
@@ -419,9 +433,16 @@ redef class ModelBuilder
 	# Return the mgroup associated to a directory path.
 	# If the directory is not a group null is returned.
 	#
+	# Silently return `null` if `dirpath` does not exists, is not a directory,
+	# cannot be identified or cannot be attached to a mpackage.
+	# If `null` is returned, `last_loader_error` can be set to a specific error message.
+	#
 	# Note: `paths` is also used to look for mgroups
 	fun identify_group(dirpath: String): nullable MGroup
 	do
+		# Reset error
+		last_loader_error = null
+
 		var stat = dirpath.file_stat
 
 		if stat == null or not stat.is_dir then do
@@ -440,6 +461,7 @@ redef class ModelBuilder
 
 		# Filter out non-directories
 		if not stat.is_dir then
+			last_loader_error = "Error: `{dirpath}` is not a directory."
 			return null
 		end
 
@@ -466,6 +488,7 @@ redef class ModelBuilder
 			# The root of the directory hierarchy in the file system.
 			if rdp == "/" then
 				mgroups[rdp] = null
+				last_loader_error = "Error: `{dirpath}` is not a Nit package."
 				return null
 			end
 
@@ -473,6 +496,7 @@ redef class ModelBuilder
 			if (dirpath/"packages.ini").file_exists then
 				# dirpath cannot be a package since it is a package directory
 				mgroups[rdp] = null
+				last_loader_error = "Error: `{dirpath}` is not a Nit package."
 				return null
 			end
 
@@ -492,6 +516,7 @@ redef class ModelBuilder
 				if parent == null then
 					# Parent is not a group, thus we are not a group either
 					mgroups[rdp] = null
+					last_loader_error = "Error: `{dirpath}` is not a Nit package."
 					return null
 				end
 			end
@@ -653,7 +678,10 @@ redef class ModelBuilder
 		# Look for the module
 		var mmodule = identify_module(filename)
 		if mmodule == null then
-			if filename.file_exists then
+			var le = last_loader_error
+			if le != null then
+				toolcontext.error(null, le)
+			else if filename.file_exists then
 				toolcontext.error(null, "Error: `{filename}` is not a Nit source file.")
 			else
 				toolcontext.error(null, "Error: cannot find module `{filename}`.")
