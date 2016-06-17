@@ -375,6 +375,39 @@ redef class ModelBuilder
 				end
 			end
 
+			# Found nothing? maybe it is a qualified name
+			if path.chars.has(':') then
+				var ids = path.split("::")
+				var g = identify_group(ids.first)
+				if g != null then
+					scan_group(g)
+					var ms = g.mmodules_by_name(ids.last)
+
+					# Return exact match
+					for m in ms do
+						if m.full_name == path then
+							return m
+						end
+					end
+
+					# Where there is only one or two names `foo::bar`
+					# then accept module that matches `foo::*::bar`
+					if ids.length <= 2 then
+						if ms.length == 1 then return ms.first
+						if ms.length > 1 then
+							var l = new Array[String]
+							for m in ms do
+								var fp = m.filepath
+								if fp != null then fp = " ({fp})" else fp = ""
+								l.add "`{m.full_name}`{fp}"
+							end
+							last_loader_error = "Error: conflicting module for `{path}`: {l.join(", ")} "
+							return null
+						end
+					end
+
+				end
+			end
 
 			return null
 		end
