@@ -164,7 +164,7 @@ class Connection
 	do
 		if events & bev_event_error != 0 or events & bev_event_eof != 0 then
 			if events & bev_event_error != 0 then print_error "Error from bufferevent"
-			close
+			force_close
 			return true
 		end
 
