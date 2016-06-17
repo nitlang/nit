@@ -424,7 +424,7 @@ redef class ModelBuilder
 	do
 		var stat = dirpath.file_stat
 
-		if stat == null then do
+		if stat == null or not stat.is_dir then do
 			# search dirless directories in known -I paths
 			if dirpath.chars.has('/') then return null
 			for p in paths do
