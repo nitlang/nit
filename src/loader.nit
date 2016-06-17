@@ -356,7 +356,7 @@ redef class ModelBuilder
 		last_loader_error = null
 
 		# special case for not a nit file
-		if not path.has_suffix(".nit") then
+		if not path.has_suffix(".nit") then do
 			# search dirless files in known -I paths
 			if not path.chars.has('/') then
 				var res = search_module_in_paths(null, path, self.paths)
@@ -364,19 +364,19 @@ redef class ModelBuilder
 			end
 
 			# Found nothing? maybe it is a group...
-			var candidate = null
 			if path.file_exists then
 				var mgroup = identify_group(path)
 				if mgroup != null then
 					var owner_path = mgroup.filepath.join_path(mgroup.name + ".nit")
-					if owner_path.file_exists then candidate = owner_path
+					if owner_path.file_exists then
+						path = owner_path
+						break
+					end
 				end
 			end
 
-			if candidate == null then
-				return null
-			end
-			path = candidate
+
+			return null
 		end
 
 		# Does the file exists?
