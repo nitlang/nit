@@ -116,9 +116,23 @@ class Connection
 	redef fun close
 	do
 		if closed then return
-		var success = native_buffer_event.destroy
-		close_requested = true
-		closed = success
+
+		var i = native_buffer_event.input_buffer
+		var o = native_buffer_event.output_buffer
+		if i.length > 0 or o.length > 0 then
+			close_requested = true
+		else
+			force_close
+		end
+	end
+
+	# Force closing this connection and freeing `native_buffer_event`
+	fun force_close
+	do
+		if closed then return
+
+		native_buffer_event.free
+		closed = true
 	end
 
 	# Callback method on a write event
@@ -288,18 +302,7 @@ extern class NativeBufferEvent `{ struct bufferevent * `}
 		return bufferevent_write(self, &byt, 1);
 	`}
 
-	# Check if we have anything left in our buffers. If so, we set our connection to be closed
-	# on a callback. Otherwise we close it and free it right away.
-	fun destroy: Bool `{
-		struct evbuffer* out = bufferevent_get_output(self);
-		struct evbuffer* in = bufferevent_get_input(self);
-		if(evbuffer_get_length(in) > 0 || evbuffer_get_length(out) > 0) {
-			return 0;
-		} else {
-			bufferevent_free(self);
-			return 1;
-		}
-	`}
+	redef fun free `{ bufferevent_free(self); `}
 
 	# The output buffer associated to `self`
 	fun output_buffer: OutputNativeEvBuffer `{ return bufferevent_get_output(self); `}
