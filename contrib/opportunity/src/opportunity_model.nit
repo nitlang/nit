@@ -260,9 +260,7 @@ class Meetup
 		end
 	end
 
-	redef fun to_s do
-		return "Event : {name}\nWhen : {date}\nWhere : {place}"
-	end
+	redef fun to_s do return "Event: {name}, date: {date}, place: {place}"
 end
 
 # An answer linked to a Meetup in the database
