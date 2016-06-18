@@ -82,19 +82,22 @@ abstract class AsyncHttpRequest
 			return null
 		end
 
-		if not deserialize_json then
-			app.run_on_ui_thread new RestRunnableOnLoad(self, rep)
+		if deserialize_json then
+			# Deserialize
+			var deserializer = new JsonDeserializer(rep.value)
+			var res = deserializer.deserialize
+			if deserializer.errors.not_empty then
+				app.run_on_ui_thread new RestRunnableOnFail(self, deserializer.errors.first)
+			else
+				app.run_on_ui_thread new RestRunnableOnLoad(self, res)
+			end
+		else
+			# Return text data
+			app.run_on_ui_thread new RestRunnableOnLoad(self, rep.value)
 			return null
 		end
 
-		# Deserialize
-		var deserializer = new JsonDeserializer(rep.value)
-		var res = deserializer.deserialize
-		if deserializer.errors.not_empty then
-			app.run_on_ui_thread new RestRunnableOnFail(self, deserializer.errors.first)
-		end
 
-		app.run_on_ui_thread new RestRunnableOnLoad(self, res)
 		return null
 	end
 
@@ -143,6 +146,7 @@ class HttpRequestResult
 	var maybe_code: nullable Int
 
 	# The status code
+	#
 	# Require: `not is_error`
 	fun code: Int do return maybe_code.as(not null)
 end
