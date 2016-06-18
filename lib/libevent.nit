@@ -242,6 +242,18 @@ fun bev_event_timeout: Int `{ return BEV_EVENT_TIMEOUT; `}
 # connect operation finished.
 fun bev_event_connected: Int `{ return BEV_EVENT_CONNECTED; `}
 
+# Global error code for the last socket operation on the calling thread
+#
+# Not idempotent on all platforms.
+fun evutil_socket_error: Int `{
+	return EVUTIL_SOCKET_ERROR();
+`}
+
+# Convert an error code from `evutil_socket_error` to a string
+fun evutil_socket_error_to_string(error_code: Int): NativeString `{
+	return evutil_socket_error_to_string(error_code);
+`}
+
 # ---
 # Options that can be specified when creating a `NativeBufferEvent`
 
@@ -384,16 +396,9 @@ extern class ConnectionListener `{ struct evconnlistener * `}
 
 	# Callback method on listening error
 	fun error_callback do
-		var cstr = socket_error
-		sys.stderr.write "libevent error: '{cstr}'"
+		var cstr = evutil_socket_error_to_string(evutil_socket_error)
+		print_error "libevent error: '{cstr}'"
 	end
-
-	# Error with sockets
-	fun socket_error: NativeString `{
-		// TODO move to Nit and maybe NativeEventBase
-		int err = EVUTIL_SOCKET_ERROR();
-		return evutil_socket_error_to_string(err);
-	`}
 end
 
 # Factory to listen on sockets and create new `Connection`
