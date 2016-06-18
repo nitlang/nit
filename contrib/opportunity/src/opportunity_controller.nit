@@ -41,7 +41,6 @@ class OpportunityWelcome
 	super OpportunityAction
 
 	redef fun answer(request, url) do
-		print "Received request for {url}"
 		var get = request.get_args
 		var rq = url.split("/")
 		if rq.has("meetup_create") then
@@ -138,7 +137,6 @@ class OpportunityRESTAction
 	super OpportunityAction
 
 	redef fun answer(request, uri) do
-		print "Received REST request from {uri}"
 		var req = uri.split("/")
 		if req.has("people") then
 			return (new OpportunityPeopleREST).answer(request, uri)
