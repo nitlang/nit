@@ -82,7 +82,7 @@ class Interfaces
 	super Array[Interface]
 
 	# Back reference to the associtated `VirtualHost`
-	var vh: VirtualHost
+	var virtual_host: VirtualHost
 
 	# Add an `Interface` described by `text` formatted as `interface.name.com:port`
 	fun add_from_string(text: String)
