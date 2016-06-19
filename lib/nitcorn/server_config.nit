@@ -25,7 +25,7 @@ class ServerConfig
 	var virtual_hosts = new VirtualHosts(self)
 
 	# Default `VirtualHost` to respond to requests not handled by any of the `virtual_hosts`
-	var default_virtual_host: nullable VirtualHost = null
+	var default_virtual_host: nullable VirtualHost = null is writable
 end
 
 # A `VirtualHost` configuration
