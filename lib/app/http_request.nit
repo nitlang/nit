@@ -89,11 +89,11 @@ abstract class AsyncHttpRequest
 			if deserializer.errors.not_empty then
 				app.run_on_ui_thread new RestRunnableOnFail(self, deserializer.errors.first)
 			else
-				app.run_on_ui_thread new RestRunnableOnLoad(self, res)
+				app.run_on_ui_thread new RestRunnableOnLoad(self, res, rep.code)
 			end
 		else
 			# Return text data
-			app.run_on_ui_thread new RestRunnableOnLoad(self, rep.value)
+			app.run_on_ui_thread new RestRunnableOnLoad(self, rep.value, rep.code)
 			return null
 		end
 
@@ -111,7 +111,7 @@ abstract class AsyncHttpRequest
 	# In this case, `result` may be any deserialized object.
 	#
 	# Otherwise, if `not deserialize_json`, `result` contains the content of the response as a `String`.
-	fun on_load(result: nullable Object) do end
+	fun on_load(result: nullable Object, http_status_code: Int) do end
 
 	# Invoked when the HTTP request has failed and no data was received or deserialization failed
 	fun on_fail(error: Error) do print_error "HTTP request '{uri}' failed with: {error}"
@@ -164,9 +164,11 @@ private class RestRunnableOnLoad
 
 	var res: nullable Object
 
+	var code: Int
+
 	redef fun main
 	do
-		sender_thread.on_load(res)
+		sender_thread.on_load(res, code)
 		sender_thread.after
 	end
 end
