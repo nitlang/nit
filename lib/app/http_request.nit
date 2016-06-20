@@ -44,6 +44,8 @@ end
 # * `on_load`
 # * `on_fail`
 # * `after`
+#
+# See full example at `examples/http_request_example.nit`.
 abstract class AsyncHttpRequest
 	super Thread
 

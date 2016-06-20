@@ -128,7 +128,8 @@ end
 The module `app::http_request` provides services to execute asynchronous HTTP request.
 The class `AsyncHttpRequest` hides the complex parallel logic and
 lets the user implement methods acting only on the UI thread.
-See the documentation of `AsyncHttpRequest` for more information.
+See the documentation of `AsyncHttpRequest` for more information and
+the full example at `examples/http_request_example.nit`.
 
 # Metadata annotations
 
